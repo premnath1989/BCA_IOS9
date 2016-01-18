@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="CPf-MS-UId">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+    </dependencies>
+    <scenes>
+        <!--carouselView-->
+        <scene sceneID="D8k-vn-pnn">
+            <objects>
+                <viewController storyboardIdentifier="carouselView" title="carouselView" id="CPf-MS-UId" customClass="CarouselViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Z98-dG-hPt"/>
+                        <viewControllerLayoutGuide type="bottom" id="knA-gA-bOG"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ni4-TR-xRd">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HEZ-j2-1uJ">
+                                <rect key="frame" x="0.0" y="64" width="1024" height="704"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Edj-fw-K4c">
+                                        <rect key="frame" x="718" y="326" width="145" height="144"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" image="sales_illustration@2x_20141118.png">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="selectSalesIllustration:" destination="CPf-MS-UId" eventType="touchUpInside" id="Kpq-rh-SZv"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UdK-sM-Ks2">
+                                        <rect key="frame" x="863" y="326" width="142" height="144"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" image="eAplication@2x_20141118.png">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="selectEApp:" destination="CPf-MS-UId" eventType="touchUpInside" id="5TM-u0-o5d"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="58s-TT-x8R">
+                                        <rect key="frame" x="568" y="326" width="142" height="144"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" image="customer_fact_find@2x_20141118.png">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="selectCFF:" destination="CPf-MS-UId" eventType="touchUpInside" id="2du-zO-z8x"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jmS-MF-lNh">
+                                        <rect key="frame" x="416" y="326" width="144" height="144"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" image="client_profile@2x_20141118.png">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="selectClientProfile:" destination="CPf-MS-UId" eventType="touchUpInside" id="G41-bt-fWV"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.92549026012420654" green="0.92549026012420654" blue="0.92549026012420654" alpha="1" colorSpace="deviceRGB"/>
+                            </view>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IeQ-yH-25x">
+                                <rect key="frame" x="0.0" y="20" width="1024" height="44"/>
+                                <items>
+                                    <navigationItem id="jRQ-Up-O3A"/>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" red="0.96078437566757202" green="0.96078437566757202" blue="0.96078437566757202" alpha="1" colorSpace="deviceRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Menu" id="xYJ-g8-i4R"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="1024" height="600"/>
+                    <connections>
+                        <outlet property="CPBtn" destination="jmS-MF-lNh" id="dep-zP-shz"/>
+                        <outlet property="myView" destination="HEZ-j2-1uJ" id="W7Z-0l-7rX"/>
+                        <outlet property="outletClientProfile" destination="jmS-MF-lNh" id="9wV-lV-V3u"/>
+                        <outlet property="outletCustomerFF" destination="58s-TT-x8R" id="Hif-gK-FRC"/>
+                        <outlet property="outletEAPP" destination="UdK-sM-Ks2" id="zaZ-x2-6HE"/>
+                        <outlet property="outletNavBar" destination="IeQ-yH-25x" id="8Ze-Zc-vPC"/>
+                        <outlet property="outletSI" destination="Edj-fw-K4c" id="fhA-Ev-8M5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mhn-8U-KJo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-71" y="-1700"/>
+        </scene>
+        <!--eBrochure-->
+        <scene sceneID="gzp-8B-dxT">
+            <objects>
+                <viewController storyboardIdentifier="eBrochure" title="eBrochure" id="R8N-LA-YEe" customClass="eBrochureViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bOF-tf-3w3"/>
+                        <viewControllerLayoutGuide type="bottom" id="JAS-Bl-NNx"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3Sn-0K-2ac">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GTf-Wd-YqW">
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="VoT-GE-vhB"/>
+                    <connections>
+                        <outlet property="OutletWebview" destination="GTf-Wd-YqW" id="m0e-u4-dg8"/>
+                        <outlet property="outletWebview" destination="GTf-Wd-YqW" id="cdE-5w-UNY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rO4-89-cy0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6094" y="1716"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="client_profile@2x_20141118.png" width="232" height="309"/>
+        <image name="customer_fact_find@2x_20141118.png" width="232" height="309"/>
+        <image name="eAplication@2x_20141118.png" width="232" height="309"/>
+        <image name="sales_illustration@2x_20141118.png" width="232" height="309"/>
+    </resources>
+</document>
