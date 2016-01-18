@@ -1,0 +1,9 @@
+{
+    "sql":[
+           "UPDATE eProposal_Country SET CountryDesc='AFGHANISTAN' WHERE CountryCode ='AFG'",
+           "UPDATE eProposal_Country SET Status='I' WHERE CountryCode='AF' ",
+
+           ],
+    "execOnFalse": [],
+    "remark":""
+}
