@@ -8,6 +8,7 @@
 
 #import "Login.h"
 #import "MainScreen.h"
+//#import "setting.h"
 #import "ForgotPwd.h"
 #import "FirstTimeViewController.h"
 #import "AppDelegate.h"
@@ -25,6 +26,9 @@
 #import "StoreVarFirstTimeReg.h"
 #import "ColorHexCode.h"
 #import "MBProgressHUD.h"
+#import <AdSupport/ASIdentifierManager.h>
+#import "Reachability.h"
+#import <SystemConfiguration/SystemConfiguration.h>
 
 @interface Login ()
 
@@ -41,131 +45,141 @@ NSString *ProceedStatus = @"";
 @synthesize labelUpdated,labelVersion,outletLogin,agentPortalLoginID,agentPortalPassword;
 @synthesize delegate = _delegate;
 @synthesize previousElementName, agentCode;
-@synthesize elementName, msg;
+@synthesize elementName, msg, lblLastLogin, lblTimeRemaining;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	
+    
     NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docsDir = [dirPaths objectAtIndex:0];
     databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
-//    RatesDatabasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"HLA_Rates.sqlite"]];
-    RatesDatabasePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"HLA_Rates.sqlite"];
-	UL_RatesDatabasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"UL_Rates.sqlite"]];
-	CommDatabasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"Rates.json"]];
+    RatesDatabasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"HLA_Rates.sqlite"]];
+    UL_RatesDatabasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"UL_Rates.sqlite"]];
+    CommDatabasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"Rates.json"]];
     [self makeDBCopy];
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(forgotPassword:)];
     tapGesture.numberOfTapsRequired = 1;
     [lblForgotPwd addGestureRecognizer:tapGesture];
     
+    
+    NSString *deviceId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
+    
+    NSLog(@"devideId %@", [[[UIDevice currentDevice] identifierForVendor] UUIDString]);
+    [self ShowLoginDate];
+    
+    //txtPassword.text = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    //txtPassword.enabled = FALSE;
+    //txtPassword.textColor = [UIColor grayColor];
+    
+    
     //[self isFirstTimeLogin];
-	
+    
     //NSString *path = [[NSBundle mainBundle] pathForResource:@"HLA Ipad-Info"  ofType:@"plist"];
     //NSMutableDictionary *dictionary = [[NSMutableDictionary alloc]initWithContentsOfFile:path];
     
     //outletReset.hidden = YES;
     
-	// NSString *version = [NSString stringWithFormat:
-	//                    @"Version %@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
-	
-	/*
-	 sqlite3_stmt *statement;
-	 int intStatus = 0;
-	 
-	 if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
-	 {
-	 NSString *querySQL = [NSString stringWithFormat: @"SELECT AgentStatus FROM User_Profile WHERE AgentLoginID=\"hla\" "];
-	 
-	 if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK){
-	 if (sqlite3_step(statement) == SQLITE_ROW){
-	 intStatus = sqlite3_column_int(statement, 0);
-	 }
-	 sqlite3_finalize(statement);
-	 }
-	 sqlite3_close(contactDB);
-	 querySQL = Nil;
-	 }
-	 */
-	NSString *version = [NSString stringWithFormat:
-						 @"%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
-	NSDate *endDate =  [[NSDate date] dateByAddingTimeInterval:8 *60 * 60 ];
-	NSDateFormatter *formatter = [[NSDateFormatter alloc] init ];
-	[formatter setDateFormat:@"yyyy-MM-dd"];
-	NSDate *StartDate = [formatter dateFromString:@"2013-04-03"];
-	
-	
-	NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-	NSDateComponents *components = [gregorianCalendar components:NSDayCalendarUnit
-														fromDate:StartDate
-														  toDate:endDate
-														 options:0];
-	
-	
-	
-	
-	labelVersion.text = @"CDY V 1.4.0.240";
+    // NSString *version = [NSString stringWithFormat:
+    //                    @"Version %@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
+    
+    /*
+     sqlite3_stmt *statement;
+     int intStatus = 0;
+     
+     if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
+     {
+     NSString *querySQL = [NSString stringWithFormat: @"SELECT AgentStatus FROM User_Profile WHERE AgentLoginID=\"hla\" "];
+     
+     if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK){
+     if (sqlite3_step(statement) == SQLITE_ROW){
+     intStatus = sqlite3_column_int(statement, 0);
+     }
+     sqlite3_finalize(statement);
+     }
+     sqlite3_close(contactDB);
+     querySQL = Nil;
+     }
+     */
+    NSString *version = [NSString stringWithFormat:
+                         @"%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
+    NSDate *endDate =  [[NSDate date] dateByAddingTimeInterval:8 *60 * 60 ];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init ];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    NSDate *StartDate = [formatter dateFromString:@"2013-04-03"];
+    
+    
+    NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *components = [gregorianCalendar components:NSDayCalendarUnit
+                                                        fromDate:StartDate
+                                                          toDate:endDate
+                                                         options:0];
+    
+    
+    
+    
+    labelVersion.text = @"CDY V 1.4.0.240";
     labelVers = labelVersion.text;
-	labelUpdated.text = @"Last Updated: 02 OCT 2014 11:00AM";
-	outletLogin.hidden = FALSE;
-	
-	//[txtUsername becomeFirstResponder];
-	/*
-	 if (intStatus != 0) {
-	 
-	 if ([components day ] > 43 ) {
-	 labelVersion.text = @"";
-	 lblForgotPwd.hidden = YES;
-	 labelUpdated.numberOfLines = 2;
-	 labelUpdated.text = @"Thank you for using iMobile Planner (1.1), this version is now EXPIRED. \nPlease watch up for our announcement for a new release ";
-	 outletLogin.hidden = TRUE;
-	 
-	 if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
-	 {
-	 NSString *querySQL = [NSString stringWithFormat: @"UPDATE User_Profile set AgentStatus = \"0\" WHERE AgentLoginID=\"hla\" "];
-	 
-	 if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK){
-	 if (sqlite3_step(statement) == SQLITE_DONE){
-	 
-	 }
-	 
-	 sqlite3_finalize(statement);
-	 }
-	 
-	 sqlite3_close(contactDB);
-	 querySQL = Nil;
-	 }
-	 
-	 statement = Nil;
-	 
-	 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Thank you for using iMobile Planner "
-	 "(1.1), this version is now EXPIRED. \nPlease watch up for our announcement for a new release "
-	 delegate:self cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil ];
-	 alert.tag = 1001;
-	 [alert show];
-	 }
-	 else{
-	 
-	 labelVersion.text = version;
-	 labelUpdated.text = @"Last Updated: 25 April 2013";
-	 outletLogin.hidden = FALSE;
-	 
-	 [txtUsername becomeFirstResponder];
-	 }
-	 }
-	 else{
-	 
-	 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Expire" message:@"Thank you for using iMobile Planner "
-	 "(1.1), this version is now EXPIRED. \nPlease watch up for our announcement for a new release "
-	 delegate:self cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil ];
-	 alert.tag = 1001;
-	 [alert show];
-	 }
-	 */
-	
-	
-	
+    labelUpdated.text = @"Last Updated: 02 OCT 2014 11:00AM";
+    outletLogin.hidden = FALSE;
+    
+    //[txtUsername becomeFirstResponder];
+    /*
+     if (intStatus != 0) {
+     
+     if ([components day ] > 43 ) {
+     labelVersion.text = @"";
+     lblForgotPwd.hidden = YES;
+     labelUpdated.numberOfLines = 2;
+     labelUpdated.text = @"Thank you for using iMobile Planner (1.1), this version is now EXPIRED. \nPlease watch up for our announcement for a new release ";
+     outletLogin.hidden = TRUE;
+     
+     if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
+     {
+     NSString *querySQL = [NSString stringWithFormat: @"UPDATE User_Profile set AgentStatus = \"0\" WHERE AgentLoginID=\"hla\" "];
+     
+     if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK){
+     if (sqlite3_step(statement) == SQLITE_DONE){
+     
+     }
+     
+     sqlite3_finalize(statement);
+     }
+     
+     sqlite3_close(contactDB);
+     querySQL = Nil;
+     }
+     
+     statement = Nil;
+     
+     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Thank you for using iMobile Planner "
+     "(1.1), this version is now EXPIRED. \nPlease watch up for our announcement for a new release "
+     delegate:self cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil ];
+     alert.tag = 1001;
+     [alert show];
+     }
+     else{
+     
+     labelVersion.text = version;
+     labelUpdated.text = @"Last Updated: 25 April 2013";
+     outletLogin.hidden = FALSE;
+     
+     [txtUsername becomeFirstResponder];
+     }
+     }
+     else{
+     
+     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Expire" message:@"Thank you for using iMobile Planner "
+     "(1.1), this version is now EXPIRED. \nPlease watch up for our announcement for a new release "
+     delegate:self cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil ];
+     alert.tag = 1001;
+     [alert show];
+     }
+     */
+    
+    
+    
     dirPaths = Nil;
     docsDir = Nil;
     version = Nil;
@@ -174,15 +188,15 @@ NSString *ProceedStatus = @"";
     StartDate = Nil;
     gregorianCalendar = Nil;
     components = Nil;
-	
-    [self setAndpopulateUsername];
-	
-	
-	UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
-	tap.cancelsTouchesInView = NO;
-	tap.numberOfTapsRequired = 1;
-	
-	[self.view addGestureRecognizer:tap];
+    
+    //    [self setAndpopulateUsername];
+    
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
+    tap.cancelsTouchesInView = NO;
+    tap.numberOfTapsRequired = 1;
+    
+    [self.view addGestureRecognizer:tap];
     
 }
 
@@ -195,16 +209,16 @@ static NSString *labelVers;
 
 -(void)hideKeyboard{
     
-	Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
-	id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
-	[activeInstance performSelector:@selector(dismissKeyboard)];
+    Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
+    id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
+    [activeInstance performSelector:@selector(dismissKeyboard)];
     
 }
 
 //username is defaulted to agent code and non editable
 -(void) setAndpopulateUsername
 {
-    txtUsername.enabled = NO;
+    txtUsername.enabled = YES;
     
     ColorHexCode *CustomColor = [[ColorHexCode alloc] init ];
     txtUsername.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
@@ -217,15 +231,15 @@ static NSString *labelVers;
     
     if (sqlite3_open(dbpath, &contactDB) == SQLITE_OK)
     {
-		
+        
         NSString *querySQL = @"SELECT \"AgentLoginID\" FROM Agent_profile";
-		
+        
         const char *query_stmt = [querySQL UTF8String];
         if (sqlite3_prepare_v2(contactDB, query_stmt, -1, &statement, NULL) == SQLITE_OK)
         {
             if (sqlite3_step(statement) == SQLITE_ROW)
             {
-				if(sqlite3_column_text(statement, 0)==nil)
+                if(sqlite3_column_text(statement, 0)==nil)
                 {
                     
                 }else
@@ -233,21 +247,21 @@ static NSString *labelVers;
                     txtUsername.text = [[NSString alloc] initWithUTF8String:(const char *)sqlite3_column_text(statement, 0)];
                 }
             } else {
-				NSLog(@"wrong query");
+                NSLog(@"wrong query");
                 
             }
             sqlite3_finalize(statement);
         }
-		else{
-			NSLog(@"wrong query");
-		}
+        else{
+            NSLog(@"wrong query");
+        }
         sqlite3_close(contactDB);
         querySQL = Nil;
         query_stmt = Nil;
     }
-	else{
-		NSLog(@"cannot open");
-	}
+    else{
+        NSLog(@"cannot open");
+    }
     
     dbpath = Nil;
     statement = Nil;
@@ -258,18 +272,18 @@ static NSString *labelVers;
 {
     xmlType = XML_TYPE_GET_AGENT_INFO;
     
-	[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         
-		NSString *strURL = [NSString stringWithFormat:@"%@eSubmissionWS/eSubmissionXMLService.asmx/"
-							"GetAgentInfo?Input1=%@&Input2=%@",
-							[SIUtilities WSLogin],  agentCode, [self getDeviceSerial]];
-		
-		NSLog(@"%@", strURL);
-		NSURL *url = [NSURL URLWithString:strURL];
-		NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:0 timeoutInterval:20];
-		
-		AFXMLRequestOperation *operation = [AFXMLRequestOperation XMLParserRequestOperationWithRequest:request
+        NSString *strURL = [NSString stringWithFormat:@"%@eSubmissionWS/eSubmissionXMLService.asmx/"
+                            "GetAgentInfo?Input1=%@&Input2=%@",
+                            [SIUtilities WSLogin],  agentCode, [self getDeviceSerial]];
+        
+        NSLog(@"%@", strURL);
+        NSURL *url = [NSURL URLWithString:strURL];
+        NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:0 timeoutInterval:20];
+        
+        AFXMLRequestOperation *operation = [AFXMLRequestOperation XMLParserRequestOperationWithRequest:request
                                                                                                success:^(NSURLRequest *request, NSHTTPURLResponse *response, NSXMLParser *XMLParser) {
                                                                                                    
                                                                                                    XMLParser.delegate = self;
@@ -287,20 +301,20 @@ static NSString *labelVers;
                                                                                                    
                                                                                                    alert = Nil;
                                                                                                }];
-		[operation start];
+        [operation start];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [MBProgressHUD hideHUDForView:self.view animated:YES];
         });
     });
-	
+    
     
 }
 
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-	if (interfaceOrientation==UIInterfaceOrientationLandscapeRight || interfaceOrientation == UIInterfaceOrientationLandscapeLeft)
+    if (interfaceOrientation==UIInterfaceOrientationLandscapeRight || interfaceOrientation == UIInterfaceOrientationLandscapeLeft)
         return YES;
     
     return NO;
@@ -320,18 +334,18 @@ static NSString *labelVers;
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
      */
     [self IsFirstDevice];
-	
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-	[super viewWillDisappear:animated];
+    [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-	[super viewDidDisappear:animated];
+    [super viewDidDisappear:animated];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -339,17 +353,17 @@ static NSString *labelVers;
     if (alertView.tag == 1001) {
         exit(0);
     }
-	else if (alertView.tag == 1){
-		/*
-		 SettingUserProfile * UserProfileView = [self.storyboard instantiateViewControllerWithIdentifier:@"SettingUserProfile"];
-		 UserProfileView.modalPresentationStyle = UIModalPresentationPageSheet;
-		 UserProfileView.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-		 UserProfileView.indexNo = self.indexNo;
-		 [self presentModalViewController:UserProfileView animated:YES];
-		 UserProfileView.view.superview.frame = CGRectMake(150, 50, 700, 748);
-		 UserProfileView = nil;
-		 */
-	}
+    else if (alertView.tag == 1){
+        /*
+         SettingUserProfile * UserProfileView = [self.storyboard instantiateViewControllerWithIdentifier:@"SettingUserProfile"];
+         UserProfileView.modalPresentationStyle = UIModalPresentationPageSheet;
+         UserProfileView.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+         UserProfileView.indexNo = self.indexNo;
+         [self presentModalViewController:UserProfileView animated:YES];
+         UserProfileView.view.superview.frame = CGRectMake(150, 50, 700, 748);
+         UserProfileView = nil;
+         */
+    }
     else if (alertView.tag == 10)
     {
         [self doOfflineLoginCheck];
@@ -362,77 +376,77 @@ static NSString *labelVers;
 - (void)makeDBCopy
 {
     BOOL success;
-	NSFileManager *fileManager = [NSFileManager defaultManager];
-	NSError *DBerror;
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSError *DBerror;
     
-	/*
-	 u1, insert 2 new column into Trad_rider_Detail, tempHL1KSA and tempHL1KSATerm
-	 u2, update Trad_Rider_Label,
-	 //update trad_sys_rider_label set labelcode = 'HL10T' where ridercode in ('PR', 'SP_PRE', 'SP_STD') and labeldesc = 'Health Loading (Per 1K SA) Term';
-	 //update trad_sys_rider_label set labelcode = 'HL10' where ridercode in ('PR', 'SP_PRE', 'SP_STD') and labeldesc = 'Health Loading (Per 1K SA)';
-	 //update trad_sys_rider_label set labeldesc = 'Health Loading (Per 100 SA)' where ridercode in ('PR', 'SP_PRE', 'SP_STD') and labelcode = 'HL10';
-	 //update trad_sys_rider_label set labeldesc = 'Health Loading (Per 100 SA) Term' where ridercode in ('PR', 'SP_PRE', 'SP_STD') and labelcode = 'HL10T';
-	 //update trad_sys_rider_label set labeldesc = 'Sum Assured (%%)' where ridercode in ('PR', 'SP_PRE', 'SP_STD') and labelcode = 'SUMA';
-	 //update trad_sys_rider_label set labelcode = 'SUAS' where ridercode in ('PR', 'SP_PRE', 'SP_STD') and labelcode = 'Sum Assured (%%)';
-	 u3, update Trad_Rider_Label,
-	 //update trad_sys_rider_label set labeldesc = 'Health Loading 1 (Per 100 SA)' where labeldesc = 'Health Loading (Per 100 SA)';
-	 //update trad_sys_rider_label set labeldesc = 'Health Loading 1 (Per 100 SA) Term' where labeldesc = 'Health Loading (Per 100 SA) Term';
-	 //update trad_sys_rider_label set labeldesc = 'Health Loading 1 (Per 1K SA)' where labeldesc = 'Health Loading (Per 1K SA)';
-	 //update trad_sys_rider_label set labeldesc = 'Health Loading 1 (Per 1K SA) Term' where labeldesc = 'Health Loading (Per 1K SA) Term';
-	 //update trad_sys_rider_label set labeldesc = 'Health Loading 1 (%%)' where labeldesc = 'Health Loading (%%)';
-	 //update trad_sys_rider_label set labeldesc = 'Health Loading 1 (%%) Term' where labeldesc = 'Health Loading (%%) Term';
-	 u4, insert 5 new jobs
-	 //	insert into Adm_Occp_Loading_Penta Values('OCC02452', 'VICE PRESIDENT', '1', 'A', 'EM', '1', '0', '0' );
-	 insert into Adm_Occp_Loading_Penta Values('OCC02453', 'PRESIDENT', '1', 'A', 'EM', '1', '0', '0' );
-	 insert into Adm_Occp_Loading_Penta Values('OCC02454', 'CUSTOMER SERVICE EXEC', '1', 'A', 'EM', '1', '0', '0' );
-	 insert into Adm_Occp_Loading_Penta Values('OCC02455', 'SALES ENGINEER', '1', 'A', 'EM', '1', '0', '0' );
-	 insert into Adm_Occp_Loading_Penta Values('OCC02456', 'SERVICE ENGINEER', '1', 'A', 'EM', '2', '0', '0' );
-	 insert into Adm_Occp_Loading Values('OCC02452', 'STD', '1', '1', '1' );
-	 insert into Adm_Occp_Loading Values('OCC02453', 'STD', '1', '1', '1');
-	 insert into Adm_Occp_Loading Values('OCC02454', 'STD', '1', '1', '1');
-	 insert into Adm_Occp_Loading Values('OCC02455', 'STD', '1', '1', '1');
-	 insert into Adm_Occp_Loading Values('OCC02456', 'STD', '1', '1', '1');
-	 insert into Adm_Occp Values('OCC02452', 'VICE PRESIDENT', '1', '', '', '', '', '' );
-	 insert into Adm_Occp Values('OCC02453', 'PRESIDENT', '1', '', '', '', '', '' );
-	 insert into Adm_Occp Values('OCC02454', 'CUSTOMER SERVICE EXEC', '1', '', '', '', '', '' );
-	 insert into Adm_Occp Values('OCC02455', 'SALES ENGINEER', '1', '', '', '', '', '' );
-	 insert into Adm_Occp Values('OCC02456', 'SERVICE ENGINEER', '1', '', '', '', '', '' );
-	 u5, update trad_sys_mtn
-	 update trad_sys_mtn set MaxAge = '63' where PlanCode = 'HLACP';
-	 u6, Delete From Adm_Occp_Loading_Penta where OccpCode = 'OCC01717';
-	 Update Trad_Sys_Rider_Mtn set MaxAge = '63' where RiderCode in ('ETPDB', 'EDB');
-	 
-	 u7, ALTER TABLE \"Agent_profile\" ADD COLUMN \"AgentPortalLoginID\" VARCHAR
-	 ALTER TABLE \"Agent_profile\" ADD COLUMN \"AgentPortalPassword\" VARCHAR
-	 */
-	
-	/*
-	 sqlite3_stmt *statement;
-	 if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
-	 {
-	 
-	 NSString *querySQL = [NSString stringWithFormat:
-	 @"update trad_sys_Rider_mtn set MaxSA = '1500000' where RiderCode = 'CIR';"];
-	 
-	 if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK){
-	 if (sqlite3_step(statement) == SQLITE_DONE){
-	 
-	 }
-	 else {
-	 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
-	 message:@"ERROR" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil ];
-	 [alert show];
-	 alert = Nil;
-	 }
-	 sqlite3_finalize(statement);
-	 }
-	 
-	 sqlite3_close(contactDB);
-	 querySQL = Nil;
-	 
-	 }
-	 */
-	
+    /*
+     u1, insert 2 new column into Trad_rider_Detail, tempHL1KSA and tempHL1KSATerm
+     u2, update Trad_Rider_Label,
+     //update trad_sys_rider_label set labelcode = 'HL10T' where ridercode in ('PR', 'SP_PRE', 'SP_STD') and labeldesc = 'Health Loading (Per 1K SA) Term';
+     //update trad_sys_rider_label set labelcode = 'HL10' where ridercode in ('PR', 'SP_PRE', 'SP_STD') and labeldesc = 'Health Loading (Per 1K SA)';
+     //update trad_sys_rider_label set labeldesc = 'Health Loading (Per 100 SA)' where ridercode in ('PR', 'SP_PRE', 'SP_STD') and labelcode = 'HL10';
+     //update trad_sys_rider_label set labeldesc = 'Health Loading (Per 100 SA) Term' where ridercode in ('PR', 'SP_PRE', 'SP_STD') and labelcode = 'HL10T';
+     //update trad_sys_rider_label set labeldesc = 'Sum Assured (%%)' where ridercode in ('PR', 'SP_PRE', 'SP_STD') and labelcode = 'SUMA';
+     //update trad_sys_rider_label set labelcode = 'SUAS' where ridercode in ('PR', 'SP_PRE', 'SP_STD') and labelcode = 'Sum Assured (%%)';
+     u3, update Trad_Rider_Label,
+     //update trad_sys_rider_label set labeldesc = 'Health Loading 1 (Per 100 SA)' where labeldesc = 'Health Loading (Per 100 SA)';
+     //update trad_sys_rider_label set labeldesc = 'Health Loading 1 (Per 100 SA) Term' where labeldesc = 'Health Loading (Per 100 SA) Term';
+     //update trad_sys_rider_label set labeldesc = 'Health Loading 1 (Per 1K SA)' where labeldesc = 'Health Loading (Per 1K SA)';
+     //update trad_sys_rider_label set labeldesc = 'Health Loading 1 (Per 1K SA) Term' where labeldesc = 'Health Loading (Per 1K SA) Term';
+     //update trad_sys_rider_label set labeldesc = 'Health Loading 1 (%%)' where labeldesc = 'Health Loading (%%)';
+     //update trad_sys_rider_label set labeldesc = 'Health Loading 1 (%%) Term' where labeldesc = 'Health Loading (%%) Term';
+     u4, insert 5 new jobs
+     //	insert into Adm_Occp_Loading_Penta Values('OCC02452', 'VICE PRESIDENT', '1', 'A', 'EM', '1', '0', '0' );
+     insert into Adm_Occp_Loading_Penta Values('OCC02453', 'PRESIDENT', '1', 'A', 'EM', '1', '0', '0' );
+     insert into Adm_Occp_Loading_Penta Values('OCC02454', 'CUSTOMER SERVICE EXEC', '1', 'A', 'EM', '1', '0', '0' );
+     insert into Adm_Occp_Loading_Penta Values('OCC02455', 'SALES ENGINEER', '1', 'A', 'EM', '1', '0', '0' );
+     insert into Adm_Occp_Loading_Penta Values('OCC02456', 'SERVICE ENGINEER', '1', 'A', 'EM', '2', '0', '0' );
+     insert into Adm_Occp_Loading Values('OCC02452', 'STD', '1', '1', '1' );
+     insert into Adm_Occp_Loading Values('OCC02453', 'STD', '1', '1', '1');
+     insert into Adm_Occp_Loading Values('OCC02454', 'STD', '1', '1', '1');
+     insert into Adm_Occp_Loading Values('OCC02455', 'STD', '1', '1', '1');
+     insert into Adm_Occp_Loading Values('OCC02456', 'STD', '1', '1', '1');
+     insert into Adm_Occp Values('OCC02452', 'VICE PRESIDENT', '1', '', '', '', '', '' );
+     insert into Adm_Occp Values('OCC02453', 'PRESIDENT', '1', '', '', '', '', '' );
+     insert into Adm_Occp Values('OCC02454', 'CUSTOMER SERVICE EXEC', '1', '', '', '', '', '' );
+     insert into Adm_Occp Values('OCC02455', 'SALES ENGINEER', '1', '', '', '', '', '' );
+     insert into Adm_Occp Values('OCC02456', 'SERVICE ENGINEER', '1', '', '', '', '', '' );
+     u5, update trad_sys_mtn
+     update trad_sys_mtn set MaxAge = '63' where PlanCode = 'HLACP';
+     u6, Delete From Adm_Occp_Loading_Penta where OccpCode = 'OCC01717';
+     Update Trad_Sys_Rider_Mtn set MaxAge = '63' where RiderCode in ('ETPDB', 'EDB');
+     
+     u7, ALTER TABLE \"Agent_profile\" ADD COLUMN \"AgentPortalLoginID\" VARCHAR
+     ALTER TABLE \"Agent_profile\" ADD COLUMN \"AgentPortalPassword\" VARCHAR
+     */
+    
+    /*
+     sqlite3_stmt *statement;
+     if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
+     {
+     
+     NSString *querySQL = [NSString stringWithFormat:
+     @"update trad_sys_Rider_mtn set MaxSA = '1500000' where RiderCode = 'CIR';"];
+     
+     if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK){
+     if (sqlite3_step(statement) == SQLITE_DONE){
+     
+     }
+     else {
+     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
+     message:@"ERROR" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil ];
+     [alert show];
+     alert = Nil;
+     }
+     sqlite3_finalize(statement);
+     }
+     
+     sqlite3_close(contactDB);
+     querySQL = Nil;
+     
+     }
+     */
+    
     /*  update Occupation list with Professional Athlete : Edwin 21-11-2013  */
     sqlite3_stmt *statement;
     BOOL proceedInsert = false;
@@ -458,7 +472,7 @@ static NSString *labelVers;
     }
     statement = Nil;
     
-	
+    
     if(proceedInsert)
     {
         sqlite3_stmt *statement;
@@ -471,7 +485,7 @@ static NSString *labelVers;
             
             if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK){
                 if (sqlite3_step(statement) == SQLITE_DONE){
-					
+                    
                 }
                 sqlite3_finalize(statement);
             }
@@ -482,60 +496,60 @@ static NSString *labelVers;
         }
     }
     /*                                                      */
-	
-	
+    
+    
     success = [fileManager fileExistsAtPath:databasePath];
     //if (success) return;
     if (!success) {
-		
+        
         NSString *defaultDBPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"hladb.sqlite"];
         success = [fileManager copyItemAtPath:defaultDBPath toPath:databasePath error:&DBerror];
         if (!success) {
             NSAssert1(0, @"Failed to create writable database file with message '%@'.", [DBerror localizedDescription]);
         }
-		
+        
         defaultDBPath = Nil;
     }
-	
-	if([fileManager fileExistsAtPath:CommDatabasePath] == FALSE ){
-		
-		//if there are any changes, system will delete the old rates.json file and replace with the new one
-		// code here
-		//--------------
-		
-		NSString *CommissionRatesPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Rates.json"];
-		success = [fileManager copyItemAtPath:CommissionRatesPath toPath:CommDatabasePath error:&DBerror];
-		if (!success) {
-			NSAssert1(0, @"Failed to create Commision Rates json file with message '%@'.", [DBerror localizedDescription]);
-		}
-		CommissionRatesPath= Nil;
-	}
-	
-	//[fileManager removeItemAtPath:UL_RatesDatabasePath error:Nil];
-	
-	if([fileManager fileExistsAtPath:UL_RatesDatabasePath] == FALSE ){
-		
-		NSString *ULRatesPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"UL_Rates.sqlite"];
-		success = [fileManager copyItemAtPath:ULRatesPath toPath:UL_RatesDatabasePath error:&DBerror];
-		if (!success) {
-			NSAssert1(0, @"Failed to create UL Rates file with message '%@'.", [DBerror localizedDescription]);
-		}
-		ULRatesPath= Nil;
-	}
     
-	if([fileManager fileExistsAtPath:RatesDatabasePath] == FALSE ){
-		NSString *RatesDBPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"HLA_Rates.sqlite"];
-		success = [fileManager copyItemAtPath:RatesDBPath toPath:RatesDatabasePath error:&DBerror];
-		if (!success) {
-			NSAssert1(0, @"Failed to create writable Rates database file with message '%@'.", [DBerror localizedDescription]);
-		}
-		RatesDBPath = Nil;
-	}
-	else {
-		return;
-	}
+    if([fileManager fileExistsAtPath:CommDatabasePath] == FALSE ){
+        
+        //if there are any changes, system will delete the old rates.json file and replace with the new one
+        // code here
+        //--------------
+        
+        NSString *CommissionRatesPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Rates.json"];
+        success = [fileManager copyItemAtPath:CommissionRatesPath toPath:CommDatabasePath error:&DBerror];
+        if (!success) {
+            NSAssert1(0, @"Failed to create Commision Rates json file with message '%@'.", [DBerror localizedDescription]);
+        }
+        CommissionRatesPath= Nil;
+    }
     
-	fileManager = Nil;
+    //[fileManager removeItemAtPath:UL_RatesDatabasePath error:Nil];
+    
+    if([fileManager fileExistsAtPath:UL_RatesDatabasePath] == FALSE ){
+        
+        NSString *ULRatesPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"UL_Rates.sqlite"];
+        success = [fileManager copyItemAtPath:ULRatesPath toPath:UL_RatesDatabasePath error:&DBerror];
+        if (!success) {
+            NSAssert1(0, @"Failed to create UL Rates file with message '%@'.", [DBerror localizedDescription]);
+        }
+        ULRatesPath= Nil;
+    }
+    
+    if([fileManager fileExistsAtPath:RatesDatabasePath] == FALSE ){
+        NSString *RatesDBPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"HLA_Rates.sqlite"];
+        success = [fileManager copyItemAtPath:RatesDBPath toPath:RatesDatabasePath error:&DBerror];
+        if (!success) {
+            NSAssert1(0, @"Failed to create writable Rates database file with message '%@'.", [DBerror localizedDescription]);
+        }
+        RatesDBPath = Nil;
+    }
+    else {
+        return;
+    }
+    
+    fileManager = Nil;
     error = Nil;
     
     
@@ -572,13 +586,13 @@ static NSString *labelVers;
                 }
                 else {
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
-																	message:@"Username does not exist. Unable to retrieve password." delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil ];
+                                                                    message:@"Username does not exist. Unable to retrieve password." delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil ];
                     [alert show];
                     alert = Nil;
                 }
                 sqlite3_finalize(statement);
             }
-			
+            
             sqlite3_close(contactDB);
             querySQL = Nil;
             
@@ -587,7 +601,7 @@ static NSString *labelVers;
         
     }
     statement = Nil;
-	
+    
 }
 
 
@@ -612,7 +626,7 @@ static NSString *labelVers;
         [self presentViewController:agentPortalLogin animated:YES completion:nil];
         agentPortalLogin.view.superview.frame = CGRectMake(150, 50, 700, 600);
     }
-	
+    
     //[self resetFirstDevice];
 }
 
@@ -632,22 +646,22 @@ static NSString *labelVers;
     const char *dbpath = [databasePath UTF8String];
     sqlite3_stmt *statement;
     agentPortalLoginID = @"";
-	agentPortalPassword = @"";
-	agentID = @"";
-	agentCode =@"";
-	
+    agentPortalPassword = @"";
+    agentID = @"";
+    agentCode =@"";
+    
     if (sqlite3_open(dbpath, &contactDB) == SQLITE_OK)
     {
-		
-       /* NSString *querySQL = [NSString stringWithFormat: @"SELECT A.IndexNo,A.AgentLoginID,A.FirstLogin,B.AgentPortalLoginID, "
+        
+        /* NSString *querySQL = [NSString stringWithFormat: @"SELECT A.IndexNo,A.AgentLoginID,A.FirstLogin,B.AgentPortalLoginID, "
 							  "B.AgentPortalPassword, B.AgentCode FROM User_Profile A, Agent_Profile B WHERE A.AgentLoginID = B.AgentLoginID AND "
 							  "A.AgentLoginID=\"%@\" and A.AgentPassword=\"%@\"",
 							  txtUsername.text,txtPassword.text];*/
         NSString *querySQL = [NSString stringWithFormat: @"SELECT IndexNo, AgentLoginID, FirstLogin, AgentPortalLoginID, AgentPortalPassword, AgentCode "
                               "FROM Agent_Profile WHERE "
-							  "AgentLoginID=\"%@\" and AgentPassword=\"%@\"",
-							  txtUsername.text,txtPassword.text];
-		
+                              "AgentLoginID=\"%@\" and AgentPassword=\"%@\"",
+                              txtUsername.text,txtPassword.text];
+        
         NSLog(@"querySQL %@", querySQL);
         const char *query_stmt = [querySQL UTF8String];
         if (sqlite3_prepare_v2(contactDB, query_stmt, -1, &statement, NULL) == SQLITE_OK)
@@ -667,27 +681,27 @@ static NSString *labelVers;
                 const char *portalCode = (const char*)sqlite3_column_text(statement, 5);
                 agentCode = portalCode == NULL ? nil : [[NSString alloc] initWithUTF8String:portalCode];
                 //txtPassword.text = @"";
-				
+                
             } else {
-				[MBProgressHUD hideHUDForView:self.view animated:YES];
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Invalid Password. Please check your password" delegate:Nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
-                [alert show];
-                alert = Nil;
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                //                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Invalid Password. Please check your password" delegate:Nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+                //                [alert show];
+                //                alert = Nil;
                 
             }
             sqlite3_finalize(statement);
         }
-		else{
-			statusLogin = 2;
-			NSLog(@"wrong query");
-		}
+        else{
+            statusLogin = 2;
+            NSLog(@"wrong query");
+        }
         sqlite3_close(contactDB);
         querySQL = Nil;
         query_stmt = Nil;
     }
-	else{
-		NSLog(@"cannot open");
-	}
+    else{
+        NSLog(@"cannot open");
+    }
     
     dbpath = Nil;
     statement = Nil;
@@ -700,10 +714,10 @@ static NSString *labelVers;
     
     if (sqlite3_open(dbpath, &contactDB) == SQLITE_OK)
     {
-		
-       // NSString *querySQL = [NSString stringWithFormat: @"SELECT \"AgentPassword\" FROM User_Profile WHERE \"AgentLoginID\"=\"%@\"", txtUsername.text];
+        
+        // NSString *querySQL = [NSString stringWithFormat: @"SELECT \"AgentPassword\" FROM User_Profile WHERE \"AgentLoginID\"=\"%@\"", txtUsername.text];
         NSString *querySQL = [NSString stringWithFormat: @"SELECT \"AgentPassword\" FROM Agent_Profile WHERE \"AgentLoginID\"=\"%@\"", txtUsername.text];
-		
+        
         const char *query_stmt = [querySQL UTF8String];
         if (sqlite3_prepare_v2(contactDB, query_stmt, -1, &statement, NULL) == SQLITE_OK)
         {
@@ -712,23 +726,23 @@ static NSString *labelVers;
                 
                 NSLog(@"password is %@", [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 0)]);
                 
-				
+                
             } else {
-				
+                
                 
             }
             sqlite3_finalize(statement);
         }
-		else{
-			NSLog(@"wrong query");
-		}
+        else{
+            NSLog(@"wrong query");
+        }
         sqlite3_close(contactDB);
         querySQL = Nil;
         query_stmt = Nil;
     }
-	else{
-		NSLog(@"cannot open");
-	}
+    else{
+        NSLog(@"cannot open");
+    }
     
     dbpath = Nil;
     statement = Nil;
@@ -841,157 +855,420 @@ static NSString *labelVers;
 #pragma mark - action
 
 - (IBAction)btnLogin:(id)sender {
-	//[self checkingPassword];
+    //[self checkingPassword];
     
     [self loginAction];
     
 }
 
+- (void) ShowLoginDate
+{
+    NSString *todaysDate = [self getTodayDate];
+    NSString *lastSyncDate = [self getLastSyncDate];
+    int dayRem = 0;
+    
+    NSLog(@"lastSyncDate %@", lastSyncDate);
+    if( lastSyncDate == nil )
+    {
+        lastSyncDate = todaysDate;
+    }
+    
+    
+    if (lastSyncDate !=(NSString *)[NSNull null]) {
+        int dateDifference = [self dateDiffrenceFromDate:todaysDate second:lastSyncDate];
+        
+        if(dateDifference<0)
+        {
+            dateDifference = dateDifference * -1;
+        }
+        
+        lblLastLogin.text = lastSyncDate;
+        
+        dayRem = 7-dateDifference;
+    }
+    else {
+        lblLastLogin.text = @"";
+    }
+    
+    if (dayRem<0) {
+        lblTimeRemaining.textColor = [UIColor redColor];
+        lblTimeRemaining.text = [NSString stringWithFormat:@"0 days"];
+    }
+    else {
+        lblTimeRemaining.textColor = [UIColor blackColor];
+        lblTimeRemaining.text = [NSString stringWithFormat:@"%d days", dayRem];
+    }
+}
+
 - (void) loginAction
 {
-    [self loginSuccess];
+    
+    //	txtUsername.text= @"emi";
+    //	txtPassword.text = @"password";
     
     if (txtUsername.text.length <= 0) {
         
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Username is required" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
         
-        [txtPassword becomeFirstResponder];
+        [txtUsername becomeFirstResponder];
         alert = Nil;
         
     }
-    else if (txtPassword.text.length <=0) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Password is required" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alert show];
+    
+    if (![self IsConnected]) {
+        // not connected
+        NSLog(@"got");
+    } else {
+        // connected, do some internet stuff
+        NSLog(@"nogot");
+    }
+    
+    
+    
+    
+    //http://192.168.2.107/AgentWebService/AgentMgmt.asmx/ValidateAgentAndDevice?strAgentID=&strDeviceID=
+    
+    NSString *deviceId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
+    
+    NSLog(@"devideId %@", [[[UIDevice currentDevice] identifierForVendor] UUIDString]);
+    
+    
+    
+    
+    
+    
+    NSString *post = [NSString stringWithFormat:@"strAgentID=%@&strPassword=%@&strDeviceID=%@",txtUsername.text,txtPassword.text, @"1AE92BBE-1B69-413E-982A-557CBA969D4B"];
+    //	NSString *post = [NSString stringWithFormat:@"strAgentID=%@&strPassword=%@&strDeviceID=%@",txtUsername.text,txtPassword.text, [[[UIDevice currentDevice] identifierForVendor] UUIDString]];
+    
+    //	NSString *post = [NSString stringWithFormat:@"strAgentID=%@&strDeviceID=%@",@"cd",@"ds"];
+    
+    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    NSString *postLength = [NSString stringWithFormat:@"%d",[postData length]];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    
+    NSString *url = [NSString stringWithFormat:@"http://192.168.0.140/AgentWebService/AgentMgmt.asmx/ValidateLogin"];
+    
+    [request setURL:[NSURL URLWithString:url]];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:postData];
+    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    NSData *urlData;
+    NSURLResponse *response;
+    //D33D26AB-2319-4088-A7AD-E8A69F675F19
+    NSError *error;
+    urlData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    
+    
+    
+    
+    BOOL hasConn;
+    if(conn) {
+        hasConn = TRUE;
+        NSLog(@"Connection Successful");
+    } else {
+        NSLog(@"Connection could not be made");
+        hasConn = FALSE;
+    }
+    
+    if (hasConn) {
+        NSString *aStr = [[NSString alloc] initWithData:urlData encoding:NSUTF8StringEncoding];
         
-        [txtPassword becomeFirstResponder];
-        alert = Nil;
-    }
-    /*
-	 else if (![txtUsername.text isEqualToString:@"hla"]) {
-	 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Invalid Login ID." delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-	 [alert show];
-	 
-	 [txtPassword becomeFirstResponder];
-	 alert = Nil;
-	 }*/
-    else if( [Login forSMPD_Acturial:txtPassword.text] )
-    {
-        [self openHome];
-    }
-    else if (isFirstDevice)
-    {
-        if ([[Reachability reachabilityWithHostname:@"www.hla.com.my"] currentReachabilityStatus] == NotReachable) {
-            // Show alert because no wifi or 3g is available..
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
-                                                            message:@"Error in connecting to Web service. Please check your internet connection"
-                                                           delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        NSRange rangeValue1 = [aStr rangeOfString:@"True" options:NSCaseInsensitiveSearch];
+        NSRange rangeValue2 = [aStr rangeOfString:@"False" options:NSCaseInsensitiveSearch];
+        
+        if (aStr == nil || [aStr isEqualToString:@""]) {
+            NSLog(@"no conn");
+            [self doOfflineLoginCheck];
+        }
+        if (rangeValue1.length > 0)
+        {
+            [self loginSuccess];
+            
+            [self parseURL:aStr];
+        }
+        if (rangeValue2.length > 0)
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Invalid Login" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [alert show];
             
+            [txtUsername becomeFirstResponder];
             alert = Nil;
-        }else
-        {
-            
-            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 5), ^{
-                
-                xmlType = XML_TYPE_VALIDATE_AGENT;
-                NSString *sBadAttempt = [NSString stringWithFormat:@"%d", [self getBadAttempts]];
-                NSString *strURL = [NSString stringWithFormat:@"%@eSubmissionWS/eSubmissionXMLService.asmx/"
-                                    "ValidateAgent?Input1=%@&Input2=%@&Input3=%@&Input4=%@",
-                                    [SIUtilities WSLogin],  txtUsername.text, txtPassword.text, [self getIPAddress], sBadAttempt];
-                NSLog(@"%@", strURL);
-                NSURL *url = [NSURL URLWithString:strURL];
-                NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:0 timeoutInterval:20];
-                
-                AFXMLRequestOperation *operation = [AFXMLRequestOperation XMLParserRequestOperationWithRequest:request
-                                                                                                       success:^(NSURLRequest *request, NSHTTPURLResponse *response, NSXMLParser *XMLParser) {
-                                                                                                           
-                                                                                                           XMLParser.delegate = self;
-                                                                                                           [XMLParser setShouldProcessNamespaces:YES];
-                                                                                                           [XMLParser parse];
-                                                                                                           
-                                                                                                       } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSXMLParser *XMLParser) {
-                                                                                                           [MBProgressHUD hideHUDForView:self.view animated:YES];
-                                                                                                           NSLog(@"error in calling web service");
-                                                                                                           UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
-                                                                                                                                                           message:@"Error in connecting to Web service. Please check your internet connection"
-                                                                                                                                                          delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                                                                                                           [alert show];
-                                                                                                           
-                                                                                                           alert = Nil;
-                                                                                                       }];
-                [operation start];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [MBProgressHUD hideHUDForView:self.view animated:YES];
-                });
-            });
         }
-		
-		
     }
     else {
         
-        [self checkingFirstLogin];
-        NSLog(@"loginstatus:%d",statusLogin);
-        NSLog(@"indexNo:%d",indexNo);
-        NSLog(@"user:%@",agentID);
-        statusLogin = 0; //hardcoded as due to previous design that this was used to trigger the security questions.
-        if (statusLogin == 1 && indexNo != 0) {
-            
-			
-			SecurityQuestion *securityPage = [self.storyboard instantiateViewControllerWithIdentifier:@"SecurityQuestion"];
-			securityPage.userID = indexNo;
-			securityPage.FirstTimeLogin = 1;
-			securityPage.modalPresentationStyle = UIModalPresentationPageSheet;
-			securityPage.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-			[self presentModalViewController:securityPage animated:NO];
-			
-			securityPage = Nil;
-			
-			
-            scrollViewLogin = Nil;
-            activeField = Nil;
-			
-			
-            
-        } else if (statusLogin == 0 && indexNo != 0) {
-            
-			
-			
-            if ([[Reachability reachabilityWithHostname:@"www.hla.com.my"] currentReachabilityStatus] == NotReachable) {
-                [self doOfflineLoginCheck];
-            }else
-            {
-                [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-                dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-                    
-                    [self doOnlineLogin];
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [MBProgressHUD hideHUDForView:self.view animated:YES];
-                    });
-                });
-            }
-            
-            
-        }
-		else if (statusLogin == 2){
-			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Please Contact System Admin." delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-			[alert show];
-			
-			alert = Nil;
-		}
-		
+        [self doOfflineLoginCheck];
+        
     }
+    
+    
+    
+    //	if ([txtUsername.text isEqualToString:@"prem"] &&[txtPassword.text isEqualToString:@"password123"])
+    //	{
+    //		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"User Account been disable,Please authenticate with the portal to enable" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    //        [alert show];
+    //
+    //        [txtPassword becomeFirstResponder];
+    //        alert = Nil;
+    //
+    //	}
+    //	else if ([txtUsername.text isEqualToString:@"emi"] &&[txtPassword.text isEqualToString:@"password123"])
+    //	{
+    //		[self loginSuccess];
+    //
+    //	}
+    //
+    //	else
+    //	{
+    //	  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Invalid Password. Please check your password" delegate:Nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+    //	  [alert show];
+    //
+    //	}
+    //
+    //
+    //
+    //
+    
+    //    else if (txtPassword.text.length <=0) {
+    //        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Password is required" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    //        [alert show];
+    //
+    //        [txtPassword becomeFirstResponder];
+    //        alert = Nil;
+    //    }
+    /*
+     else if (![txtUsername.text isEqualToString:@"hla"]) {
+     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Invalid Login ID." delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+     [alert show];
+     
+     [txtPassword becomeFirstResponder];
+     alert = Nil;
+     }*/
+    //    else if( [Login forSMPD_Acturial:txtPassword.text] )
+    //    {
+    //        [self openHome];
+    //    }
+    //    else if (isFirstDevice)
+    //    {
+    //        if ([[Reachability reachabilityWithHostname:@"www.hla.com.my"] currentReachabilityStatus] == NotReachable) {
+    //            // Show alert because no wifi or 3g is available..
+    //            [MBProgressHUD hideHUDForView:self.view animated:YES];
+    //            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
+    //                                                            message:@"Error in connecting to Web service. Please check your internet connection"
+    //                                                           delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    //            [alert show];
+    //
+    //            alert = Nil;
+    //        }else
+    //        {
+    //
+    //            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    //            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 5), ^{
+    //
+    //                xmlType = XML_TYPE_VALIDATE_AGENT;
+    //                NSString *sBadAttempt = [NSString stringWithFormat:@"%d", [self getBadAttempts]];
+    //                NSString *strURL = [NSString stringWithFormat:@"%@eSubmissionWS/eSubmissionXMLService.asmx/"
+    //                                    "ValidateAgent?Input1=%@&Input2=%@&Input3=%@&Input4=%@",
+    //                                    [SIUtilities WSLogin],  txtUsername.text, txtPassword.text, [self getIPAddress], sBadAttempt];
+    //                NSLog(@"%@", strURL);
+    //                NSURL *url = [NSURL URLWithString:strURL];
+    //                NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:0 timeoutInterval:20];
+    //
+    //                AFXMLRequestOperation *operation = [AFXMLRequestOperation XMLParserRequestOperationWithRequest:request
+    //                                                                                                       success:^(NSURLRequest *request, NSHTTPURLResponse *response, NSXMLParser *XMLParser) {
+    //
+    //                                                                                                           XMLParser.delegate = self;
+    //                                                                                                           [XMLParser setShouldProcessNamespaces:YES];
+    //                                                                                                           [XMLParser parse];
+    //
+    //                                                                                                       } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSXMLParser *XMLParser) {
+    //                                                                                                           [MBProgressHUD hideHUDForView:self.view animated:YES];
+    //                                                                                                           NSLog(@"error in calling web service");
+    //                                                                                                           UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
+    //                                                                                                                                                           message:@"Error in connecting to Web service. Please check your internet connection"
+    //                                                                                                                                                          delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    //                                                                                                           [alert show];
+    //
+    //                                                                                                           alert = Nil;
+    //                                                                                                       }];
+    //                [operation start];
+    //                dispatch_async(dispatch_get_main_queue(), ^{
+    //                    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    //                });
+    //            });
+    //        }
+    //
+    //
+    //    }
+    //    else {
+    //
+    //        [self checkingFirstLogin];
+    //        NSLog(@"loginstatus:%d",statusLogin);
+    //        NSLog(@"indexNo:%d",indexNo);
+    //        NSLog(@"user:%@",agentID);
+    //        statusLogin = 0; //hardcoded as due to previous design that this was used to trigger the security questions.
+    //        if (statusLogin == 1 && indexNo != 0) {
+    //
+    //
+    //			SecurityQuestion *securityPage = [self.storyboard instantiateViewControllerWithIdentifier:@"SecurityQuestion"];
+    //			securityPage.userID = indexNo;
+    //			securityPage.FirstTimeLogin = 1;
+    //			securityPage.modalPresentationStyle = UIModalPresentationPageSheet;
+    //			securityPage.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    //			[self presentModalViewController:securityPage animated:NO];
+    //
+    //			securityPage = Nil;
+    //
+    //
+    //            scrollViewLogin = Nil;
+    //            activeField = Nil;
+    //
+    //
+    //
+    //        } else if (statusLogin == 0 && indexNo != 0) {
+    //
+    //
+    //
+    //            if ([[Reachability reachabilityWithHostname:@"www.hla.com.my"] currentReachabilityStatus] == NotReachable) {
+    //                [self doOfflineLoginCheck];
+    //            }else
+    //            {
+    //                [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    //                dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+    //
+    //                    [self doOnlineLogin];
+    //                    dispatch_async(dispatch_get_main_queue(), ^{
+    //                        [MBProgressHUD hideHUDForView:self.view animated:YES];
+    //                    });
+    //                });
+    //            }
+    //
+    //
+    //        }
+    //		else if (statusLogin == 2){
+    //			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Please Contact System Admin." delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    //			[alert show];
+    //
+    //			alert = Nil;
+    //		}
+    //
+    //    }
 }
+
+
+
+-(void)parseURL:(NSString *) urlStr
+{
+    NSMutableDictionary *queryStringDict = [ [NSMutableDictionary alloc] init];
+    NSArray *urlArr = [urlStr componentsSeparatedByString:@"|"];
+    
+    if (urlArr.count < 1) {
+        return;//should not reach here
+    }
+    
+    NSLog(@"parseURL: %@", urlStr);
+    
+    //    for(NSString *keyPair in urlArr)
+    //    {
+    //        NSArray *pairedComp = [keyPair componentsSeparatedByString:@"="];
+    //        NSString *key = [pairedComp objectAtIndex:0];
+    //        NSString *value = [pairedComp objectAtIndex:1];
+    //
+    //        [queryStringDict setObject:value forKey:key];
+    //    }
+    
+    NSString* validity = [urlArr objectAtIndex:0];
+    NSString* agentCode_1 =  [urlArr objectAtIndex:1]; //[queryStringDict objectForKey:@"agentCode"];
+    NSString* agentName_1 = [urlArr objectAtIndex:2];
+    NSString* agentType_1 = [urlArr objectAtIndex:3];
+    NSString* immediateLeaderCode_1 = [urlArr objectAtIndex:4];
+    NSString* immediateLeaderName_1 = [urlArr objectAtIndex:5];
+    NSString* BusinessRegNumber_1 = [urlArr objectAtIndex:6];
+    NSString* agentEmail_1 = [urlArr objectAtIndex:7];
+    NSString* agentLoginId_1 = [urlArr objectAtIndex:8];
+    NSString* agentIcNo_1 = [urlArr objectAtIndex:9];
+    NSString* agentContractDate_1 = [urlArr objectAtIndex:10];
+    NSString* agentAddr1_1 = [urlArr objectAtIndex:11];
+    NSString* agentAddr2_1 = [urlArr objectAtIndex:12];
+    NSString* agentAddr3_1 = [urlArr objectAtIndex:13];
+    NSString* agentAddrPostcode_1 = [urlArr objectAtIndex:14];
+    NSString* agentContactNumber_1 = [urlArr objectAtIndex:15];
+    NSString* agentPassword_1 = [urlArr objectAtIndex:16];
+    //NSString* lastLogonDate = [queryStringDict objectForKey:@"lastLogonDate"];
+    //NSString* lastLogoutDate = [queryStringDict objectForKey:@"lastLogoutDate"];
+    NSString* agentStatus_1 = [urlArr objectAtIndex:17];
+    NSString* channel_1 = [urlArr objectAtIndex:18];
+    
+    NSLog(@"");
+    
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:agentCode_1 forKey:KEY_AGENT_CODE];
+    [defaults synchronize];
+    
+    NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsDir = [dirPaths objectAtIndex:0];
+    NSString *databasePath1 = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
+    sqlite3_stmt *statement;
+    
+    if (sqlite3_open([databasePath1 UTF8String ], &contactDB) == SQLITE_OK)
+    {
+        NSString *querySQL;
+        BOOL newRec = FALSE;
+        
+        NSString *CheckSql = [NSString stringWithFormat:
+                              @"select * FROM agent_profile"];
+        
+        
+        FMDatabase *db = [FMDatabase databaseWithPath:databasePath1];
+        [db open];
+        
+        FMResultSet *results;
+        results = [db executeQuery:CheckSql];
+        
+        while ([results next]) {
+            [db executeUpdate:@"DELETE FROM agent_profile"];
+        }
+        [db close];
+        
+        querySQL = [NSString stringWithFormat:
+                    @"insert into Agent_profile (agentCode, AgentName, AgentType, AgentContactNo, ImmediateLeaderCode, ImmediateLeaderName, BusinessRegNumber, AgentEmail, AgentLoginID, AgentICNo, "
+                    "AgentContractDate, AgentAddr1, AgentAddr2, AgentAddr3, AgentAddr4, AgentPortalLoginID, AgentPortalPassword, AgentContactNumber, AgentPassword, AgentStatus, Channel, AgentAddrPostcode, agentNRIC, LastLogonDate) VALUES "
+                    "('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@', '%@', '%@', %@) ",
+                    agentCode_1, agentName_1, agentType_1, agentContactNumber_1,immediateLeaderCode_1, immediateLeaderName_1,BusinessRegNumber_1, agentEmail_1, agentLoginId_1, agentIcNo_1, agentContractDate_1, agentAddr1_1, agentAddr2_1, agentAddr3_1, @"", agentLoginId_1, agentPassword_1, agentContactNumber_1, agentPassword_1, agentStatus_1, channel_1, agentAddrPostcode_1, agentIcNo_1, @"datetime(\"now\", \"+8 hour\")" ];
+        
+        
+        if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK){
+            if (sqlite3_step(statement) == SQLITE_DONE){
+                
+            }
+            else{
+                NSLog(@"%@",[[NSString alloc] initWithUTF8String:sqlite3_errmsg(contactDB)]) ;
+            }
+            sqlite3_finalize(statement);
+        }
+        else{
+            NSLog(@"%@",[[NSString alloc] initWithUTF8String:sqlite3_errmsg(contactDB)]) ;
+        }
+        
+        sqlite3_close(contactDB);
+        querySQL = Nil;
+        
+    }
+    
+}
+
+
 
 //- (void) loginSuccess
 //{
 //    AppDelegate *zzz= (AppDelegate*)[[UIApplication sharedApplication] delegate ];
 //    zzz.indexNo = self.indexNo;
 //    zzz.userRequest = agentID;
-//    
+//
 //    CarouselViewController *carouselMenu = [self.storyboard instantiateViewControllerWithIdentifier:@"carouselView"];
 //    carouselMenu.getInternet = @"No";
 //    [self presentViewController:carouselMenu animated:YES completion:Nil];
@@ -1083,7 +1360,7 @@ static NSString *labelVers;
     NSString *lastSyncDate = [self getLastSyncDate];
     
     NSLog(@"lastSyncDate %@", lastSyncDate);
-    if( lastSyncDate == nil )
+    if (lastSyncDate !=(NSString *)[NSNull null] || [lastSyncDate isEqualToString:@""])
     {
         lastSyncDate = todaysDate;
     }
@@ -1095,33 +1372,48 @@ static NSString *labelVers;
         dateDifference = dateDifference * -1;
     }
     //dateDifference = 20;
-    if(dateDifference > 30)
+    if(dateDifference > 7)
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
-														message:@"You have not login with an internet connection for the past 30 days. Please connect to internet to login to iM-Solutions."
-													   delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                                                        message:@"You have not login with an internet connection for the past 7 days. Please connect to internet to login."
+                                                       delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
         
         alert = Nil;
     }else
     {
-		[self loginSuccess];
-        NSString *storedAgentStatus = [self getStoredAgentStatus];
         
-        if([storedAgentStatus isEqualToString:@"Y"])
-        {
+        if ([self OfflineLogin]) {
             [self loginSuccess];
-        }else
-			if([storedAgentStatus isEqualToString:@"N"])
-			{
-				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
-																message:@"Your login is voided, please check with AASD or if your account is active, please login again with an active internet connection."
-															   delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-				[alert show];
-				
-				alert = Nil;
-			}
-		
+        }
+        else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Invalid Login" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [alert show];
+            
+            [txtUsername becomeFirstResponder];
+            alert = Nil;
+        }
+        
+        
+        
+        
+        
+        //        NSString *storedAgentStatus = [self getStoredAgentStatus];
+        
+        //        if([storedAgentStatus isEqualToString:@"Y"])
+        //        {
+        //            [self loginSuccess];
+        //        }else
+        //			if([storedAgentStatus isEqualToString:@"N"])
+        //			{
+        //				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
+        //																message:@"Your login is voided, please check with AASD or if your account is active, please login again with an active internet connection."
+        //															   delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        //				[alert show];
+        //
+        //				alert = Nil;
+        //			}
+        
     }
 }
 
@@ -1260,74 +1552,81 @@ static NSString *labelVers;
 
 - (IBAction)btnReset:(id)sender
 {
-    const char *dbpath = [databasePath UTF8String];
-    sqlite3_stmt *statement;
-    sqlite3_stmt *statement2;
-    sqlite3_stmt *statement3;
     
-    if (sqlite3_open(dbpath, &contactDB) == SQLITE_OK)
-    {
-        //NSString *querySQL = [NSString stringWithFormat:@"UPDATE User_Profile SET firstLogin = 1, agentPassword = \"password\" "];
-        /*NSString *querySQL = [NSString stringWithFormat:@"UPDATE Agent_profile SET firstLogin = null, agentPassword = \"password\" "];
-        
-        const char *query_stmt = [querySQL UTF8String];
-        if (sqlite3_prepare_v2(contactDB, query_stmt, -1, &statement, NULL) == SQLITE_OK)
-        {
-            if (sqlite3_step(statement) == SQLITE_DONE)
-            {*/
-                NSString *querySQL2 = [NSString stringWithFormat:@"DELETE from SecurityQuestion_Input "];
-                if (sqlite3_prepare_v2(contactDB, [querySQL2 UTF8String], -1, &statement2, NULL) == SQLITE_OK)
-                {
-                    if (sqlite3_step(statement2) == SQLITE_DONE){
-                        
-                        NSString *querySQL3 = [NSString stringWithFormat:@"UPDATE Agent_Profile SET AgentCode = \"\", AgentName = \"\", "
-                                               " AgentContactNo = \"\", ImmediateLeaderCode = \"\", ImmediateLeaderName = \"\", BusinessRegNumber = \"\", "
-                                               " AgentEmail = \"\", AgentPassword = \"\" , firstLogin = null "];
-                        if (sqlite3_prepare_v2(contactDB, [querySQL3 UTF8String], -1, &statement3, NULL) == SQLITE_OK)
-                        {
-                            if (sqlite3_step(statement3) == SQLITE_DONE){
-                                
-                                [self resetFirstDevice];
-                                [self IsFirstDevice];
-                                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
-                                                                                message:@"System has been restored to first time login mode" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                                [alert show];
-                                
-                            }
-                            
-                            sqlite3_finalize(statement3);
-                        }
-                        
-                    }
-                    sqlite3_finalize(statement2);
-                    
-                }
-                sqlite3_close(contactDB);
-        /*
-            } else {
-                NSLog(@"reset error");
-            }
-            sqlite3_finalize(statement);
-        }
-        sqlite3_close(contactDB);*/
-    }
     
-	/*
-	 
-	 if(_delegate != Nil){
-	 [(ViewController *)_delegate setSss:1 ];
-	 [self dismissModalViewControllerAnimated:NO];
-	 [_delegate Dismiss:@""];
-	 }
-	 */
-	
-	AgentPortalLogin *agentPortalLogin = [self.storyboard instantiateViewControllerWithIdentifier:@"agentPortalLogin"];
-	agentPortalLogin.modalPresentationStyle = UIModalPresentationPageSheet;
-	agentPortalLogin.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-	
-	[self presentViewController:agentPortalLogin animated:YES completion:nil];
-	agentPortalLogin.view.superview.frame = CGRectMake(150, 50, 700, 600);
-	
+    [self loginSuccess];
+    
+    
+    
+    
+    //    const char *dbpath = [databasePath UTF8String];
+    //    sqlite3_stmt *statement;
+    //    sqlite3_stmt *statement2;
+    //    sqlite3_stmt *statement3;
+    //
+    //    if (sqlite3_open(dbpath, &contactDB) == SQLITE_OK)
+    //    {
+    //        //NSString *querySQL = [NSString stringWithFormat:@"UPDATE User_Profile SET firstLogin = 1, agentPassword = \"password\" "];
+    //        /*NSString *querySQL = [NSString stringWithFormat:@"UPDATE Agent_profile SET firstLogin = null, agentPassword = \"password\" "];
+    //
+    //        const char *query_stmt = [querySQL UTF8String];
+    //        if (sqlite3_prepare_v2(contactDB, query_stmt, -1, &statement, NULL) == SQLITE_OK)
+    //        {
+    //            if (sqlite3_step(statement) == SQLITE_DONE)
+    //            {*/
+    //                NSString *querySQL2 = [NSString stringWithFormat:@"DELETE from SecurityQuestion_Input "];
+    //                if (sqlite3_prepare_v2(contactDB, [querySQL2 UTF8String], -1, &statement2, NULL) == SQLITE_OK)
+    //                {
+    //                    if (sqlite3_step(statement2) == SQLITE_DONE){
+    //
+    //                        NSString *querySQL3 = [NSString stringWithFormat:@"UPDATE Agent_Profile SET AgentCode = \"\", AgentName = \"\", "
+    //                                               " AgentContactNo = \"\", ImmediateLeaderCode = \"\", ImmediateLeaderName = \"\", BusinessRegNumber = \"\", "
+    //                                               " AgentEmail = \"\", AgentPassword = \"\" , firstLogin = null "];
+    //                        if (sqlite3_prepare_v2(contactDB, [querySQL3 UTF8String], -1, &statement3, NULL) == SQLITE_OK)
+    //                        {
+    //                            if (sqlite3_step(statement3) == SQLITE_DONE){
+    //
+    //                                [self resetFirstDevice];
+    //                                [self IsFirstDevice];
+    //                                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
+    //                                                                                message:@"System has been restored to first time login mode" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    //                                [alert show];
+    //
+    //                            }
+    //
+    //                            sqlite3_finalize(statement3);
+    //                        }
+    //
+    //                    }
+    //                    sqlite3_finalize(statement2);
+    //
+    //                }
+    //                sqlite3_close(contactDB);
+    //        /*
+    //            } else {
+    //                NSLog(@"reset error");
+    //            }
+    //            sqlite3_finalize(statement);
+    //        }
+    //        sqlite3_close(contactDB);*/
+    //    }
+    //
+    //	/*
+    //
+    //	 if(_delegate != Nil){
+    //	 [(ViewController *)_delegate setSss:1 ];
+    //	 [self dismissModalViewControllerAnimated:NO];
+    //	 [_delegate Dismiss:@""];
+    //	 }
+    //	 */
+    //
+    //	AgentPortalLogin *agentPortalLogin = [self.storyboard instantiateViewControllerWithIdentifier:@"agentPortalLogin"];
+    //	agentPortalLogin.modalPresentationStyle = UIModalPresentationPageSheet;
+    //	agentPortalLogin.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    //
+    //	[self presentViewController:agentPortalLogin animated:YES completion:nil];
+    //	agentPortalLogin.view.superview.frame = CGRectMake(150, 50, 700, 600);
+    
 }
 
 -(void) storeBadAttempts
@@ -1352,46 +1651,46 @@ static NSString *labelVers;
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName
     attributes:(NSDictionary *)attributeDict  {
     
-	self.previousElementName = self.elementName;
-	
+    self.previousElementName = self.elementName;
+    
     if (qName) {
         self.elementName = qName;
     }
-	
+    
 }
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
     if (!self.elementName){
         return;
     }
-	
-	if([self.elementName isEqualToString:@"LoginError"]){
-		
-		if ([string isEqualToString:@""]) {
-			
-			ProceedStatus = @"0";
-			
-		}
-		else{
-			
-			ProceedStatus = @"1";
-			/*
-			 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Agency Portal" message:[NSString stringWithFormat:@"%@", string]
-			 delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-			 alert.tag = 1;
-			 //[alert show];
-			 
-			 alert = Nil;
-			 
-			 
-			 
-			 */
-			msg = string;
-			
-		}
-		
-	}
-	
+    
+    if([self.elementName isEqualToString:@"LoginError"]){
+        
+        if ([string isEqualToString:@""]) {
+            
+            ProceedStatus = @"0";
+            
+        }
+        else{
+            
+            ProceedStatus = @"1";
+            /*
+             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Agency Portal" message:[NSString stringWithFormat:@"%@", string]
+             delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+             alert.tag = 1;
+             //[alert show];
+             
+             alert = Nil;
+             
+             
+             
+             */
+            msg = string;
+            
+        }
+        
+    }
+    
     if(xmlType == XML_TYPE_VALIDATE_AGENT)
     {
         if(isFirstDevice)
@@ -1418,16 +1717,16 @@ static NSString *labelVers;
             if([self.elementName isEqualToString:@"Output1"]){ //agent code
                 agentCode = string;
             }
-			
-			
+            
+            
             if([self.elementName isEqualToString:@"Output2"]){ //agent name
                 agentName = string;
             }
-			
+            
             if([self.elementName isEqualToString:@"Output3"]){ //new IC no
                 icNo = string;
             }
-			
+            
             if([self.elementName isEqualToString:@"Output4"]){ //contract date
                 contractDate = string;
             }
@@ -1474,42 +1773,42 @@ static NSString *labelVers;
             }
         }
     }else
-		if(xmlType == XML_TYPE_GET_AGENT_INFO)
-		{
-			NSLog(@"self.elementName : %@ || string : %@", self.elementName, string);
-			if([self.elementName isEqualToString:@"Output1"]){
-				agentStatus = string;
-			}
-			
-			if([self.elementName isEqualToString:@"Output1_Desc"]){
-				statusDesc = string;
-			}
-			
-			if([self.elementName isEqualToString:@"Output2"]){
-				loginDate = string;
-			}
+        if(xmlType == XML_TYPE_GET_AGENT_INFO)
+        {
+            NSLog(@"self.elementName : %@ || string : %@", self.elementName, string);
+            if([self.elementName isEqualToString:@"Output1"]){
+                agentStatus = string;
+            }
+            
+            if([self.elementName isEqualToString:@"Output1_Desc"]){
+                statusDesc = string;
+            }
+            
+            if([self.elementName isEqualToString:@"Output2"]){
+                loginDate = string;
+            }
             
             if([self.elementName isEqualToString:@"Output3"]){
                 deviceStatus = string;
             }
-		}else
-			if(xmlType == XML_TYPE_GET_APP_INFO)
-			{
-				if([self.elementName isEqualToString:@"Output1"]){
-					currentVers = string;
-				}
-				
-				if([self.elementName isEqualToString:@"Output2"]){
-					lastUpdateDate = string;
-				}
-				
-				if([self.elementName isEqualToString:@"Output3"]){
-					obsoleteVersNo = string;
-				}
-				
-				if([self.elementName isEqualToString:@"Output3"]){
-					obsoleteDate = string;
-				}
+        }else
+            if(xmlType == XML_TYPE_GET_APP_INFO)
+            {
+                if([self.elementName isEqualToString:@"Output1"]){
+                    currentVers = string;
+                }
+                
+                if([self.elementName isEqualToString:@"Output2"]){
+                    lastUpdateDate = string;
+                }
+                
+                if([self.elementName isEqualToString:@"Output3"]){
+                    obsoleteVersNo = string;
+                }
+                
+                if([self.elementName isEqualToString:@"Output3"]){
+                    obsoleteDate = string;
+                }
                 
                 if([self.elementName isEqualToString:@"Output4"]){
                     obsoleteDate = string;
@@ -1522,17 +1821,17 @@ static NSString *labelVers;
                 if([self.elementName isEqualToString:@"Output6"]){
                     licenseStatus = string;
                 }
-			}
-	
+            }
+    
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
-	
-	self.elementName = nil;
+    
+    self.elementName = nil;
 }
 
 -(void) parserDidEndDocument:(NSXMLParser *)parser {
-	
+    
     if(xmlType == XML_TYPE_VALIDATE_AGENT)
     {
         if(isFirstDevice)
@@ -1570,16 +1869,16 @@ static NSString *labelVers;
                 [self presentViewController:agentProfile animated:YES completion:nil];
                 agentProfile.view.superview.frame = CGRectMake(150, 50, 700, 600);
             }else
-				if([status isEqualToString:@"0"])
-				{
-					NSLog(@"not valid");
-					UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
-																	message:error
-																   delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-					[alert show];
-					
-					alert = Nil;
-				}
+                if([status isEqualToString:@"0"])
+                {
+                    NSLog(@"not valid");
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
+                                                                    message:error
+                                                                   delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                    [alert show];
+                    
+                    alert = Nil;
+                }
         }
         else
         {
@@ -1616,8 +1915,8 @@ static NSString *labelVers;
                 
                 if ([msg isEqualToString:@"Account suspended."]) {
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
-																	message:[NSString stringWithFormat:@"Your Account is suspended. Please contact Hong Leong Assurance."]
-																   delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                                                                    message:[NSString stringWithFormat:@"Your Account is suspended. Please contact Hong Leong Assurance."]
+                                                                   delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                     [alert show];
                     
                     alert = Nil;
@@ -1662,33 +1961,33 @@ static NSString *labelVers;
                     [self updateDateLogin];
                 }
                 /*
-				 CarouselViewController *carouselMenu = [self.storyboard instantiateViewControllerWithIdentifier:@"carouselView"];
-				 carouselMenu.getInternet = @"Yes";
-				 carouselMenu.getValid = @"Invalid";
-				 carouselMenu.indexNo = self.indexNo;
-				 
-				 if ([[agentPortalLoginID stringByReplacingOccurrencesOfString:@" " wi[thString:@"" ] isEqualToString:@""] ||
-				 [[agentPortalLoginID stringByReplacingOccurrencesOfString:@" " withString:@"" ] isEqualToString:@"(null)"] ||
-				 [[agentPortalLoginID stringByReplacingOccurrencesOfString:@" " withString:@"" ] isEqualToString:@"(null)"]){
-				 carouselMenu.ErrorMsg = @"Please Fill in your Agent Portal Login and Agent Portal Password";
-				 }
-				 else{
-				 carouselMenu.ErrorMsg = msg;
-				 }
-				 
-				 [self presentViewController:carouselMenu animated:YES completion:Nil];
-				 [self updateDateLogin];
+                 CarouselViewController *carouselMenu = [self.storyboard instantiateViewControllerWithIdentifier:@"carouselView"];
+                 carouselMenu.getInternet = @"Yes";
+                 carouselMenu.getValid = @"Invalid";
+                 carouselMenu.indexNo = self.indexNo;
+                 
+                 if ([[agentPortalLoginID stringByReplacingOccurrencesOfString:@" " wi[thString:@"" ] isEqualToString:@""] ||
+                 [[agentPortalLoginID stringByReplacingOccurrencesOfString:@" " withString:@"" ] isEqualToString:@"(null)"] ||
+                 [[agentPortalLoginID stringByReplacingOccurrencesOfString:@" " withString:@"" ] isEqualToString:@"(null)"]){
+                 carouselMenu.ErrorMsg = @"Please Fill in your Agent Portal Login and Agent Portal Password";
+                 }
+                 else{
+                 carouselMenu.ErrorMsg = msg;
+                 }
+                 
+                 [self presentViewController:carouselMenu animated:YES completion:Nil];
+                 [self updateDateLogin];
                  */
             }
         }
     }else
-		if(xmlType == XML_TYPE_GET_AGENT_INFO)
-		{
-			[self storeAgentStatus];
-			[self storeLastSyncDate];
+        if(xmlType == XML_TYPE_GET_AGENT_INFO)
+        {
+            [self storeAgentStatus];
+            [self storeLastSyncDate];
             [self storeLastCheckedDevice];
             [self storeDeviceStatus];
-			
+            
             if([agentStatus isEqualToString:@"Y"])
             {
                 [self getAppInfo];
@@ -1699,38 +1998,38 @@ static NSString *labelVers;
                                                                    delegate:self cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil ];
                     [alert show];
                 }
-		}else
-			if(xmlType == XML_TYPE_GET_APP_INFO)
-			{
+        }else
+            if(xmlType == XML_TYPE_GET_APP_INFO)
+            {
                 [self storeLastCheckedDevice];
                 //            deviceStatus = @"I";
                 [self storeDeviceStatus];
                 //NSString * AppsVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"];
-				NSString * AppsVersion = labelVersion.text;
-				
-				//currentVers = @"1.4"; for testing
-				
-				NSComparisonResult result = [AppsVersion compare:currentVers];
-				
-				if (result == NSOrderedAscending) // stringOne < stringTwo
-				{
-					//obsolete
-					UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Please download the latest version from the portal."
-																   delegate:self cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil ];
-					[alert show];
-				}else
-					if (result == NSOrderedDescending) // stringOne > stringTwo
-					{
-						//impossible right? but still login anyway
-						[self loginSuccess];
-					}else
-						if (result == NSOrderedSame) // stringOne == stringTwo
-						{
-							//do nothing, go to login
-							[self loginSuccess];
-						}
-			}
-	
+                NSString * AppsVersion = labelVersion.text;
+                
+                //currentVers = @"1.4"; for testing
+                
+                NSComparisonResult result = [AppsVersion compare:currentVers];
+                
+                if (result == NSOrderedAscending) // stringOne < stringTwo
+                {
+                    //obsolete
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Please download the latest version from the portal."
+                                                                   delegate:self cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil ];
+                    [alert show];
+                }else
+                    if (result == NSOrderedDescending) // stringOne > stringTwo
+                    {
+                        //impossible right? but still login anyway
+                        [self loginSuccess];
+                    }else
+                        if (result == NSOrderedSame) // stringOne == stringTwo
+                        {
+                            //do nothing, go to login
+                            [self loginSuccess];
+                        }
+            }
+    
 }
 
 -(void) storeAgentCode
@@ -1809,9 +2108,75 @@ static NSString *labelVers;
 
 -(NSString *) getLastSyncDate
 {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    //    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    //    
+    //    return [defaults stringForKey:KEY_LAST_SYNC_DATE];
     
-    return [defaults stringForKey:KEY_LAST_SYNC_DATE];
+    NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsDir = [dirPaths objectAtIndex:0];
+    NSString *dbPath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    
+    [db open];
+    
+    FMResultSet *result1 = [db executeQuery:@"select LastLogonDate from Agent_profile"];
+    
+    NSString *LastLogonDate = @"";
+    while ([result1 next]) {
+        LastLogonDate = [result1 objectForColumnName:@"LastLogonDate"];
+        
+        if (LastLogonDate !=(NSString *)[NSNull null]) {
+            
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            NSDateFormatter *dateFormatter2 = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+            [dateFormatter2 setDateFormat:@"dd/MM/yyyy"];
+            
+            NSDate *date = [dateFormatter dateFromString: LastLogonDate];
+            dateFormatter = [[NSDateFormatter alloc] init];
+            
+            LastLogonDate = [dateFormatter2 stringFromDate:date];
+        }
+        else {
+            LastLogonDate = @"";
+        }
+        
+    }
+    
+    [db close]; 
+    
+    return LastLogonDate;
+    
+}
+
+-(BOOL) OfflineLogin
+{
+    BOOL successLog = FALSE;
+    
+    NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsDir = [dirPaths objectAtIndex:0];
+    NSString *dbPath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    
+    [db open];
+    NSString *AgentName;
+    NSString *AgentPassword;
+    
+    FMResultSet *result1 = [db executeQuery:@"select AgentName, AgentPassword from Agent_profile"];
+    
+    while ([result1 next]) {
+        AgentName = [[result1 objectForColumnName:@"AgentName"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        AgentPassword = [[result1 objectForColumnName:@"AgentPassword"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        
+        if ([txtUsername.text isEqualToString:AgentName] && [txtPassword.text isEqualToString:AgentPassword]) {
+            successLog = TRUE;
+        }
+    }
+    
+    [db close];
+    
+    return successLog;
+    
 }
 
 -(NSString*) getTodayDateInStr
@@ -1831,7 +2196,7 @@ static NSString *labelVers;
     NSString *lastCheckedDateStr = [self getStoredLastCheckedDeviceDate];
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init ];
-	[formatter setDateFormat:DATE_FORMAT];
+    [formatter setDateFormat:DATE_FORMAT];
     
     NSString *todayDateStr = [formatter stringFromDate:[NSDate date]];
     
@@ -1894,6 +2259,13 @@ static NSString *labelVers;
     // Release any retained subviews of the main view.
     databasePath = Nil;
     RatesDatabasePath = Nil;
+}
+
+- (BOOL)IsConnected
+{
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
+    return networkStatus != NotReachable;
 }
 
 

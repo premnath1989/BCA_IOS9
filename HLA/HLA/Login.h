@@ -38,20 +38,20 @@ static NSString* DATE_FORMAT = @"yyyy-MM-dd";
 {
     NSString *databasePath;
     NSString *RatesDatabasePath;
-	NSString *UL_RatesDatabasePath;
+    NSString *UL_RatesDatabasePath;
     NSString *CommDatabasePath;
     sqlite3 *contactDB;
     UITextField *activeField;
-	id<LoginDelegate> _delegate;
-	Reachability *internetReachableFoo;
-	BOOL isFirstDevice;
+    id<LoginDelegate> _delegate;
+    Reachability *internetReachableFoo;
+    BOOL isFirstDevice;
     NSString *status;
     NSInteger badAttempts;
     NSString *error;
     NSString *agentInfo;
     
     NSString *agentLogin;
-    NSString *agentCode;
+    //  NSString *agentCode;
     NSString *agentName;
     NSString *icNo;
     NSString *contractDate;
@@ -75,7 +75,7 @@ static NSString* DATE_FORMAT = @"yyyy-MM-dd";
     NSString *obsoleteVersNo;
     NSString *obsoleteDate;
     NSString *licenseStatus;
-        
+    
     int xmlType;
     
     BOOL showLogout;
@@ -99,6 +99,9 @@ static NSString* DATE_FORMAT = @"yyyy-MM-dd";
 @property (weak, nonatomic) IBOutlet UILabel *lblForgotPwd;
 @property (strong, nonatomic) IBOutlet UILabel *labelVersion;
 @property (strong, nonatomic) IBOutlet UILabel *labelUpdated;
+@property (weak, nonatomic) IBOutlet UILabel *lblLastLogin;
+@property (weak, nonatomic) IBOutlet UILabel *lblTimeRemaining;
+
 @property(strong) NSString *previousElementName;
 @property(strong) NSString *elementName;
 

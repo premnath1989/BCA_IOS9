@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="k0P-Te-cR8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15A284" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="ds4-DI-v8U">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -214,113 +214,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="34S-4U-Lw3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2906" y="847"/>
-        </scene>
-        <!--Login-->
-        <scene sceneID="TkD-hU-MES">
-            <objects>
-                <viewController storyboardIdentifier="Login" title="Login" id="Gn2-qc-1Vc" customClass="Login" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="wqX-XA-Y6y">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="20130108Login.png" id="9fG-Oj-NeQ">
-                                <rect key="frame" x="-31" y="-77" width="1055" height="845"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </imageView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Cmh-hN-UBq">
-                                <rect key="frame" x="0.0" y="20" width="1024" height="748"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="R62-ds-gqi">
-                                        <rect key="frame" x="602" y="268" width="204" height="37"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="16"/>
-                                        <state key="normal" title="Login" backgroundImage="login.png">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="btnLogin:" destination="Gn2-qc-1Vc" eventType="touchUpInside" id="OTz-xe-9fo"/>
-                                        </connections>
-                                    </button>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" id="eQ4-6a-pKa">
-                                        <rect key="frame" x="579" y="220" width="270" height="31"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="16"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
-                                    </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" id="Ijs-Xp-1Xz">
-                                        <rect key="frame" x="579" y="181" width="270" height="31"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="16"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <label opaque="NO" clipsSubviews="YES" contentMode="left" text="Forgot Password ? " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="JDY-eF-v7K">
-                                        <rect key="frame" x="639" y="334" width="205" height="45"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="16"/>
-                                        <color key="textColor" red="0.0" green="0.15294118230000001" blue="0.99215692280000001" alpha="1" colorSpace="deviceRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="tB3-85-hmU">
-                                        <rect key="frame" x="915" y="691" width="72" height="37"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal" title="Reset">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="btnReset:" destination="Gn2-qc-1Vc" eventType="touchUpInside" id="LaC-WB-zbW"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="iMobile Planner " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5cG-GZ-c9h">
-                                        <rect key="frame" x="80" y="666" width="167" height="25"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="TrebuchetMS-Bold" family="Trebuchet MS" pointSize="15"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Version 1.0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="oh7-G9-5gX">
-                                        <rect key="frame" x="194" y="666" width="116" height="25"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="15"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Last Updated: 3 April 2013" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zys-Fs-pL7">
-                                        <rect key="frame" x="80" y="671" width="878" height="53"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="15"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="iMPLogo_Curve.png" id="EWI-2e-YzS">
-                                        <rect key="frame" x="22" y="666" width="53" height="53"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                </subviews>
-                            </scrollView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-                    <connections>
-                        <outlet property="labelUpdated" destination="zys-Fs-pL7" id="jNl-ZL-cwi"/>
-                        <outlet property="labelVersion" destination="oh7-G9-5gX" id="pno-1e-JiO"/>
-                        <outlet property="lblForgotPwd" destination="JDY-eF-v7K" id="dze-JZ-7eD"/>
-                        <outlet property="outletLogin" destination="R62-ds-gqi" id="VmM-yw-dhm"/>
-                        <outlet property="outletReset" destination="tB3-85-hmU" id="HGV-8R-Ue1"/>
-                        <outlet property="scrollViewLogin" destination="Cmh-hN-UBq" id="XZU-Dt-lef"/>
-                        <outlet property="txtPassword" destination="eQ4-6a-pKa" id="X30-QW-jRp"/>
-                        <outlet property="txtUsername" destination="Ijs-Xp-1Xz" id="6kD-gE-KYA"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="LNN-rq-Ubq" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-945" y="-61"/>
         </scene>
         <!--Main-->
         <scene sceneID="4">
@@ -10948,9 +10841,121 @@
             </objects>
             <point key="canvasLocation" x="2580" y="-982"/>
         </scene>
+        <!--Login-->
+        <scene sceneID="obA-JH-VTL">
+            <objects>
+                <viewController storyboardIdentifier="Login" title="Login" id="ds4-DI-v8U" customClass="Login" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fSv-5k-8lD">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="20130108Login.png" id="3SX-NO-O2T">
+                                <rect key="frame" x="0.0" y="-21" width="1025" height="866"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Yrw-oj-gAe">
+                                <rect key="frame" x="-12" y="28" width="1024" height="748"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bKx-ZE-ZlB">
+                                        <rect key="frame" x="763" y="553" width="137" height="57"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="Optima-ExtraBlack" family="Optima" pointSize="16"/>
+                                        <state key="normal">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="btnLogin:" destination="ds4-DI-v8U" eventType="touchUpInside" id="Ped-wa-V1z"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="e4o-1F-YoA">
+                                        <rect key="frame" x="611" y="556" width="133" height="56"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="btnReset:" destination="ds4-DI-v8U" eventType="touchUpInside" id="0U7-sB-m9i"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Last Login:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6Fi-43-7qW">
+                                        <rect key="frame" x="20" y="681" width="100" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Time remaining to sync with server:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jfx-O9-4dQ">
+                                        <rect key="frame" x="22" y="711" width="276" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="dd/MM/yyyy" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PQg-X8-VWN">
+                                        <rect key="frame" x="112" y="681" width="100" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="XX days" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="W0o-w7-yn1">
+                                        <rect key="frame" x="299" y="711" width="100" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="    Password" minimumFontSize="17" id="RCg-Da-r9X">
+                                        <rect key="frame" x="609" y="471" width="297" height="57"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="    Username" minimumFontSize="17" id="6Ha-4F-7Pu">
+                                        <rect key="frame" x="609" y="405" width="297" height="56"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <label hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="left" text="Forgot Password ? " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="ICg-Ip-1Nj">
+                                        <rect key="frame" x="692" y="516" width="205" height="45"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="16"/>
+                                        <color key="textColor" red="0.0" green="0.15294118230000001" blue="0.99215692280000001" alpha="1" colorSpace="deviceRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <connections>
+                        <outlet property="lblForgotPwd" destination="ICg-Ip-1Nj" id="abe-a7-SqE"/>
+                        <outlet property="lblLastLogin" destination="PQg-X8-VWN" id="8hA-EH-bRX"/>
+                        <outlet property="lblTimeRemaining" destination="W0o-w7-yn1" id="guP-2S-tig"/>
+                        <outlet property="outletLogin" destination="bKx-ZE-ZlB" id="2Ld-76-W0G"/>
+                        <outlet property="outletReset" destination="e4o-1F-YoA" id="hLg-tR-Lev"/>
+                        <outlet property="scrollViewLogin" destination="Yrw-oj-gAe" id="nFs-hi-Sle"/>
+                        <outlet property="txtPassword" destination="RCg-Da-r9X" id="q2f-UY-KXC"/>
+                        <outlet property="txtUsername" destination="6Ha-4F-7Pu" id="Y3d-mI-kEG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lle-yx-obi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-949" y="-61"/>
+        </scene>
     </scenes>
     <resources>
-        <image name="20130108Login.png" width="851" height="637"/>
+        <image name="20130108Login.png" width="2048" height="1536"/>
         <image name="button.png" width="200" height="30"/>
         <image name="cb_glossy_off.png" width="44" height="43"/>
         <image name="client_profile@2x_20141118.png" width="232" height="309"/>
@@ -10959,8 +10964,6 @@
         <image name="eAplication@2x_20141118.png" width="232" height="309"/>
         <image name="emptyCheckBox.png" width="44" height="43"/>
         <image name="f-spot-question-mark.png" width="256" height="256"/>
-        <image name="iMPLogo_Curve.png" width="72" height="72"/>
-        <image name="login.png" width="200" height="30"/>
         <image name="prospect_100.png" width="100" height="100"/>
         <image name="prospect_100_2.png" width="100" height="100"/>
         <image name="prospect_100_3.png" width="100" height="100"/>
