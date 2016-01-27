@@ -352,6 +352,9 @@
 		A1A8312019A1978400C0302D /* P2-1-Row3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A1A8311F19A1978400C0302D /* P2-1-Row3.jpg */; };
 		A1A8312219A1978D00C0302D /* P2-1-Row2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A1A8312119A1978D00C0302D /* P2-1-Row2.jpg */; };
 		A1E3AFC219BD5F5200F332B3 /* P5-footer-B.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A1E3AFC119BD5F5200F332B3 /* P5-footer-B.jpg */; };
+		A9E550A21C591E8000C9DAC2 /* libSPSignDoc_4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A9E550A11C591E8000C9DAC2 /* libSPSignDoc_4.0.a */; };
+		A9E550A51C591F7900C9DAC2 /* Expand Arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A9E550A31C591F7900C9DAC2 /* Expand Arrow.png */; };
+		A9E550A61C591F7900C9DAC2 /* Expand Arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A9E550A41C591F7900C9DAC2 /* Expand Arrow@2x.png */; };
 		C3092ABA1ADF5E4500756616 /* ClearData.m in Sources */ = {isa = PBXBuildFile; fileRef = C3092AB91ADF5E4500756616 /* ClearData.m */; };
 		C30A259C17F3C8D500613A0F /* AdditionalQuestions.m in Sources */ = {isa = PBXBuildFile; fileRef = C30A253917F3C8D500613A0F /* AdditionalQuestions.m */; };
 		C30A259D17F3C8D500613A0F /* AddtionalQuestInsured.m in Sources */ = {isa = PBXBuildFile; fileRef = C30A253B17F3C8D500613A0F /* AddtionalQuestInsured.m */; };
@@ -1356,6 +1359,9 @@
 		A1A8311F19A1978400C0302D /* P2-1-Row3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "P2-1-Row3.jpg"; sourceTree = "<group>"; };
 		A1A8312119A1978D00C0302D /* P2-1-Row2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "P2-1-Row2.jpg"; sourceTree = "<group>"; };
 		A1E3AFC119BD5F5200F332B3 /* P5-footer-B.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "P5-footer-B.jpg"; sourceTree = "<group>"; };
+		A9E550A11C591E8000C9DAC2 /* libSPSignDoc_4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSPSignDoc_4.0.a; sourceTree = "<group>"; };
+		A9E550A31C591F7900C9DAC2 /* Expand Arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Expand Arrow.png"; sourceTree = "<group>"; };
+		A9E550A41C591F7900C9DAC2 /* Expand Arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Expand Arrow@2x.png"; sourceTree = "<group>"; };
 		C3092AB81ADF5E4500756616 /* ClearData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClearData.h; sourceTree = "<group>"; };
 		C3092AB91ADF5E4500756616 /* ClearData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClearData.m; sourceTree = "<group>"; };
 		C30A253817F3C8D500613A0F /* AdditionalQuestions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdditionalQuestions.h; sourceTree = "<group>"; };
@@ -1989,6 +1995,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				174858B51C3E229D007BBF13 /* libSPSignDoc_4.0.a in Frameworks */,
+				A9E550A21C591E8000C9DAC2 /* libSPSignDoc_4.0.a in Frameworks */,
 				6A4B72AD19ECB3A800F4DE62 /* AdSupport.framework in Frameworks */,
 				428F84A719783E5C0016B7E8 /* libxml2.dylib in Frameworks */,
 				6A002CFA1850287200161727 /* libz.dylib in Frameworks */,
@@ -2580,6 +2587,7 @@
 		4239AE2E1946DAE100BD6F53 /* eSignFramework */ = {
 			isa = PBXGroup;
 			children = (
+				A9E550A11C591E8000C9DAC2 /* libSPSignDoc_4.0.a */,
 				174858B41C3E229D007BBF13 /* libSPSignDoc_4.0.a */,
 				4239AE2F1946DAE100BD6F53 /* dummy.cpp */,
 				4239AE4E1946DAE100BD6F53 /* sign-here.png */,
@@ -3663,6 +3671,8 @@
 		C4E9D1BF1612C6A500016053 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				A9E550A31C591F7900C9DAC2 /* Expand Arrow.png */,
+				A9E550A41C591F7900C9DAC2 /* Expand Arrow@2x.png */,
 				043FDBAF1A1B5376008EDC24 /* backgroundWithBox.png */,
 				043FDBA71A1AF226008EDC24 /* sales_illustration@2x_20141118.png */,
 				043FDBA81A1AF226008EDC24 /* eAplication@2x_20141118.png */,
@@ -4355,6 +4365,7 @@
 				C4F45E03165F12350035CAA9 /* f-spot-question-mark.png in Resources */,
 				C4F53558166EF649004DBF94 /* eBrochure1.jpg in Resources */,
 				C4F53559166EF649004DBF94 /* eBrochure2.jpg in Resources */,
+				A9E550A51C591F7900C9DAC2 /* Expand Arrow.png in Resources */,
 				C4F5355A166EF649004DBF94 /* Propsect1.jpg in Resources */,
 				C4F5355B166EF649004DBF94 /* Propsect2.jpg in Resources */,
 				C4F5355D166EF649004DBF94 /* SI.jpg in Resources */,
@@ -4410,6 +4421,7 @@
 				42F8590F1772E4EF003907CD /* add.png in Resources */,
 				42F859101772E4EF003907CD /* delete.png in Resources */,
 				EF1ADDF21782D20100996388 /* homeScreenBrochure2.png in Resources */,
+				A9E550A61C591F7900C9DAC2 /* Expand Arrow@2x.png in Resources */,
 				EF90B0BA178C133A00FEC129 /* emptyCheckBox.png in Resources */,
 				EF90B0BB178C133A00FEC129 /* tickCheckBox.png in Resources */,
 				EF90B0C6178D38BF00FEC129 /* disclosure_indicator.png in Resources */,
@@ -5301,7 +5313,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)\"",
+					"$(SRCROOT)",
 					"\"$(SRCROOT)/../../Desktop\"",
 					"\"$(SRCROOT)/eSignature/eSign/eSignFramework/signdociosfoundations.embeddedframework\"",
 					"\"$(SRCROOT)/eSignature/eSign/eSignFramework/signdociosfoundations.embeddedframework/signdociosfoundations.framework\"",
@@ -5309,6 +5321,7 @@
 					"\"$(SRCROOT)/eSignature/eSign/eSignFramework\"",
 					"\"$(SRCROOT)/signdociosfoundations.embeddedframework/Libraries\"",
 					"\"$(SRCROOT)/signdociosfoundations.embeddedframework\"",
+					"$(PROJECT_DIR)/eSignature/eSign/eSignFramework",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",

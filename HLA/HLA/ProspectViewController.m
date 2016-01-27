@@ -325,6 +325,65 @@ bool RegDatehandling;
     
 }
 
+/*code added by faiz*/
+-(void)setTextfieldBorder{
+    for (UIView *view in [_viewPersonalInfo subviews]) {
+        if ([view isKindOfClass:[UITextField class]]) {
+            UITextField *textField = (UITextField *)view;
+            textField.layer.borderColor=[UIColor colorWithRed:47.0/255.0 green:188.0/255.0 blue:118.0/255.0 alpha:1.0].CGColor;
+            textField.layer.borderWidth=1.0;
+            
+        }
+    }
+    
+    for (UIView *view in [_viewReferralInfo subviews]) {
+        if ([view isKindOfClass:[UITextField class]]) {
+            UITextField *textField = (UITextField *)view;
+            textField.layer.borderColor=[UIColor colorWithRed:47.0/255.0 green:188.0/255.0 blue:118.0/255.0 alpha:1.0].CGColor;
+            textField.layer.borderWidth=1.0;
+        }
+    }
+    
+    for (UIView *view in [_viewAddressDetail subviews]) {
+        if ([view isKindOfClass:[UITextField class]]) {
+            UITextField *textField = (UITextField *)view;
+            textField.layer.borderColor=[UIColor colorWithRed:47.0/255.0 green:188.0/255.0 blue:118.0/255.0 alpha:1.0].CGColor;
+            textField.layer.borderWidth=1.0;
+        }
+    }
+    
+    for (UIView *view in [_viewAddressDetailOffice subviews]) {
+        if ([view isKindOfClass:[UITextField class]]) {
+            UITextField *textField = (UITextField *)view;
+            textField.layer.borderColor=[UIColor colorWithRed:47.0/255.0 green:188.0/255.0 blue:118.0/255.0 alpha:1.0].CGColor;
+            textField.layer.borderWidth=1.0;
+        }
+    }
+    
+    for (UIView *view in [_viewOccupationInfo subviews]) {
+        if ([view isKindOfClass:[UITextField class]]) {
+            UITextField *textField = (UITextField *)view;
+            textField.layer.borderColor=[UIColor colorWithRed:47.0/255.0 green:188.0/255.0 blue:118.0/255.0 alpha:1.0].CGColor;
+            textField.layer.borderWidth=1.0;
+        }
+    }
+    
+    for (UIView *view in [_viewOtherInfo subviews]) {
+        if ([view isKindOfClass:[UITextField class]]) {
+            UITextField *textField = (UITextField *)view;
+            textField.layer.borderColor=[UIColor colorWithRed:47.0/255.0 green:188.0/255.0 blue:118.0/255.0 alpha:1.0].CGColor;
+            textField.layer.borderWidth=1.0;
+        }
+        if ([view isKindOfClass:[UITextView class]]) {
+            UITextView *textView = (UITextView *)view;
+            textView.layer.borderColor=[UIColor colorWithRed:47.0/255.0 green:188.0/255.0 blue:118.0/255.0 alpha:1.0].CGColor;
+            textView.layer.borderWidth=1.0;
+        }
+    }
+    
+}
+/*end of code added by faiz*/
+
 -(void)returnToListing {
 	[self resignFirstResponder];
 	[self.view endEditing:YES];
@@ -723,6 +782,17 @@ bool RegDatehandling;
     self.myScrollView.frame = CGRectMake(0, 0, 1024, 900);
     self.myScrollView.contentSize = CGSizeMake(900, 1300);
     
+    /*code added by faiz*/
+    float sizeOfContent = 0;
+    UIView *lLast = [_scrollViewNewProspect.subviews lastObject];
+    NSInteger wd = lLast.frame.origin.y;
+    NSInteger ht = lLast.frame.size.height;
+    
+    sizeOfContent = wd+ht;
+    
+    _scrollViewNewProspect.contentSize = CGSizeMake(900, 2000);
+    [self setTextfieldBorder];
+    /*end of code added by faiz*/
 }
 
 - (void)viewWillDisappear:(BOOL)animated

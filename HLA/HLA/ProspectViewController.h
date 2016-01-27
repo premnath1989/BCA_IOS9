@@ -166,6 +166,17 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *btnRegDate;
 @property (weak, nonatomic) IBOutlet UIButton *outletRigDate;
+
+/*added by faiz*/
+@property (strong,nonatomic) IBOutlet UIScrollView *scrollViewNewProspect;
+@property (strong,nonatomic) IBOutlet UIView *viewReferralInfo;
+@property (strong,nonatomic) IBOutlet UIView *viewPersonalInfo;
+@property (strong,nonatomic) IBOutlet UIView *viewAddressDetail;
+@property (strong,nonatomic) IBOutlet UIView *viewAddressDetailOffice;
+@property (strong,nonatomic) IBOutlet UIView *viewOccupationInfo;
+@property (strong,nonatomic) IBOutlet UIView *viewOtherInfo;
+/*end of added by faiz*/
+
 - (IBAction)ActionforRigdate:(id)sender;
 
 - (IBAction)ActionIsGrouping:(id)sender;

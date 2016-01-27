@@ -163,6 +163,16 @@
 @property (strong, nonatomic) NSUserDefaults *UDGroup;
 @property (nonatomic, copy) NSString *ProsGroupStr;
 
+/*added by faiz*/
+@property (strong,nonatomic) IBOutlet UIScrollView *scrollViewEditProspect;
+@property (strong,nonatomic) IBOutlet UIView *viewReferralInfo;
+@property (strong,nonatomic) IBOutlet UIView *viewPersonalInfo;
+@property (strong,nonatomic) IBOutlet UIView *viewAddressDetail;
+@property (strong,nonatomic) IBOutlet UIView *viewAddressDetailOffice;
+@property (strong,nonatomic) IBOutlet UIView *viewOccupationInfo;
+@property (strong,nonatomic) IBOutlet UIView *viewOtherInfo;
+/*end of added by faiz*/
+
 - (IBAction)actionGrouping:(id)sender;
 - (IBAction)addNewGroup:(id)sender;
 - (IBAction)ViewGroup:(id)sender;
