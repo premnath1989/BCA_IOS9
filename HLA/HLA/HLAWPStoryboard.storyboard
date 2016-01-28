@@ -1516,6 +1516,9 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
                                                 <state key="normal" image="Expand Arrow.png"/>
+                                                <connections>
+                                                    <action selector="btnTitle:" destination="Iz4-6t-bhg" eventType="touchUpInside" id="r6e-4l-pKU"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Client Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cw4-gY-2vh">
                                                 <rect key="frame" x="30" y="29" width="161" height="21"/>
@@ -1637,6 +1640,9 @@
                                                     <segment title="Female"/>
                                                 </segments>
                                                 <color key="tintColor" red="0.25882352939999997" green="0.82745098039999998" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <connections>
+                                                    <action selector="ActionGender:" destination="Iz4-6t-bhg" eventType="valueChanged" id="HuU-hd-BZ1"/>
+                                                </connections>
                                             </segmentedControl>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="GPt-v5-mwX">
                                                 <rect key="frame" x="460" y="143" width="14" height="21"/>
@@ -1681,6 +1687,9 @@
                                                     <segment title="No"/>
                                                 </segments>
                                                 <color key="tintColor" red="0.25882352939999997" green="0.82745098039999998" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <connections>
+                                                    <action selector="ActionSmoker:" destination="Iz4-6t-bhg" eventType="valueChanged" id="5ii-Vv-YGD"/>
+                                                </connections>
                                             </segmentedControl>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Mle-ym-Efj">
                                                 <rect key="frame" x="947" y="219" width="14" height="21"/>
@@ -1694,30 +1703,45 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
                                                 <state key="normal" image="Expand Arrow.png"/>
+                                                <connections>
+                                                    <action selector="btnDOB:" destination="Iz4-6t-bhg" eventType="touchUpInside" id="sCU-rb-O04"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="RUY-ar-i3y">
                                                 <rect key="frame" x="199" y="180" width="253" height="24"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
                                                 <state key="normal" image="Expand Arrow.png"/>
+                                                <connections>
+                                                    <action selector="btnOtherIDType:" destination="Iz4-6t-bhg" eventType="touchUpInside" id="VXE-rM-glj"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Tfz-X8-xZO">
                                                 <rect key="frame" x="199" y="256" width="253" height="24"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
                                                 <state key="normal" image="Expand Arrow.png"/>
+                                                <connections>
+                                                    <action selector="actionMaritalStatus:" destination="Iz4-6t-bhg" eventType="touchUpInside" id="Sgb-e8-vQQ"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="VlB-qB-MDB">
                                                 <rect key="frame" x="199" y="332" width="253" height="24"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
                                                 <state key="normal" image="Expand Arrow.png"/>
+                                                <connections>
+                                                    <action selector="actionNationality:" destination="Iz4-6t-bhg" eventType="touchUpInside" id="zRa-tF-2EM"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="18t-Ci-NrR">
                                                 <rect key="frame" x="199" y="408" width="253" height="24"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
                                                 <state key="normal" image="Expand Arrow.png"/>
+                                                <connections>
+                                                    <action selector="actionNationality:" destination="Iz4-6t-bhg" eventType="touchUpInside" id="SD3-ax-9vV"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1961,9 +1985,12 @@
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="BIg-iE-jG8">
+                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="BIg-iE-jG8">
                                                         <rect key="frame" x="686" y="0.0" width="51" height="31"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <connections>
+                                                            <action selector="isForeign:" destination="Iz4-6t-bhg" eventType="valueChanged" id="1uM-2j-Jwh"/>
+                                                        </connections>
                                                     </switch>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="o3o-Wr-Bxu">
                                                         <rect key="frame" x="199" y="151" width="253" height="24"/>
@@ -1976,6 +2003,9 @@
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
                                                         <state key="normal" image="Expand Arrow.png"/>
+                                                        <connections>
+                                                            <action selector="ActionHomeCountry:" destination="Iz4-6t-bhg" eventType="touchUpInside" id="pE3-ZI-Nh0"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2145,15 +2175,21 @@
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="a07-Af-twL">
+                                                    <switch opaque="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="a07-Af-twL">
                                                         <rect key="frame" x="686" y="0.0" width="51" height="31"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <connections>
+                                                            <action selector="isForeign:" destination="Iz4-6t-bhg" eventType="valueChanged" id="fcD-bc-83g"/>
+                                                        </connections>
                                                     </switch>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="7w4-MN-TfP">
                                                         <rect key="frame" x="686" y="227" width="253" height="24"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
                                                         <state key="normal" image="Expand Arrow.png"/>
+                                                        <connections>
+                                                            <action selector="ActionOfficeCountry:" destination="Iz4-6t-bhg" eventType="touchUpInside" id="jgE-Xc-qEE"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="cy6-He-Ea0">
                                                         <rect key="frame" x="199" y="151" width="253" height="24"/>
@@ -2313,6 +2349,9 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
                                                 <state key="normal" image="Expand Arrow.png"/>
+                                                <connections>
+                                                    <action selector="btnOccup:" destination="Iz4-6t-bhg" eventType="touchUpInside" id="VvV-KM-NpJ"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2381,30 +2420,30 @@
                     <connections>
                         <outlet property="AddGroup" destination="gRp-ac-p9A" id="Oaf-jk-8Z9"/>
                         <outlet property="BtnCountryOfBirth" destination="zFJ-LA-0ei" id="Q3o-DL-4aa"/>
-                        <outlet property="OtherIDType" destination="bOP-0J-sfW" id="stg-c3-I72"/>
+                        <outlet property="OtherIDType" destination="RUY-ar-i3y" id="014-ab-Ljx"/>
                         <outlet property="SegIsGrouping" destination="HeI-Kb-Fex" id="VI0-HX-ayP"/>
                         <outlet property="btnForeignHome" destination="INn-WJ-yTJ" id="Dtp-hL-YDC"/>
                         <outlet property="btnForeignOffice" destination="AWC-DF-e0T" id="GM4-KT-Ki3"/>
-                        <outlet property="btnHomeCountry" destination="qh8-JT-yan" id="ccs-AW-cP3"/>
-                        <outlet property="btnOfficeCountry" destination="Zjo-o3-3Ta" id="XoI-VU-b8B"/>
+                        <outlet property="btnHomeCountry" destination="WtK-Yw-qah" id="ZEl-Zd-jDW"/>
+                        <outlet property="btnOfficeCountry" destination="7w4-MN-TfP" id="GyW-tB-WvN"/>
                         <outlet property="btnregDate" destination="Iwt-nv-huJ" id="BfQ-Hp-dI9"/>
                         <outlet property="lblOfficeAddr" destination="VmQ-yM-HIJ" id="JWA-MX-ZVb"/>
                         <outlet property="lblPostCode" destination="H1l-0F-rDp" id="223-jR-L3v"/>
                         <outlet property="myScrollView" destination="tPn-SI-1iC" id="nLk-D7-Kw7"/>
-                        <outlet property="outletDOB" destination="gqj-6G-BpB" id="m2F-vf-YZZ"/>
+                        <outlet property="outletDOB" destination="NAv-Eh-pMr" id="pre-x1-NMC"/>
                         <outlet property="outletDelete" destination="tQF-WT-9wv" id="BWV-Uq-8kk"/>
-                        <outlet property="outletMaritalStatus" destination="ECJ-xB-jYr" id="QkR-pV-uvK"/>
-                        <outlet property="outletNationality" destination="yfw-Dz-wm2" id="kY6-Pq-aBM"/>
-                        <outlet property="outletOccup" destination="vR0-BC-VjO" id="p4d-tS-aZ7"/>
+                        <outlet property="outletMaritalStatus" destination="Tfz-X8-xZO" id="vhc-aa-5aC"/>
+                        <outlet property="outletNationality" destination="VlB-qB-MDB" id="1Gv-fP-bef"/>
+                        <outlet property="outletOccup" destination="v9v-w5-RjI" id="eJq-in-phH"/>
                         <outlet property="outletRace" destination="3SG-2P-vz0" id="5qT-zw-Kjh"/>
-                        <outlet property="outletReligion" destination="o0k-aE-toV" id="QbU-iS-jeO"/>
+                        <outlet property="outletReligion" destination="18t-Ci-NrR" id="xCv-mf-wFa"/>
                         <outlet property="outletRigDOB" destination="2PX-LN-h5b" id="r6f-eN-iWT"/>
-                        <outlet property="outletTitle" destination="ran-WV-I9W" id="FJI-mx-NZJ"/>
+                        <outlet property="outletTitle" destination="lbg-iL-C6H" id="GbJ-sl-JuL"/>
                         <outlet property="scrollViewEditProspect" destination="a2f-bo-CxD" id="1my-qE-Bs1"/>
-                        <outlet property="segGender" destination="YZl-Is-jY6" id="uRM-r3-0af"/>
+                        <outlet property="segGender" destination="a82-tU-vaD" id="zRb-Ox-jjB"/>
                         <outlet property="segRigExempted" destination="Yx2-b6-zdc" id="iSM-6c-Wk6"/>
                         <outlet property="segRigPerson" destination="oMz-NF-m0I" id="5UY-tv-zjF"/>
-                        <outlet property="segSmoker" destination="xb4-A9-V9x" id="7JT-Wh-VLS"/>
+                        <outlet property="segSmoker" destination="g3Y-Zw-VRc" id="sAq-Q2-BRx"/>
                         <outlet property="txtAnnIncome" destination="3gk-3W-mgb" id="2L7-OH-uu7"/>
                         <outlet property="txtBussinessType" destination="mAL-LK-LVv" id="M3W-E2-fg8"/>
                         <outlet property="txtClass" destination="l6H-4J-AQ1" id="Azf-dG-7uj"/>
@@ -2438,7 +2477,7 @@
                         <outlet property="txtRemark" destination="Rhd-dt-t4j" id="py5-RN-uFT"/>
                         <outlet property="txtRigDate" destination="GzK-tY-T1y" id="p6R-L8-aXt"/>
                         <outlet property="txtRigNO" destination="Vnf-fs-Q9J" id="HxR-jZ-byn"/>
-                        <outlet property="txtrFullName" destination="QJa-Nr-acq" id="X3h-1R-sZ3"/>
+                        <outlet property="txtrFullName" destination="26c-0X-Gu2" id="fOT-sv-kR7"/>
                         <outlet property="viewAddressDetail" destination="ceV-cW-LPm" id="4x6-1k-7H9"/>
                         <outlet property="viewAddressDetailOffice" destination="RyF-Hr-5vJ" id="a5C-Sj-MDI"/>
                         <outlet property="viewOccupationInfo" destination="JDu-jF-PKE" id="uJH-bH-7Qp"/>

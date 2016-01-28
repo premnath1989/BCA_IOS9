@@ -382,6 +382,48 @@ bool RegDatehandling;
     }
     
 }
+
+-(void)setButtonImageAndTextAlignment{
+    outletTitle.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    outletTitle.imageEdgeInsets = UIEdgeInsetsMake(0., outletTitle.frame.size.width - (24 + 10.0), 0., 0.);
+    outletTitle.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 0);
+
+    outletDOB.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    outletDOB.imageEdgeInsets = UIEdgeInsetsMake(0., outletDOB.frame.size.width - (24 + 10.0), 0., 0.);
+    outletDOB.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 0);
+    
+    OtherIDType.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    OtherIDType.imageEdgeInsets = UIEdgeInsetsMake(0., outletDOB.frame.size.width - (24 + 10.0), 0., 0.);
+    OtherIDType.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 0);
+    
+    outletMaritalStatus.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    outletMaritalStatus.imageEdgeInsets = UIEdgeInsetsMake(0., outletDOB.frame.size.width - (24 + 10.0), 0., 0.);
+    outletMaritalStatus.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 0);
+
+    outletNationality.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    outletNationality.imageEdgeInsets = UIEdgeInsetsMake(0., outletNationality.frame.size.width - (24 + 10.0), 0., 0.);
+    outletNationality.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 0);
+
+    outletReligion.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    outletReligion.imageEdgeInsets = UIEdgeInsetsMake(0., outletReligion.frame.size.width - (24 + 10.0), 0., 0.);
+    outletReligion.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 0);
+    
+    outletReligion.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    outletReligion.imageEdgeInsets = UIEdgeInsetsMake(0., outletReligion.frame.size.width - (24 + 10.0), 0., 0.);
+    outletReligion.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 0);
+    
+    btnOfficeCountry.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    btnOfficeCountry.imageEdgeInsets = UIEdgeInsetsMake(0., btnOfficeCountry.frame.size.width - (24 + 10.0), 0., 0.);
+    btnOfficeCountry.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 0);
+    
+    btnHomeCountry.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    btnHomeCountry.imageEdgeInsets = UIEdgeInsetsMake(0., btnHomeCountry.frame.size.width - (24 + 10.0), 0., 0.);
+    btnHomeCountry.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 0);
+    
+    outletOccup.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    outletOccup.imageEdgeInsets = UIEdgeInsetsMake(0., outletOccup.frame.size.width - (24 + 10.0), 0., 0.);
+    outletOccup.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 0);
+}
 /*end of code added by faiz*/
 
 -(void)returnToListing {
@@ -792,6 +834,7 @@ bool RegDatehandling;
     
     _scrollViewNewProspect.contentSize = CGSizeMake(900, 2000);
     [self setTextfieldBorder];
+    [self setButtonImageAndTextAlignment];
     /*end of code added by faiz*/
 }
 
@@ -1623,15 +1666,19 @@ bool RegDatehandling;
     [self.OccupationListPopover presentPopoverFromRect:[sender bounds]  inView:sender permittedArrowDirections:UIPopoverArrowDirectionLeft animated:YES];
 }
 
+/*modified by faiz*/
 - (IBAction)isForeign:(id)sender
 {
 	NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
 	[ClientProfile setObject:@"YES" forKey:@"isNew"];
 	
     UIButton *btnPressed = (UIButton*)sender;
+    UISwitch *switchPressed = (UISwitch*)sender;
     ColorHexCode *CustomColor = [[ColorHexCode alloc] init ];
+
     
-    if (btnPressed.tag == 0) {
+    //if (btnPressed.tag == 0) {
+    if (switchPressed.tag == 0) {
         if (checked) {
             [btnForeignHome setImage: [UIImage imageNamed:@"emptyCheckBox.png"] forState:UIControlStateNormal];
             checked = NO;
@@ -1735,6 +1782,7 @@ bool RegDatehandling;
         }
     }
 }
+/*end of modification by faiz*/
 
 -(NSString*) getCountryCode : (NSString*)country
 {
