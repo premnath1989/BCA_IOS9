@@ -119,7 +119,7 @@ NSString *ProceedStatus = @"";
     
     
     
-    labelVersion.text = @"CDY V 1.4.0.240";
+    labelVersion.text = @"BCA V 1.4.0.240";
     labelVers = labelVersion.text;
     labelUpdated.text = @"Last Updated: 02 OCT 2014 11:00AM";
     outletLogin.hidden = FALSE;
