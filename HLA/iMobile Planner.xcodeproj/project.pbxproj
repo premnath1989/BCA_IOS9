@@ -47,6 +47,7 @@
 		174858B51C3E229D007BBF13 /* libSPSignDoc_4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 174858B41C3E229D007BBF13 /* libSPSignDoc_4.0.a */; };
 		174858B71C438BA8007BBF13 /* MyCustomDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 174858B61C438BA8007BBF13 /* MyCustomDialog.xib */; };
 		17983C331C473373009E2977 /* HealthQuestionPO.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17983C321C473373009E2977 /* HealthQuestionPO.storyboard */; };
+		17A7D83E1C5B3EE50016EE7F /* setting.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A7D83D1C5B3EE50016EE7F /* setting.m */; };
 		2900CABC19931BBC0003B4F7 /* eAppStatusListforSubmitted.m in Sources */ = {isa = PBXBuildFile; fileRef = 2900CABB19931BBC0003B4F7 /* eAppStatusListforSubmitted.m */; };
 		29071F071A256811002F7FB1 /* RIButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 29071F041A256811002F7FB1 /* RIButtonItem.m */; };
 		29071F081A256811002F7FB1 /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 29071F061A256811002F7FB1 /* UIAlertView+Blocks.m */; };
@@ -796,6 +797,8 @@
 		174858B41C3E229D007BBF13 /* libSPSignDoc_4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSPSignDoc_4.0.a; sourceTree = "<group>"; };
 		174858B61C438BA8007BBF13 /* MyCustomDialog.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCustomDialog.xib; sourceTree = "<group>"; };
 		17983C321C473373009E2977 /* HealthQuestionPO.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HealthQuestionPO.storyboard; sourceTree = "<group>"; };
+		17A7D83C1C5B3EE50016EE7F /* setting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = setting.h; sourceTree = "<group>"; };
+		17A7D83D1C5B3EE50016EE7F /* setting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = setting.m; sourceTree = "<group>"; };
 		2900CABA19931BBC0003B4F7 /* eAppStatusListforSubmitted.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = eAppStatusListforSubmitted.h; sourceTree = "<group>"; };
 		2900CABB19931BBC0003B4F7 /* eAppStatusListforSubmitted.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = eAppStatusListforSubmitted.m; sourceTree = "<group>"; };
 		29071F031A256811002F7FB1 /* RIButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RIButtonItem.h; sourceTree = "<group>"; };
@@ -3880,6 +3883,8 @@
 				C4EA9BDD16171F4800D51FE9 /* ForgotPwd.m */,
 				C4EA9BFA161989D000D51FE9 /* FirstTimeViewController.h */,
 				C4EA9BFB161989D100D51FE9 /* FirstTimeViewController.m */,
+				17A7D83C1C5B3EE50016EE7F /* setting.h */,
+				17A7D83D1C5B3EE50016EE7F /* setting.m */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -4702,6 +4707,7 @@
 				EFEB7A07175D9FA4004FF3CE /* ClientTabBar.m in Sources */,
 				EFEB7A49175ED366004FF3CE /* GroupListing.m in Sources */,
 				42867E9A175F2D93001CE661 /* IDTypeViewController.m in Sources */,
+				17A7D83E1C5B3EE50016EE7F /* setting.m in Sources */,
 				42867EB3175F75E6001CE661 /* TitleViewController.m in Sources */,
 				C4E9F3D21765E2430070EA8A /* EverSeriesMasterViewController.m in Sources */,
 				EFEB7A5B1766F2DF004FF3CE /* CFFTabBarController.m in Sources */,
