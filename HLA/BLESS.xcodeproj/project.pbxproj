@@ -1742,7 +1742,7 @@
 		C4E9D1941612C64900016053 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C4E9D1961612C64900016053 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C4E9D1981612C64900016053 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		C4E9D19C1612C64900016053 /* iMobile Planner-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iMobile Planner-Info.plist"; sourceTree = "<group>"; };
+		C4E9D19C1612C64900016053 /* BLESS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BLESS-Info.plist"; sourceTree = "<group>"; };
 		C4E9D19E1612C64900016053 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C4E9D1A01612C64900016053 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C4E9D1A21612C64900016053 /* iMobile Planner-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iMobile Planner-Prefix.pch"; sourceTree = "<group>"; };
@@ -3645,7 +3645,7 @@
 				EF90B0CD178E7EBC00FEC129 /* Relationship.plist */,
 				42867E9C175F2E0C001CE661 /* IDType.plist */,
 				EF1F6C7B16A7C1CC001EDC81 /* pdfData.plist */,
-				C4E9D19C1612C64900016053 /* iMobile Planner-Info.plist */,
+				C4E9D19C1612C64900016053 /* BLESS-Info.plist */,
 				C486D9D3163E6622009F8F21 /* Cordova.plist */,
 				C4E9D19D1612C64900016053 /* InfoPlist.strings */,
 				C4E9D1A01612C64900016053 /* main.m */,
@@ -4232,9 +4232,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C4E9D18F1612C64900016053 /* iMobile Planner */ = {
+		C4E9D18F1612C64900016053 /* BLESS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C4E9D1AE1612C64900016053 /* Build configuration list for PBXNativeTarget "iMobile Planner" */;
+			buildConfigurationList = C4E9D1AE1612C64900016053 /* Build configuration list for PBXNativeTarget "BLESS" */;
 			buildPhases = (
 				C4E9D18C1612C64900016053 /* Sources */,
 				C4E9D18D1612C64900016053 /* Frameworks */,
@@ -4245,7 +4245,7 @@
 			);
 			dependencies = (
 			);
-			name = "iMobile Planner";
+			name = BLESS;
 			productName = HLA;
 			productReference = C4E9D1901612C64900016053 /* iMobile Planner.app */;
 			productType = "com.apple.product-type.application";
@@ -4264,7 +4264,7 @@
 					};
 				};
 			};
-			buildConfigurationList = C4E9D18A1612C64900016053 /* Build configuration list for PBXProject "iMobile Planner" */;
+			buildConfigurationList = C4E9D18A1612C64900016053 /* Build configuration list for PBXProject "BLESS" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -4277,7 +4277,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C4E9D18F1612C64900016053 /* iMobile Planner */,
+				C4E9D18F1612C64900016053 /* BLESS */,
 			);
 		};
 /* End PBXProject section */
@@ -5161,7 +5161,7 @@
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "HLA/iMobile Planner-Prefix.pch";
+				GCC_PREFIX_HEADER = "HLA/BLESS-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(TARGET_BUILD_DIR)/usr/local/lib/include",
 					"$(OBJROOT)/UninstalledProducts/include",
@@ -5170,7 +5170,7 @@
 					"\"$(SRCROOT)/chilkat/include\"",
 					"\"$(SRCROOT)/eSignature/eSign/eSignFramework/include\"",
 				);
-				INFOPLIST_FILE = "HLA/iMobile Planner-Info.plist";
+				INFOPLIST_FILE = "HLA/BLESS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5186,7 +5186,8 @@
 					"-lresolv",
 					"-lc++",
 				);
-				PRODUCT_NAME = "iMobile Planner";
+				PRODUCT_BUNDLE_IDENTIFIER = com.bca.bless;
+				PRODUCT_NAME = BLESS;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = 2;
@@ -5214,7 +5215,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "HLA/iMobile Planner-Prefix.pch";
+				GCC_PREFIX_HEADER = "HLA/BLESS-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(TARGET_BUILD_DIR)/usr/local/lib/include",
 					"$(OBJROOT)/UninstalledProducts/include",
@@ -5223,7 +5224,7 @@
 					"\"$(SRCROOT)/chilkat/include\"",
 					"\"$(SRCROOT)/eSignature/eSign/eSignFramework/include\"",
 				);
-				INFOPLIST_FILE = "HLA/iMobile Planner-Info.plist";
+				INFOPLIST_FILE = "HLA/BLESS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5239,7 +5240,8 @@
 					"-lresolv",
 					"-lc++",
 				);
-				PRODUCT_NAME = "iMobile Planner";
+				PRODUCT_BUNDLE_IDENTIFIER = com.bca.bless;
+				PRODUCT_NAME = BLESS;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = 2;
@@ -5306,7 +5308,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "HLA/iMobile Planner-Prefix.pch";
+				GCC_PREFIX_HEADER = "HLA/BLESS-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(TARGET_BUILD_DIR)/usr/local/lib/include",
 					"$(OBJROOT)/UninstalledProducts/include",
@@ -5315,7 +5317,7 @@
 					"\"$(SRCROOT)/chilkat/include\"",
 					"\"$(SRCROOT)/eSignature/eSign/eSignFramework/include\"",
 				);
-				INFOPLIST_FILE = "HLA/iMobile Planner-Info.plist";
+				INFOPLIST_FILE = "HLA/BLESS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5334,7 +5336,8 @@
 					"-lresolv",
 					"-lc++",
 				);
-				PRODUCT_NAME = "iMobile Planner";
+				PRODUCT_BUNDLE_IDENTIFIER = com.bca.bless;
+				PRODUCT_NAME = BLESS;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = 2;
@@ -5346,7 +5349,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C4E9D18A1612C64900016053 /* Build configuration list for PBXProject "iMobile Planner" */ = {
+		C4E9D18A1612C64900016053 /* Build configuration list for PBXProject "BLESS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C4E9D1AC1612C64900016053 /* Debug */,
@@ -5356,7 +5359,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C4E9D1AE1612C64900016053 /* Build configuration list for PBXNativeTarget "iMobile Planner" */ = {
+		C4E9D1AE1612C64900016053 /* Build configuration list for PBXNativeTarget "BLESS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C4E9D1AF1612C64900016053 /* Debug */,
