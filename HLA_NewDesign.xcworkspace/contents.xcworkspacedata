@@ -5,6 +5,6 @@
       location = "group:MaritalStatus.plist">
    </FileRef>
    <FileRef
-      location = "group:HLA/iMobile Planner.xcodeproj">
+      location = "group:/Users/prem/Desktop/BCA_IOS9/HLA/BLESS.xcodeproj">
    </FileRef>
 </Workspace>

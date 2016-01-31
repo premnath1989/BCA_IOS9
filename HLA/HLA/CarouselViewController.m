@@ -156,8 +156,15 @@ const int numberOfModule = 7;
     if ([app canOpenURL:ourURL]) {
         [app openURL:ourURL];
     } else {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"HLA FAST" message:@"HLA FAST is not installed!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];        
-        [alertView show];
+//        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"HLA FAST" message:@"HLA FAST is not installed!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];        
+//        [alertView show];
+        
+        Login *mainLogin = [self.storyboard instantiateViewControllerWithIdentifier:@"Login"];
+        mainLogin.modalPresentationStyle = UIModalPresentationFullScreen;
+        mainLogin.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        //            [self presentModalViewController:mainLogin animated:YES];
+        [self presentViewController:mainLogin animated:YES completion:nil];
+
     }
     
 }
@@ -366,8 +373,15 @@ const int numberOfModule = 7;
     if ([app canOpenURL:ourURL]) {
         [app openURL:ourURL];
     } else {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@" " message:@"HLA Fast is not installed!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];        
-        [alertView show];
+//        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@" " message:@"HLA Fast is not installed!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];        
+//        [alertView show];
+        
+        Login *mainLogin = [self.storyboard instantiateViewControllerWithIdentifier:@"Login"];
+        mainLogin.modalPresentationStyle = UIModalPresentationFullScreen;
+        mainLogin.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        //            [self presentModalViewController:mainLogin animated:YES];
+        [self presentViewController:mainLogin animated:YES completion:nil];
+
     }
 }
 
