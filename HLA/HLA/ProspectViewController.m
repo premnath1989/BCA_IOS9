@@ -7,6 +7,7 @@
 //
 //  KUAN - 18 OCTOBER 2013 - Deployment Version - 1.4.0.11
 
+#import <UIKit/UIKit.h>
 
 #import "ProspectViewController.h"
 #import "ProspectListing.h"
@@ -332,7 +333,7 @@ bool RegDatehandling;
             UITextField *textField = (UITextField *)view;
             textField.layer.borderColor=[UIColor colorWithRed:47.0/255.0 green:188.0/255.0 blue:118.0/255.0 alpha:1.0].CGColor;
             textField.layer.borderWidth=1.0;
-            
+            textField.delegate=self;
         }
     }
     
@@ -341,6 +342,7 @@ bool RegDatehandling;
             UITextField *textField = (UITextField *)view;
             textField.layer.borderColor=[UIColor colorWithRed:47.0/255.0 green:188.0/255.0 blue:118.0/255.0 alpha:1.0].CGColor;
             textField.layer.borderWidth=1.0;
+            textField.delegate=self;
         }
     }
     
@@ -349,6 +351,7 @@ bool RegDatehandling;
             UITextField *textField = (UITextField *)view;
             textField.layer.borderColor=[UIColor colorWithRed:47.0/255.0 green:188.0/255.0 blue:118.0/255.0 alpha:1.0].CGColor;
             textField.layer.borderWidth=1.0;
+            textField.delegate=self;
         }
     }
     
@@ -357,6 +360,7 @@ bool RegDatehandling;
             UITextField *textField = (UITextField *)view;
             textField.layer.borderColor=[UIColor colorWithRed:47.0/255.0 green:188.0/255.0 blue:118.0/255.0 alpha:1.0].CGColor;
             textField.layer.borderWidth=1.0;
+            textField.delegate=self;
         }
     }
     
@@ -373,11 +377,13 @@ bool RegDatehandling;
             UITextField *textField = (UITextField *)view;
             textField.layer.borderColor=[UIColor colorWithRed:47.0/255.0 green:188.0/255.0 blue:118.0/255.0 alpha:1.0].CGColor;
             textField.layer.borderWidth=1.0;
+            textField.delegate=self;
         }
         if ([view isKindOfClass:[UITextView class]]) {
             UITextView *textView = (UITextView *)view;
             textView.layer.borderColor=[UIColor colorWithRed:47.0/255.0 green:188.0/255.0 blue:118.0/255.0 alpha:1.0].CGColor;
             textView.layer.borderWidth=1.0;
+            textView.delegate=self;
         }
     }
     
@@ -423,7 +429,22 @@ bool RegDatehandling;
     outletOccup.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     outletOccup.imageEdgeInsets = UIEdgeInsetsMake(0., outletOccup.frame.size.width - (24 + 10.0), 0., 0.);
     outletOccup.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 0);
+    
+    btnCoutryOfBirth.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    btnCoutryOfBirth.imageEdgeInsets = UIEdgeInsetsMake(0., outletTitle.frame.size.width - (24 + 10.0), 0., 0.);
+    btnCoutryOfBirth.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 0);
 }
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    activeField = textField;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    activeField = nil;
+}
+
 /*end of code added by faiz*/
 
 -(void)returnToListing {
@@ -856,7 +877,7 @@ bool RegDatehandling;
 
 #pragma mark - keyboard
 
--(void)keyboardDidShow:(NSNotificationCenter *)notification
+-(void)keyboardDidShow:(NSNotification *)notification
 {
     self.myScrollView.frame = CGRectMake(0, 0, 1024, 900);
     self.myScrollView.contentSize = CGSizeMake(900, 1400);
@@ -894,12 +915,36 @@ bool RegDatehandling;
     } else if([txtBussinessType isFirstResponder]) {
         [myScrollView setContentOffset:CGPointMake(0,400) animated:YES];
     }
+    
+    /*added by faiz*/
+    // Step 1: Get the size of the keyboard.
+   
+    NSDictionary *userInfo = [notification userInfo];
+    CGSize kbSize = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    // Step 2: Adjust the bottom content inset of your scroll view by the keyboard height.
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height+44, 0.0);
+    _scrollViewNewProspect.contentInset = contentInsets;
+    _scrollViewNewProspect.scrollIndicatorInsets = contentInsets;
+    
+    // Step 3: Scroll the target text field into view.
+    CGRect aRect = self.view.frame;
+    aRect.size.height -= kbSize.height;
+    if (!CGRectContainsPoint(aRect, activeField.frame.origin) ) {
+        CGPoint scrollPoint = CGPointMake(0.0, activeField.frame.origin.y - (kbSize.height-15));
+        [_scrollViewNewProspect setContentOffset:scrollPoint animated:YES];
+    }
+    /*end of added by faiz*/
 }
 
 -(void)keyboardDidHide:(NSNotificationCenter *)notification
 {
     self.myScrollView.frame = CGRectMake(0, 0, 1024, 900);
     self.myScrollView.contentSize = CGSizeMake(900, 1300);
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+    _scrollViewNewProspect.contentInset = contentInsets;
+    _scrollViewNewProspect.scrollIndicatorInsets = contentInsets;
 }
 
 - (BOOL)disablesAutomaticKeyboardDismissal {
@@ -1856,6 +1901,14 @@ bool RegDatehandling;
     NSString *RegNumber = @"";
     int counter = 0;
 	
+    /*added by faiz*/
+    txtExactDuties.text=@"test";
+    txtPrefix1.text=@"021";
+    txtPrefix2.text=@"021";
+    txtPrefix3.text=@"021";
+    txtPrefix4.text=@"021";
+    /*end of added by faiz*/
+    
     if ([self Validation] == TRUE && DATE_OK == YES) {
         sqlite3_stmt *statement;
         const char *dbpath = [databasePath UTF8String];
@@ -1902,8 +1955,10 @@ bool RegDatehandling;
 			NSString *title = [outletTitle.titleLabel.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
             marital = [outletMaritalStatus.titleLabel.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
             nation = [outletNationality.titleLabel.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-            race  = [outletRace.titleLabel.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-             Rigdateoutlet  = [outletRigDate.titleLabel.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            /*modified by faiz*/
+            race  = @"OTHERS";//[outletRace.titleLabel.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            /*end of modification*/
+            Rigdateoutlet  = [outletRigDate.titleLabel.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
             religion = [outletReligion.titleLabel.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
             
             //ENS: Save othertype with code
@@ -2071,10 +2126,12 @@ bool RegDatehandling;
         int count = [result intForColumn:@"COUNT"];
         if(count > 0) {
             str_counter = [NSString stringWithFormat:@"%i",counter];
-            contact1 =  [NSString stringWithFormat:@"%@%@",txtPrefix1.text, txtContact1.text];
-            contact2 =  [NSString stringWithFormat:@"%@%@",txtPrefix2.text, txtContact2.text];
-            contact3 =  [NSString stringWithFormat:@"%@%@",txtPrefix3.text, txtContact3.text];
-            contact4 =  [NSString stringWithFormat:@"%@%@",txtPrefix4.text, txtContact4.text];
+            /*edit by faiz*/
+            contact1 =  [NSString stringWithFormat:@"%@",txtContact1.text];//[NSString stringWithFormat:@"%@%@",txtPrefix1.text, txtContact1.text];
+            contact2 =  [NSString stringWithFormat:@"%@",txtContact2.text];//[NSString stringWithFormat:@"%@%@",txtPrefix2.text, txtContact2.text];
+            contact3 =  [NSString stringWithFormat:@"%@",txtContact3.text];//[NSString stringWithFormat:@"%@%@",txtPrefix3.text, txtContact3.text];
+            contact4 =  [NSString stringWithFormat:@"%@",txtContact4.text];//[NSString stringWithFormat:@"%@%@",txtPrefix4.text, txtContact4.text];
+            /*end of edit by faiz*/
             
             [db executeUpdate:@"Update eProposal_LA_Details SET \"LATitle\" = \"%@\", \"LAName\" = \"%@\", \"LASex\" = \"%@\", \"LADOB\" = \"%@\", \"LANewICNO\" = \"%@\", \"LAOtherIDType\" = \"%@\", \"LAOtherID\" = \"%@\", \"LAMaritalStatus\" = \"%@\", \"LARace\" = \"%@\", \"LAReligion\" = \"%@\", \"LANationality\" = \"%@\", \"LAOccupationCode\" = \"%@\", \"LAExactDuties\" = \"%@\", \"LATypeOfBusiness\" = \"%@\", \"ResidenceAddress1\" = \"%@\", \"ResidenceAddress2\" = \"%@\", \"ResidenceAddress3\" = \"%@\", \"ResidenceTown\" = \"%@\", \"ResidenceState\" = \"%@\", \"ResidencePostcode\" = \"%@\", \"ResidenceCountry\" = \"%@\", \"OfficeAddress1\" = \"%@\", \"OfficeAddress2\" = \"%@\", \"OfficeAddress3\" = \"%@\", \"OfficeTown\" = \"%@\", \"OfficeState\" = \"%@\", \"OfficePostcode\" = \"%@\", \"OfficeCountry\" = \"%@\", \"ResidencePhoneNo\" = \"%@\", \"OfficePhoneNo\" = \"%@\", \"FaxPhoneNo\" = \"%@\", \"MobilePhoneNo\" = \"%@\", \"EmailAddress\" = \"%@\", \"LASmoker\" = \"%@\", \"ProspectProfileChangesCounter\" = \"%@\" WHERE  ProspectProfileID = \"%@\";",
              
@@ -5034,7 +5091,7 @@ bool RegDatehandling;
 			[ClientProfile setObject:@"NO" forKey:@"TabBar"];
             return false;
         }
-        
+        /*remarked by faiz
         if([race isEqualToString:@"- SELECT -"] && ![otherIDTypeTrim isEqualToString:@"EXPECTED DELIVERY DATE"]) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
                                                             message:@"Race is required." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
@@ -5042,7 +5099,7 @@ bool RegDatehandling;
             [alert show];
 			[ClientProfile setObject:@"NO" forKey:@"TabBar"];
             return false;
-        }
+        } end of remark*/
         
         //CHECK NATIONALITY
         if([nation isEqualToString:@"- SELECT -"]&& ![otherIDTypeTrim isEqualToString:@"EXPECTED DELIVERY DATE"]) {

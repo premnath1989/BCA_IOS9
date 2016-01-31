@@ -20,6 +20,7 @@
 #import "ClearData.h"
 #import "Cleanup.h"
 
+
 @interface ProspectListing ()
 
 @end
@@ -45,7 +46,7 @@ MBProgressHUD *HUD;
 {
     [super viewDidLoad];
     
-	self.noMoreResultsAvail =NO;
+    self.noMoreResultsAvail =NO;
 	totalView = 20;
 	
     [btnGroup setTitle:@"- SELECT -" forState:UIControlStateNormal];
@@ -68,6 +69,20 @@ MBProgressHUD *HUD;
     ColorHexCode *CustomColor = [[ColorHexCode alloc]init ];
     self.navigationController.navigationBar.tintColor = [CustomColor colorWithHexString:@"A9BCF5"];
     
+    
+    
+//    searchBar.delegate = (id)self;
+    [self getTotal]; //just to get total row of data.
+    //[self retrieveDataFromDatabase];
+    
+    /*added by faiz*/
+        modelProspectProfile=[[ModelProspectProfile alloc]init];
+        ProspectTableData=[modelProspectProfile getProspectProfile];
+        NSLog(@"ProspectTableData %i",ProspectTableData.count);
+    /*end of added by faiz*/
+    
+    /*-begining-*/
+    /*
     CGRect frame = CGRectMake(0, 0, 400, 44);
     UILabel *label = [[UILabel alloc] initWithFrame:frame];
     label.backgroundColor = [UIColor clearColor];
@@ -77,8 +92,7 @@ MBProgressHUD *HUD;
     label.textColor = [CustomColor colorWithHexString:@"234A7D"];
     label.text = @"Client Profile Listing";
     self.navigationItem.titleView = label;
-    
-//    searchBar.delegate = (id)self;
+     
     NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docsDir = [dirPaths objectAtIndex:0];
     databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
@@ -135,7 +149,7 @@ MBProgressHUD *HUD;
 	NSString *registrationDate = @"";
 	NSString *exempted = @"";
 	
-    [self getTotal]; //just to get total row of data.
+   
 	
     if (sqlite3_open(dbpath, &contactDB) == SQLITE_OK)
     {
@@ -254,7 +268,7 @@ MBProgressHUD *HUD;
                 const char *marstat = (const char*)sqlite3_column_text(statement, 36);
                 MaritalStatus = marstat == NULL ? nil : [[NSString alloc] initWithUTF8String:marstat];
                 
-                const char *rel = (const char*)sqlite3_column_text(statement, 37);
+                const char *rel = (const char*)sqlite3_column_text(statement, 41);
                 Religion = rel == NULL ? nil : [[NSString alloc] initWithUTF8String:rel];
                 
                 const char *nat = (const char*)sqlite3_column_text(statement, 38);
@@ -324,7 +338,8 @@ MBProgressHUD *HUD;
     ModifiedBy = Nil;
     
     ProspectTitle = Nil, ProspectGroup = Nil, IDTypeNo = Nil, OtherIDType = Nil, OtherIDTypeNo = Nil, Smoker = Nil;
-    Race = Nil, Religion = Nil, MaritalStatus = Nil, Nationality = Nil;
+    Race = Nil, Religion = Nil, MaritalStatus = Nil, Nationality = Nil;*/
+    /*------End------*/
     
     self.myTableView.rowHeight = 50;
     self.myTableView.backgroundColor = [UIColor clearColor];
@@ -345,6 +360,7 @@ MBProgressHUD *HUD;
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:YES];
+    NSLog(@"count %i",[ProspectTableData count]);
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -355,6 +371,267 @@ MBProgressHUD *HUD;
 - (BOOL)disablesAutomaticKeyboardDismissal
 {
     return NO;
+}
+
+-(void)retrieveDataFromDatabase{
+    ColorHexCode *CustomColor = [[ColorHexCode alloc]init ];
+    
+    CGRect frame = CGRectMake(0, 0, 400, 44);
+    UILabel *label = [[UILabel alloc] initWithFrame:frame];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont fontWithName:@"TreBuchet MS" size:20];
+    label.font = [UIFont boldSystemFontOfSize:20];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.textColor = [CustomColor colorWithHexString:@"234A7D"];
+    label.text = @"Client Profile Listing";
+    self.navigationItem.titleView = label;
+    
+    ProspectTableData=[modelProspectProfile getProspectProfile];
+    /*NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsDir = [dirPaths objectAtIndex:0];
+    databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
+    
+    const char *dbpath = [databasePath UTF8String];
+    sqlite3_stmt *statement;
+    NSString *ProspectID = @"";
+    NSString *NickName = @"";
+    NSString *ProspectName = @"";
+    NSString *ProspectDOB = @"" ;
+    NSString *ProspectGender = @"";
+    NSString *ResidenceAddress1 = @"";
+    NSString *ResidenceAddress2 = @"";
+    NSString *ResidenceAddress3 = @"";
+    NSString *ResidenceAddressTown = @"";
+    NSString *ResidenceAddressState = @"";
+    NSString *ResidenceAddressPostCode = @"";
+    NSString *ResidenceAddressCountry = @"";
+    NSString *OfficeAddress1 = @"";
+    NSString *OfficeAddress2 = @"";
+    NSString *OfficeAddress3 = @"";
+    NSString *OfficeAddressTown = @"";
+    NSString *OfficeAddressState = @"";
+    NSString *OfficeAddressPostCode = @"";
+    NSString *OfficeAddressCountry = @"";
+    NSString *ProspectEmail = @"";
+    NSString *ProspectOccupationCode = @"";
+    NSString *ExactDuties = @"";
+    NSString *ProspectRemark = @"";
+    //basvi added
+    NSString *DateCreated = @"";
+    NSString *CreatedBy = @"";
+    NSString *DateModified = @"";
+    NSString *ModifiedBy = @"";
+    //
+    NSString *ProspectGroup = @"";
+    NSString *ProspectTitle = @"";
+    NSString *IDTypeNo = @"";
+    NSString *OtherIDType = @"";
+    NSString *OtherIDTypeNo = @"";
+    NSString *Smoker = @"";
+    
+    NSString *Race = @"";
+    
+    NSString *Nationality = @"";
+    NSString *MaritalStatus = @"";
+    NSString *Religion = @"";
+    
+    NSString *AnnIncome = @"";
+    NSString *BussinessType = @"";
+    
+    NSString *registration = @"";
+    NSString *registrationNo = @"";
+    NSString *registrationDate = @"";
+    NSString *exempted = @"";
+    
+    
+    if (sqlite3_open(dbpath, &contactDB) == SQLITE_OK)
+    {
+        NSString *querySQL = [NSString stringWithFormat:@"SELECT * FROM prospect_profile WHERE QQFlag = 'false'  order by LOWER(ProspectName) ASC LIMIT 20"];
+        const char *query_stmt = [querySQL UTF8String];
+        if (sqlite3_prepare_v2(contactDB, query_stmt, -1, &statement, NULL) == SQLITE_OK)
+        {
+            ProspectTableData = [[NSMutableArray alloc] init];
+            while (sqlite3_step(statement) == SQLITE_ROW)
+            {
+                ProspectID = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 0)];
+                //ProspectID
+                const char *name = (const char*)sqlite3_column_text(statement, 1);
+                NickName = name == NULL ? nil : [[NSString alloc] initWithUTF8String:name];
+                
+                ProspectName = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 2)];
+                ProspectDOB = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 3)];
+                ProspectGender = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 4)];
+                
+                const char *Address1 = (const char*)sqlite3_column_text(statement, 5);
+                ResidenceAddress1 = Address1 == NULL ? nil : [[NSString alloc] initWithUTF8String:Address1];
+                
+                const char *Address2 = (const char*)sqlite3_column_text(statement, 6);
+                ResidenceAddress2 = Address2 == NULL ? nil : [[NSString alloc] initWithUTF8String:Address2];
+                
+                const char *Address3 = (const char*)sqlite3_column_text(statement, 7);
+                ResidenceAddress3 = Address3 == NULL ? nil : [[NSString alloc] initWithUTF8String:Address3];
+                
+                const char *AddressTown = (const char*)sqlite3_column_text(statement, 8);
+                ResidenceAddressTown = AddressTown == NULL ? nil : [[NSString alloc] initWithUTF8String:AddressTown];
+                
+                const char *AddressState = (const char*)sqlite3_column_text(statement, 9);
+                ResidenceAddressState = AddressState == NULL ? nil : [[NSString alloc] initWithUTF8String:AddressState];
+                
+                const char *AddressPostCode = (const char*)sqlite3_column_text(statement, 10);
+                ResidenceAddressPostCode = AddressPostCode == NULL ? nil : [[NSString alloc] initWithUTF8String:AddressPostCode];
+                
+                const char *AddressCountry = (const char*)sqlite3_column_text(statement, 11);
+                ResidenceAddressCountry = AddressCountry == NULL ? nil : [[NSString alloc] initWithUTF8String:AddressCountry];
+                
+                const char *AddressOff1 = (const char*)sqlite3_column_text(statement, 12);
+                OfficeAddress1 = AddressOff1 == NULL ? nil : [[NSString alloc] initWithUTF8String:AddressOff1];
+                
+                const char *AddressOff2 = (const char*)sqlite3_column_text(statement, 13);
+                OfficeAddress2 = AddressOff2 == NULL ? nil : [[NSString alloc] initWithUTF8String:AddressOff2];
+                
+                const char *AddressOff3 = (const char*)sqlite3_column_text(statement, 14);
+                OfficeAddress3 = AddressOff3 == NULL ? nil : [[NSString alloc] initWithUTF8String:AddressOff3];
+                
+                const char *AddressOffTown = (const char*)sqlite3_column_text(statement, 15);
+                OfficeAddressTown = AddressOffTown == NULL ? nil : [[NSString alloc] initWithUTF8String:AddressOffTown];
+                
+                const char *AddressOffState = (const char*)sqlite3_column_text(statement, 16);
+                OfficeAddressState = AddressOffState == NULL ? nil : [[NSString alloc] initWithUTF8String:AddressOffState];
+                
+                const char *AddressOffPostCode = (const char*)sqlite3_column_text(statement, 17);
+                OfficeAddressPostCode = AddressOffPostCode == NULL ? nil : [[NSString alloc] initWithUTF8String:AddressOffPostCode];
+                
+                const char *AddressOffCountry = (const char*)sqlite3_column_text(statement, 18);
+                OfficeAddressCountry = AddressOffCountry == NULL ? nil : [[NSString alloc] initWithUTF8String:AddressOffCountry];
+                
+                const char *Email = (const char*)sqlite3_column_text(statement, 19);
+                ProspectEmail = Email == NULL ? nil : [[NSString alloc] initWithUTF8String:Email];
+                
+                ProspectOccupationCode = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 20)];
+                
+                const char *Duties = (const char*)sqlite3_column_text(statement, 21);
+                ExactDuties = Duties == NULL ? nil : [[NSString alloc] initWithUTF8String:Duties];
+                
+                const char *Remark = (const char*)sqlite3_column_text(statement, 22);
+                ProspectRemark = Remark == NULL ? nil : [[NSString alloc] initWithUTF8String:Remark];
+                
+                //basvi added
+                const char *DateCr = (const char*)sqlite3_column_text(statement, 23);
+                DateCreated = DateCr == NULL ? nil : [[NSString alloc] initWithUTF8String:DateCr];
+                
+                const char *CrBy = (const char*)sqlite3_column_text(statement, 24);
+                CreatedBy = CrBy == NULL ? nil : [[NSString alloc] initWithUTF8String:CrBy];
+                
+                const char *DateMod = (const char*)sqlite3_column_text(statement, 25);
+                DateModified = DateMod == NULL ? nil : [[NSString alloc] initWithUTF8String:DateMod];
+                
+                const char *ModBy = (const char*)sqlite3_column_text(statement, 26);
+                ModifiedBy = ModBy == NULL ? nil : [[NSString alloc] initWithUTF8String:ModBy];
+                //
+                const char *Group = (const char*)sqlite3_column_text(statement, 27);
+                ProspectGroup = Group == NULL ? nil : [[NSString alloc] initWithUTF8String:Group];
+                
+                const char *Title = (const char*)sqlite3_column_text(statement, 28);
+                ProspectTitle = Title == NULL ? nil : [[NSString alloc] initWithUTF8String:Title];
+                
+                const char *typeNo = (const char*)sqlite3_column_text(statement, 29);
+                IDTypeNo = typeNo == NULL ? nil : [[NSString alloc] initWithUTF8String:typeNo];
+                
+                const char *OtherType = (const char*)sqlite3_column_text(statement, 30);
+                OtherIDType = OtherType == NULL ? nil : [[NSString alloc] initWithUTF8String:OtherType];
+                if ([OtherIDType isEqualToString:@"(NULL)"] || [OtherIDType isEqualToString:@"(null)"]) {
+                    OtherIDType = @"";
+                }
+                
+                const char *OtherTypeNo = (const char*)sqlite3_column_text(statement, 31);
+                OtherIDTypeNo = OtherTypeNo == NULL ? nil : [[NSString alloc] initWithUTF8String:OtherTypeNo];
+                
+                const char *smok = (const char*)sqlite3_column_text(statement, 32);
+                Smoker = smok == NULL ? nil : [[NSString alloc] initWithUTF8String:smok];
+                
+                const char *ann = (const char*)sqlite3_column_text(statement, 33);
+                AnnIncome = ann == NULL ? nil : [[NSString alloc] initWithUTF8String:ann];
+                
+                const char *buss = (const char*)sqlite3_column_text(statement, 34);
+                BussinessType = buss == NULL ? nil : [[NSString alloc] initWithUTF8String:buss];
+                
+                const char *rac = (const char*)sqlite3_column_text(statement, 35);
+                Race = rac == NULL ? nil : [[NSString alloc] initWithUTF8String:rac];
+                
+                const char *marstat = (const char*)sqlite3_column_text(statement, 36);
+                MaritalStatus = marstat == NULL ? nil : [[NSString alloc] initWithUTF8String:marstat];
+                
+                const char *rel = (const char*)sqlite3_column_text(statement, 41);
+                Religion = rel == NULL ? nil : [[NSString alloc] initWithUTF8String:rel];
+                
+                const char *nat = (const char*)sqlite3_column_text(statement, 38);
+                Nationality = nat == NULL ? nil : [[NSString alloc] initWithUTF8String:nat];
+                
+                const char *gst = (const char*)sqlite3_column_text(statement, 40);
+                registration = gst == NULL ? nil : [[NSString alloc] initWithUTF8String:gst];
+                const char *regNo = (const char*)sqlite3_column_text(statement, 41);
+                registrationNo = regNo == NULL ? nil : [[NSString alloc] initWithUTF8String:regNo];
+                const char *regDate = (const char*)sqlite3_column_text(statement, 42);
+                registrationDate = regDate == NULL ? nil : [[NSString alloc] initWithUTF8String:regDate];
+                const char *exemp = (const char*)sqlite3_column_text(statement, 43);
+                exempted = exemp == NULL ? nil : [[NSString alloc] initWithUTF8String:exemp];
+                
+                const char *isG = (const char*)sqlite3_column_text(statement, 45);
+                NSString *isGrouping = isG == NULL ? nil : [[NSString alloc] initWithUTF8String:isG];
+                
+                const char *CountryOfBirth = (const char*)sqlite3_column_text(statement, 46);
+                NSString *COB = CountryOfBirth == NULL ? nil : [[NSString alloc] initWithUTF8String:CountryOfBirth];
+                
+                [ProspectTableData addObject:[[ProspectProfile alloc] initWithName:NickName AndProspectID:ProspectID AndProspectName:ProspectName
+                                                                  AndProspecGender:ProspectGender AndResidenceAddress1:ResidenceAddress1
+                                                              AndResidenceAddress2:ResidenceAddress2 AndResidenceAddress3:ResidenceAddress3
+                                                           AndResidenceAddressTown:ResidenceAddressTown AndResidenceAddressState:ResidenceAddressState
+                                                       AndResidenceAddressPostCode:ResidenceAddressPostCode AndResidenceAddressCountry:ResidenceAddressCountry
+                                                                 AndOfficeAddress1:OfficeAddress1 AndOfficeAddress2:OfficeAddress2 AndOfficeAddress3:OfficeAddress3 AndOfficeAddressTown:OfficeAddressTown
+                                                             AndOfficeAddressState:OfficeAddressState AndOfficeAddressPostCode:OfficeAddressPostCode
+                                                           AndOfficeAddressCountry:OfficeAddressCountry AndProspectEmail:ProspectEmail AndProspectRemark:ProspectRemark AndDateCreated:DateCreated AndDateModified:DateModified AndCreatedBy:CreatedBy AndModifiedBy:ModifiedBy
+                                                         AndProspectOccupationCode:ProspectOccupationCode AndProspectDOB:ProspectDOB
+                                                                    AndExactDuties:ExactDuties AndGroup:ProspectGroup AndTitle:ProspectTitle AndIDTypeNo:IDTypeNo AndOtherIDType:OtherIDType AndOtherIDTypeNo:OtherIDTypeNo AndSmoker:Smoker AndAnnIncome:AnnIncome AndBussType:BussinessType AndRace:Race AndMaritalStatus:MaritalStatus AndReligion:Religion AndNationality:Nationality AndRegistrationNo:registrationNo AndRegistration:registration AndRegistrationDate:registrationDate AndRegistrationExempted:exempted AndProspect_IsGrouping:isGrouping AndCountryOfBirth:COB]];
+            }
+            sqlite3_finalize(statement);
+            
+        }
+        sqlite3_close(contactDB);
+        query_stmt = Nil, query_stmt = Nil;
+    }
+    
+    label = Nil, dirPaths = Nil, docsDir = Nil, dbpath = Nil, statement = Nil, statement = Nil;
+    ProspectID = Nil;
+    NickName = Nil;
+    ProspectName = Nil ;
+    ProspectDOB = Nil  ;
+    ProspectGender = Nil;
+    ResidenceAddress1 = Nil;
+    ResidenceAddress2 = Nil;
+    ResidenceAddress3 = Nil;
+    ResidenceAddressTown = Nil;
+    ResidenceAddressState = Nil;
+    ResidenceAddressPostCode = Nil;
+    ResidenceAddressCountry = Nil;
+    OfficeAddress1 = Nil;
+    OfficeAddress2 = Nil;
+    OfficeAddress3 = Nil;
+    OfficeAddressTown = Nil;
+    OfficeAddressState = Nil;
+    OfficeAddressPostCode = Nil;
+    OfficeAddressCountry = Nil;
+    ProspectEmail = Nil;
+    ProspectOccupationCode = Nil;
+    ExactDuties = Nil;
+    ProspectRemark = Nil;
+    
+    DateCreated = Nil;
+    CreatedBy = Nil;
+    DateModified = Nil;
+    ModifiedBy = Nil;
+    
+    ProspectTitle = Nil, ProspectGroup = Nil, IDTypeNo = Nil, OtherIDType = Nil, OtherIDTypeNo = Nil, Smoker = Nil;
+    Race = Nil, Religion = Nil, MaritalStatus = Nil, Nationality = Nil;*/
 }
 
 #pragma mark - `Table view data source
@@ -521,7 +798,9 @@ MBProgressHUD *HUD;
 				[dateFormat1 setDateFormat:@"dd/MM/yyyy"];
 				NSDate * CurrentdateString1 = [dateFormat1 stringFromDate:myDate1];
 				
-				NSString *timeF1 =[dateArray1 objectAtIndex:1];
+                NSLog(@"%@",dateArray1);
+                //FIXME:-dateArray1 only contain 1 row
+				NSString *timeF1 = @"test";//[dateArray1 objectAtIndex:1];
 				finaldate =[NSString stringWithFormat:@"%@\n%@",CurrentdateString1,timeF1];
 				
 			}
@@ -972,7 +1251,7 @@ MBProgressHUD *HUD;
                 const char *marstat = (const char*)sqlite3_column_text(statement, 36);
                 MaritalStatus = marstat == NULL ? nil : [[NSString alloc] initWithUTF8String:marstat];
                 
-                const char *rel = (const char*)sqlite3_column_text(statement, 37);
+                const char *rel = (const char*)sqlite3_column_text(statement, 41);
                 Religion = rel == NULL ? nil : [[NSString alloc] initWithUTF8String:rel];
                 
                 const char *nat = (const char*)sqlite3_column_text(statement, 38);
@@ -1084,6 +1363,8 @@ MBProgressHUD *HUD;
     else
     {
         pp = [ProspectTableData objectAtIndex:indexPath.row];
+        NSLog(@"prospect table data %@",pp.Religion);
+
     }
     zzz.pp = pp;
     
@@ -1311,7 +1592,7 @@ MBProgressHUD *HUD;
                 const char *marstat = (const char*)sqlite3_column_text(statement, 36);
                 NSString *MaritalStatus = marstat == NULL ? nil : [[NSString alloc] initWithUTF8String:marstat];
                 
-                const char *rel = (const char*)sqlite3_column_text(statement, 37);
+                const char *rel = (const char*)sqlite3_column_text(statement, 41);
                 NSString *Religion = rel == NULL ? nil : [[NSString alloc] initWithUTF8String:rel];
                 
                 const char *nat = (const char*)sqlite3_column_text(statement, 38);
@@ -1667,7 +1948,7 @@ MBProgressHUD *HUD;
                     const char *marstat = (const char*)sqlite3_column_text(statement, 36);
                     NSString *MaritalStatus = marstat == NULL ? nil : [[NSString alloc] initWithUTF8String:marstat];
                     
-                    const char *rel = (const char*)sqlite3_column_text(statement, 37);
+                    const char *rel = (const char*)sqlite3_column_text(statement, 41);
                     NSString *Religion = rel == NULL ? nil : [[NSString alloc] initWithUTF8String:rel];
                     
                     const char *nat = (const char*)sqlite3_column_text(statement, 38);

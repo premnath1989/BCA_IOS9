@@ -352,6 +352,8 @@
 		A1A8312019A1978400C0302D /* P2-1-Row3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A1A8311F19A1978400C0302D /* P2-1-Row3.jpg */; };
 		A1A8312219A1978D00C0302D /* P2-1-Row2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A1A8312119A1978D00C0302D /* P2-1-Row2.jpg */; };
 		A1E3AFC219BD5F5200F332B3 /* P5-footer-B.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A1E3AFC119BD5F5200F332B3 /* P5-footer-B.jpg */; };
+		A902F5411C5A0EF6001D6EC0 /* libSPSignDoc_4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A902F5401C5A0EF6001D6EC0 /* libSPSignDoc_4.0.a */; };
+		A9B8F3D41C5B5EE2005C9646 /* ModelProspectProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = A9B8F3D31C5B5EE2005C9646 /* ModelProspectProfile.m */; };
 		A9E550A21C591E8000C9DAC2 /* libSPSignDoc_4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A9E550A11C591E8000C9DAC2 /* libSPSignDoc_4.0.a */; };
 		A9E550A51C591F7900C9DAC2 /* Expand Arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A9E550A31C591F7900C9DAC2 /* Expand Arrow.png */; };
 		A9E550A61C591F7900C9DAC2 /* Expand Arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A9E550A41C591F7900C9DAC2 /* Expand Arrow@2x.png */; };
@@ -1359,6 +1361,9 @@
 		A1A8311F19A1978400C0302D /* P2-1-Row3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "P2-1-Row3.jpg"; sourceTree = "<group>"; };
 		A1A8312119A1978D00C0302D /* P2-1-Row2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "P2-1-Row2.jpg"; sourceTree = "<group>"; };
 		A1E3AFC119BD5F5200F332B3 /* P5-footer-B.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "P5-footer-B.jpg"; sourceTree = "<group>"; };
+		A902F5401C5A0EF6001D6EC0 /* libSPSignDoc_4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSPSignDoc_4.0.a; sourceTree = "<group>"; };
+		A9B8F3D21C5B5EE2005C9646 /* ModelProspectProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelProspectProfile.h; sourceTree = "<group>"; };
+		A9B8F3D31C5B5EE2005C9646 /* ModelProspectProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelProspectProfile.m; sourceTree = "<group>"; };
 		A9E550A11C591E8000C9DAC2 /* libSPSignDoc_4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSPSignDoc_4.0.a; sourceTree = "<group>"; };
 		A9E550A31C591F7900C9DAC2 /* Expand Arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Expand Arrow.png"; sourceTree = "<group>"; };
 		A9E550A41C591F7900C9DAC2 /* Expand Arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Expand Arrow@2x.png"; sourceTree = "<group>"; };
@@ -2015,6 +2020,7 @@
 				C486D9DF163E6739009F8F21 /* AVFoundation.framework in Frameworks */,
 				C486D9DD163E6732009F8F21 /* AudioToolbox.framework in Frameworks */,
 				C486D9DA163E6728009F8F21 /* AddressBook.framework in Frameworks */,
+				A902F5411C5A0EF6001D6EC0 /* libSPSignDoc_4.0.a in Frameworks */,
 				C486D9DB163E6728009F8F21 /* AddressBookUI.framework in Frameworks */,
 				C4EB49211615556300C7FC8C /* libsqlite3.dylib in Frameworks */,
 				C4E9D1951612C64900016053 /* UIKit.framework in Frameworks */,
@@ -2587,6 +2593,7 @@
 		4239AE2E1946DAE100BD6F53 /* eSignFramework */ = {
 			isa = PBXGroup;
 			children = (
+				A902F5401C5A0EF6001D6EC0 /* libSPSignDoc_4.0.a */,
 				A9E550A11C591E8000C9DAC2 /* libSPSignDoc_4.0.a */,
 				174858B41C3E229D007BBF13 /* libSPSignDoc_4.0.a */,
 				4239AE2F1946DAE100BD6F53 /* dummy.cpp */,
@@ -3069,6 +3076,15 @@
 			path = include;
 			sourceTree = "<group>";
 		};
+		A9B8F3D11C5B5EA5005C9646 /* HLADB Model */ = {
+			isa = PBXGroup;
+			children = (
+				A9B8F3D21C5B5EE2005C9646 /* ModelProspectProfile.h */,
+				A9B8F3D31C5B5EE2005C9646 /* ModelProspectProfile.m */,
+			);
+			name = "HLADB Model";
+			sourceTree = "<group>";
+		};
 		C319633618D989C800565B1C /* SupplementaryProposalForm1 */ = {
 			isa = PBXGroup;
 			children = (
@@ -3484,6 +3500,7 @@
 		C4E9D1851612C64900016053 = {
 			isa = PBXGroup;
 			children = (
+				A9B8F3D11C5B5EA5005C9646 /* HLADB Model */,
 				FA24FFBA1BA025B7000D53C0 /* database */,
 				29071F021A256811002F7FB1 /* alert_block */,
 				6A4B72AC19ECB3A800F4DE62 /* AdSupport.framework */,
@@ -4621,6 +4638,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C4E9D1A11612C64900016053 /* main.m in Sources */,
+				A9B8F3D41C5B5EE2005C9646 /* ModelProspectProfile.m in Sources */,
 				C4E9D1A51612C64900016053 /* AppDelegate.m in Sources */,
 				C4E9D1AB1612C64900016053 /* ViewController.m in Sources */,
 				C4E9D1BA1612C68200016053 /* FSVerticalTabBar.m in Sources */,

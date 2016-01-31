@@ -1,0 +1,17 @@
+//
+//  ModelProspectProfile.h
+//  iMobile Planner
+//
+//  Created by Faiz Umar Baraja on 29/01/2016.
+//  Copyright © 2016 Hong Leong Assurance. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import "FMDatabase.h"
+#import "FMResultSet.h"
+
+@interface ModelProspectProfile : NSObject {
+    FMResultSet *results;
+}
+-(NSMutableArray *)getProspectProfile;
+@end

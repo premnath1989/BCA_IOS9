@@ -13,11 +13,14 @@
 #import "GroupClass.h"
 #import "ClientProfileListingSortBy.h"
 #import "CustomAlertBox.h"
+#import "ModelProspectProfile.h"
 
 @interface ProspectListing : UIViewController<EditProspectDelegate, ProspectViewControllerDelegate,UITableViewDelegate,UITableViewDataSource,GroupDelegate, ClientProfileListingDelegate,CustomAlertBoxDelegate, UITabBarDelegate>
 {
     NSString *databasePath;
     sqlite3 *contactDB;
+    ModelProspectProfile *modelProspectProfile;
+    
     EditProspect *_EditProspect;
     ProspectViewController *_ProspectViewController;
     GroupClass *_GroupList;

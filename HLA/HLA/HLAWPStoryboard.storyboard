@@ -1729,7 +1729,9 @@
                                                 <rect key="frame" x="199" y="332" width="253" height="24"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
-                                                <state key="normal" image="Expand Arrow.png"/>
+                                                <state key="normal" image="Expand Arrow.png">
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="actionNationality:" destination="Iz4-6t-bhg" eventType="touchUpInside" id="zRa-tF-2EM"/>
                                                 </connections>
@@ -1740,7 +1742,16 @@
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
                                                 <state key="normal" image="Expand Arrow.png"/>
                                                 <connections>
-                                                    <action selector="actionNationality:" destination="Iz4-6t-bhg" eventType="touchUpInside" id="SD3-ax-9vV"/>
+                                                    <action selector="actionReligion:" destination="Iz4-6t-bhg" eventType="touchUpInside" id="0aG-i1-HCa"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bpC-KV-PAG">
+                                                <rect key="frame" x="199" y="370" width="253" height="24"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
+                                                <state key="normal" image="Expand Arrow.png"/>
+                                                <connections>
+                                                    <action selector="actionCountryOfBirth:" destination="Iz4-6t-bhg" eventType="touchUpInside" id="fCR-UU-Vrg"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -2419,7 +2430,7 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
                         <outlet property="AddGroup" destination="gRp-ac-p9A" id="Oaf-jk-8Z9"/>
-                        <outlet property="BtnCountryOfBirth" destination="zFJ-LA-0ei" id="Q3o-DL-4aa"/>
+                        <outlet property="BtnCountryOfBirth" destination="bpC-KV-PAG" id="qK9-9Z-UWs"/>
                         <outlet property="OtherIDType" destination="RUY-ar-i3y" id="014-ab-Ljx"/>
                         <outlet property="SegIsGrouping" destination="HeI-Kb-Fex" id="VI0-HX-ayP"/>
                         <outlet property="btnForeignHome" destination="INn-WJ-yTJ" id="Dtp-hL-YDC"/>
@@ -2444,7 +2455,7 @@
                         <outlet property="segRigExempted" destination="Yx2-b6-zdc" id="iSM-6c-Wk6"/>
                         <outlet property="segRigPerson" destination="oMz-NF-m0I" id="5UY-tv-zjF"/>
                         <outlet property="segSmoker" destination="g3Y-Zw-VRc" id="sAq-Q2-BRx"/>
-                        <outlet property="txtAnnIncome" destination="3gk-3W-mgb" id="2L7-OH-uu7"/>
+                        <outlet property="txtAnnIncome" destination="ZsF-rw-6Po" id="pTu-S4-Cwv"/>
                         <outlet property="txtBussinessType" destination="mAL-LK-LVv" id="M3W-E2-fg8"/>
                         <outlet property="txtClass" destination="l6H-4J-AQ1" id="Azf-dG-7uj"/>
                         <outlet property="txtContact1" destination="zqn-rl-fz2" id="nAw-aQ-ltb"/>

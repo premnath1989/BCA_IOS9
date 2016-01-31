@@ -30,6 +30,7 @@ NSString *uatAgentCode;
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     databasePath = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    NSLog(@"db path %@",databasePath);
     [SIUtilities makeDBCopy:databasePath];
 
     SICompleted = YES;

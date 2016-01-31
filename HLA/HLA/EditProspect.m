@@ -340,7 +340,11 @@ NSMutableArray *DelGroupArr;
             UITextField *textField = (UITextField *)view;
             textField.layer.borderColor=[UIColor colorWithRed:47.0/255.0 green:188.0/255.0 blue:118.0/255.0 alpha:1.0].CGColor;
             textField.layer.borderWidth=1.0;
-            
+            textField.delegate=self;
+        }
+        if ([view isKindOfClass:[UIButton class]]) {
+            UIButton *button = (UIButton *)view;
+            [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         }
     }
     
@@ -349,6 +353,11 @@ NSMutableArray *DelGroupArr;
             UITextField *textField = (UITextField *)view;
             textField.layer.borderColor=[UIColor colorWithRed:47.0/255.0 green:188.0/255.0 blue:118.0/255.0 alpha:1.0].CGColor;
             textField.layer.borderWidth=1.0;
+            textField.delegate=self;
+        }
+        if ([view isKindOfClass:[UIButton class]]) {
+            UIButton *button = (UIButton *)view;
+            [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         }
     }
     
@@ -357,7 +366,13 @@ NSMutableArray *DelGroupArr;
             UITextField *textField = (UITextField *)view;
             textField.layer.borderColor=[UIColor colorWithRed:47.0/255.0 green:188.0/255.0 blue:118.0/255.0 alpha:1.0].CGColor;
             textField.layer.borderWidth=1.0;
+            textField.delegate=self;
         }
+        if ([view isKindOfClass:[UIButton class]]) {
+            UIButton *button = (UIButton *)view;
+            [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        }
+
     }
     
     for (UIView *view in [_viewAddressDetailOffice subviews]) {
@@ -365,7 +380,13 @@ NSMutableArray *DelGroupArr;
             UITextField *textField = (UITextField *)view;
             textField.layer.borderColor=[UIColor colorWithRed:47.0/255.0 green:188.0/255.0 blue:118.0/255.0 alpha:1.0].CGColor;
             textField.layer.borderWidth=1.0;
+            textField.delegate=self;
         }
+        if ([view isKindOfClass:[UIButton class]]) {
+            UIButton *button = (UIButton *)view;
+            [button.titleLabel setTextColor:[UIColor blackColor]];
+        }
+
     }
     
     for (UIView *view in [_viewOccupationInfo subviews]) {
@@ -373,7 +394,13 @@ NSMutableArray *DelGroupArr;
             UITextField *textField = (UITextField *)view;
             textField.layer.borderColor=[UIColor colorWithRed:47.0/255.0 green:188.0/255.0 blue:118.0/255.0 alpha:1.0].CGColor;
             textField.layer.borderWidth=1.0;
+            textField.delegate=self;
         }
+        if ([view isKindOfClass:[UIButton class]]) {
+            UIButton *button = (UIButton *)view;
+            [button.titleLabel setTextColor:[UIColor blackColor]];
+        }
+
     }
     
     for (UIView *view in [_viewOtherInfo subviews]) {
@@ -381,15 +408,77 @@ NSMutableArray *DelGroupArr;
             UITextField *textField = (UITextField *)view;
             textField.layer.borderColor=[UIColor colorWithRed:47.0/255.0 green:188.0/255.0 blue:118.0/255.0 alpha:1.0].CGColor;
             textField.layer.borderWidth=1.0;
+            textField.delegate=self;
         }
         if ([view isKindOfClass:[UITextView class]]) {
             UITextView *textView = (UITextView *)view;
             textView.layer.borderColor=[UIColor colorWithRed:47.0/255.0 green:188.0/255.0 blue:118.0/255.0 alpha:1.0].CGColor;
             textView.layer.borderWidth=1.0;
+            textView.delegate=self;
+        }
+        if ([view isKindOfClass:[UIButton class]]) {
+            UIButton *button = (UIButton *)view;
+            [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         }
     }
-    
 }
+
+-(void)setButtonImageAndTextAlignment{
+    outletTitle.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    outletTitle.imageEdgeInsets = UIEdgeInsetsMake(0., outletTitle.frame.size.width - (24 + 10.0), 0., 0.);
+    outletTitle.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 0);
+    
+    outletDOB.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    outletDOB.imageEdgeInsets = UIEdgeInsetsMake(0., outletDOB.frame.size.width - (24 + 10.0), 0., 0.);
+    outletDOB.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 0);
+    
+    OtherIDType.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    OtherIDType.imageEdgeInsets = UIEdgeInsetsMake(0., outletDOB.frame.size.width - (24 + 10.0), 0., 0.);
+    OtherIDType.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 0);
+    
+    outletMaritalStatus.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    outletMaritalStatus.imageEdgeInsets = UIEdgeInsetsMake(0., outletDOB.frame.size.width - (24 + 10.0), 0., 0.);
+    outletMaritalStatus.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 0);
+    
+    outletNationality.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    outletNationality.imageEdgeInsets = UIEdgeInsetsMake(0., outletNationality.frame.size.width - (24 + 10.0), 0., 0.);
+    outletNationality.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 0);
+    
+    outletReligion.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    outletReligion.imageEdgeInsets = UIEdgeInsetsMake(0., outletReligion.frame.size.width - (24 + 10.0), 0., 0.);
+    outletReligion.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 0);
+    
+    outletReligion.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    outletReligion.imageEdgeInsets = UIEdgeInsetsMake(0., outletReligion.frame.size.width - (24 + 10.0), 0., 0.);
+    outletReligion.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 0);
+    
+    btnOfficeCountry.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    btnOfficeCountry.imageEdgeInsets = UIEdgeInsetsMake(0., btnOfficeCountry.frame.size.width - (24 + 10.0), 0., 0.);
+    btnOfficeCountry.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 0);
+    
+    btnHomeCountry.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    btnHomeCountry.imageEdgeInsets = UIEdgeInsetsMake(0., btnHomeCountry.frame.size.width - (24 + 10.0), 0., 0.);
+    btnHomeCountry.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 0);
+    
+    outletOccup.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    outletOccup.imageEdgeInsets = UIEdgeInsetsMake(0., outletOccup.frame.size.width - (24 + 10.0), 0., 0.);
+    outletOccup.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 0);
+    
+    BtnCountryOfBirth.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    BtnCountryOfBirth.imageEdgeInsets = UIEdgeInsetsMake(0., outletTitle.frame.size.width - (24 + 10.0), 0., 0.);
+    BtnCountryOfBirth.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 0);
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    activeField = textField;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    activeField = nil;
+}
+
 /*end of code added by faiz*/
 
 -(void)SaveToUserDefault {
@@ -1429,6 +1518,7 @@ NSMutableArray *DelGroupArr;
     
     _scrollViewEditProspect.contentSize = CGSizeMake(900, 2000);
     [self setTextfieldBorder];
+    [self setButtonImageAndTextAlignment];
     /*end of code added by faiz*/
 }
 
@@ -1721,6 +1811,7 @@ NSMutableArray *DelGroupArr;
     }
     
     if (!(pp.Religion == NULL || [pp.Religion isEqualToString:@"- SELECT -"] || [pp.Religion isEqualToString:@""])) {
+        NSLog(@"religion %@",pp.Religion);
         [outletReligion setTitle:[[NSString stringWithFormat:@"  "] stringByAppendingFormat:@"%@", pp.Religion]forState:UIControlStateNormal];
         outletReligion.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
@@ -2874,7 +2965,7 @@ NSMutableArray *DelGroupArr;
 	[ClientProfile setObject:@"YES" forKey:@"HasChanged"];
 }
 
--(void)keyboardDidShow:(NSNotificationCenter *)notification
+-(void)keyboardDidShow:(NSNotification *)notification
 {
     self.myScrollView.frame = CGRectMake(0, 0, 1024, 900);
     self.myScrollView.contentSize = CGSizeMake(900, 1400);
@@ -2939,12 +3030,37 @@ NSMutableArray *DelGroupArr;
     {
         [myScrollView setContentOffset:CGPointMake(0,500) animated:YES];
     }
+    
+    /*added by faiz*/
+    // Step 1: Get the size of the keyboard.
+    
+    NSDictionary *userInfo = [notification userInfo];
+    CGSize kbSize = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    // Step 2: Adjust the bottom content inset of your scroll view by the keyboard height.
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height+44, 0.0);
+    _scrollViewEditProspect.contentInset = contentInsets;
+    _scrollViewEditProspect.scrollIndicatorInsets = contentInsets;
+    
+    // Step 3: Scroll the target text field into view.
+    CGRect aRect = self.view.frame;
+    aRect.size.height -= kbSize.height;
+    if (!CGRectContainsPoint(aRect, activeField.frame.origin) ) {
+        CGPoint scrollPoint = CGPointMake(0.0, activeField.frame.origin.y - (kbSize.height-15));
+        [_scrollViewEditProspect setContentOffset:scrollPoint animated:YES];
+    }
+    /*end of added by faiz*/
+
 }
 
 -(void)keyboardDidHide:(NSNotificationCenter *)notification
 {
     self.myScrollView.frame = CGRectMake(0, 0, 1024, 900);
     self.myScrollView.contentSize = CGSizeMake(900, 1200);
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+    _scrollViewEditProspect.contentInset = contentInsets;
+    _scrollViewEditProspect.scrollIndicatorInsets = contentInsets;
 }
 
 -(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
@@ -4589,6 +4705,7 @@ NSMutableArray *DelGroupArr;
     }
     
     if (!(prospectprofile.Religion == NULL || [prospectprofile.Religion isEqualToString:@"- SELECT -"])) {
+        NSLog(@"religion %@",prospectprofile.Religion);
         [outletReligion setTitle:[[NSString stringWithFormat:@"  "] stringByAppendingFormat:@"%@", prospectprofile.Religion]forState:UIControlStateNormal];
         outletReligion.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
