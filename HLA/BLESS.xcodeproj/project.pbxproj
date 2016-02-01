@@ -1738,7 +1738,7 @@
 		C4E7C0D3172FC9CD00038FA9 /* AFXMLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFXMLRequestOperation.m; sourceTree = "<group>"; };
 		C4E7C0D4172FC9CD00038FA9 /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
 		C4E7C0D5172FC9CD00038FA9 /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
-		C4E9D1901612C64900016053 /* iMobile Planner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iMobile Planner.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C4E9D1901612C64900016053 /* BLESS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BLESS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4E9D1941612C64900016053 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C4E9D1961612C64900016053 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C4E9D1981612C64900016053 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -3535,7 +3535,7 @@
 		C4E9D1911612C64900016053 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C4E9D1901612C64900016053 /* iMobile Planner.app */,
+				C4E9D1901612C64900016053 /* BLESS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -4247,7 +4247,7 @@
 			);
 			name = BLESS;
 			productName = HLA;
-			productReference = C4E9D1901612C64900016053 /* iMobile Planner.app */;
+			productReference = C4E9D1901612C64900016053 /* BLESS.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
