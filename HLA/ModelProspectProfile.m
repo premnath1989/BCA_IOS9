@@ -90,7 +90,7 @@
         ProspectID = [NSString stringWithFormat:@"%i",ID];
         NickName = [s stringForColumn:@"PreferredName"];
         ProspectName = [s stringForColumn:@"ProspectName"];
-        ProspectDOB = [results stringForColumn:@"ProspectDOB"]; ;
+        ProspectDOB = [s stringForColumn:@"ProspectDOB"]; ;
         ProspectGender = [s stringForColumn:@"ProspectGender"];;
         ResidenceAddress1 = [s stringForColumn:@"ResidenceAddress1"];;
         ResidenceAddress2 = [s stringForColumn:@"ResidenceAddress2"];;

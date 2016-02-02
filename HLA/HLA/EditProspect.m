@@ -125,6 +125,7 @@ int name_repeat;
 @synthesize txtKcu;
 @synthesize txtReferralName;
 @synthesize outletReferralSource;
+@synthesize outletExpiryDate;
 @synthesize segReferralType;
 @synthesize txtNPWPNo;
 
@@ -507,6 +508,14 @@ NSMutableArray *DelGroupArr;
     BtnCountryOfBirth.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     BtnCountryOfBirth.imageEdgeInsets = UIEdgeInsetsMake(0., outletTitle.frame.size.width - (24 + 10.0), 0., 0.);
     BtnCountryOfBirth.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 0);
+    
+    outletExpiryDate.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    outletExpiryDate.imageEdgeInsets = UIEdgeInsetsMake(0., outletExpiryDate.frame.size.width - (24 + 10.0), 0., 0.);
+    outletExpiryDate.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 0);
+    
+    outletReferralSource.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    outletReferralSource.imageEdgeInsets = UIEdgeInsetsMake(0., outletReferralSource.frame.size.width - (24 + 10.0), 0., 0.);
+    outletReferralSource.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 0);
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
@@ -1942,6 +1951,7 @@ NSMutableArray *DelGroupArr;
 		else
 		{
 			segGender.enabled = YES;
+            NSLog(@"dob %@",pp.ProspectDOB);
 			[outletDOB setTitle:[[NSString stringWithFormat:@" "]stringByAppendingFormat:@"%@",pp.ProspectDOB] forState:UIControlStateNormal];
 			outletDOB.hidden = NO;
 		}
@@ -2699,6 +2709,7 @@ NSMutableArray *DelGroupArr;
 	}
     
     //added by faiz//
+    [outletExpiryDate setTitle:pp.IDExpirityDate forState:UIControlStateNormal];
     txtNip.text=pp.NIP;
     txtBranchCode.text=pp.BranchCode;
     txtBranchName.text=pp.BranchName;
@@ -3756,6 +3767,26 @@ NSMutableArray *DelGroupArr;
     butt.origin.y = y;
     [self.SIDatePopover presentPopoverFromRect:butt  inView:self.view permittedArrowDirections:UIPopoverArrowDirectionLeft animated:YES];
     
+}
+
+- (IBAction)btnExpiryDate:(id)sender
+{
+    [self resignFirstResponder];
+    [self.view endEditing:YES];
+    
+    if (_SIDate == Nil) {
+        UIStoryboard *clientProfileStoryboard = [UIStoryboard storyboardWithName:@"ClientProfileStoryboard" bundle:Nil];
+        self.SIDate = [clientProfileStoryboard instantiateViewControllerWithIdentifier:@"SIDate"];
+        _SIDate.delegate = self;
+        //_SIDate.ProspectDOB = pp.ProspectDOB;
+        self.SIDatePopover = [[UIPopoverController alloc] initWithContentViewController:_SIDate];
+    }
+    
+    [self.SIDatePopover setPopoverContentSize:CGSizeMake(300.0f, 255.0f)];
+    CGRect butt = [sender frame];
+    int y = butt.origin.y - 44;
+    butt.origin.y = y;
+    [self.SIDatePopover presentPopoverFromRect:butt  inView:self.view permittedArrowDirections:UIPopoverArrowDirectionLeft animated:YES];
 }
 
 - (IBAction)btnOccup:(id)sender

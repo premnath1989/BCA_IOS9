@@ -43,6 +43,7 @@
     BOOL OTHERID_Hold_Alert;
     BOOL isDOBDate;
 	BOOL isGSTDate;
+    BOOL isExpiryDate;
 
     NSString *annualIncome_original;
     
@@ -126,6 +127,7 @@
 @synthesize txtKcu;
 @synthesize txtReferralName;
 @synthesize outletReferralSource;
+@synthesize outletExpiryDate;
 @synthesize segReferralType;
 @synthesize txtNPWPNo;
 
@@ -345,6 +347,10 @@ bool RegDatehandling;
             textField.layer.borderWidth=1.0;
             textField.delegate=self;
             [textField setFont:font];
+            
+            UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
+            textField.leftView = paddingView;
+            textField.leftViewMode = UITextFieldViewModeAlways;
         }
     }
     
@@ -355,6 +361,10 @@ bool RegDatehandling;
             textField.layer.borderWidth=1.0;
             textField.delegate=self;
             [textField setFont:font];
+            
+            UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
+            textField.leftView = paddingView;
+            textField.leftViewMode = UITextFieldViewModeAlways;
         }
     }
     
@@ -365,6 +375,10 @@ bool RegDatehandling;
             textField.layer.borderWidth=1.0;
             textField.delegate=self;
             [textField setFont:font];
+            
+            UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
+            textField.leftView = paddingView;
+            textField.leftViewMode = UITextFieldViewModeAlways;
         }
     }
     
@@ -383,6 +397,10 @@ bool RegDatehandling;
             UITextField *textField = (UITextField *)view;
             textField.layer.borderColor=[UIColor colorWithRed:47.0/255.0 green:188.0/255.0 blue:118.0/255.0 alpha:1.0].CGColor;
             textField.layer.borderWidth=1.0;
+            
+            UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
+            textField.leftView = paddingView;
+            textField.leftViewMode = UITextFieldViewModeAlways;
         }
     }
     
@@ -393,6 +411,10 @@ bool RegDatehandling;
             textField.layer.borderWidth=1.0;
             textField.delegate=self;
             [textField setFont:font];
+            
+            UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
+            textField.leftView = paddingView;
+            textField.leftViewMode = UITextFieldViewModeAlways;
         }
         if ([view isKindOfClass:[UITextView class]]) {
             UITextView *textView = (UITextView *)view;
@@ -400,6 +422,8 @@ bool RegDatehandling;
             textView.layer.borderWidth=1.0;
             textView.delegate=self;
             [textView setFont:font];
+            
+            textView.textContainerInset = UIEdgeInsetsMake(0, 20, 0, 20);
         }
     }
     
@@ -408,47 +432,55 @@ bool RegDatehandling;
 -(void)setButtonImageAndTextAlignment{
     outletTitle.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     outletTitle.imageEdgeInsets = UIEdgeInsetsMake(0., outletTitle.frame.size.width - (24 + 10.0), 0., 0.);
-    outletTitle.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 0);
+    outletTitle.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 0);
 
     outletDOB.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     outletDOB.imageEdgeInsets = UIEdgeInsetsMake(0., outletDOB.frame.size.width - (24 + 10.0), 0., 0.);
-    outletDOB.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 0);
+    outletDOB.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 0);
     
     OtherIDType.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     OtherIDType.imageEdgeInsets = UIEdgeInsetsMake(0., outletDOB.frame.size.width - (24 + 10.0), 0., 0.);
-    OtherIDType.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 0);
+    OtherIDType.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 0);
     
     outletMaritalStatus.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     outletMaritalStatus.imageEdgeInsets = UIEdgeInsetsMake(0., outletDOB.frame.size.width - (24 + 10.0), 0., 0.);
-    outletMaritalStatus.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 0);
+    outletMaritalStatus.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 0);
 
     outletNationality.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     outletNationality.imageEdgeInsets = UIEdgeInsetsMake(0., outletNationality.frame.size.width - (24 + 10.0), 0., 0.);
-    outletNationality.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 0);
+    outletNationality.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 0);
 
     outletReligion.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     outletReligion.imageEdgeInsets = UIEdgeInsetsMake(0., outletReligion.frame.size.width - (24 + 10.0), 0., 0.);
-    outletReligion.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 0);
+    outletReligion.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 0);
     
     outletReligion.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     outletReligion.imageEdgeInsets = UIEdgeInsetsMake(0., outletReligion.frame.size.width - (24 + 10.0), 0., 0.);
-    outletReligion.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 0);
+    outletReligion.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 0);
     
     btnOfficeCountry.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     btnOfficeCountry.imageEdgeInsets = UIEdgeInsetsMake(0., btnOfficeCountry.frame.size.width - (24 + 10.0), 0., 0.);
-    btnOfficeCountry.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 0);
+    btnOfficeCountry.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 0);
     
     btnHomeCountry.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     btnHomeCountry.imageEdgeInsets = UIEdgeInsetsMake(0., btnHomeCountry.frame.size.width - (24 + 10.0), 0., 0.);
-    btnHomeCountry.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 0);
+    btnHomeCountry.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 0);
     
     outletOccup.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     outletOccup.imageEdgeInsets = UIEdgeInsetsMake(0., outletOccup.frame.size.width - (24 + 10.0), 0., 0.);
-    outletOccup.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 0);
+    outletOccup.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 0);
     
     btnCoutryOfBirth.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     btnCoutryOfBirth.imageEdgeInsets = UIEdgeInsetsMake(0., outletTitle.frame.size.width - (24 + 10.0), 0., 0.);
-    btnCoutryOfBirth.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 0);
+    btnCoutryOfBirth.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 0);
+
+    outletExpiryDate.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    outletExpiryDate.imageEdgeInsets = UIEdgeInsetsMake(0., outletExpiryDate.frame.size.width - (24 + 10.0), 0., 0.);
+    outletExpiryDate.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 0);
+    
+    outletReferralSource.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    outletReferralSource.imageEdgeInsets = UIEdgeInsetsMake(0., outletReferralSource.frame.size.width - (24 + 10.0), 0., 0.);
+    outletReferralSource.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 0);
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
@@ -814,7 +846,7 @@ bool RegDatehandling;
     [outletRace setTitle:@"- SELECT -" forState:UIControlStateNormal];
     outletRace.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     
-    [outletNationality setTitle:@" MALAYSIAN" forState:UIControlStateNormal];
+    [outletNationality setTitle:@" INDONESIAN" forState:UIControlStateNormal];
     outletNationality.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
 
     [outletReligion setTitle:@"- SELECT -" forState:UIControlStateNormal];
@@ -1672,6 +1704,7 @@ bool RegDatehandling;
 	
     isDOBDate = YES;
 	isGSTDate = NO;
+    isExpiryDate = NO;
 
 	NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
 	[ClientProfile setObject:@"YES" forKey:@"isNew"];
@@ -1705,6 +1738,28 @@ bool RegDatehandling;
     dateFormatter = Nil;
     dateString = Nil;
     
+}
+
+- (IBAction)btnExpiryDate:(id)sender
+{
+    [self resignFirstResponder];
+    [self.view endEditing:YES];
+    
+    isDOBDate = NO;
+    isGSTDate = NO;
+    isExpiryDate = YES;
+    
+    NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
+    [ClientProfile setObject:@"YES" forKey:@"isNew"];
+    
+    if (_SIDate == Nil) {
+        self.SIDate = [self.storyboard instantiateViewControllerWithIdentifier:@"SIDate"];
+        _SIDate.delegate = self;
+        self.SIDatePopover = [[UIPopoverController alloc] initWithContentViewController:_SIDate];
+    }
+    
+    [self.SIDatePopover setPopoverContentSize:CGSizeMake(300.0f, 255.0f)];
+    [self.SIDatePopover presentPopoverFromRect:[sender bounds]  inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:NO];
 }
 
 - (IBAction)btnOccup:(id)sender
@@ -1905,6 +1960,7 @@ bool RegDatehandling;
     
     _OccupationList = Nil;
     NSString *strDOB = @"";
+    NSString *strExpiryDate = @"";
     NSString *othertype = @"";
     NSString *marital  = @"";
     NSString *race = @"";
@@ -1952,6 +2008,8 @@ bool RegDatehandling;
             } else {
                 strDOB = outletDOB.titleLabel.text;
             }
+            
+            strExpiryDate = outletExpiryDate.titleLabel.text;
             
             if(gender == nil || gender==NULL || segGender.selectedSegmentIndex == -1) {
 				gender = @"";
@@ -2098,7 +2156,7 @@ bool RegDatehandling;
                 insertSQL = [NSString stringWithFormat:
                              @"INSERT INTO prospect_profile(\'ProspectName\', \"ProspectDOB\", \"GST_registered\", \"GST_registrationNo\", \"GST_registrationDate\", \"GST_exempted\",\"ProspectGender\", \"ResidenceAddress1\", \"ResidenceAddress2\", \"ResidenceAddress3\", \"ResidenceAddressTown\", \"ResidenceAddressState\",\"ResidenceAddressPostCode\", \"ResidenceAddressCountry\", \"OfficeAddress1\", \"OfficeAddress2\", \"OfficeAddress3\",\"OfficeAddressTown\", \"OfficeAddressState\", \"OfficeAddressPostCode\", \"OfficeAddressCountry\", \"ProspectEmail\",\"ProspectOccupationCode\", \"ExactDuties\", \"ProspectRemark\", \"DateCreated\", \"CreatedBy\", \"DateModified\",\"ModifiedBy\", \"ProspectGroup\", \"ProspectTitle\", \"IDTypeNo\", \"OtherIDType\", \"OtherIDTypeNo\", \"Smoker\", \"AnnualIncome\", \"BussinessType\", \"Race\", \"MaritalStatus\", \"Religion\", \"Nationality\", \"QQFlag\",\"ProspectProfileChangesCounter\",\"prospect_IsGrouping\", \"CountryOfBirth\", \"NIP\", \"BranchCode\", \"BranchName\", \"KCU\", \"ReferralSource\", \"ReferralName\", \"IdentitySubmitted\", \"IDExpirityDate\", \"NPWPNo\") "
                              "VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\",\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", %@, \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%s\",\"%@\",\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", txtFullName.text, strDOB, GSTRigperson, txtRigNO.text, Rigdateoutlet,GSTRigExempted,gender, txtHomeAddr1.text, txtHomeAddr2.text, txtHomeAddr3.text, txtHomeTown.text, SelectedStateCode, txtHomePostCode.text, HomeCountry, txtOfficeAddr1.text, txtOfficeAddr2.text, txtOfficeAddr3.text, txtOfficeTown.text, SelectedOfficeStateCode, txtOfficePostcode.text, OffCountry, txtEmail.text, OccupCodeSelected, txtExactDuties.text, txtRemark.text,
-                             @"datetime(\"now\", \"+8 hour\")", @"1", @"", @"1", group, TitleCodeSelected , txtIDType.text, othertype, txtOtherIDType.text, ClientSmoker, txtAnnIncome.text, txtBussinessType.text,race,marital,religion,nation,"false",@"1", isGrouping, CountryOfBirth, txtNip.text, txtBranchCode.text, txtBranchName.text, txtKcu.text, outletReferralSource.titleLabel.text, txtReferralName.text, @"", @"", txtNPWPNo.text];
+                             @"datetime(\"now\", \"+8 hour\")", @"1", @"", @"1", group, TitleCodeSelected , txtIDType.text, othertype, txtOtherIDType.text, ClientSmoker, txtAnnIncome.text, txtBussinessType.text,race,marital,religion,nation,"false",@"1", isGrouping, CountryOfBirth, txtNip.text, txtBranchCode.text, txtBranchName.text, txtKcu.text, outletReferralSource.titleLabel.text, txtReferralName.text, @"", strExpiryDate, txtNPWPNo.text];
                 
             }
 			
@@ -2386,6 +2444,7 @@ bool RegDatehandling;
     
 	isDOBDate = NO;
 	isGSTDate = YES;
+    isExpiryDate = NO;
 	
     NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
 	[ClientProfile setObject:@"YES" forKey:@"isNew"];
@@ -6959,7 +7018,11 @@ bool RegDatehandling;
     if (isDOBDate) {
 		[outletDOB setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", strDate] forState:UIControlStateNormal];
 	}
-    
+
+    if (isExpiryDate) {
+        [outletExpiryDate setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", strDate] forState:UIControlStateNormal];
+    }
+
     if([otherIDType_trim isEqualToString:@"EXPECTED DELIVERY DATE"] && [dateString isEqualToString:strDate]) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
                                                         message:@"Expected Delivery Date must be future date." delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil];

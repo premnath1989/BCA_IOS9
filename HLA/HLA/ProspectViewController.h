@@ -182,6 +182,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtKcu;
 @property (weak, nonatomic) IBOutlet UITextField *txtReferralName;
 @property (weak, nonatomic) IBOutlet UIButton *outletReferralSource;
+@property (weak, nonatomic) IBOutlet UIButton *outletExpiryDate;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *segReferralType;
 @property (weak, nonatomic) IBOutlet UITextField *txtNPWPNo;
 /*end of added by faiz*/
@@ -210,7 +211,7 @@
 - (IBAction)isForeign:(id)sender;
 - (IBAction)ActionRigperson:(id)sender;
 - (IBAction)ActionExempted:(id)sender;
-
+- (IBAction)btnExpiryDate:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *btnCoutryOfBirth;
 - (IBAction)actionCountryOfBirth:(id)sender;
 
