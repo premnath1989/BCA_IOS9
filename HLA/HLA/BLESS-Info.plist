@@ -59,6 +59,33 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>BPreplay.otf</string>
+		<string>BPreplayBold.otf</string>
+		<string>BPreplayBoldItalics.otf</string>
+		<string>BPreplayItalics.otf</string>
+		<string>HelveticaInseratLTStd-Roman.otf</string>
+		<string>HelveticaLTStd-Blk.otf</string>
+		<string>HelveticaLTStd-BlkCond.otf</string>
+		<string>HelveticaLTStd-BlkCondObl.otf</string>
+		<string>HelveticaLTStd-BlkObl.otf</string>
+		<string>HelveticaLTStd-Bold.otf</string>
+		<string>HelveticaLTStd-BoldCond.otf</string>
+		<string>HelveticaLTStd-BoldCondObl.otf</string>
+		<string>HelveticaLTStd-BoldObl.otf</string>
+		<string>HelveticaLTStd-Comp.otf</string>
+		<string>HelveticaLTStd-Cond.otf</string>
+		<string>HelveticaLTStd-CondObl.otf</string>
+		<string>HelveticaLTStd-ExtraComp.otf</string>
+		<string>HelveticaLTStd-Light.otf</string>
+		<string>HelveticaLTStd-LightCond.otf</string>
+		<string>HelveticaLTStd-LightCondObl.otf</string>
+		<string>HelveticaLTStd-LightObl.otf</string>
+		<string>HelveticaLTStd-Obl.otf</string>
+		<string>HelveticaLTStd-Roman.otf</string>
+		<string>HelveticaLTStd-UltraComp.otf</string>
+	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationLandscapeRight</string>

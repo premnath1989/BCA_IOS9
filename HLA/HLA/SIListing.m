@@ -60,6 +60,8 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
 {
     [super viewDidLoad];
     
+    [NoIlustrasi setFont:[UIFont fontWithName:@"HelveticaLTStd-UltraComp" size:25]];
+    
 	AppDelegate *appDel= (AppDelegate*)[[UIApplication sharedApplication] delegate ];
 	appDel.MhiMessage = Nil;
 	appDel = Nil;

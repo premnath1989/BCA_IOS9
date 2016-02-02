@@ -26,6 +26,8 @@
     
     NSString *DBDateFrom2;
     NSString *DBDateTo2;
+    
+    IBOutlet UILabel *NoIlustrasi;
 }
 
 @property (nonatomic, strong) NDHTMLtoPDF *PDFCreator;
