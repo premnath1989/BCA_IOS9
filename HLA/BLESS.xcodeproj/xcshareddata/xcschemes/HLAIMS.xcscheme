@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "C4E9D18F1612C64900016053"
-               BuildableName = "iMobile Planner.app"
+               BuildableName = "BLESS.app"
                BlueprintName = "BLESS"
                ReferencedContainer = "container:BLESS.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C4E9D18F1612C64900016053"
-            BuildableName = "iMobile Planner.app"
+            BuildableName = "BLESS.app"
             BlueprintName = "BLESS"
             ReferencedContainer = "container:BLESS.xcodeproj">
          </BuildableReference>
@@ -56,7 +56,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C4E9D18F1612C64900016053"
-            BuildableName = "iMobile Planner.app"
+            BuildableName = "BLESS.app"
             BlueprintName = "BLESS"
             ReferencedContainer = "container:BLESS.xcodeproj">
          </BuildableReference>
@@ -75,7 +75,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C4E9D18F1612C64900016053"
-            BuildableName = "iMobile Planner.app"
+            BuildableName = "BLESS.app"
             BlueprintName = "BLESS"
             ReferencedContainer = "container:BLESS.xcodeproj">
          </BuildableReference>

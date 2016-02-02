@@ -14,4 +14,5 @@
     FMResultSet *results;
 }
 -(NSMutableArray *)getProspectProfile;
+-(NSMutableArray *)getDataMobileAndPrefix:(NSString *)DataToReturn ProspectTableData:(NSMutableArray *)prospectTableData;
 @end

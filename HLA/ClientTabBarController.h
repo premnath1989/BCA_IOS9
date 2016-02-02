@@ -37,6 +37,7 @@
 @property (nonatomic, readwrite, assign) UIViewController *selectedViewController;
 @property (nonatomic, readwrite, assign) NSUInteger selectedIndex;
 @property (nonatomic, readwrite, assign) CGFloat tabBarWidth;
+@property (nonatomic, readwrite, assign) UIColor *tabBarColor;
 
 @property (nonatomic, readwrite, assign) id<EditProspectDelegate> delegateEdit;
 @property (nonatomic, retain) EditProspect *EditProspect;

@@ -26,9 +26,9 @@
 
 #define DEFAULT_TAB_BAR_HEIGHT 60.0
 
-
 @interface ClientTabBarController ()
 - (void)_performInitialization;
+
 @end
 
 int rrr;
@@ -42,6 +42,7 @@ int rrr;
 @synthesize selectedIndex = _selectedIndex;
 @synthesize tabBarWidth = _tabBarWidth;
 @synthesize EditProspect = _EditProspect;
+
 
 - (ClientTabBar *)tabBar
 {
@@ -184,6 +185,7 @@ int rrr;
 {
     self.tabBarWidth = DEFAULT_TAB_BAR_HEIGHT;
     self.selectedIndex = INT_MAX;
+    _tabBarColor = [UIColor colorWithRed:35.0/255.0 green:148.0/255.0 blue:167.0/255.0 alpha:1.0];
 }
 
 #pragma mark -
@@ -215,8 +217,11 @@ int rrr;
     
     // create tab bar
     self.tabBar.frame = CGRectMake(0, 20, self.tabBarWidth, layoutContainerView.bounds.size.height);
-    
     [layoutContainerView addSubview:self.tabBar];
+    
+    //[self.tabBar setBackgroundColor:_tabBarColor];
+    [layoutContainerView setBackgroundColor:[UIColor blackColor]];
+
     
     // return a ready view
     self.view = layoutContainerView;

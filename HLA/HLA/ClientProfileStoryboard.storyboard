@@ -1680,7 +1680,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0uH-Zh-sIx">
                                                 <rect key="frame" x="199" y="180" width="253" height="24"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
-                                                <state key="normal" image="Expand Arrow.png"/>
+                                                <state key="normal" title="Test Referral" image="Expand Arrow.png">
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2669,16 +2671,20 @@
                         <outlet property="outletNationality" destination="hG9-5N-gFn" id="imq-cS-Slx"/>
                         <outlet property="outletOccup" destination="Ldo-tn-n7b" id="pfF-i6-gcB"/>
                         <outlet property="outletRace" destination="YSy-bc-Wo7" id="rBq-dB-PHM"/>
+                        <outlet property="outletReferralSource" destination="0uH-Zh-sIx" id="n5t-Rz-oMj"/>
                         <outlet property="outletReligion" destination="4vW-mP-hEB" id="Jdc-hU-xXH"/>
                         <outlet property="outletRigDate" destination="QX1-39-YaJ" id="V5a-dl-QaG"/>
                         <outlet property="outletTitle" destination="HDb-Hr-36n" id="GiH-ur-gMV"/>
                         <outlet property="scrollViewNewProspect" destination="I9H-aK-o5q" id="kwS-E7-1NQ"/>
                         <outlet property="segGender" destination="zwE-hk-Aj8" id="OhK-O7-FNP"/>
                         <outlet property="segIsGrouping" destination="ZP0-UE-RtY" id="gWN-8y-MDS"/>
+                        <outlet property="segReferralType" destination="bGb-Ky-lb6" id="98u-Mz-zq8"/>
                         <outlet property="segRigExempted" destination="C4a-a3-jAw" id="CV9-Os-3vu"/>
                         <outlet property="segRigPerson" destination="KaM-9t-JXB" id="vh9-AL-Tth"/>
                         <outlet property="segSmoker" destination="uaa-CI-w8n" id="Ata-ET-RZe"/>
                         <outlet property="txtAnnIncome" destination="i8Z-ww-A06" id="sxh-NO-2x5"/>
+                        <outlet property="txtBranchCode" destination="KHo-eU-3lq" id="IGD-Xj-Ard"/>
+                        <outlet property="txtBranchName" destination="od6-4a-sHd" id="5Vi-1F-X9M"/>
                         <outlet property="txtBussinessType" destination="wQZ-PB-7Hf" id="0ka-KI-q4W"/>
                         <outlet property="txtClass" destination="kWk-mO-q5b" id="jHg-7l-w0D"/>
                         <outlet property="txtContact1" destination="6lU-Ol-Lpj" id="lUb-a9-U9c"/>
@@ -2690,16 +2696,20 @@
                         <outlet property="txtExactDuties" destination="ZoM-2T-06Q" id="Mjd-ch-oen"/>
                         <outlet property="txtFullName" destination="WPM-GB-eGj" id="VbZ-91-UQ6"/>
                         <outlet property="txtHomeAddr1" destination="4tK-Ke-iFN" id="TjA-K8-sNE"/>
-                        <outlet property="txtHomeAddr2" destination="HIe-9Y-Nw7" id="ttr-RM-e2g"/>
-                        <outlet property="txtHomeAddr3" destination="aa7-Gc-6kW" id="mkW-dB-3hv"/>
+                        <outlet property="txtHomeAddr2" destination="HFg-5F-ISe" id="YvP-wq-MVg"/>
+                        <outlet property="txtHomeAddr3" destination="FY3-Gs-XoV" id="GQK-wu-PC8"/>
                         <outlet property="txtHomeCountry" destination="eGO-VU-P0G" id="Mym-03-9Ip"/>
                         <outlet property="txtHomePostCode" destination="ERl-Cx-6sg" id="mRz-RL-DJs"/>
                         <outlet property="txtHomeState" destination="bjt-Wm-kCd" id="ejY-2W-P7N"/>
                         <outlet property="txtHomeTown" destination="4rm-vO-bmV" id="f06-md-3pq"/>
                         <outlet property="txtIDType" destination="BC5-LC-JTD" id="Gh1-Pc-AAe"/>
+                        <outlet property="txtKanwil" destination="7NA-wK-T5p" id="Oqu-CC-p6j"/>
+                        <outlet property="txtKcu" destination="lo6-vQ-BZv" id="5zX-Xv-qaQ"/>
+                        <outlet property="txtNPWPNo" destination="bzh-ks-zOR" id="89C-Lh-Eg9"/>
+                        <outlet property="txtNip" destination="xXP-ce-119" id="eQX-80-Ays"/>
                         <outlet property="txtOfficeAddr1" destination="mHL-FU-Db5" id="QiN-ps-R4E"/>
-                        <outlet property="txtOfficeAddr2" destination="jdY-dO-zjk" id="vPJ-PJ-h9f"/>
-                        <outlet property="txtOfficeAddr3" destination="jPG-VH-9Sw" id="8KW-lv-ly4"/>
+                        <outlet property="txtOfficeAddr2" destination="HIe-9Y-Nw7" id="WDo-VW-IvN"/>
+                        <outlet property="txtOfficeAddr3" destination="aa7-Gc-6kW" id="TQa-Bk-llK"/>
                         <outlet property="txtOfficeCountry" destination="WhB-43-2eh" id="opY-Nf-SbV"/>
                         <outlet property="txtOfficePostcode" destination="BoA-2M-X8H" id="96Q-di-0MT"/>
                         <outlet property="txtOfficeState" destination="wbf-hm-DcS" id="RYs-N8-T7C"/>
@@ -2708,6 +2718,7 @@
                         <outlet property="txtPrefix2" destination="eOm-CH-OHN" id="Pmc-H8-z3k"/>
                         <outlet property="txtPrefix3" destination="NRo-0z-Ht2" id="gMC-o3-r50"/>
                         <outlet property="txtPrefix4" destination="ZyW-qv-ns1" id="gDL-ng-cXO"/>
+                        <outlet property="txtReferralName" destination="P7v-tM-Ack" id="RMg-ud-7JQ"/>
                         <outlet property="txtRemark" destination="rxm-lz-ylO" id="3D1-4g-7bQ"/>
                         <outlet property="txtRigDate" destination="coS-tp-sUn" id="c1i-XD-g8A"/>
                         <outlet property="txtRigNO" destination="d2D-N0-NGC" id="vXq-ZU-sW1"/>

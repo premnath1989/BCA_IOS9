@@ -63,6 +63,16 @@
     NSString *isGrouping = @"";
     NSString *COB = @"";
     
+    NSString* NIP;
+    NSString* BranchCode;
+    NSString* BranchName;
+    NSString* KCU;
+    NSString* ReferralSource;
+    NSString* ReferralName;
+    NSString* IdentitySubmitted;
+    NSString* IDExpirityDate;
+    NSString* NPWPNo;
+    
     //NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     //NSString *docsPath = [paths objectAtIndex:0];
     //NSString *path = [docsPath stringByAppendingPathComponent:@"hladb.sqlite"];
@@ -76,59 +86,70 @@
     FMResultSet *s = [database executeQuery:@"SELECT * FROM prospect_profile WHERE QQFlag = 'false'  order by LOWER(ProspectName) ASC LIMIT 20"];
     while ([s next]) {
         //occpToEnableSection = [results stringForColumn:@"OccpCode"];
-        ProspectID = [NSString stringWithFormat:@"%i",[results intForColumn:@"IndexNo"]];
-        NSLog(@"ProspectID %@",ProspectID);
-        NickName = [results stringForColumn:@"PreferredName"];;
-        ProspectName = [results stringForColumn:@"ProspectName"];;
+        int ID = [s intForColumn:@"IndexNo"];
+        ProspectID = [NSString stringWithFormat:@"%i",ID];
+        NickName = [s stringForColumn:@"PreferredName"];
+        ProspectName = [s stringForColumn:@"ProspectName"];
         ProspectDOB = [results stringForColumn:@"ProspectDOB"]; ;
-        ProspectGender = [results stringForColumn:@"ProspectGender"];;
-        ResidenceAddress1 = [results stringForColumn:@"ResidenceAddress1"];;
-        ResidenceAddress2 = [results stringForColumn:@"ResidenceAddress2"];;
-        ResidenceAddress3 = [results stringForColumn:@"ResidenceAddress3"];;
-        ResidenceAddressTown = [results stringForColumn:@"ResidenceAddressTown"];;
-        ResidenceAddressState = [results stringForColumn:@"ResidenceAddressState"];;
-        ResidenceAddressPostCode = [results stringForColumn:@"ResidenceAddressPostCode"];;
-        ResidenceAddressCountry = [results stringForColumn:@"ResidenceAddressCountry"];;
-        OfficeAddress1 = [results stringForColumn:@"OfficeAddress1"];;
-        OfficeAddress2 = [results stringForColumn:@"OfficeAddress2"];;
-        OfficeAddress3 = [results stringForColumn:@"OfficeAddress3"];;
-        OfficeAddressTown = [results stringForColumn:@"OfficeAddressTown"];;
-        OfficeAddressState = [results stringForColumn:@"OfficeAddressState"];;
-        OfficeAddressPostCode = [results stringForColumn:@"OfficeAddressPostCode"];;
-        OfficeAddressCountry = [results stringForColumn:@"OfficeAddressCountry"];;
-        ProspectEmail = [results stringForColumn:@"ProspectEmail"];;
-        ProspectOccupationCode = [results stringForColumn:@"ProspectOccupationCode"];;
-        ExactDuties = [results stringForColumn:@"ExactDuties"];;
-        ProspectRemark = [results stringForColumn:@"ProspectRemark"];;
+        ProspectGender = [s stringForColumn:@"ProspectGender"];;
+        ResidenceAddress1 = [s stringForColumn:@"ResidenceAddress1"];;
+        ResidenceAddress2 = [s stringForColumn:@"ResidenceAddress2"];;
+        ResidenceAddress3 = [s stringForColumn:@"ResidenceAddress3"];;
+        ResidenceAddressTown = [s stringForColumn:@"ResidenceAddressTown"];;
+        ResidenceAddressState = [s stringForColumn:@"ResidenceAddressState"];;
+        ResidenceAddressPostCode = [s stringForColumn:@"ResidenceAddressPostCode"];;
+        ResidenceAddressCountry = [s stringForColumn:@"ResidenceAddressCountry"];;
+        OfficeAddress1 = [s stringForColumn:@"OfficeAddress1"];;
+        OfficeAddress2 = [s stringForColumn:@"OfficeAddress2"];;
+        OfficeAddress3 = [s stringForColumn:@"OfficeAddress3"];;
+        OfficeAddressTown = [s stringForColumn:@"OfficeAddressTown"];;
+        OfficeAddressState = [s stringForColumn:@"OfficeAddressState"];;
+        OfficeAddressPostCode = [s stringForColumn:@"OfficeAddressPostCode"];;
+        OfficeAddressCountry = [s stringForColumn:@"OfficeAddressCountry"];;
+        ProspectEmail = [s stringForColumn:@"ProspectEmail"];;
+        ProspectOccupationCode = [s stringForColumn:@"ProspectOccupationCode"];;
+        ExactDuties = [s stringForColumn:@"ExactDuties"];;
+        ProspectRemark = [s stringForColumn:@"ProspectRemark"];;
         //basvi added
-        DateCreated = [results stringForColumn:@"DateCreated"];;
-        CreatedBy = [results stringForColumn:@"CreatedBy"];;
-        DateModified = [results stringForColumn:@"DateModified"];;
-        ModifiedBy = [results stringForColumn:@"ModifiedBy"];;
+        DateCreated = [s stringForColumn:@"DateCreated"];;
+        CreatedBy = [s stringForColumn:@"CreatedBy"];;
+        DateModified = [s stringForColumn:@"DateModified"];;
+        ModifiedBy = [s stringForColumn:@"ModifiedBy"];;
         //
-        ProspectGroup = [results stringForColumn:@"ProspectGroup"];;
-        ProspectTitle = [results stringForColumn:@"ProspectTitle"];;
-        IDTypeNo = [results stringForColumn:@"IDTypeNo"];;
-        OtherIDType = [results stringForColumn:@"OtherIDType"];;
-        OtherIDTypeNo = [results stringForColumn:@"OtherIDTypeNo"];;
-        Smoker = [results stringForColumn:@"Smoker"];;
+        ProspectGroup = [s stringForColumn:@"ProspectGroup"];;
+        ProspectTitle = [s stringForColumn:@"ProspectTitle"];;
+        IDTypeNo = [s stringForColumn:@"IDTypeNo"];;
+        OtherIDType = [s stringForColumn:@"OtherIDType"];;
+        OtherIDTypeNo = [s stringForColumn:@"OtherIDTypeNo"];;
+        Smoker = [s stringForColumn:@"Smoker"];;
         
-        Race = [results stringForColumn:@"Race"];;
+        Race = [s stringForColumn:@"Race"];;
         
-        Nationality = [results stringForColumn:@"Nationality"];;
-        MaritalStatus = [results stringForColumn:@"MaritalStatus"];;
-        Religion = [results stringForColumn:@"Religion"];;
+        Nationality = [s stringForColumn:@"Nationality"];;
+        MaritalStatus = [s stringForColumn:@"MaritalStatus"];;
+        Religion = [s stringForColumn:@"Religion"];;
         
-        AnnIncome = [results stringForColumn:@"AnnualIncome"];;
-        BussinessType = [results stringForColumn:@"BussinessType"];;
+        AnnIncome = [s stringForColumn:@"AnnualIncome"];;
+        BussinessType = [s stringForColumn:@"BussinessType"];;
         
-        registration = [results stringForColumn:@"GST_registered"];;
-        registrationNo = [results stringForColumn:@"GST_registrationNo"];;
-        registrationDate = [results stringForColumn:@"GST_registrationDate"];;
-        exempted = [results stringForColumn:@"GST_exempted"];
+        registration = [s stringForColumn:@"GST_registered"];;
+        registrationNo = [s stringForColumn:@"GST_registrationNo"];;
+        registrationDate = [s stringForColumn:@"GST_registrationDate"];;
+        exempted = [s stringForColumn:@"GST_exempted"];
         
-        isGrouping = [results stringForColumn:@"Prospect_IsGrouping"];
-        COB = [results stringForColumn:@"CountryOfBirth"];
+        isGrouping = [s stringForColumn:@"Prospect_IsGrouping"];
+        COB = [s stringForColumn:@"CountryOfBirth"];
+        
+        NIP = [s stringForColumn:@"NIP"];
+        BranchCode = [s stringForColumn:@"BranchCode"];
+        BranchName = [s stringForColumn:@"BranchName"];
+        KCU = [s stringForColumn:@"KCU"];
+        ReferralSource = [s stringForColumn:@"ReferralSource"];
+        ReferralName = [s stringForColumn:@"ReferralName"];
+        IdentitySubmitted = [s stringForColumn:@"IdentitySubmitted"];
+        IDExpirityDate = [s stringForColumn:@"IDExpirityDate"];
+        NPWPNo = [s stringForColumn:@"NPWPNo"];
+
         
         [ProspectTableData addObject:[[ProspectProfile alloc] initWithName:NickName AndProspectID:ProspectID AndProspectName:ProspectName
                                                           AndProspecGender:ProspectGender AndResidenceAddress1:ResidenceAddress1
@@ -139,10 +160,41 @@
                                                      AndOfficeAddressState:OfficeAddressState AndOfficeAddressPostCode:OfficeAddressPostCode
                                                    AndOfficeAddressCountry:OfficeAddressCountry AndProspectEmail:ProspectEmail AndProspectRemark:ProspectRemark AndDateCreated:DateCreated AndDateModified:DateModified AndCreatedBy:CreatedBy AndModifiedBy:ModifiedBy
                                                  AndProspectOccupationCode:ProspectOccupationCode AndProspectDOB:ProspectDOB
-                                                            AndExactDuties:ExactDuties AndGroup:ProspectGroup AndTitle:ProspectTitle AndIDTypeNo:IDTypeNo AndOtherIDType:OtherIDType AndOtherIDTypeNo:OtherIDTypeNo AndSmoker:Smoker AndAnnIncome:AnnIncome AndBussType:BussinessType AndRace:Race AndMaritalStatus:MaritalStatus AndReligion:Religion AndNationality:Nationality AndRegistrationNo:registrationNo AndRegistration:registration AndRegistrationDate:registrationDate AndRegistrationExempted:exempted AndProspect_IsGrouping:isGrouping AndCountryOfBirth:COB]];
+                                                            AndExactDuties:ExactDuties AndGroup:ProspectGroup AndTitle:ProspectTitle AndIDTypeNo:IDTypeNo AndOtherIDType:OtherIDType AndOtherIDTypeNo:OtherIDTypeNo AndSmoker:Smoker AndAnnIncome:AnnIncome AndBussType:BussinessType AndRace:Race AndMaritalStatus:MaritalStatus AndReligion:Religion AndNationality:Nationality AndRegistrationNo:registrationNo AndRegistration:registration AndRegistrationDate:registrationDate AndRegistrationExempted:exempted AndProspect_IsGrouping:isGrouping AndCountryOfBirth:COB AndNIP:NIP AndBranchCode:BranchCode AndBranchName:BranchName AndKCU:KCU AndReferralSource:ReferralSource AndReferralName:ReferralName AndIdentitySubmitted:IdentitySubmitted AndIDExpirityDate:IDExpirityDate AndNPWPNo:NPWPNo]];
     }
     [results close];
     [database close];
     return ProspectTableData;
 }
+
+-(NSMutableArray *)getDataMobileAndPrefix:(NSString *)DataToReturn ProspectTableData:(NSMutableArray *)prospectTableData
+{
+    NSMutableArray* dataMobile = [[NSMutableArray alloc] init];
+    NSMutableArray* dataPrefix = [[NSMutableArray alloc] init];
+    
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    for (int a=0; a<prospectTableData.count; a++) {
+        ProspectProfile *pp = [prospectTableData objectAtIndex:a];
+        NSString *querySQL = [NSString stringWithFormat:@"SELECT ContactCode, ContactNo, Prefix FROM contact_input where indexNo = %@ AND ContactCode = 'CONT008'", pp.ProspectID];
+         FMResultSet *s = [database executeQuery:querySQL];
+        while ([s next]) {
+            [dataMobile addObject: [NSNumber numberWithInt: [results intForColumn:@"ContactNo"]]];
+            [dataPrefix addObject:[NSNumber numberWithInt: [results intForColumn:@"Prefix"]]];
+        }
+        [results close];
+        [database close];
+    }
+    if ([DataToReturn isEqualToString:@"Prefix"]){
+        return dataPrefix;
+    }
+    else if ([DataToReturn isEqualToString:@"ContactNo"]){
+        return dataMobile;
+    }
+    return dataPrefix;
+}
+
 @end

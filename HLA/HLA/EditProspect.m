@@ -118,7 +118,15 @@ int name_repeat;
 @synthesize AddGroup, ViewGroup, SegIsGrouping;
 @synthesize UDGroup, ProsGroupArr, ProsGroupStr, isGrouping;
 @synthesize BtnCountryOfBirth;
-
+@synthesize txtNip;
+@synthesize txtBranchCode;
+@synthesize txtBranchName;
+@synthesize txtKanwil;
+@synthesize txtKcu;
+@synthesize txtReferralName;
+@synthesize outletReferralSource;
+@synthesize segReferralType;
+@synthesize txtNPWPNo;
 
 bool IsContinue = TRUE;
 bool HomePostcodeContinue;
@@ -335,12 +343,19 @@ NSMutableArray *DelGroupArr;
 
 /*code added by faiz*/
 -(void)setTextfieldBorder{
+    
+    UIFont *font= [UIFont fontWithName:@"TreBuchet MS" size:16.0f];
     for (UIView *view in [_viewPersonalInfo subviews]) {
         if ([view isKindOfClass:[UITextField class]]) {
             UITextField *textField = (UITextField *)view;
             textField.layer.borderColor=[UIColor colorWithRed:47.0/255.0 green:188.0/255.0 blue:118.0/255.0 alpha:1.0].CGColor;
             textField.layer.borderWidth=1.0;
             textField.delegate=self;
+            [textField setFont:font];
+            
+            UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
+            textField.leftView = paddingView;
+            textField.leftViewMode = UITextFieldViewModeAlways;
         }
         if ([view isKindOfClass:[UIButton class]]) {
             UIButton *button = (UIButton *)view;
@@ -354,6 +369,10 @@ NSMutableArray *DelGroupArr;
             textField.layer.borderColor=[UIColor colorWithRed:47.0/255.0 green:188.0/255.0 blue:118.0/255.0 alpha:1.0].CGColor;
             textField.layer.borderWidth=1.0;
             textField.delegate=self;
+            
+            UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
+            textField.leftView = paddingView;
+            textField.leftViewMode = UITextFieldViewModeAlways;
         }
         if ([view isKindOfClass:[UIButton class]]) {
             UIButton *button = (UIButton *)view;
@@ -367,6 +386,11 @@ NSMutableArray *DelGroupArr;
             textField.layer.borderColor=[UIColor colorWithRed:47.0/255.0 green:188.0/255.0 blue:118.0/255.0 alpha:1.0].CGColor;
             textField.layer.borderWidth=1.0;
             textField.delegate=self;
+            [textField setFont:font];
+            
+            UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
+            textField.leftView = paddingView;
+            textField.leftViewMode = UITextFieldViewModeAlways;
         }
         if ([view isKindOfClass:[UIButton class]]) {
             UIButton *button = (UIButton *)view;
@@ -381,6 +405,11 @@ NSMutableArray *DelGroupArr;
             textField.layer.borderColor=[UIColor colorWithRed:47.0/255.0 green:188.0/255.0 blue:118.0/255.0 alpha:1.0].CGColor;
             textField.layer.borderWidth=1.0;
             textField.delegate=self;
+            [textField setFont:font];
+            
+            UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
+            textField.leftView = paddingView;
+            textField.leftViewMode = UITextFieldViewModeAlways;
         }
         if ([view isKindOfClass:[UIButton class]]) {
             UIButton *button = (UIButton *)view;
@@ -395,6 +424,11 @@ NSMutableArray *DelGroupArr;
             textField.layer.borderColor=[UIColor colorWithRed:47.0/255.0 green:188.0/255.0 blue:118.0/255.0 alpha:1.0].CGColor;
             textField.layer.borderWidth=1.0;
             textField.delegate=self;
+            [textField setFont:font];
+            
+            UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
+            textField.leftView = paddingView;
+            textField.leftViewMode = UITextFieldViewModeAlways;
         }
         if ([view isKindOfClass:[UIButton class]]) {
             UIButton *button = (UIButton *)view;
@@ -409,12 +443,18 @@ NSMutableArray *DelGroupArr;
             textField.layer.borderColor=[UIColor colorWithRed:47.0/255.0 green:188.0/255.0 blue:118.0/255.0 alpha:1.0].CGColor;
             textField.layer.borderWidth=1.0;
             textField.delegate=self;
+            [textField setFont:font];
+            
+            UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
+            textField.leftView = paddingView;
+            textField.leftViewMode = UITextFieldViewModeAlways;
         }
         if ([view isKindOfClass:[UITextView class]]) {
             UITextView *textView = (UITextView *)view;
             textView.layer.borderColor=[UIColor colorWithRed:47.0/255.0 green:188.0/255.0 blue:118.0/255.0 alpha:1.0].CGColor;
             textView.layer.borderWidth=1.0;
             textView.delegate=self;
+            [textView setFont:font];
         }
         if ([view isKindOfClass:[UIButton class]]) {
             UIButton *button = (UIButton *)view;
@@ -2657,6 +2697,18 @@ NSMutableArray *DelGroupArr;
 	if (txtIDType.text.length == 12 && [[textFields trimWhiteSpaces:outletDOB.titleLabel.text] isEqualToString:@"- Select -"]) {
 		[self GenerateDOB];
 	}
+    
+    //added by faiz//
+    txtNip.text=pp.NIP;
+    txtBranchCode.text=pp.BranchCode;
+    txtBranchName.text=pp.BranchName;
+    txtKanwil.text=@"";
+    txtKcu.text=pp.KCU;
+    txtReferralName.text=pp.ReferralName;
+    outletReferralSource.titleLabel.text=pp.ReferralSource;
+    //segReferralType.text=pp.;
+    txtNPWPNo.text=pp.NPWPNo;
+    //end of added by faiz//
     [self check_OID_BirthCer_Passport];
     [super viewWillAppear:animated];
     
@@ -4622,7 +4674,7 @@ NSMutableArray *DelGroupArr;
 													  AndOfficeAddress1:OfficeAddress1 AndOfficeAddress2:OfficeAddress2 AndOfficeAddress3:OfficeAddress3 AndOfficeAddressTown:OfficeAddressTown
 												  AndOfficeAddressState:OfficeAddressState AndOfficeAddressPostCode:OfficeAddressPostCode
 												AndOfficeAddressCountry:OfficeAddressCountry AndProspectEmail:ProspectEmail AndProspectRemark:ProspectRemark AndDateCreated:DateCreated AndDateModified:DateModified AndCreatedBy:CreatedBy AndModifiedBy:ModifiedBy
-											  AndProspectOccupationCode:ProspectOccupationCode AndProspectDOB:ProspectDOB AndExactDuties:ExactDuties AndGroup:ProspectGroup AndTitle:ProspectTitle AndIDTypeNo:IDTypeNo AndOtherIDType:OtherIDType2 AndOtherIDTypeNo:OtherIDTypeNo AndSmoker:Smoker AndAnnIncome:AnnIncome AndBussType:BussinessType AndRace:Race AndMaritalStatus:MaritalStatus AndReligion:Religion AndNationality:Nationality AndRegistrationNo:RigNumber AndRegistration:registration AndRegistrationDate:RigDate AndRegistrationExempted:registrationexempted AndProspect_IsGrouping:isGroupingLocal AndCountryOfBirth:COB];
+											  AndProspectOccupationCode:ProspectOccupationCode AndProspectDOB:ProspectDOB AndExactDuties:ExactDuties AndGroup:ProspectGroup AndTitle:ProspectTitle AndIDTypeNo:IDTypeNo AndOtherIDType:OtherIDType2 AndOtherIDTypeNo:OtherIDTypeNo AndSmoker:Smoker AndAnnIncome:AnnIncome AndBussType:BussinessType AndRace:Race AndMaritalStatus:MaritalStatus AndReligion:Religion AndNationality:Nationality AndRegistrationNo:RigNumber AndRegistration:registration AndRegistrationDate:RigDate AndRegistrationExempted:registrationexempted AndProspect_IsGrouping:isGroupingLocal AndCountryOfBirth:COB AndNIP:@"" AndBranchCode:@"" AndBranchName:@"" AndKCU:@"" AndReferralSource:@"" AndReferralName:@"" AndIdentitySubmitted:@"" AndIDExpirityDate:@"" AndNPWPNo:@""];
                 
             }
             sqlite3_finalize(statement);

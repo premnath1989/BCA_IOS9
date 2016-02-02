@@ -175,6 +175,15 @@
 @property (strong,nonatomic) IBOutlet UIView *viewAddressDetailOffice;
 @property (strong,nonatomic) IBOutlet UIView *viewOccupationInfo;
 @property (strong,nonatomic) IBOutlet UIView *viewOtherInfo;
+@property (weak, nonatomic) IBOutlet UITextField *txtNip;
+@property (weak, nonatomic) IBOutlet UITextField *txtBranchCode;
+@property (weak, nonatomic) IBOutlet UITextField *txtBranchName;
+@property (weak, nonatomic) IBOutlet UITextField *txtKanwil;
+@property (weak, nonatomic) IBOutlet UITextField *txtKcu;
+@property (weak, nonatomic) IBOutlet UITextField *txtReferralName;
+@property (weak, nonatomic) IBOutlet UIButton *outletReferralSource;
+@property (strong, nonatomic) IBOutlet UISegmentedControl *segReferralType;
+@property (weak, nonatomic) IBOutlet UITextField *txtNPWPNo;
 /*end of added by faiz*/
 
 - (IBAction)ActionforRigdate:(id)sender;
