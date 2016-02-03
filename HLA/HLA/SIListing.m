@@ -15,6 +15,7 @@
 #import "EverLifeViewController.h"
 #import "MasterMenuEApp.h"
 #import "MBProgressHUD.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface SIListing ()
 @property(nonatomic, readwrite) int kPageIndex;
@@ -66,8 +67,8 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
 	appDel.MhiMessage = Nil;
 	appDel = Nil;
 	
-    self.view.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg10.jpg"]];
-    outletDelete.hidden = TRUE;
+//    self.view.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg10.jpg"]];
+//    outletDelete.hidden = TRUE;
     
     outletDone.hidden = true;
     DBDateFrom = @"";
@@ -102,8 +103,26 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
     docsDir = Nil;
     CustomColor = Nil;
     
+    
+    UIFont *font= [UIFont fontWithName:@"TreBuchet MS" size:16.0f];
+    for (UIView *view in [txtSINO subviews]) {
+        if ([view isKindOfClass:[UITextField class]]) {
+            UITextField *textField = (UITextField *)view;
+            textField.layer.borderColor=[UIColor colorWithRed:47.0/255.0 green:188.0/255.0 blue:118.0/255.0 alpha:1.0].CGColor;
+            textField.layer.borderWidth=1.0;
+            textField.delegate=self;
+            [textField setFont:font];
+            
+            UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
+            textField.leftView = paddingView;
+            textField.leftViewMode = UITextFieldViewModeAlways;
+        }
+    }
+
+    
     txtSINO.clearButtonMode = UITextFieldViewModeWhileEditing;
     txtLAName.clearButtonMode = UITextFieldViewModeWhileEditing;
+    
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     tap.cancelsTouchesInView = NO;
@@ -512,12 +531,12 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
         [cell.contentView addSubview:label6];        
         
         if (indexPath.row % 2 == 0) {
-            label1.backgroundColor = [CustomColor colorWithHexString:@"D0D8E8"];
-            label2.backgroundColor = [CustomColor colorWithHexString:@"D0D8E8"];
-            label3.backgroundColor = [CustomColor colorWithHexString:@"D0D8E8"];
-            label4.backgroundColor = [CustomColor colorWithHexString:@"D0D8E8"];
-            label5.backgroundColor = [CustomColor colorWithHexString:@"D0D8E8"];
-            label6.backgroundColor = [CustomColor colorWithHexString:@"D0D8E8"];
+//            label1.backgroundColor = [CustomColor colorWithHexString:@"fff"];
+//            label2.backgroundColor = [CustomColor colorWithHexString:@"fff"];
+//            label3.backgroundColor = [CustomColor colorWithHexString:@"fff"];
+//            label4.backgroundColor = [CustomColor colorWithHexString:@"fff"];
+//            label5.backgroundColor = [CustomColor colorWithHexString:@"fff"];
+//            label6.backgroundColor = [CustomColor colorWithHexString:@"fff"];
 			
             label1.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
             label2.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
@@ -527,12 +546,12 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
             label6.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
 			
         } else {
-            label1.backgroundColor = [CustomColor colorWithHexString:@"E9EDF4"];
-            label2.backgroundColor = [CustomColor colorWithHexString:@"E9EDF4"];
-            label3.backgroundColor = [CustomColor colorWithHexString:@"E9EDF4"];
-            label4.backgroundColor = [CustomColor colorWithHexString:@"E9EDF4"];
-            label5.backgroundColor = [CustomColor colorWithHexString:@"E9EDF4"];
-            label6.backgroundColor = [CustomColor colorWithHexString:@"E9EDF4"];
+//            label1.backgroundColor = [CustomColor colorWithHexString:@"E9EDF4"];
+//            label2.backgroundColor = [CustomColor colorWithHexString:@"E9EDF4"];
+//            label3.backgroundColor = [CustomColor colorWithHexString:@"E9EDF4"];
+//            label4.backgroundColor = [CustomColor colorWithHexString:@"E9EDF4"];
+//            label5.backgroundColor = [CustomColor colorWithHexString:@"E9EDF4"];
+//            label6.backgroundColor = [CustomColor colorWithHexString:@"E9EDF4"];
             
             label1.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
             label2.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
