@@ -314,7 +314,7 @@ bool RegDatehandling;
     self.myScrollView.frame = CGRectMake(0, 0, 1024, 900);
     self.myScrollView.contentSize = CGSizeMake(900, 1300);
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Client Profile Listing" style:UIBarButtonItemStyleBordered target:self action:@selector(back)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Data Profi Klien" style:UIBarButtonItemStyleBordered target:self action:@selector(back)];
 	
     NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
 	[ClientProfile setObject:@"NEW" forKey:@"ChangedOn"];
@@ -549,7 +549,7 @@ bool RegDatehandling;
     if(txtOfficeCountry.text== NULL)
         txtOfficeCountry.text = @"";
     
-    if([navgtitle isEqualToString:@"Add Client Profile"]) {
+    if([navgtitle isEqualToString:@"Tambah Klien Baru"]) {
         [txtOtherIDType removeTarget:self action:@selector(OtheriDDidChange:) forControlEvents:UIControlEventEditingDidEnd];
         [txtIDType removeTarget:self action:@selector(NewICDidChange:) forControlEvents:UIControlEventEditingDidEnd];
         

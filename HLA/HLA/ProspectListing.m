@@ -947,7 +947,9 @@ MBProgressHUD *HUD;
     self.ProspectViewController = [clientProfileStoryboard instantiateViewControllerWithIdentifier:@"Prospect"];
     _ProspectViewController.delegate = self;
     [self.navigationController pushViewController:_ProspectViewController animated:YES];
-    _ProspectViewController.navigationItem.title = @"Add Client Profile";
+    //Cheged by faiz due to language translation
+    /*_ProspectViewController.navigationItem.title = @"Add Client Profile";*/
+    _ProspectViewController.navigationItem.title = @"Tambah Klien Baru";
 }
 
 -(void) ReloadTableData

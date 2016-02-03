@@ -327,6 +327,7 @@
 		42D3277618487F2D0030AA7A /* NewGroupListing.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D3277518487F2D0030AA7A /* NewGroupListing.m */; };
 		42F8590F1772E4EF003907CD /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = 42F8590D1772E4EF003907CD /* add.png */; };
 		42F859101772E4EF003907CD /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 42F8590E1772E4EF003907CD /* delete.png */; };
+		4341B5C21C61750700357986 /* libSPSignDoc_4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4341B5C11C61750700357986 /* libSPSignDoc_4.0.a */; };
 		5D3967981C02C89700464BCC /* HLAWPStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D3967971C02C89700464BCC /* HLAWPStoryboard.storyboard */; };
 		5D39679A1C02CA9000464BCC /* ClientProfileStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D3967991C02CA9000464BCC /* ClientProfileStoryboard.storyboard */; };
 		5D39679D1C02CFD600464BCC /* CarouselStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D39679C1C02CFD600464BCC /* CarouselStoryboard.storyboard */; };
@@ -1269,6 +1270,7 @@
 		42D3277518487F2D0030AA7A /* NewGroupListing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewGroupListing.m; sourceTree = "<group>"; };
 		42F8590D1772E4EF003907CD /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
 		42F8590E1772E4EF003907CD /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete.png; sourceTree = "<group>"; };
+		4341B5C11C61750700357986 /* libSPSignDoc_4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSPSignDoc_4.0.a; sourceTree = "<group>"; };
 		5D3967971C02C89700464BCC /* HLAWPStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HLAWPStoryboard.storyboard; sourceTree = "<group>"; };
 		5D3967991C02CA9000464BCC /* ClientProfileStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ClientProfileStoryboard.storyboard; sourceTree = "<group>"; };
 		5D39679C1C02CFD600464BCC /* CarouselStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CarouselStoryboard.storyboard; sourceTree = "<group>"; };
@@ -2069,6 +2071,7 @@
 				C486D9E3163E6747009F8F21 /* MediaPlayer.framework in Frameworks */,
 				C486D9E1163E6741009F8F21 /* CoreLocation.framework in Frameworks */,
 				C486D9DF163E6739009F8F21 /* AVFoundation.framework in Frameworks */,
+				4341B5C21C61750700357986 /* libSPSignDoc_4.0.a in Frameworks */,
 				C486D9DD163E6732009F8F21 /* AudioToolbox.framework in Frameworks */,
 				C486D9DA163E6728009F8F21 /* AddressBook.framework in Frameworks */,
 				A902F5411C5A0EF6001D6EC0 /* libSPSignDoc_4.0.a in Frameworks */,
@@ -2683,6 +2686,7 @@
 		4239AE2E1946DAE100BD6F53 /* eSignFramework */ = {
 			isa = PBXGroup;
 			children = (
+				4341B5C11C61750700357986 /* libSPSignDoc_4.0.a */,
 				A902F5401C5A0EF6001D6EC0 /* libSPSignDoc_4.0.a */,
 				A9E550A11C591E8000C9DAC2 /* libSPSignDoc_4.0.a */,
 				174858B41C3E229D007BBF13 /* libSPSignDoc_4.0.a */,
