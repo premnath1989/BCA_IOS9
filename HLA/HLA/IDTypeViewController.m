@@ -79,14 +79,14 @@ NSUInteger selectedIndex;
     sqlite3_stmt *statement;
     if (sqlite3_open([databasePath UTF8String], &contactDB) == SQLITE_OK)
     {
-        NSString *querySQL = [NSString stringWithFormat: @"SELECT IdentityCode, IdentityDesc from eProposal_Identification where status = 'A' and IdentityCode <> 'EDD' and IdentityCode <> 'CR'  and IdentityCode <> 'NRIC' order by IdentityDesc"];
+        NSString *querySQL = [NSString stringWithFormat: @"SELECT IdentityCode, IdentityDesc from eProposal_Identification where status = 'A' and IdentityCode <> 'EDD' and IdentityCode <> 'CR'  and IdentityCode <> 'NRIC' order by IdentityCode"];
 		
 		if ([[self.requestType description] isEqualToString:@"CO"]) {
-			querySQL = [NSString stringWithFormat: @"SELECT IdentityCode, IdentityDesc from eProposal_Identification where status = 'A' and IdentityCode <> 'NRIC' order by IdentityDesc"];
+			querySQL = [NSString stringWithFormat: @"SELECT IdentityCode, IdentityDesc from eProposal_Identification where status = 'A' and IdentityCode <> 'NRIC' order by IdentityCode"];
 		}
 		
 		else if ([[self.requestType description] isEqualToString:@"COEdit"]) {
-			querySQL = [NSString stringWithFormat: @"SELECT IdentityCode, IdentityDesc from eProposal_Identification where status = 'A' and IdentityCode in ('BC','PP','OLDIC') order by IdentityDesc"];
+			querySQL = [NSString stringWithFormat: @"SELECT IdentityCode, IdentityDesc from eProposal_Identification where status = 'A' and IdentityCode in ('BC','PP','OLDIC') order by IdentityCode"];
 		}
 		
         if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK)
