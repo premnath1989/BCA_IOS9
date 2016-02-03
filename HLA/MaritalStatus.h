@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "ModelMaritalStatus.h"
 @protocol MaritalStatusDelegate
 
 -(void)selectedMaritalStatus:(NSString *)status;
@@ -17,7 +17,7 @@
 
 
 @interface MaritalStatus : UITableViewController{
-    
+    ModelMaritalStatus* modelMaritalStatus;
     id <MaritalStatusDelegate> _delegate;
     NSMutableArray *_items;
 }

@@ -22,11 +22,16 @@ NSString *SelectedString;
 {
     self = [super initWithStyle:style];
     if (self) {
+        modelNationality=[[ModelNationality alloc]init];
         
-        NSString *file = [[NSBundle mainBundle] pathForResource:@"Nationality" ofType:@"plist"];
-        NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:file];
-        _items = [dict objectForKey:@"Nationality"];
-    
+        /*modified by faiz due to fetch data to database*/
+        //NSString *file = [[NSBundle mainBundle] pathForResource:@"Nationality" ofType:@"plist"];
+        //NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:file];
+        //_items = [dict objectForKey:@"Nationality"];
+        NSDictionary *dict = [modelNationality getNationality];
+        _items = [dict objectForKey:@"NationDesc"];
+        NSLog(@"items %@",_items);
+        
         sorted = [[NSArray alloc]init];
         sorted  =  [_items sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
         

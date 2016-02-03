@@ -25,6 +25,7 @@ NSUInteger selectedIndex;
 {
     self = [super initWithStyle:style];
     if (self) {
+        modelIdentificationType=[[ModelIdentificationType alloc]init];
     }
     return self;
 }
@@ -72,11 +73,16 @@ NSUInteger selectedIndex;
     _IDTypeCode = [[NSMutableArray alloc] init];
     _IDTypeDesc = [[NSMutableArray alloc] init];
     
-	[_IDTypeDesc addObject:@"- SELECT -"];
-	[_IDTypeCode addObject:@""];
-	
-	
-    sqlite3_stmt *statement;
+	//[_IDTypeDesc addObject:@"- SELECT -"];
+	//[_IDTypeCode addObject:@""];
+    NSDictionary *dict = [modelIdentificationType getIDType];
+    _IDTypeDesc = [dict objectForKey:@"IdentityDesc"];
+    _IDTypeCode = [dict objectForKey:@"IdentityCode"];
+
+    [_IDTypeDesc insertObject:@"- SELECT -" atIndex:0];
+    [_IDTypeCode insertObject:@"" atIndex:0];
+    /*modified by faiz due to fetch data to database*/
+    /*sqlite3_stmt *statement;
     if (sqlite3_open([databasePath UTF8String], &contactDB) == SQLITE_OK)
     {
         NSString *querySQL = [NSString stringWithFormat: @"SELECT IdentityCode, IdentityDesc from eProposal_Identification where status = 'A' and IdentityCode <> 'EDD' and IdentityCode <> 'CR'  and IdentityCode <> 'NRIC' order by IdentityCode"];
@@ -99,7 +105,7 @@ NSUInteger selectedIndex;
             sqlite3_finalize(statement);
         }
         sqlite3_close(contactDB);
-    }
+    }*/
 }
 
 #pragma mark - Table view data source

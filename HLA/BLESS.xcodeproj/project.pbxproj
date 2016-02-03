@@ -328,6 +328,10 @@
 		42F8590F1772E4EF003907CD /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = 42F8590D1772E4EF003907CD /* add.png */; };
 		42F859101772E4EF003907CD /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 42F8590E1772E4EF003907CD /* delete.png */; };
 		4341B5C21C61750700357986 /* libSPSignDoc_4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4341B5C11C61750700357986 /* libSPSignDoc_4.0.a */; };
+		4353C9481C61E95000AE1ED9 /* ModelNationality.m in Sources */ = {isa = PBXBuildFile; fileRef = 4353C9471C61E95000AE1ED9 /* ModelNationality.m */; };
+		4353C94B1C61F3A000AE1ED9 /* ModelMaritalStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 4353C94A1C61F3A000AE1ED9 /* ModelMaritalStatus.m */; };
+		4353C94E1C61F6F800AE1ED9 /* ModelReligion.m in Sources */ = {isa = PBXBuildFile; fileRef = 4353C94D1C61F6F800AE1ED9 /* ModelReligion.m */; };
+		4353C9511C61FCD000AE1ED9 /* ModelIdentificationType.m in Sources */ = {isa = PBXBuildFile; fileRef = 4353C9501C61FCD000AE1ED9 /* ModelIdentificationType.m */; };
 		5D3967981C02C89700464BCC /* HLAWPStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D3967971C02C89700464BCC /* HLAWPStoryboard.storyboard */; };
 		5D39679A1C02CA9000464BCC /* ClientProfileStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D3967991C02CA9000464BCC /* ClientProfileStoryboard.storyboard */; };
 		5D39679D1C02CFD600464BCC /* CarouselStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D39679C1C02CFD600464BCC /* CarouselStoryboard.storyboard */; };
@@ -1271,6 +1275,14 @@
 		42F8590D1772E4EF003907CD /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
 		42F8590E1772E4EF003907CD /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete.png; sourceTree = "<group>"; };
 		4341B5C11C61750700357986 /* libSPSignDoc_4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSPSignDoc_4.0.a; sourceTree = "<group>"; };
+		4353C9461C61E95000AE1ED9 /* ModelNationality.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelNationality.h; sourceTree = "<group>"; };
+		4353C9471C61E95000AE1ED9 /* ModelNationality.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelNationality.m; sourceTree = "<group>"; };
+		4353C9491C61F3A000AE1ED9 /* ModelMaritalStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelMaritalStatus.h; sourceTree = "<group>"; };
+		4353C94A1C61F3A000AE1ED9 /* ModelMaritalStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelMaritalStatus.m; sourceTree = "<group>"; };
+		4353C94C1C61F6F800AE1ED9 /* ModelReligion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelReligion.h; sourceTree = "<group>"; };
+		4353C94D1C61F6F800AE1ED9 /* ModelReligion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelReligion.m; sourceTree = "<group>"; };
+		4353C94F1C61FCD000AE1ED9 /* ModelIdentificationType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelIdentificationType.h; sourceTree = "<group>"; };
+		4353C9501C61FCD000AE1ED9 /* ModelIdentificationType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelIdentificationType.m; sourceTree = "<group>"; };
 		5D3967971C02C89700464BCC /* HLAWPStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HLAWPStoryboard.storyboard; sourceTree = "<group>"; };
 		5D3967991C02CA9000464BCC /* ClientProfileStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ClientProfileStoryboard.storyboard; sourceTree = "<group>"; };
 		5D39679C1C02CFD600464BCC /* CarouselStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CarouselStoryboard.storyboard; sourceTree = "<group>"; };
@@ -3175,6 +3187,14 @@
 			children = (
 				A9B8F3D21C5B5EE2005C9646 /* ModelProspectProfile.h */,
 				A9B8F3D31C5B5EE2005C9646 /* ModelProspectProfile.m */,
+				4353C9461C61E95000AE1ED9 /* ModelNationality.h */,
+				4353C9471C61E95000AE1ED9 /* ModelNationality.m */,
+				4353C9491C61F3A000AE1ED9 /* ModelMaritalStatus.h */,
+				4353C94A1C61F3A000AE1ED9 /* ModelMaritalStatus.m */,
+				4353C94C1C61F6F800AE1ED9 /* ModelReligion.h */,
+				4353C94D1C61F6F800AE1ED9 /* ModelReligion.m */,
+				4353C94F1C61FCD000AE1ED9 /* ModelIdentificationType.h */,
+				4353C9501C61FCD000AE1ED9 /* ModelIdentificationType.m */,
 			);
 			name = "HLADB Model";
 			sourceTree = "<group>";
@@ -4816,6 +4836,7 @@
 				C4E1B92A1713F97600D7F83B /* BrowserViewController.m in Sources */,
 				C4E1B9391713FE9500D7F83B /* FMDatabase.m in Sources */,
 				C4E1B93A1713FE9500D7F83B /* FMDatabaseAdditions.m in Sources */,
+				4353C9481C61E95000AE1ED9 /* ModelNationality.m in Sources */,
 				C4E1B93B1713FE9500D7F83B /* FMDatabasePool.m in Sources */,
 				C4E1B93C1713FE9500D7F83B /* FMDatabaseQueue.m in Sources */,
 				C4E1B93D1713FE9500D7F83B /* FMResultSet.m in Sources */,
@@ -4942,6 +4963,7 @@
 				29A38DA517EAEB6B00454787 /* FormCell.m in Sources */,
 				29A38DA617EAEB6B00454787 /* eSign.m in Sources */,
 				29A38DA917EAEB7A00454787 /* SelectCFF.m in Sources */,
+				4353C9511C61FCD000AE1ED9 /* ModelIdentificationType.m in Sources */,
 				29A38DAD17EAEB9600454787 /* PolicyOwner.m in Sources */,
 				29A38DB117EAEBAA00454787 /* LifeAssuredCell.m in Sources */,
 				29A38DBF17EAEBC800454787 /* CFFCell.m in Sources */,
@@ -4949,6 +4971,7 @@
 				29A38DC117EAEBC800454787 /* eSignCell.m in Sources */,
 				29A38DC217EAEBC800454787 /* eAppCell.m in Sources */,
 				29A38DC317EAEBC800454787 /* PolicyOwnerCell.m in Sources */,
+				4353C94E1C61F6F800AE1ED9 /* ModelReligion.m in Sources */,
 				29A38DC417EAEBC800454787 /* SICell.m in Sources */,
 				29A38DCA17EAF51000454787 /* eSubMenu.m in Sources */,
 				29A38DD017EAF58B00454787 /* pendingVC.m in Sources */,
@@ -4974,6 +4997,7 @@
 				C30A25AD17F3C8D500613A0F /* HealthQuestionnaire7e.m in Sources */,
 				C30A25AE17F3C8D500613A0F /* HealthQuestionnaire7f.m in Sources */,
 				C30A25AF17F3C8D500613A0F /* HealthQuestionnaire7g.m in Sources */,
+				4353C94B1C61F3A000AE1ED9 /* ModelMaritalStatus.m in Sources */,
 				C30A25B017F3C8D500613A0F /* HealthQuestionnaire7h.m in Sources */,
 				C30A25B117F3C8D500613A0F /* HealthQuestionnaire7i.m in Sources */,
 				C30A25B217F3C8D500613A0F /* HealthQuestionnaire7j.m in Sources */,

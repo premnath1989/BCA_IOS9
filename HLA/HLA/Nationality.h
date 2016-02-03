@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ModelNationality.h"
 
 @protocol NatinalityDelegate
 
@@ -16,8 +17,9 @@
 
 @interface Nationality : UITableViewController<UISearchBarDelegate, UISearchDisplayDelegate> {
     id <NatinalityDelegate> _delegate;
+    ModelNationality* modelNationality;
     NSMutableArray *_items;
-     NSArray *sorted;
+    NSArray *sorted;
 }
 
 @property (nonatomic, strong) NSMutableArray *items;

@@ -22,10 +22,14 @@ NSString *SelectedString;
 {
     self = [super initWithStyle:style];
     if (self) {
+        modelReligion=[[ModelReligion alloc]init];
         
-        NSString *file = [[NSBundle mainBundle] pathForResource:@"Religion" ofType:@"plist"];
-        NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:file];
-        _items = [dict objectForKey:@"Religion"];
+        /*modufied by faiz due to fetch data to database*/
+        //NSString *file = [[NSBundle mainBundle] pathForResource:@"Religion" ofType:@"plist"];
+        //NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:file];
+        //_items = [dict objectForKey:@"Religion"];
+        NSDictionary *dict = [modelReligion getReligion];
+        _items = [dict objectForKey:@"ReligionDesc"];
         
         self.clearsSelectionOnViewWillAppear = NO;
         

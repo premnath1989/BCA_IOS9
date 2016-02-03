@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <sqlite3.h>
-
+#import "ModelIdentificationType.h"
 
 @protocol IDTypeDelegate <NSObject>
 @required
@@ -18,6 +18,7 @@
 @end
 
 @interface IDTypeViewController : UITableViewController {
+    ModelIdentificationType* modelIdentificationType;
 	NSMutableArray *_IDTypeDesc;
     NSMutableArray *_IDTypeCode;
     NSString *databasePath;
