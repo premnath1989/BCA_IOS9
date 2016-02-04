@@ -332,6 +332,10 @@
 		4353C94B1C61F3A000AE1ED9 /* ModelMaritalStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 4353C94A1C61F3A000AE1ED9 /* ModelMaritalStatus.m */; };
 		4353C94E1C61F6F800AE1ED9 /* ModelReligion.m in Sources */ = {isa = PBXBuildFile; fileRef = 4353C94D1C61F6F800AE1ED9 /* ModelReligion.m */; };
 		4353C9511C61FCD000AE1ED9 /* ModelIdentificationType.m in Sources */ = {isa = PBXBuildFile; fileRef = 4353C9501C61FCD000AE1ED9 /* ModelIdentificationType.m */; };
+		439985BB1C62F7890003B037 /* SourceIncome.m in Sources */ = {isa = PBXBuildFile; fileRef = 439985BA1C62F7890003B037 /* SourceIncome.m */; };
+		439985BE1C62F8A70003B037 /* ModelPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = 439985BD1C62F8A70003B037 /* ModelPopover.m */; };
+		439985C11C630C4D0003B037 /* VIPClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 439985C01C630C4D0003B037 /* VIPClass.m */; };
+		43FD4A041C620F3E00227F8F /* ModelVIPClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 43FD4A031C620F3E00227F8F /* ModelVIPClass.m */; };
 		5D3967981C02C89700464BCC /* HLAWPStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D3967971C02C89700464BCC /* HLAWPStoryboard.storyboard */; };
 		5D39679A1C02CA9000464BCC /* ClientProfileStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D3967991C02CA9000464BCC /* ClientProfileStoryboard.storyboard */; };
 		5D39679D1C02CFD600464BCC /* CarouselStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D39679C1C02CFD600464BCC /* CarouselStoryboard.storyboard */; };
@@ -1283,6 +1287,14 @@
 		4353C94D1C61F6F800AE1ED9 /* ModelReligion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelReligion.m; sourceTree = "<group>"; };
 		4353C94F1C61FCD000AE1ED9 /* ModelIdentificationType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelIdentificationType.h; sourceTree = "<group>"; };
 		4353C9501C61FCD000AE1ED9 /* ModelIdentificationType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelIdentificationType.m; sourceTree = "<group>"; };
+		439985B91C62F7890003B037 /* SourceIncome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourceIncome.h; sourceTree = "<group>"; };
+		439985BA1C62F7890003B037 /* SourceIncome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SourceIncome.m; sourceTree = "<group>"; };
+		439985BC1C62F8A70003B037 /* ModelPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelPopover.h; sourceTree = "<group>"; };
+		439985BD1C62F8A70003B037 /* ModelPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelPopover.m; sourceTree = "<group>"; };
+		439985BF1C630C4D0003B037 /* VIPClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIPClass.h; sourceTree = "<group>"; };
+		439985C01C630C4D0003B037 /* VIPClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VIPClass.m; sourceTree = "<group>"; };
+		43FD4A021C620F3E00227F8F /* ModelVIPClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelVIPClass.h; sourceTree = "<group>"; };
+		43FD4A031C620F3E00227F8F /* ModelVIPClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelVIPClass.m; sourceTree = "<group>"; };
 		5D3967971C02C89700464BCC /* HLAWPStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HLAWPStoryboard.storyboard; sourceTree = "<group>"; };
 		5D3967991C02CA9000464BCC /* ClientProfileStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ClientProfileStoryboard.storyboard; sourceTree = "<group>"; };
 		5D39679C1C02CFD600464BCC /* CarouselStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CarouselStoryboard.storyboard; sourceTree = "<group>"; };
@@ -3195,6 +3207,10 @@
 				4353C94D1C61F6F800AE1ED9 /* ModelReligion.m */,
 				4353C94F1C61FCD000AE1ED9 /* ModelIdentificationType.h */,
 				4353C9501C61FCD000AE1ED9 /* ModelIdentificationType.m */,
+				43FD4A021C620F3E00227F8F /* ModelVIPClass.h */,
+				43FD4A031C620F3E00227F8F /* ModelVIPClass.m */,
+				439985BC1C62F8A70003B037 /* ModelPopover.h */,
+				439985BD1C62F8A70003B037 /* ModelPopover.m */,
 			);
 			name = "HLADB Model";
 			sourceTree = "<group>";
@@ -3974,6 +3990,10 @@
 				6A4ACBBD17EA9F500037C358 /* Country.m */,
 				C36D82321AF9E2CD0070D070 /* Country2.h */,
 				C36D82331AF9E2CE0070D070 /* Country2.m */,
+				439985B91C62F7890003B037 /* SourceIncome.h */,
+				439985BA1C62F7890003B037 /* SourceIncome.m */,
+				439985BF1C630C4D0003B037 /* VIPClass.h */,
+				439985C01C630C4D0003B037 /* VIPClass.m */,
 			);
 			name = PopOver;
 			sourceTree = "<group>";
@@ -4927,6 +4947,7 @@
 				2958A86017E95F1A0090A791 /* CustomerChoice.m in Sources */,
 				2958A86517E95F3F0090A791 /* PriorityViewController.m in Sources */,
 				2958A86817E95F5D0090A791 /* PotentialAreas.m in Sources */,
+				439985BE1C62F8A70003B037 /* ModelPopover.m in Sources */,
 				2958A86D17E95FDA0090A791 /* Preference.m in Sources */,
 				2958A87317E95FF60090A791 /* TVCalibratedSlider.m in Sources */,
 				2958A87417E95FF60090A791 /* TVSlider.m in Sources */,
@@ -4961,6 +4982,7 @@
 				29A38DA317EAEB6B00454787 /* eSignVC.m in Sources */,
 				29A38DA417EAEB6B00454787 /* formsDetails.m in Sources */,
 				29A38DA517EAEB6B00454787 /* FormCell.m in Sources */,
+				439985BB1C62F7890003B037 /* SourceIncome.m in Sources */,
 				29A38DA617EAEB6B00454787 /* eSign.m in Sources */,
 				29A38DA917EAEB7A00454787 /* SelectCFF.m in Sources */,
 				4353C9511C61FCD000AE1ED9 /* ModelIdentificationType.m in Sources */,
@@ -5066,6 +5088,7 @@
 				C3A8D1171833D2B800E65FC9 /* ELPPolicyOwnerVC.m in Sources */,
 				4212707F18459CBB000C2156 /* HealthQuestions1stLA.m in Sources */,
 				4212708018459CBB000C2156 /* HealthQuestions2ndLA.m in Sources */,
+				43FD4A041C620F3E00227F8F /* ModelVIPClass.m in Sources */,
 				4212708118459CBB000C2156 /* HealthQuestionsPO.m in Sources */,
 				4212708218459CBB000C2156 /* HealthQuestionsVC.m in Sources */,
 				4212708818459FC0000C2156 /* eAppReport.m in Sources */,
@@ -5124,6 +5147,7 @@
 				42B8B1481917339500E09A34 /* PRPage7.m in Sources */,
 				42B8B1491917339500E09A34 /* PRPage8.m in Sources */,
 				42B8B14A1917339500E09A34 /* PRPage9.m in Sources */,
+				439985C11C630C4D0003B037 /* VIPClass.m in Sources */,
 				42B8B14C1917339500E09A34 /* PDFCreater.m in Sources */,
 				42B8B14D1917339500E09A34 /* PRHtmlHandler.m in Sources */,
 				42B8B14E1917339500E09A34 /* PRSQLHelper.m in Sources */,

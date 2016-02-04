@@ -481,6 +481,10 @@ bool RegDatehandling;
     outletReferralSource.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     outletReferralSource.imageEdgeInsets = UIEdgeInsetsMake(0., outletReferralSource.frame.size.width - (24 + 10.0), 0., 0.);
     outletReferralSource.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 0);
+    
+    _outletVIPClass.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    _outletVIPClass.imageEdgeInsets = UIEdgeInsetsMake(0., _outletVIPClass.frame.size.width - (24 + 10.0), 0., 0.);
+    _outletVIPClass.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 0);
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
@@ -2415,6 +2419,51 @@ bool RegDatehandling;
     }
     [self.nationalityPopover presentPopoverFromRect:[sender bounds]  inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
+
+//added by faiz
+- (IBAction)actionSourceIncome:(id)sender
+{
+    
+    [self resignFirstResponder];
+    [self.view endEditing:YES];
+    
+    NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
+    [ClientProfile setObject:@"YES" forKey:@"isNew"];
+    
+    Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
+    id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
+    [activeInstance performSelector:@selector(dismissKeyboard)];
+    
+    if (_sourceIncome == nil) {
+        _sourceIncome = [[SourceIncome alloc] initWithStyle:UITableViewStylePlain];
+        _sourceIncome.delegate = self;
+        _sourceIncomePopover = [[UIPopoverController alloc] initWithContentViewController:_sourceIncome];
+    }
+    [_sourceIncomePopover presentPopoverFromRect:[sender bounds]  inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
+- (IBAction)actionVIPClass:(id)sender
+{
+    
+    [self resignFirstResponder];
+    [self.view endEditing:YES];
+    
+    NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
+    [ClientProfile setObject:@"YES" forKey:@"isNew"];
+    
+    Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
+    id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
+    [activeInstance performSelector:@selector(dismissKeyboard)];
+    
+    if (_vipClass == nil) {
+        _vipClass = [[VIPClass alloc] initWithStyle:UITableViewStylePlain];
+        _vipClass.delegate = self;
+        _vipClassPopover = [[UIPopoverController alloc] initWithContentViewController:_vipClass];
+    }
+    [_vipClassPopover presentPopoverFromRect:[sender bounds]  inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
+//end of add by faiz
 
 - (IBAction)actionRace:(id)sender
 {
@@ -6931,6 +6980,27 @@ bool RegDatehandling;
 
 
 #pragma mark - delegate
+-(void)selectedVIPClass:(NSString *)VIPClass{
+    _outletVIPClass.titleLabel.text = VIPClass;
+    if([VIPClass isEqualToString:@"- SELECT -"]) {
+        _outletVIPClass.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+    } else {
+        _outletVIPClass.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    }
+    [_outletVIPClass setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",VIPClass]forState:UIControlStateNormal];
+    [_vipClassPopover dismissPopoverAnimated:YES];
+}
+
+-(void)selectedSourceIncome:(NSString *)sourceIncome{
+    _outletSourceIncome.titleLabel.text = sourceIncome;
+    if([sourceIncome isEqualToString:@"- SELECT -"]) {
+        _outletSourceIncome.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+    } else {
+        _outletSourceIncome.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    }
+    [outletRace setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",sourceIncome]forState:UIControlStateNormal];
+    [_sourceIncomePopover dismissPopoverAnimated:YES];
+}
 
 -(void)selectedGroup:(NSString *)aaGroup
 {

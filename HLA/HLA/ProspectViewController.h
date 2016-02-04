@@ -20,6 +20,8 @@
 #import "Religion.h"
 #import "Country.h"
 #import "Country2.h"
+#import "SourceIncome.h"
+#import "VIPClass.h"
 #import "EditProspect.h"
 
 @class DataTable,DBController;
@@ -27,7 +29,7 @@
 - (void)FinishInsert;
 @end
 
-@interface ProspectViewController : UIViewController<IDTypeDelegate,SIDateDelegate,IDTypeDelegate, OccupationListDelegate,TitleDelegate,GroupDelegate, UITextFieldDelegate,UITextInputDelegate, UITextViewDelegate,NatinalityDelegate,RaceDelegate,MaritalStatusDelegate,ReligionDelegate,CountryDelegate,EditProspectDelegate, Country2Delegate>{
+@interface ProspectViewController : UIViewController<IDTypeDelegate,SIDateDelegate,IDTypeDelegate, OccupationListDelegate,TitleDelegate,GroupDelegate, UITextFieldDelegate,UITextInputDelegate, UITextViewDelegate,NatinalityDelegate,RaceDelegate,MaritalStatusDelegate,ReligionDelegate,CountryDelegate,EditProspectDelegate, Country2Delegate,SourceIncomeDelegate,VIPClassDelegate>{
     NSString *databasePath;
     sqlite3 *contactDB;
     UITextField *activeField;
@@ -39,6 +41,12 @@
     MaritalStatus *_MaritalStatusList;
     Nationality *_nationalityList;
     Nationality *_nationalityList2;
+
+    //added  by faiz
+    SourceIncome *_sourceIncome;
+    VIPClass *_vipClass;
+    //end of add
+    
     UIPopoverController *_OccupationListPopover;
     UIPopoverController *_ContactTypePopover;
     UIPopoverController *_SIDatePopover;
@@ -50,6 +58,10 @@
     UIPopoverController *_CountryListPopover;
 	UIPopoverController *_Country2ListPopover;
     UIPopoverController *_nationalityPopover;
+    //added by faiz
+    UIPopoverController *_sourceIncomePopover;
+    UIPopoverController *_vipClassPopover;
+    //end of added by faiz
     UIPopoverController *_nationalityPopover2;
     id<ProspectViewControllerDelegate> _delegate;
     EditProspect *_EditProspect;
@@ -183,6 +195,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtReferralName;
 @property (weak, nonatomic) IBOutlet UIButton *outletReferralSource;
 @property (weak, nonatomic) IBOutlet UIButton *outletExpiryDate;
+@property (weak, nonatomic) IBOutlet UIButton *outletSourceIncome;
+@property (weak, nonatomic) IBOutlet UIButton *outletVIPClass;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *segReferralType;
 @property (weak, nonatomic) IBOutlet UITextField *txtNPWPNo;
 /*end of added by faiz*/
