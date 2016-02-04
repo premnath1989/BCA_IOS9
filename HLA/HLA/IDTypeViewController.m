@@ -153,7 +153,6 @@ NSUInteger selectedIndex;
 {
     if (_delegate != nil) {
         
-        
 		[self resignFirstResponder];
 		[self.view endEditing:TRUE];
 		

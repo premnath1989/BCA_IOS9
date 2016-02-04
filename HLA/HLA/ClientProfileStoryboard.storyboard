@@ -2445,8 +2445,8 @@
                                             <constraint firstAttribute="height" constant="1" id="PWw-6F-mZw"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0QZ-ei-n2h">
-                                        <rect key="frame" x="0.0" y="0.0" width="1024" height="284"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0QZ-ei-n2h">
+                                        <rect key="frame" x="0.0" y="1382" width="1024" height="284"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l1H-iK-GuE">
                                                 <rect key="frame" x="460" y="181" width="14" height="21"/>
@@ -2556,6 +2556,9 @@
                                                 <state key="normal" image="Expand Arrow.png">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="actionSourceIncome:" destination="SzV-Ci-0zx" eventType="touchUpInside" id="zcj-s1-Dmb"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ldo-tn-n7b">
                                                 <rect key="frame" x="199" y="64" width="740" height="24"/>
@@ -2623,7 +2626,12 @@
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AQ2-11-G8t">
                                                 <rect key="frame" x="199" y="28" width="253" height="24"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
-                                                <state key="normal" image="Expand Arrow.png"/>
+                                                <state key="normal" image="Expand Arrow.png">
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="actionVIPClass:" destination="SzV-Ci-0zx" eventType="touchUpInside" id="ftg-9A-Ulr"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Grouping" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fl1-bc-MZn">
                                                 <rect key="frame" x="516" y="178" width="161" height="21"/>
@@ -2729,7 +2737,9 @@
                         <outlet property="outletReferralSource" destination="0uH-Zh-sIx" id="n5t-Rz-oMj"/>
                         <outlet property="outletReligion" destination="4vW-mP-hEB" id="Jdc-hU-xXH"/>
                         <outlet property="outletRigDate" destination="QX1-39-YaJ" id="V5a-dl-QaG"/>
+                        <outlet property="outletSourceIncome" destination="2fw-SL-aal" id="6DI-kX-nf2"/>
                         <outlet property="outletTitle" destination="HDb-Hr-36n" id="GiH-ur-gMV"/>
+                        <outlet property="outletVIPClass" destination="AQ2-11-G8t" id="GMs-WS-Stx"/>
                         <outlet property="scrollViewNewProspect" destination="I9H-aK-o5q" id="kwS-E7-1NQ"/>
                         <outlet property="segGender" destination="zwE-hk-Aj8" id="OhK-O7-FNP"/>
                         <outlet property="segIsGrouping" destination="Ins-Fd-Gmw" id="E1B-My-CrE"/>
