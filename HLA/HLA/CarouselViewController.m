@@ -159,7 +159,8 @@ const int numberOfModule = 7;
 //        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"HLA FAST" message:@"HLA FAST is not installed!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];        
 //        [alertView show];
         
-        Login *mainLogin = [self.storyboard instantiateViewControllerWithIdentifier:@"Login"];
+        UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:Nil];
+        Login *mainLogin = [mainStoryBoard instantiateViewControllerWithIdentifier:@"Login"];
         mainLogin.modalPresentationStyle = UIModalPresentationFullScreen;
         mainLogin.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
         //            [self presentModalViewController:mainLogin animated:YES];
