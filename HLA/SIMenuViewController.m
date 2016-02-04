@@ -77,9 +77,9 @@ BOOL isFirstLoad;
     databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
     
     //--for table view
-    self.myTableView.backgroundColor = [UIColor darkGrayColor];
+    //self.myTableView.backgroundColor = [UIColor darkGrayColor];
     
-    ListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"Life Assured", @"   2nd Life Assured", @"   Payor", @"Basic Plan", nil ];
+    ListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"1   Pemegang Polis", @"2   Tertanggung", @"3  Ansurasi Dasar \n Asuransi Tambahan \n Premi", @"4   Ilustras ",@"Produk Brosur",@"Simpan sebagai Baru", nil];
     appDel = (AppDelegate*)[[UIApplication sharedApplication] delegate ];
     
     PlanEmpty = YES;
@@ -90,7 +90,7 @@ BOOL isFirstLoad;
     
     LAotherIDType = @"";
     
-    myTableView.rowHeight = 44;
+    myTableView.rowHeight = 84;
     [myTableView reloadData];
     
     self.RiderController = [self.storyboard instantiateViewControllerWithIdentifier:@"RiderView"];
@@ -2438,12 +2438,13 @@ BOOL isFirstLoad;
     //--detail text label
 	
     if (indexPath.row == 0) {
-        if (NameLA.length != 0) {
-            NSString *str = [[NSString alloc] initWithFormat:@"%@",NameLA];
-            str = [str substringToIndex:MIN(30, [str length])];
-            cell.detailTextLabel.text = str;
+       if (NameLA.length != 0)
+        {
+//            NSString *str = [[NSString alloc] initWithFormat:@"1.Pemegang Polis"];
+//            str = [str substringToIndex:MIN(30, [str length])];
+//            cell.detailTextLabel.text = str;
         } else {
-            cell.detailTextLabel.text = @"";
+           // cell.detailTextLabel.text = @"";
         }
     } else if (indexPath.row == 1) {
         if (Name2ndLA.length != 0) {
@@ -2490,7 +2491,7 @@ BOOL isFirstLoad;
     
     UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(0.0f, cell.contentView.bounds.size.height - 1.0f, cell.contentView.bounds.size.width, 1.0f)];
     lineView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
-    lineView.backgroundColor = [UIColor whiteColor];
+    lineView.backgroundColor = [UIColor blackColor];
     
     [cell.contentView addSubview:lineView];
     
