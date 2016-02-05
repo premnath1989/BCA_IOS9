@@ -10,6 +10,9 @@
 #import <UIKit/UIKit.h>
 #import <sqlite3.h>
 #import "Reachability.h"
+#import "loginDBManagement.h"
+#import "LoginMacros.h"
+
 
 @protocol LoginDelegate
 - (void)Dismiss: (NSString *)ViewToBePresented;
@@ -36,11 +39,10 @@ static NSString* DATE_FORMAT = @"yyyy-MM-dd";
 
 @interface Login : UIViewController<NSXMLParserDelegate, UITextFieldDelegate>
 {
-    NSString *databasePath;
-    NSString *RatesDatabasePath;
-    NSString *UL_RatesDatabasePath;
-    NSString *CommDatabasePath;
-    sqlite3 *contactDB;
+//    NSString *databasePath;
+//    NSString *RatesDatabasePath;
+//    NSString *UL_RatesDatabasePath;
+//    NSString *CommDatabasePath;
     UITextField *activeField;
     id<LoginDelegate> _delegate;
     Reachability *internetReachableFoo;
@@ -49,6 +51,7 @@ static NSString* DATE_FORMAT = @"yyyy-MM-dd";
     NSInteger badAttempts;
     NSString *error;
     NSString *agentInfo;
+    loginDBManagement *loginDB;
     
     NSString *agentLogin;
     //  NSString *agentCode;
@@ -75,6 +78,8 @@ static NSString* DATE_FORMAT = @"yyyy-MM-dd";
     NSString *obsoleteVersNo;
     NSString *obsoleteDate;
     NSString *licenseStatus;
+    
+    
     
     int xmlType;
     
