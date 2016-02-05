@@ -8756,6 +8756,14 @@
                                             <action selector="selectClientProfile:" destination="k0P-Te-cR8" eventType="touchUpInside" id="a08-9N-r4S"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="J3Q-u0-6Bw">
+                                        <rect key="frame" x="956" y="21" width="50" height="33"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" backgroundImage="setting_btnB.png"/>
+                                        <connections>
+                                            <action selector="ButtonInfoAgent:" destination="k0P-Te-cR8" eventType="touchUpInside" id="swg-vu-I3c"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.67000000000000004" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -10968,6 +10976,7 @@
         <image name="prospect_100_2.png" width="100" height="100"/>
         <image name="prospect_100_3.png" width="100" height="100"/>
         <image name="sales_illustration@2x_20141118.png" width="232" height="309"/>
+        <image name="setting_btnB.png" width="42" height="40"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

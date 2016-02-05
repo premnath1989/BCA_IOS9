@@ -33,10 +33,15 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *CPBtn;
 @property (weak, nonatomic) IBOutlet UINavigationBar *outletNavBar;
+@property (weak, nonatomic) IBOutlet UIButton *ButtonInfoLabel;
+@property (weak, nonatomic) IBOutlet UILabel *AgentName;
 
 - (IBAction)selectClientProfile:(id)sender;
 - (IBAction)selectSalesIllustration:(id)sender;
 - (IBAction)selectCFF:(id)sender;
 - (IBAction)selectEApp:(id)sender;
+- (IBAction)ButtonInfo:(id)sender;
+- (IBAction)ButtonInfoAgent:(id)sender;
+
 
 @end

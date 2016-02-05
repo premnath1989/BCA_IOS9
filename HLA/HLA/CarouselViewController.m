@@ -68,6 +68,8 @@ const int numberOfModule = 7;
     exitBtn.frame = CGRectMake(980.1, 17, 27.0, 29.0);
     [outletNavBar addSubview:exitBtn];
     
+   
+    
     NSString *version= [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     NSString *build= [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
     
@@ -107,6 +109,13 @@ const int numberOfModule = 7;
     label2.numberOfLines=0;
     label2.lineBreakMode=NSLineBreakByWordWrapping;
     
+//    UIButton *AgentProfile = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [AgentProfile addTarget:self action:@selector(ButtonInfo) forControlEvents:UIControlEventTouchUpInside];
+//    [AgentProfile setBackgroundImage:[UIImage imageNamed:@"Setting_btnB.png"] forState:UIControlStateNormal];
+//    AgentProfile.frame = CGRectMake(980.1, 50, 27.0, 29.0);
+//    [self.view addSubview:AgentProfile];
+
+    
     NSString *string =[SIUtilities WSLogin];
     
     if ([string rangeOfString:@"echannel.dev"].location == NSNotFound) {
@@ -114,6 +123,20 @@ const int numberOfModule = 7;
     } else {
         label2.text =[NSString stringWithFormat:@"App type : Development"];
     }
+    
+    NSArray *paths2 = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsPath2 = [paths2 objectAtIndex:0];
+    NSString *path2 = [docsPath2 stringByAppendingPathComponent:@"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path2];
+    [database open];
+    FMResultSet *results;
+    results = [database executeQuery:@"select AgentCode,AgentName from Agent_profile"];
+    while([results next])
+    {
+         _AgentName.text  = [results stringForColumn:@"AgentName"];
+    }
+    
     
     int width = 128;
     int height = 160;
@@ -184,6 +207,104 @@ const int numberOfModule = 7;
     return UIStatusBarStyleLightContent;
 }
 
+-(void)parseURL:(NSString *) urlStr
+{
+    NSMutableDictionary *queryStringDict = [ [NSMutableDictionary alloc] init];
+    NSArray *urlArr = [urlStr componentsSeparatedByString:@"&"];
+    
+    if (urlArr.count < 1) {
+        return;    }
+    
+    for(NSString *keyPair in urlArr)
+    {
+        NSArray *pairedComp = [keyPair componentsSeparatedByString:@"="];
+        NSString *key = [pairedComp objectAtIndex:0];
+        NSString *value = [pairedComp objectAtIndex:1];
+        
+        [queryStringDict setObject:value forKey:key];
+    }
+    
+    NSString* agentCode = [queryStringDict objectForKey:@"agentCode"];
+    NSString* agentName = [queryStringDict objectForKey:@"agentName"];
+    NSString* agentType = [queryStringDict objectForKey:@"agentType"];
+    NSString* immediateLeaderCode = [queryStringDict objectForKey:@"immediateLeaderCode"];
+    NSString* immediateLeaderName = [queryStringDict objectForKey:@"immediateLeaderName"];
+    NSString* BusinessRegNumber = [queryStringDict objectForKey:@"BusinessRegNumber"];
+    NSString* agentEmail = [queryStringDict objectForKey:@"agentEmail"];
+    NSString* agentLoginId = [queryStringDict objectForKey:@"agentLoginId"];
+    NSString* agentIcNo = [queryStringDict objectForKey:@"agentIcNo"];
+    NSString* agentContractDate = [queryStringDict objectForKey:@"agentContractDate"];
+    NSString* agentAddr1 = [queryStringDict objectForKey:@"agentAddr1"];
+    NSString* agentAddr2 = [queryStringDict objectForKey:@"agentAddr2"];
+    NSString* agentAddr3 = [queryStringDict objectForKey:@"agentAddr3"];
+    NSString* agentAddrPostcode = [queryStringDict objectForKey:@"agentAddrPostcode"];
+    NSString* agentContactNumber = [queryStringDict objectForKey:@"agentContactNumber"];
+    NSString* agentPassword = [queryStringDict objectForKey:@"agentPassword"];
+    NSString* agentStatus = [queryStringDict objectForKey:@"agentStatus"];
+    NSString* channel = [queryStringDict objectForKey:@"channel"];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:agentCode forKey:KEY_AGENT_CODE];
+    [defaults synchronize];
+    
+    NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsDir = [dirPaths objectAtIndex:0];
+    NSString *databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
+    sqlite3_stmt *statement;
+    
+    if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
+    {
+        NSString *querySQL;
+        BOOL newRec = FALSE;
+        
+        querySQL = [NSString stringWithFormat:
+                    @"select agentCode FROM agent_profile where agentCode = '%@' ", agentCode ];
+        
+        if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK){
+            if (sqlite3_step(statement) == SQLITE_ROW){
+                newRec = FALSE;
+            }
+            else{
+                newRec = TRUE;
+            }
+            sqlite3_finalize(statement);
+        }
+        
+        if (newRec == FALSE) {
+            querySQL = [NSString stringWithFormat: @"Delete FROM agent_profile "];
+            
+            if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK){
+                if (sqlite3_step(statement) == SQLITE_DONE){
+                }
+                sqlite3_finalize(statement);
+            }
+        }
+        
+        querySQL = [NSString stringWithFormat:
+                    @"insert into Agent_profile (agentCode, AgentName, AgentType, AgentContactNo, ImmediateLeaderCode, ImmediateLeaderName, BusinessRegNumber, AgentEmail, AgentLoginID, AgentICNo, "
+                    "AgentContractDate, AgentAddr1, AgentAddr2, AgentAddr3, AgentAddr4, AgentPortalLoginID, AgentPortalPassword, AgentContactNumber, AgentPassword, AgentStatus, Channel, AgentAddrPostcode, agentNRIC ) VALUES "
+                    "('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@', '%@', '%@') ",
+                    agentCode, agentName, agentType, agentContactNumber, immediateLeaderCode, immediateLeaderName,BusinessRegNumber, agentEmail, agentLoginId, agentIcNo, agentContractDate, agentAddr1, agentAddr2, agentAddr3, @"", agentLoginId, agentPassword, agentContactNumber, agentPassword, agentStatus, channel, agentAddrPostcode, agentIcNo ];
+        
+        if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK){
+            if (sqlite3_step(statement) == SQLITE_DONE){
+                
+            }
+            else{
+                NSLog(@"%@",[[NSString alloc] initWithUTF8String:sqlite3_errmsg(contactDB)]) ;
+            }
+            sqlite3_finalize(statement);
+        }
+        else{
+            NSLog(@"%@",[[NSString alloc] initWithUTF8String:sqlite3_errmsg(contactDB)]) ;
+        }
+        
+        sqlite3_close(contactDB);
+        querySQL = Nil;
+        
+    }
+    
+}
 
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -266,6 +387,25 @@ const int numberOfModule = 7;
 		}
 	}
 }
+
+- (void)ButtonInfoAgent:(id)sender;
+{
+    SettingUserProfile * UserProfileView = [self.storyboard instantiateViewControllerWithIdentifier:@"SettingUserProfile"];
+    UserProfileView.modalPresentationStyle = UIModalPresentationPageSheet;
+    UserProfileView.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    UserProfileView.indexNo = self.indexNo;
+    UserProfileView.getLatest = @"Yes";
+    //            [self presentModalViewController:UserProfileView animated:YES];
+    [self presentViewController:UserProfileView animated:YES completion:nil];
+    
+    UserProfileView.view.superview.frame = CGRectMake(150, 50, 700, 748);
+    UserProfileView = nil;
+    
+    
+    
+    
+}
+
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
 	
