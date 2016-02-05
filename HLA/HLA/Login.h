@@ -11,8 +11,6 @@
 #import <sqlite3.h>
 #import "Reachability.h"
 #import "loginDBManagement.h"
-#import "LoginMacros.h"
-
 
 @protocol LoginDelegate
 - (void)Dismiss: (NSString *)ViewToBePresented;

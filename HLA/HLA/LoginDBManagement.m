@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "loginDBManagement.h"
-#import "LoginMacros.h"
+//#import "LoginMacros.h"
 #import "FMDatabase.h"
 
 @implementation loginDBManagement
@@ -140,14 +140,14 @@
 
 - (int) SearchAgent:(NSString *)AgentID{
     sqlite3_stmt *statement;
-    int AgentFound = DATABASE_ERROR;
+    int AgentFound = 500;
     if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
     {
         NSString *querySQL = [NSString stringWithFormat: @"SELECT * FROM Agent_Profile WHERE AgentLoginID=\"%@\" ", AgentID];
 
         if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK){
-            if (sqlite3_step(statement) == SQLITE_ROW) AgentFound = AGENT_IS_FOUND;
-            else AgentFound = AGENT_IS_NOT_FOUND;
+            if (sqlite3_step(statement) == SQLITE_ROW) AgentFound = 100;
+            else AgentFound = 101;
             sqlite3_finalize(statement);
         }
         sqlite3_close(contactDB);
@@ -158,7 +158,7 @@
 - (int) InsertAgentProfile:(NSString *) urlStr
 {
     NSArray *urlArr = [urlStr componentsSeparatedByString:@"|"];
-    int insertAgentProfile = TABLE_INSERTION_FAILED;
+    int insertAgentProfile = 400;
     if (urlArr.count < 1) {
         return 0;//should not reach here
     }
@@ -184,7 +184,7 @@
     NSString* agentStatus_1 = [urlArr objectAtIndex:17];
     NSString* channel_1 = [urlArr objectAtIndex:18];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:agentCode_1 forKey:AGENT_KEY_CODE];
+    [defaults setObject:agentCode_1 forKey:@"agentCode"];
     [defaults synchronize];
     
     sqlite3_stmt *statement;
@@ -216,7 +216,7 @@
 
         if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK){
             if (sqlite3_step(statement) == SQLITE_DONE){
-                insertAgentProfile = TABLE_INSERTION_SUCCESS;
+                insertAgentProfile = 400;
             }
             else{
                 NSLog(@"%@",[[NSString alloc] initWithUTF8String:sqlite3_errmsg(contactDB)]) ;

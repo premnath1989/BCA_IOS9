@@ -9,7 +9,7 @@
 #ifndef LoginMacros_h
 #define LoginMacros_h
 
-// DB Related Const
+// DB Related Consta
 const int DATABASE_ERROR = 500;
 
 // Table Related Const

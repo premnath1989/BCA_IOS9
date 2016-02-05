@@ -29,6 +29,7 @@
 #import <AdSupport/ASIdentifierManager.h>
 #import "Reachability.h"
 #import <SystemConfiguration/SystemConfiguration.h>
+#import "LoginMacros.h"
 
 @interface Login ()
 
@@ -236,23 +237,23 @@ static NSString *labelVers;
         NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:0 timeoutInterval:20];
         
         AFXMLRequestOperation *operation = [AFXMLRequestOperation XMLParserRequestOperationWithRequest:request
-                                                                                               success:^(NSURLRequest *request, NSHTTPURLResponse *response, NSXMLParser *XMLParser) {
-                                                                                                   
-                                                                                                   XMLParser.delegate = self;
-                                                                                                   [XMLParser setShouldProcessNamespaces:YES];
-                                                                                                   [XMLParser parse];
-                                                                                                   
-                                                                                               } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSXMLParser *XMLParser) {
-                                                                                                   [MBProgressHUD hideHUDForView:self.view animated:YES];
-                                                                                                   NSLog(@"error in calling web service");
-                                                                                                   UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
-                                                                                                                                                   message:@"Error in connecting to Web service. You will now be logged in as offline mode."
-                                                                                                                                                  delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                                                                                                   alert.tag = 10;
-                                                                                                   [alert show];
-                                                                                                   
-                                                                                                   alert = Nil;
-                                                                                               }];
+           success:^(NSURLRequest *request, NSHTTPURLResponse *response, NSXMLParser *XMLParser) {
+               
+               XMLParser.delegate = self;
+               [XMLParser setShouldProcessNamespaces:YES];
+               [XMLParser parse];
+               
+           } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSXMLParser *XMLParser) {
+               [MBProgressHUD hideHUDForView:self.view animated:YES];
+               NSLog(@"error in calling web service");
+               UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
+                                                               message:@"Error in connecting to Web service. You will now be logged in as offline mode."
+                                                              delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+               alert.tag = 10;
+               [alert show];
+               
+               alert = Nil;
+           }];
         [operation start];
         
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -436,96 +437,6 @@ static NSString *labelVers;
     
 }
 
-
-/*
- * Edited by : Erwin
- * Desc : Move it to LoginDBManagement
- * Goal : Refactoring
- */
-//-(void)updateDateLogin
-//{
-//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-//    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-//    NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
-//    
-//    const char *dbpath = [databasePath UTF8String];
-//    sqlite3_stmt *statement;
-//    
-//    if (sqlite3_open(dbpath, &contactDB) == SQLITE_OK)
-//    {
-//        //NSString *querySQL = [NSString stringWithFormat:@"UPDATE User_Profile SET LastLogonDate= \"%@\" WHERE IndexNo=\"%d\"",dateString,indexNo];
-//        NSString *querySQL = [NSString stringWithFormat:@"UPDATE Agent_Profile SET LastLogonDate= \"%@\" WHERE IndexNo=\"%d\"",dateString,indexNo];
-//        
-//        const char *query_stmt = [querySQL UTF8String];
-//        if (sqlite3_prepare_v2(contactDB, query_stmt, -1, &statement, NULL) == SQLITE_OK)
-//        {
-//            if (sqlite3_step(statement) == SQLITE_DONE)
-//            {
-//                NSLog(@"date update!");
-//                
-//            } else {
-//                NSLog(@"date update Failed!");
-//            }
-//            sqlite3_finalize(statement);
-//        }
-//        sqlite3_close(contactDB);
-//        
-//        query_stmt = Nil;
-//        querySQL = Nil;
-//    }
-//    
-//    dateFormatter = Nil;
-//    dateString = Nil;
-//    dbpath = Nil;
-//    statement = Nil;
-//}
-
-/*
- * Edited by : Erwin
- * Desc : not being used
- * Goal : Refactoring
- */
-//-(void)checkingLastLogout
-//{
-//    const char *dbpath = [databasePath UTF8String];
-//    sqlite3_stmt *statement;
-//    
-//    if (sqlite3_open(dbpath, &contactDB) == SQLITE_OK)
-//    {
-//        //NSString *querySQL = [NSString stringWithFormat: @"SELECT LastLogoutDate FROM User_Profile WHERE IndexNo=\"%d\"",indexNo];
-//        NSString *querySQL = [NSString stringWithFormat: @"SELECT LastLogoutDate FROM Agent_Profile WHERE IndexNo=\"%d\"",indexNo];
-//        
-//        const char *query_stmt = [querySQL UTF8String];
-//        if (sqlite3_prepare_v2(contactDB, query_stmt, -1, &statement, NULL) == SQLITE_OK)
-//        {
-//            if (sqlite3_step(statement) == SQLITE_ROW)
-//            {
-//                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-//                [dateFormatter setDateFormat:@"dd-MM-yyyy HH:mm:ss"];
-//                
-//                //                NSDate *logoutDate = [NSDate dateWithTimeIntervalSinceNow: sqlite3_column_double(statement, 0)];
-//                
-//                NSString *logoutDate = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 0)];
-//                
-//                //                NSDate *logoutDate = [dateFormatter stringFromDate:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)]];
-//                
-//                
-//                NSLog(@"%@",logoutDate);
-//                dateFormatter = Nil;
-//                logoutDate = Nil;
-//                
-//            } else {
-//                NSLog(@"error check logout");
-//            }
-//            sqlite3_finalize(statement);
-//        }
-//        sqlite3_close(contactDB);
-//        querySQL = Nil, query_stmt = Nil;
-//    }
-//    
-//    dbpath = Nil, statement = Nil;
-//}
-
 #pragma mark - keyboard display
 
 -(void)keyboardDidShow:(NSNotificationCenter *)notification
@@ -621,20 +532,11 @@ static NSString *labelVers;
         // connected, do some internet stuff
         NSLog(@"nogot");
     }
-    
-    
-    
-    
     //http://192.168.2.107/AgentWebService/AgentMgmt.asmx/ValidateAgentAndDevice?strAgentID=&strDeviceID=
     
     NSString *deviceId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
     
     NSLog(@"devideId %@", [[[UIDevice currentDevice] identifierForVendor] UUIDString]);
-    
-    
-    
-    
-    
     
     NSString *post = [NSString stringWithFormat:@"strAgentID=%@&strPassword=%@&strDeviceID=%@",txtUsername.text,txtPassword.text, @"1AE92BBE-1B69-413E-982A-557CBA969D4B"];
     //	NSString *post = [NSString stringWithFormat:@"strAgentID=%@&strPassword=%@&strDeviceID=%@",txtUsername.text,txtPassword.text, [[[UIDevice currentDevice] identifierForVendor] UUIDString]];
@@ -658,9 +560,6 @@ static NSString *labelVers;
     //D33D26AB-2319-4088-A7AD-E8A69F675F19
     NSError *error;
     urlData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    
-    
-    
     
     BOOL hasConn;
     if(conn) {
@@ -977,10 +876,6 @@ static NSString *labelVers;
             alert = Nil;
         }
         
-        
-        
-        
-        
         //        NSString *storedAgentStatus = [self getStoredAgentStatus];
         
         //        if([storedAgentStatus isEqualToString:@"Y"])
@@ -1037,111 +932,10 @@ static NSString *labelVers;
     return deviceSerial;
 }
 
--(void) getAppInfo
-{
-    if([agentCode length]==0)
-    {
-        agentCode = [self getStoredAgentCode];
-    }
-    
-    xmlType = XML_TYPE_GET_APP_INFO;
-    NSString *strURL = [NSString stringWithFormat:@"%@eSubmissionWS/eSubmissionXMLService.asmx/"
-                        "GetAppInfo?Input1=%@&Input2=%@&Input3=%@",
-                        [SIUtilities WSLogin],  APP_TYPE_HLA_FAST, agentCode,[self getDeviceSerial]];
-    NSLog(@"%@", strURL);
-    NSURL *url = [NSURL URLWithString:strURL];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:0 timeoutInterval:20];
-    
-    AFXMLRequestOperation *operation = [AFXMLRequestOperation XMLParserRequestOperationWithRequest:request
-                                                                                           success:^(NSURLRequest *request, NSHTTPURLResponse *response, NSXMLParser *XMLParser) {
-                                                                                               
-                                                                                               XMLParser.delegate = self;
-                                                                                               [XMLParser setShouldProcessNamespaces:YES];
-                                                                                               [XMLParser parse];
-                                                                                               
-                                                                                           } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSXMLParser *XMLParser) {
-                                                                                               [MBProgressHUD hideHUDForView:self.view animated:YES];
-                                                                                               NSLog(@"error in calling web service");
-                                                                                               UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
-                                                                                                                                               message:@"Error in connecting to Web service. Please check your internet connection"
-                                                                                                                                              delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                                                                                               [alert show];
-                                                                                               
-                                                                                               alert = Nil;
-                                                                                           }];
-    [operation start];
-    
-}
-
-/*
- - (BOOL) isValidAgent
- {
- internetReachableFoo = [Reachability reachabilityWithHostname:@"www.google.com"];
- 
- NSString *strURL = [NSString stringWithFormat:@"%@eSubmissionWS/eSubmissionXMLService.asmx/"
- "ValidateAgent?strinput1=%@&strinput2=%@&strinput3=%@&iinput4=%@",
- [SIUtilities WSLogin],  txtUsername.text, txtPassword.text, [self getIPAddress], @"1"]; //for testing put 1, will need to get from a stored variable
- 
- NSURL *url = [NSURL URLWithString:strURL];
- NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:0 timeoutInterval:20];
- 
- AFXMLRequestOperation *operation = [AFXMLRequestOperation XMLParserRequestOperationWithRequest:request
- success:^(NSURLRequest *request, NSHTTPURLResponse *response, NSXMLParser *XMLParser) {
- NSLog(@"responseobject: %@", [responseObject description]);
- } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSXMLParser *XMLParser) {
- NSLog(@"error in calling web service");
- UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
- message:@"Error in connecting to Web service. Please check your internet connection"
- delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
- [alert show];
- 
- alert = Nil;
- }];
- 
- }
- */
-
-- (NSString *)getIPAddress {
-    
-    NSString *address = @"error";
-    struct ifaddrs *interfaces = NULL;
-    struct ifaddrs *temp_addr = NULL;
-    int success = 0;
-    // retrieve the current interfaces - returns 0 on success
-    success = getifaddrs(&interfaces);
-    if (success == 0) {
-        // Loop through linked list of interfaces
-        temp_addr = interfaces;
-        while(temp_addr != NULL) {
-            if(temp_addr->ifa_addr->sa_family == AF_INET) {
-                // Check if interface is en0 which is the wifi connection on the iPhone
-                if([[NSString stringWithUTF8String:temp_addr->ifa_name] isEqualToString:@"en0"]) {
-                    // Get NSString from C String
-                    address = [NSString stringWithUTF8String:inet_ntoa(((struct sockaddr_in *)temp_addr->ifa_addr)->sin_addr)];
-                    
-                }
-                
-            }
-            
-            temp_addr = temp_addr->ifa_next;
-        }
-    }
-    // Free memory
-    freeifaddrs(interfaces);
-    return address;
-    
-}
-
 
 - (IBAction)btnReset:(id)sender
 {
-    
-    
     [self loginSuccess];
-    
-    
-    
-    
     //    const char *dbpath = [databasePath UTF8String];
     //    sqlite3_stmt *statement;
     //    sqlite3_stmt *statement2;
@@ -1212,24 +1006,6 @@ static NSString *labelVers;
     
 }
 
--(void) storeBadAttempts
-{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    [defaults setObject:[NSNumber numberWithInt:badAttempts] forKey:KEY_BAD_ATTEMPTS];
-    [defaults synchronize];
-}
-
--(NSInteger) getBadAttempts
-{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSNumber *number = [defaults objectForKey:KEY_BAD_ATTEMPTS];
-    
-    NSInteger anInt = [number intValue];
-    
-    return anInt;
-}
-
 #pragma mark - XML parser
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName
     attributes:(NSDictionary *)attributeDict  {
@@ -1239,172 +1015,6 @@ static NSString *labelVers;
     if (qName) {
         self.elementName = qName;
     }
-    
-}
-
-- (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
-    if (!self.elementName){
-        return;
-    }
-    
-    if([self.elementName isEqualToString:@"LoginError"]){
-        
-        if ([string isEqualToString:@""]) {
-            
-            ProceedStatus = @"0";
-            
-        }
-        else{
-            
-            ProceedStatus = @"1";
-            /*
-             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Agency Portal" message:[NSString stringWithFormat:@"%@", string]
-             delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-             alert.tag = 1;
-             //[alert show];
-             
-             alert = Nil;
-             
-             
-             
-             */
-            msg = string;
-            
-        }
-        
-    }
-    
-    if(xmlType == XML_TYPE_VALIDATE_AGENT)
-    {
-        if(isFirstDevice)
-        {
-            NSLog(@"%@" , self.elementName);
-            NSLog(@"%@" , string);
-            
-            if([self.elementName isEqualToString:@"BadAttempts"]){
-                badAttempts = [string intValue];
-            }
-            
-            if([self.elementName isEqualToString:@"Status"]){
-                status = string;
-            }
-            
-            if([self.elementName isEqualToString:@"Error"]){
-                error = string;
-            }
-            
-            if([self.elementName isEqualToString:@"AgentInfo"]){
-                agentInfo = string;
-            }
-            
-            if([self.elementName isEqualToString:@"Output1"]){ //agent code
-                agentCode = string;
-            }
-            
-            
-            if([self.elementName isEqualToString:@"Output2"]){ //agent name
-                agentName = string;
-            }
-            
-            if([self.elementName isEqualToString:@"Output3"]){ //new IC no
-                icNo = string;
-            }
-            
-            if([self.elementName isEqualToString:@"Output4"]){ //contract date
-                contractDate = string;
-            }
-            
-            if([self.elementName isEqualToString:@"Output5"]){ //email address
-                email = string;
-            }
-            
-            
-            if([self.elementName isEqualToString:@"Output6"]){ //address1
-                address1 = string;
-            }
-            
-            if([self.elementName isEqualToString:@"Output7"]){ //address2
-                address2 = string;
-            }
-            
-            if([self.elementName isEqualToString:@"Output8"]){ //address3
-                address3 = string;
-            }
-            
-            if([self.elementName isEqualToString:@"Output9"]){ //postal
-                postalCode = string;
-            }
-            
-            if([self.elementName isEqualToString:@"Output10"]){ //state
-                stateCode = string;
-            }
-            
-            if([self.elementName isEqualToString:@"Output11"]){ //country
-                countryCode = string;
-            }
-            
-            if([self.elementName isEqualToString:@"Output12"]){ //agent status
-                agentStatus = string;
-            }
-            
-            if([self.elementName isEqualToString:@"Output13"]){ //leader code
-                leaderCode = string;
-            }
-            
-            if([self.elementName isEqualToString:@"Output14"]){ //leader name
-                leaderName = string;
-            }
-        }
-    }else
-        if(xmlType == XML_TYPE_GET_AGENT_INFO)
-        {
-            NSLog(@"self.elementName : %@ || string : %@", self.elementName, string);
-            if([self.elementName isEqualToString:@"Output1"]){
-                agentStatus = string;
-            }
-            
-            if([self.elementName isEqualToString:@"Output1_Desc"]){
-                statusDesc = string;
-            }
-            
-            if([self.elementName isEqualToString:@"Output2"]){
-                loginDate = string;
-            }
-            
-            if([self.elementName isEqualToString:@"Output3"]){
-                deviceStatus = string;
-            }
-        }else
-            if(xmlType == XML_TYPE_GET_APP_INFO)
-            {
-                if([self.elementName isEqualToString:@"Output1"]){
-                    currentVers = string;
-                }
-                
-                if([self.elementName isEqualToString:@"Output2"]){
-                    lastUpdateDate = string;
-                }
-                
-                if([self.elementName isEqualToString:@"Output3"]){
-                    obsoleteVersNo = string;
-                }
-                
-                if([self.elementName isEqualToString:@"Output3"]){
-                    obsoleteDate = string;
-                }
-                
-                if([self.elementName isEqualToString:@"Output4"]){
-                    obsoleteDate = string;
-                }
-                
-                if([self.elementName isEqualToString:@"Output5"]){
-                    deviceStatus = string;
-                }
-                
-                if([self.elementName isEqualToString:@"Output6"]){
-                    licenseStatus = string;
-                }
-            }
     
 }
 
@@ -1434,22 +1044,18 @@ static NSString *labelVers;
     
     [defaults setObject:[self getTodayDateInStr] forKey:KEY_LAST_CHECK_DEVICE_DATE];
     [defaults synchronize];
-    
 }
 
 -(NSString *) getStoredLastCheckedDeviceDate
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
     return [defaults stringForKey:KEY_LAST_CHECK_DEVICE_DATE];
 }
 
 -(void) storeDeviceStatus
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
     //    deviceStatus = @"N";
-    
     [defaults setObject:deviceStatus forKey:KEY_DEVICE_STATUS];
     [defaults synchronize];
     
@@ -1572,56 +1178,6 @@ static NSString *labelVers;
     return stringFromDate;
 }
 
--(BOOL)hasCheckedToday
-{
-    NSString *lastCheckedDateStr = [self getStoredLastCheckedDeviceDate];
-    
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init ];
-    [formatter setDateFormat:DATE_FORMAT];
-    
-    NSString *todayDateStr = [formatter stringFromDate:[NSDate date]];
-    
-    NSDate *todayDate = [formatter dateFromString:todayDateStr]; 
-    NSDate *lastCheckedDate = [formatter dateFromString:lastCheckedDateStr];
-    
-    NSComparisonResult result; 
-    //has three possible values: NSOrderedSame,NSOrderedDescending, NSOrderedAscending
-    
-    result = [todayDate compare:lastCheckedDate]; // comparing two dates
-    
-    if([lastCheckedDateStr length]==0)
-    {
-        return NO;
-    }else
-    {
-        if(result==NSOrderedAscending)
-        {
-            NSLog(@"today is less");
-            return NO;
-        }
-        else if(result==NSOrderedDescending)
-        {
-            NSLog(@"newDate is less");
-            return NO;
-        }
-        else
-        {
-            NSLog(@"Both dates are same");
-            return YES;
-        }
-    }
-}
-
--(void) doOnceADayCheck:(BOOL)showLogoutF
-{
-    showLogout = showLogoutF;
-    if(![self hasCheckedToday])
-    {
-        [self getAppInfo];
-    }
-}
-
-
 #pragma mark - memory
 
 - (void)viewDidUnload
@@ -1647,6 +1203,358 @@ static NSString *labelVers;
     return networkStatus != NotReachable;
 }
 
+/*
+ * Edited By : Erwin
+ * Desc : Not being used
+ * Goal : Refactoring
+ */
+//-(void) getAppInfo
+//{
+//    if([agentCode length]==0)
+//    {
+//        agentCode = [self getStoredAgentCode];
+//    }
+//    
+//    xmlType = XML_TYPE_GET_APP_INFO;
+//    NSString *strURL = [NSString stringWithFormat:@"%@eSubmissionWS/eSubmissionXMLService.asmx/"
+//                        "GetAppInfo?Input1=%@&Input2=%@&Input3=%@",
+//                        [SIUtilities WSLogin],  APP_TYPE_HLA_FAST, agentCode,[self getDeviceSerial]];
+//    NSLog(@"%@", strURL);
+//    NSURL *url = [NSURL URLWithString:strURL];
+//    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:0 timeoutInterval:20];
+//    
+//    AFXMLRequestOperation *operation = [AFXMLRequestOperation XMLParserRequestOperationWithRequest:request
+//                                                                                           success:^(NSURLRequest *request, NSHTTPURLResponse *response, NSXMLParser *XMLParser) {
+//                                                                                               
+//                                                                                               XMLParser.delegate = self;
+//                                                                                               [XMLParser setShouldProcessNamespaces:YES];
+//                                                                                               [XMLParser parse];
+//                                                                                               
+//                                                                                           } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSXMLParser *XMLParser) {
+//                                                                                               [MBProgressHUD hideHUDForView:self.view animated:YES];
+//                                                                                               NSLog(@"error in calling web service");
+//                                                                                               UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
+//                                                                                                                                               message:@"Error in connecting to Web service. Please check your internet connection"
+//                                                                                                                                              delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//                                                                                               [alert show];
+//                                                                                               
+//                                                                                               alert = Nil;
+//                                                                                           }];
+//    [operation start];
+//}
+
+/*
+ * Edited By : Erwin
+ * Desc : Not being used
+ * Goal : Refactoring
+ */
+//-(void) storeBadAttempts
+//{
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    
+//    [defaults setObject:[NSNumber numberWithInt:badAttempts] forKey:KEY_BAD_ATTEMPTS];
+//    [defaults synchronize];
+//}
+//
+//-(NSInteger) getBadAttempts
+//{
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    NSNumber *number = [defaults objectForKey:KEY_BAD_ATTEMPTS];
+//    
+//    NSInteger anInt = [number intValue];
+//    
+//    return anInt;
+//}
+
+/*
+ * Edited By : Erwin
+ * Desc : Not being used
+ * Goal : Refactoring
+ */
+//- (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
+//    if (!self.elementName){
+//        return;
+//    }
+//
+//    if([self.elementName isEqualToString:@"LoginError"]){
+//
+//        if ([string isEqualToString:@""]) {
+//
+//            ProceedStatus = @"0";
+//
+//        }
+//        else{
+//
+//            ProceedStatus = @"1";
+//            /*
+//             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Agency Portal" message:[NSString stringWithFormat:@"%@", string]
+//             delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//             alert.tag = 1;
+//             //[alert show];
+//
+//             alert = Nil;
+//
+//
+//
+//             */
+//            msg = string;
+//
+//        }
+//
+//    }
+//
+//    if(xmlType == XML_TYPE_VALIDATE_AGENT)
+//    {
+//        if(isFirstDevice)
+//        {
+//            NSLog(@"%@" , self.elementName);
+//            NSLog(@"%@" , string);
+//
+//            if([self.elementName isEqualToString:@"BadAttempts"]){
+//                badAttempts = [string intValue];
+//            }
+//
+//            if([self.elementName isEqualToString:@"Status"]){
+//                status = string;
+//            }
+//
+//            if([self.elementName isEqualToString:@"Error"]){
+//                error = string;
+//            }
+//
+//            if([self.elementName isEqualToString:@"AgentInfo"]){
+//                agentInfo = string;
+//            }
+//
+//            if([self.elementName isEqualToString:@"Output1"]){ //agent code
+//                agentCode = string;
+//            }
+//
+//
+//            if([self.elementName isEqualToString:@"Output2"]){ //agent name
+//                agentName = string;
+//            }
+//
+//            if([self.elementName isEqualToString:@"Output3"]){ //new IC no
+//                icNo = string;
+//            }
+//
+//            if([self.elementName isEqualToString:@"Output4"]){ //contract date
+//                contractDate = string;
+//            }
+//
+//            if([self.elementName isEqualToString:@"Output5"]){ //email address
+//                email = string;
+//            }
+//
+//
+//            if([self.elementName isEqualToString:@"Output6"]){ //address1
+//                address1 = string;
+//            }
+//
+//            if([self.elementName isEqualToString:@"Output7"]){ //address2
+//                address2 = string;
+//            }
+//
+//            if([self.elementName isEqualToString:@"Output8"]){ //address3
+//                address3 = string;
+//            }
+//
+//            if([self.elementName isEqualToString:@"Output9"]){ //postal
+//                postalCode = string;
+//            }
+//
+//            if([self.elementName isEqualToString:@"Output10"]){ //state
+//                stateCode = string;
+//            }
+//
+//            if([self.elementName isEqualToString:@"Output11"]){ //country
+//                countryCode = string;
+//            }
+//
+//            if([self.elementName isEqualToString:@"Output12"]){ //agent status
+//                agentStatus = string;
+//            }
+//
+//            if([self.elementName isEqualToString:@"Output13"]){ //leader code
+//                leaderCode = string;
+//            }
+//
+//            if([self.elementName isEqualToString:@"Output14"]){ //leader name
+//                leaderName = string;
+//            }
+//        }
+//    }else
+//        if(xmlType == XML_TYPE_GET_AGENT_INFO)
+//        {
+//            NSLog(@"self.elementName : %@ || string : %@", self.elementName, string);
+//            if([self.elementName isEqualToString:@"Output1"]){
+//                agentStatus = string;
+//            }
+//
+//            if([self.elementName isEqualToString:@"Output1_Desc"]){
+//                statusDesc = string;
+//            }
+//
+//            if([self.elementName isEqualToString:@"Output2"]){
+//                loginDate = string;
+//            }
+//
+//            if([self.elementName isEqualToString:@"Output3"]){
+//                deviceStatus = string;
+//            }
+//        }else
+//            if(xmlType == XML_TYPE_GET_APP_INFO)
+//            {
+//                if([self.elementName isEqualToString:@"Output1"]){
+//                    currentVers = string;
+//                }
+//
+//                if([self.elementName isEqualToString:@"Output2"]){
+//                    lastUpdateDate = string;
+//                }
+//
+//                if([self.elementName isEqualToString:@"Output3"]){
+//                    obsoleteVersNo = string;
+//                }
+//
+//                if([self.elementName isEqualToString:@"Output3"]){
+//                    obsoleteDate = string;
+//                }
+//
+//                if([self.elementName isEqualToString:@"Output4"]){
+//                    obsoleteDate = string;
+//                }
+//
+//                if([self.elementName isEqualToString:@"Output5"]){
+//                    deviceStatus = string;
+//                }
+//
+//                if([self.elementName isEqualToString:@"Output6"]){
+//                    licenseStatus = string;
+//                }
+//            }
+//
+//}
+
+/*
+ - (BOOL) isValidAgent
+ {
+ internetReachableFoo = [Reachability reachabilityWithHostname:@"www.google.com"];
+ 
+ NSString *strURL = [NSString stringWithFormat:@"%@eSubmissionWS/eSubmissionXMLService.asmx/"
+ "ValidateAgent?strinput1=%@&strinput2=%@&strinput3=%@&iinput4=%@",
+ [SIUtilities WSLogin],  txtUsername.text, txtPassword.text, [self getIPAddress], @"1"]; //for testing put 1, will need to get from a stored variable
+ 
+ NSURL *url = [NSURL URLWithString:strURL];
+ NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:0 timeoutInterval:20];
+ 
+ AFXMLRequestOperation *operation = [AFXMLRequestOperation XMLParserRequestOperationWithRequest:request
+ success:^(NSURLRequest *request, NSHTTPURLResponse *response, NSXMLParser *XMLParser) {
+ NSLog(@"responseobject: %@", [responseObject description]);
+ } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSXMLParser *XMLParser) {
+ NSLog(@"error in calling web service");
+ UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
+ message:@"Error in connecting to Web service. Please check your internet connection"
+ delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+ [alert show];
+ 
+ alert = Nil;
+ }];
+ 
+ }
+ */
+
+/*
+ * Edited by : Erwin
+ * Desc : Not being Used
+ * Goal : Refactoring
+ */
+//- (NSString *)getIPAddress {
+//
+//    NSString *address = @"error";
+//    struct ifaddrs *interfaces = NULL;
+//    struct ifaddrs *temp_addr = NULL;
+//    int success = 0;
+//    // retrieve the current interfaces - returns 0 on success
+//    success = getifaddrs(&interfaces);
+//    if (success == 0) {
+//        // Loop through linked list of interfaces
+//        temp_addr = interfaces;
+//        while(temp_addr != NULL) {
+//            if(temp_addr->ifa_addr->sa_family == AF_INET) {
+//                // Check if interface is en0 which is the wifi connection on the iPhone
+//                if([[NSString stringWithUTF8String:temp_addr->ifa_name] isEqualToString:@"en0"]) {
+//                    // Get NSString from C String
+//                    address = [NSString stringWithUTF8String:inet_ntoa(((struct sockaddr_in *)temp_addr->ifa_addr)->sin_addr)];
+//
+//                }
+//
+//            }
+//
+//            temp_addr = temp_addr->ifa_next;
+//        }
+//    }
+//    // Free memory
+//    freeifaddrs(interfaces);
+//    return address;
+//
+//}
+
+
+/*
+ * Edited by : Erwin
+ * Desc : Not being used
+ * Goal : Refactoring
+ */
+//-(BOOL)hasCheckedToday
+//{
+//    NSString *lastCheckedDateStr = [self getStoredLastCheckedDeviceDate];
+//
+//    NSDateFormatter *formatter = [[NSDateFormatter alloc] init ];
+//    [formatter setDateFormat:DATE_FORMAT];
+//
+//    NSString *todayDateStr = [formatter stringFromDate:[NSDate date]];
+//
+//    NSDate *todayDate = [formatter dateFromString:todayDateStr];
+//    NSDate *lastCheckedDate = [formatter dateFromString:lastCheckedDateStr];
+//
+//    NSComparisonResult result;
+//    //has three possible values: NSOrderedSame,NSOrderedDescending, NSOrderedAscending
+//
+//    result = [todayDate compare:lastCheckedDate]; // comparing two dates
+//
+//    if([lastCheckedDateStr length]==0)
+//    {
+//        return NO;
+//    }else
+//    {
+//        if(result==NSOrderedAscending)
+//        {
+//            NSLog(@"today is less");
+//            return NO;
+//        }
+//        else if(result==NSOrderedDescending)
+//        {
+//            NSLog(@"newDate is less");
+//            return NO;
+//        }
+//        else
+//        {
+//            NSLog(@"Both dates are same");
+//            return YES;
+//        }
+//    }
+//}
+//
+//-(void) doOnceADayCheck:(BOOL)showLogoutF
+//{
+//    showLogout = showLogoutF;
+//    if(![self hasCheckedToday])
+//    {
+//        [self getAppInfo];
+//    }
+//}
 
 /*
  * Edited By : Erwin
@@ -2329,6 +2237,96 @@ static NSString *labelVers;
 //                        }
 //            }
 //
+//}
+
+
+/*
+ * Edited by : Erwin
+ * Desc : Move it to LoginDBManagement
+ * Goal : Refactoring
+ */
+//-(void)updateDateLogin
+//{
+//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+//    NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
+//
+//    const char *dbpath = [databasePath UTF8String];
+//    sqlite3_stmt *statement;
+//
+//    if (sqlite3_open(dbpath, &contactDB) == SQLITE_OK)
+//    {
+//        //NSString *querySQL = [NSString stringWithFormat:@"UPDATE User_Profile SET LastLogonDate= \"%@\" WHERE IndexNo=\"%d\"",dateString,indexNo];
+//        NSString *querySQL = [NSString stringWithFormat:@"UPDATE Agent_Profile SET LastLogonDate= \"%@\" WHERE IndexNo=\"%d\"",dateString,indexNo];
+//
+//        const char *query_stmt = [querySQL UTF8String];
+//        if (sqlite3_prepare_v2(contactDB, query_stmt, -1, &statement, NULL) == SQLITE_OK)
+//        {
+//            if (sqlite3_step(statement) == SQLITE_DONE)
+//            {
+//                NSLog(@"date update!");
+//
+//            } else {
+//                NSLog(@"date update Failed!");
+//            }
+//            sqlite3_finalize(statement);
+//        }
+//        sqlite3_close(contactDB);
+//
+//        query_stmt = Nil;
+//        querySQL = Nil;
+//    }
+//
+//    dateFormatter = Nil;
+//    dateString = Nil;
+//    dbpath = Nil;
+//    statement = Nil;
+//}
+
+/*
+ * Edited by : Erwin
+ * Desc : not being used
+ * Goal : Refactoring
+ */
+//-(void)checkingLastLogout
+//{
+//    const char *dbpath = [databasePath UTF8String];
+//    sqlite3_stmt *statement;
+//
+//    if (sqlite3_open(dbpath, &contactDB) == SQLITE_OK)
+//    {
+//        //NSString *querySQL = [NSString stringWithFormat: @"SELECT LastLogoutDate FROM User_Profile WHERE IndexNo=\"%d\"",indexNo];
+//        NSString *querySQL = [NSString stringWithFormat: @"SELECT LastLogoutDate FROM Agent_Profile WHERE IndexNo=\"%d\"",indexNo];
+//
+//        const char *query_stmt = [querySQL UTF8String];
+//        if (sqlite3_prepare_v2(contactDB, query_stmt, -1, &statement, NULL) == SQLITE_OK)
+//        {
+//            if (sqlite3_step(statement) == SQLITE_ROW)
+//            {
+//                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//                [dateFormatter setDateFormat:@"dd-MM-yyyy HH:mm:ss"];
+//
+//                //                NSDate *logoutDate = [NSDate dateWithTimeIntervalSinceNow: sqlite3_column_double(statement, 0)];
+//
+//                NSString *logoutDate = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 0)];
+//
+//                //                NSDate *logoutDate = [dateFormatter stringFromDate:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)]];
+//
+//
+//                NSLog(@"%@",logoutDate);
+//                dateFormatter = Nil;
+//                logoutDate = Nil;
+//
+//            } else {
+//                NSLog(@"error check logout");
+//            }
+//            sqlite3_finalize(statement);
+//        }
+//        sqlite3_close(contactDB);
+//        querySQL = Nil, query_stmt = Nil;
+//    }
+//
+//    dbpath = Nil, statement = Nil;
 //}
 
 @end
