@@ -391,6 +391,7 @@
 		A9E550A21C591E8000C9DAC2 /* libSPSignDoc_4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A9E550A11C591E8000C9DAC2 /* libSPSignDoc_4.0.a */; };
 		A9E550A51C591F7900C9DAC2 /* Expand Arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A9E550A31C591F7900C9DAC2 /* Expand Arrow.png */; };
 		A9E550A61C591F7900C9DAC2 /* Expand Arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A9E550A41C591F7900C9DAC2 /* Expand Arrow@2x.png */; };
+		AAD5455F1C6443080029631D /* LoginDBManagement.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD5455E1C6443080029631D /* LoginDBManagement.m */; };
 		C3092ABA1ADF5E4500756616 /* ClearData.m in Sources */ = {isa = PBXBuildFile; fileRef = C3092AB91ADF5E4500756616 /* ClearData.m */; };
 		C30A259C17F3C8D500613A0F /* AdditionalQuestions.m in Sources */ = {isa = PBXBuildFile; fileRef = C30A253917F3C8D500613A0F /* AdditionalQuestions.m */; };
 		C30A259D17F3C8D500613A0F /* AddtionalQuestInsured.m in Sources */ = {isa = PBXBuildFile; fileRef = C30A253B17F3C8D500613A0F /* AddtionalQuestInsured.m */; };
@@ -1444,6 +1445,9 @@
 		A9E550A11C591E8000C9DAC2 /* libSPSignDoc_4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSPSignDoc_4.0.a; sourceTree = "<group>"; };
 		A9E550A31C591F7900C9DAC2 /* Expand Arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Expand Arrow.png"; sourceTree = "<group>"; };
 		A9E550A41C591F7900C9DAC2 /* Expand Arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Expand Arrow@2x.png"; sourceTree = "<group>"; };
+		AAD5455D1C6442F80029631D /* loginDBManagement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = loginDBManagement.h; sourceTree = "<group>"; };
+		AAD5455E1C6443080029631D /* LoginDBManagement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginDBManagement.m; sourceTree = "<group>"; };
+		AAD545601C644DE60029631D /* LoginMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginMacros.h; sourceTree = "<group>"; };
 		C3092AB81ADF5E4500756616 /* ClearData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClearData.h; sourceTree = "<group>"; };
 		C3092AB91ADF5E4500756616 /* ClearData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClearData.m; sourceTree = "<group>"; };
 		C30A253817F3C8D500613A0F /* AdditionalQuestions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdditionalQuestions.h; sourceTree = "<group>"; };
@@ -3215,6 +3219,16 @@
 			name = "HLADB Model";
 			sourceTree = "<group>";
 		};
+		AAD5455C1C643FF00029631D /* LoginUtilities */ = {
+			isa = PBXGroup;
+			children = (
+				AAD5455D1C6442F80029631D /* loginDBManagement.h */,
+				AAD5455E1C6443080029631D /* LoginDBManagement.m */,
+				AAD545601C644DE60029631D /* LoginMacros.h */,
+			);
+			name = LoginUtilities;
+			sourceTree = "<group>";
+		};
 		C319633618D989C800565B1C /* SupplementaryProposalForm1 */ = {
 			isa = PBXGroup;
 			children = (
@@ -4018,6 +4032,7 @@
 		C4EB48EC16152E8800C7FC8C /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				AAD5455C1C643FF00029631D /* LoginUtilities */,
 				6CB3125F18EE4E2B00A323A4 /* LoginVar.h */,
 				6CB3126018EE4E2B00A323A4 /* LoginVar.m */,
 				C4EB493A161592EB00C7FC8C /* UserProfile.h */,
@@ -5176,6 +5191,7 @@
 				4239AEDC1946DAE200BD6F53 /* PDFFormContainer.m in Sources */,
 				4239AEDD1946DAE200BD6F53 /* PDFObject.m in Sources */,
 				4239AEDE1946DAE200BD6F53 /* PDFPage.m in Sources */,
+				AAD5455F1C6443080029631D /* LoginDBManagement.m in Sources */,
 				4239AEDF1946DAE200BD6F53 /* PDFStream.m in Sources */,
 				4239AEE01946DAE200BD6F53 /* PDFObjectParser.m in Sources */,
 				4239AEE11946DAE200BD6F53 /* PDFUtility.m in Sources */,
