@@ -22,6 +22,7 @@
 #import "Country2.h"
 #import "SourceIncome.h"
 #import "VIPClass.h"
+#import "ReferralSource.h"
 #import "EditProspect.h"
 
 @class DataTable,DBController;
@@ -29,7 +30,7 @@
 - (void)FinishInsert;
 @end
 
-@interface ProspectViewController : UIViewController<IDTypeDelegate,SIDateDelegate,IDTypeDelegate, OccupationListDelegate,TitleDelegate,GroupDelegate, UITextFieldDelegate,UITextInputDelegate, UITextViewDelegate,NatinalityDelegate,RaceDelegate,MaritalStatusDelegate,ReligionDelegate,CountryDelegate,EditProspectDelegate, Country2Delegate,SourceIncomeDelegate,VIPClassDelegate>{
+@interface ProspectViewController : UIViewController<IDTypeDelegate,SIDateDelegate,IDTypeDelegate, OccupationListDelegate,TitleDelegate,GroupDelegate, UITextFieldDelegate,UITextInputDelegate, UITextViewDelegate,NatinalityDelegate,RaceDelegate,MaritalStatusDelegate,ReligionDelegate,CountryDelegate,EditProspectDelegate, Country2Delegate,SourceIncomeDelegate,VIPClassDelegate,ReferralSourceDelegate>{
     NSString *databasePath;
     sqlite3 *contactDB;
     UITextField *activeField;
@@ -45,6 +46,7 @@
     //added  by faiz
     SourceIncome *_sourceIncome;
     VIPClass *_vipClass;
+    ReferralSource *_referralSource;
     //end of add
     
     UIPopoverController *_OccupationListPopover;
@@ -61,6 +63,7 @@
     //added by faiz
     UIPopoverController *_sourceIncomePopover;
     UIPopoverController *_vipClassPopover;
+    UIPopoverController *_referralSourcePopover;
     //end of added by faiz
     UIPopoverController *_nationalityPopover2;
     id<ProspectViewControllerDelegate> _delegate;

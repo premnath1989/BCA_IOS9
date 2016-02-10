@@ -65,10 +65,11 @@ MBProgressHUD *HUD;
     [self.view endEditing:YES];
     [self resignFirstResponder];
     
-    self.view.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg10.jpg"]];
+    //modfied by faiz due to change request
+    //self.view.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg10.jpg"]];
     
     ColorHexCode *CustomColor = [[ColorHexCode alloc]init ];
-    self.navigationController.navigationBar.tintColor = [CustomColor colorWithHexString:@"A9BCF5"];
+    //self.navigationController.navigationBar.tintColor = [CustomColor colorWithHexString:@"A9BCF5"];
     
 //    searchBar.delegate = (id)self;
     [self getTotal]; //just to get total row of data.
@@ -76,6 +77,7 @@ MBProgressHUD *HUD;
     /*added by faiz*/
     modelProspectProfile=[[ModelProspectProfile alloc]init];
     ProspectTableData=[modelProspectProfile getProspectProfile];
+    [self createBlackStatusBar];
     /*end of added by faiz*/
     
     self.myTableView.rowHeight = 50;
@@ -110,6 +112,16 @@ MBProgressHUD *HUD;
     return NO;
 }
 
+#pragma mark - `added by faiz
+//added by faiz
+-(void)createBlackStatusBar{
+    CGFloat statusBarHeight = 20.0;
+    UIView* colorView = [[UIView alloc]initWithFrame:CGRectMake(0, -statusBarHeight, self.view.bounds.size.width, statusBarHeight)];
+    [colorView setBackgroundColor:[UIColor blackColor]];
+    [self.navigationController.navigationBar addSubview:colorView];
+}
+
+//end of added by faiz
 #pragma mark - `Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -856,7 +868,7 @@ MBProgressHUD *HUD;
 	
 	@try {
 		[self.navigationController pushViewController:_EditProspect animated:YES];
-		_EditProspect.navigationItem.title = @"Edit Client Profile";
+		_EditProspect.navigationItem.title = @"Edit";
 	} @catch (NSException * e) {
 		NSLog(@"Exception: %@", e);
 	} @finally {
@@ -943,13 +955,13 @@ MBProgressHUD *HUD;
     agree.view.superview.frame = CGRectMake(120, 200, 450, 600);
 	
     
-    UIStoryboard* clientProfileStoryboard = [UIStoryboard storyboardWithName:@"ClientProfileStoryboard" bundle:nil];
-    self.ProspectViewController = [clientProfileStoryboard instantiateViewControllerWithIdentifier:@"Prospect"];
-    _ProspectViewController.delegate = self;
+    //UIStoryboard* clientProfileStoryboard = [UIStoryboard storyboardWithName:@"ClientProfileStoryboard" bundle:nil];
+    self.ProspectViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"Prospect"];
+    self.ProspectViewController.delegate = self;
     [self.navigationController pushViewController:_ProspectViewController animated:YES];
     //Cheged by faiz due to language translation
     /*_ProspectViewController.navigationItem.title = @"Add Client Profile";*/
-    _ProspectViewController.navigationItem.title = @"Tambah Klien Baru";
+    _ProspectViewController.navigationItem.title = @"Add";
 }
 
 -(void) ReloadTableData

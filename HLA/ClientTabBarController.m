@@ -185,7 +185,7 @@ int rrr;
 {
     self.tabBarWidth = DEFAULT_TAB_BAR_HEIGHT;
     self.selectedIndex = INT_MAX;
-    _tabBarColor = [UIColor colorWithRed:35.0/255.0 green:148.0/255.0 blue:167.0/255.0 alpha:1.0];
+    _tabBarColor = [UIColor colorWithRed:250.0/255.0 green:175.0/255.0 blue:50.0/255.0 alpha:1.0];
 }
 
 #pragma mark -

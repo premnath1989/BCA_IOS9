@@ -15,4 +15,5 @@
 }
 -(NSDictionary *)getSourceIncome;
 -(NSDictionary *)getVIPClass;
+-(NSDictionary *)getReferralSource;
 @end

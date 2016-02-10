@@ -86,6 +86,8 @@
 		<string>HelveticaLTStd-Roman.otf</string>
 		<string>HelveticaLTStd-UltraComp.otf</string>
 	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationLandscapeRight</string>

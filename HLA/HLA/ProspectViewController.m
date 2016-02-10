@@ -432,59 +432,63 @@ bool RegDatehandling;
 -(void)setButtonImageAndTextAlignment{
     outletTitle.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     outletTitle.imageEdgeInsets = UIEdgeInsetsMake(0., outletTitle.frame.size.width - (24 + 10.0), 0., 0.);
-    outletTitle.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 0);
+    outletTitle.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
 
     outletDOB.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     outletDOB.imageEdgeInsets = UIEdgeInsetsMake(0., outletDOB.frame.size.width - (24 + 10.0), 0., 0.);
-    outletDOB.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 0);
+    outletDOB.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
     
     OtherIDType.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     OtherIDType.imageEdgeInsets = UIEdgeInsetsMake(0., outletDOB.frame.size.width - (24 + 10.0), 0., 0.);
-    OtherIDType.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 0);
+    OtherIDType.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
     
     outletMaritalStatus.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     outletMaritalStatus.imageEdgeInsets = UIEdgeInsetsMake(0., outletDOB.frame.size.width - (24 + 10.0), 0., 0.);
-    outletMaritalStatus.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 0);
+    outletMaritalStatus.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
 
     outletNationality.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     outletNationality.imageEdgeInsets = UIEdgeInsetsMake(0., outletNationality.frame.size.width - (24 + 10.0), 0., 0.);
-    outletNationality.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 0);
+    outletNationality.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
 
     outletReligion.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     outletReligion.imageEdgeInsets = UIEdgeInsetsMake(0., outletReligion.frame.size.width - (24 + 10.0), 0., 0.);
-    outletReligion.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 0);
+    outletReligion.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
     
     outletReligion.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     outletReligion.imageEdgeInsets = UIEdgeInsetsMake(0., outletReligion.frame.size.width - (24 + 10.0), 0., 0.);
-    outletReligion.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 0);
+    outletReligion.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
     
     btnOfficeCountry.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     btnOfficeCountry.imageEdgeInsets = UIEdgeInsetsMake(0., btnOfficeCountry.frame.size.width - (24 + 10.0), 0., 0.);
-    btnOfficeCountry.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 0);
+    btnOfficeCountry.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
     
     btnHomeCountry.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     btnHomeCountry.imageEdgeInsets = UIEdgeInsetsMake(0., btnHomeCountry.frame.size.width - (24 + 10.0), 0., 0.);
-    btnHomeCountry.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 0);
+    btnHomeCountry.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
     
     outletOccup.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     outletOccup.imageEdgeInsets = UIEdgeInsetsMake(0., outletOccup.frame.size.width - (24 + 10.0), 0., 0.);
-    outletOccup.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 0);
+    outletOccup.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
     
     btnCoutryOfBirth.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     btnCoutryOfBirth.imageEdgeInsets = UIEdgeInsetsMake(0., outletTitle.frame.size.width - (24 + 10.0), 0., 0.);
-    btnCoutryOfBirth.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 0);
+    btnCoutryOfBirth.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
 
     outletExpiryDate.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     outletExpiryDate.imageEdgeInsets = UIEdgeInsetsMake(0., outletExpiryDate.frame.size.width - (24 + 10.0), 0., 0.);
-    outletExpiryDate.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 0);
+    outletExpiryDate.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
     
     outletReferralSource.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     outletReferralSource.imageEdgeInsets = UIEdgeInsetsMake(0., outletReferralSource.frame.size.width - (24 + 10.0), 0., 0.);
-    outletReferralSource.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 0);
+    outletReferralSource.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
     
     _outletVIPClass.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     _outletVIPClass.imageEdgeInsets = UIEdgeInsetsMake(0., _outletVIPClass.frame.size.width - (24 + 10.0), 0., 0.);
-    _outletVIPClass.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 0);
+    _outletVIPClass.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
+    
+    _outletSourceIncome.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    _outletSourceIncome.imageEdgeInsets = UIEdgeInsetsMake(0., _outletSourceIncome.frame.size.width - (24 + 10.0), 0., 0.);
+    _outletSourceIncome.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
@@ -553,7 +557,7 @@ bool RegDatehandling;
     if(txtOfficeCountry.text== NULL)
         txtOfficeCountry.text = @"";
     
-    if([navgtitle isEqualToString:@"Tambah Klien Baru"]) {
+    if([navgtitle isEqualToString:@"Add"]) {
         [txtOtherIDType removeTarget:self action:@selector(OtheriDDidChange:) forControlEvents:UIControlEventEditingDidEnd];
         [txtIDType removeTarget:self action:@selector(NewICDidChange:) forControlEvents:UIControlEventEditingDidEnd];
         
@@ -1731,7 +1735,8 @@ bool RegDatehandling;
     }
     
     if (_SIDate == Nil) {
-        self.SIDate = [self.storyboard instantiateViewControllerWithIdentifier:@"SIDate"];
+        UIStoryboard *clientProfileStoryBoard = [UIStoryboard storyboardWithName:@"ClientProfileStoryboard" bundle:nil];
+        self.SIDate = [clientProfileStoryBoard instantiateViewControllerWithIdentifier:@"SIDate"];
         _SIDate.delegate = self;
         self.SIDatePopover = [[UIPopoverController alloc] initWithContentViewController:_SIDate];
     }
@@ -2461,6 +2466,27 @@ bool RegDatehandling;
         _vipClassPopover = [[UIPopoverController alloc] initWithContentViewController:_vipClass];
     }
     [_vipClassPopover presentPopoverFromRect:[sender bounds]  inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
+- (IBAction)actionReferralSource:(id)sender
+{
+    
+    [self resignFirstResponder];
+    [self.view endEditing:YES];
+    
+    NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
+    [ClientProfile setObject:@"YES" forKey:@"isNew"];
+    
+    Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
+    id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
+    [activeInstance performSelector:@selector(dismissKeyboard)];
+    
+    if (_referralSource == nil) {
+        _referralSource = [[ReferralSource alloc] initWithStyle:UITableViewStylePlain];
+        _referralSource.delegate = self;
+        _referralSourcePopover = [[UIPopoverController alloc] initWithContentViewController:_referralSource];
+    }
+    [_referralSourcePopover presentPopoverFromRect:[sender bounds]  inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
 //end of add by faiz
@@ -6991,6 +7017,18 @@ bool RegDatehandling;
     [_vipClassPopover dismissPopoverAnimated:YES];
 }
 
+
+-(void)selectedReferralSource:(NSString *)referralSource{
+    outletReferralSource.titleLabel.text = referralSource;
+    if([referralSource isEqualToString:@"- SELECT -"]) {
+        outletReferralSource.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+    } else {
+        outletReferralSource.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    }
+    [outletReferralSource setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",referralSource]forState:UIControlStateNormal];
+    [_referralSourcePopover dismissPopoverAnimated:YES];
+}
+
 -(void)selectedSourceIncome:(NSString *)sourceIncome{
     _outletSourceIncome.titleLabel.text = sourceIncome;
     if([sourceIncome isEqualToString:@"- SELECT -"]) {
@@ -6998,7 +7036,7 @@ bool RegDatehandling;
     } else {
         _outletSourceIncome.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
-    [outletRace setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",sourceIncome]forState:UIControlStateNormal];
+    [_outletSourceIncome setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",sourceIncome]forState:UIControlStateNormal];
     [_sourceIncomePopover dismissPopoverAnimated:YES];
 }
 

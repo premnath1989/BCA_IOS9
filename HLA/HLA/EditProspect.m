@@ -298,7 +298,7 @@ NSMutableArray *DelGroupArr;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(btnSave:)];
     self.navigationItem.rightBarButtonItem.tintColor = [UIColor colorWithRed:48.0/255.0 green:131.0/255.0 blue:251/255.0 alpha:1];
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Client Profile Listing" style:UIBarButtonItemStyleBordered target:self action:@selector(back)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Daftar Nasabah" style:UIBarButtonItemStyleBordered target:self action:@selector(back)];
     self.navigationItem.leftBarButtonItem.tintColor = [UIColor colorWithRed:48.0/255.0 green:131.0/255.0 blue:251/255.0 alpha:1];
     
     
@@ -4460,7 +4460,7 @@ NSMutableArray *DelGroupArr;
 	}
 	else if(alertView.tag == 6000)
     {
-		self.navigationItem.title = @"Edit Client Profile";
+		self.navigationItem.title = @"Edit";
         txtIDType.text = [txtIDType.text stringByTrimmingCharactersInSet:
 						  [NSCharacterSet whitespaceCharacterSet]];
 		

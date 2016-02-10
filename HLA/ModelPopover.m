@@ -54,7 +54,7 @@
     
     FMResultSet *s = [database executeQuery:@"SELECT * FROM eProposal_VIPClass WHERE status = 'A'"];
     while ([s next]) {
-        NSString *vipCode = [NSString stringWithFormat:@"%@",[s stringForColumn:@"VIPCOde"]];
+        NSString *vipCode = [NSString stringWithFormat:@"%@",[s stringForColumn:@"VIPCode"]];
         NSString *vipDesc = [NSString stringWithFormat:@"%@",[s stringForColumn:@"VIPDesc"]];
         NSString *Status = [NSString stringWithFormat:@"%@",[s stringForColumn:@"Status"]];
         
@@ -62,11 +62,42 @@
         [arrayVIPDesc addObject:vipDesc];
         [arrayStatus addObject:Status];
     }
-    dict = [[NSDictionary alloc] initWithObjectsAndKeys:arrayVIPCode,@"VIPCOde", arrayVIPDesc,@"VIPDesc",arrayStatus,@"Status",nil];
+    dict = [[NSDictionary alloc] initWithObjectsAndKeys:arrayVIPCode,@"VIPCode", arrayVIPDesc,@"VIPDesc",arrayStatus,@"Status",nil];
     
     [results close];
     [database close];
     return dict;
 }
+
+-(NSDictionary *)getReferralSource{
+    NSDictionary *dict;
+    
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    NSMutableArray* arrayReferCode=[[NSMutableArray alloc] init];
+    NSMutableArray* arrayReferDesc=[[NSMutableArray alloc] init];
+    NSMutableArray* arrayStatus=[[NSMutableArray alloc] init];
+    
+    FMResultSet *s = [database executeQuery:@"SELECT * FROM eProposal_ReferralSource WHERE status = 'A'"];
+    while ([s next]) {
+        NSString *referCode = [NSString stringWithFormat:@"%@",[s stringForColumn:@"ReferCode"]];
+        NSString *referDesc = [NSString stringWithFormat:@"%@",[s stringForColumn:@"ReferDesc"]];
+        NSString *Status = [NSString stringWithFormat:@"%@",[s stringForColumn:@"Status"]];
+        
+        [arrayReferCode addObject:referCode];
+        [arrayReferDesc addObject:referDesc];
+        [arrayStatus addObject:Status];
+    }
+    dict = [[NSDictionary alloc] initWithObjectsAndKeys:arrayReferCode,@"ReferCode", arrayReferDesc,@"ReferDesc",arrayStatus,@"Status",nil];
+    
+    [results close];
+    [database close];
+    return dict;
+}
+
 
 @end

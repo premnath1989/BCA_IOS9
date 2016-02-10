@@ -35,9 +35,9 @@
     [controllersToAdd addObject:carouselPage];
     viewControllers = [NSArray arrayWithArray:controllersToAdd];
     
-    UIStoryboard *clientStoryboard = [UIStoryboard storyboardWithName:@"HLAWPStoryboard" bundle:Nil];
-    ProspectListing* ProspectListingPage = [clientStoryboard instantiateViewControllerWithIdentifier:@"clientListing"];
-	//ProspectListing* ProspectListingPage = [self.storyboard instantiateViewControllerWithIdentifier:@"ProspectListing"];
+    UIStoryboard *clientStoryboard = [UIStoryboard storyboardWithName:@"ProspectProfileStoryboard" bundle:Nil];
+    ProspectListing* ProspectListingPage = [clientStoryboard instantiateViewControllerWithIdentifier:@"prospectProfile"];
+	//ProspectListing* ProspectListingPage = [self.storyboard instantiateViewControllerWithIdentifier:@"newClientListing"];
     ProspectListingPage.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Client" image:[UIImage imageNamed:@"btn_prospect_off.png"] tag: 0];
     [controllersToAdd addObject:ProspectListingPage];
     viewControllers = [NSArray arrayWithArray:controllersToAdd];
@@ -51,7 +51,7 @@
     
     NSArray *colors = [NSArray arrayWithObjects:(id)[UIColor whiteColor].CGColor,(id)[UIColor lightGrayColor].CGColor, nil];
     //self.tabBar.backgroundGradientColors = colors;
-    [self.tabBar setBackgroundColor:[UIColor colorWithRed:35.0/255.0 green:148.0/255.0 blue:167.0/255.0 alpha:1.0]];
+    [self.tabBar setBackgroundColor:[UIColor colorWithRed:250.0/255.0 green:175.0/255.0 blue:50.0/255.0 alpha:1.0]];
     
     if (self.IndexTab) {
         clickIndex = IndexTab;
@@ -59,7 +59,7 @@
         
     }
     else {
-        self.selectedViewController = ((UIViewController*)[viewControllers objectAtIndex:1]);
+        self.selectedViewController = ((UIViewController*)[viewControllers objectAtIndex:2]);
     }
     
     colors = Nil, controllersToAdd = Nil, carouselPage = Nil, ProspectListingPage = Nil;
