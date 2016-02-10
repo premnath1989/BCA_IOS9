@@ -65,6 +65,8 @@
 
 #pragma mark - Cycle View
 
+NSString* const STR_L100 = @"BCALH";
+
 bool WPTPD30RisDeleted = FALSE;
 
 - (void)viewDidLoad

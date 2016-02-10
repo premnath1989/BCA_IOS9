@@ -3869,12 +3869,20 @@ BOOL isFirstLoad;
                             } else if ([getBasicPlan isEqualToString:STR_S100]) {
                                 path = [[NSBundle mainBundle] pathForResource:@"SI/mly_S100_Page1" ofType:@"html"];
                             } 
-                        } else {
+                        }
+                        else
+                        {
                             if ([getBasicPlan isEqualToString:STR_HLAWP]) {
                                 path = [[NSBundle mainBundle] pathForResource:@"SI/eng_HLAWP_Page1" ofType:@"html"]; //changed for language switcher @edwin 4-9-2013
                             } else if ([getBasicPlan isEqualToString:STR_S100]) {
                                 path = [[NSBundle mainBundle] pathForResource:@"SI/eng_S100_Page1" ofType:@"html"]; //changed for language switcher @edwin 4-9-2013
                             }
+                            
+                            else if([getBasicPlan isEqualToString:@"BCALH"] )
+                            {
+                                path = [[NSBundle mainBundle] pathForResource:@"SI/eng_BCALH_Page1" ofType:@"html"]; //changed for language switcher @edwin 4-9-2013
+                            }
+
                         }
                         
                         NSURL *pathURL = [NSURL fileURLWithPath:path];
