@@ -143,6 +143,10 @@ int TotalGeneratedPages;
         } else if ([pPlanCode isEqualToString:STR_S100]) {
             [self InsertToSI_Temp_Trad_Basic_S100];
         }
+        else if([pPlanCode isEqualToString:@"BCALH"])
+        {
+            [self InsertToSI_Temp_Trad_Basic_L100];
+        }
     } else {
         if ([pPlanCode isEqualToString:STR_HLAWP]) {
             [self InsertToSI_Temp_Trad_Basic_HLAWP];
@@ -394,6 +398,58 @@ int TotalGeneratedPages;
         sqlStmt = [NSString stringWithFormat:@"INSERT INTO SI_Temp_Pages(htmlName, PageNum, PageDesc) VALUES ('%@_HLAWP_Summary_Page3.html',%d,'%@')",
                     tempLang, *pageNum,[desc stringByAppendingString:[NSString stringWithFormat:@"%d",*pageNum]]];
         [_db ExecuteINSERT:sqlStmt];
+    }
+}
+
+- (void)buildSITempPagesL100:(int *)pageNum desc:(NSString *)desc sqlStmt:(NSString **)sqlStmt DBID:(int *)DBID
+{
+    int numberOfItems;
+    (*pageNum)++;
+    *sqlStmt = [NSString stringWithFormat:@"INSERT INTO SI_Temp_Pages(htmlName, PageNum, PageDesc) VALUES ('BCALH_Page1.html',%d,'%@')",*pageNum,[desc stringByAppendingString:[NSString stringWithFormat:@"%d",*pageNum]]];
+    *DBID = [_db ExecuteINSERT:*sqlStmt];
+    if (*DBID <= 0){
+        NSLog(@"Error inserting data into database.");
+    }
+    /*
+     numberOfItems = _dataTable.rows.count + 1; //1 is for basic plan
+     
+     if( numberOfItems > 13){
+     (*pageNum)++;
+     *sqlStmt = [NSString stringWithFormat:@"INSERT INTO SI_Temp_Pages(htmlName, PageNum, PageDesc) VALUES ('L100_Page1_2.html',%d,'%@')",*pageNum,[desc stringByAppendingString:[NSString stringWithFormat:@"%d",*pageNum]]];
+     *DBID = [_db ExecuteINSERT:*sqlStmt];
+     if (*DBID <= 0){
+     NSLog(@"Error inserting data into database.");
+     }
+     }
+     
+     numberOfItems = _dataTable.rows.count + 1;
+     
+     for (int i = 0; i <_dataTable.rows.count; i ++) {
+     if ([[_dataTable.rows objectAtIndex:i] indexOfObject:@"CIWP"] != NSNotFound) {
+     numberOfItems = numberOfItems + 4;
+     } else if ([[_dataTable.rows objectAtIndex:i] indexOfObject:@"LCWP"] != NSNotFound) {
+     numberOfItems = numberOfItems + 4;
+     } else if ([[_dataTable.rows objectAtIndex:i] indexOfObject:@"SP_PRE"] != NSNotFound) {
+     numberOfItems = numberOfItems + 4;
+     } else if ([[_dataTable.rows objectAtIndex:i] indexOfObject:@"SP_STD"] != NSNotFound) {
+     numberOfItems = numberOfItems + 4;
+     } else if ([[_dataTable.rows objectAtIndex:i] indexOfObject:@"PR"] != NSNotFound) {
+     numberOfItems = numberOfItems + 4;
+     }
+     }
+     */
+    (*pageNum)++;
+    *sqlStmt = [NSString stringWithFormat:@"INSERT INTO SI_Temp_Pages(htmlName, PageNum, PageDesc) VALUES ('eng_BCALH_Page2.html',%d,'%@')",*pageNum,[desc stringByAppendingString:[NSString stringWithFormat:@"%d",*pageNum]]];
+    *DBID = [_db ExecuteINSERT:*sqlStmt];
+    if (*DBID <= 0){
+        NSLog(@"Error inserting data into database.");
+    }
+    
+    (*pageNum)++;
+    *sqlStmt = [NSString stringWithFormat:@"INSERT INTO SI_Temp_Pages(htmlName, PageNum, PageDesc) VALUES ('eng_BCALH_Page3.html',%d,'%@')",*pageNum,[desc stringByAppendingString:[NSString stringWithFormat:@"%d",*pageNum]]];
+    *DBID = [_db ExecuteINSERT:*sqlStmt];
+    if (*DBID <= 0){
+        NSLog(@"Error inserting data into database.");
     }
 }
 
@@ -4911,6 +4967,134 @@ int TotalGeneratedPages;
     
     NSString *temp = [formatter stringFromNumber:[NSNumber numberWithDouble:value]];
     return [temp doubleValue];
+}
+
+-(void)InsertToSI_Temp_Trad_Basic_L100
+{
+    NSString *QuerySQL;
+    sqlite3_stmt *statement;
+    NSMutableArray *SurValueSingle = [[NSMutableArray alloc] init ];
+    NSMutableArray *SurValue5Pay = [[NSMutableArray alloc] init ];
+    
+    if (sqlite3_open([RatesDatabasePath UTF8String], &contactDB) == SQLITE_OK)
+    {
+        for (int i = 1; i < 100 - Age; i++) {
+            QuerySQL = [NSString stringWithFormat: @"Select rates from cash_SurValue_Single where "
+                        " age = \"%d\" and gender='%@' ", Age + i - 1, [sex substringToIndex:1]];
+            
+            if(sqlite3_prepare_v2(contactDB, [QuerySQL UTF8String], -1, &statement, NULL) == SQLITE_OK) {
+                
+                if(sqlite3_step(statement) == SQLITE_ROW) {
+                    
+                    [SurValueSingle addObject:[NSString stringWithFormat:@"%f", sqlite3_column_double(statement, 0) ]];
+                    
+                }
+                sqlite3_finalize(statement);
+            }
+            
+            if (premiumPaymentOption == 5) {
+                QuerySQL = [NSString stringWithFormat: @"Select rates from cash_SurValue_5Pay where "
+                            " age = \"%d\" and gender='%@' AND year = '%d' ", Age, [sex substringToIndex:1], i];
+                
+                if(sqlite3_prepare_v2(contactDB, [QuerySQL UTF8String], -1, &statement, NULL) == SQLITE_OK) {
+                    
+                    if(sqlite3_step(statement) == SQLITE_ROW) {
+                        [SurValue5Pay addObject:[NSString stringWithFormat:@"%f", sqlite3_column_double(statement, 0) ]];
+                    }
+                    else{
+                        [SurValue5Pay addObject:@"0.00"];
+                    }
+                    sqlite3_finalize(statement);
+                }
+            }
+            
+            
+        }
+        
+        sqlite3_close(contactDB);
+    }
+    
+    //----do the insertion of si_temp_trad_basic here---------------//
+    
+    int skipCount=1;
+    int lifeAsAt=0;
+    int seqNo=1;
+    double totPremPaid = 0;
+    
+    
+    
+    double PenanggunganTambahanAcc = 0.00;
+    double PrevPenanggunganTambahanAcc = 0.00;
+    double PenanggunganTambahan = 0.00;
+    double NilaiTunaiTerjamin = 0.00;
+    double NilaiTunaiPerTanggunganTambahan = 0.00;
+    double TotalNilaiTunai = 0.00;
+    double TotalManfaat = 0.00;
+    double RB_Rate = 0.015;
+    double interest_Rate = 0.0225;
+    int RB_Factor = 0;
+    double tempBasicSA = BasicSA/1000;
+    
+    for (int polYear=1; polYear< 100 - Age; polYear++) {
+        lifeAsAt = polYear + Age;
+        //juv = [self getJuvenileRate:lifeAsAt];
+        
+        if (premiumPaymentOption == 1) {
+            RB_Factor = polYear == 1 ? 0 : 1;
+        }
+        else{
+            RB_Factor = polYear < 3 ? 0 : 1;
+        }
+        
+        PenanggunganTambahan = RB_Factor * (tempBasicSA * RB_Rate) + (PrevPenanggunganTambahanAcc * interest_Rate);
+        PenanggunganTambahanAcc = PenanggunganTambahanAcc + PenanggunganTambahan;
+        PrevPenanggunganTambahanAcc = PenanggunganTambahanAcc;
+        TotalManfaat = tempBasicSA + PenanggunganTambahanAcc;
+        
+        if (premiumPaymentOption == 1) {
+            NilaiTunaiTerjamin = [[SurValueSingle objectAtIndex:polYear -1] doubleValue] * tempBasicSA/1000.00;
+        }
+        else{
+            NilaiTunaiTerjamin = [[SurValue5Pay objectAtIndex:polYear -1] doubleValue] * tempBasicSA/1000.00;
+        }
+        
+        NilaiTunaiPerTanggunganTambahan = [[SurValueSingle objectAtIndex:polYear - 1] doubleValue] * PenanggunganTambahanAcc/1000.00;
+        
+        TotalNilaiTunai = NilaiTunaiTerjamin + NilaiTunaiPerTanggunganTambahan;
+        
+        if(lifeAsAt<100) {
+            if(polYear>20 && skipCount<5   ) {
+                if (lifeAsAt != 100 - 1) {
+                    skipCount++;
+                    continue;
+                }
+            }
+        }
+        skipCount = 1;
+        
+        QuerySQL = [NSString stringWithFormat: @"Insert INTO SI_Temp_Trad_Basic "
+                    "(\"SINO\", \"SeqNo\", \"DataType\",\"col0_1\",\"col0_2\", "
+                    "\"col1\",\"col2\", \"col3\",\"col4\",\"col5\", \"col6\",\"col7\" ) "
+                    "VALUES ( "
+                    " \"%@\",\"%d\",\"DATA\",\"%d\",\"%d\", "
+                    "\"%.0f\",\"%.0f\",\"%.0f\",\"%.0f\",\"%.0f\",\"%.0f\",\"%.0f\" )",
+                    SINo, seqNo, polYear, lifeAsAt,
+                    tempBasicSA,  PenanggunganTambahan, PenanggunganTambahanAcc, TotalManfaat, NilaiTunaiTerjamin, NilaiTunaiPerTanggunganTambahan, TotalNilaiTunai];
+        
+        if (sqlite3_open([databasePath UTF8String], &contactDB) == SQLITE_OK){
+            if(sqlite3_prepare_v2(contactDB, [QuerySQL UTF8String], -1, &statement, NULL) == SQLITE_OK) {
+                if (sqlite3_step(statement) == SQLITE_DONE) {
+                    
+                }
+                sqlite3_finalize(statement);
+            }
+            
+            sqlite3_close(contactDB);
+        }
+        
+        seqNo++;
+        totPremPaidL100 = totPremPaid;
+    }
 }
 
 -(void)InsertToSI_Temp_Trad_Rider_WP_GYI{
