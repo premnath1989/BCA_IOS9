@@ -2952,6 +2952,11 @@
             querySQL = [NSString stringWithFormat: @"SELECT Rate, PremPayOpt FROM Trad_Sys_Basic_Prem_new WHERE PlanCode=\"%@\" AND Sex=\"%@\" AND FromAge=\"%d\" AND ToAge=\"%d\" ",
                         getBasicPlan,sexStr,fromAge,toAge];
         }
+        else if([getBasicPlan isEqualToString:@"BCALH"])
+        {
+            querySQL = [NSString stringWithFormat: @"SELECT Rates FROM Basic_Prem WHERE trim(Gender) = '%@' AND EntryAge = '%d' AND Premium_Term = '%d'  ", sexStr, fromAge, getMOP ];
+        }
+
         
         if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK)
         {

@@ -444,6 +444,9 @@
                     } else {
                         termCover = 100 - ageClient;
                     }
+                }else if ([planChoose isEqualToString:@"BCALH"]) {
+                    termCover = maxTerm - ageClient;
+    
                 } else {
                     termCover = -1; //for debugging
                 }
