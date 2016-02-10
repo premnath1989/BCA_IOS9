@@ -73,7 +73,6 @@
         [self.backgroundView.layer addSublayer:gradientLayer];
         
     }
-    
 }
 
 - (void)setBackgroundImage:(UIImage *)backgroundImage

@@ -28,6 +28,9 @@
     NSString *DBDateTo2;
     
     IBOutlet UILabel *NoIlustrasi;
+    UIView *TableHeader;
+    UIColor *themeColour;
+    NSArray *columnHeadersContent;
 }
 
 @property (nonatomic, strong) NDHTMLtoPDF *PDFCreator;
@@ -78,8 +81,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblName;
 @property (weak, nonatomic) IBOutlet UILabel *lblPlan;
 @property (weak, nonatomic) IBOutlet UILabel *lblBasicSA;
+@property (weak, nonatomic) IBOutlet UILabel *lblProposalStats;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *outletGender;
 @property (weak, nonatomic) IBOutlet UIButton *outletEdit;
+
+
+//@property (weak, nonatomic) IBOutlet UIView *TableHeader;
 
 - (IBAction)btnDateFrom:(id)sender;
 - (IBAction)btnDateTo:(id)sender;

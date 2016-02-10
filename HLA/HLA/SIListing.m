@@ -31,6 +31,8 @@
 @synthesize lblName;
 @synthesize lblPlan;
 @synthesize lblBasicSA;
+@synthesize lblProposalStats;
+
 @synthesize outletDateFrom;
 @synthesize outletDelete;
 @synthesize myTableView;
@@ -45,6 +47,8 @@
 @synthesize Popover = _Popover;
 @synthesize SIDate = _SIDate;
 @synthesize SIDatePopover = _SIDatePopover;
+
+//@synthesize TableHeader;
 
 int DateOption;
 int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination of 101 + 102
@@ -62,10 +66,18 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
     [super viewDidLoad];
     
     [NoIlustrasi setFont:[UIFont fontWithName:@"HelveticaLTStd-UltraComp" size:25]];
+    themeColour = [UIColor colorWithRed:242.0f/255.0f green:113.0f/255.0f blue:134.0f/255.0f alpha:1];
     
 	AppDelegate *appDel= (AppDelegate*)[[UIApplication sharedApplication] delegate ];
 	appDel.MhiMessage = Nil;
 	appDel = Nil;
+    
+    txtSINO.layer.borderColor = [themeColour CGColor];
+    txtSINO.layer.masksToBounds = YES;
+    txtSINO.layer.borderWidth = 1.0f;
+    txtLAName.layer.borderColor = [themeColour CGColor];
+    txtLAName.layer.masksToBounds = YES;
+    txtLAName.layer.borderWidth = 1.0f;
 	
 //    self.view.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg10.jpg"]];
 //    outletDelete.hidden = TRUE;
@@ -128,8 +140,58 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
     tap.cancelsTouchesInView = NO;
     tap.numberOfTapsRequired = 1;
     
-    [self.view addGestureRecognizer:tap];
+    columnHeadersContent = [NSArray arrayWithObjects:@"No. Ilustrasi",
+                              @"Tanggal Dibuat", @" Nama", @" Produk", @"Uang Pertanggungan",@"Status \n Proposal",nil];
+    [self TableHeaderSetup:columnHeadersContent];
     
+    [self.view addGestureRecognizer:tap];
+}
+
+- (void) TableHeaderSetup:(NSArray *)columnHeaders{
+    TableHeader = [[UIView alloc]initWithFrame:
+                        CGRectMake(self.view.frame.origin.x + 3.0f,
+                                   242.0f, self.view.frame.size.width - 75.0f, 41.0f)];
+    [TableHeader setBackgroundColor:themeColour];
+    [self.view addSubview:TableHeader];
+    [self TableHeaderColumn:columnHeaders];
+}
+
+- (void)TableHeaderColumn:(NSArray *)columnHeaders{
+    CGFloat headerOriginX = TableHeader.frame.origin.x;
+    CGFloat headerTable = TableHeader.frame.size.width - (10.0f * columnHeaders.count);
+    for(NSString *lblHeader in columnHeaders){
+        UILabel *lblHeaderColumn = [[UILabel alloc]initWithFrame:
+                              CGRectMake(headerOriginX+5.0f,
+                                         0.0f,
+                                         headerTable/columnHeaders.count,
+                                         TableHeader.frame.size.height)];
+        lblHeaderColumn.text = lblHeader;
+        lblHeaderColumn.textColor = [UIColor whiteColor];
+        lblHeaderColumn.numberOfLines = 0;
+        lblHeaderColumn.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+        lblHeaderColumn.lineBreakMode = NSLineBreakByWordWrapping;
+        lblHeaderColumn.font = [UIFont fontWithName:@"TrebuchetMS-Bold" size:17.0f];
+        if([lblHeader isEqualToString:@" Nama"] || [lblHeader isEqualToString:@" Produk"]){
+            lblHeaderColumn.textAlignment = NSTextAlignmentLeft;
+        }else
+            lblHeaderColumn.textAlignment = NSTextAlignmentCenter;
+            
+        [TableHeader addSubview:lblHeaderColumn];
+        
+        if(lblHeaderColumn.frame.size.height > (TableHeader.frame.size.height - 1.0f))
+            [TableHeader setFrame:CGRectMake(self.view.frame.origin.x + 3.0f,
+                                             242.0f, self.view.frame.size.width - 75.0f,
+                                             lblHeaderColumn.frame.size.height + 1.0f)];
+        
+        
+        if(![lblHeader isEqualToString:[columnHeaders lastObject]]){
+            UIView *verticalLineView=[[UIView alloc] initWithFrame:
+                                      CGRectMake(lblHeaderColumn.frame.origin.x+lblHeaderColumn.frame.size.width+5, 0, 2, TableHeader.frame.size.height)];
+            [verticalLineView setBackgroundColor:[UIColor whiteColor]];
+            [TableHeader addSubview:verticalLineView];
+        }
+        headerOriginX = headerOriginX + lblHeaderColumn.frame.size.width + 5.0f;
+    }
 }
 
 -(void)hideKeyboard {
@@ -479,40 +541,48 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
     
     ColorHexCode *CustomColor = [[ColorHexCode alloc]init ];
     
+    
+    CGFloat headerOriginX = TableHeader.frame.origin.x - 3.0f;
+    CGFloat DataRowTableWidth = (TableHeader.frame.size.width - (10.0f * [columnHeadersContent count]))/columnHeadersContent.count;
+    
     if (isFilter == false) {
-        CGRect frame=CGRectMake(-30,0, 200, 50);
+        CGRect frame=CGRectMake(headerOriginX,0, DataRowTableWidth, 50);
         UILabel *label1=[[UILabel alloc]init];            
         label1.frame=frame;
         label1.text= [SINO objectAtIndex:indexPath.row];
         label1.tag = 1001;
         label1.textAlignment = NSTextAlignmentCenter;
         [cell.contentView addSubview:label1];
+        headerOriginX += DataRowTableWidth + 10.0f;
         
-        CGRect frame2=CGRectMake(170,0, 150, 50);
+        CGRect frame2=CGRectMake(headerOriginX+5.0f,0, DataRowTableWidth, 50);
         UILabel *label2=[[UILabel alloc]init];
         label2.frame=frame2;
         label2.text= [DateCreated objectAtIndex:indexPath.row];
         label2.textAlignment = NSTextAlignmentCenter;    
         label2.tag = 1002;
         [cell.contentView addSubview:label2];
+        headerOriginX += DataRowTableWidth + 10.0f;
         
-        CGRect frame3=CGRectMake(320,0, 180, 50);
+        CGRect frame3=CGRectMake(headerOriginX+7.0f,0, DataRowTableWidth, 50);
         UILabel *label3=[[UILabel alloc]init];            
         label3.frame=frame3;
         label3.text= [Name objectAtIndex:indexPath.row];
         label3.tag = 1003;
-        label3.textAlignment = NSTextAlignmentCenter;
+//        label3.textAlignment = NSTextAlignmentCenter;
         [cell.contentView addSubview:label3];
+        headerOriginX += DataRowTableWidth;
         
-        CGRect frame4=CGRectMake(500,0, 150, 50);
+        CGRect frame4=CGRectMake(headerOriginX,0, DataRowTableWidth, 50);
         UILabel *label4=[[UILabel alloc]init];
         label4.frame=frame4;
         label4.text= [PlanName objectAtIndex:indexPath.row];
         label4.textAlignment = NSTextAlignmentCenter;    
         label4.tag = 1004;
         [cell.contentView addSubview:label4];
+        headerOriginX += DataRowTableWidth + 10.0f;
         
-        CGRect frame5=CGRectMake(650,0, 165, 50);
+        CGRect frame5=CGRectMake(headerOriginX,0, DataRowTableWidth, 50);
         UILabel *label5=[[UILabel alloc]init];            
         label5.frame=frame5;
 		label5.text = [NSString stringWithFormat:@"%.2f\n%@", [[BasicSA objectAtIndex:indexPath.row] doubleValue ], [SIValidStatus objectAtIndex:indexPath.row]];
@@ -520,15 +590,17 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
         label5.textAlignment = NSTextAlignmentCenter;
 		label5.numberOfLines = 2;
         [cell.contentView addSubview:label5];
+        headerOriginX += DataRowTableWidth + 10.0f;
         
-        CGRect frame6=CGRectMake(815,0, 160, 50);
+        CGRect frame6=CGRectMake(headerOriginX,0, DataRowTableWidth, 50);
         UILabel *label6=[[UILabel alloc]init];	
         label6.frame=frame6;
 		label6.text = [NSString stringWithFormat:@"%@\n%@", [SIStatus objectAtIndex:indexPath.row], [SIVersion objectAtIndex:indexPath.row]];
         label6.textAlignment = NSTextAlignmentCenter;
         label6.tag = 1006;
 		label6.numberOfLines = 2;
-        [cell.contentView addSubview:label6];        
+        [cell.contentView addSubview:label6];
+        headerOriginX += DataRowTableWidth + 10.0f;
         
         if (indexPath.row % 2 == 0) {
 //            label1.backgroundColor = [CustomColor colorWithHexString:@"fff"];
