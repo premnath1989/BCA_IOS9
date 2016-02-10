@@ -1739,6 +1739,25 @@ function writeSummary2_HLCP() {
             }
         });
     }
+    else if(gdata.SI[0].PlanCode=="BCALH") {
+       	
+        var number;
+       	$.each(gdata.SI[0].SI_Temp_Trad_Basic.data, function(index, row) {
+               if(index < 30) {
+               number = row.col2;
+               row.col2 = number | 0;
+               $('#table-Summary1 > tbody').append('<tr><td>' + row.col0_1 + '</td><td>' + row.col0_2 + '</td><td>' + CurrencyNoCents(row.col1) + '</td><td>' +
+                                                   CurrencyNoCents(row.col2) + '</td><td>' + CurrencyNoCents(row.col3) + '</td><td>' + CurrencyNoCents(row.col4) + '</td><td>' + CurrencyNoCents(row.col5) + '</td><td>' +
+                                                   CurrencyNoCents(row.col6) + '</td><td>' + CurrencyNoCents(row.col7) + '</td></tr>');
+               } else {
+               number = row.col2;
+               row.col2 = number | 0;
+               $('#table-Summary1_2 > tbody').append('<tr><td>' + row.col0_1 + '</td><td>' + row.col0_2 + '</td><td>' + formatCurrency(row.col1) + '</td><td>' +
+                                                     CurrencyNoCents(row.col2) + '</td><td>' + CurrencyNoCents(row.col3) + '</td><td>' + CurrencyNoCents(row.col4) + '</td></tr>');
+               }            
+               });
+    }
+
 }
 function writeRiderPage1_HLCP() {
     if ($.trim(gdata.SI[0].Trad_Details.data[0].CashDividend) == 'ACC') {
