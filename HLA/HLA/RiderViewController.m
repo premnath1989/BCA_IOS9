@@ -4712,6 +4712,11 @@ int maxGycc = 0;
                         "AND FromAge=\"%d\" AND ToAge=\"%d\" and FromTerm <=\"%d\" AND ToTerm >= \"%d\" AND PremPayOpt=\"%d\" ",
                         getPlanChoose,fromAge,toAge,getTerm,getTerm,getMOP];
         }
+        else if([getPlanChoose isEqualToString:@"BCALH"])
+        {
+            querySQL = [NSString stringWithFormat: @"SELECT Rates FROM Basic_Prem WHERE trim(Gender) = '%@' AND EntryAge = '%d' AND Premium_Term = '%d'  ", sexStr, fromAge, getMOP ];
+        }
+
         
         if (querySQL == NULL) {
             NSString *msg = [NSString stringWithFormat:@"No rate data found for %@", getPlanChoose];
