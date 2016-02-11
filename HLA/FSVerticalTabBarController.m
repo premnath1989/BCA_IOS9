@@ -294,7 +294,7 @@ BOOL isBusy;
     UIView *layoutContainerView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
     layoutContainerView.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
     layoutContainerView.autoresizesSubviews = YES;
-    layoutContainerView.backgroundColor = [UIColor whiteColor];
+    layoutContainerView.backgroundColor = [UIColor blackColor];
     
     // create tab bar
     self.tabBar.frame = CGRectMake(0, 20, self.tabBarWidth, layoutContainerView.bounds.size.height);

@@ -56,18 +56,33 @@
 @synthesize siObj,requesteProposalStatus;
 @synthesize planName;
 
+@synthesize LAHbgTertanggung;
+@synthesize LAProductName;
+
 id temp;
 id dobtemp;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate ];
-//    self.view.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg10.jpg"]];
     
     NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docsDir = [dirPaths objectAtIndex:0];
     databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
+    
+    themeColour = [UIColor colorWithRed:242.0f/255.0f green:113.0f/255.0f blue:134.0f/255.0f alpha:1];
+    
+    LANameField.layer.borderColor = [themeColour CGColor];
+    LANameField.layer.masksToBounds = YES;
+    LANameField.layer.borderWidth = 1.0f;
+    
+    LAHbgTertanggung.layer.borderColor = [themeColour CGColor];
+    LAHbgTertanggung.layer.masksToBounds = YES;
+    LAHbgTertanggung.layer.borderWidth = 1.0f;
+    
+    LAProductName.layer.borderColor = [themeColour CGColor];
+    LAProductName.layer.masksToBounds = YES;
+    LAProductName.layer.borderWidth = 1.0f;
 	
 }
 

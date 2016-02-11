@@ -47,6 +47,9 @@
     CGContextTranslateCTM(context, 0.0, bounds.size.height);
     CGContextScaleCTM(context, 1.0, -1.0);
     
+    [[UIColor colorWithRed:242.0f/255.0f green:113.0f/255.0f blue:134.0f/255.0f alpha:1] setFill];
+    UIRectFill(rect);
+    
     // draw an image in the center of the cell
     CGSize imageSize = self.iconImage.size;
     CGRect imageRect = CGRectMake(floorf(((bounds.size.width-imageSize.width)/2.0)),
@@ -84,9 +87,9 @@
         // fill and end the transparency layer
         CGContextSetFillColorWithColor(context, [self.selectedImageTintColor CGColor]);
         CGContextFillRect(context, imageRect);
-        CGPoint start = CGPointMake(CGRectGetMidX(imageRect), imageRect.origin.y);
-        CGPoint end = CGPointMake(CGRectGetMidX(imageRect)-imageRect.size.height/4, imageRect.size.height+imageRect.origin.y);
-        CGContextDrawLinearGradient(context, colorGradient, end, start, 0);
+//        CGPoint start = CGPointMake(CGRectGetMidX(imageRect), imageRect.origin.y);
+//        CGPoint end = CGPointMake(CGRectGetMidX(imageRect)-imageRect.size.height/4, imageRect.size.height+imageRect.origin.y);
+//        CGContextDrawLinearGradient(context, colorGradient, end, start, 0);
         CGContextEndTransparencyLayer(context);
         
         CGGradientRelease(colorGradient);
@@ -102,6 +105,8 @@
     
     CGRect textLabelFrame = CGRectMake(0, NAN, self.bounds.size.width, self.textLabel.font.lineHeight);
     textLabelFrame.origin.y = self.bounds.size.height-textLabelFrame.size.height - 15;
+    
+    [self.textLabel setTextColor:[UIColor whiteColor]];
     self.textLabel.frame = textLabelFrame;
 }
 

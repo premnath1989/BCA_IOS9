@@ -70,6 +70,8 @@
     int prevIndexNo;
     int savedIndexNo;
     NSString *OccuCatCode;
+    
+    UIColor *themeColour;
 }
 
 @property (nonatomic, retain) SIObj* siObj;
@@ -110,6 +112,8 @@
 @property (retain, nonatomic) IBOutlet UITextField *LAOccLoadingField;
 @property (retain, nonatomic) IBOutlet UITextField *LACPAField;
 @property (retain, nonatomic) IBOutlet UITextField *LAPAField;
+@property (retain, nonatomic) IBOutlet UITextField *LAHbgTertanggung;
+@property (retain, nonatomic) IBOutlet UITextField *LAProductName;
 @property (strong, nonatomic) IBOutlet UIButton *btnCommDate;
 @property (strong, nonatomic) IBOutlet UILabel *statusLabel;
 @property (strong, nonatomic) IBOutlet UIToolbar *myToolBar;

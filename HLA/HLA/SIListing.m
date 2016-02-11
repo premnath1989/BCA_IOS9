@@ -15,6 +15,9 @@
 #import "EverLifeViewController.h"
 #import "MasterMenuEApp.h"
 #import "MBProgressHUD.h"
+
+#import "TableManagement.h"
+#import "ColumnHeaderStyle.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface SIListing ()
@@ -140,59 +143,25 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
     tap.cancelsTouchesInView = NO;
     tap.numberOfTapsRequired = 1;
     
-    columnHeadersContent = [NSArray arrayWithObjects:@"No. Ilustrasi",
-                              @"Tanggal Dibuat", @" Nama", @" Produk", @"Uang Pertanggungan",@"Status \n Proposal",nil];
-    [self TableHeaderSetup:columnHeadersContent];
+    //we call the table management to design the table
+    ColumnHeaderStyle *ilustrasi = [[ColumnHeaderStyle alloc]init:@"No. Ilustrasi" alignment:NSTextAlignmentLeft button:FALSE];
+    ColumnHeaderStyle *tanggal = [[ColumnHeaderStyle alloc]init:@"Tanggal Dibuat" alignment:NSTextAlignmentCenter button:TRUE];
+    ColumnHeaderStyle *nama = [[ColumnHeaderStyle alloc]init:@" Nama"
+                                                   alignment:NSTextAlignmentLeft button:FALSE];
+    ColumnHeaderStyle *produk = [[ColumnHeaderStyle alloc]init:@" Produk"
+                                                     alignment:NSTextAlignmentLeft button:FALSE];
+    ColumnHeaderStyle *pertanggungan = [[ColumnHeaderStyle alloc]init:@"Uang Pertanggungan" alignment:NSTextAlignmentCenter button:FALSE];
+    ColumnHeaderStyle *status = [[ColumnHeaderStyle alloc]init:@"Status Proposal" alignment:NSTextAlignmentCenter button:FALSE];
+    columnHeadersContent = [NSArray arrayWithObjects:ilustrasi,
+                            tanggal, nama, produk, pertanggungan,status,nil];
+    TableManagement *tableManagement = [[TableManagement alloc]init:self.view themeColour:themeColour];
+    TableHeader =[tableManagement TableHeaderSetup:columnHeadersContent];
     
+    [self.view addSubview:TableHeader];
     [self.view addGestureRecognizer:tap];
 }
 
-- (void) TableHeaderSetup:(NSArray *)columnHeaders{
-    TableHeader = [[UIView alloc]initWithFrame:
-                        CGRectMake(self.view.frame.origin.x + 3.0f,
-                                   242.0f, self.view.frame.size.width - 75.0f, 41.0f)];
-    [TableHeader setBackgroundColor:themeColour];
-    [self.view addSubview:TableHeader];
-    [self TableHeaderColumn:columnHeaders];
-}
 
-- (void)TableHeaderColumn:(NSArray *)columnHeaders{
-    CGFloat headerOriginX = TableHeader.frame.origin.x;
-    CGFloat headerTable = TableHeader.frame.size.width - (10.0f * columnHeaders.count);
-    for(NSString *lblHeader in columnHeaders){
-        UILabel *lblHeaderColumn = [[UILabel alloc]initWithFrame:
-                              CGRectMake(headerOriginX+5.0f,
-                                         0.0f,
-                                         headerTable/columnHeaders.count,
-                                         TableHeader.frame.size.height)];
-        lblHeaderColumn.text = lblHeader;
-        lblHeaderColumn.textColor = [UIColor whiteColor];
-        lblHeaderColumn.numberOfLines = 0;
-        lblHeaderColumn.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-        lblHeaderColumn.lineBreakMode = NSLineBreakByWordWrapping;
-        lblHeaderColumn.font = [UIFont fontWithName:@"TrebuchetMS-Bold" size:17.0f];
-        if([lblHeader isEqualToString:@" Nama"] || [lblHeader isEqualToString:@" Produk"]){
-            lblHeaderColumn.textAlignment = NSTextAlignmentLeft;
-        }else
-            lblHeaderColumn.textAlignment = NSTextAlignmentCenter;
-            
-        [TableHeader addSubview:lblHeaderColumn];
-        
-        if(lblHeaderColumn.frame.size.height > (TableHeader.frame.size.height - 1.0f))
-            [TableHeader setFrame:CGRectMake(self.view.frame.origin.x + 3.0f,
-                                             242.0f, self.view.frame.size.width - 75.0f,
-                                             lblHeaderColumn.frame.size.height + 1.0f)];
-        
-        
-        if(![lblHeader isEqualToString:[columnHeaders lastObject]]){
-            UIView *verticalLineView=[[UIView alloc] initWithFrame:
-                                      CGRectMake(lblHeaderColumn.frame.origin.x+lblHeaderColumn.frame.size.width+5, 0, 2, TableHeader.frame.size.height)];
-            [verticalLineView setBackgroundColor:[UIColor whiteColor]];
-            [TableHeader addSubview:verticalLineView];
-        }
-        headerOriginX = headerOriginX + lblHeaderColumn.frame.size.width + 5.0f;
-    }
-}
 
 -(void)hideKeyboard {
     Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");

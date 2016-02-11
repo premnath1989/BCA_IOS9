@@ -2469,6 +2469,11 @@ BOOL isFirstLoad;
     
     cell.textLabel.textColor = [UIColor whiteColor];
     cell.backgroundColor = [UIColor clearColor];
+    
+    UIView *bgColorView = [[UIView alloc] init];
+    bgColorView.backgroundColor = [UIColor orangeColor];
+    [cell setSelectedBackgroundView:bgColorView];
+    
     if (cell.textLabel.text.length > 25) {
         cell.textLabel.font = [UIFont fontWithName:@"Trebuchet MS" size:15];
     } else {
@@ -2484,9 +2489,9 @@ BOOL isFirstLoad;
 		cell.textLabel.backgroundColor = [UIColor clearColor];
 		cell.detailTextLabel.backgroundColor = [UIColor clearColor ];
 		cell.contentView.backgroundColor = [UIColor clearColor];
-		cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+//		cell.selectionStyle = UITableViewCellSelectionStyleBlue;
 	} else {
-		cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+//		cell.selectionStyle = UITableViewCellSelectionStyleBlue;
 	}
     
     UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(0.0f, cell.contentView.bounds.size.height - 1.0f, cell.contentView.bounds.size.width, 1.0f)];
