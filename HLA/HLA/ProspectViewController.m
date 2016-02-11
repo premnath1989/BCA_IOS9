@@ -128,6 +128,8 @@
 @synthesize txtReferralName;
 @synthesize outletReferralSource;
 @synthesize outletExpiryDate;
+@synthesize outletBranchCode;
+@synthesize outletBranchName;
 @synthesize segReferralType;
 @synthesize txtNPWPNo;
 
@@ -341,6 +343,7 @@ bool RegDatehandling;
     
 }
 
+#pragma mark - added by faiz
 /*code added by faiz*/
 -(void)setTextfieldBorder{
     UIFont *font= [UIFont fontWithName:@"TreBuchet MS" size:16.0f];
@@ -505,6 +508,275 @@ bool RegDatehandling;
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     activeField = nil;
+}
+
+- (void)createAlertViewAndShow:(NSString *)message tag:(int)alertTag{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
+                                                    message:[NSString stringWithFormat:@"%@",message] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    alert.tag = alertTag;
+    [alert show];
+}
+
+- (bool)validationDataReferral{
+    bool valid=true;
+    NSArray* validationSet=[[NSArray alloc]initWithObjects:@"",@"- SELECT -",@"- Select -", nil];
+    NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
+    
+    [outletBranchCode setTitle:@"Test Kode Cabang" forState:UIControlStateNormal];
+    [outletBranchName setTitle:@"Test Nama Cabang" forState:UIControlStateNormal];
+    [txtKcu setText:@"test KCU"];
+    //validation message data refferal
+    NSString *validationKodeCabang=@"Kode Cabang harus diisi";
+    NSString *validationNamaCabang=@"Nama Cabang harus diisi";
+    NSString *validationKCU=@"KCU harus diisi";
+    NSString *validationNamaReferral=@"Nama Referral harus diisi";
+    NSString *validationSumberReferral=@"Sumber Referral harus diisi";
+    //outletkodecabang
+    NSString* branchCode=outletBranchCode.titleLabel.text;
+    //outletnamacabang
+    NSString* branchName=outletBranchName.titleLabel.text;
+    //textKCU
+    NSString* KCU=txtKcu.text;
+    //textnamareferral
+    NSString* refName=txtReferralName.text;
+    //outlet sumber referral
+    NSString* refSource=outletReferralSource.titleLabel.text;
+
+    if ([validationSet containsObject:branchCode]||branchCode==NULL){
+        [self createAlertViewAndShow:validationKodeCabang tag:0];
+        [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+        return false;
+    }
+    else if ([validationSet containsObject:branchName]||branchName==NULL){
+        [self createAlertViewAndShow:validationNamaCabang tag:0];
+        [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+        return false;
+    }
+    else if ([validationSet containsObject:KCU]||KCU==NULL){
+        [self createAlertViewAndShow:validationKCU tag:0];
+        [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+        return false;
+    }
+    else if ([validationSet containsObject:refName]||refName==NULL){
+        [self createAlertViewAndShow:validationNamaReferral tag:0];
+        [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+        return false;
+    }
+    else if ([validationSet containsObject:refSource]||refSource==NULL){
+        [self createAlertViewAndShow:validationSumberReferral tag:0];
+        [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+        return false;
+    }
+    return valid;
+}
+
+- (bool)validationDataPribadi{
+    bool valid=true;
+    NSArray* validationSet=[[NSArray alloc]initWithObjects:@"",@"- SELECT -",@"- Select -", nil];
+    
+    NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
+    
+    //validation message data pribadi
+    NSString *validationNamaLengkap=@"Nama lengkap harus diisi";
+    NSString *validationJenisKelamin=@"Jenis Kelamin harus diisi";
+    NSString *validationTanggalLahir=@"Tanggal lahir harus diisi";
+    NSString *validationTanggalLahirFuture=@"Tanggal lahir tidak dapat lebih besar dari tanggal hari ini";
+    NSString *validationJenisIdentitas=@"Jenis identitas harus diisi";
+    NSString *validationNomorIdentitas=@"Nomor identitas harus diisi";
+    NSString *validationTanggalKadaluarsaIdentitas=@"Tanggal kadaluarsa identitas harus diisi";
+    NSString *validationMerokok=@"Merokok harus diisi";
+    NSString *validationKebangsaan=@"Kewarganegaraan harus diisi";
+    
+    //textnamalengkap
+    NSString* fullName=txtFullName.text;
+    //segmen jenis kelamin
+    //segGender.selectedSegmentIndex
+    //outletDOB
+    NSString* dob=outletDOB.titleLabel.text;
+    //otheridtype
+    NSString* otheridtype=OtherIDType.titleLabel.text;
+    //txtotherid
+    NSString* otheridtext=txtOtherIDType.text;
+    //outletexpirydate
+    NSString* outletexpirydate=outletExpiryDate.titleLabel.text;
+    //segmentsmoke
+    //segsmoke.selectedSegmentIndex
+    //outletnationality
+    NSString* outletnationality=outletNationality.titleLabel.text;
+
+    if ([validationSet containsObject:fullName]||fullName==NULL){
+        [self createAlertViewAndShow:validationNamaLengkap tag:0];
+        [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+        return false;
+    }
+    else if (segGender.selectedSegmentIndex==UISegmentedControlNoSegment){
+        [self createAlertViewAndShow:validationJenisKelamin tag:0];
+        [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+        return false;
+    }
+    else if ([validationSet containsObject:dob]||dob==NULL){
+        [self createAlertViewAndShow:validationTanggalLahir tag:0];
+        [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+        return false;
+    }
+    else if ([validationSet containsObject:otheridtype]||otheridtype==NULL){
+        [self createAlertViewAndShow:validationJenisIdentitas tag:0];
+        [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+        return false;
+    }
+    else if ([validationSet containsObject:otheridtext]||otheridtext==NULL){
+        [self createAlertViewAndShow:validationNomorIdentitas tag:0];
+        [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+        return false;
+    }
+    else if ([validationSet containsObject:outletexpirydate]||outletexpirydate==NULL){
+        [self createAlertViewAndShow:validationTanggalKadaluarsaIdentitas tag:0];
+        [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+        return false;
+    }
+    else if (segSmoker.selectedSegmentIndex==UISegmentedControlNoSegment){
+        [self createAlertViewAndShow:validationMerokok tag:0];
+        [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+        return false;
+    }
+    else if ([validationSet containsObject:outletnationality]||outletnationality==NULL){
+        [self createAlertViewAndShow:validationKebangsaan tag:0];
+        [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+        return false;
+    }
+    return valid;
+}
+
+- (bool)validationDataAlamat{
+    bool valid=true;
+    NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
+    
+    //validation message data alamat tempat tinggal
+    NSString *validationAlamat=@"Alamat Tempat harus diisi";
+    NSString *validationAreaTelponRumah=@"Nomor kode telepon rumah yang dimasukkan minimal 6 digit atau lebih";
+    NSString *validationNumberTelponRumah=@"Nomor telepon rumah yang dimasukkan minimal 6 digit atau lebih";
+    NSString *validationAreaHPUtama=@"Nomor Kode HP Utama yang dimasukkan minimal 6 digit atau lebih";
+    NSString *validationNumberHPUtama=@"Nomor HP Utama yang dimasukkan minimal 6 digit atau lebih";
+    NSString *validationAreaHP2=@"Nomor Kode HP 2 yang dimasukkan minimal 6 digit atau lebih";
+    NSString *validationNumberHP2=@"Nomor HP2 yang dimasukkan minimal 6 digit atau lebih";
+    
+    //validation message data alamat kantor
+    NSString *validationAreaTelponKantor=@"Nomor kode telepon kantor yang dimasukkan minimal 6 digit atau lebih";
+    NSString *validationNumberTelponKantor=@"Nomor telepon kantor yang dimasukkan minimal 6 digit atau lebih";
+    
+    //texthomeaddress1
+    NSString *texthomeaddress1=txtHomeAddr1.text;
+    //texthomeaddress2
+    NSString *texthomeaddress2=txtHomeAddr2.text;
+    //texthomeaddress3
+    NSString *texthomeaddress3=txtHomeAddr3.text;
+    //textprefix1
+    NSString *textprefix1=txtPrefix1.text;
+    //txtcontact1
+    NSString *textcontact1=txtContact1.text;
+    //textprefix2
+    NSString *textprefix2=txtPrefix2.text;
+    //txtcontact2
+    NSString *textcontact2=txtContact2.text;
+    //textprefix3
+    NSString *textprefix3=txtPrefix3.text;
+    //txtcontact3
+    NSString *textcontact3=txtContact3.text;
+    //textprefix4
+    NSString *textprefix4=txtPrefix4.text;
+    //txtcontact4
+    NSString *textcontact4=txtContact4.text;
+    if ([texthomeaddress1 isEqualToString:@""]||texthomeaddress1==NULL){
+        [self createAlertViewAndShow:validationAlamat tag:0];
+        [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+        return false;
+    }
+    else if ([texthomeaddress2 isEqualToString:@""]||texthomeaddress2==NULL){
+        [self createAlertViewAndShow:validationAlamat tag:0];
+        [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+        return false;
+    }
+    else if ([texthomeaddress3 isEqualToString:@""]||texthomeaddress3==NULL){
+        [self createAlertViewAndShow:validationAlamat tag:0];
+        [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+        return false;
+    }
+    else if ([textprefix1 isEqualToString:@""]||textprefix1==NULL){
+        [self createAlertViewAndShow:validationAreaTelponRumah tag:0];
+        [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+        return false;
+    }
+    else if ([textcontact1 isEqualToString:@""]||textcontact1==NULL){
+        [self createAlertViewAndShow:validationNumberTelponRumah tag:0];
+        [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+        return false;
+    }
+    else if ([textprefix2 isEqualToString:@""]||textprefix2==NULL){
+        [self createAlertViewAndShow:validationAreaHPUtama tag:0];
+        [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+        return false;
+    }
+    else if ([textcontact2 isEqualToString:@""]||textcontact2==NULL){
+        [self createAlertViewAndShow:validationNumberHPUtama tag:0];
+        [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+        return false;
+    }
+    else if ([textprefix3 isEqualToString:@""]||textprefix3==NULL){
+        [self createAlertViewAndShow:validationAreaHP2 tag:0];
+        [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+        return false;
+    }
+    else if ([textcontact3 isEqualToString:@""]||textcontact3==NULL){
+        [self createAlertViewAndShow:validationNumberHP2 tag:0];
+        [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+        return false;
+    }
+    else if ([textprefix4 isEqualToString:@""]||textprefix4==NULL){
+        [self createAlertViewAndShow:validationAreaTelponKantor tag:0];
+        [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+        return false;
+    }
+    else if ([textcontact4 isEqualToString:@""]||textcontact4==NULL){
+        [self createAlertViewAndShow:validationNumberTelponKantor tag:0];
+        [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+        return false;
+    }
+    return valid;
+}
+
+- (bool)validationDatapekerjaan{
+    bool valid=true;
+    NSArray* validationSet=[[NSArray alloc]initWithObjects:@"",@"- SELECT -",@"- Select -", nil];
+    NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
+    
+    //validation message data pekerjaan
+    NSString *validationPekerjaan=@"Pekerjaan harus diisi";
+    NSString *validationPendapatanTahunan=@"Pendapatan tahunan harus diisi";
+    NSString *validationSumberPenghasilan=@"Sumber penghasilan harus diisi";
+    
+    //outletOccupation
+    NSString* outletoccupaction=outletOccup.titleLabel.text;
+    //textannincome
+    NSString *textannincome=txtAnnIncome.text;
+    //outletsourceincome
+    NSString* outletsourceincome=_outletSourceIncome.titleLabel.text;
+
+    if ([validationSet containsObject:outletoccupaction]||outletoccupaction==NULL){
+        [self createAlertViewAndShow:validationPekerjaan tag:0];
+        [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+        return false;
+    }
+    else if ([textannincome isEqualToString:@""]||textannincome==NULL){
+        [self createAlertViewAndShow:validationPendapatanTahunan tag:0];
+        [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+        return false;
+    }
+    else if ([validationSet containsObject:outletsourceincome]||outletsourceincome==NULL){
+        [self createAlertViewAndShow:validationSumberPenghasilan tag:0];
+        [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+        return false;
+    }
+    return valid;
 }
 
 /*end of code added by faiz*/
@@ -4176,7 +4448,7 @@ bool RegDatehandling;
 
 - (bool) Validation
 {
-	NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
+	/*NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
     int annual_income =  [txtAnnIncome.text integerValue];
     
     NSString *otherIDTypeTrim = [OtherIDType.titleLabel.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
@@ -5260,7 +5532,7 @@ bool RegDatehandling;
         } end of remark*/
         
         //CHECK NATIONALITY
-        if([nation isEqualToString:@"- SELECT -"]&& ![otherIDTypeTrim isEqualToString:@"EXPECTED DELIVERY DATE"]) {
+        /*if([nation isEqualToString:@"- SELECT -"]&& ![otherIDTypeTrim isEqualToString:@"EXPECTED DELIVERY DATE"]) {
             rrr = [[UIAlertView alloc] initWithTitle:@" " message:@"Nationality is required." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             rrr.tag = 1005;
             [rrr show];
@@ -6653,8 +6925,23 @@ bool RegDatehandling;
         [alert show];
         return false;
     }
-    
-    return true;
+    */
+    bool returnBool;
+    bool validDateRef=[self  validationDataReferral];
+    returnBool=validDateRef;
+    if (validDateRef){
+        bool validDataPribadi=[self validationDataPribadi];
+        returnBool=validDataPribadi;
+        if (validDataPribadi){
+            bool validDataAlamat=[self validationDataAlamat];
+            returnBool=validDataAlamat;
+            if (validDataAlamat) {
+                bool validDataPekerjaan=[self validationDatapekerjaan];
+                returnBool=validDataPekerjaan;
+            }
+        }
+    }
+    return returnBool;
 }
 
 
@@ -7110,16 +7397,22 @@ bool RegDatehandling;
     DATE_OK = YES;
     NSDateFormatter* df = [[NSDateFormatter alloc] init];
     [df setDateFormat:@"dd/MM/yyyy"];
+
     NSDate *d = [NSDate date];
     NSDate* d2 = [df dateFromString:strDate];
-    
+
     NSDateFormatter *formatter;
     NSString        *dateString;
+    NSString        *clientDateString;
     
     formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"dd/MM/yyyy"];
     
+    NSDateFormatter* clientDateFormmater = [[NSDateFormatter alloc] init];
+    [clientDateFormmater setDateFormat:@"yyyy-MM-dd"];
+    
     dateString = [formatter stringFromDate:[NSDate date]];
+    clientDateString = [clientDateFormmater stringFromDate:d2];
     
     if(RegDatehandling == NO && isGSTDate) {
         outletRigDate.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
@@ -7133,11 +7426,12 @@ bool RegDatehandling;
     
     if (isDOBDate) {
 		//[outletDOB setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", strDate] forState:UIControlStateNormal];
-        [outletDOB setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", [df stringFromDate:d2]] forState:UIControlStateNormal];
+        [outletDOB setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", clientDateString] forState:UIControlStateNormal];
 	}
 
     if (isExpiryDate) {
-        [outletExpiryDate setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", strDate] forState:UIControlStateNormal];
+        //[outletExpiryDate setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", strDate] forState:UIControlStateNormal];
+        [outletExpiryDate setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", clientDateString] forState:UIControlStateNormal];
     }
 
     if([otherIDType_trim isEqualToString:@"EXPECTED DELIVERY DATE"] && [dateString isEqualToString:strDate]) {
@@ -7165,7 +7459,8 @@ bool RegDatehandling;
     } else {
         if (isDOBDate) {
 			outletDOB.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-			[outletDOB setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", strDate] forState:UIControlStateNormal];
+			//[outletDOB setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", strDate] forState:UIControlStateNormal];
+            [outletDOB setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", clientDateString] forState:UIControlStateNormal];
 		}
     }
     
@@ -7827,12 +8122,15 @@ bool RegDatehandling;
         txtAnnIncome.backgroundColor = [UIColor whiteColor];
         txtAnnIncome.enabled =true;
     }*/
+    ColorHexCode *CustomColor = [[ColorHexCode alloc] init ];
     if ([selectedIDType isEqualToString:@"- SELECT -"]) {
         OtherIDType.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+        txtOtherIDType.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
         txtOtherIDType.enabled = NO;
     }
     else{
         OtherIDType.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        txtOtherIDType.backgroundColor = [UIColor whiteColor];
         txtOtherIDType.enabled = YES;
     }
     [OtherIDType setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",selectedIDType]forState:UIControlStateNormal];

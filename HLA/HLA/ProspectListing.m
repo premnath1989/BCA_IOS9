@@ -45,6 +45,9 @@ MBProgressHUD *HUD;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    borderColor=[[UIColor alloc]initWithRed:250.0/255.0 green:175.0/255.0 blue:50.0/255.0 alpha:1.0];
+    [self setTextfieldBorder];
+
     [self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
     
     self.noMoreResultsAvail =NO;
@@ -120,6 +123,26 @@ MBProgressHUD *HUD;
     [colorView setBackgroundColor:[UIColor blackColor]];
     [self.navigationController.navigationBar addSubview:colorView];
 }
+
+-(void)setTextfieldBorder{
+    UIFont *font= [UIFont fontWithName:@"TreBuchet MS" size:16.0f];
+    for (UIView *view in self.view.subviews) {
+        if ([view isKindOfClass:[UITextField class]]) {
+            UITextField *textField = (UITextField *)view;
+            textField.layer.borderColor=borderColor.CGColor;
+            textField.layer.borderWidth=1.0;
+            textField.delegate=self;
+            [textField setFont:font];
+            
+            UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
+            textField.leftView = paddingView;
+            textField.leftViewMode = UITextFieldViewModeAlways;
+        }
+    }
+    
+    
+}
+
 
 //end of added by faiz
 #pragma mark - `Table view data source

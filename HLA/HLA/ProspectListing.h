@@ -15,7 +15,7 @@
 #import "CustomAlertBox.h"
 #import "ModelProspectProfile.h"
 
-@interface ProspectListing : UIViewController<EditProspectDelegate, ProspectViewControllerDelegate,UITableViewDelegate,UITableViewDataSource,GroupDelegate, ClientProfileListingDelegate,CustomAlertBoxDelegate, UITabBarDelegate>
+@interface ProspectListing : UIViewController<EditProspectDelegate, ProspectViewControllerDelegate,UITableViewDelegate,UITableViewDataSource,GroupDelegate, ClientProfileListingDelegate,CustomAlertBoxDelegate, UITabBarDelegate, UITextFieldDelegate>
 {
     NSString *databasePath;
     sqlite3 *contactDB;
@@ -31,7 +31,8 @@
     UIPopoverController *_Popover;
 	
 	UIActivityIndicatorView *spinner;
- 
+    
+    UIColor *borderColor;
 }
 
 @property (nonatomic, retain) ClientProfileListingSortBy *SortBy;

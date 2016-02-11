@@ -200,6 +200,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *outletExpiryDate;
 @property (weak, nonatomic) IBOutlet UIButton *outletSourceIncome;
 @property (weak, nonatomic) IBOutlet UIButton *outletVIPClass;
+@property (weak, nonatomic) IBOutlet UIButton *outletBranchCode;
+@property (weak, nonatomic) IBOutlet UIButton *outletBranchName;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *segReferralType;
 @property (weak, nonatomic) IBOutlet UITextField *txtNPWPNo;
 /*end of added by faiz*/
