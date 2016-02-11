@@ -57,6 +57,7 @@ int name_repeat;
 	NSString *getSameRecord_Indexno;
 	int clickDone;		//if user click done, = 1
 	NSString *SameID_type;
+    UIColor *borderColor;
 	
 }
 @end
@@ -140,7 +141,8 @@ NSMutableArray *DelGroupArr;
 {
 	
     [super viewDidLoad];
-	
+    borderColor=[[UIColor alloc]initWithRed:250.0/255.0 green:175.0/255.0 blue:50.0/255.0 alpha:1.0];
+    
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LoadDisplay) name:@"reloadEdit" object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(returnTolisting) name:@"returnToListing" object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(disableGroup) name:@"DismissGroup" object:nil];
@@ -175,7 +177,7 @@ NSMutableArray *DelGroupArr;
     
     databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
     txtRemark.layer.borderWidth = 1.0f;
-    txtRemark.layer.borderColor = [[UIColor grayColor] CGColor];
+    txtRemark.layer.borderColor = borderColor.CGColor;
     
     //easysqlite---------start
 	self.db = [DBController sharedDatabaseController:@"hladb.sqlite"];
@@ -296,10 +298,10 @@ NSMutableArray *DelGroupArr;
     outletDelete.titleLabel.shadowOffset = CGSizeMake(0, -1);
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(btnSave:)];
-    self.navigationItem.rightBarButtonItem.tintColor = [UIColor colorWithRed:48.0/255.0 green:131.0/255.0 blue:251/255.0 alpha:1];
+    self.navigationItem.rightBarButtonItem.tintColor = borderColor;
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Daftar Nasabah" style:UIBarButtonItemStyleBordered target:self action:@selector(back)];
-    self.navigationItem.leftBarButtonItem.tintColor = [UIColor colorWithRed:48.0/255.0 green:131.0/255.0 blue:251/255.0 alpha:1];
+    self.navigationItem.leftBarButtonItem.tintColor = borderColor;
     
     
     checked = NO;
@@ -344,12 +346,12 @@ NSMutableArray *DelGroupArr;
 
 /*code added by faiz*/
 -(void)setTextfieldBorder{
-    
+
     UIFont *font= [UIFont fontWithName:@"TreBuchet MS" size:16.0f];
     for (UIView *view in [_viewPersonalInfo subviews]) {
         if ([view isKindOfClass:[UITextField class]]) {
             UITextField *textField = (UITextField *)view;
-            textField.layer.borderColor=[UIColor colorWithRed:47.0/255.0 green:188.0/255.0 blue:118.0/255.0 alpha:1.0].CGColor;
+            textField.layer.borderColor=borderColor.CGColor;
             textField.layer.borderWidth=1.0;
             textField.delegate=self;
             [textField setFont:font];
@@ -367,7 +369,7 @@ NSMutableArray *DelGroupArr;
     for (UIView *view in [_viewReferralInfo subviews]) {
         if ([view isKindOfClass:[UITextField class]]) {
             UITextField *textField = (UITextField *)view;
-            textField.layer.borderColor=[UIColor colorWithRed:47.0/255.0 green:188.0/255.0 blue:118.0/255.0 alpha:1.0].CGColor;
+            textField.layer.borderColor=borderColor.CGColor;
             textField.layer.borderWidth=1.0;
             textField.delegate=self;
             
@@ -384,7 +386,7 @@ NSMutableArray *DelGroupArr;
     for (UIView *view in [_viewAddressDetail subviews]) {
         if ([view isKindOfClass:[UITextField class]]) {
             UITextField *textField = (UITextField *)view;
-            textField.layer.borderColor=[UIColor colorWithRed:47.0/255.0 green:188.0/255.0 blue:118.0/255.0 alpha:1.0].CGColor;
+            textField.layer.borderColor=borderColor.CGColor;
             textField.layer.borderWidth=1.0;
             textField.delegate=self;
             [textField setFont:font];
@@ -403,7 +405,7 @@ NSMutableArray *DelGroupArr;
     for (UIView *view in [_viewAddressDetailOffice subviews]) {
         if ([view isKindOfClass:[UITextField class]]) {
             UITextField *textField = (UITextField *)view;
-            textField.layer.borderColor=[UIColor colorWithRed:47.0/255.0 green:188.0/255.0 blue:118.0/255.0 alpha:1.0].CGColor;
+            textField.layer.borderColor=borderColor.CGColor;
             textField.layer.borderWidth=1.0;
             textField.delegate=self;
             [textField setFont:font];
@@ -422,7 +424,7 @@ NSMutableArray *DelGroupArr;
     for (UIView *view in [_viewOccupationInfo subviews]) {
         if ([view isKindOfClass:[UITextField class]]) {
             UITextField *textField = (UITextField *)view;
-            textField.layer.borderColor=[UIColor colorWithRed:47.0/255.0 green:188.0/255.0 blue:118.0/255.0 alpha:1.0].CGColor;
+            textField.layer.borderColor=borderColor.CGColor;
             textField.layer.borderWidth=1.0;
             textField.delegate=self;
             [textField setFont:font];
@@ -441,7 +443,7 @@ NSMutableArray *DelGroupArr;
     for (UIView *view in [_viewOtherInfo subviews]) {
         if ([view isKindOfClass:[UITextField class]]) {
             UITextField *textField = (UITextField *)view;
-            textField.layer.borderColor=[UIColor colorWithRed:47.0/255.0 green:188.0/255.0 blue:118.0/255.0 alpha:1.0].CGColor;
+            textField.layer.borderColor=borderColor.CGColor;
             textField.layer.borderWidth=1.0;
             textField.delegate=self;
             [textField setFont:font];
@@ -452,7 +454,7 @@ NSMutableArray *DelGroupArr;
         }
         if ([view isKindOfClass:[UITextView class]]) {
             UITextView *textView = (UITextView *)view;
-            textView.layer.borderColor=[UIColor colorWithRed:47.0/255.0 green:188.0/255.0 blue:118.0/255.0 alpha:1.0].CGColor;
+            textView.layer.borderColor=borderColor.CGColor;
             textView.layer.borderWidth=1.0;
             textView.delegate=self;
             [textView setFont:font];
@@ -467,55 +469,55 @@ NSMutableArray *DelGroupArr;
 -(void)setButtonImageAndTextAlignment{
     outletTitle.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     outletTitle.imageEdgeInsets = UIEdgeInsetsMake(0., outletTitle.frame.size.width - (24 + 10.0), 0., 0.);
-    outletTitle.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 0);
+    outletTitle.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 31.7);
     
     outletDOB.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     outletDOB.imageEdgeInsets = UIEdgeInsetsMake(0., outletDOB.frame.size.width - (24 + 10.0), 0., 0.);
-    outletDOB.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 0);
+    outletDOB.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 31.7);
     
     OtherIDType.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     OtherIDType.imageEdgeInsets = UIEdgeInsetsMake(0., outletDOB.frame.size.width - (24 + 10.0), 0., 0.);
-    OtherIDType.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 0);
+    OtherIDType.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 31.7);
     
     outletMaritalStatus.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     outletMaritalStatus.imageEdgeInsets = UIEdgeInsetsMake(0., outletDOB.frame.size.width - (24 + 10.0), 0., 0.);
-    outletMaritalStatus.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 0);
+    outletMaritalStatus.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 31.7);
     
     outletNationality.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     outletNationality.imageEdgeInsets = UIEdgeInsetsMake(0., outletNationality.frame.size.width - (24 + 10.0), 0., 0.);
-    outletNationality.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 0);
+    outletNationality.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 31.7);
     
     outletReligion.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     outletReligion.imageEdgeInsets = UIEdgeInsetsMake(0., outletReligion.frame.size.width - (24 + 10.0), 0., 0.);
-    outletReligion.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 0);
+    outletReligion.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 31.7);
     
     outletReligion.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     outletReligion.imageEdgeInsets = UIEdgeInsetsMake(0., outletReligion.frame.size.width - (24 + 10.0), 0., 0.);
-    outletReligion.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 0);
+    outletReligion.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 31.7);
     
     btnOfficeCountry.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     btnOfficeCountry.imageEdgeInsets = UIEdgeInsetsMake(0., btnOfficeCountry.frame.size.width - (24 + 10.0), 0., 0.);
-    btnOfficeCountry.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 0);
+    btnOfficeCountry.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 31.7);
     
     btnHomeCountry.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     btnHomeCountry.imageEdgeInsets = UIEdgeInsetsMake(0., btnHomeCountry.frame.size.width - (24 + 10.0), 0., 0.);
-    btnHomeCountry.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 0);
+    btnHomeCountry.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 31.7);
     
     outletOccup.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     outletOccup.imageEdgeInsets = UIEdgeInsetsMake(0., outletOccup.frame.size.width - (24 + 10.0), 0., 0.);
-    outletOccup.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 0);
+    outletOccup.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 31.7);
     
     BtnCountryOfBirth.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     BtnCountryOfBirth.imageEdgeInsets = UIEdgeInsetsMake(0., outletTitle.frame.size.width - (24 + 10.0), 0., 0.);
-    BtnCountryOfBirth.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 0);
+    BtnCountryOfBirth.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 31.7);
     
     outletExpiryDate.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     outletExpiryDate.imageEdgeInsets = UIEdgeInsetsMake(0., outletExpiryDate.frame.size.width - (24 + 10.0), 0., 0.);
-    outletExpiryDate.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 0);
+    outletExpiryDate.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
     
     outletReferralSource.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     outletReferralSource.imageEdgeInsets = UIEdgeInsetsMake(0., outletReferralSource.frame.size.width - (24 + 10.0), 0., 0.);
-    outletReferralSource.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 0);
+    outletReferralSource.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField

@@ -60,7 +60,7 @@
     NSString *getSameRecord_Indexno;
 	
 	int clickDone;		//if user click done, = 1
-    
+    UIColor *borderColor;
 }
 
 @end
@@ -142,7 +142,8 @@ bool RegDatehandling;
     RegDatehandling =YES;
     
     [super viewDidLoad];
-	
+    borderColor=[[UIColor alloc]initWithRed:250.0/255.0 green:175.0/255.0 blue:50.0/255.0 alpha:1.0];
+    
 	UDGroup = [NSUserDefaults standardUserDefaults];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -275,11 +276,11 @@ bool RegDatehandling;
     btnHomeCountry.hidden = YES;
     txtOtherIDType.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
     txtOtherIDType.enabled = NO;
-    outletDOB.hidden = YES;
+    //outletDOB.hidden = YES; //*remarked by faiz due to validation request
     txtDOB.enabled = NO;
-    segGender.enabled = FALSE;
+    txtDOB.hidden = YES; //*added by faiz due to validation request
+    //segGender.enabled = FALSE; //*remarked by faiz due to validation request
     segRigPerson.selectedSegmentIndex=1;
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(btnSave_EditOrNew)];
 	
     checked = NO;
     checked2 = NO;
@@ -314,8 +315,11 @@ bool RegDatehandling;
     self.myScrollView.frame = CGRectMake(0, 0, 1024, 900);
     self.myScrollView.contentSize = CGSizeMake(900, 1300);
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Data Profi Klien" style:UIBarButtonItemStyleBordered target:self action:@selector(back)];
-	
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Daftar Nasabah" style:UIBarButtonItemStyleBordered target:self action:@selector(back)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(btnSave_EditOrNew)];
+    self.navigationItem.leftBarButtonItem.tintColor = borderColor;
+	self.navigationItem.rightBarButtonItem.tintColor = borderColor;
+    
     NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
 	[ClientProfile setObject:@"NEW" forKey:@"ChangedOn"];
 	[ClientProfile setObject:@"NO" forKey:@"TabBar"];
@@ -343,7 +347,7 @@ bool RegDatehandling;
     for (UIView *view in [_viewPersonalInfo subviews]) {
         if ([view isKindOfClass:[UITextField class]]) {
             UITextField *textField = (UITextField *)view;
-            textField.layer.borderColor=[UIColor colorWithRed:47.0/255.0 green:188.0/255.0 blue:118.0/255.0 alpha:1.0].CGColor;
+            textField.layer.borderColor=borderColor.CGColor;
             textField.layer.borderWidth=1.0;
             textField.delegate=self;
             [textField setFont:font];
@@ -357,7 +361,7 @@ bool RegDatehandling;
     for (UIView *view in [_viewReferralInfo subviews]) {
         if ([view isKindOfClass:[UITextField class]]) {
             UITextField *textField = (UITextField *)view;
-            textField.layer.borderColor=[UIColor colorWithRed:47.0/255.0 green:188.0/255.0 blue:118.0/255.0 alpha:1.0].CGColor;
+            textField.layer.borderColor=borderColor.CGColor;
             textField.layer.borderWidth=1.0;
             textField.delegate=self;
             [textField setFont:font];
@@ -371,7 +375,7 @@ bool RegDatehandling;
     for (UIView *view in [_viewAddressDetail subviews]) {
         if ([view isKindOfClass:[UITextField class]]) {
             UITextField *textField = (UITextField *)view;
-            textField.layer.borderColor=[UIColor colorWithRed:47.0/255.0 green:188.0/255.0 blue:118.0/255.0 alpha:1.0].CGColor;
+            textField.layer.borderColor=borderColor.CGColor;
             textField.layer.borderWidth=1.0;
             textField.delegate=self;
             [textField setFont:font];
@@ -385,7 +389,7 @@ bool RegDatehandling;
     for (UIView *view in [_viewAddressDetailOffice subviews]) {
         if ([view isKindOfClass:[UITextField class]]) {
             UITextField *textField = (UITextField *)view;
-            textField.layer.borderColor=[UIColor colorWithRed:47.0/255.0 green:188.0/255.0 blue:118.0/255.0 alpha:1.0].CGColor;
+            textField.layer.borderColor=borderColor.CGColor;
             textField.layer.borderWidth=1.0;
             textField.delegate=self;
             [textField setFont:font];
@@ -395,7 +399,7 @@ bool RegDatehandling;
     for (UIView *view in [_viewOccupationInfo subviews]) {
         if ([view isKindOfClass:[UITextField class]]) {
             UITextField *textField = (UITextField *)view;
-            textField.layer.borderColor=[UIColor colorWithRed:47.0/255.0 green:188.0/255.0 blue:118.0/255.0 alpha:1.0].CGColor;
+            textField.layer.borderColor=borderColor.CGColor;
             textField.layer.borderWidth=1.0;
             
             UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
@@ -407,7 +411,7 @@ bool RegDatehandling;
     for (UIView *view in [_viewOtherInfo subviews]) {
         if ([view isKindOfClass:[UITextField class]]) {
             UITextField *textField = (UITextField *)view;
-            textField.layer.borderColor=[UIColor colorWithRed:47.0/255.0 green:188.0/255.0 blue:118.0/255.0 alpha:1.0].CGColor;
+            textField.layer.borderColor=borderColor.CGColor;
             textField.layer.borderWidth=1.0;
             textField.delegate=self;
             [textField setFont:font];
@@ -418,7 +422,7 @@ bool RegDatehandling;
         }
         if ([view isKindOfClass:[UITextView class]]) {
             UITextView *textView = (UITextView *)view;
-            textView.layer.borderColor=[UIColor colorWithRed:47.0/255.0 green:188.0/255.0 blue:118.0/255.0 alpha:1.0].CGColor;
+            textView.layer.borderColor=borderColor.CGColor;
             textView.layer.borderWidth=1.0;
             textView.delegate=self;
             [textView setFont:font];
@@ -437,6 +441,8 @@ bool RegDatehandling;
     outletDOB.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     outletDOB.imageEdgeInsets = UIEdgeInsetsMake(0., outletDOB.frame.size.width - (24 + 10.0), 0., 0.);
     outletDOB.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
+    outletDOB.layer.borderColor = borderColor.CGColor;
+    outletDOB.layer.borderWidth = 1.0;
     
     OtherIDType.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     OtherIDType.imageEdgeInsets = UIEdgeInsetsMake(0., outletDOB.frame.size.width - (24 + 10.0), 0., 0.);
@@ -1983,6 +1989,7 @@ bool RegDatehandling;
     int counter = 0;
 	
     /*added by faiz*/
+    [outletMaritalStatus setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"SINGLE"]forState:UIControlStateNormal];
     txtExactDuties.text=@"test";
     txtPrefix1.text=@"021";
     txtPrefix2.text=@"021";
@@ -2040,6 +2047,7 @@ bool RegDatehandling;
             nation = [outletNationality.titleLabel.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
             /*modified by faiz*/
             race  = @"OTHERS";//[outletRace.titleLabel.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            
             /*end of modification*/
             Rigdateoutlet  = [outletRigDate.titleLabel.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
             religion = [outletReligion.titleLabel.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
@@ -6783,9 +6791,9 @@ bool RegDatehandling;
     btnHomeCountry.hidden = YES;
     txtOtherIDType.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
     txtOtherIDType.enabled = NO;
-    outletDOB.hidden = YES;
+    //outletDOB.hidden = YES; //*remarked by faiz due to validation request
     txtDOB.enabled = NO;
-    segGender.enabled = FALSE;
+    //segGender.enabled = FALSE; //*remarked by faiz due to validation request
 	
     checked = NO;
     checked2 = NO;
@@ -7180,7 +7188,7 @@ bool RegDatehandling;
 
 -(void)IDTypeDescSelected:(NSString *)selectedIDType
 {
-    ColorHexCode *CustomColor = [[ColorHexCode alloc] init ];
+    /*ColorHexCode *CustomColor = [[ColorHexCode alloc] init ];
 	
 	if (outletOccup.enabled == FALSE) {
 		outletOccup.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
@@ -7817,7 +7825,17 @@ bool RegDatehandling;
     } else if(![otherIDType isEqualToString:@"EXPECTED DELIVERY DATE"]) {
         txtAnnIncome.backgroundColor = [UIColor whiteColor];
         txtAnnIncome.enabled =true;
+    }*/
+    if ([selectedIDType isEqualToString:@"- SELECT -"]) {
+        OtherIDType.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+        txtOtherIDType.enabled = NO;
     }
+    else{
+        OtherIDType.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        txtOtherIDType.enabled = YES;
+    }
+    [OtherIDType setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",selectedIDType]forState:UIControlStateNormal];
+    [self.IDTypePickerPopover dismissPopoverAnimated:YES];
 }
 
 -(void)IDTypeCodeSelected:(NSString *)IDTypeCode {

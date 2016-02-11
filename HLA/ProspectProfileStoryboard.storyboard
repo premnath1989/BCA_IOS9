@@ -1513,12 +1513,12 @@
                                                     <segment title="Prospect"/>
                                                     <segment title="Suspect"/>
                                                 </segments>
-                                                <color key="tintColor" red="0.25882352939999997" green="0.82745098039999998" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="tintColor" red="0.98039215690000003" green="0.68627450980000004" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                             </segmentedControl>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gdu-gm-agK">
                                                 <rect key="frame" x="199" y="180" width="253" height="24"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
-                                                <state key="normal" title="Test Referral" image="Expand Arrow.png">
+                                                <state key="normal" image="Expand Arrow.png">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
@@ -1560,14 +1560,14 @@
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yER-tI-48b">
                                         <rect key="frame" x="10" y="223" width="1000" height="1"/>
-                                        <color key="backgroundColor" red="0.25882352939999997" green="0.82745098039999998" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.98039215690000003" green="0.68627450980000004" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="Gqy-bp-2bB"/>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="Hhq-VX-U3W"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ouT-3T-nVv">
-                                        <rect key="frame" x="0.0" y="228" width="1024" height="435"/>
+                                        <rect key="frame" x="0.0" y="228" width="1024" height="397"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Jenis Kelamin" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ydP-Js-Dca">
                                                 <rect key="frame" x="20" y="105" width="161" height="21"/>
@@ -1666,7 +1666,7 @@
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KfK-lG-uuA">
+                                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KfK-lG-uuA">
                                                 <rect key="frame" x="199" y="253" width="253" height="30"/>
                                                 <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1675,62 +1675,62 @@
                                                     <action selector="actionMaritalStatus:" destination="CEO-Xo-hVe" eventType="editingDidEnd" id="oEd-iy-wsV"/>
                                                 </connections>
                                             </textField>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Status Pernikahan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hiu-ed-Dja">
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Status Pernikahan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hiu-ed-Dja">
                                                 <rect key="frame" x="20" y="257" width="161" height="21"/>
                                                 <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Merokok ?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tgt-7e-tCO">
-                                                <rect key="frame" x="20" y="295" width="161" height="21"/>
+                                                <rect key="frame" x="20" y="257" width="161" height="21"/>
                                                 <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YJa-Vk-wjc">
-                                                <rect key="frame" x="199" y="329" width="253" height="30"/>
+                                                <rect key="frame" x="199" y="291" width="253" height="30"/>
                                                 <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Kebangsaan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gbb-uk-APr">
-                                                <rect key="frame" x="20" y="333" width="161" height="21"/>
+                                                <rect key="frame" x="20" y="295" width="161" height="21"/>
                                                 <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="w1o-e5-VP1">
-                                                <rect key="frame" x="199" y="367" width="253" height="30"/>
+                                                <rect key="frame" x="199" y="329" width="253" height="30"/>
                                                 <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tempat Lahir" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sWm-U9-SSa">
-                                                <rect key="frame" x="20" y="371" width="161" height="21"/>
+                                                <rect key="frame" x="20" y="333" width="161" height="21"/>
                                                 <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aAd-II-mcr">
-                                                <rect key="frame" x="199" y="405" width="253" height="30"/>
+                                                <rect key="frame" x="199" y="367" width="253" height="30"/>
                                                 <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Agama" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EOZ-03-iJk">
-                                                <rect key="frame" x="20" y="409" width="161" height="21"/>
+                                                <rect key="frame" x="20" y="371" width="161" height="21"/>
                                                 <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tanggal Kadaluarsa Identitas" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Opc-wD-ggZ">
-                                                <rect key="frame" x="517" y="219" width="220" height="21"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tanggal               Kadaluarsa Identitas" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Opc-wD-ggZ">
+                                                <rect key="frame" x="517" y="199" width="161" height="46"/>
                                                 <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8jf-fl-JVE">
-                                                <rect key="frame" x="754" y="215" width="185" height="30"/>
+                                                <rect key="frame" x="686" y="215" width="253" height="30"/>
                                                 <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
@@ -1747,7 +1747,7 @@
                                                     <segment title="Pria"/>
                                                     <segment title="Wanita"/>
                                                 </segments>
-                                                <color key="tintColor" red="0.25882352939999997" green="0.82745098039999998" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="tintColor" red="0.98039215690000003" green="0.68627450980000004" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                                 <connections>
                                                     <action selector="ActionGender:" destination="CEO-Xo-hVe" eventType="valueChanged" id="bik-EF-yeT"/>
                                                 </connections>
@@ -1789,7 +1789,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wrR-wG-cA6">
-                                                <rect key="frame" x="199" y="142" width="253" height="24"/>
+                                                <rect key="frame" x="199" y="139" width="253" height="30"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
                                                 <state key="normal" image="Expand Arrow.png">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -1808,7 +1808,7 @@
                                                     <action selector="btnOtherIDType:" destination="CEO-Xo-hVe" eventType="touchUpInside" id="kzD-br-htA"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DWP-ha-kye">
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DWP-ha-kye">
                                                 <rect key="frame" x="199" y="256" width="253" height="24"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
                                                 <state key="normal" image="Expand Arrow.png">
@@ -1819,7 +1819,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eri-0W-6k7">
-                                                <rect key="frame" x="199" y="332" width="253" height="24"/>
+                                                <rect key="frame" x="199" y="294" width="253" height="24"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
                                                 <state key="normal" image="Expand Arrow.png">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -1829,7 +1829,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LeO-9i-P3B">
-                                                <rect key="frame" x="199" y="408" width="253" height="24"/>
+                                                <rect key="frame" x="199" y="370" width="253" height="24"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
                                                 <state key="normal" image="Expand Arrow.png">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -1839,18 +1839,18 @@
                                                 </connections>
                                             </button>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="mc6-N5-ayz">
-                                                <rect key="frame" x="199" y="291" width="253" height="29"/>
+                                                <rect key="frame" x="199" y="253" width="253" height="29"/>
                                                 <segments>
-                                                    <segment title="Yes"/>
+                                                    <segment title="Ya"/>
                                                     <segment title="No"/>
                                                 </segments>
-                                                <color key="tintColor" red="0.25882352939999997" green="0.82745098039999998" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="tintColor" red="0.98039215690000003" green="0.68627450980000004" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                                 <connections>
                                                     <action selector="ActionSmoker:" destination="CEO-Xo-hVe" eventType="valueChanged" id="hUg-KN-ezw"/>
                                                 </connections>
                                             </segmentedControl>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RgO-WD-oD0">
-                                                <rect key="frame" x="199" y="370" width="253" height="24"/>
+                                                <rect key="frame" x="199" y="332" width="253" height="24"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
                                                 <state key="normal" image="Expand Arrow.png">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -1860,7 +1860,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qyU-HT-WIG">
-                                                <rect key="frame" x="754" y="218" width="185" height="24"/>
+                                                <rect key="frame" x="686" y="218" width="253" height="24"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
                                                 <state key="normal" image="Expand Arrow.png">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -1872,19 +1872,19 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="435" id="njJ-gB-q3y"/>
+                                            <constraint firstAttribute="height" constant="397" id="njJ-gB-q3y"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iTT-7A-dbO">
-                                        <rect key="frame" x="10" y="668" width="1000" height="1"/>
-                                        <color key="backgroundColor" red="0.25882352939999997" green="0.82745098039999998" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <rect key="frame" x="10" y="630" width="1000" height="1"/>
+                                        <color key="backgroundColor" red="0.98039215690000003" green="0.68627450980000004" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="Jmo-FD-cuZ"/>
                                             <constraint firstAttribute="height" constant="1" id="e4E-Fu-Pxx"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gAE-lQ-Lef">
-                                        <rect key="frame" x="0.0" y="673" width="1024" height="699"/>
+                                        <rect key="frame" x="0.0" y="635" width="1024" height="699"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Data Alamat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bcu-Mh-2Op">
                                                 <rect key="frame" x="20" y="0.0" width="184" height="21"/>
@@ -2015,7 +2015,7 @@
                                                             <segment title="Mobile 1"/>
                                                             <segment title="Mobile 2"/>
                                                         </segments>
-                                                        <color key="tintColor" red="0.25882352939999997" green="0.82745098039999998" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="tintColor" red="0.98039215690000003" green="0.68627450980000004" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                                     </segmentedControl>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="82g-a7-a2y">
                                                         <rect key="frame" x="199" y="72" width="740" height="30"/>
@@ -2085,6 +2085,7 @@
                                                     </label>
                                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="cD9-7A-YRV">
                                                         <rect key="frame" x="686" y="0.0" width="51" height="31"/>
+                                                        <color key="tintColor" red="0.98039215690000003" green="0.68627450980000004" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                                         <connections>
                                                             <action selector="isForeign:" destination="CEO-Xo-hVe" eventType="valueChanged" id="HQR-AT-yTm"/>
                                                         </connections>
@@ -2250,6 +2251,7 @@
                                                     </label>
                                                     <switch opaque="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="GbV-4r-2Q0">
                                                         <rect key="frame" x="686" y="0.0" width="51" height="31"/>
+                                                        <color key="tintColor" red="0.98039215690000003" green="0.68627450980000004" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                                         <connections>
                                                             <action selector="isForeign:" destination="CEO-Xo-hVe" eventType="valueChanged" id="I1Y-oT-wkI"/>
                                                         </connections>
@@ -2279,15 +2281,15 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6nN-TV-0FR">
-                                        <rect key="frame" x="10" y="1377" width="1000" height="1"/>
-                                        <color key="backgroundColor" red="0.25882352939999997" green="0.82745098039999998" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <rect key="frame" x="10" y="1339" width="1000" height="1"/>
+                                        <color key="backgroundColor" red="0.98039215690000003" green="0.68627450980000004" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="3n0-WC-4Xw"/>
                                             <constraint firstAttribute="height" constant="1" id="bfS-ul-Hef"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FsL-eZ-tS4">
-                                        <rect key="frame" x="0.0" y="1382" width="1024" height="284"/>
+                                        <rect key="frame" x="0.0" y="1344" width="1024" height="245"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wyv-3a-y4n">
                                                 <rect key="frame" x="460" y="181" width="14" height="21"/>
@@ -2420,19 +2422,19 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="284" id="EA6-Me-yc5"/>
+                                            <constraint firstAttribute="height" constant="245" id="EA6-Me-yc5"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kAd-fe-unr">
-                                        <rect key="frame" x="10" y="1671" width="1000" height="1"/>
-                                        <color key="backgroundColor" red="0.25882352939999997" green="0.82745098039999998" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <rect key="frame" x="10" y="1594" width="1000" height="1"/>
+                                        <color key="backgroundColor" red="0.98039215690000003" green="0.68627450980000004" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="3jH-cf-jQV"/>
                                             <constraint firstAttribute="height" constant="1" id="mxv-3M-XKZ"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9EI-4x-PDy">
-                                        <rect key="frame" x="0.0" y="1676" width="1024" height="220"/>
+                                        <rect key="frame" x="0.0" y="1599" width="1024" height="220"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Other Info" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r7U-0V-ArP">
                                                 <rect key="frame" x="20" y="0.0" width="161" height="21"/>
@@ -2486,7 +2488,7 @@
                                                     <segment title="Yes"/>
                                                     <segment title="No"/>
                                                 </segments>
-                                                <color key="tintColor" red="0.25882352939999997" green="0.82745098039999998" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="tintColor" red="0.98039215690000003" green="0.68627450980000004" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                                 <connections>
                                                     <action selector="ActionIsGrouping:" destination="CEO-Xo-hVe" eventType="valueChanged" id="XGl-Qu-ASd"/>
                                                 </connections>
@@ -2527,7 +2529,7 @@
                                     <constraint firstItem="ouT-3T-nVv" firstAttribute="leading" secondItem="gAE-lQ-Lef" secondAttribute="leading" id="Pts-2Y-6XO"/>
                                     <constraint firstItem="6nN-TV-0FR" firstAttribute="trailing" secondItem="kAd-fe-unr" secondAttribute="trailing" id="WKY-g5-lJi"/>
                                     <constraint firstAttribute="trailing" secondItem="ouT-3T-nVv" secondAttribute="trailing" id="XyC-jf-PAd"/>
-                                    <constraint firstAttribute="bottom" secondItem="iTT-7A-dbO" secondAttribute="bottom" constant="79" id="d8f-6f-ObR"/>
+                                    <constraint firstAttribute="bottom" secondItem="iTT-7A-dbO" secondAttribute="bottom" constant="117" id="d8f-6f-ObR"/>
                                     <constraint firstItem="yER-tI-48b" firstAttribute="trailing" secondItem="iTT-7A-dbO" secondAttribute="trailing" id="e2n-sr-nZH"/>
                                     <constraint firstItem="kAd-fe-unr" firstAttribute="top" secondItem="FsL-eZ-tS4" secondAttribute="bottom" constant="5" id="eek-bj-eqU"/>
                                     <constraint firstItem="6nN-TV-0FR" firstAttribute="top" secondItem="gAE-lQ-Lef" secondAttribute="bottom" constant="5" id="ejt-Ul-i1h"/>
@@ -3084,7 +3086,7 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8X2-tv-VFI">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8X2-tv-VFI">
                                         <rect key="frame" x="700" y="602" width="250" height="30"/>
                                         <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="phonePad"/>
@@ -4204,7 +4206,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LiQ-zC-xyQ">
                                                 <rect key="frame" x="199" y="180" width="253" height="24"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
-                                                <state key="normal" title="Test Referral" image="Expand Arrow.png">
+                                                <state key="normal" image="Expand Arrow.png">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                             </button>
@@ -4249,13 +4251,13 @@
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A64-Ld-mR1">
                                         <rect key="frame" x="10" y="223" width="1000" height="1"/>
-                                        <color key="backgroundColor" red="0.25882352939999997" green="0.82745098039999998" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.98039215690000003" green="0.68627450980000004" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="9Wu-Pk-OjN"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jwo-SQ-Utz">
-                                        <rect key="frame" x="0.0" y="228" width="1024" height="435"/>
+                                        <rect key="frame" x="0.0" y="228" width="1024" height="397"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Jenis Kelamin" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Opk-Tf-LVR">
                                                 <rect key="frame" x="30" y="105" width="161" height="21"/>
@@ -4349,62 +4351,62 @@
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zfK-3M-bDM">
+                                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zfK-3M-bDM">
                                                 <rect key="frame" x="199" y="253" width="253" height="30"/>
                                                 <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Status Pernikahan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hZd-kb-F90">
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Status Pernikahan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hZd-kb-F90">
                                                 <rect key="frame" x="30" y="257" width="161" height="21"/>
                                                 <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Merokok ?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JCW-6f-3nv">
-                                                <rect key="frame" x="30" y="295" width="161" height="21"/>
+                                                <rect key="frame" x="30" y="257" width="161" height="21"/>
                                                 <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7dc-oF-mPB">
-                                                <rect key="frame" x="199" y="329" width="253" height="30"/>
+                                                <rect key="frame" x="199" y="291" width="253" height="30"/>
                                                 <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Kebangsaan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mGc-8j-snj">
-                                                <rect key="frame" x="30" y="333" width="161" height="21"/>
+                                                <rect key="frame" x="30" y="295" width="161" height="21"/>
                                                 <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v1G-LW-BC2">
-                                                <rect key="frame" x="199" y="367" width="253" height="30"/>
+                                                <rect key="frame" x="199" y="329" width="253" height="30"/>
                                                 <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tempat Lahir" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yqh-Ag-SZD">
-                                                <rect key="frame" x="30" y="371" width="161" height="21"/>
+                                                <rect key="frame" x="30" y="333" width="161" height="21"/>
                                                 <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WJM-Lg-hd0">
-                                                <rect key="frame" x="199" y="405" width="253" height="30"/>
+                                                <rect key="frame" x="199" y="367" width="253" height="30"/>
                                                 <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Agama" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TOF-Ba-Qen">
-                                                <rect key="frame" x="30" y="409" width="161" height="21"/>
+                                                <rect key="frame" x="30" y="371" width="161" height="21"/>
                                                 <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tanggal Kadaluarsa Identitas" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A26-sU-cEy">
-                                                <rect key="frame" x="504" y="219" width="227" height="21"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tanggal               Kadaluarsa Identitas" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A26-sU-cEy">
+                                                <rect key="frame" x="517" y="199" width="161" height="46"/>
                                                 <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -4421,7 +4423,7 @@
                                                     <segment title="Pria"/>
                                                     <segment title="Wanita"/>
                                                 </segments>
-                                                <color key="tintColor" red="0.25882352939999997" green="0.82745098039999998" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="tintColor" red="0.98039215690000003" green="0.68627450980000004" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                                 <connections>
                                                     <action selector="ActionGender:" destination="Few-sZ-jKx" eventType="valueChanged" id="xnP-5m-JFY"/>
                                                 </connections>
@@ -4457,12 +4459,12 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="C1R-jh-EIh">
-                                                <rect key="frame" x="199" y="291" width="253" height="29"/>
+                                                <rect key="frame" x="199" y="253" width="253" height="29"/>
                                                 <segments>
                                                     <segment title="Ya"/>
                                                     <segment title="Tidak"/>
                                                 </segments>
-                                                <color key="tintColor" red="0.25882352939999997" green="0.82745098039999998" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="tintColor" red="0.98039215690000003" green="0.68627450980000004" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                                 <connections>
                                                     <action selector="ActionSmoker:" destination="Few-sZ-jKx" eventType="valueChanged" id="xYw-Sr-zjv"/>
                                                 </connections>
@@ -4489,7 +4491,7 @@
                                                     <action selector="btnOtherIDType:" destination="Few-sZ-jKx" eventType="touchUpInside" id="S6F-zE-KfJ"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fq7-kM-b6K">
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fq7-kM-b6K">
                                                 <rect key="frame" x="199" y="256" width="253" height="24"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
                                                 <state key="normal" image="Expand Arrow.png"/>
@@ -4498,7 +4500,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HLw-Sh-dM8">
-                                                <rect key="frame" x="199" y="332" width="253" height="24"/>
+                                                <rect key="frame" x="199" y="294" width="253" height="24"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
                                                 <state key="normal" image="Expand Arrow.png">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -4508,7 +4510,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j9n-Yp-L6s">
-                                                <rect key="frame" x="199" y="408" width="253" height="24"/>
+                                                <rect key="frame" x="199" y="370" width="253" height="24"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
                                                 <state key="normal" image="Expand Arrow.png"/>
                                                 <connections>
@@ -4516,7 +4518,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bTs-Bs-c8y">
-                                                <rect key="frame" x="199" y="370" width="253" height="24"/>
+                                                <rect key="frame" x="199" y="332" width="253" height="24"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
                                                 <state key="normal" image="Expand Arrow.png"/>
                                                 <connections>
@@ -4524,7 +4526,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C9s-VH-cos">
-                                                <rect key="frame" x="732" y="218" width="207" height="24"/>
+                                                <rect key="frame" x="686" y="218" width="253" height="24"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
                                                 <state key="normal" image="Expand Arrow.png">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -4534,7 +4536,7 @@
                                                 </connections>
                                             </button>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5mG-Yr-lIh">
-                                                <rect key="frame" x="732" y="215" width="207" height="30"/>
+                                                <rect key="frame" x="686" y="215" width="253" height="30"/>
                                                 <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
@@ -4542,18 +4544,18 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="435" id="kFz-ax-GXb"/>
+                                            <constraint firstAttribute="height" constant="397" id="kFz-ax-GXb"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U77-9e-qdh">
-                                        <rect key="frame" x="10" y="668" width="1000" height="1"/>
-                                        <color key="backgroundColor" red="0.25882352939999997" green="0.82745098039999998" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <rect key="frame" x="10" y="630" width="1000" height="1"/>
+                                        <color key="backgroundColor" red="0.98039215690000003" green="0.68627450980000004" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="peZ-uo-h4a"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f4V-Z1-kY3">
-                                        <rect key="frame" x="0.0" y="673" width="1024" height="699"/>
+                                        <rect key="frame" x="0.0" y="635" width="1024" height="699"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Data Alamat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zgl-q1-5Oy">
                                                 <rect key="frame" x="20" y="0.0" width="194" height="21"/>
@@ -4704,6 +4706,7 @@
                                                     </label>
                                                     <switch opaque="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="KKj-AZ-i4A">
                                                         <rect key="frame" x="686" y="0.0" width="51" height="31"/>
+                                                        <color key="tintColor" red="0.98039215690000003" green="0.68627450980000004" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                                         <connections>
                                                             <action selector="isForeign:" destination="Few-sZ-jKx" eventType="valueChanged" id="3WF-bR-QYZ"/>
                                                         </connections>
@@ -4901,6 +4904,7 @@
                                                     </label>
                                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="idO-OM-9lY">
                                                         <rect key="frame" x="686" y="0.0" width="51" height="31"/>
+                                                        <color key="tintColor" red="0.98039215690000003" green="0.68627450980000004" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                                         <connections>
                                                             <action selector="isForeign:" destination="Few-sZ-jKx" eventType="valueChanged" id="fMA-Tf-TSh"/>
                                                         </connections>
@@ -4932,14 +4936,14 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ziu-lw-4fn">
-                                        <rect key="frame" x="10" y="1377" width="1000" height="1"/>
-                                        <color key="backgroundColor" red="0.25882352939999997" green="0.82745098039999998" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <rect key="frame" x="10" y="1339" width="1000" height="1"/>
+                                        <color key="backgroundColor" red="0.98039215690000003" green="0.68627450980000004" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="ahm-hg-u5k"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rPW-ee-ZoK">
-                                        <rect key="frame" x="0.0" y="1382" width="1024" height="245"/>
+                                        <rect key="frame" x="0.0" y="1344" width="1024" height="245"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zHe-pI-AqR">
                                                 <rect key="frame" x="460" y="181" width="14" height="21"/>
@@ -5071,14 +5075,14 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vg3-4M-QFp">
-                                        <rect key="frame" x="10" y="1632" width="1000" height="1"/>
-                                        <color key="backgroundColor" red="0.25882352939999997" green="0.82745098039999998" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <rect key="frame" x="10" y="1594" width="1000" height="1"/>
+                                        <color key="backgroundColor" red="0.98039215690000003" green="0.68627450980000004" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="qCI-os-kSD"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XQr-rz-0yc">
-                                        <rect key="frame" x="0.0" y="1637" width="1024" height="206"/>
+                                        <rect key="frame" x="0.0" y="1599" width="1024" height="206"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Other Info" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="da9-2g-3Rb">
                                                 <rect key="frame" x="30" y="0.0" width="161" height="21"/>
@@ -5128,7 +5132,7 @@
                                                     <segment title="Prospect"/>
                                                     <segment title="Suspect"/>
                                                 </segments>
-                                                <color key="tintColor" red="0.25882352939999997" green="0.82745098039999998" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="tintColor" red="0.98039215690000003" green="0.68627450980000004" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                             </segmentedControl>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -5153,7 +5157,7 @@
                                     <constraint firstItem="20A-uD-uZC" firstAttribute="trailing" secondItem="jwo-SQ-Utz" secondAttribute="trailing" id="Sd5-jn-Fd4"/>
                                     <constraint firstItem="20A-uD-uZC" firstAttribute="leading" secondItem="jaE-AU-tI1" secondAttribute="leading" id="VYC-bi-61J"/>
                                     <constraint firstItem="rPW-ee-ZoK" firstAttribute="top" secondItem="f4V-Z1-kY3" secondAttribute="bottom" constant="10" id="aks-9m-5W3"/>
-                                    <constraint firstAttribute="bottom" secondItem="U77-9e-qdh" secondAttribute="bottom" constant="79" id="c7s-vY-SnO"/>
+                                    <constraint firstAttribute="bottom" secondItem="U77-9e-qdh" secondAttribute="bottom" constant="117" id="c7s-vY-SnO"/>
                                     <constraint firstItem="f4V-Z1-kY3" firstAttribute="trailing" secondItem="jwo-SQ-Utz" secondAttribute="trailing" id="eQ9-WM-GVO"/>
                                     <constraint firstItem="XQr-rz-0yc" firstAttribute="leading" secondItem="rPW-ee-ZoK" secondAttribute="leading" id="eYQ-oT-Faj"/>
                                     <constraint firstItem="Ziu-lw-4fn" firstAttribute="trailing" secondItem="Vg3-4M-QFp" secondAttribute="trailing" id="ed5-uv-CWN"/>
