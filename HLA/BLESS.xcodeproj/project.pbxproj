@@ -72,6 +72,9 @@
 		17A299251C60A0DB00C2537A /* BPreplayBoldItalics.otf in Resources */ = {isa = PBXBuildFile; fileRef = 17A298F81C60920A00C2537A /* BPreplayBoldItalics.otf */; };
 		17A299261C60A0DB00C2537A /* BPreplayItalics.otf in Resources */ = {isa = PBXBuildFile; fileRef = 17A298F91C60920A00C2537A /* BPreplayItalics.otf */; };
 		17A7D83E1C5B3EE50016EE7F /* setting.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A7D83D1C5B3EE50016EE7F /* setting.m */; };
+		17F10EB01C6C85DA002C32D3 /* btn_login.png in Resources */ = {isa = PBXBuildFile; fileRef = 17F10EAE1C6C85DA002C32D3 /* btn_login.png */; };
+		17F10EB11C6C85DA002C32D3 /* btn_reset.png in Resources */ = {isa = PBXBuildFile; fileRef = 17F10EAF1C6C85DA002C32D3 /* btn_reset.png */; };
+		17F10EB31C6C85EF002C32D3 /* login_box.png in Resources */ = {isa = PBXBuildFile; fileRef = 17F10EB21C6C85EF002C32D3 /* login_box.png */; };
 		2900CABC19931BBC0003B4F7 /* eAppStatusListforSubmitted.m in Sources */ = {isa = PBXBuildFile; fileRef = 2900CABB19931BBC0003B4F7 /* eAppStatusListforSubmitted.m */; };
 		29071F071A256811002F7FB1 /* RIButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 29071F041A256811002F7FB1 /* RIButtonItem.m */; };
 		29071F081A256811002F7FB1 /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 29071F061A256811002F7FB1 /* UIAlertView+Blocks.m */; };
@@ -863,6 +866,9 @@
 		17A2990E1C60923400C2537A /* HelveticaLTStd-UltraComp.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HelveticaLTStd-UltraComp.otf"; sourceTree = "<group>"; };
 		17A7D83C1C5B3EE50016EE7F /* setting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = setting.h; sourceTree = "<group>"; };
 		17A7D83D1C5B3EE50016EE7F /* setting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = setting.m; sourceTree = "<group>"; };
+		17F10EAE1C6C85DA002C32D3 /* btn_login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_login.png; sourceTree = "<group>"; };
+		17F10EAF1C6C85DA002C32D3 /* btn_reset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = btn_reset.png; path = HLA/btn_reset.png; sourceTree = "<group>"; };
+		17F10EB21C6C85EF002C32D3 /* login_box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_box.png; sourceTree = "<group>"; };
 		2900CABA19931BBC0003B4F7 /* eAppStatusListforSubmitted.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = eAppStatusListforSubmitted.h; sourceTree = "<group>"; };
 		2900CABB19931BBC0003B4F7 /* eAppStatusListforSubmitted.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = eAppStatusListforSubmitted.m; sourceTree = "<group>"; };
 		29071F031A256811002F7FB1 /* RIButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RIButtonItem.h; sourceTree = "<group>"; };
@@ -3873,6 +3879,9 @@
 		C4E9D1BF1612C6A500016053 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				17F10EAE1C6C85DA002C32D3 /* btn_login.png */,
+				17F10EB21C6C85EF002C32D3 /* login_box.png */,
+				17F10EAF1C6C85DA002C32D3 /* btn_reset.png */,
 				A9E550A31C591F7900C9DAC2 /* Expand Arrow.png */,
 				A9E550A41C591F7900C9DAC2 /* Expand Arrow@2x.png */,
 				043FDBAF1A1B5376008EDC24 /* backgroundWithBox.png */,
@@ -4511,6 +4520,7 @@
 				17A2991E1C60A0DB00C2537A /* HelveticaLTStd-LightCondObl.otf in Resources */,
 				17A2991F1C60A0DB00C2537A /* HelveticaLTStd-LightObl.otf in Resources */,
 				17A299201C60A0DB00C2537A /* HelveticaLTStd-Obl.otf in Resources */,
+				17F10EB11C6C85DA002C32D3 /* btn_reset.png in Resources */,
 				17A299211C60A0DB00C2537A /* HelveticaLTStd-Roman.otf in Resources */,
 				17A299221C60A0DB00C2537A /* HelveticaLTStd-UltraComp.otf in Resources */,
 				17A299231C60A0DB00C2537A /* BPreplay.otf in Resources */,
@@ -4709,6 +4719,7 @@
 				43739B881C64980700A1788A /* ProspectProfileStoryboard.storyboard in Resources */,
 				423A853618502D92008EC5D4 /* SelectCFFCell.xib in Resources */,
 				423A85381850353F008EC5D4 /* test.pdf in Resources */,
+				17F10EB31C6C85EF002C32D3 /* login_box.png in Resources */,
 				42557FCB185954210035DDA5 /* test2.pdf in Resources */,
 				C394D6BB1C48861500722C07 /* PolicyOwner.storyboard in Resources */,
 				EF671896186302D0000BCE45 /* btn_exit.png in Resources */,
@@ -4803,6 +4814,7 @@
 				C37FC55B1C477B9A00238490 /* PendingSubmission.storyboard in Resources */,
 				04B15E0A19DA8D0900FF7039 /* HeaderHLA.png in Resources */,
 				04B15E0B19DA8D0900FF7039 /* e-Application@2x.png in Resources */,
+				17F10EB01C6C85DA002C32D3 /* btn_login.png in Resources */,
 				04B15E0C19DA8D0900FF7039 /* Customer_Fact_Find@2x.png in Resources */,
 				04B15E0D19DA8D0900FF7039 /* Client_Profile@2x.png in Resources */,
 				04B15E0E19DA8D0900FF7039 /* Bachground.png in Resources */,
