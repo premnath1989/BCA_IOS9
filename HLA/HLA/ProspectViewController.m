@@ -7132,7 +7132,8 @@ bool RegDatehandling;
     //KY
     
     if (isDOBDate) {
-		[outletDOB setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", strDate] forState:UIControlStateNormal];
+		//[outletDOB setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", strDate] forState:UIControlStateNormal];
+        [outletDOB setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", [df stringFromDate:d2]] forState:UIControlStateNormal];
 	}
 
     if (isExpiryDate) {

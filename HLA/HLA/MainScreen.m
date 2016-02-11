@@ -56,7 +56,7 @@
     viewControllers = [NSArray arrayWithArray:controllersToAdd];
     
     UIStoryboard *clientStoryboard = [UIStoryboard storyboardWithName:@"ProspectProfileStoryboard" bundle:Nil];
-    ProspectListing* ProspectListingPage = [clientStoryboard instantiateViewControllerWithIdentifier:@"clientListing"];
+    ProspectListing* ProspectListingPage = [clientStoryboard instantiateViewControllerWithIdentifier:@"prospectProfile"];
     image = [UIImage imageNamed:@"btn_prospect_off.png"];
     ProspectListingPage.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Client" image:image selectedImage:image];
 
