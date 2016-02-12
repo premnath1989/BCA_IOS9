@@ -11,10 +11,11 @@
 
 @implementation ColumnHeaderStyle
 
-- (instancetype)init:(NSString *)title alignment:(NSTextAlignment)textAlignment button:(BOOL)flag{
+- (instancetype)init:(NSString *)title alignment:(NSTextAlignment)textAlignment button:(BOOL)flag width:(float)columnWidth{
     lblTitle = title;
     algText = textAlignment;
     buttonFlag = flag;
+    width = columnWidth;
     return self;
 }
 
@@ -28,6 +29,10 @@
 
 -(BOOL)getButtonFlag{
     return buttonFlag;
+}
+
+-(float)getColumnWidth{
+    return width;
 }
 
 @end

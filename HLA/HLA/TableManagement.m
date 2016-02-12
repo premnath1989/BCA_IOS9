@@ -12,17 +12,18 @@
 
 @implementation TableManagement
 
-- (instancetype)init:(UIView *)view themeColour:(UIColor *)Colour{
+- (instancetype)init:(UIView *)view themeColour:(UIColor *)Colour themeFont:(UIFont *)font{
     ParentView = view;
     themeColour = Colour;
+    themeFont = font;
     return self;
 }
 
 
-- (UIView *) TableHeaderSetup:(NSArray *)columnHeaders{
+- (UIView *) TableHeaderSetup:(NSArray *)columnHeaders positionY:(float)originY{
     TableHeader = [[UIView alloc]initWithFrame:
                                CGRectMake(ParentView.frame.origin.x + 15.0f,
-                                          240.0f, ParentView.frame.size.width - 90.0f, 41.0f)];
+                                          originY, ParentView.frame.size.width - 90.0f, 41.0f)];
     [TableHeader setBackgroundColor:themeColour];
     [self TableHeaderColumn:columnHeaders];
     return TableHeader;
@@ -35,15 +36,15 @@
         UILabel *lblHeaderColumn = [[UILabel alloc]initWithFrame:
                                     CGRectMake(headerOriginX,
                                                0.0f,
-                                               headerTable/columnHeaders.count,
+                                               headerTable*styleHeader.getColumnWidth,
                                                TableHeader.frame.size.height)];
         lblHeaderColumn.text = styleHeader.getTitle;
         lblHeaderColumn.textColor = [UIColor whiteColor];
         lblHeaderColumn.numberOfLines = 0;
         lblHeaderColumn.autoresizingMask = UIViewAutoresizingFlexibleHeight;
         lblHeaderColumn.lineBreakMode = NSLineBreakByWordWrapping;
-        lblHeaderColumn.font = [UIFont fontWithName:@"HelveticaLTStd-Roman" size:17.0f];
-            lblHeaderColumn.textAlignment = styleHeader.getAlignment;
+        lblHeaderColumn.font = themeFont;
+        lblHeaderColumn.textAlignment = styleHeader.getAlignment;
         
         [TableHeader addSubview:lblHeaderColumn];
         
@@ -51,13 +52,6 @@
             [TableHeader setFrame:CGRectMake(TableHeader.frame.origin.x,
                                              TableHeader.frame.origin.y, TableHeader.frame.size.width,
                                              lblHeaderColumn.frame.size.height + 1.0f)];
-//            NSUInteger currentIndex = [columnHeaders indexOfObject:styleHeader];
-//            for(int i = currentIndex-1; i >= 0; i--){
-//                UIView *lineObject = (UIView *)[TableHeader viewWithTag:i];
-//                [(UIView *)[TableHeader viewWithTag:i] setFrame:CGRectMake(lineObject.frame.origin.x, lineObject.frame.origin.y, 1,TableHeader.frame.size.height)];
-//                [lineObject setFrame:CGRectMake(lineObject.frame.origin.x, lineObject.frame.origin.y, 1,
-//                                                TableHeader.frame.size.height)];
-//            }
         }
         
         if(![styleHeader isEqual: (ColumnHeaderStyle *)[columnHeaders lastObject]]){
@@ -68,6 +62,24 @@
             [TableHeader addSubview:verticalLineView];
         }
         headerOriginX = headerOriginX + lblHeaderColumn.frame.size.width + 10.0f;
+    }
+}
+
+- (void)TableRowInsert:(NSArray *)dataArray index:(NSInteger)index table:(UITableViewCell*)cell{
+    int i = 0;
+    for(UIView *view in [TableHeader subviews]){
+        if([view isKindOfClass:[UILabel class]]){
+            CGRect frame=CGRectMake(view.frame.origin.x + 15.0f,0, view.frame.size.width, 50);
+            UILabel *columnLabel = (UILabel *)view;
+            UILabel *label1=[[UILabel alloc]init];
+            label1.frame=frame;
+            label1.text= [[dataArray objectAtIndex:i] objectAtIndex:index];
+            label1.tag = 1001+i;
+            label1.textAlignment = columnLabel.textAlignment;
+            label1.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
+            [cell.contentView addSubview:label1];
+            i++;
+        }
     }
 }
 

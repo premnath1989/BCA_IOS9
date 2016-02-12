@@ -16,7 +16,6 @@
 #import "MasterMenuEApp.h"
 #import "MBProgressHUD.h"
 
-#import "TableManagement.h"
 #import "ColumnHeaderStyle.h"
 #import "UIButton+Property.h"
 #import "UIElementsManagement.h"
@@ -72,6 +71,7 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
     
     [NoIlustrasi setFont:[UIFont fontWithName:@"HelveticaLTStd-UltraComp" size:25]];
     themeColour = [UIColor colorWithRed:242.0f/255.0f green:113.0f/255.0f blue:134.0f/255.0f alpha:1];
+    fontType = [UIFont fontWithName:@"TreBuchet MS" size:16.0f];
     
 	AppDelegate *appDel= (AppDelegate*)[[UIApplication sharedApplication] delegate ];
 	appDel.MhiMessage = Nil;
@@ -81,8 +81,9 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
     outletDateFrom.property = 1;
     outletDateTo.property = 1;
     
-    UIElementsManagement *uiManagement = [[UIElementsManagement alloc]init:self.view themeColour:themeColour font:[UIFont fontWithName:@"TreBuchet MS" size:16.0f]];
+    UIElementsManagement *uiManagement = [[UIElementsManagement alloc]init:self.view themeColour:themeColour font:fontType];
     [uiManagement setupUI];
+    
     //set TableView header design
     [self setupTableColumn];
     
@@ -90,12 +91,13 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
     
     NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docsDir = [dirPaths objectAtIndex:0];
-    databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
+    databasePath = [[NSString alloc] initWithString:
+                    [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
     
     [self LoadAllResult];
     
     CGRect tableRect = myTableView.frame;
-    myTableView.frame = CGRectMake(tableRect.origin.x, tableRect.origin.y, self.view.frame.size.width-85.0f, tableRect.size.height);
+    myTableView.frame = CGRectMake(tableRect.origin.x, tableRect.origin.y, self.view.frame.size.width-75.0f, tableRect.size.height);
     myTableView.rowHeight = 50;
     myTableView.backgroundColor = [UIColor clearColor];
     myTableView.opaque = NO;
@@ -128,20 +130,21 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
 
 - (void)setupTableColumn{
     //we call the table management to design the table
-    ColumnHeaderStyle *ilustrasi = [[ColumnHeaderStyle alloc]init:@" No. Ilustrasi" alignment:NSTextAlignmentLeft button:FALSE];
-    ColumnHeaderStyle *tanggal = [[ColumnHeaderStyle alloc]init:@"Tanggal Dibuat" alignment:NSTextAlignmentCenter button:TRUE];
-    ColumnHeaderStyle *nama = [[ColumnHeaderStyle alloc]init:@" Nama"
-                                                   alignment:NSTextAlignmentLeft button:FALSE];
-    ColumnHeaderStyle *produk = [[ColumnHeaderStyle alloc]init:@" Produk"
-                                                     alignment:NSTextAlignmentLeft button:FALSE];
-    ColumnHeaderStyle *pertanggungan = [[ColumnHeaderStyle alloc]init:@"Uang Pertanggungan" alignment:NSTextAlignmentCenter button:FALSE];
-    ColumnHeaderStyle *status = [[ColumnHeaderStyle alloc]init:@"Status Proposal" alignment:NSTextAlignmentCenter button:FALSE];
+    ColumnHeaderStyle *ilustrasi = [[ColumnHeaderStyle alloc]init:@" No. Ilustrasi" alignment:NSTextAlignmentLeft button:FALSE width:0.15];
+    ColumnHeaderStyle *tanggal = [[ColumnHeaderStyle alloc]init:@"Tanggal Dibuat" alignment:NSTextAlignmentCenter button:TRUE width:0.17];
+    ColumnHeaderStyle *nama = [[ColumnHeaderStyle alloc]init:@"Nama"
+                                                   alignment:NSTextAlignmentLeft button:FALSE width:0.2];
+    ColumnHeaderStyle *produk = [[ColumnHeaderStyle alloc]init:@"Produk"
+                                                     alignment:NSTextAlignmentLeft button:FALSE width:0.2];
+    ColumnHeaderStyle *pertanggungan = [[ColumnHeaderStyle alloc]init:@"Uang Pertanggungan" alignment:NSTextAlignmentCenter button:FALSE width:0.15];
+    ColumnHeaderStyle *status = [[ColumnHeaderStyle alloc]init:@"Status Proposal" alignment:NSTextAlignmentCenter button:FALSE width:0.13];
     
     //add it to array
     columnHeadersContent = [NSArray arrayWithObjects:ilustrasi,
                             tanggal, nama, produk, pertanggungan,status,nil];
-    TableManagement *tableManagement = [[TableManagement alloc]init:self.view themeColour:themeColour];
-    TableHeader =[tableManagement TableHeaderSetup:columnHeadersContent];
+    tableManagement = [[TableManagement alloc]init:self.view themeColour:themeColour themeFont:fontType];
+    TableHeader =[tableManagement TableHeaderSetup:columnHeadersContent
+                                         positionY:outletDelete.frame.origin.y+55.0f];
     
     [self.view addSubview:TableHeader];
 }
@@ -494,98 +497,73 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
     [[cell.contentView viewWithTag:1008] removeFromSuperview ];
     
     ColorHexCode *CustomColor = [[ColorHexCode alloc]init ];
-    
-    
-    CGFloat headerOriginX = TableHeader.frame.origin.x - 3.0f;
-    CGFloat DataRowTableWidth = (TableHeader.frame.size.width - (10.0f * [columnHeadersContent count]))/columnHeadersContent.count;
+ 
     
     if (isFilter == false) {
-        CGRect frame=CGRectMake(headerOriginX,0, DataRowTableWidth, 50);
-        UILabel *label1=[[UILabel alloc]init];            
-        label1.frame=frame;
-        label1.text= [SINO objectAtIndex:indexPath.row];
-        label1.tag = 1001;
-        label1.textAlignment = NSTextAlignmentCenter;
-        [cell.contentView addSubview:label1];
-        headerOriginX += DataRowTableWidth + 10.0f;
-        
-        CGRect frame2=CGRectMake(headerOriginX+5.0f,0, DataRowTableWidth, 50);
-        UILabel *label2=[[UILabel alloc]init];
-        label2.frame=frame2;
-        label2.text= [DateCreated objectAtIndex:indexPath.row];
-        label2.textAlignment = NSTextAlignmentCenter;    
-        label2.tag = 1002;
-        [cell.contentView addSubview:label2];
-        headerOriginX += DataRowTableWidth + 10.0f;
-        
-        CGRect frame3=CGRectMake(headerOriginX+7.0f,0, DataRowTableWidth, 50);
-        UILabel *label3=[[UILabel alloc]init];            
-        label3.frame=frame3;
-        label3.text= [Name objectAtIndex:indexPath.row];
-        label3.tag = 1003;
-//        label3.textAlignment = NSTextAlignmentCenter;
-        [cell.contentView addSubview:label3];
-        headerOriginX += DataRowTableWidth;
-        
-        CGRect frame4=CGRectMake(headerOriginX,0, DataRowTableWidth, 50);
-        UILabel *label4=[[UILabel alloc]init];
-        label4.frame=frame4;
-        label4.text= [PlanName objectAtIndex:indexPath.row];
-        label4.textAlignment = NSTextAlignmentCenter;    
-        label4.tag = 1004;
-        [cell.contentView addSubview:label4];
-        headerOriginX += DataRowTableWidth + 10.0f;
-        
-        CGRect frame5=CGRectMake(headerOriginX,0, DataRowTableWidth, 50);
-        UILabel *label5=[[UILabel alloc]init];            
-        label5.frame=frame5;
-		label5.text = [NSString stringWithFormat:@"%.2f\n%@", [[BasicSA objectAtIndex:indexPath.row] doubleValue ], [SIValidStatus objectAtIndex:indexPath.row]];
-        label5.tag = 1005;
-        label5.textAlignment = NSTextAlignmentCenter;
-		label5.numberOfLines = 2;
-        [cell.contentView addSubview:label5];
-        headerOriginX += DataRowTableWidth + 10.0f;
-        
-        CGRect frame6=CGRectMake(headerOriginX,0, DataRowTableWidth, 50);
-        UILabel *label6=[[UILabel alloc]init];	
-        label6.frame=frame6;
-		label6.text = [NSString stringWithFormat:@"%@\n%@", [SIStatus objectAtIndex:indexPath.row], [SIVersion objectAtIndex:indexPath.row]];
-        label6.textAlignment = NSTextAlignmentCenter;
-        label6.tag = 1006;
-		label6.numberOfLines = 2;
-        [cell.contentView addSubview:label6];
-        headerOriginX += DataRowTableWidth + 10.0f;
-        
-        if (indexPath.row % 2 == 0) {
-//            label1.backgroundColor = [CustomColor colorWithHexString:@"fff"];
-//            label2.backgroundColor = [CustomColor colorWithHexString:@"fff"];
-//            label3.backgroundColor = [CustomColor colorWithHexString:@"fff"];
-//            label4.backgroundColor = [CustomColor colorWithHexString:@"fff"];
-//            label5.backgroundColor = [CustomColor colorWithHexString:@"fff"];
-//            label6.backgroundColor = [CustomColor colorWithHexString:@"fff"];
-			
-            label1.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
-            label2.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
-            label3.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
-            label4.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
-            label5.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
-            label6.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
-			
-        } else {
-//            label1.backgroundColor = [CustomColor colorWithHexString:@"E9EDF4"];
-//            label2.backgroundColor = [CustomColor colorWithHexString:@"E9EDF4"];
-//            label3.backgroundColor = [CustomColor colorWithHexString:@"E9EDF4"];
-//            label4.backgroundColor = [CustomColor colorWithHexString:@"E9EDF4"];
-//            label5.backgroundColor = [CustomColor colorWithHexString:@"E9EDF4"];
-//            label6.backgroundColor = [CustomColor colorWithHexString:@"E9EDF4"];
-            
-            label1.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
-            label2.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
-            label3.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
-            label4.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
-            label5.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
-            label6.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
-        }
+        NSArray *arrayOfData = [NSArray arrayWithObjects:SINO,
+                                DateCreated, Name, PlanName, SIValidStatus,SIVersion,nil];
+        [tableManagement TableRowInsert:arrayOfData index:indexPath.row table:cell];
+//        CGRect frame=CGRectMake(headerOriginX,0, DataRowTableWidth, 50);
+//        UILabel *label1=[[UILabel alloc]init];            
+//        label1.frame=frame;
+//        label1.text= [SINO objectAtIndex:indexPath.row];
+//        label1.tag = 1001;
+//        label1.textAlignment = NSTextAlignmentCenter;
+//        [cell.contentView addSubview:label1];
+//        headerOriginX += DataRowTableWidth + 10.0f;
+//        
+//        CGRect frame2=CGRectMake(headerOriginX+5.0f,0, DataRowTableWidth, 50);
+//        UILabel *label2=[[UILabel alloc]init];
+//        label2.frame=frame2;
+//        label2.text= [DateCreated objectAtIndex:indexPath.row];
+//        label2.textAlignment = NSTextAlignmentCenter;    
+//        label2.tag = 1002;
+//        [cell.contentView addSubview:label2];
+//        headerOriginX += DataRowTableWidth + 10.0f;
+//        
+//        CGRect frame3=CGRectMake(headerOriginX+7.0f,0, DataRowTableWidth, 50);
+//        UILabel *label3=[[UILabel alloc]init];            
+//        label3.frame=frame3;
+//        label3.text= [Name objectAtIndex:indexPath.row];
+//        label3.tag = 1003;
+//        [cell.contentView addSubview:label3];
+//        headerOriginX += DataRowTableWidth;
+//        
+//        CGRect frame4=CGRectMake(headerOriginX,0, DataRowTableWidth, 50);
+//        UILabel *label4=[[UILabel alloc]init];
+//        label4.frame=frame4;
+//        label4.text= [PlanName objectAtIndex:indexPath.row];
+//        label4.textAlignment = NSTextAlignmentCenter;    
+//        label4.tag = 1004;
+//        [cell.contentView addSubview:label4];
+//        headerOriginX += DataRowTableWidth + 10.0f;
+//        
+//        CGRect frame5=CGRectMake(headerOriginX,0, DataRowTableWidth, 50);
+//        UILabel *label5=[[UILabel alloc]init];            
+//        label5.frame=frame5;
+//		label5.text = [NSString stringWithFormat:@"%.2f\n%@", [[BasicSA objectAtIndex:indexPath.row] doubleValue ], [SIValidStatus objectAtIndex:indexPath.row]];
+//        label5.tag = 1005;
+//        label5.textAlignment = NSTextAlignmentCenter;
+//		label5.numberOfLines = 2;
+//        [cell.contentView addSubview:label5];
+//        headerOriginX += DataRowTableWidth + 10.0f;
+//        
+//        CGRect frame6=CGRectMake(headerOriginX,0, DataRowTableWidth, 50);
+//        UILabel *label6=[[UILabel alloc]init];	
+//        label6.frame=frame6;
+//		label6.text = [NSString stringWithFormat:@"%@\n%@", [SIStatus objectAtIndex:indexPath.row], [SIVersion objectAtIndex:indexPath.row]];
+//        label6.textAlignment = NSTextAlignmentCenter;
+//        label6.tag = 1006;
+//		label6.numberOfLines = 2;
+//        [cell.contentView addSubview:label6];
+//        headerOriginX += DataRowTableWidth + 10.0f;
+//        
+//        label1.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
+//        label2.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
+//        label3.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
+//        label4.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
+//        label5.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
+//        label6.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
     } else {
         CGRect frame=CGRectMake(0,0, 170, 50);
         UILabel *label1=[[UILabel alloc]init];            

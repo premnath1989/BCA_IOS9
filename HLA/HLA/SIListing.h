@@ -11,6 +11,7 @@
 #import "siListingSortBy.h"
 #import "SIDate.h"
 #import "NDHTMLtoPDF.h"
+#import "TableManagement.h"
 
 @interface SIListing : UIViewController<UITableViewDelegate, UITableViewDataSource, siListingDelegate, SIDateDelegate, NDHTMLtoPDFDelegate>
 {
@@ -31,6 +32,8 @@
     UIView *TableHeader;
     UIColor *themeColour;
     NSArray *columnHeadersContent;
+    UIFont *fontType;
+    TableManagement *tableManagement;
 }
 
 @property (nonatomic, strong) NDHTMLtoPDF *PDFCreator;

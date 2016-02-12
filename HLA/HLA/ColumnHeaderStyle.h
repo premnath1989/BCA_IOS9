@@ -12,14 +12,14 @@
     NSString *lblTitle;
     NSTextAlignment algText;
     BOOL buttonFlag;
+    float width;
 }
 
-- (instancetype)init:(NSString *)title alignment:(NSTextAlignment)textAlignment button:(BOOL)flag;
+- (instancetype)init:(NSString *)title alignment:(NSTextAlignment)textAlignment button:(BOOL)flag width:(float)columnWidth;
 
 -(NSString *)getTitle;
-
 -(NSTextAlignment)getAlignment;
-
 -(BOOL)getButtonFlag;
+-(float)getColumnWidth;
 
 @end

@@ -12,9 +12,11 @@
     UIView *TableHeader;
     UIView *ParentView;
     UIColor *themeColour;
+    UIFont *themeFont;
 }
 
-- (instancetype)init:(UIView *)view themeColour:(UIColor *)Colour;
-- (UIView *) TableHeaderSetup:(NSArray *)columnHeaders;
+- (instancetype)init:(UIView *)view themeColour:(UIColor *)Colour themeFont:(UIFont *)font;
+- (UIView *) TableHeaderSetup:(NSArray *)columnHeaders positionY:(float)originY;
+- (void)TableRowInsert:(NSArray *)dataArray index:(NSInteger)index table:(UITableViewCell*)cell;
 
 @end
