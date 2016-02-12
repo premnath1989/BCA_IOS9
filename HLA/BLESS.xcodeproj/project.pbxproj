@@ -399,6 +399,8 @@
 		AAD5455F1C6443080029631D /* LoginDBManagement.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD5455E1C6443080029631D /* LoginDBManagement.m */; };
 		AAFEE0351C6C1EC900702F64 /* TableManagement.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFEE0341C6C1EC900702F64 /* TableManagement.m */; };
 		AAFEE0381C6C239E00702F64 /* ColumnHeaderStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFEE0371C6C239E00702F64 /* ColumnHeaderStyle.m */; };
+		AAFEE03E1C6D927400702F64 /* UIButton+Property.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFEE03D1C6D927400702F64 /* UIButton+Property.m */; };
+		AAFEE0411C6DA60E00702F64 /* UIElementsManagement.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFEE0401C6DA60E00702F64 /* UIElementsManagement.m */; };
 		C3092ABA1ADF5E4500756616 /* ClearData.m in Sources */ = {isa = PBXBuildFile; fileRef = C3092AB91ADF5E4500756616 /* ClearData.m */; };
 		C30A259C17F3C8D500613A0F /* AdditionalQuestions.m in Sources */ = {isa = PBXBuildFile; fileRef = C30A253917F3C8D500613A0F /* AdditionalQuestions.m */; };
 		C30A259D17F3C8D500613A0F /* AddtionalQuestInsured.m in Sources */ = {isa = PBXBuildFile; fileRef = C30A253B17F3C8D500613A0F /* AddtionalQuestInsured.m */; };
@@ -1465,6 +1467,10 @@
 		AAFEE0341C6C1EC900702F64 /* TableManagement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableManagement.m; sourceTree = "<group>"; };
 		AAFEE0361C6C239000702F64 /* ColumnHeaderStyle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColumnHeaderStyle.h; sourceTree = "<group>"; };
 		AAFEE0371C6C239E00702F64 /* ColumnHeaderStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColumnHeaderStyle.m; sourceTree = "<group>"; };
+		AAFEE03C1C6D925E00702F64 /* UIButton+Property.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+Property.h"; sourceTree = "<group>"; };
+		AAFEE03D1C6D927400702F64 /* UIButton+Property.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Property.m"; sourceTree = "<group>"; };
+		AAFEE03F1C6DA5FF00702F64 /* UIElementsManagement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIElementsManagement.h; sourceTree = "<group>"; };
+		AAFEE0401C6DA60E00702F64 /* UIElementsManagement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIElementsManagement.m; sourceTree = "<group>"; };
 		C3092AB81ADF5E4500756616 /* ClearData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClearData.h; sourceTree = "<group>"; };
 		C3092AB91ADF5E4500756616 /* ClearData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClearData.m; sourceTree = "<group>"; };
 		C30A253817F3C8D500613A0F /* AdditionalQuestions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdditionalQuestions.h; sourceTree = "<group>"; };
@@ -3272,6 +3278,17 @@
 			name = ColumnStyle;
 			sourceTree = "<group>";
 		};
+		AAFEE03B1C6D923300702F64 /* UIElementStyle */ = {
+			isa = PBXGroup;
+			children = (
+				AAFEE03C1C6D925E00702F64 /* UIButton+Property.h */,
+				AAFEE03D1C6D927400702F64 /* UIButton+Property.m */,
+				AAFEE03F1C6DA5FF00702F64 /* UIElementsManagement.h */,
+				AAFEE0401C6DA60E00702F64 /* UIElementsManagement.m */,
+			);
+			name = UIElementStyle;
+			sourceTree = "<group>";
+		};
 		C319633618D989C800565B1C /* SupplementaryProposalForm1 */ = {
 			isa = PBXGroup;
 			children = (
@@ -3652,6 +3669,7 @@
 		C4E7B384161B10F200066CBF /* SI Listing */ = {
 			isa = PBXGroup;
 			children = (
+				AAFEE03B1C6D923300702F64 /* UIElementStyle */,
 				AAFEE0391C6C23A300702F64 /* ColumnStyle */,
 				AAFEE0321C6C1EA300702F64 /* TableManagement */,
 				C4E7B386161B119E00066CBF /* SIListing.h */,
@@ -4895,6 +4913,7 @@
 				EF059842161A901A004A9095 /* PayorViewController.m in Sources */,
 				EF059845161A9055004A9095 /* SecondLAViewController.m in Sources */,
 				EF059848161A912A004A9095 /* BasicPlanViewController.m in Sources */,
+				AAFEE0411C6DA60E00702F64 /* UIElementsManagement.m in Sources */,
 				EF05984B161A91EF004A9095 /* RiderViewController.m in Sources */,
 				EF059850161A92C4004A9095 /* DateViewController.m in Sources */,
 				EF059853161A92E3004A9095 /* JobListTbViewController.m in Sources */,
@@ -5052,6 +5071,7 @@
 				AAFEE0351C6C1EC900702F64 /* TableManagement.m in Sources */,
 				29A38DA317EAEB6B00454787 /* eSignVC.m in Sources */,
 				29A38DA417EAEB6B00454787 /* formsDetails.m in Sources */,
+				AAFEE03E1C6D927400702F64 /* UIButton+Property.m in Sources */,
 				29A38DA517EAEB6B00454787 /* FormCell.m in Sources */,
 				439985BB1C62F7890003B037 /* SourceIncome.m in Sources */,
 				29A38DA617EAEB6B00454787 /* eSign.m in Sources */,

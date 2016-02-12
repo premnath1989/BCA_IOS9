@@ -12,9 +12,7 @@
 
 #define DEFAULT_ITEM_HEIGHT 80.0
 
-
 @implementation FSVerticalTabBar
-
 
 @synthesize items = _items;
 @synthesize backgroundImage = _backgroundImage;

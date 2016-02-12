@@ -18,6 +18,8 @@
 
 #import "TableManagement.h"
 #import "ColumnHeaderStyle.h"
+#import "UIButton+Property.h"
+#import "UIElementsManagement.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface SIListing ()
@@ -75,33 +77,29 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
 	appDel.MhiMessage = Nil;
 	appDel = Nil;
     
-    txtSINO.layer.borderColor = [themeColour CGColor];
-    txtSINO.layer.masksToBounds = YES;
-    txtSINO.layer.borderWidth = 1.0f;
-    txtLAName.layer.borderColor = [themeColour CGColor];
-    txtLAName.layer.masksToBounds = YES;
-    txtLAName.layer.borderWidth = 1.0f;
-	
-//    self.view.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg10.jpg"]];
-//    outletDelete.hidden = TRUE;
+    //set Button want to add border
+    outletDateFrom.property = 1;
+    outletDateTo.property = 1;
+    
+    UIElementsManagement *uiManagement = [[UIElementsManagement alloc]init:self.view themeColour:themeColour font:[UIFont fontWithName:@"TreBuchet MS" size:16.0f]];
+    [uiManagement setupUI];
+    //set TableView header design
+    [self setupTableColumn];
     
     outletDone.hidden = true;
-    DBDateFrom = @"";
-    DBDateTo = @"";
     
-    ColorHexCode *CustomColor = [[ColorHexCode alloc]init ];
-        
     NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docsDir = [dirPaths objectAtIndex:0];
     databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
     
     [self LoadAllResult];
     
+    CGRect tableRect = myTableView.frame;
+    myTableView.frame = CGRectMake(tableRect.origin.x, tableRect.origin.y, self.view.frame.size.width-85.0f, tableRect.size.height);
     myTableView.rowHeight = 50;
     myTableView.backgroundColor = [UIColor clearColor];
     myTableView.opaque = NO;
     myTableView.backgroundView = nil;
-    
     [self.view addSubview:myTableView];
     
     ItemToBeDeleted = [[NSMutableArray alloc] init];
@@ -116,35 +114,21 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
 	
     dirPaths = Nil;
     docsDir = Nil;
-    CustomColor = Nil;
-    
-    
-    UIFont *font= [UIFont fontWithName:@"TreBuchet MS" size:16.0f];
-    for (UIView *view in [txtSINO subviews]) {
-        if ([view isKindOfClass:[UITextField class]]) {
-            UITextField *textField = (UITextField *)view;
-            textField.layer.borderColor=[UIColor colorWithRed:47.0/255.0 green:188.0/255.0 blue:118.0/255.0 alpha:1.0].CGColor;
-            textField.layer.borderWidth=1.0;
-            textField.delegate=self;
-            [textField setFont:font];
-            
-            UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
-            textField.leftView = paddingView;
-            textField.leftViewMode = UITextFieldViewModeAlways;
-        }
-    }
 
     
-    txtSINO.clearButtonMode = UITextFieldViewModeWhileEditing;
-    txtLAName.clearButtonMode = UITextFieldViewModeWhileEditing;
+//    txtSINO.clearButtonMode = UITextFieldViewModeWhileEditing;
+//    txtLAName.clearButtonMode = UITextFieldViewModeWhileEditing;
     
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     tap.cancelsTouchesInView = NO;
     tap.numberOfTapsRequired = 1;
-    
+    [self.view addGestureRecognizer:tap];
+}
+
+- (void)setupTableColumn{
     //we call the table management to design the table
-    ColumnHeaderStyle *ilustrasi = [[ColumnHeaderStyle alloc]init:@"No. Ilustrasi" alignment:NSTextAlignmentLeft button:FALSE];
+    ColumnHeaderStyle *ilustrasi = [[ColumnHeaderStyle alloc]init:@" No. Ilustrasi" alignment:NSTextAlignmentLeft button:FALSE];
     ColumnHeaderStyle *tanggal = [[ColumnHeaderStyle alloc]init:@"Tanggal Dibuat" alignment:NSTextAlignmentCenter button:TRUE];
     ColumnHeaderStyle *nama = [[ColumnHeaderStyle alloc]init:@" Nama"
                                                    alignment:NSTextAlignmentLeft button:FALSE];
@@ -152,13 +136,14 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
                                                      alignment:NSTextAlignmentLeft button:FALSE];
     ColumnHeaderStyle *pertanggungan = [[ColumnHeaderStyle alloc]init:@"Uang Pertanggungan" alignment:NSTextAlignmentCenter button:FALSE];
     ColumnHeaderStyle *status = [[ColumnHeaderStyle alloc]init:@"Status Proposal" alignment:NSTextAlignmentCenter button:FALSE];
+    
+    //add it to array
     columnHeadersContent = [NSArray arrayWithObjects:ilustrasi,
                             tanggal, nama, produk, pertanggungan,status,nil];
     TableManagement *tableManagement = [[TableManagement alloc]init:self.view themeColour:themeColour];
     TableHeader =[tableManagement TableHeaderSetup:columnHeadersContent];
     
     [self.view addSubview:TableHeader];
-    [self.view addGestureRecognizer:tap];
 }
 
 
