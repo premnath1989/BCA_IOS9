@@ -16,4 +16,7 @@
 -(NSDictionary *)getSourceIncome;
 -(NSDictionary *)getVIPClass;
 -(NSDictionary *)getReferralSource;
+-(NSDictionary *)getOccupation;
+-(NSDictionary *)getTitle;
+-(NSDictionary *)getBranchInfo;
 @end
