@@ -331,6 +331,8 @@
 		42F8590F1772E4EF003907CD /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = 42F8590D1772E4EF003907CD /* add.png */; };
 		42F859101772E4EF003907CD /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 42F8590E1772E4EF003907CD /* delete.png */; };
 		431F5FDF1C6D781A00A9CA6C /* BranchInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 431F5FDE1C6D781A00A9CA6C /* BranchInfo.m */; };
+		431F5FE41C6D93E800A9CA6C /* ProspectListingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 431F5FE21C6D93E800A9CA6C /* ProspectListingTableViewCell.m */; };
+		431F5FE51C6D93E800A9CA6C /* ProspectListingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 431F5FE31C6D93E800A9CA6C /* ProspectListingTableViewCell.xib */; };
 		4341B5C21C61750700357986 /* libSPSignDoc_4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4341B5C11C61750700357986 /* libSPSignDoc_4.0.a */; };
 		4353C9481C61E95000AE1ED9 /* ModelNationality.m in Sources */ = {isa = PBXBuildFile; fileRef = 4353C9471C61E95000AE1ED9 /* ModelNationality.m */; };
 		4353C94B1C61F3A000AE1ED9 /* ModelMaritalStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 4353C94A1C61F3A000AE1ED9 /* ModelMaritalStatus.m */; };
@@ -1292,6 +1294,9 @@
 		42F8590E1772E4EF003907CD /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete.png; sourceTree = "<group>"; };
 		431F5FDD1C6D781A00A9CA6C /* BranchInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BranchInfo.h; sourceTree = "<group>"; };
 		431F5FDE1C6D781A00A9CA6C /* BranchInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BranchInfo.m; sourceTree = "<group>"; };
+		431F5FE11C6D93E800A9CA6C /* ProspectListingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProspectListingTableViewCell.h; sourceTree = "<group>"; };
+		431F5FE21C6D93E800A9CA6C /* ProspectListingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProspectListingTableViewCell.m; sourceTree = "<group>"; };
+		431F5FE31C6D93E800A9CA6C /* ProspectListingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProspectListingTableViewCell.xib; sourceTree = "<group>"; };
 		4341B5C11C61750700357986 /* libSPSignDoc_4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSPSignDoc_4.0.a; sourceTree = "<group>"; };
 		4353C9461C61E95000AE1ED9 /* ModelNationality.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelNationality.h; sourceTree = "<group>"; };
 		4353C9471C61E95000AE1ED9 /* ModelNationality.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelNationality.m; sourceTree = "<group>"; };
@@ -3081,6 +3086,16 @@
 			path = "TBXML+NSDictionary";
 			sourceTree = "<group>";
 		};
+		431F5FE01C6D93B700A9CA6C /* tableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				431F5FE11C6D93E800A9CA6C /* ProspectListingTableViewCell.h */,
+				431F5FE21C6D93E800A9CA6C /* ProspectListingTableViewCell.m */,
+				431F5FE31C6D93E800A9CA6C /* ProspectListingTableViewCell.xib */,
+			);
+			name = tableViewCell;
+			sourceTree = "<group>";
+		};
 		43739B861C6497B900A1788A /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
@@ -3780,6 +3795,7 @@
 		C4E9D19A1612C64900016053 /* HLA */ = {
 			isa = PBXGroup;
 			children = (
+				431F5FE01C6D93B700A9CA6C /* tableViewCell */,
 				C416C2B31855BA2800D29E46 /* FirstTimeRegistration */,
 				29A38DCB17EAF55900454787 /* eSub */,
 				2958A8C517E960EA0090A791 /* DataClass */,
@@ -4835,6 +4851,7 @@
 				043FDBA21A1AEF14008EDC24 /* transparent_boxv3.png in Resources */,
 				043FDBA41A1AEF14008EDC24 /* eAplicationv3.png in Resources */,
 				043FDBA51A1AEF14008EDC24 /* customer_fact_findv3.png in Resources */,
+				431F5FE51C6D93E800A9CA6C /* ProspectListingTableViewCell.xib in Resources */,
 				043FDBA61A1AEF14008EDC24 /* client_profilev3.png in Resources */,
 				043FDBA31A1AEF14008EDC24 /* sales_illustrationv3.png in Resources */,
 				043FDBAB1A1AF226008EDC24 /* sales_illustration@2x_20141118.png in Resources */,
@@ -5167,6 +5184,7 @@
 				4212707F18459CBB000C2156 /* HealthQuestions1stLA.m in Sources */,
 				4212708018459CBB000C2156 /* HealthQuestions2ndLA.m in Sources */,
 				43FD4A041C620F3E00227F8F /* ModelVIPClass.m in Sources */,
+				431F5FE41C6D93E800A9CA6C /* ProspectListingTableViewCell.m in Sources */,
 				4212708118459CBB000C2156 /* HealthQuestionsPO.m in Sources */,
 				4212708218459CBB000C2156 /* HealthQuestionsVC.m in Sources */,
 				4212708818459FC0000C2156 /* eAppReport.m in Sources */,
