@@ -123,6 +123,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *btnEnabled;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *btnToEAPP;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *outletDone;
+@property (strong, nonatomic) IBOutlet UISwitch *quickQuoteFlag;
 
 
 @property (nonatomic, copy) NSString *SINo;

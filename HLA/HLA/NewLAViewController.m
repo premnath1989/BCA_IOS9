@@ -58,6 +58,7 @@
 
 @synthesize LAHbgTertanggung;
 @synthesize LAProductName;
+@synthesize quickQuoteFlag;
 
 id temp;
 id dobtemp;
@@ -72,6 +73,44 @@ id dobtemp;
     
     themeColour = [UIColor colorWithRed:242.0f/255.0f green:113.0f/255.0f blue:134.0f/255.0f alpha:1];
     
+    [self setupUIElementDefaultSetting];
+}
+
+- (void) setupUIElementDefaultSetting{
+    [self setUIElementsDelegate];
+    [self setUIelementsAction];
+    [self setUIElementsEditable];
+    [self setupUIElementsColor];
+}
+
+- (void)setUIElementsDelegate{
+    LAProductName.delegate = self;
+    LANameField.delegate = self;
+    LAHbgTertanggung.delegate = self;
+}
+
+- (void)setUIelementsAction{
+    [quickQuoteFlag addTarget:self action:@selector(changeUIElementsEditable:) forControlEvents:UIControlEventValueChanged];
+}
+
+- (void)changeUIElementsEditable:(id)sender {
+    [self setUIElementsEditable];
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    return [quickQuoteFlag isOn];
+}
+
+- (void)setUIElementsEditable{
+    btnDOB.enabled = [quickQuoteFlag isOn];
+    sexSegment.enabled = [quickQuoteFlag isOn];
+    btnOccp.enabled = [quickQuoteFlag isOn];
+    
+    //always disable AgeButton
+    LAAgeField.enabled = FALSE;
+}
+
+- (void) setupUIElementsColor{
     LANameField.layer.borderColor = [themeColour CGColor];
     LANameField.layer.masksToBounds = YES;
     LANameField.layer.borderWidth = 1.0f;
@@ -83,7 +122,19 @@ id dobtemp;
     LAProductName.layer.borderColor = [themeColour CGColor];
     LAProductName.layer.masksToBounds = YES;
     LAProductName.layer.borderWidth = 1.0f;
-	
+    
+    btnDOB.layer.borderColor = [themeColour CGColor];
+    btnDOB.layer.masksToBounds = YES;
+    btnDOB.layer.borderWidth = 1.0f;
+    
+    btnOccp.layer.borderColor = [themeColour CGColor];
+    btnOccp.layer.masksToBounds = YES;
+    btnOccp.layer.borderWidth = 1.0f;
+    
+    //this button must always be enabled
+    btnCommDate.layer.borderColor = [themeColour CGColor];
+    btnCommDate.layer.masksToBounds = YES;
+    btnCommDate.layer.borderWidth = 1.0f;
 }
 
 -(void)processLifeAssured {
@@ -101,25 +152,25 @@ id dobtemp;
     DiffClient = NO; //initialized to NO, as to allow riders to be added, else riders wouldn't be able to be added in every new SI.
     savedIndexNo = -1; //initialized to -1, for debugging and to prevent it from going to the different condition for setting DiffClient
     
-    planChoose = NULL;
-    LANameField.enabled = NO;
-    sexSegment.enabled = NO;
-    LAAgeField.enabled = NO;
-    LAOccLoadingField.enabled = NO;
-    LACPAField.enabled = NO;
-    LAPAField.enabled = NO;
-    btnOccp.enabled = NO;
-    btnDOB.enabled = NO;
-    useExist = NO;
-    AgeChanged = NO;
-    JobChanged = NO;
-    QQProspect = NO;
-    self.btnOccp.titleLabel.textColor = [UIColor darkGrayColor];
-    [LANameField setDelegate:self];
-    [LAAgeField setDelegate:self];
-    [LAOccLoadingField setDelegate:self];
-    [LACPAField setDelegate:self];
-    [LAPAField setDelegate:self];
+//    planChoose = NULL;
+//    LANameField.enabled = NO;
+//    sexSegment.enabled = NO;
+//    LAAgeField.enabled = NO;
+//    LAOccLoadingField.enabled = NO;
+//    LACPAField.enabled = NO;
+//    LAPAField.enabled = NO;
+//    btnOccp.enabled = NO;
+//    btnDOB.enabled = NO;
+//    useExist = NO;
+//    AgeChanged = NO;
+//    JobChanged = NO;
+//    QQProspect = NO;
+//    self.btnOccp.titleLabel.textColor = [UIColor darkGrayColor];
+//    [LANameField setDelegate:self];
+//    [LAAgeField setDelegate:self];
+//    [LAOccLoadingField setDelegate:self];
+//    [LACPAField setDelegate:self];
+//    [LAPAField setDelegate:self];
     
     getSINo = [self.requestSINo description];
     
@@ -207,23 +258,23 @@ id dobtemp;
     
     [self.view addGestureRecognizer:tap];
     
-    if (Editable == NO) {
-        [self DisableTextField:LANameField ];
-        [self DisableTextField:LAAgeField ];
-        [self DisableTextField:LACPAField ];
-        [self DisableTextField:LAOccLoadingField ];
-        [self DisableTextField:LAPAField ];
-        
-        sexSegment.enabled = FALSE;
-        smokerSegment.enabled = FALSE;
-        btnCommDate.enabled = FALSE;
-        btnEnabled.enabled = FALSE;
-        btnProspect.enabled = FALSE;
-        
-        if([EAPPorSI isEqualToString:@"eAPP"]) {
-            outletDone.enabled = FALSE;
-        }		
-    }
+//    if (Editable == NO) {
+//        [self DisableTextField:LANameField ];
+//        [self DisableTextField:LAAgeField ];
+//        [self DisableTextField:LACPAField ];
+//        [self DisableTextField:LAOccLoadingField ];
+//        [self DisableTextField:LAPAField ];
+//        
+//        sexSegment.enabled = FALSE;
+//        smokerSegment.enabled = FALSE;
+//        btnCommDate.enabled = FALSE;
+//        btnEnabled.enabled = FALSE;
+//        btnProspect.enabled = FALSE;
+//        
+//        if([EAPPorSI isEqualToString:@"eAPP"]) {
+//            outletDone.enabled = FALSE;
+//        }		
+//    }
     
     if([EAPPorSI isEqualToString:@"eAPP"]) {
         [self disableFieldsForEapp];
@@ -281,8 +332,8 @@ id dobtemp;
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];    
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
 	
 }
 
@@ -299,28 +350,28 @@ id dobtemp;
 
 #pragma mark - Handle KeyboardShow
 
--(void)keyboardDidShow:(NSNotificationCenter *)notification
-{
-    self.myScrollView.frame = CGRectMake(0, 44, 708, 960-264);
-    self.myScrollView.contentSize = CGSizeMake(708, 960);
-    
-    CGRect textFieldRect = [activeField frame];
-    textFieldRect.origin.y += 10;
-    [self.myScrollView scrollRectToVisible:textFieldRect animated:YES];    
-}
+//-(void)keyboardDidShow:(NSNotificationCenter *)notification
+//{
+//    self.myScrollView.frame = CGRectMake(0, 44, 708, 960-264);
+//    self.myScrollView.contentSize = CGSizeMake(708, 960);
+//    
+//    CGRect textFieldRect = [activeField frame];
+//    textFieldRect.origin.y += 10;
+//    [self.myScrollView scrollRectToVisible:textFieldRect animated:YES];    
+//}
+//
+//-(void)keyboardDidHide:(NSNotificationCenter *)notification
+//{
+//    self.myScrollView.frame = CGRectMake(0, 44, 708, 960);
+//}
 
--(void)keyboardDidHide:(NSNotificationCenter *)notification
-{
-    self.myScrollView.frame = CGRectMake(0, 44, 708, 960);
-}
-
--(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-{
-    activeField = textField;    
-    [activeField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
-	
-    return YES;
-}
+//-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+//{
+//    activeField = textField;    
+//    [activeField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+//	
+//    return YES;
+//}
 
 -(void)textFieldDidChange:(UITextField*)textField
 {
