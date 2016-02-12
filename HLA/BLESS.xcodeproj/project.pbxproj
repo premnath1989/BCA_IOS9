@@ -330,6 +330,7 @@
 		42D3277618487F2D0030AA7A /* NewGroupListing.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D3277518487F2D0030AA7A /* NewGroupListing.m */; };
 		42F8590F1772E4EF003907CD /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = 42F8590D1772E4EF003907CD /* add.png */; };
 		42F859101772E4EF003907CD /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 42F8590E1772E4EF003907CD /* delete.png */; };
+		431F5FDF1C6D781A00A9CA6C /* BranchInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 431F5FDE1C6D781A00A9CA6C /* BranchInfo.m */; };
 		4341B5C21C61750700357986 /* libSPSignDoc_4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4341B5C11C61750700357986 /* libSPSignDoc_4.0.a */; };
 		4353C9481C61E95000AE1ED9 /* ModelNationality.m in Sources */ = {isa = PBXBuildFile; fileRef = 4353C9471C61E95000AE1ED9 /* ModelNationality.m */; };
 		4353C94B1C61F3A000AE1ED9 /* ModelMaritalStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 4353C94A1C61F3A000AE1ED9 /* ModelMaritalStatus.m */; };
@@ -1289,6 +1290,8 @@
 		42D3277518487F2D0030AA7A /* NewGroupListing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewGroupListing.m; sourceTree = "<group>"; };
 		42F8590D1772E4EF003907CD /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
 		42F8590E1772E4EF003907CD /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete.png; sourceTree = "<group>"; };
+		431F5FDD1C6D781A00A9CA6C /* BranchInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BranchInfo.h; sourceTree = "<group>"; };
+		431F5FDE1C6D781A00A9CA6C /* BranchInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BranchInfo.m; sourceTree = "<group>"; };
 		4341B5C11C61750700357986 /* libSPSignDoc_4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSPSignDoc_4.0.a; sourceTree = "<group>"; };
 		4353C9461C61E95000AE1ED9 /* ModelNationality.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelNationality.h; sourceTree = "<group>"; };
 		4353C9471C61E95000AE1ED9 /* ModelNationality.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelNationality.m; sourceTree = "<group>"; };
@@ -4059,6 +4062,8 @@
 				439985C01C630C4D0003B037 /* VIPClass.m */,
 				437343131C6B1CBD001516D9 /* ReferralSource.h */,
 				437343141C6B1CBD001516D9 /* ReferralSource.m */,
+				431F5FDD1C6D781A00A9CA6C /* BranchInfo.h */,
+				431F5FDE1C6D781A00A9CA6C /* BranchInfo.m */,
 			);
 			name = PopOver;
 			sourceTree = "<group>";
@@ -4959,6 +4964,7 @@
 				EFEB7A5C1766F2DF004FF3CE /* CFFTabBar.m in Sources */,
 				EFEB7A5D1766F2DF004FF3CE /* CFFTabBarButton.m in Sources */,
 				EFEB7A651766FDCC004FF3CE /* eAppTabBarController.m in Sources */,
+				431F5FDF1C6D781A00A9CA6C /* BranchInfo.m in Sources */,
 				EFEB7A661766FDCC004FF3CE /* eAppTabBar.m in Sources */,
 				EFEB7A671766FDCC004FF3CE /* eAppTabBarButton.m in Sources */,
 				C4E9F3D6176878E90070EA8A /* BasicAccountViewController.m in Sources */,

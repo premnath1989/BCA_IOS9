@@ -498,6 +498,14 @@ bool RegDatehandling;
     _outletSourceIncome.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     _outletSourceIncome.imageEdgeInsets = UIEdgeInsetsMake(0., _outletSourceIncome.frame.size.width - (24 + 10.0), 0., 0.);
     _outletSourceIncome.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
+    
+    outletBranchCode.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    outletBranchCode.imageEdgeInsets = UIEdgeInsetsMake(0., outletBranchCode.frame.size.width - (24 + 10.0), 0., 0.);
+    outletBranchCode.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
+    
+    outletBranchName.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    outletBranchName.imageEdgeInsets = UIEdgeInsetsMake(0., outletBranchName.frame.size.width - (24 + 10.0), 0., 0.);
+    outletBranchName.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
@@ -580,7 +588,7 @@ bool RegDatehandling;
     NSString *validationNamaLengkap=@"Nama lengkap harus diisi";
     NSString *validationJenisKelamin=@"Jenis Kelamin harus diisi";
     NSString *validationTanggalLahir=@"Tanggal lahir harus diisi";
-    NSString *validationTanggalLahirFuture=@"Tanggal lahir tidak dapat lebih besar dari tanggal hari ini";
+    
     NSString *validationJenisIdentitas=@"Jenis identitas harus diisi";
     NSString *validationNomorIdentitas=@"Nomor identitas harus diisi";
     NSString *validationTanggalKadaluarsaIdentitas=@"Tanggal kadaluarsa identitas harus diisi";
@@ -1478,59 +1486,91 @@ bool RegDatehandling;
     }
     
     if (textField == txtPrefix1) {
-        myString = [txtPrefix1.text stringByReplacingCharactersInRange:range withString:string];
+        /*myString = [txtPrefix1.text stringByReplacingCharactersInRange:range withString:string];
         if (myString.length > 4) {
             return NO;
-        }
+        }*/
+        NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
+        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        
+        return (([string isEqualToString:filtered])&&(newLength <= 4));
     }
     
     if (textField == txtPrefix2) {
-        myString = [txtPrefix2.text stringByReplacingCharactersInRange:range withString:string];
+        /*myString = [txtPrefix2.text stringByReplacingCharactersInRange:range withString:string];
         if (myString.length > 4) {
             return NO;
-        }
+        }*/
+        NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
+        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        
+        return (([string isEqualToString:filtered])&&(newLength <= 4));
     }
     
     if (textField == txtPrefix3) {
-        myString = [txtPrefix3.text stringByReplacingCharactersInRange:range withString:string];
+        /*myString = [txtPrefix3.text stringByReplacingCharactersInRange:range withString:string];
         if (myString.length > 4) {
             return NO;
-        }
+        }*/
+        NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
+        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        
+        return (([string isEqualToString:filtered])&&(newLength <= 4));
     }
     
     if (textField == txtPrefix4) {
-        myString = [txtPrefix4.text stringByReplacingCharactersInRange:range withString:string];
+        /*myString = [txtPrefix4.text stringByReplacingCharactersInRange:range withString:string];
         if (myString.length > 4) {
             return NO;
-        }
+        }*/
+        NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
+        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        
+        return (([string isEqualToString:filtered])&&(newLength <= 4));
     }
     
     if (textField == txtContact1) {
-        myString = [txtContact1.text stringByReplacingCharactersInRange:range withString:string];
+        /*myString = [txtContact1.text stringByReplacingCharactersInRange:range withString:string];
         if (myString.length > 10) {
             return NO;
-        }
+        }*/
+        NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
+        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        
+        return (([string isEqualToString:filtered])&&(newLength <= 10));
     }
     
     if (textField == txtContact2) {
-        myString = [txtContact2.text stringByReplacingCharactersInRange:range withString:string];
+        /*myString = [txtContact2.text stringByReplacingCharactersInRange:range withString:string];
         if (myString.length > 10) {
             return NO;
-        }
+        }*/
+        NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
+        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        
+        return (([string isEqualToString:filtered])&&(newLength <= 10));
     }
     
     if (textField == txtContact3) {
-        myString = [txtContact3.text stringByReplacingCharactersInRange:range withString:string];
+        /*myString = [txtContact3.text stringByReplacingCharactersInRange:range withString:string];
         if (myString.length > 10) {
             return NO;
-        }
+        }*/
+        NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
+        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        
+        return (([string isEqualToString:filtered])&&(newLength <= 10));
     }
     
     if (textField == txtContact4) {
-        myString = [txtContact4.text stringByReplacingCharactersInRange:range withString:string];
+        /*myString = [txtContact4.text stringByReplacingCharactersInRange:range withString:string];
         if (myString.length > 10) {
             return NO;
-        }
+        }*/
+        NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
+        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        
+        return (([string isEqualToString:filtered])&&(newLength <= 10));
     }
     
     if (textField == txtIDType) {
@@ -1999,7 +2039,7 @@ bool RegDatehandling;
     id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
     [activeInstance performSelector:@selector(dismissKeyboard)];
     
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    /*NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"dd/MM/yyyy"];
     NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
     
@@ -2010,7 +2050,7 @@ bool RegDatehandling;
         txtDOB.text = dateString;
     } else {
         [outletDOB setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", outletDOB.titleLabel.text] forState:UIControlStateNormal];
-    }
+    }*/
     
     if (_SIDate == Nil) {
         UIStoryboard *clientProfileStoryBoard = [UIStoryboard storyboardWithName:@"ClientProfileStoryboard" bundle:nil];
@@ -2022,8 +2062,8 @@ bool RegDatehandling;
     [self.SIDatePopover setPopoverContentSize:CGSizeMake(300.0f, 255.0f)];
     [self.SIDatePopover presentPopoverFromRect:[sender bounds]  inView:sender permittedArrowDirections:UIPopoverArrowDirectionLeft animated:NO];
     
-    dateFormatter = Nil;
-    dateString = Nil;
+    //dateFormatter = Nil;
+    //dateString = Nil;
     
 }
 
@@ -2726,6 +2766,30 @@ bool RegDatehandling;
     }
     [_sourceIncomePopover presentPopoverFromRect:[sender bounds]  inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
+
+- (IBAction)actionBranchInfo:(UIButton *)sender
+{
+    
+    [self resignFirstResponder];
+    [self.view endEditing:YES];
+    
+    NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
+    [ClientProfile setObject:@"YES" forKey:@"isNew"];
+    
+    Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
+    id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
+    [activeInstance performSelector:@selector(dismissKeyboard)];
+    
+    //if (_branchInfo == nil) {
+        _branchInfo = [[BranchInfo alloc] initWithStyle:UITableViewStylePlain];
+        _branchInfo.delegate = self;
+        [_branchInfo setData:[NSNumber numberWithInt:sender.tag]];
+        [_branchInfo.tableView reloadData];
+        _branchInfoPopover = [[UIPopoverController alloc] initWithContentViewController:_branchInfo];
+    //}
+    [_branchInfoPopover presentPopoverFromRect:[sender bounds]  inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
 
 - (IBAction)actionVIPClass:(id)sender
 {
@@ -7301,6 +7365,20 @@ bool RegDatehandling;
 
 
 #pragma mark - delegate
+-(void)selectedBranch:(NSString *)branchCode BranchName:(NSString *)branchName BranchStatus:(NSString *)branchStatus{
+    /*if([VIPClass isEqualToString:@"- SELECT -"]) {
+        _outletVIPClass.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+    } else {
+        _outletVIPClass.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    }*/
+    outletBranchCode.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    outletBranchName.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    [outletBranchCode setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",branchCode]forState:UIControlStateNormal];
+    [outletBranchName setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",branchName]forState:UIControlStateNormal];
+    [txtKcu setText:branchStatus];
+    [_branchInfoPopover dismissPopoverAnimated:YES];
+}
+
 -(void)selectedVIPClass:(NSString *)VIPClass{
     _outletVIPClass.titleLabel.text = VIPClass;
     if([VIPClass isEqualToString:@"- SELECT -"]) {
@@ -7425,16 +7503,26 @@ bool RegDatehandling;
     //KY
     
     if (isDOBDate) {
-		//[outletDOB setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", strDate] forState:UIControlStateNormal];
-        [outletDOB setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", clientDateString] forState:UIControlStateNormal];
+        if ([d compare:d2] == NSOrderedAscending){
+            NSString *validationTanggalLahirFuture=@"Tanggal lahir tidak dapat lebih besar dari tanggal hari ini";
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
+                                                            message:validationTanggalLahirFuture delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil];
+            [alert show];
+        }
+        else{
+            outletDOB.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+            //[outletDOB setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", strDate] forState:UIControlStateNormal];
+            [outletDOB setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", clientDateString] forState:UIControlStateNormal];
+        }
 	}
 
     if (isExpiryDate) {
+        outletDOB.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         //[outletExpiryDate setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", strDate] forState:UIControlStateNormal];
         [outletExpiryDate setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", clientDateString] forState:UIControlStateNormal];
     }
 
-    if([otherIDType_trim isEqualToString:@"EXPECTED DELIVERY DATE"] && [dateString isEqualToString:strDate]) {
+    /*if([otherIDType_trim isEqualToString:@"EXPECTED DELIVERY DATE"] && [dateString isEqualToString:strDate]) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
                                                         message:@"Expected Delivery Date must be future date." delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil];
         [alert show];
@@ -7462,7 +7550,7 @@ bool RegDatehandling;
 			//[outletDOB setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", strDate] forState:UIControlStateNormal];
             [outletDOB setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", clientDateString] forState:UIControlStateNormal];
 		}
-    }
+    }*/
     
     if((segRigPerson.selectedSegmentIndex == 0) && [d compare:d2] == NSOrderedAscending) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "

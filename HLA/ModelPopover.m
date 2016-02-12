@@ -99,5 +99,102 @@
     return dict;
 }
 
+-(NSDictionary *)getTitle{
+    NSDictionary *dict;
+    
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    NSMutableArray* arrayTitleCode=[[NSMutableArray alloc] init];
+    NSMutableArray* arrayTitleDesc=[[NSMutableArray alloc] init];
+    NSMutableArray* arrayStatus=[[NSMutableArray alloc] init];
+    
+    FMResultSet *s = [database executeQuery:@"SELECT * FROM eProposal_Title WHERE status = 'A'"];
+    while ([s next]) {
+        NSString *titleCode = [NSString stringWithFormat:@"%@",[s stringForColumn:@"TitleCode"]];
+        NSString *titleDesc = [NSString stringWithFormat:@"%@",[s stringForColumn:@"TitleDesc"]];
+        NSString *Status = [NSString stringWithFormat:@"%@",[s stringForColumn:@"Status"]];
+        
+        [arrayTitleCode addObject:titleCode];
+        [arrayTitleDesc addObject:titleDesc];
+        [arrayStatus addObject:Status];
+    }
+    dict = [[NSDictionary alloc] initWithObjectsAndKeys:arrayTitleCode,@"TitleCode", arrayTitleDesc,@"TitleDesc",arrayStatus,@"Status",nil];
+    
+    [results close];
+    [database close];
+    return dict;
+}
+
+-(NSDictionary *)getOccupation{
+    NSDictionary *dict;
+    
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    NSMutableArray* arrayOccpCode=[[NSMutableArray alloc] init];
+    NSMutableArray* arrayOccpDesc=[[NSMutableArray alloc] init];
+    NSMutableArray* arrayOccpClass=[[NSMutableArray alloc] init];
+    NSMutableArray* arrayStatus=[[NSMutableArray alloc] init];
+    
+    FMResultSet *s = [database executeQuery:@"SELECT * FROM eProposal_OCCP WHERE status = 'A'"];
+    while ([s next]) {
+        NSString *occpCode = [NSString stringWithFormat:@"%@",[s stringForColumn:@"occp_Code"]];
+        NSString *occpeDesc = [NSString stringWithFormat:@"%@",[s stringForColumn:@"OccpDesc"]];
+        NSString *occpClass = [NSString stringWithFormat:@"%@",[s stringForColumn:@"OccpClass"]];
+        NSString *Status = [NSString stringWithFormat:@"%@",[s stringForColumn:@"Status"]];
+        
+        [arrayOccpCode addObject:occpCode];
+        [arrayOccpDesc addObject:occpeDesc];
+        [arrayOccpClass addObject:occpClass];
+        [arrayStatus addObject:Status];
+    }
+    dict = [[NSDictionary alloc] initWithObjectsAndKeys:arrayOccpCode,@"OccpCode", arrayOccpDesc,@"OccpDesc", arrayOccpClass,@"occpClass",arrayStatus,@"Status",nil];
+    
+    [results close];
+    [database close];
+    return dict;
+}
+
+-(NSDictionary *)getBranchInfo{
+    NSDictionary *dict;
+    
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    NSMutableArray* arrayKodeCabang=[[NSMutableArray alloc] init];
+    NSMutableArray* arrayNamaCabang=[[NSMutableArray alloc] init];
+    NSMutableArray* arrayStatusCabang=[[NSMutableArray alloc] init];
+    NSMutableArray* arrayStatus=[[NSMutableArray alloc] init];
+    
+    FMResultSet *s = [database executeQuery:@"SELECT * FROM Data_Cabang WHERE status = 'A'"];
+    while ([s next]) {
+        NSString *occpCode = [NSString stringWithFormat:@"%@",[s stringForColumn:@"KodeCabang"]];
+        NSString *occpeDesc = [NSString stringWithFormat:@"%@",[s stringForColumn:@"NamaCabang"]];
+        NSString *occpClass = [NSString stringWithFormat:@"%@",[s stringForColumn:@"StatusCabang"]];
+        NSString *Status = [NSString stringWithFormat:@"%@",[s stringForColumn:@"Status"]];
+        
+        [arrayKodeCabang addObject:occpCode];
+        [arrayNamaCabang addObject:occpeDesc];
+        [arrayStatusCabang addObject:occpClass];
+        [arrayStatus addObject:Status];
+    }
+    dict = [[NSDictionary alloc] initWithObjectsAndKeys:arrayKodeCabang,@"KodeCabang", arrayNamaCabang,@"NamaCabang", arrayStatusCabang,@"StatusCabang",arrayStatus,@"Status",nil];
+    
+    [results close];
+    [database close];
+    return dict;
+}
+
+
 
 @end
