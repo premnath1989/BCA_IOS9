@@ -281,11 +281,11 @@ static NSString *labelVers;
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    /*
+    
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
      
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
-     */
+    
     [self IsFirstDevice];
     
 }
@@ -440,19 +440,28 @@ static NSString *labelVers;
 #pragma mark - keyboard display
 
 -(void)keyboardDidShow:(NSNotificationCenter *)notification
-{/*
-  self.scrollViewLogin.frame = CGRectMake(0, 0, 1024, 748-352);
-  self.scrollViewLogin.contentSize = CGSizeMake(1024, 748);
+{
+    [self viewScrollUp:0.0f to:200.0f];
   
-  CGRect textFieldRect = [activeField frame];
-  textFieldRect.origin.y += 10;
-  [self.scrollViewLogin scrollRectToVisible:textFieldRect animated:YES];
-  */
+}
+
+-(void)viewScrollUp:(CGFloat)yFrom to:(CGFloat)yTo{
+    CGRect bounds = scrollViewLogin.bounds;
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"bounds"];
+    animation.duration = 1.0;
+    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    animation.fillMode = kCAFillModeForwards;
+    animation.removedOnCompletion = NO;
+    bounds.origin.y = bounds.origin.y + yFrom;
+    animation.fromValue = [NSValue valueWithCGRect:bounds];
+    bounds.origin.y = bounds.origin.y + yTo;
+    animation.toValue = [NSValue valueWithCGRect:bounds];
+    [self.scrollViewLogin.layer addAnimation:animation forKey:@"bounds"];
 }
 
 -(void)keyboardDidHide:(NSNotificationCenter *)notification
 {
-    self.scrollViewLogin.frame = CGRectMake(0, 0, 1024, 748);
+    [self viewScrollUp:200.0f to:-200.0f];
 }
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
