@@ -109,7 +109,7 @@ BOOL isSave;
 	//check edit/create new
 	NSString *pID;
 	NSString *Trim_GroupName = [GroupName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-	if ([TitleBar.text isEqualToString:@"Add New Group"]) {
+	if ([TitleBar.text isEqualToString:@"New"]) {
 		if ([self CheckValidation]) {
 			[db executeUpdate:[NSString stringWithFormat:@"INSERT INTO prospect_groups (name) values ('%@')", Trim_GroupName]];
 			
@@ -251,7 +251,7 @@ BOOL isSave;
 	[self hideKeyboard];
 	
 	NSString *Trim_GroupName = [GroupName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-	if ([titleGroup isEqualToString:@"Add New Group"] && (Trim_GroupName.length != 0 || member.count != 0)) {
+	if ([titleGroup isEqualToString:@"New"] && (Trim_GroupName.length != 0 || member.count != 0)) {
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Do you want to save?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
 		[alert setTag:1003];
 		[alert show];

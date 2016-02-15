@@ -114,6 +114,7 @@ int rrr;
         }
         else {
             if (selectedIndex == 1||selectedIndex == 2) {
+                NSLog(@"selected index %i",selectedIndex);
                 [self addChildViewController:selectedViewController];
                 selectedViewController.view.frame = CGRectMake(self.tabBarWidth,
                                                                    0,
@@ -131,8 +132,9 @@ int rrr;
 -(void)updateTabBar
 {
     UIViewController *selectedViewController = [self.viewControllers objectAtIndex:clickIndex];
-    
+    _selectedIndex = clickIndex;
     if ([self.view subviews].count > 1) {
+        NSLog(@"selcted index %i",_selectedIndex);
 		if (_selectedIndex == 1) {
 			[[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadData" object:self];
 			[[NSNotificationCenter defaultCenter] postNotificationName:@"returnToListing" object:nil];
@@ -144,7 +146,7 @@ int rrr;
 	}
 
     // set new selected index
-    _selectedIndex = clickIndex;
+    //_selectedIndex = clickIndex;
 	
     // update tab bar
     if (clickIndex < [self.tabBar.items count])

@@ -14,6 +14,7 @@
 #import "ClientProfileListingSortBy.h"
 #import "CustomAlertBox.h"
 #import "ModelProspectProfile.h"
+#import "ProspectListingTableViewCell.h"
 
 @interface ProspectListing : UIViewController<EditProspectDelegate, ProspectViewControllerDelegate,UITableViewDelegate,UITableViewDataSource,GroupDelegate, ClientProfileListingDelegate,CustomAlertBoxDelegate, UITabBarDelegate, UITextFieldDelegate>
 {
@@ -44,6 +45,7 @@
 @property (nonatomic, strong) UIPopoverController *GroupPopover;
 @property (strong, nonatomic) NSMutableArray* ProspectTableData;
 @property (strong, nonatomic) NSMutableArray* FilteredProspectTableData;
+@property (strong, nonatomic) NSMutableArray* dataIndex;
 @property (strong, nonatomic) NSMutableArray* dataMobile;
 @property (strong, nonatomic) NSMutableArray* dataPrefix;
 

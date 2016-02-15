@@ -347,6 +347,8 @@ bool RegDatehandling;
 	
 	[self.view addGestureRecognizer:tap];
     
+    txtHomeCountry.text=@"Indonesia";
+    txtOfficeCountry.text=@"Indonesia";
 }
 
 #pragma mark - added by faiz
@@ -476,10 +478,14 @@ bool RegDatehandling;
     btnOfficeCountry.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     btnOfficeCountry.imageEdgeInsets = UIEdgeInsetsMake(0., btnOfficeCountry.frame.size.width - (24 + 10.0), 0., 0.);
     btnOfficeCountry.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
-    
+    btnOfficeCountry.layer.borderColor = borderColor.CGColor;
+    btnOfficeCountry.layer.borderWidth = 1.0;
+
     btnHomeCountry.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     btnHomeCountry.imageEdgeInsets = UIEdgeInsetsMake(0., btnHomeCountry.frame.size.width - (24 + 10.0), 0., 0.);
     btnHomeCountry.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
+    btnHomeCountry.layer.borderColor = borderColor.CGColor;
+    btnHomeCountry.layer.borderWidth = 1.0;
     
     outletOccup.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     outletOccup.imageEdgeInsets = UIEdgeInsetsMake(0., outletOccup.frame.size.width - (24 + 10.0), 0., 0.);
@@ -1322,19 +1328,19 @@ bool RegDatehandling;
     if(txtHomePostCode.text.length < 5) {
         txtHomeState.text = @"";
         txtHomeTown.text = @"";
-        txtHomeCountry.text = @"";
+        //txtHomeCountry.text = @"";
         SelectedStateCode = @"";
         
     } else  if (!valid_symbol) {
         txtHomeState.text = @"";
         txtHomeTown.text = @"";
-        txtHomeCountry.text = @"";
+        //txtHomeCountry.text = @"";
         SelectedStateCode = @"";
         
     } else if (!valid) {
         txtHomeState.text = @"";
         txtHomeTown.text = @"";
-        txtHomeCountry.text = @"";
+        //txtHomeCountry.text = @"";
         SelectedStateCode = @"";
         PostcodeContinue = FALSE;
         
@@ -1365,7 +1371,7 @@ bool RegDatehandling;
             } else {
                 txtHomeState.text = @"";
                 txtHomeTown.text = @"";
-                txtHomeCountry.text = @"";
+                //txtHomeCountry.text = @"";
                 
             }
             sqlite3_close(contactDB);
@@ -2136,7 +2142,7 @@ bool RegDatehandling;
             txtHomePostCode.text = @"";
             txtHomeTown.text = @"";
             txtHomeState.text = @"";
-            txtHomeCountry.text = @"";
+            //txtHomeCountry.text = @"";
             txtHomeTown.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
             txtHomeState.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
             txtHomeCountry.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
@@ -2487,8 +2493,8 @@ bool RegDatehandling;
             } else {
                 insertSQL = [NSString stringWithFormat:
                              @"INSERT INTO prospect_profile(\'ProspectName\', \"ProspectDOB\", \"GST_registered\", \"GST_registrationNo\", \"GST_registrationDate\", \"GST_exempted\",\"ProspectGender\", \"ResidenceAddress1\", \"ResidenceAddress2\", \"ResidenceAddress3\", \"ResidenceAddressTown\", \"ResidenceAddressState\",\"ResidenceAddressPostCode\", \"ResidenceAddressCountry\", \"ResidenceDistrict\", \"ResidenceVillage\", \"ResidenceProvince\", \"OfficeAddress1\", \"OfficeAddress2\", \"OfficeAddress3\",\"OfficeAddressTown\", \"OfficeAddressState\", \"OfficeAddressPostCode\", \"OfficeAddressCountry\", \"OfficeDistrict\", \"OfficeVillage\", \"OfficeProvince\", \"ProspectEmail\",\"ProspectOccupationCode\", \"ExactDuties\", \"ProspectRemark\", \"ClientSegmentation\", \"DateCreated\", \"CreatedBy\", \"DateModified\",\"ModifiedBy\", \"ProspectGroup\", \"ProspectTitle\", \"IDTypeNo\", \"OtherIDType\", \"OtherIDTypeNo\", \"Smoker\", \"AnnualIncome\", \"SourceIncome\", \"BussinessType\", \"Race\", \"MaritalStatus\", \"Religion\", \"Nationality\", \"QQFlag\",\"ProspectProfileChangesCounter\",\"prospect_IsGrouping\", \"CountryOfBirth\", \"NIP\", \"BranchCode\", \"BranchName\", \"KCU\", \"Kanwil\",\"ReferralSource\", \"ReferralName\", \"IDExpiryDate\", \"NPWPNo\") "
-                             "VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\",\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\",\"%@\",\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%s\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", txtFullName.text, strDOB, GSTRigperson, txtRigNO.text, Rigdateoutlet,GSTRigExempted,gender, txtHomeAddr1.text, txtHomeAddr2.text, txtHomeAddr3.text, txtHomeTown.text, SelectedStateCode, txtHomePostCode.text, HomeCountry,txtHomeDistrict.text,txtHomeVillage.text, txtHomeProvince.text, txtOfficeAddr1.text, txtOfficeAddr2.text, txtOfficeAddr3.text, txtOfficeTown.text, SelectedOfficeStateCode, txtOfficePostcode.text, OffCountry, txtOfficeDistrict.text,txtOfficeVillage.text, txtOfficeCountry.text, txtEmail.text, OccupCodeSelected, txtExactDuties.text, txtRemark.text, _outletVIPClass.titleLabel.text,
-                             @"datetime(\'now\', \'+8 hour\')", @"1", @"", @"1", group, TitleCodeSelected , txtIDType.text, othertype, txtOtherIDType.text, ClientSmoker, txtAnnIncome.text, _outletSourceIncome.titleLabel.text, txtBussinessType.text,race,marital,religion,nation,"false",@"1", isGrouping, CountryOfBirth, txtNip.text, outletBranchCode.titleLabel.text, outletBranchName.titleLabel.text, txtKcu.text, txtKanwil.text, outletReferralSource.titleLabel.text, txtReferralName.text, strExpiryDate, txtNPWPNo.text];
+                             "VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\",\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", %@, \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\",\"%@\",\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%s\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", txtFullName.text, strDOB, GSTRigperson, txtRigNO.text, Rigdateoutlet,GSTRigExempted,gender, txtHomeAddr1.text, txtHomeAddr2.text, txtHomeAddr3.text, txtHomeTown.text, SelectedStateCode, txtHomePostCode.text, HomeCountry,txtHomeDistrict.text,txtHomeVillage.text, txtHomeProvince.text, txtOfficeAddr1.text, txtOfficeAddr2.text, txtOfficeAddr3.text, txtOfficeTown.text, SelectedOfficeStateCode, txtOfficePostcode.text, OffCountry, txtOfficeDistrict.text,txtOfficeVillage.text, txtOfficeCountry.text, txtEmail.text, OccupCodeSelected, txtExactDuties.text, txtRemark.text, _outletVIPClass.titleLabel.text,
+                             @"datetime(\"now\", \"+8 hour\")", @"1", @"", @"1", group, TitleCodeSelected , txtIDType.text, othertype, txtOtherIDType.text, ClientSmoker, txtAnnIncome.text, _outletSourceIncome.titleLabel.text, txtBussinessType.text,race,marital,religion,nation,"false",@"1", isGrouping, CountryOfBirth, txtNip.text, outletBranchCode.titleLabel.text, outletBranchName.titleLabel.text, txtKcu.text, txtKanwil.text, outletReferralSource.titleLabel.text, txtReferralName.text, strExpiryDate, txtNPWPNo.text];
                 
             }
 			
@@ -4336,7 +4342,7 @@ bool RegDatehandling;
                                                       AndOfficeAddress1:OfficeAddress1 AndOfficeAddress2:OfficeAddress2 AndOfficeAddress3:OfficeAddress3 AndOfficeAddressTown:OfficeAddressTown
                                                   AndOfficeAddressState:OfficeAddressState AndOfficeAddressPostCode:OfficeAddressPostCode
                                                 AndOfficeAddressCountry:OfficeAddressCountry AndProspectEmail:ProspectEmail AndProspectRemark:ProspectRemark AndDateCreated:DateCreated AndDateModified:DateModified AndCreatedBy:CreatedBy AndModifiedBy:ModifiedBy
-                                              AndProspectOccupationCode:ProspectOccupationCode AndProspectDOB:ProspectDOB AndExactDuties:ExactDuties AndGroup:ProspectGroup AndTitle:ProspectTitle AndIDTypeNo:IDTypeNo AndOtherIDType:OtherIDType2 AndOtherIDTypeNo:OtherIDTypeNo AndSmoker:Smoker AndAnnIncome:AnnIncome AndBussType:BussinessType AndRace:Race AndMaritalStatus:MaritalStatus AndReligion:Religion AndNationality:Nationality AndRegistrationNo:registrationNo AndRegistration:registration AndRegistrationDate:registrationDate AndRegistrationExempted:regExempted AndProspect_IsGrouping:isGrouping AndCountryOfBirth:COB AndNIP:@"" AndBranchCode:@"" AndBranchName:@"" AndKCU:@"" AndReferralSource:@"" AndReferralName:@"" AndIdentitySubmitted:@"" AndIDExpirityDate:@"" AndNPWPNo:@""];
+                                              AndProspectOccupationCode:ProspectOccupationCode AndProspectDOB:ProspectDOB AndExactDuties:ExactDuties AndGroup:ProspectGroup AndTitle:ProspectTitle AndIDTypeNo:IDTypeNo AndOtherIDType:OtherIDType2 AndOtherIDTypeNo:OtherIDTypeNo AndSmoker:Smoker AndAnnIncome:AnnIncome AndBussType:BussinessType AndRace:Race AndMaritalStatus:MaritalStatus AndReligion:Religion AndNationality:Nationality AndRegistrationNo:registrationNo AndRegistration:registration AndRegistrationDate:registrationDate AndRegistrationExempted:regExempted AndProspect_IsGrouping:isGrouping AndCountryOfBirth:COB AndNIP:@"" AndBranchCode:@"" AndBranchName:@"" AndKCU:@"" AndReferralSource:@"" AndReferralName:@"" AndIdentitySubmitted:@"" AndIDExpirityDate:@"" AndNPWPNo:@"" AndKanwil:@"" AndHomeVillage:@"" AndHomeDistrict:@"" AndHomeProvince:@"" AndOfficeVillage:@"" AndOfficeDistrict:@"" AndOfficePorvince:@"" AndSourceIncome:@"" AndClientSegmentation:@""];
                 
             }
             sqlite3_finalize(statement);
@@ -7168,7 +7174,7 @@ bool RegDatehandling;
 	txtHomeAddr1.text = @"";
 	txtHomeAddr2.text = @"";
 	txtHomeAddr3.text = @"";
-	txtHomeCountry.text = @"";
+	//txtHomeCountry.text = @"";
 	txtHomePostCode.text  = @"";
 	txtHomeState.text = @"";
 	txtHomeTown.text = @"";

@@ -89,7 +89,8 @@
 	
 	
 	NgroupPage.modalPresentationStyle = UIModalPresentationFormSheet;
-	[UDGroup setObject:@"Add New Group" forKey:@"GroupTitle"];
+	//[UDGroup setObject:@"Add New Group" forKey:@"GroupTitle"];
+    [UDGroup setObject:@"New" forKey:@"GroupTitle"];
 	[self presentViewController:NgroupPage animated:YES completion:nil];
 	
 	[self refreshData];

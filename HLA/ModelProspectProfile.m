@@ -72,6 +72,15 @@
     NSString* IdentitySubmitted;
     NSString* IDExpirityDate;
     NSString* NPWPNo;
+    NSString* Kanwil;
+    NSString* HomeVillage;
+    NSString* HomeDistrict;
+    NSString* HomeProvicne;
+    NSString* OfficeVillage;
+    NSString* OfficeDistrict;
+    NSString* OfficeProvicne;
+    NSString* SourceIncome;
+    NSString* ClientSegmentation;
     
     //NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     //NSString *docsPath = [paths objectAtIndex:0];
@@ -149,6 +158,15 @@
         IdentitySubmitted = [s stringForColumn:@"IdentitySubmitted"];
         IDExpirityDate = [s stringForColumn:@"IDExpirityDate"];
         NPWPNo = [s stringForColumn:@"NPWPNo"];
+        Kanwil = [s stringForColumn:@"Kanwil"];
+        HomeVillage = [s stringForColumn:@"ResidenceVillage"];
+        HomeDistrict = [s stringForColumn:@"ResidenceDistrict"];
+        HomeProvicne = [s stringForColumn:@"ResidenceProvince"];
+        OfficeVillage = [s stringForColumn:@"OfficeVillage"];
+        OfficeDistrict = [s stringForColumn:@"OfficeDistrict"];
+        OfficeVillage = [s stringForColumn:@"OfficeProvince"];
+        SourceIncome = [s stringForColumn:@"SourceIncome"];
+        ClientSegmentation = [s stringForColumn:@"ClientSegmentation"];
 
         
         [ProspectTableData addObject:[[ProspectProfile alloc] initWithName:NickName AndProspectID:ProspectID AndProspectName:ProspectName
@@ -160,7 +178,7 @@
                                                      AndOfficeAddressState:OfficeAddressState AndOfficeAddressPostCode:OfficeAddressPostCode
                                                    AndOfficeAddressCountry:OfficeAddressCountry AndProspectEmail:ProspectEmail AndProspectRemark:ProspectRemark AndDateCreated:DateCreated AndDateModified:DateModified AndCreatedBy:CreatedBy AndModifiedBy:ModifiedBy
                                                  AndProspectOccupationCode:ProspectOccupationCode AndProspectDOB:ProspectDOB
-                                                            AndExactDuties:ExactDuties AndGroup:ProspectGroup AndTitle:ProspectTitle AndIDTypeNo:IDTypeNo AndOtherIDType:OtherIDType AndOtherIDTypeNo:OtherIDTypeNo AndSmoker:Smoker AndAnnIncome:AnnIncome AndBussType:BussinessType AndRace:Race AndMaritalStatus:MaritalStatus AndReligion:Religion AndNationality:Nationality AndRegistrationNo:registrationNo AndRegistration:registration AndRegistrationDate:registrationDate AndRegistrationExempted:exempted AndProspect_IsGrouping:isGrouping AndCountryOfBirth:COB AndNIP:NIP AndBranchCode:BranchCode AndBranchName:BranchName AndKCU:KCU AndReferralSource:ReferralSource AndReferralName:ReferralName AndIdentitySubmitted:IdentitySubmitted AndIDExpirityDate:IDExpirityDate AndNPWPNo:NPWPNo]];
+                                                            AndExactDuties:ExactDuties AndGroup:ProspectGroup AndTitle:ProspectTitle AndIDTypeNo:IDTypeNo AndOtherIDType:OtherIDType AndOtherIDTypeNo:OtherIDTypeNo AndSmoker:Smoker AndAnnIncome:AnnIncome AndBussType:BussinessType AndRace:Race AndMaritalStatus:MaritalStatus AndReligion:Religion AndNationality:Nationality AndRegistrationNo:registrationNo AndRegistration:registration AndRegistrationDate:registrationDate AndRegistrationExempted:exempted AndProspect_IsGrouping:isGrouping AndCountryOfBirth:COB AndNIP:NIP AndBranchCode:BranchCode AndBranchName:BranchName AndKCU:KCU AndReferralSource:ReferralSource AndReferralName:ReferralName AndIdentitySubmitted:IdentitySubmitted AndIDExpirityDate:IDExpirityDate AndNPWPNo:NPWPNo AndKanwil:Kanwil AndHomeVillage:HomeVillage AndHomeDistrict:HomeDistrict AndHomeProvince:HomeProvicne AndOfficeVillage:OfficeVillage AndOfficeDistrict:OfficeDistrict AndOfficePorvince:OfficeProvicne AndSourceIncome:SourceIncome AndClientSegmentation:ClientSegmentation]];
     }
     [results close];
     [database close];
@@ -169,6 +187,7 @@
 
 -(NSMutableArray *)getDataMobileAndPrefix:(NSString *)DataToReturn ProspectTableData:(NSMutableArray *)prospectTableData
 {
+    NSMutableArray* dataIndex = [[NSMutableArray alloc] init];
     NSMutableArray* dataMobile = [[NSMutableArray alloc] init];
     NSMutableArray* dataPrefix = [[NSMutableArray alloc] init];
     
@@ -179,11 +198,12 @@
     
     for (int a=0; a<prospectTableData.count; a++) {
         ProspectProfile *pp = [prospectTableData objectAtIndex:a];
-        NSString *querySQL = [NSString stringWithFormat:@"SELECT ContactCode, ContactNo, Prefix FROM contact_input where indexNo = %@ AND ContactCode = 'CONT008'", pp.ProspectID];
+        NSString *querySQL = [NSString stringWithFormat:@"SELECT IndexNo, ContactCode, ContactNo, Prefix FROM contact_input where indexNo = %@ AND ContactCode = 'CONT008'", pp.ProspectID];
          FMResultSet *s = [database executeQuery:querySQL];
         while ([s next]) {
             [dataMobile addObject: [NSNumber numberWithInt: [results intForColumn:@"ContactNo"]]];
             [dataPrefix addObject:[NSNumber numberWithInt: [results intForColumn:@"Prefix"]]];
+            [dataIndex addObject:[NSNumber numberWithInt: [results intForColumn:@"IndexNo"]]];
         }
         [results close];
         [database close];
@@ -194,6 +214,10 @@
     else if ([DataToReturn isEqualToString:@"ContactNo"]){
         return dataMobile;
     }
+    else if ([DataToReturn isEqualToString:@"Index"]){
+        return dataIndex;
+    }
+
     return dataPrefix;
 }
 

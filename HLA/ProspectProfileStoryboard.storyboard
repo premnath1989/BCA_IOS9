@@ -1883,8 +1883,8 @@
                                             <constraint firstAttribute="height" constant="1" id="e4E-Fu-Pxx"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gAE-lQ-Lef">
-                                        <rect key="frame" x="0.0" y="0.0" width="1024" height="699"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gAE-lQ-Lef">
+                                        <rect key="frame" x="0.0" y="635" width="1024" height="699"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Data Alamat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bcu-Mh-2Op">
                                                 <rect key="frame" x="20" y="0.0" width="184" height="21"/>
@@ -3090,7 +3090,7 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8X2-tv-VFI">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8X2-tv-VFI">
                                         <rect key="frame" x="700" y="602" width="250" height="30"/>
                                         <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="phonePad"/>

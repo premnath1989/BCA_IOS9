@@ -41,7 +41,7 @@ AndResidenceAddressCountry:(NSString*)TheResidenceAddressCountry AndOfficeAddres
 AndOfficeAddressTown:(NSString*)TheOfficeAddressTown AndOfficeAddressState:(NSString*)TheOfficeAddressState
 AndOfficeAddressPostCode:(NSString*)TheOfficeAddressPostCode
 AndOfficeAddressCountry:(NSString*)TheOfficeAddressCountry AndProspectEmail:(NSString*)TheProspectEmail AndProspectRemark:(NSString*)TheProspectRemark AndDateCreated:(NSString*)TheDateCreated AndDateModified:(NSString*)TheDateModified AndCreatedBy:(NSString*)TheCreatedBy AndModifiedBy:(NSString*)TheModifiedBy AndProspectOccupationCode:(NSString*)TheProspectOccupationCode
-AndProspectDOB:(NSString*)TheProspectDOB AndExactDuties:(NSString*)TheExactDuties AndGroup:(NSString *)TheGroup AndTitle:(NSString *)TheTitle AndIDTypeNo:(NSString *)TheIDTypeNo AndOtherIDType:(NSString *)TheOtherIDType AndOtherIDTypeNo:(NSString *)TheOtherIDTypeNo AndSmoker:(NSString *)TheSmoker AndAnnIncome:(NSString *)TheIncome AndBussType:(NSString *)TheBussType AndRace:(NSString*)TheRace AndMaritalStatus:(NSString*)TheMaritalStatus AndReligion:(NSString*)TheReligion AndNationality:(NSString*)TheNationality AndRegistrationNo:(NSString*)TheRegistrationNo AndRegistration:(NSString*)TheRegistration AndRegistrationDate:(NSString*)TheRegistrationDate AndRegistrationExempted:(NSString*)TheRegistrationExempted AndProspect_IsGrouping:(NSString*)TheProspect_IsGrouping AndCountryOfBirth:(NSString *)TheCountryOfBirth AndNIP:(NSString *)TheNIP AndBranchCode:(NSString *)TheBranchCode AndBranchName:(NSString *)TheBranchName AndKCU:(NSString *)TheKCU AndReferralSource:(NSString *)TheReferralSource AndReferralName:(NSString *)TheReferralName AndIdentitySubmitted:(NSString *)TheIdentitySubmitted AndIDExpirityDate:(NSString *)TheIDExpirityDate AndNPWPNo:(NSString *)TheNPWPNo
+AndProspectDOB:(NSString*)TheProspectDOB AndExactDuties:(NSString*)TheExactDuties AndGroup:(NSString *)TheGroup AndTitle:(NSString *)TheTitle AndIDTypeNo:(NSString *)TheIDTypeNo AndOtherIDType:(NSString *)TheOtherIDType AndOtherIDTypeNo:(NSString *)TheOtherIDTypeNo AndSmoker:(NSString *)TheSmoker AndAnnIncome:(NSString *)TheIncome AndBussType:(NSString *)TheBussType AndRace:(NSString*)TheRace AndMaritalStatus:(NSString*)TheMaritalStatus AndReligion:(NSString*)TheReligion AndNationality:(NSString*)TheNationality AndRegistrationNo:(NSString*)TheRegistrationNo AndRegistration:(NSString*)TheRegistration AndRegistrationDate:(NSString*)TheRegistrationDate AndRegistrationExempted:(NSString*)TheRegistrationExempted AndProspect_IsGrouping:(NSString*)TheProspect_IsGrouping AndCountryOfBirth:(NSString *)TheCountryOfBirth AndNIP:(NSString *)TheNIP AndBranchCode:(NSString *)TheBranchCode AndBranchName:(NSString *)TheBranchName AndKCU:(NSString *)TheKCU AndReferralSource:(NSString *)TheReferralSource AndReferralName:(NSString *)TheReferralName AndIdentitySubmitted:(NSString *)TheIdentitySubmitted AndIDExpirityDate:(NSString *)TheIDExpirityDate AndNPWPNo:(NSString *)TheNPWPNo AndKanwil:(NSString *)kanwil AndHomeVillage:(NSString *)homeVillage AndHomeDistrict:(NSString *)homeDistrict AndHomeProvince:(NSString *)homeProvince AndOfficeVillage:(NSString *)officeVillage AndOfficeDistrict:(NSString *)officeDistrict AndOfficePorvince:(NSString *)officeProvince AndSourceIncome:(NSString *)sourceIncome AndClientSegmentation:(NSString *)clientSegmentation
 {
     self = [super init];
     if(self)
@@ -104,6 +104,16 @@ AndProspectDOB:(NSString*)TheProspectDOB AndExactDuties:(NSString*)TheExactDutie
         self.IdentitySubmitted = TheIdentitySubmitted;
         self.IDExpirityDate = TheIDExpirityDate;
         self.NPWPNo = TheNPWPNo;
+        self.Kanwil = kanwil;
+        self.HomeVillage = homeVillage;
+        self.HomeDistrict = homeDistrict;
+        self.HomeProvicne = homeProvince;
+        self.OfficeVillage = officeVillage;
+        self.OfficeDistrict = officeDistrict;
+        self.OfficeProvicne = officeProvince;
+        self.SourceIncome = sourceIncome;
+        self.ClientSegmentation = clientSegmentation;
+
     }
     return self;
 }
