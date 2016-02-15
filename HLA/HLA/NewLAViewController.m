@@ -50,6 +50,8 @@
 @synthesize basicSINo,requestCommDate,requestIndexNo,requestLastIDPay,requestLastIDProf,requestSex,requestSmoker, strPA_CPA,payorAge;
 @synthesize LADate = _LADate;
 @synthesize datePopover = _datePopover;
+@synthesize planList = _planList;
+@synthesize planPopover = _planPopover;
 @synthesize dobPopover = _dobPopover;
 @synthesize OccupationList = _OccupationList;
 @synthesize OccupationListPopover = _OccupationListPopover;
@@ -72,7 +74,7 @@ id dobtemp;
     databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
     
     themeColour = [UIColor colorWithRed:242.0f/255.0f green:113.0f/255.0f blue:134.0f/255.0f alpha:1];
-    
+     _planList.delegate = self;
     [self setupUIElementDefaultSetting];
 }
 
@@ -715,6 +717,33 @@ id dobtemp;
 {
     [_delegate saveAll];
 }
+
+
+- (IBAction)NamaProdukDropDown:(id)sender;
+{
+    [self resignFirstResponder];
+    [self.view endEditing:YES];
+    
+    Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
+    id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
+    [activeInstance performSelector:@selector(dismissKeyboard)];
+    
+    if (_planList == nil) {
+        self.planList = [[PlanList alloc] init];
+        self.planList.TradOrEver = @"TRAD";
+        _planList.delegate = self;
+        self.planPopover = [[UIPopoverController alloc] initWithContentViewController:_planList];
+    }
+    
+    CGRect rect = [sender frame];
+    rect.origin.y = [sender frame].origin.y + 30;
+    
+    [self.planPopover setPopoverContentSize:CGSizeMake(350.0f, 200.0f)];
+    [self.planPopover presentPopoverFromRect:rect  inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    
+    
+}
+
 
 - (IBAction)selectProspect:(id)sender
 {
