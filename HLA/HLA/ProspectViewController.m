@@ -412,6 +412,7 @@ bool RegDatehandling;
             UITextField *textField = (UITextField *)view;
             textField.layer.borderColor=borderColor.CGColor;
             textField.layer.borderWidth=1.0;
+            [textField setFont:font];
             
             UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
             textField.leftView = paddingView;

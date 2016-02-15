@@ -363,6 +363,7 @@ NSMutableArray *DelGroupArr;
         if ([view isKindOfClass:[UIButton class]]) {
             UIButton *button = (UIButton *)view;
             [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            [button.titleLabel setFont:font];
         }
     }
     
@@ -372,6 +373,7 @@ NSMutableArray *DelGroupArr;
             textField.layer.borderColor=borderColor.CGColor;
             textField.layer.borderWidth=1.0;
             textField.delegate=self;
+            [textField setFont:font];
             
             UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
             textField.leftView = paddingView;
@@ -380,6 +382,7 @@ NSMutableArray *DelGroupArr;
         if ([view isKindOfClass:[UIButton class]]) {
             UIButton *button = (UIButton *)view;
             [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            [button.titleLabel setFont:font];
         }
     }
     
@@ -398,6 +401,7 @@ NSMutableArray *DelGroupArr;
         if ([view isKindOfClass:[UIButton class]]) {
             UIButton *button = (UIButton *)view;
             [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            [button.titleLabel setFont:font];
         }
 
     }
@@ -417,6 +421,7 @@ NSMutableArray *DelGroupArr;
         if ([view isKindOfClass:[UIButton class]]) {
             UIButton *button = (UIButton *)view;
             [button.titleLabel setTextColor:[UIColor blackColor]];
+            [button.titleLabel setFont:font];
         }
 
     }
@@ -436,6 +441,7 @@ NSMutableArray *DelGroupArr;
         if ([view isKindOfClass:[UIButton class]]) {
             UIButton *button = (UIButton *)view;
             [button.titleLabel setTextColor:[UIColor blackColor]];
+            [button.titleLabel setFont:font];
         }
 
     }
@@ -462,6 +468,7 @@ NSMutableArray *DelGroupArr;
         if ([view isKindOfClass:[UIButton class]]) {
             UIButton *button = (UIButton *)view;
             [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            [button.titleLabel setFont:font];
         }
     }
 }
@@ -518,6 +525,22 @@ NSMutableArray *DelGroupArr;
     outletReferralSource.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     outletReferralSource.imageEdgeInsets = UIEdgeInsetsMake(0., outletReferralSource.frame.size.width - (24 + 10.0), 0., 0.);
     outletReferralSource.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
+    
+    _outletVIPClass.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    _outletVIPClass.imageEdgeInsets = UIEdgeInsetsMake(0., _outletVIPClass.frame.size.width - (24 + 10.0), 0., 0.);
+    _outletVIPClass.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
+    
+    _outletSourceIncome.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    _outletSourceIncome.imageEdgeInsets = UIEdgeInsetsMake(0., _outletSourceIncome.frame.size.width - (24 + 10.0), 0., 0.);
+    _outletSourceIncome.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
+    
+    _outletBranchCode.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    _outletBranchCode.imageEdgeInsets = UIEdgeInsetsMake(0., _outletBranchCode.frame.size.width - (24 + 10.0), 0., 0.);
+    _outletBranchCode.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
+    
+    _outletBranchName.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    _outletBranchName.imageEdgeInsets = UIEdgeInsetsMake(0., _outletBranchName.frame.size.width - (24 + 10.0), 0., 0.);
+    _outletBranchName.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
@@ -2713,12 +2736,14 @@ NSMutableArray *DelGroupArr;
     //added by faiz//
     [outletExpiryDate setTitle:pp.IDExpirityDate forState:UIControlStateNormal];
     txtNip.text=pp.NIP;
-    txtBranchCode.text=pp.BranchCode;
-    txtBranchName.text=pp.BranchName;
-    txtKanwil.text=@"";
+    //txtBranchCode.text=pp.BranchCode;
+    //txtBranchName.text=pp.BranchName;
+    [_outletBranchCode setTitle:pp.BranchCode forState:UIControlStateNormal];
+    [_outletBranchName setTitle:pp.BranchName forState:UIControlStateNormal];
+    [outletReferralSource setTitle:pp.ReferralSource forState:UIControlStateNormal];
+    txtKanwil.text=pp.Kanwil;
     txtKcu.text=pp.KCU;
     txtReferralName.text=pp.ReferralName;
-    outletReferralSource.titleLabel.text=pp.ReferralSource;
     //segReferralType.text=pp.;
     txtNPWPNo.text=pp.NPWPNo;
     //end of added by faiz//
@@ -3489,6 +3514,97 @@ NSMutableArray *DelGroupArr;
     
     [self.nationalityPopover presentPopoverFromRect:[sender bounds]  inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
+
+//added by faiz
+- (IBAction)actionSourceIncome:(id)sender
+{
+    
+    [self resignFirstResponder];
+    [self.view endEditing:YES];
+    
+    NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
+    [ClientProfile setObject:@"YES" forKey:@"isNew"];
+    
+    Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
+    id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
+    [activeInstance performSelector:@selector(dismissKeyboard)];
+    
+    if (_sourceIncome == nil) {
+        _sourceIncome = [[SourceIncome alloc] initWithStyle:UITableViewStylePlain];
+        _sourceIncome.delegate = self;
+        _sourceIncomePopover = [[UIPopoverController alloc] initWithContentViewController:_sourceIncome];
+    }
+    [_sourceIncomePopover presentPopoverFromRect:[sender bounds]  inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
+- (IBAction)actionBranchInfo:(UIButton *)sender
+{
+    
+    [self resignFirstResponder];
+    [self.view endEditing:YES];
+    
+    NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
+    [ClientProfile setObject:@"YES" forKey:@"isNew"];
+    
+    Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
+    id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
+    [activeInstance performSelector:@selector(dismissKeyboard)];
+    
+    //if (_branchInfo == nil) {
+    _branchInfo = [[BranchInfo alloc] initWithStyle:UITableViewStylePlain];
+    _branchInfo.delegate = self;
+    [_branchInfo setData:[NSNumber numberWithInt:sender.tag]];
+    [_branchInfo.tableView reloadData];
+    _branchInfoPopover = [[UIPopoverController alloc] initWithContentViewController:_branchInfo];
+    //}
+    [_branchInfoPopover presentPopoverFromRect:[sender bounds]  inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
+
+- (IBAction)actionVIPClass:(id)sender
+{
+    
+    [self resignFirstResponder];
+    [self.view endEditing:YES];
+    
+    NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
+    [ClientProfile setObject:@"YES" forKey:@"isNew"];
+    
+    Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
+    id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
+    [activeInstance performSelector:@selector(dismissKeyboard)];
+    
+    if (_vipClass == nil) {
+        _vipClass = [[VIPClass alloc] initWithStyle:UITableViewStylePlain];
+        _vipClass.delegate = self;
+        _vipClassPopover = [[UIPopoverController alloc] initWithContentViewController:_vipClass];
+    }
+    [_vipClassPopover presentPopoverFromRect:[sender bounds]  inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
+- (IBAction)actionReferralSource:(id)sender
+{
+    
+    [self resignFirstResponder];
+    [self.view endEditing:YES];
+    
+    NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
+    [ClientProfile setObject:@"YES" forKey:@"isNew"];
+    
+    Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
+    id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
+    [activeInstance performSelector:@selector(dismissKeyboard)];
+    
+    if (_referralSource == nil) {
+        _referralSource = [[ReferralSource alloc] initWithStyle:UITableViewStylePlain];
+        _referralSource.delegate = self;
+        _referralSourcePopover = [[UIPopoverController alloc] initWithContentViewController:_referralSource];
+    }
+    [_referralSourcePopover presentPopoverFromRect:[sender bounds]  inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
+//end of add by faiz
+
 
 - (IBAction)actionRace:(id)sender
 {
@@ -11886,6 +12002,53 @@ NSMutableArray *DelGroupArr;
 
 
 #pragma mark - delegate
+-(void)selectedBranch:(NSString *)branchCode BranchName:(NSString *)branchName BranchStatus:(NSString *)branchStatus{
+    /*if([VIPClass isEqualToString:@"- SELECT -"]) {
+     _outletVIPClass.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+     } else {
+     _outletVIPClass.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+     }*/
+    _outletBranchCode.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    _outletBranchName.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    [_outletBranchCode setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",branchCode]forState:UIControlStateNormal];
+    [_outletBranchName setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",branchName]forState:UIControlStateNormal];
+    [txtKcu setText:branchStatus];
+    [_branchInfoPopover dismissPopoverAnimated:YES];
+}
+
+-(void)selectedVIPClass:(NSString *)VIPClass{
+    _outletVIPClass.titleLabel.text = VIPClass;
+    if([VIPClass isEqualToString:@"- SELECT -"]) {
+        _outletVIPClass.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+    } else {
+        _outletVIPClass.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    }
+    [_outletVIPClass setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",VIPClass]forState:UIControlStateNormal];
+    [_vipClassPopover dismissPopoverAnimated:YES];
+}
+
+
+-(void)selectedReferralSource:(NSString *)referralSource{
+    outletReferralSource.titleLabel.text = referralSource;
+    if([referralSource isEqualToString:@"- SELECT -"]) {
+        outletReferralSource.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+    } else {
+        outletReferralSource.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    }
+    [outletReferralSource setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",referralSource]forState:UIControlStateNormal];
+    [_referralSourcePopover dismissPopoverAnimated:YES];
+}
+
+-(void)selectedSourceIncome:(NSString *)sourceIncome{
+    _outletSourceIncome.titleLabel.text = sourceIncome;
+    if([sourceIncome isEqualToString:@"- SELECT -"]) {
+        _outletSourceIncome.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+    } else {
+        _outletSourceIncome.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    }
+    [_outletSourceIncome setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",sourceIncome]forState:UIControlStateNormal];
+    [_sourceIncomePopover dismissPopoverAnimated:YES];
+}
 
 -(void)GenerateDOB {
 	txtIDType.text = [txtIDType.text stringByReplacingOccurrencesOfString:@" " withString:@""];

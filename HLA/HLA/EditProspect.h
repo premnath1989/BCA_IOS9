@@ -21,13 +21,17 @@
 #import "MaritalStatus.h"
 #import "Religion.h"
 #import "ClearData.h"
+#import "SourceIncome.h"
+#import "BranchInfo.h"
+#import "VIPClass.h"
+#import "ReferralSource.h"
 
 @class DataTable,DBController;
 @protocol EditProspectDelegate
 - (void)FinishEdit;
 @end
 
-@interface EditProspect : UIViewController<OccupationListDelegate,IDTypeDelegate,SIDateDelegate,UITextViewDelegate,TitleDelegate,GroupDelegate,UITextFieldDelegate,NatinalityDelegate,CountryDelegate,RaceDelegate,ReligionDelegate,MaritalStatusDelegate, Country2Delegate>{
+@interface EditProspect : UIViewController<OccupationListDelegate,IDTypeDelegate,SIDateDelegate,UITextViewDelegate,TitleDelegate,GroupDelegate,UITextFieldDelegate,NatinalityDelegate,CountryDelegate,RaceDelegate,ReligionDelegate,MaritalStatusDelegate, Country2Delegate,SourceIncomeDelegate,VIPClassDelegate,ReferralSourceDelegate,BranchInfoDelegate>{
     NSString *databasePath;
     sqlite3 *contactDB;
     UITextField *activeField;
@@ -37,6 +41,14 @@
     OccupationList *_OccupationList;
     Nationality *_nationalityList;
     Nationality *_nationalityList2;
+    
+    //added  by faiz
+    SourceIncome *_sourceIncome;
+    BranchInfo *_branchInfo;
+    VIPClass *_vipClass;
+    ReferralSource *_referralSource;
+    //end of add
+    
     UIPopoverController *_GroupPopover;
     UIPopoverController *_TitlePickerPopover;
     UIPopoverController *_SIDatePopover;
@@ -44,6 +56,12 @@
     UIPopoverController *_CountryListPopover;
     UIPopoverController *_nationalityPopover;
     UIPopoverController *_nationalityPopover2;
+    //added by faiz
+    UIPopoverController *_sourceIncomePopover;
+    UIPopoverController *_branchInfoPopover;
+    UIPopoverController *_vipClassPopover;
+    UIPopoverController *_referralSourcePopover;
+    //end of added by faiz
     UIPopoverController *_ReligionListPopover;
     UIPopoverController *_RaceListPopover;
     UIPopoverController *_MaritalStatusPopover;
@@ -177,8 +195,18 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtKanwil;
 @property (weak, nonatomic) IBOutlet UITextField *txtKcu;
 @property (weak, nonatomic) IBOutlet UITextField *txtReferralName;
+@property (weak, nonatomic) IBOutlet UITextField *txtHomeVillage;
+@property (weak, nonatomic) IBOutlet UITextField *txtHomeDistrict;
+@property (weak, nonatomic) IBOutlet UITextField *txtHomeProvince;
+@property (weak, nonatomic) IBOutlet UITextField *txtOfficeVillage;
+@property (weak, nonatomic) IBOutlet UITextField *txtOfficeDistrict;
+@property (weak, nonatomic) IBOutlet UITextField *txtOfficeProvince;
 @property (weak, nonatomic) IBOutlet UIButton *outletReferralSource;
 @property (weak, nonatomic) IBOutlet UIButton *outletExpiryDate;
+@property (weak, nonatomic) IBOutlet UIButton *outletSourceIncome;
+@property (weak, nonatomic) IBOutlet UIButton *outletVIPClass;
+@property (weak, nonatomic) IBOutlet UIButton *outletBranchCode;
+@property (weak, nonatomic) IBOutlet UIButton *outletBranchName;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *segReferralType;
 @property (weak, nonatomic) IBOutlet UITextField *txtNPWPNo;
 /*end of added by faiz*/

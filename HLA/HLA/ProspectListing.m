@@ -35,6 +35,7 @@
 @synthesize GroupPopover = _GroupPopover;
 @synthesize dataMobile,dataPrefix,dataIndex;
 @synthesize OrderBy;
+//@synthesize SIDate = _SIDate;
 
 int RecDelete = 0;
 int totalView = 20;
@@ -46,6 +47,14 @@ MBProgressHUD *HUD;
 {
     [super viewDidLoad];
     borderColor=[[UIColor alloc]initWithRed:250.0/255.0 green:175.0/255.0 blue:50.0/255.0 alpha:1.0];
+    
+    _outletDOB.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    _outletDOB.imageEdgeInsets = UIEdgeInsetsMake(0., _outletDOB.frame.size.width - (24 + 10.0), 0., 0.);
+    _outletDOB.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
+    _outletDOB.layer.borderColor = borderColor.CGColor;
+    _outletDOB.layer.borderWidth = 1.0;
+    
+    
     [self setTextfieldBorder];
 
     [self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
@@ -116,7 +125,28 @@ MBProgressHUD *HUD;
 }
 
 #pragma mark - `added by faiz
+
 //added by faiz
+- (IBAction)btnDOB:(id)sender
+{
+    [self resignFirstResponder];
+    [self.view endEditing:YES];
+    
+    Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
+    id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
+    [activeInstance performSelector:@selector(dismissKeyboard)];
+    
+    if (_SIDate == Nil) {
+        UIStoryboard *clientProfileStoryBoard = [UIStoryboard storyboardWithName:@"ClientProfileStoryboard" bundle:nil];
+        _SIDate = [clientProfileStoryBoard instantiateViewControllerWithIdentifier:@"SIDate"];
+        _SIDate.delegate = self;
+        _SIDatePopover = [[UIPopoverController alloc] initWithContentViewController:_SIDate];
+    }
+    
+    [_SIDatePopover setPopoverContentSize:CGSizeMake(300.0f, 255.0f)];
+    [_SIDatePopover presentPopoverFromRect:[sender bounds]  inView:sender permittedArrowDirections:UIPopoverArrowDirectionLeft animated:NO];
+}
+
 -(void)createBlackStatusBar{
     CGFloat statusBarHeight = 20.0;
     UIView* colorView = [[UIView alloc]initWithFrame:CGRectMake(0, -statusBarHeight, self.view.bounds.size.width, statusBarHeight)];
@@ -175,8 +205,6 @@ MBProgressHUD *HUD;
 	if (ProspectTableData.count != 0) {
 		if (indexPath.row == [ProspectTableData count]) {
 			//cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-            UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-			
 			if ([ProspectTableData count] == TotalData) {
 				cell.textLabel.text = @"No More records Available";
 			}
@@ -187,8 +215,6 @@ MBProgressHUD *HUD;
 			cell.textLabel.textColor = [UIColor grayColor];
 			cell.textLabel.font = [UIFont boldSystemFontOfSize:14];
             cell.userInteractionEnabled = NO;
-            return cell;
-		
 		}
         else if(indexPath.row <[ProspectTableData count]){
             static NSString *CellIdentifier = @"Cell";
@@ -251,6 +277,7 @@ MBProgressHUD *HUD;
             [cell1.labelDateCreated setText:pp.DateCreated];
             [cell1.labelDateModified setText:pp.DateModified];
             [cell1.labelTimeRemaining setText:DateRemaining];
+            cell=cell1;
            
             /*cell.userInteractionEnabled = YES;
 			cell.textLabel.text = nil;
@@ -484,10 +511,7 @@ MBProgressHUD *HUD;
 			// ADD HERE
 			[spinner stopAnimating];
 			spinner.hidden=YES;
-			
-			//pp = Nil;
-            return cell1;
-
+			pp = Nil;
         }
         else {
             if (!self.noMoreResultsAvail) {
@@ -587,12 +611,54 @@ MBProgressHUD *HUD;
 	[db close];
 }
 
+#pragma mark - delegate
+-(void)DateSelected:(NSString *)strDate :(NSString *)dbDate
+{
+    NSDateFormatter* df = [[NSDateFormatter alloc] init];
+    [df setDateFormat:@"dd/MM/yyyy"];
+    
+    NSDate *d = [NSDate date];
+    NSDate* d2 = [df dateFromString:strDate];
+    
+    NSDateFormatter *formatter;
+    NSString        *dateString;
+    NSString        *clientDateString;
+    
+    formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"dd/MM/yyyy"];
+    
+    NSDateFormatter* clientDateFormmater = [[NSDateFormatter alloc] init];
+    [clientDateFormmater setDateFormat:@"yyyy-MM-dd"];
+    
+    dateString = [formatter stringFromDate:[NSDate date]];
+    clientDateString = [clientDateFormmater stringFromDate:d2];
+    
+    if ([d compare:d2] == NSOrderedAscending){
+        NSString *validationTanggalLahirFuture=@"Tanggal lahir tidak dapat lebih besar dari tanggal hari ini";
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
+                                                        message:validationTanggalLahirFuture delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil];
+        [alert show];
+    }
+    else{
+        _outletDOB.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        [_outletDOB setTitle:clientDateString forState:UIControlStateNormal];
+    }
+    df = Nil, d = Nil, d2 = Nil;
+}
+
+-(void)CloseWindow
+{
+    [self resignFirstResponder];
+    [self.view endEditing:YES];
+    [_SIDatePopover dismissPopoverAnimated:YES];
+}
+
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     RecDelete = RecDelete+1;
-      
+    
     if ([self.myTableView isEditing] == TRUE ) {
         BOOL gotRowSelected = FALSE;
         
@@ -1053,11 +1119,11 @@ MBProgressHUD *HUD;
 
 -(void) ReloadTableData
 {
-    ProspectTableData=[modelProspectProfile getProspectProfile];
     [self getTotal];
+    [ProspectTableData removeAllObjects];
+    ProspectTableData=[modelProspectProfile getProspectProfile];
     [self getMobileNo];
     [self.myTableView reloadData];
-    [HUD hide:YES];
 }
 
 -(void) FinishEdit
@@ -1151,7 +1217,7 @@ MBProgressHUD *HUD;
     }
     else
     {
-        if (sqlite3_open([databasePath UTF8String], &contactDB) == SQLITE_OK) {
+        /*if (sqlite3_open([databasePath UTF8String], &contactDB) == SQLITE_OK) {
             querySQL = @"SELECT * FROM prospect_profile";
 			
 			if (![txtIDTypeNo.text isEqualToString:@""] && ![nametxt.text isEqualToString:@""] && (![trim_group isEqualToString:@""] && ![trim_group isEqualToString:@"- SELECT -"])) {
@@ -1388,7 +1454,8 @@ MBProgressHUD *HUD;
             }
             sqlite3_close(contactDB);
             querySQL = Nil;
-        }
+        }*/
+        ProspectTableData=[modelProspectProfile searchProspectProfileByName:nametxt.text BranchName:_txtBranchName.text DOB:_outletDOB.titleLabel.text];
     }
     [self getMobileNo];
     
@@ -1420,14 +1487,16 @@ MBProgressHUD *HUD;
     [self hideKeyboard];
     nametxt.text = @"";
     txtIDTypeNo.text = @"";
+    _txtBranchName.text = @"";
+    [_outletDOB setTitle:@"" forState:UIControlStateNormal];
+    
     idTypeLabel.highlighted= false;
     [btnGroup setTitle:@"- SELECT -" forState:UIControlStateNormal];
     btnGroup.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
 	
 	totalView = 20;
     [self ReloadTableData];
-	[self performSelector:@selector(loadDataDelayed) withObject:nil afterDelay:2];
-	
+//	[self performSelector:@selector(loadDataDelayed) withObject:nil afterDelay:2];
 }
 
 - (IBAction)editPressed:(id)sender
