@@ -68,6 +68,28 @@
 	
 }
 
+-(void) setFirstLogin
+{
+    sqlite3_stmt *statement;
+    if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
+    {
+        //NSString *querySQL = [NSString stringWithFormat: @"UPDATE User_Profile set AgentStatus = \"1\" WHERE "
+        //"AgentLoginID=\"hla\" "];
+        NSString *querySQL = [NSString stringWithFormat: @"UPDATE User_Profile set FirstLogin = \"0\" "];
+        
+        if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK){
+            if (sqlite3_step(statement) == SQLITE_DONE){
+                
+            }
+            sqlite3_finalize(statement);
+        }
+        
+        sqlite3_close(contactDB);
+        querySQL = Nil;
+    }
+    statement = nil;
+}
+
 -(void)hideKeyboard{
 	Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
 	id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
@@ -94,9 +116,6 @@
     
     return NO;
 }
-
-
-
 
 -(void)validateExistingPwd
 {

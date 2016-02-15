@@ -30,6 +30,7 @@
 #import "Reachability.h"
 #import <SystemConfiguration/SystemConfiguration.h>
 #import "LoginMacros.h"
+#import "WebServiceUtilities.h"
 
 @interface Login ()
 
@@ -54,6 +55,12 @@ NSString *ProceedStatus = @"";
 
     loginDB = [[loginDBManagement alloc]init];
     
+    indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    indicator.frame = CGRectMake(0.0, 0.0, 80.0, 80.0);
+    indicator.center = self.view.center;
+    [self.view addSubview:indicator];
+    [indicator bringSubviewToFront:self.view];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = TRUE;
     /*
      * Edited By Erwin
      * Desc : move it to LoginDBManagement.m
@@ -68,7 +75,8 @@ NSString *ProceedStatus = @"";
 //    [self makeDBCopy];
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(forgotPassword:)];
-    tapGesture.numberOfTapsRequired = 1;
+//    tapGesture.numberOfTapsRequired = 1;
+    [lblForgotPwd setUserInteractionEnabled:YES];
     [lblForgotPwd addGestureRecognizer:tapGesture];
     
     
@@ -123,9 +131,6 @@ NSString *ProceedStatus = @"";
                                                         fromDate:StartDate
                                                           toDate:endDate
                                                          options:0];
-    
-    
-    
     
     labelVersion.text = @"BCA V 1.4.0.240";
     labelVers = labelVersion.text;
@@ -217,8 +222,6 @@ static NSString *labelVers;
     [activeInstance performSelector:@selector(dismissKeyboard)];
     
 }
-
-
 
 
 - (void) doOnlineLogin
@@ -324,8 +327,47 @@ static NSString *labelVers;
     
 }
 
-- (void)forgotPassword:(id)sender
+- (void) operation:(AgentWSSoapBindingOperation *)operation
+                completedWithResponse:(AgentWSSoapBindingResponse *)response
 {
+    [indicator stopAnimating];
+    NSArray *responseBodyParts = response.bodyParts;
+    for(id bodyPart in responseBodyParts) {
+    
+        /****
+         * SOAP Fault Error
+         ****/
+        if ([bodyPart isKindOfClass:[SOAPFault class]]) {
+            
+            //You can get the error like this:
+            NSString* errorMesg = ((SOAPFault *)bodyPart).simpleFaultString;
+            UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Please check your connection" message:errorMesg delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
+            [alert show];
+        }
+        
+        /****
+         * is it AgentWS_SendForgotPasswordResponse
+         ****/
+        else if([bodyPart isKindOfClass:[AgentWS_SendForgotPasswordResponse class]]) {
+            AgentWS_SendForgotPasswordResponse* rateResponse = bodyPart;
+            UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Success!"message:[NSString stringWithFormat:@"%@ that new Password has been sent to your email",rateResponse.SendForgotPasswordResult] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alert show];
+        }
+        
+        /****
+         * is it AgentWS_SendForgotPasswordResponse
+         ****/
+        else if([bodyPart isKindOfClass:[AgentWS_SendForgotPasswordResponse class]]) {
+            AgentWS_ValidateLoginResponse* rateResponse = bodyPart;
+            UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Success!"message:[NSString stringWithFormat:@"%@ that you are logged in",rateResponse.ValidateLoginResult] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alert show];
+        }
+    }
+}
+
+- (void)forgotPassword:(UIGestureRecognizer*)gestureRecognizer
+{
+    
     if (txtUsername.text.length <= 0) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
                                                         message:@"User ID is required" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil ];
@@ -333,33 +375,11 @@ static NSString *labelVers;
         alert = Nil;
     }
     else {
-        switch ([loginDB SearchAgent:txtUsername.text]) {
-            case DATABASE_ERROR:
-            {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Database is Error" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil ];
-                [alert show];
-                break;
-            }
-            case AGENT_IS_FOUND:
-            {
-                ForgotPwd *forgotView = [self.storyboard
-                                         instantiateViewControllerWithIdentifier:@"ForgotPwd"];
-                forgotView.modalPresentationStyle = UIModalPresentationFormSheet;
-                forgotView.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-                forgotView.LoginID = txtUsername.text;
-                [self presentModalViewController:forgotView animated:NO];
-                forgotView.view.superview.bounds = CGRectMake(0, 0, 550, 600);
-                break;
-            }
-            case AGENT_IS_NOT_FOUND:
-            {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Username does not exist. Unable to retrieve password." delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil ];
-                [alert show];
-                break;
-            }
-            default:
-                break;
-        }
+        [indicator startAnimating];
+        
+        WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
+        [webservice forgotPassword:txtUsername.text delegate:self];
+    }
         /*
          * Edited by : Erwin
          * Desc : call function "SearchAgent" from LoginDBManagement
@@ -395,12 +415,7 @@ static NSString *labelVers;
 //            querySQL = Nil;
 //            
 //        }
-        
-        
-    }
-    
 }
-
 
 -(void)IsFirstDevice
 {
@@ -556,7 +571,7 @@ static NSString *labelVers;
     NSString *postLength = [NSString stringWithFormat:@"%d",[postData length]];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     
-    NSString *url = [NSString stringWithFormat:@"http://192.168.0.140/AgentWebService/AgentMgmt.asmx/ValidateLogin"];
+    NSString *url = [NSString stringWithFormat:@"http://192.168.2.131/AgentWebService/AgentMgmt.asmx/ValidateLogin"];
     
     [request setURL:[NSURL URLWithString:url]];
     [request setHTTPMethod:@"POST"];

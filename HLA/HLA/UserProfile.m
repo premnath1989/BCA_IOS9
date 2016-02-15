@@ -37,6 +37,7 @@
 @synthesize datePopover = _datePopover;
 @synthesize DatePicker = _DatePicker;
 @synthesize previousElementName, elementName;
+@synthesize outletChgPassword;
 
 id temp;
 
@@ -396,7 +397,13 @@ id temp;
     [self.view endEditing:TRUE];
     [self resignFirstResponder];
     [self updateUserData ];
-	
+}
+
+- (IBAction)btnChgPassword:(id)sender
+{
+    [self.view endEditing:TRUE];
+    [self resignFirstResponder];
+    [self updateUserData ];
 }
 
 - (IBAction)btnContractDatePressed:(id)sender     //--bob

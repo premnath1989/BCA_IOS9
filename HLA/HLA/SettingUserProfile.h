@@ -48,6 +48,7 @@
 - (IBAction)btnClose:(id)sender;
 - (IBAction)btnSave:(id)sender;
 - (IBAction)btnDone:(id)sender;
+- (IBAction)ChangePassword:(id)sender;
 
 //--bob
 @property (strong, nonatomic) IBOutlet UIScrollView *myScrollView;

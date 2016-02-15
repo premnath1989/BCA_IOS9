@@ -72,4 +72,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtAgencyPortalPwd;
 
 
+@property (weak, nonatomic) IBOutlet UIButton *outletChgPassword;
+
+
 @end

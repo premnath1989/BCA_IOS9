@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import "AFNetworking.h"
 #import "SIUtilities.h"
+#import "ChangePassword.h"
 
 @interface SettingUserProfile ()
 
@@ -147,6 +148,17 @@ id temp;
 			else if (alertView.tag == 3){
 				exit(0);
 			}
+}
+
+- (IBAction)ChangePassword:(id)sender
+{
+    ChangePassword * UserProfileView = [self.storyboard instantiateViewControllerWithIdentifier:@"ChangePwd"];
+    UserProfileView.modalPresentationStyle = UIModalPresentationPageSheet;
+    UserProfileView.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self presentViewController:UserProfileView animated:YES completion:nil];
+    
+    UserProfileView.view.superview.frame = CGRectMake(150, 50, 700, 748);
+    UserProfileView = nil;
 }
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField

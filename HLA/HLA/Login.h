@@ -11,6 +11,7 @@
 #import <sqlite3.h>
 #import "Reachability.h"
 #import "loginDBManagement.h"
+#import "AgentWS.h"
 
 @protocol LoginDelegate
 - (void)Dismiss: (NSString *)ViewToBePresented;
@@ -35,7 +36,7 @@ static NSString* APP_TYPE_HLA_FAST = @"HLA_FAST";
 static NSString* DATE_FORMAT = @"yyyy-MM-dd";
 
 
-@interface Login : UIViewController<NSXMLParserDelegate, UITextFieldDelegate>
+@interface Login : UIViewController<NSXMLParserDelegate, UITextFieldDelegate, AgentWSSoapBindingResponseDelegate>
 {
 //    NSString *databasePath;
 //    NSString *RatesDatabasePath;
@@ -82,6 +83,7 @@ static NSString* DATE_FORMAT = @"yyyy-MM-dd";
     int xmlType;
     
     BOOL showLogout;
+    UIActivityIndicatorView *indicator;
 }
 
 

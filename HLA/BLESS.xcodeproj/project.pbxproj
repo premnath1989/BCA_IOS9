@@ -399,6 +399,14 @@
 		A9E550A21C591E8000C9DAC2 /* libSPSignDoc_4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A9E550A11C591E8000C9DAC2 /* libSPSignDoc_4.0.a */; };
 		A9E550A51C591F7900C9DAC2 /* Expand Arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A9E550A31C591F7900C9DAC2 /* Expand Arrow.png */; };
 		A9E550A61C591F7900C9DAC2 /* Expand Arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A9E550A41C591F7900C9DAC2 /* Expand Arrow@2x.png */; };
+		AA2BB5FE1C70598E00A5256E /* SynchDaysCounter.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2BB5FD1C70598E00A5256E /* SynchDaysCounter.m */; };
+		AAAC9D021C717CCF002E3190 /* AgentWS.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAC9CF71C717CCF002E3190 /* AgentWS.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		AAAC9D031C717CCF002E3190 /* NSDate+ISO8601Parsing.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAC9CF91C717CCF002E3190 /* NSDate+ISO8601Parsing.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		AAAC9D041C717CCF002E3190 /* NSDate+ISO8601Unparsing.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAC9CFB1C717CCF002E3190 /* NSDate+ISO8601Unparsing.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		AAAC9D051C717CCF002E3190 /* USAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAC9CFD1C717CCF002E3190 /* USAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		AAAC9D061C717CCF002E3190 /* USGlobals.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAC9CFF1C717CCF002E3190 /* USGlobals.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		AAAC9D071C717CCF002E3190 /* xsd.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAC9D011C717CCF002E3190 /* xsd.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		AAAC9D0A1C71BAF3002E3190 /* WebServiceUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAC9D091C71BAF3002E3190 /* WebServiceUtilities.m */; };
 		AAD5455F1C6443080029631D /* LoginDBManagement.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD5455E1C6443080029631D /* LoginDBManagement.m */; };
 		AAFEE0351C6C1EC900702F64 /* TableManagement.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFEE0341C6C1EC900702F64 /* TableManagement.m */; };
 		AAFEE0381C6C239E00702F64 /* ColumnHeaderStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFEE0371C6C239E00702F64 /* ColumnHeaderStyle.m */; };
@@ -1469,6 +1477,22 @@
 		A9E550A11C591E8000C9DAC2 /* libSPSignDoc_4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSPSignDoc_4.0.a; sourceTree = "<group>"; };
 		A9E550A31C591F7900C9DAC2 /* Expand Arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Expand Arrow.png"; sourceTree = "<group>"; };
 		A9E550A41C591F7900C9DAC2 /* Expand Arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Expand Arrow@2x.png"; sourceTree = "<group>"; };
+		AA2BB5FC1C70597300A5256E /* SynchdaysCounter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SynchdaysCounter.h; sourceTree = "<group>"; };
+		AA2BB5FD1C70598E00A5256E /* SynchDaysCounter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SynchDaysCounter.m; sourceTree = "<group>"; };
+		AAAC9CF61C717CCF002E3190 /* AgentWS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentWS.h; sourceTree = "<group>"; };
+		AAAC9CF71C717CCF002E3190 /* AgentWS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgentWS.m; sourceTree = "<group>"; };
+		AAAC9CF81C717CCF002E3190 /* NSDate+ISO8601Parsing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+ISO8601Parsing.h"; sourceTree = "<group>"; };
+		AAAC9CF91C717CCF002E3190 /* NSDate+ISO8601Parsing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+ISO8601Parsing.m"; sourceTree = "<group>"; };
+		AAAC9CFA1C717CCF002E3190 /* NSDate+ISO8601Unparsing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+ISO8601Unparsing.h"; sourceTree = "<group>"; };
+		AAAC9CFB1C717CCF002E3190 /* NSDate+ISO8601Unparsing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+ISO8601Unparsing.m"; sourceTree = "<group>"; };
+		AAAC9CFC1C717CCF002E3190 /* USAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAdditions.h; sourceTree = "<group>"; };
+		AAAC9CFD1C717CCF002E3190 /* USAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAdditions.m; sourceTree = "<group>"; };
+		AAAC9CFE1C717CCF002E3190 /* USGlobals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USGlobals.h; sourceTree = "<group>"; };
+		AAAC9CFF1C717CCF002E3190 /* USGlobals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USGlobals.m; sourceTree = "<group>"; };
+		AAAC9D001C717CCF002E3190 /* xsd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xsd.h; sourceTree = "<group>"; };
+		AAAC9D011C717CCF002E3190 /* xsd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = xsd.m; sourceTree = "<group>"; };
+		AAAC9D081C71BAE5002E3190 /* WebServiceUtilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebServiceUtilities.h; sourceTree = "<group>"; };
+		AAAC9D091C71BAF3002E3190 /* WebServiceUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebServiceUtilities.m; sourceTree = "<group>"; };
 		AAD5455D1C6442F80029631D /* loginDBManagement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = loginDBManagement.h; sourceTree = "<group>"; };
 		AAD5455E1C6443080029631D /* LoginDBManagement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginDBManagement.m; sourceTree = "<group>"; };
 		AAFEE0331C6C1EBD00702F64 /* TableManagement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TableManagement.h; sourceTree = "<group>"; };
@@ -3268,12 +3292,35 @@
 			name = "HLADB Model";
 			sourceTree = "<group>";
 		};
+		AAAC9CF51C717C45002E3190 /* WebServices */ = {
+			isa = PBXGroup;
+			children = (
+				AAAC9CF61C717CCF002E3190 /* AgentWS.h */,
+				AAAC9CF71C717CCF002E3190 /* AgentWS.m */,
+				AAAC9CF81C717CCF002E3190 /* NSDate+ISO8601Parsing.h */,
+				AAAC9CF91C717CCF002E3190 /* NSDate+ISO8601Parsing.m */,
+				AAAC9CFA1C717CCF002E3190 /* NSDate+ISO8601Unparsing.h */,
+				AAAC9CFB1C717CCF002E3190 /* NSDate+ISO8601Unparsing.m */,
+				AAAC9CFC1C717CCF002E3190 /* USAdditions.h */,
+				AAAC9CFD1C717CCF002E3190 /* USAdditions.m */,
+				AAAC9CFE1C717CCF002E3190 /* USGlobals.h */,
+				AAAC9CFF1C717CCF002E3190 /* USGlobals.m */,
+				AAAC9D001C717CCF002E3190 /* xsd.h */,
+				AAAC9D011C717CCF002E3190 /* xsd.m */,
+			);
+			name = WebServices;
+			sourceTree = "<group>";
+		};
 		AAD5455C1C643FF00029631D /* LoginUtilities */ = {
 			isa = PBXGroup;
 			children = (
 				43739B891C649F9B00A1788A /* LoginMacros.h */,
 				AAD5455D1C6442F80029631D /* loginDBManagement.h */,
 				AAD5455E1C6443080029631D /* LoginDBManagement.m */,
+				AA2BB5FC1C70597300A5256E /* SynchdaysCounter.h */,
+				AA2BB5FD1C70598E00A5256E /* SynchDaysCounter.m */,
+				AAAC9D081C71BAE5002E3190 /* WebServiceUtilities.h */,
+				AAAC9D091C71BAF3002E3190 /* WebServiceUtilities.m */,
 			);
 			name = LoginUtilities;
 			sourceTree = "<group>";
@@ -3813,6 +3860,7 @@
 		C4E9D19A1612C64900016053 /* HLA */ = {
 			isa = PBXGroup;
 			children = (
+				AAAC9CF51C717C45002E3190 /* WebServices */,
 				431F5FE01C6D93B700A9CA6C /* tableViewCell */,
 				C416C2B31855BA2800D29E46 /* FirstTimeRegistration */,
 				29A38DCB17EAF55900454787 /* eSub */,
@@ -4972,6 +5020,7 @@
 				C4E1B93C1713FE9500D7F83B /* FMDatabaseQueue.m in Sources */,
 				C4E1B93D1713FE9500D7F83B /* FMResultSet.m in Sources */,
 				C4E1B93E1713FE9500D7F83B /* NDHTMLtoPDF.m in Sources */,
+				AAAC9D041C717CCF002E3190 /* NSDate+ISO8601Unparsing.m in Sources */,
 				C4E1B9441713FFBC00D7F83B /* DataTable.m in Sources */,
 				C4E1B9451713FFBC00D7F83B /* DBController.m in Sources */,
 				C4E6437D171BE69A001DF8F8 /* Reachability.m in Sources */,
@@ -5042,6 +5091,7 @@
 				2958A83317E95EA10090A791 /* NationalityPopoverViewController.m in Sources */,
 				2958A83417E95EA10090A791 /* OtherIDPopoverViewController.m in Sources */,
 				2958A83517E95EA10090A791 /* RacePopoverViewController.m in Sources */,
+				AAAC9D051C717CCF002E3190 /* USAdditions.m in Sources */,
 				2958A83617E95EA10090A791 /* RelationshipPopoverViewController.m in Sources */,
 				2958A83717E95EA10090A791 /* TitlePopoverViewController.m in Sources */,
 				2958A84E17E95EC80090A791 /* ChildrenandDependents.m in Sources */,
@@ -5082,6 +5132,7 @@
 				2958A8C317E960D80090A791 /* RetirementPlans.m in Sources */,
 				2958A8C417E960D80090A791 /* SavingsPlans.m in Sources */,
 				2958A8C817E960FE0090A791 /* DataClass.m in Sources */,
+				AAAC9D031C717CCF002E3190 /* NSDate+ISO8601Parsing.m in Sources */,
 				2958A8CE17E9615F0090A791 /* textFields.m in Sources */,
 				2958A8CF17E9615F0090A791 /* Utility.m in Sources */,
 				2958A8D717E97E390090A791 /* StatusViewController.m in Sources */,
@@ -5092,6 +5143,7 @@
 				29A3EEDC17EAEA2200E1CE8B /* RecurPaymentPopoverVC.m in Sources */,
 				29A3EEDD17EAEA2200E1CE8B /* PersonTypePopoverVC.m in Sources */,
 				AAFEE0351C6C1EC900702F64 /* TableManagement.m in Sources */,
+				AAAC9D061C717CCF002E3190 /* USGlobals.m in Sources */,
 				29A38DA317EAEB6B00454787 /* eSignVC.m in Sources */,
 				29A38DA417EAEB6B00454787 /* formsDetails.m in Sources */,
 				AAFEE03E1C6D927400702F64 /* UIButton+Property.m in Sources */,
@@ -5129,6 +5181,7 @@
 				C30A25A817F3C8D500613A0F /* HealthQuestionnaire6.m in Sources */,
 				C30A25A917F3C8D500613A0F /* HealthQuestionnaire7.m in Sources */,
 				C30A25AA17F3C8D500613A0F /* HealthQuestionnaire7b.m in Sources */,
+				AAAC9D071C717CCF002E3190 /* xsd.m in Sources */,
 				C30A25AB17F3C8D500613A0F /* HealthQuestionnaire7c.m in Sources */,
 				C30A25AC17F3C8D500613A0F /* HealthQuestionnaire7d.m in Sources */,
 				C30A25AD17F3C8D500613A0F /* HealthQuestionnaire7e.m in Sources */,
@@ -5167,6 +5220,7 @@
 				C30A25EC17F3CB7100613A0F /* AddPolicyTableVC.m in Sources */,
 				C30A25ED17F3CB7100613A0F /* ExistingLifePolicies.m in Sources */,
 				C30A25EE17F3CB7100613A0F /* ExistingPolicyListing.m in Sources */,
+				AA2BB5FE1C70598E00A5256E /* SynchDaysCounter.m in Sources */,
 				C30A25EF17F3CB7100613A0F /* InsuredDetail.m in Sources */,
 				C30A25F017F3CB7100613A0F /* InsuredObject.m in Sources */,
 				C30A25F117F3CB7100613A0F /* MainAdditionalQuestInsureds.m in Sources */,
@@ -5233,6 +5287,7 @@
 				6A0B1761188A36DE00931673 /* FFform.m in Sources */,
 				6A0B1765188A36DE00931673 /* SupplementaryProposalForm.m in Sources */,
 				6A3D70D1188A4B8B000B2097 /* PRxml.m in Sources */,
+				AAAC9D021C717CCF002E3190 /* AgentWS.m in Sources */,
 				6A3D70D2188A4B8B000B2097 /* SIxml.m in Sources */,
 				6A55483A188B6BA400994B42 /* FormViewController.m in Sources */,
 				42804E21188EDF7F008EF058 /* FullyReducePaidUpPopover.m in Sources */,
@@ -5327,6 +5382,7 @@
 				C35EC8601B983C5D00738933 /* PymtWebViewViewController.m in Sources */,
 				FA49F2891B9EE4E500B20169 /* DBUpdater.m in Sources */,
 				FA9C9D341B95772300E15346 /* WBSummaryBenefitObject.m in Sources */,
+				AAAC9D0A1C71BAF3002E3190 /* WebServiceUtilities.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5485,6 +5541,7 @@
 					"-ObjC",
 					"-lresolv",
 					"-lc++",
+					"-lxml2",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bca.bless;
 				PRODUCT_NAME = BLESS;
@@ -5539,6 +5596,7 @@
 					"-ObjC",
 					"-lresolv",
 					"-lc++",
+					"-lxml2",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bca.bless;
 				PRODUCT_NAME = BLESS;
@@ -5635,6 +5693,7 @@
 					"-ObjC",
 					"-lresolv",
 					"-lc++",
+					"-lxml2",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bca.bless;
 				PRODUCT_NAME = BLESS;
