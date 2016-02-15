@@ -13,16 +13,21 @@
 #import "GroupClass.h"
 #import "ClientProfileListingSortBy.h"
 #import "CustomAlertBox.h"
+#import "SIDate.h"
 #import "ModelProspectProfile.h"
+#import "ProspectListingTableViewCell.h"
 
-@interface ProspectListing : UIViewController<EditProspectDelegate, ProspectViewControllerDelegate,UITableViewDelegate,UITableViewDataSource,GroupDelegate, ClientProfileListingDelegate,CustomAlertBoxDelegate, UITabBarDelegate, UITextFieldDelegate>
+@interface ProspectListing : UIViewController<EditProspectDelegate, ProspectViewControllerDelegate,UITableViewDelegate,UITableViewDataSource,GroupDelegate, ClientProfileListingDelegate,CustomAlertBoxDelegate, UITabBarDelegate, UITextFieldDelegate,SIDateDelegate>
 {
+    SIDate *_SIDate;
+    
     NSString *databasePath;
     sqlite3 *contactDB;
     ModelProspectProfile *modelProspectProfile;
     
     EditProspect *_EditProspect;
     ProspectViewController *_ProspectViewController;
+    UIPopoverController *_SIDatePopover;
     GroupClass *_GroupList;
     UIPopoverController *_GroupPopover;
     NSMutableArray *ItemToBeDeleted;
@@ -44,6 +49,7 @@
 @property (nonatomic, strong) UIPopoverController *GroupPopover;
 @property (strong, nonatomic) NSMutableArray* ProspectTableData;
 @property (strong, nonatomic) NSMutableArray* FilteredProspectTableData;
+@property (strong, nonatomic) NSMutableArray* dataIndex;
 @property (strong, nonatomic) NSMutableArray* dataMobile;
 @property (strong, nonatomic) NSMutableArray* dataPrefix;
 
@@ -57,6 +63,8 @@
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
 @property (strong, nonatomic) IBOutlet UITextField *nametxt;
 @property (strong, nonatomic) IBOutlet UITextField *txtIDTypeNo;
+@property (strong, nonatomic) IBOutlet UITextField *txtBranchName;
+@property (weak, nonatomic) IBOutlet UIButton *outletDOB;
 @property (strong, nonatomic) IBOutlet UIButton *btnGroup;
 @property (strong, nonatomic) IBOutlet UIButton *editBtn;
 @property (strong, nonatomic) IBOutlet UIButton *deleteBtn;
@@ -76,6 +84,7 @@
 - (IBAction)btnAddNew:(id)sender;
 - (IBAction)btnSortBy:(id)sender;
 - (IBAction)segOrderBy:(id)sender;
+- (IBAction)btnDOB:(id)sender;
 
 -(void) ReloadTableData;
 -(void) Clear;

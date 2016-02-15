@@ -28,8 +28,8 @@
 	if([TradOrEver isEqualToString:@"TRAD"]){
 		ListOfPlan = [[NSMutableArray alloc] initWithObjects:@"Secure100", @"HLA Wealth Plan", nil ];
 		ListOfCode = [[NSMutableArray alloc] initWithObjects:@"S100", @"HLAWP", nil ];
-        ListOfPlan = [[NSMutableArray alloc] initWithObjects:@"BCA Life Heritage", nil ];
-        ListOfCode = [[NSMutableArray alloc] initWithObjects:@"BCALH", nil ];
+        ListOfPlan = [[NSMutableArray alloc] initWithObjects:@"BCA Life Heritage",@"BCA Life Keluargaku",nil];
+        ListOfCode = [[NSMutableArray alloc] initWithObjects:@"BCALH",@"BCAKK", nil ];
         
 //		ListOfPlan = [[NSMutableArray alloc] initWithObjects:@"HLA Wealth Plan", nil ];
 //		ListOfCode = [[NSMutableArray alloc] initWithObjects:@"HLAWP", nil ];
@@ -38,8 +38,8 @@
         //ListOfCode = [[NSMutableArray alloc] initWithObjects:@"L100", nil ];
 	}
 	else{
-		ListOfPlan = [[NSMutableArray alloc] initWithObjects:@"HLA EverLife Plus", nil ];
-		ListOfCode = [[NSMutableArray alloc] initWithObjects:@"UV", nil ];
+		ListOfPlan = [[NSMutableArray alloc] initWithObjects:@"HLA EverLife Plus",@"test", nil ];
+		ListOfCode = [[NSMutableArray alloc] initWithObjects:@"UV",@"test2", nil ];
 		
 		[ListOfPlan addObject:@"HLA EverGain Plus"];
 		[ListOfCode addObject:@"UP" ];

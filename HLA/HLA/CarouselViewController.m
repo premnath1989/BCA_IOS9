@@ -50,17 +50,21 @@ const int numberOfModule = 7;
 }
 
 -(void)viewDidLayoutSubviews {
-    [outletNavBar setBackgroundImage:[UIImage imageNamed:@"NewHLAHeader.png"] forBarMetrics:UIBarMetricsDefault];
-    CGRect frame = CGRectMake(0, 20, 1024, 60);
-    [outletNavBar setFrame:frame];
+//    [outletNavBar setBackgroundImage:[UIImage imageNamed:@"NewHLAHeader.png"] forBarMetrics:UIBarMetricsDefault];
+//    CGRect frame = CGRectMake(0, 20, 1024, 60);
+//    [outletNavBar setFrame:frame];
     
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _myView.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"backgroundWithBox.png"]];
-    self.view.backgroundColor = [UIColor clearColor];
+    
+    [self createBlackStatusBar];
+//    _myView.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"Tablet-App-Redesign-Slices.jpg"]];
+//     CGRect frame = CGRectMake(0, 20, 1024, 720);
+//    [_myView setFrame:frame];
+//    self.view.backgroundColor = [UIColor clearColor];
     
     UIButton *exitBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [exitBtn addTarget:self action:@selector(goToHome:) forControlEvents:UIControlEventTouchUpInside];
@@ -142,10 +146,10 @@ const int numberOfModule = 7;
     int height = 160;
     int positionY = 310;
     
-    [outletClientProfile setFrame:CGRectMake(420, positionY, width, height)];
-    [outletCustomerFF setFrame:CGRectMake(565, positionY, width, height)];
-    [outletSI setFrame:CGRectMake(715, positionY, width, height)];
-    [outletEAPP setFrame:CGRectMake(860, 300, width, 160)]; // EAPP words consist of one line only
+//    [outletClientProfile setFrame:CGRectMake(420, positionY, width, height)];
+//    [outletCustomerFF setFrame:CGRectMake(565, positionY, width, height)];
+//    [outletSI setFrame:CGRectMake(715, positionY, width, height)];
+//    [outletEAPP setFrame:CGRectMake(860, 300, width, 160)]; // EAPP words consist of one line only
 }
 
 #ifdef UAT_BUILD
@@ -202,9 +206,11 @@ const int numberOfModule = 7;
                                                                                  kCFStringEncodingUTF8));
 }
 
-- (UIStatusBarStyle)preferredStatusBarStyle
-{
-    return UIStatusBarStyleLightContent;
+-(void)createBlackStatusBar{
+    CGFloat statusBarHeight = 20.0;
+    UIView* colorView = [[UIView alloc]initWithFrame:CGRectMake(0, -statusBarHeight, self.view.bounds.size.width, statusBarHeight)];
+    [colorView setBackgroundColor:[UIColor blackColor]];
+    [self.navigationController.navigationBar addSubview:colorView];
 }
 
 -(void)parseURL:(NSString *) urlStr

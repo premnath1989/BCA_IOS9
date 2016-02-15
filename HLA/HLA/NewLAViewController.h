@@ -10,6 +10,7 @@
 #import <sqlite3.h>
 #import "ListingTbViewController.h"
 #import "DateViewController.h"
+#import "PlanList.h"
 #import "BasicPlanHandler.h"
 #import "OccupationList.h"
 #import "SIObj.h"
@@ -28,15 +29,17 @@
 -(void)deleteSecondLAFromDB;
 @end
 
-@interface NewLAViewController : UIViewController<UITextFieldDelegate,UIPopoverControllerDelegate,ListingTbViewControllerDelegate,DateViewControllerDelegate,OccupationListDelegate>{
+@interface NewLAViewController : UIViewController<UITextFieldDelegate,UIPopoverControllerDelegate,ListingTbViewControllerDelegate,DateViewControllerDelegate,OccupationListDelegate,PlanListDelegate>{
     NSString *databasePath;
     sqlite3 *contactDB;
     UITextField *activeField;
+    UIPopoverController *_planPopover;
     UIPopoverController *popOverController;
     UIPopoverController *_prospectPopover;
     UIPopoverController *_datePopover;
     UIPopoverController *_dobPopover;
     UIPopoverController *_OccupationListPopover;
+    PlanList *_planList;
     ListingTbViewController *_ProspectList;
     DateViewController *_LADate;
     OccupationList *_OccupationList;
@@ -75,7 +78,7 @@
 }
 
 @property (nonatomic, retain) SIObj* siObj;
-
+@property (nonatomic, retain) PlanList *planList;
 @property (strong, nonatomic) NSMutableArray *dataInsert;
 @property (strong, nonatomic) NSMutableArray *dataInsert2;
 @property (nonatomic,strong) BasicPlanHandler *laBH;
@@ -94,10 +97,10 @@
 
 @property (nonatomic, copy) NSString *getSINo;
 //--
-
 @property (nonatomic, retain) OccupationList *OccupationList;
 @property (nonatomic, retain) ListingTbViewController *ProspectList;
 @property (nonatomic, retain) DateViewController *LADate;
+@property (nonatomic, retain) UIPopoverController *planPopover;
 @property (nonatomic, retain) UIPopoverController *prospectPopover;
 @property (nonatomic, retain) UIPopoverController *datePopover;
 @property (nonatomic, retain) UIPopoverController *dobPopover;
@@ -123,7 +126,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *btnEnabled;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *btnToEAPP;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *outletDone;
-@property (strong, nonatomic) IBOutlet UISwitch *quickQuoteFlag;
+@property (strong, nonatomic) IBOutlet UIButton *NamaProduk;
 
 
 @property (nonatomic, copy) NSString *SINo;
@@ -188,10 +191,11 @@
 @property (nonatomic, retain) NSMutableArray *ridCode;
 @property(nonatomic , retain) NSMutableArray *atcRidCode;
 @property(nonatomic , retain) NSMutableArray *atcPlanChoice;
-
+@property (strong, nonatomic) IBOutlet UISwitch *quickQuoteFlag;
 //@property (nonatomic, retain) SIObj* siObj;
 
 - (IBAction)sexSegmentPressed:(id)sender;
+- (IBAction)NamaProdukDropDown:(id)sender;
 - (IBAction)smokerSegmentPressed:(id)sender;
 - (IBAction)doSaveLA:(id)sender;
 - (IBAction)selectProspect:(id)sender;

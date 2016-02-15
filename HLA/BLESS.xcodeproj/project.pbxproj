@@ -41,6 +41,13 @@
 		04B15E0E19DA8D0900FF7039 /* Bachground.png in Resources */ = {isa = PBXBuildFile; fileRef = 04B15E0519DA8D0900FF7039 /* Bachground.png */; };
 		04D7C8B41C1FA9580053F651 /* EverStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04D7C8B31C1FA9580053F651 /* EverStoryboard.storyboard */; };
 		162C3C0F1BBBD7270022CAF0 /* dbupdates in Resources */ = {isa = PBXBuildFile; fileRef = 162C3C0E1BBBD7270022CAF0 /* dbupdates */; };
+		1706BD4C1C7169A40038D1DB /* menu_customerfactfind.png in Resources */ = {isa = PBXBuildFile; fileRef = 1706BD451C7169A40038D1DB /* menu_customerfactfind.png */; };
+		1706BD4D1C7169A40038D1DB /* menu_datanasabah.png in Resources */ = {isa = PBXBuildFile; fileRef = 1706BD461C7169A40038D1DB /* menu_datanasabah.png */; };
+		1706BD4E1C7169A40038D1DB /* menu_ilustrasi.png in Resources */ = {isa = PBXBuildFile; fileRef = 1706BD471C7169A40038D1DB /* menu_ilustrasi.png */; };
+		1706BD4F1C7169A40038D1DB /* menu_productinformation.png in Resources */ = {isa = PBXBuildFile; fileRef = 1706BD481C7169A40038D1DB /* menu_productinformation.png */; };
+		1706BD501C7169A40038D1DB /* menu_salesactivity.png in Resources */ = {isa = PBXBuildFile; fileRef = 1706BD491C7169A40038D1DB /* menu_salesactivity.png */; };
+		1706BD511C7169A40038D1DB /* menu_spaj.png in Resources */ = {isa = PBXBuildFile; fileRef = 1706BD4A1C7169A40038D1DB /* menu_spaj.png */; };
+		1706BD521C7169A40038D1DB /* Tablet-App-Redesign-Slices.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1706BD4B1C7169A40038D1DB /* Tablet-App-Redesign-Slices.jpg */; };
 		1706E6B31C2A8AC3005E36EF /* MenuEapp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1706E6B21C2A8AC3005E36EF /* MenuEapp.storyboard */; };
 		170BB47D1C30DAE600CE75DF /* Summary(PolicyDetails).storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 170BB47C1C30DAE600CE75DF /* Summary(PolicyDetails).storyboard */; };
 		173E81601C28F9C600BDAAE9 /* EappListing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 173E815F1C28F9C600BDAAE9 /* EappListing.storyboard */; };
@@ -847,6 +854,13 @@
 		161EA6BB1B131A9E009AF454 /* hladb.sqlite.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = hladb.sqlite.sql; path = database/src/hladb.sqlite.sql; sourceTree = "<group>"; };
 		162C3C0C1BBBD6430022CAF0 /* dbupdates-sample.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "dbupdates-sample.json"; sourceTree = "<group>"; };
 		162C3C0E1BBBD7270022CAF0 /* dbupdates */ = {isa = PBXFileReference; lastKnownFileType = folder; path = dbupdates; sourceTree = "<group>"; };
+		1706BD451C7169A40038D1DB /* menu_customerfactfind.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_customerfactfind.png; sourceTree = "<group>"; };
+		1706BD461C7169A40038D1DB /* menu_datanasabah.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_datanasabah.png; sourceTree = "<group>"; };
+		1706BD471C7169A40038D1DB /* menu_ilustrasi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_ilustrasi.png; sourceTree = "<group>"; };
+		1706BD481C7169A40038D1DB /* menu_productinformation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_productinformation.png; sourceTree = "<group>"; };
+		1706BD491C7169A40038D1DB /* menu_salesactivity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_salesactivity.png; sourceTree = "<group>"; };
+		1706BD4A1C7169A40038D1DB /* menu_spaj.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_spaj.png; sourceTree = "<group>"; };
+		1706BD4B1C7169A40038D1DB /* Tablet-App-Redesign-Slices.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Tablet-App-Redesign-Slices.jpg"; sourceTree = "<group>"; };
 		1706E6B21C2A8AC3005E36EF /* MenuEapp.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MenuEapp.storyboard; sourceTree = "<group>"; };
 		170BB47C1C30DAE600CE75DF /* Summary(PolicyDetails).storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Summary(PolicyDetails).storyboard"; sourceTree = "<group>"; };
 		173E815F1C28F9C600BDAAE9 /* EappListing.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EappListing.storyboard; sourceTree = "<group>"; };
@@ -3969,6 +3983,13 @@
 				17F10EAF1C6C85DA002C32D3 /* btn_reset.png */,
 				A9E550A31C591F7900C9DAC2 /* Expand Arrow.png */,
 				A9E550A41C591F7900C9DAC2 /* Expand Arrow@2x.png */,
+				1706BD451C7169A40038D1DB /* menu_customerfactfind.png */,
+				1706BD461C7169A40038D1DB /* menu_datanasabah.png */,
+				1706BD471C7169A40038D1DB /* menu_ilustrasi.png */,
+				1706BD481C7169A40038D1DB /* menu_productinformation.png */,
+				1706BD491C7169A40038D1DB /* menu_salesactivity.png */,
+				1706BD4A1C7169A40038D1DB /* menu_spaj.png */,
+				1706BD4B1C7169A40038D1DB /* Tablet-App-Redesign-Slices.jpg */,
 				043FDBAF1A1B5376008EDC24 /* backgroundWithBox.png */,
 				043FDBA71A1AF226008EDC24 /* sales_illustration@2x_20141118.png */,
 				043FDBA81A1AF226008EDC24 /* eAplication@2x_20141118.png */,
@@ -4641,6 +4662,7 @@
 				5D3967981C02C89700464BCC /* HLAWPStoryboard.storyboard in Resources */,
 				C4660EBD1625047800BA4AFE /* prospect_btnB.png in Resources */,
 				C4660EBE1625047800BA4AFE /* prospect_btnB2_144.png in Resources */,
+				1706BD501C7169A40038D1DB /* menu_salesactivity.png in Resources */,
 				C4660EBF1625047800BA4AFE /* prospect_btnB2.png in Resources */,
 				C4660EC01625047800BA4AFE /* prospect.png in Resources */,
 				C4660EC11625047800BA4AFE /* setting_btnB_144.png in Resources */,
@@ -4661,6 +4683,7 @@
 				C4F83005162E503D00EF8FAA /* iconHLwithbackground.png in Resources */,
 				C4F83031162FCEE000EF8FAA /* HLassurance.png in Resources */,
 				C4F83035162FCEE000EF8FAA /* style.css in Resources */,
+				1706BD511C7169A40038D1DB /* menu_spaj.png in Resources */,
 				C4FCDDCA16395F120065D024 /* background12.png in Resources */,
 				C4FCDDCB16395F120065D024 /* background13.png in Resources */,
 				C4FCDDCC16395F120065D024 /* background14.png in Resources */,
@@ -4702,6 +4725,7 @@
 				C4F5355B166EF649004DBF94 /* Propsect2.jpg in Resources */,
 				C4F5355D166EF649004DBF94 /* SI.jpg in Resources */,
 				5D39679A1C02CA9000464BCC /* ClientProfileStoryboard.storyboard in Resources */,
+				1706BD4E1C7169A40038D1DB /* menu_ilustrasi.png in Resources */,
 				C4F5355F166F3BF0004DBF94 /* icon_settings.png in Resources */,
 				C4E5A470168AAA89007848CE /* ChgPwd_24.png in Resources */,
 				C4E5A471168AAA89007848CE /* ChgPwd_32.png in Resources */,
@@ -4796,6 +4820,7 @@
 				C30A260217F3CFBC00613A0F /* NewStoryboard.storyboard in Resources */,
 				2943213517F40FAB00FB64AB /* viewSI.png in Resources */,
 				29096FB217F9543B003421A0 /* MengCheong_Storyboard_eApp.storyboard in Resources */,
+				1706BD4F1C7169A40038D1DB /* menu_productinformation.png in Resources */,
 				C3560C941805119400745FC6 /* priority.plist in Resources */,
 				425092AE180E71E80022FED3 /* prospect_100_2.png in Resources */,
 				425092AF180E71E80022FED3 /* prospect_100_3.png in Resources */,
@@ -4828,6 +4853,7 @@
 				2994B41318E121AE00B0D4D2 /* Header.jpg in Resources */,
 				2994B41418E121AE00B0D4D2 /* P1.jpg in Resources */,
 				2994B41518E121AE00B0D4D2 /* P2-1-Header.jpg in Resources */,
+				1706BD4D1C7169A40038D1DB /* menu_datanasabah.png in Resources */,
 				2994B41618E121AE00B0D4D2 /* P2-1-Row.jpg in Resources */,
 				2994B41718E121AE00B0D4D2 /* P2-1.jpg in Resources */,
 				2994B41818E121AE00B0D4D2 /* P2-2.jpg in Resources */,
@@ -4909,6 +4935,7 @@
 				04508E5219DD609C00B4502A /* 144-x-144.png in Resources */,
 				04508E5419DE34BD00B4502A /* NewHLAHeader.png in Resources */,
 				04328CC719EBC12B005E7D32 /* house.png in Resources */,
+				1706BD521C7169A40038D1DB /* Tablet-App-Redesign-Slices.jpg in Resources */,
 				0466E1211A03172500971DFF /* client-profile20141031.png in Resources */,
 				043FDB981A1AEEE6008EDC24 /* transparent_boxv2.png in Resources */,
 				043FDB991A1AEEE6008EDC24 /* sales_illustrationv2.png in Resources */,
@@ -4920,6 +4947,7 @@
 				431F5FE51C6D93E800A9CA6C /* ProspectListingTableViewCell.xib in Resources */,
 				043FDBA61A1AEF14008EDC24 /* client_profilev3.png in Resources */,
 				043FDBA31A1AEF14008EDC24 /* sales_illustrationv3.png in Resources */,
+				1706BD4C1C7169A40038D1DB /* menu_customerfactfind.png in Resources */,
 				043FDBAB1A1AF226008EDC24 /* sales_illustration@2x_20141118.png in Resources */,
 				043FDBAC1A1AF226008EDC24 /* eAplication@2x_20141118.png in Resources */,
 				043FDBAD1A1AF226008EDC24 /* customer_fact_find@2x_20141118.png in Resources */,

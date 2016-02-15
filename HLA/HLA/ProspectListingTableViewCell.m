@@ -9,6 +9,13 @@
 #import "ProspectListingTableViewCell.h"
 
 @implementation ProspectListingTableViewCell
+@synthesize labelName =_labelName;
+@synthesize labelDOB =_labelDOB;
+@synthesize labelPhone1 =_labelPhone1;
+@synthesize labelBranchName =_labelBranchName;
+@synthesize labelDateCreated =_labelDateCreated;
+@synthesize labelDateModified =_labelDateModified;
+@synthesize labelTimeRemaining =_labelTimeRemaining;
 
 - (void)awakeFromNib {
     NSLog(@"test");
@@ -17,7 +24,6 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
     // Configure the view for the selected state
 }
 

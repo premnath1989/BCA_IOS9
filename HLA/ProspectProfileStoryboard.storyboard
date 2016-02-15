@@ -1883,8 +1883,8 @@
                                             <constraint firstAttribute="height" constant="1" id="e4E-Fu-Pxx"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gAE-lQ-Lef">
-                                        <rect key="frame" x="0.0" y="0.0" width="1024" height="699"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gAE-lQ-Lef">
+                                        <rect key="frame" x="0.0" y="635" width="1024" height="699"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Data Alamat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bcu-Mh-2Op">
                                                 <rect key="frame" x="20" y="0.0" width="184" height="21"/>
@@ -2868,6 +2868,16 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t2P-Dg-3ef">
+                                <rect key="frame" x="160" y="121" width="285" height="30"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
+                                <state key="normal" image="Expand Arrow.png">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="btnDOB:" destination="R2U-dm-XLx" eventType="touchUpInside" id="teg-5J-fRY"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -2890,7 +2900,9 @@
                         <outlet property="idTypeLabel" destination="yq0-QT-WHC" id="DkI-zs-GeA"/>
                         <outlet property="myTableView" destination="rxJ-zx-Wdo" id="Vxo-3N-c0c"/>
                         <outlet property="nametxt" destination="wpG-rs-IJ9" id="3r3-gX-fBO"/>
+                        <outlet property="outletDOB" destination="t2P-Dg-3ef" id="ncA-nu-0cf"/>
                         <outlet property="outletOrder" destination="GR8-70-6tt" id="xRI-0u-POk"/>
+                        <outlet property="txtBranchName" destination="7hN-Tk-v6C" id="wjZ-SG-fa4"/>
                         <outlet property="txtIDTypeNo" destination="D2p-GA-zG8" id="Zq9-TT-Mko"/>
                     </connections>
                 </viewController>
@@ -3090,7 +3102,7 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8X2-tv-VFI">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8X2-tv-VFI">
                                         <rect key="frame" x="700" y="602" width="250" height="30"/>
                                         <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="phonePad"/>
@@ -4153,7 +4165,7 @@
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tipe Referral" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EpK-ga-KNo">
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tipe Referral" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EpK-ga-KNo">
                                                 <rect key="frame" x="517" y="181" width="161" height="21"/>
                                                 <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -4213,6 +4225,9 @@
                                                 <state key="normal" image="Expand Arrow.png">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="actionReferralSource:" destination="Few-sZ-jKx" eventType="touchUpInside" id="RpE-X5-1BG"/>
+                                                </connections>
                                             </button>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ier-xU-GRc">
                                                 <rect key="frame" x="199" y="25" width="253" height="30"/>
@@ -4226,21 +4241,27 @@
                                                 <state key="normal" image="Expand Arrow.png">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="actionBranchInfo:" destination="Few-sZ-jKx" eventType="touchUpInside" id="AAE-gK-JJ1"/>
+                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iH7-Mf-UJv">
+                                            <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iH7-Mf-UJv">
                                                 <rect key="frame" x="686" y="66" width="253" height="24"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
                                                 <state key="normal" image="Expand Arrow.png">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="actionBranchInfo:" destination="Few-sZ-jKx" eventType="touchUpInside" id="S6c-lP-fJi"/>
+                                                </connections>
                                             </button>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WqX-Qr-Mdp">
+                                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WqX-Qr-Mdp">
                                                 <rect key="frame" x="686" y="177" width="253" height="30"/>
                                                 <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H5F-6W-tCE">
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H5F-6W-tCE">
                                                 <rect key="frame" x="686" y="180" width="253" height="24"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
                                                 <state key="normal" image="Expand Arrow.png">
@@ -4456,12 +4477,6 @@
                                                 <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bjt-Vp-WEp">
-                                                <rect key="frame" x="460" y="333" width="14" height="21"/>
-                                                <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
-                                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="C1R-jh-EIh">
                                                 <rect key="frame" x="199" y="253" width="253" height="29"/>
                                                 <segments>
@@ -4571,7 +4586,7 @@
                                                 <rect key="frame" x="0.0" y="406" width="1024" height="293"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Nomor Telepon Kantor" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HAE-gR-nlE">
-                                                        <rect key="frame" x="20" y="269" width="161" height="15"/>
+                                                        <rect key="frame" x="20" y="269" width="171" height="15"/>
                                                         <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -4724,13 +4739,6 @@
                                                         <connections>
                                                             <action selector="ActionOfficeCountry:" destination="Few-sZ-jKx" eventType="touchUpInside" id="1sG-Bu-cEr"/>
                                                         </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="paE-fs-TQw">
-                                                        <rect key="frame" x="199" y="151" width="253" height="24"/>
-                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
-                                                        <state key="normal" image="Expand Arrow.png">
-                                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                        </state>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -4913,13 +4921,6 @@
                                                             <action selector="isForeign:" destination="Few-sZ-jKx" eventType="valueChanged" id="fMA-Tf-TSh"/>
                                                         </connections>
                                                     </switch>
-                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xgH-Az-Rin">
-                                                        <rect key="frame" x="199" y="151" width="253" height="24"/>
-                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
-                                                        <state key="normal" image="Expand Arrow.png">
-                                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                        </state>
-                                                    </button>
                                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="spY-ko-cHP">
                                                         <rect key="frame" x="686" y="227" width="253" height="24"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
@@ -4947,63 +4948,63 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rPW-ee-ZoK">
-                                        <rect key="frame" x="0.0" y="1344" width="1024" height="245"/>
+                                        <rect key="frame" x="0.0" y="1344" width="1024" height="207"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zHe-pI-AqR">
-                                                <rect key="frame" x="460" y="181" width="14" height="21"/>
-                                                <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
-                                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xsW-Qo-fPm">
                                                 <rect key="frame" x="460" y="143" width="14" height="21"/>
                                                 <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
                                                 <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Kelas Pekerjaan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VWR-qb-pWz">
-                                                <rect key="frame" x="30" y="105" width="161" height="21"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xsW-Qo-fPm">
+                                                <rect key="frame" x="460" y="105" width="14" height="21"/>
                                                 <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
-                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Jenis Pekerjaan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="002-xd-fdK">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Kelas Pekerjaan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VWR-qb-pWz">
                                                 <rect key="frame" x="30" y="67" width="161" height="21"/>
                                                 <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Jenis Pekerjaan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="002-xd-fdK">
+                                                <rect key="frame" x="30" y="29" width="161" height="21"/>
+                                                <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PGv-4Z-wZX">
-                                                <rect key="frame" x="199" y="177" width="253" height="30"/>
+                                                <rect key="frame" x="199" y="139" width="253" height="30"/>
                                                 <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Pekerjaan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NEU-Ee-a9k">
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Pekerjaan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NEU-Ee-a9k">
                                                 <rect key="frame" x="30" y="29" width="161" height="21"/>
                                                 <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1ua-0Y-Y0p">
-                                                <rect key="frame" x="199" y="139" width="253" height="30"/>
+                                                <rect key="frame" x="199" y="101" width="253" height="30"/>
                                                 <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Pendapatan Tahunan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g6o-9y-EcV">
-                                                <rect key="frame" x="30" y="143" width="161" height="21"/>
+                                                <rect key="frame" x="30" y="105" width="161" height="21"/>
                                                 <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="G0v-1a-g8K">
-                                                <rect key="frame" x="199" y="100" width="740" height="30"/>
+                                                <rect key="frame" x="199" y="62" width="740" height="30"/>
                                                 <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JwS-4k-AmS">
+                                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JwS-4k-AmS">
                                                 <rect key="frame" x="199" y="25" width="740" height="30"/>
                                                 <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -5016,13 +5017,13 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sumber Penghasilan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6i2-dT-aPf">
-                                                <rect key="frame" x="30" y="181" width="161" height="21"/>
+                                                <rect key="frame" x="30" y="143" width="161" height="21"/>
                                                 <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aKk-De-mct">
-                                                <rect key="frame" x="199" y="139" width="740" height="30"/>
+                                                <rect key="frame" x="199" y="101" width="740" height="30"/>
                                                 <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
@@ -5034,36 +5035,39 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Jabatan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9vN-9W-cie">
-                                                <rect key="frame" x="30" y="143" width="161" height="21"/>
+                                                <rect key="frame" x="30" y="105" width="161" height="21"/>
                                                 <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Nomorr NPWP." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6jO-2y-wPc">
-                                                <rect key="frame" x="30" y="219" width="161" height="21"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Nomor NPWP." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6jO-2y-wPc">
+                                                <rect key="frame" x="30" y="181" width="161" height="21"/>
                                                 <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9XB-Yd-oIv">
-                                                <rect key="frame" x="199" y="215" width="253" height="30"/>
+                                                <rect key="frame" x="199" y="177" width="253" height="30"/>
                                                 <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sEy-e9-eF4">
-                                                <rect key="frame" x="199" y="63" width="740" height="30"/>
+                                                <rect key="frame" x="199" y="25" width="740" height="30"/>
                                                 <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0sz-0J-Mrk">
-                                                <rect key="frame" x="199" y="180" width="253" height="24"/>
+                                                <rect key="frame" x="199" y="142" width="253" height="24"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
                                                 <state key="normal" image="Expand Arrow.png"/>
+                                                <connections>
+                                                    <action selector="actionSourceIncome:" destination="Few-sZ-jKx" eventType="touchUpInside" id="AZH-wF-Atb"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xd0-EL-MCz">
-                                                <rect key="frame" x="199" y="66" width="740" height="24"/>
+                                                <rect key="frame" x="199" y="28" width="740" height="24"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
                                                 <state key="normal" image="Expand Arrow.png">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -5075,18 +5079,18 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="245" id="87E-re-wjt"/>
+                                            <constraint firstAttribute="height" constant="207" id="87E-re-wjt"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vg3-4M-QFp">
-                                        <rect key="frame" x="10" y="1594" width="1000" height="1"/>
+                                        <rect key="frame" x="10" y="1556" width="1000" height="1"/>
                                         <color key="backgroundColor" red="0.98039215690000003" green="0.68627450980000004" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="qCI-os-kSD"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XQr-rz-0yc">
-                                        <rect key="frame" x="0.0" y="1599" width="1024" height="206"/>
+                                        <rect key="frame" x="0.0" y="1561" width="1024" height="206"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Other Info" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="da9-2g-3Rb">
                                                 <rect key="frame" x="30" y="0.0" width="161" height="21"/>
@@ -5115,7 +5119,6 @@
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hYs-Jv-d6X">
                                                 <rect key="frame" x="199" y="63" width="739" height="106"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
@@ -5123,6 +5126,9 @@
                                                 <rect key="frame" x="199" y="28" width="253" height="24"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
                                                 <state key="normal" image="Expand Arrow.png"/>
+                                                <connections>
+                                                    <action selector="actionVIPClass:" destination="Few-sZ-jKx" eventType="touchUpInside" id="21c-Eg-1Te"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Grouping" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lu7-5s-uEO">
                                                 <rect key="frame" x="516" y="180" width="161" height="21"/>
@@ -5206,6 +5212,8 @@
                         <outlet property="lblOfficeAddr" destination="SHu-ND-OzQ" id="wqA-l2-uqa"/>
                         <outlet property="lblPostCode" destination="rfg-K9-Tmn" id="icx-Jc-Vsd"/>
                         <outlet property="myScrollView" destination="ZCF-Kw-sDE" id="Dsl-e9-W5L"/>
+                        <outlet property="outletBranchCode" destination="Zhp-OK-ixt" id="3PH-Tq-WX2"/>
+                        <outlet property="outletBranchName" destination="iH7-Mf-UJv" id="AZ1-Ip-Nx9"/>
                         <outlet property="outletDOB" destination="s2d-JC-Tr9" id="6FE-RA-hqz"/>
                         <outlet property="outletDelete" destination="8M1-eE-yDW" id="bJF-vG-GOh"/>
                         <outlet property="outletExpiryDate" destination="C9s-VH-cos" id="laI-Rr-rLF"/>
@@ -5213,10 +5221,12 @@
                         <outlet property="outletNationality" destination="HLw-Sh-dM8" id="myJ-2X-ptH"/>
                         <outlet property="outletOccup" destination="xd0-EL-MCz" id="fGe-16-Kpr"/>
                         <outlet property="outletRace" destination="aPx-ed-zde" id="P5l-dJ-o1c"/>
-                        <outlet property="outletReferralSource" destination="LiQ-zC-xyQ" id="iwr-jE-z2R"/>
+                        <outlet property="outletReferralSource" destination="LiQ-zC-xyQ" id="zYX-X9-91j"/>
                         <outlet property="outletReligion" destination="j9n-Yp-L6s" id="c8c-hW-QGN"/>
                         <outlet property="outletRigDOB" destination="oC8-ef-FmH" id="SJf-rg-QTA"/>
+                        <outlet property="outletSourceIncome" destination="0sz-0J-Mrk" id="yvT-nC-6A7"/>
                         <outlet property="outletTitle" destination="FwN-cR-wel" id="ZKF-bZ-k3R"/>
+                        <outlet property="outletVIPClass" destination="tcC-Fd-Qlb" id="5wv-N6-NjQ"/>
                         <outlet property="scrollViewEditProspect" destination="jaE-AU-tI1" id="olM-GU-Ybe"/>
                         <outlet property="segGender" destination="aga-H9-axw" id="jBP-4R-zum"/>
                         <outlet property="segRigExempted" destination="uwT-V0-6mX" id="z0U-Ug-2ck"/>
@@ -5237,10 +5247,12 @@
                         <outlet property="txtHomeAddr1" destination="fkg-XZ-tpy" id="32t-Ld-2ER"/>
                         <outlet property="txtHomeAddr2" destination="Cca-dk-5XH" id="SK0-Es-n1Q"/>
                         <outlet property="txtHomeAddr3" destination="tPT-Rc-jLK" id="uDc-in-Xe4"/>
-                        <outlet property="txtHomeCountry" destination="2EK-DK-UZL" id="E6y-Wr-W0p"/>
-                        <outlet property="txtHomePostCode" destination="2cG-EH-AJh" id="tH7-XJ-xNT"/>
-                        <outlet property="txtHomeState" destination="aSn-cx-gaj" id="EBd-fb-fFW"/>
-                        <outlet property="txtHomeTown" destination="Lhb-qU-rFc" id="18c-4W-Vda"/>
+                        <outlet property="txtHomeCountry" destination="2EK-DK-UZL" id="MD2-eL-hoc"/>
+                        <outlet property="txtHomeDistrict" destination="2cG-EH-AJh" id="DQp-e9-Tnz"/>
+                        <outlet property="txtHomePostCode" destination="3Ol-Mf-G43" id="z9z-NN-xDN"/>
+                        <outlet property="txtHomeProvince" destination="aSn-cx-gaj" id="Ur6-Xk-n6s"/>
+                        <outlet property="txtHomeTown" destination="MSN-uT-Lfc" id="vpF-gt-gih"/>
+                        <outlet property="txtHomeVillage" destination="i07-qO-dOI" id="hsI-cj-ZdG"/>
                         <outlet property="txtIDType" destination="T22-1R-TCI" id="7Zz-MW-Bbg"/>
                         <outlet property="txtKanwil" destination="wtE-zJ-gTo" id="f9f-ny-1kp"/>
                         <outlet property="txtKcu" destination="F13-BG-wSC" id="nOc-98-SGx"/>
@@ -5249,10 +5261,13 @@
                         <outlet property="txtOfficeAddr1" destination="03h-gk-Xeg" id="eXh-KQ-yIh"/>
                         <outlet property="txtOfficeAddr2" destination="LLe-Hb-Qcv" id="ctq-gW-a1P"/>
                         <outlet property="txtOfficeAddr3" destination="OoV-wc-tYl" id="3du-Ko-RS7"/>
-                        <outlet property="txtOfficeCountry" destination="z6r-fI-UgQ" id="MR7-Ie-Ar0"/>
-                        <outlet property="txtOfficePostCode" destination="wPN-Fu-wMG" id="i7n-xT-lkG"/>
+                        <outlet property="txtOfficeCountry" destination="z6r-fI-UgQ" id="WeI-01-ff4"/>
+                        <outlet property="txtOfficeDistrict" destination="ubN-91-9Yz" id="yNL-tr-XOB"/>
+                        <outlet property="txtOfficePostCode" destination="wPN-Fu-wMG" id="6FU-S8-jG6"/>
+                        <outlet property="txtOfficeProvince" destination="5E8-w4-TS9" id="FJP-ZN-FqR"/>
                         <outlet property="txtOfficeState" destination="5E8-w4-TS9" id="b6t-Fr-ro5"/>
-                        <outlet property="txtOfficeTown" destination="f4b-OI-Jek" id="dy2-he-TY8"/>
+                        <outlet property="txtOfficeTown" destination="2Uc-vY-ifH" id="OPp-cA-GrN"/>
+                        <outlet property="txtOfficeVillage" destination="inf-hk-p0N" id="jeo-nY-rqV"/>
                         <outlet property="txtOtherIDType" destination="Prx-mE-FQj" id="ZyK-6o-lvC"/>
                         <outlet property="txtPrefix1" destination="NbD-iH-pne" id="6VR-GP-jJR"/>
                         <outlet property="txtPrefix2" destination="0Uy-th-vyG" id="6AF-dK-Vkg"/>

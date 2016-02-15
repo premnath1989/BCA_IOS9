@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ProspectListingTableViewCell : UITableViewCell
+@interface ProspectListingTableViewCell : UITableViewCell {
+    
+}
 
+@property (nonatomic, weak) IBOutlet UILabel* labelName;
+@property (nonatomic, weak) IBOutlet UILabel* labelDOB;
+@property (nonatomic, weak) IBOutlet UILabel* labelPhone1;
+@property (nonatomic, weak) IBOutlet UILabel* labelBranchName;
+@property (nonatomic, weak) IBOutlet UILabel* labelDateCreated;
+@property (nonatomic, weak) IBOutlet UILabel* labelDateModified;
+@property (nonatomic, weak) IBOutlet UILabel* labelTimeRemaining;
 @end

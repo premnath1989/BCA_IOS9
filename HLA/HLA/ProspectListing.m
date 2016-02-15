@@ -33,8 +33,9 @@
 @synthesize idNoLabel,idTypeLabel,clientNameLabel,editBtn,deleteBtn,nametxt;
 @synthesize GroupList = _GroupList;
 @synthesize GroupPopover = _GroupPopover;
-@synthesize dataMobile,dataPrefix;
+@synthesize dataMobile,dataPrefix,dataIndex;
 @synthesize OrderBy;
+//@synthesize SIDate = _SIDate;
 
 int RecDelete = 0;
 int totalView = 20;
@@ -46,6 +47,14 @@ MBProgressHUD *HUD;
 {
     [super viewDidLoad];
     borderColor=[[UIColor alloc]initWithRed:250.0/255.0 green:175.0/255.0 blue:50.0/255.0 alpha:1.0];
+    
+    _outletDOB.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    _outletDOB.imageEdgeInsets = UIEdgeInsetsMake(0., _outletDOB.frame.size.width - (24 + 10.0), 0., 0.);
+    _outletDOB.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
+    _outletDOB.layer.borderColor = borderColor.CGColor;
+    _outletDOB.layer.borderWidth = 1.0;
+    
+    
     [self setTextfieldBorder];
 
     [self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
@@ -116,7 +125,28 @@ MBProgressHUD *HUD;
 }
 
 #pragma mark - `added by faiz
+
 //added by faiz
+- (IBAction)btnDOB:(id)sender
+{
+    [self resignFirstResponder];
+    [self.view endEditing:YES];
+    
+    Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
+    id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
+    [activeInstance performSelector:@selector(dismissKeyboard)];
+    
+    if (_SIDate == Nil) {
+        UIStoryboard *clientProfileStoryBoard = [UIStoryboard storyboardWithName:@"ClientProfileStoryboard" bundle:nil];
+        _SIDate = [clientProfileStoryBoard instantiateViewControllerWithIdentifier:@"SIDate"];
+        _SIDate.delegate = self;
+        _SIDatePopover = [[UIPopoverController alloc] initWithContentViewController:_SIDate];
+    }
+    
+    [_SIDatePopover setPopoverContentSize:CGSizeMake(300.0f, 255.0f)];
+    [_SIDatePopover presentPopoverFromRect:[sender bounds]  inView:sender permittedArrowDirections:UIPopoverArrowDirectionLeft animated:NO];
+}
+
 -(void)createBlackStatusBar{
     CGFloat statusBarHeight = 20.0;
     UIView* colorView = [[UIView alloc]initWithFrame:CGRectMake(0, -statusBarHeight, self.view.bounds.size.width, statusBarHeight)];
@@ -158,6 +188,7 @@ MBProgressHUD *HUD;
         return 0;
     }
     else {
+        NSLog(@"%i",[ProspectTableData count]+1);
         return [ProspectTableData count]+1;
     }
 }
@@ -167,15 +198,13 @@ MBProgressHUD *HUD;
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        cell = [[ProspectListingTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
    
 	//change
 	if (ProspectTableData.count != 0) {
 		if (indexPath.row == [ProspectTableData count]) {
-			cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-			
+			//cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 			if ([ProspectTableData count] == TotalData) {
 				cell.textLabel.text = @"No More records Available";
 			}
@@ -186,10 +215,71 @@ MBProgressHUD *HUD;
 			cell.textLabel.textColor = [UIColor grayColor];
 			cell.textLabel.font = [UIFont boldSystemFontOfSize:14];
             cell.userInteractionEnabled = NO;
-		
 		}
         else if(indexPath.row <[ProspectTableData count]){
-            cell.userInteractionEnabled = YES;
+            static NSString *CellIdentifier = @"Cell";
+            ProspectListingTableViewCell *cell1 = (ProspectListingTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (cell1 == nil) {
+                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ProspectListingTableViewCell" owner:self options:nil];
+                cell1 = [nib objectAtIndex:0];
+            }
+            ProspectProfile *pp = [ProspectTableData objectAtIndex:indexPath.row];
+            
+            int hoursToAdd = 2160;
+            NSDateFormatter *df = [[NSDateFormatter alloc] init];
+            NSArray *CreatedDate = [pp.DateCreated componentsSeparatedByString:@" "];
+            NSString *CreatedDateString = [CreatedDate objectAtIndex:0];
+            NSString *CreatedTimeString = [CreatedDate objectAtIndex:1];
+            NSString *DateNTime = [NSString stringWithFormat:@"%@ %@",CreatedDateString,CreatedTimeString];
+            
+            NSDateFormatter *dateFormatter1 = [[NSDateFormatter alloc] init];
+            // this is imporant - we set our input date format to match our input string
+            // if format doesn't match you'll get nil from your string, so be careful
+            [dateFormatter1 setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+            NSDate *dateFromString1 = [[NSDate alloc] init];
+            // voila!
+            dateFromString1 = [dateFormatter1 dateFromString:DateNTime];
+            
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+            [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+            
+            NSDate *FinalDate = dateFromString1;
+
+            NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+            NSDateComponents *components = [[NSDateComponents alloc] init];
+            [components setHour:hoursToAdd];
+            NSDate *newDate= [calendar dateByAddingComponents:components toDate:FinalDate options:0];
+            
+            [df setDateFormat:@"dd/MM/yyyy ( HH:mm a )"];
+            NSString *strNewDate = [df stringFromDate:newDate];
+            
+            NSDate *mydate = [NSDate date];
+            NSTimeInterval secondsInEightHours = 8 * 60 * 60;
+            NSDate *currentDate = [mydate dateByAddingTimeInterval:secondsInEightHours];
+            NSDate *expireDate = [newDate dateByAddingTimeInterval:secondsInEightHours];
+            
+            int countdown = -[currentDate timeIntervalSinceDate:expireDate];//pay attention here.
+            int minutes = (countdown / 60) % 60;
+            int hours = (countdown / 3600) % 24;
+            int days = (countdown / 86400) % 30;
+            
+            NSString *DateRemaining =[NSString stringWithFormat:@"%d Days %d Hours\n %d Minutes",days,hours,minutes];
+            
+            if ([dataIndex containsObject:pp.ProspectID]){
+                int indexArray = [dataIndex indexOfObject:pp.ProspectID];
+                [cell1.labelPhone1 setText:[NSString stringWithFormat:@"%@ - %@",[dataPrefix objectAtIndex:indexArray],[dataMobile objectAtIndex:indexArray]]];
+            }
+            
+            [cell1.labelName setText:pp.ProspectName];
+            [cell1.labelDOB setText:pp.ProspectDOB];
+            [cell1.labelBranchName setText:pp.BranchName];
+            [cell1.labelPhone1 setText:@""];
+            [cell1.labelDateCreated setText:pp.DateCreated];
+            [cell1.labelDateModified setText:pp.DateModified];
+            [cell1.labelTimeRemaining setText:DateRemaining];
+            cell=cell1;
+           
+            /*cell.userInteractionEnabled = YES;
 			cell.textLabel.text = nil;
 			
 			//ORIGINAL
@@ -200,7 +290,7 @@ MBProgressHUD *HUD;
 			[[cell.contentView viewWithTag:2005] removeFromSuperview ];
 			[[cell.contentView viewWithTag:2006] removeFromSuperview ];
 			
-			ProspectProfile *pp = [ProspectTableData objectAtIndex:indexPath.row];
+			
 			ColorHexCode *CustomColor = [[ColorHexCode alloc]init ];
 			
             NSLog(@"prospect name %@",pp.ProspectName);
@@ -416,14 +506,12 @@ MBProgressHUD *HUD;
 				label4.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
 				label5.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
 				label6.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
-			}
+			}*/
 						
 			// ADD HERE
 			[spinner stopAnimating];
 			spinner.hidden=YES;
-			
 			pp = Nil;
-
         }
         else {
             if (!self.noMoreResultsAvail) {
@@ -523,12 +611,54 @@ MBProgressHUD *HUD;
 	[db close];
 }
 
+#pragma mark - delegate
+-(void)DateSelected:(NSString *)strDate :(NSString *)dbDate
+{
+    NSDateFormatter* df = [[NSDateFormatter alloc] init];
+    [df setDateFormat:@"dd/MM/yyyy"];
+    
+    NSDate *d = [NSDate date];
+    NSDate* d2 = [df dateFromString:strDate];
+    
+    NSDateFormatter *formatter;
+    NSString        *dateString;
+    NSString        *clientDateString;
+    
+    formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"dd/MM/yyyy"];
+    
+    NSDateFormatter* clientDateFormmater = [[NSDateFormatter alloc] init];
+    [clientDateFormmater setDateFormat:@"yyyy-MM-dd"];
+    
+    dateString = [formatter stringFromDate:[NSDate date]];
+    clientDateString = [clientDateFormmater stringFromDate:d2];
+    
+    if ([d compare:d2] == NSOrderedAscending){
+        NSString *validationTanggalLahirFuture=@"Tanggal lahir tidak dapat lebih besar dari tanggal hari ini";
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
+                                                        message:validationTanggalLahirFuture delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil];
+        [alert show];
+    }
+    else{
+        _outletDOB.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        [_outletDOB setTitle:clientDateString forState:UIControlStateNormal];
+    }
+    df = Nil, d = Nil, d2 = Nil;
+}
+
+-(void)CloseWindow
+{
+    [self resignFirstResponder];
+    [self.view endEditing:YES];
+    [_SIDatePopover dismissPopoverAnimated:YES];
+}
+
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     RecDelete = RecDelete+1;
-      
+    
     if ([self.myTableView isEditing] == TRUE ) {
         BOOL gotRowSelected = FALSE;
         
@@ -798,7 +928,7 @@ MBProgressHUD *HUD;
                                                                  AndOfficeAddress1:OfficeAddress1 AndOfficeAddress2:OfficeAddress2 AndOfficeAddress3:OfficeAddress3 AndOfficeAddressTown:OfficeAddressTown
                                                              AndOfficeAddressState:OfficeAddressState AndOfficeAddressPostCode:OfficeAddressPostCode
                                                            AndOfficeAddressCountry:OfficeAddressCountry AndProspectEmail:ProspectEmail AndProspectRemark:ProspectRemark AndDateCreated:DateCreated AndDateModified:DateModified AndCreatedBy:CreatedBy AndModifiedBy:ModifiedBy
-                                                         AndProspectOccupationCode:ProspectOccupationCode AndProspectDOB:ProspectDOB AndExactDuties:ExactDuties AndGroup:ProspectGroup AndTitle:ProspectTitle AndIDTypeNo:IDTypeNo AndOtherIDType:OtherIDType AndOtherIDTypeNo:OtherIDTypeNo AndSmoker:Smoker AndAnnIncome:AnnIncome AndBussType:BussinessType AndRace:Race AndMaritalStatus:MaritalStatus AndReligion:Religion AndNationality:Nationality AndRegistrationNo:registrationNo AndRegistration:registration AndRegistrationDate:registrationDate AndRegistrationExempted:regExempted AndProspect_IsGrouping:isGrouping AndCountryOfBirth:COB AndNIP:@"" AndBranchCode:@"" AndBranchName:@"" AndKCU:@"" AndReferralSource:@"" AndReferralName:@"" AndIdentitySubmitted:@"" AndIDExpirityDate:@"" AndNPWPNo:@""]];
+                                                         AndProspectOccupationCode:ProspectOccupationCode AndProspectDOB:ProspectDOB AndExactDuties:ExactDuties AndGroup:ProspectGroup AndTitle:ProspectTitle AndIDTypeNo:IDTypeNo AndOtherIDType:OtherIDType AndOtherIDTypeNo:OtherIDTypeNo AndSmoker:Smoker AndAnnIncome:AnnIncome AndBussType:BussinessType AndRace:Race AndMaritalStatus:MaritalStatus AndReligion:Religion AndNationality:Nationality AndRegistrationNo:registrationNo AndRegistration:registration AndRegistrationDate:registrationDate AndRegistrationExempted:regExempted AndProspect_IsGrouping:isGrouping AndCountryOfBirth:COB AndNIP:@"" AndBranchCode:@"" AndBranchName:@"" AndKCU:@"" AndReferralSource:@"" AndReferralName:@"" AndIdentitySubmitted:@"" AndIDExpirityDate:@"" AndNPWPNo:@"" AndKanwil:@"" AndHomeVillage:@"" AndHomeDistrict:@"" AndHomeProvince:@"" AndOfficeVillage:@"" AndOfficeDistrict:@"" AndOfficePorvince:@"" AndSourceIncome:@"" AndClientSegmentation:@""]];
             }
             sqlite3_finalize(statement);
             
@@ -932,7 +1062,7 @@ MBProgressHUD *HUD;
 
 -(void)getMobileNo
 {
-
+    dataIndex = [[NSMutableArray alloc] initWithArray:[modelProspectProfile getDataMobileAndPrefix:@"Index" ProspectTableData:ProspectTableData]];
     dataMobile = [[NSMutableArray alloc] initWithArray:[modelProspectProfile getDataMobileAndPrefix:@"ContactNo" ProspectTableData:ProspectTableData]];
     dataPrefix = [[NSMutableArray alloc] initWithArray:[modelProspectProfile getDataMobileAndPrefix:@"Prefix" ProspectTableData:ProspectTableData]];
     
@@ -989,11 +1119,11 @@ MBProgressHUD *HUD;
 
 -(void) ReloadTableData
 {
+    [self getTotal];
+    [ProspectTableData removeAllObjects];
     ProspectTableData=[modelProspectProfile getProspectProfile];
+    [self getMobileNo];
     [self.myTableView reloadData];
-	[self getTotal];
-	[self getMobileNo];
-    [HUD hide:YES];
 }
 
 -(void) FinishEdit
@@ -1087,7 +1217,7 @@ MBProgressHUD *HUD;
     }
     else
     {
-        if (sqlite3_open([databasePath UTF8String], &contactDB) == SQLITE_OK) {
+        /*if (sqlite3_open([databasePath UTF8String], &contactDB) == SQLITE_OK) {
             querySQL = @"SELECT * FROM prospect_profile";
 			
 			if (![txtIDTypeNo.text isEqualToString:@""] && ![nametxt.text isEqualToString:@""] && (![trim_group isEqualToString:@""] && ![trim_group isEqualToString:@"- SELECT -"])) {
@@ -1291,7 +1421,7 @@ MBProgressHUD *HUD;
                     const char *CountryOfBirth = (const char*)sqlite3_column_text(statement, 46);
                     NSString *COB = CountryOfBirth == NULL ? nil : [[NSString alloc] initWithUTF8String:CountryOfBirth];
                         
-                    [ProspectTableData addObject:[[ProspectProfile alloc] initWithName:NickName AndProspectID:ProspectID AndProspectName:ProspectName AndProspecGender:ProspectGender AndResidenceAddress1:ResidenceAddress1 AndResidenceAddress2:ResidenceAddress2 AndResidenceAddress3:ResidenceAddress3 AndResidenceAddressTown:ResidenceAddressTown AndResidenceAddressState:ResidenceAddressState AndResidenceAddressPostCode:ResidenceAddressPostCode AndResidenceAddressCountry:ResidenceAddressCountry AndOfficeAddress1:OfficeAddress1 AndOfficeAddress2:OfficeAddress2 AndOfficeAddress3:OfficeAddress3 AndOfficeAddressTown:OfficeAddressTown AndOfficeAddressState:OfficeAddressState AndOfficeAddressPostCode:OfficeAddressPostCode AndOfficeAddressCountry:OfficeAddressCountry AndProspectEmail:ProspectEmail AndProspectRemark:ProspectRemark AndDateCreated:DateCreated AndDateModified:DateModified AndCreatedBy:CreatedBy AndModifiedBy:ModifiedBy AndProspectOccupationCode:ProspectOccupationCode AndProspectDOB:ProspectDOB AndExactDuties:ExactDuties AndGroup:ProspectGroup AndTitle:ProspectTitle AndIDTypeNo:IDTypeNo AndOtherIDType:OtherIDType AndOtherIDTypeNo:OtherIDTypeNo AndSmoker:Smoker AndAnnIncome:AnnIncome AndBussType:BussinessType AndRace:Race AndMaritalStatus:MaritalStatus AndReligion:Religion AndNationality:Nationality AndRegistrationNo:registrationNo AndRegistration:registration AndRegistrationDate:registrationDate AndRegistrationExempted:regExempted AndProspect_IsGrouping:isGroup AndCountryOfBirth:COB AndNIP:@"" AndBranchCode:@"" AndBranchName:@"" AndKCU:@"" AndReferralSource:@"" AndReferralName:@"" AndIdentitySubmitted:@"" AndIDExpirityDate:@"" AndNPWPNo:@""]];
+                    [ProspectTableData addObject:[[ProspectProfile alloc] initWithName:NickName AndProspectID:ProspectID AndProspectName:ProspectName AndProspecGender:ProspectGender AndResidenceAddress1:ResidenceAddress1 AndResidenceAddress2:ResidenceAddress2 AndResidenceAddress3:ResidenceAddress3 AndResidenceAddressTown:ResidenceAddressTown AndResidenceAddressState:ResidenceAddressState AndResidenceAddressPostCode:ResidenceAddressPostCode AndResidenceAddressCountry:ResidenceAddressCountry AndOfficeAddress1:OfficeAddress1 AndOfficeAddress2:OfficeAddress2 AndOfficeAddress3:OfficeAddress3 AndOfficeAddressTown:OfficeAddressTown AndOfficeAddressState:OfficeAddressState AndOfficeAddressPostCode:OfficeAddressPostCode AndOfficeAddressCountry:OfficeAddressCountry AndProspectEmail:ProspectEmail AndProspectRemark:ProspectRemark AndDateCreated:DateCreated AndDateModified:DateModified AndCreatedBy:CreatedBy AndModifiedBy:ModifiedBy AndProspectOccupationCode:ProspectOccupationCode AndProspectDOB:ProspectDOB AndExactDuties:ExactDuties AndGroup:ProspectGroup AndTitle:ProspectTitle AndIDTypeNo:IDTypeNo AndOtherIDType:OtherIDType AndOtherIDTypeNo:OtherIDTypeNo AndSmoker:Smoker AndAnnIncome:AnnIncome AndBussType:BussinessType AndRace:Race AndMaritalStatus:MaritalStatus AndReligion:Religion AndNationality:Nationality AndRegistrationNo:registrationNo AndRegistration:registration AndRegistrationDate:registrationDate AndRegistrationExempted:regExempted AndProspect_IsGrouping:isGroup AndCountryOfBirth:COB AndNIP:@"" AndBranchCode:@"" AndBranchName:@"" AndKCU:@"" AndReferralSource:@"" AndReferralName:@"" AndIdentitySubmitted:@"" AndIDExpirityDate:@"" AndNPWPNo:@"" AndKanwil:@"" AndHomeVillage:@"" AndHomeDistrict:@"" AndHomeProvince:@"" AndOfficeVillage:@"" AndOfficeDistrict:@"" AndOfficePorvince:@"" AndSourceIncome:@"" AndClientSegmentation:@""]];
                     
                     ProspectID = Nil;
                     NickName = Nil;
@@ -1324,7 +1454,8 @@ MBProgressHUD *HUD;
             }
             sqlite3_close(contactDB);
             querySQL = Nil;
-        }
+        }*/
+        ProspectTableData=[modelProspectProfile searchProspectProfileByName:nametxt.text BranchName:_txtBranchName.text DOB:_outletDOB.titleLabel.text];
     }
     [self getMobileNo];
     
@@ -1356,14 +1487,16 @@ MBProgressHUD *HUD;
     [self hideKeyboard];
     nametxt.text = @"";
     txtIDTypeNo.text = @"";
+    _txtBranchName.text = @"";
+    [_outletDOB setTitle:@"" forState:UIControlStateNormal];
+    
     idTypeLabel.highlighted= false;
     [btnGroup setTitle:@"- SELECT -" forState:UIControlStateNormal];
     btnGroup.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
 	
 	totalView = 20;
     [self ReloadTableData];
-	[self performSelector:@selector(loadDataDelayed) withObject:nil afterDelay:2];
-	
+//	[self performSelector:@selector(loadDataDelayed) withObject:nil afterDelay:2];
 }
 
 - (IBAction)editPressed:(id)sender

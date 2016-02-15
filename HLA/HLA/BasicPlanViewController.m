@@ -926,13 +926,13 @@ bool WPTPD30RisDeleted = FALSE;
     
     zzz.planChoose = planChoose;
     termField.hidden = NO;
-    btnPlan.titleLabel.text = @"BCA Life Heritage";
+    btnPlan.titleLabel.text = @"";
     labelThree.text = @"Basic Sum Assured :";
     planChoose = STR_L100;
     zzz.planChoose = planChoose;
     termField.hidden = NO;
     termField.text = [NSString stringWithFormat:@"%d", 100 - ageClient];
-    [self.btnPlan setTitle:@"BCA Life Heritage" forState:UIControlStateNormal];
+    [self.btnPlan setTitle:@"" forState:UIControlStateNormal];
     
     [MOPSegment setTitle:@" Single Payment " forSegmentAtIndex:0];
     [MOPSegment setTitle:@" 5 payment " forSegmentAtIndex:1];
@@ -1058,13 +1058,13 @@ bool WPTPD30RisDeleted = FALSE;
     
     //MOPHLACP = 6;
     advanceYearlyIncomeHLACP = 0;
-    btnPlan.titleLabel.text = @"BCA Life Heritage";
+    btnPlan.titleLabel.text = @"";
     planChoose = STR_HLAWP;
     termField.hidden = NO;
     termField.text = [NSString stringWithFormat:@"%d", 100 - age];
     del.planChoose = planChoose;
     
-    [self.btnPlan setTitle:@"BCA Life Heritage" forState:UIControlStateNormal];
+    [self.btnPlan setTitle:@"" forState:UIControlStateNormal];
 }
 
 #pragma mark - calculation
