@@ -167,6 +167,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtContact3;
 @property (weak, nonatomic) IBOutlet UITextField *txtContact4;
 @property (weak, nonatomic) IBOutlet UITextField *txtEmail;
+@property (weak, nonatomic) IBOutlet UITextField *txtCountryOfBirth;
 @property (strong, nonatomic) IBOutlet UITextField *txtClass;
 @property (strong, nonatomic) IBOutlet UIButton *btnForeignHome;
 @property (strong, nonatomic) IBOutlet UIButton *btnForeignOffice;

@@ -46,6 +46,8 @@ MBProgressHUD *HUD;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    sortMethod=@"ASC";
+    
     borderColor=[[UIColor alloc]initWithRed:250.0/255.0 green:175.0/255.0 blue:50.0/255.0 alpha:1.0];
     
     _outletDOB.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
@@ -671,11 +673,11 @@ MBProgressHUD *HUD;
         }
         
         if (!gotRowSelected) {
-            [deleteBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal ];
+            ////[deleteBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal ];
             deleteBtn.enabled = FALSE;
         }
         else {
-            [deleteBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            ////[deleteBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             deleteBtn.enabled = TRUE;
         }
         
@@ -708,11 +710,11 @@ MBProgressHUD *HUD;
         }
         
         if (RecDelete < 1) {
-            [deleteBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal ];
+            ////[deleteBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal ];
             deleteBtn.enabled = FALSE;
         }
         else {
-            [deleteBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            ////[deleteBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             deleteBtn.enabled = TRUE;
         }
         
@@ -1184,15 +1186,43 @@ MBProgressHUD *HUD;
     }
 }
 
-- (IBAction)btnSortBy:(id)sender
+- (IBAction)btnSortBy:(UIButton *)sender
 {
-    if (_SortBy == nil) {
+    /*if (_SortBy == nil) {
         self.SortBy = [[ClientProfileListingSortBy alloc] initWithStyle:UITableViewStylePlain];
         _SortBy.delegate = self;
         self.Popover = [[UIPopoverController alloc] initWithContentViewController:_SortBy];
     }
     [self.Popover setPopoverContentSize:CGSizeMake(200, 300)];
-    [self.Popover presentPopoverFromRect:[sender frame ]  inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    [self.Popover presentPopoverFromRect:[sender frame ]  inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];*/
+    NSString* sortedBy=sender.titleLabel.text;
+    if (sender==_btnSortFullName){
+        sortedBy=@"ProspectName";
+    }
+    else if (sender==_btnSortDOB){
+        sortedBy=@"ProspectDOB";
+    }
+    else if (sender==_btnSortBranchName){
+        sortedBy=@"BranchName";
+    }
+    else if (sender==_btnSortDateCreated){
+        sortedBy=@"DateCreated";
+    }
+    else if (sender==_btnSortDateModified){
+        sortedBy=@"DateModified";
+    }
+    
+    ProspectTableData=[modelProspectProfile searchProspectProfileByName:nametxt.text BranchName:_txtBranchName.text DOB:_outletDOB.titleLabel.text Order:sortedBy Method:sortMethod];
+    [self getMobileNo];
+    TotalData = ProspectTableData.count;
+    [self.myTableView reloadData];
+    
+    if ([sortMethod isEqualToString:@"ASC"]){
+        sortMethod=@"DESC";
+    }
+    else{
+        sortMethod=@"ASC";
+    }
 }
 
 - (IBAction)searchPressed:(id)sender
@@ -1455,7 +1485,7 @@ MBProgressHUD *HUD;
             sqlite3_close(contactDB);
             querySQL = Nil;
         }*/
-        ProspectTableData=[modelProspectProfile searchProspectProfileByName:nametxt.text BranchName:_txtBranchName.text DOB:_outletDOB.titleLabel.text];
+        ProspectTableData=[modelProspectProfile searchProspectProfileByName:nametxt.text BranchName:_txtBranchName.text DOB:_outletDOB.titleLabel.text Order:@"ProspectName" Method:@"ASC"];
     }
     [self getMobileNo];
     
@@ -1519,7 +1549,7 @@ MBProgressHUD *HUD;
         
         [self.myTableView setEditing:YES animated:TRUE];
         deleteBtn.hidden = FALSE;
-        [deleteBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal ];
+        //[deleteBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal ];
         [editBtn setTitle:@"Cancel" forState:UIControlStateNormal ];
     }
 }
@@ -1708,7 +1738,7 @@ MBProgressHUD *HUD;
         [ItemToBeDeleted removeAllObjects];
         [indexPaths removeAllObjects];
         deleteBtn.enabled = FALSE;
-        [deleteBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal ];
+        //[deleteBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal ];
         
         [self ReloadTableData];
         
@@ -1793,7 +1823,7 @@ MBProgressHUD *HUD;
     [ItemToBeDeleted removeAllObjects];
     [indexPaths removeAllObjects];
     deleteBtn.enabled = FALSE;
-    [deleteBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal ];
+    //[deleteBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal ];
     
     [self ReloadTableData];
 }

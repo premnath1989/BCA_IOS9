@@ -54,7 +54,7 @@ NSString *SelectedString;
         //GET THE TRAD/UL SI VERSION START
         FMResultSet *results2;
         //NSString *title;
-        results2 =  [database executeQuery:@"SELECT TitleCode, TitleDesc from eProposal_Title ORDER BY TitleDesc asc"];
+        results2 =  [database executeQuery:@"SELECT TitleCode, TitleDesc from eProposal_Title where status = 'A' ORDER BY TitleDesc asc"];
         
         while ([results2 next]) {
             

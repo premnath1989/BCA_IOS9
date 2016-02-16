@@ -272,10 +272,13 @@ bool RegDatehandling;
     outletRigDate.titleLabel.textColor = [UIColor grayColor];
     ColorHexCode *CustomColor = [[ColorHexCode alloc] init ];
     
-    txtHomeTown.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+    txtOfficeCountry.enabled=false;
+    txtHomeCountry.enabled=false;
+    
+    ////txtHomeTown.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
     txtHomeState.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
     txtHomeCountry.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
-    txtOfficeTown.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+    // txtOfficeTown.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
     txtOfficeState.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
     txtOfficeCountry.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
     txtClass.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
@@ -404,6 +407,10 @@ bool RegDatehandling;
             textField.layer.borderWidth=1.0;
             textField.delegate=self;
             [textField setFont:font];
+            
+            UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
+            textField.leftView = paddingView;
+            textField.leftViewMode = UITextFieldViewModeAlways;
         }
     }
     
@@ -439,7 +446,7 @@ bool RegDatehandling;
             textView.delegate=self;
             [textView setFont:font];
             
-            textView.textContainerInset = UIEdgeInsetsMake(0, 20, 0, 20);
+            textView.textContainerInset = UIEdgeInsetsMake(0, 5, 0, 20);
         }
     }
     
@@ -573,11 +580,13 @@ bool RegDatehandling;
     else if ([validationSet containsObject:KCU]||KCU==NULL){
         [self createAlertViewAndShow:validationKCU tag:0];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+        [txtKcu becomeFirstResponder];
         return false;
     }
     else if ([validationSet containsObject:refName]||refName==NULL){
         [self createAlertViewAndShow:validationNamaReferral tag:0];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+        [txtReferralName becomeFirstResponder];
         return false;
     }
     else if ([validationSet containsObject:refSource]||refSource==NULL){
@@ -625,6 +634,7 @@ bool RegDatehandling;
     if ([validationSet containsObject:fullName]||fullName==NULL){
         [self createAlertViewAndShow:validationNamaLengkap tag:0];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+        [txtFullName becomeFirstResponder];
         return false;
     }
     else if (segGender.selectedSegmentIndex==UISegmentedControlNoSegment){
@@ -707,57 +717,90 @@ bool RegDatehandling;
     if ([texthomeaddress1 isEqualToString:@""]||texthomeaddress1==NULL){
         [self createAlertViewAndShow:validationAlamat tag:0];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+        [txtHomeAddr1 becomeFirstResponder];
         return false;
     }
     else if ([texthomeaddress2 isEqualToString:@""]||texthomeaddress2==NULL){
         [self createAlertViewAndShow:validationAlamat tag:0];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+        [txtHomeAddr2 becomeFirstResponder];
         return false;
     }
     else if ([texthomeaddress3 isEqualToString:@""]||texthomeaddress3==NULL){
         [self createAlertViewAndShow:validationAlamat tag:0];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+        [txtHomeAddr3 becomeFirstResponder];
         return false;
     }
-    else if ([textprefix1 isEqualToString:@""]||textprefix1==NULL){
-        [self createAlertViewAndShow:validationAreaTelponRumah tag:0];
-        [ClientProfile setObject:@"NO" forKey:@"TabBar"];
-        return false;
+//    else if ([textprefix1 isEqualToString:@""]||textprefix1==NULL){
+    else if (![textprefix1 isEqualToString:@""]){
+        if ([txtPrefix1.text length]<6){
+            [self createAlertViewAndShow:validationAreaTelponRumah tag:0];
+            [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+            [txtPrefix1 becomeFirstResponder];
+            return false;
+        }
     }
-    else if ([textcontact1 isEqualToString:@""]||textcontact1==NULL){
-        [self createAlertViewAndShow:validationNumberTelponRumah tag:0];
-        [ClientProfile setObject:@"NO" forKey:@"TabBar"];
-        return false;
+    //else if ([textcontact1 isEqualToString:@""]||textcontact1==NULL){
+    else if (![textcontact1 isEqualToString:@""]){
+        if ([textcontact1 length]<6){
+            [self createAlertViewAndShow:validationNumberTelponRumah tag:0];
+            [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+            [txtContact1 becomeFirstResponder];
+            return false;
+        }
     }
     else if ([textprefix2 isEqualToString:@""]||textprefix2==NULL){
-        [self createAlertViewAndShow:validationAreaHPUtama tag:0];
-        [ClientProfile setObject:@"NO" forKey:@"TabBar"];
-        return false;
+        if ([txtPrefix2.text length]<6){
+            [self createAlertViewAndShow:validationAreaHPUtama tag:0];
+            [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+            [txtPrefix2 becomeFirstResponder];
+            return false;
+        }
     }
     else if ([textcontact2 isEqualToString:@""]||textcontact2==NULL){
-        [self createAlertViewAndShow:validationNumberHPUtama tag:0];
-        [ClientProfile setObject:@"NO" forKey:@"TabBar"];
-        return false;
+        if ([textcontact2 length]<6){
+            [self createAlertViewAndShow:validationNumberHPUtama tag:0];
+            [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+            [txtContact2 becomeFirstResponder];
+            return false;
+        }
     }
-    else if ([textprefix3 isEqualToString:@""]||textprefix3==NULL){
-        [self createAlertViewAndShow:validationAreaHP2 tag:0];
-        [ClientProfile setObject:@"NO" forKey:@"TabBar"];
-        return false;
+    //else if ([textprefix3 isEqualToString:@""]||textprefix3==NULL){
+    else if (![textprefix3 isEqualToString:@""]){
+        if ([txtPrefix3.text length]<6){
+            [self createAlertViewAndShow:validationAreaHP2 tag:0];
+            [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+            [txtPrefix3 becomeFirstResponder];
+            return false;
+        }
     }
-    else if ([textcontact3 isEqualToString:@""]||textcontact3==NULL){
-        [self createAlertViewAndShow:validationNumberHP2 tag:0];
-        [ClientProfile setObject:@"NO" forKey:@"TabBar"];
-        return false;
+    //else if ([textcontact3 isEqualToString:@""]||textcontact3==NULL){
+    else if (![textcontact3 isEqualToString:@""]){
+        if ([textcontact3 length]<6){
+            [self createAlertViewAndShow:validationNumberHP2 tag:0];
+            [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+            [txtContact3 becomeFirstResponder];
+            return false;
+        }
     }
-    else if ([textprefix4 isEqualToString:@""]||textprefix4==NULL){
-        [self createAlertViewAndShow:validationAreaTelponKantor tag:0];
-        [ClientProfile setObject:@"NO" forKey:@"TabBar"];
-        return false;
+    //else if ([textprefix4 isEqualToString:@""]||textprefix4==NULL){
+    else if (![textprefix4 isEqualToString:@""]){
+        if ([txtPrefix4.text length]<6){
+            [self createAlertViewAndShow:validationAreaTelponKantor tag:0];
+            [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+            [txtPrefix4 becomeFirstResponder];
+            return false;
+        }
     }
-    else if ([textcontact4 isEqualToString:@""]||textcontact4==NULL){
-        [self createAlertViewAndShow:validationNumberTelponKantor tag:0];
-        [ClientProfile setObject:@"NO" forKey:@"TabBar"];
-        return false;
+    //else if ([textcontact4 isEqualToString:@""]||textcontact4==NULL){
+    else if (![textcontact4 isEqualToString:@""]){
+        if ([textcontact4 length]<6){
+            [self createAlertViewAndShow:validationNumberTelponKantor tag:0];
+            [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+            [txtContact4 becomeFirstResponder];
+            return false;
+        }
     }
     return valid;
 }
@@ -787,6 +830,7 @@ bool RegDatehandling;
     else if ([textannincome isEqualToString:@""]||textannincome==NULL){
         [self createAlertViewAndShow:validationPendapatanTahunan tag:0];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+        [txtAnnIncome becomeFirstResponder];
         return false;
     }
     else if ([validationSet containsObject:outletsourceincome]||outletsourceincome==NULL){
@@ -1476,6 +1520,110 @@ bool RegDatehandling;
     return YES;
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (textField == txtNip) {
+        [textField resignFirstResponder];
+    } else if (textField == txtReferralName) {
+        [textField resignFirstResponder];
+    }
+    else if (textField == txtFullName) {
+        [textField resignFirstResponder];
+    }
+    else if (textField == txtOtherIDType) {
+        [textField resignFirstResponder];
+    }
+    else if (textField == _txtCountryOfBirth) {
+        [textField resignFirstResponder];
+    }
+    else if (textField == txtAnnIncome) {
+        [textField resignFirstResponder];
+    }
+    else if (textField == txtNPWPNo) {
+        [textField resignFirstResponder];
+    }
+    else if (textField == txtKcu) {
+        [txtKanwil becomeFirstResponder];
+    }
+    else if (textField == txtKanwil) {
+        [txtReferralName becomeFirstResponder];
+    }
+    else if (textField == txtHomeAddr1) {
+        [txtHomeAddr2 becomeFirstResponder];
+    }
+    else if (textField == txtHomeAddr2) {
+        [txtHomeAddr3 becomeFirstResponder];
+    }
+    else if (textField == txtHomeAddr3) {
+        [txtHomePostCode becomeFirstResponder];
+    }
+    else if (textField == txtHomePostCode) {
+        [txtHomeVillage becomeFirstResponder];
+    }
+    else if (textField == txtHomeVillage) {
+        [txtHomeDistrict becomeFirstResponder];
+    }
+    else if (textField == txtHomeDistrict) {
+        [txtHomeTown becomeFirstResponder];
+    }
+    else if (textField == txtHomeTown) {
+        [txtHomeProvince becomeFirstResponder];
+    }
+    else if (textField == txtHomeProvince) {
+        [txtPrefix1 becomeFirstResponder];
+    }
+    else if (textField == txtPrefix1) {
+        [txtContact1 becomeFirstResponder];
+    }
+    else if (textField == txtContact1) {
+        [txtPrefix2 becomeFirstResponder];
+    }
+    else if (textField == txtPrefix2) {
+        [txtContact2 becomeFirstResponder];
+    }
+    else if (textField == txtContact2) {
+        [txtPrefix3 becomeFirstResponder];
+    }
+    else if (textField == txtPrefix3) {
+        [txtContact3 becomeFirstResponder];
+    }
+    else if (textField == txtContact3) {
+        [txtOfficeAddr1 becomeFirstResponder];
+    }
+    else if (textField == txtOfficeAddr1) {
+        [txtOfficeAddr2 becomeFirstResponder];
+    }
+    else if (textField == txtOfficeAddr2) {
+        [txtOfficeAddr3 becomeFirstResponder];
+    }
+
+    else if (textField == txtOfficeAddr3) {
+        [txtOfficePostcode becomeFirstResponder];
+    }
+    else if (textField == txtOfficePostcode) {
+        [txtOfficeVillage becomeFirstResponder];
+    }
+    else if (textField == txtOfficeVillage) {
+        [txtOfficeDistrict becomeFirstResponder];
+    }
+    else if (textField == txtOfficeDistrict) {
+        [txtOfficeTown becomeFirstResponder];
+    }
+    else if (textField == txtOfficeTown) {
+        [txtOfficeProvince becomeFirstResponder];
+    }
+    else if (textField == txtOfficeProvince) {
+        [txtPrefix4 becomeFirstResponder];
+    }
+    else if (textField == txtPrefix4) {
+        [txtContact4 becomeFirstResponder];
+    }
+    else if (textField == txtContact4) {
+        [txtContact4 resignFirstResponder];
+    }
+    
+    return YES;
+}
+
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
@@ -1484,6 +1632,13 @@ bool RegDatehandling;
     
     NSString *myString = nil;
     NSUInteger newLength = [textField.text length] + [string length] - range.length;
+    
+    if ((textField == txtHomePostCode)||(textField == txtOfficePostcode)){
+        NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
+        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        
+        return (([string isEqualToString:filtered])&&(newLength <= 5));
+    }
     
     if((checked && textField == txtHomePostCode ) || (checked2 && textField == txtOfficePostcode)) {
         return ((newLength <= CHARACTER_LIMIT_FOREIGN_POSTCODE));
@@ -2090,7 +2245,8 @@ bool RegDatehandling;
     [ClientProfile setObject:@"YES" forKey:@"isNew"];
     
     if (_SIDate == Nil) {
-        self.SIDate = [self.storyboard instantiateViewControllerWithIdentifier:@"SIDate"];
+        UIStoryboard *clientProfileStoryBoard = [UIStoryboard storyboardWithName:@"ClientProfileStoryboard" bundle:nil];
+        self.SIDate = [clientProfileStoryBoard instantiateViewControllerWithIdentifier:@"SIDate"];
         _SIDate.delegate = self;
         self.SIDatePopover = [[UIPopoverController alloc] initWithContentViewController:_SIDate];
     }
@@ -2144,7 +2300,7 @@ bool RegDatehandling;
             txtHomeTown.text = @"";
             txtHomeState.text = @"";
             //txtHomeCountry.text = @"";
-            txtHomeTown.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+            //txtHomeTown.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
             txtHomeState.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
             txtHomeCountry.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
             txtHomeTown.enabled = NO;
@@ -2194,8 +2350,8 @@ bool RegDatehandling;
             txtOfficePostcode.text = @"";
             txtOfficeTown.text = @"";
             txtOfficeState.text = @"";
-            txtOfficeCountry.text = @"";
-            txtOfficeTown.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+            //txtOfficeCountry.text = @"";
+            // txtOfficeTown.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
             txtOfficeState.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
             txtOfficeCountry.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
             txtOfficeTown.enabled = NO;
@@ -2313,10 +2469,10 @@ bool RegDatehandling;
     /*added by faiz*/
     [outletMaritalStatus setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"SINGLE"]forState:UIControlStateNormal];
     txtExactDuties.text=@"test";
-    txtPrefix1.text=@"021";
-    txtPrefix2.text=@"021";
-    txtPrefix3.text=@"021";
-    txtPrefix4.text=@"021";
+    //txtPrefix1.text=@"021";
+    //txtPrefix2.text=@"021";
+    //txtPrefix3.text=@"021";
+    //txtPrefix4.text=@"021";
     /*end of added by faiz*/
     
     if ([self Validation] == TRUE && DATE_OK == YES) {
@@ -2458,8 +2614,8 @@ bool RegDatehandling;
 			}
             
 			NSString *CountryOfBirth = @"";
-			CountryOfBirth = btnCoutryOfBirth.titleLabel.text;
-			CountryOfBirth = [self getCountryCode:CountryOfBirth];
+            CountryOfBirth = _txtCountryOfBirth.text;//btnCoutryOfBirth.titleLabel.text;
+			//CountryOfBirth = [self getCountryCode:CountryOfBirth];
             
             if(Update_record == YES) {
                 //GET PP  CHANGES COUNTER
@@ -2494,8 +2650,8 @@ bool RegDatehandling;
             } else {
                 insertSQL = [NSString stringWithFormat:
                              @"INSERT INTO prospect_profile(\'ProspectName\', \"ProspectDOB\", \"GST_registered\", \"GST_registrationNo\", \"GST_registrationDate\", \"GST_exempted\",\"ProspectGender\", \"ResidenceAddress1\", \"ResidenceAddress2\", \"ResidenceAddress3\", \"ResidenceAddressTown\", \"ResidenceAddressState\",\"ResidenceAddressPostCode\", \"ResidenceAddressCountry\", \"ResidenceDistrict\", \"ResidenceVillage\", \"ResidenceProvince\", \"OfficeAddress1\", \"OfficeAddress2\", \"OfficeAddress3\",\"OfficeAddressTown\", \"OfficeAddressState\", \"OfficeAddressPostCode\", \"OfficeAddressCountry\", \"OfficeDistrict\", \"OfficeVillage\", \"OfficeProvince\", \"ProspectEmail\",\"ProspectOccupationCode\", \"ExactDuties\", \"ProspectRemark\", \"ClientSegmentation\", \"DateCreated\", \"CreatedBy\", \"DateModified\",\"ModifiedBy\", \"ProspectGroup\", \"ProspectTitle\", \"IDTypeNo\", \"OtherIDType\", \"OtherIDTypeNo\", \"Smoker\", \"AnnualIncome\", \"SourceIncome\", \"BussinessType\", \"Race\", \"MaritalStatus\", \"Religion\", \"Nationality\", \"QQFlag\",\"ProspectProfileChangesCounter\",\"prospect_IsGrouping\", \"CountryOfBirth\", \"NIP\", \"BranchCode\", \"BranchName\", \"KCU\", \"Kanwil\",\"ReferralSource\", \"ReferralName\", \"IDExpiryDate\", \"NPWPNo\") "
-                             "VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\",\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", %@, \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\",\"%@\",\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%s\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", txtFullName.text, strDOB, GSTRigperson, txtRigNO.text, Rigdateoutlet,GSTRigExempted,gender, txtHomeAddr1.text, txtHomeAddr2.text, txtHomeAddr3.text, txtHomeTown.text, SelectedStateCode, txtHomePostCode.text, HomeCountry,txtHomeDistrict.text,txtHomeVillage.text, txtHomeProvince.text, txtOfficeAddr1.text, txtOfficeAddr2.text, txtOfficeAddr3.text, txtOfficeTown.text, SelectedOfficeStateCode, txtOfficePostcode.text, OffCountry, txtOfficeDistrict.text,txtOfficeVillage.text, txtOfficeCountry.text, txtEmail.text, OccupCodeSelected, txtExactDuties.text, txtRemark.text, _outletVIPClass.titleLabel.text,
-                             @"datetime(\"now\", \"+8 hour\")", @"1", @"", @"1", group, TitleCodeSelected , txtIDType.text, othertype, txtOtherIDType.text, ClientSmoker, txtAnnIncome.text, _outletSourceIncome.titleLabel.text, txtBussinessType.text,race,marital,religion,nation,"false",@"1", isGrouping, CountryOfBirth, txtNip.text, outletBranchCode.titleLabel.text, outletBranchName.titleLabel.text, txtKcu.text, txtKanwil.text, outletReferralSource.titleLabel.text, txtReferralName.text, strExpiryDate, txtNPWPNo.text];
+                             "VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\",\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", %@, \"%@\", %@, \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\",\"%@\",\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%s\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", txtFullName.text, strDOB, GSTRigperson, txtRigNO.text, Rigdateoutlet,GSTRigExempted,gender, txtHomeAddr1.text, txtHomeAddr2.text, txtHomeAddr3.text, txtHomeTown.text, SelectedStateCode, txtHomePostCode.text, HomeCountry,txtHomeDistrict.text,txtHomeVillage.text, txtHomeProvince.text, txtOfficeAddr1.text, txtOfficeAddr2.text, txtOfficeAddr3.text, txtOfficeTown.text, SelectedOfficeStateCode, txtOfficePostcode.text, OffCountry, txtOfficeDistrict.text,txtOfficeVillage.text, txtOfficeCountry.text, txtEmail.text, OccupCodeSelected, txtExactDuties.text, txtRemark.text, _outletVIPClass.titleLabel.text,
+                             @"datetime(\"now\", \"+8 hour\")", @"1", @"datetime(\"now\", \"+8 hour\")", @"1", group, TitleCodeSelected , txtIDType.text, othertype, txtOtherIDType.text, ClientSmoker, txtAnnIncome.text, _outletSourceIncome.titleLabel.text, txtBussinessType.text,race,marital,religion,nation,"false",@"1", isGrouping, CountryOfBirth, txtNip.text, outletBranchCode.titleLabel.text, outletBranchName.titleLabel.text, txtKcu.text, txtKanwil.text, outletReferralSource.titleLabel.text, txtReferralName.text, strExpiryDate, txtNPWPNo.text];
                 
             }
 			
@@ -7144,10 +7300,10 @@ bool RegDatehandling;
 -(void)ClearAll {
 	ColorHexCode *CustomColor = [[ColorHexCode alloc] init ];
     
-    txtHomeTown.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+    //txtHomeTown.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
     txtHomeState.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
     txtHomeCountry.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
-    txtOfficeTown.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+    // txtOfficeTown.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
     txtOfficeState.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
     txtOfficeCountry.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
     txtClass.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
