@@ -221,7 +221,7 @@
     return dataPrefix;
 }
 
--(NSMutableArray *)searchProspectProfileByName:(NSString *)searchName BranchName:(NSString *)branchName DOB:(NSString *)dateOfBirth{
+-(NSMutableArray *)searchProspectProfileByName:(NSString *)searchName BranchName:(NSString *)branchName DOB:(NSString *)dateOfBirth Order:(NSString *)orderBy Method:(NSString *)method{
     NSString *ProspectID = @"";
     NSString *NickName = @"";
     NSString *ProspectName = @"";
@@ -305,13 +305,11 @@
     //results = [database executeQuery:@"SELECT * FROM prospect_profile WHERE QQFlag = 'false'  order by LOWER(ProspectName) ASC LIMIT 20)", Nil];
     FMResultSet *s;
     if ([dateOfBirth length]>0){
-        s = [database executeQuery:[NSString stringWithFormat:@"SELECT * FROM prospect_profile WHERE ProspectName like \"%%%@%%\" and BranchName like \"%%%@%%\" and ProspectDOB = \"%@\" and QQFlag = 'false'  order by LOWER(ProspectName) ASC",searchName,branchName,dateOfBirth]];
+        s = [database executeQuery:[NSString stringWithFormat:@"SELECT * FROM prospect_profile WHERE ProspectName like \"%%%@%%\" and BranchName like \"%%%@%%\" and ProspectDOB = \"%@\" and QQFlag = 'false'  order by LOWER(\"%@\") %@",searchName,branchName,dateOfBirth,orderBy,method]];
     }
     else{
-        s = [database executeQuery:[NSString stringWithFormat:@"SELECT * FROM prospect_profile WHERE ProspectName like \"%%%@%%\" and BranchName like \"%%%@%%\" and QQFlag = 'false'  order by LOWER(ProspectName) ASC",searchName,branchName]];
+        s = [database executeQuery:[NSString stringWithFormat:@"SELECT * FROM prospect_profile WHERE ProspectName like \"%%%@%%\" and BranchName like \"%%%@%%\" and QQFlag = 'false'  order by LOWER(\"%@\") %@",searchName,branchName,orderBy,method]];
     }
-    
-    NSLog(@"%@",[NSString stringWithFormat:@"SELECT * FROM prospect_profile WHERE ProspectName like \"%%%@%%\" and BranchName like \"%%%@%%\" and ProspectDOB = \"%@\" and QQFlag = 'false'  order by LOWER(ProspectName) ASC",searchName,branchName,dateOfBirth]);
     
     while ([s next]) {
         //occpToEnableSection = [results stringForColumn:@"OccpCode"];

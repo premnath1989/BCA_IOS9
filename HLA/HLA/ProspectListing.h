@@ -32,6 +32,7 @@
     UIPopoverController *_GroupPopover;
     NSMutableArray *ItemToBeDeleted;
     NSMutableArray *indexPaths;
+    NSString* sortMethod;
     ClientProfileListingSortBy *_SortBy;
     UIPopoverController *_Popover;
 	
@@ -75,6 +76,13 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *outletOrder;
 @property (strong, nonatomic) IBOutlet UIButton *btnSortBy;
 @property (nonatomic, copy) NSString *OrderBy;
+
+@property (strong, nonatomic) IBOutlet UIButton *btnSortFullName;
+@property (strong, nonatomic) IBOutlet UIButton *btnSortDOB;
+@property (strong, nonatomic) IBOutlet UIButton *btnSortBranchName;
+@property (strong, nonatomic) IBOutlet UIButton *btnSortDateCreated;
+@property (strong, nonatomic) IBOutlet UIButton *btnSortDateModified;
+@property (strong, nonatomic) IBOutlet UIButton *btnSortTimeRemaining;
 
 - (IBAction)ActionGroup:(id)sender;
 - (IBAction)searchPressed:(id)sender;
