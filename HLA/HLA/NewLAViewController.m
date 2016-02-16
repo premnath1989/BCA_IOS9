@@ -11,7 +11,6 @@
 #import "SecondLAViewController.h"
 #import "BasicPlanViewController.h"
 #import "RiderViewController.h"
-
 #import "AppDelegate.h"
 #import "SIMenuViewController.h"
 #import "MainScreen.h"
@@ -42,7 +41,7 @@
 @synthesize ProspectList=_ProspectList;
 @synthesize NamePP,DOBPP,GenderPP,OccpCodePP,occPA;
 @synthesize getSINo,dataInsert2,btnDOB,btnOccp;
-@synthesize getHL,getHLTerm,getPolicyTerm,getSumAssured,getTempHL,getTempHLTerm,MOP,cashDividend,advanceYearlyIncome,yearlyIncome;
+@synthesize getHL,getHLTerm,getPolicyTerm,getSumAssured,getTempHL,getTempHLTerm,MOP,cashDividend,advanceYearlyIncome,yearlyIncome,NamaProduk;
 @synthesize termCover,planCode,arrExistRiderCode,arrExistPlanChoice;
 @synthesize prospectPopover = _prospectPopover;
 @synthesize idPayor,idProfile,idProfile2,lastIdPayor,lastIdProfile,planChoose,ridCode,atcRidCode,atcPlanChoice, outletDone;
@@ -57,17 +56,21 @@
 @synthesize OccupationListPopover = _OccupationListPopover;
 @synthesize siObj,requesteProposalStatus;
 @synthesize planName;
+@synthesize  SINOBCA,TanggalIllustrasi;
 
 @synthesize LAHbgTertanggung;
-@synthesize LAProductName;
+@synthesize LAProductName,Relationship;
 @synthesize quickQuoteFlag;
 
 id temp;
 id dobtemp;
+id dobtanngal;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self saveBasicPlan];
     
     NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docsDir = [dirPaths objectAtIndex:0];
@@ -107,15 +110,26 @@ id dobtemp;
     btnDOB.enabled = [quickQuoteFlag isOn];
     sexSegment.enabled = [quickQuoteFlag isOn];
     btnOccp.enabled = [quickQuoteFlag isOn];
+    TanggalIllustrasi.enabled = [quickQuoteFlag isOn];
+    
     
     //always disable AgeButton
     LAAgeField.enabled = FALSE;
 }
 
-- (void) setupUIElementsColor{
+- (void) setupUIElementsColor
+{
+    _ProdukBtn.layer.borderColor = [themeColour CGColor];
+    _ProdukBtn.layer.masksToBounds = YES;
+    _ProdukBtn.layer.borderWidth = 1.0f;
+    
     LANameField.layer.borderColor = [themeColour CGColor];
     LANameField.layer.masksToBounds = YES;
     LANameField.layer.borderWidth = 1.0f;
+    
+    _SINumberBCA.layer.borderColor = [themeColour CGColor];
+    _SINumberBCA.layer.masksToBounds = YES;
+    _SINumberBCA.layer.borderWidth = 1.0f;
     
     LAHbgTertanggung.layer.borderColor = [themeColour CGColor];
     LAHbgTertanggung.layer.masksToBounds = YES;
@@ -128,6 +142,15 @@ id dobtemp;
     btnDOB.layer.borderColor = [themeColour CGColor];
     btnDOB.layer.masksToBounds = YES;
     btnDOB.layer.borderWidth = 1.0f;
+    
+    TanggalIllustrasi.layer.borderColor = [themeColour CGColor];
+    TanggalIllustrasi.layer.masksToBounds = YES;
+    TanggalIllustrasi.layer.borderWidth = 1.0f;
+    
+    _BtnHubungan.layer.borderColor = [themeColour CGColor];
+    _BtnHubungan.layer.masksToBounds = YES;
+    _BtnHubungan.layer.borderWidth = 1.0f;
+
     
     btnOccp.layer.borderColor = [themeColour CGColor];
     btnOccp.layer.masksToBounds = YES;
@@ -713,6 +736,199 @@ id dobtemp;
 	
 }
 
+-(void)Planlisting:(PlanList *)inController didSelectCode:(NSString *)aaCode andDesc:(NSString *)aaDesc{
+//    txtBasicPremium.text = @"0";
+//    txtBasicSA.text = @"0";
+//    txtBUMP.text = @"0";
+//    txtCommFrom.text = @"0";
+//    txtFor.text = @"0";
+//    txtGrayRTUP.text = @"0";
+//    txtPolicyTerm.text = @"0";
+//    txtPremiumPayable.text = @"0";
+//    txtRTUP.text = @"0";
+//    txtTotalBAPremium.text = @"0";
+//    outletLanguage.selectedSegmentIndex = 0;
+//    segPremium.selectedSegmentIndex = 0;
+//    
+//    if ( ageClient > 70) {
+//        [self.planPopover dismissPopoverAnimated:YES];
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Age Last Birthday must be less than or equal to 70 for this product." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
+//        alert.tag = 1008;
+//        [alert show];
+//    }
+//    /*#EDD
+//     else if ( [OccpCode isEqualToString:@"OCC01360"] && ageClient == 0) {
+//     [self.planPopover dismissPopoverAnimated:YES];
+//     if([aaCode isEqualToString:@"UV"]){
+//     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Age Last Birthday must be greater than or equal to 30 days for this product." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
+//     [alert show];
+//     }
+//     else{
+//     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Age Last Birthday must be greater than or equal to 6 for this product." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
+//     [alert show];
+//     }
+//     
+//     }
+//     else if (LA_EDD == TRUE) {
+//     [self.planPopover dismissPopoverAnimated:YES];
+//     
+//     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Age must be at least 30 days." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
+//     //alert.tag = 3333;
+//     [alert show];
+//     
+//     }*/
+//    else if ([aaCode isEqualToString:@"UP"]  && ageClient < 6) {
+//        [self.planPopover dismissPopoverAnimated:YES];
+//        
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Age Last Birthday must be greater than or equal to 6 for this product." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
+//        [alert show];
+//        
+//        
+//    }
+//    else{
+//        
+//        if([aaCode isEqualToString:@"UV"]){
+//            [self DisableTextField:txtPolicyTerm];
+//            txtPolicyTerm.text =  [NSString stringWithFormat:@"%d", (100 - requestAge)];
+//        }
+//        else{
+//            [self EnableTextField:txtPolicyTerm];
+//            txtPolicyTerm.text =  [NSString stringWithFormat:@"25"];
+//        }
+    
+
+    
+        [NamaProduk setTitle:aaDesc forState:UIControlStateNormal];
+        [self.planPopover dismissPopoverAnimated:YES];
+       // getPlanCode = aaCode;
+        
+//    }
+    
+}
+
+
+-(void)saveBasicPlan
+{
+    NSString *_AgentCode;
+    
+    NSArray *paths2 = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsPath2 = [paths2 objectAtIndex:0];
+    NSString *path2 = [docsPath2 stringByAppendingPathComponent:@"hladb.sqlite"];
+
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path2];
+    [database open];
+    FMResultSet *results;
+    results = [database executeQuery:@"select AgentCode,AgentName from Agent_profile"];
+    
+    FMDatabase *database1 = [FMDatabase databaseWithPath:path2];
+    if (![database open]) {
+        NSLog(@"Could not open db.");
+    }
+    
+    while([results next])
+        
+    {
+        _AgentCode  = [results stringForColumn:@"AgentCode"];
+    }
+    
+    
+    
+    
+    //generate SINo || CustCode
+    NSDate *currDate = [NSDate date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"YYYYMMddHHmmss"];
+    NSString *dateString = [dateFormatter stringFromDate:currDate];
+    NSLog(@"%@",dateString);
+    
+    SINOBCA =[NSString stringWithFormat:@"%@%@",_AgentCode,dateString];
+    
+    _SINumberBCA.text =SINOBCA;
+
+    
+//    int runningNoSI = SILastNo + 1;
+//    int runningNoCust = CustLastNo + 1;
+//    NSString *fooSI = [NSString stringWithFormat:@"%04d", runningNoSI];
+//    NSString *fooCust = [NSString stringWithFormat:@"%04d", runningNoCust];
+//    
+//    SINo = [[NSString alloc] initWithFormat:@"SI%@-%@",currentdate,fooSI];
+//    LACustCode = [[NSString alloc] initWithFormat:@"CL%@-%@",currentdate,fooCust];
+    
+//    NSString *AppsVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"];
+//    
+//    if (sqlite3_open([databasePath UTF8String], &contactDB) == SQLITE_OK)
+//    {
+//        sqlite3_stmt *statement;
+//        NSString *query = [NSString stringWithFormat:@"SELECT SINo FROM Trad_Details WHERE SINo=\"%@\"", SINo];
+//        BOOL isUpdate = FALSE;
+//        if(sqlite3_prepare_v2(contactDB, [query UTF8String], -1, &statement, NULL) == SQLITE_OK) {
+//            if (sqlite3_step(statement) == SQLITE_ROW) {
+//                isUpdate = TRUE;
+//            }
+//            sqlite3_finalize(statement);
+//        }
+//        
+//        if (isUpdate) {
+//            query = [NSString stringWithFormat:
+//                     @"UPDATE Trad_Details SET PlanCode=\"%@\", PTypeCode=\"LA\", Seq=\"1\", PolicyTerm=\"%@\", BasicSA=\"%@\", "
+//                     "PremiumPaymentOption=\"%d\", CashDividend=\"%@\", YearlyIncome=\"%@\", AdvanceYearlyIncome=\"%d\", HL1KSA=\"%@\", HL1KSATerm=\"%@\", "
+//                     "TempHL1KSA=\"%@\", TempHL1KSATerm=\"%@\", CreatedAt=%@,UpdatedAt=%@,PartialAcc=%d,PartialPayout=%@, QuotationLang=\"%@\", SIVersion='%@', SIStatus='%@' "
+//                     "WHERE SINo=\"%@\"",
+//                     planChoose, @"", @"", MOP, cashDividend, yearlyIncome,
+//                     advanceYearlyIncome, HLField.text,@" ", tempHLField.text,
+//                     @"", @"datetime(\"now\", \"+8 hour\")",@"datetime(\"now\", \"+8 hour\")",
+//                     @"",@"", quotationLang, AppsVersion, @"INVALID", SINo];
+//        } else {
+//            query = [NSString stringWithFormat:
+//                     @"INSERT INTO Trad_Details (SINo,  PlanCode, PTypeCode, Seq, PolicyTerm, BasicSA, "
+//                     "PremiumPaymentOption, CashDividend, YearlyIncome, AdvanceYearlyIncome, HL1KSA, HL1KSATerm, "
+//                     "TempHL1KSA, TempHL1KSATerm, CreatedAt,UpdatedAt,PartialAcc,PartialPayout, QuotationLang, SIVersion, SIStatus) "
+//                     "VALUES (\"%@\", \"%@\", \"LA\", \"1\", \"%@\", \"%@\", \"%d\", \"%@\", \"%@\", \"%d\", \"%@\", "
+//                     "\"%d\", \"%@\", \"%d\", %@ , %@,%d,%d, \"%@\", '%@', '%@')",
+//                     SINo, planChoose, [self getTerm], yearlyIncomeField.text, MOP, cashDividend, yearlyIncome,
+//                     advanceYearlyIncome, HLField.text, [HLTermField.text intValue], tempHLField.text,
+//                     [tempHLTermField.text intValue], @"datetime(\"now\", \"+8 hour\")",@"datetime(\"now\", \"+8 hour\")",
+//                     [parAccField.text intValue],[parPayoutField.text intValue], quotationLang, AppsVersion, @"INVALID"];
+//        }
+//        
+//        if(sqlite3_prepare_v2(contactDB, [query UTF8String], -1, &statement, NULL) == SQLITE_OK) {
+//            if (sqlite3_step(statement) == SQLITE_DONE)
+//            {
+//                [self updateLA];
+//                [self getPlanCodePenta];
+//                
+//                prevPlanChoose = planChoose;
+//                
+//                if (PayorIndexNo != 0) {
+//                    IndexNo = PayorIndexNo;
+//                    [self getProspectData];
+//                    [self savePayor];
+//                }
+//                
+//                if (secondLAIndexNo != 0) {
+//                    IndexNo = secondLAIndexNo;
+//                    [self getProspectData];
+//                    [self saveSecondLA];
+//                }
+//                
+//                [_delegate BasicSI:SINo andAge:ageClient andOccpCode:OccpCode andCovered:termCover andBasicSA:yearlyIncomeField.text andBasicHL:HLField.text andBasicTempHL:tempHLField.text andMOP:MOP andPlanCode:planCode andAdvance:advanceYearlyIncome andBasicPlan:planChoose planName:(NSString *)btnPlan.titleLabel.text];
+//                AppDelegate *zzz= (AppDelegate*)[[UIApplication sharedApplication] delegate ];
+//                zzz.SICompleted = YES;
+//                [self updateFirstRunSI];
+//            } else {
+//                UIAlertView *failAlert = [[UIAlertView alloc] initWithTitle:@" " message:@"Fail in inserting record." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+//                [failAlert show];
+//            }
+//            sqlite3_finalize(statement);
+//        }
+//        sqlite3_close(contactDB);
+//    }
+//    
+//    appDelegate.isSIExist = YES;
+}
+
+
 - (IBAction)doSaveLA:(id)sender
 {
     [_delegate saveAll];
@@ -755,7 +971,7 @@ id dobtemp;
     }
     
     CGRect rect = [sender frame];
-	rect.origin.y = [sender frame].origin.y + 30;
+	rect.origin.y = [sender frame].origin.y + 40;
     
     [self.prospectPopover presentPopoverFromRect:rect inView:self.view permittedArrowDirections:UIPopoverArrowDirectionRight animated:YES];
 }
@@ -807,21 +1023,10 @@ id dobtemp;
     
 }
 
-- (IBAction)btnDOBPressed:(id)sender
+- (IBAction)btnTanggalIllustrasiPressed:(id)sender;
 {
-    date1 = YES;
-    date2 = NO;
-    
-    if (DOB.length==0 || btnDOB.titleLabel.text.length == 0) {
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"dd/MM/yyyy"];
-        NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
-        
-        [self.btnDOB setTitle:dateString forState:UIControlStateNormal];
-        dobtemp = btnDOB.titleLabel.text;
-    } else {
-        dobtemp = btnDOB.titleLabel.text;
-    }
+    date1 = NO;
+    date2 = YES;
     
     UIStoryboard *sharedStoryboard = [UIStoryboard storyboardWithName:@"SharedStoryboard" bundle:Nil];
     self.LADate = [sharedStoryboard instantiateViewControllerWithIdentifier:@"showDate"];
@@ -830,8 +1035,50 @@ id dobtemp;
     _LADate.btnSender = 1;
     self.dobPopover = [[UIPopoverController alloc] initWithContentViewController:_LADate];
     
-    [self.dobPopover setPopoverContentSize:CGSizeMake(300.0f, 255.0f)];
-    [self.dobPopover presentPopoverFromRect:[sender frame]  inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:NO];
+    
+    [self.dobPopover setPopoverContentSize:CGSizeMake(100.0f, 100.0f)];
+    
+//    CGRect rect = [sender frame];
+//    rect.origin.y = [sender frame].origin.y;
+    
+    [self.dobPopover presentPopoverFromRect:[sender frame]  inView:scrollLA permittedArrowDirections:UIPopoverArrowDirectionRight animated:YES];
+    appDelegate.isNeedPromptSaveMsg = YES;
+
+}
+
+- (IBAction)btnDOBPressed:(id)sender
+{
+    date1 = YES;
+    date2 = NO;
+    
+//    if (DOB.length==0 || btnDOB.titleLabel.text.length == 0) {
+//        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//        [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+//        NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
+//        
+//        [self.btnDOB setTitle:dateString forState:UIControlStateNormal];
+//        dobtemp = btnDOB.titleLabel.text;
+//    } else {
+//        dobtemp = btnDOB.titleLabel.text;
+//    }
+//    
+    
+    
+    UIStoryboard *sharedStoryboard = [UIStoryboard storyboardWithName:@"SharedStoryboard" bundle:Nil];
+    self.LADate = [sharedStoryboard instantiateViewControllerWithIdentifier:@"showDate"];
+    _LADate.delegate = self;
+    _LADate.msgDate = dobtemp;
+    _LADate.btnSender = 1;
+    self.dobPopover = [[UIPopoverController alloc] initWithContentViewController:_LADate];
+    
+    
+    [self.dobPopover setPopoverContentSize:CGSizeMake(100.0f, 100.0f)];
+    
+    CGRect rect = [sender frame];
+    rect.origin.y = [sender frame].origin.y + 40;
+    
+    
+    [self.dobPopover presentPopoverFromRect:[sender frame]  inView:scrollLA permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     appDelegate.isNeedPromptSaveMsg = YES;
 	
 }
@@ -877,7 +1124,7 @@ id dobtemp;
         self.OccupationListPopover = [[UIPopoverController alloc] initWithContentViewController:_OccupationList];
     }
     
-    [self.OccupationListPopover presentPopoverFromRect:[sender frame]  inView:self.view permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
+    [self.OccupationListPopover presentPopoverFromRect:[sender frame]  inView:scrollLA permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
 	
     appDelegate.isNeedPromptSaveMsg = YES;
 	
@@ -2331,7 +2578,8 @@ id dobtemp;
     NSDateComponents *difference = [[NSCalendar currentCalendar] components:flags fromDate:startDate toDate:endDate options:0];
     int diffDays = [difference day];
     
-    if (date1) {
+    if (date1)
+    {
         if (aDate == NULL) {
             [btnDOB setTitle:dobtemp forState:UIControlStateNormal];
             DOB = dobtemp;
@@ -2348,33 +2596,77 @@ id dobtemp;
         self.btnDOB.titleLabel.textColor = [UIColor blackColor];
         [self.dobPopover dismissPopoverAnimated:YES];
         date1 = NO;
-    } else if (date2) {
+    } else if (date2)
+    {
         if (aDate == NULL) {
-            [btnCommDate setTitle:temp forState:UIControlStateNormal];
-            commDate = temp;
-        } else {
-            if (diffDays > 182 ) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Maximum backdating days allowed is 182 days."
-                                                               delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                [alert show];
-            } else {
-                [self.btnCommDate setTitle:aDate forState:UIControlStateNormal];
-                commDate = aDate;
-            }            
-        }
-        
-        if (DOB.length != 0 || btnDOB.titleLabel.text.length != 0) {
+            [TanggalIllustrasi setTitle:dobtemp forState:UIControlStateNormal];
+            DOB = dobtemp;
             [self calculateAge];
-            LAAgeField.text = [[NSString alloc] initWithFormat:@"%d",age];
+          //  LAAgeField.text = [[NSString alloc] initWithFormat:@"%d",age];
+            
+        } else {
+            [TanggalIllustrasi setTitle:aDate forState:UIControlStateNormal];
+            DOB = aDate;
+            [self calculateAge];
+           // LAAgeField.text = [[NSString alloc] initWithFormat:@"%d",bAge];
         }
-        
-        [self.datePopover dismissPopoverAnimated:YES];
-        date2 = NO;
-    }
+    
+    self.btnDOB.titleLabel.textColor = [UIColor blackColor];
+    [self.dobPopover dismissPopoverAnimated:YES];
+    date1 = NO;
+}
+    
+   // if (DAteTanggal)
+//    {
+//        [self.TanggalIllustrasi setTitle:aDate forState:UIControlStateNormal];
+//        
+//        
+//        [self.datePopover dismissPopoverAnimated:YES];
+//        
+    
+//    }
     
     [_delegate LAIDPayor:lastIdPayor andIDProfile:lastIdProfile andAge:age andOccpCode:occuCode andOccpClass:occuClass andSex:sex andIndexNo:IndexNo
              andCommDate:commDate andSmoker:smoker DiffClient:DiffClient bEDDCase:EDDCase];
 }
+
+-(void)selectedRship:(NSString *)selectedRship{
+    //[Relationship setText:selectedRship];
+    
+    Relationship = selectedRship;
+    
+     [_BtnHubungan setTitle:Relationship forState:UIControlStateNormal];
+    
+    if (_RshipTypePickerPopover) {
+        [_RshipTypePickerPopover dismissPopoverAnimated:YES];
+        _RshipTypePickerPopover = nil;
+    }
+}
+
+- (IBAction)Hubungan:(id)sender;
+{
+    [self.view endEditing:YES];
+    
+   // _RshipTypePicker.rowToUpdate = _rowToUpdate;
+    if (_RshipTypePicker == nil) {
+        _RshipTypePicker = [[RelationshipPopoverViewController alloc] initWithStyle:UITableViewStylePlain];
+        _RshipTypePicker.delegate = self;
+        //_RshipTypePicker.rowToUpdate = _rowToUpdate;
+    }
+    
+    if (_RshipTypePickerPopover == nil) {
+        
+        _RshipTypePickerPopover = [[UIPopoverController alloc] initWithContentViewController:_RshipTypePicker];
+        [_RshipTypePickerPopover presentPopoverFromRect:[sender bounds] inView:sender permittedArrowDirections:UIPopoverArrowDirectionLeft animated:YES];
+    } else {
+        [_RshipTypePickerPopover dismissPopoverAnimated:YES];
+        _RshipTypePickerPopover = nil;
+    }
+    
+    
+    
+}
+
 
 - (void)OccupCodeSelected:(NSString *)OccupCode
 {
