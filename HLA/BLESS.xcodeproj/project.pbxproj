@@ -416,11 +416,11 @@
 		AAAC9D071C717CCF002E3190 /* xsd.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAC9D011C717CCF002E3190 /* xsd.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		AAAC9D0A1C71BAF3002E3190 /* WebServiceUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAC9D091C71BAF3002E3190 /* WebServiceUtilities.m */; };
 		AAD5455F1C6443080029631D /* LoginDBManagement.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD5455E1C6443080029631D /* LoginDBManagement.m */; };
-		AADD7E5B1C73813400D87750 /* DDXMLElementAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AADD7E4E1C73813400D87750 /* DDXMLElementAdditions.m */; };
-		AADD7E5C1C73813400D87750 /* NSString+DDXML.m in Sources */ = {isa = PBXBuildFile; fileRef = AADD7E511C73813400D87750 /* NSString+DDXML.m */; };
-		AADD7E5D1C73813400D87750 /* DDXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = AADD7E541C73813400D87750 /* DDXMLDocument.m */; };
-		AADD7E5E1C73813400D87750 /* DDXMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = AADD7E561C73813400D87750 /* DDXMLElement.m */; };
-		AADD7E5F1C73813400D87750 /* DDXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = AADD7E581C73813400D87750 /* DDXMLNode.m */; };
+		AADD7E6F1C743A1E00D87750 /* DDXMLElementAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AADD7E621C743A1E00D87750 /* DDXMLElementAdditions.m */; };
+		AADD7E701C743A1E00D87750 /* NSString+DDXML.m in Sources */ = {isa = PBXBuildFile; fileRef = AADD7E651C743A1E00D87750 /* NSString+DDXML.m */; };
+		AADD7E711C743A1E00D87750 /* DDXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = AADD7E681C743A1E00D87750 /* DDXMLDocument.m */; };
+		AADD7E721C743A1E00D87750 /* DDXMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = AADD7E6A1C743A1E00D87750 /* DDXMLElement.m */; };
+		AADD7E731C743A1E00D87750 /* DDXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = AADD7E6C1C743A1E00D87750 /* DDXMLNode.m */; };
 		AAFEE0351C6C1EC900702F64 /* TableManagement.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFEE0341C6C1EC900702F64 /* TableManagement.m */; };
 		AAFEE0381C6C239E00702F64 /* ColumnHeaderStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFEE0371C6C239E00702F64 /* ColumnHeaderStyle.m */; };
 		AAFEE03E1C6D927400702F64 /* UIButton+Property.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFEE03D1C6D927400702F64 /* UIButton+Property.m */; };
@@ -1516,18 +1516,18 @@
 		AAAC9D091C71BAF3002E3190 /* WebServiceUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebServiceUtilities.m; sourceTree = "<group>"; };
 		AAD5455D1C6442F80029631D /* LoginDBManagement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginDBManagement.h; sourceTree = "<group>"; };
 		AAD5455E1C6443080029631D /* LoginDBManagement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginDBManagement.m; sourceTree = "<group>"; };
-		AADD7E4D1C73813400D87750 /* DDXMLElementAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLElementAdditions.h; sourceTree = "<group>"; };
-		AADD7E4E1C73813400D87750 /* DDXMLElementAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLElementAdditions.m; sourceTree = "<group>"; };
-		AADD7E501C73813400D87750 /* NSString+DDXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+DDXML.h"; sourceTree = "<group>"; };
-		AADD7E511C73813400D87750 /* NSString+DDXML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+DDXML.m"; sourceTree = "<group>"; };
-		AADD7E521C73813400D87750 /* DDXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDXML.h; path = "../../../Downloads/KissXML-master/KissXML/DDXML.h"; sourceTree = "<group>"; };
-		AADD7E531C73813400D87750 /* DDXMLDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDXMLDocument.h; path = "../../../Downloads/KissXML-master/KissXML/DDXMLDocument.h"; sourceTree = "<group>"; };
-		AADD7E541C73813400D87750 /* DDXMLDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDXMLDocument.m; path = "../../../Downloads/KissXML-master/KissXML/DDXMLDocument.m"; sourceTree = "<group>"; };
-		AADD7E551C73813400D87750 /* DDXMLElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDXMLElement.h; path = "../../../Downloads/KissXML-master/KissXML/DDXMLElement.h"; sourceTree = "<group>"; };
-		AADD7E561C73813400D87750 /* DDXMLElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDXMLElement.m; path = "../../../Downloads/KissXML-master/KissXML/DDXMLElement.m"; sourceTree = "<group>"; };
-		AADD7E571C73813400D87750 /* DDXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDXMLNode.h; path = "../../../Downloads/KissXML-master/KissXML/DDXMLNode.h"; sourceTree = "<group>"; };
-		AADD7E581C73813400D87750 /* DDXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDXMLNode.m; path = "../../../Downloads/KissXML-master/KissXML/DDXMLNode.m"; sourceTree = "<group>"; };
-		AADD7E5A1C73813400D87750 /* DDXMLPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLPrivate.h; sourceTree = "<group>"; };
+		AADD7E611C743A1E00D87750 /* DDXMLElementAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLElementAdditions.h; sourceTree = "<group>"; };
+		AADD7E621C743A1E00D87750 /* DDXMLElementAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLElementAdditions.m; sourceTree = "<group>"; };
+		AADD7E641C743A1E00D87750 /* NSString+DDXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+DDXML.h"; sourceTree = "<group>"; };
+		AADD7E651C743A1E00D87750 /* NSString+DDXML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+DDXML.m"; sourceTree = "<group>"; };
+		AADD7E661C743A1E00D87750 /* DDXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXML.h; sourceTree = "<group>"; };
+		AADD7E671C743A1E00D87750 /* DDXMLDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLDocument.h; sourceTree = "<group>"; };
+		AADD7E681C743A1E00D87750 /* DDXMLDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLDocument.m; sourceTree = "<group>"; };
+		AADD7E691C743A1E00D87750 /* DDXMLElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLElement.h; sourceTree = "<group>"; };
+		AADD7E6A1C743A1E00D87750 /* DDXMLElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLElement.m; sourceTree = "<group>"; };
+		AADD7E6B1C743A1E00D87750 /* DDXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLNode.h; sourceTree = "<group>"; };
+		AADD7E6C1C743A1E00D87750 /* DDXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLNode.m; sourceTree = "<group>"; };
+		AADD7E6E1C743A1E00D87750 /* DDXMLPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLPrivate.h; sourceTree = "<group>"; };
 		AAFEE0331C6C1EBD00702F64 /* TableManagement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TableManagement.h; sourceTree = "<group>"; };
 		AAFEE0341C6C1EC900702F64 /* TableManagement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableManagement.m; sourceTree = "<group>"; };
 		AAFEE0361C6C239000702F64 /* ColumnHeaderStyle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColumnHeaderStyle.h; sourceTree = "<group>"; };
@@ -3361,47 +3361,44 @@
 		AADD7E4B1C7380EF00D87750 /* kissXML */ = {
 			isa = PBXGroup;
 			children = (
-				AADD7E4C1C73813400D87750 /* Additions */,
-				AADD7E4F1C73813400D87750 /* Categories */,
-				AADD7E521C73813400D87750 /* DDXML.h */,
-				AADD7E531C73813400D87750 /* DDXMLDocument.h */,
-				AADD7E541C73813400D87750 /* DDXMLDocument.m */,
-				AADD7E551C73813400D87750 /* DDXMLElement.h */,
-				AADD7E561C73813400D87750 /* DDXMLElement.m */,
-				AADD7E571C73813400D87750 /* DDXMLNode.h */,
-				AADD7E581C73813400D87750 /* DDXMLNode.m */,
-				AADD7E591C73813400D87750 /* Private */,
+				AADD7E601C743A1D00D87750 /* Additions */,
+				AADD7E631C743A1E00D87750 /* Categories */,
+				AADD7E661C743A1E00D87750 /* DDXML.h */,
+				AADD7E671C743A1E00D87750 /* DDXMLDocument.h */,
+				AADD7E681C743A1E00D87750 /* DDXMLDocument.m */,
+				AADD7E691C743A1E00D87750 /* DDXMLElement.h */,
+				AADD7E6A1C743A1E00D87750 /* DDXMLElement.m */,
+				AADD7E6B1C743A1E00D87750 /* DDXMLNode.h */,
+				AADD7E6C1C743A1E00D87750 /* DDXMLNode.m */,
+				AADD7E6D1C743A1E00D87750 /* Private */,
 			);
 			name = kissXML;
 			sourceTree = "<group>";
 		};
-		AADD7E4C1C73813400D87750 /* Additions */ = {
+		AADD7E601C743A1D00D87750 /* Additions */ = {
 			isa = PBXGroup;
 			children = (
-				AADD7E4D1C73813400D87750 /* DDXMLElementAdditions.h */,
-				AADD7E4E1C73813400D87750 /* DDXMLElementAdditions.m */,
+				AADD7E611C743A1E00D87750 /* DDXMLElementAdditions.h */,
+				AADD7E621C743A1E00D87750 /* DDXMLElementAdditions.m */,
 			);
-			name = Additions;
-			path = "../../../Downloads/KissXML-master/KissXML/Additions";
+			path = Additions;
 			sourceTree = "<group>";
 		};
-		AADD7E4F1C73813400D87750 /* Categories */ = {
+		AADD7E631C743A1E00D87750 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				AADD7E501C73813400D87750 /* NSString+DDXML.h */,
-				AADD7E511C73813400D87750 /* NSString+DDXML.m */,
+				AADD7E641C743A1E00D87750 /* NSString+DDXML.h */,
+				AADD7E651C743A1E00D87750 /* NSString+DDXML.m */,
 			);
-			name = Categories;
-			path = "../../../Downloads/KissXML-master/KissXML/Categories";
+			path = Categories;
 			sourceTree = "<group>";
 		};
-		AADD7E591C73813400D87750 /* Private */ = {
+		AADD7E6D1C743A1E00D87750 /* Private */ = {
 			isa = PBXGroup;
 			children = (
-				AADD7E5A1C73813400D87750 /* DDXMLPrivate.h */,
+				AADD7E6E1C743A1E00D87750 /* DDXMLPrivate.h */,
 			);
-			name = Private;
-			path = "../../../Downloads/KissXML-master/KissXML/Private";
+			path = Private;
 			sourceTree = "<group>";
 		};
 		AAFEE0321C6C1EA300702F64 /* TableManagement */ = {
@@ -5148,7 +5145,7 @@
 				431F5FDF1C6D781A00A9CA6C /* BranchInfo.m in Sources */,
 				EFEB7A661766FDCC004FF3CE /* eAppTabBar.m in Sources */,
 				EFEB7A671766FDCC004FF3CE /* eAppTabBarButton.m in Sources */,
-				AADD7E5C1C73813400D87750 /* NSString+DDXML.m in Sources */,
+				AADD7E701C743A1E00D87750 /* NSString+DDXML.m in Sources */,
 				C4E9F3D6176878E90070EA8A /* BasicAccountViewController.m in Sources */,
 				C4E9F3D9176879190070EA8A /* EverRiderViewController.m in Sources */,
 				C4E9F3DC17687D4A0070EA8A /* EverLAViewController.m in Sources */,
@@ -5174,7 +5171,7 @@
 				C4C6C0A6178BB0F50006B00D /* PopOverFundViewController.m in Sources */,
 				EF90B0C9178E56A800FEC129 /* eAppStatusList.m in Sources */,
 				EF90B0D1178E7F1800FEC129 /* Relationship.m in Sources */,
-				AADD7E5E1C73813400D87750 /* DDXMLElement.m in Sources */,
+				AADD7E721C743A1E00D87750 /* DDXMLElement.m in Sources */,
 				EF30C76217A63E94009A301A /* Nationality.m in Sources */,
 				C4EEB64317BCD11900F268B3 /* EverLifeViewController.m in Sources */,
 				C4EEB64617C1A98900F268B3 /* demo.m in Sources */,
@@ -5386,7 +5383,7 @@
 				6A0B1765188A36DE00931673 /* SupplementaryProposalForm.m in Sources */,
 				6A3D70D1188A4B8B000B2097 /* PRxml.m in Sources */,
 				AAAC9D021C717CCF002E3190 /* AgentWS.m in Sources */,
-				AADD7E5B1C73813400D87750 /* DDXMLElementAdditions.m in Sources */,
+				AADD7E6F1C743A1E00D87750 /* DDXMLElementAdditions.m in Sources */,
 				6A3D70D2188A4B8B000B2097 /* SIxml.m in Sources */,
 				6A55483A188B6BA400994B42 /* FormViewController.m in Sources */,
 				42804E21188EDF7F008EF058 /* FullyReducePaidUpPopover.m in Sources */,
@@ -5457,7 +5454,7 @@
 				4239AEE51946DAE200BD6F53 /* PDFFormTextField.m in Sources */,
 				4239AEE61946DAE200BD6F53 /* PDFView.m in Sources */,
 				4239AEE71946DAE200BD6F53 /* PDFWidgetAnnotationView.m in Sources */,
-				AADD7E5F1C73813400D87750 /* DDXMLNode.m in Sources */,
+				AADD7E731C743A1E00D87750 /* DDXMLNode.m in Sources */,
 				4239AEE81946DAE200BD6F53 /* SnapCustomCell.m in Sources */,
 				4239AEEA1946DAE200BD6F53 /* CardSnap.m in Sources */,
 				4239AEEC1946DAE200BD6F53 /* IDTypePicker.m in Sources */,
@@ -5470,7 +5467,7 @@
 				C34F6AE51A280FFC000B957F /* GroupVC.m in Sources */,
 				37AEC3691A2F0A4E002D81D2 /* PRPage14.m in Sources */,
 				6AFBD8F41A36A66700550896 /* CardTypePopoverVCDC.m in Sources */,
-				AADD7E5D1C73813400D87750 /* DDXMLDocument.m in Sources */,
+				AADD7E711C743A1E00D87750 /* DDXMLDocument.m in Sources */,
 				C3872FC61A4017F1009BF93D /* GroupViewVC.m in Sources */,
 				C3872FC71A4017F1009BF93D /* ClientGroup.m in Sources */,
 				FA137ABC1A9325E90051772D /* Constants.m in Sources */,

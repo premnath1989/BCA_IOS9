@@ -62,7 +62,10 @@ NSString *ProceedStatus = @"";
     [UIApplication sharedApplication].networkActivityIndicatorVisible = TRUE;
     
     txtUsername.delegate = self;
+    txtUsername.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0);
+    
     txtPassword.delegate = self;
+    txtPassword.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0);
     
     [self initLoadingSpinner];
     
@@ -72,31 +75,32 @@ NSString *ProceedStatus = @"";
         firstLogin = true;
     }
     
-    NSString *xmlContent = @"<ReceiveFirstLoginResult><DocumentElement><MyTable><AgentCode>1024</AgentCode><AgentName>Erwin</AgentName><AgentType>type1</AgentType><ImmediateLeaderCode>sad</ImmediateLeaderCode><ImmediateLeaderName>ads</ImmediateLeaderName><BusinessRegNumber>213</BusinessRegNumber><AgentEmail>button.setonclicklistener@gmail.com</AgentEmail><AgentLoginID>1024</AgentLoginID><AgentNRIC>1234567884332</AgentNRIC><AgentContractDate>2016-02-15T00:00:00+08:00</AgentContractDate><AgentAddrLine1>21321</AgentAddrLine1><AgentAddrLine2>wqeqe</AgentAddrLine2><AgentAddrLine3>sadsa</AgentAddrLine3><AgentAddrPostcode>34566</AgentAddrPostcode><AgentContactNo>1232143437</AgentContactNo> <AgentPassword>password</AgentPassword><AgentStatus>Active</AgentStatus><Channel>1</Channel><AgentPortalLoginID>asd</AgentPortalLoginID><AgentPortalPassword>asd</AgentPortalPassword><FirstLogin>2016-02-16T11:36:33.387+08:00</FirstLogin><xs:element name=\"AgentCode\" type=\"xs:string\" minOccurs=\"0\" /> <LastLogonDate>2016-02-16T15:30:09.487+08:00</LastLogonDate><DeviceID>1231231</DeviceID><DeviceType>asd</DeviceType><OSVersion>9.2</OSVersion><SignDocLicense>True</SignDocLicense></MyTable></DocumentElement></ReceiveFirstLoginResult>";
-    
-    // create XMLDocument object
-    DDXMLDocument *xml = [[DDXMLDocument alloc] initWithXMLString:xmlContent options:0 error:nil];
-    
-    // Get root element - DataSetMenu for your XMLfile
-    DDXMLElement *root = [xml rootElement];
-    
-    // go through all elements in root element (DataSetMenu element)
-    for (DDXMLElement *DataSetMenuElement in [root children]) {
-        // if the element name's is MenuCategories then do something
-        NSLog(@"%@", [DataSetMenuElement name]);
-        for(DDXMLElement *DocumentElement in [DataSetMenuElement children]){
-             NSLog(@"%@", [DocumentElement name]);
-            for(DDXMLElement *table in [DocumentElement children]){
-                NSArray *elements = [DocumentElement elementsForName:[table name]];
-                NSLog(@"%@ = %@", [table name], [[elements objectAtIndex:0] stringValue]);
-                if ([[table name] isEqualToString:@"xs:element"]){
-                    DDXMLNode *name = [table attributeForName: @"name"];
-                    DDXMLNode *type = [table attributeForName: @"type"];
-                    NSLog(@"attribute = %@, type = %@", [name stringValue], [type stringValue]);
-                }
-            }
-        }
-    }
+    //parser function
+//    NSString *xmlContent = @"<ReceiveFirstLoginResult><DocumentElement><MyTable><AgentCode>1024</AgentCode><AgentName>Erwin</AgentName><AgentType>type1</AgentType><ImmediateLeaderCode>sad</ImmediateLeaderCode><ImmediateLeaderName>ads</ImmediateLeaderName><BusinessRegNumber>213</BusinessRegNumber><AgentEmail>button.setonclicklistener@gmail.com</AgentEmail><AgentLoginID>1024</AgentLoginID><AgentNRIC>1234567884332</AgentNRIC><AgentContractDate>2016-02-15T00:00:00+08:00</AgentContractDate><AgentAddrLine1>21321</AgentAddrLine1><AgentAddrLine2>wqeqe</AgentAddrLine2><AgentAddrLine3>sadsa</AgentAddrLine3><AgentAddrPostcode>34566</AgentAddrPostcode><AgentContactNo>1232143437</AgentContactNo> <AgentPassword>password</AgentPassword><AgentStatus>Active</AgentStatus><Channel>1</Channel><AgentPortalLoginID>asd</AgentPortalLoginID><AgentPortalPassword>asd</AgentPortalPassword><FirstLogin>2016-02-16T11:36:33.387+08:00</FirstLogin><xs:element name=\"AgentCode\" type=\"xs:string\" minOccurs=\"0\" /> <LastLogonDate>2016-02-16T15:30:09.487+08:00</LastLogonDate><DeviceID>1231231</DeviceID><DeviceType>asd</DeviceType><OSVersion>9.2</OSVersion><SignDocLicense>True</SignDocLicense></MyTable></DocumentElement></ReceiveFirstLoginResult>";
+//    
+//    // create XMLDocument object
+//    DDXMLDocument *xml = [[DDXMLDocument alloc] initWithXMLString:xmlContent options:0 error:nil];
+//    
+//    // Get root element - DataSetMenu for your XMLfile
+//    DDXMLElement *root = [xml rootElement];
+//    
+//    // go through all elements in root element (DataSetMenu element)
+//    for (DDXMLElement *DataSetMenuElement in [root children]) {
+//        // if the element name's is MenuCategories then do something
+//        NSLog(@"%@", [DataSetMenuElement name]);
+//        for(DDXMLElement *DocumentElement in [DataSetMenuElement children]){
+//             NSLog(@"%@", [DocumentElement name]);
+//            for(DDXMLElement *table in [DocumentElement children]){
+//                NSArray *elements = [DocumentElement elementsForName:[table name]];
+//                NSLog(@"%@ = %@", [table name], [[elements objectAtIndex:0] stringValue]);
+//                if ([[table name] isEqualToString:@"xs:element"]){
+//                    DDXMLNode *name = [table attributeForName: @"name"];
+//                    DDXMLNode *type = [table attributeForName: @"type"];
+//                    NSLog(@"attribute = %@, type = %@", [name stringValue], [type stringValue]);
+//                }
+//            }
+//        }
+//    }
     
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(forgotPassword:)];
@@ -654,7 +658,7 @@ static NSString *labelVers;
             [self loginSuccess];
         }
         else {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Invalid Login" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Username/Password yang anda masukan salah" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [alert show];
             
             [txtUsername becomeFirstResponder];
