@@ -77,7 +77,7 @@ const int numberOfModule = 7;
     NSString *version= [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     NSString *build= [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
     
-    UILabel  * label = [[UILabel alloc] initWithFrame:CGRectMake(3, 670, 600, 50)];
+    UILabel  * label = [[UILabel alloc] initWithFrame:CGRectMake(3, 710, 600, 50)];
     label.backgroundColor = [UIColor clearColor];
     label.textColor=[UIColor blackColor];
     label.numberOfLines=0;
@@ -90,7 +90,7 @@ const int numberOfModule = 7;
 #endif
     [self.view addSubview:label];
     
-    UILabel  * labelbg = [[UILabel alloc] initWithFrame:CGRectMake(0, 670, 300, 50)];
+    UILabel  * labelbg = [[UILabel alloc] initWithFrame:CGRectMake(0, 710, 300, 50)];
     labelbg.backgroundColor = [UIColor grayColor];
     labelbg.alpha =0.3;
     labelbg.numberOfLines=0;
@@ -100,18 +100,18 @@ const int numberOfModule = 7;
     
     NSString *id = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
     
-    UILabel  * label1 = [[UILabel alloc] initWithFrame:CGRectMake(3, 700, 600, 50)];
-    label1.backgroundColor = [UIColor clearColor];
-    label1.textColor=[UIColor blackColor];
-    label1.numberOfLines=0;
-    label1.lineBreakMode=NSLineBreakByWordWrapping;
-    label1.text =[NSString stringWithFormat:@"Ad Id : %@",id];
-    
-    UILabel  * label2 = [[UILabel alloc] initWithFrame:CGRectMake(3, 640, 600, 50)];
-    label2.backgroundColor = [UIColor clearColor];
-    label2.textColor=[UIColor blackColor];
-    label2.numberOfLines=0;
-    label2.lineBreakMode=NSLineBreakByWordWrapping;
+//    UILabel  * label1 = [[UILabel alloc] initWithFrame:CGRectMake(3, 700, 600, 50)];
+//    label1.backgroundColor = [UIColor clearColor];
+//    label1.textColor=[UIColor blackColor];
+//    label1.numberOfLines=0;
+//    label1.lineBreakMode=NSLineBreakByWordWrapping;
+//    label1.text =[NSString stringWithFormat:@"Ad Id : %@",id];
+//    
+//    UILabel  * label2 = [[UILabel alloc] initWithFrame:CGRectMake(3, 640, 600, 50)];
+//    label2.backgroundColor = [UIColor clearColor];
+//    label2.textColor=[UIColor blackColor];
+//    label2.numberOfLines=0;
+//    label2.lineBreakMode=NSLineBreakByWordWrapping;
     
 //    UIButton *AgentProfile = [UIButton buttonWithType:UIButtonTypeCustom];
 //    [AgentProfile addTarget:self action:@selector(ButtonInfo) forControlEvents:UIControlEventTouchUpInside];
@@ -122,11 +122,11 @@ const int numberOfModule = 7;
     
     NSString *string =[SIUtilities WSLogin];
     
-    if ([string rangeOfString:@"echannel.dev"].location == NSNotFound) {
-        label2.text =[NSString stringWithFormat:@"App type : Production"];
-    } else {
-        label2.text =[NSString stringWithFormat:@"App type : Development"];
-    }
+//    if ([string rangeOfString:@"echannel.dev"].location == NSNotFound) {
+//        label2.text =[NSString stringWithFormat:@"App type : Production"];
+//    } else {
+//        label2.text =[NSString stringWithFormat:@"App type : Development"];
+//    }
     
     NSArray *paths2 = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docsPath2 = [paths2 objectAtIndex:0];
