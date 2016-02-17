@@ -53,6 +53,7 @@
 		173E81601C28F9C600BDAAE9 /* EappListing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 173E815F1C28F9C600BDAAE9 /* EappListing.storyboard */; };
 		174858B51C3E229D007BBF13 /* libSPSignDoc_4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 174858B41C3E229D007BBF13 /* libSPSignDoc_4.0.a */; };
 		174858B71C438BA8007BBF13 /* MyCustomDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 174858B61C438BA8007BBF13 /* MyCustomDialog.xib */; };
+		178765D91C7409F00036F31A /* menu_selectoption.png in Resources */ = {isa = PBXBuildFile; fileRef = 178765D81C7409F00036F31A /* menu_selectoption.png */; };
 		17983C331C473373009E2977 /* HealthQuestionPO.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17983C321C473373009E2977 /* HealthQuestionPO.storyboard */; };
 		17A2990F1C60A0DB00C2537A /* HelveticaInseratLTStd-Roman.otf in Resources */ = {isa = PBXBuildFile; fileRef = 17A298FB1C60923400C2537A /* HelveticaInseratLTStd-Roman.otf */; };
 		17A299101C60A0DB00C2537A /* HelveticaLTStd-Blk.otf in Resources */ = {isa = PBXBuildFile; fileRef = 17A298FC1C60923400C2537A /* HelveticaLTStd-Blk.otf */; };
@@ -871,6 +872,7 @@
 		173E815F1C28F9C600BDAAE9 /* EappListing.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EappListing.storyboard; sourceTree = "<group>"; };
 		174858B41C3E229D007BBF13 /* libSPSignDoc_4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSPSignDoc_4.0.a; sourceTree = "<group>"; };
 		174858B61C438BA8007BBF13 /* MyCustomDialog.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCustomDialog.xib; sourceTree = "<group>"; };
+		178765D81C7409F00036F31A /* menu_selectoption.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_selectoption.png; sourceTree = "<group>"; };
 		17983C321C473373009E2977 /* HealthQuestionPO.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HealthQuestionPO.storyboard; sourceTree = "<group>"; };
 		17A298F61C60920A00C2537A /* BPreplay.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BPreplay.otf; sourceTree = "<group>"; };
 		17A298F71C60920A00C2537A /* BPreplayBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BPreplayBold.otf; sourceTree = "<group>"; };
@@ -4048,6 +4050,7 @@
 				A9E550A31C591F7900C9DAC2 /* Expand Arrow.png */,
 				A9E550A41C591F7900C9DAC2 /* Expand Arrow@2x.png */,
 				1706BD451C7169A40038D1DB /* menu_customerfactfind.png */,
+				178765D81C7409F00036F31A /* menu_selectoption.png */,
 				1706BD461C7169A40038D1DB /* menu_datanasabah.png */,
 				1706BD471C7169A40038D1DB /* menu_ilustrasi.png */,
 				1706BD481C7169A40038D1DB /* menu_productinformation.png */,
@@ -4822,6 +4825,7 @@
 				C4C501F416A64C6300096156 /* Brochure_MajorMediPlus.pdf in Resources */,
 				C4C501F516A64C6300096156 /* Brochure_MedGlobalII_Chi.pdf in Resources */,
 				C4C501F616A64C6300096156 /* Brochure_MedGlobalII.pdf in Resources */,
+				178765D91C7409F00036F31A /* menu_selectoption.png in Resources */,
 				C4C501F716A64C6300096156 /* Brochure_MedGlobalIVP.pdf in Resources */,
 				C4C501F816A64C6300096156 /* Brochure_PACare.pdf in Resources */,
 				C4C501F916A64C6300096156 /* Brochure_PremierLife.pdf in Resources */,

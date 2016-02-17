@@ -15,6 +15,8 @@
 #import "OccupationList.h"
 #import "SIObj.h"
 #import "AppDelegate.h"
+#import "RelationshipPopoverViewController.h"
+
 
 @class NewLAViewController;
 @protocol NewLAViewControllerDelegate
@@ -29,7 +31,7 @@
 -(void)deleteSecondLAFromDB;
 @end
 
-@interface NewLAViewController : UIViewController<UITextFieldDelegate,UIPopoverControllerDelegate,ListingTbViewControllerDelegate,DateViewControllerDelegate,OccupationListDelegate,PlanListDelegate>{
+@interface NewLAViewController : UIViewController<UITextFieldDelegate,UIPopoverControllerDelegate,ListingTbViewControllerDelegate,DateViewControllerDelegate,OccupationListDelegate,PlanListDelegate,RelationshipPopoverViewControllerDelegate>{
     NSString *databasePath;
     sqlite3 *contactDB;
     UITextField *activeField;
@@ -39,6 +41,8 @@
     UIPopoverController *_datePopover;
     UIPopoverController *_dobPopover;
     UIPopoverController *_OccupationListPopover;
+    
+    
     PlanList *_planList;
     ListingTbViewController *_ProspectList;
     DateViewController *_LADate;
@@ -55,6 +59,8 @@
     BOOL JobChanged;
     BOOL date1;
     BOOL date2;
+    BOOL DAteTanggal;
+    NSString *SINOBCA;
     //BOOL isNewClient;
 	BOOL QQProspect;
 	SIObj* siObj;
@@ -75,8 +81,11 @@
     NSString *OccuCatCode;
     
     UIColor *themeColour;
+    IBOutlet UIScrollView* scrollLA;
+    NSString *Relationship;
 }
-
+@property (nonatomic, strong) RelationshipPopoverViewController *RshipTypePicker;
+@property (nonatomic, strong) UIPopoverController *RshipTypePickerPopover;
 @property (nonatomic, retain) SIObj* siObj;
 @property (nonatomic, retain) PlanList *planList;
 @property (strong, nonatomic) NSMutableArray *dataInsert;
@@ -95,7 +104,7 @@
 @property (nonatomic,strong) id EAPPorSI;
 @property (nonatomic,strong) id requesteProposalStatus;
 
-@property (nonatomic, copy) NSString *getSINo;
+@property (nonatomic, copy) NSString *getSINo, *Relationship;
 //--
 @property (nonatomic, retain) OccupationList *OccupationList;
 @property (nonatomic, retain) ListingTbViewController *ProspectList;
@@ -127,9 +136,10 @@
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *btnToEAPP;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *outletDone;
 @property (strong, nonatomic) IBOutlet UIButton *NamaProduk;
+@property (strong, nonatomic) IBOutlet UIButton *BtnHubungan;
 
 
-@property (nonatomic, copy) NSString *SINo;
+@property (nonatomic, copy) NSString *SINo, *SINOBCA;
 @property (nonatomic, copy) NSString *CustCode;
 @property (nonatomic,strong) NSString *planChoose;
 
@@ -162,6 +172,10 @@
 @property (nonatomic, assign,readwrite) int termCover;
 @property (nonatomic,strong) NSString *planCode;
 @property (nonatomic,strong) NSString *planName;
+@property (weak, nonatomic) IBOutlet UITextField *SINumberBCA;
+@property (weak, nonatomic) IBOutlet UIButton *ProdukBtn;
+@property (weak, nonatomic) IBOutlet UIButton *TanggalIllustrasi;
+@property (weak, nonatomic) IBOutlet UIButton *NamaHubungan;
 
 //declare for store in DB
 @property (nonatomic, copy) NSString *sex;
@@ -202,8 +216,10 @@
 - (IBAction)btnCommDatePressed:(id)sender;
 - (IBAction)enableFields:(id)sender;
 - (IBAction)btnDOBPressed:(id)sender;
+- (IBAction)btnTanggalIllustrasiPressed:(id)sender;
 - (IBAction)btnOccpPressed:(id)sender;
 - (IBAction)ActionEAPP:(id)sender;
+- (IBAction)Hubungan:(id)sender;
 - (BOOL)validateSave;
 - (BOOL)updateData:(NSString *) SiNo;
 - (BOOL)performSaveData;

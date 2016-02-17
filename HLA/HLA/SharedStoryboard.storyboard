@@ -8,7 +8,7 @@
         <!--Date View Controller-->
         <scene sceneID="4uX-jl-rhC">
             <objects>
-                <viewController storyboardIdentifier="showDate" id="exg-Ih-6Yb" customClass="DateViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="showDate" modalPresentationStyle="currentContext" id="exg-Ih-6Yb" customClass="DateViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="N7w-ip-QDX"/>
                         <viewControllerLayoutGuide type="bottom" id="iSZ-0O-HUb"/>
@@ -43,6 +43,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <value key="contentSizeForViewInPopover" type="size" width="540" height="250"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <modalFormSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
