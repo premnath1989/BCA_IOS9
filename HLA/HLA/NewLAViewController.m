@@ -993,7 +993,9 @@ id dobtanngal;
 		QQProspect = NO;
         QQProspect = FALSE;
         
-    } else {        
+    }
+    else
+    {
         LANameField.enabled = YES;
         LANameField.backgroundColor = [UIColor whiteColor];
         LANameField.textColor = [UIColor blackColor];
@@ -1113,8 +1115,8 @@ id dobtanngal;
     
     [self.datePopover presentPopoverFromRect:rect  inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:NO];
     appDelegate.isNeedPromptSaveMsg = YES;
-	
 }
+
 
 - (IBAction)btnOccpPressed:(id)sender
 {
@@ -1277,7 +1279,6 @@ id dobtanngal;
         ANB = 1;
     }
 }
-
 
 
 #pragma mark - UIALERT VIEW DELEGATE
@@ -1483,6 +1484,7 @@ id dobtanngal;
         sqlite3_close(contactDB);
     }
 }
+
 
 -(void) GetLastID
 {
