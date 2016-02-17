@@ -16,10 +16,24 @@
     binding.logXMLInOut = YES;
     
     AgentWS_ValidateLogin *agentCodea = [[AgentWS_ValidateLogin alloc]init];
-    agentCodea.strAgentID = @"emi";
-    agentCodea.strPassword = @"password";
-    agentCodea.strDeviceID = @"asd";
+    agentCodea.strAgentID = username;
+    agentCodea.strPassword = password;
+    agentCodea.strDeviceID = deviceID;
     [binding ValidateLoginAsyncUsingParameters:agentCodea delegate:delegate];
+    return 1;
+}
+
+- (int)FirstTimeLogin:(id)delegate AgentCode:(NSString *)AgentCode password:(NSString *)password newPassword:(NSString *)newpassword UUID:(NSString *)deviceID {
+    AgentWSSoapBinding *binding = [AgentWS AgentWSSoapBinding];
+    binding.logXMLInOut = YES;
+    
+    AgentWS_ReceiveFirstLogin *agentCodea = [[AgentWS_ReceiveFirstLogin alloc]init];
+    agentCodea.strAgentId = AgentCode;
+    agentCodea.strAgentPass = password;
+    agentCodea.strUID = deviceID;
+    agentCodea.strNewPass = newpassword;
+    agentCodea.strStatus = @"";
+    [binding ReceiveFirstLoginAsyncUsingParameters:agentCodea delegate:delegate];
     return 1;
 }
 

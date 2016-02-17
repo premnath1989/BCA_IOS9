@@ -12,6 +12,9 @@
 @class AgentWS_RetrievePolicyNumberResponse;
 @class AgentWS_SendForgotPassword;
 @class AgentWS_SendForgotPasswordResponse;
+@class AgentWS_ReceiveFirstLogin;
+@class AgentWS_ReceiveFirstLoginResponse;
+@class AgentWS_ReceiveFirstLoginResult;
 @interface AgentWS_ValidateAgentAndDevice : NSObject {
 	
 /* elements */
@@ -177,7 +180,7 @@
 @interface AgentWS_SendForgotPassword : NSObject {
 	
 /* elements */
-	NSString *strAgentId;
+	NSString * strAgentId;
 /* attributes */
 }
 - (NSString *)nsPrefix;
@@ -207,6 +210,68 @@
 - (void)deserializeElementsFromNode:(xmlNodePtr)cur;
 /* elements */
 @property (retain) NSString * SendForgotPasswordResult;
+/* attributes */
+- (NSDictionary *)attributes;
+@end
+@interface AgentWS_ReceiveFirstLogin : NSObject {
+	
+/* elements */
+	NSString * strAgentId;
+	NSString * strAgentPass;
+	NSString * strNewPass;
+	NSString * strUID;
+	NSString * strStatus;
+/* attributes */
+}
+- (NSString *)nsPrefix;
+- (xmlNodePtr)xmlNodeForDoc:(xmlDocPtr)doc elementName:(NSString *)elName elementNSPrefix:(NSString *)elNSPrefix;
+- (void)addAttributesToNode:(xmlNodePtr)node;
+- (void)addElementsToNode:(xmlNodePtr)node;
++ (AgentWS_ReceiveFirstLogin *)deserializeNode:(xmlNodePtr)cur;
+- (void)deserializeAttributesFromNode:(xmlNodePtr)cur;
+- (void)deserializeElementsFromNode:(xmlNodePtr)cur;
+/* elements */
+@property (retain) NSString * strAgentId;
+@property (retain) NSString * strAgentPass;
+@property (retain) NSString * strNewPass;
+@property (retain) NSString * strUID;
+@property (retain) NSString * strStatus;
+/* attributes */
+- (NSDictionary *)attributes;
+@end
+@interface AgentWS_ReceiveFirstLoginResult : NSObject {
+	
+/* elements */
+/* attributes */
+}
+- (NSString *)nsPrefix;
+- (xmlNodePtr)xmlNodeForDoc:(xmlDocPtr)doc elementName:(NSString *)elName elementNSPrefix:(NSString *)elNSPrefix;
+- (void)addAttributesToNode:(xmlNodePtr)node;
+- (void)addElementsToNode:(xmlNodePtr)node;
++ (AgentWS_ReceiveFirstLoginResult *)deserializeNode:(xmlNodePtr)cur;
+- (void)deserializeAttributesFromNode:(xmlNodePtr)cur;
+- (void)deserializeElementsFromNode:(xmlNodePtr)cur;
+/* elements */
+/* attributes */
+- (NSDictionary *)attributes;
+@end
+@interface AgentWS_ReceiveFirstLoginResponse : NSObject {
+	
+/* elements */
+	AgentWS_ReceiveFirstLoginResult * ReceiveFirstLoginResult;
+	NSString * strStatus;
+/* attributes */
+}
+- (NSString *)nsPrefix;
+- (xmlNodePtr)xmlNodeForDoc:(xmlDocPtr)doc elementName:(NSString *)elName elementNSPrefix:(NSString *)elNSPrefix;
+- (void)addAttributesToNode:(xmlNodePtr)node;
+- (void)addElementsToNode:(xmlNodePtr)node;
++ (AgentWS_ReceiveFirstLoginResponse *)deserializeNode:(xmlNodePtr)cur;
+- (void)deserializeAttributesFromNode:(xmlNodePtr)cur;
+- (void)deserializeElementsFromNode:(xmlNodePtr)cur;
+/* elements */
+@property (retain) AgentWS_ReceiveFirstLoginResult * ReceiveFirstLoginResult;
+@property (retain) NSString * strStatus;
 /* attributes */
 - (NSDictionary *)attributes;
 @end
@@ -255,6 +320,8 @@
 - (void)RetrievePolicyNumberAsyncUsingParameters:(AgentWS_RetrievePolicyNumber *)aParameters  delegate:(id<AgentWSSoapBindingResponseDelegate>)responseDelegate;
 - (AgentWSSoapBindingResponse *)SendForgotPasswordUsingParameters:(AgentWS_SendForgotPassword *)aParameters ;
 - (void)SendForgotPasswordAsyncUsingParameters:(AgentWS_SendForgotPassword *)aParameters  delegate:(id<AgentWSSoapBindingResponseDelegate>)responseDelegate;
+- (AgentWSSoapBindingResponse *)ReceiveFirstLoginUsingParameters:(AgentWS_ReceiveFirstLogin *)aParameters ;
+- (void)ReceiveFirstLoginAsyncUsingParameters:(AgentWS_ReceiveFirstLogin *)aParameters  delegate:(id<AgentWSSoapBindingResponseDelegate>)responseDelegate;
 @end
 @interface AgentWSSoapBindingOperation : NSOperation {
 	AgentWSSoapBinding *binding;
@@ -310,6 +377,14 @@
 	parameters:(AgentWS_SendForgotPassword *)aParameters
 ;
 @end
+@interface AgentWSSoapBinding_ReceiveFirstLogin : AgentWSSoapBindingOperation {
+	AgentWS_ReceiveFirstLogin * parameters;
+}
+@property (retain) AgentWS_ReceiveFirstLogin * parameters;
+- (id)initWithBinding:(AgentWSSoapBinding *)aBinding delegate:(id<AgentWSSoapBindingResponseDelegate>)aDelegate
+	parameters:(AgentWS_ReceiveFirstLogin *)aParameters
+;
+@end
 @interface AgentWSSoapBinding_envelope : NSObject {
 }
 + (AgentWSSoapBinding_envelope *)sharedInstance;
@@ -357,6 +432,8 @@
 - (void)RetrievePolicyNumberAsyncUsingParameters:(AgentWS_RetrievePolicyNumber *)aParameters  delegate:(id<AgentWSSoap12BindingResponseDelegate>)responseDelegate;
 - (AgentWSSoap12BindingResponse *)SendForgotPasswordUsingParameters:(AgentWS_SendForgotPassword *)aParameters ;
 - (void)SendForgotPasswordAsyncUsingParameters:(AgentWS_SendForgotPassword *)aParameters  delegate:(id<AgentWSSoap12BindingResponseDelegate>)responseDelegate;
+- (AgentWSSoap12BindingResponse *)ReceiveFirstLoginUsingParameters:(AgentWS_ReceiveFirstLogin *)aParameters ;
+- (void)ReceiveFirstLoginAsyncUsingParameters:(AgentWS_ReceiveFirstLogin *)aParameters  delegate:(id<AgentWSSoap12BindingResponseDelegate>)responseDelegate;
 @end
 @interface AgentWSSoap12BindingOperation : NSOperation {
 	AgentWSSoap12Binding *binding;
@@ -410,6 +487,14 @@
 @property (retain) AgentWS_SendForgotPassword * parameters;
 - (id)initWithBinding:(AgentWSSoap12Binding *)aBinding delegate:(id<AgentWSSoap12BindingResponseDelegate>)aDelegate
 	parameters:(AgentWS_SendForgotPassword *)aParameters
+;
+@end
+@interface AgentWSSoap12Binding_ReceiveFirstLogin : AgentWSSoap12BindingOperation {
+	AgentWS_ReceiveFirstLogin * parameters;
+}
+@property (retain) AgentWS_ReceiveFirstLogin * parameters;
+- (id)initWithBinding:(AgentWSSoap12Binding *)aBinding delegate:(id<AgentWSSoap12BindingResponseDelegate>)aDelegate
+	parameters:(AgentWS_ReceiveFirstLogin *)aParameters
 ;
 @end
 @interface AgentWSSoap12Binding_envelope : NSObject {

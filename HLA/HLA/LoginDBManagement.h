@@ -1,5 +1,5 @@
 //
-//  loginDBManagement.h
+//  LoginDBManagement.h
 //  BLESS
 //
 //  Created by Erwin on 05/02/2016.
@@ -8,7 +8,7 @@
 #import <UIKit/UIKit.h>
 #import <sqlite3.h>
 
-@interface loginDBManagement : NSObject{
+@interface LoginDBManagement : NSObject{
     NSString *databasePath;
     NSString *RatesDatabasePath;
     NSString *UL_RatesDatabasePath;
@@ -19,6 +19,10 @@
 - (int) SearchAgent:(NSString *)AgentID;
 - (int) InsertAgentProfile:(NSString *) urlStr;
 - (void) updateLoginDate:(int)indexNo;
-
+- (int) FirstLogin:(NSString *)AgentID;
+- (int) AgentRecord;
+- (int) AgentStatus:(NSString *)AgentID;
+- (NSString *) expiryDate:(NSString *)AgentID;
+-(NSString *)checkingLastLogout;
 
 @end

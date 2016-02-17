@@ -10,7 +10,7 @@
 #import <UIKit/UIKit.h>
 #import <sqlite3.h>
 #import "Reachability.h"
-#import "loginDBManagement.h"
+#import "LoginDBManagement.h"
 #import "AgentWS.h"
 
 @protocol LoginDelegate
@@ -38,19 +38,15 @@ static NSString* DATE_FORMAT = @"yyyy-MM-dd";
 
 @interface Login : UIViewController<NSXMLParserDelegate, UITextFieldDelegate, AgentWSSoapBindingResponseDelegate>
 {
-//    NSString *databasePath;
-//    NSString *RatesDatabasePath;
-//    NSString *UL_RatesDatabasePath;
-//    NSString *CommDatabasePath;
     UITextField *activeField;
     id<LoginDelegate> _delegate;
     Reachability *internetReachableFoo;
-    BOOL isFirstDevice;
+    BOOL firstLogin;
     NSString *status;
     NSInteger badAttempts;
     NSString *error;
     NSString *agentInfo;
-    loginDBManagement *loginDB;
+    LoginDBManagement *loginDB;
     
     NSString *agentLogin;
     //  NSString *agentCode;
@@ -121,11 +117,7 @@ static NSString* DATE_FORMAT = @"yyyy-MM-dd";
 +(NSString *)getLabelVersion;
 
 -(void)doOnceADayCheck:(BOOL)debugF;
-
-
 +(bool)forSMPD_Acturial:(NSString*) password;
-
-
 +(void)setFirstDevice;
 
 @end

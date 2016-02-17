@@ -9,6 +9,7 @@
 #import "ChangePassword.h"
 #import "Login.h"
 #import "AppDelegate.h"
+#import "WebServiceUtilities.h"
 
 @interface ChangePassword ()
 
@@ -34,6 +35,10 @@
     return self;
 }
 
+- (void)setDelegate:(id)delegate{
+    loginDelegate = delegate;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -49,7 +54,7 @@
     
     self.userID = zzz.indexNo;
     [self validateExistingPwd];
-    outletSave.hidden = YES;
+//    outletSave.hidden = YES;
     lblMsg.hidden = TRUE;
     outletTips.hidden = TRUE;
     UITapGestureRecognizer *gestureQOne = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(DisplayTips)];
@@ -73,9 +78,7 @@
     sqlite3_stmt *statement;
     if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
     {
-        //NSString *querySQL = [NSString stringWithFormat: @"UPDATE User_Profile set AgentStatus = \"1\" WHERE "
-        //"AgentLoginID=\"hla\" "];
-        NSString *querySQL = [NSString stringWithFormat: @"UPDATE User_Profile set FirstLogin = \"0\" "];
+        NSString *querySQL = [NSString stringWithFormat: @"UPDATE Agent_Profile set FirstLogin = \"1\" "];
         
         if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK){
             if (sqlite3_step(statement) == SQLITE_DONE){
@@ -256,7 +259,10 @@
         }
         else {
             if ([txtNewPwd.text isEqualToString:txtConfirmPwd.text]) {
-                [self validatePassword];
+                
+                WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
+                [webservice FirstTimeLogin:loginDelegate AgentCode:@"1024" password:txtOldPwd.text newPassword:txtNewPwd.text UUID:[[[UIDevice currentDevice] identifierForVendor] UUIDString]];
+//                [self validatePassword];
             }
             else {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"New Password did not match with confirmed password." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
@@ -265,12 +271,8 @@
                 txtNewPwd.text = @"";
                 txtConfirmPwd.text = @"";
             }
-            
         }
-        
-        
     }
-    
 }
 
 - (BOOL) isPasswordLegal:(NSString*) password

@@ -13,4 +13,5 @@
 - (int)forgotPassword:(NSString *)username delegate:(id)delegate;
 - (int)ValidateLogin:(NSString *)username password:(NSString *)password
                 UUID:(NSString *)deviceID delegate:(id)delegate;
+- (int)FirstTimeLogin:(id)delegate AgentCode:(NSString *)AgentCode password:(NSString *)password newPassword:(NSString *)newpassword UUID:(NSString *)deviceID;
 @end

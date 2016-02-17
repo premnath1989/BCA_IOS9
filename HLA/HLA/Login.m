@@ -31,6 +31,10 @@
 #import <SystemConfiguration/SystemConfiguration.h>
 #import "LoginMacros.h"
 #import "WebServiceUtilities.h"
+#import "DDXMLDocument.h"
+#import "DDXMLElementAdditions.h"
+#import "DDXMLNode.h"
+#import "ChangePassword.h"
 
 @interface Login ()
 
@@ -53,71 +57,61 @@ NSString *ProceedStatus = @"";
 {
     [super viewDidLoad];
 
-    loginDB = [[loginDBManagement alloc]init];
+    loginDB = [[LoginDBManagement alloc]init];
     
-    indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    indicator.frame = CGRectMake(0.0, 0.0, 80.0, 80.0);
-    indicator.center = self.view.center;
-    [self.view addSubview:indicator];
-    [indicator bringSubviewToFront:self.view];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = TRUE;
-    /*
-     * Edited By Erwin
-     * Desc : move it to LoginDBManagement.m
-     * Goal : refactoring
-     */
-//    NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//    NSString *docsDir = [dirPaths objectAtIndex:0];
-//    databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
-//    RatesDatabasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"HLA_Rates.sqlite"]];
-//    UL_RatesDatabasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"UL_Rates.sqlite"]];
-//    CommDatabasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"Rates.json"]];
-//    [self makeDBCopy];
+    
+    txtUsername.delegate = self;
+    txtPassword.delegate = self;
+    
+    [self initLoadingSpinner];
+    
+    firstLogin = false;
+    if([loginDB AgentRecord] == AGENT_IS_NOT_FOUND){
+        [self FirstTimeAlert:@"Congratulation"];
+        firstLogin = true;
+    }
+    
+    NSString *xmlContent = @"<ReceiveFirstLoginResult><DocumentElement><MyTable><AgentCode>1024</AgentCode><AgentName>Erwin</AgentName><AgentType>type1</AgentType><ImmediateLeaderCode>sad</ImmediateLeaderCode><ImmediateLeaderName>ads</ImmediateLeaderName><BusinessRegNumber>213</BusinessRegNumber><AgentEmail>button.setonclicklistener@gmail.com</AgentEmail><AgentLoginID>1024</AgentLoginID><AgentNRIC>1234567884332</AgentNRIC><AgentContractDate>2016-02-15T00:00:00+08:00</AgentContractDate><AgentAddrLine1>21321</AgentAddrLine1><AgentAddrLine2>wqeqe</AgentAddrLine2><AgentAddrLine3>sadsa</AgentAddrLine3><AgentAddrPostcode>34566</AgentAddrPostcode><AgentContactNo>1232143437</AgentContactNo> <AgentPassword>password</AgentPassword><AgentStatus>Active</AgentStatus><Channel>1</Channel><AgentPortalLoginID>asd</AgentPortalLoginID><AgentPortalPassword>asd</AgentPortalPassword><FirstLogin>2016-02-16T11:36:33.387+08:00</FirstLogin><xs:element name=\"AgentCode\" type=\"xs:string\" minOccurs=\"0\" /> <LastLogonDate>2016-02-16T15:30:09.487+08:00</LastLogonDate><DeviceID>1231231</DeviceID><DeviceType>asd</DeviceType><OSVersion>9.2</OSVersion><SignDocLicense>True</SignDocLicense></MyTable></DocumentElement></ReceiveFirstLoginResult>";
+    
+    // create XMLDocument object
+    DDXMLDocument *xml = [[DDXMLDocument alloc] initWithXMLString:xmlContent options:0 error:nil];
+    
+    // Get root element - DataSetMenu for your XMLfile
+    DDXMLElement *root = [xml rootElement];
+    
+    // go through all elements in root element (DataSetMenu element)
+    for (DDXMLElement *DataSetMenuElement in [root children]) {
+        // if the element name's is MenuCategories then do something
+        NSLog(@"%@", [DataSetMenuElement name]);
+        for(DDXMLElement *DocumentElement in [DataSetMenuElement children]){
+             NSLog(@"%@", [DocumentElement name]);
+            for(DDXMLElement *table in [DocumentElement children]){
+                NSArray *elements = [DocumentElement elementsForName:[table name]];
+                NSLog(@"%@ = %@", [table name], [[elements objectAtIndex:0] stringValue]);
+                if ([[table name] isEqualToString:@"xs:element"]){
+                    DDXMLNode *name = [table attributeForName: @"name"];
+                    DDXMLNode *type = [table attributeForName: @"type"];
+                    NSLog(@"attribute = %@, type = %@", [name stringValue], [type stringValue]);
+                }
+            }
+        }
+    }
+    
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(forgotPassword:)];
-//    tapGesture.numberOfTapsRequired = 1;
     [lblForgotPwd setUserInteractionEnabled:YES];
     [lblForgotPwd addGestureRecognizer:tapGesture];
     
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
+    tap.cancelsTouchesInView = NO;
+    [self.view addGestureRecognizer:tap];
     
     NSString *deviceId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
     
     NSLog(@"devideId %@", [[[UIDevice currentDevice] identifierForVendor] UUIDString]);
     [self ShowLoginDate];
     
-    //txtPassword.text = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
-    //txtPassword.enabled = FALSE;
-    //txtPassword.textColor = [UIColor grayColor];
-    
-    
-    //[self isFirstTimeLogin];
-    
-    //NSString *path = [[NSBundle mainBundle] pathForResource:@"HLA Ipad-Info"  ofType:@"plist"];
-    //NSMutableDictionary *dictionary = [[NSMutableDictionary alloc]initWithContentsOfFile:path];
-    
-    //outletReset.hidden = YES;
-    
-    // NSString *version = [NSString stringWithFormat:
-    //                    @"Version %@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
-    
-    /*
-     sqlite3_stmt *statement;
-     int intStatus = 0;
-     
-     if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
-     {
-     NSString *querySQL = [NSString stringWithFormat: @"SELECT AgentStatus FROM User_Profile WHERE AgentLoginID=\"hla\" "];
-     
-     if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK){
-     if (sqlite3_step(statement) == SQLITE_ROW){
-     intStatus = sqlite3_column_int(statement, 0);
-     }
-     sqlite3_finalize(statement);
-     }
-     sqlite3_close(contactDB);
-     querySQL = Nil;
-     }
-     */
     NSString *version = [NSString stringWithFormat:
                          @"%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
     NSDate *endDate =  [[NSDate date] dateByAddingTimeInterval:8 *60 * 60 ];
@@ -137,59 +131,6 @@ NSString *ProceedStatus = @"";
     labelUpdated.text = @"Last Updated: 02 OCT 2014 11:00AM";
     outletLogin.hidden = FALSE;
     
-    //[txtUsername becomeFirstResponder];
-    /*
-     if (intStatus != 0) {
-     
-     if ([components day ] > 43 ) {
-     labelVersion.text = @"";
-     lblForgotPwd.hidden = YES;
-     labelUpdated.numberOfLines = 2;
-     labelUpdated.text = @"Thank you for using iMobile Planner (1.1), this version is now EXPIRED. \nPlease watch up for our announcement for a new release ";
-     outletLogin.hidden = TRUE;
-     
-     if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
-     {
-     NSString *querySQL = [NSString stringWithFormat: @"UPDATE User_Profile set AgentStatus = \"0\" WHERE AgentLoginID=\"hla\" "];
-     
-     if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK){
-     if (sqlite3_step(statement) == SQLITE_DONE){
-     
-     }
-     
-     sqlite3_finalize(statement);
-     }
-     
-     sqlite3_close(contactDB);
-     querySQL = Nil;
-     }
-     
-     statement = Nil;
-     
-     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Thank you for using iMobile Planner "
-     "(1.1), this version is now EXPIRED. \nPlease watch up for our announcement for a new release "
-     delegate:self cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil ];
-     alert.tag = 1001;
-     [alert show];
-     }
-     else{
-     
-     labelVersion.text = version;
-     labelUpdated.text = @"Last Updated: 25 April 2013";
-     outletLogin.hidden = FALSE;
-     
-     [txtUsername becomeFirstResponder];
-     }
-     }
-     else{
-     
-     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Expire" message:@"Thank you for using iMobile Planner "
-     "(1.1), this version is now EXPIRED. \nPlease watch up for our announcement for a new release "
-     delegate:self cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil ];
-     alert.tag = 1001;
-     [alert show];
-     }
-     */
     version = Nil;
     endDate =  Nil;
     formatter = Nil;
@@ -197,15 +138,15 @@ NSString *ProceedStatus = @"";
     gregorianCalendar = Nil;
     components = Nil;
     
-    //    [self setAndpopulateUsername];
     
-    
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
-    tap.cancelsTouchesInView = NO;
-    tap.numberOfTapsRequired = 1;
-    
-    [self.view addGestureRecognizer:tap];
-    
+}
+
+- (void) initLoadingSpinner{
+    indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    indicator.frame = CGRectMake(0.0, 0.0, 80.0, 80.0);
+    indicator.center = self.view.center;
+    [self.view addSubview:indicator];
+    [indicator bringSubviewToFront:self.view];
 }
 
 //added by Edwin 12-02-2014
@@ -216,11 +157,9 @@ static NSString *labelVers;
 }
 
 -(void)hideKeyboard{
-    
     Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
     id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
     [activeInstance performSelector:@selector(dismissKeyboard)];
-    
 }
 
 
@@ -289,7 +228,7 @@ static NSString *labelVers;
      
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
     
-    [self IsFirstDevice];
+//    [self IsFirstDevice];
     
 }
 
@@ -304,29 +243,8 @@ static NSString *labelVers;
     [super viewDidDisappear:animated];
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    
-    if (alertView.tag == 1001) {
-        exit(0);
-    }
-    else if (alertView.tag == 1){
-        /*
-         SettingUserProfile * UserProfileView = [self.storyboard instantiateViewControllerWithIdentifier:@"SettingUserProfile"];
-         UserProfileView.modalPresentationStyle = UIModalPresentationPageSheet;
-         UserProfileView.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-         UserProfileView.indexNo = self.indexNo;
-         [self presentModalViewController:UserProfileView animated:YES];
-         UserProfileView.view.superview.frame = CGRectMake(150, 50, 700, 748);
-         UserProfileView = nil;
-         */
-    }
-    else if (alertView.tag == 10)
-    {
-        [self doOfflineLoginCheck];
-    }
-    
-}
 
+//here is our function for every response from webservice
 - (void) operation:(AgentWSSoapBindingOperation *)operation
                 completedWithResponse:(AgentWSSoapBindingResponse *)response
 {
@@ -355,12 +273,23 @@ static NSString *labelVers;
         }
         
         /****
+         * is it AgentWS_ReceiveFirstLoginResponse
+         ****/
+        else if([bodyPart isKindOfClass:[AgentWS_ReceiveFirstLoginResponse class]]) {
+            AgentWS_ReceiveFirstLoginResponse* rateResponse = bodyPart;
+            UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Success!"message:@"Please Login using your new password" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alert show];
+            firstLogin = false;
+        }
+        
+        /****
          * is it AgentWS_SendForgotPasswordResponse
          ****/
-        else if([bodyPart isKindOfClass:[AgentWS_SendForgotPasswordResponse class]]) {
-            AgentWS_ValidateLoginResponse* rateResponse = bodyPart;
-            UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Success!"message:[NSString stringWithFormat:@"%@ that you are logged in",rateResponse.ValidateLoginResult] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [alert show];
+        else if([bodyPart isKindOfClass:[AgentWS_ValidateLoginResponse class]]) {
+//            AgentWS_ValidateLoginResponse* rateResponse = bodyPart;
+//            UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Success!"message:[NSString stringWithFormat:@"%@ that you are logged in",rateResponse.ValidateLoginResult] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+//            [alert show];
+            [self loginSuccess];
         }
     }
 }
@@ -380,118 +309,60 @@ static NSString *labelVers;
         WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
         [webservice forgotPassword:txtUsername.text delegate:self];
     }
-        /*
-         * Edited by : Erwin
-         * Desc : call function "SearchAgent" from LoginDBManagement
-         * Goal : Refactoring
-         */
-//        sqlite3_stmt *statement;
-//        if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
-//        {
-//            //NSString *querySQL = [NSString stringWithFormat: @"SELECT * FROM User_Profile WHERE AgentLoginID=\"%@\" ", txtUsername.text];
-//            NSString *querySQL = [NSString stringWithFormat: @"SELECT * FROM Agent_Profile WHERE AgentLoginID=\"%@\" ", txtUsername.text];
-//            
-//            if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK){
-//                if (sqlite3_step(statement) == SQLITE_ROW){
-//                    ForgotPwd *forgotView = [self.storyboard instantiateViewControllerWithIdentifier:@"ForgotPwd"];
-//                    forgotView.modalPresentationStyle = UIModalPresentationFormSheet;
-//                    forgotView.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-//                    forgotView.LoginID = txtUsername.text;
-//                    [self presentModalViewController:forgotView animated:NO];
-//                    forgotView.view.superview.bounds = CGRectMake(0, 0, 550, 600);
-//                    
-//                    forgotView = Nil;
-//                }
-//                else {
-//                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
-//                                                                    message:@"Username does not exist. Unable to retrieve password." delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil ];
-//                    [alert show];
-//                    alert = Nil;
-//                }
-//                sqlite3_finalize(statement);
-//            }
-//            
-//            sqlite3_close(contactDB);
-//            querySQL = Nil;
-//            
-//        }
-}
-
--(void)IsFirstDevice
-{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    NSNumber *aNumber = [defaults objectForKey:@"isFirstDevice"];
-    NSInteger anInt = [aNumber intValue];
-    anInt=1;
-    if(anInt==1)
-    {
-        isFirstDevice = FALSE;
-    }else
-    {
-        isFirstDevice = TRUE;
-        
-        AgentPortalLogin *agentPortalLogin = [self.storyboard instantiateViewControllerWithIdentifier:@"agentPortalLogin"];
-        agentPortalLogin.modalPresentationStyle = UIModalPresentationPageSheet;
-        agentPortalLogin.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-        
-        [self presentViewController:agentPortalLogin animated:YES completion:nil];
-        agentPortalLogin.view.superview.frame = CGRectMake(150, 50, 700, 600);
-    }
-    
-    //[self resetFirstDevice];
-}
-
-
-/* added by Edwin for new device registration, resets to as new device*/
--(void)resetFirstDevice
-{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    [defaults setObject:[NSNumber numberWithInt:0] forKey:@"isFirstDevice"];
-    
 }
 
 #pragma mark - keyboard display
 
--(void)keyboardDidShow:(NSNotificationCenter *)notification
+-(void)keyboardDidShow:(NSNotification *)notification
 {
-    [self viewScrollUp:0.0f to:200.0f];
-  
+    NSDictionary* info = [notification userInfo];
+    CGSize keyboardSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    CGPoint buttonOrigin = self.outletReset.frame.origin;
+    CGFloat buttonHeight = self.outletReset.frame.size.height;
+    CGRect visibleRect = self.view.frame;
+    
+    visibleRect.size.height -= keyboardSize.height;
+    
+    if (!CGRectContainsPoint(visibleRect, buttonOrigin)){
+        CGPoint scrollPoint = CGPointMake(0.0, buttonOrigin.y - visibleRect.size.height + buttonHeight);
+        [self.scrollViewLogin setContentOffset:scrollPoint animated:YES];
+    }
 }
 
--(void)viewScrollUp:(CGFloat)yFrom to:(CGFloat)yTo{
-    CGRect bounds = scrollViewLogin.bounds;
-    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"bounds"];
-    animation.duration = 1.0;
-    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    animation.fillMode = kCAFillModeForwards;
-    animation.removedOnCompletion = NO;
-    bounds.origin.y = bounds.origin.y + yFrom;
-    animation.fromValue = [NSValue valueWithCGRect:bounds];
-    bounds.origin.y = bounds.origin.y + yTo;
-    animation.toValue = [NSValue valueWithCGRect:bounds];
-    [self.scrollViewLogin.layer addAnimation:animation forKey:@"bounds"];
-}
 
 -(void)keyboardDidHide:(NSNotificationCenter *)notification
 {
-    [self viewScrollUp:200.0f to:-200.0f];
-}
-
--(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-{
-    activeField = textField;
-    return YES;
+    [self.scrollViewLogin setContentOffset:CGPointZero animated:YES];
 }
 
 #pragma mark - action
 
 - (IBAction)btnLogin:(id)sender {
-    //[self checkingPassword];
     
-    [self loginAction];
-    
+    if (txtUsername.text.length <= 0 || txtPassword.text.length <=0 ) {
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Username and password are required" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        alert.tag = USERNAME_PASSWORD_VALIDATION;
+        [alert show];
+    }else{
+        if(firstLogin && ![self connected]){
+            [self FirstTimeAlert:@"Information"];
+        }else{
+            [self loginAction];
+        }
+    }
+}
+
+- (void)FirstTimeAlert:(NSString *)title{
+    UIAlertView* alert = [[UIAlertView alloc]initWithTitle:title message:[NSString stringWithFormat:@"Please make sure you are connected to the internet for first time login"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    [alert show];
+}
+
+- (BOOL)connected
+{
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
+    return networkStatus != NotReachable;
 }
 
 - (void) ShowLoginDate
@@ -533,252 +404,142 @@ static NSString *labelVers;
     }
 }
 
+- (BOOL) validToLogin{
+    
+    //need to check again the date format
+    NSDateFormatter *dateFormatter  =   [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+    
+    BOOL validFlag = true;
+    
+    switch ([loginDB AgentStatus:txtUsername.text]) {
+        case AGENT_IS_INACTIVE:
+        {
+            UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Your Agent Status is inactive"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alert show];
+            validFlag = false;
+            break;
+        }
+        case AGENT_IS_NOT_FOUND:
+        {
+            UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Your Agent Code is wrong"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alert show];
+            validFlag = false;
+            break;
+        }
+        default:
+            break;
+    }
+    switch ([[dateFormatter dateFromString:[loginDB expiryDate:txtUsername.text]] compare:[NSDate date]]) {
+        case NSOrderedAscending:
+        {
+            UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Agent license has expired"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alert show];
+            validFlag = false;
+            break;
+        }
+        default:
+            break;
+    }
+    
+    return validFlag;
+}
+
 - (void) loginAction
 {
-    
-    //	txtUsername.text= @"emi";
-    //	txtPassword.text = @"password";
-    
-    if (txtUsername.text.length <= 0) {
+    //check the agentstatus and expiry date
+    if([self validToLogin] && !firstLogin){
+        [indicator startAnimating];
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Username is required" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alert show];
-        
-        [txtUsername becomeFirstResponder];
-        alert = Nil;
-        
-    }
-    
-    if (![self IsConnected]) {
-        // not connected
-        NSLog(@"got");
-    } else {
-        // connected, do some internet stuff
-        NSLog(@"nogot");
-    }
-    //http://192.168.2.107/AgentWebService/AgentMgmt.asmx/ValidateAgentAndDevice?strAgentID=&strDeviceID=
-    
-    NSString *deviceId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
-    
-    NSLog(@"devideId %@", [[[UIDevice currentDevice] identifierForVendor] UUIDString]);
-    
-    NSString *post = [NSString stringWithFormat:@"strAgentID=%@&strPassword=%@&strDeviceID=%@",txtUsername.text,txtPassword.text, @"1AE92BBE-1B69-413E-982A-557CBA969D4B"];
-    //	NSString *post = [NSString stringWithFormat:@"strAgentID=%@&strPassword=%@&strDeviceID=%@",txtUsername.text,txtPassword.text, [[[UIDevice currentDevice] identifierForVendor] UUIDString]];
-    
-    //	NSString *post = [NSString stringWithFormat:@"strAgentID=%@&strDeviceID=%@",@"cd",@"ds"];
-    
-    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-    NSString *postLength = [NSString stringWithFormat:@"%d",[postData length]];
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    
-    NSString *url = [NSString stringWithFormat:@"http://192.168.2.131/AgentWebService/AgentMgmt.asmx/ValidateLogin"];
-    
-    [request setURL:[NSURL URLWithString:url]];
-    [request setHTTPMethod:@"POST"];
-    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
-    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    [request setHTTPBody:postData];
-    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-    NSData *urlData;
-    NSURLResponse *response;
-    //D33D26AB-2319-4088-A7AD-E8A69F675F19
-    NSError *error;
-    urlData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    
-    BOOL hasConn;
-    if(conn) {
-        hasConn = TRUE;
-        NSLog(@"Connection Successful");
-    } else {
-        NSLog(@"Connection could not be made");
-        hasConn = FALSE;
-    }
-    
-    if (hasConn) {
-        NSString *aStr = [[NSString alloc] initWithData:urlData encoding:NSUTF8StringEncoding];
-        
-        NSRange rangeValue1 = [aStr rangeOfString:@"True" options:NSCaseInsensitiveSearch];
-        NSRange rangeValue2 = [aStr rangeOfString:@"False" options:NSCaseInsensitiveSearch];
-        
-        if (aStr == nil || [aStr isEqualToString:@""]) {
-            NSLog(@"no conn");
-            [self doOfflineLoginCheck];
+        //online login
+        if([self connected]){
+            WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
+            [webservice ValidateLogin:txtUsername.text password:txtPassword.text UUID:[[[UIDevice currentDevice] identifierForVendor] UUIDString] delegate:self];
+        }else{
+            //offline login
+             [self doOfflineLoginCheck];
         }
-        if (rangeValue1.length > 0)
-        {
-            [self loginSuccess];
-            [loginDB InsertAgentProfile:aStr];
-            //Edited by : erwin, change it to insertagentprofile
-//            [self parseURL:aStr];
-            
-        }
-        if (rangeValue2.length > 0)
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Invalid Login" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-            [alert show];
-            
-            [txtUsername becomeFirstResponder];
-            alert = Nil;
-        }
-    }
-    else {
+    }else if(firstLogin){
+        ChangePassword * UserProfileView = [self.storyboard instantiateViewControllerWithIdentifier:@"ChangePwd"];
+        UserProfileView.modalPresentationStyle = UIModalPresentationPageSheet;
+        UserProfileView.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [UserProfileView setDelegate:self];
+        [self presentViewController:UserProfileView animated:YES completion:nil];
         
-        [self doOfflineLoginCheck];
-        
+        UserProfileView.view.superview.frame = CGRectMake(150, 50, 700, 748);
+        UserProfileView = nil;
     }
-    
-    
-    
-    //	if ([txtUsername.text isEqualToString:@"prem"] &&[txtPassword.text isEqualToString:@"password123"])
-    //	{
-    //		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"User Account been disable,Please authenticate with the portal to enable" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-    //        [alert show];
-    //
-    //        [txtPassword becomeFirstResponder];
-    //        alert = Nil;
-    //
-    //	}
-    //	else if ([txtUsername.text isEqualToString:@"emi"] &&[txtPassword.text isEqualToString:@"password123"])
-    //	{
-    //		[self loginSuccess];
-    //
-    //	}
-    //
-    //	else
-    //	{
-    //	  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Invalid Password. Please check your password" delegate:Nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
-    //	  [alert show];
-    //
-    //	}
-    //
-    //
-    //
-    //
-    
-    //    else if (txtPassword.text.length <=0) {
-    //        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Password is required" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-    //        [alert show];
-    //
-    //        [txtPassword becomeFirstResponder];
-    //        alert = Nil;
-    //    }
-    /*
-     else if (![txtUsername.text isEqualToString:@"hla"]) {
-     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Invalid Login ID." delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-     [alert show];
-     
-     [txtPassword becomeFirstResponder];
-     alert = Nil;
-     }*/
-    //    else if( [Login forSMPD_Acturial:txtPassword.text] )
-    //    {
-    //        [self openHome];
-    //    }
-    //    else if (isFirstDevice)
-    //    {
-    //        if ([[Reachability reachabilityWithHostname:@"www.hla.com.my"] currentReachabilityStatus] == NotReachable) {
-    //            // Show alert because no wifi or 3g is available..
-    //            [MBProgressHUD hideHUDForView:self.view animated:YES];
-    //            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
-    //                                                            message:@"Error in connecting to Web service. Please check your internet connection"
-    //                                                           delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-    //            [alert show];
-    //
-    //            alert = Nil;
-    //        }else
-    //        {
-    //
-    //            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    //            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 5), ^{
-    //
-    //                xmlType = XML_TYPE_VALIDATE_AGENT;
-    //                NSString *sBadAttempt = [NSString stringWithFormat:@"%d", [self getBadAttempts]];
-    //                NSString *strURL = [NSString stringWithFormat:@"%@eSubmissionWS/eSubmissionXMLService.asmx/"
-    //                                    "ValidateAgent?Input1=%@&Input2=%@&Input3=%@&Input4=%@",
-    //                                    [SIUtilities WSLogin],  txtUsername.text, txtPassword.text, [self getIPAddress], sBadAttempt];
-    //                NSLog(@"%@", strURL);
-    //                NSURL *url = [NSURL URLWithString:strURL];
-    //                NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:0 timeoutInterval:20];
-    //
-    //                AFXMLRequestOperation *operation = [AFXMLRequestOperation XMLParserRequestOperationWithRequest:request
-    //                                                                                                       success:^(NSURLRequest *request, NSHTTPURLResponse *response, NSXMLParser *XMLParser) {
-    //
-    //                                                                                                           XMLParser.delegate = self;
-    //                                                                                                           [XMLParser setShouldProcessNamespaces:YES];
-    //                                                                                                           [XMLParser parse];
-    //
-    //                                                                                                       } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSXMLParser *XMLParser) {
-    //                                                                                                           [MBProgressHUD hideHUDForView:self.view animated:YES];
-    //                                                                                                           NSLog(@"error in calling web service");
-    //                                                                                                           UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
-    //                                                                                                                                                           message:@"Error in connecting to Web service. Please check your internet connection"
-    //                                                                                                                                                          delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-    //                                                                                                           [alert show];
-    //
-    //                                                                                                           alert = Nil;
-    //                                                                                                       }];
-    //                [operation start];
-    //                dispatch_async(dispatch_get_main_queue(), ^{
-    //                    [MBProgressHUD hideHUDForView:self.view animated:YES];
-    //                });
-    //            });
-    //        }
-    //
-    //
-    //    }
-    //    else {
-    //
-    //        [self checkingFirstLogin];
-    //        NSLog(@"loginstatus:%d",statusLogin);
-    //        NSLog(@"indexNo:%d",indexNo);
-    //        NSLog(@"user:%@",agentID);
-    //        statusLogin = 0; //hardcoded as due to previous design that this was used to trigger the security questions.
-    //        if (statusLogin == 1 && indexNo != 0) {
-    //
-    //
-    //			SecurityQuestion *securityPage = [self.storyboard instantiateViewControllerWithIdentifier:@"SecurityQuestion"];
-    //			securityPage.userID = indexNo;
-    //			securityPage.FirstTimeLogin = 1;
-    //			securityPage.modalPresentationStyle = UIModalPresentationPageSheet;
-    //			securityPage.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    //			[self presentModalViewController:securityPage animated:NO];
-    //
-    //			securityPage = Nil;
-    //
-    //
-    //            scrollViewLogin = Nil;
-    //            activeField = Nil;
-    //
-    //
-    //
-    //        } else if (statusLogin == 0 && indexNo != 0) {
-    //
-    //
-    //
-    //            if ([[Reachability reachabilityWithHostname:@"www.hla.com.my"] currentReachabilityStatus] == NotReachable) {
-    //                [self doOfflineLoginCheck];
-    //            }else
-    //            {
-    //                [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    //                dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-    //
-    //                    [self doOnlineLogin];
-    //                    dispatch_async(dispatch_get_main_queue(), ^{
-    //                        [MBProgressHUD hideHUDForView:self.view animated:YES];
-    //                    });
-    //                });
-    //            }
-    //
-    //
-    //        }
-    //		else if (statusLogin == 2){
-    //			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Please Contact System Admin." delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-    //			[alert show];
-    //
-    //			alert = Nil;
-    //		}
-    //
-    //    }
+        
+//    if (![self IsConnected]) {
+//        // not connected
+//        NSLog(@"got");
+//    } else {
+//        // connected, do some internet stuff
+//        NSLog(@"nogot");
+//    }
+//    //http://192.168.2.107/AgentWebService/AgentMgmt.asmx/ValidateAgentAndDevice?strAgentID=&strDeviceID=
+//    
+//    NSString *deviceId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
+//    
+//    NSLog(@"devideId %@", [[[UIDevice currentDevice] identifierForVendor] UUIDString]);
+//    
+//    NSString *post = [NSString stringWithFormat:@"strAgentID=%@&strPassword=%@&strDeviceID=%@",txtUsername.text,txtPassword.text, @"asd"];
+//    
+//    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+//    NSString *postLength = [NSString stringWithFormat:@"%d",[postData length]];
+//    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+//    
+//    NSString *url = [NSString stringWithFormat:@"http://192.168.2.131/AgentWebService/AgentMgmt.asmx/ValidateLogin"];
+//    
+//    [request setURL:[NSURL URLWithString:url]];
+//    [request setHTTPMethod:@"POST"];
+//    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+//    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+//    [request setHTTPBody:postData];
+//    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+//    NSData *urlData;
+//    NSURLResponse *response;
+//    //D33D26AB-2319-4088-A7AD-E8A69F675F19
+//    NSError *error;
+//    urlData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+//    
+//    BOOL hasConn;
+//    if(conn) {
+//        hasConn = TRUE;
+//        NSLog(@"Connection Successful");
+//    } else {
+//        NSLog(@"Connection could not be made");
+//        hasConn = FALSE;
+//    }
+//    
+//    if (hasConn) {
+//        NSString *aStr = [[NSString alloc] initWithData:urlData encoding:NSUTF8StringEncoding];
+//        
+//        NSRange rangeValue1 = [aStr rangeOfString:@"True" options:NSCaseInsensitiveSearch];
+//        NSRange rangeValue2 = [aStr rangeOfString:@"False" options:NSCaseInsensitiveSearch];
+//        
+//        if (aStr == nil || [aStr isEqualToString:@""]) {
+//            NSLog(@"no conn");
+//            [self doOfflineLoginCheck];
+//        }
+//        if (rangeValue1.length > 0)
+//        {
+//            [self loginSuccess];
+//            [loginDB InsertAgentProfile:aStr];
+//            
+//        }
+//        if (rangeValue2.length > 0)
+//        {
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Invalid Login" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//            [alert show];
+//            
+//            [txtUsername becomeFirstResponder];
+//            alert = Nil;
+//        }
+//    }
+//    else {
+//        [self doOfflineLoginCheck];
+//    }
 }
 
 +(bool)forSMPD_Acturial:(NSString*) password
@@ -899,6 +660,7 @@ static NSString *labelVers;
             [txtUsername becomeFirstResponder];
             alert = Nil;
         }
+        [indicator stopAnimating];
         
         //        NSString *storedAgentStatus = [self getStoredAgentStatus];
         
@@ -1119,44 +881,7 @@ static NSString *labelVers;
 
 -(NSString *) getLastSyncDate
 {
-    //    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    //    
-    //    return [defaults stringForKey:KEY_LAST_SYNC_DATE];
-    
-    NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *docsDir = [dirPaths objectAtIndex:0];
-    NSString *dbPath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
-    
-    [db open];
-    
-    FMResultSet *result1 = [db executeQuery:@"select LastLogonDate from Agent_profile"];
-    
-    NSString *LastLogonDate = @"";
-    while ([result1 next]) {
-        LastLogonDate = [result1 objectForColumnName:@"LastLogonDate"];
-        
-        if (LastLogonDate !=(NSString *)[NSNull null]) {
-            
-            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-            NSDateFormatter *dateFormatter2 = [[NSDateFormatter alloc] init];
-            [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-            [dateFormatter2 setDateFormat:@"dd/MM/yyyy"];
-            
-            NSDate *date = [dateFormatter dateFromString: LastLogonDate];
-            dateFormatter = [[NSDateFormatter alloc] init];
-            
-            LastLogonDate = [dateFormatter2 stringFromDate:date];
-        }
-        else {
-            LastLogonDate = @"";
-        }
-        
-    }
-    
-    [db close]; 
-    
-    return LastLogonDate;
+    return [loginDB checkingLastLogout];
     
 }
 
@@ -1173,10 +898,10 @@ static NSString *labelVers;
     NSString *AgentName;
     NSString *AgentPassword;
     
-    FMResultSet *result1 = [db executeQuery:@"select AgentName, AgentPassword from Agent_profile"];
+    FMResultSet *result1 = [db executeQuery:@"select AgentCode, AgentPassword from Agent_profile"];
     
     while ([result1 next]) {
-        AgentName = [[result1 objectForColumnName:@"AgentName"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        AgentName = [[result1 objectForColumnName:@"AgentCode"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
         AgentPassword = [[result1 objectForColumnName:@"AgentPassword"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
         
         if ([txtUsername.text isEqualToString:AgentName] && [txtPassword.text isEqualToString:AgentPassword]) {
@@ -1225,6 +950,39 @@ static NSString *labelVers;
     Reachability *reachability = [Reachability reachabilityForInternetConnection];
     NetworkStatus networkStatus = [reachability currentReachabilityStatus];
     return networkStatus != NotReachable;
+}
+
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+
+    switch (alertView.tag) {
+        case USERNAME_PASSWORD_VALIDATION:
+        {
+            [alertView dismissWithClickedButtonIndex:buttonIndex animated:FALSE];
+            [txtUsername becomeFirstResponder];
+            break;
+        }
+        default:
+            break;
+    }
+//    if (alertView.tag == 1001) {
+//        exit(0);
+//    }
+//    else if (alertView.tag == 1){
+//        /*
+//         SettingUserProfile * UserProfileView = [self.storyboard instantiateViewControllerWithIdentifier:@"SettingUserProfile"];
+//         UserProfileView.modalPresentationStyle = UIModalPresentationPageSheet;
+//         UserProfileView.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+//         UserProfileView.indexNo = self.indexNo;
+//         [self presentModalViewController:UserProfileView animated:YES];
+//         UserProfileView.view.superview.frame = CGRectMake(150, 50, 700, 748);
+//         UserProfileView = nil;
+//         */
+//    }
+//    else if (alertView.tag == 10)
+//    {
+//        [self doOfflineLoginCheck];
+//    }
 }
 
 /*

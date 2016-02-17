@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "loginDBManagement.h"
+#import "LoginDBManagement.h"
 #import "FMDatabase.h"
 #import "LoginMacros.h"
 
-@implementation loginDBManagement
+@implementation LoginDBManagement
 
 - (instancetype)init{
     NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -134,8 +134,6 @@
     }
 
     fileManager = Nil;
-
-
 }
 
 - (int) SearchAgent:(NSString *)AgentID{
@@ -153,6 +151,92 @@
         sqlite3_close(contactDB);
     }
     return AgentFound;
+}
+
+- (int) AgentRecord{
+    sqlite3_stmt *statement;
+    int AgentFound = DATABASE_ERROR;
+    if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
+    {
+        NSString *querySQL = [NSString stringWithFormat: @"SELECT * FROM Agent_Profile"];
+        
+        if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK){
+            if (sqlite3_step(statement) == SQLITE_ROW) AgentFound = AGENT_IS_FOUND;
+            else AgentFound = AGENT_IS_NOT_FOUND;
+            sqlite3_finalize(statement);
+        }
+        sqlite3_close(contactDB);
+    }
+    return AgentFound;
+}
+
+- (int) AgentStatus:(NSString *)AgentID{
+    sqlite3_stmt *statement;
+    int agentStatusFlag = DATABASE_ERROR;
+    if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
+    {
+        NSString *querySQL = [NSString stringWithFormat: @"SELECT AgentStatus FROM Agent_Profile WHERE AgentCode=\"%@\" ", AgentID];
+        
+        if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK){
+            if (sqlite3_step(statement) == SQLITE_ROW) {
+                NSString *strFirstLogin = [[NSString alloc]
+                                           initWithUTF8String:
+                                           (const char *) sqlite3_column_text(statement, 0)];
+                NSLog(@"%@",strFirstLogin);
+                if([strFirstLogin caseInsensitiveCompare:@"A"] == NSOrderedSame){
+                    agentStatusFlag = AGENT_IS_ACTIVE;
+                }else{
+                    agentStatusFlag = AGENT_IS_INACTIVE;
+                }
+            }else{
+                agentStatusFlag = AGENT_IS_NOT_FOUND;
+            }
+            sqlite3_finalize(statement);
+        }
+        sqlite3_close(contactDB);
+    }
+    return agentStatusFlag;
+}
+
+- (NSString *) expiryDate:(NSString *)AgentID{
+    sqlite3_stmt *statement;
+    NSString *nsdate = @"";
+    if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
+    {
+        NSString *querySQL = [NSString stringWithFormat: @"SELECT LicenseExpiryDate FROM Agent_Profile WHERE AgentCode=\"%@\" ", AgentID];
+        
+        if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK){
+            if (sqlite3_step(statement) == SQLITE_ROW) {
+                nsdate = [[NSString alloc]
+                                           initWithUTF8String:
+                                           (const char *) sqlite3_column_text(statement, 0)];
+            }
+            sqlite3_finalize(statement);
+        }
+        sqlite3_close(contactDB);
+    }
+    return nsdate;
+}
+
+- (int) FirstLogin:(NSString *)AgentID{
+    sqlite3_stmt *statement;
+    int FirstLogin = DATABASE_ERROR;
+    if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
+    {
+        NSString *querySQL = [NSString stringWithFormat: @"SELECT FirstLogin FROM Agent_Profile WHERE AgentCode=\"%@\" ", AgentID];
+        
+        if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK){
+            if (sqlite3_step(statement) == SQLITE_ROW) {
+                NSString *strFirstLogin = [[NSString alloc]
+                                          initWithUTF8String:
+                                          (const char *) sqlite3_column_text(statement, 0)];
+                FirstLogin = [strFirstLogin intValue];
+            }
+            sqlite3_finalize(statement);
+        }
+        sqlite3_close(contactDB);
+    }
+    return FirstLogin;
 }
 
 - (int) InsertAgentProfile:(NSString *) urlStr
@@ -268,45 +352,27 @@
     statement = Nil;
 }
 
--(void)checkingLastLogout:(int)indexNo
+-(NSString *)checkingLastLogout
 {
-    const char *dbpath = [databasePath UTF8String];
+    
     sqlite3_stmt *statement;
-
-    if (sqlite3_open(dbpath, &contactDB) == SQLITE_OK)
+    NSString *nsdate = @"";
+    if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
     {
-        //NSString *querySQL = [NSString stringWithFormat: @"SELECT LastLogoutDate FROM User_Profile WHERE IndexNo=\"%d\"",indexNo];
-        NSString *querySQL = [NSString stringWithFormat: @"SELECT LastLogoutDate FROM Agent_Profile WHERE IndexNo=\"%d\"",indexNo];
-
-        const char *query_stmt = [querySQL UTF8String];
-        if (sqlite3_prepare_v2(contactDB, query_stmt, -1, &statement, NULL) == SQLITE_OK)
-        {
-            if (sqlite3_step(statement) == SQLITE_ROW)
-            {
-                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-                [dateFormatter setDateFormat:@"dd-MM-yyyy HH:mm:ss"];
-
-                //                NSDate *logoutDate = [NSDate dateWithTimeIntervalSinceNow: sqlite3_column_double(statement, 0)];
-
-                NSString *logoutDate = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 0)];
-
-                //                NSDate *logoutDate = [dateFormatter stringFromDate:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)]];
-
-
-                NSLog(@"%@",logoutDate);
-                dateFormatter = Nil;
-                logoutDate = Nil;
-
-            } else {
-                NSLog(@"error check logout");
+        NSString *querySQL = [NSString stringWithFormat: @"SELECT LastLogonDate FROM Agent_Profile WHERE AgentCode=1024"];
+        
+        if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK){
+            if (sqlite3_step(statement) == SQLITE_ROW) {
+                nsdate = [[NSString alloc]
+                          initWithUTF8String:
+                          (const char *) sqlite3_column_text(statement, 0)];
             }
             sqlite3_finalize(statement);
         }
         sqlite3_close(contactDB);
-        querySQL = Nil, query_stmt = Nil;
     }
-
-    dbpath = Nil, statement = Nil;
+    return nsdate;
+    
 }
 
 

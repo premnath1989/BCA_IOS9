@@ -15,6 +15,7 @@
     sqlite3 *contactDB;
     UIPopoverController *_PasswordTipPopover;
     PasswordTips *_PasswordTips;
+    id loginDelegate;
 }
 
 @property (nonatomic, assign,readwrite) int userID;
@@ -34,7 +35,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *outletTips;
 @property (weak, nonatomic) IBOutlet UILabel *lblTips;
 
+- (void)setDelegate:(id)delegate;
+
 
 - (IBAction)btnTips:(id)sender;
+- (IBAction)btnSave:(id)sender;
 
 @end
