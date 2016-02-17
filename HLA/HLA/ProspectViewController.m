@@ -7706,9 +7706,17 @@ bool RegDatehandling;
 	}
 
     if (isExpiryDate) {
-        outletDOB.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        //[outletExpiryDate setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", strDate] forState:UIControlStateNormal];
-        [outletExpiryDate setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", clientDateString] forState:UIControlStateNormal];
+        if ([d compare:d2] == NSOrderedDescending){
+            NSString *validationTanggalLahirFuture=@"Tanggal kadaluarsa tidak dapat lebih kecil dari tanggal hari ini";
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
+                                                            message:validationTanggalLahirFuture delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil];
+            [alert show];
+        }
+        else{
+            outletDOB.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+            //[outletExpiryDate setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", strDate] forState:UIControlStateNormal];
+            [outletExpiryDate setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", clientDateString] forState:UIControlStateNormal];
+        }
     }
 
     /*if([otherIDType_trim isEqualToString:@"EXPECTED DELIVERY DATE"] && [dateString isEqualToString:strDate]) {

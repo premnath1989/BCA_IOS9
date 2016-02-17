@@ -199,15 +199,18 @@
     for (int a=0; a<prospectTableData.count; a++) {
         ProspectProfile *pp = [prospectTableData objectAtIndex:a];
         NSString *querySQL = [NSString stringWithFormat:@"SELECT IndexNo, ContactCode, ContactNo, Prefix FROM contact_input where indexNo = %@ AND ContactCode = 'CONT008'", pp.ProspectID];
-         FMResultSet *s = [database executeQuery:querySQL];
+        NSLog(@"query %@",querySQL);
+        FMResultSet *s = [database executeQuery:querySQL];
+        NSLog(@"query q %@",querySQL);
         while ([s next]) {
-            [dataMobile addObject: [NSNumber numberWithInt: [results intForColumn:@"ContactNo"]]];
-            [dataPrefix addObject:[NSNumber numberWithInt: [results intForColumn:@"Prefix"]]];
-            [dataIndex addObject:[NSNumber numberWithInt: [results intForColumn:@"IndexNo"]]];
+            NSLog(@"datamobile %@",[s stringForColumn:@"ContactNo"]);
+            [dataMobile addObject: [s stringForColumn:@"ContactNo"]];
+            [dataPrefix addObject:[s stringForColumn:@"Prefix"]];
+            [dataIndex addObject:[s stringForColumn:@"IndexNo"]];
         }
-        [results close];
-        [database close];
+        //[s close];
     }
+    [database close];
     if ([DataToReturn isEqualToString:@"Prefix"]){
         return dataPrefix;
     }

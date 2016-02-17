@@ -218,7 +218,7 @@ MBProgressHUD *HUD;
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[ProspectListingTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        cell = [[ProspectListingTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Data"];
     }
    
 	//change
@@ -237,8 +237,8 @@ MBProgressHUD *HUD;
             cell.userInteractionEnabled = NO;
 		}
         else if(indexPath.row <[ProspectTableData count]){
-            static NSString *CellIdentifier = @"Cell";
-            ProspectListingTableViewCell *cell1 = (ProspectListingTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            //static NSString *CellIdentifier = @"Cell";
+            ProspectListingTableViewCell *cell1 = (ProspectListingTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"DataCell"];
             if (cell1 == nil) {
                 NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ProspectListingTableViewCell" owner:self options:nil];
                 cell1 = [nib objectAtIndex:0];
@@ -293,7 +293,14 @@ MBProgressHUD *HUD;
             [cell1.labelName setText:pp.ProspectName];
             [cell1.labelDOB setText:pp.ProspectDOB];
             [cell1.labelBranchName setText:pp.BranchName];
-            [cell1.labelPhone1 setText:@""];
+            //[cell1.labelPhone1 setText:@""];
+            if ([dataPrefix count]>indexPath.row){
+                cell1.labelPhone1.text= [NSString stringWithFormat:@"%@ - %@",[dataPrefix objectAtIndex:indexPath.row],[dataMobile objectAtIndex:indexPath.row]];
+            }
+            else {
+                cell1.labelPhone1.text = @"";
+            }
+
             [cell1.labelDateCreated setText:pp.DateCreated];
             [cell1.labelDateModified setText:pp.DateModified];
             [cell1.labelTimeRemaining setText:DateRemaining];
@@ -1141,6 +1148,8 @@ MBProgressHUD *HUD;
     ProspectTableData=[modelProspectProfile getProspectProfile];
     [self getMobileNo];
     [self.myTableView reloadData];
+    
+    [self.myTableView reloadData];
 }
 
 -(void) FinishEdit
@@ -1541,7 +1550,7 @@ MBProgressHUD *HUD;
 	
 	totalView = 20;
     [self ReloadTableData];
-//	[self performSelector:@selector(loadDataDelayed) withObject:nil afterDelay:2];
+	[self performSelector:@selector(loadDataDelayed) withObject:nil afterDelay:2];
 }
 
 - (IBAction)editPressed:(id)sender
