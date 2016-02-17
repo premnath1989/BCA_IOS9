@@ -201,6 +201,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtOfficeVillage;
 @property (weak, nonatomic) IBOutlet UITextField *txtOfficeDistrict;
 @property (weak, nonatomic) IBOutlet UITextField *txtOfficeProvince;
+@property (weak, nonatomic) IBOutlet UITextField *txtCountryOfBirth;
 @property (weak, nonatomic) IBOutlet UIButton *outletReferralSource;
 @property (weak, nonatomic) IBOutlet UIButton *outletExpiryDate;
 @property (weak, nonatomic) IBOutlet UIButton *outletSourceIncome;

@@ -90,13 +90,13 @@ MBProgressHUD *HUD;
     
     /*added by faiz*/
     modelProspectProfile=[[ModelProspectProfile alloc]init];
-    ProspectTableData=[modelProspectProfile getProspectProfile];
+    ProspectTableData = [modelProspectProfile getProspectProfile];
     [self createBlackStatusBar];
     /*end of added by faiz*/
     
     self.myTableView.rowHeight = 50;
     self.myTableView.backgroundColor = [UIColor clearColor];
-    self.myTableView.separatorColor = [UIColor clearColor];
+    //self.myTableView.separatorColor = [UIColor clearColor];
     self.myTableView.opaque = NO;
     
     deleteBtn.hidden = TRUE;
@@ -192,6 +192,24 @@ MBProgressHUD *HUD;
     else {
         NSLog(@"%i",[ProspectTableData count]+1);
         return [ProspectTableData count]+1;
+    }
+}
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Remove seperator inset
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    // Prevent the cell from inheriting the Table View's margin settings
+    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
+        [cell setPreservesSuperviewLayoutMargins:NO];
+    }
+    
+    // Explictly set your cell's layout margins
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
     }
 }
 
@@ -1010,8 +1028,6 @@ MBProgressHUD *HUD;
     else
     {
         pp = [ProspectTableData objectAtIndex:indexPath.row];
-        NSLog(@"prospect table data %@",pp.Religion);
-
     }
     zzz.pp = pp;
     
@@ -1020,8 +1036,7 @@ MBProgressHUD *HUD;
         _EditProspect.delegate = self;
     }
     _EditProspect.pp = pp;
-	
-	@try {
+    @try {
 		[self.navigationController pushViewController:_EditProspect animated:YES];
 		_EditProspect.navigationItem.title = @"Edit";
 	} @catch (NSException * e) {
@@ -1495,7 +1510,7 @@ MBProgressHUD *HUD;
     
    if(ProspectTableData.count == 0)
    {
-       UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"No record found" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+       UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Data Tidak Ditemukan" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
        
        [alert show];
        alert = nil;

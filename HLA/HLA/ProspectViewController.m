@@ -680,7 +680,7 @@ bool RegDatehandling;
     NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
     
     //validation message data alamat tempat tinggal
-    NSString *validationAlamat=@"Alamat Tempat harus diisi";
+    NSString *validationAlamat=@"Alamat Tempat Tinggal harus diisi";
     NSString *validationAreaTelponRumah=@"Nomor kode telepon rumah yang dimasukkan minimal 6 digit atau lebih";
     NSString *validationNumberTelponRumah=@"Nomor telepon rumah yang dimasukkan minimal 6 digit atau lebih";
     NSString *validationAreaHPUtama=@"Nomor Kode HP Utama yang dimasukkan minimal 6 digit atau lebih";
@@ -907,7 +907,7 @@ bool RegDatehandling;
         if(IC_Hold_Alert || OTHERID_Hold_Alert) {
             [self hideKeyboard];
             UIAlertView *back_alert = [[UIAlertView alloc] initWithTitle:@" "
-                                                                 message:@"Do you want to save?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+                                                                 message:@"Apakah anda ingin menyimpan?" delegate:self cancelButtonTitle:@"Ya" otherButtonTitles:@"Tidak", nil];
             back_alert.tag = 5000;
             [back_alert show];
             back_alert=nil;
@@ -915,7 +915,7 @@ bool RegDatehandling;
         } else if(![type isEqualToString:@"- SELECT -"]) {
             [self hideKeyboard];
             UIAlertView *back_alert = [[UIAlertView alloc] initWithTitle:@" "
-                                                                 message:@"Do you want to save?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+                                                                 message:@"Apakah anda ingin menyimpan?" delegate:self cancelButtonTitle:@"Ya" otherButtonTitles:@"Tidak", nil];
             back_alert.tag = 5000;
             [back_alert show];
             back_alert=nil;
@@ -933,7 +933,7 @@ bool RegDatehandling;
         } else {
             [self hideKeyboard];
             UIAlertView *back_alert = [[UIAlertView alloc] initWithTitle:@" "
-                                                                 message:@"Do you want to save?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+                                                                 message:@"Apakah anda ingin menyimpan?" delegate:self cancelButtonTitle:@"Ya" otherButtonTitles:@"Tidak", nil];
             back_alert.tag = 5000;
             [back_alert show];
             back_alert=nil;
@@ -1044,7 +1044,7 @@ bool RegDatehandling;
         } else {
             [self hideKeyboard];
             UIAlertView *back_alert = [[UIAlertView alloc] initWithTitle:@" "
-                                                                 message:@"Do you want to save?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+                                                                 message:@"Apakah anda ingin menyimpan?" delegate:self cancelButtonTitle:@"Ya" otherButtonTitles:@"Tidak", nil];
             back_alert.tag = 5000;
             [back_alert show];
             back_alert=nil;
@@ -1650,6 +1650,13 @@ bool RegDatehandling;
         return ((newLength <= CHARACTER_LIMIT_ExactDuties));
     }
     
+    if (textField == txtNPWPNo) {
+        NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_MONEY] invertedSet];
+        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        
+        return (([string isEqualToString:filtered])&&(newLength <= 20));
+    }
+    
     if (textField == txtPrefix1) {
         /*myString = [txtPrefix1.text stringByReplacingCharactersInRange:range withString:string];
         if (myString.length > 4) {
@@ -1658,7 +1665,7 @@ bool RegDatehandling;
         NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
         
-        return (([string isEqualToString:filtered])&&(newLength <= 4));
+        return (([string isEqualToString:filtered])&&(newLength <= 6));
     }
     
     if (textField == txtPrefix2) {
@@ -1669,7 +1676,7 @@ bool RegDatehandling;
         NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
         
-        return (([string isEqualToString:filtered])&&(newLength <= 4));
+        return (([string isEqualToString:filtered])&&(newLength <= 6));
     }
     
     if (textField == txtPrefix3) {
@@ -1680,7 +1687,7 @@ bool RegDatehandling;
         NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
         
-        return (([string isEqualToString:filtered])&&(newLength <= 4));
+        return (([string isEqualToString:filtered])&&(newLength <= 6));
     }
     
     if (textField == txtPrefix4) {
@@ -1691,7 +1698,7 @@ bool RegDatehandling;
         NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
         
-        return (([string isEqualToString:filtered])&&(newLength <= 4));
+        return (([string isEqualToString:filtered])&&(newLength <= 6));
     }
     
     if (textField == txtContact1) {
@@ -1737,6 +1744,18 @@ bool RegDatehandling;
         
         return (([string isEqualToString:filtered])&&(newLength <= 10));
     }
+    
+    if (textField == txtOtherIDType) {
+        /*myString = [txtContact4.text stringByReplacingCharactersInRange:range withString:string];
+         if (myString.length > 10) {
+         return NO;
+         }*/
+        NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
+        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        
+        return (([string isEqualToString:filtered]));
+    }
+
     
     if (textField == txtIDType) {
         NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
@@ -2338,7 +2357,7 @@ bool RegDatehandling;
             [txtHomePostCode removeTarget:self action:@selector(EditTextFieldBegin:) forControlEvents:UIControlEventEditingDidBegin];
         }
         
-    } else if (btnPressed.tag == 1) {
+    } else if (switchPressed.tag == 1) {
         if (checked2) {
             [btnForeignOffice setImage: [UIImage imageNamed:@"emptyCheckBox.png"] forState:UIControlStateNormal];
             checked2 = NO;
@@ -2417,7 +2436,7 @@ bool RegDatehandling;
 	clickDone = 1;
     bool exist =  [self record_exist];
     if(exist) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"All changes will be updated to related SI, CFF and eApp. Do you want to proceed?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"All changes will be updated to related SI, CFF and eApp. Do you want to proceed?" delegate:self cancelButtonTitle:@"Ya" otherButtonTitles:@"Tidak", nil];
         [alert setTag:1004];
         [alert show];
     } else {
@@ -2650,7 +2669,7 @@ bool RegDatehandling;
             } else {
                 insertSQL = [NSString stringWithFormat:
                              @"INSERT INTO prospect_profile(\'ProspectName\', \"ProspectDOB\", \"GST_registered\", \"GST_registrationNo\", \"GST_registrationDate\", \"GST_exempted\",\"ProspectGender\", \"ResidenceAddress1\", \"ResidenceAddress2\", \"ResidenceAddress3\", \"ResidenceAddressTown\", \"ResidenceAddressState\",\"ResidenceAddressPostCode\", \"ResidenceAddressCountry\", \"ResidenceDistrict\", \"ResidenceVillage\", \"ResidenceProvince\", \"OfficeAddress1\", \"OfficeAddress2\", \"OfficeAddress3\",\"OfficeAddressTown\", \"OfficeAddressState\", \"OfficeAddressPostCode\", \"OfficeAddressCountry\", \"OfficeDistrict\", \"OfficeVillage\", \"OfficeProvince\", \"ProspectEmail\",\"ProspectOccupationCode\", \"ExactDuties\", \"ProspectRemark\", \"ClientSegmentation\", \"DateCreated\", \"CreatedBy\", \"DateModified\",\"ModifiedBy\", \"ProspectGroup\", \"ProspectTitle\", \"IDTypeNo\", \"OtherIDType\", \"OtherIDTypeNo\", \"Smoker\", \"AnnualIncome\", \"SourceIncome\", \"BussinessType\", \"Race\", \"MaritalStatus\", \"Religion\", \"Nationality\", \"QQFlag\",\"ProspectProfileChangesCounter\",\"prospect_IsGrouping\", \"CountryOfBirth\", \"NIP\", \"BranchCode\", \"BranchName\", \"KCU\", \"Kanwil\",\"ReferralSource\", \"ReferralName\", \"IDExpiryDate\", \"NPWPNo\") "
-                             "VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\",\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", %@, \"%@\", %@, \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\",\"%@\",\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%s\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", txtFullName.text, strDOB, GSTRigperson, txtRigNO.text, Rigdateoutlet,GSTRigExempted,gender, txtHomeAddr1.text, txtHomeAddr2.text, txtHomeAddr3.text, txtHomeTown.text, SelectedStateCode, txtHomePostCode.text, HomeCountry,txtHomeDistrict.text,txtHomeVillage.text, txtHomeProvince.text, txtOfficeAddr1.text, txtOfficeAddr2.text, txtOfficeAddr3.text, txtOfficeTown.text, SelectedOfficeStateCode, txtOfficePostcode.text, OffCountry, txtOfficeDistrict.text,txtOfficeVillage.text, txtOfficeCountry.text, txtEmail.text, OccupCodeSelected, txtExactDuties.text, txtRemark.text, _outletVIPClass.titleLabel.text,
+                             "VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\",\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", %@, \"%@\", %@, \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\",\"%@\",\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%s\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", txtFullName.text, strDOB, GSTRigperson, txtRigNO.text, Rigdateoutlet,GSTRigExempted,gender, txtHomeAddr1.text, txtHomeAddr2.text, txtHomeAddr3.text, txtHomeTown.text, SelectedStateCode, txtHomePostCode.text, HomeCountry,txtHomeDistrict.text,txtHomeVillage.text, txtHomeProvince.text, txtOfficeAddr1.text, txtOfficeAddr2.text, txtOfficeAddr3.text, txtOfficeTown.text, SelectedOfficeStateCode, txtOfficePostcode.text, OffCountry, txtOfficeDistrict.text,txtOfficeVillage.text, txtOfficeProvince.text, txtEmail.text, OccupCodeSelected, txtExactDuties.text, txtRemark.text, _outletVIPClass.titleLabel.text,
                              @"datetime(\"now\", \"+8 hour\")", @"1", @"datetime(\"now\", \"+8 hour\")", @"1", group, TitleCodeSelected , txtIDType.text, othertype, txtOtherIDType.text, ClientSmoker, txtAnnIncome.text, _outletSourceIncome.titleLabel.text, txtBussinessType.text,race,marital,religion,nation,"false",@"1", isGrouping, CountryOfBirth, txtNip.text, outletBranchCode.titleLabel.text, outletBranchName.titleLabel.text, txtKcu.text, txtKanwil.text, outletReferralSource.titleLabel.text, txtReferralName.text, strExpiryDate, txtNPWPNo.text];
                 
             }
@@ -3303,7 +3322,7 @@ bool RegDatehandling;
 				[ClientProfile setObject:@"NO" forKey:@"isNew"];
                 
             } else if(exist) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"All changes will be updated to related SI, CFF and eApp. Do you want to proceed?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"All changes will be updated to related SI, CFF and eApp. Do you want to proceed?" delegate:self cancelButtonTitle:@"Ya" otherButtonTitles:@"Tidak", nil];
                 [alert setTag:1004];
                 [alert show];
                 
@@ -7486,7 +7505,7 @@ bool RegDatehandling;
     if(Update_record == YES) {
 		if (![[ClientProfile objectForKey:@"TabBar"] isEqualToString:@"YES"]) {
             SuccessAlert = [[UIAlertView alloc] initWithTitle:@" "
-                                                      message:@"Changes have been updated successfully." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                                                      message:@"Perubahan berhasil disimpan." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
 		}
 		SuccessAlert.tag = 1;
 		[SuccessAlert show];
@@ -7495,7 +7514,7 @@ bool RegDatehandling;
     } else {
 		if (![[ClientProfile objectForKey:@"TabBar"] isEqualToString:@"YES"]) {
 			SuccessAlert = [[UIAlertView alloc] initWithTitle:@" "
-													  message:@"A new client record successfully inserted." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+													  message:@"Data Nasabah Baru Berhasil Ditambahkan" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
 		}
 		SuccessAlert.tag = 1;
 		[SuccessAlert show];

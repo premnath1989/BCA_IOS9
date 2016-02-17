@@ -156,7 +156,7 @@
         ReferralSource = [s stringForColumn:@"ReferralSource"];
         ReferralName = [s stringForColumn:@"ReferralName"];
         IdentitySubmitted = [s stringForColumn:@"IdentitySubmitted"];
-        IDExpirityDate = [s stringForColumn:@"IDExpirityDate"];
+        IDExpirityDate = [s stringForColumn:@"IDExpiryDate"];
         NPWPNo = [s stringForColumn:@"NPWPNo"];
         Kanwil = [s stringForColumn:@"Kanwil"];
         HomeVillage = [s stringForColumn:@"ResidenceVillage"];
@@ -164,10 +164,10 @@
         HomeProvicne = [s stringForColumn:@"ResidenceProvince"];
         OfficeVillage = [s stringForColumn:@"OfficeVillage"];
         OfficeDistrict = [s stringForColumn:@"OfficeDistrict"];
-        OfficeVillage = [s stringForColumn:@"OfficeProvince"];
+        OfficeVillage = [s stringForColumn:@"OfficeVillage"];
+        OfficeProvicne = [s stringForColumn:@"OfficeProvince"];
         SourceIncome = [s stringForColumn:@"SourceIncome"];
         ClientSegmentation = [s stringForColumn:@"ClientSegmentation"];
-
         
         [ProspectTableData addObject:[[ProspectProfile alloc] initWithName:NickName AndProspectID:ProspectID AndProspectName:ProspectName
                                                           AndProspecGender:ProspectGender AndResidenceAddress1:ResidenceAddress1
@@ -386,7 +386,7 @@
         SourceIncome = [s stringForColumn:@"SourceIncome"];
         ClientSegmentation = [s stringForColumn:@"ClientSegmentation"];
         
-        
+
         [ProspectTableData addObject:[[ProspectProfile alloc] initWithName:NickName AndProspectID:ProspectID AndProspectName:ProspectName
                                                           AndProspecGender:ProspectGender AndResidenceAddress1:ResidenceAddress1
                                                       AndResidenceAddress2:ResidenceAddress2 AndResidenceAddress3:ResidenceAddress3
