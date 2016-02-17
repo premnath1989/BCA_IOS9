@@ -131,6 +131,13 @@ id msg, ComDate;
 
 -(NSString *)selectedStrDate
 {
+    if (msgDate==NULL){
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+        NSString *pickerDate = [dateFormatter stringFromDate:[_datePickerView date]];
+        
+        msgDate = [NSString stringWithFormat:@"%@",pickerDate];
+    }
     return msgDate;
 }
 
