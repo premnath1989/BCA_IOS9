@@ -1234,11 +1234,11 @@ BOOL isFirstLoad;
         } else {
 			[self UpdateSIToInvalid];
 			
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Please attach Payor as Life Assured is below 10 years old."
-                                                           delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
-            [alert show];
-            
-            return NO;
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Please attach Payor as Life Assured is below 10 years old."
+//                                                           delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
+//            [alert show];
+//            
+//            return NO;
         }
     }
     

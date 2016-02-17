@@ -153,7 +153,7 @@ id dobtemp, temp;
 	else{
 		appDel.isSIExist = NO;
 		MaritalStatus = @"S";
-		outletDone.enabled = FALSE;
+		outletDone.enabled = TRUE;
 		
 		NSLog(@"SINo not exist!");
 	}
@@ -205,7 +205,7 @@ id dobtemp, temp;
 		
 		
 		if([EAPPorSI isEqualToString:@"eAPP"]){
-			outletDone.enabled = FALSE;
+			outletDone.enabled = TRUE;
 			outletEAPP.width = 0;
 			outletSpace.width = 564;
 			
