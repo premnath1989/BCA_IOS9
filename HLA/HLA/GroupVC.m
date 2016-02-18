@@ -12,8 +12,9 @@
 #import "ColorHexCode.h"
 #import "ListingTbViewController.h"
 
-@interface GroupVC ()
-
+@interface GroupVC (){
+     UIColor *borderColor;
+}
 
 @end
 
@@ -40,8 +41,11 @@ BOOL isSave;
 - (void)viewDidLoad
 {
 	UDGroup = [NSUserDefaults standardUserDefaults];
-	
+	borderColor=[[UIColor alloc]initWithRed:250.0/255.0 green:175.0/255.0 blue:50.0/255.0 alpha:1.0];
+    
     [super viewDidLoad];
+    GroupName.layer.borderColor=borderColor.CGColor;
+    GroupName.layer.borderWidth=1.0;
 //	GroupName.delegate = self;
 	
 	[Cancel setTitle:@"Delete" forState:UIControlStateNormal];

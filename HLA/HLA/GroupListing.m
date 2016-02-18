@@ -12,7 +12,9 @@
 #import "NewGroupListing.h"
 #import "GroupVC.h"
 
-@interface GroupListing ()
+@interface GroupListing () {
+     UIColor *borderColor;
+}
 
 @end
 
@@ -24,15 +26,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	
+    borderColor=[[UIColor alloc]initWithRed:250.0/255.0 green:175.0/255.0 blue:50.0/255.0 alpha:1.0];
+    
 	UDGroup = [NSUserDefaults standardUserDefaults];
     NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docsDir = [dirPaths objectAtIndex:0];
     databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
     
-    self.view.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg10.jpg"]];
+    //self.view.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg10.jpg"]];
     self.myTableView.backgroundColor = [UIColor clearColor];
-    self.myTableView.separatorColor = [UIColor clearColor];
+    self.myTableView.separatorColor = borderColor;//[UIColor clearColor];
     ItemToBeDeleted = [[NSMutableArray alloc] init];
 	
     indexPaths = [[NSMutableArray alloc] init];
@@ -45,18 +48,21 @@
     
     ColorHexCode *CustomColor = [[ColorHexCode alloc]init ];
     
-    CGRect frame1=CGRectMake(0,204, 640, 50);
+    txtName.layer.borderColor=borderColor.CGColor;
+    txtName.layer.borderWidth=1.0;
+    
+    CGRect frame1=CGRectMake(0,220, 640, 50);
     groupLabel.frame = frame1;
-    groupLabel.textAlignment = UITextAlignmentCenter;
-    groupLabel.textColor = [CustomColor colorWithHexString:@"FFFFFF"];
-    groupLabel.backgroundColor = [CustomColor colorWithHexString:@"4F81BD"];
+    groupLabel.textAlignment = NSTextAlignmentCenter;
+    groupLabel.textColor = [UIColor whiteColor];//[CustomColor colorWithHexString:@"FFFFFF"];
+    groupLabel.backgroundColor = borderColor;//[CustomColor colorWithHexString:@"4F81BD"];
     groupLabel.numberOfLines = 2;
     
-    CGRect frame2=CGRectMake(640,204, 384, 50);
+    CGRect frame2=CGRectMake(640,220, 384, 50);
     memberLabel.frame = frame2;
-    memberLabel.textAlignment = UITextAlignmentCenter;
-    memberLabel.textColor = [CustomColor colorWithHexString:@"FFFFFF"];
-    memberLabel.backgroundColor = [CustomColor colorWithHexString:@"4F81BD"];
+    memberLabel.textAlignment = NSTextAlignmentCenter;
+    memberLabel.textColor = [UIColor whiteColor];//[CustomColor colorWithHexString:@"FFFFFF"];
+    memberLabel.backgroundColor = borderColor;//[CustomColor colorWithHexString:@"4F81BD"];
     
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData) name:@"reloadTable" object:nil];
