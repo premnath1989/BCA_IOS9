@@ -200,13 +200,13 @@ NSMutableArray *DelGroupArr;
     [txtHomeAddr3 addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
 	[txtHomeTown addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
 	[txtHomeState addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
-	[txtHomePostCode addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
+	//[txtHomePostCode addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
     [txtOfficeAddr1 addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
     [txtOfficeAddr2 addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
     [txtOfficeAddr3 addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
 	[txtOfficeTown addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
 	[txtOfficeState addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
-	[txtOfficePostCode addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
+	//[txtOfficePostCode addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
     [txtrFullName addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
     [txtPrefix1 addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
     [txtContact1 addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
@@ -227,10 +227,10 @@ NSMutableArray *DelGroupArr;
 	
     [txtAnnIncome addTarget:self action:@selector(AnnualIncomeChange:) forControlEvents:UIControlEventEditingDidEnd];
     
-    [txtHomePostCode addTarget:self action:@selector(EditTextFieldDidChange:) forControlEvents:UIControlEventEditingDidEnd];
+    //[txtHomePostCode addTarget:self action:@selector(EditTextFieldDidChange:) forControlEvents:UIControlEventEditingDidEnd];
     [txtHomePostCode addTarget:self action:@selector(EditTextFieldBegin:) forControlEvents:UIControlEventEditingDidBegin];
     
-    [txtOfficePostCode addTarget:self action:@selector(EditOfficePostcodeDidChange:) forControlEvents:UIControlEventEditingDidEnd];
+    //[txtOfficePostCode addTarget:self action:@selector(EditOfficePostcodeDidChange:) forControlEvents:UIControlEventEditingDidEnd];
     [txtOfficePostCode addTarget:self action:@selector(OfficeEditTextFieldBegin:) forControlEvents:UIControlEventEditingDidBegin];
 	
     [txtIDType addTarget:self action:@selector(NewICTextFieldBegin:) forControlEvents:UIControlEventEditingDidBegin];
@@ -586,11 +586,13 @@ NSMutableArray *DelGroupArr;
     
     if ([validationSet containsObject:branchCode]||branchCode==NULL){
         [self createAlertViewAndShow:validationKodeCabang tag:0];
+        [_outletBranchCode setBackgroundColor:[UIColor redColor]];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
         return false;
     }
     else if ([validationSet containsObject:branchName]||branchName==NULL){
         [self createAlertViewAndShow:validationNamaCabang tag:0];
+        [_outletBranchName setBackgroundColor:[UIColor redColor]];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
         return false;
     }
@@ -608,6 +610,7 @@ NSMutableArray *DelGroupArr;
     }
     else if ([validationSet containsObject:refSource]||refSource==NULL){
         [self createAlertViewAndShow:validationSumberReferral tag:0];
+        [outletReferralSource setBackgroundColor:[UIColor redColor]];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
         return false;
     }
@@ -661,21 +664,25 @@ NSMutableArray *DelGroupArr;
     }
     else if ([validationSet containsObject:dob]||dob==NULL){
         [self createAlertViewAndShow:validationTanggalLahir tag:0];
+        [outletDOB setBackgroundColor:[UIColor redColor]];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
         return false;
     }
     else if ([validationSet containsObject:otheridtype]||otheridtype==NULL){
         [self createAlertViewAndShow:validationJenisIdentitas tag:0];
+        [OtherIDType setBackgroundColor:[UIColor redColor]];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
         return false;
     }
     else if ([validationSet containsObject:otheridtext]||otheridtext==NULL){
         [self createAlertViewAndShow:validationNomorIdentitas tag:0];
+        [txtOtherIDType becomeFirstResponder];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
         return false;
     }
     else if ([validationSet containsObject:outletexpirydate]||outletexpirydate==NULL){
         [self createAlertViewAndShow:validationTanggalKadaluarsaIdentitas tag:0];
+        [outletExpiryDate setBackgroundColor:[UIColor redColor]];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
         return false;
     }
@@ -686,6 +693,7 @@ NSMutableArray *DelGroupArr;
     }
     else if ([validationSet containsObject:outletnationality]||outletnationality==NULL){
         [self createAlertViewAndShow:validationKebangsaan tag:0];
+        [outletNationality setBackgroundColor:[UIColor redColor]];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
         return false;
     }
@@ -760,7 +768,7 @@ NSMutableArray *DelGroupArr;
     }
     //else if ([textcontact1 isEqualToString:@""]||textcontact1==NULL){
     else if (![textcontact1 isEqualToString:@""]){
-        if ([textcontact1 length]<6){
+        if ([txtContact1.text length]<6){
             [self createAlertViewAndShow:validationNumberTelponRumah tag:0];
             [ClientProfile setObject:@"NO" forKey:@"TabBar"];
             [txtContact1 becomeFirstResponder];
@@ -768,21 +776,34 @@ NSMutableArray *DelGroupArr;
         }
     }
     else if ([textprefix2 isEqualToString:@""]||textprefix2==NULL){
-        if ([txtPrefix2.text length]<6){
-            [self createAlertViewAndShow:validationAreaHPUtama tag:0];
-            [ClientProfile setObject:@"NO" forKey:@"TabBar"];
-            [txtPrefix2 becomeFirstResponder];
-            return false;
-        }
+        [self createAlertViewAndShow:validationAreaHPUtama tag:0];
+        [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+        [txtPrefix2 becomeFirstResponder];
+        return false;
     }
+    
+    if ([txtPrefix2.text length]<6){
+        [self createAlertViewAndShow:validationAreaHPUtama tag:0];
+        [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+        [txtPrefix2 becomeFirstResponder];
+        return false;
+    }
+    
     else if ([textcontact2 isEqualToString:@""]||textcontact2==NULL){
-        if ([textcontact2 length]<6){
-            [self createAlertViewAndShow:validationNumberHPUtama tag:0];
-            [ClientProfile setObject:@"NO" forKey:@"TabBar"];
-            [txtContact2 becomeFirstResponder];
-            return false;
-        }
+        NSLog(@"length %i",[txtContact2.text length]);
+        [self createAlertViewAndShow:validationNumberHPUtama tag:0];
+        [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+        [txtContact2 becomeFirstResponder];
+        return false;
     }
+    
+    if ([txtContact2.text length]<6){
+        [self createAlertViewAndShow:validationNumberHPUtama tag:0];
+        [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+        [txtContact2 becomeFirstResponder];
+        return false;
+    }
+    
     //else if ([textprefix3 isEqualToString:@""]||textprefix3==NULL){
     else if (![textprefix3 isEqualToString:@""]){
         if ([txtPrefix3.text length]<6){
@@ -794,7 +815,7 @@ NSMutableArray *DelGroupArr;
     }
     //else if ([textcontact3 isEqualToString:@""]||textcontact3==NULL){
     else if (![textcontact3 isEqualToString:@""]){
-        if ([textcontact3 length]<6){
+        if ([txtContact3.text length]<6){
             [self createAlertViewAndShow:validationNumberHP2 tag:0];
             [ClientProfile setObject:@"NO" forKey:@"TabBar"];
             [txtContact3 becomeFirstResponder];
@@ -812,7 +833,7 @@ NSMutableArray *DelGroupArr;
     }
     //else if ([textcontact4 isEqualToString:@""]||textcontact4==NULL){
     else if (![textcontact4 isEqualToString:@""]){
-        if ([textcontact4 length]<6){
+        if ([txtContact4.text length]<6){
             [self createAlertViewAndShow:validationNumberTelponKantor tag:0];
             [ClientProfile setObject:@"NO" forKey:@"TabBar"];
             [txtContact4 becomeFirstResponder];
@@ -841,6 +862,7 @@ NSMutableArray *DelGroupArr;
     
     if ([validationSet containsObject:outletoccupaction]||outletoccupaction==NULL){
         [self createAlertViewAndShow:validationPekerjaan tag:0];
+        [outletOccup setBackgroundColor:[UIColor redColor]];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
         return false;
     }
@@ -852,6 +874,7 @@ NSMutableArray *DelGroupArr;
     }
     else if ([validationSet containsObject:outletsourceincome]||outletsourceincome==NULL){
         [self createAlertViewAndShow:validationSumberPenghasilan tag:0];
+        [_outletSourceIncome setBackgroundColor:[UIColor redColor]];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
         return false;
     }
@@ -2871,7 +2894,7 @@ NSMutableArray *DelGroupArr;
             if (![[txtHomePostCode.text stringByReplacingOccurrencesOfString:@" " withString:@""] isEqualToString:@"" ] && [txtHomeCountry.text isEqualToString:@"MALAYSIA"]) {
                 
                 [self PopulateState];
-                [txtHomePostCode addTarget:self action:@selector(EditTextFieldDidChange:) forControlEvents:UIControlEventEditingDidEnd];
+                //[txtHomePostCode addTarget:self action:@selector(EditTextFieldDidChange:) forControlEvents:UIControlEventEditingDidEnd];
                 [txtHomePostCode addTarget:self action:@selector(EditTextFieldBegin:) forControlEvents:UIControlEventEditingDidBegin];
             }
             else if (![[txtHomePostCode.text stringByReplacingOccurrencesOfString:@" " withString:@""] isEqualToString:@"" ] && ![txtHomeCountry.text isEqualToString:@"MALAYSIA"]) {
@@ -2881,14 +2904,14 @@ NSMutableArray *DelGroupArr;
             else {
                 
                 txtHomeState.text = @"";
-                [txtHomePostCode addTarget:self action:@selector(EditTextFieldDidChange:) forControlEvents:UIControlEventEditingDidEnd];
+                //[txtHomePostCode addTarget:self action:@selector(EditTextFieldDidChange:) forControlEvents:UIControlEventEditingDidEnd];
                 [txtHomePostCode addTarget:self action:@selector(EditTextFieldBegin:) forControlEvents:UIControlEventEditingDidBegin];
             }
             
             if (![[txtOfficePostCode.text stringByReplacingOccurrencesOfString:@" " withString:@""] isEqualToString:@"" ] && [txtOfficeCountry.text isEqualToString:@"MALAYSIA"]) {
                 
                 [self PopulateOfficeState];
-                [txtOfficePostCode addTarget:self action:@selector(EditOfficePostcodeDidChange:) forControlEvents:UIControlEventEditingDidEnd];
+                //[txtOfficePostCode addTarget:self action:@selector(EditOfficePostcodeDidChange:) forControlEvents:UIControlEventEditingDidEnd];
                 [txtOfficePostCode addTarget:self action:@selector(OfficeEditTextFieldBegin:) forControlEvents:UIControlEventEditingDidBegin];
             }
             else if (![[txtOfficePostCode.text stringByReplacingOccurrencesOfString:@" " withString:@""] isEqualToString:@"" ] && ![txtOfficeCountry.text isEqualToString:@"MALAYSIA"]) {
@@ -2898,7 +2921,7 @@ NSMutableArray *DelGroupArr;
             else {
                 
                 txtOfficeState.text = @"";
-                [txtOfficePostCode addTarget:self action:@selector(EditOfficePostcodeDidChange:) forControlEvents:UIControlEventEditingDidEnd];
+                //[txtOfficePostCode addTarget:self action:@selector(EditOfficePostcodeDidChange:) forControlEvents:UIControlEventEditingDidEnd];
                 [txtOfficePostCode addTarget:self action:@selector(OfficeEditTextFieldBegin:) forControlEvents:UIControlEventEditingDidBegin];
             }
         }
@@ -3057,7 +3080,15 @@ NSMutableArray *DelGroupArr;
     txtKcu.text=pp.KCU;
     txtReferralName.text=pp.ReferralName;
     txtNPWPNo.text=pp.NPWPNo;
-    [outletExpiryDate setTitle:[[NSString stringWithFormat:@""]stringByAppendingFormat:@"%@",pp.IDExpirityDate] forState:UIControlStateNormal];
+    
+    NSDateFormatter *expiryDateFormat = [[NSDateFormatter alloc] init];
+    [expiryDateFormat setDateFormat:@"dd/MM/yyyy"];
+    NSDate *dateExpiry = [expiryDateFormat dateFromString:pp.IDExpirityDate];
+    // Convert date object to desired output format
+    [expiryDateFormat setDateFormat:@"yyyy-MM-dd"];
+    NSString *newExpiryDate = [expiryDateFormat stringFromDate:dateExpiry];
+    [outletExpiryDate setTitle:[[NSString stringWithFormat:@""]stringByAppendingFormat:@"%@",newExpiryDate] forState:UIControlStateNormal];
+    
     _txtCountryOfBirth.text=pp.countryOfBirth;
     _txtHomeVillage.text=pp.HomeVillage;
     _txtHomeDistrict.text=pp.HomeDistrict;
@@ -3080,7 +3111,15 @@ NSMutableArray *DelGroupArr;
     txtDOB.hidden=YES;
     [txtOtherIDType setEnabled:YES];
     [txtOtherIDType setBackgroundColor:[UIColor whiteColor]];
-    [outletDOB setTitle:[[NSString stringWithFormat:@""]stringByAppendingFormat:@"%@",pp.ProspectDOB] forState:UIControlStateNormal];
+
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"dd/MM/yyyy"];
+    NSDate *date = [dateFormat dateFromString:pp.ProspectDOB];
+    // Convert date object to desired output format
+    [dateFormat setDateFormat:@"yyyy-MM-dd"];
+    NSString *newDOB = [dateFormat stringFromDate:date];
+    [outletDOB setTitle:[[NSString stringWithFormat:@""]stringByAppendingFormat:@"%@",newDOB] forState:UIControlStateNormal];
+    
     outletDOB.hidden = NO;
     OtherIDType.enabled=YES;
     //end of added by faiz//
@@ -4106,7 +4145,7 @@ NSMutableArray *DelGroupArr;
             txtHomeCountry.hidden = NO;
             btnHomeCountry.hidden = YES;
             
-            [txtHomePostCode addTarget:self action:@selector(EditTextFieldDidChange:) forControlEvents:UIControlEventEditingDidEnd];
+            //[txtHomePostCode addTarget:self action:@selector(EditTextFieldDidChange:) forControlEvents:UIControlEventEditingDidEnd];
             [txtHomePostCode addTarget:self action:@selector(EditTextFieldBegin:) forControlEvents:UIControlEventEditingDidBegin];
         }
         else {
@@ -4161,7 +4200,7 @@ NSMutableArray *DelGroupArr;
             txtOfficeCountry.hidden = NO;
             btnOfficeCountry.hidden = YES;
             
-            [txtOfficePostCode addTarget:self action:@selector(EditOfficePostcodeDidChange:) forControlEvents:UIControlEventEditingDidEnd];
+            //[txtOfficePostCode addTarget:self action:@selector(EditOfficePostcodeDidChange:) forControlEvents:UIControlEventEditingDidEnd];
             [txtOfficePostCode addTarget:self action:@selector(OfficeEditTextFieldBegin:) forControlEvents:UIControlEventEditingDidBegin];
         }
         else {
@@ -8850,7 +8889,7 @@ NSMutableArray *DelGroupArr;
                     rrr.tag = 2001;
                     [rrr show];
                     rrr=nil;
-                    [txtHomePostCode addTarget:self action:@selector(EditTextFieldDidChange:) forControlEvents:UIControlEventEditingDidEnd];
+                    //[txtHomePostCode addTarget:self action:@selector(EditTextFieldDidChange:) forControlEvents:UIControlEventEditingDidEnd];
                     return false;
                 }
                 
@@ -9820,7 +9859,7 @@ NSMutableArray *DelGroupArr;
                         rrr.tag = 2001;
                         [rrr show];
                         rrr=nil;
-                        [txtHomePostCode addTarget:self action:@selector(EditTextFieldDidChange:) forControlEvents:UIControlEventEditingDidEnd];
+                        //[txtHomePostCode addTarget:self action:@selector(EditTextFieldDidChange:) forControlEvents:UIControlEventEditingDidEnd];
                         return false;
                     }
                 }
@@ -9980,7 +10019,7 @@ NSMutableArray *DelGroupArr;
                             rrr.tag = 3001;
                             [rrr show];
                             rrr=nil;
-                            [txtOfficePostCode addTarget:self action:@selector(EditOfficePostcodeDidChange:) forControlEvents:UIControlEventEditingDidEnd];
+                            //[txtOfficePostCode addTarget:self action:@selector(EditOfficePostcodeDidChange:) forControlEvents:UIControlEventEditingDidEnd];
                             return false;
                         }
                     }
@@ -10163,7 +10202,7 @@ NSMutableArray *DelGroupArr;
 							rrr.tag = 3001;
 							[rrr show];
 							rrr=nil;
-							[txtOfficePostCode addTarget:self action:@selector(EditOfficePostcodeDidChange:) forControlEvents:UIControlEventEditingDidEnd];
+							//[txtOfficePostCode addTarget:self action:@selector(EditOfficePostcodeDidChange:) forControlEvents:UIControlEventEditingDidEnd];
 							return false;
 						}
                     }
@@ -11077,7 +11116,7 @@ NSMutableArray *DelGroupArr;
                     rrr.tag = 2001;
                     [rrr show];
                     rrr=nil;
-                    [txtHomePostCode addTarget:self action:@selector(EditTextFieldDidChange:) forControlEvents:UIControlEventEditingDidEnd];
+                    //[txtHomePostCode addTarget:self action:@selector(EditTextFieldDidChange:) forControlEvents:UIControlEventEditingDidEnd];
 					ErrMsg = @"";
                     return ErrMsg;
                 }
@@ -11817,7 +11856,7 @@ NSMutableArray *DelGroupArr;
                         
                         txtHomeState.text=@"";
                         txtHomeState.text = @"";
-                        [txtHomePostCode addTarget:self action:@selector(EditTextFieldDidChange:) forControlEvents:UIControlEventEditingDidEnd];
+                        //[txtHomePostCode addTarget:self action:@selector(EditTextFieldDidChange:) forControlEvents:UIControlEventEditingDidEnd];
 						
 						ErrMsg = @"Postcode for Residential Address is invalid.";
                         return ErrMsg;
@@ -11956,7 +11995,7 @@ NSMutableArray *DelGroupArr;
                             txtOfficeCountry.text = @"";
                             SelectedStateCode = @"";
 							ErrMsg = @"Postcode for Office Address is invalid.";
-                            [txtOfficePostCode addTarget:self action:@selector(EditOfficePostcodeDidChange:) forControlEvents:UIControlEventEditingDidEnd];
+                            //[txtOfficePostCode addTarget:self action:@selector(EditOfficePostcodeDidChange:) forControlEvents:UIControlEventEditingDidEnd];
                             return ErrMsg;
                         }
                     }
@@ -12107,7 +12146,7 @@ NSMutableArray *DelGroupArr;
 							txtOfficeCountry.text = @"";
 							SelectedStateCode = @"";
 							
-							[txtOfficePostCode addTarget:self action:@selector(EditOfficePostcodeDidChange:) forControlEvents:UIControlEventEditingDidEnd];
+							//[txtOfficePostCode addTarget:self action:@selector(EditOfficePostcodeDidChange:) forControlEvents:UIControlEventEditingDidEnd];
 							ErrMsg = @"Postcode for Office Address is invalid.";
 							return ErrMsg;
 						}
@@ -12438,6 +12477,8 @@ NSMutableArray *DelGroupArr;
     _outletBranchName.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [_outletBranchCode setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",branchCode]forState:UIControlStateNormal];
     [_outletBranchName setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",branchName]forState:UIControlStateNormal];
+    [_outletBranchCode setBackgroundColor:[UIColor clearColor]];
+    [_outletBranchName setBackgroundColor:[UIColor clearColor]];
     [txtKcu setText:branchStatus];
     [_branchInfoPopover dismissPopoverAnimated:YES];
 }
@@ -12450,6 +12491,7 @@ NSMutableArray *DelGroupArr;
         _outletVIPClass.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
     [_outletVIPClass setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",VIPClass]forState:UIControlStateNormal];
+    [_outletVIPClass setBackgroundColor:[UIColor clearColor]];
     [_vipClassPopover dismissPopoverAnimated:YES];
 }
 
@@ -12462,6 +12504,7 @@ NSMutableArray *DelGroupArr;
         outletReferralSource.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
     [outletReferralSource setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",referralSource]forState:UIControlStateNormal];
+    [outletReferralSource setBackgroundColor:[UIColor clearColor]];
     [_referralSourcePopover dismissPopoverAnimated:YES];
 }
 
@@ -12473,6 +12516,7 @@ NSMutableArray *DelGroupArr;
         _outletSourceIncome.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
     [_outletSourceIncome setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",sourceIncome]forState:UIControlStateNormal];
+    [_outletSourceIncome setBackgroundColor:[UIColor clearColor]];
     [_sourceIncomePopover dismissPopoverAnimated:YES];
 }
 
@@ -12776,6 +12820,7 @@ NSMutableArray *DelGroupArr;
         outletNationality.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
     [outletNationality setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",selectedNationality]forState:UIControlStateNormal];
+    [outletNationality setBackgroundColor:[UIColor clearColor]];
     [self.nationalityPopover dismissPopoverAnimated:YES];
 	edited = YES;
 	
@@ -13462,7 +13507,8 @@ NSMutableArray *DelGroupArr;
         outletOccup.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
 	[outletOccup setTitle:[[NSString stringWithFormat:@"  "] stringByAppendingFormat:@"%@", color] forState:UIControlStateNormal];
-	edited = YES;
+	[outletOccup setBackgroundColor:[UIColor clearColor]];
+    edited = YES;
 	
 	//###
 	
@@ -13654,12 +13700,15 @@ NSMutableArray *DelGroupArr;
         else{
             outletDOB.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
             [outletDOB setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", clientDateString] forState:UIControlStateNormal];
+            [outletDOB setBackgroundColor:[UIColor clearColor]];
+
         }
     }
     
     if (isExpiryDate) {
         outletDOB.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         [outletExpiryDate setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", clientDateString] forState:UIControlStateNormal];
+        [outletExpiryDate setBackgroundColor:[UIColor clearColor]];
     }
     edited = YES;
     NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];

@@ -135,7 +135,7 @@
 		[_textLabel addSubview:fromLabel];
 		
 		//_textLabel.text =@"PERSONAL DATA - Hong Leong Assurance Berhad (\"HLA/we/us/our\") safeguards your personal data in accordance with the applicable laws in Malaysia. HLA uses personal data in accordance with the HLA Notice on Personal Data as set out in HLA's website                                which may be amended from time to time (\"Notice on Personal Data\"). The Notice on Personal Data explains the data collection purposes, the persons to whom HLA may transfer data to, your rights to access and correct your data and how you may contact HLA's Data Protection Officer.";
-		_textLabel.text =@"PERSONAL DATA - XXX company safeguards your personal data in accordance with the applicable laws in Malaysia. XXX company uses personal data in accordance with the XXX company Notice on Personal Data as set out in XXX company's website                                which may be amended from time to time (\"Notice on Personal Data\"). The Notice on Personal Data explains the data collection purposes, the persons to whom XXX company may transfer data to, your rights to access and correct your data and how you may contact XXX company's Data Protection Officer.";
+		_textLabel.text =@"";
         
 		UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(textTapped)];
 		tapGestureRecognizer.numberOfTapsRequired = 1;

@@ -1596,6 +1596,10 @@ MBProgressHUD *HUD;
 	sqlite3_stmt *statement;
 	BOOL CanDelete = TRUE;
     int RecCount = 0;
+    NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsDir = [dirPaths objectAtIndex:0];
+    databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
+
     for (UITableViewCell *cell in [self.myTableView visibleCells])
     {
         if (cell.selected == TRUE) {
@@ -1742,8 +1746,9 @@ MBProgressHUD *HUD;
                 value = [[sorted objectAtIndex:a] intValue] - a;
                 
                 pp = [ProspectTableData objectAtIndex:value];
-                DeleteSQL = [NSString stringWithFormat:@"Delete from prospect_profile where indexNo = \"%@\"", pp.ProspectID];
-                
+                DeleteSQL = [NSString stringWithFormat:@"Delete from prospect_profile where IndexNo = %@", pp.ProspectID];
+                NSLog(@"delete sql %@",DeleteSQL);
+
                 const char *Delete_stmt = [DeleteSQL UTF8String];
                 if(sqlite3_prepare_v2(contactDB, Delete_stmt, -1, &statement, NULL) == SQLITE_OK)
                 {
@@ -1751,7 +1756,7 @@ MBProgressHUD *HUD;
                     sqlite3_finalize(statement);
                 }
                 else {
-                    NSLog(@"Error in Delete Statement");
+                    NSLog(@"Error in Delete Statement %s",sqlite3_errmsg(contactDB));
                 }
                 
                 [ProspectTableData removeObjectAtIndex:value];
@@ -1809,7 +1814,7 @@ MBProgressHUD *HUD;
         value = [[sorted objectAtIndex:a] intValue] - a;
         ProspectProfile *pp = [ProspectTableData objectAtIndex:value];
         
-        [db executeUpdate:@"Delete from prospect_profile where indexNo = ?", pp.ProspectID];
+        [db executeUpdate:@"Delete from prospect_profile where IndexNo = ?", pp.ProspectID];
                 
         //Get proposal No
         FMResultSet *results;
