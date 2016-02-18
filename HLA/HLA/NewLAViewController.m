@@ -2535,7 +2535,7 @@ else {
         return;
     }
     
-    int currentAge =22; //[self getAgeFromDOB:aaDOB CommDate:commDate];
+    int currentAge =[self getAgeFromDOB:aaDOB CommDate:commDate];
     
 	LANameField.enabled = NO;
 	LANameField.backgroundColor = [UIColor lightGrayColor];
