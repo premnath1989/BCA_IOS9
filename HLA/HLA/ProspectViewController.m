@@ -188,10 +188,10 @@ bool RegDatehandling;
     
     //---------end
     
-    [txtHomePostCode addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingDidEnd];
-    [txtOfficePostcode addTarget:self action:@selector(OfficePostcodeDidChange:) forControlEvents:UIControlEventEditingDidEnd];
-    [txtHomePostCode addTarget:self action:@selector(EditTextFieldBegin:) forControlEvents:UIControlEventEditingDidBegin];
-    [txtOfficePostcode addTarget:self action:@selector(OfficeEditTextFieldBegin:) forControlEvents:UIControlEventEditingDidBegin];
+    //[txtHomePostCode addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingDidEnd];
+    ////[txtOfficePostcode addTarget:self action:@selector(OfficePostcodeDidChange:) forControlEvents:UIControlEventEditingDidEnd];
+    //[txtHomePostCode addTarget:self action:@selector(EditTextFieldBegin:) forControlEvents:UIControlEventEditingDidBegin];
+    //[txtOfficePostcode addTarget:self action:@selector(OfficeEditTextFieldBegin:) forControlEvents:UIControlEventEditingDidBegin];
     [txtIDType addTarget:self action:@selector(NewICDidChange:) forControlEvents:UIControlEventEditingDidEnd];
     //  [txtIDType addTarget:self action:@selector(NewICTextFieldBegin:) forControlEvents:UIControlEventEditingDidBegin];
     [txtAnnIncome addTarget:self action:@selector(AnnualIncomeChange:) forControlEvents:UIControlEventEditingDidEnd];
@@ -206,13 +206,13 @@ bool RegDatehandling;
     [txtHomeAddr3 addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
 	[txtHomeTown addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
 	[txtHomeState addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
-	[txtHomePostCode addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
+	//[txtHomePostCode addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
     [txtOfficeAddr1 addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
     [txtOfficeAddr2 addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
     [txtOfficeAddr3 addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
 	[txtOfficeTown addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
 	[txtOfficeState addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
-	[txtOfficePostcode addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
+	//[txtOfficePostcode addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
     [txtFullName addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
     [txtPrefix1 addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
     [txtContact1 addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
@@ -350,8 +350,8 @@ bool RegDatehandling;
 	
 	[self.view addGestureRecognizer:tap];
     
-    txtHomeCountry.text=@"Indonesia";
-    txtOfficeCountry.text=@"Indonesia";
+    //txtHomeCountry.text=@"Indonesia";
+    //txtOfficeCountry.text=@"Indonesia";
 }
 
 #pragma mark - added by faiz
@@ -1524,7 +1524,7 @@ bool RegDatehandling;
 
 -(void)EditTextFieldBegin:(id)sender
 {
-    [txtHomePostCode addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingDidEnd];
+    //[txtHomePostCode addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingDidEnd];
 }
 
 -(void)OfficeEditTextFieldBegin:(id)sender
@@ -1674,7 +1674,7 @@ bool RegDatehandling;
     }
     
     if (textField == txtNPWPNo) {
-        NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_MONEY] invertedSet];
+        NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
         
         return (([string isEqualToString:filtered])&&(newLength <= 20));
@@ -2350,8 +2350,8 @@ bool RegDatehandling;
             txtHomeCountry.hidden = NO;
             btnHomeCountry.hidden = YES;
             
-            [txtHomePostCode addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingDidEnd];
-            [txtHomePostCode addTarget:self action:@selector(EditTextFieldBegin:) forControlEvents:UIControlEventEditingDidBegin];
+            //[txtHomePostCode addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingDidEnd];
+            //[txtHomePostCode addTarget:self action:@selector(EditTextFieldBegin:) forControlEvents:UIControlEventEditingDidBegin];
         } else {
             [btnForeignHome setImage: [UIImage imageNamed:@"tickCheckBox.png"] forState:UIControlStateNormal];
             checked = YES;
@@ -2401,7 +2401,7 @@ bool RegDatehandling;
             txtOfficeCountry.hidden = NO;
             btnOfficeCountry.hidden = YES;
             
-            [txtOfficePostcode addTarget:self action:@selector(OfficePostcodeDidChange:) forControlEvents:UIControlEventEditingDidEnd];
+            //[txtOfficePostcode addTarget:self action:@selector(OfficePostcodeDidChange:) forControlEvents:UIControlEventEditingDidEnd];
             [txtOfficePostcode addTarget:self action:@selector(OfficeEditTextFieldBegin:) forControlEvents:UIControlEventEditingDidBegin];
             
         } else {
@@ -2559,8 +2559,8 @@ bool RegDatehandling;
                 OccupCodeSelected= @"";
             }
             
-            HomeCountry =  [self getCountryCode:HomeCountry];
-            OffCountry =  [self getCountryCode:OffCountry];
+            //HomeCountry =  [self getCountryCode:HomeCountry];
+            //OffCountry =  [self getCountryCode:OffCountry];
             
 			NSString *title = [outletTitle.titleLabel.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
             marital = [outletMaritalStatus.titleLabel.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
@@ -2670,7 +2670,7 @@ bool RegDatehandling;
             
             // Convert date object to desired output format
             [expiryDateFormat setDateFormat:@"dd/MM/yyyy"];
-            NSString *newExpiryDate = [dateFormat stringFromDate:dateExpiry];
+            NSString *newExpiryDate = [expiryDateFormat stringFromDate:dateExpiry];
 
             NSLog(@"%@",newDOB);
             
@@ -4102,7 +4102,7 @@ bool RegDatehandling;
             
             if (![[txtOfficePostcode.text stringByReplacingOccurrencesOfString:@" " withString:@""] isEqualToString:@""] && [txtOfficeCountry.text isEqualToString:@"MALAYSIA"]) {
                 txtOfficeState.text = officestate;
-                [txtOfficePostcode addTarget:self action:@selector(OfficePostcodeDidChange:) forControlEvents:UIControlEventEditingDidEnd];
+                //[txtOfficePostcode addTarget:self action:@selector(OfficePostcodeDidChange:) forControlEvents:UIControlEventEditingDidEnd];
                 [txtOfficePostcode addTarget:self action:@selector(OfficeEditTextFieldBegin:) forControlEvents:UIControlEventEditingDidBegin];
                 
             } else if (![[txtOfficePostcode.text stringByReplacingOccurrencesOfString:@" " withString:@""] isEqualToString:@""] && ![txtOfficeCountry.text isEqualToString:@"MALAYSIA"]) {
@@ -4110,7 +4110,7 @@ bool RegDatehandling;
                 
             } else {
                 txtOfficeState.text = @"";
-                [txtOfficePostcode addTarget:self action:@selector(OfficePostcodeDidChange:) forControlEvents:UIControlEventEditingDidEnd];
+                //[txtOfficePostcode addTarget:self action:@selector(OfficePostcodeDidChange:) forControlEvents:UIControlEventEditingDidEnd];
                 [txtOfficePostcode addTarget:self action:@selector(OfficeEditTextFieldBegin:) forControlEvents:UIControlEventEditingDidBegin];
             }
         }
@@ -5317,7 +5317,7 @@ bool RegDatehandling;
                             rrr.tag = 3001;
                             [rrr show];
                             rrr=nil;
-                            [txtOfficePostcode addTarget:self action:@selector(OfficePostcodeDidChange:) forControlEvents:UIControlEventEditingDidEnd];
+                            //[txtOfficePostcode addTarget:self action:@selector(OfficePostcodeDidChange:) forControlEvents:UIControlEventEditingDidEnd];
                             [ClientProfile setObject:@"NO" forKey:@"TabBar"];
                             return false;
                             
@@ -6490,7 +6490,7 @@ bool RegDatehandling;
                                 rrr.tag = 3001;
                                 [rrr show];
                                 rrr=nil;
-                                [txtOfficePostcode addTarget:self action:@selector(OfficePostcodeDidChange:) forControlEvents:UIControlEventEditingDidEnd];
+                                //[txtOfficePostcode addTarget:self action:@selector(OfficePostcodeDidChange:) forControlEvents:UIControlEventEditingDidEnd];
                                 [ClientProfile setObject:@"NO" forKey:@"TabBar"];
                                 return false;
                                 
@@ -6629,7 +6629,7 @@ bool RegDatehandling;
                             rrr.tag = 3001;
                             [rrr show];
                             rrr=nil;
-                            [txtOfficePostcode addTarget:self action:@selector(OfficePostcodeDidChange:) forControlEvents:UIControlEventEditingDidEnd];
+                            //[txtOfficePostcode addTarget:self action:@selector(OfficePostcodeDidChange:) forControlEvents:UIControlEventEditingDidEnd];
                             [ClientProfile setObject:@"NO" forKey:@"TabBar"];
                             return false;
                         }
@@ -6796,7 +6796,7 @@ bool RegDatehandling;
                         rrr.tag = 3001;
                         [rrr show];
                         rrr=nil;
-                        [txtOfficePostcode addTarget:self action:@selector(OfficePostcodeDidChange:) forControlEvents:UIControlEventEditingDidEnd];
+                        //[txtOfficePostcode addTarget:self action:@selector(OfficePostcodeDidChange:) forControlEvents:UIControlEventEditingDidEnd];
                         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
                         return false;
                         

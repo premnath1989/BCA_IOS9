@@ -27,6 +27,18 @@ id msg, DBDate;
     return self;
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+    if (ProspectDOB != NULL ) {
+        
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+        //[dateFormatter setDateFormat:@"yyyy-MM-dd"];
+        NSDate *zzz = [dateFormatter dateFromString:ProspectDOB];
+        [_outletDate setDate:zzz animated:YES ];
+        
+    }
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -50,8 +62,8 @@ id msg, DBDate;
     if (ProspectDOB != NULL ) {
         
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        //[dateFormatter setDateFormat:@"dd/MM/yyyy"];
-        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+        [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+        //[dateFormatter setDateFormat:@"yyyy-MM-dd"];
         NSDate *zzz = [dateFormatter dateFromString:ProspectDOB];
         [_outletDate setDate:zzz animated:YES ];
          

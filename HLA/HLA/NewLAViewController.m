@@ -73,6 +73,7 @@ id dobtanngal;
     [self saveBasicPlan];
     
     outletDone.enabled=TRUE;
+    btnProspect.enabled = NO;
     
     NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docsDir = [dirPaths objectAtIndex:0];
@@ -121,7 +122,7 @@ id dobtanngal;
 }
 
 
-- (IBAction)QuickQuoteFunc:(id)sender
+- (IBAction)QuickQuoteFunc:(UISwitch *)sender
 {
     if([sender isOn])
     {
@@ -135,6 +136,8 @@ id dobtanngal;
         btnDOB.enabled = YES;
         sexSegment.enabled = YES;
         btnOccp.enabled = YES;
+        btnProspect.enabled = NO;
+        
 
 
     }
@@ -150,6 +153,7 @@ id dobtanngal;
         btnDOB.enabled = NO;
         sexSegment.enabled = NO;
         btnOccp.enabled = NO;
+        btnProspect.enabled = YES;
 
         
     }
@@ -1486,44 +1490,27 @@ id dobtanngal;
 
 -(void)getOccLoadExist
 {
-    sqlite3_stmt *statement;
-    if (sqlite3_open([databasePath UTF8String], &contactDB) == SQLITE_OK)
-    {
-        NSString *querySQL = [NSString stringWithFormat:
-							  @"SELECT a.OccpDesc, b.OccLoading, b.CPA, b.PA, a.Class from Adm_Occp_Loading_Penta a LEFT JOIN Adm_Occp_Loading b ON a.OccpCode = b.OccpCode WHERE b.OccpCode = \"%@\"",
-                              occuCode];
-        
-        occLoading = @"";
-        if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK)
-        {
-            if (sqlite3_step(statement) == SQLITE_ROW)
-            {
-                occuDesc = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 0)];
-                occLoading =  
-                    [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 1)]==nil ? @"" :
-                [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 1)];
-                occCPA_PA  = sqlite3_column_int(statement, 2);
-                occPA  = sqlite3_column_int(statement, 3);
-                occuClass = sqlite3_column_int(statement, 4);
-                strPA_CPA = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 2)];
-            }
-            sqlite3_finalize(statement);
-        }
-        
-        querySQL = [NSString stringWithFormat:
-                    @"select OccpCatCode from Adm_OccpCat_Occp where occpcode = '%@' ", occuCode];
-        
-        if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK)
-        {
-            if (sqlite3_step(statement) == SQLITE_ROW)
-            {
-                OccuCatCode = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 0)];
-            }
-            sqlite3_finalize(statement);
-        }
-        
-        sqlite3_close(contactDB);
+    FMDatabase *db;
+    FMResultSet *results;
+    
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsPath = [paths objectAtIndex:0];
+    NSString *path = [docsPath stringByAppendingPathComponent:@"hladb.sqlite"];
+    
+    db = [FMDatabase databaseWithPath:path];
+    [db open];
+    
+  
+    
+    results = Nil;
+
+    results = [db executeQuery:@"SELECT OccpDesc from Adm_Occp WHERE OccpCode = ?", occuCode, Nil];
+    while ([results next]) {
+        NSString *occpDesc = [results stringForColumn:@"OccpDesc"] != NULL ? [results stringForColumn:@"OccpDesc"] : @"";
+        occuDesc = occpDesc;
     }
+    [db close];
 }
 
 
@@ -2533,11 +2520,16 @@ else {
     tempCommDate = commDate;
     tempIdProfile = idProfile;
     
-    if (commDate.length == 0) {
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"dd/MM/yyyy"];
-        commDate = [dateFormatter stringFromDate:[NSDate date]];
-    }
+    
+        
+    NSDate *currDate = [NSDate date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+    NSString *dateString = [dateFormatter stringFromDate:currDate];
+    NSLog(@"%@",dateString);
+    
+    commDate = dateString;
+   // }
     
     if([aaDOB length]==0) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"The selected client is not applicable for this SI product."
@@ -2547,7 +2539,7 @@ else {
         return;
     }
     
-    int currentAge = [self getAgeFromDOB:aaDOB CommDate:commDate];
+    int currentAge =[self getAgeFromDOB:aaDOB CommDate:commDate];
     
 	LANameField.enabled = NO;
 	LANameField.backgroundColor = [UIColor lightGrayColor];
@@ -2580,7 +2572,7 @@ else {
         IndexNo = prevIndexNo;
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"You can't select the First Life Assured with the same sex as the Second Life Assured." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
-    } else if ([del.planChoose isEqualToString:STR_HLAWP] && (currentAge > 45 && getPolicyTerm==50)) {
+    } else if ([del.planChoose isEqualToString:STR_HLAWP] && (currentAge > 18 && getPolicyTerm==70)) {
         IndexNo = prevIndexNo;
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Age Last Birthday must be less than or equal to 45 for this product." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
@@ -2594,10 +2586,11 @@ else {
             } else {
                 DiffClient = YES;
             }
-        }
-        
+      }
+
         DOB = aaDOB;
         [self calculateAge];
+       // LAAgeField.text = [[NSString alloc] initWithFormat:@"%d",age];
         
         LANameField.text = aaName;
         sex = aaGender;
@@ -2702,15 +2695,15 @@ else {
     } else if (date2)
     {
         if (aDate == NULL) {
-            [TanggalIllustrasi setTitle:dobtemp forState:UIControlStateNormal];
+            [TanggalIllustrasi setTitle:aDate forState:UIControlStateNormal];
             DOB = dobtemp;
-            [self calculateAge];
+          //  [self calculateAge];
           //  LAAgeField.text = [[NSString alloc] initWithFormat:@"%d",age];
             
         } else {
             [TanggalIllustrasi setTitle:aDate forState:UIControlStateNormal];
             DOB = aDate;
-            [self calculateAge];
+           // [self calculateAge];
            // LAAgeField.text = [[NSString alloc] initWithFormat:@"%d",bAge];
         }
     
