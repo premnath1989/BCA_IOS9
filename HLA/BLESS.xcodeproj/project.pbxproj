@@ -55,6 +55,7 @@
 		174858B71C438BA8007BBF13 /* MyCustomDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 174858B61C438BA8007BBF13 /* MyCustomDialog.xib */; };
 		178765D91C7409F00036F31A /* menu_selectoption.png in Resources */ = {isa = PBXBuildFile; fileRef = 178765D81C7409F00036F31A /* menu_selectoption.png */; };
 		178765DB1C74C25D0036F31A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 178765DA1C74C25D0036F31A /* Images.xcassets */; };
+		178765DF1C75C04C0036F31A /* ProspectProfileStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 178765DE1C75C04C0036F31A /* ProspectProfileStoryboard.storyboard */; };
 		17983C331C473373009E2977 /* HealthQuestionPO.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17983C321C473373009E2977 /* HealthQuestionPO.storyboard */; };
 		17A2990F1C60A0DB00C2537A /* HelveticaInseratLTStd-Roman.otf in Resources */ = {isa = PBXBuildFile; fileRef = 17A298FB1C60923400C2537A /* HelveticaInseratLTStd-Roman.otf */; };
 		17A299101C60A0DB00C2537A /* HelveticaLTStd-Blk.otf in Resources */ = {isa = PBXBuildFile; fileRef = 17A298FC1C60923400C2537A /* HelveticaLTStd-Blk.otf */; };
@@ -348,7 +349,6 @@
 		4353C94E1C61F6F800AE1ED9 /* ModelReligion.m in Sources */ = {isa = PBXBuildFile; fileRef = 4353C94D1C61F6F800AE1ED9 /* ModelReligion.m */; };
 		4353C9511C61FCD000AE1ED9 /* ModelIdentificationType.m in Sources */ = {isa = PBXBuildFile; fileRef = 4353C9501C61FCD000AE1ED9 /* ModelIdentificationType.m */; };
 		437343151C6B1CBD001516D9 /* ReferralSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 437343141C6B1CBD001516D9 /* ReferralSource.m */; };
-		43739B881C64980700A1788A /* ProspectProfileStoryboard1.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43739B871C64980700A1788A /* ProspectProfileStoryboard1.storyboard */; };
 		439985BB1C62F7890003B037 /* SourceIncome.m in Sources */ = {isa = PBXBuildFile; fileRef = 439985BA1C62F7890003B037 /* SourceIncome.m */; };
 		439985BE1C62F8A70003B037 /* ModelPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = 439985BD1C62F8A70003B037 /* ModelPopover.m */; };
 		439985C11C630C4D0003B037 /* VIPClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 439985C01C630C4D0003B037 /* VIPClass.m */; };
@@ -875,6 +875,7 @@
 		174858B61C438BA8007BBF13 /* MyCustomDialog.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCustomDialog.xib; sourceTree = "<group>"; };
 		178765D81C7409F00036F31A /* menu_selectoption.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_selectoption.png; sourceTree = "<group>"; };
 		178765DA1C74C25D0036F31A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = BLESS/Images.xcassets; sourceTree = "<group>"; };
+		178765DE1C75C04C0036F31A /* ProspectProfileStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ProspectProfileStoryboard.storyboard; sourceTree = "<group>"; };
 		17983C321C473373009E2977 /* HealthQuestionPO.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HealthQuestionPO.storyboard; sourceTree = "<group>"; };
 		17A298F61C60920A00C2537A /* BPreplay.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BPreplay.otf; sourceTree = "<group>"; };
 		17A298F71C60920A00C2537A /* BPreplayBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BPreplayBold.otf; sourceTree = "<group>"; };
@@ -1341,7 +1342,6 @@
 		4353C9501C61FCD000AE1ED9 /* ModelIdentificationType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelIdentificationType.m; sourceTree = "<group>"; };
 		437343131C6B1CBD001516D9 /* ReferralSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReferralSource.h; sourceTree = "<group>"; };
 		437343141C6B1CBD001516D9 /* ReferralSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReferralSource.m; sourceTree = "<group>"; };
-		43739B871C64980700A1788A /* ProspectProfileStoryboard1.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ProspectProfileStoryboard1.storyboard; sourceTree = "<group>"; };
 		43739B891C649F9B00A1788A /* LoginMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginMacros.h; sourceTree = "<group>"; };
 		439985B91C62F7890003B037 /* SourceIncome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourceIncome.h; sourceTree = "<group>"; };
 		439985BA1C62F7890003B037 /* SourceIncome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SourceIncome.m; sourceTree = "<group>"; };
@@ -3164,7 +3164,7 @@
 		43739B861C6497B900A1788A /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
-				43739B871C64980700A1788A /* ProspectProfileStoryboard1.storyboard */,
+				178765DE1C75C04C0036F31A /* ProspectProfileStoryboard.storyboard */,
 			);
 			name = Storyboard;
 			sourceTree = "<group>";
@@ -4783,6 +4783,7 @@
 				C486D9D4163E6622009F8F21 /* Cordova.plist in Resources */,
 				C486DAB8163FB928009F8F21 /* Databases.db in Resources */,
 				EFABB36E16475A430069502B /* redBtn.png in Resources */,
+				178765DF1C75C04C0036F31A /* ProspectProfileStoryboard.storyboard in Resources */,
 				C4EF084D1648DC5C000444BA /* iphone_delete_button.png in Resources */,
 				C4F45DF3165C6C430035CAA9 /* viewer.plist in Resources */,
 				C4F45E03165F12350035CAA9 /* f-spot-question-mark.png in Resources */,
@@ -4897,7 +4898,6 @@
 				42B972FE1820AA4C005AFE16 /* greenBtn.png in Resources */,
 				C4D0E095182A4F1F0094B41B /* pds2HTML in Resources */,
 				C44E3D90182C8E4A005CCC09 /* EverLife_SI_BM in Resources */,
-				43739B881C64980700A1788A /* ProspectProfileStoryboard1.storyboard in Resources */,
 				423A853618502D92008EC5D4 /* SelectCFFCell.xib in Resources */,
 				423A85381850353F008EC5D4 /* test.pdf in Resources */,
 				17F10EB31C6C85EF002C32D3 /* login_box.png in Resources */,

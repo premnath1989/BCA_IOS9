@@ -2520,12 +2520,16 @@ else {
     tempCommDate = commDate;
     tempIdProfile = idProfile;
     
-    if (commDate.length == 0) {
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"dd/MM/yyyy"];
-        [dateFormatter setDateFormat:@""];
-        commDate = [dateFormatter stringFromDate:[NSDate date]];
-    }
+    
+        
+    NSDate *currDate = [NSDate date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+    NSString *dateString = [dateFormatter stringFromDate:currDate];
+    NSLog(@"%@",dateString);
+    
+    commDate = dateString;
+   // }
     
     if([aaDOB length]==0) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"The selected client is not applicable for this SI product."
