@@ -4319,10 +4319,9 @@ NSMutableArray *DelGroupArr;
         UIStoryboard *clientProfileStoryboard = [UIStoryboard storyboardWithName:@"ClientProfileStoryboard" bundle:Nil];
         self.SIDate = [clientProfileStoryboard instantiateViewControllerWithIdentifier:@"SIDate"];
         _SIDate.delegate = self;
-        _SIDate.ProspectDOB = pp.ProspectDOB;
         self.SIDatePopover = [[UIPopoverController alloc] initWithContentViewController:_SIDate];
     }
-    
+    _SIDate.ProspectDOB = pp.ProspectDOB;
     [self.SIDatePopover setPopoverContentSize:CGSizeMake(300.0f, 255.0f)];
     CGRect butt = [sender frame];
     int y = butt.origin.y - 44;
@@ -4343,10 +4342,10 @@ NSMutableArray *DelGroupArr;
         UIStoryboard *clientProfileStoryboard = [UIStoryboard storyboardWithName:@"ClientProfileStoryboard" bundle:Nil];
         self.SIDate = [clientProfileStoryboard instantiateViewControllerWithIdentifier:@"SIDate"];
         _SIDate.delegate = self;
-        //_SIDate.ProspectDOB = pp.ProspectDOB;
+        
         self.SIDatePopover = [[UIPopoverController alloc] initWithContentViewController:_SIDate];
     }
-    
+    _SIDate.ProspectDOB = pp.IDExpirityDate;
     [self.SIDatePopover setPopoverContentSize:CGSizeMake(300.0f, 255.0f)];
     CGRect butt = [sender frame];
     int y = butt.origin.y - 44;
