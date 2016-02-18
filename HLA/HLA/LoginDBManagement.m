@@ -239,82 +239,82 @@
     return FirstLogin;
 }
 
-- (int) InsertAgentProfile:(NSString *) urlStr
-{
-    NSArray *urlArr = [urlStr componentsSeparatedByString:@"|"];
-    int insertAgentProfile = TABLE_INSERTION_FAILED;
-    if (urlArr.count < 1) {
-        return 0;//should not reach here
-    }
-    
-    NSLog(@"parseURL: %@", urlStr);
-    
-    NSString* agentCode_1 =  [urlArr objectAtIndex:1]; //[queryStringDict objectForKey:@"agentCode"];
-    NSString* agentName_1 = [urlArr objectAtIndex:2];
-    NSString* agentType_1 = [urlArr objectAtIndex:3];
-    NSString* immediateLeaderCode_1 = [urlArr objectAtIndex:4];
-    NSString* immediateLeaderName_1 = [urlArr objectAtIndex:5];
-    NSString* BusinessRegNumber_1 = [urlArr objectAtIndex:6];
-    NSString* agentEmail_1 = [urlArr objectAtIndex:7];
-    NSString* agentLoginId_1 = [urlArr objectAtIndex:8];
-    NSString* agentIcNo_1 = [urlArr objectAtIndex:9];
-    NSString* agentContractDate_1 = [urlArr objectAtIndex:10];
-    NSString* agentAddr1_1 = [urlArr objectAtIndex:11];
-    NSString* agentAddr2_1 = [urlArr objectAtIndex:12];
-    NSString* agentAddr3_1 = [urlArr objectAtIndex:13];
-    NSString* agentAddrPostcode_1 = [urlArr objectAtIndex:14];
-    NSString* agentContactNumber_1 = [urlArr objectAtIndex:15];
-    NSString* agentPassword_1 = [urlArr objectAtIndex:16];
-    NSString* agentStatus_1 = [urlArr objectAtIndex:17];
-    NSString* channel_1 = [urlArr objectAtIndex:18];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:agentCode_1 forKey:AGENT_KEY_CODE];
-    [defaults synchronize];
-    
-    sqlite3_stmt *statement;
-    if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
-    {
-        NSString *querySQL;
-
-        NSString *CheckSql = [NSString stringWithFormat:
-                              @"select * FROM agent_profile"];
-
-
-        FMDatabase *db = [FMDatabase databaseWithPath:databasePath];
-        [db open];
-
-        FMResultSet *results;
-        results = [db executeQuery:CheckSql];
-
-        while ([results next]) {
-            [db executeUpdate:@"DELETE FROM agent_profile"];
-        }
-        [db close];
-
-        querySQL = [NSString stringWithFormat:
-                    @"insert into Agent_profile (agentCode, AgentName, AgentType, AgentContactNo, ImmediateLeaderCode, ImmediateLeaderName, BusinessRegNumber, AgentEmail, AgentLoginID, AgentICNo, "
-                    "AgentContractDate, AgentAddr1, AgentAddr2, AgentAddr3, AgentAddr4, AgentPortalLoginID, AgentPortalPassword, AgentContactNumber, AgentPassword, AgentStatus, Channel, AgentAddrPostcode, agentNRIC, LastLogonDate) VALUES "
-                    "('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@', '%@', '%@', %@) ",
-                    agentCode_1, agentName_1, agentType_1, agentContactNumber_1,immediateLeaderCode_1, immediateLeaderName_1,BusinessRegNumber_1, agentEmail_1, agentLoginId_1, agentIcNo_1, agentContractDate_1, agentAddr1_1, agentAddr2_1, agentAddr3_1, @"", agentLoginId_1, agentPassword_1, agentContactNumber_1, agentPassword_1, agentStatus_1, channel_1, agentAddrPostcode_1, agentIcNo_1, @"datetime(\"now\", \"+8 hour\")" ];
-
-
-        if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK){
-            if (sqlite3_step(statement) == SQLITE_DONE){
-                insertAgentProfile = TABLE_INSERTION_SUCCESS;
-            }
-            else{
-                NSLog(@"%@",[[NSString alloc] initWithUTF8String:sqlite3_errmsg(contactDB)]) ;
-            }
-            sqlite3_finalize(statement);
-        }
-        else{
-            NSLog(@"%@",[[NSString alloc] initWithUTF8String:sqlite3_errmsg(contactDB)]) ;
-        }
-        
-        sqlite3_close(contactDB);
-    }
-    return insertAgentProfile;
-}
+//- (int) InsertAgentProfile:(NSString *) urlStr
+//{
+//    NSArray *urlArr = [urlStr componentsSeparatedByString:@"|"];
+//    int insertAgentProfile = TABLE_INSERTION_FAILED;
+//    if (urlArr.count < 1) {
+//        return 0;//should not reach here
+//    }
+//    
+//    NSLog(@"parseURL: %@", urlStr);
+//    
+//    NSString* agentCode_1 =  [urlArr objectAtIndex:1]; //[queryStringDict objectForKey:@"agentCode"];
+//    NSString* agentName_1 = [urlArr objectAtIndex:2];
+//    NSString* agentType_1 = [urlArr objectAtIndex:3];
+//    NSString* immediateLeaderCode_1 = [urlArr objectAtIndex:4];
+//    NSString* immediateLeaderName_1 = [urlArr objectAtIndex:5];
+//    NSString* BusinessRegNumber_1 = [urlArr objectAtIndex:6];
+//    NSString* agentEmail_1 = [urlArr objectAtIndex:7];
+//    NSString* agentLoginId_1 = [urlArr objectAtIndex:8];
+//    NSString* agentIcNo_1 = [urlArr objectAtIndex:9];
+//    NSString* agentContractDate_1 = [urlArr objectAtIndex:10];
+//    NSString* agentAddr1_1 = [urlArr objectAtIndex:11];
+//    NSString* agentAddr2_1 = [urlArr objectAtIndex:12];
+//    NSString* agentAddr3_1 = [urlArr objectAtIndex:13];
+//    NSString* agentAddrPostcode_1 = [urlArr objectAtIndex:14];
+//    NSString* agentContactNumber_1 = [urlArr objectAtIndex:15];
+//    NSString* agentPassword_1 = [urlArr objectAtIndex:16];
+//    NSString* agentStatus_1 = [urlArr objectAtIndex:17];
+//    NSString* channel_1 = [urlArr objectAtIndex:18];
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    [defaults setObject:agentCode_1 forKey:AGENT_KEY_CODE];
+//    [defaults synchronize];
+//    
+//    sqlite3_stmt *statement;
+//    if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
+//    {
+//        NSString *querySQL;
+//
+//        NSString *CheckSql = [NSString stringWithFormat:
+//                              @"select * FROM agent_profile"];
+//
+//
+//        FMDatabase *db = [FMDatabase databaseWithPath:databasePath];
+//        [db open];
+//
+//        FMResultSet *results;
+//        results = [db executeQuery:CheckSql];
+//
+//        while ([results next]) {
+//            [db executeUpdate:@"DELETE FROM agent_profile"];
+//        }
+//        [db close];
+//
+//        querySQL = [NSString stringWithFormat:
+//                    @"insert into Agent_profile (agentCode, AgentName, AgentType, AgentContactNo, ImmediateLeaderCode, ImmediateLeaderName, BusinessRegNumber, AgentEmail, AgentLoginID, AgentICNo, "
+//                    "AgentContractDate, AgentAddr1, AgentAddr2, AgentAddr3, AgentAddr4, AgentPortalLoginID, AgentPortalPassword, AgentContactNumber, AgentPassword, AgentStatus, Channel, AgentAddrPostcode, agentNRIC, LastLogonDate) VALUES "
+//                    "('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@', '%@', '%@', %@) ",
+//                    agentCode_1, agentName_1, agentType_1, agentContactNumber_1,immediateLeaderCode_1, immediateLeaderName_1,BusinessRegNumber_1, agentEmail_1, agentLoginId_1, agentIcNo_1, agentContractDate_1, agentAddr1_1, agentAddr2_1, agentAddr3_1, @"", agentLoginId_1, agentPassword_1, agentContactNumber_1, agentPassword_1, agentStatus_1, channel_1, agentAddrPostcode_1, agentIcNo_1, @"datetime(\"now\", \"+8 hour\")" ];
+//
+//
+//        if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK){
+//            if (sqlite3_step(statement) == SQLITE_DONE){
+//                insertAgentProfile = TABLE_INSERTION_SUCCESS;
+//            }
+//            else{
+//                NSLog(@"%@",[[NSString alloc] initWithUTF8String:sqlite3_errmsg(contactDB)]) ;
+//            }
+//            sqlite3_finalize(statement);
+//        }
+//        else{
+//            NSLog(@"%@",[[NSString alloc] initWithUTF8String:sqlite3_errmsg(contactDB)]) ;
+//        }
+//        
+//        sqlite3_close(contactDB);
+//    }
+//    return insertAgentProfile;
+//}
 
 - (void) updateLoginDate:(int)indexNo{
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -350,6 +350,45 @@
     dateString = Nil;
     dbpath = Nil;
     statement = Nil;
+}
+
+-(int)insertAgentProfile:(NSMutableDictionary *)dict
+{
+    int insertProc = TABLE_INSERTION_FAILED;
+    NSString *sql = @"insert into Agent_profile (";
+    
+    for(NSString *keys in dict){
+        NSString *key = [NSString stringWithFormat:@"%@,",keys];
+        sql = [sql stringByAppendingString:key];
+    }
+    sql = [sql substringToIndex:[sql length]-1];
+    sql = [sql stringByAppendingString:@") VALUES ("];
+    
+    for(NSString *keys in dict){
+        NSString *value = @"";
+        if([dict valueForKey:keys] != NULL)
+        value = [NSString stringWithFormat:@"'%@',",[dict valueForKey:keys]];
+        else
+        value = [NSString stringWithFormat:@"'',"];
+        
+        sql = [sql stringByAppendingString:value];
+    }
+    sql = [sql substringToIndex:[sql length]-1];
+    sql = [sql stringByAppendingString:@")"];
+    
+    NSLog(@"%@",sql);
+    
+    char *error;
+    if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
+    {
+        sqlite3_exec(contactDB, [sql UTF8String], NULL, NULL, &error);
+            if (error == nil) {
+                insertProc = TABLE_INSERTION_SUCCESS;
+            }
+        
+        sqlite3_close(contactDB);
+    }
+    return insertProc;
 }
 
 -(NSString *)checkingLastLogout

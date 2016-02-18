@@ -240,10 +240,11 @@
 - (NSDictionary *)attributes;
 @end
 @interface AgentWS_ReceiveFirstLoginResult : NSObject {
-	
-/* elements */
-/* attributes */
+    /* elements */
+    NSString * xmlDetails;
+    /* attributes */
 }
+@property (retain) NSString * xmlDetails;
 - (NSString *)nsPrefix;
 - (xmlNodePtr)xmlNodeForDoc:(xmlDocPtr)doc elementName:(NSString *)elName elementNSPrefix:(NSString *)elNSPrefix;
 - (void)addAttributesToNode:(xmlNodePtr)node;

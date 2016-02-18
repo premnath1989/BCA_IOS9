@@ -17,7 +17,8 @@
 }
 
 - (int) SearchAgent:(NSString *)AgentID;
-- (int) InsertAgentProfile:(NSString *) urlStr;
+//- (int) InsertAgentProfile:(NSString *) urlStr;
+- (int)insertAgentProfile:(NSMutableDictionary *)dict;
 - (void) updateLoginDate:(int)indexNo;
 - (int) FirstLogin:(NSString *)AgentID;
 - (int) AgentRecord;

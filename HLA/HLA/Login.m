@@ -75,34 +75,6 @@ NSString *ProceedStatus = @"";
         firstLogin = true;
     }
     
-    //parser function
-//    NSString *xmlContent = @"<ReceiveFirstLoginResult><DocumentElement><MyTable><AgentCode>1024</AgentCode><AgentName>Erwin</AgentName><AgentType>type1</AgentType><ImmediateLeaderCode>sad</ImmediateLeaderCode><ImmediateLeaderName>ads</ImmediateLeaderName><BusinessRegNumber>213</BusinessRegNumber><AgentEmail>button.setonclicklistener@gmail.com</AgentEmail><AgentLoginID>1024</AgentLoginID><AgentNRIC>1234567884332</AgentNRIC><AgentContractDate>2016-02-15T00:00:00+08:00</AgentContractDate><AgentAddrLine1>21321</AgentAddrLine1><AgentAddrLine2>wqeqe</AgentAddrLine2><AgentAddrLine3>sadsa</AgentAddrLine3><AgentAddrPostcode>34566</AgentAddrPostcode><AgentContactNo>1232143437</AgentContactNo> <AgentPassword>password</AgentPassword><AgentStatus>Active</AgentStatus><Channel>1</Channel><AgentPortalLoginID>asd</AgentPortalLoginID><AgentPortalPassword>asd</AgentPortalPassword><FirstLogin>2016-02-16T11:36:33.387+08:00</FirstLogin><xs:element name=\"AgentCode\" type=\"xs:string\" minOccurs=\"0\" /> <LastLogonDate>2016-02-16T15:30:09.487+08:00</LastLogonDate><DeviceID>1231231</DeviceID><DeviceType>asd</DeviceType><OSVersion>9.2</OSVersion><SignDocLicense>True</SignDocLicense></MyTable></DocumentElement></ReceiveFirstLoginResult>";
-//    
-//    // create XMLDocument object
-//    DDXMLDocument *xml = [[DDXMLDocument alloc] initWithXMLString:xmlContent options:0 error:nil];
-//    
-//    // Get root element - DataSetMenu for your XMLfile
-//    DDXMLElement *root = [xml rootElement];
-//    
-//    // go through all elements in root element (DataSetMenu element)
-//    for (DDXMLElement *DataSetMenuElement in [root children]) {
-//        // if the element name's is MenuCategories then do something
-//        NSLog(@"%@", [DataSetMenuElement name]);
-//        for(DDXMLElement *DocumentElement in [DataSetMenuElement children]){
-//             NSLog(@"%@", [DocumentElement name]);
-//            for(DDXMLElement *table in [DocumentElement children]){
-//                NSArray *elements = [DocumentElement elementsForName:[table name]];
-//                NSLog(@"%@ = %@", [table name], [[elements objectAtIndex:0] stringValue]);
-//                if ([[table name] isEqualToString:@"xs:element"]){
-//                    DDXMLNode *name = [table attributeForName: @"name"];
-//                    DDXMLNode *type = [table attributeForName: @"type"];
-//                    NSLog(@"attribute = %@, type = %@", [name stringValue], [type stringValue]);
-//                }
-//            }
-//        }
-//    }
-    
-    
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(forgotPassword:)];
     [lblForgotPwd setUserInteractionEnabled:YES];
     [lblForgotPwd addGestureRecognizer:tapGesture];
@@ -232,8 +204,16 @@ static NSString *labelVers;
      
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
     
-//    [self IsFirstDevice];
-    
+    if(firstLogin){
+        ChangePassword * UserProfileView = [self.storyboard instantiateViewControllerWithIdentifier:@"ChangePwd"];
+        UserProfileView.modalPresentationStyle = UIModalPresentationPageSheet;
+        UserProfileView.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [UserProfileView setDelegate:self];
+        [self presentViewController:UserProfileView animated:YES completion:nil];
+        
+        UserProfileView.view.superview.frame = CGRectMake(150, 50, 700, 748);
+        UserProfileView = nil;
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -280,21 +260,50 @@ static NSString *labelVers;
          * is it AgentWS_ReceiveFirstLoginResponse
          ****/
         else if([bodyPart isKindOfClass:[AgentWS_ReceiveFirstLoginResponse class]]) {
-            AgentWS_ReceiveFirstLoginResponse* rateResponse = bodyPart;
             UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Success!"message:@"Please Login using your new password" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [alert show];
             firstLogin = false;
+            
+            AgentWS_ReceiveFirstLoginResponse* rateResponse = bodyPart;
+            // create XMLDocument object
+            DDXMLDocument *xml = [[DDXMLDocument alloc] initWithXMLString:rateResponse.ReceiveFirstLoginResult.xmlDetails options:0 error:nil];
+        
+            // Get root element - DataSetMenu for your XMLfile
+            DDXMLElement *root = [xml rootElement];
+            NSMutableDictionary *returnDict = [[NSMutableDictionary alloc]init];
+            [self parseXML:root dictBuff:returnDict];
+            int result = [loginDB insertAgentProfile:returnDict];
+            NSLog(@"%d",result);
         }
         
         /****
          * is it AgentWS_SendForgotPasswordResponse
          ****/
         else if([bodyPart isKindOfClass:[AgentWS_ValidateLoginResponse class]]) {
-//            AgentWS_ValidateLoginResponse* rateResponse = bodyPart;
-//            UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Success!"message:[NSString stringWithFormat:@"%@ that you are logged in",rateResponse.ValidateLoginResult] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-//            [alert show];
             [self loginSuccess];
         }
+    }
+}
+
+- (void) parseXML:(DDXMLElement *)root dictBuff:(NSMutableDictionary *)dict{
+    // go through all elements in root element (DataSetMenu element)
+    for (DDXMLElement *DataSetMenuElement in [root children]) {
+        // if the element name's is MenuCategories then do something
+        if([[DataSetMenuElement children] count] <= 0){
+            if([[DataSetMenuElement name] caseInsensitiveCompare:@"xs:element"]==NSOrderedSame){
+                DDXMLNode *name = [DataSetMenuElement attributeForName: @"name"];
+                DDXMLNode *type = [DataSetMenuElement attributeForName: @"type"];
+                NSLog(@"%@ : %@", [name stringValue], [type stringValue]);
+                [dict setValue:NULL forKey:[name stringValue]];
+            }
+            else{
+                NSArray *elements = [root elementsForName:[DataSetMenuElement name]];
+                NSLog(@"%@ = %@", [[DataSetMenuElement parent]name], [[elements objectAtIndex:0]stringValue]);
+                [dict setValue:[[elements objectAtIndex:0]stringValue]
+                        forKey:[[DataSetMenuElement parent]name]];
+            }
+        }
+        [self parseXML:DataSetMenuElement dictBuff:dict];
     }
 }
 

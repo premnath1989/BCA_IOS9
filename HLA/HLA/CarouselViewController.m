@@ -119,7 +119,6 @@ const int numberOfModule = 7;
 //    AgentProfile.frame = CGRectMake(980.1, 50, 27.0, 29.0);
 //    [self.view addSubview:AgentProfile];
 
-    
     NSString *string =[SIUtilities WSLogin];
     
 //    if ([string rangeOfString:@"echannel.dev"].location == NSNotFound) {

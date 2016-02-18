@@ -1,5 +1,10 @@
 #import "AgentWS.h"
 #import <libxml/xmlstring.h>
+
+#import "DDXMLDocument.h"
+#import "DDXMLElementAdditions.h"
+#import "DDXMLNode.h"
+
 #if TARGET_OS_IPHONE
 #import <CFNetwork/CFNetwork.h>
 #endif
@@ -1864,6 +1869,8 @@
 }
 @end
 @implementation AgentWS_ReceiveFirstLoginResult
+
+@synthesize xmlDetails;
 - (id)init
 {
 	if((self = [super init])) {
@@ -1902,7 +1909,6 @@
 }
 - (void)addAttributesToNode:(xmlNodePtr)node
 {
-	
 }
 - (void)addElementsToNode:(xmlNodePtr)node
 {
@@ -1918,8 +1924,19 @@
 }
 + (AgentWS_ReceiveFirstLoginResult *)deserializeNode:(xmlNodePtr)cur
 {
+    xmlBufferPtr buff = xmlBufferCreate();
+    int result = xmlNodeDump(buff, NULL, cur, 0, 1);
+    NSString *str = @"";
+    
+    if (result > -1) {
+        str = [[NSString alloc] initWithBytes:(xmlBufferContent(buff))
+                                       length:(NSUInteger)(xmlBufferLength(buff))
+                                     encoding:NSUTF8StringEncoding];
+    }
+    xmlBufferFree(buff);
+    
 	AgentWS_ReceiveFirstLoginResult *newObject = [[AgentWS_ReceiveFirstLoginResult new] autorelease];
-	
+    newObject.xmlDetails = str;
 	[newObject deserializeAttributesFromNode:cur];
 	[newObject deserializeElementsFromNode:cur];
 	
