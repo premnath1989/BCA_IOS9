@@ -199,6 +199,7 @@
 @property(nonatomic , retain) NSString *DOBPP;
 @property(nonatomic , retain) NSString *GenderPP;
 @property(nonatomic , retain) NSString *OccpCodePP;
+- (IBAction)QuickQuoteFunc:(id)sender;
 
 @property (retain, nonatomic) NSMutableArray *arrExistRiderCode;
 @property (retain, nonatomic) NSMutableArray *arrExistPlanChoice;

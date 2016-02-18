@@ -72,6 +72,8 @@ id dobtanngal;
     
     [self saveBasicPlan];
     
+    outletDone.enabled=TRUE;
+    
     NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docsDir = [dirPaths objectAtIndex:0];
     databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
@@ -95,27 +97,66 @@ id dobtanngal;
 }
 
 - (void)setUIelementsAction{
-    [quickQuoteFlag addTarget:self action:@selector(changeUIElementsEditable:) forControlEvents:UIControlEventValueChanged];
+   // [quickQuoteFlag addTarget:self action:@selector(changeUIElementsEditable:) forControlEvents:UIControlEventValueChanged];
 }
 
 - (void)changeUIElementsEditable:(id)sender {
-    [self setUIElementsEditable];
+   // [self setUIElementsEditable];
+    
+    
+    
+    
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-    return [quickQuoteFlag isOn];
+   // return [quickQuoteFlag isOn];
 }
 
 - (void)setUIElementsEditable{
-    btnDOB.enabled = [quickQuoteFlag isOn];
-    sexSegment.enabled = [quickQuoteFlag isOn];
-    btnOccp.enabled = [quickQuoteFlag isOn];
-    TanggalIllustrasi.enabled = [quickQuoteFlag isOn];
+//    btnDOB.enabled = [quickQuoteFlag isOn];
+//    sexSegment.enabled = [quickQuoteFlag isOn];
+//    btnOccp.enabled = [quickQuoteFlag isOn];
+    //TanggalIllustrasi.enabled = [quickQuoteFlag isOn];
     
-    
-    //always disable AgeButton
-    LAAgeField.enabled = FALSE;
 }
+
+
+- (IBAction)QuickQuoteFunc:(id)sender
+{
+    if([sender isOn])
+    {
+        [btnDOB setTitle:@"--Please Select--" forState:UIControlStateNormal];
+        [sexSegment setSelectedSegmentIndex:-1];
+        [btnOccp setTitle:@"--Please Select--" forState:UIControlStateNormal];
+        LAAgeField.enabled = FALSE;
+        LAAgeField.text =@"";
+        LANameField.text =@"";
+        LANameField.enabled = YES;
+        btnDOB.enabled = YES;
+        sexSegment.enabled = YES;
+        btnOccp.enabled = YES;
+
+
+    }
+    else
+    {
+        [btnDOB setTitle:@"--Please Select--" forState:UIControlStateNormal];
+        [sexSegment setSelectedSegmentIndex:-1];
+        [btnOccp setTitle:@"--Please Select--" forState:UIControlStateNormal];
+        LAAgeField.enabled = FALSE;
+        LAAgeField.text =@"";
+        LANameField.text =@"";
+        LANameField.enabled = NO;
+        btnDOB.enabled = NO;
+        sexSegment.enabled = NO;
+        btnOccp.enabled = NO;
+
+        
+    }
+
+    
+}
+
 
 - (void) setupUIElementsColor
 {
@@ -223,7 +264,7 @@ id dobtanngal;
             [self getSavedField];
         }
     } else {
-        outletDone.enabled = FALSE;
+        outletDone.enabled = TRUE;
         appDelegate.isSIExist = NO;
     }
     
@@ -1289,7 +1330,7 @@ id dobtanngal;
         if (useExist) {
             [self updateData:getSINo];
         } else if (Inserted) {
-            [self updateData2];
+           // [self updateData2];
         } else {
             [self insertData];
         }
@@ -1811,49 +1852,49 @@ id dobtanngal;
     return isUpdated;
 }
 
--(void)updateData2
-{
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"dd/MM/yyyy HH:mm:ss"];
-    NSString *currentdate = [dateFormatter stringFromDate:[NSDate date]];
-    
-    sqlite3_stmt *statement;
-    if (sqlite3_open([databasePath UTF8String], &contactDB) == SQLITE_OK)
-    {
-        NSString *sex1 = [self getNonGender:sex];
-        NSString *querySQL = [NSString stringWithFormat:
-                              @"UPDATE Clt_Profile SET Name=\'%@\', Smoker=\"%@\", Sex=\"%@\", DOB=\"%@\", ALB=\"%d\", ANB=\"%d\", OccpCode=\"%@\", DateModified=\"%@\", "
-                              "ModifiedBy=\"hla\",indexNo=\"%d\", DateCreated = \"%@\"  WHERE id=\"%d\"",
-                              LANameField.text,smoker,sex1,DOB,age,ANB,occuCode,currentdate,IndexNo, commDate,lastIdProfile];
-        if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK)
-        {
-            if (sqlite3_step(statement) == SQLITE_DONE)
-            {
-                if (age < 10) {
-                    [self checkingPayor];
-                    if (payorSINo.length == 0) {
-                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Please attach Payor as Life Assured is below 10 years old."
-                                                                       delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
-                        [alert show];
-                    }
-                }
-                
-                savedIndexNo = IndexNo;
-                [self setGlobalExistPayor];
-            } else {
-                savedIndexNo = -1;
-                UIAlertView *failAlert = [[UIAlertView alloc] initWithTitle:@" " message:@"Fail in updating record." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-                [failAlert show];
-            }
-            
-            [_delegate LAIDPayor:lastIdPayor andIDProfile:lastIdProfile andAge:age andOccpCode:occuCode andOccpClass:occuClass andSex:sex andIndexNo:IndexNo
-                     andCommDate:commDate andSmoker:smoker DiffClient:DiffClient bEDDCase:EDDCase];
-            
-            sqlite3_finalize(statement);
-        }
-        sqlite3_close(contactDB);
-    }
-}
+//-(void)updateData2
+//{
+//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//    [dateFormatter setDateFormat:@"dd/MM/yyyy HH:mm:ss"];
+//    NSString *currentdate = [dateFormatter stringFromDate:[NSDate date]];
+//    
+//    sqlite3_stmt *statement;
+//    if (sqlite3_open([databasePath UTF8String], &contactDB) == SQLITE_OK)
+//    {
+//        NSString *sex1 = [self getNonGender:sex];
+//        NSString *querySQL = [NSString stringWithFormat:
+//                              @"UPDATE Clt_Profile SET Name=\'%@\', Smoker=\"%@\", Sex=\"%@\", DOB=\"%@\", ALB=\"%d\", ANB=\"%d\", OccpCode=\"%@\", DateModified=\"%@\", "
+//                              "ModifiedBy=\"hla\",indexNo=\"%d\", DateCreated = \"%@\"  WHERE id=\"%d\"",
+//                              LANameField.text,smoker,sex1,DOB,age,ANB,occuCode,currentdate,IndexNo, commDate,lastIdProfile];
+//        if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK)
+//        {
+//            if (sqlite3_step(statement) == SQLITE_DONE)
+//            {
+//                if (age < 10) {
+//                    [self checkingPayor];
+//                    if (payorSINo.length == 0) {
+//                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Please attach Payor as Life Assured is below 10 years old."
+//                                                                       delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
+//                        [alert show];
+//                    }
+//                }
+//                
+//                savedIndexNo = IndexNo;
+//                [self setGlobalExistPayor];
+//            } else {
+//                savedIndexNo = -1;
+//                UIAlertView *failAlert = [[UIAlertView alloc] initWithTitle:@" " message:@"Fail in updating record." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+//                [failAlert show];
+//            }
+//            
+//            [_delegate LAIDPayor:lastIdPayor andIDProfile:lastIdProfile andAge:age andOccpCode:occuCode andOccpClass:occuClass andSex:sex andIndexNo:IndexNo
+//                     andCommDate:commDate andSmoker:smoker DiffClient:DiffClient bEDDCase:EDDCase];
+//            
+//            sqlite3_finalize(statement);
+//        }
+//        sqlite3_close(contactDB);
+//    }
+//}
 
 -(void)checkingExisting
 {
@@ -2332,34 +2373,94 @@ id dobtanngal;
 
 -(BOOL)validateSave// validate new la before saving
 {
-    if (LANameField.text.length <= 0) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Please select Life Assured from the listing or create new Client Profile in order to create new SI."
+    int LAAGEint = [[LAAgeField text] intValue];
+    
+    
+    if ([NamaProduk.titleLabel.text isEqualToString:@"(null)"] ||[NamaProduk.titleLabel.text isEqualToString:@"--Please Select--"] || NamaProduk.titleLabel.text.length == 0)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Produk harus diisi."
+                                                       delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
+        [alert show];
+      
+        
+    } else if ([TanggalIllustrasi.titleLabel.text isEqualToString:@"(null)"] ||[TanggalIllustrasi.titleLabel.text isEqualToString:@"--Please Select--"] || TanggalIllustrasi.titleLabel.text.length == 0) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Tanggal Ilustrasi harus diisi "
+                                                       delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
+        [alert show];
+
+        
+    } else if (LANameField.text.length <= 0) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Nama Pemegang harus diisi."
                                                        delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
         [alert show];
         [LANameField becomeFirstResponder];
-    } else if ([btnCommDate.titleLabel.text isEqualToString:@"(null)"] || btnCommDate.titleLabel.text.length == 0) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Commencement date is required."
+        
+       
+    } else if ([btnDOB.titleLabel.text isEqualToString:@"(null)"] ||[btnDOB.titleLabel.text isEqualToString:@"--Please Select--"] || btnDOB.titleLabel.text.length == 0) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Tanggal Lahir Pemegang Polis"
                                                        delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
         [alert show];
-    } else if (AgeLess || (EDDCase && [planChoose isEqualToString:STR_S100])) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Age must be at least 30 days."
+    } else if (LAAGEint < 18) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Usia harus sama dengan atau lebih dari 18 tahun"
                                                        delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
-        [alert setTag:1005];    
+     //   [alert setTag:1005];
         [alert show];
-    } else if (AgeExceed189Days) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Expected date of delivery cannot be more than 189 days."
+    }
+    
+ else if (LAAGEint > 70)
+ {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Usia tidak boleh melebihi dari 70 tahun."
+                                                   delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
+   // [alert setTag:1005];
+    [alert show];
+  }
+    
+    else if (sexSegment.selectedSegmentIndex == -1)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Jenis kelamin Pemegang Polis harus diisi."
                                                        delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
-        [alert setTag:1005];
+        // [alert setTag:1005];
         [alert show];
-    } else if ( (occuCode.length == 0 || btnOccp.titleLabel.text.length == 0) && [sex length]>0 ) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Please select an Occupation Description."
+    }
+    
+    else if ([btnOccp.titleLabel.text isEqualToString:@"(null)"] ||[btnOccp.titleLabel.text isEqualToString:@"--Please Select--"] || btnOccp.titleLabel.text.length == 0)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Pekerjaan Pemegang Polis harus diisi."
                                                        delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
         [alert show];
-    } else if ([occuCode isEqualToString:@"OCC01975"]) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"There is no existing plan which can be offered to this occupation."
+    }
+    
+    else if ([_BtnHubungan.titleLabel.text isEqualToString:@"(null)"] ||[_BtnHubungan.titleLabel.text isEqualToString:@"--Please Select--"] || _BtnHubungan.titleLabel.text.length == 0)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Hubungan Dengan Tertannggung harus diisi"
                                                        delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
         [alert show];
-    } else {
+    }
+    
+    else if ([_BtnHubungan.titleLabel.text isEqualToString:@"self"])
+    {
+        //if hubungan dengan tertanggung is not equal to self",tertanggung screen...
+    }
+
+
+
+
+
+    //        else if (AgeExceed189Days) {
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Expected date of delivery cannot be more than 189 days."
+//                                                       delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
+//        [alert setTag:1005];
+//        [alert show];
+//    } else if ( (occuCode.length == 0 || btnOccp.titleLabel.text.length == 0) && [sex length]>0 ) {
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Please select an Occupation Description."
+//                                                       delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
+//        [alert show];
+//    } else if ([occuCode isEqualToString:@"OCC01975"]) {
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"There is no existing plan which can be offered to this occupation."
+//                                                       delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
+//        [alert show];
+//    }
+else {
         return YES;
     }
     return NO;
@@ -2703,6 +2804,20 @@ id dobtanngal;
 -(void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
 {
     self.popOverController = nil;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    
+    if (textField == LANameField)
+    {
+        NSUInteger newLength = [textField.text length] + [string length] - range.length;
+        NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:@"ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz./@'()-"] invertedSet];
+        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        return (([string isEqualToString:filtered]) && newLength <= 40);
+    }
+
+    return YES;
 }
 
 - (void)viewDidUnload

@@ -30,7 +30,7 @@
                                         <rect key="frame" x="0.0" y="-81" width="1026" height="769"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wfk-qa-4dx">
-                                        <rect key="frame" x="736" y="357" width="181" height="62"/>
+                                        <rect key="frame" x="736" y="322" width="228" height="45"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal" image="menu_ilustrasi.png">
                                             <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -44,7 +44,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2tD-ZJ-SG0">
-                                        <rect key="frame" x="736" y="424" width="160" height="59"/>
+                                        <rect key="frame" x="736" y="390" width="228" height="45"/>
                                         <accessibility key="accessibilityConfiguration">
                                             <bool key="isElement" value="NO"/>
                                         </accessibility>
@@ -61,7 +61,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GvT-B9-fLa">
-                                        <rect key="frame" x="736" y="285" width="269" height="56"/>
+                                        <rect key="frame" x="736" y="254" width="228" height="45"/>
                                         <accessibility key="accessibilityConfiguration">
                                             <bool key="isElement" value="NO"/>
                                         </accessibility>
@@ -89,7 +89,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ozH-5y-yon">
-                                        <rect key="frame" x="726" y="83" width="298" height="38"/>
+                                        <rect key="frame" x="726" y="56" width="298" height="65"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal" image="menu_selectoption.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -102,7 +102,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OSf-Rc-sUK">
-                                        <rect key="frame" x="741" y="136" width="225" height="57"/>
+                                        <rect key="frame" x="736" y="123" width="228" height="45"/>
                                         <accessibility key="accessibilityConfiguration">
                                             <bool key="isElement" value="NO"/>
                                         </accessibility>
@@ -116,42 +116,42 @@
                                         </state>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FhS-U2-GUE">
-                                        <rect key="frame" x="738" y="205" width="290" height="1"/>
+                                        <rect key="frame" x="738" y="175" width="290" height="1"/>
                                         <color key="backgroundColor" red="0.50588235290000005" green="0.50588235290000005" blue="0.50588235290000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GNO-qz-8ao">
-                                        <rect key="frame" x="730" y="274" width="290" height="1"/>
+                                        <rect key="frame" x="736" y="240" width="290" height="1"/>
                                         <color key="backgroundColor" red="0.50588235290000005" green="0.50588235290000005" blue="0.50588235290000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qby-rC-yvM">
-                                        <rect key="frame" x="738" y="347" width="290" height="1"/>
+                                        <rect key="frame" x="738" y="310" width="290" height="1"/>
                                         <color key="backgroundColor" red="0.50588235290000005" green="0.50588235290000005" blue="0.50588235290000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C2i-v2-n7M">
-                                        <rect key="frame" x="738" y="420" width="290" height="1"/>
+                                        <rect key="frame" x="738" y="377" width="290" height="1"/>
                                         <color key="backgroundColor" red="0.50588235290000005" green="0.50588235290000005" blue="0.50588235290000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ExP-bb-J7P">
-                                        <rect key="frame" x="738" y="488" width="290" height="1"/>
+                                        <rect key="frame" x="738" y="443" width="290" height="1"/>
                                         <color key="backgroundColor" red="0.50588235290000005" green="0.50588235290000005" blue="0.50588235290000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XIk-i8-6C3">
-                                        <rect key="frame" x="736" y="218" width="218" height="55"/>
+                                        <rect key="frame" x="736" y="186" width="228" height="45"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal" image="menu_datanasabah.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -161,6 +161,23 @@
                                         </state>
                                         <connections>
                                             <action selector="selectClientProfile:" destination="CPf-MS-UId" eventType="touchUpInside" id="oO9-hH-BIG"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZUG-sL-Duu">
+                                        <rect key="frame" x="736" y="457" width="228" height="45"/>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <bool key="isElement" value="NO"/>
+                                        </accessibility>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" image="menu_productinformation.png">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="selectEApp:" destination="CPf-MS-UId" eventType="touchUpInside" id="t1B-ky-Ty7"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -217,11 +234,12 @@
     <resources>
         <image name="Profile.png" width="256" height="256"/>
         <image name="Tablet-App-Redesign-Slices.jpg" width="2048" height="1536"/>
-        <image name="menu_customerfactfind.png" width="486" height="103"/>
-        <image name="menu_datanasabah.png" width="388" height="103"/>
-        <image name="menu_ilustrasi.png" width="297" height="103"/>
-        <image name="menu_salesactivity.png" width="423" height="103"/>
-        <image name="menu_selectoption.png" width="591" height="78"/>
-        <image name="menu_spaj.png" width="267" height="103"/>
+        <image name="menu_customerfactfind.png" width="578" height="103"/>
+        <image name="menu_datanasabah.png" width="578" height="103"/>
+        <image name="menu_ilustrasi.png" width="578" height="103"/>
+        <image name="menu_productinformation.png" width="578" height="103"/>
+        <image name="menu_salesactivity.png" width="578" height="103"/>
+        <image name="menu_selectoption.png" width="578" height="103"/>
+        <image name="menu_spaj.png" width="578" height="103"/>
     </resources>
 </document>

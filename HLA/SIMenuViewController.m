@@ -1234,11 +1234,11 @@ BOOL isFirstLoad;
         } else {
 			[self UpdateSIToInvalid];
 			
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Please attach Payor as Life Assured is below 10 years old."
-                                                           delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
-            [alert show];
-            
-            return NO;
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Please attach Payor as Life Assured is below 10 years old."
+//                                                           delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
+//            [alert show];
+//            
+//            return NO;
         }
     }
     
@@ -2526,11 +2526,11 @@ BOOL isFirstLoad;
                 alert = Nil;
                 blocked = YES;
             } else if (getBasicPlan == NULL) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Please select basic plan first."
-                                                               delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
-                [alert show];
-                alert = Nil;
-                blocked = YES;
+//                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Please select basic plan first."
+//                                                               delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
+//                [alert show];
+//                alert = Nil;
+//                blocked = YES;
                 
             } else if (([getBasicPlan isEqualToString:STR_S100] || [getBasicPlan isEqualToString:STR_HLAWP]) && getAge > 65 ) {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Age Last Birthday must be less than or equal to 65 for this product."

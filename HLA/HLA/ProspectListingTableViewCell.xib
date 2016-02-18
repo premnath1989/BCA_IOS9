@@ -86,6 +86,7 @@
                     </view>
                 </subviews>
             </tableViewCellContentView>
+            <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
                 <outlet property="labelBranchName" destination="7pF-7w-Q8B" id="gbT-h6-9Nx"/>
                 <outlet property="labelDOB" destination="VW7-sF-Mpf" id="7Jj-gx-Jnv"/>

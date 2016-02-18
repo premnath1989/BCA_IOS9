@@ -156,7 +156,7 @@
         ReferralSource = [s stringForColumn:@"ReferralSource"];
         ReferralName = [s stringForColumn:@"ReferralName"];
         IdentitySubmitted = [s stringForColumn:@"IdentitySubmitted"];
-        IDExpirityDate = [s stringForColumn:@"IDExpirityDate"];
+        IDExpirityDate = [s stringForColumn:@"IDExpiryDate"];
         NPWPNo = [s stringForColumn:@"NPWPNo"];
         Kanwil = [s stringForColumn:@"Kanwil"];
         HomeVillage = [s stringForColumn:@"ResidenceVillage"];
@@ -164,10 +164,10 @@
         HomeProvicne = [s stringForColumn:@"ResidenceProvince"];
         OfficeVillage = [s stringForColumn:@"OfficeVillage"];
         OfficeDistrict = [s stringForColumn:@"OfficeDistrict"];
-        OfficeVillage = [s stringForColumn:@"OfficeProvince"];
+        OfficeVillage = [s stringForColumn:@"OfficeVillage"];
+        OfficeProvicne = [s stringForColumn:@"OfficeProvince"];
         SourceIncome = [s stringForColumn:@"SourceIncome"];
         ClientSegmentation = [s stringForColumn:@"ClientSegmentation"];
-
         
         [ProspectTableData addObject:[[ProspectProfile alloc] initWithName:NickName AndProspectID:ProspectID AndProspectName:ProspectName
                                                           AndProspecGender:ProspectGender AndResidenceAddress1:ResidenceAddress1
@@ -199,15 +199,18 @@
     for (int a=0; a<prospectTableData.count; a++) {
         ProspectProfile *pp = [prospectTableData objectAtIndex:a];
         NSString *querySQL = [NSString stringWithFormat:@"SELECT IndexNo, ContactCode, ContactNo, Prefix FROM contact_input where indexNo = %@ AND ContactCode = 'CONT008'", pp.ProspectID];
-         FMResultSet *s = [database executeQuery:querySQL];
+        NSLog(@"query %@",querySQL);
+        FMResultSet *s = [database executeQuery:querySQL];
+        NSLog(@"query q %@",querySQL);
         while ([s next]) {
-            [dataMobile addObject: [NSNumber numberWithInt: [results intForColumn:@"ContactNo"]]];
-            [dataPrefix addObject:[NSNumber numberWithInt: [results intForColumn:@"Prefix"]]];
-            [dataIndex addObject:[NSNumber numberWithInt: [results intForColumn:@"IndexNo"]]];
+            NSLog(@"datamobile %@",[s stringForColumn:@"ContactNo"]);
+            [dataMobile addObject: [s stringForColumn:@"ContactNo"]];
+            [dataPrefix addObject:[s stringForColumn:@"Prefix"]];
+            [dataIndex addObject:[s stringForColumn:@"IndexNo"]];
         }
-        [results close];
-        [database close];
+        //[s close];
     }
+    [database close];
     if ([DataToReturn isEqualToString:@"Prefix"]){
         return dataPrefix;
     }
@@ -386,7 +389,7 @@
         SourceIncome = [s stringForColumn:@"SourceIncome"];
         ClientSegmentation = [s stringForColumn:@"ClientSegmentation"];
         
-        
+
         [ProspectTableData addObject:[[ProspectProfile alloc] initWithName:NickName AndProspectID:ProspectID AndProspectName:ProspectName
                                                           AndProspecGender:ProspectGender AndResidenceAddress1:ResidenceAddress1
                                                       AndResidenceAddress2:ResidenceAddress2 AndResidenceAddress3:ResidenceAddress3

@@ -90,13 +90,13 @@ MBProgressHUD *HUD;
     
     /*added by faiz*/
     modelProspectProfile=[[ModelProspectProfile alloc]init];
-    ProspectTableData=[modelProspectProfile getProspectProfile];
+    ProspectTableData = [modelProspectProfile getProspectProfile];
     [self createBlackStatusBar];
     /*end of added by faiz*/
     
     self.myTableView.rowHeight = 50;
     self.myTableView.backgroundColor = [UIColor clearColor];
-    self.myTableView.separatorColor = [UIColor clearColor];
+    //self.myTableView.separatorColor = [UIColor clearColor];
     self.myTableView.opaque = NO;
     
     deleteBtn.hidden = TRUE;
@@ -195,12 +195,30 @@ MBProgressHUD *HUD;
     }
 }
 
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Remove seperator inset
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    // Prevent the cell from inheriting the Table View's margin settings
+    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
+        [cell setPreservesSuperviewLayoutMargins:NO];
+    }
+    
+    // Explictly set your cell's layout margins
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[ProspectListingTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        cell = [[ProspectListingTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Data"];
     }
    
 	//change
@@ -219,8 +237,8 @@ MBProgressHUD *HUD;
             cell.userInteractionEnabled = NO;
 		}
         else if(indexPath.row <[ProspectTableData count]){
-            static NSString *CellIdentifier = @"Cell";
-            ProspectListingTableViewCell *cell1 = (ProspectListingTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            //static NSString *CellIdentifier = @"Cell";
+            ProspectListingTableViewCell *cell1 = (ProspectListingTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"DataCell"];
             if (cell1 == nil) {
                 NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ProspectListingTableViewCell" owner:self options:nil];
                 cell1 = [nib objectAtIndex:0];
@@ -275,7 +293,14 @@ MBProgressHUD *HUD;
             [cell1.labelName setText:pp.ProspectName];
             [cell1.labelDOB setText:pp.ProspectDOB];
             [cell1.labelBranchName setText:pp.BranchName];
-            [cell1.labelPhone1 setText:@""];
+            //[cell1.labelPhone1 setText:@""];
+            if ([dataPrefix count]>indexPath.row){
+                cell1.labelPhone1.text= [NSString stringWithFormat:@"%@ - %@",[dataPrefix objectAtIndex:indexPath.row],[dataMobile objectAtIndex:indexPath.row]];
+            }
+            else {
+                cell1.labelPhone1.text = @"";
+            }
+
             [cell1.labelDateCreated setText:pp.DateCreated];
             [cell1.labelDateModified setText:pp.DateModified];
             [cell1.labelTimeRemaining setText:DateRemaining];
@@ -1010,8 +1035,6 @@ MBProgressHUD *HUD;
     else
     {
         pp = [ProspectTableData objectAtIndex:indexPath.row];
-        NSLog(@"prospect table data %@",pp.Religion);
-
     }
     zzz.pp = pp;
     
@@ -1020,8 +1043,7 @@ MBProgressHUD *HUD;
         _EditProspect.delegate = self;
     }
     _EditProspect.pp = pp;
-	
-	@try {
+    @try {
 		[self.navigationController pushViewController:_EditProspect animated:YES];
 		_EditProspect.navigationItem.title = @"Edit";
 	} @catch (NSException * e) {
@@ -1125,6 +1147,8 @@ MBProgressHUD *HUD;
     [ProspectTableData removeAllObjects];
     ProspectTableData=[modelProspectProfile getProspectProfile];
     [self getMobileNo];
+    [self.myTableView reloadData];
+    
     [self.myTableView reloadData];
 }
 
@@ -1495,7 +1519,7 @@ MBProgressHUD *HUD;
     
    if(ProspectTableData.count == 0)
    {
-       UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"No record found" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+       UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Data Tidak Ditemukan" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
        
        [alert show];
        alert = nil;
@@ -1526,7 +1550,7 @@ MBProgressHUD *HUD;
 	
 	totalView = 20;
     [self ReloadTableData];
-//	[self performSelector:@selector(loadDataDelayed) withObject:nil afterDelay:2];
+	[self performSelector:@selector(loadDataDelayed) withObject:nil afterDelay:2];
 }
 
 - (IBAction)editPressed:(id)sender

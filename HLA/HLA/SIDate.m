@@ -50,7 +50,8 @@ id msg, DBDate;
     if (ProspectDOB != NULL ) {
         
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+        //[dateFormatter setDateFormat:@"dd/MM/yyyy"];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
         NSDate *zzz = [dateFormatter dateFromString:ProspectDOB];
         [_outletDate setDate:zzz animated:YES ];
          
@@ -71,8 +72,6 @@ id msg, DBDate;
 }
 
 - (IBAction)ActionDate:(id)sender {
-    
-      
     if (_delegate != Nil) {
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"dd/MM/yyyy"];
@@ -83,11 +82,7 @@ id msg, DBDate;
         [dateFormatter setDateFormat:@"yyyy-MM-dd"];
         DBDate = [dateFormatter stringFromDate:[_outletDate date]];
         //[_delegate DateSelected:msg :DBDate];
-        
-          
     }
-    
-    
 }
 - (IBAction)btnClose:(id)sender {
     [_delegate CloseWindow];

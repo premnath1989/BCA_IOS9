@@ -569,11 +569,13 @@ bool RegDatehandling;
 
     if ([validationSet containsObject:branchCode]||branchCode==NULL){
         [self createAlertViewAndShow:validationKodeCabang tag:0];
+        [outletBranchCode setBackgroundColor:[UIColor redColor]];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
         return false;
     }
     else if ([validationSet containsObject:branchName]||branchName==NULL){
         [self createAlertViewAndShow:validationNamaCabang tag:0];
+        [outletBranchName setBackgroundColor:[UIColor redColor]];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
         return false;
     }
@@ -591,6 +593,7 @@ bool RegDatehandling;
     }
     else if ([validationSet containsObject:refSource]||refSource==NULL){
         [self createAlertViewAndShow:validationSumberReferral tag:0];
+        [outletReferralSource setBackgroundColor:[UIColor redColor]];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
         return false;
     }
@@ -644,21 +647,25 @@ bool RegDatehandling;
     }
     else if ([validationSet containsObject:dob]||dob==NULL){
         [self createAlertViewAndShow:validationTanggalLahir tag:0];
+        [outletDOB setBackgroundColor:[UIColor redColor]];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
         return false;
     }
     else if ([validationSet containsObject:otheridtype]||otheridtype==NULL){
         [self createAlertViewAndShow:validationJenisIdentitas tag:0];
+        [OtherIDType setBackgroundColor:[UIColor redColor]];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
         return false;
     }
     else if ([validationSet containsObject:otheridtext]||otheridtext==NULL){
         [self createAlertViewAndShow:validationNomorIdentitas tag:0];
+        [txtOtherIDType becomeFirstResponder];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
         return false;
     }
     else if ([validationSet containsObject:outletexpirydate]||outletexpirydate==NULL){
         [self createAlertViewAndShow:validationTanggalKadaluarsaIdentitas tag:0];
+        [outletExpiryDate setBackgroundColor:[UIColor redColor]];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
         return false;
     }
@@ -669,6 +676,7 @@ bool RegDatehandling;
     }
     else if ([validationSet containsObject:outletnationality]||outletnationality==NULL){
         [self createAlertViewAndShow:validationKebangsaan tag:0];
+        [outletNationality setBackgroundColor:[UIColor redColor]];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
         return false;
     }
@@ -680,7 +688,7 @@ bool RegDatehandling;
     NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
     
     //validation message data alamat tempat tinggal
-    NSString *validationAlamat=@"Alamat Tempat harus diisi";
+    NSString *validationAlamat=@"Alamat Tempat Tinggal harus diisi";
     NSString *validationAreaTelponRumah=@"Nomor kode telepon rumah yang dimasukkan minimal 6 digit atau lebih";
     NSString *validationNumberTelponRumah=@"Nomor telepon rumah yang dimasukkan minimal 6 digit atau lebih";
     NSString *validationAreaHPUtama=@"Nomor Kode HP Utama yang dimasukkan minimal 6 digit atau lebih";
@@ -743,7 +751,7 @@ bool RegDatehandling;
     }
     //else if ([textcontact1 isEqualToString:@""]||textcontact1==NULL){
     else if (![textcontact1 isEqualToString:@""]){
-        if ([textcontact1 length]<6){
+        if ([txtContact1.text length]<6){
             [self createAlertViewAndShow:validationNumberTelponRumah tag:0];
             [ClientProfile setObject:@"NO" forKey:@"TabBar"];
             [txtContact1 becomeFirstResponder];
@@ -751,21 +759,34 @@ bool RegDatehandling;
         }
     }
     else if ([textprefix2 isEqualToString:@""]||textprefix2==NULL){
-        if ([txtPrefix2.text length]<6){
-            [self createAlertViewAndShow:validationAreaHPUtama tag:0];
-            [ClientProfile setObject:@"NO" forKey:@"TabBar"];
-            [txtPrefix2 becomeFirstResponder];
-            return false;
-        }
+        [self createAlertViewAndShow:validationAreaHPUtama tag:0];
+        [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+        [txtPrefix2 becomeFirstResponder];
+        return false;
     }
+    
+    if ([txtPrefix2.text length]<6){
+        [self createAlertViewAndShow:validationAreaHPUtama tag:0];
+        [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+        [txtPrefix2 becomeFirstResponder];
+        return false;
+    }
+
     else if ([textcontact2 isEqualToString:@""]||textcontact2==NULL){
-        if ([textcontact2 length]<6){
-            [self createAlertViewAndShow:validationNumberHPUtama tag:0];
-            [ClientProfile setObject:@"NO" forKey:@"TabBar"];
-            [txtContact2 becomeFirstResponder];
-            return false;
-        }
+        NSLog(@"length %i",[txtContact2.text length]);
+        [self createAlertViewAndShow:validationNumberHPUtama tag:0];
+        [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+        [txtContact2 becomeFirstResponder];
+        return false;
     }
+    
+    if ([txtContact2.text length]<6){
+        [self createAlertViewAndShow:validationNumberHPUtama tag:0];
+        [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+        [txtContact2 becomeFirstResponder];
+        return false;
+    }
+
     //else if ([textprefix3 isEqualToString:@""]||textprefix3==NULL){
     else if (![textprefix3 isEqualToString:@""]){
         if ([txtPrefix3.text length]<6){
@@ -777,7 +798,7 @@ bool RegDatehandling;
     }
     //else if ([textcontact3 isEqualToString:@""]||textcontact3==NULL){
     else if (![textcontact3 isEqualToString:@""]){
-        if ([textcontact3 length]<6){
+        if ([txtContact3.text length]<6){
             [self createAlertViewAndShow:validationNumberHP2 tag:0];
             [ClientProfile setObject:@"NO" forKey:@"TabBar"];
             [txtContact3 becomeFirstResponder];
@@ -795,7 +816,7 @@ bool RegDatehandling;
     }
     //else if ([textcontact4 isEqualToString:@""]||textcontact4==NULL){
     else if (![textcontact4 isEqualToString:@""]){
-        if ([textcontact4 length]<6){
+        if ([txtContact4.text length]<6){
             [self createAlertViewAndShow:validationNumberTelponKantor tag:0];
             [ClientProfile setObject:@"NO" forKey:@"TabBar"];
             [txtContact4 becomeFirstResponder];
@@ -824,6 +845,7 @@ bool RegDatehandling;
 
     if ([validationSet containsObject:outletoccupaction]||outletoccupaction==NULL){
         [self createAlertViewAndShow:validationPekerjaan tag:0];
+        [outletOccup setBackgroundColor:[UIColor redColor]];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
         return false;
     }
@@ -835,6 +857,7 @@ bool RegDatehandling;
     }
     else if ([validationSet containsObject:outletsourceincome]||outletsourceincome==NULL){
         [self createAlertViewAndShow:validationSumberPenghasilan tag:0];
+        [_outletSourceIncome setBackgroundColor:[UIColor redColor]];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
         return false;
     }
@@ -907,7 +930,7 @@ bool RegDatehandling;
         if(IC_Hold_Alert || OTHERID_Hold_Alert) {
             [self hideKeyboard];
             UIAlertView *back_alert = [[UIAlertView alloc] initWithTitle:@" "
-                                                                 message:@"Do you want to save?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+                                                                 message:@"Apakah anda ingin menyimpan?" delegate:self cancelButtonTitle:@"Ya" otherButtonTitles:@"Tidak", nil];
             back_alert.tag = 5000;
             [back_alert show];
             back_alert=nil;
@@ -915,7 +938,7 @@ bool RegDatehandling;
         } else if(![type isEqualToString:@"- SELECT -"]) {
             [self hideKeyboard];
             UIAlertView *back_alert = [[UIAlertView alloc] initWithTitle:@" "
-                                                                 message:@"Do you want to save?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+                                                                 message:@"Apakah anda ingin menyimpan?" delegate:self cancelButtonTitle:@"Ya" otherButtonTitles:@"Tidak", nil];
             back_alert.tag = 5000;
             [back_alert show];
             back_alert=nil;
@@ -933,7 +956,7 @@ bool RegDatehandling;
         } else {
             [self hideKeyboard];
             UIAlertView *back_alert = [[UIAlertView alloc] initWithTitle:@" "
-                                                                 message:@"Do you want to save?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+                                                                 message:@"Apakah anda ingin menyimpan?" delegate:self cancelButtonTitle:@"Ya" otherButtonTitles:@"Tidak", nil];
             back_alert.tag = 5000;
             [back_alert show];
             back_alert=nil;
@@ -1044,7 +1067,7 @@ bool RegDatehandling;
         } else {
             [self hideKeyboard];
             UIAlertView *back_alert = [[UIAlertView alloc] initWithTitle:@" "
-                                                                 message:@"Do you want to save?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+                                                                 message:@"Apakah anda ingin menyimpan?" delegate:self cancelButtonTitle:@"Ya" otherButtonTitles:@"Tidak", nil];
             back_alert.tag = 5000;
             [back_alert show];
             back_alert=nil;
@@ -1650,6 +1673,13 @@ bool RegDatehandling;
         return ((newLength <= CHARACTER_LIMIT_ExactDuties));
     }
     
+    if (textField == txtNPWPNo) {
+        NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_MONEY] invertedSet];
+        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        
+        return (([string isEqualToString:filtered])&&(newLength <= 20));
+    }
+    
     if (textField == txtPrefix1) {
         /*myString = [txtPrefix1.text stringByReplacingCharactersInRange:range withString:string];
         if (myString.length > 4) {
@@ -1658,7 +1688,7 @@ bool RegDatehandling;
         NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
         
-        return (([string isEqualToString:filtered])&&(newLength <= 4));
+        return (([string isEqualToString:filtered])&&(newLength <= 6));
     }
     
     if (textField == txtPrefix2) {
@@ -1669,7 +1699,7 @@ bool RegDatehandling;
         NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
         
-        return (([string isEqualToString:filtered])&&(newLength <= 4));
+        return (([string isEqualToString:filtered])&&(newLength <= 6));
     }
     
     if (textField == txtPrefix3) {
@@ -1680,7 +1710,7 @@ bool RegDatehandling;
         NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
         
-        return (([string isEqualToString:filtered])&&(newLength <= 4));
+        return (([string isEqualToString:filtered])&&(newLength <= 6));
     }
     
     if (textField == txtPrefix4) {
@@ -1691,7 +1721,7 @@ bool RegDatehandling;
         NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
         
-        return (([string isEqualToString:filtered])&&(newLength <= 4));
+        return (([string isEqualToString:filtered])&&(newLength <= 6));
     }
     
     if (textField == txtContact1) {
@@ -1737,6 +1767,18 @@ bool RegDatehandling;
         
         return (([string isEqualToString:filtered])&&(newLength <= 10));
     }
+    
+    if (textField == txtOtherIDType) {
+        /*myString = [txtContact4.text stringByReplacingCharactersInRange:range withString:string];
+         if (myString.length > 10) {
+         return NO;
+         }*/
+        NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
+        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        
+        return (([string isEqualToString:filtered]));
+    }
+
     
     if (textField == txtIDType) {
         NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
@@ -2338,7 +2380,7 @@ bool RegDatehandling;
             [txtHomePostCode removeTarget:self action:@selector(EditTextFieldBegin:) forControlEvents:UIControlEventEditingDidBegin];
         }
         
-    } else if (btnPressed.tag == 1) {
+    } else if (switchPressed.tag == 1) {
         if (checked2) {
             [btnForeignOffice setImage: [UIImage imageNamed:@"emptyCheckBox.png"] forState:UIControlStateNormal];
             checked2 = NO;
@@ -2417,7 +2459,7 @@ bool RegDatehandling;
 	clickDone = 1;
     bool exist =  [self record_exist];
     if(exist) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"All changes will be updated to related SI, CFF and eApp. Do you want to proceed?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"All changes will be updated to related SI, CFF and eApp. Do you want to proceed?" delegate:self cancelButtonTitle:@"Ya" otherButtonTitles:@"Tidak", nil];
         [alert setTag:1004];
         [alert show];
     } else {
@@ -2613,6 +2655,25 @@ bool RegDatehandling;
 				group = @"";
 			}
             
+            // Convert string to date object
+            NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+            [dateFormat setDateFormat:@"yyyy-MM-dd"];
+            NSDate *date = [dateFormat dateFromString:strDOB];
+            
+            // Convert date object to desired output format
+            [dateFormat setDateFormat:@"dd/MM/yyyy"];
+            NSString *newDOB = [dateFormat stringFromDate:date];
+
+            NSDateFormatter *expiryDateFormat = [[NSDateFormatter alloc] init];
+            [expiryDateFormat setDateFormat:@"yyyy-MM-dd"];
+            NSDate *dateExpiry = [expiryDateFormat dateFromString:strExpiryDate];
+            
+            // Convert date object to desired output format
+            [expiryDateFormat setDateFormat:@"dd/MM/yyyy"];
+            NSString *newExpiryDate = [dateFormat stringFromDate:dateExpiry];
+
+            NSLog(@"%@",newDOB);
+            
 			NSString *CountryOfBirth = @"";
             CountryOfBirth = _txtCountryOfBirth.text;//btnCoutryOfBirth.titleLabel.text;
 			//CountryOfBirth = [self getCountryCode:CountryOfBirth];
@@ -2643,15 +2704,17 @@ bool RegDatehandling;
 					[db open];
 				}
 				
+                
                 insertSQL = [NSString stringWithFormat:
                              @"UPDATE prospect_profile set \"ProspectName\"=\'%@\', \"ProspectDOB\"=\"%@\",\"GST_registered\"=\"%@\",\"GST_registrationNo\"=\"%@\",\"GST_registrationDate\"=\"%@\",\"GST_exempted\"=\"%@\", \"ProspectGender\"=\"%@\", \"ResidenceAddress1\"=\"%@\", \"ResidenceAddress2\"=\"%@\", \"ResidenceAddress3\"=\"%@\", \"ResidenceAddressTown\"=\"%@\", \"ResidenceAddressState\"=\"%@\", \"ResidenceAddressPostCode\"=\"%@\", \"ResidenceAddressCountry\"=\"%@\", \"OfficeAddress1\"=\"%@\", \"OfficeAddress2\"=\"%@\", \"OfficeAddress3\"=\"%@\", \"OfficeAddressTown\"=\"%@\",\"OfficeAddressState\"=\"%@\", \"OfficeAddressPostCode\"=\"%@\", \"OfficeAddressCountry\"=\"%@\", \"ProspectEmail\"= \"%@\", \"ProspectOccupationCode\"=\"%@\", \"ExactDuties\"=\"%@\", \"ProspectRemark\"=\"%@\", \"DateModified\"=%@,\"ModifiedBy\"=\"%@\", \"ProspectGroup\"=\"%@\", \"ProspectTitle\"=\"%@\", \"IDTypeNo\"=\"%@\", \"OtherIDType\"=\"%@\", \"OtherIDTypeNo\"=\"%@\", \"Smoker\"=\"%@\", \"AnnualIncome\"=\"%@\", \"BussinessType\"=\"%@\", \"Race\"=\"%@\", \"MaritalStatus\"=\"%@\", \"Nationality\"=\"%@\", \"Religion\"=\"%@\",\"ProspectProfileChangesCounter\"=\"%@\", \"Prospect_IsGrouping\"=\"%@\", \"CountryOfBirth\"=\"%@\" where IndexNo = \"%@\" " ,
-                             txtFullName.text, strDOB, GSTRigperson, txtRigNO.text, Rigdateoutlet,GSTRigExempted,gender, txtHomeAddr1.text, txtHomeAddr2.text, txtHomeAddr3.text, txtHomeTown.text, SelectedStateCode, txtHomePostCode.text, HomeCountry, txtOfficeAddr1.text, txtOfficeAddr2.text, txtOfficeAddr3.text, txtOfficeTown.text, SelectedOfficeStateCode, txtOfficePostcode.text, OffCountry, txtEmail.text, OccupCodeSelected, txtExactDuties.text, txtRemark.text, @"datetime(\"now\", \"+8 hour\")", @"1", group, TitleCodeSelected, txtIDType.text, othertype, txtOtherIDType.text, ClientSmoker, txtAnnIncome.text, txtBussinessType.text, race, marital, nation, religion, str_counter,isGrouping, CountryOfBirth, prosID];
+                             txtFullName.text, newDOB, GSTRigperson, txtRigNO.text, Rigdateoutlet,GSTRigExempted,gender, txtHomeAddr1.text, txtHomeAddr2.text, txtHomeAddr3.text, txtHomeTown.text, SelectedStateCode, txtHomePostCode.text, HomeCountry, txtOfficeAddr1.text, txtOfficeAddr2.text, txtOfficeAddr3.text, txtOfficeTown.text, SelectedOfficeStateCode, txtOfficePostcode.text, OffCountry, txtEmail.text, OccupCodeSelected, txtExactDuties.text, txtRemark.text, @"datetime(\"now\", \"+8 hour\")", @"1", group, TitleCodeSelected, txtIDType.text, othertype, txtOtherIDType.text, ClientSmoker, txtAnnIncome.text, txtBussinessType.text, race, marital, nation, religion, str_counter,isGrouping, CountryOfBirth, prosID];
 
             } else {
+
                 insertSQL = [NSString stringWithFormat:
                              @"INSERT INTO prospect_profile(\'ProspectName\', \"ProspectDOB\", \"GST_registered\", \"GST_registrationNo\", \"GST_registrationDate\", \"GST_exempted\",\"ProspectGender\", \"ResidenceAddress1\", \"ResidenceAddress2\", \"ResidenceAddress3\", \"ResidenceAddressTown\", \"ResidenceAddressState\",\"ResidenceAddressPostCode\", \"ResidenceAddressCountry\", \"ResidenceDistrict\", \"ResidenceVillage\", \"ResidenceProvince\", \"OfficeAddress1\", \"OfficeAddress2\", \"OfficeAddress3\",\"OfficeAddressTown\", \"OfficeAddressState\", \"OfficeAddressPostCode\", \"OfficeAddressCountry\", \"OfficeDistrict\", \"OfficeVillage\", \"OfficeProvince\", \"ProspectEmail\",\"ProspectOccupationCode\", \"ExactDuties\", \"ProspectRemark\", \"ClientSegmentation\", \"DateCreated\", \"CreatedBy\", \"DateModified\",\"ModifiedBy\", \"ProspectGroup\", \"ProspectTitle\", \"IDTypeNo\", \"OtherIDType\", \"OtherIDTypeNo\", \"Smoker\", \"AnnualIncome\", \"SourceIncome\", \"BussinessType\", \"Race\", \"MaritalStatus\", \"Religion\", \"Nationality\", \"QQFlag\",\"ProspectProfileChangesCounter\",\"prospect_IsGrouping\", \"CountryOfBirth\", \"NIP\", \"BranchCode\", \"BranchName\", \"KCU\", \"Kanwil\",\"ReferralSource\", \"ReferralName\", \"IDExpiryDate\", \"NPWPNo\") "
-                             "VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\",\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", %@, \"%@\", %@, \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\",\"%@\",\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%s\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", txtFullName.text, strDOB, GSTRigperson, txtRigNO.text, Rigdateoutlet,GSTRigExempted,gender, txtHomeAddr1.text, txtHomeAddr2.text, txtHomeAddr3.text, txtHomeTown.text, SelectedStateCode, txtHomePostCode.text, HomeCountry,txtHomeDistrict.text,txtHomeVillage.text, txtHomeProvince.text, txtOfficeAddr1.text, txtOfficeAddr2.text, txtOfficeAddr3.text, txtOfficeTown.text, SelectedOfficeStateCode, txtOfficePostcode.text, OffCountry, txtOfficeDistrict.text,txtOfficeVillage.text, txtOfficeCountry.text, txtEmail.text, OccupCodeSelected, txtExactDuties.text, txtRemark.text, _outletVIPClass.titleLabel.text,
-                             @"datetime(\"now\", \"+8 hour\")", @"1", @"datetime(\"now\", \"+8 hour\")", @"1", group, TitleCodeSelected , txtIDType.text, othertype, txtOtherIDType.text, ClientSmoker, txtAnnIncome.text, _outletSourceIncome.titleLabel.text, txtBussinessType.text,race,marital,religion,nation,"false",@"1", isGrouping, CountryOfBirth, txtNip.text, outletBranchCode.titleLabel.text, outletBranchName.titleLabel.text, txtKcu.text, txtKanwil.text, outletReferralSource.titleLabel.text, txtReferralName.text, strExpiryDate, txtNPWPNo.text];
+                             "VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\",\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", %@, \"%@\", %@, \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\",\"%@\",\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%s\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", txtFullName.text, newDOB, GSTRigperson, txtRigNO.text, Rigdateoutlet,GSTRigExempted,gender, txtHomeAddr1.text, txtHomeAddr2.text, txtHomeAddr3.text, txtHomeTown.text, SelectedStateCode, txtHomePostCode.text, HomeCountry,txtHomeDistrict.text,txtHomeVillage.text, txtHomeProvince.text, txtOfficeAddr1.text, txtOfficeAddr2.text, txtOfficeAddr3.text, txtOfficeTown.text, SelectedOfficeStateCode, txtOfficePostcode.text, OffCountry, txtOfficeDistrict.text,txtOfficeVillage.text, txtOfficeProvince.text, txtEmail.text, OccupCodeSelected, txtExactDuties.text, txtRemark.text, _outletVIPClass.titleLabel.text,
+                             @"datetime(\"now\", \"+8 hour\")", @"1", @"datetime(\"now\", \"+8 hour\")", @"1", group, TitleCodeSelected , txtIDType.text, othertype, txtOtherIDType.text, ClientSmoker, txtAnnIncome.text, _outletSourceIncome.titleLabel.text, txtBussinessType.text,race,marital,religion,nation,"false",@"1", isGrouping, CountryOfBirth, txtNip.text, outletBranchCode.titleLabel.text, outletBranchName.titleLabel.text, txtKcu.text, txtKanwil.text, outletReferralSource.titleLabel.text, txtReferralName.text, newExpiryDate, txtNPWPNo.text];
                 
             }
 			
@@ -3303,7 +3366,7 @@ bool RegDatehandling;
 				[ClientProfile setObject:@"NO" forKey:@"isNew"];
                 
             } else if(exist) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"All changes will be updated to related SI, CFF and eApp. Do you want to proceed?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"All changes will be updated to related SI, CFF and eApp. Do you want to proceed?" delegate:self cancelButtonTitle:@"Ya" otherButtonTitles:@"Tidak", nil];
                 [alert setTag:1004];
                 [alert show];
                 
@@ -7486,7 +7549,7 @@ bool RegDatehandling;
     if(Update_record == YES) {
 		if (![[ClientProfile objectForKey:@"TabBar"] isEqualToString:@"YES"]) {
             SuccessAlert = [[UIAlertView alloc] initWithTitle:@" "
-                                                      message:@"Changes have been updated successfully." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                                                      message:@"Perubahan berhasil disimpan." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
 		}
 		SuccessAlert.tag = 1;
 		[SuccessAlert show];
@@ -7495,7 +7558,7 @@ bool RegDatehandling;
     } else {
 		if (![[ClientProfile objectForKey:@"TabBar"] isEqualToString:@"YES"]) {
 			SuccessAlert = [[UIAlertView alloc] initWithTitle:@" "
-													  message:@"A new client record successfully inserted." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+													  message:@"Data Nasabah Baru Berhasil Ditambahkan" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
 		}
 		SuccessAlert.tag = 1;
 		[SuccessAlert show];
@@ -7543,10 +7606,14 @@ bool RegDatehandling;
     }*/
     outletBranchCode.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     outletBranchName.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [outletBranchCode setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",branchCode]forState:UIControlStateNormal];
-    [outletBranchName setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",branchName]forState:UIControlStateNormal];
+    [outletBranchCode setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",branchCode]forState:UIControlStateNormal];
+    [outletBranchName setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",branchName]forState:UIControlStateNormal];
+    [outletBranchCode setBackgroundColor:[UIColor clearColor]];
+    [outletBranchName setBackgroundColor:[UIColor clearColor    ]];
     [txtKcu setText:branchStatus];
     [_branchInfoPopover dismissPopoverAnimated:YES];
+    
+    
 }
 
 -(void)selectedVIPClass:(NSString *)VIPClass{
@@ -7557,6 +7624,7 @@ bool RegDatehandling;
         _outletVIPClass.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
     [_outletVIPClass setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",VIPClass]forState:UIControlStateNormal];
+    [_outletVIPClass setBackgroundColor:[UIColor clearColor]];
     [_vipClassPopover dismissPopoverAnimated:YES];
 }
 
@@ -7569,6 +7637,7 @@ bool RegDatehandling;
         outletReferralSource.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
     [outletReferralSource setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",referralSource]forState:UIControlStateNormal];
+    [outletReferralSource setBackgroundColor:[UIColor clearColor]];
     [_referralSourcePopover dismissPopoverAnimated:YES];
 }
 
@@ -7580,6 +7649,7 @@ bool RegDatehandling;
         _outletSourceIncome.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
     [_outletSourceIncome setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",sourceIncome]forState:UIControlStateNormal];
+    [_outletSourceIncome setBackgroundColor:[UIColor clearColor]];
     [_sourceIncomePopover dismissPopoverAnimated:YES];
 }
 
@@ -7618,6 +7688,7 @@ bool RegDatehandling;
     }
     outletNationality.titleLabel.text = selectedNationality;
     [outletNationality setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",selectedNationality]forState:UIControlStateNormal];
+    [outletNationality setBackgroundColor:[UIColor clearColor]];
     [self.nationalityPopover dismissPopoverAnimated:YES];
 }
 
@@ -7683,13 +7754,23 @@ bool RegDatehandling;
             outletDOB.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
             //[outletDOB setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", strDate] forState:UIControlStateNormal];
             [outletDOB setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", clientDateString] forState:UIControlStateNormal];
+            [outletDOB setBackgroundColor:[UIColor clearColor]];
         }
 	}
 
     if (isExpiryDate) {
-        outletDOB.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        //[outletExpiryDate setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", strDate] forState:UIControlStateNormal];
-        [outletExpiryDate setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", clientDateString] forState:UIControlStateNormal];
+        if ([d compare:d2] == NSOrderedDescending){
+            NSString *validationTanggalLahirFuture=@"Tanggal kadaluarsa tidak dapat lebih kecil dari tanggal hari ini";
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
+                                                            message:validationTanggalLahirFuture delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil];
+            [alert show];
+        }
+        else{
+            outletDOB.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+            //[outletExpiryDate setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", strDate] forState:UIControlStateNormal];
+            [outletExpiryDate setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", clientDateString] forState:UIControlStateNormal];
+            [outletExpiryDate setBackgroundColor:[UIColor clearColor]];
+        }
     }
 
     /*if([otherIDType_trim isEqualToString:@"EXPECTED DELIVERY DATE"] && [dateString isEqualToString:strDate]) {
@@ -8392,6 +8473,7 @@ bool RegDatehandling;
         txtOtherIDType.enabled = YES;
     }
     [OtherIDType setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",selectedIDType]forState:UIControlStateNormal];
+    [OtherIDType setBackgroundColor:[UIColor clearColor]];
     [self.IDTypePickerPopover dismissPopoverAnimated:YES];
 }
 
@@ -8433,6 +8515,7 @@ bool RegDatehandling;
 - (void)OccupDescSelected:(NSString *)color
 {
     [outletOccup setTitle:[[NSString stringWithFormat:@"  "] stringByAppendingFormat:@"%@", color]forState:UIControlStateNormal];
+    [outletOccup setBackgroundColor:[UIColor clearColor]];
     [self.OccupationListPopover dismissPopoverAnimated:YES];
     [self.view endEditing:YES];
     [self resignFirstResponder];
