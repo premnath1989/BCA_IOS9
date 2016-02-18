@@ -2517,8 +2517,11 @@ BOOL isFirstLoad;
             [self loadLAPage];
             selectedPath = indexPath;
             previousPath = selectedPath;
-            blocked = NO;			
-        } else if (indexPath.row == SIMENU_SECOND_LIFE_ASSURED) {
+            //blocked = NO;
+        }
+        
+    else if (indexPath.row == SIMENU_SECOND_LIFE_ASSURED)
+    {
             if ([getOccpCode isEqualToString:@"OCC01975"]) {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"There is no existing plan which can be offered to this occupation."
                                                                delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
