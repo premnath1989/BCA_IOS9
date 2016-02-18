@@ -32,6 +32,7 @@
 @synthesize datePopover = _datePopover;
 @synthesize DatePicker = _DatePicker;
 @synthesize previousElementName, elementName, getLatest;
+@synthesize outletChgPassword;
 
 
 id temp;
@@ -40,7 +41,7 @@ id temp;
 {
     [super viewDidLoad];
     
-    self.view.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg10.jpg"]];
+//    self.view.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg10.jpg"]];
     
     AppDelegate *zzz= (AppDelegate*)[[UIApplication sharedApplication] delegate ];
     self.indexNo = zzz.indexNo;
@@ -50,10 +51,12 @@ id temp;
     NSString *docsDir = [dirPaths objectAtIndex:0];
     databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
     
-    //NSLog(@"receive User:%@",[self.idRequest description]);
-    //NSLog(@"receive Index:%d",self.indexNo);
+    outletSave.layer.cornerRadius = 10.0f;
+    outletSave.clipsToBounds = YES;
     
-    outletSave.hidden = YES;
+    outletChgPassword.layer.cornerRadius = 10.0f;
+    outletChgPassword.clipsToBounds = YES;
+    
     lblAgentLoginID.text = [NSString stringWithFormat:@"%@",[self.idRequest description]];
 	txtAddr1.delegate = self;
 	txtAddr2.delegate = self;
@@ -153,12 +156,11 @@ id temp;
 - (IBAction)ChangePassword:(id)sender
 {
     ChangePassword * UserProfileView = [self.storyboard instantiateViewControllerWithIdentifier:@"ChangePwd"];
-    UserProfileView.modalPresentationStyle = UIModalPresentationPageSheet;
-    UserProfileView.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    UserProfileView.modalPresentationStyle = UIModalPresentationFormSheet;
+    UserProfileView.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    UserProfileView.preferredContentSize = CGSizeMake(600, 500);
+    [UserProfileView setAgentCode:@"AgentCode"];
     [self presentViewController:UserProfileView animated:YES completion:nil];
-    
-    UserProfileView.view.superview.frame = CGRectMake(150, 50, 700, 748);
-    UserProfileView = nil;
 }
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField

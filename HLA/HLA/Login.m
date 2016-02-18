@@ -34,7 +34,6 @@
 #import "DDXMLDocument.h"
 #import "DDXMLElementAdditions.h"
 #import "DDXMLNode.h"
-#import "ChangePassword.h"
 
 @interface Login ()
 
@@ -69,6 +68,7 @@ NSString *ProceedStatus = @"";
     
     [self initLoadingSpinner];
     
+    UserProfileView = [self.storyboard instantiateViewControllerWithIdentifier:@"ChangePwd"];
     firstLogin = false;
     if([loginDB AgentRecord] == AGENT_IS_NOT_FOUND){
         [self FirstTimeAlert:@"Congratulation"];
@@ -205,14 +205,11 @@ static NSString *labelVers;
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
     
     if(firstLogin){
-        ChangePassword * UserProfileView = [self.storyboard instantiateViewControllerWithIdentifier:@"ChangePwd"];
-        UserProfileView.modalPresentationStyle = UIModalPresentationPageSheet;
-        UserProfileView.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-        [UserProfileView setDelegate:self];
+        UserProfileView.modalPresentationStyle = UIModalPresentationFormSheet;
+        UserProfileView.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+        [UserProfileView setDelegate:self firstLogin:firstLogin];
+        UserProfileView.preferredContentSize = CGSizeMake(600, 500);
         [self presentViewController:UserProfileView animated:YES completion:nil];
-        
-        UserProfileView.view.superview.frame = CGRectMake(150, 50, 700, 748);
-        UserProfileView = nil;
     }
 }
 
@@ -260,8 +257,6 @@ static NSString *labelVers;
          * is it AgentWS_ReceiveFirstLoginResponse
          ****/
         else if([bodyPart isKindOfClass:[AgentWS_ReceiveFirstLoginResponse class]]) {
-            UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Success!"message:@"Please Login using your new password" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [alert show];
             firstLogin = false;
             
             AgentWS_ReceiveFirstLoginResponse* rateResponse = bodyPart;
@@ -273,13 +268,16 @@ static NSString *labelVers;
             NSMutableDictionary *returnDict = [[NSMutableDictionary alloc]init];
             [self parseXML:root dictBuff:returnDict];
             int result = [loginDB insertAgentProfile:returnDict];
-            NSLog(@"%d",result);
+            if(result == TABLE_INSERTION_SUCCESS){
+                [UserProfileView gotoCarousel];
+            }
         }
         
         /****
-         * is it AgentWS_SendForgotPasswordResponse
+         * is it AgentWS_ValidateLoginResponse
          ****/
         else if([bodyPart isKindOfClass:[AgentWS_ValidateLoginResponse class]]) {
+            
             [self loginSuccess];
         }
     }
@@ -472,17 +470,18 @@ static NSString *labelVers;
             //offline login
              [self doOfflineLoginCheck];
         }
-    }else if(firstLogin){
-        ChangePassword * UserProfileView = [self.storyboard instantiateViewControllerWithIdentifier:@"ChangePwd"];
-        UserProfileView.modalPresentationStyle = UIModalPresentationPageSheet;
-        UserProfileView.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-        [UserProfileView setDelegate:self];
-        [self presentViewController:UserProfileView animated:YES completion:nil];
-        
-        UserProfileView.view.superview.frame = CGRectMake(150, 50, 700, 748);
-        UserProfileView = nil;
     }
-        
+//    else if(firstLogin){
+//        ChangePassword * UserProfileView = [self.storyboard instantiateViewControllerWithIdentifier:@"ChangePwd"];
+//        UserProfileView.modalPresentationStyle = UIModalPresentationPageSheet;
+//        UserProfileView.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+//        [UserProfileView setDelegate:self];
+//        [self presentViewController:UserProfileView animated:YES completion:nil];
+//        
+//        UserProfileView.view.superview.frame = CGRectMake(150, 50, 700, 748);
+//        UserProfileView = nil;
+//    }
+    
 //    if (![self IsConnected]) {
 //        // not connected
 //        NSLog(@"got");

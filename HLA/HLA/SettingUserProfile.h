@@ -41,6 +41,7 @@
 @property (nonatomic, copy) NSString *registerNo;
 @property (nonatomic, copy) NSString *email;
 @property (weak, nonatomic) IBOutlet UIButton *outletSave;
+@property (weak, nonatomic) IBOutlet UIButton *outletChgPassword;
 
 @property(strong) NSString *previousElementName;
 @property(strong) NSString *elementName;

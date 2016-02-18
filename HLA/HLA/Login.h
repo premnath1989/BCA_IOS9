@@ -12,6 +12,7 @@
 #import "Reachability.h"
 #import "LoginDBManagement.h"
 #import "AgentWS.h"
+#import "ChangePassword.h"
 
 @protocol LoginDelegate
 - (void)Dismiss: (NSString *)ViewToBePresented;
@@ -80,6 +81,7 @@ static NSString* DATE_FORMAT = @"yyyy-MM-dd";
     
     BOOL showLogout;
     UIActivityIndicatorView *indicator;
+    ChangePassword * UserProfileView;
 }
 
 

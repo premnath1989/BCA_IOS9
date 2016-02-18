@@ -382,7 +382,7 @@
     if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
     {
         sqlite3_exec(contactDB, [sql UTF8String], NULL, NULL, &error);
-            if (error == nil) {
+            if (error == NULL || (error[0] == '\0')) {
                 insertProc = TABLE_INSERTION_SUCCESS;
             }
         
@@ -398,7 +398,7 @@
     NSString *nsdate = @"";
     if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
     {
-        NSString *querySQL = [NSString stringWithFormat: @"SELECT LastLogonDate FROM Agent_Profile WHERE AgentCode=1024"];
+        NSString *querySQL = [NSString stringWithFormat: @"SELECT LastLogonDate FROM Agent_Profile"];
         
         if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK){
             if (sqlite3_step(statement) == SQLITE_ROW) {

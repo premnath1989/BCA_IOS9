@@ -10,6 +10,8 @@
 #import "Login.h"
 #import "AppDelegate.h"
 #import "WebServiceUtilities.h"
+#import "CarouselViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface ChangePassword ()
 
@@ -25,6 +27,10 @@
 @synthesize userID;
 @synthesize PasswordTipPopover = _PasswordTipPopover;
 @synthesize PasswordTips = _PasswordTips;
+@synthesize txtAgentCode;
+@synthesize btnBarCancel;
+@synthesize btnBarDone;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -35,8 +41,27 @@
     return self;
 }
 
-- (void)setDelegate:(id)delegate{
+- (void)setDelegate:(id)delegate firstLogin:(BOOL)firstLogin{
     loginDelegate = delegate;
+    flagFirstLogin = firstLogin;
+}
+
+- (void)setAgentCode:(NSString *)agentCode{
+    strAgentCode = agentCode;
+}
+
+
+- (void)gotoCarousel{
+    CarouselViewController *carouselMenu = [self.storyboard instantiateViewControllerWithIdentifier:@"carouselView"];
+    carouselMenu.getInternet = @"No";
+    [self presentViewController:carouselMenu animated:YES completion:Nil];
+}
+- (void) initLoadingSpinner{
+    indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    indicator.frame = CGRectMake(0.0, 0.0, 80.0, 80.0);
+    indicator.center = self.view.center;
+    [self.view addSubview:indicator];
+    [indicator bringSubviewToFront:self.view];
 }
 
 - (void)viewDidLoad
@@ -44,17 +69,28 @@
     [super viewDidLoad];
     NSLog(@"Receive userID:%d",self.userID);
     
-    self.view.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg10.jpg"]];
-    
     NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docsDir = [dirPaths objectAtIndex:0];
     databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
     
+    if(flagFirstLogin){
+        btnBarDone.enabled = NO;
+        btnBarCancel.enabled = NO;
+    }else{
+        txtAgentCode.text = strAgentCode;
+        txtAgentCode.textColor = [UIColor lightGrayColor];
+        txtAgentCode.enabled = NO;
+    }
+        
     AppDelegate *zzz= (AppDelegate*)[[UIApplication sharedApplication] delegate ];
     
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = TRUE;
+    
     self.userID = zzz.indexNo;
-    [self validateExistingPwd];
-//    outletSave.hidden = YES;
+    
+    outletSave.layer.cornerRadius = 10.0f;
+    outletSave.clipsToBounds = YES;
+    
     lblMsg.hidden = TRUE;
     outletTips.hidden = TRUE;
     UITapGestureRecognizer *gestureQOne = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(DisplayTips)];
@@ -208,42 +244,44 @@
 - (IBAction)btnChange:(id)sender {
     bool valid;
     
-    /*
-     if (txtOldPwd.text.length <= 0 || txtNewPwd.text.length <= 0 || txtConfirmPwd.text.length <= 0) {
-     
-     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Please fill up all field!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-     [alert show];
-     
-     }
-     */
-    if ([txtOldPwd.text stringByReplacingOccurrencesOfString:@" " withString:@"" ].length <= 0 ) {
+    if ([txtAgentCode.text stringByReplacingOccurrencesOfString:@" " withString:@"" ].length <= 0 ) {
         [self hideKeyboard];
         valid = FALSE;
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Old password is required." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Agent Code harap di isi" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
         [txtOldPwd becomeFirstResponder];
         
     }
-    else {
-        if ([txtNewPwd.text stringByReplacingOccurrencesOfString:@" " withString:@""  ].length <= 0) {
-            valid = FALSE;
+    else{
+        if ([txtOldPwd.text stringByReplacingOccurrencesOfString:@" " withString:@"" ].length <= 0 ) {
             [self hideKeyboard];
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"New password is required." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            valid = FALSE;
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Password lama harap di isi" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [alert show];
-            [txtNewPwd becomeFirstResponder];
+            [txtOldPwd becomeFirstResponder];
+            
         }
         else {
-            if ([txtConfirmPwd.text stringByReplacingOccurrencesOfString:@" " withString:@""  ].length <= 0) {
+            if ([txtNewPwd.text stringByReplacingOccurrencesOfString:@" " withString:@""  ].length <= 0) {
                 valid = FALSE;
                 [self hideKeyboard];
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Confirm password is required." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Password baru harap di isi" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [alert show];
-                [txtConfirmPwd becomeFirstResponder];
-                
+                [txtNewPwd becomeFirstResponder];
             }
             else {
-                valid = TRUE;
-                
+                if ([txtConfirmPwd.text stringByReplacingOccurrencesOfString:@" " withString:@""  ].length <= 0) {
+                    valid = FALSE;
+                    [self hideKeyboard];
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Confirm password harap di isi" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                    [alert show];
+                    [txtConfirmPwd becomeFirstResponder];
+                    
+                }
+                else {
+                    valid = TRUE;
+                    
+                }
             }
         }
     }
@@ -252,20 +290,19 @@
         
         if (txtNewPwd.text.length < 6 || txtNewPwd.text.length > 20 ) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
-                                                            message:@"New Password must be at least 6 characters long." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                                                            message:@"Password Baru paling pendek 6 karakter" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [alert show];
             [txtNewPwd becomeFirstResponder];
-            
         }
         else {
             if ([txtNewPwd.text isEqualToString:txtConfirmPwd.text]) {
                 
                 WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
-                [webservice FirstTimeLogin:loginDelegate AgentCode:@"1024" password:txtOldPwd.text newPassword:txtNewPwd.text UUID:[[[UIDevice currentDevice] identifierForVendor] UUIDString]];
+                [webservice FirstTimeLogin:loginDelegate AgentCode:txtAgentCode.text password:txtOldPwd.text newPassword:txtNewPwd.text UUID:[[[UIDevice currentDevice] identifierForVendor] UUIDString]];
 //                [self validatePassword];
             }
             else {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"New Password did not match with confirmed password." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Password Baru tidak sesuai dengan Confirm Password" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [alert show];
                 txtOldPwd.text = @"";
                 txtNewPwd.text = @"";

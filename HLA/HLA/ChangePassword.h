@@ -16,14 +16,20 @@
     UIPopoverController *_PasswordTipPopover;
     PasswordTips *_PasswordTips;
     id loginDelegate;
+    UIActivityIndicatorView *indicator;
+    BOOL flagFirstLogin;
+    NSString *strAgentCode;
 }
 
 @property (nonatomic, assign,readwrite) int userID;
 @property (nonatomic, retain) UIPopoverController *PasswordTipPopover;
 @property (nonatomic, retain) PasswordTips *PasswordTips;
+@property (weak, nonatomic) IBOutlet UITextField *txtAgentCode;
 @property (weak, nonatomic) IBOutlet UITextField *txtOldPwd;
 @property (weak, nonatomic) IBOutlet UITextField *txtNewPwd;
 @property (weak, nonatomic) IBOutlet UITextField *txtConfirmPwd;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *btnBarCancel;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *btnBarDone;
 - (IBAction)btnChange:(id)sender;
 - (IBAction)btnCancel:(id)sender;
 - (IBAction)btnDone:(id)sender;
@@ -35,7 +41,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *outletTips;
 @property (weak, nonatomic) IBOutlet UILabel *lblTips;
 
-- (void)setDelegate:(id)delegate;
+- (void)setDelegate:(id)delegate firstLogin:(BOOL)firstLogin;
+- (void)setAgentCode:(NSString *)agentCode;
+- (void)gotoCarousel;
 
 
 - (IBAction)btnTips:(id)sender;
