@@ -25,6 +25,7 @@
 #import "VIPClass.h"
 #import "ReferralSource.h"
 #import "EditProspect.h"
+#import "ModelAgentProfile.h"
 
 @class DataTable,DBController;
 @protocol ProspectViewControllerDelegate
@@ -46,6 +47,7 @@
     Nationality *_nationalityList2;
 
     //added  by faiz
+    ModelAgentProfile* modelAgentProfil;
     SourceIncome *_sourceIncome;
     BranchInfo *_branchInfo;
     VIPClass *_vipClass;
@@ -200,6 +202,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtBranchName;
 @property (weak, nonatomic) IBOutlet UITextField *txtKanwil;
 @property (weak, nonatomic) IBOutlet UITextField *txtKcu;
+@property (weak, nonatomic) IBOutlet UITextField *txtChannelName;
 @property (weak, nonatomic) IBOutlet UITextField *txtReferralName;
 @property (weak, nonatomic) IBOutlet UITextField *txtHomeVillage;
 @property (weak, nonatomic) IBOutlet UITextField *txtHomeDistrict;

@@ -352,6 +352,7 @@
 		439985BB1C62F7890003B037 /* SourceIncome.m in Sources */ = {isa = PBXBuildFile; fileRef = 439985BA1C62F7890003B037 /* SourceIncome.m */; };
 		439985BE1C62F8A70003B037 /* ModelPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = 439985BD1C62F8A70003B037 /* ModelPopover.m */; };
 		439985C11C630C4D0003B037 /* VIPClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 439985C01C630C4D0003B037 /* VIPClass.m */; };
+		43DA4BD91C76A59A0038C92C /* ModelAgentProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DA4BD81C76A59A0038C92C /* ModelAgentProfile.m */; };
 		43FD4A041C620F3E00227F8F /* ModelVIPClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 43FD4A031C620F3E00227F8F /* ModelVIPClass.m */; };
 		5D3967981C02C89700464BCC /* HLAWPStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D3967971C02C89700464BCC /* HLAWPStoryboard.storyboard */; };
 		5D39679A1C02CA9000464BCC /* ClientProfileStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D3967991C02CA9000464BCC /* ClientProfileStoryboard.storyboard */; };
@@ -1350,6 +1351,8 @@
 		439985BD1C62F8A70003B037 /* ModelPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelPopover.m; sourceTree = "<group>"; };
 		439985BF1C630C4D0003B037 /* VIPClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIPClass.h; sourceTree = "<group>"; };
 		439985C01C630C4D0003B037 /* VIPClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VIPClass.m; sourceTree = "<group>"; };
+		43DA4BD71C76A59A0038C92C /* ModelAgentProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelAgentProfile.h; sourceTree = "<group>"; };
+		43DA4BD81C76A59A0038C92C /* ModelAgentProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelAgentProfile.m; sourceTree = "<group>"; };
 		43FD4A021C620F3E00227F8F /* ModelVIPClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelVIPClass.h; sourceTree = "<group>"; };
 		43FD4A031C620F3E00227F8F /* ModelVIPClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelVIPClass.m; sourceTree = "<group>"; };
 		5D3967971C02C89700464BCC /* HLAWPStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HLAWPStoryboard.storyboard; sourceTree = "<group>"; };
@@ -3326,6 +3329,8 @@
 				43FD4A031C620F3E00227F8F /* ModelVIPClass.m */,
 				439985BC1C62F8A70003B037 /* ModelPopover.h */,
 				439985BD1C62F8A70003B037 /* ModelPopover.m */,
+				43DA4BD71C76A59A0038C92C /* ModelAgentProfile.h */,
+				43DA4BD81C76A59A0038C92C /* ModelAgentProfile.m */,
 			);
 			name = "HLADB Model";
 			sourceTree = "<group>";
@@ -5479,6 +5484,7 @@
 				4239AEF21946DAE200BD6F53 /* SnapGen.m in Sources */,
 				428F84A5197831450016B7E8 /* GDataXMLNode.m in Sources */,
 				2900CABC19931BBC0003B4F7 /* eAppStatusListforSubmitted.m in Sources */,
+				43DA4BD91C76A59A0038C92C /* ModelAgentProfile.m in Sources */,
 				6A18E30319E7C7620019F5C4 /* MyDocumentType.m in Sources */,
 				29071F071A256811002F7FB1 /* RIButtonItem.m in Sources */,
 				29071F081A256811002F7FB1 /* UIAlertView+Blocks.m in Sources */,

@@ -176,7 +176,7 @@
     NSMutableArray* arrayStatusCabang=[[NSMutableArray alloc] init];
     NSMutableArray* arrayStatus=[[NSMutableArray alloc] init];
     
-    FMResultSet *s = [database executeQuery:@"SELECT * FROM Data_Cabang WHERE status = 'A'"];
+    FMResultSet *s = [database executeQuery:@"SELECT dc.* FROM Data_Cabang dc, Agent_profile ap WHERE dc.status = 'A' and ap.Kanwil = dc.Kanwil"];
     while ([s next]) {
         NSString *occpCode = [NSString stringWithFormat:@"%@",[s stringForColumn:@"KodeCabang"]];
         NSString *occpeDesc = [NSString stringWithFormat:@"%@",[s stringForColumn:@"NamaCabang"]];

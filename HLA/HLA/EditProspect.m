@@ -62,6 +62,7 @@ int name_repeat;
 	NSString *SameID_type;
     UIColor *borderColor;
 	
+    NSDictionary* dictAgentData;
 }
 @end
 
@@ -345,6 +346,11 @@ NSMutableArray *DelGroupArr;
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(SaveEdit2) name:@"EditProfile_validate" object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveToDB) name:@"EditProfile_Save" object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(check_edited) name:@"CheckEdited" object:nil];
+    
+    modelAgentProfil=[[ModelAgentProfile alloc]init];
+    dictAgentData=[[NSDictionary alloc]initWithDictionary:[modelAgentProfil getAgentData]];
+    [_txtChannelName setText:[dictAgentData valueForKey:@"ChannelName"]];
+    [txtKanwil setText:[dictAgentData valueForKey:@"Kanwil"]];
 }
 
 /*code added by faiz*/
@@ -1926,8 +1932,6 @@ NSMutableArray *DelGroupArr;
     sizeOfContent = wd+ht;
     
     _scrollViewEditProspect.contentSize = CGSizeMake(900, 2000);
-    [self setTextfieldBorder];
-    [self setButtonImageAndTextAlignment];
     /*end of code added by faiz*/
 }
 
@@ -2042,9 +2046,9 @@ NSMutableArray *DelGroupArr;
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    NSLog(@"rescountry %@",pp.ResidenceAddressCountry);
-    NSLog(@"officecountry %@",pp.OfficeAddressCountry);
-	
+    [self setTextfieldBorder];
+    [self setButtonImageAndTextAlignment];
+
     //GET THE OCCUPATION CODE
 	[self get_unemploy_initial];
     
@@ -3076,7 +3080,6 @@ NSMutableArray *DelGroupArr;
     [_outletBranchCode setTitle:pp.BranchCode forState:UIControlStateNormal];
     [_outletBranchName setTitle:pp.BranchName forState:UIControlStateNormal];
     [outletReferralSource setTitle:pp.ReferralSource forState:UIControlStateNormal];
-    txtKanwil.text=pp.Kanwil;
     txtKcu.text=pp.KCU;
     txtReferralName.text=pp.ReferralName;
     txtNPWPNo.text=pp.NPWPNo;
