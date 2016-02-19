@@ -395,7 +395,9 @@ const int numberOfModule = 7;
 
 - (void)ButtonInfoAgent:(id)sender;
 {
-    SettingUserProfile * UserProfileView = [self.storyboard instantiateViewControllerWithIdentifier:@"SettingUserProfile"];
+    
+    UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:Nil];
+    SettingUserProfile * UserProfileView = [mainStoryBoard instantiateViewControllerWithIdentifier:@"SettingUserProfile"];
     UserProfileView.modalPresentationStyle = UIModalPresentationPageSheet;
     UserProfileView.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     UserProfileView.indexNo = self.indexNo;
@@ -407,8 +409,7 @@ const int numberOfModule = 7;
     UserProfileView = nil;
     
     
-    
-    
+
 }
 
 

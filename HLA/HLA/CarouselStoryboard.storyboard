@@ -80,6 +80,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BxD-gG-EEs">
                                         <rect key="frame" x="924" y="642" width="60" height="40"/>
                                         <state key="normal" backgroundImage="Profile.png"/>
+                                        <connections>
+                                            <action selector="ButtonInfoAgent:" destination="CPf-MS-UId" eventType="touchUpInside" id="gr3-og-dVI"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sbm-kK-Dqc">
                                         <rect key="frame" x="992" y="-60" width="52" height="748"/>
