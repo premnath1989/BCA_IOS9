@@ -239,82 +239,6 @@
     return FirstLogin;
 }
 
-//- (int) InsertAgentProfile:(NSString *) urlStr
-//{
-//    NSArray *urlArr = [urlStr componentsSeparatedByString:@"|"];
-//    int insertAgentProfile = TABLE_INSERTION_FAILED;
-//    if (urlArr.count < 1) {
-//        return 0;//should not reach here
-//    }
-//    
-//    NSLog(@"parseURL: %@", urlStr);
-//    
-//    NSString* agentCode_1 =  [urlArr objectAtIndex:1]; //[queryStringDict objectForKey:@"agentCode"];
-//    NSString* agentName_1 = [urlArr objectAtIndex:2];
-//    NSString* agentType_1 = [urlArr objectAtIndex:3];
-//    NSString* immediateLeaderCode_1 = [urlArr objectAtIndex:4];
-//    NSString* immediateLeaderName_1 = [urlArr objectAtIndex:5];
-//    NSString* BusinessRegNumber_1 = [urlArr objectAtIndex:6];
-//    NSString* agentEmail_1 = [urlArr objectAtIndex:7];
-//    NSString* agentLoginId_1 = [urlArr objectAtIndex:8];
-//    NSString* agentIcNo_1 = [urlArr objectAtIndex:9];
-//    NSString* agentContractDate_1 = [urlArr objectAtIndex:10];
-//    NSString* agentAddr1_1 = [urlArr objectAtIndex:11];
-//    NSString* agentAddr2_1 = [urlArr objectAtIndex:12];
-//    NSString* agentAddr3_1 = [urlArr objectAtIndex:13];
-//    NSString* agentAddrPostcode_1 = [urlArr objectAtIndex:14];
-//    NSString* agentContactNumber_1 = [urlArr objectAtIndex:15];
-//    NSString* agentPassword_1 = [urlArr objectAtIndex:16];
-//    NSString* agentStatus_1 = [urlArr objectAtIndex:17];
-//    NSString* channel_1 = [urlArr objectAtIndex:18];
-//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//    [defaults setObject:agentCode_1 forKey:AGENT_KEY_CODE];
-//    [defaults synchronize];
-//    
-//    sqlite3_stmt *statement;
-//    if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
-//    {
-//        NSString *querySQL;
-//
-//        NSString *CheckSql = [NSString stringWithFormat:
-//                              @"select * FROM agent_profile"];
-//
-//
-//        FMDatabase *db = [FMDatabase databaseWithPath:databasePath];
-//        [db open];
-//
-//        FMResultSet *results;
-//        results = [db executeQuery:CheckSql];
-//
-//        while ([results next]) {
-//            [db executeUpdate:@"DELETE FROM agent_profile"];
-//        }
-//        [db close];
-//
-//        querySQL = [NSString stringWithFormat:
-//                    @"insert into Agent_profile (agentCode, AgentName, AgentType, AgentContactNo, ImmediateLeaderCode, ImmediateLeaderName, BusinessRegNumber, AgentEmail, AgentLoginID, AgentICNo, "
-//                    "AgentContractDate, AgentAddr1, AgentAddr2, AgentAddr3, AgentAddr4, AgentPortalLoginID, AgentPortalPassword, AgentContactNumber, AgentPassword, AgentStatus, Channel, AgentAddrPostcode, agentNRIC, LastLogonDate) VALUES "
-//                    "('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@', '%@', '%@', %@) ",
-//                    agentCode_1, agentName_1, agentType_1, agentContactNumber_1,immediateLeaderCode_1, immediateLeaderName_1,BusinessRegNumber_1, agentEmail_1, agentLoginId_1, agentIcNo_1, agentContractDate_1, agentAddr1_1, agentAddr2_1, agentAddr3_1, @"", agentLoginId_1, agentPassword_1, agentContactNumber_1, agentPassword_1, agentStatus_1, channel_1, agentAddrPostcode_1, agentIcNo_1, @"datetime(\"now\", \"+8 hour\")" ];
-//
-//
-//        if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK){
-//            if (sqlite3_step(statement) == SQLITE_DONE){
-//                insertAgentProfile = TABLE_INSERTION_SUCCESS;
-//            }
-//            else{
-//                NSLog(@"%@",[[NSString alloc] initWithUTF8String:sqlite3_errmsg(contactDB)]) ;
-//            }
-//            sqlite3_finalize(statement);
-//        }
-//        else{
-//            NSLog(@"%@",[[NSString alloc] initWithUTF8String:sqlite3_errmsg(contactDB)]) ;
-//        }
-//        
-//        sqlite3_close(contactDB);
-//    }
-//    return insertAgentProfile;
-//}
 
 - (void) updateLoginDate:(int)indexNo{
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -411,6 +335,75 @@
         sqlite3_close(contactDB);
     }
     return nsdate;
+}
+
+- (NSMutableArray *) columnNames{
+    sqlite3_stmt *statement;
+    NSMutableArray *columns = [NSMutableArray array];
+    if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
+    {
+        int rc = sqlite3_prepare_v2(contactDB, "pragma table_info ('Agent_Profile')", -1, &statement, NULL);
+        
+        if (rc==SQLITE_OK)
+        {
+            //will continue to go down the rows (columns in your table) till there are no more
+            while(sqlite3_step(statement) == SQLITE_ROW)
+            {
+                NSString *columnName = [[NSString alloc]
+                                   initWithUTF8String:
+                                   (const char *) sqlite3_column_text(statement, 1)];
+                [columns addObject:columnName];
+                //do something with colName because it contains the column's name
+            }
+        }
+        sqlite3_close(contactDB);
+    }
+    return columns;
+}
+
+-(NSMutableDictionary *)getAgentDetails
+{
+    
+    sqlite3_stmt *statement;
+    NSMutableDictionary *agentDetails = [[NSMutableDictionary alloc]init];
+    NSMutableArray *columnArray = [self columnNames];
+    
+    NSString *sql = @"";
+    for(NSString *keys in columnArray){
+        NSString *key = [NSString stringWithFormat:@"%@,",keys];
+        sql = [sql stringByAppendingString:key];
+    }
+    sql = [sql substringToIndex:[sql length]-1];
+    
+    NSString *querySQL = [NSString stringWithFormat: @"SELECT %@ FROM Agent_Profile", sql];
+    NSLog(@"%@",querySQL);
+
+    if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
+    {
+        int rc = sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL);
+        
+        if (rc==SQLITE_OK)
+        {
+            //will continue to go down the rows (columns in your table) till there are no more
+            while(sqlite3_step(statement) == SQLITE_ROW)
+            {
+                for(int index = 0; index < columnArray.count ; index++){
+                    NSString *value = @"";
+                    if((const char *) sqlite3_column_text(statement, index) != NULL){
+                        value = [[NSString alloc]
+                                        initWithUTF8String:
+                                        (const char *) sqlite3_column_text(statement, index)];
+                    }
+                    
+                    [agentDetails setValue:value forKey:[columnArray objectAtIndex:index]];
+                    //do something with colName because it contains the column's name
+                }
+            }
+        }
+        sqlite3_close(contactDB);
+    }
+    
+    return agentDetails;
     
 }
 

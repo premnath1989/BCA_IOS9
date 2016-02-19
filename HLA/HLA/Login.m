@@ -113,8 +113,6 @@ NSString *ProceedStatus = @"";
     StartDate = Nil;
     gregorianCalendar = Nil;
     components = Nil;
-    
-    
 }
 
 - (void) initLoadingSpinner{
@@ -206,7 +204,7 @@ static NSString *labelVers;
     
     if(firstLogin){
         UserProfileView.modalPresentationStyle = UIModalPresentationFormSheet;
-        UserProfileView.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+        UserProfileView.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
         [UserProfileView setDelegate:self firstLogin:firstLogin];
         UserProfileView.preferredContentSize = CGSizeMake(600, 500);
         [self presentViewController:UserProfileView animated:YES completion:nil];
@@ -277,7 +275,6 @@ static NSString *labelVers;
          * is it AgentWS_ValidateLoginResponse
          ****/
         else if([bodyPart isKindOfClass:[AgentWS_ValidateLoginResponse class]]) {
-            
             [self loginSuccess];
         }
     }
@@ -310,7 +307,7 @@ static NSString *labelVers;
     
     if (txtUsername.text.length <= 0) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
-                                                        message:@"User ID is required" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil ];
+                                                        message:@"Kode Agen harap di isi" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil ];
         [alert show];
         alert = Nil;
     }
@@ -352,12 +349,12 @@ static NSString *labelVers;
     
     if (txtUsername.text.length <= 0 || txtPassword.text.length <=0 ) {
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Username and password are required" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Kode Agen dan password harap di isi" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         alert.tag = USERNAME_PASSWORD_VALIDATION;
         [alert show];
     }else{
         if(firstLogin && ![self connected]){
-            [self FirstTimeAlert:@"Information"];
+            [self FirstTimeAlert:@"Informasi"];
         }else{
             [self loginAction];
         }
@@ -365,7 +362,7 @@ static NSString *labelVers;
 }
 
 - (void)FirstTimeAlert:(NSString *)title{
-    UIAlertView* alert = [[UIAlertView alloc]initWithTitle:title message:[NSString stringWithFormat:@"Please make sure you are connected to the internet for first time login"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    UIAlertView* alert = [[UIAlertView alloc]initWithTitle:title message:[NSString stringWithFormat:@"Pastikan perangkat terhubung ke internet untuk melakukan login perdana"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     [alert show];
 }
 
@@ -426,14 +423,14 @@ static NSString *labelVers;
     switch ([loginDB AgentStatus:txtUsername.text]) {
         case AGENT_IS_INACTIVE:
         {
-            UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Your Agent Status is inactive"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Status Agen adalah inactive"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [alert show];
             validFlag = false;
             break;
         }
         case AGENT_IS_NOT_FOUND:
         {
-            UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Your Agent Code is wrong"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Kode Agen yang di masukan salah"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [alert show];
             validFlag = false;
             break;
@@ -444,7 +441,7 @@ static NSString *labelVers;
     switch ([[dateFormatter dateFromString:[loginDB expiryDate:txtUsername.text]] compare:[NSDate date]]) {
         case NSOrderedAscending:
         {
-            UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Agent license has expired"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Lisensi Agen telah expired"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [alert show];
             validFlag = false;
             break;
@@ -573,7 +570,7 @@ static NSString *labelVers;
     if(dateDifference > 7)
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
-                                                        message:@"You have not login with an internet connection for the past 7 days. Please connect to internet to login."
+                                                        message:@"Anda tidak melakukan online login selama 7 hari, pastikan perangkat terhubung ke internet untuk login."
                                                        delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
         
@@ -582,7 +579,8 @@ static NSString *labelVers;
     {
         
         if ([self OfflineLogin]) {
-            [self loginSuccess];
+            [self openHome];
+            //[self loginSuccess];
         }
         else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Username/Password yang anda masukan salah" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
@@ -592,23 +590,6 @@ static NSString *labelVers;
             alert = Nil;
         }
         [indicator stopAnimating];
-        
-        //        NSString *storedAgentStatus = [self getStoredAgentStatus];
-        
-        //        if([storedAgentStatus isEqualToString:@"Y"])
-        //        {
-        //            [self loginSuccess];
-        //        }else
-        //			if([storedAgentStatus isEqualToString:@"N"])
-        //			{
-        //				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
-        //																message:@"Your login is voided, please check with AASD or if your account is active, please login again with an active internet connection."
-        //															   delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        //				[alert show];
-        //
-        //				alert = Nil;
-        //			}
-        
     }
 }
 

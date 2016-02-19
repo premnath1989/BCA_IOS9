@@ -73,12 +73,15 @@
     NSString *docsDir = [dirPaths objectAtIndex:0];
     databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
     
+    btnBarDone.enabled = NO;
+    [btnBarDone setTintColor: [UIColor clearColor]];
+
     if(flagFirstLogin){
-        btnBarDone.enabled = NO;
         btnBarCancel.enabled = NO;
+        [btnBarCancel setTintColor: [UIColor clearColor]];
     }else{
         txtAgentCode.text = strAgentCode;
-        txtAgentCode.textColor = [UIColor lightGrayColor];
+        txtAgentCode.backgroundColor = [UIColor lightGrayColor];
         txtAgentCode.enabled = NO;
     }
         
@@ -298,8 +301,9 @@
             if ([txtNewPwd.text isEqualToString:txtConfirmPwd.text]) {
                 
                 WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
-                [webservice FirstTimeLogin:loginDelegate AgentCode:txtAgentCode.text password:txtOldPwd.text newPassword:txtNewPwd.text UUID:[[[UIDevice currentDevice] identifierForVendor] UUIDString]];
-//                [self validatePassword];
+                if(flagFirstLogin){
+                    [webservice FirstTimeLogin:loginDelegate AgentCode:txtAgentCode.text password:txtOldPwd.text newPassword:txtNewPwd.text UUID:[[[UIDevice currentDevice] identifierForVendor] UUIDString]];
+                }
             }
             else {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Password Baru tidak sesuai dengan Confirm Password" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
@@ -362,7 +366,7 @@
         
         valid = FALSE;
         [self hideKeyboard];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Old password is required." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Password lama harap di isi" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         alert.tag = 10;
         [alert show];
         //[txtOldPwd becomeFirstResponder];
@@ -372,7 +376,7 @@
         if ([txtNewPwd.text stringByReplacingOccurrencesOfString:@" " withString:@""  ].length <= 0) {
             valid = FALSE;
             [self hideKeyboard];
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"New password is required." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Password baru harap di isi" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             alert.tag = 11;
             [alert show];
             //[txtNewPwd becomeFirstResponder];
@@ -381,7 +385,7 @@
             if ([txtConfirmPwd.text stringByReplacingOccurrencesOfString:@" " withString:@""  ].length <= 0) {
                 valid = FALSE;
                 [self hideKeyboard];
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Confirm password is required." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Confirm password harap di isi" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 alert.tag = 12;
                 [alert show];
                 //[txtConfirmPwd becomeFirstResponder];
@@ -401,7 +405,7 @@
             if (txtNewPwd.text.length < 6 ) {
                 [self hideKeyboard];
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
-                                                                message:@"New password should be between 6 to 20 characters" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                                                                message:@"Password baru minimal 6 karakter" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 txtNewPwd.text = @"";
                 txtConfirmPwd.text = @"";
                 alert.tag = 03;
@@ -413,7 +417,7 @@
                 if (txtNewPwd.text.length > 20) {
                     [self hideKeyboard];
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
-                                                                    message:@"New password should be between 6 to 20 characters" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                                                                    message:@"Password baru minimal 6 karakter" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                     txtNewPwd.text = @"";
                     txtConfirmPwd.text = @"";
                     alert.tag = 03;
@@ -425,7 +429,7 @@
                         [self validatePassword];
                     }
                     else {
-                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"New Password did not match with confirmed password." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Password baru tidak sesuai dengan Confirm password" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                         [alert show];
                         txtNewPwd.text = @"";
                         txtConfirmPwd.text = @"";

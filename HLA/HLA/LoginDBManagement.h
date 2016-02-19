@@ -24,6 +24,7 @@
 - (int) AgentRecord;
 - (int) AgentStatus:(NSString *)AgentID;
 - (NSString *) expiryDate:(NSString *)AgentID;
--(NSString *)checkingLastLogout;
+- (NSString *)checkingLastLogout;
+- (NSMutableDictionary *)getAgentDetails;
 
 @end

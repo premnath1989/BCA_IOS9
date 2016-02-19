@@ -12,6 +12,7 @@
 #import "AFNetworking.h"
 #import "SIUtilities.h"
 #import "ChangePassword.h"
+#import "LoginDatabaseManagement.h"
 
 @interface SettingUserProfile ()
 
@@ -19,20 +20,31 @@
 
 @implementation SettingUserProfile
 @synthesize outletSave;
-@synthesize lblAgentLoginID, username, code, name, contactNo ;
-@synthesize txtAgentCode, leaderCode, leaderName, registerNo, email;
-@synthesize txtAgentName, idRequest, indexNo;
-@synthesize txtAgentContactNo;
-@synthesize txtLeaderCode;
-@synthesize txtLeaderName;
-@synthesize txtEmail;
-@synthesize txtBixRegNo;
-@synthesize txtICNo,txtAddr1,txtAddr2,txtAddr3,btnContractDate,myScrollView;
-@synthesize contDate,ICNo,Addr1,Addr2,Addr3,txtAgencyPortalLogin, txtAgencyPortalPwd, AgentPortalLoginID, AgentPortalPassword;
+@synthesize username, code, name, contactNo ;
+@synthesize leaderCode, leaderName, registerNo, email;
+@synthesize idRequest, indexNo;
+@synthesize btnContractDate,myScrollView;
+@synthesize contDate,ICNo,Addr1,Addr2,Addr3, AgentPortalLoginID, AgentPortalPassword;
 @synthesize datePopover = _datePopover;
 @synthesize DatePicker = _DatePicker;
 @synthesize previousElementName, elementName, getLatest;
 @synthesize outletChgPassword;
+
+@synthesize txtAgentCode;
+@synthesize txtAgentName;
+@synthesize txtCabang;
+@synthesize txtKanwil;
+@synthesize txtKCU;
+@synthesize txtChannel;
+@synthesize txtDirectSupervisor;
+@synthesize txtAgentStatus;
+@synthesize txtLicenseStart;
+@synthesize txtLicenseEnd;
+@synthesize txtAddress1;
+@synthesize txtAddress2;
+@synthesize txtAddress3;
+@synthesize txtMobileNumber;
+@synthesize txtEmail;
 
 
 id temp;
@@ -40,8 +52,6 @@ id temp;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-//    self.view.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg10.jpg"]];
     
     AppDelegate *zzz= (AppDelegate*)[[UIApplication sharedApplication] delegate ];
     self.indexNo = zzz.indexNo;
@@ -51,25 +61,45 @@ id temp;
     NSString *docsDir = [dirPaths objectAtIndex:0];
     databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
     
+    LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
+    agentDetails =[loginDB getAgentDetails];
+    [self setValueProperty];
+    
     outletSave.layer.cornerRadius = 10.0f;
     outletSave.clipsToBounds = YES;
     
     outletChgPassword.layer.cornerRadius = 10.0f;
     outletChgPassword.clipsToBounds = YES;
     
-    lblAgentLoginID.text = [NSString stringWithFormat:@"%@",[self.idRequest description]];
-	txtAddr1.delegate = self;
-	txtAddr2.delegate = self;
-	txtAddr3.delegate = self;
+	txtAddress1.delegate = self;
+	txtAddress2.delegate = self;
+	txtAddress3.delegate = self;
 	
 	txtAgentCode.enabled = FALSE;
 	txtAgentName.enabled = FALSE;
-	txtICNo.enabled = FALSE;
 	btnContractDate.enabled = FALSE;
 	
-	txtAgencyPortalLogin.hidden = YES;
-	txtAgencyPortalPwd.hidden = YES;
-	
+}
+
+- (void) setValueProperty{
+    txtAgentCode.text = [agentDetails valueForKey:@"AgentCode"];
+    txtAgentCode.enabled = NO;
+    txtAgentCode.backgroundColor = [UIColor lightGrayColor];
+    
+    txtAgentName.text = [agentDetails valueForKey:@"AgentName"];
+    txtCabang.text = [NSString stringWithFormat:@"%@ - %@",[agentDetails valueForKey:@"BranchCode"], [agentDetails valueForKey:@"BranchName"]];
+    txtKanwil.text = [NSString stringWithFormat:@"%@ - %@",[agentDetails valueForKey:@"KanwilCode"], [agentDetails valueForKey:@"Kanwil"]];
+    txtKCU.text = [agentDetails valueForKey:@"KCU"];
+    txtChannel.text = [agentDetails valueForKey:@"ChannelName"];
+    txtDirectSupervisor.text = [NSString stringWithFormat:@"%@ - %@",[agentDetails valueForKey:@"DirectSupervisorCode"], [agentDetails valueForKey:@"DirectSupervisorName"]];
+    txtAgentStatus.text = [agentDetails valueForKey:@"AgentStatus"];
+    txtLicenseStart.text = [agentDetails valueForKey:@"LicenseStartDate"];
+    txtLicenseEnd.text = [agentDetails valueForKey:@"LicenseExpiryDate"];
+    txtAddress1.text = [agentDetails valueForKey:@"AgentAddr1"];
+    txtAddress2.text = [agentDetails valueForKey:@"AgentAddr2"];
+    txtAddress3.text = [agentDetails valueForKey:@"AgentAddr3"];
+    txtMobileNumber.text = [agentDetails valueForKey:@"AgentContactNumber"];
+    txtEmail.text = [agentDetails valueForKey:@"AgentEmail"];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -107,19 +137,9 @@ id temp;
 }
 
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{   /*
+{
         if (alertView.tag == 1) {
-            Login *LoginPage = [self.storyboard instantiateViewControllerWithIdentifier:@"Login"];
-            LoginPage.modalPresentationStyle = UIModalPresentationFullScreen;
-            LoginPage.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-            [self presentModalViewController:LoginPage animated:YES ];
-            
-            [self dismissModalViewControllerAnimated:YES];
-            
-        }
-     */
-	        if (alertView.tag == 1) {
-				if ([getLatest isEqualToString:@"Yes"]) { //not need check latest version when user edit on user profile
+            if ([getLatest isEqualToString:@"Yes"]) { //not need check latest version when user edit on user profile
 					NSString *strURL = [NSString stringWithFormat:@"%@eSubmissionWS/eSubmissionXMLService.asmx/"
 										"GetSIVersion_TRADUL?Type=IPAD_TRAD&Remarks=Agency&OSType=32", [SIUtilities WSLogin]];
 					NSLog(@"%@", strURL);
@@ -159,7 +179,7 @@ id temp;
     UserProfileView.modalPresentationStyle = UIModalPresentationFormSheet;
     UserProfileView.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     UserProfileView.preferredContentSize = CGSizeMake(600, 500);
-    [UserProfileView setAgentCode:@"AgentCode"];
+    [UserProfileView setAgentCode:[agentDetails valueForKey:@"AgentCode"]];
     [self presentViewController:UserProfileView animated:YES completion:nil];
 }
 
@@ -176,7 +196,7 @@ id temp;
 		return YES;
 	}
 	
-	if (textField == txtAddr1 || textField == txtAddr2 || textField == txtAddr3 ) {
+	if (textField == txtAddress1 || textField == txtAddress2 || textField == txtAddress3 ) {
 		if ([textField.text stringByReplacingOccurrencesOfString:@" " withString:@""].length > 31) {
 			return NO;
 		}
@@ -195,13 +215,6 @@ id temp;
 {
     self.myScrollView.frame = CGRectMake(0, 44, 768, 704-352);
     self.myScrollView.contentSize = CGSizeMake(768, 605);
-    
-	if ([txtAgencyPortalLogin isFirstResponder]) {
-		activeField = txtAgencyPortalLogin;
-	}
-	if ([txtAgencyPortalPwd isFirstResponder]) {
-		activeField = txtAgencyPortalPwd;
-	}
 	
     CGRect textFieldRect = [activeField frame];
     textFieldRect.origin.y += 30;
@@ -279,20 +292,20 @@ id temp;
         }
     }
     
-    if(![[txtAgentContactNo.text stringByReplacingOccurrencesOfString:@" " withString:@"" ] isEqualToString:@"" ]){
-        if (txtAgentContactNo.text.length > 11) {
+    if(![[txtMobileNumber.text stringByReplacingOccurrencesOfString:@" " withString:@"" ] isEqualToString:@"" ]){
+        if (txtMobileNumber.text.length > 11) {
             
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
                                                             message:@"Contact number length must be less than 11 digits" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [alert show];
             
-            [txtAgentContactNo becomeFirstResponder ];
+            [txtMobileNumber becomeFirstResponder ];
             return false;
         }
         
         BOOL valid;
         NSCharacterSet *alphaNums = [NSCharacterSet decimalDigitCharacterSet];
-        NSCharacterSet *inStringSet = [NSCharacterSet characterSetWithCharactersInString:txtAgentContactNo.text];
+        NSCharacterSet *inStringSet = [NSCharacterSet characterSetWithCharactersInString:txtMobileNumber.text];
         valid = [alphaNums isSupersetOfSet:inStringSet]; 
         if (!valid) {
             
@@ -300,7 +313,7 @@ id temp;
                                                             message:@"Contact number must be numeric" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [alert show];
             
-            [txtAgentContactNo becomeFirstResponder];
+            [txtMobileNumber becomeFirstResponder];
             return false;
         }
         
@@ -309,52 +322,52 @@ id temp;
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
                                                         message:@"Agent's Contact No is required." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
-        [txtAgentContactNo becomeFirstResponder];
+        [txtMobileNumber becomeFirstResponder];
         return false;
     }
     
-    if (![[txtLeaderCode.text stringByReplacingOccurrencesOfString:@" " withString:@"" ] isEqualToString:@""]) {
-        if (txtLeaderCode.text.length != 8) {
+    if (![[txtDirectSupervisor.text stringByReplacingOccurrencesOfString:@" " withString:@"" ] isEqualToString:@""]) {
+        if (txtDirectSupervisor.text.length != 8) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
                                                             message:@"Invalid Immediate Leader Code length. Immediate Leader Code length should be 8 characters long" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [alert show];
-            [txtLeaderCode becomeFirstResponder];
+            [txtDirectSupervisor becomeFirstResponder];
             return false;
         }
     }
     
     
     //new
-    if (![[txtICNo.text stringByReplacingOccurrencesOfString:@" " withString:@"" ] isEqualToString:@""]) {
-        if (txtICNo.text.length != 12) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
-                                                            message:@"Invalid IC No length. IC No length should be 12 characters long" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-            [alert show];
-            [txtICNo becomeFirstResponder];
-            return false;
-        }
-        
-        BOOL valid;
-        NSCharacterSet *alphaNums = [NSCharacterSet decimalDigitCharacterSet];
-        NSCharacterSet *inStringSet = [NSCharacterSet characterSetWithCharactersInString:txtICNo.text];
-        valid = [alphaNums isSupersetOfSet:inStringSet];
-        if (!valid) {
-            
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
-                                                            message:@"Agent's IC No must be numeric" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-            [alert show];
-            
-            [txtICNo becomeFirstResponder];
-            return false;
-        }
-    }
-    else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
-                                                        message:@"Agent's IC No is required." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alert show];
-        [txtICNo becomeFirstResponder];
-        return false;
-    }
+//    if (![[txtICNo.text stringByReplacingOccurrencesOfString:@" " withString:@"" ] isEqualToString:@""]) {
+//        if (txtICNo.text.length != 12) {
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
+//                                                            message:@"Invalid IC No length. IC No length should be 12 characters long" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//            [alert show];
+//            [txtICNo becomeFirstResponder];
+//            return false;
+//        }
+//        
+//        BOOL valid;
+//        NSCharacterSet *alphaNums = [NSCharacterSet decimalDigitCharacterSet];
+//        NSCharacterSet *inStringSet = [NSCharacterSet characterSetWithCharactersInString:txtICNo.text];
+//        valid = [alphaNums isSupersetOfSet:inStringSet];
+//        if (!valid) {
+//            
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
+//                                                            message:@"Agent's IC No must be numeric" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//            [alert show];
+//            
+//            [txtICNo becomeFirstResponder];
+//            return false;
+//        }
+//    }
+//    else {
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
+//                                                        message:@"Agent's IC No is required." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//        [alert show];
+//        [txtICNo becomeFirstResponder];
+//        return false;
+//    }
     
     if (contDate.length == 0 || [self.btnContractDate.titleLabel.text isEqualToString:@""]) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
@@ -363,11 +376,11 @@ id temp;
         return false;
     }
     
-    if ([[txtAddr1.text stringByReplacingOccurrencesOfString:@" " withString:@"" ] isEqualToString:@""]) {
+    if ([[txtAddress1.text stringByReplacingOccurrencesOfString:@" " withString:@"" ] isEqualToString:@""]) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
                                                         message:@"Agent's Correspendence Address is required." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
-        [txtAddr1 becomeFirstResponder];
+        [txtAddress1 becomeFirstResponder];
         return false;
     }
     //end
@@ -432,14 +445,17 @@ id temp;
 - (IBAction)btnSave:(id)sender { //no longer using
     [self.view endEditing:TRUE];
     [self resignFirstResponder];
-    [self updateUserData ];
+//    [self updateUserData ];
 }
 
 - (IBAction)btnDone:(id)sender {
-    [self.view endEditing:TRUE];
-    [self resignFirstResponder];
-    [self updateUserData ];
-	//[self CheckAgentPortal];
+    UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:Nil];
+    Login *mainLogin = [mainStoryBoard instantiateViewControllerWithIdentifier:@"Login"];
+    mainLogin.modalPresentationStyle = UIModalPresentationFullScreen;
+    mainLogin.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self presentViewController:mainLogin animated:YES completion:nil];
+//    [self.view endEditing:TRUE];
+//    [self resignFirstResponder];
 }
 
 - (IBAction)btnContractDatePressed:(id)sender     //--bob
@@ -487,32 +503,32 @@ id temp;
     [self.datePopover dismissPopoverAnimated:YES];
 }
 
--(void)CheckAgentPortal{
-	NSString *strURL = [NSString stringWithFormat:@"%@eSubmissionWS/eSubmissionXMLService.asmx/"
-									"ValidateLogin?strid=%@&strpwd=%@&strIPAddres=123&iBadAttempts=0&strFirstAgentCode=%@",
-						[SIUtilities WSLogin], txtAgencyPortalLogin.text, txtAgencyPortalPwd.text, txtAgentCode.text];
-	
-		NSLog(@"%@", strURL);
-		NSURL *url = [NSURL URLWithString:strURL];
-		NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:0 timeoutInterval:20];
-	
-		AFXMLRequestOperation *operation =
-		[AFXMLRequestOperation XMLParserRequestOperationWithRequest:request
-		 													success:^(NSURLRequest *request, NSHTTPURLResponse *response, NSXMLParser *XMLParser) {
-			 													XMLParser.delegate = self;
-			 														[XMLParser setShouldProcessNamespaces:YES];
-			 														[XMLParser parse];
-			 
-			 													} failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSXMLParser *XMLParser) {
-				 													NSLog(@"error in calling web service");
-																	UIAlertView *success = [[UIAlertView alloc] initWithTitle:@" "
-																													  message:@"Record saved" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil ];
-																	success.tag = 1;
-																	[success show];
-																}];
-		
-		[operation start];
-}
+//-(void)CheckAgentPortal{
+//	NSString *strURL = [NSString stringWithFormat:@"%@eSubmissionWS/eSubmissionXMLService.asmx/"
+//									"ValidateLogin?strid=%@&strpwd=%@&strIPAddres=123&iBadAttempts=0&strFirstAgentCode=%@",
+//						[SIUtilities WSLogin], txtAgencyPortalLogin.text, txtAgencyPortalPwd.text, txtAgentCode.text];
+//	
+//		NSLog(@"%@", strURL);
+//		NSURL *url = [NSURL URLWithString:strURL];
+//		NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:0 timeoutInterval:20];
+//	
+//		AFXMLRequestOperation *operation =
+//		[AFXMLRequestOperation XMLParserRequestOperationWithRequest:request
+//		 													success:^(NSURLRequest *request, NSHTTPURLResponse *response, NSXMLParser *XMLParser) {
+//			 													XMLParser.delegate = self;
+//			 														[XMLParser setShouldProcessNamespaces:YES];
+//			 														[XMLParser parse];
+//			 
+//			 													} failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSXMLParser *XMLParser) {
+//				 													NSLog(@"error in calling web service");
+//																	UIAlertView *success = [[UIAlertView alloc] initWithTitle:@" "
+//																													  message:@"Record saved" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil ];
+//																	success.tag = 1;
+//																	[success show];
+//																}];
+//		
+//		[operation start];
+//}
 
 #pragma mark - XML parser
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName
@@ -728,19 +744,9 @@ id temp;
 				
                 txtAgentCode.text = code;
                 txtAgentName.text = name;
-                txtAgentContactNo.text = contactNo;
-                txtLeaderCode.text = leaderCode;
-                txtLeaderName.text = leaderName;
-                txtBixRegNo.text = registerNo;
                 txtEmail.text = email;
                 
-                txtICNo.text = ICNo;
                 [btnContractDate setTitle:contDate forState:UIControlStateNormal];
-                txtAddr1.text = Addr1;
-                txtAddr2.text = Addr2;
-                txtAddr3.text = Addr3;
-                txtAgencyPortalLogin.text = AgentPortalLoginID;
-				txtAgencyPortalPwd.text = AgentPortalPassword;
                 
                 
             } else {
@@ -752,54 +758,54 @@ id temp;
     }
 }
 
--(void)updateUserData
-{
-    if([self Validation] == TRUE){
-        const char *dbpath = [databasePath UTF8String];
-        sqlite3_stmt *statement;
-        
-        
-        if (sqlite3_open(dbpath, &contactDB) == SQLITE_OK)
-        {
-            
-            NSString *querySQL = [NSString stringWithFormat:@"UPDATE Agent_Profile SET AgentCode= \"%@\", AgentName= \"%@\", "
-								  "AgentContactNo= \"%@\", ImmediateLeaderCode= \"%@\", ImmediateLeaderName= \"%@\", "
-								  "BusinessRegNumber = \"%@\", AgentEmail= \"%@\", AgentICNo=\"%@\", AgentContractDate=\"%@\", "
-								  "AgentAddr1=\"%@\", AgentAddr2=\"%@\", AgentAddr3=\"%@\", AgentPortalLoginID = \"%@\", "
-								  "AgentPortalPassword = \"%@\" WHERE IndexNo=\"%d\"",
-								  txtAgentCode.text, txtAgentName.text, txtAgentContactNo.text, txtLeaderCode.text,
-								  txtLeaderName.text,txtBixRegNo.text,txtEmail.text,txtICNo.text, contDate, txtAddr1.text,
-								  txtAddr2.text, txtAddr3.text, txtAgencyPortalLogin.text, txtAgencyPortalPwd.text, self.indexNo];
-            
-            
-            const char *query_stmt = [querySQL UTF8String];
-            
-            //NSLog(@"%@",querySQL);
-            
-            if (sqlite3_prepare_v2(contactDB, query_stmt, -1, &statement, NULL) == SQLITE_OK)
-            {
-                if (sqlite3_step(statement) == SQLITE_DONE)
-                {
-                    
-                    UIAlertView *success = [[UIAlertView alloc] initWithTitle:@" "
-                                                                      message:@"Record saved" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil ];
-                    success.tag = 1;
-                    [success show];
-					 
-                    
-                } else {
-                    //lblStatus.text = @"Failed to update!";
-                    //lblStatus.textColor = [UIColor redColor];
-                    
-                }
-                sqlite3_finalize(statement);
-            }
-            sqlite3_close(contactDB);
-        }
-		
-		//[self CheckAgentPortal];
-    }
-}
+//-(void)updateUserData
+//{
+//    if([self Validation] == TRUE){
+//        const char *dbpath = [databasePath UTF8String];
+//        sqlite3_stmt *statement;
+//        
+//        
+//        if (sqlite3_open(dbpath, &contactDB) == SQLITE_OK)
+//        {
+//            
+//            NSString *querySQL = [NSString stringWithFormat:@"UPDATE Agent_Profile SET AgentCode= \"%@\", AgentName= \"%@\", "
+//								  "AgentContactNo= \"%@\", ImmediateLeaderCode= \"%@\", ImmediateLeaderName= \"%@\", "
+//								  "BusinessRegNumber = \"%@\", AgentEmail= \"%@\", AgentICNo=\"%@\", AgentContractDate=\"%@\", "
+//								  "AgentAddr1=\"%@\", AgentAddr2=\"%@\", AgentAddr3=\"%@\", AgentPortalLoginID = \"%@\", "
+//								  "AgentPortalPassword = \"%@\" WHERE IndexNo=\"%d\"",
+//								  txtAgentCode.text, txtAgentName.text, txtAgentContactNo.text, txtLeaderCode.text,
+//								  txtLeaderName.text,txtBixRegNo.text,txtEmail.text,txtICNo.text, contDate, txtAddr1.text,
+//								  txtAddr2.text, txtAddr3.text, txtAgencyPortalLogin.text, txtAgencyPortalPwd.text, self.indexNo];
+//            
+//            
+//            const char *query_stmt = [querySQL UTF8String];
+//            
+//            //NSLog(@"%@",querySQL);
+//            
+//            if (sqlite3_prepare_v2(contactDB, query_stmt, -1, &statement, NULL) == SQLITE_OK)
+//            {
+//                if (sqlite3_step(statement) == SQLITE_DONE)
+//                {
+//                    
+//                    UIAlertView *success = [[UIAlertView alloc] initWithTitle:@" "
+//                                                                      message:@"Record saved" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil ];
+//                    success.tag = 1;
+//                    [success show];
+//					 
+//                    
+//                } else {
+//                    //lblStatus.text = @"Failed to update!";
+//                    //lblStatus.textColor = [UIColor redColor];
+//                    
+//                }
+//                sqlite3_finalize(statement);
+//            }
+//            sqlite3_close(contactDB);
+//        }
+//		
+//		//[self CheckAgentPortal];
+//    }
+//}
 
 
 #pragma mark - memory release
@@ -811,23 +817,13 @@ id temp;
     [self setAddr3:nil];
     [self setContDate:nil];
     [self setICNo:nil];
-    [self setTxtAddr1:nil];
-    [self setTxtAddr2:nil];
-    [self setTxtAddr3:nil];
     [self setTxtICNo:nil];
     [self setBtnContractDate:nil];
     [self setMyScrollView:nil];
-    [self setLblAgentLoginID:nil];
     [self setTxtAgentCode:nil];
     [self setTxtAgentName:nil];
-    [self setTxtAgentContactNo:nil];
-    [self setTxtLeaderCode:nil];
-    [self setTxtLeaderName:nil];
-    [self setTxtBixRegNo:nil];
     [self setTxtEmail:nil];
     [self setOutletSave:nil];
-	[self setTxtAgencyPortalLogin:nil];
-	[self setTxtAgencyPortalPwd:nil];
     [super viewDidUnload];
 }
 

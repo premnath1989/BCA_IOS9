@@ -16,21 +16,27 @@
     UITextField *activeField;
     DateViewController *_DatePicker;
     UIPopoverController *_datePopover;
+    NSMutableDictionary *agentDetails;
 }
 
 @property (nonatomic,strong) id idRequest;
 @property (nonatomic, assign) int indexNo;
 
-@property (weak, nonatomic) IBOutlet UILabel *lblAgentLoginID;
 @property (weak, nonatomic) IBOutlet UITextField *txtAgentCode;
 @property (weak, nonatomic) IBOutlet UITextField *txtAgentName;
-@property (weak, nonatomic) IBOutlet UITextField *txtAgentContactNo;
-@property (weak, nonatomic) IBOutlet UITextField *txtLeaderCode;
-@property (weak, nonatomic) IBOutlet UITextField *txtLeaderName;
+@property (weak, nonatomic) IBOutlet UITextField *txtCabang;
+@property (weak, nonatomic) IBOutlet UITextField *txtKanwil;
+@property (weak, nonatomic) IBOutlet UITextField *txtKCU;
+@property (weak, nonatomic) IBOutlet UITextField *txtChannel;
+@property (weak, nonatomic) IBOutlet UITextField *txtDirectSupervisor;
+@property (weak, nonatomic) IBOutlet UITextField *txtAgentStatus;
+@property (weak, nonatomic) IBOutlet UITextField *txtLicenseStart;
+@property (weak, nonatomic) IBOutlet UITextField *txtLicenseEnd;
+@property (weak, nonatomic) IBOutlet UITextField *txtAddress1;
+@property (weak, nonatomic) IBOutlet UITextField *txtAddress2;
+@property (weak, nonatomic) IBOutlet UITextField *txtAddress3;
+@property (weak, nonatomic) IBOutlet UITextField *txtMobileNumber;
 @property (weak, nonatomic) IBOutlet UITextField *txtEmail;
-
-@property (weak, nonatomic) IBOutlet UITextField *txtBixRegNo;
-
 
 @property (nonatomic, copy) NSString *username;
 @property (nonatomic, copy) NSString *code;
@@ -56,9 +62,6 @@
 @property (strong, nonatomic) IBOutlet UITextField *txtICNo;
 @property (strong, nonatomic) IBOutlet UIButton *btnContractDate;
 - (IBAction)btnContractDatePressed:(id)sender;
-@property (strong, nonatomic) IBOutlet UITextField *txtAddr1;
-@property (strong, nonatomic) IBOutlet UITextField *txtAddr2;
-@property (strong, nonatomic) IBOutlet UITextField *txtAddr3;
 
 @property (nonatomic, retain) DateViewController *DatePicker;
 @property (nonatomic, retain) UIPopoverController *datePopover;
@@ -71,9 +74,6 @@
 @property (nonatomic, copy) NSString *AgentPortalPassword;
 @property (nonatomic, copy) NSString *getLatest;
 //--end
-
-@property (weak, nonatomic) IBOutlet UITextField *txtAgencyPortalLogin;
-@property (weak, nonatomic) IBOutlet UITextField *txtAgencyPortalPwd;
 
 
 @end

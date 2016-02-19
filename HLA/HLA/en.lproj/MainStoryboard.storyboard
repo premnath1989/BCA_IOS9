@@ -416,19 +416,19 @@
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" id="B6q-Hw-guN">
                                         <rect key="frame" x="374" y="493" width="244" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="16"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" id="SSd-XD-i2F">
                                         <rect key="frame" x="374" y="458" width="244" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="16"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" id="68P-fA-IhU">
                                         <rect key="frame" x="374" y="424" width="244" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="16"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alamat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="etP-Ia-Hgg">
@@ -447,7 +447,7 @@
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" id="9hG-mx-i91">
                                         <rect key="frame" x="374" y="38" width="244" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="16"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Data Alamat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wCb-yG-fcJ">
@@ -477,7 +477,8 @@
                                                 <action selector="btnClose:" destination="Xma-Uf-txG" id="XeH-1Z-4Bu"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="Done" id="hx4-zM-xzi">
+                                        <barButtonItem key="rightBarButtonItem" title="Logout" id="hx4-zM-xzi">
+                                            <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
                                                 <action selector="btnDone:" destination="Xma-Uf-txG" id="kkv-0n-411"/>
                                             </connections>
@@ -500,16 +501,21 @@
                         <outlet property="myScrollView" destination="J6L-bp-dYG" id="fEX-qw-h7n"/>
                         <outlet property="outletChgPassword" destination="SbK-xb-lBO" id="jBz-5z-j5z"/>
                         <outlet property="outletSave" destination="Kjs-eG-Zzm" id="7Ni-VM-kJM"/>
-                        <outlet property="txtAddr1" destination="2bx-63-0XH" id="gA8-ao-fG2"/>
-                        <outlet property="txtAddr2" destination="520-Na-eL9" id="tqy-tS-neV"/>
-                        <outlet property="txtAddr3" destination="daL-Mj-PLR" id="0PO-L0-cYo"/>
-                        <outlet property="txtAgentContactNo" destination="Bf7-JB-AB3" id="uzo-KG-Aee"/>
-                        <outlet property="txtAgentName" destination="hiC-pS-7hB" id="3Ib-C6-Ncf"/>
-                        <outlet property="txtBixRegNo" destination="GBz-1E-DJN" id="L7K-u4-bvr"/>
-                        <outlet property="txtEmail" destination="Jvm-Lf-yeP" id="glG-R2-yjn"/>
-                        <outlet property="txtICNo" destination="Bbi-mR-NKR" id="kKX-oC-Bt1"/>
-                        <outlet property="txtLeaderCode" destination="emz-Qj-1Nc" id="lJl-GJ-D6i"/>
-                        <outlet property="txtLeaderName" destination="FGD-7G-HOz" id="P2A-Lo-JS6"/>
+                        <outlet property="txtAddress1" destination="68P-fA-IhU" id="4yJ-lR-7JI"/>
+                        <outlet property="txtAddress2" destination="SSd-XD-i2F" id="JQW-sv-wGt"/>
+                        <outlet property="txtAddress3" destination="B6q-Hw-guN" id="u7p-d7-6u3"/>
+                        <outlet property="txtAgentCode" destination="9hG-mx-i91" id="KPY-z5-mpZ"/>
+                        <outlet property="txtAgentName" destination="hiC-pS-7hB" id="nhi-DJ-Qxo"/>
+                        <outlet property="txtAgentStatus" destination="heN-Zs-PIe" id="4KP-K5-SmE"/>
+                        <outlet property="txtCabang" destination="Bf7-JB-AB3" id="FIE-sk-zHt"/>
+                        <outlet property="txtChannel" destination="GBz-1E-DJN" id="giH-cS-K00"/>
+                        <outlet property="txtDirectSupervisor" destination="Bbi-mR-NKR" id="GwM-uK-1sN"/>
+                        <outlet property="txtEmail" destination="Jvm-Lf-yeP" id="mcx-a1-r1K"/>
+                        <outlet property="txtKCU" destination="FGD-7G-HOz" id="qel-rf-tMh"/>
+                        <outlet property="txtKanwil" destination="emz-Qj-1Nc" id="rPr-TK-ItA"/>
+                        <outlet property="txtLicenseEnd" destination="520-Na-eL9" id="n1B-eD-kQv"/>
+                        <outlet property="txtLicenseStart" destination="2bx-63-0XH" id="Rsw-cV-CRx"/>
+                        <outlet property="txtMobileNumber" destination="daL-Mj-PLR" id="TLJ-sI-7q2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sgP-0B-tHw" userLabel="First Responder" sceneMemberID="firstResponder"/>
