@@ -137,9 +137,6 @@ id dobtanngal;
         sexSegment.enabled = YES;
         btnOccp.enabled = YES;
         btnProspect.enabled = NO;
-        
-
-
     }
     else
     {
@@ -154,13 +151,8 @@ id dobtanngal;
         sexSegment.enabled = NO;
         btnOccp.enabled = NO;
         btnProspect.enabled = YES;
-
-        
     }
-
-    
 }
-
 
 - (void) setupUIElementsColor
 {
@@ -2360,6 +2352,9 @@ id dobtanngal;
 
 -(BOOL)validateSave// validate new la before saving
 {
+    //temp
+    return YES;
+    
     int LAAGEint = [[LAAgeField text] intValue];
     
     
@@ -2542,8 +2537,8 @@ else {
     int currentAge =[self getAgeFromDOB:aaDOB CommDate:commDate];
     
 	LANameField.enabled = NO;
-	LANameField.backgroundColor = [UIColor lightGrayColor];
-	LANameField.textColor = [UIColor darkGrayColor];
+//	LANameField.backgroundColor = [UIColor lightGrayColor];
+//	LANameField.textColor = [UIColor darkGrayColor];
 	
 	sexSegment.enabled = NO;
 	

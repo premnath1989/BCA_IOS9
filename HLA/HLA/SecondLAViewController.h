@@ -33,6 +33,7 @@
     UIPopoverController *popOverController;
     UIPopoverController *_dobPopover;
     UIPopoverController *_OccupationListPopover;
+    UIPopoverController *_prospectPopover;
     ListingTbViewController *_ProspectList;
     OccupationList *_OccupationList;
     DateViewController *_LADate;
@@ -73,6 +74,8 @@
 @property (nonatomic, copy) NSString *getCommDate;
 @property (nonatomic,strong) id requesteProposalStatus;
 //--
+
+@property (strong, nonatomic) IBOutlet UIButton *BtnTanggalLahir;
 @property (retain, nonatomic) IBOutlet UITextField *nameField;
 @property (retain, nonatomic) IBOutlet UISegmentedControl *sexSegment;
 @property (retain, nonatomic) IBOutlet UISegmentedControl *smokerSegment;
@@ -89,7 +92,7 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *outletDone;
 @property (weak, nonatomic) IBOutlet UIButton *outletProspect;
 @property (weak, nonatomic) IBOutlet UIButton *outletQQ;
-
+@property (nonatomic, retain) UIPopoverController *prospectPopover;
 
 @property (nonatomic, assign,readwrite) int IndexNo;
 @property (nonatomic, copy) NSString *sex;

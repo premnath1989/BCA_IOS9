@@ -27,6 +27,7 @@ NSString *gNameSecond = @"";
 @synthesize sex,smoker,DOB,jobDesc,age,ANB,OccpCode,occLoading,SINo,CustLastNo,CustDate,CustCode,clientName,clientID,OccpDesc,occCPA_PA, occuCode,occuDesc;
 @synthesize popOverController,requestSINo,la2ndHand,basicHand;
 @synthesize ProspectList = _ProspectList;
+@synthesize prospectPopover = _prospectPopover;
 @synthesize CheckRiderCode,IndexNo;
 @synthesize NamePP,DOBPP,GenderPP,OccpCodePP;
 @synthesize DOBField,OccpField,deleteBtn,getCommDate,dataInsert;
@@ -146,7 +147,26 @@ id dobtemp;
     } else {
         outletProspect.hidden = false;
     }
-	
+    
+    
+    UIColor *themeColour = [UIColor colorWithRed:242.0f/255.0f green:113.0f/255.0f blue:134.0f/255.0f alpha:1];
+
+    nameField.layer.borderColor = [themeColour CGColor];
+    nameField.layer.masksToBounds = YES;
+    nameField.layer.borderWidth = 1.0f;
+    
+    _BtnTanggalLahir.layer.borderColor = [themeColour CGColor];
+    _BtnTanggalLahir.layer.masksToBounds = YES;
+    _BtnTanggalLahir.layer.borderWidth = 1.0f;
+    
+    btnOccp.layer.borderColor = [themeColour CGColor];
+    btnOccp.layer.masksToBounds = YES;
+    btnOccp.layer.borderWidth = 1.0f;
+    
+    ageField.layer.borderColor = [themeColour CGColor];
+    ageField.layer.masksToBounds = YES;
+    ageField.layer.borderWidth = 1.0f;
+
 }
 
 -(void) disableFieldsForEapp
@@ -369,13 +389,14 @@ id dobtemp;
 {
     if (_ProspectList == nil) {
         self.ProspectList = [[ListingTbViewController alloc] initWithStyle:UITableViewStylePlain];
-        _ProspectList.ignoreID = getLAIndexNo;
-        _ProspectList.filterEDD = TRUE;
         _ProspectList.delegate = self;
-        popOverController = [[UIPopoverController alloc] initWithContentViewController:_ProspectList];
+        self.prospectPopover = [[UIPopoverController alloc] initWithContentViewController:_ProspectList];
     }
     
-    [popOverController presentPopoverFromRect:[sender frame] inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    CGRect rect = [sender frame];
+    rect.origin.y = [sender frame].origin.y + 40;
+    
+    [self.prospectPopover presentPopoverFromRect:rect inView:self.view permittedArrowDirections:UIPopoverArrowDirectionRight animated:YES];
 }
 
 - (IBAction)sexSegmentChange:(id)sender
@@ -580,24 +601,24 @@ id dobtemp;
         ANB = newANB;
         
         if (age < 16) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Age must be at least 16 years old." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
-            [alert show];
-            return FALSE;
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Age must be at least 16 years old." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
+//            [alert show];
+//            return FALSE;
         }
     } else if (yearN == yearB) {
         age = 0;
         ANB = 1;
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Age must be at least 16 years old." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
-        [alert show];
-        return FALSE;
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Age must be at least 16 years old." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
+//        [alert show];
+//        return FALSE;
     } else {
         age = 0;
         ANB = 1;
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Age must be at least 16 years old." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
-        [alert show];
-        return FALSE;
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Age must be at least 16 years old." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
+//        [alert show];
+//        return FALSE;
     }
     return TRUE;
 }
@@ -732,7 +753,8 @@ id dobtemp;
             [self saveData];
         }
         [_delegate setIsSecondLaNeeded:YES];
-        [popOverController dismissPopoverAnimated:YES];
+        [_prospectPopover dismissPopoverAnimated:YES];
+        
     }
 }
 

@@ -601,30 +601,30 @@ BOOL isFirstLoad;
 
 -(BOOL)select2ndLA
 {
-    if ([EAPPorSI isEqualToString:@"eAPP"]) {
-        return YES;
-    }
-    
-    if (getAge >= 18 && getAge <=70 && ![getOccpCode isEqualToString:@"(null)"]) {
-        return YES;
-    } else if (getAge < 16 && getOccpCode.length != 0 && ![getOccpCode isEqualToString:@"(null)"]) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Life Assured is less than 16 years old." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alert show];
-        blocked = YES;
-        return NO;
-    } else if ( (getOccpCode.length == 0 || [getOccpCode isEqualToString:@"(null)"]) 
-             && ![LAotherIDType isEqualToString:@"EDD"]) { // skip checking if equal to EDD
-        blocked = YES;
-        return NO;
-    } else if (!isFirstLoad) {
-        [self checkingPayor];
-        if (payorSINo.length != 0 || getPayorIndexNo != 0) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Not allowed as Payor has been attached" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-            [alert show];
-            blocked = YES;
-            return NO;
-        }        
-    }
+//    if ([EAPPorSI isEqualToString:@"eAPP"]) {
+//        return YES;
+//    }
+//    
+//    if (getAge >= 18 && getAge <=70 && ![getOccpCode isEqualToString:@"(null)"]) {
+//        return YES;
+//    } else if (getAge < 16 && getOccpCode.length != 0 && ![getOccpCode isEqualToString:@"(null)"]) {
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Life Assured is less than 16 years old." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//        [alert show];
+//        blocked = YES;
+//        return NO;
+//    } else if ( (getOccpCode.length == 0 || [getOccpCode isEqualToString:@"(null)"]) 
+//             && ![LAotherIDType isEqualToString:@"EDD"]) { // skip checking if equal to EDD
+//        blocked = YES;
+//        return NO;
+//    } else if (!isFirstLoad) {
+//        [self checkingPayor];
+//        if (payorSINo.length != 0 || getPayorIndexNo != 0) {
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Not allowed as Payor has been attached" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//            [alert show];
+//            blocked = YES;
+//            return NO;
+//        }        
+//    }
     return YES;
 }
 
@@ -2518,31 +2518,36 @@ BOOL isFirstLoad;
             selectedPath = indexPath;
             previousPath = selectedPath;
             blocked = NO;			
-        } else if (indexPath.row == SIMENU_SECOND_LIFE_ASSURED) {
-            if ([getOccpCode isEqualToString:@"OCC01975"]) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"There is no existing plan which can be offered to this occupation."
-                                                               delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
-                [alert show];
-                alert = Nil;
-                blocked = YES;
-            } else if (getBasicPlan == NULL) {
-//                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Please select basic plan first."
+        } else if (indexPath.row == SIMENU_SECOND_LIFE_ASSURED)
+        {
+            
+            [self loadSecondLAPage];
+            
+            
+//            if ([getOccpCode isEqualToString:@"OCC01975"]) {
+//                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"There is no existing plan which can be offered to this occupation."
 //                                                               delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
 //                [alert show];
 //                alert = Nil;
 //                blocked = YES;
-                
-            } else if (([getBasicPlan isEqualToString:STR_S100] || [getBasicPlan isEqualToString:STR_HLAWP]) && getAge > 65 ) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Age Last Birthday must be less than or equal to 65 for this product."
-                                                               delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
-                [alert show];
-                alert = Nil;
-                blocked = YES;
-                
-            } else {
-                [self loadSecondLAPage];
-                selectedPath = indexPath;
-            }
+//            } else if (getBasicPlan == NULL) {
+////                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Please select basic plan first."
+////                                                               delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
+////                [alert show];
+////                alert = Nil;
+////                blocked = YES;
+//                
+//            } else if (([getBasicPlan isEqualToString:STR_S100] || [getBasicPlan isEqualToString:STR_HLAWP]) && getAge > 65 ) {
+//                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Age Last Birthday must be less than or equal to 65 for this product."
+//                                                               delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
+//                [alert show];
+//                alert = Nil;
+//                blocked = YES;
+//                
+//            } else {
+//                [self loadSecondLAPage];
+//                selectedPath = indexPath;
+//            }
             
         } else if (indexPath.row == SIMENU_PAYOR) {
             if ([getOccpCode isEqualToString:@"OCC01975"]) {
@@ -4629,7 +4634,7 @@ BOOL isFirstLoad;
 
 -(void)saveAll
 {    
-    NSString* msg = @"Confirm changes?";	
+    NSString* msg = @"Simpan perubahan?";
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:msg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"CANCEL",nil];
     [alert setTag:3001];
     [alert show];    

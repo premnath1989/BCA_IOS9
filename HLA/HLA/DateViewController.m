@@ -121,7 +121,7 @@ id msg, ComDate;
     [dateFormatter setDateFormat:@"dd/MM/yyyy"];
     
     if ((yearN<yearB)||(yearN==yearB && monthN<monthB)||(yearN==yearB && monthN==monthB && dayN<dayB)) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Entered date cannot be greater than today." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Tanggal yang dimasukkan tidak boleh melebihi tanggal hari ini" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
     }
     else {
