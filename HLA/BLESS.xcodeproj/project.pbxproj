@@ -422,6 +422,7 @@
 		AADD7E711C743A1E00D87750 /* DDXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = AADD7E681C743A1E00D87750 /* DDXMLDocument.m */; };
 		AADD7E721C743A1E00D87750 /* DDXMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = AADD7E6A1C743A1E00D87750 /* DDXMLElement.m */; };
 		AADD7E731C743A1E00D87750 /* DDXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = AADD7E6C1C743A1E00D87750 /* DDXMLNode.m */; };
+		AADD7E771C76AB2F00D87750 /* SessionManagement.m in Sources */ = {isa = PBXBuildFile; fileRef = AADD7E761C76AB2F00D87750 /* SessionManagement.m */; };
 		AAFEE0351C6C1EC900702F64 /* TableManagement.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFEE0341C6C1EC900702F64 /* TableManagement.m */; };
 		AAFEE0381C6C239E00702F64 /* ColumnHeaderStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFEE0371C6C239E00702F64 /* ColumnHeaderStyle.m */; };
 		AAFEE03E1C6D927400702F64 /* UIButton+Property.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFEE03D1C6D927400702F64 /* UIButton+Property.m */; };
@@ -1530,6 +1531,8 @@
 		AADD7E6B1C743A1E00D87750 /* DDXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLNode.h; sourceTree = "<group>"; };
 		AADD7E6C1C743A1E00D87750 /* DDXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLNode.m; sourceTree = "<group>"; };
 		AADD7E6E1C743A1E00D87750 /* DDXMLPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLPrivate.h; sourceTree = "<group>"; };
+		AADD7E751C76AB1800D87750 /* SessionManagement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SessionManagement.h; sourceTree = "<group>"; };
+		AADD7E761C76AB2F00D87750 /* SessionManagement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionManagement.m; sourceTree = "<group>"; };
 		AAFEE0331C6C1EBD00702F64 /* TableManagement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TableManagement.h; sourceTree = "<group>"; };
 		AAFEE0341C6C1EC900702F64 /* TableManagement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableManagement.m; sourceTree = "<group>"; };
 		AAFEE0361C6C239000702F64 /* ColumnHeaderStyle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColumnHeaderStyle.h; sourceTree = "<group>"; };
@@ -3403,6 +3406,15 @@
 			path = Private;
 			sourceTree = "<group>";
 		};
+		AADD7E741C76AAEC00D87750 /* SessionManagement */ = {
+			isa = PBXGroup;
+			children = (
+				AADD7E751C76AB1800D87750 /* SessionManagement.h */,
+				AADD7E761C76AB2F00D87750 /* SessionManagement.m */,
+			);
+			name = SessionManagement;
+			sourceTree = "<group>";
+		};
 		AAFEE0321C6C1EA300702F64 /* TableManagement */ = {
 			isa = PBXGroup;
 			children = (
@@ -4258,6 +4270,7 @@
 		C4EB48EC16152E8800C7FC8C /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				AADD7E741C76AAEC00D87750 /* SessionManagement */,
 				AAD5455C1C643FF00029631D /* LoginUtilities */,
 				6CB3125F18EE4E2B00A323A4 /* LoginVar.h */,
 				6CB3126018EE4E2B00A323A4 /* LoginVar.m */,
@@ -5215,6 +5228,7 @@
 				2958A88D17E9602D0090A791 /* RecordofAdvice.m in Sources */,
 				2958A89117E960610090A791 /* Declare.m in Sources */,
 				2958A89917E960890090A791 /* ConfirmationCFF.m in Sources */,
+				AADD7E771C76AB2F00D87750 /* SessionManagement.m in Sources */,
 				2958A89A17E960890090A791 /* ExistingProductRecommended.m in Sources */,
 				2958A89B17E960890090A791 /* ProductRecommended.m in Sources */,
 				2958A8A617E960B40090A791 /* FNAEducation.m in Sources */,
