@@ -58,6 +58,8 @@
     NSString *temp_cont4;
     
     NSString *getSameRecord_Indexno;
+    
+    NSDictionary* dictAgentData;
 	
 	int clickDone;		//if user click done, = 1
     UIColor *borderColor;
@@ -350,6 +352,10 @@ bool RegDatehandling;
 	
 	[self.view addGestureRecognizer:tap];
     
+    modelAgentProfil=[[ModelAgentProfile alloc]init];
+    dictAgentData=[[NSDictionary alloc]initWithDictionary:[modelAgentProfil getAgentData]];
+    [_txtChannelName setText:[dictAgentData valueForKey:@"ChannelName"]];
+    [txtKanwil setText:[dictAgentData valueForKey:@"Kanwil"]];
     //txtHomeCountry.text=@"Indonesia";
     //txtOfficeCountry.text=@"Indonesia";
 }
@@ -2511,10 +2517,6 @@ bool RegDatehandling;
     /*added by faiz*/
     [outletMaritalStatus setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"SINGLE"]forState:UIControlStateNormal];
     txtExactDuties.text=@"test";
-    //txtPrefix1.text=@"021";
-    //txtPrefix2.text=@"021";
-    //txtPrefix3.text=@"021";
-    //txtPrefix4.text=@"021";
     /*end of added by faiz*/
     
     if ([self Validation] == TRUE && DATE_OK == YES) {
