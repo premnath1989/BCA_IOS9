@@ -79,7 +79,10 @@ BOOL isFirstLoad;
     //--for table view
     //self.myTableView.backgroundColor = [UIColor darkGrayColor];
     
-    ListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"1   Pemegang Polis", @"2   Tertanggung", @"3  Ansurasi Dasar \n Asuransi Tambahan \n Premi", @"4   Ilustrasi ",@"Produk Brosur",@"Simpan sebagai Baru", nil];
+    _NumberListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"1", @"2", @"3", @"4",@"0",@"0", nil];
+    ListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"Pemegang Polis", @"Tertanggung", @"Asuransi Dasar,\nAsuransi Tambahan,\nPremi", @"Ilustrasi ",@"Produk Brosur",@"Simpan sebagai Baru", nil];
+    //ListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"1   Pemegang Polis", @"2   Tertanggung", @"3  Ansurasi Dasar \n Asuransi Tambahan \n Premi", @"4   Ilustrasi ",@"Produk Brosur",@"Simpan sebagai Baru", nil];
+    
     appDel = (AppDelegate*)[[UIApplication sharedApplication] delegate ];
     
     PlanEmpty = YES;
@@ -2414,9 +2417,9 @@ BOOL isFirstLoad;
     return ListOfSubMenu.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)myTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	static NSString *CellIdentifier = @"Cell";
+	/*static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [self.myTableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
@@ -2498,7 +2501,27 @@ BOOL isFirstLoad;
     lineView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     lineView.backgroundColor = [UIColor blackColor];
     
-    [cell.contentView addSubview:lineView];
+    [cell.contentView addSubview:lineView];*/
+    static NSString *CellIdentifier = @"Cell";
+    SIMenuTableViewCell *cell = (SIMenuTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SIMenuTableViewCell" owner:self options:nil];
+        cell = [nib objectAtIndex:0];
+    }
+    UIView *bgColorView = [[UIView alloc] init];
+    bgColorView.backgroundColor = [UIColor orangeColor];
+    [cell setSelectedBackgroundView:bgColorView];
+    
+    if ([[_NumberListOfSubMenu objectAtIndex:indexPath.row] isEqualToString:@"0"]){
+        [cell.labelNumber setText:@""];
+        [cell.labelDesc setText:@""];
+        [cell.labelWide setText:[ListOfSubMenu objectAtIndex:indexPath.row]];
+    }
+    else{
+        [cell.labelNumber setText:[_NumberListOfSubMenu objectAtIndex:indexPath.row]];
+        [cell.labelDesc setText:[ListOfSubMenu objectAtIndex:indexPath.row]];
+        [cell.labelWide setText:@""];
+    }
     
     return cell;
 }

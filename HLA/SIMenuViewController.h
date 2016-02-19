@@ -26,6 +26,7 @@
 #import "DataTable.h"
 
 #import "Constants.h"
+#import "SIMenuTableViewCell.h"
 
 @class SIMenuViewController;
 @protocol SIMenuDelegate
@@ -121,6 +122,7 @@
 @property (nonatomic,retain) HLViewController *HLController;
 @property (nonatomic,retain) FSVerticalTabBarController *FS;
 
+@property (retain, nonatomic) NSMutableArray *NumberListOfSubMenu;
 @property (retain, nonatomic) NSMutableArray *ListOfSubMenu;
 @property (retain, nonatomic) NSMutableArray *SelectedRow;
 @property (nonatomic,strong) BasicPlanHandler *menuBH;
