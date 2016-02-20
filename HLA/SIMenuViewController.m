@@ -80,7 +80,7 @@ BOOL isFirstLoad;
     //self.myTableView.backgroundColor = [UIColor darkGrayColor];
     
     _NumberListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"1", @"2", @"3", @"4",@"0",@"0", nil];
-    ListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"Pemegang Polis", @"Tertanggung", @"Asuransi Dasar,\nAsuransi Tambahan,\nPremi", @"Ilustrasi ",@"Produk Brosur",@"Simpan sebagai Baru", nil];
+    ListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"Pemegang Polis", @"Tertanggung", @"Asuransi Dasar\nAsuransi Tambahan\nPremi", @"Ilustrasi ",@"Produk Brosur",@"Simpan sebagai Baru", nil];
     //ListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"1   Pemegang Polis", @"2   Tertanggung", @"3  Ansurasi Dasar \n Asuransi Tambahan \n Premi", @"4   Ilustrasi ",@"Produk Brosur",@"Simpan sebagai Baru", nil];
     
     appDel = (AppDelegate*)[[UIApplication sharedApplication] delegate ];
@@ -528,7 +528,7 @@ BOOL isFirstLoad;
     if ([self.requestSINo isEqualToString:self.requestSINo2] || (self.requestSINo == NULL && self.requestSINo2 == NULL) ) {        
         PlanEmpty = YES;
         added = NO;
-		ListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"1   Pemegang Polis", @"2   Tertanggung", @"3  Ansurasi Dasar \n Asuransi Tambahan \n Premi", @"4   Ilustrasi ",@"Produk Brosur",@"Simpan sebagai Baru", nil];
+		ListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"Pemegang Polis", @"Tertanggung", @"Ansurasi Dasar \n Asuransi Tambahan \n Premi", @"Ilustrasi ",@"Produk Brosur",@"Simpan sebagai Baru", nil];
 //		ListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"Life Assured", @"   2nd Life Assured", @"   Payor", @"Basic Plan", nil];
         
         [self RemovePDS];
