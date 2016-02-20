@@ -5272,7 +5272,7 @@ NSString *prevPlan;
 }
 
 -(void)RemovePDS {
-    ListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"1   Pemegang Polis", @"2   Tertanggung", @"3  Ansurasi Dasar \n Asuransi Tambahan \n Premi", @"4   Ilustrasi ",@"Produk Brosur",@"Simpan sebagai Baru", nil];
+    ListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"Pemegang Polis", @"Tertanggung", @"Ansurasi Dasar \n Asuransi Tambahan \n Premi", @"Ilustrasi ",@"Produk Brosur",@"Simpan sebagai Baru", nil];
 //	ListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"Life Assured", @"   2nd Life Assured", @"   Payor", @"Basic Plan", nil];
 }
 
