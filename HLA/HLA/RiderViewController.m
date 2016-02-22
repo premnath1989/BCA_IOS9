@@ -101,7 +101,7 @@ int maxGycc = 0;
 {
     ridNotAffected = [NSArray arrayWithObjects: @"ACIR_MPP", @"CIR", @"ICR", @"LCPR", @"LCWP", @"PLCP", @"PTR", @"PR", @"SP_PRE",@"SP_STD" , nil];
     
-    myView.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg10.jpg"]];
+    //myView.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg10.jpg"]];
     
     NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docsDir = [dirPaths objectAtIndex:0];
@@ -119,16 +119,17 @@ int maxGycc = 0;
     tempHLLabel.text = @"Temporary Health\nLoading (Per 1k SA):";
     tempHLTLabel.text = @"Temporary Health Loading\n(Per 1k SA)Term:";
     
-    [editBtn setBackgroundImage:[[UIImage imageNamed:@"iphone_delete_button.png"] stretchableImageWithLeftCapWidth:8.0f topCapHeight:0.0f] forState:UIControlStateNormal];
-    [editBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    editBtn.titleLabel.shadowColor = [UIColor lightGrayColor];
-    editBtn.titleLabel.shadowOffset = CGSizeMake(0, -1);
+    //[editBtn setBackgroundImage:[[UIImage imageNamed:@"iphone_delete_button.png"] stretchableImageWithLeftCapWidth:8.0f topCapHeight:0.0f] forState:UIControlStateNormal];
+    //[editBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    //editBtn.titleLabel.shadowColor = [UIColor lightGrayColor];
+    //editBtn.titleLabel.shadowOffset = CGSizeMake(0, -1);
     
-    [deleteBtn setBackgroundImage:[[UIImage imageNamed:@"iphone_delete_button.png"] stretchableImageWithLeftCapWidth:8.0f topCapHeight:0.0f] forState:UIControlStateNormal];
-    [deleteBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    deleteBtn.titleLabel.shadowColor = [UIColor lightGrayColor];
-    deleteBtn.titleLabel.shadowOffset = CGSizeMake(0, -1);
-    
+    //[deleteBtn setBackgroundImage:[[UIImage imageNamed:@"iphone_delete_button.png"] stretchableImageWithLeftCapWidth:8.0f topCapHeight:0.0f] forState:UIControlStateNormal];
+    //[deleteBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    //deleteBtn.titleLabel.shadowColor = [UIColor lightGrayColor];
+    //deleteBtn.titleLabel.shadowOffset = CGSizeMake(0, -1);
+    themeColour = [UIColor colorWithRed:242.0f/255.0f green:113.0f/255.0f blue:134.0f/255.0f alpha:1];
+    [self setTextfieldBorder];
     [super viewDidLoad];
 	
 }
@@ -585,6 +586,38 @@ int maxGycc = 0;
     
     return YES;
 }
+
+#pragma mark - added by faiz
+//added by faiz
+-(void)setTextfieldBorder{
+    UIFont *font= [UIFont fontWithName:@"TreBuchet MS" size:16.0f];
+    for (UIView *view in [myView subviews]) {
+        if ([view isKindOfClass:[UITextField class]]) {
+            UITextField *textField = (UITextField *)view;
+            textField.layer.borderColor=themeColour.CGColor;
+            textField.layer.borderWidth=1.0;
+            textField.delegate=self;
+            [textField setFont:font];
+            
+            UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
+            textField.leftView = paddingView;
+            textField.leftViewMode = UITextFieldViewModeAlways;
+        }
+        
+        if ([view isKindOfClass:[UIButton class]]) {
+            UIButton *button = (UIButton *)view;
+            if (button.tag>0){
+                button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+                button.layer.borderColor=themeColour.CGColor;
+                button.layer.borderWidth=1.0;
+                [button.titleLabel setFont:font];
+            }
+        }
+    }
+    
+}
+//end of added by faiz
+
 
 -(void)displayedMinMax
 {    

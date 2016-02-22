@@ -27,6 +27,7 @@
 -(void)clearPayor;
 -(void)setNewPlan:(NSString*)planChoose;
 -(void)SwitchToRiderTab;
+-(void)brngSubview:(NSString *)view;
 @end
 
 @interface BasicPlanViewController : UIViewController <UITextFieldDelegate,PlanListDelegate>{
@@ -159,6 +160,10 @@
 @property (strong, nonatomic) IBOutlet UITextField *totalPremiWithLoadingField;
 @property (strong, nonatomic) IBOutlet UIButton *masaPembayaranButton;
 @property (strong, nonatomic) IBOutlet UIButton *frekuensiPembayaranButton;
+
+- (IBAction)tempNext:(id)sender;
+-(IBAction)actionMasaPembayaran:(id)sender;
+-(IBAction)actionFrekuensiPembayaran:(id)sender;
 //end of added by faiz
 
 //for SINo

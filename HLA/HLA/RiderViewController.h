@@ -68,6 +68,7 @@
     
     double dblGrossPrem;
  
+    UIColor *themeColour;
 }
 
 @property (nonatomic, retain) UIPopoverController *RiderListPopover;
@@ -225,6 +226,11 @@
 @property (strong, nonatomic) IBOutlet UIButton *editBtn;
 @property (strong, nonatomic) IBOutlet UIButton *deleteBtn;
 @property (strong, nonatomic) IBOutlet UILabel *titleHLPTerm;
+
+//Added by faiz
+@property (retain, nonatomic) IBOutlet UIButton *titleRidCode;
+@property (retain, nonatomic) IBOutlet UIButton *titleRidCode;
+//end of Added by faiz
 
 @property (retain, nonatomic) NSMutableArray *LRiderCode;
 @property (retain, nonatomic) NSMutableArray *LSumAssured;

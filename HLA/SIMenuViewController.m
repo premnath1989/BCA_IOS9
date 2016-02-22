@@ -600,6 +600,14 @@ BOOL isFirstLoad;
     [myTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 }
 
+#pragma mark - temporary function added by faiz
+//added by faiz
+-(void)brngSubview:(NSString *)view{
+    if ([view isEqualToString:@"Rider"]){
+        [RightView bringSubviewToFront:_RiderController.view];
+    }
+}
+
 #pragma mark - action
 
 -(BOOL)select2ndLA

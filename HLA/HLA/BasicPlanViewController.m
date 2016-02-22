@@ -382,6 +382,15 @@ bool WPTPD30RisDeleted = FALSE;
 
 #pragma mark - added by faiz 
 //added by faiz
+
+-(IBAction)actionMasaPembayaran:(id)sender{
+
+}
+
+-(IBAction)actionFrekuensiPembayaran:(id)sender{
+    
+}
+
 -(void)setTextfieldBorder{
     UIFont *font= [UIFont fontWithName:@"TreBuchet MS" size:16.0f];
     for (UIView *view in [myScrollView subviews]) {
@@ -610,6 +619,17 @@ bool WPTPD30RisDeleted = FALSE;
     [self updateBasicPlan];
     [_delegate saveAll];
 }
+
+- (IBAction)tempNext:(id)sender
+{
+    [self resignFirstResponder];
+    [self.view endEditing:YES];
+    Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
+    id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
+    [activeInstance performSelector:@selector(dismissKeyboard)];
+    [_delegate brngSubview:@"Rider"];
+}
+
 
 -(BOOL)checkingSave:(NSString *)getSex
 {
