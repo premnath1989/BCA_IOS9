@@ -140,7 +140,9 @@ id dobtanngal;
         btnProspect.enabled = NO;
         NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
         [prefs setObject:@"Yes" forKey:@"keyToLookupString"];
-        [self.SecondLAController testing:@"helloMyPrem"];
+        _SecondLAController =[self.storyboard instantiateViewControllerWithIdentifier:@"secondLAView"];
+        [_SecondLAController testing:@"Enable"];
+        
     }
     else
     {
@@ -157,6 +159,8 @@ id dobtanngal;
         btnProspect.enabled = YES;
         NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
         [prefs setObject:@"No" forKey:@"keyToLookupString"];
+        _SecondLAController =[self.storyboard instantiateViewControllerWithIdentifier:@"secondLAView"];
+        [_SecondLAController testing:@"Disable"];
     }
 }
 
@@ -2359,7 +2363,7 @@ id dobtanngal;
 -(BOOL)validateSave// validate new la before saving
 {
     //temp
-    return YES;
+    //return YES;
     
     int LAAGEint = [[LAAgeField text] intValue];
     
