@@ -75,7 +75,7 @@ bool WPTPD30RisDeleted = FALSE;
     
     appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate ];
 	
-    self.view.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg10.jpg"]];
+    //self.view.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg10.jpg"]];
     self.healthLoadingView.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg10.jpg"]];
     
     NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -184,6 +184,8 @@ bool WPTPD30RisDeleted = FALSE;
         isFirstSaved = FALSE;
     }
 
+    themeColour = [UIColor colorWithRed:242.0f/255.0f green:113.0f/255.0f blue:134.0f/255.0f alpha:1];
+    [self setTextfieldBorder];
 }
 
 -(void) disableFieldsForEapp
@@ -376,6 +378,36 @@ bool WPTPD30RisDeleted = FALSE;
     
     return YES;
 }
+
+
+#pragma mark - added by faiz 
+//added by faiz
+-(void)setTextfieldBorder{
+    UIFont *font= [UIFont fontWithName:@"TreBuchet MS" size:16.0f];
+    for (UIView *view in [myScrollView subviews]) {
+        if ([view isKindOfClass:[UITextField class]]) {
+            UITextField *textField = (UITextField *)view;
+            textField.layer.borderColor=themeColour.CGColor;
+            textField.layer.borderWidth=1.0;
+            textField.delegate=self;
+            [textField setFont:font];
+            
+            UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
+            textField.leftView = paddingView;
+            textField.leftViewMode = UITextFieldViewModeAlways;
+        }
+        
+        if ([view isKindOfClass:[UIButton class]]) {
+            UIButton *button = (UIButton *)view;
+            button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+            button.layer.borderColor=themeColour.CGColor;
+            button.layer.borderWidth=1.0;
+            [button.titleLabel setFont:font];
+        }
+    }
+
+}
+//end of added by faiz
 
 #pragma mark - Action
 

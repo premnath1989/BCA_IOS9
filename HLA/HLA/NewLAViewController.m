@@ -2363,7 +2363,7 @@ id dobtanngal;
 -(BOOL)validateSave// validate new la before saving
 {
     //temp
-    //return YES;
+    return YES;
     
     int LAAGEint = [[LAAgeField text] intValue];
     

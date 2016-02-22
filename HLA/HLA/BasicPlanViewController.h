@@ -62,6 +62,8 @@
     NSMutableArray *LRidHLPTerm;
     NSMutableArray *LTempRidHL1KTerm;
     double dblGrossPrem;
+    
+    UIColor *themeColour;
 }
 
 @property (nonatomic, retain) UIPopoverController *planPopover;
@@ -147,6 +149,17 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *quotationLangSegment;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *outletDone;
 @property (weak, nonatomic) IBOutlet UILabel *labelThree;
+
+//Added by faiz
+@property (strong, nonatomic) IBOutlet UITextField *basicPremiField;
+@property (strong, nonatomic) IBOutlet UITextField *extraPremiPercentField;
+@property (strong, nonatomic) IBOutlet UITextField *extraPremiNumberField;
+@property (strong, nonatomic) IBOutlet UITextField *masaExtraPremiField;
+@property (strong, nonatomic) IBOutlet UITextField *extraBasicPremiField;
+@property (strong, nonatomic) IBOutlet UITextField *totalPremiWithLoadingField;
+@property (strong, nonatomic) IBOutlet UIButton *masaPembayaranButton;
+@property (strong, nonatomic) IBOutlet UIButton *frekuensiPembayaranButton;
+//end of added by faiz
 
 //for SINo
 @property (nonatomic, assign,readwrite) int SILastNo;
