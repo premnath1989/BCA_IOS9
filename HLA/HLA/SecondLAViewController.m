@@ -60,22 +60,18 @@ id dobtemp;
 		Editable = YES;
 	}
     
-    sexSegment.selectedSegmentIndex = UISegmentedControlNoSegment;
-    smokerSegment.selectedSegmentIndex = UISegmentedControlNoSegment;
+   
 	
-    getLAIndexNo = requestLAIndexNo;
-    getCommDate = [self.requestCommDate description];
-    getSINo = [self.requestSINo description];
-    
-    nameField.enabled = NO;
-    sexSegment.enabled = NO;
-    ageField.enabled = NO;
-    OccpLoadField.enabled = NO;
-    CPAField.enabled = NO;
-    PAField.enabled = NO;
-    DOBField.enabled = NO;
-    OccpField.enabled = NO;
-    self.deleteBtn.hidden = YES;
+ //
+//    nameField.enabled = NO;
+//    sexSegment.enabled = NO;
+//    ageField.enabled = NO;
+//    OccpLoadField.enabled = NO;
+//    CPAField.enabled = NO;
+//    PAField.enabled = NO;
+//    DOBField.enabled = NO;
+//    OccpField.enabled = NO;
+//    self.deleteBtn.hidden = YES;
     
     [nameField setDelegate:self];
     [ageField setDelegate:self];
@@ -93,8 +89,8 @@ id dobtemp;
     deleteBtn.titleLabel.shadowColor = [UIColor lightGrayColor];
     deleteBtn.titleLabel.shadowOffset = CGSizeMake(0, -1);
     
-	btnDOB.enabled = FALSE;
-	btnOccp.enabled = FALSE;
+//	btnDOB.enabled = FALSE;
+//	btnOccp.enabled = FALSE;
     
 	UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
 								   initWithTarget:self
@@ -171,7 +167,27 @@ id dobtemp;
 
 -(void)testing :(NSString *)testing
 {
-    NSLog(@"testing %@",testing);
+    if ([testing isEqualToString:@"Enable"])
+    {
+        nameField.text =@"test";
+        nameField.enabled = false;
+        _BtnTanggalLahir.enabled = false;
+        ageField.enabled = false;
+        sexSegment.enabled = false;
+        btnOccp.enabled = false;
+        outletProspect.enabled = NO;
+    }
+    else if ([testing isEqualToString:@"Disable"])
+    {
+        
+        nameField.text = @"TestDisable";
+        nameField.enabled = false;
+        _BtnTanggalLahir.enabled = false;
+        ageField.enabled = false;
+        sexSegment.enabled = false;
+        btnOccp.enabled = false;
+        outletProspect.enabled = YES;
+    }
 }
 
 -(void) disableFieldsForEapp
@@ -261,6 +277,7 @@ id dobtemp;
         } else {
             [btnDOB setTitle:aDate forState:UIControlStateNormal];
             DOB = aDate;
+            [_BtnTanggalLahir setTitle:aDate forState:UIControlStateNormal];
             [self calculateAge];
             ageField.text = [[NSString alloc] initWithFormat:@"%d",bAge];
         }
@@ -490,7 +507,10 @@ id dobtemp;
         self.OccupationListPopover = [[UIPopoverController alloc] initWithContentViewController:_OccupationList];
     }
     
-	[self.OccupationListPopover presentPopoverFromRect:[sender frame]  inView:self.view permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
+    CGRect rect = [sender frame];
+    rect.origin.y = [sender frame].origin.y + 70;
+    
+	[self.OccupationListPopover presentPopoverFromRect:[sender frame]  inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
 }
 
 -(IBAction)btnDOBPressed:(id)sender{

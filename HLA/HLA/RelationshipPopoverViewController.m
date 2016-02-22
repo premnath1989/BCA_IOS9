@@ -25,9 +25,11 @@
         NSString *file = [[NSBundle mainBundle] pathForResource:@"Relationship" ofType:@"plist"];
         NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:file];
         
+        //
+        
         //_IDTypes = [NSMutableArray array];
         //_IDTypes = [dict objectForKey:@"Title"];//[NSMutableArray array];
-        _IDTypes = [[NSMutableArray alloc] initWithObjects:@"BROTHER", @"DAUGHTER", @"FATHER", @"GRAND DAUGHTER", @"GRANDFATHER", @"GRANDMOTHER", @"GRANDSON", @"GUARDIAN", @"HUSBAND", @"MOTHER", @"SISTER", @"SON", @"STEP DAUGHTER", @"STEP FATHER", @"STEP MOTHER", @"STEP SON", @"WIFE", nil];
+        _IDTypes = [[NSMutableArray alloc] initWithObjects:@"BROTHER", @"DAUGHTER", @"FATHER", @"GRAND DAUGHTER", @"GRANDFATHER", @"GRANDMOTHER", @"GRANDSON", @"GUARDIAN", @"HUSBAND", @"MOTHER", @"SISTER", @"SON", @"SELF", @"STEP DAUGHTER", @"STEP FATHER", @"STEP MOTHER", @"STEP SON", @"WIFE", nil];
         
         self.clearsSelectionOnViewWillAppear = NO;
         
