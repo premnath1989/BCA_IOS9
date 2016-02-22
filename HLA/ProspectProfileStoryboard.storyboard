@@ -20,7 +20,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" showsHorizontalScrollIndicator="NO" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g5K-hZ-wZf">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" showsHorizontalScrollIndicator="NO" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g5K-hZ-wZf">
                                 <rect key="frame" x="0.0" y="-143" width="1324" height="1192"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Date of Birth" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="qKc-gk-Ivw">
@@ -887,7 +887,7 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" misplaced="YES" text="GST Registration Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V5R-2F-kw6">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="GST Registration Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V5R-2F-kw6">
                                         <rect key="frame" x="26" y="841" width="157" height="19"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="157" id="APU-CD-Oz7"/>
@@ -897,7 +897,7 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" misplaced="YES" text="GST Exempted" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gum-5C-cAQ">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="GST Exempted" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gum-5C-cAQ">
                                         <rect key="frame" x="26" y="873" width="150" height="19"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="150" id="Ifp-ur-3Rf"/>
@@ -940,7 +940,7 @@
                                         <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="16"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="brl-FQ-HGm">
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="brl-FQ-HGm">
                                         <rect key="frame" x="193" y="873" width="253" height="29"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -970,11 +970,11 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="6ks-8a-ACh">
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="6ks-8a-ACh">
                                         <rect key="frame" x="584" y="732" width="257" height="29"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="247" id="9XJ-7o-0FO"/>
+                                            <constraint firstAttribute="width" constant="257" id="9XJ-7o-0FO"/>
                                             <constraint firstAttribute="height" constant="28" id="yeS-KW-fc7"/>
                                         </constraints>
                                         <segments>
@@ -985,7 +985,7 @@
                                             <action selector="ActionIsGrouping:" destination="CEO-Xo-hVe" eventType="valueChanged" id="liZ-X7-Peq"/>
                                         </connections>
                                     </segmentedControl>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Zs-yc-0UE">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Zs-yc-0UE">
                                         <rect key="frame" x="193" y="837" width="254" height="31"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -1207,7 +1207,7 @@
                                     <constraint firstItem="IzJ-uu-h9N" firstAttribute="leading" secondItem="V5R-2F-kw6" secondAttribute="trailing" constant="219" id="GtD-Lq-8LM"/>
                                     <constraint firstItem="YVT-7l-TEm" firstAttribute="top" secondItem="cYj-0f-n9G" secondAttribute="bottom" constant="7" id="GyX-kf-HCq"/>
                                     <constraint firstItem="1yg-F4-BGd" firstAttribute="leading" secondItem="g5K-hZ-wZf" secondAttribute="leading" constant="30" id="H1v-n7-zvC"/>
-                                    <constraint firstItem="3Zs-yc-0UE" firstAttribute="top" secondItem="5dR-HK-o2g" secondAttribute="bottom" constant="3" id="H5a-pU-eRa"/>
+                                    <constraint firstItem="3Zs-yc-0UE" firstAttribute="top" secondItem="5dR-HK-o2g" secondAttribute="bottom" constant="4" id="H5a-pU-eRa"/>
                                     <constraint firstItem="kyb-w3-zyF" firstAttribute="leading" secondItem="Cnh-zX-prb" secondAttribute="trailing" constant="62" id="H9B-s5-idg"/>
                                     <constraint firstItem="ymC-mG-8DZ" firstAttribute="leading" secondItem="OMM-uf-jiw" secondAttribute="trailing" constant="97" id="HVh-Wy-rY0"/>
                                     <constraint firstItem="ymC-mG-8DZ" firstAttribute="top" secondItem="upM-MD-MOQ" secondAttribute="bottom" constant="6" id="HXg-Sm-V09"/>
@@ -1252,8 +1252,8 @@
                                     <constraint firstItem="7aU-DV-W8S" firstAttribute="top" secondItem="g5K-hZ-wZf" secondAttribute="top" constant="65" id="TeE-9F-PRs"/>
                                     <constraint firstItem="QaG-Xj-GF6" firstAttribute="leading" secondItem="XMc-RX-oka" secondAttribute="trailing" constant="15" id="UJs-oF-wHf"/>
                                     <constraint firstItem="HLR-kz-xjr" firstAttribute="leading" secondItem="WnD-Z7-m9f" secondAttribute="trailing" constant="63" id="UMa-EM-O5t"/>
-                                    <constraint firstAttribute="trailing" secondItem="nmJ-ad-icK" secondAttribute="trailing" constant="1003" id="UMq-bq-ds1"/>
-                                    <constraint firstItem="V5R-2F-kw6" firstAttribute="top" secondItem="M5h-aS-lvJ" secondAttribute="bottom" constant="6" id="UXk-AB-gSJ"/>
+                                    <constraint firstAttribute="trailing" secondItem="nmJ-ad-icK" secondAttribute="trailing" constant="879" id="UMq-bq-ds1"/>
+                                    <constraint firstItem="V5R-2F-kw6" firstAttribute="top" secondItem="M5h-aS-lvJ" secondAttribute="bottom" constant="13" id="UXk-AB-gSJ"/>
                                     <constraint firstItem="6h6-Ck-5Yh" firstAttribute="leading" secondItem="dvm-Nr-Ykg" secondAttribute="trailing" constant="62" id="UuN-Ai-21V"/>
                                     <constraint firstItem="5dR-HK-o2g" firstAttribute="top" secondItem="Bed-sg-zf5" secondAttribute="bottom" constant="5" id="V7C-vI-8ml"/>
                                     <constraint firstItem="QSB-OM-Eje" firstAttribute="leading" secondItem="AGB-Ah-AeI" secondAttribute="trailing" constant="8" id="VHA-g8-DSY"/>
@@ -1265,7 +1265,7 @@
                                     <constraint firstItem="Cnh-zX-prb" firstAttribute="leading" secondItem="HQn-2Q-3S1" secondAttribute="trailing" constant="23" id="Y6C-aF-S7w"/>
                                     <constraint firstItem="17Y-KC-BHq" firstAttribute="top" secondItem="XMc-RX-oka" secondAttribute="bottom" constant="10" id="Yll-Sz-t0U"/>
                                     <constraint firstItem="NIe-H1-akB" firstAttribute="top" secondItem="eaY-aj-xls" secondAttribute="bottom" constant="8" id="ZlC-wc-23W"/>
-                                    <constraint firstAttribute="bottom" secondItem="nmJ-ad-icK" secondAttribute="bottom" constant="1157" id="aCa-bf-J5x"/>
+                                    <constraint firstAttribute="bottom" secondItem="nmJ-ad-icK" secondAttribute="bottom" constant="911" id="aCa-bf-J5x"/>
                                     <constraint firstItem="V5R-2F-kw6" firstAttribute="leading" secondItem="g5K-hZ-wZf" secondAttribute="leading" constant="26" id="aIP-ws-pPp"/>
                                     <constraint firstItem="Cnh-zX-prb" firstAttribute="top" secondItem="nmJ-ad-icK" secondAttribute="bottom" constant="7" id="acJ-aU-Gxh"/>
                                     <constraint firstItem="wjn-C6-kQD" firstAttribute="leading" secondItem="1yg-F4-BGd" secondAttribute="trailing" constant="21" id="arp-WX-b3P"/>
@@ -1317,7 +1317,7 @@
                                     <constraint firstItem="HJl-zP-F0D" firstAttribute="leading" secondItem="g5K-hZ-wZf" secondAttribute="leading" constant="31" id="lRy-h9-PL0"/>
                                     <constraint firstItem="PQB-fO-CSJ" firstAttribute="top" secondItem="ZUI-12-COB" secondAttribute="bottom" constant="6" id="lcR-yl-ohd"/>
                                     <constraint firstItem="9Qw-Ew-asX" firstAttribute="top" secondItem="fDt-C9-09P" secondAttribute="bottom" constant="17" id="lwu-Pn-vvV"/>
-                                    <constraint firstItem="brl-FQ-HGm" firstAttribute="top" secondItem="3Zs-yc-0UE" secondAttribute="bottom" id="m6d-e5-gJc"/>
+                                    <constraint firstItem="brl-FQ-HGm" firstAttribute="top" secondItem="3Zs-yc-0UE" secondAttribute="bottom" constant="5" id="m6d-e5-gJc"/>
                                     <constraint firstItem="qKc-gk-Ivw" firstAttribute="leading" secondItem="g5K-hZ-wZf" secondAttribute="leading" constant="29" id="m8S-Td-Dof"/>
                                     <constraint firstItem="cLo-Fz-DxP" firstAttribute="leading" secondItem="VNM-LA-WKp" secondAttribute="trailing" constant="8" id="mYa-4G-P7S"/>
                                     <constraint firstAttribute="width" constant="1024" id="nGi-0X-W9B"/>
@@ -1352,7 +1352,7 @@
                                     <constraint firstItem="L1g-OX-FeP" firstAttribute="top" secondItem="9Jd-hs-YBi" secondAttribute="bottom" constant="12" id="xBQ-dv-Cj2"/>
                                     <constraint firstItem="gum-5C-cAQ" firstAttribute="leading" secondItem="g5K-hZ-wZf" secondAttribute="leading" constant="26" id="xHW-6b-Ll6"/>
                                     <constraint firstItem="XMc-RX-oka" firstAttribute="top" secondItem="f14-7r-jBy" secondAttribute="bottom" constant="8" id="xq5-IY-IVE"/>
-                                    <constraint firstItem="gum-5C-cAQ" firstAttribute="top" secondItem="V5R-2F-kw6" secondAttribute="bottom" constant="14" id="xx9-tL-JPa"/>
+                                    <constraint firstItem="gum-5C-cAQ" firstAttribute="top" secondItem="V5R-2F-kw6" secondAttribute="bottom" constant="13" id="xx9-tL-JPa"/>
                                     <constraint firstItem="wjn-C6-kQD" firstAttribute="top" secondItem="gIP-lv-zao" secondAttribute="bottom" constant="6" id="y3q-q0-fxs"/>
                                     <constraint firstItem="L1g-OX-FeP" firstAttribute="leading" secondItem="StF-Kh-oXJ" secondAttribute="trailing" constant="48" id="yim-8s-NGn"/>
                                     <constraint firstItem="NIe-H1-akB" firstAttribute="leading" secondItem="g5K-hZ-wZf" secondAttribute="leading" constant="29" id="yjc-R7-YYo"/>
@@ -1415,7 +1415,7 @@
                                                 <rect key="frame" x="199" y="25" width="253" height="30"/>
                                                 <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="CEO-Xo-hVe" id="Zf7-pl-D2z"/>
                                                 </connections>
@@ -1726,7 +1726,7 @@
                                                 <rect key="frame" x="199" y="329" width="253" height="30"/>
                                                 <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tempat Lahir" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sWm-U9-SSa">
                                                 <rect key="frame" x="20" y="333" width="161" height="21"/>
@@ -1901,7 +1901,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gAE-lQ-Lef">
-                                        <rect key="frame" x="0.0" y="671" width="1024" height="699"/>
+                                        <rect key="frame" x="0.0" y="671" width="1024" height="702"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Data Alamat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bcu-Mh-2Op">
                                                 <rect key="frame" x="20" y="0.0" width="184" height="21"/>
@@ -1910,7 +1910,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HML-rh-Mp9">
-                                                <rect key="frame" x="0.0" y="29" width="1024" height="369"/>
+                                                <rect key="frame" x="0.0" y="32" width="1024" height="369"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Nomor HP 2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ibq-MH-xJj">
                                                         <rect key="frame" x="20" y="342" width="161" height="21"/>
@@ -1940,7 +1940,7 @@
                                                         <rect key="frame" x="199" y="186" width="253" height="30"/>
                                                         <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Alamat Tempat Tinggal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pgw-J1-eie">
                                                         <rect key="frame" x="20" y="0.0" width="200" height="21"/>
@@ -1964,7 +1964,7 @@
                                                         <rect key="frame" x="199" y="34" width="740" height="30"/>
                                                         <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Kota" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OpU-ny-LVA">
                                                         <rect key="frame" x="517" y="190" width="161" height="21"/>
@@ -2006,7 +2006,7 @@
                                                         <rect key="frame" x="686" y="186" width="253" height="30"/>
                                                         <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                     </textField>
                                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SMS Notification No." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bw2-31-TI9">
                                                         <rect key="frame" x="20" y="380" width="161" height="21"/>
@@ -2018,7 +2018,7 @@
                                                         <rect key="frame" x="199" y="224" width="253" height="30"/>
                                                         <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dcQ-vE-I69">
                                                         <rect key="frame" x="460" y="304" width="14" height="21"/>
@@ -2038,7 +2038,7 @@
                                                         <rect key="frame" x="199" y="72" width="740" height="30"/>
                                                         <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="chC-j3-4lw">
                                                         <rect key="frame" x="947" y="76" width="14" height="21"/>
@@ -2050,7 +2050,7 @@
                                                         <rect key="frame" x="199" y="110" width="740" height="30"/>
                                                         <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7es-6D-Yyt">
                                                         <rect key="frame" x="947" y="114" width="14" height="21"/>
@@ -2074,7 +2074,7 @@
                                                         <rect key="frame" x="686" y="148" width="253" height="30"/>
                                                         <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Negara" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="be5-zo-Aco">
                                                         <rect key="frame" x="517" y="228" width="161" height="21"/>
@@ -2158,7 +2158,7 @@
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </view>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VMd-cs-4ZQ">
-                                                <rect key="frame" x="0.0" y="406" width="1024" height="293"/>
+                                                <rect key="frame" x="0.0" y="409" width="1024" height="293"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Nomor Telpon Kantor" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Wy-TU-aHl">
                                                         <rect key="frame" x="20" y="266" width="161" height="21"/>
@@ -2176,7 +2176,7 @@
                                                         <rect key="frame" x="199" y="186" width="253" height="30"/>
                                                         <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Alamat Kantor" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wgL-Mm-cUA">
                                                         <rect key="frame" x="20" y="0.0" width="161" height="21"/>
@@ -2200,7 +2200,7 @@
                                                         <rect key="frame" x="199" y="34" width="740" height="30"/>
                                                         <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Kota" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qMl-rF-dBd">
                                                         <rect key="frame" x="517" y="190" width="161" height="21"/>
@@ -2230,19 +2230,19 @@
                                                         <rect key="frame" x="686" y="186" width="253" height="30"/>
                                                         <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                     </textField>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="n6V-r0-0MJ">
                                                         <rect key="frame" x="199" y="224" width="253" height="30"/>
                                                         <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                     </textField>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qwz-kQ-BeL">
                                                         <rect key="frame" x="199" y="72" width="740" height="30"/>
                                                         <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                     </textField>
                                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gPY-fr-rXW">
                                                         <rect key="frame" x="947" y="76" width="14" height="21"/>
@@ -2254,7 +2254,7 @@
                                                         <rect key="frame" x="199" y="110" width="740" height="30"/>
                                                         <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                     </textField>
                                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2vK-By-2k3">
                                                         <rect key="frame" x="947" y="114" width="14" height="21"/>
@@ -2278,7 +2278,7 @@
                                                         <rect key="frame" x="686" y="148" width="253" height="30"/>
                                                         <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Negara" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F8K-Lx-xIW">
                                                         <rect key="frame" x="517" y="228" width="161" height="21"/>
@@ -2334,11 +2334,11 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="699" id="nVs-xJ-A7U"/>
+                                            <constraint firstAttribute="height" constant="702" id="nVs-xJ-A7U"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6nN-TV-0FR">
-                                        <rect key="frame" x="10" y="1375" width="1000" height="1"/>
+                                        <rect key="frame" x="10" y="1378" width="1000" height="1"/>
                                         <color key="backgroundColor" red="0.98039215690000003" green="0.68627450980000004" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="3n0-WC-4Xw"/>
@@ -2346,7 +2346,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FsL-eZ-tS4">
-                                        <rect key="frame" x="0.0" y="1380" width="1024" height="206"/>
+                                        <rect key="frame" x="0.0" y="1383" width="1024" height="206"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wyv-3a-y4n">
                                                 <rect key="frame" x="460" y="105" width="14" height="21"/>
@@ -2492,7 +2492,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kAd-fe-unr">
-                                        <rect key="frame" x="10" y="1591" width="1000" height="1"/>
+                                        <rect key="frame" x="10" y="1594" width="1000" height="1"/>
                                         <color key="backgroundColor" red="0.98039215690000003" green="0.68627450980000004" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="3jH-cf-jQV"/>
@@ -2500,7 +2500,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9EI-4x-PDy">
-                                        <rect key="frame" x="0.0" y="1596" width="1024" height="220"/>
+                                        <rect key="frame" x="0.0" y="1599" width="1024" height="220"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Other Info" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r7U-0V-ArP">
                                                 <rect key="frame" x="20" y="0.0" width="161" height="21"/>
@@ -2617,8 +2617,8 @@
                             <constraint firstItem="g5K-hZ-wZf" firstAttribute="top" secondItem="rsr-Im-u42" secondAttribute="bottom" id="8Ww-X8-EAE"/>
                             <constraint firstAttribute="trailing" secondItem="g5K-hZ-wZf" secondAttribute="trailing" constant="-300" id="H4j-5R-czE"/>
                             <constraint firstItem="g5K-hZ-wZf" firstAttribute="leading" secondItem="SV4-EF-z8N" secondAttribute="leading" id="N50-9x-Ry2"/>
-                            <constraint firstAttribute="bottom" secondItem="g5K-hZ-wZf" secondAttribute="bottom" constant="-380" id="PbJ-fJ-1Yq"/>
-                            <constraint firstItem="g5K-hZ-wZf" firstAttribute="top" secondItem="rsr-Im-u42" secondAttribute="bottom" constant="-94" id="RFU-wK-89w"/>
+                            <constraint firstAttribute="bottom" secondItem="g5K-hZ-wZf" secondAttribute="bottom" constant="-281" id="PbJ-fJ-1Yq"/>
+                            <constraint firstItem="g5K-hZ-wZf" firstAttribute="top" secondItem="rsr-Im-u42" secondAttribute="bottom" constant="-163" id="RFU-wK-89w"/>
                             <constraint firstAttribute="trailing" secondItem="W3B-ya-3sF" secondAttribute="trailing" id="VXx-v7-zjH"/>
                             <constraint firstAttribute="trailing" secondItem="g5K-hZ-wZf" secondAttribute="trailing" constant="-424" id="g2P-MU-hhJ"/>
                             <constraint firstItem="g5K-hZ-wZf" firstAttribute="leading" secondItem="SV4-EF-z8N" secondAttribute="leading" id="ggP-mk-vw2"/>
@@ -4346,7 +4346,7 @@
                                                 <rect key="frame" x="199" y="25" width="253" height="30"/>
                                                 <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zhp-OK-ixt">
                                                 <rect key="frame" x="199" y="66" width="253" height="24"/>
@@ -4536,7 +4536,7 @@
                                                 <rect key="frame" x="199" y="329" width="253" height="30"/>
                                                 <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tempat Lahir" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yqh-Ag-SZD">
                                                 <rect key="frame" x="30" y="333" width="161" height="21"/>
@@ -4700,7 +4700,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f4V-Z1-kY3">
-                                        <rect key="frame" x="0.0" y="673" width="1024" height="699"/>
+                                        <rect key="frame" x="0.0" y="673" width="1024" height="702"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Data Alamat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zgl-q1-5Oy">
                                                 <rect key="frame" x="20" y="0.0" width="194" height="21"/>
@@ -4709,7 +4709,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aJ2-71-xLO">
-                                                <rect key="frame" x="0.0" y="406" width="1024" height="293"/>
+                                                <rect key="frame" x="0.0" y="409" width="1024" height="293"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Nomor Telepon Kantor" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HAE-gR-nlE">
                                                         <rect key="frame" x="20" y="269" width="171" height="15"/>
@@ -4727,7 +4727,7 @@
                                                         <rect key="frame" x="199" y="186" width="253" height="30"/>
                                                         <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Alamat Kantor" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xZ9-BS-Z5c">
                                                         <rect key="frame" x="20" y="0.0" width="161" height="21"/>
@@ -4751,7 +4751,7 @@
                                                         <rect key="frame" x="199" y="34" width="740" height="30"/>
                                                         <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Kota" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yFw-82-LgD">
                                                         <rect key="frame" x="517" y="190" width="161" height="21"/>
@@ -4775,25 +4775,25 @@
                                                         <rect key="frame" x="686" y="186" width="253" height="30"/>
                                                         <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                     </textField>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5E8-w4-TS9">
                                                         <rect key="frame" x="199" y="224" width="253" height="30"/>
                                                         <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                     </textField>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LLe-Hb-Qcv">
                                                         <rect key="frame" x="199" y="72" width="740" height="30"/>
                                                         <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                     </textField>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OoV-wc-tYl">
                                                         <rect key="frame" x="199" y="110" width="740" height="30"/>
                                                         <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                     </textField>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pUA-mz-fJe">
                                                         <rect key="frame" x="301" y="262" width="151" height="30"/>
@@ -4811,7 +4811,7 @@
                                                         <rect key="frame" x="686" y="148" width="253" height="30"/>
                                                         <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Negara" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YkW-fO-4UY">
                                                         <rect key="frame" x="517" y="228" width="161" height="21"/>
@@ -4865,7 +4865,7 @@
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </view>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VSn-nf-cgd">
-                                                <rect key="frame" x="0.0" y="29" width="1024" height="369"/>
+                                                <rect key="frame" x="0.0" y="32" width="1024" height="369"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Nomor HP 2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Nr-l2-2cc">
                                                         <rect key="frame" x="20" y="342" width="171" height="21"/>
@@ -4895,7 +4895,7 @@
                                                         <rect key="frame" x="199" y="186" width="253" height="30"/>
                                                         <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Alamat Tempat Tinggal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6p9-MI-PLP">
                                                         <rect key="frame" x="20" y="0.0" width="187" height="21"/>
@@ -4919,7 +4919,7 @@
                                                         <rect key="frame" x="199" y="34" width="740" height="30"/>
                                                         <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Kota" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lSy-Q4-lu1">
                                                         <rect key="frame" x="517" y="190" width="161" height="21"/>
@@ -4961,13 +4961,13 @@
                                                         <rect key="frame" x="686" y="186" width="253" height="30"/>
                                                         <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                     </textField>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aSn-cx-gaj">
                                                         <rect key="frame" x="199" y="224" width="253" height="30"/>
                                                         <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rWx-CW-cyk">
                                                         <rect key="frame" x="460" y="304" width="14" height="21"/>
@@ -4979,7 +4979,7 @@
                                                         <rect key="frame" x="199" y="72" width="740" height="30"/>
                                                         <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U8Z-FX-XSM">
                                                         <rect key="frame" x="947" y="76" width="14" height="21"/>
@@ -4991,7 +4991,7 @@
                                                         <rect key="frame" x="199" y="110" width="740" height="30"/>
                                                         <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Mx-rY-914">
                                                         <rect key="frame" x="947" y="114" width="14" height="21"/>
@@ -5015,7 +5015,7 @@
                                                         <rect key="frame" x="686" y="148" width="253" height="30"/>
                                                         <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Negara" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wxB-hZ-Vbp">
                                                         <rect key="frame" x="517" y="228" width="161" height="21"/>
@@ -5025,6 +5025,7 @@
                                                     </label>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2EK-DK-UZL">
                                                         <rect key="frame" x="686" y="224" width="253" height="30"/>
+                                                        <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                                                         <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -5095,18 +5096,18 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="699" id="NKc-0W-v1s"/>
+                                            <constraint firstAttribute="height" constant="702" id="NKc-0W-v1s"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ziu-lw-4fn">
-                                        <rect key="frame" x="10" y="1377" width="1000" height="1"/>
+                                        <rect key="frame" x="10" y="1380" width="1000" height="1"/>
                                         <color key="backgroundColor" red="0.98039215690000003" green="0.68627450980000004" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="ahm-hg-u5k"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rPW-ee-ZoK">
-                                        <rect key="frame" x="0.0" y="1382" width="1024" height="207"/>
+                                        <rect key="frame" x="0.0" y="1385" width="1024" height="207"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zHe-pI-AqR">
                                                 <rect key="frame" x="460" y="143" width="14" height="21"/>
@@ -5243,14 +5244,14 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vg3-4M-QFp">
-                                        <rect key="frame" x="10" y="1594" width="1000" height="1"/>
+                                        <rect key="frame" x="10" y="1597" width="1000" height="1"/>
                                         <color key="backgroundColor" red="0.98039215690000003" green="0.68627450980000004" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="qCI-os-kSD"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XQr-rz-0yc">
-                                        <rect key="frame" x="0.0" y="1599" width="1024" height="206"/>
+                                        <rect key="frame" x="0.0" y="1602" width="1024" height="206"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Other Info" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="da9-2g-3Rb">
                                                 <rect key="frame" x="30" y="0.0" width="161" height="21"/>

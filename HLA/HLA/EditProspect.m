@@ -287,13 +287,13 @@ NSMutableArray *DelGroupArr;
     txtRigDate.userInteractionEnabled=FALSE;
     
     ColorHexCode *CustomColor = [[ColorHexCode alloc]init ];
-    txtHomeTown.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
-    txtHomeState.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
-    txtHomeCountry.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
-    txtOfficeTown.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
-    txtOfficeState.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+    txtHomeTown.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
+    txtHomeState.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
     txtOfficeCountry.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
-    txtClass.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+    txtOfficeTown.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
+    txtOfficeState.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
+    txtOfficeCountry.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+    txtClass.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
     
     [outletDelete setBackgroundImage:[[UIImage imageNamed:@"iphone_delete_button.png"] stretchableImageWithLeftCapWidth:8.0f topCapHeight:0.0f]
                             forState:UIControlStateNormal];
@@ -317,7 +317,7 @@ NSMutableArray *DelGroupArr;
     outletDOB.hidden = YES;
     txtDOB.enabled = NO;
     segGender.enabled = FALSE;
-    txtDOB.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+    txtDOB.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
     
     CustomColor = nil;
     
@@ -347,6 +347,7 @@ NSMutableArray *DelGroupArr;
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveToDB) name:@"EditProfile_Save" object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(check_edited) name:@"CheckEdited" object:nil];
     
+    [self addressChange];
     modelAgentProfil=[[ModelAgentProfile alloc]init];
     dictAgentData=[[NSDictionary alloc]initWithDictionary:[modelAgentProfil getAgentData]];
     [_txtChannelName setText:[dictAgentData valueForKey:@"ChannelName"]];
@@ -354,6 +355,29 @@ NSMutableArray *DelGroupArr;
 }
 
 /*code added by faiz*/
+-(void)addressChange{
+    [txtHomeAddr1 addTarget:self action:@selector(detectFilled:) forControlEvents:UIControlEventEditingDidEnd];
+    [txtHomeAddr2 addTarget:self action:@selector(detectFilled:) forControlEvents:UIControlEventEditingDidEnd];
+    [txtHomeAddr3 addTarget:self action:@selector(detectFilled:) forControlEvents:UIControlEventEditingDidEnd];
+    [_txtHomeVillage addTarget:self action:@selector(detectFilled:) forControlEvents:UIControlEventEditingDidEnd];
+    [_txtHomeDistrict addTarget:self action:@selector(detectFilled:) forControlEvents:UIControlEventEditingDidEnd];
+    [_txtHomeProvince addTarget:self action:@selector(detectFilled:) forControlEvents:UIControlEventEditingDidEnd];
+    [txtHomeTown addTarget:self action:@selector(detectFilled:) forControlEvents:UIControlEventEditingDidEnd];
+    [txtHomeState addTarget:self action:@selector(detectFilled:) forControlEvents:UIControlEventEditingDidEnd];
+    [txtHomePostCode addTarget:self action:@selector(detectFilled:) forControlEvents:UIControlEventEditingDidEnd];
+    
+    
+    [txtOfficeAddr1 addTarget:self action:@selector(detectFilled:) forControlEvents:UIControlEventEditingDidEnd];
+    [txtOfficeAddr2 addTarget:self action:@selector(detectFilled:) forControlEvents:UIControlEventEditingDidEnd];
+    [txtOfficeAddr3 addTarget:self action:@selector(detectFilled:) forControlEvents:UIControlEventEditingDidEnd];
+    [_txtOfficeVillage addTarget:self action:@selector(detectFilled:) forControlEvents:UIControlEventEditingDidEnd];
+    [_txtOfficeDistrict addTarget:self action:@selector(detectFilled:) forControlEvents:UIControlEventEditingDidEnd];
+    [_txtOfficeProvince addTarget:self action:@selector(detectFilled:) forControlEvents:UIControlEventEditingDidEnd];
+    [txtOfficeTown addTarget:self action:@selector(detectFilled:) forControlEvents:UIControlEventEditingDidEnd];
+    [txtOfficeState addTarget:self action:@selector(detectFilled:) forControlEvents:UIControlEventEditingDidEnd];
+    [txtOfficePostCode addTarget:self action:@selector(detectFilled:) forControlEvents:UIControlEventEditingDidEnd];
+}
+
 -(void)setTextfieldBorder{
 
     UIFont *font= [UIFont fontWithName:@"TreBuchet MS" size:16.0f];
@@ -2326,7 +2350,7 @@ NSMutableArray *DelGroupArr;
     else {
         txtIDType.text = pp.IDTypeNo;
         txtIDType.enabled = NO;
-        txtIDType.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+        txtIDType.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
         
         txtDOB.text = pp.ProspectDOB;
         
@@ -2468,7 +2492,7 @@ NSMutableArray *DelGroupArr;
         txtHomeState.backgroundColor = [UIColor whiteColor];
         txtHomeTown.enabled = YES;
         txtHomeState.enabled = NO;
-        txtHomeState.backgroundColor =  [CustomColor colorWithHexString:@"EEEEEE"];
+        txtHomeState.backgroundColor =  [CustomColor colorWithHexString:@"FFFFFF"];
         txtHomeCountry.hidden = YES;
         btnHomeCountry.hidden = NO;
         [btnForeignHome setImage: [UIImage imageNamed:@"tickCheckBox.png"] forState:UIControlStateNormal];
@@ -2488,7 +2512,7 @@ NSMutableArray *DelGroupArr;
         txtOfficeState.backgroundColor = [UIColor whiteColor];
         txtOfficeTown.enabled = YES;
         txtOfficeState.enabled = NO;
-        txtOfficeState.backgroundColor =  [CustomColor colorWithHexString:@"EEEEEE"];
+        txtOfficeState.backgroundColor =  [CustomColor colorWithHexString:@"FFFFFF"];
         txtOfficeCountry.hidden = YES;
         btnOfficeCountry.hidden = NO;
         [btnForeignOffice setImage: [UIImage imageNamed:@"tickCheckBox.png"] forState:UIControlStateNormal];
@@ -2568,7 +2592,7 @@ NSMutableArray *DelGroupArr;
         txtAnnIncome.text = pp.AnnualIncome;
         
         //IC
-        txtIDType.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+        txtIDType.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
         txtIDType.enabled = NO;
     }
     else {
@@ -2739,10 +2763,10 @@ NSMutableArray *DelGroupArr;
                 
                 //TITLE
                 txtBussinessType.enabled = false;
-                txtBussinessType.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+                txtBussinessType.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
                 
                 txtRemark.editable = false;
-                txtRemark.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+                txtRemark.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
                 
                 outletTitle.enabled = NO;
                 outletTitle.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
@@ -2800,7 +2824,7 @@ NSMutableArray *DelGroupArr;
                 txtEmail.enabled = false;
                 
                 txtAnnIncome.text = @"";
-                txtAnnIncome.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+                txtAnnIncome.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
                 txtAnnIncome.enabled =false;
                 
                 outletTitle.enabled = NO;
@@ -2813,7 +2837,7 @@ NSMutableArray *DelGroupArr;
                 segGender.enabled = FALSE;
                 segSmoker.enabled = FALSE;
                 segGender.selectedSegmentIndex = UISegmentedControlNoSegment;
-                txtIDType.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+                txtIDType.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
                 txtIDType.text = @"";
                 txtIDType.enabled = NO;
                 
@@ -2824,41 +2848,41 @@ NSMutableArray *DelGroupArr;
 				
 				OtherIDType.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
 				txtOtherIDType.enabled = NO;
-				txtOtherIDType.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+				txtOtherIDType.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
 				txtOtherIDType.text =@"";
                 
                 txtExactDuties.editable = NO;
-                txtExactDuties.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+                txtExactDuties.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
                 
                 txtHomeAddr1.enabled = NO;
-                txtHomeAddr1.backgroundColor  = [CustomColor colorWithHexString:@"EEEEEE"];
+                txtHomeAddr1.backgroundColor  = [CustomColor colorWithHexString:@"FFFFFF"];
                 
-                txtHomeAddr2.backgroundColor  = [CustomColor colorWithHexString:@"EEEEEE"];
+                txtHomeAddr2.backgroundColor  = [CustomColor colorWithHexString:@"FFFFFF"];
                 txtHomeAddr2.enabled = NO;
                 
-                txtHomeAddr3.backgroundColor  = [CustomColor colorWithHexString:@"EEEEEE"];
+                txtHomeAddr3.backgroundColor  = [CustomColor colorWithHexString:@"FFFFFF"];
                 txtHomeAddr3.enabled = NO;
                 
-                txtHomePostCode.backgroundColor  = [CustomColor colorWithHexString:@"EEEEEE"];
+                txtHomePostCode.backgroundColor  = [CustomColor colorWithHexString:@"FFFFFF"];
                 txtHomePostCode.enabled = NO;
                 
-                txtOfficeAddr1.backgroundColor  = [CustomColor colorWithHexString:@"EEEEEE"];
+                txtOfficeAddr1.backgroundColor  = [CustomColor colorWithHexString:@"FFFFFF"];
                 txtOfficeAddr1.enabled = NO;
                 
-                txtOfficeAddr2.backgroundColor  = [CustomColor colorWithHexString:@"EEEEEE"];
+                txtOfficeAddr2.backgroundColor  = [CustomColor colorWithHexString:@"FFFFFF"];
                 txtOfficeAddr2.enabled = NO;
                 
-                txtOfficeAddr3.backgroundColor  = [CustomColor colorWithHexString:@"EEEEEE"];
+                txtOfficeAddr3.backgroundColor  = [CustomColor colorWithHexString:@"FFFFFF"];
                 txtOfficeAddr3.enabled = NO;
                 
-                txtOfficePostCode.backgroundColor  = [CustomColor colorWithHexString:@"EEEEEE"];
+                txtOfficePostCode.backgroundColor  = [CustomColor colorWithHexString:@"FFFFFF"];
                 txtOfficePostCode.enabled = NO;
                 
-                txtRigNO.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+                txtRigNO.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
                 txtRigNO.enabled = NO;
                 txtRigNO.text =@"";
                 
-                txtRigDate.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+                txtRigDate.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
                 outletRigDOB.enabled = NO;
                 outletRigDOB.titleLabel.textColor = [UIColor grayColor];
                 txtRigDate.text =@"";
@@ -2880,7 +2904,7 @@ NSMutableArray *DelGroupArr;
                 {
                     txtAnnIncome.text = @"";
                     txtAnnIncome.enabled = NO;
-                    txtAnnIncome.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+                    txtAnnIncome.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
                 }
             }
             else if([OccpCatCode isEqualToString:@"RET"] ||[OccpCatCode isEqualToString:@"UNEMP"])
@@ -2942,10 +2966,10 @@ NSMutableArray *DelGroupArr;
     // WHEHN EDIT CLIENT PROFILE - USER NOT ABLE TO EDIT THE NEW IC NO, OTHER ID TYPE, OTHER ID
 		
     txtIDType.enabled = FALSE;
-    txtIDType.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+    txtIDType.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
 	if (![OtherIDType.titleLabel.text isEqualToString:@"- SELECT -"]) {
 		txtOtherIDType.enabled = NO;
-		txtOtherIDType.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+		txtOtherIDType.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
 		
 		OtherIDType.enabled = NO;
 		OtherIDType.titleLabel.textColor = [UIColor grayColor];
@@ -2959,27 +2983,27 @@ NSMutableArray *DelGroupArr;
     if ([trim_otheridtype isEqualToString:@"EXPECTED DELIVERY DATE"])
     {
         txtEmail.enabled = false;
-        txtEmail.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+        txtEmail.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
         
         txtPrefix1.enabled = false;
         txtPrefix2.enabled = false;
         txtPrefix3.enabled = false;
         txtPrefix4.enabled = false;
         
-        txtPrefix1.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
-        txtPrefix2.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
-        txtPrefix3.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
-        txtPrefix4.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+        txtPrefix1.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
+        txtPrefix2.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
+        txtPrefix3.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
+        txtPrefix4.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
         
         txtContact1.enabled = false;
         txtContact2.enabled = false;
         txtContact3.enabled = false;
         txtContact4.enabled = false;
         
-        txtContact1.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
-        txtContact2.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
-        txtContact3.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
-        txtContact4.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+        txtContact1.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
+        txtContact2.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
+        txtContact3.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
+        txtContact4.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
         
         txtAnnIncome.text = @"";
         txtExactDuties.text = @"";
@@ -2991,35 +3015,35 @@ NSMutableArray *DelGroupArr;
         txtOfficeAddr2.text =@"";
         txtOfficeAddr3.text = @"";
         
-        txtAnnIncome.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+        txtAnnIncome.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
         txtAnnIncome.enabled =false;
         
         txtHomeAddr1.enabled = NO;
-        txtHomeAddr1.backgroundColor  = [CustomColor colorWithHexString:@"EEEEEE"];
+        txtHomeAddr1.backgroundColor  = [CustomColor colorWithHexString:@"FFFFFF"];
         
-        txtHomeAddr2.backgroundColor  = [CustomColor colorWithHexString:@"EEEEEE"];
+        txtHomeAddr2.backgroundColor  = [CustomColor colorWithHexString:@"FFFFFF"];
         txtHomeAddr2.enabled = NO;
         
-        txtHomeAddr3.backgroundColor  = [CustomColor colorWithHexString:@"EEEEEE"];
+        txtHomeAddr3.backgroundColor  = [CustomColor colorWithHexString:@"FFFFFF"];
         txtHomeAddr3.enabled = NO;
         
-        txtHomePostCode.backgroundColor  = [CustomColor colorWithHexString:@"EEEEEE"];
+        txtHomePostCode.backgroundColor  = [CustomColor colorWithHexString:@"FFFFFF"];
         txtHomePostCode.enabled = NO;
         
-        txtOfficeAddr1.backgroundColor  = [CustomColor colorWithHexString:@"EEEEEE"];
+        txtOfficeAddr1.backgroundColor  = [CustomColor colorWithHexString:@"FFFFFF"];
         txtOfficeAddr1.enabled = NO;
         
-        txtOfficeAddr2.backgroundColor  = [CustomColor colorWithHexString:@"EEEEEE"];
+        txtOfficeAddr2.backgroundColor  = [CustomColor colorWithHexString:@"FFFFFF"];
         txtOfficeAddr2.enabled = NO;
         
-        txtOfficeAddr3.backgroundColor  = [CustomColor colorWithHexString:@"EEEEEE"];
+        txtOfficeAddr3.backgroundColor  = [CustomColor colorWithHexString:@"FFFFFF"];
         txtOfficeAddr3.enabled = NO;
         
-        txtOfficePostCode.backgroundColor  = [CustomColor colorWithHexString:@"EEEEEE"];
+        txtOfficePostCode.backgroundColor  = [CustomColor colorWithHexString:@"FFFFFF"];
         txtOfficePostCode.enabled = NO;
         
         txtExactDuties.editable = NO;
-        txtExactDuties.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+        txtExactDuties.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
         
         [btnForeignHome setImage: [UIImage imageNamed:@"emptyCheckBox.png"] forState:UIControlStateNormal];
         [btnForeignOffice setImage: [UIImage imageNamed:@"emptyCheckBox.png"] forState:UIControlStateNormal];
@@ -3066,7 +3090,7 @@ NSMutableArray *DelGroupArr;
 		outletDOB.hidden = YES;
 		txtDOB.hidden = NO;
 		txtDOB.enabled = NO;
-		txtDOB.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+		txtDOB.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
     }
 	
 	//fixed for dob missing value if IC exist:
@@ -4126,10 +4150,11 @@ NSMutableArray *DelGroupArr;
 {
 	
     UIButton *btnPressed = (UIButton*)sender;
+    UISwitch *switchPressed = (UISwitch*)sender;
     ColorHexCode *CustomColor = [[ColorHexCode alloc] init ];
     
-    if (btnPressed.tag == 0) {
-        if (checked) {
+    if (switchPressed.tag == 0) {
+        if ([switchPressed isOn]) {
             [btnForeignHome setImage: [UIImage imageNamed:@"emptyCheckBox.png"] forState:UIControlStateNormal];
             checked = NO;
             
@@ -4137,16 +4162,19 @@ NSMutableArray *DelGroupArr;
             txtHomeAddr2.text=@"";
             txtHomeAddr3.text=@"";
             txtHomePostCode.text = @"";
+            _txtHomeVillage.text = @"";
+            _txtHomeDistrict.text = @"";
+            _txtHomeProvince.text = @"";
             txtHomeTown.text = @"";
             txtHomeState.text = @"";
             txtHomeCountry.text = @"";
-            txtHomeTown.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
-            txtHomeState.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+            txtHomeTown.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
+            txtHomeState.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
             txtHomeCountry.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
             txtHomeTown.enabled = NO;
             txtHomeState.enabled = NO;
-            txtHomeCountry.hidden = NO;
-            btnHomeCountry.hidden = YES;
+            txtHomeCountry.hidden = YES;
+            btnHomeCountry.hidden = NO;
             
             //[txtHomePostCode addTarget:self action:@selector(EditTextFieldDidChange:) forControlEvents:UIControlEventEditingDidEnd];
             [txtHomePostCode addTarget:self action:@selector(EditTextFieldBegin:) forControlEvents:UIControlEventEditingDidBegin];
@@ -4160,7 +4188,9 @@ NSMutableArray *DelGroupArr;
             txtHomeAddr1.text = @"";
             txtHomeAddr2.text = @"";
             txtHomeAddr3.text = @"";
-			
+            _txtHomeVillage.text = @"";
+            _txtHomeDistrict.text = @"";
+            _txtHomeProvince.text = @"";
             txtHomePostCode.text = @"";
             txtHomeTown.text = @"";
             txtHomeState.text = @"";
@@ -4168,22 +4198,22 @@ NSMutableArray *DelGroupArr;
             btnHomeCountry.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
             txtHomeTown.backgroundColor = [UIColor whiteColor];
             txtHomeState.backgroundColor = [UIColor whiteColor];
-            txtHomeCountry.backgroundColor = [UIColor whiteColor];
+            //txtHomeCountry.backgroundColor = [UIColor whiteColor];
             txtHomeTown.enabled = YES;
             txtHomeState.enabled = YES;
-            txtHomeCountry.hidden = YES;
-            btnHomeCountry.hidden = NO;
+            txtHomeCountry.hidden = NO;
+            btnHomeCountry.hidden = YES;
             
             txtHomeState.enabled = NO;
-            txtHomeState.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+            txtHomeState.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
 			
             
             [txtHomePostCode removeTarget:self action:@selector(EditTextFieldDidChange:) forControlEvents:UIControlEventEditingDidEnd];
             [txtHomePostCode removeTarget:self action:@selector(EditTextFieldBegin:) forControlEvents:UIControlEventEditingDidBegin];
         }
     }
-    else if (btnPressed.tag == 1) {
-        if (checked2) {
+    else if (switchPressed.tag == 1) {
+        if ([switchPressed isOn]) {
             [btnForeignOffice setImage: [UIImage imageNamed:@"emptyCheckBox.png"] forState:UIControlStateNormal];
             checked2 = NO;
             
@@ -4192,16 +4222,19 @@ NSMutableArray *DelGroupArr;
             txtOfficeAddr3.text=@"";
             
             txtOfficePostCode.text = @"";
+            _txtOfficeVillage.text = @"";
+            _txtOfficeDistrict.text = @"";
+            _txtOfficeProvince.text = @"";
             txtOfficeTown.text = @"";
             txtOfficeState.text = @"";
             txtOfficeCountry.text = @"";
-            txtOfficeTown.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
-            txtOfficeState.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+            txtOfficeTown.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
+            txtOfficeState.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
             txtOfficeCountry.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
             txtOfficeTown.enabled = NO;
             txtOfficeState.enabled = NO;
-            txtOfficeCountry.hidden = NO;
-            btnOfficeCountry.hidden = YES;
+            txtOfficeCountry.hidden = YES;
+            btnOfficeCountry.hidden = NO;
             
             //[txtOfficePostCode addTarget:self action:@selector(EditOfficePostcodeDidChange:) forControlEvents:UIControlEventEditingDidEnd];
             [txtOfficePostCode addTarget:self action:@selector(OfficeEditTextFieldBegin:) forControlEvents:UIControlEventEditingDidBegin];
@@ -4216,20 +4249,23 @@ NSMutableArray *DelGroupArr;
             txtOfficeAddr3.text = @"";
             
             txtOfficePostCode.text = @"";
+            _txtOfficeVillage.text = @"";
+            _txtOfficeDistrict.text = @"";
+            _txtOfficeProvince.text = @"";
             txtOfficeTown.text = @"";
             txtOfficeState.text = @"";
             [btnOfficeCountry setTitle:@"- SELECT -" forState:UIControlStateNormal];
             btnOfficeCountry.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
             txtOfficeTown.backgroundColor = [UIColor whiteColor];
             txtOfficeState.backgroundColor = [UIColor whiteColor];
-            txtOfficeCountry.backgroundColor = [UIColor whiteColor];
+            //txtOfficeCountry.backgroundColor = [UIColor whiteColor];
             txtOfficeTown.enabled = YES;
             txtOfficeState.enabled = YES;
-            txtOfficeCountry.hidden = YES;
-            btnOfficeCountry.hidden = NO;
+            txtOfficeCountry.hidden = NO;
+            btnOfficeCountry.hidden = YES;
             
             txtOfficeState.enabled = NO;
-            txtOfficeState.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+            txtOfficeState.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
             
             [txtOfficePostCode removeTarget:self action:@selector(EditOfficePostcodeDidChange:) forControlEvents:UIControlEventEditingDidEnd];
             [txtOfficePostCode removeTarget:self action:@selector(OfficeEditTextFieldBegin:) forControlEvents:UIControlEventEditingDidBegin];
@@ -4670,6 +4706,44 @@ NSMutableArray *DelGroupArr;
     [self.IDTypePickerPopover presentPopoverFromRect:[sender bounds] inView:sender permittedArrowDirections:UIPopoverArrowDirectionLeft animated:YES];
 	
 }
+
+-(void)detectFilled:(UITextField *)sender{
+    NSArray *arrayTxtHome=[[NSArray alloc]initWithObjects:txtHomeAddr1,txtHomeAddr2,txtHomeAddr3,_txtHomeVillage,_txtHomeDistrict,txtHomeTown,_txtHomeProvince, nil];
+    
+    NSArray *arrayTxtOffice=[[NSArray alloc]initWithObjects:txtOfficeAddr1,txtOfficeAddr2,txtOfficeAddr3,_txtOfficeVillage,_txtOfficeDistrict,txtOfficeTown,_txtOfficeProvince, nil];
+    
+    if ([arrayTxtHome containsObject:sender]){
+        if (!checked) {
+            for (int i=0; i<[arrayTxtHome count]; i++){
+                UITextField *textField = (UITextField *)[arrayTxtHome objectAtIndex:i];
+                if ([textField.text length]>0){
+                    [txtHomeCountry setText:@"Indonesia"];
+                    return;
+                }
+                else{
+                    [txtHomeCountry setText:@""];
+                }
+            }
+        }
+    }
+    
+    if ([arrayTxtOffice containsObject:sender]){
+        if (!checked2) {
+            for (int i=0; i<[arrayTxtOffice count]; i++){
+                UITextField *textField = (UITextField *)[arrayTxtOffice objectAtIndex:i];
+                if ([textField.text length]>0){
+                    [txtOfficeCountry setText:@"Indonesia"];
+                    return;
+                }
+                else{
+                    [txtOfficeCountry setText:@""];
+                }
+            }
+        }
+    }
+    
+}
+
 
 -(void)detectChanges:(id) sender
 {
@@ -5450,7 +5524,7 @@ NSMutableArray *DelGroupArr;
     else {
         txtIDType.text = prospectprofile.IDTypeNo;
         txtIDType.enabled = NO;
-        txtIDType.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+        txtIDType.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
         txtDOB.text = prospectprofile.ProspectDOB;
         segGender.enabled = NO;
     }
@@ -5681,7 +5755,7 @@ NSMutableArray *DelGroupArr;
         txtAnnIncome.text = prospectprofile.AnnualIncome;
         
         //IC
-        txtIDType.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+        txtIDType.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
         txtIDType.enabled = NO;
         
         txtDOB.hidden = YES;
@@ -5888,10 +5962,10 @@ NSMutableArray *DelGroupArr;
                 
                 //TITLE
                 txtBussinessType.enabled = false;
-                txtBussinessType.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+                txtBussinessType.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
                 
                 txtRemark.editable = false;
-                txtRemark.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+                txtRemark.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
                 
                 outletTitle.enabled = NO;
                 outletTitle.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
@@ -5939,7 +6013,7 @@ NSMutableArray *DelGroupArr;
                 
                  outletRigDOB.titleLabel.textColor = [UIColor grayColor];
                 txtAnnIncome.text = @"";
-                txtAnnIncome.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+                txtAnnIncome.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
                 txtAnnIncome.enabled =false;
                 
                 outletTitle.enabled = NO;
@@ -5953,7 +6027,7 @@ NSMutableArray *DelGroupArr;
                 segGender.enabled = FALSE;
                 segSmoker.enabled = FALSE;
                 segGender.selectedSegmentIndex = UISegmentedControlNoSegment;
-                txtIDType.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+                txtIDType.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
                 txtIDType.text = @"";
                 txtIDType.enabled = NO;
                 
@@ -5964,34 +6038,34 @@ NSMutableArray *DelGroupArr;
                 
                 OtherIDType.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
                 txtOtherIDType.enabled = NO;
-                txtOtherIDType.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+                txtOtherIDType.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
                 txtOtherIDType.text =@"";
                 
                 txtExactDuties.editable = NO;
-                txtExactDuties.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+                txtExactDuties.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
                 
                 txtHomeAddr1.enabled = NO;
-                txtHomeAddr1.backgroundColor  = [CustomColor colorWithHexString:@"EEEEEE"];
+                txtHomeAddr1.backgroundColor  = [CustomColor colorWithHexString:@"FFFFFF"];
                 
-                txtHomeAddr2.backgroundColor  = [CustomColor colorWithHexString:@"EEEEEE"];
+                txtHomeAddr2.backgroundColor  = [CustomColor colorWithHexString:@"FFFFFF"];
                 txtHomeAddr2.enabled = NO;
                 
-                txtHomeAddr3.backgroundColor  = [CustomColor colorWithHexString:@"EEEEEE"];
+                txtHomeAddr3.backgroundColor  = [CustomColor colorWithHexString:@"FFFFFF"];
                 txtHomeAddr3.enabled = NO;
                 
-                txtHomePostCode.backgroundColor  = [CustomColor colorWithHexString:@"EEEEEE"];
+                txtHomePostCode.backgroundColor  = [CustomColor colorWithHexString:@"FFFFFF"];
                 txtHomePostCode.enabled = NO;
                 
-                txtOfficeAddr1.backgroundColor  = [CustomColor colorWithHexString:@"EEEEEE"];
+                txtOfficeAddr1.backgroundColor  = [CustomColor colorWithHexString:@"FFFFFF"];
                 txtOfficeAddr1.enabled = NO;
                 
-                txtOfficeAddr2.backgroundColor  = [CustomColor colorWithHexString:@"EEEEEE"];
+                txtOfficeAddr2.backgroundColor  = [CustomColor colorWithHexString:@"FFFFFF"];
                 txtOfficeAddr2.enabled = NO;
                 
-                txtOfficeAddr3.backgroundColor  = [CustomColor colorWithHexString:@"EEEEEE"];
+                txtOfficeAddr3.backgroundColor  = [CustomColor colorWithHexString:@"FFFFFF"];
                 txtOfficeAddr3.enabled = NO;
                 
-                txtOfficePostCode.backgroundColor  = [CustomColor colorWithHexString:@"EEEEEE"];
+                txtOfficePostCode.backgroundColor  = [CustomColor colorWithHexString:@"FFFFFF"];
                 txtOfficePostCode.enabled = NO;
                 
             }
@@ -6005,7 +6079,7 @@ NSMutableArray *DelGroupArr;
                 {
                     txtAnnIncome.text = @"";
                     txtAnnIncome.enabled = NO;
-                    txtAnnIncome.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+                    txtAnnIncome.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
                 }
                 
             }
@@ -6089,17 +6163,17 @@ NSMutableArray *DelGroupArr;
         else
         {
             txtIDType.enabled = NO;
-            txtIDType.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+            txtIDType.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
         }
     }
     else {
         txtIDType.enabled = NO;
-        txtIDType.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+        txtIDType.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
         
     }
     
     txtOtherIDType.enabled = NO;
-    txtOtherIDType.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+    txtOtherIDType.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
     
     OtherIDType.enabled = NO;
     OtherIDType.titleLabel.textColor = [UIColor grayColor];
@@ -6113,27 +6187,27 @@ NSMutableArray *DelGroupArr;
     if ([trim_otheridtype isEqualToString:@"EXPECTED DELIVERY DATE"])
     {
         txtEmail.enabled = false;
-        txtEmail.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+        txtEmail.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
         
         txtPrefix1.enabled = false;
         txtPrefix2.enabled = false;
         txtPrefix3.enabled = false;
         txtPrefix4.enabled = false;
         
-        txtPrefix1.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
-        txtPrefix2.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
-        txtPrefix3.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
-        txtPrefix4.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+        txtPrefix1.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
+        txtPrefix2.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
+        txtPrefix3.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
+        txtPrefix4.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
         
         txtContact1.enabled = false;
         txtContact2.enabled = false;
         txtContact3.enabled = false;
         txtContact4.enabled = false;
         
-        txtContact1.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
-        txtContact2.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
-        txtContact3.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
-        txtContact4.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+        txtContact1.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
+        txtContact2.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
+        txtContact3.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
+        txtContact4.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
         
         txtAnnIncome.text = @"";
         txtExactDuties.text = @"";
@@ -6145,35 +6219,35 @@ NSMutableArray *DelGroupArr;
         txtOfficeAddr2.text =@"";
         txtOfficeAddr3.text = @"";
         
-        txtAnnIncome.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+        txtAnnIncome.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
         txtAnnIncome.enabled =false;
         
         txtHomeAddr1.enabled = NO;
-        txtHomeAddr1.backgroundColor  = [CustomColor colorWithHexString:@"EEEEEE"];
+        txtHomeAddr1.backgroundColor  = [CustomColor colorWithHexString:@"FFFFFF"];
         
-        txtHomeAddr2.backgroundColor  = [CustomColor colorWithHexString:@"EEEEEE"];
+        txtHomeAddr2.backgroundColor  = [CustomColor colorWithHexString:@"FFFFFF"];
         txtHomeAddr2.enabled = NO;
         
-        txtHomeAddr3.backgroundColor  = [CustomColor colorWithHexString:@"EEEEEE"];
+        txtHomeAddr3.backgroundColor  = [CustomColor colorWithHexString:@"FFFFFF"];
         txtHomeAddr3.enabled = NO;
         
-        txtHomePostCode.backgroundColor  = [CustomColor colorWithHexString:@"EEEEEE"];
+        txtHomePostCode.backgroundColor  = [CustomColor colorWithHexString:@"FFFFFF"];
         txtHomePostCode.enabled = NO;
         
-        txtOfficeAddr1.backgroundColor  = [CustomColor colorWithHexString:@"EEEEEE"];
+        txtOfficeAddr1.backgroundColor  = [CustomColor colorWithHexString:@"FFFFFF"];
         txtOfficeAddr1.enabled = NO;
         
-        txtOfficeAddr2.backgroundColor  = [CustomColor colorWithHexString:@"EEEEEE"];
+        txtOfficeAddr2.backgroundColor  = [CustomColor colorWithHexString:@"FFFFFF"];
         txtOfficeAddr2.enabled = NO;
         
-        txtOfficeAddr3.backgroundColor  = [CustomColor colorWithHexString:@"EEEEEE"];
+        txtOfficeAddr3.backgroundColor  = [CustomColor colorWithHexString:@"FFFFFF"];
         txtOfficeAddr3.enabled = NO;
         
-        txtOfficePostCode.backgroundColor  = [CustomColor colorWithHexString:@"EEEEEE"];
+        txtOfficePostCode.backgroundColor  = [CustomColor colorWithHexString:@"FFFFFF"];
         txtOfficePostCode.enabled = NO;
         
         txtExactDuties.editable = NO;
-        txtExactDuties.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+        txtExactDuties.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
         
         [btnForeignHome setImage: [UIImage imageNamed:@"emptyCheckBox.png"] forState:UIControlStateNormal];
         [btnForeignOffice setImage: [UIImage imageNamed:@"emptyCheckBox.png"] forState:UIControlStateNormal];
@@ -6207,7 +6281,7 @@ NSMutableArray *DelGroupArr;
         outletDOB.hidden = YES;
         txtDOB.hidden = NO;
         txtDOB.enabled = NO;
-        txtDOB.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+        txtDOB.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
         
     }
 	
@@ -9114,7 +9188,7 @@ NSMutableArray *DelGroupArr;
 		
         if(([otherIDType_trim isEqualToString:@"- SELECT -"] && ![otherIDType_trim isEqualToString:@"OLD IDENTIFICATION NO"]) && ![OccpCatCode isEqualToString:@"JUV"] ){
             ColorHexCode *CustomColor = [[ColorHexCode alloc] init ];
-            txtDOB.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+            txtDOB.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
             
             if ([otherIDType_trim isEqualToString:@"- SELECT -"] && ([txtIDType.text isEqualToString:@""] || (txtIDType.text.length == 0) )) {
 				
@@ -11287,7 +11361,7 @@ NSMutableArray *DelGroupArr;
         if(([otherIDType_trim isEqualToString:@""] && ![otherIDType_trim isEqualToString:@"OLDIC"]) && ![OccpCatCode isEqualToString:@"JUV"]) {
             
             ColorHexCode *CustomColor = [[ColorHexCode alloc] init ];
-            txtDOB.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+            txtDOB.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
             
             if ([otherIDType_trim isEqualToString:@""] && ([IDType isEqualToString:@""] || (IDType.length == 0) )) {
                 txtIDType.text = @"";
@@ -12888,7 +12962,7 @@ NSMutableArray *DelGroupArr;
             outletDOB.hidden = TRUE;
             outletDOB.titleLabel.text = @"";
             txtDOB.enabled = FALSE;
-            txtDOB.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+            txtDOB.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
             txtDOB.hidden = NO;
 			
         }
@@ -12900,7 +12974,7 @@ NSMutableArray *DelGroupArr;
             outletDOB.hidden = TRUE;
             outletDOB.titleLabel.text =@"";
             txtDOB.enabled = FALSE;
-            txtDOB.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+            txtDOB.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
             txtDOB.hidden = NO;
 			
         }
@@ -12909,7 +12983,7 @@ NSMutableArray *DelGroupArr;
         
         OtherIDType.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
         txtOtherIDType.enabled = NO;
-        txtOtherIDType.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+        txtOtherIDType.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
         txtOtherIDType.text =@"";
         
         outletTitle.enabled = YES;
@@ -12947,7 +13021,7 @@ NSMutableArray *DelGroupArr;
         gender = @"";
         segSmoker.enabled = TRUE;
         segGender.selectedSegmentIndex = UISegmentedControlNoSegment;
-        txtIDType.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+        txtIDType.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
         txtIDType.enabled = NO;
         
         txtDOB.hidden = YES;
@@ -12959,11 +13033,11 @@ NSMutableArray *DelGroupArr;
         
         OtherIDType.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         txtOtherIDType.enabled = NO;
-        txtOtherIDType.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+        txtOtherIDType.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
         txtOtherIDType.text =@"";
         
         txtExactDuties.editable = NO;
-        txtExactDuties.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+        txtExactDuties.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
         
         outletTitle.enabled = YES;
         outletTitle.titleLabel.textColor = [UIColor blackColor];
@@ -13013,12 +13087,12 @@ NSMutableArray *DelGroupArr;
         else if (![txtIDType.text isEqualToString:@""]) {
             segGender.enabled = FALSE;
             txtDOB.enabled = FALSE;
-            txtDOB.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+            txtDOB.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
             outletDOB.enabled = FALSE;
         }
         
         [outletDOB setTitle:@"" forState:UIControlStateNormal];
-        txtDOB.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+        txtDOB.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
         txtDOB.enabled = NO;
         
         outletDOB.enabled = NO;
@@ -13053,7 +13127,7 @@ NSMutableArray *DelGroupArr;
         txtOtherIDType.enabled = YES;
         outletDOB.enabled = NO;
         txtIDType.enabled = NO;
-        txtIDType.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+        txtIDType.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
         txtIDType.text=@"";
         
         segGender.enabled = FALSE;
@@ -13083,12 +13157,12 @@ NSMutableArray *DelGroupArr;
         segSmoker.selectedSegmentIndex = UISegmentedControlNoSegment;
         companyCase = YES;
         txtDOB.hidden = NO;
-        txtDOB.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+        txtDOB.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
         outletDOB.hidden = YES;
         txtDOB.text = @"";
     }
     else {
-        txtIDType.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+        txtIDType.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
         txtIDType.enabled = NO;
         txtIDType.text = @"";
         

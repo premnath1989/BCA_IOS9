@@ -1118,7 +1118,7 @@ MBProgressHUD *HUD;
 - (IBAction)btnAddNew:(id)sender//premnathvj
 {
     
-	UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"NewStoryboard" bundle:nil];
+	/*UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"NewStoryboard" bundle:nil];
     CustomAlertBox * agree = (CustomAlertBox *)[storyboard instantiateViewControllerWithIdentifier:@"CustomAlertBox"];
     agree.AlertProspect=YES;
 	
@@ -1129,7 +1129,7 @@ MBProgressHUD *HUD;
     
     [self presentViewController:agree animated:NO completion:nil];
     agree.preferredContentSize = CGSizeMake(600, 450);
-    agree.view.superview.frame = CGRectMake(120, 200, 450, 600);
+    agree.view.superview.frame = CGRectMake(120, 200, 450, 600);*/
 	
     
     //UIStoryboard* clientProfileStoryboard = [UIStoryboard storyboardWithName:@"ClientProfileStoryboard" bundle:nil];
@@ -1707,10 +1707,10 @@ MBProgressHUD *HUD;
 	else {
 		NSString *msg;
 		if (RecDelete == 1) {
-            msg = @"Are you sure want to delete these Clients?";
+            msg = @"Apakah anda yakin ingin menghapus klien ini ?";//Are you sure want to delete these Clients?";
 		}
 		else {
-			msg = @"Are you sure want to delete these Clients?";
+			msg = @"Apakah anda yakin ingin menghapus klien ini ?";//Are you sure want to delete these Clients?";
 		}
 		
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:msg delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
@@ -1771,7 +1771,7 @@ MBProgressHUD *HUD;
         
         [self ReloadTableData];
         
-        NSString *msg = @"Client Profile has been successfully deleted.";
+        NSString *msg = @"Profil klien berhasil dihapus";//Client Profile has been successfully deleted.";
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:msg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         
         [alert show];
@@ -1783,7 +1783,7 @@ MBProgressHUD *HUD;
     {
         [self delete_prospect_eApp];
         
-        NSString *msg = @"Client Profile has been successfully deleted.";
+        NSString *msg = @"Profil klien berhasil dihapus";//Client Profile has been successfully deleted.";
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:msg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         
         [alert show];

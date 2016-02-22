@@ -203,19 +203,21 @@ bool RegDatehandling;
 	[txtEmail addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
 	[txtIDType addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
 	[txtOtherIDType addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
-    [txtHomeAddr1 addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
+    /*[txtHomeAddr1 addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
     [txtHomeAddr2 addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
     [txtHomeAddr3 addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
 	[txtHomeTown addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
 	[txtHomeState addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
-	//[txtHomePostCode addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
+	[txtHomePostCode addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
     [txtOfficeAddr1 addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
     [txtOfficeAddr2 addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
     [txtOfficeAddr3 addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
 	[txtOfficeTown addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
 	[txtOfficeState addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
-	//[txtOfficePostcode addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
-    [txtFullName addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
+	[txtOfficePostcode addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];*/
+    
+     
+     [txtFullName addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
     [txtPrefix1 addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
     [txtContact1 addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
     [txtContact2 addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
@@ -362,6 +364,29 @@ bool RegDatehandling;
 
 #pragma mark - added by faiz
 /*code added by faiz*/
+-(void)addressChange{
+    [txtHomeAddr1 addTarget:self action:@selector(detectFilled:) forControlEvents:UIControlEventEditingDidEnd];
+    [txtHomeAddr2 addTarget:self action:@selector(detectFilled:) forControlEvents:UIControlEventEditingDidEnd];
+    [txtHomeAddr3 addTarget:self action:@selector(detectFilled:) forControlEvents:UIControlEventEditingDidEnd];
+    [txtHomeVillage addTarget:self action:@selector(detectFilled:) forControlEvents:UIControlEventEditingDidEnd];
+    [txtHomeDistrict addTarget:self action:@selector(detectFilled:) forControlEvents:UIControlEventEditingDidEnd];
+    [txtHomeProvince addTarget:self action:@selector(detectFilled:) forControlEvents:UIControlEventEditingDidEnd];
+    [txtHomeTown addTarget:self action:@selector(detectFilled:) forControlEvents:UIControlEventEditingDidEnd];
+    [txtHomeState addTarget:self action:@selector(detectFilled:) forControlEvents:UIControlEventEditingDidEnd];
+    [txtHomePostCode addTarget:self action:@selector(detectFilled:) forControlEvents:UIControlEventEditingDidEnd];
+
+    
+    [txtOfficeAddr1 addTarget:self action:@selector(detectFilled:) forControlEvents:UIControlEventEditingDidEnd];
+    [txtOfficeAddr2 addTarget:self action:@selector(detectFilled:) forControlEvents:UIControlEventEditingDidEnd];
+    [txtOfficeAddr3 addTarget:self action:@selector(detectFilled:) forControlEvents:UIControlEventEditingDidEnd];
+    [txtOfficeVillage addTarget:self action:@selector(detectFilled:) forControlEvents:UIControlEventEditingDidEnd];
+    [txtOfficeDistrict addTarget:self action:@selector(detectFilled:) forControlEvents:UIControlEventEditingDidEnd];
+    [txtOfficeProvince addTarget:self action:@selector(detectFilled:) forControlEvents:UIControlEventEditingDidEnd];
+    [txtOfficeTown addTarget:self action:@selector(detectFilled:) forControlEvents:UIControlEventEditingDidEnd];
+    [txtOfficeState addTarget:self action:@selector(detectFilled:) forControlEvents:UIControlEventEditingDidEnd];
+    [txtOfficePostcode addTarget:self action:@selector(detectFilled:) forControlEvents:UIControlEventEditingDidEnd];
+}
+
 -(void)setTextfieldBorder{
     UIFont *font= [UIFont fontWithName:@"TreBuchet MS" size:16.0f];
     for (UIView *view in [_viewPersonalInfo subviews]) {
@@ -1280,6 +1305,7 @@ bool RegDatehandling;
     
     _scrollViewNewProspect.contentSize = CGSizeMake(900, 2000);
     [self setTextfieldBorder];
+    [self addressChange];
     [self setButtonImageAndTextAlignment];
     /*end of code added by faiz*/
 }
@@ -2115,6 +2141,43 @@ bool RegDatehandling;
     self.navigationItem.rightBarButtonItem.enabled = TRUE;
 }
 
+-(void)detectFilled:(UITextField *)sender{
+    NSArray *arrayTxtHome=[[NSArray alloc]initWithObjects:txtHomeAddr1,txtHomeAddr2,txtHomeAddr3,txtHomeVillage,txtHomeDistrict,txtHomeTown,txtHomeProvince, nil];
+    
+    NSArray *arrayTxtOffice=[[NSArray alloc]initWithObjects:txtOfficeAddr1,txtOfficeAddr2,txtOfficeAddr3,txtOfficeVillage,txtOfficeDistrict,txtOfficeTown,txtOfficeProvince, nil];
+    
+    if ([arrayTxtHome containsObject:sender]){
+        if (!checked) {
+            for (int i=0; i<[arrayTxtHome count]; i++){
+                UITextField *textField = (UITextField *)[arrayTxtHome objectAtIndex:i];
+                if ([textField.text length]>0){
+                    [txtHomeCountry setText:@"Indonesia"];
+                    return;
+                }
+                else{
+                    [txtHomeCountry setText:@""];
+                }
+            }
+        }
+    }
+
+    if ([arrayTxtOffice containsObject:sender]){
+        if (!checked2) {
+            for (int i=0; i<[arrayTxtOffice count]; i++){
+                UITextField *textField = (UITextField *)[arrayTxtOffice objectAtIndex:i];
+                if ([textField.text length]>0){
+                    [txtOfficeCountry setText:@"Indonesia"];
+                    return;
+                }
+                else{
+                    [txtOfficeCountry setText:@""];
+                }
+            }
+        }
+    }
+
+}
+
 -(void)detectChanges:(id)sender {
 	NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
 	[ClientProfile setObject:@"YES" forKey:@"isNew"];
@@ -2347,7 +2410,7 @@ bool RegDatehandling;
             txtHomePostCode.text = @"";
             txtHomeTown.text = @"";
             txtHomeState.text = @"";
-            //txtHomeCountry.text = @"";
+            txtHomeCountry.text = @"";
             //txtHomeTown.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
             txtHomeState.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
             txtHomeCountry.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
@@ -2398,7 +2461,7 @@ bool RegDatehandling;
             txtOfficePostcode.text = @"";
             txtOfficeTown.text = @"";
             txtOfficeState.text = @"";
-            //txtOfficeCountry.text = @"";
+            txtOfficeCountry.text = @"";
             // txtOfficeTown.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
             txtOfficeState.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
             txtOfficeCountry.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
