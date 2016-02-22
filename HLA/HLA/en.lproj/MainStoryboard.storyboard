@@ -10954,7 +10954,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="20130108Login.png" id="3SX-NO-O2T">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Login Page Bless_english_final_2-01.jpg" id="3SX-NO-O2T">
                                 <rect key="frame" x="0.0" y="-50" width="1026" height="864"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
@@ -10963,11 +10963,11 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="login_box.png" id="uid-T9-G8h">
-                                        <rect key="frame" x="581" y="207" width="426" height="452"/>
+                                        <rect key="frame" x="19" y="207" width="426" height="452"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="e4o-1F-YoA">
-                                        <rect key="frame" x="819" y="556" width="134" height="48"/>
+                                        <rect key="frame" x="257" y="556" width="134" height="48"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="btn_reset.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -10998,21 +10998,21 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="    Password" minimumFontSize="17" id="RCg-Da-r9X">
-                                        <rect key="frame" x="656" y="458" width="297" height="57"/>
+                                        <rect key="frame" x="94" y="458" width="297" height="57"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="    Username" minimumFontSize="17" id="6Ha-4F-7Pu">
-                                        <rect key="frame" x="656" y="392" width="297" height="56"/>
+                                        <rect key="frame" x="94" y="392" width="297" height="56"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="16"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bKx-ZE-ZlB">
-                                        <rect key="frame" x="656" y="556" width="134" height="48"/>
+                                        <rect key="frame" x="94" y="556" width="134" height="48"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="Optima-ExtraBlack" family="Optima" pointSize="16"/>
                                         <state key="normal" image="btn_login.png">
@@ -11027,7 +11027,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RTd-al-ErO">
-                                        <rect key="frame" x="814" y="523" width="139" height="21"/>
+                                        <rect key="frame" x="252" y="523" width="139" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <attributedString key="attributedText">
                                             <fragment content="Forgot Password">
@@ -11070,7 +11070,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="20130108Login.png" width="2048" height="1536"/>
+        <image name="Login Page Bless_english_final_2-01.jpg" width="2048" height="1536"/>
         <image name="Profile.png" width="256" height="256"/>
         <image name="Tablet-App-Redesign-Slices.jpg" width="2048" height="1536"/>
         <image name="btn_login.png" width="280" height="102"/>
