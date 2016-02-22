@@ -11,5 +11,6 @@
 @interface SynchdaysCounter : NSObject
 
 + (NSInteger)synchLeftDate;
++ (NSInteger)daysBetweenDate:(NSDate*)fromDateTime andDate:(NSDate*)toDateTime;
 
 @end

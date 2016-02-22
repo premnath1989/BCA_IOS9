@@ -8,7 +8,6 @@
 
 #import "Login.h"
 #import "MainScreen.h"
-//#import "setting.h"
 #import "ForgotPwd.h"
 #import "FirstTimeViewController.h"
 #import "AppDelegate.h"
@@ -34,6 +33,7 @@
 #import "DDXMLDocument.h"
 #import "DDXMLElementAdditions.h"
 #import "DDXMLNode.h"
+#import "SynchdaysCounter.h"
 
 @interface Login ()
 
@@ -119,6 +119,10 @@ NSString *ProceedStatus = @"";
     indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     indicator.frame = CGRectMake(0.0, 0.0, 80.0, 80.0);
     indicator.center = self.view.center;
+    indicator.layer.cornerRadius = 05;
+    indicator.opaque = NO;
+    indicator.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.6f];
+    [indicator setColor:[UIColor colorWithRed:0.6 green:0.8 blue:1.0 alpha:1.0]];
     [self.view addSubview:indicator];
     [indicator bringSubviewToFront:self.view];
 }
@@ -251,11 +255,11 @@ static NSString *labelVers;
          ****/
         else if([bodyPart isKindOfClass:[AgentWS_SendForgotPasswordResponse class]]) {
             AgentWS_SendForgotPasswordResponse* rateResponse = bodyPart;
-            if(![(NSString *)rateResponse.SendForgotPasswordResult caseInsensitiveCompare:@"FALSE"]){
-                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Success!"message:[NSString stringWithFormat:@"%@ that new Password has been sent to your email",rateResponse.SendForgotPasswordResult] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            if([(NSString *)rateResponse.SendForgotPasswordResult caseInsensitiveCompare:@"TRUE"]){
+                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Sukses!"message:[NSString stringWithFormat:@"Password baru telah di kirimkan ke email anda"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
                 [alert show];
             }else{
-                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Success!"message:[NSString stringWithFormat:@"Periksa lagi koneksi internet anda",rateResponse.SendForgotPasswordResult] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Gagal!" message:[NSString stringWithFormat:@"Periksa lagi koneksi internet anda"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
                 [alert show];
             }
         }
@@ -292,7 +296,7 @@ static NSString *labelVers;
             if([rateResponse.ValidateLoginResult caseInsensitiveCompare:@"True"] == NSOrderedSame){
                 [self loginSuccess];
             }else if([rateResponse.ValidateLoginResult caseInsensitiveCompare:@"False"] == NSOrderedSame){
-                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"PRoses Login anda gagal" message:@"" delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
+                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Proses Login anda gagal" message:@"" delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
                 [alert show];
             }
         }
@@ -394,32 +398,30 @@ static NSString *labelVers;
 
 - (void) ShowLoginDate
 {
-    NSString *todaysDate = [self getTodayDate];
     NSString *lastSyncDate = [self getLastSyncDate];
     int dayRem = 0;
     
     NSLog(@"lastSyncDate %@", lastSyncDate);
-    if( lastSyncDate == nil )
+    if( [lastSyncDate compare:@""] == NSOrderedSame )
     {
-        lastSyncDate = todaysDate;
+        lastSyncDate = @"";
     }
     
+    int differentDay = [self syncDaysLeft];
+    if(differentDay<0)
+    {
+        differentDay = differentDay * -1;
+    }
     
-    if (lastSyncDate !=(NSString *)[NSNull null]) {
-        int dateDifference = [self dateDiffrenceFromDate:todaysDate second:lastSyncDate];
-        
-        if(dateDifference<0)
-        {
-            dateDifference = dateDifference * -1;
-        }
-        
-        lblLastLogin.text = lastSyncDate;
-        
-        dayRem = 7-dateDifference;
-    }
-    else {
-        lblLastLogin.text = @"";
-    }
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZZZZ"];
+    NSDate *lastSync = [dateFormatter dateFromString:lastSyncDate];
+    [dateFormatter setDateFormat:@"dd/MM/YYYY"];
+    lastSyncDate = [dateFormatter stringFromDate:lastSync];
+    
+    lblLastLogin.text = lastSyncDate;
+    [lblLastLogin sizeToFit];
+    dayRem = 7 - differentDay;
     
     if (dayRem<0) {
         lblTimeRemaining.textColor = [UIColor redColor];
@@ -434,8 +436,8 @@ static NSString *labelVers;
 - (BOOL) validToLogin{
     
     //need to check again the date format
-    NSDateFormatter *dateFormatter  =   [[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZZZZ"];
     
     BOOL validFlag = true;
     
@@ -510,26 +512,6 @@ static NSString *labelVers;
     }
 }
 
-+(bool)forSMPD_Acturial:(NSString*) password
-{
-    if( [password isEqualToString:@"Hla123"] )
-    {
-        return true;
-    }else
-    {
-        return false;
-    }
-}
-
-+(void)setFirstDevice
-{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    [defaults setObject:[NSNumber numberWithInt:1] forKey:@"isFirstDevice"];
-    
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
 - (void) loginSuccess
 {
     AppDelegate *zzz= (AppDelegate*)[[UIApplication sharedApplication] delegate ];
@@ -589,27 +571,36 @@ static NSString *labelVers;
     [self presentViewController:carouselMenu animated:YES completion:Nil];
 }
 
-- (void) doOfflineLoginCheck
-{
+- (int)syncDaysLeft{
     NSString *todaysDate = [self getTodayDate];
     NSString *lastSyncDate = [self getLastSyncDate];
     
     NSLog(@"lastSyncDate %@", lastSyncDate);
-    if (lastSyncDate !=(NSString *)[NSNull null] || [lastSyncDate isEqualToString:@""])
-    {
+    if([lastSyncDate compare:@""] == NSOrderedSame){
         lastSyncDate = todaysDate;
     }
     
-    int dateDifference = [self dateDiffrenceFromDate:todaysDate second:lastSyncDate];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"dd/MM/yyyy"];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZZZZ"];
+    
+    return [SynchdaysCounter daysBetweenDate:[formatter dateFromString:todaysDate] andDate:[dateFormatter dateFromString:lastSyncDate]];
+}
+
+- (void) doOfflineLoginCheck
+{
+    int dateDifference = [self syncDaysLeft];
     
     if(dateDifference<0)
     {
         dateDifference = dateDifference * -1;
     }
-    //dateDifference = 20;
+    
     if(dateDifference > 7)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Informasi"
                                                         message:@"Anda tidak melakukan online login selama 7 hari, pastikan perangkat terhubung ke internet untuk login."
                                                        delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
@@ -646,21 +637,6 @@ static NSString *labelVers;
     return dateString;
 }
 
--(int)dateDiffrenceFromDate:(NSString *)date1 second:(NSString *)date2 {
-    // Manage Date Formation same for both dates
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"dd/MM/yyyy"];
-    NSDate *startDate = [formatter dateFromString:date1];
-    NSDate *endDate = [formatter dateFromString:date2];
-    
-    
-    unsigned flags = NSDayCalendarUnit;
-    NSDateComponents *difference = [[NSCalendar currentCalendar] components:flags fromDate:startDate toDate:endDate options:0];
-    
-    int dayDiff = [difference day];
-    
-    return dayDiff;
-}
 
 -(NSString*) getDeviceSerial
 {
@@ -674,73 +650,8 @@ static NSString *labelVers;
 - (IBAction)btnReset:(id)sender
 {
     [self loginSuccess];
-    //    const char *dbpath = [databasePath UTF8String];
-    //    sqlite3_stmt *statement;
-    //    sqlite3_stmt *statement2;
-    //    sqlite3_stmt *statement3;
-    //
-    //    if (sqlite3_open(dbpath, &contactDB) == SQLITE_OK)
-    //    {
-    //        //NSString *querySQL = [NSString stringWithFormat:@"UPDATE User_Profile SET firstLogin = 1, agentPassword = \"password\" "];
-    //        /*NSString *querySQL = [NSString stringWithFormat:@"UPDATE Agent_profile SET firstLogin = null, agentPassword = \"password\" "];
-    //
-    //        const char *query_stmt = [querySQL UTF8String];
-    //        if (sqlite3_prepare_v2(contactDB, query_stmt, -1, &statement, NULL) == SQLITE_OK)
-    //        {
-    //            if (sqlite3_step(statement) == SQLITE_DONE)
-    //            {*/
-    //                NSString *querySQL2 = [NSString stringWithFormat:@"DELETE from SecurityQuestion_Input "];
-    //                if (sqlite3_prepare_v2(contactDB, [querySQL2 UTF8String], -1, &statement2, NULL) == SQLITE_OK)
-    //                {
-    //                    if (sqlite3_step(statement2) == SQLITE_DONE){
-    //
-    //                        NSString *querySQL3 = [NSString stringWithFormat:@"UPDATE Agent_Profile SET AgentCode = \"\", AgentName = \"\", "
-    //                                               " AgentContactNo = \"\", ImmediateLeaderCode = \"\", ImmediateLeaderName = \"\", BusinessRegNumber = \"\", "
-    //                                               " AgentEmail = \"\", AgentPassword = \"\" , firstLogin = null "];
-    //                        if (sqlite3_prepare_v2(contactDB, [querySQL3 UTF8String], -1, &statement3, NULL) == SQLITE_OK)
-    //                        {
-    //                            if (sqlite3_step(statement3) == SQLITE_DONE){
-    //
-    //                                [self resetFirstDevice];
-    //                                [self IsFirstDevice];
-    //                                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
-    //                                                                                message:@"System has been restored to first time login mode" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-    //                                [alert show];
-    //
-    //                            }
-    //
-    //                            sqlite3_finalize(statement3);
-    //                        }
-    //
-    //                    }
-    //                    sqlite3_finalize(statement2);
-    //
-    //                }
-    //                sqlite3_close(contactDB);
-    //        /*
-    //            } else {
-    //                NSLog(@"reset error");
-    //            }
-    //            sqlite3_finalize(statement);
-    //        }
-    //        sqlite3_close(contactDB);*/
-    //    }
-    //
-    //	/*
-    //
-    //	 if(_delegate != Nil){
-    //	 [(ViewController *)_delegate setSss:1 ];
-    //	 [self dismissModalViewControllerAnimated:NO];
-    //	 [_delegate Dismiss:@""];
-    //	 }
-    //	 */
-    //
-    //	AgentPortalLogin *agentPortalLogin = [self.storyboard instantiateViewControllerWithIdentifier:@"agentPortalLogin"];
-    //	agentPortalLogin.modalPresentationStyle = UIModalPresentationPageSheet;
-    //	agentPortalLogin.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    //
-    //	[self presentViewController:agentPortalLogin animated:YES completion:nil];
-    //	agentPortalLogin.view.superview.frame = CGRectMake(150, 50, 700, 600);
+    txtUsername.text = @"";
+    txtPassword.text = @"";
     
 }
 
@@ -876,7 +787,6 @@ static NSString *labelVers;
     [db close];
     
     return successLog;
-    
 }
 
 -(NSString*) getTodayDateInStr
@@ -948,6 +858,26 @@ static NSString *labelVers;
 //        [self doOfflineLoginCheck];
 //    }
 }
+
+//+(void)setFirstDevice
+//{
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    
+//    [defaults setObject:[NSNumber numberWithInt:1] forKey:@"isFirstDevice"];
+//    
+//    [[NSUserDefaults standardUserDefaults] synchronize];
+//}
+
+//+(bool)forSMPD_Acturial:(NSString*) password
+//{
+//    if( [password isEqualToString:@"Hla123"] )
+//    {
+//        return true;
+//    }else
+//    {
+//        return false;
+//    }
+//}
 
 /*
  * Edited By : Erwin

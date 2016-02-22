@@ -421,6 +421,7 @@
 		AADD7E721C743A1E00D87750 /* DDXMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = AADD7E6A1C743A1E00D87750 /* DDXMLElement.m */; };
 		AADD7E731C743A1E00D87750 /* DDXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = AADD7E6C1C743A1E00D87750 /* DDXMLNode.m */; };
 		AADD7E771C76AB2F00D87750 /* SessionManagement.m in Sources */ = {isa = PBXBuildFile; fileRef = AADD7E761C76AB2F00D87750 /* SessionManagement.m */; };
+		AAFE1AAF1C7B05E1008D4B9C /* Login Page Bless_english_final_2-01.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AAFE1AAE1C7B05E1008D4B9C /* Login Page Bless_english_final_2-01.jpg */; };
 		AAFEE0351C6C1EC900702F64 /* TableManagement.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFEE0341C6C1EC900702F64 /* TableManagement.m */; };
 		AAFEE0381C6C239E00702F64 /* ColumnHeaderStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFEE0371C6C239E00702F64 /* ColumnHeaderStyle.m */; };
 		AAFEE03E1C6D927400702F64 /* UIButton+Property.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFEE03D1C6D927400702F64 /* UIButton+Property.m */; };
@@ -1494,6 +1495,7 @@
 		AADD7E6E1C743A1E00D87750 /* DDXMLPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLPrivate.h; sourceTree = "<group>"; };
 		AADD7E751C76AB1800D87750 /* SessionManagement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SessionManagement.h; sourceTree = "<group>"; };
 		AADD7E761C76AB2F00D87750 /* SessionManagement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionManagement.m; sourceTree = "<group>"; };
+		AAFE1AAE1C7B05E1008D4B9C /* Login Page Bless_english_final_2-01.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Login Page Bless_english_final_2-01.jpg"; sourceTree = "<group>"; };
 		AAFEE0331C6C1EBD00702F64 /* TableManagement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TableManagement.h; sourceTree = "<group>"; };
 		AAFEE0341C6C1EC900702F64 /* TableManagement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableManagement.m; sourceTree = "<group>"; };
 		AAFEE0361C6C239000702F64 /* ColumnHeaderStyle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColumnHeaderStyle.h; sourceTree = "<group>"; };
@@ -3961,6 +3963,7 @@
 		C4E9D1BF1612C6A500016053 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				AAFE1AAE1C7B05E1008D4B9C /* Login Page Bless_english_final_2-01.jpg */,
 				17F10EAE1C6C85DA002C32D3 /* btn_login.png */,
 				17F10EB21C6C85EF002C32D3 /* login_box.png */,
 				17F10EAF1C6C85DA002C32D3 /* btn_reset.png */,
@@ -4777,6 +4780,7 @@
 				6C0B08CE18D1979B00826FC9 /* underwriting in Resources */,
 				2994B41018E121AE00B0D4D2 /* CA_bg.png in Resources */,
 				2994B41118E121AE00B0D4D2 /* CA_HeaderImage.png in Resources */,
+				AAFE1AAF1C7B05E1008D4B9C /* Login Page Bless_english_final_2-01.jpg in Resources */,
 				2994B41218E121AE00B0D4D2 /* Footer.png in Resources */,
 				2994B41318E121AE00B0D4D2 /* Header.jpg in Resources */,
 				2994B41418E121AE00B0D4D2 /* P1.jpg in Resources */,

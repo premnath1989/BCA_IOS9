@@ -60,6 +60,10 @@
     indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     indicator.frame = CGRectMake(0.0, 0.0, 80.0, 80.0);
     indicator.center = self.view.center;
+    indicator.layer.cornerRadius = 05;
+    indicator.opaque = NO;
+    indicator.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.6f];
+    [indicator setColor:[UIColor colorWithRed:0.6 green:0.8 blue:1.0 alpha:1.0]];
     [self.view addSubview:indicator];
     [indicator bringSubviewToFront:self.view];
 }
