@@ -75,6 +75,7 @@
     
     btnBarDone.enabled = NO;
     [btnBarDone setTintColor: [UIColor clearColor]];
+    [self initLoadingSpinner];
 
     if(flagFirstLogin){
         btnBarCancel.enabled = NO;
@@ -299,10 +300,12 @@
         }
         else {
             if ([txtNewPwd.text isEqualToString:txtConfirmPwd.text]) {
-                
+                [indicator startAnimating];
                 WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
                 if(flagFirstLogin){
                     [webservice FirstTimeLogin:loginDelegate AgentCode:txtAgentCode.text password:txtOldPwd.text newPassword:txtNewPwd.text UUID:[[[UIDevice currentDevice] identifierForVendor] UUIDString]];
+                }else{
+                    [webservice chgPassword:self AgentCode:txtAgentCode.text password:txtOldPwd.text newPassword:txtNewPwd.text UUID:[[[UIDevice currentDevice] identifierForVendor] UUIDString]];
                 }
             }
             else {
@@ -312,6 +315,40 @@
                 txtNewPwd.text = @"";
                 txtConfirmPwd.text = @"";
             }
+        }
+    }
+}
+
+//here is our function for every response from webservice
+- (void) operation:(AgentWSSoapBindingOperation *)operation
+completedWithResponse:(AgentWSSoapBindingResponse *)response
+{
+    [indicator stopAnimating];
+    NSArray *responseBodyParts = response.bodyParts;
+    if([[response.error localizedDescription] caseInsensitiveCompare:@""] != NSOrderedSame){
+        UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Periksa lagi koneksi internet anda" message:@"" delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
+        [alert show];
+    }
+    for(id bodyPart in responseBodyParts) {
+        
+        /****
+         * SOAP Fault Error
+         ****/
+        if ([bodyPart isKindOfClass:[SOAPFault class]]) {
+            
+            //You can get the error like this:
+            NSString* errorMesg = ((SOAPFault *)bodyPart).simpleFaultString;
+            UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Please check your connection" message:errorMesg delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
+            [alert show];
+        }
+        
+        /****
+         * is it AgentWS_ChangePasswordResponse
+         ****/
+        else if([bodyPart isKindOfClass:[AgentWS_ChangePasswordResponse class]]) {
+            AgentWS_ChangePasswordResponse* rateResponse = bodyPart;
+            UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Ubah Password Sukses!"message:[NSString stringWithFormat:@"%@ Password Anda telah berhasil di ubah",rateResponse.ChangePasswordResult] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alert show];
         }
     }
 }

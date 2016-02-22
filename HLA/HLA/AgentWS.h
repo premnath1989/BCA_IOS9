@@ -15,6 +15,8 @@
 @class AgentWS_ReceiveFirstLogin;
 @class AgentWS_ReceiveFirstLoginResponse;
 @class AgentWS_ReceiveFirstLoginResult;
+@class AgentWS_ChangePassword;
+@class AgentWS_ChangePasswordResponse;
 @interface AgentWS_ValidateAgentAndDevice : NSObject {
 	
 /* elements */
@@ -276,6 +278,48 @@
 /* attributes */
 - (NSDictionary *)attributes;
 @end
+@interface AgentWS_ChangePassword : NSObject {
+	
+/* elements */
+	NSString * strAgentId;
+	NSString * strPassword;
+	NSString * strNewPass;
+	NSString * strUDID;
+/* attributes */
+}
+- (NSString *)nsPrefix;
+- (xmlNodePtr)xmlNodeForDoc:(xmlDocPtr)doc elementName:(NSString *)elName elementNSPrefix:(NSString *)elNSPrefix;
+- (void)addAttributesToNode:(xmlNodePtr)node;
+- (void)addElementsToNode:(xmlNodePtr)node;
++ (AgentWS_ChangePassword *)deserializeNode:(xmlNodePtr)cur;
+- (void)deserializeAttributesFromNode:(xmlNodePtr)cur;
+- (void)deserializeElementsFromNode:(xmlNodePtr)cur;
+/* elements */
+@property (retain) NSString * strAgentId;
+@property (retain) NSString * strPassword;
+@property (retain) NSString * strNewPass;
+@property (retain) NSString * strUDID;
+/* attributes */
+- (NSDictionary *)attributes;
+@end
+@interface AgentWS_ChangePasswordResponse : NSObject {
+	
+/* elements */
+	NSString * ChangePasswordResult;
+/* attributes */
+}
+- (NSString *)nsPrefix;
+- (xmlNodePtr)xmlNodeForDoc:(xmlDocPtr)doc elementName:(NSString *)elName elementNSPrefix:(NSString *)elNSPrefix;
+- (void)addAttributesToNode:(xmlNodePtr)node;
+- (void)addElementsToNode:(xmlNodePtr)node;
++ (AgentWS_ChangePasswordResponse *)deserializeNode:(xmlNodePtr)cur;
+- (void)deserializeAttributesFromNode:(xmlNodePtr)cur;
+- (void)deserializeElementsFromNode:(xmlNodePtr)cur;
+/* elements */
+@property (retain) NSString * ChangePasswordResult;
+/* attributes */
+- (NSDictionary *)attributes;
+@end
 /* Cookies handling provided by http://en.wikibooks.org/wiki/Programming:WebObjects/Web_Services/Web_Service_Provider */
 #import <libxml/parser.h>
 #import "xsd.h"
@@ -323,6 +367,8 @@
 - (void)SendForgotPasswordAsyncUsingParameters:(AgentWS_SendForgotPassword *)aParameters  delegate:(id<AgentWSSoapBindingResponseDelegate>)responseDelegate;
 - (AgentWSSoapBindingResponse *)ReceiveFirstLoginUsingParameters:(AgentWS_ReceiveFirstLogin *)aParameters ;
 - (void)ReceiveFirstLoginAsyncUsingParameters:(AgentWS_ReceiveFirstLogin *)aParameters  delegate:(id<AgentWSSoapBindingResponseDelegate>)responseDelegate;
+- (AgentWSSoapBindingResponse *)ChangePasswordUsingParameters:(AgentWS_ChangePassword *)aParameters ;
+- (void)ChangePasswordAsyncUsingParameters:(AgentWS_ChangePassword *)aParameters  delegate:(id<AgentWSSoapBindingResponseDelegate>)responseDelegate;
 @end
 @interface AgentWSSoapBindingOperation : NSOperation {
 	AgentWSSoapBinding *binding;
@@ -386,6 +432,14 @@
 	parameters:(AgentWS_ReceiveFirstLogin *)aParameters
 ;
 @end
+@interface AgentWSSoapBinding_ChangePassword : AgentWSSoapBindingOperation {
+	AgentWS_ChangePassword * parameters;
+}
+@property (retain) AgentWS_ChangePassword * parameters;
+- (id)initWithBinding:(AgentWSSoapBinding *)aBinding delegate:(id<AgentWSSoapBindingResponseDelegate>)aDelegate
+	parameters:(AgentWS_ChangePassword *)aParameters
+;
+@end
 @interface AgentWSSoapBinding_envelope : NSObject {
 }
 + (AgentWSSoapBinding_envelope *)sharedInstance;
@@ -435,6 +489,8 @@
 - (void)SendForgotPasswordAsyncUsingParameters:(AgentWS_SendForgotPassword *)aParameters  delegate:(id<AgentWSSoap12BindingResponseDelegate>)responseDelegate;
 - (AgentWSSoap12BindingResponse *)ReceiveFirstLoginUsingParameters:(AgentWS_ReceiveFirstLogin *)aParameters ;
 - (void)ReceiveFirstLoginAsyncUsingParameters:(AgentWS_ReceiveFirstLogin *)aParameters  delegate:(id<AgentWSSoap12BindingResponseDelegate>)responseDelegate;
+- (AgentWSSoap12BindingResponse *)ChangePasswordUsingParameters:(AgentWS_ChangePassword *)aParameters ;
+- (void)ChangePasswordAsyncUsingParameters:(AgentWS_ChangePassword *)aParameters  delegate:(id<AgentWSSoap12BindingResponseDelegate>)responseDelegate;
 @end
 @interface AgentWSSoap12BindingOperation : NSOperation {
 	AgentWSSoap12Binding *binding;
@@ -496,6 +552,14 @@
 @property (retain) AgentWS_ReceiveFirstLogin * parameters;
 - (id)initWithBinding:(AgentWSSoap12Binding *)aBinding delegate:(id<AgentWSSoap12BindingResponseDelegate>)aDelegate
 	parameters:(AgentWS_ReceiveFirstLogin *)aParameters
+;
+@end
+@interface AgentWSSoap12Binding_ChangePassword : AgentWSSoap12BindingOperation {
+	AgentWS_ChangePassword * parameters;
+}
+@property (retain) AgentWS_ChangePassword * parameters;
+- (id)initWithBinding:(AgentWSSoap12Binding *)aBinding delegate:(id<AgentWSSoap12BindingResponseDelegate>)aDelegate
+	parameters:(AgentWS_ChangePassword *)aParameters
 ;
 @end
 @interface AgentWSSoap12Binding_envelope : NSObject {

@@ -170,6 +170,34 @@
     return AgentFound;
 }
 
+- (int) DeviceStatus:(NSString *)AgentID{
+    sqlite3_stmt *statement;
+    int DeviceStatusFlag = DATABASE_ERROR;
+    if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
+    {
+        NSString *querySQL = [NSString stringWithFormat: @"SELECT DeviceStatus FROM Agent_Profile WHERE AgentCode=\"%@\" ", AgentID];
+        
+        if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK){
+            if (sqlite3_step(statement) == SQLITE_ROW) {
+                NSString *strFirstLogin = [[NSString alloc]
+                                           initWithUTF8String:
+                                           (const char *) sqlite3_column_text(statement, 0)];
+                NSLog(@"%@",strFirstLogin);
+                if([strFirstLogin caseInsensitiveCompare:@"A"] == NSOrderedSame){
+                    DeviceStatusFlag = DEVICE_IS_ACTIVE;
+                }else if([strFirstLogin caseInsensitiveCompare:@"I"] == NSOrderedSame){
+                    DeviceStatusFlag = DEVICE_IS_INACTIVE;
+                }
+            }else{
+                DeviceStatusFlag = AGENT_IS_NOT_FOUND;
+            }
+            sqlite3_finalize(statement);
+        }
+        sqlite3_close(contactDB);
+    }
+    return DeviceStatusFlag;
+}
+
 - (int) AgentStatus:(NSString *)AgentID{
     sqlite3_stmt *statement;
     int agentStatusFlag = DATABASE_ERROR;
@@ -185,8 +213,10 @@
                 NSLog(@"%@",strFirstLogin);
                 if([strFirstLogin caseInsensitiveCompare:@"A"] == NSOrderedSame){
                     agentStatusFlag = AGENT_IS_ACTIVE;
-                }else{
+                }else if([strFirstLogin caseInsensitiveCompare:@"I"] == NSOrderedSame){
                     agentStatusFlag = AGENT_IS_INACTIVE;
+                }else if([strFirstLogin caseInsensitiveCompare:@"T"] == NSOrderedSame){
+                    agentStatusFlag = AGENT_IS_TERMINATED;
                 }
             }else{
                 agentStatusFlag = AGENT_IS_NOT_FOUND;
@@ -404,6 +434,44 @@
     }
     
     return agentDetails;
+    
+}
+
+
+-(BOOL) SpvAdmValidation:(NSString *)username password:(NSString *)password
+{
+    BOOL successLog = FALSE;
+    
+    NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsDir = [dirPaths objectAtIndex:0];
+    NSString *dbPath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    
+    [db open];
+    NSString *SupervisorCode;
+    NSString *SupervisorPass;
+    NSString *Admin;
+    NSString *AdminPassword;
+    
+    FMResultSet *result1 = [db executeQuery:@"select AgentCode, AgentPassword, DirectSupervisorCode, DirectSupervisorPassword, Admin, AdminPassword  from Agent_profile"];
+    
+    while ([result1 next]) {
+        
+        SupervisorCode = [[result1 objectForColumnName:@"DirectSupervisorCode"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        SupervisorPass = [[result1 objectForColumnName:@"DirectSupervisorPassword"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        
+        Admin = [[result1 objectForColumnName:@"Admin"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        AdminPassword = [[result1 objectForColumnName:@"AdminPassword"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        
+        if (([username isEqualToString:SupervisorCode] && [password isEqualToString:SupervisorPass])
+            || ([username isEqualToString:Admin] && [password isEqualToString:AdminPassword])) {
+            successLog = TRUE;
+        }
+    }
+    
+    [db close];
+    
+    return successLog;
     
 }
 

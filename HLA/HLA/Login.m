@@ -229,6 +229,10 @@ static NSString *labelVers;
 {
     [indicator stopAnimating];
     NSArray *responseBodyParts = response.bodyParts;
+    if([[response.error localizedDescription] caseInsensitiveCompare:@""] != NSOrderedSame){
+        UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Periksa lagi koneksi internet anda" message:@"" delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
+        [alert show];
+    }
     for(id bodyPart in responseBodyParts) {
     
         /****
@@ -247,27 +251,36 @@ static NSString *labelVers;
          ****/
         else if([bodyPart isKindOfClass:[AgentWS_SendForgotPasswordResponse class]]) {
             AgentWS_SendForgotPasswordResponse* rateResponse = bodyPart;
-            UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Success!"message:[NSString stringWithFormat:@"%@ that new Password has been sent to your email",rateResponse.SendForgotPasswordResult] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [alert show];
+            if(![(NSString *)rateResponse.SendForgotPasswordResult caseInsensitiveCompare:@"FALSE"]){
+                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Success!"message:[NSString stringWithFormat:@"%@ that new Password has been sent to your email",rateResponse.SendForgotPasswordResult] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                [alert show];
+            }else{
+                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Success!"message:[NSString stringWithFormat:@"Periksa lagi koneksi internet anda",rateResponse.SendForgotPasswordResult] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                [alert show];
+            }
         }
         
         /****
          * is it AgentWS_ReceiveFirstLoginResponse
          ****/
         else if([bodyPart isKindOfClass:[AgentWS_ReceiveFirstLoginResponse class]]) {
-            firstLogin = false;
-            
             AgentWS_ReceiveFirstLoginResponse* rateResponse = bodyPart;
-            // create XMLDocument object
-            DDXMLDocument *xml = [[DDXMLDocument alloc] initWithXMLString:rateResponse.ReceiveFirstLoginResult.xmlDetails options:0 error:nil];
-        
-            // Get root element - DataSetMenu for your XMLfile
-            DDXMLElement *root = [xml rootElement];
-            NSMutableDictionary *returnDict = [[NSMutableDictionary alloc]init];
-            [self parseXML:root dictBuff:returnDict];
-            int result = [loginDB insertAgentProfile:returnDict];
-            if(result == TABLE_INSERTION_SUCCESS){
-                [UserProfileView gotoCarousel];
+            if([rateResponse.strStatus caseInsensitiveCompare:@"True"] == NSOrderedSame){
+                firstLogin = false;
+                // create XMLDocument object
+                DDXMLDocument *xml = [[DDXMLDocument alloc] initWithXMLString:rateResponse.ReceiveFirstLoginResult.xmlDetails options:0 error:nil];
+            
+                // Get root element - DataSetMenu for your XMLfile
+                DDXMLElement *root = [xml rootElement];
+                NSMutableDictionary *returnDict = [[NSMutableDictionary alloc]init];
+                [self parseXML:root dictBuff:returnDict];
+                int result = [loginDB insertAgentProfile:returnDict];
+                if(result == TABLE_INSERTION_SUCCESS){
+                    [UserProfileView gotoCarousel];
+                }
+            }else if([rateResponse.strStatus caseInsensitiveCompare:@"False"] == NSOrderedSame){
+                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Proses Login anda gagal" message:@"" delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
+                [alert show];
             }
         }
         
@@ -275,7 +288,13 @@ static NSString *labelVers;
          * is it AgentWS_ValidateLoginResponse
          ****/
         else if([bodyPart isKindOfClass:[AgentWS_ValidateLoginResponse class]]) {
-            [self loginSuccess];
+            AgentWS_ValidateLoginResponse* rateResponse = bodyPart;
+            if([rateResponse.ValidateLoginResult caseInsensitiveCompare:@"True"] == NSOrderedSame){
+                [self loginSuccess];
+            }else if([rateResponse.ValidateLoginResult caseInsensitiveCompare:@"False"] == NSOrderedSame){
+                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"PRoses Login anda gagal" message:@"" delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
+                [alert show];
+            }
         }
     }
 }
@@ -420,28 +439,49 @@ static NSString *labelVers;
     
     BOOL validFlag = true;
     
-    switch ([loginDB AgentStatus:txtUsername.text]) {
-        case AGENT_IS_INACTIVE:
-        {
-            UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Status Agen adalah inactive"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [alert show];
-            validFlag = false;
-            break;
+    if(![loginDB SpvAdmValidation:txtUsername.text password:txtPassword.text]){
+        switch ([loginDB AgentStatus:txtUsername.text]) {
+            case AGENT_IS_INACTIVE:
+            {
+                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Status Agen adalah inactive"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                [alert show];
+                validFlag = false;
+                break;
+            }
+            case AGENT_IS_NOT_FOUND:
+            {
+                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Kode Agen yang di masukan salah"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                [alert show];
+                validFlag = false;
+                break;
+            }
+            case AGENT_IS_TERMINATED:
+            {
+                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Status Agen adalah terminated"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                [alert show];
+                validFlag = false;
+                break;
+            }
+            default:
+                break;
         }
-        case AGENT_IS_NOT_FOUND:
-        {
-            UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Kode Agen yang di masukan salah"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [alert show];
-            validFlag = false;
-            break;
+        switch ([[dateFormatter dateFromString:[loginDB expiryDate:txtUsername.text]] compare:[NSDate date]]) {
+            case NSOrderedAscending:
+            {
+                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Lisensi Agen telah expired"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                [alert show];
+                validFlag = false;
+                break;
+            }
+            default:
+                break;
         }
-        default:
-            break;
     }
-    switch ([[dateFormatter dateFromString:[loginDB expiryDate:txtUsername.text]] compare:[NSDate date]]) {
-        case NSOrderedAscending:
+    
+    switch ([loginDB DeviceStatus:txtUsername.text]) {
+        case DEVICE_IS_INACTIVE:
         {
-            UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Lisensi Agen telah expired"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Status Perangkat anda tidak aktif"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [alert show];
             validFlag = false;
             break;
@@ -809,14 +849,26 @@ static NSString *labelVers;
     [db open];
     NSString *AgentName;
     NSString *AgentPassword;
+    NSString *SupervisorCode;
+    NSString *SupervisorPass;
+    NSString *Admin;
+    NSString *AdminPassword;
     
-    FMResultSet *result1 = [db executeQuery:@"select AgentCode, AgentPassword from Agent_profile"];
+    FMResultSet *result1 = [db executeQuery:@"select AgentCode, AgentPassword, DirectSupervisorCode, DirectSupervisorPassword, Admin, AdminPassword  from Agent_profile"];
     
     while ([result1 next]) {
         AgentName = [[result1 objectForColumnName:@"AgentCode"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
         AgentPassword = [[result1 objectForColumnName:@"AgentPassword"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
         
-        if ([txtUsername.text isEqualToString:AgentName] && [txtPassword.text isEqualToString:AgentPassword]) {
+        SupervisorCode = [[result1 objectForColumnName:@"DirectSupervisorCode"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        SupervisorPass = [[result1 objectForColumnName:@"DirectSupervisorPassword"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        
+        Admin = [[result1 objectForColumnName:@"Admin"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        AdminPassword = [[result1 objectForColumnName:@"AdminPassword"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        
+        if (([txtUsername.text isEqualToString:AgentName] && [txtPassword.text isEqualToString:AgentPassword])
+            || ([txtUsername.text isEqualToString:SupervisorCode] && [txtPassword.text isEqualToString:SupervisorPass])
+            || ([txtUsername.text isEqualToString:Admin] && [txtPassword.text isEqualToString:AdminPassword])) {
             successLog = TRUE;
         }
     }

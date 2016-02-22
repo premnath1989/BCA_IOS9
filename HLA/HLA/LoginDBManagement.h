@@ -26,5 +26,7 @@
 - (NSString *) expiryDate:(NSString *)AgentID;
 - (NSString *)checkingLastLogout;
 - (NSMutableDictionary *)getAgentDetails;
+- (int) DeviceStatus:(NSString *)AgentID;
+-(BOOL) SpvAdmValidation:(NSString *)username password:(NSString *)password;
 
 @end

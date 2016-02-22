@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <sqlite3.h>
 #import "PasswordTips.h"
+#import "AgentWS.h"
 
-@interface ChangePassword : UIViewController<PasswordTipDelegate>{
+@interface ChangePassword : UIViewController<PasswordTipDelegate, AgentWSSoapBindingResponseDelegate>{
     NSString *databasePath;
     sqlite3 *contactDB;
     UIPopoverController *_PasswordTipPopover;

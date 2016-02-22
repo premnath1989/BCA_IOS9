@@ -23,6 +23,19 @@
     return 1;
 }
 
+- (int)chgPassword:(id)delegate AgentCode:(NSString *)AgentCode password:(NSString *)password newPassword:(NSString *)newpassword UUID:(NSString *)deviceID {
+    AgentWSSoapBinding *binding = [AgentWS AgentWSSoapBinding];
+    binding.logXMLInOut = YES;
+    
+    AgentWS_ChangePassword *agentCodea = [[AgentWS_ChangePassword alloc]init];
+    agentCodea.strAgentId = AgentCode;
+    agentCodea.strPassword = password;
+    agentCodea.strUDID = deviceID;
+    agentCodea.strNewPass = newpassword;
+    [binding ChangePasswordAsyncUsingParameters:agentCodea delegate:delegate];
+    return 1;
+}
+
 - (int)FirstTimeLogin:(id)delegate AgentCode:(NSString *)AgentCode password:(NSString *)password newPassword:(NSString *)newpassword UUID:(NSString *)deviceID {
     AgentWSSoapBinding *binding = [AgentWS AgentWSSoapBinding];
     binding.logXMLInOut = YES;
