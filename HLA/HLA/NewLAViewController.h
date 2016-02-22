@@ -16,6 +16,7 @@
 #import "SIObj.h"
 #import "AppDelegate.h"
 #import "RelationshipPopoverViewController.h"
+#import "SecondLAViewController.h"
 
 
 @class NewLAViewController;
@@ -41,6 +42,7 @@
     UIPopoverController *_datePopover;
     UIPopoverController *_dobPopover;
     UIPopoverController *_OccupationListPopover;
+    SecondLAViewController *_SecondLAController;
     
     
     PlanList *_planList;
@@ -79,6 +81,7 @@
     int prevIndexNo;
     int savedIndexNo;
     NSString *OccuCatCode;
+    BOOL QuickQuoteBool;
     
     UIColor *themeColour;
     IBOutlet UIScrollView* scrollLA;
@@ -92,6 +95,7 @@
 @property (strong, nonatomic) NSMutableArray *dataInsert2;
 @property (nonatomic,strong) BasicPlanHandler *laBH;
 @property (nonatomic,strong) id <NewLAViewControllerDelegate> delegate;
+@property (nonatomic, retain) SecondLAViewController *SecondLAController;
 
 //--request
 @property (nonatomic,strong) id requestSINo;
@@ -137,7 +141,7 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *outletDone;
 @property (strong, nonatomic) IBOutlet UIButton *NamaProduk;
 @property (strong, nonatomic) IBOutlet UIButton *BtnHubungan;
-
+@property (nonatomic, assign)BOOL QuickQuoteBool;
 
 @property (nonatomic, copy) NSString *SINo, *SINOBCA;
 @property (nonatomic, copy) NSString *CustCode;

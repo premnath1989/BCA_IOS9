@@ -25,6 +25,7 @@
 
 @implementation NewLAViewController
 @synthesize myScrollView;
+@synthesize SecondLAController = _SecondLAController;
 @synthesize LANameField;
 @synthesize sexSegment;
 @synthesize smokerSegment;
@@ -32,7 +33,7 @@
 @synthesize LAOccLoadingField;
 @synthesize LACPAField;
 @synthesize LAPAField,btnToEAPP;
-@synthesize btnCommDate,btnEnabled,btnProspect;
+@synthesize btnCommDate,btnEnabled,btnProspect,QuickQuoteBool;
 @synthesize statusLabel,EAPPorSI;
 @synthesize sex,smoker,age,ANB,DOB,jobDesc,SINo,CustCode;
 @synthesize occDesc,occCode,occLoading,payorSINo,occCPA_PA;
@@ -137,6 +138,9 @@ id dobtanngal;
         sexSegment.enabled = YES;
         btnOccp.enabled = YES;
         btnProspect.enabled = NO;
+        NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+        [prefs setObject:@"Yes" forKey:@"keyToLookupString"];
+        [self.SecondLAController testing:@"helloMyPrem"];
     }
     else
     {
@@ -151,6 +155,8 @@ id dobtanngal;
         sexSegment.enabled = NO;
         btnOccp.enabled = NO;
         btnProspect.enabled = YES;
+        NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+        [prefs setObject:@"No" forKey:@"keyToLookupString"];
     }
 }
 

@@ -130,7 +130,7 @@ id dobtemp;
 		sexSegment.enabled = FALSE;
 		smokerSegment.enabled = FALSE;
 		btnDOB.enabled = FALSE;
-		btnOccp.enabled = FALSE;
+		btnOccp.enabled = TRUE;
         
         if([EAPPorSI isEqualToString:@"eAPP"]){
             outletEAPP.title = @"e-Application Checklist";
@@ -167,6 +167,11 @@ id dobtemp;
     ageField.layer.masksToBounds = YES;
     ageField.layer.borderWidth = 1.0f;
 
+}
+
+-(void)testing :(NSString *)testing
+{
+    NSLog(@"testing %@",testing);
 }
 
 -(void) disableFieldsForEapp
@@ -557,21 +562,28 @@ id dobtemp;
 
 -(BOOL)calculateAge
 {
-    NSArray *curr = [getCommDate componentsSeparatedByString: @"/"];
-    NSString *currentDay = [curr objectAtIndex:0];
-    NSString *currentMonth = [curr objectAtIndex:1];
-    NSString *currentYear = [curr objectAtIndex:2];
+  
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+    NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
+    
+    
+    NSArray *comm = [dateString componentsSeparatedByString: @"/"];
+    NSString *commDay = [comm objectAtIndex:0];
+    NSString *commMonth = [comm objectAtIndex:1];
+    NSString *commYear = [comm objectAtIndex:2];
+    
     
     NSArray *foo = [DOB componentsSeparatedByString: @"/"];
     NSString *birthDay = [foo objectAtIndex: 0];
     NSString *birthMonth = [foo objectAtIndex: 1];
     NSString *birthYear = [foo objectAtIndex: 2];
     
-    int yearN = [currentYear intValue];
+    int yearN = [commYear intValue];
     int yearB = [birthYear intValue];
-    int monthN = [currentMonth intValue];
+    int monthN = [commMonth intValue];
     int monthB = [birthMonth intValue];
-    int dayN = [currentDay intValue];
+    int dayN = [commDay intValue];
     int dayB = [birthDay intValue];
     
     int ALB = yearN - yearB;
@@ -579,48 +591,58 @@ id dobtemp;
     int newANB;
     
     NSString *msgAge;
-    if (yearN > yearB)
-    {
+    if (yearN > yearB) {
         if (monthN < monthB) {
             newALB = ALB - 1;
         } else if (monthN == monthB && dayN < dayB) {
             newALB = ALB - 1;
+        } else if (monthN == monthB && dayN == dayB) { //edited by heng
+            newALB = ALB ;  //edited by heng
         } else {
             newALB = ALB;
         }
         
         if (monthN > monthB) {
             newANB = ALB + 1;
-        } else if (monthN == monthB && dayN >= dayB) {
+        } else if (monthN == monthB && dayN > dayB) {
             newANB = ALB + 1;
+        } else if (monthN == monthB && dayN == dayB) { // edited by heng
+            newANB = ALB; //edited by heng
         } else {
             newANB = ALB;
         }
         msgAge = [[NSString alloc] initWithFormat:@"%d",newALB];
         age = newALB;
         ANB = newANB;
-        
-        if (age < 16) {
-//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Age must be at least 16 years old." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
-//            [alert show];
-//            return FALSE;
-        }
     } else if (yearN == yearB) {
+        [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+        NSString *selectDate = DOB;
+        NSDate *startDate = [dateFormatter dateFromString:selectDate];
+        
+        NSDate *endDate = [dateFormatter dateFromString:dateString];
+        
+        unsigned flags = NSDayCalendarUnit;
+        NSDateComponents *difference = [[NSCalendar currentCalendar] components:flags fromDate:startDate toDate:endDate options:0];
+        int diffDays = [difference day];
+        
+        msgAge = [[NSString alloc] initWithFormat:@"%d days",diffDays];
+        
         age = 0;
         ANB = 1;
-        
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Age must be at least 16 years old." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
-//        [alert show];
-//        return FALSE;
     } else {
-        age = 0;
-        ANB = 1;
+        [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+        NSString *selectDate = DOB;
+        NSDate *startDate = [dateFormatter dateFromString:selectDate];
         
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Age must be at least 16 years old." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
-//        [alert show];
-//        return FALSE;
+        NSDate *endDate = [dateFormatter dateFromString:dateString];
+        
+        unsigned flags = NSDayCalendarUnit;
+        NSDateComponents *difference = [[NSCalendar currentCalendar] components:flags fromDate:startDate toDate:endDate options:0];
+        int diffDays = [difference day];
+        
+    age = 0;
+        ANB = 1;
     }
-    return TRUE;
 }
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
@@ -717,8 +739,8 @@ id dobtemp;
                 sexSegment.selectedSegmentIndex = 1;
             }
             
-            DOBField.text = [[NSString alloc] initWithFormat:@"%@",aaDOB];
-            [btnDOB setTitle:aaDOB forState:UIControlStateNormal];
+           // DOBField.text = [[NSString alloc] initWithFormat:@"%@",aaDOB];
+            [_BtnTanggalLahir setTitle:aaDOB forState:UIControlStateNormal];
             DOB = aaDOB;
             isValid = [self calculateAge];
             ageField.text = [[NSString alloc] initWithFormat:@"%d",age];
@@ -727,32 +749,12 @@ id dobtemp;
             [self getOccLoadExist];
             OccpField.text = [[NSString alloc] initWithFormat:@"%@",OccpDesc];
             [btnOccp setTitle:OccpDesc forState:UIControlStateNormal];
-            OccpLoadField.text = [NSString stringWithFormat:@"%@",occLoading];
+           
             
-            if (occCPA_PA == 0) {
-                CPAField.text = @"D";
-            } else {
-                CPAField.text = [NSString stringWithFormat:@"%d",occCPA_PA];
-            }
-            
-            if (occPA == 0) {
-                PAField.text = @"D";
-            } else {
-                PAField.text = [NSString stringWithFormat:@"%d",occPA];
-            }
             [_delegate saved:YES];
         }
         
-        smokerSegment.enabled = FALSE;
-        if ([aaSmoker isEqualToString:@"N"]) {
-            smokerSegment.selectedSegmentIndex = 1;
-        } else {
-            smokerSegment.selectedSegmentIndex = 0;
-        }
-        if (isValid) {
-            [self saveData];
-        }
-        [_delegate setIsSecondLaNeeded:YES];
+                [_delegate setIsSecondLaNeeded:YES];
         [_prospectPopover dismissPopoverAnimated:YES];
         
     }
@@ -966,25 +968,27 @@ id dobtemp;
 
 -(void)getOccLoadExist
 {
-    sqlite3_stmt *statement;
-    if (sqlite3_open([databasePath UTF8String], &contactDB) == SQLITE_OK)
-    {
-        NSString *querySQL = [NSString stringWithFormat:
-                              @"SELECT a.OccpDesc, b.OccLoading, b.CPA, b.PA, a.Class from Adm_Occp_Loading_Penta a LEFT JOIN Adm_Occp_Loading b ON a.OccpCode = b.OccpCode WHERE b.OccpCode = \"%@\"",OccpCode];
-        if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK)
-        {
-            if (sqlite3_step(statement) == SQLITE_ROW)
-            {
-                OccpDesc = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 0)];
-                occLoading =  [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 1)];
-                occCPA_PA  = sqlite3_column_int(statement, 2);
-                occPA  = sqlite3_column_int(statement, 3);
-                occuClass = sqlite3_column_int(statement, 4);
-            }
-            sqlite3_finalize(statement);
-        }
-        sqlite3_close(contactDB);
+    FMDatabase *db;
+    FMResultSet *results;
+    
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsPath = [paths objectAtIndex:0];
+    NSString *path = [docsPath stringByAppendingPathComponent:@"hladb.sqlite"];
+    
+    db = [FMDatabase databaseWithPath:path];
+    [db open];
+    
+    
+    
+    results = Nil;
+    
+    results = [db executeQuery:@"SELECT OccpDesc from Adm_Occp WHERE OccpCode = ?", OccpCode, Nil];
+    while ([results next]) {
+        NSString *occpDesc = [results stringForColumn:@"OccpDesc"] != NULL ? [results stringForColumn:@"OccpDesc"] : @"";
+        OccpDesc = occpDesc;
     }
+    [db close];
 }
 
 -(BOOL)updateData

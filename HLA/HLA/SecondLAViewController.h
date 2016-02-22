@@ -138,6 +138,7 @@
 -(void)deleteSecondLA;
 -(void)deleteLA;
 -(void)resetField;
+-(void)testing :(NSString *)testing;
 
 @property(nonatomic , retain) NSString *Change;
 @property(nonatomic , retain) NSString *LAView;
