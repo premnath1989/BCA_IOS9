@@ -29,12 +29,25 @@ id msg, DBDate;
 
 -(void)viewDidAppear:(BOOL)animated{
     if (ProspectDOB != NULL ) {
-        
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"dd/MM/yyyy"];
-        //[dateFormatter setDateFormat:@"yyyy-MM-dd"];
-        NSDate *zzz = [dateFormatter dateFromString:ProspectDOB];
-        [_outletDate setDate:zzz animated:YES ];
+        @try {
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+            //[dateFormatter setDateFormat:@"yyyy-MM-dd"];
+            NSDate *zzz = [dateFormatter dateFromString:ProspectDOB];
+            [_outletDate setDate:zzz animated:YES ];
+
+        }
+        @catch (NSException *exception) {
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            //[dateFormatter setDateFormat:@"dd/MM/yyyy"];
+            [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+            NSDate *zzz = [dateFormatter dateFromString:ProspectDOB];
+            [_outletDate setDate:zzz animated:YES ];
+
+        }
+        @finally {
+            NSLog(@"succeded");
+        }
         
     }
 }
@@ -60,12 +73,24 @@ id msg, DBDate;
   
     
     if (ProspectDOB != NULL ) {
+        @try {
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+            //[dateFormatter setDateFormat:@"yyyy-MM-dd"];
+            NSDate *zzz = [dateFormatter dateFromString:ProspectDOB];
+            [_outletDate setDate:zzz animated:YES ];
+        }
+        @catch (NSException *exception) {
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            //[dateFormatter setDateFormat:@"dd/MM/yyyy"];
+            [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+            NSDate *zzz = [dateFormatter dateFromString:ProspectDOB];
+            [_outletDate setDate:zzz animated:YES ];
+        }
+        @finally {
+            NSLog(@"berhasil");
+        }
         
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"dd/MM/yyyy"];
-        //[dateFormatter setDateFormat:@"yyyy-MM-dd"];
-        NSDate *zzz = [dateFormatter dateFromString:ProspectDOB];
-        [_outletDate setDate:zzz animated:YES ];
          
     }
     
