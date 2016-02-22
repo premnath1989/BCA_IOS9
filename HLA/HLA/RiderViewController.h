@@ -228,8 +228,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *titleHLPTerm;
 
 //Added by faiz
-@property (retain, nonatomic) IBOutlet UIButton *titleRidCode;
-@property (retain, nonatomic) IBOutlet UIButton *titleRidCode;
+//@property (retain, nonatomic) IBOutlet UILabel *titleRidCode;
+//@property (retain, nonatomic) IBOutlet UILabel *titleRidCode;
 //end of Added by faiz
 
 @property (retain, nonatomic) NSMutableArray *LRiderCode;
