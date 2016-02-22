@@ -2547,19 +2547,18 @@ BOOL isFirstLoad;
             [self loadSecondLAPage];
             
             
+        }
+        else if (indexPath.row == SIMENU_PAYOR)
+        
+        {
+            
+            [self loadBasicPlanPage:YES];
 //            if ([getOccpCode isEqualToString:@"OCC01975"]) {
 //                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"There is no existing plan which can be offered to this occupation."
 //                                                               delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
 //                [alert show];
 //                alert = Nil;
 //                blocked = YES;
-//            } else if (getBasicPlan == NULL) {
-////                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Please select basic plan first."
-////                                                               delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
-////                [alert show];
-////                alert = Nil;
-////                blocked = YES;
-//                
 //            } else if (([getBasicPlan isEqualToString:STR_S100] || [getBasicPlan isEqualToString:STR_HLAWP]) && getAge > 65 ) {
 //                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Age Last Birthday must be less than or equal to 65 for this product."
 //                                                               delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
@@ -2567,40 +2566,24 @@ BOOL isFirstLoad;
 //                alert = Nil;
 //                blocked = YES;
 //                
+//            } else if (getBasicPlan == NULL) {
+////                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Please select basic plan first."
+////                                                               delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
+////                [alert show];
+////                alert = Nil;
+////                blocked = YES;
+//                
 //            } else {
-//                [self loadSecondLAPage];
-//                selectedPath = indexPath;
+//                if ([self selectPayor]) {
+//                    [self loadPayorPage];
+//                    selectedPath = indexPath;					
+//                } else {
+//                    blocked = YES;
+//                }
 //            }
             
-        } else if (indexPath.row == SIMENU_PAYOR) {
-            if ([getOccpCode isEqualToString:@"OCC01975"]) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"There is no existing plan which can be offered to this occupation."
-                                                               delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
-                [alert show];
-                alert = Nil;
-                blocked = YES;
-            } else if (([getBasicPlan isEqualToString:STR_S100] || [getBasicPlan isEqualToString:STR_HLAWP]) && getAge > 65 ) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Age Last Birthday must be less than or equal to 65 for this product."
-                                                               delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
-                [alert show];
-                alert = Nil;
-                blocked = YES;
-                
-            } else if (getBasicPlan == NULL) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Please select basic plan first."
-                                                               delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
-                [alert show];
-                alert = Nil;
-                blocked = YES;
-                
-            } else {
-                if ([self selectPayor]) {
-                    [self loadPayorPage];
-                    selectedPath = indexPath;					
-                } else {
-                    blocked = YES;
-                }
-            }            
+            
+            
         } else if (indexPath.row == SIMENU_BASIC_PLAN) {
             [_BasicController loadData];
             if ([getOccpCode isEqualToString:@"OCC01975"]) {
