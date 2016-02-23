@@ -2859,7 +2859,6 @@ BOOL isFirstLoad;
         [tableView selectRowAtIndexPath:selectedPath animated:NO scrollPosition:UITableViewScrollPositionNone];
         previousPath = selectedPath;
     }
-    
 }
 
 -(void) getSelectedLanguage

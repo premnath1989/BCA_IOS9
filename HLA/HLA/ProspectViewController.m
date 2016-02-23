@@ -875,24 +875,24 @@ bool RegDatehandling;
     //outletsourceincome
     NSString* outletsourceincome=_outletSourceIncome.titleLabel.text;
 
-    /*if ([validationSet containsObject:outletoccupaction]||outletoccupaction==NULL){
+    if ([validationSet containsObject:outletoccupaction]||outletoccupaction==NULL){
         [self createAlertViewAndShow:validationPekerjaan tag:0];
         [outletOccup setBackgroundColor:[UIColor redColor]];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
         return false;
     }
-    else*/ if ([textannincome isEqualToString:@""]||textannincome==NULL){
+    else if ([textannincome isEqualToString:@""]||textannincome==NULL){
         [self createAlertViewAndShow:validationPendapatanTahunan tag:0];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
         [txtAnnIncome becomeFirstResponder];
         return false;
     }
-    else if ([validationSet containsObject:outletsourceincome]||outletsourceincome==NULL){
+    /*else if ([validationSet containsObject:outletsourceincome]||outletsourceincome==NULL){
         [self createAlertViewAndShow:validationSumberPenghasilan tag:0];
         [_outletSourceIncome setBackgroundColor:[UIColor redColor]];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
         return false;
-    }
+    }*/
     return valid;
 }
 
