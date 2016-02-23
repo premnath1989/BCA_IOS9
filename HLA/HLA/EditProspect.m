@@ -3124,7 +3124,10 @@ NSMutableArray *DelGroupArr;
     _txtOfficeDistrict.text=pp.OfficeDistrict;
     _txtOfficeProvince.text=pp.OfficeProvicne;
     [_outletSourceIncome setTitle:pp.SourceIncome forState:UIControlStateNormal];
-    [_outletVIPClass setTitle:pp.ClientSegmentation forState:UIControlStateNormal];
+    if (![pp.ClientSegmentation isEqualToString:@"(null)"]){
+        [_outletVIPClass setTitle:pp.ClientSegmentation forState:UIControlStateNormal];
+    }
+    
 
     [BtnCountryOfBirth setHidden:YES];
     [btnOfficeCountry setHidden:YES];
@@ -4156,7 +4159,7 @@ NSMutableArray *DelGroupArr;
     if (switchPressed.tag == 0) {
         if ([switchPressed isOn]) {
             [btnForeignHome setImage: [UIImage imageNamed:@"emptyCheckBox.png"] forState:UIControlStateNormal];
-            checked = NO;
+            checked = YES;
             
             txtHomeAddr1.text = @"";
             txtHomeAddr2.text=@"";
@@ -4182,7 +4185,7 @@ NSMutableArray *DelGroupArr;
         else {
 			
             [btnForeignHome setImage: [UIImage imageNamed:@"tickCheckBox.png"] forState:UIControlStateNormal];
-            checked = YES;
+            checked = NO;
             
             self.navigationItem.rightBarButtonItem.enabled = TRUE; //ENABLE DONE BUTTON
             txtHomeAddr1.text = @"";
@@ -4215,7 +4218,7 @@ NSMutableArray *DelGroupArr;
     else if (switchPressed.tag == 1) {
         if ([switchPressed isOn]) {
             [btnForeignOffice setImage: [UIImage imageNamed:@"emptyCheckBox.png"] forState:UIControlStateNormal];
-            checked2 = NO;
+            checked2 = YES;
             
             txtOfficeAddr1.text=@"";
             txtOfficeAddr2.text=@"";
@@ -4241,7 +4244,7 @@ NSMutableArray *DelGroupArr;
         }
         else {
             [btnForeignOffice setImage: [UIImage imageNamed:@"tickCheckBox.png"] forState:UIControlStateNormal];
-            checked2 = YES;
+            checked2 = NO;
             
             self.navigationItem.rightBarButtonItem.enabled = TRUE;
             txtOfficeAddr1.text = @"";
@@ -6806,7 +6809,7 @@ NSMutableArray *DelGroupArr;
                                @"update prospect_profile set \"ProspectName\"=\'%@\', \"ProspectDOB\"=\"%@\", \"GST_registered\"=\"%@\",\"GST_registrationNo\"=\"%@\",\"GST_registrationDate\"=\"%@\",\"GST_exempted\"=\"%@\",  \"ProspectGender\"=\"%@\", \"ResidenceAddress1\"=\"%@\", \"ResidenceAddress2\"=\"%@\", \"ResidenceAddress3\"=\"%@\", \"ResidenceAddressTown\"=\"%@\", \"ResidenceAddressState\"=\"%@\", \"ResidenceAddressPostCode\"=\"%@\", \"ResidenceAddressCountry\"=\"%@\", \"OfficeAddress1\"=\"%@\", \"OfficeAddress2\"=\"%@\", \"OfficeAddress3\"=\"%@\", \"OfficeAddressTown\"=\"%@\",\"OfficeAddressState\"=\"%@\", \"OfficeAddressPostCode\"=\"%@\", \"OfficeAddressCountry\"=\"%@\", \"ProspectEmail\"= \"%@\", \"ProspectOccupationCode\"=\"%@\", \"ExactDuties\"=\"%@\", \"ProspectRemark\"=\"%@\", \"DateModified\"=%@,\"ModifiedBy\"=\"%@\", \"ProspectGroup\"=\"%@\", \"ProspectTitle\"=\"%@\", \"IDTypeNo\"=\"%@\", \"OtherIDType\"=\"%@\", \"OtherIDTypeNo\"=\"%@\", \"Smoker\"=\"%@\", \"AnnualIncome\"=\"%@\", \"BussinessType\"=\"%@\", \"Race\"=\"%@\", \"MaritalStatus\"=\"%@\", \"Nationality\"=\"%@\", \"Religion\"=\"%@\",\"ProspectProfileChangesCounter\"=\"%@\", \"Prospect_IsGrouping\"=\"%@\", \"CountryOfBirth\"=\"%@\",\"NIP\"=\"%@\",\"BranchCode\"=\"%@\",\"BranchName\"=\"%@\",\"KCU\"=\"%@\",\"ReferralSource\"=\"%@\",\"ReferralName\"=\"%@\",\"Kanwil\"=\"%@\",\"ResidenceDistrict\"=\"%@\",\"ResidenceVillage\"=\"%@\",\"ResidenceProvince\"=\"%@\",\"OfficeDistrict\"=\"%@\",\"OfficeVillage\"=\"%@\",\"OfficeProvince\"=\"%@\",\"SourceIncome\"=\"%@\",\"NPWPNo\"=\"%@\",\"ClientSegmentation\"=\"%@\",\"IDExpiryDate\"=\"%@\" where indexNo = \"%@\" "
                                     , txtrFullName.text, newDOB,GSTRigperson,txtRigNO.text,strGstdate, GSTRigExempted,gender, txtHomeAddr1.text, txtHomeAddr2.text, txtHomeAddr3.text, txtHomeTown.text, SelectedStateCode, txtHomePostCode.text, HomeCountry, txtOfficeAddr1.text, txtOfficeAddr2.text, txtOfficeAddr3.text, txtOfficeTown.text, SelectedOfficeStateCode, txtOfficePostCode.text, OffCountry, txtEmail.text, OccupCodeSelected, txtExactDuties.text, txtRemark.text, @"datetime(\"now\", \"+8 hour\")", @"1", group, TitleCodeSelected, txtIDType.text, IDTypeCodeSelected, txtOtherIDType.text, ClientSmoker, txtAnnIncome.text, txtBussinessType.text,race, marital, nation,
                             religion,str_counter, IsGrrouping, CountryOfBirth, txtNip.text, _outletBranchCode.titleLabel.text, _outletBranchName.titleLabel.text, txtKcu.text, outletReferralSource.titleLabel.text, txtReferralName.text, txtKanwil.text, _txtHomeDistrict.text, _txtHomeVillage.text, _txtHomeProvince.text,_txtOfficeDistrict.text, _txtOfficeVillage.text, _txtOfficeProvince.text, _outletSourceIncome.titleLabel.text, txtNPWPNo.text, _outletVIPClass.titleLabel.text,newExpiryDate, pp.ProspectID];
-		
+
         const char *Update_stmt = [insertSQL UTF8String];
         if(sqlite3_prepare_v2(contactDB, Update_stmt, -1, &statement, NULL) == SQLITE_OK) {
             if (sqlite3_step(statement) == SQLITE_DONE)
@@ -8216,7 +8219,7 @@ NSMutableArray *DelGroupArr;
                 if (failedCase || receivedCase || submittedCase)
                 {
                     //UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"All changes will be updated to related SI, CFF and eApp. Do you want to proceed?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Semua perubahan akan diperbarui untuk terkait SI, CFF dan e App. Apakah Anda ingin melanjutkan?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Semua perubahan akan diperbarui untuk terkait SI, CFF dan e App. Apakah Anda ingin melanjutkan?" delegate:self cancelButtonTitle:@"Ya" otherButtonTitles:@"Tidak", nil];
                     [alert setTag:1004];
                     [alert show];
                 }
@@ -8229,7 +8232,7 @@ NSMutableArray *DelGroupArr;
             }
             else
             {
-				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"All changes will be updated to related SI, CFF and eApp. Do you want to proceed?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Semua perubahan akan diperbarui untuk terkait SI, CFF dan e App. Apakah Anda ingin melanjutkan?" delegate:self cancelButtonTitle:@"Ya" otherButtonTitles:@"Tidak", nil];
 				[alert setTag:1004];
 				[alert show];
             }

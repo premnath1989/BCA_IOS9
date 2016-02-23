@@ -1904,7 +1904,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gAE-lQ-Lef">
-                                        <rect key="frame" x="0.0" y="671" width="1024" height="702"/>
+                                        <rect key="frame" x="0.0" y="671" width="1024" height="705"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Data Alamat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bcu-Mh-2Op">
                                                 <rect key="frame" x="20" y="0.0" width="184" height="21"/>
@@ -2161,7 +2161,7 @@
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </view>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VMd-cs-4ZQ">
-                                                <rect key="frame" x="0.0" y="409" width="1024" height="293"/>
+                                                <rect key="frame" x="0.0" y="412" width="1024" height="293"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Nomor Telpon Kantor" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Wy-TU-aHl">
                                                         <rect key="frame" x="20" y="266" width="161" height="21"/>
@@ -2337,11 +2337,11 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="702" id="nVs-xJ-A7U"/>
+                                            <constraint firstAttribute="height" constant="705" id="nVs-xJ-A7U"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6nN-TV-0FR">
-                                        <rect key="frame" x="10" y="1378" width="1000" height="1"/>
+                                        <rect key="frame" x="10" y="1381" width="1000" height="1"/>
                                         <color key="backgroundColor" red="0.98039215690000003" green="0.68627450980000004" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="3n0-WC-4Xw"/>
@@ -2349,7 +2349,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FsL-eZ-tS4">
-                                        <rect key="frame" x="0.0" y="1383" width="1024" height="206"/>
+                                        <rect key="frame" x="0.0" y="1386" width="1024" height="206"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wyv-3a-y4n">
                                                 <rect key="frame" x="460" y="105" width="14" height="21"/>
@@ -2495,7 +2495,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kAd-fe-unr">
-                                        <rect key="frame" x="10" y="1594" width="1000" height="1"/>
+                                        <rect key="frame" x="10" y="1597" width="1000" height="1"/>
                                         <color key="backgroundColor" red="0.98039215690000003" green="0.68627450980000004" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="3jH-cf-jQV"/>
@@ -2503,7 +2503,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9EI-4x-PDy">
-                                        <rect key="frame" x="0.0" y="1599" width="1024" height="220"/>
+                                        <rect key="frame" x="0.0" y="1602" width="1024" height="220"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Other Info" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r7U-0V-ArP">
                                                 <rect key="frame" x="20" y="0.0" width="161" height="21"/>
@@ -4703,7 +4703,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f4V-Z1-kY3">
-                                        <rect key="frame" x="0.0" y="673" width="1024" height="702"/>
+                                        <rect key="frame" x="0.0" y="673" width="1024" height="705"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Data Alamat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zgl-q1-5Oy">
                                                 <rect key="frame" x="20" y="0.0" width="194" height="21"/>
@@ -4712,7 +4712,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aJ2-71-xLO">
-                                                <rect key="frame" x="0.0" y="409" width="1024" height="293"/>
+                                                <rect key="frame" x="0.0" y="412" width="1024" height="293"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Nomor Telepon Kantor" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HAE-gR-nlE">
                                                         <rect key="frame" x="20" y="269" width="171" height="15"/>
@@ -5099,18 +5099,18 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="702" id="NKc-0W-v1s"/>
+                                            <constraint firstAttribute="height" constant="705" id="NKc-0W-v1s"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ziu-lw-4fn">
-                                        <rect key="frame" x="10" y="1380" width="1000" height="1"/>
+                                        <rect key="frame" x="10" y="1383" width="1000" height="1"/>
                                         <color key="backgroundColor" red="0.98039215690000003" green="0.68627450980000004" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="ahm-hg-u5k"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rPW-ee-ZoK">
-                                        <rect key="frame" x="0.0" y="1385" width="1024" height="207"/>
+                                        <rect key="frame" x="0.0" y="1388" width="1024" height="207"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zHe-pI-AqR">
                                                 <rect key="frame" x="460" y="143" width="14" height="21"/>
@@ -5247,14 +5247,14 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vg3-4M-QFp">
-                                        <rect key="frame" x="10" y="1597" width="1000" height="1"/>
+                                        <rect key="frame" x="10" y="1600" width="1000" height="1"/>
                                         <color key="backgroundColor" red="0.98039215690000003" green="0.68627450980000004" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="qCI-os-kSD"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XQr-rz-0yc">
-                                        <rect key="frame" x="0.0" y="1602" width="1024" height="206"/>
+                                        <rect key="frame" x="0.0" y="1605" width="1024" height="206"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Other Info" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="da9-2g-3Rb">
                                                 <rect key="frame" x="30" y="0.0" width="161" height="21"/>

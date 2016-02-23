@@ -26,10 +26,10 @@
     FMResultSet *s = [database executeQuery:@"SELECT * FROM Agent_profile"];
     while ([s next]) {
         NamaChannel = [NSString stringWithFormat:@"%@",[s stringForColumn:@"ChannelName"]];
-        CodeChannel = [NSString stringWithFormat:@"%@",[s stringForColumn:@"ChannelName"]];
+        CodeChannel = [NSString stringWithFormat:@"%@",[s stringForColumn:@"ChannelCode"]];
         Kanwil = [NSString stringWithFormat:@"%@",[s stringForColumn:@"Kanwil"]];
     }
-    dict = [[NSDictionary alloc] initWithObjectsAndKeys:NamaChannel,@"ChannelName", Kanwil,@"Kanwil",nil];
+    dict = [[NSDictionary alloc] initWithObjectsAndKeys:NamaChannel,@"ChannelName", CodeChannel,@"ChannelCode",Kanwil,@"Kanwil",nil];
     
     [results close];
     [database close];
