@@ -24,7 +24,7 @@
 #define NUMBERS_MONEY @"0123456789."
 #define CHARACTER_LIMIT_PC_F 12
 #define CHARACTER_LIMIT_FULLNAME 70
-#define CHARACTER_LIMIT_OtherID 30
+#define CHARACTER_LIMIT_OtherID 20
 #define CHARACTER_LIMIT_Bussiness 60
 #define CHARACTER_LIMIT_ExactDuties 40
 #define CHARACTER_LIMIT_Address 30
@@ -357,7 +357,7 @@ bool RegDatehandling;
     modelAgentProfil=[[ModelAgentProfile alloc]init];
     dictAgentData=[[NSDictionary alloc]initWithDictionary:[modelAgentProfil getAgentData]];
     [_txtChannelName setText:[dictAgentData valueForKey:@"ChannelName"]];
-    [txtKanwil setText:[dictAgentData valueForKey:@"Kanwil"]];
+    //[txtKanwil setText:[dictAgentData valueForKey:@"Kanwil"]];
     //txtHomeCountry.text=@"Indonesia";
     //txtOfficeCountry.text=@"Indonesia";
 }
@@ -1569,9 +1569,10 @@ bool RegDatehandling;
     NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
 	[ClientProfile setObject:@"YES" forKey:@"isNew"];
     NSUInteger newLength = [textView.text length] + [text length] - range.length;
-    if (textView == txtExactDuties) {
-        return ((newLength <= CHARACTER_LIMIT_ExactDuties));
-    }
+    //if (textView == txtExactDuties) {
+    //    return ((newLength <= CHARACTER_LIMIT_ExactDuties));
+    //}
+    return textView.text.length + (text.length - range.length) <= 500   ;
     return YES;
 }
 
@@ -1808,7 +1809,7 @@ bool RegDatehandling;
         NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
         
-        return (([string isEqualToString:filtered]));
+        return (([string isEqualToString:filtered])&&(newLength <= 20));
     }
 
     
@@ -1865,9 +1866,13 @@ bool RegDatehandling;
         return ((newLength <= CHARACTER_LIMIT_FULLNAME));
     }
     
-    if (textField == txtOtherIDType) {
-        return ((newLength <= CHARACTER_LIMIT_OtherID));
-    }
+    /*if (textField == txtOtherIDType) {
+        NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
+        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        
+        return (([string isEqualToString:filtered])&&(newLength <= 20));
+        //return ((newLength <= CHARACTER_LIMIT_OtherID));
+    }*/
     
     if (textField == txtBussinessType) {
         return ((newLength <= CHARACTER_LIMIT_Bussiness));
@@ -1883,6 +1888,8 @@ bool RegDatehandling;
     
     return YES;
 }
+
+
 
 -(void)AnnualIncomeChange:(id) sender
 {
@@ -7663,7 +7670,7 @@ bool RegDatehandling;
 
 
 #pragma mark - delegate
--(void)selectedBranch:(NSString *)branchCode BranchName:(NSString *)branchName BranchStatus:(NSString *)branchStatus{
+-(void)selectedBranch:(NSString *)branchCode BranchName:(NSString *)branchName BranchStatus:(NSString *)branchStatus BranchKanwil:(NSString *)branchKanwil{
     /*if([VIPClass isEqualToString:@"- SELECT -"]) {
         _outletVIPClass.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     } else {
@@ -7676,6 +7683,7 @@ bool RegDatehandling;
     [outletBranchCode setBackgroundColor:[UIColor clearColor]];
     [outletBranchName setBackgroundColor:[UIColor clearColor    ]];
     [txtKcu setText:branchStatus];
+    [txtKanwil setText:branchKanwil];
     [_branchInfoPopover dismissPopoverAnimated:YES];
     
     

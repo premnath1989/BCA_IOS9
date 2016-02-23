@@ -174,21 +174,25 @@
     NSMutableArray* arrayKodeCabang=[[NSMutableArray alloc] init];
     NSMutableArray* arrayNamaCabang=[[NSMutableArray alloc] init];
     NSMutableArray* arrayStatusCabang=[[NSMutableArray alloc] init];
+    NSMutableArray* arrayKanwilCabang=[[NSMutableArray alloc] init];
     NSMutableArray* arrayStatus=[[NSMutableArray alloc] init];
     
     FMResultSet *s = [database executeQuery:@"SELECT dc.* FROM Data_Cabang dc, Agent_profile ap WHERE dc.status = 'A' and ap.Kanwil = dc.Kanwil"];
     while ([s next]) {
         NSString *occpCode = [NSString stringWithFormat:@"%@",[s stringForColumn:@"KodeCabang"]];
         NSString *occpeDesc = [NSString stringWithFormat:@"%@",[s stringForColumn:@"NamaCabang"]];
-        NSString *occpClass = [NSString stringWithFormat:@"%@",[s stringForColumn:@"StatusCabang"]];
+        NSString *occpClass = [NSString stringWithFormat:@"%@ - %@",[s stringForColumn:@"KodeCabangInduk"],[s stringForColumn:@"NamaCabangInduk"]];
+        NSString *stringKanwil = [NSString stringWithFormat:@"%@ - %@",[s stringForColumn:@"Wilayah"],[s stringForColumn:@"Kanwil"]];
+
         NSString *Status = [NSString stringWithFormat:@"%@",[s stringForColumn:@"Status"]];
         
         [arrayKodeCabang addObject:occpCode];
         [arrayNamaCabang addObject:occpeDesc];
         [arrayStatusCabang addObject:occpClass];
+        [arrayKanwilCabang addObject:stringKanwil];
         [arrayStatus addObject:Status];
     }
-    dict = [[NSDictionary alloc] initWithObjectsAndKeys:arrayKodeCabang,@"KodeCabang", arrayNamaCabang,@"NamaCabang", arrayStatusCabang,@"StatusCabang",arrayStatus,@"Status",nil];
+    dict = [[NSDictionary alloc] initWithObjectsAndKeys:arrayKodeCabang,@"KodeCabang", arrayNamaCabang,@"NamaCabang", arrayStatusCabang,@"StatusCabang",arrayKanwilCabang,@"KanwilCabang",arrayStatus,@"Status",nil];
     
     [results close];
     [database close];

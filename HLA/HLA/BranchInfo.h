@@ -10,7 +10,7 @@
 #import "ModelPopover.h"
 
 @protocol BranchInfoDelegate
--(void)selectedBranch:(NSString *)branchCode BranchName:(NSString *)branchName BranchStatus:(NSString *)branchStatus;
+-(void)selectedBranch:(NSString *)branchCode BranchName:(NSString *)branchName BranchStatus:(NSString *)branchStatus BranchKanwil:(NSString *)branchKanwil;
 @end
 
 
@@ -18,6 +18,7 @@
     NSMutableArray *_itemsKodeCabang;
     NSMutableArray *_itemsNamaCabang;
     NSMutableArray *_itemsStatusCabang;
+    NSMutableArray *_itemsKanwilCabang;
     ModelPopover* modelPopOver;
     id <BranchInfoDelegate> _delegate;
     

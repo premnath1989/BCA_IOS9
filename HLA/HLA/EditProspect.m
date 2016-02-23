@@ -6712,8 +6712,8 @@ NSMutableArray *DelGroupArr;
 			OfficeForeignAddressFlag = @"N";
         }
         
-        HomeCountry = [self getCountryCode:HomeCountry];
-        OffCountry = [self getCountryCode:OffCountry];
+        //HomeCountry = [self getCountryCode:HomeCountry];
+        //OffCountry = [self getCountryCode:OffCountry];
 		
         if([SelectedStateCode isEqualToString:@"(null)"]  || (SelectedStateCode == NULL)) {
 			SelectedStateCode = @"";
@@ -7279,9 +7279,11 @@ NSMutableArray *DelGroupArr;
     NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
 		
 	if (![[ClientProfile objectForKey:@"TabBar"] isEqualToString:@"YES"]) {
-		UIAlertView *SuccessAlert = [[UIAlertView alloc] initWithTitle:@" "
-															   message:@"Changes have been updated successfully." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-		
+		//UIAlertView *SuccessAlert = [[UIAlertView alloc] initWithTitle:@" "
+		//													   message:@"Changes have been updated successfully." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        UIAlertView *SuccessAlert = [[UIAlertView alloc] initWithTitle:@" "
+        message:@"Perubahan telah berhasil disimpan." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        
 		SuccessAlert.tag = 9001;
 		[SuccessAlert show];
 	}
@@ -8213,7 +8215,8 @@ NSMutableArray *DelGroupArr;
             {
                 if (failedCase || receivedCase || submittedCase)
                 {
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"All changes will be updated to related SI, CFF and eApp. Do you want to proceed?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+                    //UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"All changes will be updated to related SI, CFF and eApp. Do you want to proceed?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Semua perubahan akan diperbarui untuk terkait SI, CFF dan e App. Apakah Anda ingin melanjutkan?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
                     [alert setTag:1004];
                     [alert show];
                 }
@@ -12564,7 +12567,7 @@ NSMutableArray *DelGroupArr;
 
 
 #pragma mark - delegate
--(void)selectedBranch:(NSString *)branchCode BranchName:(NSString *)branchName BranchStatus:(NSString *)branchStatus{
+-(void)selectedBranch:(NSString *)branchCode BranchName:(NSString *)branchName BranchStatus:(NSString *)branchStatus BranchKanwil:(NSString *)branchKanwil{
     /*if([VIPClass isEqualToString:@"- SELECT -"]) {
      _outletVIPClass.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
      } else {
@@ -12577,6 +12580,7 @@ NSMutableArray *DelGroupArr;
     [_outletBranchCode setBackgroundColor:[UIColor clearColor]];
     [_outletBranchName setBackgroundColor:[UIColor clearColor]];
     [txtKcu setText:branchStatus];
+    [txtKanwil setText:branchKanwil];
     [_branchInfoPopover dismissPopoverAnimated:YES];
 }
 
