@@ -585,6 +585,7 @@ NSMutableArray *DelGroupArr;
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     activeField = textField;
+    activeView = nil;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
@@ -890,13 +891,13 @@ NSMutableArray *DelGroupArr;
     //outletsourceincome
     NSString* outletsourceincome=_outletSourceIncome.titleLabel.text;
     
-    if ([validationSet containsObject:outletoccupaction]||outletoccupaction==NULL){
+    /*if ([validationSet containsObject:outletoccupaction]||outletoccupaction==NULL){
         [self createAlertViewAndShow:validationPekerjaan tag:0];
         [outletOccup setBackgroundColor:[UIColor redColor]];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
         return false;
     }
-    else if ([textannincome isEqualToString:@""]||textannincome==NULL){
+    else*/ if ([textannincome isEqualToString:@""]||textannincome==NULL){
         [self createAlertViewAndShow:validationPendapatanTahunan tag:0];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
         [txtAnnIncome becomeFirstResponder];
@@ -1906,6 +1907,7 @@ NSMutableArray *DelGroupArr;
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView{
+    activeView=textView;
     strChanges = @"Yes";
 }
 
@@ -3127,16 +3129,44 @@ NSMutableArray *DelGroupArr;
     if (![pp.ClientSegmentation isEqualToString:@"(null)"]){
         [_outletVIPClass setTitle:pp.ClientSegmentation forState:UIControlStateNormal];
     }
-    
+
+    if ([[pp.ResidenceAddressCountry uppercaseString] isEqualToString:@"INDONESIA"]){
+        [_switchCountryHome setOn:NO];
+        [btnHomeCountry setHidden:YES];
+        [txtHomeCountry setHidden:NO];
+        checked = NO;
+    }
+    else{
+        [_switchCountryHome setOn:YES];
+        [btnHomeCountry setHidden:NO];
+        [txtHomeCountry setHidden:YES];
+        checked = YES;
+    }
+
+    if ([[pp.OfficeAddressCountry uppercaseString] isEqualToString:@"INDONESIA"]){
+        [_switchCountryOffice setOn:NO];
+        [btnOfficeCountry setHidden:YES];
+        [txtOfficeCountry setHidden:NO];
+        checked2 = NO;
+    }
+    else{
+        [_switchCountryOffice setOn:YES];
+        [btnOfficeCountry setHidden:NO];
+        [txtOfficeCountry setHidden:YES];
+        checked2 = YES;
+    }
 
     [BtnCountryOfBirth setHidden:YES];
-    [btnOfficeCountry setHidden:YES];
-    [btnHomeCountry setHidden:YES];
-    [txtHomeCountry setHidden:NO];
-    [txtOfficeCountry setHidden:NO];
+    //[btnOfficeCountry setHidden:YES];
+    //[btnHomeCountry setHidden:YES];
+    //[txtHomeCountry setHidden:NO];
+    //[txtOfficeCountry setHidden:NO];
     
     txtHomeCountry.text = pp.ResidenceAddressCountry;
     txtOfficeCountry.text = pp.OfficeAddressCountry;
+    [btnHomeCountry setTitle:pp.ResidenceAddressCountry forState:UIControlStateNormal];
+    [btnOfficeCountry setTitle:pp.OfficeAddressCountry forState:UIControlStateNormal];
+    
     segGender.enabled = YES;
     txtDOB.hidden=YES;
     [txtOtherIDType setEnabled:YES];
@@ -3527,6 +3557,11 @@ NSMutableArray *DelGroupArr;
     {
         [myScrollView setContentOffset:CGPointMake(0,500) animated:YES];
     }
+    else if([txtRemark isFirstResponder])
+    {
+        [myScrollView setContentOffset:CGPointMake(0,500) animated:YES];
+    }
+
     
     /*added by faiz*/
     // Step 1: Get the size of the keyboard.
@@ -3542,9 +3577,17 @@ NSMutableArray *DelGroupArr;
     // Step 3: Scroll the target text field into view.
     CGRect aRect = self.view.frame;
     aRect.size.height -= kbSize.height;
-    if (!CGRectContainsPoint(aRect, activeField.frame.origin) ) {
-        CGPoint scrollPoint = CGPointMake(0.0, activeField.frame.origin.y - (kbSize.height-15));
-        [_scrollViewEditProspect setContentOffset:scrollPoint animated:YES];
+    if (activeView != nil){
+        // make sure the scrollview content size width and height are greater than 0
+        [_scrollViewEditProspect setContentSize:CGSizeMake (_scrollViewEditProspect.frame.size.width, _scrollViewEditProspect.contentSize.height)];
+        // scroll to the text view
+        [_scrollViewEditProspect scrollRectToVisible:activeView.superview.frame animated:YES];
+    }
+    else{
+        if (!CGRectContainsPoint(aRect, activeField.frame.origin) ) {
+            CGPoint scrollPoint = CGPointMake(0.0, activeField.frame.origin.y - (kbSize.height-15));
+            [_scrollViewEditProspect setContentOffset:scrollPoint animated:YES];
+        }
     }
     /*end of added by faiz*/
 
@@ -12578,8 +12621,8 @@ NSMutableArray *DelGroupArr;
      }*/
     _outletBranchCode.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     _outletBranchName.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [_outletBranchCode setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",branchCode]forState:UIControlStateNormal];
-    [_outletBranchName setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",branchName]forState:UIControlStateNormal];
+    [_outletBranchCode setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",branchCode]forState:UIControlStateNormal];
+    [_outletBranchName setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",branchName]forState:UIControlStateNormal];
     [_outletBranchCode setBackgroundColor:[UIColor clearColor]];
     [_outletBranchName setBackgroundColor:[UIColor clearColor]];
     [txtKcu setText:branchStatus];
@@ -12745,7 +12788,7 @@ NSMutableArray *DelGroupArr;
             btnOfficeCountry.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         }
         
-        [btnOfficeCountry setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",theCountry] forState:UIControlStateNormal];
+        [btnOfficeCountry setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",theCountry] forState:UIControlStateNormal];
         [self.CountryListPopover dismissPopoverAnimated:YES];
 		
 		NSString *OffCountry = @"";
@@ -12760,7 +12803,7 @@ NSMutableArray *DelGroupArr;
             btnHomeCountry.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         }
         
-        [btnHomeCountry setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",theCountry] forState:UIControlStateNormal];
+        [btnHomeCountry setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",theCountry] forState:UIControlStateNormal];
         [self.CountryListPopover dismissPopoverAnimated:YES];
 		
 		NSString *HomeCountry = @"";

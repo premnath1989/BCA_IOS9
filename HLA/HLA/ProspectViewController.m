@@ -562,6 +562,7 @@ bool RegDatehandling;
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     activeField = textField;
+    activeView = nil;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
@@ -874,13 +875,13 @@ bool RegDatehandling;
     //outletsourceincome
     NSString* outletsourceincome=_outletSourceIncome.titleLabel.text;
 
-    if ([validationSet containsObject:outletoccupaction]||outletoccupaction==NULL){
+    /*if ([validationSet containsObject:outletoccupaction]||outletoccupaction==NULL){
         [self createAlertViewAndShow:validationPekerjaan tag:0];
         [outletOccup setBackgroundColor:[UIColor redColor]];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
         return false;
     }
-    else if ([textannincome isEqualToString:@""]||textannincome==NULL){
+    else*/ if ([textannincome isEqualToString:@""]||textannincome==NULL){
         [self createAlertViewAndShow:validationPendapatanTahunan tag:0];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
         [txtAnnIncome becomeFirstResponder];
@@ -1381,10 +1382,19 @@ bool RegDatehandling;
     // Step 3: Scroll the target text field into view.
     CGRect aRect = self.view.frame;
     aRect.size.height -= kbSize.height;
-    if (!CGRectContainsPoint(aRect, activeField.frame.origin) ) {
-        CGPoint scrollPoint = CGPointMake(0.0, activeField.frame.origin.y - (kbSize.height-15));
-        [_scrollViewNewProspect setContentOffset:scrollPoint animated:YES];
+    if (activeView != nil){
+        // make sure the scrollview content size width and height are greater than 0
+        [_scrollViewNewProspect setContentSize:CGSizeMake (_scrollViewNewProspect.frame.size.width, _scrollViewNewProspect.contentSize.height)];
+        // scroll to the text view
+        [_scrollViewNewProspect scrollRectToVisible:activeView.superview.frame animated:YES];
     }
+    else{
+        if (!CGRectContainsPoint(aRect, activeField.frame.origin) ) {
+            CGPoint scrollPoint = CGPointMake(0.0, activeField.frame.origin.y - (kbSize.height-15));
+            [_scrollViewNewProspect setContentOffset:scrollPoint animated:YES];
+        }
+    }
+    
     /*end of added by faiz*/
 }
 
@@ -1564,6 +1574,12 @@ bool RegDatehandling;
     
 }
 
+-(void)textViewDidBeginEditing:(UITextView *)textView
+{
+    activeView=textView;
+    /*YOUR CODE HERE*/
+}
+
 -(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
     NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
@@ -1572,6 +1588,7 @@ bool RegDatehandling;
     //if (textView == txtExactDuties) {
     //    return ((newLength <= CHARACTER_LIMIT_ExactDuties));
     //}
+    activeView = textView;
     return textView.text.length + (text.length - range.length) <= 500   ;
     return YES;
 }

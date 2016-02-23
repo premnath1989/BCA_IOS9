@@ -45,7 +45,7 @@ id dobtemp;
     [super viewDidLoad];
     appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate ];
 	
-    self.view.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg10.jpg"]];
+    self.view.backgroundColor=[UIColor whiteColor];//[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg10.jpg"]];
     
     NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docsDir = [dirPaths objectAtIndex:0];
@@ -171,7 +171,8 @@ id dobtemp;
     if (active)
     {
         //nameField.text =@"test";
-        nameField.enabled = true;
+        [nameField setBackgroundColor:[UIColor whiteColor]];
+        nameField.enabled = YES;
         _BtnTanggalLahir.enabled = true;
         ageField.enabled = false;
         sexSegment.enabled = true;
@@ -183,7 +184,8 @@ id dobtemp;
     {
         
         //nameField.text = @"TestDisable";
-        nameField.enabled = false;
+        [nameField setBackgroundColor:[UIColor colorWithRed:238.0/255.0 green:238.0/255.0 blue:238.0/255.0 alpha:1.0]];
+        nameField.enabled = NO;
         _BtnTanggalLahir.enabled = false;
         ageField.enabled = false;
         sexSegment.enabled = false;
@@ -700,6 +702,18 @@ id dobtemp;
     }
     
     return returnInt;
+}
+
+#pragma mark - Length Check
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    NSUInteger newLength = [textField.text length] + [string length] - range.length;
+    if (textField == nameField)
+    {
+        NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:@"ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz./@'()-"] invertedSet];
+        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        return (([string isEqualToString:filtered]) && newLength <= 40);
+    }
+    return YES;
 }
 
 #pragma mark - delegate
