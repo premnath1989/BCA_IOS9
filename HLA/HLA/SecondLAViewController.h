@@ -46,7 +46,7 @@
 	SIObj* siObj;
     AppDelegate* appDelegate;
 	BOOL Editable;
-    
+	
     int prevIndexNo;
 }
 
@@ -138,8 +138,13 @@
 -(void)deleteSecondLA;
 -(void)deleteLA;
 -(void)resetField;
--(void)testing :(NSString *)testing;
+//-(void)testing :(NSString *)testing;
+-(void)setElementActive :(BOOL)active;
 
 @property(nonatomic , retain) NSString *Change;
 @property(nonatomic , retain) NSString *LAView;
+
+//added by faiz
+@property (nonatomic, assign,readwrite) BOOL quickCountEnabled;
+//end of added by faiz
 @end

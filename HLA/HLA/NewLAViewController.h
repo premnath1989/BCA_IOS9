@@ -30,6 +30,7 @@
 -(void)PayorDeleted;
 -(void)saveAll;
 -(void)deleteSecondLAFromDB;
+-(void)setQuickCountValue:(BOOL)value;
 @end
 
 @interface NewLAViewController : UIViewController<UITextFieldDelegate,UIPopoverControllerDelegate,ListingTbViewControllerDelegate,DateViewControllerDelegate,OccupationListDelegate,PlanListDelegate,RelationshipPopoverViewControllerDelegate>{

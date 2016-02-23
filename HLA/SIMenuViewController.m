@@ -298,9 +298,12 @@ BOOL isFirstLoad;
             self.SecondLAController.requestCommDate = getCommDate;
             self.SecondLAController.requestSINo = getSINo;
 			self.SecondLAController.requesteProposalStatus = eProposalStatus;
+            [self.SecondLAController setQuickCountEnabled:quickCountEnabled];
             [self.RightView addSubview:self.SecondLAController.view];
         } else {
             self.SecondLAController.requestSINo = getSINo;
+            [self.SecondLAController setQuickCountEnabled:quickCountEnabled];
+            [self.SecondLAController setElementActive:quickCountEnabled];
             [self.RightView bringSubviewToFront:self.SecondLAController.view];            
         }
         previousPath = selectedPath;
@@ -2532,6 +2535,11 @@ BOOL isFirstLoad;
     }
     
     return cell;
+}
+
+#pragma mark - delegate added by faiz
+-(void)setQuickCountValue:(BOOL)value{
+    quickCountEnabled=value;
 }
 
 #pragma mark - table delegate

@@ -125,6 +125,7 @@ id dobtanngal;
 
 - (IBAction)QuickQuoteFunc:(UISwitch *)sender
 {
+    _SecondLAController =[self.storyboard instantiateViewControllerWithIdentifier:@"secondLAView"];
     if([sender isOn])
     {
         [btnDOB setTitle:@"--Please Select--" forState:UIControlStateNormal];
@@ -140,9 +141,10 @@ id dobtanngal;
         btnProspect.enabled = NO;
         NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
         [prefs setObject:@"Yes" forKey:@"keyToLookupString"];
-        _SecondLAController =[self.storyboard instantiateViewControllerWithIdentifier:@"secondLAView"];
-        [_SecondLAController testing:@"Enable"];
+        //[_SecondLAController testing:@"Enable"];
         
+        /*added by faiz*/
+        [_delegate setQuickCountValue:YES];
     }
     else
     {
@@ -159,8 +161,10 @@ id dobtanngal;
         btnProspect.enabled = YES;
         NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
         [prefs setObject:@"No" forKey:@"keyToLookupString"];
-        _SecondLAController =[self.storyboard instantiateViewControllerWithIdentifier:@"secondLAView"];
-        [_SecondLAController testing:@"Disable"];
+        //[_SecondLAController testing:@"Disable"];
+        
+        /*added by faiz*/
+        [_delegate setQuickCountValue:NO];
     }
 }
 

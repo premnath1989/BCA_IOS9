@@ -165,22 +165,24 @@ id dobtemp;
 
 }
 
--(void)testing :(NSString *)testing
+-(void)setElementActive :(BOOL)active
 {
-    if ([testing isEqualToString:@"Enable"])
+    //if ([testing isEqualToString:@"Enable"])
+    if (active)
     {
-        nameField.text =@"test";
-        nameField.enabled = false;
-        _BtnTanggalLahir.enabled = false;
+        //nameField.text =@"test";
+        nameField.enabled = true;
+        _BtnTanggalLahir.enabled = true;
         ageField.enabled = false;
-        sexSegment.enabled = false;
-        btnOccp.enabled = false;
-        outletProspect.enabled = NO;
+        sexSegment.enabled = true;
+        btnOccp.enabled = true;
+        outletProspect.enabled = true;
     }
-    else if ([testing isEqualToString:@"Disable"])
+//    else if ([testing isEqualToString:@"Disable"])
+    else
     {
         
-        nameField.text = @"TestDisable";
+        //nameField.text = @"TestDisable";
         nameField.enabled = false;
         _BtnTanggalLahir.enabled = false;
         ageField.enabled = false;
@@ -223,6 +225,7 @@ id dobtemp;
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    [self setElementActive:_quickCountEnabled];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
