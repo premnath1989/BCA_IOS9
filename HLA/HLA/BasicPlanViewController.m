@@ -344,37 +344,13 @@ bool WPTPD30RisDeleted = FALSE;
 {
     NSString *newString     = [textField.text stringByReplacingCharactersInRange:range withString:string];
     NSArray  *arrayOfString = [newString componentsSeparatedByString:@"."];
-    if ([arrayOfString count] > 2 )
     {
-        return NO;
     }
     
 
-    if ([textField isEqual:parAccField] || [textField isEqual:parPayoutField]) {
-        NSCharacterSet *nonNumberSet = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
-        if ([string rangeOfCharacterFromSet:nonNumberSet].location != NSNotFound) {
-            return NO;
-        }
-    }
-    else{
-        NSCharacterSet *nonNumberSet = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789."] invertedSet];
-        if ([string rangeOfCharacterFromSet:nonNumberSet].location != NSNotFound) {
-            return NO;
-        }
-    }
     
     
-    if ([textField isEqual:parAccField]) {
-        if (parAccField.text.length > 2 && ![string isEqualToString:@""]) {
-            return NO;
-        }
-    }
     
-    if ([textField isEqual:parPayoutField]) {
-        if (parPayoutField.text.length > 2 && ![string isEqualToString:@""]) {
-            return NO;
-        }
-    }
     
     return YES;
 }

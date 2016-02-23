@@ -30,7 +30,7 @@
 @synthesize sexSegment;
 @synthesize smokerSegment;
 @synthesize LAAgeField;
-@synthesize LAOccLoadingField;
+@synthesize LAOccLoadingField,Hubungan;
 @synthesize LACPAField;
 @synthesize LAPAField,btnToEAPP;
 @synthesize btnCommDate,btnEnabled,btnProspect,QuickQuoteBool;
@@ -198,7 +198,6 @@ id dobtanngal;
     _BtnHubungan.layer.masksToBounds = YES;
     _BtnHubungan.layer.borderWidth = 1.0f;
 
-    
     btnOccp.layer.borderColor = [themeColour CGColor];
     btnOccp.layer.masksToBounds = YES;
     btnOccp.layer.borderWidth = 1.0f;
@@ -209,7 +208,8 @@ id dobtanngal;
     btnCommDate.layer.borderWidth = 1.0f;
 }
 
--(void)processLifeAssured {
+-(void)processLifeAssured
+{
     if ([requesteProposalStatus isEqualToString:@"Failed"] ||
         [requesteProposalStatus isEqualToString:@"Confirmed"] || [requesteProposalStatus isEqualToString:@"Submitted"] ||
         [requesteProposalStatus isEqualToString:@"Received"] || [EAPPorSI isEqualToString:@"eAPP"] || [requesteProposalStatus isEqualToString:@"Created_View"] ||
@@ -714,7 +714,7 @@ id dobtanngal;
     [self.btnCommDate setTitle:commDate forState:UIControlStateNormal];
     
     sex = [self.requestSex description];
-    smoker = [self.requestSmoker description];
+    Relationship = [self.requestSmoker description];
     [self setSexToGlobal];
     sexSegment.selectedSegmentIndex = UISegmentedControlNoSegment;
     smokerSegment.selectedSegmentIndex = UISegmentedControlNoSegment;
@@ -2375,7 +2375,8 @@ id dobtanngal;
         [alert show];
       
         
-    } else if ([TanggalIllustrasi.titleLabel.text isEqualToString:@"(null)"] ||[TanggalIllustrasi.titleLabel.text isEqualToString:@"--Please Select--"] || TanggalIllustrasi.titleLabel.text.length == 0) {
+    }
+    else if ([TanggalIllustrasi.titleLabel.text isEqualToString:@"(null)"] ||[TanggalIllustrasi.titleLabel.text isEqualToString:@"--Please Select--"] || TanggalIllustrasi.titleLabel.text.length == 0) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Tanggal Ilustrasi harus diisi "
                                                        delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
         [alert show];
@@ -2737,6 +2738,9 @@ else {
     Relationship = selectedRship;
     
      [_BtnHubungan setTitle:Relationship forState:UIControlStateNormal];
+    
+    
+      Relationship = [self.requestSmoker description];
     
     if (_RshipTypePickerPopover) {
         [_RshipTypePickerPopover dismissPopoverAnimated:YES];

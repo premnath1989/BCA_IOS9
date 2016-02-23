@@ -43,8 +43,6 @@
     UIPopoverController *_dobPopover;
     UIPopoverController *_OccupationListPopover;
     SecondLAViewController *_SecondLAController;
-    
-    
     PlanList *_planList;
     ListingTbViewController *_ProspectList;
     DateViewController *_LADate;
@@ -184,6 +182,7 @@
 //declare for store in DB
 @property (nonatomic, copy) NSString *sex;
 @property (nonatomic, copy) NSString *smoker;
+@property (nonatomic, copy) NSString *Hubungan;
 @property (nonatomic, copy) NSString *DOB;
 @property (nonatomic, copy) NSString *commDate;
 @property (nonatomic, copy) NSString *jobDesc;
