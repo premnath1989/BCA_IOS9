@@ -53,6 +53,8 @@
 		173E81601C28F9C600BDAAE9 /* EappListing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 173E815F1C28F9C600BDAAE9 /* EappListing.storyboard */; };
 		174858B51C3E229D007BBF13 /* libSPSignDoc_4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 174858B41C3E229D007BBF13 /* libSPSignDoc_4.0.a */; };
 		174858B71C438BA8007BBF13 /* MyCustomDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 174858B61C438BA8007BBF13 /* MyCustomDialog.xib */; };
+		175E3A561C7BFE4A000EC161 /* MasaPembayaran.m in Sources */ = {isa = PBXBuildFile; fileRef = 175E3A551C7BFE4A000EC161 /* MasaPembayaran.m */; };
+		175E3A5A1C7C243B000EC161 /* Frekeunsi.m in Sources */ = {isa = PBXBuildFile; fileRef = 175E3A581C7C243B000EC161 /* Frekeunsi.m */; };
 		178765D91C7409F00036F31A /* menu_selectoption.png in Resources */ = {isa = PBXBuildFile; fileRef = 178765D81C7409F00036F31A /* menu_selectoption.png */; };
 		178765DB1C74C25D0036F31A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 178765DA1C74C25D0036F31A /* Images.xcassets */; };
 		178765DF1C75C04C0036F31A /* ProspectProfileStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 178765DE1C75C04C0036F31A /* ProspectProfileStoryboard.storyboard */; };
@@ -836,6 +838,12 @@
 		173E815F1C28F9C600BDAAE9 /* EappListing.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EappListing.storyboard; sourceTree = "<group>"; };
 		174858B41C3E229D007BBF13 /* libSPSignDoc_4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSPSignDoc_4.0.a; sourceTree = "<group>"; };
 		174858B61C438BA8007BBF13 /* MyCustomDialog.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCustomDialog.xib; sourceTree = "<group>"; };
+		175E3A541C7BFE4A000EC161 /* MasaPembayaran.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasaPembayaran.h; sourceTree = "<group>"; };
+		175E3A551C7BFE4A000EC161 /* MasaPembayaran.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasaPembayaran.m; sourceTree = "<group>"; };
+		175E3A571C7C243B000EC161 /* Frekeunsi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Frekeunsi.h; sourceTree = "<group>"; };
+		175E3A581C7C243B000EC161 /* Frekeunsi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Frekeunsi.m; sourceTree = "<group>"; };
+		175E3A591C7C243B000EC161 /* MasaPembayaran.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasaPembayaran.h; sourceTree = "<group>"; };
+		175E3A5B1C7C50A0000EC161 /* BCA_Rates.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = BCA_Rates.sqlite; sourceTree = "<group>"; };
 		178765D81C7409F00036F31A /* menu_selectoption.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_selectoption.png; sourceTree = "<group>"; };
 		178765DA1C74C25D0036F31A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = BLESS/Images.xcassets; sourceTree = "<group>"; };
 		178765DE1C75C04C0036F31A /* ProspectProfileStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ProspectProfileStoryboard.storyboard; sourceTree = "<group>"; };
@@ -4217,6 +4225,7 @@
 				FA49F2881B9EE4E500B20169 /* DBUpdater.m */,
 				161EA6BB1B131A9E009AF454 /* hladb.sqlite.sql */,
 				420AC655181F83E200946C31 /* UL_Rates.sqlite */,
+				175E3A5B1C7C50A0000EC161 /* BCA_Rates.sqlite */,
 				6A4ACBB817EA9EE30037C358 /* HLA_Rates.sqlite */,
 				C4E643811724F175001DF8F8 /* Rates.json */,
 				C4F45DF2165C6C430035CAA9 /* viewer.plist */,
@@ -4314,6 +4323,11 @@
 				EF059844161A9055004A9095 /* SecondLAViewController.h */,
 				EF059843161A9055004A9095 /* SecondLAViewController.m */,
 				EFB3D5891686AE2200A7B517 /* SecondLAHandler.h */,
+				175E3A541C7BFE4A000EC161 /* MasaPembayaran.h */,
+				175E3A551C7BFE4A000EC161 /* MasaPembayaran.m */,
+				175E3A571C7C243B000EC161 /* Frekeunsi.h */,
+				175E3A581C7C243B000EC161 /* Frekeunsi.m */,
+				175E3A591C7C243B000EC161 /* MasaPembayaran.h */,
 				EFB3D58A1686AE2200A7B517 /* SecondLAHandler.m */,
 				EF05983E161A8C85004A9095 /* ListingTbViewController.h */,
 				EF05983D161A8C85004A9095 /* ListingTbViewController.m */,
@@ -5049,6 +5063,7 @@
 				2958A81C17E95E0E0090A791 /* ContactTypeClass.m in Sources */,
 				2958A82417E95E7D0090A791 /* PersonalDetialsViewController.m in Sources */,
 				2958A82517E95E7D0090A791 /* SelectPartner.m in Sources */,
+				175E3A561C7BFE4A000EC161 /* MasaPembayaran.m in Sources */,
 				2958A83217E95EA10090A791 /* CountryPopoverViewController.m in Sources */,
 				2958A83317E95EA10090A791 /* NationalityPopoverViewController.m in Sources */,
 				2958A83417E95EA10090A791 /* OtherIDPopoverViewController.m in Sources */,
@@ -5105,6 +5120,7 @@
 				29A3EEDB17EAEA2200E1CE8B /* IssuingBankPopoverVC.m in Sources */,
 				29A3EEDC17EAEA2200E1CE8B /* RecurPaymentPopoverVC.m in Sources */,
 				29A3EEDD17EAEA2200E1CE8B /* PersonTypePopoverVC.m in Sources */,
+				175E3A5A1C7C243B000EC161 /* Frekeunsi.m in Sources */,
 				AAFEE0351C6C1EC900702F64 /* TableManagement.m in Sources */,
 				AAAC9D061C717CCF002E3190 /* USGlobals.m in Sources */,
 				29A38DA317EAEB6B00454787 /* eSignVC.m in Sources */,
