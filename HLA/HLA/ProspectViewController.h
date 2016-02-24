@@ -37,6 +37,7 @@
     NSString *databasePath;
     sqlite3 *contactDB;
     UITextField *activeField;
+    UITextView *activeView;
     OccupationList *_OccupationList;
     SIDate *_SIDate;
     GroupClass *_GroupList;

@@ -585,6 +585,7 @@ NSMutableArray *DelGroupArr;
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     activeField = textField;
+    activeView = nil;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
@@ -902,12 +903,12 @@ NSMutableArray *DelGroupArr;
         [txtAnnIncome becomeFirstResponder];
         return false;
     }
-    else if ([validationSet containsObject:outletsourceincome]||outletsourceincome==NULL){
+    /*else if ([validationSet containsObject:outletsourceincome]||outletsourceincome==NULL){
         [self createAlertViewAndShow:validationSumberPenghasilan tag:0];
         [_outletSourceIncome setBackgroundColor:[UIColor redColor]];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
         return false;
-    }
+    }*/
     return valid;
 }
 
@@ -1906,6 +1907,7 @@ NSMutableArray *DelGroupArr;
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView{
+    activeView=textView;
     strChanges = @"Yes";
 }
 
@@ -3123,17 +3125,53 @@ NSMutableArray *DelGroupArr;
     _txtOfficeVillage.text=pp.OfficeVillage;
     _txtOfficeDistrict.text=pp.OfficeDistrict;
     _txtOfficeProvince.text=pp.OfficeProvicne;
-    [_outletSourceIncome setTitle:pp.SourceIncome forState:UIControlStateNormal];
-    [_outletVIPClass setTitle:pp.ClientSegmentation forState:UIControlStateNormal];
+
+    if (![pp.ClientSegmentation isEqualToString:@"(null)"]){
+        [_outletVIPClass setTitle:pp.ClientSegmentation forState:UIControlStateNormal];
+    }
+
+    if (![pp.SourceIncome isEqualToString:@"(null)"]){
+        [_outletSourceIncome setTitle:pp.SourceIncome forState:UIControlStateNormal];
+    }
+
+    
+    if ([[pp.ResidenceAddressCountry uppercaseString] isEqualToString:@"INDONESIA"]){
+        [_switchCountryHome setOn:NO];
+        [btnHomeCountry setHidden:YES];
+        [txtHomeCountry setHidden:NO];
+        checked = NO;
+    }
+    else{
+        [_switchCountryHome setOn:YES];
+        [btnHomeCountry setHidden:NO];
+        [txtHomeCountry setHidden:YES];
+        checked = YES;
+    }
+
+    if ([[pp.OfficeAddressCountry uppercaseString] isEqualToString:@"INDONESIA"]){
+        [_switchCountryOffice setOn:NO];
+        [btnOfficeCountry setHidden:YES];
+        [txtOfficeCountry setHidden:NO];
+        checked2 = NO;
+    }
+    else{
+        [_switchCountryOffice setOn:YES];
+        [btnOfficeCountry setHidden:NO];
+        [txtOfficeCountry setHidden:YES];
+        checked2 = YES;
+    }
 
     [BtnCountryOfBirth setHidden:YES];
-    [btnOfficeCountry setHidden:YES];
-    [btnHomeCountry setHidden:YES];
-    [txtHomeCountry setHidden:NO];
-    [txtOfficeCountry setHidden:NO];
+    //[btnOfficeCountry setHidden:YES];
+    //[btnHomeCountry setHidden:YES];
+    //[txtHomeCountry setHidden:NO];
+    //[txtOfficeCountry setHidden:NO];
     
     txtHomeCountry.text = pp.ResidenceAddressCountry;
     txtOfficeCountry.text = pp.OfficeAddressCountry;
+    [btnHomeCountry setTitle:pp.ResidenceAddressCountry forState:UIControlStateNormal];
+    [btnOfficeCountry setTitle:pp.OfficeAddressCountry forState:UIControlStateNormal];
+    
     segGender.enabled = YES;
     txtDOB.hidden=YES;
     [txtOtherIDType setEnabled:YES];
@@ -3524,6 +3562,11 @@ NSMutableArray *DelGroupArr;
     {
         [myScrollView setContentOffset:CGPointMake(0,500) animated:YES];
     }
+    else if([txtRemark isFirstResponder])
+    {
+        [myScrollView setContentOffset:CGPointMake(0,500) animated:YES];
+    }
+
     
     /*added by faiz*/
     // Step 1: Get the size of the keyboard.
@@ -3539,9 +3582,17 @@ NSMutableArray *DelGroupArr;
     // Step 3: Scroll the target text field into view.
     CGRect aRect = self.view.frame;
     aRect.size.height -= kbSize.height;
-    if (!CGRectContainsPoint(aRect, activeField.frame.origin) ) {
-        CGPoint scrollPoint = CGPointMake(0.0, activeField.frame.origin.y - (kbSize.height-15));
-        [_scrollViewEditProspect setContentOffset:scrollPoint animated:YES];
+    if (activeView != nil){
+        // make sure the scrollview content size width and height are greater than 0
+        [_scrollViewEditProspect setContentSize:CGSizeMake (_scrollViewEditProspect.frame.size.width, _scrollViewEditProspect.contentSize.height)];
+        // scroll to the text view
+        [_scrollViewEditProspect scrollRectToVisible:activeView.superview.frame animated:YES];
+    }
+    else{
+        if (!CGRectContainsPoint(aRect, activeField.frame.origin) ) {
+            CGPoint scrollPoint = CGPointMake(0.0, activeField.frame.origin.y - (kbSize.height-15));
+            [_scrollViewEditProspect setContentOffset:scrollPoint animated:YES];
+        }
     }
     /*end of added by faiz*/
 
@@ -4156,7 +4207,7 @@ NSMutableArray *DelGroupArr;
     if (switchPressed.tag == 0) {
         if ([switchPressed isOn]) {
             [btnForeignHome setImage: [UIImage imageNamed:@"emptyCheckBox.png"] forState:UIControlStateNormal];
-            checked = NO;
+            checked = YES;
             
             txtHomeAddr1.text = @"";
             txtHomeAddr2.text=@"";
@@ -4182,7 +4233,7 @@ NSMutableArray *DelGroupArr;
         else {
 			
             [btnForeignHome setImage: [UIImage imageNamed:@"tickCheckBox.png"] forState:UIControlStateNormal];
-            checked = YES;
+            checked = NO;
             
             self.navigationItem.rightBarButtonItem.enabled = TRUE; //ENABLE DONE BUTTON
             txtHomeAddr1.text = @"";
@@ -4215,7 +4266,7 @@ NSMutableArray *DelGroupArr;
     else if (switchPressed.tag == 1) {
         if ([switchPressed isOn]) {
             [btnForeignOffice setImage: [UIImage imageNamed:@"emptyCheckBox.png"] forState:UIControlStateNormal];
-            checked2 = NO;
+            checked2 = YES;
             
             txtOfficeAddr1.text=@"";
             txtOfficeAddr2.text=@"";
@@ -4241,7 +4292,7 @@ NSMutableArray *DelGroupArr;
         }
         else {
             [btnForeignOffice setImage: [UIImage imageNamed:@"tickCheckBox.png"] forState:UIControlStateNormal];
-            checked2 = YES;
+            checked2 = NO;
             
             self.navigationItem.rightBarButtonItem.enabled = TRUE;
             txtOfficeAddr1.text = @"";
@@ -6712,8 +6763,8 @@ NSMutableArray *DelGroupArr;
 			OfficeForeignAddressFlag = @"N";
         }
         
-        HomeCountry = [self getCountryCode:HomeCountry];
-        OffCountry = [self getCountryCode:OffCountry];
+        //HomeCountry = [self getCountryCode:HomeCountry];
+        //OffCountry = [self getCountryCode:OffCountry];
 		
         if([SelectedStateCode isEqualToString:@"(null)"]  || (SelectedStateCode == NULL)) {
 			SelectedStateCode = @"";
@@ -6806,7 +6857,7 @@ NSMutableArray *DelGroupArr;
                                @"update prospect_profile set \"ProspectName\"=\'%@\', \"ProspectDOB\"=\"%@\", \"GST_registered\"=\"%@\",\"GST_registrationNo\"=\"%@\",\"GST_registrationDate\"=\"%@\",\"GST_exempted\"=\"%@\",  \"ProspectGender\"=\"%@\", \"ResidenceAddress1\"=\"%@\", \"ResidenceAddress2\"=\"%@\", \"ResidenceAddress3\"=\"%@\", \"ResidenceAddressTown\"=\"%@\", \"ResidenceAddressState\"=\"%@\", \"ResidenceAddressPostCode\"=\"%@\", \"ResidenceAddressCountry\"=\"%@\", \"OfficeAddress1\"=\"%@\", \"OfficeAddress2\"=\"%@\", \"OfficeAddress3\"=\"%@\", \"OfficeAddressTown\"=\"%@\",\"OfficeAddressState\"=\"%@\", \"OfficeAddressPostCode\"=\"%@\", \"OfficeAddressCountry\"=\"%@\", \"ProspectEmail\"= \"%@\", \"ProspectOccupationCode\"=\"%@\", \"ExactDuties\"=\"%@\", \"ProspectRemark\"=\"%@\", \"DateModified\"=%@,\"ModifiedBy\"=\"%@\", \"ProspectGroup\"=\"%@\", \"ProspectTitle\"=\"%@\", \"IDTypeNo\"=\"%@\", \"OtherIDType\"=\"%@\", \"OtherIDTypeNo\"=\"%@\", \"Smoker\"=\"%@\", \"AnnualIncome\"=\"%@\", \"BussinessType\"=\"%@\", \"Race\"=\"%@\", \"MaritalStatus\"=\"%@\", \"Nationality\"=\"%@\", \"Religion\"=\"%@\",\"ProspectProfileChangesCounter\"=\"%@\", \"Prospect_IsGrouping\"=\"%@\", \"CountryOfBirth\"=\"%@\",\"NIP\"=\"%@\",\"BranchCode\"=\"%@\",\"BranchName\"=\"%@\",\"KCU\"=\"%@\",\"ReferralSource\"=\"%@\",\"ReferralName\"=\"%@\",\"Kanwil\"=\"%@\",\"ResidenceDistrict\"=\"%@\",\"ResidenceVillage\"=\"%@\",\"ResidenceProvince\"=\"%@\",\"OfficeDistrict\"=\"%@\",\"OfficeVillage\"=\"%@\",\"OfficeProvince\"=\"%@\",\"SourceIncome\"=\"%@\",\"NPWPNo\"=\"%@\",\"ClientSegmentation\"=\"%@\",\"IDExpiryDate\"=\"%@\" where indexNo = \"%@\" "
                                     , txtrFullName.text, newDOB,GSTRigperson,txtRigNO.text,strGstdate, GSTRigExempted,gender, txtHomeAddr1.text, txtHomeAddr2.text, txtHomeAddr3.text, txtHomeTown.text, SelectedStateCode, txtHomePostCode.text, HomeCountry, txtOfficeAddr1.text, txtOfficeAddr2.text, txtOfficeAddr3.text, txtOfficeTown.text, SelectedOfficeStateCode, txtOfficePostCode.text, OffCountry, txtEmail.text, OccupCodeSelected, txtExactDuties.text, txtRemark.text, @"datetime(\"now\", \"+8 hour\")", @"1", group, TitleCodeSelected, txtIDType.text, IDTypeCodeSelected, txtOtherIDType.text, ClientSmoker, txtAnnIncome.text, txtBussinessType.text,race, marital, nation,
                             religion,str_counter, IsGrrouping, CountryOfBirth, txtNip.text, _outletBranchCode.titleLabel.text, _outletBranchName.titleLabel.text, txtKcu.text, outletReferralSource.titleLabel.text, txtReferralName.text, txtKanwil.text, _txtHomeDistrict.text, _txtHomeVillage.text, _txtHomeProvince.text,_txtOfficeDistrict.text, _txtOfficeVillage.text, _txtOfficeProvince.text, _outletSourceIncome.titleLabel.text, txtNPWPNo.text, _outletVIPClass.titleLabel.text,newExpiryDate, pp.ProspectID];
-		
+
         const char *Update_stmt = [insertSQL UTF8String];
         if(sqlite3_prepare_v2(contactDB, Update_stmt, -1, &statement, NULL) == SQLITE_OK) {
             if (sqlite3_step(statement) == SQLITE_DONE)
@@ -7279,9 +7330,11 @@ NSMutableArray *DelGroupArr;
     NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
 		
 	if (![[ClientProfile objectForKey:@"TabBar"] isEqualToString:@"YES"]) {
-		UIAlertView *SuccessAlert = [[UIAlertView alloc] initWithTitle:@" "
-															   message:@"Changes have been updated successfully." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-		
+		//UIAlertView *SuccessAlert = [[UIAlertView alloc] initWithTitle:@" "
+		//													   message:@"Changes have been updated successfully." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        UIAlertView *SuccessAlert = [[UIAlertView alloc] initWithTitle:@" "
+        message:@"Perubahan telah berhasil disimpan." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        
 		SuccessAlert.tag = 9001;
 		[SuccessAlert show];
 	}
@@ -8213,7 +8266,8 @@ NSMutableArray *DelGroupArr;
             {
                 if (failedCase || receivedCase || submittedCase)
                 {
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"All changes will be updated to related SI, CFF and eApp. Do you want to proceed?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+                    //UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"All changes will be updated to related SI, CFF and eApp. Do you want to proceed?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Semua perubahan akan diperbarui untuk terkait SI, CFF dan e App. Apakah Anda ingin melanjutkan?" delegate:self cancelButtonTitle:@"Ya" otherButtonTitles:@"Tidak", nil];
                     [alert setTag:1004];
                     [alert show];
                 }
@@ -8226,7 +8280,7 @@ NSMutableArray *DelGroupArr;
             }
             else
             {
-				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"All changes will be updated to related SI, CFF and eApp. Do you want to proceed?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Semua perubahan akan diperbarui untuk terkait SI, CFF dan e App. Apakah Anda ingin melanjutkan?" delegate:self cancelButtonTitle:@"Ya" otherButtonTitles:@"Tidak", nil];
 				[alert setTag:1004];
 				[alert show];
             }
@@ -12564,7 +12618,7 @@ NSMutableArray *DelGroupArr;
 
 
 #pragma mark - delegate
--(void)selectedBranch:(NSString *)branchCode BranchName:(NSString *)branchName BranchStatus:(NSString *)branchStatus{
+-(void)selectedBranch:(NSString *)branchCode BranchName:(NSString *)branchName BranchStatus:(NSString *)branchStatus BranchKanwil:(NSString *)branchKanwil{
     /*if([VIPClass isEqualToString:@"- SELECT -"]) {
      _outletVIPClass.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
      } else {
@@ -12572,11 +12626,12 @@ NSMutableArray *DelGroupArr;
      }*/
     _outletBranchCode.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     _outletBranchName.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [_outletBranchCode setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",branchCode]forState:UIControlStateNormal];
-    [_outletBranchName setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",branchName]forState:UIControlStateNormal];
+    [_outletBranchCode setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",branchCode]forState:UIControlStateNormal];
+    [_outletBranchName setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",branchName]forState:UIControlStateNormal];
     [_outletBranchCode setBackgroundColor:[UIColor clearColor]];
     [_outletBranchName setBackgroundColor:[UIColor clearColor]];
     [txtKcu setText:branchStatus];
+    [txtKanwil setText:branchKanwil];
     [_branchInfoPopover dismissPopoverAnimated:YES];
 }
 
@@ -12738,7 +12793,7 @@ NSMutableArray *DelGroupArr;
             btnOfficeCountry.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         }
         
-        [btnOfficeCountry setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",theCountry] forState:UIControlStateNormal];
+        [btnOfficeCountry setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",theCountry] forState:UIControlStateNormal];
         [self.CountryListPopover dismissPopoverAnimated:YES];
 		
 		NSString *OffCountry = @"";
@@ -12753,7 +12808,7 @@ NSMutableArray *DelGroupArr;
             btnHomeCountry.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         }
         
-        [btnHomeCountry setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",theCountry] forState:UIControlStateNormal];
+        [btnHomeCountry setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",theCountry] forState:UIControlStateNormal];
         [self.CountryListPopover dismissPopoverAnimated:YES];
 		
 		NSString *HomeCountry = @"";

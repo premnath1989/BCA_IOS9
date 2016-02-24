@@ -9,8 +9,11 @@
 #import "SecondLAViewController.h"
 #import "MainScreen.h"
 #import "AppDelegate.h"
+#import "ColorHexCode.h"
 
-@interface SecondLAViewController ()
+@interface SecondLAViewController (){
+    ColorHexCode *CustomColor;
+}
 
 @end
 
@@ -43,9 +46,10 @@ id dobtemp;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    CustomColor = [[ColorHexCode alloc] init ];
     appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate ];
 	
-    self.view.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg10.jpg"]];
+    self.view.backgroundColor=[UIColor whiteColor];//[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg10.jpg"]];
     
     NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docsDir = [dirPaths objectAtIndex:0];
@@ -165,23 +169,27 @@ id dobtemp;
 
 }
 
--(void)testing :(NSString *)testing
+-(void)setElementActive :(BOOL)active
 {
-    if ([testing isEqualToString:@"Enable"])
+    //if ([testing isEqualToString:@"Enable"])
+    if (active)
     {
-        nameField.text =@"test";
-        nameField.enabled = false;
-        _BtnTanggalLahir.enabled = false;
+        //nameField.text =@"test";
+        [nameField setBackgroundColor:[UIColor whiteColor]];
+        nameField.enabled = YES;
+        _BtnTanggalLahir.enabled = true;
         ageField.enabled = false;
-        sexSegment.enabled = false;
-        btnOccp.enabled = false;
-        outletProspect.enabled = NO;
+        sexSegment.enabled = true;
+        btnOccp.enabled = true;
+        outletProspect.enabled = true;
     }
-    else if ([testing isEqualToString:@"Disable"])
+//    else if ([testing isEqualToString:@"Disable"])
+    else
     {
         
-        nameField.text = @"TestDisable";
-        nameField.enabled = false;
+        //nameField.text = @"TestDisable";
+        [nameField setBackgroundColor:[UIColor colorWithRed:238.0/255.0 green:238.0/255.0 blue:238.0/255.0 alpha:1.0]];
+        nameField.enabled = NO;
         _BtnTanggalLahir.enabled = false;
         ageField.enabled = false;
         sexSegment.enabled = false;
@@ -223,6 +231,7 @@ id dobtemp;
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    [self setElementActive:_quickQuoteEnabled];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -261,7 +270,7 @@ id dobtemp;
 }
 
 -(void)OccupDescSelected:(NSString *)OccupDesc{
-    
+    btnOccp.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
     [btnOccp setTitle:OccupDesc forState:UIControlStateNormal];
     [self.OccupationListPopover dismissPopoverAnimated:YES];
 }
@@ -282,6 +291,9 @@ id dobtemp;
             ageField.text = [[NSString alloc] initWithFormat:@"%d",bAge];
         }
         
+
+        _BtnTanggalLahir.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+
         self.btnDOB.titleLabel.textColor = [UIColor blackColor];
         [self.dobPopover dismissPopoverAnimated:YES];
         date1 = NO;
@@ -513,7 +525,7 @@ id dobtemp;
 	[self.OccupationListPopover presentPopoverFromRect:[sender frame]  inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
 }
 
--(IBAction)btnDOBPressed:(id)sender{
+-(IBAction)btnDOBPressed:(UIButton *)sender{
 	[self resignFirstResponder];
     [self.view endEditing:YES];
     
@@ -526,7 +538,7 @@ id dobtemp;
     UIStoryboard *sharedStoryboard = [UIStoryboard storyboardWithName:@"SharedStoryboard" bundle:Nil];
     self.LADate = [sharedStoryboard instantiateViewControllerWithIdentifier:@"showDate"];
     _LADate.delegate = self;
-    _LADate.msgDate = dobtemp;
+    _LADate.msgDate = sender.titleLabel.text;
     _LADate.btnSender = 1;
     
     self.dobPopover = [[UIPopoverController alloc] initWithContentViewController:_LADate];
@@ -537,7 +549,10 @@ id dobtemp;
 
 - (IBAction)doSave:(id)sender
 {
-    [_delegate saveAll];
+    //[_delegate saveAll];
+    if ([self validateSave]){
+        [_delegate saveSecondLA];
+    }
 }
 
 - (IBAction)doDelete:(id)sender
@@ -697,6 +712,18 @@ id dobtemp;
     }
     
     return returnInt;
+}
+
+#pragma mark - Length Check
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    NSUInteger newLength = [textField.text length] + [string length] - range.length;
+    if (textField == nameField)
+    {
+        NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:@"ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz./@'()-"] invertedSet];
+        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        return (([string isEqualToString:filtered]) && newLength <= 40);
+    }
+    return YES;
 }
 
 #pragma mark - delegate
@@ -1309,9 +1336,61 @@ id dobtemp;
 	
     [_delegate secondLADelete];
 }
+
+- (void)createAlertViewAndShow:(NSString *)message tag:(int)alertTag{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
+                                                    message:[NSString stringWithFormat:@"%@",message] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    alert.tag = alertTag;
+    [alert show];
+}
+
+
+- (bool)validationDataLifeAssured{
+    bool valid=true;
+    NSArray* validationSet=[[NSArray alloc]initWithObjects:@"",@"- SELECT -",@"- Select -",@"--Please Select--", nil];
+    
+    //validation message data refferal
+    NSString *validationNamaTertanggung=@"Nama Tertanggung harus diisi";
+    NSString *validationTanggalLahir=@"Tanggal Lahir Tertanggung harus diisi";
+    NSString *validationJenisKelamin=@"Jenis Kelamin Tertanggung harus diisi";
+    NSString *validationPekerjaan=@"Pekerjaan Tertanggung harus diisi";
+
+    //outletkodecabang
+    NSString* namaTertangggung=nameField.text;
+    //outletnamacabang
+    NSString* tanggalLahir=_BtnTanggalLahir.titleLabel.text;
+    //segmen jenis kelamin
+    //segGender.selectedSegmentIndex
+    //occupation
+    NSString* occupation=btnOccp.titleLabel.text;
+    
+    if ([validationSet containsObject:namaTertangggung]||namaTertangggung==NULL){
+        [self createAlertViewAndShow:validationNamaTertanggung tag:0];
+        [nameField becomeFirstResponder];
+        return false;
+    }
+    else if ([validationSet containsObject:tanggalLahir]||tanggalLahir==NULL){
+        [self createAlertViewAndShow:validationTanggalLahir tag:0];
+        [_BtnTanggalLahir setBackgroundColor:[UIColor redColor]];
+        return false;
+    }
+    else if (sexSegment.selectedSegmentIndex==UISegmentedControlNoSegment){
+        [self createAlertViewAndShow:validationJenisKelamin tag:0];
+        return false;
+    }
+
+    else if ([validationSet containsObject:occupation]||occupation==NULL){
+        [self createAlertViewAndShow:validationPekerjaan tag:0];
+        [btnOccp setBackgroundColor:[UIColor redColor]];
+        return false;
+    }
+    return valid;
+}
+
+
 -(BOOL)validateSave
 {
-    if (nameField.text.length <= 0) {
+    /*if (nameField.text.length <= 0) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"2nd Life Assured Name is required." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
         [alert show];
     } else if (OccpCode.length == 0) {
@@ -1325,10 +1404,15 @@ id dobtemp;
         [alert show];
     } else {
         return YES;
-    }
+    }*/
     
+    if (_quickQuoteEnabled){
+        return [self validationDataLifeAssured];
+    }
+    else{
+        return YES;
+    }
     return NO;
-	
 }
 #pragma mark - STORE 2nd LA BEFORE SAVE INTO DATABASE
 -(BOOL)performUpdateData//update second la while looping all section

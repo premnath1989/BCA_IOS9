@@ -106,6 +106,10 @@
     AppDelegate *appDel;
     NSString * LAotherIDType;
     BOOL getEDD;
+    
+    //added by faiz
+    BOOL quickQuoteEnabled;
+    //end of added by faiz
 }
 
 @property (nonatomic, assign) id<SIMenuDelegate> delegate;

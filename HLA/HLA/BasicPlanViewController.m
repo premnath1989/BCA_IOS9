@@ -23,6 +23,7 @@
 @implementation BasicPlanViewController
 @synthesize btnPlan;
 @synthesize termField;
+@synthesize FrekuensiPembayaranChecking,FRekeunsiPembayaranMode;;
 @synthesize yearlyIncomeField;
 @synthesize minSALabel;
 @synthesize maxSALabel;
@@ -41,7 +42,7 @@
 @synthesize MOP,yearlyIncome,advanceYearlyIncome,basicRate,cashDividend;
 @synthesize getSINo,getSumAssured,getPolicyTerm,getHL,getHLTerm,getTempHL,getTempHLTerm;
 @synthesize planCode,requestOccpCode,dataInsert,basicBH,basicPH,basicLa2ndH;
-@synthesize SINo,LACustCode,PYCustCode,SIDate,SILastNo,CustDate,CustLastNo;
+@synthesize SINo,LACustCode,PYCustCode,SIDate,SILastNo,CustDate,CustLastNo,BasisSumAssured;
 @synthesize NamePP,DOBPP,OccpCodePP,GenderPP,secondLACustCode,IndexNo,PayorIndexNo,secondLAIndexNo;
 @synthesize delegate = _delegate;
 @synthesize requestAge,OccpCode,requestIDPay,requestIDProf,idPay,idProf,annualMedRiderSum,halfMedRiderSum,quarterMedRiderSum;
@@ -54,6 +55,7 @@
 @synthesize requestOccpClass,OccpClass,SavedMOP,yearlyIncomeHLAIB,cashDividendHLAIB,cashDividendHLACP;
 @synthesize advanceYearlyIncomeHLAIB,advanceYearlyIncomeHLACP,maxAge,occLoad,LSDRate,LUnits,occCPA_PA;
 @synthesize planList = _planList;
+@synthesize _masaPembayaran = _masaPembayaran;
 @synthesize planPopover = _planPopover;
 @synthesize labelParAcc,labelParPayout,labelPercent1,labelPercent2,parAccField,parPayoutField,getParAcc,getParPayout;
 @synthesize pTypeOccp,occLoadRider,riderPrem,waiverRiderAnn,medRiderPrem;
@@ -72,6 +74,8 @@ bool WPTPD30RisDeleted = FALSE;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    
     
     appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate ];
 	
@@ -103,6 +107,7 @@ bool WPTPD30RisDeleted = FALSE;
     healthLoadingView.alpha = 0;
     showHL = NO;
     [self togglePlan];
+    _frekuensiPembayaranButton.enabled;
     
     [self resetData];
     if (self.requestSINo) {
@@ -185,6 +190,7 @@ bool WPTPD30RisDeleted = FALSE;
     }
 
     themeColour = [UIColor colorWithRed:242.0f/255.0f green:113.0f/255.0f blue:134.0f/255.0f alpha:1];
+    [yearlyIncomeField addTarget:self action:@selector(AnnualIncomeChange:) forControlEvents:UIControlEventEditingDidEnd];
     [self setTextfieldBorder];
 }
 
@@ -316,7 +322,8 @@ bool WPTPD30RisDeleted = FALSE;
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-    switch (textField.tag) {
+    switch (textField.tag)
+    {
         case 0:
             minSALabel.text = @"";
             maxSALabel.text = @"";
@@ -342,40 +349,22 @@ bool WPTPD30RisDeleted = FALSE;
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    NSString *newString     = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    NSArray  *arrayOfString = [newString componentsSeparatedByString:@"."];
-    if ([arrayOfString count] > 2 )
+    NSUInteger newLength = [textField.text length] + [string length] - range.length;
+    
+    if (textField == yearlyIncomeField)
     {
-        return NO;
+        NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
+        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        return (([string isEqualToString:filtered]) && newLength <= 15);
     }
     
+    if (textField == _extraPremiPercentField)
+    {
+        NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
+        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        return (([string isEqualToString:filtered]) && newLength <= 15);
+    }
 
-    if ([textField isEqual:parAccField] || [textField isEqual:parPayoutField]) {
-        NSCharacterSet *nonNumberSet = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
-        if ([string rangeOfCharacterFromSet:nonNumberSet].location != NSNotFound) {
-            return NO;
-        }
-    }
-    else{
-        NSCharacterSet *nonNumberSet = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789."] invertedSet];
-        if ([string rangeOfCharacterFromSet:nonNumberSet].location != NSNotFound) {
-            return NO;
-        }
-    }
-    
-    
-    if ([textField isEqual:parAccField]) {
-        if (parAccField.text.length > 2 && ![string isEqualToString:@""]) {
-            return NO;
-        }
-    }
-    
-    if ([textField isEqual:parPayoutField]) {
-        if (parPayoutField.text.length > 2 && ![string isEqualToString:@""]) {
-            return NO;
-        }
-    }
-    
     return YES;
 }
 
@@ -383,13 +372,154 @@ bool WPTPD30RisDeleted = FALSE;
 #pragma mark - added by faiz 
 //added by faiz
 
--(IBAction)actionMasaPembayaran:(id)sender{
+-(IBAction)actionMasaPembayaran:(id)sender
+{
+    
+    [self resignFirstResponder];
+    [self.view endEditing:YES];
+    
+    Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
+    id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
+    [activeInstance performSelector:@selector(dismissKeyboard)];
+    
+    if (_masaPembayaran == nil) {
+        _masaPembayaran = [[MasaPembayaran alloc] init];
+        _masaPembayaran.TradOrEver = @"TRAD";
+        _masaPembayaran.delegate = self;
+        self.planPopover = [[UIPopoverController alloc] initWithContentViewController:_masaPembayaran];
+    }
+    else
+    {
+        _masaPembayaran = [[MasaPembayaran alloc] init];
+        _masaPembayaran.TradOrEver = @"TRAD";
+        _masaPembayaran.delegate = self;
+        self.planPopover = [[UIPopoverController alloc] initWithContentViewController:_masaPembayaran];
+
+    }
+    
+    CGRect rect = [sender frame];
+    rect.origin.y = [sender frame].origin.y + 30;
+    
+    [self.planPopover setPopoverContentSize:CGSizeMake(350.0f, 200.0f)];
+    [self.planPopover presentPopoverFromRect:rect  inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 
 }
 
--(IBAction)actionFrekuensiPembayaran:(id)sender{
+-(IBAction)actionFrekuensiPembayaran:(id)sender
+
+{
+    
+    if ([FrekuensiPembayaranChecking isEqualToString:@"Premi Tunggal"])
+    {
+        [self resignFirstResponder];
+        [self.view endEditing:YES];
+        
+        Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
+        id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
+        [activeInstance performSelector:@selector(dismissKeyboard)];
+        
+        if (_frekuensi == nil) {
+            _frekuensi = [[Frekeunsi alloc] init];
+            _frekuensi.Frekuensi = @"Premi Tunggal";
+            _frekuensi.delegate = self;
+            self.planPopover = [[UIPopoverController alloc] initWithContentViewController:_frekuensi];
+        }
+        else
+        {
+            _frekuensi = [[Frekeunsi alloc] init];
+            _frekuensi.Frekuensi = @"Premi Tunggal";
+            _frekuensi.delegate = self;
+            self.planPopover = [[UIPopoverController alloc] initWithContentViewController:_frekuensi];
+        }
+        
+        CGRect rect = [sender frame];
+        rect.origin.y = [sender frame].origin.y + 30;
+        
+        [self.planPopover setPopoverContentSize:CGSizeMake(350.0f, 200.0f)];
+        [self.planPopover presentPopoverFromRect:rect  inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        
+        //_frekuensiPembayaranButton.enabled =TRUE;
+    }
+    else if ([FrekuensiPembayaranChecking isEqualToString:@"Premi 5 Tahun"])
+    {
+        
+        [self resignFirstResponder];
+        [self.view endEditing:YES];
+        
+        Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
+        id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
+        [activeInstance performSelector:@selector(dismissKeyboard)];
+        
+        if (_frekuensi == nil) {
+            _frekuensi = [[Frekeunsi alloc] init];
+            _frekuensi.Frekuensi = @"Premi 5 Tahun";
+            _frekuensi.delegate = self;
+            self.planPopover = [[UIPopoverController alloc] initWithContentViewController:_frekuensi];
+        }
+        else
+        {
+            _frekuensi = [[Frekeunsi alloc] init];
+            _frekuensi.Frekuensi = @"Premi 5 Tahun";
+            _frekuensi.delegate = self;
+            self.planPopover = [[UIPopoverController alloc] initWithContentViewController:_frekuensi];
+
+        }
+        
+        CGRect rect = [sender frame];
+        rect.origin.y = [sender frame].origin.y + 30;
+        
+        [self.planPopover setPopoverContentSize:CGSizeMake(350.0f, 200.0f)];
+        [self.planPopover presentPopoverFromRect:rect  inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+       // _frekuensiPembayaranButton.enabled =TRUE;
+    }
     
 }
+
+-(void)PremiDasarAct
+{
+    NSString*RatesPremiumRate;
+    NSString*AnsuransiDasarQuery;
+    double PaymentMode;
+    NSArray *paths2 = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsPath2 = [paths2 objectAtIndex:0];
+    NSString *path2 = [docsPath2 stringByAppendingPathComponent:@"BCA_Rates.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path2];
+    [database open];
+    FMResultSet *results;
+    results = [database executeQuery:AnsuransiDasarQuery];
+    
+    AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM basicPremiumRate Where BasicCode = '%@' AND EntryAge = '%@'",@"Male",@"HRT",@"7"];
+    
+    if (![database open])
+    {
+        NSLog(@"Could not open db.");
+    }
+    
+    while([results next])
+    {
+        RatesPremiumRate  = [results stringForColumn:@"Male"];
+    }
+    
+    if ([FRekeunsiPembayaranMode isEqualToString:@"Pembayaran Sekaligus"]||[FRekeunsiPembayaranMode isEqualToString:@"Tahunan"])
+    {
+        PaymentMode = 1;
+        
+    }
+    if ([FRekeunsiPembayaranMode isEqualToString:@"Bulanan"])
+    {
+       PaymentMode = 0.1;
+        
+        
+    }
+    
+    int RatesInt = [RatesPremiumRate intValue];
+    int total =(BasisSumAssured/1000)*(PaymentMode * RatesInt);
+    [_basicPremiField setText:[NSString stringWithFormat:@"%d", total]];
+
+}
+
+
 
 -(void)setTextfieldBorder{
     UIFont *font= [UIFont fontWithName:@"TreBuchet MS" size:16.0f];
@@ -610,14 +740,16 @@ bool WPTPD30RisDeleted = FALSE;
 
 - (IBAction)doSavePlan:(id)sender
 {
-    [self resignFirstResponder];
-    [self.view endEditing:YES];
-    isFirstSaved = FALSE;
-    Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
-    id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
-    [activeInstance performSelector:@selector(dismissKeyboard)];
-    [self updateBasicPlan];
-    [_delegate saveAll];
+    if ([self validateSave]){
+        isFirstSaved = FALSE;
+        Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
+        id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
+        [activeInstance performSelector:@selector(dismissKeyboard)];
+        [self updateBasicPlan];
+        //[_delegate saveAll];
+        [_delegate saveBasicPlan];
+    }
+
 }
 
 - (IBAction)tempNext:(id)sender
@@ -628,6 +760,48 @@ bool WPTPD30RisDeleted = FALSE;
     id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
     [activeInstance performSelector:@selector(dismissKeyboard)];
     [_delegate brngSubview:@"Rider"];
+}
+
+
+-(void)AnnualIncomeChange:(id) sender
+{
+    BasisSumAssured = [yearlyIncomeField.text intValue];
+    
+    yearlyIncomeField.text = [yearlyIncomeField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    yearlyIncomeField.text = [yearlyIncomeField.text stringByReplacingOccurrencesOfString:@"," withString:@""];
+    yearlyIncomeField.text = [yearlyIncomeField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    
+    NSString *result;
+    
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc]init];
+    [formatter setMaximumFractionDigits:2];
+    [formatter setUsesGroupingSeparator:YES];
+    [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    
+    double entryFieldFloat = [yearlyIncomeField.text doubleValue];
+    
+    if ([yearlyIncomeField.text rangeOfString:@".00"].length == 3) {
+        formatter.alwaysShowsDecimalSeparator = YES;
+        result =[formatter stringFromNumber:[NSNumber numberWithDouble:entryFieldFloat]];
+        result = [result stringByAppendingFormat:@"00"];
+        
+    } else  if ([yearlyIncomeField.text rangeOfString:@"."].length == 1) {
+        formatter.alwaysShowsDecimalSeparator = YES;
+        result =[formatter stringFromNumber:[NSNumber numberWithDouble:entryFieldFloat]];
+        
+    } else if ([yearlyIncomeField.text rangeOfString:@"."].length != 1) {
+        formatter.alwaysShowsDecimalSeparator = NO;
+        result =[formatter stringFromNumber:[NSNumber numberWithDouble:entryFieldFloat]];
+        result = [result stringByAppendingFormat:@".00"];
+        
+    }
+    
+    
+    if(yearlyIncomeField.text.length==0) {
+        yearlyIncomeField.text = @"";
+    } else {
+        yearlyIncomeField.text = result;
+    }
 }
 
 
@@ -1153,8 +1327,6 @@ bool WPTPD30RisDeleted = FALSE;
         sqlite3_close(contactDB);
     }
 }
-
-
 
 -(void)calculateSA //exact copy of RiderViewController.m
 {
@@ -3591,54 +3763,27 @@ bool WPTPD30RisDeleted = FALSE;
 }
 #pragma mark - delegate
 
--(void)Planlisting:(PlanList *)inController didSelectCode:(NSString *)aaCode andDesc:(NSString *)aaDesc
-{ 
-    if ([aaCode isEqualToString:STR_S100] && requestEDD == TRUE) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Age must be at least 30 days." delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:Nil,nil];
-        [self.planPopover dismissPopoverAnimated:YES];
-        [alert show];
-        return;
-    }
-    
-    if ([planChoose isEqualToString:STR_HLAWP]) {
-        yearlyIncomeField.text = @"";
-    }
-    
-    if (![aaCode isEqualToString:planChoose] && prevPlanChoose.length != 0) {
-        SavedMOP = 0;
-        yearlyIncomeHLAIB = nil;
-        cashDividendHLAIB = nil;
-        cashDividendHLACP = nil;
-        advanceYearlyIncomeHLAIB = 0;
-        advanceYearlyIncomeHLACP = 0;
-        
-        [self checkExistRider];
-        
-        if (arrExistRiderCode.count > 0) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Rider(s) has been deleted due to business rule." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
-            [alert setTag:1007];
-            [alert show];
-        }
-    }
-    
-    
-    if (aaCode == NULL) {
-        [btnPlan setTitle:@"" forState:UIControlStateNormal];
-    } else {
-        [self.btnPlan setTitle:aaDesc forState:UIControlStateNormal];
-        planChoose = [[NSString alloc] initWithFormat:@"%@",aaCode];
-    }
-    
-    [self togglePlan];
-    [self loadBasic];
-    
-    if([self isPlanChanged]) {
-        [_delegate clearSecondLA];
-        [_delegate clearPayor];
-        [_delegate setNewPlan:planChoose];
-    }
-        
+-(void)Planlisting:(MasaPembayaran *)inController didSelectCode:(NSString *)aaCode andDesc:(NSString *)aaDesc{
+  
+    [_masaPembayaranButton setTitle:aaDesc forState:UIControlStateNormal];
     [self.planPopover dismissPopoverAnimated:YES];
+    // getPlanCode = aaCode;
+    
+    FrekuensiPembayaranChecking = aaDesc;
+    
+}
+
+-(void)PlanFrekuensi:(MasaPembayaran *)inController didSelectCode:(NSString *)aaCode andDesc:(NSString *)aaDesc;
+{
+    [_frekuensiPembayaranButton setTitle:aaDesc forState:UIControlStateNormal];
+    [self.planPopover dismissPopoverAnimated:YES];
+    // getPlanCode = aaCode;
+    
+    FRekeunsiPembayaranMode = aaDesc;
+    
+    [self PremiDasarAct];
+    
+    
 }
 
 -(void)setDefaultSA

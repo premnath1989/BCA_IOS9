@@ -24,6 +24,7 @@ NSString *SelectedString;
         _itemsKodeCabang = [dict objectForKey:@"KodeCabang"];
         _itemsNamaCabang = [dict objectForKey:@"NamaCabang"];
         _itemsStatusCabang = [dict objectForKey:@"StatusCabang"];
+        _itemsKanwilCabang = [dict objectForKey:@"KanwilCabang"];
         
         self.clearsSelectionOnViewWillAppear = NO;
         
@@ -115,9 +116,9 @@ NSString *SelectedString;
     NSString *theBranchCode = [_itemsKodeCabang objectAtIndex:indexPath.row];
     NSString *theBranchName = [_itemsNamaCabang objectAtIndex:indexPath.row];
     NSString *theBranchStatus = [_itemsStatusCabang objectAtIndex:indexPath.row];
-    
+    NSString *theBranchKanwil = [_itemsKanwilCabang objectAtIndex:indexPath.row];
     SelectedString = theBranchCode;
-    [_delegate selectedBranch:theBranchCode BranchName:theBranchName BranchStatus:theBranchStatus];
+    [_delegate selectedBranch:theBranchCode BranchName:theBranchName BranchStatus:theBranchStatus BranchKanwil:theBranchKanwil];
     [tableView reloadData];
 }
 -(void) setTitle:(NSString *)title

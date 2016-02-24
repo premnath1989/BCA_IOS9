@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <sqlite3.h>
 #import "PlanList.h"
+#import "MasaPembayaran.h"
+#import "Frekeunsi.h"
 #import "BasicPlanHandler.h"
 #import "PayorHandler.h"
 #import "SecondLAHandler.h"
@@ -28,15 +30,18 @@
 -(void)setNewPlan:(NSString*)planChoose;
 -(void)SwitchToRiderTab;
 -(void)brngSubview:(NSString *)view;
+-(void)saveBasicPlan;
 @end
 
-@interface BasicPlanViewController : UIViewController <UITextFieldDelegate,PlanListDelegate>{
+@interface BasicPlanViewController : UIViewController <UITextFieldDelegate,PlanListDelegate,MasaPembayaranDelegate,FrekeunsiDelegate>{
     NSString *databasePath;
     NSString *RatesDatabasePath;
     sqlite3 *contactDB;
     UITextField *activeField;
     UIPopoverController *_planPopover;
     PlanList *_planList;
+    MasaPembayaran*_masaPembayaran;
+    Frekeunsi*_frekuensi;
     BOOL showHL;
     BOOL useExist;
     BOOL newSegment;
@@ -53,7 +58,7 @@
     
     NSString *prevPlanChoose;
     NSString *planHSPII;
-    NSString *OccpCat;
+    NSString *OccpCat,*FrekuensiPembayaranChecking,*FRekeunsiPembayaranMode;
     
     int policyTermSegInt;
     int maxGycc;
@@ -69,12 +74,13 @@
 
 @property (nonatomic, retain) UIPopoverController *planPopover;
 @property (nonatomic, retain) PlanList *planList;
+@property (nonatomic, retain) MasaPembayaran *_masaPembayaran;
+@property (nonatomic, retain) Frekeunsi*_frekuensi;
 @property (nonatomic,strong) id <BasicPlanViewControllerDelegate> delegate;
 @property (nonatomic,strong) BasicPlanHandler *basicBH;
 @property (nonatomic,strong) PayorHandler *basicPH;
 @property (nonatomic,strong) SecondLAHandler *basicLa2ndH;
 @property (strong, nonatomic) NSMutableArray *dataInsert;
-
 @property (nonatomic,strong) id EAPPorSI;
 
 //--request from previous
@@ -100,13 +106,14 @@
 @property (nonatomic, assign) BOOL requestEDD;
 
 @property (nonatomic, assign,readwrite) int ageClient;
+@property (nonatomic, assign,readwrite) double BasisSumAssured;
 @property(nonatomic , retain) NSString *OccpCode;
 @property (nonatomic, assign,readwrite) int OccpClass;
 @property (nonatomic, copy) NSString *SINo;
 @property (nonatomic, assign,readwrite) int idPay;
 @property (nonatomic, assign,readwrite) int idProf;
 @property (nonatomic, assign,readwrite) int PayorIndexNo;
-@property (nonatomic, copy) NSString *PayorSmoker;
+@property (nonatomic, copy) NSString *PayorSmoker,*FrekuensiPembayaranChecking,*FRekeunsiPembayaranMode;;
 @property (nonatomic, copy) NSString *PayorSex;
 @property (nonatomic, copy) NSString *PayorDOB;
 @property (nonatomic, assign,readwrite) int PayorAge;

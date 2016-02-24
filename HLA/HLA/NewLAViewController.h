@@ -30,6 +30,8 @@
 -(void)PayorDeleted;
 -(void)saveAll;
 -(void)deleteSecondLAFromDB;
+-(void)setQuickQuoteValue:(BOOL)value;
+-(void)saveNewLA;
 @end
 
 @interface NewLAViewController : UIViewController<UITextFieldDelegate,UIPopoverControllerDelegate,ListingTbViewControllerDelegate,DateViewControllerDelegate,OccupationListDelegate,PlanListDelegate,RelationshipPopoverViewControllerDelegate>{
@@ -43,8 +45,6 @@
     UIPopoverController *_dobPopover;
     UIPopoverController *_OccupationListPopover;
     SecondLAViewController *_SecondLAController;
-    
-    
     PlanList *_planList;
     ListingTbViewController *_ProspectList;
     DateViewController *_LADate;
@@ -184,6 +184,7 @@
 //declare for store in DB
 @property (nonatomic, copy) NSString *sex;
 @property (nonatomic, copy) NSString *smoker;
+@property (nonatomic, copy) NSString *Hubungan;
 @property (nonatomic, copy) NSString *DOB;
 @property (nonatomic, copy) NSString *commDate;
 @property (nonatomic, copy) NSString *jobDesc;
@@ -220,8 +221,8 @@
 - (IBAction)selectProspect:(id)sender;
 - (IBAction)btnCommDatePressed:(id)sender;
 - (IBAction)enableFields:(id)sender;
-- (IBAction)btnDOBPressed:(id)sender;
-- (IBAction)btnTanggalIllustrasiPressed:(id)sender;
+- (IBAction)btnDOBPressed:(UIButton *)sender;
+- (IBAction)btnTanggalIllustrasiPressed:(UIButton *)sender;
 - (IBAction)btnOccpPressed:(id)sender;
 - (IBAction)ActionEAPP:(id)sender;
 - (IBAction)Hubungan:(id)sender;

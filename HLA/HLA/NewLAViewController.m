@@ -30,7 +30,7 @@
 @synthesize sexSegment;
 @synthesize smokerSegment;
 @synthesize LAAgeField;
-@synthesize LAOccLoadingField;
+@synthesize LAOccLoadingField,Hubungan;
 @synthesize LACPAField;
 @synthesize LAPAField,btnToEAPP;
 @synthesize btnCommDate,btnEnabled,btnProspect,QuickQuoteBool;
@@ -83,6 +83,34 @@ id dobtanngal;
     themeColour = [UIColor colorWithRed:242.0f/255.0f green:113.0f/255.0f blue:134.0f/255.0f alpha:1];
      _planList.delegate = self;
     [self setupUIElementDefaultSetting];
+    
+    
+    NSString*test;
+    NSString*test1;
+    
+    NSArray *paths2 = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsPath2 = [paths2 objectAtIndex:0];
+    NSString *path2 = [docsPath2 stringByAppendingPathComponent:@"BCA_Rates.sqlite"];
+    
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path2];
+    [database open];
+    FMResultSet *results;
+    results = [database executeQuery:@"select BasicCode,Male from BasicPremiumRate"];
+    
+    FMDatabase *database1 = [FMDatabase databaseWithPath:path2];
+    if (![database open]) {
+        NSLog(@"Could not open db.");
+    }
+    
+    while([results next])
+        
+    {
+        test  = [results stringForColumn:@"BasicCode"];
+        test1  = [results stringForColumn:@"Male"];
+    }
+    
+    [_delegate setQuickQuoteValue:[quickQuoteFlag isOn]];
 }
 
 - (void) setupUIElementDefaultSetting{
@@ -125,6 +153,7 @@ id dobtanngal;
 
 - (IBAction)QuickQuoteFunc:(UISwitch *)sender
 {
+    _SecondLAController =[self.storyboard instantiateViewControllerWithIdentifier:@"secondLAView"];
     if([sender isOn])
     {
         [btnDOB setTitle:@"--Please Select--" forState:UIControlStateNormal];
@@ -140,9 +169,10 @@ id dobtanngal;
         btnProspect.enabled = NO;
         NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
         [prefs setObject:@"Yes" forKey:@"keyToLookupString"];
-        _SecondLAController =[self.storyboard instantiateViewControllerWithIdentifier:@"secondLAView"];
-        [_SecondLAController testing:@"Enable"];
+        //[_SecondLAController testing:@"Enable"];
         
+        /*added by faiz*/
+        [_delegate setQuickQuoteValue:YES];
     }
     else
     {
@@ -159,8 +189,10 @@ id dobtanngal;
         btnProspect.enabled = YES;
         NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
         [prefs setObject:@"No" forKey:@"keyToLookupString"];
-        _SecondLAController =[self.storyboard instantiateViewControllerWithIdentifier:@"secondLAView"];
-        [_SecondLAController testing:@"Disable"];
+        //[_SecondLAController testing:@"Disable"];
+        
+        /*added by faiz*/
+        [_delegate setQuickQuoteValue:NO];
     }
 }
 
@@ -198,7 +230,6 @@ id dobtanngal;
     _BtnHubungan.layer.masksToBounds = YES;
     _BtnHubungan.layer.borderWidth = 1.0f;
 
-    
     btnOccp.layer.borderColor = [themeColour CGColor];
     btnOccp.layer.masksToBounds = YES;
     btnOccp.layer.borderWidth = 1.0f;
@@ -209,7 +240,8 @@ id dobtanngal;
     btnCommDate.layer.borderWidth = 1.0f;
 }
 
--(void)processLifeAssured {
+-(void)processLifeAssured
+{
     if ([requesteProposalStatus isEqualToString:@"Failed"] ||
         [requesteProposalStatus isEqualToString:@"Confirmed"] || [requesteProposalStatus isEqualToString:@"Submitted"] ||
         [requesteProposalStatus isEqualToString:@"Received"] || [EAPPorSI isEqualToString:@"eAPP"] || [requesteProposalStatus isEqualToString:@"Created_View"] ||
@@ -714,7 +746,7 @@ id dobtanngal;
     [self.btnCommDate setTitle:commDate forState:UIControlStateNormal];
     
     sex = [self.requestSex description];
-    smoker = [self.requestSmoker description];
+    Relationship = [self.requestSmoker description];
     [self setSexToGlobal];
     sexSegment.selectedSegmentIndex = UISegmentedControlNoSegment;
     smokerSegment.selectedSegmentIndex = UISegmentedControlNoSegment;
@@ -881,7 +913,6 @@ id dobtanngal;
     
     
     
-    
     //generate SINo || CustCode
     NSDate *currDate = [NSDate date];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
@@ -978,7 +1009,10 @@ id dobtanngal;
 
 - (IBAction)doSaveLA:(id)sender
 {
-    [_delegate saveAll];
+    //[_delegate saveAll];
+    if ([self validateSave]){
+        [_delegate saveNewLA];
+    }
 }
 
 
@@ -1072,7 +1106,7 @@ id dobtanngal;
     
 }
 
-- (IBAction)btnTanggalIllustrasiPressed:(id)sender;
+- (IBAction)btnTanggalIllustrasiPressed:(UIButton *)sender;
 {
     date1 = NO;
     date2 = YES;
@@ -1080,7 +1114,7 @@ id dobtanngal;
     UIStoryboard *sharedStoryboard = [UIStoryboard storyboardWithName:@"SharedStoryboard" bundle:Nil];
     self.LADate = [sharedStoryboard instantiateViewControllerWithIdentifier:@"showDate"];
     _LADate.delegate = self;
-    _LADate.msgDate = dobtemp;
+    _LADate.msgDate = sender.titleLabel.text;
     _LADate.btnSender = 1;
     self.dobPopover = [[UIPopoverController alloc] initWithContentViewController:_LADate];
     
@@ -1095,7 +1129,7 @@ id dobtanngal;
 
 }
 
-- (IBAction)btnDOBPressed:(id)sender
+- (IBAction)btnDOBPressed:(UIButton *)sender
 {
     date1 = YES;
     date2 = NO;
@@ -1111,25 +1145,19 @@ id dobtanngal;
 //        dobtemp = btnDOB.titleLabel.text;
 //    }
 //    
-    
-    
     UIStoryboard *sharedStoryboard = [UIStoryboard storyboardWithName:@"SharedStoryboard" bundle:Nil];
     self.LADate = [sharedStoryboard instantiateViewControllerWithIdentifier:@"showDate"];
     _LADate.delegate = self;
-    _LADate.msgDate = dobtemp;
     _LADate.btnSender = 1;
+    _LADate.msgDate = sender.titleLabel.text;
     self.dobPopover = [[UIPopoverController alloc] initWithContentViewController:_LADate];
-    
-    
     [self.dobPopover setPopoverContentSize:CGSizeMake(100.0f, 100.0f)];
     
     CGRect rect = [sender frame];
     rect.origin.y = [sender frame].origin.y + 40;
     
-    
     [self.dobPopover presentPopoverFromRect:[sender frame]  inView:scrollLA permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     appDelegate.isNeedPromptSaveMsg = YES;
-	
 }
 
 - (IBAction)btnCommDatePressed:(id)sender
@@ -2363,7 +2391,7 @@ id dobtanngal;
 -(BOOL)validateSave// validate new la before saving
 {
     //temp
-    return YES;
+    //return YES;
     
     int LAAGEint = [[LAAgeField text] intValue];
     
@@ -2375,7 +2403,8 @@ id dobtanngal;
         [alert show];
       
         
-    } else if ([TanggalIllustrasi.titleLabel.text isEqualToString:@"(null)"] ||[TanggalIllustrasi.titleLabel.text isEqualToString:@"--Please Select--"] || TanggalIllustrasi.titleLabel.text.length == 0) {
+    }
+    else if ([TanggalIllustrasi.titleLabel.text isEqualToString:@"(null)"] ||[TanggalIllustrasi.titleLabel.text isEqualToString:@"--Please Select--"] || TanggalIllustrasi.titleLabel.text.length == 0) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Tanggal Ilustrasi harus diisi "
                                                        delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
         [alert show];
@@ -2737,6 +2766,9 @@ else {
     Relationship = selectedRship;
     
      [_BtnHubungan setTitle:Relationship forState:UIControlStateNormal];
+    
+    
+      Relationship = [self.requestSmoker description];
     
     if (_RshipTypePickerPopover) {
         [_RshipTypePickerPopover dismissPopoverAnimated:YES];
