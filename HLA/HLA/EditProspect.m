@@ -3125,11 +3125,16 @@ NSMutableArray *DelGroupArr;
     _txtOfficeVillage.text=pp.OfficeVillage;
     _txtOfficeDistrict.text=pp.OfficeDistrict;
     _txtOfficeProvince.text=pp.OfficeProvicne;
-    [_outletSourceIncome setTitle:pp.SourceIncome forState:UIControlStateNormal];
+
     if (![pp.ClientSegmentation isEqualToString:@"(null)"]){
         [_outletVIPClass setTitle:pp.ClientSegmentation forState:UIControlStateNormal];
     }
 
+    if (![pp.SourceIncome isEqualToString:@"(null)"]){
+        [_outletSourceIncome setTitle:pp.SourceIncome forState:UIControlStateNormal];
+    }
+
+    
     if ([[pp.ResidenceAddressCountry uppercaseString] isEqualToString:@"INDONESIA"]){
         [_switchCountryHome setOn:NO];
         [btnHomeCountry setHidden:YES];
