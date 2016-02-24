@@ -8782,14 +8782,6 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="J3Q-u0-6Bw">
-                                        <rect key="frame" x="924" y="642" width="60" height="40"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" backgroundImage="Profile.png"/>
-                                        <connections>
-                                            <action selector="ButtonInfoAgent:" destination="k0P-Te-cR8" eventType="touchUpInside" id="swg-vu-I3c"/>
-                                        </connections>
-                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SAW-Nq-0yu">
                                         <rect key="frame" x="738" y="175" width="290" height="1"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -8858,6 +8850,14 @@
                                         </state>
                                         <connections>
                                             <action selector="selectCFF:" destination="k0P-Te-cR8" eventType="touchUpInside" id="h5O-8I-PXC"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="J3Q-u0-6Bw">
+                                        <rect key="frame" x="966" y="630" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" backgroundImage="bless final-02.png"/>
+                                        <connections>
+                                            <action selector="ButtonInfoAgent:" destination="k0P-Te-cR8" eventType="touchUpInside" id="swg-vu-I3c"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -11071,8 +11071,8 @@
     </scenes>
     <resources>
         <image name="Login Page Bless_english_final_2-01.jpg" width="2048" height="1536"/>
-        <image name="Profile.png" width="256" height="256"/>
         <image name="Tablet-App-Redesign-Slices.jpg" width="2048" height="1536"/>
+        <image name="bless final-02.png" width="787" height="785"/>
         <image name="btn_login.png" width="280" height="102"/>
         <image name="btn_reset.png" width="280" height="102"/>
         <image name="button.png" width="200" height="30"/>
