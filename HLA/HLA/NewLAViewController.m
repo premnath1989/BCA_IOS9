@@ -109,7 +109,8 @@ id dobtanngal;
         test  = [results stringForColumn:@"BasicCode"];
         test1  = [results stringForColumn:@"Male"];
     }
-
+    
+    [_delegate setQuickQuoteValue:[quickQuoteFlag isOn]];
 }
 
 - (void) setupUIElementDefaultSetting{
@@ -171,7 +172,7 @@ id dobtanngal;
         //[_SecondLAController testing:@"Enable"];
         
         /*added by faiz*/
-        [_delegate setQuickCountValue:YES];
+        [_delegate setQuickQuoteValue:YES];
     }
     else
     {
@@ -191,7 +192,7 @@ id dobtanngal;
         //[_SecondLAController testing:@"Disable"];
         
         /*added by faiz*/
-        [_delegate setQuickCountValue:NO];
+        [_delegate setQuickQuoteValue:NO];
     }
 }
 
@@ -1008,7 +1009,10 @@ id dobtanngal;
 
 - (IBAction)doSaveLA:(id)sender
 {
-    [_delegate saveAll];
+    //[_delegate saveAll];
+    if ([self validateSave]){
+        [_delegate saveNewLA];
+    }
 }
 
 
@@ -1102,7 +1106,7 @@ id dobtanngal;
     
 }
 
-- (IBAction)btnTanggalIllustrasiPressed:(id)sender;
+- (IBAction)btnTanggalIllustrasiPressed:(UIButton *)sender;
 {
     date1 = NO;
     date2 = YES;
@@ -1110,7 +1114,7 @@ id dobtanngal;
     UIStoryboard *sharedStoryboard = [UIStoryboard storyboardWithName:@"SharedStoryboard" bundle:Nil];
     self.LADate = [sharedStoryboard instantiateViewControllerWithIdentifier:@"showDate"];
     _LADate.delegate = self;
-    _LADate.msgDate = dobtemp;
+    _LADate.msgDate = sender.titleLabel.text;
     _LADate.btnSender = 1;
     self.dobPopover = [[UIPopoverController alloc] initWithContentViewController:_LADate];
     
@@ -1125,7 +1129,7 @@ id dobtanngal;
 
 }
 
-- (IBAction)btnDOBPressed:(id)sender
+- (IBAction)btnDOBPressed:(UIButton *)sender
 {
     date1 = YES;
     date2 = NO;
@@ -1141,25 +1145,19 @@ id dobtanngal;
 //        dobtemp = btnDOB.titleLabel.text;
 //    }
 //    
-    
-    
     UIStoryboard *sharedStoryboard = [UIStoryboard storyboardWithName:@"SharedStoryboard" bundle:Nil];
     self.LADate = [sharedStoryboard instantiateViewControllerWithIdentifier:@"showDate"];
     _LADate.delegate = self;
-    _LADate.msgDate = dobtemp;
     _LADate.btnSender = 1;
+    _LADate.msgDate = sender.titleLabel.text;
     self.dobPopover = [[UIPopoverController alloc] initWithContentViewController:_LADate];
-    
-    
     [self.dobPopover setPopoverContentSize:CGSizeMake(100.0f, 100.0f)];
     
     CGRect rect = [sender frame];
     rect.origin.y = [sender frame].origin.y + 40;
     
-    
     [self.dobPopover presentPopoverFromRect:[sender frame]  inView:scrollLA permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     appDelegate.isNeedPromptSaveMsg = YES;
-	
 }
 
 - (IBAction)btnCommDatePressed:(id)sender
@@ -2393,7 +2391,7 @@ id dobtanngal;
 -(BOOL)validateSave// validate new la before saving
 {
     //temp
-    return YES;
+    //return YES;
     
     int LAAGEint = [[LAAgeField text] intValue];
     

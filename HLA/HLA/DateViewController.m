@@ -18,17 +18,25 @@
 @synthesize delegate = _delegate;
 
 id msg, ComDate;
+
+-(void)viewDidAppear:(BOOL)animated{
+    if ((msgDate != NULL)&&(![msgDate isEqualToString:@"--Please Select--"])) {
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+        //[dateFormatter setDateFormat:@"yyyy-MM-dd"];
+        NSDate *zzz = [dateFormatter dateFromString:msgDate];
+        [_datePickerView setDate:zzz animated:YES ];
+    }
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    if (msgDate != NULL ) {
-        
+    if ((msgDate != NULL)&&(![msgDate isEqualToString:@"--Please Select--"])) {
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"dd/MM/yyyy"];
         NSDate *date = [dateFormatter dateFromString:msgDate];
         [_datePickerView setDate:date animated:YES ];
-        
     }
 }
 
@@ -40,7 +48,6 @@ id msg, ComDate;
 #pragma mark - action
 - (IBAction)dateChange:(id)sender
 {
-    
     if (_delegate != Nil) {
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"dd/MM/yyyy"];

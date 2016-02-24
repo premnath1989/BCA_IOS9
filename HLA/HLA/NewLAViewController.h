@@ -30,7 +30,8 @@
 -(void)PayorDeleted;
 -(void)saveAll;
 -(void)deleteSecondLAFromDB;
--(void)setQuickCountValue:(BOOL)value;
+-(void)setQuickQuoteValue:(BOOL)value;
+-(void)saveNewLA;
 @end
 
 @interface NewLAViewController : UIViewController<UITextFieldDelegate,UIPopoverControllerDelegate,ListingTbViewControllerDelegate,DateViewControllerDelegate,OccupationListDelegate,PlanListDelegate,RelationshipPopoverViewControllerDelegate>{
@@ -220,8 +221,8 @@
 - (IBAction)selectProspect:(id)sender;
 - (IBAction)btnCommDatePressed:(id)sender;
 - (IBAction)enableFields:(id)sender;
-- (IBAction)btnDOBPressed:(id)sender;
-- (IBAction)btnTanggalIllustrasiPressed:(id)sender;
+- (IBAction)btnDOBPressed:(UIButton *)sender;
+- (IBAction)btnTanggalIllustrasiPressed:(UIButton *)sender;
 - (IBAction)btnOccpPressed:(id)sender;
 - (IBAction)ActionEAPP:(id)sender;
 - (IBAction)Hubungan:(id)sender;

@@ -689,12 +689,15 @@ bool WPTPD30RisDeleted = FALSE;
 {
     [self resignFirstResponder];
     [self.view endEditing:YES];
-    isFirstSaved = FALSE;
-    Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
-    id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
-    [activeInstance performSelector:@selector(dismissKeyboard)];
-    [self updateBasicPlan];
-    [_delegate saveAll];
+    if ([self validateSave]){
+        isFirstSaved = FALSE;
+        Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
+        id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
+        [activeInstance performSelector:@selector(dismissKeyboard)];
+        [self updateBasicPlan];
+        //[_delegate saveAll];
+        [_delegate saveBasicPlan];
+    }
 }
 
 - (IBAction)tempNext:(id)sender

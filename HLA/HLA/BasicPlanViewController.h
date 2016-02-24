@@ -30,6 +30,7 @@
 -(void)setNewPlan:(NSString*)planChoose;
 -(void)SwitchToRiderTab;
 -(void)brngSubview:(NSString *)view;
+-(void)saveBasicPlan;
 @end
 
 @interface BasicPlanViewController : UIViewController <UITextFieldDelegate,PlanListDelegate,MasaPembayaranDelegate,FrekeunsiDelegate>{

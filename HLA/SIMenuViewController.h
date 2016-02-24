@@ -108,7 +108,7 @@
     BOOL getEDD;
     
     //added by faiz
-    BOOL quickCountEnabled;
+    BOOL quickQuoteEnabled;
     //end of added by faiz
 }
 

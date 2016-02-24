@@ -25,6 +25,7 @@
 -(void) RiderAdded;
 -(void)saveAll;
 -(void)setIsSecondLaNeeded:(BOOL)temp;
+-(void)saveSecondLA;
 @end
 
 @interface SecondLAViewController : UIViewController <ListingTbViewControllerDelegate,UIPopoverControllerDelegate, DateViewControllerDelegate, OccupationListDelegate, UITextFieldDelegate> {
@@ -130,7 +131,7 @@
 - (IBAction)smokerSegmentChange:(id)sender;
 - (IBAction)doSave:(id)sender;
 - (IBAction)doDelete:(id)sender;
-- (IBAction)btnDOBPressed:(id)sender;
+- (IBAction)btnDOBPressed:(UIButton *)sender;
 - (IBAction)btnOccpPressed:(id)sender;
 - (IBAction)enableFields:(id)sender;
 -(BOOL)validateSave;
@@ -145,6 +146,6 @@
 @property(nonatomic , retain) NSString *LAView;
 
 //added by faiz
-@property (nonatomic, assign,readwrite) BOOL quickCountEnabled;
+@property (nonatomic, assign,readwrite) BOOL quickQuoteEnabled;
 //end of added by faiz
 @end

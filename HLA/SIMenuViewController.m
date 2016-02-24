@@ -298,12 +298,12 @@ BOOL isFirstLoad;
             self.SecondLAController.requestCommDate = getCommDate;
             self.SecondLAController.requestSINo = getSINo;
 			self.SecondLAController.requesteProposalStatus = eProposalStatus;
-            [self.SecondLAController setQuickCountEnabled:quickCountEnabled];
+            [self.SecondLAController setQuickQuoteEnabled:quickQuoteEnabled];
             [self.RightView addSubview:self.SecondLAController.view];
         } else {
             self.SecondLAController.requestSINo = getSINo;
-            [self.SecondLAController setQuickCountEnabled:quickCountEnabled];
-            [self.SecondLAController setElementActive:quickCountEnabled];
+            [self.SecondLAController setQuickQuoteEnabled:quickQuoteEnabled];
+            [self.SecondLAController setElementActive:quickQuoteEnabled];
             [self.RightView bringSubviewToFront:self.SecondLAController.view];            
         }
         previousPath = selectedPath;
@@ -2538,8 +2538,25 @@ BOOL isFirstLoad;
 }
 
 #pragma mark - delegate added by faiz
--(void)setQuickCountValue:(BOOL)value{
-    quickCountEnabled=value;
+-(void)saveNewLA{
+    [self loadSecondLAPage];
+    [self.myTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:SIMENU_SECOND_LIFE_ASSURED inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
+}
+
+-(void)saveSecondLA{
+    [self loadBasicPlanPage:YES];
+    [self.myTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:SIMENU_BASIC_PLAN inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
+}
+
+-(void)saveBasicPlan{
+    self.RiderController = [self.storyboard instantiateViewControllerWithIdentifier:@"RiderView"];
+    _RiderController.delegate = self;
+    [self.RightView addSubview:self.RiderController.view];
+    //[self.myTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:SIMENU_RIDER inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
+}
+
+-(void)setQuickQuoteValue:(BOOL)value{
+    quickQuoteEnabled=value;
 }
 
 #pragma mark - table delegate
@@ -4658,7 +4675,7 @@ BOOL isFirstLoad;
     NSString* msg = @"Simpan perubahan?";
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:msg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"CANCEL",nil];
     [alert setTag:3001];
-    [alert show];    
+    [alert show];
 }
 
 #pragma mark - delegate FSVerticalTabBarController
