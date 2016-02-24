@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="CPf-MS-UId">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="CPf-MS-UId">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
@@ -78,8 +78,8 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BxD-gG-EEs">
-                                        <rect key="frame" x="924" y="642" width="60" height="40"/>
-                                        <state key="normal" backgroundImage="Profile.png"/>
+                                        <rect key="frame" x="966" y="630" width="50" height="50"/>
+                                        <state key="normal" backgroundImage="bless final-02.png"/>
                                         <connections>
                                             <action selector="ButtonInfoAgent:" destination="CPf-MS-UId" eventType="touchUpInside" id="gr3-og-dVI"/>
                                         </connections>
@@ -228,8 +228,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Profile.png" width="256" height="256"/>
         <image name="Tablet-App-Redesign-Slices.jpg" width="2048" height="1536"/>
+        <image name="bless final-02.png" width="787" height="785"/>
         <image name="menu_customerfactfind.png" width="578" height="103"/>
         <image name="menu_datanasabah.png" width="578" height="103"/>
         <image name="menu_ilustrasi.png" width="578" height="103"/>
