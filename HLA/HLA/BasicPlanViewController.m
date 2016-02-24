@@ -23,7 +23,7 @@
 @implementation BasicPlanViewController
 @synthesize btnPlan;
 @synthesize termField;
-@synthesize FrekuensiPembayaranChecking;
+@synthesize FrekuensiPembayaranChecking,FRekeunsiPembayaranMode;;
 @synthesize yearlyIncomeField;
 @synthesize minSALabel;
 @synthesize maxSALabel;
@@ -42,7 +42,7 @@
 @synthesize MOP,yearlyIncome,advanceYearlyIncome,basicRate,cashDividend;
 @synthesize getSINo,getSumAssured,getPolicyTerm,getHL,getHLTerm,getTempHL,getTempHLTerm;
 @synthesize planCode,requestOccpCode,dataInsert,basicBH,basicPH,basicLa2ndH;
-@synthesize SINo,LACustCode,PYCustCode,SIDate,SILastNo,CustDate,CustLastNo;
+@synthesize SINo,LACustCode,PYCustCode,SIDate,SILastNo,CustDate,CustLastNo,BasisSumAssured;
 @synthesize NamePP,DOBPP,OccpCodePP,GenderPP,secondLACustCode,IndexNo,PayorIndexNo,secondLAIndexNo;
 @synthesize delegate = _delegate;
 @synthesize requestAge,OccpCode,requestIDPay,requestIDProf,idPay,idProf,annualMedRiderSum,halfMedRiderSum,quarterMedRiderSum;
@@ -74,6 +74,8 @@ bool WPTPD30RisDeleted = FALSE;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    
     
     appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate ];
 	
@@ -320,7 +322,8 @@ bool WPTPD30RisDeleted = FALSE;
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-    switch (textField.tag) {
+    switch (textField.tag)
+    {
         case 0:
             minSALabel.text = @"";
             maxSALabel.text = @"";
@@ -346,17 +349,21 @@ bool WPTPD30RisDeleted = FALSE;
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
+    NSUInteger newLength = [textField.text length] + [string length] - range.length;
     
     if (textField == yearlyIncomeField)
     {
-        NSUInteger newLength = [textField.text length] + [string length] - range.length;
         NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
         return (([string isEqualToString:filtered]) && newLength <= 15);
     }
     
-    return YES;
-   
+    if (textField == _extraPremiPercentField)
+    {
+        NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
+        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        return (([string isEqualToString:filtered]) && newLength <= 15);
+    }
 
     return YES;
 }
@@ -467,6 +474,52 @@ bool WPTPD30RisDeleted = FALSE;
     }
     
 }
+
+-(void)PremiDasarAct
+{
+    NSString*RatesPremiumRate;
+    NSString*AnsuransiDasarQuery;
+    double PaymentMode;
+    NSArray *paths2 = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsPath2 = [paths2 objectAtIndex:0];
+    NSString *path2 = [docsPath2 stringByAppendingPathComponent:@"BCA_Rates.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path2];
+    [database open];
+    FMResultSet *results;
+    results = [database executeQuery:AnsuransiDasarQuery];
+    
+    AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM basicPremiumRate Where BasicCode = '%@' AND EntryAge = '%@'",@"Male",@"HRT",@"7"];
+    
+    if (![database open])
+    {
+        NSLog(@"Could not open db.");
+    }
+    
+    while([results next])
+    {
+        RatesPremiumRate  = [results stringForColumn:@"Male"];
+    }
+    
+    if ([FRekeunsiPembayaranMode isEqualToString:@"Pembayaran Sekaligus"]||[FRekeunsiPembayaranMode isEqualToString:@"Tahunan"])
+    {
+        PaymentMode = 1;
+        
+    }
+    if ([FRekeunsiPembayaranMode isEqualToString:@"Bulanan"])
+    {
+       PaymentMode = 0.1;
+        
+        
+    }
+    
+    int RatesInt = [RatesPremiumRate intValue];
+    int total =(BasisSumAssured/1000)*(PaymentMode * RatesInt);
+    [_basicPremiField setText:[NSString stringWithFormat:@"%d", total]];
+
+}
+
+
 
 -(void)setTextfieldBorder{
     UIFont *font= [UIFont fontWithName:@"TreBuchet MS" size:16.0f];
@@ -687,8 +740,6 @@ bool WPTPD30RisDeleted = FALSE;
 
 - (IBAction)doSavePlan:(id)sender
 {
-    [self resignFirstResponder];
-    [self.view endEditing:YES];
     if ([self validateSave]){
         isFirstSaved = FALSE;
         Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
@@ -698,6 +749,7 @@ bool WPTPD30RisDeleted = FALSE;
         //[_delegate saveAll];
         [_delegate saveBasicPlan];
     }
+
 }
 
 - (IBAction)tempNext:(id)sender
@@ -713,6 +765,7 @@ bool WPTPD30RisDeleted = FALSE;
 
 -(void)AnnualIncomeChange:(id) sender
 {
+    BasisSumAssured = [yearlyIncomeField.text intValue];
     
     yearlyIncomeField.text = [yearlyIncomeField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     yearlyIncomeField.text = [yearlyIncomeField.text stringByReplacingOccurrencesOfString:@"," withString:@""];
@@ -3725,6 +3778,10 @@ bool WPTPD30RisDeleted = FALSE;
     [_frekuensiPembayaranButton setTitle:aaDesc forState:UIControlStateNormal];
     [self.planPopover dismissPopoverAnimated:YES];
     // getPlanCode = aaCode;
+    
+    FRekeunsiPembayaranMode = aaDesc;
+    
+    [self PremiDasarAct];
     
     
 }
