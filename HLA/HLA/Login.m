@@ -34,6 +34,7 @@
 #import "DDXMLElementAdditions.h"
 #import "DDXMLNode.h"
 #import "SynchdaysCounter.h"
+#import "WebResponObj.h"
 
 @interface Login ()
 
@@ -75,6 +76,9 @@ NSString *ProceedStatus = @"";
         firstLogin = true;
     }
     
+//    WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
+//    [webservice fullSync:self];
+    
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(forgotPassword:)];
     [lblForgotPwd setUserInteractionEnabled:YES];
     [lblForgotPwd addGestureRecognizer:tapGesture];
@@ -106,13 +110,6 @@ NSString *ProceedStatus = @"";
     labelVers = labelVersion.text;
     labelUpdated.text = @"Last Updated: 02 OCT 2014 11:00AM";
     outletLogin.hidden = FALSE;
-    
-    version = Nil;
-    endDate =  Nil;
-    formatter = Nil;
-    StartDate = Nil;
-    gregorianCalendar = Nil;
-    components = Nil;
 }
 
 - (void) initLoadingSpinner{
@@ -276,10 +273,11 @@ static NSString *labelVers;
             
                 // Get root element - DataSetMenu for your XMLfile
                 DDXMLElement *root = [xml rootElement];
-                NSMutableDictionary *returnDict = [[NSMutableDictionary alloc]init];
-                [self parseXML:root dictBuff:returnDict];
-                int result = [loginDB insertAgentProfile:returnDict];
+                WebResponObj *returnObj = [[WebResponObj alloc]init];
+                [self parseXML:root objBuff:returnObj index:0];
+                int result = [loginDB fullSyncTable:returnObj];
                 if(result == TABLE_INSERTION_SUCCESS){
+                    [loginDB updateLoginDate:indexNo];
                     [UserProfileView gotoCarousel];
                 }
             }else if([rateResponse.strStatus caseInsensitiveCompare:@"False"] == NSOrderedSame){
@@ -293,9 +291,46 @@ static NSString *labelVers;
          ****/
         else if([bodyPart isKindOfClass:[AgentWS_ValidateLoginResponse class]]) {
             AgentWS_ValidateLoginResponse* rateResponse = bodyPart;
-            if([rateResponse.ValidateLoginResult caseInsensitiveCompare:@"True"] == NSOrderedSame){
+            if([rateResponse.strStatus caseInsensitiveCompare:@"True"] == NSOrderedSame){
+                
+                // create XMLDocument object
+                DDXMLDocument *xml = [[DDXMLDocument alloc] initWithXMLString:
+                                      rateResponse.ValidateLoginResult.xmlDetails options:0 error:nil];
+                
+                // Get root element - DataSetMenu for your XMLfile
+                DDXMLElement *root = [xml rootElement];
+                WebResponObj *returnObj = [[WebResponObj alloc]init];
+                [self parseXML:root objBuff:returnObj index:0];
+                int result = [loginDB fullSyncTable:returnObj];
+                if(result == TABLE_INSERTION_SUCCESS){
+                    [self loginSuccess];
+                }
+            }else if([rateResponse.strStatus caseInsensitiveCompare:@"False"] == NSOrderedSame){
+                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Proses Login anda gagal" message:@"" delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
+                [alert show];
+            }
+        }
+        
+        /****
+         * is it AgentWS_FullSyncTableResponse
+         ****/
+        else if([bodyPart isKindOfClass:[AgentWS_FullSyncTableResponse class]]) {
+            AgentWS_FullSyncTableResponse* rateResponse = bodyPart;
+            if([rateResponse.strStatus caseInsensitiveCompare:@"True"] == NSOrderedSame){
+                
+                // create XMLDocument object
+                DDXMLDocument *xml = [[DDXMLDocument alloc] initWithXMLString:
+                                      rateResponse.FullSyncTableResult.xmlDetails options:0 error:nil];
+                
+                // Get root element - DataSetMenu for your XMLfile
+                DDXMLElement *root = [xml rootElement];
+                WebResponObj *returnObj = [[WebResponObj alloc]init];
+                [self parseXML:root objBuff:returnObj index:0];
+                
+                //we insert/update the table
+                [loginDB fullSyncTable:returnObj];
                 [self loginSuccess];
-            }else if([rateResponse.ValidateLoginResult caseInsensitiveCompare:@"False"] == NSOrderedSame){
+            }else if([rateResponse.strStatus caseInsensitiveCompare:@"False"] == NSOrderedSame){
                 UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Proses Login anda gagal" message:@"" delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
                 [alert show];
             }
@@ -303,25 +338,38 @@ static NSString *labelVers;
     }
 }
 
-- (void) parseXML:(DDXMLElement *)root dictBuff:(NSMutableDictionary *)dict{
+- (void) parseXML:(DDXMLElement *)root objBuff:(WebResponObj *)obj index:(int)index{
     // go through all elements in root element (DataSetMenu element)
     for (DDXMLElement *DataSetMenuElement in [root children]) {
         // if the element name's is MenuCategories then do something
         if([[DataSetMenuElement children] count] <= 0){
             if([[DataSetMenuElement name] caseInsensitiveCompare:@"xs:element"]==NSOrderedSame){
-                DDXMLNode *name = [DataSetMenuElement attributeForName: @"name"];
-                DDXMLNode *type = [DataSetMenuElement attributeForName: @"type"];
-                NSLog(@"%@ : %@", [name stringValue], [type stringValue]);
-                [dict setValue:NULL forKey:[name stringValue]];
-            }
-            else{
+//                DDXMLNode *name = [DataSetMenuElement attributeForName: @"name"];
+//                DDXMLNode *type = [DataSetMenuElement attributeForName: @"type"];
+//                NSLog(@"%@ : %@", [name stringValue], [type stringValue]);
+//                
+//                DDXMLNode *tableName = [[[DataSetMenuElement parent] parent] parent];
+//                [obj addRow:[tableName ] columnNames:[name stringValue] data:@""];
+            }else{
                 NSArray *elements = [root elementsForName:[DataSetMenuElement name]];
-                NSLog(@"%@ = %@", [[DataSetMenuElement parent]name], [[elements objectAtIndex:0]stringValue]);
-                [dict setValue:[[elements objectAtIndex:0]stringValue]
-                        forKey:[[DataSetMenuElement parent]name]];
+                if([[[elements objectAtIndex:0]stringValue] caseInsensitiveCompare:@""] != NSOrderedSame){
+                    NSLog(@"%d %@ = %@", index,[[DataSetMenuElement parent]name], [[elements objectAtIndex:0]stringValue]);
+                    NSString *tableName = [NSString stringWithFormat:@"%@&%d",[[[DataSetMenuElement parent] parent]name], index];
+                    [obj addRow:tableName columnNames:[[DataSetMenuElement parent]name] data:[[elements objectAtIndex:0]stringValue]];
+                }else{
+                    NSLog(@"%d %@ = %@",index, [DataSetMenuElement name], [[elements objectAtIndex:0]stringValue]);
+                    NSString *tableName = [NSString stringWithFormat:@"%@&%d",[[DataSetMenuElement parent]name], index];
+                    [obj addRow:tableName columnNames:[DataSetMenuElement name] data:[[elements objectAtIndex:0]stringValue]];
+                }
+            }
+        }else{
+            DDXMLNode *name = [DataSetMenuElement attributeForName: @"diffgr:id"];
+            if(name != nil){
+                NSLog(@"diffgr : %@",[[DataSetMenuElement attributeForName:@"diffgr:id"] stringValue]);
+                index++;
             }
         }
-        [self parseXML:DataSetMenuElement dictBuff:dict];
+        [self parseXML:DataSetMenuElement objBuff:obj index:index];
     }
 }
 
@@ -385,6 +433,7 @@ static NSString *labelVers;
 }
 
 - (void)FirstTimeAlert:(NSString *)title{
+    
     UIAlertView* alert = [[UIAlertView alloc]initWithTitle:title message:[NSString stringWithFormat:@"Pastikan perangkat terhubung ke internet untuk melakukan login perdana"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     [alert show];
 }

@@ -7,6 +7,7 @@
 //
 #import <UIKit/UIKit.h>
 #import <sqlite3.h>
+#import "WebResponObj.h"
 
 @interface LoginDBManagement : NSObject{
     NSString *databasePath;
@@ -18,7 +19,7 @@
 
 - (int) SearchAgent:(NSString *)AgentID;
 //- (int) InsertAgentProfile:(NSString *) urlStr;
-- (int)insertAgentProfile:(NSMutableDictionary *)dict;
+- (int)insertAgentProfile:(WebResponObj *)obj;
 - (void) updateLoginDate:(int)indexNo;
 - (int) FirstLogin:(NSString *)AgentID;
 - (int) AgentRecord;
@@ -27,6 +28,7 @@
 - (NSString *)checkingLastLogout;
 - (NSMutableDictionary *)getAgentDetails;
 - (int) DeviceStatus:(NSString *)AgentID;
--(BOOL) SpvAdmValidation:(NSString *)username password:(NSString *)password;
+- (BOOL) SpvAdmValidation:(NSString *)username password:(NSString *)password;
+- (int)fullSyncTable:(WebResponObj *)obj;
 
 @end

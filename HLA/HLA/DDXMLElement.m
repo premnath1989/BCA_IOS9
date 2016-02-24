@@ -386,7 +386,7 @@
 					return [DDXMLAttributeNode nodeWithAttrPrimitive:attr owner:self];
 				}
 			}
-			
+            NSLog(@"attributeName %s",attr->name);
 			attr = attr->next;
 			
 		} while (attr);

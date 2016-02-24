@@ -306,43 +306,84 @@
     statement = Nil;
 }
 
--(int)insertAgentProfile:(NSMutableDictionary *)dict
-{
+-(int)fullSyncTable:(WebResponObj *)obj{
     int insertProc = TABLE_INSERTION_FAILED;
-    NSString *sql = @"insert into Agent_profile (";
     
-    for(NSString *keys in dict){
-        NSString *key = [NSString stringWithFormat:@"%@,",keys];
-        sql = [sql stringByAppendingString:key];
-    }
-    sql = [sql substringToIndex:[sql length]-1];
-    sql = [sql stringByAppendingString:@") VALUES ("];
+    for(dataCollection *data in [obj getDataWrapper]){
+        NSString *tableName = [[data.tableName componentsSeparatedByString:@"&"] objectAtIndex: 0];
+        NSString *sql =  [NSString stringWithFormat:@"insert or replace into %@ (",tableName ];
+        for(NSString *keys in data.dataRows){
+            NSString *key = [NSString stringWithFormat:@"%@,",keys];
+            sql = [sql stringByAppendingString:key];
+        }
+        sql = [sql substringToIndex:[sql length]-1];
+        sql = [sql stringByAppendingString:@") VALUES ("];
     
-    for(NSString *keys in dict){
-        NSString *value = @"";
-        if([dict valueForKey:keys] != NULL)
-        value = [NSString stringWithFormat:@"'%@',",[dict valueForKey:keys]];
-        else
-        value = [NSString stringWithFormat:@"'',"];
-        
-        sql = [sql stringByAppendingString:value];
-    }
-    sql = [sql substringToIndex:[sql length]-1];
-    sql = [sql stringByAppendingString:@")"];
+        for(NSString *keys in data.dataRows){
+            NSString *value = @"";
+            if([data.dataRows valueForKey:keys] != NULL)
+            value = [NSString stringWithFormat:@"'%@',",[data.dataRows valueForKey:keys]];
+            else
+            value = [NSString stringWithFormat:@"'',"];
     
-    NSLog(@"%@",sql);
+            sql = [sql stringByAppendingString:value];
+        }
+        sql = [sql substringToIndex:[sql length]-1];
+        sql = [sql stringByAppendingString:@")"];
     
-    char *error;
-    if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
-    {
-        sqlite3_exec(contactDB, [sql UTF8String], NULL, NULL, &error);
-            if (error == NULL || (error[0] == '\0')) {
-                insertProc = TABLE_INSERTION_SUCCESS;
-            }
-        
-        sqlite3_close(contactDB);
+        NSLog(@"%@",sql);
+    
+        char *error;
+        if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
+        {
+            sqlite3_exec(contactDB, [sql UTF8String], NULL, NULL, &error);
+                if (error == NULL || (error[0] == '\0')) {
+                    insertProc = TABLE_INSERTION_SUCCESS;
+                }
+            
+            sqlite3_close(contactDB);
+        }
     }
     return insertProc;
+}
+
+-(int)insertAgentProfile:(WebResponObj *)obj
+{
+//    int insertProc = TABLE_INSERTION_FAILED;
+//    NSString *sql = @"insert into Agent_profile (";
+//    
+//    for(NSString *keys in obj){
+//        NSString *key = [NSString stringWithFormat:@"%@,",keys];
+//        sql = [sql stringByAppendingString:key];
+//    }
+//    sql = [sql substringToIndex:[sql length]-1];
+//    sql = [sql stringByAppendingString:@") VALUES ("];
+//    
+//    for(NSString *keys in obj.DataRows){
+//        NSString *value = @"";
+//        if([obj.DataRows valueForKey:keys] != NULL)
+//        value = [NSString stringWithFormat:@"'%@',",[obj.DataRows valueForKey:keys]];
+//        else
+//        value = [NSString stringWithFormat:@"'',"];
+//        
+//        sql = [sql stringByAppendingString:value];
+//    }
+//    sql = [sql substringToIndex:[sql length]-1];
+//    sql = [sql stringByAppendingString:@")"];
+//    
+//    NSLog(@"%@",sql);
+//    
+//    char *error;
+//    if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
+//    {
+//        sqlite3_exec(contactDB, [sql UTF8String], NULL, NULL, &error);
+//            if (error == NULL || (error[0] == '\0')) {
+//                insertProc = TABLE_INSERTION_SUCCESS;
+//            }
+//        
+//        sqlite3_close(contactDB);
+//    }
+//    return insertProc;
 }
 
 -(NSString *)checkingLastLogout
@@ -356,9 +397,11 @@
         
         if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK){
             if (sqlite3_step(statement) == SQLITE_ROW) {
-                nsdate = [[NSString alloc]
+                if((const char *) sqlite3_column_text(statement, 0) != NULL){
+                    nsdate = [[NSString alloc]
                           initWithUTF8String:
                           (const char *) sqlite3_column_text(statement, 0)];
+                }
             }
             sqlite3_finalize(statement);
         }

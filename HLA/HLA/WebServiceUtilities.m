@@ -23,6 +23,17 @@
     return 1;
 }
 
+
+-(int)fullSync:(id)delegate{
+    AgentWSSoapBinding *binding = [AgentWS AgentWSSoapBinding];
+    binding.logXMLInOut = YES;
+    
+    AgentWS_FullSyncTable *agentCodea = [[AgentWS_FullSyncTable alloc]init];
+    agentCodea.strStatus = @"";
+    [binding FullSyncTableAsyncUsingParameters:agentCodea delegate:delegate];
+    return 1;
+}
+
 - (int)chgPassword:(id)delegate AgentCode:(NSString *)AgentCode password:(NSString *)password newPassword:(NSString *)newpassword UUID:(NSString *)deviceID {
     AgentWSSoapBinding *binding = [AgentWS AgentWSSoapBinding];
     binding.logXMLInOut = YES;
