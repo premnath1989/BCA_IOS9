@@ -34,7 +34,10 @@
 #define TRAD_DETAILS_BASICPLAN @"3"
 #define TRAD_RIDER_DETAILS @"4"
 
-@interface SIMenuViewController ()
+@interface SIMenuViewController (){
+    PremiumViewController *_PremiumController;
+    NSMutableArray* arrayIntValidate;
+}
 
 @end
 
@@ -79,6 +82,8 @@ BOOL isFirstLoad;
     //--for table view
     //self.myTableView.backgroundColor = [UIColor darkGrayColor];
     
+    arrayIntValidate = [[NSMutableArray alloc] initWithObjects:@"0",@"0",@"0",@"0", nil];
+
     _NumberListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"1", @"2", @"3", @"4",@"0",@"0", nil];
     ListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"Pemegang Polis", @"Tertanggung", @"Asuransi Dasar\nAsuransi Tambahan\nPremi", @"Ilustrasi ",@"Produk Brosur",@"Simpan sebagai Baru", nil];
     //ListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"1   Pemegang Polis", @"2   Tertanggung", @"3  Ansurasi Dasar \n Asuransi Tambahan \n Premi", @"4   Ilustrasi ",@"Produk Brosur",@"Simpan sebagai Baru", nil];
@@ -2425,7 +2430,7 @@ BOOL isFirstLoad;
 
 - (NSInteger)tableView:(UITableView *)myTableView numberOfRowsInSection:(NSInteger)section
 {
-    return ListOfSubMenu.count;
+    return ListOfSubMenu.count-2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -2520,8 +2525,31 @@ BOOL isFirstLoad;
         cell = [nib objectAtIndex:0];
     }
     UIView *bgColorView = [[UIView alloc] init];
+    if (indexPath.row<[arrayIntValidate count]){
+        if ([[arrayIntValidate objectAtIndex:indexPath.row] isEqualToString:@"1"]){
+            [cell setBackgroundColor:[UIColor colorWithRed:131.0/255.0 green:184.0/255.0 blue:105.0/255.0 alpha:1.0]];
+        }
+        else{
+            [cell setBackgroundColor:[UIColor colorWithRed:204.0/255.0 green:203.0/255.0 blue:205.0/255.0 alpha:1.0]];
+        }
+    }
+    else{
+            [cell setBackgroundColor:[UIColor colorWithRed:204.0/255.0 green:203.0/255.0 blue:205.0/255.0 alpha:1.0]];
+    }
+    
     bgColorView.backgroundColor = [UIColor orangeColor];
+    
     [cell setSelectedBackgroundView:bgColorView];
+    
+    [cell.button1 addTarget:self action:@selector(showviewControllerFromCellView:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.button2 addTarget:self action:@selector(showviewControllerFromCellView:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.button3 addTarget:self action:@selector(showviewControllerFromCellView:) forControlEvents:UIControlEventTouchUpInside];
+    
+    if (indexPath.row != 2){
+        [cell.button1 setEnabled:false];
+        [cell.button2 setEnabled:false];
+        [cell.button3 setEnabled:false];
+    }
     
     if ([[_NumberListOfSubMenu objectAtIndex:indexPath.row] isEqualToString:@"0"]){
         [cell.labelNumber setText:@""];
@@ -2537,18 +2565,78 @@ BOOL isFirstLoad;
     return cell;
 }
 
+#pragma mark - void added by faiz
+-(void)checkValidateView{
+    if ([_LAController validateSave]){
+        [arrayIntValidate replaceObjectAtIndex:0 withObject:@"1"];
+    }
+    else{
+        [arrayIntValidate replaceObjectAtIndex:0 withObject:@"0"];
+    }
+    
+    if ([_SecondLAController validateSave]){
+        [arrayIntValidate replaceObjectAtIndex:1 withObject:@"1"];
+    }
+    else{
+        [arrayIntValidate replaceObjectAtIndex:1 withObject:@"0"];
+    }
+    
+   /* if ([_BasicController validateSave]){
+        [arrayIntValidate replaceObjectAtIndex:2 withObject:@"1"];
+    }
+    else{
+        [arrayIntValidate replaceObjectAtIndex:2 withObject:@"0"];
+    }*/
+    [myTableView reloadData];
+}
+
+-(void)showviewControllerFromCellView:(UIButton *)sender{
+    switch (sender.tag) {
+        case 0:
+            if (!_BasicController) {
+                self.BasicController = [self.storyboard instantiateViewControllerWithIdentifier:@"BasicPlanView"];
+                _BasicController.delegate = self;
+                [self.RightView addSubview:self.BasicController.view];
+            }
+            [self.RightView bringSubviewToFront:self.BasicController.view];
+            break;
+        case 1:
+            if (!_RiderController){
+                self.RiderController = [self.storyboard instantiateViewControllerWithIdentifier:@"RiderView"];
+                _RiderController.delegate = self;
+                [self.RightView addSubview:self.RiderController.view];
+            }
+            [self.RightView bringSubviewToFront:self.RiderController.view];
+            break;
+        case 2:
+            if (!_PremiumController) {
+                _PremiumController = [self.storyboard instantiateViewControllerWithIdentifier:@"premiumView"];
+                //_PremiumController.delegate = self;
+                [self.RightView addSubview:_PremiumController.view];
+            }
+            [self.RightView bringSubviewToFront:_PremiumController.view];
+            break;
+        default:
+            break;
+    }
+}
+
 #pragma mark - delegate added by faiz
 -(void)saveNewLA{
+    [arrayIntValidate replaceObjectAtIndex:0 withObject:@"1"];
     [self loadSecondLAPage];
+    [self.myTableView reloadData];
     [self.myTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:SIMENU_SECOND_LIFE_ASSURED inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
 }
 
 -(void)saveSecondLA{
+    [arrayIntValidate replaceObjectAtIndex:1 withObject:@"1"];
     [self loadBasicPlanPage:YES];
     [self.myTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:SIMENU_BASIC_PLAN inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
 }
 
 -(void)saveBasicPlan{
+    [arrayIntValidate replaceObjectAtIndex:2 withObject:@"1"];
     self.RiderController = [self.storyboard instantiateViewControllerWithIdentifier:@"RiderView"];
     _RiderController.delegate = self;
     [self.RightView addSubview:self.RiderController.view];
@@ -2563,8 +2651,41 @@ BOOL isFirstLoad;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    //[self checkValidateView];
+    int lastIndexSelected = indexPath.row;
+    switch (lastIndexSelected) {
+        case 0:
+            if (_LAController == nil) {
+                self.LAController = [self.storyboard instantiateViewControllerWithIdentifier:@"LAView"];
+                _LAController.delegate = self;
+                [self.RightView addSubview:self.LAController.view];
+            }
+            [self.RightView bringSubviewToFront:self.LAController.view];
+            break;
+        case 1:
+            if (!_SecondLAController) {
+                self.SecondLAController = [self.storyboard instantiateViewControllerWithIdentifier:@"secondLAView"];
+                _SecondLAController.delegate = self;
+                [self.RightView addSubview:self.SecondLAController.view];
+            }
+            [self.RightView bringSubviewToFront:self.SecondLAController.view];
+            break;
+        case 2:
+            if (!_BasicController) {
+                self.BasicController = [self.storyboard instantiateViewControllerWithIdentifier:@"BasicPlanView"];
+                _BasicController.delegate = self;
+                [self.RightView addSubview:self.BasicController.view];
+            }
+            [self.RightView bringSubviewToFront:self.BasicController.view];
+            break;
+        case 3:
+            break;
+        default:
+            break;
+    }
 	//perform checking before going next page
-    blocked = YES;
+    //temporary remark by faiz
+    /*blocked = YES;
     if ([self validatePage:indexPath]) {
         blocked = NO;
         
@@ -2585,7 +2706,7 @@ BOOL isFirstLoad;
         
         {
             
-            [self loadBasicPlanPage:YES];
+            [self loadBasicPlanPage:YES];*/
 //            if ([getOccpCode isEqualToString:@"OCC01975"]) {
 //                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"There is no existing plan which can be offered to this occupation."
 //                                                               delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
@@ -2616,8 +2737,8 @@ BOOL isFirstLoad;
 //            }
             
             
-            
-        } else if (indexPath.row == SIMENU_BASIC_PLAN) {
+        //temporary remark by faiz
+        /*} else if (indexPath.row == SIMENU_BASIC_PLAN) {
             [_BasicController loadData];
             if ([getOccpCode isEqualToString:@"OCC01975"]) {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"There is no existing plan which can be offered to this occupation."
@@ -2855,8 +2976,9 @@ BOOL isFirstLoad;
                         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:dialogStr delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil ];
                         [alert show];
                     } else {
-                        //*******set the isNeedPromptSaveMsg to NO to prevent further "Do you need to save changes" dialog from popping up ********//
-                        appDel.isNeedPromptSaveMsg = NO;
+                        //*******set the isNeedPromptSaveMsg to NO to prevent further "Do you need to save changes" dialog from popping up ********/
+                        //temporary remark by faiz
+                        /* appDel.isNeedPromptSaveMsg = NO;
                         
                         NSString* msg = [NSString stringWithFormat:@"Create a new SI from %@ (%@)?", getSINo, NameLA];
                         
@@ -2875,7 +2997,7 @@ BOOL isFirstLoad;
     } else {
         [tableView selectRowAtIndexPath:selectedPath animated:NO scrollPosition:UITableViewScrollPositionNone];
         previousPath = selectedPath;
-    }
+    }*/
 }
 
 -(void) getSelectedLanguage

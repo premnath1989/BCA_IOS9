@@ -2696,6 +2696,7 @@ else {
 
 -(void)datePick:(DateViewController *)inController strDate:(NSString *)aDate strAge:(NSString *)aAge intAge:(int)bAge intANB:(int)aANB
 {
+    NSLog(@"date %@ age %@ bAge %i anb %i",aDate,aAge,bAge,aANB);
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"dd/MM/yyyy"];
     NSString *selectDate = aDate;

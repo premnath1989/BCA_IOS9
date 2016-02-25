@@ -90,6 +90,8 @@ id msg, ComDate;
     int newALB;
     int newANB;
     
+    NSLog(@"yearN %i yearB %i",yearN,yearB);
+    
     if (yearN > yearB)
     {
         if (monthN < monthB) {

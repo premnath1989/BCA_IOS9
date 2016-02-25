@@ -36,12 +36,23 @@
                         <rect key="frame" x="0.0" y="83" width="205" height="1"/>
                         <color key="backgroundColor" red="0.80000000000000004" green="0.79607843140000001" blue="0.80392156859999997" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fJC-Ay-Vmd">
+                        <rect key="frame" x="48" y="11" width="147" height="19"/>
+                    </button>
+                    <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6c7-EK-JHD">
+                        <rect key="frame" x="48" y="34" width="147" height="19"/>
+                    </button>
+                    <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="trv-A4-y7w">
+                        <rect key="frame" x="48" y="57" width="147" height="19"/>
+                    </button>
                 </subviews>
-                <color key="backgroundColor" red="0.80000000000000004" green="0.79607843140000001" blue="0.80392156859999997" alpha="1" colorSpace="calibratedRGB"/>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.80000000000000004" green="0.79607843140000001" blue="0.80392156859999997" alpha="1" colorSpace="calibratedRGB"/>
             <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
+                <outlet property="button1" destination="fJC-Ay-Vmd" id="rc4-XE-wqW"/>
+                <outlet property="button2" destination="6c7-EK-JHD" id="AhU-Eb-Qnx"/>
+                <outlet property="button3" destination="trv-A4-y7w" id="Wjq-4w-gdU"/>
                 <outlet property="labelDesc" destination="Xjp-w3-AQA" id="pgm-BZ-L1W"/>
                 <outlet property="labelNumber" destination="9J6-CF-8AO" id="iq3-Zb-NEm"/>
                 <outlet property="labelWide" destination="ARb-aR-NMc" id="yyh-dL-RlE"/>

@@ -14,4 +14,8 @@
 @property (nonatomic, weak) IBOutlet UILabel* labelNumber;
 @property (nonatomic, weak) IBOutlet UILabel* labelDesc;
 @property (nonatomic, weak) IBOutlet UILabel* labelWide;
+@property (nonatomic, weak) IBOutlet UIButton* button1;
+@property (nonatomic, weak) IBOutlet UIButton* button2;
+@property (nonatomic, weak) IBOutlet UIButton* button3;
+
 @end

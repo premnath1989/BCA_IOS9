@@ -334,6 +334,9 @@ bool RegDatehandling;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(btnSave_EditOrNew)];
     self.navigationItem.leftBarButtonItem.tintColor = borderColor;
 	self.navigationItem.rightBarButtonItem.tintColor = borderColor;
+    [self.navigationController.navigationBar setTitleTextAttributes:
+     @{NSForegroundColorAttributeName:[UIColor darkGrayColor]}];
+
     
     NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
 	[ClientProfile setObject:@"NEW" forKey:@"ChangedOn"];

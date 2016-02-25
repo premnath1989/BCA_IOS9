@@ -108,6 +108,9 @@ MBProgressHUD *HUD;
 	
     OrderBy = @"ASC";
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ReloadTableData) name:@"ReloadData" object:nil];
+    [self.navigationController.navigationBar setTitleTextAttributes:
+     @{NSForegroundColorAttributeName:[UIColor darkGrayColor]}];
+
 }
 
 -(void)viewDidAppear:(BOOL)animated

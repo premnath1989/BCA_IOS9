@@ -147,5 +147,6 @@
 
 //added by faiz
 @property (nonatomic, assign,readwrite) BOOL quickQuoteEnabled;
+- (bool)validationDataLifeAssured;
 //end of added by faiz
 @end
