@@ -403,7 +403,9 @@
 		A17D8A2C199C611200C2A269 /* P5-Line.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A17D8A2B199C611200C2A269 /* P5-Line.jpg */; };
 		A1A8312019A1978400C0302D /* P2-1-Row3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A1A8311F19A1978400C0302D /* P2-1-Row3.jpg */; };
 		A1A8312219A1978D00C0302D /* P2-1-Row2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A1A8312119A1978D00C0302D /* P2-1-Row2.jpg */; };
+		A1C085D11C7DD77200A0592C /* bless final-02.png in Resources */ = {isa = PBXBuildFile; fileRef = A1C085D01C7DD77200A0592C /* bless final-02.png */; };
 		A1E3AFC219BD5F5200F332B3 /* P5-footer-B.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A1E3AFC119BD5F5200F332B3 /* P5-footer-B.jpg */; };
+		A1EE80A11C7BB7560096185C /* libSPSignDoc_4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1EE80A01C7BB7550096185C /* libSPSignDoc_4.0.a */; };
 		A902F5411C5A0EF6001D6EC0 /* libSPSignDoc_4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A902F5401C5A0EF6001D6EC0 /* libSPSignDoc_4.0.a */; };
 		A9B8F3D41C5B5EE2005C9646 /* ModelProspectProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = A9B8F3D31C5B5EE2005C9646 /* ModelProspectProfile.m */; };
 		A9E550A21C591E8000C9DAC2 /* libSPSignDoc_4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A9E550A11C591E8000C9DAC2 /* libSPSignDoc_4.0.a */; };
@@ -1468,7 +1470,9 @@
 		A17D8A2B199C611200C2A269 /* P5-Line.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "P5-Line.jpg"; sourceTree = "<group>"; };
 		A1A8311F19A1978400C0302D /* P2-1-Row3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "P2-1-Row3.jpg"; sourceTree = "<group>"; };
 		A1A8312119A1978D00C0302D /* P2-1-Row2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "P2-1-Row2.jpg"; sourceTree = "<group>"; };
+		A1C085D01C7DD77200A0592C /* bless final-02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bless final-02.png"; sourceTree = "<group>"; };
 		A1E3AFC119BD5F5200F332B3 /* P5-footer-B.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "P5-footer-B.jpg"; sourceTree = "<group>"; };
+		A1EE80A01C7BB7550096185C /* libSPSignDoc_4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSPSignDoc_4.0.a; sourceTree = "<group>"; };
 		A902F5401C5A0EF6001D6EC0 /* libSPSignDoc_4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSPSignDoc_4.0.a; sourceTree = "<group>"; };
 		A9B8F3D21C5B5EE2005C9646 /* ModelProspectProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelProspectProfile.h; sourceTree = "<group>"; };
 		A9B8F3D31C5B5EE2005C9646 /* ModelProspectProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelProspectProfile.m; sourceTree = "<group>"; };
@@ -2114,6 +2118,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				174858B51C3E229D007BBF13 /* libSPSignDoc_4.0.a in Frameworks */,
+				A1EE80A11C7BB7560096185C /* libSPSignDoc_4.0.a in Frameworks */,
 				A9E550A21C591E8000C9DAC2 /* libSPSignDoc_4.0.a in Frameworks */,
 				6A4B72AD19ECB3A800F4DE62 /* AdSupport.framework in Frameworks */,
 				428F84A719783E5C0016B7E8 /* libxml2.dylib in Frameworks */,
@@ -2743,6 +2748,7 @@
 			children = (
 				4341B5C11C61750700357986 /* libSPSignDoc_4.0.a */,
 				A902F5401C5A0EF6001D6EC0 /* libSPSignDoc_4.0.a */,
+				A1EE80A01C7BB7550096185C /* libSPSignDoc_4.0.a */,
 				A9E550A11C591E8000C9DAC2 /* libSPSignDoc_4.0.a */,
 				174858B41C3E229D007BBF13 /* libSPSignDoc_4.0.a */,
 				4239AE2F1946DAE100BD6F53 /* dummy.cpp */,
@@ -3982,6 +3988,7 @@
 				AAFE1AAE1C7B05E1008D4B9C /* Login Page Bless_english_final_2-01.jpg */,
 				17F10EAE1C6C85DA002C32D3 /* btn_login.png */,
 				17F10EB21C6C85EF002C32D3 /* login_box.png */,
+				A1C085D01C7DD77200A0592C /* bless final-02.png */,
 				17F10EAF1C6C85DA002C32D3 /* btn_reset.png */,
 				A9E550A31C591F7900C9DAC2 /* Expand Arrow.png */,
 				A9E550A41C591F7900C9DAC2 /* Expand Arrow@2x.png */,
@@ -4766,6 +4773,7 @@
 				2958A88717E960150090A791 /* slider_hover@2x.png in Resources */,
 				2958A88817E960150090A791 /* slider_normal.png in Resources */,
 				2958A88917E960150090A791 /* slider_normal@2x.png in Resources */,
+				A1C085D11C7DD77200A0592C /* bless final-02.png in Resources */,
 				2958A8D117E965BD0090A791 /* mengcheong_Storyboard CFF.storyboard in Resources */,
 				2958A8D317E965CA0090A791 /* mengcheong_Storyboard.storyboard in Resources */,
 				2958A8D917E986620090A791 /* status.plist in Resources */,
