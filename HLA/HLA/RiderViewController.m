@@ -6501,4 +6501,14 @@ int maxGycc = 0;
     [self setPlanBtnTitle:@""];
     [self.deducBtn setTitle:[NSString stringWithFormat:@""] forState:UIControlStateNormal];
 }
+- (IBAction)NextView:(id)sender
+{
+    
+    PremiumViewController *premView = [self.storyboard instantiateViewControllerWithIdentifier:@"premiumView"];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(100, 100, 0, 0)];
+    [view addSubview:premView.view];
+
+}
+
+
 @end

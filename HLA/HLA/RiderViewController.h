@@ -120,6 +120,7 @@
 
 //--
 
+- (IBAction)NextView:(id)sender;
 @property (strong, nonatomic) IBOutlet UIScrollView *myScrollView;
 @property (strong, nonatomic) IBOutlet UIView *myView;
 @property (retain, nonatomic) IBOutlet UIButton *btnPType;

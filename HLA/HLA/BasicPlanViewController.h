@@ -157,6 +157,8 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *quotationLangSegment;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *outletDone;
 @property (weak, nonatomic) IBOutlet UILabel *labelThree;
+@property (weak, nonatomic) IBOutlet UILabel *ExtraPremiDasarLBL;
+@property (weak, nonatomic) IBOutlet UILabel *ExtraPremiDasarNumberLBL;
 
 //Added by faiz
 @property (strong, nonatomic) IBOutlet UITextField *basicPremiField;
@@ -169,8 +171,11 @@
 @property (strong, nonatomic) IBOutlet UIButton *frekuensiPembayaranButton;
 
 - (IBAction)tempNext:(id)sender;
+- (IBAction)tempNext1:(id)sender;
 -(IBAction)actionMasaPembayaran:(id)sender;
 -(IBAction)actionFrekuensiPembayaran:(id)sender;
+-(IBAction)ExtraPremiDasarLBLFunc:(id)sender;
+-(IBAction)ExtraPremiDasarNumberLBLFunc:(id)sender;
 //end of added by faiz
 
 //for SINo

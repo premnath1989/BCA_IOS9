@@ -25,6 +25,8 @@
 @synthesize termField;
 @synthesize FrekuensiPembayaranChecking,FRekeunsiPembayaranMode;;
 @synthesize yearlyIncomeField;
+@synthesize ExtraPremiDasarLBL;
+@synthesize ExtraPremiDasarNumberLBL;
 @synthesize minSALabel;
 @synthesize maxSALabel;
 @synthesize healthLoadingView;
@@ -75,8 +77,6 @@ bool WPTPD30RisDeleted = FALSE;
 {
     [super viewDidLoad];
     
-    
-    
     appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate ];
 	
     //self.view.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg10.jpg"]];
@@ -89,12 +89,15 @@ bool WPTPD30RisDeleted = FALSE;
     
 	if ([requesteProposalStatus isEqualToString:@"Failed"] || [requesteProposalStatus isEqualToString:@"Submitted"] ||
 		[requesteProposalStatus isEqualToString:@"Received"] || [requesteProposalStatus isEqualToString:@"Confirmed"] || [EAPPorSI isEqualToString:@"eAPP"] ||
-        [requesteProposalStatus isEqualToString:@"Created_View"]) {
+        [requesteProposalStatus isEqualToString:@"Created_View"])
+    {
 		Editable = NO;
 	} else {
 		Editable = YES;
 	}
 	
+    _masaExtraPremiField.enabled=false;
+    
     [self loadData];
     
     self.planList = [[PlanList alloc] init];
@@ -148,6 +151,9 @@ bool WPTPD30RisDeleted = FALSE;
 	[self.view addGestureRecognizer:tap];
 	
     _planList = nil;
+    
+    ExtraPremiDasarNumberLBL.hidden =YES;
+    ExtraPremiDasarLBL.hidden=YES;
     
     outletEAPP.title = @"";
     outletEAPP.enabled = FALSE;
@@ -357,15 +363,50 @@ bool WPTPD30RisDeleted = FALSE;
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
         return (([string isEqualToString:filtered]) && newLength <= 15);
     }
-    
-    if (textField == _extraPremiPercentField)
+    else if (textField == _extraPremiPercentField)
     {
         NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
-        return (([string isEqualToString:filtered]) && newLength <= 15);
+        return (([string isEqualToString:filtered]) && newLength <= 3);
+    }
+    else if (textField == _extraPremiNumberField)
+    {
+        NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
+        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        return (([string isEqualToString:filtered]) && newLength <= 2);
+    }
+    
+    return YES;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    if (textField == yearlyIncomeField)
+    {
+        ExtraPremiDasarLBL.hidden=NO;
+
     }
 
-    return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if (textField == yearlyIncomeField)
+    {
+        ExtraPremiDasarLBL.hidden=YES;
+    }
+    if(textField == _extraPremiNumberField)
+    {
+        _masaExtraPremiField.enabled=TRUE;
+        _masaExtraPremiField.text =@"0";
+    }
+    if(textField == _extraPremiPercentField)
+    {
+        _masaExtraPremiField.enabled =TRUE;
+        _masaExtraPremiField.text =@"0";
+        
+    }
+    
 }
 
 
@@ -387,6 +428,9 @@ bool WPTPD30RisDeleted = FALSE;
         _masaPembayaran.TradOrEver = @"TRAD";
         _masaPembayaran.delegate = self;
         self.planPopover = [[UIPopoverController alloc] initWithContentViewController:_masaPembayaran];
+        
+        
+        
     }
     else
     {
@@ -394,7 +438,8 @@ bool WPTPD30RisDeleted = FALSE;
         _masaPembayaran.TradOrEver = @"TRAD";
         _masaPembayaran.delegate = self;
         self.planPopover = [[UIPopoverController alloc] initWithContentViewController:_masaPembayaran];
-
+        
+        
     }
     
     CGRect rect = [sender frame];
@@ -406,9 +451,7 @@ bool WPTPD30RisDeleted = FALSE;
 }
 
 -(IBAction)actionFrekuensiPembayaran:(id)sender
-
 {
-    
     if ([FrekuensiPembayaranChecking isEqualToString:@"Premi Tunggal"])
     {
         [self resignFirstResponder];
@@ -464,7 +507,6 @@ bool WPTPD30RisDeleted = FALSE;
             self.planPopover = [[UIPopoverController alloc] initWithContentViewController:_frekuensi];
 
         }
-        
         CGRect rect = [sender frame];
         rect.origin.y = [sender frame].origin.y + 30;
         
@@ -504,13 +546,10 @@ bool WPTPD30RisDeleted = FALSE;
     if ([FRekeunsiPembayaranMode isEqualToString:@"Pembayaran Sekaligus"]||[FRekeunsiPembayaranMode isEqualToString:@"Tahunan"])
     {
         PaymentMode = 1;
-        
     }
     if ([FRekeunsiPembayaranMode isEqualToString:@"Bulanan"])
     {
        PaymentMode = 0.1;
-        
-        
     }
     
     int RatesInt = [RatesPremiumRate intValue];
@@ -518,7 +557,6 @@ bool WPTPD30RisDeleted = FALSE;
     [_basicPremiField setText:[NSString stringWithFormat:@"%d", total]];
 
 }
-
 
 
 -(void)setTextfieldBorder{
@@ -3768,6 +3806,8 @@ bool WPTPD30RisDeleted = FALSE;
     [_masaPembayaranButton setTitle:aaDesc forState:UIControlStateNormal];
     [self.planPopover dismissPopoverAnimated:YES];
     // getPlanCode = aaCode;
+    
+    [_frekuensiPembayaranButton setTitle:@"--Please Select--" forState:UIControlStateNormal];
     
     FrekuensiPembayaranChecking = aaDesc;
     
