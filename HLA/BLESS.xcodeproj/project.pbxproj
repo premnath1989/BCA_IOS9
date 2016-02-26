@@ -403,6 +403,7 @@
 		A11B845B19C41FDA00A5F38B /* SIRIM_Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = A11B845A19C41FDA00A5F38B /* SIRIM_Logo.png */; };
 		A15F5A4A199A22BF00FE892D /* P5-Row.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A15F5A49199A22BF00FE892D /* P5-Row.jpg */; };
 		A170C12E19A6052A0073325B /* P2-1Full.png in Resources */ = {isa = PBXBuildFile; fileRef = A170C12D19A605290073325B /* P2-1Full.png */; };
+		A175F04D1C8065310077A3CB /* logo bless final-01.png in Resources */ = {isa = PBXBuildFile; fileRef = A175F04C1C8065310077A3CB /* logo bless final-01.png */; };
 		A17D8A2C199C611200C2A269 /* P5-Line.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A17D8A2B199C611200C2A269 /* P5-Line.jpg */; };
 		A1A8312019A1978400C0302D /* P2-1-Row3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A1A8311F19A1978400C0302D /* P2-1-Row3.jpg */; };
 		A1A8312219A1978D00C0302D /* P2-1-Row2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A1A8312119A1978D00C0302D /* P2-1-Row2.jpg */; };
@@ -1476,6 +1477,7 @@
 		A11B845A19C41FDA00A5F38B /* SIRIM_Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SIRIM_Logo.png; sourceTree = "<group>"; };
 		A15F5A49199A22BF00FE892D /* P5-Row.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "P5-Row.jpg"; sourceTree = "<group>"; };
 		A170C12D19A605290073325B /* P2-1Full.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "P2-1Full.png"; sourceTree = "<group>"; };
+		A175F04C1C8065310077A3CB /* logo bless final-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo bless final-01.png"; sourceTree = "<group>"; };
 		A17D8A2B199C611200C2A269 /* P5-Line.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "P5-Line.jpg"; sourceTree = "<group>"; };
 		A1A8311F19A1978400C0302D /* P2-1-Row3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "P2-1-Row3.jpg"; sourceTree = "<group>"; };
 		A1A8312119A1978D00C0302D /* P2-1-Row2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "P2-1-Row2.jpg"; sourceTree = "<group>"; };
@@ -4008,6 +4010,7 @@
 				A9E550A31C591F7900C9DAC2 /* Expand Arrow.png */,
 				A9E550A41C591F7900C9DAC2 /* Expand Arrow@2x.png */,
 				1706BD451C7169A40038D1DB /* menu_customerfactfind.png */,
+				A175F04C1C8065310077A3CB /* logo bless final-01.png */,
 				178765D81C7409F00036F31A /* menu_selectoption.png */,
 				1706BD461C7169A40038D1DB /* menu_datanasabah.png */,
 				1706BD471C7169A40038D1DB /* menu_ilustrasi.png */,
@@ -4734,6 +4737,7 @@
 				1706BD4E1C7169A40038D1DB /* menu_ilustrasi.png in Resources */,
 				C4F5355F166F3BF0004DBF94 /* icon_settings.png in Resources */,
 				C4E5A470168AAA89007848CE /* ChgPwd_24.png in Resources */,
+				A175F04D1C8065310077A3CB /* logo bless final-01.png in Resources */,
 				C4E5A471168AAA89007848CE /* ChgPwd_32.png in Resources */,
 				C4E5A472168AAA89007848CE /* ChgPwd_48.png in Resources */,
 				C4E5A473168AAA89007848CE /* ChgPwd_64.png in Resources */,
