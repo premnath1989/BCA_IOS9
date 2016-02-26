@@ -383,7 +383,7 @@ NSMutableArray *DelGroupArr;
 
 -(void)setTextfieldBorder{
 
-    UIFont *font= [UIFont fontWithName:@"TreBuchet MS" size:16.0f];
+    UIFont *font= [UIFont fontWithName:@"BPreplay" size:16.0f];
     for (UIView *view in [_viewPersonalInfo subviews]) {
         if ([view isKindOfClass:[UITextField class]]) {
             UITextField *textField = (UITextField *)view;
@@ -398,7 +398,7 @@ NSMutableArray *DelGroupArr;
         }
         if ([view isKindOfClass:[UIButton class]]) {
             UIButton *button = (UIButton *)view;
-            [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            //[button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             [button.titleLabel setFont:font];
         }
     }
@@ -417,7 +417,7 @@ NSMutableArray *DelGroupArr;
         }
         if ([view isKindOfClass:[UIButton class]]) {
             UIButton *button = (UIButton *)view;
-            [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            //[button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             [button.titleLabel setFont:font];
         }
     }
@@ -436,7 +436,7 @@ NSMutableArray *DelGroupArr;
         }
         if ([view isKindOfClass:[UIButton class]]) {
             UIButton *button = (UIButton *)view;
-            [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+           // [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             [button.titleLabel setFont:font];
         }
 
@@ -456,7 +456,7 @@ NSMutableArray *DelGroupArr;
         }
         if ([view isKindOfClass:[UIButton class]]) {
             UIButton *button = (UIButton *)view;
-            [button.titleLabel setTextColor:[UIColor blackColor]];
+            //[button.titleLabel setTextColor:[UIColor blackColor]];
             [button.titleLabel setFont:font];
         }
 
@@ -476,7 +476,7 @@ NSMutableArray *DelGroupArr;
         }
         if ([view isKindOfClass:[UIButton class]]) {
             UIButton *button = (UIButton *)view;
-            [button.titleLabel setTextColor:[UIColor blackColor]];
+           // [button.titleLabel setTextColor:[UIColor blackColor]];
             [button.titleLabel setFont:font];
         }
 
@@ -503,7 +503,7 @@ NSMutableArray *DelGroupArr;
         }
         if ([view isKindOfClass:[UIButton class]]) {
             UIButton *button = (UIButton *)view;
-            [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            //[button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             [button.titleLabel setFont:font];
         }
     }
@@ -2089,7 +2089,7 @@ NSMutableArray *DelGroupArr;
     
 	txtOtherIDType.text = pp.OtherIDTypeNo;
     //CHANGE SEGMENTATION CONTROL FONT SIZE
-    UIFont *font= [UIFont fontWithName:@"TreBuchet MS" size:16.0f];
+    UIFont *font= [UIFont fontWithName:@"BPreplay" size:16.0f];
     
     NSDictionary *attributes = [NSDictionary dictionaryWithObject:font
                                                            forKey:UITextAttributeFont];

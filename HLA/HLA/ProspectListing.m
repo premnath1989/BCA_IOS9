@@ -160,7 +160,7 @@ MBProgressHUD *HUD;
 }
 
 -(void)setTextfieldBorder{
-    UIFont *font= [UIFont fontWithName:@"TreBuchet MS" size:16.0f];
+    UIFont *font= [UIFont fontWithName:@"BPreplay" size:16.0f];
     for (UIView *view in self.view.subviews) {
         if ([view isKindOfClass:[UITextField class]]) {
             UITextField *textField = (UITextField *)view;
@@ -235,8 +235,8 @@ MBProgressHUD *HUD;
 				cell.textLabel.text = @"Load more records...";
 			}
 			
-			cell.textLabel.textColor = [UIColor grayColor];
-			cell.textLabel.font = [UIFont boldSystemFontOfSize:14];
+			cell.textLabel.textColor = [UIColor colorWithRed:88.0f/255.0f green:89.0f/255.0f blue:92.0f/255.0f alpha:1];
+			cell.textLabel.font = [UIFont fontWithName:@"BPreplay" size:14];
             cell.userInteractionEnabled = NO;
 		}
         else if(indexPath.row <[ProspectTableData count]){
