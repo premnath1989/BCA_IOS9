@@ -13,8 +13,6 @@
 @protocol ListingTbViewControllerDelegate
 
 -(void)listing:(ListingTbViewController *)inController didSelectIndex:(NSString *)aaIndex andName:(NSString *)aaName andDOB:(NSString *)aaDOB andGender:(NSString *)aaGender andOccpCode:(NSString *)aaCode andSmoker:(NSString *)aaSmoker andMaritalStatus:(NSString *)aaMaritalStatus;
- 
-
 @end
 
 @interface ListingTbViewController : UITableViewController <UISearchBarDelegate, UISearchDisplayDelegate> {

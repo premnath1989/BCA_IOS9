@@ -25,7 +25,7 @@
 -(void) RiderAdded;
 -(void)saveAll;
 -(void)setIsSecondLaNeeded:(BOOL)temp;
--(void)saveSecondLA;
+-(void)saveSecondLA:(NSDictionary *)dataLA;
 @end
 
 @interface SecondLAViewController : UIViewController <ListingTbViewControllerDelegate,UIPopoverControllerDelegate, DateViewControllerDelegate, OccupationListDelegate, UITextFieldDelegate> {

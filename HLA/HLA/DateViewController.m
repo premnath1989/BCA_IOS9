@@ -140,7 +140,7 @@ id msg, ComDate;
 
 -(NSString *)selectedStrDate
 {
-    if (msgDate==NULL){
+    if ((msgDate==NULL)||([msgDate isEqualToString:@"--Please Select--"])){
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"dd/MM/yyyy"];
         NSString *pickerDate = [dateFormatter stringFromDate:[_datePickerView date]];

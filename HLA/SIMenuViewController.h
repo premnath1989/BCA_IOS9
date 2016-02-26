@@ -28,6 +28,8 @@
 
 #import "Constants.h"
 #import "SIMenuTableViewCell.h"
+#import "ModelSIPOData.h"
+#import "Model_SI_Master.h"
 
 @class SIMenuViewController;
 @protocol SIMenuDelegate
@@ -42,6 +44,9 @@
 	NSString *databasePath;
     sqlite3 *contactDB;
     BOOL PlanEmpty;
+    
+    Model_SI_Master *_modelSIMaster;
+    ModelSIPOData *_modelSIPOData;
     NewLAViewController *_LAController;
     PayorViewController *_PayorController;
     SecondLAViewController *_SecondLAController;

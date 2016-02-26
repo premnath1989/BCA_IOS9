@@ -13,6 +13,7 @@
 
 @interface SecondLAViewController (){
     ColorHexCode *CustomColor;
+    int clientProfileID;
 }
 
 @end
@@ -435,7 +436,14 @@ id dobtemp;
 
 - (IBAction)sexSegmentChange:(id)sender
 {
-    [self getSmoker];
+    if ([sexSegment selectedSegmentIndex]==0) {
+        sex = @"MALE";
+    } else if (sexSegment.selectedSegmentIndex == 1) {
+        sex = @"FEMALE";
+    }
+    
+    appDelegate.isNeedPromptSaveMsg = YES;
+    //    [self getSmoker];
 }
 
 - (IBAction)smokerSegmentChange:(id)sender
@@ -551,7 +559,24 @@ id dobtemp;
 {
     //[_delegate saveAll];
     if ([self validateSave]){
-        [_delegate saveSecondLA];
+        NSNumber *numberIntClientProfile;
+        if (_quickQuoteEnabled){
+            clientProfileID = -1;
+        }
+
+        numberIntClientProfile = [NSNumber numberWithInt:clientProfileID];
+        
+        NSString *laDOB=[_BtnTanggalLahir.titleLabel.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+        NSString *occupationDesc=[btnOccp.titleLabel.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+        NSMutableDictionary *dictionaryNewLA=[[NSMutableDictionary alloc]initWithObjectsAndKeys:
+                                              numberIntClientProfile,@"LA_ClientID",
+                                              nameField.text,@"LA_Name",
+                                              laDOB,@"LA_DOB",
+                                              ageField.text,@"LA_Age",
+                                              sex,@"LA_Gender",
+                                              occuCode,@"LA_OccpCode",
+                                              occupationDesc,@"LA_Occp",nil];
+        [_delegate saveSecondLA:dictionaryNewLA];
     }
 }
 
@@ -762,6 +787,7 @@ id dobtemp;
             [alert show];
         } else {
 //            [self deleteLA];
+            clientProfileID = [aaIndex intValue];
             nameField.enabled = NO;
             nameField.backgroundColor = [UIColor lightGrayColor];
             nameField.textColor = [UIColor darkGrayColor];
@@ -782,8 +808,10 @@ id dobtemp;
             sexSegment.enabled = FALSE;
             if ([sex isEqualToString:@"M"] || [sex isEqualToString:@"MALE"]) {
                 sexSegment.selectedSegmentIndex = 0;
+                sex =@"MALE";
             } else {
                 sexSegment.selectedSegmentIndex = 1;
+                sex =@"FEMALE";
             }
             
            // DOBField.text = [[NSString alloc] initWithFormat:@"%@",aaDOB];
@@ -793,6 +821,7 @@ id dobtemp;
             ageField.text = [[NSString alloc] initWithFormat:@"%d",age];
             
             OccpCode = aaCode;
+            occuCode = aaCode;
             [self getOccLoadExist];
             OccpField.text = [[NSString alloc] initWithFormat:@"%@",OccpDesc];
             [btnOccp setTitle:OccpDesc forState:UIControlStateNormal];

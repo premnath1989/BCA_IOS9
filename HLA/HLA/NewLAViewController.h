@@ -31,7 +31,7 @@
 -(void)saveAll;
 -(void)deleteSecondLAFromDB;
 -(void)setQuickQuoteValue:(BOOL)value;
--(void)saveNewLA;
+-(void)saveNewLA:(NSDictionary *)dataPO;
 @end
 
 @interface NewLAViewController : UIViewController<UITextFieldDelegate,UIPopoverControllerDelegate,ListingTbViewControllerDelegate,DateViewControllerDelegate,OccupationListDelegate,PlanListDelegate,RelationshipPopoverViewControllerDelegate>{

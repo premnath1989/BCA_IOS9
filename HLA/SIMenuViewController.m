@@ -37,6 +37,8 @@
 @interface SIMenuViewController (){
     PremiumViewController *_PremiumController;
     NSMutableArray* arrayIntValidate;
+    NSMutableDictionary* dictionaryPOForInsert;
+    NSMutableDictionary* dictionaryMasterForInsert;
 }
 
 @end
@@ -72,6 +74,11 @@ BOOL isFirstLoad;
 {
     [super viewDidLoad];
     [self resignFirstResponder];
+    
+    _modelSIPOData = [[ModelSIPOData alloc]init];
+    _modelSIMaster = [[Model_SI_Master alloc]init];
+    
+    dictionaryPOForInsert = [[NSMutableDictionary alloc]init];
     
     [self.view setBackgroundColor:[UIColor darkGrayColor]];
     
@@ -2622,14 +2629,22 @@ BOOL isFirstLoad;
 }
 
 #pragma mark - delegate added by faiz
--(void)saveNewLA{
+-(void)saveNewLA:(NSDictionary *)dataPO{
+    dictionaryPOForInsert = [NSMutableDictionary dictionaryWithDictionary:dataPO];
     [arrayIntValidate replaceObjectAtIndex:0 withObject:@"1"];
     [self loadSecondLAPage];
     [self.myTableView reloadData];
     [self.myTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:SIMENU_SECOND_LIFE_ASSURED inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
 }
 
--(void)saveSecondLA{
+-(void)saveSecondLA:(NSDictionary *)dataLA{
+    dictionaryMasterForInsert = [[NSMutableDictionary alloc]initWithObjectsAndKeys:[dictionaryPOForInsert valueForKey:@"SINO"],@"SINO",@"1.1",@"SI_Version",@"Not Created",@"ProposalStatus", nil];
+    [dictionaryPOForInsert addEntriesFromDictionary:dataLA];
+    
+    NSLog(@"dataLA %@",dictionaryPOForInsert);
+    [_modelSIPOData savePODate:dictionaryPOForInsert];
+    [_modelSIMaster saveIlustrationMaster:dictionaryMasterForInsert];
+    
     [arrayIntValidate replaceObjectAtIndex:1 withObject:@"1"];
     [self loadBasicPlanPage:YES];
     [self.myTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:SIMENU_BASIC_PLAN inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];

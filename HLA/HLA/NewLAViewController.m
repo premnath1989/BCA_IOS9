@@ -19,7 +19,10 @@
 #import "eAppMenu.h"
 #import "Constants.h"
 
-@interface NewLAViewController ()
+@interface NewLAViewController (){
+    NSString *ilustrationProductCode;
+    int clientProfileID;
+}
 
 @end
 
@@ -876,7 +879,7 @@ id dobtanngal;
 //        }
     
 
-    
+        ilustrationProductCode = aaCode;
         [NamaProduk setTitle:aaDesc forState:UIControlStateNormal];
         [self.planPopover dismissPopoverAnimated:YES];
        // getPlanCode = aaCode;
@@ -1011,7 +1014,39 @@ id dobtanngal;
 {
     //[_delegate saveAll];
     if ([self validateSave]){
-        [_delegate saveNewLA];
+        NSNumber *numberBoolQuickQuote;
+        NSNumber *numberIntClientProfile;
+        if ([quickQuoteFlag isOn]){
+            clientProfileID = -1;
+        }
+        numberIntClientProfile = [NSNumber numberWithInt:clientProfileID];
+        
+        if ([quickQuoteFlag isOn]){
+            numberBoolQuickQuote=[NSNumber numberWithInt:1];
+        }
+        else{
+            numberBoolQuickQuote=[NSNumber numberWithInt:0];
+        }
+        
+        NSString *occupationDesc=[btnOccp.titleLabel.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+        NSString *relationDesc=[_BtnHubungan.titleLabel.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+        NSString *productName=NamaProduk.titleLabel.text;
+        NSMutableDictionary *dictionaryNewLA=[[NSMutableDictionary alloc]initWithObjectsAndKeys:
+                                              _SINumberBCA.text,@"SINO",
+                                              ilustrationProductCode,@"ProductCode",
+                                              productName,@"ProductName",
+                                              numberBoolQuickQuote,@"QuickQuote",
+                                              TanggalIllustrasi.titleLabel.text,@"SIDate",
+                                              LANameField.text,@"PO_Name",
+                                              btnDOB.titleLabel.text,@"PO_DOB",
+                                              sex,@"PO_Gender",
+                                              LAAgeField.text,@"PO_Age",
+                                              occuCode,@"PO_OccpCode",
+                                              occupationDesc,@"PO_Occp",
+                                              numberIntClientProfile,@"PO_ClientID",
+                                              relationDesc,@"RelWithLA",nil];
+        
+        [_delegate saveNewLA:dictionaryNewLA];
     }
 }
 
@@ -2544,7 +2579,8 @@ else {
 -(void)listing:(ListingTbViewController *)inController didSelectIndex:(NSString *)aaIndex andName:(NSString *)aaName andDOB:(NSString *)aaDOB andGender:(NSString *)aaGender andOccpCode:(NSString *)aaCode andSmoker:(NSString *)aaSmoker andMaritalStatus:(NSString *)aaMaritalStatus;
 {
     int selectedIndex = [aaIndex intValue];
-    
+
+    clientProfileID = [aaIndex intValue];
     tempSmoker = smoker;
     tempSex = sex;
     tempDOB = DOB;
@@ -2636,8 +2672,10 @@ else {
         if (!EDDCase) {
             if ([sex isEqualToString:@"MALE"] || [sex isEqualToString:@"M"] || EDDCase == TRUE ) {
                 sexSegment.selectedSegmentIndex = 0;
+                sex = @"MALE";
             } else {
                 sexSegment.selectedSegmentIndex = 1;
+                sex = @"FEMALE";
             }
             
             if ([aaSmoker isEqualToString:@"N"] || EDDCase == TRUE) {
