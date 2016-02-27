@@ -30,6 +30,7 @@
 #import "SIMenuTableViewCell.h"
 #import "ModelSIPOData.h"
 #import "Model_SI_Master.h"
+#import "Model_SI_Premium.h"
 
 @class SIMenuViewController;
 @protocol SIMenuDelegate
@@ -45,6 +46,7 @@
     sqlite3 *contactDB;
     BOOL PlanEmpty;
     
+    Model_SI_Premium *_modelSIPremium;
     Model_SI_Master *_modelSIMaster;
     ModelSIPOData *_modelSIPOData;
     NewLAViewController *_LAController;

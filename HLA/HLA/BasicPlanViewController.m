@@ -796,9 +796,20 @@ bool WPTPD30RisDeleted = FALSE;
         Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
         id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
         [activeInstance performSelector:@selector(dismissKeyboard)];
+        NSMutableDictionary *dictionaryBasicPlan=[[NSMutableDictionary alloc]initWithObjectsAndKeys:
+                                                  yearlyIncomeField.text,@"Sum_Assured",
+                                                  _masaPembayaranButton.titleLabel.text,@"Payment_Term",
+                                                  _frekuensiPembayaranButton.titleLabel.text,@"Payment_Frequency",
+                                                  _basicPremiField.text,@"PremiumPolicyA",
+                                                  _extraPremiPercentField.text,@"ExtraPremiumPercentage",
+                                                  _extraPremiNumberField.text,@"ExtraPremiumSum",
+                                                  _masaExtraPremiField.text,@"ExtraPremiumTerm",
+                                                  _extraBasicPremiField.text,@"ExtraPremiumPolicy",
+                                                  _totalPremiWithLoadingField.text,@"TotalPremiumLoading",
+                                                  @"0",@"SubTotalPremium",nil];
         [self updateBasicPlan];
         //[_delegate saveAll];
-        [_delegate saveBasicPlan];
+        [_delegate saveBasicPlan:dictionaryBasicPlan];
     }
 
 }

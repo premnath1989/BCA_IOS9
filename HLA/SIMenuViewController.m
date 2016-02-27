@@ -74,7 +74,8 @@ BOOL isFirstLoad;
 {
     [super viewDidLoad];
     [self resignFirstResponder];
-    
+
+    _modelSIPremium = [[Model_SI_Premium alloc]init];
     _modelSIPOData = [[ModelSIPOData alloc]init];
     _modelSIMaster = [[Model_SI_Master alloc]init];
     
@@ -2669,12 +2670,19 @@ BOOL isFirstLoad;
     [self.myTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:SIMENU_BASIC_PLAN inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
 }
 
--(void)saveBasicPlan{
+-(void)saveBasicPlan:(NSDictionary *)basicPlan{
     [arrayIntValidate replaceObjectAtIndex:2 withObject:@"1"];
-    self.RiderController = [self.storyboard instantiateViewControllerWithIdentifier:@"RiderView"];
-    _RiderController.delegate = self;
-    [self.RightView addSubview:self.RiderController.view];
-    //[self.myTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:SIMENU_RIDER inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
+    NSMutableDictionary* newDictionaryForBasicPlan=[NSMutableDictionary dictionaryWithDictionary:basicPlan];
+    [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"SINO"] forKey:@"SINO"];
+    NSLog(@"newDict %@",newDictionaryForBasicPlan);
+    [_modelSIPremium savePremium:newDictionaryForBasicPlan];
+
+    if (!_RiderController){
+        self.RiderController = [self.storyboard instantiateViewControllerWithIdentifier:@"RiderView"];
+        _RiderController.delegate = self;
+        [self.RightView addSubview:self.RiderController.view];
+    }
+    [self.RightView bringSubviewToFront:self.RiderController.view];    //[self.myTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:SIMENU_RIDER inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
 }
 
 -(void)setQuickQuoteValue:(BOOL)value{

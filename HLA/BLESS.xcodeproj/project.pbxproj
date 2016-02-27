@@ -338,6 +338,7 @@
 		42D3277618487F2D0030AA7A /* NewGroupListing.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D3277518487F2D0030AA7A /* NewGroupListing.m */; };
 		42F8590F1772E4EF003907CD /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = 42F8590D1772E4EF003907CD /* add.png */; };
 		42F859101772E4EF003907CD /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 42F8590E1772E4EF003907CD /* delete.png */; };
+		431C065F1C823A9B001824FD /* Model_SI_Premium.m in Sources */ = {isa = PBXBuildFile; fileRef = 431C065D1C823A9B001824FD /* Model_SI_Premium.m */; };
 		431F5FDF1C6D781A00A9CA6C /* BranchInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 431F5FDE1C6D781A00A9CA6C /* BranchInfo.m */; };
 		431F5FE41C6D93E800A9CA6C /* ProspectListingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 431F5FE21C6D93E800A9CA6C /* ProspectListingTableViewCell.m */; };
 		431F5FE51C6D93E800A9CA6C /* ProspectListingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 431F5FE31C6D93E800A9CA6C /* ProspectListingTableViewCell.xib */; };
@@ -1306,6 +1307,8 @@
 		42D3277518487F2D0030AA7A /* NewGroupListing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewGroupListing.m; sourceTree = "<group>"; };
 		42F8590D1772E4EF003907CD /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
 		42F8590E1772E4EF003907CD /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete.png; sourceTree = "<group>"; };
+		431C065D1C823A9B001824FD /* Model_SI_Premium.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Model_SI_Premium.m; sourceTree = "<group>"; };
+		431C065E1C823A9B001824FD /* Model_SI_Premium.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model_SI_Premium.h; sourceTree = "<group>"; };
 		431F5FDD1C6D781A00A9CA6C /* BranchInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BranchInfo.h; sourceTree = "<group>"; };
 		431F5FDE1C6D781A00A9CA6C /* BranchInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BranchInfo.m; sourceTree = "<group>"; };
 		431F5FE11C6D93E800A9CA6C /* ProspectListingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProspectListingTableViewCell.h; sourceTree = "<group>"; };
@@ -3279,6 +3282,8 @@
 		A9B8F3D11C5B5EA5005C9646 /* HLADB Model */ = {
 			isa = PBXGroup;
 			children = (
+				431C065D1C823A9B001824FD /* Model_SI_Premium.m */,
+				431C065E1C823A9B001824FD /* Model_SI_Premium.h */,
 				A9B8F3D21C5B5EE2005C9646 /* ModelProspectProfile.h */,
 				A9B8F3D31C5B5EE2005C9646 /* ModelProspectProfile.m */,
 				4353C9461C61E95000AE1ED9 /* ModelNationality.h */,
@@ -5217,6 +5222,7 @@
 				C30A25A717F3C8D500613A0F /* HealthQuestionnaire5.m in Sources */,
 				C30A25A817F3C8D500613A0F /* HealthQuestionnaire6.m in Sources */,
 				C30A25A917F3C8D500613A0F /* HealthQuestionnaire7.m in Sources */,
+				431C065F1C823A9B001824FD /* Model_SI_Premium.m in Sources */,
 				C30A25AA17F3C8D500613A0F /* HealthQuestionnaire7b.m in Sources */,
 				C30A25AB17F3C8D500613A0F /* HealthQuestionnaire7c.m in Sources */,
 				C30A25AC17F3C8D500613A0F /* HealthQuestionnaire7d.m in Sources */,
