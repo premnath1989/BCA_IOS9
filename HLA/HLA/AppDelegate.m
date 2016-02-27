@@ -32,8 +32,7 @@ NSString *uatAgentCode;
     //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    databasePath = [docsDir stringByAppendingPathComponent: @"BCA_Rates.sqlite"];
-
+    databasePath = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
     NSLog(@"db path %@",databasePath);
     [SIUtilities makeDBCopy:databasePath];
 
