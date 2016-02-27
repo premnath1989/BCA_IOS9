@@ -88,30 +88,30 @@ id dobtanngal;
     [self setupUIElementDefaultSetting];
     
     
-    NSString*test;
-    NSString*test1;
-    
-    NSArray *paths2 = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *docsPath2 = [paths2 objectAtIndex:0];
-    NSString *path2 = [docsPath2 stringByAppendingPathComponent:@"BCA_Rates.sqlite"];
-    
-    
-    FMDatabase *database = [FMDatabase databaseWithPath:path2];
-    [database open];
-    FMResultSet *results;
-    results = [database executeQuery:@"select BasicCode,Male from BasicPremiumRate"];
-    
-    FMDatabase *database1 = [FMDatabase databaseWithPath:path2];
-    if (![database open]) {
-        NSLog(@"Could not open db.");
-    }
-    
-    while([results next])
-        
-    {
-        test  = [results stringForColumn:@"BasicCode"];
-        test1  = [results stringForColumn:@"Male"];
-    }
+//    NSString*test;
+//    NSString*test1;
+//    
+//    NSArray *paths2 = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    NSString *docsPath2 = [paths2 objectAtIndex:0];
+//    NSString *path2 = [docsPath2 stringByAppendingPathComponent:@"BCA_Rates.sqlite"];
+//    
+//    
+//    FMDatabase *database = [FMDatabase databaseWithPath:path2];
+//    [database open];
+//    FMResultSet *results;
+//    results = [database executeQuery:@"select BasicCode,Male from BasicPremiumRate"];
+//    
+//    FMDatabase *database1 = [FMDatabase databaseWithPath:path2];
+//    if (![database open]) {
+//        NSLog(@"Could not open db.");
+//    }
+//    
+//    while([results next])
+//        
+//    {
+//        test  = [results stringForColumn:@"BasicCode"];
+//        test1  = [results stringForColumn:@"Male"];
+//    }
     
     [_delegate setQuickQuoteValue:[quickQuoteFlag isOn]];
 }

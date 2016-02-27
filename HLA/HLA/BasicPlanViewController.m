@@ -519,20 +519,22 @@ bool WPTPD30RisDeleted = FALSE;
 
 -(void)PremiDasarAct
 {
-    NSString*RatesPremiumRate;
+
     NSString*AnsuransiDasarQuery;
-    double PaymentMode;
+    
     NSArray *paths2 = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docsPath2 = [paths2 objectAtIndex:0];
     NSString *path2 = [docsPath2 stringByAppendingPathComponent:@"BCA_Rates.sqlite"];
-    
+   
     FMDatabase *database = [FMDatabase databaseWithPath:path2];
     [database open];
     FMResultSet *results;
-    results = [database executeQuery:AnsuransiDasarQuery];
-    
     AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM basicPremiumRate Where BasicCode = '%@' AND EntryAge = '%@'",@"Male",@"HRT",@"7"];
-    
+    results = [database executeQuery:AnsuransiDasarQuery];
+
+    NSString*RatesPremiumRate;
+    double PaymentMode;
+    FMDatabase *database1 = [FMDatabase databaseWithPath:path2];
     if (![database open])
     {
         NSLog(@"Could not open db.");
@@ -541,6 +543,7 @@ bool WPTPD30RisDeleted = FALSE;
     while([results next])
     {
         RatesPremiumRate  = [results stringForColumn:@"Male"];
+        RatesPremiumRate  = [results stringForColumn:@"Female"];
     }
     
     if ([FRekeunsiPembayaranMode isEqualToString:@"Pembayaran Sekaligus"]||[FRekeunsiPembayaranMode isEqualToString:@"Tahunan"])
