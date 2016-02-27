@@ -3494,16 +3494,6 @@
                                             <outlet property="delegate" destination="Bg9-Wf-jjW" id="cIj-eQ-oZZ"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="right" minimumFontSize="17" id="D1i-Jd-i2o">
-                                        <rect key="frame" x="277" y="319" width="236" height="31"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
-                                        <connections>
-                                            <outlet property="delegate" destination="Bg9-Wf-jjW" id="nfj-1Y-BGa"/>
-                                        </connections>
-                                    </textField>
                                     <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="right" minimumFontSize="17" id="eiw-Lr-JdY">
                                         <rect key="frame" x="277" y="371" width="236" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -3591,6 +3581,16 @@
                                             <action selector="actionFrekuensiPembayaran:" destination="Bg9-Wf-jjW" eventType="touchUpInside" id="che-RS-oQH"/>
                                         </connections>
                                     </button>
+                                    <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="right" minimumFontSize="17" id="D1i-Jd-i2o">
+                                        <rect key="frame" x="277" y="319" width="236" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="Bg9-Wf-jjW" id="nfj-1Y-BGa"/>
+                                        </connections>
+                                    </textField>
                                 </subviews>
                             </scrollView>
                         </subviews>

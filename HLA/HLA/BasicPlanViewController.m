@@ -375,6 +375,12 @@ bool WPTPD30RisDeleted = FALSE;
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
         return (([string isEqualToString:filtered]) && newLength <= 2);
     }
+    else if (textField == _masaExtraPremiField)
+    {
+        NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
+        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        return (([string isEqualToString:filtered]) && newLength <= 1);
+    }
     
     return YES;
 }
@@ -398,14 +404,40 @@ bool WPTPD30RisDeleted = FALSE;
     if(textField == _extraPremiNumberField)
     {
         _masaExtraPremiField.enabled=TRUE;
-        _masaExtraPremiField.text =@"0";
+        //_masaExtraPremiField.text =@"0";
     }
     if(textField == _extraPremiPercentField)
     {
         _masaExtraPremiField.enabled =TRUE;
-        _masaExtraPremiField.text =@"0";
+        //_masaExtraPremiField.text =@"0";
         
     }
+    else if (textField == _masaExtraPremiField)
+    {
+        int masaExtraPremi=[textField.text intValue];
+        
+        if ([_masaPembayaranButton.titleLabel.text isEqualToString:@"Premi Tunggal"]){
+            if (masaExtraPremi != 1){
+                [self createAlertViewAndShow:@"Masa extra premi harus sama dengan 1" tag:0];
+                [textField setText:@""];
+                [textField becomeFirstResponder];
+            }
+            else{
+                [self PremiDasarActB];
+            }
+        }
+        else{
+            if (masaExtraPremi<1 && masaExtraPremi>5){
+                [self createAlertViewAndShow:@"Masa extra premi tidak boleh lebih dari 5 dan kurang dari 1" tag:0];
+                [textField setText:@""];
+                [textField becomeFirstResponder];
+            }
+            else{
+                [self PremiDasarActB];
+            }
+        }
+    }
+
     
 }
 
@@ -573,8 +605,59 @@ bool WPTPD30RisDeleted = FALSE;
 
 -(void)PremiDasarActB
 {
+    NSString*AnsuransiDasarQuery;
+    NSArray *paths2 = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsPath2 = [paths2 objectAtIndex:0];
+    NSString *path2 = [docsPath2 stringByAppendingPathComponent:@"BCA_Rates.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path2];
+    [database open];
+    FMResultSet *results;
+    AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM EMRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",PayorSex,@"HRT",premiType,PayorAge];
+    results = [database executeQuery:AnsuransiDasarQuery];
+    
+    NSString*RatesPremiumRate;
+    double PaymentMode;
+    FMDatabase *database1 = [FMDatabase databaseWithPath:path2];
+    if (![database open])
+    {
+        NSLog(@"Could not open db.");
+    }
+    
+    while([results next])
+    {
+        if ([PayorSex isEqualToString:@"Male"]||[PayorSex isEqualToString:@"MALE"]){
+            RatesPremiumRate  = [results stringForColumn:@"Male"];
+        }
+        else{
+            RatesPremiumRate  = [results stringForColumn:@"Female"];
+        }
+        
+    }
+    
+    if ([FRekeunsiPembayaranMode isEqualToString:@"Pembayaran Sekaligus"]||[FRekeunsiPembayaranMode isEqualToString:@"Tahunan"])
+    {
+        PaymentMode = 1;
+    }
+    if ([FRekeunsiPembayaranMode isEqualToString:@"Bulanan"])
+    {
+        PaymentMode = 0.1;
+    }
+    
+    int RatesInt = [RatesPremiumRate intValue];
+    int total =(BasisSumAssured/1000)*(PaymentMode * RatesInt);
+    [_basicPremiField setText:[NSString stringWithFormat:@"%d", total]];
+    
+    int masaExtraPremiBTotal =[_masaExtraPremiField.text intValue];
+    
+    int totalB = total * masaExtraPremiBTotal;
+    
+    [_extraBasicPremiField setText:[NSString stringWithFormat:@"%d", totalB]];
     
     
+    int TotalAB = total + totalB;
+    
+    [_totalPremiWithLoadingField setText:[NSString stringWithFormat:@"%d", TotalAB]];
     
 }
 
@@ -800,7 +883,8 @@ bool WPTPD30RisDeleted = FALSE;
 
 - (IBAction)doSavePlan:(id)sender
 {
-    if ([self validateSave]){
+    //if ([self validateSave]){
+    if ([self validationDataBasicPlan]){
         isFirstSaved = FALSE;
         Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
         id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
@@ -816,7 +900,7 @@ bool WPTPD30RisDeleted = FALSE;
                                                   _extraBasicPremiField.text,@"ExtraPremiumPolicy",
                                                   _totalPremiWithLoadingField.text,@"TotalPremiumLoading",
                                                   @"0",@"SubTotalPremium",nil];
-        [self updateBasicPlan];
+        //[self updateBasicPlan];
         //[_delegate saveAll];
         [_delegate saveBasicPlan:dictionaryBasicPlan];
     }
@@ -3534,6 +3618,56 @@ bool WPTPD30RisDeleted = FALSE;
 }
 
 #pragma mark - VALIDATION
+- (void)createAlertViewAndShow:(NSString *)message tag:(int)alertTag{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
+                                                    message:[NSString stringWithFormat:@"%@",message] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    alert.tag = alertTag;
+    [alert show];
+}
+
+- (bool)validationDataBasicPlan{
+    bool valid=true;
+    NSArray* validationSet=[[NSArray alloc]initWithObjects:@"",@"- SELECT -",@"- Select -",@"--Please Select--", nil];
+    
+    //validation message data refferal
+    NSString *validationUangPertanggunganDasar=@"Uang Pertanggungan dasar harus diisi";
+    NSString *validationMasaPembayaran=@"Masa Pembayaran harus diisi";
+    NSString *validationFrekuensiPembayaran=@"Frekuensi Pembayaran harus diisi";
+    NSString *validationMasaExtraPremi=@"Masa Extra Premi harus diisi";
+    
+    NSString* uangPertanggunganDasar=yearlyIncomeField.text;
+    NSString* masaPembayaran=_masaPembayaranButton.titleLabel.text;
+    NSString* frekuensiPembayaran=_frekuensiPembayaranButton.titleLabel.text;
+    NSString* masaEktraPremi=_masaExtraPremiField.text;
+    
+    if ([validationSet containsObject:uangPertanggunganDasar]||uangPertanggunganDasar==NULL){
+        [self createAlertViewAndShow:validationUangPertanggunganDasar tag:0];
+        [yearlyIncomeField becomeFirstResponder];
+        return false;
+    }
+    else if ([validationSet containsObject:masaPembayaran]||masaPembayaran==NULL){
+        [self createAlertViewAndShow:validationMasaPembayaran tag:0];
+        //[_BtnTanggalLahir setBackgroundColor:[UIColor redColor]];
+        return false;
+    }
+    else if ([validationSet containsObject:frekuensiPembayaran]||frekuensiPembayaran==NULL){
+        [self createAlertViewAndShow:validationFrekuensiPembayaran tag:0];
+        //[btnOccp setBackgroundColor:[UIColor redColor]];
+        return false;
+    }
+    
+    else if (([_extraPremiPercentField.text length]>0)||([_extraPremiNumberField.text length]>0)){
+        if ([validationSet containsObject:masaEktraPremi]||masaEktraPremi==NULL){
+            [self createAlertViewAndShow:validationMasaExtraPremi tag:0];
+            [_masaExtraPremiField becomeFirstResponder];
+            return false;
+        }
+    }
+    
+    
+    return valid;
+}
+
 
 -(int)validateSave//basic plan validation checking before save
 {
