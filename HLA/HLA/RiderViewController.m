@@ -2617,6 +2617,14 @@ int maxGycc = 0;
     }
 }
 
+#pragma mark - setSumAssuredasDouble
+-(void)setSumAssured:(NSString *)sumAssured{
+    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+    f.numberStyle = NSNumberFormatterDecimalStyle;
+    NSNumber *myNumber = [f numberFromString:sumAssured];
+    doubleSumAssured = [myNumber doubleValue];
+}
+
 #pragma mark - Action
 
 - (IBAction)ActionEAPP:(id)sender {

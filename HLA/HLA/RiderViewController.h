@@ -69,6 +69,8 @@
     double dblGrossPrem;
  
     UIColor *themeColour;
+    
+    double doubleSumAssured;
 }
 
 @property (nonatomic, retain) UIPopoverController *RiderListPopover;
@@ -229,7 +231,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *titleHLPTerm;
 
 //Added by faiz
-//@property (retain, nonatomic) IBOutlet UILabel *titleRidCode;
+-(void)setSumAssured:(NSString *)sumAssured;
 //@property (retain, nonatomic) IBOutlet UILabel *titleRidCode;
 //end of Added by faiz
 

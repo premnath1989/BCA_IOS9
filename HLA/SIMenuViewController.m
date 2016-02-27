@@ -2686,6 +2686,8 @@ BOOL isFirstLoad;
         _RiderController.delegate = self;
         [self.RightView addSubview:self.RiderController.view];
     }
+    //[self.RiderController setSumAssured:[newDictionaryForBasicPlan valueForKey:@"Sum_Assured"]];
+    [self.RiderController setSumAssured:[newDictionaryForBasicPlan valueForKey:@"Sum_Assured"]];
     [self.RightView bringSubviewToFront:self.RiderController.view];    //[self.myTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:SIMENU_RIDER inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
 }
 
