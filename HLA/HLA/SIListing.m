@@ -69,9 +69,9 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
 {
     [super viewDidLoad];
     
-    [NoIlustrasi setFont:[UIFont fontWithName:@"HelveticaLTStd-UltraComp" size:25]];
+    [NoIlustrasi setFont:[UIFont fontWithName:@"BPreplay" size:25]];
     themeColour = [UIColor colorWithRed:242.0f/255.0f green:113.0f/255.0f blue:134.0f/255.0f alpha:1];
-    fontType = [UIFont fontWithName:@"TreBuchet MS" size:16.0f];
+    fontType = [UIFont fontWithName:@"BPreplay" size:16.0f];
     
 	AppDelegate *appDel= (AppDelegate*)[[UIApplication sharedApplication] delegate ];
 	appDel.MhiMessage = Nil;
@@ -616,12 +616,12 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
             label5.backgroundColor = [CustomColor colorWithHexString:@"D0D8E8"];
             label6.backgroundColor = [CustomColor colorWithHexString:@"D0D8E8"];
             
-            label1.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
-            label2.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
-            label3.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
-            label4.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
-            label5.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
-            label6.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
+            label1.font = [UIFont fontWithName:@"BPreplay" size:16];
+            label2.font = [UIFont fontWithName:@"BPreplay" size:16];
+            label3.font = [UIFont fontWithName:@"BPreplay" size:16];
+            label4.font = [UIFont fontWithName:@"BPreplay" size:16];
+            label5.font = [UIFont fontWithName:@"BPreplay" size:16];
+            label6.font = [UIFont fontWithName:@"BPreplay" size:16];
         } else {
             label1.backgroundColor = [CustomColor colorWithHexString:@"E9EDF4"];
             label2.backgroundColor = [CustomColor colorWithHexString:@"E9EDF4"];
@@ -630,12 +630,12 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
             label5.backgroundColor = [CustomColor colorWithHexString:@"E9EDF4"];
             label6.backgroundColor = [CustomColor colorWithHexString:@"E9EDF4"];
             
-            label1.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
-            label2.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
-            label3.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
-            label4.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
-            label5.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
-            label6.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
+            label1.font = [UIFont fontWithName:@"BPreplay" size:16];
+            label2.font = [UIFont fontWithName:@"BPreplay" size:16];
+            label3.font = [UIFont fontWithName:@"BPreplay" size:16];
+            label4.font = [UIFont fontWithName:@"BPreplay" size:16];
+            label5.font = [UIFont fontWithName:@"BPreplay" size:16];
+            label6.font = [UIFont fontWithName:@"BPreplay" size:16];
         }
     }
     cell.selectionStyle = UITableViewCellSelectionStyleGray;

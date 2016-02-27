@@ -2544,7 +2544,7 @@ BOOL isFirstLoad;
             [cell setBackgroundColor:[UIColor colorWithRed:204.0/255.0 green:203.0/255.0 blue:205.0/255.0 alpha:1.0]];
     }
     
-    bgColorView.backgroundColor = [UIColor orangeColor];
+    bgColorView.backgroundColor = [UIColor colorWithRed:242.0f/255.0f green:113.0f/255.0f blue:134.0f/255.0f alpha:1];
     
     [cell setSelectedBackgroundView:bgColorView];
     
