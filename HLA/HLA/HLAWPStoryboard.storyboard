@@ -166,18 +166,20 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" id="cID-5y-RUj">
-                                <rect key="frame" x="0.0" y="698" width="205" height="70"/>
+                                <rect key="frame" x="0.0" y="670" width="205" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="xlQ-6E-XPK">
-                                        <rect key="frame" x="35" y="10" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.94901960780000005" green="0.4431372549" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="voa-jX-hEh">
-                                        <rect key="frame" x="119" y="10" width="50" height="50"/>
+                                        <rect key="frame" x="106" y="0.0" width="80" height="80"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.94901960780000005" green="0.4431372549" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <state key="normal" image="Icon Brochure &amp; save as-01-02.png"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="xlQ-6E-XPK">
+                                        <rect key="frame" x="18" y="0.0" width="80" height="80"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <state key="normal" image="Icon Brochure &amp; save as-01-01.png"/>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -5080,6 +5082,8 @@
     </scenes>
     <resources>
         <image name="Expand Arrow.png" width="24" height="24"/>
+        <image name="Icon Brochure &amp; save as-01-01.png" width="506" height="506"/>
+        <image name="Icon Brochure &amp; save as-01-02.png" width="506" height="506"/>
         <image name="disclosure_indicator.png" width="8" height="13"/>
         <image name="emptyCheckBox.png" width="44" height="43"/>
         <image name="icon_leads_2.png" width="70" height="70"/>
