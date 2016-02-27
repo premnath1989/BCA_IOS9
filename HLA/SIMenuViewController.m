@@ -392,6 +392,8 @@ BOOL isFirstLoad;
 			
             [self.BasicController loadData];
             
+            [self.BasicController setPayorSex:[dictionaryPOForInsert valueForKey:@"PO_Gender"]];
+            [self.BasicController setPayorAge:[[dictionaryPOForInsert valueForKey:@"PO_Age"] integerValue]];
             if (loadsView) {
                 [self.RightView addSubview:self.BasicController.view];
             }            
@@ -425,7 +427,9 @@ BOOL isFirstLoad;
             self.BasicController.requestEDD = getEDD;
             
             [self.BasicController loadData];
-            
+
+            [self.BasicController setPayorSex:[dictionaryPOForInsert valueForKey:@"PO_Gender"]];
+            [self.BasicController setPayorAge:[[dictionaryPOForInsert valueForKey:@"PO_Age"] integerValue]];
             if (loadsView) {
                 [self.RightView bringSubviewToFront:self.BasicController.view];
             }

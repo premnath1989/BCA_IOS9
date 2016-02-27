@@ -70,6 +70,7 @@
     double dblGrossPrem;
     
     UIColor *themeColour;
+    NSString *premiType;
 }
 
 @property (nonatomic, retain) UIPopoverController *planPopover;

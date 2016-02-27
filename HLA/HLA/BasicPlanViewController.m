@@ -465,6 +465,7 @@ bool WPTPD30RisDeleted = FALSE;
             _frekuensi = [[Frekeunsi alloc] init];
             _frekuensi.Frekuensi = @"Premi Tunggal";
             _frekuensi.delegate = self;
+            premiType = @"S";
             self.planPopover = [[UIPopoverController alloc] initWithContentViewController:_frekuensi];
         }
         else
@@ -472,6 +473,7 @@ bool WPTPD30RisDeleted = FALSE;
             _frekuensi = [[Frekeunsi alloc] init];
             _frekuensi.Frekuensi = @"Premi Tunggal";
             _frekuensi.delegate = self;
+            premiType = @"S";
             self.planPopover = [[UIPopoverController alloc] initWithContentViewController:_frekuensi];
         }
         
@@ -497,6 +499,7 @@ bool WPTPD30RisDeleted = FALSE;
             _frekuensi = [[Frekeunsi alloc] init];
             _frekuensi.Frekuensi = @"Premi 5 Tahun";
             _frekuensi.delegate = self;
+            premiType = @"S";
             self.planPopover = [[UIPopoverController alloc] initWithContentViewController:_frekuensi];
         }
         else
@@ -504,6 +507,7 @@ bool WPTPD30RisDeleted = FALSE;
             _frekuensi = [[Frekeunsi alloc] init];
             _frekuensi.Frekuensi = @"Premi 5 Tahun";
             _frekuensi.delegate = self;
+            premiType = @"S";
             self.planPopover = [[UIPopoverController alloc] initWithContentViewController:_frekuensi];
 
         }
@@ -521,7 +525,7 @@ bool WPTPD30RisDeleted = FALSE;
 {
 
     NSString*AnsuransiDasarQuery;
-    
+
     NSArray *paths2 = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docsPath2 = [paths2 objectAtIndex:0];
     NSString *path2 = [docsPath2 stringByAppendingPathComponent:@"BCA_Rates.sqlite"];
@@ -529,7 +533,7 @@ bool WPTPD30RisDeleted = FALSE;
     FMDatabase *database = [FMDatabase databaseWithPath:path2];
     [database open];
     FMResultSet *results;
-    AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM basicPremiumRate Where BasicCode = '%@' AND EntryAge = '%@'",@"Male",@"HRT",@"7"];
+    AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM basicPremiumRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",PayorSex,@"HRT",premiType,PayorAge];
     results = [database executeQuery:AnsuransiDasarQuery];
 
     NSString*RatesPremiumRate;
@@ -542,8 +546,13 @@ bool WPTPD30RisDeleted = FALSE;
     
     while([results next])
     {
-        RatesPremiumRate  = [results stringForColumn:@"Male"];
-        RatesPremiumRate  = [results stringForColumn:@"Female"];
+        if ([PayorSex isEqualToString:@"Male"]||[PayorSex isEqualToString:@"MALE"]){
+            RatesPremiumRate  = [results stringForColumn:@"Male"];
+        }
+        else{
+            RatesPremiumRate  = [results stringForColumn:@"Female"];
+        }
+        
     }
     
     if ([FRekeunsiPembayaranMode isEqualToString:@"Pembayaran Sekaligus"]||[FRekeunsiPembayaranMode isEqualToString:@"Tahunan"])
