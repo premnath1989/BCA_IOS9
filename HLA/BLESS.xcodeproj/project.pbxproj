@@ -356,6 +356,8 @@
 		43DA4BE31C770AA90038C92C /* SIMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DA4BE11C770AA90038C92C /* SIMenuTableViewCell.m */; };
 		43DA4BE41C770AA90038C92C /* SIMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43DA4BE21C770AA90038C92C /* SIMenuTableViewCell.xib */; };
 		43DA4BE61C770B3C0038C92C /* icon_leads_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 43DA4BE51C770B3C0038C92C /* icon_leads_2.png */; };
+		43F8B5511C81E71B006F3F6C /* SIListingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43F8B54E1C81E71A006F3F6C /* SIListingTableViewCell.xib */; };
+		43F8B5521C81E71B006F3F6C /* SIListingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F8B5501C81E71B006F3F6C /* SIListingTableViewCell.m */; };
 		43FD4A041C620F3E00227F8F /* ModelVIPClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 43FD4A031C620F3E00227F8F /* ModelVIPClass.m */; };
 		5D3967981C02C89700464BCC /* HLAWPStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D3967971C02C89700464BCC /* HLAWPStoryboard.storyboard */; };
 		5D39679A1C02CA9000464BCC /* ClientProfileStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D3967991C02CA9000464BCC /* ClientProfileStoryboard.storyboard */; };
@@ -1338,6 +1340,9 @@
 		43DA4BE11C770AA90038C92C /* SIMenuTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMenuTableViewCell.m; sourceTree = "<group>"; };
 		43DA4BE21C770AA90038C92C /* SIMenuTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SIMenuTableViewCell.xib; sourceTree = "<group>"; };
 		43DA4BE51C770B3C0038C92C /* icon_leads_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_leads_2.png; sourceTree = "<group>"; };
+		43F8B54E1C81E71A006F3F6C /* SIListingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SIListingTableViewCell.xib; sourceTree = "<group>"; };
+		43F8B54F1C81E71A006F3F6C /* SIListingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIListingTableViewCell.h; sourceTree = "<group>"; };
+		43F8B5501C81E71B006F3F6C /* SIListingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIListingTableViewCell.m; sourceTree = "<group>"; };
 		43FD4A021C620F3E00227F8F /* ModelVIPClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelVIPClass.h; sourceTree = "<group>"; };
 		43FD4A031C620F3E00227F8F /* ModelVIPClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelVIPClass.m; sourceTree = "<group>"; };
 		5D3967971C02C89700464BCC /* HLAWPStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HLAWPStoryboard.storyboard; sourceTree = "<group>"; };
@@ -3112,6 +3117,9 @@
 		431F5FE01C6D93B700A9CA6C /* tableViewCell */ = {
 			isa = PBXGroup;
 			children = (
+				43F8B54E1C81E71A006F3F6C /* SIListingTableViewCell.xib */,
+				43F8B54F1C81E71A006F3F6C /* SIListingTableViewCell.h */,
+				43F8B5501C81E71B006F3F6C /* SIListingTableViewCell.m */,
 				43DA4BE01C770AA90038C92C /* SIMenuTableViewCell.h */,
 				43DA4BE11C770AA90038C92C /* SIMenuTableViewCell.m */,
 				43DA4BE21C770AA90038C92C /* SIMenuTableViewCell.xib */,
@@ -4728,6 +4736,7 @@
 				C486D9CA163E5319009F8F21 /* btn_newSI_on.png in Resources */,
 				C486D9CB163E5319009F8F21 /* btn_prospect_off.png in Resources */,
 				C486D9CC163E5319009F8F21 /* btn_prospect_on.png in Resources */,
+				43F8B5511C81E71B006F3F6C /* SIListingTableViewCell.xib in Resources */,
 				C486D9CE163E5319009F8F21 /* btn_SIlisting_on.png in Resources */,
 				C486D9D1163E5466009F8F21 /* btn_home.png in Resources */,
 				C486D9D2163E5466009F8F21 /* btn_SIlisting_off.png in Resources */,
@@ -5040,6 +5049,7 @@
 				C4E1B93C1713FE9500D7F83B /* FMDatabaseQueue.m in Sources */,
 				C4E1B93D1713FE9500D7F83B /* FMResultSet.m in Sources */,
 				C4E1B93E1713FE9500D7F83B /* NDHTMLtoPDF.m in Sources */,
+				43F8B5521C81E71B006F3F6C /* SIListingTableViewCell.m in Sources */,
 				C4E1B9441713FFBC00D7F83B /* DataTable.m in Sources */,
 				C4E1B9451713FFBC00D7F83B /* DBController.m in Sources */,
 				C4E6437D171BE69A001DF8F8 /* Reachability.m in Sources */,

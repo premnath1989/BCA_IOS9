@@ -73,7 +73,12 @@
             UILabel *columnLabel = (UILabel *)view;
             UILabel *label1=[[UILabel alloc]init];
             label1.frame=frame;
-            label1.text= [[dataArray objectAtIndex:i] objectAtIndex:index];
+            if ([dataArray count]>0){
+                label1.text= [[dataArray objectAtIndex:i] objectAtIndex:index];
+            }
+            else{
+                label1.text= @"";
+            }
             label1.tag = 1001+i;
             label1.textAlignment = columnLabel.textAlignment;
             label1.font = [UIFont fontWithName:@"TreBuchet MS" size:16];

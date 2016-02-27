@@ -68,10 +68,11 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _modelSIMaster=[[Model_SI_Master alloc]init];
     
-    [NoIlustrasi setFont:[UIFont fontWithName:@"BPreplay" size:25]];
+    [NoIlustrasi setFont:[UIFont fontWithName:@"HelveticaLTStd-UltraComp" size:25]];
     themeColour = [UIColor colorWithRed:242.0f/255.0f green:113.0f/255.0f blue:134.0f/255.0f alpha:1];
-    fontType = [UIFont fontWithName:@"BPreplay" size:16.0f];
+    fontType = [UIFont fontWithName:@"TreBuchet MS" size:16.0f];
     
 	AppDelegate *appDel= (AppDelegate*)[[UIApplication sharedApplication] delegate ];
 	appDel.MhiMessage = Nil;
@@ -102,7 +103,11 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
     myTableView.backgroundColor = [UIColor clearColor];
     myTableView.opaque = NO;
     myTableView.backgroundView = nil;
-    [self.view addSubview:myTableView];
+    //[self.view addSubview:myTableView];
+    
+    
+    [self getDataForTable];
+    [myTableView reloadData];
     
     ItemToBeDeleted = [[NSMutableArray alloc] init];
     indexPaths = [[NSMutableArray alloc] init];
@@ -146,7 +151,7 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
     TableHeader =[tableManagement TableHeaderSetup:columnHeadersContent
                                          positionY:outletDelete.frame.origin.y+55.0f];
     
-    [self.view addSubview:TableHeader];
+    //[self.view addSubview:TableHeader];
 }
 
 
@@ -480,10 +485,42 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
     }
 }
 
-- (UITableViewCell *)tableView:(UITableView *)myTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	static NSString *CellIdentifier = @"Cell";
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Remove seperator inset
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
     
-    UITableViewCell *cell = [self.myTableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    // Prevent the cell from inheriting the Table View's margin settings
+    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
+        [cell setPreservesSuperviewLayoutMargins:NO];
+    }
+    
+    // Explictly set your cell's layout margins
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+	static NSString *CellIdentifier = @"Cell";
+    SIListingTableViewCell *cell = (SIListingTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SIListingTableViewCell" owner:self options:nil];
+        cell = [nib objectAtIndex:0];
+    }
+    if (indexPath.row < [SINO count]){
+        [cell.labelIlusrationNo setText:[SINO objectAtIndex:indexPath.row]];
+        [cell.labelIlustrationDate setText:[DateCreated objectAtIndex:indexPath.row]];
+        [cell.labelPOName setText:[Name objectAtIndex:indexPath.row]];
+        [cell.labelProduct setText:[PlanName objectAtIndex:indexPath.row]];
+        //[cell.labelSumAssured setText:[BasicSA objectAtIndex:indexPath.row]];
+        [cell.labelSumAssured setText:@"0"];
+        [cell.labelStatus setText:[SIStatus objectAtIndex:indexPath.row]];
+    }
+    /*UITableViewCell *cell = [self.myTableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
@@ -500,8 +537,8 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
  
     
     if (isFilter == false) {
-        NSArray *arrayOfData = [NSArray arrayWithObjects:SINO,
-                                DateCreated, Name, PlanName, SIValidStatus,SIVersion,nil];
+        //NSArray *arrayOfData = [NSArray arrayWithObjects:SINO, DateCreated, Name, PlanName, SIValidStatus,BasicSA,SIVersion,nil];
+        NSArray *arrayOfData = [NSArray arrayWithObjects:SINO, DateCreated, Name, PlanName, SIStatus,@"0",SIVersion,nil];
         [tableManagement TableRowInsert:arrayOfData index:indexPath.row table:cell];
 //        CGRect frame=CGRectMake(headerOriginX,0, DataRowTableWidth, 50);
 //        UILabel *label1=[[UILabel alloc]init];            
@@ -616,12 +653,12 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
             label5.backgroundColor = [CustomColor colorWithHexString:@"D0D8E8"];
             label6.backgroundColor = [CustomColor colorWithHexString:@"D0D8E8"];
             
-            label1.font = [UIFont fontWithName:@"BPreplay" size:16];
-            label2.font = [UIFont fontWithName:@"BPreplay" size:16];
-            label3.font = [UIFont fontWithName:@"BPreplay" size:16];
-            label4.font = [UIFont fontWithName:@"BPreplay" size:16];
-            label5.font = [UIFont fontWithName:@"BPreplay" size:16];
-            label6.font = [UIFont fontWithName:@"BPreplay" size:16];
+            label1.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
+            label2.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
+            label3.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
+            label4.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
+            label5.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
+            label6.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
         } else {
             label1.backgroundColor = [CustomColor colorWithHexString:@"E9EDF4"];
             label2.backgroundColor = [CustomColor colorWithHexString:@"E9EDF4"];
@@ -630,16 +667,16 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
             label5.backgroundColor = [CustomColor colorWithHexString:@"E9EDF4"];
             label6.backgroundColor = [CustomColor colorWithHexString:@"E9EDF4"];
             
-            label1.font = [UIFont fontWithName:@"BPreplay" size:16];
-            label2.font = [UIFont fontWithName:@"BPreplay" size:16];
-            label3.font = [UIFont fontWithName:@"BPreplay" size:16];
-            label4.font = [UIFont fontWithName:@"BPreplay" size:16];
-            label5.font = [UIFont fontWithName:@"BPreplay" size:16];
-            label6.font = [UIFont fontWithName:@"BPreplay" size:16];
+            label1.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
+            label2.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
+            label3.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
+            label4.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
+            label5.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
+            label6.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
         }
     }
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
-    CustomColor = Nil;
+    CustomColor = Nil;*/
     
     return cell;
 }
@@ -748,6 +785,20 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
     } else {
         OrderBy = @"DESC";
     }
+}
+
+#pragma mark - void added by faiz
+-(void)getDataForTable{
+    NSDictionary *dictIlustrationData=[[NSDictionary alloc]initWithDictionary:[_modelSIMaster getIlustrationata]];
+    
+    SINO = [[NSMutableArray alloc] initWithArray:[dictIlustrationData valueForKey:@"SINO"]];
+    DateCreated = [[NSMutableArray alloc] initWithArray:[dictIlustrationData valueForKey:@"CreatedDate"]];
+    Name = [[NSMutableArray alloc] initWithArray:[dictIlustrationData valueForKey:@"PO_Name"]];
+    PlanName = [[NSMutableArray alloc] initWithArray:[dictIlustrationData valueForKey:@"ProductName"]];
+    SIStatus = [[NSMutableArray alloc] initWithArray:[dictIlustrationData valueForKey:@"ProposalStatus"]];
+    SIVersion = [[NSMutableArray alloc] initWithArray:[dictIlustrationData valueForKey:@"SI_Version"]];
+    //BasicSA = [[NSMutableArray alloc] initWithArray:[dictIlustrationData valueForKey:@"Sum_Assured"]];
+    BasicSA =[[NSMutableArray alloc]initWithObjects:[NSNumber numberWithDouble:0], nil];
 }
 
 #pragma mark - Button Action

@@ -46,23 +46,26 @@
     NSMutableArray* arrayProposalStatus=[[NSMutableArray alloc] init];
     NSMutableArray* arraySIVersion=[[NSMutableArray alloc] init];
     
-    FMResultSet *s = [database executeQuery:@"SELECT sim.*, po.ProdutName,po.PO_Name FROM SI_master sim, SI_PO_Data po WHERE sim.SINO = po.SINO"];
+   // FMResultSet *s = [database executeQuery:@"SELECT sim.*, po.ProductName,po.PO_Name,premi.Sum_Assured FROM SI_master sim, SI_PO_Data po,SI_Premium premi WHERE sim.SINO = po.SINO and sim.SINO = premi.SINO"];
+     FMResultSet *s = [database executeQuery:@"SELECT sim.*, po.ProductName,po.PO_Name FROM SI_master sim, SI_PO_Data po WHERE sim.SINO = po.SINO"];
     while ([s next]) {
         NSString *stringSINo = [NSString stringWithFormat:@"%@",[s stringForColumn:@"SINO"]];
         NSString *stringCreatedDate = [NSString stringWithFormat:@"%@",[s stringForColumn:@"CreatedDate"]];
         NSString *stringPOName = [NSString stringWithFormat:@"%@",[s stringForColumn:@"PO_Name"]];
-        NSString *stringProductName = [NSString stringWithFormat:@"%@",[s stringForColumn:@"ProdutName"]];
+        NSString *stringProductName = [NSString stringWithFormat:@"%@",[s stringForColumn:@"ProductName"]];
         NSString *stringProposalStatus = [NSString stringWithFormat:@"%@",[s stringForColumn:@"ProposalStatus"]];
         NSString *stringSIVersion = [NSString stringWithFormat:@"%@",[s stringForColumn:@"SI_Version"]];
+        //double sumAssured = [s doubleForColumn:@"Sum_Assured"];
 
         [arraySINo addObject:stringSINo];
         [arrayCreatedDate addObject:stringCreatedDate];
         [arrayPOName addObject:stringPOName];
         [arrayProductName addObject:stringProductName];
+        //[arraySumAssured addObject:[NSNumber numberWithDouble:sumAssured]];
         [arrayProposalStatus addObject:stringProposalStatus];
         [arraySIVersion addObject:stringSIVersion];
     }
-    dict = [[NSDictionary alloc] initWithObjectsAndKeys:arraySINo,@"SINO", arrayCreatedDate,@"CreatedDate", arrayPOName,@"PO_Name",arrayProductName,@"ProdutName",arrayProposalStatus,@"ProposalStatus",arraySIVersion,@"SI_Version",nil];
+    dict = [[NSDictionary alloc] initWithObjectsAndKeys:arraySINo,@"SINO", arrayCreatedDate,@"CreatedDate", arrayPOName,@"PO_Name",arrayProductName,@"ProductName",arrayProposalStatus,@"ProposalStatus",arraySIVersion,@"SI_Version",/*arraySumAssured,@"Sum_Assured",*/ nil];
     
     [results close];
     [database close];
