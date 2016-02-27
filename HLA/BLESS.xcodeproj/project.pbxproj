@@ -59,6 +59,7 @@
 		178765DB1C74C25D0036F31A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 178765DA1C74C25D0036F31A /* Images.xcassets */; };
 		178765DF1C75C04C0036F31A /* ProspectProfileStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 178765DE1C75C04C0036F31A /* ProspectProfileStoryboard.storyboard */; };
 		178A076B1C7DAD7300B91582 /* ExtraPremi.m in Sources */ = {isa = PBXBuildFile; fileRef = 178A076A1C7DAD7300B91582 /* ExtraPremi.m */; };
+		178A076C1C8232A100B91582 /* BCA_Rates.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 175E3A5B1C7C50A0000EC161 /* BCA_Rates.sqlite */; };
 		17983C331C473373009E2977 /* HealthQuestionPO.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17983C321C473373009E2977 /* HealthQuestionPO.storyboard */; };
 		17A2990F1C60A0DB00C2537A /* HelveticaInseratLTStd-Roman.otf in Resources */ = {isa = PBXBuildFile; fileRef = 17A298FB1C60923400C2537A /* HelveticaInseratLTStd-Roman.otf */; };
 		17A299101C60A0DB00C2537A /* HelveticaLTStd-Blk.otf in Resources */ = {isa = PBXBuildFile; fileRef = 17A298FC1C60923400C2537A /* HelveticaLTStd-Blk.otf */; };
@@ -4643,6 +4644,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				178A076C1C8232A100B91582 /* BCA_Rates.sqlite in Resources */,
 				17A2990F1C60A0DB00C2537A /* HelveticaInseratLTStd-Roman.otf in Resources */,
 				17A299101C60A0DB00C2537A /* HelveticaLTStd-Blk.otf in Resources */,
 				17A299111C60A0DB00C2537A /* HelveticaLTStd-BlkCond.otf in Resources */,

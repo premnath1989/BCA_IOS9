@@ -85,7 +85,7 @@ bool WPTPD30RisDeleted = FALSE;
     NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docsDir = [dirPaths objectAtIndex:0];
     databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
-    RatesDatabasePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"HLA_Rates.sqlite"];
+    RatesDatabasePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"BCA_Rates.sqlite"];
     
 	if ([requesteProposalStatus isEqualToString:@"Failed"] || [requesteProposalStatus isEqualToString:@"Submitted"] ||
 		[requesteProposalStatus isEqualToString:@"Received"] || [requesteProposalStatus isEqualToString:@"Confirmed"] || [EAPPorSI isEqualToString:@"eAPP"] ||
@@ -562,6 +562,15 @@ bool WPTPD30RisDeleted = FALSE;
 }
 
 
+-(void)PremiDasarActB
+{
+    
+    
+    
+}
+
+
+
 -(void)setTextfieldBorder{
     UIFont *font= [UIFont fontWithName:@"TreBuchet MS" size:16.0f];
     for (UIView *view in [myScrollView subviews]) {
@@ -587,6 +596,7 @@ bool WPTPD30RisDeleted = FALSE;
     }
 
 }
+
 //end of added by faiz
 
 #pragma mark - Action
