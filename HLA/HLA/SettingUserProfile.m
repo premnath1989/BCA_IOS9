@@ -468,8 +468,8 @@ id temp;
     [self.view endEditing:TRUE];
     [self resignFirstResponder];
     [spinnerLoading startLoadingSpinner:self.view label:@"Sync sedang berjalan"];
-//    WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
-//    [webservice fullSync:self];
+    WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
+    [webservice checkVersion:@"1" delegate:self];
 }
 
 //here is our function for every response from webservice
@@ -494,6 +494,14 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
             UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Please check your connection" message:errorMesg delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
             [alert show];
         }
+         else if([bodyPart isKindOfClass:[AgentWS_CheckVersionResponse class]]) {
+             AgentWS_CheckVersionResponse* rateResponse = bodyPart;
+             if([rateResponse.strStatus caseInsensitiveCompare:@"True"] == NSOrderedSame){
+                 
+             }else{
+                 
+             }
+         }
     }
 }
 

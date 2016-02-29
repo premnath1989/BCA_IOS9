@@ -2636,6 +2636,7 @@
 - (id)init
 {
 	if((self = [super init])) {
+		strAgentCode = 0;
 		strStatus = 0;
 	}
 	
@@ -2643,6 +2644,7 @@
 }
 - (void)dealloc
 {
+	if(strAgentCode != nil) [strAgentCode release];
 	if(strStatus != nil) [strStatus release];
 	
 	[super dealloc];
@@ -2679,11 +2681,15 @@
 - (void)addElementsToNode:(xmlNodePtr)node
 {
 	
+	if(self.strAgentCode != 0) {
+		xmlAddChild(node, [self.strAgentCode xmlNodeForDoc:node->doc elementName:@"strAgentCode" elementNSPrefix:@"AgentWS"]);
+	}
 	if(self.strStatus != 0) {
 		xmlAddChild(node, [self.strStatus xmlNodeForDoc:node->doc elementName:@"strStatus" elementNSPrefix:@"AgentWS"]);
 	}
 }
 /* elements */
+@synthesize strAgentCode;
 @synthesize strStatus;
 /* attributes */
 - (NSDictionary *)attributes
@@ -2717,6 +2723,39 @@
 				elementString = [NSString stringWithCString:(char*)elementText encoding:NSUTF8StringEncoding];
 				[elementString self]; // avoid compiler warning for unused var
 				xmlFree(elementText);
+			}
+			if(xmlStrEqual(cur->name, (const xmlChar *) "strAgentCode")) {
+				
+				Class elementClass = nil;
+				xmlChar *instanceType = xmlGetNsProp(cur, (const xmlChar *) "type", (const xmlChar *) "http://www.w3.org/2001/XMLSchema-instance");
+				if(instanceType == NULL) {
+					elementClass = [NSString  class];
+				} else {
+					NSString *elementTypeString = [NSString stringWithCString:(char*)instanceType encoding:NSUTF8StringEncoding];
+					
+					NSArray *elementTypeArray = [elementTypeString componentsSeparatedByString:@":"];
+					
+					NSString *elementClassString = nil;
+					if([elementTypeArray count] > 1) {
+						NSString *prefix = [elementTypeArray objectAtIndex:0];
+						NSString *localName = [elementTypeArray objectAtIndex:1];
+						
+						xmlNsPtr elementNamespace = xmlSearchNs(cur->doc, cur, [prefix xmlString]);
+						
+						NSString *standardPrefix = [[USGlobals sharedInstance].wsdlStandardNamespaces objectForKey:[NSString stringWithCString:(char*)elementNamespace->href encoding:NSUTF8StringEncoding]];
+						
+						elementClassString = [NSString stringWithFormat:@"%@_%@", standardPrefix, localName];
+					} else {
+						elementClassString = [elementTypeString stringByReplacingOccurrencesOfString:@":" withString:@"_" options:0 range:NSMakeRange(0, [elementTypeString length])];
+					}
+					
+					elementClass = NSClassFromString(elementClassString);
+					xmlFree(instanceType);
+				}
+				
+				id newChild = [elementClass deserializeNode:cur];
+				
+				self.strAgentCode = newChild;
 			}
 			if(xmlStrEqual(cur->name, (const xmlChar *) "strStatus")) {
 				
@@ -2787,7 +2826,6 @@
 	
 	xmlNodePtr node = xmlNewDocNode(doc, NULL, [nodeName xmlString], NULL);
 	
-	
 	[self addAttributesToNode:node];
 	
 	[self addElementsToNode:node];
@@ -2822,7 +2860,7 @@
     }
     xmlBufferFree(buff);
     
-    AgentWS_ValidateLoginResult *newObject = [[AgentWS_ValidateLoginResult new] autorelease];
+    AgentWS_FullSyncTableResult *newObject = [[AgentWS_FullSyncTableResult new] autorelease];
     newObject.xmlDetails = str;
     [newObject deserializeAttributesFromNode:cur];
     [newObject deserializeElementsFromNode:cur];
@@ -2999,10 +3037,11 @@
 	}
 }
 @end
-@implementation AgentWS_PartialSyncTable
+@implementation AgentWS_CheckVersion
 - (id)init
 {
 	if((self = [super init])) {
+		strVesion = 0;
 		strStatus = 0;
 	}
 	
@@ -3010,6 +3049,7 @@
 }
 - (void)dealloc
 {
+	if(strVesion != nil) [strVesion release];
 	if(strStatus != nil) [strStatus release];
 	
 	[super dealloc];
@@ -3046,11 +3086,15 @@
 - (void)addElementsToNode:(xmlNodePtr)node
 {
 	
+	if(self.strVesion != 0) {
+		xmlAddChild(node, [self.strVesion xmlNodeForDoc:node->doc elementName:@"strVesion" elementNSPrefix:@"AgentWS"]);
+	}
 	if(self.strStatus != 0) {
 		xmlAddChild(node, [self.strStatus xmlNodeForDoc:node->doc elementName:@"strStatus" elementNSPrefix:@"AgentWS"]);
 	}
 }
 /* elements */
+@synthesize strVesion;
 @synthesize strStatus;
 /* attributes */
 - (NSDictionary *)attributes
@@ -3059,9 +3103,9 @@
 	
 	return attributes;
 }
-+ (AgentWS_PartialSyncTable *)deserializeNode:(xmlNodePtr)cur
++ (AgentWS_CheckVersion *)deserializeNode:(xmlNodePtr)cur
 {
-	AgentWS_PartialSyncTable *newObject = [[AgentWS_PartialSyncTable new] autorelease];
+	AgentWS_CheckVersion *newObject = [[AgentWS_CheckVersion new] autorelease];
 	
 	[newObject deserializeAttributesFromNode:cur];
 	[newObject deserializeElementsFromNode:cur];
@@ -3084,6 +3128,39 @@
 				elementString = [NSString stringWithCString:(char*)elementText encoding:NSUTF8StringEncoding];
 				[elementString self]; // avoid compiler warning for unused var
 				xmlFree(elementText);
+			}
+			if(xmlStrEqual(cur->name, (const xmlChar *) "strVesion")) {
+				
+				Class elementClass = nil;
+				xmlChar *instanceType = xmlGetNsProp(cur, (const xmlChar *) "type", (const xmlChar *) "http://www.w3.org/2001/XMLSchema-instance");
+				if(instanceType == NULL) {
+					elementClass = [NSString  class];
+				} else {
+					NSString *elementTypeString = [NSString stringWithCString:(char*)instanceType encoding:NSUTF8StringEncoding];
+					
+					NSArray *elementTypeArray = [elementTypeString componentsSeparatedByString:@":"];
+					
+					NSString *elementClassString = nil;
+					if([elementTypeArray count] > 1) {
+						NSString *prefix = [elementTypeArray objectAtIndex:0];
+						NSString *localName = [elementTypeArray objectAtIndex:1];
+						
+						xmlNsPtr elementNamespace = xmlSearchNs(cur->doc, cur, [prefix xmlString]);
+						
+						NSString *standardPrefix = [[USGlobals sharedInstance].wsdlStandardNamespaces objectForKey:[NSString stringWithCString:(char*)elementNamespace->href encoding:NSUTF8StringEncoding]];
+						
+						elementClassString = [NSString stringWithFormat:@"%@_%@", standardPrefix, localName];
+					} else {
+						elementClassString = [elementTypeString stringByReplacingOccurrencesOfString:@":" withString:@"_" options:0 range:NSMakeRange(0, [elementTypeString length])];
+					}
+					
+					elementClass = NSClassFromString(elementClassString);
+					xmlFree(instanceType);
+				}
+				
+				id newChild = [elementClass deserializeNode:cur];
+				
+				self.strVesion = newChild;
 			}
 			if(xmlStrEqual(cur->name, (const xmlChar *) "strStatus")) {
 				
@@ -3122,7 +3199,8 @@
 	}
 }
 @end
-@implementation AgentWS_PartialSyncTableResult
+@implementation AgentWS_CheckVersionResult
+@synthesize xmlDetails;
 - (id)init
 {
 	if((self = [super init])) {
@@ -3156,7 +3234,6 @@
 	
 	[self addAttributesToNode:node];
 	
-	[self addElementsToNode:node];
 	
 	return node;
 }
@@ -3166,6 +3243,7 @@
 }
 - (void)addElementsToNode:(xmlNodePtr)node
 {
+	
 }
 /* elements */
 /* attributes */
@@ -3175,9 +3253,9 @@
 	
 	return attributes;
 }
-+ (AgentWS_PartialSyncTableResult *)deserializeNode:(xmlNodePtr)cur
++ (AgentWS_CheckVersionResult *)deserializeNode:(xmlNodePtr)cur
 {
-	AgentWS_PartialSyncTableResult *newObject = [[AgentWS_PartialSyncTableResult new] autorelease];
+	AgentWS_CheckVersionResult *newObject = [[AgentWS_CheckVersionResult new] autorelease];
 	
 	[newObject deserializeAttributesFromNode:cur];
 	[newObject deserializeElementsFromNode:cur];
@@ -3189,13 +3267,15 @@
 }
 - (void)deserializeElementsFromNode:(xmlNodePtr)cur
 {
+	
+	
 }
 @end
-@implementation AgentWS_PartialSyncTableResponse
+@implementation AgentWS_CheckVersionResponse
 - (id)init
 {
 	if((self = [super init])) {
-		PartialSyncTableResult = 0;
+		CheckVersionResult = 0;
 		strStatus = 0;
 	}
 	
@@ -3203,7 +3283,7 @@
 }
 - (void)dealloc
 {
-	if(PartialSyncTableResult != nil) [PartialSyncTableResult release];
+	if(CheckVersionResult != nil) [CheckVersionResult release];
 	if(strStatus != nil) [strStatus release];
 	
 	[super dealloc];
@@ -3240,15 +3320,15 @@
 - (void)addElementsToNode:(xmlNodePtr)node
 {
 	
-	if(self.PartialSyncTableResult != 0) {
-		xmlAddChild(node, [self.PartialSyncTableResult xmlNodeForDoc:node->doc elementName:@"PartialSyncTableResult" elementNSPrefix:@"AgentWS"]);
+	if(self.CheckVersionResult != 0) {
+		xmlAddChild(node, [self.CheckVersionResult xmlNodeForDoc:node->doc elementName:@"CheckVersionResult" elementNSPrefix:@"AgentWS"]);
 	}
 	if(self.strStatus != 0) {
 		xmlAddChild(node, [self.strStatus xmlNodeForDoc:node->doc elementName:@"strStatus" elementNSPrefix:@"AgentWS"]);
 	}
 }
 /* elements */
-@synthesize PartialSyncTableResult;
+@synthesize CheckVersionResult;
 @synthesize strStatus;
 /* attributes */
 - (NSDictionary *)attributes
@@ -3257,9 +3337,9 @@
 	
 	return attributes;
 }
-+ (AgentWS_PartialSyncTableResponse *)deserializeNode:(xmlNodePtr)cur
++ (AgentWS_CheckVersionResponse *)deserializeNode:(xmlNodePtr)cur
 {
-	AgentWS_PartialSyncTableResponse *newObject = [[AgentWS_PartialSyncTableResponse new] autorelease];
+	AgentWS_CheckVersionResponse *newObject = [[AgentWS_CheckVersionResponse new] autorelease];
 	
 	[newObject deserializeAttributesFromNode:cur];
 	[newObject deserializeElementsFromNode:cur];
@@ -3283,12 +3363,12 @@
 				[elementString self]; // avoid compiler warning for unused var
 				xmlFree(elementText);
 			}
-			if(xmlStrEqual(cur->name, (const xmlChar *) "PartialSyncTableResult")) {
+			if(xmlStrEqual(cur->name, (const xmlChar *) "CheckVersionResult")) {
 				
 				Class elementClass = nil;
 				xmlChar *instanceType = xmlGetNsProp(cur, (const xmlChar *) "type", (const xmlChar *) "http://www.w3.org/2001/XMLSchema-instance");
 				if(instanceType == NULL) {
-					elementClass = [AgentWS_PartialSyncTableResult class];
+					elementClass = [AgentWS_CheckVersionResult class];
 				} else {
 					NSString *elementTypeString = [NSString stringWithCString:(char*)instanceType encoding:NSUTF8StringEncoding];
 					
@@ -3314,7 +3394,7 @@
 				
 				id newChild = [elementClass deserializeNode:cur];
 				
-				self.PartialSyncTableResult = newChild;
+				self.CheckVersionResult = newChild;
 			}
 			if(xmlStrEqual(cur->name, (const xmlChar *) "strStatus")) {
 				
@@ -3351,6 +3431,432 @@
 			}
 		}
 	}
+}
+@end
+@implementation AgentWS_PartialSync
+- (id)init
+{
+	if((self = [super init])) {
+		strAgentcode = 0;
+		strXML = 0;
+	}
+	
+	return self;
+}
+- (void)dealloc
+{
+	if(strAgentcode != nil) [strAgentcode release];
+	if(strXML != nil) [strXML release];
+	
+	[super dealloc];
+}
+- (NSString *)nsPrefix
+{
+	return @"AgentWS";
+}
+- (xmlNodePtr)xmlNodeForDoc:(xmlDocPtr)doc elementName:(NSString *)elName elementNSPrefix:(NSString *)elNSPrefix
+{
+	NSString *nodeName = nil;
+	if(elNSPrefix != nil && [elNSPrefix length] > 0)
+	{
+		nodeName = [NSString stringWithFormat:@"%@:%@", elNSPrefix, elName];
+	}
+	else
+	{
+		nodeName = [NSString stringWithFormat:@"%@:%@", @"AgentWS", elName];
+	}
+	
+	xmlNodePtr node = xmlNewDocNode(doc, NULL, [nodeName xmlString], NULL);
+	
+	
+	[self addAttributesToNode:node];
+	
+	[self addElementsToNode:node];
+	
+	return node;
+}
+- (void)addAttributesToNode:(xmlNodePtr)node
+{
+	
+}
+- (void)addElementsToNode:(xmlNodePtr)node
+{
+	
+	if(self.strAgentcode != 0) {
+		xmlAddChild(node, [self.strAgentcode xmlNodeForDoc:node->doc elementName:@"strAgentcode" elementNSPrefix:@"AgentWS"]);
+	}
+	if(self.strXML != 0) {
+		xmlAddChild(node, [self.strXML xmlNodeForDoc:node->doc elementName:@"strXML" elementNSPrefix:@"AgentWS"]);
+	}
+}
+/* elements */
+@synthesize strAgentcode;
+@synthesize strXML;
+/* attributes */
+- (NSDictionary *)attributes
+{
+	NSMutableDictionary *attributes = [NSMutableDictionary dictionary];
+	
+	return attributes;
+}
++ (AgentWS_PartialSync *)deserializeNode:(xmlNodePtr)cur
+{
+	AgentWS_PartialSync *newObject = [[AgentWS_PartialSync new] autorelease];
+	
+	[newObject deserializeAttributesFromNode:cur];
+	[newObject deserializeElementsFromNode:cur];
+	
+	return newObject;
+}
+- (void)deserializeAttributesFromNode:(xmlNodePtr)cur
+{
+}
+- (void)deserializeElementsFromNode:(xmlNodePtr)cur
+{
+	
+	
+	for( cur = cur->children ; cur != NULL ; cur = cur->next ) {
+		if(cur->type == XML_ELEMENT_NODE) {
+			xmlChar *elementText = xmlNodeListGetString(cur->doc, cur->children, 1);
+			NSString *elementString = nil;
+			
+			if(elementText != NULL) {
+				elementString = [NSString stringWithCString:(char*)elementText encoding:NSUTF8StringEncoding];
+				[elementString self]; // avoid compiler warning for unused var
+				xmlFree(elementText);
+			}
+			if(xmlStrEqual(cur->name, (const xmlChar *) "strAgentcode")) {
+				
+				Class elementClass = nil;
+				xmlChar *instanceType = xmlGetNsProp(cur, (const xmlChar *) "type", (const xmlChar *) "http://www.w3.org/2001/XMLSchema-instance");
+				if(instanceType == NULL) {
+					elementClass = [NSString  class];
+				} else {
+					NSString *elementTypeString = [NSString stringWithCString:(char*)instanceType encoding:NSUTF8StringEncoding];
+					
+					NSArray *elementTypeArray = [elementTypeString componentsSeparatedByString:@":"];
+					
+					NSString *elementClassString = nil;
+					if([elementTypeArray count] > 1) {
+						NSString *prefix = [elementTypeArray objectAtIndex:0];
+						NSString *localName = [elementTypeArray objectAtIndex:1];
+						
+						xmlNsPtr elementNamespace = xmlSearchNs(cur->doc, cur, [prefix xmlString]);
+						
+						NSString *standardPrefix = [[USGlobals sharedInstance].wsdlStandardNamespaces objectForKey:[NSString stringWithCString:(char*)elementNamespace->href encoding:NSUTF8StringEncoding]];
+						
+						elementClassString = [NSString stringWithFormat:@"%@_%@", standardPrefix, localName];
+					} else {
+						elementClassString = [elementTypeString stringByReplacingOccurrencesOfString:@":" withString:@"_" options:0 range:NSMakeRange(0, [elementTypeString length])];
+					}
+					
+					elementClass = NSClassFromString(elementClassString);
+					xmlFree(instanceType);
+				}
+				
+				id newChild = [elementClass deserializeNode:cur];
+				
+				self.strAgentcode = newChild;
+			}
+			if(xmlStrEqual(cur->name, (const xmlChar *) "strXML")) {
+				
+				Class elementClass = nil;
+				xmlChar *instanceType = xmlGetNsProp(cur, (const xmlChar *) "type", (const xmlChar *) "http://www.w3.org/2001/XMLSchema-instance");
+				if(instanceType == NULL) {
+					elementClass = [NSString  class];
+				} else {
+					NSString *elementTypeString = [NSString stringWithCString:(char*)instanceType encoding:NSUTF8StringEncoding];
+					
+					NSArray *elementTypeArray = [elementTypeString componentsSeparatedByString:@":"];
+					
+					NSString *elementClassString = nil;
+					if([elementTypeArray count] > 1) {
+						NSString *prefix = [elementTypeArray objectAtIndex:0];
+						NSString *localName = [elementTypeArray objectAtIndex:1];
+						
+						xmlNsPtr elementNamespace = xmlSearchNs(cur->doc, cur, [prefix xmlString]);
+						
+						NSString *standardPrefix = [[USGlobals sharedInstance].wsdlStandardNamespaces objectForKey:[NSString stringWithCString:(char*)elementNamespace->href encoding:NSUTF8StringEncoding]];
+						
+						elementClassString = [NSString stringWithFormat:@"%@_%@", standardPrefix, localName];
+					} else {
+						elementClassString = [elementTypeString stringByReplacingOccurrencesOfString:@":" withString:@"_" options:0 range:NSMakeRange(0, [elementTypeString length])];
+					}
+					
+					elementClass = NSClassFromString(elementClassString);
+					xmlFree(instanceType);
+				}
+				
+				id newChild = [elementClass deserializeNode:cur];
+				
+				self.strXML = newChild;
+			}
+		}
+	}
+}
+@end
+@implementation AgentWS_PartialSyncResult
+@synthesize xmlDetails;
+- (id)init
+{
+	if((self = [super init])) {
+	}
+	
+	return self;
+}
+- (void)dealloc
+{
+	
+	[super dealloc];
+}
+- (NSString *)nsPrefix
+{
+	return @"AgentWS";
+}
+- (xmlNodePtr)xmlNodeForDoc:(xmlDocPtr)doc elementName:(NSString *)elName elementNSPrefix:(NSString *)elNSPrefix
+{
+	NSString *nodeName = nil;
+	if(elNSPrefix != nil && [elNSPrefix length] > 0)
+	{
+		nodeName = [NSString stringWithFormat:@"%@:%@", elNSPrefix, elName];
+	}
+	else
+	{
+		nodeName = [NSString stringWithFormat:@"%@:%@", @"AgentWS", elName];
+	}
+	
+	xmlNodePtr node = xmlNewDocNode(doc, NULL, [nodeName xmlString], NULL);
+	
+	
+	[self addAttributesToNode:node];
+	
+	[self addElementsToNode:node];
+	
+	return node;
+}
+- (void)addAttributesToNode:(xmlNodePtr)node
+{
+	
+}
+- (void)addElementsToNode:(xmlNodePtr)node
+{
+	
+}
+/* elements */
+/* attributes */
+- (NSDictionary *)attributes
+{
+	NSMutableDictionary *attributes = [NSMutableDictionary dictionary];
+	
+	return attributes;
+}
++ (AgentWS_PartialSyncResult *)deserializeNode:(xmlNodePtr)cur
+{
+	AgentWS_PartialSyncResult *newObject = [[AgentWS_PartialSyncResult new] autorelease];
+	
+	[newObject deserializeAttributesFromNode:cur];
+	[newObject deserializeElementsFromNode:cur];
+	
+	return newObject;
+}
+- (void)deserializeAttributesFromNode:(xmlNodePtr)cur
+{
+}
+- (void)deserializeElementsFromNode:(xmlNodePtr)cur
+{
+}
+@end
+@implementation AgentWS_PartialSyncResponse
+- (id)init
+{
+	if((self = [super init])) {
+		PartialSyncResult = 0;
+	}
+	
+	return self;
+}
+- (void)dealloc
+{
+	if(PartialSyncResult != nil) [PartialSyncResult release];
+	
+	[super dealloc];
+}
+- (NSString *)nsPrefix
+{
+	return @"AgentWS";
+}
+- (xmlNodePtr)xmlNodeForDoc:(xmlDocPtr)doc elementName:(NSString *)elName elementNSPrefix:(NSString *)elNSPrefix
+{
+	NSString *nodeName = nil;
+	if(elNSPrefix != nil && [elNSPrefix length] > 0)
+	{
+		nodeName = [NSString stringWithFormat:@"%@:%@", elNSPrefix, elName];
+	}
+	else
+	{
+		nodeName = [NSString stringWithFormat:@"%@:%@", @"AgentWS", elName];
+	}
+	
+	xmlNodePtr node = xmlNewDocNode(doc, NULL, [nodeName xmlString], NULL);
+	
+	
+	[self addAttributesToNode:node];
+	
+	[self addElementsToNode:node];
+	
+	return node;
+}
+- (void)addAttributesToNode:(xmlNodePtr)node
+{
+	
+}
+- (void)addElementsToNode:(xmlNodePtr)node
+{
+	
+	if(self.PartialSyncResult != 0) {
+		xmlAddChild(node, [self.PartialSyncResult xmlNodeForDoc:node->doc elementName:@"PartialSyncResult" elementNSPrefix:@"AgentWS"]);
+	}
+}
+/* elements */
+@synthesize PartialSyncResult;
+/* attributes */
+- (NSDictionary *)attributes
+{
+	NSMutableDictionary *attributes = [NSMutableDictionary dictionary];
+	
+	return attributes;
+}
++ (AgentWS_PartialSyncResponse *)deserializeNode:(xmlNodePtr)cur
+{
+	AgentWS_PartialSyncResponse *newObject = [[AgentWS_PartialSyncResponse new] autorelease];
+	
+	[newObject deserializeAttributesFromNode:cur];
+	[newObject deserializeElementsFromNode:cur];
+	
+	return newObject;
+}
+- (void)deserializeAttributesFromNode:(xmlNodePtr)cur
+{
+}
+- (void)deserializeElementsFromNode:(xmlNodePtr)cur
+{
+	
+	
+	for( cur = cur->children ; cur != NULL ; cur = cur->next ) {
+		if(cur->type == XML_ELEMENT_NODE) {
+			xmlChar *elementText = xmlNodeListGetString(cur->doc, cur->children, 1);
+			NSString *elementString = nil;
+			
+			if(elementText != NULL) {
+				elementString = [NSString stringWithCString:(char*)elementText encoding:NSUTF8StringEncoding];
+				[elementString self]; // avoid compiler warning for unused var
+				xmlFree(elementText);
+			}
+			if(xmlStrEqual(cur->name, (const xmlChar *) "PartialSyncResult")) {
+				
+				Class elementClass = nil;
+				xmlChar *instanceType = xmlGetNsProp(cur, (const xmlChar *) "type", (const xmlChar *) "http://www.w3.org/2001/XMLSchema-instance");
+				if(instanceType == NULL) {
+					elementClass = [AgentWS_PartialSyncResult class];
+				} else {
+					NSString *elementTypeString = [NSString stringWithCString:(char*)instanceType encoding:NSUTF8StringEncoding];
+					
+					NSArray *elementTypeArray = [elementTypeString componentsSeparatedByString:@":"];
+					
+					NSString *elementClassString = nil;
+					if([elementTypeArray count] > 1) {
+						NSString *prefix = [elementTypeArray objectAtIndex:0];
+						NSString *localName = [elementTypeArray objectAtIndex:1];
+						
+						xmlNsPtr elementNamespace = xmlSearchNs(cur->doc, cur, [prefix xmlString]);
+						
+						NSString *standardPrefix = [[USGlobals sharedInstance].wsdlStandardNamespaces objectForKey:[NSString stringWithCString:(char*)elementNamespace->href encoding:NSUTF8StringEncoding]];
+						
+						elementClassString = [NSString stringWithFormat:@"%@_%@", standardPrefix, localName];
+					} else {
+						elementClassString = [elementTypeString stringByReplacingOccurrencesOfString:@":" withString:@"_" options:0 range:NSMakeRange(0, [elementTypeString length])];
+					}
+					
+					elementClass = NSClassFromString(elementClassString);
+					xmlFree(instanceType);
+				}
+				
+				id newChild = [elementClass deserializeNode:cur];
+				
+				self.PartialSyncResult = newChild;
+			}
+		}
+	}
+}
+@end
+@implementation AgentWS_DataSet
+@synthesize xmlDetails;
+- (id)init
+{
+	if((self = [super init])) {
+	}
+	
+	return self;
+}
+- (void)dealloc
+{
+	
+	[super dealloc];
+}
+- (NSString *)nsPrefix
+{
+	return @"AgentWS";
+}
+- (xmlNodePtr)xmlNodeForDoc:(xmlDocPtr)doc elementName:(NSString *)elName elementNSPrefix:(NSString *)elNSPrefix
+{
+	NSString *nodeName = nil;
+	if(elNSPrefix != nil && [elNSPrefix length] > 0)
+	{
+		nodeName = [NSString stringWithFormat:@"%@:%@", elNSPrefix, elName];
+	}
+	else
+	{
+		nodeName = [NSString stringWithFormat:@"%@:%@", @"AgentWS", elName];
+	}
+	
+	xmlNodePtr node = xmlNewDocNode(doc, NULL, [nodeName xmlString], NULL);
+	
+	
+	[self addAttributesToNode:node];
+	
+	[self addElementsToNode:node];
+	
+	return node;
+}
+- (void)addAttributesToNode:(xmlNodePtr)node
+{
+	
+}
+- (void)addElementsToNode:(xmlNodePtr)node
+{
+}
+/* elements */
+/* attributes */
+- (NSDictionary *)attributes
+{
+	NSMutableDictionary *attributes = [NSMutableDictionary dictionary];
+	
+	return attributes;
+}
++ (AgentWS_DataSet *)deserializeNode:(xmlNodePtr)cur
+{
+	AgentWS_DataSet *newObject = [[AgentWS_DataSet new] autorelease];
+	
+	[newObject deserializeAttributesFromNode:cur];
+	[newObject deserializeElementsFromNode:cur];
+	
+	return newObject;
+}
+- (void)deserializeAttributesFromNode:(xmlNodePtr)cur
+{
+}
+- (void)deserializeElementsFromNode:(xmlNodePtr)cur
+{
 }
 @end
 @implementation AgentWS
@@ -3517,15 +4023,27 @@
 																							 parameters:aParameters
 																							 ] autorelease]];
 }
-- (AgentWSSoapBindingResponse *)PartialSyncTableUsingParameters:(AgentWS_PartialSyncTable *)aParameters 
+- (AgentWSSoapBindingResponse *)CheckVersionUsingParameters:(AgentWS_CheckVersion *)aParameters 
 {
-	return [self performSynchronousOperation:[[(AgentWSSoapBinding_PartialSyncTable*)[AgentWSSoapBinding_PartialSyncTable alloc] initWithBinding:self delegate:self
+	return [self performSynchronousOperation:[[(AgentWSSoapBinding_CheckVersion*)[AgentWSSoapBinding_CheckVersion alloc] initWithBinding:self delegate:self
 																							parameters:aParameters
 																							] autorelease]];
 }
-- (void)PartialSyncTableAsyncUsingParameters:(AgentWS_PartialSyncTable *)aParameters  delegate:(id<AgentWSSoapBindingResponseDelegate>)responseDelegate
+- (void)CheckVersionAsyncUsingParameters:(AgentWS_CheckVersion *)aParameters  delegate:(id<AgentWSSoapBindingResponseDelegate>)responseDelegate
 {
-	[self performAsynchronousOperation: [[(AgentWSSoapBinding_PartialSyncTable*)[AgentWSSoapBinding_PartialSyncTable alloc] initWithBinding:self delegate:responseDelegate
+	[self performAsynchronousOperation: [[(AgentWSSoapBinding_CheckVersion*)[AgentWSSoapBinding_CheckVersion alloc] initWithBinding:self delegate:responseDelegate
+																							 parameters:aParameters
+																							 ] autorelease]];
+}
+- (AgentWSSoapBindingResponse *)PartialSyncUsingParameters:(AgentWS_PartialSync *)aParameters 
+{
+	return [self performSynchronousOperation:[[(AgentWSSoapBinding_PartialSync*)[AgentWSSoapBinding_PartialSync alloc] initWithBinding:self delegate:self
+																							parameters:aParameters
+																							] autorelease]];
+}
+- (void)PartialSyncAsyncUsingParameters:(AgentWS_PartialSync *)aParameters  delegate:(id<AgentWSSoapBindingResponseDelegate>)responseDelegate
+{
+	[self performAsynchronousOperation: [[(AgentWSSoapBinding_PartialSync*)[AgentWSSoapBinding_PartialSync alloc] initWithBinding:self delegate:responseDelegate
 																							 parameters:aParameters
 																							 ] autorelease]];
 }
@@ -4405,10 +4923,10 @@ parameters:(AgentWS_FullSyncTable *)aParameters
 	}
 }
 @end
-@implementation AgentWSSoapBinding_PartialSyncTable
+@implementation AgentWSSoapBinding_CheckVersion
 @synthesize parameters;
 - (id)initWithBinding:(AgentWSSoapBinding *)aBinding delegate:(id<AgentWSSoapBindingResponseDelegate>)responseDelegate
-parameters:(AgentWS_PartialSyncTable *)aParameters
+parameters:(AgentWS_CheckVersion *)aParameters
 {
 	if((self = [super initWithBinding:aBinding delegate:responseDelegate])) {
 		self.parameters = aParameters;
@@ -4434,11 +4952,11 @@ parameters:(AgentWS_PartialSyncTable *)aParameters
 	
 	NSMutableDictionary *bodyElements = nil;
 	bodyElements = [NSMutableDictionary dictionary];
-	if(parameters != nil) [bodyElements setObject:parameters forKey:@"PartialSyncTable"];
+	if(parameters != nil) [bodyElements setObject:parameters forKey:@"CheckVersion"];
 	
 	NSString *operationXMLString = [envelope serializedFormUsingHeaderElements:headerElements bodyElements:bodyElements];
 	
-	[binding sendHTTPCallUsingBody:operationXMLString soapAction:@"http://tempuri.org/PartialSyncTable" forOperation:self];
+	[binding sendHTTPCallUsingBody:operationXMLString soapAction:@"http://tempuri.org/CheckVersion" forOperation:self];
 }
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
@@ -4471,8 +4989,101 @@ parameters:(AgentWS_PartialSyncTable *)aParameters
 						xmlNodePtr bodyNode;
 						for(bodyNode=cur->children ; bodyNode != NULL ; bodyNode = bodyNode->next) {
 							if(cur->type == XML_ELEMENT_NODE) {
-								if(xmlStrEqual(bodyNode->name, (const xmlChar *) "PartialSyncTableResponse")) {
-									AgentWS_PartialSyncTableResponse *bodyObject = [AgentWS_PartialSyncTableResponse deserializeNode:bodyNode];
+								if(xmlStrEqual(bodyNode->name, (const xmlChar *) "CheckVersionResponse")) {
+									AgentWS_CheckVersionResponse *bodyObject = [AgentWS_CheckVersionResponse deserializeNode:bodyNode];
+									//NSAssert1(bodyObject != nil, @"Errors while parsing body %s", bodyNode->name);
+									if (bodyObject != nil) [responseBodyParts addObject:bodyObject];
+								}
+								if (xmlStrEqual(bodyNode->ns->prefix, cur->ns->prefix) && 
+									xmlStrEqual(bodyNode->name, (const xmlChar *) "Fault")) {
+									SOAPFault *bodyObject = [SOAPFault deserializeNode:bodyNode];
+									//NSAssert1(bodyObject != nil, @"Errors while parsing body %s", bodyNode->name);
+									if (bodyObject != nil) [responseBodyParts addObject:bodyObject];
+								}
+							}
+						}
+						
+						response.bodyParts = responseBodyParts;
+					}
+				}
+			}
+			
+			xmlFreeDoc(doc);
+		}
+		
+		xmlCleanupParser();
+		[delegate operation:self completedWithResponse:response];
+	}
+}
+@end
+@implementation AgentWSSoapBinding_PartialSync
+@synthesize parameters;
+- (id)initWithBinding:(AgentWSSoapBinding *)aBinding delegate:(id<AgentWSSoapBindingResponseDelegate>)responseDelegate
+parameters:(AgentWS_PartialSync *)aParameters
+{
+	if((self = [super initWithBinding:aBinding delegate:responseDelegate])) {
+		self.parameters = aParameters;
+	}
+	
+	return self;
+}
+- (void)dealloc
+{
+	if(parameters != nil) [parameters release];
+	
+	[super dealloc];
+}
+- (void)main
+{
+	[response autorelease];
+	response = [AgentWSSoapBindingResponse new];
+	
+	AgentWSSoapBinding_envelope *envelope = [AgentWSSoapBinding_envelope sharedInstance];
+	
+	NSMutableDictionary *headerElements = nil;
+	headerElements = [NSMutableDictionary dictionary];
+	
+	NSMutableDictionary *bodyElements = nil;
+	bodyElements = [NSMutableDictionary dictionary];
+	if(parameters != nil) [bodyElements setObject:parameters forKey:@"PartialSync"];
+	
+	NSString *operationXMLString = [envelope serializedFormUsingHeaderElements:headerElements bodyElements:bodyElements];
+	
+	[binding sendHTTPCallUsingBody:operationXMLString soapAction:@"http://tempuri.org/PartialSync" forOperation:self];
+}
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+	if (responseData != nil && delegate != nil)
+	{
+		xmlDocPtr doc;
+		xmlNodePtr cur;
+		
+		if (binding.logXMLInOut) {
+			NSLog(@"ResponseBody:\n%@", [[[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding] autorelease]);
+		}
+		
+		doc = xmlParseMemory([responseData bytes], [responseData length]);
+		
+		if (doc == NULL) {
+			NSDictionary *userInfo = [NSDictionary dictionaryWithObject:@"Errors while parsing returned XML" forKey:NSLocalizedDescriptionKey];
+			
+			response.error = [NSError errorWithDomain:@"AgentWSSoapBindingResponseXML" code:1 userInfo:userInfo];
+			[delegate operation:self completedWithResponse:response];
+		} else {
+			cur = xmlDocGetRootElement(doc);
+			cur = cur->children;
+			
+			for( ; cur != NULL ; cur = cur->next) {
+				if(cur->type == XML_ELEMENT_NODE) {
+					
+					if(xmlStrEqual(cur->name, (const xmlChar *) "Body")) {
+						NSMutableArray *responseBodyParts = [NSMutableArray array];
+						
+						xmlNodePtr bodyNode;
+						for(bodyNode=cur->children ; bodyNode != NULL ; bodyNode = bodyNode->next) {
+							if(cur->type == XML_ELEMENT_NODE) {
+								if(xmlStrEqual(bodyNode->name, (const xmlChar *) "PartialSyncResponse")) {
+									AgentWS_PartialSyncResponse *bodyObject = [AgentWS_PartialSyncResponse deserializeNode:bodyNode];
 									//NSAssert1(bodyObject != nil, @"Errors while parsing body %s", bodyNode->name);
 									if (bodyObject != nil) [responseBodyParts addObject:bodyObject];
 								}
@@ -4733,15 +5344,27 @@ static AgentWSSoapBinding_envelope *AgentWSSoapBindingSharedEnvelopeInstance = n
 																							 parameters:aParameters
 																							 ] autorelease]];
 }
-- (AgentWSSoap12BindingResponse *)PartialSyncTableUsingParameters:(AgentWS_PartialSyncTable *)aParameters 
+- (AgentWSSoap12BindingResponse *)CheckVersionUsingParameters:(AgentWS_CheckVersion *)aParameters 
 {
-	return [self performSynchronousOperation:[[(AgentWSSoap12Binding_PartialSyncTable*)[AgentWSSoap12Binding_PartialSyncTable alloc] initWithBinding:self delegate:self
+	return [self performSynchronousOperation:[[(AgentWSSoap12Binding_CheckVersion*)[AgentWSSoap12Binding_CheckVersion alloc] initWithBinding:self delegate:self
 																							parameters:aParameters
 																							] autorelease]];
 }
-- (void)PartialSyncTableAsyncUsingParameters:(AgentWS_PartialSyncTable *)aParameters  delegate:(id<AgentWSSoap12BindingResponseDelegate>)responseDelegate
+- (void)CheckVersionAsyncUsingParameters:(AgentWS_CheckVersion *)aParameters  delegate:(id<AgentWSSoap12BindingResponseDelegate>)responseDelegate
 {
-	[self performAsynchronousOperation: [[(AgentWSSoap12Binding_PartialSyncTable*)[AgentWSSoap12Binding_PartialSyncTable alloc] initWithBinding:self delegate:responseDelegate
+	[self performAsynchronousOperation: [[(AgentWSSoap12Binding_CheckVersion*)[AgentWSSoap12Binding_CheckVersion alloc] initWithBinding:self delegate:responseDelegate
+																							 parameters:aParameters
+																							 ] autorelease]];
+}
+- (AgentWSSoap12BindingResponse *)PartialSyncUsingParameters:(AgentWS_PartialSync *)aParameters 
+{
+	return [self performSynchronousOperation:[[(AgentWSSoap12Binding_PartialSync*)[AgentWSSoap12Binding_PartialSync alloc] initWithBinding:self delegate:self
+																							parameters:aParameters
+																							] autorelease]];
+}
+- (void)PartialSyncAsyncUsingParameters:(AgentWS_PartialSync *)aParameters  delegate:(id<AgentWSSoap12BindingResponseDelegate>)responseDelegate
+{
+	[self performAsynchronousOperation: [[(AgentWSSoap12Binding_PartialSync*)[AgentWSSoap12Binding_PartialSync alloc] initWithBinding:self delegate:responseDelegate
 																							 parameters:aParameters
 																							 ] autorelease]];
 }
@@ -5621,10 +6244,10 @@ parameters:(AgentWS_FullSyncTable *)aParameters
 	}
 }
 @end
-@implementation AgentWSSoap12Binding_PartialSyncTable
+@implementation AgentWSSoap12Binding_CheckVersion
 @synthesize parameters;
 - (id)initWithBinding:(AgentWSSoap12Binding *)aBinding delegate:(id<AgentWSSoap12BindingResponseDelegate>)responseDelegate
-parameters:(AgentWS_PartialSyncTable *)aParameters
+parameters:(AgentWS_CheckVersion *)aParameters
 {
 	if((self = [super initWithBinding:aBinding delegate:responseDelegate])) {
 		self.parameters = aParameters;
@@ -5650,11 +6273,11 @@ parameters:(AgentWS_PartialSyncTable *)aParameters
 	
 	NSMutableDictionary *bodyElements = nil;
 	bodyElements = [NSMutableDictionary dictionary];
-	if(parameters != nil) [bodyElements setObject:parameters forKey:@"PartialSyncTable"];
+	if(parameters != nil) [bodyElements setObject:parameters forKey:@"CheckVersion"];
 	
 	NSString *operationXMLString = [envelope serializedFormUsingHeaderElements:headerElements bodyElements:bodyElements];
 	
-	[binding sendHTTPCallUsingBody:operationXMLString soapAction:@"http://tempuri.org/PartialSyncTable" forOperation:self];
+	[binding sendHTTPCallUsingBody:operationXMLString soapAction:@"http://tempuri.org/CheckVersion" forOperation:self];
 }
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
@@ -5687,8 +6310,101 @@ parameters:(AgentWS_PartialSyncTable *)aParameters
 						xmlNodePtr bodyNode;
 						for(bodyNode=cur->children ; bodyNode != NULL ; bodyNode = bodyNode->next) {
 							if(cur->type == XML_ELEMENT_NODE) {
-								if(xmlStrEqual(bodyNode->name, (const xmlChar *) "PartialSyncTableResponse")) {
-									AgentWS_PartialSyncTableResponse *bodyObject = [AgentWS_PartialSyncTableResponse deserializeNode:bodyNode];
+								if(xmlStrEqual(bodyNode->name, (const xmlChar *) "CheckVersionResponse")) {
+									AgentWS_CheckVersionResponse *bodyObject = [AgentWS_CheckVersionResponse deserializeNode:bodyNode];
+									//NSAssert1(bodyObject != nil, @"Errors while parsing body %s", bodyNode->name);
+									if (bodyObject != nil) [responseBodyParts addObject:bodyObject];
+								}
+								if (xmlStrEqual(bodyNode->ns->prefix, cur->ns->prefix) && 
+									xmlStrEqual(bodyNode->name, (const xmlChar *) "Fault")) {
+									SOAPFault *bodyObject = [SOAPFault deserializeNode:bodyNode];
+									//NSAssert1(bodyObject != nil, @"Errors while parsing body %s", bodyNode->name);
+									if (bodyObject != nil) [responseBodyParts addObject:bodyObject];
+								}
+							}
+						}
+						
+						response.bodyParts = responseBodyParts;
+					}
+				}
+			}
+			
+			xmlFreeDoc(doc);
+		}
+		
+		xmlCleanupParser();
+		[delegate operation:self completedWithResponse:response];
+	}
+}
+@end
+@implementation AgentWSSoap12Binding_PartialSync
+@synthesize parameters;
+- (id)initWithBinding:(AgentWSSoap12Binding *)aBinding delegate:(id<AgentWSSoap12BindingResponseDelegate>)responseDelegate
+parameters:(AgentWS_PartialSync *)aParameters
+{
+	if((self = [super initWithBinding:aBinding delegate:responseDelegate])) {
+		self.parameters = aParameters;
+	}
+	
+	return self;
+}
+- (void)dealloc
+{
+	if(parameters != nil) [parameters release];
+	
+	[super dealloc];
+}
+- (void)main
+{
+	[response autorelease];
+	response = [AgentWSSoap12BindingResponse new];
+	
+	AgentWSSoap12Binding_envelope *envelope = [AgentWSSoap12Binding_envelope sharedInstance];
+	
+	NSMutableDictionary *headerElements = nil;
+	headerElements = [NSMutableDictionary dictionary];
+	
+	NSMutableDictionary *bodyElements = nil;
+	bodyElements = [NSMutableDictionary dictionary];
+	if(parameters != nil) [bodyElements setObject:parameters forKey:@"PartialSync"];
+	
+	NSString *operationXMLString = [envelope serializedFormUsingHeaderElements:headerElements bodyElements:bodyElements];
+	
+	[binding sendHTTPCallUsingBody:operationXMLString soapAction:@"http://tempuri.org/PartialSync" forOperation:self];
+}
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+	if (responseData != nil && delegate != nil)
+	{
+		xmlDocPtr doc;
+		xmlNodePtr cur;
+		
+		if (binding.logXMLInOut) {
+			NSLog(@"ResponseBody:\n%@", [[[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding] autorelease]);
+		}
+		
+		doc = xmlParseMemory([responseData bytes], [responseData length]);
+		
+		if (doc == NULL) {
+			NSDictionary *userInfo = [NSDictionary dictionaryWithObject:@"Errors while parsing returned XML" forKey:NSLocalizedDescriptionKey];
+			
+			response.error = [NSError errorWithDomain:@"AgentWSSoap12BindingResponseXML" code:1 userInfo:userInfo];
+			[delegate operation:self completedWithResponse:response];
+		} else {
+			cur = xmlDocGetRootElement(doc);
+			cur = cur->children;
+			
+			for( ; cur != NULL ; cur = cur->next) {
+				if(cur->type == XML_ELEMENT_NODE) {
+					
+					if(xmlStrEqual(cur->name, (const xmlChar *) "Body")) {
+						NSMutableArray *responseBodyParts = [NSMutableArray array];
+						
+						xmlNodePtr bodyNode;
+						for(bodyNode=cur->children ; bodyNode != NULL ; bodyNode = bodyNode->next) {
+							if(cur->type == XML_ELEMENT_NODE) {
+								if(xmlStrEqual(bodyNode->name, (const xmlChar *) "PartialSyncResponse")) {
+									AgentWS_PartialSyncResponse *bodyObject = [AgentWS_PartialSyncResponse deserializeNode:bodyNode];
 									//NSAssert1(bodyObject != nil, @"Errors while parsing body %s", bodyNode->name);
 									if (bodyObject != nil) [responseBodyParts addObject:bodyObject];
 								}

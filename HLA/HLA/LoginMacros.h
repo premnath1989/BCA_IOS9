@@ -31,6 +31,7 @@ static const int INACTIVE_AND_EXPIRED = 152;
 static const int DEVICE_IS_ACTIVE = 140;
 static const int DEVICE_IS_INACTIVE = 141;
 
+
 //UI Elements
 static const int USERNAME_PASSWORD_VALIDATION = 300;
 

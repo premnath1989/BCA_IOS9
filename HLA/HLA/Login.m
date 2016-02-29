@@ -60,6 +60,9 @@ NSString *ProceedStatus = @"";
     loginDB = [[LoginDBManagement alloc]init];
     [loginDB makeDBCopy];
     
+    ONLINE_PROCESS = FALSE;
+    OFFLINE_PROCESS = FALSE;
+    
     [UIApplication sharedApplication].networkActivityIndicatorVisible = TRUE;
     
     txtUsername.delegate = self;
@@ -216,8 +219,15 @@ static NSString *labelVers;
 {
     NSArray *responseBodyParts = response.bodyParts;
     if([[response.error localizedDescription] caseInsensitiveCompare:@""] != NSOrderedSame){
-        UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Periksa lagi koneksi internet anda" message:@"" delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
-        [alert show];
+        if(ONLINE_PROCESS){
+            UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Server sedang bermasalah, anda di arahkan ke offline login" message:@"" delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
+            [alert show];
+            OFFLINE_PROCESS = TRUE;
+            [self loginAction];
+        }else{
+            UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Periksa lagi koneksi internet anda" message:@"" delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
+            [alert show];
+        }
     }
     for(id bodyPart in responseBodyParts) {
     
@@ -490,12 +500,15 @@ static NSString *labelVers;
         [spinnerLoading startLoadingSpinner:self.view label:@"Loading"];
         
         //online login
-        if([self connected]){
+        if([self connected] && OFFLINE_PROCESS){
+            ONLINE_PROCESS = TRUE;
             WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
             [webservice ValidateLogin:txtUsername.text password:txtPassword.text UUID:[[[UIDevice currentDevice] identifierForVendor] UUIDString] delegate:self];
         }else{
             //offline login
-             [self doOfflineLoginCheck];
+            ONLINE_PROCESS = FALSE;
+            OFFLINE_PROCESS = FALSE;
+            [self doOfflineLoginCheck];
         }
     }
 }

@@ -21,9 +21,13 @@
 @class AgentWS_FullSyncTable;
 @class AgentWS_FullSyncTableResponse;
 @class AgentWS_FullSyncTableResult;
-@class AgentWS_PartialSyncTable;
-@class AgentWS_PartialSyncTableResponse;
-@class AgentWS_PartialSyncTableResult;
+@class AgentWS_CheckVersion;
+@class AgentWS_CheckVersionResponse;
+@class AgentWS_CheckVersionResult;
+@class AgentWS_PartialSync;
+@class AgentWS_PartialSyncResponse;
+@class AgentWS_PartialSyncResult;
+@class AgentWS_DataSet;
 @interface AgentWS_ValidateAgentAndDevice : NSObject {
 	
 /* elements */
@@ -351,6 +355,7 @@
 @interface AgentWS_FullSyncTable : NSObject {
 	
 /* elements */
+	NSString * strAgentCode;
 	NSString * strStatus;
 /* attributes */
 }
@@ -362,6 +367,7 @@
 - (void)deserializeAttributesFromNode:(xmlNodePtr)cur;
 - (void)deserializeElementsFromNode:(xmlNodePtr)cur;
 /* elements */
+@property (retain) NSString * strAgentCode;
 @property (retain) NSString * strStatus;
 /* attributes */
 - (NSDictionary *)attributes;
@@ -404,9 +410,10 @@
 /* attributes */
 - (NSDictionary *)attributes;
 @end
-@interface AgentWS_PartialSyncTable : NSObject {
+@interface AgentWS_CheckVersion : NSObject {
 	
 /* elements */
+	NSString * strVesion;
 	NSString * strStatus;
 /* attributes */
 }
@@ -414,34 +421,36 @@
 - (xmlNodePtr)xmlNodeForDoc:(xmlDocPtr)doc elementName:(NSString *)elName elementNSPrefix:(NSString *)elNSPrefix;
 - (void)addAttributesToNode:(xmlNodePtr)node;
 - (void)addElementsToNode:(xmlNodePtr)node;
-+ (AgentWS_PartialSyncTable *)deserializeNode:(xmlNodePtr)cur;
++ (AgentWS_CheckVersion *)deserializeNode:(xmlNodePtr)cur;
 - (void)deserializeAttributesFromNode:(xmlNodePtr)cur;
 - (void)deserializeElementsFromNode:(xmlNodePtr)cur;
 /* elements */
+@property (retain) NSString * strVesion;
 @property (retain) NSString * strStatus;
 /* attributes */
 - (NSDictionary *)attributes;
 @end
-@interface AgentWS_PartialSyncTableResult : NSObject {
-	
+@interface AgentWS_CheckVersionResult : NSObject {
 /* elements */
+    NSString * xmlDetails;
 /* attributes */
 }
+@property (retain) NSString * xmlDetails;
 - (NSString *)nsPrefix;
 - (xmlNodePtr)xmlNodeForDoc:(xmlDocPtr)doc elementName:(NSString *)elName elementNSPrefix:(NSString *)elNSPrefix;
 - (void)addAttributesToNode:(xmlNodePtr)node;
 - (void)addElementsToNode:(xmlNodePtr)node;
-+ (AgentWS_PartialSyncTableResult *)deserializeNode:(xmlNodePtr)cur;
++ (AgentWS_CheckVersionResult *)deserializeNode:(xmlNodePtr)cur;
 - (void)deserializeAttributesFromNode:(xmlNodePtr)cur;
 - (void)deserializeElementsFromNode:(xmlNodePtr)cur;
 /* elements */
 /* attributes */
 - (NSDictionary *)attributes;
 @end
-@interface AgentWS_PartialSyncTableResponse : NSObject {
+@interface AgentWS_CheckVersionResponse : NSObject {
 	
 /* elements */
-	AgentWS_PartialSyncTableResult * PartialSyncTableResult;
+	AgentWS_CheckVersionResult * CheckVersionResult;
 	NSString * strStatus;
 /* attributes */
 }
@@ -449,12 +458,86 @@
 - (xmlNodePtr)xmlNodeForDoc:(xmlDocPtr)doc elementName:(NSString *)elName elementNSPrefix:(NSString *)elNSPrefix;
 - (void)addAttributesToNode:(xmlNodePtr)node;
 - (void)addElementsToNode:(xmlNodePtr)node;
-+ (AgentWS_PartialSyncTableResponse *)deserializeNode:(xmlNodePtr)cur;
++ (AgentWS_CheckVersionResponse *)deserializeNode:(xmlNodePtr)cur;
 - (void)deserializeAttributesFromNode:(xmlNodePtr)cur;
 - (void)deserializeElementsFromNode:(xmlNodePtr)cur;
 /* elements */
-@property (retain) AgentWS_PartialSyncTableResult * PartialSyncTableResult;
+@property (retain) AgentWS_CheckVersionResult * CheckVersionResult;
 @property (retain) NSString * strStatus;
+/* attributes */
+- (NSDictionary *)attributes;
+@end
+@interface AgentWS_PartialSync : NSObject {
+	
+/* elements */
+	NSString * strAgentcode;
+	NSString * strXML;
+/* attributes */
+}
+- (NSString *)nsPrefix;
+- (xmlNodePtr)xmlNodeForDoc:(xmlDocPtr)doc elementName:(NSString *)elName elementNSPrefix:(NSString *)elNSPrefix;
+- (void)addAttributesToNode:(xmlNodePtr)node;
+- (void)addElementsToNode:(xmlNodePtr)node;
++ (AgentWS_PartialSync *)deserializeNode:(xmlNodePtr)cur;
+- (void)deserializeAttributesFromNode:(xmlNodePtr)cur;
+- (void)deserializeElementsFromNode:(xmlNodePtr)cur;
+/* elements */
+@property (retain) NSString * strAgentcode;
+@property (retain) NSString * strXML;
+/* attributes */
+- (NSDictionary *)attributes;
+@end
+@interface AgentWS_PartialSyncResult : NSObject {
+	
+/* elements */
+	 NSString * xmlDetails;
+/* attributes */
+}
+- (NSString *)nsPrefix;
+- (xmlNodePtr)xmlNodeForDoc:(xmlDocPtr)doc elementName:(NSString *)elName elementNSPrefix:(NSString *)elNSPrefix;
+- (void)addAttributesToNode:(xmlNodePtr)node;
+- (void)addElementsToNode:(xmlNodePtr)node;
++ (AgentWS_PartialSyncResult *)deserializeNode:(xmlNodePtr)cur;
+- (void)deserializeAttributesFromNode:(xmlNodePtr)cur;
+- (void)deserializeElementsFromNode:(xmlNodePtr)cur;
+/* elements */
+@property(retain)  NSString * xmlDetails;
+/* attributes */
+- (NSDictionary *)attributes;
+@end
+@interface AgentWS_PartialSyncResponse : NSObject {
+	
+/* elements */
+	AgentWS_PartialSyncResult * PartialSyncResult;
+/* attributes */
+}
+- (NSString *)nsPrefix;
+- (xmlNodePtr)xmlNodeForDoc:(xmlDocPtr)doc elementName:(NSString *)elName elementNSPrefix:(NSString *)elNSPrefix;
+- (void)addAttributesToNode:(xmlNodePtr)node;
+- (void)addElementsToNode:(xmlNodePtr)node;
++ (AgentWS_PartialSyncResponse *)deserializeNode:(xmlNodePtr)cur;
+- (void)deserializeAttributesFromNode:(xmlNodePtr)cur;
+- (void)deserializeElementsFromNode:(xmlNodePtr)cur;
+/* elements */
+@property (retain) AgentWS_PartialSyncResult * PartialSyncResult;
+/* attributes */
+- (NSDictionary *)attributes;
+@end
+@interface AgentWS_DataSet : NSObject {
+	
+/* elements */
+    NSString * xmlDetails;
+/* attributes */
+}
+- (NSString *)nsPrefix;
+- (xmlNodePtr)xmlNodeForDoc:(xmlDocPtr)doc elementName:(NSString *)elName elementNSPrefix:(NSString *)elNSPrefix;
+- (void)addAttributesToNode:(xmlNodePtr)node;
+- (void)addElementsToNode:(xmlNodePtr)node;
++ (AgentWS_DataSet *)deserializeNode:(xmlNodePtr)cur;
+- (void)deserializeAttributesFromNode:(xmlNodePtr)cur;
+- (void)deserializeElementsFromNode:(xmlNodePtr)cur;
+/* elements */
+@property(retain) NSString * xmlDetails;
 /* attributes */
 - (NSDictionary *)attributes;
 @end
@@ -509,8 +592,10 @@
 - (void)ChangePasswordAsyncUsingParameters:(AgentWS_ChangePassword *)aParameters  delegate:(id<AgentWSSoapBindingResponseDelegate>)responseDelegate;
 - (AgentWSSoapBindingResponse *)FullSyncTableUsingParameters:(AgentWS_FullSyncTable *)aParameters ;
 - (void)FullSyncTableAsyncUsingParameters:(AgentWS_FullSyncTable *)aParameters  delegate:(id<AgentWSSoapBindingResponseDelegate>)responseDelegate;
-- (AgentWSSoapBindingResponse *)PartialSyncTableUsingParameters:(AgentWS_PartialSyncTable *)aParameters ;
-- (void)PartialSyncTableAsyncUsingParameters:(AgentWS_PartialSyncTable *)aParameters  delegate:(id<AgentWSSoapBindingResponseDelegate>)responseDelegate;
+- (AgentWSSoapBindingResponse *)CheckVersionUsingParameters:(AgentWS_CheckVersion *)aParameters ;
+- (void)CheckVersionAsyncUsingParameters:(AgentWS_CheckVersion *)aParameters  delegate:(id<AgentWSSoapBindingResponseDelegate>)responseDelegate;
+- (AgentWSSoapBindingResponse *)PartialSyncUsingParameters:(AgentWS_PartialSync *)aParameters ;
+- (void)PartialSyncAsyncUsingParameters:(AgentWS_PartialSync *)aParameters  delegate:(id<AgentWSSoapBindingResponseDelegate>)responseDelegate;
 @end
 @interface AgentWSSoapBindingOperation : NSOperation {
 	AgentWSSoapBinding *binding;
@@ -590,12 +675,20 @@
 	parameters:(AgentWS_FullSyncTable *)aParameters
 ;
 @end
-@interface AgentWSSoapBinding_PartialSyncTable : AgentWSSoapBindingOperation {
-	AgentWS_PartialSyncTable * parameters;
+@interface AgentWSSoapBinding_CheckVersion : AgentWSSoapBindingOperation {
+	AgentWS_CheckVersion * parameters;
 }
-@property (retain) AgentWS_PartialSyncTable * parameters;
+@property (retain) AgentWS_CheckVersion * parameters;
 - (id)initWithBinding:(AgentWSSoapBinding *)aBinding delegate:(id<AgentWSSoapBindingResponseDelegate>)aDelegate
-	parameters:(AgentWS_PartialSyncTable *)aParameters
+	parameters:(AgentWS_CheckVersion *)aParameters
+;
+@end
+@interface AgentWSSoapBinding_PartialSync : AgentWSSoapBindingOperation {
+	AgentWS_PartialSync * parameters;
+}
+@property (retain) AgentWS_PartialSync * parameters;
+- (id)initWithBinding:(AgentWSSoapBinding *)aBinding delegate:(id<AgentWSSoapBindingResponseDelegate>)aDelegate
+	parameters:(AgentWS_PartialSync *)aParameters
 ;
 @end
 @interface AgentWSSoapBinding_envelope : NSObject {
@@ -651,8 +744,10 @@
 - (void)ChangePasswordAsyncUsingParameters:(AgentWS_ChangePassword *)aParameters  delegate:(id<AgentWSSoap12BindingResponseDelegate>)responseDelegate;
 - (AgentWSSoap12BindingResponse *)FullSyncTableUsingParameters:(AgentWS_FullSyncTable *)aParameters ;
 - (void)FullSyncTableAsyncUsingParameters:(AgentWS_FullSyncTable *)aParameters  delegate:(id<AgentWSSoap12BindingResponseDelegate>)responseDelegate;
-- (AgentWSSoap12BindingResponse *)PartialSyncTableUsingParameters:(AgentWS_PartialSyncTable *)aParameters ;
-- (void)PartialSyncTableAsyncUsingParameters:(AgentWS_PartialSyncTable *)aParameters  delegate:(id<AgentWSSoap12BindingResponseDelegate>)responseDelegate;
+- (AgentWSSoap12BindingResponse *)CheckVersionUsingParameters:(AgentWS_CheckVersion *)aParameters ;
+- (void)CheckVersionAsyncUsingParameters:(AgentWS_CheckVersion *)aParameters  delegate:(id<AgentWSSoap12BindingResponseDelegate>)responseDelegate;
+- (AgentWSSoap12BindingResponse *)PartialSyncUsingParameters:(AgentWS_PartialSync *)aParameters ;
+- (void)PartialSyncAsyncUsingParameters:(AgentWS_PartialSync *)aParameters  delegate:(id<AgentWSSoap12BindingResponseDelegate>)responseDelegate;
 @end
 @interface AgentWSSoap12BindingOperation : NSOperation {
 	AgentWSSoap12Binding *binding;
@@ -732,12 +827,20 @@
 	parameters:(AgentWS_FullSyncTable *)aParameters
 ;
 @end
-@interface AgentWSSoap12Binding_PartialSyncTable : AgentWSSoap12BindingOperation {
-	AgentWS_PartialSyncTable * parameters;
+@interface AgentWSSoap12Binding_CheckVersion : AgentWSSoap12BindingOperation {
+	AgentWS_CheckVersion * parameters;
 }
-@property (retain) AgentWS_PartialSyncTable * parameters;
+@property (retain) AgentWS_CheckVersion * parameters;
 - (id)initWithBinding:(AgentWSSoap12Binding *)aBinding delegate:(id<AgentWSSoap12BindingResponseDelegate>)aDelegate
-	parameters:(AgentWS_PartialSyncTable *)aParameters
+	parameters:(AgentWS_CheckVersion *)aParameters
+;
+@end
+@interface AgentWSSoap12Binding_PartialSync : AgentWSSoap12BindingOperation {
+	AgentWS_PartialSync * parameters;
+}
+@property (retain) AgentWS_PartialSync * parameters;
+- (id)initWithBinding:(AgentWSSoap12Binding *)aBinding delegate:(id<AgentWSSoap12BindingResponseDelegate>)aDelegate
+	parameters:(AgentWS_PartialSync *)aParameters
 ;
 @end
 @interface AgentWSSoap12Binding_envelope : NSObject {

@@ -77,10 +77,10 @@ static NSString* DATE_FORMAT = @"yyyy-MM-dd";
     NSString *obsoleteDate;
     NSString *licenseStatus;
     
-    
-    
     int xmlType;
     
+    BOOL ONLINE_PROCESS;
+    BOOL OFFLINE_PROCESS;
     BOOL showLogout;
     ChangePassword * UserProfileView;
     SpinnerUtilities *spinnerLoading;

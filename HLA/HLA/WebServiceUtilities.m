@@ -24,11 +24,12 @@
 }
 
 
--(int)fullSync:(id)delegate{
+-(int)fullSync:(NSString *)username delegate:(id)delegate{
     AgentWSSoapBinding *binding = [AgentWS AgentWSSoapBinding];
     binding.logXMLInOut = YES;
     
     AgentWS_FullSyncTable *agentCodea = [[AgentWS_FullSyncTable alloc]init];
+    agentCodea.strAgentCode = username;
     agentCodea.strStatus = @"";
     [binding FullSyncTableAsyncUsingParameters:agentCodea delegate:delegate];
     return 1;
@@ -60,6 +61,18 @@
     [binding ReceiveFirstLoginAsyncUsingParameters:agentCodea delegate:delegate];
     return 1;
 }
+
+
+-(int)checkVersion:(NSString *)version delegate:(id)delegate{
+    AgentWSSoapBinding *binding = [AgentWS AgentWSSoapBinding];
+    binding.logXMLInOut = YES;
+    
+    AgentWS_CheckVersion *agentCodea = [[AgentWS_CheckVersion alloc]init];
+    agentCodea.strVesion = version;
+    [binding CheckVersionAsyncUsingParameters:agentCodea delegate:delegate];
+    return 1;
+}
+
 
 -(int)forgotPassword:(NSString *)username delegate:(id)delegate{
     AgentWSSoapBinding *binding = [AgentWS AgentWSSoapBinding];

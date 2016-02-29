@@ -12,8 +12,16 @@
 
 - (int)forgotPassword:(NSString *)username delegate:(id)delegate;
 - (int)ValidateLogin:(NSString *)username password:(NSString *)password
-                UUID:(NSString *)deviceID delegate:(id)delegate;
-- (int)FirstTimeLogin:(id)delegate AgentCode:(NSString *)AgentCode password:(NSString *)password newPassword:(NSString *)newpassword UUID:(NSString *)deviceID;
-- (int)chgPassword:(id)delegate AgentCode:(NSString *)AgentCode password:(NSString *)password newPassword:(NSString *)newpassword UUID:(NSString *)deviceID;
--(int)fullSync:(id)delegate;
+                UUID:(NSString *)deviceID
+            delegate:(id)delegate;
+- (int)FirstTimeLogin:(id)delegate AgentCode:(NSString *)AgentCode
+             password:(NSString *)password
+          newPassword:(NSString *)newpassword
+                 UUID:(NSString *)deviceID;
+- (int)chgPassword:(id)delegate AgentCode:(NSString *)AgentCode
+          password:(NSString *)password
+       newPassword:(NSString *)newpassword
+              UUID:(NSString *)deviceID;
+- (int)fullSync:(NSString *)username delegate:(id)delegate;
+- (int)checkVersion:(NSString *)version delegate:(id)delegate;
 @end
