@@ -646,7 +646,7 @@ bool WPTPD30RisDeleted = FALSE;
     
     int RatesInt = [RatesPremiumRate intValue];
     int total =(BasisSumAssured/1000)*(PaymentMode * RatesInt);
-    [_basicPremiField setText:[NSString stringWithFormat:@"%d", total]];
+  //  [_basicPremiField setText:[NSString stringWithFormat:@"%d", total]];
     
     int masaExtraPremiBTotal =[_masaExtraPremiField.text intValue];
     
