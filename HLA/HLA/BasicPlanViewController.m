@@ -914,7 +914,8 @@ bool WPTPD30RisDeleted = FALSE;
     Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
     id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
     [activeInstance performSelector:@selector(dismissKeyboard)];
-    [_delegate brngSubview:@"Rider"];
+    //[_delegate brngSubview:@"Rider"];
+    [_delegate brngSubview:@"Premium"];
 }
 
 

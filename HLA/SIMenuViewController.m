@@ -39,6 +39,7 @@
     NSMutableArray* arrayIntValidate;
     NSMutableDictionary* dictionaryPOForInsert;
     NSMutableDictionary* dictionaryMasterForInsert;
+    NSMutableDictionary* newDictionaryForBasicPlan;
 }
 
 @end
@@ -625,6 +626,15 @@ BOOL isFirstLoad;
 -(void)brngSubview:(NSString *)view{
     if ([view isEqualToString:@"Rider"]){
         [RightView bringSubviewToFront:_RiderController.view];
+    }
+    else{
+        if (!_PremiumController) {
+            _PremiumController = [self.storyboard instantiateViewControllerWithIdentifier:@"premiumView"];
+            //_PremiumController.delegate = self;
+            [self.RightView addSubview:_PremiumController.view];
+        }
+        [_PremiumController setPremiumDictionary:newDictionaryForBasicPlan];
+        [self.RightView bringSubviewToFront:_PremiumController.view];
     }
 }
 
@@ -2645,8 +2655,10 @@ BOOL isFirstLoad;
                 //_PremiumController.delegate = self;
                 [self.RightView addSubview:_PremiumController.view];
             }
+            //[_PremiumController setDictionaryPremium:newDictionaryForBasicPlan];
+            //[_PremiumController setDictionaryPremium:newDictionaryForBasicPlan];
+            [_PremiumController setPremiumDictionary:newDictionaryForBasicPlan];
             [self.RightView bringSubviewToFront:_PremiumController.view];
-            //[_PremiumController setDictionaryPremium:<#(NSMutableDictionary *)#>]
             break;
         default:
             break;
@@ -2677,10 +2689,23 @@ BOOL isFirstLoad;
 
 -(void)saveBasicPlan:(NSDictionary *)basicPlan{
     [arrayIntValidate replaceObjectAtIndex:2 withObject:@"1"];
-    NSMutableDictionary* newDictionaryForBasicPlan=[NSMutableDictionary dictionaryWithDictionary:basicPlan];
+    newDictionaryForBasicPlan=[NSMutableDictionary dictionaryWithDictionary:basicPlan];
     [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"SINO"] forKey:@"SINO"];
+    
+    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+    f.numberStyle = NSNumberFormatterDecimalStyle;
+    NSNumber *myNumber = [f numberFromString:[newDictionaryForBasicPlan valueForKey:@"Sum_Assured"]];
+    [newDictionaryForBasicPlan setObject:myNumber forKey:@"Number_Sum_Assured"];
+
     NSLog(@"newDict %@",newDictionaryForBasicPlan);
-    [_modelSIPremium savePremium:newDictionaryForBasicPlan];
+    if (!_PremiumController) {
+        _PremiumController = [self.storyboard instantiateViewControllerWithIdentifier:@"premiumView"];
+        //_PremiumController.delegate = self;
+        [self.RightView addSubview:_PremiumController.view];
+    }
+    [_PremiumController setPremiumDictionary:newDictionaryForBasicPlan];
+    [self.RightView bringSubviewToFront:_PremiumController.view];
+    /*[_modelSIPremium savePremium:newDictionaryForBasicPlan];
 
     if (!_RiderController){
         self.RiderController = [self.storyboard instantiateViewControllerWithIdentifier:@"RiderView"];
@@ -2688,7 +2713,7 @@ BOOL isFirstLoad;
         [self.RightView addSubview:self.RiderController.view];
     }
     [self.RiderController setSumAssured:[newDictionaryForBasicPlan valueForKey:@"Sum_Assured"]];
-    [self.RightView bringSubviewToFront:self.RiderController.view];    //[self.myTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:SIMENU_RIDER inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
+    [self.RightView bringSubviewToFront:self.RiderController.view];    //[self.myTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:SIMENU_RIDER inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];*/
 }
 
 -(void)setQuickQuoteValue:(BOOL)value{

@@ -48,12 +48,16 @@
     return @"MsgTypeWealthPlan";
 }
 
+//- (void)viewDidAppear:(BOOL)animated{
+-(void)setPremiumDictionary:(NSMutableDictionary *)premiumDictionary{
+    dictionaryPremium = [[NSMutableDictionary alloc]initWithDictionary:premiumDictionary];//premiumDictionary;
+    NSLog(@"dict %@",dictionaryPremium);
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _dictionaryPremium = [[NSMutableDictionary alloc]init];
     [self calculateReport];
-    
 }
 
 -(void)calculateReport {

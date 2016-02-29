@@ -74,6 +74,7 @@
     IBOutlet UILabel *lblTotalBulanan;
     IBOutlet UILabel *lblTotalSekaligus;
 
+    NSMutableDictionary *dictionaryPremium;
     
     id <PremiumViewControllerDelegate> _delegate;
 //    SIMenuViewController *_simenu;
@@ -211,7 +212,8 @@
 @property (nonatomic,assign,readwrite) BOOL fromReport;
 
 //added by faiz
-@property (nonatomic,strong) NSMutableDictionary *dictionaryPremium;
+
+-(void)setPremiumDictionary:(NSMutableDictionary *)premiumDictionary;
 //end of added by faiz
 
 +(NSString *)getMsgTypeL100;
