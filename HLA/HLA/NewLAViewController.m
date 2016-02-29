@@ -87,7 +87,6 @@ id dobtanngal;
      _planList.delegate = self;
     [self setupUIElementDefaultSetting];
     
-    
 //    NSString*test;
 //    NSString*test1;
 //    
@@ -112,7 +111,7 @@ id dobtanngal;
 //        test  = [results stringForColumn:@"BasicCode"];
 //        test1  = [results stringForColumn:@"Male"];
 //    }
-    
+    [self loadDataFromList];
     [_delegate setQuickQuoteValue:[quickQuoteFlag isOn]];
 }
 
@@ -786,6 +785,42 @@ id dobtanngal;
     [_delegate LAIDPayor:lastIdPayor andIDProfile:lastIdProfile andAge:age andOccpCode:occuCode andOccpClass:occuClass andSex:sex andIndexNo:IndexNo
              andCommDate:commDate andSmoker:smoker DiffClient:DiffClient bEDDCase:EDDCase];
     Inserted = YES;
+}
+
+#pragma mark - Data Load from listing added by faiz
+-(void)loadDataFromList{
+    _modelSIPOData = [[ModelSIPOData alloc]init];
+    NSDictionary* dictPOData=[[NSDictionary alloc]initWithDictionary:[_modelSIPOData getPO_DataFor:requestSINo]];
+    if ([dictPOData count]!=0){
+        NSNumber *numberBoolQuickQuote =[NSNumber numberWithInt:[[dictPOData valueForKey:@"QuickQuote"] intValue]];
+        if ([numberBoolQuickQuote intValue]==0){
+            [quickQuoteFlag setOn:false];
+        }
+        else{
+            [quickQuoteFlag setOn:true];
+        }
+        [self QuickQuoteFunc:quickQuoteFlag];
+        
+        ilustrationProductCode = [dictPOData valueForKey:@"ProductCode"];
+        occuCode = [dictPOData valueForKey:@"PO_OccpCode"];
+        clientProfileID = [[dictPOData valueForKey:@"PO_ClientID"] intValue];
+        [_SINumberBCA setText:[dictPOData valueForKey:@"SINO"]];
+        [LANameField setText:[dictPOData valueForKey:@"PO_Name"]];
+        [LAAgeField setText:[dictPOData valueForKey:@"PO_Age"]];
+        [NamaProduk setTitle:[dictPOData valueForKey:@"ProductName"] forState:UIControlStateNormal];
+        [TanggalIllustrasi setTitle:[dictPOData valueForKey:@"SIDate"] forState:UIControlStateNormal];
+        [btnDOB setTitle:[dictPOData valueForKey:@"PO_DOB"] forState:UIControlStateNormal];
+        [btnOccp setTitle:[dictPOData valueForKey:@"PO_Occp"] forState:UIControlStateNormal];
+        [_BtnHubungan setTitle:[dictPOData valueForKey:@"RelWithLA"] forState:UIControlStateNormal];
+        
+        sex=[[NSString alloc]initWithString:[dictPOData valueForKey:@"PO_Gender"]];
+        if ([sex isEqualToString:@"MALE"]){
+            [sexSegment setSelectedSegmentIndex:0];
+        }
+        else{
+            [sexSegment setSelectedSegmentIndex:1];
+        }
+    }
 }
 
 #pragma mark - Action

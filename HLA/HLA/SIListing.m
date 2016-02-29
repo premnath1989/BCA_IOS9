@@ -712,7 +712,6 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
 		main.tradOrEver = TradOrEver;
         main.IndexTab = appdlg.NewSIIndex ;
         main.requestSINo = [SINO objectAtIndex:indexPath.row];
-        
 		[self presentViewController:main animated:NO completion:nil];
 		
 		appdlg = Nil;

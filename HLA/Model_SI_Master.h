@@ -15,4 +15,6 @@
 }
 -(void)saveIlustrationMaster:(NSDictionary *)dataIlustration;
 -(NSDictionary *)getIlustrationata;
+-(void)updateIlustrationMaster:(NSDictionary *)dataIlustration;
+-(int)getMasterCount:(NSString *)SINo;
 @end

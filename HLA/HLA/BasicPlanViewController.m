@@ -115,6 +115,7 @@ bool WPTPD30RisDeleted = FALSE;
     [self resetData];
     if (self.requestSINo) {
         [self checkingExisting];
+        [self loadDataFromList];
         if (getSINo.length != 0) {
             [self getExistingBasic:true];
             [self togglePlan];
@@ -555,7 +556,6 @@ bool WPTPD30RisDeleted = FALSE;
 
 -(void)PremiDasarAct
 {
-
     NSString*AnsuransiDasarQuery;
 
     NSArray *paths2 = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -614,6 +614,7 @@ bool WPTPD30RisDeleted = FALSE;
     [database open];
     FMResultSet *results;
     AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM EMRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",PayorSex,@"HRT",premiType,PayorAge];
+    NSLog(@"query %@",AnsuransiDasarQuery);
     results = [database executeQuery:AnsuransiDasarQuery];
     
     NSString*RatesPremiumRate;
@@ -689,6 +690,22 @@ bool WPTPD30RisDeleted = FALSE;
 
 }
 
+-(void)loadDataFromList{
+    _modelSIPremium = [[Model_SI_Premium alloc]init];
+    NSDictionary* dictPremiData=[[NSDictionary alloc]initWithDictionary:[_modelSIPremium getPremium_For:[self.requestSINo description]]];
+    if ([dictPremiData count]!=0){
+        premiType = @"S";
+        [yearlyIncomeField setText:[dictPremiData valueForKey:@"Sum_Assured"]];
+        [_basicPremiField setText:[dictPremiData valueForKey:@"PremiumPolicyA"]];
+        [_extraPremiPercentField setText:[dictPremiData valueForKey:@"ExtraPremiumPercentage"]];
+        [_extraPremiNumberField setText:[dictPremiData valueForKey:@"ExtraPremiumSum"]];
+        [_masaExtraPremiField setText:[dictPremiData valueForKey:@"ExtraPremiumTerm"]];
+        [_extraBasicPremiField setText:[dictPremiData valueForKey:@"ExtraPremiumPolicy"]];
+        [_totalPremiWithLoadingField setText:[dictPremiData valueForKey:@"TotalPremiumLoading"]];
+        [_masaPembayaranButton setTitle:[dictPremiData valueForKey:@"Payment_Term"] forState:UIControlStateNormal];
+        [_frekuensiPembayaranButton setTitle:[dictPremiData valueForKey:@"Payment_Frequency"] forState:UIControlStateNormal];
+    }
+}
 //end of added by faiz
 
 #pragma mark - Action

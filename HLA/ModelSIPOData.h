@@ -15,4 +15,6 @@
 }
 -(void)savePODate:(NSDictionary *)dataPO;
 -(NSDictionary *)getPO_DataFor:(NSString *)SINo;
+-(void)updatePOData:(NSDictionary *)dataPO;
+-(int)getPODataCount:(NSString *)SINo;
 @end

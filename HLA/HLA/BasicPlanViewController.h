@@ -17,6 +17,8 @@
 #import "SecondLAHandler.h"
 #import "AppDelegate.h"
 #import "SIObj.h"
+#import "Model_SI_Premium.h"
+#import "ModelSIPOData.h"
 
 @class BasicPlanViewController;
 @protocol BasicPlanViewControllerDelegate
@@ -40,9 +42,13 @@
     sqlite3 *contactDB;
     UITextField *activeField;
     UIPopoverController *_planPopover;
+
+    ModelSIPOData *_modelSIPOData;
+    Model_SI_Premium *_modelSIPremium;
     PlanList *_planList;
     MasaPembayaran*_masaPembayaran;
     Frekeunsi*_frekuensi;
+    
     BOOL showHL;
     BOOL useExist;
     BOOL newSegment;

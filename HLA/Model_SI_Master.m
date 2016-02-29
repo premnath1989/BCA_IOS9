@@ -29,6 +29,25 @@
     [database close];
 }
 
+-(void)updateIlustrationMaster:(NSDictionary *)dataIlustration{
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    BOOL success = [database executeUpdate:@"update SI_Master set SI_Version=?, ProposalStatus=?,UpdatedDate=""datetime(\"now\", \"+8 hour\")"" where SINO=?" ,
+                    [dataIlustration valueForKey:@"SI_Version"],
+                    [dataIlustration valueForKey:@"ProposalStatus"],
+                    [dataIlustration valueForKey:@"SINO"]];
+    
+    if (!success) {
+        NSLog(@"%s: insert error: %@", __FUNCTION__, [database lastErrorMessage]);
+        // do whatever you need to upon error
+    }
+    [results close];
+    [database close];
+}
+
 -(NSDictionary *)getIlustrationata{
     NSDictionary *dict;
     
@@ -72,5 +91,23 @@
     return dict;
 }
 
+-(int)getMasterCount:(NSString *)SINo{
+    int count;
+    
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select count(*) from SI_master where SINO = \"%@\"",SINo]];
+    while ([s next]) {
+        count = [s intForColumn:@"count"];
+    }
+    
+    [results close];
+    [database close];
+    return count;
+}
 
 @end

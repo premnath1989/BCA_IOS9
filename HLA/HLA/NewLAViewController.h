@@ -17,7 +17,7 @@
 #import "AppDelegate.h"
 #import "RelationshipPopoverViewController.h"
 #import "SecondLAViewController.h"
-
+#import "ModelSIPOData.h"
 
 @class NewLAViewController;
 @protocol NewLAViewControllerDelegate
@@ -44,6 +44,9 @@
     UIPopoverController *_datePopover;
     UIPopoverController *_dobPopover;
     UIPopoverController *_OccupationListPopover;
+    
+    ModelSIPOData *_modelSIPOData;
+    
     SecondLAViewController *_SecondLAController;
     PlanList *_planList;
     ListingTbViewController *_ProspectList;
@@ -87,6 +90,7 @@
     IBOutlet UIScrollView* scrollLA;
     NSString *Relationship;
 }
+
 @property (nonatomic, strong) RelationshipPopoverViewController *RshipTypePicker;
 @property (nonatomic, strong) UIPopoverController *RshipTypePickerPopover;
 @property (nonatomic, retain) SIObj* siObj;
@@ -234,7 +238,7 @@
 -(void)keyboardDidShow:(NSNotificationCenter *)notification;
 -(void)keyboardDidHide:(NSNotificationCenter *)notification;
 
-
+-(void)loadDataFromList;
 
 @end
 
