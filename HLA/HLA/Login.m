@@ -500,7 +500,7 @@ static NSString *labelVers;
         [spinnerLoading startLoadingSpinner:self.view label:@"Loading"];
         
         //online login
-        if([self connected] && OFFLINE_PROCESS){
+        if([self connected] && !OFFLINE_PROCESS){
             ONLINE_PROCESS = TRUE;
             WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
             [webservice ValidateLogin:txtUsername.text password:txtPassword.text UUID:[[[UIDevice currentDevice] identifierForVendor] UUIDString] delegate:self];

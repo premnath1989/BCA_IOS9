@@ -405,7 +405,7 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
                     [spinnerLoading stopLoadingSpinner];
                     [spinnerLoading startLoadingSpinner:self.view label:@"Sync sedang berjalan"];
                     WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
-                    [webservice fullSync:self];
+                    [webservice fullSync:txtAgentCode.text delegate:self];
                 }
             }else if([rateResponse.strStatus caseInsensitiveCompare:@"False"] == NSOrderedSame){
                 [spinnerLoading stopLoadingSpinner];

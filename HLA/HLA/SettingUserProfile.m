@@ -106,6 +106,13 @@ id temp;
     txtDirectSupervisor.enabled = NO;
     txtAgentStatus.text = [agentDetails valueForKey:@"AgentStatus"];
     txtAgentStatus.enabled = NO;
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZZZZ"];
+    NSDate *startDate = [dateFormatter dateFromString:[agentDetails valueForKey:@"LicenseStartDate"]];
+    NSDate *endDate = [dateFormatter dateFromString:[agentDetails valueForKey:@"LicenseExpiryDate"]];
+    [dateFormatter setDateFormat:@"dd/MM/YYYY"];
+    
     txtLicenseStart.text = [agentDetails valueForKey:@"LicenseStartDate"];
     txtLicenseStart.enabled = NO;
     txtLicenseEnd.text = [agentDetails valueForKey:@"LicenseExpiryDate"];
