@@ -14,4 +14,5 @@
     FMResultSet *results;
 }
 -(void)savePODate:(NSDictionary *)dataPO;
+-(NSDictionary *)getPO_DataFor:(NSString *)SINo;
 @end

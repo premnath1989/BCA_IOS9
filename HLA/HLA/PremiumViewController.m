@@ -50,7 +50,7 @@
 
 //- (void)viewDidAppear:(BOOL)animated{
 -(void)setPremiumDictionary:(NSMutableDictionary *)premiumDictionary{
-    dictionaryPremium = [[NSMutableDictionary alloc]initWithDictionary:premiumDictionary];//premiumDictionary;
+    dictionaryPremium = [[NSMutableDictionary alloc]initWithDictionary:premiumDictionary];
     NSLog(@"dict %@",dictionaryPremium);
 }
 

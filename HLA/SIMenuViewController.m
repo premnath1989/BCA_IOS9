@@ -2723,7 +2723,12 @@ BOOL isFirstLoad;
     f.numberStyle = NSNumberFormatterDecimalStyle;
     NSNumber *myNumber = [f numberFromString:[newDictionaryForBasicPlan valueForKey:@"Sum_Assured"]];
     [newDictionaryForBasicPlan setObject:myNumber forKey:@"Number_Sum_Assured"];
-
+    
+    [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"PO_Gender"] forKey:@"PO_Gender"];
+    [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"PO_Age"] forKey:@"PO_Age"];
+    [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"LA_Gender"] forKey:@"LA_Gender"];
+    [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"LA_Age"] forKey:@"LA_Age"];
+    
     NSLog(@"newDict %@",newDictionaryForBasicPlan);
     if (!_PremiumController) {
         _PremiumController = [self.storyboard instantiateViewControllerWithIdentifier:@"premiumView"];

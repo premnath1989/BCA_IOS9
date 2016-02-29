@@ -48,8 +48,31 @@
     [database close];
 }
 
--(NSDictionary *)getP_DataFor:(NSString *)SINo{
+-(NSDictionary *)getPO_DataFor:(NSString *)SINo{
     NSDictionary *dict;
+    
+    NSString* SINO;
+    NSString* ProductCode;
+    NSString* ProductName;
+    NSString* QuickQuote;
+    NSString* SIDate;
+    NSString* PO_Name;
+    NSString* PO_DOB;
+    NSString* PO_Gender;
+    NSString* PO_Age;
+    NSString* PO_OccpCode;
+    NSString* PO_Occp;
+    NSString* PO_ClientID;
+    NSString* RelWithLA;
+    NSString* LA_ClientID;
+    NSString* LA_Name;
+    NSString* LA_DOB;
+    NSString* LA_Age;
+    NSString* LA_Gender;
+    NSString *LA_OccpCode;
+    NSString *LA_Occp;
+    NSString *CreatedDate;
+    NSString *UpdatedDate;
     
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
@@ -57,25 +80,59 @@
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     [database open];
     
-    NSMutableArray* arrayNationCode=[[NSMutableArray alloc] init];
-    NSMutableArray* arrayNationDesc=[[NSMutableArray alloc] init];
-    NSMutableArray* arrayStatus=[[NSMutableArray alloc] init];
-    
     FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select * from SI_PO_Data where SINO = \"%@\"",SINo]];
     while ([s next]) {
-        NSString *NationCode = [NSString stringWithFormat:@"%@",[s stringForColumn:@"NationCode"]];
-        NSString *NationDesc = [NSString stringWithFormat:@"%@",[s stringForColumn:@"NationDesc"]];
-        NSString *Status = [NSString stringWithFormat:@"%@",[s stringForColumn:@"Status"]];
-        
-        [arrayNationCode addObject:NationCode];
-        [arrayNationDesc addObject:NationDesc];
-        [arrayStatus addObject:Status];
+        SINO = [s stringForColumn:@"SINO"];
+        ProductCode = [s stringForColumn:@"ProductCode"];
+        ProductName = [s stringForColumn:@"ProductName"];
+        QuickQuote = [s stringForColumn:@"QuickQuote"];
+        SIDate = [s stringForColumn:@"SIDate"];
+        PO_Name = [s stringForColumn:@"PO_Name"];
+        PO_DOB = [s stringForColumn:@"PO_DOB"];
+        PO_Gender = [s stringForColumn:@"PO_Gender"];
+        PO_Age = [s stringForColumn:@"PO_Age"];
+        PO_OccpCode = [s stringForColumn:@"PO_OccpCode"];
+        PO_Occp = [s stringForColumn:@"PO_Occp"];
+        PO_ClientID = [s stringForColumn:@"PO_ClientID"];
+        RelWithLA = [s stringForColumn:@"RelWithLA"];
+        LA_ClientID = [s stringForColumn:@"LA_ClientID"];
+        LA_Name = [s stringForColumn:@"LA_Name"];
+        LA_DOB = [s stringForColumn:@"LA_DOB"];
+        LA_Age = [s stringForColumn:@"LA_Age"];
+        LA_Gender = [s stringForColumn:@"LA_Gender"];
+        LA_OccpCode = [s stringForColumn:@"LA_OccpCode"];
+        LA_Occp = [s stringForColumn:@"LA_Occp"];
+        CreatedDate = [s stringForColumn:@"CreatedDate"];
+        UpdatedDate = [s stringForColumn:@"UpdatedDate"];
     }
-    dict = [[NSDictionary alloc] initWithObjectsAndKeys:arrayNationCode,@"NationCode", arrayNationDesc,@"NationDesc",arrayStatus,@"Status",nil];
+
+    dict=[[NSDictionary alloc]initWithObjectsAndKeys:
+                                          SINO,@"SINO",
+                                          ProductCode,@"ProductCode",
+                                          ProductName,@"ProductName",
+                                          QuickQuote,@"QuickQuote",
+                                          SIDate,@"SIDate",
+                                          PO_Name,@"PO_Name",
+                                          PO_DOB,@"PO_DOB",
+                                          PO_Gender,@"PO_Gender",
+                                          PO_Age,@"PO_Age",
+                                          PO_OccpCode,@"PO_OccpCode",
+                                          PO_Occp,@"PO_Occp",
+                                          PO_ClientID,@"PO_ClientID",
+                                          RelWithLA,@"RelWithLA",
+                                          LA_ClientID,@"LA_ClientID",
+                                          LA_Name,@"LA_Name",
+                                          LA_DOB,@"LA_DOB",
+                                          LA_Age,@"LA_Age",
+                                          LA_Gender,@"LA_Gender",
+                                          LA_OccpCode,@"LA_OccpCode",
+                                          LA_Occp,@"LA_Occp",
+                                          CreatedDate,@"CreatedDate",
+                                          UpdatedDate,@"UpdatedDate",nil];
     
-    [results close];
-    [database close];
-    return dict;
+   [results close];
+   [database close];
+   return dict;
 }
 
 
