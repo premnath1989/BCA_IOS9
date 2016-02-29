@@ -1045,6 +1045,16 @@ id dobtanngal;
                                               occupationDesc,@"PO_Occp",
                                               numberIntClientProfile,@"PO_ClientID",
                                               relationDesc,@"RelWithLA",nil];
+
+        if ([relationDesc isEqualToString:@"SELF"]){
+            [dictionaryNewLA setObject:numberIntClientProfile forKey:@"LA_ClientID"];
+            [dictionaryNewLA setObject:LANameField.text forKey:@"LA_Name"];
+            [dictionaryNewLA setObject:btnDOB.titleLabel.text forKey:@"LA_DOB"];
+            [dictionaryNewLA setObject:LAAgeField.text forKey:@"LA_Age"];
+            [dictionaryNewLA setObject:sex forKey:@"LA_Gender"];
+            [dictionaryNewLA setObject:occuCode forKey:@"LA_OccpCode"];
+            [dictionaryNewLA setObject:occupationDesc forKey:@"LA_Occp"];
+        }
         
         [_delegate saveNewLA:dictionaryNewLA];
     }

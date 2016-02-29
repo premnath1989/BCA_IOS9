@@ -40,6 +40,8 @@
     NSMutableDictionary* dictionaryPOForInsert;
     NSMutableDictionary* dictionaryMasterForInsert;
     NSMutableDictionary* newDictionaryForBasicPlan;
+    
+    bool selfRelation;
 }
 
 @end
@@ -2578,6 +2580,15 @@ BOOL isFirstLoad;
             [cell setBackgroundColor:[UIColor colorWithRed:204.0/255.0 green:203.0/255.0 blue:205.0/255.0 alpha:1.0]];
     }
     
+    if (indexPath.row == 1){
+        if (selfRelation){
+            [cell setUserInteractionEnabled:NO];
+        }
+        else{
+            [cell setUserInteractionEnabled:YES];
+        }
+    }
+    
     bgColorView.backgroundColor = [UIColor orangeColor];
     
     [cell setSelectedBackgroundView:bgColorView];
@@ -2591,6 +2602,7 @@ BOOL isFirstLoad;
         [cell.button2 setEnabled:false];
         [cell.button3 setEnabled:false];
     }
+    [cell.button2 setEnabled:false];
     
     if ([[_NumberListOfSubMenu objectAtIndex:indexPath.row] isEqualToString:@"0"]){
         [cell.labelNumber setText:@""];
@@ -2669,9 +2681,24 @@ BOOL isFirstLoad;
 -(void)saveNewLA:(NSDictionary *)dataPO{
     dictionaryPOForInsert = [NSMutableDictionary dictionaryWithDictionary:dataPO];
     [arrayIntValidate replaceObjectAtIndex:0 withObject:@"1"];
-    [self loadSecondLAPage];
     [self.myTableView reloadData];
-    [self.myTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:SIMENU_SECOND_LIFE_ASSURED inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
+    if ([[dataPO valueForKey:@"RelWithLA"] isEqualToString:@"SELF"]){
+        selfRelation = YES;
+        dictionaryPOForInsert = [NSMutableDictionary dictionaryWithDictionary:dataPO];
+        [arrayIntValidate replaceObjectAtIndex:1 withObject:@"1"];
+        [_modelSIPOData savePODate:dictionaryPOForInsert];
+        [_modelSIMaster saveIlustrationMaster:dictionaryMasterForInsert];
+        [self loadBasicPlanPage:YES];
+        [self.myTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:SIMENU_BASIC_PLAN inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
+
+    }
+    else{
+        selfRelation = NO;
+        [self loadSecondLAPage];
+        [self.myTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:SIMENU_SECOND_LIFE_ASSURED inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
+    }
+    
+
 }
 
 -(void)saveSecondLA:(NSDictionary *)dataLA{
