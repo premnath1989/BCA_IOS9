@@ -9,14 +9,19 @@
 #import <UIKit/UIKit.h>
 #import <sqlite3.h>
 #import "DateViewController.h"
+#import "AgentWS.h"
+#import "LoginDBManagement.h"
+#import "SpinnerUtilities.h"
 
-@interface SettingUserProfile : UIViewController <DateViewControllerDelegate, UITextFieldDelegate, NSXMLParserDelegate>{
+@interface SettingUserProfile : UIViewController <DateViewControllerDelegate, UITextFieldDelegate, NSXMLParserDelegate, AgentWSSoapBindingResponseDelegate>{
     NSString *databasePath;
     sqlite3 *contactDB;
     UITextField *activeField;
     DateViewController *_DatePicker;
     UIPopoverController *_datePopover;
     NSMutableDictionary *agentDetails;
+    LoginDBManagement *loginDB;
+    SpinnerUtilities *spinnerLoading;
 }
 
 @property (nonatomic,strong) id idRequest;
@@ -53,7 +58,7 @@
 @property(strong) NSString *elementName;
 
 - (IBAction)btnClose:(id)sender;
-- (IBAction)btnSave:(id)sender;
+- (IBAction)btnSync:(id)sender;
 - (IBAction)btnDone:(id)sender;
 - (IBAction)ChangePassword:(id)sender;
 

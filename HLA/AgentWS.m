@@ -3361,11 +3361,11 @@
 }
 + (AgentWSSoapBinding *)AgentWSSoapBinding
 {
-	return [[[AgentWSSoapBinding alloc] initWithAddress:@"http://192.168.2.115/AgentWebService/AgentWS.asmx"] autorelease];
+	return [[[AgentWSSoapBinding alloc] initWithAddress:@"http://175.139.194.57:8888/AgentWebService/AgentWS.asmx"] autorelease];
 }
 + (AgentWSSoap12Binding *)AgentWSSoap12Binding
 {
-	return [[[AgentWSSoap12Binding alloc] initWithAddress:@"http://192.168.2.115/AgentWebService/AgentWS.asmx"] autorelease];
+	return [[[AgentWSSoap12Binding alloc] initWithAddress:@"http://175.139.194.57:8888/AgentWebService/AgentWS.asmx"] autorelease];
 }
 @end
 @implementation AgentWSSoapBinding

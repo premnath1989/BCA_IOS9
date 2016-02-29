@@ -10,6 +10,8 @@
 #import <sqlite3.h>
 #import "PasswordTips.h"
 #import "AgentWS.h"
+#import "LoginDBManagement.h"
+#import "SpinnerUtilities.h"
 
 @interface ChangePassword : UIViewController<PasswordTipDelegate, AgentWSSoapBindingResponseDelegate>{
     NSString *databasePath;
@@ -17,9 +19,10 @@
     UIPopoverController *_PasswordTipPopover;
     PasswordTips *_PasswordTips;
     id loginDelegate;
-    UIActivityIndicatorView *indicator;
     BOOL flagFirstLogin;
     NSString *strAgentCode;
+    LoginDBManagement *loginDB;
+    SpinnerUtilities *spinnerLoading;
 }
 
 @property (nonatomic, assign,readwrite) int userID;

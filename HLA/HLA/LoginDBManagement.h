@@ -20,7 +20,7 @@
 - (int) SearchAgent:(NSString *)AgentID;
 //- (int) InsertAgentProfile:(NSString *) urlStr;
 - (int)insertAgentProfile:(WebResponObj *)obj;
-- (void) updateLoginDate:(int)indexNo;
+- (void) updateLoginDate;
 - (int) FirstLogin:(NSString *)AgentID;
 - (int) AgentRecord;
 - (int) AgentStatus:(NSString *)AgentID;
@@ -30,5 +30,7 @@
 - (int) DeviceStatus:(NSString *)AgentID;
 - (BOOL) SpvAdmValidation:(NSString *)username password:(NSString *)password;
 - (int)fullSyncTable:(WebResponObj *)obj;
+- (void)makeDBCopy;
+- (void) updateLogoutDate;
 
 @end

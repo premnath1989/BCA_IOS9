@@ -58,6 +58,7 @@ NSString *ProceedStatus = @"";
     [super viewDidLoad];
 
     loginDB = [[LoginDBManagement alloc]init];
+    [loginDB makeDBCopy];
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = TRUE;
     
@@ -67,8 +68,6 @@ NSString *ProceedStatus = @"";
     txtPassword.delegate = self;
     txtPassword.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0);
     
-    [self initLoadingSpinner];
-    
     UserProfileView = [self.storyboard instantiateViewControllerWithIdentifier:@"ChangePwd"];
     firstLogin = false;
     if([loginDB AgentRecord] == AGENT_IS_NOT_FOUND){
@@ -76,8 +75,7 @@ NSString *ProceedStatus = @"";
         firstLogin = true;
     }
     
-//    WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
-//    [webservice fullSync:self];
+    spinnerLoading = [[SpinnerUtilities alloc]init];
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(forgotPassword:)];
     [lblForgotPwd setUserInteractionEnabled:YES];
@@ -99,7 +97,6 @@ NSString *ProceedStatus = @"";
     [formatter setDateFormat:@"yyyy-MM-dd"];
     NSDate *StartDate = [formatter dateFromString:@"2013-04-03"];
     
-    
     NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *components = [gregorianCalendar components:NSDayCalendarUnit
                                                         fromDate:StartDate
@@ -112,17 +109,6 @@ NSString *ProceedStatus = @"";
     outletLogin.hidden = FALSE;
 }
 
-- (void) initLoadingSpinner{
-    indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    indicator.frame = CGRectMake(0.0, 0.0, 80.0, 80.0);
-    indicator.center = self.view.center;
-    indicator.layer.cornerRadius = 05;
-    indicator.opaque = NO;
-    indicator.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.6f];
-    [indicator setColor:[UIColor colorWithRed:0.6 green:0.8 blue:1.0 alpha:1.0]];
-    [self.view addSubview:indicator];
-    [indicator bringSubviewToFront:self.view];
-}
 
 //added by Edwin 12-02-2014
 static NSString *labelVers;
@@ -228,7 +214,6 @@ static NSString *labelVers;
 - (void) operation:(AgentWSSoapBindingOperation *)operation
                 completedWithResponse:(AgentWSSoapBindingResponse *)response
 {
-    [indicator stopAnimating];
     NSArray *responseBodyParts = response.bodyParts;
     if([[response.error localizedDescription] caseInsensitiveCompare:@""] != NSOrderedSame){
         UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Periksa lagi koneksi internet anda" message:@"" delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
@@ -251,37 +236,13 @@ static NSString *labelVers;
          * is it AgentWS_SendForgotPasswordResponse
          ****/
         else if([bodyPart isKindOfClass:[AgentWS_SendForgotPasswordResponse class]]) {
+            [spinnerLoading stopLoadingSpinner];
             AgentWS_SendForgotPasswordResponse* rateResponse = bodyPart;
             if([(NSString *)rateResponse.SendForgotPasswordResult caseInsensitiveCompare:@"TRUE"]){
                 UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Sukses!"message:[NSString stringWithFormat:@"Password baru telah di kirimkan ke email anda"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
                 [alert show];
             }else{
                 UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Gagal!" message:[NSString stringWithFormat:@"Periksa lagi koneksi internet anda"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-                [alert show];
-            }
-        }
-        
-        /****
-         * is it AgentWS_ReceiveFirstLoginResponse
-         ****/
-        else if([bodyPart isKindOfClass:[AgentWS_ReceiveFirstLoginResponse class]]) {
-            AgentWS_ReceiveFirstLoginResponse* rateResponse = bodyPart;
-            if([rateResponse.strStatus caseInsensitiveCompare:@"True"] == NSOrderedSame){
-                firstLogin = false;
-                // create XMLDocument object
-                DDXMLDocument *xml = [[DDXMLDocument alloc] initWithXMLString:rateResponse.ReceiveFirstLoginResult.xmlDetails options:0 error:nil];
-            
-                // Get root element - DataSetMenu for your XMLfile
-                DDXMLElement *root = [xml rootElement];
-                WebResponObj *returnObj = [[WebResponObj alloc]init];
-                [self parseXML:root objBuff:returnObj index:0];
-                int result = [loginDB fullSyncTable:returnObj];
-                if(result == TABLE_INSERTION_SUCCESS){
-                    [loginDB updateLoginDate:indexNo];
-                    [UserProfileView gotoCarousel];
-                }
-            }else if([rateResponse.strStatus caseInsensitiveCompare:@"False"] == NSOrderedSame){
-                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Proses Login anda gagal" message:@"" delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
                 [alert show];
             }
         }
@@ -303,34 +264,11 @@ static NSString *labelVers;
                 [self parseXML:root objBuff:returnObj index:0];
                 int result = [loginDB fullSyncTable:returnObj];
                 if(result == TABLE_INSERTION_SUCCESS){
+                    [spinnerLoading stopLoadingSpinner];
                     [self loginSuccess];
                 }
             }else if([rateResponse.strStatus caseInsensitiveCompare:@"False"] == NSOrderedSame){
-                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Proses Login anda gagal" message:@"" delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
-                [alert show];
-            }
-        }
-        
-        /****
-         * is it AgentWS_FullSyncTableResponse
-         ****/
-        else if([bodyPart isKindOfClass:[AgentWS_FullSyncTableResponse class]]) {
-            AgentWS_FullSyncTableResponse* rateResponse = bodyPart;
-            if([rateResponse.strStatus caseInsensitiveCompare:@"True"] == NSOrderedSame){
-                
-                // create XMLDocument object
-                DDXMLDocument *xml = [[DDXMLDocument alloc] initWithXMLString:
-                                      rateResponse.FullSyncTableResult.xmlDetails options:0 error:nil];
-                
-                // Get root element - DataSetMenu for your XMLfile
-                DDXMLElement *root = [xml rootElement];
-                WebResponObj *returnObj = [[WebResponObj alloc]init];
-                [self parseXML:root objBuff:returnObj index:0];
-                
-                //we insert/update the table
-                [loginDB fullSyncTable:returnObj];
-                [self loginSuccess];
-            }else if([rateResponse.strStatus caseInsensitiveCompare:@"False"] == NSOrderedSame){
+                [spinnerLoading stopLoadingSpinner];
                 UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Proses Login anda gagal" message:@"" delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
                 [alert show];
             }
@@ -383,7 +321,7 @@ static NSString *labelVers;
         alert = Nil;
     }
     else {
-        [indicator startAnimating];
+        [spinnerLoading startLoadingSpinner:self.view label:@"Loading"];
         
         WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
         [webservice forgotPassword:txtUsername.text delegate:self];
@@ -548,7 +486,8 @@ static NSString *labelVers;
 {
     //check the agentstatus and expiry date
     if([self validToLogin] && !firstLogin){
-        [indicator startAnimating];
+        
+        [spinnerLoading startLoadingSpinner:self.view label:@"Loading"];
         
         //online login
         if([self connected]){
@@ -576,7 +515,7 @@ static NSString *labelVers;
         appDelegate.isLoggedIn = TRUE;
         
         [self openHome];
-        [loginDB updateLoginDate:indexNo];
+        [loginDB updateLoginDate];
     }
 }
 
@@ -669,7 +608,7 @@ static NSString *labelVers;
             [txtUsername becomeFirstResponder];
             alert = Nil;
         }
-        [indicator stopAnimating];
+        [spinnerLoading stopLoadingSpinner];
     }
 }
 

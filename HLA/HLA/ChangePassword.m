@@ -13,6 +13,12 @@
 #import "CarouselViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
+#import "DDXMLDocument.h"
+#import "DDXMLElementAdditions.h"
+#import "DDXMLNode.h"
+
+#import "LoginMacros.h"
+
 @interface ChangePassword ()
 
 @end
@@ -56,17 +62,6 @@
     carouselMenu.getInternet = @"No";
     [self presentViewController:carouselMenu animated:YES completion:Nil];
 }
-- (void) initLoadingSpinner{
-    indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    indicator.frame = CGRectMake(0.0, 0.0, 80.0, 80.0);
-    indicator.center = self.view.center;
-    indicator.layer.cornerRadius = 05;
-    indicator.opaque = NO;
-    indicator.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.6f];
-    [indicator setColor:[UIColor colorWithRed:0.6 green:0.8 blue:1.0 alpha:1.0]];
-    [self.view addSubview:indicator];
-    [indicator bringSubviewToFront:self.view];
-}
 
 - (void)viewDidLoad
 {
@@ -77,9 +72,12 @@
     NSString *docsDir = [dirPaths objectAtIndex:0];
     databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
     
+    loginDB = [[LoginDBManagement alloc]init];
     btnBarDone.enabled = NO;
     [btnBarDone setTintColor: [UIColor clearColor]];
-    [self initLoadingSpinner];
+    
+    
+    spinnerLoading = [[SpinnerUtilities alloc]init];
 
     if(flagFirstLogin){
         btnBarCancel.enabled = NO;
@@ -304,10 +302,10 @@
         }
         else {
             if ([txtNewPwd.text isEqualToString:txtConfirmPwd.text]) {
-                [indicator startAnimating];
+                [spinnerLoading startLoadingSpinner:self.view label:@"Loading..."];
                 WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
                 if(flagFirstLogin){
-                    [webservice FirstTimeLogin:loginDelegate AgentCode:txtAgentCode.text password:txtOldPwd.text newPassword:txtNewPwd.text UUID:[[[UIDevice currentDevice] identifierForVendor] UUIDString]];
+                    [webservice FirstTimeLogin:self AgentCode:txtAgentCode.text password:txtOldPwd.text newPassword:txtNewPwd.text UUID:[[[UIDevice currentDevice] identifierForVendor] UUIDString]];
                 }else{
                     [webservice chgPassword:self AgentCode:txtAgentCode.text password:txtOldPwd.text newPassword:txtNewPwd.text UUID:[[[UIDevice currentDevice] identifierForVendor] UUIDString]];
                 }
@@ -327,7 +325,6 @@
 - (void) operation:(AgentWSSoapBindingOperation *)operation
 completedWithResponse:(AgentWSSoapBindingResponse *)response
 {
-    [indicator stopAnimating];
     NSArray *responseBodyParts = response.bodyParts;
     if([[response.error localizedDescription] caseInsensitiveCompare:@""] != NSOrderedSame){
         UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Periksa lagi koneksi internet anda" message:@"" delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
@@ -350,12 +347,110 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
          * is it AgentWS_ChangePasswordResponse
          ****/
         else if([bodyPart isKindOfClass:[AgentWS_ChangePasswordResponse class]]) {
+            [spinnerLoading stopLoadingSpinner];
             AgentWS_ChangePasswordResponse* rateResponse = bodyPart;
-            UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Ubah Password Sukses!"message:[NSString stringWithFormat:@"%@ Password Anda telah berhasil di ubah",rateResponse.ChangePasswordResult] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [alert show];
+            if([rateResponse.ChangePasswordResult caseInsensitiveCompare:@"TRUE"]){
+                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Ubah Password Sukses!"message:[NSString stringWithFormat:@"Password Anda telah berhasil di ubah"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                [alert show];
+            }else{
+                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Ubah Password Gagal!"message:[NSString stringWithFormat:@"Password Anda gagal di ubah"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                [alert show];
+            }
+        }
+        
+        /****
+         * is it AgentWS_FullSyncTableResponse
+         ****/
+        else if([bodyPart isKindOfClass:[AgentWS_FullSyncTableResponse class]]) {
+            AgentWS_FullSyncTableResponse* rateResponse = bodyPart;
+            if([rateResponse.strStatus caseInsensitiveCompare:@"True"] == NSOrderedSame){
+                
+                // create XMLDocument object
+                DDXMLDocument *xml = [[DDXMLDocument alloc] initWithXMLString:
+                                      rateResponse.FullSyncTableResult.xmlDetails options:0 error:nil];
+                
+                // Get root element - DataSetMenu for your XMLfile
+                DDXMLElement *root = [xml rootElement];
+                WebResponObj *returnObj = [[WebResponObj alloc]init];
+                [self parseXML:root objBuff:returnObj index:0];
+                
+                //we insert/update the table
+                [loginDB fullSyncTable:returnObj];
+                [spinnerLoading stopLoadingSpinner];
+                [loginDB updateLoginDate];
+                [self gotoCarousel];
+            }else if([rateResponse.strStatus caseInsensitiveCompare:@"False"] == NSOrderedSame){
+                [spinnerLoading stopLoadingSpinner];
+                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Proses Login anda gagal" message:@"" delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
+                [alert show];
+            }
+        }
+        
+        /****
+         * is it AgentWS_ReceiveFirstLoginResponse
+         ****/
+        else if([bodyPart isKindOfClass:[AgentWS_ReceiveFirstLoginResponse class]]) {
+            AgentWS_ReceiveFirstLoginResponse* rateResponse = bodyPart;
+            if([rateResponse.strStatus caseInsensitiveCompare:@"True"] == NSOrderedSame){
+                flagFirstLogin = false;
+                // create XMLDocument object
+                DDXMLDocument *xml = [[DDXMLDocument alloc] initWithXMLString:rateResponse.ReceiveFirstLoginResult.xmlDetails options:0 error:nil];
+                
+                // Get root element - DataSetMenu for your XMLfile
+                DDXMLElement *root = [xml rootElement];
+                WebResponObj *returnObj = [[WebResponObj alloc]init];
+                [self parseXML:root objBuff:returnObj index:0];
+                int result = [loginDB fullSyncTable:returnObj];
+                if(result == TABLE_INSERTION_SUCCESS){
+                    [spinnerLoading stopLoadingSpinner];
+                    [spinnerLoading startLoadingSpinner:self.view label:@"Sync sedang berjalan"];
+                    WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
+                    [webservice fullSync:self];
+                }
+            }else if([rateResponse.strStatus caseInsensitiveCompare:@"False"] == NSOrderedSame){
+                [spinnerLoading stopLoadingSpinner];
+                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Proses Login anda gagal" message:@"" delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
+                [alert show];
+            }
         }
     }
 }
+
+- (void) parseXML:(DDXMLElement *)root objBuff:(WebResponObj *)obj index:(int)index{
+    // go through all elements in root element (DataSetMenu element)
+    for (DDXMLElement *DataSetMenuElement in [root children]) {
+        // if the element name's is MenuCategories then do something
+        if([[DataSetMenuElement children] count] <= 0){
+            if([[DataSetMenuElement name] caseInsensitiveCompare:@"xs:element"]==NSOrderedSame){
+                //                DDXMLNode *name = [DataSetMenuElement attributeForName: @"name"];
+                //                DDXMLNode *type = [DataSetMenuElement attributeForName: @"type"];
+                //                NSLog(@"%@ : %@", [name stringValue], [type stringValue]);
+                //
+                //                DDXMLNode *tableName = [[[DataSetMenuElement parent] parent] parent];
+                //                [obj addRow:[tableName ] columnNames:[name stringValue] data:@""];
+            }else{
+                NSArray *elements = [root elementsForName:[DataSetMenuElement name]];
+                if([[[elements objectAtIndex:0]stringValue] caseInsensitiveCompare:@""] != NSOrderedSame){
+                    NSLog(@"%d %@ = %@", index,[[DataSetMenuElement parent]name], [[elements objectAtIndex:0]stringValue]);
+                    NSString *tableName = [NSString stringWithFormat:@"%@&%d",[[[DataSetMenuElement parent] parent]name], index];
+                    [obj addRow:tableName columnNames:[[DataSetMenuElement parent]name] data:[[elements objectAtIndex:0]stringValue]];
+                }else{
+                    NSLog(@"%d %@ = %@",index, [DataSetMenuElement name], [[elements objectAtIndex:0]stringValue]);
+                    NSString *tableName = [NSString stringWithFormat:@"%@&%d",[[DataSetMenuElement parent]name], index];
+                    [obj addRow:tableName columnNames:[DataSetMenuElement name] data:[[elements objectAtIndex:0]stringValue]];
+                }
+            }
+        }else{
+            DDXMLNode *name = [DataSetMenuElement attributeForName: @"diffgr:id"];
+            if(name != nil){
+                NSLog(@"diffgr : %@",[[DataSetMenuElement attributeForName:@"diffgr:id"] stringValue]);
+                index++;
+            }
+        }
+        [self parseXML:DataSetMenuElement objBuff:obj index:index];
+    }
+}
+
 
 - (BOOL) isPasswordLegal:(NSString*) password
 {

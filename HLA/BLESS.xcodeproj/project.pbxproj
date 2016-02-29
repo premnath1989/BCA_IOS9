@@ -442,6 +442,7 @@
 		AAFFE1801C7D475E001B91BF /* USAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFFE1781C7D475E001B91BF /* USAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		AAFFE1811C7D475E001B91BF /* USGlobals.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFFE1791C7D475E001B91BF /* USGlobals.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		AAFFE1821C7D475E001B91BF /* xsd.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFFE17A1C7D475E001B91BF /* xsd.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		AAFFE1851C7EB161001B91BF /* SpinnerUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFFE1841C7EB161001B91BF /* SpinnerUtilities.m */; };
 		C3092ABA1ADF5E4500756616 /* ClearData.m in Sources */ = {isa = PBXBuildFile; fileRef = C3092AB91ADF5E4500756616 /* ClearData.m */; };
 		C30A259C17F3C8D500613A0F /* AdditionalQuestions.m in Sources */ = {isa = PBXBuildFile; fileRef = C30A253917F3C8D500613A0F /* AdditionalQuestions.m */; };
 		C30A259D17F3C8D500613A0F /* AddtionalQuestInsured.m in Sources */ = {isa = PBXBuildFile; fileRef = C30A253B17F3C8D500613A0F /* AddtionalQuestInsured.m */; };
@@ -1546,6 +1547,8 @@
 		AAFFE17A1C7D475E001B91BF /* xsd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = xsd.m; sourceTree = SOURCE_ROOT; };
 		AAFFE17B1C7D475E001B91BF /* USGlobals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USGlobals.h; sourceTree = SOURCE_ROOT; };
 		AAFFE17C1C7D475E001B91BF /* xsd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xsd.h; sourceTree = SOURCE_ROOT; };
+		AAFFE1831C7EB150001B91BF /* SpinnerUtilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpinnerUtilities.h; sourceTree = "<group>"; };
+		AAFFE1841C7EB161001B91BF /* SpinnerUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpinnerUtilities.m; sourceTree = "<group>"; };
 		C3092AB81ADF5E4500756616 /* ClearData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClearData.h; sourceTree = "<group>"; };
 		C3092AB91ADF5E4500756616 /* ClearData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClearData.m; sourceTree = "<group>"; };
 		C30A253817F3C8D500613A0F /* AdditionalQuestions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdditionalQuestions.h; sourceTree = "<group>"; };
@@ -3325,6 +3328,10 @@
 				AAFFE17A1C7D475E001B91BF /* xsd.m */,
 				AAFFE17B1C7D475E001B91BF /* USGlobals.h */,
 				AAFFE17C1C7D475E001B91BF /* xsd.h */,
+				AAAC9D081C71BAE5002E3190 /* WebServiceUtilities.h */,
+				AAAC9D091C71BAF3002E3190 /* WebServiceUtilities.m */,
+				AAFFE16E1C7C4EE9001B91BF /* WebResponObj.h */,
+				AAFFE16F1C7C4F14001B91BF /* WebResponObj.m */,
 			);
 			name = WebServices;
 			sourceTree = "<group>";
@@ -3337,10 +3344,8 @@
 				AAD5455E1C6443080029631D /* LoginDBManagement.m */,
 				AA2BB5FC1C70597300A5256E /* SynchdaysCounter.h */,
 				AA2BB5FD1C70598E00A5256E /* SynchDaysCounter.m */,
-				AAAC9D081C71BAE5002E3190 /* WebServiceUtilities.h */,
-				AAAC9D091C71BAF3002E3190 /* WebServiceUtilities.m */,
-				AAFFE16E1C7C4EE9001B91BF /* WebResponObj.h */,
-				AAFFE16F1C7C4F14001B91BF /* WebResponObj.m */,
+				AAFFE1831C7EB150001B91BF /* SpinnerUtilities.h */,
+				AAFFE1841C7EB161001B91BF /* SpinnerUtilities.m */,
 			);
 			name = LoginUtilities;
 			sourceTree = "<group>";
@@ -5204,6 +5209,7 @@
 				29A38DCA17EAF51000454787 /* eSubMenu.m in Sources */,
 				29A38DD017EAF58B00454787 /* pendingVC.m in Sources */,
 				29A38DD117EAF58B00454787 /* submittedVC.m in Sources */,
+				AAFFE1851C7EB161001B91BF /* SpinnerUtilities.m in Sources */,
 				AAFFE17D1C7D475E001B91BF /* AgentWS.m in Sources */,
 				2943213317F2E0DC00FB64AB /* SIDate_DOB.m in Sources */,
 				C30A259C17F3C8D500613A0F /* AdditionalQuestions.m in Sources */,

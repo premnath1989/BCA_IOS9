@@ -14,6 +14,11 @@
 #import "ChangePassword.h"
 #import "LoginDatabaseManagement.h"
 
+
+#import "DDXMLDocument.h"
+#import "DDXMLElementAdditions.h"
+#import "DDXMLNode.h"
+
 @interface SettingUserProfile ()
 
 @end
@@ -56,13 +61,16 @@ id temp;
     AppDelegate *zzz= (AppDelegate*)[[UIApplication sharedApplication] delegate ];
     self.indexNo = zzz.indexNo;
     self.idRequest = zzz.userRequest;
+    
+    
+    loginDB = [[LoginDBManagement alloc]init];
+    agentDetails =[loginDB getAgentDetails];
         
     NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docsDir = [dirPaths objectAtIndex:0];
     databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
     
-    LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
-    agentDetails =[loginDB getAgentDetails];
+    spinnerLoading = [[SpinnerUtilities alloc]init];
     [self setValueProperty];
     
     outletSave.layer.cornerRadius = 10.0f;
@@ -78,28 +86,40 @@ id temp;
 	txtAgentCode.enabled = FALSE;
 	txtAgentName.enabled = FALSE;
 	btnContractDate.enabled = FALSE;
-	
 }
 
 - (void) setValueProperty{
     txtAgentCode.text = [agentDetails valueForKey:@"AgentCode"];
     txtAgentCode.enabled = NO;
-    txtAgentCode.backgroundColor = [UIColor lightGrayColor];
     
     txtAgentName.text = [agentDetails valueForKey:@"AgentName"];
+    txtAgentName.enabled = NO;
     txtCabang.text = [NSString stringWithFormat:@"%@ - %@",[agentDetails valueForKey:@"BranchCode"], [agentDetails valueForKey:@"BranchName"]];
+    txtCabang.enabled = NO;
     txtKanwil.text = [NSString stringWithFormat:@"%@ - %@",[agentDetails valueForKey:@"KanwilCode"], [agentDetails valueForKey:@"Kanwil"]];
+    txtKanwil.enabled = NO;
     txtKCU.text = [agentDetails valueForKey:@"KCU"];
+    txtKCU.enabled = NO;
     txtChannel.text = [agentDetails valueForKey:@"ChannelName"];
+    txtChannel.enabled = NO;
     txtDirectSupervisor.text = [NSString stringWithFormat:@"%@ - %@",[agentDetails valueForKey:@"DirectSupervisorCode"], [agentDetails valueForKey:@"DirectSupervisorName"]];
+    txtDirectSupervisor.enabled = NO;
     txtAgentStatus.text = [agentDetails valueForKey:@"AgentStatus"];
+    txtAgentStatus.enabled = NO;
     txtLicenseStart.text = [agentDetails valueForKey:@"LicenseStartDate"];
+    txtLicenseStart.enabled = NO;
     txtLicenseEnd.text = [agentDetails valueForKey:@"LicenseExpiryDate"];
+    txtLicenseEnd.enabled = NO;
     txtAddress1.text = [agentDetails valueForKey:@"AgentAddr1"];
+    txtAddress1.enabled = NO;
     txtAddress2.text = [agentDetails valueForKey:@"AgentAddr2"];
+    txtAddress2.enabled = NO;
     txtAddress3.text = [agentDetails valueForKey:@"AgentAddr3"];
+    txtAddress3.enabled = NO;
     txtMobileNumber.text = [agentDetails valueForKey:@"AgentContactNumber"];
+    txtMobileNumber.enabled = NO;
     txtEmail.text = [agentDetails valueForKey:@"AgentEmail"];
+    txtEmail.enabled = NO;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -176,6 +196,7 @@ id temp;
 - (IBAction)ChangePassword:(id)sender
 {
     ChangePassword * UserProfileView = [self.storyboard instantiateViewControllerWithIdentifier:@"ChangePwd"];
+    [UserProfileView setDelegate:nil firstLogin:false];
     UserProfileView.modalPresentationStyle = UIModalPresentationFormSheet;
     UserProfileView.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     UserProfileView.preferredContentSize = CGSizeMake(600, 500);
@@ -442,13 +463,77 @@ id temp;
     [self dismissModalViewControllerAnimated:YES ];
 }
 
-- (IBAction)btnSave:(id)sender { //no longer using
+
+- (IBAction)btnSync:(id)sender { //no longer using
     [self.view endEditing:TRUE];
     [self resignFirstResponder];
-//    [self updateUserData ];
+    [spinnerLoading startLoadingSpinner:self.view label:@"Sync sedang berjalan"];
+//    WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
+//    [webservice fullSync:self];
+}
+
+//here is our function for every response from webservice
+- (void) operation:(AgentWSSoapBindingOperation *)operation
+completedWithResponse:(AgentWSSoapBindingResponse *)response
+{
+    [spinnerLoading stopLoadingSpinner];
+    NSArray *responseBodyParts = response.bodyParts;
+    if([[response.error localizedDescription] caseInsensitiveCompare:@""] != NSOrderedSame){
+        UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Periksa lagi koneksi internet anda" message:@"" delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
+        [alert show];
+    }
+    for(id bodyPart in responseBodyParts) {
+        
+        /****
+         * SOAP Fault Error
+         ****/
+        if ([bodyPart isKindOfClass:[SOAPFault class]]) {
+            
+            //You can get the error like this:
+            NSString* errorMesg = ((SOAPFault *)bodyPart).simpleFaultString;
+            UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Please check your connection" message:errorMesg delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
+            [alert show];
+        }
+    }
+}
+
+- (void) parseXML:(DDXMLElement *)root objBuff:(WebResponObj *)obj index:(int)index{
+    // go through all elements in root element (DataSetMenu element)
+    for (DDXMLElement *DataSetMenuElement in [root children]) {
+        // if the element name's is MenuCategories then do something
+        if([[DataSetMenuElement children] count] <= 0){
+            if([[DataSetMenuElement name] caseInsensitiveCompare:@"xs:element"]==NSOrderedSame){
+                //                DDXMLNode *name = [DataSetMenuElement attributeForName: @"name"];
+                //                DDXMLNode *type = [DataSetMenuElement attributeForName: @"type"];
+                //                NSLog(@"%@ : %@", [name stringValue], [type stringValue]);
+                //
+                //                DDXMLNode *tableName = [[[DataSetMenuElement parent] parent] parent];
+                //                [obj addRow:[tableName ] columnNames:[name stringValue] data:@""];
+            }else{
+                NSArray *elements = [root elementsForName:[DataSetMenuElement name]];
+                if([[[elements objectAtIndex:0]stringValue] caseInsensitiveCompare:@""] != NSOrderedSame){
+                    NSLog(@"%d %@ = %@", index,[[DataSetMenuElement parent]name], [[elements objectAtIndex:0]stringValue]);
+                    NSString *tableName = [NSString stringWithFormat:@"%@&%d",[[[DataSetMenuElement parent] parent]name], index];
+                    [obj addRow:tableName columnNames:[[DataSetMenuElement parent]name] data:[[elements objectAtIndex:0]stringValue]];
+                }else{
+                    NSLog(@"%d %@ = %@",index, [DataSetMenuElement name], [[elements objectAtIndex:0]stringValue]);
+                    NSString *tableName = [NSString stringWithFormat:@"%@&%d",[[DataSetMenuElement parent]name], index];
+                    [obj addRow:tableName columnNames:[DataSetMenuElement name] data:[[elements objectAtIndex:0]stringValue]];
+                }
+            }
+        }else{
+            DDXMLNode *name = [DataSetMenuElement attributeForName: @"diffgr:id"];
+            if(name != nil){
+                NSLog(@"diffgr : %@",[[DataSetMenuElement attributeForName:@"diffgr:id"] stringValue]);
+                index++;
+            }
+        }
+        [self parseXML:DataSetMenuElement objBuff:obj index:index];
+    }
 }
 
 - (IBAction)btnDone:(id)sender {
+    [loginDB updateLogoutDate];
     UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:Nil];
     Login *mainLogin = [mainStoryBoard instantiateViewControllerWithIdentifier:@"Login"];
     mainLogin.modalPresentationStyle = UIModalPresentationFullScreen;

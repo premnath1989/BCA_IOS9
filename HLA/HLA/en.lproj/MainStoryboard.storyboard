@@ -425,13 +425,13 @@
                                         <color key="backgroundColor" red="1" green="0.72156862745098038" blue="0.090196078431372548" alpha="1" colorSpace="deviceRGB"/>
                                         <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
                                         <color key="tintColor" red="1" green="0.72156862749999995" blue="0.090196078430000007" alpha="1" colorSpace="deviceRGB"/>
-                                        <state key="normal" title="Save">
+                                        <state key="normal" title="Synch">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="btnSave:" destination="381-AA-ICO" eventType="touchUpInside" id="Mcv-Tr-VNh"/>
-                                            <action selector="btnSave:" destination="Xma-Uf-txG" eventType="touchUpInside" id="mEg-u5-EwL"/>
+                                            <action selector="btnSync:" destination="Xma-Uf-txG" eventType="touchUpInside" id="5Ze-Td-AaB"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="SbK-xb-lBO">

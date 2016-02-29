@@ -13,6 +13,8 @@
 #import "LoginDBManagement.h"
 #import "AgentWS.h"
 #import "ChangePassword.h"
+#import "WebServiceUtilities.h"
+#import "SpinnerUtilities.h"
 
 @protocol LoginDelegate
 - (void)Dismiss: (NSString *)ViewToBePresented;
@@ -80,8 +82,8 @@ static NSString* DATE_FORMAT = @"yyyy-MM-dd";
     int xmlType;
     
     BOOL showLogout;
-    UIActivityIndicatorView *indicator;
     ChangePassword * UserProfileView;
+    SpinnerUtilities *spinnerLoading;
 }
 
 
