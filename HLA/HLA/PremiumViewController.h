@@ -55,6 +55,26 @@
     
     int maxGycc;
     
+    IBOutlet UILabel *lblAsuransiDasarTahunan;
+    IBOutlet UILabel *lblAsuransiDasarBulanan;
+    IBOutlet UILabel *lblAsuransiDasarSekaligus;
+    IBOutlet UILabel *lblOccupationLoadingTahunan;
+    IBOutlet UILabel *lblOccupationLoadingBulanan;
+    IBOutlet UILabel *lblOccupationLoadingSekaligus;
+    IBOutlet UILabel *lblExtraPremiPercentTahunan;
+    IBOutlet UILabel *lblExtraPremiPercentBulanan;
+    IBOutlet UILabel *lblExtraPremiPercentSekaligus;
+    IBOutlet UILabel *lblExtraPremiNumberTahunan;
+    IBOutlet UILabel *lblExtraPremiNumberBulanan;
+    IBOutlet UILabel *lblExtraPremiNumberSekaligus;
+    IBOutlet UILabel *lblSubtotalTahunan;
+    IBOutlet UILabel *lblSubtotalBulanan;
+    IBOutlet UILabel *lblSubtotalSekaligus;
+    IBOutlet UILabel *lblTotalTahunan;
+    IBOutlet UILabel *lblTotalBulanan;
+    IBOutlet UILabel *lblTotalSekaligus;
+
+    
     id <PremiumViewControllerDelegate> _delegate;
 //    SIMenuViewController *_simenu;
 }
@@ -188,7 +208,11 @@
 @property(nonatomic , retain) NSMutableArray *ReportHMMRates;
 @property(nonatomic , retain) NSMutableArray *ReportFromAge;
 @property(nonatomic , retain) NSMutableArray *ReportToAge;
-@property (nonatomic,assign,readwrite) BOOL fromReport; 
+@property (nonatomic,assign,readwrite) BOOL fromReport;
+
+//added by faiz
+@property (nonatomic,strong) NSMutableDictionary *dictionaryPremium;
+//end of added by faiz
 
 +(NSString *)getMsgTypeL100;
 +(NSString *)getMsgTypeWealthPlan;

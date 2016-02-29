@@ -4543,7 +4543,19 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="WebView" destination="mb7-5H-Zhs" id="3Wl-Wk-FwT"/>
+                        <outlet property="lblAsuransiDasarBulanan" destination="HPR-2b-fKI" id="Iiu-HX-MPb"/>
+                        <outlet property="lblAsuransiDasarSekaligus" destination="s6N-51-t9L" id="WgY-1g-WDo"/>
+                        <outlet property="lblAsuransiDasarTahunan" destination="8Fg-NW-4Nh" id="klf-SZ-cbE"/>
+                        <outlet property="lblExtraPremiNumberBulanan" destination="zov-F7-MX8" id="aS2-8Q-zAI"/>
+                        <outlet property="lblExtraPremiNumberSekaligus" destination="haF-Xq-R4t" id="3Ky-V2-8dl"/>
+                        <outlet property="lblExtraPremiNumberTahunan" destination="Ulv-FD-Jlw" id="zKW-Kg-uCg"/>
+                        <outlet property="lblExtraPremiPercentBulanan" destination="4fU-3b-fzb" id="Huc-kV-Atd"/>
+                        <outlet property="lblExtraPremiPercentSekaligus" destination="SrX-Y4-eSu" id="PC8-aF-nPI"/>
+                        <outlet property="lblExtraPremiPercentTahunan" destination="ejQ-j8-e9d" id="jrU-Ri-x9s"/>
                         <outlet property="lblMessage" destination="neP-Ii-q4u" id="qAV-R1-zuW"/>
+                        <outlet property="lblOccupationLoadingBulanan" destination="dNv-PT-MpH" id="NrO-2G-SPy"/>
+                        <outlet property="lblOccupationLoadingSekaligus" destination="l3K-Et-iae" id="4tx-Jb-xf0"/>
+                        <outlet property="lblOccupationLoadingTahunan" destination="bLB-it-h4a" id="PdG-Hr-3zL"/>
                         <outlet property="navItem" destination="Grc-rY-MoE" id="V6R-JL-dkc"/>
                     </connections>
                 </viewController>

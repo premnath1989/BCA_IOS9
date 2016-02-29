@@ -51,6 +51,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _dictionaryPremium = [[NSMutableDictionary alloc]init];
     [self calculateReport];
     
 }
