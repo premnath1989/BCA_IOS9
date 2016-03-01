@@ -13,6 +13,8 @@
 #import "NDHTMLtoPDF.h"
 #import "TableManagement.h"
 #import "Model_SI_Master.h"
+#import "Model_SI_Premium.h"
+#import "ModelSIPOData.h"
 #import "SIListingTableViewCell.h"
 
 @interface SIListing : UIViewController<UITableViewDelegate, UITableViewDataSource, siListingDelegate, SIDateDelegate, NDHTMLtoPDFDelegate>
@@ -21,7 +23,11 @@
     sqlite3 *contactDB;
     Boolean isFilter;
     siListingSortBy *_SortBy;
+    
     Model_SI_Master *_modelSIMaster;
+    ModelSIPOData *_modelSIPOData;
+    Model_SI_Premium *_modelSIPremium;
+
     UIPopoverController *_Popover;
     SIDate *_SIDate;
     UIPopoverController *_SIDatePopover;

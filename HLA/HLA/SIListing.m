@@ -69,6 +69,8 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
 {
     [super viewDidLoad];
     _modelSIMaster=[[Model_SI_Master alloc]init];
+    _modelSIPremium=[[Model_SI_Premium alloc]init];
+    _modelSIPOData=[[ModelSIPOData alloc]init];
     
     [NoIlustrasi setFont:[UIFont fontWithName:@"HelveticaLTStd-UltraComp" size:25]];
     themeColour = [UIColor colorWithRed:242.0f/255.0f green:113.0f/255.0f blue:134.0f/255.0f alpha:1];
@@ -1074,7 +1076,7 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
                 return;
             }
             
-            NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            /*NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
             NSString *docsDir = [dirPaths objectAtIndex:0];
             databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
             
@@ -1288,9 +1290,27 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
             statement2 = Nil;
             statement3 = Nil;
             dbpath = Nil;
-            sorted = Nil;
+            sorted = Nil;*/
+
+            //delete from SIMaster
+            //delete from SIPOData
+            //delete from SIBasicPlan
+            NSArray *sorted = [[NSArray alloc] init ];
+            sorted = [ItemToBeDeleted sortedArrayUsingComparator:^(id firstObject, id secondObject){
+                return [((NSString *)firstObject) compare:((NSString *)secondObject) options:NSNumericSearch];
+            }];
+            //int value;
+            for(int a=0; a<sorted.count; a++){
+                //value = [[sorted objectAtIndex:a] intValue] - a;
+                [_modelSIPremium deletePremium:[SINO objectAtIndex:a]];
+                [_modelSIPOData deletePOData:[SINO objectAtIndex:a]];
+                [_modelSIMaster deleteIlustrationMaster:[SINO objectAtIndex:a]];
+            }
             
-        }        
+            //[myTableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
+            [self getDataForTable];
+            [myTableView reloadData];
+        }
     }    
 }
 

@@ -14,6 +14,7 @@
     FMResultSet *results;
 }
 -(void)savePODate:(NSDictionary *)dataPO;
+-(void)deletePOData:(NSString *)siNo;
 -(NSDictionary *)getPO_DataFor:(NSString *)SINo;
 -(void)updatePOData:(NSDictionary *)dataPO;
 -(int)getPODataCount:(NSString *)SINo;

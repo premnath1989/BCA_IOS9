@@ -48,6 +48,22 @@
     [database close];
 }
 
+-(void)deleteIlustrationMaster:(NSString *)siNo{
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    BOOL success = [database executeUpdate:@"delete from SI_Master where SINO=?",siNo];
+    
+    if (!success) {
+        NSLog(@"%s: insert error: %@", __FUNCTION__, [database lastErrorMessage]);
+        // do whatever you need to upon error
+    }
+    [results close];
+    [database close];
+}
+
 -(NSDictionary *)getIlustrationata{
     NSDictionary *dict;
     
@@ -129,12 +145,10 @@
     FMResultSet *s;
     if (([dateFrom length]>0)&&([dateTo length]>0)){
         s = [database executeQuery:[NSString stringWithFormat:@"SELECT sim.*, po.ProductName,po.PO_Name FROM SI_Master sim join SI_PO_Data po on sim.SINO=po.SINO where sim.SINO like \"%%%@%%\" and po.PO_Name like \"%%%@%%\" and sim.CreatedDate between \"%@\" and \"%@\" group by sim.SINO order by \"%@\" %@",SINO,poName,dateFrom,dateTo,orderBy,method]];
-        NSLog(@"query %@",[NSString stringWithFormat:@"SELECT sim.*, po.ProductName,po.PO_Name FROM SI_Master sim join SI_PO_Data po on sim.SINO=po.SINO where sim.SINO like \"%%%@%%\" and po.PO_Name like \"%%%@%%\" and CreatedDate between \"%@\" and \"%@\" group by sim.SINO order by \"%@\" %@",SINO,poName,dateFrom,dateTo,orderBy,method]);
     }
     else{
         s = [database executeQuery:[NSString stringWithFormat:@"SELECT sim.*, po.ProductName,po.PO_Name FROM SI_Master sim join SI_PO_Data po on sim.SINO=po.SINO where sim.SINO like \"%%%@%%\" and po.PO_Name like \"%%%@%%\" group by sim.SINO order by \"%@\" %@",SINO,poName,orderBy,method]];
     }
-    
     
     while ([s next]) {
         NSLog(@"SINO %@",[NSString stringWithFormat:@"%@",[s stringForColumn:@"SINO"]]);
