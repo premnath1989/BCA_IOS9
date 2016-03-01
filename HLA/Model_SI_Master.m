@@ -110,8 +110,8 @@
     return count;
 }
 
--(NSDictionary *)searchSIListingByName:(NSString *)SINO POName:(NSString *)poName Order:(NSString *)orderBy Method:(NSString *)method{
-    NSDictionary *dict;
+-(NSDictionary *)searchSIListingByName:(NSString *)SINO POName:(NSString *)poName Order:(NSString *)orderBy Method:(NSString *)method DateFrom:(NSString *)dateFrom DateTo:(NSString *)dateTo{
+    NSDictionary *dict ;
     
     NSMutableArray* arraySINo=[[NSMutableArray alloc] init];
     NSMutableArray* arrayCreatedDate=[[NSMutableArray alloc] init];
@@ -126,8 +126,15 @@
     
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     [database open];
-    //FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"SELECT sim.*, po.ProductName,po.PO_Name FROM SI_Master sim, SI_PO_Data po WHERE sim.SINO like \"%%%@%%\" and sim.PO_Name like \"%%%@%%\" order by LOWER(\"%@\") %@",SINO,poName,orderBy,method]];
-    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"SELECT sim.*, po.ProductName,po.PO_Name FROM SI_Master sim join SI_PO_Data po on sim.SINO=po.SINO where sim.SINO like \"%%%@%%\" and po.PO_Name like \"%%%@%%\" order by LOWER(\"%@\") %@",SINO,poName,orderBy,method]];
+    FMResultSet *s;
+    if (([dateFrom length]>0)&&([dateTo length]>0)){
+        s = [database executeQuery:[NSString stringWithFormat:@"SELECT sim.*, po.ProductName,po.PO_Name FROM SI_Master sim join SI_PO_Data po on sim.SINO=po.SINO where sim.SINO like \"%%%@%%\" and po.PO_Name like \"%%%@%%\" and sim.CreatedDate between \"%@\" and \"%@\" group by sim.SINO order by \"%@\" %@",SINO,poName,dateFrom,dateTo,orderBy,method]];
+        NSLog(@"query %@",[NSString stringWithFormat:@"SELECT sim.*, po.ProductName,po.PO_Name FROM SI_Master sim join SI_PO_Data po on sim.SINO=po.SINO where sim.SINO like \"%%%@%%\" and po.PO_Name like \"%%%@%%\" and CreatedDate between \"%@\" and \"%@\" group by sim.SINO order by \"%@\" %@",SINO,poName,dateFrom,dateTo,orderBy,method]);
+    }
+    else{
+        s = [database executeQuery:[NSString stringWithFormat:@"SELECT sim.*, po.ProductName,po.PO_Name FROM SI_Master sim join SI_PO_Data po on sim.SINO=po.SINO where sim.SINO like \"%%%@%%\" and po.PO_Name like \"%%%@%%\" group by sim.SINO order by \"%@\" %@",SINO,poName,orderBy,method]];
+    }
+    
     
     while ([s next]) {
         NSLog(@"SINO %@",[NSString stringWithFormat:@"%@",[s stringForColumn:@"SINO"]]);
