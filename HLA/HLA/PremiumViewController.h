@@ -82,6 +82,7 @@
     int ExtraPercentsubtotalYear;
     int ExtraNumbsubtotalBulan;
     int ExtraNumbsubtotalYear;
+    NSString *Highlight;
 
 
     NSMutableDictionary *dictionaryPremium;
@@ -215,7 +216,7 @@
 @property (nonatomic,strong) NSMutableArray *quarterRiderTot;
 @property (nonatomic,strong) NSMutableArray *halfRiderTot;
 @property (nonatomic,strong) NSMutableArray *monthRiderTot;
-
+@property (nonatomic,strong) NSString *Highlight;
 @property (nonatomic,strong) NSMutableArray *waiverRiderAnn;
 @property (nonatomic,strong) NSMutableArray *waiverRiderQuar;
 @property (nonatomic,strong) NSMutableArray *waiverRiderHalf;
