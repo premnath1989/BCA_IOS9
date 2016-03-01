@@ -788,7 +788,14 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
 
 #pragma mark - void added by faiz
 -(void)getDataForTable{
-    NSDictionary *dictIlustrationData=[[NSDictionary alloc]initWithDictionary:[_modelSIMaster getIlustrationata]];
+    NSDictionary *dictIlustrationData;
+    if (([txtSINO.text length]>0)||([txtLAName.text length]>0)){
+        dictIlustrationData=[[NSDictionary alloc]initWithDictionary:[_modelSIMaster searchSIListingByName:txtSINO.text POName:txtLAName.text Order:@"CreatedDate" Method:@"Desc"]];
+    }
+    else{
+        dictIlustrationData=[[NSDictionary alloc]initWithDictionary:[_modelSIMaster getIlustrationata]];
+    }
+    
     
     SINO = [[NSMutableArray alloc] initWithArray:[dictIlustrationData valueForKey:@"SINO"]];
     DateCreated = [[NSMutableArray alloc] initWithArray:[dictIlustrationData valueForKey:@"CreatedDate"]];
@@ -798,6 +805,8 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
     SIVersion = [[NSMutableArray alloc] initWithArray:[dictIlustrationData valueForKey:@"SI_Version"]];
     //BasicSA = [[NSMutableArray alloc] initWithArray:[dictIlustrationData valueForKey:@"Sum_Assured"]];
     BasicSA =[[NSMutableArray alloc]initWithObjects:[NSNumber numberWithDouble:0], nil];
+    
+    NSLog(@"SINO %@",dictIlustrationData);
 }
 
 #pragma mark - Button Action
@@ -819,7 +828,7 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
                                                         message:@"Date To cannot be greater than Date From" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil ];
         [alert show ];
     } else {
-        NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        /*NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *docsDir = [dirPaths objectAtIndex:0];
         databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
         
@@ -1024,7 +1033,8 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
         } else {
             [outletEdit setTitleColor:[UIColor blackColor] forState:UIControlStateNormal ];
             outletEdit.enabled = TRUE;
-        }
+        }*/
+        [self getDataForTable];
         [myTableView reloadData];
     }
     

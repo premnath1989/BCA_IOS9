@@ -17,4 +17,5 @@
 -(NSDictionary *)getIlustrationata;
 -(void)updateIlustrationMaster:(NSDictionary *)dataIlustration;
 -(int)getMasterCount:(NSString *)SINo;
+-(NSDictionary *)searchSIListingByName:(NSString *)SINO POName:(NSString *)poName Order:(NSString *)orderBy Method:(NSString *)method;
 @end

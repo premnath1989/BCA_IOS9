@@ -110,4 +110,50 @@
     return count;
 }
 
+-(NSDictionary *)searchSIListingByName:(NSString *)SINO POName:(NSString *)poName Order:(NSString *)orderBy Method:(NSString *)method{
+    NSDictionary *dict;
+    
+    NSMutableArray* arraySINo=[[NSMutableArray alloc] init];
+    NSMutableArray* arrayCreatedDate=[[NSMutableArray alloc] init];
+    NSMutableArray* arrayPOName=[[NSMutableArray alloc] init];
+    NSMutableArray* arrayProductName=[[NSMutableArray alloc] init];
+    NSMutableArray* arraySumAssured=[[NSMutableArray alloc] init];
+    NSMutableArray* arrayProposalStatus=[[NSMutableArray alloc] init];
+    NSMutableArray* arraySIVersion=[[NSMutableArray alloc] init];
+    
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    //FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"SELECT sim.*, po.ProductName,po.PO_Name FROM SI_Master sim, SI_PO_Data po WHERE sim.SINO like \"%%%@%%\" and sim.PO_Name like \"%%%@%%\" order by LOWER(\"%@\") %@",SINO,poName,orderBy,method]];
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"SELECT sim.*, po.ProductName,po.PO_Name FROM SI_Master sim join SI_PO_Data po on sim.SINO=po.SINO where sim.SINO like \"%%%@%%\" and po.PO_Name like \"%%%@%%\" order by LOWER(\"%@\") %@",SINO,poName,orderBy,method]];
+    
+    while ([s next]) {
+        NSLog(@"SINO %@",[NSString stringWithFormat:@"%@",[s stringForColumn:@"SINO"]]);
+        //occpToEnableSection = [results stringForColumn:@"OccpCode"];
+        NSString *stringSINo = [NSString stringWithFormat:@"%@",[s stringForColumn:@"SINO"]];
+        NSString *stringCreatedDate = [NSString stringWithFormat:@"%@",[s stringForColumn:@"CreatedDate"]];
+        NSString *stringPOName = [NSString stringWithFormat:@"%@",[s stringForColumn:@"PO_Name"]];
+        NSString *stringProductName = [NSString stringWithFormat:@"%@",[s stringForColumn:@"ProductName"]];
+        NSString *stringProposalStatus = [NSString stringWithFormat:@"%@",[s stringForColumn:@"ProposalStatus"]];
+        NSString *stringSIVersion = [NSString stringWithFormat:@"%@",[s stringForColumn:@"SI_Version"]];
+        //double sumAssured = [s doubleForColumn:@"Sum_Assured"];
+        
+        [arraySINo addObject:stringSINo];
+        [arrayCreatedDate addObject:stringCreatedDate];
+        [arrayPOName addObject:stringPOName];
+        [arrayProductName addObject:stringProductName];
+        //[arraySumAssured addObject:[NSNumber numberWithDouble:sumAssured]];
+        [arrayProposalStatus addObject:stringProposalStatus];
+        [arraySIVersion addObject:stringSIVersion];
+    }
+    dict = [[NSDictionary alloc] initWithObjectsAndKeys:arraySINo,@"SINO", arrayCreatedDate,@"CreatedDate", arrayPOName,@"PO_Name",arrayProductName,@"ProductName",arrayProposalStatus,@"ProposalStatus",arraySIVersion,@"SI_Version",/*arraySumAssured,@"Sum_Assured",*/ nil];
+    
+    [results close];
+    [database close];
+    return dict;
+}
+
+
 @end
