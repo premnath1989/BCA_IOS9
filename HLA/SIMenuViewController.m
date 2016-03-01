@@ -465,6 +465,18 @@ BOOL isFirstLoad;
     //}
 }
 
+-(void)LoadIlustrationPage
+{
+    if (_salesIlustrationViewController == nil) {
+        _salesIlustrationViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SalesIlustration"];
+        //_LAController.delegate = self;
+        [self.RightView addSubview:_salesIlustrationViewController.view];
+    }
+    [self.RightView bringSubviewToFront:_salesIlustrationViewController.view];
+//    [self.myTableView selectRowAtIndexPath:selectedPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+}
+
+
 -(void)loadHLPage
 {
     if (getAge < 10 && payorSINo.length == 0) {        
@@ -2853,6 +2865,7 @@ BOOL isFirstLoad;
             [self loadBasicPlanPage:YES];
             break;
         case 3:
+            [self LoadIlustrationPage];
             break;
         default:
             break;

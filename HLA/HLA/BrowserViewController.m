@@ -123,22 +123,22 @@
 }
 
 - (void)closeModalWindow:(id)sender {
-	NSError *error;
-	NSFileManager *fileManager = [NSFileManager defaultManager];
+	//NSError *error;
+	//NSFileManager *fileManager = [NSFileManager defaultManager];
 	
-	[fileManager removeItemAtPath:SIFilePath error:&error];
+	//[fileManager removeItemAtPath:SIFilePath error:&error];
 	
-	error = Nil;
-	fileManager= Nil;
-	SIFilePath = Nil;
+	//error = Nil;
+	//fileManager= Nil;
+	//SIFilePath = Nil;
     
     [self dismissViewControllerAnimated:YES completion:nil];
-	[printInteraction dismissAnimated:YES];
-	[self.PagesPopover dismissPopoverAnimated:YES];
-	printInteraction = Nil;
-	print = nil;
-	email= nil;
-	webView = nil;
+	//[printInteraction dismissAnimated:YES];
+	//[self.PagesPopover dismissPopoverAnimated:YES];
+	//printInteraction = Nil;
+	//print = nil;
+	//email= nil;
+	//webView = nil;
 }
 
 -(void)pagesSI:(UIBarButtonItem *)sender        //--**added by bob

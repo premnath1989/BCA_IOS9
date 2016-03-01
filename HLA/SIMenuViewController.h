@@ -32,6 +32,8 @@
 #import "Model_SI_Master.h"
 #import "Model_SI_Premium.h"
 
+#import "IlustrationViewController.h"
+
 @class SIMenuViewController;
 @protocol SIMenuDelegate
 -(void)showReportCantDisplay:(NSString*)type;
@@ -45,6 +47,8 @@
 	NSString *databasePath;
     sqlite3 *contactDB;
     BOOL PlanEmpty;
+    
+    IlustrationViewController *_salesIlustrationViewController;
     
     Model_SI_Premium *_modelSIPremium;
     Model_SI_Master *_modelSIMaster;

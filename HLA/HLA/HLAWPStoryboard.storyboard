@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15A284" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -235,6 +235,51 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5PH-fH-W4n" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="527.36000000000001" y="-1477.9733333333334"/>
+        </scene>
+        <!--Ilustration View Controller-->
+        <scene sceneID="BF7-OA-Wve">
+            <objects>
+                <viewController storyboardIdentifier="SalesIlustration" id="hyY-qz-y3i" customClass="IlustrationViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9a7-5U-d1s">
+                        <rect key="frame" x="0.0" y="0.0" width="779" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" id="iKJ-gT-oqf">
+                                <rect key="frame" x="0.0" y="0.0" width="779" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <fontDescription key="fontDescription" name="TrebuchetMS-Bold" family="Trebuchet MS" pointSize="20"/>
+                                    <color key="textColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Ilustration" id="oGe-za-cdW">
+                                        <barButtonItem key="rightBarButtonItem" title="Done" id="xwG-su-Ydf">
+                                            <color key="tintColor" red="0.92156862750000001" green="0.34509803919999998" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <webView contentMode="scaleToFill" id="3Tj-db-vyv">
+                                <rect key="frame" x="26" y="46" width="728" height="722"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="delegate" destination="hyY-qz-y3i" id="ffB-f4-s9Z"/>
+                                </connections>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="779" height="768"/>
+                    <connections>
+                        <outlet property="webIlustration" destination="3Tj-db-vyv" id="izW-0p-jlB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="upi-KH-VGN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4406.5" y="-285"/>
         </scene>
         <!--SIListing-->
         <scene sceneID="EkG-jk-NyZ">
