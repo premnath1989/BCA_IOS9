@@ -26,9 +26,7 @@
     UIStoryboard *carouselStoryboard = [UIStoryboard storyboardWithName:@"CarouselStoryboard" bundle:Nil];
     CarouselViewController* carouselPage = [carouselStoryboard instantiateViewControllerWithIdentifier:@"carouselView"];
     [self presentViewController:carouselPage animated:YES completion:Nil];
-    
 }
-
 
 - (IBAction)seePDF:(id)sender{
     NSString *file = [[NSBundle mainBundle] pathForResource:@"Brochure_ProdukBCALIfeKeluargaku_21012016" ofType:@"pdf"];

@@ -154,6 +154,18 @@
 	}
 }
 
+- (void) viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    if([self respondsToSelector:@selector(edgesForExtendedLayout)])
+    {
+        CGRect frame = self.view.frame;
+        frame.origin.y = 20;
+        frame.size.height = frame.size.height - 20;
+        self.view.frame = frame;
+    }
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
