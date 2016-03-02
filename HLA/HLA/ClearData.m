@@ -61,7 +61,7 @@ NSMutableArray *EProArr;
 		DayCount = [self CalculateDateCheck:CreatedDate];
 		
 		//if (DayCount > 30) {
-        if (DayCount > 90) {
+        if (DayCount > 365) {
 			tempData = [[NSDictionary alloc] initWithObjectsAndKeys:CreatedDate, @"CreatedDate", ProspectID, @"ProspectID", nil];
 			[CDateProsArr addObject:[tempData copy]];
 		}

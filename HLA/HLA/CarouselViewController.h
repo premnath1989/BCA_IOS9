@@ -1,6 +1,6 @@
 //
 //  CarouselViewController.h
-//  HLA Ipad
+//  Ipad
 //
 //  Created by Md. Nazmus Saadat on 10/10/12.
 //  Copyright (c) 2012 InfoConnect Sdn Bhd. All rights reserved.

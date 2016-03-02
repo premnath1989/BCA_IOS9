@@ -73,6 +73,17 @@
     IBOutlet UILabel *lblTotalTahunan;
     IBOutlet UILabel *lblTotalBulanan;
     IBOutlet UILabel *lblTotalSekaligus;
+    int Pertanggungan_Dasar;
+    NSString *PayorSex;
+    int *PayorAge;
+    int AnssubtotalBulan;
+    int AnssubtotalYear;
+    int ExtraPercentsubtotalBulan;
+    int ExtraPercentsubtotalYear;
+    int ExtraNumbsubtotalBulan;
+    int ExtraNumbsubtotalYear;
+    NSString *Highlight;
+
 
     NSMutableDictionary *dictionaryPremium;
     
@@ -97,6 +108,17 @@
 @property (nonatomic,strong) id requestSINo;
 @property (nonatomic, assign,readwrite) int requestMOP;
 @property (nonatomic, assign,readwrite) int requestTerm;
+@property (nonatomic, assign,readwrite) int Pertanggungan_Dasar;
+@property (nonatomic,strong) NSString *PayorSex;
+@property (nonatomic, assign,readwrite) int PayorAge;
+@property (nonatomic, assign,readwrite) int AnssubtotalBulan;
+@property (nonatomic, assign,readwrite) int AnssubtotalYear;
+@property (nonatomic, assign,readwrite) int ExtraPercentsubtotalBulan;
+@property (nonatomic, assign,readwrite) int ExtraPercentsubtotalYear;
+@property (nonatomic, assign,readwrite) int ExtraNumbsubtotalBulan;
+@property (nonatomic, assign,readwrite) int ExtraNumbsubtotalYear;
+
+
 @property (nonatomic,strong) id requestBasicSA;
 @property (nonatomic,strong) id requestBasicHL;
 @property (nonatomic,strong) id requestBasicTempHL;
@@ -194,7 +216,7 @@
 @property (nonatomic,strong) NSMutableArray *quarterRiderTot;
 @property (nonatomic,strong) NSMutableArray *halfRiderTot;
 @property (nonatomic,strong) NSMutableArray *monthRiderTot;
-
+@property (nonatomic,strong) NSString *Highlight;
 @property (nonatomic,strong) NSMutableArray *waiverRiderAnn;
 @property (nonatomic,strong) NSMutableArray *waiverRiderQuar;
 @property (nonatomic,strong) NSMutableArray *waiverRiderHalf;

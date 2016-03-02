@@ -271,14 +271,15 @@ MBProgressHUD *HUD;
             NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
             NSDateComponents *components = [[NSDateComponents alloc] init];
             [components setHour:hoursToAdd];
+            NSLog(@"components %@",components);
             NSDate *newDate= [calendar dateByAddingComponents:components toDate:FinalDate options:0];
             
             [df setDateFormat:@"dd/MM/yyyy ( HH:mm a )"];
             //NSString *strNewDate = [df stringFromDate:newDate];
             
-            NSUInteger unitFlags = NSDayCalendarUnit|NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit;
+            /*NSUInteger unitFlags = NSDayCalendarUnit|NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit;
             NSDateComponents *dateComponents = [calendar components:unitFlags fromDate:FinalDate toDate:newDate options:0];
-            NSInteger days     = [dateComponents day];
+            NSInteger days     = [dateComponents day];*/
             
             
             NSDate *mydate = [NSDate date];
@@ -289,7 +290,7 @@ MBProgressHUD *HUD;
             int countdown = -[currentDate timeIntervalSinceDate:expireDate];//pay attention here.
             int minutes = (countdown / 60) % 60;
             int hours = (countdown / 3600) % 24;
-            //int days = (countdown / 86400) % 30;
+            int days = (countdown / 86400) % 365;
             
             NSString *DateRemaining =[NSString stringWithFormat:@"%d Days %d Hours\n %d Minutes",days,hours,minutes];
             

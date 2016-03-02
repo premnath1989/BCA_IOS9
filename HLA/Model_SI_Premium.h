@@ -13,4 +13,8 @@
     FMResultSet *results;
 }
 -(void)savePremium:(NSDictionary *)dataPremium;
+-(void)deletePremium:(NSString *)siNo;
+-(NSDictionary *)getPremium_For:(NSString *)SINo;
+-(void)updatePremium:(NSDictionary *)dataPremium;
+-(int)getPremiumCount:(NSString *)SINo;
 @end

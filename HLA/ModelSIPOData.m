@@ -48,6 +48,58 @@
     [database close];
 }
 
+-(void)updatePOData:(NSDictionary *)dataPO{
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    BOOL success = [database executeUpdate:@"update SI_PO_Data set ProductCode=?, ProductName=?, QuickQuote=?,SIDate=?,PO_Name=?,PO_DOB=?,PO_Gender=?,PO_Age=?,PO_OccpCode=?,PO_Occp=?,PO_ClientID=?,RelWithLA=?,LA_ClientID=?,LA_Name=?,LA_DOB=?,LA_Age=?,LA_Gender=?,LA_OccpCode=?,LA_Occp=?,UpdatedDate=""datetime(\"now\", \"+8 hour\")"" where SINO=?)" ,
+                    [dataPO valueForKey:@"ProductCode"],
+                    [dataPO valueForKey:@"ProductName"],
+                    [dataPO valueForKey:@"QuickQuote"],
+                    [dataPO valueForKey:@"SIDate"],
+                    [dataPO valueForKey:@"PO_Name"],
+                    [dataPO valueForKey:@"PO_DOB"],
+                    [dataPO valueForKey:@"PO_Gender"],
+                    [dataPO valueForKey:@"PO_Age"],
+                    [dataPO valueForKey:@"PO_OccpCode"],
+                    [dataPO valueForKey:@"PO_Occp"],
+                    [dataPO valueForKey:@"PO_ClientID"],
+                    [dataPO valueForKey:@"RelWithLA"],
+                    [dataPO valueForKey:@"LA_ClientID"],
+                    [dataPO valueForKey:@"LA_Name"],
+                    [dataPO valueForKey:@"LA_DOB"],
+                    [dataPO valueForKey:@"LA_Age"],
+                    [dataPO valueForKey:@"LA_Gender"],
+                    [dataPO valueForKey:@"LA_OccpCode"],
+                    [dataPO valueForKey:@"LA_Occp"],
+                    [dataPO valueForKey:@"SINO"]];
+    
+    if (!success) {
+        NSLog(@"%s: insert error: %@", __FUNCTION__, [database lastErrorMessage]);
+        // do whatever you need to upon error
+    }
+    [results close];
+    [database close];
+}
+
+-(void)deletePOData:(NSString *)siNo{
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    BOOL success = [database executeUpdate:@"delete from SI_PO_Data where SINO=?",siNo];
+    if (!success) {
+        NSLog(@"%s: insert error: %@", __FUNCTION__, [database lastErrorMessage]);
+        // do whatever you need to upon error
+    }
+    [results close];
+    [database close];
+}
+
+
 -(NSDictionary *)getPO_DataFor:(NSString *)SINo{
     NSDictionary *dict;
     
@@ -81,6 +133,7 @@
     [database open];
     
     FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select * from SI_PO_Data where SINO = \"%@\"",SINo]];
+    NSLog(@"query %@",[NSString stringWithFormat:@"select * from SI_PO_Data where SINO = \"%@\"",SINo]);
     while ([s next]) {
         SINO = [s stringForColumn:@"SINO"];
         ProductCode = [s stringForColumn:@"ProductCode"];
@@ -135,5 +188,22 @@
    return dict;
 }
 
-
+-(int)getPODataCount:(NSString *)SINo{
+    int count;
+    
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select count(*) from SI_PO_Data where SINO = \"%@\"",SINo]];
+    while ([s next]) {
+        count = [s intForColumn:@"count"];
+    }
+    
+    [results close];
+    [database close];
+    return count;
+}
 @end

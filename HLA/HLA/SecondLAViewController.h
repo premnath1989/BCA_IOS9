@@ -15,6 +15,7 @@
 #import "OccupationList.h"
 #import "SIObj.h"
 #import "AppDelegate.h"
+#import "ModelSIPOData.h"
 
 @class SecondLAViewController;
 @protocol SecondLAViewControllerDelegate
@@ -35,8 +36,11 @@
     UIPopoverController *_dobPopover;
     UIPopoverController *_OccupationListPopover;
     UIPopoverController *_prospectPopover;
+    
+    ModelSIPOData *_modelSIPOData;
     ListingTbViewController *_ProspectList;
     OccupationList *_OccupationList;
+    
     DateViewController *_LADate;
     BOOL inserted;
     BOOL saved;

@@ -69,6 +69,8 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
 {
     [super viewDidLoad];
     _modelSIMaster=[[Model_SI_Master alloc]init];
+    _modelSIPremium=[[Model_SI_Premium alloc]init];
+    _modelSIPOData=[[ModelSIPOData alloc]init];
     
     [NoIlustrasi setFont:[UIFont fontWithName:@"HelveticaLTStd-UltraComp" size:25]];
     themeColour = [UIColor colorWithRed:242.0f/255.0f green:113.0f/255.0f blue:134.0f/255.0f alpha:1];
@@ -122,7 +124,8 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
     dirPaths = Nil;
     docsDir = Nil;
 
-    
+    DBDateFrom2 = @"";
+    DBDateTo2 = @"";
 //    txtSINO.clearButtonMode = UITextFieldViewModeWhileEditing;
 //    txtLAName.clearButtonMode = UITextFieldViewModeWhileEditing;
     
@@ -712,7 +715,6 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
 		main.tradOrEver = TradOrEver;
         main.IndexTab = appdlg.NewSIIndex ;
         main.requestSINo = [SINO objectAtIndex:indexPath.row];
-        
 		[self presentViewController:main animated:NO completion:nil];
 		
 		appdlg = Nil;
@@ -789,7 +791,14 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
 
 #pragma mark - void added by faiz
 -(void)getDataForTable{
-    NSDictionary *dictIlustrationData=[[NSDictionary alloc]initWithDictionary:[_modelSIMaster getIlustrationata]];
+    NSDictionary *dictIlustrationData;
+    if (([txtSINO.text length]>0)||([txtLAName.text length]>0)||([DBDateFrom2 length]>0)||([DBDateTo2 length]>0)){
+        dictIlustrationData=[[NSDictionary alloc]initWithDictionary:[_modelSIMaster searchSIListingByName:txtSINO.text POName:txtLAName.text Order:@"CreatedDate" Method:@"Desc" DateFrom:DBDateFrom2 DateTo:DBDateTo2]];
+    }
+    else{
+        dictIlustrationData=[[NSDictionary alloc]initWithDictionary:[_modelSIMaster getIlustrationata]];
+    }
+    
     
     SINO = [[NSMutableArray alloc] initWithArray:[dictIlustrationData valueForKey:@"SINO"]];
     DateCreated = [[NSMutableArray alloc] initWithArray:[dictIlustrationData valueForKey:@"CreatedDate"]];
@@ -799,6 +808,8 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
     SIVersion = [[NSMutableArray alloc] initWithArray:[dictIlustrationData valueForKey:@"SI_Version"]];
     //BasicSA = [[NSMutableArray alloc] initWithArray:[dictIlustrationData valueForKey:@"Sum_Assured"]];
     BasicSA =[[NSMutableArray alloc]initWithObjects:[NSNumber numberWithDouble:0], nil];
+    
+    NSLog(@"SINO %@",dictIlustrationData);
 }
 
 #pragma mark - Button Action
@@ -811,7 +822,7 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
     
     //isFilter = true;
     NSDateFormatter* df = [[NSDateFormatter alloc] init];
-    [df setDateFormat:@"yyyy-MM-dd"];
+    [df setDateFormat:@"yyyy-MM-dd hh:mm;ss"];
     NSDate* d = [df dateFromString:DBDateFrom];
     NSDate* d2 = [df dateFromString:DBDateTo];
     
@@ -820,7 +831,7 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
                                                         message:@"Date To cannot be greater than Date From" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil ];
         [alert show ];
     } else {
-        NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        /*NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *docsDir = [dirPaths objectAtIndex:0];
         databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
         
@@ -1025,7 +1036,8 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
         } else {
             [outletEdit setTitleColor:[UIColor blackColor] forState:UIControlStateNormal ];
             outletEdit.enabled = TRUE;
-        }
+        }*/
+        [self getDataForTable];
         [myTableView reloadData];
     }
     
@@ -1064,7 +1076,7 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
                 return;
             }
             
-            NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            /*NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
             NSString *docsDir = [dirPaths objectAtIndex:0];
             databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
             
@@ -1278,9 +1290,27 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
             statement2 = Nil;
             statement3 = Nil;
             dbpath = Nil;
-            sorted = Nil;
+            sorted = Nil;*/
+
+            //delete from SIMaster
+            //delete from SIPOData
+            //delete from SIBasicPlan
+            NSArray *sorted = [[NSArray alloc] init ];
+            sorted = [ItemToBeDeleted sortedArrayUsingComparator:^(id firstObject, id secondObject){
+                return [((NSString *)firstObject) compare:((NSString *)secondObject) options:NSNumericSearch];
+            }];
+            //int value;
+            for(int a=0; a<sorted.count; a++){
+                //value = [[sorted objectAtIndex:a] intValue] - a;
+                [_modelSIPremium deletePremium:[SINO objectAtIndex:a]];
+                [_modelSIPOData deletePOData:[SINO objectAtIndex:a]];
+                [_modelSIMaster deleteIlustrationMaster:[SINO objectAtIndex:a]];
+            }
             
-        }        
+            //[myTableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
+            [self getDataForTable];
+            [myTableView reloadData];
+        }
     }    
 }
 
@@ -1434,7 +1464,6 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
 }
 
 -(void)DateSelected:(NSString *)strDate:(NSString *)dbDate{
-    
     if (DateOption == 1) {
         [outletDateFrom setTitle:strDate forState:UIControlStateNormal];
         DBDateFrom = strDate;
@@ -1444,7 +1473,6 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
         DBDateTo = strDate;
         DBDateTo2 = [self convertToDateFormat:strDate];
     }
-    
 }
 
 -(NSString*)convertToDateFormat:(NSString*)strDate
@@ -1455,7 +1483,7 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
     NSDate *date = [df dateFromString: strDate]; 
     
     df = [[[NSDateFormatter alloc] init] init];
-    [df setDateFormat:@"yyyy-MM-dd"];
+    [df setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
     
     NSString *convertedString = [df stringFromDate:date];
     
@@ -1469,11 +1497,13 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
 - (IBAction)btnReset:(id)sender {
     txtSINO.text = @"";
     txtLAName.text = @"";
-    [outletDateFrom setTitle:@"" forState:UIControlStateNormal];
-    [outletDateTo setTitle:@"" forState:UIControlStateNormal];
+    [outletDateFrom setTitle:@"--Please Select--" forState:UIControlStateNormal];
+    [outletDateTo setTitle:@"--Please Select--" forState:UIControlStateNormal];
     DBDateFrom = @"";
     DBDateTo = @"";
-    lblBasicSA.highlighted = FALSE;
+    DBDateFrom2 = @"";
+    DBDateTo2 = @"";
+    /*lblBasicSA.highlighted = FALSE;
     lblDateCreated.highlighted = FALSE;
     lblName.highlighted = FALSE;
     lblPlan.highlighted = FALSE;
@@ -1484,9 +1514,10 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
     _SortBy = Nil;
     isFilter = FALSE;
     ItemToBeDeleted = [[NSMutableArray alloc] init ];
-	indexPaths = [[NSMutableArray alloc] init ];
+	indexPaths = [[NSMutableArray alloc] init ];*/
 	
-    [self LoadAllResult];
+    //[self LoadAllResult];
+    [self getDataForTable];
     [myTableView reloadData];
     
 }
