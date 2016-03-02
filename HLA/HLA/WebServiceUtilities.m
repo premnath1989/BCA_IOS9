@@ -63,12 +63,25 @@
 }
 
 
+-(int)partialSync:(NSString *)agentCode delegate:(id)delegate xml:(NSString *)XMLTable{
+    AgentWSSoapBinding *binding = [AgentWS AgentWSSoapBinding];
+    binding.logXMLInOut = YES;
+    
+    AgentWS_PartialSync *agentCodea = [[AgentWS_PartialSync alloc]init];
+    agentCodea.strAgentcode = agentCode;
+    agentCodea.strXML = XMLTable;
+    [binding PartialSyncAsyncUsingParameters:agentCodea delegate:delegate];
+    return 1;
+}
+
+
 -(int)checkVersion:(NSString *)version delegate:(id)delegate{
     AgentWSSoapBinding *binding = [AgentWS AgentWSSoapBinding];
     binding.logXMLInOut = YES;
     
     AgentWS_CheckVersion *agentCodea = [[AgentWS_CheckVersion alloc]init];
     agentCodea.strVesion = version;
+    agentCodea.strStatus = @"";
     [binding CheckVersionAsyncUsingParameters:agentCodea delegate:delegate];
     return 1;
 }

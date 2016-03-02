@@ -27,6 +27,8 @@
 #import "MaineApp.h"
 #import <AdSupport/ASIdentifierManager.h>
 #import "ClearData.h"
+#import "ProductInformation.h"
+#import "ProductInformation.h"
 
 const int numberOfModule = 7;
 
@@ -395,7 +397,6 @@ const int numberOfModule = 7;
 
 - (void)ButtonInfoAgent:(id)sender;
 {
-    
     UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:Nil];
     SettingUserProfile * UserProfileView = [mainStoryBoard instantiateViewControllerWithIdentifier:@"SettingUserProfile"];
     UserProfileView.modalPresentationStyle = UIModalPresentationPageSheet;
@@ -543,6 +544,23 @@ const int numberOfModule = 7;
     mainClient= Nil;
 }
 
+- (IBAction)selectEApp:(id)sender {
+    
+    ProductInformation *view = [[ProductInformation alloc] initWithNibName:@"ProductInformation" bundle:nil];
+    view.modalTransitionStyle = UIModalPresentationFullScreen;
+    [self presentViewController:view animated:NO completion:nil];
+    //    UIStoryboard *secondStoryboard = [UIStoryboard storyboardWithName:@"EappListing" bundle:Nil];
+    //    MaineApp *mainEApp = [secondStoryboard instantiateViewControllerWithIdentifier:@"maineApp"];
+    //    mainEApp.modalPresentationStyle = UIModalPresentationFullScreen;
+    //    mainEApp.IndexTab = 1;
+    //    [self presentViewController:mainEApp animated:NO completion:Nil];
+    //    mainEApp = Nil;
+    //    secondStoryboard = Nil;
+    //
+    //    AppDelegate *appdlg = (AppDelegate*)[[UIApplication sharedApplication] delegate ];
+    //    appdlg.eApp=YES;
+}
+
 - (IBAction)selectSalesIllustration:(id)sender {
     // Override option, open the Traditional SI
     UIStoryboard *cpStoryboard = [UIStoryboard storyboardWithName:@"HLAWPStoryboard" bundle:Nil];
@@ -566,19 +584,6 @@ const int numberOfModule = 7;
     mainCustomer = Nil;
     AppDelegate *appdlg = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     appdlg.eApp=NO;
-}
-
-- (IBAction)selectEApp:(id)sender {
-    UIStoryboard *secondStoryboard = [UIStoryboard storyboardWithName:@"EappListing" bundle:Nil];
-    MaineApp *mainEApp = [secondStoryboard instantiateViewControllerWithIdentifier:@"maineApp"];
-    mainEApp.modalPresentationStyle = UIModalPresentationFullScreen;
-    mainEApp.IndexTab = 1;
-    [self presentViewController:mainEApp animated:NO completion:Nil];
-    mainEApp = Nil;
-    secondStoryboard = Nil;
-    
-    AppDelegate *appdlg = (AppDelegate*)[[UIApplication sharedApplication] delegate ];
-    appdlg.eApp=YES;
 }
 
 #pragma mark - other

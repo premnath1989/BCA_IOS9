@@ -113,9 +113,9 @@ id temp;
     NSDate *endDate = [dateFormatter dateFromString:[agentDetails valueForKey:@"LicenseExpiryDate"]];
     [dateFormatter setDateFormat:@"dd/MM/YYYY"];
     
-    txtLicenseStart.text = [agentDetails valueForKey:@"LicenseStartDate"];
+    txtLicenseStart.text = [dateFormatter stringFromDate:startDate];
     txtLicenseStart.enabled = NO;
-    txtLicenseEnd.text = [agentDetails valueForKey:@"LicenseExpiryDate"];
+    txtLicenseEnd.text = [dateFormatter stringFromDate:endDate];
     txtLicenseEnd.enabled = NO;
     txtAddress1.text = [agentDetails valueForKey:@"AgentAddr1"];
     txtAddress1.enabled = NO;
@@ -501,12 +501,28 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
             UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Please check your connection" message:errorMesg delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
             [alert show];
         }
-         else if([bodyPart isKindOfClass:[AgentWS_CheckVersionResponse class]]) {
+        else if([bodyPart isKindOfClass:[AgentWS_PartialSyncResponse class]]) {
+            
+        }
+        else if([bodyPart isKindOfClass:[AgentWS_CheckVersionResponse class]]) {
              AgentWS_CheckVersionResponse* rateResponse = bodyPart;
              if([rateResponse.strStatus caseInsensitiveCompare:@"True"] == NSOrderedSame){
+                 // create XMLDocument object
+                 DDXMLDocument *xml = [[DDXMLDocument alloc] initWithXMLString:
+                                       rateResponse.CheckVersionResult.xmlDetails options:0 error:nil];
                  
+                 // Get root element - DataSetMenu for your XMLfile
+                 DDXMLElement *root = [xml rootElement];
+                 WebResponObj *returnObj = [[WebResponObj alloc]init];
+                 [self parseXML:root objBuff:returnObj index:0];
+//                 for(dataCollection *data in [returnObj getDataWrapper]){
+//                 }
+                 //partialsync
+                 NSString *xmlDummy = @"<?xml version='1.0'?><!-- This is a sample XML document --><Master><SyncDate>2016-02-25</SyncDate><TableName>Data_Cabang</TableName><TableName>eProposal_Credit_Card_Bank</TableName><TableName>eProposal_Identification</TableName></Master>";
+                 WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
+                 [webservice partialSync:@"1024" delegate:self xml:xmlDummy];
              }else{
-                 
+                 NSLog(@"same version");
              }
          }
     }

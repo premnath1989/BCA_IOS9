@@ -422,6 +422,67 @@
 		A9E550A51C591F7900C9DAC2 /* Expand Arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A9E550A31C591F7900C9DAC2 /* Expand Arrow.png */; };
 		A9E550A61C591F7900C9DAC2 /* Expand Arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A9E550A41C591F7900C9DAC2 /* Expand Arrow@2x.png */; };
 		AA2BB5FE1C70598E00A5256E /* SynchDaysCounter.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2BB5FD1C70598E00A5256E /* SynchDaysCounter.m */; };
+		AA4EF6DD1C8572B00050CCD8 /* ProductInformation.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA4EF6DC1C8572B00050CCD8 /* ProductInformation.xib */; };
+		AA4EF6E01C8572F30050CCD8 /* ProductInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4EF6DF1C8572F30050CCD8 /* ProductInformation.m */; };
+		AA4EF73F1C85A4260050CCD8 /* AppIcon-057.png in Resources */ = {isa = PBXBuildFile; fileRef = AA4EF6EF1C85A4260050CCD8 /* AppIcon-057.png */; };
+		AA4EF7401C85A4260050CCD8 /* AppIcon-072.png in Resources */ = {isa = PBXBuildFile; fileRef = AA4EF6F01C85A4260050CCD8 /* AppIcon-072.png */; };
+		AA4EF7411C85A4260050CCD8 /* AppIcon-076.png in Resources */ = {isa = PBXBuildFile; fileRef = AA4EF6F11C85A4260050CCD8 /* AppIcon-076.png */; };
+		AA4EF7421C85A4260050CCD8 /* AppIcon-114.png in Resources */ = {isa = PBXBuildFile; fileRef = AA4EF6F21C85A4260050CCD8 /* AppIcon-114.png */; };
+		AA4EF7431C85A4260050CCD8 /* AppIcon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = AA4EF6F31C85A4260050CCD8 /* AppIcon-120.png */; };
+		AA4EF7441C85A4260050CCD8 /* AppIcon-144.png in Resources */ = {isa = PBXBuildFile; fileRef = AA4EF6F41C85A4260050CCD8 /* AppIcon-144.png */; };
+		AA4EF7451C85A4260050CCD8 /* AppIcon-152.png in Resources */ = {isa = PBXBuildFile; fileRef = AA4EF6F51C85A4260050CCD8 /* AppIcon-152.png */; };
+		AA4EF7461C85A4260050CCD8 /* AppIcon-167.png in Resources */ = {isa = PBXBuildFile; fileRef = AA4EF6F61C85A4260050CCD8 /* AppIcon-167.png */; };
+		AA4EF7471C85A4260050CCD8 /* AppIcon-180.png in Resources */ = {isa = PBXBuildFile; fileRef = AA4EF6F71C85A4260050CCD8 /* AppIcon-180.png */; };
+		AA4EF7481C85A4260050CCD8 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA4EF6F81C85A4260050CCD8 /* Default-568h@2x.png */; };
+		AA4EF7491C85A4260050CCD8 /* Default-667h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA4EF6F91C85A4260050CCD8 /* Default-667h@2x.png */; };
+		AA4EF74A1C85A4260050CCD8 /* Default-736h@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA4EF6FA1C85A4260050CCD8 /* Default-736h@3x.png */; };
+		AA4EF74B1C85A4260050CCD8 /* Reader-Button-H.png in Resources */ = {isa = PBXBuildFile; fileRef = AA4EF6FB1C85A4260050CCD8 /* Reader-Button-H.png */; };
+		AA4EF74C1C85A4260050CCD8 /* Reader-Button-H@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA4EF6FC1C85A4260050CCD8 /* Reader-Button-H@2x.png */; };
+		AA4EF74D1C85A4260050CCD8 /* Reader-Button-H@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA4EF6FD1C85A4260050CCD8 /* Reader-Button-H@3x.png */; };
+		AA4EF74E1C85A4260050CCD8 /* Reader-Button-N.png in Resources */ = {isa = PBXBuildFile; fileRef = AA4EF6FE1C85A4260050CCD8 /* Reader-Button-N.png */; };
+		AA4EF74F1C85A4260050CCD8 /* Reader-Button-N@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA4EF6FF1C85A4260050CCD8 /* Reader-Button-N@2x.png */; };
+		AA4EF7501C85A4260050CCD8 /* Reader-Button-N@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA4EF7001C85A4260050CCD8 /* Reader-Button-N@3x.png */; };
+		AA4EF7511C85A4260050CCD8 /* Reader-Email.png in Resources */ = {isa = PBXBuildFile; fileRef = AA4EF7011C85A4260050CCD8 /* Reader-Email.png */; };
+		AA4EF7521C85A4260050CCD8 /* Reader-Email@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA4EF7021C85A4260050CCD8 /* Reader-Email@2x.png */; };
+		AA4EF7531C85A4260050CCD8 /* Reader-Email@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA4EF7031C85A4260050CCD8 /* Reader-Email@3x.png */; };
+		AA4EF7541C85A4260050CCD8 /* Reader-Export.png in Resources */ = {isa = PBXBuildFile; fileRef = AA4EF7041C85A4260050CCD8 /* Reader-Export.png */; };
+		AA4EF7551C85A4260050CCD8 /* Reader-Export@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA4EF7051C85A4260050CCD8 /* Reader-Export@2x.png */; };
+		AA4EF7561C85A4260050CCD8 /* Reader-Export@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA4EF7061C85A4260050CCD8 /* Reader-Export@3x.png */; };
+		AA4EF7571C85A4260050CCD8 /* Reader-Mark-N.png in Resources */ = {isa = PBXBuildFile; fileRef = AA4EF7071C85A4260050CCD8 /* Reader-Mark-N.png */; };
+		AA4EF7581C85A4260050CCD8 /* Reader-Mark-N@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA4EF7081C85A4260050CCD8 /* Reader-Mark-N@2x.png */; };
+		AA4EF7591C85A4260050CCD8 /* Reader-Mark-N@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA4EF7091C85A4260050CCD8 /* Reader-Mark-N@3x.png */; };
+		AA4EF75A1C85A4260050CCD8 /* Reader-Mark-Y.png in Resources */ = {isa = PBXBuildFile; fileRef = AA4EF70A1C85A4260050CCD8 /* Reader-Mark-Y.png */; };
+		AA4EF75B1C85A4260050CCD8 /* Reader-Mark-Y@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA4EF70B1C85A4260050CCD8 /* Reader-Mark-Y@2x.png */; };
+		AA4EF75C1C85A4260050CCD8 /* Reader-Mark-Y@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA4EF70C1C85A4260050CCD8 /* Reader-Mark-Y@3x.png */; };
+		AA4EF75D1C85A4260050CCD8 /* Reader-Print.png in Resources */ = {isa = PBXBuildFile; fileRef = AA4EF70D1C85A4260050CCD8 /* Reader-Print.png */; };
+		AA4EF75E1C85A4260050CCD8 /* Reader-Print@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA4EF70E1C85A4260050CCD8 /* Reader-Print@2x.png */; };
+		AA4EF75F1C85A4260050CCD8 /* Reader-Print@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA4EF70F1C85A4260050CCD8 /* Reader-Print@3x.png */; };
+		AA4EF7601C85A4260050CCD8 /* Reader-Thumbs.png in Resources */ = {isa = PBXBuildFile; fileRef = AA4EF7101C85A4260050CCD8 /* Reader-Thumbs.png */; };
+		AA4EF7611C85A4260050CCD8 /* Reader-Thumbs@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA4EF7111C85A4260050CCD8 /* Reader-Thumbs@2x.png */; };
+		AA4EF7621C85A4260050CCD8 /* Reader-Thumbs@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA4EF7121C85A4260050CCD8 /* Reader-Thumbs@3x.png */; };
+		AA4EF7631C85A4260050CCD8 /* CGPDFDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4EF7151C85A4260050CCD8 /* CGPDFDocument.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		AA4EF7641C85A4260050CCD8 /* ReaderConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4EF7171C85A4260050CCD8 /* ReaderConstants.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		AA4EF7651C85A4260050CCD8 /* ReaderContentPage.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4EF7191C85A4260050CCD8 /* ReaderContentPage.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		AA4EF7661C85A4260050CCD8 /* ReaderContentTile.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4EF71B1C85A4260050CCD8 /* ReaderContentTile.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		AA4EF7671C85A4260050CCD8 /* ReaderContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4EF71D1C85A4260050CCD8 /* ReaderContentView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		AA4EF7681C85A4260050CCD8 /* ReaderDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4EF71F1C85A4260050CCD8 /* ReaderDocument.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		AA4EF7691C85A4260050CCD8 /* ReaderDocumentOutline.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4EF7211C85A4260050CCD8 /* ReaderDocumentOutline.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		AA4EF76A1C85A4260050CCD8 /* ReaderMainPagebar.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4EF7231C85A4260050CCD8 /* ReaderMainPagebar.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		AA4EF76B1C85A4260050CCD8 /* ReaderMainToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4EF7251C85A4260050CCD8 /* ReaderMainToolbar.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		AA4EF76C1C85A4260050CCD8 /* ReaderThumbCache.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4EF7271C85A4260050CCD8 /* ReaderThumbCache.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		AA4EF76D1C85A4260050CCD8 /* ReaderThumbFetch.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4EF7291C85A4260050CCD8 /* ReaderThumbFetch.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		AA4EF76E1C85A4260050CCD8 /* ReaderThumbQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4EF72B1C85A4260050CCD8 /* ReaderThumbQueue.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		AA4EF76F1C85A4260050CCD8 /* ReaderThumbRender.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4EF72D1C85A4260050CCD8 /* ReaderThumbRender.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		AA4EF7701C85A4260050CCD8 /* ReaderThumbRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4EF72F1C85A4260050CCD8 /* ReaderThumbRequest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		AA4EF7711C85A4260050CCD8 /* ReaderThumbsView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4EF7311C85A4260050CCD8 /* ReaderThumbsView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		AA4EF7721C85A4260050CCD8 /* ReaderThumbView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4EF7331C85A4260050CCD8 /* ReaderThumbView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		AA4EF7731C85A4260050CCD8 /* ReaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4EF7351C85A4260050CCD8 /* ReaderViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		AA4EF7741C85A4260050CCD8 /* ThumbsMainToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4EF7371C85A4260050CCD8 /* ThumbsMainToolbar.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		AA4EF7751C85A4260050CCD8 /* ThumbsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4EF7391C85A4260050CCD8 /* ThumbsViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		AA4EF7761C85A4260050CCD8 /* UIXToolbarView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4EF73B1C85A4260050CCD8 /* UIXToolbarView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		AA4EF7781C85A9C50050CCD8 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA4EF7771C85A9C50050CCD8 /* ImageIO.framework */; };
+		AA4EF77B1C8687CF0050CCD8 /* Brochure_ProdukBCALIfeKeluargaku_21012016.pdf in Resources */ = {isa = PBXBuildFile; fileRef = AA4EF7791C8687CF0050CCD8 /* Brochure_ProdukBCALIfeKeluargaku_21012016.pdf */; };
+		AA4EF77C1C8687CF0050CCD8 /* Brochure_ProdukBCALIfeKeluargaku.pdf in Resources */ = {isa = PBXBuildFile; fileRef = AA4EF77A1C8687CF0050CCD8 /* Brochure_ProdukBCALIfeKeluargaku.pdf */; };
 		AAAC9D0A1C71BAF3002E3190 /* WebServiceUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAC9D091C71BAF3002E3190 /* WebServiceUtilities.m */; };
 		AAD5455F1C6443080029631D /* LoginDBManagement.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD5455E1C6443080029631D /* LoginDBManagement.m */; };
 		AADD7E6F1C743A1E00D87750 /* DDXMLElementAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AADD7E621C743A1E00D87750 /* DDXMLElementAdditions.m */; };
@@ -1506,6 +1567,88 @@
 		A9E550A41C591F7900C9DAC2 /* Expand Arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Expand Arrow@2x.png"; sourceTree = "<group>"; };
 		AA2BB5FC1C70597300A5256E /* SynchdaysCounter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SynchdaysCounter.h; sourceTree = "<group>"; };
 		AA2BB5FD1C70598E00A5256E /* SynchDaysCounter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SynchDaysCounter.m; sourceTree = "<group>"; };
+		AA4EF6DC1C8572B00050CCD8 /* ProductInformation.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductInformation.xib; sourceTree = "<group>"; };
+		AA4EF6DE1C8572DD0050CCD8 /* ProductInformation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProductInformation.h; sourceTree = "<group>"; };
+		AA4EF6DF1C8572F30050CCD8 /* ProductInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductInformation.m; sourceTree = "<group>"; };
+		AA4EF6EF1C85A4260050CCD8 /* AppIcon-057.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon-057.png"; sourceTree = "<group>"; };
+		AA4EF6F01C85A4260050CCD8 /* AppIcon-072.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon-072.png"; sourceTree = "<group>"; };
+		AA4EF6F11C85A4260050CCD8 /* AppIcon-076.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon-076.png"; sourceTree = "<group>"; };
+		AA4EF6F21C85A4260050CCD8 /* AppIcon-114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon-114.png"; sourceTree = "<group>"; };
+		AA4EF6F31C85A4260050CCD8 /* AppIcon-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon-120.png"; sourceTree = "<group>"; };
+		AA4EF6F41C85A4260050CCD8 /* AppIcon-144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon-144.png"; sourceTree = "<group>"; };
+		AA4EF6F51C85A4260050CCD8 /* AppIcon-152.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon-152.png"; sourceTree = "<group>"; };
+		AA4EF6F61C85A4260050CCD8 /* AppIcon-167.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon-167.png"; sourceTree = "<group>"; };
+		AA4EF6F71C85A4260050CCD8 /* AppIcon-180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon-180.png"; sourceTree = "<group>"; };
+		AA4EF6F81C85A4260050CCD8 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		AA4EF6F91C85A4260050CCD8 /* Default-667h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-667h@2x.png"; sourceTree = "<group>"; };
+		AA4EF6FA1C85A4260050CCD8 /* Default-736h@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-736h@3x.png"; sourceTree = "<group>"; };
+		AA4EF6FB1C85A4260050CCD8 /* Reader-Button-H.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Reader-Button-H.png"; sourceTree = "<group>"; };
+		AA4EF6FC1C85A4260050CCD8 /* Reader-Button-H@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Reader-Button-H@2x.png"; sourceTree = "<group>"; };
+		AA4EF6FD1C85A4260050CCD8 /* Reader-Button-H@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Reader-Button-H@3x.png"; sourceTree = "<group>"; };
+		AA4EF6FE1C85A4260050CCD8 /* Reader-Button-N.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Reader-Button-N.png"; sourceTree = "<group>"; };
+		AA4EF6FF1C85A4260050CCD8 /* Reader-Button-N@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Reader-Button-N@2x.png"; sourceTree = "<group>"; };
+		AA4EF7001C85A4260050CCD8 /* Reader-Button-N@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Reader-Button-N@3x.png"; sourceTree = "<group>"; };
+		AA4EF7011C85A4260050CCD8 /* Reader-Email.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Reader-Email.png"; sourceTree = "<group>"; };
+		AA4EF7021C85A4260050CCD8 /* Reader-Email@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Reader-Email@2x.png"; sourceTree = "<group>"; };
+		AA4EF7031C85A4260050CCD8 /* Reader-Email@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Reader-Email@3x.png"; sourceTree = "<group>"; };
+		AA4EF7041C85A4260050CCD8 /* Reader-Export.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Reader-Export.png"; sourceTree = "<group>"; };
+		AA4EF7051C85A4260050CCD8 /* Reader-Export@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Reader-Export@2x.png"; sourceTree = "<group>"; };
+		AA4EF7061C85A4260050CCD8 /* Reader-Export@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Reader-Export@3x.png"; sourceTree = "<group>"; };
+		AA4EF7071C85A4260050CCD8 /* Reader-Mark-N.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Reader-Mark-N.png"; sourceTree = "<group>"; };
+		AA4EF7081C85A4260050CCD8 /* Reader-Mark-N@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Reader-Mark-N@2x.png"; sourceTree = "<group>"; };
+		AA4EF7091C85A4260050CCD8 /* Reader-Mark-N@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Reader-Mark-N@3x.png"; sourceTree = "<group>"; };
+		AA4EF70A1C85A4260050CCD8 /* Reader-Mark-Y.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Reader-Mark-Y.png"; sourceTree = "<group>"; };
+		AA4EF70B1C85A4260050CCD8 /* Reader-Mark-Y@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Reader-Mark-Y@2x.png"; sourceTree = "<group>"; };
+		AA4EF70C1C85A4260050CCD8 /* Reader-Mark-Y@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Reader-Mark-Y@3x.png"; sourceTree = "<group>"; };
+		AA4EF70D1C85A4260050CCD8 /* Reader-Print.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Reader-Print.png"; sourceTree = "<group>"; };
+		AA4EF70E1C85A4260050CCD8 /* Reader-Print@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Reader-Print@2x.png"; sourceTree = "<group>"; };
+		AA4EF70F1C85A4260050CCD8 /* Reader-Print@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Reader-Print@3x.png"; sourceTree = "<group>"; };
+		AA4EF7101C85A4260050CCD8 /* Reader-Thumbs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Reader-Thumbs.png"; sourceTree = "<group>"; };
+		AA4EF7111C85A4260050CCD8 /* Reader-Thumbs@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Reader-Thumbs@2x.png"; sourceTree = "<group>"; };
+		AA4EF7121C85A4260050CCD8 /* Reader-Thumbs@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Reader-Thumbs@3x.png"; sourceTree = "<group>"; };
+		AA4EF7141C85A4260050CCD8 /* CGPDFDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGPDFDocument.h; sourceTree = "<group>"; };
+		AA4EF7151C85A4260050CCD8 /* CGPDFDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGPDFDocument.m; sourceTree = "<group>"; };
+		AA4EF7161C85A4260050CCD8 /* ReaderConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReaderConstants.h; sourceTree = "<group>"; };
+		AA4EF7171C85A4260050CCD8 /* ReaderConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReaderConstants.m; sourceTree = "<group>"; };
+		AA4EF7181C85A4260050CCD8 /* ReaderContentPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReaderContentPage.h; sourceTree = "<group>"; };
+		AA4EF7191C85A4260050CCD8 /* ReaderContentPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReaderContentPage.m; sourceTree = "<group>"; };
+		AA4EF71A1C85A4260050CCD8 /* ReaderContentTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReaderContentTile.h; sourceTree = "<group>"; };
+		AA4EF71B1C85A4260050CCD8 /* ReaderContentTile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReaderContentTile.m; sourceTree = "<group>"; };
+		AA4EF71C1C85A4260050CCD8 /* ReaderContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReaderContentView.h; sourceTree = "<group>"; };
+		AA4EF71D1C85A4260050CCD8 /* ReaderContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReaderContentView.m; sourceTree = "<group>"; };
+		AA4EF71E1C85A4260050CCD8 /* ReaderDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReaderDocument.h; sourceTree = "<group>"; };
+		AA4EF71F1C85A4260050CCD8 /* ReaderDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReaderDocument.m; sourceTree = "<group>"; };
+		AA4EF7201C85A4260050CCD8 /* ReaderDocumentOutline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReaderDocumentOutline.h; sourceTree = "<group>"; };
+		AA4EF7211C85A4260050CCD8 /* ReaderDocumentOutline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReaderDocumentOutline.m; sourceTree = "<group>"; };
+		AA4EF7221C85A4260050CCD8 /* ReaderMainPagebar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReaderMainPagebar.h; sourceTree = "<group>"; };
+		AA4EF7231C85A4260050CCD8 /* ReaderMainPagebar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReaderMainPagebar.m; sourceTree = "<group>"; };
+		AA4EF7241C85A4260050CCD8 /* ReaderMainToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReaderMainToolbar.h; sourceTree = "<group>"; };
+		AA4EF7251C85A4260050CCD8 /* ReaderMainToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReaderMainToolbar.m; sourceTree = "<group>"; };
+		AA4EF7261C85A4260050CCD8 /* ReaderThumbCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReaderThumbCache.h; sourceTree = "<group>"; };
+		AA4EF7271C85A4260050CCD8 /* ReaderThumbCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReaderThumbCache.m; sourceTree = "<group>"; };
+		AA4EF7281C85A4260050CCD8 /* ReaderThumbFetch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReaderThumbFetch.h; sourceTree = "<group>"; };
+		AA4EF7291C85A4260050CCD8 /* ReaderThumbFetch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReaderThumbFetch.m; sourceTree = "<group>"; };
+		AA4EF72A1C85A4260050CCD8 /* ReaderThumbQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReaderThumbQueue.h; sourceTree = "<group>"; };
+		AA4EF72B1C85A4260050CCD8 /* ReaderThumbQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReaderThumbQueue.m; sourceTree = "<group>"; };
+		AA4EF72C1C85A4260050CCD8 /* ReaderThumbRender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReaderThumbRender.h; sourceTree = "<group>"; };
+		AA4EF72D1C85A4260050CCD8 /* ReaderThumbRender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReaderThumbRender.m; sourceTree = "<group>"; };
+		AA4EF72E1C85A4260050CCD8 /* ReaderThumbRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReaderThumbRequest.h; sourceTree = "<group>"; };
+		AA4EF72F1C85A4260050CCD8 /* ReaderThumbRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReaderThumbRequest.m; sourceTree = "<group>"; };
+		AA4EF7301C85A4260050CCD8 /* ReaderThumbsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReaderThumbsView.h; sourceTree = "<group>"; };
+		AA4EF7311C85A4260050CCD8 /* ReaderThumbsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReaderThumbsView.m; sourceTree = "<group>"; };
+		AA4EF7321C85A4260050CCD8 /* ReaderThumbView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReaderThumbView.h; sourceTree = "<group>"; };
+		AA4EF7331C85A4260050CCD8 /* ReaderThumbView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReaderThumbView.m; sourceTree = "<group>"; };
+		AA4EF7341C85A4260050CCD8 /* ReaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReaderViewController.h; sourceTree = "<group>"; };
+		AA4EF7351C85A4260050CCD8 /* ReaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReaderViewController.m; sourceTree = "<group>"; };
+		AA4EF7361C85A4260050CCD8 /* ThumbsMainToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThumbsMainToolbar.h; sourceTree = "<group>"; };
+		AA4EF7371C85A4260050CCD8 /* ThumbsMainToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThumbsMainToolbar.m; sourceTree = "<group>"; };
+		AA4EF7381C85A4260050CCD8 /* ThumbsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThumbsViewController.h; sourceTree = "<group>"; };
+		AA4EF7391C85A4260050CCD8 /* ThumbsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThumbsViewController.m; sourceTree = "<group>"; };
+		AA4EF73A1C85A4260050CCD8 /* UIXToolbarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIXToolbarView.h; sourceTree = "<group>"; };
+		AA4EF73B1C85A4260050CCD8 /* UIXToolbarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIXToolbarView.m; sourceTree = "<group>"; };
+		AA4EF7771C85A9C50050CCD8 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		AA4EF7791C8687CF0050CCD8 /* Brochure_ProdukBCALIfeKeluargaku_21012016.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Brochure_ProdukBCALIfeKeluargaku_21012016.pdf; sourceTree = "<group>"; };
+		AA4EF77A1C8687CF0050CCD8 /* Brochure_ProdukBCALIfeKeluargaku.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Brochure_ProdukBCALIfeKeluargaku.pdf; sourceTree = "<group>"; };
 		AAAC9D081C71BAE5002E3190 /* WebServiceUtilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebServiceUtilities.h; sourceTree = "<group>"; };
 		AAAC9D091C71BAF3002E3190 /* WebServiceUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebServiceUtilities.m; sourceTree = "<group>"; };
 		AAD5455D1C6442F80029631D /* LoginDBManagement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginDBManagement.h; sourceTree = "<group>"; };
@@ -2144,6 +2287,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA4EF7781C85A9C50050CCD8 /* ImageIO.framework in Frameworks */,
+				C4E9D1CC1612C9C300016053 /* QuartzCore.framework in Frameworks */,
+				C4E9D1991612C64900016053 /* CoreGraphics.framework in Frameworks */,
 				174858B51C3E229D007BBF13 /* libSPSignDoc_4.0.a in Frameworks */,
 				A1EE80A11C7BB7560096185C /* libSPSignDoc_4.0.a in Frameworks */,
 				A9E550A21C591E8000C9DAC2 /* libSPSignDoc_4.0.a in Frameworks */,
@@ -2160,7 +2306,6 @@
 				C486D9E9163E6762009F8F21 /* CoreMedia.framework in Frameworks */,
 				C486D9E7163E675C009F8F21 /* MobileCoreServices.framework in Frameworks */,
 				C486D9E5163E6756009F8F21 /* SystemConfiguration.framework in Frameworks */,
-				C4E9D1CC1612C9C300016053 /* QuartzCore.framework in Frameworks */,
 				C486D9E3163E6747009F8F21 /* MediaPlayer.framework in Frameworks */,
 				C486D9E1163E6741009F8F21 /* CoreLocation.framework in Frameworks */,
 				C486D9DF163E6739009F8F21 /* AVFoundation.framework in Frameworks */,
@@ -2172,7 +2317,6 @@
 				C4EB49211615556300C7FC8C /* libsqlite3.dylib in Frameworks */,
 				C4E9D1951612C64900016053 /* UIKit.framework in Frameworks */,
 				C4E9D1971612C64900016053 /* Foundation.framework in Frameworks */,
-				C4E9D1991612C64900016053 /* CoreGraphics.framework in Frameworks */,
 				6A5E1C931897459E00815C33 /* libchilkatIos.a in Frameworks */,
 				4239AEBB1946DAE200BD6F53 /* WacomDevice.framework in Frameworks */,
 				4239AEC51946DAE200BD6F53 /* signdociosfoundations.framework in Frameworks */,
@@ -3313,6 +3457,124 @@
 			name = "HLADB Model";
 			sourceTree = "<group>";
 		};
+		AA4EF6DB1C8571800050CCD8 /* Product Information */ = {
+			isa = PBXGroup;
+			children = (
+				AA4EF6DC1C8572B00050CCD8 /* ProductInformation.xib */,
+				AA4EF6DE1C8572DD0050CCD8 /* ProductInformation.h */,
+				AA4EF6DF1C8572F30050CCD8 /* ProductInformation.m */,
+			);
+			name = "Product Information";
+			sourceTree = "<group>";
+		};
+		AA4EF6E61C85A3F20050CCD8 /* PDFReader */ = {
+			isa = PBXGroup;
+			children = (
+				AA4EF6EE1C85A4260050CCD8 /* Graphics */,
+				AA4EF7131C85A4260050CCD8 /* Sources */,
+			);
+			name = PDFReader;
+			sourceTree = "<group>";
+		};
+		AA4EF6EE1C85A4260050CCD8 /* Graphics */ = {
+			isa = PBXGroup;
+			children = (
+				AA4EF6EF1C85A4260050CCD8 /* AppIcon-057.png */,
+				AA4EF6F01C85A4260050CCD8 /* AppIcon-072.png */,
+				AA4EF6F11C85A4260050CCD8 /* AppIcon-076.png */,
+				AA4EF6F21C85A4260050CCD8 /* AppIcon-114.png */,
+				AA4EF6F31C85A4260050CCD8 /* AppIcon-120.png */,
+				AA4EF6F41C85A4260050CCD8 /* AppIcon-144.png */,
+				AA4EF6F51C85A4260050CCD8 /* AppIcon-152.png */,
+				AA4EF6F61C85A4260050CCD8 /* AppIcon-167.png */,
+				AA4EF6F71C85A4260050CCD8 /* AppIcon-180.png */,
+				AA4EF6F81C85A4260050CCD8 /* Default-568h@2x.png */,
+				AA4EF6F91C85A4260050CCD8 /* Default-667h@2x.png */,
+				AA4EF6FA1C85A4260050CCD8 /* Default-736h@3x.png */,
+				AA4EF6FB1C85A4260050CCD8 /* Reader-Button-H.png */,
+				AA4EF6FC1C85A4260050CCD8 /* Reader-Button-H@2x.png */,
+				AA4EF6FD1C85A4260050CCD8 /* Reader-Button-H@3x.png */,
+				AA4EF6FE1C85A4260050CCD8 /* Reader-Button-N.png */,
+				AA4EF6FF1C85A4260050CCD8 /* Reader-Button-N@2x.png */,
+				AA4EF7001C85A4260050CCD8 /* Reader-Button-N@3x.png */,
+				AA4EF7011C85A4260050CCD8 /* Reader-Email.png */,
+				AA4EF7021C85A4260050CCD8 /* Reader-Email@2x.png */,
+				AA4EF7031C85A4260050CCD8 /* Reader-Email@3x.png */,
+				AA4EF7041C85A4260050CCD8 /* Reader-Export.png */,
+				AA4EF7051C85A4260050CCD8 /* Reader-Export@2x.png */,
+				AA4EF7061C85A4260050CCD8 /* Reader-Export@3x.png */,
+				AA4EF7071C85A4260050CCD8 /* Reader-Mark-N.png */,
+				AA4EF7081C85A4260050CCD8 /* Reader-Mark-N@2x.png */,
+				AA4EF7091C85A4260050CCD8 /* Reader-Mark-N@3x.png */,
+				AA4EF70A1C85A4260050CCD8 /* Reader-Mark-Y.png */,
+				AA4EF70B1C85A4260050CCD8 /* Reader-Mark-Y@2x.png */,
+				AA4EF70C1C85A4260050CCD8 /* Reader-Mark-Y@3x.png */,
+				AA4EF70D1C85A4260050CCD8 /* Reader-Print.png */,
+				AA4EF70E1C85A4260050CCD8 /* Reader-Print@2x.png */,
+				AA4EF70F1C85A4260050CCD8 /* Reader-Print@3x.png */,
+				AA4EF7101C85A4260050CCD8 /* Reader-Thumbs.png */,
+				AA4EF7111C85A4260050CCD8 /* Reader-Thumbs@2x.png */,
+				AA4EF7121C85A4260050CCD8 /* Reader-Thumbs@3x.png */,
+			);
+			path = Graphics;
+			sourceTree = "<group>";
+		};
+		AA4EF7131C85A4260050CCD8 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				AA4EF7141C85A4260050CCD8 /* CGPDFDocument.h */,
+				AA4EF7151C85A4260050CCD8 /* CGPDFDocument.m */,
+				AA4EF7161C85A4260050CCD8 /* ReaderConstants.h */,
+				AA4EF7171C85A4260050CCD8 /* ReaderConstants.m */,
+				AA4EF7181C85A4260050CCD8 /* ReaderContentPage.h */,
+				AA4EF7191C85A4260050CCD8 /* ReaderContentPage.m */,
+				AA4EF71A1C85A4260050CCD8 /* ReaderContentTile.h */,
+				AA4EF71B1C85A4260050CCD8 /* ReaderContentTile.m */,
+				AA4EF71C1C85A4260050CCD8 /* ReaderContentView.h */,
+				AA4EF71D1C85A4260050CCD8 /* ReaderContentView.m */,
+				AA4EF71E1C85A4260050CCD8 /* ReaderDocument.h */,
+				AA4EF71F1C85A4260050CCD8 /* ReaderDocument.m */,
+				AA4EF7201C85A4260050CCD8 /* ReaderDocumentOutline.h */,
+				AA4EF7211C85A4260050CCD8 /* ReaderDocumentOutline.m */,
+				AA4EF7221C85A4260050CCD8 /* ReaderMainPagebar.h */,
+				AA4EF7231C85A4260050CCD8 /* ReaderMainPagebar.m */,
+				AA4EF7241C85A4260050CCD8 /* ReaderMainToolbar.h */,
+				AA4EF7251C85A4260050CCD8 /* ReaderMainToolbar.m */,
+				AA4EF7261C85A4260050CCD8 /* ReaderThumbCache.h */,
+				AA4EF7271C85A4260050CCD8 /* ReaderThumbCache.m */,
+				AA4EF7281C85A4260050CCD8 /* ReaderThumbFetch.h */,
+				AA4EF7291C85A4260050CCD8 /* ReaderThumbFetch.m */,
+				AA4EF72A1C85A4260050CCD8 /* ReaderThumbQueue.h */,
+				AA4EF72B1C85A4260050CCD8 /* ReaderThumbQueue.m */,
+				AA4EF72C1C85A4260050CCD8 /* ReaderThumbRender.h */,
+				AA4EF72D1C85A4260050CCD8 /* ReaderThumbRender.m */,
+				AA4EF72E1C85A4260050CCD8 /* ReaderThumbRequest.h */,
+				AA4EF72F1C85A4260050CCD8 /* ReaderThumbRequest.m */,
+				AA4EF7301C85A4260050CCD8 /* ReaderThumbsView.h */,
+				AA4EF7311C85A4260050CCD8 /* ReaderThumbsView.m */,
+				AA4EF7321C85A4260050CCD8 /* ReaderThumbView.h */,
+				AA4EF7331C85A4260050CCD8 /* ReaderThumbView.m */,
+				AA4EF7341C85A4260050CCD8 /* ReaderViewController.h */,
+				AA4EF7351C85A4260050CCD8 /* ReaderViewController.m */,
+				AA4EF7361C85A4260050CCD8 /* ThumbsMainToolbar.h */,
+				AA4EF7371C85A4260050CCD8 /* ThumbsMainToolbar.m */,
+				AA4EF7381C85A4260050CCD8 /* ThumbsViewController.h */,
+				AA4EF7391C85A4260050CCD8 /* ThumbsViewController.m */,
+				AA4EF73A1C85A4260050CCD8 /* UIXToolbarView.h */,
+				AA4EF73B1C85A4260050CCD8 /* UIXToolbarView.m */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		AA4EF77D1C8687DC0050CCD8 /* Brochure */ = {
+			isa = PBXGroup;
+			children = (
+				AA4EF7791C8687CF0050CCD8 /* Brochure_ProdukBCALIfeKeluargaku_21012016.pdf */,
+				AA4EF77A1C8687CF0050CCD8 /* Brochure_ProdukBCALIfeKeluargaku.pdf */,
+			);
+			name = Brochure;
+			sourceTree = "<group>";
+		};
 		AAAC9CF51C717C45002E3190 /* WebServices */ = {
 			isa = PBXGroup;
 			children = (
@@ -3831,6 +4093,8 @@
 		C4E9D1851612C64900016053 = {
 			isa = PBXGroup;
 			children = (
+				AA4EF77D1C8687DC0050CCD8 /* Brochure */,
+				AA4EF6E61C85A3F20050CCD8 /* PDFReader */,
 				178765DA1C74C25D0036F31A /* Images.xcassets */,
 				43739B861C6497B900A1788A /* Storyboard */,
 				17A298F51C6091EB00C2537A /* BcaFont */,
@@ -3891,6 +4155,7 @@
 		C4E9D1931612C64900016053 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AA4EF7771C85A9C50050CCD8 /* ImageIO.framework */,
 				6A002CF91850287200161727 /* libz.dylib */,
 				6A002CF71850286600161727 /* libstdc++.dylib */,
 				6A002CF51850285600161727 /* CoreText.framework */,
@@ -3938,6 +4203,7 @@
 				C4E7B384161B10F200066CBF /* SI Listing */,
 				C4EA9BDF16181F7F00D51FE9 /* Prospect */,
 				C4EA9BCF1616DAFF00D51FE9 /* PopOver */,
+				AA4EF6DB1C8571800050CCD8 /* Product Information */,
 				C4EB48EC16152E8800C7FC8C /* Login */,
 				EF05983A161A8BDB004A9095 /* LA */,
 				EF05984D161A9230004A9095 /* BasicPlan */,
@@ -4654,6 +4920,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA4EF77B1C8687CF0050CCD8 /* Brochure_ProdukBCALIfeKeluargaku_21012016.pdf in Resources */,
+				AA4EF77C1C8687CF0050CCD8 /* Brochure_ProdukBCALIfeKeluargaku.pdf in Resources */,
 				178A076C1C8232A100B91582 /* BCA_Rates.sqlite in Resources */,
 				17A2990F1C60A0DB00C2537A /* HelveticaInseratLTStd-Roman.otf in Resources */,
 				17A299101C60A0DB00C2537A /* HelveticaLTStd-Blk.otf in Resources */,
@@ -4690,6 +4958,7 @@
 				C4EB49101615327E00C7FC8C /* button_hover.png in Resources */,
 				C4EB49111615327E00C7FC8C /* button.png in Resources */,
 				C4EB49121615327E00C7FC8C /* header-repeted.png in Resources */,
+				AA4EF7611C85A4260050CCD8 /* Reader-Thumbs@2x.png in Resources */,
 				C4EB49131615327E00C7FC8C /* header.png in Resources */,
 				43DA4BE61C770B3C0038C92C /* icon_leads_2.png in Resources */,
 				C4EB49151615327E00C7FC8C /* login.png in Resources */,
@@ -4698,6 +4967,7 @@
 				C4EB49181615327E00C7FC8C /* protectGlobe.png in Resources */,
 				C4EB49191615327E00C7FC8C /* topbar.png in Resources */,
 				C4660EB61625047800BA4AFE /* delete_button.png in Resources */,
+				AA4EF74F1C85A4260050CCD8 /* Reader-Button-N@2x.png in Resources */,
 				C4660EB71625047800BA4AFE /* exit_btnB_144.png in Resources */,
 				C4660EB81625047800BA4AFE /* exit_btnB.png in Resources */,
 				C4660EB91625047800BA4AFE /* home_144.png in Resources */,
@@ -4707,8 +4977,12 @@
 				5D3967981C02C89700464BCC /* HLAWPStoryboard.storyboard in Resources */,
 				C4660EBD1625047800BA4AFE /* prospect_btnB.png in Resources */,
 				178765DB1C74C25D0036F31A /* Images.xcassets in Resources */,
+				AA4EF7451C85A4260050CCD8 /* AppIcon-152.png in Resources */,
 				C4660EBE1625047800BA4AFE /* prospect_btnB2_144.png in Resources */,
+				AA4EF74C1C85A4260050CCD8 /* Reader-Button-H@2x.png in Resources */,
+				AA4EF7411C85A4260050CCD8 /* AppIcon-076.png in Resources */,
 				1706BD501C7169A40038D1DB /* menu_salesactivity.png in Resources */,
+				AA4EF7511C85A4260050CCD8 /* Reader-Email.png in Resources */,
 				C4660EBF1625047800BA4AFE /* prospect_btnB2.png in Resources */,
 				C4660EC01625047800BA4AFE /* prospect.png in Resources */,
 				C4660EC11625047800BA4AFE /* setting_btnB_144.png in Resources */,
@@ -4717,8 +4991,10 @@
 				C4660EC41625047800BA4AFE /* setting_btnB2.png in Resources */,
 				C4660EC51625047800BA4AFE /* SI_button_144.png in Resources */,
 				C4660EC61625047800BA4AFE /* SI_button.png in Resources */,
+				AA4EF7571C85A4260050CCD8 /* Reader-Mark-N.png in Resources */,
 				C4660EC71625047800BA4AFE /* SI_button2_144.png in Resources */,
 				C4660EC81625047800BA4AFE /* SI_button2.png in Resources */,
+				AA4EF75A1C85A4260050CCD8 /* Reader-Mark-Y.png in Resources */,
 				173E81601C28F9C600BDAAE9 /* EappListing.storyboard in Resources */,
 				C4660EC91625047800BA4AFE /* SI_buttonB_144.png in Resources */,
 				C4660ECA1625047800BA4AFE /* SI_buttonB.png in Resources */,
@@ -4736,9 +5012,11 @@
 				C4FCDDD416395F120065D024 /* bg11.jpg in Resources */,
 				C4FCDDD516395F120065D024 /* bg18.jpg in Resources */,
 				C4FCDDD616395F120065D024 /* ipad_bg_4.jpg in Resources */,
+				AA4EF7471C85A4260050CCD8 /* AppIcon-180.png in Resources */,
 				C4FCDDE316395F290065D024 /* btn_brochure_home.png in Resources */,
 				C4FCDDE816395F290065D024 /* btn_prospect_home.png in Resources */,
 				17983C331C473373009E2977 /* HealthQuestionPO.storyboard in Resources */,
+				AA4EF7421C85A4260050CCD8 /* AppIcon-114.png in Resources */,
 				43DA4BE41C770AA90038C92C /* SIMenuTableViewCell.xib in Resources */,
 				C4FCDDEB16395F290065D024 /* btn_setting_home.png in Resources */,
 				C4FCDDEC16395F290065D024 /* btn_SI_home.png in Resources */,
@@ -4757,9 +5035,11 @@
 				EFABB36E16475A430069502B /* redBtn.png in Resources */,
 				178765DF1C75C04C0036F31A /* ProspectProfileStoryboard.storyboard in Resources */,
 				C4EF084D1648DC5C000444BA /* iphone_delete_button.png in Resources */,
+				AA4EF75B1C85A4260050CCD8 /* Reader-Mark-Y@2x.png in Resources */,
 				C4F45DF3165C6C430035CAA9 /* viewer.plist in Resources */,
 				C4F45E03165F12350035CAA9 /* f-spot-question-mark.png in Resources */,
 				A9E550A51C591F7900C9DAC2 /* Expand Arrow.png in Resources */,
+				AA4EF7541C85A4260050CCD8 /* Reader-Export.png in Resources */,
 				5D39679A1C02CA9000464BCC /* ClientProfileStoryboard.storyboard in Resources */,
 				1706BD4E1C7169A40038D1DB /* menu_ilustrasi.png in Resources */,
 				C4F5355F166F3BF0004DBF94 /* icon_settings.png in Resources */,
@@ -4779,10 +5059,13 @@
 				C4E5A47C168AAA89007848CE /* Profile96.png in Resources */,
 				C4E5A47D168AAA89007848CE /* Profile128.png in Resources */,
 				C4E5A47E168AAA89007848CE /* SecurityQuestion16.png in Resources */,
+				AA4EF74B1C85A4260050CCD8 /* Reader-Button-H.png in Resources */,
 				C4E5A47F168AAA89007848CE /* SecurityQuestion32.png in Resources */,
+				AA4EF7591C85A4260050CCD8 /* Reader-Mark-N@3x.png in Resources */,
 				C4E5A480168AAA89007848CE /* SecurityQuestion48.png in Resources */,
 				C4E5A481168AAA89007848CE /* SecurityQuestion128.png in Resources */,
 				C4B84472169C63C500E1A0D3 /* 20130108Login.png in Resources */,
+				AA4EF75C1C85A4260050CCD8 /* Reader-Mark-Y@3x.png in Resources */,
 				178765D91C7409F00036F31A /* menu_selectoption.png in Resources */,
 				EF1F6C7C16A7C1CC001EDC81 /* pdfData.plist in Resources */,
 				046735971C23A61300DEE400 /* CFFStoryboard.storyboard in Resources */,
@@ -4792,6 +5075,7 @@
 				42867E9D175F2E0C001CE661 /* IDType.plist in Resources */,
 				42867EAF175F75BD001CE661 /* Title.plist in Resources */,
 				42F8590F1772E4EF003907CD /* add.png in Resources */,
+				AA4EF74E1C85A4260050CCD8 /* Reader-Button-N.png in Resources */,
 				42F859101772E4EF003907CD /* delete.png in Resources */,
 				EF1ADDF21782D20100996388 /* homeScreenBrochure2.png in Resources */,
 				A9E550A61C591F7900C9DAC2 /* Expand Arrow@2x.png in Resources */,
@@ -4802,26 +5086,33 @@
 				EFBECF3B1791167E00C3D177 /* iconComplete.png in Resources */,
 				EFBECF3C1791167E00C3D177 /* iconNotComplete.png in Resources */,
 				EF30C75F17A63E61009A301A /* Nationality.plist in Resources */,
+				AA4EF7481C85A4260050CCD8 /* Default-568h@2x.png in Resources */,
 				C38190B31C28F1FA001E0C9E /* EappChecklist.storyboard in Resources */,
 				C4EEB6A217C4AFAF00F268B3 /* EverLife_SI in Resources */,
+				AA4EF6DD1C8572B00050CCD8 /* ProductInformation.xib in Resources */,
 				6A6ED09717D49937009FFA56 /* Race.plist in Resources */,
 				6A6ED0A217D57FD6009FFA56 /* MaritalStatus.plist in Resources */,
 				6A6ED0A417D59186009FFA56 /* Religion.plist in Resources */,
 				6A6ED0AD17D5E97E009FFA56 /* Country.plist in Resources */,
 				2958A88017E960150090A791 /* marker.png in Resources */,
+				AA4EF7621C85A4260050CCD8 /* Reader-Thumbs@3x.png in Resources */,
 				2958A88117E960150090A791 /* marker@2x.png in Resources */,
 				2958A88217E960150090A791 /* slider_blue.png in Resources */,
+				AA4EF7431C85A4260050CCD8 /* AppIcon-120.png in Resources */,
 				2958A88317E960150090A791 /* slider_blue@2x.png in Resources */,
 				2958A88417E960150090A791 /* slider_gray.png in Resources */,
 				5D39679D1C02CFD600464BCC /* CarouselStoryboard.storyboard in Resources */,
+				AA4EF74A1C85A4260050CCD8 /* Default-736h@3x.png in Resources */,
 				2958A88517E960150090A791 /* slider_gray@2x.png in Resources */,
 				2958A88617E960150090A791 /* slider_hover.png in Resources */,
 				2958A88717E960150090A791 /* slider_hover@2x.png in Resources */,
 				2958A88817E960150090A791 /* slider_normal.png in Resources */,
 				2958A88917E960150090A791 /* slider_normal@2x.png in Resources */,
+				AA4EF7561C85A4260050CCD8 /* Reader-Export@3x.png in Resources */,
 				A1C085D11C7DD77200A0592C /* bless final-02.png in Resources */,
 				2958A8D117E965BD0090A791 /* mengcheong_Storyboard CFF.storyboard in Resources */,
 				2958A8D317E965CA0090A791 /* mengcheong_Storyboard.storyboard in Resources */,
+				AA4EF75F1C85A4260050CCD8 /* Reader-Print@3x.png in Resources */,
 				2958A8D917E986620090A791 /* status.plist in Resources */,
 				29A3EEC517EAA71100E1CE8B /* cb_glossy_off.png in Resources */,
 				049B29341C3CF88A00BD509B /* CFF_1.storyboard in Resources */,
@@ -4836,10 +5127,15 @@
 				C3560C941805119400745FC6 /* priority.plist in Resources */,
 				425092AE180E71E80022FED3 /* prospect_100_2.png in Resources */,
 				425092AF180E71E80022FED3 /* prospect_100_3.png in Resources */,
+				AA4EF7491C85A4260050CCD8 /* Default-667h@2x.png in Resources */,
 				42B972FC1820A658005AFE16 /* UL_Rates.sqlite in Resources */,
+				AA4EF7401C85A4260050CCD8 /* AppIcon-072.png in Resources */,
 				42B972FE1820AA4C005AFE16 /* greenBtn.png in Resources */,
 				C4D0E095182A4F1F0094B41B /* pds2HTML in Resources */,
 				C44E3D90182C8E4A005CCC09 /* EverLife_SI_BM in Resources */,
+				AA4EF7521C85A4260050CCD8 /* Reader-Email@2x.png in Resources */,
+				AA4EF7581C85A4260050CCD8 /* Reader-Mark-N@2x.png in Resources */,
+				AA4EF7551C85A4260050CCD8 /* Reader-Export@2x.png in Resources */,
 				423A853618502D92008EC5D4 /* SelectCFFCell.xib in Resources */,
 				17F10EB31C6C85EF002C32D3 /* login_box.png in Resources */,
 				C394D6BB1C48861500722C07 /* PolicyOwner.storyboard in Resources */,
@@ -4847,6 +5143,7 @@
 				6A16C1A51889410700F7EFFA /* ProposalForm in Resources */,
 				6A0B175C188A36DE00931673 /* ApplicationAuthorization in Resources */,
 				6A0B175E188A36DE00931673 /* CA in Resources */,
+				AA4EF74D1C85A4260050CCD8 /* Reader-Button-H@3x.png in Resources */,
 				6A0B1760188A36DE00931673 /* FF in Resources */,
 				6A0B1764188A36DE00931673 /* SupplementaryProposalForm in Resources */,
 				EF5D3477188A45F700C8D80B /* CountryList.csv in Resources */,
@@ -4873,6 +5170,7 @@
 				2994B41C18E121AE00B0D4D2 /* P3.jpg in Resources */,
 				2994B41D18E121AE00B0D4D2 /* P4.jpg in Resources */,
 				2994B41E18E121AE00B0D4D2 /* P5-bg.jpg in Resources */,
+				AA4EF7461C85A4260050CCD8 /* AppIcon-167.png in Resources */,
 				2994B41F18E121AE00B0D4D2 /* P5-footer.jpg in Resources */,
 				170BB47D1C30DAE600CE75DF /* Summary(PolicyDetails).storyboard in Resources */,
 				2994B42018E121AE00B0D4D2 /* P5-header.jpg in Resources */,
@@ -4895,6 +5193,7 @@
 				4239AEBC1946DAE200BD6F53 /* cancel.png in Resources */,
 				4239AEBD1946DAE200BD6F53 /* cancel@2x.png in Resources */,
 				4239AEBE1946DAE200BD6F53 /* check_icon.png in Resources */,
+				AA4EF75E1C85A4260050CCD8 /* Reader-Print@2x.png in Resources */,
 				4239AEBF1946DAE200BD6F53 /* check_icon@2x.png in Resources */,
 				4239AEC01946DAE200BD6F53 /* iOSFoundations.strings in Resources */,
 				4239AEC31946DAE200BD6F53 /* undo.png in Resources */,
@@ -4906,6 +5205,7 @@
 				4239AECE1946DAE200BD6F53 /* au-p1.jpg in Resources */,
 				4239AECF1946DAE200BD6F53 /* au-p2.jpg in Resources */,
 				4239AED01946DAE200BD6F53 /* au-p3.jpg in Resources */,
+				AA4EF7601C85A4260050CCD8 /* Reader-Thumbs.png in Resources */,
 				4239AED11946DAE200BD6F53 /* au-p4.jpg in Resources */,
 				4239AED21946DAE200BD6F53 /* ios-linen.png in Resources */,
 				4239AED51946DAE200BD6F53 /* E-Application.pdf in Resources */,
@@ -4921,6 +5221,7 @@
 				162C3C0F1BBBD7270022CAF0 /* dbupdates in Resources */,
 				6AA6CCFD1994D70800B09730 /* CloseButton.png in Resources */,
 				6AA2AABA199A12DB00491126 /* Nominee & Trustee Guideline.pdf in Resources */,
+				AA4EF7531C85A4260050CCD8 /* Reader-Email@3x.png in Resources */,
 				A15F5A4A199A22BF00FE892D /* P5-Row.jpg in Resources */,
 				A17D8A2C199C611200C2A269 /* P5-Line.jpg in Resources */,
 				A1442C531C819834009B14C9 /* Icon Brochure & save as-01-01.png in Resources */,
@@ -4930,6 +5231,7 @@
 				A170C12E19A6052A0073325B /* P2-1Full.png in Resources */,
 				A1E3AFC219BD5F5200F332B3 /* P5-footer-B.jpg in Resources */,
 				A11B845B19C41FDA00A5F38B /* SIRIM_Logo.png in Resources */,
+				AA4EF75D1C85A4260050CCD8 /* Reader-Print.png in Resources */,
 				6A0C06DC19DA5A39008DD450 /* x5.png in Resources */,
 				04B15E0619DA8D0900FF7039 /* White-Header@2x.png in Resources */,
 				04B15E0719DA8D0900FF7039 /* White-Header.png in Resources */,
@@ -4939,6 +5241,7 @@
 				04B15E0A19DA8D0900FF7039 /* HeaderHLA.png in Resources */,
 				04B15E0B19DA8D0900FF7039 /* e-Application@2x.png in Resources */,
 				17F10EB01C6C85DA002C32D3 /* btn_login.png in Resources */,
+				AA4EF7501C85A4260050CCD8 /* Reader-Button-N@3x.png in Resources */,
 				04B15E0C19DA8D0900FF7039 /* Customer_Fact_Find@2x.png in Resources */,
 				04B15E0D19DA8D0900FF7039 /* Client_Profile@2x.png in Resources */,
 				04B15E0E19DA8D0900FF7039 /* Bachground.png in Resources */,
@@ -4950,6 +5253,7 @@
 				0466E1211A03172500971DFF /* client-profile20141031.png in Resources */,
 				043FDB981A1AEEE6008EDC24 /* transparent_boxv2.png in Resources */,
 				043FDB991A1AEEE6008EDC24 /* sales_illustrationv2.png in Resources */,
+				AA4EF73F1C85A4260050CCD8 /* AppIcon-057.png in Resources */,
 				043FDB9A1A1AEEE6008EDC24 /* eAplicationv2.png in Resources */,
 				043FDB9B1A1AEEE6008EDC24 /* customer_fact_findv2.png in Resources */,
 				043FDBA21A1AEF14008EDC24 /* transparent_boxv3.png in Resources */,
@@ -4960,6 +5264,7 @@
 				043FDBA61A1AEF14008EDC24 /* client_profilev3.png in Resources */,
 				043FDBA31A1AEF14008EDC24 /* sales_illustrationv3.png in Resources */,
 				1706BD4C1C7169A40038D1DB /* menu_customerfactfind.png in Resources */,
+				AA4EF7441C85A4260050CCD8 /* AppIcon-144.png in Resources */,
 				043FDBAB1A1AF226008EDC24 /* sales_illustration@2x_20141118.png in Resources */,
 				043FDBAC1A1AF226008EDC24 /* eAplication@2x_20141118.png in Resources */,
 				043FDBAD1A1AF226008EDC24 /* customer_fact_find@2x_20141118.png in Resources */,
@@ -5007,6 +5312,7 @@
 				C4E9D1CA1612C7D300016053 /* MainScreen.m in Sources */,
 				C4EB491F1615402800C7FC8C /* Login.m in Sources */,
 				C4EB4924161558F300C7FC8C /* ChangePassword.m in Sources */,
+				AA4EF7751C85A4260050CCD8 /* ThumbsViewController.m in Sources */,
 				C4EB493C161592EC00C7FC8C /* UserProfile.m in Sources */,
 				C4EA9BCD1616D7C700D51FE9 /* SecurityQuestion.m in Sources */,
 				C4EA9BD21616DB7F00D51FE9 /* SecurityQuesTbViewController.m in Sources */,
@@ -5015,8 +5321,11 @@
 				C4EA9BEA16181FFB00D51FE9 /* ProspectViewController.m in Sources */,
 				C4EA9BED1619359D00D51FE9 /* OccupationList.m in Sources */,
 				C4EA9BF01619404D00D51FE9 /* ProspectListing.m in Sources */,
+				AA4EF76F1C85A4260050CCD8 /* ReaderThumbRender.m in Sources */,
 				C4EA9BF31619460500D51FE9 /* ProspectProfile.m in Sources */,
+				AA4EF7731C85A4260050CCD8 /* ReaderViewController.m in Sources */,
 				C4EA9BF61619630F00D51FE9 /* EditProspect.m in Sources */,
+				AA4EF7651C85A4260050CCD8 /* ReaderContentPage.m in Sources */,
 				C4EA9BFC161989D200D51FE9 /* FirstTimeViewController.m in Sources */,
 				C4EA9C07161A76A900D51FE9 /* Logout.m in Sources */,
 				EF059839161A8BD1004A9095 /* NewLAViewController.m in Sources */,
@@ -5067,6 +5376,7 @@
 				C4E6437D171BE69A001DF8F8 /* Reachability.m in Sources */,
 				C4E7C07117291E2D00038FA9 /* PagesController.m in Sources */,
 				C4E7C0D6172FC9CD00038FA9 /* AFHTTPClient.m in Sources */,
+				AA4EF7631C85A4260050CCD8 /* CGPDFDocument.m in Sources */,
 				C4E7C0D7172FC9CD00038FA9 /* AFHTTPRequestOperation.m in Sources */,
 				C4E7C0D8172FC9CD00038FA9 /* AFImageRequestOperation.m in Sources */,
 				C4E7C0D9172FC9CD00038FA9 /* AFJSONRequestOperation.m in Sources */,
@@ -5154,6 +5464,7 @@
 				2958A86017E95F1A0090A791 /* CustomerChoice.m in Sources */,
 				2958A86517E95F3F0090A791 /* PriorityViewController.m in Sources */,
 				2958A86817E95F5D0090A791 /* PotentialAreas.m in Sources */,
+				AA4EF7671C85A4260050CCD8 /* ReaderContentView.m in Sources */,
 				439985BE1C62F8A70003B037 /* ModelPopover.m in Sources */,
 				2958A86D17E95FDA0090A791 /* Preference.m in Sources */,
 				2958A87317E95FF60090A791 /* TVCalibratedSlider.m in Sources */,
@@ -5210,6 +5521,7 @@
 				29A38DD017EAF58B00454787 /* pendingVC.m in Sources */,
 				29A38DD117EAF58B00454787 /* submittedVC.m in Sources */,
 				AAFFE1851C7EB161001B91BF /* SpinnerUtilities.m in Sources */,
+				AA4EF7641C85A4260050CCD8 /* ReaderConstants.m in Sources */,
 				AAFFE17D1C7D475E001B91BF /* AgentWS.m in Sources */,
 				2943213317F2E0DC00FB64AB /* SIDate_DOB.m in Sources */,
 				C30A259C17F3C8D500613A0F /* AdditionalQuestions.m in Sources */,
@@ -5218,6 +5530,7 @@
 				C30A259E17F3C8D500613A0F /* Declaration.m in Sources */,
 				C30A259F17F3C8D500613A0F /* eAppCheckList.m in Sources */,
 				C30A25A017F3C8D500613A0F /* eAppMenu.m in Sources */,
+				AA4EF76E1C85A4260050CCD8 /* ReaderThumbQueue.m in Sources */,
 				C30A25A117F3C8D500613A0F /* eAppPersonalDetails.m in Sources */,
 				C30A25A217F3C8D500613A0F /* eAppsListing.m in Sources */,
 				C30A25A317F3C8D500613A0F /* eSubmission.m in Sources */,
@@ -5247,6 +5560,7 @@
 				AAFFE17E1C7D475E001B91BF /* NSDate+ISO8601Parsing.m in Sources */,
 				C30A25B817F3C8D500613A0F /* HealthQuestionnaire9.m in Sources */,
 				C30A25B917F3C8D500613A0F /* HealthQuestionnaire10.m in Sources */,
+				AA4EF7681C85A4260050CCD8 /* ReaderDocument.m in Sources */,
 				C30A25BA17F3C8D500613A0F /* HealthQuestionnaire11.m in Sources */,
 				C30A25BB17F3C8D500613A0F /* HealthQuestionnaire12.m in Sources */,
 				C30A25BC17F3C8D500613A0F /* HealthQuestionnaire13.m in Sources */,
@@ -5257,6 +5571,7 @@
 				C30A25C117F3C8D500613A0F /* HealthQuestPersonType.m in Sources */,
 				C30A25C217F3C8D500613A0F /* MaineApp.m in Sources */,
 				C30A25C317F3C8D500613A0F /* MainNomineesTrusteesVC.m in Sources */,
+				AA4EF76A1C85A4260050CCD8 /* ReaderMainPagebar.m in Sources */,
 				C30A25C417F3C8D500613A0F /* MainQViewController.m in Sources */,
 				C30A25C517F3C8D500613A0F /* MasterMenuCFFeApp.m in Sources */,
 				C30A25C617F3C8D500613A0F /* MasterMenuEApp.m in Sources */,
@@ -5265,6 +5580,7 @@
 				C30A25C917F3C8D500613A0F /* SubDetails.m in Sources */,
 				C30A25CA17F3C8D500613A0F /* Summary.m in Sources */,
 				C30A25CC17F3C8D500613A0F /* TagObject.m in Sources */,
+				AA4EF7691C85A4260050CCD8 /* ReaderDocumentOutline.m in Sources */,
 				C30A25CD17F3C8D500613A0F /* Trustees.m in Sources */,
 				C30A25EC17F3CB7100613A0F /* AddPolicyTableVC.m in Sources */,
 				C30A25ED17F3CB7100613A0F /* ExistingLifePolicies.m in Sources */,
@@ -5276,6 +5592,7 @@
 				C30A25F217F3CB7100613A0F /* MainAddPolicyVC.m in Sources */,
 				C30A25F317F3CB7100613A0F /* MainEditInsured.m in Sources */,
 				C30A25F417F3CB7100613A0F /* MainExistingPolicyListing.m in Sources */,
+				AA4EF7661C85A4260050CCD8 /* ReaderContentTile.m in Sources */,
 				C30A25F517F3CB7100613A0F /* MainSubDetailsVC.m in Sources */,
 				C30A25F617F3CB7100613A0F /* MainTrusteesVC.m in Sources */,
 				C30A25F717F3CB7100613A0F /* MainViewInsured.m in Sources */,
@@ -5296,6 +5613,7 @@
 				C333A2C01831E98F00FA8200 /* MainExistingPolicyLA2Listing.m in Sources */,
 				C333A2C11831E98F00FA8200 /* MainExistingPolicyPOListing.m in Sources */,
 				C3A8D0FF1833AB3E00E65FC9 /* CustomAlertBox.m in Sources */,
+				AA4EF7701C85A4260050CCD8 /* ReaderThumbRequest.m in Sources */,
 				C3A8D1081833AEB700E65FC9 /* LA1DetailsVC.m in Sources */,
 				C3A8D1091833AEB700E65FC9 /* LA2DetailsVC.m in Sources */,
 				C3A8D10A1833AEB700E65FC9 /* MainLA1DetailsVC.m in Sources */,
@@ -5308,12 +5626,14 @@
 				AAFFE1811C7D475E001B91BF /* USGlobals.m in Sources */,
 				4212708018459CBB000C2156 /* HealthQuestions2ndLA.m in Sources */,
 				43FD4A041C620F3E00227F8F /* ModelVIPClass.m in Sources */,
+				AA4EF6E01C8572F30050CCD8 /* ProductInformation.m in Sources */,
 				431F5FE41C6D93E800A9CA6C /* ProspectListingTableViewCell.m in Sources */,
 				4212708118459CBB000C2156 /* HealthQuestionsPO.m in Sources */,
 				4212708218459CBB000C2156 /* HealthQuestionsVC.m in Sources */,
 				4212708818459FC0000C2156 /* eAppReport.m in Sources */,
 				4212708918459FC0000C2156 /* ReportCell.m in Sources */,
 				4212708C1845DF33000C2156 /* eConfirmationCell.m in Sources */,
+				AA4EF76D1C85A4260050CCD8 /* ReaderThumbFetch.m in Sources */,
 				42D3277618487F2D0030AA7A /* NewGroupListing.m in Sources */,
 				EF509EC7184F30110058CCD8 /* ClientProfileListingSortBy.m in Sources */,
 				423A853518502D92008EC5D4 /* SelectCFFCell.m in Sources */,
@@ -5339,6 +5659,7 @@
 				6A3D70D1188A4B8B000B2097 /* PRxml.m in Sources */,
 				AADD7E6F1C743A1E00D87750 /* DDXMLElementAdditions.m in Sources */,
 				6A3D70D2188A4B8B000B2097 /* SIxml.m in Sources */,
+				AA4EF7761C85A4260050CCD8 /* UIXToolbarView.m in Sources */,
 				6A55483A188B6BA400994B42 /* FormViewController.m in Sources */,
 				42804E21188EDF7F008EF058 /* FullyReducePaidUpPopover.m in Sources */,
 				296F543D18BC3DF500E3B7B2 /* NSStringAdditions.m in Sources */,
@@ -5346,6 +5667,7 @@
 				C319633918D98A0C00565B1C /* SupplementaryProposalForm1.m in Sources */,
 				2994B40A18E121AE00B0D4D2 /* myLable.m in Sources */,
 				2994B40B18E121AE00B0D4D2 /* myTextView.m in Sources */,
+				AA4EF7711C85A4260050CCD8 /* ReaderThumbsView.m in Sources */,
 				2994B42418E121AE00B0D4D2 /* P2Table.m in Sources */,
 				2994B42618E121AE00B0D4D2 /* Table2.m in Sources */,
 				2994B42818E121AE00B0D4D2 /* Table3.m in Sources */,
@@ -5362,6 +5684,7 @@
 				42B8B1411917339500E09A34 /* PRPage12.m in Sources */,
 				42B8B1421917339500E09A34 /* PRPage13.m in Sources */,
 				42B8B1431917339500E09A34 /* PRPage2.m in Sources */,
+				AA4EF76C1C85A4260050CCD8 /* ReaderThumbCache.m in Sources */,
 				42B8B1441917339500E09A34 /* PRPage3.m in Sources */,
 				43B56A8F1C7EDDCC00145D35 /* ModelSIMaster.m in Sources */,
 				42B8B1451917339500E09A34 /* PRPage4.m in Sources */,
@@ -5399,6 +5722,7 @@
 				4239AEDB1946DAE200BD6F53 /* PDFFormAction.m in Sources */,
 				4239AEDC1946DAE200BD6F53 /* PDFFormContainer.m in Sources */,
 				4239AEDD1946DAE200BD6F53 /* PDFObject.m in Sources */,
+				AA4EF7741C85A4260050CCD8 /* ThumbsMainToolbar.m in Sources */,
 				4239AEDE1946DAE200BD6F53 /* PDFPage.m in Sources */,
 				AAD5455F1C6443080029631D /* LoginDBManagement.m in Sources */,
 				4239AEDF1946DAE200BD6F53 /* PDFStream.m in Sources */,
@@ -5433,11 +5757,13 @@
 				FA137ABC1A9325E90051772D /* Constants.m in Sources */,
 				FAF837561ADE0A24001B5589 /* Cleanup.m in Sources */,
 				C3092ABA1ADF5E4500756616 /* ClearData.m in Sources */,
+				AA4EF76B1C85A4260050CCD8 /* ReaderMainToolbar.m in Sources */,
 				C35DF4081AE62C1F00A19353 /* WebViewViewController.m in Sources */,
 				FA0DC1A91AE0F0BE00ABDF3F /* DataManager.m in Sources */,
 				C36D82341AF9E2CE0070D070 /* Country2.m in Sources */,
 				C39046DE1B8EBB0700DE1E5B /* CameraViewController.m in Sources */,
 				C35EC8601B983C5D00738933 /* PymtWebViewViewController.m in Sources */,
+				AA4EF7721C85A4260050CCD8 /* ReaderThumbView.m in Sources */,
 				FA49F2891B9EE4E500B20169 /* DBUpdater.m in Sources */,
 				FA9C9D341B95772300E15346 /* WBSummaryBenefitObject.m in Sources */,
 				AAAC9D0A1C71BAF3002E3190 /* WebServiceUtilities.m in Sources */,

@@ -3219,23 +3219,23 @@
 }
 - (xmlNodePtr)xmlNodeForDoc:(xmlDocPtr)doc elementName:(NSString *)elName elementNSPrefix:(NSString *)elNSPrefix
 {
-	NSString *nodeName = nil;
-	if(elNSPrefix != nil && [elNSPrefix length] > 0)
-	{
-		nodeName = [NSString stringWithFormat:@"%@:%@", elNSPrefix, elName];
-	}
-	else
-	{
-		nodeName = [NSString stringWithFormat:@"%@:%@", @"AgentWS", elName];
-	}
-	
-	xmlNodePtr node = xmlNewDocNode(doc, NULL, [nodeName xmlString], NULL);
-	
-	
-	[self addAttributesToNode:node];
-	
-	
-	return node;
+    NSString *nodeName = nil;
+    if(elNSPrefix != nil && [elNSPrefix length] > 0)
+    {
+        nodeName = [NSString stringWithFormat:@"%@:%@", elNSPrefix, elName];
+    }
+    else
+    {
+        nodeName = [NSString stringWithFormat:@"%@:%@", @"AgentWS", elName];
+    }
+    
+    xmlNodePtr node = xmlNewDocNode(doc, NULL, [nodeName xmlString], NULL);
+    
+    [self addAttributesToNode:node];
+    
+    [self addElementsToNode:node];
+    
+    return node;
 }
 - (void)addAttributesToNode:(xmlNodePtr)node
 {
@@ -3255,10 +3255,21 @@
 }
 + (AgentWS_CheckVersionResult *)deserializeNode:(xmlNodePtr)cur
 {
-	AgentWS_CheckVersionResult *newObject = [[AgentWS_CheckVersionResult new] autorelease];
-	
-	[newObject deserializeAttributesFromNode:cur];
-	[newObject deserializeElementsFromNode:cur];
+    xmlBufferPtr buff = xmlBufferCreate();
+    int result = xmlNodeDump(buff, NULL, cur, 0, 1);
+    NSString *str = @"";
+    
+    if (result > -1) {
+        str = [[NSString alloc] initWithBytes:(xmlBufferContent(buff))
+                                       length:(NSUInteger)(xmlBufferLength(buff))
+                                     encoding:NSUTF8StringEncoding];
+    }
+    xmlBufferFree(buff);
+    
+    AgentWS_CheckVersionResult *newObject = [[AgentWS_CheckVersionResult new] autorelease];
+    newObject.xmlDetails = str;
+    [newObject deserializeAttributesFromNode:cur];
+    [newObject deserializeElementsFromNode:cur];
 	
 	return newObject;
 }
