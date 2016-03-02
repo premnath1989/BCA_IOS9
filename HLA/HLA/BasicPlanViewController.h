@@ -78,6 +78,7 @@
     
     UIColor *themeColour;
     NSString *premiType;
+    NSString *PlanType;
 }
 
 @property (nonatomic, retain) UIPopoverController *planPopover;
@@ -167,6 +168,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *labelThree;
 @property (weak, nonatomic) IBOutlet UILabel *ExtraPremiDasarLBL;
 @property (weak, nonatomic) IBOutlet UILabel *ExtraPremiDasarNumberLBL;
+@property (weak, nonatomic) IBOutlet UILabel *KKLKExtraPremiDasarLBL;
+@property (weak, nonatomic) IBOutlet UIButton *KKLKPembelianKeBtn;
+@property (weak, nonatomic) IBOutlet UILabel *KKLKPembelianKeLbl;
+
+@property (weak, nonatomic) IBOutlet UITextField *KKLKDiskaunBtn;
+@property (weak, nonatomic) IBOutlet UILabel *KKLKDiskaunLbl;
 
 //Added by faiz
 @property (strong, nonatomic) IBOutlet UITextField *basicPremiField;
@@ -229,6 +236,7 @@
 @property (nonatomic,assign,readwrite) double getSumAssured;
 @property (nonatomic,copy) NSString *getHL;
 @property (nonatomic,copy) NSString *getTempHL;
+@property (nonatomic,copy) NSString *PlanType;
 @property (nonatomic,assign,readwrite) int getTempHLTerm;
 @property (nonatomic,assign,readwrite) int getHLTerm;
 @property (nonatomic,assign,readwrite) int getParAcc;
@@ -310,6 +318,8 @@
 - (IBAction)cashDividendSegmentPressed:(id)sender;
 - (IBAction)cashDivSgmntCPPressed:(id)sender;
 - (IBAction)quotationLangSegmentPressed:(id)sender;
+- (IBAction)KKLKPembelianKe:(id)sender;
+
 @property (weak, nonatomic) IBOutlet UISegmentedControl *policyTermSeg;
 
 - (int)validateSave;

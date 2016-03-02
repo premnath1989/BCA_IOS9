@@ -46,7 +46,7 @@ NSString *SelectedString;
         self.items = [[NSMutableArray alloc] initWithObjects:@"BROTHER", @"DAUGHTER", @"DAUGHTER IN LAW", @"EMPLOYEE", @"EMPLOYER", @"FATHER", @"FATHER IN LAW", @"GRAND DAUGHTER", @"GRANDFATHER", @"GRANDMOTHER", @"GRANDSON", @"GUARDIAN", @"HUSBAND", @"MOTHER", @"MOTHER IN LAW", @"SELF", @"SISTER", @"SISTER IN LAW", @"SON", @"SON-IN LAW", @"STEP DAUGHTER", @"STEP FATHER", @"STEP MOTHER", @"STEP SON", @"WIFE",nil];
     }
 	else if ([[self.requestType description] isEqualToString:@"creditCard2"]) {
-        self.items = [[NSMutableArray alloc] initWithObjects:@"BROTHER", @"DAUGHTER", @"DAUGHTER IN LAW", @"EMPLOYEE", @"EMPLOYER", @"FATHER", @"FATHER IN LAW", @"GRAND DAUGHTER", @"GRANDFATHER", @"GRANDMOTHER", @"GRANDSON", @"GUARDIAN", @"HUSBAND", @"MOTHER", @"MOTHER IN LAW", @"SISTER", @"SISTER IN LAW", @"SON", @"SON-IN LAW", @"STEP DAUGHTER", @"STEP FATHER", @"STEP MOTHER", @"STEP SON", @"WIFE",nil];
+        self.items = [[NSMutableArray alloc] initWithObjects:@"BROTHER", @"DAUGHTER", @"DAUGHTER IN LAW", @"EMPLOYEE", @"EMPLOYER", @"FATHER", @"FATHER IN LAW", @"GRAND DAUGHTER", @"GRANDFATHER", @"GRANDMOTHER", @"GRANDSON", @"GUARDIAN", @"HUSBAND", @"MOTHER", @"MOTHER IN LAW",@"PARENTS", @"SISTER", @"SISTER IN LAW", @"SON", @"SON-IN LAW", @"STEP DAUGHTER", @"STEP FATHER", @"STEP MOTHER", @"STEP SON", @"WIFE",nil];
     }
     else {
         //contRel

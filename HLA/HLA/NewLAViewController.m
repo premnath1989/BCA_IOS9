@@ -2476,6 +2476,7 @@ id dobtanngal;
     int LAAGEint = [[LAAgeField text] intValue];
     
     
+    
     if ([NamaProduk.titleLabel.text isEqualToString:@"(null)"] ||[NamaProduk.titleLabel.text isEqualToString:@"--Please Select--"] || NamaProduk.titleLabel.text.length == 0)
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Produk harus diisi."
@@ -2508,13 +2509,22 @@ id dobtanngal;
         [alert show];
     }
     
- else if (LAAGEint > 70)
- {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Usia tidak boleh melebihi dari 70 tahun."
+     else if ((LAAGEint >70)&&[NamaProduk.titleLabel.text isEqualToString:@"BCA Life Heritage"])
+    {
+         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Usia tidak boleh melebihi dari 70 tahun."
                                                    delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
-   // [alert setTag:1005];
-    [alert show];
-  }
+        // [alert setTag:1005];
+         [alert show];
+     }
+    
+     else if ((LAAGEint >55)&&[NamaProduk.titleLabel.text isEqualToString:@"BCA Life Keluargaku"])
+     {
+         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Usia tidak boleh melebihi dari 55 tahun."
+                                                        delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
+         // [alert setTag:1005];
+         [alert show];
+     }
+
     
     else if (sexSegment.selectedSegmentIndex == -1)
     {

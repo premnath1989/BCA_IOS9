@@ -57,6 +57,7 @@
     _PayorSex = [dictionaryPremium valueForKey:@"LA_Gender"];
     Highlight =[dictionaryPremium valueForKey:@"Payment_Frequency"];
     
+    
     [self AnsuransiDasar];
     [self ExtraPremi];
     [self ExtraPremiNumber];
@@ -68,7 +69,6 @@
 {
     [super viewDidLoad];
     [self calculateReport];
-    
 }
 
 -(void)AnsuransiDasar
@@ -369,10 +369,7 @@
         lblTotalTahunan.textColor = [UIColor colorWithRed:242.0f/255.0f green:113.0f/255.0f blue:134.0f/255.0f alpha:1];
         lblSubtotalTahunan.textColor = [UIColor colorWithRed:242.0f/255.0f green:113.0f/255.0f blue:134.0f/255.0f alpha:1];
     }
-
-
 }
-
 
 -(void)calculateReport
 {

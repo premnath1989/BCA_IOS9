@@ -35,7 +35,7 @@
 @synthesize incomeSegment,cashDivSgmntCP;
 @synthesize advanceIncomeSegment;
 @synthesize cashDividendSegment;
-@synthesize HLField;
+@synthesize HLField,PlanType;
 @synthesize HLTermField;
 @synthesize tempHLField,annualRiderSum,halfRiderSum,monthRiderSum,quarterRiderSum;
 @synthesize tempHLTermField,basicPremAnn,basicPremHalf,basicPremQuar,basicPremMonth;
@@ -165,7 +165,7 @@ bool WPTPD30RisDeleted = FALSE;
 		[self DisableTextField:parAccField ];
 		[self DisableTextField:parPayoutField ];
 		
-		MOPSegment.enabled = FALSE;
+        MOPSegment.enabled = FALSE;
         S100MOPSegment.enabled = FALSE;
 		incomeSegment.enabled = FALSE;
 		btnPlan.enabled = FALSE;
@@ -199,7 +199,8 @@ bool WPTPD30RisDeleted = FALSE;
     themeColour = [UIColor colorWithRed:242.0f/255.0f green:113.0f/255.0f blue:134.0f/255.0f alpha:1];
     [yearlyIncomeField addTarget:self action:@selector(AnnualIncomeChange:) forControlEvents:UIControlEventEditingDidEnd];
     [self setTextfieldBorder];
-}
+    
+  }
 
 -(void) disableFieldsForEapp
 {
@@ -272,7 +273,18 @@ bool WPTPD30RisDeleted = FALSE;
             [_policyTermSeg setEnabled:YES forSegmentAtIndex:1];;
             [[_policyTermSeg.subviews objectAtIndex:0] setAlpha:1];
         }        
-    }    
+    }
+    
+    NSLog(@"%@",PlanType);
+    if ([PlanType isEqualToString:@"BCA Life Heritage"])
+    {
+    _KKLKDiskaunBtn.hidden = YES;
+    _KKLKDiskaunLbl.hidden = YES;
+    _KKLKExtraPremiDasarLBL.hidden = YES;
+    _KKLKPembelianKeBtn.hidden = YES;
+    _KKLKPembelianKeLbl.hidden = YES;
+    }
+
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -441,7 +453,6 @@ bool WPTPD30RisDeleted = FALSE;
 
     
 }
-
 
 #pragma mark - added by faiz 
 //added by faiz
@@ -4122,4 +4133,6 @@ bool WPTPD30RisDeleted = FALSE;
     [super viewDidUnload];
 }
 
+- (IBAction)KKLKDiskon:(id)sender {
+}
 @end

@@ -22,7 +22,7 @@
 NSString *gNameSecond = @"";
 
 @implementation SecondLAViewController
-@synthesize nameField;
+@synthesize nameField,msgAge;
 @synthesize sexSegment;
 @synthesize smokerSegment;
 @synthesize ageField;
@@ -673,7 +673,7 @@ id dobtemp;
     int newALB;
     int newANB;
     
-    NSString *msgAge;
+    
     if (yearN > yearB) {
         if (monthN < monthB) {
             newALB = ALB - 1;
@@ -1400,7 +1400,7 @@ id dobtemp;
 - (bool)validationDataLifeAssured{
     bool valid=true;
     NSArray* validationSet=[[NSArray alloc]initWithObjects:@"",@"- SELECT -",@"- Select -",@"--Please Select--", nil];
-    
+    int DOBDate =[msgAge intValue];
     //validation message data refferal
     NSString *validationNamaTertanggung=@"Nama Tertanggung harus diisi";
     NSString *validationTanggalLahir=@"Tanggal Lahir Tertanggung harus diisi";
@@ -1421,11 +1421,25 @@ id dobtemp;
         [nameField becomeFirstResponder];
         return false;
     }
+    else if(age >17)
+    {
+        [self createAlertViewAndShow:validationTanggalLahir tag:0];
+        [_BtnTanggalLahir setBackgroundColor:[UIColor redColor]];
+        return false;
+    }
+    else if(DOBDate <180)
+    {
+        [self createAlertViewAndShow:validationTanggalLahir tag:0];
+        [_BtnTanggalLahir setBackgroundColor:[UIColor redColor]];
+        return false;
+    }
+    
     else if ([validationSet containsObject:tanggalLahir]||tanggalLahir==NULL){
         [self createAlertViewAndShow:validationTanggalLahir tag:0];
         [_BtnTanggalLahir setBackgroundColor:[UIColor redColor]];
         return false;
     }
+    
     else if (sexSegment.selectedSegmentIndex==UISegmentedControlNoSegment){
         [self createAlertViewAndShow:validationJenisKelamin tag:0];
         return false;
@@ -1435,6 +1449,10 @@ id dobtemp;
         [self createAlertViewAndShow:validationPekerjaan tag:0];
         [btnOccp setBackgroundColor:[UIColor redColor]];
         return false;
+    }
+    else if ([validationSet containsObject:occupation]||occupation==NULL)
+    {
+        
     }
     return valid;
 }

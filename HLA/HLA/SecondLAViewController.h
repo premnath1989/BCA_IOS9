@@ -30,7 +30,7 @@
 @end
 
 @interface SecondLAViewController : UIViewController <ListingTbViewControllerDelegate,UIPopoverControllerDelegate, DateViewControllerDelegate, OccupationListDelegate, UITextFieldDelegate> {
-    NSString *databasePath;
+    NSString *databasePath,*msgAge;
     sqlite3 *contactDB;
     UIPopoverController *popOverController;
     UIPopoverController *_dobPopover;
@@ -76,7 +76,7 @@
 @property (nonatomic, assign,readwrite) int getLAIndexNo;
 @property (nonatomic, assign,readwrite) BOOL saved2ndLA;
 @property(nonatomic , retain) NSString *getSINo;
-@property (nonatomic, copy) NSString *getCommDate;
+@property (nonatomic, copy) NSString *getCommDate,*msgAge;
 @property (nonatomic,strong) id requesteProposalStatus;
 //--
 

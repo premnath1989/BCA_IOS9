@@ -383,6 +383,7 @@ BOOL isFirstLoad;
             self.BasicController.requestAgePay = getPayAge;
             self.BasicController.requestOccpPay = getPayOccp;
             
+            
             self.BasicController.requestIndex2ndLA = get2ndLAIndexNo;
             self.BasicController.requestSmoker2ndLA = get2ndLASmoker;
             self.BasicController.requestSex2ndLA = get2ndLASex;
@@ -401,11 +402,13 @@ BOOL isFirstLoad;
             if (!self.requestSINo){
                 [self.BasicController setPayorSex:[dictionaryPOForInsert valueForKey:@"PO_Gender"]];
                 [self.BasicController setPayorAge:[[dictionaryPOForInsert valueForKey:@"PO_Age"] integerValue]];
+                [self.BasicController setPlanType:[dictionaryPOForInsert valueForKey:@"ProductName"]];
             }
             else{
                 NSDictionary* dictPO=[_modelSIPOData getPO_DataFor:[self.requestSINo description]];
                 [self.BasicController setPayorSex:[dictPO valueForKey:@"PO_Gender"]];
                 [self.BasicController setPayorAge:[[dictPO valueForKey:@"PO_Age"] integerValue]];
+                [self.BasicController setPlanType:[dictPO valueForKey:@"ProductName"]];
             }
 
             self.BasicController.requestSINo = [self.requestSINo description];
@@ -446,11 +449,13 @@ BOOL isFirstLoad;
             if (!self.requestSINo){
                 [self.BasicController setPayorSex:[dictionaryPOForInsert valueForKey:@"PO_Gender"]];
                 [self.BasicController setPayorAge:[[dictionaryPOForInsert valueForKey:@"PO_Age"] integerValue]];
+                [self.BasicController setPlanType:[dictionaryPOForInsert valueForKey:@"ProductName"]];
             }
             else{
                 NSDictionary* dictPO=[_modelSIPOData getPO_DataFor:[self.requestSINo description]];
                 [self.BasicController setPayorSex:[dictPO valueForKey:@"PO_Gender"]];
                 [self.BasicController setPayorAge:[[dictPO valueForKey:@"PO_Age"] integerValue]];
+                [self.BasicController setPlanType:[dictPO valueForKey:@"ProductName"]];
             }
             self.BasicController.requestSINo = [self.requestSINo description];
             if (loadsView) {
