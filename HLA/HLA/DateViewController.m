@@ -53,6 +53,7 @@ id msg, ComDate;
         [dateFormatter setDateFormat:@"dd/MM/yyyy"];
         NSString *pickerDate = [dateFormatter stringFromDate:[_datePickerView date]];
         
+        
         msgDate = [NSString stringWithFormat:@"%@",pickerDate];
     }
 }
@@ -60,6 +61,10 @@ id msg, ComDate;
 - (IBAction)donePressed:(id)sender
 {
     [self calculateAge];
+ 
+    
+    
+    
 }
 
 -(void)calculateAge
@@ -136,6 +141,105 @@ id msg, ComDate;
     else {
         [_delegate datePick:self strDate:self.selectedStrDate strAge:self.selectedStrAge intAge:self.selectedIntAge intANB:self.selectedIntANB];
     }
+}
+
+-(void)calculateAgeIllustrasi
+{
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+    NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
+    
+    
+    NSArray *comm = [dateString componentsSeparatedByString: @"/"];
+    NSString *commDay = [comm objectAtIndex:0];
+    NSString *commMonth = [comm objectAtIndex:1];
+    NSString *commYear = [comm objectAtIndex:2];
+    
+    
+    NSArray *foo = [msgDate componentsSeparatedByString: @"/"];
+    NSString *birthDay = [foo objectAtIndex: 0];
+    NSString *birthMonth = [foo objectAtIndex: 1];
+    NSString *birthYear = [foo objectAtIndex: 2];
+    
+    int yearN = [commYear intValue];
+    int yearB = [birthYear intValue];
+    int monthN = [commMonth intValue];
+    int monthB = [birthMonth intValue];
+    int dayN = [commDay intValue];
+    int dayB = [birthDay intValue];
+    
+    int ALB = yearN - yearB;
+    int newALB;
+    int newANB;
+    
+    
+    if (yearN > yearB) {
+        if (monthN < monthB) {
+            newALB = ALB - 1;
+        } else if (monthN == monthB && dayN < dayB) {
+            newALB = ALB - 1;
+        } else if (monthN == monthB && dayN == dayB) { //edited by heng
+            newALB = ALB ;  //edited by heng
+        } else {
+            newALB = ALB;
+        }
+        
+        if (monthN > monthB) {
+            newANB = ALB + 1;
+        } else if (monthN == monthB && dayN > dayB) {
+            newANB = ALB + 1;
+        } else if (monthN == monthB && dayN == dayB) { // edited by heng
+            newANB = ALB; //edited by heng
+        } else {
+            newANB = ALB;
+        }
+        msgAge = [[NSString alloc] initWithFormat:@"%d",newALB];
+        Age = newALB;
+        ANB = newANB;
+    } else if (yearN == yearB) {
+        [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+        NSString *selectDate = msgDate;
+        NSDate *startDate = [dateFormatter dateFromString:selectDate];
+        
+        NSDate *endDate = [dateFormatter dateFromString:dateString];
+        
+        unsigned flags = NSDayCalendarUnit;
+        NSDateComponents *difference = [[NSCalendar currentCalendar] components:flags fromDate:startDate toDate:endDate options:0];
+        int diffDays = [difference day];
+        
+        msgAge = [[NSString alloc] initWithFormat:@"%d days",diffDays];
+        
+        Age = 0;
+        ANB = 1;
+    } else {
+        [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+        NSString *selectDate = msgDate;
+        NSDate *startDate = [dateFormatter dateFromString:selectDate];
+        
+        NSDate *endDate = [dateFormatter dateFromString:dateString];
+        
+        unsigned flags = NSDayCalendarUnit;
+        NSDateComponents *difference = [[NSCalendar currentCalendar] components:flags fromDate:startDate toDate:endDate options:0];
+        int diffDays = [difference day];
+        
+        Age = 0;
+        ANB = 1;
+    }
+    
+    [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+    NSString *selectDate = msgDate;
+    NSDate *startDate = [dateFormatter dateFromString:selectDate];
+    
+    NSDate *endDate = [dateFormatter dateFromString:dateString];
+    
+    unsigned flags = NSDayCalendarUnit;
+    NSDateComponents *difference = [[NSCalendar currentCalendar] components:flags fromDate:startDate toDate:endDate options:0];
+    int diffDays = [difference day];
+    
+    Age = 0;
+    ANB = 1;
+
 }
 
 -(NSString *)selectedStrDate

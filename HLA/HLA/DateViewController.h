@@ -20,6 +20,7 @@
 @property (retain, nonatomic) IBOutlet UIDatePicker *datePickerView;
 @property (nonatomic, copy) NSString *msgDate;
 @property (nonatomic, copy) NSString *msgAge;
+@property (nonatomic, copy) NSString *msgAgeYear;
 @property (nonatomic,assign,readwrite) int Age;
 @property (nonatomic, assign,readwrite) int ANB;
 @property (nonatomic,assign,readwrite) int btnSender;

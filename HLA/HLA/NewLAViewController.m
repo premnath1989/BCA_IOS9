@@ -1193,10 +1193,15 @@ id dobtanngal;
     
 }
 
+
 - (IBAction)btnTanggalIllustrasiPressed:(UIButton *)sender;
 {
     date1 = NO;
     date2 = YES;
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setInteger:9001 forKey:@"Illustrasi"];
+    [defaults synchronize];
     
     UIStoryboard *sharedStoryboard = [UIStoryboard storyboardWithName:@"SharedStoryboard" bundle:Nil];
     self.LADate = [sharedStoryboard instantiateViewControllerWithIdentifier:@"showDate"];
@@ -1427,16 +1432,16 @@ id dobtanngal;
         NSDateComponents *difference = [[NSCalendar currentCalendar] components:flags fromDate:startDate toDate:endDate options:0];
         int diffDays = [difference day];
         
-        if (diffDays < 0 && diffDays > -190 ) {
-            EDDCase = YES;
-            AgeExceed189Days = NO;
-        } else if (diffDays < 0 && diffDays <  -190 ) {
-            AgeExceed189Days = YES;
-            EDDCase = NO;
-        } else if (diffDays < 30) {
-            AgeLess = YES;
-            AgeExceed189Days = NO;
-        }
+//        if (diffDays < 0 && diffDays > -190 ) {
+//            EDDCase = YES;
+//            AgeExceed189Days = NO;
+//        } else if (diffDays < 0 && diffDays <  -190 ) {
+//            AgeExceed189Days = YES;
+//            EDDCase = NO;
+//        } else if (diffDays < 30) {
+//            AgeLess = YES;
+//            AgeExceed189Days = NO;
+//        }
         age = 0;
         ANB = 1;
     }
@@ -2498,7 +2503,14 @@ id dobtanngal;
         [alert show];
 
         
-    } else if (LANameField.text.length <= 0) {
+    }
+    else if (AgeExceed189Days == true) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Tanggal lahir yang dimasukkan tidak boleh lebih dari 180 hari yang lalu"
+                                                       delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
+        [alert setTag:1005];
+        [alert show];
+    }
+    else if (LANameField.text.length <= 0) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Nama Pemegang harus diisi."
                                                        delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
         [alert show];
@@ -2808,6 +2820,15 @@ else {
     unsigned flags = NSDayCalendarUnit;
     NSDateComponents *difference = [[NSCalendar currentCalendar] components:flags fromDate:startDate toDate:endDate options:0];
     int diffDays = [difference day];
+    if (diffDays >180)
+    {
+        AgeExceed189Days = true;
+    }
+    else
+    {
+        AgeExceed189Days = false;
+    }
+
     
     if (date1)
     {
