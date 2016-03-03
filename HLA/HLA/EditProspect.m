@@ -784,7 +784,7 @@ NSMutableArray *DelGroupArr;
         [txtHomeAddr1 becomeFirstResponder];
         return false;
     }
-    else if ([texthomeaddress2 isEqualToString:@""]||texthomeaddress2==NULL){
+    /*else if ([texthomeaddress2 isEqualToString:@""]||texthomeaddress2==NULL){
         [self createAlertViewAndShow:validationAlamat tag:0];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
         [txtHomeAddr2 becomeFirstResponder];
@@ -795,7 +795,7 @@ NSMutableArray *DelGroupArr;
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
         [txtHomeAddr3 becomeFirstResponder];
         return false;
-    }
+    }*/
     else if ([_switchCountryHome isOn]){
         if ([validationSet containsObject:homeCountry]||homeCountry==NULL){
             [self createAlertViewAndShow:validationNegara tag:0];
@@ -3698,7 +3698,7 @@ NSMutableArray *DelGroupArr;
         NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
         
-        return (([string isEqualToString:filtered])&&(newLength <= 6));
+        return (([string isEqualToString:filtered])&&(newLength <= 4));
 
     }
     
@@ -3710,7 +3710,7 @@ NSMutableArray *DelGroupArr;
         NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
         
-        return (([string isEqualToString:filtered])&&(newLength <= 6));
+        return (([string isEqualToString:filtered])&&(newLength <= 4));
 
     }
     
@@ -3722,7 +3722,7 @@ NSMutableArray *DelGroupArr;
         NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
         
-        return (([string isEqualToString:filtered])&&(newLength <= 6));
+        return (([string isEqualToString:filtered])&&(newLength <= 4));
     }
     
     if (textField == txtContact1) {
@@ -4051,6 +4051,24 @@ NSMutableArray *DelGroupArr;
 }
 
 //added by faiz
+-(IBAction)textFieldDidChangeEditing:(UITextField *)sender{
+    if (sender==txtPrefix2){
+        if ([sender.text length]>=4){
+            [txtContact2 becomeFirstResponder];
+        }
+    }
+    else if (sender==txtPrefix3){
+        if ([sender.text length]>=4){
+            [txtContact3 becomeFirstResponder];
+        }
+    }
+    else if (sender==txtPrefix4){
+        if ([sender.text length]>=4){
+            [txtContact4 becomeFirstResponder];
+        }
+    }
+}
+
 - (IBAction)actionSourceIncome:(id)sender
 {
     

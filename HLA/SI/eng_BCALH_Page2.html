@@ -2,6 +2,22 @@
 <html>
     <head>
         <link href="css/style.css" rel="stylesheet" type="text/css" />
+        <style>
+            thead,table-Summary1 {
+                border: 1px solid black;
+            }
+            td.one {
+                border-style: solid;
+                border-color: black;
+                border-width: 1px;
+                padding: 0px 0px 0px 0px;
+            }
+            tr.rowStyle {
+                border-style: solid;
+                border-color: black;
+                border-width: 1px;
+            }
+        </style>
         <script type="text/javascript" charset="utf-8" src="js/jquery-1.8.2.min.js"></script>
         <script type="text/javascript" charset="utf-8" src="js/hla.js"></script>
         <script>
@@ -34,14 +50,55 @@
             return amt + "&nbsp;&nbsp;";
         }
         
-            </script>
+        function createTable(Age,xRow,BasicSumAssured) {
+            var table = document.getElementById("table-Summary1");
+            for (i = 0; i < xRow; i++) {
+                var col1Val=i+1;
+                var col2Val=Age +col1Val;
+                var col3Val=BasicSumAssured;
+                
+                
+                var row = table.insertRow(i+4);
+                var cell1 = row.insertCell(0);
+                var cell2 = row.insertCell(1);
+                var cell3 = row.insertCell(2);
+                var cell4 = row.insertCell(3);
+                var cell5 = row.insertCell(4);
+                var cell6 = row.insertCell(5);
+                var cell7 = row.insertCell(6);
+                var cell8 = row.insertCell(7);
+                var cell9 = row.insertCell(8);
+                
+                cell1.className = 'one';
+                cell2.className = 'one';
+                cell3.className = 'one';
+                cell4.className = 'one';
+                cell5.className = 'one';
+                cell6.className = 'one';
+                cell7.className = 'one';
+                cell8.className = 'one';
+                cell9.className = 'one';
+                
+                cell1.innerHTML = col1Val;
+                cell2.innerHTML = col2Val;
+                cell3.innerHTML = col3Val;
+                cell4.innerHTML = "Cell d";
+                cell5.innerHTML = "Cell e";
+                cell6.innerHTML = "Cell f";
+                cell7.innerHTML = "Cell g";
+                cell8.innerHTML = "Cell h";
+                cell9.innerHTML = "Cell i";
+            }
+        }
+        
+    </script>
     </head>
     <!-- <body onload="onBodyLoad()">   -->
     <body>
         <div id="header">
             <table border="0" style="border-collapse:separate;border:0px solid black;width:100%;">
                 <tr>
-                    <td style="width: 25%"><img src="SI/HLA.png" height="65px"/></td>
+                    <td style="width: 25%"><img src="SI/img/LogoBCALife.jpg" height="50px"/></td>
                     <td style="width: 50%;text-align: center">
                         <table  style="border-collapse:separate;border:1px solid black;width:90%;">
                             <tr>
@@ -54,7 +111,7 @@
                     </td>
                     <td style="width: 25%">
                         BCA Life Heritage Protection <br>
-                        Nomor ilustrasi : <label for="SINumber">16011813027</label>
+                        Nomor ilustrasi : <label id="SINumber">16011813027</label>
                     </td>
                 </tr>
             </table>
@@ -64,51 +121,51 @@
             <table style="border-collapse:separate;border:0px solid black;width:100%;" >
                 <tr valign="top">
                     <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;">Nama Pemegangn Polis :</td>
-                    <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;"><label for="HeaderPOName">Amin Suramin</label></td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;"><label id="HeaderPOName">Amin Suramin</label></td>
                     <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;">Uang Pertanggungan :</td>
-                    <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;"><label for="HeaderSumAssured">1.000.000.000</label></td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;"><label id="HeaderSumAssured">1.000.000.000</label></td>
                 </tr>
                 <tr valign="top">
                     <td style="text-align:left;padding: 0px 0px 0px 0px; ">Tanggal Lahir Pemegang Polis (dd/MM/yyyy)</td>
-                    <td style="text-align:left;padding: 0px 0px 0px 0px; "><label for="HeaderPODOB">07/07/1970</label></td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px; "><label id="HeaderPODOB">07/07/1970</label></td>
                     <td style="text-align:left;padding: 0px 0px 0px 0px; ">Masa Pembayaran Premi</td>
-                    <td style="text-align:left;padding: 0px 0px 0px 0px; "><label for="HeaderPaymentPeriode">5</label></td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px; "><label id="HeaderPaymentPeriode">5</label></td>
                 </tr>
                 <tr valign="top">
                     <td style="text-align:left;padding: 0px 0px 0px 0px; ">Nama Tertanggung (jika berbeda)</td>
-                    <td style="text-align:left;padding: 0px 0px 0px 0px; "><label for="HeaderLAName">Budi Budiman</label></td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px; "><label id="HeaderLAName">Budi Budiman</label></td>
                     <td style="text-align:left;padding: 0px 0px 0px 0px; ">Frekuensi Pembayaran</td>
-                    <td style="text-align:left;padding: 0px 0px 0px 0px; "><label for="HeaderPaymentFrequency">Tahunan</label></td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px; "><label id="HeaderPaymentFrequency">Tahunan</label></td>
                 </tr>
                 <tr valign="top">
                     <td style="text-align:left;padding: 0px 0px 0px 0px; ">Tanggal Lahir Tertanggung (jika berbeda dengan pemegang polis) (dd/mm/yyyy) </td>
-                    <td style="text-align:left;padding: 0px 0px 0px 0px; "><label for="HeaderLADOB">07/07/1970</label></td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px; "><label id="HeaderLADOB">07/07/1970</label></td>
                     <td style="text-align:left;padding: 0px 0px 0px 0px; ">Premi Standard</td>
-                    <td style="text-align:left;padding: 0px 0px 0px 0px; "><label for="HeaderBasicPremi">69.560.000</label></td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px; "><label id="HeaderBasicPremi">69.560.000</label></td>
                 </tr>
                 <tr valign="top">
                     <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;">Tanggal pembuatan illustrasi :</td>
-                    <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;"><label for="HeaderIlustrationDate">18/01/2016</label></td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;"><label id="HeaderIlustrationDate">18/01/2016</label></td>
                     <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;">Extra Premi</td>
-                    <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;"><label for="HeaderExtraPremiPercent">100%</label><br/><label for="HeaderExtraPremiNumber">1</label></td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;"><label id="HeaderExtraPremiPercent">100%</label><br/><label id="HeaderExtraPremiNumber">1</label></td>
                 </tr>
                 <tr valign="top">
                     <td style="text-align:left;padding: 0px 0px 0px 0px; ">Usia Pemegang Polis</td>
-                    <td style="text-align:left;padding: 0px 0px 0px 0px; "><label for="HeaderPOAge">45</label></td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px; "><label id="HeaderPOAge">45</label></td>
                     <td style="text-align:left;padding: 0px 0px 0px 0px; ">Durasi Extra Premi</td>
-                    <td style="text-align:left;padding: 0px 0px 0px 0px; "><label for="HeaderExtraPremiDuration">5</label></td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px; "><label id="HeaderExtraPremiDuration">5</label></td>
                 </tr>
                 <tr valign="top">
                     <td style="text-align:left;padding: 0px 0px 0px 0px; ">Usia Masuk Tertanggung</td>
-                    <td style="text-align:left;padding: 0px 0px 0px 0px; "><label for="HeaderLAAge">45</label></td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px; "><label id="HeaderLAAge">45</label></td>
                     <td style="text-align:left;padding: 0px 0px 0px 0px; ">Extra Premi Karena UW Loading</td>
-                    <td style="text-align:left;padding: 0px 0px 0px 0px; "><label for="HeaderExtraPremiUWLoading">70.560.000</label></td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px; "><label id="HeaderExtraPremiUWLoading">70.560.000</label></td>
                 </tr>
                 <tr valign="top">
                     <td style="text-align:left;padding: 0px 0px 0px 0px; ">Jenis Kelamin</td>
-                    <td style="text-align:left;padding: 0px 0px 0px 0px; "><label for="HeaderPOAge">Pria</label></td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px; "><label id="HeaderPOAge">Pria</label></td>
                     <td style="text-align:left;padding: 0px 0px 0px 0px; ">Total Premi Dibayar</td>
-                    <td style="text-align:left;padding: 0px 0px 0px 0px; "><label for="HeaderPremiPay">140.120.000</label></td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px; "><label id="HeaderPremiPay">140.120.000</label></td>
                 </tr>
                 
             </table>
@@ -117,7 +174,7 @@
             <!--520px-->
             <div class="contentArea" >
                 
-                <table id="table-Summary1">
+                <table id="table-Summary1" width="100%">
                     <thead>
                         <tr>
                             <th colspan="9" class="contentSmall">Ilustrasi Manfaat Asuransi</th>
@@ -159,30 +216,31 @@
             </div>
             
         </div>
-        
+        <br/>
+        <br/>
         <!--tanda tangan-->
         <div style="width:100%;background-color: #fff;vertical-align: top;">
             <table border="0" style="border-collapse:separate;border:0px solid black;width:100%;">
                 <td style="width: 50%">
                     <table  style="border-collapse:separate;border:0px solid black;width:100%;">
                         <tr>
-                            <td>Disiapkan oleh</td><td>:</td><td style="width: 60%"><label for="FooterAgentName">Andreas</label></td>
+                            <td>Disiapkan oleh</td><td>:</td><td style="width: 60%"><label id="FooterAgentName">Andreas</label></td>
                         </tr>
                         
                         <tr>
-                            <td>Tanggal dan jam cetak</td><td>:</td><td><label for="FooterPrintDate">26-Januari-2016</label></td>
+                            <td>Tanggal dan jam cetak</td><td>:</td><td><label id="FooterPrintDate">26-Januari-2016</label></td>
                         </tr>
                         
                         <tr>
-                            <td>Versi</td><td>:</td><td><label for="FooterVersion">1.0.000</label></td>
+                            <td>Versi</td><td>:</td><td><label id="FooterVersion">1.0.000</label></td>
                         </tr>
                         
                         <tr>
-                            <td>Kode Tenaga Penjual</td><td>:</td><td><label for="FooterAgentCode">HRTG-003</label></td>
+                            <td>Kode Tenaga Penjual</td><td>:</td><td><label id="FooterAgentCode">HRTG-003</label></td>
                         </tr>
                         
                         <tr>
-                            <td>Cabang</td><td>:</td><td><label for="FooterBranch">Head Office</label></td>
+                            <td>Cabang</td><td>:</td><td><label id="FooterBranch">Head Office</label></td>
                         </tr>
                         
                         <tr>

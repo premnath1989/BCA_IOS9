@@ -475,10 +475,16 @@ BOOL isFirstLoad;
     if (_salesIlustrationViewController == nil) {
         _salesIlustrationViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SalesIlustration"];
         //_LAController.delegate = self;
-        [self.RightView addSubview:_salesIlustrationViewController.view];
+        [_salesIlustrationViewController setDictionaryPOForInsert:dictionaryPOForInsert];
+        [_salesIlustrationViewController setDictionaryForBasicPlan:newDictionaryForBasicPlan];
+        //[self.RightView addSubview:_salesIlustrationViewController.view];
     }
-    [self.RightView bringSubviewToFront:_salesIlustrationViewController.view];
+    [_salesIlustrationViewController setDictionaryPOForInsert:dictionaryPOForInsert];
+    [_salesIlustrationViewController setDictionaryForBasicPlan:newDictionaryForBasicPlan];
+    //[self.RightView bringSubviewToFront:_salesIlustrationViewController.view];
 //    [self.myTableView selectRowAtIndexPath:selectedPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:_salesIlustrationViewController];
+    [self presentViewController:navController animated:YES completion:nil];
 }
 
 
@@ -2716,6 +2722,14 @@ BOOL isFirstLoad;
 }
 
 #pragma mark - delegate added by faiz
+-(void)setBasicPlanDictionaryWhenLoadFromList:(NSDictionary *)basicPlan{
+    newDictionaryForBasicPlan = [NSMutableDictionary dictionaryWithDictionary:basicPlan];
+}
+
+-(void)setPODictionaryWhenLoadFromList:(NSDictionary *)dataPO{
+    dictionaryPOForInsert= [NSMutableDictionary dictionaryWithDictionary:dataPO];
+}
+
 -(void)saveNewLA:(NSDictionary *)dataPO{
     dictionaryPOForInsert = [NSMutableDictionary dictionaryWithDictionary:dataPO];
     [arrayIntValidate replaceObjectAtIndex:0 withObject:@"1"];

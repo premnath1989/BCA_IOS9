@@ -221,6 +221,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtNPWPNo;
 @property (weak, nonatomic) IBOutlet UISwitch *switchCountryHome;
 @property (weak, nonatomic) IBOutlet UISwitch *switchCountryOffice;
+
+-(IBAction)textFieldDidChangeEditing:(UITextField *)sender;
 /*end of added by faiz*/
 
 - (IBAction)ActionforRigdate:(id)sender;

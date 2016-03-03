@@ -22,14 +22,21 @@
     NSString *NamaChannel ;
     NSString *Kanwil ;
     NSString *CodeChannel ;
+    NSString *AgentName ;
+    NSString *AgentCode ;
+    NSString *AgentBranch ;
     
     FMResultSet *s = [database executeQuery:@"SELECT * FROM Agent_profile"];
     while ([s next]) {
         NamaChannel = [NSString stringWithFormat:@"%@",[s stringForColumn:@"ChannelName"]];
         CodeChannel = [NSString stringWithFormat:@"%@",[s stringForColumn:@"ChannelCode"]];
         Kanwil = [NSString stringWithFormat:@"%@",[s stringForColumn:@"Kanwil"]];
+        AgentName = [NSString stringWithFormat:@"%@",[s stringForColumn:@"AgentName"]];
+        AgentCode = [NSString stringWithFormat:@"%@",[s stringForColumn:@"AgentCode"]];
+        AgentBranch = [NSString stringWithFormat:@"%@",[s stringForColumn:@"BranchName"]];
     }
-    dict = [[NSDictionary alloc] initWithObjectsAndKeys:NamaChannel,@"ChannelName", CodeChannel,@"ChannelCode",Kanwil,@"Kanwil",nil];
+
+    dict = [[NSDictionary alloc] initWithObjectsAndKeys:NamaChannel,@"ChannelName", CodeChannel,@"ChannelCode",Kanwil,@"Kanwil",AgentName,@"AgentName", AgentCode,@"AgentCode",AgentBranch,@"BranchName",nil];
     
     [results close];
     [database close];

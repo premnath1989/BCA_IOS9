@@ -34,6 +34,7 @@
 -(void)SwitchToRiderTab;
 -(void)brngSubview:(NSString *)view;
 -(void)saveBasicPlan:(NSDictionary *)basicPlan;
+-(void)setBasicPlanDictionaryWhenLoadFromList:(NSDictionary *)basicPlan;
 @end
 
 @interface BasicPlanViewController : UIViewController <UITextFieldDelegate,PlanListDelegate,MasaPembayaranDelegate,FrekeunsiDelegate>{

@@ -16,6 +16,7 @@ table td{
 	font-size:9.8px;
 	font-weight:normal;
 	padding:0;
+    border: 1px solid black;
 }
 
 	#wrapper {

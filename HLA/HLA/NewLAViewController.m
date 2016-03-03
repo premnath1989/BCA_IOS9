@@ -827,6 +827,7 @@ id dobtanngal;
         else{
             [sexSegment setSelectedSegmentIndex:1];
         }
+        [_delegate setPODictionaryWhenLoadFromList:dictPOData];
     }
 }
 

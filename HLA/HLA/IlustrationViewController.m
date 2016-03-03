@@ -16,16 +16,27 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //[self loadHTMLToWebView];
-    [self createPDFFile];
+    modelAgentProfile=[[ModelAgentProfile alloc]init];
+    self.title=@"Sales Ilustration Quotation";
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStyleBordered target:self action:@selector(closeModalWindow:) ];
+    [self loadHTMLToWebView];
+    //[self createPDFFile];
     // Do any additional setup after loading the view.
+}
+
+- (void)closeModalWindow:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)actionDismissModal:(UIBarButtonItem *)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(void)loadHTMLToWebView{
    // NSString *htmlFile = [[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page1" ofType:@"html"];
    // NSString* htmlString = [NSString stringWithContentsOfFile:htmlFile encoding:NSUTF8StringEncoding error:nil];
    // [webIlustration loadHTMLString:htmlString baseURL:nil];
-    [webIlustration loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page1" ofType:@"html"]isDirectory:NO]]];
+    [webIlustration loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page2" ofType:@"html"]isDirectory:NO]]];
 }
 
 -(void)createPDFFile{
@@ -98,6 +109,337 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)setValuePage1{
+    NSString *javaScript = [NSString stringWithFormat:@"document.getElementById('SINumber').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"SINO"]];
+    
+    NSString *javaScriptP1H1 = [NSString stringWithFormat:@"document.getElementById('HeaderLAName').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"LA_Name"]];
+    NSString *javaScriptP1H2 = [NSString stringWithFormat:@"document.getElementById('HeaderLASex').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"LA_Gender"]];
+    NSString *javaScriptP1H3 = [NSString stringWithFormat:@"document.getElementById('HeaderLADOB').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"LA_DOB"]];
+    NSString *javaScriptP1H4 = [NSString stringWithFormat:@"document.getElementById('HeaderOccupation').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"LA_Occp"]];
+    NSString *javaScriptP1H5 = [NSString stringWithFormat:@"document.getElementById('HeaderPaymentPeriode').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"Payment_Term"]];
+    NSString *javaScriptP1H6 = [NSString stringWithFormat:@"document.getElementById('HeaderPaymentFrequency').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"Payment_Frequency"]];
+    
+    NSString *javaScriptP2H1 = [NSString stringWithFormat:@"document.getElementById('HeaderPOName').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"PO_Name"]];
+    NSString *javaScriptP2H2 = [NSString stringWithFormat:@"document.getElementById('HeaderSumAssured').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"Sum_Assured"]];
+    NSString *javaScriptP2H3 = [NSString stringWithFormat:@"document.getElementById('HeaderPODOB').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"PO_DOB"]];
+    NSString *javaScriptP2H4 = [NSString stringWithFormat:@"document.getElementById('HeaderPaymentPeriode').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"Payment_Term"]];
+    NSString *javaScriptP2H5 = [NSString stringWithFormat:@"document.getElementById('HeaderLAName').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"LA_Name"]];
+    NSString *javaScriptP2H6 = [NSString stringWithFormat:@"document.getElementById('HeaderPaymentFrequency').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"Payment_Frequency"]];
+    NSString *javaScriptP2H7 = [NSString stringWithFormat:@"document.getElementById('HeaderLADOB').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"LA_DOB"]];
+    NSString *javaScriptP2H8 = [NSString stringWithFormat:@"document.getElementById('HeaderBasicPremi').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"PremiumPolicyA"]];
+    NSString *javaScriptP2H9 = [NSString stringWithFormat:@"document.getElementById('HeaderIlustrationDate').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"SIDate"]];
+    NSString *javaScriptP2H10 = [NSString stringWithFormat:@"document.getElementById('HeaderExtraPremiPercent').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"ExtraPremiumPercentage"]];
+    NSString *javaScriptP2H11 = [NSString stringWithFormat:@"document.getElementById('HeaderPOAge').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"PO_Age"]];
+    NSString *javaScriptP2H12 = [NSString stringWithFormat:@"document.getElementById('HeaderExtraPremiDuration').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"ExtraPremiumTerm"]];
+    NSString *javaScriptP2H13 = [NSString stringWithFormat:@"document.getElementById('HeaderLAAge').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"LA_Age"]];
+    NSString *javaScriptP2H14 = [NSString stringWithFormat:@"document.getElementById('HeaderExtraPremiUWLoading').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"TotalPremiumLoading"]];
+    NSString *javaScriptP2H15 = [NSString stringWithFormat:@"document.getElementById('HeaderPOAge').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"PO_Age"]];
+    NSString *javaScriptP2H16 = [NSString stringWithFormat:@"document.getElementById('HeaderPremiPay').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"LA_Occp"]];
+    
+    
+    //footer agent data
+    NSString *javaScriptF1 = [NSString stringWithFormat:@"document.getElementById('FooterAgentName').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"AgentName"]];
+    NSString *javaScriptF2 = [NSString stringWithFormat:@"document.getElementById('FooterPrintDate').innerHTML =\"%@\";",[NSDate date]];
+    NSString *javaScriptF3 = [NSString stringWithFormat:@"document.getElementById('FooterAgentCode').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"AgentCode"]];
+    NSString *javaScriptF4 = [NSString stringWithFormat:@"document.getElementById('FooterBranch').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"BranchName"]];
+    
+    // Make the UIWebView method call
+    NSString *response = [webIlustration stringByEvaluatingJavaScriptFromString:javaScript];
+    
+    NSString *response1 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1H1];
+    NSString *response2 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1H2];
+    NSString *response3 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1H3];
+    NSString *response4 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1H4];
+    NSString *response5 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1H5];
+    NSString *response6 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1H6];
+    
+    NSString *responseF1 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptF1];
+    NSString *responseF2 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptF2];
+    NSString *responseF3 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptF3];
+    NSString *responseF4 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptF4];
+    
+    NSString *responseP21 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H1];
+    NSString *responseP22 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H2];
+    NSString *responseP23 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H3];
+    NSString *responseP24 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H4];
+    NSString *responseP25 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H5];
+    NSString *responseP26 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H6];
+    NSString *responseP27 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H7];
+    NSString *responseP28 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H8];
+    NSString *responseP29 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H9];
+    NSString *responseP210 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H10];
+    NSString *responseP211 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H11];
+    NSString *responseP212 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H12];
+    NSString *responseP213 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H13];
+    NSString *responseP214 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H14];
+    NSString *responseP215 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H15];
+    NSString *responseP216 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H16];
+    
+    NSLog(@"javascript result: %@", response);
+    NSLog(@"javascript result: %@", response1);
+    NSLog(@"javascript result: %@", response2);
+    NSLog(@"javascript result: %@", response3);
+    NSLog(@"javascript result: %@", response4);
+    NSLog(@"javascript result: %@", response5);
+    NSLog(@"javascript result: %@", response6);
+    
+    NSLog(@"javascript result: %@", responseF1);
+    NSLog(@"javascript result: %@", responseF2);
+    NSLog(@"javascript result: %@", responseF3);
+    NSLog(@"javascript result: %@", responseF4);
+    
+    NSLog(@"javascript result: %@", responseP21);
+    NSLog(@"javascript result: %@", responseP22);
+    NSLog(@"javascript result: %@", responseP23);
+    NSLog(@"javascript result: %@", responseP24);
+    NSLog(@"javascript result: %@", responseP25);
+    NSLog(@"javascript result: %@", responseP26);
+    NSLog(@"javascript result: %@", responseP27);
+    NSLog(@"javascript result: %@", responseP28);
+    NSLog(@"javascript result: %@", responseP29);
+    NSLog(@"javascript result: %@", responseP210);
+    NSLog(@"javascript result: %@", responseP211);
+    NSLog(@"javascript result: %@", responseP212);
+    NSLog(@"javascript result: %@", responseP213);
+    NSLog(@"javascript result: %@", responseP214);
+    NSLog(@"javascript result: %@", responseP215);
+    NSLog(@"javascript result: %@", responseP216);
+
+}
+
+-(int)calculateRowNumber:(int)Age{
+    int rowNumber=0;
+    if (Age<21){
+        rowNumber=20;
+    }
+    else{
+        int remainingAge=Age-20;
+        if (remainingAge%5 == 0){
+            int addedRow = remainingAge/5;
+            rowNumber=20+addedRow;
+        }
+        else{
+            int addedRow = remainingAge/5;
+            rowNumber=20+addedRow+1;
+        }
+    }
+    return rowNumber;
+}
+
+-(void)setValuePage2{
+    NSString *javaScript = [NSString stringWithFormat:@"document.getElementById('SINumber').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"SINO"]];
+    
+    int poAge=[[_dictionaryPOForInsert valueForKey:@"PO_Age"] intValue];
+    int numberOfRow=[self calculateRowNumber:poAge];
+    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+    f.numberStyle = NSNumberFormatterDecimalStyle;
+    NSNumber *myNumber = [f numberFromString:[_dictionaryForBasicPlan valueForKey:@"Sum_Assured"]];
+    double basicSumAssured = [myNumber doubleValue]/1000;
+    
+    NSLog(@"basic %f",basicSumAssured);
+    
+    NSString *javaScriptP2H1 = [NSString stringWithFormat:@"document.getElementById('HeaderPOName').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"PO_Name"]];
+    NSString *javaScriptP2H2 = [NSString stringWithFormat:@"document.getElementById('HeaderSumAssured').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"Sum_Assured"]];
+    NSString *javaScriptP2H3 = [NSString stringWithFormat:@"document.getElementById('HeaderPODOB').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"PO_DOB"]];
+    NSString *javaScriptP2H4 = [NSString stringWithFormat:@"document.getElementById('HeaderPaymentPeriode').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"Payment_Term"]];
+    NSString *javaScriptP2H5 = [NSString stringWithFormat:@"document.getElementById('HeaderLAName').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"LA_Name"]];
+    NSString *javaScriptP2H6 = [NSString stringWithFormat:@"document.getElementById('HeaderPaymentFrequency').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"Payment_Frequency"]];
+    NSString *javaScriptP2H7 = [NSString stringWithFormat:@"document.getElementById('HeaderLADOB').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"LA_DOB"]];
+    NSString *javaScriptP2H8 = [NSString stringWithFormat:@"document.getElementById('HeaderBasicPremi').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"PremiumPolicyA"]];
+    NSString *javaScriptP2H9 = [NSString stringWithFormat:@"document.getElementById('HeaderIlustrationDate').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"SIDate"]];
+    NSString *javaScriptP2H10 = [NSString stringWithFormat:@"document.getElementById('HeaderExtraPremiPercent').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"ExtraPremiumPercentage"]];
+    NSString *javaScriptP2H11 = [NSString stringWithFormat:@"document.getElementById('HeaderPOAge').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"PO_Age"]];
+    NSString *javaScriptP2H12 = [NSString stringWithFormat:@"document.getElementById('HeaderExtraPremiDuration').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"ExtraPremiumTerm"]];
+    NSString *javaScriptP2H13 = [NSString stringWithFormat:@"document.getElementById('HeaderLAAge').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"LA_Age"]];
+    NSString *javaScriptP2H14 = [NSString stringWithFormat:@"document.getElementById('HeaderExtraPremiUWLoading').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"TotalPremiumLoading"]];
+    NSString *javaScriptP2H15 = [NSString stringWithFormat:@"document.getElementById('HeaderPOAge').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"PO_Age"]];
+    NSString *javaScriptP2H16 = [NSString stringWithFormat:@"document.getElementById('HeaderPremiPay').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"LA_Occp"]];
+    
+    
+    //footer agent data
+    NSString *javaScriptF1 = [NSString stringWithFormat:@"document.getElementById('FooterAgentName').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"AgentName"]];
+    NSString *javaScriptF2 = [NSString stringWithFormat:@"document.getElementById('FooterPrintDate').innerHTML =\"%@\";",[NSDate date]];
+    NSString *javaScriptF3 = [NSString stringWithFormat:@"document.getElementById('FooterAgentCode').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"AgentCode"]];
+    NSString *javaScriptF4 = [NSString stringWithFormat:@"document.getElementById('FooterBranch').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"BranchName"]];
+    
+    [webIlustration stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"createTable(%d,%i,%f)", poAge,numberOfRow,basicSumAssured]];
+    
+    // Make the UIWebView method call
+    NSString *response = [webIlustration stringByEvaluatingJavaScriptFromString:javaScript];
+    
+    NSString *responseF1 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptF1];
+    NSString *responseF2 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptF2];
+    NSString *responseF3 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptF3];
+    NSString *responseF4 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptF4];
+    
+    NSString *responseP21 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H1];
+    NSString *responseP22 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H2];
+    NSString *responseP23 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H3];
+    NSString *responseP24 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H4];
+    NSString *responseP25 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H5];
+    NSString *responseP26 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H6];
+    NSString *responseP27 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H7];
+    NSString *responseP28 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H8];
+    NSString *responseP29 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H9];
+    NSString *responseP210 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H10];
+    NSString *responseP211 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H11];
+    NSString *responseP212 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H12];
+    NSString *responseP213 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H13];
+    NSString *responseP214 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H14];
+    NSString *responseP215 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H15];
+    NSString *responseP216 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H16];
+    
+    NSLog(@"javascript result: %@", responseF1);
+    NSLog(@"javascript result: %@", responseF2);
+    NSLog(@"javascript result: %@", responseF3);
+    NSLog(@"javascript result: %@", responseF4);
+    
+    NSLog(@"javascript result: %@", responseP21);
+    NSLog(@"javascript result: %@", responseP22);
+    NSLog(@"javascript result: %@", responseP23);
+    NSLog(@"javascript result: %@", responseP24);
+    NSLog(@"javascript result: %@", responseP25);
+    NSLog(@"javascript result: %@", responseP26);
+    NSLog(@"javascript result: %@", responseP27);
+    NSLog(@"javascript result: %@", responseP28);
+    NSLog(@"javascript result: %@", responseP29);
+    NSLog(@"javascript result: %@", responseP210);
+    NSLog(@"javascript result: %@", responseP211);
+    NSLog(@"javascript result: %@", responseP212);
+    NSLog(@"javascript result: %@", responseP213);
+    NSLog(@"javascript result: %@", responseP214);
+    NSLog(@"javascript result: %@", responseP215);
+    NSLog(@"javascript result: %@", responseP216);
+
+}
+
+-(void)setValuePage3{
+    NSString *javaScript = [NSString stringWithFormat:@"document.getElementById('SINumber').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"SINO"]];
+    
+    //footer agent data
+    NSString *javaScriptF1 = [NSString stringWithFormat:@"document.getElementById('FooterAgentName').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"AgentName"]];
+    NSString *javaScriptF2 = [NSString stringWithFormat:@"document.getElementById('FooterPrintDate').innerHTML =\"%@\";",[NSDate date]];
+    NSString *javaScriptF3 = [NSString stringWithFormat:@"document.getElementById('FooterAgentCode').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"AgentCode"]];
+    NSString *javaScriptF4 = [NSString stringWithFormat:@"document.getElementById('FooterBranch').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"BranchName"]];
+    
+    // Make the UIWebView method call
+    NSString *response = [webIlustration stringByEvaluatingJavaScriptFromString:javaScript];
+    
+    NSString *responseF1 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptF1];
+    NSString *responseF2 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptF2];
+    NSString *responseF3 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptF3];
+    NSString *responseF4 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptF4];
+    
+    NSLog(@"javascript result: %@", response);
+    
+    NSLog(@"javascript result: %@", responseF1);
+    NSLog(@"javascript result: %@", responseF2);
+    NSLog(@"javascript result: %@", responseF3);
+    NSLog(@"javascript result: %@", responseF4);
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    _dictionaryForAgentProfile = [[NSMutableDictionary alloc]initWithDictionary:[modelAgentProfile getAgentData]];
+
+    [self setValuePage1];
+    [self setValuePage2];
+    [self setValuePage3];
+    /*NSString *javaScript = [NSString stringWithFormat:@"document.getElementById('SINumber').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"SINO"]];
+
+    NSString *javaScriptP1H1 = [NSString stringWithFormat:@"document.getElementById('HeaderLAName').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"LA_Name"]];
+    NSString *javaScriptP1H2 = [NSString stringWithFormat:@"document.getElementById('HeaderLASex').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"LA_Gender"]];
+    NSString *javaScriptP1H3 = [NSString stringWithFormat:@"document.getElementById('HeaderLADOB').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"LA_DOB"]];
+    NSString *javaScriptP1H4 = [NSString stringWithFormat:@"document.getElementById('HeaderOccupation').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"LA_Occp"]];
+    NSString *javaScriptP1H5 = [NSString stringWithFormat:@"document.getElementById('HeaderPaymentPeriode').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"Payment_Term"]];
+    NSString *javaScriptP1H6 = [NSString stringWithFormat:@"document.getElementById('HeaderPaymentFrequency').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"Payment_Frequency"]];
+    
+    NSString *javaScriptP2H1 = [NSString stringWithFormat:@"document.getElementById('HeaderPOName').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"PO_Name"]];
+    NSString *javaScriptP2H2 = [NSString stringWithFormat:@"document.getElementById('HeaderSumAssured').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"Sum_Assured"]];
+    NSString *javaScriptP2H3 = [NSString stringWithFormat:@"document.getElementById('HeaderPODOB').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"PO_DOB"]];
+    NSString *javaScriptP2H4 = [NSString stringWithFormat:@"document.getElementById('HeaderPaymentPeriode').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"Payment_Term"]];
+    NSString *javaScriptP2H5 = [NSString stringWithFormat:@"document.getElementById('HeaderLAName').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"LA_Name"]];
+    NSString *javaScriptP2H6 = [NSString stringWithFormat:@"document.getElementById('HeaderPaymentFrequency').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"Payment_Frequency"]];
+    NSString *javaScriptP2H7 = [NSString stringWithFormat:@"document.getElementById('HeaderLADOB').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"LA_DOB"]];
+    NSString *javaScriptP2H8 = [NSString stringWithFormat:@"document.getElementById('HeaderBasicPremi').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"PremiumPolicyA"]];
+    NSString *javaScriptP2H9 = [NSString stringWithFormat:@"document.getElementById('HeaderIlustrationDate').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"SIDate"]];
+    NSString *javaScriptP2H10 = [NSString stringWithFormat:@"document.getElementById('HeaderExtraPremiPercent').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"ExtraPremiumPercentage"]];
+    NSString *javaScriptP2H11 = [NSString stringWithFormat:@"document.getElementById('HeaderPOAge').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"PO_Age"]];
+    NSString *javaScriptP2H12 = [NSString stringWithFormat:@"document.getElementById('HeaderExtraPremiDuration').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"ExtraPremiumTerm"]];
+    NSString *javaScriptP2H13 = [NSString stringWithFormat:@"document.getElementById('HeaderLAAge').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"LA_Age"]];
+    NSString *javaScriptP2H14 = [NSString stringWithFormat:@"document.getElementById('HeaderExtraPremiUWLoading').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"TotalPremiumLoading"]];
+    NSString *javaScriptP2H15 = [NSString stringWithFormat:@"document.getElementById('HeaderPOAge').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"PO_Age"]];
+    NSString *javaScriptP2H16 = [NSString stringWithFormat:@"document.getElementById('HeaderPremiPay').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"LA_Occp"]];
+    
+    
+    //footer agent data
+    NSString *javaScriptF1 = [NSString stringWithFormat:@"document.getElementById('FooterAgentName').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"AgentName"]];
+    NSString *javaScriptF2 = [NSString stringWithFormat:@"document.getElementById('FooterPrintDate').innerHTML =\"%@\";",[NSDate date]];
+    NSString *javaScriptF3 = [NSString stringWithFormat:@"document.getElementById('FooterAgentCode').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"AgentCode"]];
+    NSString *javaScriptF4 = [NSString stringWithFormat:@"document.getElementById('FooterBranch').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"BranchName"]];
+    
+    // Make the UIWebView method call
+    NSString *response = [webView stringByEvaluatingJavaScriptFromString:javaScript];
+    
+    NSString *response1 = [webView stringByEvaluatingJavaScriptFromString:javaScriptP1H1];
+    NSString *response2 = [webView stringByEvaluatingJavaScriptFromString:javaScriptP1H2];
+    NSString *response3 = [webView stringByEvaluatingJavaScriptFromString:javaScriptP1H3];
+    NSString *response4 = [webView stringByEvaluatingJavaScriptFromString:javaScriptP1H4];
+    NSString *response5 = [webView stringByEvaluatingJavaScriptFromString:javaScriptP1H5];
+    NSString *response6 = [webView stringByEvaluatingJavaScriptFromString:javaScriptP1H6];
+
+    NSString *responseF1 = [webView stringByEvaluatingJavaScriptFromString:javaScriptF1];
+    NSString *responseF2 = [webView stringByEvaluatingJavaScriptFromString:javaScriptF2];
+    NSString *responseF3 = [webView stringByEvaluatingJavaScriptFromString:javaScriptF3];
+    NSString *responseF4 = [webView stringByEvaluatingJavaScriptFromString:javaScriptF4];
+    
+    NSString *responseP21 = [webView stringByEvaluatingJavaScriptFromString:javaScriptP2H1];
+    NSString *responseP22 = [webView stringByEvaluatingJavaScriptFromString:javaScriptP2H2];
+    NSString *responseP23 = [webView stringByEvaluatingJavaScriptFromString:javaScriptP2H3];
+    NSString *responseP24 = [webView stringByEvaluatingJavaScriptFromString:javaScriptP2H4];
+    NSString *responseP25 = [webView stringByEvaluatingJavaScriptFromString:javaScriptP2H5];
+    NSString *responseP26 = [webView stringByEvaluatingJavaScriptFromString:javaScriptP2H6];
+    NSString *responseP27 = [webView stringByEvaluatingJavaScriptFromString:javaScriptP2H7];
+    NSString *responseP28 = [webView stringByEvaluatingJavaScriptFromString:javaScriptP2H8];
+    NSString *responseP29 = [webView stringByEvaluatingJavaScriptFromString:javaScriptP2H9];
+    NSString *responseP210 = [webView stringByEvaluatingJavaScriptFromString:javaScriptP2H10];
+    NSString *responseP211 = [webView stringByEvaluatingJavaScriptFromString:javaScriptP2H11];
+    NSString *responseP212 = [webView stringByEvaluatingJavaScriptFromString:javaScriptP2H12];
+    NSString *responseP213 = [webView stringByEvaluatingJavaScriptFromString:javaScriptP2H13];
+    NSString *responseP214 = [webView stringByEvaluatingJavaScriptFromString:javaScriptP2H14];
+    NSString *responseP215 = [webView stringByEvaluatingJavaScriptFromString:javaScriptP2H15];
+    NSString *responseP216 = [webView stringByEvaluatingJavaScriptFromString:javaScriptP2H16];
+    
+    NSLog(@"javascript result: %@", response);
+    NSLog(@"javascript result: %@", response1);
+    NSLog(@"javascript result: %@", response2);
+    NSLog(@"javascript result: %@", response3);
+    NSLog(@"javascript result: %@", response4);
+    NSLog(@"javascript result: %@", response5);
+    NSLog(@"javascript result: %@", response6);
+
+    NSLog(@"javascript result: %@", responseF1);
+    NSLog(@"javascript result: %@", responseF2);
+    NSLog(@"javascript result: %@", responseF3);
+    NSLog(@"javascript result: %@", responseF4);
+    
+    NSLog(@"javascript result: %@", responseP21);
+    NSLog(@"javascript result: %@", responseP22);
+    NSLog(@"javascript result: %@", responseP23);
+    NSLog(@"javascript result: %@", responseP24);
+    NSLog(@"javascript result: %@", responseP25);
+    NSLog(@"javascript result: %@", responseP26);
+    NSLog(@"javascript result: %@", responseP27);
+    NSLog(@"javascript result: %@", responseP28);
+    NSLog(@"javascript result: %@", responseP29);
+    NSLog(@"javascript result: %@", responseP210);
+    NSLog(@"javascript result: %@", responseP211);
+    NSLog(@"javascript result: %@", responseP212);
+    NSLog(@"javascript result: %@", responseP213);
+    NSLog(@"javascript result: %@", responseP214);
+    NSLog(@"javascript result: %@", responseP215);
+    NSLog(@"javascript result: %@", responseP216);*/
+}
 /*
 #pragma mark - Navigation
 

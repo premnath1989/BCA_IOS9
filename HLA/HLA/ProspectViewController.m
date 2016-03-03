@@ -367,6 +367,25 @@ bool RegDatehandling;
 
 #pragma mark - added by faiz
 /*code added by faiz*/
+
+-(IBAction)textFieldDidChangeEditing:(UITextField *)sender{
+    if (sender==txtPrefix2){
+        if ([sender.text length]>=4){
+            [txtContact2 becomeFirstResponder];
+        }
+    }
+    else if (sender==txtPrefix3){
+        if ([sender.text length]>=4){
+            [txtContact3 becomeFirstResponder];
+        }
+    }
+    else if (sender==txtPrefix4){
+        if ([sender.text length]>=4){
+            [txtContact4 becomeFirstResponder];
+        }
+    }
+}
+
 -(void)addressChange{
     [txtHomeAddr1 addTarget:self action:@selector(detectFilled:) forControlEvents:UIControlEventEditingDidEnd];
     [txtHomeAddr2 addTarget:self action:@selector(detectFilled:) forControlEvents:UIControlEventEditingDidEnd];
@@ -768,7 +787,7 @@ bool RegDatehandling;
         [txtHomeAddr1 becomeFirstResponder];
         return false;
     }
-    else if ([texthomeaddress2 isEqualToString:@""]||texthomeaddress2==NULL){
+    /*else if ([texthomeaddress2 isEqualToString:@""]||texthomeaddress2==NULL){
         [self createAlertViewAndShow:validationAlamat tag:0];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
         [txtHomeAddr2 becomeFirstResponder];
@@ -779,7 +798,7 @@ bool RegDatehandling;
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
         [txtHomeAddr3 becomeFirstResponder];
         return false;
-    }
+    }*/
     
     else if ([_switchCountryHome isOn]){
         if ([validationSet containsObject:homeCountry]||homeCountry==NULL){
@@ -1434,7 +1453,7 @@ bool RegDatehandling;
     return  [StrText rangeOfString:StrSearchTerm options:NSCaseInsensitiveSearch].location==NSNotFound?FALSE:TRUE;
 }
 
--(void)textFieldDidChange:(id) sender
+-(void)textFieldDidChange:(UITextField *) sender
 {
     BOOL gotRow = false;
     const char *dbpath = [databasePath UTF8String];
@@ -1766,7 +1785,7 @@ bool RegDatehandling;
         NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
         
-        return (([string isEqualToString:filtered])&&(newLength <= 6));
+        return (([string isEqualToString:filtered])&&(newLength <= 4));
     }
     
     if (textField == txtPrefix3) {
@@ -1777,7 +1796,7 @@ bool RegDatehandling;
         NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
         
-        return (([string isEqualToString:filtered])&&(newLength <= 6));
+        return (([string isEqualToString:filtered])&&(newLength <= 4));
     }
     
     if (textField == txtPrefix4) {
@@ -1788,7 +1807,7 @@ bool RegDatehandling;
         NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
         
-        return (([string isEqualToString:filtered])&&(newLength <= 6));
+        return (([string isEqualToString:filtered])&&(newLength <= 4));
     }
     
     if (textField == txtContact1) {
@@ -2356,11 +2375,11 @@ bool RegDatehandling;
     id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
     [activeInstance performSelector:@selector(dismissKeyboard)];
     
-    /*NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"dd/MM/yyyy"];
     NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
     
-    outletDOB.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    /*outletDOB.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     
     if([txtDOB.text isEqualToString:@""]) {
         [outletDOB setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", dateString] forState:UIControlStateNormal];
@@ -2375,7 +2394,7 @@ bool RegDatehandling;
         _SIDate.delegate = self;
         self.SIDatePopover = [[UIPopoverController alloc] initWithContentViewController:_SIDate];
     }
-    
+    _SIDate.ProspectDOB = dateString;
     [self.SIDatePopover setPopoverContentSize:CGSizeMake(300.0f, 255.0f)];
     [self.SIDatePopover presentPopoverFromRect:[sender bounds]  inView:sender permittedArrowDirections:UIPopoverArrowDirectionLeft animated:NO];
     
@@ -2396,13 +2415,17 @@ bool RegDatehandling;
     NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
     [ClientProfile setObject:@"YES" forKey:@"isNew"];
     
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+    NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
+    
     if (_SIDate == Nil) {
         UIStoryboard *clientProfileStoryBoard = [UIStoryboard storyboardWithName:@"ClientProfileStoryboard" bundle:nil];
         self.SIDate = [clientProfileStoryBoard instantiateViewControllerWithIdentifier:@"SIDate"];
         _SIDate.delegate = self;
         self.SIDatePopover = [[UIPopoverController alloc] initWithContentViewController:_SIDate];
     }
-    
+    _SIDate.ProspectDOB=dateString;
     [self.SIDatePopover setPopoverContentSize:CGSizeMake(300.0f, 255.0f)];
     [self.SIDatePopover presentPopoverFromRect:[sender bounds]  inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:NO];
 }

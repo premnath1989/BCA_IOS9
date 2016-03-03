@@ -715,6 +715,8 @@ bool WPTPD30RisDeleted = FALSE;
         [_totalPremiWithLoadingField setText:[dictPremiData valueForKey:@"TotalPremiumLoading"]];
         [_masaPembayaranButton setTitle:[dictPremiData valueForKey:@"Payment_Term"] forState:UIControlStateNormal];
         [_frekuensiPembayaranButton setTitle:[dictPremiData valueForKey:@"Payment_Frequency"] forState:UIControlStateNormal];
+
+        [_delegate setBasicPlanDictionaryWhenLoadFromList:dictPremiData];
     }
 }
 //end of added by faiz

@@ -361,6 +361,10 @@
 		43DA4BE61C770B3C0038C92C /* icon_leads_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 43DA4BE51C770B3C0038C92C /* icon_leads_2.png */; };
 		43F8B5511C81E71B006F3F6C /* SIListingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43F8B54E1C81E71A006F3F6C /* SIListingTableViewCell.xib */; };
 		43F8B5521C81E71B006F3F6C /* SIListingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F8B5501C81E71B006F3F6C /* SIListingTableViewCell.m */; };
+		43FA6C191C87CD7F0098BA47 /* eng_BCALH_Page1.html in Resources */ = {isa = PBXBuildFile; fileRef = 43FA6C161C87CD7F0098BA47 /* eng_BCALH_Page1.html */; };
+		43FA6C1A1C87CD7F0098BA47 /* eng_BCALH_Page2.html in Resources */ = {isa = PBXBuildFile; fileRef = 43FA6C171C87CD7F0098BA47 /* eng_BCALH_Page2.html */; };
+		43FA6C1B1C87CD7F0098BA47 /* eng_BCALH_Page3.html in Resources */ = {isa = PBXBuildFile; fileRef = 43FA6C181C87CD7F0098BA47 /* eng_BCALH_Page3.html */; };
+		43FA6C1D1C882D810098BA47 /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = 43FA6C1C1C882D810098BA47 /* style.css */; };
 		43FD4A041C620F3E00227F8F /* ModelVIPClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 43FD4A031C620F3E00227F8F /* ModelVIPClass.m */; };
 		5D3967981C02C89700464BCC /* HLAWPStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D3967971C02C89700464BCC /* HLAWPStoryboard.storyboard */; };
 		5D39679A1C02CA9000464BCC /* ClientProfileStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D3967991C02CA9000464BCC /* ClientProfileStoryboard.storyboard */; };
@@ -1412,6 +1416,10 @@
 		43F8B54E1C81E71A006F3F6C /* SIListingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SIListingTableViewCell.xib; sourceTree = "<group>"; };
 		43F8B54F1C81E71A006F3F6C /* SIListingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIListingTableViewCell.h; sourceTree = "<group>"; };
 		43F8B5501C81E71B006F3F6C /* SIListingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIListingTableViewCell.m; sourceTree = "<group>"; };
+		43FA6C161C87CD7F0098BA47 /* eng_BCALH_Page1.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = eng_BCALH_Page1.html; path = SI/eng_BCALH_Page1.html; sourceTree = "<group>"; };
+		43FA6C171C87CD7F0098BA47 /* eng_BCALH_Page2.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = eng_BCALH_Page2.html; path = SI/eng_BCALH_Page2.html; sourceTree = "<group>"; };
+		43FA6C181C87CD7F0098BA47 /* eng_BCALH_Page3.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = eng_BCALH_Page3.html; path = SI/eng_BCALH_Page3.html; sourceTree = "<group>"; };
+		43FA6C1C1C882D810098BA47 /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = style.css; path = SI/css/style.css; sourceTree = "<group>"; };
 		43FD4A021C620F3E00227F8F /* ModelVIPClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelVIPClass.h; sourceTree = "<group>"; };
 		43FD4A031C620F3E00227F8F /* ModelVIPClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelVIPClass.m; sourceTree = "<group>"; };
 		5D3967971C02C89700464BCC /* HLAWPStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HLAWPStoryboard.storyboard; sourceTree = "<group>"; };
@@ -3292,6 +3300,17 @@
 			name = Storyboard;
 			sourceTree = "<group>";
 		};
+		43FA6C151C87CD5D0098BA47 /* HTML USED */ = {
+			isa = PBXGroup;
+			children = (
+				43FA6C1C1C882D810098BA47 /* style.css */,
+				43FA6C161C87CD7F0098BA47 /* eng_BCALH_Page1.html */,
+				43FA6C171C87CD7F0098BA47 /* eng_BCALH_Page2.html */,
+				43FA6C181C87CD7F0098BA47 /* eng_BCALH_Page3.html */,
+			);
+			name = "HTML USED";
+			sourceTree = "<group>";
+		};
 		6A16C1811889384300F7EFFA /* FormObjects */ = {
 			isa = PBXGroup;
 			children = (
@@ -4096,6 +4115,7 @@
 		C4E9D1851612C64900016053 = {
 			isa = PBXGroup;
 			children = (
+				43FA6C151C87CD5D0098BA47 /* HTML USED */,
 				AA4EF77D1C8687DC0050CCD8 /* Brochure */,
 				AA4EF6E61C85A3F20050CCD8 /* PDFReader */,
 				178765DA1C74C25D0036F31A /* Images.xcassets */,
@@ -4939,6 +4959,7 @@
 				17A299171C60A0DB00C2537A /* HelveticaLTStd-BoldObl.otf in Resources */,
 				17A299181C60A0DB00C2537A /* HelveticaLTStd-Comp.otf in Resources */,
 				17A299191C60A0DB00C2537A /* HelveticaLTStd-Cond.otf in Resources */,
+				43FA6C1D1C882D810098BA47 /* style.css in Resources */,
 				17A2991A1C60A0DB00C2537A /* HelveticaLTStd-CondObl.otf in Resources */,
 				17A2991B1C60A0DB00C2537A /* HelveticaLTStd-ExtraComp.otf in Resources */,
 				17A2991C1C60A0DB00C2537A /* HelveticaLTStd-Light.otf in Resources */,
@@ -5037,6 +5058,7 @@
 				C486D9D2163E5466009F8F21 /* btn_SIlisting_off.png in Resources */,
 				C486D9D4163E6622009F8F21 /* Cordova.plist in Resources */,
 				C486DAB8163FB928009F8F21 /* Databases.db in Resources */,
+				43FA6C1A1C87CD7F0098BA47 /* eng_BCALH_Page2.html in Resources */,
 				EFABB36E16475A430069502B /* redBtn.png in Resources */,
 				178765DF1C75C04C0036F31A /* ProspectProfileStoryboard.storyboard in Resources */,
 				C4EF084D1648DC5C000444BA /* iphone_delete_button.png in Resources */,
@@ -5148,6 +5170,7 @@
 				6A16C1A51889410700F7EFFA /* ProposalForm in Resources */,
 				6A0B175C188A36DE00931673 /* ApplicationAuthorization in Resources */,
 				6A0B175E188A36DE00931673 /* CA in Resources */,
+				43FA6C191C87CD7F0098BA47 /* eng_BCALH_Page1.html in Resources */,
 				AA4EF74D1C85A4260050CCD8 /* Reader-Button-H@3x.png in Resources */,
 				6A0B1760188A36DE00931673 /* FF in Resources */,
 				6A0B1764188A36DE00931673 /* SupplementaryProposalForm in Resources */,
@@ -5222,6 +5245,7 @@
 				4239AEEF1946DAE200BD6F53 /* hla_use_only.png in Resources */,
 				4239AEF01946DAE200BD6F53 /* Preview_icon.png in Resources */,
 				4239AEF11946DAE200BD6F53 /* tick-snapshot.png in Resources */,
+				43FA6C1B1C87CD7F0098BA47 /* eng_BCALH_Page3.html in Resources */,
 				42B190641980F62D00B6BE34 /* delete25.png in Resources */,
 				162C3C0F1BBBD7270022CAF0 /* dbupdates in Resources */,
 				6AA6CCFD1994D70800B09730 /* CloseButton.png in Resources */,
