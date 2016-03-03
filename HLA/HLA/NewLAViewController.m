@@ -87,6 +87,13 @@ id dobtanngal;
      _planList.delegate = self;
     [self setupUIElementDefaultSetting];
     
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+    NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
+    
+    [TanggalIllustrasi setTitle:dateString forState:UIControlStateNormal];
+
+    
 //    NSString*test;
 //    NSString*test1;
 //    
@@ -171,6 +178,7 @@ id dobtanngal;
         btnProspect.enabled = NO;
         NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
         [prefs setObject:@"Yes" forKey:@"keyToLookupString"];
+
         //[_SecondLAController testing:@"Enable"];
         
         /*added by faiz*/
@@ -192,7 +200,6 @@ id dobtanngal;
         NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
         [prefs setObject:@"No" forKey:@"keyToLookupString"];
         //[_SecondLAController testing:@"Disable"];
-        
         /*added by faiz*/
         [_delegate setQuickQuoteValue:NO];
     }
