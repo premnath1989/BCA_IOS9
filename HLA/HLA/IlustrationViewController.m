@@ -30,27 +30,27 @@
 
 -(void)createPDFFile{
     NSString *path = nil;
-    path = [[NSBundle mainBundle] pathForResource:@"SI/eng_BCALH_Page1" ofType:@"html"];
+    path = [[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page1" ofType:@"html"];
 
     NSString *path2 = nil;
-    path2 = [[NSBundle mainBundle] pathForResource:@"SI/eng_BCALH_Page2" ofType:@"html"];
+    path2 = [[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page2" ofType:@"html"];
     
     NSString *path3 = nil;
-    path3 = [[NSBundle mainBundle] pathForResource:@"SI/eng_BCALH_Page3" ofType:@"html"];
+    path3 = [[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page3" ofType:@"html"];
 
-    NSURL *pathURL = [NSURL fileURLWithPath:path];
+    NSURL *pathURL = [NSURL fileURLWithPath:path] ;
     NSURL *pathURL2 = [NSURL fileURLWithPath:path2];
     NSURL *pathURL3 = [NSURL fileURLWithPath:path3];
     
     NSArray* path_forDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
     NSString* documentsDirectory = [path_forDirectory objectAtIndex:0];
     
-    NSMutableData* data = [NSMutableData dataWithContentsOfURL:pathURL];
+    NSMutableData* data = [NSMutableData dataWithContentsOfURL:pathURL3];
     NSData *data2=[NSData dataWithContentsOfURL:pathURL2];
     NSData *data3=[NSData dataWithContentsOfURL:pathURL3];
     
-    [data appendData:data2];
-    [data appendData:data3];
+    //[data appendData:data2];
+    //[data appendData:data3];
     
     [data writeToFile:[NSString stringWithFormat:@"%@/SI_Temp.html",documentsDirectory] atomically:YES];
 

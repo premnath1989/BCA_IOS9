@@ -59,9 +59,9 @@ NSMutableArray *EProArr;
 		CreatedDate = [dateFormatter stringFromDate:date];
 		
 		DayCount = [self CalculateDateCheck:CreatedDate];
-		
+        NSLog(@"daycount %d",DayCount);
 		//if (DayCount > 30) {
-        if (DayCount > 365) {
+        if (DayCount > 30) {
 			tempData = [[NSDictionary alloc] initWithObjectsAndKeys:CreatedDate, @"CreatedDate", ProspectID, @"ProspectID", nil];
 			[CDateProsArr addObject:[tempData copy]];
 		}
@@ -487,7 +487,7 @@ NSMutableArray *EProArr;
 	[df1 setTimeStyle:NSDateFormatterMediumStyle];
 	strCurrentDate = [df1 stringFromDate:FinalDate];
     
-	int hoursToAdd = 720;
+	int hoursToAdd = 2160;
 	NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
 	NSDateComponents *components = [[NSDateComponents alloc] init];
 	[components setHour:hoursToAdd];
@@ -504,7 +504,7 @@ NSMutableArray *EProArr;
 	int countdown = -[currentDate timeIntervalSinceDate:expireDate];//pay attention here.
 	int minutes = (countdown / 60) % 60;
 	int hours = (countdown / 3600) % 24;
-	int days = (countdown / 86400) % 30;
+	int days = (countdown / 86400) % 365;
 	
     if (minutes < 1 && hours < 1 && days < 1) {
 		return 31; //will delete

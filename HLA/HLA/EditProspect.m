@@ -737,9 +737,11 @@ NSMutableArray *DelGroupArr;
 - (bool)validationDataAlamat{
     bool valid=true;
     NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
+    NSArray* validationSet=[[NSArray alloc]initWithObjects:@"",@"- SELECT -",@"- Select -", nil];
     
     //validation message data alamat tempat tinggal
     NSString *validationAlamat=@"Alamat Tempat Tinggal harus diisi";
+    NSString *validationNegara=@"Negara Tempat Tinggal harus diisi";
     NSString *validationAreaTelponRumah=@"Nomor kode telepon rumah yang dimasukkan minimal 6 digit atau lebih";
     NSString *validationNumberTelponRumah=@"Nomor telepon rumah yang dimasukkan minimal 6 digit atau lebih";
     NSString *validationAreaHPUtama=@"Nomor Kode HP Utama yang dimasukkan minimal 6 digit atau lebih";
@@ -773,6 +775,9 @@ NSMutableArray *DelGroupArr;
     NSString *textprefix4=txtPrefix4.text;
     //txtcontact4
     NSString *textcontact4=txtContact4.text;
+    //outletCountry
+    NSString *homeCountry=btnHomeCountry.titleLabel.text;
+    
     if ([texthomeaddress1 isEqualToString:@""]||texthomeaddress1==NULL){
         [self createAlertViewAndShow:validationAlamat tag:0];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
@@ -790,6 +795,14 @@ NSMutableArray *DelGroupArr;
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
         [txtHomeAddr3 becomeFirstResponder];
         return false;
+    }
+    else if ([_switchCountryHome isOn]){
+        if ([validationSet containsObject:homeCountry]||homeCountry==NULL){
+            [self createAlertViewAndShow:validationNegara tag:0];
+            [btnHomeCountry setBackgroundColor:[UIColor redColor]];
+            [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+            return false;
+        }
     }
     //    else if ([textprefix1 isEqualToString:@""]||textprefix1==NULL){
     else if (![textprefix1 isEqualToString:@""]){
@@ -900,12 +913,12 @@ NSMutableArray *DelGroupArr;
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
         return false;
     }
-    else if ([textannincome isEqualToString:@""]||textannincome==NULL){
+   /* else if ([textannincome isEqualToString:@""]||textannincome==NULL){
         [self createAlertViewAndShow:validationPendapatanTahunan tag:0];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
         [txtAnnIncome becomeFirstResponder];
         return false;
-    }
+    }*/
     /*else if ([validationSet containsObject:outletsourceincome]||outletsourceincome==NULL){
         [self createAlertViewAndShow:validationSumberPenghasilan tag:0];
         [_outletSourceIncome setBackgroundColor:[UIColor redColor]];
@@ -3119,7 +3132,7 @@ NSMutableArray *DelGroupArr;
     // Convert date object to desired output format
     [expiryDateFormat setDateFormat:@"yyyy-MM-dd"];
     NSString *newExpiryDate = [expiryDateFormat stringFromDate:dateExpiry];
-    [outletExpiryDate setTitle:[[NSString stringWithFormat:@""]stringByAppendingFormat:@"%@",newExpiryDate] forState:UIControlStateNormal];
+    [outletExpiryDate setTitle:[[NSString stringWithFormat:@""]stringByAppendingFormat:@"%@",pp.IDExpirityDate] forState:UIControlStateNormal];
     
     _txtCountryOfBirth.text=pp.countryOfBirth;
     _txtHomeVillage.text=pp.HomeVillage;
@@ -3186,7 +3199,7 @@ NSMutableArray *DelGroupArr;
     // Convert date object to desired output format
     [dateFormat setDateFormat:@"yyyy-MM-dd"];
     NSString *newDOB = [dateFormat stringFromDate:date];
-    [outletDOB setTitle:[[NSString stringWithFormat:@""]stringByAppendingFormat:@"%@",newDOB] forState:UIControlStateNormal];
+    [outletDOB setTitle:[[NSString stringWithFormat:@""]stringByAppendingFormat:@"%@",pp.ProspectDOB] forState:UIControlStateNormal];
     
     outletDOB.hidden = NO;
     OtherIDType.enabled=YES;
@@ -4212,7 +4225,7 @@ NSMutableArray *DelGroupArr;
             [btnForeignHome setImage: [UIImage imageNamed:@"emptyCheckBox.png"] forState:UIControlStateNormal];
             checked = YES;
             
-            txtHomeAddr1.text = @"";
+            /*txtHomeAddr1.text = @"";
             txtHomeAddr2.text=@"";
             txtHomeAddr3.text=@"";
             txtHomePostCode.text = @"";
@@ -4221,7 +4234,7 @@ NSMutableArray *DelGroupArr;
             _txtHomeProvince.text = @"";
             txtHomeTown.text = @"";
             txtHomeState.text = @"";
-            txtHomeCountry.text = @"";
+            txtHomeCountry.text = @"";*/
             txtHomeTown.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
             txtHomeState.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
             txtHomeCountry.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
@@ -4239,7 +4252,7 @@ NSMutableArray *DelGroupArr;
             checked = NO;
             
             self.navigationItem.rightBarButtonItem.enabled = TRUE; //ENABLE DONE BUTTON
-            txtHomeAddr1.text = @"";
+            /*txtHomeAddr1.text = @"";
             txtHomeAddr2.text = @"";
             txtHomeAddr3.text = @"";
             _txtHomeVillage.text = @"";
@@ -4247,7 +4260,7 @@ NSMutableArray *DelGroupArr;
             _txtHomeProvince.text = @"";
             txtHomePostCode.text = @"";
             txtHomeTown.text = @"";
-            txtHomeState.text = @"";
+            txtHomeState.text = @"";*/
             [btnHomeCountry setTitle:@"- SELECT -" forState:UIControlStateNormal];
             btnHomeCountry.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
             txtHomeTown.backgroundColor = [UIColor whiteColor];
@@ -6858,8 +6871,8 @@ NSMutableArray *DelGroupArr;
         NSString *str_counter = [NSString stringWithFormat:@"%i",counter];
         NSString *insertSQL = [NSString stringWithFormat:
                                @"update prospect_profile set \"ProspectName\"=\'%@\', \"ProspectDOB\"=\"%@\", \"GST_registered\"=\"%@\",\"GST_registrationNo\"=\"%@\",\"GST_registrationDate\"=\"%@\",\"GST_exempted\"=\"%@\",  \"ProspectGender\"=\"%@\", \"ResidenceAddress1\"=\"%@\", \"ResidenceAddress2\"=\"%@\", \"ResidenceAddress3\"=\"%@\", \"ResidenceAddressTown\"=\"%@\", \"ResidenceAddressState\"=\"%@\", \"ResidenceAddressPostCode\"=\"%@\", \"ResidenceAddressCountry\"=\"%@\", \"OfficeAddress1\"=\"%@\", \"OfficeAddress2\"=\"%@\", \"OfficeAddress3\"=\"%@\", \"OfficeAddressTown\"=\"%@\",\"OfficeAddressState\"=\"%@\", \"OfficeAddressPostCode\"=\"%@\", \"OfficeAddressCountry\"=\"%@\", \"ProspectEmail\"= \"%@\", \"ProspectOccupationCode\"=\"%@\", \"ExactDuties\"=\"%@\", \"ProspectRemark\"=\"%@\", \"DateModified\"=%@,\"ModifiedBy\"=\"%@\", \"ProspectGroup\"=\"%@\", \"ProspectTitle\"=\"%@\", \"IDTypeNo\"=\"%@\", \"OtherIDType\"=\"%@\", \"OtherIDTypeNo\"=\"%@\", \"Smoker\"=\"%@\", \"AnnualIncome\"=\"%@\", \"BussinessType\"=\"%@\", \"Race\"=\"%@\", \"MaritalStatus\"=\"%@\", \"Nationality\"=\"%@\", \"Religion\"=\"%@\",\"ProspectProfileChangesCounter\"=\"%@\", \"Prospect_IsGrouping\"=\"%@\", \"CountryOfBirth\"=\"%@\",\"NIP\"=\"%@\",\"BranchCode\"=\"%@\",\"BranchName\"=\"%@\",\"KCU\"=\"%@\",\"ReferralSource\"=\"%@\",\"ReferralName\"=\"%@\",\"Kanwil\"=\"%@\",\"ResidenceDistrict\"=\"%@\",\"ResidenceVillage\"=\"%@\",\"ResidenceProvince\"=\"%@\",\"OfficeDistrict\"=\"%@\",\"OfficeVillage\"=\"%@\",\"OfficeProvince\"=\"%@\",\"SourceIncome\"=\"%@\",\"NPWPNo\"=\"%@\",\"ClientSegmentation\"=\"%@\",\"IDExpiryDate\"=\"%@\" where indexNo = \"%@\" "
-                                    , txtrFullName.text, newDOB,GSTRigperson,txtRigNO.text,strGstdate, GSTRigExempted,gender, txtHomeAddr1.text, txtHomeAddr2.text, txtHomeAddr3.text, txtHomeTown.text, SelectedStateCode, txtHomePostCode.text, HomeCountry, txtOfficeAddr1.text, txtOfficeAddr2.text, txtOfficeAddr3.text, txtOfficeTown.text, SelectedOfficeStateCode, txtOfficePostCode.text, OffCountry, txtEmail.text, OccupCodeSelected, txtExactDuties.text, txtRemark.text, @"datetime(\"now\", \"+8 hour\")", @"1", group, TitleCodeSelected, txtIDType.text, IDTypeCodeSelected, txtOtherIDType.text, ClientSmoker, txtAnnIncome.text, txtBussinessType.text,race, marital, nation,
-                            religion,str_counter, IsGrrouping, CountryOfBirth, txtNip.text, _outletBranchCode.titleLabel.text, _outletBranchName.titleLabel.text, txtKcu.text, outletReferralSource.titleLabel.text, txtReferralName.text, txtKanwil.text, _txtHomeDistrict.text, _txtHomeVillage.text, _txtHomeProvince.text,_txtOfficeDistrict.text, _txtOfficeVillage.text, _txtOfficeProvince.text, _outletSourceIncome.titleLabel.text, txtNPWPNo.text, _outletVIPClass.titleLabel.text,newExpiryDate, pp.ProspectID];
+                                    , txtrFullName.text, strDOB,GSTRigperson,txtRigNO.text,strGstdate, GSTRigExempted,gender, txtHomeAddr1.text, txtHomeAddr2.text, txtHomeAddr3.text, txtHomeTown.text, SelectedStateCode, txtHomePostCode.text, HomeCountry, txtOfficeAddr1.text, txtOfficeAddr2.text, txtOfficeAddr3.text, txtOfficeTown.text, SelectedOfficeStateCode, txtOfficePostCode.text, OffCountry, txtEmail.text, OccupCodeSelected, txtExactDuties.text, txtRemark.text, @"datetime(\"now\", \"+8 hour\")", @"1", group, TitleCodeSelected, txtIDType.text, IDTypeCodeSelected, txtOtherIDType.text, ClientSmoker, txtAnnIncome.text, txtBussinessType.text,race, marital, nation,
+                            religion,str_counter, IsGrrouping, CountryOfBirth, txtNip.text, _outletBranchCode.titleLabel.text, _outletBranchName.titleLabel.text, txtKcu.text, outletReferralSource.titleLabel.text, txtReferralName.text, txtKanwil.text, _txtHomeDistrict.text, _txtHomeVillage.text, _txtHomeProvince.text,_txtOfficeDistrict.text, _txtOfficeVillage.text, _txtOfficeProvince.text, _outletSourceIncome.titleLabel.text, txtNPWPNo.text, _outletVIPClass.titleLabel.text,strExpiryDate, pp.ProspectID];
 
         const char *Update_stmt = [insertSQL UTF8String];
         if(sqlite3_prepare_v2(contactDB, Update_stmt, -1, &statement, NULL) == SQLITE_OK) {
@@ -12810,7 +12823,7 @@ NSMutableArray *DelGroupArr;
         } else {
             btnHomeCountry.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         }
-        
+        [btnHomeCountry setBackgroundColor:[UIColor whiteColor]];
         [btnHomeCountry setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",theCountry] forState:UIControlStateNormal];
         [self.CountryListPopover dismissPopoverAnimated:YES];
 		
@@ -13854,7 +13867,7 @@ NSMutableArray *DelGroupArr;
         }
         else{
             outletDOB.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-            [outletDOB setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", clientDateString] forState:UIControlStateNormal];
+            [outletDOB setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", strDate] forState:UIControlStateNormal];
             [outletDOB setBackgroundColor:[UIColor clearColor]];
 
         }
@@ -13862,7 +13875,7 @@ NSMutableArray *DelGroupArr;
     
     if (isExpiryDate) {
         outletDOB.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        [outletExpiryDate setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", clientDateString] forState:UIControlStateNormal];
+        [outletExpiryDate setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", strDate] forState:UIControlStateNormal];
         [outletExpiryDate setBackgroundColor:[UIColor clearColor]];
     }
     edited = YES;

@@ -180,7 +180,7 @@
 	
 	self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:email, print, pages, Nil];
 	
-	webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 50, 1024, 728)];
+	webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, 1024, 768)];
     
     //Considering your pdf is stored in documents directory with name as "pdfFileName"
     NSURL *url = [NSURL fileURLWithPath:SIFilePath];

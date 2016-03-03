@@ -219,6 +219,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *outletBranchName;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *segReferralType;
 @property (weak, nonatomic) IBOutlet UITextField *txtNPWPNo;
+@property (weak, nonatomic) IBOutlet UISwitch *switchCountryHome;
+@property (weak, nonatomic) IBOutlet UISwitch *switchCountryOffice;
 /*end of added by faiz*/
 
 - (IBAction)ActionforRigdate:(id)sender;
