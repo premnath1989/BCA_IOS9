@@ -71,6 +71,7 @@
 
 //--request
 @property (nonatomic, assign,readwrite) int requestLAIndexNo;
+@property (nonatomic, assign,readwrite) int diffDaysValiation;
 @property (nonatomic,strong) id requestSINo;
 @property (nonatomic,strong) id requestCommDate;
 @property (nonatomic, assign,readwrite) int getLAIndexNo;

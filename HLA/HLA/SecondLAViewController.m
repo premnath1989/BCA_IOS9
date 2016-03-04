@@ -28,7 +28,7 @@ NSString *gNameSecond = @"";
 @synthesize ageField;
 @synthesize OccpLoadField;
 @synthesize CPAField;
-@synthesize PAField;
+@synthesize PAField,diffDaysValiation;
 @synthesize sex,smoker,DOB,jobDesc,age,ANB,OccpCode,occLoading,SINo,CustLastNo,CustDate,CustCode,clientName,clientID,OccpDesc,occCPA_PA, occuCode,occuDesc;
 @synthesize popOverController,requestSINo,la2ndHand,basicHand;
 @synthesize ProspectList = _ProspectList;
@@ -65,9 +65,6 @@ id dobtemp;
 	} else {
 		Editable = YES;
 	}
-    
-   
-	
  //
 //    nameField.enabled = NO;
 //    sexSegment.enabled = NO;
@@ -178,13 +175,13 @@ id dobtemp;
     if (active)
     {
         //nameField.text =@"test";
-        [nameField setBackgroundColor:[UIColor whiteColor]];
+        //[nameField setBackgroundColor:[UIColor whiteColor]];
         nameField.enabled = YES;
         _BtnTanggalLahir.enabled = true;
         ageField.enabled = false;
         sexSegment.enabled = true;
         btnOccp.enabled = true;
-        outletProspect.enabled = true;
+        outletProspect.enabled = false;
     }
 //    else if ([testing isEqualToString:@"Disable"])
     else
@@ -273,7 +270,7 @@ id dobtemp;
 }
 
 -(void)OccupDescSelected:(NSString *)OccupDesc{
-    btnOccp.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+   // btnOccp.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
     [btnOccp setTitle:OccupDesc forState:UIControlStateNormal];
     [self.OccupationListPopover dismissPopoverAnimated:YES];
 }
@@ -295,7 +292,7 @@ id dobtemp;
         }
         
 
-        _BtnTanggalLahir.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+      //  _BtnTanggalLahir.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
 
         self.btnDOB.titleLabel.textColor = [UIColor blackColor];
         [self.dobPopover dismissPopoverAnimated:YES];
@@ -450,7 +447,6 @@ id dobtemp;
         _ProspectList.delegate = self;
         self.prospectPopover = [[UIPopoverController alloc] initWithContentViewController:_ProspectList];
     }
-    
     CGRect rect = [sender frame];
     rect.origin.y = [sender frame].origin.y + 40;
     
@@ -496,14 +492,11 @@ id dobtemp;
         nameField.backgroundColor = [UIColor lightGrayColor];
         nameField.textColor = [UIColor darkGrayColor];
         sexSegment.enabled = NO;
-        
         btnDOB.enabled = NO;
         self.btnDOB.titleLabel.textColor = [UIColor darkGrayColor];
-        
         btnOccp.enabled = NO;
         self.btnOccp.titleLabel.textColor = [UIColor darkGrayColor];
-        
-		[_delegate setIsSecondLaNeeded:NO];
+        [_delegate setIsSecondLaNeeded:NO];
         QQProspect = NO;
     } else {
         
@@ -512,14 +505,11 @@ id dobtemp;
         nameField.textColor = [UIColor blackColor];
         sexSegment.enabled = YES;
         smokerSegment.enabled = YES;
-        
         btnDOB.enabled = YES;
         self.btnDOB.titleLabel.textColor = [UIColor blackColor];
-        
         btnOccp.enabled = YES;
         self.btnOccp.titleLabel.textColor = [UIColor blackColor];
-        
-		[_delegate setIsSecondLaNeeded:YES];
+        [_delegate setIsSecondLaNeeded:YES];
 		QQProspect = YES;
     }
     
@@ -532,7 +522,6 @@ id dobtemp;
     OccpLoadField.text = @"";
     CPAField.text = @"";
     PAField.text = @"";
-    
     [_delegate setIsSecondLaNeeded:YES];
 }
 
@@ -726,6 +715,18 @@ id dobtemp;
     age = 0;
         ANB = 1;
     }
+    
+    [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+    NSString *selectDate = DOB;
+    NSDate *startDate = [dateFormatter dateFromString:selectDate];
+    
+    NSDate *endDate = [dateFormatter dateFromString:dateString];
+    
+    unsigned flags = NSDayCalendarUnit;
+    NSDateComponents *difference = [[NSCalendar currentCalendar] components:flags fromDate:startDate toDate:endDate options:0];
+    
+    diffDaysValiation = [difference day];
+    
 }
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
@@ -1406,7 +1407,9 @@ id dobtemp;
     NSString *validationTanggalLahir=@"Tanggal Lahir Tertanggung harus diisi";
     NSString *validationJenisKelamin=@"Jenis Kelamin Tertanggung harus diisi";
     NSString *validationPekerjaan=@"Pekerjaan Tertanggung harus diisi";
-
+    NSString *validation70=@"Usia tidak boleh lebih dari 70 tahun";
+    NSString *validation180=@"Usia tidak boleh kurang dari 180 hari";
+    
     //outletkodecabang
     NSString* namaTertangggung=nameField.text;
     //outletnamacabang
@@ -1421,22 +1424,22 @@ id dobtemp;
         [nameField becomeFirstResponder];
         return false;
     }
-    else if(age >17)
+    else if(age >70)
     {
         [self createAlertViewAndShow:validationTanggalLahir tag:0];
-        [_BtnTanggalLahir setBackgroundColor:[UIColor redColor]];
+        //[_BtnTanggalLahir setBackgroundColor:[UIColor redColor]];
         return false;
     }
-    else if(DOBDate <180)
+    else if(diffDaysValiation <180)
     {
         [self createAlertViewAndShow:validationTanggalLahir tag:0];
-        [_BtnTanggalLahir setBackgroundColor:[UIColor redColor]];
+        //[_BtnTanggalLahir setBackgroundColor:[UIColor redColor]];
         return false;
     }
     
     else if ([validationSet containsObject:tanggalLahir]||tanggalLahir==NULL){
         [self createAlertViewAndShow:validationTanggalLahir tag:0];
-        [_BtnTanggalLahir setBackgroundColor:[UIColor redColor]];
+       // [_BtnTanggalLahir setBackgroundColor:[UIColor redColor]];
         return false;
     }
     
@@ -1457,7 +1460,6 @@ id dobtemp;
     return valid;
 }
 
-
 -(BOOL)validateSave
 {
     /*if (nameField.text.length <= 0) {
@@ -1475,7 +1477,6 @@ id dobtemp;
     } else {
         return YES;
     }*/
-    
     if (_quickQuoteEnabled){
         return [self validationDataLifeAssured];
     }
