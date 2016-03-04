@@ -1426,13 +1426,13 @@ id dobtemp;
     }
     else if(age >70)
     {
-        [self createAlertViewAndShow:validationTanggalLahir tag:0];
+        [self createAlertViewAndShow:validation70 tag:0];
         //[_BtnTanggalLahir setBackgroundColor:[UIColor redColor]];
         return false;
     }
     else if(diffDaysValiation <180)
     {
-        [self createAlertViewAndShow:validationTanggalLahir tag:0];
+        [self createAlertViewAndShow:validation180 tag:0];
         //[_BtnTanggalLahir setBackgroundColor:[UIColor redColor]];
         return false;
     }
@@ -1450,7 +1450,7 @@ id dobtemp;
 
     else if ([validationSet containsObject:occupation]||occupation==NULL){
         [self createAlertViewAndShow:validationPekerjaan tag:0];
-        [btnOccp setBackgroundColor:[UIColor redColor]];
+        //[btnOccp setBackgroundColor:[UIColor redColor]];
         return false;
     }
     else if ([validationSet containsObject:occupation]||occupation==NULL)

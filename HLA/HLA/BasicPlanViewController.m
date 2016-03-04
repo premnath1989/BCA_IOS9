@@ -275,17 +275,37 @@ bool WPTPD30RisDeleted = FALSE;
         }        
     }
     
+   
+}
+
+-(void)KeluargakuDisable
+{
     NSLog(@"%@",PlanType);
-    if ([PlanType isEqualToString:@"BCA Life Heritage"])
-    {
-    _KKLKDiskaunBtn.hidden = YES;
-    _KKLKDiskaunLbl.hidden = YES;
-    _KKLKExtraPremiDasarLBL.hidden = YES;
-    _KKLKPembelianKeBtn.hidden = YES;
-    _KKLKPembelianKeLbl.hidden = YES;
-    }
+//    if ([PlanType isEqualToString:@"BCA Life Heritage"])
+//    {
+        _KKLKDiskaunBtn.hidden = YES;
+        _KKLKDiskaunLbl.hidden = YES;
+        _KKLKExtraPremiDasarLBL.hidden = YES;
+        _KKLKPembelianKeBtn.hidden = YES;
+        _KKLKPembelianKeLbl.hidden = YES;
+//    }
 
 }
+
+-(void)KeluargakuEnable
+{
+    NSLog(@"%@",PlanType);
+    //    if ([PlanType isEqualToString:@"BCA Life Heritage"])
+    //    {
+    _KKLKDiskaunBtn.hidden = NO;
+    _KKLKDiskaunLbl.hidden = NO;
+    _KKLKExtraPremiDasarLBL.hidden = NO;
+    _KKLKPembelianKeBtn.hidden = NO;
+    _KKLKPembelianKeLbl.hidden = NO;
+    //    }
+    
+}
+
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -1001,6 +1021,47 @@ bool WPTPD30RisDeleted = FALSE;
         yearlyIncomeField.text = @"";
     } else {
         yearlyIncomeField.text = result;
+    }
+}
+
+-(void)PremiDasarIncomeChange:(id) sender
+{
+    BasisSumAssured = [yearlyIncomeField.text intValue];
+    
+    _basicPremiField.text = [_basicPremiField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    _basicPremiField.text = [_basicPremiField.text stringByReplacingOccurrencesOfString:@"," withString:@""];
+    _basicPremiField.text = [_basicPremiField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    
+    NSString *result;
+    
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc]init];
+    [formatter setMaximumFractionDigits:2];
+    [formatter setUsesGroupingSeparator:YES];
+    [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    
+    double entryFieldFloat = [_basicPremiField.text doubleValue];
+    
+    if ([_basicPremiField.text rangeOfString:@".00"].length == 3) {
+        formatter.alwaysShowsDecimalSeparator = YES;
+        result =[formatter stringFromNumber:[NSNumber numberWithDouble:entryFieldFloat]];
+        result = [result stringByAppendingFormat:@"00"];
+        
+    } else  if ([_basicPremiField.text rangeOfString:@"."].length == 1) {
+        formatter.alwaysShowsDecimalSeparator = YES;
+        result =[formatter stringFromNumber:[NSNumber numberWithDouble:entryFieldFloat]];
+        
+    } else if ([_basicPremiField.text rangeOfString:@"."].length != 1) {
+        formatter.alwaysShowsDecimalSeparator = NO;
+        result =[formatter stringFromNumber:[NSNumber numberWithDouble:entryFieldFloat]];
+        result = [result stringByAppendingFormat:@".00"];
+        
+    }
+    
+    
+    if(_basicPremiField.text.length==0) {
+        _basicPremiField.text = @"";
+    } else {
+        _basicPremiField.text = result;
     }
 }
 

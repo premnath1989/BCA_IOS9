@@ -310,6 +310,7 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *outletEAPP;
 
 - (IBAction)ActionEAPP:(id)sender;
+- (void)KeluargakuEnable;
 - (IBAction)btnPlanPressed:(id)sender;
 - (IBAction)doSavePlan:(id)sender;
 - (IBAction)S100MOPSegmentPressed:(id)sender;
@@ -321,6 +322,7 @@
 - (IBAction)quotationLangSegmentPressed:(id)sender;
 - (IBAction)KKLKPembelianKe:(id)sender;
 
+
 @property (weak, nonatomic) IBOutlet UISegmentedControl *policyTermSeg;
 
 - (int)validateSave;
@@ -329,5 +331,6 @@
 -(void)loadData;
 -(BOOL)isBasicPlanSelected;
 -(void)reloadPaymentOption;
+-(void)KeluargakuDisable;
 
 @end

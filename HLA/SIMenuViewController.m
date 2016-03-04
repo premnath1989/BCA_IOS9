@@ -403,12 +403,36 @@ BOOL isFirstLoad;
                 [self.BasicController setPayorSex:[dictionaryPOForInsert valueForKey:@"PO_Gender"]];
                 [self.BasicController setPayorAge:[[dictionaryPOForInsert valueForKey:@"PO_Age"] integerValue]];
                 [self.BasicController setPlanType:[dictionaryPOForInsert valueForKey:@"ProductName"]];
+                
+                NSString *PlanType = [dictionaryPOForInsert valueForKey:@"ProductName"];
+                
+                if([PlanType isEqualToString:@"BCA Life Heritage"])
+                {
+                    [self.BasicController KeluargakuDisable];
+                }
+                else
+                {
+                    [self.BasicController KeluargakuEnable];
+                }
+
             }
             else{
                 NSDictionary* dictPO=[_modelSIPOData getPO_DataFor:[self.requestSINo description]];
                 [self.BasicController setPayorSex:[dictPO valueForKey:@"PO_Gender"]];
                 [self.BasicController setPayorAge:[[dictPO valueForKey:@"PO_Age"] integerValue]];
                 [self.BasicController setPlanType:[dictPO valueForKey:@"ProductName"]];
+                
+                NSString *PlanType = [dictionaryPOForInsert valueForKey:@"ProductName"];
+                
+                if([PlanType isEqualToString:@"BCA Life Heritage"])
+                {
+                    [self.BasicController KeluargakuDisable];
+                }
+                else
+                {
+                    [self.BasicController KeluargakuEnable];
+                }
+
             }
 
             self.BasicController.requestSINo = [self.requestSINo description];
@@ -444,18 +468,46 @@ BOOL isFirstLoad;
             self.BasicController.MOP = getMOP;
             self.BasicController.requestEDD = getEDD;
             
+            [self.BasicController KeluargakuDisable];
+            
+            
             [self.BasicController loadData];
 
             if (!self.requestSINo){
                 [self.BasicController setPayorSex:[dictionaryPOForInsert valueForKey:@"PO_Gender"]];
                 [self.BasicController setPayorAge:[[dictionaryPOForInsert valueForKey:@"PO_Age"] integerValue]];
                 [self.BasicController setPlanType:[dictionaryPOForInsert valueForKey:@"ProductName"]];
+                
+                NSString *PlanType = [dictionaryPOForInsert valueForKey:@"ProductName"];
+                
+                if([PlanType isEqualToString:@"BCA Life Heritage"])
+                {
+                    [self.BasicController KeluargakuDisable];
+                }
+                else
+                {
+                    [self.BasicController KeluargakuEnable];
+                }
+
             }
             else{
                 NSDictionary* dictPO=[_modelSIPOData getPO_DataFor:[self.requestSINo description]];
                 [self.BasicController setPayorSex:[dictPO valueForKey:@"PO_Gender"]];
                 [self.BasicController setPayorAge:[[dictPO valueForKey:@"PO_Age"] integerValue]];
                 [self.BasicController setPlanType:[dictPO valueForKey:@"ProductName"]];
+                
+                NSString *PlanType = [dictionaryPOForInsert valueForKey:@"ProductName"];
+                
+                if([PlanType isEqualToString:@"BCA Life Heritage"])
+                {
+                    [self.BasicController KeluargakuDisable];
+                    
+                }
+                else
+                {
+                    [self.BasicController KeluargakuEnable];
+                }
+
             }
             self.BasicController.requestSINo = [self.requestSINo description];
             if (loadsView) {
