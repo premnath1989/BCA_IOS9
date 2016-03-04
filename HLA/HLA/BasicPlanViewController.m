@@ -16,6 +16,7 @@
 #import "SIObj.h"
 #import "Constants.h"
 
+
 @interface BasicPlanViewController ()
 
 @end
@@ -23,7 +24,7 @@
 @implementation BasicPlanViewController
 @synthesize btnPlan;
 @synthesize termField;
-@synthesize FrekuensiPembayaranChecking,FRekeunsiPembayaranMode;;
+@synthesize FrekuensiPembayaranChecking,FRekeunsiPembayaranMode,YearlyIncm;
 @synthesize yearlyIncomeField;
 @synthesize ExtraPremiDasarLBL;
 @synthesize ExtraPremiDasarNumberLBL;
@@ -197,6 +198,9 @@ bool WPTPD30RisDeleted = FALSE;
     }
 
     themeColour = [UIColor colorWithRed:242.0f/255.0f green:113.0f/255.0f blue:134.0f/255.0f alpha:1];
+    
+    
+    
     [yearlyIncomeField addTarget:self action:@selector(AnnualIncomeChange:) forControlEvents:UIControlEventEditingDidEnd];
     [self setTextfieldBorder];
     
@@ -985,7 +989,7 @@ bool WPTPD30RisDeleted = FALSE;
 
 -(void)AnnualIncomeChange:(id) sender
 {
-    BasisSumAssured = [yearlyIncomeField.text intValue];
+    BasisSumAssured = [(yearlyIncomeField.text) intValue];
     
     yearlyIncomeField.text = [yearlyIncomeField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     yearlyIncomeField.text = [yearlyIncomeField.text stringByReplacingOccurrencesOfString:@"," withString:@""];
@@ -3740,15 +3744,29 @@ bool WPTPD30RisDeleted = FALSE;
     NSString *validationMasaPembayaran=@"Masa Pembayaran harus diisi";
     NSString *validationFrekuensiPembayaran=@"Frekuensi Pembayaran harus diisi";
     NSString *validationMasaExtraPremi=@"Masa Extra Premi harus diisi";
+    NSString *validationUanglebih=@"Uang Pertangungan Dasar Min:Rp1,000,000,000.00 Max:Rp300,000,000,000.00";
     
     NSString* uangPertanggunganDasar=yearlyIncomeField.text;
     NSString* masaPembayaran=_masaPembayaranButton.titleLabel.text;
     NSString* frekuensiPembayaran=_frekuensiPembayaranButton.titleLabel.text;
     NSString* masaEktraPremi=_masaExtraPremiField.text;
     
+    
+    
     if ([validationSet containsObject:uangPertanggunganDasar]||uangPertanggunganDasar==NULL){
         [self createAlertViewAndShow:validationUangPertanggunganDasar tag:0];
         [yearlyIncomeField becomeFirstResponder];
+        return false;
+    }
+    else if (BasisSumAssured >3000000000000 ){
+        [self createAlertViewAndShow:validationUanglebih tag:0];
+        //[_BtnTanggalLahir setBackgroundColor:[UIColor redColor]];
+        return false;
+    }
+
+    else if ([validationSet containsObject:masaPembayaran]||masaPembayaran==NULL){
+        [self createAlertViewAndShow:validationMasaPembayaran tag:0];
+        //[_BtnTanggalLahir setBackgroundColor:[UIColor redColor]];
         return false;
     }
     else if ([validationSet containsObject:masaPembayaran]||masaPembayaran==NULL){

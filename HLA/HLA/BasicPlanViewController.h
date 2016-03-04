@@ -67,6 +67,7 @@
     NSString *prevPlanChoose;
     NSString *planHSPII;
     NSString *OccpCat,*FrekuensiPembayaranChecking,*FRekeunsiPembayaranMode;
+    NSString *YearlyIncm;
     
     int policyTermSegInt;
     int maxGycc;
@@ -116,14 +117,14 @@
 @property (nonatomic, assign) BOOL requestEDD;
 
 @property (nonatomic, assign,readwrite) int ageClient;
-@property (nonatomic, assign,readwrite) double BasisSumAssured;
+@property (nonatomic, assign,readwrite) int BasisSumAssured;
 @property(nonatomic , retain) NSString *OccpCode;
 @property (nonatomic, assign,readwrite) int OccpClass;
 @property (nonatomic, copy) NSString *SINo;
 @property (nonatomic, assign,readwrite) int idPay;
 @property (nonatomic, assign,readwrite) int idProf;
 @property (nonatomic, assign,readwrite) int PayorIndexNo;
-@property (nonatomic, copy) NSString *PayorSmoker,*FrekuensiPembayaranChecking,*FRekeunsiPembayaranMode;;
+@property (nonatomic, copy) NSString *PayorSmoker,*FrekuensiPembayaranChecking,*FRekeunsiPembayaranMode,*YearlyIncm;
 @property (nonatomic, copy) NSString *PayorSex;
 @property (nonatomic, copy) NSString *PayorDOB;
 @property (nonatomic, assign,readwrite) int PayorAge;
