@@ -349,6 +349,7 @@
 		4353C94B1C61F3A000AE1ED9 /* ModelMaritalStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 4353C94A1C61F3A000AE1ED9 /* ModelMaritalStatus.m */; };
 		4353C94E1C61F6F800AE1ED9 /* ModelReligion.m in Sources */ = {isa = PBXBuildFile; fileRef = 4353C94D1C61F6F800AE1ED9 /* ModelReligion.m */; };
 		4353C9511C61FCD000AE1ED9 /* ModelIdentificationType.m in Sources */ = {isa = PBXBuildFile; fileRef = 4353C9501C61FCD000AE1ED9 /* ModelIdentificationType.m */; };
+		437223E61C89372200D94B2F /* RateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 437223E51C89372200D94B2F /* RateModel.m */; };
 		437343151C6B1CBD001516D9 /* ReferralSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 437343141C6B1CBD001516D9 /* ReferralSource.m */; };
 		439985BB1C62F7890003B037 /* SourceIncome.m in Sources */ = {isa = PBXBuildFile; fileRef = 439985BA1C62F7890003B037 /* SourceIncome.m */; };
 		439985BE1C62F8A70003B037 /* ModelPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = 439985BD1C62F8A70003B037 /* ModelPopover.m */; };
@@ -1394,6 +1395,8 @@
 		4353C94D1C61F6F800AE1ED9 /* ModelReligion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelReligion.m; sourceTree = "<group>"; };
 		4353C94F1C61FCD000AE1ED9 /* ModelIdentificationType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelIdentificationType.h; sourceTree = "<group>"; };
 		4353C9501C61FCD000AE1ED9 /* ModelIdentificationType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelIdentificationType.m; sourceTree = "<group>"; };
+		437223E41C89372200D94B2F /* RateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RateModel.h; sourceTree = "<group>"; };
+		437223E51C89372200D94B2F /* RateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RateModel.m; sourceTree = "<group>"; };
 		437343131C6B1CBD001516D9 /* ReferralSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReferralSource.h; sourceTree = "<group>"; };
 		437343141C6B1CBD001516D9 /* ReferralSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReferralSource.m; sourceTree = "<group>"; };
 		43739B891C649F9B00A1788A /* LoginMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginMacros.h; sourceTree = "<group>"; };
@@ -3292,6 +3295,15 @@
 			name = tableViewCell;
 			sourceTree = "<group>";
 		};
+		437223E31C8936EB00D94B2F /* RATESDBModel */ = {
+			isa = PBXGroup;
+			children = (
+				437223E41C89372200D94B2F /* RateModel.h */,
+				437223E51C89372200D94B2F /* RateModel.m */,
+			);
+			name = RATESDBModel;
+			sourceTree = "<group>";
+		};
 		43739B861C6497B900A1788A /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
@@ -4121,6 +4133,7 @@
 				178765DA1C74C25D0036F31A /* Images.xcassets */,
 				43739B861C6497B900A1788A /* Storyboard */,
 				17A298F51C6091EB00C2537A /* BcaFont */,
+				437223E31C8936EB00D94B2F /* RATESDBModel */,
 				A9B8F3D11C5B5EA5005C9646 /* HLADB Model */,
 				FA24FFBA1BA025B7000D53C0 /* database */,
 				29071F021A256811002F7FB1 /* alert_block */,
@@ -5413,6 +5426,7 @@
 				C4E7C0DB172FC9CD00038FA9 /* AFPropertyListRequestOperation.m in Sources */,
 				C4E7C0DC172FC9CD00038FA9 /* AFURLConnectionOperation.m in Sources */,
 				C4E7C0DD172FC9CD00038FA9 /* AFXMLRequestOperation.m in Sources */,
+				437223E61C89372200D94B2F /* RateModel.m in Sources */,
 				C4E7C0DE172FC9CD00038FA9 /* UIImageView+AFNetworking.m in Sources */,
 				EF5B611F173C9ED900751157 /* CustomerProfile.m in Sources */,
 				EF5B612A1740B70C00751157 /* SIUtilities.m in Sources */,

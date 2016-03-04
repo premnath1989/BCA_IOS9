@@ -50,13 +50,85 @@
             return amt + "&nbsp;&nbsp;";
         }
         
-        function createTable(Age,xRow,BasicSumAssured) {
+        function removeRows(rowCount){
+            var rowTobeDeleted=24;
+            for (i = 24; i < rowCount+3; i++) {
+                var realRow = i-3;
+                var modulusResult=realRow%5;
+                if (modulusResult != 0){
+                    document.getElementById("table-Summary1").deleteRow(rowTobeDeleted);
+                }
+                else{
+                    rowTobeDeleted=rowTobeDeleted+1;
+                }
+            }
+        }
+        
+        function createTable(Age,xRow,BasicSumAssured,PaymentTerm,rateTunggal,rate5) {
             var table = document.getElementById("table-Summary1");
+            var rbFactor = 1;
+            var term = PaymentTerm;
+            var rbRate=1.5;
+            var interesRate=2.25;
+            var prevColE=0;
+            var finalRate;
+            
+            if (term == 1){
+                finalRate=rateTunggal;
+            }
+            else{
+                finalRate=rate5;
+            }
+            
             for (i = 0; i < xRow; i++) {
                 var col1Val=i+1;
                 var col2Val=Age +col1Val;
                 var col3Val=BasicSumAssured;
+                var col4Val=0;
+                if (term == 1){
+                    if (col1Val<2){
+                        rbFactor=0;
+                    }
+                    else{
+                        rbFactor=1;
+                    }
+                }
+                else{
+                    if (col1Val<3){
+                        rbFactor=0;
+                    }
+                    else{
+                        rbFactor=1;
+                    }
+                }
+                col4Val=rbFactor*((col3Val*rbRate)+(prevColE*interesRate));
+                col4Val=col4Val/1000;
+                var col5Val = col4Val + prevColE;
+                var col6Val = col3Val + col5Val;
+                var col7Val;
+                var col8Val;
+                if (col2Val == 99){
+                    col7Val = 0;
+                    col8Val = col5Val;
+                }
+                else if (col2Val>99){
+                    col8Val = 0;
+                }
+                else{
+                    var valueRate = finalRate[i];
+                    col7Val = (col3Val * valueRate)/1000;
+                    col8Val = (rateTunggal[i] * col5Val)/1000;
+                }
                 
+                var col9Val = col7Val + col8Val;
+
+                var displayCol3Val=col3Val.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+                var displayCol4Val=col4Val.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+                var displayCol5Val=col5Val.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+                var displayCol6Val=col6Val.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+                var displayCol7Val=col7Val.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+                var displayCol8Val=col8Val.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+                var displayCol9Val=col9Val.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
                 
                 var row = table.insertRow(i+4);
                 var cell1 = row.insertCell(0);
@@ -81,14 +153,17 @@
                 
                 cell1.innerHTML = col1Val;
                 cell2.innerHTML = col2Val;
-                cell3.innerHTML = col3Val;
-                cell4.innerHTML = "Cell d";
-                cell5.innerHTML = "Cell e";
-                cell6.innerHTML = "Cell f";
-                cell7.innerHTML = "Cell g";
-                cell8.innerHTML = "Cell h";
-                cell9.innerHTML = "Cell i";
+                cell3.innerHTML = displayCol3Val;
+                cell4.innerHTML = displayCol4Val;
+                cell5.innerHTML = displayCol5Val;
+                cell6.innerHTML = displayCol6Val;
+                cell7.innerHTML = displayCol7Val;
+                cell8.innerHTML = displayCol8Val;
+                cell9.innerHTML = displayCol9Val;
+                
+                prevColE=col5Val;
             }
+            removeRows(xRow);
         }
         
     </script>

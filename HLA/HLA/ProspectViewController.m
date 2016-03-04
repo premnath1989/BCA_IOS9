@@ -1774,7 +1774,7 @@ bool RegDatehandling;
         NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
         
-        return (([string isEqualToString:filtered])&&(newLength <= 6));
+        return (([string isEqualToString:filtered])&&(newLength <= 4));
     }
     
     if (textField == txtPrefix2) {

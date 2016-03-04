@@ -17,12 +17,32 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     modelAgentProfile=[[ModelAgentProfile alloc]init];
+    modelRate = [[RateModel alloc]init];
+
+    page1 = [[UIBarButtonItem alloc] initWithTitle:@"Page 1" style:UIBarButtonItemStyleBordered target:self action:@selector(page1)];
+    page2 = [[UIBarButtonItem alloc] initWithTitle:@"Page 2" style:UIBarButtonItemStyleBordered target:self action:@selector(page2)];
+    page3 = [[UIBarButtonItem alloc] initWithTitle:@"Page 3" style:UIBarButtonItemStyleBordered target:self action:@selector(page3)];
+
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:page3, page2, page1, Nil];
     self.title=@"Sales Ilustration Quotation";
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStyleBordered target:self action:@selector(closeModalWindow:) ];
     [self loadHTMLToWebView];
     //[self createPDFFile];
     // Do any additional setup after loading the view.
 }
+
+-(void)page1{
+    [webIlustration loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page1" ofType:@"html"]isDirectory:NO]]];
+}
+
+-(void)page2{
+    [webIlustration loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page2" ofType:@"html"]isDirectory:NO]]];
+}
+
+-(void)page3{
+    [webIlustration loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page3" ofType:@"html"]isDirectory:NO]]];
+}
+
 
 - (void)closeModalWindow:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -209,7 +229,7 @@
 
 -(int)calculateRowNumber:(int)Age{
     int rowNumber=0;
-    if (Age<21){
+    /*if (Age<21){
         rowNumber=20;
     }
     else{
@@ -222,22 +242,48 @@
             int addedRow = remainingAge/5;
             rowNumber=20+addedRow+1;
         }
-    }
+    }*/
+    rowNumber = 99 - Age;
     return rowNumber;
+}
+
+-(NSMutableArray *)getRate5:(int)age{
+    NSMutableArray* arrayRate=[[NSMutableArray alloc]init];
+    int rowNumber = 99 - age;
+    for (int i=1;i<rowNumber;i++){
+        [arrayRate addObject:[NSNumber numberWithLong:[modelRate getCashSurValue5Year:@"HRT" EntryAge:age PolYear:i Gender:[_dictionaryPOForInsert valueForKey:@"LA_Gender"]]]];
+    }
+    return arrayRate;
+}
+
+-(NSMutableArray *)getRateTunggal:(int)age{
+    NSMutableArray* arrayRate=[[NSMutableArray alloc]init];
+    int rowNumber = 99 - age;
+    for (int i=1;i<rowNumber;i++){
+        [arrayRate addObject:[NSNumber numberWithLong:[modelRate getCashSurValue1Year:[_dictionaryPOForInsert valueForKey:@"LA_Gender"] BasicCode:@"HRT" EntryAge:age+i]]];
+    }
+    return arrayRate;
 }
 
 -(void)setValuePage2{
     NSString *javaScript = [NSString stringWithFormat:@"document.getElementById('SINumber').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"SINO"]];
     
     int poAge=[[_dictionaryPOForInsert valueForKey:@"PO_Age"] intValue];
+    int laAge=[[_dictionaryPOForInsert valueForKey:@"LA_Age"] intValue];
     int numberOfRow=[self calculateRowNumber:poAge];
+    
     NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
     f.numberStyle = NSNumberFormatterDecimalStyle;
     NSNumber *myNumber = [f numberFromString:[_dictionaryForBasicPlan valueForKey:@"Sum_Assured"]];
     double basicSumAssured = [myNumber doubleValue]/1000;
     
-    NSLog(@"basic %f",basicSumAssured);
-    
+    int paymentTerm = 1;
+    if ([[_dictionaryForBasicPlan valueForKey:@"Payment_Term"] isEqualToString:@"Premi Tunggal"]){
+        paymentTerm = 1;
+    }
+    else{
+        paymentTerm = 5;
+    }
     NSString *javaScriptP2H1 = [NSString stringWithFormat:@"document.getElementById('HeaderPOName').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"PO_Name"]];
     NSString *javaScriptP2H2 = [NSString stringWithFormat:@"document.getElementById('HeaderSumAssured').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"Sum_Assured"]];
     NSString *javaScriptP2H3 = [NSString stringWithFormat:@"document.getElementById('HeaderPODOB').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"PO_DOB"]];
@@ -262,7 +308,10 @@
     NSString *javaScriptF3 = [NSString stringWithFormat:@"document.getElementById('FooterAgentCode').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"AgentCode"]];
     NSString *javaScriptF4 = [NSString stringWithFormat:@"document.getElementById('FooterBranch').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"BranchName"]];
     
-    [webIlustration stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"createTable(%d,%i,%f)", poAge,numberOfRow,basicSumAssured]];
+    NSMutableArray* valRate1Year=[[NSMutableArray alloc]initWithArray:[self getRateTunggal:laAge]];
+    NSString *string = [[valRate1Year valueForKey:@"description"] componentsJoinedByString:@","];
+    
+    NSString *responseTable = [webIlustration stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"createTable(%d,%i,%f,%d,[%@],[%@])", poAge,numberOfRow,basicSumAssured,paymentTerm,string,[self getRate5:laAge]]];
     
     // Make the UIWebView method call
     NSString *response = [webIlustration stringByEvaluatingJavaScriptFromString:javaScript];
@@ -289,6 +338,7 @@
     NSString *responseP215 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H15];
     NSString *responseP216 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H16];
     
+    NSLog(@"javascript result: %@", responseTable);
     NSLog(@"javascript result: %@", responseF1);
     NSLog(@"javascript result: %@", responseF2);
     NSLog(@"javascript result: %@", responseF3);
