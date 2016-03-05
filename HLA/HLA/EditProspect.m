@@ -384,6 +384,10 @@ NSMutableArray *DelGroupArr;
 -(void)setTextfieldBorder{
 
     UIFont *font= [UIFont fontWithName:@"BPreplay" size:16.0f];
+    ColorHexCode *CustomColor = [[ColorHexCode alloc] init ];
+    txtrFullName.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+    outletDOB.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+    
     for (UIView *view in [_viewPersonalInfo subviews]) {
         if ([view isKindOfClass:[UITextField class]]) {
             UITextField *textField = (UITextField *)view;
@@ -702,7 +706,7 @@ NSMutableArray *DelGroupArr;
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
         return false;
     }
-    else if ([validationSet containsObject:otheridtype]||otheridtype==NULL){
+    /*else if ([validationSet containsObject:otheridtype]||otheridtype==NULL){
         [self createAlertViewAndShow:validationJenisIdentitas tag:0];
         [OtherIDType setBackgroundColor:[UIColor redColor]];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
@@ -719,7 +723,7 @@ NSMutableArray *DelGroupArr;
         [outletExpiryDate setBackgroundColor:[UIColor redColor]];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
         return false;
-    }
+    }*/
     else if (segSmoker.selectedSegmentIndex==UISegmentedControlNoSegment){
         [self createAlertViewAndShow:validationMerokok tag:0];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
@@ -2090,7 +2094,9 @@ NSMutableArray *DelGroupArr;
 {
     [self setTextfieldBorder];
     [self setButtonImageAndTextAlignment];
-
+    
+    segGender.enabled = NO;
+    
     //GET THE OCCUPATION CODE
 	[self get_unemploy_initial];
     
@@ -2101,6 +2107,7 @@ NSMutableArray *DelGroupArr;
 	//pp.ResidenceAddressCountry  =  [self getCountryDesc:pp.ResidenceAddressCountry];
     
 	txtOtherIDType.text = pp.OtherIDTypeNo;
+    
     //CHANGE SEGMENTATION CONTROL FONT SIZE
     UIFont *font= [UIFont fontWithName:@"BPreplay" size:16.0f];
     
@@ -2358,7 +2365,7 @@ NSMutableArray *DelGroupArr;
 		}
 		else
 		{
-			segGender.enabled = YES;
+			//segGender.enabled = YES;
             NSLog(@"dob %@",pp.ProspectDOB);
 			[outletDOB setTitle:[[NSString stringWithFormat:@""]stringByAppendingFormat:@"%@",pp.ProspectDOB] forState:UIControlStateNormal];
 			outletDOB.hidden = NO;
@@ -2861,7 +2868,7 @@ NSMutableArray *DelGroupArr;
                 
                 txtDOB.hidden = YES;
                 outletDOB.hidden = NO;
-                outletDOB.enabled = YES;
+                //outletDOB.enabled = YES;
                 txtDOB.backgroundColor = [UIColor whiteColor];
 				
 				OtherIDType.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
@@ -3188,7 +3195,7 @@ NSMutableArray *DelGroupArr;
     [btnHomeCountry setTitle:pp.ResidenceAddressCountry forState:UIControlStateNormal];
     [btnOfficeCountry setTitle:pp.OfficeAddressCountry forState:UIControlStateNormal];
     
-    segGender.enabled = YES;
+    //segGender.enabled = YES;
     txtDOB.hidden=YES;
     [txtOtherIDType setEnabled:YES];
     [txtOtherIDType setBackgroundColor:[UIColor whiteColor]];
@@ -3200,7 +3207,7 @@ NSMutableArray *DelGroupArr;
     [dateFormat setDateFormat:@"yyyy-MM-dd"];
     NSString *newDOB = [dateFormat stringFromDate:date];
     [outletDOB setTitle:[[NSString stringWithFormat:@""]stringByAppendingFormat:@"%@",pp.ProspectDOB] forState:UIControlStateNormal];
-    
+    outletDOB.enabled = NO;
     outletDOB.hidden = NO;
     OtherIDType.enabled=YES;
     //end of added by faiz//
@@ -5602,7 +5609,7 @@ NSMutableArray *DelGroupArr;
         if ([[prospectprofile.OtherIDType stringByReplacingOccurrencesOfString:@" " withString:@""] isEqualToString:@"COMPANYREGISTRATIONNUMBER"] || [[prospectprofile.OtherIDType stringByReplacingOccurrencesOfString:@" " withString:@""] isEqualToString:@"CR"]) {
             segGender.enabled = NO;
         } else {
-            segGender.enabled = YES;
+            //segGender.enabled = YES;
         }
         txtDOB.hidden = YES;
     }
@@ -6118,7 +6125,7 @@ NSMutableArray *DelGroupArr;
                 
                 txtDOB.hidden = YES;
                 outletDOB.hidden = NO;
-                outletDOB.enabled = YES;
+                //outletDOB.enabled = YES;
                 txtDOB.backgroundColor = [UIColor whiteColor];
                 
                 OtherIDType.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
@@ -9276,7 +9283,7 @@ NSMutableArray *DelGroupArr;
         
         //Check if baby
         if([OccpCatCode isEqualToString:@"JUV"] && [otherIDType_trim isEqualToString:@"BIRTH CERTIFICATE"]) {
-            segGender.enabled = YES;
+            //segGender.enabled = YES;
             if(txtOtherIDType.text.length==0 && txtIDType.text.length == 0)
             {
                 rrr = [[UIAlertView alloc] initWithTitle:@" " message:@"New IC No or Other ID is required." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
@@ -11452,7 +11459,7 @@ NSMutableArray *DelGroupArr;
     else {
         //Check if baby
         if([OccpCatCode isEqualToString:@"JUV"] && [otherIDType_trim isEqualToString:@"BC"]) {
-            segGender.enabled = YES;
+            //segGender.enabled = YES;
             if(OtherIDType2.length==0 && IDType.length == 0)
             {
 				ErrMsg = @"New IC No or Other ID is required.";
@@ -13137,7 +13144,7 @@ NSMutableArray *DelGroupArr;
         txtDOB.hidden = YES;
         txtDOB.text = @"";
         outletDOB.hidden = NO;
-        outletDOB.enabled = YES;
+        //outletDOB.enabled = YES;
         [outletDOB setTitle:@"- SELECT -" forState:UIControlStateNormal];
         txtDOB.backgroundColor = [UIColor whiteColor];
         
@@ -13286,14 +13293,14 @@ NSMutableArray *DelGroupArr;
         
         outletTitle.titleLabel.textColor = [UIColor blackColor];
         outletOccup.enabled = YES;
-        segGender.enabled = YES;
+        //segGender.enabled = YES;
         segGender.selectedSegmentIndex = UISegmentedControlNoSegment;
         segSmoker.enabled = YES;
         companyCase = NO;
         txtDOB.hidden = YES;
         txtDOB.text = @"";
         outletDOB.hidden = NO;
-        outletDOB.enabled = YES;
+        //outletDOB.enabled = YES;
 		
         [outletDOB setTitle:@"- SELECT -" forState:UIControlStateNormal];
         outletDOB.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
@@ -13412,7 +13419,7 @@ NSMutableArray *DelGroupArr;
         txtDOB.hidden = YES;
         txtDOB.text = @"";
         outletDOB.hidden = NO;
-        outletDOB.enabled = YES;
+        //outletDOB.enabled = YES;
         [outletDOB setTitle:@"- SELECT -" forState:UIControlStateNormal];
         txtDOB.backgroundColor = [UIColor whiteColor];
         
@@ -13563,14 +13570,14 @@ NSMutableArray *DelGroupArr;
         outletTitle.titleLabel.textColor = [UIColor blackColor];
         
         outletOccup.enabled = YES;
-        segGender.enabled = YES;
+        //segGender.enabled = YES;
         segGender.selectedSegmentIndex = UISegmentedControlNoSegment;
         segSmoker.enabled = YES;
         companyCase = NO;
         txtDOB.hidden = YES;
         txtDOB.text = @"";
         outletDOB.hidden = NO;
-        outletDOB.enabled = YES;
+        //outletDOB.enabled = YES;
 		
         [outletDOB setTitle:@"- SELECT -" forState:UIControlStateNormal];
         outletDOB.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
@@ -13647,7 +13654,7 @@ NSMutableArray *DelGroupArr;
         txtDOB.hidden = YES;
         txtDOB.text = @"";
         outletDOB.hidden = NO;
-        outletDOB.enabled = YES;
+        //outletDOB.enabled = YES;
         [outletDOB setTitle:@"- SELECT -" forState:UIControlStateNormal]; //ENABLE DOB OUTLETS
         outletDOB.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
         

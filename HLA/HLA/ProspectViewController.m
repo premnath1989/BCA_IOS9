@@ -705,7 +705,7 @@ bool RegDatehandling;
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
         return false;
     }
-    else if ([validationSet containsObject:otheridtype]||otheridtype==NULL){
+    /*else if ([validationSet containsObject:otheridtype]||otheridtype==NULL){
         [self createAlertViewAndShow:validationJenisIdentitas tag:0];
         [OtherIDType setBackgroundColor:[UIColor redColor]];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
@@ -722,7 +722,7 @@ bool RegDatehandling;
         [outletExpiryDate setBackgroundColor:[UIColor redColor]];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
         return false;
-    }
+    }*/
     else if (segSmoker.selectedSegmentIndex==UISegmentedControlNoSegment){
         [self createAlertViewAndShow:validationMerokok tag:0];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
