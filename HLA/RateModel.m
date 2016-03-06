@@ -10,8 +10,8 @@
 
 @implementation RateModel
 
--(long)getCashSurValue5Year:(NSString *)BasicCode EntryAge:(int)entryAge PolYear:(int)polYear Gender:(NSString *)gender{
-    long Rate;
+-(double)getCashSurValue5Year:(NSString *)BasicCode EntryAge:(int)entryAge PolYear:(int)polYear Gender:(NSString *)gender{
+    double Rate;
     
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *path = [docsDir stringByAppendingPathComponent: @"BCA_Rates.sqlite"];
@@ -20,8 +20,9 @@
     [database open];
     
     FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"SELECT Rate FROM Cash_SurValue_Regular Where BasicCode = \"%@\" AND EntryAge = %i  AND PolYear = %i AND Gender = \"%@\"",BasicCode,entryAge,polYear,gender]];
+    
     while ([s next]) {
-        Rate = [s intForColumn:@"Rate"];
+        Rate = [s doubleForColumn:@"Rate"];
     }
     
     [results close];
@@ -29,8 +30,8 @@
     return Rate;
 }
 
--(long)getCashSurValue1Year:(NSString *)Gender BasicCode:(NSString *)basicCode EntryAge:(int)entryAge{
-    long Rate;
+-(double)getCashSurValue1Year:(NSString *)Gender BasicCode:(NSString *)basicCode EntryAge:(int)entryAge{
+    double Rate;
     
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *path = [docsDir stringByAppendingPathComponent: @"BCA_Rates.sqlite"];
@@ -40,7 +41,7 @@
     
     FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"SELECT \"%@\" FROM Cash_SurValue_Single Where BasicCode = \"%@\" AND EntryAge = %i",Gender,basicCode,entryAge]];
     while ([s next]) {
-        Rate = [s intForColumn:Gender];
+        Rate = [s doubleForColumn:Gender];
     }
     
     [results close];

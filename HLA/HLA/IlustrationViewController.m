@@ -24,7 +24,7 @@
     page3 = [[UIBarButtonItem alloc] initWithTitle:@"Page 3" style:UIBarButtonItemStyleBordered target:self action:@selector(page3)];
 
     self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:page3, page2, page1, Nil];
-    self.title=@"Sales Ilustration Quotation";
+    self.title=@"Ilustration";
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStyleBordered target:self action:@selector(closeModalWindow:) ];
     [self loadHTMLToWebView];
     //[self createPDFFile];
@@ -56,7 +56,7 @@
    // NSString *htmlFile = [[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page1" ofType:@"html"];
    // NSString* htmlString = [NSString stringWithContentsOfFile:htmlFile encoding:NSUTF8StringEncoding error:nil];
    // [webIlustration loadHTMLString:htmlString baseURL:nil];
-    [webIlustration loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page2" ofType:@"html"]isDirectory:NO]]];
+    [webIlustration loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page1" ofType:@"html"]isDirectory:NO]]];
 }
 
 -(void)createPDFFile{
@@ -250,8 +250,9 @@
 -(NSMutableArray *)getRate5:(int)age{
     NSMutableArray* arrayRate=[[NSMutableArray alloc]init];
     int rowNumber = 99 - age;
+    NSString *gender =[[_dictionaryPOForInsert valueForKey:@"LA_Gender"]substringToIndex:1];
     for (int i=1;i<rowNumber;i++){
-        [arrayRate addObject:[NSNumber numberWithLong:[modelRate getCashSurValue5Year:@"HRT" EntryAge:age PolYear:i Gender:[_dictionaryPOForInsert valueForKey:@"LA_Gender"]]]];
+        [arrayRate addObject:[NSNumber numberWithDouble:[modelRate getCashSurValue5Year:@"HRT" EntryAge:age PolYear:i Gender:gender]]];
     }
     return arrayRate;
 }
@@ -260,7 +261,7 @@
     NSMutableArray* arrayRate=[[NSMutableArray alloc]init];
     int rowNumber = 99 - age;
     for (int i=1;i<rowNumber;i++){
-        [arrayRate addObject:[NSNumber numberWithLong:[modelRate getCashSurValue1Year:[_dictionaryPOForInsert valueForKey:@"LA_Gender"] BasicCode:@"HRT" EntryAge:age+i]]];
+        [arrayRate addObject:[NSNumber numberWithDouble:[modelRate getCashSurValue1Year:[_dictionaryPOForInsert valueForKey:@"LA_Gender"] BasicCode:@"HRT" EntryAge:age+i]]];
     }
     return arrayRate;
 }
@@ -311,7 +312,10 @@
     NSMutableArray* valRate1Year=[[NSMutableArray alloc]initWithArray:[self getRateTunggal:laAge]];
     NSString *string = [[valRate1Year valueForKey:@"description"] componentsJoinedByString:@","];
     
-    NSString *responseTable = [webIlustration stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"createTable(%d,%i,%f,%d,[%@],[%@])", poAge,numberOfRow,basicSumAssured,paymentTerm,string,[self getRate5:laAge]]];
+    NSMutableArray* valRate5Year=[[NSMutableArray alloc]initWithArray:[self getRate5:laAge]];
+    NSString *string5Year = [[valRate5Year valueForKey:@"description"] componentsJoinedByString:@","];
+    
+    NSString *responseTable = [webIlustration stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"createTable(%d,%i,%f,%d,[%@],[%@])", poAge,numberOfRow,basicSumAssured,paymentTerm,string,string5Year]];
     
     // Make the UIWebView method call
     NSString *response = [webIlustration stringByEvaluatingJavaScriptFromString:javaScript];

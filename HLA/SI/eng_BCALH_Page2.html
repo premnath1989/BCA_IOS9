@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link href="css/style.css" rel="stylesheet" type="text/css" />
+        <link href="css/htmlStyle.css" rel="stylesheet" type="text/css" />
         <style>
             thead,table-Summary1 {
                 border: 1px solid black;
             }
             td.one {
+                font-size:14px;
                 border-style: solid;
                 border-color: black;
                 border-width: 1px;
@@ -102,13 +103,13 @@
                     }
                 }
                 col4Val=rbFactor*((col3Val*rbRate)+(prevColE*interesRate));
-                col4Val=col4Val/1000;
+                col4Val=col4Val/100;
                 var col5Val = col4Val + prevColE;
                 var col6Val = col3Val + col5Val;
                 var col7Val;
                 var col8Val;
                 if (col2Val == 99){
-                    col7Val = 0;
+                    col7Val = col3Val;
                     col8Val = col5Val;
                 }
                 else if (col2Val>99){
@@ -116,19 +117,19 @@
                 }
                 else{
                     var valueRate = finalRate[i];
-                    col7Val = (col3Val * valueRate)/1000;
-                    col8Val = (rateTunggal[i] * col5Val)/1000;
+                    col7Val = (Math.round(col3Val) * valueRate)/1000;
+                    col8Val = (rateTunggal[i] * Math.round(col5Val))/1000;
                 }
                 
                 var col9Val = col7Val + col8Val;
 
-                var displayCol3Val=col3Val.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
-                var displayCol4Val=col4Val.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
-                var displayCol5Val=col5Val.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
-                var displayCol6Val=col6Val.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
-                var displayCol7Val=col7Val.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
-                var displayCol8Val=col8Val.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
-                var displayCol9Val=col9Val.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+                var displayCol3Val=Math.round(col3Val).toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+                var displayCol4Val=Math.round(col4Val).toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+                var displayCol5Val=Math.round(col5Val).toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+                var displayCol6Val=Math.round(col6Val).toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+                var displayCol7Val=Math.round(col7Val).toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+                var displayCol8Val=Math.round(col8Val).toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+                var displayCol9Val=Math.round(col9Val).toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
                 
                 var row = table.insertRow(i+4);
                 var cell1 = row.insertCell(0);
@@ -195,52 +196,52 @@
             <!--data LA-->
             <table style="border-collapse:separate;border:0px solid black;width:100%;" >
                 <tr valign="top">
-                    <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;">Nama Pemegangn Polis :</td>
-                    <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;"><label id="HeaderPOName">Amin Suramin</label></td>
-                    <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;">Uang Pertanggungan :</td>
-                    <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;"><label id="HeaderSumAssured">1.000.000.000</label></td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;font-size:14px">Nama Pemegangn Polis :</td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;font-size:14px"><label id="HeaderPOName">Amin Suramin</label></td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;font-size:14px">Uang Pertanggungan :</td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;font-size:14px"><label id="HeaderSumAssured">1.000.000.000</label></td>
                 </tr>
                 <tr valign="top">
-                    <td style="text-align:left;padding: 0px 0px 0px 0px; ">Tanggal Lahir Pemegang Polis (dd/MM/yyyy)</td>
-                    <td style="text-align:left;padding: 0px 0px 0px 0px; "><label id="HeaderPODOB">07/07/1970</label></td>
-                    <td style="text-align:left;padding: 0px 0px 0px 0px; ">Masa Pembayaran Premi</td>
-                    <td style="text-align:left;padding: 0px 0px 0px 0px; "><label id="HeaderPaymentPeriode">5</label></td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-size:14px ">Tanggal Lahir Pemegang Polis (dd/MM/yyyy)</td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-size:14px "><label id="HeaderPODOB">07/07/1970</label></td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-size:14px ">Masa Pembayaran Premi</td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-size:14px "><label id="HeaderPaymentPeriode">5</label></td>
                 </tr>
                 <tr valign="top">
-                    <td style="text-align:left;padding: 0px 0px 0px 0px; ">Nama Tertanggung (jika berbeda)</td>
-                    <td style="text-align:left;padding: 0px 0px 0px 0px; "><label id="HeaderLAName">Budi Budiman</label></td>
-                    <td style="text-align:left;padding: 0px 0px 0px 0px; ">Frekuensi Pembayaran</td>
-                    <td style="text-align:left;padding: 0px 0px 0px 0px; "><label id="HeaderPaymentFrequency">Tahunan</label></td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-size:14px ">Nama Tertanggung (jika berbeda)</td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px; font-size:14px"><label id="HeaderLAName">Budi Budiman</label></td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-size:14px ">Frekuensi Pembayaran</td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-size:14px "><label id="HeaderPaymentFrequency">Tahunan</label></td>
                 </tr>
                 <tr valign="top">
-                    <td style="text-align:left;padding: 0px 0px 0px 0px; ">Tanggal Lahir Tertanggung (jika berbeda dengan pemegang polis) (dd/mm/yyyy) </td>
-                    <td style="text-align:left;padding: 0px 0px 0px 0px; "><label id="HeaderLADOB">07/07/1970</label></td>
-                    <td style="text-align:left;padding: 0px 0px 0px 0px; ">Premi Standard</td>
-                    <td style="text-align:left;padding: 0px 0px 0px 0px; "><label id="HeaderBasicPremi">69.560.000</label></td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-size:14px ">Tanggal Lahir Tertanggung (jika berbeda dengan pemegang polis) (dd/mm/yyyy) </td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-size:14px "><label id="HeaderLADOB">07/07/1970</label></td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-size:14px ">Premi Standard</td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-size:14px "><label id="HeaderBasicPremi">69.560.000</label></td>
                 </tr>
                 <tr valign="top">
-                    <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;">Tanggal pembuatan illustrasi :</td>
-                    <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;"><label id="HeaderIlustrationDate">18/01/2016</label></td>
-                    <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;">Extra Premi</td>
-                    <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;"><label id="HeaderExtraPremiPercent">100%</label><br/><label id="HeaderExtraPremiNumber">1</label></td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;font-size:14px">Tanggal pembuatan illustrasi :</td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;font-size:14px"><label id="HeaderIlustrationDate">18/01/2016</label></td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;font-size:14px">Extra Premi</td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;font-size:14px"><label id="HeaderExtraPremiPercent">100%</label><br/><label id="HeaderExtraPremiNumber">1</label></td>
                 </tr>
                 <tr valign="top">
-                    <td style="text-align:left;padding: 0px 0px 0px 0px; ">Usia Pemegang Polis</td>
-                    <td style="text-align:left;padding: 0px 0px 0px 0px; "><label id="HeaderPOAge">45</label></td>
-                    <td style="text-align:left;padding: 0px 0px 0px 0px; ">Durasi Extra Premi</td>
-                    <td style="text-align:left;padding: 0px 0px 0px 0px; "><label id="HeaderExtraPremiDuration">5</label></td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-size:14px ">Usia Pemegang Polis</td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-size:14px "><label id="HeaderPOAge">45</label></td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-size:14px ">Durasi Extra Premi</td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-size:14px "><label id="HeaderExtraPremiDuration">5</label></td>
                 </tr>
                 <tr valign="top">
-                    <td style="text-align:left;padding: 0px 0px 0px 0px; ">Usia Masuk Tertanggung</td>
-                    <td style="text-align:left;padding: 0px 0px 0px 0px; "><label id="HeaderLAAge">45</label></td>
-                    <td style="text-align:left;padding: 0px 0px 0px 0px; ">Extra Premi Karena UW Loading</td>
-                    <td style="text-align:left;padding: 0px 0px 0px 0px; "><label id="HeaderExtraPremiUWLoading">70.560.000</label></td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-size:14px ">Usia Masuk Tertanggung</td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-size:14px "><label id="HeaderLAAge">45</label></td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-size:14px ">Extra Premi Karena UW Loading</td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-size:14px "><label id="HeaderExtraPremiUWLoading">70.560.000</label></td>
                 </tr>
                 <tr valign="top">
-                    <td style="text-align:left;padding: 0px 0px 0px 0px; ">Jenis Kelamin</td>
-                    <td style="text-align:left;padding: 0px 0px 0px 0px; "><label id="HeaderPOAge">Pria</label></td>
-                    <td style="text-align:left;padding: 0px 0px 0px 0px; ">Total Premi Dibayar</td>
-                    <td style="text-align:left;padding: 0px 0px 0px 0px; "><label id="HeaderPremiPay">140.120.000</label></td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-size:14px ">Jenis Kelamin</td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-size:14px "><label id="HeaderPOAge">Pria</label></td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-size:14px ">Total Premi Dibayar</td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-size:14px "><label id="HeaderPremiPay">140.120.000</label></td>
                 </tr>
                 
             </table>
@@ -256,8 +257,8 @@
                         </tr>-->
                         <tr>
                             <td colspan="3"></td>
-                            <td colspan="3" style="text-align: center; border:1px solid black">Death Benefit</td>
-                            <td colspan="3" style="text-align: center; border:1px solid black">Surrender Benefit</td>
+                            <td colspan="3" style="text-align: center; border:1px solid black;font-size:14px">Death Benefit</td>
+                            <td colspan="3" style="text-align: center; border:1px solid black;font-size:14px">Surrender Benefit</td>
                         </tr>
                         <tr>
                             <td  class="contentSmall" valign="top" style="border:1px solid black; font-size:14px;text-align: center">Tahun Polis ke-</td>
@@ -288,9 +289,9 @@
                             <td  class="contentSmall" valign="top" style="border:1px solid black;font-size:14px;text-align: center">d</td>
                             <td  class="contentSmall" valign="top" style="border:1px solid black;font-size:14px;text-align: center">e</td>
                             <td  class="contentSmall" valign="top" style="border:1px solid black;font-size:14px;text-align: center">f=(c+e)</td>
-                            <td  class="contentSmall" valign="top" style="border:1px solid black;font-size:14px;text-align: center">f</td>
                             <td  class="contentSmall" valign="top" style="border:1px solid black;font-size:14px;text-align: center">g</td>
-                            <td  class="contentSmall" valign="top" style="border:1px solid black;font-size:14px;text-align: center">h=(f+g)</td>
+                            <td  class="contentSmall" valign="top" style="border:1px solid black;font-size:14px;text-align: center">h</td>
+                            <td  class="contentSmall" valign="top" style="border:1px solid black;font-size:14px;text-align: center">i=(g+h)</td>
                         </tr>
                         
                     </thead>

@@ -810,7 +810,7 @@ bool RegDatehandling;
     }
 //    else if ([textprefix1 isEqualToString:@""]||textprefix1==NULL){
     else if (![textprefix1 isEqualToString:@""]){
-        if ([txtPrefix1.text length]<6){
+        if ([txtPrefix1.text length]<4){
             [self createAlertViewAndShow:validationAreaTelponRumah tag:0];
             [ClientProfile setObject:@"NO" forKey:@"TabBar"];
             [txtPrefix1 becomeFirstResponder];
@@ -833,7 +833,7 @@ bool RegDatehandling;
         return false;
     }
     
-    if ([txtPrefix2.text length]<6){
+    if ([txtPrefix2.text length]<4){
         [self createAlertViewAndShow:validationAreaHPUtama tag:0];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
         [txtPrefix2 becomeFirstResponder];
@@ -857,7 +857,7 @@ bool RegDatehandling;
 
     //else if ([textprefix3 isEqualToString:@""]||textprefix3==NULL){
     else if (![textprefix3 isEqualToString:@""]){
-        if ([txtPrefix3.text length]<6){
+        if ([txtPrefix3.text length]<4){
             [self createAlertViewAndShow:validationAreaHP2 tag:0];
             [ClientProfile setObject:@"NO" forKey:@"TabBar"];
             [txtPrefix3 becomeFirstResponder];
@@ -875,7 +875,7 @@ bool RegDatehandling;
     }
     //else if ([textprefix4 isEqualToString:@""]||textprefix4==NULL){
     else if (![textprefix4 isEqualToString:@""]){
-        if ([txtPrefix4.text length]<6){
+        if ([txtPrefix4.text length]<4){
             [self createAlertViewAndShow:validationAreaTelponKantor tag:0];
             [ClientProfile setObject:@"NO" forKey:@"TabBar"];
             [txtPrefix4 becomeFirstResponder];

@@ -343,6 +343,7 @@
 		431F5FDF1C6D781A00A9CA6C /* BranchInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 431F5FDE1C6D781A00A9CA6C /* BranchInfo.m */; };
 		431F5FE41C6D93E800A9CA6C /* ProspectListingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 431F5FE21C6D93E800A9CA6C /* ProspectListingTableViewCell.m */; };
 		431F5FE51C6D93E800A9CA6C /* ProspectListingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 431F5FE31C6D93E800A9CA6C /* ProspectListingTableViewCell.xib */; };
+		4321B3331C8B3496006B9402 /* htmlStyle.css in Resources */ = {isa = PBXBuildFile; fileRef = 4321B3321C8B3496006B9402 /* htmlStyle.css */; };
 		4329213A1C7FFC26000D1064 /* Model_SI_Master.m in Sources */ = {isa = PBXBuildFile; fileRef = 432921391C7FFC26000D1064 /* Model_SI_Master.m */; };
 		4341B5C21C61750700357986 /* libSPSignDoc_4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4341B5C11C61750700357986 /* libSPSignDoc_4.0.a */; };
 		4353C9481C61E95000AE1ED9 /* ModelNationality.m in Sources */ = {isa = PBXBuildFile; fileRef = 4353C9471C61E95000AE1ED9 /* ModelNationality.m */; };
@@ -1384,6 +1385,7 @@
 		431F5FE11C6D93E800A9CA6C /* ProspectListingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProspectListingTableViewCell.h; sourceTree = "<group>"; };
 		431F5FE21C6D93E800A9CA6C /* ProspectListingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProspectListingTableViewCell.m; sourceTree = "<group>"; };
 		431F5FE31C6D93E800A9CA6C /* ProspectListingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProspectListingTableViewCell.xib; sourceTree = "<group>"; };
+		4321B3321C8B3496006B9402 /* htmlStyle.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = htmlStyle.css; path = SI/css/htmlStyle.css; sourceTree = "<group>"; };
 		432921381C7FFC26000D1064 /* Model_SI_Master.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model_SI_Master.h; sourceTree = "<group>"; };
 		432921391C7FFC26000D1064 /* Model_SI_Master.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Model_SI_Master.m; sourceTree = "<group>"; };
 		4341B5C11C61750700357986 /* libSPSignDoc_4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSPSignDoc_4.0.a; sourceTree = "<group>"; };
@@ -3315,6 +3317,7 @@
 		43FA6C151C87CD5D0098BA47 /* HTML USED */ = {
 			isa = PBXGroup;
 			children = (
+				4321B3321C8B3496006B9402 /* htmlStyle.css */,
 				43FA6C1C1C882D810098BA47 /* style.css */,
 				43FA6C161C87CD7F0098BA47 /* eng_BCALH_Page1.html */,
 				43FA6C171C87CD7F0098BA47 /* eng_BCALH_Page2.html */,
@@ -5288,6 +5291,7 @@
 				04B15E0D19DA8D0900FF7039 /* Client_Profile@2x.png in Resources */,
 				04B15E0E19DA8D0900FF7039 /* Bachground.png in Resources */,
 				04508E5019DD607E00B4502A /* 72-x-72.png in Resources */,
+				4321B3331C8B3496006B9402 /* htmlStyle.css in Resources */,
 				04508E5219DD609C00B4502A /* 144-x-144.png in Resources */,
 				04508E5419DE34BD00B4502A /* NewHLAHeader.png in Resources */,
 				04328CC719EBC12B005E7D32 /* house.png in Resources */,

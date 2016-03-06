@@ -487,7 +487,7 @@ NSMutableArray *EProArr;
 	[df1 setTimeStyle:NSDateFormatterMediumStyle];
 	strCurrentDate = [df1 stringFromDate:FinalDate];
     
-	int hoursToAdd = 2160;
+	int hoursToAdd = 8760;
 	NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
 	NSDateComponents *components = [[NSDateComponents alloc] init];
 	[components setHour:hoursToAdd];
