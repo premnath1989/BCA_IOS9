@@ -65,7 +65,7 @@
             }
         }
         
-        function createTable(Age,xRow,BasicSumAssured,PaymentTerm,rateTunggal,rate5) {
+        function createTable(Age,xRow,BasicSumAssured,PaymentTerm,rateTunggal,rate5,surValue) {
             var table = document.getElementById("table-Summary1");
             var rbFactor = 1;
             var term = PaymentTerm;
@@ -118,7 +118,7 @@
                 else{
                     var valueRate = finalRate[i];
                     col7Val = (Math.round(col3Val) * valueRate)/1000;
-                    col8Val = (rateTunggal[i] * Math.round(col5Val))/1000;
+                    col8Val = (surValue[i] * Math.round(col5Val))/1000;
                 }
                 
                 var col9Val = col7Val + col8Val;
@@ -234,14 +234,16 @@
                 <tr valign="top">
                     <td style="text-align:left;padding: 0px 0px 0px 0px;font-size:14px ">Usia Masuk Tertanggung</td>
                     <td style="text-align:left;padding: 0px 0px 0px 0px;font-size:14px "><label id="HeaderLAAge">45</label></td>
-                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-size:14px ">Extra Premi Karena UW Loading</td>
-                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-size:14px "><label id="HeaderExtraPremiUWLoading">70.560.000</label></td>
+                    <!--<td style="text-align:left;padding: 0px 0px 0px 0px;font-size:14px ">Extra Premi Karena UW Loading</td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-size:14px "><label id="HeaderExtraPremiUWLoading">70.560.000</label></td>-->
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-size:14px ">Total Premi Dibayar</td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-size:14px "><label id="HeaderPremiPay">140.120.000</label></td>
                 </tr>
                 <tr valign="top">
                     <td style="text-align:left;padding: 0px 0px 0px 0px;font-size:14px ">Jenis Kelamin</td>
                     <td style="text-align:left;padding: 0px 0px 0px 0px;font-size:14px "><label id="HeaderPOAge">Pria</label></td>
-                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-size:14px ">Total Premi Dibayar</td>
-                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-size:14px "><label id="HeaderPremiPay">140.120.000</label></td>
+                    <!--<td style="text-align:left;padding: 0px 0px 0px 0px;font-size:14px ">Total Premi Dibayar</td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-size:14px "><label id="HeaderPremiPay">140.120.000</label></td>-->
                 </tr>
                 
             </table>

@@ -49,5 +49,25 @@
     return Rate;
 }
 
+-(double)getCashSurValue:(NSString *)Gender BasicCode:(NSString *)basicCode EntryAge:(int)entryAge PolYear:(int)polYear{
+    double Rate;
+    
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"BCA_Rates.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"SELECT \"%@\" FROM Cash_SurValue_Single Where BasicCode = \"%@\" AND EntryAge = ((%i+%i)-1)",Gender,basicCode,entryAge,polYear]];
+    NSLog(@"surval %@",[NSString stringWithFormat:@"SELECT \"%@\" FROM Cash_SurValue_Single Where BasicCode = \"%@\" AND EntryAge = ((%i+%i)-1)",Gender,basicCode,entryAge,polYear]);
+    while ([s next]) {
+        Rate = [s doubleForColumn:Gender];
+    }
+    
+    [results close];
+    [database close];
+    return Rate;
+}
+
 
 @end

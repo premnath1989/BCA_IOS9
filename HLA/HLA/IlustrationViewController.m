@@ -266,6 +266,15 @@
     return arrayRate;
 }
 
+-(NSMutableArray *)getSurValue:(int)age{
+    NSMutableArray* arrayRate=[[NSMutableArray alloc]init];
+    int rowNumber = 99 - age;
+    for (int i=1;i<rowNumber;i++){
+        [arrayRate addObject:[NSNumber numberWithDouble:[modelRate getCashSurValue:[_dictionaryPOForInsert valueForKey:@"LA_Gender"] BasicCode:@"HRT" EntryAge:age PolYear:i]]];
+    }
+    return arrayRate;
+}
+
 -(void)setValuePage2{
     NSString *javaScript = [NSString stringWithFormat:@"document.getElementById('SINumber').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"SINO"]];
     
@@ -312,10 +321,13 @@
     NSMutableArray* valRate1Year=[[NSMutableArray alloc]initWithArray:[self getRateTunggal:laAge]];
     NSString *string = [[valRate1Year valueForKey:@"description"] componentsJoinedByString:@","];
     
+    NSMutableArray* valSurValue=[[NSMutableArray alloc]initWithArray:[self getSurValue:laAge]];
+    NSString *stringSurValue = [[valSurValue valueForKey:@"description"] componentsJoinedByString:@","];
+    
     NSMutableArray* valRate5Year=[[NSMutableArray alloc]initWithArray:[self getRate5:laAge]];
     NSString *string5Year = [[valRate5Year valueForKey:@"description"] componentsJoinedByString:@","];
     
-    NSString *responseTable = [webIlustration stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"createTable(%d,%i,%f,%d,[%@],[%@])", poAge,numberOfRow,basicSumAssured,paymentTerm,string,string5Year]];
+    NSString *responseTable = [webIlustration stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"createTable(%d,%i,%f,%d,[%@],[%@],[%@])", poAge,numberOfRow,basicSumAssured,paymentTerm,string,string5Year,stringSurValue]];
     
     // Make the UIWebView method call
     NSString *response = [webIlustration stringByEvaluatingJavaScriptFromString:javaScript];
