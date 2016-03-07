@@ -422,7 +422,10 @@
 		A1A8312219A1978D00C0302D /* P2-1-Row2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A1A8312119A1978D00C0302D /* P2-1-Row2.jpg */; };
 		A1C085D11C7DD77200A0592C /* bless final-02.png in Resources */ = {isa = PBXBuildFile; fileRef = A1C085D01C7DD77200A0592C /* bless final-02.png */; };
 		A1E3AFC219BD5F5200F332B3 /* P5-footer-B.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A1E3AFC119BD5F5200F332B3 /* P5-footer-B.jpg */; };
+		A1E3E2651C86BF6800E2C6DC /* libSPSignDoc_4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1E3E2641C86BF6800E2C6DC /* libSPSignDoc_4.0.a */; };
 		A1EE80A11C7BB7560096185C /* libSPSignDoc_4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1EE80A01C7BB7550096185C /* libSPSignDoc_4.0.a */; };
+		A1EEF9591C8D8E520016BB3D /* Icon Brochure & save as-01-03.png in Resources */ = {isa = PBXBuildFile; fileRef = A1EEF9571C8D8E520016BB3D /* Icon Brochure & save as-01-03.png */; };
+		A1EEF95A1C8D8E520016BB3D /* Icon Brochure & save as-01-04.png in Resources */ = {isa = PBXBuildFile; fileRef = A1EEF9581C8D8E520016BB3D /* Icon Brochure & save as-01-04.png */; };
 		A902F5411C5A0EF6001D6EC0 /* libSPSignDoc_4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A902F5401C5A0EF6001D6EC0 /* libSPSignDoc_4.0.a */; };
 		A9B8F3D41C5B5EE2005C9646 /* ModelProspectProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = A9B8F3D31C5B5EE2005C9646 /* ModelProspectProfile.m */; };
 		A9E550A21C591E8000C9DAC2 /* libSPSignDoc_4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A9E550A11C591E8000C9DAC2 /* libSPSignDoc_4.0.a */; };
@@ -1574,7 +1577,10 @@
 		A1A8312119A1978D00C0302D /* P2-1-Row2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "P2-1-Row2.jpg"; sourceTree = "<group>"; };
 		A1C085D01C7DD77200A0592C /* bless final-02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bless final-02.png"; sourceTree = "<group>"; };
 		A1E3AFC119BD5F5200F332B3 /* P5-footer-B.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "P5-footer-B.jpg"; sourceTree = "<group>"; };
+		A1E3E2641C86BF6800E2C6DC /* libSPSignDoc_4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSPSignDoc_4.0.a; sourceTree = "<group>"; };
 		A1EE80A01C7BB7550096185C /* libSPSignDoc_4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSPSignDoc_4.0.a; sourceTree = "<group>"; };
+		A1EEF9571C8D8E520016BB3D /* Icon Brochure & save as-01-03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon Brochure & save as-01-03.png"; sourceTree = "<group>"; };
+		A1EEF9581C8D8E520016BB3D /* Icon Brochure & save as-01-04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon Brochure & save as-01-04.png"; sourceTree = "<group>"; };
 		A902F5401C5A0EF6001D6EC0 /* libSPSignDoc_4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSPSignDoc_4.0.a; sourceTree = "<group>"; };
 		A9B8F3D21C5B5EE2005C9646 /* ModelProspectProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelProspectProfile.h; sourceTree = "<group>"; };
 		A9B8F3D31C5B5EE2005C9646 /* ModelProspectProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelProspectProfile.m; sourceTree = "<group>"; };
@@ -2314,6 +2320,7 @@
 				6A002CFA1850287200161727 /* libz.dylib in Frameworks */,
 				6A002CF81850286600161727 /* libstdc++.dylib in Frameworks */,
 				6A002CF61850285600161727 /* CoreText.framework in Frameworks */,
+				A1E3E2651C86BF6800E2C6DC /* libSPSignDoc_4.0.a in Frameworks */,
 				6A002CF41850284A00161727 /* CoreFoundation.framework in Frameworks */,
 				6A002CF21850282D00161727 /* OpenGLES.framework in Frameworks */,
 				6A002CF01850280A00161727 /* Security.framework in Frameworks */,
@@ -2935,6 +2942,7 @@
 			children = (
 				4341B5C11C61750700357986 /* libSPSignDoc_4.0.a */,
 				A902F5401C5A0EF6001D6EC0 /* libSPSignDoc_4.0.a */,
+				A1E3E2641C86BF6800E2C6DC /* libSPSignDoc_4.0.a */,
 				A1EE80A01C7BB7550096185C /* libSPSignDoc_4.0.a */,
 				A9E550A11C591E8000C9DAC2 /* libSPSignDoc_4.0.a */,
 				174858B41C3E229D007BBF13 /* libSPSignDoc_4.0.a */,
@@ -4339,6 +4347,8 @@
 				A1442C511C819834009B14C9 /* Icon Brochure & save as-01-01.png */,
 				A1442C521C819834009B14C9 /* Icon Brochure & save as-01-02.png */,
 				A9E550A41C591F7900C9DAC2 /* Expand Arrow@2x.png */,
+				A1EEF9571C8D8E520016BB3D /* Icon Brochure & save as-01-03.png */,
+				A1EEF9581C8D8E520016BB3D /* Icon Brochure & save as-01-04.png */,
 				1706BD451C7169A40038D1DB /* menu_customerfactfind.png */,
 				A175F04C1C8065310077A3CB /* logo bless final-01.png */,
 				178765D81C7409F00036F31A /* menu_selectoption.png */,
@@ -5071,6 +5081,7 @@
 				43F8B5511C81E71B006F3F6C /* SIListingTableViewCell.xib in Resources */,
 				C486D9CE163E5319009F8F21 /* btn_SIlisting_on.png in Resources */,
 				C486D9D1163E5466009F8F21 /* btn_home.png in Resources */,
+				A1EEF9591C8D8E520016BB3D /* Icon Brochure & save as-01-03.png in Resources */,
 				C486D9D2163E5466009F8F21 /* btn_SIlisting_off.png in Resources */,
 				C486D9D4163E6622009F8F21 /* Cordova.plist in Resources */,
 				C486DAB8163FB928009F8F21 /* Databases.db in Resources */,
@@ -5101,6 +5112,7 @@
 				C4E5A47B168AAA89007848CE /* Profile72.png in Resources */,
 				C4E5A47C168AAA89007848CE /* Profile96.png in Resources */,
 				C4E5A47D168AAA89007848CE /* Profile128.png in Resources */,
+				A1EEF95A1C8D8E520016BB3D /* Icon Brochure & save as-01-04.png in Resources */,
 				C4E5A47E168AAA89007848CE /* SecurityQuestion16.png in Resources */,
 				AA4EF74B1C85A4260050CCD8 /* Reader-Button-H.png in Resources */,
 				C4E5A47F168AAA89007848CE /* SecurityQuestion32.png in Resources */,
