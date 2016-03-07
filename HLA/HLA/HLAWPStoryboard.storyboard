@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15A284" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15C50" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="BPreplay.otf">
@@ -172,14 +172,14 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="xlQ-6E-XPK">
-                                        <rect key="frame" x="15" y="0.0" width="80" height="80"/>
+                                        <rect key="frame" x="28" y="0.0" width="70" height="70"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="Icon Brochure &amp; save as-01-01.png"/>
+                                        <state key="normal" image="Icon Brochure &amp; save as-01-03.png"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="voa-jX-hEh">
-                                        <rect key="frame" x="103" y="0.0" width="80" height="80"/>
+                                        <rect key="frame" x="106" y="0.0" width="70" height="70"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="Icon Brochure &amp; save as-01-02.png"/>
+                                        <state key="normal" image="Icon Brochure &amp; save as-01-04.png"/>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -5268,8 +5268,8 @@
     </scenes>
     <resources>
         <image name="Expand Arrow.png" width="24" height="24"/>
-        <image name="Icon Brochure &amp; save as-01-01.png" width="506" height="506"/>
-        <image name="Icon Brochure &amp; save as-01-02.png" width="506" height="506"/>
+        <image name="Icon Brochure &amp; save as-01-03.png" width="506" height="506"/>
+        <image name="Icon Brochure &amp; save as-01-04.png" width="506" height="506"/>
         <image name="disclosure_indicator.png" width="8" height="13"/>
         <image name="emptyCheckBox.png" width="44" height="43"/>
         <image name="icon_leads_2.png" width="70" height="70"/>
