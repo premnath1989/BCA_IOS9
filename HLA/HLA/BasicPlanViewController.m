@@ -997,8 +997,8 @@ bool WPTPD30RisDeleted = FALSE;
 
 -(void)AnnualIncomeChange:(id) sender
 {
-    BasisSumAssured = [(yearlyIncomeField.text) intValue];
-    
+    BasisSumAssured = [(yearlyIncomeField.text) longLongValue];
+    NSLog(@"basicsumassured %lli",BasisSumAssured);
     yearlyIncomeField.text = [yearlyIncomeField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     yearlyIncomeField.text = [yearlyIncomeField.text stringByReplacingOccurrencesOfString:@"," withString:@""];
     yearlyIncomeField.text = [yearlyIncomeField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];

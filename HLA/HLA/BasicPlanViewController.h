@@ -117,7 +117,7 @@
 @property (nonatomic, assign) BOOL requestEDD;
 
 @property (nonatomic, assign,readwrite) int ageClient;
-@property (nonatomic, assign,readwrite) int BasisSumAssured;
+@property (nonatomic, assign,readwrite) long long BasisSumAssured;
 @property(nonatomic , retain) NSString *OccpCode;
 @property (nonatomic, assign,readwrite) int OccpClass;
 @property (nonatomic, copy) NSString *SINo;
