@@ -3759,14 +3759,22 @@ bool WPTPD30RisDeleted = FALSE;
     NSString* frekuensiPembayaran=_frekuensiPembayaranButton.titleLabel.text;
     NSString* masaEktraPremi=_masaExtraPremiField.text;
     
+    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+    f.numberStyle = NSNumberFormatterDecimalStyle;
+    NSNumber *myNumber = [f numberFromString:uangPertanggunganDasar];
     
+    long long sumAssured = [myNumber longLongValue];
+    long long maxNumber = 300000000000;
+    long long minNumber = 1000000000;
+    NSLog(@"%lld",sumAssured);
+    NSLog(@"%lld",maxNumber);
     
     if ([validationSet containsObject:uangPertanggunganDasar]||uangPertanggunganDasar==NULL){
         [self createAlertViewAndShow:validationUangPertanggunganDasar tag:0];
         [yearlyIncomeField becomeFirstResponder];
         return false;
     }
-    else if (BasisSumAssured >3000000000000 ){
+    else if ((sumAssured > maxNumber)||(sumAssured < minNumber)){
         [self createAlertViewAndShow:validationUanglebih tag:0];
         //[_BtnTanggalLahir setBackgroundColor:[UIColor redColor]];
         return false;
