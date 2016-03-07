@@ -593,17 +593,17 @@ bool WPTPD30RisDeleted = FALSE;
 -(void)PremiDasarAct
 {
     NSString*AnsuransiDasarQuery;
-
+    
     NSArray *paths2 = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docsPath2 = [paths2 objectAtIndex:0];
     NSString *path2 = [docsPath2 stringByAppendingPathComponent:@"BCA_Rates.sqlite"];
-   
+    
     FMDatabase *database = [FMDatabase databaseWithPath:path2];
     [database open];
     FMResultSet *results;
     AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM basicPremiumRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",PayorSex,@"HRT",premiType,PayorAge];
     results = [database executeQuery:AnsuransiDasarQuery];
-
+    
     NSString*RatesPremiumRate;
     double PaymentMode;
     FMDatabase *database1 = [FMDatabase databaseWithPath:path2];
@@ -629,7 +629,7 @@ bool WPTPD30RisDeleted = FALSE;
     }
     if ([FRekeunsiPembayaranMode isEqualToString:@"Bulanan"])
     {
-       PaymentMode = 0.1;
+        PaymentMode = 0.1;
     }
     
     double RatesInt = [RatesPremiumRate doubleValue];
@@ -637,13 +637,14 @@ bool WPTPD30RisDeleted = FALSE;
     
     int total =(BasisSumAssured/1000);
     
-    int test = PaymentMode * RatesInt;
+    double test = PaymentMode * RatesInt;
+    
+    double TestTotal = total * test;
     
     
-    [_basicPremiField setText:[NSString stringWithFormat:@"%d", total]];
+    [_basicPremiField setText:[NSString stringWithFormat:@"%2f", TestTotal]];
     [self PremiDasarIncomeChange:_basicPremiField.text];
 }
-
 
 -(void)PremiDasarActB
 {
