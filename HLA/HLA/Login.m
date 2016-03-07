@@ -153,7 +153,7 @@ static NSString *labelVers;
                [MBProgressHUD hideHUDForView:self.view animated:YES];
                NSLog(@"error in calling web service");
                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
-                                                               message:@"Error in connecting to Web service. You will now be logged in as offline mode."
+                                                               message:@"Anda tidak dapat menghubungi server. Anda akan diarahkan untuk offline login."
                                                               delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                alert.tag = 10;
                [alert show];
@@ -238,7 +238,7 @@ static NSString *labelVers;
             
             //You can get the error like this:
             NSString* errorMesg = ((SOAPFault *)bodyPart).simpleFaultString;
-            UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Please check your connection" message:errorMesg delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
+            UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Periksa lagi koneksi internet anda" message:errorMesg delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
             [alert show];
         }
         
@@ -368,7 +368,7 @@ static NSString *labelVers;
     
     if (txtUsername.text.length <= 0 || txtPassword.text.length <=0 ) {
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Kode Agen dan password harap di isi" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Username dan password harap di isi" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         alert.tag = USERNAME_PASSWORD_VALIDATION;
         [alert show];
     }else{
