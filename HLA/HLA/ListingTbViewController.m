@@ -314,6 +314,7 @@
     if (isFiltered == false) {
         [self resignFirstResponder];
         [self.view endEditing:TRUE];
+        
         [_delegate listing:self didSelectIndex:[_indexNo objectAtIndex:selectedIndex]
                    andName:[_NameList objectAtIndex:selectedIndex]
                     andDOB:[_DOBList objectAtIndex:selectedIndex]

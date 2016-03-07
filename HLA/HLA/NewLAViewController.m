@@ -1628,7 +1628,7 @@ id dobtanngal;
     
     results = Nil;
 
-    results = [db executeQuery:@"SELECT OccpDesc from Adm_Occp WHERE OccpCode = ?", occuCode, Nil];
+    results = [db executeQuery:@"SELECT OccpDesc from eProposal_OCCP WHERE occp_Code = ?", occuCode, Nil];
     while ([results next]) {
         NSString *occpDesc = [results stringForColumn:@"OccpDesc"] != NULL ? [results stringForColumn:@"OccpDesc"] : @"";
         occuDesc = occpDesc;
