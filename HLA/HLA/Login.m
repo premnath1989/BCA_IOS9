@@ -425,7 +425,7 @@ static NSString *labelVers;
         lblTimeRemaining.text = [NSString stringWithFormat:@"0 days"];
     }
     else {
-        lblTimeRemaining.textColor = [UIColor blackColor];
+        lblTimeRemaining.textColor = [UIColor whiteColor];
         lblTimeRemaining.text = [NSString stringWithFormat:@"%d days", dayRem];
     }
 }
