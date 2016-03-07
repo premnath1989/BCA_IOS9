@@ -78,69 +78,68 @@
     NSString *docsPath2 = [paths2 objectAtIndex:0];
     NSString *path2 = [docsPath2 stringByAppendingPathComponent:@"BCA_Rates.sqlite"];
     
-        FMDatabase *database = [FMDatabase databaseWithPath:path2];
-        [database open];
-        FMResultSet *results;
-        AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM basicPremiumRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",_PayorSex,@"HRT",@"S",_PayorAge];
-        results = [database executeQuery:AnsuransiDasarQuery];
+    FMDatabase *database = [FMDatabase databaseWithPath:path2];
+    [database open];
+    FMResultSet *results;
+    AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM basicPremiumRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",_PayorSex,@"HRT",@"S",_PayorAge];
+    results = [database executeQuery:AnsuransiDasarQuery];
     
-        NSString*RatesPremiumRate;
-        int PaymentModeYear;
-        int PaymentModeMonthly;
-        FMDatabase *database1 = [FMDatabase databaseWithPath:path2];
-        if (![database open])
-        {
-            NSLog(@"Could not open db.");
+    NSString*RatesPremiumRate;
+    int PaymentModeYear;
+    int PaymentModeMonthly;
+    FMDatabase *database1 = [FMDatabase databaseWithPath:path2];
+    if (![database open])
+    {
+        NSLog(@"Could not open db.");
+    }
+    
+    _PayorSex=@"Male";
+    
+    while([results next])
+    {
+        if ([_PayorSex isEqualToString:@"Male"]||[_PayorSex isEqualToString:@"MALE"]){
+            RatesPremiumRate  = [results stringForColumn:@"Male"];
         }
-    
-        _PayorSex=@"Male";
-    
-        while([results next])
-        {
-            if ([_PayorSex isEqualToString:@"Male"]||[_PayorSex isEqualToString:@"MALE"]){
-                RatesPremiumRate  = [results stringForColumn:@"Male"];
-            }
-            else{
-                RatesPremiumRate  = [results stringForColumn:@"Female"];
-            }
-    
+        else{
+            RatesPremiumRate  = [results stringForColumn:@"Female"];
         }
+        
+    }
+    
+    PaymentModeYear = 1;
+    PaymentModeMonthly = 0.1;
+    
+    if ([Highlight isEqualToString:@"Pembayaran Sekaligus"])
+    {
+        
+        lblAsuransiDasarSekaligus.textColor = [UIColor colorWithRed:250.0f/255.0f green:175.0f/255.0f blue:50.0f/255.0f alpha:1];
+        lblAsuransiDasarBulanan.textColor = [UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
+        lblAsuransiDasarTahunan.textColor = [UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
+    }
+    else if ([Highlight isEqualToString:@"Bulanan"])
+    {
+        
+        lblAsuransiDasarSekaligus.textColor = [UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
+        lblAsuransiDasarBulanan.textColor = [UIColor colorWithRed:250.0f/255.0f green:175.0f/255.0f blue:50.0f/255.0f alpha:1];
+        lblAsuransiDasarTahunan.textColor = [UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
+    }
+    else if ([Highlight isEqualToString:@"Tahunan"])
+    {
+        
+        lblAsuransiDasarSekaligus.textColor = [UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
+        lblAsuransiDasarBulanan.textColor = [UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
+        lblAsuransiDasarTahunan.textColor = [UIColor colorWithRed:250.0f/255.0f green:175.0f/255.0f blue:50.0f/255.0f alpha:1];
+    }
     
     
-            PaymentModeYear = 1;
-            PaymentModeMonthly = 0.1;
+    int RatesInt = [RatesPremiumRate intValue];
+    _AnssubtotalYear =(_Pertanggungan_Dasar/1000)*(PaymentModeYear * RatesInt);
+    [lblAsuransiDasarTahunan setText:[NSString stringWithFormat:@"%d", _AnssubtotalYear]];
+    [lblAsuransiDasarSekaligus setText:[NSString stringWithFormat:@"%d", _AnssubtotalYear]];
     
-         if ([Highlight isEqualToString:@"Pembayaran Sekaligus"])
-         {
-             
-             lblAsuransiDasarSekaligus.textColor = [UIColor colorWithRed:250.0f/255.0f green:175.0f/255.0f blue:50.0f/255.0f alpha:1];
-             lblAsuransiDasarBulanan.textColor = [UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
-             lblAsuransiDasarTahunan.textColor = [UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
-         }
-         else if ([Highlight isEqualToString:@"Bulanan"])
-         {
-             
-             lblAsuransiDasarSekaligus.textColor = [UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
-             lblAsuransiDasarBulanan.textColor = [UIColor colorWithRed:250.0f/255.0f green:175.0f/255.0f blue:50.0f/255.0f alpha:1];
-             lblAsuransiDasarTahunan.textColor = [UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
-         }
-         else if ([Highlight isEqualToString:@"Tahunan"])
-         {
-             
-             lblAsuransiDasarSekaligus.textColor = [UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
-             lblAsuransiDasarBulanan.textColor = [UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
-             lblAsuransiDasarTahunan.textColor = [UIColor colorWithRed:250.0f/255.0f green:175.0f/255.0f blue:50.0f/255.0f alpha:1];
-         }
-    
-    
-        int RatesInt = [RatesPremiumRate intValue];
-        _AnssubtotalYear =(_Pertanggungan_Dasar/1000)*(PaymentModeYear * RatesInt);
-        [lblAsuransiDasarTahunan setText:[NSString stringWithFormat:@"%d", _AnssubtotalYear]];
-        [lblAsuransiDasarSekaligus setText:[NSString stringWithFormat:@"%d", _AnssubtotalYear]];
-    
-        //int RatesInt = [RatesPremiumRate intValue];
-        _AnssubtotalBulan =(_Pertanggungan_Dasar/1000)*(0.1 * RatesInt);
-        [lblAsuransiDasarBulanan setText:[NSString stringWithFormat:@"%d", _AnssubtotalBulan]];
+    //int RatesInt = [RatesPremiumRate intValue];
+    _AnssubtotalBulan =(_Pertanggungan_Dasar/1000)*(0.1 * RatesInt);
+    [lblAsuransiDasarBulanan setText:[NSString stringWithFormat:@"%d", _AnssubtotalBulan]];
 
 }
 
@@ -173,6 +172,7 @@
         }
         else{
             RatesPremiumRate  = [results stringForColumn:@"Female"];
+            
         }
         
     }

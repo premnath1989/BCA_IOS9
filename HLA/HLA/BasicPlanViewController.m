@@ -204,6 +204,8 @@ bool WPTPD30RisDeleted = FALSE;
     [yearlyIncomeField addTarget:self action:@selector(AnnualIncomeChange:) forControlEvents:UIControlEventEditingDidEnd];
     [self setTextfieldBorder];
     
+    [_basicPremiField addTarget:self action:@selector(PremiDasarIncomeChange:) forControlEvents:UIControlEventEditingDidEnd];
+    
   }
 
 -(void) disableFieldsForEapp
@@ -309,7 +311,6 @@ bool WPTPD30RisDeleted = FALSE;
     //    }
     
 }
-
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -631,10 +632,16 @@ bool WPTPD30RisDeleted = FALSE;
        PaymentMode = 0.1;
     }
     
-    int RatesInt = [RatesPremiumRate intValue];
-    int total =(BasisSumAssured/1000)*(PaymentMode * RatesInt);
+    double RatesInt = [RatesPremiumRate doubleValue];
+    
+    
+    int total =(BasisSumAssured/1000);
+    
+    int test = PaymentMode * RatesInt;
+    
+    
     [_basicPremiField setText:[NSString stringWithFormat:@"%d", total]];
-
+    [self PremiDasarIncomeChange:_basicPremiField.text];
 }
 
 
@@ -1004,7 +1011,7 @@ bool WPTPD30RisDeleted = FALSE;
     
     double entryFieldFloat = [yearlyIncomeField.text doubleValue];
     
-    if ([yearlyIncomeField.text rangeOfString:@".00"].length == 3) {
+    if ([yearlyIncomeField.text rangeOfString:@""].length == 3) {
         formatter.alwaysShowsDecimalSeparator = YES;
         result =[formatter stringFromNumber:[NSNumber numberWithDouble:entryFieldFloat]];
         result = [result stringByAppendingFormat:@"00"];
@@ -1016,7 +1023,7 @@ bool WPTPD30RisDeleted = FALSE;
     } else if ([yearlyIncomeField.text rangeOfString:@"."].length != 1) {
         formatter.alwaysShowsDecimalSeparator = NO;
         result =[formatter stringFromNumber:[NSNumber numberWithDouble:entryFieldFloat]];
-        result = [result stringByAppendingFormat:@".00"];
+        result = [result stringByAppendingFormat:@""];
         
     }
     
@@ -1028,13 +1035,13 @@ bool WPTPD30RisDeleted = FALSE;
     }
 }
 
--(void)PremiDasarIncomeChange:(id) sender
+-(void)PremiDasarIncomeChange:(NSString *)BAsicPremiDasar
 {
-    BasisSumAssured = [yearlyIncomeField.text intValue];
+    //BasisSumAssured = [yearlyIncomeField.text intValue];
     
-    _basicPremiField.text = [_basicPremiField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
-    _basicPremiField.text = [_basicPremiField.text stringByReplacingOccurrencesOfString:@"," withString:@""];
-    _basicPremiField.text = [_basicPremiField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    _basicPremiField.text = [BAsicPremiDasar stringByReplacingOccurrencesOfString:@" " withString:@""];
+    _basicPremiField.text = [BAsicPremiDasar stringByReplacingOccurrencesOfString:@"," withString:@""];
+    _basicPremiField.text = [BAsicPremiDasar stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     
     NSString *result;
     
@@ -1061,8 +1068,8 @@ bool WPTPD30RisDeleted = FALSE;
         
     }
     
-    
-    if(_basicPremiField.text.length==0) {
+    if(_basicPremiField.text.length==0)
+    {
         _basicPremiField.text = @"";
     } else {
         _basicPremiField.text = result;
@@ -1110,6 +1117,7 @@ bool WPTPD30RisDeleted = FALSE;
         }
     }
 }
+
 
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
