@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ModelAgentProfile.h"
+#import "RateModel.h"
 
 //#define kPaperSizeA4 CGSizeMake(595,842) //ori
 //#define kPaperSizeLetter CGSizeMake(612,792) //ori
@@ -36,7 +38,10 @@ BOOL isExport;
 
 @end
 
-@interface NDHTMLtoPDF : UIViewController <UIWebViewDelegate>
+@interface NDHTMLtoPDF : UIViewController <UIWebViewDelegate>{
+    ModelAgentProfile* modelAgentProfile;
+    RateModel* modelRate;
+}
 
 @property (nonatomic, weak) id <NDHTMLtoPDFDelegate> delegate;
 

@@ -5,24 +5,37 @@
 //  Created by Basvi on 3/1/16.
 //  Copyright © 2016 Hong Leong Assurance. All rights reserved.
 //
+#define kPaperSizeA4 CGSizeMake(842,595)
 
 #import "IlustrationViewController.h"
 
-@interface IlustrationViewController ()
+@interface IlustrationViewController (){
+    int page;
 
+}
+
+@end
+
+@interface UIPrintPageRenderer (PDF)
+- (NSData*) printToPDF;
 @end
 
 @implementation IlustrationViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    webTemp = [[UIWebView alloc]init];
+    webTemp.delegate = self;
     modelAgentProfile=[[ModelAgentProfile alloc]init];
     modelRate = [[RateModel alloc]init];
-
+    
+    page =1;
+    
     page1 = [[UIBarButtonItem alloc] initWithTitle:@"Page 1" style:UIBarButtonItemStyleBordered target:self action:@selector(page1)];
     page2 = [[UIBarButtonItem alloc] initWithTitle:@"Page 2" style:UIBarButtonItemStyleBordered target:self action:@selector(page2)];
     page3 = [[UIBarButtonItem alloc] initWithTitle:@"Page 3" style:UIBarButtonItemStyleBordered target:self action:@selector(page3)];
-
+    page4 = [[UIBarButtonItem alloc] initWithTitle:@"Page 4" style:UIBarButtonItemStyleBordered target:self action:@selector(page4)];
+    
     self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:page3, page2, page1, Nil];
     self.title=@"Ilustration";
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStyleBordered target:self action:@selector(closeModalWindow:) ];
@@ -32,17 +45,31 @@
 }
 
 -(void)page1{
-    [webIlustration loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page1" ofType:@"html"]isDirectory:NO]]];
+    [webTemp loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page1" ofType:@"html"]isDirectory:NO]]];
+    page = 1;
 }
 
 -(void)page2{
-    [webIlustration loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page2" ofType:@"html"]isDirectory:NO]]];
+    [webTemp loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page2" ofType:@"html"]isDirectory:NO]]];
+    page = 2;
 }
 
 -(void)page3{
     [webIlustration loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page3" ofType:@"html"]isDirectory:NO]]];
+    page = 3;
 }
 
+-(void)page4{
+
+}
+
+- (void)HTMLtoPDFDidSucceed:(NDHTMLtoPDF*)htmlToPDF{
+
+}
+
+- (void)HTMLtoPDFDidFail:(NDHTMLtoPDF*)htmlToPDF{
+
+}
 
 - (void)closeModalWindow:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -53,21 +80,20 @@
 }
 
 -(void)loadHTMLToWebView{
-   // NSString *htmlFile = [[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page1" ofType:@"html"];
-   // NSString* htmlString = [NSString stringWithContentsOfFile:htmlFile encoding:NSUTF8StringEncoding error:nil];
-   // [webIlustration loadHTMLString:htmlString baseURL:nil];
-    [webIlustration loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page1" ofType:@"html"]isDirectory:NO]]];
+    [webTemp loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page1" ofType:@"html"]isDirectory:NO]]];
+    //[webIlustration loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page2" ofType:@"html"]isDirectory:NO]]];
+    //[webIlustration loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page1" ofType:@"html"]isDirectory:NO]]];
 }
 
 -(void)createPDFFile{
-    NSString *path = nil;
-    path = [[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page1" ofType:@"html"];
-
+    /*NSString *path = nil;
+    path = [NSString stringWithFormat:@"%@tmp1.pdf",NSTemporaryDirectory()];
+    
     NSString *path2 = nil;
-    path2 = [[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page2" ofType:@"html"];
+    path2 = [NSString stringWithFormat:@"%@tmp2.pdf",NSTemporaryDirectory()];
     
     NSString *path3 = nil;
-    path3 = [[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page3" ofType:@"html"];
+    path3 = [NSString stringWithFormat:@"%@tmp3.pdf",NSTemporaryDirectory()];
 
     NSURL *pathURL = [NSURL fileURLWithPath:path] ;
     NSURL *pathURL2 = [NSURL fileURLWithPath:path2];
@@ -76,53 +102,96 @@
     NSArray* path_forDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
     NSString* documentsDirectory = [path_forDirectory objectAtIndex:0];
     
-    NSMutableData* data = [NSMutableData dataWithContentsOfURL:pathURL3];
+    NSMutableData* data = [NSMutableData dataWithContentsOfURL:pathURL];
     NSData *data2=[NSData dataWithContentsOfURL:pathURL2];
     NSData *data3=[NSData dataWithContentsOfURL:pathURL3];
     
-    //[data appendData:data2];
-    //[data appendData:data3];
+    [data appendData:data3];
+    [data appendData:data2];
     
-    [data writeToFile:[NSString stringWithFormat:@"%@/SI_Temp.html",documentsDirectory] atomically:YES];
-
-    NSString *HTMLPath = [documentsDirectory stringByAppendingPathComponent:@"SI_Temp.html"];
-    if ([[NSFileManager defaultManager] fileExistsAtPath:HTMLPath]) {
-        NSURL *targetURL = [NSURL fileURLWithPath:HTMLPath];
-        // Converting HTML to PDF
-        NSString *SIPDFName = [NSString stringWithFormat:@"tes.pdf"/*,self.getSINo*/];
-        PDFCreator = [NDHTMLtoPDF createPDFWithURL:targetURL
-                                             pathForPDF:[documentsDirectory stringByAppendingPathComponent:SIPDFName]
-                                               delegate:self
-                                               pageSize:kPaperSizeA4
-                                                margins:UIEdgeInsetsMake(10, 5, 10, 5)];
+    [data writeToFile:[NSString stringWithFormat:@"%@/SI_Temp.pdf",documentsDirectory] atomically:YES];*/
+    //NSString *cacheDir = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
+    
+    // File paths
+    NSString *pdfPath1 = [NSString stringWithFormat:@"%@tmp1.pdf",NSTemporaryDirectory()];
+    NSString *pdfPath2 = [NSString stringWithFormat:@"%@tmp2.pdf",NSTemporaryDirectory()];
+    NSString *pdfPath3 = [NSString stringWithFormat:@"%@tmp3.pdf",NSTemporaryDirectory()];
+    
+    NSArray* path_forDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+    NSString* documentsDirectory = [path_forDirectory objectAtIndex:0];
+    NSString *pdfPathOutput = [NSString stringWithFormat:@"%@/SI_Temp.pdf",documentsDirectory];//[cacheDir stringByAppendingPathComponent:@"out.pdf"];
+    
+    // File URLs - bridge casting for ARC
+    CFURLRef pdfURL1 = (__bridge_retained CFURLRef)[[NSURL alloc] initFileURLWithPath:(NSString *)pdfPath1];//(CFURLRef) NSURL
+    CFURLRef pdfURL2 = (__bridge_retained CFURLRef)[[NSURL alloc] initFileURLWithPath:(NSString *)pdfPath2];//(CFURLRef)
+    CFURLRef pdfURL3 = (__bridge_retained CFURLRef)[[NSURL alloc] initFileURLWithPath:(NSString *)pdfPath3];//(CFURLRef)
+    CFURLRef pdfURLOutput =(__bridge_retained CFURLRef) [[NSURL alloc] initFileURLWithPath:(NSString *)pdfPathOutput];//(CFURLRef)
+    
+    // File references
+    CGPDFDocumentRef pdfRef1 = CGPDFDocumentCreateWithURL((CFURLRef) pdfURL1);
+    CGPDFDocumentRef pdfRef2 = CGPDFDocumentCreateWithURL((CFURLRef) pdfURL2);
+    CGPDFDocumentRef pdfRef3 = CGPDFDocumentCreateWithURL((CFURLRef) pdfURL3);
+    
+    // Number of pages
+    NSInteger numberOfPages1 = CGPDFDocumentGetNumberOfPages(pdfRef1);
+    NSInteger numberOfPages2 = CGPDFDocumentGetNumberOfPages(pdfRef2);
+    NSInteger numberOfPages3 = CGPDFDocumentGetNumberOfPages(pdfRef3);
+    
+    // Create the output context
+    CGContextRef writeContext = CGPDFContextCreateWithURL(pdfURLOutput, NULL, NULL);
+    
+    // Loop variables
+    CGPDFPageRef page;
+    CGRect mediaBox;
+    
+    // Read the first PDF and generate the output pages
+    NSLog(@"GENERATING PAGES FROM PDF 1 (%i)...", numberOfPages1);
+    for (int i=1; i<=numberOfPages1; i++) {
+        page = CGPDFDocumentGetPage(pdfRef1, i);
+        mediaBox = CGPDFPageGetBoxRect(page, kCGPDFMediaBox);
+        CGContextBeginPage(writeContext, &mediaBox);
+        CGContextDrawPDFPage(writeContext, page);
+        CGContextEndPage(writeContext);
+    }
+    
+    // Read the second PDF and generate the output pages
+    NSLog(@"GENERATING PAGES FROM PDF 2 (%i)...", numberOfPages2);
+    for (int i=1; i<=numberOfPages2; i++) {
+        page = CGPDFDocumentGetPage(pdfRef2, i);
+        mediaBox = CGPDFPageGetBoxRect(page, kCGPDFMediaBox);
+        CGContextBeginPage(writeContext, &mediaBox);
+        CGContextDrawPDFPage(writeContext, page);
+        CGContextEndPage(writeContext);
     }
 
+    for (int i=1; i<=numberOfPages3; i++) {
+        page = CGPDFDocumentGetPage(pdfRef3, i);
+        mediaBox = CGPDFPageGetBoxRect(page, kCGPDFMediaBox);
+        CGContextBeginPage(writeContext, &mediaBox);
+        CGContextDrawPDFPage(writeContext, page);
+        CGContextEndPage(writeContext);
+    }
+
+    NSLog(@"DONE!");
+    
+    // Finalize the output file
+    CGPDFContextClose(writeContext);
+    
+    // Release from memory
+    CFRelease(pdfURL1);
+    CFRelease(pdfURL2);
+    CFRelease(pdfURL3);
+    CFRelease(pdfURLOutput);
+    CGPDFDocumentRelease(pdfRef1);
+    CGPDFDocumentRelease(pdfRef2);
+    CGPDFDocumentRelease(pdfRef3);
+    CGContextRelease(writeContext);
+    
+    //NSString *path = [[NSBundle mainBundle] pathForResource:@"document" ofType:@"pdf"];
+    NSURL *targetURL = [NSURL fileURLWithPath:pdfPathOutput];
+    NSURLRequest *request = [NSURLRequest requestWithURL:targetURL];
+    [webIlustration loadRequest:request];
 }
-
-- (void)HTMLtoPDFDidSucceed:(NDHTMLtoPDF*)htmlToPDF
-{
-    /*NSURL *url = [NSURL fileURLWithPath:htmlToPDF.PDFpath];
-    NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
-    
-    [webIlustration loadRequest:requestObj];
-    [webIlustration setScalesPageToFit:YES];*/
-    BrowserViewController *controller = [[BrowserViewController alloc] initWithFilePath:htmlToPDF.PDFpath PDSorSI:@"SI" TradOrEver:@"Trad"];
-    NSString *SIPDFName=@"Example.pdf";
-    /*if ([PDSorSI isEqualToString:@"PDS"]) {
-        SIPDFName = [NSString stringWithFormat:@"PDS_%@.pdf",self.getSINo];
-    } else if ([PDSorSI isEqualToString:@"UNDERWRITING"]) {
-        SIPDFName = [NSString stringWithFormat:@"UNDERWRITING_%@.pdf",self.getSINo];
-    } else {
-        SIPDFName = [NSString stringWithFormat:@"%@.pdf",self.getSINo];
-    }*/
-    controller.title = SIPDFName;
-    
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
-    
-    [self presentViewController:navController animated:YES completion:nil];
-
-}
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -229,20 +298,6 @@
 
 -(int)calculateRowNumber:(int)Age{
     int rowNumber=0;
-    /*if (Age<21){
-        rowNumber=20;
-    }
-    else{
-        int remainingAge=Age-20;
-        if (remainingAge%5 == 0){
-            int addedRow = remainingAge/5;
-            rowNumber=20+addedRow;
-        }
-        else{
-            int addedRow = remainingAge/5;
-            rowNumber=20+addedRow+1;
-        }
-    }*/
     rowNumber = 99 - Age;
     return rowNumber;
 }
@@ -404,6 +459,40 @@
     NSLog(@"javascript result: %@", responseF4);
 }
 
+-(void)makePDF{
+    UIPrintPageRenderer *render = [[UIPrintPageRenderer alloc] init];
+    [render addPrintFormatter:webIlustration.viewPrintFormatter startingAtPageAtIndex:0];
+    //increase these values according to your requirement
+    float topPadding = 0.0f;
+    float bottomPadding = 0.0f;
+    float leftPadding = 0.0f;
+    float rightPadding = 0.0f;
+    CGRect printableRect = CGRectMake(leftPadding,
+                                      topPadding,
+                                      kPaperSizeA4.width-leftPadding-rightPadding,
+                                      kPaperSizeA4.height-topPadding-bottomPadding);
+    CGRect paperRect = CGRectMake(0, 0, kPaperSizeA4.width, kPaperSizeA4.height);
+    [render setValue:[NSValue valueWithCGRect:paperRect] forKey:@"paperRect"];
+    [render setValue:[NSValue valueWithCGRect:printableRect] forKey:@"printableRect"];
+    NSData *pdfData = [render printToPDF];
+    if (pdfData) {
+        if (page == 1){
+            [pdfData writeToFile:[NSString stringWithFormat:@"%@/tmp1.pdf",NSTemporaryDirectory()] atomically: YES];
+        }
+        else if (page == 2){
+            [pdfData writeToFile:[NSString stringWithFormat:@"%@/tmp2.pdf",NSTemporaryDirectory()] atomically: YES];
+        }
+        else if (page == 3){
+            [pdfData writeToFile:[NSString stringWithFormat:@"%@/tmp3.pdf",NSTemporaryDirectory()] atomically: YES];
+            page = 4;
+        }
+    }
+    else
+    {
+        NSLog(@"PDF couldnot be created");
+    }
+}
+
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     _dictionaryForAgentProfile = [[NSMutableDictionary alloc]initWithDictionary:[modelAgentProfile getAgentData]];
@@ -411,101 +500,23 @@
     [self setValuePage1];
     [self setValuePage2];
     [self setValuePage3];
-    /*NSString *javaScript = [NSString stringWithFormat:@"document.getElementById('SINumber').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"SINO"]];
-
-    NSString *javaScriptP1H1 = [NSString stringWithFormat:@"document.getElementById('HeaderLAName').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"LA_Name"]];
-    NSString *javaScriptP1H2 = [NSString stringWithFormat:@"document.getElementById('HeaderLASex').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"LA_Gender"]];
-    NSString *javaScriptP1H3 = [NSString stringWithFormat:@"document.getElementById('HeaderLADOB').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"LA_DOB"]];
-    NSString *javaScriptP1H4 = [NSString stringWithFormat:@"document.getElementById('HeaderOccupation').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"LA_Occp"]];
-    NSString *javaScriptP1H5 = [NSString stringWithFormat:@"document.getElementById('HeaderPaymentPeriode').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"Payment_Term"]];
-    NSString *javaScriptP1H6 = [NSString stringWithFormat:@"document.getElementById('HeaderPaymentFrequency').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"Payment_Frequency"]];
+    [self makePDF];
     
-    NSString *javaScriptP2H1 = [NSString stringWithFormat:@"document.getElementById('HeaderPOName').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"PO_Name"]];
-    NSString *javaScriptP2H2 = [NSString stringWithFormat:@"document.getElementById('HeaderSumAssured').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"Sum_Assured"]];
-    NSString *javaScriptP2H3 = [NSString stringWithFormat:@"document.getElementById('HeaderPODOB').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"PO_DOB"]];
-    NSString *javaScriptP2H4 = [NSString stringWithFormat:@"document.getElementById('HeaderPaymentPeriode').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"Payment_Term"]];
-    NSString *javaScriptP2H5 = [NSString stringWithFormat:@"document.getElementById('HeaderLAName').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"LA_Name"]];
-    NSString *javaScriptP2H6 = [NSString stringWithFormat:@"document.getElementById('HeaderPaymentFrequency').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"Payment_Frequency"]];
-    NSString *javaScriptP2H7 = [NSString stringWithFormat:@"document.getElementById('HeaderLADOB').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"LA_DOB"]];
-    NSString *javaScriptP2H8 = [NSString stringWithFormat:@"document.getElementById('HeaderBasicPremi').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"PremiumPolicyA"]];
-    NSString *javaScriptP2H9 = [NSString stringWithFormat:@"document.getElementById('HeaderIlustrationDate').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"SIDate"]];
-    NSString *javaScriptP2H10 = [NSString stringWithFormat:@"document.getElementById('HeaderExtraPremiPercent').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"ExtraPremiumPercentage"]];
-    NSString *javaScriptP2H11 = [NSString stringWithFormat:@"document.getElementById('HeaderPOAge').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"PO_Age"]];
-    NSString *javaScriptP2H12 = [NSString stringWithFormat:@"document.getElementById('HeaderExtraPremiDuration').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"ExtraPremiumTerm"]];
-    NSString *javaScriptP2H13 = [NSString stringWithFormat:@"document.getElementById('HeaderLAAge').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"LA_Age"]];
-    NSString *javaScriptP2H14 = [NSString stringWithFormat:@"document.getElementById('HeaderExtraPremiUWLoading').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"TotalPremiumLoading"]];
-    NSString *javaScriptP2H15 = [NSString stringWithFormat:@"document.getElementById('HeaderPOAge').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"PO_Age"]];
-    NSString *javaScriptP2H16 = [NSString stringWithFormat:@"document.getElementById('HeaderPremiPay').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"LA_Occp"]];
-    
-    
-    //footer agent data
-    NSString *javaScriptF1 = [NSString stringWithFormat:@"document.getElementById('FooterAgentName').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"AgentName"]];
-    NSString *javaScriptF2 = [NSString stringWithFormat:@"document.getElementById('FooterPrintDate').innerHTML =\"%@\";",[NSDate date]];
-    NSString *javaScriptF3 = [NSString stringWithFormat:@"document.getElementById('FooterAgentCode').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"AgentCode"]];
-    NSString *javaScriptF4 = [NSString stringWithFormat:@"document.getElementById('FooterBranch').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"BranchName"]];
-    
-    // Make the UIWebView method call
-    NSString *response = [webView stringByEvaluatingJavaScriptFromString:javaScript];
-    
-    NSString *response1 = [webView stringByEvaluatingJavaScriptFromString:javaScriptP1H1];
-    NSString *response2 = [webView stringByEvaluatingJavaScriptFromString:javaScriptP1H2];
-    NSString *response3 = [webView stringByEvaluatingJavaScriptFromString:javaScriptP1H3];
-    NSString *response4 = [webView stringByEvaluatingJavaScriptFromString:javaScriptP1H4];
-    NSString *response5 = [webView stringByEvaluatingJavaScriptFromString:javaScriptP1H5];
-    NSString *response6 = [webView stringByEvaluatingJavaScriptFromString:javaScriptP1H6];
-
-    NSString *responseF1 = [webView stringByEvaluatingJavaScriptFromString:javaScriptF1];
-    NSString *responseF2 = [webView stringByEvaluatingJavaScriptFromString:javaScriptF2];
-    NSString *responseF3 = [webView stringByEvaluatingJavaScriptFromString:javaScriptF3];
-    NSString *responseF4 = [webView stringByEvaluatingJavaScriptFromString:javaScriptF4];
-    
-    NSString *responseP21 = [webView stringByEvaluatingJavaScriptFromString:javaScriptP2H1];
-    NSString *responseP22 = [webView stringByEvaluatingJavaScriptFromString:javaScriptP2H2];
-    NSString *responseP23 = [webView stringByEvaluatingJavaScriptFromString:javaScriptP2H3];
-    NSString *responseP24 = [webView stringByEvaluatingJavaScriptFromString:javaScriptP2H4];
-    NSString *responseP25 = [webView stringByEvaluatingJavaScriptFromString:javaScriptP2H5];
-    NSString *responseP26 = [webView stringByEvaluatingJavaScriptFromString:javaScriptP2H6];
-    NSString *responseP27 = [webView stringByEvaluatingJavaScriptFromString:javaScriptP2H7];
-    NSString *responseP28 = [webView stringByEvaluatingJavaScriptFromString:javaScriptP2H8];
-    NSString *responseP29 = [webView stringByEvaluatingJavaScriptFromString:javaScriptP2H9];
-    NSString *responseP210 = [webView stringByEvaluatingJavaScriptFromString:javaScriptP2H10];
-    NSString *responseP211 = [webView stringByEvaluatingJavaScriptFromString:javaScriptP2H11];
-    NSString *responseP212 = [webView stringByEvaluatingJavaScriptFromString:javaScriptP2H12];
-    NSString *responseP213 = [webView stringByEvaluatingJavaScriptFromString:javaScriptP2H13];
-    NSString *responseP214 = [webView stringByEvaluatingJavaScriptFromString:javaScriptP2H14];
-    NSString *responseP215 = [webView stringByEvaluatingJavaScriptFromString:javaScriptP2H15];
-    NSString *responseP216 = [webView stringByEvaluatingJavaScriptFromString:javaScriptP2H16];
-    
-    NSLog(@"javascript result: %@", response);
-    NSLog(@"javascript result: %@", response1);
-    NSLog(@"javascript result: %@", response2);
-    NSLog(@"javascript result: %@", response3);
-    NSLog(@"javascript result: %@", response4);
-    NSLog(@"javascript result: %@", response5);
-    NSLog(@"javascript result: %@", response6);
-
-    NSLog(@"javascript result: %@", responseF1);
-    NSLog(@"javascript result: %@", responseF2);
-    NSLog(@"javascript result: %@", responseF3);
-    NSLog(@"javascript result: %@", responseF4);
-    
-    NSLog(@"javascript result: %@", responseP21);
-    NSLog(@"javascript result: %@", responseP22);
-    NSLog(@"javascript result: %@", responseP23);
-    NSLog(@"javascript result: %@", responseP24);
-    NSLog(@"javascript result: %@", responseP25);
-    NSLog(@"javascript result: %@", responseP26);
-    NSLog(@"javascript result: %@", responseP27);
-    NSLog(@"javascript result: %@", responseP28);
-    NSLog(@"javascript result: %@", responseP29);
-    NSLog(@"javascript result: %@", responseP210);
-    NSLog(@"javascript result: %@", responseP211);
-    NSLog(@"javascript result: %@", responseP212);
-    NSLog(@"javascript result: %@", responseP213);
-    NSLog(@"javascript result: %@", responseP214);
-    NSLog(@"javascript result: %@", responseP215);
-    NSLog(@"javascript result: %@", responseP216);*/
+    switch (page) {
+        case 1:
+            [webTemp loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page2" ofType:@"html"]isDirectory:NO]]];
+            page=2;
+            break;
+        case 2:
+            [webTemp loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page3" ofType:@"html"]isDirectory:NO]]];
+            [self createPDFFile];
+            page=3;
+            break;
+        default:
+            break;
+    }
 }
+
 /*
 #pragma mark - Navigation
 
@@ -516,4 +527,24 @@
 }
 */
 
+@end
+
+
+@implementation UIPrintPageRenderer (PDF)
+- (NSData*) printToPDF
+{
+    NSMutableData *pdfData = [NSMutableData data];
+    UIGraphicsBeginPDFContextToData( pdfData, self.paperRect, nil );
+    //UIGraphicsBeginPDFContextToData( pdfData, CGRectMake(0, 0, 842, 595), nil );
+    [self prepareForDrawingPages: NSMakeRange(0, self.numberOfPages)];
+    CGRect bounds = UIGraphicsGetPDFContextBounds();
+    NSLog(@"bounds %@ %i",NSStringFromCGRect(bounds),self.numberOfPages);
+    for ( int i = 0 ; i < self.numberOfPages ; i++ )
+    {
+        UIGraphicsBeginPDFPage();
+        [self drawPageAtIndex: i inRect: bounds];
+    }
+    UIGraphicsEndPDFContext();
+    return pdfData;
+}
 @end

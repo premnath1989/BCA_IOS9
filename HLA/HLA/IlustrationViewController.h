@@ -12,14 +12,16 @@
 #import "ModelAgentProfile.h"
 #import "RateModel.h"
 
-@interface IlustrationViewController : UIViewController<NDHTMLtoPDFDelegate>{
+@interface IlustrationViewController : UIViewController<NDHTMLtoPDFDelegate,UIWebViewDelegate>{
     IBOutlet UIWebView* webIlustration;
+    UIWebView *webTemp;
     NDHTMLtoPDF *PDFCreator;
     ModelAgentProfile* modelAgentProfile;
     RateModel* modelRate;
     UIBarButtonItem *page1;
     UIBarButtonItem *page2;
     UIBarButtonItem *page3;
+    UIBarButtonItem *page4;
 }
 @property (retain, nonatomic) NSMutableDictionary* dictionaryPOForInsert;
 @property (retain, nonatomic) NSMutableDictionary* dictionaryMasterForInsert;
