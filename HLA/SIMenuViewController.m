@@ -40,12 +40,10 @@
     NSMutableDictionary* dictionaryPOForInsert;
     NSMutableDictionary* dictionaryMasterForInsert;
     NSMutableDictionary* newDictionaryForBasicPlan;
-    
     bool selfRelation;
 }
 
 @end
-
 @implementation SIMenuViewController
 @synthesize myTableView, SIshowQuotation;
 @synthesize RightView,EAPPorSI;
