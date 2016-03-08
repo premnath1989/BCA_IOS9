@@ -264,6 +264,7 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:targetURL];
     [webIlustration loadRequest:request];
     [webIlustration setHidden:NO];
+    [viewspinBar setHidden:YES];
 }
 
 - (void)didReceiveMemoryWarning {

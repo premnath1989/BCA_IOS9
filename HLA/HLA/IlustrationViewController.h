@@ -27,7 +27,7 @@
     UIPrintInteractionController *printInteraction;
     PagesController *_PagesList;
     UIPopoverController *_PagesPopover;
- 
+    IBOutlet UIView* viewspinBar;
 }
 @property (retain, nonatomic) NSMutableDictionary* dictionaryPOForInsert;
 @property (retain, nonatomic) NSMutableDictionary* dictionaryMasterForInsert;
