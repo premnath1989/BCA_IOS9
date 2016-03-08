@@ -74,14 +74,16 @@
     IBOutlet UILabel *lblTotalBulanan;
     IBOutlet UILabel *lblTotalSekaligus;
     int Pertanggungan_Dasar;
+    int Pertanggungan_ExtrePremi;
     NSString *PayorSex;
     int *PayorAge;
-    int AnssubtotalBulan;
-    int AnssubtotalYear;
+    double AnssubtotalBulan;
+    double AnssubtotalYear;
     int ExtraPercentsubtotalBulan;
     int ExtraPercentsubtotalYear;
     int ExtraNumbsubtotalBulan;
     int ExtraNumbsubtotalYear;
+    int ExtraPremiNumbValue;
     NSString *Highlight;
 
 
@@ -109,6 +111,7 @@
 @property (nonatomic, assign,readwrite) int requestMOP;
 @property (nonatomic, assign,readwrite) int requestTerm;
 @property (nonatomic, assign,readwrite) int Pertanggungan_Dasar;
+@property (nonatomic, assign,readwrite) int Pertanggungan_ExtrePremi;
 @property (nonatomic,strong) NSString *PayorSex;
 @property (nonatomic, assign,readwrite) int PayorAge;
 @property (nonatomic, assign,readwrite) int AnssubtotalBulan;
@@ -117,6 +120,7 @@
 @property (nonatomic, assign,readwrite) int ExtraPercentsubtotalYear;
 @property (nonatomic, assign,readwrite) int ExtraNumbsubtotalBulan;
 @property (nonatomic, assign,readwrite) int ExtraNumbsubtotalYear;
+@property (nonatomic, assign,readwrite) int ExtraPremiNumbValue;
 
 
 @property (nonatomic,strong) id requestBasicSA;
