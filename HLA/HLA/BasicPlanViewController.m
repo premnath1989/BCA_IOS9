@@ -42,7 +42,7 @@
 @synthesize tempHLTermField,basicPremAnn,basicPremHalf,basicPremQuar,basicPremMonth;
 @synthesize myScrollView,labelThree,labelSix,labelSeven,labelFour,labelFive,annualMedRiderPrem,monthMedRiderPrem,quarterMedRiderPrem;
 @synthesize ageClient,requestSINo,termCover,maxSA,minSA,halfMedRiderPrem;
-@synthesize MOP,yearlyIncome,advanceYearlyIncome,basicRate,cashDividend;
+@synthesize MOP,yearlyIncome,advanceYearlyIncome,basicRate,cashDividend,TotalA;
 @synthesize getSINo,getSumAssured,getPolicyTerm,getHL,getHLTerm,getTempHL,getTempHLTerm;
 @synthesize planCode,requestOccpCode,dataInsert,basicBH,basicPH,basicLa2ndH;
 @synthesize SINo,LACustCode,PYCustCode,SIDate,SILastNo,CustDate,CustLastNo,BasisSumAssured;
@@ -639,10 +639,10 @@ bool WPTPD30RisDeleted = FALSE;
     
     double test = PaymentMode * RatesInt;
     
-    double TestTotal = total * test;
+    TotalA = total * test;
     
     
-    [_basicPremiField setText:[NSString stringWithFormat:@"%2f", TestTotal]];
+    [_basicPremiField setText:[NSString stringWithFormat:@"%2f", TotalA]];
     [self PremiDasarIncomeChange:_basicPremiField.text];
 }
 
@@ -688,18 +688,22 @@ bool WPTPD30RisDeleted = FALSE;
         PaymentMode = 0.1;
     }
     
-    int RatesInt = [RatesPremiumRate intValue];
-    int total =(BasisSumAssured/1000)*(PaymentMode * RatesInt);
-  //  [_basicPremiField setText:[NSString stringWithFormat:@"%d", total]];
+    double RatesInt = [RatesPremiumRate doubleValue];
+    int totalDivide =(BasisSumAssured/1000);
     
+    double valueofTotal =(PaymentMode * RatesInt);
+    
+    double total =(totalDivide * valueofTotal);
+  //  [_basicPremiField setText:[NSString stringWithFormat:@"%d", total]];
+
     int masaExtraPremiBTotal =[_masaExtraPremiField.text intValue];
     
-    int totalB = total * masaExtraPremiBTotal;
+    double totalB = total * masaExtraPremiBTotal;
     
-    [_extraBasicPremiField setText:[NSString stringWithFormat:@"%d", totalB]];
+    [_extraBasicPremiField setText:[NSString stringWithFormat:@"%f", totalB]];
     
     
-    int TotalAB = total + totalB;
+    int TotalAB = TotalA + totalB;
     
     [_totalPremiWithLoadingField setText:[NSString stringWithFormat:@"%d", TotalAB]];
     
@@ -1053,7 +1057,7 @@ bool WPTPD30RisDeleted = FALSE;
     
     double entryFieldFloat = [_basicPremiField.text doubleValue];
     
-    if ([_basicPremiField.text rangeOfString:@".00"].length == 3) {
+    if ([_basicPremiField.text rangeOfString:@""].length == 3) {
         formatter.alwaysShowsDecimalSeparator = YES;
         result =[formatter stringFromNumber:[NSNumber numberWithDouble:entryFieldFloat]];
         result = [result stringByAppendingFormat:@"00"];
@@ -1065,7 +1069,7 @@ bool WPTPD30RisDeleted = FALSE;
     } else if ([_basicPremiField.text rangeOfString:@"."].length != 1) {
         formatter.alwaysShowsDecimalSeparator = NO;
         result =[formatter stringFromNumber:[NSNumber numberWithDouble:entryFieldFloat]];
-        result = [result stringByAppendingFormat:@".00"];
+        result = [result stringByAppendingFormat:@""];
         
     }
     
@@ -1076,6 +1080,89 @@ bool WPTPD30RisDeleted = FALSE;
         _basicPremiField.text = result;
     }
 }
+
+-(void)PremiDasarIncomeChangeB:(NSString *)BAsicPremiDasarB
+{
+    //BasisSumAssured = [yearlyIncomeField.text intValue];
+    
+    _extraBasicPremiField.text = [BAsicPremiDasarB stringByReplacingOccurrencesOfString:@" " withString:@""];
+    _extraBasicPremiField.text = [BAsicPremiDasarB stringByReplacingOccurrencesOfString:@"," withString:@""];
+    _extraBasicPremiField.text = [BAsicPremiDasarB stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    
+    NSString *result;
+    
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc]init];
+    [formatter setMaximumFractionDigits:2];
+    [formatter setUsesGroupingSeparator:YES];
+    [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    
+    double entryFieldFloat = [_extraBasicPremiField.text doubleValue];
+    
+    if ([_extraBasicPremiField.text rangeOfString:@""].length == 3) {
+        formatter.alwaysShowsDecimalSeparator = YES;
+        result =[formatter stringFromNumber:[NSNumber numberWithDouble:entryFieldFloat]];
+        result = [result stringByAppendingFormat:@"00"];
+        
+    } else  if ([_extraBasicPremiField.text rangeOfString:@"."].length == 1) {
+        formatter.alwaysShowsDecimalSeparator = YES;
+        result =[formatter stringFromNumber:[NSNumber numberWithDouble:entryFieldFloat]];
+        
+    } else if ([_extraBasicPremiField.text rangeOfString:@"."].length != 1) {
+        formatter.alwaysShowsDecimalSeparator = NO;
+        result =[formatter stringFromNumber:[NSNumber numberWithDouble:entryFieldFloat]];
+        result = [result stringByAppendingFormat:@""];
+        
+    }
+    
+    if(_extraBasicPremiField.text.length==0)
+    {
+        _extraBasicPremiField.text = @"";
+    } else {
+        _extraBasicPremiField.text = result;
+    }
+}
+
+-(void)PremiDasarIncomeChangeAplusB:(NSString *)BAsicPremiDasar
+{
+    //BasisSumAssured = [yearlyIncomeField.text intValue];
+    
+    _basicPremiField.text = [BAsicPremiDasar stringByReplacingOccurrencesOfString:@" " withString:@""];
+    _basicPremiField.text = [BAsicPremiDasar stringByReplacingOccurrencesOfString:@"," withString:@""];
+    _basicPremiField.text = [BAsicPremiDasar stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    
+    NSString *result;
+    
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc]init];
+    [formatter setMaximumFractionDigits:2];
+    [formatter setUsesGroupingSeparator:YES];
+    [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    
+    double entryFieldFloat = [_basicPremiField.text doubleValue];
+    
+    if ([_basicPremiField.text rangeOfString:@""].length == 3) {
+        formatter.alwaysShowsDecimalSeparator = YES;
+        result =[formatter stringFromNumber:[NSNumber numberWithDouble:entryFieldFloat]];
+        result = [result stringByAppendingFormat:@"00"];
+        
+    } else  if ([_basicPremiField.text rangeOfString:@"."].length == 1) {
+        formatter.alwaysShowsDecimalSeparator = YES;
+        result =[formatter stringFromNumber:[NSNumber numberWithDouble:entryFieldFloat]];
+        
+    } else if ([_basicPremiField.text rangeOfString:@"."].length != 1) {
+        formatter.alwaysShowsDecimalSeparator = NO;
+        result =[formatter stringFromNumber:[NSNumber numberWithDouble:entryFieldFloat]];
+        result = [result stringByAppendingFormat:@""];
+        
+    }
+    
+    if(_basicPremiField.text.length==0)
+    {
+        _basicPremiField.text = @"";
+    } else {
+        _basicPremiField.text = result;
+    }
+}
+
 
 
 -(BOOL)checkingSave:(NSString *)getSex
@@ -3806,6 +3893,14 @@ bool WPTPD30RisDeleted = FALSE;
         return false;
     }
     
+   else if ((![_extraPremiNumberField.text isEqualToString:@""]&&![_extraPremiNumberField.text isEqualToString:@"1"]&&![_extraPremiNumberField.text isEqualToString:@"2"]&&![_extraPremiNumberField.text isEqualToString:@"3"]&&![_extraPremiNumberField.text isEqualToString:@"4"]&&![_extraPremiNumberField.text isEqualToString:@"5"]&&![_extraPremiNumberField.text isEqualToString:@"6"]&&![_extraPremiNumberField.text isEqualToString:@"7"]&&![_extraPremiNumberField.text isEqualToString:@"8"]&&![_extraPremiNumberField.text isEqualToString:@"9"]&&![_extraPremiNumberField.text isEqualToString:@"10"]))
+    {
+        [self createAlertViewAndShow:validationExtraNumber tag:0];
+        [_masaExtraPremiField becomeFirstResponder];
+        return false;
+    }
+
+    
     else if (([_extraPremiPercentField.text length]>0)||([_extraPremiNumberField.text length]>0))
     {
         if ([validationSet containsObject:masaEktraPremi]||masaEktraPremi==NULL)
@@ -3814,14 +3909,6 @@ bool WPTPD30RisDeleted = FALSE;
             [_masaExtraPremiField becomeFirstResponder];
             return false;
         }
-        
-        if ((![_extraPremiPercentField.text isEqualToString:@"1"]&&![_extraPremiPercentField.text isEqualToString:@"2"]&&![_extraPremiPercentField.text isEqualToString:@"3"]&&![_extraPremiPercentField.text isEqualToString:@"4"]&&![_extraPremiPercentField.text isEqualToString:@"5"]&&![_extraPremiPercentField.text isEqualToString:@"6"]&&![_extraPremiPercentField.text isEqualToString:@"7"]&&![_extraPremiPercentField.text isEqualToString:@"8"]&&![_extraPremiPercentField.text isEqualToString:@"9"]&&![_extraPremiPercentField.text isEqualToString:@"10"]))
-        {
-            [self createAlertViewAndShow:validationExtraNumber tag:0];
-            [_masaExtraPremiField becomeFirstResponder];
-            return false;
-        }
-
     }
     
     

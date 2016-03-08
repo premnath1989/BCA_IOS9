@@ -229,6 +229,7 @@
 @property (nonatomic, assign,readwrite) int advanceYearlyIncomeHLAIB;
 @property (nonatomic, assign,readwrite) int advanceYearlyIncomeHLACP;
 @property (nonatomic, assign,readwrite) double basicRate;
+@property (nonatomic, assign,readwrite) double TotalA;
 @property (nonatomic,strong) NSString *planCode;
 @property (nonatomic, copy) NSString *quotationLang;
 
