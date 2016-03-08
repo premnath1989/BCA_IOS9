@@ -11,17 +11,23 @@
 #import "BrowserViewController.h"
 #import "ModelAgentProfile.h"
 #import "RateModel.h"
+#import <MessageUI/MessageUI.h>
+#import "PagesController.h"
 
-@interface IlustrationViewController : UIViewController<NDHTMLtoPDFDelegate,UIWebViewDelegate>{
+@interface IlustrationViewController : UIViewController<NDHTMLtoPDFDelegate,UIWebViewDelegate,MFMailComposeViewControllerDelegate,PagesControllerDelegate>{
     IBOutlet UIWebView* webIlustration;
     UIWebView *webTemp;
     NDHTMLtoPDF *PDFCreator;
     ModelAgentProfile* modelAgentProfile;
     RateModel* modelRate;
-    UIBarButtonItem *page1;
-    UIBarButtonItem *page2;
-    UIBarButtonItem *page3;
+    UIBarButtonItem *email;
+    UIBarButtonItem *printSI;
+    UIBarButtonItem *pages;
     UIBarButtonItem *page4;
+    UIPrintInteractionController *printInteraction;
+    PagesController *_PagesList;
+    UIPopoverController *_PagesPopover;
+ 
 }
 @property (retain, nonatomic) NSMutableDictionary* dictionaryPOForInsert;
 @property (retain, nonatomic) NSMutableDictionary* dictionaryMasterForInsert;
