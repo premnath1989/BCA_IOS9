@@ -294,6 +294,8 @@ bool WPTPD30RisDeleted = FALSE;
         _KKLKPembelianKeLbl.hidden = YES;
         _KKLKMasaPembayaran.hidden = YES;
         _masaPembayaranButton.hidden = NO;
+         ExtraPremiDasarLBL.hidden = NO;
+        yearlyIncomeField.text = @"";
 //    }
 
 }
@@ -310,6 +312,9 @@ bool WPTPD30RisDeleted = FALSE;
     _KKLKPembelianKeLbl.hidden = NO;
     _KKLKMasaPembayaran.hidden = NO;
     _masaPembayaranButton.hidden = YES;
+    ExtraPremiDasarLBL.hidden = YES;
+    FrekuensiPembayaranChecking =@"10 Tahun";
+    yearlyIncomeField.text = @"";
     
 
     //    }
@@ -429,11 +434,12 @@ bool WPTPD30RisDeleted = FALSE;
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    if (textField == yearlyIncomeField)
-    {
-        ExtraPremiDasarLBL.hidden=NO;
+//    if ((textField == yearlyIncomeField)&&(PlanType = @"BCA Life Heritage"))
+//    {
+//        ExtraPremiDasarLBL.hidden=NO;
+//
+//    }
 
-    }
 
 }
 
@@ -590,6 +596,40 @@ bool WPTPD30RisDeleted = FALSE;
         [self.planPopover setPopoverContentSize:CGSizeMake(350.0f, 200.0f)];
         [self.planPopover presentPopoverFromRect:rect  inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
        // _frekuensiPembayaranButton.enabled =TRUE;
+    }
+    else if ([FrekuensiPembayaranChecking isEqualToString:@"10 Tahun"])
+    {
+        
+        [self resignFirstResponder];
+        [self.view endEditing:YES];
+        
+        Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
+        id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
+        [activeInstance performSelector:@selector(dismissKeyboard)];
+        
+        if (_frekuensi == nil) {
+            _frekuensi = [[Frekeunsi alloc] init];
+            _frekuensi.Frekuensi = @"10 Tahun";
+            _frekuensi.delegate = self;
+            premiType = @"S";
+            self.planPopover = [[UIPopoverController alloc] initWithContentViewController:_frekuensi];
+        }
+        else
+        {
+            _frekuensi = [[Frekeunsi alloc] init];
+            _frekuensi.Frekuensi = @"10 Tahun";
+            _frekuensi.delegate = self;
+            premiType = @"S";
+            self.planPopover = [[UIPopoverController alloc] initWithContentViewController:_frekuensi];
+            
+        }
+        CGRect rect = [sender frame];
+        rect.origin.y = [sender frame].origin.y + 30;
+        
+        [self.planPopover setPopoverContentSize:CGSizeMake(350.0f, 200.0f)];
+        [self.planPopover presentPopoverFromRect:rect  inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        // _frekuensiPembayaranButton.enabled =TRUE;
+
     }
     
 }

@@ -37,6 +37,14 @@
         ListOfCode = [[NSMutableArray alloc] initWithObjects:@"", @"", nil ];
 
     }
+    
+    if ([Frekuensi isEqualToString:@"10 Tahun"])
+    {
+        ListOfPlan = [[NSMutableArray alloc] initWithObjects: @"Tahunan",@"Semester",@"Kuartal",@"Bulanan", nil ];
+        ListOfCode = [[NSMutableArray alloc] initWithObjects:@"", @"", nil ];
+        
+    }
+
 
 //	if([TradOrEver isEqualToString:@"TRAD"]){
 //		ListOfPlan = [[NSMutableArray alloc] initWithObjects:@"Secure100", @"HLA Wealth Plan", nil ];
