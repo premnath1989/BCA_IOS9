@@ -678,7 +678,12 @@ bool WPTPD30RisDeleted = FALSE;
     
     double RatesInt = [RatesPremiumRate doubleValue];
     
+    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+    f.numberStyle = NSNumberFormatterDecimalStyle;
+    NSNumber *myNumber = [f numberFromString:yearlyIncomeField.text];
     
+    BasisSumAssured = [myNumber longLongValue];
+
     int total =(BasisSumAssured/1000);
     
     double test = PaymentMode * RatesInt;

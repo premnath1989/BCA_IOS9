@@ -82,7 +82,7 @@
     NSMutableArray* arraySIVersion=[[NSMutableArray alloc] init];
     
    // FMResultSet *s = [database executeQuery:@"SELECT sim.*, po.ProductName,po.PO_Name,premi.Sum_Assured FROM SI_master sim, SI_PO_Data po,SI_Premium premi WHERE sim.SINO = po.SINO and sim.SINO = premi.SINO"];
-     FMResultSet *s = [database executeQuery:@"SELECT sim.*, po.ProductName,po.PO_Name FROM SI_master sim, SI_PO_Data po WHERE sim.SINO = po.SINO"];
+     FMResultSet *s = [database executeQuery:@"SELECT sim.*, po.ProductName,po.PO_Name,sip.Sum_Assured FROM SI_master sim, SI_PO_Data po, SI_Premium sip WHERE sim.SINO = po.SINO and sim.SINO = sip.SINO group by sim.ID"];
     while ([s next]) {
         NSString *stringSINo = [NSString stringWithFormat:@"%@",[s stringForColumn:@"SINO"]];
         NSString *stringCreatedDate = [NSString stringWithFormat:@"%@",[s stringForColumn:@"CreatedDate"]];
@@ -90,17 +90,18 @@
         NSString *stringProductName = [NSString stringWithFormat:@"%@",[s stringForColumn:@"ProductName"]];
         NSString *stringProposalStatus = [NSString stringWithFormat:@"%@",[s stringForColumn:@"ProposalStatus"]];
         NSString *stringSIVersion = [NSString stringWithFormat:@"%@",[s stringForColumn:@"SI_Version"]];
-        //double sumAssured = [s doubleForColumn:@"Sum_Assured"];
-
+        NSString *sumAssured = [NSString stringWithFormat:@"%@",[s stringForColumn:@"Sum_Assured"]];
+        
+        NSLog(@"sumassured %@",sumAssured);
         [arraySINo addObject:stringSINo];
         [arrayCreatedDate addObject:stringCreatedDate];
         [arrayPOName addObject:stringPOName];
         [arrayProductName addObject:stringProductName];
-        //[arraySumAssured addObject:[NSNumber numberWithDouble:sumAssured]];
+        [arraySumAssured addObject:sumAssured];
         [arrayProposalStatus addObject:stringProposalStatus];
         [arraySIVersion addObject:stringSIVersion];
     }
-    dict = [[NSDictionary alloc] initWithObjectsAndKeys:arraySINo,@"SINO", arrayCreatedDate,@"CreatedDate", arrayPOName,@"PO_Name",arrayProductName,@"ProductName",arrayProposalStatus,@"ProposalStatus",arraySIVersion,@"SI_Version",/*arraySumAssured,@"Sum_Assured",*/ nil];
+    dict = [[NSDictionary alloc] initWithObjectsAndKeys:arraySINo,@"SINO", arrayCreatedDate,@"CreatedDate", arrayPOName,@"PO_Name",arrayProductName,@"ProductName",arrayProposalStatus,@"ProposalStatus",arraySIVersion,@"SI_Version",arraySumAssured,@"Sum_Assured", nil];
     
     [results close];
     [database close];
@@ -144,11 +145,13 @@
     [database open];
     FMResultSet *s;
     if (([dateFrom length]>0)&&([dateTo length]>0)){
-        s = [database executeQuery:[NSString stringWithFormat:@"SELECT sim.*, po.ProductName,po.PO_Name FROM SI_Master sim join SI_PO_Data po on sim.SINO=po.SINO where sim.SINO like \"%%%@%%\" and po.PO_Name like \"%%%@%%\" and sim.CreatedDate between \"%@\" and \"%@\" group by sim.SINO order by \"%@\" %@",SINO,poName,dateFrom,dateTo,orderBy,method]];
+        s = [database executeQuery:[NSString stringWithFormat:@"SELECT sim.*, po.ProductName,po.PO_Name,sip.Sum_Assured FROM SI_Master sim join SI_PO_Data po on sim.SINO=po.SINO join SI_Premium sip on sim.SINO=sip.SINO where sim.SINO like \"%%%@%%\" and po.PO_Name like \"%%%@%%\" and sim.CreatedDate between \"%@\" and \"%@\" group by sim.SINO group by sim.ID order by \"%@\" %@",SINO,poName,dateFrom,dateTo,orderBy,method]];
     }
     else{
-        s = [database executeQuery:[NSString stringWithFormat:@"SELECT sim.*, po.ProductName,po.PO_Name FROM SI_Master sim join SI_PO_Data po on sim.SINO=po.SINO where sim.SINO like \"%%%@%%\" and po.PO_Name like \"%%%@%%\" group by sim.SINO order by \"%@\" %@",SINO,poName,orderBy,method]];
+        s = [database executeQuery:[NSString stringWithFormat:@"SELECT sim.*, po.ProductName,po.PO_Name,sip.Sum_Assured FROM SI_Master sim join SI_PO_Data po on sim.SINO=po.SINO join SI_Premium sip on sim.SINO=sip.SINO  where sim.SINO like \"%%%@%%\" and po.PO_Name like \"%%%@%%\" group by sim.SINO group by sim.ID order by \"%@\" %@",SINO,poName,orderBy,method]];
     }
+    
+    NSLog(@"query %@",[NSString stringWithFormat:@"SELECT sim.*, po.ProductName,po.PO_Name,sip.Sum_Assured FROM SI_Master sim join SI_PO_Data po on sim.SINO=po.SINO join SI_Premium sip on sim.SINO=sip.SINO  where sim.SINO like \"%%%@%%\" and po.PO_Name like \"%%%@%%\" group by sim.SINO order by \"%@\" %@",SINO,poName,orderBy,method]);
     
     while ([s next]) {
         NSLog(@"SINO %@",[NSString stringWithFormat:@"%@",[s stringForColumn:@"SINO"]]);
@@ -159,17 +162,17 @@
         NSString *stringProductName = [NSString stringWithFormat:@"%@",[s stringForColumn:@"ProductName"]];
         NSString *stringProposalStatus = [NSString stringWithFormat:@"%@",[s stringForColumn:@"ProposalStatus"]];
         NSString *stringSIVersion = [NSString stringWithFormat:@"%@",[s stringForColumn:@"SI_Version"]];
-        //double sumAssured = [s doubleForColumn:@"Sum_Assured"];
+        NSString *sumAssured = [NSString stringWithFormat:@"%@",[s stringForColumn:@"Sum_Assured"]];
         
         [arraySINo addObject:stringSINo];
         [arrayCreatedDate addObject:stringCreatedDate];
         [arrayPOName addObject:stringPOName];
         [arrayProductName addObject:stringProductName];
-        //[arraySumAssured addObject:[NSNumber numberWithDouble:sumAssured]];
+        [arraySumAssured addObject:sumAssured];
         [arrayProposalStatus addObject:stringProposalStatus];
         [arraySIVersion addObject:stringSIVersion];
     }
-    dict = [[NSDictionary alloc] initWithObjectsAndKeys:arraySINo,@"SINO", arrayCreatedDate,@"CreatedDate", arrayPOName,@"PO_Name",arrayProductName,@"ProductName",arrayProposalStatus,@"ProposalStatus",arraySIVersion,@"SI_Version",/*arraySumAssured,@"Sum_Assured",*/ nil];
+    dict = [[NSDictionary alloc] initWithObjectsAndKeys:arraySINo,@"SINO", arrayCreatedDate,@"CreatedDate", arrayPOName,@"PO_Name",arrayProductName,@"ProductName",arrayProposalStatus,@"ProposalStatus",arraySIVersion,@"SI_Version",arraySumAssured,@"Sum_Assured", nil];
     
     [results close];
     [database close];

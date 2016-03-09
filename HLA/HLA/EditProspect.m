@@ -352,6 +352,8 @@ NSMutableArray *DelGroupArr;
     
     [self addressChange];
     modelAgentProfil=[[ModelAgentProfile alloc]init];
+    modelDataReferral=[[ModelDataReferral alloc]init];
+    
     dictAgentData=[[NSDictionary alloc]initWithDictionary:[modelAgentProfil getAgentData]];
     [_txtChannelName setText:[dictAgentData valueForKey:@"ChannelName"]];
     [txtKanwil setText:[dictAgentData valueForKey:@"Kanwil"]];
@@ -4058,6 +4060,14 @@ NSMutableArray *DelGroupArr;
 }
 
 //added by faiz
+-(IBAction)textFieldNIPDidEndEditing:(UITextField *)sender{
+    NSString *refName=[modelDataReferral getReferralName:sender.text];
+    if ([refName isEqualToString:@"(null)"]){
+        refName = @"";
+    }
+    [txtReferralName setText:refName];
+}
+
 -(IBAction)textFieldDidChangeEditing:(UITextField *)sender{
     if (sender==txtPrefix2){
         if ([sender.text length]>=4){
@@ -8381,10 +8391,109 @@ NSMutableArray *DelGroupArr;
 	
 }
 
--(BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-	[textField resignFirstResponder];
-	return YES;
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (textField == txtNip) {
+        [textField resignFirstResponder];
+    } else if (textField == txtReferralName) {
+        [textField resignFirstResponder];
+    }
+    else if (textField == txtrFullName) {
+        [textField resignFirstResponder];
+    }
+    else if (textField == txtOtherIDType) {
+        [textField resignFirstResponder];
+    }
+    else if (textField == _txtCountryOfBirth) {
+        [textField resignFirstResponder];
+    }
+    else if (textField == txtAnnIncome) {
+        [textField resignFirstResponder];
+    }
+    else if (textField == txtNPWPNo) {
+        [textField resignFirstResponder];
+    }
+    else if (textField == txtKcu) {
+        [textField resignFirstResponder];
+        //[txtKanwil becomeFirstResponder];
+    }
+    else if (textField == txtKanwil) {
+        [txtReferralName becomeFirstResponder];
+    }
+    else if (textField == txtHomeAddr1) {
+        [txtHomeAddr2 becomeFirstResponder];
+    }
+    else if (textField == txtHomeAddr2) {
+        [txtHomeAddr3 becomeFirstResponder];
+    }
+    else if (textField == txtHomeAddr3) {
+        [txtHomePostCode becomeFirstResponder];
+    }
+    else if (textField == txtHomePostCode) {
+        [_txtHomeVillage becomeFirstResponder];
+    }
+    else if (textField == _txtHomeVillage) {
+        [_txtHomeDistrict becomeFirstResponder];
+    }
+    else if (textField == _txtHomeDistrict) {
+        [txtHomeTown becomeFirstResponder];
+    }
+    else if (textField == txtHomeTown) {
+        [_txtHomeProvince becomeFirstResponder];
+    }
+    else if (textField == _txtHomeProvince) {
+        [txtPrefix1 becomeFirstResponder];
+    }
+    else if (textField == txtPrefix1) {
+        [txtContact1 becomeFirstResponder];
+    }
+    else if (textField == txtContact1) {
+        [txtPrefix2 becomeFirstResponder];
+    }
+    else if (textField == txtPrefix2) {
+        [txtContact2 becomeFirstResponder];
+    }
+    else if (textField == txtContact2) {
+        [txtPrefix3 becomeFirstResponder];
+    }
+    else if (textField == txtPrefix3) {
+        [txtContact3 becomeFirstResponder];
+    }
+    else if (textField == txtContact3) {
+        [txtOfficeAddr1 becomeFirstResponder];
+    }
+    else if (textField == txtOfficeAddr1) {
+        [txtOfficeAddr2 becomeFirstResponder];
+    }
+    else if (textField == txtOfficeAddr2) {
+        [txtOfficeAddr3 becomeFirstResponder];
+    }
+    
+    else if (textField == txtOfficeAddr3) {
+        [txtOfficePostCode becomeFirstResponder];
+    }
+    else if (textField == txtOfficePostCode) {
+        [_txtOfficeVillage becomeFirstResponder];
+    }
+    else if (textField == _txtOfficeVillage) {
+        [_txtOfficeDistrict becomeFirstResponder];
+    }
+    else if (textField == _txtOfficeDistrict) {
+        [txtOfficeTown becomeFirstResponder];
+    }
+    else if (textField == txtOfficeTown) {
+        [_txtOfficeProvince becomeFirstResponder];
+    }
+    else if (textField == _txtOfficeProvince) {
+        [txtPrefix4 becomeFirstResponder];
+    }
+    else if (textField == txtPrefix4) {
+        [txtContact4 becomeFirstResponder];
+    }
+    else if (textField == txtContact4) {
+        [txtContact4 resignFirstResponder];
+    }
+    
+    return YES;
 }
 
 -(void)SaveChanges2

@@ -22,13 +22,22 @@
 
 @implementation IlustrationViewController
 
+-(void)viewWillAppear:(BOOL)animated{
+    [webIlustration setHidden:YES];
+    [viewspinBar setHidden:NO];
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    page =1;
+    [self loadHTMLToWebView];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [webIlustration setHidden:YES];
+
     modelAgentProfile=[[ModelAgentProfile alloc]init];
     modelRate = [[RateModel alloc]init];
     
-    page =1;
     
     email = [[UIBarButtonItem alloc] initWithTitle:@"Email" style:UIBarButtonItemStyleBordered target:self action:@selector(email)];
     printSI = [[UIBarButtonItem alloc] initWithTitle:@"Print" style:UIBarButtonItemStyleBordered target:self action:@selector(printSI)];
@@ -38,7 +47,7 @@
     self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:email,printSI, Nil];
     self.title=@"Ilustration";
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStyleBordered target:self action:@selector(closeModalWindow:) ];
-    [self loadHTMLToWebView];
+    
 }
 
 -(void)email{
@@ -63,7 +72,7 @@
         MFMailComposeViewController *mailComposer = [MFMailComposeViewController new];
         
         [mailComposer addAttachmentData:attachment mimeType:@"application/pdf" fileName:fileName];
-        [mailComposer setSubject:fileName]; // Use the document file name for the subject
+        [mailComposer setSubject:@"Ilustrasi"]; // Use the document file name for the subject
         
         mailComposer.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
         mailComposer.modalPresentationStyle = UIModalPresentationFormSheet;
@@ -456,7 +465,7 @@
     NSMutableArray* valRate5Year=[[NSMutableArray alloc]initWithArray:[self getRate5:laAge]];
     NSString *string5Year = [[valRate5Year valueForKey:@"description"] componentsJoinedByString:@","];
     
-    NSString *responseTable = [webIlustration stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"createTable(%d,%i,%f,%d,[%@],[%@],[%@])", poAge,numberOfRow,basicSumAssured,paymentTerm,string,string5Year,stringSurValue]];
+    NSString *responseTable = [webIlustration stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"createTable(%d,%i,%f,%d,[%@],[%@],[%@])", laAge,numberOfRow,basicSumAssured,paymentTerm,string,string5Year,stringSurValue]];
     
     // Make the UIWebView method call
     NSString *response = [webIlustration stringByEvaluatingJavaScriptFromString:javaScript];
@@ -587,19 +596,6 @@
     [self setValuePage1];
     [self setValuePage2];
     [self setValuePage3];
-    
-    /*switch (page) {
-        case 1:
-            [webIlustration loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page2" ofType:@"html"]isDirectory:NO]]];
-            page=2;
-            break;
-        case 2:
-            [webIlustration loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page3" ofType:@"html"]isDirectory:NO]]];
-            page=3;
-            break;
-        default:
-            break;
-    }*/
     [self makePDF];
 }
 

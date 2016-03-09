@@ -1686,11 +1686,13 @@
                                                 <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                                                 <connections>
+                                                    <action selector="textFieldNIPDidEndEditing:" destination="CEO-Xo-hVe" eventType="editingDidEnd" id="t8J-8J-lNi"/>
                                                     <outlet property="delegate" destination="CEO-Xo-hVe" id="Zf7-pl-D2z"/>
                                                 </connections>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="Mhg-iM-U5Z">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="Mhg-iM-U5Z">
                                                 <rect key="frame" x="199" y="175" width="740" height="30"/>
+                                                <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.34509803919999998" green="0.34901960780000002" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="14"/>
@@ -4689,6 +4691,9 @@
                                                 <color key="textColor" red="0.34509803919999998" green="0.34901960780000002" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                                                <connections>
+                                                    <action selector="textFieldNIPDidEndEditing:" destination="Few-sZ-jKx" eventType="editingDidEnd" id="7UP-dV-RGb"/>
+                                                </connections>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zhp-OK-ixt">
                                                 <rect key="frame" x="199" y="103" width="253" height="24"/>
@@ -4739,8 +4744,9 @@
                                                 <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="aSo-RG-yia">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="aSo-RG-yia">
                                                 <rect key="frame" x="199" y="176" width="740" height="30"/>
+                                                <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.34509803919999998" green="0.34901960780000002" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>

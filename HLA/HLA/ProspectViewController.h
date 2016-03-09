@@ -26,6 +26,7 @@
 #import "ReferralSource.h"
 #import "EditProspect.h"
 #import "ModelAgentProfile.h"
+#import "ModelDataReferral.h"
 
 @class DataTable,DBController;
 @protocol ProspectViewControllerDelegate
@@ -48,6 +49,7 @@
     Nationality *_nationalityList2;
 
     //added  by faiz
+    ModelDataReferral* modelDataReferral;
     ModelAgentProfile* modelAgentProfil;
     SourceIncome *_sourceIncome;
     BranchInfo *_branchInfo;
@@ -223,6 +225,7 @@
 @property (weak, nonatomic) IBOutlet UISwitch *switchCountryOffice;
 
 -(IBAction)textFieldDidChangeEditing:(UITextField *)sender;
+-(IBAction)textFieldNIPDidEndEditing:(UITextField *)sender;
 /*end of added by faiz*/
 
 - (IBAction)ActionforRigdate:(id)sender;

@@ -161,7 +161,6 @@ bool RegDatehandling;
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
     
-    self.txtFullName.autocapitalizationType = UITextAutocapitalizationTypeWords;
     name_morethan3times = FALSE;
     DATE_OK = YES;
     Update_record = NO;
@@ -358,6 +357,8 @@ bool RegDatehandling;
 	[self.view addGestureRecognizer:tap];
     
     modelAgentProfil=[[ModelAgentProfile alloc]init];
+    modelDataReferral=[[ModelDataReferral alloc]init];
+    
     dictAgentData=[[NSDictionary alloc]initWithDictionary:[modelAgentProfil getAgentData]];
     [_txtChannelName setText:[NSString stringWithFormat:@"%@ - %@",[dictAgentData valueForKey:@"ChannelCode"],[dictAgentData valueForKey:@"ChannelName"]]];
     //[txtKanwil setText:[dictAgentData valueForKey:@"Kanwil"]];
@@ -367,6 +368,13 @@ bool RegDatehandling;
 
 #pragma mark - added by faiz
 /*code added by faiz*/
+-(IBAction)textFieldNIPDidEndEditing:(UITextField *)sender{
+    NSString *refName=[modelDataReferral getReferralName:sender.text];
+    if ([refName isEqualToString:@"(null)"]){
+        refName = @"";
+    }
+    [txtReferralName setText:refName];
+}
 
 -(IBAction)textFieldDidChangeEditing:(UITextField *)sender{
     if (sender==txtPrefix2){
@@ -1651,7 +1659,8 @@ bool RegDatehandling;
         [textField resignFirstResponder];
     }
     else if (textField == txtKcu) {
-        [txtKanwil becomeFirstResponder];
+        [textField resignFirstResponder];
+        //[txtKanwil becomeFirstResponder];
     }
     else if (textField == txtKanwil) {
         [txtReferralName becomeFirstResponder];
@@ -1739,7 +1748,6 @@ bool RegDatehandling;
 	NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
 	[ClientProfile setObject:@"YES" forKey:@"isNew"];
     
-    NSString *myString = nil;
     NSUInteger newLength = [textField.text length] + [string length] - range.length;
     
     if ((textField == txtHomePostCode)||(textField == txtOfficePostcode)){

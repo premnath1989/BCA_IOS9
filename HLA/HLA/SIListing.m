@@ -519,8 +519,8 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
         [cell.labelIlustrationDate setText:[DateCreated objectAtIndex:indexPath.row]];
         [cell.labelPOName setText:[Name objectAtIndex:indexPath.row]];
         [cell.labelProduct setText:[PlanName objectAtIndex:indexPath.row]];
-        //[cell.labelSumAssured setText:[BasicSA objectAtIndex:indexPath.row]];
-        [cell.labelSumAssured setText:@"0"];
+        [cell.labelSumAssured setText:[BasicSA objectAtIndex:indexPath.row]];
+        //[cell.labelSumAssured setText:@"0"];
         [cell.labelStatus setText:[SIStatus objectAtIndex:indexPath.row]];
     }
     /*UITableViewCell *cell = [self.myTableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -806,8 +806,8 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
     PlanName = [[NSMutableArray alloc] initWithArray:[dictIlustrationData valueForKey:@"ProductName"]];
     SIStatus = [[NSMutableArray alloc] initWithArray:[dictIlustrationData valueForKey:@"ProposalStatus"]];
     SIVersion = [[NSMutableArray alloc] initWithArray:[dictIlustrationData valueForKey:@"SI_Version"]];
-    //BasicSA = [[NSMutableArray alloc] initWithArray:[dictIlustrationData valueForKey:@"Sum_Assured"]];
-    BasicSA =[[NSMutableArray alloc]initWithObjects:[NSNumber numberWithDouble:0], nil];
+    BasicSA = [[NSMutableArray alloc] initWithArray:[dictIlustrationData valueForKey:@"Sum_Assured"]];
+    //BasicSA =[[NSMutableArray alloc]initWithObjects:[NSNumber numberWithDouble:0], nil];
     
     NSLog(@"SINO %@",dictIlustrationData);
 }
