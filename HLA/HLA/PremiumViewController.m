@@ -51,15 +51,19 @@
 //- (void)viewDidAppear:(BOOL)animated{
 -(void)setPremiumDictionary:(NSMutableDictionary *)premiumDictionary{
     dictionaryPremium = [[NSMutableDictionary alloc]initWithDictionary:premiumDictionary];
-    NSLog(@"dict %@",dictionaryPremium);
+   
+    if ([[dictionaryPremium valueForKey:@"ProductCode"] isEqualToString:@"BCALH"]){
+        [viewSubTotal setHidden:YES];
+    }
+    else{
+        [viewSubTotal setHidden:NO];
+    }
     _Pertanggungan_Dasar = [[dictionaryPremium valueForKey:@"Number_Sum_Assured"] integerValue];
     _PayorAge = [[dictionaryPremium valueForKey:@"PO_Age"]integerValue];;
     _PayorSex = [dictionaryPremium valueForKey:@"LA_Gender"];
     Highlight =[dictionaryPremium valueForKey:@"Payment_Frequency"];
     Pertanggungan_ExtrePremi = [[dictionaryPremium valueForKey:@"ExtraPremiumTerm"] integerValue];
     ExtraPremiNumbValue  = [[dictionaryPremium valueForKey:@"ExtraPremiumSum"] integerValue];
-    
-    
     
     [self AnsuransiDasar];
     [self PremiDasarActB];
@@ -85,6 +89,7 @@
     [database open];
     FMResultSet *results;
     AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM basicPremiumRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",_PayorSex,@"HRT",@"S",_PayorAge];
+    NSLog(@"query %@",AnsuransiDasarQuery);
     results = [database executeQuery:AnsuransiDasarQuery];
     
     NSString*RatesPremiumRate;

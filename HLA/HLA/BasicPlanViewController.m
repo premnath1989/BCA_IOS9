@@ -25,6 +25,7 @@
 @synthesize FrekuensiPembayaranChecking,FRekeunsiPembayaranMode,YearlyIncm;
 @synthesize yearlyIncomeField;
 @synthesize ExtraPremiDasarLBL;
+@synthesize MasaExtraPremiLBL;
 @synthesize ExtraPremiDasarNumberLBL;
 @synthesize minSALabel;
 @synthesize maxSALabel;
@@ -295,7 +296,7 @@ bool WPTPD30RisDeleted = FALSE;
         _KKLKMasaPembayaran.hidden = YES;
         _masaPembayaranButton.hidden = NO;
          ExtraPremiDasarLBL.hidden = NO;
-        yearlyIncomeField.text = @"";
+        //yearlyIncomeField.text = @"";
 //    }
 
 }
@@ -314,7 +315,7 @@ bool WPTPD30RisDeleted = FALSE;
     _masaPembayaranButton.hidden = YES;
     ExtraPremiDasarLBL.hidden = YES;
     FrekuensiPembayaranChecking =@"10 Tahun";
-    yearlyIncomeField.text = @"";
+    //yearlyIncomeField.text = @"";
     
 
     //    }
@@ -492,6 +493,21 @@ bool WPTPD30RisDeleted = FALSE;
 #pragma mark - added by faiz 
 //added by faiz
 
+-(IBAction)MasaExtraPremiTextFieldDidBegin:(UITextField *)sender{
+    if ([_masaPembayaranButton.titleLabel.text isEqualToString:@"Premi Tunggal"]){
+        [MasaExtraPremiLBL setText:@"Min 1 | Max 1"];
+    }
+    else if ([_masaPembayaranButton.titleLabel.text isEqualToString:@"Premi 5 Tahun"]){
+        [MasaExtraPremiLBL setText:@"Min 1 | Max 5"];
+    }
+    [MasaExtraPremiLBL setHidden:NO];
+}
+
+-(IBAction)MasaExtraPremiTextFieldDidEnd:(UITextField *)sender {
+    [MasaExtraPremiLBL setHidden:YES];
+}
+
+
 -(IBAction)actionMasaPembayaran:(id)sender
 {
     
@@ -650,7 +666,6 @@ bool WPTPD30RisDeleted = FALSE;
     
     NSString*RatesPremiumRate;
     double PaymentMode;
-    FMDatabase *database1 = [FMDatabase databaseWithPath:path2];
     if (![database open])
     {
         NSLog(@"Could not open db.");
@@ -684,7 +699,7 @@ bool WPTPD30RisDeleted = FALSE;
     
     BasisSumAssured = [myNumber longLongValue];
 
-    int total =(BasisSumAssured/1000);
+    long long total =(BasisSumAssured/1000);
     
     double test = PaymentMode * RatesInt;
     
@@ -711,7 +726,6 @@ bool WPTPD30RisDeleted = FALSE;
     
     NSString*RatesPremiumRate;
     double PaymentMode;
-    FMDatabase *database1 = [FMDatabase databaseWithPath:path2];
     if (![database open])
     {
         NSLog(@"Could not open db.");
@@ -738,7 +752,7 @@ bool WPTPD30RisDeleted = FALSE;
     }
     
     double RatesInt = [RatesPremiumRate doubleValue];
-    int totalDivide =(BasisSumAssured/1000);
+    long long totalDivide =(BasisSumAssured/1000);
     
     double valueofTotal =(PaymentMode * RatesInt);
     
@@ -748,14 +762,20 @@ bool WPTPD30RisDeleted = FALSE;
     int masaExtraPremiBTotal =[_masaExtraPremiField.text intValue];
     
     double totalB = total * masaExtraPremiBTotal;
+    double TotalAB = TotalA + totalB;
     
-    [_extraBasicPremiField setText:[NSString stringWithFormat:@"%f", totalB]];
+    NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setFormatterBehavior: NSNumberFormatterBehavior10_4];
+    [numberFormatter setNumberStyle: NSNumberFormatterDecimalStyle];
+    [numberFormatter setRoundingMode:NSNumberFormatterRoundUp];
+    [numberFormatter setMaximumFractionDigits:0];
+    [numberFormatter setMinimumFractionDigits:0];
     
+    NSString *numberExtraBasicPremi = [numberFormatter stringFromNumber: [NSNumber numberWithDouble:totalB]];
+    NSString *totalPremiWithLoading = [numberFormatter stringFromNumber: [NSNumber numberWithDouble:TotalAB]];
     
-    int TotalAB = TotalA + totalB;
-    
-    [_totalPremiWithLoadingField setText:[NSString stringWithFormat:@"%d", TotalAB]];
-    
+    [_extraBasicPremiField setText:[NSString stringWithFormat:@"%@", numberExtraBasicPremi]];
+    [_totalPremiWithLoadingField setText:[NSString stringWithFormat:@"%@", totalPremiWithLoading]];
 }
 
 

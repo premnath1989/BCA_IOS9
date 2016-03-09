@@ -29,6 +29,7 @@
 
 -(void)viewDidAppear:(BOOL)animated {
     page =1;
+    [self loadPremi];
     [self loadHTMLToWebView];
 }
 
@@ -284,12 +285,29 @@
 - (void)setValuePage1{
     NSString *javaScript = [NSString stringWithFormat:@"document.getElementById('SINumber').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"SINO"]];
     
+    NSString *sex;
+    if ([[_dictionaryPOForInsert valueForKey:@"LA_Gender"] isEqualToString:@"MALE"]){
+        sex=@"Pria";
+    }
+    else{
+        sex=@"Wanita";
+    }
+    
+    NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setFormatterBehavior: NSNumberFormatterBehavior10_4];
+    [numberFormatter setNumberStyle: NSNumberFormatterDecimalStyle];
+    NSString *numberString = [numberFormatter stringFromNumber: [NSNumber numberWithInteger: totalYear]];
+    
+    
     NSString *javaScriptP1H1 = [NSString stringWithFormat:@"document.getElementById('HeaderLAName').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"LA_Name"]];
-    NSString *javaScriptP1H2 = [NSString stringWithFormat:@"document.getElementById('HeaderLASex').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"LA_Gender"]];
+    NSString *javaScriptP1H2 = [NSString stringWithFormat:@"document.getElementById('HeaderLASex').innerHTML =\"%@\";", sex];
     NSString *javaScriptP1H3 = [NSString stringWithFormat:@"document.getElementById('HeaderLADOB').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"LA_DOB"]];
     NSString *javaScriptP1H4 = [NSString stringWithFormat:@"document.getElementById('HeaderOccupation').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"LA_Occp"]];
     NSString *javaScriptP1H5 = [NSString stringWithFormat:@"document.getElementById('HeaderPaymentPeriode').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"Payment_Term"]];
     NSString *javaScriptP1H6 = [NSString stringWithFormat:@"document.getElementById('HeaderPaymentFrequency').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"Payment_Frequency"]];
+    
+    NSString *javaScriptP1T1 = [NSString stringWithFormat:@"document.getElementById('BasicSA').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"Sum_Assured"]];
+    NSString *javaScriptP1T2 = [NSString stringWithFormat:@"document.getElementById('Premi').innerHTML =\"%@\";", numberString];
     
     NSString *javaScriptP2H1 = [NSString stringWithFormat:@"document.getElementById('HeaderPOName').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"PO_Name"]];
     NSString *javaScriptP2H2 = [NSString stringWithFormat:@"document.getElementById('HeaderSumAssured').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"Sum_Assured"]];
@@ -324,6 +342,9 @@
     NSString *response4 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1H4];
     NSString *response5 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1H5];
     NSString *response6 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1H6];
+
+    NSString *response7 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1T1];
+    NSString *response8 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1T2];
     
     NSString *responseF1 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptF1];
     NSString *responseF2 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptF2];
@@ -354,6 +375,9 @@
     NSLog(@"javascript result: %@", response4);
     NSLog(@"javascript result: %@", response5);
     NSLog(@"javascript result: %@", response6);
+
+    NSLog(@"javascript result: %@", response7);
+    NSLog(@"javascript result: %@", response8);
     
     NSLog(@"javascript result: %@", responseF1);
     NSLog(@"javascript result: %@", responseF2);
@@ -621,6 +645,117 @@
     }
 #endif
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)loadPremi{
+    Pertanggungan_Dasar = [[_dictionaryForBasicPlan valueForKey:@"Number_Sum_Assured"] integerValue];
+    PayorAge = [[_dictionaryForBasicPlan valueForKey:@"PO_Age"]integerValue];;
+    PayorSex = [_dictionaryForBasicPlan valueForKey:@"LA_Gender"];
+    Highlight =[_dictionaryForBasicPlan valueForKey:@"Payment_Frequency"];
+    Pertanggungan_ExtrePremi = [[_dictionaryForBasicPlan valueForKey:@"ExtraPremiumTerm"] integerValue];
+    ExtraPremiNumbValue  = [[_dictionaryForBasicPlan valueForKey:@"ExtraPremiumSum"] integerValue];
+    
+    [self AnsuransiDasar];
+    [self PremiDasarActB];
+    [self ExtraPremiNumber];
+    [self SubTotal];
+    [self PremiDasarActB];
+}
+
+-(void)AnsuransiDasar
+{
+    NSString*AnsuransiDasarQuery;
+    NSArray *paths2 = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsPath2 = [paths2 objectAtIndex:0];
+    NSString *path2 = [docsPath2 stringByAppendingPathComponent:@"BCA_Rates.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path2];
+    [database open];
+    FMResultSet *results;
+    AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM basicPremiumRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",PayorSex,@"HRT",@"S",PayorAge];
+    NSLog(@"query %@",AnsuransiDasarQuery);
+    results = [database executeQuery:AnsuransiDasarQuery];
+    
+    NSString*RatesPremiumRate;
+    int PaymentModeYear;
+    int PaymentModeMonthly;
+    if (![database open])
+    {
+        NSLog(@"Could not open db.");
+    }
+    
+    while([results next])
+    {
+        if ([PayorSex isEqualToString:@"Male"]||[PayorSex isEqualToString:@"MALE"]){
+            RatesPremiumRate  = [results stringForColumn:@"Male"];
+        }
+        else{
+            RatesPremiumRate  = [results stringForColumn:@"Female"];
+        }
+    }
+    
+    PaymentModeYear = 1;
+    PaymentModeMonthly = 0.1;
+    
+    double RatesInt = [RatesPremiumRate doubleValue];
+    AnssubtotalYear =(Pertanggungan_Dasar/1000)*(PaymentModeYear * RatesInt);
+    //int RatesInt = [RatesPremiumRate intValue];
+    AnssubtotalBulan =(Pertanggungan_Dasar/1000)*(0.1 * RatesInt);
+}
+
+-(void)PremiDasarActB
+{
+    NSString*AnsuransiDasarQuery;
+    NSArray *paths2 = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsPath2 = [paths2 objectAtIndex:0];
+    NSString *path2 = [docsPath2 stringByAppendingPathComponent:@"BCA_Rates.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path2];
+    [database open];
+    FMResultSet *results;
+    AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM EMRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",PayorSex,@"HRT",@"S",PayorAge];
+    NSLog(@"query %@",AnsuransiDasarQuery);
+    results = [database executeQuery:AnsuransiDasarQuery];
+    
+    NSString*RatesPremiumRate;
+    double PaymentMode;
+    if (![database open])
+    {
+        NSLog(@"Could not open db.");
+    }
+    
+    while([results next])
+    {
+        if ([PayorSex isEqualToString:@"Male"]||[PayorSex isEqualToString:@"MALE"]){
+            RatesPremiumRate  = [results stringForColumn:@"Male"];
+        }
+        else{
+            RatesPremiumRate  = [results stringForColumn:@"Female"];
+            
+        }
+        
+    }
+    PaymentMode = 1;
+    PaymentMode = 0.1;
+    
+    
+    double RatesInt = [RatesPremiumRate doubleValue];
+    
+    ExtraPercentsubtotalYear =(Pertanggungan_Dasar/1000)*(1.0 * RatesInt)*Pertanggungan_ExtrePremi;
+    ExtraPercentsubtotalBulan =(Pertanggungan_Dasar/1000)*(0.1 * RatesInt)*Pertanggungan_ExtrePremi;
+}
+
+
+-(void)ExtraPremiNumber
+{
+    ExtraNumbsubtotalYear =(ExtraPremiNumbValue* 1.0) *(Pertanggungan_Dasar/1000);
+    ExtraNumbsubtotalBulan =(ExtraPremiNumbValue* 0.1) *(Pertanggungan_Dasar/1000);
+}
+
+-(void)SubTotal
+{
+    totalYear = (AnssubtotalYear + ExtraNumbsubtotalYear + ExtraPercentsubtotalYear);
+    totalBulanan = (AnssubtotalBulan + ExtraNumbsubtotalBulan + ExtraPercentsubtotalBulan);
 }
 
 

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15A284" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="BPreplay.otf">
+            <string>BPreplay</string>
             <string>BPreplay</string>
             <string>BPreplay</string>
             <string>BPreplay</string>
@@ -260,20 +261,20 @@
                                 </connections>
                             </webView>
                             <view contentMode="scaleToFill" id="NHv-Mg-qV4">
-                                <rect key="frame" x="0.0" y="46" width="1024" height="722"/>
+                                <rect key="frame" x="0.0" y="64" width="1024" height="704"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <view alpha="0.5" contentMode="scaleToFill" id="gzR-id-HeQ">
-                                        <rect key="frame" x="0.0" y="0.0" width="1024" height="722"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="1024" height="704"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" id="i71-jW-EbM">
-                                        <rect key="frame" x="493" y="320" width="37" height="37"/>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" id="i71-jW-EbM">
+                                        <rect key="frame" x="493" y="311" width="37" height="37"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </activityIndicatorView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Creating Quotation" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xR9-hu-rqO">
-                                        <rect key="frame" x="361" y="365" width="302" height="38"/>
+                                        <rect key="frame" x="361" y="356" width="302" height="38"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="20"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -3724,7 +3725,7 @@
                                         <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Min Rp 1,000,000,000.00 | Max Rp 300,000,000,000.00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Be8-cC-xKO">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Min Rp 1,000,000,000 | Max Rp 300,000,000,000" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Be8-cC-xKO">
                                         <rect key="frame" x="517" y="7" width="247" height="29"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="9"/>
@@ -3799,6 +3800,8 @@
                                         <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                         <connections>
+                                            <action selector="MasaExtraPremiTextFieldDidBegin:" destination="Bg9-Wf-jjW" eventType="editingDidBegin" id="SEe-Rn-9Zh"/>
+                                            <action selector="MasaExtraPremiTextFieldDidEnd:" destination="Bg9-Wf-jjW" eventType="editingDidEnd" id="p5a-66-7IJ"/>
                                             <outlet property="delegate" destination="Bg9-Wf-jjW" id="nfj-1Y-BGa"/>
                                         </connections>
                                     </textField>
@@ -3832,6 +3835,13 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
+                                    <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="0/100" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EVg-jp-kZt">
+                                        <rect key="frame" x="517" y="357" width="246" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
+                                        <color key="textColor" red="0.94901960780000005" green="0.4431372549" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                             </scrollView>
                         </subviews>
@@ -3848,8 +3858,10 @@
                         <outlet property="KKLKDiskaunLbl" destination="kAj-9z-Kxh" id="lA4-JJ-enp"/>
                         <outlet property="KKLKExtraPremiDasarLBL" destination="R2E-3o-LqR" id="Dm7-ln-leN"/>
                         <outlet property="KKLKMasaPembayaran" destination="1GV-Zv-eH8" id="ra6-rs-Zo2"/>
+                        <outlet property="KKLKPembelianKeBtn" destination="kap-z4-Yjk" id="2uf-90-tz9"/>
                         <outlet property="KKLKPembelianKeLbl" destination="cNH-u4-mGv" id="KWy-EJ-FuS"/>
                         <outlet property="MOPSegment" destination="GNN-Cy-LrN" id="9Xi-dD-MiU"/>
+                        <outlet property="MasaExtraPremiLBL" destination="EVg-jp-kZt" id="Pzp-Tr-zfi"/>
                         <outlet property="S100MOPSegment" destination="NfY-zv-Rhe" id="g6a-Ms-HLJ"/>
                         <outlet property="advanceIncomeSegment" destination="e0n-58-WxS" id="E4u-O3-D9g"/>
                         <outlet property="basicPremiField" destination="Csr-9E-LP8" id="ZQY-8o-C7O"/>
@@ -4720,7 +4732,7 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99,000,000.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rbi-7r-OEP">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99,000,000.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rbi-7r-OEP">
                                                 <rect key="frame" x="395" y="5" width="145" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -4728,7 +4740,7 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99,000,000.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PRI-zN-aRt">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99,000,000.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PRI-zN-aRt">
                                                 <rect key="frame" x="548" y="5" width="145" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -4736,7 +4748,7 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99,000,000.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="U0S-NC-pJB">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99,000,000.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="U0S-NC-pJB">
                                                 <rect key="frame" x="242" y="5" width="145" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -4818,6 +4830,7 @@
                         <outlet property="lblTotalSekaligus" destination="Gyw-kj-wbn" id="qBY-lt-rdW"/>
                         <outlet property="lblTotalTahunan" destination="aQa-BJ-N9V" id="Tcc-mC-0BK"/>
                         <outlet property="navItem" destination="Grc-rY-MoE" id="V6R-JL-dkc"/>
+                        <outlet property="viewSubTotal" destination="nbb-Ul-SOP" id="07U-aW-565"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BPg-G8-9uc" userLabel="First Responder" sceneMemberID="firstResponder"/>

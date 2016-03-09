@@ -169,6 +169,7 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *outletDone;
 @property (weak, nonatomic) IBOutlet UILabel *labelThree;
 @property (weak, nonatomic) IBOutlet UILabel *ExtraPremiDasarLBL;
+@property (weak, nonatomic) IBOutlet UILabel *MasaExtraPremiLBL;
 @property (weak, nonatomic) IBOutlet UILabel *ExtraPremiDasarNumberLBL;
 @property (weak, nonatomic) IBOutlet UILabel *KKLKExtraPremiDasarLBL;
 @property (weak, nonatomic) IBOutlet UIButton *KKLKPembelianKeBtn;
@@ -196,6 +197,8 @@
 -(IBAction)actionFrekuensiPembayaran:(id)sender;
 -(IBAction)ExtraPremiDasarLBLFunc:(id)sender;
 -(IBAction)ExtraPremiDasarNumberLBLFunc:(id)sender;
+-(IBAction)MasaExtraPremiTextFieldDidBegin:(UITextField *)sender;
+-(IBAction)MasaExtraPremiTextFieldDidEnd:(UITextField *)sender;
 //end of added by faiz
 
 //for SINo

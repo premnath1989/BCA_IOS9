@@ -55,6 +55,8 @@
     
     int maxGycc;
     
+    IBOutlet UIView *viewSubTotal;
+    
     IBOutlet UILabel *lblAsuransiDasarTahunan;
     IBOutlet UILabel *lblAsuransiDasarBulanan;
     IBOutlet UILabel *lblAsuransiDasarSekaligus;

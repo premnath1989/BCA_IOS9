@@ -28,6 +28,21 @@
     PagesController *_PagesList;
     UIPopoverController *_PagesPopover;
     IBOutlet UIView* viewspinBar;
+    
+    int Pertanggungan_Dasar;
+    int Pertanggungan_ExtrePremi;
+    NSString *PayorSex;
+    int PayorAge;
+    double AnssubtotalBulan;
+    double AnssubtotalYear;
+    int ExtraPercentsubtotalBulan;
+    int ExtraPercentsubtotalYear;
+    int ExtraNumbsubtotalBulan;
+    int ExtraNumbsubtotalYear;
+    int ExtraPremiNumbValue;
+    NSString *Highlight;
+    int totalYear;
+    int totalBulanan;
 }
 @property (retain, nonatomic) NSMutableDictionary* dictionaryPOForInsert;
 @property (retain, nonatomic) NSMutableDictionary* dictionaryMasterForInsert;
