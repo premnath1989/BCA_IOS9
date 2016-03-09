@@ -175,6 +175,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *KKLKPembelianKeLbl;
 
 @property (weak, nonatomic) IBOutlet UITextField *KKLKDiskaunBtn;
+@property (weak, nonatomic) IBOutlet UITextField *KKLKMasaPembayaran;
+
+
 @property (weak, nonatomic) IBOutlet UILabel *KKLKDiskaunLbl;
 
 //Added by faiz

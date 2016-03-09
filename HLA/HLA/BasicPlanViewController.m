@@ -16,9 +16,7 @@
 #import "SIObj.h"
 #import "Constants.h"
 
-
 @interface BasicPlanViewController ()
-
 @end
 
 @implementation BasicPlanViewController
@@ -294,6 +292,8 @@ bool WPTPD30RisDeleted = FALSE;
         _KKLKExtraPremiDasarLBL.hidden = YES;
         _KKLKPembelianKeBtn.hidden = YES;
         _KKLKPembelianKeLbl.hidden = YES;
+        _KKLKMasaPembayaran.hidden = YES;
+        _masaPembayaranButton.hidden = NO;
 //    }
 
 }
@@ -301,13 +301,17 @@ bool WPTPD30RisDeleted = FALSE;
 -(void)KeluargakuEnable
 {
     NSLog(@"%@",PlanType);
-    //    if ([PlanType isEqualToString:@"BCA Life Heritage"])
+    //    if ([PlanType isEqualToString:@"BCA Life Keluargaku"])
     //    {
     _KKLKDiskaunBtn.hidden = NO;
     _KKLKDiskaunLbl.hidden = NO;
     _KKLKExtraPremiDasarLBL.hidden = NO;
     _KKLKPembelianKeBtn.hidden = NO;
     _KKLKPembelianKeLbl.hidden = NO;
+    _KKLKMasaPembayaran.hidden = NO;
+    _masaPembayaranButton.hidden = YES;
+    
+
     //    }
     
 }
