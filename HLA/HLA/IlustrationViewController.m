@@ -3,9 +3,9 @@
 //  BLESS
 //
 //  Created by Basvi on 3/1/16.
-//  Copyright © 2016 Hong Leong Assurance. All rights reserved.
+//  Copyright © 2016 InfoConnect Sdn Bhd. All rights reserved.
 //
-#define kPaperSizeA4 CGSizeMake(842,595)
+#define kPaperSizeA4 CGSizeMake(842,655)
 
 #import "IlustrationViewController.h"
 
