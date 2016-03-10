@@ -610,11 +610,14 @@ NSMutableArray *DelGroupArr;
     NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
     
     //validation message data refferal
+    NSString *validationNIP=@"NIP harus diisi";    
     NSString *validationKodeCabang=@"Kode Cabang harus diisi";
     NSString *validationNamaCabang=@"Nama Cabang harus diisi";
     NSString *validationKCU=@"KCU harus diisi";
     NSString *validationNamaReferral=@"Nama Referral harus diisi";
     NSString *validationSumberReferral=@"Sumber Referral harus diisi";
+    //textNIP
+    NSString* NIP=txtNip.text;
     //outletkodecabang
     NSString* branchCode=_outletBranchCode.titleLabel.text;
     //outletnamacabang
@@ -626,7 +629,12 @@ NSMutableArray *DelGroupArr;
     //outlet sumber referral
     NSString* refSource=outletReferralSource.titleLabel.text;
     
-    if ([validationSet containsObject:branchCode]||branchCode==NULL){
+    if ([validationSet containsObject:NIP]||NIP==NULL){
+        [self createAlertViewAndShow:validationNIP tag:0];
+        [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+        return false;
+    }
+    else if ([validationSet containsObject:branchCode]||branchCode==NULL){
         [self createAlertViewAndShow:validationKodeCabang tag:0];
         [_outletBranchCode setBackgroundColor:[UIColor redColor]];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
