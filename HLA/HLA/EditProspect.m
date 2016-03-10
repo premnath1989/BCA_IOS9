@@ -352,6 +352,8 @@ NSMutableArray *DelGroupArr;
     
     [self addressChange];
     modelAgentProfil=[[ModelAgentProfile alloc]init];
+    modelDataReferral=[[ModelDataReferral alloc]init];
+    
     dictAgentData=[[NSDictionary alloc]initWithDictionary:[modelAgentProfil getAgentData]];
     [_txtChannelName setText:[dictAgentData valueForKey:@"ChannelName"]];
     [txtKanwil setText:[dictAgentData valueForKey:@"Kanwil"]];
@@ -396,7 +398,7 @@ NSMutableArray *DelGroupArr;
             textField.delegate=self;
             [textField setFont:font];
             
-            UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
+            UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 20)];
             textField.leftView = paddingView;
             textField.leftViewMode = UITextFieldViewModeAlways;
         }
@@ -415,7 +417,7 @@ NSMutableArray *DelGroupArr;
             textField.delegate=self;
             [textField setFont:font];
             
-            UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
+            UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 20)];
             textField.leftView = paddingView;
             textField.leftViewMode = UITextFieldViewModeAlways;
         }
@@ -434,7 +436,7 @@ NSMutableArray *DelGroupArr;
             textField.delegate=self;
             [textField setFont:font];
             
-            UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
+            UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 20)];
             textField.leftView = paddingView;
             textField.leftViewMode = UITextFieldViewModeAlways;
         }
@@ -454,7 +456,7 @@ NSMutableArray *DelGroupArr;
             textField.delegate=self;
             [textField setFont:font];
             
-            UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
+            UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 20)];
             textField.leftView = paddingView;
             textField.leftViewMode = UITextFieldViewModeAlways;
         }
@@ -474,7 +476,7 @@ NSMutableArray *DelGroupArr;
             textField.delegate=self;
             [textField setFont:font];
             
-            UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
+            UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 20)];
             textField.leftView = paddingView;
             textField.leftViewMode = UITextFieldViewModeAlways;
         }
@@ -494,7 +496,7 @@ NSMutableArray *DelGroupArr;
             textField.delegate=self;
             [textField setFont:font];
             
-            UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
+            UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 20)];
             textField.leftView = paddingView;
             textField.leftViewMode = UITextFieldViewModeAlways;
         }
@@ -504,6 +506,8 @@ NSMutableArray *DelGroupArr;
             textView.layer.borderWidth=1.0;
             textView.delegate=self;
             [textView setFont:font];
+            
+            textView.textContainerInset = UIEdgeInsetsMake(0, 4, 0, 20);
         }
         if ([view isKindOfClass:[UIButton class]]) {
             UIButton *button = (UIButton *)view;
@@ -516,53 +520,53 @@ NSMutableArray *DelGroupArr;
 -(void)setButtonImageAndTextAlignment{
     outletTitle.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     outletTitle.imageEdgeInsets = UIEdgeInsetsMake(0., outletTitle.frame.size.width - (24 + 10.0), 0., 0.);
-    outletTitle.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 31.7);
+    outletTitle.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
     
     outletDOB.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     outletDOB.imageEdgeInsets = UIEdgeInsetsMake(0., outletDOB.frame.size.width - (24 + 10.0), 0., 0.);
-    outletDOB.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 31.7);
+    outletDOB.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
     outletDOB.layer.borderWidth = 1.0;
     outletDOB.layer.borderColor = borderColor.CGColor;
     
     OtherIDType.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     OtherIDType.imageEdgeInsets = UIEdgeInsetsMake(0., outletDOB.frame.size.width - (24 + 10.0), 0., 0.);
-    OtherIDType.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 31.7);
+    OtherIDType.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
     
     outletMaritalStatus.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     outletMaritalStatus.imageEdgeInsets = UIEdgeInsetsMake(0., outletDOB.frame.size.width - (24 + 10.0), 0., 0.);
-    outletMaritalStatus.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 31.7);
+    outletMaritalStatus.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
     
     outletNationality.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     outletNationality.imageEdgeInsets = UIEdgeInsetsMake(0., outletNationality.frame.size.width - (24 + 10.0), 0., 0.);
-    outletNationality.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 31.7);
+    outletNationality.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
     
     outletReligion.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     outletReligion.imageEdgeInsets = UIEdgeInsetsMake(0., outletReligion.frame.size.width - (24 + 10.0), 0., 0.);
-    outletReligion.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 31.7);
+    outletReligion.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
     
     outletReligion.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     outletReligion.imageEdgeInsets = UIEdgeInsetsMake(0., outletReligion.frame.size.width - (24 + 10.0), 0., 0.);
-    outletReligion.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 31.7);
+    outletReligion.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
     
     btnOfficeCountry.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     btnOfficeCountry.imageEdgeInsets = UIEdgeInsetsMake(0., btnOfficeCountry.frame.size.width - (24 + 10.0), 0., 0.);
-    btnOfficeCountry.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 31.7);
+    btnOfficeCountry.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
     btnOfficeCountry.layer.borderWidth=1.0;
     btnOfficeCountry.layer.borderColor=borderColor.CGColor;
     
     btnHomeCountry.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     btnHomeCountry.imageEdgeInsets = UIEdgeInsetsMake(0., btnHomeCountry.frame.size.width - (24 + 10.0), 0., 0.);
-    btnHomeCountry.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 31.7);
+    btnHomeCountry.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
     btnHomeCountry.layer.borderWidth=1.0;
     btnHomeCountry.layer.borderColor=borderColor.CGColor;
     
     outletOccup.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     outletOccup.imageEdgeInsets = UIEdgeInsetsMake(0., outletOccup.frame.size.width - (24 + 10.0), 0., 0.);
-    outletOccup.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 31.7);
+    outletOccup.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
     
     BtnCountryOfBirth.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     BtnCountryOfBirth.imageEdgeInsets = UIEdgeInsetsMake(0., outletTitle.frame.size.width - (24 + 10.0), 0., 0.);
-    BtnCountryOfBirth.titleEdgeInsets = UIEdgeInsetsMake(0, -24.0, 0, 31.7);
+    BtnCountryOfBirth.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
     
     outletExpiryDate.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     outletExpiryDate.imageEdgeInsets = UIEdgeInsetsMake(0., outletExpiryDate.frame.size.width - (24 + 10.0), 0., 0.);
@@ -606,11 +610,14 @@ NSMutableArray *DelGroupArr;
     NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
     
     //validation message data refferal
+    NSString *validationNIP=@"NIP harus diisi";    
     NSString *validationKodeCabang=@"Kode Cabang harus diisi";
     NSString *validationNamaCabang=@"Nama Cabang harus diisi";
     NSString *validationKCU=@"KCU harus diisi";
     NSString *validationNamaReferral=@"Nama Referral harus diisi";
     NSString *validationSumberReferral=@"Sumber Referral harus diisi";
+    //textNIP
+    NSString* NIP=txtNip.text;
     //outletkodecabang
     NSString* branchCode=_outletBranchCode.titleLabel.text;
     //outletnamacabang
@@ -622,7 +629,12 @@ NSMutableArray *DelGroupArr;
     //outlet sumber referral
     NSString* refSource=outletReferralSource.titleLabel.text;
     
-    if ([validationSet containsObject:branchCode]||branchCode==NULL){
+    if ([validationSet containsObject:NIP]||NIP==NULL){
+        [self createAlertViewAndShow:validationNIP tag:0];
+        [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+        return false;
+    }
+    else if ([validationSet containsObject:branchCode]||branchCode==NULL){
         [self createAlertViewAndShow:validationKodeCabang tag:0];
         [_outletBranchCode setBackgroundColor:[UIColor redColor]];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
@@ -640,12 +652,12 @@ NSMutableArray *DelGroupArr;
         [txtKcu becomeFirstResponder];
         return false;
     }
-    else if ([validationSet containsObject:refName]||refName==NULL){
+    /*else if ([validationSet containsObject:refName]||refName==NULL){
         [self createAlertViewAndShow:validationNamaReferral tag:0];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
         [txtReferralName becomeFirstResponder];
         return false;
-    }
+    }*/
     else if ([validationSet containsObject:refSource]||refSource==NULL){
         [self createAlertViewAndShow:validationSumberReferral tag:0];
         [outletReferralSource setBackgroundColor:[UIColor redColor]];
@@ -2220,7 +2232,7 @@ NSMutableArray *DelGroupArr;
     txtRigNO.text = pp.registrationNo;
     
     if (!(pp.registrationDate == NULL || [pp.registrationDate isEqualToString:@"- SELECT -"] || [pp.registrationDate isEqualToString:@""] )) {
-        [outletRigDOB setTitle:[[NSString stringWithFormat:@"  "] stringByAppendingFormat:@"%@", pp.registrationDate]forState:UIControlStateNormal];
+        [outletRigDOB setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", pp.registrationDate]forState:UIControlStateNormal];
         outletRigDOB.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
     else {
@@ -2241,7 +2253,7 @@ NSMutableArray *DelGroupArr;
 	
     if (!(pp.ProspectGroup == NULL || [pp.ProspectGroup isEqualToString:@"- SELECT -"] || [pp.ProspectGroup isEqualToString:@""] )) {
 		
-        [outletGroup setTitle:[[NSString stringWithFormat:@"  "] stringByAppendingFormat:@"%@", pp.ProspectGroup]forState:UIControlStateNormal];
+        [outletGroup setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", pp.ProspectGroup]forState:UIControlStateNormal];
         outletGroup.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
     else {
@@ -2251,7 +2263,7 @@ NSMutableArray *DelGroupArr;
     pp.ProspectTitle = [pp.ProspectTitle stringByTrimmingCharactersInSet:
                         [NSCharacterSet whitespaceCharacterSet]];
     if (!(pp.ProspectTitle == NULL || [pp.ProspectTitle isEqualToString:@"(null)"] || [pp.ProspectTitle isEqualToString:@"- SELECT -"] || [pp.ProspectTitle isEqualToString:@""])) {
-        [outletTitle setTitle:[[NSString stringWithFormat:@"  "] stringByAppendingFormat:@"%@", [self getTitleDesc:pp.ProspectTitle]]forState:UIControlStateNormal];
+        [outletTitle setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", [self getTitleDesc:pp.ProspectTitle]]forState:UIControlStateNormal];
         outletTitle.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
 		TitleCodeSelected = pp.ProspectTitle;
     }
@@ -2259,7 +2271,7 @@ NSMutableArray *DelGroupArr;
         [outletTitle setTitle:@"- SELECT -" forState:UIControlStateNormal];
     }
     if (!(pp.Race == NULL || [pp.Race isEqualToString:@"- SELECT -"] || [pp.Race isEqualToString:@""])) {
-        [outletRace setTitle:[[NSString stringWithFormat:@"  "] stringByAppendingFormat:@"%@", pp.Race]forState:UIControlStateNormal];
+        [outletRace setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", pp.Race]forState:UIControlStateNormal];
         outletRace.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
     else {
@@ -2267,7 +2279,7 @@ NSMutableArray *DelGroupArr;
     }
     
     if (!(pp.MaritalStatus == NULL || [pp.MaritalStatus isEqualToString:@"- SELECT -"] || [pp.MaritalStatus isEqualToString:@""])) {
-        [outletMaritalStatus setTitle:[[NSString stringWithFormat:@"  "] stringByAppendingFormat:@"%@", pp.MaritalStatus]forState:UIControlStateNormal];
+        [outletMaritalStatus setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", pp.MaritalStatus]forState:UIControlStateNormal];
         outletMaritalStatus.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
     else {
@@ -2276,14 +2288,14 @@ NSMutableArray *DelGroupArr;
     
     if (!(pp.Religion == NULL || [pp.Religion isEqualToString:@"- SELECT -"] || [pp.Religion isEqualToString:@""])) {
         NSLog(@"religion %@",pp.Religion);
-        [outletReligion setTitle:[[NSString stringWithFormat:@"  "] stringByAppendingFormat:@"%@", pp.Religion]forState:UIControlStateNormal];
+        [outletReligion setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", pp.Religion]forState:UIControlStateNormal];
         outletReligion.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
     else {
         [outletReligion setTitle:@"- SELECT -" forState:UIControlStateNormal];
     }
     if (!(pp.Nationality == NULL || [pp.Nationality isEqualToString:@"- SELECT -"] || [pp.Nationality isEqualToString:@""])) {
-        [outletNationality setTitle:[[NSString stringWithFormat:@"  "] stringByAppendingFormat:@"%@", pp.Nationality]forState:UIControlStateNormal];
+        [outletNationality setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", pp.Nationality]forState:UIControlStateNormal];
         outletNationality.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
     else {
@@ -2293,7 +2305,7 @@ NSMutableArray *DelGroupArr;
 	
     if (!(pp.OtherIDType == NULL || [pp.OtherIDType isEqualToString:@"- SELECT -"] || [pp.OtherIDType isEqualToString:@""])) {
         
-        [OtherIDType setTitle:[[NSString stringWithFormat:@"  "] stringByAppendingFormat:@"%@", [self getIDTypeDesc:pp.OtherIDType]]forState:UIControlStateNormal];
+        [OtherIDType setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", [self getIDTypeDesc:pp.OtherIDType]]forState:UIControlStateNormal];
 		
 		if ([IDTypeCodeSelected isEqualToString:@""] || (IDTypeCodeSelected == NULL)) {
 			IDTypeCodeSelected = pp.OtherIDType;
@@ -2387,7 +2399,7 @@ NSMutableArray *DelGroupArr;
         COB = [self getCountryDesc:pp.countryOfBirth];
         pp.countryOfBirth =   [self getCountryDesc:pp.countryOfBirth];
 		
-		[BtnCountryOfBirth setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", pp.countryOfBirth]forState:UIControlStateNormal];
+		[BtnCountryOfBirth setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", pp.countryOfBirth]forState:UIControlStateNormal];
         BtnCountryOfBirth.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
     else {
@@ -2523,7 +2535,7 @@ NSMutableArray *DelGroupArr;
         [btnForeignHome setImage: [UIImage imageNamed:@"tickCheckBox.png"] forState:UIControlStateNormal];
         
         btnHomeCountry.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        [btnHomeCountry setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",pp.ResidenceAddressCountry] forState:UIControlStateNormal];
+        [btnHomeCountry setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",pp.ResidenceAddressCountry] forState:UIControlStateNormal];
     }
     else {
         btnHomeCountry.hidden = YES;
@@ -2543,7 +2555,7 @@ NSMutableArray *DelGroupArr;
         [btnForeignOffice setImage: [UIImage imageNamed:@"tickCheckBox.png"] forState:UIControlStateNormal];
         
         btnOfficeCountry.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        [btnOfficeCountry setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",pp.OfficeAddressCountry] forState:UIControlStateNormal];
+        [btnOfficeCountry setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",pp.OfficeAddressCountry] forState:UIControlStateNormal];
     }
     else {
         btnOfficeCountry.hidden = YES;
@@ -2834,7 +2846,7 @@ NSMutableArray *DelGroupArr;
                 //OCCUPATION
                 outletOccup.enabled = NO;
 				outletOccup.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-				[outletOccup setTitle:[[NSString stringWithFormat:@"  "] stringByAppendingFormat:@"MINOR"]forState:UIControlStateNormal];
+				[outletOccup setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"MINOR"]forState:UIControlStateNormal];
 				outletOccup.titleLabel.textColor = [UIColor grayColor];
 				txtClass.text = @"2";
 				OccupCodeSelected = @"OCC01360";
@@ -4058,8 +4070,21 @@ NSMutableArray *DelGroupArr;
 }
 
 //added by faiz
+-(IBAction)textFieldNIPDidEndEditing:(UITextField *)sender{
+    NSString *refName=[modelDataReferral getReferralName:sender.text];
+    if ([refName isEqualToString:@"(null)"]){
+        refName = @"";
+    }
+    [txtReferralName setText:refName];
+}
+
 -(IBAction)textFieldDidChangeEditing:(UITextField *)sender{
-    if (sender==txtPrefix2){
+    if (sender==txtPrefix1){
+        if ([sender.text length]>=4){
+            [txtContact1 becomeFirstResponder];
+        }
+    }
+    else if (sender==txtPrefix2){
         if ([sender.text length]>=4){
             [txtContact2 becomeFirstResponder];
         }
@@ -4997,7 +5022,7 @@ NSMutableArray *DelGroupArr;
                         [db executeUpdate:@"insert into prospect_groups (name) values (?)", str, nil];
                         
                         outletGroup.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-                        [outletGroup setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",str]forState:UIControlStateNormal];
+                        [outletGroup setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",str]forState:UIControlStateNormal];
                     }
                     [result close];
                     [db close];
@@ -5490,7 +5515,7 @@ NSMutableArray *DelGroupArr;
                                      [NSCharacterSet whitespaceCharacterSet]];
     
     if (!(prospectprofile.ProspectGroup == NULL || [prospectprofile.ProspectGroup isEqualToString:@"- SELECT -"])) {
-        [outletGroup setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", prospectprofile.ProspectGroup]forState:UIControlStateNormal];
+        [outletGroup setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", prospectprofile.ProspectGroup]forState:UIControlStateNormal];
         outletGroup.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
     else {
@@ -5498,7 +5523,7 @@ NSMutableArray *DelGroupArr;
     }
     
     if (!(prospectprofile.ProspectTitle == NULL || [prospectprofile.ProspectTitle isEqualToString:@"- SELECT -"])) {
-        [outletTitle setTitle:[[NSString stringWithFormat:@"  "] stringByAppendingFormat:@"%@", [self getTitleDesc:prospectprofile.ProspectTitle]]forState:UIControlStateNormal];
+        [outletTitle setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", [self getTitleDesc:prospectprofile.ProspectTitle]]forState:UIControlStateNormal];
         outletTitle.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
     else {
@@ -5506,14 +5531,14 @@ NSMutableArray *DelGroupArr;
     }
     
     if (!(prospectprofile.Race == NULL || [prospectprofile.Race isEqualToString:@"- SELECT -"])) {
-        [outletRace setTitle:[[NSString stringWithFormat:@"  "] stringByAppendingFormat:@"%@", prospectprofile.Race]forState:UIControlStateNormal];
+        [outletRace setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", prospectprofile.Race]forState:UIControlStateNormal];
         outletRace.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
     else {
         [outletRace setTitle:@"- SELECT -" forState:UIControlStateNormal];
     }
     if (!(prospectprofile.MaritalStatus == NULL || [prospectprofile.MaritalStatus isEqualToString:@"- SELECT -"])) {
-        [outletMaritalStatus setTitle:[[NSString stringWithFormat:@"  "] stringByAppendingFormat:@"%@", prospectprofile.MaritalStatus]forState:UIControlStateNormal];
+        [outletMaritalStatus setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", prospectprofile.MaritalStatus]forState:UIControlStateNormal];
         outletMaritalStatus.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
     else {
@@ -5522,7 +5547,7 @@ NSMutableArray *DelGroupArr;
     
     if (!(prospectprofile.Religion == NULL || [prospectprofile.Religion isEqualToString:@"- SELECT -"])) {
         NSLog(@"religion %@",prospectprofile.Religion);
-        [outletReligion setTitle:[[NSString stringWithFormat:@"  "] stringByAppendingFormat:@"%@", prospectprofile.Religion]forState:UIControlStateNormal];
+        [outletReligion setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", prospectprofile.Religion]forState:UIControlStateNormal];
         outletReligion.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
     else {
@@ -5530,7 +5555,7 @@ NSMutableArray *DelGroupArr;
     }
     
     if (!(prospectprofile.Nationality == NULL || [prospectprofile.Nationality isEqualToString:@"- SELECT -"])) {
-        [outletNationality setTitle:[[NSString stringWithFormat:@"  "] stringByAppendingFormat:@"%@", prospectprofile.Nationality]forState:UIControlStateNormal];
+        [outletNationality setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", prospectprofile.Nationality]forState:UIControlStateNormal];
         outletNationality.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
     else {
@@ -5539,7 +5564,7 @@ NSMutableArray *DelGroupArr;
     
     if (!(prospectprofile.OtherIDType == NULL || [prospectprofile.OtherIDType isEqualToString:@"- SELECT -"] || [prospectprofile.OtherIDType isEqualToString:@"(NULL)"])) {
         
-        [OtherIDType setTitle:[[NSString stringWithFormat:@"  "] stringByAppendingFormat:@"%@", [self getIDTypeDesc:prospectprofile.OtherIDType]] forState:UIControlStateNormal];
+        [OtherIDType setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", [self getIDTypeDesc:prospectprofile.OtherIDType]] forState:UIControlStateNormal];
         txtOtherIDType.text = prospectprofile.OtherIDTypeNo;
         
         OtherIDType.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
@@ -5755,7 +5780,7 @@ NSMutableArray *DelGroupArr;
         [btnForeignHome setImage: [UIImage imageNamed:@"tickCheckBox.png"] forState:UIControlStateNormal];
         
         btnHomeCountry.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        [btnHomeCountry setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",prospectprofile.ResidenceAddressCountry] forState:UIControlStateNormal];
+        [btnHomeCountry setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",prospectprofile.ResidenceAddressCountry] forState:UIControlStateNormal];
     }
     else {
         btnHomeCountry.hidden = YES;
@@ -5774,7 +5799,7 @@ NSMutableArray *DelGroupArr;
         [btnForeignOffice setImage: [UIImage imageNamed:@"tickCheckBox.png"] forState:UIControlStateNormal];
         
         btnOfficeCountry.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        [btnOfficeCountry setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",prospectprofile.OfficeAddressCountry] forState:UIControlStateNormal];
+        [btnOfficeCountry setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",prospectprofile.OfficeAddressCountry] forState:UIControlStateNormal];
     }
     else {
         btnOfficeCountry.hidden = YES;
@@ -6392,7 +6417,7 @@ NSMutableArray *DelGroupArr;
         if([outletOccup.titleLabel.text isEqualToString:@""]) {
             [outletOccup setTitle:[NSString stringWithFormat:@""] forState:UIControlStateNormal];
         } else {
-			[outletOccup setTitle:[[NSString stringWithFormat:@"  "] stringByAppendingFormat:@"%@", outletOccup.titleLabel.text]forState:UIControlStateNormal];
+			[outletOccup setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", outletOccup.titleLabel.text]forState:UIControlStateNormal];
         }
         
         if(prospectprofile.ProspectDOB != NULL && ![prospectprofile.ProspectDOB isEqualToString:@""]) {
@@ -6421,7 +6446,7 @@ NSMutableArray *DelGroupArr;
                 if([OccpDesc isEqualToString:@""])
 					[outletOccup setTitle:[NSString stringWithFormat:@""] forState:UIControlStateNormal];
                 else
-                    [outletOccup setTitle:[[NSString stringWithFormat:@"  "] stringByAppendingFormat:@"%@", OccpDesc]forState:UIControlStateNormal];
+                    [outletOccup setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", OccpDesc]forState:UIControlStateNormal];
                 txtClass.text = OccpClass;
                 outletOccup.titleLabel.text = OccpDesc;
             }
@@ -6450,7 +6475,7 @@ NSMutableArray *DelGroupArr;
                 if([OtherIDDesc isEqualToString:@""]) {
                     [OtherIDType setTitle:[NSString stringWithFormat:@""] forState:UIControlStateNormal];
                 } else {
-                    [OtherIDType setTitle:[[NSString stringWithFormat:@"  "] stringByAppendingFormat:@"%@", OtherIDDesc]forState:UIControlStateNormal];
+                    [OtherIDType setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", OtherIDDesc]forState:UIControlStateNormal];
                 }
                 OtherIDType.titleLabel.text = OtherIDDesc;
             }
@@ -6479,7 +6504,7 @@ NSMutableArray *DelGroupArr;
                 if([TitleDesc isEqualToString:@""]) {
                     [outletTitle setTitle:[NSString stringWithFormat:@""] forState:UIControlStateNormal];
                 } else {
-                    [outletTitle setTitle:[[NSString stringWithFormat:@"  "] stringByAppendingFormat:@"%@", TitleDesc]forState:UIControlStateNormal];
+                    [outletTitle setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", TitleDesc]forState:UIControlStateNormal];
                 }
                 outletTitle.titleLabel.text = TitleDesc;
             }
@@ -6866,8 +6891,8 @@ NSMutableArray *DelGroupArr;
 		}
 		
 		NSString *CountryOfBirth = @"";
-		CountryOfBirth = [BtnCountryOfBirth.titleLabel.text stringByReplacingOccurrencesOfString:@" " withString:@""];
-		CountryOfBirth = [self getCountryCode:CountryOfBirth];
+		CountryOfBirth = _txtCountryOfBirth.text/*[BtnCountryOfBirth.titleLabel.text stringByReplacingOccurrencesOfString:@" " withString:@""]*/;
+		//CountryOfBirth = [self getCountryCode:CountryOfBirth];
 		
         NSString *strExpiryDate = outletExpiryDate.titleLabel.text;
         
@@ -8381,10 +8406,109 @@ NSMutableArray *DelGroupArr;
 	
 }
 
--(BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-	[textField resignFirstResponder];
-	return YES;
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (textField == txtNip) {
+        [textField resignFirstResponder];
+    } else if (textField == txtReferralName) {
+        [textField resignFirstResponder];
+    }
+    else if (textField == txtrFullName) {
+        [textField resignFirstResponder];
+    }
+    else if (textField == txtOtherIDType) {
+        [textField resignFirstResponder];
+    }
+    else if (textField == _txtCountryOfBirth) {
+        [textField resignFirstResponder];
+    }
+    else if (textField == txtAnnIncome) {
+        [textField resignFirstResponder];
+    }
+    else if (textField == txtNPWPNo) {
+        [textField resignFirstResponder];
+    }
+    else if (textField == txtKcu) {
+        [textField resignFirstResponder];
+        //[txtKanwil becomeFirstResponder];
+    }
+    else if (textField == txtKanwil) {
+        [txtReferralName becomeFirstResponder];
+    }
+    else if (textField == txtHomeAddr1) {
+        [txtHomeAddr2 becomeFirstResponder];
+    }
+    else if (textField == txtHomeAddr2) {
+        [txtHomeAddr3 becomeFirstResponder];
+    }
+    else if (textField == txtHomeAddr3) {
+        [txtHomePostCode becomeFirstResponder];
+    }
+    else if (textField == txtHomePostCode) {
+        [_txtHomeVillage becomeFirstResponder];
+    }
+    else if (textField == _txtHomeVillage) {
+        [_txtHomeDistrict becomeFirstResponder];
+    }
+    else if (textField == _txtHomeDistrict) {
+        [txtHomeTown becomeFirstResponder];
+    }
+    else if (textField == txtHomeTown) {
+        [_txtHomeProvince becomeFirstResponder];
+    }
+    else if (textField == _txtHomeProvince) {
+        [txtPrefix1 becomeFirstResponder];
+    }
+    else if (textField == txtPrefix1) {
+        [txtContact1 becomeFirstResponder];
+    }
+    else if (textField == txtContact1) {
+        [txtPrefix2 becomeFirstResponder];
+    }
+    else if (textField == txtPrefix2) {
+        [txtContact2 becomeFirstResponder];
+    }
+    else if (textField == txtContact2) {
+        [txtPrefix3 becomeFirstResponder];
+    }
+    else if (textField == txtPrefix3) {
+        [txtContact3 becomeFirstResponder];
+    }
+    else if (textField == txtContact3) {
+        [txtOfficeAddr1 becomeFirstResponder];
+    }
+    else if (textField == txtOfficeAddr1) {
+        [txtOfficeAddr2 becomeFirstResponder];
+    }
+    else if (textField == txtOfficeAddr2) {
+        [txtOfficeAddr3 becomeFirstResponder];
+    }
+    
+    else if (textField == txtOfficeAddr3) {
+        [txtOfficePostCode becomeFirstResponder];
+    }
+    else if (textField == txtOfficePostCode) {
+        [_txtOfficeVillage becomeFirstResponder];
+    }
+    else if (textField == _txtOfficeVillage) {
+        [_txtOfficeDistrict becomeFirstResponder];
+    }
+    else if (textField == _txtOfficeDistrict) {
+        [txtOfficeTown becomeFirstResponder];
+    }
+    else if (textField == txtOfficeTown) {
+        [_txtOfficeProvince becomeFirstResponder];
+    }
+    else if (textField == _txtOfficeProvince) {
+        [txtPrefix4 becomeFirstResponder];
+    }
+    else if (textField == txtPrefix4) {
+        [txtContact4 becomeFirstResponder];
+    }
+    else if (textField == txtContact4) {
+        [txtContact4 resignFirstResponder];
+    }
+    
+    return YES;
 }
 
 -(void)SaveChanges2
@@ -8472,9 +8596,9 @@ NSMutableArray *DelGroupArr;
             OffCountry = [self getCountryCode:OffCountry];
 			
 			NSString *CountryOfBirth = @"";
-			CountryOfBirth = [BtnCountryOfBirth.titleLabel.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+			CountryOfBirth = _txtCountryOfBirth.text/*[BtnCountryOfBirth.titleLabel.text stringByReplacingOccurrencesOfString:@" " withString:@""]*/;
 			
-			CountryOfBirth = [self getCountryCode:CountryOfBirth];
+			//CountryOfBirth = [self getCountryCode:CountryOfBirth];
 			
             if(gender == nil || gender==NULL || [gender isEqualToString:@"(null)"]) {
                 gender=@"";
@@ -8486,7 +8610,7 @@ NSMutableArray *DelGroupArr;
 						
             NSString *insertSQL = [NSString stringWithFormat:
                                    @"update prospect_profile set \"ProspectName\"=\'%@\', \"ProspectDOB\"=\"%@\", \"ProspectGender\"=\"%@\", \"ResidenceAddress1\"=\"%@\", \"ResidenceAddress2\"=\"%@\", \"ResidenceAddress3\"=\"%@\", \"ResidenceAddressTown\"=\"%@\", \"ResidenceAddressState\"=\"%@\", \"ResidenceAddressPostCode\"=\"%@\", \"ResidenceAddressCountry\"=\"%@\", \"OfficeAddress1\"=\"%@\", \"OfficeAddress2\"=\"%@\", \"OfficeAddress3\"=\"%@\", \"OfficeAddressTown\"=\"%@\",\"OfficeAddressState\"=\"%@\", \"OfficeAddressPostCode\"=\"%@\", \"OfficeAddressCountry\"=\"%@\", \"ProspectEmail\"= \"%@\", \"ProspectOccupationCode\"=\"%@\", \"ExactDuties\"=\"%@\", \"ProspectRemark\"=\"%@\", \"DateModified\"=%@,\"ModifiedBy\"=\"%@\", \"ProspectGroup\"=\"%@\", \"ProspectTitle\"=\"%@\", \"IDTypeNo\"=\"%@\", \"OtherIDType\"=\"%@\", \"OtherIDTypeNo\"=\"%@\", \"Smoker\"=\"%@\", \"AnnualIncome\"=\"%@\", \"BussinessType\"=\"%@\", \"Race\"=\"%@\", \"MaritalStatus\"=\"%@\", \"Nationality\"=\"%@\", \"Religion\"=\"%@\" , \"QQFlag\"=\"%@\", \"CountryOfBirth\"=\"%@\"  where indexNo = \"%@\" "
-                                   "", txtrFullName.text, strDOB, gender, txtHomeAddr1.text, txtHomeAddr2.text, txtHomeAddr3.text, txtHomeTown.text, SelectedStateCode, txtHomePostCode.text, HomeCountry, txtOfficeAddr1.text, txtOfficeAddr2.text, txtOfficeAddr3.text, txtOfficeTown.text, SelectedOfficeStateCode, txtOfficePostCode.text, OffCountry, txtEmail.text, OccupCodeSelected, txtExactDuties.text, txtRemark.text, @"datetime(\"now\", \"+8 hour\")", @"1", group, TitleCodeSelected, txtIDType.text, IDTypeCodeSelected, txtOtherIDType.text, ClientSmoker, txtAnnIncome.text, txtBussinessType.text, race, marital, nation, religion,@"false" , CountryOfBirth ,pp.ProspectID];
+                                   "", txtrFullName.text, strDOB, gender, txtHomeAddr1.text, txtHomeAddr2.text, txtHomeAddr3.text, txtHomeTown.text, SelectedStateCode, txtHomePostCode.text, HomeCountry, txtOfficeAddr1.text, txtOfficeAddr2.text, txtOfficeAddr3.text, txtOfficeTown.text, SelectedOfficeStateCode, txtOfficePostCode.text, OffCountry, txtEmail.text, OccupCodeSelected, txtExactDuties.text, txtRemark.text, @"datetime(\"now\", \"+7 hour\")", @"1", group, TitleCodeSelected, txtIDType.text, IDTypeCodeSelected, txtOtherIDType.text, ClientSmoker, txtAnnIncome.text, txtBussinessType.text, race, marital, nation, religion,@"false" , CountryOfBirth ,pp.ProspectID];
             
 			
             const char *Update_stmt = [insertSQL UTF8String];
@@ -9491,7 +9615,7 @@ NSMutableArray *DelGroupArr;
                 txtDOB.enabled = FALSE;
                 txtDOB.hidden = NO;
                 txtDOB.text = strDOB;
-                [outletDOB setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",strDOB]forState:UIControlStateNormal];
+                [outletDOB setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",strDOB]forState:UIControlStateNormal];
             }
             
             //CHECK DAY / MONTH / YEAT END
@@ -11638,7 +11762,7 @@ NSMutableArray *DelGroupArr;
                 txtDOB.enabled = FALSE;
                 txtDOB.hidden = NO;
                 txtDOB.text = strDOB;
-                [outletDOB setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",strDOB]forState:UIControlStateNormal];
+                [outletDOB setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",strDOB]forState:UIControlStateNormal];
             }
             
             //CHECK DAY / MONTH / YEAT END
@@ -12683,7 +12807,7 @@ NSMutableArray *DelGroupArr;
     } else {
         _outletVIPClass.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
-    [_outletVIPClass setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",VIPClass]forState:UIControlStateNormal];
+    [_outletVIPClass setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",VIPClass]forState:UIControlStateNormal];
     [_outletVIPClass setBackgroundColor:[UIColor clearColor]];
     [_vipClassPopover dismissPopoverAnimated:YES];
 }
@@ -12696,7 +12820,7 @@ NSMutableArray *DelGroupArr;
     } else {
         outletReferralSource.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
-    [outletReferralSource setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",referralSource]forState:UIControlStateNormal];
+    [outletReferralSource setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",referralSource]forState:UIControlStateNormal];
     [outletReferralSource setBackgroundColor:[UIColor clearColor]];
     [_referralSourcePopover dismissPopoverAnimated:YES];
 }
@@ -12708,7 +12832,7 @@ NSMutableArray *DelGroupArr;
     } else {
         _outletSourceIncome.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
-    [_outletSourceIncome setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",sourceIncome]forState:UIControlStateNormal];
+    [_outletSourceIncome setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",sourceIncome]forState:UIControlStateNormal];
     [_outletSourceIncome setBackgroundColor:[UIColor clearColor]];
     [_sourceIncomePopover dismissPopoverAnimated:YES];
 }
@@ -12876,7 +13000,7 @@ NSMutableArray *DelGroupArr;
         BtnCountryOfBirth.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
     
-    [BtnCountryOfBirth setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",theCountry] forState:UIControlStateNormal];
+    [BtnCountryOfBirth setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",theCountry] forState:UIControlStateNormal];
     [self.Country2ListPopover dismissPopoverAnimated:YES];
     
     NSString *COB = @"";
@@ -12897,7 +13021,7 @@ NSMutableArray *DelGroupArr;
     } else {
         outletGroup.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
-    [outletGroup setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", aaGroup] forState:UIControlStateNormal];
+    [outletGroup setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", aaGroup] forState:UIControlStateNormal];
     [self.GroupPopover dismissPopoverAnimated:YES];
     
 	edited = YES;
@@ -12930,7 +13054,7 @@ NSMutableArray *DelGroupArr;
     } else {
         outletRace.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
-    [outletRace setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",theRace]forState:UIControlStateNormal];
+    [outletRace setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",theRace]forState:UIControlStateNormal];
     [self.raceListPopover dismissPopoverAnimated:YES];
     
 	edited = YES;
@@ -12956,7 +13080,7 @@ NSMutableArray *DelGroupArr;
     } else {
         outletMaritalStatus.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
-    [outletMaritalStatus setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",status]forState:UIControlStateNormal];
+    [outletMaritalStatus setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",status]forState:UIControlStateNormal];
     [self.MaritalStatusPopover dismissPopoverAnimated:YES];
     
 	edited = YES;
@@ -12982,7 +13106,7 @@ NSMutableArray *DelGroupArr;
     } else {
         outletTitle.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
-    [outletTitle setTitle:[[NSString stringWithFormat:@"  "] stringByAppendingFormat:@"%@", selectedTitle] forState:UIControlStateNormal];
+    [outletTitle setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", selectedTitle] forState:UIControlStateNormal];
     [self.TitlePickerPopover dismissPopoverAnimated:YES];
 	NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
     [ClientProfile setObject:selectedTitle forKey:@"title"];
@@ -13012,7 +13136,7 @@ NSMutableArray *DelGroupArr;
     } else {
         outletNationality.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
-    [outletNationality setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",selectedNationality]forState:UIControlStateNormal];
+    [outletNationality setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",selectedNationality]forState:UIControlStateNormal];
     [outletNationality setBackgroundColor:[UIColor clearColor]];
     [self.nationalityPopover dismissPopoverAnimated:YES];
 	edited = YES;
@@ -13040,7 +13164,7 @@ NSMutableArray *DelGroupArr;
     } else {
         outletReligion.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
-    [outletReligion setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",setReligion]forState:UIControlStateNormal];
+    [outletReligion setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",setReligion]forState:UIControlStateNormal];
     [self.ReligionListPopover dismissPopoverAnimated:YES];
 	edited = YES;
 	
@@ -13069,7 +13193,7 @@ NSMutableArray *DelGroupArr;
 	ColorHexCode *CustomColor = [[ColorHexCode alloc] init ];
     
     OtherIDType.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [OtherIDType setTitle:[[NSString stringWithFormat:@"  "] stringByAppendingFormat:@"%@",selectedIDType]forState:UIControlStateNormal];
+    [OtherIDType setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",selectedIDType]forState:UIControlStateNormal];
     
     if ([selectedIDType isEqualToString:@"- SELECT -"]) {
         if(txtIDType.text.length!=0)
@@ -13334,7 +13458,7 @@ NSMutableArray *DelGroupArr;
     ColorHexCode *CustomColor = [[ColorHexCode alloc] init ];
     
     OtherIDType.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [OtherIDType setTitle:[[NSString stringWithFormat:@"  "] stringByAppendingFormat:@"%@",selectedIDType]forState:UIControlStateNormal];
+    [OtherIDType setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",selectedIDType]forState:UIControlStateNormal];
     
     OtherIDType.titleLabel.text = selectedIDType;
     
@@ -13603,7 +13727,7 @@ NSMutableArray *DelGroupArr;
         txtOtherIDType.backgroundColor = [UIColor whiteColor];
         txtOtherIDType.enabled = YES;
     }
-    [OtherIDType setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",selectedIDType]forState:UIControlStateNormal];
+    [OtherIDType setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",selectedIDType]forState:UIControlStateNormal];
     [self.IDTypePickerPopover dismissPopoverAnimated:YES];
 
     
@@ -13699,7 +13823,7 @@ NSMutableArray *DelGroupArr;
     } else {
         outletOccup.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
-	[outletOccup setTitle:[[NSString stringWithFormat:@"  "] stringByAppendingFormat:@"%@", color] forState:UIControlStateNormal];
+	[outletOccup setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", color] forState:UIControlStateNormal];
 	[outletOccup setBackgroundColor:[UIColor clearColor]];
     edited = YES;
 	
@@ -13828,7 +13952,7 @@ NSMutableArray *DelGroupArr;
     NSDate *d = [NSDate date];
     NSDate* d2 = [df dateFromString:dbDate];
     outletRigDOB.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [outletRigDOB setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",strDate]forState:UIControlStateNormal];
+    [outletRigDOB setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",strDate]forState:UIControlStateNormal];
   
     if(ToDissAlertforRegDate==YES){
 		if ([d compare:d2] == NSOrderedDescending) {
@@ -13839,7 +13963,7 @@ NSMutableArray *DelGroupArr;
 		}
 		else {
             outletDOB.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-            [outletDOB setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", strDate] forState:UIControlStateNormal];
+            [outletDOB setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", strDate] forState:UIControlStateNormal];
 		}
 	}
     
@@ -13892,7 +14016,7 @@ NSMutableArray *DelGroupArr;
         }
         else{
             outletDOB.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-            [outletDOB setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", strDate] forState:UIControlStateNormal];
+            [outletDOB setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", strDate] forState:UIControlStateNormal];
             [outletDOB setBackgroundColor:[UIColor clearColor]];
 
         }
@@ -13900,7 +14024,7 @@ NSMutableArray *DelGroupArr;
     
     if (isExpiryDate) {
         outletDOB.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        [outletExpiryDate setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", strDate] forState:UIControlStateNormal];
+        [outletExpiryDate setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", strDate] forState:UIControlStateNormal];
         [outletExpiryDate setBackgroundColor:[UIColor clearColor]];
     }
     edited = YES;

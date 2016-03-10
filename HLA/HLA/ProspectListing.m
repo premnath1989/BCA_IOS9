@@ -680,7 +680,7 @@ MBProgressHUD *HUD;
     }
     else{
         _outletDOB.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        [_outletDOB setTitle:clientDateString forState:UIControlStateNormal];
+        [_outletDOB setTitle:strDate forState:UIControlStateNormal];
     }
     df = Nil, d = Nil, d2 = Nil;
 }

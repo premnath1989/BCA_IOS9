@@ -169,12 +169,16 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *outletDone;
 @property (weak, nonatomic) IBOutlet UILabel *labelThree;
 @property (weak, nonatomic) IBOutlet UILabel *ExtraPremiDasarLBL;
+@property (weak, nonatomic) IBOutlet UILabel *MasaExtraPremiLBL;
 @property (weak, nonatomic) IBOutlet UILabel *ExtraPremiDasarNumberLBL;
 @property (weak, nonatomic) IBOutlet UILabel *KKLKExtraPremiDasarLBL;
 @property (weak, nonatomic) IBOutlet UIButton *KKLKPembelianKeBtn;
 @property (weak, nonatomic) IBOutlet UILabel *KKLKPembelianKeLbl;
 
 @property (weak, nonatomic) IBOutlet UITextField *KKLKDiskaunBtn;
+@property (weak, nonatomic) IBOutlet UITextField *KKLKMasaPembayaran;
+
+
 @property (weak, nonatomic) IBOutlet UILabel *KKLKDiskaunLbl;
 
 //Added by faiz
@@ -193,6 +197,8 @@
 -(IBAction)actionFrekuensiPembayaran:(id)sender;
 -(IBAction)ExtraPremiDasarLBLFunc:(id)sender;
 -(IBAction)ExtraPremiDasarNumberLBLFunc:(id)sender;
+-(IBAction)MasaExtraPremiTextFieldDidBegin:(UITextField *)sender;
+-(IBAction)MasaExtraPremiTextFieldDidEnd:(UITextField *)sender;
 //end of added by faiz
 
 //for SINo
@@ -229,6 +235,7 @@
 @property (nonatomic, assign,readwrite) int advanceYearlyIncomeHLAIB;
 @property (nonatomic, assign,readwrite) int advanceYearlyIncomeHLACP;
 @property (nonatomic, assign,readwrite) double basicRate;
+@property (nonatomic, assign,readwrite) double TotalA;
 @property (nonatomic,strong) NSString *planCode;
 @property (nonatomic, copy) NSString *quotationLang;
 

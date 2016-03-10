@@ -570,6 +570,25 @@
     return rowCount;
 }
 
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Remove seperator inset
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    // Prevent the cell from inheriting the Table View's margin settings
+    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
+        [cell setPreservesSuperviewLayoutMargins:NO];
+    }
+    
+    // Explictly set your cell's layout margins
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+}
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
@@ -596,7 +615,7 @@
     UILabel *label1=[[UILabel alloc]init];
     label1.frame=frame;
     label1.text= [NSString stringWithFormat:@"        %@",itemDisplay];
-    label1.textAlignment = UITextAlignmentLeft;
+    label1.textAlignment = NSTextAlignmentLeft;
     label1.tag = 2001;
     [cell.contentView addSubview:label1];
     
@@ -604,23 +623,23 @@
     UILabel *label2=[[UILabel alloc]init];
     label2.frame=frame2;
     label2.text= [arrCountGroup objectAtIndex:indexPath.row];
-    label2.textAlignment = UITextAlignmentCenter;
+    label2.textAlignment = NSTextAlignmentCenter;
     label2.tag = 2002;
     [cell.contentView addSubview:label2];
     
     if (indexPath.row % 2 == 0) {
-        label1.backgroundColor = [CustomColor colorWithHexString:@"D0D8E8"];
-        label2.backgroundColor = [CustomColor colorWithHexString:@"D0D8E8"];
+        //label1.backgroundColor = [CustomColor colorWithHexString:@"D0D8E8"];
+        //label2.backgroundColor = [CustomColor colorWithHexString:@"D0D8E8"];
         
-        label1.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
-        label2.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
+        label1.font = [UIFont fontWithName:@"BPreplay" size:16];
+        label2.font = [UIFont fontWithName:@"BPreplay" size:16];
     }
     else {
-        label1.backgroundColor = [CustomColor colorWithHexString:@"E9EDF4"];
-        label2.backgroundColor = [CustomColor colorWithHexString:@"E9EDF4"];
+        //label1.backgroundColor = [CustomColor colorWithHexString:@"E9EDF4"];
+        //label2.backgroundColor = [CustomColor colorWithHexString:@"E9EDF4"];
         
-        label1.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
-        label2.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
+        label1.font = [UIFont fontWithName:@"BPreplay" size:16];
+        label2.font = [UIFont fontWithName:@"BPreplay" size:16];
     }
     
     cell.selectionStyle = UITableViewCellSelectionStyleGray;

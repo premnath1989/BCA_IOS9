@@ -40,12 +40,10 @@
     NSMutableDictionary* dictionaryPOForInsert;
     NSMutableDictionary* dictionaryMasterForInsert;
     NSMutableDictionary* newDictionaryForBasicPlan;
-    
     bool selfRelation;
 }
 
 @end
-
 @implementation SIMenuViewController
 @synthesize myTableView, SIshowQuotation;
 @synthesize RightView,EAPPorSI;
@@ -2765,6 +2763,8 @@ BOOL isFirstLoad;
             }
             //[_PremiumController setDictionaryPremium:newDictionaryForBasicPlan];
             //[_PremiumController setDictionaryPremium:newDictionaryForBasicPlan];
+
+
             [_PremiumController setPremiumDictionary:newDictionaryForBasicPlan];
             [self.RightView bringSubviewToFront:_PremiumController.view];
             break;
@@ -2776,6 +2776,19 @@ BOOL isFirstLoad;
 #pragma mark - delegate added by faiz
 -(void)setBasicPlanDictionaryWhenLoadFromList:(NSDictionary *)basicPlan{
     newDictionaryForBasicPlan = [NSMutableDictionary dictionaryWithDictionary:basicPlan];
+    NSDictionary* dictPOData=[[NSDictionary alloc]initWithDictionary:[_modelSIPOData getPO_DataFor:[self.requestSINo description]]];
+    
+    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+    f.numberStyle = NSNumberFormatterDecimalStyle;
+    NSNumber *myNumber = [f numberFromString:[newDictionaryForBasicPlan valueForKey:@"Sum_Assured"]];
+    
+    [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"ProductCode"] forKey:@"ProductCode"];
+    [newDictionaryForBasicPlan setObject:[self.requestSINo description] forKey:@"SINO"];
+    [newDictionaryForBasicPlan setObject:myNumber forKey:@"Number_Sum_Assured"];
+    [newDictionaryForBasicPlan setObject:[dictPOData valueForKey:@"PO_Gender"] forKey:@"PO_Gender"];
+    [newDictionaryForBasicPlan setObject:[dictPOData valueForKey:@"PO_Age"] forKey:@"PO_Age"];
+    [newDictionaryForBasicPlan setObject:[dictPOData valueForKey:@"LA_Gender"] forKey:@"LA_Gender"];
+    [newDictionaryForBasicPlan setObject:[dictPOData valueForKey:@"LA_Age"] forKey:@"LA_Age"];
 }
 
 -(void)setPODictionaryWhenLoadFromList:(NSDictionary *)dataPO{
@@ -2852,6 +2865,7 @@ BOOL isFirstLoad;
         NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
         f.numberStyle = NSNumberFormatterDecimalStyle;
         NSNumber *myNumber = [f numberFromString:[newDictionaryForBasicPlan valueForKey:@"Sum_Assured"]];
+        [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"ProductCode"] forKey:@"ProductCode"];
         [newDictionaryForBasicPlan setObject:[self.requestSINo description] forKey:@"SINO"];
         [newDictionaryForBasicPlan setObject:myNumber forKey:@"Number_Sum_Assured"];
         [newDictionaryForBasicPlan setObject:[dictPOData valueForKey:@"PO_Gender"] forKey:@"PO_Gender"];
@@ -2869,6 +2883,7 @@ BOOL isFirstLoad;
         NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
         f.numberStyle = NSNumberFormatterDecimalStyle;
         NSNumber *myNumber = [f numberFromString:[newDictionaryForBasicPlan valueForKey:@"Sum_Assured"]];
+        [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"ProductCode"] forKey:@"ProductCode"];
         [newDictionaryForBasicPlan setObject:myNumber forKey:@"Number_Sum_Assured"];
         [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"PO_Gender"] forKey:@"PO_Gender"];
         [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"PO_Age"] forKey:@"PO_Age"];

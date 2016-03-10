@@ -3,9 +3,9 @@
 //  BLESS
 //
 //  Created by Basvi on 3/1/16.
-//  Copyright © 2016 Hong Leong Assurance. All rights reserved.
+//  Copyright © 2016 InfoConnect Sdn Bhd. All rights reserved.
 //
-#define kPaperSizeA4 CGSizeMake(842,595)
+#define kPaperSizeA4 CGSizeMake(842,655)
 
 #import "IlustrationViewController.h"
 
@@ -22,42 +22,123 @@
 
 @implementation IlustrationViewController
 
+-(void)viewWillAppear:(BOOL)animated{
+    [webIlustration setHidden:YES];
+    [viewspinBar setHidden:NO];
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    page =1;
+    [self loadPremi];
+    [self loadHTMLToWebView];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    webTemp = [[UIWebView alloc]init];
-    webTemp.delegate = self;
+
     modelAgentProfile=[[ModelAgentProfile alloc]init];
     modelRate = [[RateModel alloc]init];
     
-    page =1;
     
-    page1 = [[UIBarButtonItem alloc] initWithTitle:@"Page 1" style:UIBarButtonItemStyleBordered target:self action:@selector(page1)];
-    page2 = [[UIBarButtonItem alloc] initWithTitle:@"Page 2" style:UIBarButtonItemStyleBordered target:self action:@selector(page2)];
-    page3 = [[UIBarButtonItem alloc] initWithTitle:@"Page 3" style:UIBarButtonItemStyleBordered target:self action:@selector(page3)];
+    email = [[UIBarButtonItem alloc] initWithTitle:@"Email" style:UIBarButtonItemStyleBordered target:self action:@selector(email)];
+    printSI = [[UIBarButtonItem alloc] initWithTitle:@"Print" style:UIBarButtonItemStyleBordered target:self action:@selector(printSI)];
+    pages = [[UIBarButtonItem alloc] initWithTitle:@"Pages" style:UIBarButtonItemStyleBordered target:self action:@selector(pagesSI:)];
     page4 = [[UIBarButtonItem alloc] initWithTitle:@"Page 4" style:UIBarButtonItemStyleBordered target:self action:@selector(page4)];
     
-    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:page3, page2, page1, Nil];
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:email,printSI, Nil];
     self.title=@"Ilustration";
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStyleBordered target:self action:@selector(closeModalWindow:) ];
-    [self loadHTMLToWebView];
-    //[self createPDFFile];
-    // Do any additional setup after loading the view.
+    
 }
 
--(void)page1{
-    [webTemp loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page1" ofType:@"html"]isDirectory:NO]]];
-    page = 1;
+-(void)email{
+    NSArray* path_forDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+    NSString* documentsDirectory = [path_forDirectory objectAtIndex:0];
+    NSString *pdfPathOutput = [NSString stringWithFormat:@"%@/SI_Temp.pdf",documentsDirectory];
+    if ([MFMailComposeViewController canSendMail] == NO){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Please set up your default email account in iPad first"
+                                                       delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+        alert = Nil;
+        return;
+    }
+    if (printInteraction != nil) [printInteraction dismissAnimated:YES];
+    
+    NSURL *fileURL = [NSURL fileURLWithPath:pdfPathOutput]; //document.fileURL;
+    NSString *fileName = [pdfPathOutput lastPathComponent];//document.fileName; // Document
+    
+    NSData *attachment = [NSData dataWithContentsOfURL:fileURL options:(NSDataReadingMapped|NSDataReadingUncached) error:nil];
+    
+    if (attachment != nil) { // Ensure that we have valid document file attachment data
+        MFMailComposeViewController *mailComposer = [MFMailComposeViewController new];
+        
+        [mailComposer addAttachmentData:attachment mimeType:@"application/pdf" fileName:fileName];
+        [mailComposer setSubject:@"Ilustrasi"]; // Use the document file name for the subject
+        
+        mailComposer.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        mailComposer.modalPresentationStyle = UIModalPresentationFormSheet;
+        mailComposer.mailComposeDelegate = self; // Set the delegate
+        
+        [self presentViewController:mailComposer animated:YES completion:nil];
+        // Cleanup
+    }
 }
 
--(void)page2{
-    [webTemp loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page2" ofType:@"html"]isDirectory:NO]]];
-    page = 2;
+-(void)printSI{
+    NSArray* path_forDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+    NSString* documentsDirectory = [path_forDirectory objectAtIndex:0];
+    NSString *pdfPathOutput = [NSString stringWithFormat:@"%@/SI_Temp.pdf",documentsDirectory];
+    
+    [_PagesPopover dismissPopoverAnimated:YES];
+    Class printInteractionController = NSClassFromString(@"UIPrintInteractionController");
+    
+    if ((printInteractionController != nil) && [printInteractionController isPrintingAvailable])
+    {
+        NSURL *fileURL = [NSURL fileURLWithPath:pdfPathOutput]; // Document file URL
+        
+        printInteraction = [printInteractionController sharedPrintController];
+        
+        if ([printInteractionController canPrintURL:fileURL] == YES) // Check first
+        {
+            UIPrintInfo *printInfo = [NSClassFromString(@"UIPrintInfo") printInfo];
+            
+            printInfo.duplex = UIPrintInfoDuplexLongEdge;
+            printInfo.outputType = UIPrintInfoOutputGeneral;
+            printInfo.jobName = [pdfPathOutput lastPathComponent];
+            
+            printInteraction.printInfo = printInfo;
+            printInteraction.printingItem = fileURL;
+            printInteraction.showsPageRange = YES;
+            
+            if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+                [printInteraction presentFromBarButtonItem:printSI animated:YES completionHandler:
+                 ^(UIPrintInteractionController *pic, BOOL completed, NSError *error)
+                 {
+#ifdef DEBUG
+                     if ((completed == NO) && (error != nil)) NSLog(@"%s %@", __FUNCTION__, error);
+#endif
+                 }
+                 ];
+            }
+        }
+    }
 }
 
--(void)page3{
-    [webIlustration loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page3" ofType:@"html"]isDirectory:NO]]];
-    page = 3;
+-(void)pagesSI:(UIBarButtonItem *)sender        //--**added by bob
+{
+    if (_PagesList == nil) {
+        
+        _PagesList = [[PagesController alloc] initWithStyle:UITableViewStylePlain];
+        _PagesList.delegate = self;
+        //_PagesList.PDSorSI =_PDSorSI;
+        //_PagesList.TradOrEver =_TradOrEver;
+        _PagesPopover = [[UIPopoverController alloc] initWithContentViewController:_PagesList];
+    }
+    
+    [_PagesPopover setPopoverContentSize:CGSizeMake(230.0f, 600.0f)];
+    [_PagesPopover presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
+
 
 -(void)page4{
 
@@ -80,7 +161,7 @@
 }
 
 -(void)loadHTMLToWebView{
-    [webTemp loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page1" ofType:@"html"]isDirectory:NO]]];
+    [webIlustration loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page1" ofType:@"html"]isDirectory:NO]]];
     //[webIlustration loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page2" ofType:@"html"]isDirectory:NO]]];
     //[webIlustration loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page1" ofType:@"html"]isDirectory:NO]]];
 }
@@ -164,6 +245,7 @@
         CGContextEndPage(writeContext);
     }
 
+    NSLog(@"GENERATING PAGES FROM PDF 3 (%i)...", numberOfPages3);
     for (int i=1; i<=numberOfPages3; i++) {
         page = CGPDFDocumentGetPage(pdfRef3, i);
         mediaBox = CGPDFPageGetBoxRect(page, kCGPDFMediaBox);
@@ -191,6 +273,8 @@
     NSURL *targetURL = [NSURL fileURLWithPath:pdfPathOutput];
     NSURLRequest *request = [NSURLRequest requestWithURL:targetURL];
     [webIlustration loadRequest:request];
+    [webIlustration setHidden:NO];
+    [viewspinBar setHidden:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -201,12 +285,29 @@
 - (void)setValuePage1{
     NSString *javaScript = [NSString stringWithFormat:@"document.getElementById('SINumber').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"SINO"]];
     
+    NSString *sex;
+    if ([[_dictionaryPOForInsert valueForKey:@"LA_Gender"] isEqualToString:@"MALE"]){
+        sex=@"Pria";
+    }
+    else{
+        sex=@"Wanita";
+    }
+    
+    NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setFormatterBehavior: NSNumberFormatterBehavior10_4];
+    [numberFormatter setNumberStyle: NSNumberFormatterDecimalStyle];
+    NSString *numberString = [numberFormatter stringFromNumber: [NSNumber numberWithInteger: totalYear]];
+    
+    
     NSString *javaScriptP1H1 = [NSString stringWithFormat:@"document.getElementById('HeaderLAName').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"LA_Name"]];
-    NSString *javaScriptP1H2 = [NSString stringWithFormat:@"document.getElementById('HeaderLASex').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"LA_Gender"]];
+    NSString *javaScriptP1H2 = [NSString stringWithFormat:@"document.getElementById('HeaderLASex').innerHTML =\"%@\";", sex];
     NSString *javaScriptP1H3 = [NSString stringWithFormat:@"document.getElementById('HeaderLADOB').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"LA_DOB"]];
     NSString *javaScriptP1H4 = [NSString stringWithFormat:@"document.getElementById('HeaderOccupation').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"LA_Occp"]];
     NSString *javaScriptP1H5 = [NSString stringWithFormat:@"document.getElementById('HeaderPaymentPeriode').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"Payment_Term"]];
     NSString *javaScriptP1H6 = [NSString stringWithFormat:@"document.getElementById('HeaderPaymentFrequency').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"Payment_Frequency"]];
+    
+    NSString *javaScriptP1T1 = [NSString stringWithFormat:@"document.getElementById('BasicSA').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"Sum_Assured"]];
+    NSString *javaScriptP1T2 = [NSString stringWithFormat:@"document.getElementById('Premi').innerHTML =\"%@\";", numberString];
     
     NSString *javaScriptP2H1 = [NSString stringWithFormat:@"document.getElementById('HeaderPOName').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"PO_Name"]];
     NSString *javaScriptP2H2 = [NSString stringWithFormat:@"document.getElementById('HeaderSumAssured').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"Sum_Assured"]];
@@ -241,6 +342,9 @@
     NSString *response4 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1H4];
     NSString *response5 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1H5];
     NSString *response6 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1H6];
+
+    NSString *response7 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1T1];
+    NSString *response8 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1T2];
     
     NSString *responseF1 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptF1];
     NSString *responseF2 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptF2];
@@ -271,6 +375,9 @@
     NSLog(@"javascript result: %@", response4);
     NSLog(@"javascript result: %@", response5);
     NSLog(@"javascript result: %@", response6);
+
+    NSLog(@"javascript result: %@", response7);
+    NSLog(@"javascript result: %@", response8);
     
     NSLog(@"javascript result: %@", responseF1);
     NSLog(@"javascript result: %@", responseF2);
@@ -382,7 +489,7 @@
     NSMutableArray* valRate5Year=[[NSMutableArray alloc]initWithArray:[self getRate5:laAge]];
     NSString *string5Year = [[valRate5Year valueForKey:@"description"] componentsJoinedByString:@","];
     
-    NSString *responseTable = [webIlustration stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"createTable(%d,%i,%f,%d,[%@],[%@],[%@])", poAge,numberOfRow,basicSumAssured,paymentTerm,string,string5Year,stringSurValue]];
+    NSString *responseTable = [webIlustration stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"createTable(%d,%i,%f,%d,[%@],[%@],[%@])", laAge,numberOfRow,basicSumAssured,paymentTerm,string,string5Year,stringSurValue]];
     
     // Make the UIWebView method call
     NSString *response = [webIlustration stringByEvaluatingJavaScriptFromString:javaScript];
@@ -478,12 +585,23 @@
     if (pdfData) {
         if (page == 1){
             [pdfData writeToFile:[NSString stringWithFormat:@"%@/tmp1.pdf",NSTemporaryDirectory()] atomically: YES];
+            page=2;
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0), ^{
+                [webIlustration loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page2" ofType:@"html"]isDirectory:NO]]];
+            });
         }
         else if (page == 2){
             [pdfData writeToFile:[NSString stringWithFormat:@"%@/tmp2.pdf",NSTemporaryDirectory()] atomically: YES];
+            page=3;
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0), ^{
+                [webIlustration loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page3" ofType:@"html"]isDirectory:NO]]];
+            });
         }
         else if (page == 3){
             [pdfData writeToFile:[NSString stringWithFormat:@"%@/tmp3.pdf",NSTemporaryDirectory()] atomically: YES];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0), ^{
+                [self createPDFFile];
+            });
             page = 4;
         }
     }
@@ -491,6 +609,8 @@
     {
         NSLog(@"PDF couldnot be created");
     }
+    
+    
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
@@ -501,20 +621,6 @@
     [self setValuePage2];
     [self setValuePage3];
     [self makePDF];
-    
-    switch (page) {
-        case 1:
-            [webTemp loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page2" ofType:@"html"]isDirectory:NO]]];
-            page=2;
-            break;
-        case 2:
-            [webTemp loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page3" ofType:@"html"]isDirectory:NO]]];
-            [self createPDFFile];
-            page=3;
-            break;
-        default:
-            break;
-    }
 }
 
 /*
@@ -526,6 +632,132 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+#ifdef DEBUGX
+    NSLog(@"%s", __FUNCTION__);
+#endif
+    
+#ifdef DEBUG
+    if ((result == MFMailComposeResultFailed) && (error != NULL)) {
+        NSLog(@"%@", error);
+    }
+#endif
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)loadPremi{
+    Pertanggungan_Dasar = [[_dictionaryForBasicPlan valueForKey:@"Number_Sum_Assured"] integerValue];
+    PayorAge = [[_dictionaryForBasicPlan valueForKey:@"PO_Age"]integerValue];;
+    PayorSex = [_dictionaryForBasicPlan valueForKey:@"LA_Gender"];
+    Highlight =[_dictionaryForBasicPlan valueForKey:@"Payment_Frequency"];
+    Pertanggungan_ExtrePremi = [[_dictionaryForBasicPlan valueForKey:@"ExtraPremiumTerm"] integerValue];
+    ExtraPremiNumbValue  = [[_dictionaryForBasicPlan valueForKey:@"ExtraPremiumSum"] integerValue];
+    
+    [self AnsuransiDasar];
+    [self PremiDasarActB];
+    [self ExtraPremiNumber];
+    [self SubTotal];
+    [self PremiDasarActB];
+}
+
+-(void)AnsuransiDasar
+{
+    NSString*AnsuransiDasarQuery;
+    NSArray *paths2 = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsPath2 = [paths2 objectAtIndex:0];
+    NSString *path2 = [docsPath2 stringByAppendingPathComponent:@"BCA_Rates.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path2];
+    [database open];
+    FMResultSet *results;
+    AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM basicPremiumRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",PayorSex,@"HRT",@"S",PayorAge];
+    NSLog(@"query %@",AnsuransiDasarQuery);
+    results = [database executeQuery:AnsuransiDasarQuery];
+    
+    NSString*RatesPremiumRate;
+    int PaymentModeYear;
+    int PaymentModeMonthly;
+    if (![database open])
+    {
+        NSLog(@"Could not open db.");
+    }
+    
+    while([results next])
+    {
+        if ([PayorSex isEqualToString:@"Male"]||[PayorSex isEqualToString:@"MALE"]){
+            RatesPremiumRate  = [results stringForColumn:@"Male"];
+        }
+        else{
+            RatesPremiumRate  = [results stringForColumn:@"Female"];
+        }
+    }
+    
+    PaymentModeYear = 1;
+    PaymentModeMonthly = 0.1;
+    
+    double RatesInt = [RatesPremiumRate doubleValue];
+    AnssubtotalYear =(Pertanggungan_Dasar/1000)*(PaymentModeYear * RatesInt);
+    //int RatesInt = [RatesPremiumRate intValue];
+    AnssubtotalBulan =(Pertanggungan_Dasar/1000)*(0.1 * RatesInt);
+}
+
+-(void)PremiDasarActB
+{
+    NSString*AnsuransiDasarQuery;
+    NSArray *paths2 = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsPath2 = [paths2 objectAtIndex:0];
+    NSString *path2 = [docsPath2 stringByAppendingPathComponent:@"BCA_Rates.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path2];
+    [database open];
+    FMResultSet *results;
+    AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM EMRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",PayorSex,@"HRT",@"S",PayorAge];
+    NSLog(@"query %@",AnsuransiDasarQuery);
+    results = [database executeQuery:AnsuransiDasarQuery];
+    
+    NSString*RatesPremiumRate;
+    double PaymentMode;
+    if (![database open])
+    {
+        NSLog(@"Could not open db.");
+    }
+    
+    while([results next])
+    {
+        if ([PayorSex isEqualToString:@"Male"]||[PayorSex isEqualToString:@"MALE"]){
+            RatesPremiumRate  = [results stringForColumn:@"Male"];
+        }
+        else{
+            RatesPremiumRate  = [results stringForColumn:@"Female"];
+            
+        }
+        
+    }
+    PaymentMode = 1;
+    PaymentMode = 0.1;
+    
+    
+    double RatesInt = [RatesPremiumRate doubleValue];
+    
+    ExtraPercentsubtotalYear =(Pertanggungan_Dasar/1000)*(1.0 * RatesInt)*Pertanggungan_ExtrePremi;
+    ExtraPercentsubtotalBulan =(Pertanggungan_Dasar/1000)*(0.1 * RatesInt)*Pertanggungan_ExtrePremi;
+}
+
+
+-(void)ExtraPremiNumber
+{
+    ExtraNumbsubtotalYear =(ExtraPremiNumbValue* 1.0) *(Pertanggungan_Dasar/1000);
+    ExtraNumbsubtotalBulan =(ExtraPremiNumbValue* 0.1) *(Pertanggungan_Dasar/1000);
+}
+
+-(void)SubTotal
+{
+    totalYear = (AnssubtotalYear + ExtraNumbsubtotalYear + ExtraPercentsubtotalYear);
+    totalBulanan = (AnssubtotalBulan + ExtraNumbsubtotalBulan + ExtraPercentsubtotalBulan);
+}
+
 
 @end
 

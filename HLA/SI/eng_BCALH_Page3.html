@@ -4,6 +4,39 @@
         <!--<link href="SI/css/style.css" rel="stylesheet" type="text/css" />-->
         <script type="text/javascript" charset="utf-8" src="SI/js/jquery-1.8.2.min.js"></script>
         <script type="text/javascript" charset="utf-8" src="SI/js/hla.js"></script>
+        <style>
+            thead,table-Summary1 {
+                border: 1px solid black;
+            }
+        td {
+            border-style: solid;
+            border-color: black;
+            border-width: 0px;
+            padding: 0px 0px 0px 0px;
+            text-align: justify;
+            font-size:11px;
+            font-family: "Helvetica"
+        }
+        p {
+            font-size:9.8px;
+            padding: 0px 0px 0px 0px;
+        }
+        z {
+            font-size:9.8px;
+            padding: 0px 0px 0px 0px;
+        }
+        header1 {
+            font-size:12px;
+            padding: 0px 0px 0px 0px;
+        }
+        tr.rowStyle {
+            border-style: solid;
+            border-color: black;
+            border-width: 1px;
+            font-size:9.8px;
+
+        }
+        </style>
         <script>
             var gData;
             function onBodyLoad(){
@@ -223,25 +256,24 @@
                         <tr>
                             <td style="width: 25%"><img src="SI/img/LogoBCALife.jpg" height="55px"/></td>
                             <td style="width: 45%" valign="top">
-                                <table  style="border-collapse:separate;border:1px solid black;width:100%;font-size:14px;text-align: center">
+                                <table  style="border-collapse:separate;border:1px solid black;width:100%;font-size:10px;text-align: center">
                                     <tr>
-                                        <td>
+                                        <td style="font-size:11px;font-family: helvetical; text-align: center">
                                             Kecuali dinyatakan lain, ilustrasi ini bukan merupakan kontrak asuransi
                                         </td>
                                     </tr>
                                     
                                 </table>
                             </td>
-                            <td style="width: 30%" align="right" valign="top" style="margin:0">
-                                BCA Life Heritage Protection<br/>
-                                Nomor Ilustrasi : <label id="SINumber">16011813027</label>
-                            </td>
+                            <td style="width: 30%; font-size:13px;font-family:Helvetica; text-align: right" valign="top" style="margin:0" >
+                                <header1>BCA Life Heritage Protection</header1></br>
+                                <font color="red">Nomor Ilustrasi : <font color="red"><label id="SINumber">16011813027</label></font>
+                                    </td>
                         </tr>
                     </table>    
                 </div>
                 
                 <div class="main-content">
-                    <br/>
                     <!--520,430px-->
                     <div style="width:100%;background-color: #fff;vertical-align: top;">
                     
@@ -300,70 +332,61 @@
                                                 
                                             </td>
                                             <td rowspan="4" width="7%" style="border: none; padding: 0in">
-                                                <table width="349" cellpadding="0" cellspacing="0" border="1">
-                                                    <col width="164">
-                                                        <col width="185">
+                                                </br>
+                                                <table width="280"cellpadding="0" cellspacing="0" border="1">
+                                                    <col width="140">
+                                                        <col width="140">
                                                             <tr>
-                                                                <td width="164" height="36" style="border:1px solid black; padding: 0in">
-                                                                    <p align="center"><font face="Helvetica"><font size="1" style="font-size: 8pt">Usia
-                                                                        saat Meninggal Dunia (tahun)
-                                                                        
+                                                                <td width="140" height="22" style="border:1px solid black; padding: 0in; text-align:center">
+                                                                    Usia saat Meninggal Dunia (tahun)
                                                                         </td>
-                                                                <td width="185" style="border:1px solid black; padding: 0in">
-                                                                    <p align="center"><font face="Helvetica"><font size="1" style="font-size: 8pt">Persentase
-                                                                        Uang Pertanggungan
-                                                                        
-                                                                        </td>
+                                                                <td width="140" height="22"  style="border:1px solid black; padding: 0in; text-align:center">
+                                                                    Persentase Uang Pertanggungan
+                                                                </td>
                                                             </tr>
                                                             <tr>
-                                                                <td width="164" style="border:1px solid black; padding: 0in">
-                                                                    <p align="center"><font face="Helvetica"><font size="1" style="font-size: 8pt">6
-                                                                        bulan s/d &lt; 1
-                                                                        
-                                                                        </td>
-                                                                <td width="185" style="border:1px solid black; padding: 0in" sdval="0.1" sdnum="1033;0;0.00%">
-                                                                    <p align="center"><font face="Times New Roman, serif"><font size="2" style="font-size: 10pt">10.00%
-                                                                        </td>
+                                                                <td width="140" height="22"  style="border:1px solid black; padding: 0in; text-align:center">
+                                                                    6 bulan s/d &lt; 1                                                                       </td>
+                                                                <td width="140" height="22"  height="2" style="border:1px solid black; padding: 0in; text-align:center">
+                                                                    10.00%
+                                                                </td>
                                                             </tr>
                                                             <tr>
-                                                                <td width="164" style="border:1px solid black; padding: 0in" sdval="1" sdnum="1033;">
-                                                                    <p align="center"><font face="Times New Roman, serif"><font size="2" style="font-size: 10pt">1
+                                                                <td width="140" height="22" style="border:1px solid black; padding: 0in; text-align:center">
+                                                                    1
                                                                         </td>
-                                                                <td width="185" style="border:1px solid black; padding: 0in" sdval="0.2" sdnum="1033;0;0.00%">
-                                                                    <p align="center"><font face="Times New Roman, serif"><font size="2" style="font-size: 10pt">20.00%
+                                                                <td width="140" height="22"  style="border:1px solid black; padding: 0in; text-align:center">
+                                                                    20.00%
                                                                         </td>
                                                             </tr>
                                                             <tr>
-                                                                <td width="164" style="border:1px solid black; padding: 0in" sdval="2" sdnum="1033;">
-                                                                    <p align="center"><font face="Times New Roman, serif"><font size="2" style="font-size: 10pt">2
-                                                                        </td>
-                                                                <td width="185" style="border:1px solid black; padding: 0in" sdval="0.4" sdnum="1033;0;0.00%">
-                                                                    <p align="center"><font face="Times New Roman, serif"><font size="2" style="font-size: 10pt">40.00%
-                                                                        </td>
+                                                                <td width="140" height="22"  style="border:1px solid black; padding: 0in; text-align:center">
+                                                                    2
+                                                                </td>
+                                                                <td width="140" height="22"  style="border:1px solid black; padding: 0in; text-align:center">
+                                                                    40.00%
+                                                                </td>
                                                             </tr>
-                                                            <tr style="border:1px solid black">
-                                                                <td width="164" style="border:1px solid black; padding: 0in" sdval="3" sdnum="1033;">
-                                                                    <p align="center"><font face="Times New Roman, serif"><font size="2" style="font-size: 10pt">3
-                                                                        </td>
-                                                                <td width="185" style="border:1px solid black; padding: 0in" sdval="0.6" sdnum="1033;0;0.00%">
-                                                                    <p align="center"><font face="Times New Roman, serif"><font size="2" style="font-size: 10pt">60.00%
-                                                                        </td>
+                                                            <tr>
+                                                                <td width="140" height="22" style="border:1px solid black; padding: 0in; text-align:center">
+                                                                    3
+                                                                </td>
+                                                                <td width="140" height="22"  style="border:1px solid black; padding: 0in; text-align:center">
+                                                                    60.00%
+                                                                </td>
                                                             </tr>
-                                                            <tr style="border:1px solid black">
-                                                                <td width="164" style="border:1px solid black; padding: 0in" sdval="4" sdnum="1033;">
-                                                                    <p align="center"><font face="Times New Roman, serif"><font size="2" style="font-size: 10pt">4
-                                                                        </td>
-                                                                <td width="185" style="border:1px solid black; padding: 0in" sdval="0.8" sdnum="1033;0;0.00%">
-                                                                    <p align="center"><font face="Times New Roman, serif"><font size="2" style="font-size: 10pt">80.00%
-                                                                        </td>
+                                                            <tr>
+                                                                <td width="140" height="22"  style="border:1px solid black; padding: 0in; text-align:center">
+                                                                    4
+                                                                </td>
+                                                                <td width="140" height="22"  style="border:1px solid black; padding: 0in; text-align:center">
+                                                                    80.00%
+                                                                </td>
                                                             </tr>
                                                             </table>
-                                                <br/>
-                                                <br/>
-                                                
                                                 
                                             </td>
-                                            <td width="40%" style="border: none; padding: 0in">
+                                            <td width="70%" style="border: none; padding: 0in">
                                                 <ol type="a" style="margin:0">
                                                     <li/>
                                                     Manfaat
@@ -538,12 +561,10 @@
                                                 
                                             </td>
                                         </tr>
-                        </table>	
-                        
+                        </table>
                         
                     </div>
-                    <br/>	
-                    
+                    </br>
                     <!--tanda tangan-->
                     <div style="width:100%;background-color: #fff;vertical-align: top;">
                         <table border="0" style="border-collapse:separate;border:0px solid black;width:100%;">
@@ -608,33 +629,18 @@
                             </td>			
                         </table>
                     </div>
-                    <br/>
                     
                     <!--halaman-->
-                    <div style="width:100%;background-color: #fff;vertical-align: top;">
-                        <br/>
-                        <table border="0" style="border-collapse:separate;border:0px solid black;width:100%;">
-                            <tr align="right">
-                                <!--<td width="75%" style="font-family:Times New Roman;font-size:9px;font-weight:normal;padding: 0px 0px 0px 0px;"></td>
-                                 <td width="9%" align="left" valign="bottom" style="padding: 0px 0px 0px 0px;font-family:Times New Roman;font-size:9px;">Page <span class="currentPage">1</span> of <span class="totalPages">56</span></td>
-                                 <td width="16%" align="right" valign="bottom" style="padding: 0px 0px 0px 0px;font-family:Times New Roman;font-size:9px;"></br>Ref: <span id=SICode class="SICode">{SINo}</span></td>-->
-                                <td>
-                                    Halaman 3 dari 3
-                                </td>
+                    <div style="width:100%;height:20px;background-color: #fff;vertical-align: top;">
+                        <table border="0" style="border-collapse:separate;border:0px solid black;width:100%;;font-family:Helvetica;font-size:11px;text-align: right">
+                            <tr style="text-align: right">
+                                <td style="text-align: right">Halaman 3 dari 3</td>
                             </tr>
-                            <tr align="right">
-                                <td>
-                                    www.bcalife.co.id
-                                </td>
+                            <tr style="text-align: right">
+                                <td style="text-align: right">www.bcalife.co.id</td>
                             </tr>
-                            
                         </table>
                     </div>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <div id="externalPages"></div>
-                </div>
             </body>
             
 </html>

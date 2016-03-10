@@ -315,8 +315,9 @@ BOOL isSave;
 	[self.prospectPopover dismissPopoverAnimated:YES];
 	[self.tableView reloadData];
 	
-	UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@" " message:@"Customer selected has been successfully added into Group." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-	[alert show];
+	//UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@" " message:@"Customer selected has been successfully added into Group." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+	UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@" " message:@"Pelanggan yang dipilih berhasil ditambahkan ke group." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
 	
 	isSave = NO;
 }
@@ -398,6 +399,25 @@ BOOL isSave;
 	return member.count;
 }
 
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Remove seperator inset
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    // Prevent the cell from inheriting the Table View's margin settings
+    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
+        [cell setPreservesSuperviewLayoutMargins:NO];
+    }
+    
+    // Explictly set your cell's layout margins
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+}
+
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSMutableArray *tempArray = nil;
 
@@ -418,13 +438,13 @@ BOOL isSave;
     cell.textLabel.text = [[tempArray objectAtIndex:indexPath.row] objectForKey:@"name"];
 	cell.textLabel.font = [UIFont fontWithName:@"Tret MS" size:16];
 	
-	ColorHexCode *CustomColor = [[ColorHexCode alloc]init ];
+	/*ColorHexCode *CustomColor = [[ColorHexCode alloc]init ];
 	if (indexPath.row % 2 == 0) {
         cell.backgroundColor = [CustomColor colorWithHexString:@"D0D8E8"];
     }
     else {
         cell.backgroundColor = [CustomColor colorWithHexString:@"E9EDF4"];
-    }
+    }*/
     
 //    cell.selectionStyle = UITableViewCellSelectionStyleGray;
 	
@@ -642,7 +662,8 @@ BOOL isSave;
 		
 		
 		
-		UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@" " message:@"Customer selected have been successfully deleted from this Group." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+		//UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@" " message:@"Customer selected have been successfully deleted from this Group." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@" " message:@"Pelanggan yang dipilih berhasil dihapus dari group." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
 		[alert setTag:1004];
 		[alert show];
 		

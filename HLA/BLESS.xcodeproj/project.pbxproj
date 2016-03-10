@@ -344,6 +344,7 @@
 		431F5FE41C6D93E800A9CA6C /* ProspectListingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 431F5FE21C6D93E800A9CA6C /* ProspectListingTableViewCell.m */; };
 		431F5FE51C6D93E800A9CA6C /* ProspectListingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 431F5FE31C6D93E800A9CA6C /* ProspectListingTableViewCell.xib */; };
 		4321B3331C8B3496006B9402 /* htmlStyle.css in Resources */ = {isa = PBXBuildFile; fileRef = 4321B3321C8B3496006B9402 /* htmlStyle.css */; };
+		432466541C9000EC001EE22F /* ModelDataReferral.m in Sources */ = {isa = PBXBuildFile; fileRef = 432466531C9000EC001EE22F /* ModelDataReferral.m */; };
 		4329213A1C7FFC26000D1064 /* Model_SI_Master.m in Sources */ = {isa = PBXBuildFile; fileRef = 432921391C7FFC26000D1064 /* Model_SI_Master.m */; };
 		4341B5C21C61750700357986 /* libSPSignDoc_4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4341B5C11C61750700357986 /* libSPSignDoc_4.0.a */; };
 		4353C9481C61E95000AE1ED9 /* ModelNationality.m in Sources */ = {isa = PBXBuildFile; fileRef = 4353C9471C61E95000AE1ED9 /* ModelNationality.m */; };
@@ -352,6 +353,8 @@
 		4353C9511C61FCD000AE1ED9 /* ModelIdentificationType.m in Sources */ = {isa = PBXBuildFile; fileRef = 4353C9501C61FCD000AE1ED9 /* ModelIdentificationType.m */; };
 		437223E61C89372200D94B2F /* RateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 437223E51C89372200D94B2F /* RateModel.m */; };
 		437343151C6B1CBD001516D9 /* ReferralSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 437343141C6B1CBD001516D9 /* ReferralSource.m */; };
+		4374ACFD1C911FF00006522A /* eng_BCALKK_Page1.html in Resources */ = {isa = PBXBuildFile; fileRef = 4374ACFB1C911FF00006522A /* eng_BCALKK_Page1.html */; };
+		4374ACFE1C911FF00006522A /* eng_BCALKK_Page2.html in Resources */ = {isa = PBXBuildFile; fileRef = 4374ACFC1C911FF00006522A /* eng_BCALKK_Page2.html */; };
 		439985BB1C62F7890003B037 /* SourceIncome.m in Sources */ = {isa = PBXBuildFile; fileRef = 439985BA1C62F7890003B037 /* SourceIncome.m */; };
 		439985BE1C62F8A70003B037 /* ModelPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = 439985BD1C62F8A70003B037 /* ModelPopover.m */; };
 		439985C11C630C4D0003B037 /* VIPClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 439985C01C630C4D0003B037 /* VIPClass.m */; };
@@ -1390,6 +1393,8 @@
 		431F5FE21C6D93E800A9CA6C /* ProspectListingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProspectListingTableViewCell.m; sourceTree = "<group>"; };
 		431F5FE31C6D93E800A9CA6C /* ProspectListingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProspectListingTableViewCell.xib; sourceTree = "<group>"; };
 		4321B3321C8B3496006B9402 /* htmlStyle.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = htmlStyle.css; path = SI/css/htmlStyle.css; sourceTree = "<group>"; };
+		432466521C9000EC001EE22F /* ModelDataReferral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelDataReferral.h; sourceTree = "<group>"; };
+		432466531C9000EC001EE22F /* ModelDataReferral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelDataReferral.m; sourceTree = "<group>"; };
 		432921381C7FFC26000D1064 /* Model_SI_Master.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model_SI_Master.h; sourceTree = "<group>"; };
 		432921391C7FFC26000D1064 /* Model_SI_Master.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Model_SI_Master.m; sourceTree = "<group>"; };
 		4341B5C11C61750700357986 /* libSPSignDoc_4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSPSignDoc_4.0.a; sourceTree = "<group>"; };
@@ -1406,6 +1411,8 @@
 		437343131C6B1CBD001516D9 /* ReferralSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReferralSource.h; sourceTree = "<group>"; };
 		437343141C6B1CBD001516D9 /* ReferralSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReferralSource.m; sourceTree = "<group>"; };
 		43739B891C649F9B00A1788A /* LoginMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginMacros.h; sourceTree = "<group>"; };
+		4374ACFB1C911FF00006522A /* eng_BCALKK_Page1.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = eng_BCALKK_Page1.html; path = SI/eng_BCALKK_Page1.html; sourceTree = "<group>"; };
+		4374ACFC1C911FF00006522A /* eng_BCALKK_Page2.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = eng_BCALKK_Page2.html; path = SI/eng_BCALKK_Page2.html; sourceTree = "<group>"; };
 		439985B91C62F7890003B037 /* SourceIncome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourceIncome.h; sourceTree = "<group>"; };
 		439985BA1C62F7890003B037 /* SourceIncome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SourceIncome.m; sourceTree = "<group>"; };
 		439985BC1C62F8A70003B037 /* ModelPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelPopover.h; sourceTree = "<group>"; };
@@ -3329,6 +3336,8 @@
 		43FA6C151C87CD5D0098BA47 /* HTML USED */ = {
 			isa = PBXGroup;
 			children = (
+				4374ACFB1C911FF00006522A /* eng_BCALKK_Page1.html */,
+				4374ACFC1C911FF00006522A /* eng_BCALKK_Page2.html */,
 				4321B3321C8B3496006B9402 /* htmlStyle.css */,
 				43FA6C1C1C882D810098BA47 /* style.css */,
 				43FA6C161C87CD7F0098BA47 /* eng_BCALH_Page1.html */,
@@ -3502,6 +3511,8 @@
 				43B56A8E1C7EDDCC00145D35 /* ModelSIMaster.m */,
 				432921381C7FFC26000D1064 /* Model_SI_Master.h */,
 				432921391C7FFC26000D1064 /* Model_SI_Master.m */,
+				432466521C9000EC001EE22F /* ModelDataReferral.h */,
+				432466531C9000EC001EE22F /* ModelDataReferral.m */,
 			);
 			name = "HLADB Model";
 			sourceTree = "<group>";
@@ -5040,6 +5051,7 @@
 				1706BD501C7169A40038D1DB /* menu_salesactivity.png in Resources */,
 				AA4EF7511C85A4260050CCD8 /* Reader-Email.png in Resources */,
 				C4660EBF1625047800BA4AFE /* prospect_btnB2.png in Resources */,
+				4374ACFD1C911FF00006522A /* eng_BCALKK_Page1.html in Resources */,
 				C4660EC01625047800BA4AFE /* prospect.png in Resources */,
 				C4660EC11625047800BA4AFE /* setting_btnB_144.png in Resources */,
 				C4660EC21625047800BA4AFE /* setting_btnB.png in Resources */,
@@ -5245,6 +5257,7 @@
 				42B8B14B1917339500E09A34 /* PDFCreater.bundle in Resources */,
 				42B8B14F1917339500E09A34 /* README.markdown in Resources */,
 				043FDB9C1A1AEEE6008EDC24 /* client_profilev2.png in Resources */,
+				4374ACFE1C911FF00006522A /* eng_BCALKK_Page2.html in Resources */,
 				42B8B1531917339500E09A34 /* README.md in Resources */,
 				4239AEB51946DAE200BD6F53 /* eSignController.xib in Resources */,
 				4239AEB91946DAE200BD6F53 /* sign-here.png in Resources */,
@@ -5802,6 +5815,7 @@
 				4239AEE81946DAE200BD6F53 /* SnapCustomCell.m in Sources */,
 				4239AEEA1946DAE200BD6F53 /* CardSnap.m in Sources */,
 				4239AEEC1946DAE200BD6F53 /* IDTypePicker.m in Sources */,
+				432466541C9000EC001EE22F /* ModelDataReferral.m in Sources */,
 				AAFFE17F1C7D475E001B91BF /* NSDate+ISO8601Unparsing.m in Sources */,
 				4239AEF21946DAE200BD6F53 /* SnapGen.m in Sources */,
 				428F84A5197831450016B7E8 /* GDataXMLNode.m in Sources */,

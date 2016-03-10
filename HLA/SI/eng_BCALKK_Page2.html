@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--<link href="css/htmlStyle.css" rel="stylesheet" type="text/css" />-->
+        <style>
+            thead,table-Summary1 {
+                border: 1px solid black;
+            }
+            td.one {
+                font-size:11px;
+                border-style: solid;
+                border-color: black;
+                border-width: 1px;
+                padding: 0px 0px 0px 0px;
+                font-family: "Helvetica"
+                font-size: 11px;
+                text-align: center;
+            }
+            tr.rowStyle {
+                border-style: solid;
+                border-color: black;
+                border-width: 1px;
+                font-family: "Helvetica"
+                font-size: 11px;
+            }
+ td {
+            border-style: solid;
+            border-color: black;
+            border-width: 0px;
+            padding: 0px 0px 0px 0px;
+            text-align: justify;
+            font-size:11px;
+            font-family: "Helvetica"
+        }
+            p {
+                font-size:11px;
+                padding: 0px 0px 0px 0px;
+            }
+            z {
+                font-size:11px;
+	            font-family: "Helvetica"
+	            padding: 0px 0px 0px 0px;
+            }
+            header1 {
+                font-size:12px;
+                padding: 0px 0px 0px 0px;
+            }
+        </style>
+        
+        
+        <script type="text/javascript" charset="utf-8" src="js/jquery-1.8.2.min.js"></script>
+        <script type="text/javascript" charset="utf-8" src="js/hla.js"></script>
+        <script>
+            var gData;
+            function onBodyLoad(){
+                //writeSummary1();
+            }
+        
+        function replaceChar(char){
+            var temp, returnVal;
+            if (char == "0")
+            returnVal = "-"
+            else if (char == "")
+            returnVal = "-"
+            else
+            returnVal = char;
+            return returnVal;
+        }
+        
+        function isIncomeRider(amt,rider){
+            //rider.replace(/^\s+|\s$/g,"")
+            //$.trim(rider)
+            var temp;
+            temp = $.trim(rider)
+            //alert(temp + "x")
+            if (temp == "HLA Income Builder" || temp == "Income 20 Rider" || temp == "Income 30 Rider" || temp == "Income 40 Rider" || temp == "Income D-20 Rider" || temp == "Income D-30 Rider" || temp == "Income D-40 Rider" || temp == "Income E-20 Rider" || temp == "Income E-30 Rider"){
+                return amt + " *";
+            }
+            else
+            return amt + "&nbsp;&nbsp;";
+        }
+        
+        function removeRows(rowCount){
+            var rowTobeDeleted=24;
+            for (i = 24; i < rowCount+3; i++) {
+                var realRow = i-3;
+                var modulusResult=realRow%5;
+                if (modulusResult != 0){
+                    document.getElementById("table-Summary1").deleteRow(rowTobeDeleted);
+                }
+                else{
+                    rowTobeDeleted=rowTobeDeleted+1;
+                }
+            }
+        }
+        
+        function createTable(Age,xRow,BasicSumAssured,PaymentTerm,rateTunggal,rate5,surValue) {
+            var table = document.getElementById("table-Summary1");
+            var rbFactor = 1;
+            var term = PaymentTerm;
+            var rbRate=1.5;
+            var interesRate=2.25;
+            var prevColE=0;
+            var finalRate;
+            
+            if (term == 1){
+                finalRate=rateTunggal;
+            }
+            else{
+                finalRate=rate5;
+            }
+            
+            for (i = 0; i < xRow; i++) {
+                var col1Val=i+1;
+                var col2Val=Age +col1Val;
+                var col3Val=BasicSumAssured;
+                var col4Val=0;
+                if (term == 1){
+                    if (col1Val<2){
+                        rbFactor=0;
+                    }
+                    else{
+                        rbFactor=1;
+                    }
+                }
+                else{
+                    if (col1Val<3){
+                        rbFactor=0;
+                    }
+                    else{
+                        rbFactor=1;
+                    }
+                }
+                col4Val=rbFactor*((col3Val*rbRate)+(prevColE*interesRate));
+                col4Val=col4Val/100;
+                var col5Val = col4Val + prevColE;
+                var col6Val = col3Val + col5Val;
+                var col7Val;
+                var col8Val;
+                if (col2Val == 99){
+                    col7Val = col3Val;
+                    col8Val = col5Val;
+                }
+                else if (col2Val>99){
+                    col8Val = 0;
+                }
+                else{
+                    var valueRate = finalRate[i];
+                    col7Val = (Math.round(col3Val) * valueRate)/1000;
+                    col8Val = (surValue[i] * Math.round(col5Val))/1000;
+                }
+                
+                var col9Val = col7Val + col8Val;
+
+                var displayCol3Val=Math.round(col3Val).toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+                var displayCol4Val=Math.round(col4Val).toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+                var displayCol5Val=Math.round(col5Val).toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+                var displayCol6Val=Math.round(col6Val).toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+                var displayCol7Val=Math.round(col7Val).toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+                var displayCol8Val=Math.round(col8Val).toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+                var displayCol9Val=Math.round(col9Val).toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+                
+                var row = table.insertRow(i+4);
+                var cell1 = row.insertCell(0);
+                var cell2 = row.insertCell(1);
+                var cell3 = row.insertCell(2);
+                var cell4 = row.insertCell(3);
+                var cell5 = row.insertCell(4);
+                var cell6 = row.insertCell(5);
+                var cell7 = row.insertCell(6);
+                var cell8 = row.insertCell(7);
+                var cell9 = row.insertCell(8);
+                
+                cell1.className = 'one';
+                cell2.className = 'one';
+                cell3.className = 'one';
+                cell4.className = 'one';
+                cell5.className = 'one';
+                cell6.className = 'one';
+                cell7.className = 'one';
+                cell8.className = 'one';
+                cell9.className = 'one';
+                
+                cell1.innerHTML = col1Val;
+                cell2.innerHTML = col2Val;
+                cell3.innerHTML = displayCol3Val;
+                cell4.innerHTML = displayCol4Val;
+                cell5.innerHTML = displayCol5Val;
+                cell6.innerHTML = displayCol6Val;
+                cell7.innerHTML = displayCol7Val;
+                cell8.innerHTML = displayCol8Val;
+                cell9.innerHTML = displayCol9Val;
+                
+                prevColE=col5Val;
+            }
+            removeRows(xRow);
+        }
+        
+    </script>
+    </head>
+    <!-- <body onload="onBodyLoad()">   -->
+    <body>
+        <div id="header">
+            <table border="0" style="border-collapse:separate;border:0px solid black;width:100%;">
+                <tr>
+                    <td style="width: 25%"><img src="SI/img/LogoBCALife.jpg" height="55px"/></td>
+                    <td style="width: 45%" valign="top">
+                        <table  style="border-collapse:separate;border:1px solid black;width:100%;font-family:Helveticafont-size:11px;text-align: center">
+                            <tr>
+                                <td style="font-size:11px;font-family: helvetical; text-align: center">
+                                    Kecuali dinyatakan lain, ilustrasi ini bukan merupakan kontrak asuransi
+                                </td>
+                            </tr>
+                            
+                        </table>
+                    </td>
+                    <td style="width: 30%; font-size:13px;font-family:Helvetica; text-align: right" valign="top" style="margin:0" >
+                        <header1>BCA Life Keluargaku</header1></br>
+                        <font color="red">Nomor Ilustrasi : <font color="red"><label id="SINumber">16011813027</label></font>
+                            </td>
+                </tr>
+            </table>
+        </div>
+        <div class="main-content">
+            <!--data LA-->
+            <br/>
+            <!--520px-->
+            <div class="contentArea" >
+	            <b><z>Ringkasan Manfaat</z></b>
+                <br/>
+                <table id="table-Summary1" width="100%" cellspacing="0" cellpadding="0">
+
+                        <!--<tr>
+                            <th colspan="9" class="contentSmall">Ilustrasi Manfaat Asuransi</th>
+                        </tr>-->
+                        <tr>
+                            <td  valign="top" style="width: 10%;border:1px solid black; font-family:Helvetica;font-size:11px;text-align: center">Tahun</td>
+                            <td  valign="top" style="width: 22.5%;border:1px solid black; font-family:Helvetica;font-size:11px;text-align: center">Premi Asuransi Dasar (Awal)</td>
+                            <td  valign="top" style="width: 22.5%;border:1px solid black; font-family:Helvetica;font-size:11px;text-align: center">Akumulasi Premi Asuransi Dasar</td>
+                            <td  valign="top" style="width: 22.5%;border:1px solid black; font-family:Helvetica;font-size:11px;text-align: center">Pengembalian Sebagian Premi* (Akhir)</td>
+                            <td  valign="top" style="width: 22.5%;border:1px solid black; font-family:Helvetica;font-size:11px;text-align: center">Pengembalian Seluruh Premi* (Akhir)</td>
+                        </tr>
+                    <tbody>
+                        <!--sql data here-->
+                    </tbody>
+                    
+                </table>
+
+<z>Untuk keperluan ilustrasi, penjelasan lengkap mengenai Manfaat Asuransi (termasuk syarat-syarat dan pengecualian-pengecualian) tercantum dalam Polis, berlaku dan mengikat.</z>
+                        <table  >
+                            
+                            <!--<tr>
+                             <td >
+                             <b>Ringkasan Manfaat</b><br/>
+                             Untuk keperluan ilustrasi, penjelasan lengkap mengenai Manfaat Asuransi (termasuk syarat-syarat dan pengecualian-pengecualian) tercantum dalam polis, berlaku dan mengikat.
+                             </td>
+                             </tr>-->
+                            <tr><td></td></tr>
+                            <tr VALIGN=TOP>
+                                <td style="width: 2%"> <b>1.</b>
+                                </td>
+                                <td>
+                                    Isi Ilustrasi ini bukan merupakan kontrak asuransi. Ilustrasi ini hanya digunakan untuk memberikan gambaran mengenai Manfaat Asuransi yang akan diberikan oleh Penanggung. Hak dan kewajiban Pemegang Polis dan ketentuan lain nya mengenai produk ini tercantum dalam Polis.
+                                </td>
+                            </tr>
+                            <tr><td></td></tr>
+                            <tr VALIGN=TOP>
+                                <td style="width: 2%"><b>2.</b>
+                                </td>
+                                <td>
+                                    Angka pada tabel Ringkasan Ilustrasi diasumsikan bahwa semua premi telah lunas pada saat jatuh tempo pembayaran.
+                                </td>
+                            </tr>
+                            <tr><td></td></tr>
+                            <tr VALIGN=TOP>
+                                <td style="width: 2%"><b>3.</b>
+                                </td>
+                                
+                                <td>
+                                    Ilustrasi ini berlaku selama tidak ada perubahan usia masuk dari Calon Tertanggung.
+                                </td>
+                            </tr>
+                            <tr><td></td></tr>
+                            <tr VALIGN=TOP>
+                            	<td style="width: 2%"><b>4.</b>
+                                </td>
+                                
+                                <td>
+                                    Pemegang Polis dapat mengajukan penghentian polis dengan mengajukan permohonan Manfaat Pengembalian Sebagian Premi. Besarnya nilai Pengembalian Sebagian Premi yang terbentuk setelah
+diperhitungkan dengan kewajiban-kewajiban dan manfaat yang sudah dibayarkan kepada Pemegang Polis, akan diberikan setelah Penanggung menyetujui permohonan yang diajukan oleh Pemegang Polis. Dengan telah disetujuinya permohonan tersebut, maka polis berhenti berlaku dan permohonan penebusan Polis tidak dapat ditarik kembali oleh Pemegang Polis.
+                                </td>
+                            </tr> 
+                            
+                        </table>
+            </div>
+            
+        </div>
+        </br>
+        <!--tanda tangan-->
+        <div style="width:100%;background-color: #fff;vertical-align: top;">
+            <table border="0" style="border-collapse:separate;border:0px solid black;width:100%;font-family:Helvetica;font-size:11px">
+                <td style="width: 50%">
+                    <table  style="border-collapse:separate;border:0px solid black;width:100%;">
+                        <tr>
+                            <td>Disiapkan oleh</td><td>:</td><td style="width: 60%"><label id="FooterAgentName">Andreas</label></td>
+                        </tr>
+                        
+                        <tr>
+                            <td>Tanggal dan jam cetak</td><td>:</td><td><label id="FooterPrintDate">26-Januari-2016</label></td>
+                        </tr>
+                        
+                        <tr>
+                            <td>Versi</td><td>:</td><td><label id="FooterVersion">1.0.000</label></td>
+                        </tr>
+                        
+                        <tr>
+                            <td>Kode Tenaga Penjual</td><td>:</td><td><label id="FooterAgentCode">HRTG-003</label></td>
+                        </tr>
+                        
+                        <tr>
+                            <td>Cabang</td><td>:</td><td><label id="FooterBranch">Head Office</label></td>
+                        </tr>
+                        
+                        <tr>
+                            <td colspan="3">Saya Telah menjelaskan isi ilustrasi ini kepada Calon Pemegang Polis</td>
+                        </tr>
+                        
+                        <tr>
+                            <td>Tanda Tangan Tenaga Penjual</td><td>:</td><td></td>
+                        </tr>
+                    </table>
+                </td>
+                <td style="width: 50%">
+                    <table  style="border-collapse:separate;border:1px solid black;width:100%;">
+                        <tr>
+                            <td>Saya telah memahami dan menyetujui penjelasan yang diberikan atas ilustrasi manfaat asuransi yang diuraikan pada halaman ini.</td>
+                        </tr>
+                        
+                        <tr align="left">
+                            <td>Tanda Tangan Pemegang Polis :</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><br/></td>
+                        </tr>
+                        
+                        <tr>
+                            <td><br/></td>
+                        </tr>
+                        <tr>
+                            <td><br/></td>
+                        </tr>
+                        <tr>
+                            <td><br/></td>
+                        </tr>
+                        <tr>
+                            <td><br/></td>
+                        </tr>
+                    </table>
+                </td>			
+            </table>
+        </div>
+        <!--halaman-->
+        <div style="width:100%;height:20px;background-color: #fff;vertical-align: top;">
+            <table border="0" style="border-collapse:separate;border:0px solid black;width:100%;;font-family:Helvetica;font-size:11px;text-align: right">
+                <tr style="text-align: right">
+                    <td style="text-align: right">Halaman 2 dari 2</td>
+                </tr>
+                <tr style="text-align: right">
+                    <td style="text-align: right">www.bcalife.co.id</td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>

@@ -16,9 +16,7 @@
 #import "SIObj.h"
 #import "Constants.h"
 
-
 @interface BasicPlanViewController ()
-
 @end
 
 @implementation BasicPlanViewController
@@ -27,6 +25,7 @@
 @synthesize FrekuensiPembayaranChecking,FRekeunsiPembayaranMode,YearlyIncm;
 @synthesize yearlyIncomeField;
 @synthesize ExtraPremiDasarLBL;
+@synthesize MasaExtraPremiLBL;
 @synthesize ExtraPremiDasarNumberLBL;
 @synthesize minSALabel;
 @synthesize maxSALabel;
@@ -42,7 +41,7 @@
 @synthesize tempHLTermField,basicPremAnn,basicPremHalf,basicPremQuar,basicPremMonth;
 @synthesize myScrollView,labelThree,labelSix,labelSeven,labelFour,labelFive,annualMedRiderPrem,monthMedRiderPrem,quarterMedRiderPrem;
 @synthesize ageClient,requestSINo,termCover,maxSA,minSA,halfMedRiderPrem;
-@synthesize MOP,yearlyIncome,advanceYearlyIncome,basicRate,cashDividend;
+@synthesize MOP,yearlyIncome,advanceYearlyIncome,basicRate,cashDividend,TotalA;
 @synthesize getSINo,getSumAssured,getPolicyTerm,getHL,getHLTerm,getTempHL,getTempHLTerm;
 @synthesize planCode,requestOccpCode,dataInsert,basicBH,basicPH,basicLa2ndH;
 @synthesize SINo,LACustCode,PYCustCode,SIDate,SILastNo,CustDate,CustLastNo,BasisSumAssured;
@@ -294,6 +293,10 @@ bool WPTPD30RisDeleted = FALSE;
         _KKLKExtraPremiDasarLBL.hidden = YES;
         _KKLKPembelianKeBtn.hidden = YES;
         _KKLKPembelianKeLbl.hidden = YES;
+        _KKLKMasaPembayaran.hidden = YES;
+        _masaPembayaranButton.hidden = NO;
+         ExtraPremiDasarLBL.hidden = NO;
+        //yearlyIncomeField.text = @"";
 //    }
 
 }
@@ -301,13 +304,20 @@ bool WPTPD30RisDeleted = FALSE;
 -(void)KeluargakuEnable
 {
     NSLog(@"%@",PlanType);
-    //    if ([PlanType isEqualToString:@"BCA Life Heritage"])
+    //    if ([PlanType isEqualToString:@"BCA Life Keluargaku"])
     //    {
     _KKLKDiskaunBtn.hidden = NO;
     _KKLKDiskaunLbl.hidden = NO;
     _KKLKExtraPremiDasarLBL.hidden = NO;
     _KKLKPembelianKeBtn.hidden = NO;
     _KKLKPembelianKeLbl.hidden = NO;
+    _KKLKMasaPembayaran.hidden = NO;
+    _masaPembayaranButton.hidden = YES;
+    ExtraPremiDasarLBL.hidden = YES;
+    FrekuensiPembayaranChecking =@"10 Tahun";
+    //yearlyIncomeField.text = @"";
+    
+
     //    }
     
 }
@@ -425,11 +435,12 @@ bool WPTPD30RisDeleted = FALSE;
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    if (textField == yearlyIncomeField)
-    {
-        ExtraPremiDasarLBL.hidden=NO;
+//    if ((textField == yearlyIncomeField)&&(PlanType = @"BCA Life Heritage"))
+//    {
+//        ExtraPremiDasarLBL.hidden=NO;
+//
+//    }
 
-    }
 
 }
 
@@ -481,6 +492,21 @@ bool WPTPD30RisDeleted = FALSE;
 
 #pragma mark - added by faiz 
 //added by faiz
+
+-(IBAction)MasaExtraPremiTextFieldDidBegin:(UITextField *)sender{
+    if ([_masaPembayaranButton.titleLabel.text isEqualToString:@"Premi Tunggal"]){
+        [MasaExtraPremiLBL setText:@"Min 1 | Max 1"];
+    }
+    else if ([_masaPembayaranButton.titleLabel.text isEqualToString:@"Premi 5 Tahun"]){
+        [MasaExtraPremiLBL setText:@"Min 1 | Max 5"];
+    }
+    [MasaExtraPremiLBL setHidden:NO];
+}
+
+-(IBAction)MasaExtraPremiTextFieldDidEnd:(UITextField *)sender {
+    [MasaExtraPremiLBL setHidden:YES];
+}
+
 
 -(IBAction)actionMasaPembayaran:(id)sender
 {
@@ -587,8 +613,134 @@ bool WPTPD30RisDeleted = FALSE;
         [self.planPopover presentPopoverFromRect:rect  inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
        // _frekuensiPembayaranButton.enabled =TRUE;
     }
+    else if ([FrekuensiPembayaranChecking isEqualToString:@"10 Tahun"])
+    {
+        
+        [self resignFirstResponder];
+        [self.view endEditing:YES];
+        
+        Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
+        id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
+        [activeInstance performSelector:@selector(dismissKeyboard)];
+        
+        if (_frekuensi == nil) {
+            _frekuensi = [[Frekeunsi alloc] init];
+            _frekuensi.Frekuensi = @"10 Tahun";
+            _frekuensi.delegate = self;
+            premiType = @"S";
+            self.planPopover = [[UIPopoverController alloc] initWithContentViewController:_frekuensi];
+        }
+        else
+        {
+            _frekuensi = [[Frekeunsi alloc] init];
+            _frekuensi.Frekuensi = @"10 Tahun";
+            _frekuensi.delegate = self;
+            premiType = @"S";
+            self.planPopover = [[UIPopoverController alloc] initWithContentViewController:_frekuensi];
+            
+        }
+        CGRect rect = [sender frame];
+        rect.origin.y = [sender frame].origin.y + 30;
+        
+        [self.planPopover setPopoverContentSize:CGSizeMake(350.0f, 200.0f)];
+        [self.planPopover presentPopoverFromRect:rect  inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        // _frekuensiPembayaranButton.enabled =TRUE;
+
+    }
     
 }
+
+-(void)PremiDasarActKeluargaku: (NSString *)PaymentDesc
+{
+    
+    double PaymentType;
+    double PaymentFoctor;
+    
+    //PAymentFactorRate//
+    
+    if ([PaymentDesc isEqualToString:@"Tahunan"])
+    {
+        PaymentType =1;
+    }
+    else if ([PaymentDesc isEqualToString:@"Semester"])
+    {
+        PaymentType =2;
+    }
+    else if ([PaymentDesc isEqualToString:@"Kuartal"])
+    {
+        PaymentType =3;
+    }
+    else if ([PaymentDesc isEqualToString:@"Bulanan"])
+    {
+        PaymentType =4;
+    }
+    
+    NSString*AnsuransiDasarQuery;
+    NSArray *paths2 = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsPath2 = [paths2 objectAtIndex:0];
+    NSString *path2 = [docsPath2 stringByAppendingPathComponent:@"BCA_Rates.sqlite"];
+    FMDatabase *database = [FMDatabase databaseWithPath:path2];
+    [database open];
+    FMResultSet *results;
+    FMResultSet *Results2;
+    NSString * RatesMop = [NSString stringWithFormat:@"SELECT Payment_Fact FROM Keluargaku_Rates_MOP Where Payment_Code = %f",PaymentType];
+    Results2 = [database executeQuery:RatesMop];
+    
+    while([Results2 next])
+    {
+      PaymentFoctor = [[Results2 stringForColumn:@"Payment_Fact"]doubleValue];
+        
+    }
+    
+    ////BasicPremiRate/////
+    
+    AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM Keluargaku_Rates_basicPrem Where BasicCode = '%@' AND EntryAge = %i",PayorSex,@"KLK",PayorAge];
+    results = [database executeQuery:AnsuransiDasarQuery];
+    
+    NSString*RatesPremiumRate;
+    double PaymentMode;
+    if (![database open])
+    {
+        NSLog(@"Could not open db.");
+    }
+    
+    while([results next])
+    {
+        if ([PayorSex isEqualToString:@"Male"]||[PayorSex isEqualToString:@"MALE"]){
+            RatesPremiumRate  = [results stringForColumn:@"Male"];
+        }
+        else{
+            RatesPremiumRate  = [results stringForColumn:@"Female"];
+        }
+        
+    }
+    
+     double RatesInt = [RatesPremiumRate doubleValue];
+    
+    ///BasiSumAssured///
+ 
+    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+    f.numberStyle = NSNumberFormatterDecimalStyle;
+    NSNumber *myNumber = [f numberFromString:yearlyIncomeField.text];
+    
+    BasisSumAssured = [myNumber longLongValue];
+    
+    long long total =(BasisSumAssured/1000);
+    
+    //NoPolRate//
+    
+    int NoPolRate =0;
+    
+    //Diskoun Premi//
+    
+    double DiskounPremi = 0 * RatesInt * total * PaymentFoctor;
+    
+    
+    [_KKLKDiskaunBtn setText:[NSString stringWithFormat:@"%2f", DiskounPremi]];
+  //  [self PremiDasarIncomeChange:_basicPremiField.text];
+}
+
+
 
 -(void)PremiDasarAct
 {
@@ -606,7 +758,6 @@ bool WPTPD30RisDeleted = FALSE;
     
     NSString*RatesPremiumRate;
     double PaymentMode;
-    FMDatabase *database1 = [FMDatabase databaseWithPath:path2];
     if (![database open])
     {
         NSLog(@"Could not open db.");
@@ -634,15 +785,20 @@ bool WPTPD30RisDeleted = FALSE;
     
     double RatesInt = [RatesPremiumRate doubleValue];
     
+    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+    f.numberStyle = NSNumberFormatterDecimalStyle;
+    NSNumber *myNumber = [f numberFromString:yearlyIncomeField.text];
     
-    int total =(BasisSumAssured/1000);
+    BasisSumAssured = [myNumber longLongValue];
+
+    long long total =(BasisSumAssured/1000);
     
     double test = PaymentMode * RatesInt;
     
-    double TestTotal = total * test;
+    TotalA = total * test;
     
     
-    [_basicPremiField setText:[NSString stringWithFormat:@"%2f", TestTotal]];
+    [_basicPremiField setText:[NSString stringWithFormat:@"%2f", TotalA]];
     [self PremiDasarIncomeChange:_basicPremiField.text];
 }
 
@@ -662,7 +818,6 @@ bool WPTPD30RisDeleted = FALSE;
     
     NSString*RatesPremiumRate;
     double PaymentMode;
-    FMDatabase *database1 = [FMDatabase databaseWithPath:path2];
     if (![database open])
     {
         NSLog(@"Could not open db.");
@@ -688,21 +843,31 @@ bool WPTPD30RisDeleted = FALSE;
         PaymentMode = 0.1;
     }
     
-    int RatesInt = [RatesPremiumRate intValue];
-    int total =(BasisSumAssured/1000)*(PaymentMode * RatesInt);
-  //  [_basicPremiField setText:[NSString stringWithFormat:@"%d", total]];
+    double RatesInt = [RatesPremiumRate doubleValue];
+    long long totalDivide =(BasisSumAssured/1000);
     
+    double valueofTotal =(PaymentMode * RatesInt);
+    
+    double total =(totalDivide * valueofTotal);
+  //  [_basicPremiField setText:[NSString stringWithFormat:@"%d", total]];
+
     int masaExtraPremiBTotal =[_masaExtraPremiField.text intValue];
     
-    int totalB = total * masaExtraPremiBTotal;
+    double totalB = total * masaExtraPremiBTotal;
+    double TotalAB = TotalA + totalB;
     
-    [_extraBasicPremiField setText:[NSString stringWithFormat:@"%d", totalB]];
+    NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setFormatterBehavior: NSNumberFormatterBehavior10_4];
+    [numberFormatter setNumberStyle: NSNumberFormatterDecimalStyle];
+    [numberFormatter setRoundingMode:NSNumberFormatterRoundUp];
+    [numberFormatter setMaximumFractionDigits:0];
+    [numberFormatter setMinimumFractionDigits:0];
     
+    NSString *numberExtraBasicPremi = [numberFormatter stringFromNumber: [NSNumber numberWithDouble:totalB]];
+    NSString *totalPremiWithLoading = [numberFormatter stringFromNumber: [NSNumber numberWithDouble:TotalAB]];
     
-    int TotalAB = total + totalB;
-    
-    [_totalPremiWithLoadingField setText:[NSString stringWithFormat:@"%d", TotalAB]];
-    
+    [_extraBasicPremiField setText:[NSString stringWithFormat:@"%@", numberExtraBasicPremi]];
+    [_totalPremiWithLoadingField setText:[NSString stringWithFormat:@"%@", totalPremiWithLoading]];
 }
 
 
@@ -1053,7 +1218,7 @@ bool WPTPD30RisDeleted = FALSE;
     
     double entryFieldFloat = [_basicPremiField.text doubleValue];
     
-    if ([_basicPremiField.text rangeOfString:@".00"].length == 3) {
+    if ([_basicPremiField.text rangeOfString:@""].length == 3) {
         formatter.alwaysShowsDecimalSeparator = YES;
         result =[formatter stringFromNumber:[NSNumber numberWithDouble:entryFieldFloat]];
         result = [result stringByAppendingFormat:@"00"];
@@ -1065,7 +1230,7 @@ bool WPTPD30RisDeleted = FALSE;
     } else if ([_basicPremiField.text rangeOfString:@"."].length != 1) {
         formatter.alwaysShowsDecimalSeparator = NO;
         result =[formatter stringFromNumber:[NSNumber numberWithDouble:entryFieldFloat]];
-        result = [result stringByAppendingFormat:@".00"];
+        result = [result stringByAppendingFormat:@""];
         
     }
     
@@ -1076,6 +1241,89 @@ bool WPTPD30RisDeleted = FALSE;
         _basicPremiField.text = result;
     }
 }
+
+-(void)PremiDasarIncomeChangeB:(NSString *)BAsicPremiDasarB
+{
+    //BasisSumAssured = [yearlyIncomeField.text intValue];
+    
+    _extraBasicPremiField.text = [BAsicPremiDasarB stringByReplacingOccurrencesOfString:@" " withString:@""];
+    _extraBasicPremiField.text = [BAsicPremiDasarB stringByReplacingOccurrencesOfString:@"," withString:@""];
+    _extraBasicPremiField.text = [BAsicPremiDasarB stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    
+    NSString *result;
+    
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc]init];
+    [formatter setMaximumFractionDigits:2];
+    [formatter setUsesGroupingSeparator:YES];
+    [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    
+    double entryFieldFloat = [_extraBasicPremiField.text doubleValue];
+    
+    if ([_extraBasicPremiField.text rangeOfString:@""].length == 3) {
+        formatter.alwaysShowsDecimalSeparator = YES;
+        result =[formatter stringFromNumber:[NSNumber numberWithDouble:entryFieldFloat]];
+        result = [result stringByAppendingFormat:@"00"];
+        
+    } else  if ([_extraBasicPremiField.text rangeOfString:@"."].length == 1) {
+        formatter.alwaysShowsDecimalSeparator = YES;
+        result =[formatter stringFromNumber:[NSNumber numberWithDouble:entryFieldFloat]];
+        
+    } else if ([_extraBasicPremiField.text rangeOfString:@"."].length != 1) {
+        formatter.alwaysShowsDecimalSeparator = NO;
+        result =[formatter stringFromNumber:[NSNumber numberWithDouble:entryFieldFloat]];
+        result = [result stringByAppendingFormat:@""];
+        
+    }
+    
+    if(_extraBasicPremiField.text.length==0)
+    {
+        _extraBasicPremiField.text = @"";
+    } else {
+        _extraBasicPremiField.text = result;
+    }
+}
+
+-(void)PremiDasarIncomeChangeAplusB:(NSString *)BAsicPremiDasar
+{
+    //BasisSumAssured = [yearlyIncomeField.text intValue];
+    
+    _basicPremiField.text = [BAsicPremiDasar stringByReplacingOccurrencesOfString:@" " withString:@""];
+    _basicPremiField.text = [BAsicPremiDasar stringByReplacingOccurrencesOfString:@"," withString:@""];
+    _basicPremiField.text = [BAsicPremiDasar stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    
+    NSString *result;
+    
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc]init];
+    [formatter setMaximumFractionDigits:2];
+    [formatter setUsesGroupingSeparator:YES];
+    [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    
+    double entryFieldFloat = [_basicPremiField.text doubleValue];
+    
+    if ([_basicPremiField.text rangeOfString:@""].length == 3) {
+        formatter.alwaysShowsDecimalSeparator = YES;
+        result =[formatter stringFromNumber:[NSNumber numberWithDouble:entryFieldFloat]];
+        result = [result stringByAppendingFormat:@"00"];
+        
+    } else  if ([_basicPremiField.text rangeOfString:@"."].length == 1) {
+        formatter.alwaysShowsDecimalSeparator = YES;
+        result =[formatter stringFromNumber:[NSNumber numberWithDouble:entryFieldFloat]];
+        
+    } else if ([_basicPremiField.text rangeOfString:@"."].length != 1) {
+        formatter.alwaysShowsDecimalSeparator = NO;
+        result =[formatter stringFromNumber:[NSNumber numberWithDouble:entryFieldFloat]];
+        result = [result stringByAppendingFormat:@""];
+        
+    }
+    
+    if(_basicPremiField.text.length==0)
+    {
+        _basicPremiField.text = @"";
+    } else {
+        _basicPremiField.text = result;
+    }
+}
+
 
 
 -(BOOL)checkingSave:(NSString *)getSex
@@ -3806,6 +4054,14 @@ bool WPTPD30RisDeleted = FALSE;
         return false;
     }
     
+   else if ((![_extraPremiNumberField.text isEqualToString:@""]&&![_extraPremiNumberField.text isEqualToString:@"1"]&&![_extraPremiNumberField.text isEqualToString:@"2"]&&![_extraPremiNumberField.text isEqualToString:@"3"]&&![_extraPremiNumberField.text isEqualToString:@"4"]&&![_extraPremiNumberField.text isEqualToString:@"5"]&&![_extraPremiNumberField.text isEqualToString:@"6"]&&![_extraPremiNumberField.text isEqualToString:@"7"]&&![_extraPremiNumberField.text isEqualToString:@"8"]&&![_extraPremiNumberField.text isEqualToString:@"9"]&&![_extraPremiNumberField.text isEqualToString:@"10"]))
+    {
+        [self createAlertViewAndShow:validationExtraNumber tag:0];
+        [_masaExtraPremiField becomeFirstResponder];
+        return false;
+    }
+
+    
     else if (([_extraPremiPercentField.text length]>0)||([_extraPremiNumberField.text length]>0))
     {
         if ([validationSet containsObject:masaEktraPremi]||masaEktraPremi==NULL)
@@ -3814,14 +4070,6 @@ bool WPTPD30RisDeleted = FALSE;
             [_masaExtraPremiField becomeFirstResponder];
             return false;
         }
-        
-        if ((![_extraPremiPercentField.text isEqualToString:@"1"]&&![_extraPremiPercentField.text isEqualToString:@"2"]&&![_extraPremiPercentField.text isEqualToString:@"3"]&&![_extraPremiPercentField.text isEqualToString:@"4"]&&![_extraPremiPercentField.text isEqualToString:@"5"]&&![_extraPremiPercentField.text isEqualToString:@"6"]&&![_extraPremiPercentField.text isEqualToString:@"7"]&&![_extraPremiPercentField.text isEqualToString:@"8"]&&![_extraPremiPercentField.text isEqualToString:@"9"]&&![_extraPremiPercentField.text isEqualToString:@"10"]))
-        {
-            [self createAlertViewAndShow:validationExtraNumber tag:0];
-            [_masaExtraPremiField becomeFirstResponder];
-            return false;
-        }
-
     }
     
     
@@ -4148,8 +4396,14 @@ bool WPTPD30RisDeleted = FALSE;
     
     FRekeunsiPembayaranMode = aaDesc;
     
-    [self PremiDasarAct];
-    
+    if([PlanType isEqualToString:@"BCA Life Keluargaku"])
+    {
+        [self PremiDasarActKeluargaku:aaDesc];
+    }
+    else
+    {
+         [self PremiDasarAct];
+    }
     
 }
 

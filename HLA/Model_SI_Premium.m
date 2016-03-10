@@ -16,6 +16,7 @@
     
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     [database open];
+    
     BOOL success = [database executeUpdate:@"insert into SI_Premium (SINO, Sum_Assured, Payment_Term, Payment_Frequency,PremiumPolicyA,ExtraPremiumPercentage,ExtraPremiumSum,ExtraPremiumTerm,ExtraPremiumPolicy,TotalPremiumLoading,SubTotalPremium,CreatedDate,UpdatedDate) values (?,?,?,?,?,?,?,?,?,?,?,""datetime(\"now\", \"+8 hour\")"",""datetime(\"now\", \"+8 hour\")"")" ,
                     [dataPremium valueForKey:@"SINO"],
                     [dataPremium valueForKey:@"Sum_Assured"],
@@ -149,8 +150,9 @@
     [database open];
     
     FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select count(*) from SI_Premium where SINO = \"%@\"",SINo]];
+    NSLog(@"query %@",[NSString stringWithFormat:@"select count(*) from SI_Premium where SINO = \"%@\"",SINo]);
     while ([s next]) {
-        count = [s intForColumn:@"count"];
+        count = [s intForColumn:@"count(*)"];
     }
     
     [results close];
