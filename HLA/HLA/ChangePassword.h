@@ -20,6 +20,7 @@
     PasswordTips *_PasswordTips;
     id loginDelegate;
     BOOL flagFirstLogin;
+    BOOL flagFullSync;
     NSString *strAgentCode;
     LoginDBManagement *loginDB;
     SpinnerUtilities *spinnerLoading;

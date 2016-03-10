@@ -247,6 +247,31 @@
     return nsdate;
 }
 
+
+
+- (int) DeleteAgentProfile{
+    sqlite3_stmt *statement;
+    int DeleteAgent = DATABASE_ERROR;
+    if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
+    {
+        NSString *querySQL = [NSString stringWithFormat: @"DELETE FROM AGENT_PROFILE"];
+        
+        if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK){
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                NSLog(@"date update!");
+                DeleteAgent = TABLE_INSERTION_SUCCESS;
+                
+            } else {
+                NSLog(@"date update Failed!");
+            }
+            sqlite3_finalize(statement);
+        }
+        sqlite3_close(contactDB);
+    }
+    return DeleteAgent;
+}
+
 - (int) FirstLogin:(NSString *)AgentID{
     sqlite3_stmt *statement;
     int FirstLogin = DATABASE_ERROR;

@@ -25,4 +25,5 @@
 - (int)fullSync:(NSString *)username delegate:(id)delegate;
 - (int)checkVersion:(NSString *)version delegate:(id)delegate;
 - (int)partialSync:(NSString *)agentCode delegate:(id)delegate xml:(NSString *)XMLTable;
+- (int)AppVersionChecker:(NSString *)strVersion delegate:(id)delegate;
 @end

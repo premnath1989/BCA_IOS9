@@ -802,6 +802,7 @@
 		C4FCDDE816395F290065D024 /* btn_prospect_home.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FCDDDC16395F290065D024 /* btn_prospect_home.png */; };
 		C4FCDDEB16395F290065D024 /* btn_setting_home.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FCDDDF16395F290065D024 /* btn_setting_home.png */; };
 		C4FCDDEC16395F290065D024 /* btn_SI_home.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FCDDE016395F290065D024 /* btn_SI_home.png */; };
+		DEDF23F41C8E85EA00FD9B88 /* libSPSignDoc_4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DEDF23F31C8E85EA00FD9B88 /* libSPSignDoc_4.0.a */; };
 		EF059839161A8BD1004A9095 /* NewLAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF059837161A8BCF004A9095 /* NewLAViewController.m */; };
 		EF05983F161A8C85004A9095 /* ListingTbViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF05983D161A8C85004A9095 /* ListingTbViewController.m */; };
 		EF059842161A901A004A9095 /* PayorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF059840161A901A004A9095 /* PayorViewController.m */; };
@@ -2177,6 +2178,7 @@
 		C4FCDDDC16395F290065D024 /* btn_prospect_home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_prospect_home.png; sourceTree = "<group>"; };
 		C4FCDDDF16395F290065D024 /* btn_setting_home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_setting_home.png; sourceTree = "<group>"; };
 		C4FCDDE016395F290065D024 /* btn_SI_home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_SI_home.png; sourceTree = "<group>"; };
+		DEDF23F31C8E85EA00FD9B88 /* libSPSignDoc_4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSPSignDoc_4.0.a; sourceTree = "<group>"; };
 		EF059837161A8BCF004A9095 /* NewLAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewLAViewController.m; sourceTree = "<group>"; };
 		EF059838161A8BD0004A9095 /* NewLAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewLAViewController.h; sourceTree = "<group>"; };
 		EF05983D161A8C85004A9095 /* ListingTbViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListingTbViewController.m; sourceTree = "<group>"; };
@@ -2316,6 +2318,7 @@
 				A1EE80A11C7BB7560096185C /* libSPSignDoc_4.0.a in Frameworks */,
 				A9E550A21C591E8000C9DAC2 /* libSPSignDoc_4.0.a in Frameworks */,
 				6A4B72AD19ECB3A800F4DE62 /* AdSupport.framework in Frameworks */,
+				DEDF23F41C8E85EA00FD9B88 /* libSPSignDoc_4.0.a in Frameworks */,
 				428F84A719783E5C0016B7E8 /* libxml2.dylib in Frameworks */,
 				6A002CFA1850287200161727 /* libz.dylib in Frameworks */,
 				6A002CF81850286600161727 /* libstdc++.dylib in Frameworks */,
@@ -2940,6 +2943,7 @@
 		4239AE2E1946DAE100BD6F53 /* eSignFramework */ = {
 			isa = PBXGroup;
 			children = (
+				DEDF23F31C8E85EA00FD9B88 /* libSPSignDoc_4.0.a */,
 				4341B5C11C61750700357986 /* libSPSignDoc_4.0.a */,
 				A902F5401C5A0EF6001D6EC0 /* libSPSignDoc_4.0.a */,
 				A1E3E2641C86BF6800E2C6DC /* libSPSignDoc_4.0.a */,
@@ -4944,7 +4948,7 @@
 				ORGANIZATIONNAME = "Hong Leong Assurance";
 				TargetAttributes = {
 					C4E9D18F1612C64900016053 = {
-						DevelopmentTeam = 2YT8E2D9X6;
+						DevelopmentTeam = 87JN2XNQTS;
 					};
 				};
 			};
@@ -5989,9 +5993,9 @@
 					"-lc++",
 					"-lxml2",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.bca.bless;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bcalife.bless;
 				PRODUCT_NAME = BLESS;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "460ae584-3c48-4f80-a890-f5fbee798767";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = "armv7 armv6 i386";
@@ -6005,7 +6009,7 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Asuransi Jiwa BCA, PT";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -6046,9 +6050,9 @@
 					"-lc++",
 					"-lxml2",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.bca.bless;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bcalife.bless;
 				PRODUCT_NAME = BLESS;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "954ccc9a-01f8-4583-9ed7-fc4107de17e9";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = "armv7 armv6 i386";
@@ -6101,7 +6105,7 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Asuransi Jiwa BCA, PT";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -6145,9 +6149,9 @@
 					"-lc++",
 					"-lxml2",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.bca.bless;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bcalife.bless;
 				PRODUCT_NAME = BLESS;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "954ccc9a-01f8-4583-9ed7-fc4107de17e9";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = "armv7 armv6 i386";

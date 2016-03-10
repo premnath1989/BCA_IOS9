@@ -23,6 +23,16 @@
     return 1;
 }
 
+-(int)AppVersionChecker:(NSString *)strVersion delegate:(id)delegate{
+    AgentWSSoapBinding *binding = [AgentWS AgentWSSoapBinding];
+    binding.logXMLInOut = YES;
+    
+    AgentWS_VersionChecker *agentCodea = [[AgentWS_VersionChecker alloc]init];
+    agentCodea.strVersion = strVersion;
+    [binding VersionCheckerAsyncUsingParameters:agentCodea delegate:delegate];
+    return 1;
+}
+
 
 -(int)fullSync:(NSString *)username delegate:(id)delegate{
     AgentWSSoapBinding *binding = [AgentWS AgentWSSoapBinding];

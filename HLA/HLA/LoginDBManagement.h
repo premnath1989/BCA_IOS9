@@ -29,8 +29,9 @@
 - (NSMutableDictionary *)getAgentDetails;
 - (int) DeviceStatus:(NSString *)AgentID;
 - (BOOL) SpvAdmValidation:(NSString *)username password:(NSString *)password;
-- (int)fullSyncTable:(WebResponObj *)obj;
-- (void)makeDBCopy;
+- (int) fullSyncTable:(WebResponObj *)obj;
+- (void) makeDBCopy;
 - (void) updateLogoutDate;
+- (int) DeleteAgentProfile;
 
 @end

@@ -476,7 +476,8 @@ id temp;
     [self resignFirstResponder];
     [spinnerLoading startLoadingSpinner:self.view label:@"Sync sedang berjalan"];
     WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
-    [webservice checkVersion:@"1" delegate:self];
+//    [webservice checkVersion:@"1" delegate:self];
+    [webservice fullSync:txtAgentCode.text delegate:self];
 }
 
 //here is our function for every response from webservice
@@ -504,6 +505,32 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
         else if([bodyPart isKindOfClass:[AgentWS_PartialSyncResponse class]]) {
             
         }
+        
+        /****
+         * is it AgentWS_FullSyncTableResponse
+         ****/
+        else if([bodyPart isKindOfClass:[AgentWS_FullSyncTableResponse class]]) {
+            AgentWS_FullSyncTableResponse* rateResponse = bodyPart;
+            if([rateResponse.strStatus caseInsensitiveCompare:@"True"] == NSOrderedSame){
+                // create XMLDocument object
+                DDXMLDocument *xml = [[DDXMLDocument alloc] initWithXMLString:
+                                      rateResponse.FullSyncTableResult.xmlDetails options:0 error:nil];
+                
+                // Get root element - DataSetMenu for your XMLfile
+                DDXMLElement *root = [xml rootElement];
+                WebResponObj *returnObj = [[WebResponObj alloc]init];
+                [self parseXML:root objBuff:returnObj index:0];
+                
+                //we insert/update the table
+                [loginDB fullSyncTable:returnObj];
+                [spinnerLoading stopLoadingSpinner];
+            }else if([rateResponse.strStatus caseInsensitiveCompare:@"False"] == NSOrderedSame){
+                [spinnerLoading stopLoadingSpinner];
+                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Proses Login anda gagal" message:@"" delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
+                [alert show];
+            }
+        }
+        
         else if([bodyPart isKindOfClass:[AgentWS_CheckVersionResponse class]]) {
              AgentWS_CheckVersionResponse* rateResponse = bodyPart;
              if([rateResponse.strStatus caseInsensitiveCompare:@"True"] == NSOrderedSame){

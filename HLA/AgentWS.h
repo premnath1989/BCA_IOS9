@@ -27,6 +27,10 @@
 @class AgentWS_PartialSync;
 @class AgentWS_PartialSyncResponse;
 @class AgentWS_PartialSyncResult;
+@class AgentWS_LoginAPI;
+@class AgentWS_LoginAPIResponse;
+@class AgentWS_VersionChecker;
+@class AgentWS_VersionCheckerResponse;
 @class AgentWS_DataSet;
 @interface AgentWS_ValidateAgentAndDevice : NSObject {
 	
@@ -523,6 +527,82 @@
 /* attributes */
 - (NSDictionary *)attributes;
 @end
+@interface AgentWS_LoginAPI : NSObject {
+	
+/* elements */
+	NSString * strAgentCode;
+	NSString * strPass;
+	NSString * strStatus;
+/* attributes */
+}
+- (NSString *)nsPrefix;
+- (xmlNodePtr)xmlNodeForDoc:(xmlDocPtr)doc elementName:(NSString *)elName elementNSPrefix:(NSString *)elNSPrefix;
+- (void)addAttributesToNode:(xmlNodePtr)node;
+- (void)addElementsToNode:(xmlNodePtr)node;
++ (AgentWS_LoginAPI *)deserializeNode:(xmlNodePtr)cur;
+- (void)deserializeAttributesFromNode:(xmlNodePtr)cur;
+- (void)deserializeElementsFromNode:(xmlNodePtr)cur;
+/* elements */
+@property (retain) NSString * strAgentCode;
+@property (retain) NSString * strPass;
+@property (retain) NSString * strStatus;
+/* attributes */
+- (NSDictionary *)attributes;
+@end
+@interface AgentWS_LoginAPIResponse : NSObject {
+	
+/* elements */
+	NSString * LoginAPIResult;
+/* attributes */
+}
+- (NSString *)nsPrefix;
+- (xmlNodePtr)xmlNodeForDoc:(xmlDocPtr)doc elementName:(NSString *)elName elementNSPrefix:(NSString *)elNSPrefix;
+- (void)addAttributesToNode:(xmlNodePtr)node;
+- (void)addElementsToNode:(xmlNodePtr)node;
++ (AgentWS_LoginAPIResponse *)deserializeNode:(xmlNodePtr)cur;
+- (void)deserializeAttributesFromNode:(xmlNodePtr)cur;
+- (void)deserializeElementsFromNode:(xmlNodePtr)cur;
+/* elements */
+@property (retain) NSString * LoginAPIResult;
+/* attributes */
+- (NSDictionary *)attributes;
+@end
+@interface AgentWS_VersionChecker : NSObject {
+	
+/* elements */
+	NSString * strVersion;
+/* attributes */
+}
+- (NSString *)nsPrefix;
+- (xmlNodePtr)xmlNodeForDoc:(xmlDocPtr)doc elementName:(NSString *)elName elementNSPrefix:(NSString *)elNSPrefix;
+- (void)addAttributesToNode:(xmlNodePtr)node;
+- (void)addElementsToNode:(xmlNodePtr)node;
++ (AgentWS_VersionChecker *)deserializeNode:(xmlNodePtr)cur;
+- (void)deserializeAttributesFromNode:(xmlNodePtr)cur;
+- (void)deserializeElementsFromNode:(xmlNodePtr)cur;
+/* elements */
+@property (retain) NSString * strVersion;
+/* attributes */
+- (NSDictionary *)attributes;
+@end
+@interface AgentWS_VersionCheckerResponse : NSObject {
+	
+/* elements */
+	NSString * VersionCheckerResult;
+/* attributes */
+}
+- (NSString *)nsPrefix;
+- (xmlNodePtr)xmlNodeForDoc:(xmlDocPtr)doc elementName:(NSString *)elName elementNSPrefix:(NSString *)elNSPrefix;
+- (void)addAttributesToNode:(xmlNodePtr)node;
+- (void)addElementsToNode:(xmlNodePtr)node;
++ (AgentWS_VersionCheckerResponse *)deserializeNode:(xmlNodePtr)cur;
+- (void)deserializeAttributesFromNode:(xmlNodePtr)cur;
+- (void)deserializeElementsFromNode:(xmlNodePtr)cur;
+/* elements */
+@property (retain) NSString * VersionCheckerResult;
+/* attributes */
+- (NSDictionary *)attributes;
+@end
 @interface AgentWS_DataSet : NSObject {
 	
 /* elements */
@@ -596,6 +676,10 @@
 - (void)CheckVersionAsyncUsingParameters:(AgentWS_CheckVersion *)aParameters  delegate:(id<AgentWSSoapBindingResponseDelegate>)responseDelegate;
 - (AgentWSSoapBindingResponse *)PartialSyncUsingParameters:(AgentWS_PartialSync *)aParameters ;
 - (void)PartialSyncAsyncUsingParameters:(AgentWS_PartialSync *)aParameters  delegate:(id<AgentWSSoapBindingResponseDelegate>)responseDelegate;
+- (AgentWSSoapBindingResponse *)LoginAPIUsingParameters:(AgentWS_LoginAPI *)aParameters ;
+- (void)LoginAPIAsyncUsingParameters:(AgentWS_LoginAPI *)aParameters  delegate:(id<AgentWSSoapBindingResponseDelegate>)responseDelegate;
+- (AgentWSSoapBindingResponse *)VersionCheckerUsingParameters:(AgentWS_VersionChecker *)aParameters ;
+- (void)VersionCheckerAsyncUsingParameters:(AgentWS_VersionChecker *)aParameters  delegate:(id<AgentWSSoapBindingResponseDelegate>)responseDelegate;
 @end
 @interface AgentWSSoapBindingOperation : NSOperation {
 	AgentWSSoapBinding *binding;
@@ -691,6 +775,22 @@
 	parameters:(AgentWS_PartialSync *)aParameters
 ;
 @end
+@interface AgentWSSoapBinding_LoginAPI : AgentWSSoapBindingOperation {
+	AgentWS_LoginAPI * parameters;
+}
+@property (retain) AgentWS_LoginAPI * parameters;
+- (id)initWithBinding:(AgentWSSoapBinding *)aBinding delegate:(id<AgentWSSoapBindingResponseDelegate>)aDelegate
+	parameters:(AgentWS_LoginAPI *)aParameters
+;
+@end
+@interface AgentWSSoapBinding_VersionChecker : AgentWSSoapBindingOperation {
+	AgentWS_VersionChecker * parameters;
+}
+@property (retain) AgentWS_VersionChecker * parameters;
+- (id)initWithBinding:(AgentWSSoapBinding *)aBinding delegate:(id<AgentWSSoapBindingResponseDelegate>)aDelegate
+	parameters:(AgentWS_VersionChecker *)aParameters
+;
+@end
 @interface AgentWSSoapBinding_envelope : NSObject {
 }
 + (AgentWSSoapBinding_envelope *)sharedInstance;
@@ -748,6 +848,10 @@
 - (void)CheckVersionAsyncUsingParameters:(AgentWS_CheckVersion *)aParameters  delegate:(id<AgentWSSoap12BindingResponseDelegate>)responseDelegate;
 - (AgentWSSoap12BindingResponse *)PartialSyncUsingParameters:(AgentWS_PartialSync *)aParameters ;
 - (void)PartialSyncAsyncUsingParameters:(AgentWS_PartialSync *)aParameters  delegate:(id<AgentWSSoap12BindingResponseDelegate>)responseDelegate;
+- (AgentWSSoap12BindingResponse *)LoginAPIUsingParameters:(AgentWS_LoginAPI *)aParameters ;
+- (void)LoginAPIAsyncUsingParameters:(AgentWS_LoginAPI *)aParameters  delegate:(id<AgentWSSoap12BindingResponseDelegate>)responseDelegate;
+- (AgentWSSoap12BindingResponse *)VersionCheckerUsingParameters:(AgentWS_VersionChecker *)aParameters ;
+- (void)VersionCheckerAsyncUsingParameters:(AgentWS_VersionChecker *)aParameters  delegate:(id<AgentWSSoap12BindingResponseDelegate>)responseDelegate;
 @end
 @interface AgentWSSoap12BindingOperation : NSOperation {
 	AgentWSSoap12Binding *binding;
@@ -841,6 +945,22 @@
 @property (retain) AgentWS_PartialSync * parameters;
 - (id)initWithBinding:(AgentWSSoap12Binding *)aBinding delegate:(id<AgentWSSoap12BindingResponseDelegate>)aDelegate
 	parameters:(AgentWS_PartialSync *)aParameters
+;
+@end
+@interface AgentWSSoap12Binding_LoginAPI : AgentWSSoap12BindingOperation {
+	AgentWS_LoginAPI * parameters;
+}
+@property (retain) AgentWS_LoginAPI * parameters;
+- (id)initWithBinding:(AgentWSSoap12Binding *)aBinding delegate:(id<AgentWSSoap12BindingResponseDelegate>)aDelegate
+	parameters:(AgentWS_LoginAPI *)aParameters
+;
+@end
+@interface AgentWSSoap12Binding_VersionChecker : AgentWSSoap12BindingOperation {
+	AgentWS_VersionChecker * parameters;
+}
+@property (retain) AgentWS_VersionChecker * parameters;
+- (id)initWithBinding:(AgentWSSoap12Binding *)aBinding delegate:(id<AgentWSSoap12BindingResponseDelegate>)aDelegate
+	parameters:(AgentWS_VersionChecker *)aParameters
 ;
 @end
 @interface AgentWSSoap12Binding_envelope : NSObject {

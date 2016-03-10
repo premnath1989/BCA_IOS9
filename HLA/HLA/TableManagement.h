@@ -18,5 +18,6 @@
 - (instancetype)init:(UIView *)view themeColour:(UIColor *)Colour themeFont:(UIFont *)font;
 - (UIView *) TableHeaderSetup:(NSArray *)columnHeaders positionY:(float)originY;
 - (void)TableRowInsert:(NSArray *)dataArray index:(NSInteger)index table:(UITableViewCell*)cell;
+- (UIView *) TableHeaderSetupXY:(NSArray *)columnHeaders positionY:(float)originY positionX:(float)originX;
 
 @end

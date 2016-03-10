@@ -329,6 +329,10 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
     if([[response.error localizedDescription] caseInsensitiveCompare:@""] != NSOrderedSame){
         UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Periksa lagi koneksi internet anda" message:@"" delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
         [alert show];
+        [spinnerLoading stopLoadingSpinner];
+        if(flagFullSync){
+            [loginDB DeleteAgentProfile];
+        }
     }
     for(id bodyPart in responseBodyParts) {
         
@@ -341,6 +345,10 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
             NSString* errorMesg = ((SOAPFault *)bodyPart).simpleFaultString;
             UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Please check your connection" message:errorMesg delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
             [alert show];
+            [spinnerLoading stopLoadingSpinner];
+            if(flagFullSync){
+                [loginDB DeleteAgentProfile];
+            }
         }
         
         /****
@@ -349,7 +357,7 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
         else if([bodyPart isKindOfClass:[AgentWS_ChangePasswordResponse class]]) {
             [spinnerLoading stopLoadingSpinner];
             AgentWS_ChangePasswordResponse* rateResponse = bodyPart;
-            if([rateResponse.ChangePasswordResult caseInsensitiveCompare:@"TRUE"]){
+            if([rateResponse.ChangePasswordResult caseInsensitiveCompare:@"TRUE"]== NSOrderedSame){
                 UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Ubah Password Sukses!"message:[NSString stringWithFormat:@"Password Anda telah berhasil di ubah"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
                 [alert show];
             }else{
@@ -364,7 +372,7 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
         else if([bodyPart isKindOfClass:[AgentWS_FullSyncTableResponse class]]) {
             AgentWS_FullSyncTableResponse* rateResponse = bodyPart;
             if([rateResponse.strStatus caseInsensitiveCompare:@"True"] == NSOrderedSame){
-                
+                flagFullSync = FALSE;
                 // create XMLDocument object
                 DDXMLDocument *xml = [[DDXMLDocument alloc] initWithXMLString:
                                       rateResponse.FullSyncTableResult.xmlDetails options:0 error:nil];
@@ -406,6 +414,7 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
                     [spinnerLoading startLoadingSpinner:self.view label:@"Sync sedang berjalan"];
                     WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
                     [webservice fullSync:txtAgentCode.text delegate:self];
+                    flagFullSync = TRUE;
                 }
             }else if([rateResponse.strStatus caseInsensitiveCompare:@"False"] == NSOrderedSame){
                 [spinnerLoading stopLoadingSpinner];

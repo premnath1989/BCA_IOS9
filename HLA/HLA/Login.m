@@ -78,8 +78,6 @@ NSString *ProceedStatus = @"";
         firstLogin = true;
     }
     
-    spinnerLoading = [[SpinnerUtilities alloc]init];
-    
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(forgotPassword:)];
     [lblForgotPwd setUserInteractionEnabled:YES];
     [lblForgotPwd addGestureRecognizer:tapGesture];
@@ -112,6 +110,13 @@ NSString *ProceedStatus = @"";
     outletLogin.hidden = FALSE;
 }
 
+
+- (void)appVersionChecker{
+    [spinnerLoading startLoadingSpinner:self.view label:@"Periksa Versi Aplikasi"];
+    NSString *version= [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
+    [webservice AppVersionChecker:version delegate:self];
+}
 
 //added by Edwin 12-02-2014
 static NSString *labelVers;
@@ -188,6 +193,8 @@ static NSString *labelVers;
 {
     [super viewDidAppear:animated];
     
+    spinnerLoading = [[SpinnerUtilities alloc]init];
+    
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
      
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
@@ -199,6 +206,8 @@ static NSString *labelVers;
         UserProfileView.preferredContentSize = CGSizeMake(600, 500);
         [self presentViewController:UserProfileView animated:YES completion:nil];
     }
+    
+    [self appVersionChecker];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -242,13 +251,24 @@ static NSString *labelVers;
             [alert show];
         }
         
+        else if([bodyPart isKindOfClass:[AgentWS_VersionCheckerResponse class]]) {
+            [spinnerLoading stopLoadingSpinner];
+            AgentWS_VersionCheckerResponse* rateResponse = bodyPart;
+            
+            if([(NSString *)rateResponse.VersionCheckerResult caseInsensitiveCompare:@"TRUE"]== NSOrderedSame){
+                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Informasi" message:@"Harap Download applikasi versi terbaru" delegate:self cancelButtonTitle:@"Download" otherButtonTitles:nil];
+                [alert show];
+                alert.tag = 100;
+            }
+        }
+        
         /****
          * is it AgentWS_SendForgotPasswordResponse
          ****/
         else if([bodyPart isKindOfClass:[AgentWS_SendForgotPasswordResponse class]]) {
             [spinnerLoading stopLoadingSpinner];
             AgentWS_SendForgotPasswordResponse* rateResponse = bodyPart;
-            if([(NSString *)rateResponse.SendForgotPasswordResult caseInsensitiveCompare:@"TRUE"]){
+            if([(NSString *)rateResponse.SendForgotPasswordResult caseInsensitiveCompare:@"TRUE"]== NSOrderedSame){
                 UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Sukses!"message:[NSString stringWithFormat:@"Password baru telah di kirimkan ke email anda"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
                 [alert show];
             }else{
@@ -605,7 +625,7 @@ static NSString *labelVers;
                                                         message:@"Anda tidak melakukan online login selama 7 hari, pastikan perangkat terhubung ke internet untuk login."
                                                        delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
-        
+        [spinnerLoading stopLoadingSpinner];
         alert = Nil;
     }else
     {
@@ -827,6 +847,19 @@ static NSString *labelVers;
     return networkStatus != NotReachable;
 }
 
+- (BOOL)alertViewShouldEnableFirstOtherButton:(UIAlertView *)alertView
+{
+    NSString *inputText = [[alertView textFieldAtIndex:0] text];
+    if( [inputText length] > 0)
+    {
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
+}
+
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
 
@@ -835,6 +868,11 @@ static NSString *labelVers;
         {
             [alertView dismissWithClickedButtonIndex:buttonIndex animated:FALSE];
             [txtUsername becomeFirstResponder];
+            break;
+        }
+        case 100:{
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://mpos-0i0p0bbi.cloudapp.net/AgentWebService/LoginSite.aspx"]];
+            [self appVersionChecker];
             break;
         }
         default:

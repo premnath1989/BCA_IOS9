@@ -29,6 +29,15 @@
     return TableHeader;
 }
 
+- (UIView *) TableHeaderSetupXY:(NSArray *)columnHeaders positionY:(float)originY positionX:(float)originX{
+    TableHeader = [[UIView alloc]initWithFrame:
+                   CGRectMake(originX,
+                              originY, ParentView.frame.size.width - 90.0f, 41.0f)];
+    [TableHeader setBackgroundColor:themeColour];
+    [self TableHeaderColumn:columnHeaders];
+    return TableHeader;
+}
+
 - (void)TableHeaderColumn:(NSArray *)columnHeaders{
     CGFloat headerOriginX = 0.0f;
     CGFloat headerTable = TableHeader.frame.size.width - (10.0f * (columnHeaders.count-1));
@@ -74,7 +83,7 @@
             UILabel *label1=[[UILabel alloc]init];
             label1.frame=frame;
             if ([dataArray count]>0){
-                label1.text= [[dataArray objectAtIndex:i] objectAtIndex:index];
+                label1.text= [dataArray objectAtIndex:i];
             }
             else{
                 label1.text= @"";
