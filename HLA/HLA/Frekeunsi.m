@@ -41,7 +41,7 @@
     if ([Frekuensi isEqualToString:@"10 Tahun"])
     {
         ListOfPlan = [[NSMutableArray alloc] initWithObjects: @"Tahunan",@"Semester",@"Kuartal",@"Bulanan", nil ];
-        ListOfCode = [[NSMutableArray alloc] initWithObjects:@"", @"", nil ];
+        ListOfCode = [[NSMutableArray alloc] initWithObjects:@"", @"",@"", @"" ,nil ];
         
     }
 

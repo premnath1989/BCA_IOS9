@@ -650,6 +650,98 @@ bool WPTPD30RisDeleted = FALSE;
     
 }
 
+-(void)PremiDasarActKeluargaku: (NSString *)PaymentDesc
+{
+    
+    double PaymentType;
+    double PaymentFoctor;
+    
+    //PAymentFactorRate//
+    
+    if ([PaymentDesc isEqualToString:@"Tahunan"])
+    {
+        PaymentType =1;
+    }
+    else if ([PaymentDesc isEqualToString:@"Semester"])
+    {
+        PaymentType =2;
+    }
+    else if ([PaymentDesc isEqualToString:@"Kuartal"])
+    {
+        PaymentType =3;
+    }
+    else if ([PaymentDesc isEqualToString:@"Bulanan"])
+    {
+        PaymentType =4;
+    }
+    
+    NSString*AnsuransiDasarQuery;
+    NSArray *paths2 = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsPath2 = [paths2 objectAtIndex:0];
+    NSString *path2 = [docsPath2 stringByAppendingPathComponent:@"BCA_Rates.sqlite"];
+    FMDatabase *database = [FMDatabase databaseWithPath:path2];
+    [database open];
+    FMResultSet *results;
+    FMResultSet *Results2;
+    NSString * RatesMop = [NSString stringWithFormat:@"SELECT Payment_Fact FROM Keluargaku_Rates_MOP Where Payment_Code = %f",PaymentType];
+    Results2 = [database executeQuery:RatesMop];
+    
+    while([Results2 next])
+    {
+      PaymentFoctor = [[Results2 stringForColumn:@"Payment_Fact"]doubleValue];
+        
+    }
+    
+    ////BasicPremiRate/////
+    
+    AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM Keluargaku_Rates_basicPrem Where BasicCode = '%@' AND EntryAge = %i",PayorSex,@"KLK",PayorAge];
+    results = [database executeQuery:AnsuransiDasarQuery];
+    
+    NSString*RatesPremiumRate;
+    double PaymentMode;
+    if (![database open])
+    {
+        NSLog(@"Could not open db.");
+    }
+    
+    while([results next])
+    {
+        if ([PayorSex isEqualToString:@"Male"]||[PayorSex isEqualToString:@"MALE"]){
+            RatesPremiumRate  = [results stringForColumn:@"Male"];
+        }
+        else{
+            RatesPremiumRate  = [results stringForColumn:@"Female"];
+        }
+        
+    }
+    
+     double RatesInt = [RatesPremiumRate doubleValue];
+    
+    ///BasiSumAssured///
+ 
+    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+    f.numberStyle = NSNumberFormatterDecimalStyle;
+    NSNumber *myNumber = [f numberFromString:yearlyIncomeField.text];
+    
+    BasisSumAssured = [myNumber longLongValue];
+    
+    long long total =(BasisSumAssured/1000);
+    
+    //NoPolRate//
+    
+    int NoPolRate =0;
+    
+    //Diskoun Premi//
+    
+    double DiskounPremi = 0 * RatesInt * total * PaymentFoctor;
+    
+    
+    [_KKLKDiskaunBtn setText:[NSString stringWithFormat:@"%2f", DiskounPremi]];
+  //  [self PremiDasarIncomeChange:_basicPremiField.text];
+}
+
+
+
 -(void)PremiDasarAct
 {
     NSString*AnsuransiDasarQuery;
@@ -4304,8 +4396,14 @@ bool WPTPD30RisDeleted = FALSE;
     
     FRekeunsiPembayaranMode = aaDesc;
     
-    [self PremiDasarAct];
-    
+    if([PlanType isEqualToString:@"BCA Life Keluargaku"])
+    {
+        [self PremiDasarActKeluargaku:aaDesc];
+    }
+    else
+    {
+         [self PremiDasarAct];
+    }
     
 }
 
