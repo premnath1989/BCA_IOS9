@@ -86,9 +86,9 @@ const int numberOfModule = 7;
     label.lineBreakMode=NSLineBreakByWordWrapping;
     
 #ifdef UAT_BUILD
-    label.text =[NSString stringWithFormat:@"App Version : %@ b%@ UAT",version, build];
+    label.text =[NSString stringWithFormat:@"MPOS Version : %@ b%@ UAT",version, build];
 #else
-    label.text =[NSString stringWithFormat:@"App Version : %@ b%@",version, build];
+    label.text =[NSString stringWithFormat:@"MPOS Version : %@ b%@",version, build];
 #endif
     [self.view addSubview:label];
     
