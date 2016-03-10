@@ -642,12 +642,12 @@ NSMutableArray *DelGroupArr;
         [txtKcu becomeFirstResponder];
         return false;
     }
-    else if ([validationSet containsObject:refName]||refName==NULL){
+    /*else if ([validationSet containsObject:refName]||refName==NULL){
         [self createAlertViewAndShow:validationNamaReferral tag:0];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
         [txtReferralName becomeFirstResponder];
         return false;
-    }
+    }*/
     else if ([validationSet containsObject:refSource]||refSource==NULL){
         [self createAlertViewAndShow:validationSumberReferral tag:0];
         [outletReferralSource setBackgroundColor:[UIColor redColor]];
