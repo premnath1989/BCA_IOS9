@@ -113,7 +113,7 @@ int rrr;
             [self updateTabBar];
         }
         else {
-            if (selectedIndex == 1||selectedIndex == 2) {
+            if (selectedIndex == 1||selectedIndex == 2||selectedIndex == 3) {
                 NSLog(@"selected index %i",selectedIndex);
                 [self addChildViewController:selectedViewController];
                 selectedViewController.view.frame = CGRectMake(self.tabBarWidth,
@@ -256,7 +256,7 @@ int rrr;
 	if(rrr != 2) {
 		clickIndex = indexPath.row;
 		
-		if (indexPath.row == 3) {
+		/*if (indexPath.row == 3) {
         
 			UIAlertView *alert = [[UIAlertView alloc]
                               initWithTitle: NSLocalizedString(@" ",nil)
@@ -268,9 +268,9 @@ int rrr;
 			[alert show];
 			alert = Nil;
 		}
-		else {
+		else {*/
 			[self setSelectedIndex:indexPath.row];
-		}
+		//}
     }
 }
 

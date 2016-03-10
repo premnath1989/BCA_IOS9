@@ -377,7 +377,12 @@ bool RegDatehandling;
 }
 
 -(IBAction)textFieldDidChangeEditing:(UITextField *)sender{
-    if (sender==txtPrefix2){
+    if (sender==txtPrefix1){
+        if ([sender.text length]>=4){
+            [txtContact1 becomeFirstResponder];
+        }
+    }
+    else if (sender==txtPrefix2){
         if ([sender.text length]>=4){
             [txtContact2 becomeFirstResponder];
         }
@@ -427,7 +432,7 @@ bool RegDatehandling;
             textField.delegate=self;
             [textField setFont:font];
             
-            UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
+            UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 20)];
             textField.leftView = paddingView;
             textField.leftViewMode = UITextFieldViewModeAlways;
         }
@@ -441,7 +446,7 @@ bool RegDatehandling;
             textField.delegate=self;
             [textField setFont:font];
             
-            UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
+            UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 20)];
             textField.leftView = paddingView;
             textField.leftViewMode = UITextFieldViewModeAlways;
         }
@@ -455,7 +460,7 @@ bool RegDatehandling;
             textField.delegate=self;
             [textField setFont:font];
             
-            UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
+            UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 20)];
             textField.leftView = paddingView;
             textField.leftViewMode = UITextFieldViewModeAlways;
         }
@@ -469,7 +474,7 @@ bool RegDatehandling;
             textField.delegate=self;
             [textField setFont:font];
             
-            UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
+            UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 20)];
             textField.leftView = paddingView;
             textField.leftViewMode = UITextFieldViewModeAlways;
         }
@@ -482,7 +487,7 @@ bool RegDatehandling;
             textField.layer.borderWidth=1.0;
             [textField setFont:font];
             
-            UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
+            UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 20)];
             textField.leftView = paddingView;
             textField.leftViewMode = UITextFieldViewModeAlways;
         }
@@ -496,7 +501,7 @@ bool RegDatehandling;
             textField.delegate=self;
             [textField setFont:font];
             
-            UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
+            UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 20)];
             textField.leftView = paddingView;
             textField.leftViewMode = UITextFieldViewModeAlways;
         }
@@ -507,7 +512,7 @@ bool RegDatehandling;
             textView.delegate=self;
             [textView setFont:font];
             
-            textView.textContainerInset = UIEdgeInsetsMake(0, 5, 0, 20);
+            textView.textContainerInset = UIEdgeInsetsMake(0, 4, 0, 20);
         }
     }
     
@@ -2193,7 +2198,7 @@ bool RegDatehandling;
                 txtDOB.enabled = FALSE;
                 txtDOB.hidden = NO;
                 txtDOB.text = strDOB;
-                [outletDOB setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",strDOB]forState:UIControlStateNormal];
+                [outletDOB setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",strDOB]forState:UIControlStateNormal];
                 
                 ColorHexCode *CustomColor = [[ColorHexCode alloc] init ];
                 txtDOB.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
@@ -2390,10 +2395,10 @@ bool RegDatehandling;
     /*outletDOB.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     
     if([txtDOB.text isEqualToString:@""]) {
-        [outletDOB setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", dateString] forState:UIControlStateNormal];
+        [outletDOB setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", dateString] forState:UIControlStateNormal];
         txtDOB.text = dateString;
     } else {
-        [outletDOB setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", outletDOB.titleLabel.text] forState:UIControlStateNormal];
+        [outletDOB setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", outletDOB.titleLabel.text] forState:UIControlStateNormal];
     }*/
     
     if (_SIDate == Nil) {
@@ -2650,7 +2655,7 @@ bool RegDatehandling;
     int counter = 0;
 	
     /*added by faiz*/
-    [outletMaritalStatus setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"SINGLE"]forState:UIControlStateNormal];
+    [outletMaritalStatus setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"SINGLE"]forState:UIControlStateNormal];
     txtExactDuties.text=@"test";
     /*end of added by faiz*/
     
@@ -2851,7 +2856,7 @@ bool RegDatehandling;
                 insertSQL = [NSString stringWithFormat:
                              @"INSERT INTO prospect_profile(\'ProspectName\', \"ProspectDOB\", \"GST_registered\", \"GST_registrationNo\", \"GST_registrationDate\", \"GST_exempted\",\"ProspectGender\", \"ResidenceAddress1\", \"ResidenceAddress2\", \"ResidenceAddress3\", \"ResidenceAddressTown\", \"ResidenceAddressState\",\"ResidenceAddressPostCode\", \"ResidenceAddressCountry\", \"ResidenceDistrict\", \"ResidenceVillage\", \"ResidenceProvince\", \"OfficeAddress1\", \"OfficeAddress2\", \"OfficeAddress3\",\"OfficeAddressTown\", \"OfficeAddressState\", \"OfficeAddressPostCode\", \"OfficeAddressCountry\", \"OfficeDistrict\", \"OfficeVillage\", \"OfficeProvince\", \"ProspectEmail\",\"ProspectOccupationCode\", \"ExactDuties\", \"ProspectRemark\", \"ClientSegmentation\", \"DateCreated\", \"CreatedBy\", \"DateModified\",\"ModifiedBy\", \"ProspectGroup\", \"ProspectTitle\", \"IDTypeNo\", \"OtherIDType\", \"OtherIDTypeNo\", \"Smoker\", \"AnnualIncome\", \"SourceIncome\", \"BussinessType\", \"Race\", \"MaritalStatus\", \"Religion\", \"Nationality\", \"QQFlag\",\"ProspectProfileChangesCounter\",\"prospect_IsGrouping\", \"CountryOfBirth\", \"NIP\", \"BranchCode\", \"BranchName\", \"KCU\", \"Kanwil\",\"ReferralSource\", \"ReferralName\", \"IDExpiryDate\", \"NPWPNo\") "
                              "VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\",\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", %@, \"%@\", %@, \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\",\"%@\",\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%s\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", txtFullName.text, strDOB, GSTRigperson, txtRigNO.text, Rigdateoutlet,GSTRigExempted,gender, txtHomeAddr1.text, txtHomeAddr2.text, txtHomeAddr3.text, txtHomeTown.text, SelectedStateCode, txtHomePostCode.text, HomeCountry,txtHomeDistrict.text,txtHomeVillage.text, txtHomeProvince.text, txtOfficeAddr1.text, txtOfficeAddr2.text, txtOfficeAddr3.text, txtOfficeTown.text, SelectedOfficeStateCode, txtOfficePostcode.text, OffCountry, txtOfficeDistrict.text,txtOfficeVillage.text, txtOfficeProvince.text, txtEmail.text, OccupCodeSelected, txtExactDuties.text, txtRemark.text, _outletVIPClass.titleLabel.text,
-                             @"datetime(\"now\", \"+8 hour\")", @"1", @"datetime(\"now\", \"+8 hour\")", @"1", group, TitleCodeSelected , txtIDType.text, othertype, txtOtherIDType.text, ClientSmoker, txtAnnIncome.text, _outletSourceIncome.titleLabel.text, txtBussinessType.text,race,marital,religion,nation,"false",@"1", isGrouping, CountryOfBirth, txtNip.text, outletBranchCode.titleLabel.text, outletBranchName.titleLabel.text, txtKcu.text, txtKanwil.text, outletReferralSource.titleLabel.text, txtReferralName.text, strExpiryDate, txtNPWPNo.text];
+                             @"datetime(\"now\", \"+7 hour\")", @"1", @"datetime(\"now\", \"+7 hour\")", @"1", group, TitleCodeSelected , txtIDType.text, othertype, txtOtherIDType.text, ClientSmoker, txtAnnIncome.text, _outletSourceIncome.titleLabel.text, txtBussinessType.text,race,marital,religion,nation,"false",@"1", isGrouping, CountryOfBirth, txtNip.text, outletBranchCode.titleLabel.text, outletBranchName.titleLabel.text, txtKcu.text, txtKanwil.text, outletReferralSource.titleLabel.text, txtReferralName.text, strExpiryDate, txtNPWPNo.text];
                 
             }
 			
@@ -3420,7 +3425,7 @@ bool RegDatehandling;
                 [db executeUpdate:@"insert into prospect_groups (name) values (?)", str, nil];
                 
                 outletGroup.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-                [outletGroup setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",str]forState:UIControlStateNormal];
+                [outletGroup setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",str]forState:UIControlStateNormal];
             }
             [result close];
             [db close];
@@ -3548,7 +3553,7 @@ bool RegDatehandling;
                                      [NSCharacterSet whitespaceCharacterSet]];
     
     if (!(prospectprofile.ProspectGroup == NULL || [prospectprofile.ProspectGroup isEqualToString:@"- SELECT -"])) {
-        [outletGroup setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", prospectprofile.ProspectGroup]forState:UIControlStateNormal];
+        [outletGroup setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", prospectprofile.ProspectGroup]forState:UIControlStateNormal];
         outletGroup.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     } else {
         [outletGroup setTitle:@"- SELECT -" forState:UIControlStateNormal];
@@ -3559,7 +3564,7 @@ bool RegDatehandling;
 	if (![prospectprofile.countryOfBirth isEqualToString:@"(null)"] && prospectprofile.countryOfBirth != NULL && ![prospectprofile.countryOfBirth isEqualToString:@""]) {
         COB = [self getCountryDesc:prospectprofile.countryOfBirth];
         prospectprofile.countryOfBirth =   [self getCountryDesc:prospectprofile.countryOfBirth];
-		[btnCoutryOfBirth setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", prospectprofile.countryOfBirth]forState:UIControlStateNormal];
+		[btnCoutryOfBirth setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", prospectprofile.countryOfBirth]forState:UIControlStateNormal];
         btnCoutryOfBirth.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     } else {
          [btnCoutryOfBirth setTitle:@"- SELECT -" forState:UIControlStateNormal];
@@ -3567,49 +3572,49 @@ bool RegDatehandling;
 	
     
     if (!(prospectprofile.ProspectTitle == NULL || [prospectprofile.ProspectTitle isEqualToString:@"- SELECT -"])) {
-        [outletTitle setTitle:[[NSString stringWithFormat:@"  "] stringByAppendingFormat:@"%@", [self getTitleDesc:prospectprofile.ProspectTitle]]forState:UIControlStateNormal];
+        [outletTitle setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", [self getTitleDesc:prospectprofile.ProspectTitle]]forState:UIControlStateNormal];
         outletTitle.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     } else {
         [outletTitle setTitle:@"- SELECT -" forState:UIControlStateNormal];
     }
     
     if (!(prospectprofile.Race == NULL || [prospectprofile.Race isEqualToString:@"- SELECT -"])) {
-        [outletRace setTitle:[[NSString stringWithFormat:@"  "] stringByAppendingFormat:@"%@", prospectprofile.Race]forState:UIControlStateNormal];
+        [outletRace setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", prospectprofile.Race]forState:UIControlStateNormal];
         outletRace.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     } else {
         [outletRace setTitle:@"- SELECT -" forState:UIControlStateNormal];
     }
     
     if (!(prospectprofile.registrationDate == NULL || [prospectprofile.registrationDate isEqualToString:@"- SELECT -"])) {
-        [outletRigDate setTitle:[[NSString stringWithFormat:@"  "] stringByAppendingFormat:@"%@", prospectprofile.registrationDate]forState:UIControlStateNormal];
+        [outletRigDate setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", prospectprofile.registrationDate]forState:UIControlStateNormal];
         outletRigDate.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     } else {
         [outletRigDate setTitle:@"- SELECT -" forState:UIControlStateNormal];
     }
     
     if (!(prospectprofile.MaritalStatus == NULL || [prospectprofile.MaritalStatus isEqualToString:@"- SELECT -"])) {
-        [outletMaritalStatus setTitle:[[NSString stringWithFormat:@"  "] stringByAppendingFormat:@"%@", prospectprofile.MaritalStatus]forState:UIControlStateNormal];
+        [outletMaritalStatus setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", prospectprofile.MaritalStatus]forState:UIControlStateNormal];
         outletMaritalStatus.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     } else {
         [outletMaritalStatus setTitle:@"- SELECT -" forState:UIControlStateNormal];
     }
     
     if (!(prospectprofile.Religion == NULL || [prospectprofile.Religion isEqualToString:@"- SELECT -"])) {
-        [outletReligion setTitle:[[NSString stringWithFormat:@"  "] stringByAppendingFormat:@"%@", prospectprofile.Religion]forState:UIControlStateNormal];
+        [outletReligion setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", prospectprofile.Religion]forState:UIControlStateNormal];
         outletReligion.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     } else {
         [outletReligion setTitle:@"- SELECT -" forState:UIControlStateNormal];
     }
     
     if (!(prospectprofile.Nationality == NULL || [prospectprofile.Nationality isEqualToString:@"- SELECT -"])) {
-        [outletNationality setTitle:[[NSString stringWithFormat:@"  "] stringByAppendingFormat:@"%@", prospectprofile.Nationality]forState:UIControlStateNormal];
+        [outletNationality setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", prospectprofile.Nationality]forState:UIControlStateNormal];
         outletNationality.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     } else {
         [outletNationality setTitle:@"- SELECT -" forState:UIControlStateNormal];
     }
     
     if (!(prospectprofile.OtherIDType == NULL || [prospectprofile.OtherIDType isEqualToString:@"- SELECT -"] || [prospectprofile.OtherIDType isEqualToString:@"(NULL)"])) {
-        [OtherIDType setTitle:[[NSString stringWithFormat:@"  "] stringByAppendingFormat:@"%@", prospectprofile.OtherIDType]forState:UIControlStateNormal];
+        [OtherIDType setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", prospectprofile.OtherIDType]forState:UIControlStateNormal];
         txtOtherIDType.text = prospectprofile.OtherIDTypeNo;
         OtherIDType.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         
@@ -3798,7 +3803,7 @@ bool RegDatehandling;
         [btnForeignHome setImage: [UIImage imageNamed:@"tickCheckBox.png"] forState:UIControlStateNormal];
         
         btnHomeCountry.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        [btnHomeCountry setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",prospectprofile.ResidenceAddressCountry] forState:UIControlStateNormal];
+        [btnHomeCountry setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",prospectprofile.ResidenceAddressCountry] forState:UIControlStateNormal];
         
     } else {
         btnHomeCountry.hidden = YES;
@@ -3817,7 +3822,7 @@ bool RegDatehandling;
         [btnForeignOffice setImage: [UIImage imageNamed:@"tickCheckBox.png"] forState:UIControlStateNormal];
         
         btnOfficeCountry.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        [btnOfficeCountry setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",prospectprofile.OfficeAddressCountry] forState:UIControlStateNormal];
+        [btnOfficeCountry setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",prospectprofile.OfficeAddressCountry] forState:UIControlStateNormal];
         
     } else {
         btnOfficeCountry.hidden = YES;
@@ -4390,7 +4395,7 @@ bool RegDatehandling;
         if([outletOccup.titleLabel.text isEqualToString:@""]) {
             [outletOccup setTitle:[NSString stringWithFormat:@""] forState:UIControlStateNormal];
         } else {
-            [outletOccup setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", outletOccup.titleLabel.text]forState:UIControlStateNormal];
+            [outletOccup setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", outletOccup.titleLabel.text]forState:UIControlStateNormal];
         }
         
         if(prospectprofile.ProspectDOB != NULL && ![prospectprofile.ProspectDOB isEqualToString:@""]) {
@@ -4417,7 +4422,7 @@ bool RegDatehandling;
                 if([OccpDesc isEqualToString:@""]) {
                     [outletOccup setTitle:[NSString stringWithFormat:@""] forState:UIControlStateNormal];
                 } else {
-                    [outletOccup setTitle:[[NSString stringWithFormat:@"  "] stringByAppendingFormat:@"%@", OccpDesc]forState:UIControlStateNormal];
+                    [outletOccup setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", OccpDesc]forState:UIControlStateNormal];
                 }
                 txtClass.text = OccpClass;
                 outletOccup.titleLabel.text = OccpDesc;
@@ -4443,7 +4448,7 @@ bool RegDatehandling;
                 if([OtherIDDesc isEqualToString:@""]) {
                     [OtherIDType setTitle:[NSString stringWithFormat:@""] forState:UIControlStateNormal];
                 } else {
-                    [OtherIDType setTitle:[[NSString stringWithFormat:@"  "] stringByAppendingFormat:@"%@", OtherIDDesc]forState:UIControlStateNormal];
+                    [OtherIDType setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", OtherIDDesc]forState:UIControlStateNormal];
                 }
                 OtherIDType.titleLabel.text = OtherIDDesc;
             }
@@ -4468,7 +4473,7 @@ bool RegDatehandling;
                 if([TitleDesc isEqualToString:@""]) {
                     [outletTitle setTitle:[NSString stringWithFormat:@""] forState:UIControlStateNormal];
                 } else {
-                    [outletTitle setTitle:[[NSString stringWithFormat:@"  "] stringByAppendingFormat:@"%@", TitleDesc]forState:UIControlStateNormal];
+                    [outletTitle setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", TitleDesc]forState:UIControlStateNormal];
                 }
             }
             sqlite3_finalize(statement);
@@ -5691,7 +5696,7 @@ bool RegDatehandling;
                 txtDOB.enabled = FALSE;
                 txtDOB.hidden = NO;
                 txtDOB.text = strDOB;
-                [outletDOB setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",strDOB]forState:UIControlStateNormal];
+                [outletDOB setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",strDOB]forState:UIControlStateNormal];
             }
             //CHECK DAY / MONTH / YEAT END
             
@@ -7761,7 +7766,7 @@ bool RegDatehandling;
     } else {
         _outletVIPClass.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
-    [_outletVIPClass setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",VIPClass]forState:UIControlStateNormal];
+    [_outletVIPClass setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",VIPClass]forState:UIControlStateNormal];
     [_outletVIPClass setBackgroundColor:[UIColor clearColor]];
     [_vipClassPopover dismissPopoverAnimated:YES];
 }
@@ -7774,7 +7779,7 @@ bool RegDatehandling;
     } else {
         outletReferralSource.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
-    [outletReferralSource setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",referralSource]forState:UIControlStateNormal];
+    [outletReferralSource setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",referralSource]forState:UIControlStateNormal];
     [outletReferralSource setBackgroundColor:[UIColor clearColor]];
     [_referralSourcePopover dismissPopoverAnimated:YES];
 }
@@ -7786,7 +7791,7 @@ bool RegDatehandling;
     } else {
         _outletSourceIncome.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
-    [_outletSourceIncome setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",sourceIncome]forState:UIControlStateNormal];
+    [_outletSourceIncome setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",sourceIncome]forState:UIControlStateNormal];
     [_outletSourceIncome setBackgroundColor:[UIColor clearColor]];
     [_sourceIncomePopover dismissPopoverAnimated:YES];
 }
@@ -7798,7 +7803,7 @@ bool RegDatehandling;
     } else {
         outletGroup.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
-    [outletGroup setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",aaGroup]forState:UIControlStateNormal];
+    [outletGroup setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",aaGroup]forState:UIControlStateNormal];
     [self.GroupPopover dismissPopoverAnimated:YES];
 }
 
@@ -7809,7 +7814,7 @@ bool RegDatehandling;
     } else {
         outletTitle.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
-	[outletTitle setTitle:[[NSString stringWithFormat:@"  "] stringByAppendingFormat:@"%@",selectedTitleDesc]forState:UIControlStateNormal];
+	[outletTitle setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",selectedTitleDesc]forState:UIControlStateNormal];
     [self.TitlePickerPopover dismissPopoverAnimated:YES];
 }
 
@@ -7825,7 +7830,7 @@ bool RegDatehandling;
         outletNationality.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
     outletNationality.titleLabel.text = selectedNationality;
-    [outletNationality setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",selectedNationality]forState:UIControlStateNormal];
+    [outletNationality setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",selectedNationality]forState:UIControlStateNormal];
     [outletNationality setBackgroundColor:[UIColor clearColor]];
     [self.nationalityPopover dismissPopoverAnimated:YES];
 }
@@ -7838,7 +7843,7 @@ bool RegDatehandling;
         outletReligion.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
     outletReligion.titleLabel.text = setReligion;
-    [outletReligion setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",setReligion]forState:UIControlStateNormal];
+    [outletReligion setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",setReligion]forState:UIControlStateNormal];
     [self.ReligionListPopover dismissPopoverAnimated:YES];
 }
 
@@ -7873,7 +7878,7 @@ bool RegDatehandling;
     
     if(RegDatehandling == NO && isGSTDate) {
         outletRigDate.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        [outletRigDate setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",strDate]forState:UIControlStateNormal];
+        [outletRigDate setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",strDate]forState:UIControlStateNormal];
     }
         
     NSString *otherIDType_trim = [OtherIDType.titleLabel.text stringByTrimmingCharactersInSet:
@@ -7890,8 +7895,8 @@ bool RegDatehandling;
         }
         else{
             outletDOB.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-            //[outletDOB setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", strDate] forState:UIControlStateNormal];
-            [outletDOB setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", strDate] forState:UIControlStateNormal];
+            //[outletDOB setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", strDate] forState:UIControlStateNormal];
+            [outletDOB setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", strDate] forState:UIControlStateNormal];
             [outletDOB setBackgroundColor:[UIColor clearColor]];
         }
 	}
@@ -7905,8 +7910,8 @@ bool RegDatehandling;
         }
         else{
             outletDOB.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-            //[outletExpiryDate setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", strDate] forState:UIControlStateNormal];
-            [outletExpiryDate setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", strDate] forState:UIControlStateNormal];
+            //[outletExpiryDate setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", strDate] forState:UIControlStateNormal];
+            [outletExpiryDate setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", strDate] forState:UIControlStateNormal];
             [outletExpiryDate setBackgroundColor:[UIColor clearColor]];
         }
     }
@@ -7936,8 +7941,8 @@ bool RegDatehandling;
     } else {
         if (isDOBDate) {
 			outletDOB.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-			//[outletDOB setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", strDate] forState:UIControlStateNormal];
-            [outletDOB setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", clientDateString] forState:UIControlStateNormal];
+			//[outletDOB setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", strDate] forState:UIControlStateNormal];
+            [outletDOB setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", clientDateString] forState:UIControlStateNormal];
 		}
     }*/
     
@@ -8071,7 +8076,7 @@ bool RegDatehandling;
     //default end
     
     OtherIDType.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [OtherIDType setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",selectedIDType]forState:UIControlStateNormal];
+    [OtherIDType setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",selectedIDType]forState:UIControlStateNormal];
     
     OtherIDType.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     OtherIDType.titleLabel.text = selectedIDType;
@@ -8187,7 +8192,7 @@ bool RegDatehandling;
         //OCCUPATION
         outletOccup.enabled = NO;
 		outletOccup.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        [outletOccup setTitle:[[NSString stringWithFormat:@"  "] stringByAppendingFormat:@"MINOR"]forState:UIControlStateNormal];
+        [outletOccup setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"MINOR"]forState:UIControlStateNormal];
 		outletOccup.titleLabel.textColor = [UIColor grayColor];
 		txtClass.text = @"2";
 		OccupCodeSelected = @"OCC01360";
@@ -8610,7 +8615,7 @@ bool RegDatehandling;
         txtOtherIDType.backgroundColor = [UIColor whiteColor];
         txtOtherIDType.enabled = YES;
     }
-    [OtherIDType setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",selectedIDType]forState:UIControlStateNormal];
+    [OtherIDType setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",selectedIDType]forState:UIControlStateNormal];
     [OtherIDType setBackgroundColor:[UIColor clearColor]];
     [self.IDTypePickerPopover dismissPopoverAnimated:YES];
 }
@@ -8652,7 +8657,7 @@ bool RegDatehandling;
 
 - (void)OccupDescSelected:(NSString *)color
 {
-    [outletOccup setTitle:[[NSString stringWithFormat:@"  "] stringByAppendingFormat:@"%@", color]forState:UIControlStateNormal];
+    [outletOccup setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", color]forState:UIControlStateNormal];
     [outletOccup setBackgroundColor:[UIColor clearColor]];
     [self.OccupationListPopover dismissPopoverAnimated:YES];
     [self.view endEditing:YES];
@@ -8681,7 +8686,7 @@ bool RegDatehandling;
     } else {
         outletRace.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
-    [outletRace setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",theRace]forState:UIControlStateNormal];
+    [outletRace setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",theRace]forState:UIControlStateNormal];
     [self.raceListPopover dismissPopoverAnimated:YES];
     
 }
@@ -8694,7 +8699,7 @@ bool RegDatehandling;
     } else {
         outletRigDate.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
-    [outletRigDate setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",therigdate]forState:UIControlStateNormal];
+    [outletRigDate setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",therigdate]forState:UIControlStateNormal];
     [self.SIDatePopover dismissPopoverAnimated:YES];
     
 }
@@ -8707,7 +8712,7 @@ bool RegDatehandling;
         outletMaritalStatus.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
     outletMaritalStatus.titleLabel.text = status;
-    [outletMaritalStatus setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",status]forState:UIControlStateNormal];
+    [outletMaritalStatus setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",status]forState:UIControlStateNormal];
     [self.MaritalStatusPopover dismissPopoverAnimated:YES];
     
 }
@@ -8720,7 +8725,7 @@ bool RegDatehandling;
         } else {
             btnOfficeCountry.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         }
-        [btnOfficeCountry setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",theCountry] forState:UIControlStateNormal];
+        [btnOfficeCountry setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",theCountry] forState:UIControlStateNormal];
         [self.CountryListPopover dismissPopoverAnimated:YES];
         
     } else if (isHomeCountry) {
@@ -8730,7 +8735,7 @@ bool RegDatehandling;
             btnHomeCountry.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         }
         [btnHomeCountry setBackgroundColor:[UIColor whiteColor]];
-        [btnHomeCountry setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",theCountry] forState:UIControlStateNormal];
+        [btnHomeCountry setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",theCountry] forState:UIControlStateNormal];
         [self.CountryListPopover dismissPopoverAnimated:YES];
     }
     
@@ -8745,7 +8750,7 @@ bool RegDatehandling;
         btnCoutryOfBirth.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     } else {
         btnCoutryOfBirth.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        [btnCoutryOfBirth setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@",theCountry] forState:UIControlStateNormal];
+        [btnCoutryOfBirth setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",theCountry] forState:UIControlStateNormal];
     }
     [self.Country2ListPopover dismissPopoverAnimated:YES];
 	

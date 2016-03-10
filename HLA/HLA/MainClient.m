@@ -11,6 +11,7 @@
 #import "ProspectListing.h"
 #import "Logout.h"
 #import "GroupListing.h"
+#import "SIMenuViewController.h"
 
 @interface MainClient () {
     NSArray* viewControllers;
@@ -45,6 +46,16 @@
     GroupListing *groupPage = [self.storyboard instantiateViewControllerWithIdentifier:@"groupListing"];
     groupPage.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Group" image:[UIImage imageNamed:@"btn_prospect_off.png"] tag:0];
     [controllersToAdd addObject:groupPage];
+    viewControllers = [NSArray arrayWithArray:controllersToAdd];
+    
+    UIStoryboard *HLAWPStoryboard = [UIStoryboard storyboardWithName:@"HLAWPStoryboard" bundle:Nil];
+    SIMenuViewController *menuSIPage = [HLAWPStoryboard instantiateViewControllerWithIdentifier:@"SIPageView"];
+    menuSIPage.requestSINo = [self.requestSINo description];
+    menuSIPage.SIshowQuotation = _showQuotation;
+    menuSIPage.EAPPorSI = [self.EAPPorSI description];
+    menuSIPage.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"New SI" image:[UIImage imageNamed:@"btn_newSI_off.png"] tag:0];
+    
+    [controllersToAdd addObject:menuSIPage];
     viewControllers = [NSArray arrayWithArray:controllersToAdd];
 
     [self setViewControllers:viewControllers];
