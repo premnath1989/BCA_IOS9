@@ -362,6 +362,7 @@
 		43DA4BE31C770AA90038C92C /* SIMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DA4BE11C770AA90038C92C /* SIMenuTableViewCell.m */; };
 		43DA4BE41C770AA90038C92C /* SIMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43DA4BE21C770AA90038C92C /* SIMenuTableViewCell.xib */; };
 		43DA4BE61C770B3C0038C92C /* icon_leads_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 43DA4BE51C770B3C0038C92C /* icon_leads_2.png */; };
+		43EFEB731C93915A00B9AA2A /* LogoBCALife.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 43EFEB721C93915A00B9AA2A /* LogoBCALife.jpg */; };
 		43F8B5511C81E71B006F3F6C /* SIListingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43F8B54E1C81E71A006F3F6C /* SIListingTableViewCell.xib */; };
 		43F8B5521C81E71B006F3F6C /* SIListingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F8B5501C81E71B006F3F6C /* SIListingTableViewCell.m */; };
 		43FA6C191C87CD7F0098BA47 /* eng_BCALH_Page1.html in Resources */ = {isa = PBXBuildFile; fileRef = 43FA6C161C87CD7F0098BA47 /* eng_BCALH_Page1.html */; };
@@ -1413,6 +1414,7 @@
 		43DA4BE11C770AA90038C92C /* SIMenuTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMenuTableViewCell.m; sourceTree = "<group>"; };
 		43DA4BE21C770AA90038C92C /* SIMenuTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SIMenuTableViewCell.xib; sourceTree = "<group>"; };
 		43DA4BE51C770B3C0038C92C /* icon_leads_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_leads_2.png; sourceTree = "<group>"; };
+		43EFEB721C93915A00B9AA2A /* LogoBCALife.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = LogoBCALife.jpg; path = SI/LogoBCALife.jpg; sourceTree = "<group>"; };
 		43F8B54E1C81E71A006F3F6C /* SIListingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SIListingTableViewCell.xib; sourceTree = "<group>"; };
 		43F8B54F1C81E71A006F3F6C /* SIListingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIListingTableViewCell.h; sourceTree = "<group>"; };
 		43F8B5501C81E71B006F3F6C /* SIListingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIListingTableViewCell.m; sourceTree = "<group>"; };
@@ -3305,6 +3307,7 @@
 		43FA6C151C87CD5D0098BA47 /* HTML USED */ = {
 			isa = PBXGroup;
 			children = (
+				43EFEB721C93915A00B9AA2A /* LogoBCALife.jpg */,
 				4374ACFB1C911FF00006522A /* eng_BCALKK_Page1.html */,
 				4374ACFC1C911FF00006522A /* eng_BCALKK_Page2.html */,
 				4321B3321C8B3496006B9402 /* htmlStyle.css */,
@@ -5122,6 +5125,7 @@
 				2958A88617E960150090A791 /* slider_hover.png in Resources */,
 				2958A88717E960150090A791 /* slider_hover@2x.png in Resources */,
 				2958A88817E960150090A791 /* slider_normal.png in Resources */,
+				43EFEB731C93915A00B9AA2A /* LogoBCALife.jpg in Resources */,
 				2958A88917E960150090A791 /* slider_normal@2x.png in Resources */,
 				AA4EF7561C85A4260050CCD8 /* Reader-Export@3x.png in Resources */,
 				A1C085D11C7DD77200A0592C /* bless final-02.png in Resources */,

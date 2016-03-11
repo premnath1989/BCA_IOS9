@@ -56,7 +56,7 @@
 -(void)email{
     NSArray* path_forDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
     NSString* documentsDirectory = [path_forDirectory objectAtIndex:0];
-    NSString *pdfPathOutput = [NSString stringWithFormat:@"%@/SI_Temp.pdf",documentsDirectory];
+    NSString *pdfPathOutput = [NSString stringWithFormat:@"%@/SalesIlustration.pdf",documentsDirectory];
     if ([MFMailComposeViewController canSendMail] == NO){
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Please set up your default email account in iPad first"
                                                        delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
@@ -89,7 +89,7 @@
 -(void)printSI{
     NSArray* path_forDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
     NSString* documentsDirectory = [path_forDirectory objectAtIndex:0];
-    NSString *pdfPathOutput = [NSString stringWithFormat:@"%@/SI_Temp.pdf",documentsDirectory];
+    NSString *pdfPathOutput = [NSString stringWithFormat:@"%@/SalesIlustration.pdf",documentsDirectory];
     
     [_PagesPopover dismissPopoverAnimated:YES];
     Class printInteractionController = NSClassFromString(@"UIPrintInteractionController");
@@ -172,9 +172,13 @@
     NSString *path2 = [[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page2" ofType:@"html"]; //changed for language
     NSString *path3 = [[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page3" ofType:@"html"]; //changed for language
     
+    NSString *pathImage = [[NSBundle mainBundle] pathForResource:@"LogoBCALife" ofType:@"jpg"]; //
+    
     NSURL *pathURL1 = [NSURL fileURLWithPath:path1];
     NSURL *pathURL2 = [NSURL fileURLWithPath:path2];
     NSURL *pathURL3 = [NSURL fileURLWithPath:path3];
+
+    NSURL *pathURLImage = [NSURL fileURLWithPath:pathImage];
     
     NSArray* path_forDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
     NSString* documentsDirectory = [path_forDirectory objectAtIndex:0];
@@ -185,7 +189,11 @@
     [data appendData:data2];
     [data appendData:data3];
 
+    NSData* dataImage = [NSData dataWithContentsOfURL:pathURLImage];
+    
     [data writeToFile:[NSString stringWithFormat:@"%@/SI_Temp.html",documentsDirectory] atomically:YES];
+    [dataImage writeToFile:[NSString stringWithFormat:@"%@/LogoBCALife.jpg",documentsDirectory] atomically:YES];
+    
     NSString *HTMLPath = [documentsDirectory stringByAppendingPathComponent:@"SI_Temp.html"];
     NSURL *targetURL = [NSURL fileURLWithPath:HTMLPath];
     
@@ -620,27 +628,6 @@
     NSString* documentsDirectory = [path_forDirectory objectAtIndex:0];
     if (pdfData) {
         [pdfData writeToFile:[NSString stringWithFormat:@"%@/SalesIlustration.pdf",documentsDirectory] atomically:YES];
-        /*if (page == 1){
-            [pdfData writeToFile:[NSString stringWithFormat:@"%@/tmp1.pdf",NSTemporaryDirectory()] atomically: YES];
-            page=2;
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0), ^{
-                [webIlustration loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page2" ofType:@"html"]isDirectory:NO]]];
-            });
-        }
-        else if (page == 2){
-            [pdfData writeToFile:[NSString stringWithFormat:@"%@/tmp2.pdf",NSTemporaryDirectory()] atomically: YES];
-            page=3;
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0), ^{
-                [webIlustration loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page3" ofType:@"html"]isDirectory:NO]]];
-            });
-        }
-        else if (page == 3){
-            [pdfData writeToFile:[NSString stringWithFormat:@"%@/tmp3.pdf",NSTemporaryDirectory()] atomically: YES];
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0), ^{
-                [self createPDFFile];
-            });
-            page = 4;
-        }*/
     }
     else
     {
