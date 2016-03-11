@@ -768,7 +768,7 @@ bool RegDatehandling;
     NSString *validationNegara=@"Negara Tempat Tinggal harus diisi";
     NSString *validationAreaTelponRumah=@"Nomor kode telepon rumah yang dimasukkan minimal 6 digit atau lebih";
     NSString *validationNumberTelponRumah=@"Nomor telepon rumah yang dimasukkan minimal 6 digit atau lebih";
-    NSString *validationAreaHPUtama=@"Nomor Kode HP Utama yang dimasukkan minimal 6 digit atau lebih";
+    NSString *validationAreaHPUtama=@"Nomor Kode HP Utama harus diisi";
     NSString *validationNumberHPUtama=@"Nomor HP Utama yang dimasukkan minimal 6 digit atau lebih";
     NSString *validationAreaHP2=@"Nomor Kode HP 2 yang dimasukkan minimal 6 digit atau lebih";
     NSString *validationNumberHP2=@"Nomor HP2 yang dimasukkan minimal 6 digit atau lebih";
@@ -3504,7 +3504,7 @@ bool RegDatehandling;
         if(buttonIndex == 0) { //YES
             if(IC_Hold_Alert || OTHERID_Hold_Alert) {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
-                                                                message:@"Customer profile has been created using this ID." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                                                                message:@"Data Nasabah sudah ada." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 
                 alert.tag = 6000;
                 [alert show];
@@ -4793,7 +4793,7 @@ bool RegDatehandling;
             if(Update_record == FALSE) {
                 getSameRecord_Indexno = indexno;
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
-                                                                message:@"Customer profile has been created using this ID."
+                                                                message:@"Data Nasabah sudah ada."
                                                                delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 alert.tag = 6000;
                 [alert show];
@@ -4833,7 +4833,7 @@ bool RegDatehandling;
 				if(Update_record == FALSE) {
 					getSameRecord_Indexno = indexno;
 					UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
-																	message:@"Customer profile has been created using this ID."
+																	message:@"Data Nasabah sudah ada."
                                                                    delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
 					
 					alert.tag = 6000;
@@ -4876,7 +4876,7 @@ bool RegDatehandling;
 				if(Update_record == FALSE) {
 					getSameRecord_Indexno = [row objectAtIndex:0];
 					UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
-																	message:@"Customer profile has been created using this ID."
+																	message:@"Data Nasabah sudah ada."
                                                                    delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
 					alert.tag = 6000;
 					[alert show];
@@ -7708,7 +7708,7 @@ bool RegDatehandling;
     } else {
 		if (![[ClientProfile objectForKey:@"TabBar"] isEqualToString:@"YES"]) {
 			SuccessAlert = [[UIAlertView alloc] initWithTitle:@" "
-													  message:@"Data Nasabah Baru Berhasil Ditambahkan" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+													  message:@"Data Nasabah telah berhasil disimpan" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
 		}
 		SuccessAlert.tag = 1;
 		[SuccessAlert show];
@@ -7911,7 +7911,7 @@ bool RegDatehandling;
 
     if (isExpiryDate) {
         if ([d compare:d2] == NSOrderedDescending){
-            NSString *validationTanggalLahirFuture=@"Tanggal kadaluarsa tidak dapat lebih kecil dari tanggal hari ini";
+            NSString *validationTanggalLahirFuture=@"Tanggal kadaluarsa Identitas tidak dapat lebih kecil dari tanggal hari ini";
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
                                                             message:validationTanggalLahirFuture delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil];
             [alert show];
