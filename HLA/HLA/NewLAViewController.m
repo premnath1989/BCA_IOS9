@@ -18,6 +18,7 @@
 #import "MaineApp.h"
 #import "eAppMenu.h"
 #import "Constants.h"
+#import "TabValidation.h"
 
 @interface NewLAViewController (){
     NSString *ilustrationProductCode;
@@ -411,6 +412,30 @@ id dobtanngal;
         
         sqlite3_close(contactDB);
     }
+}
+
+- (void)passValidationCheck{
+    if(![NamaProduk.titleLabel.text isEqualToString:@"--Please Select--"] && ![LANameField.text isEqualToString:@""] && ![btnDOB.titleLabel.text isEqualToString:@"--Please Select--"] && ![_BtnHubungan.titleLabel.text isEqualToString:@"--Please Select--"] && ![btnOccp.titleLabel.text isEqualToString:@"--Please Select--"] && !sexSegment.selected){
+            unsigned flags = NSDayCalendarUnit;
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+            NSString *selectDate = TanggalIllustrasi.titleLabel.text;
+            NSDate *startDate = [dateFormatter dateFromString:selectDate];
+            
+            NSString *todayDate = [dateFormatter stringFromDate:[NSDate date]];
+            NSDate *endDate = [dateFormatter dateFromString:todayDate];
+            NSDateComponents *difference = [[NSCalendar currentCalendar] components:flags fromDate:startDate toDate:endDate options:0];
+            int diffDays = [difference day];
+            if (diffDays >180)
+            {
+               
+            }
+            else
+            {
+                [[TabValidation sharedMySingleton] setValidTab1:TRUE];
+            }
+    }
+    
 }
 
 -(void) disableFieldsForEapp
@@ -1099,6 +1124,7 @@ id dobtanngal;
             [dictionaryNewLA setObject:occupationDesc forKey:@"LA_Occp"];
         }
         
+        [self passValidationCheck];
         [_delegate saveNewLA:dictionaryNewLA];
     }
 }

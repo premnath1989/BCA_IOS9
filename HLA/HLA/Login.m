@@ -112,10 +112,12 @@ NSString *ProceedStatus = @"";
 
 
 - (void)appVersionChecker{
-    [spinnerLoading startLoadingSpinner:self.view label:@"Periksa Versi Aplikasi"];
-    NSString *version= [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-    WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
-    [webservice AppVersionChecker:version delegate:self];
+    if([self connected]){
+        [spinnerLoading startLoadingSpinner:self.view label:@"Periksa Versi Aplikasi"];
+        NSString *version= @"3.0";
+        WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
+        [webservice AppVersionChecker:version delegate:self];
+    }
 }
 
 //added by Edwin 12-02-2014

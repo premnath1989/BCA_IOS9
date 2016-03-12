@@ -10,6 +10,7 @@
 #import "MainScreen.h"
 #import "AppDelegate.h"
 #import "ColorHexCode.h"
+#import "TabValidation.h"
 
 
 @interface SecondLAViewController (){
@@ -435,6 +436,12 @@ id dobtemp;
     }
 }
 
+- (void)passValidationCheck{
+    if(![_BtnTanggalLahir.titleLabel.text isEqualToString:@"--Please Select--"] && ![nameField.text isEqualToString:@""]&& ![btnOccp.titleLabel.text isEqualToString:@"--Please Select--"] && !sexSegment.selected){
+            [[TabValidation sharedMySingleton] setValidTab2:TRUE];
+    }
+}
+
 #pragma mark - action
 - (IBAction)ActionEAPP:(id)sender {
     [_delegate dismissEApp];
@@ -588,6 +595,7 @@ id dobtemp;
                                               sex,@"LA_Gender",
                                               occuCode,@"LA_OccpCode",
                                               occupationDesc,@"LA_Occp",nil];
+        [self passValidationCheck];
         [_delegate saveSecondLA:dictionaryNewLA];
     }
 }

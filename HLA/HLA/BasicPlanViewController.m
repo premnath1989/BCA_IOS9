@@ -15,6 +15,7 @@
 #import "AppDelegate.h"
 #import "SIObj.h"
 #import "Constants.h"
+#import "TabValidation.h"
 
 @interface BasicPlanViewController ()
 @end
@@ -234,6 +235,12 @@ bool WPTPD30RisDeleted = FALSE;
 	Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
 	id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
 	[activeInstance performSelector:@selector(dismissKeyboard)];
+}
+
+- (void)passValidationCheck{
+    if(![_masaPembayaranButton.titleLabel.text isEqualToString:@"--Please Select--"] && ![_frekuensiPembayaranButton.titleLabel.text isEqualToString:@"--Please Select--"]){
+        [[TabValidation sharedMySingleton] setValidTab3:TRUE];
+    }
 }
 
 -(void)DisableTextField :(UITextField *)aaTextField{
@@ -1219,6 +1226,7 @@ bool WPTPD30RisDeleted = FALSE;
                                                   @"0",@"SubTotalPremium",nil];
         //[self updateBasicPlan];
         //[_delegate saveAll];
+        [self passValidationCheck];
         [_delegate saveBasicPlan:dictionaryBasicPlan];
     }
 

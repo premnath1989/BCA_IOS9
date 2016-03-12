@@ -27,6 +27,7 @@
 #import "MasterMenuEApp.h"
 #import "Cleanup.h"
 #import "Constants.h"
+#import "TabValidation.h"
 
 #define TRAD_PAYOR_FIRSTLA  @"0"
 #define TRAD_PAYOR_SECONDLA  @"1"
@@ -3284,8 +3285,50 @@ BOOL isFirstLoad;
             }
             sqlite3_finalize(statement);
         }
-        sqlite3_close(contactDB);        
+        sqlite3_close(contactDB);
     }
+}
+
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    // rows in section 0 should not be selectable
+    int lastIndexSelected = indexPath.row;
+    switch (lastIndexSelected) {
+        case 1:
+            if(![[TabValidation sharedMySingleton] CheckTab1]){
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
+                                                                message:@"Harap isi mandatory fields"
+                                                               delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                [alert show];
+                return nil;
+            }
+            break;
+        case 2:
+            if(![[TabValidation sharedMySingleton] CheckTab1] &&
+               ![[TabValidation sharedMySingleton] CheckTab2]){
+                
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
+                                                                message:@"Harap isi mandatory fields"
+                                                               delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                [alert show];
+                return nil;
+            }
+            break;
+        case 3:
+            if(![[TabValidation sharedMySingleton] CheckTab1] &&
+               ![[TabValidation sharedMySingleton] CheckTab2] &&
+               ![[TabValidation sharedMySingleton] CheckTab3]){
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
+                                                                message:@"Harap isi mandatory fields"
+                                                               delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                [alert show];
+                return nil;
+            }
+            break;
+        default:
+            break;
+    }
+
+    return indexPath;
 }
 
 - (void)buildSpinner {    
@@ -3863,6 +3906,10 @@ BOOL isFirstLoad;
             }
         });
     }
+}
+
+- (void) checkMandatoryField{
+    
 }
 
 /**
