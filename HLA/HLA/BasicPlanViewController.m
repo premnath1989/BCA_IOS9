@@ -924,10 +924,14 @@ bool WPTPD30RisDeleted = FALSE;
     
     double test = PaymentMode * RatesInt;
     
+    double test2 = (test * BasisSumAssured)/1000;
+    
+    
+    
     TotalA = total * test;
     
     
-    [_basicPremiField setText:[NSString stringWithFormat:@"%2f", TotalA]];
+    [_basicPremiField setText:[NSString stringWithFormat:@"%2f", test2]];
     [self PremiDasarIncomeChange:_basicPremiField.text];
 }
 
@@ -1391,20 +1395,21 @@ bool WPTPD30RisDeleted = FALSE;
     
     double entryFieldFloat = [_basicPremiField.text doubleValue];
     
-    if ([_basicPremiField.text rangeOfString:@""].length == 3) {
+    if ([_basicPremiField.text rangeOfString:@""].length == 3)
+    {
         formatter.alwaysShowsDecimalSeparator = YES;
-        result =[formatter stringFromNumber:[NSNumber numberWithDouble:entryFieldFloat]];
-        result = [result stringByAppendingFormat:@"00"];
-        
-    } else  if ([_basicPremiField.text rangeOfString:@"."].length == 1) {
-        formatter.alwaysShowsDecimalSeparator = YES;
-        result =[formatter stringFromNumber:[NSNumber numberWithDouble:entryFieldFloat]];
-        
-    } else if ([_basicPremiField.text rangeOfString:@"."].length != 1) {
-        formatter.alwaysShowsDecimalSeparator = NO;
         result =[formatter stringFromNumber:[NSNumber numberWithDouble:entryFieldFloat]];
         result = [result stringByAppendingFormat:@""];
         
+    } else  if ([_basicPremiField.text rangeOfString:@"."].length == 1)
+    {
+        formatter.alwaysShowsDecimalSeparator = NO;
+        result =[formatter stringFromNumber:[NSNumber numberWithDouble:entryFieldFloat]];
+    } else if ([_basicPremiField.text rangeOfString:@"."].length != 1)
+    {
+        formatter.alwaysShowsDecimalSeparator = NO;
+        result =[formatter stringFromNumber:[NSNumber numberWithDouble:entryFieldFloat]];
+        result = [result stringByAppendingFormat:@""];
     }
     
     if(_basicPremiField.text.length==0)
