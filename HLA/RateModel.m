@@ -59,6 +59,7 @@
     [database open];
     
     FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"SELECT \"%@\" FROM Cash_SurValue_Single Where BasicCode = \"%@\" AND EntryAge = ((%i+%i)-1)",Gender,basicCode,entryAge,polYear]];
+    
     NSLog(@"surval %@",[NSString stringWithFormat:@"SELECT \"%@\" FROM Cash_SurValue_Single Where BasicCode = \"%@\" AND EntryAge = ((%i+%i)-1)",Gender,basicCode,entryAge,polYear]);
     while ([s next]) {
         Rate = [s doubleForColumn:Gender];

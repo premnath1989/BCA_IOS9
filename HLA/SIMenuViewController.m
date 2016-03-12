@@ -729,6 +729,45 @@ BOOL isFirstLoad;
 
 #pragma mark - temporary function added by faiz
 //added by faiz
+
+-(void)pullSIData{
+    dictionaryPOForInsert = [[NSMutableDictionary alloc]initWithDictionary:[_LAController setDictionaryLA]];
+    dictionaryMasterForInsert = [[NSMutableDictionary alloc]initWithObjectsAndKeys:[dictionaryPOForInsert valueForKey:@"SINO"],@"SINO",@"1.1",@"SI_Version",@"Not Created",@"ProposalStatus", nil];
+    
+    if (!_SecondLAController) {
+        NSDictionary* dictPOData=[[NSDictionary alloc]initWithDictionary:[_modelSIPOData getPO_DataFor:[self.requestSINo description]]];
+        [dictionaryPOForInsert setObject:[dictPOData valueForKey:@"LA_ClientID"] forKey:@"LA_ClientID"];
+        [dictionaryPOForInsert setObject:[dictPOData valueForKey:@"LA_Name"] forKey:@"LA_Name"];
+        [dictionaryPOForInsert setObject:[dictPOData valueForKey:@"LA_DOB"] forKey:@"LA_DOB"];
+        [dictionaryPOForInsert setObject:[dictPOData valueForKey:@"LA_Age"] forKey:@"LA_Age"];
+        [dictionaryPOForInsert setObject:[dictPOData valueForKey:@"LA_Gender"] forKey:@"LA_Gender"];
+        [dictionaryPOForInsert setObject:[dictPOData valueForKey:@"LA_OccpCode"] forKey:@"LA_OccpCode"];
+        [dictionaryPOForInsert setObject:[dictPOData valueForKey:@"LA_Occp"] forKey:@"LA_Occp"];
+    }
+    else{
+        [dictionaryPOForInsert addEntriesFromDictionary:[_SecondLAController setDictionarySecondLA]];
+    }
+    
+    if (!_BasicController) {
+        newDictionaryForBasicPlan=[NSMutableDictionary dictionaryWithDictionary:[_modelSIPremium getPremium_For:[self.requestSINo description]]];
+    }
+    else{
+        newDictionaryForBasicPlan=[NSMutableDictionary dictionaryWithDictionary:[_BasicController setDataBasicPlan]];
+    }
+    
+    
+    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+    f.numberStyle = NSNumberFormatterDecimalStyle;
+    NSNumber *myNumber = [f numberFromString:[newDictionaryForBasicPlan valueForKey:@"Sum_Assured"]];
+    [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"ProductCode"] forKey:@"ProductCode"];
+    [newDictionaryForBasicPlan setObject:myNumber forKey:@"Number_Sum_Assured"];
+    [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"PO_Gender"] forKey:@"PO_Gender"];
+    [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"PO_Age"] forKey:@"PO_Age"];
+    [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"LA_Gender"] forKey:@"LA_Gender"];
+    [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"LA_Age"] forKey:@"LA_Age"];
+    [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"SINO"] forKey:@"SINO"];
+}
+
 -(void)brngSubview:(NSString *)view{
     if ([view isEqualToString:@"Rider"]){
         [RightView bringSubviewToFront:_RiderController.view];
@@ -2933,6 +2972,7 @@ BOOL isFirstLoad;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [self pullSIData];
     //[self checkValidateView];
     int lastIndexSelected = indexPath.row;
     switch (lastIndexSelected) {

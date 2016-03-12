@@ -173,7 +173,7 @@
             var finalRate;
             
             if (term == 1){
-                finalRate=rateTunggal;
+                finalRate=surValue;
             }
             else{
                 finalRate=rate5;
@@ -215,7 +215,7 @@
                 }
                 else{
                     var valueRate = finalRate[i];
-                    col7Val = (Math.round(col3Val) * valueRate)/1000;
+                    col7Val = (Math.round(col3Val) * finalRate[i])/1000;
                     col8Val = (surValue[i] * Math.round(col5Val))/1000;
                 }
                 
@@ -293,7 +293,7 @@
         <div id="maincontainer">
         <div class="main-content">
         <br/>
-            <!--data LA-->
+
             <table style="border-collapse:separate;border:0px solid black;width:100%;" >
                 <tr valign="top">
                     <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;font-family:Helvetica;font-size:11px">Nama Pemegang Polis</td>
@@ -305,13 +305,13 @@
                     <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:11px ">Tanggal Lahir Pemegang Polis (dd/MM/yyyy)</td>
                     <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:11px ">:&nbsp;&nbsp;&nbsp;<label id="HeaderPODOB">07/07/1970</label></td>
                     <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:11px ">Masa Pembayaran Premi</td>
-                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:11px ">:&nbsp;&nbsp;&nbsp;<label id="HeaderPaymentPeriode">5</label></td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:11px ">:&nbsp;&nbsp;&nbsp;<label id="HeaderPaymentPeriode1"></label></td>
                 </tr>
                 <tr valign="top">
                     <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:11px ">Nama Tertanggung (jika berbeda)</td>
-                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:11px">:&nbsp;&nbsp;&nbsp;<label id="HeaderLAName">Budi Budiman</label></td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:11px">:&nbsp;&nbsp;&nbsp;<label id="HeaderLAName1">Budi Budiman</label></td>
                     <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:11px ">Frekuensi Pembayaran</td>
-                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:11px ">:&nbsp;&nbsp;&nbsp;<label id="HeaderPaymentFrequency">Tahunan</label></td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:11px ">:&nbsp;&nbsp;&nbsp;<label id="HeaderPaymentFrequency1"></label></td>
                 </tr>
                 <tr valign="top">
                     <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:11px ">Tanggal Lahir Tertanggung (jika berbeda dengan pemegang polis) (dd/mm/yyyy) </td>
@@ -335,11 +335,11 @@
                     <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:11px ">Usia Masuk Tertanggung</td>
                     <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:11px ">:&nbsp;&nbsp;&nbsp;<label id="HeaderLAAge">45</label></td>
                     <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:11px ">Durasi Extra Premi</td>
-                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:11px ">:&nbsp;&nbsp;&nbsp;<label id="HeaderExtraPremiDuration">5</label></td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:11px ">:&nbsp;&nbsp;&nbsp;<label id="HeaderExtraPremiDuration1"></label></td>
                 </tr>
                 <tr valign="top">
                     <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:11px ">Jenis Kelamin</td>
-                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:11px ">:&nbsp;&nbsp;&nbsp;<label id="HeaderPOAge">Pria</label></td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:11px ">:&nbsp;&nbsp;&nbsp;<label id="HeaderPOSex"></label></td>
                     <!--<td style="text-align:left;padding: 0px 0px 0px 0px;font-size:14px ">Extra Premi Karena UW Loading</td>
                     <td style="text-align:left;padding: 0px 0px 0px 0px;font-size:14px "><label id="HeaderExtraPremiUWLoading">70.560.000</label></td>-->
                     <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:11px ">Total Premi Dibayar</td>
@@ -483,7 +483,7 @@
             <div style="width:100%;height:20px;background-color: #fff;vertical-align: top;">
                 <table border="0" style="border-collapse:separate;border:0px solid black;width:100%;;font-family:Helvetica;font-size:11px;text-align: right">
                     <tr style="text-align: right">
-                        <td style="text-align: right">Halaman 1 dari 3</td>
+                        <td style="text-align: right">Halaman 2 dari 3</td>
                     </tr>
                     <tr style="text-align: right">
                         <td style="text-align: right">www.bcalife.co.id</td>

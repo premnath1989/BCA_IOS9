@@ -793,7 +793,7 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
 -(void)getDataForTable{
     NSDictionary *dictIlustrationData;
     if (([txtSINO.text length]>0)||([txtLAName.text length]>0)||([DBDateFrom2 length]>0)||([DBDateTo2 length]>0)){
-        dictIlustrationData=[[NSDictionary alloc]initWithDictionary:[_modelSIMaster searchSIListingByName:txtSINO.text POName:txtLAName.text Order:@"CreatedDate" Method:@"Desc" DateFrom:DBDateFrom2 DateTo:DBDateTo2]];
+        dictIlustrationData=[[NSDictionary alloc]initWithDictionary:[_modelSIMaster searchSIListingByName:txtSINO.text POName:txtLAName.text Order:@"sim.CreatedDate" Method:@"Desc" DateFrom:DBDateFrom2 DateTo:DBDateTo2]];
     }
     else{
         dictIlustrationData=[[NSDictionary alloc]initWithDictionary:[_modelSIMaster getIlustrationata]];

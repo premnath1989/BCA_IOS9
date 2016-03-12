@@ -1077,8 +1077,61 @@ id dobtanngal;
 //    appDelegate.isSIExist = YES;
 }
 
+-(NSDictionary *)setDictionaryLA{
+    NSNumber *numberBoolQuickQuote;
+    NSNumber *numberIntClientProfile;
+    if ([quickQuoteFlag isOn]){
+        clientProfileID = -1;
+    }
+    numberIntClientProfile = [NSNumber numberWithInt:clientProfileID];
+    
+    if ([quickQuoteFlag isOn]){
+        numberBoolQuickQuote=[NSNumber numberWithInt:1];
+    }
+    else{
+        numberBoolQuickQuote=[NSNumber numberWithInt:0];
+    }
+    
+    NSString *occupationDesc=[btnOccp.titleLabel.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString *relationDesc=[_BtnHubungan.titleLabel.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString *productName=NamaProduk.titleLabel.text;
+    NSMutableDictionary *dictionaryNewLA=[[NSMutableDictionary alloc]initWithObjectsAndKeys:
+                                          _SINumberBCA.text,@"SINO",
+                                          ilustrationProductCode,@"ProductCode",
+                                          productName,@"ProductName",
+                                          numberBoolQuickQuote,@"QuickQuote",
+                                          TanggalIllustrasi.titleLabel.text,@"SIDate",
+                                          LANameField.text,@"PO_Name",
+                                          btnDOB.titleLabel.text,@"PO_DOB",
+                                          sex,@"PO_Gender",
+                                          LAAgeField.text,@"PO_Age",
+                                          occuCode,@"PO_OccpCode",
+                                          occupationDesc,@"PO_Occp",
+                                          numberIntClientProfile,@"PO_ClientID",
+                                          relationDesc,@"RelWithLA",nil];
+    
+    if ([relationDesc isEqualToString:@"SELF"]){
+        [dictionaryNewLA setObject:numberIntClientProfile forKey:@"LA_ClientID"];
+        [dictionaryNewLA setObject:LANameField.text forKey:@"LA_Name"];
+        [dictionaryNewLA setObject:btnDOB.titleLabel.text forKey:@"LA_DOB"];
+        [dictionaryNewLA setObject:LAAgeField.text forKey:@"LA_Age"];
+        [dictionaryNewLA setObject:sex forKey:@"LA_Gender"];
+        [dictionaryNewLA setObject:occuCode forKey:@"LA_OccpCode"];
+        [dictionaryNewLA setObject:occupationDesc forKey:@"LA_Occp"];
+    }
+    return dictionaryNewLA;
+}
 
 - (IBAction)doSaveLA:(id)sender
+{
+    //[_delegate saveAll];
+    if ([self validateSave]){
+        [self passValidationCheck];
+        [_delegate saveNewLA:[self setDictionaryLA]];
+    }
+}
+
+/*- (IBAction)doSaveLA:(id)sender
 {
     //[_delegate saveAll];
     if ([self validateSave]){
@@ -1127,7 +1180,7 @@ id dobtanngal;
         [self passValidationCheck];
         [_delegate saveNewLA:dictionaryNewLA];
     }
-}
+}*/
 
 
 - (IBAction)NamaProdukDropDown:(id)sender;

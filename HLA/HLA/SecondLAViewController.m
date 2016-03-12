@@ -574,7 +574,45 @@ id dobtemp;
     [self.dobPopover presentPopoverFromRect:[sender bounds]  inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:NO];
 }
 
+-(NSMutableDictionary *)setDictionarySecondLA{
+    NSNumber *numberIntClientProfile;
+    
+    if ([sexSegment selectedSegmentIndex]==0) {
+        sex = @"MALE";
+    } else if (sexSegment.selectedSegmentIndex == 1) {
+        sex = @"FEMALE";
+    }
+    
+    if (_quickQuoteEnabled){
+        clientProfileID = -1;
+    }
+    
+    numberIntClientProfile = [NSNumber numberWithInt:clientProfileID];
+    NSLog(@"nameField %@",nameField.text);
+    
+    NSString *laDOB=[_BtnTanggalLahir.titleLabel.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString *occupationDesc=[btnOccp.titleLabel.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSMutableDictionary *dictionaryNewLA=[[NSMutableDictionary alloc]initWithObjectsAndKeys:
+                                          numberIntClientProfile,@"LA_ClientID",
+                                          nameField.text,@"LA_Name",
+                                          laDOB,@"LA_DOB",
+                                          ageField.text,@"LA_Age",
+                                          sex,@"LA_Gender",
+                                          occuCode,@"LA_OccpCode",
+                                          occupationDesc,@"LA_Occp",nil];
+    return dictionaryNewLA;
+}
+
 - (IBAction)doSave:(id)sender
+{
+    //[_delegate saveAll];
+    if ([self validateSave]){
+        [self passValidationCheck];
+        [_delegate saveSecondLA:[self setDictionarySecondLA]];
+    }
+}
+
+/*- (IBAction)doSave:(id)sender
 {
     //[_delegate saveAll];
     if ([self validateSave]){
@@ -598,7 +636,7 @@ id dobtemp;
         [self passValidationCheck];
         [_delegate saveSecondLA:dictionaryNewLA];
     }
-}
+}*/
 
 - (IBAction)doDelete:(id)sender
 {

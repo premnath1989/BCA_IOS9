@@ -240,7 +240,7 @@
 -(void)keyboardDidHide:(NSNotificationCenter *)notification;
 
 -(void)loadDataFromList;
-
+-(NSDictionary *)setDictionaryLA;
 @end
 
 

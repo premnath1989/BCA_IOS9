@@ -26,6 +26,7 @@
 -(void) RiderAdded;
 -(void)saveAll;
 -(void)setIsSecondLaNeeded:(BOOL)temp;
+-(NSDictionary *)getDataPO;
 -(void)saveSecondLA:(NSDictionary *)dataLA;
 @end
 
@@ -53,7 +54,9 @@
 	BOOL Editable;
 	
     int prevIndexNo;
+    NSDictionary* dictionaryPO;
 }
+
 
 @property (nonatomic,strong) BasicPlanHandler *basicHand;
 @property (nonatomic,strong) SecondLAHandler *la2ndHand;
@@ -153,5 +156,7 @@
 //added by faiz
 @property (nonatomic, assign,readwrite) BOOL quickQuoteEnabled;
 - (bool)validationDataLifeAssured;
+-(void)initialPOData;
+-(NSMutableDictionary *)setDictionarySecondLA;
 //end of added by faiz
 @end

@@ -1244,6 +1244,21 @@ bool WPTPD30RisDeleted = FALSE;
 	
 }
 
+-(NSMutableDictionary *)setDataBasicPlan{
+    NSMutableDictionary *dictionaryBasicPlan=[[NSMutableDictionary alloc]initWithObjectsAndKeys:
+                                              yearlyIncomeField.text,@"Sum_Assured",
+                                              _masaPembayaranButton.titleLabel.text,@"Payment_Term",
+                                              _frekuensiPembayaranButton.titleLabel.text,@"Payment_Frequency",
+                                              _basicPremiField.text,@"PremiumPolicyA",
+                                              _extraPremiPercentField.text,@"ExtraPremiumPercentage",
+                                              _extraPremiNumberField.text,@"ExtraPremiumSum",
+                                              _masaExtraPremiField.text,@"ExtraPremiumTerm",
+                                              _extraBasicPremiField.text,@"ExtraPremiumPolicy",
+                                              _totalPremiWithLoadingField.text,@"TotalPremiumLoading",
+                                              @"0",@"SubTotalPremium",nil];
+    return dictionaryBasicPlan;
+}
+
 - (IBAction)doSavePlan:(id)sender
 {
     //if ([self validateSave]){
@@ -1252,23 +1267,12 @@ bool WPTPD30RisDeleted = FALSE;
         Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
         id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
         [activeInstance performSelector:@selector(dismissKeyboard)];
-        NSMutableDictionary *dictionaryBasicPlan=[[NSMutableDictionary alloc]initWithObjectsAndKeys:
-                                                  yearlyIncomeField.text,@"Sum_Assured",
-                                                  _masaPembayaranButton.titleLabel.text,@"Payment_Term",
-                                                  _frekuensiPembayaranButton.titleLabel.text,@"Payment_Frequency",
-                                                  _basicPremiField.text,@"PremiumPolicyA",
-                                                  _extraPremiPercentField.text,@"ExtraPremiumPercentage",
-                                                  _extraPremiNumberField.text,@"ExtraPremiumSum",
-                                                  _masaExtraPremiField.text,@"ExtraPremiumTerm",
-                                                  _extraBasicPremiField.text,@"ExtraPremiumPolicy",
-                                                  _totalPremiWithLoadingField.text,@"TotalPremiumLoading",
-                                                  @"0",@"SubTotalPremium",nil];
         //[self updateBasicPlan];
         //[_delegate saveAll];
         [self passValidationCheck];
-        [_delegate saveBasicPlan:dictionaryBasicPlan];
+        [_delegate saveBasicPlan:[self setDataBasicPlan]];
     }
-
+    
 }
 
 - (IBAction)tempNext:(id)sender
