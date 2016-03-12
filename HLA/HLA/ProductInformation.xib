@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="9532" systemVersion="15C50" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
@@ -8,7 +8,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProductInformation">
             <connections>
                 <outlet property="btnHome" destination="SFe-2T-YSc" id="X9x-iM-soD"/>
-                <outlet property="btnPDF" destination="Ads-QS-QNa" id="Q9W-hz-auP"/>
                 <outlet property="view" destination="sKD-c1-55Z" id="uK6-dr-au4"/>
             </connections>
         </placeholder>
@@ -34,7 +33,7 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" red="1" green="0.72156862749999995" blue="0.090196078430000007" alpha="1" colorSpace="deviceRGB"/>
+                    <color key="backgroundColor" red="0.0" green="0.62745098039215685" blue="0.70588235294117641" alpha="1" colorSpace="deviceRGB"/>
                 </view>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HGE-ZP-aPg">
                     <rect key="frame" x="0.0" y="0.0" width="1024" height="20"/>
@@ -50,16 +49,10 @@
                         <navigationItem title="Informasi Produk" id="04X-lj-Jxk"/>
                     </items>
                 </navigationBar>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ads-QS-QNa">
-                    <rect key="frame" x="77" y="79" width="194" height="30"/>
-                    <state key="normal" title="Produk BCALIfe Keluargaku"/>
-                    <connections>
-                        <action selector="seePDF:" destination="-1" eventType="touchUpInside" id="Fmn-nG-g08"/>
-                    </connections>
-                </button>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1uw-8g-iyc">
-                    <rect key="frame" x="80" y="125" width="678" height="271"/>
+                    <rect key="frame" x="80" y="125" width="900" height="600"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="sectionIndexColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="dnc-3y-HLr"/>
                         <outlet property="delegate" destination="-1" id="t82-3s-OQS"/>

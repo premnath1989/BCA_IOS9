@@ -3,7 +3,7 @@
 //  BLESS
 //
 //  Created by Erwin on 01/03/2016.
-//  Copyright © 2016 Hong Leong Assurance. All rights reserved.
+//  Copyright © 2016 InfoConnect Sdn Bhd. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -23,8 +23,8 @@
     
     [self createDirectory];
     
-    themeColour = [UIColor colorWithRed:255.0f/255.0f green:184.0f/255.0f blue:23.0f/255.0f alpha:1];
-    fontType = [UIFont fontWithName:@"TreBuchet MS" size:16.0f];
+    themeColour = [UIColor colorWithRed:0.0f/255.0f green:160.0f/255.0f blue:180.0f/255.0f alpha:1];
+    fontType = [UIFont fontWithName:@"BPreplay" size:16.0f];
     
     [self setupTableColumn];
     
@@ -85,7 +85,7 @@
     NSInteger row = indexPath.row;
     NSArray *arrayOfData;
     if(row == 0)
-        arrayOfData = [NSArray arrayWithObjects:@"1",@"Brochure_ProdukBCALIfeKeluargaku_21012016",nil];
+        arrayOfData = [NSArray arrayWithObjects:@"1",@"Brochure Produk BCA LIfe Keluargaku",nil];
     [tableManagement TableRowInsert:arrayOfData index:indexPath.row table:cell];
     
     return cell;

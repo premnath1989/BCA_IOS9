@@ -3,7 +3,7 @@
 //  BLESS
 //
 //  Created by Erwin on 01/03/2016.
-//  Copyright © 2016 Hong Leong Assurance. All rights reserved.
+//  Copyright © 2016 InfoConnect Sdn Bhd. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
