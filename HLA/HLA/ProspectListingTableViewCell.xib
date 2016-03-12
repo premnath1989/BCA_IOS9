@@ -51,7 +51,7 @@
                         <rect key="frame" x="562" y="-3" width="128" height="50"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Tanggal Pembuatan" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="IDa-Ar-Mzk">
-                                <rect key="frame" x="5" y="0.0" width="119" height="50"/>
+                                <rect key="frame" x="5" y="0.0" width="118" height="50"/>
                                 <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="14"/>
                                 <color key="textColor" red="0.34509803919999998" green="0.34901960780000002" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -62,7 +62,7 @@
                         <rect key="frame" x="691" y="-3" width="128" height="50"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Tanggal Terakhir Di Update" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="nlA-oh-DBM">
-                                <rect key="frame" x="5" y="0.0" width="119" height="50"/>
+                                <rect key="frame" x="5" y="0.0" width="118" height="50"/>
                                 <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="14"/>
                                 <color key="textColor" red="0.34509803919999998" green="0.34901960780000002" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -94,7 +94,7 @@
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K9d-RH-BKe">
                         <rect key="frame" x="0.0" y="-3" width="174" height="50"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Nama" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="kG8-Ke-3s0">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Nama" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="kG8-Ke-3s0">
                                 <rect key="frame" x="5" y="0.0" width="168" height="50"/>
                                 <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="14"/>
                                 <color key="textColor" red="0.34509803919999998" green="0.34901960780000002" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>

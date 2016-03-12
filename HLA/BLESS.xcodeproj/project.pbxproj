@@ -362,6 +362,7 @@
 		43DA4BE31C770AA90038C92C /* SIMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DA4BE11C770AA90038C92C /* SIMenuTableViewCell.m */; };
 		43DA4BE41C770AA90038C92C /* SIMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43DA4BE21C770AA90038C92C /* SIMenuTableViewCell.xib */; };
 		43DA4BE61C770B3C0038C92C /* icon_leads_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 43DA4BE51C770B3C0038C92C /* icon_leads_2.png */; };
+		43EFEB731C93915A00B9AA2A /* LogoBCALife.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 43EFEB721C93915A00B9AA2A /* LogoBCALife.jpg */; };
 		43F8B5511C81E71B006F3F6C /* SIListingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43F8B54E1C81E71A006F3F6C /* SIListingTableViewCell.xib */; };
 		43F8B5521C81E71B006F3F6C /* SIListingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F8B5501C81E71B006F3F6C /* SIListingTableViewCell.m */; };
 		43FA6C191C87CD7F0098BA47 /* eng_BCALH_Page1.html in Resources */ = {isa = PBXBuildFile; fileRef = 43FA6C161C87CD7F0098BA47 /* eng_BCALH_Page1.html */; };
@@ -413,6 +414,7 @@
 		6C0B08CE18D1979B00826FC9 /* underwriting in Resources */ = {isa = PBXBuildFile; fileRef = 6C0B08CD18D1979B00826FC9 /* underwriting */; };
 		6CB3126118EE4E2B00A323A4 /* LoginVar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CB3126018EE4E2B00A323A4 /* LoginVar.m */; };
 		A11B845B19C41FDA00A5F38B /* SIRIM_Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = A11B845A19C41FDA00A5F38B /* SIRIM_Logo.png */; };
+		A120EC821C93966E00C8A1C9 /* BCAHTMLlogo.png in Resources */ = {isa = PBXBuildFile; fileRef = A120EC811C93966E00C8A1C9 /* BCAHTMLlogo.png */; };
 		A1442C531C819834009B14C9 /* Icon Brochure & save as-01-01.png in Resources */ = {isa = PBXBuildFile; fileRef = A1442C511C819834009B14C9 /* Icon Brochure & save as-01-01.png */; };
 		A1442C541C819834009B14C9 /* Icon Brochure & save as-01-02.png in Resources */ = {isa = PBXBuildFile; fileRef = A1442C521C819834009B14C9 /* Icon Brochure & save as-01-02.png */; };
 		A15F5A4A199A22BF00FE892D /* P5-Row.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A15F5A49199A22BF00FE892D /* P5-Row.jpg */; };
@@ -790,7 +792,6 @@
 		C4F8300D162FA84D00EF8FAA /* ReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4F8300C162FA84D00EF8FAA /* ReportViewController.m */; };
 		C4F83031162FCEE000EF8FAA /* HLassurance.png in Resources */ = {isa = PBXBuildFile; fileRef = C4F8302C162FCEE000EF8FAA /* HLassurance.png */; };
 		C4F83035162FCEE000EF8FAA /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = C4F83030162FCEE000EF8FAA /* style.css */; };
-		C4FCDDE316395F290065D024 /* btn_brochure_home.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FCDDD716395F290065D024 /* btn_brochure_home.png */; };
 		C4FCDDE816395F290065D024 /* btn_prospect_home.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FCDDDC16395F290065D024 /* btn_prospect_home.png */; };
 		C4FCDDEB16395F290065D024 /* btn_setting_home.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FCDDDF16395F290065D024 /* btn_setting_home.png */; };
 		C4FCDDEC16395F290065D024 /* btn_SI_home.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FCDDE016395F290065D024 /* btn_SI_home.png */; };
@@ -1415,6 +1416,7 @@
 		43DA4BE11C770AA90038C92C /* SIMenuTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMenuTableViewCell.m; sourceTree = "<group>"; };
 		43DA4BE21C770AA90038C92C /* SIMenuTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SIMenuTableViewCell.xib; sourceTree = "<group>"; };
 		43DA4BE51C770B3C0038C92C /* icon_leads_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_leads_2.png; sourceTree = "<group>"; };
+		43EFEB721C93915A00B9AA2A /* LogoBCALife.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = LogoBCALife.jpg; path = SI/LogoBCALife.jpg; sourceTree = "<group>"; };
 		43F8B54E1C81E71A006F3F6C /* SIListingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SIListingTableViewCell.xib; sourceTree = "<group>"; };
 		43F8B54F1C81E71A006F3F6C /* SIListingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIListingTableViewCell.h; sourceTree = "<group>"; };
 		43F8B5501C81E71B006F3F6C /* SIListingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIListingTableViewCell.m; sourceTree = "<group>"; };
@@ -1561,6 +1563,7 @@
 		6CB3125F18EE4E2B00A323A4 /* LoginVar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginVar.h; sourceTree = "<group>"; };
 		6CB3126018EE4E2B00A323A4 /* LoginVar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginVar.m; sourceTree = "<group>"; };
 		A11B845A19C41FDA00A5F38B /* SIRIM_Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SIRIM_Logo.png; sourceTree = "<group>"; };
+		A120EC811C93966E00C8A1C9 /* BCAHTMLlogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BCAHTMLlogo.png; sourceTree = "<group>"; };
 		A1442C511C819834009B14C9 /* Icon Brochure & save as-01-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon Brochure & save as-01-01.png"; sourceTree = "<group>"; };
 		A1442C521C819834009B14C9 /* Icon Brochure & save as-01-02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon Brochure & save as-01-02.png"; sourceTree = "<group>"; };
 		A15F5A49199A22BF00FE892D /* P5-Row.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "P5-Row.jpg"; sourceTree = "<group>"; };
@@ -2158,7 +2161,6 @@
 		C4F8300C162FA84D00EF8FAA /* ReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportViewController.m; sourceTree = "<group>"; };
 		C4F8302C162FCEE000EF8FAA /* HLassurance.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HLassurance.png; sourceTree = "<group>"; };
 		C4F83030162FCEE000EF8FAA /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
-		C4FCDDD716395F290065D024 /* btn_brochure_home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_brochure_home.png; sourceTree = "<group>"; };
 		C4FCDDDC16395F290065D024 /* btn_prospect_home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_prospect_home.png; sourceTree = "<group>"; };
 		C4FCDDDF16395F290065D024 /* btn_setting_home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_setting_home.png; sourceTree = "<group>"; };
 		C4FCDDE016395F290065D024 /* btn_SI_home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_SI_home.png; sourceTree = "<group>"; };
@@ -3311,6 +3313,8 @@
 		43FA6C151C87CD5D0098BA47 /* HTML USED */ = {
 			isa = PBXGroup;
 			children = (
+				43EFEB721C93915A00B9AA2A /* LogoBCALife.jpg */,
+				A120EC811C93966E00C8A1C9 /* BCAHTMLlogo.png */,
 				4374ACFB1C911FF00006522A /* eng_BCALKK_Page1.html */,
 				4374ACFC1C911FF00006522A /* eng_BCALKK_Page2.html */,
 				4321B3321C8B3496006B9402 /* htmlStyle.css */,
@@ -4651,7 +4655,6 @@
 				C486D9C3163E5319009F8F21 /* btn_prospect_off.png */,
 				C486D9C4163E5319009F8F21 /* btn_prospect_on.png */,
 				C486D9C6163E5319009F8F21 /* btn_SIlisting_on.png */,
-				C4FCDDD716395F290065D024 /* btn_brochure_home.png */,
 				C4FCDDDC16395F290065D024 /* btn_prospect_home.png */,
 				C4FCDDDF16395F290065D024 /* btn_setting_home.png */,
 				C4FCDDE016395F290065D024 /* btn_SI_home.png */,
@@ -5034,7 +5037,6 @@
 				1706BD511C7169A40038D1DB /* menu_spaj.png in Resources */,
 				5D59C88E1C16893900F5C028 /* SharedStoryboard.storyboard in Resources */,
 				AA4EF7471C85A4260050CCD8 /* AppIcon-180.png in Resources */,
-				C4FCDDE316395F290065D024 /* btn_brochure_home.png in Resources */,
 				C4FCDDE816395F290065D024 /* btn_prospect_home.png in Resources */,
 				17983C331C473373009E2977 /* HealthQuestionPO.storyboard in Resources */,
 				AA4EF7421C85A4260050CCD8 /* AppIcon-114.png in Resources */,
@@ -5130,6 +5132,7 @@
 				2958A88617E960150090A791 /* slider_hover.png in Resources */,
 				2958A88717E960150090A791 /* slider_hover@2x.png in Resources */,
 				2958A88817E960150090A791 /* slider_normal.png in Resources */,
+				43EFEB731C93915A00B9AA2A /* LogoBCALife.jpg in Resources */,
 				2958A88917E960150090A791 /* slider_normal@2x.png in Resources */,
 				AA4EF7561C85A4260050CCD8 /* Reader-Export@3x.png in Resources */,
 				A1C085D11C7DD77200A0592C /* bless final-02.png in Resources */,
@@ -5285,6 +5288,7 @@
 				A1442C541C819834009B14C9 /* Icon Brochure & save as-01-02.png in Resources */,
 				043FDBA41A1AEF14008EDC24 /* eAplicationv3.png in Resources */,
 				043FDBA51A1AEF14008EDC24 /* customer_fact_findv3.png in Resources */,
+				A120EC821C93966E00C8A1C9 /* BCAHTMLlogo.png in Resources */,
 				431F5FE51C6D93E800A9CA6C /* ProspectListingTableViewCell.xib in Resources */,
 				043FDBA61A1AEF14008EDC24 /* client_profilev3.png in Resources */,
 				043FDBA31A1AEF14008EDC24 /* sales_illustrationv3.png in Resources */,

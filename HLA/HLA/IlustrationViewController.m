@@ -11,7 +11,7 @@
 
 @interface IlustrationViewController (){
     int page;
-
+    bool pdfCreated;
 }
 
 @end
@@ -29,8 +29,10 @@
 
 -(void)viewDidAppear:(BOOL)animated {
     page =1;
+    pdfCreated=false;
     [self loadPremi];
-    [self loadHTMLToWebView];
+    [self joinHTML];
+    //[self loadHTMLToWebView];
 }
 
 - (void)viewDidLoad {
@@ -54,7 +56,7 @@
 -(void)email{
     NSArray* path_forDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
     NSString* documentsDirectory = [path_forDirectory objectAtIndex:0];
-    NSString *pdfPathOutput = [NSString stringWithFormat:@"%@/SI_Temp.pdf",documentsDirectory];
+    NSString *pdfPathOutput = [NSString stringWithFormat:@"%@/SalesIlustration.pdf",documentsDirectory];
     if ([MFMailComposeViewController canSendMail] == NO){
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Please set up your default email account in iPad first"
                                                        delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
@@ -87,7 +89,7 @@
 -(void)printSI{
     NSArray* path_forDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
     NSString* documentsDirectory = [path_forDirectory objectAtIndex:0];
-    NSString *pdfPathOutput = [NSString stringWithFormat:@"%@/SI_Temp.pdf",documentsDirectory];
+    NSString *pdfPathOutput = [NSString stringWithFormat:@"%@/SalesIlustration.pdf",documentsDirectory];
     
     [_PagesPopover dismissPopoverAnimated:YES];
     Class printInteractionController = NSClassFromString(@"UIPrintInteractionController");
@@ -162,8 +164,47 @@
 
 -(void)loadHTMLToWebView{
     [webIlustration loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page1" ofType:@"html"]isDirectory:NO]]];
-    //[webIlustration loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page2" ofType:@"html"]isDirectory:NO]]];
-    //[webIlustration loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page1" ofType:@"html"]isDirectory:NO]]];
+}
+
+-(void)joinHTML{
+
+    NSString *path1 = [[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page1" ofType:@"html"]; //changed for language
+    NSString *path2 = [[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page2" ofType:@"html"]; //changed for language
+    NSString *path3 = [[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page3" ofType:@"html"]; //changed for language
+    
+    NSString *pathImage = [[NSBundle mainBundle] pathForResource:@"LogoBCALife" ofType:@"jpg"]; //
+    
+    NSURL *pathURL1 = [NSURL fileURLWithPath:path1];
+    NSURL *pathURL2 = [NSURL fileURLWithPath:path2];
+    NSURL *pathURL3 = [NSURL fileURLWithPath:path3];
+
+    NSURL *pathURLImage = [NSURL fileURLWithPath:pathImage];
+    
+    NSArray* path_forDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+    NSString* documentsDirectory = [path_forDirectory objectAtIndex:0];
+    
+    NSMutableData* data = [NSMutableData dataWithContentsOfURL:pathURL1];
+    NSData* data2 = [NSData dataWithContentsOfURL:pathURL2];
+    NSData* data3 = [NSData dataWithContentsOfURL:pathURL3];
+    [data appendData:data2];
+    [data appendData:data3];
+
+    NSData* dataImage = [NSData dataWithContentsOfURL:pathURLImage];
+    
+    [data writeToFile:[NSString stringWithFormat:@"%@/SI_Temp.html",documentsDirectory] atomically:YES];
+    [dataImage writeToFile:[NSString stringWithFormat:@"%@/LogoBCALife.jpg",documentsDirectory] atomically:YES];
+    
+    NSString *HTMLPath = [documentsDirectory stringByAppendingPathComponent:@"SI_Temp.html"];
+    NSURL *targetURL = [NSURL fileURLWithPath:HTMLPath];
+    
+    NSString *path = [[NSBundle mainBundle] bundlePath];
+    NSURL *baseURL = [NSURL fileURLWithPath:path];
+    
+    NSString* htmlString = [NSString stringWithContentsOfFile:HTMLPath encoding:NSUTF8StringEncoding error:nil];
+    [webIlustration loadHTMLString:htmlString baseURL:baseURL];
+    //[webIlustration loadRequest:[NSURLRequest requestWithURL:targetURL]];
+    [webIlustration setHidden:NO];
+    [viewspinBar setHidden:YES];
 }
 
 -(void)createPDFFile{
@@ -440,9 +481,9 @@
 -(void)setValuePage2{
     NSString *javaScript = [NSString stringWithFormat:@"document.getElementById('SINumber').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"SINO"]];
     
-    int poAge=[[_dictionaryPOForInsert valueForKey:@"PO_Age"] intValue];
+    //int poAge=[[_dictionaryPOForInsert valueForKey:@"PO_Age"] intValue];
     int laAge=[[_dictionaryPOForInsert valueForKey:@"LA_Age"] intValue];
-    int numberOfRow=[self calculateRowNumber:poAge];
+    int numberOfRow=[self calculateRowNumber:laAge];
     
     NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
     f.numberStyle = NSNumberFormatterDecimalStyle;
@@ -582,45 +623,32 @@
     [render setValue:[NSValue valueWithCGRect:paperRect] forKey:@"paperRect"];
     [render setValue:[NSValue valueWithCGRect:printableRect] forKey:@"printableRect"];
     NSData *pdfData = [render printToPDF];
+
+    NSArray* path_forDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+    NSString* documentsDirectory = [path_forDirectory objectAtIndex:0];
     if (pdfData) {
-        if (page == 1){
-            [pdfData writeToFile:[NSString stringWithFormat:@"%@/tmp1.pdf",NSTemporaryDirectory()] atomically: YES];
-            page=2;
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0), ^{
-                [webIlustration loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page2" ofType:@"html"]isDirectory:NO]]];
-            });
-        }
-        else if (page == 2){
-            [pdfData writeToFile:[NSString stringWithFormat:@"%@/tmp2.pdf",NSTemporaryDirectory()] atomically: YES];
-            page=3;
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0), ^{
-                [webIlustration loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page3" ofType:@"html"]isDirectory:NO]]];
-            });
-        }
-        else if (page == 3){
-            [pdfData writeToFile:[NSString stringWithFormat:@"%@/tmp3.pdf",NSTemporaryDirectory()] atomically: YES];
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0), ^{
-                [self createPDFFile];
-            });
-            page = 4;
-        }
+        [pdfData writeToFile:[NSString stringWithFormat:@"%@/SalesIlustration.pdf",documentsDirectory] atomically:YES];
     }
     else
     {
         NSLog(@"PDF couldnot be created");
     }
-    
-    
+    NSString *HTMLPath = [documentsDirectory stringByAppendingPathComponent:@"SalesIlustration.pdf"];
+    NSURL *targetURL = [NSURL fileURLWithPath:HTMLPath];
+    [webIlustration loadRequest:[NSURLRequest requestWithURL:targetURL]];
+    pdfCreated=true;
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     _dictionaryForAgentProfile = [[NSMutableDictionary alloc]initWithDictionary:[modelAgentProfile getAgentData]];
-
     [self setValuePage1];
     [self setValuePage2];
     [self setValuePage3];
-    [self makePDF];
+    
+    if (!pdfCreated){
+       [self makePDF];
+    }
 }
 
 /*
@@ -767,10 +795,8 @@
 {
     NSMutableData *pdfData = [NSMutableData data];
     UIGraphicsBeginPDFContextToData( pdfData, self.paperRect, nil );
-    //UIGraphicsBeginPDFContextToData( pdfData, CGRectMake(0, 0, 842, 595), nil );
     [self prepareForDrawingPages: NSMakeRange(0, self.numberOfPages)];
     CGRect bounds = UIGraphicsGetPDFContextBounds();
-    NSLog(@"bounds %@ %i",NSStringFromCGRect(bounds),self.numberOfPages);
     for ( int i = 0 ; i < self.numberOfPages ; i++ )
     {
         UIGraphicsBeginPDFPage();
