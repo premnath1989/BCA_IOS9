@@ -402,7 +402,9 @@ BOOL isFirstLoad;
                 [self.BasicController setPayorSex:[dictionaryPOForInsert valueForKey:@"PO_Gender"]];
                 [self.BasicController setPayorAge:[[dictionaryPOForInsert valueForKey:@"PO_Age"] integerValue]];
                 [self.BasicController setPlanType:[dictionaryPOForInsert valueForKey:@"ProductName"]];
-                
+                [self.BasicController setLAAge:[[dictionaryPOForInsert valueForKey:@"LA_Age"] integerValue]];
+                [self.BasicController setLASex:[dictionaryPOForInsert valueForKey:@"LA_Gender"]];
+                [self.BasicController setRelWithLA:[dictionaryPOForInsert valueForKey:@"RelWithLA"]];
                 NSString *PlanType = [dictionaryPOForInsert valueForKey:@"ProductName"];
                 
                 if([PlanType isEqualToString:@"BCA Life Heritage"])
@@ -420,7 +422,9 @@ BOOL isFirstLoad;
                 [self.BasicController setPayorSex:[dictPO valueForKey:@"PO_Gender"]];
                 [self.BasicController setPayorAge:[[dictPO valueForKey:@"PO_Age"] integerValue]];
                 [self.BasicController setPlanType:[dictPO valueForKey:@"ProductName"]];
-                
+                [self.BasicController setLAAge:[[dictPO valueForKey:@"LA_Age"] integerValue]];
+                [self.BasicController setLASex:[dictPO valueForKey:@"LA_Gender"]];
+                [self.BasicController setRelWithLA:[dictionaryPOForInsert valueForKey:@"RelWithLA"]];
                 NSString *PlanType = [dictionaryPOForInsert valueForKey:@"ProductName"];
                 
                 if([PlanType isEqualToString:@"BCA Life Heritage"])
@@ -476,6 +480,9 @@ BOOL isFirstLoad;
                 [self.BasicController setPayorSex:[dictionaryPOForInsert valueForKey:@"PO_Gender"]];
                 [self.BasicController setPayorAge:[[dictionaryPOForInsert valueForKey:@"PO_Age"] integerValue]];
                 [self.BasicController setPlanType:[dictionaryPOForInsert valueForKey:@"ProductName"]];
+                [self.BasicController setLAAge:[[dictionaryPOForInsert valueForKey:@"LA_Age"] integerValue]];
+                [self.BasicController setLASex:[dictionaryPOForInsert valueForKey:@"LA_Gender"]];
+                [self.BasicController setRelWithLA:[dictionaryPOForInsert valueForKey:@"RelWithLA"]];
                 
                 NSString *PlanType = [dictionaryPOForInsert valueForKey:@"ProductName"];
                 
@@ -494,7 +501,9 @@ BOOL isFirstLoad;
                 [self.BasicController setPayorSex:[dictPO valueForKey:@"PO_Gender"]];
                 [self.BasicController setPayorAge:[[dictPO valueForKey:@"PO_Age"] integerValue]];
                 [self.BasicController setPlanType:[dictPO valueForKey:@"ProductName"]];
-                
+                [self.BasicController setLAAge:[[dictPO valueForKey:@"LA_Age"] integerValue]];
+                [self.BasicController setLASex:[dictPO valueForKey:@"LA_Gender"]];
+                [self.BasicController setRelWithLA:[dictPO valueForKey:@"RelWithLA"]];
                 NSString *PlanType = [dictionaryPOForInsert valueForKey:@"ProductName"];
                 
                 if([PlanType isEqualToString:@"BCA Life Heritage"])
@@ -2789,6 +2798,7 @@ BOOL isFirstLoad;
     [newDictionaryForBasicPlan setObject:[dictPOData valueForKey:@"PO_Gender"] forKey:@"PO_Gender"];
     [newDictionaryForBasicPlan setObject:[dictPOData valueForKey:@"PO_Age"] forKey:@"PO_Age"];
     [newDictionaryForBasicPlan setObject:[dictPOData valueForKey:@"LA_Gender"] forKey:@"LA_Gender"];
+    [newDictionaryForBasicPlan setObject:[dictPOData valueForKey:@"RelWithLA"] forKey:@"RelWithLA"];
     [newDictionaryForBasicPlan setObject:[dictPOData valueForKey:@"LA_Age"] forKey:@"LA_Age"];
 }
 
@@ -2872,6 +2882,7 @@ BOOL isFirstLoad;
         [newDictionaryForBasicPlan setObject:[dictPOData valueForKey:@"PO_Gender"] forKey:@"PO_Gender"];
         [newDictionaryForBasicPlan setObject:[dictPOData valueForKey:@"PO_Age"] forKey:@"PO_Age"];
         [newDictionaryForBasicPlan setObject:[dictPOData valueForKey:@"LA_Gender"] forKey:@"LA_Gender"];
+        [newDictionaryForBasicPlan setObject:[dictPOData valueForKey:@"RelWithLA"] forKey:@"RelWithLA"];
         [newDictionaryForBasicPlan setObject:[dictPOData valueForKey:@"LA_Age"] forKey:@"LA_Age"];
         if ([_modelSIPremium getPremiumCount:[self.requestSINo description]]>0){
             [_modelSIPremium updatePremium:newDictionaryForBasicPlan];
@@ -2889,6 +2900,7 @@ BOOL isFirstLoad;
         [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"PO_Gender"] forKey:@"PO_Gender"];
         [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"PO_Age"] forKey:@"PO_Age"];
         [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"LA_Gender"] forKey:@"LA_Gender"];
+        [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"RelWithLA"] forKey:@"RelWithLA"];
         [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"LA_Age"] forKey:@"LA_Age"];
         [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"SINO"] forKey:@"SINO"];
         [_modelSIPremium savePremium:newDictionaryForBasicPlan];

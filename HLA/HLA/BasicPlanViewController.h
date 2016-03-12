@@ -126,8 +126,11 @@
 @property (nonatomic, assign,readwrite) int PayorIndexNo;
 @property (nonatomic, copy) NSString *PayorSmoker,*FrekuensiPembayaranChecking,*FRekeunsiPembayaranMode,*YearlyIncm;
 @property (nonatomic, copy) NSString *PayorSex;
+@property (nonatomic, copy) NSString *LASex;
 @property (nonatomic, copy) NSString *PayorDOB;
+@property (nonatomic, copy) NSString *RelWithLA;
 @property (nonatomic, assign,readwrite) int PayorAge;
+@property (nonatomic, assign,readwrite) int LAAge;
 @property (nonatomic, copy) NSString *PayorOccpCode;
 @property (nonatomic, assign,readwrite) int secondLAIndexNo;
 @property (nonatomic, copy) NSString *secondLASmoker;
