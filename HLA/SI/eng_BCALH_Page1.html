@@ -13,12 +13,6 @@
                 width:100%;
                 height:565px;
             }
-            #footer1 {
-                width:100%;
- 			   	position: absolute;
-			    bottom: 0;
-				left: 0;
-			}
             thead,table-Summary1 {
                 border: 1px solid black;
             }
@@ -40,8 +34,14 @@
             padding: 0px 0px 0px 0px;
         }
         header1 {
-            font-size:12px;
+            font-size:18px;
             padding: 0px 0px 0px 0px;
+        }
+        footer1 {
+            width:100%;
+            position: absolute;
+            bottom: 0;
+            left: 0;
         }
         tr.rowStyle {
             border-style: solid;
@@ -268,11 +268,11 @@
 				<div id="header">
 					<table border="0" style="border-collapse:separate;border:0px solid black;width:100%;">
 						<tr>
-							<td style="width: 25%"><img src="LogoBCALife.jpg" height="55px"/></td>
+							<td style="width: 25%"><img src="BCAHTMLlogo.png" height="55px"/></td>
 							<td style="width: 45%" valign="top">
 								<table  style="border-collapse:separate;border:1px solid black;width:100%;font-size:11px;text-align: center">
 									<tr>
-										<td style="font-size:11px;font-family: helvetical; text-align: center">
+										<td style="font-size:11px;font-family: Helvetica; text-align: center">
 											Kecuali dinyatakan lain, ilustrasi ini bukan merupakan kontrak asuransi
 										</td>
 									</tr>
@@ -291,26 +291,26 @@
 					<br/>
 					<table style="border-collapse:separate;border:0px solid black;width:100%;" >
 						<tr>
-							<td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;">Nama Tertanggung :</td>
-							<td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;"><label id="HeaderLAName"></label></td>
+							<td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;">Nama Tertanggung</td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;">:&nbsp;&nbsp;&nbsp;<label id="HeaderLAName"></label></td>
 							<td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;">Jenis Kelamin :</td>
-							<td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;"><label id="HeaderLASex"></label></td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;">:&nbsp;&nbsp;&nbsp;<label id="HeaderLASex"></label></td>
 						</tr>
 						<tr>
 							<td style="text-align:left;padding: 0px 0px 0px 0px; ">Usia Masuk</td>
-							<td style="text-align:left;padding: 0px 0px 0px 0px; "><label id="HeaderLADOB"></label></td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; ">:&nbsp;&nbsp;&nbsp;<label id="HeaderLADOB"></label></td>
 							<td style="text-align:left;padding: 0px 0px 0px 0px; ">Mata Uang</td>
-							<td style="text-align:left;padding: 0px 0px 0px 0px; ">Rupiah</td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; ">:&nbsp;&nbsp;&nbsp;Rupiah</td>
 						</tr>
 						<tr>
 							<td style="text-align:left;padding: 0px 0px 0px 0px; ">Pekerjaan</td>
-							<td style="text-align:left;padding: 0px 0px 0px 0px; "><label id="HeaderOccupation"></label></td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; ">:&nbsp;&nbsp;&nbsp;<label id="HeaderOccupation"></label></td>
 							<td style="text-align:left;padding: 0px 0px 0px 0px; ">Masa Pembayaran</td>
-							<td style="text-align:left;padding: 0px 0px 0px 0px; "><label id="HeaderPaymentPeriode"></label></td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; ">:&nbsp;&nbsp;&nbsp;<label id="HeaderPaymentPeriode"></label></td>
 						</tr>
 						<tr>
 							<td style="text-align:left;padding: 0px 0px 0px 0px; ">Frekuensi Pembayaran </td>
-							<td style="text-align:left;padding: 0px 0px 0px 0px; "><label id="HeaderPaymentFrequency"></label></td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; ">:&nbsp;&nbsp;&nbsp;<label id="HeaderPaymentFrequency"></label></td>
 							<td style="text-align:left;padding: 0px 0px 0px 0px; "></td>
 							<td style="text-align:left;padding: 0px 0px 0px 0px; "></td>
 						</tr>
@@ -320,30 +320,30 @@
 					<br/>
 					<table style="border-collapse:separate;border:1px solid black;width:100%;" >
 						<tr>
-							<td style="width: 20%;text-align: center"><u>Jenis Asuransi</u></td>
-							<td style="width:  20%;text-align: center"><u>Nama Produk</u></td>
-							<td style="width: 20%;text-align: center"><u>Masa Pertanggungan</u></td>
-							<td style="width:  20%;text-align: center"><u>Uang Pertanggungan</u></td>
-							<td style="width: 20%;text-align: center"><u>Premi</u></td>
+							<td style="width: 20%;text-align: left"><u>   Jenis Asuransi</u></td>
+							<td style="width:  20%;text-align: left"><u>Nama Produk</u></td>
+							<td style="width: 20%;text-align: left"><u>Masa Pertanggungan</u></td>
+							<td style="width:  20%;text-align: left"><u>Uang Pertanggungan</u></td>
+							<td style="width: 20%;text-align: left"><u>Premi</u></td>
 						</tr>
 						<tr>
-							<td style="text-align: center">Asuransi Dasar</td>
-							<td style="text-align: center">BCA Life Heritage</td>
-							<td style="text-align: center">Hingga umur 99</td>
-							<td style="text-align: center"><label id="BasicSA"></label></td>
-							<td style="text-align: center"><label id="Premi"></label></td>
+							<td style="text-align: left">   Asuransi Dasar</td>
+							<td style="text-align: left">BCA Life Heritage</td>
+							<td style="text-align: left">Hingga umur 99</td>
+							<td style="text-align: left"><label id="BasicSA"></label></td>
+							<td style="text-align: left"><label id="Premi"></label></td>
 						</tr>
 						<tr>
-							<td colspan="5">(Frekuensi Pembayaran, Mata Uang, Masa Pembayaran, Uang Pertanggungan dan Premi tersebut di atas adalah bagian dari SPAJ yang akan digunakan sebagai acuan dalam proses penerbitan polis)</td>
+							<td colspan="5"></br>(Frekuensi Pembayaran, Mata Uang, Masa Pembayaran, Uang Pertanggungan dan Premi tersebut di atas adalah bagian dari SPAJ yang akan digunakan sebagai acuan dalam proses penerbitan polis)</td>
 						</tr>
 						
 					</table>
 					
 					<!--520,430px-->
-					<div style="width:100%;background-color: #fff;vertical-align: top;">
+					<div style="width:100%;background-color: #fff;vertical-align: top;font-size:11px;font-family: Helvetica;">
 						<br/>
-						<b><z>Ringkasan Manfaat</z></b>
-						<p>Untuk keperluan ilustrasi, penjelasan lengkap mengenai Manfaat Asuransi (termasuk syarat-syarat dan pengecualian-pengecualian) tercantum dalam polis, berlaku dan mengikat.</p>
+						<b>Ringkasan Manfaat</b></br>
+						Untuk keperluan ilustrasi, penjelasan lengkap mengenai Manfaat Asuransi (termasuk syarat-syarat dan pengecualian-pengecualian) tercantum dalam polis, berlaku dan mengikat.</br></br>
 						<table  >
 							
 							<!--<tr>
@@ -398,7 +398,6 @@
 						</table>
 						
 					</div>
-					</br>
 				</div>
 				</div>
 				<footer>
@@ -408,23 +407,23 @@
 						<td style="width: 50%">
 							<table  style="border-collapse:separate;border:0px solid black;width:100%;">
 								<tr>
-									<td>Disiapkan oleh</td><td>:</td><td style="width: 60%"><label id="FooterAgentName">Andreas</label></td>
+									<td>Disiapkan oleh</td><td>:</td><td style="width: 60%">&nbsp;&nbsp;<label id="FooterAgentName">Andreas</label></td>
 								</tr>
 								
 								<tr>
-									<td>Tanggal dan jam cetak</td><td>:</td><td><label id="FooterPrintDate">26-Januari-2016</label></td>
+									<td>Tanggal dan jam cetak</td><td>:</td><td>&nbsp;&nbsp;<label id="FooterPrintDate">26-Januari-2016</label></td>
 								</tr>
 								
 								<tr>
-									<td>Versi</td><td>:</td><td><label id="FooterVersion">1.0.000</label></td>
+									<td>Versi</td><td>:</td><td>&nbsp;&nbsp;<label id="FooterVersion">1.0.000</label></td>
 								</tr>
 								
 								<tr>
-									<td>Kode Tenaga Penjual</td><td>:</td><td><label id="FooterAgentCode">HRTG-003</label></td>
+									<td>Kode Tenaga Penjual</td><td>:</td><td>&nbsp;&nbsp;<label id="FooterAgentCode">HRTG-003</label></td>
 								</tr>
 								
 								<tr>
-									<td>Cabang</td><td>:</td><td><label id="FooterBranch">Head Office</label></td>
+									<td>Cabang</td><td>:</td><td>&nbsp;&nbsp;<label id="FooterBranch">Head Office</label></td>
 								</tr>
 								
 								<tr>
@@ -441,15 +440,12 @@
 								<tr>
 									<td>Saya telah memahami dan menyetujui penjelasan yang diberikan atas ilustrasi manfaat asuransi yang diuraikan pada halaman ini.</td>
 								</tr>
-								
-								<tr align="right">
-									<td>Tanda Tangan Pemegang Polis :</td>
+								<tr>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tanda Tangan Pemegang Polis :</td>
 								</tr>
-								
 								<tr>
 									<td><br/></td>
 								</tr>
-								
 								<tr>
 									<td><br/></td>
 								</tr>

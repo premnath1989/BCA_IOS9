@@ -414,6 +414,7 @@
 		6C0B08CE18D1979B00826FC9 /* underwriting in Resources */ = {isa = PBXBuildFile; fileRef = 6C0B08CD18D1979B00826FC9 /* underwriting */; };
 		6CB3126118EE4E2B00A323A4 /* LoginVar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CB3126018EE4E2B00A323A4 /* LoginVar.m */; };
 		A11B845B19C41FDA00A5F38B /* SIRIM_Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = A11B845A19C41FDA00A5F38B /* SIRIM_Logo.png */; };
+		A120EC821C93966E00C8A1C9 /* BCAHTMLlogo.png in Resources */ = {isa = PBXBuildFile; fileRef = A120EC811C93966E00C8A1C9 /* BCAHTMLlogo.png */; };
 		A1442C531C819834009B14C9 /* Icon Brochure & save as-01-01.png in Resources */ = {isa = PBXBuildFile; fileRef = A1442C511C819834009B14C9 /* Icon Brochure & save as-01-01.png */; };
 		A1442C541C819834009B14C9 /* Icon Brochure & save as-01-02.png in Resources */ = {isa = PBXBuildFile; fileRef = A1442C521C819834009B14C9 /* Icon Brochure & save as-01-02.png */; };
 		A15F5A4A199A22BF00FE892D /* P5-Row.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A15F5A49199A22BF00FE892D /* P5-Row.jpg */; };
@@ -1561,6 +1562,7 @@
 		6CB3125F18EE4E2B00A323A4 /* LoginVar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginVar.h; sourceTree = "<group>"; };
 		6CB3126018EE4E2B00A323A4 /* LoginVar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginVar.m; sourceTree = "<group>"; };
 		A11B845A19C41FDA00A5F38B /* SIRIM_Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SIRIM_Logo.png; sourceTree = "<group>"; };
+		A120EC811C93966E00C8A1C9 /* BCAHTMLlogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BCAHTMLlogo.png; sourceTree = "<group>"; };
 		A1442C511C819834009B14C9 /* Icon Brochure & save as-01-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon Brochure & save as-01-01.png"; sourceTree = "<group>"; };
 		A1442C521C819834009B14C9 /* Icon Brochure & save as-01-02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon Brochure & save as-01-02.png"; sourceTree = "<group>"; };
 		A15F5A49199A22BF00FE892D /* P5-Row.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "P5-Row.jpg"; sourceTree = "<group>"; };
@@ -3308,6 +3310,7 @@
 			isa = PBXGroup;
 			children = (
 				43EFEB721C93915A00B9AA2A /* LogoBCALife.jpg */,
+				A120EC811C93966E00C8A1C9 /* BCAHTMLlogo.png */,
 				4374ACFB1C911FF00006522A /* eng_BCALKK_Page1.html */,
 				4374ACFC1C911FF00006522A /* eng_BCALKK_Page2.html */,
 				4321B3321C8B3496006B9402 /* htmlStyle.css */,
@@ -5281,6 +5284,7 @@
 				A1442C541C819834009B14C9 /* Icon Brochure & save as-01-02.png in Resources */,
 				043FDBA41A1AEF14008EDC24 /* eAplicationv3.png in Resources */,
 				043FDBA51A1AEF14008EDC24 /* customer_fact_findv3.png in Resources */,
+				A120EC821C93966E00C8A1C9 /* BCAHTMLlogo.png in Resources */,
 				431F5FE51C6D93E800A9CA6C /* ProspectListingTableViewCell.xib in Resources */,
 				043FDBA61A1AEF14008EDC24 /* client_profilev3.png in Resources */,
 				043FDBA31A1AEF14008EDC24 /* sales_illustrationv3.png in Resources */,
