@@ -32,7 +32,7 @@
 - (UIView *) TableHeaderSetupXY:(NSArray *)columnHeaders positionY:(float)originY positionX:(float)originX{
     TableHeader = [[UIView alloc]initWithFrame:
                    CGRectMake(originX,
-                              originY, ParentView.frame.size.width - 90.0f, 41.0f)];
+                              originY, ParentView.frame.size.width+132.0f, 41.0f)];
     [TableHeader setBackgroundColor:themeColour];
     [self TableHeaderColumn:columnHeaders];
     return TableHeader;
@@ -74,7 +74,7 @@
     }
 }
 
-- (void)TableRowInsert:(NSArray *)dataArray index:(NSInteger)index table:(UITableViewCell*)cell{
+- (void)TableRowInsert:(NSArray *)dataArray index:(NSInteger)index table:(UITableViewCell*)cell color:(UIColor *)textColor{
     int i = 0;
     for(UIView *view in [TableHeader subviews]){
         if([view isKindOfClass:[UILabel class]]){
@@ -89,6 +89,7 @@
                 label1.text= @"";
             }
             label1.tag = 1001+i;
+            label1.textColor = textColor;
             label1.textAlignment = columnLabel.textAlignment;
             label1.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
             [cell.contentView addSubview:label1];

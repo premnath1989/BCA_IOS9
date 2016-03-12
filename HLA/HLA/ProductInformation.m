@@ -54,7 +54,7 @@
 - (void)setupTableColumn{
     //we call the table management to design the table
     ColumnHeaderStyle *ilustrasi = [[ColumnHeaderStyle alloc]init:@" No. Brosur" alignment:NSTextAlignmentLeft button:FALSE width:0.15];
-    ColumnHeaderStyle *nama = [[ColumnHeaderStyle alloc]init:@"Nama Brosur" alignment:NSTextAlignmentCenter button:TRUE width:0.75];
+    ColumnHeaderStyle *nama = [[ColumnHeaderStyle alloc]init:@"Nama Brosur" alignment:NSTextAlignmentCenter button:TRUE width:0.85];
     
     //add it to array
     columnHeadersContent = [NSArray arrayWithObjects:ilustrasi, nama, nil];
@@ -86,7 +86,7 @@
     NSArray *arrayOfData;
     if(row == 0)
         arrayOfData = [NSArray arrayWithObjects:@"1",@"Brochure Produk BCA LIfe Keluargaku",nil];
-    [tableManagement TableRowInsert:arrayOfData index:indexPath.row table:cell];
+    [tableManagement TableRowInsert:arrayOfData index:indexPath.row table:cell color:[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1]];
     
     return cell;
 }
