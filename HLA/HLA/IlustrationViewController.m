@@ -203,8 +203,6 @@
     NSString* htmlString = [NSString stringWithContentsOfFile:HTMLPath encoding:NSUTF8StringEncoding error:nil];
     [webIlustration loadHTMLString:htmlString baseURL:baseURL];
     //[webIlustration loadRequest:[NSURLRequest requestWithURL:targetURL]];
-    [webIlustration setHidden:NO];
-    [viewspinBar setHidden:YES];
 }
 
 -(void)createPDFFile{
@@ -645,6 +643,8 @@
     NSURL *targetURL = [NSURL fileURLWithPath:HTMLPath];
     [webIlustration loadRequest:[NSURLRequest requestWithURL:targetURL]];
     pdfCreated=true;
+    [webIlustration setHidden:NO];
+    [viewspinBar setHidden:YES];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
