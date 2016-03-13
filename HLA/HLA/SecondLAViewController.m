@@ -439,6 +439,9 @@ id dobtemp;
         else{
             [sexSegment setSelectedSegmentIndex:1];
         }
+        
+        DOB = _BtnTanggalLahir.titleLabel.text;
+        [self calculateAge];
     }
 }
 
