@@ -22,6 +22,7 @@
 #import "FMDatabase.h"
 #import "NDHTMLtoPDF.h"
 
+#import "ReaderViewController.h"
 
 #import "DBController.h"
 #import "DataTable.h"
@@ -39,7 +40,7 @@
 -(void)showReportCantDisplay:(NSString*)type;
 @end
 
-@interface SIMenuViewController : UIViewController <FSTabBarControllerDelegate,NewLAViewControllerDelegate,PayorViewControllerDelegate,SecondLAViewControllerDelegate,BasicPlanViewControllerDelegate,RiderViewControllerDelegate,HLViewControllerDelegate, NDHTMLtoPDFDelegate> {
+@interface SIMenuViewController : UIViewController <FSTabBarControllerDelegate,NewLAViewControllerDelegate,PayorViewControllerDelegate,SecondLAViewControllerDelegate,BasicPlanViewControllerDelegate,RiderViewControllerDelegate,HLViewControllerDelegate, NDHTMLtoPDFDelegate, ReaderViewControllerDelegate> {
     
     int getTerm;
 	UIActivityIndicatorView *spinner_SI;
@@ -222,5 +223,7 @@
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
 -(void)dismissEApp;
 @property (nonatomic, strong) NSMutableDictionary *riderCode;
+- (IBAction)brochureTapped:(UIButton *)sender;
+- (IBAction)SaveTapped:(UIButton *)sender;
 
 @end

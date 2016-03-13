@@ -178,11 +178,17 @@
                                         <rect key="frame" x="28" y="0.0" width="70" height="70"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="Icon Brochure &amp; save as-01-03.png"/>
+                                        <connections>
+                                            <action selector="brochureTapped:" destination="geq-zo-2Ih" eventType="touchUpInside" id="ia4-tb-0du"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="voa-jX-hEh">
                                         <rect key="frame" x="106" y="0.0" width="70" height="70"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="Icon Brochure &amp; save as-01-04.png"/>
+                                        <connections>
+                                            <action selector="SaveTapped:" destination="geq-zo-2Ih" eventType="touchUpInside" id="Pfc-XB-2Si"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
