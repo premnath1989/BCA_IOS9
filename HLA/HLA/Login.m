@@ -238,6 +238,7 @@ static NSString *labelVers;
         }else{
             UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Periksa lagi koneksi internet anda" message:@"" delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
             [alert show];
+            [spinnerLoading stopLoadingSpinner];
         }
     }
     for(id bodyPart in responseBodyParts) {
@@ -251,6 +252,7 @@ static NSString *labelVers;
             NSString* errorMesg = ((SOAPFault *)bodyPart).simpleFaultString;
             UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Periksa lagi koneksi internet anda" message:errorMesg delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
             [alert show];
+            [spinnerLoading stopLoadingSpinner];
         }
         
         else if([bodyPart isKindOfClass:[AgentWS_VersionCheckerResponse class]]) {

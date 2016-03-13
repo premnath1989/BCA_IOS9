@@ -360,22 +360,44 @@ bool WPTPD30RisDeleted = FALSE;
 	[super viewDidDisappear:animated];
 }
 
--(void)keyboardDidShow:(NSNotificationCenter *)notification
+-(void)keyboardDidShow:(NSNotification *)notification
 {
-    self.myScrollView.frame = CGRectMake(0, 44, 775, 960-264);
-    self.myScrollView.contentSize = CGSizeMake(775, 960);
+    NSDictionary* info = [notification userInfo];
+    CGSize keyboardSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    CGPoint buttonOrigin = _totalPremiWithLoadingField.frame.origin;
+    CGFloat buttonHeight = _totalPremiWithLoadingField.frame.size.height;
+    CGRect visibleRect = self.view.frame;
     
-    CGRect textFieldRect = [activeField frame];
-    textFieldRect.origin.y += 10;
-    [self.myScrollView scrollRectToVisible:textFieldRect animated:YES];
+    visibleRect.size.height -= keyboardSize.height;
+    
+    if (keyboardSize.height-buttonOrigin.y <= 0 && ![yearlyIncomeField isEditing]){
+        CGPoint scrollPoint = CGPointMake(0.0, visibleRect.size.height - buttonOrigin.y);
+        [self.myScrollView setContentOffset:scrollPoint animated:YES];
+    }
 }
+
 
 -(void)keyboardDidHide:(NSNotificationCenter *)notification
 {
-    minSALabel.text = @"";
-    maxSALabel.text = @"";    
-    self.myScrollView.frame = CGRectMake(0, 44, 775, 960);
+    [self.myScrollView setContentOffset:CGPointZero animated:YES];
 }
+
+//-(void)keyboardDidShow:(NSNotificationCenter *)notification
+//{
+//    self.myScrollView.frame = CGRectMake(0, 44, 775, 960-264);
+//    self.myScrollView.contentSize = CGSizeMake(775, 960);
+//    
+//    CGRect textFieldRect = [activeField frame];
+//    textFieldRect.origin.y += 10;
+//    [self.myScrollView scrollRectToVisible:textFieldRect animated:YES];
+//}
+//
+//-(void)keyboardDidHide:(NSNotificationCenter *)notification
+//{
+//    minSALabel.text = @"";
+//    maxSALabel.text = @"";    
+//    self.myScrollView.frame = CGRectMake(0, 44, 775, 960);
+//}
 
 -(void)textFieldDidChange:(UITextField*)textField
 {
