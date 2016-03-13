@@ -43,6 +43,7 @@ NSString *gNameSecond = @"";
 @synthesize dobPopover = _dobPopover;
 @synthesize btnDOB, btnOccp;
 @synthesize saved2ndLA,requesteProposalStatus, EAPPorSI, outletDone, outletProspect, outletQQ, outletEAPP;
+@synthesize navigationBar;
 
 id temp;
 id dobtemp;
@@ -53,6 +54,11 @@ id dobtemp;
     appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate ];
 	
     self.view.backgroundColor=[UIColor whiteColor];//[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg10.jpg"]];
+    
+    
+    NSMutableDictionary *newAttributes = [[NSMutableDictionary alloc] init];
+    [newAttributes setObject:[UIFont systemFontOfSize:18] forKey:UITextAttributeFont];
+    [self.navigationBar setTitleTextAttributes:newAttributes];
     
     NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docsDir = [dirPaths objectAtIndex:0];

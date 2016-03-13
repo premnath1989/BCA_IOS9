@@ -82,6 +82,7 @@
 @property(nonatomic , retain) NSString *getSINo;
 @property (nonatomic, copy) NSString *getCommDate,*msgAge;
 @property (nonatomic,strong) id requesteProposalStatus;
+@property (weak, nonatomic) IBOutlet UINavigationBar *navigationBar;
 //--
 
 @property (strong, nonatomic) IBOutlet UIButton *BtnTanggalLahir;

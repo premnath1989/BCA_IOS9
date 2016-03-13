@@ -238,6 +238,7 @@
 @property(nonatomic , retain) NSMutableArray *ReportFromAge;
 @property(nonatomic , retain) NSMutableArray *ReportToAge;
 @property (nonatomic,assign,readwrite) BOOL fromReport;
+@property (weak, nonatomic) IBOutlet UINavigationBar *navigationBar;
 
 //added by faiz
 

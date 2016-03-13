@@ -68,6 +68,7 @@
 @synthesize labelPremiumPay, requestEDD;
 @synthesize planChoose;
 @synthesize isFirstSaved;
+@synthesize navigationBar;
 
 #pragma mark - Cycle View
 
@@ -78,6 +79,10 @@ bool WPTPD30RisDeleted = FALSE;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    NSMutableDictionary *newAttributes = [[NSMutableDictionary alloc] init];
+    [newAttributes setObject:[UIFont systemFontOfSize:18] forKey:UITextAttributeFont];
+    [self.navigationBar setTitleTextAttributes:newAttributes];
     
     appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate ];
 	

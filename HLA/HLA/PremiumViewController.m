@@ -38,6 +38,7 @@
 //@synthesize simenu = _simenu;
 @synthesize gstPremAnn, gstPremHalf, gstPremQuar, gstPremMonth, Highlight;
 @synthesize navItem;
+@synthesize navigationBar;
 +(NSString *)getMsgTypeL100
 {
     return @"MsgTypeL100";
@@ -75,6 +76,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    NSMutableDictionary *newAttributes = [[NSMutableDictionary alloc] init];
+    [newAttributes setObject:[UIFont systemFontOfSize:18] forKey:UITextAttributeFont];
+    [self.navigationBar setTitleTextAttributes:newAttributes];
+    
     [self calculateReport];
 }
 

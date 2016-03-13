@@ -21,6 +21,7 @@
 @end
 
 @implementation IlustrationViewController
+@synthesize navigationBar;
 
 -(void)viewWillAppear:(BOOL)animated{
     [webIlustration setHidden:YES];
@@ -41,6 +42,9 @@
     modelAgentProfile=[[ModelAgentProfile alloc]init];
     modelRate = [[RateModel alloc]init];
     
+    NSMutableDictionary *newAttributes = [[NSMutableDictionary alloc] init];
+    [newAttributes setObject:[UIFont systemFontOfSize:18] forKey:UITextAttributeFont];
+    [self.navigationBar setTitleTextAttributes:newAttributes];
     
     email = [[UIBarButtonItem alloc] initWithTitle:@"Email" style:UIBarButtonItemStyleBordered target:self action:@selector(email)];
     printSI = [[UIBarButtonItem alloc] initWithTitle:@"Print" style:UIBarButtonItemStyleBordered target:self action:@selector(printSI)];

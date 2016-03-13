@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15C50" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
@@ -3265,6 +3265,7 @@
                         <outlet property="btnOccp" destination="AOj-LW-GaO" id="jnd-Vk-uTU"/>
                         <outlet property="btnProspect" destination="hPv-sx-1L3" id="FUE-VN-9sF"/>
                         <outlet property="btnToEAPP" destination="I13-rd-bsh" id="YmJ-Sc-4e6"/>
+                        <outlet property="navigationBar" destination="xsw-jh-SMI" id="Keq-o3-Olg"/>
                         <outlet property="outletDone" destination="pza-PN-3E0" id="GeI-Pb-Dd7"/>
                         <outlet property="quickQuoteFlag" destination="MVW-Ya-yW4" id="BD5-wJ-aGG"/>
                         <outlet property="scrollLA" destination="9q7-6a-XHh" id="Toc-Xq-vYl"/>
@@ -3888,6 +3889,7 @@
                         <outlet property="maxSALabel" destination="DMc-5N-1wy" id="WLy-hR-hUJ"/>
                         <outlet property="minSALabel" destination="E7c-JL-bkP" id="hgr-hk-7CJ"/>
                         <outlet property="myScrollView" destination="9N3-rL-EtV" id="6d1-oJ-s1O"/>
+                        <outlet property="navigationBar" destination="FSd-Tl-JeS" id="pth-Ed-cgf"/>
                         <outlet property="outletDone" destination="GzP-st-cHH" id="525-4R-wMP"/>
                         <outlet property="outletEAPP" destination="8bP-AK-DOc" id="F6K-4y-PLq"/>
                         <outlet property="parAccField" destination="vLg-7F-VFk" id="bwC-mv-3uM"/>
@@ -4836,6 +4838,7 @@
                         <outlet property="lblTotalSekaligus" destination="Gyw-kj-wbn" id="qBY-lt-rdW"/>
                         <outlet property="lblTotalTahunan" destination="aQa-BJ-N9V" id="Tcc-mC-0BK"/>
                         <outlet property="navItem" destination="Grc-rY-MoE" id="V6R-JL-dkc"/>
+                        <outlet property="navigationBar" destination="XPc-vk-TS1" id="0H9-ma-2wI"/>
                         <outlet property="viewSubTotal" destination="nbb-Ul-SOP" id="07U-aW-565"/>
                     </connections>
                 </viewController>

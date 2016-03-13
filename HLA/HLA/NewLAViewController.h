@@ -125,6 +125,8 @@
 @property (nonatomic, retain) UIPopoverController *OccupationListPopover;
 @property (retain, nonatomic) IBOutlet UIScrollView *myScrollView;
 @property (nonatomic, retain) UIPopoverController *popOverController;
+@property (weak, nonatomic) IBOutlet UINavigationBar *navigationBar;
+
 //LA Field
 @property (retain, nonatomic) IBOutlet UITextField *LANameField;
 @property (retain, nonatomic) IBOutlet UISegmentedControl *sexSegment;

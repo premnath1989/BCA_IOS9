@@ -66,6 +66,7 @@
 @synthesize LAHbgTertanggung;
 @synthesize LAProductName,Relationship;
 @synthesize quickQuoteFlag;
+@synthesize navigationBar;
 
 id temp;
 id dobtemp;
@@ -79,6 +80,10 @@ id dobtanngal;
     
     outletDone.enabled=TRUE;
     btnProspect.enabled = NO;
+    
+    NSMutableDictionary *newAttributes = [[NSMutableDictionary alloc] init];
+    [newAttributes setObject:[UIFont systemFontOfSize:18] forKey:UITextAttributeFont];
+    [self.navigationBar setTitleTextAttributes:newAttributes];
     
     NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docsDir = [dirPaths objectAtIndex:0];

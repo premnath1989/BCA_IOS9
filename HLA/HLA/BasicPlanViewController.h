@@ -193,6 +193,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *totalPremiWithLoadingField;
 @property (strong, nonatomic) IBOutlet UIButton *masaPembayaranButton;
 @property (strong, nonatomic) IBOutlet UIButton *frekuensiPembayaranButton;
+@property (weak, nonatomic) IBOutlet UINavigationBar *navigationBar;
 
 -(NSMutableDictionary *)setDataBasicPlan;
 - (IBAction)tempNext:(id)sender;

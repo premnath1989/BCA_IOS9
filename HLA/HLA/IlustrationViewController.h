@@ -48,4 +48,5 @@
 @property (retain, nonatomic) NSMutableDictionary* dictionaryMasterForInsert;
 @property (retain, nonatomic) NSMutableDictionary* dictionaryForBasicPlan;
 @property (retain, nonatomic) NSMutableDictionary* dictionaryForAgentProfile;
+@property (weak, nonatomic) IBOutlet UINavigationBar *navigationBar;
 @end
