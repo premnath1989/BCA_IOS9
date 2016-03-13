@@ -516,7 +516,7 @@ bool RegDatehandling;
             textView.delegate=self;
             [textView setFont:font];
             
-            textView.textContainerInset = UIEdgeInsetsMake(0, 4, 0, 20);
+            textView.textContainerInset = UIEdgeInsetsMake(5, 4, 0, 20);
         }
     }
     
@@ -2471,7 +2471,14 @@ bool RegDatehandling;
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"dd/MM/yyyy"];
-    NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
+    NSString *dateString;
+    if ([outletDOB.titleLabel.text length]>0){
+        dateString= outletDOB.titleLabel.text;
+    }
+    else{
+        dateString= [dateFormatter stringFromDate:[NSDate date]];
+    }
+    
     
     /*outletDOB.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     
@@ -2511,7 +2518,14 @@ bool RegDatehandling;
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"dd/MM/yyyy"];
-    NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
+    NSString *dateString;
+    if ([outletExpiryDate.titleLabel.text length]>0){
+        dateString= outletExpiryDate.titleLabel.text;
+    }
+    else{
+        dateString= [dateFormatter stringFromDate:[NSDate date]];
+    }
+
     
     if (_SIDate == Nil) {
         UIStoryboard *clientProfileStoryBoard = [UIStoryboard storyboardWithName:@"ClientProfileStoryboard" bundle:nil];

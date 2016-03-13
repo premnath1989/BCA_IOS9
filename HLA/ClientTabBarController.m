@@ -107,13 +107,13 @@ int rrr;
         // add new view controller to hierarchy
         UIViewController *selectedViewController = [self.viewControllers objectAtIndex:selectedIndex];
         
-        if (selectedIndex == 0) {
+        if (selectedIndex == 0 ||selectedIndex == 3) {
             
             [self presentViewController:selectedViewController animated:NO completion:Nil];
             [self updateTabBar];
         }
         else {
-            if (selectedIndex == 1||selectedIndex == 2||selectedIndex == 3) {
+            if (selectedIndex == 1||selectedIndex == 2) {
                 NSLog(@"selected index %i",selectedIndex);
                 [self addChildViewController:selectedViewController];
                 selectedViewController.view.frame = CGRectMake(self.tabBarWidth,

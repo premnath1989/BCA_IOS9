@@ -508,7 +508,7 @@ NSMutableArray *DelGroupArr;
             textView.delegate=self;
             [textView setFont:font];
             
-            textView.textContainerInset = UIEdgeInsetsMake(0, 4, 0, 20);
+            textView.textContainerInset = UIEdgeInsetsMake(5, 4, 0, 20);
         }
         if ([view isKindOfClass:[UIButton class]]) {
             UIButton *button = (UIButton *)view;
@@ -3190,7 +3190,7 @@ NSMutableArray *DelGroupArr;
         checked = YES;
     }
 
-    if ([[pp.OfficeAddressCountry uppercaseString] isEqualToString:@"INDONESIA"]){
+    if (([[pp.OfficeAddressCountry uppercaseString] isEqualToString:@"INDONESIA"])||([[pp.OfficeAddressCountry uppercaseString] isEqualToString:@""])){
         [_switchCountryOffice setOn:NO];
         [btnOfficeCountry setHidden:YES];
         [txtOfficeCountry setHidden:NO];
