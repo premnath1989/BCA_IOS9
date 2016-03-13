@@ -91,7 +91,7 @@
             label1.tag = 1001+i;
             label1.textColor = textColor;
             label1.textAlignment = columnLabel.textAlignment;
-            label1.font = [UIFont fontWithName:@"TreBuchet MS" size:16];
+            label1.font = [UIFont fontWithName:@"BPreplay" size:16];
             [cell.contentView addSubview:label1];
             i++;
         }

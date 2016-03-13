@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnHome;
 @property (weak, nonatomic) IBOutlet UIButton *btnPDF;
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
+@property (weak, nonatomic) IBOutlet UINavigationBar *navigationBar;
 
 - (IBAction)goHome:(id)sender;
 - (IBAction)seePDF:(id)sender;

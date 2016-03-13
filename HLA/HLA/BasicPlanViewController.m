@@ -1377,6 +1377,14 @@ bool WPTPD30RisDeleted = FALSE;
         
     }
     
+    NSLog(@"uang dasar %@", result);
+    
+    if([result hasSuffix:@","]){
+        NSString *str = result;
+        result = [str substringToIndex:[str length]-1];
+    }
+        
+    
     if(_basicPremiField.text.length==0)
     {
         _basicPremiField.text = @"";

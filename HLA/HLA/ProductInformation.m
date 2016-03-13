@@ -17,11 +17,16 @@
 @synthesize btnHome;
 @synthesize btnPDF;
 @synthesize myTableView;
+@synthesize navigationBar;
 
 - (void)viewDidLoad{
     [super viewDidLoad];
     
     [self createDirectory];
+    
+    NSMutableDictionary *newAttributes = [[NSMutableDictionary alloc] init];
+    [newAttributes setObject:[UIFont systemFontOfSize:18] forKey:UITextAttributeFont];
+    [self.navigationBar setTitleTextAttributes:newAttributes];
     
     themeColour = [UIColor colorWithRed:0.0f/255.0f green:160.0f/255.0f blue:180.0f/255.0f alpha:1];
     fontType = [UIFont fontWithName:@"BPreplay" size:16.0f];
