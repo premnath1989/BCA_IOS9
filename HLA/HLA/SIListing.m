@@ -792,8 +792,14 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
 #pragma mark - void added by faiz
 -(void)getDataForTable{
     NSDictionary *dictIlustrationData;
+    
     if (([txtSINO.text length]>0)||([txtLAName.text length]>0)||([DBDateFrom2 length]>0)||([DBDateTo2 length]>0)){
-        dictIlustrationData=[[NSDictionary alloc]initWithDictionary:[_modelSIMaster searchSIListingByName:txtSINO.text POName:txtLAName.text Order:@"sim.CreatedDate" Method:@"Desc" DateFrom:DBDateFrom2 DateTo:DBDateTo2]];
+        NSMutableString* dateFrom=[[NSMutableString alloc]initWithString:DBDateFrom2];
+        NSMutableString* dateTo=[[NSMutableString alloc]initWithString:DBDateTo2];
+        [dateFrom appendString:@" 00:00:00"];
+        [dateTo appendString:@" 24:00:00"];
+
+        dictIlustrationData=[[NSDictionary alloc]initWithDictionary:[_modelSIMaster searchSIListingByName:txtSINO.text POName:txtLAName.text Order:@"sim.CreatedDate" Method:@"Desc" DateFrom:dateFrom DateTo:dateTo]];
     }
     else{
         dictIlustrationData=[[NSDictionary alloc]initWithDictionary:[_modelSIMaster getIlustrationata]];
@@ -1483,7 +1489,7 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
     NSDate *date = [df dateFromString: strDate]; 
     
     df = [[[NSDateFormatter alloc] init] init];
-    [df setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+    [df setDateFormat:@"yyyy-MM-dd"];
     
     NSString *convertedString = [df stringFromDate:date];
     
