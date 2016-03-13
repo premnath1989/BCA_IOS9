@@ -924,21 +924,20 @@ bool WPTPD30RisDeleted = FALSE;
     
     double test = PaymentMode * RatesInt;
     
+    double test2 = (test * BasisSumAssured)/1000;
+    
+    
+    
     TotalA = total * test;
     
     
-    [_basicPremiField setText:[NSString stringWithFormat:@"%2f", TotalA]];
+    [_basicPremiField setText:[NSString stringWithFormat:@"%2f", test2]];
     [self PremiDasarIncomeChange:_basicPremiField.text];
 }
 
 -(void)PremiDasarActB
 {
     
-    if([RelWithLA isEqualToString:@"SELF"])
-    {
-        PayorSex = LASex;
-        PayorAge = LAAge;
-    }
     
     NSString*AnsuransiDasarQuery;
     NSArray *paths2 = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -948,9 +947,6 @@ bool WPTPD30RisDeleted = FALSE;
     FMDatabase *database = [FMDatabase databaseWithPath:path2];
     [database open];
     FMResultSet *results;
-    AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM EMRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",PayorSex,@"HRT",premiType,PayorAge];
-    NSLog(@"query %@",AnsuransiDasarQuery);
-    results = [database executeQuery:AnsuransiDasarQuery];
     
     NSString*RatesPremiumRate;
     double PaymentMode;
@@ -959,17 +955,46 @@ bool WPTPD30RisDeleted = FALSE;
         NSLog(@"Could not open db.");
     }
     
-    while([results next])
+    if([RelWithLA isEqualToString:@"SELF"])
     {
-        if ([PayorSex isEqualToString:@"Male"]||[PayorSex isEqualToString:@"MALE"]){
-            RatesPremiumRate  = [results stringForColumn:@"Male"];
-        }
-        else{
-            RatesPremiumRate  = [results stringForColumn:@"Female"];
-        }
+        AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM EMRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",PayorSex,@"HRT",premiType,PayorAge];
+        NSLog(@"query %@",AnsuransiDasarQuery);
+        results = [database executeQuery:AnsuransiDasarQuery];
         
+        while([results next])
+        {
+            if ([PayorSex isEqualToString:@"Male"]||[PayorSex isEqualToString:@"MALE"]){
+                RatesPremiumRate  = [results stringForColumn:@"Male"];
+            }
+            else{
+                RatesPremiumRate  = [results stringForColumn:@"Female"];
+            }
+            
+        }
+
+
+    }
+    else
+    {
+        AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM EMRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",LASex,@"HRT",premiType,LAAge];
+        NSLog(@"query %@",AnsuransiDasarQuery);
+        results = [database executeQuery:AnsuransiDasarQuery];
+        
+        while([results next])
+        {
+            if ([LASex isEqualToString:@"Male"]||[LASex isEqualToString:@"MALE"]){
+                RatesPremiumRate  = [results stringForColumn:@"Male"];
+            }
+            else{
+                RatesPremiumRate  = [results stringForColumn:@"Female"];
+            }
+            
+        }
+
+
     }
     
+
     if ([FRekeunsiPembayaranMode isEqualToString:@"Pembayaran Sekaligus"]||[FRekeunsiPembayaranMode isEqualToString:@"Tahunan"])
     {
         PaymentMode = 1;
@@ -979,7 +1004,12 @@ bool WPTPD30RisDeleted = FALSE;
         PaymentMode = 0.1;
     }
     
-    double RatesInt = [RatesPremiumRate doubleValue];
+    double RatesInt0 = [RatesPremiumRate doubleValue];
+    
+    float percent = [_extraPremiPercentField.text floatValue] / 100.0f;
+    
+    double RatesInt = percent * RatesInt0;
+    
     long long totalDivide =(BasisSumAssured/1000);
     
     double valueofTotal =(PaymentMode * RatesInt);
@@ -987,9 +1017,13 @@ bool WPTPD30RisDeleted = FALSE;
     double total =(totalDivide * valueofTotal);
   //  [_basicPremiField setText:[NSString stringWithFormat:@"%d", total]];
 
-    int masaExtraPremiBTotal =[_masaExtraPremiField.text intValue];
+    int masaExtraPremiBTotal =[_masaExtraPremiField.text intValue];\
     
-    double totalB = total * masaExtraPremiBTotal;
+     double totalB = total * masaExtraPremiBTotal;
+    
+    
+    
+    
     double TotalAB = TotalA + totalB;
     
     NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
@@ -1361,20 +1395,21 @@ bool WPTPD30RisDeleted = FALSE;
     
     double entryFieldFloat = [_basicPremiField.text doubleValue];
     
-    if ([_basicPremiField.text rangeOfString:@""].length == 3) {
+    if ([_basicPremiField.text rangeOfString:@""].length == 3)
+    {
         formatter.alwaysShowsDecimalSeparator = YES;
-        result =[formatter stringFromNumber:[NSNumber numberWithDouble:entryFieldFloat]];
-        result = [result stringByAppendingFormat:@"00"];
-        
-    } else  if ([_basicPremiField.text rangeOfString:@"."].length == 1) {
-        formatter.alwaysShowsDecimalSeparator = YES;
-        result =[formatter stringFromNumber:[NSNumber numberWithDouble:entryFieldFloat]];
-        
-    } else if ([_basicPremiField.text rangeOfString:@"."].length != 1) {
-        formatter.alwaysShowsDecimalSeparator = NO;
         result =[formatter stringFromNumber:[NSNumber numberWithDouble:entryFieldFloat]];
         result = [result stringByAppendingFormat:@""];
         
+    } else  if ([_basicPremiField.text rangeOfString:@"."].length == 1)
+    {
+        formatter.alwaysShowsDecimalSeparator = NO;
+        result =[formatter stringFromNumber:[NSNumber numberWithDouble:entryFieldFloat]];
+    } else if ([_basicPremiField.text rangeOfString:@"."].length != 1)
+    {
+        formatter.alwaysShowsDecimalSeparator = NO;
+        result =[formatter stringFromNumber:[NSNumber numberWithDouble:entryFieldFloat]];
+        result = [result stringByAppendingFormat:@""];
     }
     
     NSLog(@"uang dasar %@", result);
