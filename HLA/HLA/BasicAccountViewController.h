@@ -126,6 +126,7 @@
 //for SINo
 @property (nonatomic, assign,readwrite) int SILastNo;
 @property (nonatomic, assign,readwrite) int CustLastNo;
+@property (nonatomic, copy) NSString *SalesIlustrationDate;
 @property (nonatomic, copy) NSString *SIDate;
 @property (nonatomic, copy) NSString *CustDate;
 

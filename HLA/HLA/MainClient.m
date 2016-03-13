@@ -53,7 +53,7 @@
     MainScreen *mainScreen= [cpStoryboard instantiateViewControllerWithIdentifier:@"Main"];
     mainScreen.tradOrEver = @"TRAD";
     mainScreen.modalPresentationStyle = UIModalPresentationFullScreen;
-    mainScreen.IndexTab = appdlg.SIListingIndex;
+    mainScreen.IndexTab = appdlg.NewSIIndex;
     mainScreen.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"New SI" image:[UIImage imageNamed:@"btn_newSI_off.png"] tag:0];
     [controllersToAdd addObject:mainScreen];
     viewControllers = [NSArray arrayWithArray:controllersToAdd];
