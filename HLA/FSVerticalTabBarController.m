@@ -136,13 +136,14 @@ BOOL isBusy;
                     [alert show];
                     alert = Nil;
                 } else {
-                    [self addChildViewController:selectedViewController];
+                    /*[self addChildViewController:selectedViewController];
                     selectedViewController.view.frame = CGRectMake(self.tabBarWidth,
                                                                    0,
                                                                    self.view.bounds.size.width-self.tabBarWidth,
                                                                    self.view.bounds.size.height);
                     selectedViewController.view.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
-                    [self.view addSubview:selectedViewController.view];
+                    [self.view addSubview:selectedViewController.view];*/
+                    [self presentViewController:selectedViewController animated:NO completion:Nil];
                     
                     [self updateTabBar];
                 }

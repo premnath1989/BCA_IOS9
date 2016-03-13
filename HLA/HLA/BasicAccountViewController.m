@@ -89,7 +89,7 @@ double PrevBasicPrem;
 @synthesize ageClient,idPay,idProf,SINo,OccpClass, OccpCode, PayorAge, PayorDOB, PayorIndexNo;
 @synthesize PayorOccpCode, PayorSex, PayorSmoker,secondLAAge,secondLADOB,secondLAIndexNo,secondLAOccpCode;
 @synthesize secondLASex,secondLASmoker, minSA, minPremium, getPolicyTerm, getSINo, getSumAssured;
-@synthesize GenderPP, SIDate, SILastNo, CustDate, CustLastNo, LACustCode, PYCustCode, planChoose, OccpCodePP, NamePP;
+@synthesize GenderPP, SalesIlustrationDate, SILastNo, CustDate, CustLastNo, LACustCode, PYCustCode, planChoose, OccpCodePP, NamePP;
 @synthesize DOBPP, IndexNo, termCover, secondLACustCode, getHL, getHLPct,getHLPctTerm,getHLTerm;
 @synthesize getBumpMode, getBasicPrem, getPlanCode, getCommFrom, getFor,getRTUP, requestSexLA, getSexLA;
 @synthesize requestSmokerLA, getSmokerLA, requestPlanCommDate, getPlanCommDate, requestDOB, getDOB;
@@ -6659,7 +6659,6 @@ id AppsVersion;
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"dd/MM/yyyy"];
     NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
-    
     if (sqlite3_open([databasePath UTF8String], &contactDB) == SQLITE_OK)
     {
         NSString *querySQL = [NSString stringWithFormat:
@@ -6672,13 +6671,15 @@ id AppsVersion;
                 SILastNo = sqlite3_column_int(statement, 0);
                 
                 const char *lastDate = (const char *)sqlite3_column_text(statement, 1);
-                SIDate = lastDate == NULL ? nil : [[NSString alloc] initWithUTF8String:lastDate];
+                SalesIlustrationDate=lastDate == NULL ? nil : [[NSString alloc] initWithUTF8String:lastDate];
+                //SIDate = lastDate == NULL ? nil : [[NSString alloc] initWithUTF8String:lastDate];
                 
-                NSLog(@"LastSINo:%d SIDate:%@",SILastNo,SIDate);
+                //NSLog(@"LastSINo:%d SIDate:%@",SILastNo,SIDate);
                 
             } else {
                 SILastNo = 0;
-                SIDate = dateString;
+                SalesIlustrationDate=dateString;
+                //SIDate = dateString;
             }
             sqlite3_finalize(statement);
         }

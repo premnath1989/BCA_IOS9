@@ -45,7 +45,7 @@
 @synthesize MOP,yearlyIncome,advanceYearlyIncome,basicRate,cashDividend,TotalA;
 @synthesize getSINo,getSumAssured,getPolicyTerm,getHL,getHLTerm,getTempHL,getTempHLTerm;
 @synthesize planCode,requestOccpCode,dataInsert,basicBH,basicPH,basicLa2ndH;
-@synthesize SINo,LACustCode,PYCustCode,SIDate,SILastNo,CustDate,CustLastNo,BasisSumAssured;
+@synthesize SINo,LACustCode,PYCustCode,SalesIlustrationDate,SILastNo,CustDate,CustLastNo,BasisSumAssured;
 @synthesize NamePP,DOBPP,OccpCodePP,GenderPP,secondLACustCode,IndexNo,PayorIndexNo,secondLAIndexNo;
 @synthesize delegate = _delegate;
 @synthesize requestAge,OccpCode,requestIDPay,requestIDProf,idPay,idProf,annualMedRiderSum,halfMedRiderSum,quarterMedRiderSum;
@@ -2641,36 +2641,32 @@ bool WPTPD30RisDeleted = FALSE;
 
 #pragma mark - Handle DB
 
--(void)getRunningSI
-{
+-(void)getRunningSI {
     sqlite3_stmt *statement;
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"dd/MM/yyyy"];
     NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
     
-    if (sqlite3_open([databasePath UTF8String], &contactDB) == SQLITE_OK)
-    {
+    if (sqlite3_open([databasePath UTF8String], &contactDB) == SQLITE_OK) {
         NSString *querySQL = [NSString stringWithFormat:
                               @"SELECT LastNo,LastUpdated FROM Adm_TrnTypeNo WHERE TrnTypeCode=\"SI\" AND LastUpdated like \"%%%@%%\"", dateString];
-        if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK)
-        {
-            if (sqlite3_step(statement) == SQLITE_ROW)
-            {
+        if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK) {
+            if (sqlite3_step(statement) == SQLITE_ROW) {
                 SILastNo = sqlite3_column_int(statement, 0);
-                
                 const char *lastDate = (const char *)sqlite3_column_text(statement, 1);
-                SIDate = lastDate == NULL ? nil : [[NSString alloc] initWithUTF8String:lastDate];
-                
-            } else {
+                SalesIlustrationDate = lastDate == NULL ? nil : [[NSString alloc] initWithUTF8String:lastDate];
+            }
+            else{
                 SILastNo = 0;
-                SIDate = dateString;
+                SalesIlustrationDate = dateString;
             }
             sqlite3_finalize(statement);
         }
         sqlite3_close(contactDB);
     }
 }
+
 
 -(void)getRunningCustCode
 {
