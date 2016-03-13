@@ -760,7 +760,8 @@ BOOL isFirstLoad;
     f.numberStyle = NSNumberFormatterDecimalStyle;
     NSNumber *myNumber = [f numberFromString:[newDictionaryForBasicPlan valueForKey:@"Sum_Assured"]];
     [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"ProductCode"] forKey:@"ProductCode"];
-    [newDictionaryForBasicPlan setObject:myNumber forKey:@"Number_Sum_Assured"];
+    if(myNumber != nil)
+        [newDictionaryForBasicPlan setObject:myNumber forKey:@"Number_Sum_Assured"];
     [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"PO_Gender"] forKey:@"PO_Gender"];
     [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"PO_Age"] forKey:@"PO_Age"];
     [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"LA_Gender"] forKey:@"LA_Gender"];
@@ -2833,7 +2834,8 @@ BOOL isFirstLoad;
     
     [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"ProductCode"] forKey:@"ProductCode"];
     [newDictionaryForBasicPlan setObject:[self.requestSINo description] forKey:@"SINO"];
-    [newDictionaryForBasicPlan setObject:myNumber forKey:@"Number_Sum_Assured"];
+    if(myNumber != nil)
+        [newDictionaryForBasicPlan setObject:myNumber forKey:@"Number_Sum_Assured"];
     [newDictionaryForBasicPlan setObject:[dictPOData valueForKey:@"PO_Gender"] forKey:@"PO_Gender"];
     [newDictionaryForBasicPlan setObject:[dictPOData valueForKey:@"PO_Age"] forKey:@"PO_Age"];
     [newDictionaryForBasicPlan setObject:[dictPOData valueForKey:@"LA_Gender"] forKey:@"LA_Gender"];
@@ -2917,7 +2919,8 @@ BOOL isFirstLoad;
         NSNumber *myNumber = [f numberFromString:[newDictionaryForBasicPlan valueForKey:@"Sum_Assured"]];
         [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"ProductCode"] forKey:@"ProductCode"];
         [newDictionaryForBasicPlan setObject:[self.requestSINo description] forKey:@"SINO"];
-        [newDictionaryForBasicPlan setObject:myNumber forKey:@"Number_Sum_Assured"];
+        if(myNumber != nil)
+            [newDictionaryForBasicPlan setObject:myNumber forKey:@"Number_Sum_Assured"];
         [newDictionaryForBasicPlan setObject:[dictPOData valueForKey:@"PO_Gender"] forKey:@"PO_Gender"];
         [newDictionaryForBasicPlan setObject:[dictPOData valueForKey:@"PO_Age"] forKey:@"PO_Age"];
         [newDictionaryForBasicPlan setObject:[dictPOData valueForKey:@"LA_Gender"] forKey:@"LA_Gender"];
@@ -2935,7 +2938,8 @@ BOOL isFirstLoad;
         f.numberStyle = NSNumberFormatterDecimalStyle;
         NSNumber *myNumber = [f numberFromString:[newDictionaryForBasicPlan valueForKey:@"Sum_Assured"]];
         [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"ProductCode"] forKey:@"ProductCode"];
-        [newDictionaryForBasicPlan setObject:myNumber forKey:@"Number_Sum_Assured"];
+        if(myNumber != nil)
+            [newDictionaryForBasicPlan setObject:myNumber forKey:@"Number_Sum_Assured"];
         [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"PO_Gender"] forKey:@"PO_Gender"];
         [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"PO_Age"] forKey:@"PO_Age"];
         [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"LA_Gender"] forKey:@"LA_Gender"];

@@ -141,7 +141,7 @@
 //--
 @property (strong, nonatomic) IBOutlet UIButton *btnPlan;
 @property (retain, nonatomic) IBOutlet UITextField *termField;
-@property (retain, nonatomic) IBOutlet UITextField *yearlyIncomeField;
+@property (strong, nonatomic) IBOutlet UITextField *yearlyIncomeField;
 @property (retain, nonatomic) IBOutlet UILabel *minSALabel;
 @property (retain, nonatomic) IBOutlet UILabel *maxSALabel;
 @property (retain, nonatomic) IBOutlet UIView *healthLoadingView;
