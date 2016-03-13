@@ -106,6 +106,7 @@ static NSString* DATE_FORMAT = @"yyyy-MM-dd";
 @property (strong, nonatomic) IBOutlet UILabel *labelUpdated;
 @property (weak, nonatomic) IBOutlet UILabel *lblLastLogin;
 @property (weak, nonatomic) IBOutlet UILabel *lblTimeRemaining;
+@property (weak, nonatomic) IBOutlet UILabel *lblVersinBuild;
 
 @property(strong) NSString *previousElementName;
 @property(strong) NSString *elementName;

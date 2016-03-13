@@ -48,7 +48,7 @@ NSString *ProceedStatus = @"";
 @synthesize txtPassword;
 @synthesize lblForgotPwd;
 @synthesize statusLogin,indexNo,agentID;
-@synthesize labelUpdated,labelVersion,outletLogin,agentPortalLoginID,agentPortalPassword;
+@synthesize labelUpdated,labelVersion,outletLogin,agentPortalLoginID,agentPortalPassword,lblVersinBuild;
 @synthesize delegate = _delegate;
 @synthesize previousElementName, agentCode;
 @synthesize elementName, msg, lblLastLogin, lblTimeRemaining;
@@ -108,6 +108,18 @@ NSString *ProceedStatus = @"";
     labelVers = labelVersion.text;
     labelUpdated.text = @"Last Updated: 02 OCT 2014 11:00AM";
     outletLogin.hidden = FALSE;
+    
+    NSString *BCAversion= [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    NSString *build= [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+    
+    UILabel  * label = [[UILabel alloc] initWithFrame:CGRectMake(3, 710, 600, 50)];
+    label.backgroundColor = [UIColor clearColor];
+    label.textColor=[UIColor blackColor];
+    label.numberOfLines=0;
+    label.lineBreakMode=NSLineBreakByWordWrapping;
+    
+    lblVersinBuild.text =[NSString stringWithFormat:@"%@ b%@",BCAversion, build];
+
 }
 
 
