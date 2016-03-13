@@ -481,7 +481,7 @@
 }
 
 -(void)setValuePage2{
-    NSString *javaScript = [NSString stringWithFormat:@"document.getElementById('SINumber').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"SINO"]];
+    NSString *javaScript = [NSString stringWithFormat:@"document.getElementById('SINumber2').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"SINO"]];
     
     //int poAge=[[_dictionaryPOForInsert valueForKey:@"PO_Age"] intValue];
     int laAge=[[_dictionaryPOForInsert valueForKey:@"LA_Age"] intValue];
@@ -522,14 +522,14 @@
     NSString *javaScriptP2H13 = [NSString stringWithFormat:@"document.getElementById('HeaderLAAge').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"LA_Age"]];
     NSString *javaScriptP2H14 = [NSString stringWithFormat:@"document.getElementById('HeaderExtraPremiUWLoading').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"TotalPremiumLoading"]];
     NSString *javaScriptP2H15 = [NSString stringWithFormat:@"document.getElementById('HeaderPOSex').innerHTML =\"%@\";", sexPO];
-    NSString *javaScriptP2H16 = [NSString stringWithFormat:@"document.getElementById('HeaderPremiPay').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"LA_Occp"]];
+    NSString *javaScriptP2H16 = [NSString stringWithFormat:@"document.getElementById('HeaderPremiPay').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"TotalPremiumLoading"]];
     
     
     //footer agent data
-    NSString *javaScriptF1 = [NSString stringWithFormat:@"document.getElementById('FooterAgentName').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"AgentName"]];
-    NSString *javaScriptF2 = [NSString stringWithFormat:@"document.getElementById('FooterPrintDate').innerHTML =\"%@\";",[NSDate date]];
-    NSString *javaScriptF3 = [NSString stringWithFormat:@"document.getElementById('FooterAgentCode').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"AgentCode"]];
-    NSString *javaScriptF4 = [NSString stringWithFormat:@"document.getElementById('FooterBranch').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"BranchName"]];
+    NSString *javaScriptF1 = [NSString stringWithFormat:@"document.getElementById('FooterAgentName2').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"AgentName"]];
+    NSString *javaScriptF2 = [NSString stringWithFormat:@"document.getElementById('FooterPrintDate2').innerHTML =\"%@\";",[NSDate date]];
+    NSString *javaScriptF3 = [NSString stringWithFormat:@"document.getElementById('FooterAgentCode2').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"AgentCode"]];
+    NSString *javaScriptF4 = [NSString stringWithFormat:@"document.getElementById('FooterBranch2').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"BranchName"]];
     
     NSMutableArray* valRate1Year=[[NSMutableArray alloc]initWithArray:[self getRateTunggal:laAge]];
     NSString *string = [[valRate1Year valueForKey:@"description"] componentsJoinedByString:@","];
@@ -593,13 +593,13 @@
 }
 
 -(void)setValuePage3{
-    NSString *javaScript = [NSString stringWithFormat:@"document.getElementById('SINumber').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"SINO"]];
+    NSString *javaScript = [NSString stringWithFormat:@"document.getElementById('SINumber3').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"SINO"]];
     
     //footer agent data
-    NSString *javaScriptF1 = [NSString stringWithFormat:@"document.getElementById('FooterAgentName').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"AgentName"]];
-    NSString *javaScriptF2 = [NSString stringWithFormat:@"document.getElementById('FooterPrintDate').innerHTML =\"%@\";",[NSDate date]];
-    NSString *javaScriptF3 = [NSString stringWithFormat:@"document.getElementById('FooterAgentCode').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"AgentCode"]];
-    NSString *javaScriptF4 = [NSString stringWithFormat:@"document.getElementById('FooterBranch').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"BranchName"]];
+    NSString *javaScriptF1 = [NSString stringWithFormat:@"document.getElementById('FooterAgentName3').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"AgentName"]];
+    NSString *javaScriptF2 = [NSString stringWithFormat:@"document.getElementById('FooterPrintDate3').innerHTML =\"%@\";",[NSDate date]];
+    NSString *javaScriptF3 = [NSString stringWithFormat:@"document.getElementById('FooterAgentCode3').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"AgentCode"]];
+    NSString *javaScriptF4 = [NSString stringWithFormat:@"document.getElementById('FooterBranch3').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"BranchName"]];
     
     // Make the UIWebView method call
     NSString *response = [webIlustration stringByEvaluatingJavaScriptFromString:javaScript];
