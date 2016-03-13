@@ -11,28 +11,29 @@
 @implementation TabValidation
 static TabValidation* _sharedMySingleton = nil;
 
-static BOOL Tab1 = false;
-static BOOL Tab2 = false;
-static BOOL Tab3 = false;
+BOOL Tab1;
+BOOL Tab2;
+BOOL Tab3;
 
 
 +(TabValidation*)sharedMySingleton {
-    @synchronized([TabValidation class]) {
-        if (!_sharedMySingleton){
-            [[self alloc] init];
-            Tab1 = false;
-            Tab2 = false;
-            Tab3 = false;
-        }
-        return _sharedMySingleton;
-    }
-    return nil;
+    
+    static TabValidation *singleton;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        singleton = [[self alloc] init];
+    });
+    
+    return singleton;
 }
 
 - (id)init {
     self = [super init];
     if (self != nil) {
         // initialize stuff here
+        Tab1 = false;
+        Tab2 = false;
+        Tab3 = false;
     }
     return self;
 }
