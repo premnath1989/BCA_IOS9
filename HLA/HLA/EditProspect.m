@@ -21,15 +21,16 @@
 #define NUMBERS_ONLY @"0123456789"
 #define NUMBERS_MONEY @"0123456789."
 #define CHARACTER_LIMIT_PC_F 12
-#define CHARACTER_LIMIT_FULLNAME 70
+#define CHARACTER_LIMIT_FULLNAME 40
 #define CHARACTER_LIMIT_OtherID 30
 #define CHARACTER_LIMIT_Bussiness 60
 #define CHARACTER_LIMIT_ExactDuties 40
 #define CHARACTER_LIMIT_Address 30
-#define CHARACTER_LIMIT_POSTCODE 5
+#define CHARACTER_LIMIT_POSTCODE 6
 #define CHARACTER_LIMIT_FOREIGN_POSTCODE 12
 #define CHARACTER_LIMIT_ANNUALINCOME 20
 #define CHARACTER_LIMIT_GSTREGNO 15
+#define CHARACTER_LIMIT_30 30
 
 int name_repeat;
 
@@ -3151,7 +3152,13 @@ NSMutableArray *DelGroupArr;
     // Convert date object to desired output format
     [expiryDateFormat setDateFormat:@"yyyy-MM-dd"];
     NSString *newExpiryDate = [expiryDateFormat stringFromDate:dateExpiry];
+    if ([pp.IDExpirityDate isEqualToString:@"(null)"]){
+        [outletExpiryDate setTitle:[[NSString stringWithFormat:@""]stringByAppendingFormat:@""] forState:UIControlStateNormal];
+    }
+    else{
     [outletExpiryDate setTitle:[[NSString stringWithFormat:@""]stringByAppendingFormat:@"%@",pp.IDExpirityDate] forState:UIControlStateNormal];
+    }
+    
     
     _txtCountryOfBirth.text=pp.countryOfBirth;
     _txtHomeVillage.text=pp.HomeVillage;
@@ -3675,7 +3682,7 @@ NSMutableArray *DelGroupArr;
         NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
         
-        return (([string isEqualToString:filtered])&&(newLength <= 5));
+        return (([string isEqualToString:filtered])&&(newLength <= CHARACTER_LIMIT_POSTCODE));
     }
     
     if((checked && textField == txtHomePostCode ) || (checked2 && textField == txtOfficePostCode)) {
@@ -3691,10 +3698,11 @@ NSMutableArray *DelGroupArr;
     }
     
     if (textField == txtNPWPNo) {
-        NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_MONEY] invertedSet];
-        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        /*NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
+         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];*/
         
-        return (([string isEqualToString:filtered])&&(newLength <= 20));
+        //return (([string isEqualToString:filtered])&&(newLength <= 20));
+        return (newLength <= 20);
     }
     
     if (textField == txtPrefix1) {
@@ -3752,7 +3760,7 @@ NSMutableArray *DelGroupArr;
         NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
         
-        return (([string isEqualToString:filtered])&&(newLength <= 10));
+        return (([string isEqualToString:filtered])&&(newLength <= 7));
 
     }
     
@@ -3764,7 +3772,7 @@ NSMutableArray *DelGroupArr;
         NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
         
-        return (([string isEqualToString:filtered])&&(newLength <= 10));
+        return (([string isEqualToString:filtered])&&(newLength <= 12));
 
     }
     
@@ -3776,7 +3784,7 @@ NSMutableArray *DelGroupArr;
         NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
         
-        return (([string isEqualToString:filtered])&&(newLength <= 10));
+        return (([string isEqualToString:filtered])&&(newLength <= 12));
 
     }
     
@@ -3788,7 +3796,7 @@ NSMutableArray *DelGroupArr;
         NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
         
-        return (([string isEqualToString:filtered])&&(newLength <= 10));
+        return (([string isEqualToString:filtered])&&(newLength <= 7));
 
     }
     
@@ -3797,7 +3805,7 @@ NSMutableArray *DelGroupArr;
         NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
         
-        return (([string isEqualToString:filtered])&&(newLength <= CHARACTER_LIMIT_PC_F));
+        return (([string isEqualToString:filtered])&&(newLength <= 20));
     }
     
     if (textField == txtAnnIncome) {
@@ -3823,15 +3831,69 @@ NSMutableArray *DelGroupArr;
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
         
         if( return13digit == TRUE) {
-            return (([string isEqualToString:filtered])&&(newLength <= 13));
+            return (([string isEqualToString:filtered])&&(newLength <= CHARACTER_LIMIT_ANNUALINCOME));
         } else {
             return (([string isEqualToString:filtered])&&(newLength <= CHARACTER_LIMIT_ANNUALINCOME));
         }
     }
-    
+
     if (textField == txtrFullName) {
         return ((newLength <= CHARACTER_LIMIT_FULLNAME));
     }
+    
+    if (textField == txtNip) {
+        return ((newLength <= 20));
+    }
+    
+    if (textField == txtReferralName) {
+        return ((newLength <= 40));
+    }
+    
+    if (textField == _txtCountryOfBirth) {
+        return ((newLength <= 40));
+    }
+    
+    if (textField == _txtHomeDistrict) {
+        return ((newLength <= 50));
+    }
+    
+    if (textField == _txtHomeVillage) {
+        return ((newLength <= 50));
+    }
+    
+    if (textField == txtHomeTown) {
+        return ((newLength <= 50));
+    }
+    
+    if (textField == _txtHomeProvince) {
+        return ((newLength <= 50));
+    }
+    
+    if (textField == txtHomeCountry) {
+        return ((newLength <= 50));
+    }
+    
+    if (textField == _txtOfficeDistrict) {
+        return ((newLength <= 50));
+    }
+    
+    if (textField == _txtOfficeVillage) {
+        return ((newLength <= 50));
+    }
+    
+    if (textField == txtOfficeTown) {
+        return ((newLength <= 50));
+    }
+    
+    if (textField == _txtOfficeProvince) {
+        return ((newLength <= 50));
+    }
+    
+    if (textField == txtOfficeCountry) {
+        return ((newLength <= 50));
+    }
+
+    
 	
     if (textField == txtRigNO) {
 		NSUInteger newLength = [textField.text length] + [string length] - range.length;

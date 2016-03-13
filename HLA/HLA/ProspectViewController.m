@@ -23,15 +23,16 @@
 #define NUMBERS_ONLY @"0123456789"
 #define NUMBERS_MONEY @"0123456789."
 #define CHARACTER_LIMIT_PC_F 12
-#define CHARACTER_LIMIT_FULLNAME 70
+#define CHARACTER_LIMIT_FULLNAME 40
 #define CHARACTER_LIMIT_OtherID 20
 #define CHARACTER_LIMIT_Bussiness 60
 #define CHARACTER_LIMIT_ExactDuties 40
 #define CHARACTER_LIMIT_Address 30
-#define CHARACTER_LIMIT_POSTCODE 5
+#define CHARACTER_LIMIT_POSTCODE 6
 #define CHARACTER_LIMIT_FOREIGN_POSTCODE 12
 #define CHARACTER_LIMIT_ANNUALINCOME 20
 #define CHARACTER_LIMIT_GSTREGNO 15
+#define CHARACTER_LIMIT_30 30
 
 @interface ProspectViewController ()
 {
@@ -330,7 +331,9 @@ bool RegDatehandling;
     self.myScrollView.contentSize = CGSizeMake(900, 1300);
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Daftar Nasabah" style:UIBarButtonItemStyleBordered target:self action:@selector(back)];
+    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(btnSave_EditOrNew)];
+
     self.navigationItem.leftBarButtonItem.tintColor = borderColor;
 	self.navigationItem.rightBarButtonItem.tintColor = borderColor;
     [self.navigationController.navigationBar setTitleTextAttributes:
@@ -356,6 +359,7 @@ bool RegDatehandling;
 	
 	[self.view addGestureRecognizer:tap];
     
+    modelProspectProfile=[[ModelProspectProfile alloc]init];
     modelAgentProfil=[[ModelAgentProfile alloc]init];
     modelDataReferral=[[ModelDataReferral alloc]init];
     
@@ -611,6 +615,19 @@ bool RegDatehandling;
     alert.tag = alertTag;
     [alert show];
 }
+
+- (bool)validationDuplicate{
+    bool valid=true;
+
+    NSString *validationDuplicate=@"Data Nasabah sudah ada";
+
+    if (![[modelProspectProfile checkDuplicateData:txtFullName.text Gender:gender DOB:outletDOB.titleLabel.text] isEqualToString:@"(null)"]){
+        [self createAlertViewAndShow:validationDuplicate tag:18];
+        return false;
+    }
+    return valid;
+}
+
 
 - (bool)validationDataReferral{
     bool valid=true;
@@ -1767,7 +1784,7 @@ bool RegDatehandling;
         NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
         
-        return (([string isEqualToString:filtered])&&(newLength <= 5));
+        return (([string isEqualToString:filtered])&&(newLength <= CHARACTER_LIMIT_POSTCODE));
     }
     
     if((checked && textField == txtHomePostCode ) || (checked2 && textField == txtOfficePostcode)) {
@@ -1781,10 +1798,11 @@ bool RegDatehandling;
     }
     
     if (textField == txtNPWPNo) {
-        NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
-        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        /*NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
+        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];*/
         
-        return (([string isEqualToString:filtered])&&(newLength <= 20));
+        //return (([string isEqualToString:filtered])&&(newLength <= 20));
+        return (newLength <= 20);
     }
     
     if (textField == txtPrefix1) {
@@ -1839,7 +1857,7 @@ bool RegDatehandling;
         NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
         
-        return (([string isEqualToString:filtered])&&(newLength <= 10));
+        return (([string isEqualToString:filtered])&&(newLength <= 7));
     }
     
     if (textField == txtContact2) {
@@ -1850,7 +1868,7 @@ bool RegDatehandling;
         NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
         
-        return (([string isEqualToString:filtered])&&(newLength <= 10));
+        return (([string isEqualToString:filtered])&&(newLength <= 12));
     }
     
     if (textField == txtContact3) {
@@ -1861,7 +1879,7 @@ bool RegDatehandling;
         NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
         
-        return (([string isEqualToString:filtered])&&(newLength <= 10));
+        return (([string isEqualToString:filtered])&&(newLength <= 12));
     }
     
     if (textField == txtContact4) {
@@ -1872,7 +1890,7 @@ bool RegDatehandling;
         NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
         
-        return (([string isEqualToString:filtered])&&(newLength <= 10));
+        return (([string isEqualToString:filtered])&&(newLength <= 7));
     }
     
     if (textField == txtOtherIDType) {
@@ -1930,16 +1948,67 @@ bool RegDatehandling;
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
         
         if(return13digit == TRUE) {
-            return (([string isEqualToString:filtered])&&(newLength <= 13));
+            return (([string isEqualToString:filtered])&&(newLength <= CHARACTER_LIMIT_ANNUALINCOME));
         } else {
             return (([string isEqualToString:filtered])&&(newLength <= CHARACTER_LIMIT_ANNUALINCOME));
         }
     }
     
     if (textField == txtFullName) {
-        return ((newLength <= CHARACTER_LIMIT_FULLNAME));
+        return ((newLength <= 40));
     }
     
+    if (textField == txtNip) {
+        return ((newLength <= 20));
+    }
+
+    if (textField == txtReferralName) {
+        return ((newLength <= 40));
+    }
+    
+    if (textField == _txtCountryOfBirth) {
+        return ((newLength <= 40));
+    }
+    
+    if (textField == txtHomeDistrict) {
+        return ((newLength <= 50));
+    }
+    
+    if (textField == txtHomeVillage) {
+        return ((newLength <= 50));
+    }
+    
+    if (textField == txtHomeTown) {
+        return ((newLength <= 50));
+    }
+    
+    if (textField == txtHomeProvince) {
+        return ((newLength <= 50));
+    }
+
+    if (textField == txtHomeCountry) {
+        return ((newLength <= 50));
+    }
+
+    if (textField == txtOfficeDistrict) {
+        return ((newLength <= 50));
+    }
+    
+    if (textField == txtOfficeVillage) {
+        return ((newLength <= 50));
+    }
+    
+    if (textField == txtOfficeTown) {
+        return ((newLength <= 50));
+    }
+    
+    if (textField == txtOfficeProvince) {
+        return ((newLength <= 50));
+    }
+    
+    if (textField == txtOfficeCountry) {
+        return ((newLength <= 50));
+    }
     /*if (textField == txtOtherIDType) {
         NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
@@ -2284,6 +2353,11 @@ bool RegDatehandling;
 }
 
 #pragma mark - action
+- (IBAction)fullNameDidEnd:(UITextField *)sender
+{
+
+}
+
 
 - (IBAction)ActionGender:(id)sender
 {
@@ -2302,7 +2376,6 @@ bool RegDatehandling;
     } else if([segGender selectedSegmentIndex]==1) {
         gender = @"FEMALE";
     }
-    
 }
 
 - (IBAction)ActionSmoker:(id)sender
@@ -2608,6 +2681,13 @@ bool RegDatehandling;
     return code;
 }
 
+-(NSString *)checkDuplicateData:(NSString *)Name Gender:(NSString *)genderProspect DOB:(NSString *)dob{
+    NSString* duplicateIndex;
+    duplicateIndex=[modelProspectProfile checkDuplicateData:Name Gender:genderProspect DOB:dob];
+    NSLog(@"duplicate %@",duplicateIndex);
+    return duplicateIndex;
+}
+
 -(void)btnSave_EditOrNew
 {
 	clickDone = 1;
@@ -2668,6 +2748,8 @@ bool RegDatehandling;
     /*end of added by faiz*/
     
     if ([self Validation] == TRUE && DATE_OK == YES) {
+        
+        
         sqlite3_stmt *statement;
         const char *dbpath = [databasePath UTF8String];
         
@@ -3386,7 +3468,21 @@ bool RegDatehandling;
         [self resignFirstResponder];
         [self.view endEditing:YES];
         [self.navigationController popViewControllerAnimated:YES];
-    } else if(alertView.tag == 80) {
+    }
+    else if(alertView.tag == 18) {
+        [self resignFirstResponder];
+        [self.view endEditing:YES];
+        [CATransaction begin];
+        [CATransaction setCompletionBlock:^{
+            // handle completion here
+            if (_delegate != Nil) {
+                [_delegate selectDataForEdit:[modelProspectProfile checkDuplicateData:txtFullName.text Gender:gender DOB:outletDOB.titleLabel.text]];
+            }
+        }];
+        [self.navigationController popViewControllerAnimated:YES];
+        [CATransaction commit];
+    }
+    else if(alertView.tag == 80) {
         [txtFullName becomeFirstResponder];
     } else if(alertView.tag == 81 || alertView.tag == 82) {
         [txtOtherIDType becomeFirstResponder];
@@ -7385,6 +7481,10 @@ bool RegDatehandling;
             if (validDataAlamat) {
                 bool validDataPekerjaan=[self validationDatapekerjaan];
                 returnBool=validDataPekerjaan;
+                if (validDataPekerjaan){
+                    bool validDataDuplicate=[self validationDuplicate];
+                    returnBool=validDataDuplicate;
+                }
             }
         }
     }
