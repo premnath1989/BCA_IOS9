@@ -1183,6 +1183,31 @@ MBProgressHUD *HUD;
 	[self performSelector:@selector(loadDataDelayed) withObject:nil afterDelay:1];
 }
 
+
+
+- (void)selectDataForEdit:(NSString *)indexNo{
+    ProspectProfile* pp;
+    ProspectTableData = [modelProspectProfile searchProspectProfileByID:[indexNo intValue]];
+    pp = [ProspectTableData objectAtIndex:0];
+    EditProspect* zzz = [self.storyboard instantiateViewControllerWithIdentifier:@"EditProspect"];
+    zzz.pp = pp;
+    
+    if (_EditProspect == Nil) {
+        self.EditProspect = [self.storyboard instantiateViewControllerWithIdentifier:@"EditProspect"];
+        _EditProspect.delegate = self;
+    }
+    _EditProspect.pp = pp;
+    @try {
+        [self.navigationController pushViewController:_EditProspect animated:YES];
+        _EditProspect.navigationItem.title = @"Edit";
+    } @catch (NSException * e) {
+        NSLog(@"Exception: %@", e);
+    } @finally {
+    }
+    pp = Nil, zzz = Nil;
+
+}
+
 - (void) SortBySelected:(NSMutableArray *)SortBySelected {
      
     idTypeLabel.highlighted= false;

@@ -27,10 +27,12 @@
 #import "EditProspect.h"
 #import "ModelAgentProfile.h"
 #import "ModelDataReferral.h"
+#import "ModelProspectProfile.h"
 
 @class DataTable,DBController;
 @protocol ProspectViewControllerDelegate
 - (void)FinishInsert;
+- (void)selectDataForEdit:(NSString *)indexNo;
 @end
 
 @interface ProspectViewController : UIViewController<IDTypeDelegate,SIDateDelegate,IDTypeDelegate, OccupationListDelegate,TitleDelegate,GroupDelegate, UITextFieldDelegate,UITextInputDelegate, UITextViewDelegate,NatinalityDelegate,RaceDelegate,MaritalStatusDelegate,ReligionDelegate,CountryDelegate,EditProspectDelegate, Country2Delegate,SourceIncomeDelegate,VIPClassDelegate,ReferralSourceDelegate,BranchInfoDelegate>{
@@ -49,6 +51,7 @@
     Nationality *_nationalityList2;
 
     //added  by faiz
+    ModelProspectProfile* modelProspectProfile;
     ModelDataReferral* modelDataReferral;
     ModelAgentProfile* modelAgentProfil;
     SourceIncome *_sourceIncome;
