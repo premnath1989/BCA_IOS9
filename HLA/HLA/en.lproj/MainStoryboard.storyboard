@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15C50" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="ds4-DI-v8U">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15A284" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="ds4-DI-v8U">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="BPreplay.otf">
@@ -11143,6 +11143,7 @@
                         <outlet property="lblForgotPwd" destination="RTd-al-ErO" id="fLv-g8-9mA"/>
                         <outlet property="lblLastLogin" destination="PQg-X8-VWN" id="8hA-EH-bRX"/>
                         <outlet property="lblTimeRemaining" destination="W0o-w7-yn1" id="guP-2S-tig"/>
+                        <outlet property="lblVersinBuild" destination="qlO-kb-24G" id="dlI-oc-cwk"/>
                         <outlet property="outletLogin" destination="bKx-ZE-ZlB" id="2Ld-76-W0G"/>
                         <outlet property="outletReset" destination="e4o-1F-YoA" id="hLg-tR-Lev"/>
                         <outlet property="scrollViewLogin" destination="Yrw-oj-gAe" id="nFs-hi-Sle"/>
