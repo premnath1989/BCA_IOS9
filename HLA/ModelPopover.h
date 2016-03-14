@@ -19,4 +19,5 @@
 -(NSDictionary *)getOccupation;
 -(NSDictionary *)getTitle;
 -(NSDictionary *)getBranchInfo;
+-(NSDictionary *)getBranchInfoFilter:(NSString *)columnFilter ColumnValue:(NSString *)columnValue;
 @end

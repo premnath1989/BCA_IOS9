@@ -199,6 +199,43 @@
     return dict;
 }
 
+-(NSDictionary *)getBranchInfoFilter:(NSString *)columnFilter ColumnValue:(NSString *)columnValue{
+    NSDictionary *dict;
+    
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    NSString *branchCode;
+    NSString *branchName;
+    NSString *branchParent;
+    NSString *branchKanwil;
+    NSString *Status;
+    
+    //FMResultSet *s = [database executeQuery:@"SELECT dc.* FROM Data_Cabang dc, Agent_profile ap WHERE dc.status = 'A' and ap.Kanwil = dc.Kanwil and %@ = \"%@\"",columnFilter,columnValue];
+    FMResultSet *s;
+    if ([columnFilter isEqualToString:@"dc.KodeCabang"]){
+        s = [database executeQuery:@"SELECT dc.* FROM Data_Cabang dc, Agent_profile ap WHERE dc.status = 'A' and ap.Kanwil = dc.Kanwil and dc.KodeCabang=?",columnValue];
+    }
+    else{
+        s = [database executeQuery:@"SELECT dc.* FROM Data_Cabang dc, Agent_profile ap WHERE dc.status = 'A' and ap.Kanwil = dc.Kanwil and dc.NamaCabang=?",columnValue];
+    }
+    while ([s next]) {
+        branchCode = [NSString stringWithFormat:@"%@",[s stringForColumn:@"KodeCabang"]];
+        branchName = [NSString stringWithFormat:@"%@",[s stringForColumn:@"NamaCabang"]];
+        branchParent = [NSString stringWithFormat:@"%@ - %@",[s stringForColumn:@"KodeCabangInduk"],[s stringForColumn:@"NamaCabangInduk"]];
+        branchKanwil = [NSString stringWithFormat:@"%@ - %@",[s stringForColumn:@"Wilayah"],[s stringForColumn:@"Kanwil"]];
+        Status = [NSString stringWithFormat:@"%@",[s stringForColumn:@"Status"]];
+    }
+    dict = [[NSDictionary alloc] initWithObjectsAndKeys:branchCode,@"KodeCabang", branchName,@"NamaCabang", branchParent,@"StatusCabang",branchKanwil,@"KanwilCabang",Status,@"Status",nil];
+    
+    [results close];
+    [database close];
+    return dict;
+}
+
 
 
 @end

@@ -14,15 +14,17 @@
 @end
 
 
-@interface BranchInfo : UITableViewController{
+@interface BranchInfo : UITableViewController<UISearchBarDelegate,UISearchDisplayDelegate>{
     NSMutableArray *_itemsKodeCabang;
     NSMutableArray *_itemsNamaCabang;
     NSMutableArray *_itemsStatusCabang;
     NSMutableArray *_itemsKanwilCabang;
     ModelPopover* modelPopOver;
     id <BranchInfoDelegate> _delegate;
-    
+    NSArray *sorted;
 }
 @property (nonatomic, strong) id <BranchInfoDelegate> delegate;
 @property (nonatomic, strong) NSNumber *data;
+@property (nonatomic, assign) bool isFiltered;
+@property (strong, nonatomic) NSMutableArray* FilteredData;
 @end

@@ -30,7 +30,7 @@ NSString *SelectedString;
         _items = [dict objectForKey:@"Country"];
         
         sorted = [[NSArray alloc]init];
-        sorted  =  [_items sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+        sorted = [_items sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
         
         
           /*

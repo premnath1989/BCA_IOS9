@@ -625,6 +625,7 @@
     float bottomPadding = 0.0f;
     float leftPadding = 0.0f;
     float rightPadding = 0.0f;
+    NSLog(@"size %@",NSStringFromCGSize(kPaperSizeA4));
     CGRect printableRect = CGRectMake(leftPadding,
                                       topPadding,
                                       kPaperSizeA4.width-leftPadding-rightPadding,

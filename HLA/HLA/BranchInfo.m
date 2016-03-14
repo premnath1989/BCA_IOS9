@@ -14,6 +14,7 @@ NSString *SelectedString;
 
 @implementation BranchInfo
 @synthesize delegate = _delegate;
+@synthesize isFiltered,FilteredData;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -32,8 +33,7 @@ NSString *SelectedString;
         NSInteger singleRowHeight = [self.tableView.delegate tableView:self.tableView
                                                heightForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
         NSInteger totalRowsHeight = rowsCount * singleRowHeight;
-        
-        
+
         CGFloat largestLabelWidth = 0;
         for (NSString *Title in _itemsKodeCabang) {
             CGSize labelSize = [Title sizeWithFont:[UIFont boldSystemFontOfSize:20.0f]];
@@ -51,9 +51,25 @@ NSString *SelectedString;
     return self;
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    sorted = [[NSArray alloc]init];
+    if ([_data intValue] == 0){
+        sorted  =  [_itemsKodeCabang sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+    }
+    else{
+        sorted  =  [_itemsNamaCabang sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    UISearchBar *zzz = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 200, 50) ];
     
+    zzz.opaque = false;
+    zzz.delegate = (id) self;
+    self.tableView.tableHeaderView = zzz;
+    CGRect searchbarFrame = zzz.frame;
+    [self.tableView scrollRectToVisible:searchbarFrame animated:NO];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -66,6 +82,30 @@ NSString *SelectedString;
     // Dispose of any resources that can be recreated.
 }
 
+-(void)searchBar:(UISearchBar*)searchBar textDidChange:(NSString*)text
+{
+    if (text.length == 0) {
+        isFiltered = false;
+        
+    }
+    else {
+        isFiltered = true;
+        FilteredData = [[NSMutableArray alloc] init ];
+        
+        for (int a =0; a<sorted.count; a++ ) {
+            NSRange Occu = [[sorted objectAtIndex:a ] rangeOfString:text options:NSCaseInsensitiveSearch];
+            
+            if (Occu.location != NSNotFound) {
+                [FilteredData addObject:[sorted objectAtIndex:a ] ];
+                
+            }
+        }
+    }
+    
+    [self.tableView reloadData];
+}
+
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -75,7 +115,12 @@ NSString *SelectedString;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete implementation, return the number of rows
-    return [_itemsKodeCabang count];
+    //return [_itemsKodeCabang count];
+    if(isFiltered ==false)
+        return [_itemsKodeCabang count];
+    else
+        
+        return [FilteredData count];
 }
 
 
@@ -87,24 +132,43 @@ NSString *SelectedString;
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
-    NSString *ms;
-    if ([_data intValue]==0){
-        ms = [_itemsKodeCabang objectAtIndex:indexPath.row];
+    if (isFiltered == true)
+    {
+        
+        NSString *ms = [FilteredData objectAtIndex:indexPath.row];
+        cell.textLabel.text = ms;
+        
+        
+        if (ms == SelectedString) {
+            cell.accessoryType= UITableViewCellAccessoryCheckmark;
+        }
+        else
+        {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        }
+        
     }
     else{
-        ms = [_itemsNamaCabang objectAtIndex:indexPath.row];
+        NSString *ms;
+        if ([_data intValue]==0){
+            ms = [_itemsKodeCabang objectAtIndex:indexPath.row];
+        }
+        else{
+            ms = [_itemsNamaCabang objectAtIndex:indexPath.row];
+        }
+        
+        cell.textLabel.text = ms;
+        
+        
+        if (ms == SelectedString) {
+            cell.accessoryType= UITableViewCellAccessoryCheckmark;
+        }
+        else
+        {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        }
     }
     
-    cell.textLabel.text = ms;
-    
-    
-    if (ms == SelectedString) {
-        cell.accessoryType= UITableViewCellAccessoryCheckmark;
-    }
-    else
-    {
-        cell.accessoryType = UITableViewCellAccessoryNone;
-    }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.textLabel.font = [UIFont fontWithName:@"TreBuchet MS" size:16 ];
@@ -113,12 +177,33 @@ NSString *SelectedString;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *theBranchCode = [_itemsKodeCabang objectAtIndex:indexPath.row];
-    NSString *theBranchName = [_itemsNamaCabang objectAtIndex:indexPath.row];
-    NSString *theBranchStatus = [_itemsStatusCabang objectAtIndex:indexPath.row];
-    NSString *theBranchKanwil = [_itemsKanwilCabang objectAtIndex:indexPath.row];
-    SelectedString = theBranchCode;
-    [_delegate selectedBranch:theBranchCode BranchName:theBranchName BranchStatus:theBranchStatus BranchKanwil:theBranchKanwil];
+    if (isFiltered == false)
+    {
+        NSString *theBranchCode = [_itemsKodeCabang objectAtIndex:indexPath.row];
+        NSString *theBranchName = [_itemsNamaCabang objectAtIndex:indexPath.row];
+        NSString *theBranchStatus = [_itemsStatusCabang objectAtIndex:indexPath.row];
+        NSString *theBranchKanwil = [_itemsKanwilCabang objectAtIndex:indexPath.row];
+        SelectedString = theBranchCode;
+        [_delegate selectedBranch:theBranchCode BranchName:theBranchName BranchStatus:theBranchStatus BranchKanwil:theBranchKanwil];
+    }
+    else
+    {
+        NSString *ms = [FilteredData objectAtIndex:indexPath.row];
+        SelectedString = ms;
+        NSString* stringDataShow;
+        if ([_data intValue]==0){
+            stringDataShow=@"dc.KodeCabang";
+        }
+        else{
+            stringDataShow=@"dc.NamaCabang";
+        }
+        NSDictionary* dictBranchFilteredData = [modelPopOver getBranchInfoFilter:stringDataShow ColumnValue:SelectedString];
+        NSString *theBranchCode = [dictBranchFilteredData valueForKey:@"KodeCabang"];
+        NSString *theBranchName = [dictBranchFilteredData valueForKey:@"NamaCabang"];
+        NSString *theBranchStatus = [dictBranchFilteredData valueForKey:@"StatusCabang"];
+        NSString *theBranchKanwil = [dictBranchFilteredData valueForKey:@"KanwilCabang"];
+        [_delegate selectedBranch:theBranchCode BranchName:theBranchName BranchStatus:theBranchStatus BranchKanwil:theBranchKanwil];
+    }
     [tableView reloadData];
 }
 -(void) setTitle:(NSString *)title
