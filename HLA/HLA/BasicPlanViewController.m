@@ -866,12 +866,12 @@ bool WPTPD30RisDeleted = FALSE;
     
     double DiskounPremi = 0 * RatesInt * total * PaymentFoctor;
     
+   // [_KKLKDiskaunBtn setText:[NSString stringWithFormat:@"%2f", DiskounPremi]];
     
-    [_KKLKDiskaunBtn setText:[NSString stringWithFormat:@"%2f", DiskounPremi]];
+    //Current Defaulr
+    [_KKLKDiskaunBtn setText:[NSString stringWithFormat:@"%@",@"0"]];
   //  [self PremiDasarIncomeChange:_basicPremiField.text];
 }
-
-
 
 -(void)PremiDasarAct
 {
@@ -4246,12 +4246,7 @@ bool WPTPD30RisDeleted = FALSE;
             //[_BtnTanggalLahir setBackgroundColor:[UIColor redColor]];
             return false;
         }
-        else if ([validationSet containsObject:masaPembayaran]||masaPembayaran==NULL){
-            [self createAlertViewAndShow:validationMasaPembayaran tag:0];
-            //[_BtnTanggalLahir setBackgroundColor:[UIColor redColor]];
-            return false;
-        }
-        else if ([validationSet containsObject:masaPembayaran]||masaPembayaran==NULL){
+        else if ([_KKLKMasaPembayaran.text isEqualToString:@""]||_KKLKMasaPembayaran.text==NULL){
             [self createAlertViewAndShow:validationMasaPembayaran tag:0];
             //[_BtnTanggalLahir setBackgroundColor:[UIColor redColor]];
             return false;
