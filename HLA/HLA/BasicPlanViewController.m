@@ -66,7 +66,7 @@
 @synthesize waiverRiderAnn2,waiverRiderHalf,waiverRiderHalf2,waiverRiderMonth,waiverRiderMonth2,waiverRiderQuar,waiverRiderQuar2;
 @synthesize quotationLang,requesteProposalStatus, EAPPorSI, outletDone, outletEAPP;
 @synthesize labelPremiumPay, requestEDD;
-@synthesize planChoose;
+@synthesize planChoose,PremiType;
 @synthesize isFirstSaved;
 @synthesize navigationBar;
 

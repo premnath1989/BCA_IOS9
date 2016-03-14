@@ -78,7 +78,9 @@
     int Pertanggungan_Dasar;
     int Pertanggungan_ExtrePremi;
     NSString *PayorSex;
+    NSString *PremiType;
     int *PayorAge;
+    int *LAAge;
     double AnssubtotalBulan;
     double AnssubtotalYear;
     int ExtraPercentsubtotalBulan;
@@ -114,8 +116,9 @@
 @property (nonatomic, assign,readwrite) int requestTerm;
 @property (nonatomic, assign,readwrite) int Pertanggungan_Dasar;
 @property (nonatomic, assign,readwrite) int Pertanggungan_ExtrePremi;
-@property (nonatomic,strong) NSString *PayorSex;
+@property (nonatomic,strong) NSString *PayorSex,*PremiType,*RelWithLA,*LASex;
 @property (nonatomic, assign,readwrite) int PayorAge;
+@property (nonatomic, assign,readwrite) int LAAge;
 @property (nonatomic, assign,readwrite) int AnssubtotalBulan;
 @property (nonatomic, assign,readwrite) int AnssubtotalYear;
 @property (nonatomic, assign,readwrite) int ExtraPercentsubtotalBulan;

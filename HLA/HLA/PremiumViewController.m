@@ -21,7 +21,7 @@
 @synthesize requestBasicSA,requestBasicHL,requestMOP,requestTerm,requestPlanCode,requestSINo,requestAge,requestOccpCode;
 @synthesize basicRate,LSDRate,riderCode,riderSA,riderHL1K,riderHL100,riderHLP,riderRate,riderTerm;
 @synthesize riderDesc,planCodeRider,riderUnit,riderPlanOpt,riderDeduct,pentaSQL;
-@synthesize plnOptC,planOptHMM,deducHMM,planHSPII,planMGII,planMGIV;
+@synthesize plnOptC,planOptHMM,deducHMM,planHSPII,planMGII,planMGIV,PremiType;
 @synthesize riderAge,riderCustCode,riderSmoker,Pertanggungan_ExtrePremi,ExtraPremiNumbValue;
 @synthesize annualRiderTot,halfRiderTot,quarterRiderTot,monthRiderTot;
 @synthesize htmlRider,occLoad,annualRider,halfYearRider,quarterRider,monthlyRider,annualRiderSum,halfRiderSum,monthRiderSum,quarterRiderSum,annualRiderOnly,halfYearRiderOnly,quarterRiderOnly,monthlyRiderOnly;
@@ -30,13 +30,13 @@
 @synthesize waiverRiderAnn2,waiverRiderHalf2,waiverRiderMonth2,waiverRiderQuar2,ReportFromAge,ReportToAge;
 @synthesize riderOccp,strOccp,occLoadRider,getAge,SINo,getOccpCode,getMOP,getTerm,getBasicSA,getBasicHL,getPlanCode,getOccpClass;
 @synthesize getBasicTempHL,requestBasicTempHL,requestOccpClass;
-@synthesize BasicAnnually,BasicHalfYear,BasicMonthly,BasicQuarterly,getBasicPlan,requestBasicPlan;
+@synthesize BasicAnnually,BasicHalfYear,BasicMonthly,BasicQuarterly,getBasicPlan,requestBasicPlan,RelWithLA;
 @synthesize OccpLoadA,OccpLoadH,OccpLoadM,OccpLoadQ;
 @synthesize BasicHLAnnually,BasicHLHalfYear,BasicHLMonthly,BasicHLQuarterly;
 @synthesize LSDAnnually,LSDHalfYear,LSDMonthly,LSDQuarterly;
 @synthesize basicTotalA,basicTotalM,basicTotalQ,basicTotalS,riderTempHL1K,headerTitle,myToolBar,fromReport,EAPPorSI,premPayOpt,executeMHI;
 //@synthesize simenu = _simenu;
-@synthesize gstPremAnn, gstPremHalf, gstPremQuar, gstPremMonth, Highlight;
+@synthesize gstPremAnn, gstPremHalf, gstPremQuar, gstPremMonth, Highlight,LASex;
 @synthesize navItem;
 @synthesize navigationBar;
 +(NSString *)getMsgTypeL100
@@ -62,9 +62,15 @@
     _Pertanggungan_Dasar = [[dictionaryPremium valueForKey:@"Number_Sum_Assured"] integerValue];
     _PayorAge = [[dictionaryPremium valueForKey:@"PO_Age"]integerValue];;
     _PayorSex = [dictionaryPremium valueForKey:@"LA_Gender"];
+    PremiType = [dictionaryPremium valueForKey:@"Payment_Term"];
+    RelWithLA = [dictionaryPremium valueForKey:@"SELF"];
     Highlight =[dictionaryPremium valueForKey:@"Payment_Frequency"];
     Pertanggungan_ExtrePremi = [[dictionaryPremium valueForKey:@"ExtraPremiumTerm"] integerValue];
     ExtraPremiNumbValue  = [[dictionaryPremium valueForKey:@"ExtraPremiumSum"] integerValue];
+    LASex = [dictionaryPremium valueForKey:@"LA_Gender"];
+    _LAAge = [[dictionaryPremium valueForKey:@"PO_Age"]integerValue];
+
+    
     
     [self AnsuransiDasar];
     [self PremiDasarActB];
@@ -86,7 +92,9 @@
 
 -(void)AnsuransiDasar
 {
-    NSString*AnsuransiDasarQuery;
+    
+    NSString *AnsuransiDasarQuery;
+    
     NSArray *paths2 = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docsPath2 = [paths2 objectAtIndex:0];
     NSString *path2 = [docsPath2 stringByAppendingPathComponent:@"BCA_Rates.sqlite"];
@@ -94,29 +102,96 @@
     FMDatabase *database = [FMDatabase databaseWithPath:path2];
     [database open];
     FMResultSet *results;
-    AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM basicPremiumRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",_PayorSex,@"HRT",@"S",_PayorAge];
-    NSLog(@"query %@",AnsuransiDasarQuery);
-    results = [database executeQuery:AnsuransiDasarQuery];
     
     NSString*RatesPremiumRate;
-    int PaymentModeYear;
-    int PaymentModeMonthly;
-    FMDatabase *database1 = [FMDatabase databaseWithPath:path2];
+    double PaymentMode;
     if (![database open])
     {
         NSLog(@"Could not open db.");
     }
     
-    while([results next])
+    if ([PremiType isEqualToString:@"Premi Tunggal"])
     {
-        if ([_PayorSex isEqualToString:@"Male"]||[_PayorSex isEqualToString:@"MALE"]){
-            RatesPremiumRate  = [results stringForColumn:@"Male"];
+        if([RelWithLA isEqualToString:@"SELF"])
+        {
+            AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM basicPremiumRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",PayorSex,@"HRT",@"S",_PayorAge];
+            results = [database executeQuery:AnsuransiDasarQuery];
+            
+            while([results next])
+            {
+                if ([PayorSex isEqualToString:@"Male"]||[PayorSex isEqualToString:@"MALE"]){
+                    RatesPremiumRate  = [results stringForColumn:@"Male"];
+                }
+                else{
+                    RatesPremiumRate  = [results stringForColumn:@"Female"];
+                }
+                
+            }
+            
         }
-        else{
-            RatesPremiumRate  = [results stringForColumn:@"Female"];
+        else
+        {
+            AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM basicPremiumRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",LASex,@"HRT",@"S",_LAAge];
+            results = [database executeQuery:AnsuransiDasarQuery];
+            
+            while([results next])
+            {
+                if ([LASex isEqualToString:@"Male"]||[LASex isEqualToString:@"MALE"]){
+                    RatesPremiumRate  = [results stringForColumn:@"Male"];
+                }
+                else{
+                    RatesPremiumRate  = [results stringForColumn:@"Female"];
+                }
+                
+            }
+            
+            
         }
-        
+ 
     }
+    else
+    {
+        if([RelWithLA isEqualToString:@"SELF"])
+        {
+            AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM basicPremiumRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",PayorSex,@"HRT",@"R",_PayorAge];
+            results = [database executeQuery:AnsuransiDasarQuery];
+            
+            while([results next])
+            {
+                if ([PayorSex isEqualToString:@"Male"]||[PayorSex isEqualToString:@"MALE"]){
+                    RatesPremiumRate  = [results stringForColumn:@"Male"];
+                }
+                else{
+                    RatesPremiumRate  = [results stringForColumn:@"Female"];
+                }
+                
+            }
+            
+        }
+        else
+        {
+            AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM basicPremiumRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",LASex,@"HRT",@"R",_LAAge];
+            results = [database executeQuery:AnsuransiDasarQuery];
+            
+            while([results next])
+            {
+                if ([LASex isEqualToString:@"Male"]||[LASex isEqualToString:@"MALE"]){
+                    RatesPremiumRate  = [results stringForColumn:@"Male"];
+                }
+                else{
+                    RatesPremiumRate  = [results stringForColumn:@"Female"];
+                }
+                
+            }
+            
+            
+        }
+
+    }
+
+    
+    int PaymentModeYear;
+    int PaymentModeMonthly;
     
     PaymentModeYear = 1;
     PaymentModeMonthly = 0.1;
@@ -161,35 +236,104 @@
     NSArray *paths2 = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docsPath2 = [paths2 objectAtIndex:0];
     NSString *path2 = [docsPath2 stringByAppendingPathComponent:@"BCA_Rates.sqlite"];
+    NSString*RatesPremiumRate;
     
     FMDatabase *database = [FMDatabase databaseWithPath:path2];
     [database open];
     FMResultSet *results;
-    AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM EMRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",_PayorSex,@"HRT",@"S",_PayorAge];
-    NSLog(@"query %@",AnsuransiDasarQuery);
-    results = [database executeQuery:AnsuransiDasarQuery];
     
-    NSString*RatesPremiumRate;
-    double PaymentMode;
-    FMDatabase *database1 = [FMDatabase databaseWithPath:path2];
-    if (![database open])
-    {
-        NSLog(@"Could not open db.");
-    }
     
-    while([results next])
+    if ([PremiType isEqualToString:@"Premi Tunggal"])
     {
-        if ([_PayorSex isEqualToString:@"Male"]||[_PayorSex isEqualToString:@"MALE"]){
-            RatesPremiumRate  = [results stringForColumn:@"Male"];
-        }
-        else{
-            RatesPremiumRate  = [results stringForColumn:@"Female"];
+        if([RelWithLA isEqualToString:@"SELF"])
+        {
+            AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM EMRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",PayorSex,@"HRT",@"S",_PayorAge];
+            NSLog(@"query %@",AnsuransiDasarQuery);
+            results = [database executeQuery:AnsuransiDasarQuery];
+            
+            while([results next])
+            {
+                if ([PayorSex isEqualToString:@"Male"]||[PayorSex isEqualToString:@"MALE"]){
+                    RatesPremiumRate  = [results stringForColumn:@"Male"];
+                }
+                else{
+                    RatesPremiumRate  = [results stringForColumn:@"Female"];
+                }
+                
+            }
+            
             
         }
+        else
+        {
+            AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM EMRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",LASex,@"HRT",@"S",_LAAge];
+            NSLog(@"query %@",AnsuransiDasarQuery);
+            results = [database executeQuery:AnsuransiDasarQuery];
+            
+            while([results next])
+            {
+                if ([LASex isEqualToString:@"Male"]||[LASex isEqualToString:@"MALE"]){
+                    RatesPremiumRate  = [results stringForColumn:@"Male"];
+                }
+                else{
+                    RatesPremiumRate  = [results stringForColumn:@"Female"];
+                }
+                
+            }
+            
+            
+        }
+
         
     }
-        PaymentMode = 1;
-        PaymentMode = 0.1;
+    else
+    {
+        if([RelWithLA isEqualToString:@"SELF"])
+        {
+            AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM EMRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",PayorSex,@"HRT",@"R",_PayorAge];
+            NSLog(@"query %@",AnsuransiDasarQuery);
+            results = [database executeQuery:AnsuransiDasarQuery];
+            
+            while([results next])
+            {
+                if ([PayorSex isEqualToString:@"Male"]||[PayorSex isEqualToString:@"MALE"]){
+                    RatesPremiumRate  = [results stringForColumn:@"Male"];
+                }
+                else{
+                    RatesPremiumRate  = [results stringForColumn:@"Female"];
+                }
+                
+            }
+            
+            
+        }
+        else
+        {
+            AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM EMRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",LASex,@"HRT",@"R",_LAAge];
+            NSLog(@"query %@",AnsuransiDasarQuery);
+            results = [database executeQuery:AnsuransiDasarQuery];
+            
+            while([results next])
+            {
+                if ([LASex isEqualToString:@"Male"]||[LASex isEqualToString:@"MALE"]){
+                    RatesPremiumRate  = [results stringForColumn:@"Male"];
+                }
+                else{
+                    RatesPremiumRate  = [results stringForColumn:@"Female"];
+                }
+                
+            }
+            
+            
+        }
+
+    }
+    
+//        int PaymentModeYear;
+//        int PaymentModeMonthly;
+//
+//        PaymentMode = 1;
+//        PaymentMode = 0.1;
     
     
     double RatesInt = [RatesPremiumRate doubleValue];
