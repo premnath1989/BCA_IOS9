@@ -13,8 +13,9 @@
 #import "RateModel.h"
 #import <MessageUI/MessageUI.h>
 #import "PagesController.h"
+#import "ReaderViewController.h"
 
-@interface IlustrationViewController : UIViewController<NDHTMLtoPDFDelegate,UIWebViewDelegate,MFMailComposeViewControllerDelegate,PagesControllerDelegate>{
+@interface IlustrationViewController : UIViewController<ReaderViewControllerDelegate,NDHTMLtoPDFDelegate,UIWebViewDelegate,MFMailComposeViewControllerDelegate,PagesControllerDelegate>{
     IBOutlet UIWebView* webIlustration;
     UIWebView *webTemp;
     NDHTMLtoPDF *PDFCreator;

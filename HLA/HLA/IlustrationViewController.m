@@ -45,15 +45,15 @@
     NSMutableDictionary *newAttributes = [[NSMutableDictionary alloc] init];
     [newAttributes setObject:[UIFont systemFontOfSize:18] forKey:UITextAttributeFont];
     [self.navigationBar setTitleTextAttributes:newAttributes];
-    
-    email = [[UIBarButtonItem alloc] initWithTitle:@"Email" style:UIBarButtonItemStyleBordered target:self action:@selector(email)];
+    [self.navigationBar setBackgroundColor:[UIColor clearColor]];
+    /*email = [[UIBarButtonItem alloc] initWithTitle:@"Email" style:UIBarButtonItemStyleBordered target:self action:@selector(email)];
     printSI = [[UIBarButtonItem alloc] initWithTitle:@"Print" style:UIBarButtonItemStyleBordered target:self action:@selector(printSI)];
     pages = [[UIBarButtonItem alloc] initWithTitle:@"Pages" style:UIBarButtonItemStyleBordered target:self action:@selector(pagesSI:)];
-    page4 = [[UIBarButtonItem alloc] initWithTitle:@"Page 4" style:UIBarButtonItemStyleBordered target:self action:@selector(page4)];
+    page4 = [[UIBarButtonItem alloc] initWithTitle:@"Page 4" style:UIBarButtonItemStyleBordered target:self action:@selector(page4)];*/
     
-    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:email,printSI, Nil];
+    /*self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:email,printSI, Nil];
     self.title=@"Ilustrasi";
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStyleBordered target:self action:@selector(closeModalWindow:) ];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStyleBordered target:self action:@selector(closeModalWindow:) ];*/
     
 }
 
@@ -646,10 +646,30 @@
     }
     NSString *HTMLPath = [documentsDirectory stringByAppendingPathComponent:@"SalesIlustration.pdf"];
     NSURL *targetURL = [NSURL fileURLWithPath:HTMLPath];
-    [webIlustration loadRequest:[NSURLRequest requestWithURL:targetURL]];
+    //[webIlustration loadRequest:[NSURLRequest requestWithURL:targetURL]];
     pdfCreated=true;
-    [webIlustration setHidden:NO];
+    [webIlustration setHidden:YES];
     [viewspinBar setHidden:YES];
+    [self seePDF];
+}
+
+- (void)seePDF{
+    NSArray* path_forDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+    NSString* documentsDirectory = [path_forDirectory objectAtIndex:0];
+    NSString *pdfPathOutput = [NSString stringWithFormat:@"%@/SalesIlustration.pdf",documentsDirectory];
+    //NSString *file = [[NSBundle mainBundle] pathForResource:@"Brochure_ProdukBCALIfeKeluargaku_21012016" ofType:@"pdf"];
+    
+    ReaderDocument *document = [ReaderDocument withDocumentFilePath:pdfPathOutput password:nil];
+    
+    if (document != nil)
+    {
+        ReaderViewController *readerViewController = [[ReaderViewController alloc] initWithReaderDocument:document];
+        readerViewController.delegate = self;
+        
+        readerViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        readerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+        [self presentViewController:readerViewController animated:YES completion:Nil];
+    }
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
@@ -673,6 +693,12 @@
     // Pass the selected object to the new view controller.
 }
 */
+- (void)dismissReaderViewController:(ReaderViewController *)viewController {
+    [self dismissModalViewControllerAnimated:YES];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self dismissViewControllerAnimated:YES completion:nil];
+    });
+}
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {

@@ -2950,14 +2950,28 @@ BOOL isFirstLoad;
         [_modelSIPremium savePremium:newDictionaryForBasicPlan];
     }
 
+    NSString *PlanType = [dictionaryPOForInsert valueForKey:@"ProductName"];
     
-    if (!_PremiumController) {
-        _PremiumController = [self.storyboard instantiateViewControllerWithIdentifier:@"premiumView"];
-        //_PremiumController.delegate = self;
-        [self.RightView addSubview:_PremiumController.view];
+    if([PlanType isEqualToString:@"BCA Life Heritage"])
+    {
+        if (!_PremiumController) {
+            _PremiumController = [self.storyboard instantiateViewControllerWithIdentifier:@"premiumView"];
+            //_PremiumController.delegate = self;
+            [self.RightView addSubview:_PremiumController.view];
+        }
+        [_PremiumController setPremiumDictionary:newDictionaryForBasicPlan];
+        [self.RightView bringSubviewToFront:_PremiumController.view];
     }
-    [_PremiumController setPremiumDictionary:newDictionaryForBasicPlan];
-    [self.RightView bringSubviewToFront:_PremiumController.view];
+    else{
+        if (!_RiderController){
+            self.RiderController = [self.storyboard instantiateViewControllerWithIdentifier:@"RiderView"];
+            _RiderController.delegate = self;
+            [self.RightView addSubview:self.RiderController.view];
+        }
+        [self.RightView bringSubviewToFront:self.RiderController.view];
+    }
+    
+    
     /*
 
     if (!_RiderController){
