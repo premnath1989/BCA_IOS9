@@ -5,7 +5,7 @@
 //  Created by Basvi on 3/1/16.
 //  Copyright © 2016 InfoConnect Sdn Bhd. All rights reserved.
 //
-#define kPaperSizeA4 CGSizeMake(842,655)
+#define kPaperSizeA4 CGSizeMake(842,595)
 
 #import "IlustrationViewController.h"
 

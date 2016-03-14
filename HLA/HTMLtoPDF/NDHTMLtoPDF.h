@@ -20,7 +20,7 @@
 //#define kPaperSizeA4 CGSizeMake(595,842)
 //#define kPaperSizeLetter CGSizeMake(612,792)
 
-#define kPaperSizeA4 CGSizeMake(842,655)
+#define kPaperSizeA4 CGSizeMake(842,595)
 #define WebViewSize CGSizeMake(728,722)
 #define kPaperSizeLetter CGSizeMake(792,612)
 #define kPaperSizeA4_portrait CGSizeMake(500,703)
