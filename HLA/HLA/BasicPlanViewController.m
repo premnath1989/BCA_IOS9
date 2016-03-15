@@ -17,7 +17,9 @@
 #import "Constants.h"
 #import "TabValidation.h"
 
-@interface BasicPlanViewController ()
+@interface BasicPlanViewController (){
+    ColorHexCode *CustomColor;
+}
 @end
 
 @implementation BasicPlanViewController
@@ -79,6 +81,7 @@ bool WPTPD30RisDeleted = FALSE;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    CustomColor = [[ColorHexCode alloc] init ];
     
     NSMutableDictionary *newAttributes = [[NSMutableDictionary alloc] init];
     [newAttributes setObject:[UIFont systemFontOfSize:18] forKey:UITextAttributeFont];
@@ -535,6 +538,38 @@ bool WPTPD30RisDeleted = FALSE;
 
 #pragma mark - added by faiz 
 //added by faiz
+-(IBAction)validationExtraPremiField:(UITextField *)sender{
+    if (sender==_extraPremiPercentField){
+        if ([sender.text length]>0){
+            [self setActiveTextField:_extraPremiNumberField Active:NO];
+        }
+        else{
+            [self setActiveTextField:_extraPremiPercentField Active:YES];
+            [self setActiveTextField:_extraPremiNumberField Active:YES];
+        }
+    }
+    else{
+        if ([sender.text length]>0){
+            [self setActiveTextField:_extraPremiPercentField Active:NO];
+        }
+        else{
+            [self setActiveTextField:_extraPremiPercentField Active:YES];
+            [self setActiveTextField:_extraPremiNumberField Active:YES];
+        }
+    }
+}
+
+-(void)setActiveTextField:(UITextField *)textField Active:(BOOL)active{
+    if (active){
+        [textField setEnabled:YES];
+        [textField setBackgroundColor:[UIColor whiteColor]];
+    }
+    else{
+        [CustomColor colorWithHexString:@"EEEEEE"];
+        [textField setEnabled:NO];
+        [textField setBackgroundColor:[CustomColor colorWithHexString:@"EEEEEE"]];
+    }
+}
 
 -(IBAction)MasaExtraPremiTextFieldDidBegin:(UITextField *)sender{
     if ([_masaPembayaranButton.titleLabel.text isEqualToString:@"Premi Tunggal"]){

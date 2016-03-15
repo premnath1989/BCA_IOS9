@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15A284" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="BPreplay.otf">
@@ -3686,6 +3686,7 @@
                                         <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                         <connections>
+                                            <action selector="validationExtraPremiField:" destination="Bg9-Wf-jjW" eventType="editingDidEnd" id="7fX-a4-IVU"/>
                                             <outlet property="delegate" destination="Bg9-Wf-jjW" id="ela-PY-N8g"/>
                                         </connections>
                                     </textField>
@@ -3696,6 +3697,7 @@
                                         <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                         <connections>
+                                            <action selector="validationExtraPremiField:" destination="Bg9-Wf-jjW" eventType="editingDidEnd" id="YuW-0t-sHJ"/>
                                             <outlet property="delegate" destination="Bg9-Wf-jjW" id="cIj-eQ-oZZ"/>
                                         </connections>
                                     </textField>

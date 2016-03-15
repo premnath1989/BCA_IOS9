@@ -19,6 +19,7 @@
 #import "SIObj.h"
 #import "Model_SI_Premium.h"
 #import "ModelSIPOData.h"
+#import "ColorHexCode.h"
 
 @class BasicPlanViewController;
 @protocol BasicPlanViewControllerDelegate
@@ -205,6 +206,7 @@
 -(IBAction)ExtraPremiDasarNumberLBLFunc:(id)sender;
 -(IBAction)MasaExtraPremiTextFieldDidBegin:(UITextField *)sender;
 -(IBAction)MasaExtraPremiTextFieldDidEnd:(UITextField *)sender;
+-(IBAction)validationExtraPremiField:(UITextField *)sender;
 //end of added by faiz
 
 //for SINo

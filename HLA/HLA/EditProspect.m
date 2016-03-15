@@ -14101,9 +14101,17 @@ NSMutableArray *DelGroupArr;
     }
     
     if (isExpiryDate) {
-        outletDOB.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        [outletExpiryDate setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", strDate] forState:UIControlStateNormal];
-        [outletExpiryDate setBackgroundColor:[UIColor clearColor]];
+        if ([d compare:d2] == NSOrderedDescending){
+            NSString *validationTanggalLahirFuture=@"Tanggal kadaluarsa Identitas tidak dapat lebih kecil dari tanggal hari ini";
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
+                                                            message:validationTanggalLahirFuture delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil];
+            [alert show];
+        }
+        else{
+            outletDOB.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+            [outletExpiryDate setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", strDate] forState:UIControlStateNormal];
+            [outletExpiryDate setBackgroundColor:[UIColor clearColor]];
+        }
     }
     edited = YES;
     NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
