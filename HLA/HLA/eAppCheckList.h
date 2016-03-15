@@ -10,8 +10,8 @@
 #import "eAppsListing.h"
 #import "SelectCFF.h"
 #import "eSignVC.h"
-#import "COAPDF.h"
-#import "eSignController.h"
+//#import "COAPDF.h"
+//#import "eSignController.h"
 #import "CardSnap.h"
 #import "AppDelegate.h"
 #import "ESignGenerator.h"
@@ -22,7 +22,8 @@
 @class eSignController;
 
 
-@interface eAppCheckList : UIViewController<eAppsListingDelegate,SelectCFFDelegate,eSignVCDelegate,COAPDFDelegate>
+@interface eAppCheckList : UIViewController<eAppsListingDelegate,SelectCFFDelegate,eSignVCDelegate
+/*COAPDFDelegate*/>
 
 {
     NSDictionary *SecPo_LADetails_ClientNew;
@@ -47,7 +48,7 @@
 -(void)testingAttack;
 - (IBAction)doEAppListing:(id)sender;
 @property (strong, nonatomic) MBProgressHUD *HUD;
-@property (strong, nonatomic) eSignController *signController;
+//@property (strong, nonatomic) eSignController *signController;
 @property (strong, nonatomic) ESignGenerator *esignGenerator;
 @property (strong, nonatomic) CardSnap *cardSnap;
 @property (nonatomic, strong) UILabel *proposalNo_display;

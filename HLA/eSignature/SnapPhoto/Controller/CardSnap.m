@@ -13,6 +13,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "FormViewController.h"
 #import "CameraViewController.h"
+#import "DataClass.h"
 
 #define kfirstLA        @"0"
 #define ksecondLA       @"1"

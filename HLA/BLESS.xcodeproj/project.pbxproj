@@ -49,8 +49,6 @@
 		1706E6B31C2A8AC3005E36EF /* MenuEapp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1706E6B21C2A8AC3005E36EF /* MenuEapp.storyboard */; };
 		170BB47D1C30DAE600CE75DF /* Summary(PolicyDetails).storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 170BB47C1C30DAE600CE75DF /* Summary(PolicyDetails).storyboard */; };
 		173E81601C28F9C600BDAAE9 /* EappListing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 173E815F1C28F9C600BDAAE9 /* EappListing.storyboard */; };
-		174858B51C3E229D007BBF13 /* libSPSignDoc_4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 174858B41C3E229D007BBF13 /* libSPSignDoc_4.0.a */; };
-		174858B71C438BA8007BBF13 /* MyCustomDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 174858B61C438BA8007BBF13 /* MyCustomDialog.xib */; };
 		174BAA451C86799B002EEEEC /* IlustrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 174BAA441C86799B002EEEEC /* IlustrationViewController.m */; };
 		175E3A561C7BFE4A000EC161 /* MasaPembayaran.m in Sources */ = {isa = PBXBuildFile; fileRef = 175E3A551C7BFE4A000EC161 /* MasaPembayaran.m */; };
 		175E3A5A1C7C243B000EC161 /* Frekeunsi.m in Sources */ = {isa = PBXBuildFile; fileRef = 175E3A581C7C243B000EC161 /* Frekeunsi.m */; };
@@ -227,26 +225,6 @@
 		4239AEB41946DAE200BD6F53 /* eSignController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4239AE291946DAE100BD6F53 /* eSignController.m */; };
 		4239AEB51946DAE200BD6F53 /* eSignController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4239AE2A1946DAE100BD6F53 /* eSignController.xib */; };
 		4239AEB61946DAE200BD6F53 /* ESignGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4239AE2C1946DAE100BD6F53 /* ESignGenerator.m */; };
-		4239AEB71946DAE200BD6F53 /* dummy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4239AE2F1946DAE100BD6F53 /* dummy.cpp */; };
-		4239AEB91946DAE200BD6F53 /* sign-here.png in Resources */ = {isa = PBXBuildFile; fileRef = 4239AE4E1946DAE100BD6F53 /* sign-here.png */; };
-		4239AEBA1946DAE200BD6F53 /* SignatureCaptureViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4239AE4F1946DAE100BD6F53 /* SignatureCaptureViewController_iPad.xib */; };
-		4239AEBB1946DAE200BD6F53 /* WacomDevice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4239AE521946DAE100BD6F53 /* WacomDevice.framework */; };
-		4239AEBC1946DAE200BD6F53 /* cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = 4239AE541946DAE100BD6F53 /* cancel.png */; };
-		4239AEBD1946DAE200BD6F53 /* cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4239AE551946DAE100BD6F53 /* cancel@2x.png */; };
-		4239AEBE1946DAE200BD6F53 /* check_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4239AE561946DAE100BD6F53 /* check_icon.png */; };
-		4239AEBF1946DAE200BD6F53 /* check_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4239AE571946DAE100BD6F53 /* check_icon@2x.png */; };
-		4239AEC01946DAE200BD6F53 /* iOSFoundations.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4239AE581946DAE100BD6F53 /* iOSFoundations.strings */; };
-		4239AEC31946DAE200BD6F53 /* undo.png in Resources */ = {isa = PBXBuildFile; fileRef = 4239AE5D1946DAE100BD6F53 /* undo.png */; };
-		4239AEC41946DAE200BD6F53 /* undo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4239AE5E1946DAE100BD6F53 /* undo@2x.png */; };
-		4239AEC51946DAE200BD6F53 /* signdociosfoundations.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4239AE5F1946DAE100BD6F53 /* signdociosfoundations.framework */; };
-		4239AEC61946DAE200BD6F53 /* SignDocSDK.lic in Resources */ = {isa = PBXBuildFile; fileRef = 4239AE601946DAE100BD6F53 /* SignDocSDK.lic */; };
-		4239AEC71946DAE200BD6F53 /* test-private.key in Resources */ = {isa = PBXBuildFile; fileRef = 4239AE611946DAE100BD6F53 /* test-private.key */; };
-		4239AEC81946DAE200BD6F53 /* test-public.key in Resources */ = {isa = PBXBuildFile; fileRef = 4239AE621946DAE200BD6F53 /* test-public.key */; };
-		4239AEC91946DAE200BD6F53 /* test.bio in Resources */ = {isa = PBXBuildFile; fileRef = 4239AE631946DAE200BD6F53 /* test.bio */; };
-		4239AECA1946DAE200BD6F53 /* test.m in Sources */ = {isa = PBXBuildFile; fileRef = 4239AE651946DAE200BD6F53 /* test.m */; };
-		4239AECB1946DAE200BD6F53 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 4239AE671946DAE200BD6F53 /* UIImage+Resize.m */; };
-		4239AECC1946DAE200BD6F53 /* UIImage+Rotate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4239AE691946DAE200BD6F53 /* UIImage+Rotate.m */; };
-		4239AECD1946DAE200BD6F53 /* UIImagePickerController+NoRotate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4239AE6B1946DAE200BD6F53 /* UIImagePickerController+NoRotate.m */; };
 		4239AECE1946DAE200BD6F53 /* au-p1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4239AE6D1946DAE200BD6F53 /* au-p1.jpg */; };
 		4239AECF1946DAE200BD6F53 /* au-p2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4239AE6E1946DAE200BD6F53 /* au-p2.jpg */; };
 		4239AED01946DAE200BD6F53 /* au-p3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4239AE6F1946DAE200BD6F53 /* au-p3.jpg */; };
@@ -344,7 +322,6 @@
 		4321B3331C8B3496006B9402 /* htmlStyle.css in Resources */ = {isa = PBXBuildFile; fileRef = 4321B3321C8B3496006B9402 /* htmlStyle.css */; };
 		432466541C9000EC001EE22F /* ModelDataReferral.m in Sources */ = {isa = PBXBuildFile; fileRef = 432466531C9000EC001EE22F /* ModelDataReferral.m */; };
 		4329213A1C7FFC26000D1064 /* Model_SI_Master.m in Sources */ = {isa = PBXBuildFile; fileRef = 432921391C7FFC26000D1064 /* Model_SI_Master.m */; };
-		4341B5C21C61750700357986 /* libSPSignDoc_4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4341B5C11C61750700357986 /* libSPSignDoc_4.0.a */; };
 		4353C9481C61E95000AE1ED9 /* ModelNationality.m in Sources */ = {isa = PBXBuildFile; fileRef = 4353C9471C61E95000AE1ED9 /* ModelNationality.m */; };
 		4353C94B1C61F3A000AE1ED9 /* ModelMaritalStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 4353C94A1C61F3A000AE1ED9 /* ModelMaritalStatus.m */; };
 		4353C94E1C61F6F800AE1ED9 /* ModelReligion.m in Sources */ = {isa = PBXBuildFile; fileRef = 4353C94D1C61F6F800AE1ED9 /* ModelReligion.m */; };
@@ -425,13 +402,9 @@
 		A1A8312219A1978D00C0302D /* P2-1-Row2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A1A8312119A1978D00C0302D /* P2-1-Row2.jpg */; };
 		A1C085D11C7DD77200A0592C /* bless final-02.png in Resources */ = {isa = PBXBuildFile; fileRef = A1C085D01C7DD77200A0592C /* bless final-02.png */; };
 		A1E3AFC219BD5F5200F332B3 /* P5-footer-B.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A1E3AFC119BD5F5200F332B3 /* P5-footer-B.jpg */; };
-		A1E3E2651C86BF6800E2C6DC /* libSPSignDoc_4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1E3E2641C86BF6800E2C6DC /* libSPSignDoc_4.0.a */; };
-		A1EE80A11C7BB7560096185C /* libSPSignDoc_4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1EE80A01C7BB7550096185C /* libSPSignDoc_4.0.a */; };
 		A1EEF9591C8D8E520016BB3D /* Icon Brochure & save as-01-03.png in Resources */ = {isa = PBXBuildFile; fileRef = A1EEF9571C8D8E520016BB3D /* Icon Brochure & save as-01-03.png */; };
 		A1EEF95A1C8D8E520016BB3D /* Icon Brochure & save as-01-04.png in Resources */ = {isa = PBXBuildFile; fileRef = A1EEF9581C8D8E520016BB3D /* Icon Brochure & save as-01-04.png */; };
-		A902F5411C5A0EF6001D6EC0 /* libSPSignDoc_4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A902F5401C5A0EF6001D6EC0 /* libSPSignDoc_4.0.a */; };
 		A9B8F3D41C5B5EE2005C9646 /* ModelProspectProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = A9B8F3D31C5B5EE2005C9646 /* ModelProspectProfile.m */; };
-		A9E550A21C591E8000C9DAC2 /* libSPSignDoc_4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A9E550A11C591E8000C9DAC2 /* libSPSignDoc_4.0.a */; };
 		A9E550A51C591F7900C9DAC2 /* Expand Arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A9E550A31C591F7900C9DAC2 /* Expand Arrow.png */; };
 		A9E550A61C591F7900C9DAC2 /* Expand Arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A9E550A41C591F7900C9DAC2 /* Expand Arrow@2x.png */; };
 		AA2BB5FE1C70598E00A5256E /* SynchDaysCounter.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2BB5FD1C70598E00A5256E /* SynchDaysCounter.m */; };
@@ -796,7 +769,6 @@
 		C4FCDDEB16395F290065D024 /* btn_setting_home.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FCDDDF16395F290065D024 /* btn_setting_home.png */; };
 		C4FCDDEC16395F290065D024 /* btn_SI_home.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FCDDE016395F290065D024 /* btn_SI_home.png */; };
 		DE8D29C71C94512900727765 /* TabValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = DE8D29C61C94512900727765 /* TabValidation.m */; };
-		DEDF23F41C8E85EA00FD9B88 /* libSPSignDoc_4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DEDF23F31C8E85EA00FD9B88 /* libSPSignDoc_4.0.a */; };
 		EF059839161A8BD1004A9095 /* NewLAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF059837161A8BCF004A9095 /* NewLAViewController.m */; };
 		EF05983F161A8C85004A9095 /* ListingTbViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF05983D161A8C85004A9095 /* ListingTbViewController.m */; };
 		EF059842161A901A004A9095 /* PayorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF059840161A901A004A9095 /* PayorViewController.m */; };
@@ -914,8 +886,6 @@
 		1706E6B21C2A8AC3005E36EF /* MenuEapp.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MenuEapp.storyboard; sourceTree = "<group>"; };
 		170BB47C1C30DAE600CE75DF /* Summary(PolicyDetails).storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Summary(PolicyDetails).storyboard"; sourceTree = "<group>"; };
 		173E815F1C28F9C600BDAAE9 /* EappListing.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EappListing.storyboard; sourceTree = "<group>"; };
-		174858B41C3E229D007BBF13 /* libSPSignDoc_4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSPSignDoc_4.0.a; sourceTree = "<group>"; };
-		174858B61C438BA8007BBF13 /* MyCustomDialog.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCustomDialog.xib; sourceTree = "<group>"; };
 		174BAA431C86799B002EEEEC /* IlustrationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IlustrationViewController.h; sourceTree = "<group>"; };
 		174BAA441C86799B002EEEEC /* IlustrationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IlustrationViewController.m; sourceTree = "<group>"; };
 		175E3A541C7BFE4A000EC161 /* MasaPembayaran.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasaPembayaran.h; sourceTree = "<group>"; };
@@ -1198,31 +1168,6 @@
 		4239AE2B1946DAE100BD6F53 /* ESignGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESignGenerator.h; sourceTree = "<group>"; };
 		4239AE2C1946DAE100BD6F53 /* ESignGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESignGenerator.m; sourceTree = "<group>"; };
 		4239AE2D1946DAE100BD6F53 /* NSObject_ConstantTags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSObject_ConstantTags.h; sourceTree = "<group>"; };
-		4239AE2F1946DAE100BD6F53 /* dummy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dummy.cpp; sourceTree = "<group>"; };
-		4239AE4E1946DAE100BD6F53 /* sign-here.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sign-here.png"; sourceTree = "<group>"; };
-		4239AE4F1946DAE100BD6F53 /* SignatureCaptureViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignatureCaptureViewController_iPad.xib; sourceTree = "<group>"; };
-		4239AE521946DAE100BD6F53 /* WacomDevice.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WacomDevice.framework; sourceTree = "<group>"; };
-		4239AE541946DAE100BD6F53 /* cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel.png; sourceTree = "<group>"; };
-		4239AE551946DAE100BD6F53 /* cancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancel@2x.png"; sourceTree = "<group>"; };
-		4239AE561946DAE100BD6F53 /* check_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check_icon.png; sourceTree = "<group>"; };
-		4239AE571946DAE100BD6F53 /* check_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "check_icon@2x.png"; sourceTree = "<group>"; };
-		4239AE591946DAE100BD6F53 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/iOSFoundations.strings; sourceTree = "<group>"; };
-		4239AE5A1946DAE100BD6F53 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/iOSFoundations.strings; sourceTree = "<group>"; };
-		4239AE5D1946DAE100BD6F53 /* undo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = undo.png; sourceTree = "<group>"; };
-		4239AE5E1946DAE100BD6F53 /* undo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "undo@2x.png"; sourceTree = "<group>"; };
-		4239AE5F1946DAE100BD6F53 /* signdociosfoundations.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = signdociosfoundations.framework; sourceTree = "<group>"; };
-		4239AE601946DAE100BD6F53 /* SignDocSDK.lic */ = {isa = PBXFileReference; lastKnownFileType = file; path = SignDocSDK.lic; sourceTree = "<group>"; };
-		4239AE611946DAE100BD6F53 /* test-private.key */ = {isa = PBXFileReference; lastKnownFileType = file; path = "test-private.key"; sourceTree = "<group>"; };
-		4239AE621946DAE200BD6F53 /* test-public.key */ = {isa = PBXFileReference; lastKnownFileType = file; path = "test-public.key"; sourceTree = "<group>"; };
-		4239AE631946DAE200BD6F53 /* test.bio */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.bio; sourceTree = "<group>"; };
-		4239AE641946DAE200BD6F53 /* test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = test.h; sourceTree = "<group>"; };
-		4239AE651946DAE200BD6F53 /* test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = test.m; sourceTree = "<group>"; };
-		4239AE661946DAE200BD6F53 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
-		4239AE671946DAE200BD6F53 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
-		4239AE681946DAE200BD6F53 /* UIImage+Rotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Rotate.h"; sourceTree = "<group>"; };
-		4239AE691946DAE200BD6F53 /* UIImage+Rotate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Rotate.m"; sourceTree = "<group>"; };
-		4239AE6A1946DAE200BD6F53 /* UIImagePickerController+NoRotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImagePickerController+NoRotate.h"; sourceTree = "<group>"; };
-		4239AE6B1946DAE200BD6F53 /* UIImagePickerController+NoRotate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImagePickerController+NoRotate.m"; sourceTree = "<group>"; };
 		4239AE6D1946DAE200BD6F53 /* au-p1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "au-p1.jpg"; sourceTree = "<group>"; };
 		4239AE6E1946DAE200BD6F53 /* au-p2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "au-p2.jpg"; sourceTree = "<group>"; };
 		4239AE6F1946DAE200BD6F53 /* au-p3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "au-p3.jpg"; sourceTree = "<group>"; };
@@ -1385,7 +1330,6 @@
 		432466531C9000EC001EE22F /* ModelDataReferral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelDataReferral.m; sourceTree = "<group>"; };
 		432921381C7FFC26000D1064 /* Model_SI_Master.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model_SI_Master.h; sourceTree = "<group>"; };
 		432921391C7FFC26000D1064 /* Model_SI_Master.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Model_SI_Master.m; sourceTree = "<group>"; };
-		4341B5C11C61750700357986 /* libSPSignDoc_4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSPSignDoc_4.0.a; sourceTree = "<group>"; };
 		4353C9461C61E95000AE1ED9 /* ModelNationality.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelNationality.h; sourceTree = "<group>"; };
 		4353C9471C61E95000AE1ED9 /* ModelNationality.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelNationality.m; sourceTree = "<group>"; };
 		4353C9491C61F3A000AE1ED9 /* ModelMaritalStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelMaritalStatus.h; sourceTree = "<group>"; };
@@ -1575,14 +1519,10 @@
 		A1A8312119A1978D00C0302D /* P2-1-Row2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "P2-1-Row2.jpg"; sourceTree = "<group>"; };
 		A1C085D01C7DD77200A0592C /* bless final-02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bless final-02.png"; sourceTree = "<group>"; };
 		A1E3AFC119BD5F5200F332B3 /* P5-footer-B.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "P5-footer-B.jpg"; sourceTree = "<group>"; };
-		A1E3E2641C86BF6800E2C6DC /* libSPSignDoc_4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSPSignDoc_4.0.a; sourceTree = "<group>"; };
-		A1EE80A01C7BB7550096185C /* libSPSignDoc_4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSPSignDoc_4.0.a; sourceTree = "<group>"; };
 		A1EEF9571C8D8E520016BB3D /* Icon Brochure & save as-01-03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon Brochure & save as-01-03.png"; sourceTree = "<group>"; };
 		A1EEF9581C8D8E520016BB3D /* Icon Brochure & save as-01-04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon Brochure & save as-01-04.png"; sourceTree = "<group>"; };
-		A902F5401C5A0EF6001D6EC0 /* libSPSignDoc_4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSPSignDoc_4.0.a; sourceTree = "<group>"; };
 		A9B8F3D21C5B5EE2005C9646 /* ModelProspectProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelProspectProfile.h; sourceTree = "<group>"; };
 		A9B8F3D31C5B5EE2005C9646 /* ModelProspectProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelProspectProfile.m; sourceTree = "<group>"; };
-		A9E550A11C591E8000C9DAC2 /* libSPSignDoc_4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSPSignDoc_4.0.a; sourceTree = "<group>"; };
 		A9E550A31C591F7900C9DAC2 /* Expand Arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Expand Arrow.png"; sourceTree = "<group>"; };
 		A9E550A41C591F7900C9DAC2 /* Expand Arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Expand Arrow@2x.png"; sourceTree = "<group>"; };
 		AA2BB5FC1C70597300A5256E /* SynchdaysCounter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SynchdaysCounter.h; sourceTree = "<group>"; };
@@ -2167,7 +2107,6 @@
 		C4FCDDE016395F290065D024 /* btn_SI_home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_SI_home.png; sourceTree = "<group>"; };
 		DE8D29C51C94511C00727765 /* TabValidation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabValidation.h; sourceTree = "<group>"; };
 		DE8D29C61C94512900727765 /* TabValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabValidation.m; sourceTree = "<group>"; };
-		DEDF23F31C8E85EA00FD9B88 /* libSPSignDoc_4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSPSignDoc_4.0.a; sourceTree = "<group>"; };
 		EF059837161A8BCF004A9095 /* NewLAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewLAViewController.m; sourceTree = "<group>"; };
 		EF059838161A8BD0004A9095 /* NewLAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewLAViewController.h; sourceTree = "<group>"; };
 		EF05983D161A8C85004A9095 /* ListingTbViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListingTbViewController.m; sourceTree = "<group>"; };
@@ -2301,16 +2240,11 @@
 				AA4EF7781C85A9C50050CCD8 /* ImageIO.framework in Frameworks */,
 				C4E9D1CC1612C9C300016053 /* QuartzCore.framework in Frameworks */,
 				C4E9D1991612C64900016053 /* CoreGraphics.framework in Frameworks */,
-				174858B51C3E229D007BBF13 /* libSPSignDoc_4.0.a in Frameworks */,
-				A1EE80A11C7BB7560096185C /* libSPSignDoc_4.0.a in Frameworks */,
-				A9E550A21C591E8000C9DAC2 /* libSPSignDoc_4.0.a in Frameworks */,
 				6A4B72AD19ECB3A800F4DE62 /* AdSupport.framework in Frameworks */,
-				DEDF23F41C8E85EA00FD9B88 /* libSPSignDoc_4.0.a in Frameworks */,
 				428F84A719783E5C0016B7E8 /* libxml2.dylib in Frameworks */,
 				6A002CFA1850287200161727 /* libz.dylib in Frameworks */,
 				6A002CF81850286600161727 /* libstdc++.dylib in Frameworks */,
 				6A002CF61850285600161727 /* CoreText.framework in Frameworks */,
-				A1E3E2651C86BF6800E2C6DC /* libSPSignDoc_4.0.a in Frameworks */,
 				6A002CF41850284A00161727 /* CoreFoundation.framework in Frameworks */,
 				6A002CF21850282D00161727 /* OpenGLES.framework in Frameworks */,
 				6A002CF01850280A00161727 /* Security.framework in Frameworks */,
@@ -2322,17 +2256,13 @@
 				C486D9E3163E6747009F8F21 /* MediaPlayer.framework in Frameworks */,
 				C486D9E1163E6741009F8F21 /* CoreLocation.framework in Frameworks */,
 				C486D9DF163E6739009F8F21 /* AVFoundation.framework in Frameworks */,
-				4341B5C21C61750700357986 /* libSPSignDoc_4.0.a in Frameworks */,
 				C486D9DD163E6732009F8F21 /* AudioToolbox.framework in Frameworks */,
 				C486D9DA163E6728009F8F21 /* AddressBook.framework in Frameworks */,
-				A902F5411C5A0EF6001D6EC0 /* libSPSignDoc_4.0.a in Frameworks */,
 				C486D9DB163E6728009F8F21 /* AddressBookUI.framework in Frameworks */,
 				C4EB49211615556300C7FC8C /* libsqlite3.dylib in Frameworks */,
 				C4E9D1951612C64900016053 /* UIKit.framework in Frameworks */,
 				C4E9D1971612C64900016053 /* Foundation.framework in Frameworks */,
 				6A5E1C931897459E00815C33 /* libchilkatIos.a in Frameworks */,
-				4239AEBB1946DAE200BD6F53 /* WacomDevice.framework in Frameworks */,
-				4239AEC51946DAE200BD6F53 /* signdociosfoundations.framework in Frameworks */,
 				4239AEF41946DC8D00BD6F53 /* CoreBluetooth.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2906,7 +2836,6 @@
 			isa = PBXGroup;
 			children = (
 				4239AE261946DAE100BD6F53 /* Controller */,
-				4239AE2E1946DAE100BD6F53 /* eSignFramework */,
 				4239AE6C1946DAE200BD6F53 /* eSignImages */,
 				4239AE721946DAE200BD6F53 /* ILPDFKit */,
 			);
@@ -2925,69 +2854,6 @@
 				4239AE2D1946DAE100BD6F53 /* NSObject_ConstantTags.h */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		4239AE2E1946DAE100BD6F53 /* eSignFramework */ = {
-			isa = PBXGroup;
-			children = (
-				DEDF23F31C8E85EA00FD9B88 /* libSPSignDoc_4.0.a */,
-				4341B5C11C61750700357986 /* libSPSignDoc_4.0.a */,
-				A902F5401C5A0EF6001D6EC0 /* libSPSignDoc_4.0.a */,
-				A1E3E2641C86BF6800E2C6DC /* libSPSignDoc_4.0.a */,
-				A1EE80A01C7BB7550096185C /* libSPSignDoc_4.0.a */,
-				A9E550A11C591E8000C9DAC2 /* libSPSignDoc_4.0.a */,
-				174858B41C3E229D007BBF13 /* libSPSignDoc_4.0.a */,
-				4239AE2F1946DAE100BD6F53 /* dummy.cpp */,
-				4239AE4E1946DAE100BD6F53 /* sign-here.png */,
-				4239AE4F1946DAE100BD6F53 /* SignatureCaptureViewController_iPad.xib */,
-				4239AE501946DAE100BD6F53 /* signdociosfoundations.embeddedframework */,
-				4239AE601946DAE100BD6F53 /* SignDocSDK.lic */,
-				4239AE611946DAE100BD6F53 /* test-private.key */,
-				4239AE621946DAE200BD6F53 /* test-public.key */,
-				4239AE631946DAE200BD6F53 /* test.bio */,
-				4239AE641946DAE200BD6F53 /* test.h */,
-				4239AE651946DAE200BD6F53 /* test.m */,
-				4239AE661946DAE200BD6F53 /* UIImage+Resize.h */,
-				4239AE671946DAE200BD6F53 /* UIImage+Resize.m */,
-				4239AE681946DAE200BD6F53 /* UIImage+Rotate.h */,
-				4239AE691946DAE200BD6F53 /* UIImage+Rotate.m */,
-				4239AE6A1946DAE200BD6F53 /* UIImagePickerController+NoRotate.h */,
-				4239AE6B1946DAE200BD6F53 /* UIImagePickerController+NoRotate.m */,
-			);
-			path = eSignFramework;
-			sourceTree = "<group>";
-		};
-		4239AE501946DAE100BD6F53 /* signdociosfoundations.embeddedframework */ = {
-			isa = PBXGroup;
-			children = (
-				4239AE511946DAE100BD6F53 /* Frameworks */,
-				4239AE531946DAE100BD6F53 /* Resources */,
-				4239AE5F1946DAE100BD6F53 /* signdociosfoundations.framework */,
-			);
-			path = signdociosfoundations.embeddedframework;
-			sourceTree = "<group>";
-		};
-		4239AE511946DAE100BD6F53 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				4239AE521946DAE100BD6F53 /* WacomDevice.framework */,
-			);
-			path = Frameworks;
-			sourceTree = "<group>";
-		};
-		4239AE531946DAE100BD6F53 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				174858B61C438BA8007BBF13 /* MyCustomDialog.xib */,
-				4239AE541946DAE100BD6F53 /* cancel.png */,
-				4239AE551946DAE100BD6F53 /* cancel@2x.png */,
-				4239AE561946DAE100BD6F53 /* check_icon.png */,
-				4239AE571946DAE100BD6F53 /* check_icon@2x.png */,
-				4239AE581946DAE100BD6F53 /* iOSFoundations.strings */,
-				4239AE5D1946DAE100BD6F53 /* undo.png */,
-				4239AE5E1946DAE100BD6F53 /* undo@2x.png */,
-			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
 		4239AE6C1946DAE200BD6F53 /* eSignImages */ = {
@@ -5048,7 +4914,6 @@
 				43DA4BE41C770AA90038C92C /* SIMenuTableViewCell.xib in Resources */,
 				C4FCDDEB16395F290065D024 /* btn_setting_home.png in Resources */,
 				C4FCDDEC16395F290065D024 /* btn_SI_home.png in Resources */,
-				174858B71C438BA8007BBF13 /* MyCustomDialog.xib in Resources */,
 				C486D9C7163E5319009F8F21 /* btn_exit.png in Resources */,
 				C486D9C9163E5319009F8F21 /* btn_newSI_off.png in Resources */,
 				C486D9CA163E5319009F8F21 /* btn_newSI_on.png in Resources */,
@@ -5220,21 +5085,8 @@
 				4374ACFE1C911FF00006522A /* eng_BCALKK_Page2.html in Resources */,
 				42B8B1531917339500E09A34 /* README.md in Resources */,
 				4239AEB51946DAE200BD6F53 /* eSignController.xib in Resources */,
-				4239AEB91946DAE200BD6F53 /* sign-here.png in Resources */,
-				4239AEBA1946DAE200BD6F53 /* SignatureCaptureViewController_iPad.xib in Resources */,
 				1706E6B31C2A8AC3005E36EF /* MenuEapp.storyboard in Resources */,
-				4239AEBC1946DAE200BD6F53 /* cancel.png in Resources */,
-				4239AEBD1946DAE200BD6F53 /* cancel@2x.png in Resources */,
-				4239AEBE1946DAE200BD6F53 /* check_icon.png in Resources */,
 				AA4EF75E1C85A4260050CCD8 /* Reader-Print@2x.png in Resources */,
-				4239AEBF1946DAE200BD6F53 /* check_icon@2x.png in Resources */,
-				4239AEC01946DAE200BD6F53 /* iOSFoundations.strings in Resources */,
-				4239AEC31946DAE200BD6F53 /* undo.png in Resources */,
-				4239AEC41946DAE200BD6F53 /* undo@2x.png in Resources */,
-				4239AEC61946DAE200BD6F53 /* SignDocSDK.lic in Resources */,
-				4239AEC71946DAE200BD6F53 /* test-private.key in Resources */,
-				4239AEC81946DAE200BD6F53 /* test-public.key in Resources */,
-				4239AEC91946DAE200BD6F53 /* test.bio in Resources */,
 				4239AECE1946DAE200BD6F53 /* au-p1.jpg in Resources */,
 				4239AECF1946DAE200BD6F53 /* au-p2.jpg in Resources */,
 				4239AED01946DAE200BD6F53 /* au-p3.jpg in Resources */,
@@ -5744,11 +5596,6 @@
 				4239AE231946013900BD6F53 /* SupportingDocCell.m in Sources */,
 				4239AEB41946DAE200BD6F53 /* eSignController.m in Sources */,
 				4239AEB61946DAE200BD6F53 /* ESignGenerator.m in Sources */,
-				4239AEB71946DAE200BD6F53 /* dummy.cpp in Sources */,
-				4239AECA1946DAE200BD6F53 /* test.m in Sources */,
-				4239AECB1946DAE200BD6F53 /* UIImage+Resize.m in Sources */,
-				4239AECC1946DAE200BD6F53 /* UIImage+Rotate.m in Sources */,
-				4239AECD1946DAE200BD6F53 /* UIImagePickerController+NoRotate.m in Sources */,
 				4239AED31946DAE200BD6F53 /* PDFSerializer.m in Sources */,
 				4239AED41946DAE200BD6F53 /* PDFViewController.m in Sources */,
 				4239AED71946DAE200BD6F53 /* PDFArray.m in Sources */,
@@ -5811,15 +5658,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		4239AE581946DAE100BD6F53 /* iOSFoundations.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4239AE591946DAE100BD6F53 /* de */,
-				4239AE5A1946DAE100BD6F53 /* en */,
-			);
-			name = iOSFoundations.strings;
-			sourceTree = "<group>";
-		};
 		C4E9D19D1612C64900016053 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -5933,11 +5771,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
-					"\"$(SRCROOT)/eSignature/eSign/eSignFramework/signdociosfoundations.embeddedframework/Frameworks\"",
-					"\"$(SRCROOT)/eSignature/eSign/eSignFramework/signdociosfoundations.embeddedframework\"",
 					"\"$(SRCROOT)/CustomUI\"",
 					"\"$(SRCROOT)/eSignature/eSign/eSignFramework\"",
-					"\"$(SRCROOT)/eSignature/eSign/eSignFramework/signdociosfoundations.embeddedframework/signdociosfoundations.framework\"",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -5955,8 +5790,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
-					"$(PROJECT_DIR)/eSignature/eSign/eSignFramework/signdociosfoundations.embeddedframework",
-					"$(PROJECT_DIR)/eSignature/eSign/eSignFramework/signdociosfoundations.embeddedframework/signdociosfoundations.framework",
 					"$(PROJECT_DIR)/eSignature/eSign/eSignFramework",
 					"$(PROJECT_DIR)/eSignature/eSign/eSignFramework",
 					"$(PROJECT_DIR)/chilkat",
@@ -5989,11 +5822,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
-					"\"$(SRCROOT)/eSignature/eSign/eSignFramework/signdociosfoundations.embeddedframework/Frameworks\"",
-					"\"$(SRCROOT)/eSignature/eSign/eSignFramework/signdociosfoundations.embeddedframework\"",
 					"\"$(SRCROOT)/CustomUI\"",
 					"\"$(SRCROOT)/eSignature/eSign/eSignFramework\"",
-					"\"$(SRCROOT)/eSignature/eSign/eSignFramework/signdociosfoundations.embeddedframework/signdociosfoundations.framework\"",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -6012,8 +5842,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
-					"$(PROJECT_DIR)/eSignature/eSign/eSignFramework/signdociosfoundations.embeddedframework",
-					"$(PROJECT_DIR)/eSignature/eSign/eSignFramework/signdociosfoundations.embeddedframework/signdociosfoundations.framework",
 					"$(PROJECT_DIR)/eSignature/eSign/eSignFramework",
 					"$(PROJECT_DIR)/eSignature/eSign/eSignFramework",
 					"$(PROJECT_DIR)/chilkat",
@@ -6085,11 +5913,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
-					"\"$(SRCROOT)/eSignature/eSign/eSignFramework/signdociosfoundations.embeddedframework/Frameworks\"",
-					"\"$(SRCROOT)/eSignature/eSign/eSignFramework/signdociosfoundations.embeddedframework\"",
 					"\"$(SRCROOT)/CustomUI\"",
 					"\"$(SRCROOT)/eSignature/eSign/eSignFramework\"",
-					"\"$(SRCROOT)/eSignature/eSign/eSignFramework/signdociosfoundations.embeddedframework/signdociosfoundations.framework\"",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -6109,8 +5934,6 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					"\"$(SRCROOT)/../../Desktop\"",
-					"\"$(SRCROOT)/eSignature/eSign/eSignFramework/signdociosfoundations.embeddedframework\"",
-					"\"$(SRCROOT)/eSignature/eSign/eSignFramework/signdociosfoundations.embeddedframework/signdociosfoundations.framework\"",
 					"\"$(SRCROOT)/chilkat\"",
 					"\"$(SRCROOT)/eSignature/eSign/eSignFramework\"",
 					"\"$(SRCROOT)/signdociosfoundations.embeddedframework/Libraries\"",

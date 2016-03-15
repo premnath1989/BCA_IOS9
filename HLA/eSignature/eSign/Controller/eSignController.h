@@ -9,12 +9,12 @@
 #import <UIKit/UIKit.h>
 //#import "SPSignDocCAPI.h"
 #import "SignDocSDK-c.h"
-#import <signdociosfoundations/SDSignatureHandler.h>
-#import <signdociosfoundations/SDSignatureCaptureController.h>
-#import <signdociosfoundations/SDDeviceManager.h>
-#import "UIImagePickerController+NoRotate.h"
-#import "UIImage+Rotate.h"
-#import "UIImage+Resize.h"
+//#import <signdociosfoundations/SDSignatureHandler.h>
+//#import <signdociosfoundations/SDSignatureCaptureController.h>
+//#import <signdociosfoundations/SDDeviceManager.h>
+//#import "UIImagePickerController+NoRotate.h"
+//#import "UIImage+Rotate.h"
+//#import "UIImage+Resize.h"
 #ifdef __APPLE__
 #include "TargetConditionals.h"
 #endif
@@ -36,9 +36,9 @@
 @end
 
 
-@interface eSignController : UIViewController <SDSignatureHandler, UIImagePickerControllerDelegate, UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,CustomAlertBoxDelegate,UIAlertViewDelegate,UIScrollViewDelegate,refreshdata> {
+@interface eSignController : UIViewController </*SDSignatureHandler,*/ UIImagePickerControllerDelegate, UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,CustomAlertBoxDelegate,UIAlertViewDelegate,UIScrollViewDelegate,refreshdata> {
     IBOutlet UIImageView *imageView;
-    SDSignatureCaptureController *dialog;
+//    SDSignatureCaptureController *dialog;
     NSString *pdfPath;
     NSString *proposalNumber;
     NSString *currentSigner;

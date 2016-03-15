@@ -11,7 +11,7 @@
 #include <string.h>
 #include <errno.h>
 #include "SignDocSDK-c.h"
-#import "test.h"
+//#import "test.h"
 #import "FMDatabase.h"
 #import "FMResultSet.h"
 
@@ -373,7 +373,7 @@
     
     SetPDFPath(path);
     [self getRequiredSnapList];
-    initTest();
+//    initTest();
     
     
 
@@ -385,142 +385,142 @@
 //        setValueToField([_proposalNumber substringWithRange:NSMakeRange(i, 1)], [NSString stringWithFormat:@"%@%i",kpolicyNo,i]);
 //    }
     
-    setValueToField(_intermediaryName, kagentName);
-    setValueToField(_proposalNumber, krefNo);
+//    setValueToField(_intermediaryName, kagentName);
+//    setValueToField(_proposalNumber, krefNo);
 //    if (_intermediaryName2 == nil || [_intermediaryName2 isEqualToString:NULL]) {
 //        _intermediaryName2 = @"";
 //        _intermediaryCode2 = @"";        
 //    }
-    setValueToField(_intermediaryName2, kagentName2);
+//    setValueToField(_intermediaryName2, kagentName2);
     
-    for (int i=0; i<_intermediaryCode.length; i++) {
-        setValueToField([_intermediaryCode substringWithRange:NSMakeRange(i, 1)], [NSString stringWithFormat:@"%@%i",kagentCode,i]);
-    }
-
-    for (int i=0; i<_intermediaryCode2.length; i++) {
-        setValueToField([_intermediaryCode2 substringWithRange:NSMakeRange(i, 1)], [NSString stringWithFormat:@"%@%i",ksecondAgentCode,i]);
-    }
+//    for (int i=0; i<_intermediaryCode.length; i++) {
+//        setValueToField([_intermediaryCode substringWithRange:NSMakeRange(i, 1)], [NSString stringWithFormat:@"%@%i",kagentCode,i]);
+//    }
+//
+//    for (int i=0; i<_intermediaryCode2.length; i++) {
+//        setValueToField([_intermediaryCode2 substringWithRange:NSMakeRange(i, 1)], [NSString stringWithFormat:@"%@%i",ksecondAgentCode,i]);
+//    }
+//    
     
-    
-    setValueToField(_lAName, klAName);
-    setValueToField(_lAICNO, klAICNO);
+//    setValueToField(_lAName, klAName);
+//    setValueToField(_lAICNO, klAICNO);
 //    setValueToField(_secondLAName, ksecondLaName); // this is only for supplementary proposal
 //    setValueToField(_secondLAICNO, ksecondLaICNO); // this is only for supplementary proposal
-    setValueToField(_policyOwnerNamel, kpolicyOwnerName);
-    setValueToField(_policyOwnerICNO, kpolicyOwnerICNO);
+//    setValueToField(_policyOwnerNamel, kpolicyOwnerName);
+//    setValueToField(_policyOwnerICNO, kpolicyOwnerICNO);
     
     
 // only display this if First Time Payment is by Credit Card
-    if ([_firstTimePayment isEqualToString:@"05"]) {
-        if ([_debitUpon isEqualToString:@"Yes"]) {
-            setValueToField(@"", kdebitUponSub);
-            setValueToField(@"X", kdebitUponAccept);
-        }
-        else if ([_debitUpon isEqualToString:@"No"]) {
-            setValueToField(@"X", kdebitUponSub);
-            setValueToField(@"", kdebitUponAccept);
-        }
-        else {
-            setValueToField(@"", kdebitUponSub);
-            setValueToField(@"", kdebitUponAccept);
-        }
-        
-        for (int i=0; i<_cardMemberAccNO.length; i++) {
-            setValueToField([_cardMemberAccNO substringWithRange:NSMakeRange(i, 1)], [NSString stringWithFormat:@"%@%i",kcardMemberAccount,i]);
-        }
-        setValueToField(_creditCardBank, kissuedBy);
-        
-        for (int i=0; i<_cardExpiredDate.length; i++) {
-            setValueToField([_cardExpiredDate substringWithRange:NSMakeRange(i, 1)], [NSString stringWithFormat:@"%@%i",kcardExpiry,i]);
-        }
-        
-        NSNumberFormatter *fmt = [[NSNumberFormatter alloc] init];
-        [fmt setMaximumFractionDigits:2];
-        [fmt setPositiveFormat:@"#,##0.00"];
-        
-        setValueToField(_cardMemberName, kcardMemberName);
-        setValueToField([fmt stringFromNumber:[fmt numberFromString:_totalModalPremium]], kpolicyPerimium);
-        setValueToField(_cardMemberNewICNo, kcardMemberIC);
-        setValueToField(_cardMemberRelationship, kcardmemberRelation);
-        //    setValueToField(_clientChoice, kquestion1);
-    
-    }
-	else if([_recurringPayment isEqualToString:@"05"]) {
-        if ([_debitUpon isEqualToString:@"Yes"]) {
-            setValueToField(@"", kdebitUponSub);
-            setValueToField(@"X", kdebitUponAccept);
-        }
-        else if ([_debitUpon isEqualToString:@"No"]) {
-            setValueToField(@"X", kdebitUponSub);
-            setValueToField(@"", kdebitUponAccept);
-        }
-        else {
-            setValueToField(@"", kdebitUponSub);
-            setValueToField(@"", kdebitUponAccept);
-        }
-        
-        for (int i=0; i<_cardMemberAccNO.length; i++) {
-            setValueToField([_cardMemberAccNO substringWithRange:NSMakeRange(i, 1)], [NSString stringWithFormat:@"%@%i",kcardMemberAccount,i]);
-        }
-        setValueToField(_creditCardBank, kissuedBy);
-        
-        for (int i=0; i<_cardExpiredDate.length; i++) {
-            setValueToField([_cardExpiredDate substringWithRange:NSMakeRange(i, 1)], [NSString stringWithFormat:@"%@%i",kcardExpiry,i]);
-        }
-        
-        NSNumberFormatter *fmt = [[NSNumberFormatter alloc] init];
-        [fmt setMaximumFractionDigits:2];
-        [fmt setPositiveFormat:@"#,##0.00"];
-        
-        setValueToField(_cardMemberName, kcardMemberName);
-        setValueToField([fmt stringFromNumber:[fmt numberFromString:_totalModalPremium]], kpolicyPerimium);
-        setValueToField(_cardMemberNewICNo, kcardMemberIC);
-        setValueToField(_cardMemberRelationship, kcardmemberRelation);
-        //    setValueToField(_clientChoice, kquestion1);
-		
-    }
+//    if ([_firstTimePayment isEqualToString:@"05"]) {
+//        if ([_debitUpon isEqualToString:@"Yes"]) {
+//            setValueToField(@"", kdebitUponSub);
+//            setValueToField(@"X", kdebitUponAccept);
+//        }
+//        else if ([_debitUpon isEqualToString:@"No"]) {
+//            setValueToField(@"X", kdebitUponSub);
+//            setValueToField(@"", kdebitUponAccept);
+//        }
+//        else {
+//            setValueToField(@"", kdebitUponSub);
+//            setValueToField(@"", kdebitUponAccept);
+//        }
+//        
+//        for (int i=0; i<_cardMemberAccNO.length; i++) {
+//            setValueToField([_cardMemberAccNO substringWithRange:NSMakeRange(i, 1)], [NSString stringWithFormat:@"%@%i",kcardMemberAccount,i]);
+//        }
+//        setValueToField(_creditCardBank, kissuedBy);
+//        
+//        for (int i=0; i<_cardExpiredDate.length; i++) {
+//            setValueToField([_cardExpiredDate substringWithRange:NSMakeRange(i, 1)], [NSString stringWithFormat:@"%@%i",kcardExpiry,i]);
+//        }
+//        
+//        NSNumberFormatter *fmt = [[NSNumberFormatter alloc] init];
+//        [fmt setMaximumFractionDigits:2];
+//        [fmt setPositiveFormat:@"#,##0.00"];
+//        
+//        setValueToField(_cardMemberName, kcardMemberName);
+//        setValueToField([fmt stringFromNumber:[fmt numberFromString:_totalModalPremium]], kpolicyPerimium);
+//        setValueToField(_cardMemberNewICNo, kcardMemberIC);
+//        setValueToField(_cardMemberRelationship, kcardmemberRelation);
+//        //    setValueToField(_clientChoice, kquestion1);
+//    
+//    }
+//	else if([_recurringPayment isEqualToString:@"05"]) {
+//        if ([_debitUpon isEqualToString:@"Yes"]) {
+//            setValueToField(@"", kdebitUponSub);
+//            setValueToField(@"X", kdebitUponAccept);
+//        }
+//        else if ([_debitUpon isEqualToString:@"No"]) {
+//            setValueToField(@"X", kdebitUponSub);
+//            setValueToField(@"", kdebitUponAccept);
+//        }
+//        else {
+//            setValueToField(@"", kdebitUponSub);
+//            setValueToField(@"", kdebitUponAccept);
+//        }
+//        
+//        for (int i=0; i<_cardMemberAccNO.length; i++) {
+//            setValueToField([_cardMemberAccNO substringWithRange:NSMakeRange(i, 1)], [NSString stringWithFormat:@"%@%i",kcardMemberAccount,i]);
+//        }
+//        setValueToField(_creditCardBank, kissuedBy);
+//        
+//        for (int i=0; i<_cardExpiredDate.length; i++) {
+//            setValueToField([_cardExpiredDate substringWithRange:NSMakeRange(i, 1)], [NSString stringWithFormat:@"%@%i",kcardExpiry,i]);
+//        }
+//        
+//        NSNumberFormatter *fmt = [[NSNumberFormatter alloc] init];
+//        [fmt setMaximumFractionDigits:2];
+//        [fmt setPositiveFormat:@"#,##0.00"];
+//        
+//        setValueToField(_cardMemberName, kcardMemberName);
+//        setValueToField([fmt stringFromNumber:[fmt numberFromString:_totalModalPremium]], kpolicyPerimium);
+//        setValueToField(_cardMemberNewICNo, kcardMemberIC);
+//        setValueToField(_cardMemberRelationship, kcardmemberRelation);
+//        //    setValueToField(_clientChoice, kquestion1);
+//		
+//    }
 
     
 //    setValueToField(@"X", kno15AcknowledgeEng);
 //    setValueToField(@"X", kno15AcknowledgeMalay);
     
-    if ([_clientChoice hasPrefix:@"1"]) {
-        setValueToField(@"  X", kq1cho1);
-        setValueToField(@"", kq1cho2);
-        setValueToField(@"", kq1cho3);
-    }
-    if ([_clientChoice hasPrefix:@"2"]) {
-        setValueToField(@"", kq1cho1);
-        setValueToField(@"  X", kq1cho2);
-        setValueToField(@"", kq1cho3);
-    }
-    if ([_clientChoice hasPrefix:@"3"]) {
-        setValueToField(@"", kq1cho1);
-        setValueToField(@"", kq1cho2);
-        setValueToField(@"  X", kq1cho3);
-    }
-    
-    if ([_clientAck hasPrefix:@"1"]) {
-        setValueToField(@"  X", kq2cho1);
-        setValueToField(@"", kq2cho2);
-    }
-    if ([_clientAck hasPrefix:@"2"]) {
-        setValueToField(@"", kq2cho1);
-        setValueToField(@"  X", kq2cho2);
-    }
-    
-    if ([_agree isEqualToString:@"True"]) {
-        setValueToField(@"  X", kno14AgreeEng);
-        setValueToField(@"  X", kno14AgreeMalay);
-        setValueToField(@"", kno14DisagreeEng);
-        setValueToField(@"", kno14DisagreeMalay);
-    }
-    else if ([_agree isEqualToString:@"False"]) {
-        setValueToField(@"", kno14AgreeEng);
-        setValueToField(@"", kno14AgreeMalay);
-        setValueToField(@"  X", kno14DisagreeEng);
-        setValueToField(@"  X", kno14DisagreeMalay);
-    }
+//    if ([_clientChoice hasPrefix:@"1"]) {
+//        setValueToField(@"  X", kq1cho1);
+//        setValueToField(@"", kq1cho2);
+//        setValueToField(@"", kq1cho3);
+//    }
+//    if ([_clientChoice hasPrefix:@"2"]) {
+//        setValueToField(@"", kq1cho1);
+//        setValueToField(@"  X", kq1cho2);
+//        setValueToField(@"", kq1cho3);
+//    }
+//    if ([_clientChoice hasPrefix:@"3"]) {
+//        setValueToField(@"", kq1cho1);
+//        setValueToField(@"", kq1cho2);
+//        setValueToField(@"  X", kq1cho3);
+//    }
+//    
+//    if ([_clientAck hasPrefix:@"1"]) {
+//        setValueToField(@"  X", kq2cho1);
+//        setValueToField(@"", kq2cho2);
+//    }
+//    if ([_clientAck hasPrefix:@"2"]) {
+//        setValueToField(@"", kq2cho1);
+//        setValueToField(@"  X", kq2cho2);
+//    }
+//    
+//    if ([_agree isEqualToString:@"True"]) {
+//        setValueToField(@"  X", kno14AgreeEng);
+//        setValueToField(@"  X", kno14AgreeMalay);
+//        setValueToField(@"", kno14DisagreeEng);
+//        setValueToField(@"", kno14DisagreeMalay);
+//    }
+//    else if ([_agree isEqualToString:@"False"]) {
+//        setValueToField(@"", kno14AgreeEng);
+//        setValueToField(@"", kno14AgreeMalay);
+//        setValueToField(@"  X", kno14DisagreeEng);
+//        setValueToField(@"  X", kno14DisagreeMalay);
+//    }
     
     
     
@@ -530,21 +530,21 @@
     NSString *dateString = [dateFormatter stringFromDate:currDate];
 
     //setValueToField(dateString, kdate1);
-    setValueToField(_intermediaryName, kintermediaryName);
-    setValueToField(_intermediaryNICNo, kintermediaryICNO);
-    setValueToField(_intermediaryName, ksecondLaName2);
-    setValueToField(_intermediaryNICNo, ksecondLaICNO2);
-    setValueToField(_gardianName, kGardian);
-    setValueToField(_gardianICNo, kGardianICNO);
+//    setValueToField(_intermediaryName, kintermediaryName);
+//    setValueToField(_intermediaryNICNo, kintermediaryICNO);
+//    setValueToField(_intermediaryName, ksecondLaName2);
+//    setValueToField(_intermediaryNICNo, ksecondLaICNO2);
+//    setValueToField(_gardianName, kGardian);
+//    setValueToField(_gardianICNo, kGardianICNO);
     
     
 
     //setValueToField(_intermediaryManagerName, kmanagerName);
-    if(numberOfDays<366){
-        setValueToField(_intermediaryManagerName, kmanagerName);
-    }
+//    if(numberOfDays<366){
+//        setValueToField(_intermediaryManagerName, kmanagerName);
+//    }
     
-    saveField();
+//    saveField();
     
     return path;
 }

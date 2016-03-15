@@ -6,7 +6,7 @@
 #import "PDFWidgetAnnotationView.h"
 #import "PDFFormButtonField.h"
 #import "PDF.h"
-#import "eSignController.h"
+//#import "eSignController.h"
 
 
 
@@ -184,8 +184,8 @@
 
 -(void)SigninFormx
 {
-    eSignController *apiViewController = [[eSignController alloc] initWithNibName:nil bundle:nil];
-    [apiViewController Signtheform];
+//    eSignController *apiViewController = [[eSignController alloc] initWithNibName:nil bundle:nil];
+//    [apiViewController Signtheform];
 }
 
 

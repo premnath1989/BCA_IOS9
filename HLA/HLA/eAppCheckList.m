@@ -7,7 +7,7 @@
 //
 
 #import "eAppCheckList.h"
-#include "test.h"
+//#include "test.h"
 #import "SICell.h"
 #import "PolicyOwnerCell.h"
 #import "CFFCell.h"
@@ -20,7 +20,7 @@
 #import "PolicyOwner.h"
 #import "SelectCFF.h"
 #import "eSignVC.h"
-#import "COAPDF.h"
+//#import "COAPDF.h"
 #import "MasterMenuEApp.h"
 #import "DataClass.h"
 
@@ -1027,11 +1027,11 @@
     NSString *str = [NSString stringWithContentsOfFile:xmlPRPath encoding:NSUTF8StringEncoding error:nil];
     NSDictionary *xmlDoc = [NSDictionary dictionaryWithXMLString:str];
     
-    _signController  = [[eSignController alloc]init];
-    _signController.delegate=self;
-    
-    [_signController eApplicationForProposalNo:[[obj.eAppData objectForKey:@"EAPP"] objectForKey:@"eProposalNo"] fromInfoDic:xmlDoc];
-    [self.view addSubview:_signController.view];
+//    _signController  = [[eSignController alloc]init];
+//    _signController.delegate=self;
+//    
+//    [_signController eApplicationForProposalNo:[[obj.eAppData objectForKey:@"EAPP"] objectForKey:@"eProposalNo"] fromInfoDic:xmlDoc];
+//    [self.view addSubview:_signController.view];
     [HUD hide:YES];
 }
 
@@ -1087,9 +1087,9 @@
 
 -(void)displayPDF:(NSString *)formType{
     UIStoryboard *thirdStoryBoard = [UIStoryboard storyboardWithName:@"LynnStoryboard" bundle:nil];
-    COAPDF *coaPDF = [thirdStoryBoard instantiateViewControllerWithIdentifier:@"COA"];
-    coaPDF.delegate = self;
-    [self presentViewController:coaPDF animated:YES completion:nil];
+//    COAPDF *coaPDF = [thirdStoryBoard instantiateViewControllerWithIdentifier:@"COA"];
+//    coaPDF.delegate = self;
+//    [self presentViewController:coaPDF animated:YES completion:nil];
     
 }
 

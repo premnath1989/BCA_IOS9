@@ -259,36 +259,43 @@
         
     }
     else{
-        if ([txtOldPwd.text stringByReplacingOccurrencesOfString:@" " withString:@"" ].length <= 0 ) {
+        if([txtOldPwd.text isEqualToString:txtNewPwd.text]) {
             [self hideKeyboard];
             valid = FALSE;
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Password lama harap di isi" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Password lama tidak boleh sama dengan password baru" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [alert show];
-            [txtOldPwd becomeFirstResponder];
-            
-        }
-        else {
-            if ([txtNewPwd.text stringByReplacingOccurrencesOfString:@" " withString:@""  ].length <= 0) {
-                valid = FALSE;
+            [txtNewPwd becomeFirstResponder];
+        }else{
+            if ([txtOldPwd.text stringByReplacingOccurrencesOfString:@" " withString:@"" ].length <= 0 ) {
                 [self hideKeyboard];
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Password baru harap di isi" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                valid = FALSE;
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Password lama harap di isi" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [alert show];
-                [txtNewPwd becomeFirstResponder];
+                [txtOldPwd becomeFirstResponder];
             }
             else {
-                if ([txtConfirmPwd.text stringByReplacingOccurrencesOfString:@" " withString:@""  ].length <= 0) {
+                if ([txtNewPwd.text stringByReplacingOccurrencesOfString:@" " withString:@""  ].length <= 0) {
                     valid = FALSE;
                     [self hideKeyboard];
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Confirm password harap di isi" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Password baru harap di isi" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                     [alert show];
-                    [txtConfirmPwd becomeFirstResponder];
-                    
+                    [txtNewPwd becomeFirstResponder];
                 }
                 else {
-                    valid = TRUE;
-                    
+                    if ([txtConfirmPwd.text stringByReplacingOccurrencesOfString:@" " withString:@""  ].length <= 0) {
+                        valid = FALSE;
+                        [self hideKeyboard];
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Confirm password harap di isi" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                        [alert show];
+                        [txtConfirmPwd becomeFirstResponder];
+                        
+                    }
+                    else {
+                        valid = TRUE;
+                        
+                    }
                 }
-            }
+        }
         }
     }
     
@@ -360,6 +367,8 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
             if([rateResponse.ChangePasswordResult caseInsensitiveCompare:@"TRUE"]== NSOrderedSame){
                 UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Ubah Password Sukses!"message:[NSString stringWithFormat:@"Password Anda telah berhasil di ubah"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
                 [alert show];
+                [loginDB updatePassword:txtNewPwd.text];
+                [self dismissModalViewControllerAnimated:YES];
             }else{
                 UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Ubah Password Gagal!"message:[NSString stringWithFormat:@"Password Anda gagal di ubah"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
                 [alert show];

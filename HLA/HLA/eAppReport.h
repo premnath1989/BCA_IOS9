@@ -16,7 +16,7 @@
 #import "ApplicationAuthorization.h"
 #import "NDHTMLtoPDF.h"
 #import "ESignGenerator.h"
-#import "eSignController.h"
+//#import "eSignController.h"
 
 @class eSignController;
 
@@ -33,7 +33,7 @@
 }
 
  
-@property (strong, nonatomic) eSignController *signController;
+//@property (strong, nonatomic) eSignController *signController;
 @property (weak, nonatomic) IBOutlet UITableView *reportTable;
  
 @property (weak, nonatomic) IBOutlet UILabel *textLabel;
@@ -44,7 +44,7 @@
 @property (nonatomic, retain) FFform *FFPDFGenerator;
 
 @property (strong, nonatomic) ESignGenerator *eSignGenerator;
-@property (strong, nonatomic) eSignController *eSignController;
+//@property (strong, nonatomic) eSignController *eSignController;
 
 @property (nonatomic, retain) CAform *CAPDFGenerator;
 @property (nonatomic, retain) ApplicationAuthorization *ApplicationAuthorizationPDFGenerator;

@@ -52,6 +52,7 @@ NSString *ProceedStatus = @"";
 @synthesize delegate = _delegate;
 @synthesize previousElementName, agentCode;
 @synthesize elementName, msg, lblLastLogin, lblTimeRemaining;
+@synthesize uatAgentStatus, uatDeviceLabel;
 
 - (void)viewDidLoad
 {
@@ -119,6 +120,8 @@ NSString *ProceedStatus = @"";
     label.lineBreakMode=NSLineBreakByWordWrapping;
     
     lblVersinBuild.text =[NSString stringWithFormat:@"%@ b%@",BCAversion, build];
+    
+    [self UATFunctions];
 
 }
 
@@ -311,12 +314,26 @@ static NSString *labelVers;
                 int result = [loginDB fullSyncTable:returnObj];
                 if(result == TABLE_INSERTION_SUCCESS){
                     [spinnerLoading stopLoadingSpinner];
-                    [self loginSuccess];
+                    if([self validToLogin] && [self CredentialChecking:FALSE])
+                        [self loginSuccess];
                 }
             }else if([rateResponse.strStatus caseInsensitiveCompare:@"False"] == NSOrderedSame){
-                [spinnerLoading stopLoadingSpinner];
-                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Proses Login anda gagal" message:@"" delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
-                [alert show];
+                
+                // create XMLDocument object
+                DDXMLDocument *xml = [[DDXMLDocument alloc] initWithXMLString:
+                                      rateResponse.ValidateLoginResult.xmlDetails options:0 error:nil];
+                
+                // Get root element - DataSetMenu for your XMLfile
+                DDXMLElement *root = [xml rootElement];
+                WebResponObj *returnObj = [[WebResponObj alloc]init];
+                [self parseXML:root objBuff:returnObj index:0];
+                int result = [loginDB fullSyncTable:returnObj];
+                if(result == TABLE_INSERTION_SUCCESS){
+                    [spinnerLoading stopLoadingSpinner];
+                    if([self validToLogin] && [self CredentialChecking:FALSE])
+                        [self loginSuccess];
+                }
+
             }
         }
     }
@@ -362,7 +379,7 @@ static NSString *labelVers;
     
     if (txtUsername.text.length <= 0) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
-                                                        message:@"Kode Agen harap di isi" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil ];
+                                                        message:@"Username harap di isi" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil ];
         [alert show];
         alert = Nil;
     }
@@ -466,6 +483,49 @@ static NSString *labelVers;
     }
 }
 
+- (void)UATFunctions{
+    switch ([loginDB AgentStatus:txtUsername.text]) {
+        case AGENT_IS_ACTIVE:
+        {
+            uatAgentStatus.text = @"Status Agen : active";
+            break;
+        }
+        case AGENT_IS_INACTIVE:
+        {
+            uatAgentStatus.text = @"Status Agen : inactive";
+            break;
+        }
+        case AGENT_IS_TERMINATED:
+        {
+            uatAgentStatus.text = @"Status Agen : terminated";
+            break;
+        }
+        default:
+            break;
+    }
+    
+    switch ([loginDB DeviceStatus:txtUsername.text]) {
+        case DEVICE_IS_ACTIVE:
+        {
+            uatDeviceLabel.text = @"Status device : aktif";
+            break;
+        }
+        case DEVICE_IS_INACTIVE:
+        {
+            uatDeviceLabel.text = @"Status device : tidak aktif";
+            break;
+        }
+        case DEVICE_IS_TERMINATED:
+        {
+            uatDeviceLabel.text = @"Status device : terminate";
+            break;
+        }
+        default:
+            break;
+    }
+
+}
+
 - (BOOL) validToLogin{
     
     //need to check again the date format
@@ -485,7 +545,7 @@ static NSString *labelVers;
             }
             case AGENT_IS_NOT_FOUND:
             {
-                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Kode Agen yang di masukan salah"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Username yang di masukan salah"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
                 [alert show];
                 validFlag = false;
                 break;
@@ -513,10 +573,23 @@ static NSString *labelVers;
         }
     }
     
+    if([[loginDB localDBUDID] caseInsensitiveCompare:[[[UIDevice currentDevice] identifierForVendor] UUIDString]]!= NSOrderedSame){
+        UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Agen login di device yang tidak terdaftar"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+        validFlag = false;
+    }
+    
     switch ([loginDB DeviceStatus:txtUsername.text]) {
         case DEVICE_IS_INACTIVE:
         {
             UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Status Perangkat anda tidak aktif"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alert show];
+            validFlag = false;
+            break;
+        }
+        case DEVICE_IS_TERMINATED:
+        {
+            UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Status Perangkat anda telah di terminate"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [alert show];
             validFlag = false;
             break;
@@ -531,7 +604,7 @@ static NSString *labelVers;
 - (void) loginAction
 {
     //check the agentstatus and expiry date
-    if([self validToLogin] && !firstLogin){
+    if(!firstLogin){
         
         [spinnerLoading startLoadingSpinner:self.view label:@"Loading"];
         
@@ -542,9 +615,13 @@ static NSString *labelVers;
             [webservice ValidateLogin:txtUsername.text password:txtPassword.text UUID:[[[UIDevice currentDevice] identifierForVendor] UUIDString] delegate:self];
         }else{
             //offline login
-            ONLINE_PROCESS = FALSE;
-            OFFLINE_PROCESS = FALSE;
-            [self doOfflineLoginCheck];
+            if([self validToLogin]){
+                ONLINE_PROCESS = FALSE;
+                OFFLINE_PROCESS = FALSE;
+                [self doOfflineLoginCheck];
+            }else{
+                [spinnerLoading stopLoadingSpinner];
+            }
         }
     }
 }
@@ -637,25 +714,24 @@ static NSString *labelVers;
     
     if(dateDifference > 7)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Informasi"
+        if(dateDifference > 14){
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Informasi"
+                                                            message:@"Anda tidak melakukan online login selama 14 hari, semua data nasabah telah terhapus."
+                                                           delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [alert show];
+        }else{
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Informasi"
                                                         message:@"Anda tidak melakukan online login selama 7 hari, pastikan perangkat terhubung ke internet untuk login."
                                                        delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alert show];
+            [alert show];
+        }
         [spinnerLoading stopLoadingSpinner];
-        alert = Nil;
     }else
     {
         
         if ([self OfflineLogin]) {
             [self openHome];
             //[self loginSuccess];
-        }
-        else {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Username/Password yang anda masukan salah" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-            [alert show];
-            
-            [txtUsername becomeFirstResponder];
-            alert = Nil;
         }
         [spinnerLoading stopLoadingSpinner];
     }
@@ -686,10 +762,14 @@ static NSString *labelVers;
 
 - (IBAction)btnReset:(id)sender
 {
-    [self loginSuccess];
+//    [self loginSuccess];
     txtUsername.text = @"";
     txtPassword.text = @"";
-    
+}
+
+- (IBAction)passLogin:(id)sender
+{
+    [self loginSuccess];
 }
 
 #pragma mark - XML parser
@@ -785,7 +865,7 @@ static NSString *labelVers;
     
 }
 
--(BOOL) OfflineLogin
+-(BOOL) CredentialChecking:(BOOL)spvAdminBypass
 {
     BOOL successLog = FALSE;
     
@@ -814,16 +894,47 @@ static NSString *labelVers;
         Admin = [[result1 objectForColumnName:@"Admin"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
         AdminPassword = [[result1 objectForColumnName:@"AdminPassword"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
         
-        if (([txtUsername.text isEqualToString:AgentName] && [txtPassword.text isEqualToString:AgentPassword])
-            || ([txtUsername.text isEqualToString:SupervisorCode] && [txtPassword.text isEqualToString:SupervisorPass])
-            || ([txtUsername.text isEqualToString:Admin] && [txtPassword.text isEqualToString:AdminPassword])) {
-            successLog = TRUE;
+        if(!spvAdminBypass){
+            if ([txtUsername.text isEqualToString:AgentName]) {
+                if ([txtPassword.text isEqualToString:AgentPassword]) {
+                    successLog = TRUE;
+                }else{
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Password yang anda masukan salah" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                    [alert show];
+                    successLog = FALSE;
+                }
+            }else{
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Username yang anda masukan salah" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                [alert show];
+                successLog = FALSE;
+            }
+        }else{
+            if([txtUsername.text isEqualToString:AgentName] || [txtUsername.text isEqualToString:SupervisorCode] || [txtUsername.text isEqualToString:Admin]){
+                if (([txtUsername.text isEqualToString:AgentName] && [txtPassword.text isEqualToString:AgentPassword])
+                    ||([txtUsername.text isEqualToString:SupervisorCode] && [txtPassword.text isEqualToString:SupervisorPass])
+                    || ([txtUsername.text isEqualToString:Admin] && [txtPassword.text isEqualToString:AdminPassword])) {
+                    successLog = TRUE;
+                }else{
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Password yang anda masukan salah" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                    [alert show];
+                    successLog = FALSE;
+                }
+            }else{
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Username yang anda masukan salah" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                [alert show];
+                successLog = FALSE;
+            }
         }
     }
     
     [db close];
     
     return successLog;
+}
+
+-(BOOL) OfflineLogin
+{
+    return [self CredentialChecking:TRUE];
 }
 
 -(NSString*) getTodayDateInStr

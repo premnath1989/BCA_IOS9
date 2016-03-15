@@ -18,20 +18,22 @@
 }
 
 - (int) SearchAgent:(NSString *)AgentID;
-//- (int) InsertAgentProfile:(NSString *) urlStr;
-- (int)insertAgentProfile:(WebResponObj *)obj;
-- (void) updateLoginDate;
+- (int) insertAgentProfile:(WebResponObj *)obj;
 - (int) FirstLogin:(NSString *)AgentID;
 - (int) AgentRecord;
 - (int) AgentStatus:(NSString *)AgentID;
-- (NSString *) expiryDate:(NSString *)AgentID;
-- (NSString *)checkingLastLogout;
-- (NSMutableDictionary *)getAgentDetails;
-- (int) DeviceStatus:(NSString *)AgentID;
-- (BOOL) SpvAdmValidation:(NSString *)username password:(NSString *)password;
-- (int) fullSyncTable:(WebResponObj *)obj;
-- (void) makeDBCopy;
-- (void) updateLogoutDate;
 - (int) DeleteAgentProfile;
+- (int) fullSyncTable:(WebResponObj *)obj;
+- (int) DeviceStatus:(NSString *)AgentID;
+- (void) updatePassword:(NSString *)newPassword;
+- (void) makeDBCopy;
+- (void) updateLoginDate;
+- (void) updateLogoutDate;
+- (BOOL) SpvAdmValidation:(NSString *)username password:(NSString *)password;
+- (NSString *) expiryDate:(NSString *)AgentID;
+- (NSString *) checkingLastLogout;
+- (NSString *) localDBUDID;
+- (NSMutableDictionary *)getAgentDetails;
+//- (int) InsertAgentProfile:(NSString *) urlStr;
 
 @end

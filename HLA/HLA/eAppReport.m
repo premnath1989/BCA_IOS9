@@ -18,7 +18,7 @@
 #import "ColorHexCode.h"
 #import "MBProgressHUD.h"
 #import "ESignGenerator.h"
-#import "eSignController.h"
+//#import "eSignController.h"
 
 #import "SIxml.h"
 #import "PRxml.h"
@@ -269,8 +269,8 @@
     [database executeUpdate:queryB];
 
 
-    eSignController *esignCon = [[eSignController alloc]init];
-    [esignCon eApplicationForProposalNo:[[obj.eAppData objectForKey:@"EAPP"] objectForKey:@"eProposalNo"] fromInfoDic:xmlDoc];
+//    eSignController *esignCon = [[eSignController alloc]init];
+//    [esignCon eApplicationForProposalNo:[[obj.eAppData objectForKey:@"EAPP"] objectForKey:@"eProposalNo"] fromInfoDic:xmlDoc];
     NSLog(@"Generate Forms : Authorization Form - generated!");
 
 
@@ -1005,14 +1005,14 @@
                 NSString *str = [NSString stringWithContentsOfFile:xmlPRPath encoding:NSUTF8StringEncoding error:nil];                
                 NSDictionary *xmlDoc = [NSDictionary dictionaryWithXMLString:str];                
                 
-                _signController = [[eSignController alloc]init];
-                
-                _signController.delegate=self;
-                _signController.cellRghtbuttonDisabled1 =@"disable";                
-                [_signController eApplicationForProposalNo:[[obj.eAppData objectForKey:@"EAPP"] objectForKey:@"eProposalNo"] fromInfoDic:xmlDoc];                
-                _signController.view.frame = CGRectMake(0, 20, _signController.view.frame.size.width, _signController.view.frame.size.height);
-                
-                [self.navigationController.view addSubview:_signController.view];
+//                _signController = [[eSignController alloc]init];
+//                
+//                _signController.delegate=self;
+//                _signController.cellRghtbuttonDisabled1 =@"disable";                
+//                [_signController eApplicationForProposalNo:[[obj.eAppData objectForKey:@"EAPP"] objectForKey:@"eProposalNo"] fromInfoDic:xmlDoc];                
+//                _signController.view.frame = CGRectMake(0, 20, _signController.view.frame.size.width, _signController.view.frame.size.height);
+//                
+//                [self.navigationController.view addSubview:_signController.view];
                 
             }
         }
@@ -1089,15 +1089,15 @@
                 
                 NSDictionary *xmlDoc = [NSDictionary dictionaryWithXMLString:str];                
                 
-                _signController = [[eSignController alloc]init];
-                
-                _signController.delegate=self;
-                _signController.cellRghtbuttonDisabled1 =@"disable";                
-                [_signController eApplicationForProposalNo:[[obj.eAppData objectForKey:@"EAPP"] objectForKey:@"eProposalNo"] fromInfoDic:xmlDoc];
-                                
-                _signController.view.frame = CGRectMake(0, 20, _signController.view.frame.size.width, _signController.view.frame.size.height);
-                
-                [self.navigationController.view addSubview:_signController.view];
+//                _signController = [[eSignController alloc]init];
+//                
+//                _signController.delegate=self;
+//                _signController.cellRghtbuttonDisabled1 =@"disable";                
+//                [_signController eApplicationForProposalNo:[[obj.eAppData objectForKey:@"EAPP"] objectForKey:@"eProposalNo"] fromInfoDic:xmlDoc];
+//                                
+//                _signController.view.frame = CGRectMake(0, 20, _signController.view.frame.size.width, _signController.view.frame.size.height);
+//                
+//                [self.navigationController.view addSubview:_signController.view];
                 
             }            
             
@@ -1114,20 +1114,20 @@
     
     for (int i= 1 ; i<6; i++) {
         [[NSUserDefaults standardUserDefaults]setInteger:i forKey:@"pageNo"];
-        NSMutableData *data;
-        struct SIGNDOC_ByteArray *blob;
-        blob = renderTest(self.view.frame.size.height*2);
-        data = [[NSMutableData alloc] initWithBytesNoCopy:SIGNDOC_ByteArray_data(blob) length:SIGNDOC_ByteArray_count(blob)];
-        UIImage *resultImage = [UIImage imageWithData:data];
+//        NSMutableData *data;
+//        struct SIGNDOC_ByteArray *blob;
+//        blob = renderTest(self.view.frame.size.height*2);
+//        data = [[NSMutableData alloc] initWithBytesNoCopy:SIGNDOC_ByteArray_data(blob) length:SIGNDOC_ByteArray_count(blob)];
+//        UIImage *resultImage = [UIImage imageWithData:data];
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"image%i.png",i]];
         
         // Save image.
-        [UIImagePNGRepresentation(resultImage) writeToFile:filePath atomically:YES];
+//        [UIImagePNGRepresentation(resultImage) writeToFile:filePath atomically:YES];
         
         
         UIImageView *imgView = [[UIImageView alloc]initWithFrame:CGRectMake(0, y, self.view.frame.size.width, self.view.frame.size.height*2)];
-        [imgView setImage:resultImage];
+//        [imgView setImage:resultImage];
         [pdfView addSubview:imgView];
         y+= (self.view.frame.size.height*2) + 10;
     }

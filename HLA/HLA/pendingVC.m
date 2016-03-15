@@ -16,6 +16,7 @@
 #import "NSStringAdditions.h"
 #import "AFXMLRequestOperation.h"
 #import "ColorHexCode.h"
+#import "DataClass.h"
 
 
 @interface pendingVC () {

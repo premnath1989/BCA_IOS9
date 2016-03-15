@@ -118,11 +118,14 @@ static NSString* DATE_FORMAT = @"yyyy-MM-dd";
 -(void)keyboardDidHide:(NSNotificationCenter *)notification;
 - (IBAction)btnReset:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *outletReset;
+@property (weak, nonatomic) IBOutlet UILabel *uatDeviceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *uatAgentStatus;
 
 +(NSString *)getLabelVersion;
 
 -(void)doOnceADayCheck:(BOOL)debugF;
 +(bool)forSMPD_Acturial:(NSString*) password;
 +(void)setFirstDevice;
+- (IBAction)passLogin:(id)sender;
 
 @end

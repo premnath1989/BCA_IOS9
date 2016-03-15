@@ -186,6 +186,8 @@
                     DeviceStatusFlag = DEVICE_IS_ACTIVE;
                 }else if([strFirstLogin caseInsensitiveCompare:@"I"] == NSOrderedSame){
                     DeviceStatusFlag = DEVICE_IS_INACTIVE;
+                }else if([strFirstLogin caseInsensitiveCompare:@"T"] == NSOrderedSame){
+                    DeviceStatusFlag = DEVICE_IS_TERMINATED;
                 }
             }else{
                 DeviceStatusFlag = AGENT_IS_NOT_FOUND;
@@ -293,6 +295,8 @@
     return FirstLogin;
 }
 
+
+
 - (void) updateLogoutDate{
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZZZZ"];
@@ -329,6 +333,35 @@
     statement = Nil;
 }
 
+- (void) updatePassword:(NSString *)newPassword{
+    
+    const char *dbpath = [databasePath UTF8String];
+    sqlite3_stmt *statement;
+    
+    if (sqlite3_open(dbpath, &contactDB) == SQLITE_OK)
+    {
+        NSString *querySQL = [NSString stringWithFormat:@"UPDATE Agent_Profile SET AgentPassword= \"%@\"",newPassword];
+        
+        const char *query_stmt = [querySQL UTF8String];
+        if (sqlite3_prepare_v2(contactDB, query_stmt, -1, &statement, NULL) == SQLITE_OK)
+        {
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                NSLog(@"date update!");
+                
+            } else {
+                NSLog(@"date update Failed!");
+            }
+            sqlite3_finalize(statement);
+        }
+        sqlite3_close(contactDB);
+        
+        query_stmt = Nil;
+        querySQL = Nil;
+    }
+    dbpath = Nil;
+    statement = Nil;
+}
 
 - (void) updateLoginDate{
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -468,6 +501,30 @@
         sqlite3_close(contactDB);
     }
     return nsdate;
+}
+
+-(NSString *)localDBUDID
+{
+    
+    sqlite3_stmt *statement;
+    NSString *UDID = @"";
+    if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
+    {
+        NSString *querySQL = [NSString stringWithFormat: @"SELECT UDID FROM Agent_Profile"];
+        
+        if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK){
+            if (sqlite3_step(statement) == SQLITE_ROW) {
+                if((const char *) sqlite3_column_text(statement, 0) != NULL){
+                    UDID = [[NSString alloc]
+                              initWithUTF8String:
+                              (const char *) sqlite3_column_text(statement, 0)];
+                }
+            }
+            sqlite3_finalize(statement);
+        }
+        sqlite3_close(contactDB);
+    }
+    return UDID;
 }
 
 - (NSMutableArray *) columnNames{

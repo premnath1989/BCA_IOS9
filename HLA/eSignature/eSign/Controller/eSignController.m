@@ -8,7 +8,7 @@
 
 #import "eSignController.h"
 #import <QuartzCore/QuartzCore.h> 
-#include "test.h"
+//#include "test.h"
 #import <sys/socket.h>
 #import <ifaddrs.h>
 #import <arpa/inet.h>
@@ -110,7 +110,7 @@ NSString *Signer_type = @"";
     _BackButtonName.title=proposalNumber;
     
     
-    saveDocument();
+//    saveDocument();
     BOOL allSigned=YES;
     for (NSString *key in [GetProposalObject(proposalNumber)allKeys])
     {
@@ -274,9 +274,9 @@ NSString *Signer_type = @"";
     for (int i= 1 ; i<6; i++) {
         [[NSUserDefaults standardUserDefaults]setInteger:i forKey:@"pageNo"];
         NSMutableData *data;
-        struct SIGNDOC_ByteArray *blob;
-        blob = renderTest(self.view.frame.size.height*2);
-        data = [[NSMutableData alloc] initWithBytesNoCopy:SIGNDOC_ByteArray_data(blob) length:SIGNDOC_ByteArray_count(blob)];
+//        struct SIGNDOC_ByteArray *blob;
+//        blob = renderTest(self.view.frame.size.height*2);
+//        data = [[NSMutableData alloc] initWithBytesNoCopy:SIGNDOC_ByteArray_data(blob) length:SIGNDOC_ByteArray_count(blob)];
         UIImage *resultImage = [UIImage imageWithData:data];
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"image%i.png",i]];
@@ -306,9 +306,9 @@ NSString *Signer_type = @"";
     }
     
     NSMutableData *data;
-    struct SIGNDOC_ByteArray *blob;
-    blob = renderTest(imageView.frame.size.height);
-    data = [[NSMutableData alloc] initWithBytesNoCopy:SIGNDOC_ByteArray_data(blob) length:SIGNDOC_ByteArray_count(blob)];
+//    struct SIGNDOC_ByteArray *blob;
+//    blob = renderTest(imageView.frame.size.height);
+//    data = [[NSMutableData alloc] initWithBytesNoCopy:SIGNDOC_ByteArray_data(blob) length:SIGNDOC_ByteArray_count(blob)];
     UIImage *resultImage = [UIImage imageWithData:data];
     
     
@@ -333,13 +333,13 @@ NSString *Signer_type = @"";
     [array removeObject:@""];
     
     UIImage *renderedImage;
-    double documentWidth = getDocumentWidth();
-    double documentHeight = getDocumentHeight();
+//    double documentWidth = getDocumentWidth();
+//    double documentHeight = getDocumentHeight();
     
     int yPoint = 100;
     if (isCustomerSelected) yPoint=-200;
     
-    [imageView setFrame:CGRectMake(imageView.frame.origin.x, yPoint, imageView.frame.size.width, imageView.frame.size.width*documentHeight/documentWidth)];
+//    [imageView setFrame:CGRectMake(imageView.frame.origin.x, yPoint, imageView.frame.size.width, imageView.frame.size.width*documentHeight/documentWidth)];
     getImageWithSignDocSDKRenderer = TRUE;
     renderedImage = getImageWithSignDocSDKRenderer ? [self getImageWithSignDocSDKRenderer] : [self getImageWithAppleRenderer];
     imageView.image = renderedImage;
@@ -356,38 +356,38 @@ NSString *Signer_type = @"";
     //    }
 }
 - (void)showSignature {
-    struct SIGNDOC_ByteArray *blob;
+//    struct SIGNDOC_ByteArray *blob;
     NSMutableData *data;
-    double documentWidth = getDocumentWidth();
-    double imagewidth = imageView.frame.size.width;
-    double scale = imagewidth/documentWidth;
+//    double documentWidth = getDocumentWidth();
+//    double imagewidth = imageView.frame.size.width;
+//    double scale = imagewidth/documentWidth;
     UILabel *signatureLabel = [[UILabel alloc]init];
-    CGRect originalSignatureFrame = getSignatureRect();
-    [signatureLabel setFrame:CGRectMake(originalSignatureFrame.origin.x*scale, originalSignatureFrame.origin.y*scale, originalSignatureFrame.size.width*scale, originalSignatureFrame.size.height*scale)];
-    CGRect signatureImageCoordinates = getSignatureSignDocCoordinates();
+//    CGRect originalSignatureFrame = getSignatureRect();
+//    [signatureLabel setFrame:CGRectMake(originalSignatureFrame.origin.x*scale, originalSignatureFrame.origin.y*scale, originalSignatureFrame.size.width*scale, originalSignatureFrame.size.height*scale)];
+//    CGRect signatureImageCoordinates = getSignatureSignDocCoordinates();
     //the coordinates do not depend on height. Height only determines the quality and will return an image of different sizes for the desired area
 //    blob = getSignatureImage(imageView.frame.size.height, signatureImageCoordinates);
 //    data = [[NSMutableData alloc] initWithBytesNoCopy:SIGNDOC_ByteArray_data(blob) length:SIGNDOC_ByteArray_count(blob)];
 //    UIImage *signatureImage = [UIImage imageWithData:data];
     
-    UIImage *signatureImage = getSignatureImage(imageView.frame.size.height, signatureImageCoordinates);
-    [signatureLabel setBackgroundColor:[UIColor colorWithPatternImage:signatureImage]];
+//    UIImage *signatureImage = getSignatureImage(imageView.frame.size.height, signatureImageCoordinates);
+//    [signatureLabel setBackgroundColor:[UIColor colorWithPatternImage:signatureImage]];
     [imageView addSubview:signatureLabel];
     [imageView bringSubviewToFront:signatureFrameLabel];
     
 }
 - (void)addSignatureFrame {
-    double documentWidth = getDocumentWidth();
-    double imagewidth = imageView.frame.size.width;
-    double scale = imagewidth/documentWidth;
+//    double documentWidth = getDocumentWidth();
+//    double imagewidth = imageView.frame.size.width;
+//    double scale = imagewidth/documentWidth;
     // if ([signatureFrameLabel superview]) {
     // [signatureFrameLabel removeFromSuperview];//
     // signatureFrameLabel=nil;
     // }
     signatureFrameLabel = [[UITextView alloc]init];
-    CGRect originalSignatureFrame = getSignatureRect();
+//    CGRect originalSignatureFrame = getSignatureRect();
     
-    [signatureFrameLabel setFrame:CGRectMake(originalSignatureFrame.origin.x*scale, originalSignatureFrame.origin.y*scale, originalSignatureFrame.size.width*scale, originalSignatureFrame.size.height*scale)];
+//    [signatureFrameLabel setFrame:CGRectMake(originalSignatureFrame.origin.x*scale, originalSignatureFrame.origin.y*scale, originalSignatureFrame.size.width*scale, originalSignatureFrame.size.height*scale)];
     // [signatureFrameLabel setBackgroundColor:[UIColor clearColor]];
     [signatureFrameLabel.layer setBorderColor:[[UIColor redColor] CGColor]];
     [signatureFrameLabel.layer setBorderWidth:2];
@@ -414,11 +414,11 @@ NSString *Signer_type = @"";
     NSString *dateString = [dateFormatter stringFromDate:currDate];
     
     if(!cFFSignatureRequired){
-		if (([isCustSign isEqualToString:@""] || (NSNull *) isCustSign == [NSNull null]) || isCustSign == nil) {
-			setValueToField(dateString, kdate1);
-		}
-		else
-			setValueToField(DateCustSign, kdate1);
+//		if (([isCustSign isEqualToString:@""] || (NSNull *) isCustSign == [NSNull null]) || isCustSign == nil) {
+//			setValueToField(dateString, kdate1);
+//		}
+//		else
+//			setValueToField(DateCustSign, kdate1);
         
     }
     
@@ -472,17 +472,17 @@ NSString *Signer_type = @"";
     
     
     
-    double documentWidth = getDocumentWidth();
-    double imagewidth = imageView.frame.size.width;
-    double scale = imagewidth/documentWidth;
+//    double documentWidth = getDocumentWidth();
+//    double imagewidth = imageView.frame.size.width;
+//    double scale = imagewidth/documentWidth;
     // if ([signatureFrameLabel superview]) {
     // [signatureFrameLabel removeFromSuperview];//
     // signatureFrameLabel=nil;
     // }
     signatureFrameLabel = [[UITextView alloc]init];
-    CGRect originalSignatureFrame = getSignatureRect();
+//    CGRect originalSignatureFrame = getSignatureRect();
     signatureFrameLabel.editable=NO;
-    [signatureFrameLabel setFrame:CGRectMake(originalSignatureFrame.origin.x*scale, originalSignatureFrame.origin.y*scale, originalSignatureFrame.size.width*scale, originalSignatureFrame.size.height*scale)];
+//    [signatureFrameLabel setFrame:CGRectMake(originalSignatureFrame.origin.x*scale, originalSignatureFrame.origin.y*scale, originalSignatureFrame.size.width*scale, originalSignatureFrame.size.height*scale)];
     // UIImage *aImage = [self drawText:currentSigner inImage:[UIImage imageNamed:@"sign-here.png"] atPoint:CGPointMake(200, 450)];
     // signatureFrameLabel.backgroundColor = [UIColor colorWithPatternImage:aImage];
     
@@ -581,11 +581,7 @@ NSString *Signer_type = @"";
             
             if(!cFFSignatureRequired){
                 [_tableView reloadData];
-				if (([isCustSign isEqualToString:@""] || (NSNull *) isCustSign == [NSNull null]) || isCustSign == nil) {
-					setValueToField(dateString, kdate1);
-				}
-				else
-					setValueToField(DateCustSign, kdate1);
+
             }
             
         }
@@ -1122,55 +1118,55 @@ NSString *Signer_type = @"";
 - (void) abortSignature: (NSString *) fieldId {
     _overlayView.hidden=YES;
 }
-- (void) saveSignature {
-    
-    NSData *signatureData;
-    UIImage *signatureImage;
-    NSData *imgData;
-    
-    
-    
-    
-    const char *output_path = [GetPDFPath UTF8String];
-    
-    signatureData = [dialog signatureAsISO19794Simple];
-    
-    signatureImage = [dialog signatureAsUIImage];
-    BOOL getSignatureImageAsPNG = TRUE;
-    if (getSignatureImageAsPNG) {
-        //
-        signatureImage = [self fixSemiTransparenceInImage:signatureImage];
-        [self writeImageToFile:signatureImage];
-    }
-    imgData = getSignatureImageAsPNG ? [NSData dataWithData:UIImagePNGRepresentation(signatureImage)] : [NSData dataWithData:UIImageJPEGRepresentation(signatureImage, 1)];
-    
-    signTest([GetObjectSigName cStringUsingEncoding:NSASCIIStringEncoding], (unsigned char *)[signatureData bytes], [signatureData length], (unsigned char *)[imgData bytes], [imgData length], output_path, TRUE);
-    
-    NSMutableDictionary *dic= [GetProposalObject(proposalNumber)mutableCopy];
-    [dic setObject:[NSNumber numberWithBool:YES] forKey:GetObjectSigName];
-    SetProposalObject(dic, proposalNumber);
-    [self cleanSignatureFrames];
-    [_tableView reloadData];
-    
-    
-    // to check if everyone have signed.
-    BOOL allSigned=YES;
-    for (NSString *key in [GetProposalObject(proposalNumber)allKeys]) {
-        if ([[GetProposalObject(proposalNumber)objectForKey:key]boolValue]==NO) {
-            allSigned = NO;
-        }
-    }
-    if (allSigned) {
-        [self injectSignDateAndLocation];
-    }
-    
-    [self render];
-    if (cFFSignatureRequired) {
-        cFFSignatureRequired= NO; //We Have Collected the Customer signature -- Must False the value
-        //        [self showSignatureCollectorView];
-    }
-    [HUD hide:YES];
-}
+//- (void) saveSignature {
+//    
+//    NSData *signatureData;
+//    UIImage *signatureImage;
+//    NSData *imgData;
+//    
+//    
+//    
+//    
+//    const char *output_path = [GetPDFPath UTF8String];
+//    
+////    signatureData = [dialog signatureAsISO19794Simple];
+//    
+////    signatureImage = [dialog signatureAsUIImage];
+//    BOOL getSignatureImageAsPNG = TRUE;
+//    if (getSignatureImageAsPNG) {
+//        //
+//        signatureImage = [self fixSemiTransparenceInImage:signatureImage];
+//        [self writeImageToFile:signatureImage];
+//    }
+//    imgData = getSignatureImageAsPNG ? [NSData dataWithData:UIImagePNGRepresentation(signatureImage)] : [NSData dataWithData:UIImageJPEGRepresentation(signatureImage, 1)];
+//    
+//    signTest([GetObjectSigName cStringUsingEncoding:NSASCIIStringEncoding], (unsigned char *)[signatureData bytes], [signatureData length], (unsigned char *)[imgData bytes], [imgData length], output_path, TRUE);
+//    
+//    NSMutableDictionary *dic= [GetProposalObject(proposalNumber)mutableCopy];
+//    [dic setObject:[NSNumber numberWithBool:YES] forKey:GetObjectSigName];
+//    SetProposalObject(dic, proposalNumber);
+//    [self cleanSignatureFrames];
+//    [_tableView reloadData];
+//    
+//    
+//    // to check if everyone have signed.
+//    BOOL allSigned=YES;
+//    for (NSString *key in [GetProposalObject(proposalNumber)allKeys]) {
+//        if ([[GetProposalObject(proposalNumber)objectForKey:key]boolValue]==NO) {
+//            allSigned = NO;
+//        }
+//    }
+//    if (allSigned) {
+//        [self injectSignDateAndLocation];
+//    }
+//    
+//    [self render];
+//    if (cFFSignatureRequired) {
+//        cFFSignatureRequired= NO; //We Have Collected the Customer signature -- Must False the value
+//        //        [self showSignatureCollectorView];
+//    }
+//    [HUD hide:YES];
+//}
 -(void)showAlert{
     
     
@@ -1227,11 +1223,11 @@ NSString *Signer_type = @"";
     NSString *dateString = [dateFormatter stringFromDate:currDate];
 	
     if(!cFFSignatureRequired){
-		if (([isCustSign isEqualToString:@""] || (NSNull *) isCustSign == [NSNull null]) || isCustSign == nil) {
-			setValueToField(dateString, kdate1);
-		}
-		else
-			setValueToField(DateCustSign, kdate1);
+//		if (([isCustSign isEqualToString:@""] || (NSNull *) isCustSign == [NSNull null]) || isCustSign == nil) {
+//			setValueToField(dateString, kdate1);
+//		}
+//		else
+//			setValueToField(DateCustSign, kdate1);
     }
 	_overlayView.hidden=YES;
     if (!points)
@@ -1245,11 +1241,11 @@ NSString *Signer_type = @"";
     while (!isExcecution) {
         [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.01]];
     }
-    if (selectedTag==0)
-        [self saveSignature];
-    else{
-        [self abortSignature:fieldId];
-    }
+//    if (selectedTag==0)
+//        [self saveSignature];
+//    else{
+//        [self abortSignature:fieldId];
+//    }
     
     
     
@@ -1261,21 +1257,21 @@ NSString *Signer_type = @"";
     
     [dateFormatter setDateFormat:@"dd"];
     NSString *dayStr = [dateFormatter stringFromDate:currDate];
-    for (int i=0; i<dayStr.length; i++) {
-        setValueToField([dayStr substringWithRange:NSMakeRange(i, 1)], [NSString stringWithFormat:@"%@%i",ksignedOnDay,i]);
-    }
+//    for (int i=0; i<dayStr.length; i++) {
+//        setValueToField([dayStr substringWithRange:NSMakeRange(i, 1)], [NSString stringWithFormat:@"%@%i",ksignedOnDay,i]);
+//    }
     
     [dateFormatter setDateFormat:@"MM"];
     NSString *monthStr = [dateFormatter stringFromDate:currDate];
-    for (int i=0; i<monthStr.length; i++) {
-        setValueToField([monthStr substringWithRange:NSMakeRange(i, 1)], [NSString stringWithFormat:@"%@%i",ksignedOnMonth,i]);
-    }
+//    for (int i=0; i<monthStr.length; i++) {
+//        setValueToField([monthStr substringWithRange:NSMakeRange(i, 1)], [NSString stringWithFormat:@"%@%i",ksignedOnMonth,i]);
+//    }
     
     [dateFormatter setDateFormat:@"yyyy"];
     NSString *yearStr = [dateFormatter stringFromDate:currDate];
-    for (int i=0; i<yearStr.length; i++) {
-        setValueToField([yearStr substringWithRange:NSMakeRange(i, 1)], [NSString stringWithFormat:@"%@%i",ksignedOnYear,i]);
-    }
+//    for (int i=0; i<yearStr.length; i++) {
+//        setValueToField([yearStr substringWithRange:NSMakeRange(i, 1)], [NSString stringWithFormat:@"%@%i",ksignedOnYear,i]);
+//    }
     
     
     
@@ -1288,23 +1284,23 @@ NSString *Signer_type = @"";
     
     [dateFormatter setDateFormat:@"dd"];
     NSString *dayStr = [dateFormatter stringFromDate:currDate];
-    for (int i=0; i<dayStr.length; i++) {
-        setValueToField([dayStr substringWithRange:NSMakeRange(i, 1)], [NSString stringWithFormat:@"%i",i]);
-    }
+//    for (int i=0; i<dayStr.length; i++) {
+//        setValueToField([dayStr substringWithRange:NSMakeRange(i, 1)], [NSString stringWithFormat:@"%i",i]);
+//    }
     
     [dateFormatter setDateFormat:@"MM"];
     NSString *monthStr = [dateFormatter stringFromDate:currDate];
-    for (int i=0; i<monthStr.length; i++) {
-        setValueToField([monthStr substringWithRange:NSMakeRange(i, 1)], [NSString stringWithFormat:@"%i",i]);
-    }
+//    for (int i=0; i<monthStr.length; i++) {
+//        setValueToField([monthStr substringWithRange:NSMakeRange(i, 1)], [NSString stringWithFormat:@"%i",i]);
+//    }
     
     [dateFormatter setDateFormat:@"yyyy"];
     NSString *yearStr = [dateFormatter stringFromDate:currDate];
-    for (int i=0; i<yearStr.length; i++) {
-        setValueToField([yearStr substringWithRange:NSMakeRange(i, 1)], [NSString stringWithFormat:@"%i",i]);
-    }
+//    for (int i=0; i<yearStr.length; i++) {
+//        setValueToField([yearStr substringWithRange:NSMakeRange(i, 1)], [NSString stringWithFormat:@"%i",i]);
+//    }
     
-    saveField();
+//    saveField();
 }
 - (void)writeImageToFile:(UIImage *)image {
     NSData *imgData = UIImagePNGRepresentation(image);
@@ -1445,17 +1441,17 @@ NSString *Signer_type = @"";
 //        [UIImagePNGRepresentation(aImage) writeToFile:filePath atomically:YES];
         
         NSArray *xibsArray = [NSArray arrayWithObjects:@"MyCustomDialog", nil];
-        dialog = [[SDSignatureCaptureController alloc] initWithParent: self withDelegate: self backgroundImage:[UIImage imageNamed:@"sign-here.png"] dialogXibs:xibsArray languages:nil];
+//        dialog = [[SDSignatureCaptureController alloc] initWithParent: self withDelegate: self backgroundImage:[UIImage imageNamed:@"sign-here.png"] dialogXibs:xibsArray languages:nil];
     } else {
-        dialog = [[SDSignatureCaptureController alloc] initWithParent: self withDelegate: self];
+//        dialog = [[SDSignatureCaptureController alloc] initWithParent: self withDelegate: self];
     }
     NSMutableDictionary *penPropertiesDictionary = [[NSMutableDictionary alloc]init];
     [penPropertiesDictionary setObject:[NSNumber numberWithInteger:10] forKey:@"penSize"];
     [penPropertiesDictionary setObject:[UIColor colorWithRed:0.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:1.0f] forKey:@"color"];
-    [dialog setPenProperties:penPropertiesDictionary];
-    [dialog setDialogPosition:1];
-    [dialog setTitle:currentSigner];
-    [dialog captureSignature];
+//    [dialog setPenProperties:penPropertiesDictionary];
+//    [dialog setDialogPosition:1];
+//    [dialog setTitle:currentSigner];
+//    [dialog captureSignature];
     
 }
 
@@ -1810,7 +1806,7 @@ NSString *Signer_type = @"";
 - (IBAction)saveDocumentClicked:(id)sender
 {
     //    [self saveToXML];
-    saveDocument();
+//    saveDocument();
 	
 //	[self SaveUpdate];
 	
@@ -1870,7 +1866,7 @@ NSString *Signer_type = @"";
         //[_navC.view removeFromSuperview];
     }
 	else {
-		saveField();
+//		saveField();
 		
 		UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@" " message:@"All signatures have been saved successfully." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
 		alert.tag=12000;
@@ -2633,8 +2629,8 @@ NSString *Signer_type = @"";
     }
     if (alertView.tag == 2000) {
         if (buttonIndex==1) {
-            setValueToField(@"  X", kno15AcknowledgeEng);
-            setValueToField(@"  X", kno15AcknowledgeMalay);
+//            setValueToField(@"  X", kno15AcknowledgeEng);
+//            setValueToField(@"  X", kno15AcknowledgeMalay);
             HUD = [[MBProgressHUD alloc] initWithView:self.view];
             [self.view addSubview:HUD];
             HUD.labelText = @"Please Wait";
@@ -2678,18 +2674,18 @@ NSString *Signer_type = @"";
 		NSLog(@"%@", textField.text);
         if ([textField.text length]) {
             //			SignAtTextField = textField.text;
-            setValueToField(convertUpperCase, ksignedAt);
+//            setValueToField(convertUpperCase, ksignedAt);
 			SignAtTextField = convertUpperCase;
             SignAt = convertUpperCase;
             
-            setValueToField(_eApplicationGenerator.gardianName, kGardian);
-            setValueToField(_eApplicationGenerator.gardianICNo, kGardianICNO);
+//            setValueToField(_eApplicationGenerator.gardianName, kGardian);
+//            setValueToField(_eApplicationGenerator.gardianICNo, kGardianICNO);
             
-            if(_eApplicationGenerator.intermediaryManagerName.length==0){
-                setValueToField(@"", kintermediaryName);
-            }
+//            if(_eApplicationGenerator.intermediaryManagerName.length==0){
+//                setValueToField(@"", kintermediaryName);
+//            }
             [self injectSignDateAndLocationAfterSign];
-            saveField();
+//            saveField();
             [self saveToXML];
             [HUD hide:YES afterDelay:1];
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@" " message:@"All signatures have been saved successfully." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
@@ -2857,11 +2853,11 @@ NSString *Signer_type = @"";
                 //[self injectSignDateAndLocation];
                 
                 if(!cFFSignatureRequired){
-					if (([isCustSign isEqualToString:@""] || (NSNull *) isCustSign == [NSNull null]) || isCustSign == nil) {
-						setValueToField(dateString, kdate1);
-					}
-					else
-						setValueToField(DateCustSign, kdate1);
+//					if (([isCustSign isEqualToString:@""] || (NSNull *) isCustSign == [NSNull null]) || isCustSign == nil) {
+//						setValueToField(dateString, kdate1);
+//					}
+//					else
+//						setValueToField(DateCustSign, kdate1);
                     
                 }
                 
@@ -3283,7 +3279,7 @@ NSString *Signer_type = @"";
 	
     if (((indexPath.row==1) || (indexPath.row==2) || (indexPath.row==3) || (indexPath.row==4) || (indexPath.row==5) || (indexPath.row==6) || (indexPath.row==7) || (indexPath.row==8) || (indexPath.row==11) )&& (!cFFSignatureRequired || ToCheckAlert==NO) ) {
         
-        initTest();
+//        initTest();
         isCustomerSelected = NO;
         
         
@@ -3317,13 +3313,13 @@ NSString *Signer_type = @"";
             [self render];
 			
             if(!cFFSignatureRequired){
-				if (([isCustSign isEqualToString:@""] || (NSNull *) isCustSign == [NSNull null]) || isCustSign == nil) {
-					setValueToField(dateString, kdate1);
-				}
-				else
-                {
-					setValueToField(DateCustSign, kdate1);
-                }
+//				if (([isCustSign isEqualToString:@""] || (NSNull *) isCustSign == [NSNull null]) || isCustSign == nil) {
+//					setValueToField(dateString, kdate1);
+//				}
+//				else
+//                {
+//					setValueToField(DateCustSign, kdate1);
+//                }
                 
                 [self addSignatureFrame:indexPath.row];
                 
