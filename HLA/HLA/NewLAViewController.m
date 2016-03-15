@@ -216,7 +216,11 @@ id dobtanngal;
     _ProdukBtn.layer.borderColor = [themeColour CGColor];
     _ProdukBtn.layer.masksToBounds = YES;
     _ProdukBtn.layer.borderWidth = 1.0f;
-    
+
+    LAAgeField.layer.borderColor = [themeColour CGColor];
+    LAAgeField.layer.masksToBounds = YES;
+    LAAgeField.layer.borderWidth = 1.0f;
+
     LANameField.layer.borderColor = [themeColour CGColor];
     LANameField.layer.masksToBounds = YES;
     LANameField.layer.borderWidth = 1.0f;

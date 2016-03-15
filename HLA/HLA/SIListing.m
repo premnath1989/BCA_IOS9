@@ -406,10 +406,10 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
     }
     
     if (SINO.count == 0) {
-        [outletEdit setTitleColor:[UIColor grayColor] forState:UIControlStateNormal ];
+       // [outletEdit setTitleColor:[UIColor grayColor] forState:UIControlStateNormal ];
         outletEdit.enabled = FALSE;
     } else {
-        [outletEdit setTitleColor:[UIColor blackColor] forState:UIControlStateNormal ];
+      //  [outletEdit setTitleColor:[UIColor blackColor] forState:UIControlStateNormal ];
         outletEdit.enabled = TRUE;
     }
     
@@ -1060,10 +1060,10 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
         
         if (SINO.count == 0) {
             outletEdit.enabled = FALSE;
-            [outletEdit setTitleColor:[UIColor grayColor] forState:UIControlStateNormal ];
+          //  [outletEdit setTitleColor:[UIColor grayColor] forState:UIControlStateNormal ];
         } else {
             [outletEdit setTitleColor:[UIColor blackColor] forState:UIControlStateNormal ];
-            outletEdit.enabled = TRUE;
+         //   outletEdit.enabled = TRUE;
         }
     } else {
         [self.myTableView setEditing:YES animated:TRUE]; 

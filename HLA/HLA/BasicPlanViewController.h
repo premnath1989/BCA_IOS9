@@ -19,6 +19,7 @@
 #import "SIObj.h"
 #import "Model_SI_Premium.h"
 #import "ModelSIPOData.h"
+#import "ColorHexCode.h"
 
 @class BasicPlanViewController;
 @protocol BasicPlanViewControllerDelegate
@@ -127,6 +128,7 @@
 @property (nonatomic, copy) NSString *PayorSmoker,*FrekuensiPembayaranChecking,*FRekeunsiPembayaranMode,*YearlyIncm;
 @property (nonatomic, copy) NSString *PayorSex;
 @property (nonatomic, copy) NSString *LASex;
+@property (nonatomic, copy) NSString *PremiType;
 @property (nonatomic, copy) NSString *PayorDOB;
 @property (nonatomic, copy) NSString *RelWithLA;
 @property (nonatomic, assign,readwrite) int PayorAge;
@@ -204,6 +206,7 @@
 -(IBAction)ExtraPremiDasarNumberLBLFunc:(id)sender;
 -(IBAction)MasaExtraPremiTextFieldDidBegin:(UITextField *)sender;
 -(IBAction)MasaExtraPremiTextFieldDidEnd:(UITextField *)sender;
+-(IBAction)validationExtraPremiField:(UITextField *)sender;
 //end of added by faiz
 
 //for SINo

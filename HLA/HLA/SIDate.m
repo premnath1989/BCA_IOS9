@@ -28,7 +28,7 @@ id msg, DBDate;
 }
 
 -(void)viewDidAppear:(BOOL)animated{
-    if (ProspectDOB != NULL ) {
+    if ((ProspectDOB != NULL)&&(![ProspectDOB isEqual:@"(null)"])) {
         @try {
             NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
             [dateFormatter setDateFormat:@"dd/MM/yyyy"];
@@ -67,12 +67,9 @@ id msg, DBDate;
     
     dateString = [formatter stringFromDate:[NSDate date]];
     msg = dateString;
-
-    
-    
   
     
-    if (ProspectDOB != NULL ) {
+    if ((ProspectDOB != NULL)&&(![ProspectDOB isEqual:@"(null)"])) {
         @try {
             NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
             [dateFormatter setDateFormat:@"dd/MM/yyyy"];

@@ -17,7 +17,9 @@
 #import "Constants.h"
 #import "TabValidation.h"
 
-@interface BasicPlanViewController ()
+@interface BasicPlanViewController (){
+    ColorHexCode *CustomColor;
+}
 @end
 
 @implementation BasicPlanViewController
@@ -66,7 +68,7 @@
 @synthesize waiverRiderAnn2,waiverRiderHalf,waiverRiderHalf2,waiverRiderMonth,waiverRiderMonth2,waiverRiderQuar,waiverRiderQuar2;
 @synthesize quotationLang,requesteProposalStatus, EAPPorSI, outletDone, outletEAPP;
 @synthesize labelPremiumPay, requestEDD;
-@synthesize planChoose;
+@synthesize planChoose,PremiType;
 @synthesize isFirstSaved;
 @synthesize navigationBar;
 
@@ -79,6 +81,7 @@ bool WPTPD30RisDeleted = FALSE;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    CustomColor = [[ColorHexCode alloc] init ];
     
     NSMutableDictionary *newAttributes = [[NSMutableDictionary alloc] init];
     [newAttributes setObject:[UIFont systemFontOfSize:18] forKey:UITextAttributeFont];
@@ -451,18 +454,24 @@ bool WPTPD30RisDeleted = FALSE;
         NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
         return (([string isEqualToString:filtered]) && newLength <= 3);
+        
+        
     }
     else if (textField == _extraPremiNumberField)
     {
         NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
         return (([string isEqualToString:filtered]) && newLength <= 2);
+        
+        
     }
     else if (textField == _masaExtraPremiField)
     {
         NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
         return (([string isEqualToString:filtered]) && newLength <= 1);
+        
+       
     }
     
     return YES;
@@ -493,6 +502,8 @@ bool WPTPD30RisDeleted = FALSE;
     if(textField == _extraPremiPercentField)
     {
         _masaExtraPremiField.enabled =TRUE;
+        
+        [self PremiDasarActB];
         //_masaExtraPremiField.text =@"0";
         
     }
@@ -527,6 +538,38 @@ bool WPTPD30RisDeleted = FALSE;
 
 #pragma mark - added by faiz 
 //added by faiz
+-(IBAction)validationExtraPremiField:(UITextField *)sender{
+    if (sender==_extraPremiPercentField){
+        if ([sender.text length]>0){
+            [self setActiveTextField:_extraPremiNumberField Active:NO];
+        }
+        else{
+            [self setActiveTextField:_extraPremiPercentField Active:YES];
+            [self setActiveTextField:_extraPremiNumberField Active:YES];
+        }
+    }
+    else{
+        if ([sender.text length]>0){
+            [self setActiveTextField:_extraPremiPercentField Active:NO];
+        }
+        else{
+            [self setActiveTextField:_extraPremiPercentField Active:YES];
+            [self setActiveTextField:_extraPremiNumberField Active:YES];
+        }
+    }
+}
+
+-(void)setActiveTextField:(UITextField *)textField Active:(BOOL)active{
+    if (active){
+        [textField setEnabled:YES];
+        [textField setBackgroundColor:[UIColor whiteColor]];
+    }
+    else{
+        [CustomColor colorWithHexString:@"EEEEEE"];
+        [textField setEnabled:NO];
+        [textField setBackgroundColor:[CustomColor colorWithHexString:@"EEEEEE"]];
+    }
+}
 
 -(IBAction)MasaExtraPremiTextFieldDidBegin:(UITextField *)sender{
     if ([_masaPembayaranButton.titleLabel.text isEqualToString:@"Premi Tunggal"]){
@@ -928,7 +971,6 @@ bool WPTPD30RisDeleted = FALSE;
 
 
     }
-
     
     if ([FRekeunsiPembayaranMode isEqualToString:@"Pembayaran Sekaligus"]||[FRekeunsiPembayaranMode isEqualToString:@"Tahunan"])
     {
@@ -961,6 +1003,115 @@ bool WPTPD30RisDeleted = FALSE;
     [_basicPremiField setText:[NSString stringWithFormat:@"%2f", test2]];
     [self PremiDasarIncomeChange:_basicPremiField.text];
 }
+
+-(void)PremiDasarActkklk
+{
+    
+    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+    f.numberStyle = NSNumberFormatterDecimalStyle;
+    NSNumber *myNumber = [f numberFromString:yearlyIncomeField.text];
+    
+    BasisSumAssured = [myNumber longLongValue];
+    
+    long long total =BasisSumAssured *2;
+
+    
+    
+    NSString*WaiverRate;
+    
+    NSArray *paths2 = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsPath2 = [paths2 objectAtIndex:0];
+    NSString *path2 = [docsPath2 stringByAppendingPathComponent:@"BCA_Rates.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path2];
+    [database open];
+    FMResultSet *results;
+    
+    NSString*RatesPremiumRate;
+    double PaymentMode;
+    if (![database open])
+    {
+        NSLog(@"Could not open db.");
+    }
+    
+    
+//    if([RelWithLA isEqualToString:@"SELF"])
+//    {
+        WaiverRate = [NSString stringWithFormat:@"SELECT %@ FROM KLK_Waiver Where EntryAge = '%i' AND PersonType = '%@'",PayorSex,PayorAge,@"P"];
+        results = [database executeQuery:WaiverRate];
+        
+        while([results next])
+        {
+            if ([PayorSex isEqualToString:@"Male"]||[PayorSex isEqualToString:@"MALE"]){
+                RatesPremiumRate  = [results stringForColumn:@"Male"];
+            }
+            else{
+                RatesPremiumRate  = [results stringForColumn:@"Female"];
+            }
+            
+        }
+        
+//    }
+//    else
+//    {
+//        WaiverRate = [NSString stringWithFormat:@"SELECT %@ FROM KLK_Waiver Where EntryAge = '%i' AND PersonType = '%@'",LASex,LAAge,@"T"];
+//        results = [database executeQuery:WaiverRate];
+//        
+//        while([results next])
+//        {
+//            if ([LASex isEqualToString:@"Male"]||[LASex isEqualToString:@"MALE"]){
+//                RatesPremiumRate  = [results stringForColumn:@"Male"];
+//            }
+//            else{
+//                RatesPremiumRate  = [results stringForColumn:@"Female"];
+//            }
+//            
+//        }
+//        
+//        
+//    }
+//
+    double RatesInt = [RatesPremiumRate doubleValue];
+    double  RiderPremium = (RatesInt/100)* total;
+    
+    double totalPremiumDasarA = RiderPremium + total;
+    
+    [_basicPremiField setText:[NSString stringWithFormat:@"%2f", totalPremiumDasarA]];
+    [self PremiDasarIncomeChange:_basicPremiField.text];
+    
+//    
+//    if ([FRekeunsiPembayaranMode isEqualToString:@"Pembayaran Sekaligus"]||[FRekeunsiPembayaranMode isEqualToString:@"Tahunan"])
+//    {
+//        PaymentMode = 1;
+//    }
+//    if ([FRekeunsiPembayaranMode isEqualToString:@"Bulanan"])
+//    {
+//        PaymentMode = 0.1;
+//    }
+//    
+//    double RatesInt = [RatesPremiumRate doubleValue];
+//    
+//    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+//    f.numberStyle = NSNumberFormatterDecimalStyle;
+//    NSNumber *myNumber = [f numberFromString:yearlyIncomeField.text];
+//    
+//    BasisSumAssured = [myNumber longLongValue];
+//    
+//    long long total =(BasisSumAssured/1000);
+//    
+//    double test = PaymentMode * RatesInt;
+//    
+//    double test2 = (test * BasisSumAssured)/1000;
+//    
+//    
+//    
+//    TotalA = total * test;
+//    
+//    
+//    [_basicPremiField setText:[NSString stringWithFormat:@"%2f", test2]];
+//    [self PremiDasarIncomeChange:_basicPremiField.text];
+}
+
 
 -(void)PremiDasarActB
 {
@@ -1047,9 +1198,6 @@ bool WPTPD30RisDeleted = FALSE;
     int masaExtraPremiBTotal =[_masaExtraPremiField.text intValue];\
     
      double totalB = total * masaExtraPremiBTotal;
-    
-    
-    
     
     double TotalAB = TotalA + totalB;
     
@@ -1402,7 +1550,17 @@ bool WPTPD30RisDeleted = FALSE;
         yearlyIncomeField.text = result;
     }
     
-    [self PremiDasarAct];
+    if([PlanType isEqualToString:@"BCA Life Keluargaku"])
+    {
+        [self PremiDasarActkklk];
+    }
+    else
+    {
+        [self PremiDasarAct];
+        [self PremiDasarActB];
+    }
+
+    
 }
 
 -(void)PremiDasarIncomeChange:(NSString *)BAsicPremiDasar
@@ -4674,10 +4832,13 @@ bool WPTPD30RisDeleted = FALSE;
     if([PlanType isEqualToString:@"BCA Life Keluargaku"])
     {
         [self PremiDasarActKeluargaku:aaDesc];
+        [self PremiDasarActkklk];
+        
     }
     else
     {
          [self PremiDasarAct];
+        [self PremiDasarActB];
     }
     
 }

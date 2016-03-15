@@ -21,7 +21,7 @@
 @synthesize requestBasicSA,requestBasicHL,requestMOP,requestTerm,requestPlanCode,requestSINo,requestAge,requestOccpCode;
 @synthesize basicRate,LSDRate,riderCode,riderSA,riderHL1K,riderHL100,riderHLP,riderRate,riderTerm;
 @synthesize riderDesc,planCodeRider,riderUnit,riderPlanOpt,riderDeduct,pentaSQL;
-@synthesize plnOptC,planOptHMM,deducHMM,planHSPII,planMGII,planMGIV;
+@synthesize plnOptC,planOptHMM,deducHMM,planHSPII,planMGII,planMGIV,PremiType;
 @synthesize riderAge,riderCustCode,riderSmoker,Pertanggungan_ExtrePremi,ExtraPremiNumbValue;
 @synthesize annualRiderTot,halfRiderTot,quarterRiderTot,monthRiderTot;
 @synthesize htmlRider,occLoad,annualRider,halfYearRider,quarterRider,monthlyRider,annualRiderSum,halfRiderSum,monthRiderSum,quarterRiderSum,annualRiderOnly,halfYearRiderOnly,quarterRiderOnly,monthlyRiderOnly;
@@ -30,13 +30,13 @@
 @synthesize waiverRiderAnn2,waiverRiderHalf2,waiverRiderMonth2,waiverRiderQuar2,ReportFromAge,ReportToAge;
 @synthesize riderOccp,strOccp,occLoadRider,getAge,SINo,getOccpCode,getMOP,getTerm,getBasicSA,getBasicHL,getPlanCode,getOccpClass;
 @synthesize getBasicTempHL,requestBasicTempHL,requestOccpClass;
-@synthesize BasicAnnually,BasicHalfYear,BasicMonthly,BasicQuarterly,getBasicPlan,requestBasicPlan;
+@synthesize BasicAnnually,BasicHalfYear,BasicMonthly,BasicQuarterly,getBasicPlan,requestBasicPlan,RelWithLA;
 @synthesize OccpLoadA,OccpLoadH,OccpLoadM,OccpLoadQ;
 @synthesize BasicHLAnnually,BasicHLHalfYear,BasicHLMonthly,BasicHLQuarterly;
 @synthesize LSDAnnually,LSDHalfYear,LSDMonthly,LSDQuarterly;
 @synthesize basicTotalA,basicTotalM,basicTotalQ,basicTotalS,riderTempHL1K,headerTitle,myToolBar,fromReport,EAPPorSI,premPayOpt,executeMHI;
 //@synthesize simenu = _simenu;
-@synthesize gstPremAnn, gstPremHalf, gstPremQuar, gstPremMonth, Highlight;
+@synthesize gstPremAnn, gstPremHalf, gstPremQuar, gstPremMonth, Highlight,LASex;
 @synthesize navItem;
 @synthesize navigationBar;
 +(NSString *)getMsgTypeL100
@@ -61,11 +61,17 @@
     }
     _Pertanggungan_Dasar = [[dictionaryPremium valueForKey:@"Number_Sum_Assured"] integerValue];
     _PayorAge = [[dictionaryPremium valueForKey:@"PO_Age"]integerValue];;
-    _PayorSex = [dictionaryPremium valueForKey:@"LA_Gender"];
+    _PayorSex = [dictionaryPremium valueForKey:@"PO_Gender"];
+    PremiType = [dictionaryPremium valueForKey:@"Payment_Term"];
+    RelWithLA = [dictionaryPremium valueForKey:@"RelWithLA"];
     Highlight =[dictionaryPremium valueForKey:@"Payment_Frequency"];
     Pertanggungan_ExtrePremi = [[dictionaryPremium valueForKey:@"ExtraPremiumTerm"] integerValue];
     ExtraPremiNumbValue  = [[dictionaryPremium valueForKey:@"ExtraPremiumSum"] integerValue];
+    LASex = [dictionaryPremium valueForKey:@"LA_Gender"];
+    _LAAge = [[dictionaryPremium valueForKey:@"LA_Age"]integerValue];
+
     
+
     [self AnsuransiDasar];
     [self PremiDasarActB];
     [self ExtraPremiNumber];
@@ -86,7 +92,7 @@
 
 -(void)AnsuransiDasar
 {
-    NSString*AnsuransiDasarQuery;
+    NSString *AnsuransiDasarQuery;
     NSArray *paths2 = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docsPath2 = [paths2 objectAtIndex:0];
     NSString *path2 = [docsPath2 stringByAppendingPathComponent:@"BCA_Rates.sqlite"];
@@ -94,29 +100,96 @@
     FMDatabase *database = [FMDatabase databaseWithPath:path2];
     [database open];
     FMResultSet *results;
-    AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM basicPremiumRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",_PayorSex,@"HRT",@"S",_PayorAge];
-    NSLog(@"query %@",AnsuransiDasarQuery);
-    results = [database executeQuery:AnsuransiDasarQuery];
     
     NSString*RatesPremiumRate;
-    int PaymentModeYear;
-    int PaymentModeMonthly;
-    FMDatabase *database1 = [FMDatabase databaseWithPath:path2];
+    NSString*RatesPremiumRateTunggal;
+    double PaymentMode;
     if (![database open])
     {
         NSLog(@"Could not open db.");
     }
     
-    while([results next])
-    {
-        if ([_PayorSex isEqualToString:@"Male"]||[_PayorSex isEqualToString:@"MALE"]){
-            RatesPremiumRate  = [results stringForColumn:@"Male"];
+//    if ([PremiType isEqualToString:@"Premi Tunggal"]||[PremiType isEqualToString:@"Premi 5 tahun"])
+//    {
+        if([RelWithLA isEqualToString:@"SELF"])
+        {
+            AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM basicPremiumRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",_PayorSex,@"HRT",@"S",_PayorAge];
+            results = [database executeQuery:AnsuransiDasarQuery];
+            
+            while([results next])
+            {
+                if ([_PayorSex isEqualToString:@"Male"]||[_PayorSex isEqualToString:@"MALE"]){
+                    RatesPremiumRateTunggal  = [results stringForColumn:@"Male"];
+                }
+                else{
+                    RatesPremiumRateTunggal  = [results stringForColumn:@"Female"];
+                }
+                
+            }
+            
         }
-        else{
-            RatesPremiumRate  = [results stringForColumn:@"Female"];
+        else
+        {
+            AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM basicPremiumRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",LASex,@"HRT",@"S",_LAAge];
+            results = [database executeQuery:AnsuransiDasarQuery];
+            
+            while([results next])
+            {
+                if ([LASex isEqualToString:@"Male"]||[LASex isEqualToString:@"MALE"]){
+                    RatesPremiumRateTunggal  = [results stringForColumn:@"Male"];
+                }
+                else{
+                    RatesPremiumRateTunggal  = [results stringForColumn:@"Female"];
+                }
+                
+            }
+            
+            
         }
-        
-    }
+ 
+//    }
+//    else
+//    {
+        if([RelWithLA isEqualToString:@"SELF"])
+        {
+            AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM basicPremiumRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",_PayorSex,@"HRT",@"R",_PayorAge];
+            results = [database executeQuery:AnsuransiDasarQuery];
+            
+            while([results next])
+            {
+                if ([_PayorSex isEqualToString:@"Male"]||[_PayorSex isEqualToString:@"MALE"]){
+                    RatesPremiumRate  = [results stringForColumn:@"Male"];
+                }
+                else{
+                    RatesPremiumRate  = [results stringForColumn:@"Female"];
+                }
+                
+            }
+            
+        }
+        else
+        {
+            AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM basicPremiumRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",LASex,@"HRT",@"R",_LAAge];
+            results = [database executeQuery:AnsuransiDasarQuery];
+            
+            while([results next])
+            {
+                if ([LASex isEqualToString:@"Male"]||[LASex isEqualToString:@"MALE"]){
+                    RatesPremiumRate  = [results stringForColumn:@"Male"];
+                }
+                else{
+                    RatesPremiumRate  = [results stringForColumn:@"Female"];
+                }
+                
+            }
+            
+            
+        }
+
+//    }
+
+    int PaymentModeYear;
+    int PaymentModeMonthly;
     
     PaymentModeYear = 1;
     PaymentModeMonthly = 0.1;
@@ -124,30 +197,35 @@
     if ([Highlight isEqualToString:@"Pembayaran Sekaligus"])
     {
         
-        lblAsuransiDasarSekaligus.textColor = [UIColor colorWithRed:250.0f/255.0f green:175.0f/255.0f blue:50.0f/255.0f alpha:1];
-        lblAsuransiDasarBulanan.textColor = [UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
-        lblAsuransiDasarTahunan.textColor = [UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
+        lblAsuransiDasarSekaligus.textColor =[UIColor colorWithRed:250.0f/255.0f green:175.0f/255.0f blue:50.0f/255.0f alpha:1];
+        lblAsuransiDasarBulanan.textColor = [UIColor clearColor];//[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
+        lblAsuransiDasarTahunan.textColor = [UIColor clearColor];//[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
     }
     else if ([Highlight isEqualToString:@"Bulanan"])
     {
         
-        lblAsuransiDasarSekaligus.textColor = [UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
+        lblAsuransiDasarSekaligus.textColor = [UIColor clearColor];//[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
         lblAsuransiDasarBulanan.textColor = [UIColor colorWithRed:250.0f/255.0f green:175.0f/255.0f blue:50.0f/255.0f alpha:1];
         lblAsuransiDasarTahunan.textColor = [UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
     }
     else if ([Highlight isEqualToString:@"Tahunan"])
     {
         
-        lblAsuransiDasarSekaligus.textColor = [UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
+        lblAsuransiDasarSekaligus.textColor = [UIColor clearColor];//[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
         lblAsuransiDasarBulanan.textColor = [UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
         lblAsuransiDasarTahunan.textColor = [UIColor colorWithRed:250.0f/255.0f green:175.0f/255.0f blue:50.0f/255.0f alpha:1];
     }
     
-    
     double RatesInt = [RatesPremiumRate doubleValue];
+    double RatesIntTunggal = [RatesPremiumRateTunggal doubleValue];
+    
+    
+    _AnssubtotalSekaligus =(_Pertanggungan_Dasar/1000)*(PaymentModeYear * RatesIntTunggal);
+    [lblAsuransiDasarSekaligus setText:[NSString stringWithFormat:@"%d", _AnssubtotalSekaligus]];
+    
     _AnssubtotalYear =(_Pertanggungan_Dasar/1000)*(PaymentModeYear * RatesInt);
     [lblAsuransiDasarTahunan setText:[NSString stringWithFormat:@"%d", _AnssubtotalYear]];
-    [lblAsuransiDasarSekaligus setText:[NSString stringWithFormat:@"%d", _AnssubtotalYear]];
+    
     
     //int RatesInt = [RatesPremiumRate intValue];
     _AnssubtotalBulan =(_Pertanggungan_Dasar/1000)*(0.1 * RatesInt);
@@ -161,41 +239,111 @@
     NSArray *paths2 = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docsPath2 = [paths2 objectAtIndex:0];
     NSString *path2 = [docsPath2 stringByAppendingPathComponent:@"BCA_Rates.sqlite"];
+    NSString*RatesPremiumRate;
+    NSString*RatesPremiumRateSekaligus;
     
     FMDatabase *database = [FMDatabase databaseWithPath:path2];
     [database open];
     FMResultSet *results;
-    AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM EMRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",_PayorSex,@"HRT",@"S",_PayorAge];
-    NSLog(@"query %@",AnsuransiDasarQuery);
-    results = [database executeQuery:AnsuransiDasarQuery];
     
-    NSString*RatesPremiumRate;
-    double PaymentMode;
-    FMDatabase *database1 = [FMDatabase databaseWithPath:path2];
-    if (![database open])
-    {
-        NSLog(@"Could not open db.");
-    }
     
-    while([results next])
-    {
-        if ([_PayorSex isEqualToString:@"Male"]||[_PayorSex isEqualToString:@"MALE"]){
-            RatesPremiumRate  = [results stringForColumn:@"Male"];
-        }
-        else{
-            RatesPremiumRate  = [results stringForColumn:@"Female"];
+   
+        if([RelWithLA isEqualToString:@"SELF"])
+        {
+            AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM EMRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",PayorSex,@"HRT",@"S",_PayorAge];
+            NSLog(@"query %@",AnsuransiDasarQuery);
+            results = [database executeQuery:AnsuransiDasarQuery];
+            
+            while([results next])
+            {
+                if ([PayorSex isEqualToString:@"Male"]||[PayorSex isEqualToString:@"MALE"]){
+                    RatesPremiumRateSekaligus  = [results stringForColumn:@"Male"];
+                }
+                else{
+                    RatesPremiumRateSekaligus  = [results stringForColumn:@"Female"];
+                }
+                
+            }
+            
             
         }
+        else
+        {
+            AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM EMRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",LASex,@"HRT",@"S",_LAAge];
+            NSLog(@"query %@",AnsuransiDasarQuery);
+            results = [database executeQuery:AnsuransiDasarQuery];
+            
+            while([results next])
+            {
+                if ([LASex isEqualToString:@"Male"]||[LASex isEqualToString:@"MALE"]){
+                    RatesPremiumRateSekaligus  = [results stringForColumn:@"Male"];
+                }
+                else{
+                    RatesPremiumRateSekaligus  = [results stringForColumn:@"Female"];
+                }
+                
+            }
+            
+            
+        }
+
         
-    }
-        PaymentMode = 1;
-        PaymentMode = 0.1;
+   
+        if([RelWithLA isEqualToString:@"SELF"])
+        {
+            AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM EMRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",PayorSex,@"HRT",@"R",_PayorAge];
+            NSLog(@"query %@",AnsuransiDasarQuery);
+            results = [database executeQuery:AnsuransiDasarQuery];
+            
+            while([results next])
+            {
+                if ([PayorSex isEqualToString:@"Male"]||[PayorSex isEqualToString:@"MALE"]){
+                    RatesPremiumRate  = [results stringForColumn:@"Male"];
+                }
+                else{
+                    RatesPremiumRate  = [results stringForColumn:@"Female"];
+                }
+                
+            }
+            
+            
+        }
+        else
+        {
+            AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM EMRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",LASex,@"HRT",@"R",_LAAge];
+            NSLog(@"query %@",AnsuransiDasarQuery);
+            results = [database executeQuery:AnsuransiDasarQuery];
+            
+            while([results next])
+            {
+                if ([LASex isEqualToString:@"Male"]||[LASex isEqualToString:@"MALE"]){
+                    RatesPremiumRate  = [results stringForColumn:@"Male"];
+                }
+                else{
+                    RatesPremiumRate  = [results stringForColumn:@"Female"];
+                }
+                
+            }
+            
+            
+        }
+
+   
+    
+//        int PaymentModeYear;
+//        int PaymentModeMonthly;
+//
+//        PaymentMode = 1;
+//        PaymentMode = 0.1;
     
     
     double RatesInt = [RatesPremiumRate doubleValue];
+    double RatesIntSekaligus = [RatesPremiumRateSekaligus doubleValue];
+    
+    _ExtraPercentsubtotalSekaligus =(_Pertanggungan_Dasar/1000)*(1.0 * RatesIntSekaligus)*Pertanggungan_ExtrePremi;
+    [lblExtraPremiPercentSekaligus setText:[NSString stringWithFormat:@"%d", _ExtraPercentsubtotalSekaligus]];
     
     _ExtraPercentsubtotalYear =(_Pertanggungan_Dasar/1000)*(1.0 * RatesInt)*Pertanggungan_ExtrePremi;
-    [lblExtraPremiPercentSekaligus setText:[NSString stringWithFormat:@"%d", _ExtraPercentsubtotalYear]];
     [lblExtraPremiPercentTahunan setText:[NSString stringWithFormat:@"%d", _ExtraPercentsubtotalYear]];
     
     //int RatesInt = [RatesPremiumRate intValue];
@@ -205,21 +353,21 @@
     if ([Highlight isEqualToString:@"Pembayaran Sekaligus"])
     {
         lblExtraPremiPercentSekaligus.textColor = [UIColor colorWithRed:250.0f/255.0f green:175.0f/255.0f blue:50.0f/255.0f alpha:1];
-        lblExtraPremiPercentBulanan.textColor = [UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
-        lblExtraPremiPercentTahunan.textColor = [UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
+        lblExtraPremiPercentBulanan.textColor = [UIColor clearColor];//[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
+        lblExtraPremiPercentTahunan.textColor = [UIColor clearColor];//[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
         
     }
     else if ([Highlight isEqualToString:@"Bulanan"])
     {
         
-        lblExtraPremiPercentSekaligus.textColor = [UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
+        lblExtraPremiPercentSekaligus.textColor = [UIColor clearColor];//[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
         lblExtraPremiPercentBulanan.textColor = [UIColor colorWithRed:250.0f/255.0f green:175.0f/255.0f blue:50.0f/255.0f alpha:1];
         lblExtraPremiPercentTahunan.textColor = [UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
     }
     else if ([Highlight isEqualToString:@"Tahunan"])
     {
         
-        lblExtraPremiPercentSekaligus.textColor = [UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
+        lblExtraPremiPercentSekaligus.textColor = [UIColor clearColor];//[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
         lblExtraPremiPercentBulanan.textColor = [UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
         lblExtraPremiPercentTahunan.textColor = [UIColor colorWithRed:250.0f/255.0f green:175.0f/255.0f blue:50.0f/255.0f alpha:1];
     }
@@ -280,21 +428,21 @@
     if ([Highlight isEqualToString:@"Pembayaran Sekaligus"])
     {
         lblExtraPremiNumberSekaligus.textColor = [UIColor colorWithRed:250.0f/255.0f green:175.0f/255.0f blue:50.0f/255.0f alpha:1];
-        lblExtraPremiNumberBulanan.textColor = [UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
-        lblExtraPremiNumberTahunan.textColor = [UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
+        lblExtraPremiNumberBulanan.textColor = [UIColor clearColor];//[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
+        lblExtraPremiNumberTahunan.textColor = [UIColor clearColor];//[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
         
     }
     else if ([Highlight isEqualToString:@"Bulanan"])
     {
         
-        lblExtraPremiNumberSekaligus.textColor = [UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
+        lblExtraPremiNumberSekaligus.textColor = [UIColor clearColor];//[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
         lblExtraPremiNumberBulanan.textColor = [UIColor colorWithRed:250.0f/255.0f green:175.0f/255.0f blue:50.0f/255.0f alpha:1];
         lblExtraPremiNumberTahunan.textColor = [UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
     }
     else if ([Highlight isEqualToString:@"Tahunan"])
     {
         
-        lblExtraPremiNumberSekaligus.textColor = [UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
+        lblExtraPremiNumberSekaligus.textColor = [UIColor clearColor];//[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
         lblExtraPremiNumberBulanan.textColor = [UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
         lblExtraPremiNumberTahunan.textColor = [UIColor colorWithRed:250.0f/255.0f green:175.0f/255.0f blue:50.0f/255.0f alpha:1];
     }
@@ -308,16 +456,19 @@
     
     int totalBulanan = (_AnssubtotalBulan + _ExtraNumbsubtotalBulan + _ExtraPercentsubtotalBulan);
     
+    int totalSekaligus = (_AnssubtotalSekaligus + _ExtraNumbsubtotalSekaligus + _ExtraPercentsubtotalSekaligus);
+    
     NSString *year =[@(totalYear)stringValue];
     NSString *Bulan =[@(totalBulanan)stringValue];
+    NSString *Sekaligus =[@(totalSekaligus)stringValue];
     
     
     [lblSubtotalBulanan setText:[NSString stringWithFormat:@"%@", Bulan]];
-    [lblSubtotalSekaligus setText:[NSString stringWithFormat:@"%@", year]];
+    [lblSubtotalSekaligus setText:[NSString stringWithFormat:@"%@", Sekaligus]];
     [lblSubtotalTahunan setText:[NSString stringWithFormat:@"%@", year]];
     
     [lblTotalBulanan setText:[NSString stringWithFormat:@"%@",Bulan ]];
-    [lblTotalSekaligus setText:[NSString stringWithFormat:@"%@", year]];
+    [lblTotalSekaligus setText:[NSString stringWithFormat:@"%@", Sekaligus]];
     [lblTotalTahunan setText:[NSString stringWithFormat:@"%@", year]];
     
     if ([Highlight isEqualToString:@"Pembayaran Sekaligus"])
@@ -325,30 +476,31 @@
         lblSubtotalSekaligus.textColor = [UIColor colorWithRed:250.0f/255.0f green:175.0f/255.0f blue:50.0f/255.0f alpha:1];
         lblTotalSekaligus.textColor = [UIColor colorWithRed:250.0f/255.0f green:175.0f/255.0f blue:50.0f/255.0f alpha:1];
         
-        lblSubtotalBulanan.textColor = [UIColor whiteColor];
-        lblTotalBulanan.textColor = [UIColor whiteColor];
+        lblSubtotalBulanan.textColor =[UIColor clearColor];//[UIColor whiteColor];
+        lblTotalBulanan.textColor = [UIColor clearColor];//[UIColor whiteColor];
         
-        lblTotalTahunan.textColor = [UIColor whiteColor];
-        lblSubtotalTahunan.textColor = [UIColor whiteColor];
+        lblTotalTahunan.textColor = [UIColor clearColor];//[UIColor whiteColor];
+        lblSubtotalTahunan.textColor = [UIColor clearColor];//[UIColor whiteColor];
 
         
     }
     else if ([Highlight isEqualToString:@"Bulanan"])
     {
-        lblSubtotalSekaligus.textColor = [UIColor whiteColor];
-        lblTotalSekaligus.textColor = [UIColor whiteColor];
+        lblSubtotalSekaligus.textColor = [UIColor clearColor];//[UIColor whiteColor];
+        lblTotalSekaligus.textColor = [UIColor clearColor];//[UIColor whiteColor];
         
         lblSubtotalBulanan.textColor = [UIColor colorWithRed:250.0f/255.0f green:175.0f/255.0f blue:50.0f/255.0f alpha:1];
         lblTotalBulanan.textColor = [UIColor colorWithRed:250.0f/255.0f green:175.0f/255.0f blue:50.0f/255.0f alpha:1];
         
         lblTotalTahunan.textColor = [UIColor whiteColor];
-        lblSubtotalTahunan.textColor = [UIColor whiteColor];    }
+        lblSubtotalTahunan.textColor = [UIColor whiteColor];
+    }
     else if ([Highlight isEqualToString:@"Tahunan"])
     {
-        lblSubtotalSekaligus.textColor = [UIColor whiteColor];
-        lblTotalSekaligus.textColor = [UIColor whiteColor];
+        lblSubtotalSekaligus.textColor = [UIColor clearColor];//[UIColor whiteColor];
+        lblTotalSekaligus.textColor = [UIColor clearColor];//[UIColor whiteColor];
         
-        lblSubtotalBulanan.textColor = [UIColor whiteColor];
+        lblSubtotalBulanan.textColor =[UIColor whiteColor];
         lblTotalBulanan.textColor = [UIColor whiteColor];
         
         lblTotalTahunan.textColor = [UIColor colorWithRed:250.0f/255.0f green:175.0f/255.0f blue:50.0f/255.0f alpha:1];
