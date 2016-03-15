@@ -197,21 +197,21 @@
     if ([Highlight isEqualToString:@"Pembayaran Sekaligus"])
     {
         
-        lblAsuransiDasarSekaligus.textColor = [UIColor colorWithRed:250.0f/255.0f green:175.0f/255.0f blue:50.0f/255.0f alpha:1];
-        lblAsuransiDasarBulanan.textColor = [UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
-        lblAsuransiDasarTahunan.textColor = [UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
+        lblAsuransiDasarSekaligus.textColor =[UIColor colorWithRed:250.0f/255.0f green:175.0f/255.0f blue:50.0f/255.0f alpha:1];
+        lblAsuransiDasarBulanan.textColor = [UIColor clearColor];//[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
+        lblAsuransiDasarTahunan.textColor = [UIColor clearColor];//[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
     }
     else if ([Highlight isEqualToString:@"Bulanan"])
     {
         
-        lblAsuransiDasarSekaligus.textColor = [UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
+        lblAsuransiDasarSekaligus.textColor = [UIColor clearColor];//[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
         lblAsuransiDasarBulanan.textColor = [UIColor colorWithRed:250.0f/255.0f green:175.0f/255.0f blue:50.0f/255.0f alpha:1];
         lblAsuransiDasarTahunan.textColor = [UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
     }
     else if ([Highlight isEqualToString:@"Tahunan"])
     {
         
-        lblAsuransiDasarSekaligus.textColor = [UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
+        lblAsuransiDasarSekaligus.textColor = [UIColor clearColor];//[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
         lblAsuransiDasarBulanan.textColor = [UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
         lblAsuransiDasarTahunan.textColor = [UIColor colorWithRed:250.0f/255.0f green:175.0f/255.0f blue:50.0f/255.0f alpha:1];
     }
@@ -353,21 +353,21 @@
     if ([Highlight isEqualToString:@"Pembayaran Sekaligus"])
     {
         lblExtraPremiPercentSekaligus.textColor = [UIColor colorWithRed:250.0f/255.0f green:175.0f/255.0f blue:50.0f/255.0f alpha:1];
-        lblExtraPremiPercentBulanan.textColor = [UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
-        lblExtraPremiPercentTahunan.textColor = [UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
+        lblExtraPremiPercentBulanan.textColor = [UIColor clearColor];//[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
+        lblExtraPremiPercentTahunan.textColor = [UIColor clearColor];//[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
         
     }
     else if ([Highlight isEqualToString:@"Bulanan"])
     {
         
-        lblExtraPremiPercentSekaligus.textColor = [UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
+        lblExtraPremiPercentSekaligus.textColor = [UIColor clearColor];//[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
         lblExtraPremiPercentBulanan.textColor = [UIColor colorWithRed:250.0f/255.0f green:175.0f/255.0f blue:50.0f/255.0f alpha:1];
         lblExtraPremiPercentTahunan.textColor = [UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
     }
     else if ([Highlight isEqualToString:@"Tahunan"])
     {
         
-        lblExtraPremiPercentSekaligus.textColor = [UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
+        lblExtraPremiPercentSekaligus.textColor = [UIColor clearColor];//[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
         lblExtraPremiPercentBulanan.textColor = [UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
         lblExtraPremiPercentTahunan.textColor = [UIColor colorWithRed:250.0f/255.0f green:175.0f/255.0f blue:50.0f/255.0f alpha:1];
     }
@@ -428,21 +428,21 @@
     if ([Highlight isEqualToString:@"Pembayaran Sekaligus"])
     {
         lblExtraPremiNumberSekaligus.textColor = [UIColor colorWithRed:250.0f/255.0f green:175.0f/255.0f blue:50.0f/255.0f alpha:1];
-        lblExtraPremiNumberBulanan.textColor = [UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
-        lblExtraPremiNumberTahunan.textColor = [UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
+        lblExtraPremiNumberBulanan.textColor = [UIColor clearColor];//[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
+        lblExtraPremiNumberTahunan.textColor = [UIColor clearColor];//[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
         
     }
     else if ([Highlight isEqualToString:@"Bulanan"])
     {
         
-        lblExtraPremiNumberSekaligus.textColor = [UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
+        lblExtraPremiNumberSekaligus.textColor = [UIColor clearColor];//[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
         lblExtraPremiNumberBulanan.textColor = [UIColor colorWithRed:250.0f/255.0f green:175.0f/255.0f blue:50.0f/255.0f alpha:1];
         lblExtraPremiNumberTahunan.textColor = [UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
     }
     else if ([Highlight isEqualToString:@"Tahunan"])
     {
         
-        lblExtraPremiNumberSekaligus.textColor = [UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
+        lblExtraPremiNumberSekaligus.textColor = [UIColor clearColor];//[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
         lblExtraPremiNumberBulanan.textColor = [UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
         lblExtraPremiNumberTahunan.textColor = [UIColor colorWithRed:250.0f/255.0f green:175.0f/255.0f blue:50.0f/255.0f alpha:1];
     }
@@ -476,30 +476,31 @@
         lblSubtotalSekaligus.textColor = [UIColor colorWithRed:250.0f/255.0f green:175.0f/255.0f blue:50.0f/255.0f alpha:1];
         lblTotalSekaligus.textColor = [UIColor colorWithRed:250.0f/255.0f green:175.0f/255.0f blue:50.0f/255.0f alpha:1];
         
-        lblSubtotalBulanan.textColor = [UIColor whiteColor];
-        lblTotalBulanan.textColor = [UIColor whiteColor];
+        lblSubtotalBulanan.textColor =[UIColor clearColor];//[UIColor whiteColor];
+        lblTotalBulanan.textColor = [UIColor clearColor];//[UIColor whiteColor];
         
-        lblTotalTahunan.textColor = [UIColor whiteColor];
-        lblSubtotalTahunan.textColor = [UIColor whiteColor];
+        lblTotalTahunan.textColor = [UIColor clearColor];//[UIColor whiteColor];
+        lblSubtotalTahunan.textColor = [UIColor clearColor];//[UIColor whiteColor];
 
         
     }
     else if ([Highlight isEqualToString:@"Bulanan"])
     {
-        lblSubtotalSekaligus.textColor = [UIColor whiteColor];
-        lblTotalSekaligus.textColor = [UIColor whiteColor];
+        lblSubtotalSekaligus.textColor = [UIColor clearColor];//[UIColor whiteColor];
+        lblTotalSekaligus.textColor = [UIColor clearColor];//[UIColor whiteColor];
         
         lblSubtotalBulanan.textColor = [UIColor colorWithRed:250.0f/255.0f green:175.0f/255.0f blue:50.0f/255.0f alpha:1];
         lblTotalBulanan.textColor = [UIColor colorWithRed:250.0f/255.0f green:175.0f/255.0f blue:50.0f/255.0f alpha:1];
         
         lblTotalTahunan.textColor = [UIColor whiteColor];
-        lblSubtotalTahunan.textColor = [UIColor whiteColor];    }
+        lblSubtotalTahunan.textColor = [UIColor whiteColor];
+    }
     else if ([Highlight isEqualToString:@"Tahunan"])
     {
-        lblSubtotalSekaligus.textColor = [UIColor whiteColor];
-        lblTotalSekaligus.textColor = [UIColor whiteColor];
+        lblSubtotalSekaligus.textColor = [UIColor clearColor];//[UIColor whiteColor];
+        lblTotalSekaligus.textColor = [UIColor clearColor];//[UIColor whiteColor];
         
-        lblSubtotalBulanan.textColor = [UIColor whiteColor];
+        lblSubtotalBulanan.textColor =[UIColor whiteColor];
         lblTotalBulanan.textColor = [UIColor whiteColor];
         
         lblTotalTahunan.textColor = [UIColor colorWithRed:250.0f/255.0f green:175.0f/255.0f blue:50.0f/255.0f alpha:1];
