@@ -92,9 +92,7 @@
 
 -(void)AnsuransiDasar
 {
-    
     NSString *AnsuransiDasarQuery;
-    
     NSArray *paths2 = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docsPath2 = [paths2 objectAtIndex:0];
     NSString *path2 = [docsPath2 stringByAppendingPathComponent:@"BCA_Rates.sqlite"];
@@ -104,14 +102,15 @@
     FMResultSet *results;
     
     NSString*RatesPremiumRate;
+    NSString*RatesPremiumRateTunggal;
     double PaymentMode;
     if (![database open])
     {
         NSLog(@"Could not open db.");
     }
     
-    if ([PremiType isEqualToString:@"Premi Tunggal"])
-    {
+//    if ([PremiType isEqualToString:@"Premi Tunggal"]||[PremiType isEqualToString:@"Premi 5 tahun"])
+//    {
         if([RelWithLA isEqualToString:@"SELF"])
         {
             AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM basicPremiumRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",PayorSex,@"HRT",@"S",_PayorAge];
@@ -120,10 +119,10 @@
             while([results next])
             {
                 if ([PayorSex isEqualToString:@"Male"]||[PayorSex isEqualToString:@"MALE"]){
-                    RatesPremiumRate  = [results stringForColumn:@"Male"];
+                    RatesPremiumRateTunggal  = [results stringForColumn:@"Male"];
                 }
                 else{
-                    RatesPremiumRate  = [results stringForColumn:@"Female"];
+                    RatesPremiumRateTunggal  = [results stringForColumn:@"Female"];
                 }
                 
             }
@@ -137,10 +136,10 @@
             while([results next])
             {
                 if ([LASex isEqualToString:@"Male"]||[LASex isEqualToString:@"MALE"]){
-                    RatesPremiumRate  = [results stringForColumn:@"Male"];
+                    RatesPremiumRateTunggal  = [results stringForColumn:@"Male"];
                 }
                 else{
-                    RatesPremiumRate  = [results stringForColumn:@"Female"];
+                    RatesPremiumRateTunggal  = [results stringForColumn:@"Female"];
                 }
                 
             }
@@ -148,9 +147,9 @@
             
         }
  
-    }
-    else
-    {
+//    }
+//    else
+//    {
         if([RelWithLA isEqualToString:@"SELF"])
         {
             AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM basicPremiumRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",PayorSex,@"HRT",@"R",_PayorAge];
@@ -187,9 +186,8 @@
             
         }
 
-    }
+//    }
 
-    
     int PaymentModeYear;
     int PaymentModeMonthly;
     
@@ -218,11 +216,16 @@
         lblAsuransiDasarTahunan.textColor = [UIColor colorWithRed:250.0f/255.0f green:175.0f/255.0f blue:50.0f/255.0f alpha:1];
     }
     
-    
     double RatesInt = [RatesPremiumRate doubleValue];
+    double RatesIntTunggal = [RatesPremiumRateTunggal doubleValue];
+    
+    
+    _AnssubtotalSekaligus =(_Pertanggungan_Dasar/1000)*(PaymentModeYear * RatesIntTunggal);
+    [lblAsuransiDasarSekaligus setText:[NSString stringWithFormat:@"%d", _AnssubtotalSekaligus]];
+    
     _AnssubtotalYear =(_Pertanggungan_Dasar/1000)*(PaymentModeYear * RatesInt);
     [lblAsuransiDasarTahunan setText:[NSString stringWithFormat:@"%d", _AnssubtotalYear]];
-    [lblAsuransiDasarSekaligus setText:[NSString stringWithFormat:@"%d", _AnssubtotalYear]];
+    
     
     //int RatesInt = [RatesPremiumRate intValue];
     _AnssubtotalBulan =(_Pertanggungan_Dasar/1000)*(0.1 * RatesInt);
@@ -237,14 +240,14 @@
     NSString *docsPath2 = [paths2 objectAtIndex:0];
     NSString *path2 = [docsPath2 stringByAppendingPathComponent:@"BCA_Rates.sqlite"];
     NSString*RatesPremiumRate;
+    NSString*RatesPremiumRateSekaligus;
     
     FMDatabase *database = [FMDatabase databaseWithPath:path2];
     [database open];
     FMResultSet *results;
     
     
-    if ([PremiType isEqualToString:@"Premi Tunggal"])
-    {
+   
         if([RelWithLA isEqualToString:@"SELF"])
         {
             AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM EMRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",PayorSex,@"HRT",@"S",_PayorAge];
@@ -254,10 +257,10 @@
             while([results next])
             {
                 if ([PayorSex isEqualToString:@"Male"]||[PayorSex isEqualToString:@"MALE"]){
-                    RatesPremiumRate  = [results stringForColumn:@"Male"];
+                    RatesPremiumRateSekaligus  = [results stringForColumn:@"Male"];
                 }
                 else{
-                    RatesPremiumRate  = [results stringForColumn:@"Female"];
+                    RatesPremiumRateSekaligus  = [results stringForColumn:@"Female"];
                 }
                 
             }
@@ -273,10 +276,10 @@
             while([results next])
             {
                 if ([LASex isEqualToString:@"Male"]||[LASex isEqualToString:@"MALE"]){
-                    RatesPremiumRate  = [results stringForColumn:@"Male"];
+                    RatesPremiumRateSekaligus  = [results stringForColumn:@"Male"];
                 }
                 else{
-                    RatesPremiumRate  = [results stringForColumn:@"Female"];
+                    RatesPremiumRateSekaligus  = [results stringForColumn:@"Female"];
                 }
                 
             }
@@ -285,9 +288,7 @@
         }
 
         
-    }
-    else
-    {
+   
         if([RelWithLA isEqualToString:@"SELF"])
         {
             AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM EMRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",PayorSex,@"HRT",@"R",_PayorAge];
@@ -327,7 +328,7 @@
             
         }
 
-    }
+   
     
 //        int PaymentModeYear;
 //        int PaymentModeMonthly;
@@ -337,9 +338,12 @@
     
     
     double RatesInt = [RatesPremiumRate doubleValue];
+    double RatesIntSekaligus = [RatesPremiumRateSekaligus doubleValue];
+    
+    _ExtraPercentsubtotalSekaligus =(_Pertanggungan_Dasar/1000)*(1.0 * RatesIntSekaligus)*Pertanggungan_ExtrePremi;
+    [lblExtraPremiPercentSekaligus setText:[NSString stringWithFormat:@"%d", _ExtraPercentsubtotalSekaligus]];
     
     _ExtraPercentsubtotalYear =(_Pertanggungan_Dasar/1000)*(1.0 * RatesInt)*Pertanggungan_ExtrePremi;
-    [lblExtraPremiPercentSekaligus setText:[NSString stringWithFormat:@"%d", _ExtraPercentsubtotalYear]];
     [lblExtraPremiPercentTahunan setText:[NSString stringWithFormat:@"%d", _ExtraPercentsubtotalYear]];
     
     //int RatesInt = [RatesPremiumRate intValue];
@@ -452,16 +456,19 @@
     
     int totalBulanan = (_AnssubtotalBulan + _ExtraNumbsubtotalBulan + _ExtraPercentsubtotalBulan);
     
+    int totalSekaligus = (_AnssubtotalSekaligus + _ExtraNumbsubtotalSekaligus + _ExtraPercentsubtotalSekaligus);
+    
     NSString *year =[@(totalYear)stringValue];
     NSString *Bulan =[@(totalBulanan)stringValue];
+    NSString *Sekaligus =[@(totalSekaligus)stringValue];
     
     
     [lblSubtotalBulanan setText:[NSString stringWithFormat:@"%@", Bulan]];
-    [lblSubtotalSekaligus setText:[NSString stringWithFormat:@"%@", year]];
+    [lblSubtotalSekaligus setText:[NSString stringWithFormat:@"%@", Sekaligus]];
     [lblSubtotalTahunan setText:[NSString stringWithFormat:@"%@", year]];
     
     [lblTotalBulanan setText:[NSString stringWithFormat:@"%@",Bulan ]];
-    [lblTotalSekaligus setText:[NSString stringWithFormat:@"%@", year]];
+    [lblTotalSekaligus setText:[NSString stringWithFormat:@"%@", Sekaligus]];
     [lblTotalTahunan setText:[NSString stringWithFormat:@"%@", year]];
     
     if ([Highlight isEqualToString:@"Pembayaran Sekaligus"])
