@@ -61,17 +61,17 @@
     }
     _Pertanggungan_Dasar = [[dictionaryPremium valueForKey:@"Number_Sum_Assured"] integerValue];
     _PayorAge = [[dictionaryPremium valueForKey:@"PO_Age"]integerValue];;
-    _PayorSex = [dictionaryPremium valueForKey:@"LA_Gender"];
+    _PayorSex = [dictionaryPremium valueForKey:@"PO_Gender"];
     PremiType = [dictionaryPremium valueForKey:@"Payment_Term"];
-    RelWithLA = [dictionaryPremium valueForKey:@"SELF"];
+    RelWithLA = [dictionaryPremium valueForKey:@"RelWithLA"];
     Highlight =[dictionaryPremium valueForKey:@"Payment_Frequency"];
     Pertanggungan_ExtrePremi = [[dictionaryPremium valueForKey:@"ExtraPremiumTerm"] integerValue];
     ExtraPremiNumbValue  = [[dictionaryPremium valueForKey:@"ExtraPremiumSum"] integerValue];
     LASex = [dictionaryPremium valueForKey:@"LA_Gender"];
-    _LAAge = [[dictionaryPremium valueForKey:@"PO_Age"]integerValue];
+    _LAAge = [[dictionaryPremium valueForKey:@"LA_Age"]integerValue];
 
     
-    
+
     [self AnsuransiDasar];
     [self PremiDasarActB];
     [self ExtraPremiNumber];
@@ -113,12 +113,12 @@
 //    {
         if([RelWithLA isEqualToString:@"SELF"])
         {
-            AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM basicPremiumRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",PayorSex,@"HRT",@"S",_PayorAge];
+            AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM basicPremiumRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",_PayorSex,@"HRT",@"S",_PayorAge];
             results = [database executeQuery:AnsuransiDasarQuery];
             
             while([results next])
             {
-                if ([PayorSex isEqualToString:@"Male"]||[PayorSex isEqualToString:@"MALE"]){
+                if ([_PayorSex isEqualToString:@"Male"]||[_PayorSex isEqualToString:@"MALE"]){
                     RatesPremiumRateTunggal  = [results stringForColumn:@"Male"];
                 }
                 else{
@@ -152,12 +152,12 @@
 //    {
         if([RelWithLA isEqualToString:@"SELF"])
         {
-            AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM basicPremiumRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",PayorSex,@"HRT",@"R",_PayorAge];
+            AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM basicPremiumRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",_PayorSex,@"HRT",@"R",_PayorAge];
             results = [database executeQuery:AnsuransiDasarQuery];
             
             while([results next])
             {
-                if ([PayorSex isEqualToString:@"Male"]||[PayorSex isEqualToString:@"MALE"]){
+                if ([_PayorSex isEqualToString:@"Male"]||[_PayorSex isEqualToString:@"MALE"]){
                     RatesPremiumRate  = [results stringForColumn:@"Male"];
                 }
                 else{

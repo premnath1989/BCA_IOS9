@@ -936,7 +936,6 @@ bool WPTPD30RisDeleted = FALSE;
 
 
     }
-
     
     if ([FRekeunsiPembayaranMode isEqualToString:@"Pembayaran Sekaligus"]||[FRekeunsiPembayaranMode isEqualToString:@"Tahunan"])
     {
@@ -1037,7 +1036,7 @@ bool WPTPD30RisDeleted = FALSE;
 //        
 //    }
 //
-    double RatesInt = [WaiverRate doubleValue];
+    double RatesInt = [RatesPremiumRate doubleValue];
     double  RiderPremium = (RatesInt/100)* total;
     
     double totalPremiumDasarA = RiderPremium + total;
@@ -1164,9 +1163,6 @@ bool WPTPD30RisDeleted = FALSE;
     int masaExtraPremiBTotal =[_masaExtraPremiField.text intValue];\
     
      double totalB = total * masaExtraPremiBTotal;
-    
-    
-    
     
     double TotalAB = TotalA + totalB;
     
