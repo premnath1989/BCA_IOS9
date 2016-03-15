@@ -280,22 +280,25 @@ MBProgressHUD *HUD;
             [df setDateFormat:@"dd/MM/yyyy ( HH:mm a )"];
             //NSString *strNewDate = [df stringFromDate:newDate];
             
-            /*NSUInteger unitFlags = NSDayCalendarUnit|NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit;
-            NSDateComponents *dateComponents = [calendar components:unitFlags fromDate:FinalDate toDate:newDate options:0];
-            NSInteger days     = [dateComponents day];*/
-            
-            
             NSDate *mydate = [NSDate date];
             NSTimeInterval secondsInEightHours = 8 * 60 * 60;
             NSDate *currentDate = [mydate dateByAddingTimeInterval:secondsInEightHours];
             NSDate *expireDate = [newDate dateByAddingTimeInterval:secondsInEightHours];
+
+            NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+            NSDateComponents *componentsDay = [gregorianCalendar components:NSCalendarUnitDay
+                                                                   fromDate:currentDate
+                                                                     toDate:expireDate
+                                                                    options:NSCalendarWrapComponents];
+            //NSLog(@"%i", [componentsDay day]);
+            int days1 = [componentsDay day];
             
             int countdown = -[currentDate timeIntervalSinceDate:expireDate];//pay attention here.
             int minutes = (countdown / 60) % 60;
             int hours = (countdown / 3600) % 24;
             int days = (countdown / 86400) % 365;
             
-            NSString *DateRemaining =[NSString stringWithFormat:@"%d Days %d Hours\n %d Minutes",days,hours,minutes];
+            NSString *DateRemaining =[NSString stringWithFormat:@"%d Days %d Hours\n %d Minutes",days1,hours,minutes];
             
             if ([dataIndex containsObject:pp.ProspectID]){
                 int indexArray = [dataIndex indexOfObject:pp.ProspectID];
