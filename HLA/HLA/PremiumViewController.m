@@ -11,7 +11,9 @@
 #import "AppDelegate.h"
 #import "RiderViewController.h"
 
-@interface PremiumViewController ()
+@interface PremiumViewController (){
+    NSNumberFormatter *Premformatter;
+}
 
 @end
 
@@ -82,6 +84,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    Premformatter = [[NSNumberFormatter alloc] init];
+    [Premformatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+    [Premformatter setGeneratesDecimalNumbers:FALSE];
+    [Premformatter setMaximumFractionDigits:0];
+    [Premformatter setCurrencySymbol:@""];
+    [Premformatter setRoundingMode:NSNumberFormatterRoundUp];
     
     NSMutableDictionary *newAttributes = [[NSMutableDictionary alloc] init];
     [newAttributes setObject:[UIFont systemFontOfSize:18] forKey:UITextAttributeFont];
@@ -221,17 +229,18 @@
     
     
     _AnssubtotalSekaligus =(_Pertanggungan_Dasar/1000)*(PaymentModeYear * RatesIntTunggal);
-    [lblAsuransiDasarSekaligus setText:[NSString stringWithFormat:@"%d", _AnssubtotalSekaligus]];
-    
     _AnssubtotalYear =(_Pertanggungan_Dasar/1000)*(PaymentModeYear * RatesInt);
-    [lblAsuransiDasarTahunan setText:[NSString stringWithFormat:@"%d", _AnssubtotalYear]];
-    
-    
-    //int RatesInt = [RatesPremiumRate intValue];
     _AnssubtotalBulan =(_Pertanggungan_Dasar/1000)*(0.1 * RatesInt);
-    [lblAsuransiDasarBulanan setText:[NSString stringWithFormat:@"%d", _AnssubtotalBulan]];
-
-}
+    
+    NSNumber* numberSekaligus=[NSNumber numberWithInt:_AnssubtotalSekaligus];
+    NSNumber* numberYear=[NSNumber numberWithInt:_AnssubtotalYear];
+    NSNumber* numberBulan=[NSNumber numberWithInt:_AnssubtotalBulan];
+    
+    [lblAsuransiDasarSekaligus setText:[Premformatter stringFromNumber:numberSekaligus]/*[NSString stringWithFormat:@"%d", _AnssubtotalSekaligus]*/];
+    [lblAsuransiDasarTahunan setText:[Premformatter stringFromNumber:numberYear]/*[NSString stringWithFormat:@"%d", _AnssubtotalYear]*/];
+    //int RatesInt = [RatesPremiumRate intValue];
+    [lblAsuransiDasarBulanan setText:[Premformatter stringFromNumber:numberBulan]/*[NSString stringWithFormat:@"%d", _AnssubtotalBulan]*/];
+ }
 
 -(void)PremiDasarActB
 {
@@ -341,14 +350,17 @@
     double RatesIntSekaligus = [RatesPremiumRateSekaligus doubleValue];
     
     _ExtraPercentsubtotalSekaligus =(_Pertanggungan_Dasar/1000)*(1.0 * RatesIntSekaligus)*Pertanggungan_ExtrePremi;
-    [lblExtraPremiPercentSekaligus setText:[NSString stringWithFormat:@"%d", _ExtraPercentsubtotalSekaligus]];
-    
     _ExtraPercentsubtotalYear =(_Pertanggungan_Dasar/1000)*(1.0 * RatesInt)*Pertanggungan_ExtrePremi;
-    [lblExtraPremiPercentTahunan setText:[NSString stringWithFormat:@"%d", _ExtraPercentsubtotalYear]];
-    
-    //int RatesInt = [RatesPremiumRate intValue];
     _ExtraPercentsubtotalBulan =(_Pertanggungan_Dasar/1000)*(0.1 * RatesInt)*Pertanggungan_ExtrePremi;
-    [lblExtraPremiPercentBulanan setText:[NSString stringWithFormat:@"%d", _ExtraPercentsubtotalBulan]];
+    
+    NSNumber* numberSekaligus=[NSNumber numberWithInt:_ExtraPercentsubtotalSekaligus];
+    NSNumber* numberYear=[NSNumber numberWithInt:_ExtraPercentsubtotalYear];
+    NSNumber* numberBulan=[NSNumber numberWithInt:_ExtraPercentsubtotalBulan];
+    
+    [lblExtraPremiPercentSekaligus setText:[Premformatter stringFromNumber:numberSekaligus]];
+    [lblExtraPremiPercentTahunan setText:[Premformatter stringFromNumber:numberYear]];
+    //int RatesInt = [RatesPremiumRate intValue];
+    [lblExtraPremiPercentBulanan setText:[Premformatter stringFromNumber:numberBulan]];
     
     if ([Highlight isEqualToString:@"Pembayaran Sekaligus"])
     {
@@ -418,12 +430,15 @@
     
     
     _ExtraNumbsubtotalYear =(ExtraPremiNumbValue* 1.0) *(_Pertanggungan_Dasar/1000);
-    [lblExtraPremiNumberTahunan setText:[NSString stringWithFormat:@"%d", _ExtraNumbsubtotalYear]];
-    [lblExtraPremiNumberSekaligus setText:[NSString stringWithFormat:@"%d", _ExtraNumbsubtotalYear]];
+    _ExtraNumbsubtotalBulan =(ExtraPremiNumbValue* 0.1) *(_Pertanggungan_Dasar/1000);
     
+    NSNumber* numberYear=[NSNumber numberWithInt:_ExtraNumbsubtotalYear];
+    NSNumber* numberBulan=[NSNumber numberWithInt:_ExtraNumbsubtotalBulan];
+
+    [lblExtraPremiNumberTahunan setText:[Premformatter stringFromNumber:numberYear]];
+    [lblExtraPremiNumberSekaligus setText:[Premformatter stringFromNumber:numberYear]];
     //int RatesInt = [RatesPremiumRate intValue];
-     _ExtraNumbsubtotalBulan =(ExtraPremiNumbValue* 0.1) *(_Pertanggungan_Dasar/1000);
-    [lblExtraPremiNumberBulanan setText:[NSString stringWithFormat:@"%d",_ExtraNumbsubtotalBulan]];
+    [lblExtraPremiNumberBulanan setText:[Premformatter stringFromNumber:numberBulan]];
     
     if ([Highlight isEqualToString:@"Pembayaran Sekaligus"])
     {
@@ -461,15 +476,18 @@
     NSString *year =[@(totalYear)stringValue];
     NSString *Bulan =[@(totalBulanan)stringValue];
     NSString *Sekaligus =[@(totalSekaligus)stringValue];
+
+    NSNumber* numberSekaligus=[NSNumber numberWithInt:totalSekaligus];
+    NSNumber* numberYear=[NSNumber numberWithInt:totalYear];
+    NSNumber* numberBulan=[NSNumber numberWithInt:totalBulanan];
+
+    [lblSubtotalBulanan setText:[Premformatter stringFromNumber:numberBulan]];
+    [lblSubtotalSekaligus setText:[Premformatter stringFromNumber:numberSekaligus]];
+    [lblSubtotalTahunan setText:[Premformatter stringFromNumber:numberYear]];
     
-    
-    [lblSubtotalBulanan setText:[NSString stringWithFormat:@"%@", Bulan]];
-    [lblSubtotalSekaligus setText:[NSString stringWithFormat:@"%@", Sekaligus]];
-    [lblSubtotalTahunan setText:[NSString stringWithFormat:@"%@", year]];
-    
-    [lblTotalBulanan setText:[NSString stringWithFormat:@"%@",Bulan ]];
-    [lblTotalSekaligus setText:[NSString stringWithFormat:@"%@", Sekaligus]];
-    [lblTotalTahunan setText:[NSString stringWithFormat:@"%@", year]];
+    [lblTotalBulanan setText:[Premformatter stringFromNumber:numberBulan]];
+    [lblTotalSekaligus setText:[Premformatter stringFromNumber:numberSekaligus]];
+    [lblTotalTahunan setText:[Premformatter stringFromNumber:numberYear]];
     
     if ([Highlight isEqualToString:@"Pembayaran Sekaligus"])
     {
