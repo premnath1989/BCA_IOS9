@@ -1678,8 +1678,10 @@ bool RegDatehandling;
     //    return ((newLength <= CHARACTER_LIMIT_ExactDuties));
     //}
     activeView = textView;
-    return textView.text.length + (text.length - range.length) <= 500   ;
-    return YES;
+    //return textView.text.length + (text.length - range.length) <= 500   ;
+    //return YES;
+
+    return (newLength <= 500);//textView.text.length + (text.length - range.length) <= 500   ;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {

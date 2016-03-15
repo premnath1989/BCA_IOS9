@@ -736,14 +736,16 @@ BOOL isFirstLoad;
     dictionaryMasterForInsert = [[NSMutableDictionary alloc]initWithObjectsAndKeys:[dictionaryPOForInsert valueForKey:@"SINO"],@"SINO",@"1.1",@"SI_Version",@"Not Created",@"ProposalStatus", nil];
     
     if (!_SecondLAController) {
-        NSDictionary* dictPOData=[[NSDictionary alloc]initWithDictionary:[_modelSIPOData getPO_DataFor:[self.requestSINo description]]];
-        [dictionaryPOForInsert setObject:[dictPOData valueForKey:@"LA_ClientID"] forKey:@"LA_ClientID"];
-        [dictionaryPOForInsert setObject:[dictPOData valueForKey:@"LA_Name"] forKey:@"LA_Name"];
-        [dictionaryPOForInsert setObject:[dictPOData valueForKey:@"LA_DOB"] forKey:@"LA_DOB"];
-        [dictionaryPOForInsert setObject:[dictPOData valueForKey:@"LA_Age"] forKey:@"LA_Age"];
-        [dictionaryPOForInsert setObject:[dictPOData valueForKey:@"LA_Gender"] forKey:@"LA_Gender"];
-        [dictionaryPOForInsert setObject:[dictPOData valueForKey:@"LA_OccpCode"] forKey:@"LA_OccpCode"];
-        [dictionaryPOForInsert setObject:[dictPOData valueForKey:@"LA_Occp"] forKey:@"LA_Occp"];
+        if (![dictionaryPOForInsert objectForKey:@"LA_ClientID"]){
+            NSDictionary* dictPOData=[[NSDictionary alloc]initWithDictionary:[_modelSIPOData getPO_DataFor:[self.requestSINo description]]];
+            [dictionaryPOForInsert setObject:[dictPOData valueForKey:@"LA_ClientID"] forKey:@"LA_ClientID"];
+            [dictionaryPOForInsert setObject:[dictPOData valueForKey:@"LA_Name"] forKey:@"LA_Name"];
+            [dictionaryPOForInsert setObject:[dictPOData valueForKey:@"LA_DOB"] forKey:@"LA_DOB"];
+            [dictionaryPOForInsert setObject:[dictPOData valueForKey:@"LA_Age"] forKey:@"LA_Age"];
+            [dictionaryPOForInsert setObject:[dictPOData valueForKey:@"LA_Gender"] forKey:@"LA_Gender"];
+            [dictionaryPOForInsert setObject:[dictPOData valueForKey:@"LA_OccpCode"] forKey:@"LA_OccpCode"];
+            [dictionaryPOForInsert setObject:[dictPOData valueForKey:@"LA_Occp"] forKey:@"LA_Occp"];
+        }
     }
     else{
         [dictionaryPOForInsert addEntriesFromDictionary:[_SecondLAController setDictionarySecondLA]];
