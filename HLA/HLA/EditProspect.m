@@ -770,6 +770,9 @@ NSMutableArray *DelGroupArr;
     NSString *validationAreaTelponKantor=@"Nomor kode telepon kantor yang dimasukkan minimal 6 digit atau lebih";
     NSString *validationNumberTelponKantor=@"Nomor telepon kantor yang dimasukkan minimal 6 digit atau lebih";
     
+    NSString *validationEmailWrong=@"Anda memasukkan email yang salah. Harap masukkan email yang benar.";
+    NSString *validationEmailCharacter=@"Kesalahan panjang email. Hanya 40 karakter yang dibolehkan";
+
     //texthomeaddress1
     NSString *texthomeaddress1=txtHomeAddr1.text;
     //texthomeaddress2
@@ -813,6 +816,19 @@ NSMutableArray *DelGroupArr;
         [txtHomeAddr3 becomeFirstResponder];
         return false;
     }*/
+    
+    if(![txtEmail.text isEqualToString:@""]) {
+        if( [self NSStringIsValidEmail:txtEmail.text] == FALSE) {
+            [self createAlertViewAndShow:validationEmailWrong tag:0];
+            return false;
+        }
+        
+        if (txtEmail.text.length > 40) {
+            [self createAlertViewAndShow:validationEmailCharacter tag:0];
+            return false;
+        }
+    }
+    
     else if ([_switchCountryHome isOn]){
         if ([validationSet containsObject:homeCountry]||homeCountry==NULL){
             [self createAlertViewAndShow:validationNegara tag:0];
