@@ -31,6 +31,11 @@
 @class AgentWS_LoginAPIResponse;
 @class AgentWS_VersionChecker;
 @class AgentWS_VersionCheckerResponse;
+@class AgentWS_SupervisorLogin;
+@class AgentWS_SupervisorLoginResponse;
+@class AgentWS_SupervisorLoginResult;
+@class AgentWS_AdminLogin;
+@class AgentWS_AdminLoginResponse;
 @class AgentWS_DataSet;
 @interface AgentWS_ValidateAgentAndDevice : NSObject {
 	
@@ -75,7 +80,7 @@
 /* elements */
 	NSString * strAgentID;
 	NSString * strPassword;
-	NSString * strDeviceID;
+	NSString * strUDID;
 	NSString * strStatus;
 /* attributes */
 }
@@ -89,7 +94,7 @@
 /* elements */
 @property (retain) NSString * strAgentID;
 @property (retain) NSString * strPassword;
-@property (retain) NSString * strDeviceID;
+@property (retain) NSString * strUDID;
 @property (retain) NSString * strStatus;
 /* attributes */
 - (NSDictionary *)attributes;
@@ -603,6 +608,108 @@
 /* attributes */
 - (NSDictionary *)attributes;
 @end
+@interface AgentWS_SupervisorLogin : NSObject {
+	
+/* elements */
+	NSString * strAgentcode;
+	NSString * strSupervisorname;
+	NSString * strSupervisorPass;
+	NSString * strStatus;
+/* attributes */
+}
+- (NSString *)nsPrefix;
+- (xmlNodePtr)xmlNodeForDoc:(xmlDocPtr)doc elementName:(NSString *)elName elementNSPrefix:(NSString *)elNSPrefix;
+- (void)addAttributesToNode:(xmlNodePtr)node;
+- (void)addElementsToNode:(xmlNodePtr)node;
++ (AgentWS_SupervisorLogin *)deserializeNode:(xmlNodePtr)cur;
+- (void)deserializeAttributesFromNode:(xmlNodePtr)cur;
+- (void)deserializeElementsFromNode:(xmlNodePtr)cur;
+/* elements */
+@property (retain) NSString * strAgentcode;
+@property (retain) NSString * strSupervisorname;
+@property (retain) NSString * strSupervisorPass;
+@property (retain) NSString * strStatus;
+/* attributes */
+- (NSDictionary *)attributes;
+@end
+@interface AgentWS_SupervisorLoginResult : NSObject {
+	
+    /* elements */
+    NSString * xmlDetails;
+    /* attributes */
+}
+@property (retain) NSString * xmlDetails;
+- (NSString *)nsPrefix;
+- (xmlNodePtr)xmlNodeForDoc:(xmlDocPtr)doc elementName:(NSString *)elName elementNSPrefix:(NSString *)elNSPrefix;
+- (void)addAttributesToNode:(xmlNodePtr)node;
+- (void)addElementsToNode:(xmlNodePtr)node;
++ (AgentWS_SupervisorLoginResult *)deserializeNode:(xmlNodePtr)cur;
+- (void)deserializeAttributesFromNode:(xmlNodePtr)cur;
+- (void)deserializeElementsFromNode:(xmlNodePtr)cur;
+/* elements */
+/* attributes */
+- (NSDictionary *)attributes;
+@end
+@interface AgentWS_SupervisorLoginResponse : NSObject {
+	
+/* elements */
+	AgentWS_SupervisorLoginResult * SupervisorLoginResult;
+	NSString * strStatus;
+/* attributes */
+}
+- (NSString *)nsPrefix;
+- (xmlNodePtr)xmlNodeForDoc:(xmlDocPtr)doc elementName:(NSString *)elName elementNSPrefix:(NSString *)elNSPrefix;
+- (void)addAttributesToNode:(xmlNodePtr)node;
+- (void)addElementsToNode:(xmlNodePtr)node;
++ (AgentWS_SupervisorLoginResponse *)deserializeNode:(xmlNodePtr)cur;
+- (void)deserializeAttributesFromNode:(xmlNodePtr)cur;
+- (void)deserializeElementsFromNode:(xmlNodePtr)cur;
+/* elements */
+@property (retain) AgentWS_SupervisorLoginResult * SupervisorLoginResult;
+@property (retain) NSString * strStatus;
+/* attributes */
+- (NSDictionary *)attributes;
+@end
+@interface AgentWS_AdminLogin : NSObject {
+	
+/* elements */
+	NSString * stradmin;
+	NSString * stradminpass;
+	NSString * strStatus;
+/* attributes */
+}
+- (NSString *)nsPrefix;
+- (xmlNodePtr)xmlNodeForDoc:(xmlDocPtr)doc elementName:(NSString *)elName elementNSPrefix:(NSString *)elNSPrefix;
+- (void)addAttributesToNode:(xmlNodePtr)node;
+- (void)addElementsToNode:(xmlNodePtr)node;
++ (AgentWS_AdminLogin *)deserializeNode:(xmlNodePtr)cur;
+- (void)deserializeAttributesFromNode:(xmlNodePtr)cur;
+- (void)deserializeElementsFromNode:(xmlNodePtr)cur;
+/* elements */
+@property (retain) NSString * stradmin;
+@property (retain) NSString * stradminpass;
+@property (retain) NSString * strStatus;
+/* attributes */
+- (NSDictionary *)attributes;
+@end
+@interface AgentWS_AdminLoginResponse : NSObject {
+	
+/* elements */
+	NSString * AdminLoginResult;
+/* attributes */
+}
+- (NSString *)nsPrefix;
+- (xmlNodePtr)xmlNodeForDoc:(xmlDocPtr)doc elementName:(NSString *)elName elementNSPrefix:(NSString *)elNSPrefix;
+- (void)addAttributesToNode:(xmlNodePtr)node;
+- (void)addElementsToNode:(xmlNodePtr)node;
++ (AgentWS_AdminLoginResponse *)deserializeNode:(xmlNodePtr)cur;
+- (void)deserializeAttributesFromNode:(xmlNodePtr)cur;
+- (void)deserializeElementsFromNode:(xmlNodePtr)cur;
+/* elements */
+@property (retain) NSString * AdminLoginResult;
+/* attributes */
+- (NSDictionary *)attributes;
+@end
 @interface AgentWS_DataSet : NSObject {
 	
 /* elements */
@@ -680,6 +787,10 @@
 - (void)LoginAPIAsyncUsingParameters:(AgentWS_LoginAPI *)aParameters  delegate:(id<AgentWSSoapBindingResponseDelegate>)responseDelegate;
 - (AgentWSSoapBindingResponse *)VersionCheckerUsingParameters:(AgentWS_VersionChecker *)aParameters ;
 - (void)VersionCheckerAsyncUsingParameters:(AgentWS_VersionChecker *)aParameters  delegate:(id<AgentWSSoapBindingResponseDelegate>)responseDelegate;
+- (AgentWSSoapBindingResponse *)SupervisorLoginUsingParameters:(AgentWS_SupervisorLogin *)aParameters ;
+- (void)SupervisorLoginAsyncUsingParameters:(AgentWS_SupervisorLogin *)aParameters  delegate:(id<AgentWSSoapBindingResponseDelegate>)responseDelegate;
+- (AgentWSSoapBindingResponse *)AdminLoginUsingParameters:(AgentWS_AdminLogin *)aParameters ;
+- (void)AdminLoginAsyncUsingParameters:(AgentWS_AdminLogin *)aParameters  delegate:(id<AgentWSSoapBindingResponseDelegate>)responseDelegate;
 @end
 @interface AgentWSSoapBindingOperation : NSOperation {
 	AgentWSSoapBinding *binding;
@@ -791,6 +902,22 @@
 	parameters:(AgentWS_VersionChecker *)aParameters
 ;
 @end
+@interface AgentWSSoapBinding_SupervisorLogin : AgentWSSoapBindingOperation {
+	AgentWS_SupervisorLogin * parameters;
+}
+@property (retain) AgentWS_SupervisorLogin * parameters;
+- (id)initWithBinding:(AgentWSSoapBinding *)aBinding delegate:(id<AgentWSSoapBindingResponseDelegate>)aDelegate
+	parameters:(AgentWS_SupervisorLogin *)aParameters
+;
+@end
+@interface AgentWSSoapBinding_AdminLogin : AgentWSSoapBindingOperation {
+	AgentWS_AdminLogin * parameters;
+}
+@property (retain) AgentWS_AdminLogin * parameters;
+- (id)initWithBinding:(AgentWSSoapBinding *)aBinding delegate:(id<AgentWSSoapBindingResponseDelegate>)aDelegate
+	parameters:(AgentWS_AdminLogin *)aParameters
+;
+@end
 @interface AgentWSSoapBinding_envelope : NSObject {
 }
 + (AgentWSSoapBinding_envelope *)sharedInstance;
@@ -852,6 +979,10 @@
 - (void)LoginAPIAsyncUsingParameters:(AgentWS_LoginAPI *)aParameters  delegate:(id<AgentWSSoap12BindingResponseDelegate>)responseDelegate;
 - (AgentWSSoap12BindingResponse *)VersionCheckerUsingParameters:(AgentWS_VersionChecker *)aParameters ;
 - (void)VersionCheckerAsyncUsingParameters:(AgentWS_VersionChecker *)aParameters  delegate:(id<AgentWSSoap12BindingResponseDelegate>)responseDelegate;
+- (AgentWSSoap12BindingResponse *)SupervisorLoginUsingParameters:(AgentWS_SupervisorLogin *)aParameters ;
+- (void)SupervisorLoginAsyncUsingParameters:(AgentWS_SupervisorLogin *)aParameters  delegate:(id<AgentWSSoap12BindingResponseDelegate>)responseDelegate;
+- (AgentWSSoap12BindingResponse *)AdminLoginUsingParameters:(AgentWS_AdminLogin *)aParameters ;
+- (void)AdminLoginAsyncUsingParameters:(AgentWS_AdminLogin *)aParameters  delegate:(id<AgentWSSoap12BindingResponseDelegate>)responseDelegate;
 @end
 @interface AgentWSSoap12BindingOperation : NSOperation {
 	AgentWSSoap12Binding *binding;
@@ -961,6 +1092,22 @@
 @property (retain) AgentWS_VersionChecker * parameters;
 - (id)initWithBinding:(AgentWSSoap12Binding *)aBinding delegate:(id<AgentWSSoap12BindingResponseDelegate>)aDelegate
 	parameters:(AgentWS_VersionChecker *)aParameters
+;
+@end
+@interface AgentWSSoap12Binding_SupervisorLogin : AgentWSSoap12BindingOperation {
+	AgentWS_SupervisorLogin * parameters;
+}
+@property (retain) AgentWS_SupervisorLogin * parameters;
+- (id)initWithBinding:(AgentWSSoap12Binding *)aBinding delegate:(id<AgentWSSoap12BindingResponseDelegate>)aDelegate
+	parameters:(AgentWS_SupervisorLogin *)aParameters
+;
+@end
+@interface AgentWSSoap12Binding_AdminLogin : AgentWSSoap12BindingOperation {
+	AgentWS_AdminLogin * parameters;
+}
+@property (retain) AgentWS_AdminLogin * parameters;
+- (id)initWithBinding:(AgentWSSoap12Binding *)aBinding delegate:(id<AgentWSSoap12BindingResponseDelegate>)aDelegate
+	parameters:(AgentWS_AdminLogin *)aParameters
 ;
 @end
 @interface AgentWSSoap12Binding_envelope : NSObject {

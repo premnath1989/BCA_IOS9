@@ -281,6 +281,18 @@ static NSString *labelVers;
             }
         }
         
+        else if([bodyPart isKindOfClass:[AgentWS_AdminLoginResponse class]]) {
+            [spinnerLoading stopLoadingSpinner];
+            AgentWS_AdminLoginResponse* rateResponse = bodyPart;
+            
+            if([(NSString *)rateResponse.AdminLoginResult caseInsensitiveCompare:@"TRUE"]== NSOrderedSame){
+                [self loginSuccess];
+            }else{
+                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Informasi" message:@"Username/Password yang anda masukan salah" delegate:self cancelButtonTitle:@"Download" otherButtonTitles:nil];
+                [alert show];
+            }
+        }
+        
         /****
          * is it AgentWS_SendForgotPasswordResponse
          ****/
@@ -293,6 +305,34 @@ static NSString *labelVers;
             }else{
                 UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Gagal!" message:[NSString stringWithFormat:@"Periksa lagi koneksi internet anda"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
                 [alert show];
+            }
+        }
+        
+        else if([bodyPart isKindOfClass:[AgentWS_SupervisorLoginResponse class]]) {
+            AgentWS_SupervisorLoginResponse* rateResponse = bodyPart;
+            if([rateResponse.strStatus caseInsensitiveCompare:@"True"] == NSOrderedSame){
+                
+                // create XMLDocument object
+                DDXMLDocument *xml = [[DDXMLDocument alloc] initWithXMLString:
+                                      rateResponse.SupervisorLoginResult.xmlDetails options:0 error:nil];
+                
+                // Get root element - DataSetMenu for your XMLfile
+                DDXMLElement *root = [xml rootElement];
+                WebResponObj *returnObj = [[WebResponObj alloc]init];
+                [self parseXML:root objBuff:returnObj index:0];
+                int result = [loginDB fullSyncTable:returnObj];
+                if(result == TABLE_INSERTION_SUCCESS){
+                    [spinnerLoading stopLoadingSpinner];
+                    if([self validToLogin] && [self CredentialChecking:FALSE])
+                        [self loginSuccess];
+                }
+            }else if([rateResponse.strStatus caseInsensitiveCompare:@"False"] == NSOrderedSame){
+                
+                [spinnerLoading stopLoadingSpinner];
+                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Username/Password yang anda masukan salah"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                [alert show];
+                
+                
             }
         }
         
@@ -319,20 +359,10 @@ static NSString *labelVers;
                 }
             }else if([rateResponse.strStatus caseInsensitiveCompare:@"False"] == NSOrderedSame){
                 
-                // create XMLDocument object
-                DDXMLDocument *xml = [[DDXMLDocument alloc] initWithXMLString:
-                                      rateResponse.ValidateLoginResult.xmlDetails options:0 error:nil];
+                [spinnerLoading stopLoadingSpinner];
+                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Username/Password yang anda masukan salah"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                [alert show];
                 
-                // Get root element - DataSetMenu for your XMLfile
-                DDXMLElement *root = [xml rootElement];
-                WebResponObj *returnObj = [[WebResponObj alloc]init];
-                [self parseXML:root objBuff:returnObj index:0];
-                int result = [loginDB fullSyncTable:returnObj];
-                if(result == TABLE_INSERTION_SUCCESS){
-                    [spinnerLoading stopLoadingSpinner];
-                    if([self validToLogin] && [self CredentialChecking:FALSE])
-                        [self loginSuccess];
-                }
 
             }
         }
@@ -475,11 +505,11 @@ static NSString *labelVers;
     
     if (dayRem<0) {
         lblTimeRemaining.textColor = [UIColor redColor];
-        lblTimeRemaining.text = [NSString stringWithFormat:@"0 days"];
+        lblTimeRemaining.text = [NSString stringWithFormat:@"0 hari"];
     }
     else {
         lblTimeRemaining.textColor = [UIColor whiteColor];
-        lblTimeRemaining.text = [NSString stringWithFormat:@"%d days", dayRem];
+        lblTimeRemaining.text = [NSString stringWithFormat:@"%d hari", dayRem];
     }
 }
 
@@ -545,7 +575,7 @@ static NSString *labelVers;
             }
             case AGENT_IS_NOT_FOUND:
             {
-                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Username yang di masukan salah"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Username/Password yang di masukan salah"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
                 [alert show];
                 validFlag = false;
                 break;
@@ -606,21 +636,51 @@ static NSString *labelVers;
     //check the agentstatus and expiry date
     if(!firstLogin){
         
-        [spinnerLoading startLoadingSpinner:self.view label:@"Loading"];
-        
         //online login
-        if([self connected] && !OFFLINE_PROCESS){
-            ONLINE_PROCESS = TRUE;
-            WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
-            [webservice ValidateLogin:txtUsername.text password:txtPassword.text UUID:[[[UIDevice currentDevice] identifierForVendor] UUIDString] delegate:self];
+        int dateDifference = [self syncDaysLeft];
+        if(dateDifference>0)
+        {
+            UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Mohon kembalikan waktu anda ke semula"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alert show];
         }else{
-            //offline login
-            if([self validToLogin]){
-                ONLINE_PROCESS = FALSE;
-                OFFLINE_PROCESS = FALSE;
-                [self doOfflineLoginCheck];
+            [spinnerLoading startLoadingSpinner:self.view label:@"Loading"];
+            if([self connected] && !OFFLINE_PROCESS){
+                ONLINE_PROCESS = TRUE;
+                int usernameTemp = [self UsernameChecking];
+                if(usernameTemp != 0){
+                    switch (usernameTemp) {
+                        case USERNAME_IS_AGENT:{
+                            WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
+                            [webservice ValidateLogin:txtUsername.text password:txtPassword.text UUID:[[[UIDevice currentDevice] identifierForVendor] UUIDString] delegate:self];
+                            break;
+                        }
+                        case USERNAME_IS_SPV:{
+                            WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
+                            [webservice spvLogin:[loginDB AgentCodeLocal] delegate:self spvCode:txtUsername.text spvPass:txtPassword.text];
+                            break;
+                        }
+                        case USERNAME_IS_ADMIN:{
+                            WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
+                            [webservice adminLogin:[loginDB AgentCodeLocal] delegate:self adminCode:txtUsername.text  adminPass:txtPassword.text];
+                            break;
+                        }
+                        default:
+                            break;
+                    }
+                }else{
+                    UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Username/password yang anda masukan salah"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                    [alert show];
+                    [spinnerLoading stopLoadingSpinner];
+                }
             }else{
-                [spinnerLoading stopLoadingSpinner];
+                //offline login
+                if([self validToLogin]){
+                    ONLINE_PROCESS = FALSE;
+                    OFFLINE_PROCESS = FALSE;
+                    [self doOfflineLoginCheck];
+                }else{
+                    [spinnerLoading stopLoadingSpinner];
+                }
             }
         }
     }
@@ -865,6 +925,53 @@ static NSString *labelVers;
     
 }
 
+-(int) UsernameChecking
+{
+    int statusUsername = 0;
+    
+    NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsDir = [dirPaths objectAtIndex:0];
+    NSString *dbPath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    
+    [db open];
+    NSString *AgentName;
+    NSString *AgentPassword;
+    NSString *SupervisorCode;
+    NSString *SupervisorPass;
+    NSString *Admin;
+    NSString *AdminPassword;
+    
+    FMResultSet *result1 = [db executeQuery:@"select AgentCode, AgentPassword, DirectSupervisorCode, DirectSupervisorPassword, Admin, AdminPassword  from Agent_profile"];
+    
+    while ([result1 next]) {
+        AgentName = [[result1 objectForColumnName:@"AgentCode"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        AgentPassword = [[result1 objectForColumnName:@"AgentPassword"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        
+        SupervisorCode = [[result1 objectForColumnName:@"DirectSupervisorCode"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        SupervisorPass = [[result1 objectForColumnName:@"DirectSupervisorPassword"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        
+        Admin = [[result1 objectForColumnName:@"Admin"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        AdminPassword = [[result1 objectForColumnName:@"AdminPassword"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    }
+    
+    if([txtUsername.text isEqualToString:AgentName] ){
+        
+        statusUsername = USERNAME_IS_AGENT;
+
+    }else if([txtUsername.text isEqualToString:SupervisorCode]){
+        
+        statusUsername = USERNAME_IS_SPV;
+
+    }else if([txtUsername.text isEqualToString:Admin]){
+        statusUsername = USERNAME_IS_ADMIN;
+    }
+    
+    [db close];
+    
+    return statusUsername;
+}
+
 -(BOOL) CredentialChecking:(BOOL)spvAdminBypass
 {
     BOOL successLog = FALSE;
@@ -899,12 +1006,12 @@ static NSString *labelVers;
                 if ([txtPassword.text isEqualToString:AgentPassword]) {
                     successLog = TRUE;
                 }else{
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Password yang anda masukan salah" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Username/Password yang anda masukan salah" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                     [alert show];
                     successLog = FALSE;
                 }
             }else{
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Username yang anda masukan salah" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Username/Password yang anda masukan salah" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [alert show];
                 successLog = FALSE;
             }
@@ -915,12 +1022,12 @@ static NSString *labelVers;
                     || ([txtUsername.text isEqualToString:Admin] && [txtPassword.text isEqualToString:AdminPassword])) {
                     successLog = TRUE;
                 }else{
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Password yang anda masukan salah" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Username/Password yang anda masukan salah" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                     [alert show];
                     successLog = FALSE;
                 }
             }else{
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Username yang anda masukan salah" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Username/Password yang anda masukan salah" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [alert show];
                 successLog = FALSE;
             }

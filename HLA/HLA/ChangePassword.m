@@ -398,7 +398,7 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
                 [self gotoCarousel];
             }else if([rateResponse.strStatus caseInsensitiveCompare:@"False"] == NSOrderedSame){
                 [spinnerLoading stopLoadingSpinner];
-                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Proses Login anda gagal" message:@"" delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
+                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Proses Login anda gagal, periksa username dan password anda" message:@"" delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
                 [alert show];
             }
         }
