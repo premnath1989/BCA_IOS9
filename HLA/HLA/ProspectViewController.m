@@ -607,6 +607,22 @@ bool RegDatehandling;
     outletBranchName.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     outletBranchName.imageEdgeInsets = UIEdgeInsetsMake(0., outletBranchName.frame.size.width - (24 + 10.0), 0., 0.);
     outletBranchName.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
+
+    _outletProvinsi.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    _outletProvinsi.imageEdgeInsets = UIEdgeInsetsMake(0., _outletProvinsi.frame.size.width - (24 + 10.0), 0., 0.);
+    _outletProvinsi.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
+
+    _outletKota.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    _outletKota.imageEdgeInsets = UIEdgeInsetsMake(0., _outletKota.frame.size.width - (24 + 10.0), 0., 0.);
+    _outletKota.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
+
+    _outletProvinsiOffice.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    _outletProvinsiOffice.imageEdgeInsets = UIEdgeInsetsMake(0., _outletProvinsiOffice.frame.size.width - (24 + 10.0), 0., 0.);
+    _outletProvinsiOffice.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
+    
+    _outletKotaOffice.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    _outletKotaOffice.imageEdgeInsets = UIEdgeInsetsMake(0., _outletKotaOffice.frame.size.width - (24 + 10.0), 0., 0.);
+    _outletKotaOffice.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
@@ -787,6 +803,9 @@ bool RegDatehandling;
 }
 
 - (bool)validationDataAlamat{
+    int prefixHomeOfficeLimit=3;
+    int prefixMobileLimit=2;
+    
     bool valid=true;
     NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
     NSArray* validationSet=[[NSArray alloc]initWithObjects:@"",@"- SELECT -",@"- Select -", nil];
@@ -794,15 +813,15 @@ bool RegDatehandling;
     //validation message data alamat tempat tinggal
     NSString *validationAlamat=@"Alamat Tempat Tinggal harus diisi";
     NSString *validationNegara=@"Negara Tempat Tinggal harus diisi";
-    NSString *validationAreaTelponRumah=@"Nomor kode telepon rumah yang dimasukkan minimal 6 digit atau lebih";
+    NSString *validationAreaTelponRumah=[NSString stringWithFormat:@"Nomor kode telepon rumah yang dimasukkan minimal %i digit atau lebih",prefixHomeOfficeLimit];
     NSString *validationNumberTelponRumah=@"Nomor telepon rumah yang dimasukkan minimal 6 digit atau lebih";
     NSString *validationAreaHPUtama=@"Nomor Kode HP Utama harus diisi";
     NSString *validationNumberHPUtama=@"Nomor HP Utama yang dimasukkan minimal 6 digit atau lebih";
-    NSString *validationAreaHP2=@"Nomor Kode HP 2 yang dimasukkan minimal 6 digit atau lebih";
+    NSString *validationAreaHP2=[NSString stringWithFormat:@"Nomor Kode HP 2 yang dimasukkan minimal %i digit atau lebih",prefixMobileLimit];
     NSString *validationNumberHP2=@"Nomor HP2 yang dimasukkan minimal 6 digit atau lebih";
     
     //validation message data alamat kantor
-    NSString *validationAreaTelponKantor=@"Nomor kode telepon kantor yang dimasukkan minimal 6 digit atau lebih";
+    NSString *validationAreaTelponKantor=[NSString stringWithFormat:@"Nomor kode telepon kantor yang dimasukkan minimal %i digit atau lebih",prefixHomeOfficeLimit];
     NSString *validationNumberTelponKantor=@"Nomor telepon kantor yang dimasukkan minimal 6 digit atau lebih";
     
     NSString *validationEmailWrong=@"Anda memasukkan email yang salah. Harap masukkan email yang benar.";
@@ -874,8 +893,9 @@ bool RegDatehandling;
     }
 //    else if ([textprefix1 isEqualToString:@""]||textprefix1==NULL){
     else if (![textprefix1 isEqualToString:@""]){
-        if ([txtPrefix1.text length]<4){
-            [self createAlertViewAndShow:validationAreaTelponRumah tag:0];
+        if ([txtPrefix1.text length]<prefixHomeOfficeLimit){
+            NSString *validation=[NSString stringWithFormat:@"Nomor kode telepon rumah yang dimasukkan minimal %i digit atau lebih",prefixHomeOfficeLimit];
+            [self createAlertViewAndShow:validation tag:0];
             [ClientProfile setObject:@"NO" forKey:@"TabBar"];
             [txtPrefix1 becomeFirstResponder];
             return false;
@@ -897,8 +917,9 @@ bool RegDatehandling;
         return false;
     }
     
-    if ([txtPrefix2.text length]<2){
-        [self createAlertViewAndShow:validationAreaHPUtama tag:0];
+    if ([txtPrefix2.text length]<prefixMobileLimit){
+        NSString *validation=[NSString stringWithFormat:@"Nomor kode HP utama yang dimasukkan minimal %i digit atau lebih",prefixMobileLimit];
+        [self createAlertViewAndShow:validation tag:0];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
         [txtPrefix2 becomeFirstResponder];
         return false;
@@ -921,8 +942,9 @@ bool RegDatehandling;
 
     //else if ([textprefix3 isEqualToString:@""]||textprefix3==NULL){
     else if (![textprefix3 isEqualToString:@""]){
-        if ([txtPrefix3.text length]<2){
-            [self createAlertViewAndShow:validationAreaHP2 tag:0];
+        if ([txtPrefix3.text length]<prefixMobileLimit){
+            NSString *validation=[NSString stringWithFormat:@"Nomor kode HP 2 yang dimasukkan minimal %i digit atau lebih",prefixMobileLimit];
+            [self createAlertViewAndShow:validation tag:0];
             [ClientProfile setObject:@"NO" forKey:@"TabBar"];
             [txtPrefix3 becomeFirstResponder];
             return false;
@@ -939,8 +961,9 @@ bool RegDatehandling;
     }
     //else if ([textprefix4 isEqualToString:@""]||textprefix4==NULL){
     else if (![textprefix4 isEqualToString:@""]){
-        if ([txtPrefix4.text length]<4){
-            [self createAlertViewAndShow:validationAreaTelponKantor tag:0];
+        if ([txtPrefix4.text length]<prefixHomeOfficeLimit){
+            NSString *validation=[NSString stringWithFormat:@"Nomor kode telpon kantor yang dimasukkan minimal %i digit atau lebih",prefixHomeOfficeLimit];
+            [self createAlertViewAndShow:validation tag:0];
             [ClientProfile setObject:@"NO" forKey:@"TabBar"];
             [txtPrefix4 becomeFirstResponder];
             return false;
@@ -2990,7 +3013,7 @@ bool RegDatehandling;
 
                 insertSQL = [NSString stringWithFormat:
                              @"INSERT INTO prospect_profile(\'ProspectName\', \"ProspectDOB\", \"GST_registered\", \"GST_registrationNo\", \"GST_registrationDate\", \"GST_exempted\",\"ProspectGender\", \"ResidenceAddress1\", \"ResidenceAddress2\", \"ResidenceAddress3\", \"ResidenceAddressTown\", \"ResidenceAddressState\",\"ResidenceAddressPostCode\", \"ResidenceAddressCountry\", \"ResidenceDistrict\", \"ResidenceVillage\", \"ResidenceProvince\", \"OfficeAddress1\", \"OfficeAddress2\", \"OfficeAddress3\",\"OfficeAddressTown\", \"OfficeAddressState\", \"OfficeAddressPostCode\", \"OfficeAddressCountry\", \"OfficeDistrict\", \"OfficeVillage\", \"OfficeProvince\", \"ProspectEmail\",\"ProspectOccupationCode\", \"ExactDuties\", \"ProspectRemark\", \"ClientSegmentation\", \"DateCreated\", \"CreatedBy\", \"DateModified\",\"ModifiedBy\", \"ProspectGroup\", \"ProspectTitle\", \"IDTypeNo\", \"OtherIDType\", \"OtherIDTypeNo\", \"Smoker\", \"AnnualIncome\", \"SourceIncome\", \"BussinessType\", \"Race\", \"MaritalStatus\", \"Religion\", \"Nationality\", \"QQFlag\",\"ProspectProfileChangesCounter\",\"prospect_IsGrouping\", \"CountryOfBirth\", \"NIP\", \"BranchCode\", \"BranchName\", \"KCU\", \"Kanwil\",\"ReferralSource\", \"ReferralName\", \"IDExpiryDate\", \"NPWPNo\") "
-                             "VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\",\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", %@, \"%@\", %@, \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\",\"%@\",\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%s\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", txtFullName.text, strDOB, GSTRigperson, txtRigNO.text, Rigdateoutlet,GSTRigExempted,gender, txtHomeAddr1.text, txtHomeAddr2.text, txtHomeAddr3.text, txtHomeTown.text, SelectedStateCode, txtHomePostCode.text, HomeCountry,txtHomeDistrict.text,txtHomeVillage.text, txtHomeProvince.text, txtOfficeAddr1.text, txtOfficeAddr2.text, txtOfficeAddr3.text, txtOfficeTown.text, SelectedOfficeStateCode, txtOfficePostcode.text, OffCountry, txtOfficeDistrict.text,txtOfficeVillage.text, txtOfficeProvince.text, txtEmail.text, OccupCodeSelected, txtExactDuties.text, txtRemark.text, _outletVIPClass.titleLabel.text,
+                             "VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\",\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", %@, \"%@\", %@, \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\",\"%@\",\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%s\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", txtFullName.text, strDOB, GSTRigperson, txtRigNO.text, Rigdateoutlet,GSTRigExempted,gender, txtHomeAddr1.text, txtHomeAddr2.text, txtHomeAddr3.text, /*txtHomeTown.text*/_outletKota.titleLabel.text, SelectedStateCode, txtHomePostCode.text, HomeCountry,txtHomeDistrict.text,txtHomeVillage.text, /*txtHomeProvince.text*/_outletProvinsi.titleLabel.text, txtOfficeAddr1.text, txtOfficeAddr2.text, txtOfficeAddr3.text, /*txtOfficeTown.text*/_outletKotaOffice.titleLabel.text, SelectedOfficeStateCode, txtOfficePostcode.text, OffCountry, txtOfficeDistrict.text,txtOfficeVillage.text, /*txtOfficeProvince.text*/_outletProvinsiOffice.titleLabel.text, txtEmail.text, OccupCodeSelected, txtExactDuties.text, txtRemark.text, _outletVIPClass.titleLabel.text,
                              @"datetime(\"now\", \"+7 hour\")", @"1", @"datetime(\"now\", \"+7 hour\")", @"1", group, TitleCodeSelected , txtIDType.text, othertype, txtOtherIDType.text, ClientSmoker, txtAnnIncome.text, _outletSourceIncome.titleLabel.text, txtBussinessType.text,race,marital,religion,nation,"false",@"1", isGrouping, CountryOfBirth, txtNip.text, outletBranchCode.titleLabel.text, outletBranchName.titleLabel.text, txtKcu.text, txtKanwil.text, outletReferralSource.titleLabel.text, txtReferralName.text, strExpiryDate, txtNPWPNo.text];
                 
             }
@@ -3463,6 +3486,57 @@ bool RegDatehandling;
     self.Country2ListPopover = [[UIPopoverController alloc] initWithContentViewController:_Country2List];
     
     [self.Country2ListPopover presentPopoverFromRect:[sender bounds]  inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
+- (IBAction)actionProvinsiInfo:(UIButton *)sender{
+    [self resignFirstResponder];
+    [self.view endEditing:YES];
+    
+    NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
+    [ClientProfile setObject:@"YES" forKey:@"isNew"];
+    
+    Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
+    id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
+    [activeInstance performSelector:@selector(dismissKeyboard)];
+    
+    //if (_branchInfo == nil) {
+    _kodePosInfo = [[KodePosInfo alloc] initWithStyle:UITableViewStylePlain];
+    _kodePosInfo.delegate = self;
+    [_kodePosInfo setData:[NSNumber numberWithInt:sender.tag]];
+    [_kodePosInfo.tableView reloadData];
+    
+    _kodePosPopover = [[UIPopoverController alloc] initWithContentViewController:_kodePosInfo];
+    //}
+    [_kodePosPopover presentPopoverFromRect:[sender bounds]  inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
+- (IBAction)actionKotaInfo:(UIButton *)sender{
+    [self resignFirstResponder];
+    [self.view endEditing:YES];
+    
+    NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
+    [ClientProfile setObject:@"YES" forKey:@"isNew"];
+    
+    Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
+    id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
+    [activeInstance performSelector:@selector(dismissKeyboard)];
+    
+    //if (_branchInfo == nil) {
+    _kodePosInfo = [[KodePosInfo alloc] initWithStyle:UITableViewStylePlain];
+    _kodePosInfo.delegate = self;
+    [_kodePosInfo setData:[NSNumber numberWithInt:sender.tag]];
+    if (sender.tag==1) {
+        [_kodePosInfo setProvinsiText:_outletProvinsi.titleLabel.text];
+    }
+    if (sender.tag==3) {
+        [_kodePosInfo setProvinsiText:_outletProvinsiOffice.titleLabel.text];
+    }
+    [_kodePosInfo.tableView reloadData];
+    
+    _kodePosPopover = [[UIPopoverController alloc] initWithContentViewController:_kodePosInfo];
+    //}
+    [_kodePosPopover presentPopoverFromRect:[sender bounds]  inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    
 }
 
 - (IBAction)btnGroup:(id)sender
@@ -7893,6 +7967,23 @@ bool RegDatehandling;
 
 
 #pragma mark - delegate
+-(void)selectedKodePosText:(NSString *)selectText SenderTag:(int)senderTag{
+    if (senderTag==0){
+        [_outletProvinsi setTitle:selectText forState:UIControlStateNormal];
+    }
+    else if (senderTag==1){
+        [_outletKota setTitle:selectText forState:UIControlStateNormal];
+    }
+    else if (senderTag==2){
+        [_outletProvinsiOffice setTitle:selectText forState:UIControlStateNormal];
+    }
+    else if (senderTag==3){
+        [_outletKotaOffice setTitle:selectText forState:UIControlStateNormal];
+    }
+
+    [_kodePosPopover dismissPopoverAnimated:YES];
+}
+
 -(void)selectedBranch:(NSString *)branchCode BranchName:(NSString *)branchName BranchStatus:(NSString *)branchStatus BranchKanwil:(NSString *)branchKanwil{
     /*if([VIPClass isEqualToString:@"- SELECT -"]) {
         _outletVIPClass.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;

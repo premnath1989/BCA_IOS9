@@ -132,9 +132,13 @@ MBProgressHUD *HUD;
     return NO;
 }
 
-#pragma mark - `added by faiz
+#pragma mark - added by faiz
 
 //added by faiz
+-(IBAction)actionProvince:(UIButton *)sender{
+
+}
+
 - (IBAction)btnDOB:(id)sender
 {
     [self resignFirstResponder];

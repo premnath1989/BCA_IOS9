@@ -27,13 +27,14 @@
 #import "ReferralSource.h"
 #import "ModelAgentProfile.h"
 #import "ModelDataReferral.h"
+#import "KodePosInfo.h"
 
 @class DataTable,DBController;
 @protocol EditProspectDelegate
 - (void)FinishEdit;
 @end
 
-@interface EditProspect : UIViewController<OccupationListDelegate,IDTypeDelegate,SIDateDelegate,UITextViewDelegate,TitleDelegate,GroupDelegate,UITextFieldDelegate,NatinalityDelegate,CountryDelegate,RaceDelegate,ReligionDelegate,MaritalStatusDelegate, Country2Delegate,SourceIncomeDelegate,VIPClassDelegate,ReferralSourceDelegate,BranchInfoDelegate>{
+@interface EditProspect : UIViewController<OccupationListDelegate,IDTypeDelegate,SIDateDelegate,UITextViewDelegate,TitleDelegate,GroupDelegate,UITextFieldDelegate,NatinalityDelegate,CountryDelegate,RaceDelegate,ReligionDelegate,MaritalStatusDelegate, Country2Delegate,SourceIncomeDelegate,VIPClassDelegate,ReferralSourceDelegate,BranchInfoDelegate,KodeposInfoDelegate>{
     NSString *databasePath;
     sqlite3 *contactDB;
     UITextField *activeField;
@@ -51,6 +52,7 @@
     SourceIncome *_sourceIncome;
     BranchInfo *_branchInfo;
     VIPClass *_vipClass;
+    KodePosInfo *_kodePosInfo;
     ReferralSource *_referralSource;
     //end of add
     
@@ -65,6 +67,7 @@
     UIPopoverController *_sourceIncomePopover;
     UIPopoverController *_branchInfoPopover;
     UIPopoverController *_vipClassPopover;
+    UIPopoverController *_kodePosPopover;
     UIPopoverController *_referralSourcePopover;
     //end of added by faiz
     UIPopoverController *_ReligionListPopover;
@@ -125,6 +128,12 @@
 @property (weak, nonatomic) IBOutlet UIButton *outletReligion;
 @property (weak, nonatomic) IBOutlet UIButton *outletNationality;
 @property (strong, nonatomic) IBOutlet UIButton *outletGroup;
+
+@property (weak, nonatomic) IBOutlet UIButton *outletProvinsi;
+@property (weak, nonatomic) IBOutlet UIButton *outletKota;
+@property (weak, nonatomic) IBOutlet UIButton *outletProvinsiOffice;
+@property (weak, nonatomic) IBOutlet UIButton *outletKotaOffice;
+
 @property (strong, nonatomic) IBOutlet UIButton *outletTitle;
 @property (weak, nonatomic) IBOutlet UITextField *txtrFullName;
 @property (weak, nonatomic) IBOutlet UIButton *outletDOB;
@@ -221,6 +230,8 @@
 
 -(IBAction)textFieldDidChangeEditing:(UITextField *)sender;
 -(IBAction)textFieldNIPDidEndEditing:(UITextField *)sender;
+- (IBAction)actionProvinsiInfo:(UIButton *)sender;
+- (IBAction)actionKotaInfo:(UIButton *)sender;
 /*end of added by faiz*/
 
 - (IBAction)actionGrouping:(id)sender;

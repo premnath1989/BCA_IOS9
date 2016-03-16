@@ -289,6 +289,12 @@
             <string>BPreplay</string>
             <string>BPreplay</string>
             <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -2182,8 +2188,8 @@
                                             <constraint firstAttribute="height" constant="1" id="e4E-Fu-Pxx"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gAE-lQ-Lef">
-                                        <rect key="frame" x="0.0" y="671" width="1024" height="705"/>
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gAE-lQ-Lef">
+                                        <rect key="frame" x="0.0" y="0.0" width="1024" height="705"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Data Alamat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bcu-Mh-2Op">
                                                 <rect key="frame" x="20" y="0.0" width="184" height="21"/>
@@ -2464,6 +2470,28 @@
                                                         <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
+                                                    <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cA2-Gw-HJg">
+                                                        <rect key="frame" x="686" y="186" width="253" height="30"/>
+                                                        <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="15"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
+                                                        <state key="normal" image="Expand Arrow.png">
+                                                            <color key="titleColor" red="0.34509803919999998" green="0.34901960780000002" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="actionKotaInfo:" destination="CEO-Xo-hVe" eventType="touchUpInside" id="sVb-Kv-lTm"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FAi-c5-9sQ">
+                                                        <rect key="frame" x="199" y="224" width="253" height="30"/>
+                                                        <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="15"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
+                                                        <state key="normal" image="Expand Arrow.png">
+                                                            <color key="titleColor" red="0.34509803919999998" green="0.34901960780000002" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="actionProvinsiInfo:" destination="CEO-Xo-hVe" eventType="touchUpInside" id="JsR-W8-foF"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </view>
@@ -2653,6 +2681,28 @@
                                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
+                                                    <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ofp-qi-cIr">
+                                                        <rect key="frame" x="199" y="224" width="253" height="30"/>
+                                                        <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
+                                                        <state key="normal" image="Expand Arrow.png">
+                                                            <color key="titleColor" red="0.34509803919999998" green="0.34901960780000002" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="actionProvinsiInfo:" destination="CEO-Xo-hVe" eventType="touchUpInside" id="W90-oM-Zmo"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z2H-Gp-oDk">
+                                                        <rect key="frame" x="686" y="186" width="253" height="30"/>
+                                                        <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
+                                                        <state key="normal" image="Expand Arrow.png">
+                                                            <color key="titleColor" red="0.34509803919999998" green="0.34901960780000002" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="actionKotaInfo:" destination="CEO-Xo-hVe" eventType="touchUpInside" id="8fN-pz-ZkT"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </view>
@@ -2992,9 +3042,13 @@
                         <outlet property="outletBranchName" destination="WQm-hf-IzM" id="UAO-7l-F8Y"/>
                         <outlet property="outletDOB" destination="wrR-wG-cA6" id="7ty-vA-Yfh"/>
                         <outlet property="outletExpiryDate" destination="qyU-HT-WIG" id="7yK-wu-sr8"/>
+                        <outlet property="outletKota" destination="cA2-Gw-HJg" id="UYK-hW-qft"/>
+                        <outlet property="outletKotaOffice" destination="Z2H-Gp-oDk" id="J2C-Mw-Al7"/>
                         <outlet property="outletMaritalStatus" destination="DWP-ha-kye" id="gib-z9-0to"/>
                         <outlet property="outletNationality" destination="eri-0W-6k7" id="hnD-Wv-Xlt"/>
                         <outlet property="outletOccup" destination="zrm-SO-XWu" id="TLg-vW-dds"/>
+                        <outlet property="outletProvinsi" destination="FAi-c5-9sQ" id="Ibh-OG-hnx"/>
+                        <outlet property="outletProvinsiOffice" destination="ofp-qi-cIr" id="Cfv-Wl-dbq"/>
                         <outlet property="outletRace" destination="ymC-mG-8DZ" id="FK9-iF-KnL"/>
                         <outlet property="outletReferralSource" destination="gdu-gm-agK" id="m3X-w2-Wu9"/>
                         <outlet property="outletReligion" destination="LeO-9i-P3B" id="l4Q-Bt-BTU"/>
@@ -5060,8 +5114,8 @@
                                             <constraint firstAttribute="height" constant="1" id="peZ-uo-h4a"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f4V-Z1-kY3">
-                                        <rect key="frame" x="0.0" y="673" width="1024" height="705"/>
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f4V-Z1-kY3">
+                                        <rect key="frame" x="0.0" y="0.0" width="1024" height="705"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Data Alamat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zgl-q1-5Oy">
                                                 <rect key="frame" x="20" y="0.0" width="194" height="21"/>
@@ -5135,14 +5189,14 @@
                                                         <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="2Uc-vY-ifH">
+                                                    <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="2Uc-vY-ifH">
                                                         <rect key="frame" x="686" y="186" width="253" height="30"/>
                                                         <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <color key="textColor" red="0.34509803919999998" green="0.34901960780000002" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                                                     </textField>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="5E8-w4-TS9">
+                                                    <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="5E8-w4-TS9">
                                                         <rect key="frame" x="199" y="224" width="253" height="30"/>
                                                         <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <color key="textColor" red="0.34509803919999998" green="0.34901960780000002" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -5237,6 +5291,28 @@
                                                         <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
+                                                    <button opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lSV-Xc-IUz">
+                                                        <rect key="frame" x="686" y="186" width="253" height="30"/>
+                                                        <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
+                                                        <state key="normal" image="Expand Arrow.png">
+                                                            <color key="titleColor" red="0.34509803919999998" green="0.34901960780000002" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="actionKotaInfo:" destination="Few-sZ-jKx" eventType="touchUpInside" id="vsX-0P-pjm"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GRR-vP-7VA">
+                                                        <rect key="frame" x="199" y="224" width="253" height="30"/>
+                                                        <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
+                                                        <state key="normal" image="Expand Arrow.png">
+                                                            <color key="titleColor" red="0.34509803919999998" green="0.34901960780000002" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="actionProvinsiInfo:" destination="Few-sZ-jKx" eventType="touchUpInside" id="988-DW-XnC"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </view>
@@ -5347,14 +5423,14 @@
                                                         <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="MSN-uT-Lfc">
+                                                    <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="MSN-uT-Lfc">
                                                         <rect key="frame" x="686" y="186" width="253" height="30"/>
                                                         <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <color key="textColor" red="0.34509803919999998" green="0.34901960780000002" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                                                     </textField>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="aSn-cx-gaj">
+                                                    <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="aSn-cx-gaj">
                                                         <rect key="frame" x="199" y="224" width="253" height="30"/>
                                                         <color key="tintColor" red="0.14901960780000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <color key="textColor" red="0.34509803919999998" green="0.34901960780000002" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -5493,6 +5569,26 @@
                                                         <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
+                                                    <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uIq-zO-x1i">
+                                                        <rect key="frame" x="686" y="186" width="253" height="30"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
+                                                        <state key="normal" image="Expand Arrow.png">
+                                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="actionKotaInfo:" destination="Few-sZ-jKx" eventType="touchUpInside" id="Ren-Gi-pvJ"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xMC-it-210">
+                                                        <rect key="frame" x="199" y="224" width="253" height="30"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
+                                                        <state key="normal" image="Expand Arrow.png">
+                                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="actionProvinsiInfo:" destination="Few-sZ-jKx" eventType="touchUpInside" id="02Y-uX-tpR"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </view>
@@ -5812,9 +5908,13 @@
                         <outlet property="outletDOB" destination="s2d-JC-Tr9" id="6FE-RA-hqz"/>
                         <outlet property="outletDelete" destination="8M1-eE-yDW" id="bJF-vG-GOh"/>
                         <outlet property="outletExpiryDate" destination="C9s-VH-cos" id="laI-Rr-rLF"/>
+                        <outlet property="outletKota" destination="uIq-zO-x1i" id="Uhq-Jd-YxX"/>
+                        <outlet property="outletKotaOffice" destination="lSV-Xc-IUz" id="jVS-5Q-Vwq"/>
                         <outlet property="outletMaritalStatus" destination="Fq7-kM-b6K" id="dSe-ku-OHh"/>
                         <outlet property="outletNationality" destination="HLw-Sh-dM8" id="myJ-2X-ptH"/>
                         <outlet property="outletOccup" destination="xd0-EL-MCz" id="fGe-16-Kpr"/>
+                        <outlet property="outletProvinsi" destination="xMC-it-210" id="Q9d-t7-odB"/>
+                        <outlet property="outletProvinsiOffice" destination="GRR-vP-7VA" id="GK0-qq-fPH"/>
                         <outlet property="outletRace" destination="aPx-ed-zde" id="P5l-dJ-o1c"/>
                         <outlet property="outletReferralSource" destination="LiQ-zC-xyQ" id="zYX-X9-91j"/>
                         <outlet property="outletReligion" destination="j9n-Yp-L6s" id="c8c-hW-QGN"/>

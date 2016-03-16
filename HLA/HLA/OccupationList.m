@@ -77,12 +77,19 @@ NSString *SelectedString;
         sqlite3_close(contactDB);
     }
     
-    UISearchBar *searchbar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 200, 50) ];
+    /*UISearchBar *searchbar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 200, 50) ];
     
     searchbar.opaque = false;
     searchbar.delegate = (id) self;
     self.tableView.tableHeaderView = searchbar;
     CGRect searchbarFrame = searchbar.frame;
+    [self.tableView scrollRectToVisible:searchbarFrame animated:NO];*/
+    UISearchBar *zzz = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 200, 50) ];
+    
+    zzz.opaque = false;
+    zzz.delegate = (id) self;
+    self.tableView.tableHeaderView = zzz;
+    CGRect searchbarFrame = zzz.frame;
     [self.tableView scrollRectToVisible:searchbarFrame animated:NO];
 }
 
