@@ -162,7 +162,7 @@
     return dict;
 }
 
--(NSDictionary *)getBranchInfo{
+-(NSDictionary *)getBranchInfo:(NSString *)columnOrder{
     NSDictionary *dict;
     
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
@@ -177,7 +177,9 @@
     NSMutableArray* arrayKanwilCabang=[[NSMutableArray alloc] init];
     NSMutableArray* arrayStatus=[[NSMutableArray alloc] init];
     
-    FMResultSet *s = [database executeQuery:@"SELECT dc.* FROM Data_Cabang dc, Agent_profile ap WHERE dc.status = 'A' and ap.Kanwil = dc.Kanwil"];
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"SELECT dc.* FROM Data_Cabang dc, Agent_profile ap WHERE dc.status = 'A' and ap.Kanwil = dc.Kanwil order by %@ ASC",columnOrder]];
+    
+    NSLog(@"query %@",[NSString stringWithFormat:@"SELECT dc.* FROM Data_Cabang dc, Agent_profile ap WHERE dc.status = 'A' and ap.Kanwil = dc.Kanwil order by %@ ASC",columnOrder]);
     while ([s next]) {
         NSString *occpCode = [NSString stringWithFormat:@"%@",[s stringForColumn:@"KodeCabang"]];
         NSString *occpeDesc = [NSString stringWithFormat:@"%@",[s stringForColumn:@"NamaCabang"]];

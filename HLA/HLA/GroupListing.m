@@ -160,7 +160,7 @@
 	if([txt isEqualToString:@""])
     {
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Search Criteria is required. Please key in one of the criteria." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Kriteria pencarian dibutuhkan. Harap masukkan salah satu kriteria pencarian." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         
         [alert show];
         alert = nil;
@@ -241,7 +241,7 @@
 		
 		if (count == 0) {
 			[self hideKeyboard];
-			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"No record found." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Data Tidak ditemukan." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
 			[alert show];
 		}
 		
@@ -281,7 +281,7 @@
     else{
         [self.myTableView setEditing:YES animated:TRUE];
         deleteBtn.hidden = FALSE;
-        [deleteBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal ];
+        //[deleteBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal ];
         [editBtn setTitle:@"Cancel" forState:UIControlStateNormal ];
     }
 }
@@ -312,16 +312,17 @@
     
     NSString *msg;
     if (RecCount == 1 && !zz) {
-        msg = [NSString stringWithFormat:@"Delete %@",ss];
+        msg = [NSString stringWithFormat:@"Hapus %@",ss];
     }
     else  if (RecCount == 1 && zz) {
-        msg = [NSString stringWithFormat:@"Are you sure want to delete these Group %@?", ss];
+        //msg = [NSString stringWithFormat:@"Yakin ingin menghapus group ini %@?", ss];
+        msg = @"Apakah Anda yakin akan menghapus kelompok? Apabila kelompok dihapus, semua anggota akan keluar dari kelompok tersebut?";
     }
     else if (zz) {
-        msg = @"One of the group contain member/s. Are you sure want to delete these Group(s)?";
+        msg = @"Satu dari group ini memiliki anggota. Yakin ingin menghapus group ini?";
     }
     else if (!zz) {
-        msg = @"Are you sure want to delete these Group(s)?";
+        msg = @"Apakah Anda yakin akan menghapus kelompok? Apabila kelompok dihapus, semua anggota akan keluar dari kelompok tersebut?";
     }
     
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:msg delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
@@ -357,7 +358,7 @@
                 
                 if ([str isEqualToString:existing]) {
                     
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Group already exist" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil];
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Group sudah ada" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil];
                     [alert show];
                     
                     Found = YES;
@@ -378,7 +379,7 @@
         }
         else {
             
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Please insert data" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Harap masukkan data" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil];
             [alert show];
         }
     }
@@ -518,7 +519,7 @@
         [db close];
 
         
-		UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@" " message:@"Group selected have been successfully deleted." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+		UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@" " message:@"Group terpilih suskes dihapus." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
 //		[alert setTag:1004];
 		[alert show];
 		

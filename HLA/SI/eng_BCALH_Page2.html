@@ -133,13 +133,14 @@
         }
         
         function removeRows(rowCount,LAAge){
-            var rowTobeDeleted=14;
-            var checkPointColA=10;
+            var rowTobeDeleted=9;
+            var checkPointColA=5;
             
             for (i = 4; i < rowCount+3; i++) {
                 var Val1=(i+1)-4;
                 var Val2=LAAge +Val1;
-                if (Val1>10){
+                //if (Val1>10){
+                if (Val1>5){
                     if (Val2<55){
                         var modulusResult=Val1%5;
                         if (modulusResult != 0){

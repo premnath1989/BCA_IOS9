@@ -18,6 +18,6 @@
 -(NSDictionary *)getReferralSource;
 -(NSDictionary *)getOccupation;
 -(NSDictionary *)getTitle;
--(NSDictionary *)getBranchInfo;
+-(NSDictionary *)getBranchInfo:(NSString *)columnOrder;
 -(NSDictionary *)getBranchInfoFilter:(NSString *)columnFilter ColumnValue:(NSString *)columnValue;
 @end

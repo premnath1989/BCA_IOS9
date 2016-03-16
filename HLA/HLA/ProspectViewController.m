@@ -372,6 +372,17 @@ bool RegDatehandling;
 
 #pragma mark - added by faiz
 /*code added by faiz*/
+-(void)setGenderValue:(int)genderValue Active:(BOOL)segmentActive{
+    [segGender setEnabled:segmentActive];
+    if (genderValue > 1){
+        [segGender setSelectedSegmentIndex:UISegmentedControlNoSegment];
+    }
+    else{
+        [segGender setSelectedSegmentIndex:genderValue];
+    }
+    
+}
+
 -(IBAction)textFieldNIPDidEndEditing:(UITextField *)sender{
     NSString *refName=[modelDataReferral getReferralName:sender.text];
     if ([refName isEqualToString:@"(null)"]){
@@ -886,7 +897,7 @@ bool RegDatehandling;
         return false;
     }
     
-    if ([txtPrefix2.text length]<4){
+    if ([txtPrefix2.text length]<2){
         [self createAlertViewAndShow:validationAreaHPUtama tag:0];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
         [txtPrefix2 becomeFirstResponder];
@@ -910,7 +921,7 @@ bool RegDatehandling;
 
     //else if ([textprefix3 isEqualToString:@""]||textprefix3==NULL){
     else if (![textprefix3 isEqualToString:@""]){
-        if ([txtPrefix3.text length]<4){
+        if ([txtPrefix3.text length]<2){
             [self createAlertViewAndShow:validationAreaHP2 tag:0];
             [ClientProfile setObject:@"NO" forKey:@"TabBar"];
             [txtPrefix3 becomeFirstResponder];
@@ -1874,7 +1885,7 @@ bool RegDatehandling;
         NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
         
-        return (([string isEqualToString:filtered])&&(newLength <= 7));
+        return (([string isEqualToString:filtered])&&(newLength <= 10));
     }
     
     if (textField == txtContact2) {
@@ -1907,7 +1918,7 @@ bool RegDatehandling;
         NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
         
-        return (([string isEqualToString:filtered])&&(newLength <= 7));
+        return (([string isEqualToString:filtered])&&(newLength <= 10));
     }
     
     if (textField == txtOtherIDType) {
@@ -1976,7 +1987,10 @@ bool RegDatehandling;
     }
     
     if (textField == txtNip) {
-        return ((newLength <= 20));
+        NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
+        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        
+        return (([string isEqualToString:filtered])&&(newLength <= 20));
     }
 
     if (textField == txtReferralName) {
@@ -7894,8 +7908,6 @@ bool RegDatehandling;
     [txtKcu setText:branchStatus];
     [txtKanwil setText:branchKanwil];
     [_branchInfoPopover dismissPopoverAnimated:YES];
-    
-    
 }
 
 -(void)selectedVIPClass:(NSString *)VIPClass{
@@ -7952,6 +7964,15 @@ bool RegDatehandling;
         outletTitle.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     } else {
         outletTitle.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    }
+    if ([selectedTitleDesc isEqualToString:@"BAPAK"]){
+        [self setGenderValue:0 Active:NO];
+    }
+    else if ([selectedTitleDesc isEqualToString:@"IBU"]){
+        [self setGenderValue:1 Active:NO];
+    }
+    else{
+        [self setGenderValue:2 Active:YES];
     }
 	[outletTitle setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",selectedTitleDesc]forState:UIControlStateNormal];
     [self.TitlePickerPopover dismissPopoverAnimated:YES];

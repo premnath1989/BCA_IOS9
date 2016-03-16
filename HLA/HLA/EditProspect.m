@@ -862,7 +862,7 @@ NSMutableArray *DelGroupArr;
         return false;
     }
     
-    if ([txtPrefix2.text length]<4){
+    if ([txtPrefix2.text length]<2){
         [self createAlertViewAndShow:validationAreaHPUtama tag:0];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
         [txtPrefix2 becomeFirstResponder];
@@ -886,7 +886,7 @@ NSMutableArray *DelGroupArr;
     
     //else if ([textprefix3 isEqualToString:@""]||textprefix3==NULL){
     else if (![textprefix3 isEqualToString:@""]){
-        if ([txtPrefix3.text length]<4){
+        if ([txtPrefix3.text length]<2){
             [self createAlertViewAndShow:validationAreaHP2 tag:0];
             [ClientProfile setObject:@"NO" forKey:@"TabBar"];
             [txtPrefix3 becomeFirstResponder];
@@ -3776,7 +3776,7 @@ NSMutableArray *DelGroupArr;
         NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
         
-        return (([string isEqualToString:filtered])&&(newLength <= 7));
+        return (([string isEqualToString:filtered])&&(newLength <= 10));
 
     }
     
@@ -3812,7 +3812,7 @@ NSMutableArray *DelGroupArr;
         NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
         
-        return (([string isEqualToString:filtered])&&(newLength <= 7));
+        return (([string isEqualToString:filtered])&&(newLength <= 10));
 
     }
     
@@ -3858,8 +3858,12 @@ NSMutableArray *DelGroupArr;
     }
     
     if (textField == txtNip) {
-        return ((newLength <= 20));
+        NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
+        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        
+        return (([string isEqualToString:filtered])&&(newLength <= 20));
     }
+
     
     if (textField == txtReferralName) {
         return ((newLength <= 40));
@@ -4148,6 +4152,17 @@ NSMutableArray *DelGroupArr;
 }
 
 //added by faiz
+-(void)setGenderValue:(int)genderValue Active:(BOOL)segmentActive{
+    [segGender setEnabled:segmentActive];
+    if (genderValue > 1){
+        [segGender setSelectedSegmentIndex:UISegmentedControlNoSegment];
+    }
+    else{
+        [segGender setSelectedSegmentIndex:genderValue];
+    }
+    
+}
+
 -(IBAction)textFieldNIPDidEndEditing:(UITextField *)sender{
     NSString *refName=[modelDataReferral getReferralName:sender.text];
     if ([refName isEqualToString:@"(null)"]){
@@ -13184,6 +13199,17 @@ NSMutableArray *DelGroupArr;
     } else {
         outletTitle.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
+    
+    if ([selectedTitle isEqualToString:@"BAPAK"]){
+        [self setGenderValue:0 Active:NO];
+    }
+    else if ([selectedTitle isEqualToString:@"IBU"]){
+        [self setGenderValue:1 Active:NO];
+    }
+    else{
+        [self setGenderValue:2 Active:YES];
+    }
+
     [outletTitle setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", selectedTitle] forState:UIControlStateNormal];
     [self.TitlePickerPopover dismissPopoverAnimated:YES];
 	NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
