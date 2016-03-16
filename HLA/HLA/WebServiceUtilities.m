@@ -18,7 +18,7 @@
     AgentWS_ValidateLogin *agentCodea = [[AgentWS_ValidateLogin alloc]init];
     agentCodea.strAgentID = username;
     agentCodea.strPassword = password;
-    agentCodea.strDeviceID = deviceID;
+    agentCodea.strUDID = deviceID;
     [binding ValidateLoginAsyncUsingParameters:agentCodea delegate:delegate];
     return 1;
 }
@@ -69,6 +69,31 @@
     agentCodea.strNewPass = newpassword;
     agentCodea.strStatus = @"";
     [binding ReceiveFirstLoginAsyncUsingParameters:agentCodea delegate:delegate];
+    return 1;
+}
+
+-(int)spvLogin:(NSString *)agentCode delegate:(id)delegate spvCode:(NSString *)spvCode spvPass:(NSString *)spvPass{
+    AgentWSSoapBinding *binding = [AgentWS AgentWSSoapBinding];
+    binding.logXMLInOut = YES;
+    
+    AgentWS_SupervisorLogin *agentCodea = [[AgentWS_SupervisorLogin alloc]init];
+    agentCodea.strAgentcode = agentCode;
+    agentCodea.strSupervisorname = spvCode;
+    agentCodea.strSupervisorPass = spvPass;
+    agentCodea.strStatus = @"";
+    [binding SupervisorLoginAsyncUsingParameters:agentCodea delegate:delegate];
+    return 1;
+}
+
+-(int)adminLogin:(NSString *)agentCode delegate:(id)delegate adminCode:(NSString *)adminCode adminPass:(NSString *)adminPass{
+    AgentWSSoapBinding *binding = [AgentWS AgentWSSoapBinding];
+    binding.logXMLInOut = YES;
+    
+    AgentWS_AdminLogin *agentCodea = [[AgentWS_AdminLogin alloc]init];
+    agentCodea.stradmin = adminCode;
+    agentCodea.stradminpass = adminPass;
+    agentCodea.strStatus = @"";
+    [binding AdminLoginAsyncUsingParameters:agentCodea delegate:delegate];
     return 1;
 }
 

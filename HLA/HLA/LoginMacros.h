@@ -32,6 +32,10 @@ static const int DEVICE_IS_ACTIVE = 140;
 static const int DEVICE_IS_INACTIVE = 141;
 static const int DEVICE_IS_TERMINATED = 142;
 
+static const int USERNAME_IS_AGENT = 160;
+static const int USERNAME_IS_SPV = 161;
+static const int USERNAME_IS_ADMIN = 162;
+
 
 //UI Elements
 static const int USERNAME_PASSWORD_VALIDATION = 300;

@@ -33,6 +33,7 @@
 - (NSString *) expiryDate:(NSString *)AgentID;
 - (NSString *) checkingLastLogout;
 - (NSString *) localDBUDID;
+- (NSString *) AgentCodeLocal;
 - (NSMutableDictionary *)getAgentDetails;
 //- (int) InsertAgentProfile:(NSString *) urlStr;
 
