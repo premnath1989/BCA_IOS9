@@ -288,7 +288,7 @@ static NSString *labelVers;
             if([(NSString *)rateResponse.AdminLoginResult caseInsensitiveCompare:@"TRUE"]== NSOrderedSame){
                 [self loginSuccess];
             }else{
-                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Informasi" message:@"Password Admin yang anda masukan salah" delegate:self cancelButtonTitle:@"Download" otherButtonTitles:nil];
+                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Informasi" message:@"Username/Password yang anda masukan salah" delegate:self cancelButtonTitle:@"Download" otherButtonTitles:nil];
                 [alert show];
             }
         }
@@ -329,7 +329,7 @@ static NSString *labelVers;
             }else if([rateResponse.strStatus caseInsensitiveCompare:@"False"] == NSOrderedSame){
                 
                 [spinnerLoading stopLoadingSpinner];
-                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Password Supervisor yang anda masukan salah"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Username/Password yang anda masukan salah"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
                 [alert show];
                 
                 
@@ -360,7 +360,7 @@ static NSString *labelVers;
             }else if([rateResponse.strStatus caseInsensitiveCompare:@"False"] == NSOrderedSame){
                 
                 [spinnerLoading stopLoadingSpinner];
-                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Password yang anda masukan salah"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Username/Password yang anda masukan salah"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
                 [alert show];
                 
 
@@ -575,7 +575,7 @@ static NSString *labelVers;
             }
             case AGENT_IS_NOT_FOUND:
             {
-                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Username yang di masukan salah"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Username/Password yang di masukan salah"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
                 [alert show];
                 validFlag = false;
                 break;
@@ -638,7 +638,7 @@ static NSString *labelVers;
         
         //online login
         int dateDifference = [self syncDaysLeft];
-        if(dateDifference<0)
+        if(dateDifference>0)
         {
             UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Mohon kembalikan waktu anda ke semula"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [alert show];
@@ -668,7 +668,7 @@ static NSString *labelVers;
                             break;
                     }
                 }else{
-                    UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Username yang anda masukan salah"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                    UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Username/password yang anda masukan salah"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
                     [alert show];
                     [spinnerLoading stopLoadingSpinner];
                 }
@@ -1006,12 +1006,12 @@ static NSString *labelVers;
                 if ([txtPassword.text isEqualToString:AgentPassword]) {
                     successLog = TRUE;
                 }else{
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Password yang anda masukan salah" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Username/Password yang anda masukan salah" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                     [alert show];
                     successLog = FALSE;
                 }
             }else{
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Username yang anda masukan salah" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Username/Password yang anda masukan salah" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [alert show];
                 successLog = FALSE;
             }
@@ -1022,12 +1022,12 @@ static NSString *labelVers;
                     || ([txtUsername.text isEqualToString:Admin] && [txtPassword.text isEqualToString:AdminPassword])) {
                     successLog = TRUE;
                 }else{
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Password yang anda masukan salah" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Username/Password yang anda masukan salah" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                     [alert show];
                     successLog = FALSE;
                 }
             }else{
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Username yang anda masukan salah" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Username/Password yang anda masukan salah" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [alert show];
                 successLog = FALSE;
             }
