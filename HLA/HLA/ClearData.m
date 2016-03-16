@@ -506,7 +506,14 @@ NSMutableArray *EProArr;
 	int hours = (countdown / 3600) % 24;
 	int days = (countdown / 86400) % 365;
 	
-    if (minutes < 1 && hours < 1 && days < 1) {
+    NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *componentsDay = [gregorianCalendar components:NSCalendarUnitDay
+                                                        fromDate:currentDate
+                                                          toDate:expireDate
+                                                         options:NSCalendarWrapComponents];
+    int days1 = [componentsDay day];
+    
+    if (minutes < 1 && hours < 1 && days1 < 1) {
 		return 31; //will delete
     } else {
 		return 0; //no delete
