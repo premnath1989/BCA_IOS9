@@ -41,6 +41,7 @@
 @end
 
 @interface SIMenuViewController : UIViewController <FSTabBarControllerDelegate,NewLAViewControllerDelegate,PayorViewControllerDelegate,SecondLAViewControllerDelegate,BasicPlanViewControllerDelegate,RiderViewControllerDelegate,HLViewControllerDelegate, NDHTMLtoPDFDelegate, ReaderViewControllerDelegate> {
+    UIViewController* lastActiveController;
     
     int getTerm;
 	UIActivityIndicatorView *spinner_SI;

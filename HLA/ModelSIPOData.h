@@ -18,4 +18,5 @@
 -(NSDictionary *)getPO_DataFor:(NSString *)SINo;
 -(void)updatePOData:(NSDictionary *)dataPO;
 -(int)getPODataCount:(NSString *)SINo;
+-(int)getLADataCount:(NSString *)prospectProfileID;
 @end

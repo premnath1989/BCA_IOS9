@@ -43,6 +43,7 @@
     NSMutableDictionary* dictionaryMasterForInsert;
     NSMutableDictionary* newDictionaryForBasicPlan;
     bool selfRelation;
+    int lastIndexSelected;
 }
 
 @end
@@ -317,12 +318,14 @@ BOOL isFirstLoad;
             [self.SecondLAController setQuickQuoteEnabled:quickQuoteEnabled];
             self.SecondLAController.requestSINo = [self.requestSINo description];
             [self.RightView addSubview:self.SecondLAController.view];
+            lastActiveController = self.SecondLAController;
         } else {
             //self.SecondLAController.requestSINo = getSINo;
             [self.SecondLAController setQuickQuoteEnabled:quickQuoteEnabled];
             [self.SecondLAController setElementActive:quickQuoteEnabled];
             self.SecondLAController.requestSINo = [self.requestSINo description];
-            [self.RightView bringSubviewToFront:self.SecondLAController.view];            
+            [self.RightView bringSubviewToFront:self.SecondLAController.view];
+            lastActiveController = self.SecondLAController;
         }
         previousPath = selectedPath;
         blocked = NO;
@@ -442,6 +445,7 @@ BOOL isFirstLoad;
             self.BasicController.requestSINo = [self.requestSINo description];
             if (loadsView) {
                 [self.RightView addSubview:self.BasicController.view];
+                lastActiveController = self.BasicController;
             }            
         } else {
             self.BasicController.requestAge = getAge;
@@ -521,6 +525,7 @@ BOOL isFirstLoad;
             self.BasicController.requestSINo = [self.requestSINo description];
             if (loadsView) {
                 [self.RightView bringSubviewToFront:self.BasicController.view];
+                lastActiveController = self.BasicController;
             }
         }
         previousPath = selectedPath;
@@ -624,6 +629,7 @@ BOOL isFirstLoad;
     self.LAController.requesteProposalStatus = eProposalStatus;
     self.LAController.EAPPorSI = [self.EAPPorSI description];
     [self.RightView addSubview:self.LAController.view];
+    lastActiveController = self.LAController;
     [_LAController processLifeAssured];
     blocked = NO;
     selectedPath = [NSIndexPath indexPathForRow:0 inSection:0];
@@ -737,39 +743,71 @@ BOOL isFirstLoad;
     
     if (!_SecondLAController) {
         if (![dictionaryPOForInsert objectForKey:@"LA_ClientID"]){
-            NSDictionary* dictPOData=[[NSDictionary alloc]initWithDictionary:[_modelSIPOData getPO_DataFor:[self.requestSINo description]]];
-            [dictionaryPOForInsert setObject:[dictPOData valueForKey:@"LA_ClientID"] forKey:@"LA_ClientID"];
-            [dictionaryPOForInsert setObject:[dictPOData valueForKey:@"LA_Name"] forKey:@"LA_Name"];
-            [dictionaryPOForInsert setObject:[dictPOData valueForKey:@"LA_DOB"] forKey:@"LA_DOB"];
-            [dictionaryPOForInsert setObject:[dictPOData valueForKey:@"LA_Age"] forKey:@"LA_Age"];
-            [dictionaryPOForInsert setObject:[dictPOData valueForKey:@"LA_Gender"] forKey:@"LA_Gender"];
-            [dictionaryPOForInsert setObject:[dictPOData valueForKey:@"LA_OccpCode"] forKey:@"LA_OccpCode"];
-            [dictionaryPOForInsert setObject:[dictPOData valueForKey:@"LA_Occp"] forKey:@"LA_Occp"];
+            @try {
+                NSDictionary* dictPOData=[[NSDictionary alloc]initWithDictionary:[_modelSIPOData getPO_DataFor:[self.requestSINo description]]];
+                [dictionaryPOForInsert setObject:[dictPOData valueForKey:@"LA_ClientID"] forKey:@"LA_ClientID"];
+                [dictionaryPOForInsert setObject:[dictPOData valueForKey:@"LA_Name"] forKey:@"LA_Name"];
+                [dictionaryPOForInsert setObject:[dictPOData valueForKey:@"LA_DOB"] forKey:@"LA_DOB"];
+                [dictionaryPOForInsert setObject:[dictPOData valueForKey:@"LA_Age"] forKey:@"LA_Age"];
+                [dictionaryPOForInsert setObject:[dictPOData valueForKey:@"LA_Gender"] forKey:@"LA_Gender"];
+                [dictionaryPOForInsert setObject:[dictPOData valueForKey:@"LA_OccpCode"] forKey:@"LA_OccpCode"];
+                [dictionaryPOForInsert setObject:[dictPOData valueForKey:@"LA_Occp"] forKey:@"LA_Occp"];
+            }
+            @catch (NSException *exception) {
+                
+            }
+            @finally {
+                
+            }
         }
     }
     else{
-        [dictionaryPOForInsert addEntriesFromDictionary:[_SecondLAController setDictionarySecondLA]];
+        @try {
+            [dictionaryPOForInsert addEntriesFromDictionary:[_SecondLAController setDictionarySecondLA]];
+        }
+        @catch (NSException *exception) {
+            
+        }
+        @finally {
+            
+        }
+        
     }
     
     if (!_BasicController) {
         newDictionaryForBasicPlan=[NSMutableDictionary dictionaryWithDictionary:[_modelSIPremium getPremium_For:[self.requestSINo description]]];
     }
     else{
-        newDictionaryForBasicPlan=[NSMutableDictionary dictionaryWithDictionary:[_BasicController setDataBasicPlan]];
+        @try {
+            newDictionaryForBasicPlan=[NSMutableDictionary dictionaryWithDictionary:[_BasicController setDataBasicPlan]];
+        }
+        @catch (NSException *exception) {
+            
+        }
+        @finally {
+            
+        }
     }
     
-    
-    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
-    f.numberStyle = NSNumberFormatterDecimalStyle;
-    NSNumber *myNumber = [f numberFromString:[newDictionaryForBasicPlan valueForKey:@"Sum_Assured"]];
-    [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"ProductCode"] forKey:@"ProductCode"];
-    if(myNumber != nil)
-        [newDictionaryForBasicPlan setObject:myNumber forKey:@"Number_Sum_Assured"];
-    [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"PO_Gender"] forKey:@"PO_Gender"];
-    [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"PO_Age"] forKey:@"PO_Age"];
-    [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"LA_Gender"] forKey:@"LA_Gender"];
-    [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"LA_Age"] forKey:@"LA_Age"];
-    [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"SINO"] forKey:@"SINO"];
+    @try {
+        NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+        f.numberStyle = NSNumberFormatterDecimalStyle;
+        NSNumber *myNumber = [f numberFromString:[newDictionaryForBasicPlan valueForKey:@"Sum_Assured"]];
+        [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"ProductCode"] forKey:@"ProductCode"];
+        if(myNumber != nil)
+            [newDictionaryForBasicPlan setObject:myNumber forKey:@"Number_Sum_Assured"];
+        [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"PO_Gender"] forKey:@"PO_Gender"];
+        [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"PO_Age"] forKey:@"PO_Age"];
+        [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"LA_Gender"] forKey:@"LA_Gender"];
+        [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"LA_Age"] forKey:@"LA_Age"];
+        [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"SINO"] forKey:@"SINO"];
+    }
+    @catch (NSException *exception) {
+        
+    }
+    @finally {
+        
+    }
 }
 
 -(void)brngSubview:(NSString *)view{
@@ -2744,11 +2782,12 @@ BOOL isFirstLoad;
     [cell.button2 addTarget:self action:@selector(showviewControllerFromCellView:) forControlEvents:UIControlEventTouchUpInside];
     [cell.button3 addTarget:self action:@selector(showviewControllerFromCellView:) forControlEvents:UIControlEventTouchUpInside];
     
-    if (indexPath.row != 2){
+    if ((indexPath.row != 2)&&(lastIndexSelected != 2)){
         [cell.button1 setEnabled:false];
         [cell.button2 setEnabled:false];
         [cell.button3 setEnabled:false];
     }
+    
     [cell.button2 setEnabled:false];
     
     if ([[_NumberListOfSubMenu objectAtIndex:indexPath.row] isEqualToString:@"0"]){
@@ -2767,27 +2806,36 @@ BOOL isFirstLoad;
 
 #pragma mark - void added by faiz
 -(void)checkValidateView{
-    if ([_LAController validateSave]){
-        [arrayIntValidate replaceObjectAtIndex:0 withObject:@"1"];
+    @try {
+        if ([_LAController validateSave]){
+            [arrayIntValidate replaceObjectAtIndex:0 withObject:@"1"];
+        }
+        else{
+            [arrayIntValidate replaceObjectAtIndex:0 withObject:@"0"];
+        }
+        
+        if ([_SecondLAController validateSave]){
+            [arrayIntValidate replaceObjectAtIndex:1 withObject:@"1"];
+        }
+        else{
+            [arrayIntValidate replaceObjectAtIndex:1 withObject:@"0"];
+        }
+        
+        if ([_BasicController validateSave]){
+             [arrayIntValidate replaceObjectAtIndex:2 withObject:@"1"];
+        }
+        else{
+             [arrayIntValidate replaceObjectAtIndex:2 withObject:@"0"];
+        }
+        [myTableView reloadData];
+
     }
-    else{
-        [arrayIntValidate replaceObjectAtIndex:0 withObject:@"0"];
+    @catch (NSException *exception) {
+        
     }
-    
-    if ([_SecondLAController validateSave]){
-        [arrayIntValidate replaceObjectAtIndex:1 withObject:@"1"];
+    @finally {
+        
     }
-    else{
-        [arrayIntValidate replaceObjectAtIndex:1 withObject:@"0"];
-    }
-    
-   /* if ([_BasicController validateSave]){
-        [arrayIntValidate replaceObjectAtIndex:2 withObject:@"1"];
-    }
-    else{
-        [arrayIntValidate replaceObjectAtIndex:2 withObject:@"0"];
-    }*/
-    [myTableView reloadData];
 }
 
 -(void)showviewControllerFromCellView:(UIButton *)sender{
@@ -2850,10 +2898,30 @@ BOOL isFirstLoad;
     dictionaryPOForInsert= [NSMutableDictionary dictionaryWithDictionary:dataPO];
 }
 
+-(void)saveLAForTableDidSelect{
+    if ([_modelSIPOData getPODataCount:[dictionaryPOForInsert valueForKey:@"SINO"]]>0){
+        [_modelSIPOData updatePOData:dictionaryPOForInsert];
+        [_modelSIMaster updateIlustrationMaster:dictionaryMasterForInsert];
+    }
+    else{
+        [_modelSIPOData savePODate:dictionaryPOForInsert];
+        [_modelSIMaster saveIlustrationMaster:dictionaryMasterForInsert];
+    }
+}
+
+-(void)saveBasicPlanForTableDidSelect{
+    if ([_modelSIPremium getPremiumCount:[dictionaryPOForInsert valueForKey:@"SINO"]]>0){
+        [_modelSIPremium updatePremium:newDictionaryForBasicPlan];
+    }
+    else{
+        [_modelSIPremium savePremium:newDictionaryForBasicPlan];
+    }
+
+}
+
 -(void)saveNewLA:(NSDictionary *)dataPO{
     dictionaryPOForInsert = [NSMutableDictionary dictionaryWithDictionary:dataPO];
     [arrayIntValidate replaceObjectAtIndex:0 withObject:@"1"];
-    
     [self.myTableView reloadData];
     if ([[dataPO valueForKey:@"RelWithLA"] isEqualToString:@"SELF"]){
         selfRelation = YES;
@@ -2871,8 +2939,14 @@ BOOL isFirstLoad;
             }
         }
         else{
-            [_modelSIPOData savePODate:dictionaryPOForInsert];
-            [_modelSIMaster saveIlustrationMaster:dictionaryMasterForInsert];
+            if ([_modelSIPOData getPODataCount:[dictionaryPOForInsert valueForKey:@"SINO"]]>0){
+                [_modelSIPOData updatePOData:dictionaryPOForInsert];
+                [_modelSIMaster updateIlustrationMaster:dictionaryMasterForInsert];
+            }
+            else{
+                [_modelSIPOData savePODate:dictionaryPOForInsert];
+                [_modelSIMaster saveIlustrationMaster:dictionaryMasterForInsert];
+            }
         }
         
         [self loadBasicPlanPage:YES];
@@ -2891,6 +2965,8 @@ BOOL isFirstLoad;
 -(void)saveSecondLA:(NSDictionary *)dataLA{
     dictionaryMasterForInsert = [[NSMutableDictionary alloc]initWithObjectsAndKeys:[dictionaryPOForInsert valueForKey:@"SINO"],@"SINO",@"1.1",@"SI_Version",@"Not Created",@"ProposalStatus", nil];
     [dictionaryPOForInsert addEntriesFromDictionary:dataLA];
+    [arrayIntValidate replaceObjectAtIndex:1 withObject:@"1"];
+    [self.myTableView reloadData];
     
     if (self.requestSINo){
         if ([_modelSIPOData getPODataCount:[self.requestSINo description]]>0){
@@ -2903,8 +2979,14 @@ BOOL isFirstLoad;
         }
     }
     else{
-        [_modelSIPOData savePODate:dictionaryPOForInsert];
-        [_modelSIMaster saveIlustrationMaster:dictionaryMasterForInsert];
+        if ([_modelSIPOData getPODataCount:[dictionaryPOForInsert valueForKey:@"SINO"]]>0){
+            [_modelSIPOData updatePOData:dictionaryPOForInsert];
+            [_modelSIMaster updateIlustrationMaster:dictionaryMasterForInsert];
+        }
+        else{
+            [_modelSIPOData savePODate:dictionaryPOForInsert];
+            [_modelSIMaster saveIlustrationMaster:dictionaryMasterForInsert];
+        }
     }
 
     [arrayIntValidate replaceObjectAtIndex:1 withObject:@"1"];
@@ -2994,8 +3076,9 @@ BOOL isFirstLoad;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self pullSIData];
+    [tableView reloadData];
     //[self checkValidateView];
-    int lastIndexSelected = indexPath.row;
+    lastIndexSelected = indexPath.row;
     switch (lastIndexSelected) {
         case 0:
             if (_LAController == nil) {
@@ -3004,32 +3087,174 @@ BOOL isFirstLoad;
                 [self.RightView addSubview:self.LAController.view];
             }
             [self.RightView bringSubviewToFront:self.LAController.view];
+            lastActiveController = self.LAController;
+            [arrayIntValidate replaceObjectAtIndex:2 withObject:@"0"];
+            [arrayIntValidate replaceObjectAtIndex:1 withObject:@"0"];
+            [arrayIntValidate replaceObjectAtIndex:0 withObject:@"0"];
+            
+            [tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
             break;
         case 1:
-            /*if (!_SecondLAController) {
-                self.SecondLAController = [self.storyboard instantiateViewControllerWithIdentifier:@"secondLAView"];
-                _SecondLAController.delegate = self;
-                self.SecondLAController.requestSINo = [self.requestSINo description];
-                [self.RightView addSubview:self.SecondLAController.view];
+            if ([_LAController validateSave]){
+                if (![[dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"SELF"]){
+                    [self loadSecondLAPage];
+                }
+                else{
+                    [self loadBasicPlanPage:YES];
+                    [arrayIntValidate replaceObjectAtIndex:1 withObject:@"1"];
+                }
+                [arrayIntValidate replaceObjectAtIndex:0 withObject:@"1"];
             }
-            [self.RightView bringSubviewToFront:self.SecondLAController.view];*/
-            [self loadSecondLAPage];
+            else{
+                if (_LAController == nil) {
+                    self.LAController = [self.storyboard instantiateViewControllerWithIdentifier:@"LAView"];
+                    _LAController.delegate = self;
+                    [self.RightView addSubview:self.LAController.view];
+                }
+                [arrayIntValidate replaceObjectAtIndex:2 withObject:@"0"];
+                [arrayIntValidate replaceObjectAtIndex:1 withObject:@"0"];
+                [arrayIntValidate replaceObjectAtIndex:0 withObject:@"0"];
+
+                [self.RightView bringSubviewToFront:self.LAController.view];
+                lastActiveController = self.LAController;
+                
+                [tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
+            }
+            @try {
+                [self saveLAForTableDidSelect];
+                [self saveBasicPlanForTableDidSelect];
+            }
+            @catch (NSException *exception) {
+                
+            }
+            @finally {
+                
+            }
             break;
         case 2:
-            /*if (!_BasicController) {
-                self.BasicController = [self.storyboard instantiateViewControllerWithIdentifier:@"BasicPlanView"];
-                _BasicController.delegate = self;
-                [self.RightView addSubview:self.BasicController.view];
+            if ([_LAController validateSave]){
+                if (![[dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"SELF"]){
+                    if ([_SecondLAController validateSave]){
+                        [self loadBasicPlanPage:YES];
+                        [arrayIntValidate replaceObjectAtIndex:1 withObject:@"1"];
+                    }
+                    else{
+                        [self loadSecondLAPage];
+                        [arrayIntValidate replaceObjectAtIndex:2 withObject:@"0"];
+                        [arrayIntValidate replaceObjectAtIndex:1 withObject:@"0"];
+                    }
+                }
+                else{
+                    [self loadBasicPlanPage:YES];
+                    [arrayIntValidate replaceObjectAtIndex:0 withObject:@"1"];
+                    [arrayIntValidate replaceObjectAtIndex:1 withObject:@"1"];
+                }
+                
             }
-            [self.RightView bringSubviewToFront:self.BasicController.view];*/
-            [self loadBasicPlanPage:YES];
+            else{
+                if (_LAController == nil) {
+                    self.LAController = [self.storyboard instantiateViewControllerWithIdentifier:@"LAView"];
+                    _LAController.delegate = self;
+                    [self.RightView addSubview:self.LAController.view];
+                }
+                [self.RightView bringSubviewToFront:self.LAController.view];
+                lastActiveController = self.LAController;
+                [arrayIntValidate replaceObjectAtIndex:2 withObject:@"0"];
+                [arrayIntValidate replaceObjectAtIndex:1 withObject:@"0"];
+                [arrayIntValidate replaceObjectAtIndex:0 withObject:@"0"];
+                
+                [tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
+            }
+            @try {
+                [self saveLAForTableDidSelect];
+                [self saveBasicPlanForTableDidSelect];
+            }
+            @catch (NSException *exception) {
+                
+            }
+            @finally {
+                
+            }
             break;
         case 3:
-            [self LoadIlustrationPage];
+            if ([_LAController validateSave]){
+                if (![[dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"SELF"])
+                    if ([_SecondLAController validateSave]){
+                        if ([_BasicController validationDataBasicPlan]) {
+                            [arrayIntValidate replaceObjectAtIndex:2 withObject:@"1"];
+                            [arrayIntValidate replaceObjectAtIndex:1 withObject:@"1"];
+                            [arrayIntValidate replaceObjectAtIndex:0 withObject:@"1"];
+
+                            [self LoadIlustrationPage];
+                            [tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
+
+                        }
+                        else{
+                            [arrayIntValidate replaceObjectAtIndex:2 withObject:@"0"];
+                            [arrayIntValidate replaceObjectAtIndex:1 withObject:@"1"];
+                            [arrayIntValidate replaceObjectAtIndex:0 withObject:@"1"];
+                            
+                            [self loadBasicPlanPage:YES];
+                            [arrayIntValidate replaceObjectAtIndex:1 withObject:@"1"];
+                        }
+                    }
+                    else{
+                        [arrayIntValidate replaceObjectAtIndex:2 withObject:@"0"];
+                        [arrayIntValidate replaceObjectAtIndex:1 withObject:@"0"];
+                        [arrayIntValidate replaceObjectAtIndex:0 withObject:@"1"];
+                        
+                        [self loadSecondLAPage];
+                        [arrayIntValidate replaceObjectAtIndex:0 withObject:@"1"];
+                    }
+                else{
+                    if ([_BasicController validationDataBasicPlan]) {
+                        [arrayIntValidate replaceObjectAtIndex:2 withObject:@"1"];
+                        [arrayIntValidate replaceObjectAtIndex:1 withObject:@"1"];
+                        [arrayIntValidate replaceObjectAtIndex:0 withObject:@"1"];
+                        
+                        [self LoadIlustrationPage];
+                        [tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
+                        
+                    }
+                    else{
+                        [arrayIntValidate replaceObjectAtIndex:2 withObject:@"0"];
+                        [arrayIntValidate replaceObjectAtIndex:1 withObject:@"1"];
+                        [arrayIntValidate replaceObjectAtIndex:0 withObject:@"1"];
+                        
+                        [self loadBasicPlanPage:YES];
+                        [arrayIntValidate replaceObjectAtIndex:1 withObject:@"1"];
+                    }
+                }
+            }
+            else{
+                if (_LAController == nil) {
+                    self.LAController = [self.storyboard instantiateViewControllerWithIdentifier:@"LAView"];
+                    _LAController.delegate = self;
+                    [self.RightView addSubview:self.LAController.view];
+                }
+                [self.RightView bringSubviewToFront:self.LAController.view];
+                lastActiveController = self.LAController;
+                [arrayIntValidate replaceObjectAtIndex:2 withObject:@"0"];
+                [arrayIntValidate replaceObjectAtIndex:1 withObject:@"0"];
+                [arrayIntValidate replaceObjectAtIndex:0 withObject:@"0"];
+                
+                [tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
+            }
+            @try {
+                [self saveLAForTableDidSelect];
+                [self saveBasicPlanForTableDidSelect];
+            }
+            @catch (NSException *exception) {
+                
+            }
+            @finally {
+                
+            }
             break;
         default:
             break;
     }
+
 	//perform checking before going next page
     //temporary remark by faiz
     /*blocked = YES;
@@ -3362,7 +3587,7 @@ BOOL isFirstLoad;
     }
 }
 
-- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+/*- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // rows in section 0 should not be selectable
     int lastIndexSelected = indexPath.row;
     switch (lastIndexSelected) {
@@ -3402,7 +3627,7 @@ BOOL isFirstLoad;
     }
 
     return indexPath;
-}
+}*/
 
 - (void)buildSpinner {    
     spinner_SI = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];

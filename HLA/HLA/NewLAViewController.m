@@ -1131,7 +1131,7 @@ id dobtanngal;
     return dictionaryNewLA;
 }
 
-- (IBAction)doSaveLA:(id)sender
+- (IBAction)doSave:(id)sender
 {
     //[_delegate saveAll];
     if ([self validateSave]){

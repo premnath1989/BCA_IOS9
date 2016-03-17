@@ -8503,7 +8503,16 @@ NSMutableArray *DelGroupArr;
 	
 	
     if ([self Validation] == TRUE) {
-        NSString *PO_Sign;
+        int usedInSI=[modelSIPOData getLADataCount:pp.ProspectID];
+        if (usedInSI>0){
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Ada kasus eApp tertunda untuk klien ini. Jika Anda ingin melanjutkan, sistem akan otomatis menghapus semua kasus eApp tertunda terkait dan Anda diminta untuk membuat ulang data ini jika Anda berharap untuk mengirim ulang kasus ini." delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+            [alert setTag:1004];
+            [alert show];
+        }
+        else{
+            [self saveToDB];
+        }
+        /*NSString *PO_Sign;
         NSString *eProposalNo;
 		FMDatabase *db = [FMDatabase databaseWithPath:databasePath];
         [db open];
@@ -8559,7 +8568,7 @@ NSMutableArray *DelGroupArr;
         }
         else {
             [self saveToDB];
-		}
+		}*/
     }
 }
 

@@ -224,7 +224,7 @@
 - (IBAction)sexSegmentPressed:(id)sender;
 - (IBAction)NamaProdukDropDown:(id)sender;
 - (IBAction)smokerSegmentPressed:(id)sender;
-- (IBAction)doSaveLA:(id)sender;
+- (IBAction)doSave:(id)sender;
 - (IBAction)selectProspect:(id)sender;
 - (IBAction)btnCommDatePressed:(id)sender;
 - (IBAction)enableFields:(id)sender;
@@ -241,6 +241,7 @@
 -(void)keyboardDidShow:(NSNotificationCenter *)notification;
 -(void)keyboardDidHide:(NSNotificationCenter *)notification;
 
+-(BOOL)validateSave;
 -(void)loadDataFromList;
 -(NSDictionary *)setDictionaryLA;
 @end

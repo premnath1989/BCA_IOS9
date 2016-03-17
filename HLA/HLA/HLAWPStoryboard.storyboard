@@ -2969,7 +2969,7 @@
                                         <barButtonItem key="rightBarButtonItem" title="Done" id="pza-PN-3E0">
                                             <color key="tintColor" red="0.94901960780000005" green="0.4431372549" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
-                                                <action selector="doSaveLA:" destination="gBu-Hz-A8j" id="fBP-hF-VXo"/>
+                                                <action selector="doSave:" destination="gBu-Hz-A8j" id="xig-9S-P3Y"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -3763,7 +3763,7 @@
                                         <color key="textColor" red="0.94901960784313721" green="0.44313725490196076" blue="0.52549019607843139" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Lay-vx-9JM">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Lay-vx-9JM">
                                         <rect key="frame" x="650" y="485" width="92" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Temp Next"/>
