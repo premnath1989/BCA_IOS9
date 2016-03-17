@@ -520,10 +520,11 @@
     NSString *javaScriptP2H11 = [NSString stringWithFormat:@"document.getElementById('HeaderPOAge').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"PO_Age"]];
     NSString *javaScriptP2H12 = [NSString stringWithFormat:@"document.getElementById('HeaderExtraPremiDuration1').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"ExtraPremiumTerm"]];
     NSString *javaScriptP2H13 = [NSString stringWithFormat:@"document.getElementById('HeaderLAAge').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"LA_Age"]];
-    NSString *javaScriptP2H14 = [NSString stringWithFormat:@"document.getElementById('HeaderExtraPremiUWLoading').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"TotalPremiumLoading"]];
+    NSString *javaScriptP2H14 = [NSString stringWithFormat:@"document.getElementById('HeaderExtraPremiUWLoading').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"ExtraPremiumPolicy"]];
     NSString *javaScriptP2H15 = [NSString stringWithFormat:@"document.getElementById('HeaderPOSex').innerHTML =\"%@\";", sexPO];
     NSString *javaScriptP2H16 = [NSString stringWithFormat:@"document.getElementById('HeaderPremiPay').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"TotalPremiumLoading"]];
-    
+    NSString *javaScriptP2H17 = [NSString stringWithFormat:@"document.getElementById('HeaderExtraPremiNumber').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"ExtraPremiumSum"]];
+
     
     //footer agent data
     NSString *javaScriptF1 = [NSString stringWithFormat:@"document.getElementById('FooterAgentName2').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"AgentName"]];
@@ -566,6 +567,7 @@
     NSString *responseP214 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H14];
     NSString *responseP215 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H15];
     NSString *responseP216 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H16];
+    NSString *responseP217 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H17];
     
     NSLog(@"javascript result: %@", responseTable);
     NSLog(@"javascript result: %@", responseF1);

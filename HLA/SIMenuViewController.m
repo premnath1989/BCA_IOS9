@@ -763,7 +763,9 @@ BOOL isFirstLoad;
     }
     else{
         @try {
-            [dictionaryPOForInsert addEntriesFromDictionary:[_SecondLAController setDictionarySecondLA]];
+            if (![[dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"SELF"]){
+                [dictionaryPOForInsert addEntriesFromDictionary:[_SecondLAController setDictionarySecondLA]];
+            }
         }
         @catch (NSException *exception) {
             
