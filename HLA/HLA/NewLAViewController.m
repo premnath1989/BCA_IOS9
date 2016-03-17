@@ -2608,7 +2608,7 @@ id dobtanngal;
         [alert show];
     }
     
-     else if ((LAAGEint >70)&&[NamaProduk.titleLabel.text isEqualToString:@"BCA Life Heritage"])
+     else if ((LAAGEint >70)&&[NamaProduk.titleLabel.text isEqualToString:@"BCA Life Heritage Protection"])
     {
          UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Usia tidak boleh melebihi dari 70 tahun."
                                                    delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
@@ -2616,7 +2616,7 @@ id dobtanngal;
          [alert show];
      }
     
-     else if ((LAAGEint >55)&&[NamaProduk.titleLabel.text isEqualToString:@"BCA Life Keluargaku"])
+     else if ((LAAGEint >55)&&[NamaProduk.titleLabel.text isEqualToString:@"BCA Life Keluargaku Protection"])
      {
          UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Usia tidak boleh melebihi dari 55 tahun."
                                                         delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];

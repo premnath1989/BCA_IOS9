@@ -87,6 +87,7 @@
     UIColor *themeColour;
     NSString *premiType;
     NSString *PlanType;
+    NSString *PembelianKEString;
     
 }
 
@@ -150,6 +151,7 @@
 @property (nonatomic, copy) NSString *secondLADOB;
 @property (nonatomic, assign,readwrite) int secondLAAge;
 @property (nonatomic, copy) NSString *secondLAOccpCode;
+@property (nonatomic, copy) NSString *PembelianKEString;
 //--
 @property (strong, nonatomic) IBOutlet UIButton *btnPlan;
 @property (retain, nonatomic) IBOutlet UITextField *termField;

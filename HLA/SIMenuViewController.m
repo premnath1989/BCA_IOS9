@@ -411,7 +411,7 @@ BOOL isFirstLoad;
                 [self.BasicController setRelWithLA:[dictionaryPOForInsert valueForKey:@"RelWithLA"]];
                 NSString *PlanType = [dictionaryPOForInsert valueForKey:@"ProductName"];
                 
-                if([PlanType isEqualToString:@"BCA Life Heritage"])
+                if([PlanType isEqualToString:@"BCA Life Heritage Protection"])
                 {
                     [self.BasicController KeluargakuDisable];
                 }
@@ -431,7 +431,7 @@ BOOL isFirstLoad;
                 [self.BasicController setRelWithLA:[dictionaryPOForInsert valueForKey:@"RelWithLA"]];
                 NSString *PlanType = [dictionaryPOForInsert valueForKey:@"ProductName"];
                 
-                if([PlanType isEqualToString:@"BCA Life Heritage"])
+                if([PlanType isEqualToString:@"BCA Life Heritage Protection"])
                 {
                     [self.BasicController KeluargakuDisable];
                 }
@@ -491,7 +491,7 @@ BOOL isFirstLoad;
                 
                 NSString *PlanType = [dictionaryPOForInsert valueForKey:@"ProductName"];
                 
-                if([PlanType isEqualToString:@"BCA Life Heritage"])
+                if([PlanType isEqualToString:@"BCA Life Heritage Protection"])
                 {
                     [self.BasicController KeluargakuDisable];
                 }
@@ -511,7 +511,7 @@ BOOL isFirstLoad;
                 [self.BasicController setRelWithLA:[dictPO valueForKey:@"RelWithLA"]];
                 NSString *PlanType = [dictionaryPOForInsert valueForKey:@"ProductName"];
                 
-                if([PlanType isEqualToString:@"BCA Life Heritage"])
+                if([PlanType isEqualToString:@"BCA Life Heritage Protection"])
                 {
                     [self.BasicController KeluargakuDisable];
                     
@@ -2790,7 +2790,7 @@ BOOL isFirstLoad;
         [cell.button3 setEnabled:false];
     }
     
-    if ([[dictionaryPOForInsert valueForKey:@"ProductName"] isEqualToString:@"BCA Life Keluargaku"]){
+    if ([[dictionaryPOForInsert valueForKey:@"ProductName"] isEqualToString:@"BCA Life Keluargaku Protection"]){
         [cell.button2 setEnabled:true];
     }
     else{
@@ -3044,7 +3044,7 @@ BOOL isFirstLoad;
 
     NSString *PlanType = [dictionaryPOForInsert valueForKey:@"ProductName"];
     
-    if([PlanType isEqualToString:@"BCA Life Heritage"])
+    if([PlanType isEqualToString:@"BCA Life Heritage Protection"])
     {
         if (!_PremiumController) {
             _PremiumController = [self.storyboard instantiateViewControllerWithIdentifier:@"premiumView"];
@@ -6405,10 +6405,10 @@ NSString *prevPlan;
         UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"informasi" message:@"mohon terlebih dahulu memilih nama produk" delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
         [alert show];
     }
-    if([_LAController.NamaProduk.titleLabel.text caseInsensitiveCompare:@"BCA Life Heritage"] == NSOrderedSame){
+    if([_LAController.NamaProduk.titleLabel.text caseInsensitiveCompare:@"BCA Life Heritage Protection"] == NSOrderedSame){
         [self seePDF:@"Brochure_ProdukBCALifeHeritage"];
     }
-    if([_LAController.NamaProduk.titleLabel.text caseInsensitiveCompare:@"BCA Life Keluargaku"] == NSOrderedSame){
+    if([_LAController.NamaProduk.titleLabel.text caseInsensitiveCompare:@"BCA Life Keluargaku Protection"] == NSOrderedSame){
         [self seePDF:@"Brochure_ProdukBCALIfeKeluargaku"];
     }
 }

@@ -932,7 +932,9 @@ bool WPTPD30RisDeleted = FALSE;
     
     while([Results2 next])
     {
+        
       PaymentFoctor = [[Results2 stringForColumn:@"Payment_Fact"]doubleValue];
+    PaymentFoctor =  PaymentFoctor/100.0f;
         
     }
     
@@ -973,16 +975,104 @@ bool WPTPD30RisDeleted = FALSE;
     
     //NoPolRate//
     
-    int NoPolRate =0;
+    int NoPolRate =[PembelianKEString intValue];
     
     //Diskoun Premi//
     
-    double DiskounPremi = 0 * RatesInt * total * PaymentFoctor;
+    double DiskounPremi = NoPolRate * RatesInt * total * PaymentFoctor;
+    
+    
+    NSString*WaiverRate;
+    
+    NSArray *paths5 = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsPath5 = [paths5 objectAtIndex:0];
+    NSString *path5 = [docsPath5 stringByAppendingPathComponent:@"BCA_Rates.sqlite"];
+    
+    FMDatabase *database5 = [FMDatabase databaseWithPath:path5];
+    [database open];
+    FMResultSet *results5;
+    
+    NSString*RatesPremiumRate5;
+    double PaymentMode5;
+    if (![database open])
+    {
+        NSLog(@"Could not open db.");
+    }
+    
+    
+    if([RelWithLA isEqualToString:@"SELF"])
+        {
+    WaiverRate = [NSString stringWithFormat:@"SELECT %@ FROM KLK_Waiver Where EntryAge = '%i' AND PersonType = '%@'",PayorSex,PayorAge,@"T"];
+    results5 = [database executeQuery:WaiverRate];
+    
+    while([results5 next])
+    {
+        if ([PayorSex isEqualToString:@"Male"]||[PayorSex isEqualToString:@"MALE"]){
+            RatesPremiumRate5  = [results5 stringForColumn:@"Male"];
+        }
+        else{
+            RatesPremiumRate5 = [results5 stringForColumn:@"Female"];
+        }
+        
+    }
+    
+        }
+        else
+        {
+            WaiverRate = [NSString stringWithFormat:@"SELECT %@ FROM KLK_Waiver Where EntryAge = '%i' AND PersonType = '%@'",LASex,LAAge,@"P"];
+            results5 = [database5 executeQuery:WaiverRate];
+    
+            while([results5 next])
+            {
+                if ([LASex isEqualToString:@"Male"]||[LASex isEqualToString:@"MALE"]){
+                    RatesPremiumRate5 = [results5 stringForColumn:@"Male"];
+                }
+                else{
+                    RatesPremiumRate5  = [results5 stringForColumn:@"Female"];
+                }
+    
+            }
+    
+    
+        }
+    
+    
+    
+    double RatesInt5 = [RatesPremiumRate5 doubleValue];
+    double  RiderPremium5 = (RatesInt5/100)* DiskounPremi;
+    
+    NSNumberFormatter *format = [[NSNumberFormatter alloc]init];
+    [format setNumberStyle:NSNumberFormatterNoStyle];
+    [format setGeneratesDecimalNumbers:FALSE];
+    [format setMaximumFractionDigits:0];
+    [format setRoundingMode:NSNumberFormatterRoundUp];
+
+    
+    RiderPremium5 = [[format stringFromNumber:[NSNumber numberWithDouble:RiderPremium5]] doubleValue];
+    RiderPremium5 = RiderPremium5/100;
+    RiderPremium5 = [[format stringFromNumber:[NSNumber numberWithDouble:RiderPremium5]] doubleValue];
+    RiderPremium5 = RiderPremium5 * 100;
+ //   RiderPremium5 = round(RiderPremium5);
+//    RiderPremium5 =RiderPremium5/1000;
+//    RiderPremium5 = round();
+    
+    
+    double totalPremiumDasarA = RiderPremium5 + DiskounPremi;
+    
+    [_basicPremiField setText:[NSString stringWithFormat:@"lround", totalPremiumDasarA]];
+    [self PremiDasarIncomeChange:_basicPremiField.text];
+
     
    // [_KKLKDiskaunBtn setText:[NSString stringWithFormat:@"%2f", DiskounPremi]];
     
     //Current Defaulr
     [_KKLKDiskaunBtn setText:[NSString stringWithFormat:@"%@",@"0"]];
+    
+    
+    
+    
+    
+    
   //  [self PremiDasarIncomeChange:_basicPremiField.text];
 }
 
@@ -1648,7 +1738,7 @@ bool WPTPD30RisDeleted = FALSE;
         yearlyIncomeField.text = result;
     }
     
-    if([PlanType isEqualToString:@"BCA Life Keluargaku"])
+    if([PlanType isEqualToString:@"BCA Life Keluargaku Protection"])
     {
         [self PremiDasarActkklk];
     }
@@ -4492,7 +4582,7 @@ bool WPTPD30RisDeleted = FALSE;
     NSLog(@"%lld",sumAssured);
     NSLog(@"%lld",maxNumber);
     
-    if([PlanType isEqualToString:@"BCA Life Keluargaku"])
+    if([PlanType isEqualToString:@"BCA Life Keluargaku Protection"])
     {
         if ([validationSet containsObject:uangPertanggunganDasar]||uangPertanggunganDasar==NULL){
             [self createAlertViewAndShow:validationUangPertanggunganDasar tag:0];
@@ -4912,6 +5002,8 @@ bool WPTPD30RisDeleted = FALSE;
     [_KKLKPembelianKeBtn setTitle:aaDesc forState:UIControlStateNormal];
     [self.planPopover dismissPopoverAnimated:YES];
     // getPlanCode = aaCode;
+    
+    PembelianKEString = aaDesc;
 
 }
 
@@ -4939,7 +5031,7 @@ bool WPTPD30RisDeleted = FALSE;
     
     FRekeunsiPembayaranMode = aaDesc;
     
-    if([PlanType isEqualToString:@"BCA Life Keluargaku"])
+    if([PlanType isEqualToString:@"BCA Life Keluargaku Protection"])
     {
         [self PremiDasarActKeluargaku:aaDesc];
         [self PremiDasarActkklk];
