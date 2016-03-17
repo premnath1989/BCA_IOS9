@@ -588,6 +588,8 @@ bool WPTPD30RisDeleted = FALSE;
     
     long long ExtraPrem1 = ExtraPremiTotal + ExtraPrecenttotal;
     
+    long long Alltotal = TotalA +ExtraPrem1;
+    
     NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setFormatterBehavior: NSNumberFormatterBehavior10_4];
     [numberFormatter setNumberStyle: NSNumberFormatterDecimalStyle];
@@ -597,13 +599,9 @@ bool WPTPD30RisDeleted = FALSE;
     
     NSString *numberExtraBasicPremi = [numberFormatter stringFromNumber: [NSNumber numberWithDouble:ExtraPrem1]];
     
-    
-
-
-
-    
-    
     [_extraBasicPremiField setText:[NSString stringWithFormat:@"%@", numberExtraBasicPremi]];
+    
+    [_totalPremiWithLoadingField setText:[NSString stringWithFormat:@"%lld", Alltotal]];
     
 
 }
@@ -874,9 +872,8 @@ bool WPTPD30RisDeleted = FALSE;
     id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
     [activeInstance performSelector:@selector(dismissKeyboard)];
     
-    if (_Pembelianke == nil) {
+    if (_Pembelianke.title == nil) {
         self.Pembelianke = [[PembeliaKe alloc] init];
-        self.Pembelianke.TradOrEver = @"TRAD";
         _Pembelianke.delegate = self;
         self.planPopover = [[UIPopoverController alloc] initWithContentViewController:_Pembelianke];
     }
@@ -1282,7 +1279,7 @@ bool WPTPD30RisDeleted = FALSE;
 
     
     
-    double TotalAB = TotalA + totalB;
+    double TotalAB = TotalA + ExtraPrem1;
     
     
     
