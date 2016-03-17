@@ -2782,7 +2782,7 @@ BOOL isFirstLoad;
     [cell.button2 addTarget:self action:@selector(showviewControllerFromCellView:) forControlEvents:UIControlEventTouchUpInside];
     [cell.button3 addTarget:self action:@selector(showviewControllerFromCellView:) forControlEvents:UIControlEventTouchUpInside];
     
-    if ((indexPath.row != 2)&&(lastIndexSelected != 2)){
+    if (lastIndexSelected != 2){
         [cell.button1 setEnabled:false];
         [cell.button2 setEnabled:false];
         [cell.button3 setEnabled:false];
@@ -3075,6 +3075,7 @@ BOOL isFirstLoad;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    SIMenuTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     [self pullSIData];
     [tableView reloadData];
     //[self checkValidateView];
@@ -3100,6 +3101,7 @@ BOOL isFirstLoad;
                     [self loadSecondLAPage];
                 }
                 else{
+
                     [self loadBasicPlanPage:YES];
                     [arrayIntValidate replaceObjectAtIndex:1 withObject:@"1"];
                 }
@@ -3253,6 +3255,17 @@ BOOL isFirstLoad;
             break;
         default:
             break;
+    }
+    
+    if (lastIndexSelected==2){
+        [cell.button1 setEnabled:true];
+        [cell.button2 setEnabled:true];
+        [cell.button3 setEnabled:true];
+    }
+    else{
+        [cell.button1 setEnabled:false];
+        [cell.button2 setEnabled:false];
+        [cell.button3 setEnabled:false];
     }
 
 	//perform checking before going next page
