@@ -30,6 +30,8 @@
 @synthesize ExtraPremiDasarLBL;
 @synthesize MasaExtraPremiLBL;
 @synthesize ExtraPremiDasarNumberLBL;
+@synthesize ExtraPremiTotal;
+@synthesize ExtraPrecenttotal;
 @synthesize minSALabel;
 @synthesize maxSALabel;
 @synthesize healthLoadingView;
@@ -582,6 +584,10 @@ bool WPTPD30RisDeleted = FALSE;
     
     long long Extraprem =(ExtraPremiNumb* PaymentMode) *(BasisSumAssured/1000);
     
+    ExtraPremiTotal = Extraprem;
+    
+    long long ExtraPrem1 = ExtraPremiTotal + ExtraPrecenttotal;
+    
     NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setFormatterBehavior: NSNumberFormatterBehavior10_4];
     [numberFormatter setNumberStyle: NSNumberFormatterDecimalStyle];
@@ -589,7 +595,10 @@ bool WPTPD30RisDeleted = FALSE;
     [numberFormatter setMaximumFractionDigits:0];
     [numberFormatter setMinimumFractionDigits:0];
     
-    NSString *numberExtraBasicPremi = [numberFormatter stringFromNumber: [NSNumber numberWithDouble:Extraprem]];
+    NSString *numberExtraBasicPremi = [numberFormatter stringFromNumber: [NSNumber numberWithDouble:ExtraPrem1]];
+    
+    
+
 
 
     
@@ -1263,7 +1272,19 @@ bool WPTPD30RisDeleted = FALSE;
     
      double totalB = total * masaExtraPremiBTotal;
     
+    //prem//
+    
+    long long Extraprem =totalB;
+    
+    ExtraPrecenttotal = Extraprem;
+    
+    long long ExtraPrem1 = ExtraPremiTotal + ExtraPrecenttotal;
+
+    
+    
     double TotalAB = TotalA + totalB;
+    
+    
     
     NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setFormatterBehavior: NSNumberFormatterBehavior10_4];
@@ -1272,7 +1293,8 @@ bool WPTPD30RisDeleted = FALSE;
     [numberFormatter setMaximumFractionDigits:0];
     [numberFormatter setMinimumFractionDigits:0];
     
-    NSString *numberExtraBasicPremi = [numberFormatter stringFromNumber: [NSNumber numberWithDouble:totalB]];
+    NSString *numberExtraBasicPremi = [numberFormatter stringFromNumber: [NSNumber numberWithDouble:ExtraPrem1]];
+    
     NSString *totalPremiWithLoading = [numberFormatter stringFromNumber: [NSNumber numberWithDouble:TotalAB]];
     
     [_extraBasicPremiField setText:[NSString stringWithFormat:@"%@", numberExtraBasicPremi]];

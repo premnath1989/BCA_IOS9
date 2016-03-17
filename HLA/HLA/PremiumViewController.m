@@ -75,8 +75,6 @@
     _LAAge = [[dictionaryPremium valueForKey:@"LA_Age"]integerValue];
     _ExtraPercentagePremi = [dictionaryPremium valueForKey:@"ExtraPremiumPercentage"];
 
-    
-
     [self AnsuransiDasar];
     [self PremiDasarActB];
     [self ExtraPremiNumber];
@@ -511,7 +509,7 @@
     
     long long totalBulanan = (_AnssubtotalBulan + _ExtraNumbsubtotalBulan + _ExtraPercentsubtotalBulan);
     
-    long long totalSekaligus = (_AnssubtotalSekaligus + _ExtraNumbsubtotalSekaligus + _ExtraPercentsubtotalSekaligus);
+    long long totalSekaligus = (_AnssubtotalSekaligus + _ExtraNumbsubtotalYear + _ExtraPercentsubtotalSekaligus);
     
     NSString *year =[@(totalYear)stringValue];
     NSString *Bulan =[@(totalBulanan)stringValue];
