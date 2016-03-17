@@ -2757,7 +2757,7 @@ BOOL isFirstLoad;
     UIView *bgColorView = [[UIView alloc] init];
     if (indexPath.row<[arrayIntValidate count]){
         if ([[arrayIntValidate objectAtIndex:indexPath.row] isEqualToString:@"1"]){
-            [cell setBackgroundColor:[UIColor colorWithRed:131.0/255.0 green:184.0/255.0 blue:105.0/255.0 alpha:1.0]];
+            [cell setBackgroundColor:[UIColor colorWithRed:88.0/255.0 green:89.0/255.0 blue:92.0/255.0 alpha:1.0]];
         }
         else{
             [cell setBackgroundColor:[UIColor colorWithRed:204.0/255.0 green:203.0/255.0 blue:205.0/255.0 alpha:1.0]];
@@ -2776,7 +2776,7 @@ BOOL isFirstLoad;
         }
     }
     
-    bgColorView.backgroundColor = [UIColor colorWithRed:242.0f/255.0f green:113.0f/255.0f blue:134.0f/255.0f alpha:1];
+    bgColorView.backgroundColor = [UIColor colorWithRed:218.0f/255.0f green:49.0f/255.0f blue:85.0f/255.0f alpha:1];
     
     [cell setSelectedBackgroundView:bgColorView];
     
@@ -2790,7 +2790,13 @@ BOOL isFirstLoad;
         [cell.button3 setEnabled:false];
     }
     
-    [cell.button2 setEnabled:false];
+    if ([[dictionaryPOForInsert valueForKey:@"ProductName"] isEqualToString:@"BCA Life Keluargaku"]){
+        [cell.button2 setEnabled:true];
+    }
+    else{
+        [cell.button2 setEnabled:false];
+    }
+    
     
     if ([[_NumberListOfSubMenu objectAtIndex:indexPath.row] isEqualToString:@"0"]){
         [cell.labelNumber setText:@""];

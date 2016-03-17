@@ -145,7 +145,7 @@ id dobtemp;
     }
     
     
-    UIColor *themeColour = [UIColor colorWithRed:242.0f/255.0f green:113.0f/255.0f blue:134.0f/255.0f alpha:1];
+    UIColor *themeColour = [UIColor colorWithRed:218.0f/255.0f green:49.0f/255.0f blue:85.0f/255.0f alpha:1];
 
     nameField.layer.borderColor = [themeColour CGColor];
     nameField.layer.borderWidth = 1.0f;
