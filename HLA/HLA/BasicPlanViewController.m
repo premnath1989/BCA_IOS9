@@ -4906,6 +4906,15 @@ bool WPTPD30RisDeleted = FALSE;
 }
 #pragma mark - delegate
 
+-(void)PlanPembelianKe:(PembeliaKe *)inController didSelectCode:(NSString *)aaCode andDesc:(NSString *)aaDesc;
+{
+    
+    [_KKLKPembelianKeBtn setTitle:aaDesc forState:UIControlStateNormal];
+    [self.planPopover dismissPopoverAnimated:YES];
+    // getPlanCode = aaCode;
+
+}
+
 -(void)Planlisting:(MasaPembayaran *)inController didSelectCode:(NSString *)aaCode andDesc:(NSString *)aaDesc{
   
     [_masaPembayaranButton setTitle:aaDesc forState:UIControlStateNormal];
