@@ -239,7 +239,7 @@
 -(IBAction)textFieldDidChangeEditing:(UITextField *)sender;
 -(IBAction)textFieldNIPDidEndEditing:(UITextField *)sender;
 
-- (IBAction)actionProvinsiInfo:(UIButton *)sender;
+- (IBAction)actionProvinsiInfo:(id)sender;
 - (IBAction)actionKotaInfo:(UIButton *)sender;
 /*end of added by faiz*/
 

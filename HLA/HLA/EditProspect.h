@@ -28,6 +28,7 @@
 #import "ModelAgentProfile.h"
 #import "ModelDataReferral.h"
 #import "KodePosInfo.h"
+#import "ModelSIPOData.h"
 
 @class DataTable,DBController;
 @protocol EditProspectDelegate
@@ -47,6 +48,7 @@
     Nationality *_nationalityList2;
     
     //added  by faiz
+    ModelSIPOData* modelSIPOData;
     ModelDataReferral* modelDataReferral;
     ModelAgentProfile* modelAgentProfil;
     SourceIncome *_sourceIncome;

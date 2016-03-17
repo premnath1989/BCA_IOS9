@@ -206,4 +206,24 @@
     [database close];
     return count;
 }
+
+-(int)getLADataCount:(NSString *)prospectProfileID{
+    int count;
+    
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select count(*) from SI_PO_Data where LA_ClientID = \"%@\"",prospectProfileID]];
+    while ([s next]) {
+        count = [s intForColumn:@"count(*)"];
+    }
+    
+    [results close];
+    [database close];
+    return count;
+}
+
 @end

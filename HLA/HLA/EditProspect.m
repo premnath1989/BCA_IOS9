@@ -146,6 +146,7 @@ NSMutableArray *DelGroupArr;
 {
 	
     [super viewDidLoad];
+    modelSIPOData=[[ModelSIPOData alloc]init];
     borderColor=[[UIColor alloc]initWithRed:250.0/255.0 green:175.0/255.0 blue:50.0/255.0 alpha:1.0];
     
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LoadDisplay) name:@"reloadEdit" object:nil];
@@ -2500,11 +2501,11 @@ NSMutableArray *DelGroupArr;
     
     if ([pp.ResidenceAddressTown isEqualToString:@"(null)"] || pp.ResidenceAddressTown == NULL) {
         txtHomeTown.text = @"";
-        [_outletKota setTitle:@"" forState:UIControlStateNormal];
+        //[_outletKota setTitle:@"" forState:UIControlStateNormal];
     }
     else {
         txtHomeTown.text = pp.ResidenceAddressTown;
-        [_outletKota setTitle:pp.ResidenceAddressTown forState:UIControlStateNormal];
+        //[_outletKota setTitle:pp.ResidenceAddressTown forState:UIControlStateNormal];
     }
     
     //Office Add  - Eliminate "null" value
@@ -2546,11 +2547,11 @@ NSMutableArray *DelGroupArr;
     
     if ([pp.OfficeAddressTown isEqualToString:@"(null)"] || pp.OfficeAddressTown == NULL) {
         txtOfficeTown.text = @"";
-        [_outletKotaOffice setTitle:@"" forState:UIControlStateNormal];
+        //[_outletKotaOffice setTitle:@"" forState:UIControlStateNormal];
     }
     else {
         txtOfficeTown.text = pp.OfficeAddressTown;
-        [_outletKotaOffice setTitle:pp.OfficeAddressTown forState:UIControlStateNormal];
+        //[_outletKotaOffice setTitle:pp.OfficeAddressTown forState:UIControlStateNormal];
     }
 	
     if (![pp.ProspectRemark isEqualToString:@"(null)"] || pp.ProspectRemark != NULL) {
@@ -3220,12 +3221,12 @@ NSMutableArray *DelGroupArr;
     _txtOfficeDistrict.text=pp.OfficeDistrict;
     _txtOfficeProvince.text=pp.OfficeProvicne;
 
-    if (![pp.HomeProvicne isEqualToString:@"(null)"]){
+    /*if (![pp.HomeProvicne isEqualToString:@"(null)"]){
         [_outletProvinsi setTitle:pp.HomeProvicne forState:UIControlStateNormal];
     }
     if (![pp.OfficeProvicne isEqualToString:@"(null)"]){
         [_outletProvinsiOffice setTitle:pp.OfficeProvicne forState:UIControlStateNormal];    
-    }
+    }*/
     
     if (![pp.ClientSegmentation isEqualToString:@"(null)"]){
         [_outletVIPClass setTitle:pp.ClientSegmentation forState:UIControlStateNormal];
@@ -3239,12 +3240,16 @@ NSMutableArray *DelGroupArr;
     if ([[pp.ResidenceAddressCountry uppercaseString] isEqualToString:@"INDONESIA"]){
         [_switchCountryHome setOn:NO];
         [btnHomeCountry setHidden:YES];
+        [_outletKota setHidden:NO];
+        [_outletProvinsi setHidden:NO];
         [txtHomeCountry setHidden:NO];
         checked = NO;
     }
     else{
         [_switchCountryHome setOn:YES];
         [btnHomeCountry setHidden:NO];
+        [_outletKota setHidden:YES];
+        [_outletProvinsi setHidden:YES];
         [txtHomeCountry setHidden:YES];
         checked = YES;
     }
@@ -3252,12 +3257,16 @@ NSMutableArray *DelGroupArr;
     if (([[pp.OfficeAddressCountry uppercaseString] isEqualToString:@"INDONESIA"])||([[pp.OfficeAddressCountry uppercaseString] isEqualToString:@""])){
         [_switchCountryOffice setOn:NO];
         [btnOfficeCountry setHidden:YES];
+        [_outletKotaOffice setHidden:NO];
+        [_outletProvinsiOffice setHidden:NO];
         [txtOfficeCountry setHidden:NO];
         checked2 = NO;
     }
     else{
         [_switchCountryOffice setOn:YES];
         [btnOfficeCountry setHidden:NO];
+        [_outletKotaOffice setHidden:YES];
+        [_outletProvinsiOffice setHidden:YES];
         [txtOfficeCountry setHidden:YES];
         checked2 = YES;
     }
@@ -4428,6 +4437,8 @@ NSMutableArray *DelGroupArr;
             txtHomeState.enabled = NO;
             txtHomeCountry.hidden = YES;
             btnHomeCountry.hidden = NO;
+            _outletKota.hidden=YES;
+            _outletProvinsi.hidden=YES;
             
             //[txtHomePostCode addTarget:self action:@selector(EditTextFieldDidChange:) forControlEvents:UIControlEventEditingDidEnd];
             [txtHomePostCode addTarget:self action:@selector(EditTextFieldBegin:) forControlEvents:UIControlEventEditingDidBegin];
@@ -4456,6 +4467,8 @@ NSMutableArray *DelGroupArr;
             txtHomeState.enabled = YES;
             txtHomeCountry.hidden = NO;
             btnHomeCountry.hidden = YES;
+            _outletKota.hidden=NO;
+            _outletProvinsi.hidden=NO;
             
             txtHomeState.enabled = NO;
             txtHomeState.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
@@ -4488,7 +4501,8 @@ NSMutableArray *DelGroupArr;
             txtOfficeState.enabled = NO;
             txtOfficeCountry.hidden = YES;
             btnOfficeCountry.hidden = NO;
-            
+            _outletKotaOffice.hidden=YES;
+            _outletProvinsiOffice.hidden=YES;
             //[txtOfficePostCode addTarget:self action:@selector(EditOfficePostcodeDidChange:) forControlEvents:UIControlEventEditingDidEnd];
             [txtOfficePostCode addTarget:self action:@selector(OfficeEditTextFieldBegin:) forControlEvents:UIControlEventEditingDidBegin];
         }
@@ -4516,6 +4530,8 @@ NSMutableArray *DelGroupArr;
             txtOfficeState.enabled = YES;
             txtOfficeCountry.hidden = NO;
             btnOfficeCountry.hidden = YES;
+            _outletKotaOffice.hidden=NO;
+            _outletProvinsiOffice.hidden=NO;
             
             txtOfficeState.enabled = NO;
             txtOfficeState.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
@@ -4575,32 +4591,33 @@ NSMutableArray *DelGroupArr;
 }
 
 - (IBAction)actionKotaInfo:(UIButton *)sender{
-    [self resignFirstResponder];
-    [self.view endEditing:YES];
-    
-    NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
-    [ClientProfile setObject:@"YES" forKey:@"isNew"];
-    
-    Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
-    id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
-    [activeInstance performSelector:@selector(dismissKeyboard)];
-    
-    //if (_branchInfo == nil) {
-    _kodePosInfo = [[KodePosInfo alloc] initWithStyle:UITableViewStylePlain];
-    _kodePosInfo.delegate = self;
-    [_kodePosInfo setData:[NSNumber numberWithInt:sender.tag]];
-    if (sender.tag==1) {
-        [_kodePosInfo setProvinsiText:_outletProvinsi.titleLabel.text];
+    if (((sender.tag==1)&&([_txtHomeProvince.text length]>0))||((sender.tag==3)&&([_txtOfficeProvince.text length]>0))){
+        [self resignFirstResponder];
+        [self.view endEditing:YES];
+        
+        NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
+        [ClientProfile setObject:@"YES" forKey:@"isNew"];
+        
+        Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
+        id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
+        [activeInstance performSelector:@selector(dismissKeyboard)];
+        
+        //if (_branchInfo == nil) {
+        _kodePosInfo = [[KodePosInfo alloc] initWithStyle:UITableViewStylePlain];
+        _kodePosInfo.delegate = self;
+        [_kodePosInfo setData:[NSNumber numberWithInt:sender.tag]];
+        if (sender.tag==1) {
+            [_kodePosInfo setProvinsiText:_txtHomeProvince.text];
+        }
+        if (sender.tag==3) {
+            [_kodePosInfo setProvinsiText:_txtOfficeProvince.text];
+        }
+        [_kodePosInfo.tableView reloadData];
+        
+        _kodePosPopover = [[UIPopoverController alloc] initWithContentViewController:_kodePosInfo];
+        //}
+        [_kodePosPopover presentPopoverFromRect:[sender bounds]  inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     }
-    if (sender.tag==3) {
-        [_kodePosInfo setProvinsiText:_outletProvinsiOffice.titleLabel.text];
-    }
-    [_kodePosInfo.tableView reloadData];
-    
-    _kodePosPopover = [[UIPopoverController alloc] initWithContentViewController:_kodePosInfo];
-    //}
-    [_kodePosPopover presentPopoverFromRect:[sender bounds]  inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-    
 }
 
 
@@ -7109,8 +7126,8 @@ NSMutableArray *DelGroupArr;
         NSString *str_counter = [NSString stringWithFormat:@"%i",counter];
         NSString *insertSQL = [NSString stringWithFormat:
                                @"update prospect_profile set \"ProspectName\"=\'%@\', \"ProspectDOB\"=\"%@\", \"GST_registered\"=\"%@\",\"GST_registrationNo\"=\"%@\",\"GST_registrationDate\"=\"%@\",\"GST_exempted\"=\"%@\",  \"ProspectGender\"=\"%@\", \"ResidenceAddress1\"=\"%@\", \"ResidenceAddress2\"=\"%@\", \"ResidenceAddress3\"=\"%@\", \"ResidenceAddressTown\"=\"%@\", \"ResidenceAddressState\"=\"%@\", \"ResidenceAddressPostCode\"=\"%@\", \"ResidenceAddressCountry\"=\"%@\", \"OfficeAddress1\"=\"%@\", \"OfficeAddress2\"=\"%@\", \"OfficeAddress3\"=\"%@\", \"OfficeAddressTown\"=\"%@\",\"OfficeAddressState\"=\"%@\", \"OfficeAddressPostCode\"=\"%@\", \"OfficeAddressCountry\"=\"%@\", \"ProspectEmail\"= \"%@\", \"ProspectOccupationCode\"=\"%@\", \"ExactDuties\"=\"%@\", \"ProspectRemark\"=\"%@\", \"DateModified\"=%@,\"ModifiedBy\"=\"%@\", \"ProspectGroup\"=\"%@\", \"ProspectTitle\"=\"%@\", \"IDTypeNo\"=\"%@\", \"OtherIDType\"=\"%@\", \"OtherIDTypeNo\"=\"%@\", \"Smoker\"=\"%@\", \"AnnualIncome\"=\"%@\", \"BussinessType\"=\"%@\", \"Race\"=\"%@\", \"MaritalStatus\"=\"%@\", \"Nationality\"=\"%@\", \"Religion\"=\"%@\",\"ProspectProfileChangesCounter\"=\"%@\", \"Prospect_IsGrouping\"=\"%@\", \"CountryOfBirth\"=\"%@\",\"NIP\"=\"%@\",\"BranchCode\"=\"%@\",\"BranchName\"=\"%@\",\"KCU\"=\"%@\",\"ReferralSource\"=\"%@\",\"ReferralName\"=\"%@\",\"Kanwil\"=\"%@\",\"ResidenceDistrict\"=\"%@\",\"ResidenceVillage\"=\"%@\",\"ResidenceProvince\"=\"%@\",\"OfficeDistrict\"=\"%@\",\"OfficeVillage\"=\"%@\",\"OfficeProvince\"=\"%@\",\"SourceIncome\"=\"%@\",\"NPWPNo\"=\"%@\",\"ClientSegmentation\"=\"%@\",\"IDExpiryDate\"=\"%@\" where indexNo = \"%@\" "
-                                    , txtrFullName.text, strDOB,GSTRigperson,txtRigNO.text,strGstdate, GSTRigExempted,gender, txtHomeAddr1.text, txtHomeAddr2.text, txtHomeAddr3.text, /*txtHomeTown.text*/_outletKota.titleLabel.text, SelectedStateCode, txtHomePostCode.text, HomeCountry, txtOfficeAddr1.text, txtOfficeAddr2.text, txtOfficeAddr3.text, /*txtOfficeTown.text*/_outletKotaOffice.titleLabel.text, SelectedOfficeStateCode, txtOfficePostCode.text, OffCountry, txtEmail.text, OccupCodeSelected, txtExactDuties.text, txtRemark.text, @"datetime(\"now\", \"+8 hour\")", @"1", group, TitleCodeSelected, txtIDType.text, IDTypeCodeSelected, txtOtherIDType.text, ClientSmoker, txtAnnIncome.text, txtBussinessType.text,race, marital, nation,
-                            religion,str_counter, IsGrrouping, CountryOfBirth, txtNip.text, _outletBranchCode.titleLabel.text, _outletBranchName.titleLabel.text, txtKcu.text, outletReferralSource.titleLabel.text, txtReferralName.text, txtKanwil.text, _txtHomeDistrict.text, _txtHomeVillage.text, /*_txtHomeProvince.text*/_outletProvinsi.titleLabel.text,_txtOfficeDistrict.text, _txtOfficeVillage.text, /*_txtOfficeProvince.text*/_outletProvinsiOffice.titleLabel.text, _outletSourceIncome.titleLabel.text, txtNPWPNo.text, _outletVIPClass.titleLabel.text,strExpiryDate, pp.ProspectID];
+                                    , txtrFullName.text, strDOB,GSTRigperson,txtRigNO.text,strGstdate, GSTRigExempted,gender, txtHomeAddr1.text, txtHomeAddr2.text, txtHomeAddr3.text, txtHomeTown.text/*_outletKota.titleLabel.text*/, SelectedStateCode, txtHomePostCode.text, HomeCountry, txtOfficeAddr1.text, txtOfficeAddr2.text, txtOfficeAddr3.text, txtOfficeTown.text/*_outletKotaOffice.titleLabel.text*/, SelectedOfficeStateCode, txtOfficePostCode.text, OffCountry, txtEmail.text, OccupCodeSelected, txtExactDuties.text, txtRemark.text, @"datetime(\"now\", \"+8 hour\")", @"1", group, TitleCodeSelected, txtIDType.text, IDTypeCodeSelected, txtOtherIDType.text, ClientSmoker, txtAnnIncome.text, txtBussinessType.text,race, marital, nation,
+                            religion,str_counter, IsGrrouping, CountryOfBirth, txtNip.text, _outletBranchCode.titleLabel.text, _outletBranchName.titleLabel.text, txtKcu.text, outletReferralSource.titleLabel.text, txtReferralName.text, txtKanwil.text, _txtHomeDistrict.text, _txtHomeVillage.text, _txtHomeProvince.text/*_outletProvinsi.titleLabel.text*/,_txtOfficeDistrict.text, _txtOfficeVillage.text, _txtOfficeProvince.text/*_outletProvinsiOffice.titleLabel.text*/, _outletSourceIncome.titleLabel.text, txtNPWPNo.text, _outletVIPClass.titleLabel.text,strExpiryDate, pp.ProspectID];
 
         const char *Update_stmt = [insertSQL UTF8String];
         if(sqlite3_prepare_v2(contactDB, Update_stmt, -1, &statement, NULL) == SQLITE_OK) {
@@ -12973,18 +12990,20 @@ NSMutableArray *DelGroupArr;
 #pragma mark - delegate
 -(void)selectedKodePosText:(NSString *)selectText SenderTag:(int)senderTag{
     if (senderTag==0){
+        [_txtHomeProvince setText:selectText];
         //[_outletProvinsi setTitle:selectText forState:UIControlStateNormal];
-        [_outletProvinsi setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",selectText]forState:UIControlStateNormal];
     }
     else if (senderTag==1){
-        [_outletKota setTitle:selectText forState:UIControlStateNormal];
+        [txtHomeTown setText:selectText];
+        //[_outletKota setTitle:selectText forState:UIControlStateNormal];
     }
     else if (senderTag==2){
+        [_txtOfficeProvince setText:selectText];
         //[_outletProvinsiOffice setTitle:selectText forState:UIControlStateNormal];
-        [_outletProvinsiOffice setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",selectText]forState:UIControlStateNormal];
     }
     else if (senderTag==3){
-        [_outletKotaOffice setTitle:selectText forState:UIControlStateNormal];
+        [txtOfficeTown setText:selectText];
+        //[_outletKotaOffice setTitle:selectText forState:UIControlStateNormal];
     }
     
     [_kodePosPopover dismissPopoverAnimated:YES];
