@@ -388,9 +388,9 @@
 
     
 
-    _ExtraPercentsubtotalSekaligus=percent *RatesIntSekaligus*1.0*(_Pertanggungan_Dasar/1000); //(_Pertanggungan_Dasar/1000)*(1.0 * RatesIntSekaligus)*Pertanggungan_ExtrePremi*percent;
-    _ExtraPercentsubtotalYear =percent *RatesInt*1.0*(_Pertanggungan_Dasar/1000);
-    _ExtraPercentsubtotalBulan =percent *RatesInt*0.1*(_Pertanggungan_Dasar/1000);
+    _ExtraPercentsubtotalSekaligus=percent *RatesIntSekaligus*1.0*(_Pertanggungan_Dasar/1000)-_ExtraNumbsubtotalYear; //(_Pertanggungan_Dasar/1000)*(1.0 * RatesIntSekaligus)*Pertanggungan_ExtrePremi*percent;
+    _ExtraPercentsubtotalYear =percent *RatesInt*1.0*(_Pertanggungan_Dasar/1000)-_ExtraNumbsubtotalYear;
+    _ExtraPercentsubtotalBulan =percent *RatesInt*0.1*(_Pertanggungan_Dasar/1000-_ExtraNumbsubtotalBulan);
     
     NSNumber* numberSekaligus=[NSNumber numberWithLongLong:_ExtraPercentsubtotalSekaligus];
     NSNumber* numberYear=[NSNumber numberWithLongLong:_ExtraPercentsubtotalYear];
