@@ -4810,7 +4810,7 @@
 				ORGANIZATIONNAME = "Hong Leong Assurance";
 				TargetAttributes = {
 					C4E9D18F1612C64900016053 = {
-						DevelopmentTeam = 2YT8E2D9X6;
+						DevelopmentTeam = 87JN2XNQTS;
 					};
 				};
 			};
@@ -5820,7 +5820,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bcalife.bless;
 				PRODUCT_NAME = BLESS;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "64cb3c38-7b10-432b-ab19-7416cf6d2833";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = "armv7 armv6 i386";
@@ -5834,7 +5834,7 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Asuransi Jiwa BCA, PT";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5872,7 +5872,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bcalife.bless;
 				PRODUCT_NAME = BLESS;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "954ccc9a-01f8-4583-9ed7-fc4107de17e9";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = "armv7 armv6 i386";
@@ -5925,7 +5925,7 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Asuransi Jiwa BCA, PT";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5966,7 +5966,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bcalife.bless;
 				PRODUCT_NAME = BLESS;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "954ccc9a-01f8-4583-9ed7-fc4107de17e9";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = "armv7 armv6 i386";
