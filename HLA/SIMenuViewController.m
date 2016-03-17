@@ -2790,7 +2790,13 @@ BOOL isFirstLoad;
         [cell.button3 setEnabled:false];
     }
     
-    [cell.button2 setEnabled:false];
+    if ([[dictionaryPOForInsert valueForKey:@"ProductName"] isEqualToString:@"BCA Life Keluargaku"]){
+        [cell.button2 setEnabled:true];
+    }
+    else{
+        [cell.button2 setEnabled:false];
+    }
+    
     
     if ([[_NumberListOfSubMenu objectAtIndex:indexPath.row] isEqualToString:@"0"]){
         [cell.labelNumber setText:@""];
