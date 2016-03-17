@@ -661,15 +661,15 @@
     
     ReaderDocument *document = [ReaderDocument withDocumentFilePath:pdfPathOutput password:nil];
     
-    if (document != nil)
-    {
+    //if (document != nil)
+    //{
         ReaderViewController *readerViewController = [[ReaderViewController alloc] initWithReaderDocument:document];
         readerViewController.delegate = self;
         
         readerViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
         readerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
         [self presentViewController:readerViewController animated:YES completion:Nil];
-    }
+    //}
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView

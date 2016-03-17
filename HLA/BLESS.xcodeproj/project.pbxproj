@@ -335,6 +335,8 @@
 		439985C11C630C4D0003B037 /* VIPClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 439985C01C630C4D0003B037 /* VIPClass.m */; };
 		43B56A8C1C7EDDB100145D35 /* ModelSIPOData.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B56A8B1C7EDDB100145D35 /* ModelSIPOData.m */; };
 		43B56A8F1C7EDDCC00145D35 /* ModelSIMaster.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B56A8E1C7EDDCC00145D35 /* ModelSIMaster.m */; };
+		43C166191C99448500001691 /* ModelKodepos.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C166181C99448500001691 /* ModelKodepos.m */; };
+		43C1661C1C99489000001691 /* KodePosInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C1661B1C99489000001691 /* KodePosInfo.m */; };
 		43DA4BD91C76A59A0038C92C /* ModelAgentProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DA4BD81C76A59A0038C92C /* ModelAgentProfile.m */; };
 		43DA4BE31C770AA90038C92C /* SIMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DA4BE11C770AA90038C92C /* SIMenuTableViewCell.m */; };
 		43DA4BE41C770AA90038C92C /* SIMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43DA4BE21C770AA90038C92C /* SIMenuTableViewCell.xib */; };
@@ -1355,6 +1357,10 @@
 		43B56A8B1C7EDDB100145D35 /* ModelSIPOData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelSIPOData.m; sourceTree = "<group>"; };
 		43B56A8D1C7EDDCC00145D35 /* ModelSIMaster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelSIMaster.h; sourceTree = "<group>"; };
 		43B56A8E1C7EDDCC00145D35 /* ModelSIMaster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelSIMaster.m; sourceTree = "<group>"; };
+		43C166171C99448500001691 /* ModelKodepos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelKodepos.h; sourceTree = "<group>"; };
+		43C166181C99448500001691 /* ModelKodepos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelKodepos.m; sourceTree = "<group>"; };
+		43C1661A1C99489000001691 /* KodePosInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KodePosInfo.h; sourceTree = "<group>"; };
+		43C1661B1C99489000001691 /* KodePosInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KodePosInfo.m; sourceTree = "<group>"; };
 		43DA4BD71C76A59A0038C92C /* ModelAgentProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelAgentProfile.h; sourceTree = "<group>"; };
 		43DA4BD81C76A59A0038C92C /* ModelAgentProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelAgentProfile.m; sourceTree = "<group>"; };
 		43DA4BE01C770AA90038C92C /* SIMenuTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIMenuTableViewCell.h; sourceTree = "<group>"; };
@@ -3361,6 +3367,8 @@
 				432921391C7FFC26000D1064 /* Model_SI_Master.m */,
 				432466521C9000EC001EE22F /* ModelDataReferral.h */,
 				432466531C9000EC001EE22F /* ModelDataReferral.m */,
+				43C166171C99448500001691 /* ModelKodepos.h */,
+				43C166181C99448500001691 /* ModelKodepos.m */,
 			);
 			name = "HLADB Model";
 			sourceTree = "<group>";
@@ -4385,6 +4393,8 @@
 				437343141C6B1CBD001516D9 /* ReferralSource.m */,
 				431F5FDD1C6D781A00A9CA6C /* BranchInfo.h */,
 				431F5FDE1C6D781A00A9CA6C /* BranchInfo.m */,
+				43C1661A1C99489000001691 /* KodePosInfo.h */,
+				43C1661B1C99489000001691 /* KodePosInfo.m */,
 			);
 			name = PopOver;
 			sourceTree = "<group>";
@@ -5216,6 +5226,7 @@
 				C4EA9C07161A76A900D51FE9 /* Logout.m in Sources */,
 				EF059839161A8BD1004A9095 /* NewLAViewController.m in Sources */,
 				EF05983F161A8C85004A9095 /* ListingTbViewController.m in Sources */,
+				43C166191C99448500001691 /* ModelKodepos.m in Sources */,
 				EF059842161A901A004A9095 /* PayorViewController.m in Sources */,
 				EF059845161A9055004A9095 /* SecondLAViewController.m in Sources */,
 				EF059848161A912A004A9095 /* BasicPlanViewController.m in Sources */,
@@ -5312,6 +5323,7 @@
 				EF1ADDEA178285B700996388 /* CustomerPartner.m in Sources */,
 				EF1ADDED1782A73C00996388 /* CustomerPartnerII.m in Sources */,
 				EF1ADDF01782AE3A00996388 /* CustomerChildren.m in Sources */,
+				43C1661C1C99489000001691 /* KodePosInfo.m in Sources */,
 				EF90AFF817891C6300FEC129 /* GroupClass.m in Sources */,
 				C47F40E3178B9B930023D9EF /* EverSpecialViewController.m in Sources */,
 				C47F40E6178BA5230023D9EF /* EverFundMaturityViewController.m in Sources */,

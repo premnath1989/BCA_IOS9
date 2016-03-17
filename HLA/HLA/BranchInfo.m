@@ -21,7 +21,7 @@ NSString *SelectedString;
     self = [super initWithStyle:style];
     if (self) {
         modelPopOver=[[ModelPopover alloc]init];
-        NSDictionary *dict = [modelPopOver getBranchInfo];
+        /*NSDictionary *dict = [modelPopOver getBranchInfo];
         _itemsKodeCabang = [dict objectForKey:@"KodeCabang"];
         _itemsNamaCabang = [dict objectForKey:@"NamaCabang"];
         _itemsStatusCabang = [dict objectForKey:@"StatusCabang"];
@@ -44,19 +44,45 @@ NSString *SelectedString;
         
         CGFloat popoverWidth = largestLabelWidth + 100;
         
-        self.contentSizeForViewInPopover = CGSizeMake(popoverWidth, totalRowsHeight);
+        self.contentSizeForViewInPopover = CGSizeMake(popoverWidth, totalRowsHeight);*/
         
         // Custom initialization
     }
     return self;
 }
 
+-(void)loadData:(NSString *)orderBy{
+    NSDictionary *dict = [modelPopOver getBranchInfo:orderBy];
+    _itemsKodeCabang = [dict objectForKey:@"KodeCabang"];
+    _itemsNamaCabang = [dict objectForKey:@"NamaCabang"];
+    _itemsStatusCabang = [dict objectForKey:@"StatusCabang"];
+    _itemsKanwilCabang = [dict objectForKey:@"KanwilCabang"];
+    
+    self.clearsSelectionOnViewWillAppear = NO;
+    NSInteger rowsCount = [_itemsKodeCabang count];
+    NSInteger singleRowHeight = [self.tableView.delegate tableView:self.tableView
+                                           heightForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    NSInteger totalRowsHeight = rowsCount * singleRowHeight;
+    
+    CGFloat largestLabelWidth = 0;
+    for (NSString *Title in _itemsKodeCabang) {
+        CGSize labelSize = [Title sizeWithFont:[UIFont boldSystemFontOfSize:20.0f]];
+        if (labelSize.width > largestLabelWidth) {
+            largestLabelWidth = labelSize.width;
+        }
+    }
+    CGFloat popoverWidth = largestLabelWidth + 100;
+    self.contentSizeForViewInPopover = CGSizeMake(popoverWidth, totalRowsHeight);
+}
+
 -(void)viewWillAppear:(BOOL)animated{
     sorted = [[NSArray alloc]init];
     if ([_data intValue] == 0){
+        [self loadData:@"KodeCabang"];
         sorted  =  [_itemsKodeCabang sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     }
     else{
+        [self loadData:@"NamaCabang"];
         sorted  =  [_itemsNamaCabang sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     }
 }

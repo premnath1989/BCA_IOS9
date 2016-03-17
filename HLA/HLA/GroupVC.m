@@ -362,7 +362,7 @@ BOOL isSave;
     {
       //  NSString *Row0 =[itemToBeDeleted objectAtIndex:0];
         
-        NSString *GroupAlert=[NSString stringWithFormat:@"Group %@ will be auto deleted by system as no member attached to this group.",ss];
+        NSString *GroupAlert=[NSString stringWithFormat:@"Group %@ akan otomatis dihapus oleh sistem karena tidak adanya anggota pada group ini.",ss];
         
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:GroupAlert delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
 		[alert setTag:8001];

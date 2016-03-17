@@ -28,6 +28,7 @@
 #import "ModelAgentProfile.h"
 #import "ModelDataReferral.h"
 #import "ModelProspectProfile.h"
+#import "KodePosInfo.h"
 
 @class DataTable,DBController;
 @protocol ProspectViewControllerDelegate
@@ -35,7 +36,7 @@
 - (void)selectDataForEdit:(NSString *)indexNo;
 @end
 
-@interface ProspectViewController : UIViewController<IDTypeDelegate,SIDateDelegate,IDTypeDelegate, OccupationListDelegate,TitleDelegate,GroupDelegate, UITextFieldDelegate,UITextInputDelegate, UITextViewDelegate,NatinalityDelegate,RaceDelegate,MaritalStatusDelegate,ReligionDelegate,CountryDelegate,EditProspectDelegate, Country2Delegate,SourceIncomeDelegate,VIPClassDelegate,ReferralSourceDelegate,BranchInfoDelegate>{
+@interface ProspectViewController : UIViewController<IDTypeDelegate,SIDateDelegate,IDTypeDelegate, OccupationListDelegate,TitleDelegate,GroupDelegate, UITextFieldDelegate,UITextInputDelegate, UITextViewDelegate,NatinalityDelegate,RaceDelegate,MaritalStatusDelegate,ReligionDelegate,CountryDelegate,EditProspectDelegate, Country2Delegate,SourceIncomeDelegate,VIPClassDelegate,ReferralSourceDelegate,BranchInfoDelegate,KodeposInfoDelegate>{
     
     NSString *databasePath;
     sqlite3 *contactDB;
@@ -56,6 +57,7 @@
     ModelAgentProfile* modelAgentProfil;
     SourceIncome *_sourceIncome;
     BranchInfo *_branchInfo;
+    KodePosInfo *_kodePosInfo;
     VIPClass *_vipClass;
     ReferralSource *_referralSource;
     //end of add
@@ -74,6 +76,7 @@
     //added by faiz
     UIPopoverController *_sourceIncomePopover;
     UIPopoverController *_branchInfoPopover;
+    UIPopoverController *_kodePosPopover;
     UIPopoverController *_vipClassPopover;
     UIPopoverController *_referralSourcePopover;
     //end of added by faiz
@@ -132,6 +135,12 @@
 @property (strong, nonatomic) ProspectProfile* pp;
 
 @property (strong, nonatomic) IBOutlet UIButton *outletGroup;
+@property (weak, nonatomic) IBOutlet UIButton *outletProvinsi;
+@property (weak, nonatomic) IBOutlet UIButton *outletKota;
+@property (weak, nonatomic) IBOutlet UIButton *outletProvinsiOffice;
+@property (weak, nonatomic) IBOutlet UIButton *outletKotaOffice;
+
+
 @property (weak, nonatomic) IBOutlet UIButton *outletTitle;
 @property (weak, nonatomic) IBOutlet UIButton *outletRace;
 @property (weak, nonatomic) IBOutlet UIButton *outletMaritalStatus;
@@ -229,6 +238,9 @@
 
 -(IBAction)textFieldDidChangeEditing:(UITextField *)sender;
 -(IBAction)textFieldNIPDidEndEditing:(UITextField *)sender;
+
+- (IBAction)actionProvinsiInfo:(id)sender;
+- (IBAction)actionKotaInfo:(UIButton *)sender;
 /*end of added by faiz*/
 
 - (IBAction)ActionforRigdate:(id)sender;

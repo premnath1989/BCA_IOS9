@@ -109,7 +109,7 @@ NSMutableArray *DelGroupArr;
 			if ([gName caseInsensitiveCompare:existing] == NSOrderedSame) {
 //			if ([gName isEqualToString:existing]) {
 				
-				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Group already exist" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil];
+				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Group sudah ada" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil];
 				[alert show];
 				found = YES;
 				break;
@@ -186,14 +186,14 @@ NSMutableArray *DelGroupArr;
     }
 	
 	if (alertC) {
-		NSString *GroupAlert=[NSString stringWithFormat:@"Group %@ will be auto deleted by system as no member attached to this group.",Gname];
+		NSString *GroupAlert=[NSString stringWithFormat:@"Group %@ akan otomatis dihapus oleh sistem karena tidak adanya anggota pada group ini.",Gname];
 		
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:GroupAlert delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
 		[alert setTag:1001];
 		[alert show];
 	}
 	else {
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Are you sure want to delete?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Anda yakin ingin menghapus data?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
 		[alert setTag:1001];
 		[alert show];
 	}
