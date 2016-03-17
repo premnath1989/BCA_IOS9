@@ -158,19 +158,15 @@ id dobtemp;
     UIColor *themeColour = [UIColor colorWithRed:242.0f/255.0f green:113.0f/255.0f blue:134.0f/255.0f alpha:1];
 
     nameField.layer.borderColor = [themeColour CGColor];
-    nameField.layer.masksToBounds = YES;
     nameField.layer.borderWidth = 1.0f;
     
     _BtnTanggalLahir.layer.borderColor = [themeColour CGColor];
-    _BtnTanggalLahir.layer.masksToBounds = YES;
     _BtnTanggalLahir.layer.borderWidth = 1.0f;
     
     btnOccp.layer.borderColor = [themeColour CGColor];
-    btnOccp.layer.masksToBounds = YES;
     btnOccp.layer.borderWidth = 1.0f;
     
     ageField.layer.borderColor = [themeColour CGColor];
-    ageField.layer.masksToBounds = YES;
     ageField.layer.borderWidth = 1.0f;
     
     [self loadDataFromList];
@@ -517,7 +513,7 @@ id dobtemp;
     } else {
         
         nameField.enabled = YES;
-        nameField.backgroundColor = [UIColor whiteColor];
+        nameField.backgroundColor = [UIColor clearColor];
         nameField.textColor = [UIColor blackColor];
         sexSegment.enabled = YES;
         smokerSegment.enabled = YES;

@@ -216,48 +216,37 @@ id dobtanngal;
 - (void) setupUIElementsColor
 {
     _ProdukBtn.layer.borderColor = [themeColour CGColor];
-    _ProdukBtn.layer.masksToBounds = YES;
     _ProdukBtn.layer.borderWidth = 1.0f;
 
     LAAgeField.layer.borderColor = [themeColour CGColor];
-    LAAgeField.layer.masksToBounds = YES;
     LAAgeField.layer.borderWidth = 1.0f;
 
     LANameField.layer.borderColor = [themeColour CGColor];
-    LANameField.layer.masksToBounds = YES;
     LANameField.layer.borderWidth = 1.0f;
     
     _SINumberBCA.layer.borderColor = [themeColour CGColor];
-    _SINumberBCA.layer.masksToBounds = YES;
     _SINumberBCA.layer.borderWidth = 1.0f;
     
     LAHbgTertanggung.layer.borderColor = [themeColour CGColor];
-    LAHbgTertanggung.layer.masksToBounds = YES;
     LAHbgTertanggung.layer.borderWidth = 1.0f;
     
     LAProductName.layer.borderColor = [themeColour CGColor];
-    LAProductName.layer.masksToBounds = YES;
     LAProductName.layer.borderWidth = 1.0f;
     
     btnDOB.layer.borderColor = [themeColour CGColor];
-    btnDOB.layer.masksToBounds = YES;
     btnDOB.layer.borderWidth = 1.0f;
     
     TanggalIllustrasi.layer.borderColor = [themeColour CGColor];
-    TanggalIllustrasi.layer.masksToBounds = YES;
     TanggalIllustrasi.layer.borderWidth = 1.0f;
     
     _BtnHubungan.layer.borderColor = [themeColour CGColor];
-    _BtnHubungan.layer.masksToBounds = YES;
     _BtnHubungan.layer.borderWidth = 1.0f;
 
     btnOccp.layer.borderColor = [themeColour CGColor];
-    btnOccp.layer.masksToBounds = YES;
     btnOccp.layer.borderWidth = 1.0f;
     
     //this button must always be enabled
     btnCommDate.layer.borderColor = [themeColour CGColor];
-    btnCommDate.layer.masksToBounds = YES;
     btnCommDate.layer.borderWidth = 1.0f;
 }
 
