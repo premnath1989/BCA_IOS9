@@ -72,16 +72,6 @@ id dobtemp;
 	} else {
 		Editable = YES;
 	}
- //
-//    nameField.enabled = NO;
-//    sexSegment.enabled = NO;
-//    ageField.enabled = NO;
-//    OccpLoadField.enabled = NO;
-//    CPAField.enabled = NO;
-//    PAField.enabled = NO;
-//    DOBField.enabled = NO;
-//    OccpField.enabled = NO;
-//    self.deleteBtn.hidden = YES;
     
     [nameField setDelegate:self];
     [ageField setDelegate:self];
