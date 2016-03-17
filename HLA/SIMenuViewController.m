@@ -2865,7 +2865,7 @@ BOOL isFirstLoad;
             //[_PremiumController setDictionaryPremium:newDictionaryForBasicPlan];
             //[_PremiumController setDictionaryPremium:newDictionaryForBasicPlan];
 
-
+            [self pullSIData];
             [_PremiumController setPremiumDictionary:newDictionaryForBasicPlan];
             [self.RightView bringSubviewToFront:_PremiumController.view];
             break;

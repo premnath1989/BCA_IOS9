@@ -52,6 +52,7 @@
 }
 
 //- (void)viewDidAppear:(BOOL)animated{
+
 -(void)setPremiumDictionary:(NSMutableDictionary *)premiumDictionary{
     dictionaryPremium = [[NSMutableDictionary alloc]initWithDictionary:premiumDictionary];
    
@@ -61,16 +62,18 @@
     else{
         [viewSubTotal setHidden:NO];
     }
-    _Pertanggungan_Dasar = [[dictionaryPremium valueForKey:@"Number_Sum_Assured"] integerValue];
+    _Pertanggungan_Dasar = [[dictionaryPremium valueForKey:@"Number_Sum_Assured"] longLongValue];
     _PayorAge = [[dictionaryPremium valueForKey:@"PO_Age"]integerValue];;
     _PayorSex = [dictionaryPremium valueForKey:@"PO_Gender"];
     PremiType = [dictionaryPremium valueForKey:@"Payment_Term"];
     RelWithLA = [dictionaryPremium valueForKey:@"RelWithLA"];
     Highlight =[dictionaryPremium valueForKey:@"Payment_Frequency"];
-    Pertanggungan_ExtrePremi = [[dictionaryPremium valueForKey:@"ExtraPremiumTerm"] integerValue];
-    ExtraPremiNumbValue  = [[dictionaryPremium valueForKey:@"ExtraPremiumSum"] integerValue];
+    Pertanggungan_ExtrePremi = [[dictionaryPremium valueForKey:@"ExtraPremiumTerm"] longLongValue];
+    ExtraPremiNumbValue  = [[dictionaryPremium valueForKey:@"ExtraPremiumSum"] longLongValue];
     LASex = [dictionaryPremium valueForKey:@"LA_Gender"];
     _LAAge = [[dictionaryPremium valueForKey:@"LA_Age"]integerValue];
+    _LAAge = [[dictionaryPremium valueForKey:@"LA_Age"]integerValue];
+    _ExtraPercentagePremi = [dictionaryPremium valueForKey:@"ExtraPremiumPercentage"];
 
     
 
@@ -117,8 +120,8 @@
         NSLog(@"Could not open db.");
     }
     
-//    if ([PremiType isEqualToString:@"Premi Tunggal"]||[PremiType isEqualToString:@"Premi 5 tahun"])
-//    {
+    if ([PremiType isEqualToString:@"Premi Tunggal"])
+    {
         if([RelWithLA isEqualToString:@"SELF"])
         {
             AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM basicPremiumRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",_PayorSex,@"HRT",@"S",_PayorAge];
@@ -155,9 +158,9 @@
             
         }
  
-//    }
-//    else
-//    {
+   }
+    else
+    {
         if([RelWithLA isEqualToString:@"SELF"])
         {
             AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM basicPremiumRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",_PayorSex,@"HRT",@"R",_PayorAge];
@@ -194,7 +197,7 @@
             
         }
 
-//    }
+    }
 
     int PaymentModeYear;
     int PaymentModeMonthly;
@@ -232,9 +235,9 @@
     _AnssubtotalYear =(_Pertanggungan_Dasar/1000)*(PaymentModeYear * RatesInt);
     _AnssubtotalBulan =(_Pertanggungan_Dasar/1000)*(0.1 * RatesInt);
     
-    NSNumber* numberSekaligus=[NSNumber numberWithInt:_AnssubtotalSekaligus];
-    NSNumber* numberYear=[NSNumber numberWithInt:_AnssubtotalYear];
-    NSNumber* numberBulan=[NSNumber numberWithInt:_AnssubtotalBulan];
+    NSNumber* numberSekaligus=[NSNumber numberWithLongLong:_AnssubtotalSekaligus];
+    NSNumber* numberYear=[NSNumber numberWithLongLong:_AnssubtotalYear];
+    NSNumber* numberBulan=[NSNumber numberWithLongLong:_AnssubtotalBulan];
     
     [lblAsuransiDasarSekaligus setText:[Premformatter stringFromNumber:numberSekaligus]/*[NSString stringWithFormat:@"%d", _AnssubtotalSekaligus]*/];
     [lblAsuransiDasarTahunan setText:[Premformatter stringFromNumber:numberYear]/*[NSString stringWithFormat:@"%d", _AnssubtotalYear]*/];
@@ -255,17 +258,18 @@
     [database open];
     FMResultSet *results;
     
-    
+    if ([PremiType isEqualToString:@"Premi Tunggal"])
+    {
    
         if([RelWithLA isEqualToString:@"SELF"])
         {
-            AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM EMRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",PayorSex,@"HRT",@"S",_PayorAge];
+            AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM EMRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",_PayorSex,@"HRT",@"S",_PayorAge];
             NSLog(@"query %@",AnsuransiDasarQuery);
             results = [database executeQuery:AnsuransiDasarQuery];
             
             while([results next])
             {
-                if ([PayorSex isEqualToString:@"Male"]||[PayorSex isEqualToString:@"MALE"]){
+                if ([_PayorSex isEqualToString:@"Male"]||[_PayorSex isEqualToString:@"MALE"]){
                     RatesPremiumRateSekaligus  = [results stringForColumn:@"Male"];
                 }
                 else{
@@ -295,18 +299,22 @@
             
             
         }
-
         
+    }
+    else
+    {
+
+    
    
         if([RelWithLA isEqualToString:@"SELF"])
         {
-            AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM EMRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",PayorSex,@"HRT",@"R",_PayorAge];
+            AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM EMRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",_PayorSex,@"HRT",@"R",_PayorAge];
             NSLog(@"query %@",AnsuransiDasarQuery);
             results = [database executeQuery:AnsuransiDasarQuery];
             
             while([results next])
             {
-                if ([PayorSex isEqualToString:@"Male"]||[PayorSex isEqualToString:@"MALE"]){
+                if ([_PayorSex isEqualToString:@"Male"]||[_PayorSex isEqualToString:@"MALE"]){
                     RatesPremiumRate  = [results stringForColumn:@"Male"];
                 }
                 else{
@@ -337,6 +345,7 @@
             
         }
 
+    }
    
     
 //        int PaymentModeYear;
@@ -349,13 +358,45 @@
     double RatesInt = [RatesPremiumRate doubleValue];
     double RatesIntSekaligus = [RatesPremiumRateSekaligus doubleValue];
     
-    _ExtraPercentsubtotalSekaligus =(_Pertanggungan_Dasar/1000)*(1.0 * RatesIntSekaligus)*Pertanggungan_ExtrePremi;
-    _ExtraPercentsubtotalYear =(_Pertanggungan_Dasar/1000)*(1.0 * RatesInt)*Pertanggungan_ExtrePremi;
-    _ExtraPercentsubtotalBulan =(_Pertanggungan_Dasar/1000)*(0.1 * RatesInt)*Pertanggungan_ExtrePremi;
     
-    NSNumber* numberSekaligus=[NSNumber numberWithInt:_ExtraPercentsubtotalSekaligus];
-    NSNumber* numberYear=[NSNumber numberWithInt:_ExtraPercentsubtotalYear];
-    NSNumber* numberBulan=[NSNumber numberWithInt:_ExtraPercentsubtotalBulan];
+    
+    float percent = [_ExtraPercentagePremi floatValue] / 100.0f;
+    
+    double RatesIntSekaligusPerc = percent * RatesIntSekaligus;
+   
+    double RatesIntPerc;
+    
+     if ([PremiType isEqualToString:@"Premi Tunggal"])
+     {
+          RatesIntPerc = percent * RatesIntSekaligus;
+     }
+    else
+    {
+         RatesIntPerc = percent * RatesInt;
+    }
+    
+    
+    long long totalDivide =(_Pertanggungan_Dasar/1000);
+    
+    double valueofTotal =(1.0 * RatesIntPerc);
+    
+    double total =(totalDivide * valueofTotal);
+    //  [_basicPremiField setText:[NSString stringWithFormat:@"%d", total]];
+    
+    
+    double totalB = total * Pertanggungan_ExtrePremi;
+    
+//    double TotalAB = TotalA + totalB;
+
+    
+
+    _ExtraPercentsubtotalSekaligus=percent *RatesIntSekaligus*1.0*(_Pertanggungan_Dasar/1000); //(_Pertanggungan_Dasar/1000)*(1.0 * RatesIntSekaligus)*Pertanggungan_ExtrePremi*percent;
+    _ExtraPercentsubtotalYear =percent *RatesInt*1.0*(_Pertanggungan_Dasar/1000);
+    _ExtraPercentsubtotalBulan =percent *RatesInt*0.1*(_Pertanggungan_Dasar/1000);
+    
+    NSNumber* numberSekaligus=[NSNumber numberWithLongLong:_ExtraPercentsubtotalSekaligus];
+    NSNumber* numberYear=[NSNumber numberWithLongLong:_ExtraPercentsubtotalYear];
+    NSNumber* numberBulan=[NSNumber numberWithLongLong:_ExtraPercentsubtotalBulan];
     
     [lblExtraPremiPercentSekaligus setText:[Premformatter stringFromNumber:numberSekaligus]];
     [lblExtraPremiPercentTahunan setText:[Premformatter stringFromNumber:numberYear]];
@@ -364,7 +405,7 @@
     
     if ([Highlight isEqualToString:@"Pembayaran Sekaligus"])
     {
-        lblExtraPremiPercentSekaligus.textColor = [UIColor colorWithRed:250.0f/255.0f green:175.0f/255.0f blue:50.0f/255.0f alpha:1];
+    lblExtraPremiPercentSekaligus.textColor = [UIColor colorWithRed:250.0f/255.0f green:175.0f/255.0f blue:50.0f/255.0f alpha:1];
         lblExtraPremiPercentBulanan.textColor = [UIColor clearColor];//[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
         lblExtraPremiPercentTahunan.textColor = [UIColor clearColor];//[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
         
@@ -426,14 +467,13 @@
     
     
 //    int RatesInt = [RatesPremiumRate intValue];
-    
-    
+
     
     _ExtraNumbsubtotalYear =(ExtraPremiNumbValue* 1.0) *(_Pertanggungan_Dasar/1000);
     _ExtraNumbsubtotalBulan =(ExtraPremiNumbValue* 0.1) *(_Pertanggungan_Dasar/1000);
     
-    NSNumber* numberYear=[NSNumber numberWithInt:_ExtraNumbsubtotalYear];
-    NSNumber* numberBulan=[NSNumber numberWithInt:_ExtraNumbsubtotalBulan];
+    NSNumber* numberYear=[NSNumber numberWithLongLong:_ExtraNumbsubtotalYear];
+    NSNumber* numberBulan=[NSNumber numberWithLongLong:_ExtraNumbsubtotalBulan];
 
     [lblExtraPremiNumberTahunan setText:[Premformatter stringFromNumber:numberYear]];
     [lblExtraPremiNumberSekaligus setText:[Premformatter stringFromNumber:numberYear]];
@@ -467,19 +507,19 @@
 
 -(void)SubTotal
 {
-    int totalYear = (_AnssubtotalYear + _ExtraNumbsubtotalYear + _ExtraPercentsubtotalYear);
+    long long totalYear = (_AnssubtotalYear + _ExtraNumbsubtotalYear + _ExtraPercentsubtotalYear);
     
-    int totalBulanan = (_AnssubtotalBulan + _ExtraNumbsubtotalBulan + _ExtraPercentsubtotalBulan);
+    long long totalBulanan = (_AnssubtotalBulan + _ExtraNumbsubtotalBulan + _ExtraPercentsubtotalBulan);
     
-    int totalSekaligus = (_AnssubtotalSekaligus + _ExtraNumbsubtotalSekaligus + _ExtraPercentsubtotalSekaligus);
+    long long totalSekaligus = (_AnssubtotalSekaligus + _ExtraNumbsubtotalSekaligus + _ExtraPercentsubtotalSekaligus);
     
     NSString *year =[@(totalYear)stringValue];
     NSString *Bulan =[@(totalBulanan)stringValue];
     NSString *Sekaligus =[@(totalSekaligus)stringValue];
 
-    NSNumber* numberSekaligus=[NSNumber numberWithInt:totalSekaligus];
-    NSNumber* numberYear=[NSNumber numberWithInt:totalYear];
-    NSNumber* numberBulan=[NSNumber numberWithInt:totalBulanan];
+    NSNumber* numberSekaligus=[NSNumber numberWithLongLong:totalSekaligus];
+    NSNumber* numberYear=[NSNumber numberWithLongLong:totalYear];
+    NSNumber* numberBulan=[NSNumber numberWithLongLong:totalBulanan];
 
     [lblSubtotalBulanan setText:[Premformatter stringFromNumber:numberBulan]];
     [lblSubtotalSekaligus setText:[Premformatter stringFromNumber:numberSekaligus]];

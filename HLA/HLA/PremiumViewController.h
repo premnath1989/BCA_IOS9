@@ -75,23 +75,23 @@
     IBOutlet UILabel *lblTotalTahunan;
     IBOutlet UILabel *lblTotalBulanan;
     IBOutlet UILabel *lblTotalSekaligus;
-    int Pertanggungan_Dasar;
-    int Pertanggungan_ExtrePremi;
+    double Pertanggungan_Dasar;
+    double Pertanggungan_ExtrePremi;
     NSString *PayorSex;
     NSString *PremiType;
     int *PayorAge;
     int *LAAge;
-    double AnssubtotalBulan;
-    double AnssubtotalYear;
-    double AnssubtotalSekaligus;
-    int ExtraPercentsubtotalBulan;
-    int ExtraPercentsubtotalYear;
-    int ExtraPercentsubtotalSekaligus;
-    int ExtraNumbsubtotalBulan;
-    int ExtraNumbsubtotalYear;
-    int ExtraNumbsubtotalSekaligus;
-    int ExtraPremiNumbValue;
-    NSString *Highlight;
+    long long AnssubtotalBulan;
+    long long AnssubtotalYear;
+    long long AnssubtotalSekaligus;
+    long long ExtraPercentsubtotalBulan;
+    long long ExtraPercentsubtotalYear;
+    long long ExtraPercentsubtotalSekaligus;
+    long long ExtraNumbsubtotalBulan;
+    long long ExtraNumbsubtotalYear;
+    long long ExtraNumbsubtotalSekaligus;
+    double ExtraPremiNumbValue;
+    NSString *Highlight,*ExtraPercentagePremi;
 
 
     NSMutableDictionary *dictionaryPremium;
@@ -117,21 +117,21 @@
 @property (nonatomic,strong) id requestSINo;
 @property (nonatomic, assign,readwrite) int requestMOP;
 @property (nonatomic, assign,readwrite) int requestTerm;
-@property (nonatomic, assign,readwrite) int Pertanggungan_Dasar;
-@property (nonatomic, assign,readwrite) int Pertanggungan_ExtrePremi;
+@property (nonatomic, assign,readwrite) double Pertanggungan_Dasar;
+@property (nonatomic, assign,readwrite) double Pertanggungan_ExtrePremi;
 @property (nonatomic,strong) NSString *PayorSex,*PremiType,*RelWithLA,*LASex;
 @property (nonatomic, assign,readwrite) int PayorAge;
 @property (nonatomic, assign,readwrite) int LAAge;
-@property (nonatomic, assign,readwrite) int AnssubtotalBulan;
-@property (nonatomic, assign,readwrite) int AnssubtotalYear;
-@property (nonatomic, assign,readwrite) int AnssubtotalSekaligus;
-@property (nonatomic, assign,readwrite) int ExtraPercentsubtotalBulan;
-@property (nonatomic, assign,readwrite) int ExtraPercentsubtotalYear;
-@property (nonatomic, assign,readwrite) int ExtraPercentsubtotalSekaligus;
-@property (nonatomic, assign,readwrite) int ExtraNumbsubtotalBulan;
-@property (nonatomic, assign,readwrite) int ExtraNumbsubtotalYear;
-@property (nonatomic, assign,readwrite) int ExtraNumbsubtotalSekaligus;
-@property (nonatomic, assign,readwrite) int ExtraPremiNumbValue;
+@property (nonatomic, assign,readwrite) long long AnssubtotalBulan;
+@property (nonatomic, assign,readwrite) long long AnssubtotalYear;
+@property (nonatomic, assign,readwrite) long long AnssubtotalSekaligus;
+@property (nonatomic, assign,readwrite) long long ExtraPercentsubtotalBulan;
+@property (nonatomic, assign,readwrite) long long ExtraPercentsubtotalYear;
+@property (nonatomic, assign,readwrite) long long ExtraPercentsubtotalSekaligus;
+@property (nonatomic, assign,readwrite) long long ExtraNumbsubtotalBulan;
+@property (nonatomic, assign,readwrite) long long ExtraNumbsubtotalYear;
+@property (nonatomic, assign,readwrite) long long ExtraNumbsubtotalSekaligus;
+@property (nonatomic, assign,readwrite) double ExtraPremiNumbValue;
 
 
 @property (nonatomic,strong) id requestBasicSA;
@@ -150,7 +150,7 @@
 @property (nonatomic,strong) NSString *getBasicHL;
 @property (nonatomic,strong) NSString *getBasicTempHL;
 @property (nonatomic,strong) NSString *getPlanCode;
-@property (nonatomic,strong) NSString *getBasicPlan;
+@property (nonatomic,strong) NSString *getBasicPlan,*ExtraPercentagePremi;
 //--
 @property (nonatomic, assign,readwrite) double basicRate;
 @property (nonatomic, assign,readwrite) int age;

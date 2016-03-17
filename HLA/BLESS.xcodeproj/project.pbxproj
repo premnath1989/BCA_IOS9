@@ -50,6 +50,7 @@
 		170BB47D1C30DAE600CE75DF /* Summary(PolicyDetails).storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 170BB47C1C30DAE600CE75DF /* Summary(PolicyDetails).storyboard */; };
 		173E81601C28F9C600BDAAE9 /* EappListing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 173E815F1C28F9C600BDAAE9 /* EappListing.storyboard */; };
 		174BAA451C86799B002EEEEC /* IlustrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 174BAA441C86799B002EEEEC /* IlustrationViewController.m */; };
+		174DD2551C9A54C400D56274 /* Pembelianke.m in Sources */ = {isa = PBXBuildFile; fileRef = 174DD2541C9A54C400D56274 /* Pembelianke.m */; };
 		175E3A561C7BFE4A000EC161 /* MasaPembayaran.m in Sources */ = {isa = PBXBuildFile; fileRef = 175E3A551C7BFE4A000EC161 /* MasaPembayaran.m */; };
 		175E3A5A1C7C243B000EC161 /* Frekeunsi.m in Sources */ = {isa = PBXBuildFile; fileRef = 175E3A581C7C243B000EC161 /* Frekeunsi.m */; };
 		178765D91C7409F00036F31A /* menu_selectoption.png in Resources */ = {isa = PBXBuildFile; fileRef = 178765D81C7409F00036F31A /* menu_selectoption.png */; };
@@ -890,6 +891,8 @@
 		173E815F1C28F9C600BDAAE9 /* EappListing.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EappListing.storyboard; sourceTree = "<group>"; };
 		174BAA431C86799B002EEEEC /* IlustrationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IlustrationViewController.h; sourceTree = "<group>"; };
 		174BAA441C86799B002EEEEC /* IlustrationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IlustrationViewController.m; sourceTree = "<group>"; };
+		174DD2531C9A54C400D56274 /* Pembelianke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pembelianke.h; sourceTree = "<group>"; };
+		174DD2541C9A54C400D56274 /* Pembelianke.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pembelianke.m; sourceTree = "<group>"; };
 		175E3A541C7BFE4A000EC161 /* MasaPembayaran.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasaPembayaran.h; sourceTree = "<group>"; };
 		175E3A551C7BFE4A000EC161 /* MasaPembayaran.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasaPembayaran.m; sourceTree = "<group>"; };
 		175E3A571C7C243B000EC161 /* Frekeunsi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Frekeunsi.h; sourceTree = "<group>"; };
@@ -4561,6 +4564,8 @@
 				175E3A551C7BFE4A000EC161 /* MasaPembayaran.m */,
 				175E3A571C7C243B000EC161 /* Frekeunsi.h */,
 				175E3A581C7C243B000EC161 /* Frekeunsi.m */,
+				174DD2531C9A54C400D56274 /* Pembelianke.h */,
+				174DD2541C9A54C400D56274 /* Pembelianke.m */,
 				175E3A591C7C243B000EC161 /* MasaPembayaran.h */,
 				EFB3D58A1686AE2200A7B517 /* SecondLAHandler.m */,
 				EF05983E161A8C85004A9095 /* ListingTbViewController.h */,
@@ -4805,7 +4810,7 @@
 				ORGANIZATIONNAME = "Hong Leong Assurance";
 				TargetAttributes = {
 					C4E9D18F1612C64900016053 = {
-						DevelopmentTeam = 87JN2XNQTS;
+						DevelopmentTeam = 2YT8E2D9X6;
 					};
 				};
 			};
@@ -5294,6 +5299,7 @@
 				42867E9A175F2D93001CE661 /* IDTypeViewController.m in Sources */,
 				17A7D83E1C5B3EE50016EE7F /* setting.m in Sources */,
 				42867EB3175F75E6001CE661 /* TitleViewController.m in Sources */,
+				174DD2551C9A54C400D56274 /* Pembelianke.m in Sources */,
 				C4E9F3D21765E2430070EA8A /* EverSeriesMasterViewController.m in Sources */,
 				EFEB7A5B1766F2DF004FF3CE /* CFFTabBarController.m in Sources */,
 				EFEB7A5C1766F2DF004FF3CE /* CFFTabBar.m in Sources */,

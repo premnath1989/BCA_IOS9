@@ -98,6 +98,8 @@ id dobtanngal;
     NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
     
     [TanggalIllustrasi setTitle:dateString forState:UIControlStateNormal];
+    
+    TanggalIllustrasi.enabled = NO;
 
     
 //    NSString*test;

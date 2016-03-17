@@ -61,6 +61,7 @@
 @synthesize requestOccpClass,OccpClass,SavedMOP,yearlyIncomeHLAIB,cashDividendHLAIB,cashDividendHLACP;
 @synthesize advanceYearlyIncomeHLAIB,advanceYearlyIncomeHLACP,maxAge,occLoad,LSDRate,LUnits,occCPA_PA;
 @synthesize planList = _planList;
+@synthesize Pembelianke = _Pembelianke;
 @synthesize _masaPembayaran = _masaPembayaran;
 @synthesize planPopover = _planPopover;
 @synthesize labelParAcc,labelParPayout,labelPercent1,labelPercent2,parAccField,parPayoutField,getParAcc,getParPayout;
@@ -551,12 +552,51 @@ bool WPTPD30RisDeleted = FALSE;
     else{
         if ([sender.text length]>0){
             [self setActiveTextField:_extraPremiPercentField Active:NO];
+            [self ExtraNumbPremi];
         }
         else{
             [self setActiveTextField:_extraPremiPercentField Active:YES];
             [self setActiveTextField:_extraPremiNumberField Active:YES];
         }
     }
+    
+    
+}
+
+-(void)ExtraNumbPremi
+{
+    double  ExtraPremiNumb = [_extraPremiNumberField.text doubleValue];
+    
+    double PaymentMode;
+    
+    if ([FRekeunsiPembayaranMode isEqualToString:@"Pembayaran Sekaligus"]||[FRekeunsiPembayaranMode isEqualToString:@"Tahunan"])
+    {
+        PaymentMode = 1;
+    }
+    if ([FRekeunsiPembayaranMode isEqualToString:@"Bulanan"])
+    {
+        PaymentMode = 0.1;
+    }
+
+    
+    
+    long long Extraprem =(ExtraPremiNumb* PaymentMode) *(BasisSumAssured/1000);
+    
+    NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setFormatterBehavior: NSNumberFormatterBehavior10_4];
+    [numberFormatter setNumberStyle: NSNumberFormatterDecimalStyle];
+    [numberFormatter setRoundingMode:NSNumberFormatterRoundUp];
+    [numberFormatter setMaximumFractionDigits:0];
+    [numberFormatter setMinimumFractionDigits:0];
+    
+    NSString *numberExtraBasicPremi = [numberFormatter stringFromNumber: [NSNumber numberWithDouble:Extraprem]];
+
+
+    
+    
+    [_extraBasicPremiField setText:[NSString stringWithFormat:@"%@", numberExtraBasicPremi]];
+    
+
 }
 
 -(void)setActiveTextField:(UITextField *)textField Active:(BOOL)active{
@@ -601,8 +641,6 @@ bool WPTPD30RisDeleted = FALSE;
         _masaPembayaran.TradOrEver = @"TRAD";
         _masaPembayaran.delegate = self;
         self.planPopover = [[UIPopoverController alloc] initWithContentViewController:_masaPembayaran];
-        
-        
         
     }
     else
@@ -817,6 +855,32 @@ bool WPTPD30RisDeleted = FALSE;
 
     
 }
+
+- (IBAction)KKLKPembelianKe:(id)sender
+{
+    [self resignFirstResponder];
+    [self.view endEditing:YES];
+    
+    Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
+    id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
+    [activeInstance performSelector:@selector(dismissKeyboard)];
+    
+    if (_Pembelianke == nil) {
+        self.Pembelianke = [[PembeliaKe alloc] init];
+        self.Pembelianke.TradOrEver = @"TRAD";
+        _Pembelianke.delegate = self;
+        self.planPopover = [[UIPopoverController alloc] initWithContentViewController:_Pembelianke];
+    }
+    
+    CGRect rect = [sender frame];
+    rect.origin.y = [sender frame].origin.y + 30;
+    
+    [self.planPopover setPopoverContentSize:CGSizeMake(350.0f, 200.0f)];
+    [self.planPopover presentPopoverFromRect:rect  inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    
+
+}
+
 
 -(void)PremiDasarActKeluargaku: (NSString *)PaymentDesc
 {
@@ -1172,7 +1236,6 @@ bool WPTPD30RisDeleted = FALSE;
 
     }
     
-
     if ([FRekeunsiPembayaranMode isEqualToString:@"Pembayaran Sekaligus"]||[FRekeunsiPembayaranMode isEqualToString:@"Tahunan"])
     {
         PaymentMode = 1;
@@ -1181,6 +1244,7 @@ bool WPTPD30RisDeleted = FALSE;
     {
         PaymentMode = 0.1;
     }
+    _PAymentModeForInt = PaymentMode;
     
     double RatesInt0 = [RatesPremiumRate doubleValue];
     
@@ -1257,7 +1321,14 @@ bool WPTPD30RisDeleted = FALSE;
         [_totalPremiWithLoadingField setText:[dictPremiData valueForKey:@"TotalPremiumLoading"]];
         [_masaPembayaranButton setTitle:[dictPremiData valueForKey:@"Payment_Term"] forState:UIControlStateNormal];
         [_frekuensiPembayaranButton setTitle:[dictPremiData valueForKey:@"Payment_Frequency"] forState:UIControlStateNormal];
-
+        FRekeunsiPembayaranMode = [dictPremiData valueForKey:@"Payment_Frequency"];
+        
+        
+        NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+        f.numberStyle = NSNumberFormatterDecimalStyle;
+        NSNumber *myNumber = [f numberFromString:[dictPremiData valueForKey:@"Sum_Assured"]];
+        
+        BasisSumAssured = [myNumber longLongValue];
         [_delegate setBasicPlanDictionaryWhenLoadFromList:dictPremiData];
     }
 }
@@ -1454,19 +1525,27 @@ bool WPTPD30RisDeleted = FALSE;
 }
 
 -(NSMutableDictionary *)setDataBasicPlan{
-    NSMutableDictionary *dictionaryBasicPlan=[[NSMutableDictionary alloc]initWithObjectsAndKeys:
-                                              yearlyIncomeField.text,@"Sum_Assured",
-                                              _masaPembayaranButton.titleLabel.text,@"Payment_Term",
-                                              _frekuensiPembayaranButton.titleLabel.text,@"Payment_Frequency",
-                                              _basicPremiField.text,@"PremiumPolicyA",
-                                              _extraPremiPercentField.text,@"ExtraPremiumPercentage",
-                                              _extraPremiNumberField.text,@"ExtraPremiumSum",
-                                              _masaExtraPremiField.text,@"ExtraPremiumTerm",
-                                              _extraBasicPremiField.text,@"ExtraPremiumPolicy",
-                                              _totalPremiWithLoadingField.text,@"TotalPremiumLoading",
-                                              @"0",@"SubTotalPremium",nil];
-    return dictionaryBasicPlan;
-}
+    @try {
+        NSMutableDictionary *dictionaryBasicPlan=[[NSMutableDictionary alloc]initWithObjectsAndKeys:
+                                                  yearlyIncomeField.text,@"Sum_Assured",
+                                                  _masaPembayaranButton.titleLabel.text,@"Payment_Term",
+                                                  _frekuensiPembayaranButton.titleLabel.text,@"Payment_Frequency",
+                                                  _basicPremiField.text,@"PremiumPolicyA",
+                                                  _extraPremiPercentField.text,@"ExtraPremiumPercentage",
+                                                  _extraPremiNumberField.text,@"ExtraPremiumSum",
+                                                  _masaExtraPremiField.text,@"ExtraPremiumTerm",
+                                                  _extraBasicPremiField.text,@"ExtraPremiumPolicy",
+                                                  _totalPremiWithLoadingField.text,@"TotalPremiumLoading",
+                                                  @"0",@"SubTotalPremium",nil];
+        return dictionaryBasicPlan;
+        
+    }
+    @catch (NSException *exception) {
+        
+    }
+    @finally {
+        
+    }}
 
 - (IBAction)doSavePlan:(id)sender
 {
@@ -1612,6 +1691,9 @@ bool WPTPD30RisDeleted = FALSE;
         _basicPremiField.text = result;
     }
 }
+
+
+
 
 -(void)PremiDasarIncomeChangeB:(NSString *)BAsicPremiDasarB
 {
@@ -4368,8 +4450,8 @@ bool WPTPD30RisDeleted = FALSE;
     NSString *validationMasaPembayaran=@"Masa Pembayaran harus diisi";
     NSString *validationFrekuensiPembayaran=@"Frekuensi Pembayaran harus diisi";
     NSString *validationMasaExtraPremi=@"Masa Extra Premi harus diisi";
-    NSString *validationUanglebih=@"Uang Pertangungan Dasar Min:Rp1,000,000,000.00 Max:Rp300,000,000,000.00";
-    NSString *validationUanglebihkk=@"Uang Pertangungan Dasar Min:Rp30,000,000.00 Max:Rp1,500,000,000.00";
+    NSString *validationUanglebih=@"Uang Pertangungan Dasar Min:Rp1,000,000,000 Max:Rp300,000,000,000";
+    NSString *validationUanglebihkk=@"Uang Pertangungan Dasar Min:Rp30,000,000 Max:Rp1,500,000,000";
     NSString *validationExtraPremi=@"Extra Premi harus 25%,50%,75%,100%.....300%";
     NSString *validationExtraNumber=@"Extra Premi 0/100 harus 1-10";
     

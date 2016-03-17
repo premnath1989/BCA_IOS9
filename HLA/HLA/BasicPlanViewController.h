@@ -12,6 +12,7 @@
 #import "PlanList.h"
 #import "MasaPembayaran.h"
 #import "Frekeunsi.h"
+#import "Pembelianke.h"
 #import "BasicPlanHandler.h"
 #import "PayorHandler.h"
 #import "SecondLAHandler.h"
@@ -38,7 +39,7 @@
 -(void)setBasicPlanDictionaryWhenLoadFromList:(NSDictionary *)basicPlan;
 @end
 
-@interface BasicPlanViewController : UIViewController <UITextFieldDelegate,PlanListDelegate,MasaPembayaranDelegate,FrekeunsiDelegate>{
+@interface BasicPlanViewController : UIViewController <UITextFieldDelegate,PlanListDelegate,MasaPembayaranDelegate,FrekeunsiDelegate,PembeliaKeDelegate>{
     NSString *databasePath;
     NSString *RatesDatabasePath;
     sqlite3 *contactDB;
@@ -50,6 +51,7 @@
     PlanList *_planList;
     MasaPembayaran*_masaPembayaran;
     Frekeunsi*_frekuensi;
+    PembeliaKe*_Pembelianke;
     
     BOOL showHL;
     BOOL useExist;
@@ -67,11 +69,12 @@
     
     NSString *prevPlanChoose;
     NSString *planHSPII;
-    NSString *OccpCat,*FrekuensiPembayaranChecking,*FRekeunsiPembayaranMode;
+    NSString *OccpCat,*FrekuensiPembayaranChecking,*FRekeunsiPembayaranMode,*PembeliaKeBayaranChecking;
     NSString *YearlyIncm;
     
     int policyTermSegInt;
     int maxGycc;
+    int PAymentModeForInt;
     
     NSMutableArray *LRidHL1KTerm;
     NSMutableArray *LRidHL100Term;
@@ -82,12 +85,14 @@
     UIColor *themeColour;
     NSString *premiType;
     NSString *PlanType;
+    
 }
 
 @property (nonatomic, retain) UIPopoverController *planPopover;
 @property (nonatomic, retain) PlanList *planList;
 @property (nonatomic, retain) MasaPembayaran *_masaPembayaran;
 @property (nonatomic, retain) Frekeunsi*_frekuensi;
+@property (nonatomic, retain) PembeliaKe*Pembelianke;
 @property (nonatomic,strong) id <BasicPlanViewControllerDelegate> delegate;
 @property (nonatomic,strong) BasicPlanHandler *basicBH;
 @property (nonatomic,strong) PayorHandler *basicPH;
@@ -99,6 +104,7 @@
 @property (nonatomic, assign,readwrite) int requestAge;
 @property (nonatomic,strong) id requestOccpCode;
 @property (nonatomic, assign,readwrite) int requestOccpClass;
+@property (nonatomic, assign,readwrite) int PAymentModeForInt;
 @property (nonatomic,strong) id requestSINo;
 @property (nonatomic, assign,readwrite) int requestIDProf;
 @property (nonatomic, assign,readwrite) int requestIDPay;
@@ -207,6 +213,7 @@
 -(IBAction)MasaExtraPremiTextFieldDidBegin:(UITextField *)sender;
 -(IBAction)MasaExtraPremiTextFieldDidEnd:(UITextField *)sender;
 -(IBAction)validationExtraPremiField:(UITextField *)sender;
+- (bool)validationDataBasicPlan;
 //end of added by faiz
 
 //for SINo
