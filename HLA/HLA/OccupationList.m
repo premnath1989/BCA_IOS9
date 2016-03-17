@@ -146,7 +146,7 @@ NSString *SelectedString;
                 cell.textLabel.text = [NSString stringWithFormat:@"%@ (%@)", OccuDesc, @"D"];
             }
             else{
-                cell.textLabel.text = [NSString stringWithFormat:@"%@ (%@)", OccuDesc, OccuClass];
+                cell.textLabel.text = [NSString stringWithFormat:@"%@", OccuDesc];
             }
         }
         
