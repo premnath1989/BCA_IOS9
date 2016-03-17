@@ -30,6 +30,8 @@
 @synthesize ExtraPremiDasarLBL;
 @synthesize MasaExtraPremiLBL;
 @synthesize ExtraPremiDasarNumberLBL;
+@synthesize ExtraPremiTotal;
+@synthesize ExtraPrecenttotal;
 @synthesize minSALabel;
 @synthesize maxSALabel;
 @synthesize healthLoadingView;
@@ -582,6 +584,12 @@ bool WPTPD30RisDeleted = FALSE;
     
     long long Extraprem =(ExtraPremiNumb* PaymentMode) *(BasisSumAssured/1000);
     
+    ExtraPremiTotal = Extraprem;
+    
+    long long ExtraPrem1 = ExtraPremiTotal + ExtraPrecenttotal;
+    
+    long long Alltotal = TotalA +ExtraPrem1;
+    
     NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setFormatterBehavior: NSNumberFormatterBehavior10_4];
     [numberFormatter setNumberStyle: NSNumberFormatterDecimalStyle];
@@ -589,12 +597,11 @@ bool WPTPD30RisDeleted = FALSE;
     [numberFormatter setMaximumFractionDigits:0];
     [numberFormatter setMinimumFractionDigits:0];
     
-    NSString *numberExtraBasicPremi = [numberFormatter stringFromNumber: [NSNumber numberWithDouble:Extraprem]];
-
-
-    
+    NSString *numberExtraBasicPremi = [numberFormatter stringFromNumber: [NSNumber numberWithDouble:ExtraPrem1]];
     
     [_extraBasicPremiField setText:[NSString stringWithFormat:@"%@", numberExtraBasicPremi]];
+    
+    [_totalPremiWithLoadingField setText:[NSString stringWithFormat:@"%lld", Alltotal]];
     
 
 }
@@ -865,9 +872,8 @@ bool WPTPD30RisDeleted = FALSE;
     id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
     [activeInstance performSelector:@selector(dismissKeyboard)];
     
-    if (_Pembelianke == nil) {
+    if (_Pembelianke.title == nil) {
         self.Pembelianke = [[PembeliaKe alloc] init];
-        self.Pembelianke.TradOrEver = @"TRAD";
         _Pembelianke.delegate = self;
         self.planPopover = [[UIPopoverController alloc] initWithContentViewController:_Pembelianke];
     }
@@ -1263,7 +1269,19 @@ bool WPTPD30RisDeleted = FALSE;
     
      double totalB = total * masaExtraPremiBTotal;
     
-    double TotalAB = TotalA + totalB;
+    //prem//
+    
+    long long Extraprem =totalB;
+    
+    ExtraPrecenttotal = Extraprem;
+    
+    long long ExtraPrem1 = ExtraPremiTotal + ExtraPrecenttotal;
+
+    
+    
+    double TotalAB = TotalA + ExtraPrem1;
+    
+    
     
     NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setFormatterBehavior: NSNumberFormatterBehavior10_4];
@@ -1272,7 +1290,8 @@ bool WPTPD30RisDeleted = FALSE;
     [numberFormatter setMaximumFractionDigits:0];
     [numberFormatter setMinimumFractionDigits:0];
     
-    NSString *numberExtraBasicPremi = [numberFormatter stringFromNumber: [NSNumber numberWithDouble:totalB]];
+    NSString *numberExtraBasicPremi = [numberFormatter stringFromNumber: [NSNumber numberWithDouble:ExtraPrem1]];
+    
     NSString *totalPremiWithLoading = [numberFormatter stringFromNumber: [NSNumber numberWithDouble:TotalAB]];
     
     [_extraBasicPremiField setText:[NSString stringWithFormat:@"%@", numberExtraBasicPremi]];
@@ -4886,6 +4905,15 @@ bool WPTPD30RisDeleted = FALSE;
     
 }
 #pragma mark - delegate
+
+-(void)PlanPembelianKe:(PembeliaKe *)inController didSelectCode:(NSString *)aaCode andDesc:(NSString *)aaDesc;
+{
+    
+    [_KKLKPembelianKeBtn setTitle:aaDesc forState:UIControlStateNormal];
+    [self.planPopover dismissPopoverAnimated:YES];
+    // getPlanCode = aaCode;
+
+}
 
 -(void)Planlisting:(MasaPembayaran *)inController didSelectCode:(NSString *)aaCode andDesc:(NSString *)aaDesc{
   

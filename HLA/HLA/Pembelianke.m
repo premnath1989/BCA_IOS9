@@ -25,12 +25,12 @@
 {
     [super viewDidLoad];
     
-    if ([Frekuensi isEqualToString:@"Premi Tunggal"])
-    {
+//    if ([Frekuensi isEqualToString:@"Trad"])
+//    {
         ListOfPlan = [[NSMutableArray alloc] initWithObjects: @"0",@"1",@"2",@"3",@"4",@"5", nil ];
         ListOfCode = [[NSMutableArray alloc] initWithObjects:@"",@"",@"",@"",@"",@"", nil ];
 
-    }
+   // }
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

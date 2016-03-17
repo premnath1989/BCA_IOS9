@@ -61,6 +61,8 @@
 	AppDelegate* appDelegate;
 	BOOL Editable;
     double maxSAFactor;
+    long long ExtraPremiTotal;
+    long long ExtraPrecenttotal;
     
     NSMutableArray *arrExistRiderCode;
     NSMutableArray *arrExistPlanChoice;
@@ -125,6 +127,8 @@
 
 @property (nonatomic, assign,readwrite) int ageClient;
 @property (nonatomic, assign,readwrite) long long BasisSumAssured;
+@property (nonatomic, assign,readwrite) long long ExtraPremiTotal;
+@property (nonatomic, assign,readwrite) long long ExtraPrecenttotal;
 @property(nonatomic , retain) NSString *OccpCode;
 @property (nonatomic, assign,readwrite) int OccpClass;
 @property (nonatomic, copy) NSString *SINo;
