@@ -449,9 +449,16 @@ static NSString *labelVers;
 
 - (IBAction)btnLogin:(id)sender {
     
-    if (txtUsername.text.length <= 0 || txtPassword.text.length <=0 ) {
-        
+    if (txtUsername.text.length <= 0 && txtPassword.text.length <=0 ) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Username dan password harap di isi" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        alert.tag = USERNAME_PASSWORD_VALIDATION;
+        [alert show];
+    }else if(txtUsername.text.length <= 0 && txtPassword.text.length != 0 ){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Username harap di isi" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        alert.tag = USERNAME_PASSWORD_VALIDATION;
+        [alert show];
+    }else if(txtUsername.text.length != 0 && txtPassword.text.length <= 0 ){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Password harap di isi" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         alert.tag = USERNAME_PASSWORD_VALIDATION;
         [alert show];
     }else{
@@ -692,45 +699,14 @@ static NSString *labelVers;
     zzz.indexNo = self.indexNo;
     zzz.userRequest = agentID;
     
-    if( [[self getDeviceStatus] isEqualToString:@"I"] )
-    {
-        [self showDeviceInactive];
-    }else
-    {
-        AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-        appDelegate.isLoggedIn = TRUE;
-        
-        [self openHome];
-        [loginDB updateLoginDate];
-    }
+    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    appDelegate.isLoggedIn = TRUE;
+    
+    [self openHome];
+    //        [loginDB updateLoginDate];
 }
 
--(void) showDeviceInactive
-{
-    NSString *inactiveMsg = nil;
-    UIAlertView *alert = nil;
-    
-    if(showLogout)
-    {
-        inactiveMsg = @"Your device has become inactive, you'll be logged out.";
-        alert = [[UIAlertView alloc] initWithTitle:@" "
-                                           message:inactiveMsg
-                                          delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        alert.tag = 2001;
-    }else
-    {
-        inactiveMsg = @"Couldn't log you in, your device is in inactive mode.";
-        alert = [[UIAlertView alloc] initWithTitle:@" "
-                                           message:inactiveMsg
-                                          delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-    }
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
-    [self loginFail];
-    
-    [alert show];
-    
-    alert = Nil;
-}
+
 
 -(void) loginFail
 {
@@ -862,14 +838,6 @@ static NSString *labelVers;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     return [defaults stringForKey:KEY_AGENT_CODE];
-}
-
--(void) storeLastCheckedDevice
-{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    [defaults setObject:[self getTodayDateInStr] forKey:KEY_LAST_CHECK_DEVICE_DATE];
-    [defaults synchronize];
 }
 
 -(NSString *) getStoredLastCheckedDeviceDate
@@ -1112,6 +1080,7 @@ static NSString *labelVers;
         default:
             break;
     }
+}
 //    if (alertView.tag == 1001) {
 //        exit(0);
 //    }
@@ -1130,7 +1099,42 @@ static NSString *labelVers;
 //    {
 //        [self doOfflineLoginCheck];
 //    }
-}
+//}
+
+//-(void) storeLastCheckedDevice
+//{
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    
+//    [defaults setObject:[self getTodayDateInStr] forKey:KEY_LAST_CHECK_DEVICE_DATE];
+//    [defaults synchronize];
+//}
+
+//-(void) showDeviceInactive
+//{
+//    NSString *inactiveMsg = nil;
+//    UIAlertView *alert = nil;
+//
+//    if(showLogout)
+//    {
+//        inactiveMsg = @"Your device has become inactive, you'll be logged out.";
+//        alert = [[UIAlertView alloc] initWithTitle:@" "
+//                                           message:inactiveMsg
+//                                          delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//        alert.tag = 2001;
+//    }else
+//    {
+//        inactiveMsg = @"Couldn't log you in, your device is in inactive mode.";
+//        alert = [[UIAlertView alloc] initWithTitle:@" "
+//                                           message:inactiveMsg
+//                                          delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//    }
+//    [MBProgressHUD hideHUDForView:self.view animated:YES];
+//    [self loginFail];
+//
+//    [alert show];
+//
+//    alert = Nil;
+//}
 
 //+(void)setFirstDevice
 //{
