@@ -184,9 +184,9 @@ id dobtanngal;
         sexSegment.enabled = YES;
         btnOccp.enabled = YES;
         btnProspect.enabled = NO;
-        NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-        [prefs setObject:@"Yes" forKey:@"keyToLookupString"];
-
+        //NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+        //[prefs setObject:@"Yes" forKey:@"keyToLookupString"];
+        
         //[_SecondLAController testing:@"Enable"];
         
         /*added by faiz*/
@@ -205,8 +205,8 @@ id dobtanngal;
         sexSegment.enabled = NO;
         btnOccp.enabled = NO;
         btnProspect.enabled = YES;
-        NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-        [prefs setObject:@"No" forKey:@"keyToLookupString"];
+        //NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+        //[prefs setObject:@"No" forKey:@"keyToLookupString"];
         //[_SecondLAController testing:@"Disable"];
         /*added by faiz*/
         [_delegate setQuickQuoteValue:NO];

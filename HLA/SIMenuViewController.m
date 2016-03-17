@@ -3102,18 +3102,24 @@ BOOL isFirstLoad;
             [arrayIntValidate replaceObjectAtIndex:0 withObject:@"0"];
             
             [tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
+            lastIndexSelected = 0;
             break;
         case 1:
             if ([_LAController validateSave]){
                 if (![[dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"SELF"]){
                     [self loadSecondLAPage];
+                    lastIndexSelected = 1;
+                    [arrayIntValidate replaceObjectAtIndex:2 withObject:@"0"];
+                    [arrayIntValidate replaceObjectAtIndex:1 withObject:@"0"];
+                    [arrayIntValidate replaceObjectAtIndex:0 withObject:@"1"];
                 }
                 else{
-
                     [self loadBasicPlanPage:YES];
+                    [arrayIntValidate replaceObjectAtIndex:2 withObject:@"0"];
                     [arrayIntValidate replaceObjectAtIndex:1 withObject:@"1"];
+                    [arrayIntValidate replaceObjectAtIndex:0 withObject:@"1"];
+                    lastIndexSelected=2;
                 }
-                [arrayIntValidate replaceObjectAtIndex:0 withObject:@"1"];
             }
             else{
                 if (_LAController == nil) {
@@ -3124,7 +3130,7 @@ BOOL isFirstLoad;
                 [arrayIntValidate replaceObjectAtIndex:2 withObject:@"0"];
                 [arrayIntValidate replaceObjectAtIndex:1 withObject:@"0"];
                 [arrayIntValidate replaceObjectAtIndex:0 withObject:@"0"];
-
+                lastIndexSelected=0;
                 [self.RightView bringSubviewToFront:self.LAController.view];
                 lastActiveController = self.LAController;
                 
@@ -3145,19 +3151,26 @@ BOOL isFirstLoad;
             if ([_LAController validateSave]){
                 if (![[dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"SELF"]){
                     if ([_SecondLAController validateSave]){
+                        lastIndexSelected=2;
                         [self loadBasicPlanPage:YES];
+                        [arrayIntValidate replaceObjectAtIndex:2 withObject:@"0"];
                         [arrayIntValidate replaceObjectAtIndex:1 withObject:@"1"];
+                        [arrayIntValidate replaceObjectAtIndex:0 withObject:@"1"];
                     }
                     else{
+                        lastIndexSelected=1;
                         [self loadSecondLAPage];
                         [arrayIntValidate replaceObjectAtIndex:2 withObject:@"0"];
                         [arrayIntValidate replaceObjectAtIndex:1 withObject:@"0"];
+                        [arrayIntValidate replaceObjectAtIndex:0 withObject:@"1"];
                     }
                 }
                 else{
+                    lastIndexSelected=2;
                     [self loadBasicPlanPage:YES];
-                    [arrayIntValidate replaceObjectAtIndex:0 withObject:@"1"];
+                    [arrayIntValidate replaceObjectAtIndex:2 withObject:@"0"];
                     [arrayIntValidate replaceObjectAtIndex:1 withObject:@"1"];
+                    [arrayIntValidate replaceObjectAtIndex:0 withObject:@"1"];
                 }
                 
             }
@@ -3167,6 +3180,7 @@ BOOL isFirstLoad;
                     _LAController.delegate = self;
                     [self.RightView addSubview:self.LAController.view];
                 }
+                lastIndexSelected=0;
                 [self.RightView bringSubviewToFront:self.LAController.view];
                 lastActiveController = self.LAController;
                 [arrayIntValidate replaceObjectAtIndex:2 withObject:@"0"];
@@ -3194,16 +3208,16 @@ BOOL isFirstLoad;
                             [arrayIntValidate replaceObjectAtIndex:2 withObject:@"1"];
                             [arrayIntValidate replaceObjectAtIndex:1 withObject:@"1"];
                             [arrayIntValidate replaceObjectAtIndex:0 withObject:@"1"];
-
+                            lastIndexSelected=3;
                             [self LoadIlustrationPage];
                             [tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
-
+                            
                         }
                         else{
                             [arrayIntValidate replaceObjectAtIndex:2 withObject:@"0"];
                             [arrayIntValidate replaceObjectAtIndex:1 withObject:@"1"];
                             [arrayIntValidate replaceObjectAtIndex:0 withObject:@"1"];
-                            
+                            lastIndexSelected=2;
                             [self loadBasicPlanPage:YES];
                             [arrayIntValidate replaceObjectAtIndex:1 withObject:@"1"];
                         }
@@ -3212,29 +3226,29 @@ BOOL isFirstLoad;
                         [arrayIntValidate replaceObjectAtIndex:2 withObject:@"0"];
                         [arrayIntValidate replaceObjectAtIndex:1 withObject:@"0"];
                         [arrayIntValidate replaceObjectAtIndex:0 withObject:@"1"];
-                        
+                        lastIndexSelected=1;
                         [self loadSecondLAPage];
                         [arrayIntValidate replaceObjectAtIndex:0 withObject:@"1"];
                     }
-                else{
-                    if ([_BasicController validationDataBasicPlan]) {
-                        [arrayIntValidate replaceObjectAtIndex:2 withObject:@"1"];
-                        [arrayIntValidate replaceObjectAtIndex:1 withObject:@"1"];
-                        [arrayIntValidate replaceObjectAtIndex:0 withObject:@"1"];
-                        
-                        [self LoadIlustrationPage];
-                        [tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
-                        
-                    }
                     else{
-                        [arrayIntValidate replaceObjectAtIndex:2 withObject:@"0"];
-                        [arrayIntValidate replaceObjectAtIndex:1 withObject:@"1"];
-                        [arrayIntValidate replaceObjectAtIndex:0 withObject:@"1"];
-                        
-                        [self loadBasicPlanPage:YES];
-                        [arrayIntValidate replaceObjectAtIndex:1 withObject:@"1"];
+                        if ([_BasicController validationDataBasicPlan]) {
+                            [arrayIntValidate replaceObjectAtIndex:2 withObject:@"1"];
+                            [arrayIntValidate replaceObjectAtIndex:1 withObject:@"1"];
+                            [arrayIntValidate replaceObjectAtIndex:0 withObject:@"1"];
+                            lastIndexSelected=3;
+                            [self LoadIlustrationPage];
+                            [tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
+                            
+                        }
+                        else{
+                            [arrayIntValidate replaceObjectAtIndex:2 withObject:@"0"];
+                            [arrayIntValidate replaceObjectAtIndex:1 withObject:@"1"];
+                            [arrayIntValidate replaceObjectAtIndex:0 withObject:@"1"];
+                            lastIndexSelected=2;
+                            [self loadBasicPlanPage:YES];
+                            [arrayIntValidate replaceObjectAtIndex:1 withObject:@"1"];
+                        }
                     }
-                }
             }
             else{
                 if (_LAController == nil) {
@@ -3242,6 +3256,7 @@ BOOL isFirstLoad;
                     _LAController.delegate = self;
                     [self.RightView addSubview:self.LAController.view];
                 }
+                lastIndexSelected=0;
                 [self.RightView bringSubviewToFront:self.LAController.view];
                 lastActiveController = self.LAController;
                 [arrayIntValidate replaceObjectAtIndex:2 withObject:@"0"];
@@ -3275,7 +3290,6 @@ BOOL isFirstLoad;
         [cell.button2 setEnabled:false];
         [cell.button3 setEnabled:false];
     }
-
 	//perform checking before going next page
     //temporary remark by faiz
     /*blocked = YES;

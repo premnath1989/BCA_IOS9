@@ -1124,7 +1124,7 @@ id dobtemp;
     
     results = Nil;
     
-    results = [db executeQuery:@"SELECT OccpDesc from Adm_Occp WHERE OccpCode = ?", OccpCode, Nil];
+    results = [db executeQuery:@"SELECT OccpDesc from eProposal_OCCP WHERE occp_Code = ?", OccpCode, Nil];
     while ([results next]) {
         NSString *occpDesc = [results stringForColumn:@"OccpDesc"] != NULL ? [results stringForColumn:@"OccpDesc"] : @"";
         OccpDesc = occpDesc;
@@ -1522,7 +1522,7 @@ id dobtemp;
         return [self validationDataLifeAssured];
     }
     else{
-        return YES;
+        return [self validationDataLifeAssured];
     }
     return NO;
 }

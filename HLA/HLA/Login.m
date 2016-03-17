@@ -75,7 +75,7 @@ NSString *ProceedStatus = @"";
     UserProfileView = [self.storyboard instantiateViewControllerWithIdentifier:@"ChangePwd"];
     firstLogin = false;
     if([loginDB AgentRecord] == AGENT_IS_NOT_FOUND){
-        [self FirstTimeAlert:@"Congratulation"];
+        [self FirstTimeAlert:@"Selamat"];
         firstLogin = true;
     }
     
