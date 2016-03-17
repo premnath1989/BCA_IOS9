@@ -209,7 +209,7 @@ bool WPTPD30RisDeleted = FALSE;
         isFirstSaved = FALSE;
     }
 
-    themeColour = [UIColor colorWithRed:242.0f/255.0f green:113.0f/255.0f blue:134.0f/255.0f alpha:1];
+    themeColour = [UIColor colorWithRed:218.0f/255.0f green:49.0f/255.0f blue:85.0f/255.0f alpha:1];
     
     
     

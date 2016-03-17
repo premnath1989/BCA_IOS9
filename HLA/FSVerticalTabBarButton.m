@@ -47,7 +47,7 @@
     CGContextTranslateCTM(context, 0.0, bounds.size.height);
     CGContextScaleCTM(context, 1.0, -1.0);
     
-    [[UIColor colorWithRed:242.0f/255.0f green:113.0f/255.0f blue:134.0f/255.0f alpha:1] setFill];
+    [[UIColor colorWithRed:218.0f/255.0f green:49.0f/255.0f blue:85.0f/255.0f alpha:1] setFill];
     UIRectFill(rect);
     
     // draw an image in the center of the cell
