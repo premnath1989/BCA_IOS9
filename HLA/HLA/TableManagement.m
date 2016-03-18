@@ -88,11 +88,17 @@
             else{
                 label1.text= @"";
             }
-            label1.tag = 1001+i;
+            
+            label1.tag = (index*1000)+i;
             label1.textColor = textColor;
             label1.textAlignment = columnLabel.textAlignment;
             label1.font = [UIFont fontWithName:@"BPreplay" size:16];
             [cell.contentView addSubview:label1];
+            
+            NSLog(@"tag : %ld", (long)label1.tag);
+            NSLog(@"name : %@", label1.text);
+            NSLog(@"row : %d", index);
+            
             i++;
         }
     }

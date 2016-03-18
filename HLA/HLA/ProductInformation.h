@@ -19,6 +19,9 @@
     UIFont *fontType;
 }
 
+
+#define MOVIEPLAYER_TAG 500
+
 @property (weak, nonatomic) IBOutlet UIButton *btnHome;
 @property (weak, nonatomic) IBOutlet UIButton *btnPDF;
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;

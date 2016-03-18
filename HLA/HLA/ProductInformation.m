@@ -35,7 +35,7 @@
     [self setupTableColumn];
     
     [btnHome addTarget:self action:@selector(goHome:) forControlEvents:UIControlEventTouchUpInside];
-    [btnPDF addTarget:self action:@selector(seePDF:) forControlEvents:UIControlEventTouchUpInside];
+//    [btnPDF addTarget:self action:@selector(seePDF:) forControlEvents:UIControlEventTouchUpInside];
     
 }
 
@@ -60,9 +60,9 @@
 
 - (void)setupTableColumn{
     //we call the table management to design the table
-    ColumnHeaderStyle *ilustrasi = [[ColumnHeaderStyle alloc]init:@" No. Brosur" alignment:NSTextAlignmentLeft button:FALSE width:0.15];
-    ColumnHeaderStyle *nama = [[ColumnHeaderStyle alloc]init:@"Nama Brosur" alignment:NSTextAlignmentCenter button:TRUE width:0.70];
-    ColumnHeaderStyle *type = [[ColumnHeaderStyle alloc]init:@"Tipe" alignment:NSTextAlignmentCenter button:TRUE width:0.15];
+    ColumnHeaderStyle *ilustrasi = [[ColumnHeaderStyle alloc]init:@" No. " alignment:NSTextAlignmentLeft button:FALSE width:0.05];
+    ColumnHeaderStyle *nama = [[ColumnHeaderStyle alloc]init:@"Nama" alignment:NSTextAlignmentCenter button:TRUE width:0.80];
+    ColumnHeaderStyle *type = [[ColumnHeaderStyle alloc]init:@"Kategori" alignment:NSTextAlignmentCenter button:TRUE width:0.15];
     
     //add it to array
     columnHeadersContent = [NSArray arrayWithObjects:ilustrasi, nama, type, nil];
@@ -89,16 +89,17 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
-    
     NSInteger row = indexPath.row;
     NSArray *arrayOfData;
     NSLog(@"insert : %d",indexPath.row);
-    if(row == 0)
-        arrayOfData = [NSArray arrayWithObjects:@"1",@"Brochure_ProdukBCALIfeKeluargaku", @"pdf",nil];
-    [tableManagement TableRowInsert:arrayOfData index:indexPath.row table:cell color:[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1]];
-    if(row == 1)
+    if(row == 0){
+        arrayOfData = [NSArray arrayWithObjects:@"1",@"Brochure_ProdukBCALIfeKeluargaku_21012016", @"brosur",nil];
+        [tableManagement TableRowInsert:arrayOfData index:indexPath.row table:cell color:[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1]];
+    }
+    if(row == 1){
         arrayOfData = [NSArray arrayWithObjects:@"2",@"BCA_life_Keluargaku_Video_Testimonial_Part_I_final", @"video", nil];
-    [tableManagement TableRowInsert:arrayOfData index:indexPath.row table:cell color:[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1]];
+        [tableManagement TableRowInsert:arrayOfData index:indexPath.row table:cell color:[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1]];
+    }
     
     return cell;
 }
@@ -111,14 +112,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSIndexPath *pathToLastRow = [NSIndexPath indexPathForRow:indexPath.row+1 inSection:0];
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:pathToLastRow];
-    NSLog(@"click : %d",pathToLastRow.row);
-    UILabel *label = (UILabel *)[cell viewWithTag:1002];
-    UILabel *fileType = (UILabel *)[cell viewWithTag:1003];
-    if([fileType.text caseInsensitiveCompare:@"pdf"]){
+//    NSIndexPath *pathToLastRow = [NSIndexPath indexPathForRow:indexPath.row-1 inSection:0];
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    NSLog(@"click : %d",indexPath.row);
+    UILabel *label = (UILabel *)[cell.contentView viewWithTag:(indexPath.row*1000)+1];
+    UILabel *fileType = (UILabel *)[cell viewWithTag:(indexPath.row*1000)+2];
+    NSLog(@"file : %@.%@", label.text,fileType.text);
+    if([fileType.text caseInsensitiveCompare:@"brosur"] == NSOrderedSame){
         [self seePDF:label.text];
-    }else if([fileType.text caseInsensitiveCompare:@"video"]){
+    }else if([fileType.text caseInsensitiveCompare:@"video"] == NSOrderedSame){
         [self seeVideo:label.text];
     }
 }
@@ -148,8 +150,10 @@
     [moviePlayer.view setFrame:self.view.bounds];
     [moviePlayer prepareToPlay];
     [moviePlayer setShouldAutoplay:NO]; // And other options you can look through the documentation.
-    [moviePlayer play];
+    moviePlayer.view.tag = MOVIEPLAYER_TAG;
     [self.view addSubview:moviePlayer.view];
+    [moviePlayer setFullscreen:YES animated:YES];
+    [moviePlayer play];
     
     // Remove the movie player view controller from the "playback did finish" notification observers
     [[NSNotificationCenter defaultCenter] removeObserver:self
@@ -176,11 +180,14 @@
         [[NSNotificationCenter defaultCenter] removeObserver:self
                                                         name:MPMoviePlayerPlaybackDidFinishNotification
                                                       object:moviePlayer];
-        
+        [moviePlayer stop];
         // Dismiss the view controller
-        [self dismissViewControllerAnimated:YES completion:nil];
+        for (UIView *subview in [self.view subviews]) {
+            if (subview.tag == MOVIEPLAYER_TAG) {
+                [subview removeFromSuperview];
+            }
+        }
     }
-    NSLog(@"click");
 }
 
 - (void)dismissReaderViewController:(ReaderViewController *)viewController {

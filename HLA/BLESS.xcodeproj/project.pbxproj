@@ -772,6 +772,7 @@
 		C4FCDDE816395F290065D024 /* btn_prospect_home.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FCDDDC16395F290065D024 /* btn_prospect_home.png */; };
 		C4FCDDEB16395F290065D024 /* btn_setting_home.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FCDDDF16395F290065D024 /* btn_setting_home.png */; };
 		C4FCDDEC16395F290065D024 /* btn_SI_home.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FCDDE016395F290065D024 /* btn_SI_home.png */; };
+		DE050BE51C9BF52B00AA6D45 /* BCA_life_Keluargaku_Video_Testimonial_Part_I_final.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = DE050BE41C9BF52B00AA6D45 /* BCA_life_Keluargaku_Video_Testimonial_Part_I_final.mp4 */; };
 		DE8D29C71C94512900727765 /* TabValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = DE8D29C61C94512900727765 /* TabValidation.m */; };
 		EF059839161A8BD1004A9095 /* NewLAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF059837161A8BCF004A9095 /* NewLAViewController.m */; };
 		EF05983F161A8C85004A9095 /* ListingTbViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF05983D161A8C85004A9095 /* ListingTbViewController.m */; };
@@ -2117,6 +2118,7 @@
 		C4FCDDDC16395F290065D024 /* btn_prospect_home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_prospect_home.png; sourceTree = "<group>"; };
 		C4FCDDDF16395F290065D024 /* btn_setting_home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_setting_home.png; sourceTree = "<group>"; };
 		C4FCDDE016395F290065D024 /* btn_SI_home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_SI_home.png; sourceTree = "<group>"; };
+		DE050BE41C9BF52B00AA6D45 /* BCA_life_Keluargaku_Video_Testimonial_Part_I_final.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = BCA_life_Keluargaku_Video_Testimonial_Part_I_final.mp4; sourceTree = "<group>"; };
 		DE8D29C51C94511C00727765 /* TabValidation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabValidation.h; sourceTree = "<group>"; };
 		DE8D29C61C94512900727765 /* TabValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabValidation.m; sourceTree = "<group>"; };
 		EF059837161A8BCF004A9095 /* NewLAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewLAViewController.m; sourceTree = "<group>"; };
@@ -4015,6 +4017,7 @@
 		C4E9D1851612C64900016053 = {
 			isa = PBXGroup;
 			children = (
+				DE050BE41C9BF52B00AA6D45 /* BCA_life_Keluargaku_Video_Testimonial_Part_I_final.mp4 */,
 				43FA6C151C87CD5D0098BA47 /* HTML USED */,
 				AA4EF77D1C8687DC0050CCD8 /* Brochure */,
 				AA4EF6E61C85A3F20050CCD8 /* PDFReader */,
@@ -4842,6 +4845,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE050BE51C9BF52B00AA6D45 /* BCA_life_Keluargaku_Video_Testimonial_Part_I_final.mp4 in Resources */,
 				AA4EF77B1C8687CF0050CCD8 /* Brochure_ProdukBCALIfeKeluargaku_21012016.pdf in Resources */,
 				AA4EF77C1C8687CF0050CCD8 /* Brochure_ProdukBCALIfeKeluargaku.pdf in Resources */,
 				178A076C1C8232A100B91582 /* BCA_Rates.sqlite in Resources */,
