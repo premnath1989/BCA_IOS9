@@ -542,25 +542,25 @@ bool WPTPD30RisDeleted = FALSE;
 #pragma mark - added by faiz 
 //added by faiz
 -(IBAction)validationExtraPremiField:(UITextField *)sender{
-    /*if (sender==_extraPremiPercentField){
-        if ([sender.text length]>0){
-            [self setActiveTextField:_extraPremiNumberField Active:NO];
-        }
-        else{
-            [self setActiveTextField:_extraPremiPercentField Active:YES];
-            [self setActiveTextField:_extraPremiNumberField Active:YES];
-        }
-    }
-    else{
-        if ([sender.text length]>0){
-            [self setActiveTextField:_extraPremiPercentField Active:NO];
+//    if (sender==_extraPremiPercentField){
+//        if ([sender.text length]>0){
+//            //[self setActiveTextField:_extraPremiNumberField Active:NO];
+//        }
+//        else{
+//            [//self setActiveTextField:_extraPremiPercentField Active:YES];
+//            //[self setActiveTextField:_extraPremiNumberField Active:YES];
+//        }
+//    }
+//    else{
+//        if ([sender.text length]>0){
+//            //[self setActiveTextField:_extraPremiPercentField Active:NO];
             [self ExtraNumbPremi];
-        }
-        else{
-            [self setActiveTextField:_extraPremiPercentField Active:YES];
-            [self setActiveTextField:_extraPremiNumberField Active:YES];
-        }
-    }*/
+//        }
+//        else{
+//            //[self setActiveTextField:_extraPremiPercentField Active:YES];
+//           // [self setActiveTextField:_extraPremiNumberField Active:YES];
+//        }
+//    }
 }
 
 -(void)ExtraNumbPremi
@@ -578,8 +578,6 @@ bool WPTPD30RisDeleted = FALSE;
         PaymentMode = 0.1;
     }
 
-    
-    
     long long Extraprem =(ExtraPremiNumb* PaymentMode) *(BasisSumAssured/1000);
     
     ExtraPremiTotal = Extraprem;
@@ -1368,6 +1366,8 @@ bool WPTPD30RisDeleted = FALSE;
     
     
     double TotalAB = TotalA + ExtraPrem1;
+    
+    [self ExtraNumbPremi];
     
     
     
