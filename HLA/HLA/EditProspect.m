@@ -4312,6 +4312,29 @@ NSMutableArray *DelGroupArr;
     [_vipClassPopover presentPopoverFromRect:[sender bounds]  inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
+- (IBAction)actionEmployeeNIP:(UIButton *)sender
+{
+    [self resignFirstResponder];
+    [self.view endEditing:YES];
+    
+    NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
+    [ClientProfile setObject:@"YES" forKey:@"isNew"];
+    
+    Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
+    id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
+    [activeInstance performSelector:@selector(dismissKeyboard)];
+    
+    //if (_branchInfo == nil) {
+    _nipInfo = [[NIPInfo alloc] initWithStyle:UITableViewStylePlain];
+    _nipInfo.delegate = self;
+    //[_branchInfo setData:[NSNumber numberWithInt:sender.tag]];
+    [_nipInfo.tableView reloadData];
+    _nipInfoPopover = [[UIPopoverController alloc] initWithContentViewController:_nipInfo];
+    //}
+    [_nipInfoPopover presentPopoverFromRect:[sender bounds]  inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
+
 - (IBAction)actionReferralSource:(id)sender
 {
     
@@ -13004,6 +13027,12 @@ NSMutableArray *DelGroupArr;
 
 
 #pragma mark - delegate
+-(void)selectedNIP:(NSString *)nipNumber Name:(NSString *)name{
+    [txtNip setText:nipNumber];
+    [txtReferralName setText:name];
+    [_nipInfoPopover dismissPopoverAnimated:YES];
+}
+
 -(void)selectedKodePosText:(NSString *)selectText SenderTag:(int)senderTag{
     if (senderTag==0){
         [_txtHomeProvince setText:selectText];

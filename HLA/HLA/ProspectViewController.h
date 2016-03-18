@@ -29,6 +29,7 @@
 #import "ModelDataReferral.h"
 #import "ModelProspectProfile.h"
 #import "KodePosInfo.h"
+#import "NIPInfo.h"
 
 @class DataTable,DBController;
 @protocol ProspectViewControllerDelegate
@@ -36,7 +37,7 @@
 - (void)selectDataForEdit:(NSString *)indexNo;
 @end
 
-@interface ProspectViewController : UIViewController<IDTypeDelegate,SIDateDelegate,IDTypeDelegate, OccupationListDelegate,TitleDelegate,GroupDelegate, UITextFieldDelegate,UITextInputDelegate, UITextViewDelegate,NatinalityDelegate,RaceDelegate,MaritalStatusDelegate,ReligionDelegate,CountryDelegate,EditProspectDelegate, Country2Delegate,SourceIncomeDelegate,VIPClassDelegate,ReferralSourceDelegate,BranchInfoDelegate,KodeposInfoDelegate>{
+@interface ProspectViewController : UIViewController<IDTypeDelegate,SIDateDelegate,IDTypeDelegate, OccupationListDelegate,TitleDelegate,GroupDelegate, UITextFieldDelegate,UITextInputDelegate, UITextViewDelegate,NatinalityDelegate,RaceDelegate,MaritalStatusDelegate,ReligionDelegate,CountryDelegate,EditProspectDelegate, Country2Delegate,SourceIncomeDelegate,VIPClassDelegate,ReferralSourceDelegate,BranchInfoDelegate,KodeposInfoDelegate,NIPInfoDelegate>{
     
     NSString *databasePath;
     sqlite3 *contactDB;
@@ -58,6 +59,7 @@
     SourceIncome *_sourceIncome;
     BranchInfo *_branchInfo;
     KodePosInfo *_kodePosInfo;
+    NIPInfo *_nipInfo;
     VIPClass *_vipClass;
     ReferralSource *_referralSource;
     //end of add
@@ -77,6 +79,7 @@
     UIPopoverController *_sourceIncomePopover;
     UIPopoverController *_branchInfoPopover;
     UIPopoverController *_kodePosPopover;
+    UIPopoverController *_nipInfoPopover;
     UIPopoverController *_vipClassPopover;
     UIPopoverController *_referralSourcePopover;
     //end of added by faiz
