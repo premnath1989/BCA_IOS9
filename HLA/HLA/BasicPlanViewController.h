@@ -45,14 +45,14 @@
     sqlite3 *contactDB;
     UITextField *activeField;
     UIPopoverController *_planPopover;
-
+    NSString *PaymentDescMDKK;
     ModelSIPOData *_modelSIPOData;
     Model_SI_Premium *_modelSIPremium;
     PlanList *_planList;
     MasaPembayaran*_masaPembayaran;
     Frekeunsi*_frekuensi;
     PembeliaKe*_Pembelianke;
-    
+    NSString *MBKKPremium;
     BOOL showHL;
     BOOL useExist;
     BOOL newSegment;
@@ -63,7 +63,7 @@
     double maxSAFactor;
     long long ExtraPremiTotal;
     long long ExtraPrecenttotal;
-    
+    double DiskounPremi;
     NSMutableArray *arrExistRiderCode;
     NSMutableArray *arrExistPlanChoice;
     
@@ -141,13 +141,13 @@
 @property (nonatomic, copy) NSString *LASex;
 @property (nonatomic, copy) NSString *PremiType;
 @property (nonatomic, copy) NSString *PayorDOB;
-@property (nonatomic, copy) NSString *RelWithLA;
+@property (nonatomic, copy) NSString *RelWithLA,*PaymentDescMDKK;
 @property (nonatomic, assign,readwrite) int PayorAge;
 @property (nonatomic, assign,readwrite) int LAAge;
 @property (nonatomic, copy) NSString *PayorOccpCode;
 @property (nonatomic, assign,readwrite) int secondLAIndexNo;
 @property (nonatomic, copy) NSString *secondLASmoker;
-@property (nonatomic, copy) NSString *secondLASex;
+@property (nonatomic, copy) NSString *secondLASex, *MBKKPremium;
 @property (nonatomic, copy) NSString *secondLADOB;
 @property (nonatomic, assign,readwrite) int secondLAAge;
 @property (nonatomic, copy) NSString *secondLAOccpCode;
@@ -256,6 +256,7 @@
 @property (nonatomic, assign,readwrite) int advanceYearlyIncomeHLAIB;
 @property (nonatomic, assign,readwrite) int advanceYearlyIncomeHLACP;
 @property (nonatomic, assign,readwrite) double basicRate;
+@property (nonatomic, assign,readwrite) double DiskounPremi;
 @property (nonatomic, assign,readwrite) double TotalA;
 @property (nonatomic,strong) NSString *planCode;
 @property (nonatomic, copy) NSString *quotationLang;

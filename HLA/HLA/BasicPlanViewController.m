@@ -42,6 +42,7 @@
 @synthesize cashDividendSegment;
 @synthesize HLField,PlanType;
 @synthesize HLTermField;
+@synthesize PaymentDescMDKK;
 @synthesize tempHLField,annualRiderSum,halfRiderSum,monthRiderSum,quarterRiderSum;
 @synthesize tempHLTermField,basicPremAnn,basicPremHalf,basicPremQuar,basicPremMonth;
 @synthesize myScrollView,labelThree,labelSix,labelSeven,labelFour,labelFive,annualMedRiderPrem,monthMedRiderPrem,quarterMedRiderPrem;
@@ -54,7 +55,7 @@
 @synthesize delegate = _delegate;
 @synthesize requestAge,OccpCode,requestIDPay,requestIDProf,idPay,idProf,annualMedRiderSum,halfMedRiderSum,quarterMedRiderSum;
 @synthesize requestAgePay,requestDOBPay,requestIndexPay,requestOccpPay,requestSexPay,requestSmokerPay,monthMedRiderSum;
-@synthesize PayorAge,PayorDOB,PayorOccpCode,PayorSex,PayorSmoker,LPlanOpt,LDeduct,LAge,LSmoker;
+@synthesize PayorAge,PayorDOB,PayorOccpCode,PayorSex,PayorSmoker,LPlanOpt,LDeduct,LAge,LSmoker,MBKKPremium;
 @synthesize LAAge,LASex,RelWithLA;
 @synthesize LTerm,age,sex,LSex,riderRate,LRidHL1K,LRidHL100,LRidHLP,LTempRidHL1K,LOccpCode;
 @synthesize requestAge2ndLA,requestDOB2ndLA,requestIndex2ndLA,requestOccp2ndLA,requestSex2ndLA,requestSmoker2ndLA;
@@ -69,7 +70,7 @@
 @synthesize labelParAcc,labelParPayout,labelPercent1,labelPercent2,parAccField,parPayoutField,getParAcc,getParPayout;
 @synthesize pTypeOccp,occLoadRider,riderPrem,waiverRiderAnn,medRiderPrem;
 @synthesize waiverRiderAnn2,waiverRiderHalf,waiverRiderHalf2,waiverRiderMonth,waiverRiderMonth2,waiverRiderQuar,waiverRiderQuar2;
-@synthesize quotationLang,requesteProposalStatus, EAPPorSI, outletDone, outletEAPP;
+@synthesize quotationLang,requesteProposalStatus, EAPPorSI, outletDone, outletEAPP, DiskounPremi;
 @synthesize labelPremiumPay, requestEDD;
 @synthesize planChoose,PremiType;
 @synthesize isFirstSaved;
@@ -506,8 +507,16 @@ bool WPTPD30RisDeleted = FALSE;
     {
         _masaExtraPremiField.enabled =TRUE;
         
-        [self PremiDasarActB];
-        //_masaExtraPremiField.text =@"0";
+        if([PlanType isEqualToString:@"BCA Life Keluargaku Protection"])
+        {
+            [self MeninggalDuniaMDBKK];
+        }
+        else
+        {
+             [self PremiDasarActB];
+        }
+
+           //_masaExtraPremiField.text =@"0";
         
     }
     else if (textField == _masaExtraPremiField)
@@ -554,7 +563,18 @@ bool WPTPD30RisDeleted = FALSE;
 //    else{
 //        if ([sender.text length]>0){
 //            //[self setActiveTextField:_extraPremiPercentField Active:NO];
-            [self ExtraNumbPremi];
+    
+    if([PlanType isEqualToString:@"BCA Life Keluargaku Protection"])
+    {
+        [self MeninggalDuniaMDBKK];
+    }
+    else
+    {
+        [self PremiDasarActB];
+        [self ExtraNumbPremi];
+    }
+
+    
 //        }
 //        else{
 //            //[self setActiveTextField:_extraPremiPercentField Active:YES];
@@ -594,10 +614,13 @@ bool WPTPD30RisDeleted = FALSE;
     [numberFormatter setMinimumFractionDigits:0];
     
     NSString *numberExtraBasicPremi = [numberFormatter stringFromNumber: [NSNumber numberWithDouble:ExtraPrem1]];
+    NSString *numberExtraBasicTotal = [numberFormatter stringFromNumber: [NSNumber numberWithDouble:Alltotal]];
+    
+    
     
     [_extraBasicPremiField setText:[NSString stringWithFormat:@"%@", numberExtraBasicPremi]];
     
-    [_totalPremiWithLoadingField setText:[NSString stringWithFormat:@"%lld", Alltotal]];
+    [_totalPremiWithLoadingField setText:[NSString stringWithFormat:@"%@", numberExtraBasicTotal]];
     
 
 }
@@ -975,7 +998,9 @@ bool WPTPD30RisDeleted = FALSE;
     
     //Diskoun Premi//
     
-    double DiskounPremi = NoPolRate * RatesInt * total * PaymentFoctor;
+    DiskounPremi = NoPolRate * RatesInt * total * PaymentFoctor;
+    
+
     
     
     NSString*WaiverRate;
@@ -1041,8 +1066,7 @@ bool WPTPD30RisDeleted = FALSE;
     [format setNumberStyle:NSNumberFormatterNoStyle];
     [format setGeneratesDecimalNumbers:FALSE];
     [format setMaximumFractionDigits:0];
-    [format setRoundingMode:NSNumberFormatterRoundUp];
-
+    [format setRoundingMode:NSNumberFormatterRoundHalfUp];
     
     RiderPremium5 = [[format stringFromNumber:[NSNumber numberWithDouble:RiderPremium5]] doubleValue];
     RiderPremium5 = RiderPremium5/100;
@@ -1055,8 +1079,19 @@ bool WPTPD30RisDeleted = FALSE;
     
     double totalPremiumDasarA = RiderPremium5 + DiskounPremi;
     
-    [_basicPremiField setText:[NSString stringWithFormat:@"lround", totalPremiumDasarA]];
-    [self PremiDasarIncomeChange:_basicPremiField.text];
+    NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setFormatterBehavior: NSNumberFormatterBehavior10_4];
+    [numberFormatter setNumberStyle: NSNumberFormatterDecimalStyle];
+    [numberFormatter setRoundingMode:NSNumberFormatterRoundUp];
+    [numberFormatter setMaximumFractionDigits:0];
+    [numberFormatter setMinimumFractionDigits:0];
+    
+    NSString *numberExtraBasicPremi = [numberFormatter stringFromNumber: [NSNumber numberWithDouble:totalPremiumDasarA]];
+
+    
+    
+    [_basicPremiField setText:[NSString stringWithFormat:@"%2@",numberExtraBasicPremi]];
+   // [self PremiDasarIncomeChange:_basicPremiField.text];
 
     
    // [_KKLKDiskaunBtn setText:[NSString stringWithFormat:@"%2f", DiskounPremi]];
@@ -1230,10 +1265,10 @@ bool WPTPD30RisDeleted = FALSE;
     double RatesInt = [RatesPremiumRate doubleValue];
     double  RiderPremium = (RatesInt/100)* total;
     
-    double totalPremiumDasarA = RiderPremium + total;
+ //   double totalPremiumDasarA = RiderPremium + total;
     
-    [_basicPremiField setText:[NSString stringWithFormat:@"%2f", totalPremiumDasarA]];
-    [self PremiDasarIncomeChange:_basicPremiField.text];
+//    [_basicPremiField setText:[NSString stringWithFormat:@"%2f", totalPremiumDasarA]];
+//    [self PremiDasarIncomeChange:_basicPremiField.text];
     
 //    
 //    if ([FRekeunsiPembayaranMode isEqualToString:@"Pembayaran Sekaligus"]||[FRekeunsiPembayaranMode isEqualToString:@"Tahunan"])
@@ -1268,10 +1303,235 @@ bool WPTPD30RisDeleted = FALSE;
 //    [self PremiDasarIncomeChange:_basicPremiField.text];
 }
 
+-(void)MeninggalDuniaMDBKK
+{
+    //(EM% * EMrate) * BasicSum_Assured/1000 * PaymentFactorRate;
+    
+    double ExtraPremiField = [_extraPremiPercentField.text doubleValue];
+    
+    float percentExtraPremiField = ExtraPremiField / 100.0f;
+    
+    NSString*EmRateQuery;
+    NSString*EMValue;
+    
+    NSArray *paths2 = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsPath2 = [paths2 objectAtIndex:0];
+    NSString *path2 = [docsPath2 stringByAppendingPathComponent:@"BCA_Rates.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path2];
+    [database open];
+    FMResultSet *results;
+    
+    if (![database open])
+    {
+        NSLog(@"Could not open db.");
+    }
+    
+    
+    if([RelWithLA isEqualToString:@"SELF"])
+    {
+        EmRateQuery = [NSString stringWithFormat:@"SELECT %@ FROM Keluargaku_Rates_EM Where EntryAge = '%i'",PayorSex,PayorAge];
+        results = [database executeQuery:EmRateQuery];
+        
+        while([results next])
+        {
+            if ([PayorSex isEqualToString:@"Male"]||[PayorSex isEqualToString:@"MALE"])
+            {
+                EMValue  = [results stringForColumn:@"Male"];
+            }
+            else
+            {
+                EMValue  = [results stringForColumn:@"Female"];
+            }
+            
+        }
+    }
+        else
+        {
+            EmRateQuery = [NSString stringWithFormat:@"SELECT %@ FROM Keluargaku_Rates_EM Where EntryAge = '%i'",LASex,LAAge];
+            results = [database executeQuery:EmRateQuery];
+            
+            while([results next])
+            {
+                if ([LASex isEqualToString:@"Male"]||[LASex isEqualToString:@"MALE"])
+                {
+                    EMValue  = [results stringForColumn:@"Male"];
+                }
+                else
+                {
+                    EMValue  = [results stringForColumn:@"Female"];
+                }
+                
+            }
+
+        }
+    
+    double EMvalueDouble =[EMValue doubleValue];
+    
+      long long totalDivide =(BasisSumAssured/1000);
+    
+    double PaymentType;
+    double PaymentFoctor;
+    
+    //PAymentFactorRate//
+    
+    if ([PaymentDescMDKK isEqualToString:@"Tahunan"])
+    {
+        PaymentType =1;
+    }
+    else if ([PaymentDescMDKK isEqualToString:@"Semester"])
+    {
+        PaymentType =2;
+    }
+    else if ([PaymentDescMDKK isEqualToString:@"Kuartal"])
+    {
+        PaymentType =3;
+    }
+    else if ([PaymentDescMDKK isEqualToString:@"Bulanan"])
+    {
+        PaymentType =4;
+    }
+    
+    NSString*PaymentFactoryQuery;
+   // NSArray *path3= NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+   // NSString *docsPath3 = [path3 objectAtIndex:0];
+   //  NSString *path4 = [docsPath3 stringByAppendingPathComponent:@"BCA_Rates.sqlite"];
+   // FMDatabase *database3 = [FMDatabase databaseWithPath:path4];
+    [database open];
+    FMResultSet *Results2;
+    NSString * RatesMop = [NSString stringWithFormat:@"SELECT Payment_Fact FROM Keluargaku_Rates_MOP Where Payment_Code = %f",PaymentType];
+    Results2 = [database executeQuery:RatesMop];
+    
+    
+    while([Results2 next])
+    {
+        PaymentFactoryQuery = [Results2 stringForColumn:@"Payment_Fact"];
+        
+    }
+    
+     float percent = [PaymentFactoryQuery floatValue] / 100.0f;
+    
+    double MDBKK =percentExtraPremiField * EMvalueDouble * totalDivide * percent;
+    
+    
+   // Rider Loading Premium
+   // Formula = (EM% * BP_Premi +  MDBKK_Premi * (AnuityRate/1000) *PaymentFactorRate
+    
+    NSString*WaiverRate;
+    
+    NSArray *paths5 = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsPath5 = [paths5 objectAtIndex:0];
+    NSString *path5 = [docsPath5 stringByAppendingPathComponent:@"BCA_Rates.sqlite"];
+    
+    FMDatabase *database5 = [FMDatabase databaseWithPath:path5];
+    [database open];
+    FMResultSet *results5;
+    
+    NSString*RatesPremiumRate5;
+    double PaymentMode5;
+    if (![database open])
+    {
+        NSLog(@"Could not open db.");
+    }
+    
+    
+    if([RelWithLA isEqualToString:@"SELF"])
+    {
+        WaiverRate = [NSString stringWithFormat:@"SELECT %@ FROM KLK_Waiver Where EntryAge = '%i' AND PersonType = '%@'",PayorSex,PayorAge,@"T"];
+        results5 = [database executeQuery:WaiverRate];
+        
+        while([results5 next])
+        {
+            if ([PayorSex isEqualToString:@"Male"]||[PayorSex isEqualToString:@"MALE"]){
+                RatesPremiumRate5  = [results5 stringForColumn:@"Male"];
+            }
+            else{
+                RatesPremiumRate5 = [results5 stringForColumn:@"Female"];
+            }
+            
+        }
+        
+    }
+    else
+    {
+        WaiverRate = [NSString stringWithFormat:@"SELECT %@ FROM KLK_Waiver Where EntryAge = '%i' AND PersonType = '%@'",LASex,LAAge,@"P"];
+        results5 = [database5 executeQuery:WaiverRate];
+        
+        while([results5 next])
+        {
+            if ([LASex isEqualToString:@"Male"]||[LASex isEqualToString:@"MALE"]){
+                RatesPremiumRate5 = [results5 stringForColumn:@"Male"];
+            }
+            else{
+                RatesPremiumRate5  = [results5 stringForColumn:@"Female"];
+            }
+            
+        }
+        
+        
+    }
+    
+    
+    
+    double RatesInt5 = [RatesPremiumRate5 doubleValue];
+    double  RiderPremium5 = (RatesInt5/100)*(DiskounPremi + MDBKK);
+    
+    NSNumberFormatter *format = [[NSNumberFormatter alloc]init];
+    [format setNumberStyle:NSNumberFormatterNoStyle];
+    [format setGeneratesDecimalNumbers:FALSE];
+    [format setMaximumFractionDigits:0];
+    [format setRoundingMode:NSNumberFormatterRoundHalfUp];
+    
+    RiderPremium5 = [[format stringFromNumber:[NSNumber numberWithDouble:RiderPremium5]] doubleValue];
+    RiderPremium5 = RiderPremium5/100;
+    RiderPremium5 = [[format stringFromNumber:[NSNumber numberWithDouble:RiderPremium5]] doubleValue];
+    RiderPremium5 = RiderPremium5 * 100;
+    
+    NSString*PaymentFactoryAnuityRate;
+    // NSArray *path3= NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    // NSString *docsPath3 = [path3 objectAtIndex:0];
+    //  NSString *path4 = [docsPath3 stringByAppendingPathComponent:@"BCA_Rates.sqlite"];
+    // FMDatabase *database3 = [FMDatabase databaseWithPath:path4];
+    [database open];
+    FMResultSet *Results3;
+    NSString * AnuityRate = [NSString stringWithFormat:@"SELECT \"Annuity Factor\" FROM Keluargaku_Rates_AnuityRate Where PaymentCode = %f",PaymentType];
+    Results3 = [database executeQuery:AnuityRate];
+    
+    while([Results3 next])
+    {
+        PaymentFactoryAnuityRate = [Results3 stringForColumn:@"Annuity Factor"];
+        
+    }
+    
+    double AnuityRt = [PaymentFactoryAnuityRate doubleValue];
+    
+    
+    
+    
+//    long long MDBKK =percentExtraPremiField * EMvalueDouble * totalDivide * percent;
+    long long totalBasicPremium = percentExtraPremiField * (RiderPremium5 + DiskounPremi) *AnuityRt *percent;
+    
+    double ValueExtraPremi = percentExtraPremiField * RiderPremium5;
+    
+    
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    [formatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+    [formatter setCurrencySymbol:@""];
+    [formatter setMaximumFractionDigits:0];
+
+    
+    
+    
+//    double Test = RiderPremium5 * percentExtraPremiField;
+//    double Test2 = percentExtraPremiField * Test;
+    
+
+    
+}
+
 
 -(void)PremiDasarActB
 {
-    
     
     NSString*AnsuransiDasarQuery;
     NSArray *paths2 = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -5001,6 +5261,8 @@ bool WPTPD30RisDeleted = FALSE;
     [self.planPopover dismissPopoverAnimated:YES];
     // getPlanCode = aaCode;
     
+    
+    
     PembelianKEString = aaDesc;
 
 }
@@ -5033,7 +5295,7 @@ bool WPTPD30RisDeleted = FALSE;
     {
         [self PremiDasarActKeluargaku:aaDesc];
         [self PremiDasarActkklk];
-        
+        PaymentDescMDKK = aaDesc;
     }
     else
     {
