@@ -11,6 +11,7 @@
 #import "CarouselViewController.h"
 #import "ReaderViewController.h"
 #import "ColumnHeaderStyle.h"
+#import <MediaPlayer/MediaPlayer.h>
 
 @implementation ProductInformation
 
@@ -59,10 +60,11 @@
 - (void)setupTableColumn{
     //we call the table management to design the table
     ColumnHeaderStyle *ilustrasi = [[ColumnHeaderStyle alloc]init:@" No. Brosur" alignment:NSTextAlignmentLeft button:FALSE width:0.15];
-    ColumnHeaderStyle *nama = [[ColumnHeaderStyle alloc]init:@"Nama Brosur" alignment:NSTextAlignmentCenter button:TRUE width:0.85];
+    ColumnHeaderStyle *nama = [[ColumnHeaderStyle alloc]init:@"Nama Brosur" alignment:NSTextAlignmentCenter button:TRUE width:0.70];
+    ColumnHeaderStyle *type = [[ColumnHeaderStyle alloc]init:@"Tipe" alignment:NSTextAlignmentCenter button:TRUE width:0.15];
     
     //add it to array
-    columnHeadersContent = [NSArray arrayWithObjects:ilustrasi, nama, nil];
+    columnHeadersContent = [NSArray arrayWithObjects:ilustrasi, nama, type, nil];
     tableManagement = [[TableManagement alloc]init:self.view themeColour:themeColour themeFont:fontType];
     TableHeader =[tableManagement TableHeaderSetupXY:columnHeadersContent
                                          positionY:80.0f positionX:80.0f];
@@ -77,7 +79,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)myTableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return 2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -90,7 +92,10 @@
     NSInteger row = indexPath.row;
     NSArray *arrayOfData;
     if(row == 0)
-        arrayOfData = [NSArray arrayWithObjects:@"1",@"Brochure Produk BCA LIfe Keluargaku",nil];
+        arrayOfData = [NSArray arrayWithObjects:@"1",@"Brochure Produk BCA LIfe Keluargaku", @"pdf",nil];
+    [tableManagement TableRowInsert:arrayOfData index:indexPath.row table:cell color:[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1]];
+    if(row == 1)
+        arrayOfData = [NSArray arrayWithObjects:@"2",@"Video", @"pdf", nil];
     [tableManagement TableRowInsert:arrayOfData index:indexPath.row table:cell color:[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1]];
     
     return cell;
@@ -121,6 +126,17 @@
         
         [self presentViewController:readerViewController animated:YES completion:Nil];
     }
+}
+
+- (IBAction)seeVideo{
+    NSString*thePath=[[NSBundle mainBundle] pathForResource:@"yourVideo" ofType:@"MOV"];
+    NSURL*theurl=[NSURL fileURLWithPath:thePath];
+    
+    MPMoviePlayerController *moviePlayer=[[MPMoviePlayerController alloc] initWithContentURL:theurl];
+    [moviePlayer.view setFrame:self.view.frame];
+    [moviePlayer prepareToPlay];
+    [moviePlayer setShouldAutoplay:NO]; // And other options you can look through the documentation.
+    [self.view addSubview:moviePlayer.view];
 }
 
 - (void)dismissReaderViewController:(ReaderViewController *)viewController {

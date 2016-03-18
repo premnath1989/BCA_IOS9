@@ -653,7 +653,7 @@ static NSString *labelVers;
             [spinnerLoading startLoadingSpinner:self.view label:@"Loading"];
             if([self connected] && !OFFLINE_PROCESS){
                 ONLINE_PROCESS = TRUE;
-                int usernameTemp = [self UsernameChecking];
+                int usernameTemp = [self UsernameUDIDChecking];
                 if(usernameTemp != 0){
                     switch (usernameTemp) {
                         case USERNAME_IS_AGENT:{
@@ -893,7 +893,7 @@ static NSString *labelVers;
     
 }
 
--(int) UsernameChecking
+-(int) UsernameUDIDChecking
 {
     int statusUsername = 0;
     
@@ -909,8 +909,9 @@ static NSString *labelVers;
     NSString *SupervisorPass;
     NSString *Admin;
     NSString *AdminPassword;
+    NSString *UDID;
     
-    FMResultSet *result1 = [db executeQuery:@"select AgentCode, AgentPassword, DirectSupervisorCode, DirectSupervisorPassword, Admin, AdminPassword  from Agent_profile"];
+    FMResultSet *result1 = [db executeQuery:@"select AgentCode, AgentPassword, DirectSupervisorCode, DirectSupervisorPassword, Admin, AdminPassword, UDID  from Agent_profile"];
     
     while ([result1 next]) {
         AgentName = [[result1 objectForColumnName:@"AgentCode"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
@@ -921,6 +922,7 @@ static NSString *labelVers;
         
         Admin = [[result1 objectForColumnName:@"Admin"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
         AdminPassword = [[result1 objectForColumnName:@"AdminPassword"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        UDID = [[result1 objectForColumnName:@"UDID"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     }
     
     if([txtUsername.text isEqualToString:AgentName] ){
@@ -933,6 +935,12 @@ static NSString *labelVers;
 
     }else if([txtUsername.text isEqualToString:Admin]){
         statusUsername = USERNAME_IS_ADMIN;
+    }
+    
+    if([[loginDB localDBUDID] caseInsensitiveCompare:[[[UIDevice currentDevice] identifierForVendor] UUIDString]]!= NSOrderedSame){
+        UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Agen login di device yang tidak terdaftar"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+        statusUsername = USERNAME_IS_INVALID;
     }
     
     [db close];

@@ -155,9 +155,9 @@ id dobtanngal;
     
 }
 
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+//- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
    // return [quickQuoteFlag isOn];
-}
+//}
 
 - (void)setUIElementsEditable{
 //    btnDOB.enabled = [quickQuoteFlag isOn];
@@ -1270,7 +1270,6 @@ id dobtanngal;
     LAOccLoadingField.text = @"";
     LACPAField.text = @"";
     LAPAField.text = @"";
-    
 }
 
 
