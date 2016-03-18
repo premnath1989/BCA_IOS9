@@ -3522,6 +3522,8 @@ bool RegDatehandling;
     [self.view endEditing:YES];
     
     UIButton *btn = (UIButton *) sender;
+    
+    
     NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
     [ClientProfile setObject:@"YES" forKey:@"isNew"];
     
@@ -8001,6 +8003,7 @@ bool RegDatehandling;
 -(void)selectedKodePosText:(NSString *)selectText SenderTag:(int)senderTag{
     if (senderTag==0){
         [txtHomeProvince setText:selectText];
+        [txtHomeTown setText:@""];
         //[_outletProvinsi setTitle:selectText forState:UIControlStateNormal];
     }
     else if (senderTag==1){
@@ -8009,6 +8012,7 @@ bool RegDatehandling;
     }
     else if (senderTag==2){
         [txtOfficeProvince setText:selectText];
+        [txtOfficeTown setText:@""];
         //[_outletProvinsiOffice setTitle:selectText forState:UIControlStateNormal];
     }
     else if (senderTag==3){
