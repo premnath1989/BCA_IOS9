@@ -542,7 +542,7 @@ bool WPTPD30RisDeleted = FALSE;
 #pragma mark - added by faiz 
 //added by faiz
 -(IBAction)validationExtraPremiField:(UITextField *)sender{
-    if (sender==_extraPremiPercentField){
+    /*if (sender==_extraPremiPercentField){
         if ([sender.text length]>0){
             [self setActiveTextField:_extraPremiNumberField Active:NO];
         }
@@ -560,9 +560,7 @@ bool WPTPD30RisDeleted = FALSE;
             [self setActiveTextField:_extraPremiPercentField Active:YES];
             [self setActiveTextField:_extraPremiNumberField Active:YES];
         }
-    }
-    
-    
+    }*/
 }
 
 -(void)ExtraNumbPremi

@@ -2790,7 +2790,7 @@ BOOL isFirstLoad;
         [cell.button3 setEnabled:false];
     }
     
-    if ([[dictionaryPOForInsert valueForKey:@"ProductName"] isEqualToString:@"BCA Life Keluargaku Protection"]){
+    if (([[dictionaryPOForInsert valueForKey:@"ProductName"] isEqualToString:@"BCA Life Keluargaku Protection"])||([[dictionaryPOForInsert valueForKey:@"ProductName"] isEqualToString:@"BCA Life Keluargaku"])){
         [cell.button2 setEnabled:true];
     }
     else{
@@ -2865,17 +2865,20 @@ BOOL isFirstLoad;
             [self.RightView bringSubviewToFront:self.RiderController.view];
             break;
         case 2:
-            if (!_PremiumController) {
-                _PremiumController = [self.storyboard instantiateViewControllerWithIdentifier:@"premiumView"];
-                //_PremiumController.delegate = self;
-                [self.RightView addSubview:_PremiumController.view];
+            if([_BasicController validationDataBasicPlan]){
+                if (!_PremiumController) {
+                    _PremiumController = [self.storyboard instantiateViewControllerWithIdentifier:@"premiumView"];
+                    //_PremiumController.delegate = self;
+                    [self.RightView addSubview:_PremiumController.view];
+                    
+                }
+                //[_PremiumController setDictionaryPremium:newDictionaryForBasicPlan];
+                //[_PremiumController setDictionaryPremium:newDictionaryForBasicPlan];
+                
+                [self pullSIData];
+                [_PremiumController setPremiumDictionary:newDictionaryForBasicPlan];
+                [self.RightView bringSubviewToFront:_PremiumController.view];
             }
-            //[_PremiumController setDictionaryPremium:newDictionaryForBasicPlan];
-            //[_PremiumController setDictionaryPremium:newDictionaryForBasicPlan];
-
-            [self pullSIData];
-            [_PremiumController setPremiumDictionary:newDictionaryForBasicPlan];
-            [self.RightView bringSubviewToFront:_PremiumController.view];
             break;
         default:
             break;
