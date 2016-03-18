@@ -10,6 +10,62 @@
 
 @implementation ModelDataReferral
 
+-(NSDictionary *)getNIPInfo{
+    NSDictionary *dict;
+    
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    NSMutableArray* arrayNIP=[[NSMutableArray alloc] init];
+    NSMutableArray* arrayNamaReferral=[[NSMutableArray alloc] init];
+    
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select NIP,Name from DataReferral order by NIP ASC"]];
+    
+    while ([s next]) {
+        NSString *nip = [NSString stringWithFormat:@"%@",[s stringForColumn:@"NIP"]];
+        NSString *name = [NSString stringWithFormat:@"%@",[s stringForColumn:@"Name"]];
+        
+        [arrayNIP addObject:nip];
+        [arrayNamaReferral addObject:name];
+    }
+    dict = [[NSDictionary alloc] initWithObjectsAndKeys:arrayNIP,@"NIP", arrayNamaReferral,@"Nama",nil];
+    
+    [results close];
+    [database close];
+    return dict;
+}
+
+-(NSDictionary *)getNIPInfoByNIP:(NSString *)nipNumber{
+    NSDictionary *dict;
+    
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    NSMutableArray* arrayNIP=[[NSMutableArray alloc] init];
+    NSMutableArray* arrayNamaReferral=[[NSMutableArray alloc] init];
+    
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select NIP,Name from DataReferral where NIP = \"%@\" order by NIP ASC",nipNumber]];
+    
+    while ([s next]) {
+        NSString *nip = [NSString stringWithFormat:@"%@",[s stringForColumn:@"NIP"]];
+        NSString *name = [NSString stringWithFormat:@"%@",[s stringForColumn:@"Name"]];
+        
+        [arrayNIP addObject:nip];
+        [arrayNamaReferral addObject:name];
+    }
+    dict = [[NSDictionary alloc] initWithObjectsAndKeys:arrayNIP,@"NIP", arrayNamaReferral,@"Nama",nil];
+    
+    [results close];
+    [database close];
+    return dict;
+}
+
 
 -(NSString *)getReferralName:(NSString *)referralNIP{
     NSString *referralName;

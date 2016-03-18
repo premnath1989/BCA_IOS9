@@ -329,6 +329,7 @@
 		4353C9511C61FCD000AE1ED9 /* ModelIdentificationType.m in Sources */ = {isa = PBXBuildFile; fileRef = 4353C9501C61FCD000AE1ED9 /* ModelIdentificationType.m */; };
 		437223E61C89372200D94B2F /* RateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 437223E51C89372200D94B2F /* RateModel.m */; };
 		437343151C6B1CBD001516D9 /* ReferralSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 437343141C6B1CBD001516D9 /* ReferralSource.m */; };
+		4373949A1C9BE5C2004522A2 /* NIPInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 437394981C9BE5C2004522A2 /* NIPInfo.m */; };
 		4374ACFD1C911FF00006522A /* eng_BCALKK_Page1.html in Resources */ = {isa = PBXBuildFile; fileRef = 4374ACFB1C911FF00006522A /* eng_BCALKK_Page1.html */; };
 		4374ACFE1C911FF00006522A /* eng_BCALKK_Page2.html in Resources */ = {isa = PBXBuildFile; fileRef = 4374ACFC1C911FF00006522A /* eng_BCALKK_Page2.html */; };
 		439985BB1C62F7890003B037 /* SourceIncome.m in Sources */ = {isa = PBXBuildFile; fileRef = 439985BA1C62F7890003B037 /* SourceIncome.m */; };
@@ -1347,6 +1348,8 @@
 		437223E51C89372200D94B2F /* RateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RateModel.m; sourceTree = "<group>"; };
 		437343131C6B1CBD001516D9 /* ReferralSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReferralSource.h; sourceTree = "<group>"; };
 		437343141C6B1CBD001516D9 /* ReferralSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReferralSource.m; sourceTree = "<group>"; };
+		437394981C9BE5C2004522A2 /* NIPInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NIPInfo.m; sourceTree = "<group>"; };
+		437394991C9BE5C2004522A2 /* NIPInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NIPInfo.h; sourceTree = "<group>"; };
 		43739B891C649F9B00A1788A /* LoginMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginMacros.h; sourceTree = "<group>"; };
 		4374ACFB1C911FF00006522A /* eng_BCALKK_Page1.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = eng_BCALKK_Page1.html; path = SI/eng_BCALKK_Page1.html; sourceTree = "<group>"; };
 		4374ACFC1C911FF00006522A /* eng_BCALKK_Page2.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = eng_BCALKK_Page2.html; path = SI/eng_BCALKK_Page2.html; sourceTree = "<group>"; };
@@ -4344,6 +4347,8 @@
 		C4EA9BCF1616DAFF00D51FE9 /* PopOver */ = {
 			isa = PBXGroup;
 			children = (
+				437394981C9BE5C2004522A2 /* NIPInfo.m */,
+				437394991C9BE5C2004522A2 /* NIPInfo.h */,
 				EF509EC5184F30110058CCD8 /* ClientProfileListingSortBy.h */,
 				EF509EC6184F30110058CCD8 /* ClientProfileListingSortBy.m */,
 				C4E7C06F17291E2D00038FA9 /* PagesController.h */,
@@ -5588,6 +5593,7 @@
 				AAFFE1801C7D475E001B91BF /* USAdditions.m in Sources */,
 				42B8B1401917339500E09A34 /* PRPage11.m in Sources */,
 				42B8B1411917339500E09A34 /* PRPage12.m in Sources */,
+				4373949A1C9BE5C2004522A2 /* NIPInfo.m in Sources */,
 				42B8B1421917339500E09A34 /* PRPage13.m in Sources */,
 				42B8B1431917339500E09A34 /* PRPage2.m in Sources */,
 				AA4EF76C1C85A4260050CCD8 /* ReaderThumbCache.m in Sources */,

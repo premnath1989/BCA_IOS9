@@ -14,4 +14,6 @@
     FMResultSet *results;
 }
 -(NSString *)getReferralName:(NSString *)referralNIP;
+-(NSDictionary *)getNIPInfo;
+-(NSDictionary *)getNIPInfoByNIP:(NSString *)nipNumber;
 @end

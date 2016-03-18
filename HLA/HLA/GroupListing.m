@@ -316,13 +316,13 @@
     }
     else  if (RecCount == 1 && zz) {
         //msg = [NSString stringWithFormat:@"Yakin ingin menghapus group ini %@?", ss];
-        msg = @"Apakah Anda yakin akan menghapus kelompok? Apabila kelompok dihapus, semua anggota akan keluar dari kelompok tersebut?";
+        msg = @"Apakah Anda yakin akan menghapus Group? Apabila group dihapus, semua anggota akan keluar dari group tersebut?";
     }
     else if (zz) {
         msg = @"Satu dari group ini memiliki anggota. Yakin ingin menghapus group ini?";
     }
     else if (!zz) {
-        msg = @"Apakah Anda yakin akan menghapus kelompok? Apabila kelompok dihapus, semua anggota akan keluar dari kelompok tersebut?";
+        msg = @"Apakah Anda yakin akan menghapus group? Apabila group dihapus, semua anggota akan keluar dari group tersebut?";
     }
     
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:msg delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
