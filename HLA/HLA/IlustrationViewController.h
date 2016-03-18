@@ -14,6 +14,7 @@
 #import <MessageUI/MessageUI.h>
 #import "PagesController.h"
 #import "ReaderViewController.h"
+#import "Formatter.h"
 
 @interface IlustrationViewController : UIViewController<ReaderViewControllerDelegate,NDHTMLtoPDFDelegate,UIWebViewDelegate,MFMailComposeViewControllerDelegate,PagesControllerDelegate>{
     IBOutlet UIWebView* webIlustration;
@@ -21,6 +22,7 @@
     NDHTMLtoPDF *PDFCreator;
     ModelAgentProfile* modelAgentProfile;
     RateModel* modelRate;
+    Formatter* formatter;
     UIBarButtonItem *email;
     UIBarButtonItem *printSI;
     UIBarButtonItem *pages;

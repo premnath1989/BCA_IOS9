@@ -1092,8 +1092,8 @@ id dobtanngal;
         numberBoolQuickQuote=[NSNumber numberWithInt:0];
     }
     
-    NSString *occupationDesc=[btnOccp.titleLabel.text stringByReplacingOccurrencesOfString:@" " withString:@""];
-    NSString *relationDesc=[_BtnHubungan.titleLabel.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString *occupationDesc=btnOccp.titleLabel.text;
+    NSString *relationDesc=_BtnHubungan.titleLabel.text;
     NSString *productName=NamaProduk.titleLabel.text;
     NSMutableDictionary *dictionaryNewLA=[[NSMutableDictionary alloc]initWithObjectsAndKeys:
                                           _SINumberBCA.text,@"SINO",

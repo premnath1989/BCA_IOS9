@@ -1903,7 +1903,8 @@ bool WPTPD30RisDeleted = FALSE;
                                                   _masaExtraPremiField.text,@"ExtraPremiumTerm",
                                                   _extraBasicPremiField.text,@"ExtraPremiumPolicy",
                                                   _totalPremiWithLoadingField.text,@"TotalPremiumLoading",
-                                                  @"0",@"SubTotalPremium",nil];
+                                                  @"0",@"SubTotalPremium",_KKLKPembelianKeBtn.titleLabel.text,@"PurchaseNumber",
+                                                  _KKLKDiskaunBtn.text,@"Discount",nil];
         return dictionaryBasicPlan;
         
     }

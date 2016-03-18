@@ -586,7 +586,7 @@ id dobtemp;
     NSLog(@"nameField %@",nameField.text);
     
     NSString *laDOB=[_BtnTanggalLahir.titleLabel.text stringByReplacingOccurrencesOfString:@" " withString:@""];
-    NSString *occupationDesc=[btnOccp.titleLabel.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString *occupationDesc=btnOccp.titleLabel.text;
     NSMutableDictionary *dictionaryNewLA=[[NSMutableDictionary alloc]initWithObjectsAndKeys:
                                           numberIntClientProfile,@"LA_ClientID",
                                           nameField.text,@"LA_Name",

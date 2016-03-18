@@ -41,6 +41,7 @@
 
     modelAgentProfile=[[ModelAgentProfile alloc]init];
     modelRate = [[RateModel alloc]init];
+    formatter = [[Formatter alloc]init];
     
     NSMutableDictionary *newAttributes = [[NSMutableDictionary alloc] init];
     [newAttributes setObject:[UIFont systemFontOfSize:18] forKey:UITextAttributeFont];
@@ -498,6 +499,9 @@
     NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
     f.numberStyle = NSNumberFormatterDecimalStyle;
     NSNumber *myNumber = [f numberFromString:[_dictionaryForBasicPlan valueForKey:@"Sum_Assured"]];
+    
+    NSLog(@"formatted %@",[formatter numberToCurrencyDecimalFormatted:myNumber]);
+    
     NSNumber *myNumberPremiB = [f numberFromString:[_dictionaryForBasicPlan valueForKey:@"ExtraPremiumSum"]];
     double basicSumAssured = [myNumber doubleValue]/1000;
     

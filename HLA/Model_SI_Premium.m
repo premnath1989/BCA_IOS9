@@ -17,7 +17,7 @@
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     [database open];
     
-    BOOL success = [database executeUpdate:@"insert into SI_Premium (SINO, Sum_Assured, Payment_Term, Payment_Frequency,PremiumPolicyA,ExtraPremiumPercentage,ExtraPremiumSum,ExtraPremiumTerm,ExtraPremiumPolicy,TotalPremiumLoading,SubTotalPremium,CreatedDate,UpdatedDate) values (?,?,?,?,?,?,?,?,?,?,?,""datetime(\"now\", \"+8 hour\")"",""datetime(\"now\", \"+8 hour\")"")" ,
+    BOOL success = [database executeUpdate:@"insert into SI_Premium (SINO, Sum_Assured, Payment_Term, Payment_Frequency,PremiumPolicyA,ExtraPremiumPercentage,ExtraPremiumSum,ExtraPremiumTerm,ExtraPremiumPolicy,TotalPremiumLoading,SubTotalPremium,CreatedDate,UpdatedDate,PurchaseNumber,Discount) values (?,?,?,?,?,?,?,?,?,?,?,""datetime(\"now\", \"+8 hour\")"",""datetime(\"now\", \"+8 hour\")"",?,?)" ,
                     [dataPremium valueForKey:@"SINO"],
                     [dataPremium valueForKey:@"Sum_Assured"],
                     [dataPremium valueForKey:@"Payment_Term"],
@@ -28,7 +28,9 @@
                     [dataPremium valueForKey:@"ExtraPremiumTerm"],
                     [dataPremium valueForKey:@"ExtraPremiumPolicy"],
                     [dataPremium valueForKey:@"TotalPremiumLoading"],
-                    [dataPremium valueForKey:@"SubTotalPremium"]];
+                    [dataPremium valueForKey:@"SubTotalPremium"],
+                    [dataPremium valueForKey:@"PurchaseNumber"],
+                    [dataPremium valueForKey:@"Discount"]];
     
     if (!success) {
         NSLog(@"%s: insert error: %@", __FUNCTION__, [database lastErrorMessage]);
@@ -44,7 +46,7 @@
     
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     [database open];
-    BOOL success = [database executeUpdate:@"update SI_Premium set Sum_Assured=?, Payment_Term=?, Payment_Frequency=?,PremiumPolicyA=?,ExtraPremiumPercentage=?,ExtraPremiumSum=?,ExtraPremiumTerm=?,ExtraPremiumPolicy=?,TotalPremiumLoading=?,SubTotalPremium=?,UpdatedDate=""datetime(\"now\", \"+8 hour\")"" where SINO=?" ,
+    BOOL success = [database executeUpdate:@"update SI_Premium set Sum_Assured=?, Payment_Term=?, Payment_Frequency=?,PremiumPolicyA=?,ExtraPremiumPercentage=?,ExtraPremiumSum=?,ExtraPremiumTerm=?,ExtraPremiumPolicy=?,TotalPremiumLoading=?,SubTotalPremium=?,UpdatedDate=""datetime(\"now\", \"+8 hour\")"",PurchaseNumber=?,Discount=? where SINO=?" ,
                     [dataPremium valueForKey:@"Sum_Assured"],
                     [dataPremium valueForKey:@"Payment_Term"],
                     [dataPremium valueForKey:@"Payment_Frequency"],
@@ -55,7 +57,9 @@
                     [dataPremium valueForKey:@"ExtraPremiumPolicy"],
                     [dataPremium valueForKey:@"TotalPremiumLoading"],
                     [dataPremium valueForKey:@"SubTotalPremium"],
-                    [dataPremium valueForKey:@"SINO"]];
+                    [dataPremium valueForKey:@"SINO"],
+                    [dataPremium valueForKey:@"PurchaseNumber"],
+                    [dataPremium valueForKey:@"Discount"]];
     if (!success) {
         NSLog(@"%s: insert error: %@", __FUNCTION__, [database lastErrorMessage]);
         // do whatever you need to upon error
@@ -95,6 +99,8 @@
     NSString* SubTotalPremium;
     NSString *CreatedDate;
     NSString *UpdatedDate;
+    NSString *PurchaseNumber;
+    NSString *Discount;
 
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
@@ -118,6 +124,8 @@
         SubTotalPremium = [s stringForColumn:@"SubTotalPremium"];
         CreatedDate = [s stringForColumn:@"CreatedDate"];
         UpdatedDate = [s stringForColumn:@"UpdatedDate"];
+        PurchaseNumber = [s stringForColumn:@"PurchaseNumber"];
+        Discount = [s stringForColumn:@"Discount"];
     }
     
     dict=[[NSDictionary alloc]initWithObjectsAndKeys:
@@ -133,7 +141,10 @@
           TotalPremiumLoading,@"TotalPremiumLoading",
           SubTotalPremium,@"SubTotalPremium",
           CreatedDate,@"CreatedDate",
-          UpdatedDate,@"UpdatedDate",nil];
+          UpdatedDate,@"UpdatedDate",
+          PurchaseNumber,@"PurchaseNumber",
+          Discount,@"Discount",
+          nil];
     
     [results close];
     [database close];
