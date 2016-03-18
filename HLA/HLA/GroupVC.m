@@ -141,7 +141,7 @@ BOOL isSave;
 				}
 			
 			success = YES;
-			msg = @"Kelompok baru berhasil dibuat.";
+			msg = @"Group baru berhasil dibuat.";
 			
 //			[self dismissModalViewControllerAnimated:YES];
 //			[[NSNotificationCenter defaultCenter] postNotificationName:@"reloadTable" object:self];
@@ -193,7 +193,7 @@ BOOL isSave;
 			}
 			
 			success = YES;
-			msg = @"Kelompok baru berhasil diperbarui.";
+			msg = @"Group baru berhasil diperbarui.";
 			
 			
 //			[self dismissModalViewControllerAnimated:YES];
@@ -266,7 +266,7 @@ BOOL isSave;
 		[alert show];
 	}
 	else if (Trim_GroupName.length != 0 && member.count == 0) {
-		UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@" " message:@"Dibutuhkan minimal 1 anggota untuk membuat kelompok." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+		UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@" " message:@"Dibutuhkan minimal 1 anggota untuk membuat group." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
 		[alert show];
 	}
 	else {
@@ -372,7 +372,7 @@ BOOL isSave;
 	}
     
     else if (RecCount >= 1) {
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Apakah Anda yakin akan menghapus kelompok? Apabila kelompok dihapus, semua anggota akan keluar dari kelompok tersebut?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Apakah Anda yakin akan menghapus group? Apabila group dihapus, semua anggota akan keluar dari group tersebut?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
 		[alert setTag:1001];
 		[alert show];
 	}
@@ -526,13 +526,13 @@ BOOL isSave;
 	
 	NSString *Trim_GroupName = [GroupName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 	if (Trim_GroupName.length == 0) {
-		UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@" " message:@"Nama kelompok harus diisi." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+		UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@" " message:@"Nama group harus diisi." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
 		[alert show];
 	
 		return FALSE;
 	}
 	else if (member.count == 0) {
-		UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@" " message:@"Dibutuhkan minimal 1 anggota untuk membuat kelompok." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+		UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@" " message:@"Dibutuhkan minimal 1 anggota untuk membuat group." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
 		[alert show];
 		
 		return FALSE;
@@ -846,11 +846,11 @@ BOOL isSave;
     {
 		if (![self CountMember] && [TitleBar.text isEqualToString:@"Edit Group"]) {
 			if (member.count > 0) {
-				UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@" " message:@"Silakan Save sebelum kembali ke Daftar kelompok." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+				UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@" " message:@"Silakan Save sebelum kembali ke Daftar group." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
 				[alert show];
 			}
 			else {
-				UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@" " message:@"Dibutuhkan minimal 1 anggota untuk membuat kelompok." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+				UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@" " message:@"Dibutuhkan minimal 1 anggota untuk membuat group." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
 				[alert show];
 			}
 		}
