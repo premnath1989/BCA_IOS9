@@ -638,11 +638,11 @@ NSMutableArray *DelGroupArr;
     
     //validation message data refferal
     NSString *validationNIP=@"NIP harus diisi";    
+    NSString *validationNamaReferral=@"Nama Referral harus diisi";
+    NSString *validationSumberReferral=@"Sumber Referral harus diisi";
     NSString *validationKodeCabang=@"Kode Cabang harus diisi";
     NSString *validationNamaCabang=@"Nama Cabang harus diisi";
     NSString *validationKCU=@"KCU harus diisi";
-    NSString *validationNamaReferral=@"Nama Referral harus diisi";
-    NSString *validationSumberReferral=@"Sumber Referral harus diisi";
     //textNIP
     NSString* NIP=txtNip.text;
     //outletkodecabang
@@ -661,6 +661,12 @@ NSMutableArray *DelGroupArr;
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
         return false;
     }
+    else if ([validationSet containsObject:refSource]||refSource==NULL){
+        [self createAlertViewAndShow:validationSumberReferral tag:0];
+        [outletReferralSource setBackgroundColor:[UIColor redColor]];
+        [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+        return false;
+    }    
     else if ([validationSet containsObject:branchCode]||branchCode==NULL){
         [self createAlertViewAndShow:validationKodeCabang tag:0];
         [_outletBranchCode setBackgroundColor:[UIColor redColor]];
@@ -685,12 +691,6 @@ NSMutableArray *DelGroupArr;
         [txtReferralName becomeFirstResponder];
         return false;
     }*/
-    else if ([validationSet containsObject:refSource]||refSource==NULL){
-        [self createAlertViewAndShow:validationSumberReferral tag:0];
-        [outletReferralSource setBackgroundColor:[UIColor redColor]];
-        [ClientProfile setObject:@"NO" forKey:@"TabBar"];
-        return false;
-    }
     return valid;
 }
 

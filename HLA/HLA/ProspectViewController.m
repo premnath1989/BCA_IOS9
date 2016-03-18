@@ -667,13 +667,15 @@ bool RegDatehandling;
     
     //validation message data refferal
     NSString *validationNIP=@"NIP harus diisi";
+    NSString *validationNamaReferral=@"Nama Referral harus diisi";
+    NSString *validationSumberReferral=@"Sumber Referral harus diisi";
     NSString *validationKodeCabang=@"Kode Cabang harus diisi";
     NSString *validationNamaCabang=@"Nama Cabang harus diisi";
     NSString *validationKCU=@"KCU harus diisi";
-    NSString *validationNamaReferral=@"Nama Referral harus diisi";
-    NSString *validationSumberReferral=@"Sumber Referral harus diisi";
     //textNIP
     NSString* NIP=txtNip.text;
+    //outlet sumber referral
+    NSString* refSource=outletReferralSource.titleLabel.text;
     //outletkodecabang
     NSString* branchCode=outletBranchCode.titleLabel.text;
     //outletnamacabang
@@ -682,11 +684,15 @@ bool RegDatehandling;
     NSString* KCU=txtKcu.text;
     //textnamareferral
     NSString* refName=txtReferralName.text;
-    //outlet sumber referral
-    NSString* refSource=outletReferralSource.titleLabel.text;
 
     if ([validationSet containsObject:NIP]||NIP==NULL){
         [self createAlertViewAndShow:validationNIP tag:0];
+        [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+        return false;
+    }
+    else if ([validationSet containsObject:refSource]||refSource==NULL){
+        [self createAlertViewAndShow:validationSumberReferral tag:0];
+        [outletReferralSource setBackgroundColor:[UIColor redColor]];
         [ClientProfile setObject:@"NO" forKey:@"TabBar"];
         return false;
     }
@@ -714,12 +720,6 @@ bool RegDatehandling;
         [txtReferralName becomeFirstResponder];
         return false;
     }*/
-    else if ([validationSet containsObject:refSource]||refSource==NULL){
-        [self createAlertViewAndShow:validationSumberReferral tag:0];
-        [outletReferralSource setBackgroundColor:[UIColor redColor]];
-        [ClientProfile setObject:@"NO" forKey:@"TabBar"];
-        return false;
-    }
     return valid;
 }
 
