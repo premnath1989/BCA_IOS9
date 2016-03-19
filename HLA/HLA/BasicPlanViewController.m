@@ -19,6 +19,7 @@
 
 @interface BasicPlanViewController (){
     ColorHexCode *CustomColor;
+    double discountPembelian;
 }
 @end
 
@@ -36,8 +37,9 @@
 @synthesize maxSALabel;
 @synthesize healthLoadingView;
 @synthesize MOPSegment;
+@synthesize totalDivide;
 @synthesize S100MOPSegment;
-@synthesize incomeSegment,cashDivSgmntCP;
+@synthesize incomeSegment,cashDivSgmntCP,DiscountCalculation;
 @synthesize advanceIncomeSegment;
 @synthesize cashDividendSegment;
 @synthesize HLField,PlanType;
@@ -46,7 +48,7 @@
 @synthesize tempHLField,annualRiderSum,halfRiderSum,monthRiderSum,quarterRiderSum;
 @synthesize tempHLTermField,basicPremAnn,basicPremHalf,basicPremQuar,basicPremMonth;
 @synthesize myScrollView,labelThree,labelSix,labelSeven,labelFour,labelFive,annualMedRiderPrem,monthMedRiderPrem,quarterMedRiderPrem;
-@synthesize ageClient,requestSINo,termCover,maxSA,minSA,halfMedRiderPrem;
+@synthesize ageClient,requestSINo,termCover,maxSA,minSA,halfMedRiderPrem,AnuityRt;
 @synthesize MOP,yearlyIncome,advanceYearlyIncome,basicRate,cashDividend,TotalA;
 @synthesize getSINo,getSumAssured,getPolicyTerm,getHL,getHLTerm,getTempHL,getTempHLTerm;
 @synthesize planCode,requestOccpCode,dataInsert,basicBH,basicPH,basicLa2ndH;
@@ -56,7 +58,7 @@
 @synthesize requestAge,OccpCode,requestIDPay,requestIDProf,idPay,idProf,annualMedRiderSum,halfMedRiderSum,quarterMedRiderSum;
 @synthesize requestAgePay,requestDOBPay,requestIndexPay,requestOccpPay,requestSexPay,requestSmokerPay,monthMedRiderSum;
 @synthesize PayorAge,PayorDOB,PayorOccpCode,PayorSex,PayorSmoker,LPlanOpt,LDeduct,LAge,LSmoker,MBKKPremium;
-@synthesize LAAge,LASex,RelWithLA;
+@synthesize LAAge,LASex,RelWithLA,MDBKK,MDBKK_Mil;
 @synthesize LTerm,age,sex,LSex,riderRate,LRidHL1K,LRidHL100,LRidHLP,LTempRidHL1K,LOccpCode;
 @synthesize requestAge2ndLA,requestDOB2ndLA,requestIndex2ndLA,requestOccp2ndLA,requestSex2ndLA,requestSmoker2ndLA;
 @synthesize secondLAAge,secondLADOB,secondLAOccpCode,secondLASex,secondLASmoker;
@@ -75,6 +77,7 @@
 @synthesize planChoose,PremiType;
 @synthesize isFirstSaved;
 @synthesize navigationBar;
+@synthesize percentPaymentMode;
 
 #pragma mark - Cycle View
 
@@ -85,6 +88,8 @@ bool WPTPD30RisDeleted = FALSE;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    discountPembelian = 0;
+    
     CustomColor = [[ColorHexCode alloc] init ];
     
     NSMutableDictionary *newAttributes = [[NSMutableDictionary alloc] init];
@@ -500,6 +505,14 @@ bool WPTPD30RisDeleted = FALSE;
     }
     if(textField == _extraPremiNumberField)
     {
+        if([PlanType isEqualToString:@"BCA Life Keluargaku Protection"])
+        {
+            [self MeninggalDuniaMDBKK];
+        }
+        else
+        {
+           
+        }
         _masaExtraPremiField.enabled=TRUE;
         //_masaExtraPremiField.text =@"0";
     }
@@ -548,6 +561,7 @@ bool WPTPD30RisDeleted = FALSE;
     
 }
 
+
 #pragma mark - added by faiz 
 //added by faiz
 -(IBAction)validationExtraPremiField:(UITextField *)sender{
@@ -567,6 +581,7 @@ bool WPTPD30RisDeleted = FALSE;
     if([PlanType isEqualToString:@"BCA Life Keluargaku Protection"])
     {
         [self MeninggalDuniaMDBKK];
+        
     }
     else
     {
@@ -905,9 +920,13 @@ bool WPTPD30RisDeleted = FALSE;
     
 
 }
+-(void)Diskaun
+{
+    
+}
 
 
--(void)PremiDasarActKeluargaku: (NSString *)PaymentDesc
+-(void)PremiDasarActKeluargaku: (NSString *)PaymentDesc//BasicRiderPremium ||Rider Premium MBKK
 {
     
     if([RelWithLA isEqualToString:@"SELF"])
@@ -998,10 +1017,19 @@ bool WPTPD30RisDeleted = FALSE;
     
     //Diskoun Premi//
     
-    DiskounPremi = NoPolRate * RatesInt * total * PaymentFoctor;
+    DiscountCalculation = NoPolRate * RatesInt * total * PaymentFoctor;
     
-
     
+    DiskounPremi = NoPolRate * RatesInt * total * PaymentFoctor;//
+    
+    NSNumberFormatter *format1 = [[NSNumberFormatter alloc]init];
+    [format1 setNumberStyle:NSNumberFormatterNoStyle];
+    [format1 setGeneratesDecimalNumbers:FALSE];
+    [format1 setMaximumFractionDigits:0];
+    [format1 setRoundingMode:NSNumberFormatterRoundHalfUp];
+    
+    DiskounPremi = [[format1 stringFromNumber:[NSNumber numberWithDouble:DiskounPremi]] doubleValue];
+    [_KKLKDiskaunBtn setText:[NSString stringWithFormat:@"%@",[format1 stringFromNumber:[NSNumber numberWithDouble:DiskounPremi]]]];
     
     NSString*WaiverRate;
     
@@ -1077,7 +1105,7 @@ bool WPTPD30RisDeleted = FALSE;
 //    RiderPremium5 = round();
     
     
-    double totalPremiumDasarA = RiderPremium5 + DiskounPremi;
+    double totalPremiumDasarA = RiderPremium5 + DiskounPremi;//
     
     NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setFormatterBehavior: NSNumberFormatterBehavior10_4];
@@ -1097,12 +1125,26 @@ bool WPTPD30RisDeleted = FALSE;
    // [_KKLKDiskaunBtn setText:[NSString stringWithFormat:@"%2f", DiskounPremi]];
     
     //Current Defaulr
-    [_KKLKDiskaunBtn setText:[NSString stringWithFormat:@"%@",@"0"]];
+    //[_KKLKDiskaunBtn setText:[NSString stringWithFormat:@"%@",@"0"]];
     
     
     
     
+    //DiskonFormula
+    //Diskoun Premi//
+    [self MeninggalDuniaMDBKK];
     
+    DiscountCalculation = discountPembelian * RatesInt * total * percentPaymentMode;
+    //DiskounPremi = NoPolRate * RatesInt * total * PaymentFoctor;//
+    
+    NSNumberFormatter *format21 = [[NSNumberFormatter alloc]init];
+    [format21 setNumberStyle:NSNumberFormatterNoStyle];
+    [format21 setGeneratesDecimalNumbers:FALSE];
+    [format21 setMaximumFractionDigits:2];
+    //[format21 setRoundingMode:NSNumberFormatterRoundHalfUp];
+    
+    DiscountCalculation = [[format21 stringFromNumber:[NSNumber numberWithDouble:DiscountCalculation]] doubleValue];
+    [_KKLKDiskaunBtn setText:[NSString stringWithFormat:@"%@",[format1 stringFromNumber:[NSNumber numberWithDouble:DiscountCalculation]]]];
     
   //  [self PremiDasarIncomeChange:_basicPremiField.text];
 }
@@ -1303,6 +1345,8 @@ bool WPTPD30RisDeleted = FALSE;
 //    [self PremiDasarIncomeChange:_basicPremiField.text];
 }
 
+#pragma mark : common Func
+
 -(void)MeninggalDuniaMDBKK
 {
     //(EM% * EMrate) * BasicSum_Assured/1000 * PaymentFactorRate;
@@ -1310,6 +1354,9 @@ bool WPTPD30RisDeleted = FALSE;
     double ExtraPremiField = [_extraPremiPercentField.text doubleValue];
     
     float percentExtraPremiField = ExtraPremiField / 100.0f;
+    
+    double ExtraPremiFieldMil = [_extraPremiNumberField.text doubleValue];
+    
     
     NSString*EmRateQuery;
     NSString*EMValue;
@@ -1368,7 +1415,7 @@ bool WPTPD30RisDeleted = FALSE;
     
     double EMvalueDouble =[EMValue doubleValue];
     
-      long long totalDivide =(BasisSumAssured/1000);
+   totalDivide =(BasisSumAssured/1000);
     
     double PaymentType;
     double PaymentFoctor;
@@ -1409,9 +1456,10 @@ bool WPTPD30RisDeleted = FALSE;
         
     }
     
-     float percent = [PaymentFactoryQuery floatValue] / 100.0f;
+     percentPaymentMode = [PaymentFactoryQuery floatValue] / 100.0f;
     
-    double MDBKK =percentExtraPremiField * EMvalueDouble * totalDivide * percent;
+    
+     MDBKK =percentExtraPremiField * EMvalueDouble * totalDivide * percentPaymentMode;
     
     
    // Rider Loading Premium
@@ -1471,8 +1519,6 @@ bool WPTPD30RisDeleted = FALSE;
         
     }
     
-    
-    
     double RatesInt5 = [RatesPremiumRate5 doubleValue];
     double  RiderPremium5 = (RatesInt5/100)*(DiskounPremi + MDBKK);
     
@@ -1503,31 +1549,72 @@ bool WPTPD30RisDeleted = FALSE;
         
     }
     
-    double AnuityRt = [PaymentFactoryAnuityRate doubleValue];
+    AnuityRt = [PaymentFactoryAnuityRate doubleValue];
+                
+                AnuityRt = (AnuityRt/1000);
+    
+    MDBKK_Mil = ExtraPremiFieldMil* totalDivide *percentPaymentMode;//MDBKKMIL extra premi
+    
+    NSNumberFormatter *format2 = [[NSNumberFormatter alloc]init];
+    [format2 setNumberStyle:NSNumberFormatterNoStyle];
+    [format2 setGeneratesDecimalNumbers:FALSE];
+    [format2 setMaximumFractionDigits:0];
+    [format2 setRoundingMode:NSNumberFormatterRoundHalfUp];
+    
+    MDBKK_Mil = [[format2 stringFromNumber:[NSNumber numberWithDouble:MDBKK_Mil]] doubleValue];
+    
     
     
     
     
 //    long long MDBKK =percentExtraPremiField * EMvalueDouble * totalDivide * percent;
-    long long totalBasicPremium = percentExtraPremiField * (RiderPremium5 + DiskounPremi) *AnuityRt *percent;
+    long long totalBasicPremium = percentExtraPremiField * (RiderPremium5 + DiskounPremi) *AnuityRt *percentPaymentMode;
     
     double ValueExtraPremi = percentExtraPremiField * RiderPremium5;
+    
+    
     
     
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
     [formatter setNumberStyle:NSNumberFormatterCurrencyStyle];
     [formatter setCurrencySymbol:@""];
     [formatter setMaximumFractionDigits:0];
-
+    
+    
+    double ExtraValue = ExtraPremiFieldMil * DiskounPremi * percentPaymentMode * AnuityRt ;
+    
+    NSNumberFormatter *format21 = [[NSNumberFormatter alloc]init];
+    [format21 setNumberStyle:NSNumberFormatterNoStyle];
+    [format21 setGeneratesDecimalNumbers:FALSE];
+    [format21 setMaximumFractionDigits:0];
+    [format21 setRoundingMode:NSNumberFormatterRoundHalfUp];
+    
+    ExtraValue = [[format21 stringFromNumber:[NSNumber numberWithDouble:ExtraValue]] doubleValue];
     
     
     
 //    double Test = RiderPremium5 * percentExtraPremiField;
 //    double Test2 = percentExtraPremiField * Test;
     
-
+[self validationExtraPremiTxt];
     
 }
+
+-(void)validationExtraPremiTxt
+{
+ 
+     //EM *(sumAsured/1000)* payment_mode
+    
+     double EtraPremMil =[_extraPremiNumberField.text doubleValue];
+    
+    long long ExtraPremiMilOne = totalDivide *percentPaymentMode * EtraPremMil;
+    
+     //Em* (Anuaty/1000)*payment mode/
+    
+    long long ExtraPremiMilTwo = EtraPremMil * AnuityRt * percentPaymentMode;
+    
+}
+
 
 
 -(void)PremiDasarActB
@@ -5258,12 +5345,22 @@ bool WPTPD30RisDeleted = FALSE;
 -(void)PlanPembelianKe:(PembeliaKe *)inController didSelectCode:(NSString *)aaCode andDesc:(NSString *)aaDesc;
 {
     
+    if ([aaDesc intValue]>=2){
+        discountPembelian=0.05;
+    }
+    else{
+        discountPembelian=0;
+    }
+    
     [_KKLKPembelianKeBtn setTitle:aaDesc forState:UIControlStateNormal];
     [self.planPopover dismissPopoverAnimated:YES];
     // getPlanCode = aaCode;
+
     
-    
-    
+    [self PremiDasarActKeluargaku:FRekeunsiPembayaranMode];
+    [self PremiDasarActkklk];
+    PaymentDescMDKK = FRekeunsiPembayaranMode;
+
     PembelianKEString = aaDesc;
 
 }

@@ -61,9 +61,13 @@
 	AppDelegate* appDelegate;
 	BOOL Editable;
     double maxSAFactor;
+    double AnuityRt;
     long long ExtraPremiTotal;
     long long ExtraPrecenttotal;
+    long long totalDivide;
     double DiskounPremi;
+    double DiscountCalculation;
+    double MDBKK;
     NSMutableArray *arrExistRiderCode;
     NSMutableArray *arrExistPlanChoice;
     
@@ -125,9 +129,11 @@
 @property (nonatomic,strong) id requestOccp2ndLA;
 @property (nonatomic,strong) id requesteProposalStatus;
 @property (nonatomic, assign) BOOL requestEDD;
+@property (nonatomic, assign,readwrite)float percentPaymentMode;
 
 @property (nonatomic, assign,readwrite) int ageClient;
 @property (nonatomic, assign,readwrite) long long BasisSumAssured;
+@property (nonatomic, assign,readwrite) long long totalDivide;
 @property (nonatomic, assign,readwrite) long long ExtraPremiTotal;
 @property (nonatomic, assign,readwrite) long long ExtraPrecenttotal;
 @property(nonatomic , retain) NSString *OccpCode;
@@ -256,10 +262,14 @@
 @property (nonatomic, assign,readwrite) int advanceYearlyIncomeHLAIB;
 @property (nonatomic, assign,readwrite) int advanceYearlyIncomeHLACP;
 @property (nonatomic, assign,readwrite) double basicRate;
+@property (nonatomic, assign,readwrite) double MDBKK;
+@property (nonatomic, assign,readwrite) double MDBKK_Mil;
 @property (nonatomic, assign,readwrite) double DiskounPremi;
+@property (nonatomic, assign,readwrite) double DiscountCalculation;
 @property (nonatomic, assign,readwrite) double TotalA;
 @property (nonatomic,strong) NSString *planCode;
 @property (nonatomic, copy) NSString *quotationLang;
+
 
 //to display
 @property (nonatomic,strong) NSString *getSINo;
@@ -291,6 +301,7 @@
 @property (nonatomic, assign,readwrite) int age;
 @property (nonatomic,strong) NSString *sex;
 @property (nonatomic, assign,readwrite) double riderRate;
+@property (nonatomic, assign,readwrite) double AnuityRt;
 @property (nonatomic,copy) NSString *pTypeOccp;
 @property (nonatomic, assign,readwrite) int occLoadRider;
 @property (nonatomic, assign,readwrite) double riderPrem;
