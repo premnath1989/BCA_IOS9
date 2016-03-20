@@ -353,27 +353,10 @@
     NSString *javaScriptP1T1 = [NSString stringWithFormat:@"document.getElementById('BasicSA').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"Sum_Assured"]];
     NSString *javaScriptP1T2 = [NSString stringWithFormat:@"document.getElementById('Premi').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"PremiumPolicyA"]];
     
-/*    NSString *javaScriptP2H1 = [NSString stringWithFormat:@"document.getElementById('HeaderPOName').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"PO_Name"]];
-    NSString *javaScriptP2H2 = [NSString stringWithFormat:@"document.getElementById('HeaderSumAssured').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"Sum_Assured"]];
-    NSString *javaScriptP2H3 = [NSString stringWithFormat:@"document.getElementById('HeaderPODOB').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"PO_DOB"]];
-    NSString *javaScriptP2H4 = [NSString stringWithFormat:@"document.getElementById('HeaderPaymentPeriode').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"Payment_Term"]];
-    NSString *javaScriptP2H5 = [NSString stringWithFormat:@"document.getElementById('HeaderLAName').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"LA_Name"]];
-    NSString *javaScriptP2H6 = [NSString stringWithFormat:@"document.getElementById('HeaderPaymentFrequency').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"Payment_Frequency"]];
-    NSString *javaScriptP2H7 = [NSString stringWithFormat:@"document.getElementById('HeaderLADOB').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"LA_DOB"]];
-    NSString *javaScriptP2H8 = [NSString stringWithFormat:@"document.getElementById('HeaderBasicPremi').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"PremiumPolicyA"]];
-    NSString *javaScriptP2H9 = [NSString stringWithFormat:@"document.getElementById('HeaderIlustrationDate').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"SIDate"]];
-    NSString *javaScriptP2H10 = [NSString stringWithFormat:@"document.getElementById('HeaderExtraPremiPercent').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"ExtraPremiumPercentage"]];
-    NSString *javaScriptP2H11 = [NSString stringWithFormat:@"document.getElementById('HeaderPOAge').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"PO_Age"]];
-    NSString *javaScriptP2H12 = [NSString stringWithFormat:@"document.getElementById('HeaderExtraPremiDuration').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"ExtraPremiumTerm"]];
-    NSString *javaScriptP2H13 = [NSString stringWithFormat:@"document.getElementById('HeaderLAAge').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"LA_Age"]];
-    NSString *javaScriptP2H14 = [NSString stringWithFormat:@"document.getElementById('HeaderExtraPremiUWLoading').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"TotalPremiumLoading"]];
-    NSString *javaScriptP2H15 = [NSString stringWithFormat:@"document.getElementById('HeaderPOAge').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"PO_Age"]];
-    NSString *javaScriptP2H16 = [NSString stringWithFormat:@"document.getElementById('HeaderPremiPay').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"LA_Occp"]];*/
-    
     
     //footer agent data
     NSString *javaScriptF1 = [NSString stringWithFormat:@"document.getElementById('FooterAgentName').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"AgentName"]];
-    NSString *javaScriptF2 = [NSString stringWithFormat:@"document.getElementById('FooterPrintDate').innerHTML =\"%@\";",[NSDate date]];
+    NSString *javaScriptF2 = [NSString stringWithFormat:@"document.getElementById('FooterPrintDate').innerHTML =\"%@\";",[formatter getDateToday:@"yyyy-MM-dd hh:mm:ss"]];
     NSString *javaScriptF3 = [NSString stringWithFormat:@"document.getElementById('FooterAgentCode').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"AgentCode"]];
     NSString *javaScriptF4 = [NSString stringWithFormat:@"document.getElementById('FooterBranch').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"BranchName"]];
     
@@ -521,19 +504,27 @@
     NSString *javaScriptP2H7 = [NSString stringWithFormat:@"document.getElementById('HeaderLADOB').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"LA_Age"]];
     NSString *javaScriptP2H8 = [NSString stringWithFormat:@"document.getElementById('HeaderBasicPremi').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"PremiumPolicyA"]];
     NSString *javaScriptP2H9 = [NSString stringWithFormat:@"document.getElementById('HeaderIlustrationDate').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"SIDate"]];
-    NSString *javaScriptP2H10 = [NSString stringWithFormat:@"document.getElementById('HeaderExtraPremiPercent').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"ExtraPremiumPercentage"]];
+    
+    NSString *javaScriptP2H10;
+    if ([[_dictionaryForBasicPlan valueForKey:@"ExtraPremiumPercentage"] intValue]>0){
+        javaScriptP2H10 = [NSString stringWithFormat:@"document.getElementById('HeaderExtraPremiPercent').innerHTML =\"%@\";", [NSString stringWithFormat:@"%@%%",[_dictionaryForBasicPlan valueForKey:@"ExtraPremiumPercentage"]]];
+    }
+        
     NSString *javaScriptP2H11 = [NSString stringWithFormat:@"document.getElementById('HeaderPOAge').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"PO_Age"]];
     NSString *javaScriptP2H12 = [NSString stringWithFormat:@"document.getElementById('HeaderExtraPremiDuration1').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"ExtraPremiumTerm"]];
     NSString *javaScriptP2H13 = [NSString stringWithFormat:@"document.getElementById('HeaderLAAge').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"LA_Age"]];
     NSString *javaScriptP2H14 = [NSString stringWithFormat:@"document.getElementById('HeaderExtraPremiUWLoading').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"ExtraPremiumPolicy"]];
     NSString *javaScriptP2H15 = [NSString stringWithFormat:@"document.getElementById('HeaderPOSex').innerHTML =\"%@\";", sexPO];
     NSString *javaScriptP2H16 = [NSString stringWithFormat:@"document.getElementById('HeaderPremiPay').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"TotalPremiumLoading"]];
-    NSString *javaScriptP2H17 = [NSString stringWithFormat:@"document.getElementById('HeaderExtraPremiNumber').innerHTML =\"%@\";", myNumberPremiB];
+    NSString *javaScriptP2H17;
+    if ([myNumberPremiB intValue]>0){
+        javaScriptP2H17 = [NSString stringWithFormat:@"document.getElementById('HeaderExtraPremiNumber').innerHTML =\"%@\";", [NSString stringWithFormat:@"%@‰",myNumberPremiB]];
+    }
 
     
     //footer agent data
     NSString *javaScriptF1 = [NSString stringWithFormat:@"document.getElementById('FooterAgentName2').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"AgentName"]];
-    NSString *javaScriptF2 = [NSString stringWithFormat:@"document.getElementById('FooterPrintDate2').innerHTML =\"%@\";",[NSDate date]];
+    NSString *javaScriptF2 = [NSString stringWithFormat:@"document.getElementById('FooterPrintDate2').innerHTML =\"%@\";",[formatter getDateToday:@"yyyy-MM-dd hh:mm:ss"]];
     NSString *javaScriptF3 = [NSString stringWithFormat:@"document.getElementById('FooterAgentCode2').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"AgentCode"]];
     NSString *javaScriptF4 = [NSString stringWithFormat:@"document.getElementById('FooterBranch2').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"BranchName"]];
     
@@ -604,7 +595,7 @@
     
     //footer agent data
     NSString *javaScriptF1 = [NSString stringWithFormat:@"document.getElementById('FooterAgentName3').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"AgentName"]];
-    NSString *javaScriptF2 = [NSString stringWithFormat:@"document.getElementById('FooterPrintDate3').innerHTML =\"%@\";",[NSDate date]];
+    NSString *javaScriptF2 = [NSString stringWithFormat:@"document.getElementById('FooterPrintDate3').innerHTML =\"%@\";",[formatter getDateToday:@"yyyy-MM-dd hh:mm:ss"]];
     NSString *javaScriptF3 = [NSString stringWithFormat:@"document.getElementById('FooterAgentCode3').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"AgentCode"]];
     NSString *javaScriptF4 = [NSString stringWithFormat:@"document.getElementById('FooterBranch3').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"BranchName"]];
     
@@ -645,7 +636,8 @@
     NSArray* path_forDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
     NSString* documentsDirectory = [path_forDirectory objectAtIndex:0];
     if (pdfData) {
-        [pdfData writeToFile:[NSString stringWithFormat:@"%@/SalesIlustration.pdf",documentsDirectory] atomically:YES];
+        [pdfData writeToFile:[NSString stringWithFormat:@"%@/%@_%@.pdf",documentsDirectory,[_dictionaryPOForInsert valueForKey:@"PO_Name"],[_dictionaryPOForInsert valueForKey:@"SINO"]] atomically:YES];
+        NSLog(@"datat %@",[NSString stringWithFormat:@"%@/%@_%@.pdf",documentsDirectory,[_dictionaryPOForInsert valueForKey:@"PO_Name"],[_dictionaryPOForInsert valueForKey:@"SINO"]]);
     }
     else
     {
@@ -663,7 +655,7 @@
 - (void)seePDF{
     NSArray* path_forDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
     NSString* documentsDirectory = [path_forDirectory objectAtIndex:0];
-    NSString *pdfPathOutput = [NSString stringWithFormat:@"%@/SalesIlustration.pdf",documentsDirectory];
+    NSString *pdfPathOutput = [NSString stringWithFormat:@"%@/%@_%@.pdf",documentsDirectory,[_dictionaryPOForInsert valueForKey:@"PO_Name"],[_dictionaryPOForInsert valueForKey:@"SINO"]];
     //NSString *file = [[NSBundle mainBundle] pathForResource:@"Brochure_ProdukBCALIfeKeluargaku_21012016" ofType:@"pdf"];
     
     ReaderDocument *document = [ReaderDocument withDocumentFilePath:pdfPathOutput password:nil];
@@ -672,7 +664,7 @@
     //{
         ReaderViewController *readerViewController = [[ReaderViewController alloc] initWithReaderDocument:document];
         readerViewController.delegate = self;
-        
+        [readerViewController setIlustrasiNumber:[_dictionaryPOForInsert valueForKey:@"SINO"]];
         readerViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
         readerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
         [self presentViewController:readerViewController animated:YES completion:Nil];

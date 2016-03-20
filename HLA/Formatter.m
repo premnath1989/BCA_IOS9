@@ -20,4 +20,24 @@
     NSLog(@"The string: %@", theString);
     return theString;
 }
+
+-(NSString *)convertDateFrom:(NSString *)originalDateFormat TargetDateFormat:(NSString *)targetDateFormat DateValue:(NSString *)dateValue{
+
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:[NSString stringWithFormat:@"%@",originalDateFormat]];
+    NSDate *dateToConvert = [dateFormatter dateFromString:dateValue];
+    
+    // Convert date object to desired output format
+    [dateFormatter setDateFormat:[NSString stringWithFormat:@"%@",targetDateFormat]];
+    NSString *targetDateString = [dateFormatter stringFromDate:dateToConvert];
+
+    return targetDateString;
+}
+
+-(NSString *)getDateToday:(NSString *)dateFormat{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:[NSString stringWithFormat:@"%@",dateFormat]];
+    NSString *targetDateString = [dateFormatter stringFromDate:[NSDate date]];
+    return targetDateString;
+}
 @end

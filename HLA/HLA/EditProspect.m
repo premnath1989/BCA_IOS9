@@ -14192,6 +14192,7 @@ NSMutableArray *DelGroupArr;
     NSString *result;
     
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc]init];
+    [formatter setLocale:[NSLocale localeWithLocaleIdentifier:@"in_ID"]];
     [formatter setMaximumFractionDigits:2];
     [formatter setUsesGroupingSeparator:YES];
     [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
