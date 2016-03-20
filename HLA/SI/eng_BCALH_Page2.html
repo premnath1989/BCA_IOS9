@@ -133,7 +133,8 @@
         }
         
         function removeRows(rowCount,LAAge){
-            var rowTobeDeleted=9;
+			if (LAAge<16){
+					var rowTobeDeleted=9;
             var checkPointColA=5;
             
             for (i = 4; i < rowCount+3; i++) {
@@ -170,6 +171,47 @@
                     }
                 }
             }
+			}
+			else{
+			var rowTobeDeleted=14;
+            var checkPointColA=10;
+            
+            for (i = 4; i < rowCount+3; i++) {
+                var Val1=(i+1)-4;
+                var Val2=LAAge +Val1;
+                //if (Val1>10){
+                if (Val1>5){
+                    if (Val2<55){
+                        var modulusResult=Val1%5;
+                        if (modulusResult != 0){
+                            document.getElementById("table-Summary1").deleteRow(rowTobeDeleted);
+                        }
+                        else{
+                            rowTobeDeleted=rowTobeDeleted+1;
+                        }
+                        checkPointColA = Val1;
+                    }
+                    else if (Val2==55){
+                        rowTobeDeleted=rowTobeDeleted+1;
+                        checkPointColA = Val1;
+                    }
+                    else if (Val2>55){
+                        var rowToCheck = (Val1-checkPointColA);
+                        if (rowToCheck>0)
+                        {
+                            var modulusResult=rowToCheck%10;
+                            if (modulusResult != 0){
+                                document.getElementById("table-Summary1").deleteRow(rowTobeDeleted);
+                            }
+                            else{
+                                rowTobeDeleted=rowTobeDeleted+1;
+                            }
+                        }
+                    }
+                }
+            }
+			}
+            
 
         }
         
@@ -354,7 +396,7 @@
                 </tr>
                 <tr valign="top">
                     <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:10px "></td>
-                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:10px ">:&nbsp;&nbsp;&nbsp;</td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:10px ">&nbsp;&nbsp;&nbsp;</td>
                     <!--<td style="text-align:left;padding: 0px 0px 0px 0px;font-size:14px ">Extra Premi Karena UW Loading</td>
                     <td style="text-align:left;padding: 0px 0px 0px 0px;font-size:14px "><label id="HeaderExtraPremiUWLoading">70.560.000</label></td>-->
                     <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:10px ">Total Premi Dibayar</td>
