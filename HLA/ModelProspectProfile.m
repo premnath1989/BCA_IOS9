@@ -319,7 +319,7 @@
         s = [database executeQuery:[NSString stringWithFormat:@"SELECT * FROM prospect_profile WHERE ProspectName like \"%%%@%%\" and BranchName like \"%%%@%%\" and QQFlag = 'false'  order by datetime(%@) %@",searchName,branchName,orderBy,method]];
     }
     else{
-        s = [database executeQuery:[NSString stringWithFormat:@"SELECT * FROM prospect_profile WHERE ProspectName like \"%%%@%%\" and BranchName like \"%%%@%%\" and QQFlag = 'false'  order by datetime(\"%@\") %@",searchName,branchName,orderBy,method]];
+        s = [database executeQuery:[NSString stringWithFormat:@"SELECT * FROM prospect_profile WHERE ProspectName like \"%%%@%%\" and BranchName like \"%%%@%%\" and QQFlag = 'false'  order by %@ %@",searchName,branchName,orderBy,method]];
 
         NSLog(@"query %@",[NSString stringWithFormat:@"SELECT * FROM prospect_profile WHERE ProspectName like \"%%%@%%\" and BranchName like \"%%%@%%\" and QQFlag = 'false'  order by LOWER(\"%@\") %@",searchName,branchName,orderBy,method]);
     }
