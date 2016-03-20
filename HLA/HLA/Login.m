@@ -216,13 +216,13 @@ static NSString *labelVers;
      
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
     
-    /*if(firstLogin){
+    if(firstLogin){
         UserProfileView.modalPresentationStyle = UIModalPresentationFormSheet;
         UserProfileView.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
         [UserProfileView setDelegate:self firstLogin:firstLogin];
         UserProfileView.preferredContentSize = CGSizeMake(600, 500);
         [self presentViewController:UserProfileView animated:YES completion:nil];
-    }*/
+    }
     
     [self appVersionChecker];
 }
