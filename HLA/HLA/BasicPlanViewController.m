@@ -506,7 +506,7 @@ bool WPTPD30RisDeleted = FALSE;
     }
     if(textField == _extraPremiNumberField)
     {
-        if([PlanType isEqualToString:@"BCA Life Keluargaku Protection"])
+        if([PlanType isEqualToString:@"BCA Life Keluargaku"])
         {
             [self MeninggalDuniaMDBKK];
         }
@@ -521,7 +521,7 @@ bool WPTPD30RisDeleted = FALSE;
     {
         _masaExtraPremiField.enabled =TRUE;
         
-        if([PlanType isEqualToString:@"BCA Life Keluargaku Protection"])
+        if([PlanType isEqualToString:@"BCA Life Keluargaku"])
         {
             [self MeninggalDuniaMDBKK];
         }
@@ -579,7 +579,7 @@ bool WPTPD30RisDeleted = FALSE;
 //        if ([sender.text length]>0){
 //            //[self setActiveTextField:_extraPremiPercentField Active:NO];
     
-    if([PlanType isEqualToString:@"BCA Life Keluargaku Protection"])
+    if([PlanType isEqualToString:@"BCA Life Keluargaku"])
     {
         [self MeninggalDuniaMDBKK];
         
@@ -2087,7 +2087,7 @@ bool WPTPD30RisDeleted = FALSE;
         yearlyIncomeField.text = result;
     }
     
-    if([PlanType isEqualToString:@"BCA Life Keluargaku Protection"])
+    if([PlanType isEqualToString:@"BCA Life Keluargaku"])
     {
         [self PremiDasarActkklk];
     }
@@ -4931,7 +4931,7 @@ bool WPTPD30RisDeleted = FALSE;
     NSLog(@"%lld",sumAssured);
     NSLog(@"%lld",maxNumber);
     
-    if([PlanType isEqualToString:@"BCA Life Keluargaku Protection"])
+    if([PlanType isEqualToString:@"BCA Life Keluargaku"])
     {
         if ([validationSet containsObject:uangPertanggunganDasar]||uangPertanggunganDasar==NULL){
             [self createAlertViewAndShow:validationUangPertanggunganDasar tag:0];
@@ -5392,7 +5392,7 @@ bool WPTPD30RisDeleted = FALSE;
     
     FRekeunsiPembayaranMode = aaDesc;
     
-    if([PlanType isEqualToString:@"BCA Life Keluargaku Protection"])
+    if([PlanType isEqualToString:@"BCA Life Keluargaku"])
     {
         [self PremiDasarActKeluargaku:aaDesc];
         [self PremiDasarActkklk];

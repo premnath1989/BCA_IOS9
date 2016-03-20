@@ -2790,7 +2790,7 @@ BOOL isFirstLoad;
         [cell.button3 setEnabled:false];
     }
     
-    if (([[dictionaryPOForInsert valueForKey:@"ProductName"] isEqualToString:@"BCA Life Keluargaku Protection"])||([[dictionaryPOForInsert valueForKey:@"ProductName"] isEqualToString:@"BCA Life Keluargaku"])){
+    if (([[dictionaryPOForInsert valueForKey:@"ProductName"] isEqualToString:@"BCA Life Keluargaku"])||([[dictionaryPOForInsert valueForKey:@"ProductName"] isEqualToString:@"BCA Life Keluargaku"])){
         [cell.button2 setEnabled:true];
     }
     else{
@@ -6425,7 +6425,7 @@ NSString *prevPlan;
     if([_LAController.NamaProduk.titleLabel.text caseInsensitiveCompare:@"BCA Life Heritage Protection"] == NSOrderedSame){
         [self seePDF:@"Brochure_ProdukBCALifeHeritage"];
     }
-    if([_LAController.NamaProduk.titleLabel.text caseInsensitiveCompare:@"BCA Life Keluargaku Protection"] == NSOrderedSame){
+    if([_LAController.NamaProduk.titleLabel.text caseInsensitiveCompare:@"BCA Life Keluargaku"] == NSOrderedSame){
         [self seePDF:@"Brochure_ProdukBCALIfeKeluargaku"];
     }
 }

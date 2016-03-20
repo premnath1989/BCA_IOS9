@@ -2615,7 +2615,7 @@ id dobtanngal;
          [alert show];
      }
     
-     else if ((LAAGEint >55)&&[NamaProduk.titleLabel.text isEqualToString:@"BCA Life Keluargaku Protection"])
+     else if ((LAAGEint >55)&&[NamaProduk.titleLabel.text isEqualToString:@"BCA Life Keluargaku"])
      {
          UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Usia tidak boleh melebihi dari 55 tahun."
                                                         delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
