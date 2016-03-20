@@ -21,6 +21,7 @@
 #import "Model_SI_Premium.h"
 #import "ModelSIPOData.h"
 #import "ColorHexCode.h"
+#import "Formatter.h"
 
 @class BasicPlanViewController;
 @protocol BasicPlanViewControllerDelegate
@@ -40,6 +41,8 @@
 @end
 
 @interface BasicPlanViewController : UIViewController <UITextFieldDelegate,PlanListDelegate,MasaPembayaranDelegate,FrekeunsiDelegate,PembeliaKeDelegate>{
+    Formatter* classFormatter;
+    
     NSString *databasePath;
     NSString *RatesDatabasePath;
     sqlite3 *contactDB;

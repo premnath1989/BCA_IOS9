@@ -88,8 +88,9 @@ bool WPTPD30RisDeleted = FALSE;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    classFormatter=[[Formatter alloc]init];
     discountPembelian = 0;
-    
+
     CustomColor = [[ColorHexCode alloc] init ];
     
     NSMutableDictionary *newAttributes = [[NSMutableDictionary alloc] init];
@@ -1137,15 +1138,17 @@ bool WPTPD30RisDeleted = FALSE;
     DiscountCalculation = discountPembelian * RatesInt * total * percentPaymentMode;
     //DiskounPremi = NoPolRate * RatesInt * total * PaymentFoctor;//
     
+    
+    
     NSNumberFormatter *format21 = [[NSNumberFormatter alloc]init];
     [format21 setNumberStyle:NSNumberFormatterNoStyle];
-    [format21 setGeneratesDecimalNumbers:FALSE];
-    [format21 setMaximumFractionDigits:2];
-    //[format21 setRoundingMode:NSNumberFormatterRoundHalfUp];
+    [format21 setGeneratesDecimalNumbers:TRUE];
+    [format21 setMaximumFractionDigits:1];
+    [format21 setRoundingMode:NSNumberFormatterRoundHalfUp];
     
     DiscountCalculation = [[format21 stringFromNumber:[NSNumber numberWithDouble:DiscountCalculation]] doubleValue];
-    [_KKLKDiskaunBtn setText:[NSString stringWithFormat:@"%@",[format1 stringFromNumber:[NSNumber numberWithDouble:DiscountCalculation]]]];
-    
+    int roundedDiscount=round(DiscountCalculation);
+    [_KKLKDiskaunBtn setText:[classFormatter stringToCurrencyDecimalFormatted:[NSString stringWithFormat:@"%i",roundedDiscount]]];
   //  [self PremiDasarIncomeChange:_basicPremiField.text];
 }
 

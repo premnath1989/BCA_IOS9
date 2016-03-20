@@ -12,4 +12,5 @@
 -(NSString *)numberToCurrencyDecimalFormatted:(NSNumber *)number;
 -(NSString *)convertDateFrom:(NSString *)originalDateFormat TargetDateFormat:(NSString *)targetDateFormat DateValue:(NSString *)dateValue;
 -(NSString *)getDateToday:(NSString *)dateFormat;
+-(NSString *)stringToCurrencyDecimalFormatted:(NSString  *)stringNumber;
 @end

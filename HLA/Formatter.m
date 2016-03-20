@@ -21,6 +21,18 @@
     return theString;
 }
 
+-(NSString *)stringToCurrencyDecimalFormatted:(NSString  *)stringNumber{
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setLocale:[NSLocale localeWithLocaleIdentifier:@"in_ID"]];
+    [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    [numberFormatter setMaximumFractionDigits:0];
+    NSNumber *myNumber = [numberFormatter numberFromString:stringNumber];
+    NSString *theString = [numberFormatter stringFromNumber:myNumber];
+    NSLog(@"The string: %@", theString);
+    return theString;
+}
+
+
 -(NSString *)convertDateFrom:(NSString *)originalDateFormat TargetDateFormat:(NSString *)targetDateFormat DateValue:(NSString *)dateValue{
 
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
