@@ -20,6 +20,11 @@
                     [dataIlustration valueForKey:@"SINO"],
                     [dataIlustration valueForKey:@"SI_Version"],
                     [dataIlustration valueForKey:@"ProposalStatus"]];
+
+    NSLog(@"log query %@",[NSString stringWithFormat:@"insert into SI_Master (SINO, SI_Version, ProposalStatus, CreatedDate,UpdatedDate) values (\"%@\",\"%@\",\"%@\",""datetime(\"now\", \"+8 hour\")"",""datetime(\"now\", \"+8 hour\")"")" ,
+                           [dataIlustration valueForKey:@"SINO"],
+                           [dataIlustration valueForKey:@"SI_Version"],
+                           [dataIlustration valueForKey:@"ProposalStatus"]]);
     
     if (!success) {
         NSLog(@"%s: insert error: %@", __FUNCTION__, [database lastErrorMessage]);
@@ -64,7 +69,7 @@
     [database close];
 }
 
--(NSDictionary *)getIlustrationata{
+-(NSDictionary *)getIlustrationata:(NSString *)orderBy Method:(NSString *)sortMethod{
     NSDictionary *dict;
     
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
@@ -82,7 +87,10 @@
     NSMutableArray* arraySIVersion=[[NSMutableArray alloc] init];
     
    // FMResultSet *s = [database executeQuery:@"SELECT sim.*, po.ProductName,po.PO_Name,premi.Sum_Assured FROM SI_master sim, SI_PO_Data po,SI_Premium premi WHERE sim.SINO = po.SINO and sim.SINO = premi.SINO"];
-     FMResultSet *s = [database executeQuery:@"SELECT sim.*, po.ProductName,po.PO_Name,sip.Sum_Assured FROM SI_master sim, SI_PO_Data po, SI_Premium sip WHERE sim.SINO = po.SINO and sim.SINO = sip.SINO group by sim.ID"];
+     FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select sim.*, po.ProductName,po.PO_Name,sip.Sum_Assured FROM SI_master sim left join SI_PO_Data po on sim.SINO=po.SINO left join SI_Premium sip on sim.SINO=sip.SINO group by sim.ID order by %@ %@",orderBy,sortMethod]];
+    
+    NSLog(@"query %@",[NSString stringWithFormat:@"select sim.*, po.ProductName,po.PO_Name,sip.Sum_Assured FROM SI_master sim left join SI_PO_Data po on sim.SINO=po.SINO left join SI_Premium sip on sim.SINO=sip.SINO group by sim.ID order by %@ %@",orderBy,sortMethod]);
+    
     while ([s next]) {
         NSString *stringSINo = [NSString stringWithFormat:@"%@",[s stringForColumn:@"SINO"]];
         NSString *stringCreatedDate = [NSString stringWithFormat:@"%@",[s stringForColumn:@"CreatedDate"]];

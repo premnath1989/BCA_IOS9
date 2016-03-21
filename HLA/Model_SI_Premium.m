@@ -57,9 +57,10 @@
                     [dataPremium valueForKey:@"ExtraPremiumPolicy"],
                     [dataPremium valueForKey:@"TotalPremiumLoading"],
                     [dataPremium valueForKey:@"SubTotalPremium"],
-                    [dataPremium valueForKey:@"SINO"],
                     [dataPremium valueForKey:@"PurchaseNumber"],
-                    [dataPremium valueForKey:@"Discount"]];
+                    [dataPremium valueForKey:@"Discount"],
+                    [dataPremium valueForKey:@"SINO"]];
+   
     if (!success) {
         NSLog(@"%s: insert error: %@", __FUNCTION__, [database lastErrorMessage]);
         // do whatever you need to upon error

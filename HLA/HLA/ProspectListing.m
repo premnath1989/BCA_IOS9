@@ -236,9 +236,11 @@ MBProgressHUD *HUD;
 		if (indexPath.row == [ProspectTableData count]) {
 			//cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 			if ([ProspectTableData count] == TotalData) {
+                cell.textLabel.text =@"";
 				cell.textLabel.text = @"No More records Available";
 			}
 			else {
+                cell.textLabel.text =@"";
 				cell.textLabel.text = @"Load more records...";
 			}
 			

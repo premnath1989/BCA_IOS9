@@ -36,6 +36,8 @@
     
     NSString *DBDateFrom2;
     NSString *DBDateTo2;
+    NSString* sortMethod;
+    NSString* sortedBy;
     
     IBOutlet UILabel *NoIlustrasi;
     UIView *TableHeader;
@@ -44,6 +46,12 @@
     UIFont *fontType;
     TableManagement *tableManagement;
 }
+
+@property (strong, nonatomic) IBOutlet UIButton *btnSortFullName;
+@property (strong, nonatomic) IBOutlet UIButton *btnSortSINO;
+@property (strong, nonatomic) IBOutlet UIButton *btnSortCreatedDate;
+@property (strong, nonatomic) IBOutlet UIButton *btnSortProduct;
+@property (strong, nonatomic) IBOutlet UIButton *btnSortSumAssured;
 
 @property (nonatomic, strong) NDHTMLtoPDF *PDFCreator;
 @property (nonatomic, copy) NSString *TradOrEver;
@@ -107,7 +115,7 @@
 - (IBAction)btnEdit:(id)sender;
 - (IBAction)btnDelete:(id)sender;
 - (IBAction)btnDone:(id)sender;
-- (IBAction)btnSortBy:(id)sender;
+- (IBAction)btnSortBy:(UIButton *)sender;
 - (IBAction)btnReset:(id)sender;
 
 //added for Add New SI Listing button by Juliana

@@ -15,7 +15,7 @@
     sqlite3 *contactDB;
 }
 -(void)saveIlustrationMaster:(NSDictionary *)dataIlustration;
--(NSDictionary *)getIlustrationata;
+-(NSDictionary *)getIlustrationata:(NSString *)orderBy Method:(NSString *)sortMethod;
 -(void)updateIlustrationMaster:(NSDictionary *)dataIlustration;
 -(int)getMasterCount:(NSString *)SINo;
 -(NSDictionary *)searchSIListingByName:(NSString *)SINO POName:(NSString *)poName Order:(NSString *)orderBy Method:(NSString *)method DateFrom:(NSString *)dateFrom DateTo:(NSString *)dateTo;

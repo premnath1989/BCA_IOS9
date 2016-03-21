@@ -1138,8 +1138,6 @@ bool WPTPD30RisDeleted = FALSE;
     DiscountCalculation = discountPembelian * RatesInt * total * percentPaymentMode;
     //DiskounPremi = NoPolRate * RatesInt * total * PaymentFoctor;//
     
-    
-    
     NSNumberFormatter *format21 = [[NSNumberFormatter alloc]init];
     [format21 setNumberStyle:NSNumberFormatterNoStyle];
     [format21 setGeneratesDecimalNumbers:TRUE];
@@ -1149,6 +1147,7 @@ bool WPTPD30RisDeleted = FALSE;
     DiscountCalculation = [[format21 stringFromNumber:[NSNumber numberWithDouble:DiscountCalculation]] doubleValue];
     int roundedDiscount=round(DiscountCalculation);
     [_KKLKDiskaunBtn setText:[classFormatter stringToCurrencyDecimalFormatted:[NSString stringWithFormat:@"%i",roundedDiscount]]];
+    NSLog(@"MDBKK %f",MDBKK);
   //  [self PremiDasarIncomeChange:_basicPremiField.text];
 }
 
