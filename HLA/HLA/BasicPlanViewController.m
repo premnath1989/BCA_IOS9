@@ -502,7 +502,7 @@ bool WPTPD30RisDeleted = FALSE;
 {
     if (textField == yearlyIncomeField)
     {
-        ExtraPremiDasarLBL.hidden=YES;
+        //ExtraPremiDasarLBL.hidden=YES;
     }
     if(textField == _extraPremiNumberField)
     {

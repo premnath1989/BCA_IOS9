@@ -488,7 +488,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="164" height="50"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <connections>
-                                                    <action selector="btnSortBy:" destination="l1n-wK-wLB" eventType="touchUpInside" id="gx5-hX-NlB"/>
+                                                    <action selector="btnSortBy:" destination="l1n-wK-wLB" eventType="touchUpInside" id="Ezw-Z6-mwE"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -509,7 +509,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="201" height="50"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <connections>
-                                                    <action selector="btnSortBy:" destination="l1n-wK-wLB" eventType="touchUpInside" id="qgz-x0-sSx"/>
+                                                    <action selector="btnSortBy:" destination="l1n-wK-wLB" eventType="touchUpInside" id="rwg-oi-3jF"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -530,7 +530,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="169" height="50"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <connections>
-                                                    <action selector="btnSortBy:" destination="l1n-wK-wLB" eventType="touchUpInside" id="zQr-dh-MEG"/>
+                                                    <action selector="btnSortBy:" destination="l1n-wK-wLB" eventType="touchUpInside" id="5YL-8m-qb9"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -551,7 +551,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="143" height="50"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <connections>
-                                                    <action selector="btnSortBy:" destination="l1n-wK-wLB" eventType="touchUpInside" id="ZK4-Uu-qXh"/>
+                                                    <action selector="btnSortBy:" destination="l1n-wK-wLB" eventType="touchUpInside" id="2Ef-T5-b9u"/>
                                                 </connections>
                                             </button>
                                         </subviews>
