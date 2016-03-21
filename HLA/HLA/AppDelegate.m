@@ -36,7 +36,7 @@ NSString *uatAgentCode;
     
     
     NSLog(@"db path %@",databasePath);
-    [SIUtilities makeDBCopy:databasePath];
+//    [SIUtilities makeDBCopy:databasePath];
 
     SICompleted = YES;
     ExistPayor = YES;

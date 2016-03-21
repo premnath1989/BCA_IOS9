@@ -35,6 +35,7 @@
 #import "DDXMLNode.h"
 #import "SynchdaysCounter.h"
 #import "WebResponObj.h"
+#import "DBMigration.h"
 
 @interface Login ()
 
@@ -60,6 +61,9 @@ NSString *ProceedStatus = @"";
 
     loginDB = [[LoginDBManagement alloc]init];
     [loginDB makeDBCopy];
+    
+//    DBMigration *migration = [[DBMigration alloc]init];
+//    [migration updateDatabase];
     
     ONLINE_PROCESS = FALSE;
     OFFLINE_PROCESS = FALSE;

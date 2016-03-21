@@ -775,6 +775,7 @@
 		C4FCDDEC16395F290065D024 /* btn_SI_home.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FCDDE016395F290065D024 /* btn_SI_home.png */; };
 		DE050BE51C9BF52B00AA6D45 /* BCA_life_Keluargaku_Video_Testimonial_Part_I_final.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = DE050BE41C9BF52B00AA6D45 /* BCA_life_Keluargaku_Video_Testimonial_Part_I_final.mp4 */; };
 		DE8D29C71C94512900727765 /* TabValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = DE8D29C61C94512900727765 /* TabValidation.m */; };
+		DEE2B7C71C9FADCF00B7283A /* DBMigration.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE2B7C61C9FADCF00B7283A /* DBMigration.m */; };
 		EF059839161A8BD1004A9095 /* NewLAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF059837161A8BCF004A9095 /* NewLAViewController.m */; };
 		EF05983F161A8C85004A9095 /* ListingTbViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF05983D161A8C85004A9095 /* ListingTbViewController.m */; };
 		EF059842161A901A004A9095 /* PayorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF059840161A901A004A9095 /* PayorViewController.m */; };
@@ -2124,6 +2125,8 @@
 		DE050BE41C9BF52B00AA6D45 /* BCA_life_Keluargaku_Video_Testimonial_Part_I_final.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = BCA_life_Keluargaku_Video_Testimonial_Part_I_final.mp4; sourceTree = "<group>"; };
 		DE8D29C51C94511C00727765 /* TabValidation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabValidation.h; sourceTree = "<group>"; };
 		DE8D29C61C94512900727765 /* TabValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabValidation.m; sourceTree = "<group>"; };
+		DEE2B7C51C9FADC200B7283A /* DBMigration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DBMigration.h; sourceTree = "<group>"; };
+		DEE2B7C61C9FADCF00B7283A /* DBMigration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBMigration.m; sourceTree = "<group>"; };
 		EF059837161A8BCF004A9095 /* NewLAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewLAViewController.m; sourceTree = "<group>"; };
 		EF059838161A8BD0004A9095 /* NewLAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewLAViewController.h; sourceTree = "<group>"; };
 		EF05983D161A8C85004A9095 /* ListingTbViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListingTbViewController.m; sourceTree = "<group>"; };
@@ -3544,6 +3547,8 @@
 				AA2BB5FD1C70598E00A5256E /* SynchDaysCounter.m */,
 				AAFFE1831C7EB150001B91BF /* SpinnerUtilities.h */,
 				AAFFE1841C7EB161001B91BF /* SpinnerUtilities.m */,
+				DEE2B7C51C9FADC200B7283A /* DBMigration.h */,
+				DEE2B7C61C9FADCF00B7283A /* DBMigration.m */,
 			);
 			name = LoginUtilities;
 			sourceTree = "<group>";
@@ -5556,6 +5561,7 @@
 				4212708018459CBB000C2156 /* HealthQuestions2ndLA.m in Sources */,
 				43FD4A041C620F3E00227F8F /* ModelVIPClass.m in Sources */,
 				AA4EF6E01C8572F30050CCD8 /* ProductInformation.m in Sources */,
+				DEE2B7C71C9FADCF00B7283A /* DBMigration.m in Sources */,
 				431F5FE41C6D93E800A9CA6C /* ProspectListingTableViewCell.m in Sources */,
 				4212708118459CBB000C2156 /* HealthQuestionsPO.m in Sources */,
 				4212708218459CBB000C2156 /* HealthQuestionsVC.m in Sources */,

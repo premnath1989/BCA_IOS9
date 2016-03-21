@@ -31,53 +31,53 @@
     NSError *DBerror;
     
     /*  update Occupation list with Professional Athlete : Edwin 21-11-2013  */
-    sqlite3_stmt *statement;
-    BOOL proceedInsert = false;
-    if (sqlite3_open([databasePath UTF8String], &contactDB) == SQLITE_OK)
-    {
-        NSString *querySQL = [NSString stringWithFormat: @"SELECT OccpCode FROM Adm_Occp_Loading_Penta WHERE OccpCode='OCC01717'"];
-
-        const char *query_stmt = [querySQL UTF8String];
-        if (sqlite3_prepare_v2(contactDB, query_stmt, -1, &statement, NULL) == SQLITE_OK)
-        {
-            if (sqlite3_step(statement) == SQLITE_ROW)
-            {
-                proceedInsert = false;
-            }else
-            {
-                proceedInsert = true;
-            }
-            sqlite3_finalize(statement);
-        }
-        sqlite3_close(contactDB);
-        query_stmt = Nil;
-        querySQL = Nil;
-    }
-    statement = Nil;
-
-
-    if(proceedInsert)
-    {
-        sqlite3_stmt *statement;
-        if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
-        {
-
-            NSString *querySQL = [NSString stringWithFormat:
-                                  @"insert into Adm_Occp_Loading_Penta Values('OCC01717', 'PROFESSIONAL ATHLETE', '4', 'A', 'EM', '4', '0.0', '0.0' )"];
+//    sqlite3_stmt *statement;
+//    BOOL proceedInsert = false;
+//    if (sqlite3_open([databasePath UTF8String], &contactDB) == SQLITE_OK)
+//    {
+//        NSString *querySQL = [NSString stringWithFormat: @"SELECT OccpCode FROM Adm_Occp_Loading_Penta WHERE OccpCode='OCC01717'"];
+//
+//        const char *query_stmt = [querySQL UTF8String];
+//        if (sqlite3_prepare_v2(contactDB, query_stmt, -1, &statement, NULL) == SQLITE_OK)
+//        {
+//            if (sqlite3_step(statement) == SQLITE_ROW)
+//            {
+//                proceedInsert = false;
+//            }else
+//            {
+//                proceedInsert = true;
+//            }
+//            sqlite3_finalize(statement);
+//        }
+//        sqlite3_close(contactDB);
+//        query_stmt = Nil;
+//        querySQL = Nil;
+//    }
+//    statement = Nil;
 
 
-            if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK){
-                if (sqlite3_step(statement) == SQLITE_DONE){
-
-                }
-                sqlite3_finalize(statement);
-            }
-
-            sqlite3_close(contactDB);
-            querySQL = Nil;
-
-        }
-    }
+//    if(proceedInsert)
+//    {
+//        sqlite3_stmt *statement;
+//        if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
+//        {
+//
+//            NSString *querySQL = [NSString stringWithFormat:
+//                                  @"insert into Adm_Occp_Loading_Penta Values('OCC01717', 'PROFESSIONAL ATHLETE', '4', 'A', 'EM', '4', '0.0', '0.0' )"];
+//
+//
+//            if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK){
+//                if (sqlite3_step(statement) == SQLITE_DONE){
+//
+//                }
+//                sqlite3_finalize(statement);
+//            }
+//
+//            sqlite3_close(contactDB);
+//            querySQL = Nil;
+//
+//        }
+//    }
     /*                                                      */
 
 
@@ -133,6 +133,12 @@
     }
 
     fileManager = Nil;
+}
+
+- (int)lightWeightMigration{
+    
+    
+    return 1;
 }
 
 - (int) SearchAgent:(NSString *)AgentID{
