@@ -72,6 +72,9 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
     _modelSIPremium=[[Model_SI_Premium alloc]init];
     _modelSIPOData=[[ModelSIPOData alloc]init];
     
+    sortedBy = @"sim.CreatedDate";
+    sortMethod=@"DESC";
+    
     [NoIlustrasi setFont:[UIFont fontWithName:@"HelveticaLTStd-UltraComp" size:25]];
     themeColour = [UIColor colorWithRed:218.0f/255.0f green:49.0f/255.0f blue:85.0f/255.0f alpha:1];
     fontType = [UIFont fontWithName:@"TreBuchet MS" size:16.0f];
@@ -799,10 +802,10 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
         [dateFrom appendString:@" 00:00:00"];
         [dateTo appendString:@" 24:00:00"];
 
-        dictIlustrationData=[[NSDictionary alloc]initWithDictionary:[_modelSIMaster searchSIListingByName:txtSINO.text POName:txtLAName.text Order:@"sim.CreatedDate" Method:@"Desc" DateFrom:dateFrom DateTo:dateTo]];
+        dictIlustrationData=[[NSDictionary alloc]initWithDictionary:[_modelSIMaster searchSIListingByName:txtSINO.text POName:txtLAName.text Order:sortedBy Method:sortMethod DateFrom:dateFrom DateTo:dateTo]];
     }
     else{
-        dictIlustrationData=[[NSDictionary alloc]initWithDictionary:[_modelSIMaster getIlustrationata]];
+        dictIlustrationData=[[NSDictionary alloc]initWithDictionary:[_modelSIMaster getIlustrationata:sortedBy Method:sortMethod]];
     }
     
     
@@ -1457,16 +1460,40 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
     }
 }
 
-- (IBAction)btnSortBy:(id)sender {
-    if (_SortBy == nil) {
+- (IBAction)btnSortBy:(UIButton *)sender {
+    /*if (_SortBy == nil) {
         self.SortBy = [[siListingSortBy alloc] initWithStyle:UITableViewStylePlain];
         _SortBy.delegate = self;
         self.Popover = [[UIPopoverController alloc] initWithContentViewController:_SortBy];               
     }
     [self.Popover setPopoverContentSize:CGSizeMake(300, 300)];
     [self.Popover presentPopoverFromRect:[sender frame ]  inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    */
+    sortedBy=sender.titleLabel.text;
+    if (sender==_btnSortFullName){
+        sortedBy=@"po.PO_Name";
+    }
+    else if (sender==_btnSortSINO){
+        sortedBy=@"sim.SINO";
+    }
+    else if (sender==_btnSortCreatedDate){
+        sortedBy=@"sim.CreatedDate";
+    }
+    else if (sender==_btnSortProduct){
+        sortedBy=@"po.ProductName";
+    }
+    else if (sender==_btnSortSumAssured){
+        sortedBy=@"sip.Sum_Assured";
+    }
     
-    
+    if ([sortMethod isEqualToString:@"ASC"]){
+        sortMethod=@"DESC";
+    }
+    else{
+        sortMethod=@"ASC";
+    }
+    [self getDataForTable];
+    [myTableView reloadData];
 }
 
 -(void)DateSelected:(NSString *)strDate:(NSString *)dbDate{

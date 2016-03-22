@@ -2937,6 +2937,8 @@ BOOL isFirstLoad;
     if ([[dataPO valueForKey:@"RelWithLA"] isEqualToString:@"SELF"]){
         selfRelation = YES;
         dictionaryPOForInsert = [NSMutableDictionary dictionaryWithDictionary:dataPO];
+        dictionaryMasterForInsert = [[NSMutableDictionary alloc]initWithObjectsAndKeys:[dictionaryPOForInsert valueForKey:@"SINO"],@"SINO",@"1.1",@"SI_Version",@"Not Created",@"ProposalStatus", nil];
+
         [arrayIntValidate replaceObjectAtIndex:1 withObject:@"1"];
         
         if (self.requestSINo){

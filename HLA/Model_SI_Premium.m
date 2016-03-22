@@ -17,7 +17,7 @@
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     [database open];
     
-    BOOL success = [database executeUpdate:@"insert into SI_Premium (SINO, Sum_Assured, Payment_Term, Payment_Frequency,PremiumPolicyA,ExtraPremiumPercentage,ExtraPremiumSum,ExtraPremiumTerm,ExtraPremiumPolicy,TotalPremiumLoading,SubTotalPremium,CreatedDate,UpdatedDate,PurchaseNumber,Discount) values (?,?,?,?,?,?,?,?,?,?,?,""datetime(\"now\", \"+8 hour\")"",""datetime(\"now\", \"+8 hour\")"",?,?)" ,
+    BOOL success = [database executeUpdate:@"insert into SI_Premium (SINO, Sum_Assured, Payment_Term, Payment_Frequency,PremiumPolicyA,ExtraPremiumPercentage,ExtraPremiumSum,ExtraPremiumTerm,ExtraPremiumPolicy,TotalPremiumLoading,SubTotalPremium,CreatedDate,UpdatedDate,PurchaseNumber,Discount) values (?,?,?,?,?,?,?,?,?,?,?,""datetime(\"now\", \"+7 hour\")"",""datetime(\"now\", \"+7 hour\")"",?,?)" ,
                     [dataPremium valueForKey:@"SINO"],
                     [dataPremium valueForKey:@"Sum_Assured"],
                     [dataPremium valueForKey:@"Payment_Term"],
@@ -46,7 +46,7 @@
     
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     [database open];
-    BOOL success = [database executeUpdate:@"update SI_Premium set Sum_Assured=?, Payment_Term=?, Payment_Frequency=?,PremiumPolicyA=?,ExtraPremiumPercentage=?,ExtraPremiumSum=?,ExtraPremiumTerm=?,ExtraPremiumPolicy=?,TotalPremiumLoading=?,SubTotalPremium=?,UpdatedDate=""datetime(\"now\", \"+8 hour\")"",PurchaseNumber=?,Discount=? where SINO=?" ,
+    BOOL success = [database executeUpdate:@"update SI_Premium set Sum_Assured=?, Payment_Term=?, Payment_Frequency=?,PremiumPolicyA=?,ExtraPremiumPercentage=?,ExtraPremiumSum=?,ExtraPremiumTerm=?,ExtraPremiumPolicy=?,TotalPremiumLoading=?,SubTotalPremium=?,UpdatedDate=""datetime(\"now\", \"+7 hour\")"",PurchaseNumber=?,Discount=? where SINO=?" ,
                     [dataPremium valueForKey:@"Sum_Assured"],
                     [dataPremium valueForKey:@"Payment_Term"],
                     [dataPremium valueForKey:@"Payment_Frequency"],
@@ -57,9 +57,10 @@
                     [dataPremium valueForKey:@"ExtraPremiumPolicy"],
                     [dataPremium valueForKey:@"TotalPremiumLoading"],
                     [dataPremium valueForKey:@"SubTotalPremium"],
-                    [dataPremium valueForKey:@"SINO"],
                     [dataPremium valueForKey:@"PurchaseNumber"],
-                    [dataPremium valueForKey:@"Discount"]];
+                    [dataPremium valueForKey:@"Discount"],
+                    [dataPremium valueForKey:@"SINO"]];
+   
     if (!success) {
         NSLog(@"%s: insert error: %@", __FUNCTION__, [database lastErrorMessage]);
         // do whatever you need to upon error
