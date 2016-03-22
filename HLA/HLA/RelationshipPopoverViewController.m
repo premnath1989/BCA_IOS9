@@ -9,6 +9,8 @@
 #import "RelationshipPopoverViewController.h"
 #import "DataClass.h"
 
+
+
 @interface RelationshipPopoverViewController (){
     DataClass *obj;
 }
@@ -17,40 +19,98 @@
 
 @implementation RelationshipPopoverViewController
 
+-(NSString*) getRelationshipDesc : (NSString*)relationship
+{
+    if ([relationship isEqualToString:@""] || (relationship == NULL) || ([relationship isEqualToString:@"(NULL)"])) {
+        return @"";
+    }
+    NSString *desc;
+    relationship = [relationship stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *databasePath = [documentsDirectory stringByAppendingPathComponent:@"hladb.sqlite"];
+    
+    
+    FMDatabase *db = [FMDatabase databaseWithPath:databasePath];
+    [db open];
+    FMResultSet *result = [db executeQuery:@"SELECT RelDesc FROM eProposal_Relation WHERE RelCode = ?", relationship];
+    
+    NSInteger *count = 0;
+    while ([result next]) {
+        count = count + 1;
+        desc = [result objectForColumnName:@"RelDesc"];
+    }
+    
+    [result close];
+    [db close];
+    
+    if (count == 0) {
+        desc = relationship;
+    }    
+    return desc;
+    
+}
+
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
-        // Custom initialization
-        NSString *file = [[NSBundle mainBundle] pathForResource:@"Relationship" ofType:@"plist"];
-        NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:file];
+        NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *docsDir = [dirPaths objectAtIndex:0];
         
-        //
+        databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
+
         
-        //_IDTypes = [NSMutableArray array];
-        //_IDTypes = [dict objectForKey:@"Title"];//[NSMutableArray array];
-        _IDTypes = [[NSMutableArray alloc] initWithObjects:@"BROTHER", @"DAUGHTER", @"FATHER", @"GRAND DAUGHTER", @"GRANDFATHER", @"GRANDMOTHER", @"GRANDSON", @"GUARDIAN", @"HUSBAND", @"MOTHER", @"SISTER", @"SON", @"SELF", @"STEP DAUGHTER", @"STEP FATHER", @"STEP MOTHER", @"STEP SON", @"WIFE", nil];
         
         self.clearsSelectionOnViewWillAppear = NO;
+        self.contentSizeForViewInPopover = CGSizeMake(700.0, 400.0);
+        self.IDTypes = [NSMutableArray array];
+       
         
-        NSInteger rowsCount = [_IDTypes count];
-        NSInteger singleRowHeight = [self.tableView.delegate tableView:self.tableView
-                                               heightForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-        NSInteger totalRowsHeight = rowsCount * singleRowHeight;
+        //Add "-Select-" in first row
+        [_IDTypes addObject:@"- SELECT -"];
+       
         
         
-        CGFloat largestLabelWidth = 0;
-        for (NSString *IDType in _IDTypes) {
-            //Checks size of text using the default font for UITableViewCell's textLabel.
-            CGSize labelSize = [IDType sizeWithFont:[UIFont boldSystemFontOfSize:20.0f]];
-            if (labelSize.width > largestLabelWidth) {
-                largestLabelWidth = labelSize.width;
+        
+        const char *dbpath = [databasePath UTF8String];
+        sqlite3_stmt *statement;
+        if (sqlite3_open(dbpath, &contactDB) == SQLITE_OK){
+            //NSString *querySQL = [NSString stringWithFormat:@"SELECT OccpCode, OccpDesc, Class FROM Adm_Occp_Loading_Penta where status = 'A' ORDER BY OccpDesc ASC"];
+            NSString *querySQL = [NSString stringWithFormat:@"SELECT RelDesc FROM eProposal_Relation where status = 'A'"];
+            const char *query_stmt = [querySQL UTF8String];
+            if (sqlite3_prepare_v2(contactDB, query_stmt, -1, &statement, NULL) == SQLITE_OK)
+            {
+                
+                NSString *IDTypes;
+                while (sqlite3_step(statement) == SQLITE_ROW){
+                
+                    IDTypes = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 0)];
+                   
+                    
+                    [_IDTypes addObject:IDTypes];
+                                    }
             }
+            
+            sqlite3_close(contactDB);
         }
         
-        CGFloat popoverWidth = largestLabelWidth + 100;
+        /*UISearchBar *searchbar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 200, 50) ];
+         
+         searchbar.opaque = false;
+         searchbar.delegate = (id) self;
+         self.tableView.tableHeaderView = searchbar;
+         CGRect searchbarFrame = searchbar.frame;
+         [self.tableView scrollRectToVisible:searchbarFrame animated:NO];*/
+        UISearchBar *zzz = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 200, 50) ];
         
-        self.contentSizeForViewInPopover = CGSizeMake(popoverWidth, totalRowsHeight);
+        zzz.opaque = false;
+        zzz.delegate = (id) self;
+        self.tableView.tableHeaderView = zzz;
+        CGRect searchbarFrame = zzz.frame;
+        [self.tableView scrollRectToVisible:searchbarFrame animated:NO];
+        
     }
     return self;
 
