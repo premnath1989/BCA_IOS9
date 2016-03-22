@@ -8,6 +8,17 @@
 
 #import "LoginDBManagement.h"
 #import <sqlite3.h>
+@class ColumnDetails;
+
+@interface ColumnDetails:NSObject
+{
+    //Instance variables
+    NSString *type;   // Length of a box
+    NSString *PK;  // Breadth of a box
+}
+@property(nonatomic, readwrite) NSString *type; // Property
+@property(nonatomic, readwrite) NSString *PK; // Property
+@end
 
 @interface DBMigration : NSObject{
     LoginDBManagement *loginDB;

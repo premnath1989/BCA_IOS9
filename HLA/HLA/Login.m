@@ -62,8 +62,8 @@ NSString *ProceedStatus = @"";
     loginDB = [[LoginDBManagement alloc]init];
     [loginDB makeDBCopy];
     
-//    DBMigration *migration = [[DBMigration alloc]init];
-//    [migration updateDatabase];
+    DBMigration *migration = [[DBMigration alloc]init];
+    [migration updateDatabase];
     
     ONLINE_PROCESS = FALSE;
     OFFLINE_PROCESS = FALSE;

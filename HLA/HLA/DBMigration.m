@@ -10,6 +10,19 @@
 #import "DBMigration.h"
 #import "LoginMacros.h"
 
+@implementation ColumnDetails
+
+@synthesize type;
+@synthesize PK;
+
+-(id)init
+{
+    self = [super init];
+    return self;
+}
+
+@end
+
 @implementation DBMigration
 
 #pragma mark - Updating functions
@@ -39,11 +52,12 @@
         loginDB = [[LoginDBManagement alloc]init];
         [loginDB makeDBCopy];
         
-        
+        //put database element into dictionary
         NSMutableDictionary *newTablesDict =  [self getTablesName:defaultDBPath];
         NSMutableDictionary *oldTablesDict =  [self getTablesName:tempDir];
         NSMutableDictionary *tempTablesDict = [[NSMutableDictionary alloc]init];
         
+        //we gather the difference between database
         for(NSString *tableName in [newTablesDict allKeys]){
             if([oldTablesDict valueForKey:tableName] != nil){
                 NSMutableDictionary *tempColumnDict = [[NSMutableDictionary alloc]init];
@@ -56,17 +70,47 @@
                 if([[tempColumnDict allValues]count] != 0)
                     [tempTablesDict setValue:tempColumnDict forKey:tableName];
             }else{
-                [tempTablesDict setValue:[newTablesDict valueForKey:tableName] forKey:tableName];
+                
+                //insert new column into tempDir
+                NSString *sqlTable = [NSString stringWithFormat:@"CREATE TABLE %@ (",tableName];
+                NSString *sqlIndex = @"";
+                if (sqlite3_open([tempDir UTF8String], &database) == SQLITE_OK) {
+                    for(NSString *columnName in [newTablesDict valueForKey:tableName]){
+                        ColumnDetails *columnType = (ColumnDetails *)[[newTablesDict valueForKey:tableName] valueForKey:columnName];
+                        NSString *key = [NSString stringWithFormat:@"%@ %@,",columnName, columnType.type];
+                        sqlTable = [sqlTable stringByAppendingString:key];
+                        if([columnType.PK isEqualToString:@"1"]){
+                            sqlIndex = [NSString stringWithFormat:@"CREATE UNIQUE INDEX %@ ON %@(%@)",tableName, tableName, columnName];
+                        }
+                    }
+                    sqlTable = [sqlTable substringToIndex:[sqlTable length]-1];
+                    sqlTable = [sqlTable stringByAppendingString:@")"];
+                    sqlite3_stmt *statement;
+                    if (sqlite3_prepare_v2(database, [sqlTable UTF8String], -1, &statement, NULL) == SQLITE_OK) {
+                        sqlite3_step(statement);
+                    }
+                    
+                    //after new table is created, now we inserted the index
+                    sqlite3_finalize(statement);
+                    if([sqlIndex isEqualToString:@""]){
+                        if (sqlite3_prepare_v2(database, [sqlIndex UTF8String], -1, &statement, NULL) == SQLITE_OK) {
+                            sqlite3_step(statement);
+                        }
+                    }
+                    sqlite3_finalize(statement);
+                }
+                
             }
         }
         
-        if (sqlite3_open([defaultDBPath UTF8String], &database) == SQLITE_OK) {
-            
+        //insert new column into tempDir
+        if (sqlite3_open([tempDir UTF8String], &database) == SQLITE_OK) {
             for(NSString *tableName in [tempTablesDict allKeys]){
-                //we construct dictionary consist of new database schema
+                //we construct query from temp dictionary
                 for(NSString *columnName in [tempTablesDict valueForKey:tableName]){
+                    ColumnDetails *columnType = (ColumnDetails *)[[tempTablesDict valueForKey:tableName]valueForKey:columnName];
                     NSString *sql = [NSString stringWithFormat:@"ALTER TABLE %@ ADD COLUMN %@ %@",
-                                     tableName, columnName, [[tempTablesDict valueForKey:tableName]valueForKey:columnName]]; 
+                                     tableName, columnName, columnType.type];
                     sqlite3_stmt *statement;
                     if (sqlite3_prepare_v2(database, [sql UTF8String], -1, &statement, NULL) == SQLITE_OK) {
                         sqlite3_step(statement);
@@ -193,10 +237,12 @@
                 NSString *querySQLColumn = [NSString stringWithFormat: @"PRAGMA table_info(%@)", [NSString stringWithUTF8String:(char *)sqlite3_column_text(tableStatement,0)]];
                 if (sqlite3_prepare_v2(contactDB, [querySQLColumn UTF8String], -1, &columnsStatement, NULL) == SQLITE_OK){
                     NSMutableDictionary *newColumnsArr = [[NSMutableDictionary alloc]init];
+                    
                     while (sqlite3_step(columnsStatement) == SQLITE_ROW) {
-                        [newColumnsArr setValue:[NSString stringWithUTF8String:(char *)sqlite3_column_text(columnsStatement,2)] forKey:[NSString stringWithUTF8String:(char *)sqlite3_column_text(columnsStatement,1)]];
-                        NSLog(@"columns name: %@", [NSString stringWithUTF8String:(char *)sqlite3_column_text(columnsStatement,1)]);
-                        NSLog(@"columns type: %@", [NSString stringWithUTF8String:(char *)sqlite3_column_text(columnsStatement,2)]);
+                        ColumnDetails *columnInfo = [[ColumnDetails alloc]init];
+                        columnInfo.type = [NSString stringWithUTF8String:(char *)sqlite3_column_text(columnsStatement,2)];
+                        columnInfo.PK = [NSString stringWithUTF8String:(char *)sqlite3_column_text(columnsStatement,5)];
+                        [newColumnsArr setValue:columnInfo forKey:[NSString stringWithUTF8String:(char *)sqlite3_column_text(columnsStatement,1)]];
                     }
                     //we insert the columns array into dictionary
                     [newTableDict setValue:newColumnsArr forKey:[NSString stringWithUTF8String:(char *)sqlite3_column_text(tableStatement,0)]];
