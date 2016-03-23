@@ -2967,8 +2967,11 @@ id dobtanngal;
              andCommDate:commDate andSmoker:smoker DiffClient:DiffClient bEDDCase:EDDCase];
 }
 
--(void)selectedRship:(NSString *)selectedRship{
+-(void)selectedRship:(NSString *)selectedRship :(NSString *)SelectedPshipCode;
+{
     //[Relationship setText:selectedRship];
+    
+    NSString *Test = SelectedPshipCode;
     
     Relationship = selectedRship;
     

@@ -12,7 +12,6 @@
 #import "ColorHexCode.h"
 #import "TabValidation.h"
 
-
 @interface SecondLAViewController (){
     ColorHexCode *CustomColor;
     int clientProfileID;
@@ -1618,5 +1617,6 @@ id dobtemp;
     [self setOutletQQ:nil];
     [super viewDidUnload];
 }
+
 
 @end

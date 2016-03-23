@@ -36,6 +36,7 @@
 - (NSString *) localDBUDID;
 - (NSString *) AgentCodeLocal;
 - (NSMutableDictionary *)getAgentDetails;
+-(NSMutableDictionary *)premiKeluargaku:(NSString *)SINo;
 //- (int) InsertAgentProfile:(NSString *) urlStr;
 
 @end
