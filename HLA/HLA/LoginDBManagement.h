@@ -25,6 +25,7 @@
 - (int) DeleteAgentProfile;
 - (int) fullSyncTable:(WebResponObj *)obj;
 - (int) DeviceStatus:(NSString *)AgentID;
+- (int) SpvStatus:(NSString *)spvID;
 - (void) updatePassword:(NSString *)newPassword;
 - (void) makeDBCopy;
 - (void) updateLoginDate;

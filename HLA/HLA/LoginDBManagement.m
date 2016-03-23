@@ -205,6 +205,36 @@
     return DeviceStatusFlag;
 }
 
+- (int) SpvStatus:(NSString *)spvID{
+    sqlite3_stmt *statement;
+    int agentStatusFlag = DATABASE_ERROR;
+    if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
+    {
+        NSString *querySQL = [NSString stringWithFormat: @"SELECT DirectSupervisorStatus FROM Agent_Profile WHERE DirectSupervisorCode=\"%@\" ", spvID];
+        
+        if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK){
+            if (sqlite3_step(statement) == SQLITE_ROW) {
+                NSString *strFirstLogin = [[NSString alloc]
+                                           initWithUTF8String:
+                                           (const char *) sqlite3_column_text(statement, 0)];
+                NSLog(@"%@",strFirstLogin);
+                if([strFirstLogin caseInsensitiveCompare:@"A"] == NSOrderedSame){
+                    agentStatusFlag = AGENT_IS_ACTIVE;
+                }else if([strFirstLogin caseInsensitiveCompare:@"I"] == NSOrderedSame){
+                    agentStatusFlag = AGENT_IS_INACTIVE;
+                }else if([strFirstLogin caseInsensitiveCompare:@"T"] == NSOrderedSame){
+                    agentStatusFlag = AGENT_IS_TERMINATED;
+                }
+            }else{
+                agentStatusFlag = AGENT_IS_NOT_FOUND;
+            }
+            sqlite3_finalize(statement);
+        }
+        sqlite3_close(contactDB);
+    }
+    return agentStatusFlag;
+}
+
 - (int) AgentStatus:(NSString *)AgentID{
     sqlite3_stmt *statement;
     int agentStatusFlag = DATABASE_ERROR;

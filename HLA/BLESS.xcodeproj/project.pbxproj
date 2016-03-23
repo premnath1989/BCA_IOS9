@@ -775,6 +775,7 @@
 		C4FCDDEC16395F290065D024 /* btn_SI_home.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FCDDE016395F290065D024 /* btn_SI_home.png */; };
 		DE050BE51C9BF52B00AA6D45 /* BCA_life_Keluargaku_Video_Testimonial_Part_I_final.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = DE050BE41C9BF52B00AA6D45 /* BCA_life_Keluargaku_Video_Testimonial_Part_I_final.mp4 */; };
 		DE8D29C71C94512900727765 /* TabValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = DE8D29C61C94512900727765 /* TabValidation.m */; };
+		DE9E89661CA26A2400BF6D0D /* PremiumKeluargakuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE9E89651CA26A2400BF6D0D /* PremiumKeluargakuViewController.m */; };
 		DEE2B7C71C9FADCF00B7283A /* DBMigration.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE2B7C61C9FADCF00B7283A /* DBMigration.m */; };
 		EF059839161A8BD1004A9095 /* NewLAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF059837161A8BCF004A9095 /* NewLAViewController.m */; };
 		EF05983F161A8C85004A9095 /* ListingTbViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF05983D161A8C85004A9095 /* ListingTbViewController.m */; };
@@ -2125,6 +2126,8 @@
 		DE050BE41C9BF52B00AA6D45 /* BCA_life_Keluargaku_Video_Testimonial_Part_I_final.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = BCA_life_Keluargaku_Video_Testimonial_Part_I_final.mp4; sourceTree = "<group>"; };
 		DE8D29C51C94511C00727765 /* TabValidation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabValidation.h; sourceTree = "<group>"; };
 		DE8D29C61C94512900727765 /* TabValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabValidation.m; sourceTree = "<group>"; };
+		DE9E89641CA26A1400BF6D0D /* PremiumKeluargakuViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PremiumKeluargakuViewController.h; sourceTree = "<group>"; };
+		DE9E89651CA26A2400BF6D0D /* PremiumKeluargakuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PremiumKeluargakuViewController.m; sourceTree = "<group>"; };
 		DEE2B7C51C9FADC200B7283A /* DBMigration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DBMigration.h; sourceTree = "<group>"; };
 		DEE2B7C61C9FADCF00B7283A /* DBMigration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBMigration.m; sourceTree = "<group>"; };
 		EF059837161A8BCF004A9095 /* NewLAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewLAViewController.m; sourceTree = "<group>"; };
@@ -4632,6 +4635,8 @@
 				EF059854161A9373004A9095 /* PremiumViewController.m */,
 				EFB9389C161C3CB800B97101 /* BasicPlanHandler.h */,
 				EFB9389D161C3CB800B97101 /* BasicPlanHandler.m */,
+				DE9E89641CA26A1400BF6D0D /* PremiumKeluargakuViewController.h */,
+				DE9E89651CA26A2400BF6D0D /* PremiumKeluargakuViewController.m */,
 			);
 			name = BasicPlan;
 			sourceTree = "<group>";
@@ -5271,6 +5276,7 @@
 				EF05985C161A9428004A9095 /* RiderListTbViewController.m in Sources */,
 				C4E7B388161B119E00066CBF /* SIListing.m in Sources */,
 				C4E7B38B161B147800066CBF /* siListingSortBy.m in Sources */,
+				DE9E89661CA26A2400BF6D0D /* PremiumKeluargakuViewController.m in Sources */,
 				EF28C319161BE224009585CC /* SIMenuViewController.m in Sources */,
 				EFB9389E161C3CB800B97101 /* BasicPlanHandler.m in Sources */,
 				C4F08D60161DBDBB008BCC1A /* SIDate.m in Sources */,

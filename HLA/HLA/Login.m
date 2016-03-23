@@ -666,8 +666,15 @@ static NSString *labelVers;
                             break;
                         }
                         case USERNAME_IS_SPV:{
-                            WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
-                            [webservice spvLogin:[loginDB AgentCodeLocal] delegate:self spvCode:txtUsername.text spvPass:txtPassword.text];
+                            
+                            if([loginDB SpvStatus:txtUsername.text] == AGENT_IS_ACTIVE){
+                                WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
+                                [webservice spvLogin:[loginDB AgentCodeLocal] delegate:self spvCode:txtUsername.text spvPass:txtPassword.text];
+                            }else{
+                                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Status Agen adalah inactive"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                                [alert show];
+                                ONLINE_PROCESS = FALSE;
+                            }
                             break;
                         }
                         case USERNAME_IS_ADMIN:{

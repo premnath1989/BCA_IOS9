@@ -122,7 +122,7 @@
         
         sqlite3_close(database);
         [self moveDBFromTemp:tempDir ToDefault:defaultDBPath];
-        
+//        [self updateDBVersion:defaultDBPath NewVersion:dbVersion Remark:@""];
         
         [[NSUserDefaults standardUserDefaults] setObject:bundleDBVersion forKey:@"dbVersion"];
         [[NSUserDefaults standardUserDefaults] synchronize];
@@ -135,17 +135,23 @@
     return 0;
 }
 
--(void)updateDBVersion:(sqlite3 *)database NewVersion:(NSString *)newVersion Remark:(NSString *)remark
+-(void)updateDBVersion:(NSString *)dbPath NewVersion:(NSString *)newVersion Remark:(NSString *)remark
 {
     int today = [[NSDate date] timeIntervalSince1970];
-    // delete old database entry
-    NSString *sql = @"DELETE FROM DB_Version";
-    sqlite3_exec(database, [sql UTF8String], NULL, NULL, NULL);
     
-    // insert new database entry
-    sql = [NSString stringWithFormat:@"INSERT INTO DB_Version (Version, DateUpdate, Remark) VALUES (\"%@\", \"%d\", \"%@\")",
-           newVersion, today, remark];
-    sqlite3_exec(database, [sql UTF8String], NULL, NULL, NULL);
+    sqlite3 *database;
+    if (sqlite3_open([dbPath UTF8String], &database) == SQLITE_OK) {
+    
+        // delete old database entry
+        NSString *sql = @"DELETE FROM DB_Version";
+        sqlite3_exec(database, [sql UTF8String], NULL, NULL, NULL);
+        
+        // insert new database entry
+        sql = [NSString stringWithFormat:@"INSERT INTO DB_Version (Version, DateUpdate, Remark) VALUES (\"%@\", \"%d\", \"%@\")",
+               newVersion, today, remark];
+        sqlite3_exec(database, [sql UTF8String], NULL, NULL, NULL);
+    }
+    sqlite3_close(database);
     
 }
 
@@ -255,6 +261,7 @@
     }
     return newTableDict;
 }
+
 
 
 @end
