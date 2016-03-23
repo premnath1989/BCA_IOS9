@@ -15,6 +15,10 @@
 #import "RiderDeducTb.h"
 #import "AppDelegate.h"
 #import "MainScreen.h"
+#import "KeluargakuTableViewCell.h"
+#import "ColorHexCode.h"
+#import "RiderCalculation.h"
+#import "Formatter.h"
 
 @class RiderViewController;
 @protocol RiderViewControllerDelegate
@@ -26,6 +30,10 @@
 
 @interface RiderViewController : UIViewController <RiderPTypeTbViewControllerDelegate,RiderListTbViewControllerDelegate,UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource,RiderDeducTbDelegate,RiderPlanTbDelegate>
 {
+    RiderCalculation *riderCalculation;
+    Formatter *formatter;
+    ColorHexCode *CustomColor;
+    
     NSString *databasePath;
     NSString *RatesDatabasePath;
     sqlite3 *contactDB;
@@ -71,7 +79,11 @@
     UIColor *themeColour;
     
     double doubleSumAssured;
+    NSMutableArray* arrayDataRiders;
 }
+
+@property (retain, nonatomic) NSMutableDictionary* dictionaryPOForInsert;
+@property (retain, nonatomic) NSMutableDictionary* dictionaryForBasicPlan;
 
 @property (nonatomic, retain) UIPopoverController *RiderListPopover;
 @property (nonatomic, retain) UIPopoverController *planPopover;
@@ -141,7 +153,7 @@
 @property (retain, nonatomic) IBOutlet UITextField *sumField;
 @property (retain, nonatomic) IBOutlet UITextField *cpaField;
 @property (retain, nonatomic) IBOutlet UITextField *unitField;
-@property (retain, nonatomic) IBOutlet UITextField *occpField;
+
 @property (retain, nonatomic) IBOutlet UITextField *HLField;
 @property (retain, nonatomic) IBOutlet UITextField *HLTField;
 @property (strong, nonatomic) IBOutlet UITextField *tempHLField;
@@ -231,6 +243,19 @@
 @property (strong, nonatomic) IBOutlet UILabel *titleHLPTerm;
 
 //Added by faiz
+@property (retain, nonatomic) IBOutlet UISegmentedControl *segmentPersonType;
+@property (retain, nonatomic) IBOutlet UITextField *occpField;
+@property (strong, nonatomic) IBOutlet UITextField *sumAssuredField;
+@property (strong, nonatomic) IBOutlet UITextField *basicPremiField;
+@property (strong, nonatomic) IBOutlet UITextField *extraPremiPercentField;
+@property (strong, nonatomic) IBOutlet UITextField *extraPremiNumberField;
+@property (strong, nonatomic) IBOutlet UITextField *masaExtraPremiField;
+@property (strong, nonatomic) IBOutlet UITextField *masaAsuransiField;
+//end of Added by faiz
+
+//Added by faiz
+-(void)setElementActive;
+-(void)calculateRiderPremi;
 -(void)setSumAssured:(NSString *)sumAssured;
 //@property (retain, nonatomic) IBOutlet UILabel *titleRidCode;
 //end of Added by faiz

@@ -12,7 +12,7 @@
 @protocol RelationshipPopoverViewControllerDelegate <NSObject>
 
 @required
--(void)selectedRship:(NSString *)selectedRship;
+-(void)selectedRship:(NSString *)selectedRship :(NSString *)SelectedPshipCode;
 @end
 
 
@@ -25,7 +25,7 @@
 
 }
 
-@property (nonatomic, strong) NSMutableArray *IDTypes;
+@property (nonatomic, strong) NSMutableArray *IDTypes, *IDCodes;
 @property (nonatomic, weak) id<RelationshipPopoverViewControllerDelegate> delegate;
 
 @property(nonatomic, assign) int rowToUpdate;

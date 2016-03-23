@@ -337,6 +337,9 @@
 		439985C11C630C4D0003B037 /* VIPClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 439985C01C630C4D0003B037 /* VIPClass.m */; };
 		43B56A8C1C7EDDB100145D35 /* ModelSIPOData.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B56A8B1C7EDDB100145D35 /* ModelSIPOData.m */; };
 		43B56A8F1C7EDDCC00145D35 /* ModelSIMaster.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B56A8E1C7EDDCC00145D35 /* ModelSIMaster.m */; };
+		43B590961CA2702400DC53AC /* KeluargakuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43B590931CA2702400DC53AC /* KeluargakuTableViewCell.xib */; };
+		43B590971CA2702400DC53AC /* KeluargakuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B590951CA2702400DC53AC /* KeluargakuTableViewCell.m */; };
+		43B5909B1CA2704200DC53AC /* RiderCalculation.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B5909A1CA2704200DC53AC /* RiderCalculation.m */; };
 		43C166191C99448500001691 /* ModelKodepos.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C166181C99448500001691 /* ModelKodepos.m */; };
 		43C1661C1C99489000001691 /* KodePosInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C1661B1C99489000001691 /* KodePosInfo.m */; };
 		43DA4BD91C76A59A0038C92C /* ModelAgentProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DA4BD81C76A59A0038C92C /* ModelAgentProfile.m */; };
@@ -1368,6 +1371,11 @@
 		43B56A8B1C7EDDB100145D35 /* ModelSIPOData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelSIPOData.m; sourceTree = "<group>"; };
 		43B56A8D1C7EDDCC00145D35 /* ModelSIMaster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelSIMaster.h; sourceTree = "<group>"; };
 		43B56A8E1C7EDDCC00145D35 /* ModelSIMaster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelSIMaster.m; sourceTree = "<group>"; };
+		43B590931CA2702400DC53AC /* KeluargakuTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KeluargakuTableViewCell.xib; sourceTree = "<group>"; };
+		43B590941CA2702400DC53AC /* KeluargakuTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeluargakuTableViewCell.h; sourceTree = "<group>"; };
+		43B590951CA2702400DC53AC /* KeluargakuTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeluargakuTableViewCell.m; sourceTree = "<group>"; };
+		43B590991CA2704200DC53AC /* RiderCalculation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RiderCalculation.h; sourceTree = "<group>"; };
+		43B5909A1CA2704200DC53AC /* RiderCalculation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RiderCalculation.m; sourceTree = "<group>"; };
 		43C166171C99448500001691 /* ModelKodepos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelKodepos.h; sourceTree = "<group>"; };
 		43C166181C99448500001691 /* ModelKodepos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelKodepos.m; sourceTree = "<group>"; };
 		43C1661A1C99489000001691 /* KodePosInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KodePosInfo.h; sourceTree = "<group>"; };
@@ -3174,6 +3182,9 @@
 		431F5FE01C6D93B700A9CA6C /* tableViewCell */ = {
 			isa = PBXGroup;
 			children = (
+				43B590931CA2702400DC53AC /* KeluargakuTableViewCell.xib */,
+				43B590941CA2702400DC53AC /* KeluargakuTableViewCell.h */,
+				43B590951CA2702400DC53AC /* KeluargakuTableViewCell.m */,
 				43F8B54E1C81E71A006F3F6C /* SIListingTableViewCell.xib */,
 				43F8B54F1C81E71A006F3F6C /* SIListingTableViewCell.h */,
 				43F8B5501C81E71B006F3F6C /* SIListingTableViewCell.m */,
@@ -3202,6 +3213,15 @@
 				178765DE1C75C04C0036F31A /* ProspectProfileStoryboard.storyboard */,
 			);
 			name = Storyboard;
+			sourceTree = "<group>";
+		};
+		43B590981CA2703000DC53AC /* RiderCalculation */ = {
+			isa = PBXGroup;
+			children = (
+				43B590991CA2704200DC53AC /* RiderCalculation.h */,
+				43B5909A1CA2704200DC53AC /* RiderCalculation.m */,
+			);
+			name = RiderCalculation;
 			sourceTree = "<group>";
 		};
 		43F7C3161C9D409D0074F464 /* Formatter */ = {
@@ -4610,6 +4630,7 @@
 		EF05984C161A9201004A9095 /* Rider */ = {
 			isa = PBXGroup;
 			children = (
+				43B590981CA2703000DC53AC /* RiderCalculation */,
 				EF05984A161A91EE004A9095 /* RiderViewController.h */,
 				EF059849161A91EE004A9095 /* RiderViewController.m */,
 				EF059858161A9406004A9095 /* RiderPTypeTbViewController.h */,
@@ -5003,6 +5024,7 @@
 				C4E5A47B168AAA89007848CE /* Profile72.png in Resources */,
 				C4E5A47C168AAA89007848CE /* Profile96.png in Resources */,
 				C4E5A47D168AAA89007848CE /* Profile128.png in Resources */,
+				43B590961CA2702400DC53AC /* KeluargakuTableViewCell.xib in Resources */,
 				A1EEF95A1C8D8E520016BB3D /* Icon Brochure & save as-01-04.png in Resources */,
 				C4E5A47E168AAA89007848CE /* SecurityQuestion16.png in Resources */,
 				AA4EF74B1C85A4260050CCD8 /* Reader-Button-H.png in Resources */,
@@ -5382,6 +5404,7 @@
 				6A6ED0A717D591DC009FFA56 /* Religion.m in Sources */,
 				2958A81917E95C070090A791 /* MainCustomer.m in Sources */,
 				2958A81C17E95E0E0090A791 /* ContactTypeClass.m in Sources */,
+				43B5909B1CA2704200DC53AC /* RiderCalculation.m in Sources */,
 				2958A82417E95E7D0090A791 /* PersonalDetialsViewController.m in Sources */,
 				2958A82517E95E7D0090A791 /* SelectPartner.m in Sources */,
 				175E3A561C7BFE4A000EC161 /* MasaPembayaran.m in Sources */,
@@ -5668,6 +5691,7 @@
 				4239AEDE1946DAE200BD6F53 /* PDFPage.m in Sources */,
 				AAD5455F1C6443080029631D /* LoginDBManagement.m in Sources */,
 				4239AEDF1946DAE200BD6F53 /* PDFStream.m in Sources */,
+				43B590971CA2702400DC53AC /* KeluargakuTableViewCell.m in Sources */,
 				4239AEE01946DAE200BD6F53 /* PDFObjectParser.m in Sources */,
 				4239AEE11946DAE200BD6F53 /* PDFUtility.m in Sources */,
 				4239AEE21946DAE200BD6F53 /* PDFFormButtonField.m in Sources */,

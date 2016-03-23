@@ -17,7 +17,14 @@
 #import "MasterMenuEApp.h"
 #import "Constants.h"
 
-@interface RiderViewController ()
+@interface RiderViewController (){
+    int lastSelectedIndex;
+    NSString* personCharacterType;
+    
+    NSMutableDictionary* dictMDBKK;
+    NSMutableDictionary* dictMBKK;
+    NSMutableDictionary* dictBebasPremi;
+}
 
 @end
 BOOL Edit = FALSE;
@@ -99,6 +106,10 @@ int maxGycc = 0;
 
 - (void)viewDidLoad
 {
+    riderCalculation = [[RiderCalculation alloc]init];
+    CustomColor = [[ColorHexCode alloc]init];
+    formatter = [[Formatter alloc]init];
+    
     ridNotAffected = [NSArray arrayWithObjects: @"ACIR_MPP", @"CIR", @"ICR", @"LCPR", @"LCWP", @"PLCP", @"PTR", @"PR", @"SP_PRE",@"SP_STD" , nil];
     
     //myView.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg10.jpg"]];
@@ -130,6 +141,7 @@ int maxGycc = 0;
     //deleteBtn.titleLabel.shadowOffset = CGSizeMake(0, -1);
     themeColour = [UIColor colorWithRed:218.0f/255.0f green:49.0f/255.0f blue:85.0f/255.0f alpha:1];
     [self setTextfieldBorder];
+    arrayDataRiders=[[NSMutableArray alloc]initWithObjects:[self dictMDBKK],[self dictMBKK],[self dictBebasPremi], nil];
     [super viewDidLoad];
 	
 }
@@ -589,6 +601,36 @@ int maxGycc = 0;
 
 #pragma mark - added by faiz
 //added by faiz
+-(void)setElementActive{
+    if ([[_dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"SELF"]){
+        for (UIView *view in [myView subviews]) {
+            if ([view isKindOfClass:[UITextField class]]) {
+                UITextField *textField = (UITextField *)view;
+                [textField setBackgroundColor:[CustomColor colorWithHexString:@"EEEEEE"]];
+                [textField setEnabled:NO];
+            }
+        }
+    }
+    else{
+        for (UIView *view in [myView subviews]) {
+            if ([view isKindOfClass:[UITextField class]]) {
+                UITextField *textField = (UITextField *)view;
+                [textField setBackgroundColor:[CustomColor colorWithHexString:@"EEEEEE"]];
+                [textField setEnabled:NO];
+            }
+        }
+        if (lastSelectedIndex==2){
+            [_extraPremiPercentField setEnabled:YES];
+            [_extraPremiNumberField setEnabled:YES];
+            [_masaExtraPremiField setEnabled:YES];
+            
+            [_extraPremiPercentField setBackgroundColor:[UIColor whiteColor]];
+            [_extraPremiNumberField setBackgroundColor:[UIColor whiteColor]];
+            [_masaExtraPremiField setBackgroundColor:[UIColor whiteColor]];
+        }
+    }
+}
+
 -(void)setTextfieldBorder{
     UIFont *font= [UIFont fontWithName:@"TreBuchet MS" size:16.0f];
     for (UIView *view in [myView subviews]) {
@@ -5719,6 +5761,168 @@ int maxGycc = 0;
     [self.deducPopover dismissPopoverAnimated:YES];
 }
 
+-(void)tiePersonType:(int)personType{
+    [_segmentPersonType setSelectedSegmentIndex:personType];
+    if (personType==0) {
+        [occpField setText:[_dictionaryPOForInsert valueForKey:@"PO_Occp"]];
+        personCharacterType = @"P";
+    } else {
+        [occpField setText:[_dictionaryPOForInsert valueForKey:@"LA_Occp"]];
+        personCharacterType = @"T";
+    }
+
+}
+
+- (IBAction)ActionPersonType:(UISegmentedControl *)sender
+{
+    [self resignFirstResponder];
+    [self.view endEditing:YES];
+    
+    Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
+    id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
+    [activeInstance performSelector:@selector(dismissKeyboard)];
+    
+    if ([sender selectedSegmentIndex]==0) {
+        [occpField setText:[_dictionaryPOForInsert valueForKey:@"PO_Occp"]];
+    } else {
+        [occpField setText:[_dictionaryPOForInsert valueForKey:@"LA_Occp"]];
+    }
+}
+
+#pragma mark calculateRiderPremi
+-(void)calculateRiderPremi{
+    NSMutableDictionary* dictForCalculate=[[NSMutableDictionary alloc]initWithDictionary:[arrayDataRiders objectAtIndex:0]];
+    [dictForCalculate setObject:[[arrayDataRiders objectAtIndex:0]valueForKey:@"ExtraPremiPerCent"] forKey:@"ExtraPremiPerCent"];
+    [dictForCalculate setObject:[[arrayDataRiders objectAtIndex:0]valueForKey:@"ExtraPremiPerMil"] forKey:@"ExtraPremiPerMil"];
+    [dictForCalculate setObject:[[arrayDataRiders objectAtIndex:0]valueForKey:@"MasaExtraPremi"] forKey:@"MasaExtraPremi"];
+    
+    //[_dictionaryForBasicPlan setObject:[NSNumber numberWithInt:2] forKey:@"PurchaseNumber"];
+    
+    if ([[_dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"SELF"]){
+        [self tiePersonType:1];
+    }
+    else{
+        //if (indexSelected==2){
+        [self tiePersonType:0];
+        //}
+        //else{
+        //    [self tiePersonType:1];
+        //}
+    }
+    
+    double RiderPremium = [riderCalculation calculateBPPremi:dictForCalculate DictionaryBasicPlan:_dictionaryForBasicPlan DictionaryPO:_dictionaryPOForInsert BasicCode:@"KLK" PaymentCode:[self getPaymentType] PersonType:personCharacterType];
+    double MDBKK = [riderCalculation calculateMDBKK:dictForCalculate DictionaryBasicPlan:_dictionaryForBasicPlan DictionaryPO:_dictionaryPOForInsert BasicCode:@"KLK" PaymentCode:[self getPaymentType] PersonType:personCharacterType];
+    double MDBKKLoading = [riderCalculation calculateMDBKKLoading:dictForCalculate DictionaryBasicPlan:_dictionaryForBasicPlan DictionaryPO:_dictionaryPOForInsert BasicCode:@"KLK" PaymentCode:[self getPaymentType] PersonType:personCharacterType];
+    double RiderLoading = [riderCalculation calculateBPPremiLoading:dictForCalculate DictionaryBasicPlan:_dictionaryForBasicPlan DictionaryPO:_dictionaryPOForInsert BasicCode:@"KLK" PaymentCode:[self getPaymentType] PersonType:personCharacterType];
+    
+    NSString *mdbkkFormatted = [formatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:MDBKK]];
+    NSString *riderPremiFormatted = [formatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:RiderPremium]];
+    NSString *riderPremiLoadingFormatted = [formatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:RiderLoading]];
+    NSString *mdbkkLoadingFormatted = [formatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:MDBKKLoading]];
+    
+    [dictMDBKK setObject:mdbkkFormatted forKey:@"PremiRp"];
+    [dictMDBKK setObject:mdbkkLoadingFormatted forKey:@"ExtraPremiRp"];
+    [dictBebasPremi setObject:riderPremiFormatted forKey:@"PremiRp"];
+    [dictBebasPremi setObject:riderPremiLoadingFormatted forKey:@"ExtraPremiRp"];
+    
+    arrayDataRiders=[[NSMutableArray alloc]initWithObjects:dictMDBKK,dictMBKK,dictBebasPremi, nil];
+    [myTableView reloadData];
+}
+
+#pragma mark - setTextFieldValue
+-(void)setRiderInformationForTextField:(int)indexSelected{
+    [self setElementActive];
+    NSDictionary* dictSelected=[arrayDataRiders objectAtIndex:indexSelected];
+    [btnAddRider setTitle:[dictSelected valueForKey:@"Manfaat"] forState:UIControlStateNormal];
+    [_sumAssuredField setText:[formatter stringToCurrencyDecimalFormatted:[NSString stringWithFormat:@"%@",[dictSelected valueForKey:@"UangPertanggungan"]]]];
+    [_masaAsuransiField setText:[dictSelected valueForKey:@"MasaAsuransi"]];
+    [_extraPremiPercentField setText:[NSString stringWithFormat:@"%@",[dictSelected valueForKey:@"ExtraPremiPerCent"]]];
+    [_extraPremiNumberField setText:[NSString stringWithFormat:@"%@",[dictSelected valueForKey:@"ExtraPremiPerMil"]]];
+    [_masaExtraPremiField setText:[NSString stringWithFormat:@"%@",[dictSelected valueForKey:@"MasaExtraPremi"]]];
+
+    if ([[_dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"SELF"]){
+        [self tiePersonType:1];
+    }
+    else{
+        if (indexSelected==2){
+            [self tiePersonType:0];
+        }
+        else{
+            [self tiePersonType:1];
+        }
+    }
+}
+
+#pragma mark - setDictionaryRider
+
+-(NSDictionary *)dictMDBKK{
+    NSNumber *sumAssured = [NSNumber numberWithLongLong:[[_dictionaryForBasicPlan valueForKey:@"Number_Sum_Assured"] longLongValue]];
+
+    int extraPremiPercentage=[[_dictionaryForBasicPlan valueForKey:@"ExtraPremiumPercentage"] integerValue];
+    int extraPremiumMil=[[_dictionaryForBasicPlan valueForKey:@"ExtraPremiumSum"] integerValue];
+    int masaPremium=[[_dictionaryForBasicPlan valueForKey:@"ExtraPremiumTerm"] integerValue];
+    NSNumber* premiDasar = [formatter convertNumberFromString:[_dictionaryForBasicPlan valueForKey:@"PremiumPolicyA"]];
+    dictMDBKK=[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"MDBKK",@"Manfaat",
+                             [riderCalculation getSumAssuredForMDBKK:sumAssured],@"UangPertanggungan",
+                             @"10",@"MasaAsuransi",
+                             @"-",@"Unit",
+                             [NSNumber numberWithInt:extraPremiPercentage],@"ExtraPremiPerCent",
+                             [NSNumber numberWithInt:extraPremiumMil],@"ExtraPremiPerMil",
+                             [NSNumber numberWithInt:masaPremium],@"MasaExtraPremi",
+                             @"-",@"ExtraPremiRp",
+                             [formatter stringToCurrencyDecimalFormatted:[NSString stringWithFormat:@"%@",premiDasar]],@"PremiRp",
+                             nil];
+    
+    return dictMDBKK;
+}
+
+-(NSDictionary *)dictMBKK{
+    NSNumber *sumAssured = [NSNumber numberWithLongLong:[[_dictionaryForBasicPlan valueForKey:@"Number_Sum_Assured"] longLongValue]];
+    dictMBKK=[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"MBKK",@"Manfaat",
+                             [riderCalculation getSumAssuredForMBKK:sumAssured],@"UangPertanggungan",
+                             @"10",@"MasaAsuransi",
+                             @"-",@"Unit",
+                             @"-",@"ExtraPremiPerCent",
+                             @"-",@"ExtraPremiPerMil",
+                             @"-",@"MasaExtraPremi",
+                             @"-",@"ExtraPremiRp",
+                             @"-",@"PremiRp",
+                             nil];
+    return dictMBKK;
+}
+
+-(NSDictionary *)dictBebasPremi{
+    int extraPremiPercentage=[[_dictionaryForBasicPlan valueForKey:@"ExtraPremiumPercentage"] integerValue];
+    int extraPremiumMil=[[_dictionaryForBasicPlan valueForKey:@"ExtraPremiumSum"] integerValue];
+    int masaPremium=[[_dictionaryForBasicPlan valueForKey:@"ExtraPremiumTerm"] integerValue];
+
+    dictBebasPremi=[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"Bebas Premi",@"Manfaat",
+                             @"-",@"UangPertanggungan",
+                             @"10",@"MasaAsuransi",
+                             @"-",@"Unit",
+                             [NSNumber numberWithInt:extraPremiPercentage],@"ExtraPremiPerCent",
+                             [NSNumber numberWithInt:extraPremiumMil],@"ExtraPremiPerMil",
+                             [NSNumber numberWithInt:masaPremium],@"MasaExtraPremi",
+                             @"-",@"ExtraPremiRp",
+                             @"-",@"PremiRp",
+                             nil];
+    return dictBebasPremi;
+}
+
+#pragma mark - calculate Premi for BP
+
+-(void)calculateBPPremi:(UITextField *)sender{
+    NSMutableDictionary* dictForCalculate=[[NSMutableDictionary alloc]initWithDictionary:[arrayDataRiders objectAtIndex:2]];
+    if (sender==_extraPremiPercentField){
+        [dictForCalculate setObject:sender.text forKey:@"ExtraPremiPerCent"];
+    }
+    else if (sender==_extraPremiNumberField){
+        [dictForCalculate setObject:sender.text forKey:@"ExtraPremiPerMil"];
+    }
+    else{
+        [dictForCalculate setObject:sender.text forKey:@"MasaExtraPremi"];
+    }
+}
 
 #pragma mark - Table view data source
 
@@ -5729,12 +5933,37 @@ int maxGycc = 0;
 
 - (NSInteger)tableView:(UITableView *)myTableView numberOfRowsInSection:(NSInteger)section
 {
-    return [LTypeRiderCode count];
+    //return [LTypeRiderCode count];
+    return [arrayDataRiders count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)myTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Remove seperator inset
+    
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
+    KeluargakuTableViewCell *cell = (KeluargakuTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"KeluargakuTableViewCell" owner:self options:nil];
+        cell = [nib objectAtIndex:0];
+    }
+    if (indexPath.row < [arrayDataRiders count]){
+        [cell.labelManfaat setText:[[arrayDataRiders objectAtIndex:indexPath.row] valueForKey:@"Manfaat"]];
+        [cell.labelUangPertanggungan setText:[formatter stringToCurrencyDecimalFormatted:[NSString stringWithFormat:@"%@",[[arrayDataRiders objectAtIndex:indexPath.row] valueForKey:@"UangPertanggungan"]]]];
+        [cell.labelMasaAsuransi setText:[[arrayDataRiders objectAtIndex:indexPath.row] valueForKey:@"MasaAsuransi"]];
+        [cell.labelUnit setText:[[arrayDataRiders objectAtIndex:indexPath.row] valueForKey:@"Unit"]];
+        [cell.labelExtraPremiPercent setText:[NSString stringWithFormat:@"%@",[[arrayDataRiders objectAtIndex:indexPath.row] valueForKey:@"ExtraPremiPerCent"]]];
+        [cell.labelExtraPremiPerMil setText:[NSString stringWithFormat:@"%@",[[arrayDataRiders objectAtIndex:indexPath.row] valueForKey:@"ExtraPremiPerMil"]]];
+        [cell.labelMasaExtraPremi setText:[NSString stringWithFormat:@"%@",[[arrayDataRiders objectAtIndex:indexPath.row] valueForKey:@"MasaExtraPremi"]]];
+        [cell.labelExraPremiRp setText:[[arrayDataRiders objectAtIndex:indexPath.row] valueForKey:@"ExtraPremiRp"]];
+        [cell.labelPremiRp setText:[[arrayDataRiders objectAtIndex:indexPath.row] valueForKey:@"PremiRp"]];
+    }
+    return cell;
+    /*static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [self.myTableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil)
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
@@ -6001,7 +6230,7 @@ int maxGycc = 0;
     
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
     
-    return cell;
+    return cell;*/
 }
 
 
@@ -6012,9 +6241,9 @@ int maxGycc = 0;
     
     UITableViewCell *currentCell = [myTableView cellForRowAtIndexPath:indexPath];
     currentCell.frame = CGRectMake(currentCell.frame.origin.x, currentCell.frame.origin.y, 750, currentCell.frame.size.height);
-
-    
-    if ([myTableView isEditing]) {
+    lastSelectedIndex = indexPath.row;
+    [self setRiderInformationForTextField:lastSelectedIndex];
+    /*if ([myTableView isEditing]) {
         BOOL gotRowSelected = FALSE;
         
         for (UITableViewCell *cell in [myTableView visibleCells]) {
@@ -6176,7 +6405,7 @@ int maxGycc = 0;
             }
             
         }
-    }
+    }*/
 }
 
 -(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -6509,13 +6738,57 @@ int maxGycc = 0;
     [self setPlanBtnTitle:@""];
     [self.deducBtn setTitle:[NSString stringWithFormat:@""] forState:UIControlStateNormal];
 }
+
+-(int)getPaymentType{
+    int PaymentType;
+    if ([[_dictionaryForBasicPlan valueForKey:@"Payment_Frequency"] isEqualToString:@"Tahunan"])
+    {
+        PaymentType =1;
+    }
+    else if ([[_dictionaryForBasicPlan valueForKey:@"Payment_Frequency"] isEqualToString:@"Semester"])
+    {
+        PaymentType =2;
+    }
+    else if ([[_dictionaryForBasicPlan valueForKey:@"Payment_Frequency"] isEqualToString:@"Kuartal"])
+    {
+        PaymentType =3;
+    }
+    else {
+        PaymentType =4;
+    }
+    return PaymentType;
+}
+
 - (IBAction)NextView:(id)sender
 {
     
-    PremiumViewController *premView = [self.storyboard instantiateViewControllerWithIdentifier:@"premiumView"];
+    /*PremiumViewController *premView = [self.storyboard instantiateViewControllerWithIdentifier:@"premiumView"];
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(100, 100, 0, 0)];
-    [view addSubview:premView.view];
+    [view addSubview:premView.view];*/
+    NSMutableDictionary* dictForCalculate=[[NSMutableDictionary alloc]initWithDictionary:[arrayDataRiders objectAtIndex:2]];
+    [dictForCalculate setObject:_extraPremiPercentField.text forKey:@"ExtraPremiPerCent"];
+    [dictForCalculate setObject:_extraPremiNumberField.text forKey:@"ExtraPremiPerMil"];
+    [dictForCalculate setObject:_masaExtraPremiField.text forKey:@"ExtraPremiPerMil"];
+    
+    [_dictionaryForBasicPlan setObject:[NSNumber numberWithInt:2] forKey:@"PurchaseNumber"];
+    
+    double RiderPremium = [riderCalculation calculateBPPremi:dictForCalculate DictionaryBasicPlan:_dictionaryForBasicPlan DictionaryPO:_dictionaryPOForInsert BasicCode:@"KLK" PaymentCode:[self getPaymentType] PersonType:personCharacterType];
+    double MDBKK = [riderCalculation calculateMDBKK:dictForCalculate DictionaryBasicPlan:_dictionaryForBasicPlan DictionaryPO:_dictionaryPOForInsert BasicCode:@"KLK" PaymentCode:[self getPaymentType] PersonType:personCharacterType];
+    double MDBKKLoading = [riderCalculation calculateMDBKKLoading:dictForCalculate DictionaryBasicPlan:_dictionaryForBasicPlan DictionaryPO:_dictionaryPOForInsert BasicCode:@"KLK" PaymentCode:[self getPaymentType] PersonType:personCharacterType];
+    double RiderLoading = [riderCalculation calculateBPPremiLoading:dictForCalculate DictionaryBasicPlan:_dictionaryForBasicPlan DictionaryPO:_dictionaryPOForInsert BasicCode:@"KLK" PaymentCode:[self getPaymentType] PersonType:personCharacterType];
 
+    NSString *mdbkkFormatted = [formatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:MDBKK]];
+    NSString *riderPremiFormatted = [formatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:RiderPremium]];
+    NSString *riderPremiLoadingFormatted = [formatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:RiderLoading]];
+    NSString *mdbkkLoadingFormatted = [formatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:MDBKKLoading]];
+    
+    [dictMDBKK setObject:mdbkkFormatted forKey:@"PremiRp"];
+    [dictMDBKK setObject:mdbkkLoadingFormatted forKey:@"ExtraPremiRp"];
+    [dictBebasPremi setObject:riderPremiFormatted forKey:@"PremiRp"];
+    [dictBebasPremi setObject:riderPremiLoadingFormatted forKey:@"ExtraPremiRp"];
+    
+    arrayDataRiders=[[NSMutableArray alloc]initWithObjects:dictMDBKK,dictMBKK,dictBebasPremi, nil];
+    [myTableView reloadData];
 }
 
 

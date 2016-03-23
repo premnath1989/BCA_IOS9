@@ -1778,7 +1778,8 @@ bool WPTPD30RisDeleted = FALSE;
         [_masaPembayaranButton setTitle:[dictPremiData valueForKey:@"Payment_Term"] forState:UIControlStateNormal];
         [_frekuensiPembayaranButton setTitle:[dictPremiData valueForKey:@"Payment_Frequency"] forState:UIControlStateNormal];
         FRekeunsiPembayaranMode = [dictPremiData valueForKey:@"Payment_Frequency"];
-        
+        [_KKLKPembelianKeBtn setTitle:[dictPremiData valueForKey:@"PurchaseNumber"] forState:UIControlStateNormal];
+        [_KKLKDiskaunBtn setText:[dictPremiData valueForKey:@"Discount"]];
         
         NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
         f.numberStyle = NSNumberFormatterDecimalStyle;
@@ -1992,7 +1993,8 @@ bool WPTPD30RisDeleted = FALSE;
                                                   _masaExtraPremiField.text,@"ExtraPremiumTerm",
                                                   _extraBasicPremiField.text,@"ExtraPremiumPolicy",
                                                   _totalPremiWithLoadingField.text,@"TotalPremiumLoading",
-                                                  @"0",@"SubTotalPremium",_KKLKPembelianKeBtn.titleLabel.text,@"PurchaseNumber",
+                                                  @"0",@"SubTotalPremium",
+                                                  _KKLKPembelianKeBtn.titleLabel.text,@"PurchaseNumber",
                                                   _KKLKDiskaunBtn.text,@"Discount",nil];
         return dictionaryBasicPlan;
         

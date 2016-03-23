@@ -115,9 +115,9 @@ BOOL isFirstLoad;
     myTableView.rowHeight = 84;
     [myTableView reloadData];
     
-    self.RiderController = [self.storyboard instantiateViewControllerWithIdentifier:@"RiderView"];
-    _RiderController.delegate = self;
-    [self.RightView addSubview:self.RiderController.view];
+    //self.RiderController = [self.storyboard instantiateViewControllerWithIdentifier:@"RiderView"];
+    //_RiderController.delegate = self;
+    //[self.RightView addSubview:self.RiderController.view];
     
     ColorHexCode *CustomColor = [[ColorHexCode alloc]init ];
     if ([[self.EAPPorSI description] isEqualToString:@"eAPP"]) {
@@ -2853,6 +2853,7 @@ BOOL isFirstLoad;
 }
 
 -(void)showviewControllerFromCellView:(UIButton *)sender{
+    [self pullSIData];
     switch (sender.tag) {
         case 0:
             if (!_BasicController) {
@@ -2866,9 +2867,27 @@ BOOL isFirstLoad;
             if (!_RiderController){
                 self.RiderController = [self.storyboard instantiateViewControllerWithIdentifier:@"RiderView"];
                 _RiderController.delegate = self;
+                [_RiderController setDictionaryPOForInsert:dictionaryPOForInsert];
+                [_RiderController setDictionaryForBasicPlan:newDictionaryForBasicPlan];
+                [_RiderController setElementActive];
+
                 [self.RightView addSubview:self.RiderController.view];
             }
+            [_RiderController setDictionaryPOForInsert:dictionaryPOForInsert];
+            [_RiderController setDictionaryForBasicPlan:newDictionaryForBasicPlan];
+            [_RiderController setElementActive];
             [self.RightView bringSubviewToFront:self.RiderController.view];
+            [_RiderController calculateRiderPremi];
+            @try {
+                [self saveLAForTableDidSelect];
+                [self saveBasicPlanForTableDidSelect];
+            }
+            @catch (NSException *exception) {
+                
+            }
+            @finally {
+                
+            }
             break;
         case 2:
             if([_BasicController validationDataBasicPlan]){
@@ -2884,6 +2903,17 @@ BOOL isFirstLoad;
                 [self pullSIData];
                 [_PremiumController setPremiumDictionary:newDictionaryForBasicPlan];
                 [self.RightView bringSubviewToFront:_PremiumController.view];
+                
+                @try {
+                    [self saveLAForTableDidSelect];
+                    [self saveBasicPlanForTableDidSelect];
+                }
+                @catch (NSException *exception) {
+                    
+                }
+                @finally {
+                    
+                }
             }
             break;
         default:
@@ -3069,9 +3099,16 @@ BOOL isFirstLoad;
         if (!_RiderController){
             self.RiderController = [self.storyboard instantiateViewControllerWithIdentifier:@"RiderView"];
             _RiderController.delegate = self;
+            [_RiderController setDictionaryPOForInsert:dictionaryPOForInsert];
+            [_RiderController setDictionaryForBasicPlan:newDictionaryForBasicPlan];
+            [_RiderController setElementActive];
             [self.RightView addSubview:self.RiderController.view];
         }
+        [_RiderController setDictionaryPOForInsert:dictionaryPOForInsert];
+        [_RiderController setDictionaryForBasicPlan:newDictionaryForBasicPlan];
+        [_RiderController setElementActive];
         [self.RightView bringSubviewToFront:self.RiderController.view];
+        [_RiderController calculateRiderPremi];
     }
     
     

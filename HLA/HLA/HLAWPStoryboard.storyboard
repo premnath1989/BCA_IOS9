@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15A284" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="BPreplay.otf">
+            <string>BPreplay</string>
             <string>BPreplay</string>
             <string>BPreplay</string>
             <string>BPreplay</string>
@@ -4329,7 +4330,17 @@
                                             <segment title="Tertanggung"/>
                                         </segments>
                                         <color key="tintColor" red="0.85490196080000003" green="0.19215686269999999" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="ActionPersonType:" destination="il8-A2-VxN" eventType="valueChanged" id="rFC-kV-A1D"/>
+                                        </connections>
                                     </segmentedControl>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="16" id="m2h-dV-y3j">
+                                        <rect key="frame" x="202" y="135" width="366" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="textColor" red="0.34509803919999998" green="0.34901960780000002" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -4374,8 +4385,6 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
-                        <outlet property="HLField" destination="5E6-z5-zNB" id="XFK-oK-wzV"/>
-                        <outlet property="HLTField" destination="QnQ-4I-PcO" id="Fp9-SU-Yz5"/>
                         <outlet property="btnAddRider" destination="e1d-Fa-EyY" id="VfJ-Gu-1fF"/>
                         <outlet property="btnPType" destination="1pp-Eo-RDT" id="07k-CW-Esh"/>
                         <outlet property="classField" destination="sxt-2d-LGU" id="zZT-Zh-Yuf"/>
@@ -4383,17 +4392,22 @@
                         <outlet property="cpaLabel" destination="hP0-rS-k5g" id="tqA-a2-V4p"/>
                         <outlet property="deleteBtn" destination="dk2-qZ-6z0" id="3lF-pc-SWs"/>
                         <outlet property="editBtn" destination="dFC-uY-v02" id="Qmb-5M-qpu"/>
+                        <outlet property="extraPremiNumberField" destination="QnQ-4I-PcO" id="hvM-Hs-HtQ"/>
+                        <outlet property="extraPremiPercentField" destination="5E6-z5-zNB" id="tln-0p-B47"/>
+                        <outlet property="masaAsuransiField" destination="5bZ-07-C4d" id="pYS-Lb-Ttj"/>
+                        <outlet property="masaExtraPremiField" destination="5CF-w0-5VR" id="e7y-JS-85G"/>
                         <outlet property="maxDisplayLabel" destination="pzQ-GQ-iWG" id="yHh-Jz-MtB"/>
                         <outlet property="minDisplayLabel" destination="AKO-EJ-m7V" id="SDZ-V6-4FT"/>
                         <outlet property="myTableView" destination="CDF-eO-5gi" id="DqP-4g-5hC"/>
                         <outlet property="myView" destination="GHJ-Af-4mD" id="DNF-Gu-7Lo"/>
-                        <outlet property="occpField" destination="55Y-76-86S" id="TnO-eS-MAA"/>
+                        <outlet property="occpField" destination="m2h-dV-y3j" id="pLO-dY-E1k"/>
                         <outlet property="outletDone" destination="Wia-0e-JFf" id="VAH-8P-nx5"/>
                         <outlet property="outletEAPP" destination="Kwo-10-LlC" id="1Wc-w5-MU7"/>
                         <outlet property="outletSaveRider" destination="Cvl-Yq-yjp" id="xFu-LJ-flJ"/>
                         <outlet property="planBtn" destination="CC0-4k-8jf" id="VCw-4m-J2e"/>
+                        <outlet property="segmentPersonType" destination="gxx-gB-uUi" id="waP-Vv-f45"/>
+                        <outlet property="sumAssuredField" destination="vJC-nD-4az" id="iMI-HH-X1O"/>
                         <outlet property="sumField" destination="vJC-nD-4az" id="eBb-Hf-EE7"/>
-                        <outlet property="tempHLField" destination="5CF-w0-5VR" id="UXx-df-qsR"/>
                         <outlet property="tempHLTField" destination="Ga0-Gv-k4P" id="4kB-P1-eNA"/>
                         <outlet property="tempHLTLabel" destination="JEo-v9-LsS" id="W0v-Nb-1Qw"/>
                         <outlet property="termField" destination="5bZ-07-C4d" id="a2F-yO-Siy"/>
@@ -4561,7 +4575,7 @@
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </webView>
                             <view contentMode="scaleToFill" id="LGR-jZ-2Nl">
-                                <rect key="frame" x="0.0" y="43" width="768" height="961"/>
+                                <rect key="frame" x="-12" y="44" width="768" height="961"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" id="ETT-DP-SIF">

@@ -19,39 +19,6 @@
 
 @implementation RelationshipPopoverViewController
 
--(NSString*) getRelationshipDesc : (NSString*)relationship
-{
-    if ([relationship isEqualToString:@""] || (relationship == NULL) || ([relationship isEqualToString:@"(NULL)"])) {
-        return @"";
-    }
-    NSString *desc;
-    relationship = [relationship stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *databasePath = [documentsDirectory stringByAppendingPathComponent:@"hladb.sqlite"];
-    
-    
-    FMDatabase *db = [FMDatabase databaseWithPath:databasePath];
-    [db open];
-    FMResultSet *result = [db executeQuery:@"SELECT RelDesc FROM eProposal_Relation WHERE RelCode = ?", relationship];
-    
-    NSInteger *count = 0;
-    while ([result next]) {
-        count = count + 1;
-        desc = [result objectForColumnName:@"RelDesc"];
-    }
-    
-    [result close];
-    [db close];
-    
-    if (count == 0) {
-        desc = relationship;
-    }    
-    return desc;
-    
-}
-
-
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -66,6 +33,7 @@
         self.clearsSelectionOnViewWillAppear = NO;
         self.contentSizeForViewInPopover = CGSizeMake(700.0, 400.0);
         self.IDTypes = [NSMutableArray array];
+        self.IDCodes = [NSMutableArray array];
        
         
         //Add "-Select-" in first row
@@ -78,18 +46,20 @@
         sqlite3_stmt *statement;
         if (sqlite3_open(dbpath, &contactDB) == SQLITE_OK){
             //NSString *querySQL = [NSString stringWithFormat:@"SELECT OccpCode, OccpDesc, Class FROM Adm_Occp_Loading_Penta where status = 'A' ORDER BY OccpDesc ASC"];
-            NSString *querySQL = [NSString stringWithFormat:@"SELECT RelDesc FROM eProposal_Relation where status = 'A'"];
+            NSString *querySQL = [NSString stringWithFormat:@"SELECT RelCode,RelDesc FROM eProposal_Relation where status = 'A' ORDER BY RelDesc ASC"];
             const char *query_stmt = [querySQL UTF8String];
             if (sqlite3_prepare_v2(contactDB, query_stmt, -1, &statement, NULL) == SQLITE_OK)
             {
                 
                 NSString *IDTypes;
+                NSString *IDCodes;
                 while (sqlite3_step(statement) == SQLITE_ROW){
                 
-                    IDTypes = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 0)];
-                   
+                    IDTypes = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 1)];
+                    IDCodes = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 0)];
                     
                     [_IDTypes addObject:IDTypes];
+                    [_IDCodes addObject:IDCodes];
                                     }
             }
             
@@ -221,6 +191,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *selectedRelationshipType = [_IDTypes objectAtIndex:indexPath.row];
+    NSString *selectedRelationshipCode = [_IDCodes objectAtIndex:indexPath.row];
+    
 	NSLog(@"selected id :%@",selectedRelationshipType);
     
     if (_rowToUpdate == 0){
@@ -249,7 +221,8 @@
     
     //Notify the delegate if it exists.
     if (_delegate != nil) {
-        [_delegate selectedRship:selectedRelationshipType];
+        [_delegate selectedRship:selectedRelationshipType:selectedRelationshipCode];
+        
     }
 
 }
