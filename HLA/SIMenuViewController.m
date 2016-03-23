@@ -113,9 +113,9 @@ BOOL isFirstLoad;
     myTableView.rowHeight = 84;
     [myTableView reloadData];
     
-    self.RiderController = [self.storyboard instantiateViewControllerWithIdentifier:@"RiderView"];
-    _RiderController.delegate = self;
-    [self.RightView addSubview:self.RiderController.view];
+    //self.RiderController = [self.storyboard instantiateViewControllerWithIdentifier:@"RiderView"];
+    //_RiderController.delegate = self;
+    //[self.RightView addSubview:self.RiderController.view];
     
     ColorHexCode *CustomColor = [[ColorHexCode alloc]init ];
     if ([[self.EAPPorSI description] isEqualToString:@"eAPP"]) {
@@ -2860,8 +2860,14 @@ BOOL isFirstLoad;
             if (!_RiderController){
                 self.RiderController = [self.storyboard instantiateViewControllerWithIdentifier:@"RiderView"];
                 _RiderController.delegate = self;
+                [_RiderController setDictionaryPOForInsert:dictionaryPOForInsert];
+                [_RiderController setDictionaryForBasicPlan:newDictionaryForBasicPlan];
+                [_RiderController setElementActive];
                 [self.RightView addSubview:self.RiderController.view];
             }
+            [_RiderController setDictionaryPOForInsert:dictionaryPOForInsert];
+            [_RiderController setDictionaryForBasicPlan:newDictionaryForBasicPlan];
+            [_RiderController setElementActive];
             [self.RightView bringSubviewToFront:self.RiderController.view];
             break;
         case 2:
@@ -3063,8 +3069,14 @@ BOOL isFirstLoad;
         if (!_RiderController){
             self.RiderController = [self.storyboard instantiateViewControllerWithIdentifier:@"RiderView"];
             _RiderController.delegate = self;
+            [_RiderController setDictionaryPOForInsert:dictionaryPOForInsert];
+            [_RiderController setDictionaryForBasicPlan:newDictionaryForBasicPlan];
+            [_RiderController setElementActive];
             [self.RightView addSubview:self.RiderController.view];
         }
+        [_RiderController setDictionaryPOForInsert:dictionaryPOForInsert];
+        [_RiderController setDictionaryForBasicPlan:newDictionaryForBasicPlan];
+        [_RiderController setElementActive];
         [self.RightView bringSubviewToFront:self.RiderController.view];
     }
     

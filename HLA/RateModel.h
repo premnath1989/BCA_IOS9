@@ -16,4 +16,8 @@
 -(double)getCashSurValue5Year:(NSString *)BasicCode EntryAge:(int)entryAge PolYear:(int)polYear Gender:(NSString *)gender;
 -(double)getCashSurValue1Year:(NSString *)Gender BasicCode:(NSString *)basicCode EntryAge:(int)entryAge;
 -(double)getCashSurValue:(NSString *)Gender BasicCode:(NSString *)basicCode EntryAge:(int)entryAge PolYear:(int)polYear;
+-(double)getWaiverRate:(NSString *)Gender EntryAge:(int)entryAge PersonType:(NSString *)personType;
+-(double)getKeluargakuBasicPremRate:(NSString *)Gender EntryAge:(int)entryAge BasicCode:(NSString *)basicCode;
+-(double)getKeluargakuEMRate:(NSString *)Gender EntryAge:(int)entryAge;
+-(NSString *)getKeluargakuMOPRate:(int)PaymentCode;
 @end

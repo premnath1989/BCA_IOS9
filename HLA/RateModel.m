@@ -70,5 +70,101 @@
     return Rate;
 }
 
+-(double)getWaiverRate:(NSString *)Gender EntryAge:(int)entryAge PersonType:(NSString *)personType{
+    double Rate;
+    
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"BCA_Rates.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"SELECT \"%@\" FROM KLK_Waiver Where EntryAge = %i AND PersonType = \"%@\"",Gender,entryAge,personType]];
+
+    while ([s next]) {
+        Rate = [s doubleForColumn:Gender];
+    }
+    
+    [results close];
+    [database close];
+    return Rate;
+}
+
+-(double)getKeluargakuBasicPremRate:(NSString *)Gender EntryAge:(int)entryAge BasicCode:(NSString *)basicCode{
+    double Rate;
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"BCA_Rates.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"SELECT \"%@\" FROM Keluargaku_Rates_BasicPrem Where BasicCode = '%@' AND EntryAge = %i",Gender,basicCode,entryAge]];
+    
+    while ([s next]) {
+        Rate = [s doubleForColumn:Gender];
+    }
+    
+    [results close];
+    [database close];
+    return Rate;
+}
+
+-(NSString *)getKeluargakuMOPRate:(int)PaymentCode{
+    NSString *Rate;
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"BCA_Rates.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"SELECT Payment_Fact FROM Keluargaku_Rates_MOP Where Payment_Code = %i",PaymentCode]];
+    
+    while ([s next]) {
+        Rate = [s stringForColumn:@"Payment_Fact"];
+    }
+    
+    [results close];
+    [database close];
+    return Rate;
+}
+
+-(double)getKeluargakuEMRate:(NSString *)Gender EntryAge:(int)entryAge{
+    double Rate;
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"BCA_Rates.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"SELECT %@ FROM Keluargaku_Rates_EM Where EntryAge = '%i'",Gender,entryAge]];
+    
+    while ([s next]) {
+        Rate = [s doubleForColumn:Gender];
+    }
+    
+    [results close];
+    [database close];
+    return Rate;
+}
+
+-(double)getKeluargakuAnuitFactor:(int)PaymentCode{
+    double Rate;
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"BCA_Rates.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"SELECT \"Annuity Factor\" FROM Keluargaku_Rates_EM Where EntryAge = %i",PaymentCode]];
+    
+    while ([s next]) {
+        Rate = [s doubleForColumn:@"Annuity Factor"];
+    }
+    
+    [results close];
+    [database close];
+    return Rate;
+}
+
 
 @end
