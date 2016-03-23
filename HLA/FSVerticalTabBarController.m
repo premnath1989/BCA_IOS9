@@ -101,7 +101,7 @@ BOOL isBusy;
             AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate ];
             if (!delegate.SICompleted) {
                 
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Are you sure you want to discard all the changes?"
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Data tidak akan tersimpan, apakah Anda yakin untuk keluar?"
                                                                delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Cancel",nil];
                 [alert setTag:2001];
                 [alert show];
@@ -125,7 +125,7 @@ BOOL isBusy;
                 AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate ];
                 if (!delegate.SICompleted) {
                     
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Are you sure you want to discard all the changes?"
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Data tidak akan tersimpan, apakah Anda yakin untuk keluar?"
                                                                    delegate:self cancelButtonTitle:@"OK" otherButtonTitles: @"Cancel",nil];
                     [alert setTag:3001];
                     [alert show];
@@ -155,7 +155,7 @@ BOOL isBusy;
                 AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate ];
                 if (!delegate.SICompleted) {
                     
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Are you sure you want to discard all the changes?"
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Data tidak akan tersimpan, apakah Anda yakin untuk keluar?"
                                                                    delegate:self cancelButtonTitle:@"OK" otherButtonTitles: @"Cancel",nil];
                     [alert setTag:3001];
                     [alert show];
@@ -183,7 +183,7 @@ BOOL isBusy;
                 [(SIListing *)selectedViewController Refresh];
                 AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate ];
                 if (!delegate.SICompleted) {                    
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Are you sure you want to discard all the changes?"
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Data tidak akan tersimpan, apakah Anda yakin untuk keluar?"
                                                                    delegate:self cancelButtonTitle:@"OK" otherButtonTitles: @"Cancel",nil];
                     [alert setTag:3001];
                     [alert show];
