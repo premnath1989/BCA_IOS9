@@ -930,7 +930,7 @@ bool WPTPD30RisDeleted = FALSE;
 -(void)PremiDasarActKeluargaku: (NSString *)PaymentDesc//BasicRiderPremium ||Rider Premium MBKK
 {
     
-    if([RelWithLA isEqualToString:@"SELF"])
+    if(([RelWithLA isEqualToString:@"DIRI SENDIRI"])||([RelWithLA isEqualToString:@"SELF"]))
     {
         PayorSex = LASex;
         PayorAge = LAAge;
@@ -1050,7 +1050,7 @@ bool WPTPD30RisDeleted = FALSE;
     }
     
     
-    if([RelWithLA isEqualToString:@"SELF"])
+    if(([RelWithLA isEqualToString:@"DIRI SENDIRI"])||([RelWithLA isEqualToString:@"SELF"]))
         {
     WaiverRate = [NSString stringWithFormat:@"SELECT %@ FROM KLK_Waiver Where EntryAge = '%i' AND PersonType = '%@'",PayorSex,PayorAge,@"T"];
     results5 = [database executeQuery:WaiverRate];
@@ -1171,7 +1171,7 @@ bool WPTPD30RisDeleted = FALSE;
     }
 
     
-    if([RelWithLA isEqualToString:@"SELF"])
+    if(([RelWithLA isEqualToString:@"DIRI SENDIRI"])||([RelWithLA isEqualToString:@"SELF"]))
     {
         AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM basicPremiumRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",PayorSex,@"HRT",premiType,PayorAge];
         results = [database executeQuery:AnsuransiDasarQuery];
@@ -1270,7 +1270,7 @@ bool WPTPD30RisDeleted = FALSE;
     }
     
     
-//    if([RelWithLA isEqualToString:@"SELF"])
+//    if([RelWithLA isEqualToString:@"DIRI SENDIRI"])
 //    {
         WaiverRate = [NSString stringWithFormat:@"SELECT %@ FROM KLK_Waiver Where EntryAge = '%i' AND PersonType = '%@'",PayorSex,PayorAge,@"P"];
         results = [database executeQuery:WaiverRate];
@@ -1377,7 +1377,7 @@ bool WPTPD30RisDeleted = FALSE;
     }
     
     
-    if([RelWithLA isEqualToString:@"SELF"])
+    if(([RelWithLA isEqualToString:@"DIRI SENDIRI"])||([RelWithLA isEqualToString:@"SELF"]))
     {
         EmRateQuery = [NSString stringWithFormat:@"SELECT %@ FROM Keluargaku_Rates_EM Where EntryAge = '%i'",PayorSex,PayorAge];
         results = [database executeQuery:EmRateQuery];
@@ -1485,7 +1485,7 @@ bool WPTPD30RisDeleted = FALSE;
     }
     
     
-    if([RelWithLA isEqualToString:@"SELF"])
+    if(([RelWithLA isEqualToString:@"DIRI SENDIRI"])||([RelWithLA isEqualToString:@"SELF"]))
     {
         WaiverRate = [NSString stringWithFormat:@"SELECT %@ FROM KLK_Waiver Where EntryAge = '%i' AND PersonType = '%@'",PayorSex,PayorAge,@"T"];
         results5 = [database executeQuery:WaiverRate];
@@ -1638,7 +1638,7 @@ bool WPTPD30RisDeleted = FALSE;
         NSLog(@"Could not open db.");
     }
     
-    if([RelWithLA isEqualToString:@"SELF"])
+    if(([RelWithLA isEqualToString:@"DIRI SENDIRI"])||([RelWithLA isEqualToString:@"SELF"]))
     {
         AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM EMRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",PayorSex,@"HRT",premiType,PayorAge];
         NSLog(@"query %@",AnsuransiDasarQuery);
