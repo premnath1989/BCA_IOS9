@@ -123,7 +123,7 @@
     
     if ([PremiType isEqualToString:@"Premi Tunggal"])
     {
-        if([RelWithLA isEqualToString:@"DIRI SENDIRI"])
+        if(([RelWithLA isEqualToString:@"DIRI SENDIRI"])||([RelWithLA isEqualToString:@"SELF"]))
         {
             AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM basicPremiumRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",_PayorSex,@"HRT",@"S",_PayorAge];
             results = [database executeQuery:AnsuransiDasarQuery];
@@ -162,7 +162,7 @@
    }
     else
     {
-        if([RelWithLA isEqualToString:@"DIRI SENDIRI"])
+        if(([RelWithLA isEqualToString:@"DIRI SENDIRI"])||([RelWithLA isEqualToString:@"SELF"]))
         {
             AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM basicPremiumRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",_PayorSex,@"HRT",@"R",_PayorAge];
             results = [database executeQuery:AnsuransiDasarQuery];
@@ -263,7 +263,7 @@
     if ([PremiType isEqualToString:@"Premi Tunggal"])
     {
    
-        if([RelWithLA isEqualToString:@"DIRI SENDIRI"])
+        if(([RelWithLA isEqualToString:@"DIRI SENDIRI"])||([RelWithLA isEqualToString:@"SELF"]))
         {
             AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM EMRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",_PayorSex,@"HRT",@"S",_PayorAge];
             NSLog(@"query %@",AnsuransiDasarQuery);
@@ -308,7 +308,7 @@
 
     
    
-        if([RelWithLA isEqualToString:@"DIRI SENDIRI"])
+        if(([RelWithLA isEqualToString:@"DIRI SENDIRI"])||([RelWithLA isEqualToString:@"SELF"]))
         {
             AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM EMRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",_PayorSex,@"HRT",@"R",_PayorAge];
             NSLog(@"query %@",AnsuransiDasarQuery);

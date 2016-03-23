@@ -1110,7 +1110,7 @@ id dobtanngal;
                                           numberIntClientProfile,@"PO_ClientID",
                                           relationDesc,@"RelWithLA",nil];
     
-    if ([relationDesc isEqualToString:@"DIRI SENDIRI"]){
+    if (([relationDesc isEqualToString:@"DIRI SENDIRI"])||([relationDesc isEqualToString:@"SELF"])){
         [dictionaryNewLA setObject:numberIntClientProfile forKey:@"LA_ClientID"];
         [dictionaryNewLA setObject:LANameField.text forKey:@"LA_Name"];
         [dictionaryNewLA setObject:btnDOB.titleLabel.text forKey:@"LA_DOB"];
@@ -2646,7 +2646,7 @@ id dobtanngal;
         [alert show];
     }
     
-    else if ([_BtnHubungan.titleLabel.text isEqualToString:@"DIRI SENDIRI"])
+    else if (([_BtnHubungan.titleLabel.text isEqualToString:@"DIRI SENDIRI"])||([_BtnHubungan.titleLabel.text isEqualToString:@"SELF"]))
     {
         //if hubungan dengan tertanggung is not equal to self",tertanggung screen...
     }
