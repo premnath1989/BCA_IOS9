@@ -82,6 +82,7 @@ BOOL isFirstLoad;
     _modelSIPremium = [[Model_SI_Premium alloc]init];
     _modelSIPOData = [[ModelSIPOData alloc]init];
     _modelSIMaster = [[Model_SI_Master alloc]init];
+    _modelSIRider = [[ModelSIRider alloc]init];
     
     dictionaryPOForInsert = [[NSMutableDictionary alloc]init];
     
@@ -3115,6 +3116,37 @@ BOOL isFirstLoad;
     }
     [self.RiderController setSumAssured:[newDictionaryForBasicPlan valueForKey:@"Sum_Assured"]];
     [self.RightView bringSubviewToFront:self.RiderController.view];    //[self.myTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:SIMENU_RIDER inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];*/
+}
+
+-(void)saveRider:(NSDictionary *)dictMDBKK MDKK:(NSDictionary *)dictMDKK BP:(NSDictionary *)dictBasicPremi{
+    
+    if ([_modelSIRider getRiderCount:[dictionaryPOForInsert valueForKey:@"SINO"] RiderCode:[self->dictMDBKK valueForKey:@"RiderCode"]]<=0){
+        [_modelSIRider saveRider:self->dictMDBKK];
+    }
+    else{
+        [_modelSIRider updateRider:self->dictMDBKK];
+    }
+    
+    if ([_modelSIRider getRiderCount:[dictionaryPOForInsert valueForKey:@"SINO"] RiderCode:[dictMDKK valueForKey:@"RiderCode"]]<=0){
+        [_modelSIRider saveRider:dictMDKK];
+    }
+    else{
+        [_modelSIRider updateRider:dictMDKK];
+    }
+    
+    if ([_modelSIRider getRiderCount:[dictionaryPOForInsert valueForKey:@"SINO"] RiderCode:[dictBP valueForKey:@"RiderCode"]]<=0){
+        [_modelSIRider saveRider:dictBasicPremi];
+    }
+    else{
+        [_modelSIRider updateRider:dictBasicPremi];
+    }
+    if (!_PremiumController) {
+        _PremiumController = [self.storyboard instantiateViewControllerWithIdentifier:@"premiumView"];
+        //_PremiumController.delegate = self;
+        [self.RightView addSubview:_PremiumController.view];
+    }
+    [_PremiumController setPremiumDictionary:newDictionaryForBasicPlan];
+    [self.RightView bringSubviewToFront:_PremiumController.view];
 }
 
 -(void)setQuickQuoteValue:(BOOL)value{

@@ -22,6 +22,7 @@
 
 @class RiderViewController;
 @protocol RiderViewControllerDelegate
+-(void)saveRider:(NSDictionary *)dictMDBKK MDKK:(NSDictionary *)dictMDKK BP:(NSDictionary *)dictBasicPremi;
 -(void)dismissEApp;
 -(void) RiderAdded;
 -(void) BasicSARevised:(NSString *)aabasicSA;

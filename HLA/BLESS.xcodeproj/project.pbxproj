@@ -340,6 +340,7 @@
 		43B590961CA2702400DC53AC /* KeluargakuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43B590931CA2702400DC53AC /* KeluargakuTableViewCell.xib */; };
 		43B590971CA2702400DC53AC /* KeluargakuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B590951CA2702400DC53AC /* KeluargakuTableViewCell.m */; };
 		43B5909B1CA2704200DC53AC /* RiderCalculation.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B5909A1CA2704200DC53AC /* RiderCalculation.m */; };
+		43B5909E1CA29D7200DC53AC /* ModelSIRider.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B5909D1CA29D7200DC53AC /* ModelSIRider.m */; };
 		43C166191C99448500001691 /* ModelKodepos.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C166181C99448500001691 /* ModelKodepos.m */; };
 		43C1661C1C99489000001691 /* KodePosInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C1661B1C99489000001691 /* KodePosInfo.m */; };
 		43DA4BD91C76A59A0038C92C /* ModelAgentProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DA4BD81C76A59A0038C92C /* ModelAgentProfile.m */; };
@@ -1375,6 +1376,8 @@
 		43B590951CA2702400DC53AC /* KeluargakuTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeluargakuTableViewCell.m; sourceTree = "<group>"; };
 		43B590991CA2704200DC53AC /* RiderCalculation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RiderCalculation.h; sourceTree = "<group>"; };
 		43B5909A1CA2704200DC53AC /* RiderCalculation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RiderCalculation.m; sourceTree = "<group>"; };
+		43B5909C1CA29D7200DC53AC /* ModelSIRider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelSIRider.h; sourceTree = "<group>"; };
+		43B5909D1CA29D7200DC53AC /* ModelSIRider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelSIRider.m; sourceTree = "<group>"; };
 		43C166171C99448500001691 /* ModelKodepos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelKodepos.h; sourceTree = "<group>"; };
 		43C166181C99448500001691 /* ModelKodepos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelKodepos.m; sourceTree = "<group>"; };
 		43C1661A1C99489000001691 /* KodePosInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KodePosInfo.h; sourceTree = "<group>"; };
@@ -3415,6 +3418,8 @@
 				432466531C9000EC001EE22F /* ModelDataReferral.m */,
 				43C166171C99448500001691 /* ModelKodepos.h */,
 				43C166181C99448500001691 /* ModelKodepos.m */,
+				43B5909C1CA29D7200DC53AC /* ModelSIRider.h */,
+				43B5909D1CA29D7200DC53AC /* ModelSIRider.m */,
 			);
 			name = "HLADB Model";
 			sourceTree = "<group>";
@@ -5274,6 +5279,7 @@
 				C4EA9BDB16171E5200D51FE9 /* RetreivePwdTbViewController.m in Sources */,
 				C4EA9BDE16171F4800D51FE9 /* ForgotPwd.m in Sources */,
 				C4EA9BEA16181FFB00D51FE9 /* ProspectViewController.m in Sources */,
+				43B5909E1CA29D7200DC53AC /* ModelSIRider.m in Sources */,
 				C4EA9BED1619359D00D51FE9 /* OccupationList.m in Sources */,
 				C4EA9BF01619404D00D51FE9 /* ProspectListing.m in Sources */,
 				AA4EF76F1C85A4260050CCD8 /* ReaderThumbRender.m in Sources */,

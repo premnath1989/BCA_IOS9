@@ -602,7 +602,7 @@ int maxGycc = 0;
 #pragma mark - added by faiz
 //added by faiz
 -(void)setElementActive{
-    if ([[_dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"SELF"]){
+    if (([[_dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"SELF"])||([[_dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"])){
         for (UIView *view in [myView subviews]) {
             if ([view isKindOfClass:[UITextField class]]) {
                 UITextField *textField = (UITextField *)view;
@@ -2852,7 +2852,7 @@ int maxGycc = 0;
 }
 
 - (IBAction)btnSaveRiderPressed:(id)sender {
-	if (Edit) {
+    /*if (Edit) {
         
         [self UpdateSIToInvalid];
 		appDelegate.isNeedPromptSaveMsg = YES;
@@ -2906,7 +2906,8 @@ int maxGycc = 0;
         eAppCheckList*deleteOldPDF=[[eAppCheckList alloc] init];
         [deleteOldPDF deleteEAppCase:getSINo];
         deleteOldPDF = Nil;    
-	}
+	}*/
+    [_delegate saveRider:dictMDBKK MDKK:dictMBKK BP:dictBebasPremi];
 }
 
 //ACIR_MPP sum assured != BSA for L100
@@ -5790,6 +5791,7 @@ int maxGycc = 0;
 }
 
 #pragma mark calculateRiderPremi
+
 -(void)calculateRiderPremi{
     NSMutableDictionary* dictForCalculate=[[NSMutableDictionary alloc]initWithDictionary:[arrayDataRiders objectAtIndex:0]];
     [dictForCalculate setObject:[[arrayDataRiders objectAtIndex:0]valueForKey:@"ExtraPremiPerCent"] forKey:@"ExtraPremiPerCent"];
@@ -5798,7 +5800,7 @@ int maxGycc = 0;
     
     //[_dictionaryForBasicPlan setObject:[NSNumber numberWithInt:2] forKey:@"PurchaseNumber"];
     
-    if ([[_dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"SELF"]){
+    if (([[_dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"SELF"])||([[_dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"])){
         [self tiePersonType:1];
     }
     else{
@@ -5833,14 +5835,14 @@ int maxGycc = 0;
 -(void)setRiderInformationForTextField:(int)indexSelected{
     [self setElementActive];
     NSDictionary* dictSelected=[arrayDataRiders objectAtIndex:indexSelected];
-    [btnAddRider setTitle:[dictSelected valueForKey:@"Manfaat"] forState:UIControlStateNormal];
-    [_sumAssuredField setText:[formatter stringToCurrencyDecimalFormatted:[NSString stringWithFormat:@"%@",[dictSelected valueForKey:@"UangPertanggungan"]]]];
+    [btnAddRider setTitle:[dictSelected valueForKey:@"RiderName"] forState:UIControlStateNormal];
+    [_sumAssuredField setText:[formatter stringToCurrencyDecimalFormatted:[NSString stringWithFormat:@"%@",[dictSelected valueForKey:@"SumAssured"]]]];
     [_masaAsuransiField setText:[dictSelected valueForKey:@"MasaAsuransi"]];
     [_extraPremiPercentField setText:[NSString stringWithFormat:@"%@",[dictSelected valueForKey:@"ExtraPremiPerCent"]]];
     [_extraPremiNumberField setText:[NSString stringWithFormat:@"%@",[dictSelected valueForKey:@"ExtraPremiPerMil"]]];
     [_masaExtraPremiField setText:[NSString stringWithFormat:@"%@",[dictSelected valueForKey:@"MasaExtraPremi"]]];
 
-    if ([[_dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"SELF"]){
+    if (([[_dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"SELF"])||([[_dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"])){
         [self tiePersonType:1];
     }
     else{
@@ -5855,6 +5857,10 @@ int maxGycc = 0;
 
 #pragma mark - setDictionaryRider
 
+-(void)loadDataFromList{
+    
+}
+
 -(NSDictionary *)dictMDBKK{
     NSNumber *sumAssured = [NSNumber numberWithLongLong:[[_dictionaryForBasicPlan valueForKey:@"Number_Sum_Assured"] longLongValue]];
 
@@ -5862,8 +5868,9 @@ int maxGycc = 0;
     int extraPremiumMil=[[_dictionaryForBasicPlan valueForKey:@"ExtraPremiumSum"] integerValue];
     int masaPremium=[[_dictionaryForBasicPlan valueForKey:@"ExtraPremiumTerm"] integerValue];
     NSNumber* premiDasar = [formatter convertNumberFromString:[_dictionaryForBasicPlan valueForKey:@"PremiumPolicyA"]];
-    dictMDBKK=[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"MDBKK",@"Manfaat",
-                             [riderCalculation getSumAssuredForMDBKK:sumAssured],@"UangPertanggungan",
+    dictMDBKK=[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"Meniggal Dunia Bukan Karena Kecelakaan",@"RiderName",
+                             @"MDBKK",@"RiderCode",
+                             [riderCalculation getSumAssuredForMDBKK:sumAssured],@"SumAssured",
                              @"10",@"MasaAsuransi",
                              @"-",@"Unit",
                              [NSNumber numberWithInt:extraPremiPercentage],@"ExtraPremiPerCent",
@@ -5878,8 +5885,9 @@ int maxGycc = 0;
 
 -(NSDictionary *)dictMBKK{
     NSNumber *sumAssured = [NSNumber numberWithLongLong:[[_dictionaryForBasicPlan valueForKey:@"Number_Sum_Assured"] longLongValue]];
-    dictMBKK=[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"MBKK",@"Manfaat",
-                             [riderCalculation getSumAssuredForMBKK:sumAssured],@"UangPertanggungan",
+    dictMBKK=[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"Meniggal Dunia Karena Kecelakaan",@"RiderName",
+                             @"MDKK",@"RiderCode",
+                             [riderCalculation getSumAssuredForMBKK:sumAssured],@"SumAssured",
                              @"10",@"MasaAsuransi",
                              @"-",@"Unit",
                              @"-",@"ExtraPremiPerCent",
@@ -5896,8 +5904,9 @@ int maxGycc = 0;
     int extraPremiumMil=[[_dictionaryForBasicPlan valueForKey:@"ExtraPremiumSum"] integerValue];
     int masaPremium=[[_dictionaryForBasicPlan valueForKey:@"ExtraPremiumTerm"] integerValue];
 
-    dictBebasPremi=[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"Bebas Premi",@"Manfaat",
-                             @"-",@"UangPertanggungan",
+    dictBebasPremi=[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"Bebas Premi",@"RiderName",
+                             @"BP",@"RiderCode",
+                             @"-",@"SumAssured",
                              @"10",@"MasaAsuransi",
                              @"-",@"Unit",
                              [NSNumber numberWithInt:extraPremiPercentage],@"ExtraPremiPerCent",
@@ -5952,8 +5961,8 @@ int maxGycc = 0;
         cell = [nib objectAtIndex:0];
     }
     if (indexPath.row < [arrayDataRiders count]){
-        [cell.labelManfaat setText:[[arrayDataRiders objectAtIndex:indexPath.row] valueForKey:@"Manfaat"]];
-        [cell.labelUangPertanggungan setText:[formatter stringToCurrencyDecimalFormatted:[NSString stringWithFormat:@"%@",[[arrayDataRiders objectAtIndex:indexPath.row] valueForKey:@"UangPertanggungan"]]]];
+        [cell.labelManfaat setText:[[arrayDataRiders objectAtIndex:indexPath.row] valueForKey:@"RiderCode"]];
+        [cell.labelUangPertanggungan setText:[formatter stringToCurrencyDecimalFormatted:[NSString stringWithFormat:@"%@",[[arrayDataRiders objectAtIndex:indexPath.row] valueForKey:@"SumAssured"]]]];
         [cell.labelMasaAsuransi setText:[[arrayDataRiders objectAtIndex:indexPath.row] valueForKey:@"MasaAsuransi"]];
         [cell.labelUnit setText:[[arrayDataRiders objectAtIndex:indexPath.row] valueForKey:@"Unit"]];
         [cell.labelExtraPremiPercent setText:[NSString stringWithFormat:@"%@",[[arrayDataRiders objectAtIndex:indexPath.row] valueForKey:@"ExtraPremiPerCent"]]];

@@ -32,6 +32,7 @@
 #import "ModelSIPOData.h"
 #import "Model_SI_Master.h"
 #import "Model_SI_Premium.h"
+#import "ModelSIRider.h"
 
 #import "IlustrationViewController.h"
 
@@ -52,6 +53,7 @@
     
     IlustrationViewController *_salesIlustrationViewController;
     
+    ModelSIRider *_modelSIRider;
     Model_SI_Premium *_modelSIPremium;
     Model_SI_Master *_modelSIMaster;
     ModelSIPOData *_modelSIPOData;
@@ -123,6 +125,9 @@
     
     //added by faiz
     BOOL quickQuoteEnabled;
+    NSMutableDictionary* dictMDBKK;
+    NSMutableDictionary* dictMBKK;
+    NSMutableDictionary* dictBebasPremi;
     //end of added by faiz
 }
 
