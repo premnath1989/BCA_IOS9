@@ -2847,6 +2847,7 @@ BOOL isFirstLoad;
 }
 
 -(void)showviewControllerFromCellView:(UIButton *)sender{
+    [self pullSIData];
     switch (sender.tag) {
         case 0:
             if (!_BasicController) {
@@ -2863,12 +2864,24 @@ BOOL isFirstLoad;
                 [_RiderController setDictionaryPOForInsert:dictionaryPOForInsert];
                 [_RiderController setDictionaryForBasicPlan:newDictionaryForBasicPlan];
                 [_RiderController setElementActive];
+
                 [self.RightView addSubview:self.RiderController.view];
             }
             [_RiderController setDictionaryPOForInsert:dictionaryPOForInsert];
             [_RiderController setDictionaryForBasicPlan:newDictionaryForBasicPlan];
             [_RiderController setElementActive];
             [self.RightView bringSubviewToFront:self.RiderController.view];
+            [_RiderController calculateRiderPremi];
+            @try {
+                [self saveLAForTableDidSelect];
+                [self saveBasicPlanForTableDidSelect];
+            }
+            @catch (NSException *exception) {
+                
+            }
+            @finally {
+                
+            }
             break;
         case 2:
             if([_BasicController validationDataBasicPlan]){
@@ -2884,6 +2897,17 @@ BOOL isFirstLoad;
                 [self pullSIData];
                 [_PremiumController setPremiumDictionary:newDictionaryForBasicPlan];
                 [self.RightView bringSubviewToFront:_PremiumController.view];
+                
+                @try {
+                    [self saveLAForTableDidSelect];
+                    [self saveBasicPlanForTableDidSelect];
+                }
+                @catch (NSException *exception) {
+                    
+                }
+                @finally {
+                    
+                }
             }
             break;
         default:
@@ -3078,6 +3102,7 @@ BOOL isFirstLoad;
         [_RiderController setDictionaryForBasicPlan:newDictionaryForBasicPlan];
         [_RiderController setElementActive];
         [self.RightView bringSubviewToFront:self.RiderController.view];
+        [_RiderController calculateRiderPremi];
     }
     
     

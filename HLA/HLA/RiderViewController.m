@@ -5789,6 +5789,46 @@ int maxGycc = 0;
     }
 }
 
+#pragma mark calculateRiderPremi
+-(void)calculateRiderPremi{
+    NSMutableDictionary* dictForCalculate=[[NSMutableDictionary alloc]initWithDictionary:[arrayDataRiders objectAtIndex:2]];
+    [dictForCalculate setObject:[[arrayDataRiders objectAtIndex:2]valueForKey:@"ExtraPremiPerCent"] forKey:@"ExtraPremiPerCent"];
+    [dictForCalculate setObject:[[arrayDataRiders objectAtIndex:2]valueForKey:@"ExtraPremiPerMil"] forKey:@"ExtraPremiPerMil"];
+    [dictForCalculate setObject:[[arrayDataRiders objectAtIndex:2]valueForKey:@"MasaExtraPremi"] forKey:@"MasaExtraPremi"];
+    
+    [_dictionaryForBasicPlan setObject:[NSNumber numberWithInt:2] forKey:@"PurchaseNumber"];
+    
+    if ([[_dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"SELF"]){
+        [self tiePersonType:1];
+    }
+    else{
+        //if (indexSelected==2){
+        [self tiePersonType:0];
+        //}
+        //else{
+        //    [self tiePersonType:1];
+        //}
+    }
+    
+    double RiderPremium = [riderCalculation calculateBPPremi:dictForCalculate DictionaryBasicPlan:_dictionaryForBasicPlan DictionaryPO:_dictionaryPOForInsert BasicCode:@"KLK" PaymentCode:[self getPaymentType] PersonType:personCharacterType];
+    double MDBKK = [riderCalculation calculateMDBKK:dictForCalculate DictionaryBasicPlan:_dictionaryForBasicPlan DictionaryPO:_dictionaryPOForInsert BasicCode:@"KLK" PaymentCode:[self getPaymentType] PersonType:personCharacterType];
+    double MDBKKLoading = [riderCalculation calculateMDBKKLoading:dictForCalculate DictionaryBasicPlan:_dictionaryForBasicPlan DictionaryPO:_dictionaryPOForInsert BasicCode:@"KLK" PaymentCode:[self getPaymentType] PersonType:personCharacterType];
+    double RiderLoading = [riderCalculation calculateBPPremiLoading:dictForCalculate DictionaryBasicPlan:_dictionaryForBasicPlan DictionaryPO:_dictionaryPOForInsert BasicCode:@"KLK" PaymentCode:[self getPaymentType] PersonType:personCharacterType];
+    
+    NSString *mdbkkFormatted = [formatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:MDBKK]];
+    NSString *riderPremiFormatted = [formatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:RiderPremium]];
+    NSString *riderPremiLoadingFormatted = [formatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:RiderLoading]];
+    NSString *mdbkkLoadingFormatted = [formatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:MDBKKLoading]];
+    
+    [dictMDBKK setObject:mdbkkFormatted forKey:@"PremiRp"];
+    [dictMDBKK setObject:mdbkkLoadingFormatted forKey:@"ExtraPremiRp"];
+    [dictBebasPremi setObject:riderPremiFormatted forKey:@"PremiRp"];
+    [dictBebasPremi setObject:riderPremiLoadingFormatted forKey:@"ExtraPremiRp"];
+    
+    arrayDataRiders=[[NSMutableArray alloc]initWithObjects:dictMDBKK,dictMBKK,dictBebasPremi, nil];
+    [myTableView reloadData];
+}
+
 #pragma mark - setTextFieldValue
 -(void)setRiderInformationForTextField:(int)indexSelected{
     [self setElementActive];
@@ -6730,15 +6770,22 @@ int maxGycc = 0;
     [dictForCalculate setObject:_extraPremiNumberField.text forKey:@"ExtraPremiPerMil"];
     [dictForCalculate setObject:_masaExtraPremiField.text forKey:@"ExtraPremiPerMil"];
     
+    [_dictionaryForBasicPlan setObject:[NSNumber numberWithInt:2] forKey:@"PurchaseNumber"];
+    
     double RiderPremium = [riderCalculation calculateBPPremi:dictForCalculate DictionaryBasicPlan:_dictionaryForBasicPlan DictionaryPO:_dictionaryPOForInsert BasicCode:@"KLK" PaymentCode:[self getPaymentType] PersonType:personCharacterType];
     double MDBKK = [riderCalculation calculateMDBKK:dictForCalculate DictionaryBasicPlan:_dictionaryForBasicPlan DictionaryPO:_dictionaryPOForInsert BasicCode:@"KLK" PaymentCode:[self getPaymentType] PersonType:personCharacterType];
     double MDBKKLoading = [riderCalculation calculateMDBKKLoading:dictForCalculate DictionaryBasicPlan:_dictionaryForBasicPlan DictionaryPO:_dictionaryPOForInsert BasicCode:@"KLK" PaymentCode:[self getPaymentType] PersonType:personCharacterType];
-    
+    double RiderLoading = [riderCalculation calculateBPPremiLoading:dictForCalculate DictionaryBasicPlan:_dictionaryForBasicPlan DictionaryPO:_dictionaryPOForInsert BasicCode:@"KLK" PaymentCode:[self getPaymentType] PersonType:personCharacterType];
+
     NSString *mdbkkFormatted = [formatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:MDBKK]];
     NSString *riderPremiFormatted = [formatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:RiderPremium]];
+    NSString *riderPremiLoadingFormatted = [formatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:RiderLoading]];
+    NSString *mdbkkLoadingFormatted = [formatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:MDBKKLoading]];
     
     [dictMDBKK setObject:mdbkkFormatted forKey:@"PremiRp"];
+    [dictMDBKK setObject:mdbkkLoadingFormatted forKey:@"ExtraPremiRp"];
     [dictBebasPremi setObject:riderPremiFormatted forKey:@"PremiRp"];
+    [dictBebasPremi setObject:riderPremiLoadingFormatted forKey:@"ExtraPremiRp"];
     
     arrayDataRiders=[[NSMutableArray alloc]initWithObjects:dictMDBKK,dictMBKK,dictBebasPremi, nil];
     [myTableView reloadData];

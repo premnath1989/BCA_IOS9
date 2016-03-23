@@ -255,6 +255,7 @@
 
 //Added by faiz
 -(void)setElementActive;
+-(void)calculateRiderPremi;
 -(void)setSumAssured:(NSString *)sumAssured;
 //@property (retain, nonatomic) IBOutlet UILabel *titleRidCode;
 //end of Added by faiz

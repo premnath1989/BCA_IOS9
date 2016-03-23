@@ -52,8 +52,8 @@
 }
 
 -(double)calculateMDBKKLoading:(NSMutableDictionary *)dictCalculate DictionaryBasicPlan:(NSDictionary *)dictionaryBasicPlan DictionaryPO:(NSDictionary *)dictPO BasicCode:(NSString *)basicCode PaymentCode:(int)paymentCode PersonType:(NSString *)personType{
-    int emPercent = [[dictCalculate valueForKey:@"ExtraPremiPerCent"] integerValue];
-    int emNumber = [[dictCalculate valueForKey:@"ExtraPremiPerMil"] integerValue];
+    int emPercent = [[dictionaryBasicPlan valueForKey:@"ExtraPremiumPercentage"] integerValue];
+    int emNumber = [[dictionaryBasicPlan valueForKey:@"ExtraPremiumSum"] integerValue];
     NSString *sex;
     if (([[dictPO valueForKey:@"LA_Gender"] isEqualToString:@"MALE"])||([[dictPO valueForKey:@"LA_Gender"] isEqualToString:@"FEMALE"])){
         sex=@"Male";
@@ -135,6 +135,26 @@
     double Rounded = 100.0 * floor((bpRiderPremium/100.0)+0.5);
     
     return Rounded;
+}
+
+-(double)calculateBPPremiLoading:(NSMutableDictionary *)dictCalculate DictionaryBasicPlan:(NSDictionary *)dictionaryBasicPlan DictionaryPO:(NSDictionary *)dictPO BasicCode:(NSString *)basicCode PaymentCode:(int)paymentCode PersonType:(NSString *)personType{
+    
+    int emPercent = [[dictCalculate valueForKey:@"ExtraPremiPerCent"] integerValue];
+    int emNumber = [[dictCalculate valueForKey:@"ExtraPremiPerMil"] integerValue];
+
+    NSString *mop = [self getKeluargakuMOP:paymentCode];
+    mop = [mop substringToIndex:[mop length]-1];
+    double paymentFactor = [mop doubleValue];
+    
+    double annuityRate = [rateModel getKeluargakuAnuityRate:paymentCode];
+    
+    double bpPremi = [self calculateBPPremi:dictCalculate DictionaryBasicPlan:dictionaryBasicPlan DictionaryPO:dictPO BasicCode:basicCode PaymentCode:paymentCode PersonType:personType];
+    
+    double mdbKKPremi = [self calculateMDBKK:dictCalculate DictionaryBasicPlan:dictionaryBasicPlan DictionaryPO:dictPO BasicCode:basicCode PaymentCode:paymentCode PersonType:personType];
+    
+    double bpPremiLoading = (emPercent * bpPremi + (emNumber * mdbKKPremi) * (annuityRate/1000) * paymentFactor);
+    
+    return bpPremiLoading;
 }
 
 @end
