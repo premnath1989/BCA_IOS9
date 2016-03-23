@@ -29,6 +29,8 @@
 #import "Constants.h"
 #import "ReaderViewController.h"
 #import "TabValidation.h"
+#import "PremiumKeluargaku.h"
+#import "ProductInformation.h"
 
 #define TRAD_PAYOR_FIRSTLA  @"0"
 #define TRAD_PAYOR_SECONDLA  @"1"
@@ -305,6 +307,10 @@ BOOL isFirstLoad;
     } else {
         isSecondLaNeeded = [self requestSecondLA:[self.requestSINo description]];
     }
+    
+//    PremiumKeluargaku *premiK = [[PremiumKeluargaku alloc]initWithNibName:@"PremiumKeluargaku" bundle:nil SINO:@"1160001920160326141955"];
+    
+//    [self.RightView addSubview:premiK.view];
     
     if ([self select2ndLA]) {
         if (!_SecondLAController) {            
@@ -3101,6 +3107,8 @@ BOOL isFirstLoad;
                 [self.RightView addSubview:self.LAController.view];
             }
             [self.RightView bringSubviewToFront:self.LAController.view];
+            
+            
             lastActiveController = self.LAController;
             [arrayIntValidate replaceObjectAtIndex:2 withObject:@"0"];
             [arrayIntValidate replaceObjectAtIndex:1 withObject:@"0"];
