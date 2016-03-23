@@ -1110,7 +1110,7 @@ id dobtanngal;
                                           numberIntClientProfile,@"PO_ClientID",
                                           relationDesc,@"RelWithLA",nil];
     
-    if ([relationDesc isEqualToString:@"SELF"]){
+    if ([relationDesc isEqualToString:@"DIRI SENDIRI"]){
         [dictionaryNewLA setObject:numberIntClientProfile forKey:@"LA_ClientID"];
         [dictionaryNewLA setObject:LANameField.text forKey:@"LA_Name"];
         [dictionaryNewLA setObject:btnDOB.titleLabel.text forKey:@"LA_DOB"];
@@ -1167,7 +1167,7 @@ id dobtanngal;
                                               numberIntClientProfile,@"PO_ClientID",
                                               relationDesc,@"RelWithLA",nil];
 
-        if ([relationDesc isEqualToString:@"SELF"]){
+        if ([relationDesc isEqualToString:@"DIRI SENDIRI"]){
             [dictionaryNewLA setObject:numberIntClientProfile forKey:@"LA_ClientID"];
             [dictionaryNewLA setObject:LANameField.text forKey:@"LA_Name"];
             [dictionaryNewLA setObject:btnDOB.titleLabel.text forKey:@"LA_DOB"];
@@ -2646,7 +2646,7 @@ id dobtanngal;
         [alert show];
     }
     
-    else if ([_BtnHubungan.titleLabel.text isEqualToString:@"self"])
+    else if ([_BtnHubungan.titleLabel.text isEqualToString:@"DIRI SENDIRI"])
     {
         //if hubungan dengan tertanggung is not equal to self",tertanggung screen...
     }

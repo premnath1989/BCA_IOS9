@@ -763,7 +763,7 @@ BOOL isFirstLoad;
     }
     else{
         @try {
-            if (![[dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"SELF"]){
+            if (![[dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"]){
                 [dictionaryPOForInsert addEntriesFromDictionary:[_SecondLAController setDictionarySecondLA]];
             }
         }
@@ -2934,7 +2934,7 @@ BOOL isFirstLoad;
     dictionaryPOForInsert = [NSMutableDictionary dictionaryWithDictionary:dataPO];
     [arrayIntValidate replaceObjectAtIndex:0 withObject:@"1"];
     [self.myTableView reloadData];
-    if ([[dataPO valueForKey:@"RelWithLA"] isEqualToString:@"SELF"]){
+    if ([[dataPO valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"]){
         selfRelation = YES;
         dictionaryPOForInsert = [NSMutableDictionary dictionaryWithDictionary:dataPO];
         dictionaryMasterForInsert = [[NSMutableDictionary alloc]initWithObjectsAndKeys:[dictionaryPOForInsert valueForKey:@"SINO"],@"SINO",@"1.1",@"SI_Version",@"Not Created",@"ProposalStatus", nil];
@@ -3111,7 +3111,7 @@ BOOL isFirstLoad;
             break;
         case 1:
             if ([_LAController validateSave]){
-                if (![[dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"SELF"]){
+                if (![[dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"]){
                     [self loadSecondLAPage];
                     lastIndexSelected = 1;
                     [arrayIntValidate replaceObjectAtIndex:2 withObject:@"0"];
@@ -3154,7 +3154,7 @@ BOOL isFirstLoad;
             break;
         case 2:
             if ([_LAController validateSave]){
-                if (![[dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"SELF"]){
+                if (![[dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"]){
                     if ([_SecondLAController validateSave]){
                         lastIndexSelected=2;
                         [self loadBasicPlanPage:YES];
@@ -3207,7 +3207,7 @@ BOOL isFirstLoad;
             break;
         case 3:
             if ([_LAController validateSave]){
-                if (![[dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"SELF"])
+                if (![[dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"])
                     if ([_SecondLAController validateSave]){
                         if ([_BasicController validationDataBasicPlan]) {
                             [arrayIntValidate replaceObjectAtIndex:2 withObject:@"1"];
