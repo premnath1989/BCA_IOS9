@@ -2566,21 +2566,19 @@ id dobtanngal;
     
     int LAAGEint = [[LAAgeField text] intValue];
     
-    
-    
     if ([NamaProduk.titleLabel.text isEqualToString:@"(null)"] ||[NamaProduk.titleLabel.text isEqualToString:@"--Please Select--"] || NamaProduk.titleLabel.text.length == 0)
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Produk harus diisi."
                                                        delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
         [alert show];
-      
+        return NO;
         
     }
     else if ([TanggalIllustrasi.titleLabel.text isEqualToString:@"(null)"] ||[TanggalIllustrasi.titleLabel.text isEqualToString:@"--Please Select--"] || TanggalIllustrasi.titleLabel.text.length == 0) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Tanggal Ilustrasi harus diisi "
                                                        delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
         [alert show];
-
+        return NO;
         
     }
     else if (AgeExceed189Days == true) {
@@ -2588,23 +2586,26 @@ id dobtanngal;
                                                        delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
         [alert setTag:1005];
         [alert show];
+        return NO;
     }
     else if (LANameField.text.length <= 0) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Nama Pemegang harus diisi."
                                                        delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
         [alert show];
         [LANameField becomeFirstResponder];
-        
+        return NO;
        
     } else if ([btnDOB.titleLabel.text isEqualToString:@"(null)"] ||[btnDOB.titleLabel.text isEqualToString:@"--Please Select--"] || btnDOB.titleLabel.text.length == 0) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Tanggal Lahir Pemegang Polis"
                                                        delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
         [alert show];
+        return NO;
     } else if (LAAGEint < 18) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Usia harus sama dengan atau lebih dari 18 tahun"
                                                        delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
      //   [alert setTag:1005];
         [alert show];
+        return NO;
     }
     
      else if ((LAAGEint >70)&&[NamaProduk.titleLabel.text isEqualToString:@"BCA Life Heritage Protection"])
@@ -2613,6 +2614,7 @@ id dobtanngal;
                                                    delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
         // [alert setTag:1005];
          [alert show];
+         return NO;
      }
     
      else if ((LAAGEint >55)&&[NamaProduk.titleLabel.text isEqualToString:@"BCA Life Keluargaku"])
@@ -2621,6 +2623,7 @@ id dobtanngal;
                                                         delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
          // [alert setTag:1005];
          [alert show];
+         return NO;
      }
 
     
@@ -2630,6 +2633,7 @@ id dobtanngal;
                                                        delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
         // [alert setTag:1005];
         [alert show];
+        return NO;
     }
     
     else if ([btnOccp.titleLabel.text isEqualToString:@"(null)"] ||[btnOccp.titleLabel.text isEqualToString:@"--Please Select--"] || btnOccp.titleLabel.text.length == 0)
@@ -2637,6 +2641,7 @@ id dobtanngal;
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Pekerjaan Pemegang Polis harus diisi."
                                                        delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
         [alert show];
+        return NO;
     }
     
     else if ([_BtnHubungan.titleLabel.text isEqualToString:@"(null)"] ||[_BtnHubungan.titleLabel.text isEqualToString:@"--Please Select--"] || _BtnHubungan.titleLabel.text.length == 0)
@@ -2644,12 +2649,13 @@ id dobtanngal;
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Hubungan Dengan Tertannggung harus diisi"
                                                        delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
         [alert show];
+        return NO;
     }
     
-    else if (([_BtnHubungan.titleLabel.text isEqualToString:@"DIRI SENDIRI"])||([_BtnHubungan.titleLabel.text isEqualToString:@"SELF"]))
+    /*else if (([_BtnHubungan.titleLabel.text isEqualToString:@"DIRI SENDIRI"])||([_BtnHubungan.titleLabel.text isEqualToString:@"SELF"]))
     {
         //if hubungan dengan tertanggung is not equal to self",tertanggung screen...
-    }
+    }*/
 
 
 
@@ -2669,10 +2675,10 @@ id dobtanngal;
 //                                                       delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
 //        [alert show];
 //    }
-else {
+    else {
         return YES;
     }
-    return NO;
+    
     
 }
 

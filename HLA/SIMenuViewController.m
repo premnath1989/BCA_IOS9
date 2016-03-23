@@ -3111,7 +3111,7 @@ BOOL isFirstLoad;
             break;
         case 1:
             if ([_LAController validateSave]){
-                if ((![[dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"])||(![[dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"SELF"])){
+                if ((![[dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"])&&(![[dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"SELF"])){
                     [self loadSecondLAPage];
                     lastIndexSelected = 1;
                     [arrayIntValidate replaceObjectAtIndex:2 withObject:@"0"];
@@ -3154,7 +3154,7 @@ BOOL isFirstLoad;
             break;
         case 2:
             if ([_LAController validateSave]){
-                if ((![[dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"])||(![[dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"SELF"])){
+                if (([[dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"])||([[dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"SELF"])){
                     if ([_SecondLAController validateSave]){
                         lastIndexSelected=2;
                         [self loadBasicPlanPage:YES];
