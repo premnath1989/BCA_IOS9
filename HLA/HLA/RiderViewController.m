@@ -5791,12 +5791,12 @@ int maxGycc = 0;
 
 #pragma mark calculateRiderPremi
 -(void)calculateRiderPremi{
-    NSMutableDictionary* dictForCalculate=[[NSMutableDictionary alloc]initWithDictionary:[arrayDataRiders objectAtIndex:2]];
-    [dictForCalculate setObject:[[arrayDataRiders objectAtIndex:2]valueForKey:@"ExtraPremiPerCent"] forKey:@"ExtraPremiPerCent"];
-    [dictForCalculate setObject:[[arrayDataRiders objectAtIndex:2]valueForKey:@"ExtraPremiPerMil"] forKey:@"ExtraPremiPerMil"];
-    [dictForCalculate setObject:[[arrayDataRiders objectAtIndex:2]valueForKey:@"MasaExtraPremi"] forKey:@"MasaExtraPremi"];
+    NSMutableDictionary* dictForCalculate=[[NSMutableDictionary alloc]initWithDictionary:[arrayDataRiders objectAtIndex:0]];
+    [dictForCalculate setObject:[[arrayDataRiders objectAtIndex:0]valueForKey:@"ExtraPremiPerCent"] forKey:@"ExtraPremiPerCent"];
+    [dictForCalculate setObject:[[arrayDataRiders objectAtIndex:0]valueForKey:@"ExtraPremiPerMil"] forKey:@"ExtraPremiPerMil"];
+    [dictForCalculate setObject:[[arrayDataRiders objectAtIndex:0]valueForKey:@"MasaExtraPremi"] forKey:@"MasaExtraPremi"];
     
-    [_dictionaryForBasicPlan setObject:[NSNumber numberWithInt:2] forKey:@"PurchaseNumber"];
+    //[_dictionaryForBasicPlan setObject:[NSNumber numberWithInt:2] forKey:@"PurchaseNumber"];
     
     if ([[_dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"SELF"]){
         [self tiePersonType:1];

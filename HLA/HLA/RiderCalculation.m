@@ -52,7 +52,8 @@
 }
 
 -(double)calculateMDBKKLoading:(NSMutableDictionary *)dictCalculate DictionaryBasicPlan:(NSDictionary *)dictionaryBasicPlan DictionaryPO:(NSDictionary *)dictPO BasicCode:(NSString *)basicCode PaymentCode:(int)paymentCode PersonType:(NSString *)personType{
-    int emPercent = [[dictionaryBasicPlan valueForKey:@"ExtraPremiumPercentage"] integerValue];
+    double emPercent = [[dictionaryBasicPlan valueForKey:@"ExtraPremiumPercentage"] doubleValue];
+    emPercent = emPercent/100;
     int emNumber = [[dictionaryBasicPlan valueForKey:@"ExtraPremiumSum"] integerValue];
     NSString *sex;
     if (([[dictPO valueForKey:@"LA_Gender"] isEqualToString:@"MALE"])||([[dictPO valueForKey:@"LA_Gender"] isEqualToString:@"FEMALE"])){
@@ -68,7 +69,7 @@
     double paymentFactor = [mop doubleValue];
     double sumAssured = [[dictionaryBasicPlan valueForKey:@"Number_Sum_Assured"] doubleValue];
     
-    double MDBKKLoading = ((emPercent * emRate)+emNumber) * (sumAssured/1000) * paymentFactor;
+    double MDBKKLoading = (emPercent * emRate + emNumber) * (sumAssured/1000) * (paymentFactor/100);
     return MDBKKLoading;
 }
 
@@ -139,7 +140,7 @@
 
 -(double)calculateBPPremiLoading:(NSMutableDictionary *)dictCalculate DictionaryBasicPlan:(NSDictionary *)dictionaryBasicPlan DictionaryPO:(NSDictionary *)dictPO BasicCode:(NSString *)basicCode PaymentCode:(int)paymentCode PersonType:(NSString *)personType{
     
-    int emPercent = [[dictCalculate valueForKey:@"ExtraPremiPerCent"] integerValue];
+    double emPercent = [[dictCalculate valueForKey:@"ExtraPremiPerCent"] doubleValue]/100;
     int emNumber = [[dictCalculate valueForKey:@"ExtraPremiPerMil"] integerValue];
 
     NSString *mop = [self getKeluargakuMOP:paymentCode];
@@ -152,7 +153,7 @@
     
     double mdbKKPremi = [self calculateMDBKK:dictCalculate DictionaryBasicPlan:dictionaryBasicPlan DictionaryPO:dictPO BasicCode:basicCode PaymentCode:paymentCode PersonType:personType];
     
-    double bpPremiLoading = (emPercent * bpPremi + (emNumber * mdbKKPremi) * (annuityRate/1000) * paymentFactor);
+    double bpPremiLoading = (emPercent * bpPremi + (emNumber * mdbKKPremi) * (annuityRate/1000) * (paymentFactor/100));
     
     return bpPremiLoading;
 }

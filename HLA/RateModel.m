@@ -155,8 +155,8 @@
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     [database open];
     
-    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"SELECT \"Annuity Factor\" FROM Keluargaku_Rates_AnuityRate Where EntryAge = %i",PaymentCode]];
-    NSLog(@"query %@",[NSString stringWithFormat:@"SELECT \"Annuity Factor\" FROM Keluargaku_Rates_EM Where EntryAge = %i",PaymentCode]);
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"SELECT \"Annuity Factor\" FROM Keluargaku_Rates_AnuityRate Where PaymentCode = %i",PaymentCode]];
+    NSLog(@"query %@",[NSString stringWithFormat:@"SELECT \"Annuity Factor\" FROM Keluargaku_Rates_AnuityRate Where PaymentCode = %i",PaymentCode]);
     while ([s next]) {
         Rate = [s doubleForColumn:@"Annuity Factor"];
     }
