@@ -4322,7 +4322,7 @@
                                             <action selector="NextView:" destination="il8-A2-VxN" eventType="touchUpInside" id="XqH-8h-mna"/>
                                         </connections>
                                     </button>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" id="gxx-gB-uUi">
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" id="gxx-gB-uUi">
                                         <rect key="frame" x="202" y="12" width="366" height="29"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <segments>

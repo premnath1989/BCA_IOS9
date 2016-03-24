@@ -5879,7 +5879,6 @@ int maxGycc = 0;
                              @"-",@"ExtraPremiRp",
                              [formatter stringToCurrencyDecimalFormatted:[NSString stringWithFormat:@"%@",premiDasar]],@"PremiRp",
                              nil];
-    
     return dictMDBKK;
 }
 

@@ -410,6 +410,7 @@ BOOL isFirstLoad;
             [self.BasicController loadData];
             
             if (!self.requestSINo){
+                [self.BasicController setDictionaryPOForInsert:dictionaryPOForInsert];
                 [self.BasicController setPayorSex:[dictionaryPOForInsert valueForKey:@"PO_Gender"]];
                 [self.BasicController setPayorAge:[[dictionaryPOForInsert valueForKey:@"PO_Age"] integerValue]];
                 [self.BasicController setPlanType:[dictionaryPOForInsert valueForKey:@"ProductName"]];
@@ -430,6 +431,7 @@ BOOL isFirstLoad;
             }
             else{
                 NSDictionary* dictPO=[_modelSIPOData getPO_DataFor:[self.requestSINo description]];
+                [self.BasicController setDictionaryPOForInsert:dictionaryPOForInsert];
                 [self.BasicController setPayorSex:[dictPO valueForKey:@"PO_Gender"]];
                 [self.BasicController setPayorAge:[[dictPO valueForKey:@"PO_Age"] integerValue]];
                 [self.BasicController setPlanType:[dictPO valueForKey:@"ProductName"]];
@@ -489,6 +491,7 @@ BOOL isFirstLoad;
             [self.BasicController loadData];
 
             if (!self.requestSINo){
+                [self.BasicController setDictionaryPOForInsert:dictionaryPOForInsert];
                 [self.BasicController setPayorSex:[dictionaryPOForInsert valueForKey:@"PO_Gender"]];
                 [self.BasicController setPayorAge:[[dictionaryPOForInsert valueForKey:@"PO_Age"] integerValue]];
                 [self.BasicController setPlanType:[dictionaryPOForInsert valueForKey:@"ProductName"]];
@@ -510,6 +513,7 @@ BOOL isFirstLoad;
             }
             else{
                 NSDictionary* dictPO=[_modelSIPOData getPO_DataFor:[self.requestSINo description]];
+                [self.BasicController setDictionaryPOForInsert:dictionaryPOForInsert];
                 [self.BasicController setPayorSex:[dictPO valueForKey:@"PO_Gender"]];
                 [self.BasicController setPayorAge:[[dictPO valueForKey:@"PO_Age"] integerValue]];
                 [self.BasicController setPlanType:[dictPO valueForKey:@"ProductName"]];

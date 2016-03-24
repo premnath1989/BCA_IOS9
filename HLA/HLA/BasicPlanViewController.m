@@ -88,6 +88,7 @@ bool WPTPD30RisDeleted = FALSE;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    riderCalculation = [[RiderCalculation alloc]init];
     classFormatter=[[Formatter alloc]init];
     discountPembelian = 0;
 
@@ -582,7 +583,7 @@ bool WPTPD30RisDeleted = FALSE;
     if([PlanType isEqualToString:@"BCA Life Keluargaku"])
     {
         [self MeninggalDuniaMDBKK];
-        
+        [self calculateRiderPremi];
     }
     else
     {
@@ -665,6 +666,7 @@ bool WPTPD30RisDeleted = FALSE;
 
 -(IBAction)MasaExtraPremiTextFieldDidEnd:(UITextField *)sender {
     [MasaExtraPremiLBL setHidden:YES];
+    [self calculateRiderPremi];
 }
 
 
@@ -1983,8 +1985,10 @@ bool WPTPD30RisDeleted = FALSE;
 
 -(NSMutableDictionary *)setDataBasicPlan{
     @try {
+        
         NSMutableDictionary *dictionaryBasicPlan=[[NSMutableDictionary alloc]initWithObjectsAndKeys:
                                                   yearlyIncomeField.text,@"Sum_Assured",
+                                                  [classFormatter convertNumberFromString:yearlyIncomeField.text],@"Number_Sum_Assured",
                                                   _masaPembayaranButton.titleLabel.text,@"Payment_Term",
                                                   _frekuensiPembayaranButton.titleLabel.text,@"Payment_Frequency",
                                                   _basicPremiField.text,@"PremiumPolicyA",
@@ -2726,6 +2730,51 @@ bool WPTPD30RisDeleted = FALSE;
     
     [self.btnPlan setTitle:@"" forState:UIControlStateNormal];
 }
+
+#pragma mark - calculationForKeluargaku
+-(int)getPaymentType{
+    int PaymentType;
+    if ([_frekuensiPembayaranButton.titleLabel.text isEqualToString:@"Tahunan"])
+    {
+        PaymentType =1;
+    }
+    else if ([_frekuensiPembayaranButton.titleLabel.text isEqualToString:@"Semester"])
+    {
+        PaymentType =2;
+    }
+    else if ([_frekuensiPembayaranButton.titleLabel.text isEqualToString:@"Kuartal"])
+    {
+        PaymentType =3;
+    }
+    else {
+        PaymentType =4;
+    }
+    return PaymentType;
+}
+
+-(void)calculateRiderPremi{
+    NSMutableDictionary* dictForCalculate =[[NSMutableDictionary alloc]initWithObjectsAndKeys:_extraPremiPercentField.text,@"ExtraPremiPerCent",_extraPremiNumberField.text,@"ExtraPremiPerMil",_masaExtraPremiField.text,@"MasaExtraPremi", nil];
+
+    NSString *personCharacterType;
+    if (([[_dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"SELF"])||([[_dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"])){
+        personCharacterType = @"T";
+        
+    }
+    else{
+         personCharacterType = @"P";
+    }
+    
+    double RiderPremium = [riderCalculation calculateBPPremi:dictForCalculate DictionaryBasicPlan:[self setDataBasicPlan] DictionaryPO:_dictionaryPOForInsert BasicCode:@"KLK" PaymentCode:[self getPaymentType] PersonType:personCharacterType];
+    double MDBKKPremi = [riderCalculation calculateMDBKK:dictForCalculate DictionaryBasicPlan:[self setDataBasicPlan] DictionaryPO:_dictionaryPOForInsert BasicCode:@"KLK" PaymentCode:[self getPaymentType] PersonType:personCharacterType];
+    double MDBKKLoading = [riderCalculation calculateMDBKKLoading:dictForCalculate DictionaryBasicPlan:[self setDataBasicPlan] DictionaryPO:_dictionaryPOForInsert BasicCode:@"KLK" PaymentCode:[self getPaymentType] PersonType:personCharacterType];
+    double RiderLoading = [riderCalculation calculateBPPremiLoading:dictForCalculate DictionaryBasicPlan:[self setDataBasicPlan] DictionaryPO:_dictionaryPOForInsert BasicCode:@"KLK" PaymentCode:[self getPaymentType] PersonType:personCharacterType];
+    
+    double premiDasar = RiderPremium + MDBKKPremi + MDBKKLoading + RiderLoading;
+    
+    NSString *PremiDasar = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:premiDasar]];
+    [_basicPremiField setText:PremiDasar];
+}
+
 
 #pragma mark - calculation
 
@@ -5366,6 +5415,7 @@ bool WPTPD30RisDeleted = FALSE;
     PaymentDescMDKK = FRekeunsiPembayaranMode;
 
     PembelianKEString = aaDesc;
+    [self calculateRiderPremi];
 
 }
 
@@ -5398,6 +5448,7 @@ bool WPTPD30RisDeleted = FALSE;
         [self PremiDasarActKeluargaku:aaDesc];
         [self PremiDasarActkklk];
         PaymentDescMDKK = aaDesc;
+        [self calculateRiderPremi];
     }
     else
     {

@@ -22,6 +22,7 @@
 #import "ModelSIPOData.h"
 #import "ColorHexCode.h"
 #import "Formatter.h"
+#import "RiderCalculation.h"
 
 @class BasicPlanViewController;
 @protocol BasicPlanViewControllerDelegate
@@ -51,6 +52,7 @@
     NSString *PaymentDescMDKK;
     ModelSIPOData *_modelSIPOData;
     Model_SI_Premium *_modelSIPremium;
+    RiderCalculation *riderCalculation;
     PlanList *_planList;
     MasaPembayaran*_masaPembayaran;
     Frekeunsi*_frekuensi;
@@ -95,6 +97,8 @@
     NSString *premiType;
     NSString *PlanType;
     NSString *PembelianKEString;
+    
+    
     
 }
 
@@ -208,6 +212,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *KKLKDiskaunLbl;
 
 //Added by faiz
+@property (retain, nonatomic) NSMutableDictionary* dictionaryPOForInsert;
 @property (strong, nonatomic) IBOutlet UITextField *basicPremiField;
 @property (strong, nonatomic) IBOutlet UITextField *extraPremiPercentField;
 @property (strong, nonatomic) IBOutlet UITextField *extraPremiNumberField;
