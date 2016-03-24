@@ -87,6 +87,6 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>dbVersion</key>
-	<string>4</string>
+	<string>5</string>
 </dict>
 </plist>
