@@ -21,4 +21,5 @@
 -(double)getKeluargakuEMRate:(NSString *)Gender EntryAge:(int)entryAge;
 -(NSString *)getKeluargakuMOPRate:(int)PaymentCode;
 -(double)getKeluargakuAnuityRate:(int)PaymentCode;
+-(int)getKeluargakuMOPFreq:(int)PaymentType;
 @end

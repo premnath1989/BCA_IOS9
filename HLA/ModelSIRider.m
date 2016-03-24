@@ -16,7 +16,7 @@
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     [database open];
     
-    BOOL success = [database executeUpdate:@"insert into SI_Temp_Trad_Rider (SINO, RiderCode, RiderName, SumAssured,MasaAsuransi,Unit,ExtraPremiPercent,ExtraPremiMil,MasaExtraPremi,ExtraPremiRp,PremiRp) values (?,?,?,?,?,?,?,?,?,?,?)" ,
+    BOOL success = [database executeUpdate:@"insert into SI_Temp_Trad_Rider (SINo, RiderCode, RiderName, SumAssured,MasaAsuransi,Unit,ExtraPremiPercent,ExtraPremiMil,MasaExtraPremi,ExtraPremiRp,PremiRp) values (?,?,?,?,?,?,?,?,?,?,?)" ,
                     [dataRider valueForKey:@"SINO"],
                     [dataRider valueForKey:@"RiderCode"],
                     [dataRider valueForKey:@"RiderName"],
@@ -43,7 +43,7 @@
     
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     [database open];
-    BOOL success = [database executeUpdate:@"update SI_Temp_Trad_Rider set Sum_Assured=?, MasaAsuransi=?, Unit=?,ExtraPremiPercent=?,ExtraPremiMil=?,MasaExtraPremi=?,ExtraPremiRp=?,PremiRp=? where SINO=? and RiderCode=?" ,
+    BOOL success = [database executeUpdate:@"update SI_Temp_Trad_Rider set Sum_Assured=?, MasaAsuransi=?, Unit=?,ExtraPremiPercent=?,ExtraPremiMil=?,MasaExtraPremi=?,ExtraPremiRp=?,PremiRp=? where SINo=? and RiderCode=?" ,
                     [dataRider valueForKey:@"SumAssured"],
                     [dataRider valueForKey:@"MasaAsuransi"],
                     [dataRider valueForKey:@"Unit"],
@@ -72,7 +72,7 @@
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     [database open];
     
-    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select count(*) from SI_Temp_Trad_Rider where SINO = \"%@\" and RiderCode=\"%@\"",SINo,riderCode]];
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select count(*) from SI_Temp_Trad_Rider where SINo = \"%@\" and RiderCode=\"%@\"",SINo,riderCode]];
     NSLog(@"query %@",[NSString stringWithFormat:@"select count(*) from SI_Temp_Trad_Rider where SINO = \"%@\" and RiderCode=\"%@\"",SINo,riderCode]);
     while ([s next]) {
         count = [s intForColumn:@"count(*)"];
@@ -105,10 +105,10 @@
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     [database open];
     
-    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select * from SI_Premium where SINO = \"%@\"",SINo]];
-    NSLog(@"query %@",[NSString stringWithFormat:@"select * from SI_Premium where SINO = \"%@\" and RiderCode=\"%@\"",SINo,riderCode]);
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select * from SI_Temp_Trad_Rider where SINo = \"%@\" and RiderCode=\"%@\"",SINo,riderCode]];
+    //NSLog(@"query %@",[NSString stringWithFormat:@"select * from SI_Premium where SINO = \"%@\" and RiderCode=\"%@\"",SINo,riderCode]);
     while ([s next]) {
-        SINO = [s stringForColumn:@"SINO"];
+        SINO = [s stringForColumn:@"SINo"];
         RiderCode = [s stringForColumn:@"RiderCode"];
         RiderName = [s stringForColumn:@"RiderName"];
         SumAssured = [s stringForColumn:@"SumAssured"];

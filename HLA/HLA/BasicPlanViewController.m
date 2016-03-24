@@ -2769,10 +2769,16 @@ bool WPTPD30RisDeleted = FALSE;
     double MDBKKLoading = [riderCalculation calculateMDBKKLoading:dictForCalculate DictionaryBasicPlan:[self setDataBasicPlan] DictionaryPO:_dictionaryPOForInsert BasicCode:@"KLK" PaymentCode:[self getPaymentType] PersonType:personCharacterType];
     double RiderLoading = [riderCalculation calculateBPPremiLoading:dictForCalculate DictionaryBasicPlan:[self setDataBasicPlan] DictionaryPO:_dictionaryPOForInsert BasicCode:@"KLK" PaymentCode:[self getPaymentType] PersonType:personCharacterType];
     
-    double premiDasar = RiderPremium + MDBKKPremi + MDBKKLoading + RiderLoading;
+    double premiDasar = RiderPremium + MDBKKPremi;
+    double extrapremi = MDBKKLoading + RiderLoading;
+    double totalPremi = RiderPremium + MDBKKPremi + MDBKKLoading + RiderLoading;
     
     NSString *PremiDasar = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:premiDasar]];
+    NSString *ExtraPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:extrapremi]];
+    NSString *TotalPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:totalPremi]];
     [_basicPremiField setText:PremiDasar];
+    [_extraBasicPremiField setText:ExtraPremi];
+    [_totalPremiWithLoadingField setText:TotalPremi];
 }
 
 

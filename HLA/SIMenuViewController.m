@@ -3129,26 +3129,32 @@ BOOL isFirstLoad;
 }
 
 -(void)saveRider:(NSDictionary *)dictMDBKK MDKK:(NSDictionary *)dictMDKK BP:(NSDictionary *)dictBasicPremi{
+    NSMutableDictionary *mutableMDBKK=[[NSMutableDictionary alloc]initWithDictionary:dictMDBKK];
+    NSMutableDictionary *mutableMDKK=[[NSMutableDictionary alloc]initWithDictionary:dictMDKK];
+    NSMutableDictionary *mutableBP=[[NSMutableDictionary alloc]initWithDictionary:dictBasicPremi];
     
-    if ([_modelSIRider getRiderCount:[dictionaryPOForInsert valueForKey:@"SINO"] RiderCode:[self->dictMDBKK valueForKey:@"RiderCode"]]<=0){
-        [_modelSIRider saveRider:self->dictMDBKK];
+    [mutableMDBKK setObject:[dictionaryPOForInsert valueForKey:@"SINO"] forKey:@"SINO"];
+    [mutableMDKK setObject:[dictionaryPOForInsert valueForKey:@"SINO"] forKey:@"SINO"];
+    [mutableBP setObject:[dictionaryPOForInsert valueForKey:@"SINO"] forKey:@"SINO"];
+    if ([_modelSIRider getRiderCount:[dictionaryPOForInsert valueForKey:@"SINO"] RiderCode:[dictMDBKK valueForKey:@"RiderCode"]]<=0){
+        [_modelSIRider saveRider:mutableMDBKK];
     }
     else{
-        [_modelSIRider updateRider:self->dictMDBKK];
+        [_modelSIRider updateRider:mutableMDBKK];
     }
     
     if ([_modelSIRider getRiderCount:[dictionaryPOForInsert valueForKey:@"SINO"] RiderCode:[dictMDKK valueForKey:@"RiderCode"]]<=0){
-        [_modelSIRider saveRider:dictMDKK];
+        [_modelSIRider saveRider:mutableMDKK];
     }
     else{
-        [_modelSIRider updateRider:dictMDKK];
+        [_modelSIRider updateRider:mutableMDKK];
     }
     
     if ([_modelSIRider getRiderCount:[dictionaryPOForInsert valueForKey:@"SINO"] RiderCode:[dictBP valueForKey:@"RiderCode"]]<=0){
-        [_modelSIRider saveRider:dictBasicPremi];
+        [_modelSIRider saveRider:mutableBP];
     }
     else{
-        [_modelSIRider updateRider:dictBasicPremi];
+        [_modelSIRider updateRider:mutableBP];
     }
     if (!_PremiumController) {
         _PremiumController = [self.storyboard instantiateViewControllerWithIdentifier:@"premiumView"];
@@ -3288,7 +3294,7 @@ BOOL isFirstLoad;
             break;
         case 3:
             if ([_LAController validateSave]){
-                if ((![[dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"])||(![[dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"SELF"]))
+                if ((![[dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"])&&(![[dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"SELF"]))
                     if ([_SecondLAController validateSave]){
                         if ([_BasicController validationDataBasicPlan]) {
                             [arrayIntValidate replaceObjectAtIndex:2 withObject:@"1"];

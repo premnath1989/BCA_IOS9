@@ -4,39 +4,63 @@
         <!--<link href="SI/css/style.css" rel="stylesheet" type="text/css" />-->
         <script type="text/javascript" charset="utf-8" src="SI/js/jquery-1.8.2.min.js"></script>
         <script type="text/javascript" charset="utf-8" src="SI/js/hla.js"></script>
-        <style>
+       <style>
+        	#maincontainer
+            {
+                top:0px;
+                padding-top:0;
+                margin:auto;
+                width:100%;
+                height:500px;
+            }
             thead,table-Summary1 {
                 border: 1px solid black;
             }
-        td {
-            border-style: solid;
-            border-color: black;
-            border-width: 0px;
-            padding: 0px 0px 0px 0px;
-            text-align: justify;
-            font-size:11px;
-            font-family: "Helvetica"
-        }
-        p {
-            font-size:9.8px;
-            padding: 0px 0px 0px 0px;
-        }
-        z {
-        	font-size:11px;
-            font-family: "Helvetica"
-            padding: 0px 0px 0px 0px;
-        }
-        header1 {
-            font-size:12px;
-            padding: 0px 0px 0px 0px;
-        }
-        tr.rowStyle {
-            border-style: solid;
-            border-color: black;
-            border-width: 1px;
-            font-size:9.8px;
-            
-        }
+            td.one {
+                border-style: solid;
+                border-color: black;
+                border-width: 1px;
+                padding: 0px 0px 0px 0px;
+                font-family: "Helvetica"
+                font-size: 10px;
+                text-align: center;
+            }
+            td.two {
+                border-style: solid;
+                border-color: black;
+                border-width: 1px;
+                padding: 0px 0px 0px 0px;
+                font-family: "Helvetica"
+                font-size: 10px;
+                text-align: right;
+            }
+
+            tr.rowStyle {
+                border-style: solid;
+                border-color: black;
+                border-width: 1px;
+                font-family: "Helvetica"
+                font-size: 10px;
+            }
+
+            p {
+                font-size:10px;
+                padding: 0px 0px 0px 0px;
+            }
+            z {
+                font-size:10px;
+                padding: 0px 0px 0px 0px;
+            }
+            header1 {
+                font-size:18px;
+                padding: 0px 0px 0px 0px;
+            }
+            footer1 {
+                width:100%;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+            }
         </style>
         <script>
             var gData;
@@ -255,7 +279,7 @@
                     
                     <table border="0" style="border-collapse:separate;border:0px solid black;width:100%;">
                         <tr>
-                            <td style="width: 25%"><img src="SI/img/LogoBCALife.jpg" height="55px"/></td>
+                            <td style="width: 25%"><img src="LogoBCALife.jpg" height="55px"/></td>
                             <td style="width: 45%" valign="top">
                                 <table  style="border-collapse:separate;border:1px solid black;width:100%;font-size:11px;text-align: center">
                                     <tr>
@@ -268,78 +292,78 @@
                             </td>
                             <td style="width: 30%; font-size:13px;font-family:Helvetica; text-align: right" valign="top" style="margin:0" >
                                 <header1>BCA Life Keluargaku"</header1></br>
-                                <font color="red">Nomor Ilustrasi : <font color="red"><label id="SINumber">16011813027</label></font>
+                                <font color="red">Nomor Ilustrasi :</font> <font color="red"><label id="SINumber1"></label></font>
                             </td>
                             
                         </tr>
                     </table>
                 </div>
+                <div id="maincontainer">
                 <div class="main-content">
-                    <br/>
                     <table style="border-collapse:separate;border:0px solid black;width:100%;" >
                         <tr>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;">Tanggal Pembuatan Ilustrasi</td>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;"><label id="HeaderLAName">:</label></td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;">: <label id="SIDate">:</label></td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;">Uang Pertanggungan</td>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;"><label id="HeaderLASex">:</label></td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;">: <label id="SumAssured"></label></td>
                         </tr>
                         <tr>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; ">Calon Pemegang Polis</td>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; "><label id="HeaderLADOB">:</label></td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; ">: <label id="POName">:</label></td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; ">Cara Bayar Premi</td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; ">:</td>
                         </tr>
                         <tr>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; ">Tanggal Lahir Pemegang Polis</td>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; "><label id="HeaderOccupation">:</label></td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; ">: <label id="PODOB">:</label></td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; ">Loading</td>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; "><label id="HeaderPaymentPeriode">:</label></td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; ">: <label id="Loading">:</label></td>
                         </tr>
                         <tr>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; ">Usia Pemegang Polis</td>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; "><label id="HeaderPaymentFrequency">:</label></td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; ">: <label id="POAge">:</label></td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; ">Extra Premi</td>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; ">:</td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; ">: <label id="ExtraPremi"></label></td>
                         </tr>
                         <tr>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;">Jenis Kelamin Pemegang Polis</td>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;"><label id="HeaderLAName">:</label></td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;">: <label id="POGender">:</label></td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;">Extra Occupation</td>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;"><label id="HeaderLASex">:</label></td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;">: <label id="ExtraOccupation">:</label></td>
                         </tr>
                         <tr>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; ">Calon Tertanggung</td>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; "><label id="HeaderLADOB">:</label></td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; ">: <label id="LAName">:</label></td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; ">Masa Extra Premi</td>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; ">:</td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; ">: <label id="MasaExtraPremi">:</label></td>
                         </tr>
                         <tr>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; ">Tanggal Lahir Tertanggung</td>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; "><label id="HeaderOccupation">:</label></td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; ">: <label id="LADOB">:</label></td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; ">Premi Dibayar</td>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; "><label id="HeaderPaymentPeriode">:</label></td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; ">: <label id="PremiDibayar">:</label></td>
                         </tr>
                         <tr>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; ">Usia Tertanggung</td>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; "><label id="HeaderPaymentFrequency">:</label></td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; ">: <label id="LAAge">:</label></td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; ">Diskon Premi</td>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; ">:</td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; ">: <label id="SIDiscount">:</label></td>
                         </tr>
                         <tr>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;">Jenis Kelamin Tertanggung</td>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;"><label id="HeaderLASex">:</label></td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;">: <label id="LAGender">:</label></td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;"></td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;"></td>
                         </tr>
                         <tr>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; ">Pemegang Polis = tertanggung</td>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; "><label id="HeaderLADOB">:</label></td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; ">: <label id="SelfRelation">:</label></td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; ">Total Premi Dibayar</td>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; ">:</td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; ">: <label id="TotalPremi">:</label></td>
                         </tr>
                         <tr>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; ">Masa Asuransi/Pembayaran Premi</td>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; "><label id="HeaderOccupation">:</label></td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; "><label>:10</label></td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; "></td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; "></td>
                         </tr>
@@ -360,7 +384,7 @@
 	                            <table style="width:100%;">
                             	<tr>
 								<td style="width: 20%;text-align: left">Rp</td>
-								<td style="text-align: right">700.000.000</td>
+								<td style="text-align: right"><label id="SumAssuredMDBKK">700.000</label></td>
 								</tr>
 								</table>
                             </td>
@@ -368,7 +392,7 @@
                             	<table style="width:100%;">
                             	<tr>
                             	<td style="width: 20%;text-align: left">Rp</td>
-								<td style="width: 75%;text-align: right">1.732.500</td>
+								<td style="width: 75%;text-align: right"><label id="MDBKKPremi">1.732.500</label></td>
 								<td style="width: 1%;text-align: right">*)</td>
 								</tr>
 								</table>
@@ -377,7 +401,7 @@
                             	<table style="width:100%;">
                             	<tr>
                             	<td style="width: 10%;text-align: left">Rp</td>
-								<td style="width: 20%;text-align: right">307.500</td>
+								<td style="width: 20%;text-align: right"><label id="MDBKKExtraPremi">307.500</label></td>
 								<td style="width: 70%;text-align: right">Sampai dengan akhir tahun ke 10</td>
 								</tr>
 								</table>
@@ -389,7 +413,7 @@
 	                            <table style="width:100%;">
                             	<tr>
 								<td style="width: 20%;text-align: left">Rp</td>
-								<td style="text-align: right">1.400.000.000</td>
+								<td style="text-align: right"><label id="SumAssuredMDKK">1.400.000.000</label></td>
 								</tr>
 								</table>
                             </td>
@@ -426,7 +450,7 @@
                             	<table style="width:100%;">
                             	<tr>
                             	<td style="width: 20%;text-align: left">Rp</td>
-								<td style="width: 75%;text-align: right">28.200</td>
+								<td style="width: 75%;text-align: right"><label id="BPPremi">28.200</label></td>
 								<td style="width: 1%;text-align: right">**)</td>
 								</tr>
 								</table>
@@ -435,7 +459,7 @@
                             	<table style="width:100%;">
                             	<tr>
                             	<td style="width: 10%;text-align: left">Rp</td>
-								<td style="width: 20%;text-align: right">28.200</td>
+								<td style="width: 20%;text-align: right"><label id="BPExtraPremi">28.200</label></td>
 								<td style="width: 70%;text-align: right">Sampai dengan akhir tahun ke 10</td>
 								</tr>
 								</table>
@@ -446,7 +470,6 @@
                     
                     <!--520,430px-->
                     <div style="width:100%;background-color: #fff;vertical-align: top;">
-                        <br/>
                         <b><z>Ringkasan Manfaat</z></b>
                         <br/>
                         <z>Untuk keperluan ilustrasi, penjelasan lengkap mengenai Manfaat Asuransi (termasuk syarat-syarat dan pengecualian-pengecualian) tercantum dalam Polis, berlaku dan mengikat.</z>
@@ -503,7 +526,9 @@
                         
                     </div>
                     </br>
-
+				</div>
+				</div>
+				<footer>
                     <div style="width:100%;background-color: #fff;vertical-align: top;">
                         <table border="0" style="border-collapse:separate;border:0px solid black;width:100%;">
                             <td style="width: 50%">
@@ -580,6 +605,7 @@
                         </tr>
                     </table>
                     </div>
+                </footer>
             </body>
             
 </html>

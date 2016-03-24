@@ -12,6 +12,10 @@
 @interface IlustrationViewController (){
     int page;
     bool pdfCreated;
+    
+    NSDictionary* dictMDBKK;
+    NSDictionary* dictMBKK;
+    NSDictionary* dictBebasPremi;
 }
 
 @end
@@ -31,8 +35,15 @@
 -(void)viewDidAppear:(BOOL)animated {
     page =1;
     pdfCreated=false;
-    [self loadPremi];
-    [self joinHTML];
+    if ([[_dictionaryForBasicPlan valueForKey:@"ProductCode"] isEqualToString:@"BCAKK"]){
+        [self joinHTMLKeluargaku];
+        [self getRiderValue];
+    }
+    else{
+        [self loadPremi];
+        [self joinHTML];
+    }
+    
     //[self loadHTMLToWebView];
 }
 
@@ -42,6 +53,8 @@
     modelAgentProfile=[[ModelAgentProfile alloc]init];
     modelRate = [[RateModel alloc]init];
     formatter = [[Formatter alloc]init];
+    modelSIRider = [[ModelSIRider alloc]init];
+    riderCalculation = [[RiderCalculation alloc]init];
     
     NSMutableDictionary *newAttributes = [[NSMutableDictionary alloc] init];
     [newAttributes setObject:[UIFont systemFontOfSize:18] forKey:UITextAttributeFont];
@@ -211,33 +224,7 @@
 }
 
 -(void)createPDFFile{
-    /*NSString *path = nil;
-    path = [NSString stringWithFormat:@"%@tmp1.pdf",NSTemporaryDirectory()];
-    
-    NSString *path2 = nil;
-    path2 = [NSString stringWithFormat:@"%@tmp2.pdf",NSTemporaryDirectory()];
-    
-    NSString *path3 = nil;
-    path3 = [NSString stringWithFormat:@"%@tmp3.pdf",NSTemporaryDirectory()];
-
-    NSURL *pathURL = [NSURL fileURLWithPath:path] ;
-    NSURL *pathURL2 = [NSURL fileURLWithPath:path2];
-    NSURL *pathURL3 = [NSURL fileURLWithPath:path3];
-    
-    NSArray* path_forDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
-    NSString* documentsDirectory = [path_forDirectory objectAtIndex:0];
-    
-    NSMutableData* data = [NSMutableData dataWithContentsOfURL:pathURL];
-    NSData *data2=[NSData dataWithContentsOfURL:pathURL2];
-    NSData *data3=[NSData dataWithContentsOfURL:pathURL3];
-    
-    [data appendData:data3];
-    [data appendData:data2];
-    
-    [data writeToFile:[NSString stringWithFormat:@"%@/SI_Temp.pdf",documentsDirectory] atomically:YES];*/
-    //NSString *cacheDir = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
-    
-    // File paths
+        // File paths
     NSString *pdfPath1 = [NSString stringWithFormat:@"%@tmp1.pdf",NSTemporaryDirectory()];
     NSString *pdfPath2 = [NSString stringWithFormat:@"%@tmp2.pdf",NSTemporaryDirectory()];
     NSString *pdfPath3 = [NSString stringWithFormat:@"%@tmp3.pdf",NSTemporaryDirectory()];
@@ -540,54 +527,30 @@
     NSString *responseTable = [webIlustration stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"createTable(%d,%i,%f,%d,[%@],[%@],[%@])", laAge,numberOfRow,basicSumAssured,paymentTerm,string,string5Year,stringSurValue]];
     
     // Make the UIWebView method call
-    NSString *response = [webIlustration stringByEvaluatingJavaScriptFromString:javaScript];
+     [webIlustration stringByEvaluatingJavaScriptFromString:javaScript];
     
-    NSString *responseF1 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptF1];
-    NSString *responseF2 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptF2];
-    NSString *responseF3 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptF3];
-    NSString *responseF4 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptF4];
+     [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptF1];
+     [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptF2];
+     [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptF3];
+     [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptF4];
     
-    NSString *responseP21 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H1];
-    NSString *responseP22 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H2];
-    NSString *responseP23 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H3];
-    NSString *responseP24 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H4];
-    NSString *responseP25 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H5];
-    NSString *responseP26 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H6];
-    NSString *responseP27 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H7];
-    NSString *responseP28 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H8];
-    NSString *responseP29 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H9];
-    NSString *responseP210 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H10];
-    NSString *responseP211 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H11];
-    NSString *responseP212 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H12];
-    NSString *responseP213 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H13];
-    NSString *responseP214 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H14];
-    NSString *responseP215 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H15];
-    NSString *responseP216 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H16];
-    NSString *responseP217 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H17];
-    
-    NSLog(@"javascript result: %@", responseTable);
-    NSLog(@"javascript result: %@", responseF1);
-    NSLog(@"javascript result: %@", responseF2);
-    NSLog(@"javascript result: %@", responseF3);
-    NSLog(@"javascript result: %@", responseF4);
-    
-    NSLog(@"javascript result: %@", responseP21);
-    NSLog(@"javascript result: %@", responseP22);
-    NSLog(@"javascript result: %@", responseP23);
-    NSLog(@"javascript result: %@", responseP24);
-    NSLog(@"javascript result: %@", responseP25);
-    NSLog(@"javascript result: %@", responseP26);
-    NSLog(@"javascript result: %@", responseP27);
-    NSLog(@"javascript result: %@", responseP28);
-    NSLog(@"javascript result: %@", responseP29);
-    NSLog(@"javascript result: %@", responseP210);
-    NSLog(@"javascript result: %@", responseP211);
-    NSLog(@"javascript result: %@", responseP212);
-    NSLog(@"javascript result: %@", responseP213);
-    NSLog(@"javascript result: %@", responseP214);
-    NSLog(@"javascript result: %@", responseP215);
-    NSLog(@"javascript result: %@", responseP216);
-
+     [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H1];
+     [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H2];
+    [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H3];
+     [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H4];
+     [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H5];
+     [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H6];
+     [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H7];
+     [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H8];
+     [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H9];
+     [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H10];
+     [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H11];
+     [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H12];
+     [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H13];
+     [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H14];
+     [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H15];
+     [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H16];
+    [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H17];
 }
 
 -(void)setValuePage3{
@@ -643,9 +606,6 @@
     {
         NSLog(@"PDF couldnot be created");
     }
-    NSString *HTMLPath = [documentsDirectory stringByAppendingPathComponent:@"SalesIlustration.pdf"];
-    NSURL *targetURL = [NSURL fileURLWithPath:HTMLPath];
-    //[webIlustration loadRequest:[NSURLRequest requestWithURL:targetURL]];
     pdfCreated=true;
     [webIlustration setHidden:YES];
     [viewspinBar setHidden:YES];
@@ -674,9 +634,15 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     _dictionaryForAgentProfile = [[NSMutableDictionary alloc]initWithDictionary:[modelAgentProfile getAgentData]];
-    [self setValuePage1];
-    [self setValuePage2];
-    [self setValuePage3];
+    if ([[_dictionaryForBasicPlan valueForKey:@"ProductCode"] isEqualToString:@"BCAKK"]){
+        [self setValueKeluargakuPage1];
+        [self setValueKeluargakuPage2];
+    }
+    else{
+        [self setValuePage1];
+        [self setValuePage2];
+        [self setValuePage3];
+    }
     
     if (!pdfCreated){
        [self makePDF];
@@ -824,6 +790,154 @@
     totalBulanan = (AnssubtotalBulan + ExtraNumbsubtotalBulan + ExtraPercentsubtotalBulan);
 }
 
+#pragma mark Keluargaku
+-(void)getRiderValue{
+    dictMDBKK=[modelSIRider getRider:[_dictionaryPOForInsert valueForKey:@"SINO"] RiderCode:@"MDBKK"];
+    dictMBKK=[modelSIRider getRider:[_dictionaryPOForInsert valueForKey:@"SINO"] RiderCode:@"MDKK"];
+    dictBebasPremi=[modelSIRider getRider:[_dictionaryPOForInsert valueForKey:@"SINO"] RiderCode:@"BP"];
+}
+
+-(void)setValueKeluargakuPage2{
+    NSString* paymentDesc = [_dictionaryForBasicPlan valueForKey:@"Payment_Frequency"];
+    int paymentFreq=[modelRate getKeluargakuMOPFreq:[riderCalculation getPaymentType:paymentDesc]];
+    
+    NSString* premiRP = [dictMDBKK valueForKey:@"PremiRp"];
+    NSNumber* numberPremiRp=[formatter convertNumberFromStringCurrency:premiRP];
+    NSLog(@"numberpremi %@",numberPremiRp);
+    NSString *javaScript = [NSString stringWithFormat:@"document.getElementById('SINumber2').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"SINO"]];
+    
+        //footer agent data
+    NSString *javaScriptF1 = [NSString stringWithFormat:@"document.getElementById('FooterAgentName2').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"AgentName"]];
+    NSString *javaScriptF2 = [NSString stringWithFormat:@"document.getElementById('FooterPrintDate2').innerHTML =\"%@\";",[formatter getDateToday:@"yyyy-MM-dd hh:mm:ss"]];
+    NSString *javaScriptF3 = [NSString stringWithFormat:@"document.getElementById('FooterAgentCode2').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"AgentCode"]];
+    NSString *javaScriptF4 = [NSString stringWithFormat:@"document.getElementById('FooterBranch2').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"BranchName"]];
+    
+    [webIlustration stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"createTable(%@,%d)",numberPremiRp,paymentFreq]];
+    // Make the UIWebView method call
+    [webIlustration stringByEvaluatingJavaScriptFromString:javaScript];
+    [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptF1];
+    [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptF2];
+    [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptF3];
+    [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptF4];
+}
+
+- (void)setValueKeluargakuPage1{
+    NSString *sexLA;
+    if ([[_dictionaryPOForInsert valueForKey:@"LA_Gender"] isEqualToString:@"MALE"]){
+        sexLA=@"Pria";
+    }
+    else{
+        sexLA=@"Wanita";
+    }
+
+    NSString *sexPO;
+    if ([[_dictionaryPOForInsert valueForKey:@"PO_Gender"] isEqualToString:@"MALE"]){
+        sexPO=@"Pria";
+    }
+    else{
+        sexPO=@"Wanita";
+    }
+
+        NSString *javaScript = [NSString stringWithFormat:@"document.getElementById('SINumber1').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"SINO"]];
+        NSString *javaScriptP1H2=[NSString stringWithFormat:@"document.getElementById('POName').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"PO_Name"]];
+        NSString *javaScriptP1H3=[NSString stringWithFormat:@"document.getElementById('PODOB').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"PO_DOB"]];
+        NSString *javaScriptP1H5=[NSString stringWithFormat:@"document.getElementById('POAge').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"PO_Age"]];
+        NSString *javaScriptP1H7=[NSString stringWithFormat:@"document.getElementById('POGender').innerHTML =\"%@\";", sexPO];
+        NSString *javaScriptP1H9=[NSString stringWithFormat:@"document.getElementById('LAName').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"LA_Name"]];
+        NSString *javaScriptP1H11=[NSString stringWithFormat:@"document.getElementById('LADOB').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"LA_DOB"]];
+        NSString *javaScriptP1H13=[NSString stringWithFormat:@"document.getElementById('LAAge').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"LA_Age"]];
+        NSString *javaScriptP1H15=[NSString stringWithFormat:@"document.getElementById('LAGender').innerHTML =\"%@\";", sexLA];
+        NSString *javaScriptP1H16=[NSString stringWithFormat:@"document.getElementById('SelfRelation').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"LA_Name"]];
+        NSString *javaScriptP1H18=[NSString stringWithFormat:@"document.getElementById('SIDate').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"SIDate"]];
+    
+        NSNumber *myNumber = [formatter convertNumberFromString:[_dictionaryForBasicPlan valueForKey:@"Sum_Assured"]];
+        NSString *javaScriptP1H14=[NSString stringWithFormat:@"document.getElementById('SIDiscount').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"Discount"]];
+        NSString *javaScriptP1H17=[NSString stringWithFormat:@"document.getElementById('TotalPremi').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"TotalPremiumLoading"]];
+        NSString *javaScriptP1H1=[NSString stringWithFormat:@"document.getElementById('SumAssured').innerHTML =\"%@\";", [formatter numberToCurrencyDecimalFormatted:myNumber]];
+        NSString *javaScriptP1H4=[NSString stringWithFormat:@"document.getElementById('Loading').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"LA_Name"]];
+        NSString *javaScriptP1H6=[NSString stringWithFormat:@"document.getElementById('ExtraPremi').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"ExtraPremiumPolicy"]];
+        NSString *javaScriptP1H8=[NSString stringWithFormat:@"document.getElementById('ExtraOccupation').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"LA_Name"]];
+        NSString *javaScriptP1H10=[NSString stringWithFormat:@"document.getElementById('MasaExtraPremi').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"ExtraPremiumTerm"]];
+        NSString *javaScriptP1H12=[NSString stringWithFormat:@"document.getElementById('PremiDibayar').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"PremiumPolicyA"]];
+    
+        NSString *javaScriptP1T1=[NSString stringWithFormat:@"document.getElementById('SumAssuredMDBKK').innerHTML =\"%@\";", [formatter stringToCurrencyDecimalFormatted:[dictMDBKK valueForKey:@"SumAssured"]]];
+        NSString *javaScriptP1T2=[NSString stringWithFormat:@"document.getElementById('MDBKKPremi').innerHTML =\"%@\";", [formatter stringToCurrencyDecimalFormatted:[dictMDBKK valueForKey:@"PremiRp"]]];
+        NSString *javaScriptP1T3=[NSString stringWithFormat:@"document.getElementById('MDBKKExtraPremi').innerHTML =\"%@\";", [formatter stringToCurrencyDecimalFormatted:[dictMDBKK valueForKey:@"ExtraPremiRp"]]];
+        NSString *javaScriptP1T4=[NSString stringWithFormat:@"document.getElementById('SumAssuredMDKK').innerHTML =\"%@\";", [formatter stringToCurrencyDecimalFormatted:[dictMBKK valueForKey:@"SumAssured"]]];
+        NSString *javaScriptP1T5=[NSString stringWithFormat:@"document.getElementById('BPPremi').innerHTML =\"%@\";", [formatter stringToCurrencyDecimalFormatted:[dictBebasPremi valueForKey:@"PremiRp"]]];
+        NSString *javaScriptP1T6=[NSString stringWithFormat:@"document.getElementById('BPExtraPremi').innerHTML =\"%@\";", [formatter stringToCurrencyDecimalFormatted:[dictBebasPremi valueForKey:@"ExtraPremiRp"]]];
+    
+        //footer agent data
+        NSString *javaScriptF1 = [NSString stringWithFormat:@"document.getElementById('FooterAgentName').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"AgentName"]];
+        NSString *javaScriptF2 = [NSString stringWithFormat:@"document.getElementById('FooterPrintDate').innerHTML =\"%@\";",[formatter getDateToday:@"yyyy-MM-dd hh:mm:ss"]];
+        NSString *javaScriptF3 = [NSString stringWithFormat:@"document.getElementById('FooterAgentCode').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"AgentCode"]];
+        NSString *javaScriptF4 = [NSString stringWithFormat:@"document.getElementById('FooterBranch').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"BranchName"]];
+
+        [webIlustration stringByEvaluatingJavaScriptFromString:javaScript];
+        [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1H1];
+        [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1H2];
+        [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1H3];
+        [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1H4];
+        [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1H5];
+        [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1H6];
+        [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1H7];
+        [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1H8];
+        [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1H9];
+        [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1H10];
+        [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1H11];
+        [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1H12];
+        [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1H13];
+        [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1H14];
+        [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1H15];
+        [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1H16];
+        [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1H17];
+        [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1H18];
+    
+        [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1T1];
+        [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1T2];
+        [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1T3];
+        [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1T4];
+        [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1T5];
+        [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1T6];
+    
+        [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptF1];
+        [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptF2];
+        [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptF3];
+        [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptF4];
+}
+-(void)joinHTMLKeluargaku{
+    
+    NSString *path1 = [[NSBundle mainBundle] pathForResource:@"eng_BCALKK_Page1" ofType:@"html"]; //changed for language
+    NSString *path2 = [[NSBundle mainBundle] pathForResource:@"eng_BCALKK_Page2" ofType:@"html"]; //changed for language
+    
+    NSString *pathImage = [[NSBundle mainBundle] pathForResource:@"LogoBCALife" ofType:@"jpg"]; //
+    
+    NSURL *pathURL1 = [NSURL fileURLWithPath:path1];
+    NSURL *pathURL2 = [NSURL fileURLWithPath:path2];
+    
+    NSURL *pathURLImage = [NSURL fileURLWithPath:pathImage];
+    
+    NSArray* path_forDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+    NSString* documentsDirectory = [path_forDirectory objectAtIndex:0];
+    
+    NSMutableData* data = [NSMutableData dataWithContentsOfURL:pathURL1];
+    NSData* data2 = [NSData dataWithContentsOfURL:pathURL2];
+    [data appendData:data2];
+    
+    NSData* dataImage = [NSData dataWithContentsOfURL:pathURLImage];
+    
+    [data writeToFile:[NSString stringWithFormat:@"%@/SI_Temp_Keluargaku.html",documentsDirectory] atomically:YES];
+    [dataImage writeToFile:[NSString stringWithFormat:@"%@/LogoBCALife.jpg",documentsDirectory] atomically:YES];
+    
+    NSString *HTMLPath = [documentsDirectory stringByAppendingPathComponent:@"SI_Temp_Keluargaku.html"];
+    
+    NSString *path = [[NSBundle mainBundle] bundlePath];
+    NSURL *baseURL = [NSURL fileURLWithPath:path];
+    
+    NSString* htmlString = [NSString stringWithContentsOfFile:HTMLPath encoding:NSUTF8StringEncoding error:nil];
+    [webIlustration loadHTMLString:htmlString baseURL:baseURL];
+    //[webIlustration loadRequest:[NSURLRequest requestWithURL:targetURL]];
+}
 
 @end
 

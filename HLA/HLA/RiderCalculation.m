@@ -158,4 +158,25 @@
     return bpPremiLoading;
 }
 
+-(int)getPaymentType:(NSString *)PaymentDesc{
+    int PaymentType;
+    if ([PaymentDesc isEqualToString:@"Tahunan"])
+    {
+        PaymentType =1;
+    }
+    else if ([PaymentDesc isEqualToString:@"Semester"])
+    {
+        PaymentType =2;
+    }
+    else if ([PaymentDesc isEqualToString:@"Kuartal"])
+    {
+        PaymentType =3;
+    }
+    else {
+        PaymentType =4;
+    }
+    return PaymentType;
+}
+
+
 @end

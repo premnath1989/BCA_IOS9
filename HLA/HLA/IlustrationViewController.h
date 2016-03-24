@@ -15,6 +15,8 @@
 #import "PagesController.h"
 #import "ReaderViewController.h"
 #import "Formatter.h"
+#import "ModelSIRider.h"
+#import "RiderCalculation.h"
 
 @interface IlustrationViewController : UIViewController<ReaderViewControllerDelegate,NDHTMLtoPDFDelegate,UIWebViewDelegate,MFMailComposeViewControllerDelegate,PagesControllerDelegate>{
     IBOutlet UIWebView* webIlustration;
@@ -22,6 +24,8 @@
     NDHTMLtoPDF *PDFCreator;
     ModelAgentProfile* modelAgentProfile;
     RateModel* modelRate;
+    ModelSIRider* modelSIRider;
+    RiderCalculation* riderCalculation;
     Formatter* formatter;
     UIBarButtonItem *email;
     UIBarButtonItem *printSI;

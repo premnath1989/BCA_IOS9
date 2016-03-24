@@ -128,6 +128,26 @@
     return Rate;
 }
 
+-(int)getKeluargakuMOPFreq:(int)PaymentType{
+    int paymentFreq;
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"BCA_Rates.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"SELECT Payment_Freq FROM Keluargaku_Rates_MOP Where Payment_Code = %i",PaymentType]];
+    
+    while ([s next]) {
+        paymentFreq = [s intForColumn:@"Payment_Freq"];
+    }
+    
+    [results close];
+    [database close];
+    return paymentFreq;
+}
+
+
 -(double)getKeluargakuEMRate:(NSString *)Gender EntryAge:(int)entryAge{
     double Rate;
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];

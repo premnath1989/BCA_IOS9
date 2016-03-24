@@ -48,6 +48,14 @@
     return myNumber;
 }
 
+-(NSNumber *)convertNumberFromStringCurrency:(NSString *)stringNumber{
+    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+    [f setLocale:[NSLocale localeWithLocaleIdentifier:@"in_ID"]];
+    f.numberStyle = NSNumberFormatterDecimalStyle;
+    NSNumber *myNumber = [f numberFromString:stringNumber];
+    return myNumber;
+}
+
 -(double)formatToTwoDecimal:(double)valueToFormat{
     NSNumberFormatter *format21 = [[NSNumberFormatter alloc]init];
     [format21 setNumberStyle:NSNumberFormatterNoStyle];
