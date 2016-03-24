@@ -128,6 +128,7 @@
 @property (weak, nonatomic) IBOutlet UINavigationBar *navigationBar;
 
 //LA Field
+@property (retain, nonatomic) IBOutlet UILabel *labelQuickQuote;
 @property (retain, nonatomic) IBOutlet UITextField *LANameField;
 @property (retain, nonatomic) IBOutlet UISegmentedControl *sexSegment;
 @property (retain, nonatomic) IBOutlet UISegmentedControl *smokerSegment;

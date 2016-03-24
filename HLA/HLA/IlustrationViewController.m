@@ -60,6 +60,8 @@
     [newAttributes setObject:[UIFont systemFontOfSize:18] forKey:UITextAttributeFont];
     [self.navigationBar setTitleTextAttributes:newAttributes];
     [self.navigationBar setBackgroundColor:[UIColor clearColor]];
+    [self.navigationController.navigationBar setTitleTextAttributes:
+     @{NSForegroundColorAttributeName:[UIColor darkGrayColor]}];
     /*email = [[UIBarButtonItem alloc] initWithTitle:@"Email" style:UIBarButtonItemStyleBordered target:self action:@selector(email)];
     printSI = [[UIBarButtonItem alloc] initWithTitle:@"Print" style:UIBarButtonItemStyleBordered target:self action:@selector(printSI)];
     pages = [[UIBarButtonItem alloc] initWithTitle:@"Pages" style:UIBarButtonItemStyleBordered target:self action:@selector(pagesSI:)];

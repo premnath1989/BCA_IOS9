@@ -172,8 +172,8 @@ NSString *SelectedString;
         NSString *ms = [FilteredData objectAtIndex:indexPath.row];
         SelectedString = ms;
         NSDictionary* dictBranchFilteredData = [modelDataReferral getNIPInfoByNIP:SelectedString];
-        NSString *NIP = [dictBranchFilteredData valueForKey:@"NIP"];
-        NSString *Name = [dictBranchFilteredData valueForKey:@"Nama"];
+        NSString *NIP = [[dictBranchFilteredData valueForKey:@"NIP"] objectAtIndex:0];
+        NSString *Name = [[dictBranchFilteredData valueForKey:@"Nama"] objectAtIndex:0];
         [_delegate selectedNIP:NIP Name:Name];
     }
     [tableView reloadData];

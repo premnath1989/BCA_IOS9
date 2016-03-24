@@ -184,6 +184,7 @@ id dobtanngal;
         sexSegment.enabled = YES;
         btnOccp.enabled = YES;
         btnProspect.enabled = NO;
+        [_labelQuickQuote setTextColor:themeColour];
         //NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
         //[prefs setObject:@"Yes" forKey:@"keyToLookupString"];
         
@@ -205,6 +206,7 @@ id dobtanngal;
         sexSegment.enabled = NO;
         btnOccp.enabled = NO;
         btnProspect.enabled = YES;
+        [_labelQuickQuote setTextColor:[UIColor lightGrayColor]];
         //NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
         //[prefs setObject:@"No" forKey:@"keyToLookupString"];
         //[_SecondLAController testing:@"Disable"];

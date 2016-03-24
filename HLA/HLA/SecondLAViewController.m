@@ -54,11 +54,6 @@ id dobtemp;
 	
     self.view.backgroundColor=[UIColor whiteColor];//[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg10.jpg"]];
     
-    
-    NSMutableDictionary *newAttributes = [[NSMutableDictionary alloc] init];
-    [newAttributes setObject:[UIFont systemFontOfSize:18] forKey:UITextAttributeFont];
-    [self.navigationBar setTitleTextAttributes:newAttributes];
-    
     NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docsDir = [dirPaths objectAtIndex:0];
     databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
@@ -180,7 +175,8 @@ id dobtemp;
     {
         
         //nameField.text = @"TestDisable";
-        [nameField setBackgroundColor:[UIColor colorWithRed:238.0/255.0 green:238.0/255.0 blue:238.0/255.0 alpha:1.0]];
+        //[nameField setBackgroundColor:[UIColor colorWithRed:237.0/255.0 green:237.0/255.0 blue:237.0/255.0 alpha:1.0]];
+        [nameField setBackgroundColor:[CustomColor colorWithHexString:@"EEEEEE"]];
         nameField.enabled = NO;
         _BtnTanggalLahir.enabled = false;
         ageField.enabled = false;
