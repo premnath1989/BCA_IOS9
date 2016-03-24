@@ -31,6 +31,7 @@
 - (void) updateLoginDate;
 - (void) updateLogoutDate;
 - (BOOL) SpvAdmValidation:(NSString *)username password:(NSString *)password;
+- (NSString *)RiderCode:(NSString *)SINo riderCode:(NSString *)code;
 - (NSString *) expiryDate:(NSString *)AgentID;
 - (NSString *) checkingLastLogout;
 - (NSString *) localDBUDID;

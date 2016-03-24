@@ -476,6 +476,35 @@
     return insertProc;
 }
 
+-(NSString *)RiderCode:(NSString *)SINo riderCode:(NSString *)code{
+    
+    sqlite3_stmt *statement;
+    NSString *value = @"";
+    
+    NSString *querySQL = [NSString stringWithFormat: @"SELECT ExtraPremiRp FROM SI_Temp_Trad_Rider WHERE SINO='%@' AND RiderCode='%@'", SINo, code];
+    NSLog(@"%@",querySQL);
+    
+    if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
+    {
+        int rc = sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL);
+        
+        if (rc==SQLITE_OK)
+        {
+            while(sqlite3_step(statement) == SQLITE_ROW)
+            {
+                if((const char *) sqlite3_column_text(statement, 0) != NULL){
+                    value = [[NSString alloc]
+                             initWithUTF8String:
+                             (const char *) sqlite3_column_text(statement, 0)];
+                }
+            }
+        }
+        sqlite3_close(contactDB);
+    }
+    
+    return value;
+}
+
 -(NSMutableDictionary *)premiKeluargaku:(NSString *)SINo{
     
     sqlite3_stmt *statement;

@@ -42,15 +42,20 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblSubTotalKuartal;
 @property (weak, nonatomic) IBOutlet UILabel *lblSubTotalBulan;
 
-@property (weak, nonatomic) IBOutlet UILabel *lblMDKCTahun;
-@property (weak, nonatomic) IBOutlet UILabel *lblMDKCSemester;
-@property (weak, nonatomic) IBOutlet UILabel *lblMDKCKuartal;
-@property (weak, nonatomic) IBOutlet UILabel *lblMDKCBulan;
+@property (weak, nonatomic) IBOutlet UILabel *lblMDBKKTahun;
+@property (weak, nonatomic) IBOutlet UILabel *lblMDBKKSemester;
+@property (weak, nonatomic) IBOutlet UILabel *lblMDBKKKuartal;
+@property (weak, nonatomic) IBOutlet UILabel *lblMDBKKBulan;
 
-@property (weak, nonatomic) IBOutlet UILabel *lblBPMDTahun;
-@property (weak, nonatomic) IBOutlet UILabel *lblBPMDSemester;
-@property (weak, nonatomic) IBOutlet UILabel *lblBPMDKuartal;
-@property (weak, nonatomic) IBOutlet UILabel *lblBPMSDBulan;
+@property (weak, nonatomic) IBOutlet UILabel *lblMDKKTahun;
+@property (weak, nonatomic) IBOutlet UILabel *lblMDKKSemester;
+@property (weak, nonatomic) IBOutlet UILabel *lblMDKKKuartal;
+@property (weak, nonatomic) IBOutlet UILabel *lblMDKKBulan;
+
+@property (weak, nonatomic) IBOutlet UILabel *lblBPTahun;
+@property (weak, nonatomic) IBOutlet UILabel *lblBPSemester;
+@property (weak, nonatomic) IBOutlet UILabel *lblBPKuartal;
+@property (weak, nonatomic) IBOutlet UILabel *lblBPBulan;
 
 @property (weak, nonatomic) IBOutlet UILabel *lblTotalTahun;
 @property (weak, nonatomic) IBOutlet UILabel *lblTotalSemester;

@@ -51,7 +51,7 @@
         
         loginDB = [[LoginDBManagement alloc]init];
         [loginDB makeDBCopy];
-        
+
         //put database element into dictionary
         NSMutableDictionary *newTablesDict =  [self getTablesName:defaultDBPath];
         NSMutableDictionary *oldTablesDict =  [self getTablesName:tempDir];
@@ -99,7 +99,7 @@
                     }
                     sqlite3_finalize(statement);
                 }
-                
+                sqlite3_close(database);
             }
         }
         
@@ -122,7 +122,7 @@
         
         sqlite3_close(database);
         [self moveDBFromTemp:tempDir ToDefault:defaultDBPath];
-//        [self updateDBVersion:defaultDBPath NewVersion:dbVersion Remark:@""];
+        [self updateDBVersion:defaultDBPath NewVersion:dbVersion Remark:@""];
         
         [[NSUserDefaults standardUserDefaults] setObject:bundleDBVersion forKey:@"dbVersion"];
         [[NSUserDefaults standardUserDefaults] synchronize];
@@ -180,11 +180,6 @@
             }
         }
     }
-    
-    //Now we remove the database from default path
-    if(![fileManager fileExistsAtPath:defaultDBPathStr]){
-        NSLog(@"db is removed");
-    }
 }
 
 -(void)moveDBFromTemp:(NSString *)tempDirStr ToDefault:(NSString *)defaultDBPathStr
@@ -192,14 +187,14 @@
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSError *error;
     // remove hladb.sqlite from default folder
-    if ([fileManager removeItemAtPath:bundleDBPath error:&error] != YES) {
+    if ([fileManager removeItemAtPath:defaultDBPathStr error:&error] != YES) {
         if (error.code != 4) {
             NSLog(@"%@ - Removing item from default directory.",[error localizedDescription]);
         }
     }
     
     // replace the hladb.sqlite by moving the database in the temporary folder to the default folder
-    if ([fileManager moveItemAtPath:tempDirStr toPath:bundleDBPath error:&error] != YES) {
+    if ([fileManager moveItemAtPath:tempDirStr toPath:defaultDBPathStr error:&error] != YES) {
         NSLog(@"%@ - Moving item from temporary to default directory.",[error localizedDescription]);
     }
     
