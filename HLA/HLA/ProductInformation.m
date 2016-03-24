@@ -11,6 +11,7 @@
 #import "CarouselViewController.h"
 #import "ReaderViewController.h"
 #import "ColumnHeaderStyle.h"
+#import "ProductInfoItems.h"
 
 @implementation ProductInformation
 
@@ -25,6 +26,10 @@
     
     [self createDirectory];
     
+    //we test our ftp
+    ProductInfoItems *FTPitems = [[ProductInfoItems alloc]init];
+    [FTPitems listDirectory];
+    
     NSMutableDictionary *newAttributes = [[NSMutableDictionary alloc] init];
     [newAttributes setObject:[UIFont systemFontOfSize:18] forKey:UITextAttributeFont];
     [self.navigationBar setTitleTextAttributes:newAttributes];
@@ -35,7 +40,6 @@
     [self setupTableColumn];
     
     [btnHome addTarget:self action:@selector(goHome:) forControlEvents:UIControlEventTouchUpInside];
-//    [btnPDF addTarget:self action:@selector(seePDF:) forControlEvents:UIControlEventTouchUpInside];
     
 }
 
