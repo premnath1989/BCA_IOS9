@@ -347,7 +347,7 @@ int rrr;
 				if ([[ClientProfile objectForKey:@"isEdited"] isEqualToString:@"YES"]) {
 					[[NSNotificationCenter defaultCenter] postNotificationName:@"EditProfile_Save" object:nil]; //Go to SaveToDb
 					SuccessAlert = [[UIAlertView alloc] initWithTitle:@" "
-																		   message:@"Changes have been updated successfully." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+																		   message:@"Perubahan telah diperbarui berhasil." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
 					SuccessAlert.tag = 1112;
 					[SuccessAlert show];
 				}
@@ -356,11 +356,11 @@ int rrr;
 					
 					if (![[ClientProfile objectForKey:@"Update_record"] isEqualToString:@"YES"]) {
 						SuccessAlert = [[UIAlertView alloc] initWithTitle:@" "
-																  message:@"A new client record successfully inserted." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+																  message:@"Sebuah catatan klien baru berhasil dimasukkan." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
                     }
 					else {
 						SuccessAlert = [[UIAlertView alloc] initWithTitle:@" "
-																  message:@"Changes have been updated successfully." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+																  message:@"Perubahan telah diperbarui berhasil." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
                     }
 					
 					SuccessAlert.tag = 1112;
@@ -406,7 +406,7 @@ int rrr;
     {
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"EditProfile_Save" object:nil]; //Go to SaveToDb
 		UIAlertView *SuccessAlert = [[UIAlertView alloc] initWithTitle:@" "
-															   message:@"Changes have been updated successfully." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+															   message:@"Perubahan telah diperbarui berhasil." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
 		
 		
 		SuccessAlert.tag = 1112;
@@ -607,7 +607,7 @@ int rrr;
         else
         {
             [self hideKeyboard];
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Do you want to save changes?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No",nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Anda ingin menyimpan perubahan?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No",nil];
             [alert setTag:9001];
             [alert show];
             

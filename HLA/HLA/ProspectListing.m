@@ -237,11 +237,11 @@ MBProgressHUD *HUD;
 			//cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 			if ([ProspectTableData count] == TotalData) {
                 cell.textLabel.text =@"";
-				cell.textLabel.text = @"No More records Available";
+				cell.textLabel.text = @"Tidak ada catatan lebih lanjut tersedia";
 			}
 			else {
                 cell.textLabel.text =@"";
-				cell.textLabel.text = @"Load more records...";
+				cell.textLabel.text = @"Memuat lebih banyak catatan...";
 			}
 			
 			cell.textLabel.textColor = [UIColor colorWithRed:88.0f/255.0f green:89.0f/255.0f blue:92.0f/255.0f alpha:1];
@@ -304,7 +304,7 @@ MBProgressHUD *HUD;
             int hours = (countdown / 3600) % 24;
             int days = (countdown / 86400) % 365;
             
-            NSString *DateRemaining =[NSString stringWithFormat:@"%d Days %d Hours\n %d Minutes",days1,hours,minutes];
+            NSString *DateRemaining =[NSString stringWithFormat:@"%d Hari %d Jam\n %d Menit",days1,hours,minutes];
             
             if ([dataIndex containsObject:pp.ProspectID]){
                 int indexArray = [dataIndex indexOfObject:pp.ProspectID];
@@ -1310,7 +1310,7 @@ MBProgressHUD *HUD;
     if(nametxt.text.length ==0 && txtIDTypeNo.text.length ==0 &&  [trim_group isEqualToString:@"- SELECT -"])
     {
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Search Criteria is required. Please key in one of the criteria." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Kriteria pencarian diperlukan . Silahkan memasukkan salah satu kriteria." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         
         [alert show];
         alert = nil;

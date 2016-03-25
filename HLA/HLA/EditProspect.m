@@ -1638,7 +1638,7 @@ NSMutableArray *DelGroupArr;
 		}
 		ErrMsg = @"Save Succeed";
 		
-		UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@" " message:@"Save Succeed" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+		UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@" " message:@"Simpan Sukses." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
 		[alert show];
 		[db close];
 	}
@@ -1973,7 +1973,7 @@ NSMutableArray *DelGroupArr;
     {
         [self hideKeyboard];
         UIAlertView *back_alert = [[UIAlertView alloc] initWithTitle:@" "
-                                                             message:@"Do you want to save?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+                                                             message:@"Apakah Anda ingin menyimpan?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
         back_alert.tag = 5000;
         [back_alert show];
         
@@ -5235,7 +5235,7 @@ NSMutableArray *DelGroupArr;
                     BOOL Found = NO;
                     for (NSString *existing in array) {
                         if ([str isEqualToString:existing]) {
-                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Group already exist" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil];
+                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Group sudah ada." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil];
                             [alert show];
                             
                             Found = YES;

@@ -496,7 +496,7 @@ BOOL isBusy;
 	if(delegate.isNeedPromptSaveMsg == YES && delegate.isSIExist == YES)
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
-                                                        message:@"Do you want to save changes?"
+                                                        message:@"Anda ingin menyimpan perubahan?"
                                                        delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No",nil];
         [alert setTag:9001];
         [alert show];

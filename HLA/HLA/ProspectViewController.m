@@ -3691,7 +3691,7 @@ bool RegDatehandling;
             BOOL Found = NO;
             for (NSString *existing in array) {
                 if ([str isEqualToString:existing]) {
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Group already exist" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil];
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Group sudah ada." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil];
                     [alert show];
                     Found = YES;
                     break;
