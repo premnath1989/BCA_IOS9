@@ -55,7 +55,7 @@ NSString *SelectedString;
 - (void)viewDidLoad {
     [super viewDidLoad];
     UISearchBar *zzz = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 200, 50) ];
-    
+    zzz.keyboardType=UIKeyboardTypeNumberPad;
     zzz.opaque = false;
     zzz.delegate = (id) self;
     self.tableView.tableHeaderView = zzz;

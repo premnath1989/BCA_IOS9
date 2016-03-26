@@ -1387,7 +1387,7 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
         deleteOption = 101;
         [alert show];
     } else if ((bCreated == FALSE && bConfirmed == FALSE) && (bSubmitted == TRUE || bReceived == TRUE || bFailed == TRUE || bNotCreated == TRUE)  ) {
-        NSString *deleteMsg = [NSString stringWithFormat: @"Are you sure want to delete these SI(s) ?"];
+        NSString *deleteMsg = [NSString stringWithFormat: @"Apakah anda yakin ingin menghapus SI ini ?"];
         
         UIAlertView *alert = [[UIAlertView alloc]
                               initWithTitle: NSLocalizedString(@" ",nil)

@@ -8,7 +8,9 @@
 
 #import "BranchInfo.h"
 NSString *SelectedString;
-@interface BranchInfo ()
+@interface BranchInfo (){
+    UISearchBar *zzz;
+}
 
 @end
 
@@ -78,10 +80,12 @@ NSString *SelectedString;
 -(void)viewWillAppear:(BOOL)animated{
     sorted = [[NSArray alloc]init];
     if ([_data intValue] == 0){
+        zzz.keyboardType=UIKeyboardTypeNumberPad;
         [self loadData:@"KodeCabang"];
         sorted  =  [_itemsKodeCabang sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     }
     else{
+        zzz.keyboardType=UIKeyboardTypeAlphabet;
         [self loadData:@"NamaCabang"];
         sorted  =  [_itemsNamaCabang sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     }
@@ -89,10 +93,10 @@ NSString *SelectedString;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UISearchBar *zzz = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 200, 50) ];
-    
+    zzz = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 200, 50) ];
     zzz.opaque = false;
     zzz.delegate = (id) self;
+
     self.tableView.tableHeaderView = zzz;
     CGRect searchbarFrame = zzz.frame;
     [self.tableView scrollRectToVisible:searchbarFrame animated:NO];
@@ -110,6 +114,8 @@ NSString *SelectedString;
 
 -(void)searchBar:(UISearchBar*)searchBar textDidChange:(NSString*)text
 {
+    
+    
     if (text.length == 0) {
         isFiltered = false;
         

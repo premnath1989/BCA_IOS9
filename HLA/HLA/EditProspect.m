@@ -278,7 +278,7 @@ NSMutableArray *DelGroupArr;
     outletMaritalStatus.enabled = NO;
     
     // By Benjamin Law on 17/10/2013 for bug 2584
-    outletTitle.enabled = YES;
+    //outletTitle.enabled = YES;
     outletReligion.enabled = YES;
     outletRace.enabled = YES;
     outletNationality.enabled = YES;
@@ -4443,7 +4443,7 @@ NSMutableArray *DelGroupArr;
             [btnForeignHome setImage: [UIImage imageNamed:@"emptyCheckBox.png"] forState:UIControlStateNormal];
             checked = YES;
             
-            /*txtHomeAddr1.text = @"";
+            txtHomeAddr1.text = @"";
             txtHomeAddr2.text=@"";
             txtHomeAddr3.text=@"";
             txtHomePostCode.text = @"";
@@ -4452,7 +4452,7 @@ NSMutableArray *DelGroupArr;
             _txtHomeProvince.text = @"";
             txtHomeTown.text = @"";
             txtHomeState.text = @"";
-            txtHomeCountry.text = @"";*/
+            txtHomeCountry.text = @"";
             txtHomeTown.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
             txtHomeState.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
             txtHomeCountry.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
@@ -4472,7 +4472,7 @@ NSMutableArray *DelGroupArr;
             checked = NO;
             
             self.navigationItem.rightBarButtonItem.enabled = TRUE; //ENABLE DONE BUTTON
-            /*txtHomeAddr1.text = @"";
+            txtHomeAddr1.text = @"";
             txtHomeAddr2.text = @"";
             txtHomeAddr3.text = @"";
             _txtHomeVillage.text = @"";
@@ -4480,7 +4480,8 @@ NSMutableArray *DelGroupArr;
             _txtHomeProvince.text = @"";
             txtHomePostCode.text = @"";
             txtHomeTown.text = @"";
-            txtHomeState.text = @"";*/
+            txtHomeState.text = @"";
+            [txtHomeCountry setText:@""];
             [btnHomeCountry setTitle:@"- SELECT -" forState:UIControlStateNormal];
             btnHomeCountry.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
             txtHomeTown.backgroundColor = [UIColor whiteColor];
@@ -4489,6 +4490,7 @@ NSMutableArray *DelGroupArr;
             txtHomeTown.enabled = YES;
             txtHomeState.enabled = YES;
             txtHomeCountry.hidden = NO;
+
             btnHomeCountry.hidden = YES;
             _outletKota.hidden=NO;
             _outletProvinsi.hidden=NO;
@@ -13036,6 +13038,7 @@ NSMutableArray *DelGroupArr;
 -(void)selectedKodePosText:(NSString *)selectText SenderTag:(int)senderTag{
     if (senderTag==0){
         [_txtHomeProvince setText:selectText];
+        [txtHomeTown setText:@""];
         //[_outletProvinsi setTitle:selectText forState:UIControlStateNormal];
     }
     else if (senderTag==1){
@@ -13044,12 +13047,14 @@ NSMutableArray *DelGroupArr;
     }
     else if (senderTag==2){
         [_txtOfficeProvince setText:selectText];
+        [txtOfficeTown setText:@""];
         //[_outletProvinsiOffice setTitle:selectText forState:UIControlStateNormal];
     }
     else if (senderTag==3){
         [txtOfficeTown setText:selectText];
         //[_outletKotaOffice setTitle:selectText forState:UIControlStateNormal];
     }
+
     
     [_kodePosPopover dismissPopoverAnimated:YES];
 }
