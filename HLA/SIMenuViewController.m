@@ -2795,10 +2795,22 @@ BOOL isFirstLoad;
     [cell.button2 addTarget:self action:@selector(showviewControllerFromCellView:) forControlEvents:UIControlEventTouchUpInside];
     [cell.button3 addTarget:self action:@selector(showviewControllerFromCellView:) forControlEvents:UIControlEventTouchUpInside];
     
-    if (lastIndexSelected != 2){
+    if (indexPath.row != 2){
         [cell.button1 setEnabled:false];
         [cell.button2 setEnabled:false];
         [cell.button3 setEnabled:false];
+    }
+    else{
+        if (lastIndexSelected != 2){
+            [cell.button1 setEnabled:false];
+            [cell.button2 setEnabled:false];
+            [cell.button3 setEnabled:false];
+        }
+        else{
+            [cell.button1 setEnabled:true];
+            [cell.button2 setEnabled:true];
+            [cell.button3 setEnabled:true];
+        }
     }
     
     if (([[dictionaryPOForInsert valueForKey:@"ProductName"] isEqualToString:@"BCA Life Keluargaku"])||([[dictionaryPOForInsert valueForKey:@"ProductName"] isEqualToString:@"BCA Life Keluargaku"])){
@@ -3242,6 +3254,13 @@ BOOL isFirstLoad;
         case 2:
             if ([_LAController validateSave]){
                 if (([[dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"])||([[dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"SELF"])){
+                    lastIndexSelected=2;
+                    [self loadBasicPlanPage:YES];
+                    [arrayIntValidate replaceObjectAtIndex:2 withObject:@"0"];
+                    [arrayIntValidate replaceObjectAtIndex:1 withObject:@"1"];
+                    [arrayIntValidate replaceObjectAtIndex:0 withObject:@"1"];
+                }
+                else{
                     if ([_SecondLAController validateSave]){
                         lastIndexSelected=2;
                         [self loadBasicPlanPage:YES];
@@ -3256,13 +3275,6 @@ BOOL isFirstLoad;
                         [arrayIntValidate replaceObjectAtIndex:1 withObject:@"0"];
                         [arrayIntValidate replaceObjectAtIndex:0 withObject:@"1"];
                     }
-                }
-                else{
-                    lastIndexSelected=2;
-                    [self loadBasicPlanPage:YES];
-                    [arrayIntValidate replaceObjectAtIndex:2 withObject:@"0"];
-                    [arrayIntValidate replaceObjectAtIndex:1 withObject:@"1"];
-                    [arrayIntValidate replaceObjectAtIndex:0 withObject:@"1"];
                 }
                 
             }

@@ -153,6 +153,12 @@ id dobtemp;
     ageField.layer.borderColor = [themeColour CGColor];
     ageField.layer.borderWidth = 1.0f;
     
+    [[UINavigationBar appearance] setTitleTextAttributes:@{
+                                                           NSForegroundColorAttributeName: [UIColor darkGrayColor],
+                                                           NSFontAttributeName: [UIFont fontWithName:@"BPreplay" size:20.0f]
+                                                           }];
+    
+    
     [self loadDataFromList];
 }
 
@@ -403,26 +409,35 @@ id dobtemp;
 
 #pragma mark - Data Load from listing added by faiz
 -(void)loadDataFromList{
-    _modelSIPOData = [[ModelSIPOData alloc]init];
-    NSDictionary* dictPOData=[[NSDictionary alloc]initWithDictionary:[_modelSIPOData getPO_DataFor:[self.requestSINo description]]];
-    if ([dictPOData count]!=0){
-        occuCode = [dictPOData valueForKey:@"LA_OccpCode"];
-        clientProfileID = [[dictPOData valueForKey:@"LA_ClientID"] intValue];
-        [nameField setText:[dictPOData valueForKey:@"LA_Name"]];
-        [ageField setText:[dictPOData valueForKey:@"LA_Age"]];
-        [_BtnTanggalLahir setTitle:[dictPOData valueForKey:@"LA_DOB"] forState:UIControlStateNormal];
-        [btnOccp setTitle:[dictPOData valueForKey:@"LA_Occp"] forState:UIControlStateNormal];
-        
-        sex=[[NSString alloc]initWithString:[dictPOData valueForKey:@"LA_Gender"]];
-        if ([sex isEqualToString:@"MALE"]){
-            [sexSegment setSelectedSegmentIndex:0];
+    @try {
+        _modelSIPOData = [[ModelSIPOData alloc]init];
+        NSDictionary* dictPOData=[[NSDictionary alloc]initWithDictionary:[_modelSIPOData getPO_DataFor:[self.requestSINo description]]];
+        if ([dictPOData count]!=0){
+            occuCode = [dictPOData valueForKey:@"LA_OccpCode"];
+            clientProfileID = [[dictPOData valueForKey:@"LA_ClientID"] intValue];
+            [nameField setText:[dictPOData valueForKey:@"LA_Name"]];
+            [ageField setText:[dictPOData valueForKey:@"LA_Age"]];
+            [_BtnTanggalLahir setTitle:[dictPOData valueForKey:@"LA_DOB"] forState:UIControlStateNormal];
+            [btnOccp setTitle:[dictPOData valueForKey:@"LA_Occp"] forState:UIControlStateNormal];
+            
+            sex=[[NSString alloc]initWithString:[dictPOData valueForKey:@"LA_Gender"]];
+            if ([sex isEqualToString:@"MALE"]){
+                [sexSegment setSelectedSegmentIndex:0];
+            }
+            else{
+                [sexSegment setSelectedSegmentIndex:1];
+            }
+            
+            DOB = _BtnTanggalLahir.titleLabel.text;
+            [self calculateAge];
         }
-        else{
-            [sexSegment setSelectedSegmentIndex:1];
-        }
+
+    }
+    @catch (NSException *exception) {
         
-        DOB = _BtnTanggalLahir.titleLabel.text;
-        [self calculateAge];
+    }
+    @finally {
+        
     }
 }
 
