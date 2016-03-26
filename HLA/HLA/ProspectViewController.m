@@ -341,7 +341,7 @@ bool RegDatehandling;
     self.navigationItem.leftBarButtonItem.tintColor = borderColor;
 	self.navigationItem.rightBarButtonItem.tintColor = borderColor;
     [self.navigationController.navigationBar setTitleTextAttributes:
-     @{NSForegroundColorAttributeName:[UIColor colorWithRed:88.0f/255.0f green:89.0f/255.0f blue:92.0f/255.0f alpha:1]}];
+     @{NSForegroundColorAttributeName:[UIColor colorWithRed:88.0f/255.0f green:89.0f/255.0f blue:92.0f/255.0f alpha:1],NSFontAttributeName: [UIFont fontWithName:@"BPreplay" size:17.0f]}];
 
     
     NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];

@@ -154,8 +154,8 @@ id dobtemp;
     ageField.layer.borderWidth = 1.0f;
     
     [[UINavigationBar appearance] setTitleTextAttributes:@{
-                                                           NSForegroundColorAttributeName: [UIColor darkGrayColor],
-                                                           NSFontAttributeName: [UIFont fontWithName:@"BPreplay" size:20.0f]
+                                                           NSForegroundColorAttributeName: [UIColor colorWithRed:88.0f/255.0f green:89.0f/255.0f blue:92.0f/255.0f alpha:1],
+                                                           NSFontAttributeName: [UIFont fontWithName:@"BPreplay" size:17.0f]
                                                            }];
     
     
@@ -864,7 +864,7 @@ id dobtemp;
 //            [self deleteLA];
             clientProfileID = [aaIndex intValue];
             nameField.enabled = NO;
-            nameField.backgroundColor = [UIColor lightGrayColor];
+//            nameField.backgroundColor = [UIColor lightGrayColor];
             nameField.textColor = [UIColor darkGrayColor];
             sexSegment.enabled = NO;
             

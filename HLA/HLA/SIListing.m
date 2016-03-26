@@ -132,8 +132,8 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
 //    txtSINO.clearButtonMode = UITextFieldViewModeWhileEditing;
 //    txtLAName.clearButtonMode = UITextFieldViewModeWhileEditing;
     [[UINavigationBar appearance] setTitleTextAttributes:@{
-                                                           NSForegroundColorAttributeName: [UIColor darkGrayColor],
-                                                           NSFontAttributeName: [UIFont fontWithName:@"BPreplay" size:20.0f]
+                                                           NSForegroundColorAttributeName: [UIColor colorWithRed:88.0f/255.0f green:89.0f/255.0f blue:92.0f/255.0f alpha:1],
+                                                           NSFontAttributeName: [UIFont fontWithName:@"BPreplay" size:17.0f]
                                                            }];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];

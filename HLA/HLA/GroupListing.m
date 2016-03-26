@@ -652,7 +652,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	[UDGroup setObject:@"Edit Group" forKey:@"GroupTitle"];
-	
+
+    
     if ([self.myTableView isEditing] == TRUE ) {
         BOOL gotRowSelected = FALSE;
         
@@ -688,7 +689,7 @@
 		NgroupPage.modalPresentationStyle = UIModalPresentationFormSheet;
 		
 		[UDGroup setObject:@"Edit Group" forKey:@"GroupTitle"];
-		
+        
 		if (!isFiltered) {
 			NgroupPage.data = [[itemInArray objectAtIndex:indexPath.row] copy];
 		}

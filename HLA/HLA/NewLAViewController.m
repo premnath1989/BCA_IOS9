@@ -1,6 +1,6 @@
 //
 //  NewLAViewController.m
-//  HLA
+//  MPOS
 //
 //  Created by shawal sapuan on 7/30/12.
 //  Copyright (c) 2012 InfoConnect Sdn Bhd. All rights reserved.
@@ -82,8 +82,15 @@ id dobtanngal;
     btnProspect.enabled = NO;
     
     NSMutableDictionary *newAttributes = [[NSMutableDictionary alloc] init];
-    [newAttributes setObject:[UIFont systemFontOfSize:18] forKey:UITextAttributeFont];
-    [self.navigationBar setTitleTextAttributes:newAttributes];
+//    [newAttributes setObject:[UIFont systemFontOfSize:17] forKey:UITextAttributeFont];
+//    [self.navigationBar setTitleTextAttributes:newAttributes];
+
+    [[UINavigationBar appearance] setTitleTextAttributes:@{
+                                                           NSForegroundColorAttributeName: [UIColor colorWithRed:88.0f/255.0f green:89.0f/255.0f blue:92.0f/255.0f alpha:1],
+                                                           NSFontAttributeName: [UIFont fontWithName:@"BPreplay" size:17.0f]
+                                                           }];
+    
+    
     
     NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docsDir = [dirPaths objectAtIndex:0];
