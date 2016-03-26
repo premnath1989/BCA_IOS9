@@ -64,6 +64,8 @@
 	
 	int clickDone;		//if user click done, = 1
     UIColor *borderColor;
+    
+    BOOL duplicateOK;
 }
 
 @end
@@ -156,6 +158,8 @@ bool RegDatehandling;
     [_outletProvinsiOffice setTag:2];
     [_outletKota setTag:1];
     [_outletKotaOffice setTag:3];
+    
+    duplicateOK = NO;
     
     borderColor=[[UIColor alloc]initWithRed:250.0/255.0 green:175.0/255.0 blue:50.0/255.0 alpha:1.0];
     
@@ -647,16 +651,28 @@ bool RegDatehandling;
     [alert show];
 }
 
+- (void)createAlertTwoOptionViewAndShow:(NSString *)message tag:(int)alertTag{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
+                                                    message:[NSString stringWithFormat:@"%@",message] delegate:self cancelButtonTitle:@"Edit" otherButtonTitles:@"Simpan sebagai nasabah baru", nil];
+    alert.tag = alertTag;
+    [alert show];
+}
+
 - (bool)validationDuplicate{
-    bool valid=true;
-
-    NSString *validationDuplicate=@"Data Nasabah sudah ada";
-
-    if (![[modelProspectProfile checkDuplicateData:txtFullName.text Gender:gender DOB:outletDOB.titleLabel.text] isEqualToString:@"(null)"]){
-        [self createAlertViewAndShow:validationDuplicate tag:18];
-        return false;
+    if (duplicateOK == YES){
+        return true;
     }
-    return valid;
+    else{
+        bool valid=true;
+        
+        NSString *validationDuplicate=@"Data Nasabah sudah ada";
+        
+        if (![[modelProspectProfile checkDuplicateData:txtFullName.text Gender:gender DOB:outletDOB.titleLabel.text] isEqualToString:@"(null)"]){
+            [self createAlertTwoOptionViewAndShow:validationDuplicate tag:18];
+            return false;
+        }
+        return valid;
+    }
 }
 
 
@@ -3645,17 +3661,23 @@ bool RegDatehandling;
         [self.navigationController popViewControllerAnimated:YES];
     }
     else if(alertView.tag == 18) {
-        [self resignFirstResponder];
-        [self.view endEditing:YES];
-        [CATransaction begin];
-        [CATransaction setCompletionBlock:^{
-            // handle completion here
-            if (_delegate != Nil) {
-                [_delegate selectDataForEdit:[modelProspectProfile checkDuplicateData:txtFullName.text Gender:gender DOB:outletDOB.titleLabel.text]];
-            }
-        }];
-        [self.navigationController popViewControllerAnimated:YES];
-        [CATransaction commit];
+        if (buttonIndex==0){
+            [self resignFirstResponder];
+            [self.view endEditing:YES];
+            [CATransaction begin];
+            [CATransaction setCompletionBlock:^{
+                // handle completion here
+                if (_delegate != Nil) {
+                    [_delegate selectDataForEdit:[modelProspectProfile checkDuplicateData:txtFullName.text Gender:gender DOB:outletDOB.titleLabel.text]];
+                }
+            }];
+            [self.navigationController popViewControllerAnimated:YES];
+            [CATransaction commit];
+        }
+        else{
+            duplicateOK = YES;
+            [self btnSave];
+        }
     }
     else if(alertView.tag == 80) {
         [txtFullName becomeFirstResponder];
