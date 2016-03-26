@@ -14191,34 +14191,36 @@ NSMutableArray *DelGroupArr;
 {
     txtAnnIncome.text = [txtAnnIncome.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     txtAnnIncome.text = [txtAnnIncome.text stringByReplacingOccurrencesOfString:@"," withString:@""];
-    txtAnnIncome.text = [txtAnnIncome.text stringByTrimmingCharactersInSet:
-                         [NSCharacterSet whitespaceCharacterSet]];
+    txtAnnIncome.text = [txtAnnIncome.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     
     NSString *result;
     
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc]init];
     [formatter setLocale:[NSLocale localeWithLocaleIdentifier:@"in_ID"]];
-    [formatter setMaximumFractionDigits:2];
+    [formatter setMaximumFractionDigits:0];
     [formatter setUsesGroupingSeparator:YES];
     [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
     
-    double entryFieldFloat = [txtAnnIncome.text doubleValue];
+    NSNumber *myNumber = [formatter numberFromString:txtAnnIncome.text];
+    result = [formatter stringFromNumber:myNumber];
     
-    if ([txtAnnIncome.text rangeOfString:@".00"].length == 3) {
-        formatter.alwaysShowsDecimalSeparator = YES;
-        result =[formatter stringFromNumber:[NSNumber numberWithDouble:entryFieldFloat]];
-        result = [result stringByAppendingFormat:@"00"];
-        
-    }
-    else  if ([txtAnnIncome.text rangeOfString:@"."].length == 1) {
-        formatter.alwaysShowsDecimalSeparator = YES;
-        result =[formatter stringFromNumber:[NSNumber numberWithDouble:entryFieldFloat]];
-    }
-    else if ([txtAnnIncome.text rangeOfString:@"."].length != 1) {
-        formatter.alwaysShowsDecimalSeparator = NO;
-        result =[formatter stringFromNumber:[NSNumber numberWithDouble:entryFieldFloat]];
-        result = [result stringByAppendingFormat:@".00"];
-    }
+    /*double entryFieldFloat = [txtAnnIncome.text doubleValue];
+     
+     if ([txtAnnIncome.text rangeOfString:@".00"].length == 3) {
+     formatter.alwaysShowsDecimalSeparator = YES;
+     result =[formatter stringFromNumber:[NSNumber numberWithDouble:entryFieldFloat]];
+     result = [result stringByAppendingFormat:@"00"];
+     
+     } else  if ([txtAnnIncome.text rangeOfString:@"."].length == 1) {
+     formatter.alwaysShowsDecimalSeparator = YES;
+     result =[formatter stringFromNumber:[NSNumber numberWithDouble:entryFieldFloat]];
+     
+     } else if ([txtAnnIncome.text rangeOfString:@"."].length != 1) {
+     formatter.alwaysShowsDecimalSeparator = NO;
+     result =[formatter stringFromNumber:[NSNumber numberWithDouble:entryFieldFloat]];
+     result = [result stringByAppendingFormat:@".00"];
+     
+     }*/
     
     annualIncome_original = txtAnnIncome.text;
     

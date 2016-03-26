@@ -2119,11 +2119,14 @@ bool RegDatehandling;
     
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc]init];
     [formatter setLocale:[NSLocale localeWithLocaleIdentifier:@"in_ID"]];
-    [formatter setMaximumFractionDigits:2];
+    [formatter setMaximumFractionDigits:0];
     [formatter setUsesGroupingSeparator:YES];
     [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
     
-    double entryFieldFloat = [txtAnnIncome.text doubleValue];
+    NSNumber *myNumber = [formatter numberFromString:txtAnnIncome.text];
+    result = [formatter stringFromNumber:myNumber];
+
+    /*double entryFieldFloat = [txtAnnIncome.text doubleValue];
     
     if ([txtAnnIncome.text rangeOfString:@".00"].length == 3) {
         formatter.alwaysShowsDecimalSeparator = YES;
@@ -2139,7 +2142,7 @@ bool RegDatehandling;
         result =[formatter stringFromNumber:[NSNumber numberWithDouble:entryFieldFloat]];
         result = [result stringByAppendingFormat:@".00"];
         
-    }
+    }*/
     
     annualIncome_original = txtAnnIncome.text;
     

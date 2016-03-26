@@ -162,7 +162,8 @@ NSString *SelectedString;
         } else if ([[FilteredClass objectAtIndex:indexPath.row] isEqualToString:@"99"]) {
             cell.textLabel.text = [NSString stringWithFormat:@"%@ (%@)", [FilteredData objectAtIndex:indexPath.row], @"D"];
         } else {
-            cell.textLabel.text = [NSString stringWithFormat:@"%@ (%@)", [FilteredData objectAtIndex:indexPath.row], [FilteredClass objectAtIndex:indexPath.row]];
+            //cell.textLabel.text = [NSString stringWithFormat:@"%@ (%@)", [FilteredData objectAtIndex:indexPath.row], [FilteredClass objectAtIndex:indexPath.row]];
+            cell.textLabel.text = [NSString stringWithFormat:@"%@", [FilteredData objectAtIndex:indexPath.row]];
         }
         
         if ([FilteredData objectAtIndex:indexPath.row] == SelectedString) {
