@@ -1774,7 +1774,6 @@ bool WPTPD30RisDeleted = FALSE;
 -(void)loadDataFromList{
     _modelSIPremium = [[Model_SI_Premium alloc]init];
     NSDictionary* dictPremiData=[[NSDictionary alloc]initWithDictionary:[_modelSIPremium getPremium_For:[self.requestSINo description]]];
-    
     if ([dictPremiData count]!=0){
         premiType = @"S";
         [yearlyIncomeField setText:[dictPremiData valueForKey:@"Sum_Assured"]];

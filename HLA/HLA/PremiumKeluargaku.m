@@ -38,6 +38,7 @@
 
 - (void) updatePremiLabel{
     LoginDBManagement *DBclass = [[LoginDBManagement alloc]init];
+    
     NSMutableDictionary *tempResult = [DBclass premiKeluargaku:SINO];
     NSLog(@"Premi Payment term : %@", [tempResult valueForKey:@"Payment_Frequency"]);
     NSString *PaymentFreq = [tempResult valueForKey:@"Payment_Frequency"];

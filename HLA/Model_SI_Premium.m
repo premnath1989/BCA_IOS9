@@ -10,6 +10,7 @@
 
 
 @implementation Model_SI_Premium
+
 -(void)savePremium:(NSDictionary *)dataPremium{
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
