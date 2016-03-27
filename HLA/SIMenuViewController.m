@@ -88,6 +88,9 @@ BOOL isFirstLoad;
     _modelSIMaster = [[Model_SI_Master alloc]init];
     _modelSIRider = [[ModelSIRider alloc]init];
     
+    self.RiderController = [self.storyboard instantiateViewControllerWithIdentifier:@"RiderView"];
+    _RiderController.delegate = self;
+    
     dictionaryPOForInsert = [[NSMutableDictionary alloc]init];
     
     [self.view setBackgroundColor:[UIColor darkGrayColor]];
@@ -3120,18 +3123,17 @@ BOOL isFirstLoad;
         [self.RightView bringSubviewToFront:_PremiumController.view];
     }
     else{
-        if (!_RiderController){
-            self.RiderController = [self.storyboard instantiateViewControllerWithIdentifier:@"RiderView"];
-            _RiderController.delegate = self;
+        if(![self.RiderController.view isDescendantOfView:self.RightView]) {
             [_RiderController setDictionaryPOForInsert:dictionaryPOForInsert];
             [_RiderController setDictionaryForBasicPlan:newDictionaryForBasicPlan];
             [_RiderController setElementActive];
             [self.RightView addSubview:self.RiderController.view];
+        } else {
+            [_RiderController setDictionaryPOForInsert:dictionaryPOForInsert];
+            [_RiderController setDictionaryForBasicPlan:newDictionaryForBasicPlan];
+            [_RiderController setElementActive];
+            [self.RightView bringSubviewToFront:self.RiderController.view];
         }
-        [_RiderController setDictionaryPOForInsert:dictionaryPOForInsert];
-        [_RiderController setDictionaryForBasicPlan:newDictionaryForBasicPlan];
-        [_RiderController setElementActive];
-        [self.RightView bringSubviewToFront:self.RiderController.view];
         [_RiderController calculateRiderPremi];
     }
     
