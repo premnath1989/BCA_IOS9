@@ -5064,7 +5064,7 @@ NSMutableArray *DelGroupArr;
             for (int i=0; i<[arrayTxtHome count]; i++){
                 UITextField *textField = (UITextField *)[arrayTxtHome objectAtIndex:i];
                 if ([textField.text length]>0){
-                    [txtHomeCountry setText:@"Indonesia"];
+                    [txtHomeCountry setText:@"INDONESIA"];
                     return;
                 }
                 else{
@@ -5079,7 +5079,7 @@ NSMutableArray *DelGroupArr;
             for (int i=0; i<[arrayTxtOffice count]; i++){
                 UITextField *textField = (UITextField *)[arrayTxtOffice objectAtIndex:i];
                 if ([textField.text length]>0){
-                    [txtOfficeCountry setText:@"Indonesia"];
+                    [txtOfficeCountry setText:@"INDONESIA"];
                     return;
                 }
                 else{
