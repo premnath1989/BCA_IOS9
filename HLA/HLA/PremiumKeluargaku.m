@@ -65,13 +65,13 @@
         lblPremiNumTahun.text = [tempResult valueForKey:@"ExtraPremiumSum"];
         lblDiscountTahun.text = [tempResult valueForKey:@"Discount"];
         lblSubTotalTahun.text = [tempResult valueForKey:@"TotalPremiumLoading"];
-        lblTotalTahun.text = [tempResult valueForKey:@"SubTotalPremium"];
+        lblTotalTahun.text = [tempResult valueForKey:@"TotalPremiumLoading"];
         
         lblMDBKKTahun.text = [DBclass RiderCode:SINO riderCode:@"MDBKK"];
         lblMDKKTahun.text = [DBclass RiderCode:SINO riderCode:@"MDKK"];
         lblBPTahun.text = [DBclass RiderCode:SINO riderCode:@"BP"];
         
-    }else if([PaymentFreq caseInsensitiveCompare:@"Semesteran"] == NSOrderedSame){lblPremiPercentageTahun.text = @""; lblPremiPercentageKuartal.text = @"";
+    }else if([PaymentFreq caseInsensitiveCompare:@"Semester"] == NSOrderedSame){lblPremiPercentageTahun.text = @""; lblPremiPercentageKuartal.text = @"";
         lblPremiPercentageBulan.text = @""; lblPremiNumTahun.text = @"";
         lblPremiNumKuartal.text = @""; lblPremiNumBulan.text = @"";
         lblDiscountTahun.text = @""; lblDiscountKuartal.text = @"";
@@ -84,6 +84,7 @@
         lblTotalTahun.text = @""; lblTotalKuartal.text = @"";
         lblTotalBulan.text = @""; lblBPTahun.text = @"";
         lblBPKuartal.text = @""; lblBPBulan.text = @"";
+        lblAsuransiDasarKuartal.text = @""; lblAsuransiDasarBulan.text = @"";
 
         
         lblAsuransiDasarSemester.text = [tempResult valueForKey:@"PremiumPolicyA"];
@@ -92,13 +93,13 @@
         lblPremiNumSemester.text = [tempResult valueForKey:@"ExtraPremiumSum"];
         lblDiscountSemester.text = [tempResult valueForKey:@"Discount"];
         lblSubTotalSemester.text = [tempResult valueForKey:@"TotalPremiumLoading"];
-        lblTotalSemester.text = [tempResult valueForKey:@"SubTotalPremium"];
+        lblTotalSemester.text = [tempResult valueForKey:@"TotalPremiumLoading"];
         
         lblMDBKKSemester.text = [DBclass RiderCode:SINO riderCode:@"MDBKK"];
         lblMDKKSemester.text = [DBclass RiderCode:SINO riderCode:@"MDKK"];
         lblBPSemester.text = [DBclass RiderCode:SINO riderCode:@"BP"];
         
-    }else if([PaymentFreq caseInsensitiveCompare:@"Kuartalan"] == NSOrderedSame){
+    }else if([PaymentFreq caseInsensitiveCompare:@"Kuartal"] == NSOrderedSame){
         
         lblAsuransiDasarTahun.text = @""; lblAsuransiDasarSemester.text = @"";
         lblAsuransiDasarBulan.text = @""; lblOccpTahun.text = @"";
@@ -123,7 +124,7 @@
         lblPremiNumKuartal.text = [tempResult valueForKey:@"ExtraPremiumSum"];
         lblDiscountKuartal.text = [tempResult valueForKey:@"Discount"];
         lblSubTotalKuartal.text = [tempResult valueForKey:@"TotalPremiumLoading"];
-        lblTotalKuartal.text = [tempResult valueForKey:@"SubTotalPremium"];
+        lblTotalKuartal.text = [tempResult valueForKey:@"TotalPremiumLoading"];
         
         lblMDBKKKuartal.text = [DBclass RiderCode:SINO riderCode:@"MDBKK"];
         lblMDKKKuartal.text = [DBclass RiderCode:SINO riderCode:@"MDKK"];
@@ -154,7 +155,7 @@
         lblPremiNumBulan.text = [tempResult valueForKey:@"ExtraPremiumSum"];
         lblDiscountBulan.text = [tempResult valueForKey:@"Discount"];
         lblSubTotalBulan.text = [tempResult valueForKey:@"TotalPremiumLoading"];
-        lblTotalBulan.text = [tempResult valueForKey:@"SubTotalPremium"];
+        lblTotalBulan.text = [tempResult valueForKey:@"TotalPremiumLoading"];
         
         lblMDBKKBulan.text = [DBclass RiderCode:SINO riderCode:@"MDBKK"];
         lblMDKKBulan.text = [DBclass RiderCode:SINO riderCode:@"MDKK"];
