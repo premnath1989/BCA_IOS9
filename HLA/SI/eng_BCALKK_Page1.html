@@ -16,6 +16,15 @@
             thead,table-Summary1 {
                 border: 1px solid black;
             }
+       td {
+           border-style: solid;
+           border-color: black;
+           border-width: 0px;
+           padding: 0px 0px 0px 0px;
+           text-align: justify;
+           font-size:10px;
+           font-family: "Helvetica"
+       }       
             td.one {
                 border-style: solid;
                 border-color: black;
@@ -44,17 +53,20 @@
             }
 
             p {
-                font-size:10px;
+                font-size: 10px;
                 padding: 0px 0px 0px 0px;
             }
             z {
-                font-size:10px;
+                font-size: 10px;
                 padding: 0px 0px 0px 0px;
             }
-            header1 {
-                font-size:18px;
-                padding: 0px 0px 0px 0px;
+            header2 {
+           font-size: 18px;
+           padding: 0px 0px 0px 0px;
+           font-family: "Helvetica"
             }
+       
+       
             footer1 {
                 width:100%;
                 position: absolute;
@@ -279,11 +291,11 @@
                     
                     <table border="0" style="border-collapse:separate;border:0px solid black;width:100%;">
                         <tr>
-                            <td style="width: 25%"><img src="LogoBCALife.jpg" height="55px"/></td>
+                            <td style="width: 25%"><img src="BCAHTMLlogo.png" height="55px"/></td>
                             <td style="width: 45%" valign="top">
                                 <table  style="border-collapse:separate;border:1px solid black;width:100%;font-size:11px;text-align: center">
                                     <tr>
-                                        <td style="font-size:11px;font-family: helvetical; text-align: center">
+                                        <td style="font-size:10px;font-family: Helvetica; text-align: center">
                                             Kecuali dinyatakan lain, ilustrasi ini bukan merupakan kontrak asuransi
                                         </td>
                                     </tr>
@@ -291,8 +303,8 @@
                                 </table>
                             </td>
                             <td style="width: 30%; font-size:13px;font-family:Helvetica; text-align: right" valign="top" style="margin:0" >
-                                <header1>BCA Life Keluargaku"</header1></br>
-                                <font color="red">Nomor Ilustrasi :</font> <font color="red"><label id="SINumber1"></label></font>
+                                <header2>BCA Life Keluargaku</header2></br>
+                                <font color="red">Nomor Ilustrasi : <label id="SINumber1">16011813027</label></font>
                             </td>
                             
                         </tr>
@@ -302,10 +314,10 @@
                 <div class="main-content">
                     <table style="border-collapse:separate;border:0px solid black;width:100%;" >
                         <tr>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;">Tanggal Pembuatan Ilustrasi</td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 20%;">Tanggal Pembuatan Ilustrasi</td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;">: <label id="SIDate">:</label></td>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;">Uang Pertanggungan</td>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;">: <label id="SumAssured"></label></td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 17%;">Uang Pertanggungan</td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 38%;">: <label id="SumAssured"></label></td>
                         </tr>
                         <tr>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; ">Calon Pemegang Polis</td>
@@ -326,10 +338,10 @@
                             <td style="text-align:left;padding: 0px 0px 0px 0px; ">: <label id="ExtraPremi"></label></td>
                         </tr>
                         <tr>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;">Jenis Kelamin Pemegang Polis</td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 20%;">Jenis Kelamin Pemegang Polis</td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;">: <label id="POGender">:</label></td>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;">Extra Occupation</td>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;">: <label id="ExtraOccupation">:</label></td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 17%;">Extra Occupation</td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 38%;">: <label id="ExtraOccupation">:</label></td>
                         </tr>
                         <tr>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; ">Calon Tertanggung</td>
@@ -350,10 +362,10 @@
                             <td style="text-align:left;padding: 0px 0px 0px 0px; ">: <label id="SIDiscount">:</label></td>
                         </tr>
                         <tr>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;">Jenis Kelamin Tertanggung</td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 20%;">Jenis Kelamin Tertanggung</td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;">: <label id="LAGender">:</label></td>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;"></td>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;"></td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 17%;"></td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 38%;"></td>
                         </tr>
                         <tr>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; ">Pemegang Polis = tertanggung</td>
@@ -375,8 +387,8 @@
                         <tr>
                             <td style="width: 25%;text-align: center"><u>Manfaat</u></td>
                             <td style="width: 25%;text-align: center"><u>Uang Pertanggungan</u></td>
-                            <td style="width: 25%;text-align: center"><u>Biaya Premi per Bulan</u></td>
-                            <td style="width: 25%;text-align: center"><u>Extra Premi per Bulan (jika ada)</u></td>
+                            <td style="width: 20%;text-align: center"><u>Biaya Premi per Bulan</u></td>
+                            <td style="width: 30%;text-align: center"><u>Extra Premi per Bulan (jika ada)</u></td>
                         </tr>
                         <tr>
                             <td style="text-align: left">Meninggal Dunia</td>
@@ -469,7 +481,7 @@
                     </table>
                     
                     <!--520,430px-->
-                    <div style="width:100%;background-color: #fff;vertical-align: top;">
+					<div style="width:100%;background-color: #fff;vertical-align: top;font-size:10px;font-family: Helvetica;">
                         <b><z>Ringkasan Manfaat</z></b>
                         <br/>
                         <z>Untuk keperluan ilustrasi, penjelasan lengkap mengenai Manfaat Asuransi (termasuk syarat-syarat dan pengecualian-pengecualian) tercantum dalam Polis, berlaku dan mengikat.</z>
@@ -568,8 +580,8 @@
                                         <td>Saya telah memahami dan menyetujui penjelasan yang diberikan atas ilustrasi manfaat asuransi yang diuraikan pada halaman ini.</td>
                                     </tr>
                                     
-                                    <tr align="right">
-                                        <td>Tanda Tangan Pemegang Polis :</td>
+                                    <tr>
+                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tanda Tangan Pemegang Polis :</td>
                                     </tr>
                                     
                                     <tr>
