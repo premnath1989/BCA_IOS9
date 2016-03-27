@@ -312,72 +312,92 @@
                 </div>
                 <div id="maincontainer">
                 <div class="main-content">
-                    <table style="border-collapse:separate;border:0px solid black;width:100%;" >
-                        <tr>
+                    <table style="border-collapse:separate;border:0px solid black;width:100%; border-spacing:0;" >
+                        <tr style="height:17px;">
                             <td style="text-align:left;padding: 0px 0px 0px 0px; width: 20%;">Tanggal Pembuatan Ilustrasi</td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;">: <label id="SIDate">:</label></td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; width: 17%;">Uang Pertanggungan</td>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 38%;">: <label id="SumAssured"></label></td>
-                        </tr>
-                        <tr>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 19%;">: <label id="SumAssured"></label></td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 19%;"></td>
+						</tr>
+                        <tr style="height:17px;">
                             <td style="text-align:left;padding: 0px 0px 0px 0px; ">Calon Pemegang Polis</td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; ">: <label id="POName">:</label></td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; ">Cara Bayar Premi</td>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; ">:</td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; ">: <label id="CaraBayarPremi"></label></td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; "> </td>
+
                         </tr>
-                        <tr>
+                        <tr style="height:17px;">
                             <td style="text-align:left;padding: 0px 0px 0px 0px; ">Tanggal Lahir Pemegang Polis</td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; ">: <label id="PODOB">:</label></td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; ">Loading</td>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; ">: <label id="Loading">:</label></td>
+                            <td style="text-align:center;padding: 0px 0px 0px 0px; border: 1px solid black; border-spacing:0; "> Calon Tertanggung </td>
+                            <td style="text-align:center;padding: 0px 0px 0px 0px; border: 1px solid black; border-spacing:0; ">Calon Pemegang Polis </td>
                         </tr>
-                        <tr>
+                        <tr style="height:17px;">
                             <td style="text-align:left;padding: 0px 0px 0px 0px; ">Usia Pemegang Polis</td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; ">: <label id="POAge">:</label></td>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; ">Extra Premi</td>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; ">: <label id="ExtraPremi"></label></td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; ">Extra Premi </td>
+                            <td style="text-align:right;padding: 0px 0px 0px 0px; border: 1px solid black; border-spacing:0;"><label id="ExtraPremiPercentLA">0</label>%</td>
+                            <td style="text-align:right;padding: 0px 0px 0px 0px; border: 1px solid black; border-spacing:0;"><label id="ExtraPremiPercentPO">0</label>%</td>
+
                         </tr>
-                        <tr>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 20%;">Jenis Kelamin Pemegang Polis</td>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;">: <label id="POGender">:</label></td>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 17%;">Extra Occupation</td>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 38%;">: <label id="ExtraOccupation">:</label></td>
+                        <tr style="height:17px;">
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; ">Jenis Kelamin Pemegang Polis</td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; ">: <label id="POGender">:</label></td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; ">Extra Occupation</td>
+                            <td style="text-align:right;padding: 0px 0px 0px 0px; border: 1px solid black; border-spacing:0;"><label id="ExtraPremiPerMilLA">0</label>&#8240</td>
+                            <td style="text-align:right;padding: 0px 0px 0px 0px; border: 1px solid black; border-spacing:0;"><label id="ExtraPremiPerMilPO">0</label>&#8240</td>
+
                         </tr>
-                        <tr>
+                        <tr style="height:17px;">
                             <td style="text-align:left;padding: 0px 0px 0px 0px; ">Calon Tertanggung</td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; ">: <label id="LAName">:</label></td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; ">Masa Extra Premi</td>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; ">: <label id="MasaExtraPremi">:</label></td>
+                            <td style="text-align:right;padding: 0px 0px 0px 0px; border: 1px solid black; border-spacing:0;"><label id="MasaExtraPremiLA"></label></td>
+                            <td style="text-align:right;padding: 0px 0px 0px 0px; border: 1px solid black; border-spacing:0;"><label id="MasaExtraPremiPO"></label></td>
+
                         </tr>
-                        <tr>
+                        <tr style="height:17px;">
                             <td style="text-align:left;padding: 0px 0px 0px 0px; ">Tanggal Lahir Tertanggung</td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; ">: <label id="LADOB">:</label></td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; ">Premi Dibayar</td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; ">: <label id="PremiDibayar">:</label></td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; "> </td>
+
                         </tr>
-                        <tr>
+                        <tr style="height:17px;">
                             <td style="text-align:left;padding: 0px 0px 0px 0px; ">Usia Tertanggung</td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; ">: <label id="LAAge">:</label></td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; ">Diskon Premi</td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; ">: <label id="SIDiscount">:</label></td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; "> </td>
+
                         </tr>
-                        <tr>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 20%;">Jenis Kelamin Tertanggung</td>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;">: <label id="LAGender">:</label></td>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 17%;"></td>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 38%;"></td>
+                        <tr style="height:17px;">
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; ">Jenis Kelamin Tertanggung</td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; ">: <label id="LAGender">:</label></td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; "></td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; "></td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; "> </td>
+
                         </tr>
-                        <tr>
+                        <tr style="height:17px;">
                             <td style="text-align:left;padding: 0px 0px 0px 0px; ">Pemegang Polis = tertanggung</td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; ">: <label id="SelfRelation">:</label></td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; ">Total Premi Dibayar</td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; ">: <label id="TotalPremi">:</label></td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; "> </td>
+
                         </tr>
-                        <tr>
+                        <tr style="height:17px;">
                             <td style="text-align:left;padding: 0px 0px 0px 0px; ">Masa Asuransi/Pembayaran Premi</td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; "><label>:10</label></td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; "></td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; "></td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; "> </td>
+
                         </tr>
 
                     </table>

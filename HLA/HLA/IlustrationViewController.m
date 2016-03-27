@@ -840,7 +840,24 @@
     else{
         sexPO=@"Wanita";
     }
-
+    NSString* RelWithLA = [_dictionaryPOForInsert valueForKey:@"RelWithLA"];
+    
+    NSString *javaScriptP1H20;
+    NSString *javaScriptP1H21;
+    NSString *javaScriptP1H22;
+    if(([RelWithLA isEqualToString:@"DIRI SENDIRI"])||([RelWithLA isEqualToString:@"SELF"]))
+    {
+        javaScriptP1H20=[NSString stringWithFormat:@"document.getElementById('ExtraPremiPercentLA').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"ExtraPremiumPercentage"]];
+        javaScriptP1H21=[NSString stringWithFormat:@"document.getElementById('ExtraPremiPerMilLA').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"ExtraPremiumSum"]];
+        javaScriptP1H22=[NSString stringWithFormat:@"document.getElementById('MasaExtraPremiLA').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"ExtraPremiumTerm"]];
+    }
+    else{
+        javaScriptP1H20=[NSString stringWithFormat:@"document.getElementById('ExtraPremiPercentPO').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"ExtraPremiumPercentage"]];
+        javaScriptP1H21=[NSString stringWithFormat:@"document.getElementById('ExtraPremiPerMilPO').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"ExtraPremiumSum"]];
+        javaScriptP1H22=[NSString stringWithFormat:@"document.getElementById('MasaExtraPremiPO').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"ExtraPremiumTerm"]];
+    }
+    
+    
         NSString *javaScript = [NSString stringWithFormat:@"document.getElementById('SINumber1').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"SINO"]];
         NSString *javaScriptP1H2=[NSString stringWithFormat:@"document.getElementById('POName').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"PO_Name"]];
         NSString *javaScriptP1H3=[NSString stringWithFormat:@"document.getElementById('PODOB').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"PO_DOB"]];
@@ -852,6 +869,7 @@
         NSString *javaScriptP1H15=[NSString stringWithFormat:@"document.getElementById('LAGender').innerHTML =\"%@\";", sexLA];
         NSString *javaScriptP1H16=[NSString stringWithFormat:@"document.getElementById('SelfRelation').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"LA_Name"]];
         NSString *javaScriptP1H18=[NSString stringWithFormat:@"document.getElementById('SIDate').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"SIDate"]];
+
     
         NSNumber *myNumber = [formatter convertNumberFromString:[_dictionaryForBasicPlan valueForKey:@"Sum_Assured"]];
         NSString *javaScriptP1H14=[NSString stringWithFormat:@"document.getElementById('SIDiscount').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"Discount"]];
@@ -862,6 +880,8 @@
         NSString *javaScriptP1H8=[NSString stringWithFormat:@"document.getElementById('ExtraOccupation').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"LA_Name"]];
         NSString *javaScriptP1H10=[NSString stringWithFormat:@"document.getElementById('MasaExtraPremi').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"ExtraPremiumTerm"]];
         NSString *javaScriptP1H12=[NSString stringWithFormat:@"document.getElementById('PremiDibayar').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"PremiumPolicyA"]];
+        NSString *javaScriptP1H19=[NSString stringWithFormat:@"document.getElementById('CaraBayarPremi').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"Payment_Frequency"]];
+
     
         NSString *javaScriptP1T1=[NSString stringWithFormat:@"document.getElementById('SumAssuredMDBKK').innerHTML =\"%@\";", [formatter stringToCurrencyDecimalFormatted:[dictMDBKK valueForKey:@"SumAssured"]]];
         NSString *javaScriptP1T2=[NSString stringWithFormat:@"document.getElementById('MDBKKPremi').innerHTML =\"%@\";", [formatter stringToCurrencyDecimalFormatted:[dictMDBKK valueForKey:@"PremiRp"]]];
@@ -895,6 +915,10 @@
         [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1H16];
         [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1H17];
         [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1H18];
+        [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1H19];
+        [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1H20];
+        [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1H21];
+        [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1H22];
     
         [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1T1];
         [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1T2];
