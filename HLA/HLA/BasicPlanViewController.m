@@ -515,7 +515,7 @@ bool WPTPD30RisDeleted = FALSE;
     {
         if([PlanType isEqualToString:@"BCA Life Keluargaku"])
         {
-            [self MeninggalDuniaMDBKK];
+            //[self MeninggalDuniaMDBKK];
         }
         else
         {
@@ -530,7 +530,7 @@ bool WPTPD30RisDeleted = FALSE;
         
         if([PlanType isEqualToString:@"BCA Life Keluargaku"])
         {
-            [self MeninggalDuniaMDBKK];
+            //[self MeninggalDuniaMDBKK];
         }
         else
         {
@@ -561,7 +561,7 @@ bool WPTPD30RisDeleted = FALSE;
                 [textField becomeFirstResponder];
             }
             else{
-                [self PremiDasarActB];
+                //[self PremiDasarActB];
             }
         }
     }
@@ -588,7 +588,7 @@ bool WPTPD30RisDeleted = FALSE;
     
     if([PlanType isEqualToString:@"BCA Life Keluargaku"])
     {
-        [self MeninggalDuniaMDBKK];
+        //[self MeninggalDuniaMDBKK];
         [self calculateRiderPremi];
     }
     else
@@ -1774,6 +1774,7 @@ bool WPTPD30RisDeleted = FALSE;
 -(void)loadDataFromList{
     _modelSIPremium = [[Model_SI_Premium alloc]init];
     NSDictionary* dictPremiData=[[NSDictionary alloc]initWithDictionary:[_modelSIPremium getPremium_For:[self.requestSINo description]]];
+    
     if ([dictPremiData count]!=0){
         premiType = @"S";
         [yearlyIncomeField setText:[dictPremiData valueForKey:@"Sum_Assured"]];

@@ -43,7 +43,7 @@
     
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     [database open];
-    BOOL success = [database executeUpdate:@"update SI_Temp_Trad_Rider set Sum_Assured=?, MasaAsuransi=?, Unit=?,ExtraPremiPercent=?,ExtraPremiMil=?,MasaExtraPremi=?,ExtraPremiRp=?,PremiRp=? where SINo=? and RiderCode=?" ,
+    BOOL success = [database executeUpdate:@"update SI_Temp_Trad_Rider set SumAssured=?, MasaAsuransi=?, Unit=?,ExtraPremiPercent=?,ExtraPremiMil=?,MasaExtraPremi=?,ExtraPremiRp=?,PremiRp=? where SINo=? and RiderCode=?" ,
                     [dataRider valueForKey:@"SumAssured"],
                     [dataRider valueForKey:@"MasaAsuransi"],
                     [dataRider valueForKey:@"Unit"],

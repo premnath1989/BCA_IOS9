@@ -33,7 +33,8 @@
 #import "Model_SI_Master.h"
 #import "Model_SI_Premium.h"
 #import "ModelSIRider.h"
-
+#import "Formatter.h"
+#import "RiderCalculation.h"
 #import "IlustrationViewController.h"
 
 @class SIMenuViewController;
@@ -51,6 +52,8 @@
     sqlite3 *contactDB;
     BOOL PlanEmpty;
     
+    Formatter* formatter;
+    RiderCalculation* riderCalculation;
     IlustrationViewController *_salesIlustrationViewController;
     
     ModelSIRider *_modelSIRider;

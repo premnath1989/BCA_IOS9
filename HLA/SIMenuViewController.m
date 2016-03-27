@@ -81,6 +81,8 @@ BOOL isFirstLoad;
     [super viewDidLoad];
     [self resignFirstResponder];
 
+    formatter = [[Formatter alloc] init];
+    riderCalculation = [[RiderCalculation alloc]init];
     _modelSIPremium = [[Model_SI_Premium alloc]init];
     _modelSIPOData = [[ModelSIPOData alloc]init];
     _modelSIMaster = [[Model_SI_Master alloc]init];
@@ -685,9 +687,7 @@ BOOL isFirstLoad;
         eProposalStatus = @"";
         [self.myTableView reloadData];
         
-        _RiderController = nil;
-        _RiderController = [self.storyboard instantiateViewControllerWithIdentifier:@"RiderView"];
-        _RiderController.delegate = self;
+       // _RiderController = nil;
         
         if (_LAController == nil) {
             self.LAController = [self.storyboard instantiateViewControllerWithIdentifier:@"LAView"];
@@ -2980,7 +2980,14 @@ BOOL isFirstLoad;
     else{
         [_modelSIPremium savePremium:newDictionaryForBasicPlan];
     }
-
+    
+    if (!_RiderController){
+        self.RiderController = [self.storyboard instantiateViewControllerWithIdentifier:@"RiderView"];
+        _RiderController.delegate = self;
+    }
+    [_RiderController setDictionaryPOForInsert:dictionaryPOForInsert];
+    [_RiderController setDictionaryForBasicPlan:newDictionaryForBasicPlan];
+    [_RiderController calculateRiderPremi];
 }
 
 -(void)saveNewLA:(NSDictionary *)dataPO{
@@ -3071,7 +3078,7 @@ BOOL isFirstLoad;
         [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"ProductCode"] forKey:@"ProductCode"];
         [newDictionaryForBasicPlan setObject:[self.requestSINo description] forKey:@"SINO"];
         if(myNumber != nil)
-            [newDictionaryForBasicPlan setObject:myNumber forKey:@"Number_Sum_Assured"];
+        [newDictionaryForBasicPlan setObject:myNumber forKey:@"Number_Sum_Assured"];
         [newDictionaryForBasicPlan setObject:[dictPOData valueForKey:@"PO_Gender"] forKey:@"PO_Gender"];
         [newDictionaryForBasicPlan setObject:[dictPOData valueForKey:@"PO_Age"] forKey:@"PO_Age"];
         [newDictionaryForBasicPlan setObject:[dictPOData valueForKey:@"LA_Gender"] forKey:@"LA_Gender"];
@@ -3162,21 +3169,23 @@ BOOL isFirstLoad;
         [_modelSIRider updateRider:mutableMDKK];
     }
     
-    if ([_modelSIRider getRiderCount:[dictionaryPOForInsert valueForKey:@"SINO"] RiderCode:[dictBP valueForKey:@"RiderCode"]]<=0){
+    if ([_modelSIRider getRiderCount:[dictionaryPOForInsert valueForKey:@"SINO"] RiderCode:[mutableBP valueForKey:@"RiderCode"]]<=0){
         [_modelSIRider saveRider:mutableBP];
     }
     else{
         [_modelSIRider updateRider:mutableBP];
     }
-    if (!_PremiumController) {
+    
+    /*if (!_PremiumController) {
         _PremiumController = [self.storyboard instantiateViewControllerWithIdentifier:@"premiumView"];
         //_PremiumController.delegate = self;
         [self.RightView addSubview:_PremiumController.view];
     }
     [_PremiumController setPremiumDictionary:newDictionaryForBasicPlan];
-    [self.RightView bringSubviewToFront:_PremiumController.view];
+    [self.RightView bringSubviewToFront:_PremiumController.view];*/
 }
 
+#pragma mark auto save rider
 -(void)setQuickQuoteValue:(BOOL)value{
     quickQuoteEnabled=value;
 }
@@ -5902,10 +5911,17 @@ BOOL isFirstLoad;
 
 -(void)saveAll
 {    
-    NSString* msg = @"Simpan perubahan?";
+    /*NSString* msg = @"Simpan perubahan?";
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:msg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"CANCEL",nil];
     [alert setTag:3001];
-    [alert show];
+    [alert show];*/
+    if (!_PremiumController) {
+     _PremiumController = [self.storyboard instantiateViewControllerWithIdentifier:@"premiumView"];
+     //_PremiumController.delegate = self;
+     [self.RightView addSubview:_PremiumController.view];
+     }
+     [_PremiumController setPremiumDictionary:newDictionaryForBasicPlan];
+     [self.RightView bringSubviewToFront:_PremiumController.view];
 }
 
 #pragma mark - delegate FSVerticalTabBarController

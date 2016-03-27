@@ -2798,7 +2798,8 @@ int maxGycc = 0;
 
 - (IBAction)doSaveRider:(id)sender
 {
-	[_delegate saveAll];
+    [self calculateRiderPremi];
+    [_delegate saveAll];
 }
 
 - (IBAction)editPressed:(id)sender
@@ -5829,6 +5830,8 @@ int maxGycc = 0;
     
     arrayDataRiders=[[NSMutableArray alloc]initWithObjects:dictMDBKK,dictMBKK,dictBebasPremi, nil];
     [myTableView reloadData];
+    
+    [_delegate saveRider:dictMDBKK MDKK:dictMBKK BP:dictBebasPremi];
 }
 
 #pragma mark - setTextFieldValue
