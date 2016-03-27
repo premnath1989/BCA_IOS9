@@ -845,16 +845,20 @@
     NSString *javaScriptP1H20;
     NSString *javaScriptP1H21;
     NSString *javaScriptP1H22;
+    NSString *javaScriptP1H16;
     if(([RelWithLA isEqualToString:@"DIRI SENDIRI"])||([RelWithLA isEqualToString:@"SELF"]))
     {
         javaScriptP1H20=[NSString stringWithFormat:@"document.getElementById('ExtraPremiPercentLA').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"ExtraPremiumPercentage"]];
         javaScriptP1H21=[NSString stringWithFormat:@"document.getElementById('ExtraPremiPerMilLA').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"ExtraPremiumSum"]];
         javaScriptP1H22=[NSString stringWithFormat:@"document.getElementById('MasaExtraPremiLA').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"ExtraPremiumTerm"]];
+        javaScriptP1H16=[NSString stringWithFormat:@"document.getElementById('SelfRelation').innerHTML =\"%@\";", @"Ya"];
+
     }
     else{
         javaScriptP1H20=[NSString stringWithFormat:@"document.getElementById('ExtraPremiPercentPO').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"ExtraPremiumPercentage"]];
         javaScriptP1H21=[NSString stringWithFormat:@"document.getElementById('ExtraPremiPerMilPO').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"ExtraPremiumSum"]];
         javaScriptP1H22=[NSString stringWithFormat:@"document.getElementById('MasaExtraPremiPO').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"ExtraPremiumTerm"]];
+        javaScriptP1H16=[NSString stringWithFormat:@"document.getElementById('SelfRelation').innerHTML =\"%@\";", @"Tidak"];
     }
     
     
@@ -867,7 +871,6 @@
         NSString *javaScriptP1H11=[NSString stringWithFormat:@"document.getElementById('LADOB').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"LA_DOB"]];
         NSString *javaScriptP1H13=[NSString stringWithFormat:@"document.getElementById('LAAge').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"LA_Age"]];
         NSString *javaScriptP1H15=[NSString stringWithFormat:@"document.getElementById('LAGender').innerHTML =\"%@\";", sexLA];
-        NSString *javaScriptP1H16=[NSString stringWithFormat:@"document.getElementById('SelfRelation').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"LA_Name"]];
         NSString *javaScriptP1H18=[NSString stringWithFormat:@"document.getElementById('SIDate').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"SIDate"]];
 
     
