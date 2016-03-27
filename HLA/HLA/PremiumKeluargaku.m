@@ -61,10 +61,10 @@
         
         lblAsuransiDasarTahun.text = [tempResult valueForKey:@"PremiumPolicyA"];
         lblOccpTahun.text = [tempResult valueForKey:@"TotalPremiumLoading"];
-        lblPremiPercentageTahun.text = [tempResult valueForKey:@"ExtraPremiumPercentage"];
+        lblPremiPercentageTahun.text = [tempResult valueForKey:@"ExtraPremiumPolicy"];
         lblPremiNumTahun.text = [tempResult valueForKey:@"ExtraPremiumSum"];
         lblDiscountTahun.text = [tempResult valueForKey:@"Discount"];
-        lblSubTotalTahun.text = [tempResult valueForKey:@"SubTotalPremium"];
+        lblSubTotalTahun.text = [tempResult valueForKey:@"TotalPremiumLoading"];
         lblTotalTahun.text = [tempResult valueForKey:@"SubTotalPremium"];
         
         lblMDBKKTahun.text = [DBclass RiderCode:SINO riderCode:@"MDBKK"];
@@ -88,10 +88,10 @@
         
         lblAsuransiDasarSemester.text = [tempResult valueForKey:@"PremiumPolicyA"];
         lblOccpSemester.text = [tempResult valueForKey:@"TotalPremiumLoading"];
-        lblPremiPercentageSemester.text = [tempResult valueForKey:@"ExtraPremiumPercentage"];
+        lblPremiPercentageSemester.text = [tempResult valueForKey:@"ExtraPremiumPolicy"];
         lblPremiNumSemester.text = [tempResult valueForKey:@"ExtraPremiumSum"];
         lblDiscountSemester.text = [tempResult valueForKey:@"Discount"];
-        lblSubTotalSemester.text = [tempResult valueForKey:@"SubTotalPremium"];
+        lblSubTotalSemester.text = [tempResult valueForKey:@"TotalPremiumLoading"];
         lblTotalSemester.text = [tempResult valueForKey:@"SubTotalPremium"];
         
         lblMDBKKSemester.text = [DBclass RiderCode:SINO riderCode:@"MDBKK"];
@@ -119,10 +119,10 @@
         
         lblAsuransiDasarKuartal.text = [tempResult valueForKey:@"PremiumPolicyA"];
         lblOccpKuartal.text = [tempResult valueForKey:@"TotalPremiumLoading"];
-        lblPremiPercentageKuartal.text = [tempResult valueForKey:@"ExtraPremiumPercentage"];
+        lblPremiPercentageKuartal.text = [tempResult valueForKey:@"ExtraPremiumPolicy"];
         lblPremiNumKuartal.text = [tempResult valueForKey:@"ExtraPremiumSum"];
         lblDiscountKuartal.text = [tempResult valueForKey:@"Discount"];
-        lblSubTotalKuartal.text = [tempResult valueForKey:@"SubTotalPremium"];
+        lblSubTotalKuartal.text = [tempResult valueForKey:@"TotalPremiumLoading"];
         lblTotalKuartal.text = [tempResult valueForKey:@"SubTotalPremium"];
         
         lblMDBKKKuartal.text = [DBclass RiderCode:SINO riderCode:@"MDBKK"];
@@ -150,10 +150,10 @@
         
         lblAsuransiDasarBulan.text = [tempResult valueForKey:@"PremiumPolicyA"];
         lblOccpBulan.text = [tempResult valueForKey:@"TotalPremiumLoading"];
-        lblPremiPercentageBulan.text = [tempResult valueForKey:@"ExtraPremiumPercentage"];
+        lblPremiPercentageBulan.text = [tempResult valueForKey:@"ExtraPremiumPolicy"];
         lblPremiNumBulan.text = [tempResult valueForKey:@"ExtraPremiumSum"];
         lblDiscountBulan.text = [tempResult valueForKey:@"Discount"];
-        lblSubTotalBulan.text = [tempResult valueForKey:@"SubTotalPremium"];
+        lblSubTotalBulan.text = [tempResult valueForKey:@"TotalPremiumLoading"];
         lblTotalBulan.text = [tempResult valueForKey:@"SubTotalPremium"];
         
         lblMDBKKBulan.text = [DBclass RiderCode:SINO riderCode:@"MDBKK"];
