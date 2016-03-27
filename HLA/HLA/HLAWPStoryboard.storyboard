@@ -177,7 +177,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="xlQ-6E-XPK">
                                         <rect key="frame" x="28" y="0.0" width="70" height="70"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="Icon Brochure &amp; save as-01-03.png"/>
+                                        <state key="normal" image="Icon_Brochure.png"/>
                                         <connections>
                                             <action selector="brochureTapped:" destination="geq-zo-2Ih" eventType="touchUpInside" id="ia4-tb-0du"/>
                                         </connections>
@@ -185,7 +185,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="voa-jX-hEh">
                                         <rect key="frame" x="106" y="0.0" width="70" height="70"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="Icon Brochure &amp; save as-01-04.png"/>
+                                        <state key="normal" image="Icon_SaveAs.png"/>
                                         <connections>
                                             <action selector="SaveTapped:" destination="geq-zo-2Ih" eventType="touchUpInside" id="Pfc-XB-2Si"/>
                                         </connections>
@@ -5386,8 +5386,8 @@
     </scenes>
     <resources>
         <image name="Expand Arrow.png" width="24" height="24"/>
-        <image name="Icon Brochure &amp; save as-01-03.png" width="506" height="506"/>
-        <image name="Icon Brochure &amp; save as-01-04.png" width="506" height="506"/>
+        <image name="Icon_Brochure.png" width="506" height="506"/>
+        <image name="Icon_SaveAs.png" width="506" height="506"/>
         <image name="disclosure_indicator.png" width="8" height="13"/>
         <image name="emptyCheckBox.png" width="44" height="43"/>
         <image name="prospect_100_2.png" width="100" height="100"/>
