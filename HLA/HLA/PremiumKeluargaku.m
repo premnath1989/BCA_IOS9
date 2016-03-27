@@ -65,6 +65,7 @@
         lblPremiNumTahun.text = [tempResult valueForKey:@"ExtraPremiumSum"];
         lblDiscountTahun.text = [tempResult valueForKey:@"Discount"];
         lblSubTotalTahun.text = [tempResult valueForKey:@"SubTotalPremium"];
+        lblTotalTahun.text = [tempResult valueForKey:@"SubTotalPremium"];
         
         lblMDBKKTahun.text = [DBclass RiderCode:SINO riderCode:@"MDBKK"];
         lblMDKKTahun.text = [DBclass RiderCode:SINO riderCode:@"MDKK"];
@@ -91,6 +92,7 @@
         lblPremiNumSemester.text = [tempResult valueForKey:@"ExtraPremiumSum"];
         lblDiscountSemester.text = [tempResult valueForKey:@"Discount"];
         lblSubTotalSemester.text = [tempResult valueForKey:@"SubTotalPremium"];
+        lblTotalSemester.text = [tempResult valueForKey:@"SubTotalPremium"];
         
         lblMDBKKSemester.text = [DBclass RiderCode:SINO riderCode:@"MDBKK"];
         lblMDKKSemester.text = [DBclass RiderCode:SINO riderCode:@"MDKK"];
@@ -121,6 +123,7 @@
         lblPremiNumKuartal.text = [tempResult valueForKey:@"ExtraPremiumSum"];
         lblDiscountKuartal.text = [tempResult valueForKey:@"Discount"];
         lblSubTotalKuartal.text = [tempResult valueForKey:@"SubTotalPremium"];
+        lblTotalKuartal.text = [tempResult valueForKey:@"SubTotalPremium"];
         
         lblMDBKKKuartal.text = [DBclass RiderCode:SINO riderCode:@"MDBKK"];
         lblMDKKKuartal.text = [DBclass RiderCode:SINO riderCode:@"MDKK"];
@@ -151,6 +154,7 @@
         lblPremiNumBulan.text = [tempResult valueForKey:@"ExtraPremiumSum"];
         lblDiscountBulan.text = [tempResult valueForKey:@"Discount"];
         lblSubTotalBulan.text = [tempResult valueForKey:@"SubTotalPremium"];
+        lblTotalBulan.text = [tempResult valueForKey:@"SubTotalPremium"];
         
         lblMDBKKBulan.text = [DBclass RiderCode:SINO riderCode:@"MDBKK"];
         lblMDKKBulan.text = [DBclass RiderCode:SINO riderCode:@"MDKK"];

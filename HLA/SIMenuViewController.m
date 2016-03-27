@@ -2934,6 +2934,24 @@ BOOL isFirstLoad;
                 }
             }
             break;
+        case 3:{
+            
+            NSString *PlanType = [dictionaryPOForInsert valueForKey:@"ProductName"];
+            
+            if([PlanType isEqualToString:@"BCA Life Heritage Protection"])
+            {
+                NSLog(@"heritage");
+            }
+            else
+            {
+                PremiumKeluargaku *premiK = [[PremiumKeluargaku alloc]initWithNibName:@"PremiumKeluargaku"
+                                                                               bundle:nil SINO:[dictionaryPOForInsert valueForKey:@"SINO"]];
+                [self.RightView addSubview:premiK.view];
+                [self.RightView bringSubviewToFront:premiK.view];
+            }
+            
+        }
+            break;
         default:
             break;
     }
@@ -5915,13 +5933,26 @@ BOOL isFirstLoad;
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:msg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"CANCEL",nil];
     [alert setTag:3001];
     [alert show];*/
-    if (!_PremiumController) {
-     _PremiumController = [self.storyboard instantiateViewControllerWithIdentifier:@"premiumView"];
-     //_PremiumController.delegate = self;
-     [self.RightView addSubview:_PremiumController.view];
-     }
-     [_PremiumController setPremiumDictionary:newDictionaryForBasicPlan];
-     [self.RightView bringSubviewToFront:_PremiumController.view];
+    
+    NSString *PlanType = [dictionaryPOForInsert valueForKey:@"ProductName"];
+    
+    if([PlanType isEqualToString:@"BCA Life Heritage Protection"])
+    {
+        if (!_PremiumController) {
+            _PremiumController = [self.storyboard instantiateViewControllerWithIdentifier:@"premiumView"];
+            //_PremiumController.delegate = self;
+            [self.RightView addSubview:_PremiumController.view];
+        }
+        [_PremiumController setPremiumDictionary:newDictionaryForBasicPlan];
+        [self.RightView bringSubviewToFront:_PremiumController.view];
+    }
+    else
+    {
+        PremiumKeluargaku *premiK = [[PremiumKeluargaku alloc]initWithNibName:@"PremiumKeluargaku"
+                                                                       bundle:nil SINO:[dictionaryPOForInsert valueForKey:@"SINO"]];
+        [self.RightView addSubview:premiK.view];
+        [self.RightView bringSubviewToFront:premiK.view];
+    }
 }
 
 #pragma mark - delegate FSVerticalTabBarController

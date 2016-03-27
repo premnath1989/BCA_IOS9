@@ -52,6 +52,11 @@ NSMutableArray *DelGroupArr;
 	
 //	GroupName.hidden = YES;
 //	BtnAddNew.hidden = YES;
+    
+    
+    UIColor *borderColor=[[UIColor alloc]initWithRed:250.0/255.0 green:175.0/255.0 blue:50.0/255.0 alpha:1.0];
+    GroupName.layer.borderColor= borderColor.CGColor;
+    GroupName.layer.borderWidth=1.0;
 	
 	
 	BtnDelete.hidden = YES;

@@ -628,22 +628,15 @@
     label2.tag = 2002;
     [cell.contentView addSubview:label2];
     
-    if (indexPath.row % 2 == 0) {
-        //label1.backgroundColor = [CustomColor colorWithHexString:@"D0D8E8"];
-        //label2.backgroundColor = [CustomColor colorWithHexString:@"D0D8E8"];
-        
-        label1.font = [UIFont fontWithName:@"BPreplay" size:16];
-        label2.font = [UIFont fontWithName:@"BPreplay" size:16];
-    }
-    else {
-        //label1.backgroundColor = [CustomColor colorWithHexString:@"E9EDF4"];
-        //label2.backgroundColor = [CustomColor colorWithHexString:@"E9EDF4"];
-        
-        label1.font = [UIFont fontWithName:@"BPreplay" size:16];
-        label2.font = [UIFont fontWithName:@"BPreplay" size:16];
-    }
+    label1.font = [UIFont fontWithName:@"BPreplay" size:16];
+    label2.font = [UIFont fontWithName:@"BPreplay" size:16];
+    label1.textColor = [UIColor colorWithRed:128.0f/255.0f
+                                       green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
+    label2.textColor = [UIColor colorWithRed:128.0f/255.0f
+                                       green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
     
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
+    cell.backgroundColor = [UIColor whiteColor];
     return cell;
 }
 

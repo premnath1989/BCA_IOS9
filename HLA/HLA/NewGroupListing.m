@@ -134,6 +134,9 @@
     
     // Configure the cell...
     cell.textLabel.text = [[tempArray objectAtIndex:indexPath.row] objectForKey:@"name"];
+    cell.textLabel.textColor = [UIColor colorWithRed:128.0f/255.0f
+                                               green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
+    cell.textLabel.font = [UIFont fontWithName:@"BPreplay" size:16];
     
     return cell;
 }
