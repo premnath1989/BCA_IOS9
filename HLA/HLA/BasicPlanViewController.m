@@ -989,7 +989,7 @@ bool WPTPD30RisDeleted = FALSE;
     
     AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM Keluargaku_Rates_basicPrem Where BasicCode = '%@' AND EntryAge = %i",LASex,@"KLK",LAAge];
     results = [database executeQuery:AnsuransiDasarQuery];
-        
+    
     NSString*RatesPremiumRate;
     double PaymentMode;
     if (![database open])
