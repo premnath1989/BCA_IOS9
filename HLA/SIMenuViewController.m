@@ -398,7 +398,6 @@ BOOL isFirstLoad;
             self.BasicController.requestAgePay = getPayAge;
             self.BasicController.requestOccpPay = getPayOccp;
             
-            
             self.BasicController.requestIndex2ndLA = get2ndLAIndexNo;
             self.BasicController.requestSmoker2ndLA = get2ndLASmoker;
             self.BasicController.requestSex2ndLA = get2ndLASex;
@@ -530,7 +529,6 @@ BOOL isFirstLoad;
                 if([PlanType isEqualToString:@"BCA Life Heritage Protection"])
                 {
                     [self.BasicController KeluargakuDisable];
-                    
                 }
                 else
                 {

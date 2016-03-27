@@ -52,9 +52,20 @@
 }
 
 -(double)calculateMDBKKLoading:(NSMutableDictionary *)dictCalculate DictionaryBasicPlan:(NSDictionary *)dictionaryBasicPlan DictionaryPO:(NSDictionary *)dictPO BasicCode:(NSString *)basicCode PaymentCode:(int)paymentCode PersonType:(NSString *)personType{
-    double emPercent = [[dictionaryBasicPlan valueForKey:@"ExtraPremiumPercentage"] doubleValue];
-    emPercent = emPercent/100;
-    int emNumber = [[dictionaryBasicPlan valueForKey:@"ExtraPremiumSum"] integerValue];
+    double emPercent;
+    int emNumber;
+    if (([[dictPO valueForKey:@"RelWithLA"] isEqualToString:@"SELF"])||([[dictPO valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"])){
+        emPercent = [[dictionaryBasicPlan valueForKey:@"ExtraPremiumPercentage"] doubleValue];
+        emPercent = emPercent/100;
+        emNumber= [[dictionaryBasicPlan valueForKey:@"ExtraPremiumSum"] integerValue];
+
+    }
+    else{
+        //emPercent = [[dictionaryBasicPlan valueForKey:@"ExtraPremiumPercentage"] doubleValue];
+        emPercent = 0;
+        emNumber = 0;
+    }
+    
     NSString *sex;
     if (([[dictPO valueForKey:@"LA_Gender"] isEqualToString:@"MALE"])||([[dictPO valueForKey:@"LA_Gender"] isEqualToString:@"FEMALE"])){
         sex=@"Male";
@@ -122,7 +133,7 @@
     }
     
     int age;
-    if ([[dictPO valueForKey:@"RelWithLA"] isEqualToString:@"SELF"]){
+    if (([[dictPO valueForKey:@"RelWithLA"] isEqualToString:@"SELF"])||([[dictPO valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"])){
         age = [[dictPO valueForKey:@"LA_Age"] integerValue];
     }
     else{

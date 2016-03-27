@@ -349,10 +349,9 @@ bool WPTPD30RisDeleted = FALSE;
     ExtraPremiDasarLBL.hidden = YES;
     FrekuensiPembayaranChecking =@"10 Tahun";
     //yearlyIncomeField.text = @"";
-    
-
     //    }
-    
+    [self PremiDasarActKeluargaku:FRekeunsiPembayaranMode];
+    [self calculateRiderPremi];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -671,7 +670,8 @@ bool WPTPD30RisDeleted = FALSE;
 }
 
 -(IBAction)MasaExtraPremiTextFieldDidEnd:(UITextField *)sender {
-    [MasaExtraPremiLBL setHidden:YES];
+    //[MasaExtraPremiLBL setHidden:YES];
+    [self PremiDasarActKeluargaku:FRekeunsiPembayaranMode];
     [self calculateRiderPremi];
 }
 
@@ -987,9 +987,9 @@ bool WPTPD30RisDeleted = FALSE;
     
     ////BasicPremiRate/////
     
-    AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM Keluargaku_Rates_basicPrem Where BasicCode = '%@' AND EntryAge = %i",PayorSex,@"KLK",PayorAge];
+    AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM Keluargaku_Rates_basicPrem Where BasicCode = '%@' AND EntryAge = %i",LASex,@"KLK",LAAge];
     results = [database executeQuery:AnsuransiDasarQuery];
-    
+        
     NSString*RatesPremiumRate;
     double PaymentMode;
     if (![database open])
