@@ -676,6 +676,10 @@ bool WPTPD30RisDeleted = FALSE;
         [self PremiDasarActKeluargaku:FRekeunsiPembayaranMode];
         [self calculateRiderPremi];
     }
+    else{
+        [self PremiDasarActB];
+        [self ExtraNumbPremi];
+    }
 }
 
 
@@ -1713,8 +1717,8 @@ bool WPTPD30RisDeleted = FALSE;
 
     int masaExtraPremiBTotal =[_masaExtraPremiField.text intValue];\
     
-     double totalB = total * masaExtraPremiBTotal;
-    
+    //double totalB = total * masaExtraPremiBTotal;
+    double totalB = total;
     //prem//
     
     long long Extraprem =totalB;
