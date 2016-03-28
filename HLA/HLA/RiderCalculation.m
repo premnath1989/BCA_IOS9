@@ -87,12 +87,23 @@
 -(double)calculateMDBKK:(NSMutableDictionary *)dictCalculate DictionaryBasicPlan:(NSDictionary *)dictionaryBasicPlan DictionaryPO:(NSDictionary *)dictPO BasicCode:(NSString *)basicCode PaymentCode:(int)paymentCode PersonType:(NSString *)personType{
     
     NSString *sex;
-    if (([[dictPO valueForKey:@"LA_Gender"] isEqualToString:@"MALE"])||([[dictPO valueForKey:@"LA_Gender"] isEqualToString:@"FEMALE"])){
-        sex=@"Male";
+    if (([[dictPO valueForKey:@"RelWithLA"] isEqualToString:@"SELF"])||([[dictPO valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"])){
+        if (([[dictPO valueForKey:@"LA_Gender"] isEqualToString:@"MALE"])||([[dictPO valueForKey:@"LA_Gender"] isEqualToString:@"FEMALE"])){
+            sex=@"Male";
+        }
+        else{
+            sex=@"Female";
+        }
     }
     else{
-        sex=@"Female";
+        if (([[dictPO valueForKey:@"PO_Gender"] isEqualToString:@"MALE"])||([[dictPO valueForKey:@"PO_Gender"] isEqualToString:@"FEMALE"])){
+            sex=@"Male";
+        }
+        else{
+            sex=@"Female";
+        }
     }
+    
 
     NSString *mop = [self getKeluargakuMOP:paymentCode];
     mop = [mop substringToIndex:[mop length]-1];
@@ -117,12 +128,23 @@
 #pragma mark - calculate 
 -(double)calculateBPPremi:(NSMutableDictionary *)dictCalculate DictionaryBasicPlan:(NSDictionary *)dictionaryBasicPlan DictionaryPO:(NSDictionary *)dictPO BasicCode:(NSString *)basicCode PaymentCode:(int)paymentCode PersonType:(NSString *)personType{
     NSString *sex;
-    if (([[dictPO valueForKey:@"PO_Gender"] isEqualToString:@"MALE"])||([[dictPO valueForKey:@"PO_Gender"] isEqualToString:@"FEMALE"])){
-        sex=@"Male";
+    if (([[dictPO valueForKey:@"RelWithLA"] isEqualToString:@"SELF"])||([[dictPO valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"])){
+        if (([[dictPO valueForKey:@"LA_Gender"] isEqualToString:@"MALE"])||([[dictPO valueForKey:@"LA_Gender"] isEqualToString:@"FEMALE"])){
+            sex=@"Male";
+        }
+        else{
+            sex=@"Female";
+        }
     }
     else{
-        sex=@"Female";
+        if (([[dictPO valueForKey:@"PO_Gender"] isEqualToString:@"MALE"])||([[dictPO valueForKey:@"PO_Gender"] isEqualToString:@"FEMALE"])){
+            sex=@"Male";
+        }
+        else{
+            sex=@"Female";
+        }
     }
+    
     
     double nopolRate;
     if ([[dictionaryBasicPlan valueForKey:@"PurchaseNumber"] integerValue]==1){

@@ -109,6 +109,7 @@ int maxGycc = 0;
     riderCalculation = [[RiderCalculation alloc]init];
     CustomColor = [[ColorHexCode alloc]init];
     formatter = [[Formatter alloc]init];
+    _modelSIRider = [[ModelSIRider alloc]init];
     
     ridNotAffected = [NSArray arrayWithObjects: @"ACIR_MPP", @"CIR", @"ICR", @"LCPR", @"LCWP", @"PLCP", @"PTR", @"PR", @"SP_PRE",@"SP_STD" , nil];
     
@@ -149,6 +150,12 @@ int maxGycc = 0;
     arrayDataRiders=[[NSMutableArray alloc]initWithObjects:[self dictMDBKK],[self dictMBKK],[self dictBebasPremi], nil];
     [myTableView reloadData];
 }
+
+-(void)loadInitialRiderDataFromDatabase{
+    arrayDataRiders=[[NSMutableArray alloc]initWithObjects:[self dictMDBKK],[self dictMBKK],[self loadDictBebasPremi], nil];
+    [myTableView reloadData];
+}
+
 
 -(void)processRiders {
     if ([requesteProposalStatus isEqualToString:@"Confirmed"] || [requesteProposalStatus isEqualToString:@"Submitted"] ||
@@ -2802,7 +2809,8 @@ int maxGycc = 0;
 
 - (IBAction)doSaveRider:(id)sender
 {
-    [self calculateRiderPremi];
+    //[self calculateRiderPremi];
+    [self calculateBPPremi];
     [_delegate saveAll];
 }
 
@@ -5798,10 +5806,10 @@ int maxGycc = 0;
 #pragma mark calculateRiderPremi
 
 -(void)calculateRiderPremi{
-    NSMutableDictionary* dictForCalculate=[[NSMutableDictionary alloc]initWithDictionary:[arrayDataRiders objectAtIndex:0]];
-    [dictForCalculate setObject:[[arrayDataRiders objectAtIndex:0]valueForKey:@"ExtraPremiPerCent"] forKey:@"ExtraPremiPerCent"];
-    [dictForCalculate setObject:[[arrayDataRiders objectAtIndex:0]valueForKey:@"ExtraPremiPerMil"] forKey:@"ExtraPremiPerMil"];
-    [dictForCalculate setObject:[[arrayDataRiders objectAtIndex:0]valueForKey:@"MasaExtraPremi"] forKey:@"MasaExtraPremi"];
+    NSMutableDictionary* dictForCalculate=[[NSMutableDictionary alloc]initWithDictionary:[arrayDataRiders objectAtIndex:2]];
+    [dictForCalculate setObject:[[arrayDataRiders objectAtIndex:2]valueForKey:@"ExtraPremiPerCent"] forKey:@"ExtraPremiPerCent"];
+    [dictForCalculate setObject:[[arrayDataRiders objectAtIndex:2]valueForKey:@"ExtraPremiPerMil"] forKey:@"ExtraPremiPerMil"];
+    [dictForCalculate setObject:[[arrayDataRiders objectAtIndex:2]valueForKey:@"MasaExtraPremi"] forKey:@"MasaExtraPremi"];
     
     //[_dictionaryForBasicPlan setObject:[NSNumber numberWithInt:2] forKey:@"PurchaseNumber"];
     
@@ -5829,6 +5837,7 @@ int maxGycc = 0;
     
     [dictMDBKK setObject:mdbkkFormatted forKey:@"PremiRp"];
     [dictMDBKK setObject:mdbkkLoadingFormatted forKey:@"ExtraPremiRp"];
+    
     [dictBebasPremi setObject:riderPremiFormatted forKey:@"PremiRp"];
     [dictBebasPremi setObject:riderPremiLoadingFormatted forKey:@"ExtraPremiRp"];
     
@@ -5906,6 +5915,11 @@ int maxGycc = 0;
 }
 
 -(NSDictionary *)dictBebasPremi{
+    NSDictionary* dictRiderBP = [[NSDictionary alloc]initWithDictionary:[_modelSIRider getRider:[_dictionaryPOForInsert valueForKey:@"SINO"] RiderCode:@"BP"]];
+    
+    //int extraPremiPercentage=[[dictRiderBP valueForKey:@"ExtraPremiPercent"] integerValue];
+    //int extraPremiumMil=[[dictRiderBP valueForKey:@"ExtraPremiMil"] integerValue];
+    //int masaPremium=[[dictRiderBP valueForKey:@"MasaExtraPremi"] integerValue];
     int extraPremiPercentage=[[_dictionaryForBasicPlan valueForKey:@"ExtraPremiumPercentage"] integerValue];
     int extraPremiumMil=[[_dictionaryForBasicPlan valueForKey:@"ExtraPremiumSum"] integerValue];
     int masaPremium=[[_dictionaryForBasicPlan valueForKey:@"ExtraPremiumTerm"] integerValue];
@@ -5918,25 +5932,78 @@ int maxGycc = 0;
                              [NSNumber numberWithInt:extraPremiPercentage],@"ExtraPremiPerCent",
                              [NSNumber numberWithInt:extraPremiumMil],@"ExtraPremiPerMil",
                              [NSNumber numberWithInt:masaPremium],@"MasaExtraPremi",
-                             @"-",@"ExtraPremiRp",
-                             @"-",@"PremiRp",
+                             [dictRiderBP valueForKey:@"ExtraPremiRp"],@"ExtraPremiRp",
+                             [dictRiderBP valueForKey:@"PremiRp"],@"PremiRp",
                              nil];
+    return dictBebasPremi;
+}
+
+-(NSDictionary *)loadDictBebasPremi{
+    NSDictionary* dictRiderBP = [[NSDictionary alloc]initWithDictionary:[_modelSIRider getRider:[_dictionaryPOForInsert valueForKey:@"SINO"] RiderCode:@"BP"]];
+    
+    int extraPremiPercentage=[[dictRiderBP valueForKey:@"ExtraPremiPercent"] integerValue];
+    int extraPremiumMil=[[dictRiderBP valueForKey:@"ExtraPremiMil"] integerValue];
+    int masaPremium=[[dictRiderBP valueForKey:@"MasaExtraPremi"] integerValue];
+    
+    dictBebasPremi=[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"Bebas Premi",@"RiderName",
+                    @"BP",@"RiderCode",
+                    @"-",@"SumAssured",
+                    @"10",@"MasaAsuransi",
+                    @"-",@"Unit",
+                    [NSNumber numberWithInt:extraPremiPercentage],@"ExtraPremiPerCent",
+                    [NSNumber numberWithInt:extraPremiumMil],@"ExtraPremiPerMil",
+                    [NSNumber numberWithInt:masaPremium],@"MasaExtraPremi",
+                    [dictRiderBP valueForKey:@"ExtraPremiRp"],@"ExtraPremiRp",
+                    [dictRiderBP valueForKey:@"PremiRp"],@"PremiRp",
+                    nil];
     return dictBebasPremi;
 }
 
 #pragma mark - calculate Premi for BP
 
--(void)calculateBPPremi:(UITextField *)sender{
+-(void)calculateBPPremi{
     NSMutableDictionary* dictForCalculate=[[NSMutableDictionary alloc]initWithDictionary:[arrayDataRiders objectAtIndex:2]];
-    if (sender==_extraPremiPercentField){
-        [dictForCalculate setObject:sender.text forKey:@"ExtraPremiPerCent"];
-    }
-    else if (sender==_extraPremiNumberField){
-        [dictForCalculate setObject:sender.text forKey:@"ExtraPremiPerMil"];
+    [dictForCalculate setObject:_extraPremiPercentField.text forKey:@"ExtraPremiPerCent"];
+    [dictForCalculate setObject:_extraPremiNumberField.text forKey:@"ExtraPremiPerMil"];
+    [dictForCalculate setObject:_masaExtraPremiField.text forKey:@"MasaExtraPremi"];
+    
+    if (([[_dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"SELF"])||([[_dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"])){
+        [self tiePersonType:1];
     }
     else{
-        [dictForCalculate setObject:sender.text forKey:@"MasaExtraPremi"];
+        //if (indexSelected==2){
+        [self tiePersonType:0];
+        //}
+        //else{
+        //    [self tiePersonType:1];
+        //}
     }
+    
+    double RiderPremium = [riderCalculation calculateBPPremi:dictForCalculate DictionaryBasicPlan:_dictionaryForBasicPlan DictionaryPO:_dictionaryPOForInsert BasicCode:@"KLK" PaymentCode:[self getPaymentType] PersonType:personCharacterType];
+    double MDBKK = [riderCalculation calculateMDBKK:dictForCalculate DictionaryBasicPlan:_dictionaryForBasicPlan DictionaryPO:_dictionaryPOForInsert BasicCode:@"KLK" PaymentCode:[self getPaymentType] PersonType:personCharacterType];
+    double MDBKKLoading = [riderCalculation calculateMDBKKLoading:dictForCalculate DictionaryBasicPlan:_dictionaryForBasicPlan DictionaryPO:_dictionaryPOForInsert BasicCode:@"KLK" PaymentCode:[self getPaymentType] PersonType:personCharacterType];
+    double RiderLoading = [riderCalculation calculateBPPremiLoading:dictForCalculate DictionaryBasicPlan:_dictionaryForBasicPlan DictionaryPO:_dictionaryPOForInsert BasicCode:@"KLK" PaymentCode:[self getPaymentType] PersonType:personCharacterType];
+    
+    NSString *mdbkkFormatted = [formatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:MDBKK]];
+    NSString *riderPremiFormatted = [formatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:RiderPremium]];
+    NSString *riderPremiLoadingFormatted = [formatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:RiderLoading]];
+    NSString *mdbkkLoadingFormatted = [formatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:MDBKKLoading]];
+    
+    [dictMDBKK setObject:mdbkkFormatted forKey:@"PremiRp"];
+    [dictMDBKK setObject:mdbkkLoadingFormatted forKey:@"ExtraPremiRp"];
+    
+    [dictBebasPremi setObject:riderPremiFormatted forKey:@"PremiRp"];
+    [dictBebasPremi setObject:riderPremiLoadingFormatted forKey:@"ExtraPremiRp"];
+    [dictBebasPremi setObject:_extraPremiPercentField.text forKey:@"ExtraPremiPerCent"];
+    [dictBebasPremi setObject:_extraPremiNumberField.text forKey:@"ExtraPremiPerMil"];
+    [dictBebasPremi setObject:_masaExtraPremiField.text forKey:@"MasaExtraPremi"];
+
+    
+    arrayDataRiders=[[NSMutableArray alloc]initWithObjects:dictMDBKK,dictMBKK,dictBebasPremi, nil];
+    [myTableView reloadData];
+    
+    [_delegate saveRider:dictMDBKK MDKK:dictMBKK BP:dictBebasPremi];
+
 }
 
 #pragma mark - Table view data source

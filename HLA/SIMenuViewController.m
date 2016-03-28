@@ -2886,7 +2886,7 @@ BOOL isFirstLoad;
             [self.RightView bringSubviewToFront:self.BasicController.view];
             break;
         case 1:
-            if (!_RiderController){
+            /*if (!_RiderController){
                 self.RiderController = [self.storyboard instantiateViewControllerWithIdentifier:@"RiderView"];
                 _RiderController.delegate = self;
                 [_RiderController setDictionaryPOForInsert:dictionaryPOForInsert];
@@ -2898,12 +2898,26 @@ BOOL isFirstLoad;
             [_RiderController setDictionaryPOForInsert:dictionaryPOForInsert];
             [_RiderController setDictionaryForBasicPlan:newDictionaryForBasicPlan];
             [_RiderController setElementActive];
-            [_RiderController loadInitialRiderData];
+            [_RiderController loadInitialRiderDataFromDatabase];
             [self.RightView bringSubviewToFront:self.RiderController.view];
+            [_RiderController calculateRiderPremi];*/
+            if(![self.RiderController.view isDescendantOfView:self.RightView]) {
+                [_RiderController setDictionaryPOForInsert:dictionaryPOForInsert];
+                [_RiderController setDictionaryForBasicPlan:newDictionaryForBasicPlan];
+                [_RiderController setElementActive];
+                [_RiderController loadInitialRiderDataFromDatabase];
+                [self.RightView addSubview:self.RiderController.view];
+            } else {
+                [_RiderController setDictionaryPOForInsert:dictionaryPOForInsert];
+                [_RiderController setDictionaryForBasicPlan:newDictionaryForBasicPlan];
+                [_RiderController setElementActive];
+                [_RiderController loadInitialRiderDataFromDatabase];
+                [self.RightView bringSubviewToFront:self.RiderController.view];
+            }
             [_RiderController calculateRiderPremi];
             @try {
                 [self saveLAForTableDidSelect];
-                [self saveBasicPlanForTableDidSelect];
+                //[self saveBasicPlanForTableDidSelect];
             }
             @catch (NSException *exception) {
                 

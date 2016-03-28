@@ -19,6 +19,7 @@
 #import "ColorHexCode.h"
 #import "RiderCalculation.h"
 #import "Formatter.h"
+#import "ModelSIRider.h"
 
 @class RiderViewController;
 @protocol RiderViewControllerDelegate
@@ -31,6 +32,7 @@
 
 @interface RiderViewController : UIViewController <RiderPTypeTbViewControllerDelegate,RiderListTbViewControllerDelegate,UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource,RiderDeducTbDelegate,RiderPlanTbDelegate>
 {
+    ModelSIRider *_modelSIRider;
     RiderCalculation *riderCalculation;
     Formatter *formatter;
     ColorHexCode *CustomColor;
@@ -83,6 +85,7 @@
     NSMutableArray* arrayDataRiders;
 }
 -(void)loadInitialRiderData;
+-(void)loadInitialRiderDataFromDatabase;
 
 @property (retain, nonatomic) NSMutableDictionary* dictionaryPOForInsert;
 @property (retain, nonatomic) NSMutableDictionary* dictionaryForBasicPlan;
