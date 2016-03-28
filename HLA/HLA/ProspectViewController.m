@@ -2803,7 +2803,7 @@ bool RegDatehandling;
 	clickDone = 1;
     bool exist =  [self record_exist];
     if(exist) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"All changes will be updated to related SI, CFF and eApp. Do you want to proceed?" delegate:self cancelButtonTitle:@"Ya" otherButtonTitles:@"Tidak", nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Semua perubahan akan diperbarui untuk berhubungan SI, CFF dan SPAJ. Apakah Anda ingin melanjutkan?" delegate:self cancelButtonTitle:@"Ya" otherButtonTitles:@"Tidak", nil];
         [alert setTag:1004];
         [alert show];
     } else {
@@ -3812,7 +3812,7 @@ bool RegDatehandling;
 				[ClientProfile setObject:@"NO" forKey:@"isNew"];
                 
             } else if(exist) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"All changes will be updated to related SI, CFF and eApp. Do you want to proceed?" delegate:self cancelButtonTitle:@"Ya" otherButtonTitles:@"Tidak", nil];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Semua perubahan akan diperbarui untuk berhubungan SI, CFF dan SPAJ. Apakah Anda ingin melanjutkan?" delegate:self cancelButtonTitle:@"Ya" otherButtonTitles:@"Tidak", nil];
                 [alert setTag:1004];
                 [alert show];
                 

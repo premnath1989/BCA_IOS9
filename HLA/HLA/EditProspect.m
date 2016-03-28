@@ -4807,7 +4807,7 @@ NSMutableArray *DelGroupArr;
 {
     UIAlertView *alert = [[UIAlertView alloc]
                           initWithTitle: NSLocalizedString(@" ",nil)
-                          message: NSLocalizedString(@"Are you sure you want to delete this prospect profile?",nil)
+                          message: NSLocalizedString(@"Apakah Anda yakin ingin menghapus profil nasabah ini? ",nil)
                           delegate: self
                           cancelButtonTitle: NSLocalizedString(@"Yes",nil)
                           otherButtonTitles: NSLocalizedString(@"No",nil), nil];
@@ -5171,7 +5171,7 @@ NSMutableArray *DelGroupArr;
                             }
                             
                             UIAlertView *SuccessAlert = [[UIAlertView alloc] initWithTitle:@" "
-                                                                                   message:@"Prospect record successfully been deleted" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                                                                                   message:@"Nasabah record berhasil dihapus" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
                             SuccessAlert.tag = 2;
                             [SuccessAlert show];
                             
@@ -5259,7 +5259,7 @@ NSMutableArray *DelGroupArr;
                     
                 }
                 else {
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Please insert data" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil];
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Silakan memasukkan data." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil];
                     [alert show];
                 }
             }
@@ -7168,7 +7168,7 @@ NSMutableArray *DelGroupArr;
                 [self GetLastID];
                 
             } else {
-                UIAlertView *failAlert = [[UIAlertView alloc] initWithTitle:@" " message:@"Fail in update" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                UIAlertView *failAlert = [[UIAlertView alloc] initWithTitle:@" " message:@"Gagal dalam update." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
                 [failAlert show];
             }
             sqlite3_finalize(statement);

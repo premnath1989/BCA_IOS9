@@ -328,13 +328,13 @@ int rrr;
 			{
 				if([confirmCase isEqualToString:@"1"])
 				{
-					UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"There are pending eApp cases for this client. Should you wish to proceed, system will auto delete all the related pending eApp cases and you are required to recreate the necessary should you wish to resubmit the case." delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+					UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Ada tertunda kasus eApp untuk nasabah ini. Haruskah Anda ingin melanjutkan, sistem akan otomatis menghapus semua pending kasus eApp terkait dan Anda diminta untuk menciptakan diperlukan jika Anda ingin mengirimkan kembali kasus ini." delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
 					[alert setTag:1111];
 					[alert show];
 				}
 				else
 				{
-					UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"All changes will be updated to related SI, CFF and eApp. Do you want to proceed?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+					UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Semua perubahan akan diperbarui untuk berhubungan SI, CFF dan SPAJ. Apakah Anda ingin melanjutkan?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
 					[alert setTag:1111];
 					[alert show];
 				}
@@ -386,7 +386,7 @@ int rrr;
 		if (selectedIndexPath.row == 3) {
             UIAlertView *alert = [[UIAlertView alloc]
                                   initWithTitle: NSLocalizedString(@" ",nil)
-                                  message: NSLocalizedString(@"Are you sure you want to log out?",nil)
+                                  message: NSLocalizedString(@"akah Anda yakin Anda ingin log out?",nil)
                                   delegate: self
                                   cancelButtonTitle: NSLocalizedString(@"Yes",nil)
                                   otherButtonTitles: NSLocalizedString(@"No",nil), nil];
@@ -423,7 +423,7 @@ int rrr;
 		if (selectedIndexPath.row == 3) {
 			UIAlertView *alert = [[UIAlertView alloc]
 								  initWithTitle: NSLocalizedString(@" ",nil)
-								  message: NSLocalizedString(@"Are you sure you want to log out?",nil)
+								  message: NSLocalizedString(@"akah Anda yakin Anda ingin log out?",nil)
 								  delegate: self
 								  cancelButtonTitle: NSLocalizedString(@"Yes",nil)
 								  otherButtonTitles: NSLocalizedString(@"No",nil), nil];
@@ -600,7 +600,7 @@ int rrr;
 
         if(confirm_case!=nil)
         {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"There are pending eApp cases for this client. Should you wish to proceed, system will auto delete all the related pending eApp cases and you are required to recreate the necessary should you wish to resubmit the case." delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Ada tertunda kasus eApp untuk klien ini. Haruskah Anda ingin melanjutkan, sistem akan otomatis menghapus semua pending kasus eApp terkait dan Anda diminta untuk menciptakan diperlukan jika Anda ingin mengirimkan kembali kasus ini." delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
             [alert setTag:9001];
             [alert show];
         }
