@@ -40,6 +40,8 @@
 @interface ReaderViewController : UIViewController
 
 @property (nonatomic,retain)NSString *ilustrasiNumber;
+@property (nonatomic,retain)NSDictionary *dictPO;
+@property (nonatomic,retain)NSDictionary *dictAgent;
 
 @property (nonatomic, weak, readwrite) id <ReaderViewControllerDelegate> delegate;
 

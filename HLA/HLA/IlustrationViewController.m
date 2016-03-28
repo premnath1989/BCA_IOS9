@@ -628,6 +628,8 @@
         ReaderViewController *readerViewController = [[ReaderViewController alloc] initWithReaderDocument:document];
         readerViewController.delegate = self;
         [readerViewController setIlustrasiNumber:[_dictionaryPOForInsert valueForKey:@"SINO"]];
+        [readerViewController setDictPO:_dictionaryPOForInsert];
+        [readerViewController setDictPO:_dictionaryForAgentProfile];
         readerViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
         readerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
         [self presentViewController:readerViewController animated:YES completion:Nil];
