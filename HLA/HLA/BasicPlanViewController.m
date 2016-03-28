@@ -671,8 +671,11 @@ bool WPTPD30RisDeleted = FALSE;
 
 -(IBAction)MasaExtraPremiTextFieldDidEnd:(UITextField *)sender {
     //[MasaExtraPremiLBL setHidden:YES];
-    [self PremiDasarActKeluargaku:FRekeunsiPembayaranMode];
-    [self calculateRiderPremi];
+    if([PlanType isEqualToString:@"BCA Life Keluargaku"])
+    {
+        [self PremiDasarActKeluargaku:FRekeunsiPembayaranMode];
+        [self calculateRiderPremi];
+    }
 }
 
 

@@ -2121,7 +2121,7 @@ bool RegDatehandling;
     [formatter setLocale:[NSLocale localeWithLocaleIdentifier:@"in_ID"]];
     [formatter setMaximumFractionDigits:0];
     [formatter setUsesGroupingSeparator:YES];
-    [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    [formatter setNumberStyle:NSNumberFormatterNoStyle];
     
     NSNumber *myNumber = [formatter numberFromString:txtAnnIncome.text];
     result = [formatter stringFromNumber:myNumber];
