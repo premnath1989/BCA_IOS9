@@ -365,13 +365,12 @@ NSMutableArray *DelGroupArr;
     
     if (cell==nil) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-        
     }
     
     
     // Configure the cell...
     cell.textLabel.text = [[tempArray objectAtIndex:indexPath.row] objectForKey:@"name"];
-	cell.textLabel.font = [UIFont fontWithName:@"Tret MS" size:16];
+	cell.textLabel.font = [UIFont fontWithName:@"BPReplay" size:14];
 	
 	ColorHexCode *CustomColor = [[ColorHexCode alloc]init ];
 	if (indexPath.row % 2 == 0) {

@@ -47,8 +47,6 @@
     if ([bundleDBVersion compare:dbVersion] == NSOrderedAscending) {
         
         [self moveDBFromDefault:defaultDBPath ToTemp:tempDir];
-        
-        
         loginDB = [[LoginDBManagement alloc]init];
         [loginDB makeDBCopy];
 
