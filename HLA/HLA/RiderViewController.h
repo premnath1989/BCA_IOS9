@@ -82,6 +82,7 @@
     double doubleSumAssured;
     NSMutableArray* arrayDataRiders;
 }
+-(void)loadInitialRiderData;
 
 @property (retain, nonatomic) NSMutableDictionary* dictionaryPOForInsert;
 @property (retain, nonatomic) NSMutableDictionary* dictionaryForBasicPlan;

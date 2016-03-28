@@ -143,7 +143,11 @@ int maxGycc = 0;
     [self setTextfieldBorder];
     arrayDataRiders=[[NSMutableArray alloc]initWithObjects:[self dictMDBKK],[self dictMBKK],[self dictBebasPremi], nil];
     [super viewDidLoad];
-	
+}
+
+-(void)loadInitialRiderData{
+    arrayDataRiders=[[NSMutableArray alloc]initWithObjects:[self dictMDBKK],[self dictMBKK],[self dictBebasPremi], nil];
+    [myTableView reloadData];
 }
 
 -(void)processRiders {

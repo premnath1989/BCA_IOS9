@@ -398,7 +398,8 @@
 
     
 
-    _ExtraPercentsubtotalSekaligus=percent *RatesIntSekaligus*1.0*(_Pertanggungan_Dasar/1000)-_ExtraNumbsubtotalYear; //(_Pertanggungan_Dasar/1000)*(1.0 * RatesIntSekaligus)*Pertanggungan_ExtrePremi*percent;
+    //_ExtraPercentsubtotalSekaligus=percent *RatesIntSekaligus*1.0*(_Pertanggungan_Dasar/1000)-_ExtraNumbsubtotalYear; //(_Pertanggungan_Dasar/1000)*(1.0 * RatesIntSekaligus)*Pertanggungan_ExtrePremi*percent;
+    _ExtraPercentsubtotalSekaligus=percent *RatesIntSekaligus*1.0*(_Pertanggungan_Dasar/1000);
     _ExtraPercentsubtotalYear =percent *RatesInt*1.0*(_Pertanggungan_Dasar/1000);//-_ExtraNumbsubtotalYear;
     _ExtraPercentsubtotalBulan =percent *RatesInt*0.1*(_Pertanggungan_Dasar/1000);//-_ExtraNumbsubtotalBulan);
     
@@ -547,6 +548,9 @@
         
         lblTotalTahunan.textColor = [UIColor whiteColor];
         lblSubtotalTahunan.textColor = [UIColor whiteColor];
+        
+        [lblTotalBulanan setText:[Premformatter stringFromNumber:[NSNumber numberWithInt:0]]];
+        [lblTotalTahunan setText:[Premformatter stringFromNumber:[NSNumber numberWithInt:0]]];
     }
     else if ([Highlight isEqualToString:@"Bulanan"])
     {
@@ -558,6 +562,8 @@
         
         lblTotalTahunan.textColor = [UIColor whiteColor];
         lblSubtotalTahunan.textColor = [UIColor whiteColor];
+        
+        [lblTotalSekaligus setText:[Premformatter stringFromNumber:[NSNumber numberWithInt:0]]];
     }
     else if ([Highlight isEqualToString:@"Tahunan"])
     {
@@ -569,6 +575,8 @@
         
         lblTotalTahunan.textColor = [UIColor whiteColor];//[UIColor colorWithRed:250.0f/255.0f green:175.0f/255.0f blue:50.0f/255.0f alpha:1];
         lblSubtotalTahunan.textColor = [UIColor whiteColor];//[UIColor colorWithRed:250.0f/255.0f green:175.0f/255.0f blue:50.0f/255.0f alpha:1];    }
+        
+        [lblTotalSekaligus setText:[Premformatter stringFromNumber:[NSNumber numberWithInt:0]]];
     }
 }
 
