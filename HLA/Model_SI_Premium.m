@@ -125,7 +125,7 @@
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     [database open];
     
-    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select * from SI_Premium where SINO = \"%@\"",SINo]];
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select *,cast(ExtraPremiumPolicy as TEXT) as EPPolicy from SI_Premium where SINO = \"%@\"",SINo]];
     NSLog(@"query %@",[NSString stringWithFormat:@"select * from SI_Premium where SINO = \"%@\"",SINo]);
     while ([s next]) {
         SINO = [s stringForColumn:@"SINO"];
@@ -136,7 +136,8 @@
         ExtraPremiumPercentage = [s stringForColumn:@"ExtraPremiumPercentage"];
         ExtraPremiumSum = [s stringForColumn:@"ExtraPremiumSum"];
         ExtraPremiumTerm = [s stringForColumn:@"ExtraPremiumTerm"];
-        ExtraPremiumPolicy = [s stringForColumn:@"ExtraPremiumPolicy"];
+        //ExtraPremiumPolicy = [s stringForColumn:@"ExtraPremiumPolicy"];
+        ExtraPremiumPolicy = [s stringForColumn:@"EPPolicy"];
         TotalPremiumLoading = [s stringForColumn:@"TotalPremiumLoading"];
         SubTotalPremium = [s stringForColumn:@"SubTotalPremium"];
         CreatedDate = [s stringForColumn:@"CreatedDate"];

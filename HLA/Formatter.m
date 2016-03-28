@@ -85,5 +85,10 @@
     return targetDateString;
 }
 
+/*-(NSString *)convertSpecialCharacter:(NSString *)originalString{
+    NSString *someString = originalString;
+    NSString *newString = [someString stringByReplacingOccurrencesOfString:@"[/,@"'; ]+" withString:@"-" options: NSRegularExpressionSearch range:NSMakeRange(0, someString.length)];
+    return newString;
+}*/
 
 @end

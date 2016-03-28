@@ -491,7 +491,7 @@
     NSString *javaScriptP2H4 = [NSString stringWithFormat:@"document.getElementById('HeaderPaymentPeriode1').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"Payment_Term"]];
     NSString *javaScriptP2H5 = [NSString stringWithFormat:@"document.getElementById('HeaderLAName1').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"LA_Name"]];
     NSString *javaScriptP2H6 = [NSString stringWithFormat:@"document.getElementById('HeaderPaymentFrequency1').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"Payment_Frequency"]];
-    NSString *javaScriptP2H7 = [NSString stringWithFormat:@"document.getElementById('HeaderLADOB').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"LA_Age"]];
+    NSString *javaScriptP2H7 = [NSString stringWithFormat:@"document.getElementById('HeaderLADOB2').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"LA_DOB"]];
     NSString *javaScriptP2H8 = [NSString stringWithFormat:@"document.getElementById('HeaderBasicPremi').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"PremiumPolicyA"]];
     NSString *javaScriptP2H9 = [NSString stringWithFormat:@"document.getElementById('HeaderIlustrationDate').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"SIDate"]];
     
@@ -628,6 +628,8 @@
         ReaderViewController *readerViewController = [[ReaderViewController alloc] initWithReaderDocument:document];
         readerViewController.delegate = self;
         [readerViewController setIlustrasiNumber:[_dictionaryPOForInsert valueForKey:@"SINO"]];
+        [readerViewController setDictPO:_dictionaryPOForInsert];
+        [readerViewController setDictPO:_dictionaryForAgentProfile];
         readerViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
         readerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
         [self presentViewController:readerViewController animated:YES completion:Nil];
@@ -875,7 +877,7 @@
 
     
         NSNumber *myNumber = [formatter convertNumberFromString:[_dictionaryForBasicPlan valueForKey:@"Sum_Assured"]];
-        NSString *javaScriptP1H14=[NSString stringWithFormat:@"document.getElementById('SIDiscount').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"Discount"]];
+        NSString *javaScriptP1H14=[NSString stringWithFormat:@"document.getElementById('SIDiscount').innerHTML =\"(%@)\";", [_dictionaryForBasicPlan valueForKey:@"Discount"]];
         NSString *javaScriptP1H17=[NSString stringWithFormat:@"document.getElementById('TotalPremi').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"TotalPremiumLoading"]];
         NSString *javaScriptP1H1=[NSString stringWithFormat:@"document.getElementById('SumAssured').innerHTML =\"%@\";", [formatter numberToCurrencyDecimalFormatted:myNumber]];
         NSString *javaScriptP1H4=[NSString stringWithFormat:@"document.getElementById('Loading').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"LA_Name"]];

@@ -1570,7 +1570,7 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
 }
 
 -(void)Refresh{
-    [SINO removeAllObjects];
+   /* [SINO removeAllObjects];
     [DateCreated removeAllObjects];
     [Name removeAllObjects];
     [PlanName removeAllObjects];
@@ -1581,7 +1581,8 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
     [SIValidStatus removeAllObjects];
 
     [self LoadAllResult];
-    [myTableView reloadData];
+    [myTableView reloadData];*/
+    [self btnReset:nil];
 }
 
 -(void)SIListingClear{

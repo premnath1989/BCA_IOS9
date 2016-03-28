@@ -30,7 +30,7 @@
 #define CHARACTER_LIMIT_Address 30
 #define CHARACTER_LIMIT_POSTCODE 6
 #define CHARACTER_LIMIT_FOREIGN_POSTCODE 12
-#define CHARACTER_LIMIT_ANNUALINCOME 20
+#define CHARACTER_LIMIT_ANNUALINCOME 15
 #define CHARACTER_LIMIT_GSTREGNO 15
 #define CHARACTER_LIMIT_30 30
 
@@ -205,7 +205,7 @@ bool RegDatehandling;
     [txtIDType addTarget:self action:@selector(NewICDidChange:) forControlEvents:UIControlEventEditingDidEnd];
     //  [txtIDType addTarget:self action:@selector(NewICTextFieldBegin:) forControlEvents:UIControlEventEditingDidBegin];
     [txtAnnIncome addTarget:self action:@selector(AnnualIncomeChange:) forControlEvents:UIControlEventEditingDidEnd];
-    [txtOtherIDType addTarget:self action:@selector(OtheriDDidChange:) forControlEvents:UIControlEventEditingDidEnd];
+    //[txtOtherIDType addTarget:self action:@selector(OtheriDDidChange:) forControlEvents:UIControlEventEditingDidEnd];
 		
 	//to detect change
 	[txtEmail addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
@@ -2122,7 +2122,7 @@ bool RegDatehandling;
     [formatter setMaximumFractionDigits:0];
     [formatter setUsesGroupingSeparator:YES];
     [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
-    
+
     NSNumber *myNumber = [formatter numberFromString:txtAnnIncome.text];
     result = [formatter stringFromNumber:myNumber];
 
@@ -2649,10 +2649,41 @@ bool RegDatehandling;
     
     //if (btnPressed.tag == 0) {
     if (switchPressed.tag == 0) {
-        if (checked) {
+        if ([switchPressed isOn]) {
             [btnForeignHome setImage: [UIImage imageNamed:@"emptyCheckBox.png"] forState:UIControlStateNormal];
-            checked = NO;
+            checked = YES;
             
+            txtHomeAddr1.text = @"";
+            txtHomeAddr2.text = @"";
+            txtHomeAddr3.text = @"";
+            
+            txtHomePostCode.text = @"";
+            txtHomeTown.text = @"";
+            txtHomeState.text = @"";
+            [_outletKota setTitle:@"" forState:UIControlStateNormal];
+            [_outletProvinsi setTitle:@"" forState:UIControlStateNormal];
+            
+            [btnHomeCountry setTitle:@"- SELECT -" forState:UIControlStateNormal];
+            btnHomeCountry.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+            txtHomeTown.backgroundColor = [UIColor whiteColor];
+            txtHomeState.backgroundColor = [UIColor whiteColor];
+            txtHomeCountry.backgroundColor = [UIColor whiteColor];
+            txtHomeTown.enabled = YES;
+            txtHomeState.enabled = YES;
+            txtHomeCountry.hidden = YES;
+            btnHomeCountry.hidden = NO;
+            _outletKota.hidden=YES;
+            _outletProvinsi.hidden=YES;
+            
+            txtHomeState.enabled = NO;
+            txtHomeState.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+            
+            [txtHomePostCode removeTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingDidEnd];
+            [txtHomePostCode removeTarget:self action:@selector(EditTextFieldBegin:) forControlEvents:UIControlEventEditingDidBegin];
+            
+        } else {
+            [btnForeignHome setImage: [UIImage imageNamed:@"tickCheckBox.png"] forState:UIControlStateNormal];
+            checked = NO;
             txtHomeAddr1.text = @"";
             txtHomeAddr2.text = @"";
             txtHomeAddr3.text = @"";
@@ -2674,37 +2705,6 @@ bool RegDatehandling;
             _outletProvinsi.hidden=NO;
             //[txtHomePostCode addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingDidEnd];
             //[txtHomePostCode addTarget:self action:@selector(EditTextFieldBegin:) forControlEvents:UIControlEventEditingDidBegin];
-        } else {
-            [btnForeignHome setImage: [UIImage imageNamed:@"tickCheckBox.png"] forState:UIControlStateNormal];
-            checked = YES;
-            
-            txtHomeAddr1.text = @"";
-            txtHomeAddr2.text = @"";
-            txtHomeAddr3.text = @"";
-            
-            txtHomePostCode.text = @"";
-            txtHomeTown.text = @"";
-            txtHomeState.text = @"";
-            [_outletKota setTitle:@"" forState:UIControlStateNormal];
-            [_outletProvinsi setTitle:@"" forState:UIControlStateNormal];
-
-            [btnHomeCountry setTitle:@"- SELECT -" forState:UIControlStateNormal];
-            btnHomeCountry.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
-            txtHomeTown.backgroundColor = [UIColor whiteColor];
-            txtHomeState.backgroundColor = [UIColor whiteColor];
-            txtHomeCountry.backgroundColor = [UIColor whiteColor];
-            txtHomeTown.enabled = YES;
-            txtHomeState.enabled = YES;
-            txtHomeCountry.hidden = YES;
-            btnHomeCountry.hidden = NO;
-            _outletKota.hidden=YES;
-            _outletProvinsi.hidden=YES;
-            
-            txtHomeState.enabled = NO;
-            txtHomeState.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
-            
-            [txtHomePostCode removeTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingDidEnd];
-            [txtHomePostCode removeTarget:self action:@selector(EditTextFieldBegin:) forControlEvents:UIControlEventEditingDidBegin];
         }
         
     } else if (switchPressed.tag == 1) {

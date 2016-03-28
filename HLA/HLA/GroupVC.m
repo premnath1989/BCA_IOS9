@@ -372,7 +372,7 @@ BOOL isSave;
 	}
     
     else if (RecCount >= 1) {
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Apakah Anda yakin akan menghapus group? Apabila group dihapus, semua anggota akan keluar dari group tersebut?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Apakah Anda yakin akan menghapus member pada group ini?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
 		[alert setTag:1001];
 		[alert show];
 	}

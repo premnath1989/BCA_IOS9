@@ -20,6 +20,7 @@
 @interface BasicPlanViewController (){
     ColorHexCode *CustomColor;
     double discountPembelian;
+    int roundedDiscount;
 }
 @end
 
@@ -232,6 +233,15 @@ bool WPTPD30RisDeleted = FALSE;
     
     [_basicPremiField addTarget:self action:@selector(PremiDasarIncomeChange:) forControlEvents:UIControlEventEditingDidEnd];
     
+    NSString *detectedPlanType = [_dictionaryPOForInsert valueForKey:@"ProductName"];
+    if([detectedPlanType isEqualToString:@"BCA Life Heritage Protection"])
+    {
+        [self KeluargakuDisable];
+    }
+    else
+    {
+        [self KeluargakuEnable];
+    }
   }
 
 -(void) disableFieldsForEapp
@@ -544,20 +554,24 @@ bool WPTPD30RisDeleted = FALSE;
         int masaExtraPremi=[textField.text intValue];
         
         if ([_masaPembayaranButton.titleLabel.text isEqualToString:@"Premi Tunggal"]){
-            if (masaExtraPremi != 1){
-                [self createAlertViewAndShow:@"Masa extra premi harus sama dengan 1" tag:0];
-                [textField setText:@""];
-                [textField becomeFirstResponder];
+            if (([_extraPremiNumberField.text length]>0)||([_extraPremiPercentField.text length]>0)){
+                if (masaExtraPremi != 1){
+                    [self createAlertViewAndShow:@"Masa extra premi harus sama dengan 1" tag:0];
+                    [textField setText:@""];
+                    [textField becomeFirstResponder];
+                }
             }
             else{
                 [self PremiDasarActB];
             }
         }
         else{
-            if (masaExtraPremi<1 && masaExtraPremi>5){
-                [self createAlertViewAndShow:@"Masa extra premi tidak boleh lebih dari 5 dan kurang dari 1" tag:0];
-                [textField setText:@""];
-                [textField becomeFirstResponder];
+            if (([_extraPremiNumberField.text length]>0)||([_extraPremiPercentField.text length]>0)){
+                if (masaExtraPremi<1 && masaExtraPremi>5){
+                    [self createAlertViewAndShow:@"Masa extra premi tidak boleh lebih dari 5 dan kurang dari 1" tag:0];
+                    [textField setText:@""];
+                    [textField becomeFirstResponder];
+                }
             }
             else{
                 //[self PremiDasarActB];
@@ -592,6 +606,7 @@ bool WPTPD30RisDeleted = FALSE;
     }
     else
     {
+        [self PremiDasarAct];
         [self PremiDasarActB];
         [self ExtraNumbPremi];
     }
@@ -671,8 +686,16 @@ bool WPTPD30RisDeleted = FALSE;
 
 -(IBAction)MasaExtraPremiTextFieldDidEnd:(UITextField *)sender {
     //[MasaExtraPremiLBL setHidden:YES];
-    [self PremiDasarActKeluargaku:FRekeunsiPembayaranMode];
-    [self calculateRiderPremi];
+    if([PlanType isEqualToString:@"BCA Life Keluargaku"])
+    {
+        [self PremiDasarActKeluargaku:FRekeunsiPembayaranMode];
+        [self calculateRiderPremi];
+    }
+    else{
+        [self PremiDasarAct];
+        [self PremiDasarActB];
+        [self ExtraNumbPremi];
+    }
 }
 
 
@@ -1153,7 +1176,7 @@ bool WPTPD30RisDeleted = FALSE;
     [format21 setRoundingMode:NSNumberFormatterRoundHalfUp];
     
     DiscountCalculation = [[format21 stringFromNumber:[NSNumber numberWithDouble:DiscountCalculation]] doubleValue];
-    int roundedDiscount=round(DiscountCalculation);
+    roundedDiscount=round(DiscountCalculation);
     [_KKLKDiskaunBtn setText:[classFormatter stringToCurrencyDecimalFormatted:[NSString stringWithFormat:@"%i",roundedDiscount]]];
     NSLog(@"MDBKK %f",MDBKK);
   //  [self PremiDasarIncomeChange:_basicPremiField.text];
@@ -1710,8 +1733,8 @@ bool WPTPD30RisDeleted = FALSE;
 
     int masaExtraPremiBTotal =[_masaExtraPremiField.text intValue];\
     
-     double totalB = total * masaExtraPremiBTotal;
-    
+    //double totalB = total * masaExtraPremiBTotal;
+    double totalB = total;
     //prem//
     
     long long Extraprem =totalB;
@@ -2775,7 +2798,7 @@ bool WPTPD30RisDeleted = FALSE;
     double MDBKKLoading = [riderCalculation calculateMDBKKLoading:dictForCalculate DictionaryBasicPlan:[self setDataBasicPlan] DictionaryPO:_dictionaryPOForInsert BasicCode:@"KLK" PaymentCode:[self getPaymentType] PersonType:personCharacterType];
     double RiderLoading = [riderCalculation calculateBPPremiLoading:dictForCalculate DictionaryBasicPlan:[self setDataBasicPlan] DictionaryPO:_dictionaryPOForInsert BasicCode:@"KLK" PaymentCode:[self getPaymentType] PersonType:personCharacterType];
     
-    double premiDasar = RiderPremium + MDBKKPremi;
+    double premiDasar = RiderPremium + MDBKKPremi + roundedDiscount;
     double extrapremi = MDBKKLoading + RiderLoading;
     double totalPremi = RiderPremium + MDBKKPremi + MDBKKLoading + RiderLoading;
     

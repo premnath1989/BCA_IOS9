@@ -676,6 +676,7 @@ BOOL isFirstLoad;
     if ([self.requestSINo isEqualToString:self.requestSINo2] || (self.requestSINo == NULL && self.requestSINo2 == NULL) ) {        
         PlanEmpty = YES;
         added = NO;
+        arrayIntValidate = [[NSMutableArray alloc] initWithObjects:@"0",@"0",@"0",@"0", nil];
 		ListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"Pemegang Polis", @"Tertanggung", @"Ansurasi Dasar \n Asuransi Tambahan \n Premi", @"Ilustrasi ",@"Produk Brosur",@"Simpan sebagai Baru", nil];
 //		ListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"Life Assured", @"   2nd Life Assured", @"   Payor", @"Basic Plan", nil];
         
@@ -2677,6 +2678,7 @@ BOOL isFirstLoad;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"cell last index %i",lastIndexSelected);
 	/*static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [self.myTableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
@@ -2808,9 +2810,11 @@ BOOL isFirstLoad;
             [cell.button3 setEnabled:false];
         }
         else{
-            [cell.button1 setEnabled:true];
-            [cell.button2 setEnabled:true];
-            [cell.button3 setEnabled:true];
+            if (indexPath.row == 2){
+                [cell.button1 setEnabled:true];
+                [cell.button2 setEnabled:true];
+                [cell.button3 setEnabled:true];
+            }
         }
     }
     
@@ -2894,6 +2898,7 @@ BOOL isFirstLoad;
             [_RiderController setDictionaryPOForInsert:dictionaryPOForInsert];
             [_RiderController setDictionaryForBasicPlan:newDictionaryForBasicPlan];
             [_RiderController setElementActive];
+            [_RiderController loadInitialRiderData];
             [self.RightView bringSubviewToFront:self.RiderController.view];
             [_RiderController calculateRiderPremi];
             @try {
@@ -3143,11 +3148,13 @@ BOOL isFirstLoad;
             [_RiderController setDictionaryPOForInsert:dictionaryPOForInsert];
             [_RiderController setDictionaryForBasicPlan:newDictionaryForBasicPlan];
             [_RiderController setElementActive];
+            [_RiderController loadInitialRiderData];
             [self.RightView addSubview:self.RiderController.view];
         } else {
             [_RiderController setDictionaryPOForInsert:dictionaryPOForInsert];
             [_RiderController setDictionaryForBasicPlan:newDictionaryForBasicPlan];
             [_RiderController setElementActive];
+            [_RiderController loadInitialRiderData];
             [self.RightView bringSubviewToFront:self.RiderController.view];
         }
         [_RiderController calculateRiderPremi];
