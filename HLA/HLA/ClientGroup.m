@@ -379,7 +379,6 @@ NSMutableArray *DelGroupArr;
     else {
         cell.backgroundColor = [CustomColor colorWithHexString:@"E9EDF4"];
     }
-    
 	//    cell.selectionStyle = UITableViewCellSelectionStyleGray;
 	
     
