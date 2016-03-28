@@ -184,7 +184,7 @@
 
 @property BRRequest *nextRequest;
 @property BRRequest *prevRequest;
-@property (weak) id <BRRequestDelegate> delegate;
+@property (strong) id <BRRequestDelegate> delegate;
 @property  BRStreamInfo *streamInfo;
 @property BOOL didOpenStream;                                                   // whether the stream opened or not
 @property (readonly) long bytesSent;                                            // will have bytes from the last FTP call

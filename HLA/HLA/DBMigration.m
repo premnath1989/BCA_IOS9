@@ -31,7 +31,6 @@
     tempDir = [NSTemporaryDirectory() stringByAppendingPathComponent:@"hladb.sqlite"];
     dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     defaultDBPath = [[dirPaths objectAtIndex:0] stringByAppendingPathComponent:@"hladb.sqlite"];
-    bundleDBPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"hladb.sqlite"];
     
     // compare database version with the version saved in the plist
     NSString *dbVersion = [NSString stringWithFormat:
@@ -39,7 +38,7 @@
     NSLog(@"dbversion New: %@",dbVersion);
     NSString *bundleDBVersion = @"0.0";
     sqlite3 *database;
-    if (sqlite3_open([bundleDBPath UTF8String], &database) == SQLITE_OK) {
+    if (sqlite3_open([defaultDBPath UTF8String], &database) == SQLITE_OK) {
         bundleDBVersion = [self getDBVersionNumber:database];
     }
     sqlite3_close(database);

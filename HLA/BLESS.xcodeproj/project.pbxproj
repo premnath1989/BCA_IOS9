@@ -784,16 +784,16 @@
 		DE050BE51C9BF52B00AA6D45 /* BCA_life_Keluargaku_Video_Testimonial_Part_I_final.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = DE050BE41C9BF52B00AA6D45 /* BCA_life_Keluargaku_Video_Testimonial_Part_I_final.mp4 */; };
 		DE1CC9621CA284A70058B595 /* PremiumKeluargaku.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE1CC9611CA284A70058B595 /* PremiumKeluargaku.xib */; };
 		DE80E43A1CA3F7FB00D9E775 /* BlackRaccoon-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DE80E4231CA3F7FB00D9E775 /* BlackRaccoon-Info.plist */; };
-		DE80E43B1CA3F7FB00D9E775 /* BRRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = DE80E4271CA3F7FB00D9E775 /* BRRequest.m */; };
-		DE80E43C1CA3F7FB00D9E775 /* BRRequest+_UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = DE80E4291CA3F7FB00D9E775 /* BRRequest+_UserData.m */; };
-		DE80E43D1CA3F7FB00D9E775 /* BRRequestCreateDirectory.m in Sources */ = {isa = PBXBuildFile; fileRef = DE80E42B1CA3F7FB00D9E775 /* BRRequestCreateDirectory.m */; };
-		DE80E43E1CA3F7FB00D9E775 /* BRRequestDelete.m in Sources */ = {isa = PBXBuildFile; fileRef = DE80E42D1CA3F7FB00D9E775 /* BRRequestDelete.m */; };
-		DE80E43F1CA3F7FB00D9E775 /* BRRequestDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = DE80E42F1CA3F7FB00D9E775 /* BRRequestDownload.m */; };
-		DE80E4401CA3F7FB00D9E775 /* BRRequestError.m in Sources */ = {isa = PBXBuildFile; fileRef = DE80E4311CA3F7FB00D9E775 /* BRRequestError.m */; };
-		DE80E4411CA3F7FB00D9E775 /* BRRequestListDirectory.m in Sources */ = {isa = PBXBuildFile; fileRef = DE80E4331CA3F7FB00D9E775 /* BRRequestListDirectory.m */; };
-		DE80E4421CA3F7FB00D9E775 /* BRRequestQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = DE80E4351CA3F7FB00D9E775 /* BRRequestQueue.m */; };
-		DE80E4431CA3F7FB00D9E775 /* BRRequestUpload.m in Sources */ = {isa = PBXBuildFile; fileRef = DE80E4371CA3F7FB00D9E775 /* BRRequestUpload.m */; };
-		DE80E4441CA3F7FB00D9E775 /* BRStreamInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = DE80E4391CA3F7FB00D9E775 /* BRStreamInfo.m */; };
+		DE80E43B1CA3F7FB00D9E775 /* BRRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = DE80E4271CA3F7FB00D9E775 /* BRRequest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		DE80E43C1CA3F7FB00D9E775 /* BRRequest+_UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = DE80E4291CA3F7FB00D9E775 /* BRRequest+_UserData.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		DE80E43D1CA3F7FB00D9E775 /* BRRequestCreateDirectory.m in Sources */ = {isa = PBXBuildFile; fileRef = DE80E42B1CA3F7FB00D9E775 /* BRRequestCreateDirectory.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		DE80E43E1CA3F7FB00D9E775 /* BRRequestDelete.m in Sources */ = {isa = PBXBuildFile; fileRef = DE80E42D1CA3F7FB00D9E775 /* BRRequestDelete.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		DE80E43F1CA3F7FB00D9E775 /* BRRequestDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = DE80E42F1CA3F7FB00D9E775 /* BRRequestDownload.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		DE80E4401CA3F7FB00D9E775 /* BRRequestError.m in Sources */ = {isa = PBXBuildFile; fileRef = DE80E4311CA3F7FB00D9E775 /* BRRequestError.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		DE80E4411CA3F7FB00D9E775 /* BRRequestListDirectory.m in Sources */ = {isa = PBXBuildFile; fileRef = DE80E4331CA3F7FB00D9E775 /* BRRequestListDirectory.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		DE80E4421CA3F7FB00D9E775 /* BRRequestQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = DE80E4351CA3F7FB00D9E775 /* BRRequestQueue.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		DE80E4431CA3F7FB00D9E775 /* BRRequestUpload.m in Sources */ = {isa = PBXBuildFile; fileRef = DE80E4371CA3F7FB00D9E775 /* BRRequestUpload.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		DE80E4441CA3F7FB00D9E775 /* BRStreamInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = DE80E4391CA3F7FB00D9E775 /* BRStreamInfo.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		DE80E4481CA3F85900D9E775 /* ProductInfoItems.m in Sources */ = {isa = PBXBuildFile; fileRef = DE80E4471CA3F85900D9E775 /* ProductInfoItems.m */; };
 		DE80E44A1CA3FCEE00D9E775 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE80E4491CA3FCEE00D9E775 /* CFNetwork.framework */; };
 		DE8D29C71C94512900727765 /* TabValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = DE8D29C61C94512900727765 /* TabValidation.m */; };
@@ -2187,6 +2187,7 @@
 		DE80E4491CA3FCEE00D9E775 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		DE8D29C51C94511C00727765 /* TabValidation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabValidation.h; sourceTree = "<group>"; };
 		DE8D29C61C94512900727765 /* TabValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabValidation.m; sourceTree = "<group>"; };
+		DE8E182F1CA906870070A298 /* ProductInfoItemsDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProductInfoItemsDelegate.h; sourceTree = "<group>"; };
 		DE9E89651CA26A2400BF6D0D /* PremiumKeluargaku.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PremiumKeluargaku.m; sourceTree = "<group>"; };
 		DEE2B7C51C9FADC200B7283A /* DBMigration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DBMigration.h; sourceTree = "<group>"; };
 		DEE2B7C61C9FADCF00B7283A /* DBMigration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBMigration.m; sourceTree = "<group>"; };
@@ -4272,6 +4273,8 @@
 		C4E9D19B1612C64900016053 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				DE80E4231CA3F7FB00D9E775 /* BlackRaccoon-Info.plist */,
+				DE80E4241CA3F7FB00D9E775 /* BlackRaccoon-Prefix.pch */,
 				C34B421518ED620B00BD92C9 /* IDTypeForCO.plist */,
 				427FD17218AC703900D3B193 /* RelationshipPO.plist */,
 				EFAEABE0188D2E37001D8C53 /* Postcode.csv */,
@@ -4658,8 +4661,6 @@
 		DE80E4221CA3F79300D9E775 /* BlackRacoon */ = {
 			isa = PBXGroup;
 			children = (
-				DE80E4231CA3F7FB00D9E775 /* BlackRaccoon-Info.plist */,
-				DE80E4241CA3F7FB00D9E775 /* BlackRaccoon-Prefix.pch */,
 				DE80E4251CA3F7FB00D9E775 /* BRGlobal.h */,
 				DE80E4261CA3F7FB00D9E775 /* BRRequest.h */,
 				DE80E4271CA3F7FB00D9E775 /* BRRequest.m */,
@@ -4690,6 +4691,7 @@
 			children = (
 				DE80E4461CA3F84D00D9E775 /* ProductInfoItems.h */,
 				DE80E4471CA3F85900D9E775 /* ProductInfoItems.m */,
+				DE8E182F1CA906870070A298 /* ProductInfoItemsDelegate.h */,
 			);
 			name = ProductInfoItems;
 			sourceTree = "<group>";

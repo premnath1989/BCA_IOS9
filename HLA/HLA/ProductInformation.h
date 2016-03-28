@@ -10,13 +10,18 @@
 #import "ReaderViewController.h"
 #import "TableManagement.h"
 #import <MediaPlayer/MediaPlayer.h>
+#import "ProductInfoItemsDelegate.h"
+#import "ProductInfoItems.h"
 
-@interface ProductInformation : UIViewController<ReaderViewControllerDelegate, UITableViewDelegate, UITableViewDataSource>{
+@interface ProductInformation : UIViewController<ReaderViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, ProductInfoItemsDelegate>{
     NSArray *columnHeadersContent;
     TableManagement *tableManagement;
     UIView *TableHeader;
     UIColor *themeColour;
     UIFont *fontType;
+    NSMutableArray *FTPItemsList;
+    ProductInfoItems *FTPitems;
+    NSString *filePath;
 }
 
 

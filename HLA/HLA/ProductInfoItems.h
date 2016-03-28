@@ -13,11 +13,17 @@
 #import "BRRequestDownload.h"
 #import "BRRequestDelete.h"
 #import "BRRequest+_UserData.h"
+#import "ProductInfoItemsDelegate.h"
 
 @interface ProductInfoItems : NSObject<BRRequestDelegate>{
     BRRequestListDirectory *listDir;
+    NSMutableData *downloadData;
+    BRRequestDownload * downloadFile;
+    NSString *fileName;
 }
 
 - (void) listDirectory;
+- (void) downloadFile:(NSString *)fileNameTemp;
+@property (nonatomic, assign) id<ProductInfoItemsDelegate>  ftpDelegate;
 
 @end

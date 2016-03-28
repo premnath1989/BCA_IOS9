@@ -25,7 +25,6 @@
     NSString *databasePath;
     NSArray *dirPaths;
     NSString *defaultDBPath;
-    NSString *bundleDBPath;
     sqlite3 *contactDB;
     NSString *tempDir;
 }

@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProductInformation">
             <connections>
                 <outlet property="btnHome" destination="SFe-2T-YSc" id="X9x-iM-soD"/>
+                <outlet property="myTableView" destination="1uw-8g-iyc" id="ZCF-Nc-LLN"/>
                 <outlet property="navigationBar" destination="IxN-eo-yn2" id="j4l-h7-v7x"/>
                 <outlet property="view" destination="sKD-c1-55Z" id="uK6-dr-au4"/>
             </connections>

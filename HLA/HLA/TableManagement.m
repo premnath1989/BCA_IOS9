@@ -74,12 +74,11 @@
     }
 }
 
-- (void)TableRowInsert:(NSArray *)dataArray index:(NSInteger)index table:(UITableViewCell*)cell color:(UIColor *)textColor{
+- (void)TableRowInsert:(NSMutableArray *)dataArray index:(NSInteger)index table:(UITableViewCell*)cell color:(UIColor *)textColor{
     int i = 0;
     for(UIView *view in [TableHeader subviews]){
         if([view isKindOfClass:[UILabel class]]){
             CGRect frame=CGRectMake(view.frame.origin.x + 15.0f,0, view.frame.size.width, 50);
-            UILabel *columnLabel = (UILabel *)view;
             UILabel *label1=[[UILabel alloc]init];
             label1.frame=frame;
             if ([dataArray count]>0){
@@ -91,7 +90,7 @@
             
             label1.tag = (index*1000)+i;
             label1.textColor = textColor;
-            label1.textAlignment = columnLabel.textAlignment;
+            label1.textAlignment = NSTextAlignmentJustified;
             label1.font = [UIFont fontWithName:@"BPreplay" size:16];
             [cell.contentView addSubview:label1];
             
