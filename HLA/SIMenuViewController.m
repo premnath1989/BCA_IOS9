@@ -2677,6 +2677,7 @@ BOOL isFirstLoad;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"cell last index %i",lastIndexSelected);
 	/*static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [self.myTableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
@@ -2808,9 +2809,11 @@ BOOL isFirstLoad;
             [cell.button3 setEnabled:false];
         }
         else{
-            [cell.button1 setEnabled:true];
-            [cell.button2 setEnabled:true];
-            [cell.button3 setEnabled:true];
+            if (indexPath.row == 2){
+                [cell.button1 setEnabled:true];
+                [cell.button2 setEnabled:true];
+                [cell.button3 setEnabled:true];
+            }
         }
     }
     
