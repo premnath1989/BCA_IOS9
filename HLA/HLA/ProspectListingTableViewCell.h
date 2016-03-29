@@ -1,9 +1,9 @@
 //
 //  ProspectListingTableViewCell.h
-//  BLESS
+//  MPOS
 //
 //  Created by Basvi on 2/12/16.
-//  Copyright © 2016 nfoConnect Sdn Bhd. All rights reserved.
+//  Copyright © 2016 InfoConnect Sdn Bhd. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

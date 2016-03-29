@@ -1,6 +1,6 @@
 //
 //  ProspectProfile.m
-//  HLA Ipad
+//  MPOS
 //
 //  Created by Md. Nazmus Saadat on 10/1/12.
 //  Copyright (c) 2012 InfoConnect Sdn Bhd. All rights reserved.
