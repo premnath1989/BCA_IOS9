@@ -228,26 +228,31 @@ MBProgressHUD *HUD;
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[ProspectListingTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Data"];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
-   
 	//change
 	if (ProspectTableData.count != 0) {
+        static NSString *CellIdentifier = @"Cell";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        }
+
 		if (indexPath.row == [ProspectTableData count]) {
 			//cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-			if ([ProspectTableData count] == TotalData) {
-                cell.textLabel.text =@"";
-				cell.textLabel.text = @"Tidak ada catatan lebih lanjut tersedia";
+            cell.textLabel.text =@"";
+            if ([ProspectTableData count] == TotalData) {
+                cell.textLabel.text = @"Tidak ada catatan lebih lanjut tersedia";
 			}
 			else {
-                cell.textLabel.text =@"";
-				cell.textLabel.text = @"Memuat lebih banyak catatan...";
+            	cell.textLabel.text = @"Memuat lebih banyak catatan...";
 			}
 			
 			cell.textLabel.textColor = [UIColor colorWithRed:88.0f/255.0f green:89.0f/255.0f blue:92.0f/255.0f alpha:1];
 			cell.textLabel.font = [UIFont fontWithName:@"BPreplay" size:14];
             cell.userInteractionEnabled = NO;
-		}
+            return cell;
+        }
         else if(indexPath.row <[ProspectTableData count]){
             //static NSString *CellIdentifier = @"Cell";
             ProspectListingTableViewCell *cell1 = (ProspectListingTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"DataCell"];
@@ -325,8 +330,9 @@ MBProgressHUD *HUD;
             [cell1.labelDateCreated setText:pp.DateCreated];
             [cell1.labelDateModified setText:pp.DateModified];
             [cell1.labelTimeRemaining setText:DateRemaining];
-            cell=cell1;
-           
+            //cell=cell1;
+            return cell1;
+            
             /*cell.userInteractionEnabled = YES;
 			cell.textLabel.text = nil;
 			
