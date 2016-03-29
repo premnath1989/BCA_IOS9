@@ -2912,33 +2912,42 @@ BOOL isFirstLoad;
                 }
                 break;
             case 2:
-                if([_BasicController validationDataBasicPlan]){
-                    if (!_PremiumController) {
-                        _PremiumController = [self.storyboard instantiateViewControllerWithIdentifier:@"premiumView"];
-                        //_PremiumController.delegate = self;
-                        [self.RightView addSubview:_PremiumController.view];
+                if([[dictionaryPOForInsert valueForKey:@"ProductName"] isEqualToString:@"BCA Life Heritage Protection"]){
+                    if([_BasicController validationDataBasicPlan]){
+                        if (!_PremiumController) {
+                            _PremiumController = [self.storyboard instantiateViewControllerWithIdentifier:@"premiumView"];
+                            //_PremiumController.delegate = self;
+                            [self.RightView addSubview:_PremiumController.view];
+                            
+                        }
+                        //[_PremiumController setDictionaryPremium:newDictionaryForBasicPlan];
+                        //[_PremiumController setDictionaryPremium:newDictionaryForBasicPlan];
                         
-                    }
-                    //[_PremiumController setDictionaryPremium:newDictionaryForBasicPlan];
-                    //[_PremiumController setDictionaryPremium:newDictionaryForBasicPlan];
-                    
-                    [self pullSIData];
-                    [_PremiumController setPremiumDictionary:newDictionaryForBasicPlan];
-                    [self.RightView bringSubviewToFront:_PremiumController.view];
-                    
-                    @try {
-                        [self saveLAForTableDidSelect];
-                        [self saveBasicPlanForTableDidSelect];
-                    }
-                    @catch (NSException *exception) {
+                        [self pullSIData];
+                        [_PremiumController setPremiumDictionary:newDictionaryForBasicPlan];
+                        [self.RightView bringSubviewToFront:_PremiumController.view];
                         
-                    }
-                    @finally {
-                        
+                        @try {
+                            [self saveLAForTableDidSelect];
+                            [self saveBasicPlanForTableDidSelect];
+                        }
+                        @catch (NSException *exception) {
+                            
+                        }
+                        @finally {
+                            
+                        }
                     }
                 }
+                else{
+                    PremiumKeluargaku *premiK = [[PremiumKeluargaku alloc]initWithNibName:@"PremiumKeluargaku"
+                                                                                   bundle:nil SINO:[dictionaryPOForInsert valueForKey:@"SINO"]];
+                    [self.RightView addSubview:premiK.view];
+                    [self.RightView bringSubviewToFront:premiK.view];
+                }
+                
                 break;
-            case 3:{
+            /*case 3:{
                 
                 NSString *PlanType = [dictionaryPOForInsert valueForKey:@"ProductName"];
                 
@@ -2955,7 +2964,7 @@ BOOL isFirstLoad;
                 }
                 
             }
-                break;
+                break;*/
             default:
                 break;
         }
