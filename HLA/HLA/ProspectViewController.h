@@ -30,6 +30,7 @@
 #import "ModelProspectProfile.h"
 #import "KodePosInfo.h"
 #import "NIPInfo.h"
+#import "Formatter.h"
 
 @class DataTable,DBController;
 @protocol ProspectViewControllerDelegate
@@ -43,6 +44,7 @@
     sqlite3 *contactDB;
     UITextField *activeField;
     UITextView *activeView;
+    Formatter* classFormatter;
     OccupationList *_OccupationList;
     SIDate *_SIDate;
     GroupClass *_GroupList;

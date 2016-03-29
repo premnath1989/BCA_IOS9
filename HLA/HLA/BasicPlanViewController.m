@@ -2087,6 +2087,7 @@ bool WPTPD30RisDeleted = FALSE;
     NSLog(@"basicsumassured %lli",BasisSumAssured);
     yearlyIncomeField.text = [yearlyIncomeField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     yearlyIncomeField.text = [yearlyIncomeField.text stringByReplacingOccurrencesOfString:@"," withString:@""];
+    yearlyIncomeField.text = [yearlyIncomeField.text stringByReplacingOccurrencesOfString:@"." withString:@""];
     yearlyIncomeField.text = [yearlyIncomeField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     
     NSString *result;

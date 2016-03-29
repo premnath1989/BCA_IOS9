@@ -154,6 +154,8 @@ bool RegDatehandling;
 {
     RegDatehandling =YES;
     [super viewDidLoad];
+    classFormatter = [[Formatter alloc]init];
+    
     [_outletProvinsi setTag:0];
     [_outletProvinsiOffice setTag:2];
     [_outletKota setTag:1];
@@ -2113,6 +2115,7 @@ bool RegDatehandling;
     
     txtAnnIncome.text = [txtAnnIncome.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     txtAnnIncome.text = [txtAnnIncome.text stringByReplacingOccurrencesOfString:@"," withString:@""];
+    txtAnnIncome.text = [txtAnnIncome.text stringByReplacingOccurrencesOfString:@"." withString:@""];
     txtAnnIncome.text = [txtAnnIncome.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     
     NSString *result;
@@ -2123,6 +2126,7 @@ bool RegDatehandling;
     [formatter setUsesGroupingSeparator:YES];
     [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
 
+    
     NSNumber *myNumber = [formatter numberFromString:txtAnnIncome.text];
     result = [formatter stringFromNumber:myNumber];
 
@@ -2708,7 +2712,7 @@ bool RegDatehandling;
         }
         
     } else if (switchPressed.tag == 1) {
-        if (checked2) {
+        if ([switchPressed isOn]) {
             [btnForeignOffice setImage: [UIImage imageNamed:@"emptyCheckBox.png"] forState:UIControlStateNormal];
             checked2 = NO;
             
@@ -2719,37 +2723,9 @@ bool RegDatehandling;
             txtOfficePostcode.text = @"";
             txtOfficeTown.text = @"";
             txtOfficeState.text = @"";
-            txtOfficeCountry.text = @"";
             [_outletKotaOffice setTitle:@"" forState:UIControlStateNormal];
             [_outletProvinsiOffice setTitle:@"" forState:UIControlStateNormal];
-
-            // txtOfficeTown.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
-            txtOfficeState.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
-            txtOfficeCountry.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
-            txtOfficeTown.enabled = NO;
-            txtOfficeState.enabled = NO;
-            txtOfficeCountry.hidden = NO;
-            btnOfficeCountry.hidden = YES;
-            _outletKotaOffice.hidden=NO;
-            _outletProvinsiOffice.hidden=NO;
             
-            //[txtOfficePostcode addTarget:self action:@selector(OfficePostcodeDidChange:) forControlEvents:UIControlEventEditingDidEnd];
-            [txtOfficePostcode addTarget:self action:@selector(OfficeEditTextFieldBegin:) forControlEvents:UIControlEventEditingDidBegin];
-            
-        } else {
-            [btnForeignOffice setImage: [UIImage imageNamed:@"tickCheckBox.png"] forState:UIControlStateNormal];
-            checked2 = YES;
-            
-            txtOfficeAddr1.text = @"";
-            txtOfficeAddr2.text = @"";
-            txtOfficeAddr3.text = @"";
-            
-            txtOfficePostcode.text = @"";
-            txtOfficeTown.text = @"";
-            txtOfficeState.text = @"";
-            [_outletKotaOffice setTitle:@"" forState:UIControlStateNormal];
-            [_outletProvinsiOffice setTitle:@"" forState:UIControlStateNormal];
-
             [btnOfficeCountry setTitle:@"- SELECT -" forState:UIControlStateNormal];
             btnOfficeCountry.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
             txtOfficeTown.backgroundColor = [UIColor whiteColor];
@@ -2767,6 +2743,33 @@ bool RegDatehandling;
             
             [txtOfficePostcode removeTarget:self action:@selector(OfficePostcodeDidChange:) forControlEvents:UIControlEventEditingDidEnd];
             [txtOfficePostcode removeTarget:self action:@selector(OfficeEditTextFieldBegin:) forControlEvents:UIControlEventEditingDidBegin];
+        } else {
+            [btnForeignOffice setImage: [UIImage imageNamed:@"tickCheckBox.png"] forState:UIControlStateNormal];
+            checked2 = YES;
+            
+            txtOfficeAddr1.text = @"";
+            txtOfficeAddr2.text = @"";
+            txtOfficeAddr3.text = @"";
+            
+            txtOfficePostcode.text = @"";
+            txtOfficeTown.text = @"";
+            txtOfficeState.text = @"";
+            txtOfficeCountry.text = @"";
+            [_outletKotaOffice setTitle:@"" forState:UIControlStateNormal];
+            [_outletProvinsiOffice setTitle:@"" forState:UIControlStateNormal];
+            
+            // txtOfficeTown.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+            txtOfficeState.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+            txtOfficeCountry.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+            txtOfficeTown.enabled = NO;
+            txtOfficeState.enabled = NO;
+            txtOfficeCountry.hidden = NO;
+            btnOfficeCountry.hidden = YES;
+            _outletKotaOffice.hidden=NO;
+            _outletProvinsiOffice.hidden=NO;
+            
+            //[txtOfficePostcode addTarget:self action:@selector(OfficePostcodeDidChange:) forControlEvents:UIControlEventEditingDidEnd];
+            [txtOfficePostcode addTarget:self action:@selector(OfficeEditTextFieldBegin:) forControlEvents:UIControlEventEditingDidBegin];
         }
     }
 }
