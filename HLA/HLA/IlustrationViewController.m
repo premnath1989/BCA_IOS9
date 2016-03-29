@@ -621,19 +621,27 @@
     NSString *pdfPathOutput = [NSString stringWithFormat:@"%@/%@_%@.pdf",documentsDirectory,[_dictionaryPOForInsert valueForKey:@"ProductName"],[_dictionaryPOForInsert valueForKey:@"SINO"]];
     //NSString *file = [[NSBundle mainBundle] pathForResource:@"Brochure_ProdukBCALIfeKeluargaku_21012016" ofType:@"pdf"];
     
+    //compose the subject and body
+    NSString *sexPO;
+    if ([[_dictionaryPOForInsert valueForKey:@"PO_Gender"] isEqualToString:@"MALE"]){
+        sexPO=@"Bapak";
+    }
+    else{
+        sexPO=@"Ibu";
+    }
+    
+    NSString* AgentName = [_dictionaryForAgentProfile valueForKey:@"AgentName"];
+    NSString *mailComposerText=[NSString stringWithFormat:@"Kepada %@ %@ <br/><br/>Calon Nasabah BCA Life,Terima kasih atas kesempatan yang diberikan kepada Financial Advisor kami %@ untuk menjelaskan mengenai produk perlindungan asuransi yang %@ butuhkan. <br/><br/>Terlampir kami kirimkan Ilustrasi yang sudah dibuat oleh Financial Advisor kami. Silahkan buka dan pelajari apakah sudah sesuai dengan kebutuhan jaminan masa depan %@. <br/><br/>Untuk informasi produk asuransi lainnya, silahkan mengunjungi website kami di www.bcalife.co.id atau menghubungi customer service HALO BCA 1500888.<br/><br/>Terima Kasih<br/>PT Asuransi Jiwa BCA",sexPO,[_dictionaryPOForInsert valueForKey:@"PO_Name"],AgentName,sexPO,sexPO];
+    
     ReaderDocument *document = [ReaderDocument withDocumentFilePath:pdfPathOutput password:nil];
     
-    //if (document != nil)
-    //{
-        ReaderViewController *readerViewController = [[ReaderViewController alloc] initWithReaderDocument:document];
-        readerViewController.delegate = self;
-        [readerViewController setIlustrasiNumber:[_dictionaryPOForInsert valueForKey:@"SINO"]];
-        [readerViewController setDictPO:_dictionaryPOForInsert];
-        [readerViewController setDictPO:_dictionaryForAgentProfile];
-        readerViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-        readerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
-        [self presentViewController:readerViewController animated:YES completion:Nil];
-    //}
+    ReaderViewController *readerViewController = [[ReaderViewController alloc] initWithReaderDocument:document];
+    readerViewController.delegate = self;
+    readerViewController.bodyEmail = mailComposerText;
+    readerViewController.subjectEmail = [NSString stringWithFormat:@"BCALife Illustration %@",[_dictionaryPOForInsert valueForKey:@"SINO"]];
+    readerViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    readerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+    [self presentViewController:readerViewController animated:YES completion:Nil];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView

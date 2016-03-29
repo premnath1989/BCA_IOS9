@@ -82,6 +82,8 @@
 #pragma mark - Properties
 
 @synthesize delegate;
+@synthesize subjectEmail;
+@synthesize bodyEmail;
 
 #pragma mark - ReaderViewController methods
 
@@ -800,17 +802,6 @@
 	if ([MFMailComposeViewController canSendMail] == NO) return;
 
 	if (printInteraction != nil) [printInteraction dismissAnimated:YES];
-
-    NSString *sexPO;
-    if ([[_dictPO valueForKey:@"PO_Gender"] isEqualToString:@"MALE"]){
-        sexPO=@"Bapak";
-    }
-    else{
-        sexPO=@"Ibu";
-    }
-    
-    NSString* AgentName = [_dictAgent valueForKey:@"AgentName"];
-    NSString *mailComposerText=[NSString stringWithFormat:@"Kepada %@ %@ Calon Nasabah BCA Life,Terima kasih atas kesempatan yang diberikan kepada Financial Advisor kami %@ untuk menjelaskan mengenai produk perlindungan asuransi yang %@ butuhkan. Terlampir kami kirimkan Ilustrasi yang sudah dibuat oleh Financial Advisor kami. Silahkan buka dan pelajari apakah sudah sesuai dengan kebutuhan jaminan masa depan %@. Untuk informasi produk asuransi lainnya, silahkan mengunjungi website kami di www.bcalife.co.id atau menghubungi customer service HALO BCA 1500888.",sexPO,[_dictPO valueForKey:@"PO_Name"],AgentName,sexPO,sexPO];
     
     unsigned long long fileSize = [document.fileSize unsignedLongLongValue];
 
@@ -826,8 +817,8 @@
 
 			[mailComposer addAttachmentData:attachment mimeType:@"application/pdf" fileName:fileName];
 
-			[mailComposer setSubject:[NSString stringWithFormat:@"BCALife Illustration %@",_ilustrasiNumber]/*fileName*/]; // Use the document file name for the subject
-            [mailComposer setMessageBody:mailComposerText isHTML:NO];
+			[mailComposer setSubject:subjectEmail]; // Use the document file name for the subject
+            [mailComposer setMessageBody:bodyEmail isHTML:YES];
 			mailComposer.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
 			mailComposer.modalPresentationStyle = UIModalPresentationFormSheet;
 

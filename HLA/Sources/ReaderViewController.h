@@ -39,9 +39,8 @@
 
 @interface ReaderViewController : UIViewController
 
-@property (nonatomic,retain)NSString *ilustrasiNumber;
-@property (nonatomic,retain)NSDictionary *dictPO;
-@property (nonatomic,retain)NSDictionary *dictAgent;
+@property (nonatomic,retain)NSString *subjectEmail;
+@property (nonatomic,retain)NSString *bodyEmail;
 
 @property (nonatomic, weak, readwrite) id <ReaderViewControllerDelegate> delegate;
 

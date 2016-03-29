@@ -32,10 +32,7 @@
     [FTPItemsList addObject:[NSMutableArray arrayWithObjects:@"1",@"Brochure_ProdukBCALIfeKeluargaku_21012016", @"brosur",@"10mb",@"",nil]];
     [FTPItemsList addObject:[NSMutableArray arrayWithObjects:@"2",@"BCA_life_Keluargaku_Video_Testimonial_Part_I_final", @"video",@"10mb",@"", nil]];
     
-    
-    FTPitems = [[ProductInfoItems alloc]init];
-    [FTPitems listDirectory];
-    FTPitems.ftpDelegate = self;
+    [self FTPFileListing];
     
     NSMutableDictionary *newAttributes = [[NSMutableDictionary alloc] init];
     [newAttributes setObject:[UIFont systemFontOfSize:18] forKey:UITextAttributeFont];
@@ -48,6 +45,12 @@
     
     [btnHome addTarget:self action:@selector(goHome:) forControlEvents:UIControlEventTouchUpInside];
     
+}
+
+- (void)FTPFileListing{
+    FTPitems = [[ProductInfoItems alloc]init];
+    [FTPitems listDirectory];
+    FTPitems.ftpDelegate = self;
 }
 
 - (void)createDirectory{
@@ -118,9 +121,9 @@
         }
         
         //simply we check whether the file exist in brochure folder or not.
-        if (![[NSFileManager defaultManager] fileExistsAtPath:
+        if ([[NSFileManager defaultManager] fileExistsAtPath:
               [NSString stringWithFormat:@"%@/%@",filePath,FileName]]){
-            [[FTPItemsList objectAtIndex:indexPath.row] replaceObjectAtIndex:4 withObject:[NSString stringWithFormat:@"unduh"]];
+            [[FTPItemsList objectAtIndex:indexPath.row] replaceObjectAtIndex:4 withObject:[NSString stringWithFormat:@""]];
         }
     }
     
@@ -242,7 +245,7 @@
             NSString *fileExt = [fullFileName objectAtIndex:1];
             NSString *fileSize = [NSByteCountFormatter stringFromByteCount:[[itemInfo objectForKey:key] longLongValue] countStyle:NSByteCountFormatterCountStyleFile];
             NSString *fileFormat = @"";
-            NSString *fileExist = @"";
+            NSString *fileExist = @"unduh";
             if([fileExt caseInsensitiveCompare:@"mp4"] == NSOrderedSame){
                 fileFormat = @"video";
             }else if([fileExt caseInsensitiveCompare:@"pdf"] == NSOrderedSame){
