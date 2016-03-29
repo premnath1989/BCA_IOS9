@@ -2812,18 +2812,18 @@ BOOL isFirstLoad;
         else{
             if (indexPath.row == 2){
                 [cell.button1 setEnabled:true];
-                [cell.button2 setEnabled:true];
+                if (([[dictionaryPOForInsert valueForKey:@"ProductName"] isEqualToString:@"BCA Life Keluargaku"])||([[dictionaryPOForInsert valueForKey:@"ProductName"] isEqualToString:@"BCA Life Keluargaku"])){
+                    [cell.button2 setEnabled:true];
+                }
+                else{
+                    [cell.button2 setEnabled:false];
+                }
                 [cell.button3 setEnabled:true];
             }
         }
     }
+
     
-    if (([[dictionaryPOForInsert valueForKey:@"ProductName"] isEqualToString:@"BCA Life Keluargaku"])||([[dictionaryPOForInsert valueForKey:@"ProductName"] isEqualToString:@"BCA Life Keluargaku"])){
-        [cell.button2 setEnabled:true];
-    }
-    else{
-        [cell.button2 setEnabled:false];
-    }
     
     
     if ([[_NumberListOfSubMenu objectAtIndex:indexPath.row] isEqualToString:@"0"]){
@@ -2875,75 +2875,34 @@ BOOL isFirstLoad;
 }
 
 -(void)showviewControllerFromCellView:(UIButton *)sender{
-    [self pullSIData];
-    switch (sender.tag) {
-        case 0:
-            if (!_BasicController) {
-                self.BasicController = [self.storyboard instantiateViewControllerWithIdentifier:@"BasicPlanView"];
-                _BasicController.delegate = self;
-                [self.RightView addSubview:self.BasicController.view];
-            }
-            [self.RightView bringSubviewToFront:self.BasicController.view];
-            break;
-        case 1:
-            /*if (!_RiderController){
-                self.RiderController = [self.storyboard instantiateViewControllerWithIdentifier:@"RiderView"];
-                _RiderController.delegate = self;
-                [_RiderController setDictionaryPOForInsert:dictionaryPOForInsert];
-                [_RiderController setDictionaryForBasicPlan:newDictionaryForBasicPlan];
-                [_RiderController setElementActive];
-
-                [self.RightView addSubview:self.RiderController.view];
-            }
-            [_RiderController setDictionaryPOForInsert:dictionaryPOForInsert];
-            [_RiderController setDictionaryForBasicPlan:newDictionaryForBasicPlan];
-            [_RiderController setElementActive];
-            [_RiderController loadInitialRiderDataFromDatabase];
-            [self.RightView bringSubviewToFront:self.RiderController.view];
-            [_RiderController calculateRiderPremi];*/
-            if(![self.RiderController.view isDescendantOfView:self.RightView]) {
-                [_RiderController setDictionaryPOForInsert:dictionaryPOForInsert];
-                [_RiderController setDictionaryForBasicPlan:newDictionaryForBasicPlan];
-                [_RiderController setElementActive];
-                [_RiderController loadInitialRiderDataFromDatabase];
-                [self.RightView addSubview:self.RiderController.view];
-            } else {
-                [_RiderController setDictionaryPOForInsert:dictionaryPOForInsert];
-                [_RiderController setDictionaryForBasicPlan:newDictionaryForBasicPlan];
-                [_RiderController setElementActive];
-                [_RiderController loadInitialRiderDataFromDatabase];
-                [self.RightView bringSubviewToFront:self.RiderController.view];
-            }
-            [_RiderController calculateRiderPremi];
-            @try {
-                [self saveLAForTableDidSelect];
-                //[self saveBasicPlanForTableDidSelect];
-            }
-            @catch (NSException *exception) {
-                
-            }
-            @finally {
-                
-            }
-            break;
-        case 2:
-            if([_BasicController validationDataBasicPlan]){
-                if (!_PremiumController) {
-                    _PremiumController = [self.storyboard instantiateViewControllerWithIdentifier:@"premiumView"];
-                    //_PremiumController.delegate = self;
-                    [self.RightView addSubview:_PremiumController.view];
-                    
+        [self pullSIData];
+        switch (sender.tag) {
+            case 0:
+                if (!_BasicController) {
+                    self.BasicController = [self.storyboard instantiateViewControllerWithIdentifier:@"BasicPlanView"];
+                    _BasicController.delegate = self;
+                    [self.RightView addSubview:self.BasicController.view];
                 }
-                //[_PremiumController setDictionaryPremium:newDictionaryForBasicPlan];
-                //[_PremiumController setDictionaryPremium:newDictionaryForBasicPlan];
-                
-                [self pullSIData];
-                [_PremiumController setPremiumDictionary:newDictionaryForBasicPlan];
-                [self.RightView bringSubviewToFront:_PremiumController.view];
-                
+                [self.RightView bringSubviewToFront:self.BasicController.view];
+                break;
+            case 1:
+                if(![self.RiderController.view isDescendantOfView:self.RightView]) {
+                    [_RiderController setDictionaryPOForInsert:dictionaryPOForInsert];
+                    [_RiderController setDictionaryForBasicPlan:newDictionaryForBasicPlan];
+                    [_RiderController setElementActive];
+                    [_RiderController loadInitialRiderDataFromDatabase];
+                    [self.RightView addSubview:self.RiderController.view];
+                } else {
+                    [_RiderController setDictionaryPOForInsert:dictionaryPOForInsert];
+                    [_RiderController setDictionaryForBasicPlan:newDictionaryForBasicPlan];
+                    [_RiderController setElementActive];
+                    [_RiderController loadInitialRiderDataFromDatabase];
+                    [self.RightView bringSubviewToFront:self.RiderController.view];
+                }
+                [_RiderController calculateRiderPremi];
                 @try {
                     [self saveLAForTableDidSelect];
-                    [self saveBasicPlanForTableDidSelect];
+                    //[self saveBasicPlanForTableDidSelect];
                 }
                 @catch (NSException *exception) {
                     
@@ -2951,29 +2910,55 @@ BOOL isFirstLoad;
                 @finally {
                     
                 }
+                break;
+            case 2:
+                if([_BasicController validationDataBasicPlan]){
+                    if (!_PremiumController) {
+                        _PremiumController = [self.storyboard instantiateViewControllerWithIdentifier:@"premiumView"];
+                        //_PremiumController.delegate = self;
+                        [self.RightView addSubview:_PremiumController.view];
+                        
+                    }
+                    //[_PremiumController setDictionaryPremium:newDictionaryForBasicPlan];
+                    //[_PremiumController setDictionaryPremium:newDictionaryForBasicPlan];
+                    
+                    [self pullSIData];
+                    [_PremiumController setPremiumDictionary:newDictionaryForBasicPlan];
+                    [self.RightView bringSubviewToFront:_PremiumController.view];
+                    
+                    @try {
+                        [self saveLAForTableDidSelect];
+                        [self saveBasicPlanForTableDidSelect];
+                    }
+                    @catch (NSException *exception) {
+                        
+                    }
+                    @finally {
+                        
+                    }
+                }
+                break;
+            case 3:{
+                
+                NSString *PlanType = [dictionaryPOForInsert valueForKey:@"ProductName"];
+                
+                if([PlanType isEqualToString:@"BCA Life Heritage Protection"])
+                {
+                    NSLog(@"heritage");
+                }
+                else
+                {
+                    PremiumKeluargaku *premiK = [[PremiumKeluargaku alloc]initWithNibName:@"PremiumKeluargaku"
+                                                                                   bundle:nil SINO:[dictionaryPOForInsert valueForKey:@"SINO"]];
+                    [self.RightView addSubview:premiK.view];
+                    [self.RightView bringSubviewToFront:premiK.view];
+                }
+                
             }
-            break;
-        case 3:{
-            
-            NSString *PlanType = [dictionaryPOForInsert valueForKey:@"ProductName"];
-            
-            if([PlanType isEqualToString:@"BCA Life Heritage Protection"])
-            {
-                NSLog(@"heritage");
-            }
-            else
-            {
-                PremiumKeluargaku *premiK = [[PremiumKeluargaku alloc]initWithNibName:@"PremiumKeluargaku"
-                                                                               bundle:nil SINO:[dictionaryPOForInsert valueForKey:@"SINO"]];
-                [self.RightView addSubview:premiK.view];
-                [self.RightView bringSubviewToFront:premiK.view];
-            }
-            
+                break;
+            default:
+                break;
         }
-            break;
-        default:
-            break;
-    }
 }
 
 #pragma mark - delegate added by faiz
