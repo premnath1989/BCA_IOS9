@@ -207,7 +207,7 @@ bool RegDatehandling;
     [txtIDType addTarget:self action:@selector(NewICDidChange:) forControlEvents:UIControlEventEditingDidEnd];
     //  [txtIDType addTarget:self action:@selector(NewICTextFieldBegin:) forControlEvents:UIControlEventEditingDidBegin];
     [txtAnnIncome addTarget:self action:@selector(AnnualIncomeChange:) forControlEvents:UIControlEventEditingDidEnd];
-    //[txtOtherIDType addTarget:self action:@selector(OtheriDDidChange:) forControlEvents:UIControlEventEditingDidEnd];
+    [txtOtherIDType addTarget:self action:@selector(OtheriDDidChange:) forControlEvents:UIControlEventEditingDidEnd];
 		
 	//to detect change
 	[txtEmail addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
@@ -3835,14 +3835,15 @@ bool RegDatehandling;
     } else if(alertView.tag == 5002) {
         btnOfficeCountry.titleLabel.textColor = [UIColor redColor];
     } else if(alertView.tag == 6000) {
-        self.navigationItem.title = @"Edit Client Profile";
+        /*self.navigationItem.title = @"Edit Client Profile";
         txtIDType.text = [txtIDType.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
         if(txtIDType.text.length ==12) {
             [self getSameIDRecord:@"IC" :getSameRecord_Indexno ];
         } else {
             [self getSameIDRecord:@"OTHERID" :getSameRecord_Indexno];
         }
-        [self displaySameRecord];
+        [self displaySameRecord];*/
+        [txtOtherIDType becomeFirstResponder];
     }
 }
 

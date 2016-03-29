@@ -100,7 +100,7 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
     databasePath = [[NSString alloc] initWithString:
                     [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
     
-    [self LoadAllResult];
+    //[self LoadAllResult];
     
     CGRect tableRect = myTableView.frame;
     myTableView.frame = CGRectMake(tableRect.origin.x, tableRect.origin.y, self.view.frame.size.width-75.0f, tableRect.size.height);
@@ -800,12 +800,10 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
     NSDictionary *dictIlustrationData;
     
     if (([txtSINO.text length]>0)||([txtLAName.text length]>0)||([DBDateFrom2 length]>0)||([DBDateTo2 length]>0)){
-        NSMutableString* dateFrom=[[NSMutableString alloc]initWithString:DBDateFrom2];
-        NSMutableString* dateTo=[[NSMutableString alloc]initWithString:DBDateTo2];
-        [dateFrom appendString:@" 00:00:00"];
-        [dateTo appendString:@" 24:00:00"];
+        
 
-        dictIlustrationData=[[NSDictionary alloc]initWithDictionary:[_modelSIMaster searchSIListingByName:txtSINO.text POName:txtLAName.text Order:sortedBy Method:sortMethod DateFrom:dateFrom DateTo:dateTo]];
+        //dictIlustrationData=[[NSDictionary alloc]initWithDictionary:[_modelSIMaster searchSIListingByName:txtSINO.text POName:txtLAName.text Order:sortedBy Method:sortMethod DateFrom:dateFrom DateTo:dateTo]];
+        dictIlustrationData=[[NSDictionary alloc]initWithDictionary:[_modelSIMaster searchSIListingByName:txtSINO.text POName:txtLAName.text Order:sortedBy Method:sortMethod DateFrom:DBDateFrom2 DateTo:DBDateTo2]];
     }
     else{
         dictIlustrationData=[[NSDictionary alloc]initWithDictionary:[_modelSIMaster getIlustrationata:sortedBy Method:sortMethod]];
@@ -1069,7 +1067,7 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
           //  [outletEdit setTitleColor:[UIColor grayColor] forState:UIControlStateNormal ];
         } else {
             [outletEdit setTitleColor:[UIColor blackColor] forState:UIControlStateNormal ];
-         //   outletEdit.enabled = TRUE;
+            outletEdit.enabled = TRUE;
         }
     } else {
         [self.myTableView setEditing:YES animated:TRUE]; 
@@ -1617,7 +1615,7 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
 
 #pragma UserDefined Method for generating data which are show in Table :::
 -(void)loadDataDelayed {    
-    [self LoadAllResult];
+    //[self LoadAllResult];
 }
 
 @end

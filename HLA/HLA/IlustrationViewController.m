@@ -341,7 +341,7 @@
     NSString *javaScriptP1H6 = [NSString stringWithFormat:@"document.getElementById('HeaderPaymentFrequency').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"Payment_Frequency"]];
     
     NSString *javaScriptP1T1 = [NSString stringWithFormat:@"document.getElementById('BasicSA').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"Sum_Assured"]];
-    NSString *javaScriptP1T2 = [NSString stringWithFormat:@"document.getElementById('Premi').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"PremiumPolicyA"]];
+    NSString *javaScriptP1T2 = [NSString stringWithFormat:@"document.getElementById('Premi').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"TotalPremiumLoading"]];
     
     
     //footer agent data
@@ -856,12 +856,15 @@
     NSString *javaScriptP1H21;
     NSString *javaScriptP1H22;
     NSString *javaScriptP1H16;
+    NSString* manfaatBebasPremiText;
     if(([RelWithLA isEqualToString:@"DIRI SENDIRI"])||([RelWithLA isEqualToString:@"SELF"]))
     {
         javaScriptP1H20=[NSString stringWithFormat:@"document.getElementById('ExtraPremiPercentLA').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"ExtraPremiumPercentage"]];
         javaScriptP1H21=[NSString stringWithFormat:@"document.getElementById('ExtraPremiPerMilLA').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"ExtraPremiumSum"]];
         javaScriptP1H22=[NSString stringWithFormat:@"document.getElementById('MasaExtraPremiLA').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"ExtraPremiumTerm"]];
         javaScriptP1H16=[NSString stringWithFormat:@"document.getElementById('SelfRelation').innerHTML =\"%@\";", @"Ya"];
+        
+        manfaatBebasPremiText = @"Jika Tertanggung cacat tetap total karena sebab apapun maka Polis menjadi Bebas Premi.";
 
     }
     else{
@@ -869,6 +872,8 @@
         javaScriptP1H21=[NSString stringWithFormat:@"document.getElementById('ExtraPremiPerMilPO').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"ExtraPremiumSum"]];
         javaScriptP1H22=[NSString stringWithFormat:@"document.getElementById('MasaExtraPremiPO').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"ExtraPremiumTerm"]];
         javaScriptP1H16=[NSString stringWithFormat:@"document.getElementById('SelfRelation').innerHTML =\"%@\";", @"Tidak"];
+        
+        manfaatBebasPremiText = @"Jika Pemegang Polis meninggal dunia karena sebab apapun maka Polis menjadi Bebas Premi.";
     }
     
     
@@ -903,6 +908,9 @@
         NSString *javaScriptP1T5=[NSString stringWithFormat:@"document.getElementById('BPPremi').innerHTML =\"%@\";", [formatter stringToCurrencyDecimalFormatted:[dictBebasPremi valueForKey:@"PremiRp"]]];
         NSString *javaScriptP1T6=[NSString stringWithFormat:@"document.getElementById('BPExtraPremi').innerHTML =\"%@\";", [formatter stringToCurrencyDecimalFormatted:[dictBebasPremi valueForKey:@"ExtraPremiRp"]]];
     
+        NSString *javaScriptP1C1=[NSString stringWithFormat:@"document.getElementById('ManfaatBebasPremi').innerHTML =\"%@\";", manfaatBebasPremiText];
+    
+    
         //footer agent data
         NSString *javaScriptF1 = [NSString stringWithFormat:@"document.getElementById('FooterAgentName').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"AgentName"]];
         NSString *javaScriptF2 = [NSString stringWithFormat:@"document.getElementById('FooterPrintDate').innerHTML =\"%@\";",[formatter getDateToday:@"yyyy-MM-dd hh:mm:ss"]];
@@ -910,6 +918,7 @@
         NSString *javaScriptF4 = [NSString stringWithFormat:@"document.getElementById('FooterBranch').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"BranchName"]];
 
         [webIlustration stringByEvaluatingJavaScriptFromString:javaScript];
+        [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1C1];
         [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1H1];
         [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1H2];
         [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1H3];
