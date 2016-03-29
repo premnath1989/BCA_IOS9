@@ -539,7 +539,7 @@
     
      [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H1];
      [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H2];
-    [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H3];
+     [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H3];
      [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H4];
      [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H5];
      [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H6];
@@ -602,7 +602,7 @@
     NSArray* path_forDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
     NSString* documentsDirectory = [path_forDirectory objectAtIndex:0];
     if (pdfData) {
-        [pdfData writeToFile:[NSString stringWithFormat:@"%@/%@_%@.pdf",documentsDirectory,[_dictionaryPOForInsert valueForKey:@"PO_Name"],[_dictionaryPOForInsert valueForKey:@"SINO"]] atomically:YES];
+        [pdfData writeToFile:[NSString stringWithFormat:@"%@/%@_%@.pdf",documentsDirectory,[_dictionaryPOForInsert valueForKey:@"ProductName"],[_dictionaryPOForInsert valueForKey:@"SINO"]] atomically:YES];
         NSLog(@"datat %@",[NSString stringWithFormat:@"%@/%@_%@.pdf",documentsDirectory,[_dictionaryPOForInsert valueForKey:@"PO_Name"],[_dictionaryPOForInsert valueForKey:@"SINO"]]);
     }
     else
@@ -618,7 +618,7 @@
 - (void)seePDF{
     NSArray* path_forDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
     NSString* documentsDirectory = [path_forDirectory objectAtIndex:0];
-    NSString *pdfPathOutput = [NSString stringWithFormat:@"%@/%@_%@.pdf",documentsDirectory,[_dictionaryPOForInsert valueForKey:@"PO_Name"],[_dictionaryPOForInsert valueForKey:@"SINO"]];
+    NSString *pdfPathOutput = [NSString stringWithFormat:@"%@/%@_%@.pdf",documentsDirectory,[_dictionaryPOForInsert valueForKey:@"ProductName"],[_dictionaryPOForInsert valueForKey:@"SINO"]];
     //NSString *file = [[NSBundle mainBundle] pathForResource:@"Brochure_ProdukBCALIfeKeluargaku_21012016" ofType:@"pdf"];
     
     ReaderDocument *document = [ReaderDocument withDocumentFilePath:pdfPathOutput password:nil];
