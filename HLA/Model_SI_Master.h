@@ -1,9 +1,9 @@
 //
 //  Model_SI_Master.h
-//  BLESS
+//  MPOS
 //
 //  Created by Basvi on 2/26/16.
-//  Copyright © 2016 Hong Leong Assurance. All rights reserved.
+//  Copyright © 2016 InfoConnect Sdn Bhd. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

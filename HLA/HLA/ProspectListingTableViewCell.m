@@ -1,6 +1,6 @@
 //
 //  ProspectListingTableViewCell.m
-//  BLESS
+//  MPOS
 //
 //  Created by Basvi on 2/12/16.
 //  Copyright © 2016 InfoConnect Sdn Bhd. All rights reserved.
