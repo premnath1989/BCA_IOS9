@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <sqlite3.h>
+#import "GroupDelegate.h"
 
-@interface GroupListing : UIViewController <UITableViewDelegate,UITableViewDataSource> {
+@interface GroupListing : UIViewController <UITableViewDelegate,UITableViewDataSource, GroupDelegate> {
     NSMutableArray *ItemToBeDeleted;
     NSMutableArray *indexPaths;
     NSString *databasePath;

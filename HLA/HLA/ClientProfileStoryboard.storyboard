@@ -2913,7 +2913,7 @@
                                 <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <items>
                                     <navigationItem id="bKv-SC-GN3">
-                                        <barButtonItem key="leftBarButtonItem" title="Daftar Group" id="qnQ-Gi-VuO">
+                                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="qnQ-Gi-VuO">
                                             <color key="tintColor" red="0.98431372549019602" green="0.69019607843137254" blue="0.20392156862745098" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
                                                 <action selector="backPressed:" destination="4Zi-Cv-MFI" id="9Ia-MO-yNH"/>

@@ -2159,6 +2159,7 @@
 		DE050BE41C9BF52B00AA6D45 /* BCA_life_Keluargaku_Video_Testimonial_Part_I_final.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = BCA_life_Keluargaku_Video_Testimonial_Part_I_final.mp4; sourceTree = "<group>"; };
 		DE1CC95E1CA283850058B595 /* PremiumKeluargaku.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PremiumKeluargaku.h; sourceTree = "<group>"; };
 		DE1CC9611CA284A70058B595 /* PremiumKeluargaku.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PremiumKeluargaku.xib; sourceTree = "<group>"; };
+		DE38E4891CAA25E300B3051B /* GroupDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GroupDelegate.h; sourceTree = "<group>"; };
 		DE80E4231CA3F7FB00D9E775 /* BlackRaccoon-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "BlackRaccoon-Info.plist"; path = "BlackRacoon/BlackRaccoon-Info.plist"; sourceTree = "<group>"; };
 		DE80E4241CA3F7FB00D9E775 /* BlackRaccoon-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "BlackRaccoon-Prefix.pch"; path = "BlackRacoon/BlackRaccoon-Prefix.pch"; sourceTree = "<group>"; };
 		DE80E4251CA3F7FB00D9E775 /* BRGlobal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BRGlobal.h; path = BlackRacoon/BRGlobal.h; sourceTree = "<group>"; };
@@ -4896,6 +4897,7 @@
 				EFEB7A48175ED365004FF3CE /* GroupListing.m */,
 				42D3277418487F2D0030AA7A /* NewGroupListing.h */,
 				42D3277518487F2D0030AA7A /* NewGroupListing.m */,
+				DE38E4891CAA25E300B3051B /* GroupDelegate.h */,
 			);
 			name = ClientGroup;
 			sourceTree = "<group>";

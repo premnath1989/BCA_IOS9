@@ -261,6 +261,14 @@
 
 - (IBAction)reset:(id)sender
 {
+    [self clearSearch];
+}
+
+- (void)clearSearchGroup{
+    [self clearSearch];
+}
+
+- (void)clearSearch{
     isFiltered = FALSE;
     txtName.text = @"";
     [self refreshData];
@@ -268,6 +276,11 @@
 
 - (IBAction)editPressed:(id)sender
 {
+    [self cancelPressed];
+}
+
+- (void)cancelPressed{
+    
     [self resignFirstResponder];
     if ([self.myTableView isEditing]) {
         [self.myTableView setEditing:NO animated:TRUE];
@@ -525,6 +538,7 @@
 		
 		
         [self.myTableView reloadData];
+        [self cancelPressed];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadData" object:self];
 		
 		
@@ -628,8 +642,8 @@
     label2.tag = 2002;
     [cell.contentView addSubview:label2];
     
-    label1.font = [UIFont fontWithName:@"BPreplay" size:16];
-    label2.font = [UIFont fontWithName:@"BPreplay" size:16];
+    label1.font = [UIFont fontWithName:@"BPreplay" size:14];
+    label2.font = [UIFont fontWithName:@"BPreplay" size:14];
     label1.textColor = [UIColor colorWithRed:128.0f/255.0f
                                        green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
     label2.textColor = [UIColor colorWithRed:128.0f/255.0f
@@ -676,8 +690,8 @@
 
 		
 		UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"ClientProfileStoryboard" bundle:nil];
-		NewGroupListing *NgroupPage = [secondStoryBoard instantiateViewControllerWithIdentifier:@"GroupVC"];
-		
+		GroupVC *NgroupPage = [secondStoryBoard instantiateViewControllerWithIdentifier:@"GroupVC"];
+        NgroupPage.delegateGroup = self;
 		
 		NgroupPage.modalPresentationStyle = UIModalPresentationFormSheet;
 		

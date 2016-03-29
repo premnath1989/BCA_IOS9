@@ -24,6 +24,7 @@
 @synthesize prospectPopover = _prospectPopover;
 @synthesize titleGroup;
 @synthesize UDGroup;
+@synthesize delegateGroup;
 
 FMDatabase *db;
 NSMutableArray *member;
@@ -101,7 +102,8 @@ BOOL isSave;
 	NSString *prosGroup;
 	BOOL toUpdate;
 	NSString *msg;
-	
+    NSString *Trim_GroupName = [GroupName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    
 	if (!db) {
 		NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 		NSString *docsDir = [dirPaths objectAtIndex:0];
@@ -112,39 +114,38 @@ BOOL isSave;
 	
 	//check edit/create new
 	NSString *pID;
-	NSString *Trim_GroupName = [GroupName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+	
 	if ([TitleBar.text isEqualToString:@"New"]) {
+        
 		if ([self CheckValidation]) {
-			[db executeUpdate:[NSString stringWithFormat:@"INSERT INTO prospect_groups (name) values ('%@')", Trim_GroupName]];
-			
-			FMResultSet *result = [db executeQuery:@"select seq from sqlite_sequence where name = 'prospect_groups'"];
-			while ([result next]) {
-				pID = [result stringForColumn:@"seq"];
-			}
-			
-//			if (member.count > 0) {
-				int i = 0;
-				while (i < member.count) {
-					
-					NSString *qtr = [NSString stringWithFormat:@"select prospectGroup from prospect_profile WHERE IndexNo = %@", [[member objectAtIndex:i] objectForKey:@"id"]];
-					FMResultSet *result = [db executeQuery:qtr];
-					while ([result next]) {
-						prosGroup = [result stringForColumn:@"prospectGroup"];
-					}
-					if (![prosGroup isEqualToString:@""])
-						prosGroup = [NSString stringWithFormat:@"%@,%@", prosGroup, pID];
-					else
-						prosGroup = pID;
-					
-					[db executeUpdate:[NSString stringWithFormat:@"UPDATE prospect_profile SET ProspectGroup = '%@', Prospect_isGrouping = 'Y'  WHERE IndexNo = %@", prosGroup, [[member objectAtIndex:i] objectForKey:@"id"]]];
-					i = i + 1;
-				}
-			
-			success = YES;
-			msg = @"Group baru berhasil dibuat.";
-			
-//			[self dismissModalViewControllerAnimated:YES];
-//			[[NSNotificationCenter defaultCenter] postNotificationName:@"reloadTable" object:self];
+            
+            if([self groupName:Trim_GroupName] == 1){
+                [db executeUpdate:[NSString stringWithFormat:@"INSERT INTO prospect_groups (name) values ('%@')", Trim_GroupName]];
+                
+                FMResultSet *result = [db executeQuery:@"select seq from sqlite_sequence where name = 'prospect_groups'"];
+                while ([result next]) {
+                    pID = [result stringForColumn:@"seq"];
+                }
+                
+                int i = 0;
+                while (i < member.count) {
+                    
+                    NSString *qtr = [NSString stringWithFormat:@"select prospectGroup from prospect_profile WHERE IndexNo = %@", [[member objectAtIndex:i] objectForKey:@"id"]];
+                    FMResultSet *result = [db executeQuery:qtr];
+                    while ([result next]) {
+                        prosGroup = [result stringForColumn:@"prospectGroup"];
+                    }
+                    if (![prosGroup isEqualToString:@""])
+                        prosGroup = [NSString stringWithFormat:@"%@,%@", prosGroup, pID];
+                    else
+                        prosGroup = pID;
+                    
+                    [db executeUpdate:[NSString stringWithFormat:@"UPDATE prospect_profile SET ProspectGroup = '%@', Prospect_isGrouping = 'Y'  WHERE IndexNo = %@", prosGroup, [[member objectAtIndex:i] objectForKey:@"id"]]];
+                    i = i + 1;
+                }
+                success = YES;
+                msg = @"Group baru berhasil dibuat.";
+            }
 		}
 		
 	}
@@ -194,10 +195,7 @@ BOOL isSave;
 			
 			success = YES;
 			msg = @"Group baru berhasil diperbarui.";
-			
-			
-//			[self dismissModalViewControllerAnimated:YES];
-//			[[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadData" object:self];
+            [delegateGroup clearSearchGroup];
 		}
 	}
 	
@@ -211,8 +209,39 @@ BOOL isSave;
 		[alert show];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadData" object:self];
 	}
-	
 }
+
+-(int)groupName:(NSString *)newName
+{
+    sqlite3 *contactDB;
+    sqlite3_stmt *statement;
+    
+    NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsDir = [dirPaths objectAtIndex:0];
+    NSString *databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
+    if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
+    {
+        NSString *querySQL = [NSString stringWithFormat: @"SELECT name FROM prospect_groups"];
+        
+        if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK){
+            while (sqlite3_step(statement) == SQLITE_ROW) {
+                if((const char *) sqlite3_column_text(statement, 0) != NULL){
+                    if([newName caseInsensitiveCompare:([[NSString alloc]
+                            initWithUTF8String:
+                        (const char *) sqlite3_column_text(statement, 0)])] == NSOrderedSame){
+                        UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Anda tidak dapat memasukan nama group yang telah ada sebelum nya"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                        [alert show];
+                        return 0;
+                    }
+                }
+            }
+            sqlite3_finalize(statement);
+        }
+        sqlite3_close(contactDB);
+    }
+    return 1;
+}
+
 
 -(void)hideKeyboard{
     
@@ -436,7 +465,9 @@ BOOL isSave;
     
     // Configure the cell...
     cell.textLabel.text = [[tempArray objectAtIndex:indexPath.row] objectForKey:@"name"];
-	cell.textLabel.font = [UIFont fontWithName:@"BPreplay" size:14];
+    cell.textLabel.font = [UIFont fontWithName:@"BPreplay" size:14];
+    cell.textLabel.textColor = [UIColor colorWithRed:128.0f/255.0f
+                                       green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
 	
 	/*ColorHexCode *CustomColor = [[ColorHexCode alloc]init ];
 	if (indexPath.row % 2 == 0) {

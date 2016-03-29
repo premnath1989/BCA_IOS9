@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ListingTbViewController.h"
 #import "ProspectProfile.h"
+#import "GroupDelegate.h"
 
 @class GroupVC;
 @protocol GroupVCDelegate
@@ -23,6 +24,7 @@
 }
 @property (strong, nonatomic) ProspectProfile* prospectprofile;
 @property (nonatomic,strong) id <GroupVCDelegate> delegate;
+@property (nonatomic,strong) id <GroupDelegate> delegateGroup;
 
 @property (nonatomic, retain) ListingTbViewController *ProspectList;
 @property (strong, nonatomic) NSMutableArray* ProspectTableData;
