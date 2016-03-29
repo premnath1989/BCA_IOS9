@@ -2005,14 +2005,14 @@ bool RegDatehandling;
             NSArray  *comp = [AI componentsSeparatedByString:@"."];
             NSString *get_num = [[comp objectAtIndex:0] stringByReplacingOccurrencesOfString:@"," withString:@""];
             int c = [get_num length];
-            if(c > 13) {
+            if(c > 15) {
                 return13digit = TRUE;
             }
         } else  if([AI rangeOfString:@"."].length == 0) {
             NSArray  *comp = [AI componentsSeparatedByString:@"."];
             NSString *get_num = [[comp objectAtIndex:0] stringByReplacingOccurrencesOfString:@"," withString:@""];
             int c = [get_num length];
-            if(c  > 13) {
+            if(c  > 15) {
                 return13digit = TRUE;
             }
         }
@@ -2023,11 +2023,11 @@ bool RegDatehandling;
         if(return13digit == TRUE) {
             return (([string isEqualToString:filtered])&&(newLength <= CHARACTER_LIMIT_ANNUALINCOME));
         } else {
-            return (([string isEqualToString:filtered])&&(newLength <= CHARACTER_LIMIT_ANNUALINCOME));
+            return (([string isEqualToString:filtered])&&(newLength <= 19));
         }
     }
     
-    if (textField == txtFullName) {
+    else if (textField == txtFullName) {
         return ((newLength <= 40));
     }
     

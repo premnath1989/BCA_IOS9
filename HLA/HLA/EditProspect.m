@@ -3886,13 +3886,13 @@ NSMutableArray *DelGroupArr;
             NSArray  *comp = [AI componentsSeparatedByString:@"."];
             NSString *get_num = [[comp objectAtIndex:0] stringByReplacingOccurrencesOfString:@"," withString:@""];
             int c = [get_num length];
-            return13digit = (c > 13);
+            return13digit = (c > 15);
             
         } else if([AI rangeOfString:@"."].length == 0) {
             NSArray  *comp = [AI componentsSeparatedByString:@"."];
             NSString *get_num = [[comp objectAtIndex:0] stringByReplacingOccurrencesOfString:@"," withString:@""];
             int c = [get_num length];
-            return13digit = (c  > 13);
+            return13digit = (c  > 15);
         }
         
         NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_MONEY] invertedSet];
@@ -3901,7 +3901,7 @@ NSMutableArray *DelGroupArr;
         if( return13digit == TRUE) {
             return (([string isEqualToString:filtered])&&(newLength <= CHARACTER_LIMIT_ANNUALINCOME));
         } else {
-            return (([string isEqualToString:filtered])&&(newLength <= CHARACTER_LIMIT_ANNUALINCOME));
+            return (([string isEqualToString:filtered])&&(newLength <= 19));
         }
     }
 
