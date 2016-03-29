@@ -1,9 +1,9 @@
 //
 //  ModelProspectProfile.h
-//  iMobile Planner
+//  MPOS
 //
 //  Created by Faiz Umar Baraja on 29/01/2016.
-//  Copyright © 2016 Hong Leong Assurance. All rights reserved.
+//  Copyright © 2016 InfoConnect Sdn Bhd. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
