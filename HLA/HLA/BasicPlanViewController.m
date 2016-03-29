@@ -567,14 +567,14 @@ bool WPTPD30RisDeleted = FALSE;
         }
         else{
             if (([_extraPremiNumberField.text length]>0)||([_extraPremiPercentField.text length]>0)){
-                if (masaExtraPremi<1 && masaExtraPremi>5){
+                if (masaExtraPremi<1 || masaExtraPremi>5){
                     [self createAlertViewAndShow:@"Masa extra premi tidak boleh lebih dari 5 dan kurang dari 1" tag:0];
                     [textField setText:@""];
                     [textField becomeFirstResponder];
                 }
             }
             else{
-                //[self PremiDasarActB];
+                [self PremiDasarActB];
             }
         }
     }
