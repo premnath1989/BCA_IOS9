@@ -4179,6 +4179,7 @@ bool RegDatehandling;
         gender = @"FEMALE";
         segGender.selectedSegmentIndex = 1;
     } else {
+        gender = @"";
         segGender.selectedSegmentIndex = UISegmentedControlNoSegment;
     }
     
@@ -8169,11 +8170,14 @@ bool RegDatehandling;
     }
     if ([selectedTitleDesc isEqualToString:@"BAPAK"]){
         [self setGenderValue:0 Active:NO];
+        gender = @"MALE";
     }
     else if ([selectedTitleDesc isEqualToString:@"IBU"]){
         [self setGenderValue:1 Active:NO];
+        gender = @"FEMALE";
     }
     else{
+        gender = @"";
         [self setGenderValue:2 Active:YES];
     }
 	[outletTitle setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",selectedTitleDesc]forState:UIControlStateNormal];
