@@ -350,7 +350,7 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
             
             //You can get the error like this:
             NSString* errorMesg = ((SOAPFault *)bodyPart).simpleFaultString;
-            UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Please check your connection" message:errorMesg delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
+            UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Periksa lagi koneksi internet anda" message:errorMesg delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
             [alert show];
             [spinnerLoading stopLoadingSpinner];
             if(flagFullSync){

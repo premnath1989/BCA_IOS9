@@ -12,8 +12,16 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import "ProductInfoItemsDelegate.h"
 #import "ProductInfoItems.h"
+#import "SpinnerUtilities.h"
+#import "ProgressBarDelegate.h"
 
-@interface ProductInformation : UIViewController<ReaderViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, ProductInfoItemsDelegate>{
+#define videoExt @"mp4"
+#define brochureExt @"pdf"
+#define videoLabel @"video"
+#define brochureLabel @"brosur"
+#define downloadMacro @"Unduh"
+
+@interface ProductInformation : UIViewController<ReaderViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, ProductInfoItemsDelegate, ProgressBarDelegate>{
     NSArray *columnHeadersContent;
     TableManagement *tableManagement;
     UIView *TableHeader;
@@ -22,6 +30,7 @@
     NSMutableArray *FTPItemsList;
     ProductInfoItems *FTPitems;
     NSString *filePath;
+    SpinnerUtilities *spinnerLoading;
 }
 
 
@@ -31,7 +40,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnPDF;
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 @property (weak, nonatomic) IBOutlet UINavigationBar *navigationBar;
-@property (strong, nonatomic) MPMoviePlayerController *moviePlayer; 
+@property (strong, nonatomic) MPMoviePlayerController *moviePlayer;
 
 - (IBAction)goHome:(id)sender;
 - (IBAction)seePDF:(id)sender;

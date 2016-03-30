@@ -13,7 +13,7 @@
 #import "SIUtilities.h"
 #import "ChangePassword.h"
 #import "LoginDatabaseManagement.h"
-
+#import "ProgressBar.h"
 
 #import "DDXMLDocument.h"
 #import "DDXMLElementAdditions.h"
@@ -208,6 +208,7 @@ id temp;
     UserProfileView.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     UserProfileView.preferredContentSize = CGSizeMake(600, 500);
     [UserProfileView setAgentCode:[agentDetails valueForKey:@"AgentCode"]];
+    
     [self presentViewController:UserProfileView animated:YES completion:nil];
 }
 

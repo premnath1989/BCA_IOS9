@@ -8,10 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "BRRequestListDirectory.h"
-#import "BRRequestCreateDirectory.h"
-#import "BRRequestUpload.h"
 #import "BRRequestDownload.h"
-#import "BRRequestDelete.h"
 #import "BRRequest+_UserData.h"
 #import "ProductInfoItemsDelegate.h"
 
@@ -24,6 +21,7 @@
 
 - (void) listDirectory;
 - (void) downloadFile:(NSString *)fileNameTemp;
+- (void) cancelAction;
 @property (nonatomic, assign) id<ProductInfoItemsDelegate>  ftpDelegate;
 
 @end

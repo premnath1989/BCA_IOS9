@@ -11,6 +11,9 @@
 #import "CarouselViewController.h"
 #import "ReaderViewController.h"
 #import "ColumnHeaderStyle.h"
+#import "Reachability.h"
+#import "ProgressBar.h"
+#import "ChangePassword.h"
 
 @implementation ProductInformation
 
@@ -27,12 +30,13 @@
     
     [self createDirectory];
     
-    //we test our ftp
-    FTPItemsList = [[NSMutableArray alloc]init];
-    [FTPItemsList addObject:[NSMutableArray arrayWithObjects:@"1",@"Brochure_ProdukBCALIfeKeluargaku_21012016", @"brosur",@"10mb",@"",nil]];
-    [FTPItemsList addObject:[NSMutableArray arrayWithObjects:@"2",@"BCA_life_Keluargaku_Video_Testimonial_Part_I_final", @"video",@"10mb",@"", nil]];
+    [self directoryFileListing];
     
-    [self FTPFileListing];
+    if([self connected]){
+        spinnerLoading = [[SpinnerUtilities alloc]init];
+        [spinnerLoading startLoadingSpinner:self.view label:@"Loading Informasi Produk"];
+        [self FTPFileListing];
+    }
     
     NSMutableDictionary *newAttributes = [[NSMutableDictionary alloc] init];
     [newAttributes setObject:[UIFont systemFontOfSize:18] forKey:UITextAttributeFont];
@@ -44,8 +48,15 @@
     [self setupTableColumn];
     
     [btnHome addTarget:self action:@selector(goHome:) forControlEvents:UIControlEventTouchUpInside];
-    
 }
+
+- (BOOL)connected
+{
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
+    return networkStatus != NotReachable;
+}
+
 
 - (void)FTPFileListing{
     FTPitems = [[ProductInfoItems alloc]init];
@@ -69,13 +80,39 @@
     
 }
 
+- (void)directoryFileListing{
+    
+    FTPItemsList = [[NSMutableArray alloc]init];
+    NSURL *directoryURL = [NSURL fileURLWithPath:filePath
+                                     isDirectory:YES];
+    NSFileManager *fm = [NSFileManager defaultManager];
+    NSError *contentsError = nil;
+    NSArray *contents = [fm contentsOfDirectoryAtURL:directoryURL
+                          includingPropertiesForKeys:@[NSURLFileSizeKey, NSURLIsDirectoryKey]
+                                             options:0
+                                               error:&contentsError];
+    
+    int index = 1;
+    for (NSURL *fileURL in contents) {
+        // Enumerate each file in directory
+        NSNumber *fileSizeNumber = nil;
+        NSError *sizeError = nil;
+        [fileURL getResourceValue:&fileSizeNumber
+                              forKey:NSURLFileSizeKey
+                               error:&sizeError];
+        
+        [self insertIntoTableData:[fileURL lastPathComponent] size:[fileSizeNumber stringValue] index:index];
+        index++;
+    }
+}
+
 - (void)setupTableColumn{
     //we call the table management to design the table
     ColumnHeaderStyle *ilustrasi = [[ColumnHeaderStyle alloc]init:@" No. " alignment:NSTextAlignmentLeft button:FALSE width:0.05];
     ColumnHeaderStyle *nama = [[ColumnHeaderStyle alloc]init:@"Nama" alignment:NSTextAlignmentCenter button:TRUE width:0.60];
     ColumnHeaderStyle *type = [[ColumnHeaderStyle alloc]init:@"Kategori" alignment:NSTextAlignmentCenter button:TRUE width:0.15];
     ColumnHeaderStyle *size = [[ColumnHeaderStyle alloc]init:@"Ukuran" alignment:NSTextAlignmentCenter button:TRUE width:0.10];
-    ColumnHeaderStyle *download = [[ColumnHeaderStyle alloc]init:@"Unduh" alignment:NSTextAlignmentCenter button:TRUE width:0.10];
+    ColumnHeaderStyle *download = [[ColumnHeaderStyle alloc]init:downloadMacro alignment:NSTextAlignmentCenter button:TRUE width:0.10];
     
     //add it to array
     columnHeadersContent = [NSArray arrayWithObjects:ilustrasi, nama, type, size, download, nil];
@@ -114,10 +151,10 @@
         NSString *FileName = [itemCell objectAtIndex:1];
         NSString *FileType = [itemCell objectAtIndex:2];
         
-        if([FileType caseInsensitiveCompare:@"brosur"] == NSOrderedSame){
-            FileName = [NSString stringWithFormat: @"%@.%@",FileName, @"pdf"];
-        }else if([FileType caseInsensitiveCompare:@"video"] == NSOrderedSame){
-            FileName = [NSString stringWithFormat: @"%@.%@",FileName, @"mp4"];
+        if([FileType caseInsensitiveCompare:brochureLabel] == NSOrderedSame){
+            FileName = [NSString stringWithFormat: @"%@.%@",FileName, brochureExt];
+        }else if([FileType caseInsensitiveCompare:videoLabel] == NSOrderedSame){
+            FileName = [NSString stringWithFormat: @"%@.%@",FileName, videoExt];
         }
         
         //simply we check whether the file exist in brochure folder or not.
@@ -146,17 +183,32 @@
     UILabel *unduhLabel = (UILabel *)[cell viewWithTag:(indexPath.row*1000)+4];
     NSLog(@"file : %@.%@", fileName.text,fileType.text);
     
-    if([fileType.text caseInsensitiveCompare:@"brosur"] == NSOrderedSame){
-        if([unduhLabel.text caseInsensitiveCompare:@"unduh"] == NSOrderedSame){
-            [FTPitems downloadFile:[NSString stringWithFormat: @"%@.%@",fileName.text, @"pdf"]];
+    if([fileType.text caseInsensitiveCompare:brochureLabel] == NSOrderedSame){
+        if([unduhLabel.text caseInsensitiveCompare:downloadMacro] == NSOrderedSame){
+            
+            ProgressBar *progressBar = [[ProgressBar alloc]initWithNibName:@"ProgressBar" bundle:nil];
+            progressBar.TitleFileName = [NSString stringWithFormat: @"%@.%@",fileName.text, brochureExt];
+            progressBar.progressDelegate = self;
+            progressBar.modalPresentationStyle = UIModalPresentationFormSheet;
+            progressBar.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+            progressBar.preferredContentSize = CGSizeMake(600, 200);
+            [self presentViewController:progressBar animated:YES completion:nil];
+            
         }else{
-            [self seePDF:[NSString stringWithFormat: @"%@.%@",fileName.text, @"pdf"]];
+            [self seePDF:[NSString stringWithFormat: @"%@.%@",fileName.text, brochureExt]];
         }
-    }else if([fileType.text caseInsensitiveCompare:@"video"] == NSOrderedSame){
-        if([unduhLabel.text caseInsensitiveCompare:@"unduh"] == NSOrderedSame){
-            [FTPitems downloadFile:[NSString stringWithFormat: @"%@.%@",fileName.text, @"mp4"]];
+    }else if([fileType.text caseInsensitiveCompare:videoLabel] == NSOrderedSame){
+        if([unduhLabel.text caseInsensitiveCompare:downloadMacro] == NSOrderedSame){
+            
+            ProgressBar *progressBar = [[ProgressBar alloc]initWithNibName:@"ProgressBar" bundle:nil];
+            progressBar.TitleFileName = [NSString stringWithFormat: @"%@.%@",fileName.text, videoExt];
+            progressBar.progressDelegate = self;
+            progressBar.modalPresentationStyle = UIModalPresentationFormSheet;
+            progressBar.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+            progressBar.preferredContentSize = CGSizeMake(600, 200);
+            [self presentViewController:progressBar animated:YES completion:nil];
         }else{
-            [self seeVideo:[NSString stringWithFormat: @"%@.%@",fileName.text, @"mp4"]];
+            [self seeVideo:[NSString stringWithFormat: @"%@.%@",fileName.text, videoExt]];
         }
     }
 }
@@ -211,7 +263,6 @@
     // Dismiss the view controller ONLY when the reason is not "playback ended"
     if ([finishReason intValue] != MPMovieFinishReasonUserExited)
     {
-        
         // Remove this class from the observers
         [[NSNotificationCenter defaultCenter] removeObserver:self
                                                         name:MPMoviePlayerPlaybackDidFinishNotification
@@ -226,37 +277,92 @@
     }
 }
 
+//for brochure
 - (void)dismissReaderViewController:(ReaderViewController *)viewController {
     [self dismissModalViewControllerAnimated:YES];
-}
-
-- (void)reloadItemsTable{
-    [myTableView reloadData];
 }
 
 - (void)itemsList:(NSMutableArray *)ftpItems{
     NSLog(@"ftp itemlist");
     int index = 1;
+    
+    //we remove any files if local if not listed in FTP
+    [self removeLocalFiles:ftpItems];
+    
     [FTPItemsList removeAllObjects];
     for(NSMutableDictionary *itemInfo in ftpItems){
         for(NSString *key in [itemInfo allKeys]){
-            NSArray* fullFileName = [key componentsSeparatedByString: @"."];
-            NSString *fileName = [fullFileName objectAtIndex:0];
-            NSString *fileExt = [fullFileName objectAtIndex:1];
-            NSString *fileSize = [NSByteCountFormatter stringFromByteCount:[[itemInfo objectForKey:key] longLongValue] countStyle:NSByteCountFormatterCountStyleFile];
-            NSString *fileFormat = @"";
-            NSString *fileExist = @"unduh";
-            if([fileExt caseInsensitiveCompare:@"mp4"] == NSOrderedSame){
-                fileFormat = @"video";
-            }else if([fileExt caseInsensitiveCompare:@"pdf"] == NSOrderedSame){
-                fileFormat = @"brosur";
-            }
-            
-            [FTPItemsList addObject:[NSMutableArray arrayWithObjects:[NSString stringWithFormat:@"%d",index],fileName, fileFormat,fileSize,fileExist,nil]];
+            [self insertIntoTableData:key size:[itemInfo objectForKey:key] index:index];
             index++;
         }
     }
     [myTableView reloadData];
+}
+
+- (void)removeLocalFiles:(NSMutableArray *)ftpItems{
+    for(NSMutableArray *itemCell in FTPItemsList){
+        NSString *FileName = [itemCell objectAtIndex:1];
+        NSString *FileType = [itemCell objectAtIndex:2];
+        
+        if([FileType caseInsensitiveCompare:brochureLabel] == NSOrderedSame){
+            FileName = [NSString stringWithFormat: @"%@.%@",FileName, brochureExt];
+        }else if([FileType caseInsensitiveCompare:videoLabel] == NSOrderedSame){
+            FileName = [NSString stringWithFormat: @"%@.%@",FileName, videoExt];
+        }
+        
+        BOOL exist = FALSE;
+        for(NSMutableDictionary *itemInfo in ftpItems){
+            for(NSString *key in [itemInfo allKeys]){
+                if([key caseInsensitiveCompare:FileName] == NSOrderedSame){
+                    exist = TRUE;
+                }
+            }
+        }
+        
+        //after checking, if the files not listed in FTP. we delete the file in local.
+        if(!exist){
+            NSError *error = nil;
+            if ([[NSFileManager defaultManager] removeItemAtPath:
+                 [NSString stringWithFormat:@"%@/%@",filePath,FileName] error:&error]){
+            }
+        }
+    }
+}
+
+- (void)insertIntoTableData:(NSString *)fileNameParam size:(NSString *)fileSizeParam index:(int)fileIndex{
+    NSArray* fullFileNameTemp = [fileNameParam componentsSeparatedByString: @"."];
+    NSString *fileName = [fullFileNameTemp objectAtIndex:0];
+    NSString *fileExt = [fullFileNameTemp objectAtIndex:1];
+    NSString *fileSize = [NSByteCountFormatter stringFromByteCount:[fileSizeParam longLongValue] countStyle:NSByteCountFormatterCountStyleFile];
+    NSString *fileFormat = @"";
+    NSString *fileExist = downloadMacro;
+    if([fileExt caseInsensitiveCompare:videoExt] == NSOrderedSame){
+        fileFormat = videoLabel;
+    }else if([fileExt caseInsensitiveCompare:brochureExt] == NSOrderedSame){
+        fileFormat = brochureLabel;
+    }
+    
+    [FTPItemsList addObject:[NSMutableArray arrayWithObjects:[NSString stringWithFormat:@"%d",fileIndex],fileName, fileFormat,fileSize,fileExist,nil]];
+    
+    [spinnerLoading stopLoadingSpinner];
+}
+
+- (void)downloadisFinished{
+    [myTableView reloadData];
+}
+
+- (void)percentCompletedfromFTP:(float)percent{
+    //left this blank
+}
+
+- (void)downloadisError{
+    UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Koneksi ke FTP Gagal" message:[NSString stringWithFormat:@"Pastikan perangkat terhubung ke internet yang stabil untuk mengakses FTP"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    [alert show];
+}
+
+- (void)failedConnectToFTP{
+    UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Koneksi ke FTP Gagal" message:[NSString stringWithFormat:@"Pastikan perangkat terhubung ke internet yang stabil untuk mengakses FTP"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    [alert show];
 }
 
 @end

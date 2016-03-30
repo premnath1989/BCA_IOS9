@@ -782,19 +782,9 @@
 		C4FCDDEB16395F290065D024 /* btn_setting_home.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FCDDDF16395F290065D024 /* btn_setting_home.png */; };
 		C4FCDDEC16395F290065D024 /* btn_SI_home.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FCDDE016395F290065D024 /* btn_SI_home.png */; };
 		DE050BE51C9BF52B00AA6D45 /* BCA_life_Keluargaku_Video_Testimonial_Part_I_final.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = DE050BE41C9BF52B00AA6D45 /* BCA_life_Keluargaku_Video_Testimonial_Part_I_final.mp4 */; };
+		DE06FFB01CAB8A0700E4DE3A /* libFTPFileSynchronization.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DE06FFAF1CAB8A0700E4DE3A /* libFTPFileSynchronization.a */; };
 		DE1CC9621CA284A70058B595 /* PremiumKeluargaku.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE1CC9611CA284A70058B595 /* PremiumKeluargaku.xib */; };
 		DE80E43A1CA3F7FB00D9E775 /* BlackRaccoon-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DE80E4231CA3F7FB00D9E775 /* BlackRaccoon-Info.plist */; };
-		DE80E43B1CA3F7FB00D9E775 /* BRRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = DE80E4271CA3F7FB00D9E775 /* BRRequest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		DE80E43C1CA3F7FB00D9E775 /* BRRequest+_UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = DE80E4291CA3F7FB00D9E775 /* BRRequest+_UserData.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		DE80E43D1CA3F7FB00D9E775 /* BRRequestCreateDirectory.m in Sources */ = {isa = PBXBuildFile; fileRef = DE80E42B1CA3F7FB00D9E775 /* BRRequestCreateDirectory.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		DE80E43E1CA3F7FB00D9E775 /* BRRequestDelete.m in Sources */ = {isa = PBXBuildFile; fileRef = DE80E42D1CA3F7FB00D9E775 /* BRRequestDelete.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		DE80E43F1CA3F7FB00D9E775 /* BRRequestDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = DE80E42F1CA3F7FB00D9E775 /* BRRequestDownload.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		DE80E4401CA3F7FB00D9E775 /* BRRequestError.m in Sources */ = {isa = PBXBuildFile; fileRef = DE80E4311CA3F7FB00D9E775 /* BRRequestError.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		DE80E4411CA3F7FB00D9E775 /* BRRequestListDirectory.m in Sources */ = {isa = PBXBuildFile; fileRef = DE80E4331CA3F7FB00D9E775 /* BRRequestListDirectory.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		DE80E4421CA3F7FB00D9E775 /* BRRequestQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = DE80E4351CA3F7FB00D9E775 /* BRRequestQueue.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		DE80E4431CA3F7FB00D9E775 /* BRRequestUpload.m in Sources */ = {isa = PBXBuildFile; fileRef = DE80E4371CA3F7FB00D9E775 /* BRRequestUpload.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		DE80E4441CA3F7FB00D9E775 /* BRStreamInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = DE80E4391CA3F7FB00D9E775 /* BRStreamInfo.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		DE80E4481CA3F85900D9E775 /* ProductInfoItems.m in Sources */ = {isa = PBXBuildFile; fileRef = DE80E4471CA3F85900D9E775 /* ProductInfoItems.m */; };
 		DE80E44A1CA3FCEE00D9E775 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE80E4491CA3FCEE00D9E775 /* CFNetwork.framework */; };
 		DE8D29C71C94512900727765 /* TabValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = DE8D29C61C94512900727765 /* TabValidation.m */; };
 		DE9E89661CA26A2400BF6D0D /* PremiumKeluargaku.m in Sources */ = {isa = PBXBuildFile; fileRef = DE9E89651CA26A2400BF6D0D /* PremiumKeluargaku.m */; };
@@ -2157,38 +2147,15 @@
 		C4FCDDDF16395F290065D024 /* btn_setting_home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_setting_home.png; sourceTree = "<group>"; };
 		C4FCDDE016395F290065D024 /* btn_SI_home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_SI_home.png; sourceTree = "<group>"; };
 		DE050BE41C9BF52B00AA6D45 /* BCA_life_Keluargaku_Video_Testimonial_Part_I_final.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = BCA_life_Keluargaku_Video_Testimonial_Part_I_final.mp4; sourceTree = "<group>"; };
+		DE06FFAF1CAB8A0700E4DE3A /* libFTPFileSynchronization.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFTPFileSynchronization.a; path = ../../FTPFileSync/FTPFileSync/libFTPFileSynchronization.a; sourceTree = "<group>"; };
 		DE1CC95E1CA283850058B595 /* PremiumKeluargaku.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PremiumKeluargaku.h; sourceTree = "<group>"; };
 		DE1CC9611CA284A70058B595 /* PremiumKeluargaku.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PremiumKeluargaku.xib; sourceTree = "<group>"; };
 		DE38E4891CAA25E300B3051B /* GroupDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GroupDelegate.h; sourceTree = "<group>"; };
 		DE80E4231CA3F7FB00D9E775 /* BlackRaccoon-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "BlackRaccoon-Info.plist"; path = "BlackRacoon/BlackRaccoon-Info.plist"; sourceTree = "<group>"; };
 		DE80E4241CA3F7FB00D9E775 /* BlackRaccoon-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "BlackRaccoon-Prefix.pch"; path = "BlackRacoon/BlackRaccoon-Prefix.pch"; sourceTree = "<group>"; };
-		DE80E4251CA3F7FB00D9E775 /* BRGlobal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BRGlobal.h; path = BlackRacoon/BRGlobal.h; sourceTree = "<group>"; };
-		DE80E4261CA3F7FB00D9E775 /* BRRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BRRequest.h; path = BlackRacoon/BRRequest.h; sourceTree = "<group>"; };
-		DE80E4271CA3F7FB00D9E775 /* BRRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BRRequest.m; path = BlackRacoon/BRRequest.m; sourceTree = "<group>"; };
-		DE80E4281CA3F7FB00D9E775 /* BRRequest+_UserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "BRRequest+_UserData.h"; path = "BlackRacoon/BRRequest+_UserData.h"; sourceTree = "<group>"; };
-		DE80E4291CA3F7FB00D9E775 /* BRRequest+_UserData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "BRRequest+_UserData.m"; path = "BlackRacoon/BRRequest+_UserData.m"; sourceTree = "<group>"; };
-		DE80E42A1CA3F7FB00D9E775 /* BRRequestCreateDirectory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BRRequestCreateDirectory.h; path = BlackRacoon/BRRequestCreateDirectory.h; sourceTree = "<group>"; };
-		DE80E42B1CA3F7FB00D9E775 /* BRRequestCreateDirectory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BRRequestCreateDirectory.m; path = BlackRacoon/BRRequestCreateDirectory.m; sourceTree = "<group>"; };
-		DE80E42C1CA3F7FB00D9E775 /* BRRequestDelete.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BRRequestDelete.h; path = BlackRacoon/BRRequestDelete.h; sourceTree = "<group>"; };
-		DE80E42D1CA3F7FB00D9E775 /* BRRequestDelete.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BRRequestDelete.m; path = BlackRacoon/BRRequestDelete.m; sourceTree = "<group>"; };
-		DE80E42E1CA3F7FB00D9E775 /* BRRequestDownload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BRRequestDownload.h; path = BlackRacoon/BRRequestDownload.h; sourceTree = "<group>"; };
-		DE80E42F1CA3F7FB00D9E775 /* BRRequestDownload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BRRequestDownload.m; path = BlackRacoon/BRRequestDownload.m; sourceTree = "<group>"; };
-		DE80E4301CA3F7FB00D9E775 /* BRRequestError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BRRequestError.h; path = BlackRacoon/BRRequestError.h; sourceTree = "<group>"; };
-		DE80E4311CA3F7FB00D9E775 /* BRRequestError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BRRequestError.m; path = BlackRacoon/BRRequestError.m; sourceTree = "<group>"; };
-		DE80E4321CA3F7FB00D9E775 /* BRRequestListDirectory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BRRequestListDirectory.h; path = BlackRacoon/BRRequestListDirectory.h; sourceTree = "<group>"; };
-		DE80E4331CA3F7FB00D9E775 /* BRRequestListDirectory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BRRequestListDirectory.m; path = BlackRacoon/BRRequestListDirectory.m; sourceTree = "<group>"; };
-		DE80E4341CA3F7FB00D9E775 /* BRRequestQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BRRequestQueue.h; path = BlackRacoon/BRRequestQueue.h; sourceTree = "<group>"; };
-		DE80E4351CA3F7FB00D9E775 /* BRRequestQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BRRequestQueue.m; path = BlackRacoon/BRRequestQueue.m; sourceTree = "<group>"; };
-		DE80E4361CA3F7FB00D9E775 /* BRRequestUpload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BRRequestUpload.h; path = BlackRacoon/BRRequestUpload.h; sourceTree = "<group>"; };
-		DE80E4371CA3F7FB00D9E775 /* BRRequestUpload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BRRequestUpload.m; path = BlackRacoon/BRRequestUpload.m; sourceTree = "<group>"; };
-		DE80E4381CA3F7FB00D9E775 /* BRStreamInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BRStreamInfo.h; path = BlackRacoon/BRStreamInfo.h; sourceTree = "<group>"; };
-		DE80E4391CA3F7FB00D9E775 /* BRStreamInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BRStreamInfo.m; path = BlackRacoon/BRStreamInfo.m; sourceTree = "<group>"; };
-		DE80E4461CA3F84D00D9E775 /* ProductInfoItems.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProductInfoItems.h; sourceTree = "<group>"; };
-		DE80E4471CA3F85900D9E775 /* ProductInfoItems.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductInfoItems.m; sourceTree = "<group>"; };
 		DE80E4491CA3FCEE00D9E775 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		DE8D29C51C94511C00727765 /* TabValidation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabValidation.h; sourceTree = "<group>"; };
 		DE8D29C61C94512900727765 /* TabValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabValidation.m; sourceTree = "<group>"; };
-		DE8E182F1CA906870070A298 /* ProductInfoItemsDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProductInfoItemsDelegate.h; sourceTree = "<group>"; };
 		DE9E89651CA26A2400BF6D0D /* PremiumKeluargaku.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PremiumKeluargaku.m; sourceTree = "<group>"; };
 		DEE2B7C51C9FADC200B7283A /* DBMigration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DBMigration.h; sourceTree = "<group>"; };
 		DEE2B7C61C9FADCF00B7283A /* DBMigration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBMigration.m; sourceTree = "<group>"; };
@@ -2322,6 +2289,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE06FFB01CAB8A0700E4DE3A /* libFTPFileSynchronization.a in Frameworks */,
 				DE80E44A1CA3FCEE00D9E775 /* CFNetwork.framework in Frameworks */,
 				C486D9E3163E6747009F8F21 /* MediaPlayer.framework in Frameworks */,
 				AA4EF7781C85A9C50050CCD8 /* ImageIO.framework in Frameworks */,
@@ -3479,8 +3447,6 @@
 		AA4EF6DB1C8571800050CCD8 /* Product Information */ = {
 			isa = PBXGroup;
 			children = (
-				DE80E4451CA3F82500D9E775 /* ProductInfoItems */,
-				DE80E4221CA3F79300D9E775 /* BlackRacoon */,
 				AA4EF6DC1C8572B00050CCD8 /* ProductInformation.xib */,
 				AA4EF6DE1C8572DD0050CCD8 /* ProductInformation.h */,
 				AA4EF6DF1C8572F30050CCD8 /* ProductInformation.m */,
@@ -4180,6 +4146,7 @@
 		C4E9D1931612C64900016053 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DE06FFAF1CAB8A0700E4DE3A /* libFTPFileSynchronization.a */,
 				DE80E4491CA3FCEE00D9E775 /* CFNetwork.framework */,
 				AA4EF7771C85A9C50050CCD8 /* ImageIO.framework */,
 				6A002CF91850287200161727 /* libz.dylib */,
@@ -4657,44 +4624,6 @@
 				C4FCDDE016395F290065D024 /* btn_SI_home.png */,
 			);
 			name = icon;
-			sourceTree = "<group>";
-		};
-		DE80E4221CA3F79300D9E775 /* BlackRacoon */ = {
-			isa = PBXGroup;
-			children = (
-				DE80E4251CA3F7FB00D9E775 /* BRGlobal.h */,
-				DE80E4261CA3F7FB00D9E775 /* BRRequest.h */,
-				DE80E4271CA3F7FB00D9E775 /* BRRequest.m */,
-				DE80E4281CA3F7FB00D9E775 /* BRRequest+_UserData.h */,
-				DE80E4291CA3F7FB00D9E775 /* BRRequest+_UserData.m */,
-				DE80E42A1CA3F7FB00D9E775 /* BRRequestCreateDirectory.h */,
-				DE80E42B1CA3F7FB00D9E775 /* BRRequestCreateDirectory.m */,
-				DE80E42C1CA3F7FB00D9E775 /* BRRequestDelete.h */,
-				DE80E42D1CA3F7FB00D9E775 /* BRRequestDelete.m */,
-				DE80E42E1CA3F7FB00D9E775 /* BRRequestDownload.h */,
-				DE80E42F1CA3F7FB00D9E775 /* BRRequestDownload.m */,
-				DE80E4301CA3F7FB00D9E775 /* BRRequestError.h */,
-				DE80E4311CA3F7FB00D9E775 /* BRRequestError.m */,
-				DE80E4321CA3F7FB00D9E775 /* BRRequestListDirectory.h */,
-				DE80E4331CA3F7FB00D9E775 /* BRRequestListDirectory.m */,
-				DE80E4341CA3F7FB00D9E775 /* BRRequestQueue.h */,
-				DE80E4351CA3F7FB00D9E775 /* BRRequestQueue.m */,
-				DE80E4361CA3F7FB00D9E775 /* BRRequestUpload.h */,
-				DE80E4371CA3F7FB00D9E775 /* BRRequestUpload.m */,
-				DE80E4381CA3F7FB00D9E775 /* BRStreamInfo.h */,
-				DE80E4391CA3F7FB00D9E775 /* BRStreamInfo.m */,
-			);
-			name = BlackRacoon;
-			sourceTree = "<group>";
-		};
-		DE80E4451CA3F82500D9E775 /* ProductInfoItems */ = {
-			isa = PBXGroup;
-			children = (
-				DE80E4461CA3F84D00D9E775 /* ProductInfoItems.h */,
-				DE80E4471CA3F85900D9E775 /* ProductInfoItems.m */,
-				DE8E182F1CA906870070A298 /* ProductInfoItemsDelegate.h */,
-			);
-			name = ProductInfoItems;
 			sourceTree = "<group>";
 		};
 		EF05983A161A8BDB004A9095 /* LA */ = {
@@ -5395,7 +5324,6 @@
 				C4EA9BF61619630F00D51FE9 /* EditProspect.m in Sources */,
 				AA4EF7651C85A4260050CCD8 /* ReaderContentPage.m in Sources */,
 				C4EA9BFC161989D200D51FE9 /* FirstTimeViewController.m in Sources */,
-				DE80E43D1CA3F7FB00D9E775 /* BRRequestCreateDirectory.m in Sources */,
 				C4EA9C07161A76A900D51FE9 /* Logout.m in Sources */,
 				EF059839161A8BD1004A9095 /* NewLAViewController.m in Sources */,
 				EF05983F161A8C85004A9095 /* ListingTbViewController.m in Sources */,
@@ -5449,7 +5377,6 @@
 				C4E7C0D6172FC9CD00038FA9 /* AFHTTPClient.m in Sources */,
 				AA4EF7631C85A4260050CCD8 /* CGPDFDocument.m in Sources */,
 				C4E7C0D7172FC9CD00038FA9 /* AFHTTPRequestOperation.m in Sources */,
-				DE80E4421CA3F7FB00D9E775 /* BRRequestQueue.m in Sources */,
 				C4E7C0D8172FC9CD00038FA9 /* AFImageRequestOperation.m in Sources */,
 				C4E7C0D9172FC9CD00038FA9 /* AFJSONRequestOperation.m in Sources */,
 				C4E7C0DA172FC9CD00038FA9 /* AFNetworkActivityIndicatorManager.m in Sources */,
@@ -5468,7 +5395,6 @@
 				EFEB7A49175ED366004FF3CE /* GroupListing.m in Sources */,
 				42867E9A175F2D93001CE661 /* IDTypeViewController.m in Sources */,
 				17A7D83E1C5B3EE50016EE7F /* setting.m in Sources */,
-				DE80E43F1CA3F7FB00D9E775 /* BRRequestDownload.m in Sources */,
 				42867EB3175F75E6001CE661 /* TitleViewController.m in Sources */,
 				174DD2551C9A54C400D56274 /* Pembelianke.m in Sources */,
 				C4E9F3D21765E2430070EA8A /* EverSeriesMasterViewController.m in Sources */,
@@ -5546,7 +5472,6 @@
 				439985BE1C62F8A70003B037 /* ModelPopover.m in Sources */,
 				2958A86D17E95FDA0090A791 /* Preference.m in Sources */,
 				2958A87317E95FF60090A791 /* TVCalibratedSlider.m in Sources */,
-				DE80E4431CA3F7FB00D9E775 /* BRRequestUpload.m in Sources */,
 				2958A87417E95FF60090A791 /* TVSlider.m in Sources */,
 				2958A88D17E9602D0090A791 /* RecordofAdvice.m in Sources */,
 				2958A89117E960610090A791 /* Declare.m in Sources */,
@@ -5596,7 +5521,6 @@
 				29A38DC317EAEBC800454787 /* PolicyOwnerCell.m in Sources */,
 				4353C94E1C61F6F800AE1ED9 /* ModelReligion.m in Sources */,
 				29A38DC417EAEBC800454787 /* SICell.m in Sources */,
-				DE80E43E1CA3F7FB00D9E775 /* BRRequestDelete.m in Sources */,
 				29A38DCA17EAF51000454787 /* eSubMenu.m in Sources */,
 				29A38DD017EAF58B00454787 /* pendingVC.m in Sources */,
 				29A38DD117EAF58B00454787 /* submittedVC.m in Sources */,
@@ -5604,7 +5528,6 @@
 				AA4EF7641C85A4260050CCD8 /* ReaderConstants.m in Sources */,
 				AAFFE17D1C7D475E001B91BF /* AgentWS.m in Sources */,
 				2943213317F2E0DC00FB64AB /* SIDate_DOB.m in Sources */,
-				DE80E4441CA3F7FB00D9E775 /* BRStreamInfo.m in Sources */,
 				C30A259C17F3C8D500613A0F /* AdditionalQuestions.m in Sources */,
 				43DA4BE31C770AA90038C92C /* SIMenuTableViewCell.m in Sources */,
 				C30A259D17F3C8D500613A0F /* AddtionalQuestInsured.m in Sources */,
@@ -5622,7 +5545,6 @@
 				C30A25A717F3C8D500613A0F /* HealthQuestionnaire5.m in Sources */,
 				C30A25A817F3C8D500613A0F /* HealthQuestionnaire6.m in Sources */,
 				43F7C3191C9D40B70074F464 /* Formatter.m in Sources */,
-				DE80E43C1CA3F7FB00D9E775 /* BRRequest+_UserData.m in Sources */,
 				C30A25A917F3C8D500613A0F /* HealthQuestionnaire7.m in Sources */,
 				431C065F1C823A9B001824FD /* Model_SI_Premium.m in Sources */,
 				C30A25AA17F3C8D500613A0F /* HealthQuestionnaire7b.m in Sources */,
@@ -5713,7 +5635,6 @@
 				DEE2B7C71C9FADCF00B7283A /* DBMigration.m in Sources */,
 				431F5FE41C6D93E800A9CA6C /* ProspectListingTableViewCell.m in Sources */,
 				4212708118459CBB000C2156 /* HealthQuestionsPO.m in Sources */,
-				DE80E4401CA3F7FB00D9E775 /* BRRequestError.m in Sources */,
 				4212708218459CBB000C2156 /* HealthQuestionsVC.m in Sources */,
 				4212708818459FC0000C2156 /* eAppReport.m in Sources */,
 				4212708918459FC0000C2156 /* ReportCell.m in Sources */,
@@ -5723,7 +5644,6 @@
 				EF509EC7184F30110058CCD8 /* ClientProfileListingSortBy.m in Sources */,
 				423A853518502D92008EC5D4 /* SelectCFFCell.m in Sources */,
 				C416C2B61855BA9B00D29E46 /* SettingUserProfileReg.m in Sources */,
-				DE80E43B1CA3F7FB00D9E775 /* BRRequest.m in Sources */,
 				C416C2C11855BBA700D29E46 /* ChangePasswordReg.m in Sources */,
 				C416C2C21855BBA700D29E46 /* NSString+MD5Addition.m in Sources */,
 				C416C2C31855BBA700D29E46 /* NSString+URLEncode.m in Sources */,
@@ -5746,7 +5666,6 @@
 				AADD7E6F1C743A1E00D87750 /* DDXMLElementAdditions.m in Sources */,
 				6A3D70D2188A4B8B000B2097 /* SIxml.m in Sources */,
 				AA4EF7761C85A4260050CCD8 /* UIXToolbarView.m in Sources */,
-				DE80E4411CA3F7FB00D9E775 /* BRRequestListDirectory.m in Sources */,
 				6A55483A188B6BA400994B42 /* FormViewController.m in Sources */,
 				42804E21188EDF7F008EF058 /* FullyReducePaidUpPopover.m in Sources */,
 				296F543D18BC3DF500E3B7B2 /* NSStringAdditions.m in Sources */,
@@ -5824,7 +5743,6 @@
 				4239AEEA1946DAE200BD6F53 /* CardSnap.m in Sources */,
 				4239AEEC1946DAE200BD6F53 /* IDTypePicker.m in Sources */,
 				432466541C9000EC001EE22F /* ModelDataReferral.m in Sources */,
-				DE80E4481CA3F85900D9E775 /* ProductInfoItems.m in Sources */,
 				AAFFE17F1C7D475E001B91BF /* NSDate+ISO8601Unparsing.m in Sources */,
 				4239AEF21946DAE200BD6F53 /* SnapGen.m in Sources */,
 				428F84A5197831450016B7E8 /* GDataXMLNode.m in Sources */,
@@ -5986,6 +5904,7 @@
 					"\"$(SDKROOT)/usr/include/libxml2\"",
 					"\"$(SRCROOT)/chilkat/include\"",
 					"\"$(SRCROOT)/eSignature/eSign/eSignFramework/include\"",
+					"\"$(SRCROOT)/FTPSync\"",
 				);
 				INFOPLIST_FILE = "HLA/BLESS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
@@ -5995,6 +5914,7 @@
 					"$(PROJECT_DIR)/eSignature/eSign/eSignFramework",
 					"$(PROJECT_DIR)/eSignature/eSign/eSignFramework",
 					"$(PROJECT_DIR)/chilkat",
+					"$(PROJECT_DIR)/FTPSync",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -6038,6 +5958,7 @@
 					"\"$(SDKROOT)/usr/include/libxml2\"",
 					"\"$(SRCROOT)/chilkat/include\"",
 					"\"$(SRCROOT)/eSignature/eSign/eSignFramework/include\"",
+					"\"$(SRCROOT)/FTPSync\"",
 				);
 				INFOPLIST_FILE = "HLA/BLESS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
@@ -6047,6 +5968,7 @@
 					"$(PROJECT_DIR)/eSignature/eSign/eSignFramework",
 					"$(PROJECT_DIR)/eSignature/eSign/eSignFramework",
 					"$(PROJECT_DIR)/chilkat",
+					"$(PROJECT_DIR)/FTPSync",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",

@@ -18,7 +18,8 @@
 
 
 - (void)itemsList:(NSMutableArray *)ftpItems;
-- (void)reloadItemsTable;
-
+- (void)failedConnectToFTP;
+- (void)percentCompletedfromFTP:(float)percent;
+- (void)downloadCompletedfromFTP;
 
 @end

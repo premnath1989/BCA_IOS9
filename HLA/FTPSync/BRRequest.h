@@ -76,6 +76,7 @@
 #import "BRGlobal.h"
 #import "BRRequestError.h"
 #import "BRStreamInfo.h"
+#import <Foundation/Foundation.h>
 
 
 //---------- enumerated data types
