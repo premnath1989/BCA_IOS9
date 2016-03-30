@@ -66,6 +66,7 @@
     UIColor *borderColor;
     
     BOOL duplicateOK;
+    BOOL idValidationChecker;
 }
 
 @end
@@ -162,6 +163,7 @@ bool RegDatehandling;
     [_outletKotaOffice setTag:3];
     
     duplicateOK = NO;
+    idValidationChecker = YES;
     
     borderColor=[[UIColor alloc]initWithRed:250.0/255.0 green:175.0/255.0 blue:50.0/255.0 alpha:1.0];
     
@@ -208,7 +210,7 @@ bool RegDatehandling;
     //  [txtIDType addTarget:self action:@selector(NewICTextFieldBegin:) forControlEvents:UIControlEventEditingDidBegin];
     [txtAnnIncome addTarget:self action:@selector(AnnualIncomeChange:) forControlEvents:UIControlEventEditingDidEnd];
     [txtOtherIDType addTarget:self action:@selector(OtheriDDidChange:) forControlEvents:UIControlEventEditingDidEnd];
-		
+    
 	//to detect change
 	[txtEmail addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
 	[txtIDType addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
@@ -637,8 +639,13 @@ bool RegDatehandling;
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    activeField = textField;
-    activeView = nil;
+    if (idValidationChecker){
+        activeField = textField;
+        activeView = nil;
+    }
+    else{
+        [txtOtherIDType becomeFirstResponder];
+    }
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
@@ -1750,7 +1757,13 @@ bool RegDatehandling;
         [textField resignFirstResponder];
     }
     else if (textField == txtOtherIDType) {
-        [textField resignFirstResponder];
+        if ([self OtherIDValidation]){
+            [textField resignFirstResponder];
+        }
+        else{
+            [txtOtherIDType becomeFirstResponder];
+        }
+        
     }
     else if (textField == _txtCountryOfBirth) {
         [textField resignFirstResponder];
@@ -5142,12 +5155,13 @@ bool RegDatehandling;
 					NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
 					[ClientProfile setObject:@"NO" forKey:@"isNew"];
 					OTHERID_Hold_Alert = YES;
-					
+                    idValidationChecker = NO;
 					return false;
 				}
 			}
 		}
 	}
+    idValidationChecker = YES;
     return true;
 }
 
