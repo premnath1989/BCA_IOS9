@@ -5844,6 +5844,8 @@ int maxGycc = 0;
     arrayDataRiders=[[NSMutableArray alloc]initWithObjects:dictMDBKK,dictMBKK,dictBebasPremi, nil];
     [myTableView reloadData];
     
+    [myTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
+    [self tableView:myTableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
     [_delegate saveRider:dictMDBKK MDKK:dictMBKK BP:dictBebasPremi];
 }
 
@@ -6022,6 +6024,20 @@ int maxGycc = 0;
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Remove seperator inset
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    // Prevent the cell from inheriting the Table View's margin settings
+    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
+        [cell setPreservesSuperviewLayoutMargins:NO];
+    }
+    
+    // Explictly set your cell's layout margins
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+
     
 }
 
@@ -6321,8 +6337,8 @@ int maxGycc = 0;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    UITableViewCell *currentCell = [myTableView cellForRowAtIndexPath:indexPath];
-    currentCell.frame = CGRectMake(currentCell.frame.origin.x, currentCell.frame.origin.y, 750, currentCell.frame.size.height);
+    //UITableViewCell *currentCell = [myTableView cellForRowAtIndexPath:indexPath];
+    //currentCell.frame = CGRectMake(currentCell.frame.origin.x, currentCell.frame.origin.y, 750, currentCell.frame.size.height);
     lastSelectedIndex = indexPath.row;
     [self setRiderInformationForTextField:lastSelectedIndex];
     /*if ([myTableView isEditing]) {

@@ -1,9 +1,9 @@
 //
 //  Model_SI_Master.m
-//  BLESS
+//  MPOS
 //
 //  Created by Basvi on 2/26/16.
-//  Copyright © 2016 Hong Leong Assurance. All rights reserved.
+//  Copyright © 2016 InfoConnect Sdn Bhd. All rights reserved.
 //
 
 #import "Model_SI_Master.h"
@@ -153,11 +153,15 @@
     [database open];
     FMResultSet *s;
     if (([dateFrom length]>0)&&([dateTo length]>0)){
-        s = [database executeQuery:[NSString stringWithFormat:@"SELECT sim.*, po.ProductName,po.PO_Name,ifnull(sip.Sum_Assured,0) as Sum_Assured FROM SI_Master sim join SI_PO_Data po on sim.SINO=po.SINO join SI_Premium sip on sim.SINO=sip.SINO where sim.SINO like \"%%%@%%\" and po.PO_Name like \"%%%@%%\" and sim.CreatedDate between \"%@\" and \"%@\" group by sim.ID order by %@ %@",SINO,poName,dateFrom,dateTo,orderBy,method]];
-        NSLog(@"query %@",[NSString stringWithFormat:@"SELECT sim.*, po.ProductName,po.PO_Name,ifnull(sip.Sum_Assured,0) FROM SI_Master sim join SI_PO_Data po on sim.SINO=po.SINO join SI_Premium sip on sim.SINO=sip.SINO where sim.SINO like \"%%%@%%\" and po.PO_Name like \"%%%@%%\" and sim.CreatedDate between \"%@\" and \"%@\" group by sim.ID order by %@ %@",SINO,poName,dateFrom,dateTo,orderBy,method]);
+        NSMutableString* dateFromNew=[[NSMutableString alloc]initWithString:dateFrom];
+        NSMutableString* dateToNew=[[NSMutableString alloc]initWithString:dateTo];
+        [dateFromNew appendString:@" 00:00:00"];
+        [dateToNew appendString:@" 24:00:00"];
+        s = [database executeQuery:[NSString stringWithFormat:@"SELECT sim.*, po.ProductName,po.PO_Name,ifnull(sip.Sum_Assured,0) as Sum_Assured FROM SI_Master sim left join SI_PO_Data po on sim.SINO=po.SINO left join SI_Premium sip on sim.SINO=sip.SINO where sim.SINO like \"%%%@%%\" and po.PO_Name like \"%%%@%%\" and sim.CreatedDate between \"%@\" and \"%@\" group by sim.ID order by %@ %@",SINO,poName,dateFromNew,dateToNew,orderBy,method]];
+        NSLog(@"query %@",[NSString stringWithFormat:@"SELECT sim.*, po.ProductName,po.PO_Name,ifnull(sip.Sum_Assured,0) FROM SI_Master sim join SI_PO_Data po on sim.SINO=po.SINO join SI_Premium sip on sim.SINO=sip.SINO where sim.SINO like \"%%%@%%\" and po.PO_Name like \"%%%@%%\" and sim.CreatedDate between \"%@\" and \"%@\" group by sim.ID order by %@ %@",SINO,poName,dateFromNew,dateToNew,orderBy,method]);
     }
     else{
-        s = [database executeQuery:[NSString stringWithFormat:@"SELECT sim.*, po.ProductName,po.PO_Name,ifnull(sip.Sum_Assured,0) as Sum_Assured FROM SI_Master sim join SI_PO_Data po on sim.SINO=po.SINO join SI_Premium sip on sim.SINO=sip.SINO  where sim.SINO like \"%%%@%%\" and po.PO_Name like \"%%%@%%\" group by sim.ID order by %@ %@",SINO,poName,orderBy,method]];
+        s = [database executeQuery:[NSString stringWithFormat:@"SELECT sim.*, po.ProductName,po.PO_Name,ifnull(sip.Sum_Assured,0) as Sum_Assured FROM SI_Master sim left join SI_PO_Data po on sim.SINO=po.SINO left join SI_Premium sip on sim.SINO=sip.SINO  where sim.SINO like \"%%%@%%\" and po.PO_Name like \"%%%@%%\" group by sim.ID order by %@ %@",SINO,poName,orderBy,method]];
     }
 
     while ([s next]) {

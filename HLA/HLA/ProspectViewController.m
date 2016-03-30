@@ -1,6 +1,6 @@
 //
 //  ProspectViewController.m
-//  HLA Ipad
+//  MPOS
 //
 //  Created by Md. Nazmus Saadat on 9/30/12.
 //  Copyright (c) 2012 InfoConnect Sdn Bhd. All rights reserved.
@@ -66,6 +66,7 @@
     UIColor *borderColor;
     
     BOOL duplicateOK;
+    BOOL idValidationChecker;
 }
 
 @end
@@ -154,12 +155,15 @@ bool RegDatehandling;
 {
     RegDatehandling =YES;
     [super viewDidLoad];
+    classFormatter = [[Formatter alloc]init];
+    
     [_outletProvinsi setTag:0];
     [_outletProvinsiOffice setTag:2];
     [_outletKota setTag:1];
     [_outletKotaOffice setTag:3];
     
     duplicateOK = NO;
+    idValidationChecker = YES;
     
     borderColor=[[UIColor alloc]initWithRed:250.0/255.0 green:175.0/255.0 blue:50.0/255.0 alpha:1.0];
     
@@ -205,8 +209,8 @@ bool RegDatehandling;
     [txtIDType addTarget:self action:@selector(NewICDidChange:) forControlEvents:UIControlEventEditingDidEnd];
     //  [txtIDType addTarget:self action:@selector(NewICTextFieldBegin:) forControlEvents:UIControlEventEditingDidBegin];
     [txtAnnIncome addTarget:self action:@selector(AnnualIncomeChange:) forControlEvents:UIControlEventEditingDidEnd];
-    //[txtOtherIDType addTarget:self action:@selector(OtheriDDidChange:) forControlEvents:UIControlEventEditingDidEnd];
-		
+    [txtOtherIDType addTarget:self action:@selector(OtheriDDidChange:) forControlEvents:UIControlEventEditingDidEnd];
+    
 	//to detect change
 	[txtEmail addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
 	[txtIDType addTarget:self action:@selector(detectChanges:) forControlEvents:UIControlEventEditingChanged];
@@ -635,8 +639,13 @@ bool RegDatehandling;
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    activeField = textField;
-    activeView = nil;
+    if (idValidationChecker){
+        activeField = textField;
+        activeView = nil;
+    }
+    else{
+        [txtOtherIDType becomeFirstResponder];
+    }
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
@@ -1748,7 +1757,13 @@ bool RegDatehandling;
         [textField resignFirstResponder];
     }
     else if (textField == txtOtherIDType) {
-        [textField resignFirstResponder];
+        if ([self OtherIDValidation]){
+            [textField resignFirstResponder];
+        }
+        else{
+            [txtOtherIDType becomeFirstResponder];
+        }
+        
     }
     else if (textField == _txtCountryOfBirth) {
         [textField resignFirstResponder];
@@ -2003,14 +2018,14 @@ bool RegDatehandling;
             NSArray  *comp = [AI componentsSeparatedByString:@"."];
             NSString *get_num = [[comp objectAtIndex:0] stringByReplacingOccurrencesOfString:@"," withString:@""];
             int c = [get_num length];
-            if(c > 13) {
+            if(c > 15) {
                 return13digit = TRUE;
             }
         } else  if([AI rangeOfString:@"."].length == 0) {
             NSArray  *comp = [AI componentsSeparatedByString:@"."];
             NSString *get_num = [[comp objectAtIndex:0] stringByReplacingOccurrencesOfString:@"," withString:@""];
             int c = [get_num length];
-            if(c  > 13) {
+            if(c  > 15) {
                 return13digit = TRUE;
             }
         }
@@ -2021,11 +2036,11 @@ bool RegDatehandling;
         if(return13digit == TRUE) {
             return (([string isEqualToString:filtered])&&(newLength <= CHARACTER_LIMIT_ANNUALINCOME));
         } else {
-            return (([string isEqualToString:filtered])&&(newLength <= CHARACTER_LIMIT_ANNUALINCOME));
+            return (([string isEqualToString:filtered])&&(newLength <= 19));
         }
     }
     
-    if (textField == txtFullName) {
+    else if (textField == txtFullName) {
         return ((newLength <= 40));
     }
     
@@ -2113,6 +2128,7 @@ bool RegDatehandling;
     
     txtAnnIncome.text = [txtAnnIncome.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     txtAnnIncome.text = [txtAnnIncome.text stringByReplacingOccurrencesOfString:@"," withString:@""];
+    txtAnnIncome.text = [txtAnnIncome.text stringByReplacingOccurrencesOfString:@"." withString:@""];
     txtAnnIncome.text = [txtAnnIncome.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     
     NSString *result;
@@ -2123,6 +2139,7 @@ bool RegDatehandling;
     [formatter setUsesGroupingSeparator:YES];
     [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
 
+    
     NSNumber *myNumber = [formatter numberFromString:txtAnnIncome.text];
     result = [formatter stringFromNumber:myNumber];
 
@@ -2708,7 +2725,7 @@ bool RegDatehandling;
         }
         
     } else if (switchPressed.tag == 1) {
-        if (checked2) {
+        if ([switchPressed isOn]) {
             [btnForeignOffice setImage: [UIImage imageNamed:@"emptyCheckBox.png"] forState:UIControlStateNormal];
             checked2 = NO;
             
@@ -2719,37 +2736,9 @@ bool RegDatehandling;
             txtOfficePostcode.text = @"";
             txtOfficeTown.text = @"";
             txtOfficeState.text = @"";
-            txtOfficeCountry.text = @"";
             [_outletKotaOffice setTitle:@"" forState:UIControlStateNormal];
             [_outletProvinsiOffice setTitle:@"" forState:UIControlStateNormal];
-
-            // txtOfficeTown.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
-            txtOfficeState.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
-            txtOfficeCountry.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
-            txtOfficeTown.enabled = NO;
-            txtOfficeState.enabled = NO;
-            txtOfficeCountry.hidden = NO;
-            btnOfficeCountry.hidden = YES;
-            _outletKotaOffice.hidden=NO;
-            _outletProvinsiOffice.hidden=NO;
             
-            //[txtOfficePostcode addTarget:self action:@selector(OfficePostcodeDidChange:) forControlEvents:UIControlEventEditingDidEnd];
-            [txtOfficePostcode addTarget:self action:@selector(OfficeEditTextFieldBegin:) forControlEvents:UIControlEventEditingDidBegin];
-            
-        } else {
-            [btnForeignOffice setImage: [UIImage imageNamed:@"tickCheckBox.png"] forState:UIControlStateNormal];
-            checked2 = YES;
-            
-            txtOfficeAddr1.text = @"";
-            txtOfficeAddr2.text = @"";
-            txtOfficeAddr3.text = @"";
-            
-            txtOfficePostcode.text = @"";
-            txtOfficeTown.text = @"";
-            txtOfficeState.text = @"";
-            [_outletKotaOffice setTitle:@"" forState:UIControlStateNormal];
-            [_outletProvinsiOffice setTitle:@"" forState:UIControlStateNormal];
-
             [btnOfficeCountry setTitle:@"- SELECT -" forState:UIControlStateNormal];
             btnOfficeCountry.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
             txtOfficeTown.backgroundColor = [UIColor whiteColor];
@@ -2767,6 +2756,33 @@ bool RegDatehandling;
             
             [txtOfficePostcode removeTarget:self action:@selector(OfficePostcodeDidChange:) forControlEvents:UIControlEventEditingDidEnd];
             [txtOfficePostcode removeTarget:self action:@selector(OfficeEditTextFieldBegin:) forControlEvents:UIControlEventEditingDidBegin];
+        } else {
+            [btnForeignOffice setImage: [UIImage imageNamed:@"tickCheckBox.png"] forState:UIControlStateNormal];
+            checked2 = YES;
+            
+            txtOfficeAddr1.text = @"";
+            txtOfficeAddr2.text = @"";
+            txtOfficeAddr3.text = @"";
+            
+            txtOfficePostcode.text = @"";
+            txtOfficeTown.text = @"";
+            txtOfficeState.text = @"";
+            txtOfficeCountry.text = @"";
+            [_outletKotaOffice setTitle:@"" forState:UIControlStateNormal];
+            [_outletProvinsiOffice setTitle:@"" forState:UIControlStateNormal];
+            
+            // txtOfficeTown.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+            txtOfficeState.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+            txtOfficeCountry.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+            txtOfficeTown.enabled = NO;
+            txtOfficeState.enabled = NO;
+            txtOfficeCountry.hidden = NO;
+            btnOfficeCountry.hidden = YES;
+            _outletKotaOffice.hidden=NO;
+            _outletProvinsiOffice.hidden=NO;
+            
+            //[txtOfficePostcode addTarget:self action:@selector(OfficePostcodeDidChange:) forControlEvents:UIControlEventEditingDidEnd];
+            [txtOfficePostcode addTarget:self action:@selector(OfficeEditTextFieldBegin:) forControlEvents:UIControlEventEditingDidBegin];
         }
     }
 }
@@ -3832,14 +3848,15 @@ bool RegDatehandling;
     } else if(alertView.tag == 5002) {
         btnOfficeCountry.titleLabel.textColor = [UIColor redColor];
     } else if(alertView.tag == 6000) {
-        self.navigationItem.title = @"Edit Client Profile";
+        /*self.navigationItem.title = @"Edit Client Profile";
         txtIDType.text = [txtIDType.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
         if(txtIDType.text.length ==12) {
             [self getSameIDRecord:@"IC" :getSameRecord_Indexno ];
         } else {
             [self getSameIDRecord:@"OTHERID" :getSameRecord_Indexno];
         }
-        [self displaySameRecord];
+        [self displaySameRecord];*/
+        [txtOtherIDType becomeFirstResponder];
     }
 }
 
@@ -5138,12 +5155,13 @@ bool RegDatehandling;
 					NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
 					[ClientProfile setObject:@"NO" forKey:@"isNew"];
 					OTHERID_Hold_Alert = YES;
-					
+                    idValidationChecker = NO;
 					return false;
 				}
 			}
 		}
 	}
+    idValidationChecker = YES;
     return true;
 }
 

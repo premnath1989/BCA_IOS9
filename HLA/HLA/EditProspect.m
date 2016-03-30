@@ -1,6 +1,6 @@
 //
 //  EditProspect.m
-//  HLA Ipad
+//  MPOS
 //
 //  Created by Md. Nazmus Saadat on 10/1/12.
 //  Copyright (c) 2012 InfoConnect Sdn Bhd. All rights reserved.
@@ -28,7 +28,7 @@
 #define CHARACTER_LIMIT_Address 30
 #define CHARACTER_LIMIT_POSTCODE 6
 #define CHARACTER_LIMIT_FOREIGN_POSTCODE 12
-#define CHARACTER_LIMIT_ANNUALINCOME 20
+#define CHARACTER_LIMIT_ANNUALINCOME 15
 #define CHARACTER_LIMIT_GSTREGNO 15
 #define CHARACTER_LIMIT_30 30
 
@@ -3886,13 +3886,13 @@ NSMutableArray *DelGroupArr;
             NSArray  *comp = [AI componentsSeparatedByString:@"."];
             NSString *get_num = [[comp objectAtIndex:0] stringByReplacingOccurrencesOfString:@"," withString:@""];
             int c = [get_num length];
-            return13digit = (c > 13);
+            return13digit = (c > 15);
             
         } else if([AI rangeOfString:@"."].length == 0) {
             NSArray  *comp = [AI componentsSeparatedByString:@"."];
             NSString *get_num = [[comp objectAtIndex:0] stringByReplacingOccurrencesOfString:@"," withString:@""];
             int c = [get_num length];
-            return13digit = (c  > 13);
+            return13digit = (c  > 15);
         }
         
         NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_MONEY] invertedSet];
@@ -3901,7 +3901,7 @@ NSMutableArray *DelGroupArr;
         if( return13digit == TRUE) {
             return (([string isEqualToString:filtered])&&(newLength <= CHARACTER_LIMIT_ANNUALINCOME));
         } else {
-            return (([string isEqualToString:filtered])&&(newLength <= CHARACTER_LIMIT_ANNUALINCOME));
+            return (([string isEqualToString:filtered])&&(newLength <= 19));
         }
     }
 
@@ -4443,6 +4443,9 @@ NSMutableArray *DelGroupArr;
             [btnForeignHome setImage: [UIImage imageNamed:@"emptyCheckBox.png"] forState:UIControlStateNormal];
             checked = YES;
             
+            [btnHomeCountry setTitle:@"- SELECT -" forState:UIControlStateNormal];
+            btnHomeCountry.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+            
             txtHomeAddr1.text = @"";
             txtHomeAddr2.text=@"";
             txtHomeAddr3.text=@"";
@@ -4458,6 +4461,7 @@ NSMutableArray *DelGroupArr;
             txtHomeCountry.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
             txtHomeTown.enabled = NO;
             txtHomeState.enabled = NO;
+            txtHomeCountry.enabled = NO;
             txtHomeCountry.hidden = YES;
             btnHomeCountry.hidden = NO;
             _outletKota.hidden=YES;
@@ -4489,6 +4493,7 @@ NSMutableArray *DelGroupArr;
             //txtHomeCountry.backgroundColor = [UIColor whiteColor];
             txtHomeTown.enabled = YES;
             txtHomeState.enabled = YES;
+            txtHomeCountry.enabled = NO;
             txtHomeCountry.hidden = NO;
 
             btnHomeCountry.hidden = YES;
@@ -4507,6 +4512,8 @@ NSMutableArray *DelGroupArr;
         if ([switchPressed isOn]) {
             [btnForeignOffice setImage: [UIImage imageNamed:@"emptyCheckBox.png"] forState:UIControlStateNormal];
             checked2 = YES;
+            [btnOfficeCountry setTitle:@"- SELECT -" forState:UIControlStateNormal];
+            btnOfficeCountry.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
             
             txtOfficeAddr1.text=@"";
             txtOfficeAddr2.text=@"";
@@ -4524,6 +4531,7 @@ NSMutableArray *DelGroupArr;
             txtOfficeCountry.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
             txtOfficeTown.enabled = NO;
             txtOfficeState.enabled = NO;
+            txtOfficeCountry.enabled = NO;
             txtOfficeCountry.hidden = YES;
             btnOfficeCountry.hidden = NO;
             _outletKotaOffice.hidden=YES;
@@ -4554,6 +4562,7 @@ NSMutableArray *DelGroupArr;
             txtOfficeTown.enabled = YES;
             txtOfficeState.enabled = YES;
             txtOfficeCountry.hidden = NO;
+            txtOfficeCountry.enabled = NO;
             btnOfficeCountry.hidden = YES;
             _outletKotaOffice.hidden=NO;
             _outletProvinsiOffice.hidden=NO;
@@ -14191,6 +14200,7 @@ NSMutableArray *DelGroupArr;
 {
     txtAnnIncome.text = [txtAnnIncome.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     txtAnnIncome.text = [txtAnnIncome.text stringByReplacingOccurrencesOfString:@"," withString:@""];
+    txtAnnIncome.text = [txtAnnIncome.text stringByReplacingOccurrencesOfString:@"." withString:@""];
     txtAnnIncome.text = [txtAnnIncome.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     
     NSString *result;

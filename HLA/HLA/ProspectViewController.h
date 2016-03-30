@@ -1,6 +1,6 @@
 //
 //  ProspectViewController.h
-//  HLA Ipad
+//  MPOS
 //
 //  Created by Md. Nazmus Saadat on 9/30/12.
 //  Copyright (c) 2012 InfoConnect Sdn Bhd. All rights reserved.
@@ -30,6 +30,7 @@
 #import "ModelProspectProfile.h"
 #import "KodePosInfo.h"
 #import "NIPInfo.h"
+#import "Formatter.h"
 
 @class DataTable,DBController;
 @protocol ProspectViewControllerDelegate
@@ -43,6 +44,7 @@
     sqlite3 *contactDB;
     UITextField *activeField;
     UITextView *activeView;
+    Formatter* classFormatter;
     OccupationList *_OccupationList;
     SIDate *_SIDate;
     GroupClass *_GroupList;

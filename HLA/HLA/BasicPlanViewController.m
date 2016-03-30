@@ -471,11 +471,37 @@ bool WPTPD30RisDeleted = FALSE;
     
     if (textField == yearlyIncomeField)
     {
+        /*NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
+        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        return (([string isEqualToString:filtered]) && newLength <= 15);*/
+        BOOL return13digit = FALSE;
+        //KY - IMPORTANT - PUT THIS LINE TO DETECT THE FIRST CHARACTER PRESSED....
+        //This method is being called before the content of textField.text is changed.
+        NSString * AI = [textField.text stringByReplacingCharactersInRange:range withString:string];
+        
+        if ([AI rangeOfString:@"."].length == 1) {
+            NSArray  *comp = [AI componentsSeparatedByString:@"."];
+            NSString *get_num = [[comp objectAtIndex:0] stringByReplacingOccurrencesOfString:@"," withString:@""];
+            int c = [get_num length];
+            return13digit = (c > 15);
+            
+        } else if([AI rangeOfString:@"."].length == 0) {
+            NSArray  *comp = [AI componentsSeparatedByString:@"."];
+            NSString *get_num = [[comp objectAtIndex:0] stringByReplacingOccurrencesOfString:@"," withString:@""];
+            int c = [get_num length];
+            return13digit = (c  > 15);
+        }
+        
         NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
-        return (([string isEqualToString:filtered]) && newLength <= 15);
+        
+        if( return13digit == TRUE) {
+            return (([string isEqualToString:filtered])&&(newLength <= 15));
+        } else {
+            return (([string isEqualToString:filtered])&&(newLength <= 19));
+        }
     }
-    else if (textField == _extraPremiPercentField)
+    if (textField == _extraPremiPercentField)
     {
         NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
@@ -2087,6 +2113,7 @@ bool WPTPD30RisDeleted = FALSE;
     NSLog(@"basicsumassured %lli",BasisSumAssured);
     yearlyIncomeField.text = [yearlyIncomeField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     yearlyIncomeField.text = [yearlyIncomeField.text stringByReplacingOccurrencesOfString:@"," withString:@""];
+    yearlyIncomeField.text = [yearlyIncomeField.text stringByReplacingOccurrencesOfString:@"." withString:@""];
     yearlyIncomeField.text = [yearlyIncomeField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     
     NSString *result;
