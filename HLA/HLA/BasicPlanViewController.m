@@ -661,8 +661,8 @@ bool WPTPD30RisDeleted = FALSE;
         PaymentMode = 0.1;
     }
 
-    long long Extraprem =(ExtraPremiNumb* PaymentMode) *(BasisSumAssured/1000);
-    
+    //long long Extraprem =(ExtraPremiNumb* PaymentMode) *(BasisSumAssured/1000);
+    double Extraprem =(ExtraPremiNumb* PaymentMode) *((double)BasisSumAssured/1000);
     ExtraPremiTotal = Extraprem;
     
     long long ExtraPrem1 = ExtraPremiTotal + ExtraPrecenttotal;
@@ -672,20 +672,15 @@ bool WPTPD30RisDeleted = FALSE;
     NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setFormatterBehavior: NSNumberFormatterBehavior10_4];
     [numberFormatter setNumberStyle: NSNumberFormatterDecimalStyle];
-    [numberFormatter setRoundingMode:NSNumberFormatterRoundUp];
+    //[numberFormatter setRoundingMode:NSNumberFormatterRoundUp];
     [numberFormatter setMaximumFractionDigits:0];
     [numberFormatter setMinimumFractionDigits:0];
     
     NSString *numberExtraBasicPremi = [numberFormatter stringFromNumber: [NSNumber numberWithDouble:ExtraPrem1]];
     NSString *numberExtraBasicTotal = [numberFormatter stringFromNumber: [NSNumber numberWithDouble:Alltotal]];
-    
-    
-    
-    [_extraBasicPremiField setText:[NSString stringWithFormat:@"%@", numberExtraBasicPremi]];
-    
-    [_totalPremiWithLoadingField setText:[NSString stringWithFormat:@"%@", numberExtraBasicTotal]];
-    
 
+    [_extraBasicPremiField setText:[NSString stringWithFormat:@"%@", numberExtraBasicPremi]];
+    [_totalPremiWithLoadingField setText:[NSString stringWithFormat:@"%@", numberExtraBasicTotal]];
 }
 
 -(void)setActiveTextField:(UITextField *)textField Active:(BOOL)active{
@@ -1281,8 +1276,8 @@ bool WPTPD30RisDeleted = FALSE;
     
     BasisSumAssured = [myNumber longLongValue];
 
-    long long total =(BasisSumAssured/1000);
-    
+    //long long total =(BasisSumAssured/1000);
+    double total =((double)BasisSumAssured/1000);
     double test = PaymentMode * RatesInt;
     
     double test2 = (test * BasisSumAssured)/1000;
@@ -1754,7 +1749,8 @@ bool WPTPD30RisDeleted = FALSE;
     
     double valueofTotal =(PaymentMode * RatesInt);
     
-    double total =(totalDivide * valueofTotal);
+    //double total =(totalDivide * valueofTotal);
+    double total =(((double)BasisSumAssured/1000) * valueofTotal);
   //  [_basicPremiField setText:[NSString stringWithFormat:@"%d", total]];
 
     int masaExtraPremiBTotal =[_masaExtraPremiField.text intValue];\
@@ -1765,8 +1761,8 @@ bool WPTPD30RisDeleted = FALSE;
     
     long long Extraprem =totalB;
     
-    ExtraPrecenttotal = Extraprem;
-    
+    //ExtraPrecenttotal = Extraprem;
+    ExtraPrecenttotal = totalB;
     long long ExtraPrem1 = ExtraPremiTotal + ExtraPrecenttotal;
 
     
@@ -1780,7 +1776,7 @@ bool WPTPD30RisDeleted = FALSE;
     NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setFormatterBehavior: NSNumberFormatterBehavior10_4];
     [numberFormatter setNumberStyle: NSNumberFormatterDecimalStyle];
-    [numberFormatter setRoundingMode:NSNumberFormatterRoundUp];
+    //[numberFormatter setRoundingMode:NSNumberFormatterRoundUp];
     [numberFormatter setMaximumFractionDigits:0];
     [numberFormatter setMinimumFractionDigits:0];
     
@@ -2172,7 +2168,7 @@ bool WPTPD30RisDeleted = FALSE;
     NSString *result;
     
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc]init];
-    [formatter setMaximumFractionDigits:2];
+    [formatter setMaximumFractionDigits:0];
     [formatter setUsesGroupingSeparator:YES];
     [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
     

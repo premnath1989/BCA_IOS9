@@ -67,8 +67,10 @@
 	BOOL Editable;
     double maxSAFactor;
     double AnuityRt;
-    long long ExtraPremiTotal;
-    long long ExtraPrecenttotal;
+    //long long ExtraPremiTotal;
+    double ExtraPremiTotal;
+    //long long ExtraPrecenttotal;
+    double ExtraPrecenttotal;
     long long totalDivide;
     double DiskounPremi;
     double DiscountCalculation;
@@ -141,8 +143,10 @@
 @property (nonatomic, assign,readwrite) int ageClient;
 @property (nonatomic, assign,readwrite) long long BasisSumAssured;
 @property (nonatomic, assign,readwrite) long long totalDivide;
-@property (nonatomic, assign,readwrite) long long ExtraPremiTotal;
-@property (nonatomic, assign,readwrite) long long ExtraPrecenttotal;
+//@property (nonatomic, assign,readwrite) long long ExtraPremiTotal;
+@property (nonatomic, assign,readwrite) double ExtraPremiTotal;
+//@property (nonatomic, assign,readwrite) long long ExtraPrecenttotal;
+@property (nonatomic, assign,readwrite) double ExtraPrecenttotal;
 @property(nonatomic , retain) NSString *OccpCode;
 @property (nonatomic, assign,readwrite) int OccpClass;
 @property (nonatomic, copy) NSString *SINo;
