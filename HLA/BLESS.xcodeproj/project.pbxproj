@@ -782,7 +782,8 @@
 		C4FCDDEB16395F290065D024 /* btn_setting_home.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FCDDDF16395F290065D024 /* btn_setting_home.png */; };
 		C4FCDDEC16395F290065D024 /* btn_SI_home.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FCDDE016395F290065D024 /* btn_SI_home.png */; };
 		DE050BE51C9BF52B00AA6D45 /* BCA_life_Keluargaku_Video_Testimonial_Part_I_final.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = DE050BE41C9BF52B00AA6D45 /* BCA_life_Keluargaku_Video_Testimonial_Part_I_final.mp4 */; };
-		DE06FFB01CAB8A0700E4DE3A /* libFTPFileSynchronization.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DE06FFAF1CAB8A0700E4DE3A /* libFTPFileSynchronization.a */; };
+		DE06FFCE1CABBC2800E4DE3A /* xibLibrary.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DE06FFCD1CABBC2800E4DE3A /* xibLibrary.bundle */; };
+		DE06FFD21CABCB8200E4DE3A /* libFTPFileSynchronization.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DE06FFD11CABCB8200E4DE3A /* libFTPFileSynchronization.a */; };
 		DE1CC9621CA284A70058B595 /* PremiumKeluargaku.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE1CC9611CA284A70058B595 /* PremiumKeluargaku.xib */; };
 		DE80E43A1CA3F7FB00D9E775 /* BlackRaccoon-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DE80E4231CA3F7FB00D9E775 /* BlackRaccoon-Info.plist */; };
 		DE80E44A1CA3FCEE00D9E775 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE80E4491CA3FCEE00D9E775 /* CFNetwork.framework */; };
@@ -2147,7 +2148,9 @@
 		C4FCDDDF16395F290065D024 /* btn_setting_home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_setting_home.png; sourceTree = "<group>"; };
 		C4FCDDE016395F290065D024 /* btn_SI_home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_SI_home.png; sourceTree = "<group>"; };
 		DE050BE41C9BF52B00AA6D45 /* BCA_life_Keluargaku_Video_Testimonial_Part_I_final.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = BCA_life_Keluargaku_Video_Testimonial_Part_I_final.mp4; sourceTree = "<group>"; };
-		DE06FFAF1CAB8A0700E4DE3A /* libFTPFileSynchronization.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFTPFileSynchronization.a; path = ../../FTPFileSync/FTPFileSync/libFTPFileSynchronization.a; sourceTree = "<group>"; };
+		DE06FFCB1CABBBC800E4DE3A /* xibLibrary.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = xibLibrary.bundle; path = FTPSync/xibLibrary.bundle; sourceTree = "<group>"; };
+		DE06FFCD1CABBC2800E4DE3A /* xibLibrary.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = xibLibrary.bundle; path = FTPSync/xibLibrary.bundle; sourceTree = "<group>"; };
+		DE06FFD11CABCB8200E4DE3A /* libFTPFileSynchronization.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFTPFileSynchronization.a; path = FTPSync/libFTPFileSynchronization.a; sourceTree = "<group>"; };
 		DE1CC95E1CA283850058B595 /* PremiumKeluargaku.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PremiumKeluargaku.h; sourceTree = "<group>"; };
 		DE1CC9611CA284A70058B595 /* PremiumKeluargaku.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PremiumKeluargaku.xib; sourceTree = "<group>"; };
 		DE38E4891CAA25E300B3051B /* GroupDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GroupDelegate.h; sourceTree = "<group>"; };
@@ -2289,7 +2292,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DE06FFB01CAB8A0700E4DE3A /* libFTPFileSynchronization.a in Frameworks */,
 				DE80E44A1CA3FCEE00D9E775 /* CFNetwork.framework in Frameworks */,
 				C486D9E3163E6747009F8F21 /* MediaPlayer.framework in Frameworks */,
 				AA4EF7781C85A9C50050CCD8 /* ImageIO.framework in Frameworks */,
@@ -2304,6 +2306,7 @@
 				6A002CF21850282D00161727 /* OpenGLES.framework in Frameworks */,
 				6A002CF01850280A00161727 /* Security.framework in Frameworks */,
 				6A002CEE185027FD00161727 /* Accelerate.framework in Frameworks */,
+				DE06FFD21CABCB8200E4DE3A /* libFTPFileSynchronization.a in Frameworks */,
 				C4E64379171669D2001DF8F8 /* MessageUI.framework in Frameworks */,
 				C486D9E9163E6762009F8F21 /* CoreMedia.framework in Frameworks */,
 				C486D9E7163E675C009F8F21 /* MobileCoreServices.framework in Frameworks */,
@@ -4082,6 +4085,7 @@
 		C4E9D1851612C64900016053 = {
 			isa = PBXGroup;
 			children = (
+				DE06FFCD1CABBC2800E4DE3A /* xibLibrary.bundle */,
 				43F7C3161C9D409D0074F464 /* Formatter */,
 				DE050BE41C9BF52B00AA6D45 /* BCA_life_Keluargaku_Video_Testimonial_Part_I_final.mp4 */,
 				43FA6C151C87CD5D0098BA47 /* HTML USED */,
@@ -4146,7 +4150,8 @@
 		C4E9D1931612C64900016053 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				DE06FFAF1CAB8A0700E4DE3A /* libFTPFileSynchronization.a */,
+				DE06FFD11CABCB8200E4DE3A /* libFTPFileSynchronization.a */,
+				DE06FFCB1CABBBC800E4DE3A /* xibLibrary.bundle */,
 				DE80E4491CA3FCEE00D9E775 /* CFNetwork.framework */,
 				AA4EF7771C85A9C50050CCD8 /* ImageIO.framework */,
 				6A002CF91850287200161727 /* libz.dylib */,
@@ -4924,6 +4929,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE06FFCE1CABBC2800E4DE3A /* xibLibrary.bundle in Resources */,
 				DE050BE51C9BF52B00AA6D45 /* BCA_life_Keluargaku_Video_Testimonial_Part_I_final.mp4 in Resources */,
 				AA4EF77B1C8687CF0050CCD8 /* Brochure_ProdukBCALIfeKeluargaku_21012016.pdf in Resources */,
 				AA4EF77C1C8687CF0050CCD8 /* Brochure_ProdukBCALIfeKeluargaku.pdf in Resources */,
@@ -5915,6 +5921,7 @@
 					"$(PROJECT_DIR)/eSignature/eSign/eSignFramework",
 					"$(PROJECT_DIR)/chilkat",
 					"$(PROJECT_DIR)/FTPSync",
+					"$(PROJECT_DIR)/FTPSync/xibLibrary.bundle",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -5969,6 +5976,7 @@
 					"$(PROJECT_DIR)/eSignature/eSign/eSignFramework",
 					"$(PROJECT_DIR)/chilkat",
 					"$(PROJECT_DIR)/FTPSync",
+					"$(PROJECT_DIR)/FTPSync/xibLibrary.bundle",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -6063,6 +6071,8 @@
 					"\"$(SRCROOT)/signdociosfoundations.embeddedframework/Libraries\"",
 					"\"$(SRCROOT)/signdociosfoundations.embeddedframework\"",
 					"$(PROJECT_DIR)/eSignature/eSign/eSignFramework",
+					"$(PROJECT_DIR)/FTPSync/xibLibrary.bundle",
+					"$(PROJECT_DIR)/FTPSync",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",

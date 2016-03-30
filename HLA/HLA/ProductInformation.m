@@ -183,10 +183,13 @@
     UILabel *unduhLabel = (UILabel *)[cell viewWithTag:(indexPath.row*1000)+4];
     NSLog(@"file : %@.%@", fileName.text,fileType.text);
     
+    NSBundle *myLibraryBundle = [NSBundle bundleWithURL:[[NSBundle mainBundle]
+                                                         URLForResource:@"xibLibrary" withExtension:@"bundle"]];
+    
     if([fileType.text caseInsensitiveCompare:brochureLabel] == NSOrderedSame){
         if([unduhLabel.text caseInsensitiveCompare:downloadMacro] == NSOrderedSame){
             
-            ProgressBar *progressBar = [[ProgressBar alloc]initWithNibName:@"ProgressBar" bundle:nil];
+            ProgressBar *progressBar = [[ProgressBar alloc]initWithNibName:@"ProgressBar" bundle:myLibraryBundle];
             progressBar.TitleFileName = [NSString stringWithFormat: @"%@.%@",fileName.text, brochureExt];
             progressBar.progressDelegate = self;
             progressBar.modalPresentationStyle = UIModalPresentationFormSheet;
@@ -200,7 +203,7 @@
     }else if([fileType.text caseInsensitiveCompare:videoLabel] == NSOrderedSame){
         if([unduhLabel.text caseInsensitiveCompare:downloadMacro] == NSOrderedSame){
             
-            ProgressBar *progressBar = [[ProgressBar alloc]initWithNibName:@"ProgressBar" bundle:nil];
+            ProgressBar *progressBar = [[ProgressBar alloc]initWithNibName:@"ProgressBar" bundle:myLibraryBundle];
             progressBar.TitleFileName = [NSString stringWithFormat: @"%@.%@",fileName.text, videoExt];
             progressBar.progressDelegate = self;
             progressBar.modalPresentationStyle = UIModalPresentationFormSheet;
