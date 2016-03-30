@@ -4431,17 +4431,17 @@
     [lblAsuransiDasarSekaligus setTextColor:[UIColor clearColor]];
     [lblExtraPremiPercentSekaligus setTextColor:[UIColor clearColor]];
     [lblExtraPremiNumberSekaligus setTextColor:[UIColor clearColor]];
-    [lblTotalSekaligus setTextColor:[UIColor clearColor]];
+    [lblTotalSekaligus setTextColor:[UIColor whiteColor]];
     
     [lblAsuransiDasarBulanan setTextColor:[UIColor clearColor]];
     [lblExtraPremiPercentBulanan setTextColor:[UIColor clearColor]];
     [lblExtraPremiNumberBulanan setTextColor:[UIColor clearColor]];
-    [lblTotalBulanan setTextColor:[UIColor clearColor]];
+    [lblTotalBulanan setTextColor:[UIColor whiteColor]];
     
     [lblAsuransiDasarTahunan setTextColor:[UIColor clearColor]];
     [lblExtraPremiPercentTahunan setTextColor:[UIColor clearColor]];
     [lblExtraPremiNumberTahunan setTextColor:[UIColor clearColor]];
-    [lblTotalTahunan setTextColor:[UIColor clearColor]];
+    [lblTotalTahunan setTextColor:[UIColor whiteColor]];
     
     if ([Highlight isEqualToString:@"Pembayaran Sekaligus"])
     {
@@ -4453,7 +4453,6 @@
         [lblAsuransiDasarSekaligus setTextColor:themeColour];
         [lblExtraPremiPercentSekaligus setTextColor:themeColour];
         [lblExtraPremiNumberSekaligus setTextColor:themeColour];
-        [lblTotalSekaligus setTextColor:themeColour];
 
     }
     else if ([Highlight isEqualToString:@"Bulanan"]){
@@ -4470,8 +4469,10 @@
         [lblAsuransiDasarBulanan setTextColor:themeColour];
         [lblExtraPremiPercentBulanan setTextColor:themeColour];
         [lblExtraPremiNumberBulanan setTextColor:themeColour];
-        [lblTotalBulanan setTextColor:themeColour];
 
+        [lblAsuransiDasarTahunan setTextColor:[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1]];
+        [lblExtraPremiPercentTahunan setTextColor:[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1]];
+        [lblExtraPremiNumberTahunan setTextColor:[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1]];
     }
     else{
         [lblAsuransiDasarBulanan setText:[NSString stringWithFormat:@"%@",[Premformatter stringFromNumber:[NSNumber numberWithDouble:[self getPremiDasarBulanan]]]]];
@@ -4484,10 +4485,13 @@
         [lblExtraPremiNumberTahunan setText:[NSString stringWithFormat:@"%@",[Premformatter stringFromNumber:[NSNumber numberWithDouble:[self calculateExtraPremiNumberTahunan]]]]];
         [lblTotalTahunan setText:totalPremi];
         
+        [lblAsuransiDasarBulanan setTextColor:[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1]];
+        [lblExtraPremiPercentBulanan setTextColor:[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1]];
+        [lblExtraPremiNumberBulanan setTextColor:[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1]];
+        
         [lblAsuransiDasarTahunan setTextColor:themeColour];
         [lblExtraPremiPercentTahunan setTextColor:themeColour];
         [lblExtraPremiNumberTahunan setTextColor:themeColour];
-        [lblTotalTahunan setTextColor:themeColour];
     }
 }
 
