@@ -1,4 +1,4 @@
-//
+    //
 //  BasicPlanViewController.m
 //  HLA
 //
@@ -2808,19 +2808,23 @@ bool WPTPD30RisDeleted = FALSE;
 -(void)calculateRiderPremi{
     NSMutableDictionary* dictForCalculate =[[NSMutableDictionary alloc]initWithObjectsAndKeys:_extraPremiPercentField.text,@"ExtraPremiPerCent",_extraPremiNumberField.text,@"ExtraPremiPerMil",_masaExtraPremiField.text,@"MasaExtraPremi", nil];
 
+    NSMutableDictionary* dictForCalculateBPPremi;
+
     NSString *personCharacterType;
     if (([[_dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"SELF"])||([[_dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"])){
         personCharacterType = @"T";
+        dictForCalculateBPPremi=[[NSMutableDictionary alloc]initWithObjectsAndKeys:_extraPremiPercentField.text,@"ExtraPremiPerCent",_extraPremiNumberField.text,@"ExtraPremiPerMil",_masaExtraPremiField.text,@"MasaExtraPremi", nil];
         
     }
     else{
          personCharacterType = @"P";
+         dictForCalculateBPPremi=[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"0",@"ExtraPremiPerCent",@"0",@"ExtraPremiPerMil",@"0",@"MasaExtraPremi", nil];
     }
     
     double RiderPremium = [riderCalculation calculateBPPremi:dictForCalculate DictionaryBasicPlan:[self setDataBasicPlan] DictionaryPO:_dictionaryPOForInsert BasicCode:@"KLK" PaymentCode:[self getPaymentType] PersonType:personCharacterType];
     double MDBKKPremi = [riderCalculation calculateMDBKK:dictForCalculate DictionaryBasicPlan:[self setDataBasicPlan] DictionaryPO:_dictionaryPOForInsert BasicCode:@"KLK" PaymentCode:[self getPaymentType] PersonType:personCharacterType];
     double MDBKKLoading = [riderCalculation calculateMDBKKLoading:dictForCalculate DictionaryBasicPlan:[self setDataBasicPlan] DictionaryPO:_dictionaryPOForInsert BasicCode:@"KLK" PaymentCode:[self getPaymentType] PersonType:personCharacterType];
-    double RiderLoading = [riderCalculation calculateBPPremiLoading:dictForCalculate DictionaryBasicPlan:[self setDataBasicPlan] DictionaryPO:_dictionaryPOForInsert BasicCode:@"KLK" PaymentCode:[self getPaymentType] PersonType:personCharacterType];
+    double RiderLoading = [riderCalculation calculateBPPremiLoading:dictForCalculateBPPremi DictionaryBasicPlan:[self setDataBasicPlan] DictionaryPO:_dictionaryPOForInsert BasicCode:@"KLK" PaymentCode:[self getPaymentType] PersonType:personCharacterType];
     
     double premiDasar = RiderPremium + MDBKKPremi + roundedDiscount;
     double extrapremi = MDBKKLoading + RiderLoading;
