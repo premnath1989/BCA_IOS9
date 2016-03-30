@@ -1764,6 +1764,7 @@ bool WPTPD30RisDeleted = FALSE;
     //ExtraPrecenttotal = Extraprem;
     ExtraPrecenttotal = totalB;
     long long ExtraPrem1 = ExtraPremiTotal + ExtraPrecenttotal;
+    //double ExtraPrem1 = ExtraPremiTotal + ExtraPrecenttotal;
 
     
     

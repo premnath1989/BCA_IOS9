@@ -76,11 +76,11 @@
     _LAAge = [[dictionaryPremium valueForKey:@"LA_Age"]integerValue];
     _ExtraPercentagePremi = [dictionaryPremium valueForKey:@"ExtraPremiumPercentage"];
 
-    [self AnsuransiDasar];
+    /*[self AnsuransiDasar];
     [self PremiDasarActB];
     [self ExtraPremiNumber];
     [self SubTotal];
-    [self PremiDasarActB];
+    [self PremiDasarActB];*/
 }
 
 - (void)viewDidLoad
@@ -89,11 +89,14 @@
     themeColour = [UIColor colorWithRed:218.0f/255.0f green:49.0f/255.0f blue:85.0f/255.0f alpha:1];
     
     Premformatter = [[NSNumberFormatter alloc] init];
-    [Premformatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+    //[Premformatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+    [Premformatter setFormatterBehavior: NSNumberFormatterBehavior10_4];
+    [Premformatter setNumberStyle: NSNumberFormatterDecimalStyle];
     [Premformatter setGeneratesDecimalNumbers:FALSE];
     [Premformatter setMaximumFractionDigits:0];
-    [Premformatter setCurrencySymbol:@""];
-    [Premformatter setRoundingMode:NSNumberFormatterRoundUp];
+    [Premformatter setMinimumFractionDigits:0];
+    //[Premformatter setCurrencySymbol:@""];
+    [Premformatter setRoundingMode:NSNumberFormatterRoundHalfUp];
     
 //    NSMutableDictionary *newAttributes = [[NSMutableDictionary alloc] init];
 //    [newAttributes setObject:[UIFont systemFontOfSize:18] forKey:UITextAttributeFont];
@@ -4180,6 +4183,312 @@
 
 -(void)CloseWindow{
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark created by faiz
+-(NSString *)getRatesInt{
+    NSString*AnsuransiDasarQuery;
+    NSArray *paths2 = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsPath2 = [paths2 objectAtIndex:0];
+    NSString *path2 = [docsPath2 stringByAppendingPathComponent:@"BCA_Rates.sqlite"];
+    
+    NSString* premType;
+    
+    if ([PremiType isEqualToString:@"Premi 5 Tahun"]){
+        premType = @"R";
+    }
+    else{
+        premType = @"S";
+    }
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path2];
+    [database open];
+    FMResultSet *results;
+    
+    NSString*RatesPremiumRate;
+    if (![database open])
+    {
+        NSLog(@"Could not open db.");
+    }
+    
+    if(([RelWithLA isEqualToString:@"DIRI SENDIRI"])||([RelWithLA isEqualToString:@"SELF"]))
+    {
+        AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT Male,Female FROM EMRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",@"HRT",premType,_PayorAge];
+        NSLog(@"query %@",AnsuransiDasarQuery);
+        results = [database executeQuery:AnsuransiDasarQuery];
+        
+        while([results next])
+        {
+            if ([_PayorSex isEqualToString:@"Male"]||[_PayorSex isEqualToString:@"MALE"]){
+                RatesPremiumRate  = [results stringForColumn:@"Male"];
+            }
+            else{
+                RatesPremiumRate  = [results stringForColumn:@"Female"];
+            }
+            
+        }
+        
+        
+    }
+    else
+    {
+        AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT Male,Female FROM EMRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",@"HRT",premType,_LAAge];
+        NSLog(@"query %@",AnsuransiDasarQuery);
+        results = [database executeQuery:AnsuransiDasarQuery];
+        
+        while([results next])
+        {
+            if ([LASex isEqualToString:@"Male"]||[LASex isEqualToString:@"MALE"]){
+                RatesPremiumRate  = [results stringForColumn:@"Male"];
+            }
+            else{
+                RatesPremiumRate  = [results stringForColumn:@"Female"];
+            }
+            
+        }
+        
+        
+    }
+    return RatesPremiumRate;
+}
+
+-(NSString *)getRatesIntPremiDasar{
+    NSString*AnsuransiDasarQuery;
+    
+    NSArray *paths2 = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsPath2 = [paths2 objectAtIndex:0];
+    NSString *path2 = [docsPath2 stringByAppendingPathComponent:@"BCA_Rates.sqlite"];
+    
+    NSString* premType;
+    
+    if ([PremiType isEqualToString:@"Premi 5 Tahun"]){
+        premType = @"R";
+    }
+    else{
+        premType = @"S";
+    }
+    
+
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path2];
+    [database open];
+    FMResultSet *results;
+    
+    NSString*RatesPremiumRate;
+    if (![database open])
+    {
+        NSLog(@"Could not open db.");
+    }
+    
+    
+    if(([RelWithLA isEqualToString:@"DIRI SENDIRI"])||([RelWithLA isEqualToString:@"SELF"]))
+    {
+        AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT Male,Female FROM basicPremiumRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",@"HRT",premType,_PayorAge];
+        results = [database executeQuery:AnsuransiDasarQuery];
+        
+        while([results next])
+        {
+            if ([_PayorSex isEqualToString:@"Male"]||[_PayorSex isEqualToString:@"MALE"]){
+                RatesPremiumRate  = [results stringForColumn:@"Male"];
+            }
+            else{
+                RatesPremiumRate  = [results stringForColumn:@"Female"];
+            }
+            
+        }
+        
+    }
+    else
+    {
+        AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT Male,Female FROM basicPremiumRate Where BasicCode = '%@' AND PremType = '%@'  AND EntryAge = %i",@"HRT",premType,_LAAge];
+        results = [database executeQuery:AnsuransiDasarQuery];
+        
+        while([results next])
+        {
+            if ([LASex isEqualToString:@"Male"]||[LASex isEqualToString:@"MALE"]){
+                RatesPremiumRate  = [results stringForColumn:@"Male"];
+            }
+            else{
+                RatesPremiumRate  = [results stringForColumn:@"Female"];
+            }
+            
+        }
+        
+        
+    }
+    return RatesPremiumRate;
+}
+
+-(double)totalPremiBulanan{
+    return [self calculateExtraPremiPercentBulanan] + [self calculateExtraPremiNumberBulanan] + [self getPremiDasarBulanan];
+}
+
+-(double)totalPremiTahunan{
+    return [self calculateExtraPremiPercentTahunan] + [self calculateExtraPremiNumberTahunan] + [self getPremiDasarTahunan];
+}
+
+-(double)getPremiDasarBulanan{
+    double PaymentMode=0.1;
+    double RatesInt = [[self getRatesIntPremiDasar] doubleValue];
+    double test = PaymentMode * RatesInt;
+    long long BasisSumAssured = [[dictionaryPremium valueForKey:@"Number_Sum_Assured"] longLongValue];
+    double test2 = (test * BasisSumAssured)/1000;
+    return test2;
+}
+
+-(double)getPremiDasarTahunan{
+    double PaymentMode=1;
+    double RatesInt = [[self getRatesIntPremiDasar] doubleValue];
+    double test = PaymentMode * RatesInt;
+    long long BasisSumAssured = [[dictionaryPremium valueForKey:@"Number_Sum_Assured"] longLongValue];
+    double test2 = (test * BasisSumAssured)/1000;
+    return test2;
+}
+
+-(double)calculateExtraPremiPercentSekaligus{
+    double PaymentMode=1;
+    double RatesInt0 = [[self getRatesInt] doubleValue];
+    double percent = [[dictionaryPremium valueForKey:@"ExtraPremiumPercentage"] doubleValue] / 100;
+    double RatesInt = percent * RatesInt0;
+    double valueofTotal =(PaymentMode * RatesInt);
+    long long BasisSumAssured = [[dictionaryPremium valueForKey:@"Number_Sum_Assured"] longLongValue];
+    double total =(((double)BasisSumAssured/1000) * valueofTotal);
+    
+    return total;
+}
+
+-(double)calculateExtraPremiPercentTahunan{
+    double PaymentMode=1;
+    double RatesInt0 = [[self getRatesInt] doubleValue];
+    double percent = [[dictionaryPremium valueForKey:@"ExtraPremiumPercentage"] doubleValue] / 100;
+    double RatesInt = percent * RatesInt0;
+    double valueofTotal =(PaymentMode * RatesInt);
+    long long BasisSumAssured = [[dictionaryPremium valueForKey:@"Number_Sum_Assured"] longLongValue];
+    double total =(((double)BasisSumAssured/1000) * valueofTotal);
+    
+    return total;
+
+}
+
+-(double)calculateExtraPremiPercentBulanan{
+    double PaymentMode=0.1;
+    double RatesInt0 = [[self getRatesInt] doubleValue];
+    double percent = [[dictionaryPremium valueForKey:@"ExtraPremiumPercentage"] doubleValue] / 100;
+    double RatesInt = percent * RatesInt0;
+    double valueofTotal =(PaymentMode * RatesInt);
+    long long BasisSumAssured = [[dictionaryPremium valueForKey:@"Number_Sum_Assured"] longLongValue];
+    double total =(((double)BasisSumAssured/1000) * valueofTotal);
+    
+    return total;
+
+}
+
+-(double)calculateExtraPremiNumberSekaligus{
+    double PaymentMode=1;
+    double  ExtraPremiNumb = [[dictionaryPremium valueForKey:@"ExtraPremiumSum"] doubleValue];
+    long long BasisSumAssured = [[dictionaryPremium valueForKey:@"Number_Sum_Assured"] longLongValue];
+    double Extraprem =(ExtraPremiNumb* PaymentMode) *((double)BasisSumAssured/1000);
+    return Extraprem;
+}
+
+-(double)calculateExtraPremiNumberTahunan{
+    double PaymentMode=1;
+    double  ExtraPremiNumb = [[dictionaryPremium valueForKey:@"ExtraPremiumSum"] doubleValue];
+    long long BasisSumAssured = [[dictionaryPremium valueForKey:@"Number_Sum_Assured"] longLongValue];
+    double Extraprem =(ExtraPremiNumb* PaymentMode) *((double)BasisSumAssured/1000);
+    return Extraprem;
+    
+}
+
+-(double)calculateExtraPremiNumberBulanan{
+    double PaymentMode=0.1;
+    double  ExtraPremiNumb = [[dictionaryPremium valueForKey:@"ExtraPremiumSum"] doubleValue];
+    long long BasisSumAssured = [[dictionaryPremium valueForKey:@"Number_Sum_Assured"] longLongValue];
+    double Extraprem =(ExtraPremiNumb* PaymentMode) *((double)BasisSumAssured/1000);
+    return Extraprem;
+}
+
+-(void)loadDataFromDB{
+    NSString* premiDasar = [dictionaryPremium valueForKey:@"PremiumPolicyA"];
+    NSString* totalPremi = [dictionaryPremium valueForKey:@"TotalPremiumLoading"];
+
+    [lblAsuransiDasarSekaligus setText:@"0"];
+    [lblExtraPremiPercentSekaligus setText:@"0"];
+    [lblExtraPremiNumberSekaligus setText:@"0"];
+    [lblTotalSekaligus setText:@"0"];
+    
+    [lblAsuransiDasarBulanan setText:@"0"];
+    [lblExtraPremiPercentBulanan setText:@"0"];
+    [lblExtraPremiNumberBulanan setText:@"0"];
+    [lblTotalBulanan setText:@"0"];
+    
+    [lblAsuransiDasarTahunan setText:@"0"];
+    [lblExtraPremiPercentTahunan setText:@"0"];
+    [lblExtraPremiNumberTahunan setText:@"0"];
+    [lblTotalTahunan setText:@"0"];
+    
+    
+    [lblAsuransiDasarSekaligus setTextColor:[UIColor clearColor]];
+    [lblExtraPremiPercentSekaligus setTextColor:[UIColor clearColor]];
+    [lblExtraPremiNumberSekaligus setTextColor:[UIColor clearColor]];
+    [lblTotalSekaligus setTextColor:[UIColor clearColor]];
+    
+    [lblAsuransiDasarBulanan setTextColor:[UIColor clearColor]];
+    [lblExtraPremiPercentBulanan setTextColor:[UIColor clearColor]];
+    [lblExtraPremiNumberBulanan setTextColor:[UIColor clearColor]];
+    [lblTotalBulanan setTextColor:[UIColor clearColor]];
+    
+    [lblAsuransiDasarTahunan setTextColor:[UIColor clearColor]];
+    [lblExtraPremiPercentTahunan setTextColor:[UIColor clearColor]];
+    [lblExtraPremiNumberTahunan setTextColor:[UIColor clearColor]];
+    [lblTotalTahunan setTextColor:[UIColor clearColor]];
+    
+    if ([Highlight isEqualToString:@"Pembayaran Sekaligus"])
+    {
+        [lblAsuransiDasarSekaligus setText:premiDasar];
+        [lblExtraPremiPercentSekaligus setText:[NSString stringWithFormat:@"%@",[Premformatter stringFromNumber:[NSNumber numberWithDouble:[self calculateExtraPremiPercentSekaligus]]]]];
+        [lblExtraPremiNumberSekaligus setText:[NSString stringWithFormat:@"%@",[Premformatter stringFromNumber:[NSNumber numberWithDouble:[self calculateExtraPremiNumberSekaligus]]]]];
+        [lblTotalSekaligus setText:totalPremi];
+        
+        [lblAsuransiDasarSekaligus setTextColor:themeColour];
+        [lblExtraPremiPercentSekaligus setTextColor:themeColour];
+        [lblExtraPremiNumberSekaligus setTextColor:themeColour];
+        [lblTotalSekaligus setTextColor:themeColour];
+
+    }
+    else if ([Highlight isEqualToString:@"Bulanan"]){
+        [lblAsuransiDasarBulanan setText:premiDasar];
+        [lblExtraPremiPercentBulanan setText:[NSString stringWithFormat:@"%@",[Premformatter stringFromNumber:[NSNumber numberWithDouble:[self calculateExtraPremiPercentBulanan]]]]];
+        [lblExtraPremiNumberBulanan setText:[NSString stringWithFormat:@"%@",[Premformatter stringFromNumber:[NSNumber numberWithDouble:[self calculateExtraPremiNumberBulanan]]]]];
+        [lblTotalBulanan setText:totalPremi];
+        
+        [lblAsuransiDasarTahunan setText:[NSString stringWithFormat:@"%@",[Premformatter stringFromNumber:[NSNumber numberWithDouble:[self getPremiDasarTahunan]]]]];
+        [lblExtraPremiPercentTahunan setText:[NSString stringWithFormat:@"%@",[Premformatter stringFromNumber:[NSNumber numberWithDouble:[self calculateExtraPremiPercentTahunan]]]]];
+        [lblExtraPremiNumberTahunan setText:[NSString stringWithFormat:@"%@",[Premformatter stringFromNumber:[NSNumber numberWithDouble:[self calculateExtraPremiNumberTahunan]]]]];
+        [lblTotalTahunan setText:[NSString stringWithFormat:@"%@",[Premformatter stringFromNumber:[NSNumber numberWithDouble:[self totalPremiTahunan]]]]];
+        
+        [lblAsuransiDasarBulanan setTextColor:themeColour];
+        [lblExtraPremiPercentBulanan setTextColor:themeColour];
+        [lblExtraPremiNumberBulanan setTextColor:themeColour];
+        [lblTotalBulanan setTextColor:themeColour];
+
+    }
+    else{
+        [lblAsuransiDasarBulanan setText:[NSString stringWithFormat:@"%@",[Premformatter stringFromNumber:[NSNumber numberWithDouble:[self getPremiDasarBulanan]]]]];
+        [lblExtraPremiPercentBulanan setText:[NSString stringWithFormat:@"%@",[Premformatter stringFromNumber:[NSNumber numberWithDouble:[self calculateExtraPremiPercentBulanan]]]]];
+        [lblExtraPremiNumberBulanan setText:[NSString stringWithFormat:@"%@",[Premformatter stringFromNumber:[NSNumber numberWithDouble:[self calculateExtraPremiNumberBulanan]]]]];
+        [lblTotalBulanan setText:[NSString stringWithFormat:@"%@",[Premformatter stringFromNumber:[NSNumber numberWithDouble:[self totalPremiBulanan]]]]];
+        
+        [lblAsuransiDasarTahunan setText:premiDasar];
+        [lblExtraPremiPercentTahunan setText:[NSString stringWithFormat:@"%@",[Premformatter stringFromNumber:[NSNumber numberWithDouble:[self calculateExtraPremiPercentTahunan]]]]];
+        [lblExtraPremiNumberTahunan setText:[NSString stringWithFormat:@"%@",[Premformatter stringFromNumber:[NSNumber numberWithDouble:[self calculateExtraPremiNumberTahunan]]]]];
+        [lblTotalTahunan setText:totalPremi];
+        
+        [lblAsuransiDasarTahunan setTextColor:themeColour];
+        [lblExtraPremiPercentTahunan setTextColor:themeColour];
+        [lblExtraPremiNumberTahunan setTextColor:themeColour];
+        [lblTotalTahunan setTextColor:themeColour];
+    }
 }
 
 @end
