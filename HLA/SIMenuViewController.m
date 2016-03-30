@@ -2925,6 +2925,7 @@ BOOL isFirstLoad;
                         
                         [self pullSIData];
                         [_PremiumController setPremiumDictionary:newDictionaryForBasicPlan];
+                        [_PremiumController loadDataFromDB];
                         [self.RightView bringSubviewToFront:_PremiumController.view];
                         
                         @try {
@@ -3149,6 +3150,7 @@ BOOL isFirstLoad;
             [self.RightView addSubview:_PremiumController.view];
         }
         [_PremiumController setPremiumDictionary:newDictionaryForBasicPlan];
+        [_PremiumController loadDataFromDB];
         [self.RightView bringSubviewToFront:_PremiumController.view];
     }
     else{

@@ -10,7 +10,7 @@
 #import <sqlite3.h>
 #import "BasicPlanHandler.h"
 #import "SIMenuViewController.h"
-
+#import "Model_SI_Premium.h"
 
 @class PremiumViewController;
 @protocol PremiumViewControllerDelegate
@@ -19,6 +19,8 @@
 
 
 @interface PremiumViewController : UIViewController<SIMenuDelegate> {
+    Model_SI_Premium* modelSIPremium;
+    
     NSString *databasePath;
 	NSString *RatesDatabasePath;
     sqlite3 *contactDB;
@@ -81,15 +83,28 @@
     NSString *PremiType;
     int *PayorAge;
     int *LAAge;
-    long long AnssubtotalBulan;
-    long long AnssubtotalYear;
-    long long AnssubtotalSekaligus;
-    long long ExtraPercentsubtotalBulan;
-    long long ExtraPercentsubtotalYear;
-    long long ExtraPercentsubtotalSekaligus;
-    long long ExtraNumbsubtotalBulan;
-    long long ExtraNumbsubtotalYear;
-    long long ExtraNumbsubtotalSekaligus;
+    //long long AnssubtotalBulan;
+    //long long AnssubtotalYear;
+    //long long AnssubtotalSekaligus;
+    
+    double AnssubtotalBulan;
+    double AnssubtotalYear;
+    double AnssubtotalSekaligus;
+    
+    //long long ExtraPercentsubtotalBulan;
+    //long long ExtraPercentsubtotalYear;
+    //long long ExtraPercentsubtotalSekaligus;
+    //long long ExtraNumbsubtotalBulan;
+    //long long ExtraNumbsubtotalYear;
+    //long long ExtraNumbsubtotalSekaligus;
+    
+    double ExtraPercentsubtotalBulan;
+    double ExtraPercentsubtotalYear;
+    double ExtraPercentsubtotalSekaligus;
+    double ExtraNumbsubtotalBulan;
+    double ExtraNumbsubtotalYear;
+    double ExtraNumbsubtotalSekaligus;
+    
     double ExtraPremiNumbValue;
     NSString *Highlight,*ExtraPercentagePremi;
 
@@ -99,7 +114,7 @@
     id <PremiumViewControllerDelegate> _delegate;
 //    SIMenuViewController *_simenu;
 }
-
+-(void)loadDataFromDB;
 @property (nonatomic,strong) id <PremiumViewControllerDelegate> delegate;
 //@property (nonatomic, retain) SIMenuViewController *simenu;
 
@@ -122,15 +137,28 @@
 @property (nonatomic,strong) NSString *PayorSex,*PremiType,*RelWithLA,*LASex;
 @property (nonatomic, assign,readwrite) int PayorAge;
 @property (nonatomic, assign,readwrite) int LAAge;
-@property (nonatomic, assign,readwrite) long long AnssubtotalBulan;
-@property (nonatomic, assign,readwrite) long long AnssubtotalYear;
-@property (nonatomic, assign,readwrite) long long AnssubtotalSekaligus;
-@property (nonatomic, assign,readwrite) long long ExtraPercentsubtotalBulan;
-@property (nonatomic, assign,readwrite) long long ExtraPercentsubtotalYear;
-@property (nonatomic, assign,readwrite) long long ExtraPercentsubtotalSekaligus;
-@property (nonatomic, assign,readwrite) long long ExtraNumbsubtotalBulan;
-@property (nonatomic, assign,readwrite) long long ExtraNumbsubtotalYear;
-@property (nonatomic, assign,readwrite) long long ExtraNumbsubtotalSekaligus;
+
+//@property (nonatomic, assign,readwrite) long long AnssubtotalBulan;
+//@property (nonatomic, assign,readwrite) long long AnssubtotalYear;
+//@property (nonatomic, assign,readwrite) long long AnssubtotalSekaligus;
+
+@property (nonatomic, assign,readwrite) double AnssubtotalBulan;
+@property (nonatomic, assign,readwrite) double AnssubtotalYear;
+@property (nonatomic, assign,readwrite) double AnssubtotalSekaligus;
+
+//@property (nonatomic, assign,readwrite) long long ExtraPercentsubtotalBulan;
+//@property (nonatomic, assign,readwrite) long long ExtraPercentsubtotalYear;
+//@property (nonatomic, assign,readwrite) long long ExtraPercentsubtotalSekaligus;
+//@property (nonatomic, assign,readwrite) long long ExtraNumbsubtotalBulan;
+//@property (nonatomic, assign,readwrite) long long ExtraNumbsubtotalYear;
+//@property (nonatomic, assign,readwrite) long long ExtraNumbsubtotalSekaligus;
+
+@property (nonatomic, assign,readwrite) double ExtraPercentsubtotalBulan;
+@property (nonatomic, assign,readwrite) double ExtraPercentsubtotalYear;
+@property (nonatomic, assign,readwrite) double ExtraPercentsubtotalSekaligus;
+@property (nonatomic, assign,readwrite) double ExtraNumbsubtotalBulan;
+@property (nonatomic, assign,readwrite) double ExtraNumbsubtotalYear;
+@property (nonatomic, assign,readwrite) double ExtraNumbsubtotalSekaligus;
 @property (nonatomic, assign,readwrite) double ExtraPremiNumbValue;
 
 
