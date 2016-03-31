@@ -341,7 +341,7 @@ BOOL isFirstLoad;
         }
         previousPath = selectedPath;
         blocked = NO;
-        
+        [self.SecondLAController setPoDictionaryPO:dictionaryPOForInsert];
         [self hideSeparatorLine];
         //[myTableView reloadData];
         [self.myTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
@@ -3062,6 +3062,7 @@ BOOL isFirstLoad;
     else{
         selfRelation = NO;
         [self loadSecondLAPage];
+        
         [self.myTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:SIMENU_SECOND_LIFE_ASSURED inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
     }
     

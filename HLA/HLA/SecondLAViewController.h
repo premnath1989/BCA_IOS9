@@ -57,6 +57,7 @@
     NSDictionary* dictionaryPO;
 }
 
+@property (strong, nonatomic)NSDictionary *poDictionaryPO;
 
 @property (nonatomic,strong) BasicPlanHandler *basicHand;
 @property (nonatomic,strong) SecondLAHandler *la2ndHand;

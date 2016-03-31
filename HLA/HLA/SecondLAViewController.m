@@ -1459,7 +1459,9 @@ id dobtemp;
     NSString *validationJenisKelamin=@"Jenis Kelamin Tertanggung harus diisi";
     NSString *validationPekerjaan=@"Pekerjaan Tertanggung harus diisi";
     NSString *validation70=@"Usia tidak boleh lebih dari 70 tahun";
-    NSString *validation180=@"Usia tidak boleh kurang dari 180 hari";
+    NSString *validation180=@"Usia tidak boleh kurang dari 180 hari atau lebih dari 55 tahun";
+    NSString *validationUsiaSuamiIstri=@"Usia tidak boleh kurang dari 19 atau lebih dari 55 tahun";
+    NSString *validationUsiaParents=@"Usia tidak boleh kurang dari 180 hari atau lebih dari 17 tahun";
     
     //outletkodecabang
     NSString* namaTertangggung=nameField.text;
@@ -1475,7 +1477,7 @@ id dobtemp;
         [nameField becomeFirstResponder];
         return false;
     }
-    else if(age >70)
+    /*else if(age >70)
     {
         [self createAlertViewAndShow:validation70 tag:0];
         //[_BtnTanggalLahir setBackgroundColor:[UIColor redColor]];
@@ -1486,12 +1488,33 @@ id dobtemp;
         [self createAlertViewAndShow:validation180 tag:0];
         //[_BtnTanggalLahir setBackgroundColor:[UIColor redColor]];
         return false;
-    }
+    }*/
     
     else if ([validationSet containsObject:tanggalLahir]||tanggalLahir==NULL){
         [self createAlertViewAndShow:validationTanggalLahir tag:0];
        // [_BtnTanggalLahir setBackgroundColor:[UIColor redColor]];
         return false;
+    }
+    
+    else if ([[_poDictionaryPO valueForKey:@"RelWithLA"] isEqualToString:@"ORANG TUA"]){
+        if ((diffDaysValiation <180)||(age >17)){
+            [self createAlertViewAndShow:validationUsiaParents tag:0];
+            return false;
+        }
+    }
+    
+    else if ([[_poDictionaryPO valueForKey:@"RelWithLA"] isEqualToString:@"SUAMI/ISTRI"]){
+        if ((age <19)||(age >55)){
+            [self createAlertViewAndShow:validationUsiaSuamiIstri tag:0];
+            return false;
+        }
+    }
+    
+    else if ((![[_poDictionaryPO valueForKey:@"RelWithLA"] isEqualToString:@"ORANG TUA"])&&(![[_poDictionaryPO valueForKey:@"RelWithLA"] isEqualToString:@"SUAMI/ISTRI"])){
+        if ((age <18)||(age >55)){
+            [self createAlertViewAndShow:validation180 tag:0];
+            return false;
+        }
     }
     
     else if (sexSegment.selectedSegmentIndex==UISegmentedControlNoSegment){

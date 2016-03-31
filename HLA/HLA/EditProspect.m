@@ -64,6 +64,9 @@ int name_repeat;
     UIColor *borderColor;
 	
     NSDictionary* dictAgentData;
+    
+    BOOL idValidationChecker;
+    BOOL duplicateOK;
 }
 @end
 
@@ -153,6 +156,8 @@ NSMutableArray *DelGroupArr;
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(returnTolisting) name:@"returnToListing" object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(disableGroup) name:@"DismissGroup" object:nil];
 	
+    duplicateOK = NO;
+    idValidationChecker = YES;
 	//AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
 	
 	UDGroup = [NSUserDefaults standardUserDefaults];
@@ -622,14 +627,42 @@ NSMutableArray *DelGroupArr;
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    activeField = textField;
-    activeView = nil;
-}
+    if (idValidationChecker){
+        activeField = textField;
+        activeView = nil;
+    }
+    else{
+        [txtOtherIDType becomeFirstResponder];
+    }}
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     activeField = nil;
 }
+
+/*- (void)createAlertTwoOptionViewAndShow:(NSString *)message tag:(int)alertTag{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
+                                                    message:[NSString stringWithFormat:@"%@",message] delegate:self cancelButtonTitle:@"Edit" otherButtonTitles:@"Simpan sebagai nasabah baru", nil];
+    alert.tag = alertTag;
+    [alert show];
+}
+
+- (bool)validationDuplicate{
+    if (duplicateOK == YES){
+        return true;
+    }
+    else{
+        bool valid=true;
+        
+        NSString *validationDuplicate=@"Data Nasabah sudah ada";
+        
+        if (![[modelProspectProfile checkDuplicateData:txtFullName.text Gender:gender DOB:outletDOB.titleLabel.text] isEqualToString:@"(null)"]){
+            [self createAlertTwoOptionViewAndShow:validationDuplicate tag:18];
+            return false;
+        }
+        return valid;
+    }
+}*/
 
 - (bool)validationDataReferral{
     bool valid=true;
@@ -3590,9 +3623,11 @@ NSMutableArray *DelGroupArr;
 }
 
 
--(void)OtheriDDidChange:(id) sender
+-(void)OtheriDDidChange:(UITextField *) sender
 {
-    [self OtherIDValidation];
+    if (![[sender text] isEqualToString:pp.OtherIDTypeNo]){
+        [self OtherIDValidation];
+    }
 }
 
 -(void)EditTextFieldBegin:(id)sender
@@ -5457,7 +5492,7 @@ NSMutableArray *DelGroupArr;
 	}
 	else if(alertView.tag == 6000)
     {
-		self.navigationItem.title = @"Edit";
+		/*self.navigationItem.title = @"Edit";
         txtIDType.text = [txtIDType.text stringByTrimmingCharactersInSet:
 						  [NSCharacterSet whitespaceCharacterSet]];
 		
@@ -5466,7 +5501,8 @@ NSMutableArray *DelGroupArr;
         } else {
             [self getSameIDRecord:@"OTHERID" :getSameRecord_Indexno];
         }
-		[self displaySameRecord];
+		[self displaySameRecord];*/
+        [txtOtherIDType becomeFirstResponder];
     }
 }
 
@@ -8671,7 +8707,12 @@ NSMutableArray *DelGroupArr;
         [textField resignFirstResponder];
     }
     else if (textField == txtOtherIDType) {
-        [textField resignFirstResponder];
+        if ([self OtherIDValidation]){
+            [textField resignFirstResponder];
+        }
+        else{
+            [txtOtherIDType becomeFirstResponder];
+        }
     }
     else if (textField == _txtCountryOfBirth) {
         [textField resignFirstResponder];
@@ -8962,12 +9003,13 @@ NSMutableArray *DelGroupArr;
 					
 					[ClientProfile setObject:@"NO" forKey:@"isNew"];
 					OTHERID_Hold_Alert = YES;
-					
+					idValidationChecker = NO;
 					return false;
 				}
 			}
 		}
 	}
+    idValidationChecker = YES;
     return true;
 }
 
