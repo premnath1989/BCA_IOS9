@@ -58,10 +58,9 @@ id temp;
 {
     [super viewDidLoad];
     
-    AppDelegate *zzz= (AppDelegate*)[[UIApplication sharedApplication] delegate ];
+    AppDelegate *zzz = (AppDelegate*)[[UIApplication sharedApplication] delegate ];
     self.indexNo = zzz.indexNo;
     self.idRequest = zzz.userRequest;
-    
     
     loginDB = [[LoginDBManagement alloc]init];
     agentDetails =[loginDB getAgentDetails];
@@ -562,12 +561,7 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
         // if the element name's is MenuCategories then do something
         if([[DataSetMenuElement children] count] <= 0){
             if([[DataSetMenuElement name] caseInsensitiveCompare:@"xs:element"]==NSOrderedSame){
-                //                DDXMLNode *name = [DataSetMenuElement attributeForName: @"name"];
-                //                DDXMLNode *type = [DataSetMenuElement attributeForName: @"type"];
-                //                NSLog(@"%@ : %@", [name stringValue], [type stringValue]);
-                //
-                //                DDXMLNode *tableName = [[[DataSetMenuElement parent] parent] parent];
-                //                [obj addRow:[tableName ] columnNames:[name stringValue] data:@""];
+                //we dont need this value
             }else{
                 NSArray *elements = [root elementsForName:[DataSetMenuElement name]];
                 if([[[elements objectAtIndex:0]stringValue] caseInsensitiveCompare:@""] != NSOrderedSame){
@@ -647,32 +641,6 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
     [self.datePopover dismissPopoverAnimated:YES];
 }
 
-//-(void)CheckAgentPortal{
-//	NSString *strURL = [NSString stringWithFormat:@"%@eSubmissionWS/eSubmissionXMLService.asmx/"
-//									"ValidateLogin?strid=%@&strpwd=%@&strIPAddres=123&iBadAttempts=0&strFirstAgentCode=%@",
-//						[SIUtilities WSLogin], txtAgencyPortalLogin.text, txtAgencyPortalPwd.text, txtAgentCode.text];
-//	
-//		NSLog(@"%@", strURL);
-//		NSURL *url = [NSURL URLWithString:strURL];
-//		NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:0 timeoutInterval:20];
-//	
-//		AFXMLRequestOperation *operation =
-//		[AFXMLRequestOperation XMLParserRequestOperationWithRequest:request
-//		 													success:^(NSURLRequest *request, NSHTTPURLResponse *response, NSXMLParser *XMLParser) {
-//			 													XMLParser.delegate = self;
-//			 														[XMLParser setShouldProcessNamespaces:YES];
-//			 														[XMLParser parse];
-//			 
-//			 													} failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSXMLParser *XMLParser) {
-//				 													NSLog(@"error in calling web service");
-//																	UIAlertView *success = [[UIAlertView alloc] initWithTitle:@" "
-//																													  message:@"Record saved" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil ];
-//																	success.tag = 1;
-//																	[success show];
-//																}];
-//		
-//		[operation start];
-//}
 
 #pragma mark - XML parser
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName
@@ -797,7 +765,6 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
 														   delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
 			alert.tag = 2;
 			[alert show];
-			
 			alert = Nil;
 		}
 		NSLog(@"%@", string);
@@ -808,17 +775,13 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
 	else if ([self.elementName isEqualToString:@"DLFilename"]){
 		NSLog(@"%@", string);
 	}
-	
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
-	
 	self.elementName = nil;
 }
 
 -(void) parserDidEndDocument:(NSXMLParser *)parser {
-	
-	
 	
 }
 
@@ -902,6 +865,26 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
     }
 }
 
+
+#pragma mark - memory release
+
+- (void)viewDidUnload
+{
+    [self setAddr1:nil];
+    [self setAddr2:nil];
+    [self setAddr3:nil];
+    [self setContDate:nil];
+    [self setICNo:nil];
+    [self setTxtICNo:nil];
+    [self setBtnContractDate:nil];
+    [self setMyScrollView:nil];
+    [self setTxtAgentCode:nil];
+    [self setTxtAgentName:nil];
+    [self setTxtEmail:nil];
+    [self setOutletSave:nil];
+    [super viewDidUnload];
+}
+
 //-(void)updateUserData
 //{
 //    if([self Validation] == TRUE){
@@ -952,23 +935,33 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
 //}
 
 
-#pragma mark - memory release
+//-(void)CheckAgentPortal{
+//	NSString *strURL = [NSString stringWithFormat:@"%@eSubmissionWS/eSubmissionXMLService.asmx/"
+//									"ValidateLogin?strid=%@&strpwd=%@&strIPAddres=123&iBadAttempts=0&strFirstAgentCode=%@",
+//						[SIUtilities WSLogin], txtAgencyPortalLogin.text, txtAgencyPortalPwd.text, txtAgentCode.text];
+//
+//		NSLog(@"%@", strURL);
+//		NSURL *url = [NSURL URLWithString:strURL];
+//		NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:0 timeoutInterval:20];
+//
+//		AFXMLRequestOperation *operation =
+//		[AFXMLRequestOperation XMLParserRequestOperationWithRequest:request
+//		 													success:^(NSURLRequest *request, NSHTTPURLResponse *response, NSXMLParser *XMLParser) {
+//			 													XMLParser.delegate = self;
+//			 														[XMLParser setShouldProcessNamespaces:YES];
+//			 														[XMLParser parse];
+//
+//			 													} failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSXMLParser *XMLParser) {
+//				 													NSLog(@"error in calling web service");
+//																	UIAlertView *success = [[UIAlertView alloc] initWithTitle:@" "
+//																													  message:@"Record saved" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil ];
+//																	success.tag = 1;
+//																	[success show];
+//																}];
+//
+//		[operation start];
+//}
 
-- (void)viewDidUnload
-{
-    [self setAddr1:nil];
-    [self setAddr2:nil];
-    [self setAddr3:nil];
-    [self setContDate:nil];
-    [self setICNo:nil];
-    [self setTxtICNo:nil];
-    [self setBtnContractDate:nil];
-    [self setMyScrollView:nil];
-    [self setTxtAgentCode:nil];
-    [self setTxtAgentName:nil];
-    [self setTxtEmail:nil];
-    [self setOutletSave:nil];
-    [super viewDidUnload];
-}
+
 
 @end

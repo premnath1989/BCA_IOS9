@@ -45,6 +45,7 @@
     UIPopoverController *_datePopover;
     UIPopoverController *_dobPopover;
     UIPopoverController *_OccupationListPopover;
+    NSDictionary* dictPOData;
     
     ModelSIPOData *_modelSIPOData;
     

@@ -612,6 +612,30 @@
     return nsdate;
 }
 
+-(NSString *)EditIllustration:(NSString *)SIno
+{
+    
+    sqlite3_stmt *statement;
+    NSString *EditMode = @"";
+    if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
+    {
+        NSString *querySQL = [NSString stringWithFormat: @"SELECT EnableEditing FROM SI_Master WHERE SINO=\"%@\"", SIno];
+        
+        if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK){
+            if (sqlite3_step(statement) == SQLITE_ROW) {
+                if((const char *) sqlite3_column_text(statement, 0) != NULL){
+                    EditMode = [[NSString alloc]
+                            initWithUTF8String:
+                            (const char *) sqlite3_column_text(statement, 0)];
+                }
+            }
+            sqlite3_finalize(statement);
+        }
+        sqlite3_close(contactDB);
+    }
+    return EditMode;
+}
+
 -(NSString *)localDBUDID
 {
     
@@ -798,6 +822,36 @@
     [db close];
     
     return AgentName;
+}
+
+- (void) updateSIMaster:(NSString *)SINO EnableEditing:(NSString *)EditFlag{
+    
+    const char *dbpath = [databasePath UTF8String];
+    sqlite3_stmt *statement;
+    
+    if (sqlite3_open(dbpath, &contactDB) == SQLITE_OK)
+    {
+        NSString *querySQL = [NSString stringWithFormat:@"UPDATE SI_Master SET EnableEditing= \"%@\" WHERE SINO = \"%@\"",EditFlag, SINO];
+        
+        const char *query_stmt = [querySQL UTF8String];
+        if (sqlite3_prepare_v2(contactDB, query_stmt, -1, &statement, NULL) == SQLITE_OK)
+        {
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                NSLog(@"EditMode Updated!");
+                
+            } else {
+                NSLog(@"EditMode update Failed!");
+            }
+            sqlite3_finalize(statement);
+        }
+        sqlite3_close(contactDB);
+        
+        query_stmt = Nil;
+        querySQL = Nil;
+    }
+    dbpath = Nil;
+    statement = Nil;
 }
 
 

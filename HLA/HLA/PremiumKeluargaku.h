@@ -12,6 +12,9 @@
     NSString *SINO;
 }
 
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *simpan;
+- (IBAction)simpanAct:(id)sender;
+
 @property (weak, nonatomic) IBOutlet UILabel *lblAsuransiDasarTahun;
 @property (weak, nonatomic) IBOutlet UILabel *lblAsuransiDasarSemester;
 @property (weak, nonatomic) IBOutlet UILabel *lblAsuransiDasarKuartal;

@@ -30,12 +30,14 @@
 - (void) makeDBCopy;
 - (void) updateLoginDate;
 - (void) updateLogoutDate;
+- (void) updateSIMaster:(NSString *)SINO EnableEditing:(NSString *)EditFlag;
 - (BOOL) SpvAdmValidation:(NSString *)username password:(NSString *)password;
 - (NSString *)RiderCode:(NSString *)SINo riderCode:(NSString *)code;
 - (NSString *) expiryDate:(NSString *)AgentID;
 - (NSString *) checkingLastLogout;
 - (NSString *) localDBUDID;
 - (NSString *) AgentCodeLocal;
+- (NSString *)EditIllustration:(NSString *)SIno;
 - (NSMutableDictionary *)getAgentDetails;
 -(NSMutableDictionary *)premiKeluargaku:(NSString *)SINo;
 //- (int) InsertAgentProfile:(NSString *) urlStr;

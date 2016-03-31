@@ -789,6 +789,7 @@
 		DE80E44A1CA3FCEE00D9E775 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE80E4491CA3FCEE00D9E775 /* CFNetwork.framework */; };
 		DE8D29C71C94512900727765 /* TabValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = DE8D29C61C94512900727765 /* TabValidation.m */; };
 		DE9E89661CA26A2400BF6D0D /* PremiumKeluargaku.m in Sources */ = {isa = PBXBuildFile; fileRef = DE9E89651CA26A2400BF6D0D /* PremiumKeluargaku.m */; };
+		DED1795A1CACE43300CD0AA1 /* UIView+viewRecursion.m in Sources */ = {isa = PBXBuildFile; fileRef = DED179591CACE43300CD0AA1 /* UIView+viewRecursion.m */; };
 		DEE2B7C71C9FADCF00B7283A /* DBMigration.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE2B7C61C9FADCF00B7283A /* DBMigration.m */; };
 		EF059839161A8BD1004A9095 /* NewLAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF059837161A8BCF004A9095 /* NewLAViewController.m */; };
 		EF05983F161A8C85004A9095 /* ListingTbViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF05983D161A8C85004A9095 /* ListingTbViewController.m */; };
@@ -2160,6 +2161,8 @@
 		DE8D29C51C94511C00727765 /* TabValidation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabValidation.h; sourceTree = "<group>"; };
 		DE8D29C61C94512900727765 /* TabValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabValidation.m; sourceTree = "<group>"; };
 		DE9E89651CA26A2400BF6D0D /* PremiumKeluargaku.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PremiumKeluargaku.m; sourceTree = "<group>"; };
+		DED179581CACE3FC00CD0AA1 /* UIView+viewRecursion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+viewRecursion.h"; sourceTree = "<group>"; };
+		DED179591CACE43300CD0AA1 /* UIView+viewRecursion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+viewRecursion.m"; path = " UIView+viewRecursion.m  / UIView+viewRecursion.m  /UIView+viewRecursion.m"; sourceTree = "<group>"; };
 		DEE2B7C51C9FADC200B7283A /* DBMigration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DBMigration.h; sourceTree = "<group>"; };
 		DEE2B7C61C9FADCF00B7283A /* DBMigration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBMigration.m; sourceTree = "<group>"; };
 		EF059837161A8BCF004A9095 /* NewLAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewLAViewController.m; sourceTree = "<group>"; };
@@ -4631,9 +4634,19 @@
 			name = icon;
 			sourceTree = "<group>";
 		};
+		DED179571CACE37700CD0AA1 /* DisableView */ = {
+			isa = PBXGroup;
+			children = (
+				DED179581CACE3FC00CD0AA1 /* UIView+viewRecursion.h */,
+				DED179591CACE43300CD0AA1 /* UIView+viewRecursion.m */,
+			);
+			name = DisableView;
+			sourceTree = "<group>";
+		};
 		EF05983A161A8BDB004A9095 /* LA */ = {
 			isa = PBXGroup;
 			children = (
+				DED179571CACE37700CD0AA1 /* DisableView */,
 				C44E3D94182CF15B005CCC09 /* SIObj.h */,
 				C44E3D95182CF15B005CCC09 /* SIObj.m */,
 				EF059838161A8BD0004A9095 /* NewLAViewController.h */,
@@ -5529,6 +5542,7 @@
 				29A38DC417EAEBC800454787 /* SICell.m in Sources */,
 				29A38DCA17EAF51000454787 /* eSubMenu.m in Sources */,
 				29A38DD017EAF58B00454787 /* pendingVC.m in Sources */,
+				DED1795A1CACE43300CD0AA1 /* UIView+viewRecursion.m in Sources */,
 				29A38DD117EAF58B00454787 /* submittedVC.m in Sources */,
 				AAFFE1851C7EB161001B91BF /* SpinnerUtilities.m in Sources */,
 				AA4EF7641C85A4260050CCD8 /* ReaderConstants.m in Sources */,

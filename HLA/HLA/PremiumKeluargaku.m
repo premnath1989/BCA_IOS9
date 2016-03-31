@@ -12,6 +12,7 @@
 
 @implementation PremiumKeluargaku
 
+@synthesize simpan;
 @synthesize lblAsuransiDasarTahun, lblAsuransiDasarSemester, lblAsuransiDasarKuartal,
             lblAsuransiDasarBulan;
 @synthesize lblOccpTahun, lblOccpSemester, lblOccpKuartal, lblOccpBulan;
@@ -29,6 +30,10 @@
 {
     [super viewDidLoad];
     [self updatePremiLabel];
+    
+    
+    LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
+    [loginDB updateSIMaster:SINO EnableEditing:@"0"];
 }
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil SINO:(NSString *)SiNo{
@@ -164,5 +169,10 @@
     }
 }
 
+- (IBAction)simpanAct:(id)sender {
+    NSLog(@"simpan has been pressed");
+    LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
+    [loginDB updateSIMaster:SINO EnableEditing:@"0"];
+}
 
 @end

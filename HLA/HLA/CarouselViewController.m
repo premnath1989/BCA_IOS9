@@ -317,18 +317,18 @@ const int numberOfModule = 7;
 -(void)viewDidAppear:(BOOL)animated{
     AppDelegate *appDele= (AppDelegate*)[[UIApplication sharedApplication] delegate ];
 
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if (! [defaults boolForKey:@"Terminated"]) {
-        if(appDele.checkLoginStatus == YES) {
-            UIApplication *app = [UIApplication sharedApplication];
-            NSURL *hlafastUrl = [NSURL URLWithString:[@"com.hla.fast://" stringByAppendingString:[@"imsLoginAssistant" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
-            if ([app canOpenURL:hlafastUrl]) {
-                [app openURL:hlafastUrl];
-            } else {
-         //       [self showDialogAppLaunchWithHLAFast];
-            }
-        }
-    }
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    if (! [defaults boolForKey:@"Terminated"]) {
+//        if(appDele.checkLoginStatus == YES) {
+//            UIApplication *app = [UIApplication sharedApplication];
+//            NSURL *hlafastUrl = [NSURL URLWithString:[@"com.hla.fast://" stringByAppendingString:[@"imsLoginAssistant" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+//            if ([app canOpenURL:hlafastUrl]) {
+//                [app openURL:hlafastUrl];
+//            } else {
+//         //       [self showDialogAppLaunchWithHLAFast];
+//            }
+//        }
+//    }
 }
 
 -(void) showDialogAppLaunchWithHLAFast {

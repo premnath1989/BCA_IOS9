@@ -19,6 +19,8 @@
 #import "eAppMenu.h"
 #import "Constants.h"
 #import "TabValidation.h"
+#import "UIView+viewRecursion.h"
+#import "LoginDBManagement.h"
 
 @interface NewLAViewController (){
     NSString *ilustrationProductCode;
@@ -135,7 +137,38 @@ id dobtanngal;
 //    }
     [self loadDataFromList];
     [_delegate setQuickQuoteValue:[quickQuoteFlag isOn]];
+    
+    
+    //test disable the fields
+    [self checkEditingMode];
 }
+
+- (void) checkEditingMode {
+    
+    LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
+    NSString *EditMode = [loginDB EditIllustration:[dictPOData valueForKey:@"SINO"]];
+    NSLog(@" Edit Mode %@ : %@", EditMode, [dictPOData valueForKey:@"SINO"]);
+    //disable all text fields
+    if([EditMode caseInsensitiveCompare:@"0"] == NSOrderedSame){
+        for(UIView *v in [self.view allSubViews])
+        {
+            if([v isKindOfClass:[UITextField class]])
+            {
+                ((UITextField*)v).userInteractionEnabled=NO;
+            }else if([v isKindOfClass:[UIButton class]])
+            {
+                ((UIButton*)v).userInteractionEnabled=NO;
+            }else if([v isKindOfClass:[UISegmentedControl class]])
+            {
+                ((UISegmentedControl*)v).userInteractionEnabled=NO;
+            }else if([v isKindOfClass:[UISwitch class]])
+            {
+                ((UISwitch*)v).userInteractionEnabled=NO;
+            }
+        }
+    }
+}
+
 
 - (void) setupUIElementDefaultSetting{
     [self setUIElementsDelegate];
@@ -831,7 +864,7 @@ id dobtanngal;
 #pragma mark - Data Load from listing added by faiz
 -(void)loadDataFromList{
     _modelSIPOData = [[ModelSIPOData alloc]init];
-    NSDictionary* dictPOData=[[NSDictionary alloc]initWithDictionary:[_modelSIPOData getPO_DataFor:requestSINo]];
+    dictPOData=[[NSDictionary alloc]initWithDictionary:[_modelSIPOData getPO_DataFor:requestSINo]];
     if ([dictPOData count]!=0){
         NSNumber *numberBoolQuickQuote =[NSNumber numberWithInt:[[dictPOData valueForKey:@"QuickQuote"] intValue]];
         if ([numberBoolQuickQuote intValue]==0){

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="9532" systemVersion="15C50" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
@@ -105,6 +105,7 @@
                 <outlet property="lblTotalKuartal" destination="ELW-8X-Xzk" id="Bbx-Yl-WDz"/>
                 <outlet property="lblTotalSemester" destination="89g-Mg-74J" id="GZE-nw-BG2"/>
                 <outlet property="lblTotalTahun" destination="Ypd-VA-F3n" id="ZKI-dV-xqP"/>
+                <outlet property="simpan" destination="kKk-8g-aID" id="Ocu-13-MQs"/>
                 <outlet property="view" destination="BBO-n5-Y1h" id="2C0-Ji-MoA"/>
             </connections>
         </placeholder>
@@ -620,12 +621,26 @@
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     </textAttributes>
                     <items>
-                        <navigationItem title="Premi" id="Ff7-nX-pOV"/>
+                        <navigationItem title="Premi" id="Ff7-nX-pOV">
+                            <barButtonItem key="rightBarButtonItem" title="Simpan" id="kKk-8g-aID">
+                                <connections>
+                                    <action selector="simpanAct:" destination="-1" id="pQ2-hb-UaX"/>
+                                </connections>
+                            </barButtonItem>
+                        </navigationItem>
                     </items>
                 </navigationBar>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kZb-vg-QHV">
+                    <rect key="frame" x="0.0" y="606" width="46" height="30"/>
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="simpanAct:" destination="-1" eventType="touchUpInside" id="F9D-BE-jcj"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-            <point key="canvasLocation" x="331" y="87"/>
+            <point key="canvasLocation" x="344" y="78"/>
         </view>
+        <barButtonItem title="Item" id="TI7-fG-UIi"/>
     </objects>
 </document>

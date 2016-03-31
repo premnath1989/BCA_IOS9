@@ -286,12 +286,12 @@ NSString *uatAgentCode;
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if ([defaults boolForKey:@"Terminated"]) {
-        [self presentTerminatedView];
-    } else {
-        [self checkSessionExpired];
-    }
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    if ([defaults boolForKey:@"Terminated"]) {
+//        [self presentTerminatedView];
+//    } else {
+//        [self checkSessionExpired];
+//    }
 }
 
 
