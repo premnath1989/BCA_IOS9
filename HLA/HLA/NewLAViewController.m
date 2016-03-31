@@ -137,10 +137,6 @@ id dobtanngal;
 //    }
     [self loadDataFromList];
     [_delegate setQuickQuoteValue:[quickQuoteFlag isOn]];
-    
-    
-    //test disable the fields
-    [self checkEditingMode];
 }
 
 - (void) checkEditingMode {
@@ -514,7 +510,9 @@ id dobtanngal;
     [super viewDidAppear:animated];    
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];    
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
-	
+    
+    //test disable the fields
+    [self checkEditingMode];
 }
 
 - (void)viewWillDisappear:(BOOL)animated

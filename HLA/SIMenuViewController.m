@@ -30,7 +30,8 @@
 #import "ReaderViewController.h"
 #import "TabValidation.h"
 #import "PremiumKeluargaku.h"
-#import "ProductInformation.h"
+#import "UIView+viewRecursion.h"
+#import "LoginDBManagement.h"
 
 #define TRAD_PAYOR_FIRSTLA  @"0"
 #define TRAD_PAYOR_SECONDLA  @"1"
@@ -50,6 +51,8 @@
 
 @end
 @implementation SIMenuViewController
+
+@synthesize outletSaveAs;
 @synthesize myTableView, SIshowQuotation;
 @synthesize RightView,EAPPorSI;
 @synthesize ListOfSubMenu,SelectedRow;
@@ -195,6 +198,19 @@ BOOL isFirstLoad;
     isFirstLoad = NO;
 }
 
+
+- (void)setSaveAsMode:(NSString *)SINO{
+    LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
+    NSString *EditMode = [loginDB EditIllustration:SINO];
+    NSLog(@" Edit Mode second %@ : %@", EditMode, SINO);
+    //disable all text fields
+    if([EditMode caseInsensitiveCompare:@"0"] != NSOrderedSame){
+        outletSaveAs.hidden = YES;
+    }else{
+        outletSaveAs.hidden = NO;
+    }
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -208,6 +224,8 @@ BOOL isFirstLoad;
     }
     
     [self hideSeparatorLine];
+    
+    [self setSaveAsMode:[dictionaryPOForInsert valueForKey:@"SINO"]];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -2941,31 +2959,14 @@ BOOL isFirstLoad;
                     }
                 }
                 else{
-                    PremiumKeluargaku *premiK = [[PremiumKeluargaku alloc]initWithNibName:@"PremiumKeluargaku"
-                                                                                   bundle:nil SINO:[dictionaryPOForInsert valueForKey:@"SINO"]];
+                    PremiumKeluargaku *premiK = [[PremiumKeluargaku alloc]initWithNibName:@"PremiumKeluargaku" bundle:nil SINO:[dictionaryPOForInsert valueForKey:@"SINO"]];
+                    premiK.delegate = self;
+                    [self addChildViewController:premiK];
                     [self.RightView addSubview:premiK.view];
                     [self.RightView bringSubviewToFront:premiK.view];
                 }
                 
                 break;
-            /*case 3:{
-                
-                NSString *PlanType = [dictionaryPOForInsert valueForKey:@"ProductName"];
-                
-                if([PlanType isEqualToString:@"BCA Life Heritage Protection"])
-                {
-                    NSLog(@"heritage");
-                }
-                else
-                {
-                    PremiumKeluargaku *premiK = [[PremiumKeluargaku alloc]initWithNibName:@"PremiumKeluargaku"
-                                                                                   bundle:nil SINO:[dictionaryPOForInsert valueForKey:@"SINO"]];
-                    [self.RightView addSubview:premiK.view];
-                    [self.RightView bringSubviewToFront:premiK.view];
-                }
-                
-            }
-                break;*/
             default:
                 break;
         }
@@ -5968,6 +5969,8 @@ BOOL isFirstLoad;
     {
         PremiumKeluargaku *premiK = [[PremiumKeluargaku alloc]initWithNibName:@"PremiumKeluargaku"
                                                                        bundle:nil SINO:[dictionaryPOForInsert valueForKey:@"SINO"]];
+        premiK.delegate = self;
+        [self addChildViewController:premiK];
         [self.RightView addSubview:premiK.view];
         [self.RightView bringSubviewToFront:premiK.view];
     }
@@ -5994,6 +5997,12 @@ BOOL isFirstLoad;
 -(BOOL)performSaveSI:(BOOL)saveChanges
 {	
     return[self isNeedSaveChanges:saveChanges];    
+}
+
+- (void)savePremium{
+    [self setSaveAsMode:[dictionaryPOForInsert valueForKey:@"SINO"]];
+    [self LoadIlustrationPage];
+    
 }
 
 #pragma mark - copy object from diff tab

@@ -8,10 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@class PremiumKeluargaku;
+@protocol PremiumKeluargaKuProtocol
+-(void)savePremium;
+@end
+
+
 @interface PremiumKeluargaku : UIViewController{
     NSString *SINO;
 }
 
+@property (nonatomic,strong) id <PremiumKeluargaKuProtocol> delegate;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *simpan;
 - (IBAction)simpanAct:(id)sender;
 

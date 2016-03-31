@@ -16,6 +16,8 @@
 #import "eAppCheckList.h"
 #import "MasterMenuEApp.h"
 #import "Constants.h"
+#import "UIView+viewRecursion.h"
+#import "LoginDBManagement.h"
 
 @interface RiderViewController (){
     int lastSelectedIndex;
@@ -381,6 +383,33 @@ int maxGycc = 0;
     [super viewDidAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
+    [self checkEditingMode];
+}
+
+- (void) checkEditingMode {
+    
+    LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
+    NSString *EditMode = [loginDB EditIllustration:[_dictionaryPOForInsert valueForKey:@"SINO"]];
+    NSLog(@" Edit Mode second %@ : %@", EditMode, [_dictionaryPOForInsert valueForKey:@"SINO"]);
+    //disable all text fields
+    if([EditMode caseInsensitiveCompare:@"0"] == NSOrderedSame){
+        for(UIView *v in [self.view allSubViews])
+        {
+            if([v isKindOfClass:[UITextField class]])
+            {
+                ((UITextField*)v).userInteractionEnabled=NO;
+            }else if([v isKindOfClass:[UIButton class]])
+            {
+                ((UIButton*)v).userInteractionEnabled=NO;
+            }else if([v isKindOfClass:[UISegmentedControl class]])
+            {
+                ((UISegmentedControl*)v).userInteractionEnabled=NO;
+            }else if([v isKindOfClass:[UISwitch class]])
+            {
+                ((UISwitch*)v).userInteractionEnabled=NO;
+            }
+        }
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated

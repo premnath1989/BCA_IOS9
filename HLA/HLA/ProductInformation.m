@@ -40,7 +40,12 @@
     
     NSMutableDictionary *newAttributes = [[NSMutableDictionary alloc] init];
     [newAttributes setObject:[UIFont systemFontOfSize:18] forKey:UITextAttributeFont];
-    [self.navigationBar setTitleTextAttributes:newAttributes];
+    [self.navigationBar setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
+                                                 [UIColor colorWithRed:88.0/255.0 green:89.0/255.0 blue:92.0/255.0 alpha:1.0], UITextAttributeTextColor,
+                                                 [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0], UITextAttributeTextShadowColor,
+                                                 [NSValue valueWithUIOffset:UIOffsetMake(0, 1)], UITextAttributeTextShadowOffset,
+                                                 [UIFont fontWithName:@"BPreplay" size:18.0], UITextAttributeFont,
+                                                 nil] ];
     
     themeColour = [UIColor colorWithRed:0.0f/255.0f green:160.0f/255.0f blue:180.0f/255.0f alpha:1];
     fontType = [UIFont fontWithName:@"BPreplay" size:16.0f];

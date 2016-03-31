@@ -11,7 +11,9 @@
 #import "AppDelegate.h"
 #import "ColorHexCode.h"
 #import "TabValidation.h"
+#import "UIView+viewRecursion.h"
 
+#import "LoginDBManagement.h"
 @interface SecondLAViewController (){
     ColorHexCode *CustomColor;
     int clientProfileID;
@@ -162,6 +164,32 @@ id dobtemp;
     [self loadDataFromList];
 }
 
+- (void) checkEditingMode {
+    
+    LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
+    NSString *EditMode = [loginDB EditIllustration:[_poDictionaryPO valueForKey:@"SINO"]];
+    NSLog(@" Edit Mode second %@ : %@", EditMode, [_poDictionaryPO valueForKey:@"SINO"]);
+    //disable all text fields
+    if([EditMode caseInsensitiveCompare:@"0"] == NSOrderedSame){
+        for(UIView *v in [self.view allSubViews])
+        {
+            if([v isKindOfClass:[UITextField class]])
+            {
+                ((UITextField*)v).userInteractionEnabled=NO;
+            }else if([v isKindOfClass:[UIButton class]])
+            {
+                ((UIButton*)v).userInteractionEnabled=NO;
+            }else if([v isKindOfClass:[UISegmentedControl class]])
+            {
+                ((UISegmentedControl*)v).userInteractionEnabled=NO;
+            }else if([v isKindOfClass:[UISwitch class]])
+            {
+                ((UISwitch*)v).userInteractionEnabled=NO;
+            }
+        }
+    }
+}
+
 -(void)setElementActive :(BOOL)active
 {
     //if ([testing isEqualToString:@"Enable"])
@@ -226,6 +254,7 @@ id dobtemp;
 {
     [super viewDidAppear:animated];
     [self setElementActive:_quickQuoteEnabled];
+    [self checkEditingMode];
 }
 
 - (void)viewWillDisappear:(BOOL)animated

@@ -12,7 +12,7 @@
 
 @implementation PremiumKeluargaku
 
-@synthesize simpan;
+@synthesize simpan, delegate;
 @synthesize lblAsuransiDasarTahun, lblAsuransiDasarSemester, lblAsuransiDasarKuartal,
             lblAsuransiDasarBulan;
 @synthesize lblOccpTahun, lblOccpSemester, lblOccpKuartal, lblOccpBulan;
@@ -31,9 +31,10 @@
     [super viewDidLoad];
     [self updatePremiLabel];
     
+    UIButton* infoButton = [UIButton buttonWithType: UIButtonTypeInfoLight];
+    [infoButton addTarget:self action:@selector(simpanAct:) forControlEvents:UIControlEventTouchDown];
     
-    LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
-    [loginDB updateSIMaster:SINO EnableEditing:@"0"];
+    simpan =[[UIBarButtonItem alloc]initWithCustomView:infoButton];
 }
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil SINO:(NSString *)SiNo{
@@ -171,8 +172,30 @@
 
 - (IBAction)simpanAct:(id)sender {
     NSLog(@"simpan has been pressed");
-    LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
-    [loginDB updateSIMaster:SINO EnableEditing:@"0"];
+    
+    
+    UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Konfirmasi" message:@"Anda tidak dapat melakukan perubahan setelah simpan" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: @"cancel", nil];
+    [alert show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (buttonIndex) {
+        case 0:
+        {
+            NSLog(@"ok");
+            LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
+            [loginDB updateSIMaster:SINO EnableEditing:@"0"];
+            
+            [delegate savePremium];
+        }
+        break;
+        case 1:
+        {
+            // Do something for button #2
+            NSLog(@"cancel");
+        }
+        break;
+    }
 }
 
 @end

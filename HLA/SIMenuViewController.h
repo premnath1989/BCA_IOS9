@@ -36,13 +36,14 @@
 #import "Formatter.h"
 #import "RiderCalculation.h"
 #import "IlustrationViewController.h"
+#import "PremiumKeluargaku.h"
 
 @class SIMenuViewController;
 @protocol SIMenuDelegate
 -(void)showReportCantDisplay:(NSString*)type;
 @end
 
-@interface SIMenuViewController : UIViewController <FSTabBarControllerDelegate,NewLAViewControllerDelegate,PayorViewControllerDelegate,SecondLAViewControllerDelegate,BasicPlanViewControllerDelegate,RiderViewControllerDelegate,HLViewControllerDelegate, NDHTMLtoPDFDelegate, ReaderViewControllerDelegate> {
+@interface SIMenuViewController : UIViewController <FSTabBarControllerDelegate,NewLAViewControllerDelegate,PayorViewControllerDelegate,SecondLAViewControllerDelegate,BasicPlanViewControllerDelegate,RiderViewControllerDelegate,HLViewControllerDelegate, NDHTMLtoPDFDelegate, ReaderViewControllerDelegate,PremiumKeluargaKuProtocol> {
     UIViewController* lastActiveController;
     
     int getTerm;
@@ -133,6 +134,7 @@
     NSMutableDictionary* dictBebasPremi;
     //end of added by faiz
 }
+@property (strong, nonatomic) IBOutlet UIButton *outletSaveAs;
 
 @property (nonatomic, assign) id<SIMenuDelegate> delegate;
 

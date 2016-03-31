@@ -623,6 +623,7 @@
                     <items>
                         <navigationItem title="Premi" id="Ff7-nX-pOV">
                             <barButtonItem key="rightBarButtonItem" title="Simpan" id="kKk-8g-aID">
+                                <color key="tintColor" red="0.85490196080000003" green="0.19215686269999999" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <action selector="simpanAct:" destination="-1" id="pQ2-hb-UaX"/>
                                 </connections>
@@ -630,13 +631,6 @@
                         </navigationItem>
                     </items>
                 </navigationBar>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kZb-vg-QHV">
-                    <rect key="frame" x="0.0" y="606" width="46" height="30"/>
-                    <state key="normal" title="Button"/>
-                    <connections>
-                        <action selector="simpanAct:" destination="-1" eventType="touchUpInside" id="F9D-BE-jcj"/>
-                    </connections>
-                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <point key="canvasLocation" x="344" y="78"/>
