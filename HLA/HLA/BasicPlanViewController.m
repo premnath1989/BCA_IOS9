@@ -665,14 +665,16 @@ bool WPTPD30RisDeleted = FALSE;
     double Extraprem =(ExtraPremiNumb* PaymentMode) *((double)BasisSumAssured/1000);
     ExtraPremiTotal = Extraprem;
     
-    long long ExtraPrem1 = ExtraPremiTotal + ExtraPrecenttotal;
+    //long long ExtraPrem1 = ExtraPremiTotal + ExtraPrecenttotal;
+    double ExtraPrem1 = ExtraPremiTotal + ExtraPrecenttotal;
     
-    long long Alltotal = TotalA +ExtraPrem1;
+    //long long Alltotal = TotalA +ExtraPrem1;
+    double Alltotal = TotalA +ExtraPrem1;
     
     NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setFormatterBehavior: NSNumberFormatterBehavior10_4];
     [numberFormatter setNumberStyle: NSNumberFormatterDecimalStyle];
-    //[numberFormatter setRoundingMode:NSNumberFormatterRoundUp];
+    [numberFormatter setRoundingMode:NSNumberFormatterRoundHalfUp];
     [numberFormatter setMaximumFractionDigits:0];
     [numberFormatter setMinimumFractionDigits:0];
     
@@ -1285,9 +1287,16 @@ bool WPTPD30RisDeleted = FALSE;
     
     
     TotalA = total * test;
+    NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setFormatterBehavior: NSNumberFormatterBehavior10_4];
+    [numberFormatter setNumberStyle: NSNumberFormatterDecimalStyle];
+    [numberFormatter setRoundingMode:NSNumberFormatterRoundHalfUp];
+    [numberFormatter setMaximumFractionDigits:0];
+    [numberFormatter setMinimumFractionDigits:0];
+
     
-    
-    [_basicPremiField setText:[NSString stringWithFormat:@"%2f", test2]];
+    //[_basicPremiField setText:[NSString stringWithFormat:@"%2f", test2]];
+    [_basicPremiField setText:[numberFormatter stringFromNumber:[NSNumber numberWithDouble:TotalA]]];
     [self PremiDasarIncomeChange:_basicPremiField.text];
 }
 
@@ -2173,6 +2182,7 @@ bool WPTPD30RisDeleted = FALSE;
     [formatter setUsesGroupingSeparator:YES];
     [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
     
+    
     double entryFieldFloat = [_basicPremiField.text doubleValue];
     
     if ([_basicPremiField.text rangeOfString:@""].length == 3)
@@ -2826,9 +2836,12 @@ bool WPTPD30RisDeleted = FALSE;
     double MDBKKLoading = [riderCalculation calculateMDBKKLoading:dictForCalculate DictionaryBasicPlan:[self setDataBasicPlan] DictionaryPO:_dictionaryPOForInsert BasicCode:@"KLK" PaymentCode:[self getPaymentType] PersonType:personCharacterType];
     double RiderLoading = [riderCalculation calculateBPPremiLoading:dictForCalculateBPPremi DictionaryBasicPlan:[self setDataBasicPlan] DictionaryPO:_dictionaryPOForInsert BasicCode:@"KLK" PaymentCode:[self getPaymentType] PersonType:personCharacterType];
     
-    double premiDasar = RiderPremium + MDBKKPremi + roundedDiscount;
-    double extrapremi = MDBKKLoading + RiderLoading;
-    double totalPremi = RiderPremium + MDBKKPremi + MDBKKLoading + RiderLoading;
+    //double premiDasar = RiderPremium + MDBKKPremi + roundedDiscount;
+    double premiDasar = MDBKKPremi + roundedDiscount;
+    //double extrapremi = MDBKKLoading + RiderLoading;
+    double extrapremi = MDBKKLoading;
+    //double totalPremi = RiderPremium + MDBKKPremi + MDBKKLoading + RiderLoading;
+    double totalPremi = MDBKKPremi + MDBKKLoading;
     
     NSString *PremiDasar = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:premiDasar]];
     NSString *ExtraPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:extrapremi]];

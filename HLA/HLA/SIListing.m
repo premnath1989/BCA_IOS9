@@ -1309,12 +1309,13 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
             sorted = [ItemToBeDeleted sortedArrayUsingComparator:^(id firstObject, id secondObject){
                 return [((NSString *)firstObject) compare:((NSString *)secondObject) options:NSNumericSearch];
             }];
-            //int value;
+
             for(int a=0; a<sorted.count; a++){
                 //value = [[sorted objectAtIndex:a] intValue] - a;
-                [_modelSIPremium deletePremium:[SINO objectAtIndex:a]];
-                [_modelSIPOData deletePOData:[SINO objectAtIndex:a]];
-                [_modelSIMaster deleteIlustrationMaster:[SINO objectAtIndex:a]];
+                int index = [[sorted objectAtIndex:a] intValue];
+                [_modelSIPremium deletePremium:[SINO objectAtIndex:index]];
+                [_modelSIPOData deletePOData:[SINO objectAtIndex:index]];
+                [_modelSIMaster deleteIlustrationMaster:[SINO objectAtIndex:index]];
             }
             
             //[myTableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
