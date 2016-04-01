@@ -16,6 +16,15 @@
     NSDictionary* dictMDBKK;
     NSDictionary* dictMBKK;
     NSDictionary* dictBebasPremi;
+    
+    double mdbkk;
+    double mdbkkExtra;
+    double bp;
+    double bpExtra;
+    
+    double premiStandard;
+    double extraPremi;
+    double totalDibayar;
 }
 
 @end
@@ -808,6 +817,41 @@
     dictMDBKK=[modelSIRider getRider:[_dictionaryPOForInsert valueForKey:@"SINO"] RiderCode:@"MDBKK"];
     dictMBKK=[modelSIRider getRider:[_dictionaryPOForInsert valueForKey:@"SINO"] RiderCode:@"MDKK"];
     dictBebasPremi=[modelSIRider getRider:[_dictionaryPOForInsert valueForKey:@"SINO"] RiderCode:@"BP"];
+    
+    NSString* mdbKKPremi = [dictMDBKK valueForKey:@"PremiRp"];
+    NSString* mdbKKPremiExtra = [dictMDBKK valueForKey:@"ExtraPremiRp"];
+    NSString* bpPremi = [dictBebasPremi valueForKey:@"PremiRp"];
+    NSString* bpPremiExtra = [dictBebasPremi valueForKey:@"ExtraPremiRp"];
+    
+    mdbKKPremi = [mdbKKPremi stringByReplacingOccurrencesOfString:@" " withString:@""];
+    mdbKKPremi = [mdbKKPremi stringByReplacingOccurrencesOfString:@"," withString:@""];
+    mdbKKPremi = [mdbKKPremi stringByReplacingOccurrencesOfString:@"." withString:@""];
+    mdbKKPremi = [mdbKKPremi stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    
+    mdbKKPremiExtra = [mdbKKPremiExtra stringByReplacingOccurrencesOfString:@" " withString:@""];
+    mdbKKPremiExtra = [mdbKKPremiExtra stringByReplacingOccurrencesOfString:@"," withString:@""];
+    mdbKKPremiExtra = [mdbKKPremiExtra stringByReplacingOccurrencesOfString:@"." withString:@""];
+    mdbKKPremiExtra = [mdbKKPremiExtra stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    
+    bpPremi = [bpPremi stringByReplacingOccurrencesOfString:@" " withString:@""];
+    bpPremi = [bpPremi stringByReplacingOccurrencesOfString:@"," withString:@""];
+    bpPremi = [bpPremi stringByReplacingOccurrencesOfString:@"." withString:@""];
+    bpPremi = [bpPremi stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    
+    bpPremiExtra = [bpPremiExtra stringByReplacingOccurrencesOfString:@" " withString:@""];
+    bpPremiExtra = [bpPremiExtra stringByReplacingOccurrencesOfString:@"," withString:@""];
+    bpPremiExtra = [bpPremiExtra stringByReplacingOccurrencesOfString:@"." withString:@""];
+    bpPremiExtra = [bpPremiExtra stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    
+    mdbkk = [mdbKKPremi doubleValue];
+    mdbkkExtra = [mdbKKPremiExtra doubleValue];
+    bp = [bpPremi doubleValue];
+    bpExtra = [bpPremiExtra doubleValue];
+    
+    
+    premiStandard = mdbkk + bp;
+    extraPremi = mdbkkExtra + bpExtra;
+    totalDibayar = premiStandard + extraPremi;
 }
 
 -(void)setValueKeluargakuPage2{
@@ -891,13 +935,13 @@
     
         NSNumber *myNumber = [formatter convertNumberFromString:[_dictionaryForBasicPlan valueForKey:@"Sum_Assured"]];
         NSString *javaScriptP1H14=[NSString stringWithFormat:@"document.getElementById('SIDiscount').innerHTML =\"(%@)\";", [_dictionaryForBasicPlan valueForKey:@"Discount"]];
-        NSString *javaScriptP1H17=[NSString stringWithFormat:@"document.getElementById('TotalPremi').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"TotalPremiumLoading"]];
+        NSString *javaScriptP1H17=[NSString stringWithFormat:@"document.getElementById('TotalPremi').innerHTML =\"%@\";", [NSString stringWithFormat:@"%@",[formatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:totalDibayar]]]];
         NSString *javaScriptP1H1=[NSString stringWithFormat:@"document.getElementById('SumAssured').innerHTML =\"%@\";", [formatter numberToCurrencyDecimalFormatted:myNumber]];
         NSString *javaScriptP1H4=[NSString stringWithFormat:@"document.getElementById('Loading').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"LA_Name"]];
-        NSString *javaScriptP1H6=[NSString stringWithFormat:@"document.getElementById('ExtraPremi').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"ExtraPremiumPolicy"]];
+        NSString *javaScriptP1H6=[NSString stringWithFormat:@"document.getElementById('ExtraPremi').innerHTML =\"%@\";", [NSString stringWithFormat:@"%@",[formatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:extraPremi]]]];
         NSString *javaScriptP1H8=[NSString stringWithFormat:@"document.getElementById('ExtraOccupation').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"LA_Name"]];
         NSString *javaScriptP1H10=[NSString stringWithFormat:@"document.getElementById('MasaExtraPremi').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"ExtraPremiumTerm"]];
-        NSString *javaScriptP1H12=[NSString stringWithFormat:@"document.getElementById('PremiDibayar').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"PremiumPolicyA"]];
+        NSString *javaScriptP1H12=[NSString stringWithFormat:@"document.getElementById('PremiDibayar').innerHTML =\"%@\";", [NSString stringWithFormat:@"%@",[formatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:premiStandard]]]];
         NSString *javaScriptP1H19=[NSString stringWithFormat:@"document.getElementById('CaraBayarPremi').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"Payment_Frequency"]];
 
     
