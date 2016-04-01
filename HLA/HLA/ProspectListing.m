@@ -317,6 +317,7 @@ MBProgressHUD *HUD;
             }
             
             [cell1.labelName setText:pp.ProspectName];
+            [cell1.labelidNum setText:pp.OtherIDTypeNo];
             [cell1.labelDOB setText:pp.ProspectDOB];
             [cell1.labelBranchName setText:pp.BranchName];
             //[cell1.labelPhone1 setText:@""];

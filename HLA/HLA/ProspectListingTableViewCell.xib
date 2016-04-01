@@ -100,6 +100,12 @@
                                 <color key="textColor" red="0.34509803919999998" green="0.34901960780000002" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bTf-gd-odA">
+                                <rect key="frame" x="5" y="31" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <color key="textColor" red="0.34509803921568627" green="0.34901960784313724" blue="0.36078431372549019" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                     </view>
                 </subviews>
@@ -113,6 +119,7 @@
                 <outlet property="labelName" destination="kG8-Ke-3s0" id="FIW-Oy-bRz"/>
                 <outlet property="labelPhone1" destination="xUp-Ie-uSx" id="edM-KE-jy0"/>
                 <outlet property="labelTimeRemaining" destination="o0f-ip-rLP" id="t3c-9p-SVa"/>
+                <outlet property="labelidNum" destination="bTf-gd-odA" id="ckK-bM-E7K"/>
             </connections>
         </tableViewCell>
     </objects>

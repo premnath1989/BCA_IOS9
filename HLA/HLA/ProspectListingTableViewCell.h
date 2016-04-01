@@ -13,6 +13,7 @@
 }
 
 @property (nonatomic, weak) IBOutlet UILabel* labelName;
+@property (nonatomic, weak) IBOutlet UILabel* labelidNum;
 @property (nonatomic, weak) IBOutlet UILabel* labelDOB;
 @property (nonatomic, weak) IBOutlet UILabel* labelPhone1;
 @property (nonatomic, weak) IBOutlet UILabel* labelBranchName;
