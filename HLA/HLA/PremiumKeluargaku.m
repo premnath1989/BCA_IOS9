@@ -29,12 +29,20 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self updatePremiLabel];
+    //[self updatePremiLabel];
+    
+    classFormatter = [[Formatter alloc]init];
+    riderCalculation = [[RiderCalculation alloc]init];
     
     UIButton* infoButton = [UIButton buttonWithType: UIButtonTypeInfoLight];
     [infoButton addTarget:self action:@selector(simpanAct:) forControlEvents:UIControlEventTouchDown];
     
     simpan =[[UIBarButtonItem alloc]initWithCustomView:infoButton];
+    
+    [self setPremiBulanan];
+    [self setPremiTahunan];
+    [self setPremiKuartalan];
+    [self setPremiSemesteran];
 }
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil SINO:(NSString *)SiNo{
@@ -197,5 +205,248 @@
         break;
     }
 }
+
+#pragma mark created by faiz
+-(int)getDiscount:(int)PurchaseNumber PaymentFrequesncy:(int)paymentFrequency{
+    NSString* RelWithLA=[_dictionaryPOForInsert valueForKey:@"RelWithLA"];
+    NSString* PayorSex = [_dictionaryPOForInsert valueForKey:@"PO_Gender"];
+    int PayorAge = [[_dictionaryPOForInsert valueForKey:@"PO_Age"] intValue];
+
+    NSString* LASex = [_dictionaryPOForInsert valueForKey:@"LA_Gender"];
+    int LAAge = [[_dictionaryPOForInsert valueForKey:@"LA_Age"] intValue];
+
+    if(([RelWithLA isEqualToString:@"DIRI SENDIRI"])||([RelWithLA isEqualToString:@"SELF"]))
+    {
+        PayorSex = LASex;
+        PayorAge = LAAge;
+    }
+    
+    NSString*WaiverRate;
+    
+    NSArray *paths2 = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsPath2 = [paths2 objectAtIndex:0];
+    NSString *path2 = [docsPath2 stringByAppendingPathComponent:@"BCA_Rates.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path2];
+    [database open];
+    FMResultSet *results;
+    
+    NSString*RatesPremiumRate;
+    double PaymentMode;
+    if (![database open])
+    {
+        NSLog(@"Could not open db.");
+    }
+    
+    
+    //    if([RelWithLA isEqualToString:@"DIRI SENDIRI"])
+    //    {
+    WaiverRate = [NSString stringWithFormat:@"SELECT %@ FROM Keluargaku_Rates_basicPrem Where BasicCode = '%@' AND EntryAge = %i",LASex,@"KLK",LAAge];
+    results = [database executeQuery:WaiverRate];
+    while([results next])
+    {
+        if ([PayorSex isEqualToString:@"Male"]||[PayorSex isEqualToString:@"MALE"]){
+            RatesPremiumRate  = [results stringForColumn:@"Male"];
+        }
+        else{
+            RatesPremiumRate  = [results stringForColumn:@"Female"];
+        }
+        
+    }
+    
+    double RatesInt = [RatesPremiumRate doubleValue];
+    
+    NSString*PaymentFactoryQuery;
+    [database open];
+    FMResultSet *Results2;
+    NSString * RatesMop = [NSString stringWithFormat:@"SELECT Payment_Fact FROM Keluargaku_Rates_MOP Where Payment_Code = %i",paymentFrequency];
+    Results2 = [database executeQuery:RatesMop];
+    
+    
+    while([Results2 next])
+    {
+        PaymentFactoryQuery = [Results2 stringForColumn:@"Payment_Fact"];
+        
+    }
+    
+    float percentPaymentMode = [PaymentFactoryQuery floatValue] / 100.0f;
+    double discountPembelian;
+    if (PurchaseNumber>=2){
+        discountPembelian=0.05;
+    }
+    else{
+        discountPembelian=0;
+    }
+    
+    long long BasisSumAssured = [[_dictionaryForBasicPlan valueForKey:@"Number_Sum_Assured"] longLongValue];
+    
+    long long total =(BasisSumAssured/1000);
+    
+    DiscountCalculation = discountPembelian * RatesInt * total * percentPaymentMode;
+    
+    NSNumberFormatter *format21 = [[NSNumberFormatter alloc]init];
+    [format21 setNumberStyle:NSNumberFormatterNoStyle];
+    [format21 setGeneratesDecimalNumbers:TRUE];
+    [format21 setMaximumFractionDigits:1];
+    [format21 setRoundingMode:NSNumberFormatterRoundHalfUp];
+    
+    DiscountCalculation = [[format21 stringFromNumber:[NSNumber numberWithDouble:DiscountCalculation]] doubleValue];
+    int roundedDiscount=round(DiscountCalculation);
+    
+    return roundedDiscount;
+}
+
+-(NSMutableDictionary *)getDictCalculatePPremi:(NSDictionary *)dictPO{
+    NSMutableDictionary* dictForCalculateBPPremi;
+    
+    if (([[dictPO valueForKey:@"RelWithLA"] isEqualToString:@"SELF"])||([[dictPO valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"])){
+        dictForCalculateBPPremi=[[NSMutableDictionary alloc]initWithObjectsAndKeys:[_dictionaryForBasicPlan valueForKey:@"ExtraPremiumPercentage"],@"ExtraPremiPerCent",[_dictionaryForBasicPlan valueForKey:@"ExtraPremiumSum"],@"ExtraPremiPerMil",[_dictionaryForBasicPlan valueForKey:@"ExtraPremiumTerm"],@"MasaExtraPremi", nil];
+    }
+    else{
+        dictForCalculateBPPremi=[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"0",@"ExtraPremiPerCent",@"0",@"ExtraPremiPerMil",@"0",@"MasaExtraPremi", nil];
+    }
+    
+    return dictForCalculateBPPremi;
+}
+
+-(NSString *)getPersonType:(NSDictionary *)dictPO{
+    NSString *personCharacterType;
+    if (([[dictPO valueForKey:@"RelWithLA"] isEqualToString:@"SELF"])||([[dictPO valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"])){
+        personCharacterType = @"T";
+    }
+    else{
+        personCharacterType = @"P";
+    }
+    return personCharacterType;
+}
+
+-(void)setPremiBulanan{
+    NSDictionary *dictPO = [[NSDictionary alloc]initWithDictionary:_dictionaryPOForInsert];
+    NSMutableDictionary *dictBasicPlan = [[NSMutableDictionary alloc]initWithDictionary:_dictionaryForBasicPlan];
+    
+    [dictBasicPlan setObject:@"Bulanan" forKey:@"Payment_Frequency"];
+    int diskon = [self getDiscount:[[dictBasicPlan valueForKey:@"PurchaseNumber"] intValue] PaymentFrequesncy:4];
+    double MDBKKPremi = [riderCalculation calculateMDBKK:[self getDictCalculatePPremi:dictPO] DictionaryBasicPlan:dictBasicPlan DictionaryPO:dictPO BasicCode:@"KLK" PaymentCode:4 PersonType:[self getPersonType:dictPO]];
+    
+    double premiDasar = MDBKKPremi + diskon;
+    double MDBKKLoading = [riderCalculation calculateMDBKKLoading:[self getDictCalculatePPremi:dictPO] DictionaryBasicPlan:dictBasicPlan DictionaryPO:dictPO BasicCode:@"KLK" PaymentCode:4 PersonType:[self getPersonType:dictPO]];
+
+    double MDBKKLoadingPercent = [riderCalculation calculateMDBKKLoadingPercent:[self getDictCalculatePPremi:dictPO] DictionaryBasicPlan:dictBasicPlan DictionaryPO:dictPO BasicCode:@"KLK" PaymentCode:4 PersonType:[self getPersonType:dictPO]];
+    double MDBKKLoadingNumber = [riderCalculation calculateMDBKKLoadingNumber:[self getDictCalculatePPremi:dictPO] DictionaryBasicPlan:dictBasicPlan DictionaryPO:dictPO BasicCode:@"KLK" PaymentCode:4 PersonType:[self getPersonType:dictPO]];
+
+    
+    double MDBKK = MDBKKPremi+MDBKKLoading;
+
+    double RiderPremium = [riderCalculation calculateBPPremi:[self getDictCalculatePPremi:dictPO] DictionaryBasicPlan:dictBasicPlan DictionaryPO:dictPO BasicCode:@"KLK" PaymentCode:4 PersonType:[self getPersonType:dictPO]];
+    double RiderLoading = [riderCalculation calculateBPPremiLoading:[self getDictCalculatePPremi:dictPO] DictionaryBasicPlan:dictBasicPlan DictionaryPO:dictPO BasicCode:@"KLK" PaymentCode:4 PersonType:[self getPersonType:dictPO]];
+    double BP = RiderPremium + RiderLoading;
+    double allTotal = BP + MDBKK;
+    [lblAsuransiDasarBulan setText:[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:premiDasar]]];
+    //lblOccpBulan;
+    [lblPremiPercentageBulan setText:[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:MDBKKLoadingPercent]]];
+    [lblPremiNumBulan setText:[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:MDBKKLoadingNumber]]];
+    [lblDiscountBulan setText:[classFormatter stringToCurrencyDecimalFormatted:[NSString stringWithFormat:@"%i",diskon]]];
+    [lblSubTotalBulan setText:[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:MDBKK]]];
+    [lblMDBKKBulan setText:[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:MDBKK]]];
+    //lblMDKKBulan;
+    [lblBPBulan setText:[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:BP]]];;
+    [lblTotalBulan setText:[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:allTotal]]];
+}
+
+-(void)setPremiTahunan{
+    NSDictionary *dictPO = [[NSDictionary alloc]initWithDictionary:_dictionaryPOForInsert];
+    NSMutableDictionary *dictBasicPlan = [[NSMutableDictionary alloc]initWithDictionary:_dictionaryForBasicPlan];
+    [dictBasicPlan setObject:@"Tahunan" forKey:@"Payment_Frequency"];
+    
+    int diskon = [self getDiscount:[[dictBasicPlan valueForKey:@"PurchaseNumber"] intValue] PaymentFrequesncy:1];
+    double MDBKKPremi = [riderCalculation calculateMDBKK:[self getDictCalculatePPremi:dictPO] DictionaryBasicPlan:dictBasicPlan DictionaryPO:dictPO BasicCode:@"KLK" PaymentCode:1 PersonType:[self getPersonType:dictPO]];
+    double MDBKKLoading = [riderCalculation calculateMDBKKLoading:[self getDictCalculatePPremi:dictPO] DictionaryBasicPlan:dictBasicPlan DictionaryPO:dictPO BasicCode:@"KLK" PaymentCode:1 PersonType:[self getPersonType:dictPO]];
+    double MDBKKLoadingPercent = [riderCalculation calculateMDBKKLoadingPercent:[self getDictCalculatePPremi:dictPO] DictionaryBasicPlan:dictBasicPlan DictionaryPO:dictPO BasicCode:@"KLK" PaymentCode:1 PersonType:[self getPersonType:dictPO]];
+    double MDBKKLoadingNumber = [riderCalculation calculateMDBKKLoadingNumber:[self getDictCalculatePPremi:dictPO] DictionaryBasicPlan:dictBasicPlan DictionaryPO:dictPO BasicCode:@"KLK" PaymentCode:1 PersonType:[self getPersonType:dictPO]];
+
+    double MDBKK = MDBKKPremi+MDBKKLoading;
+
+    double RiderPremium = [riderCalculation calculateBPPremi:[self getDictCalculatePPremi:dictPO] DictionaryBasicPlan:dictBasicPlan DictionaryPO:dictPO BasicCode:@"KLK" PaymentCode:1 PersonType:[self getPersonType:dictPO]];
+    double RiderLoading = [riderCalculation calculateBPPremiLoading:[self getDictCalculatePPremi:dictPO] DictionaryBasicPlan:dictBasicPlan DictionaryPO:dictPO BasicCode:@"KLK" PaymentCode:1 PersonType:[self getPersonType:dictPO]];
+    
+    double BP = RiderPremium + RiderLoading;
+    
+    double premiDasar = MDBKKPremi + diskon;
+        double allTotal = BP + MDBKK;
+    [lblAsuransiDasarTahun setText:[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:premiDasar]]];
+    //lblOccpTahun;
+    [lblPremiPercentageTahun setText:[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:MDBKKLoadingPercent]]];
+    [lblPremiNumTahun setText:[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:MDBKKLoadingNumber]]];
+    [lblDiscountTahun setText:[classFormatter stringToCurrencyDecimalFormatted:[NSString stringWithFormat:@"%i",diskon]]];
+    [lblSubTotalTahun setText:[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:MDBKK]]];
+    [lblMDBKKTahun setText:[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:MDBKK]]];
+    //lblMDKKTahun;
+    [lblBPTahun setText:[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:BP]]];
+    [lblTotalTahun setText:[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:allTotal]]];
+}
+
+-(void)setPremiSemesteran{
+    NSDictionary *dictPO = [[NSDictionary alloc]initWithDictionary:_dictionaryPOForInsert];
+    NSMutableDictionary *dictBasicPlan = [[NSMutableDictionary alloc]initWithDictionary:_dictionaryForBasicPlan];
+    [dictBasicPlan setObject:@"Semester" forKey:@"Payment_Frequency"];
+
+    int diskon = [self getDiscount:[[dictBasicPlan valueForKey:@"PurchaseNumber"] intValue] PaymentFrequesncy:2];
+    double MDBKKPremi = [riderCalculation calculateMDBKK:[self getDictCalculatePPremi:dictPO] DictionaryBasicPlan:dictBasicPlan DictionaryPO:dictPO BasicCode:@"KLK" PaymentCode:2 PersonType:[self getPersonType:dictPO]];
+    double premiDasar = MDBKKPremi + diskon;
+    double MDBKKLoading = [riderCalculation calculateMDBKKLoading:[self getDictCalculatePPremi:dictPO] DictionaryBasicPlan:dictBasicPlan DictionaryPO:dictPO BasicCode:@"KLK" PaymentCode:2 PersonType:[self getPersonType:dictPO]];
+    double MDBKKLoadingPercent = [riderCalculation calculateMDBKKLoadingPercent:[self getDictCalculatePPremi:dictPO] DictionaryBasicPlan:dictBasicPlan DictionaryPO:dictPO BasicCode:@"KLK" PaymentCode:2 PersonType:[self getPersonType:dictPO]];
+    double MDBKKLoadingNumber = [riderCalculation calculateMDBKKLoadingNumber:[self getDictCalculatePPremi:dictPO] DictionaryBasicPlan:dictBasicPlan DictionaryPO:dictPO BasicCode:@"KLK" PaymentCode:2 PersonType:[self getPersonType:dictPO]];
+
+    double MDBKK = MDBKKPremi+MDBKKLoading;
+
+    double RiderPremium = [riderCalculation calculateBPPremi:[self getDictCalculatePPremi:dictPO] DictionaryBasicPlan:dictBasicPlan DictionaryPO:dictPO BasicCode:@"KLK" PaymentCode:2 PersonType:[self getPersonType:dictPO]];
+    double RiderLoading = [riderCalculation calculateBPPremiLoading:[self getDictCalculatePPremi:dictPO] DictionaryBasicPlan:dictBasicPlan DictionaryPO:dictPO BasicCode:@"KLK" PaymentCode:2 PersonType:[self getPersonType:dictPO]];
+    double BP = RiderPremium + RiderLoading;
+        double allTotal = BP + MDBKK;
+    [lblAsuransiDasarSemester setText:[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:premiDasar]]];
+    //lblOccpSemester;
+    [lblPremiPercentageSemester setText:[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:MDBKKLoadingPercent]]];
+    [lblPremiNumSemester setText:[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:MDBKKLoadingNumber]]];
+    [lblDiscountSemester setText:[classFormatter stringToCurrencyDecimalFormatted:[NSString stringWithFormat:@"%i",diskon]]];
+    [lblSubTotalSemester setText:[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:MDBKK]]];
+    [lblMDBKKSemester setText:[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:MDBKK]]];
+    //lblMDKKSemester;
+    [lblBPSemester setText:[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:BP]]];
+    [lblTotalSemester setText:[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:allTotal]]];
+}
+
+-(void)setPremiKuartalan{
+    NSDictionary *dictPO = [[NSDictionary alloc]initWithDictionary:_dictionaryPOForInsert];
+    NSMutableDictionary *dictBasicPlan = [[NSMutableDictionary alloc]initWithDictionary:_dictionaryForBasicPlan];
+    [dictBasicPlan setObject:@"Kuartal" forKey:@"Payment_Frequency"];
+
+    int diskon = [self getDiscount:[[dictBasicPlan valueForKey:@"PurchaseNumber"] intValue] PaymentFrequesncy:3];
+    double MDBKKPremi = [riderCalculation calculateMDBKK:[self getDictCalculatePPremi:dictPO] DictionaryBasicPlan:dictBasicPlan DictionaryPO:dictPO BasicCode:@"KLK" PaymentCode:3 PersonType:[self getPersonType:dictPO]];
+    double premiDasar = MDBKKPremi + diskon;
+
+    double MDBKKLoading = [riderCalculation calculateMDBKKLoading:[self getDictCalculatePPremi:dictPO] DictionaryBasicPlan:dictBasicPlan DictionaryPO:dictPO BasicCode:@"KLK" PaymentCode:3 PersonType:[self getPersonType:dictPO]];
+    double MDBKKLoadingPercent = [riderCalculation calculateMDBKKLoadingPercent:[self getDictCalculatePPremi:dictPO] DictionaryBasicPlan:dictBasicPlan DictionaryPO:dictPO BasicCode:@"KLK" PaymentCode:3 PersonType:[self getPersonType:dictPO]];
+    double MDBKKLoadingNumber = [riderCalculation calculateMDBKKLoadingNumber:[self getDictCalculatePPremi:dictPO] DictionaryBasicPlan:dictBasicPlan DictionaryPO:dictPO BasicCode:@"KLK" PaymentCode:3 PersonType:[self getPersonType:dictPO]];
+
+    double MDBKK = MDBKKPremi+MDBKKLoading;
+
+    
+    double RiderPremium = [riderCalculation calculateBPPremi:[self getDictCalculatePPremi:dictPO] DictionaryBasicPlan:dictBasicPlan DictionaryPO:dictPO BasicCode:@"KLK" PaymentCode:3 PersonType:[self getPersonType:dictPO]];
+    double RiderLoading = [riderCalculation calculateBPPremiLoading:[self getDictCalculatePPremi:dictPO] DictionaryBasicPlan:dictBasicPlan DictionaryPO:dictPO BasicCode:@"KLK" PaymentCode:3 PersonType:[self getPersonType:dictPO]];
+    double BP = RiderPremium + RiderLoading;
+    
+    double allTotal = BP + MDBKK;
+    [lblAsuransiDasarKuartal setText:[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:premiDasar]]];
+    //lblOccpKuartal;
+    [lblPremiPercentageKuartal setText:[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:MDBKKLoadingPercent]]];
+    [lblPremiNumKuartal setText:[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:MDBKKLoadingNumber]]];
+    [lblDiscountKuartal setText:[classFormatter stringToCurrencyDecimalFormatted:[NSString stringWithFormat:@"%i",diskon]]];
+    [lblSubTotalKuartal setText:[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:MDBKK]]];
+    [lblMDBKKKuartal setText:[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:MDBKK]]];
+    //lblMDKKKuartal;
+    [lblBPKuartal setText:[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:BP]]];
+    [lblTotalKuartal setText:[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:allTotal]]];
+}
+
 
 @end

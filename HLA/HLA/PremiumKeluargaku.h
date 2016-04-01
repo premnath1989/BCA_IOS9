@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FMDatabase.h"
+#import "Formatter.h"
+#import "RiderCalculation.h"
 
 @class PremiumKeluargaku;
 @protocol PremiumKeluargaKuProtocol
@@ -16,7 +19,13 @@
 
 @interface PremiumKeluargaku : UIViewController{
     NSString *SINO;
+    double DiscountCalculation;
+    Formatter* classFormatter;
+    RiderCalculation* riderCalculation;
 }
+
+@property (retain, nonatomic) NSMutableDictionary* dictionaryPOForInsert;
+@property (retain, nonatomic) NSMutableDictionary* dictionaryForBasicPlan;
 
 @property (nonatomic,strong) id <PremiumKeluargaKuProtocol> delegate;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *simpan;

@@ -37,10 +37,12 @@
 }
 
 -(NSString *)getKeluargakuMOP:(int)paymentCode{
+    rateModel = [[RateModel alloc]init];
     return [rateModel getKeluargakuMOPRate:paymentCode];
 }
 
 -(double)getKeluargakuEMRate:(NSString *)gender EntryAge:(int)entryAge{
+    rateModel = [[RateModel alloc]init];
     return [rateModel getKeluargakuEMRate:gender EntryAge:entryAge];
 }
 
@@ -84,6 +86,78 @@
     double sumAssured = [[dictionaryBasicPlan valueForKey:@"Number_Sum_Assured"] doubleValue];
     
     double MDBKKLoading = (emPercent * emRate + emNumber) * (sumAssured/1000) * (paymentFactor/100);
+    return MDBKKLoading;
+}
+
+-(double)calculateMDBKKLoadingPercent:(NSMutableDictionary *)dictCalculate DictionaryBasicPlan:(NSDictionary *)dictionaryBasicPlan DictionaryPO:(NSDictionary *)dictPO BasicCode:(NSString *)basicCode PaymentCode:(int)paymentCode PersonType:(NSString *)personType{
+    double emPercent;
+    int emNumber;
+    if (([[dictPO valueForKey:@"RelWithLA"] isEqualToString:@"SELF"])||([[dictPO valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"])){
+        emPercent = [[dictionaryBasicPlan valueForKey:@"ExtraPremiumPercentage"] doubleValue];
+        emPercent = emPercent/100;
+        emNumber= [[dictionaryBasicPlan valueForKey:@"ExtraPremiumSum"] integerValue];
+        
+    }
+    else{
+        //emPercent = [[dictionaryBasicPlan valueForKey:@"ExtraPremiumPercentage"] doubleValue];
+        //emPercent = 0;
+        //emNumber = 0;
+        emPercent = [[dictionaryBasicPlan valueForKey:@"ExtraPremiumPercentage"] doubleValue];
+        emPercent = emPercent/100;
+        emNumber= [[dictionaryBasicPlan valueForKey:@"ExtraPremiumSum"] integerValue];
+    }
+    
+    NSString *sex;
+    if (([[dictPO valueForKey:@"LA_Gender"] isEqualToString:@"MALE"])||([[dictPO valueForKey:@"LA_Gender"] isEqualToString:@"Male"])){
+        sex=@"Male";
+    }
+    else{
+        sex=@"Female";
+    }
+    double emRate = [self getKeluargakuEMRate:sex EntryAge:[[dictPO valueForKey:@"LA_Age"] integerValue]];
+    
+    NSString *mop = [self getKeluargakuMOP:paymentCode];
+    mop = [mop substringToIndex:[mop length]-1];
+    double paymentFactor = [mop doubleValue];
+    double sumAssured = [[dictionaryBasicPlan valueForKey:@"Number_Sum_Assured"] doubleValue];
+    
+    double MDBKKLoading = (emPercent * emRate) * (sumAssured/1000) * (paymentFactor/100);
+    return MDBKKLoading;
+}
+
+-(double)calculateMDBKKLoadingNumber:(NSMutableDictionary *)dictCalculate DictionaryBasicPlan:(NSDictionary *)dictionaryBasicPlan DictionaryPO:(NSDictionary *)dictPO BasicCode:(NSString *)basicCode PaymentCode:(int)paymentCode PersonType:(NSString *)personType{
+    double emPercent;
+    int emNumber;
+    if (([[dictPO valueForKey:@"RelWithLA"] isEqualToString:@"SELF"])||([[dictPO valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"])){
+        emPercent = [[dictionaryBasicPlan valueForKey:@"ExtraPremiumPercentage"] doubleValue];
+        emPercent = emPercent/100;
+        emNumber= [[dictionaryBasicPlan valueForKey:@"ExtraPremiumSum"] integerValue];
+        
+    }
+    else{
+        //emPercent = [[dictionaryBasicPlan valueForKey:@"ExtraPremiumPercentage"] doubleValue];
+        //emPercent = 0;
+        //emNumber = 0;
+        emPercent = [[dictionaryBasicPlan valueForKey:@"ExtraPremiumPercentage"] doubleValue];
+        emPercent = emPercent/100;
+        emNumber= [[dictionaryBasicPlan valueForKey:@"ExtraPremiumSum"] integerValue];
+    }
+    
+    NSString *sex;
+    if (([[dictPO valueForKey:@"LA_Gender"] isEqualToString:@"MALE"])||([[dictPO valueForKey:@"LA_Gender"] isEqualToString:@"Male"])){
+        sex=@"Male";
+    }
+    else{
+        sex=@"Female";
+    }
+    double emRate = [self getKeluargakuEMRate:sex EntryAge:[[dictPO valueForKey:@"LA_Age"] integerValue]];
+    
+    NSString *mop = [self getKeluargakuMOP:paymentCode];
+    mop = [mop substringToIndex:[mop length]-1];
+    double paymentFactor = [mop doubleValue];
+    double sumAssured = [[dictionaryBasicPlan valueForKey:@"Number_Sum_Assured"] doubleValue];
+    
+    double MDBKKLoading = (emNumber) * (sumAssured/1000) * (paymentFactor/100);
     return MDBKKLoading;
 }
 

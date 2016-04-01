@@ -2971,6 +2971,8 @@ BOOL isFirstLoad;
                 else{
                     PremiumKeluargaku *premiK = [[PremiumKeluargaku alloc]initWithNibName:@"PremiumKeluargaku" bundle:nil SINO:[dictionaryPOForInsert valueForKey:@"SINO"]];
                     premiK.delegate = self;
+                    [premiK setDictionaryPOForInsert:dictionaryPOForInsert];
+                    [premiK setDictionaryForBasicPlan:newDictionaryForBasicPlan];
                     [self addChildViewController:premiK];
                     [self.RightView addSubview:premiK.view];
                     [self.RightView bringSubviewToFront:premiK.view];
@@ -5688,6 +5690,8 @@ BOOL isFirstLoad;
         PremiumKeluargaku *premiK = [[PremiumKeluargaku alloc]initWithNibName:@"PremiumKeluargaku"
                                                                        bundle:nil SINO:[dictionaryPOForInsert valueForKey:@"SINO"]];
         premiK.delegate = self;
+        [premiK setDictionaryPOForInsert:dictionaryPOForInsert];
+        [premiK setDictionaryForBasicPlan:newDictionaryForBasicPlan];
         [self addChildViewController:premiK];
         [self.RightView addSubview:premiK.view];
         [self.RightView bringSubviewToFront:premiK.view];

@@ -551,8 +551,13 @@ bool WPTPD30RisDeleted = FALSE;
     {
         NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
-        return (([string isEqualToString:filtered]) && newLength <= 1);
-        
+        NSString *PlanTypeProduct = [_dictionaryPOForInsert valueForKey:@"ProductName"];
+        if([PlanTypeProduct isEqualToString:@"BCA Life Heritage Protection"]){
+            return (([string isEqualToString:filtered]) && newLength <= 1);
+        }
+        else{
+            return (([string isEqualToString:filtered]) && newLength <= 2);
+        }
        
     }
     
@@ -608,31 +613,48 @@ bool WPTPD30RisDeleted = FALSE;
     else if (textField == _masaExtraPremiField)
     {
         int masaExtraPremi=[textField.text intValue];
+        NSString *PlanTypeProduct = [_dictionaryPOForInsert valueForKey:@"ProductName"];
         
-        if ([_masaPembayaranButton.titleLabel.text isEqualToString:@"Premi Tunggal"]){
-            if (([_extraPremiNumberField.text length]>0)||([_extraPremiPercentField.text length]>0)){
-                if (masaExtraPremi != 1){
-                    [self createAlertViewAndShow:@"Masa extra premi harus sama dengan 1" tag:0];
-                    [textField setText:@""];
-                    [textField becomeFirstResponder];
+        if([PlanTypeProduct isEqualToString:@"BCA Life Heritage Protection"]){
+            if ([_masaPembayaranButton.titleLabel.text isEqualToString:@"Premi Tunggal"]){
+                if (([_extraPremiNumberField.text length]>0)||([_extraPremiPercentField.text length]>0)){
+                    if (masaExtraPremi != 1){
+                        [self createAlertViewAndShow:@"Masa extra premi harus sama dengan 1" tag:0];
+                        [textField setText:@""];
+                        [textField becomeFirstResponder];
+                    }
+                }
+                else{
+                    [self PremiDasarActB];
                 }
             }
             else{
-                [self PremiDasarActB];
+                if (([_extraPremiNumberField.text length]>0)||([_extraPremiPercentField.text length]>0)){
+                    if (masaExtraPremi<1 || masaExtraPremi>5){
+                        [self createAlertViewAndShow:@"Masa extra premi tidak boleh lebih dari 5 dan kurang dari 1" tag:0];
+                        [textField setText:@""];
+                        [textField becomeFirstResponder];
+                    }
+                }
+                else{
+                    [self PremiDasarActB];
+                }
             }
         }
         else{
             if (([_extraPremiNumberField.text length]>0)||([_extraPremiPercentField.text length]>0)){
-                if (masaExtraPremi<1 || masaExtraPremi>5){
-                    [self createAlertViewAndShow:@"Masa extra premi tidak boleh lebih dari 5 dan kurang dari 1" tag:0];
+                if (masaExtraPremi<1 || masaExtraPremi>10){
+                    [self createAlertViewAndShow:@"Masa extra premi tidak boleh lebih dari 10 dan kurang dari 1" tag:0];
                     [textField setText:@""];
                     [textField becomeFirstResponder];
                 }
             }
             else{
-                [self PremiDasarActB];
+                [self calculateRiderPremi];
             }
         }
+        
+        
     }
 
     
@@ -1817,6 +1839,7 @@ bool WPTPD30RisDeleted = FALSE;
     [numberFormatter setFormatterBehavior: NSNumberFormatterBehavior10_4];
     [numberFormatter setNumberStyle: NSNumberFormatterDecimalStyle];
     //[numberFormatter setRoundingMode:NSNumberFormatterRoundUp];
+    [numberFormatter setRoundingMode:NSNumberFormatterRoundHalfUp];
     [numberFormatter setMaximumFractionDigits:0];
     [numberFormatter setMinimumFractionDigits:0];
     
@@ -2211,7 +2234,7 @@ bool WPTPD30RisDeleted = FALSE;
     [formatter setMaximumFractionDigits:0];
     [formatter setUsesGroupingSeparator:YES];
     [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
-    
+    [formatter setRoundingMode:NSNumberFormatterRoundHalfUp];
     
     double entryFieldFloat = [_basicPremiField.text doubleValue];
     
@@ -2262,9 +2285,10 @@ bool WPTPD30RisDeleted = FALSE;
     NSString *result;
     
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc]init];
-    [formatter setMaximumFractionDigits:2];
+    [formatter setMaximumFractionDigits:0];
     [formatter setUsesGroupingSeparator:YES];
     [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    [formatter setRoundingMode:NSNumberFormatterRoundHalfUp];
     
     double entryFieldFloat = [_extraBasicPremiField.text doubleValue];
     

@@ -1524,7 +1524,6 @@ id dobtemp;
        // [_BtnTanggalLahir setBackgroundColor:[UIColor redColor]];
         return false;
     }
-    
     else if ([[_poDictionaryPO valueForKey:@"RelWithLA"] isEqualToString:@"ORANG TUA"]){
         if ((diffDaysValiation <180)||(age >17)){
             [self createAlertViewAndShow:validationUsiaParents tag:0];
