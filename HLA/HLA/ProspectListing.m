@@ -27,7 +27,7 @@
 
 @implementation ProspectListing
 @synthesize ProspectTableData, FilteredProspectTableData, isFiltered;
-@synthesize txtIDTypeNo,btnGroup,groupLabel;
+@synthesize txtIDTypeNo,btnGroup,groupLabel,txtIDNumber;
 @synthesize EditProspect = _EditProspect;
 @synthesize ProspectViewController = _ProspectViewController;
 @synthesize idNoLabel,idTypeLabel,clientNameLabel,editBtn,deleteBtn,nametxt;
@@ -1288,7 +1288,7 @@ MBProgressHUD *HUD;
         sortedBy=@"DateModified";
     }
     
-    ProspectTableData=[modelProspectProfile searchProspectProfileByName:nametxt.text BranchName:_txtBranchName.text DOB:_outletDOB.titleLabel.text Order:sortedBy Method:sortMethod];
+    ProspectTableData=[modelProspectProfile searchProspectProfileByName:nametxt.text BranchName:_txtBranchName.text DOB:_outletDOB.titleLabel.text Order:sortedBy Method:sortMethod ID:txtIDNumber.text];
     [self getMobileNo];
     TotalData = ProspectTableData.count;
     [self.myTableView reloadData];
@@ -1561,7 +1561,7 @@ MBProgressHUD *HUD;
             sqlite3_close(contactDB);
             querySQL = Nil;
         }*/
-        ProspectTableData=[modelProspectProfile searchProspectProfileByName:nametxt.text BranchName:_txtBranchName.text DOB:_outletDOB.titleLabel.text Order:@"ProspectName" Method:@"ASC"];
+        ProspectTableData=[modelProspectProfile searchProspectProfileByName:nametxt.text BranchName:_txtBranchName.text DOB:_outletDOB.titleLabel.text Order:@"ProspectName" Method:@"ASC" ID:txtIDNumber.text];
     }
     [self getMobileNo];
     

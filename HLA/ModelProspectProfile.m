@@ -224,7 +224,7 @@
     return dataPrefix;
 }
 
--(NSMutableArray *)searchProspectProfileByName:(NSString *)searchName BranchName:(NSString *)branchName DOB:(NSString *)dateOfBirth Order:(NSString *)orderBy Method:(NSString *)method{
+-(NSMutableArray *)searchProspectProfileByName:(NSString *)searchName BranchName:(NSString *)branchName DOB:(NSString *)dateOfBirth Order:(NSString *)orderBy Method:(NSString *)method ID:(NSString *)IDNumber{
     NSString *ProspectID = @"";
     NSString *NickName = @"";
     NSString *ProspectName = @"";
@@ -308,20 +308,20 @@
     //results = [database executeQuery:@"SELECT * FROM prospect_profile WHERE QQFlag = 'false'  order by LOWER(ProspectName) ASC LIMIT 20)", Nil];
     FMResultSet *s;
     if ([dateOfBirth length]>0){
-        s = [database executeQuery:[NSString stringWithFormat:@"SELECT * FROM prospect_profile WHERE ProspectName like \"%%%@%%\" and BranchName like \"%%%@%%\" and ProspectDOB = \"%@\" and QQFlag = 'false'  order by LOWER(\"%@\") %@",searchName,branchName,dateOfBirth,orderBy,method]];
+        s = [database executeQuery:[NSString stringWithFormat:@"SELECT * FROM prospect_profile WHERE ProspectName like \"%%%@%%\" and OtherIDTypeNo like \"%%%@%%\"  and BranchName like \"%%%@%%\" and ProspectDOB = \"%@\" and QQFlag = 'false'  order by LOWER(\"%@\") %@",searchName, IDNumber,branchName,dateOfBirth,orderBy,method]];
 
-        NSLog(@"query %@",[NSString stringWithFormat:@"SELECT * FROM prospect_profile WHERE ProspectName like \"%%%@%%\" and BranchName like \"%%%@%%\" and ProspectDOB = \"%@\" and QQFlag = 'false'  order by LOWER(\"%@\") %@",searchName,branchName,dateOfBirth,orderBy,method]);
+        NSLog(@"query %@",[NSString stringWithFormat:@"SELECT * FROM prospect_profile WHERE ProspectName like \"%%%@%%\" and OtherIDTypeNo like \"%%%@%%\" and BranchName like \"%%%@%%\" and ProspectDOB = \"%@\" and QQFlag = 'false'  order by LOWER(\"%@\") %@",searchName, IDNumber, branchName,dateOfBirth,orderBy,method]);
     }
     else if ([orderBy isEqualToString:@"ProspectDOB"]){
-        s = [database executeQuery:[NSString stringWithFormat:@"SELECT *, (select substr(ProspectDOB,7,4)||'-'||substr(ProspectDOB,4,2)||'-'||substr(ProspectDOB,1,2)) as properDB FROM prospect_profile WHERE ProspectName like \"%%%@%%\" and BranchName like \"%%%@%%\" and QQFlag = 'false'  order by date(properDB) %@",searchName,branchName,method]];
+        s = [database executeQuery:[NSString stringWithFormat:@"SELECT *, (select substr(ProspectDOB,7,4)||'-'||substr(ProspectDOB,4,2)||'-'||substr(ProspectDOB,1,2)) as properDB FROM prospect_profile WHERE ProspectName like \"%%%@%%\" and OtherIDTypeNo like \"%%%@%%\" and BranchName like \"%%%@%%\" and QQFlag = 'false'  order by date(properDB) %@",searchName, IDNumber,branchName,method]];
     }
     else if ([orderBy isEqualToString:@"DateCreated"]||[orderBy isEqualToString:@"DateModified"]){
-        s = [database executeQuery:[NSString stringWithFormat:@"SELECT * FROM prospect_profile WHERE ProspectName like \"%%%@%%\" and BranchName like \"%%%@%%\" and QQFlag = 'false'  order by datetime(%@) %@",searchName,branchName,orderBy,method]];
+        s = [database executeQuery:[NSString stringWithFormat:@"SELECT * FROM prospect_profile WHERE ProspectName like \"%%%@%%\" and OtherIDTypeNo like \"%%%@%%\" and BranchName like \"%%%@%%\" and QQFlag = 'false'  order by datetime(%@) %@",searchName, IDNumber,branchName,orderBy,method]];
     }
     else{
-        s = [database executeQuery:[NSString stringWithFormat:@"SELECT * FROM prospect_profile WHERE ProspectName like \"%%%@%%\" and BranchName like \"%%%@%%\" and QQFlag = 'false'  order by %@ %@",searchName,branchName,orderBy,method]];
+        s = [database executeQuery:[NSString stringWithFormat:@"SELECT * FROM prospect_profile WHERE ProspectName like \"%%%@%%\" and OtherIDTypeNo like \"%%%@%%\" and BranchName like \"%%%@%%\" and QQFlag = 'false'  order by %@ %@",searchName, IDNumber,branchName,orderBy,method]];
 
-        NSLog(@"query %@",[NSString stringWithFormat:@"SELECT * FROM prospect_profile WHERE ProspectName like \"%%%@%%\" and BranchName like \"%%%@%%\" and QQFlag = 'false'  order by LOWER(\"%@\") %@",searchName,branchName,orderBy,method]);
+        NSLog(@"query %@",[NSString stringWithFormat:@"SELECT * FROM prospect_profile WHERE ProspectName like \"%%%@%%\" and OtherIDTypeNo like \"%%%@%%\" and BranchName like \"%%%@%%\" and QQFlag = 'false'  order by LOWER(\"%@\") %@",searchName,IDNumber, branchName,orderBy,method]);
     }
     
     while ([s next]) {

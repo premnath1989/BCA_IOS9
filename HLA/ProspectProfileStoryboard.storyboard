@@ -3340,16 +3340,6 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="GR8-70-6tt">
-                                <rect key="frame" x="841" y="138" width="95" height="29"/>
-                                <segments>
-                                    <segment title="Asc"/>
-                                    <segment title="Desc"/>
-                                </segments>
-                                <connections>
-                                    <action selector="segOrderBy:" destination="R2U-dm-XLx" eventType="valueChanged" id="Hwz-Ej-fum"/>
-                                </connections>
-                            </segmentedControl>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Tanggal Lahir" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="dhn-EJ-lPP">
                                 <rect key="frame" x="10" y="121" width="137" height="31"/>
                                 <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
@@ -3419,6 +3409,16 @@
                                 <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="GR8-70-6tt">
+                                <rect key="frame" x="660" y="178" width="95" height="29"/>
+                                <segments>
+                                    <segment title="Asc"/>
+                                    <segment title="Desc"/>
+                                </segments>
+                                <connections>
+                                    <action selector="segOrderBy:" destination="R2U-dm-XLx" eventType="valueChanged" id="Hwz-Ej-fum"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -3450,6 +3450,7 @@
                         <outlet property="outletDOB" destination="t2P-Dg-3ef" id="ncA-nu-0cf"/>
                         <outlet property="outletOrder" destination="GR8-70-6tt" id="xRI-0u-POk"/>
                         <outlet property="txtBranchName" destination="7hN-Tk-v6C" id="wjZ-SG-fa4"/>
+                        <outlet property="txtIDNumber" destination="WA0-62-UQv" id="jmE-EF-KGo"/>
                         <outlet property="txtIDTypeNo" destination="D2p-GA-zG8" id="Zq9-TT-Mko"/>
                     </connections>
                 </viewController>
