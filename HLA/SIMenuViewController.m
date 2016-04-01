@@ -5282,6 +5282,7 @@ BOOL isFirstLoad;
         [loginDB duplicateRow:@"SI_PO_Data" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
         [loginDB duplicateRow:@"SI_Temp_Trad_Raider" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
     }
+    [self LoadViewController];
 }
 
 
