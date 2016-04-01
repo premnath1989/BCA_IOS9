@@ -781,7 +781,6 @@
 		C4FCDDE816395F290065D024 /* btn_prospect_home.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FCDDDC16395F290065D024 /* btn_prospect_home.png */; };
 		C4FCDDEB16395F290065D024 /* btn_setting_home.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FCDDDF16395F290065D024 /* btn_setting_home.png */; };
 		C4FCDDEC16395F290065D024 /* btn_SI_home.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FCDDE016395F290065D024 /* btn_SI_home.png */; };
-		DE050BE51C9BF52B00AA6D45 /* BCA_life_Keluargaku_Video_Testimonial_Part_I_final.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = DE050BE41C9BF52B00AA6D45 /* BCA_life_Keluargaku_Video_Testimonial_Part_I_final.mp4 */; };
 		DE06FFCE1CABBC2800E4DE3A /* xibLibrary.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DE06FFCD1CABBC2800E4DE3A /* xibLibrary.bundle */; };
 		DE06FFD21CABCB8200E4DE3A /* libFTPFileSynchronization.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DE06FFD11CABCB8200E4DE3A /* libFTPFileSynchronization.a */; };
 		DE1CC9621CA284A70058B595 /* PremiumKeluargaku.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE1CC9611CA284A70058B595 /* PremiumKeluargaku.xib */; };
@@ -2148,7 +2147,6 @@
 		C4FCDDDC16395F290065D024 /* btn_prospect_home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_prospect_home.png; sourceTree = "<group>"; };
 		C4FCDDDF16395F290065D024 /* btn_setting_home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_setting_home.png; sourceTree = "<group>"; };
 		C4FCDDE016395F290065D024 /* btn_SI_home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_SI_home.png; sourceTree = "<group>"; };
-		DE050BE41C9BF52B00AA6D45 /* BCA_life_Keluargaku_Video_Testimonial_Part_I_final.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = BCA_life_Keluargaku_Video_Testimonial_Part_I_final.mp4; sourceTree = "<group>"; };
 		DE06FFCB1CABBBC800E4DE3A /* xibLibrary.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = xibLibrary.bundle; path = FTPSync/xibLibrary.bundle; sourceTree = "<group>"; };
 		DE06FFCD1CABBC2800E4DE3A /* xibLibrary.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = xibLibrary.bundle; path = FTPSync/xibLibrary.bundle; sourceTree = "<group>"; };
 		DE06FFD11CABCB8200E4DE3A /* libFTPFileSynchronization.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFTPFileSynchronization.a; path = FTPSync/libFTPFileSynchronization.a; sourceTree = "<group>"; };
@@ -4091,7 +4089,6 @@
 			children = (
 				DE06FFCD1CABBC2800E4DE3A /* xibLibrary.bundle */,
 				43F7C3161C9D409D0074F464 /* Formatter */,
-				DE050BE41C9BF52B00AA6D45 /* BCA_life_Keluargaku_Video_Testimonial_Part_I_final.mp4 */,
 				43FA6C151C87CD5D0098BA47 /* HTML USED */,
 				AA4EF77D1C8687DC0050CCD8 /* Brochure */,
 				AA4EF6E61C85A3F20050CCD8 /* PDFReader */,
@@ -4945,7 +4942,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE06FFCE1CABBC2800E4DE3A /* xibLibrary.bundle in Resources */,
-				DE050BE51C9BF52B00AA6D45 /* BCA_life_Keluargaku_Video_Testimonial_Part_I_final.mp4 in Resources */,
 				AA4EF77B1C8687CF0050CCD8 /* Brochure_ProdukBCALIfeKeluargaku_21012016.pdf in Resources */,
 				AA4EF77C1C8687CF0050CCD8 /* Brochure_ProdukBCALIfeKeluargaku.pdf in Resources */,
 				178A076C1C8232A100B91582 /* BCA_Rates.sqlite in Resources */,

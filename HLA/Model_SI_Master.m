@@ -86,6 +86,7 @@
     NSMutableArray* arrayProposalStatus=[[NSMutableArray alloc] init];
     NSMutableArray* arraySIVersion=[[NSMutableArray alloc] init];
     NSMutableArray* arraySIQQ=[[NSMutableArray alloc] init];
+    NSMutableArray* arrayEdit=[[NSMutableArray alloc] init];
     
    // FMResultSet *s = [database executeQuery:@"SELECT sim.*, po.ProductName,po.PO_Name,premi.Sum_Assured FROM SI_master sim, SI_PO_Data po,SI_Premium premi WHERE sim.SINO = po.SINO and sim.SINO = premi.SINO"];
      FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select sim.*, po.ProductName,po.PO_Name,ifnull(sip.Sum_Assured,0) as Sum_Assured, po.QuickQuote FROM SI_master sim left join SI_PO_Data po on sim.SINO=po.SINO left join SI_Premium sip on sim.SINO=sip.SINO group by sim.ID order by %@ %@",orderBy,sortMethod]];
@@ -101,6 +102,8 @@
         NSString *stringSIVersion = [NSString stringWithFormat:@"%@",[s stringForColumn:@"SI_Version"]];
         NSString *sumAssured = [NSString stringWithFormat:@"%@",[s stringForColumn:@"Sum_Assured"]];
         NSString *qqStr = [NSString stringWithFormat:@"%@",[s stringForColumn:@"QuickQuote"]];
+        NSString *editStr = [NSString stringWithFormat:@"%@",[s stringForColumn:@"EnableEditing"]];
+        
         
         NSLog(@"sumassured %@",sumAssured);
         [arraySINo addObject:stringSINo];
@@ -111,8 +114,9 @@
         [arrayProposalStatus addObject:stringProposalStatus];
         [arraySIVersion addObject:stringSIVersion];
         [arraySIQQ addObject:qqStr];
+        [arrayEdit addObject:editStr];
     }
-    dict = [[NSDictionary alloc] initWithObjectsAndKeys:arraySINo,@"SINO", arrayCreatedDate,@"CreatedDate", arrayPOName,@"PO_Name",arrayProductName,@"ProductName",arrayProposalStatus,@"ProposalStatus",arraySIVersion,@"SI_Version",arraySumAssured,@"Sum_Assured", arraySIQQ, @"QuickQuote", nil];
+    dict = [[NSDictionary alloc] initWithObjectsAndKeys:arraySINo,@"SINO", arrayCreatedDate,@"CreatedDate", arrayPOName,@"PO_Name",arrayProductName,@"ProductName",arrayProposalStatus,@"ProposalStatus",arraySIVersion,@"SI_Version",arraySumAssured,@"Sum_Assured", arraySIQQ, @"QuickQuote",arrayEdit, @"EnableEditing", nil];
     
     [results close];
     [database close];
@@ -149,6 +153,7 @@
     NSMutableArray* arrayProposalStatus=[[NSMutableArray alloc] init];
     NSMutableArray* arraySIVersion=[[NSMutableArray alloc] init];
     NSMutableArray* arrayQQ=[[NSMutableArray alloc] init];
+    NSMutableArray* arrayEdit=[[NSMutableArray alloc] init];
     
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
@@ -179,6 +184,8 @@
         NSString *stringSIVersion = [NSString stringWithFormat:@"%@",[s stringForColumn:@"SI_Version"]];
         NSString *sumAssured = [NSString stringWithFormat:@"%@",[s stringForColumn:@"Sum_Assured"]];
         NSString *qqStr = [NSString stringWithFormat:@"%@",[s stringForColumn:@"QuickQuote"]];
+        NSString *editStr = [NSString stringWithFormat:@"%@",[s stringForColumn:@"EnableEditing"]];
+        
         
         [arraySINo addObject:stringSINo];
         [arrayCreatedDate addObject:stringCreatedDate];
@@ -188,8 +195,9 @@
         [arrayProposalStatus addObject:stringProposalStatus];
         [arraySIVersion addObject:stringSIVersion];
         [arrayQQ addObject:qqStr];
+        [arrayEdit addObject:editStr];
     }
-    dict = [[NSDictionary alloc] initWithObjectsAndKeys:arraySINo,@"SINO", arrayCreatedDate,@"CreatedDate", arrayPOName,@"PO_Name",arrayProductName,@"ProductName",arrayProposalStatus,@"ProposalStatus",arraySIVersion,@"SI_Version",arraySumAssured,@"Sum_Assured",arrayQQ, @"QuickQuote", nil];
+    dict = [[NSDictionary alloc] initWithObjectsAndKeys:arraySINo,@"SINO", arrayCreatedDate,@"CreatedDate", arrayPOName,@"PO_Name",arrayProductName,@"ProductName",arrayProposalStatus,@"ProposalStatus",arraySIVersion,@"SI_Version",arraySumAssured,@"Sum_Assured",arrayQQ, @"QuickQuote", arrayEdit, @"EnableEditing", nil];
     
     [results close];
     [database close];

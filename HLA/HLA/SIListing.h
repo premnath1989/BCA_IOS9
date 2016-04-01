@@ -74,6 +74,7 @@
 @property (retain, nonatomic) NSMutableArray *SIVersion;
 @property (retain, nonatomic) NSMutableArray *SIValidStatus;
 @property (retain, nonatomic) NSMutableArray *SIQQStatus;
+@property (retain, nonatomic) NSMutableArray *SIEditStatus;
 
 @property (retain, nonatomic) NSMutableArray *FilteredSINO;
 @property (retain, nonatomic) NSMutableArray *FilteredDateCreated;

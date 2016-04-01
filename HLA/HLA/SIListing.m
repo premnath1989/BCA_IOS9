@@ -31,7 +31,7 @@
 @synthesize outletGender;
 @synthesize outletEdit;
 @synthesize lblSINO, DBDateTo, DBDateFrom,OrderBy;
-@synthesize lblDateCreated, SIQQStatus;
+@synthesize lblDateCreated, SIQQStatus, SIEditStatus;
 @synthesize lblName;
 @synthesize lblPlan;
 @synthesize lblBasicSA;
@@ -534,11 +534,17 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
         [cell.labelSumAssured setText:[BasicSA objectAtIndex:indexPath.row]];
         //[cell.labelSumAssured setText:@"0"];
         
+        NSString *status = @"";
         if([[SIQQStatus objectAtIndex:indexPath.row] caseInsensitiveCompare:@"false"] == NSOrderedSame){
-            [cell.labelStatus setText:@""];
+            status = @"";
         }else{
-            [cell.labelStatus setText:@"QS"];
+            status = @"Q";
         }
+        
+        if([[SIEditStatus objectAtIndex:indexPath.row] caseInsensitiveCompare:@"0"] == NSOrderedSame){
+            status = [NSString stringWithFormat:@"%@S",status];
+        }
+        [cell.labelStatus setText:status];
     }
     /*UITableViewCell *cell = [self.myTableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
@@ -829,6 +835,7 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
     SIVersion = [[NSMutableArray alloc] initWithArray:[dictIlustrationData valueForKey:@"SI_Version"]];
     BasicSA = [[NSMutableArray alloc] initWithArray:[dictIlustrationData valueForKey:@"Sum_Assured"]];
     SIQQStatus =[[NSMutableArray alloc] initWithArray:[dictIlustrationData valueForKey:@"QuickQuote"]];
+    SIEditStatus = [[NSMutableArray alloc] initWithArray:[dictIlustrationData valueForKey:@"EnableEditing"]];
     
     NSLog(@"SINO %@",dictIlustrationData);
 }

@@ -100,7 +100,6 @@
         lblTotalBulan.text = @""; lblBPTahun.text = @"";
         lblBPKuartal.text = @""; lblBPBulan.text = @"";
         lblAsuransiDasarKuartal.text = @""; lblAsuransiDasarBulan.text = @"";
-
         
         lblAsuransiDasarSemester.text = [tempResult valueForKey:@"PremiumPolicyA"];
         lblOccpSemester.text = [tempResult valueForKey:@"TotalPremiumLoading"];
@@ -113,7 +112,6 @@
         lblMDBKKSemester.text = [DBclass RiderCode:SINO riderCode:@"MDBKK"];
         lblMDKKSemester.text = [DBclass RiderCode:SINO riderCode:@"MDKK"];
         lblBPSemester.text = [DBclass RiderCode:SINO riderCode:@"BP"];
-        
     }else if([PaymentFreq caseInsensitiveCompare:@"Kuartal"] == NSOrderedSame){
         
         lblAsuransiDasarTahun.text = @""; lblAsuransiDasarSemester.text = @"";
