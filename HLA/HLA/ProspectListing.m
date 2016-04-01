@@ -301,7 +301,6 @@ MBProgressHUD *HUD;
                                                                    fromDate:currentDate
                                                                      toDate:expireDate
                                                                     options:NSCalendarWrapComponents];
-            //NSLog(@"%i", [componentsDay day]);
             int days1 = [componentsDay day];
             
             int countdown = -[currentDate timeIntervalSinceDate:expireDate];//pay attention here.
@@ -315,9 +314,17 @@ MBProgressHUD *HUD;
                 int indexArray = [dataIndex indexOfObject:pp.ProspectID];
                 [cell1.labelPhone1 setText:[NSString stringWithFormat:@"%@ - %@",[dataPrefix objectAtIndex:indexArray],[dataMobile objectAtIndex:indexArray]]];
             }
+            NSString *identityType = @"";
+            if([pp.OtherIDType caseInsensitiveCompare:@"1"]==NSOrderedSame){
+                identityType = @"KTP";
+            }else if([pp.OtherIDType caseInsensitiveCompare:@"2"]==NSOrderedSame){
+                identityType = @"PASSPOR";
+            }
+            
+            NSString *identity = [NSString stringWithFormat:@"%@ : %@",identityType, pp.OtherIDTypeNo];
             
             [cell1.labelName setText:pp.ProspectName];
-            [cell1.labelidNum setText:pp.OtherIDTypeNo];
+            [cell1.labelidNum setText:identity];
             [cell1.labelDOB setText:pp.ProspectDOB];
             [cell1.labelBranchName setText:pp.BranchName];
             //[cell1.labelPhone1 setText:@""];

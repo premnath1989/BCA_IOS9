@@ -31,7 +31,7 @@
 @synthesize outletGender;
 @synthesize outletEdit;
 @synthesize lblSINO, DBDateTo, DBDateFrom,OrderBy;
-@synthesize lblDateCreated;
+@synthesize lblDateCreated, SIQQStatus;
 @synthesize lblName;
 @synthesize lblPlan;
 @synthesize lblBasicSA;
@@ -183,12 +183,12 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
 		NSString *SIListingSQL;
 		if ([TradOrEver isEqualToString:@"TRAD"]) {
 			SIListingSQL = [NSString stringWithFormat:
-                            @"select A.Sino, B.createdAT, name, planname, basicSA, F.Status, A.CustCode, B.SIVersion, B.SIStatus, G.ProspectName "
+                            @"select A.Sino, B.createdAT, name, planname, basicSA, F.Status, A.CustCode, B.SIVersion, B.SIStatus, G.ProspectName, G.QQFlag "
 							" from trad_lapayor as A, trad_details as B, clt_profile as C, trad_sys_profile as D, eProposal as E, eProposal_Status as F, prospect_profile as G, eApp_Listing as H "
 							" where A.sino = B.sino and A.CustCode = C.custcode and B.plancode = D.plancode AND A.Sequence = 1 AND A.ptypeCode = \"LA\" AND E.Sino = A.Sino "
                             " AND H.Status = F.StatusCode AND C.IndexNo = G.IndexNo AND E.eproposalNo = H.proposalNo "
 							"union "
-							"select A.Sino, B.createdAT, name, planname, basicSA, 'Not Created', A.CustCode, B.SIVersion, B.SIStatus, E.ProspectName   from Trad_lapayor as A, "
+							"select A.Sino, B.createdAT, name, planname, basicSA, 'Not Created', A.CustCode, B.SIVersion, B.SIStatus, E.ProspectName, E.QQFlag   from Trad_lapayor as A, "
 							"Trad_details as B, clt_profile as C, trad_sys_profile as D, prospect_profile as E  where A.sino = B.sino and A.CustCode = C.custcode and B.plancode = D.plancode "
 							"AND A.Sequence = 1 AND A.ptypeCode = 'LA' AND A.sino not in (select sino from eProposal)  AND C.IndexNo = E.IndexNo "]; 
             
@@ -255,12 +255,12 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
 				SIListingSQL = [SIListingSQL stringByAppendingFormat:@" order by %@ %@ ", Sorting, OrderBy ];
 			}
 		} else { //for Ever
-			SIListingSQL = [NSString stringWithFormat:@"select A.Sino, B.DateCreated, name, planname, basicSA, F.Status, A.CustCode, B.SIVersion, B.SIStatus, G.ProspectName "
+			SIListingSQL = [NSString stringWithFormat:@"select A.Sino, B.DateCreated, name, planname, basicSA, F.Status, A.CustCode, B.SIVersion, B.SIStatus, G.ProspectName, G.QQFlag "
 							" from UL_lapayor as A, UL_details as B, clt_profile as C, trad_sys_profile as D, eProposal as E, eProposal_Status as F, prospect_profile as G  "
 							" where A.sino = B.sino and A.CustCode = C.custcode and B.plancode = D.plancode AND A.Seq = 1 AND A.ptypeCode = \"LA\" "
 							"AND E.Sino = B.Sino AND E.Status = F.StatusCode AND C.IndexNo = G.IndexNo "
 							"Union "
-							"select A.Sino, B.DateCreated, name, planname, basicSA, 'Not Created', A.CustCode, B.SIVersion, B.SIStatus, E.ProspectName from UL_lapayor as A, UL_details as B, "
+							"select A.Sino, B.DateCreated, name, planname, basicSA, 'Not Created', A.CustCode, B.SIVersion, B.SIStatus, E.ProspectName, E.QQFlag from UL_lapayor as A, UL_details as B, "
 							"clt_profile as C, trad_sys_profile as D, prospect_profile as E  where A.sino = B.sino and A.CustCode = C.custcode and B.plancode = D.plancode AND A.Seq = 1 AND  "
 							"A.ptypeCode = 'LA' AND A.sino not in (select sino from eProposal) AND C.IndexNo = E.IndexNo "];
 			
@@ -339,6 +339,7 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
                 CustomerCode = [[NSMutableArray alloc] init ];
                 SIVersion = [[NSMutableArray alloc] init ];
                 SIValidStatus = [[NSMutableArray alloc] init ];
+                SIQQStatus  = [[NSMutableArray alloc] init ];
             } else {
                 [SINO removeAllObjects];
                 [DateCreated removeAllObjects];
@@ -349,6 +350,7 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
                 [CustomerCode removeAllObjects];
                 [SIVersion removeAllObjects];
                 [SIValidStatus removeAllObjects];
+                [SIQQStatus removeAllObjects];
             }
             
             NSString *SINumber;
@@ -356,6 +358,7 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
             NSString *ItemName;
             NSString *ItemPlanName;
             NSString *ItemBasicSA;
+            NSString *ItemQQFlag;
             NSString *ItemStatus;
             NSString *ItemCustomerCode;
             NSString *ItemSIVersion;
@@ -368,6 +371,7 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
                 ItemBasicSA = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 4)];
                 ItemStatus = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 5)];
                 ItemCustomerCode = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 6)];
+                ItemQQFlag = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 10)];
 				if (sqlite3_column_text(statement, 7) == NULL) {
 					ItemSIVersion = @"";
 				} else {
@@ -383,6 +387,7 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
                 [SINO addObject:SINumber];
                 [DateCreated addObject:ItemDateCreated ];
                 [Name addObject:ItemName ];
+                [SIQQStatus addObject:ItemQQFlag];
                 [PlanName addObject:ItemPlanName ];
                 [BasicSA addObject:ItemBasicSA ];
                 [SIStatus addObject:ItemStatus];
@@ -393,6 +398,7 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
                 SINumber = Nil;
                 ItemDateCreated = Nil;
                 ItemName = Nil;
+                ItemQQFlag = Nil;
                 ItemPlanName = Nil;
                 ItemBasicSA = Nil;
                 ItemStatus = Nil;
@@ -527,7 +533,12 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
         [cell.labelProduct setText:[PlanName objectAtIndex:indexPath.row]];
         [cell.labelSumAssured setText:[BasicSA objectAtIndex:indexPath.row]];
         //[cell.labelSumAssured setText:@"0"];
-        [cell.labelStatus setText:[SIStatus objectAtIndex:indexPath.row]];
+        
+        if([[SIQQStatus objectAtIndex:indexPath.row] caseInsensitiveCompare:@"false"] == NSOrderedSame){
+            [cell.labelStatus setText:@""];
+        }else{
+            [cell.labelStatus setText:@"QS"];
+        }
     }
     /*UITableViewCell *cell = [self.myTableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
@@ -817,7 +828,7 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
     SIStatus = [[NSMutableArray alloc] initWithArray:[dictIlustrationData valueForKey:@"ProposalStatus"]];
     SIVersion = [[NSMutableArray alloc] initWithArray:[dictIlustrationData valueForKey:@"SI_Version"]];
     BasicSA = [[NSMutableArray alloc] initWithArray:[dictIlustrationData valueForKey:@"Sum_Assured"]];
-    //BasicSA =[[NSMutableArray alloc]initWithObjects:[NSNumber numberWithDouble:0], nil];
+    SIQQStatus =[[NSMutableArray alloc] initWithArray:[dictIlustrationData valueForKey:@"QuickQuote"]];
     
     NSLog(@"SINO %@",dictIlustrationData);
 }
