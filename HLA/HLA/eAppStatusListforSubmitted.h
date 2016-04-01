@@ -1,6 +1,6 @@
 //
 //  eAppStatusListforSubmitted.h
-//  iMobile Planner
+//  MPOS
 //
 //  Created by Basvi on 7/08/14.
 //  Copyright (c) 2013 InfoConnect Sdn Bhd. All rights reserved.
