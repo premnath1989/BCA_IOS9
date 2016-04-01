@@ -1,6 +1,6 @@
 //
 //  IDTypeViewController.h
-//  testViewer
+//  MPOS
 //
 //  Created by Meng Cheong on 6/3/13.
 //  Copyright (c) 2013 Meng Cheong. All rights reserved.

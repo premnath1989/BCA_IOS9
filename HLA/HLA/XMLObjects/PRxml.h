@@ -1,9 +1,9 @@
 //
 //  PRxml.h
-//  HLA_InfoConnect
+//  MPOS
 //
 //  Created by compurex on 1/2/14.
-//  Copyright (c) 2014 compurex. All rights reserved.
+//  Copyright (c) 2014 InfoConnect Sdn Bhd. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

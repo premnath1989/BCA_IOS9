@@ -1,9 +1,9 @@
 //
 //  SIxml.m
-//  HLAInfoConnect
+//  MPOS
 //
 //  Created by compurex on 12/30/13.
-//  Copyright (c) 2013 compurex. All rights reserved.
+//  Copyright (c) 2013 InfoConnect Sdn Bhd. All rights reserved.
 //
 
 #import "SIxml.h"

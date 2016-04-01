@@ -1,9 +1,9 @@
 //
 //  P2Table.m
-//  HLA_CA
+//  MPOS
 //
 //  Created by Danial D. Moghaddam on 3/13/14.
-//  Copyright (c) 2014 Danial D. Moghaddam. All rights reserved.
+//  Copyright (c) 2014 InfoConnect Sdn Bhd. All rights reserved.
 //
 
 #import "P2Table.h"

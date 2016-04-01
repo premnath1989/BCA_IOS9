@@ -1,6 +1,6 @@
 //
 //  DBUpdater.h
-//  iMobile Planner
+//  MPOS
 //
 //  Created by CK Quek on 9/8/15.
 //  Copyright (c) 2015 InfoConnect Sdn Bhd. All rights reserved.
