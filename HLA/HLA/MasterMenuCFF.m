@@ -1,6 +1,6 @@
 //
 //  MasterMenuCFF.m
-//  iMobile Planner
+//  MPOS
 //
 //  Created for test on 6/28/13.
 //  Copyright (c) 2013 InfoConnect Sdn Bhd. All rights reserved.

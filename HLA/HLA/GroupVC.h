@@ -1,6 +1,6 @@
 //
 //  GroupVC.h
-//  iMobile Planner
+//  MPOS
 //
 //  Created by Emi on 21/11/14.
 //  Copyright (c) 2014 InfoConnect Sdn Bhd. All rights reserved.

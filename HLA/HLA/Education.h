@@ -1,6 +1,6 @@
 //
 //  Education.h
-//  iMobile Planner
+//  MPOS
 //
 //  Created by shawal sapuan on 7/2/13.
 //  Copyright (c) 2013 InfoConnect Sdn Bhd. All rights reserved.

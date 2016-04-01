@@ -1,9 +1,9 @@
 //
 //  GroupDelegate.h
-//  BLESS
+//  MPOS
 //
 //  Created by Erwin Lim  on 3/29/16.
-//  Copyright © 2016 Hong Leong Assurance. All rights reserved.
+//  Copyright © 2016 InfoConnect Sdn Bhd. All rights reserved.
 //
 
 #ifndef GroupDelegate_h
