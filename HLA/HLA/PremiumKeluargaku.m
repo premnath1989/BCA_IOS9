@@ -34,6 +34,9 @@
     classFormatter = [[Formatter alloc]init];
     riderCalculation = [[RiderCalculation alloc]init];
     
+    themeColour = [UIColor colorWithRed:218.0f/255.0f green:49.0f/255.0f blue:85.0f/255.0f alpha:1];
+    unHighlightColor = [UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1];
+    
     UIButton* infoButton = [UIButton buttonWithType: UIButtonTypeInfoLight];
     [infoButton addTarget:self action:@selector(simpanAct:) forControlEvents:UIControlEventTouchDown];
     
@@ -43,6 +46,7 @@
     [self setPremiTahunan];
     [self setPremiKuartalan];
     [self setPremiSemesteran];
+     [self setHighlightText];
 }
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil SINO:(NSString *)SiNo{
@@ -205,6 +209,85 @@
 }
 
 #pragma mark created by faiz
+-(void)setHighlightText{
+    [lblAsuransiDasarKuartal setTextColor:unHighlightColor];
+    //lblOccpKuartal;
+    [lblPremiPercentageKuartal setTextColor:unHighlightColor];
+    [lblPremiNumKuartal setTextColor:unHighlightColor];
+    [lblDiscountKuartal setTextColor:unHighlightColor];
+    [lblMDBKKKuartal setTextColor:unHighlightColor];
+    //lblMDKKKuartal;
+    [lblBPKuartal setTextColor:unHighlightColor];
+    
+    [lblAsuransiDasarSemester setTextColor:unHighlightColor];
+    //lblOccpSemester;
+    [lblPremiPercentageSemester setTextColor:unHighlightColor];
+    [lblPremiNumSemester setTextColor:unHighlightColor];
+    [lblDiscountSemester setTextColor:unHighlightColor];
+    [lblMDBKKSemester setTextColor:unHighlightColor];
+    //lblMDKKSemester;
+    [lblBPSemester setTextColor:unHighlightColor];
+    
+    [lblAsuransiDasarTahun setTextColor:unHighlightColor];
+    //lblOccpTahun;
+    [lblPremiPercentageTahun setTextColor:unHighlightColor];
+    [lblPremiNumTahun setTextColor:unHighlightColor];
+    [lblDiscountTahun setTextColor:unHighlightColor];
+    [lblMDBKKTahun setTextColor:unHighlightColor];
+    //lblMDKKTahun;
+    [lblBPTahun setTextColor:unHighlightColor];
+    
+    [lblAsuransiDasarBulan setTextColor:unHighlightColor];
+    //lblOccpBulan;
+    [lblPremiPercentageBulan setTextColor:unHighlightColor];
+    [lblPremiNumBulan setTextColor:unHighlightColor];
+    [lblDiscountBulan setTextColor:unHighlightColor];
+    [lblMDBKKBulan setTextColor:unHighlightColor];
+    //lblMDKKBulan;
+    [lblBPBulan setTextColor:unHighlightColor];
+    
+    if ([[_dictionaryForBasicPlan valueForKey:@"Payment_Frequency"] isEqualToString:@"Bulanan"]){
+        [lblAsuransiDasarBulan setTextColor:themeColour];
+        //lblOccpBulan;
+        [lblPremiPercentageBulan setTextColor:themeColour];
+        [lblPremiNumBulan setTextColor:themeColour];
+        [lblDiscountBulan setTextColor:themeColour];
+        [lblMDBKKBulan setTextColor:themeColour];
+        //lblMDKKBulan;
+        [lblBPBulan setTextColor:themeColour];
+    }
+    else if ([[_dictionaryForBasicPlan valueForKey:@"Payment_Frequency"] isEqualToString:@"Tahunan"]){
+        [lblAsuransiDasarTahun setTextColor:themeColour];
+        //lblOccpTahun;
+        [lblPremiPercentageTahun setTextColor:themeColour];
+        [lblPremiNumTahun setTextColor:themeColour];
+        [lblDiscountTahun setTextColor:themeColour];
+        [lblMDBKKTahun setTextColor:themeColour];
+        //lblMDKKTahun;
+        [lblBPTahun setTextColor:themeColour];
+    }
+    else if ([[_dictionaryForBasicPlan valueForKey:@"Payment_Frequency"] isEqualToString:@"Semester"]){
+        [lblAsuransiDasarSemester setTextColor:themeColour];
+        //lblOccpSemester;
+        [lblPremiPercentageSemester setTextColor:themeColour];
+        [lblPremiNumSemester setTextColor:themeColour];
+        [lblDiscountSemester setTextColor:themeColour];
+        [lblMDBKKSemester setTextColor:themeColour];
+        //lblMDKKSemester;
+        [lblBPSemester setTextColor:themeColour];
+    }
+    else if ([[_dictionaryForBasicPlan valueForKey:@"Payment_Frequency"] isEqualToString:@"Kuartal"]){
+        [lblAsuransiDasarKuartal setTextColor:themeColour];
+        //lblOccpKuartal;
+        [lblPremiPercentageKuartal setTextColor:themeColour];
+        [lblPremiNumKuartal setTextColor:themeColour];
+        [lblDiscountKuartal setTextColor:themeColour];
+        [lblMDBKKKuartal setTextColor:themeColour];
+        //lblMDKKKuartal;
+        [lblBPKuartal setTextColor:themeColour];
+    }
+}
+
 -(int)getDiscount:(int)PurchaseNumber PaymentFrequesncy:(int)paymentFrequency{
     NSString* RelWithLA=[_dictionaryPOForInsert valueForKey:@"RelWithLA"];
     NSString* PayorSex = [_dictionaryPOForInsert valueForKey:@"PO_Gender"];

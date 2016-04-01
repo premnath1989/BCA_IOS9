@@ -1480,7 +1480,7 @@ id dobtemp;
 
 - (bool)validationDataLifeAssured{
     bool valid=true;
-    NSString *PlanTypeProduct = [dictionaryPO valueForKey:@"ProductName"];
+    NSString *PlanTypeProduct = [_poDictionaryPO valueForKey:@"ProductName"];
 
     NSArray* validationSet=[[NSArray alloc]initWithObjects:@"",@"- SELECT -",@"- Select -",@"--Please Select--", nil];
     int DOBDate =[msgAge intValue];
@@ -1492,7 +1492,7 @@ id dobtemp;
     NSString *validation70=@"Usia tidak boleh lebih dari 70 tahun";
     NSString *validation180=@"Usia tidak boleh kurang dari 180 hari atau lebih dari 55 tahun";
     NSString *validationUsiaSuamiIstri=@"Usia tidak boleh kurang dari 19 atau lebih dari 55 tahun";
-    NSString *validationUsiaParents=@"Usia tidak boleh kurang dari 180 hari atau lebih dari 17 tahun";
+    NSString *validationUsiaParents=@"Usia tidak boleh kurang dari 180 hari atau lebih dari 18 tahun";
     
     //outletkodecabang
     NSString* namaTertangggung=nameField.text;
@@ -1558,7 +1558,7 @@ id dobtemp;
     
     else if([PlanTypeProduct isEqualToString:@"BCA Life Keluargaku"]){
         if ([[_poDictionaryPO valueForKey:@"RelWithLA"] isEqualToString:@"ORANG TUA"]){
-            if ((diffDaysValiation <180)||(age >17)){
+            if ((diffDaysValiation <180)||(age >18)){
                 [self createAlertViewAndShow:validationUsiaParents tag:0];
                 return false;
             }
