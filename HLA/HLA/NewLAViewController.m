@@ -3092,9 +3092,10 @@ id dobtanngal;
     if (textField == LANameField)
     {
         NSUInteger newLength = [textField.text length] + [string length] - range.length;
-        NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:@"ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz./@'()-"] invertedSet];
+        /*NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:@"ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz./@'()-"] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
-        return (([string isEqualToString:filtered]) && newLength <= 40);
+        return (([string isEqualToString:filtered]) && newLength <= 40);*/
+        return (newLength <= 40);
     }
 
     return YES;
