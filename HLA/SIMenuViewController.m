@@ -5265,10 +5265,13 @@ BOOL isFirstLoad;
     
     NSString *PlanType = [dictionaryPOForInsert valueForKey:@"ProductName"];
     if([PlanType isEqualToString:@"BCA Life Heritage Protection"]){
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Informasi"
-                                                        message:@"save tapped heritage belum d kerjakan"
-                                                       delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alert show];
+        NSString *oldSiNo = [dictionaryPOForInsert valueForKey:@"SINO"];
+        NSString *newSiNo = [self generateSINO];
+        
+        LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
+        [loginDB duplicateRow:@"SI_Master" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
+        [loginDB duplicateRow:@"SI_Premium" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
+        [loginDB duplicateRow:@"SI_PO_Data" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
     }else{
         NSString *oldSiNo = [dictionaryPOForInsert valueForKey:@"SINO"];
         NSString *newSiNo = [self generateSINO];
