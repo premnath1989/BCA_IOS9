@@ -99,7 +99,7 @@
         }
     }
     else{
-        if (([[dictPO valueForKey:@"PO_Gender"] isEqualToString:@"MALE"])||([[dictPO valueForKey:@"PO_Gender"] isEqualToString:@"Male"])){
+        if (([[dictPO valueForKey:@"LA_Gender"] isEqualToString:@"MALE"])||([[dictPO valueForKey:@"LA_Gender"] isEqualToString:@"Male"])){
             sex=@"Male";
         }
         else{
@@ -130,6 +130,7 @@
 
 #pragma mark - calculate 
 -(double)calculateBPPremi:(NSMutableDictionary *)dictCalculate DictionaryBasicPlan:(NSDictionary *)dictionaryBasicPlan DictionaryPO:(NSDictionary *)dictPO BasicCode:(NSString *)basicCode PaymentCode:(int)paymentCode PersonType:(NSString *)personType{
+    formatter = [[Formatter alloc]init];
     NSString *sex;
     if (([[dictPO valueForKey:@"RelWithLA"] isEqualToString:@"SELF"])||([[dictPO valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"])){
         if (([[dictPO valueForKey:@"LA_Gender"] isEqualToString:@"MALE"])||([[dictPO valueForKey:@"LA_Gender"] isEqualToString:@"Male"])){
@@ -164,13 +165,40 @@
     else{
         age = [[dictPO valueForKey:@"PO_Age"] integerValue];
     }
+    
+    
     double waiverRate = [self getWaiverRate:sex EntryAge:age PersonType:personType];
+    
+    NSString* stringWaiverRate = [formatter roundTwoDigit:waiverRate];
+    
     double MDBKK = [self calculateMDBKK:dictCalculate DictionaryBasicPlan:dictionaryBasicPlan DictionaryPO:dictPO BasicCode:basicCode PaymentCode:paymentCode PersonType:personType];
     double MDBKKLoading  = [self calculateMDBKKLoading:dictCalculate DictionaryBasicPlan:dictionaryBasicPlan DictionaryPO:dictPO BasicCode:basicCode PaymentCode:paymentCode PersonType:personType];
     
-    double bpRiderPremium = (waiverRate/100) * (MDBKK+MDBKKLoading);
-    double Rounded = 100.0 * floor((bpRiderPremium/100.0)+0.5);
+    /*NSDecimalNumberHandler *roundUp = [NSDecimalNumberHandler
+                                       decimalNumberHandlerWithRoundingMode:NSRoundUp
+                                       scale:-2
+                                       raiseOnExactness:NO
+                                       raiseOnOverflow:NO
+                                       raiseOnUnderflow:NO
+                                       raiseOnDivideByZero:YES];
+
+    NSDecimalNumber *waiverDecimal = [NSDecimalNumber decimalNumberWithString:stringWaiverRate];
+    NSDecimalNumber *waiverDecimalDivide = [NSDecimalNumber decimalNumberWithString:@"100"];
+    NSDecimalNumber *DecimalMDBKK = [[NSDecimalNumber alloc]initWithDouble:MDBKK];
+    NSDecimalNumber *DecimalMDBKKLoading = [[NSDecimalNumber alloc]initWithDouble:MDBKKLoading];
+
+    NSDecimalNumber *result = [waiverDecimal decimalNumberByDividingBy:waiverDecimalDivide];
+    NSDecimalNumber *premiDecimal = [DecimalMDBKK decimalNumberByAdding:DecimalMDBKKLoading];
+    NSDecimalNumber *totalResult = [result decimalNumberByMultiplyingBy:premiDecimal withBehavior:roundUp];
     
+    NSString* resultFromDecimal = [NSString stringWithFormat:@"%@",totalResult];*/
+    
+    double bpRiderPremium = (waiverRate/100) * (MDBKK+MDBKKLoading);
+    
+    int intbpRiderPremium = round(bpRiderPremium);
+    
+    double Rounded = 100.0 * floor((intbpRiderPremium/100.0)+0.5);
+    //double Rounded = [resultFromDecimal doubleValue];
     return Rounded;
 }
 

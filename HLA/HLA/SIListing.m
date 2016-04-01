@@ -1316,6 +1316,7 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
                 [_modelSIPremium deletePremium:[SINO objectAtIndex:index]];
                 [_modelSIPOData deletePOData:[SINO objectAtIndex:index]];
                 [_modelSIMaster deleteIlustrationMaster:[SINO objectAtIndex:index]];
+                [ItemToBeDeleted removeObject:[sorted objectAtIndex:a]];
             }
             
             //[myTableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];

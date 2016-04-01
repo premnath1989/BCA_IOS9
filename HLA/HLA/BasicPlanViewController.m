@@ -1320,13 +1320,13 @@ bool WPTPD30RisDeleted = FALSE;
     NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setFormatterBehavior: NSNumberFormatterBehavior10_4];
     [numberFormatter setNumberStyle: NSNumberFormatterDecimalStyle];
-    [numberFormatter setRoundingMode:NSNumberFormatterRoundHalfUp];
+    //[numberFormatter setRoundingMode:NSNumberFormatterRoundHalfUp];
     [numberFormatter setMaximumFractionDigits:0];
     [numberFormatter setMinimumFractionDigits:0];
 
     
-    //[_basicPremiField setText:[NSString stringWithFormat:@"%2f", test2]];
-    [_basicPremiField setText:[numberFormatter stringFromNumber:[NSNumber numberWithDouble:TotalA]]];
+    [_basicPremiField setText:[NSString stringWithFormat:@"%2f", test2]];
+    //[_basicPremiField setText:[numberFormatter stringFromNumber:[NSNumber numberWithDouble:TotalA]]];
     [self PremiDasarIncomeChange:_basicPremiField.text];
 }
 

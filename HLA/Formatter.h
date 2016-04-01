@@ -15,4 +15,5 @@
 -(NSString *)stringToCurrencyDecimalFormatted:(NSString  *)stringNumber;
 -(NSNumber *)convertNumberFromString:(NSString *)stringNumber;
 -(NSNumber *)convertNumberFromStringCurrency:(NSString *)stringNumber;
+-(NSString *)roundTwoDigit:(double)originalNumber;
 @end
