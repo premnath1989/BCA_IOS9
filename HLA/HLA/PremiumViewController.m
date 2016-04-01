@@ -10,6 +10,7 @@
 #import "MainScreen.h"
 #import "AppDelegate.h"
 #import "RiderViewController.h"
+#import "LoginDBManagement.h"
 
 @interface PremiumViewController (){
     NSNumberFormatter *Premformatter;
@@ -19,7 +20,7 @@
 @end
 
 @implementation PremiumViewController
-@synthesize lblMessage;
+@synthesize lblMessage, delegate;
 @synthesize WebView;
 @synthesize requestBasicSA,requestBasicHL,requestMOP,requestTerm,requestPlanCode,requestSINo,requestAge,requestOccpCode;
 @synthesize basicRate,LSDRate,riderCode,riderSA,riderHL1K,riderHL100,riderHLP,riderRate,riderTerm;
@@ -4494,5 +4495,35 @@
         [lblExtraPremiNumberTahunan setTextColor:themeColour];
     }
 }
+
+- (IBAction)simpanAct:(id)sender {
+    NSLog(@"simpan has been pressed");
+    
+    
+    UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Konfirmasi" message:@"Anda tidak dapat melakukan perubahan setelah simpan" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: @"cancel", nil];
+    [alert show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (buttonIndex) {
+        case 0:
+        {
+            NSLog(@"ok");
+            LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
+            [loginDB updateSIMaster:[self.requestSINo description] EnableEditing:@"0"];
+            
+            [delegate heritageSimpan];
+        }
+            break;
+        case 1:
+        {
+            // Do something for button #2
+            NSLog(@"cancel");
+        }
+            break;
+    }
+}
+
+
 
 @end

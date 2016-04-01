@@ -4571,7 +4571,14 @@
                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 </textAttributes>
                                 <items>
-                                    <navigationItem title="Premi" id="Grc-rY-MoE"/>
+                                    <navigationItem title="Premi" id="Grc-rY-MoE">
+                                        <barButtonItem key="rightBarButtonItem" title="Simpan" id="39S-wd-vPe">
+                                            <color key="tintColor" red="0.85490196080000003" green="0.19215686269999999" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
+                                            <connections>
+                                                <action selector="simpanAct:" destination="ejT-Sa-vKM" id="Ifi-R4-jbX"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
                                 </items>
                             </navigationBar>
                             <webView opaque="NO" contentMode="scaleToFill" id="mb7-5H-Zhs">

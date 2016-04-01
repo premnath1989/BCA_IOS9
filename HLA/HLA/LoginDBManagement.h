@@ -27,6 +27,7 @@
 - (int) DeviceStatus:(NSString *)AgentID;
 - (int) SpvStatus:(NSString *)spvID;
 - (void) updatePassword:(NSString *)newPassword;
+- (void) duplicateRow:(NSString *)tableName param:(NSString *)column oldValue:(NSString *)oldValue newValue:(NSString *)newValue;
 - (void) makeDBCopy;
 - (void) updateLoginDate;
 - (void) updateLogoutDate;

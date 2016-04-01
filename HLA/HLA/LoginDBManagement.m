@@ -612,6 +612,61 @@
     return nsdate;
 }
 
+- (void)duplicateRow:(NSString *)tableName param:(NSString *)column oldValue:(NSString *)oldValue newValue:(NSString *)newValue{
+    
+    if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
+    {
+        NSString *createSQL = [NSString stringWithFormat:@"CREATE TEMPORARY TABLE tmp AS SELECT * FROM %@ where %@=\"%@\"",tableName,column,oldValue];
+
+        BOOL success = [self sqlStatement:createSQL];
+
+        if (success)
+        {
+            if([tableName caseInsensitiveCompare:@"SI_Master"]==NSOrderedSame){
+            createSQL = [NSString stringWithFormat:@"UPDATE tmp SET %@ =\"%@\",EnableEditing='1',id = ((Select max(id) from %@)+1)",column,newValue,tableName];
+            }else if([tableName caseInsensitiveCompare:@"SI_Temp_Trad_Rider"]==NSOrderedSame){
+                createSQL = [NSString stringWithFormat:@"UPDATE tmp SET %@ =\"%@\",rowid = ((Select max(id) from %@)+1)",column,newValue,tableName];
+            }else{
+                createSQL = [NSString stringWithFormat:@"UPDATE tmp SET %@ =\"%@\",id = ((Select max(id) from %@)+1)",column,newValue,tableName];
+            }
+            success = [self sqlStatement:createSQL];
+
+            if (success)
+            {
+                createSQL = [NSString stringWithFormat:@"INSERT INTO %@ SELECT * FROM tmp",tableName];
+                success = [self sqlStatement:createSQL];
+
+                if(success)
+                {
+                    createSQL = @"DROP TABLE tmp";
+                    [self sqlStatement:createSQL];
+
+//                    if (success) {
+//                        createSQL = [NSString stringWithFormat:@"UPDATE %@ SET CustCode=\"%@\" WHERE CustCode='0'",tableName,nextCustCode];
+//
+//                        [self sqlStatement:createSQL];
+//                    }
+                }
+            }
+            
+        }
+    }
+}
+
+-(BOOL)sqlStatement:(NSString*)querySQL
+{
+    BOOL success = YES;
+    sqlite3_stmt *statement;
+    
+    int status = sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) ;
+    if ( status == SQLITE_OK) {
+        int errorCode = sqlite3_step(statement);
+        success = errorCode == SQLITE_DONE;
+        sqlite3_finalize(statement);
+    }
+    return  success;
+}
+
 -(NSString *)EditIllustration:(NSString *)SIno
 {
     

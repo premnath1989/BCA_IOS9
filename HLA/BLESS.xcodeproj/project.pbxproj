@@ -2152,6 +2152,7 @@
 		DE06FFCB1CABBBC800E4DE3A /* xibLibrary.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = xibLibrary.bundle; path = FTPSync/xibLibrary.bundle; sourceTree = "<group>"; };
 		DE06FFCD1CABBC2800E4DE3A /* xibLibrary.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = xibLibrary.bundle; path = FTPSync/xibLibrary.bundle; sourceTree = "<group>"; };
 		DE06FFD11CABCB8200E4DE3A /* libFTPFileSynchronization.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFTPFileSynchronization.a; path = FTPSync/libFTPFileSynchronization.a; sourceTree = "<group>"; };
+		DE07AF3D1CAE225100258521 /* PremiumViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PremiumViewControllerDelegate.h; sourceTree = "<group>"; };
 		DE1CC95E1CA283850058B595 /* PremiumKeluargaku.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PremiumKeluargaku.h; sourceTree = "<group>"; };
 		DE1CC9611CA284A70058B595 /* PremiumKeluargaku.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PremiumKeluargaku.xib; sourceTree = "<group>"; };
 		DE38E4891CAA25E300B3051B /* GroupDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GroupDelegate.h; sourceTree = "<group>"; };
@@ -4705,6 +4706,7 @@
 				EFFC253616E7219400313A96 /* HLViewController.m */,
 				EF059855161A9373004A9095 /* PremiumViewController.h */,
 				EF059854161A9373004A9095 /* PremiumViewController.m */,
+				DE07AF3D1CAE225100258521 /* PremiumViewControllerDelegate.h */,
 				EFB9389C161C3CB800B97101 /* BasicPlanHandler.h */,
 				EFB9389D161C3CB800B97101 /* BasicPlanHandler.m */,
 				DE1CC95E1CA283850058B595 /* PremiumKeluargaku.h */,

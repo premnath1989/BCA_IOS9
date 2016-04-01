@@ -12,7 +12,6 @@
 #import "RiderViewController.h"
 #import "SecondLAViewController.h"
 #import "PayorViewController.h"
-#import "PremiumViewController.h"
 #import "MainScreen.h"
 #import "ReportViewController.h"
 #import "BrowserViewController.h"
@@ -32,6 +31,7 @@
 #import "PremiumKeluargaku.h"
 #import "UIView+viewRecursion.h"
 #import "LoginDBManagement.h"
+#import "PremiumViewController.h"
 
 #define TRAD_PAYOR_FIRSTLA  @"0"
 #define TRAD_PAYOR_SECONDLA  @"1"
@@ -52,7 +52,7 @@
 @end
 @implementation SIMenuViewController
 
-@synthesize outletSaveAs;
+@synthesize outletSaveAs, SaveSINO;
 @synthesize myTableView, SIshowQuotation;
 @synthesize RightView,EAPPorSI;
 @synthesize ListOfSubMenu,SelectedRow;
@@ -570,19 +570,26 @@ BOOL isFirstLoad;
 
 -(void)LoadIlustrationPage
 {
-    if (_salesIlustrationViewController == nil) {
-        _salesIlustrationViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SalesIlustration"];
-        //_LAController.delegate = self;
+    LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
+    NSString *EditMode = [loginDB EditIllustration:[dictionaryPOForInsert valueForKey:@"SINO"]];
+    NSLog(@" Edit Mode %@ : %@", EditMode, [dictionaryPOForInsert valueForKey:@"SINO"]);
+    //disable all text fields
+    if([EditMode caseInsensitiveCompare:@"0"] == NSOrderedSame){
+    
+        if (_salesIlustrationViewController == nil) {
+            _salesIlustrationViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SalesIlustration"];
+            //_LAController.delegate = self;
+            [_salesIlustrationViewController setDictionaryPOForInsert:dictionaryPOForInsert];
+            [_salesIlustrationViewController setDictionaryForBasicPlan:newDictionaryForBasicPlan];
+        }
         [_salesIlustrationViewController setDictionaryPOForInsert:dictionaryPOForInsert];
         [_salesIlustrationViewController setDictionaryForBasicPlan:newDictionaryForBasicPlan];
-        //[self.RightView addSubview:_salesIlustrationViewController.view];
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:_salesIlustrationViewController];
+        [self presentViewController:navController animated:YES completion:nil];
+    }else{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Simpan terlebih dahulu ilustrasi." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
+        [alert show];
     }
-    [_salesIlustrationViewController setDictionaryPOForInsert:dictionaryPOForInsert];
-    [_salesIlustrationViewController setDictionaryForBasicPlan:newDictionaryForBasicPlan];
-    //[self.RightView bringSubviewToFront:_salesIlustrationViewController.view];
-//    [self.myTableView selectRowAtIndexPath:selectedPath animated:NO scrollPosition:UITableViewScrollPositionNone];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:_salesIlustrationViewController];
-    [self presentViewController:navController animated:YES completion:nil];
 }
 
 
@@ -850,7 +857,8 @@ BOOL isFirstLoad;
     else{
         if (!_PremiumController) {
             _PremiumController = [self.storyboard instantiateViewControllerWithIdentifier:@"premiumView"];
-            //_PremiumController.delegate = self;
+            _PremiumController.delegate = self;
+            _PremiumController.requestSINo = [dictionaryPOForInsert valueForKey:@"SINO"];
             [self.RightView addSubview:_PremiumController.view];
         }
         [_PremiumController setPremiumDictionary:newDictionaryForBasicPlan];
@@ -975,7 +983,7 @@ BOOL isFirstLoad;
             premView.requestOccpClass = getOccpClass;
             premView.requestOccpCode = getOccpCode;
 			
-            premView.requestSINo = getSINo;
+            premView.requestSINo = [dictionaryPOForInsert valueForKey:@"SINO"];
             premView.requestMOP = getMOP;
             premView.requestTerm = getTerm;
             premView.requestBasicSA = getbasicSA;
@@ -2934,7 +2942,9 @@ BOOL isFirstLoad;
                     if([_BasicController validationDataBasicPlan]){
                         if (!_PremiumController) {
                             _PremiumController = [self.storyboard instantiateViewControllerWithIdentifier:@"premiumView"];
-                            //_PremiumController.delegate = self;
+                            _PremiumController.delegate = self;
+                            _PremiumController.requestSINo = [dictionaryPOForInsert valueForKey:@"SINO"];
+
                             [self.RightView addSubview:_PremiumController.view];
                             
                         }
@@ -3148,7 +3158,8 @@ BOOL isFirstLoad;
     {
         if (!_PremiumController) {
             _PremiumController = [self.storyboard instantiateViewControllerWithIdentifier:@"premiumView"];
-            //_PremiumController.delegate = self;
+            _PremiumController.delegate = self;
+            _PremiumController.requestSINo = [dictionaryPOForInsert valueForKey:@"SINO"];
             [self.RightView addSubview:_PremiumController.view];
         }
         [_PremiumController setPremiumDictionary:newDictionaryForBasicPlan];
@@ -5217,356 +5228,58 @@ BOOL isFirstLoad;
     return YES;
 }
 
-- (IBAction)SaveTapped:(UIButton *)sender{
+- (NSString *)generateSINO{
+    NSDate *currDate = [NSDate date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"YYYYMMddHHmmss"];
+    NSString *dateString = [dateFormatter stringFromDate:currDate];
+    NSLog(@"%@",dateString);
     
-    [self getSINoAndCustCode];
-    [self getRunningSI];
-    [self getRunningCustCode];
-    BOOL success = YES;
-    if (sqlite3_open([databasePath UTF8String], &contactDB) == SQLITE_OK)
-    {
-        
-        //generate SINo || CustCode
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"yyyyMMdd"];
-        NSString *currentdate = [dateFormatter stringFromDate:[NSDate date]];
-        
-        int runningNoSI = SILastNo + 1;
-        int runningNoCust = CustLastNo + 1;
-        
-        NSString *fooSI = [NSString stringWithFormat:@"%04d", runningNoSI];
-        NSString *fooCust = [NSString stringWithFormat:@"%04d", runningNoCust];
-        
-        getSINo = [[NSString alloc] initWithFormat:@"SI%@-%@",currentdate,fooSI];
-        NSString* custCode = [[NSString alloc] initWithFormat:@"CL%@-%@",currentdate,fooCust];
-        NSLog(@"SINo:%@, CustCode:%@",getSINo,custCode);
-        
-        
-        NSString* currSINo = saveAsSINo;
-        NSString* currCustCode = saveAsCustCode;
-        NSString* nextSiNo = getSINo ;
-        NSString* nextCustCode = custCode;
-        
-        NSString* createSQL;
-        NSString* tableName = @"UL_LAPayor";
-        // NSString* createSQL = [NSString stringWithFormat:@"CREATE TEMPORARY TABLE tmp AS SELECT * FROM Trad_LAPayor where SINo=\"%@\" AND CustCode=\"%@\"; UPDATE tmp SET SINo ='0'; INSERT INTO Trad_LAPayor SELECT * FROM tmp; DROP TABLE tmp; UPDATE Trad_LAPayor SET SINo=\"%@\", CustCode=\"%@\" WHERE SINo='0'",,@"SI20130919-0017",@"CL20130919-0054"];
-        
-        
-        //duplicate data in UL_LAPayor with next SINo and CustCode
-        
-        
-        createSQL = [NSString stringWithFormat:@"CREATE TEMPORARY TABLE tmp AS SELECT * FROM %@ where SINo=\"%@\" AND CustCode=\"%@\" LIMIT 1 ",
-                     tableName,currSINo,currCustCode];
-        success = [self sqlStatement:createSQL];
-        
-        if (success)
-        {
-            createSQL = @"UPDATE tmp SET SINo ='0'";
-            success = [self sqlStatement:createSQL];
-            
-            if (success)
-            {
-                createSQL = [NSString stringWithFormat:@"INSERT INTO %@ SELECT * FROM tmp",tableName];
-                success = [self sqlStatement:createSQL];
-                
-                if(success)
-                {
-                    createSQL = @"DROP TABLE tmp";
-                    [self sqlStatement:createSQL];
-                    
-                    if (success) {
-                        createSQL = [NSString stringWithFormat:@"UPDATE %@ SET SINo=\"%@\", CustCode=\"%@\" WHERE SINo='0'",tableName,nextSiNo,nextCustCode];
-                        
-                        [self sqlStatement:createSQL];
-                    }
-                }
-            }
-            
-        }//end first success statement
-        
-        //=======duplicate data in Clt_profile with next SINo ===========
-        
-        /*CREATE TEMPORARY TABLE tmp AS SELECT * FROM Clt_Profile where CustCode="CL20130920-0011";
-         UPDATE tmp SET CustCode ='0' , id = ((Select max(id) from Clt_Profile)+1);
-         INSERT INTO Clt_Profile SELECT * FROM tmp;
-         DROP TABLE tmp;
-         UPDATE Clt_Profile SET CustCode="CL20130920-0012" WHERE CustCode='0'
-         
-         */
-        tableName = @"Clt_Profile";
-        
-        createSQL = [NSString stringWithFormat:@"CREATE TEMPORARY TABLE tmp AS SELECT * FROM %@ where CustCode=\"%@\"",tableName,currCustCode];
-        
-        success = [self sqlStatement:createSQL];
-        
-        if (success)
-        {
-            createSQL = [NSString stringWithFormat:@"UPDATE tmp SET CustCode ='0', id = ((Select max(id) from %@)+1)",tableName];
-            success = [self sqlStatement:createSQL];
-            
-            if (success)
-            {
-                createSQL = [NSString stringWithFormat:@"INSERT INTO %@ SELECT * FROM tmp",tableName];
-                success = [self sqlStatement:createSQL];
-                
-                if(success)
-                {
-                    createSQL = @"DROP TABLE tmp";
-                    [self sqlStatement:createSQL];
-                    
-                    if (success) {
-                        createSQL = [NSString stringWithFormat:@"UPDATE %@ SET CustCode=\"%@\" WHERE CustCode='0'",tableName,nextCustCode];
-                        
-                        [self sqlStatement:createSQL];
-                    }
-                }
-            }
-            
-        }
-        
-        //=================end duplicate clt profile==============
-        
-        /*CREATE TEMPORARY TABLE tmp AS SELECT * FROM Trad_Details where SINo="SI20130920-0011";
-         UPDATE tmp SET SINo = '0';
-         INSERT INTO Trad_Details SELECT * FROM tmp;
-         DROP TABLE tmp;
-         UPDATE Trad_Details SET SINo="SI20130920-0012" WHERE SINo='0'
-         */
-        tableName = @"UL_Details";
-        
-        createSQL = [NSString stringWithFormat:@"CREATE TEMPORARY TABLE tmp AS SELECT * FROM %@ where SINo=\"%@\"",tableName,currSINo];
-        
-        success = [self sqlStatement:createSQL];
-        
-        if (success)
-        {
-            createSQL = @"UPDATE tmp SET SINo ='0'";
-            success = [self sqlStatement:createSQL];
-            
-            if (success)
-            {
-                createSQL = [NSString stringWithFormat:@"INSERT INTO %@ SELECT * FROM tmp",tableName];
-                success = [self sqlStatement:createSQL];
-                
-                if(success)
-                {
-                    createSQL = @"DROP TABLE tmp";
-                    [self sqlStatement:createSQL];
-                    
-                    if (success) {
-                        createSQL = [NSString stringWithFormat:@"UPDATE %@ SET SINo=\"%@\" WHERE SINo='0'",tableName,nextSiNo];
-                        
-                        [self sqlStatement:createSQL];
-                    }
-                }
-            }
-            
-        }
-        
-        //==============  end of update UL_details ==================
-        
-        tableName = @"UL_Rider_Details";
-        
-        createSQL = [NSString stringWithFormat:@"CREATE TEMPORARY TABLE tmp AS SELECT * FROM %@ where SINo=\"%@\"",tableName,currSINo];
-        
-        success = [self sqlStatement:createSQL];
-        
-        if (success)
-        {
-            createSQL = @"UPDATE tmp SET SINo ='0'";
-            success = [self sqlStatement:createSQL];
-            
-            if (success)
-            {
-                createSQL = [NSString stringWithFormat:@"INSERT INTO %@ SELECT * FROM tmp",tableName];
-                success = [self sqlStatement:createSQL];
-                
-                if(success)
-                {
-                    createSQL = @"DROP TABLE tmp";
-                    [self sqlStatement:createSQL];
-                    
-                    if (success) {
-                        createSQL = [NSString stringWithFormat:@"UPDATE %@ SET SINo=\"%@\" WHERE SINo='0'",tableName,nextSiNo];
-                        
-                        [self sqlStatement:createSQL];
-                    }
-                }
-            }
-            
-        }
-        
-        //==============  end of update UL_Rider_details ==================
-        
-        tableName = @"UL_Fund_Maturity_Option";
-        
-        createSQL = [NSString stringWithFormat:@"CREATE TEMPORARY TABLE tmp AS SELECT * FROM %@ where SINo=\"%@\"",tableName,currSINo];
-        
-        success = [self sqlStatement:createSQL];
-        
-        if (success)
-        {
-            createSQL = @"UPDATE tmp SET SINo ='0'";
-            success = [self sqlStatement:createSQL];
-            
-            if (success)
-            {
-                createSQL = [NSString stringWithFormat:@"INSERT INTO %@ SELECT * FROM tmp",tableName];
-                success = [self sqlStatement:createSQL];
-                
-                if(success)
-                {
-                    createSQL = @"DROP TABLE tmp";
-                    [self sqlStatement:createSQL];
-                    
-                    if (success) {
-                        createSQL = [NSString stringWithFormat:@"UPDATE %@ SET SINo=\"%@\" WHERE SINo='0'",tableName,nextSiNo];
-                        
-                        [self sqlStatement:createSQL];
-                    }
-                }
-            }
-            
-        }
-        
-        //==============  end of update UL_Fund_Maturity_Option ==================
-        
-        tableName = @"UL_ReducedPaidUp";
-        
-        createSQL = [NSString stringWithFormat:@"CREATE TEMPORARY TABLE tmp AS SELECT * FROM %@ where SINo=\"%@\"",tableName,currSINo];
-        
-        success = [self sqlStatement:createSQL];
-        
-        if (success)
-        {
-            createSQL = @"UPDATE tmp SET SINo ='0'";
-            success = [self sqlStatement:createSQL];
-            
-            if (success)
-            {
-                createSQL = [NSString stringWithFormat:@"INSERT INTO %@ SELECT * FROM tmp",tableName];
-                success = [self sqlStatement:createSQL];
-                
-                if(success)
-                {
-                    createSQL = @"DROP TABLE tmp";
-                    [self sqlStatement:createSQL];
-                    
-                    if (success) {
-                        createSQL = [NSString stringWithFormat:@"UPDATE %@ SET SINo=\"%@\" WHERE SINo='0'",tableName,nextSiNo];
-                        
-                        [self sqlStatement:createSQL];
-                    }
-                }
-            }
-            
-        }
-        
-        //==============  end of update UL_ReducedPaidUp ==================
-        
-        tableName = @"UL_RegTopUp";
-        
-        createSQL = [NSString stringWithFormat:@"CREATE TEMPORARY TABLE tmp AS SELECT * FROM %@ where SINo=\"%@\"",tableName,currSINo];
-        
-        success = [self sqlStatement:createSQL];
-        
-        if (success)
-        {
-            createSQL = @"UPDATE tmp SET SINo ='0'";
-            success = [self sqlStatement:createSQL];
-            
-            if (success)
-            {
-                createSQL = [NSString stringWithFormat:@"INSERT INTO %@ SELECT * FROM tmp",tableName];
-                success = [self sqlStatement:createSQL];
-                
-                if(success)
-                {
-                    createSQL = @"DROP TABLE tmp";
-                    [self sqlStatement:createSQL];
-                    
-                    if (success) {
-                        createSQL = [NSString stringWithFormat:@"UPDATE %@ SET SINo=\"%@\" WHERE SINo='0'",tableName,nextSiNo];
-                        
-                        [self sqlStatement:createSQL];
-                    }
-                }
-            }
-            
-        }
-        
-        //==============  end of update UL_RegTopUp ==================
-        
-        tableName = @"UL_RegWithdrawal";
-        
-        createSQL = [NSString stringWithFormat:@"CREATE TEMPORARY TABLE tmp AS SELECT * FROM %@ where SINo=\"%@\"",tableName,currSINo];
-        
-        success = [self sqlStatement:createSQL];
-        
-        if (success)
-        {
-            createSQL = @"UPDATE tmp SET SINo ='0'";
-            success = [self sqlStatement:createSQL];
-            
-            if (success)
-            {
-                createSQL = [NSString stringWithFormat:@"INSERT INTO %@ SELECT * FROM tmp",tableName];
-                success = [self sqlStatement:createSQL];
-                
-                if(success)
-                {
-                    createSQL = @"DROP TABLE tmp";
-                    [self sqlStatement:createSQL];
-                    
-                    if (success) {
-                        createSQL = [NSString stringWithFormat:@"UPDATE %@ SET SINo=\"%@\" WHERE SINo='0'",tableName,nextSiNo];
-                        
-                        [self sqlStatement:createSQL];
-                    }
-                }
-            }
-            
-        }
-        
-        //==============  end of update UL_RegWithdrawal ==================
-        
-        tableName = @"UL_TPExcess";
-        
-        createSQL = [NSString stringWithFormat:@"CREATE TEMPORARY TABLE tmp AS SELECT * FROM %@ where SINo=\"%@\"",tableName,currSINo];
-        
-        success = [self sqlStatement:createSQL];
-        
-        if (success)
-        {
-            createSQL = @"UPDATE tmp SET SINo ='0'";
-            success = [self sqlStatement:createSQL];
-            
-            if (success)
-            {
-                createSQL = [NSString stringWithFormat:@"INSERT INTO %@ SELECT * FROM tmp",tableName];
-                success = [self sqlStatement:createSQL];
-                
-                if(success)
-                {
-                    createSQL = @"DROP TABLE tmp";
-                    [self sqlStatement:createSQL];
-                    
-                    if (success) {
-                        createSQL = [NSString stringWithFormat:@"UPDATE %@ SET SINo=\"%@\" WHERE SINo='0'",tableName,nextSiNo];
-                        
-                        [self sqlStatement:createSQL];
-                    }
-                }
-            }
-            
-        }
-        
-        //==============  end of update UL_TPExcess ==================
-        
-        sqlite3_close(contactDB);
+    
+    NSString *_AgentCode;
+    
+    NSArray *paths2 = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsPath2 = [paths2 objectAtIndex:0];
+    NSString *path2 = [docsPath2 stringByAppendingPathComponent:@"hladb.sqlite"];
+    
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path2];
+    [database open];
+    FMResultSet *results;
+    results = [database executeQuery:@"select AgentCode,AgentName from Agent_profile"];
+    if (![database open]) {
+        NSLog(@"Could not open db.");
     }
+    
+    while([results next])
+        
+    {
+        _AgentCode  = [results stringForColumn:@"AgentCode"];
+    }
+    
+    
+    return [NSString stringWithFormat:@"%@%@",_AgentCode,dateString];
 }
 
+- (IBAction)SaveTapped:(UIButton *)sender{
+    
+    NSString *PlanType = [dictionaryPOForInsert valueForKey:@"ProductName"];
+    if([PlanType isEqualToString:@"BCA Life Heritage Protection"]){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Informasi"
+                                                        message:@"save tapped heritage belum d kerjakan"
+                                                       delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+    }else{
+        NSString *oldSiNo = [dictionaryPOForInsert valueForKey:@"SINO"];
+        NSString *newSiNo = [self generateSINO];
+        
+        LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
+        [loginDB duplicateRow:@"SI_Master" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
+        [loginDB duplicateRow:@"SI_Premium" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
+        [loginDB duplicateRow:@"SI_PO_Data" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
+        [loginDB duplicateRow:@"SI_Temp_Trad_Raider" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
+    }
+}
 
 
 -(void)createTradDetails:(NSString*) currSINo nextSiNo:(NSString*)nextSiNo
@@ -5959,7 +5672,8 @@ BOOL isFirstLoad;
     {
         if (!_PremiumController) {
             _PremiumController = [self.storyboard instantiateViewControllerWithIdentifier:@"premiumView"];
-            //_PremiumController.delegate = self;
+            _PremiumController.delegate = self;
+            _PremiumController.requestSINo = [dictionaryPOForInsert valueForKey:@"SINO"];
             [self.RightView addSubview:_PremiumController.view];
         }
         [_PremiumController setPremiumDictionary:newDictionaryForBasicPlan];
@@ -6641,7 +6355,11 @@ NSString *prevPlan;
 {
     self.modalTransitionStyle = UIModalPresentationFormSheet;
     [self dismissViewControllerAnimated:TRUE completion:Nil];
-    
+}
+
+- (void)heritageSimpan{
+    [self setSaveAsMode:[dictionaryPOForInsert valueForKey:@"SINO"]];
+    [self LoadIlustrationPage];
 }
 
 @end

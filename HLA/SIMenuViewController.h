@@ -37,13 +37,15 @@
 #import "RiderCalculation.h"
 #import "IlustrationViewController.h"
 #import "PremiumKeluargaku.h"
+#import "PremiumViewControllerDelegate.h"
+
 
 @class SIMenuViewController;
 @protocol SIMenuDelegate
 -(void)showReportCantDisplay:(NSString*)type;
 @end
 
-@interface SIMenuViewController : UIViewController <FSTabBarControllerDelegate,NewLAViewControllerDelegate,PayorViewControllerDelegate,SecondLAViewControllerDelegate,BasicPlanViewControllerDelegate,RiderViewControllerDelegate,HLViewControllerDelegate, NDHTMLtoPDFDelegate, ReaderViewControllerDelegate,PremiumKeluargaKuProtocol> {
+@interface SIMenuViewController : UIViewController <FSTabBarControllerDelegate,NewLAViewControllerDelegate,PayorViewControllerDelegate,SecondLAViewControllerDelegate,BasicPlanViewControllerDelegate,RiderViewControllerDelegate,HLViewControllerDelegate, NDHTMLtoPDFDelegate, ReaderViewControllerDelegate,PremiumKeluargaKuProtocol, PremiumViewControllerDelegate> {
     UIViewController* lastActiveController;
     
     int getTerm;
@@ -158,6 +160,7 @@
 @property (nonatomic,strong) SecondLAHandler *menuLa2ndH;
 @property (nonatomic,strong) id requestSINo;
 @property (nonatomic,strong) id requestSINo2;
+@property (nonatomic,strong) id SaveSINO;
 @property (nonatomic,strong) id EAPPorSI;
 
 //--from delegate

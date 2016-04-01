@@ -11,14 +11,9 @@
 #import "BasicPlanHandler.h"
 #import "SIMenuViewController.h"
 #import "Model_SI_Premium.h"
+#import "PremiumViewControllerDelegate.h"
 
-@class PremiumViewController;
-@protocol PremiumViewControllerDelegate
--(void)setNewBasicSA;
-@end
-
-
-@interface PremiumViewController : UIViewController<SIMenuDelegate> {
+@interface PremiumViewController : UIViewController {
     Model_SI_Premium* modelSIPremium;
     
     NSString *databasePath;
@@ -287,6 +282,7 @@
 +(NSString*)getShortSex:(NSString*)sexI;
 -(double)ReturnGrossPrem;
 -(void)calculateReport;
+- (IBAction)simpanAct:(id)sender;
 
 @property (strong, nonatomic) IBOutlet UINavigationItem *navItem;
 @end
