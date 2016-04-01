@@ -85,6 +85,18 @@
     return targetDateString;
 }
 
+-(NSString *)roundTwoDigit:(double)originalNumber{
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    
+    [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    [formatter setMaximumFractionDigits:2];
+    [formatter setRoundingMode: NSNumberFormatterRoundUp];
+    
+    
+    return [formatter stringFromNumber:[NSNumber numberWithDouble:originalNumber]];
+//    NSString *numberString = [formatter stringFromNumber:[NSNumber numberWithFloat:22.368511]];
+}
+
 /*-(NSString *)convertSpecialCharacter:(NSString *)originalString{
     NSString *someString = originalString;
     NSString *newString = [someString stringByReplacingOccurrencesOfString:@"[/,@"'; ]+" withString:@"-" options: NSRegularExpressionSearch range:NSMakeRange(0, someString.length)];

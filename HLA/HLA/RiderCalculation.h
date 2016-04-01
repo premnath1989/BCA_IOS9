@@ -8,9 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "RateModel.h"
+#import "Formatter.h"
 
 @interface RiderCalculation : NSObject{
     RateModel* rateModel;
+    Formatter* formatter;
 }
 
 -(NSNumber *)getSumAssuredForMDBKK:(NSNumber *)numberBasicSumAssured;

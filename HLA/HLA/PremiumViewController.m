@@ -4311,10 +4311,7 @@
             else{
                 RatesPremiumRate  = [results stringForColumn:@"Female"];
             }
-            
         }
-        
-        
     }
     return RatesPremiumRate;
 }
