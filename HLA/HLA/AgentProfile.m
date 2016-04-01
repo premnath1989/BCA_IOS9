@@ -1,6 +1,6 @@
 //
 //  AgentProfile.m
-//  iMobile Planner
+//  MPOS
 //
 //  Created by Edwin Fong on 12/2/13.
 //  Copyright (c) 2013 InfoConnect Sdn Bhd. All rights reserved.

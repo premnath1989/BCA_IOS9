@@ -1,6 +1,6 @@
 //
 //  CustomerChoice.h
-//  eAppScreen
+//  MPOS
 //
 //  Created by Erza on 7/5/13.
 //  Copyright (c) 2013 IFC. All rights reserved.
