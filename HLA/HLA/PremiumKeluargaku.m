@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "PremiumKeluargaku.h"
 #import "LoginDBManagement.h"
+#import "UIView+viewRecursion.h"
 
 @implementation PremiumKeluargaku
 
@@ -43,6 +44,8 @@
     [self setPremiTahunan];
     [self setPremiKuartalan];
     [self setPremiSemesteran];
+    //test disable the fields
+    [self checkEditingMode];
 }
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil SINO:(NSString *)SiNo{
@@ -191,7 +194,7 @@
             NSLog(@"ok");
             LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
             [loginDB updateSIMaster:SINO EnableEditing:@"0"];
-            
+            simpan.enabled = NO;
             [delegate savePremium];
         }
         break;
@@ -444,6 +447,49 @@
     //lblMDKKKuartal;
     [lblBPKuartal setText:[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:BP]]];
     [lblTotalKuartal setText:[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:allTotal]]];
+}
+
+- (void) checkEditingMode {
+    
+    LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
+    NSString *EditMode = [loginDB EditIllustration:SINO];
+    NSLog(@" Edit Mode %@ : %@", EditMode, SINO);
+    //disable all text fields
+    if([EditMode caseInsensitiveCompare:@"0"] == NSOrderedSame){
+        for(UIView *v in [self.view allSubViews])
+        {
+            if([v isKindOfClass:[UITextField class]])
+            {
+                ((UITextField*)v).userInteractionEnabled=NO;
+            }else if([v isKindOfClass:[UIButton class]])
+            {
+                ((UIButton*)v).userInteractionEnabled=NO;
+            }else if([v isKindOfClass:[UISegmentedControl class]])
+            {
+                ((UISegmentedControl*)v).userInteractionEnabled=NO;
+            }else if([v isKindOfClass:[UISwitch class]])
+            {
+                ((UISwitch*)v).userInteractionEnabled=NO;
+            }
+        }
+    }else{
+        for(UIView *v in [self.view allSubViews])
+        {
+            if([v isKindOfClass:[UITextField class]])
+            {
+                ((UITextField*)v).userInteractionEnabled=YES;
+            }else if([v isKindOfClass:[UIButton class]])
+            {
+                ((UIButton*)v).userInteractionEnabled=YES;
+            }else if([v isKindOfClass:[UISegmentedControl class]])
+            {
+                ((UISegmentedControl*)v).userInteractionEnabled=YES;
+            }else if([v isKindOfClass:[UISwitch class]])
+            {
+                ((UISwitch*)v).userInteractionEnabled=YES;
+            }
+        }
+    }
 }
 
 

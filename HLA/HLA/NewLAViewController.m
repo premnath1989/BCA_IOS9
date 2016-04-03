@@ -162,6 +162,23 @@ id dobtanngal;
                 ((UISwitch*)v).userInteractionEnabled=NO;
             }
         }
+    }else{
+        for(UIView *v in [self.view allSubViews])
+        {
+            if([v isKindOfClass:[UITextField class]])
+            {
+                ((UITextField*)v).userInteractionEnabled=YES;
+            }else if([v isKindOfClass:[UIButton class]])
+            {
+                ((UIButton*)v).userInteractionEnabled=YES;
+            }else if([v isKindOfClass:[UISegmentedControl class]])
+            {
+                ((UISegmentedControl*)v).userInteractionEnabled=YES;
+            }else if([v isKindOfClass:[UISwitch class]])
+            {
+                ((UISwitch*)v).userInteractionEnabled=YES;
+            }
+        }
     }
 }
 
@@ -511,6 +528,7 @@ id dobtanngal;
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];    
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
     
+    [self loadDataFromList];
     //test disable the fields
     [self checkEditingMode];
 }
@@ -902,6 +920,10 @@ id dobtanngal;
 {
     [_delegate dismissEApp];
     
+}
+
+- (void)updateSINO:(NSString *)newSINO{
+    _SINumberBCA.text = newSINO;
 }
 
 - (IBAction)sexSegmentPressed:(id)sender

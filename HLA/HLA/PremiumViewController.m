@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import "RiderViewController.h"
 #import "LoginDBManagement.h"
+#import "UIView+viewRecursion.h"
 
 @interface PremiumViewController (){
     NSNumberFormatter *Premformatter;
@@ -20,7 +21,7 @@
 @end
 
 @implementation PremiumViewController
-@synthesize lblMessage, delegate;
+@synthesize lblMessage, delegate, simpan;
 @synthesize WebView;
 @synthesize requestBasicSA,requestBasicHL,requestMOP,requestTerm,requestPlanCode,requestSINo,requestAge,requestOccpCode;
 @synthesize basicRate,LSDRate,riderCode,riderSA,riderHL1K,riderHL100,riderHLP,riderRate,riderTerm;
@@ -53,8 +54,53 @@
     return @"MsgTypeWealthPlan";
 }
 
-//- (void)viewDidAppear:(BOOL)animated{
+- (void)viewDidAppear:(BOOL)animated{
+    [self calculateReport];
+    [self checkEditingMode];
+}
 
+- (void) checkEditingMode {
+    
+    LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
+    NSString *EditMode = [loginDB EditIllustration:SINo];
+    NSLog(@" Edit Mode %@ : %@", EditMode, SINo);
+    //disable all text fields
+    if([EditMode caseInsensitiveCompare:@"0"] == NSOrderedSame){
+        for(UIView *v in [self.view allSubViews])
+        {
+            if([v isKindOfClass:[UITextField class]])
+            {
+                ((UITextField*)v).userInteractionEnabled=NO;
+            }else if([v isKindOfClass:[UIButton class]])
+            {
+                ((UIButton*)v).userInteractionEnabled=NO;
+            }else if([v isKindOfClass:[UISegmentedControl class]])
+            {
+                ((UISegmentedControl*)v).userInteractionEnabled=NO;
+            }else if([v isKindOfClass:[UISwitch class]])
+            {
+                ((UISwitch*)v).userInteractionEnabled=NO;
+            }
+        }
+    }else{
+        for(UIView *v in [self.view allSubViews])
+        {
+            if([v isKindOfClass:[UITextField class]])
+            {
+                ((UITextField*)v).userInteractionEnabled=YES;
+            }else if([v isKindOfClass:[UIButton class]])
+            {
+                ((UIButton*)v).userInteractionEnabled=YES;
+            }else if([v isKindOfClass:[UISegmentedControl class]])
+            {
+                ((UISegmentedControl*)v).userInteractionEnabled=YES;
+            }else if([v isKindOfClass:[UISwitch class]])
+            {
+                ((UISwitch*)v).userInteractionEnabled=YES;
+            }
+        }
+    }
+}
 -(void)setPremiumDictionary:(NSMutableDictionary *)premiumDictionary{
     dictionaryPremium = [[NSMutableDictionary alloc]initWithDictionary:premiumDictionary];
    
@@ -4508,7 +4554,7 @@
             NSLog(@"ok");
             LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
             [loginDB updateSIMaster:[self.requestSINo description] EnableEditing:@"0"];
-            
+            simpan.enabled = NO;
             [delegate heritageSimpan];
         }
             break;

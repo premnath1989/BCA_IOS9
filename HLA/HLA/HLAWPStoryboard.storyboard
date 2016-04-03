@@ -4913,6 +4913,7 @@
                         <outlet property="lblTotalTahunan" destination="aQa-BJ-N9V" id="Tcc-mC-0BK"/>
                         <outlet property="navItem" destination="Grc-rY-MoE" id="V6R-JL-dkc"/>
                         <outlet property="navigationBar" destination="XPc-vk-TS1" id="0H9-ma-2wI"/>
+                        <outlet property="simpan" destination="39S-wd-vPe" id="Y8g-Fk-Txk"/>
                         <outlet property="viewSubTotal" destination="nbb-Ul-SOP" id="07U-aW-565"/>
                     </connections>
                 </viewController>

@@ -120,6 +120,7 @@
 @property (nonatomic,strong) id executeMHI; //YES or NO
 
 @property (nonatomic,strong) BasicPlanHandler *premBH;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *simpan;
 //--request
 @property (nonatomic, assign,readwrite) int requestAge;
 @property (nonatomic, assign,readwrite) int requestOccpClass;

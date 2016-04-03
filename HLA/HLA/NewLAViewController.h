@@ -238,6 +238,7 @@
 - (BOOL)validateSave;
 - (BOOL)updateData:(NSString *) SiNo;
 - (BOOL)performSaveData;
+- (void)updateSINO:(NSString *)newSINO;
 
 -(void)processLifeAssured;
 -(void)keyboardDidShow:(NSNotificationCenter *)notification;

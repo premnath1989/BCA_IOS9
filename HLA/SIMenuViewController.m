@@ -354,6 +354,8 @@ BOOL isFirstLoad;
             [self.SecondLAController setQuickQuoteEnabled:quickQuoteEnabled];
             [self.SecondLAController setElementActive:quickQuoteEnabled];
             self.SecondLAController.requestSINo = [self.requestSINo description];
+            [self.SecondLAController.view removeFromSuperview];
+            [self.RightView addSubview:self.SecondLAController.view];
             [self.RightView bringSubviewToFront:self.SecondLAController.view];
             lastActiveController = self.SecondLAController;
         }
@@ -556,6 +558,8 @@ BOOL isFirstLoad;
             }
             self.BasicController.requestSINo = [self.requestSINo description];
             if (loadsView) {
+                [self.BasicController.view removeFromSuperview];
+                [self.RightView addSubview:self.BasicController.view];
                 [self.RightView bringSubviewToFront:self.BasicController.view];
                 lastActiveController = self.BasicController;
             }
@@ -663,11 +667,17 @@ BOOL isFirstLoad;
     if (_LAController == nil) {
         self.LAController = [self.storyboard instantiateViewControllerWithIdentifier:@"LAView"];
         _LAController.delegate = self;
+        self.LAController.requestSINo = [self.requestSINo description];
+        self.LAController.requesteProposalStatus = eProposalStatus;
+        self.LAController.EAPPorSI = [self.EAPPorSI description];
+        [self.RightView addSubview:self.LAController.view];
+    }else{
+        self.LAController.requestSINo = [self.requestSINo description];
+        self.LAController.requesteProposalStatus = eProposalStatus;
+        self.LAController.EAPPorSI = [self.EAPPorSI description];
+        [self.LAController.view removeFromSuperview];
+        [self.RightView addSubview:self.LAController.view];
     }
-    self.LAController.requestSINo = [self.requestSINo description];
-    self.LAController.requesteProposalStatus = eProposalStatus;
-    self.LAController.EAPPorSI = [self.EAPPorSI description];
-    [self.RightView addSubview:self.LAController.view];
     lastActiveController = self.LAController;
     [_LAController processLifeAssured];
     blocked = NO;
@@ -2908,6 +2918,9 @@ BOOL isFirstLoad;
                     self.BasicController = [self.storyboard instantiateViewControllerWithIdentifier:@"BasicPlanView"];
                     _BasicController.delegate = self;
                     [self.RightView addSubview:self.BasicController.view];
+                }else{
+                    [self.BasicController.view removeFromSuperview];
+                    [self.RightView addSubview:self.BasicController.view];
                 }
                 [self.RightView bringSubviewToFront:self.BasicController.view];
                 break;
@@ -2923,6 +2936,8 @@ BOOL isFirstLoad;
                     [_RiderController setDictionaryForBasicPlan:newDictionaryForBasicPlan];
                     [_RiderController setElementActive];
                     [_RiderController loadInitialRiderDataFromDatabase];
+                    [self.RiderController.view removeFromSuperview];
+                    [self.RightView addSubview:self.RiderController.view];
                     [self.RightView bringSubviewToFront:self.RiderController.view];
                 }
                 [_RiderController calculateRiderPremi];
@@ -2947,6 +2962,9 @@ BOOL isFirstLoad;
 
                             [self.RightView addSubview:_PremiumController.view];
                             
+                        }else{
+                            [_PremiumController.view removeFromSuperview];
+                            [self.RightView addSubview:_PremiumController.view];
                         }
                         //[_PremiumController setDictionaryPremium:newDictionaryForBasicPlan];
                         //[_PremiumController setDictionaryPremium:newDictionaryForBasicPlan];
@@ -3166,6 +3184,8 @@ BOOL isFirstLoad;
         }
         [_PremiumController setPremiumDictionary:newDictionaryForBasicPlan];
         [_PremiumController loadDataFromDB];
+        [_PremiumController.view removeFromSuperview];
+        [self.RightView addSubview:_PremiumController.view];
         [self.RightView bringSubviewToFront:_PremiumController.view];
     }
     else{
@@ -3180,6 +3200,8 @@ BOOL isFirstLoad;
             [_RiderController setDictionaryForBasicPlan:newDictionaryForBasicPlan];
             [_RiderController setElementActive];
             [_RiderController loadInitialRiderData];
+            [self.RiderController.view removeFromSuperview];
+            [self.RightView addSubview:self.RiderController.view];
             [self.RightView bringSubviewToFront:self.RiderController.view];
         }
         [_RiderController calculateRiderPremi];
@@ -3255,7 +3277,11 @@ BOOL isFirstLoad;
                 self.LAController = [self.storyboard instantiateViewControllerWithIdentifier:@"LAView"];
                 _LAController.delegate = self;
                 [self.RightView addSubview:self.LAController.view];
+            }else{
+                [self.LAController.view removeFromSuperview];
+                [self.RightView addSubview:self.LAController.view];
             }
+            self.LAController.requestSINo = [dictionaryPOForInsert valueForKey:@"SINO"];
             [self.RightView bringSubviewToFront:self.LAController.view];
             
             
@@ -3288,6 +3314,9 @@ BOOL isFirstLoad;
                 if (_LAController == nil) {
                     self.LAController = [self.storyboard instantiateViewControllerWithIdentifier:@"LAView"];
                     _LAController.delegate = self;
+                    [self.RightView addSubview:self.LAController.view];
+                }else{
+                    [self.LAController.view removeFromSuperview];
                     [self.RightView addSubview:self.LAController.view];
                 }
                 [arrayIntValidate replaceObjectAtIndex:2 withObject:@"0"];
@@ -3341,6 +3370,9 @@ BOOL isFirstLoad;
                 if (_LAController == nil) {
                     self.LAController = [self.storyboard instantiateViewControllerWithIdentifier:@"LAView"];
                     _LAController.delegate = self;
+                    [self.RightView addSubview:self.LAController.view];
+                }else{
+                    [self.LAController.view removeFromSuperview];
                     [self.RightView addSubview:self.LAController.view];
                 }
                 lastIndexSelected=0;
@@ -3417,6 +3449,9 @@ BOOL isFirstLoad;
                 if (_LAController == nil) {
                     self.LAController = [self.storyboard instantiateViewControllerWithIdentifier:@"LAView"];
                     _LAController.delegate = self;
+                    [self.RightView addSubview:self.LAController.view];
+                }else{
+                    [self.LAController.view removeFromSuperview];
                     [self.RightView addSubview:self.LAController.view];
                 }
                 lastIndexSelected=0;
@@ -5265,10 +5300,10 @@ BOOL isFirstLoad;
 
 - (IBAction)SaveTapped:(UIButton *)sender{
     
+    NSString *oldSiNo = [dictionaryPOForInsert valueForKey:@"SINO"];
+    NSString *newSiNo = [self generateSINO];
     NSString *PlanType = [dictionaryPOForInsert valueForKey:@"ProductName"];
     if([PlanType isEqualToString:@"BCA Life Heritage Protection"]){
-        NSString *oldSiNo = [dictionaryPOForInsert valueForKey:@"SINO"];
-        NSString *newSiNo = [self generateSINO];
         
         LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
         [loginDB duplicateRow:@"SI_Master" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
@@ -5284,6 +5319,11 @@ BOOL isFirstLoad;
         [loginDB duplicateRow:@"SI_PO_Data" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
         [loginDB duplicateRow:@"SI_Temp_Trad_Raider" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
     }
+    getSINo = newSiNo;
+    self.requestSINo = getSINo;
+    outletSaveAs.hidden = YES;
+    [dictionaryPOForInsert setValue:getSINo forKey:@"SINO"];
+    [_LAController updateSINO:getSINo];
     [self LoadViewController];
 }
 
@@ -5680,6 +5720,9 @@ BOOL isFirstLoad;
             _PremiumController = [self.storyboard instantiateViewControllerWithIdentifier:@"premiumView"];
             _PremiumController.delegate = self;
             _PremiumController.requestSINo = [dictionaryPOForInsert valueForKey:@"SINO"];
+            [self.RightView addSubview:_PremiumController.view];
+        }else{
+            [_PremiumController.view removeFromSuperview];
             [self.RightView addSubview:_PremiumController.view];
         }
         [_PremiumController setPremiumDictionary:newDictionaryForBasicPlan];

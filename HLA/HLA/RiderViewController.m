@@ -409,6 +409,23 @@ int maxGycc = 0;
                 ((UISwitch*)v).userInteractionEnabled=NO;
             }
         }
+    }else{
+        for(UIView *v in [self.view allSubViews])
+        {
+            if([v isKindOfClass:[UITextField class]])
+            {
+                ((UITextField*)v).userInteractionEnabled=YES;
+            }else if([v isKindOfClass:[UIButton class]])
+            {
+                ((UIButton*)v).userInteractionEnabled=YES;
+            }else if([v isKindOfClass:[UISegmentedControl class]])
+            {
+                ((UISegmentedControl*)v).userInteractionEnabled=YES;
+            }else if([v isKindOfClass:[UISwitch class]])
+            {
+                ((UISwitch*)v).userInteractionEnabled=YES;
+            }
+        }
     }
 }
 
