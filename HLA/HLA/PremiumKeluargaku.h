@@ -22,6 +22,8 @@
     double DiscountCalculation;
     Formatter* classFormatter;
     RiderCalculation* riderCalculation;
+    UIColor *themeColour;
+    UIColor *unHighlightColor;
 }
 
 @property (retain, nonatomic) NSMutableDictionary* dictionaryPOForInsert;

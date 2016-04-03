@@ -1,9 +1,9 @@
 //
 //  WebResponObj.m
-//  BLESS
+//  MPOS
 //
 //  Created by Erwin on 23/02/2016.
-//  Copyright © 2016 Hong Leong Assurance. All rights reserved.
+//  Copyright © 2016 InfoConnect Sdn Bhd. All rights reserved.
 //
 
 #import "WebResponObj.h"

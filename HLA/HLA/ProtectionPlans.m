@@ -1,6 +1,6 @@
 //
 //  ProtectionPlans.m
-//  iMobile Planner
+//  MPOS
 //
 //  Created by Meng Cheong on 8/20/13.
 //  Copyright (c) 2013 InfoConnect Sdn Bhd. All rights reserved.

@@ -1,6 +1,6 @@
 //
 //  SIDate.h
-//  HLA Ipad
+//  MPOS
 //
 //  Created by Md. Nazmus Saadat on 10/4/12.
 //  Copyright (c) 2012 InfoConnect Sdn Bhd. All rights reserved.

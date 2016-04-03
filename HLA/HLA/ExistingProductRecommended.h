@@ -1,6 +1,6 @@
 //
 //  ExistingProductRecommended.h
-//  iMobile Planner
+//  MPOS
 //
 //  Created by Juliana on 7/12/13.
 //  Copyright (c) 2013 InfoConnect Sdn Bhd. All rights reserved.

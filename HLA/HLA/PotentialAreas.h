@@ -1,6 +1,6 @@
 //
 //  PotentialAreas.h
-//  eAppScreen
+//  MPOS
 //
 //  Created by Erza on 7/7/13.
 //  Copyright (c) 2013 IFC. All rights reserved.

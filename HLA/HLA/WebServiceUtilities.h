@@ -1,9 +1,9 @@
 //
 //  WebServiceUtilities.h
-//  BLESS
+//  MPOS
 //
 //  Created by Erwin on 15/02/2016.
-//  Copyright © 2016 Hong Leong Assurance. All rights reserved.
+//  Copyright © 2016 InfoConnect Sdn Bhd. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

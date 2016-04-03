@@ -1,6 +1,6 @@
 //
 //  NewGroupListing.m
-//  iMobile Planner
+//  MPOS
 //
 //  Created by Erza on 11/29/13.
 //  Copyright (c) 2013 InfoConnect Sdn Bhd. All rights reserved.

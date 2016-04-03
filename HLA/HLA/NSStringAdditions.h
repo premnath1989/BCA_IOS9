@@ -1,6 +1,6 @@
 //
 //  NSStrinAdditions.h
-//  iMobile Planner
+//  MPOS
 //
 //  Created by Basvi on 14/01/14.
 //  Copyright (c) 2014 InfoConnect Sdn Bhd. All rights reserved.
