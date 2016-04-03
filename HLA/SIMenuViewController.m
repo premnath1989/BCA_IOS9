@@ -1049,7 +1049,48 @@ BOOL isFirstLoad;
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (alertView.tag == 1001 && buttonIndex == 0) {
+    if(alertView.tag == 5000){
+        switch (buttonIndex) {
+            case 0:
+            {
+                NSLog(@"ok");
+                NSString *oldSiNo = [dictionaryPOForInsert valueForKey:@"SINO"];
+                NSString *newSiNo = [self generateSINO];
+                NSString *PlanType = [dictionaryPOForInsert valueForKey:@"ProductName"];
+                if([PlanType isEqualToString:@"BCA Life Heritage Protection"]){
+                    
+                    LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
+                    [loginDB duplicateRow:@"SI_Master" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
+                    [loginDB duplicateRow:@"SI_Premium" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
+                    [loginDB duplicateRow:@"SI_PO_Data" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
+                }else{
+                    NSString *oldSiNo = [dictionaryPOForInsert valueForKey:@"SINO"];
+                    NSString *newSiNo = [self generateSINO];
+                    
+                    LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
+                    [loginDB duplicateRow:@"SI_Master" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
+                    [loginDB duplicateRow:@"SI_Premium" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
+                    [loginDB duplicateRow:@"SI_PO_Data" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
+                    [loginDB duplicateRow:@"SI_Temp_Trad_Raider" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
+                }
+                getSINo = newSiNo;
+                self.requestSINo = getSINo;
+                outletSaveAs.hidden = YES;
+                [dictionaryPOForInsert setValue:getSINo forKey:@"SINO"];
+                [_LAController updateSINO:getSINo];
+                [self LoadViewController];
+                
+            }
+                break;
+            case 1:
+            {
+                // Do something for button #2
+                NSLog(@"cancel");
+            }
+                break;
+        }
+
+    }else if (alertView.tag == 1001 && buttonIndex == 0) {
         saved = YES;
         _SecondLAController = nil;
         
@@ -5298,33 +5339,13 @@ BOOL isFirstLoad;
     return [NSString stringWithFormat:@"%@%@",_AgentCode,dateString];
 }
 
+
+
 - (IBAction)SaveTapped:(UIButton *)sender{
     
-    NSString *oldSiNo = [dictionaryPOForInsert valueForKey:@"SINO"];
-    NSString *newSiNo = [self generateSINO];
-    NSString *PlanType = [dictionaryPOForInsert valueForKey:@"ProductName"];
-    if([PlanType isEqualToString:@"BCA Life Heritage Protection"]){
-        
-        LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
-        [loginDB duplicateRow:@"SI_Master" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
-        [loginDB duplicateRow:@"SI_Premium" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
-        [loginDB duplicateRow:@"SI_PO_Data" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
-    }else{
-        NSString *oldSiNo = [dictionaryPOForInsert valueForKey:@"SINO"];
-        NSString *newSiNo = [self generateSINO];
-        
-        LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
-        [loginDB duplicateRow:@"SI_Master" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
-        [loginDB duplicateRow:@"SI_Premium" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
-        [loginDB duplicateRow:@"SI_PO_Data" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
-        [loginDB duplicateRow:@"SI_Temp_Trad_Raider" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
-    }
-    getSINo = newSiNo;
-    self.requestSINo = getSINo;
-    outletSaveAs.hidden = YES;
-    [dictionaryPOForInsert setValue:getSINo forKey:@"SINO"];
-    [_LAController updateSINO:getSINo];
-    [self LoadViewController];
+    UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Konfirmasi" message:@"Anda yakin untuk menduplikat data?" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: @"cancel", nil];
+    alert.tag = 5000;
+    [alert show];
 }
 
 
