@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "PremiumKeluargaku.h"
 #import "LoginDBManagement.h"
+#import "UIView+viewRecursion.h"
 
 @implementation PremiumKeluargaku
 
@@ -47,7 +48,52 @@
     [self setPremiKuartalan];
     [self setPremiSemesteran];
      [self setHighlightText];
+    [self checkEditingMode];
 }
+
+- (void) checkEditingMode {
+    
+    LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
+    NSString *EditMode = [loginDB EditIllustration:SINO];
+    NSLog(@" Edit Mode %@ : %@", EditMode, SINO);
+    //disable all text fields
+    if([EditMode caseInsensitiveCompare:@"0"] == NSOrderedSame){
+        for(UIView *v in [self.view allSubViews])
+        {
+            if([v isKindOfClass:[UITextField class]])
+            {
+                ((UITextField*)v).userInteractionEnabled=NO;
+            }else if([v isKindOfClass:[UIButton class]])
+            {
+                ((UIButton*)v).userInteractionEnabled=NO;
+            }else if([v isKindOfClass:[UISegmentedControl class]])
+            {
+                ((UISegmentedControl*)v).userInteractionEnabled=NO;
+            }else if([v isKindOfClass:[UISwitch class]])
+            {
+                ((UISwitch*)v).userInteractionEnabled=NO;
+            }
+        }
+    }else{
+        for(UIView *v in [self.view allSubViews])
+        {
+            if([v isKindOfClass:[UITextField class]])
+            {
+                ((UITextField*)v).userInteractionEnabled=YES;
+            }else if([v isKindOfClass:[UIButton class]])
+            {
+                ((UIButton*)v).userInteractionEnabled=YES;
+            }else if([v isKindOfClass:[UISegmentedControl class]])
+            {
+                ((UISegmentedControl*)v).userInteractionEnabled=YES;
+            }else if([v isKindOfClass:[UISwitch class]])
+            {
+                ((UISwitch*)v).userInteractionEnabled=YES;
+            }
+        }
+    }
+}
+
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil SINO:(NSString *)SiNo{
     SINO = SiNo;
