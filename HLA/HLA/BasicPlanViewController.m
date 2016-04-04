@@ -5120,6 +5120,7 @@ bool WPTPD30RisDeleted = FALSE;
     NSString *validationUanglebihkk=@"Uang Pertangungan Dasar Min:Rp30,000,000 Max:Rp1,500,000,000";
     NSString *validationExtraPremi=@"Extra Premi harus 25%,50%,75%,100%.....300%";
     NSString *validationExtraNumber=@"Extra Premi 0/100 harus 1-10";
+    NSString *validationPembelianKe=@"Pembelian Ke tidak boleh sama dengan 0";
     
     NSString* uangPertanggunganDasar=yearlyIncomeField.text;
     NSString* masaPembayaran=_masaPembayaranButton.titleLabel.text;
@@ -5159,6 +5160,11 @@ bool WPTPD30RisDeleted = FALSE;
         }
         else if ([validationSet containsObject:frekuensiPembayaran]||frekuensiPembayaran==NULL){
             [self createAlertViewAndShow:validationFrekuensiPembayaran tag:0];
+            //[btnOccp setBackgroundColor:[UIColor redColor]];
+            return false;
+        }
+        else if ([PembelianKEString intValue]==0){
+            [self createAlertViewAndShow:validationPembelianKe tag:0];
             //[btnOccp setBackgroundColor:[UIColor redColor]];
             return false;
         }
