@@ -4074,6 +4074,7 @@
                                         <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                         <connections>
+                                            <action selector="validateExtraPremiPercent:" destination="il8-A2-VxN" eventType="editingDidEnd" id="zbw-IP-Ua4"/>
                                             <outlet property="delegate" destination="il8-A2-VxN" id="7G8-ul-T2W"/>
                                         </connections>
                                     </textField>
@@ -4084,6 +4085,7 @@
                                         <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                         <connections>
+                                            <action selector="validateExtraPremiNumber:" destination="il8-A2-VxN" eventType="editingDidEnd" id="0g8-gq-Cvl"/>
                                             <outlet property="delegate" destination="il8-A2-VxN" id="Jmi-mD-2RU"/>
                                         </connections>
                                     </textField>
@@ -4094,6 +4096,7 @@
                                         <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                         <connections>
+                                            <action selector="validateMasaExtraPremi:" destination="il8-A2-VxN" eventType="editingDidEnd" id="1I4-Lh-DbV"/>
                                             <outlet property="delegate" destination="il8-A2-VxN" id="1XQ-sn-pOg"/>
                                         </connections>
                                     </textField>
@@ -4339,7 +4342,7 @@
                                         <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Min 1 | Max 10" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WBa-tB-tBd">
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Min 1 | Max 10" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WBa-tB-tBd">
                                         <rect key="frame" x="369" y="258" width="362" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
@@ -4646,7 +4649,7 @@
                                         <rect key="frame" x="33" y="112" width="701" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Occupation Loading" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" id="lMT-yj-cpp">
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Occupation Loading" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" id="lMT-yj-cpp">
                                                 <rect key="frame" x="5" y="5" width="157" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

@@ -43,6 +43,7 @@
 
 -(NSNumber *)convertNumberFromString:(NSString *)stringNumber{
     NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+
     f.numberStyle = NSNumberFormatterDecimalStyle;
     NSNumber *myNumber = [f numberFromString:stringNumber];
     return myNumber;

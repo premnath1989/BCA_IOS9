@@ -343,7 +343,8 @@ bool WPTPD30RisDeleted = FALSE;
          ExtraPremiDasarLBL.hidden = NO;
         //yearlyIncomeField.text = @"";
 //    }
-
+    [self PremiDasarAct];
+    [self PremiDasarActB];
 }
 
 -(void)KeluargakuEnable
@@ -362,6 +363,7 @@ bool WPTPD30RisDeleted = FALSE;
     FrekuensiPembayaranChecking =@"10 Tahun";
     //yearlyIncomeField.text = @"";
     //    }
+    
     [self PremiDasarActKeluargaku:FRekeunsiPembayaranMode];
     [self calculateRiderPremi];
 }
@@ -1919,6 +1921,15 @@ bool WPTPD30RisDeleted = FALSE;
         NSNumber *myNumber = [f numberFromString:[dictPremiData valueForKey:@"Sum_Assured"]];
         
         BasisSumAssured = [myNumber longLongValue];
+
+        if ([[dictPremiData valueForKey:@"PurchaseNumber"] intValue]>=2){
+            discountPembelian=0.05;
+        }
+        else{
+            discountPembelian=0;
+        }
+        PembelianKEString =[dictPremiData valueForKey:@"PurchaseNumber"];
+        PaymentDescMDKK = FRekeunsiPembayaranMode;
         [_delegate setBasicPlanDictionaryWhenLoadFromList:dictPremiData];
     }
 }
@@ -5592,9 +5603,9 @@ bool WPTPD30RisDeleted = FALSE;
     
     if([PlanType isEqualToString:@"BCA Life Keluargaku"])
     {
-        [self PremiDasarActKeluargaku:aaDesc];
-        [self PremiDasarActkklk];
         PaymentDescMDKK = aaDesc;
+        [self PremiDasarActKeluargaku:aaDesc];
+        //[self PremiDasarActkklk];
         [self calculateRiderPremi];
     }
     else

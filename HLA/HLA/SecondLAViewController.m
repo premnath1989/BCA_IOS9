@@ -458,26 +458,28 @@ id dobtemp;
     @try {
         _modelSIPOData = [[ModelSIPOData alloc]init];
         NSDictionary* dictPOData=[[NSDictionary alloc]initWithDictionary:[_modelSIPOData getPO_DataFor:[self.requestSINo description]]];
-        if ([dictPOData count]!=0){
-            occuCode = [dictPOData valueForKey:@"LA_OccpCode"];
-            clientProfileID = [[dictPOData valueForKey:@"LA_ClientID"] intValue];
-            [nameField setText:[dictPOData valueForKey:@"LA_Name"]];
-            [ageField setText:[dictPOData valueForKey:@"LA_Age"]];
-            [_BtnTanggalLahir setTitle:[dictPOData valueForKey:@"LA_DOB"] forState:UIControlStateNormal];
-            [btnOccp setTitle:[dictPOData valueForKey:@"LA_Occp"] forState:UIControlStateNormal];
-            
-            sex=[[NSString alloc]initWithString:[dictPOData valueForKey:@"LA_Gender"]];
-            if ([sex isEqualToString:@"MALE"]){
-                [sexSegment setSelectedSegmentIndex:0];
+        if (![[dictPOData valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"]){
+            if ([dictPOData count]!=0){
+                occuCode = [dictPOData valueForKey:@"LA_OccpCode"];
+                clientProfileID = [[dictPOData valueForKey:@"LA_ClientID"] intValue];
+                [nameField setText:[dictPOData valueForKey:@"LA_Name"]];
+                [ageField setText:[dictPOData valueForKey:@"LA_Age"]];
+                [_BtnTanggalLahir setTitle:[dictPOData valueForKey:@"LA_DOB"] forState:UIControlStateNormal];
+                [btnOccp setTitle:[dictPOData valueForKey:@"LA_Occp"] forState:UIControlStateNormal];
+                
+                sex=[[NSString alloc]initWithString:[dictPOData valueForKey:@"LA_Gender"]];
+                if ([sex isEqualToString:@"MALE"]){
+                    [sexSegment setSelectedSegmentIndex:0];
+                }
+                else{
+                    [sexSegment setSelectedSegmentIndex:1];
+                }
+                
+                DOB = _BtnTanggalLahir.titleLabel.text;
+                [self calculateAge];
             }
-            else{
-                [sexSegment setSelectedSegmentIndex:1];
-            }
-            
-            DOB = _BtnTanggalLahir.titleLabel.text;
-            [self calculateAge];
-        }
 
+        }
     }
     @catch (NSException *exception) {
         
@@ -1337,6 +1339,17 @@ id dobtemp;
     OccpLoadField.text = @"";
     CPAField.text = @"";
     PAField.text = @"";
+    
+    occuCode = @"";
+    clientProfileID = -1;
+    [nameField setText:@""];
+    [ageField setText:@""];
+    [_BtnTanggalLahir setTitle:@"--Please Select--" forState:UIControlStateNormal];
+    [btnOccp setTitle:@"--Please Select--" forState:UIControlStateNormal];
+    sex=@"";
+    [sexSegment setSelectedSegmentIndex:UISegmentedControlNoSegment];
+    
+    DOB = @"";
 }
 
 -(void)insertClient
@@ -1510,6 +1523,7 @@ id dobtemp;
     NSString *validation180=@"Usia tidak boleh kurang dari 180 hari atau lebih dari 55 tahun";
     NSString *validationUsiaSuamiIstri=@"Usia tidak boleh kurang dari 19 atau lebih dari 55 tahun";
     NSString *validationUsiaParents=@"Usia tidak boleh kurang dari 180 hari atau lebih dari 18 tahun";
+    NSString *validationOthers=@"Usia tidak boleh kurang dari 18 tahun atau lebih dari 55 tahun";
     
     //outletkodecabang
     NSString* namaTertangggung=nameField.text;
@@ -1590,7 +1604,7 @@ id dobtemp;
         
         else if ((![[_poDictionaryPO valueForKey:@"RelWithLA"] isEqualToString:@"ORANG TUA"])&&(![[_poDictionaryPO valueForKey:@"RelWithLA"] isEqualToString:@"SUAMI/ISTRI"])){
             if ((age <18)||(age >55)){
-                [self createAlertViewAndShow:validation180 tag:0];
+                [self createAlertViewAndShow:validationOthers tag:0];
                 return false;
             }
         }

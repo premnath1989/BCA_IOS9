@@ -2981,7 +2981,7 @@ BOOL isFirstLoad;
                     [self.RightView addSubview:self.RiderController.view];
                     [self.RightView bringSubviewToFront:self.RiderController.view];
                 }
-                [_RiderController calculateRiderPremi];
+                [_RiderController loadInitialRiderDataFromDatabase];
                 @try {
                     [self saveLAForTableDidSelect];
                     //[self saveBasicPlanForTableDidSelect];
@@ -3092,7 +3092,7 @@ BOOL isFirstLoad;
     }
     [_RiderController setDictionaryPOForInsert:dictionaryPOForInsert];
     [_RiderController setDictionaryForBasicPlan:newDictionaryForBasicPlan];
-    [_RiderController calculateRiderPremi];
+    //[_RiderController calculateRiderPremi];
 }
 
 -(void)saveNewLA:(NSDictionary *)dataPO{
@@ -3101,6 +3101,7 @@ BOOL isFirstLoad;
     [self.myTableView reloadData];
     if (([[dataPO valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"])||([[dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"SELF"])){
         selfRelation = YES;
+        [self clearData2ndLA];
         dictionaryPOForInsert = [NSMutableDictionary dictionaryWithDictionary:dataPO];
         dictionaryMasterForInsert = [[NSMutableDictionary alloc]initWithObjectsAndKeys:[dictionaryPOForInsert valueForKey:@"SINO"],@"SINO",@"1.1",@"SI_Version",@"Not Created",@"ProposalStatus", nil];
 
@@ -3134,7 +3135,7 @@ BOOL isFirstLoad;
     else{
         selfRelation = NO;
         [self loadSecondLAPage];
-        
+        [self.SecondLAController resetField];
         [self.myTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:SIMENU_SECOND_LIFE_ASSURED inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
     }
     
@@ -3344,12 +3345,24 @@ BOOL isFirstLoad;
                     [arrayIntValidate replaceObjectAtIndex:0 withObject:@"1"];
                 }
                 else{
+                    [self clearData2ndLA];
                     [self loadBasicPlanPage:YES];
                     [arrayIntValidate replaceObjectAtIndex:2 withObject:@"0"];
                     [arrayIntValidate replaceObjectAtIndex:1 withObject:@"1"];
                     [arrayIntValidate replaceObjectAtIndex:0 withObject:@"1"];
                     lastIndexSelected=2;
                 }
+                @try {
+                    [self saveLAForTableDidSelect];
+                    [self saveBasicPlanForTableDidSelect];
+                }
+                @catch (NSException *exception) {
+                    
+                }
+                @finally {
+                    
+                }
+
             }
             else{
                 if (_LAController == nil) {
@@ -3368,16 +3381,6 @@ BOOL isFirstLoad;
                 lastActiveController = self.LAController;
                 
                 [tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
-            }
-            @try {
-                [self saveLAForTableDidSelect];
-                [self saveBasicPlanForTableDidSelect];
-            }
-            @catch (NSException *exception) {
-                
-            }
-            @finally {
-                
             }
             break;
         case 2:
@@ -3405,7 +3408,16 @@ BOOL isFirstLoad;
                         [arrayIntValidate replaceObjectAtIndex:0 withObject:@"1"];
                     }
                 }
-                
+                @try {
+                    [self saveLAForTableDidSelect];
+                    [self saveBasicPlanForTableDidSelect];
+                }
+                @catch (NSException *exception) {
+                    
+                }
+                @finally {
+                    
+                }
             }
             else{
                 if (_LAController == nil) {
@@ -3425,16 +3437,7 @@ BOOL isFirstLoad;
                 
                 [tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
             }
-            @try {
-                [self saveLAForTableDidSelect];
-                [self saveBasicPlanForTableDidSelect];
-            }
-            @catch (NSException *exception) {
-                
-            }
-            @finally {
-                
-            }
+            
             break;
         case 3:
             if ([_LAController validateSave]){

@@ -133,6 +133,15 @@ int maxGycc = 0;
     tempHLLabel.text = @"Temporary Health\nLoading (Per 1k SA):";
     tempHLTLabel.text = @"Temporary Health Loading\n(Per 1k SA)Term:";
     
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(hideKeyboard)];
+    tap.cancelsTouchesInView = NO;
+    tap.numberOfTapsRequired = 1;
+    
+    [self.view addGestureRecognizer:tap];
+
+    
     //[editBtn setBackgroundImage:[[UIImage imageNamed:@"iphone_delete_button.png"] stretchableImageWithLeftCapWidth:8.0f topCapHeight:0.0f] forState:UIControlStateNormal];
     //[editBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     //editBtn.titleLabel.shadowColor = [UIColor lightGrayColor];
@@ -628,36 +637,107 @@ int maxGycc = 0;
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    NSString *newString     = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    NSArray  *arrayOfString = [newString componentsSeparatedByString:@"."];
-    
-    if (([riderCode isEqualToString:@"CIWP"] || [riderCode isEqualToString:@"LCWP"] || [riderCode isEqualToString:@"PR"] ||
-         [riderCode isEqualToString:@"SP_PRE"] || [riderCode isEqualToString:@"SP_STD"])) {
-        if (textField != HLField && textField != tempHLField) {
-            if (([arrayOfString count] > 1) || ([[arrayOfString objectAtIndex:0] length] > 3)) {
-                return NO;
+    NSUInteger newLength = [textField.text length] + [string length] - range.length;
+    if (textField == _extraPremiPercentField)
+    {
+        NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
+        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        return (([string isEqualToString:filtered]) && newLength <= 3);
+    }
+    else if (textField == _extraPremiNumberField)
+    {
+        NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
+        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        return (([string isEqualToString:filtered]) && newLength <= 2);
+    }
+    else if (textField == _masaExtraPremiField)
+    {
+        NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
+        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        return (([string isEqualToString:filtered]) && newLength <= 2);
+    }
+    else{
+        NSString *newString     = [textField.text stringByReplacingCharactersInRange:range withString:string];
+        NSArray  *arrayOfString = [newString componentsSeparatedByString:@"."];
+        
+        if (([riderCode isEqualToString:@"CIWP"] || [riderCode isEqualToString:@"LCWP"] || [riderCode isEqualToString:@"PR"] ||
+             [riderCode isEqualToString:@"SP_PRE"] || [riderCode isEqualToString:@"SP_STD"])) {
+            if (textField != HLField && textField != tempHLField) {
+                if (([arrayOfString count] > 1) || ([[arrayOfString objectAtIndex:0] length] > 3)) {
+                    return NO;
+                }
             }
         }
+        
+        if ([arrayOfString count] > 2) {
+            return NO;
+        }
+        
+        if ([arrayOfString count] > 1 && [[arrayOfString objectAtIndex:1] length] > 2) {
+            return NO;
+        }
+        
+        NSCharacterSet *nonNumberSet = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789."] invertedSet];
+        if ([string rangeOfCharacterFromSet:nonNumberSet].location != NSNotFound) {
+            return NO;
+        }
+        
+        return YES;
+
     }
-    
-    if ([arrayOfString count] > 2) {
-        return NO;
-    }
-    
-    if ([arrayOfString count] > 1 && [[arrayOfString objectAtIndex:1] length] > 2) {
-        return NO;
-    }
-    
-    NSCharacterSet *nonNumberSet = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789."] invertedSet];
-    if ([string rangeOfCharacterFromSet:nonNumberSet].location != NSNotFound) {
-        return NO;
-    }
-    
-    return YES;
 }
 
 #pragma mark - added by faiz
 //added by faiz
+- (void)createAlertViewAndShow:(NSString *)message tag:(int)alertTag{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
+                                                    message:[NSString stringWithFormat:@"%@",message] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    alert.tag = alertTag;
+    [alert show];
+}
+
+
+-(IBAction)validateMasaExtraPremi:(UITextField *)sender{
+    if (([_extraPremiNumberField.text length]>0)||([_extraPremiPercentField.text length]>0)){
+        int masaExtraPremi=[sender.text intValue];
+        if (masaExtraPremi<1 || masaExtraPremi>10){
+            [self createAlertViewAndShow:@"Masa extra premi tidak boleh lebih dari 10 dan kurang dari 1" tag:0];
+            [sender setText:@""];
+            [sender becomeFirstResponder];
+        }
+    }
+}
+
+-(IBAction)validateExtraPremiPercent:(UITextField *)sender{
+    NSString *validationExtraPremi=@"Extra Premi harus 25%,50%,75%,100%.....300%";
+    
+    if ([sender.text length]>0){
+        int intText=[sender.text intValue];
+        if (intText > 300){
+            [self createAlertViewAndShow:validationExtraPremi tag:0];
+            [sender becomeFirstResponder];
+        }
+        else{
+            if (intText%25!=0){
+                [self createAlertViewAndShow:validationExtraPremi tag:0];
+                [sender becomeFirstResponder];
+            }
+        }
+    }
+}
+
+-(IBAction)validateExtraPremiNumber:(UITextField *)sender{
+    NSString *validationExtraNumber=@"Extra Premi 0/100 harus 1-10";
+
+    if ([sender.text length]>0){
+        int intText=[sender.text intValue];
+        if (intText > 10){
+            [self createAlertViewAndShow:validationExtraNumber tag:0];
+            [sender becomeFirstResponder];
+        }
+    }
+}
+
 -(void)setElementActive{
     if (([[_dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"SELF"])||([[_dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"])){
         for (UIView *view in [myView subviews]) {
@@ -5937,7 +6017,8 @@ int maxGycc = 0;
     int extraPremiPercentage=[[_dictionaryForBasicPlan valueForKey:@"ExtraPremiumPercentage"] integerValue];
     int extraPremiumMil=[[_dictionaryForBasicPlan valueForKey:@"ExtraPremiumSum"] integerValue];
     int masaPremium=[[_dictionaryForBasicPlan valueForKey:@"ExtraPremiumTerm"] integerValue];
-    NSNumber* premiDasar = [formatter convertNumberFromString:[_dictionaryForBasicPlan valueForKey:@"PremiumPolicyA"]];
+    NSNumber* premiDasar = [formatter convertNumberFromStringCurrency:[_dictionaryForBasicPlan valueForKey:@"PremiumPolicyA"]];
+    NSNumber* premiExtra = [formatter convertNumberFromStringCurrency:[_dictionaryForBasicPlan valueForKey:@"ExtraPremiumPolicy"]];
     dictMDBKK=[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"Meniggal Dunia Bukan Karena Kecelakaan",@"RiderName",
                              @"MDBKK",@"RiderCode",
                              [riderCalculation getSumAssuredForMDBKK:sumAssured],@"SumAssured",
@@ -5946,7 +6027,7 @@ int maxGycc = 0;
                              [NSNumber numberWithInt:extraPremiPercentage],@"ExtraPremiPerCent",
                              [NSNumber numberWithInt:extraPremiumMil],@"ExtraPremiPerMil",
                              [NSNumber numberWithInt:masaPremium],@"MasaExtraPremi",
-                             @"-",@"ExtraPremiRp",
+                             [formatter stringToCurrencyDecimalFormatted:[NSString stringWithFormat:@"%@",premiExtra]],@"ExtraPremiRp",
                              [formatter stringToCurrencyDecimalFormatted:[NSString stringWithFormat:@"%@",premiDasar]],@"PremiRp",
                              nil];
     return dictMDBKK;
