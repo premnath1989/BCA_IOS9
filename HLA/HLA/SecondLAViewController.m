@@ -627,6 +627,21 @@ id dobtemp;
     [self.dobPopover presentPopoverFromRect:[sender bounds]  inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:NO];
 }
 
+-(void)setPODictionaryFromRoot:(NSMutableDictionary *)dictionaryRootPO{
+    if ([_poDictionaryPO count]>0){
+        if (![[_poDictionaryPO valueForKey:@"RelWithLA"] isEqualToString:[dictionaryRootPO valueForKey:@"RelWithLA"]]){
+            [self resetField];
+            _poDictionaryPO=dictionaryRootPO;
+        }
+        else{
+            _poDictionaryPO=dictionaryRootPO;
+        }
+    }
+    else{
+       _poDictionaryPO=dictionaryRootPO;
+    }
+}
+
 -(NSMutableDictionary *)setDictionarySecondLA{
     NSNumber *numberIntClientProfile;
     

@@ -368,11 +368,11 @@
     
     //    if([RelWithLA isEqualToString:@"DIRI SENDIRI"])
     //    {
-    WaiverRate = [NSString stringWithFormat:@"SELECT %@ FROM Keluargaku_Rates_basicPrem Where BasicCode = '%@' AND EntryAge = %i",LASex,@"KLK",LAAge];
+    WaiverRate = [NSString stringWithFormat:@"SELECT MALE,FEMALE FROM Keluargaku_Rates_basicPrem Where BasicCode = '%@' AND EntryAge = %i",@"KLK",LAAge];
     results = [database executeQuery:WaiverRate];
     while([results next])
     {
-        if ([PayorSex isEqualToString:@"Male"]||[PayorSex isEqualToString:@"MALE"]){
+        if ([LASex isEqualToString:@"Male"]||[LASex isEqualToString:@"MALE"]){
             RatesPremiumRate  = [results stringForColumn:@"Male"];
         }
         else{

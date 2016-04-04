@@ -361,7 +361,8 @@ BOOL isFirstLoad;
         }
         previousPath = selectedPath;
         blocked = NO;
-        [self.SecondLAController setPoDictionaryPO:dictionaryPOForInsert];
+        //[self.SecondLAController setPoDictionaryPO:dictionaryPOForInsert];
+        [self.SecondLAController setPODictionaryFromRoot:dictionaryPOForInsert];
         [self hideSeparatorLine];
         //[myTableView reloadData];
         [self.myTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
@@ -434,7 +435,8 @@ BOOL isFirstLoad;
             [self.BasicController loadData];
             
             if (!self.requestSINo){
-                [self.BasicController setDictionaryPOForInsert:dictionaryPOForInsert];
+                //[self.BasicController setDictionaryPOForInsert:dictionaryPOForInsert];
+                [self.BasicController setPODictionaryFromRoot:dictionaryPOForInsert];
                 [self.BasicController setPayorSex:[dictionaryPOForInsert valueForKey:@"PO_Gender"]];
                 [self.BasicController setPayorAge:[[dictionaryPOForInsert valueForKey:@"PO_Age"] integerValue]];
                 [self.BasicController setPlanType:[dictionaryPOForInsert valueForKey:@"ProductName"]];
@@ -455,7 +457,8 @@ BOOL isFirstLoad;
             }
             else{
                 NSDictionary* dictPO=[_modelSIPOData getPO_DataFor:[self.requestSINo description]];
-                [self.BasicController setDictionaryPOForInsert:dictionaryPOForInsert];
+                //[self.BasicController setDictionaryPOForInsert:dictionaryPOForInsert];
+                [self.BasicController setPODictionaryFromRoot:dictionaryPOForInsert];
                 [self.BasicController setPayorSex:[dictPO valueForKey:@"PO_Gender"]];
                 [self.BasicController setPayorAge:[[dictPO valueForKey:@"PO_Age"] integerValue]];
                 [self.BasicController setPlanType:[dictPO valueForKey:@"ProductName"]];
@@ -515,7 +518,8 @@ BOOL isFirstLoad;
             [self.BasicController loadData];
 
             if (!self.requestSINo){
-                [self.BasicController setDictionaryPOForInsert:dictionaryPOForInsert];
+                //[self.BasicController setDictionaryPOForInsert:dictionaryPOForInsert];
+                [self.BasicController setPODictionaryFromRoot:dictionaryPOForInsert];
                 [self.BasicController setPayorSex:[dictionaryPOForInsert valueForKey:@"PO_Gender"]];
                 [self.BasicController setPayorAge:[[dictionaryPOForInsert valueForKey:@"PO_Age"] integerValue]];
                 [self.BasicController setPlanType:[dictionaryPOForInsert valueForKey:@"ProductName"]];
@@ -537,7 +541,8 @@ BOOL isFirstLoad;
             }
             else{
                 NSDictionary* dictPO=[_modelSIPOData getPO_DataFor:[self.requestSINo description]];
-                [self.BasicController setDictionaryPOForInsert:dictionaryPOForInsert];
+                //[self.BasicController setDictionaryPOForInsert:dictionaryPOForInsert];
+                [self.BasicController setPODictionaryFromRoot:dictionaryPOForInsert];
                 [self.BasicController setPayorSex:[dictPO valueForKey:@"PO_Gender"]];
                 [self.BasicController setPayorAge:[[dictPO valueForKey:@"PO_Age"] integerValue]];
                 [self.BasicController setPlanType:[dictPO valueForKey:@"ProductName"]];
@@ -1079,7 +1084,7 @@ BOOL isFirstLoad;
                 [dictionaryPOForInsert setValue:getSINo forKey:@"SINO"];
                 [_LAController updateSINO:getSINo];
                 [self LoadViewController];
-                
+                arrayIntValidate = [[NSMutableArray alloc] initWithObjects:@"0",@"0",@"0",@"0", nil];                
             }
                 break;
             case 1:
@@ -3135,7 +3140,7 @@ BOOL isFirstLoad;
     else{
         selfRelation = NO;
         [self loadSecondLAPage];
-        [self.SecondLAController resetField];
+        //[self.SecondLAController resetField];
         [self.myTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:SIMENU_SECOND_LIFE_ASSURED inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
     }
     
@@ -3506,17 +3511,19 @@ BOOL isFirstLoad;
                 [arrayIntValidate replaceObjectAtIndex:0 withObject:@"0"];
                 
                 [tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
-            }
-            @try {
-                [self saveLAForTableDidSelect];
-                [self saveBasicPlanForTableDidSelect];
-            }
-            @catch (NSException *exception) {
                 
+                /*@try {
+                    [self saveLAForTableDidSelect];
+                    [self saveBasicPlanForTableDidSelect];
+                }
+                @catch (NSException *exception) {
+                    
+                }
+                @finally {
+                    
+                }*/
             }
-            @finally {
-                
-            }
+            
             break;
         default:
             break;

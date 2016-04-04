@@ -238,6 +238,7 @@
 -(IBAction)MasaExtraPremiTextFieldDidEnd:(UITextField *)sender;
 -(IBAction)validationExtraPremiField:(UITextField *)sender;
 - (bool)validationDataBasicPlan;
+-(void)setPODictionaryFromRoot:(NSMutableDictionary *)dictionaryRootPO;
 //end of added by faiz
 
 //for SINo

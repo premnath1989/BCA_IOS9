@@ -159,6 +159,7 @@
 @property (nonatomic, assign,readwrite) BOOL quickQuoteEnabled;
 - (bool)validationDataLifeAssured;
 -(void)initialPOData;
+-(void)setPODictionaryFromRoot:(NSMutableDictionary *)dictionaryRootPO;
 -(NSMutableDictionary *)setDictionarySecondLA;
 //end of added by faiz
 @end

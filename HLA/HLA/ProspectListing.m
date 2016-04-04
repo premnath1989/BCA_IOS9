@@ -113,6 +113,14 @@ MBProgressHUD *HUD;
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ReloadTableData) name:@"ReloadData" object:nil];
     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSForegroundColorAttributeName:[UIColor colorWithRed:88.0f/255.0f green:89.0f/255.0f blue:92.0f/255.0f alpha:1],NSFontAttributeName: [UIFont fontWithName:@"BPreplay" size:17.0f]}];
+    
+    if ([_myTableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [_myTableView setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    if ([_myTableView respondsToSelector:@selector(setLayoutMargins:)]) {
+        [_myTableView setLayoutMargins:UIEdgeInsetsZero];
+    }
 
 }
 
@@ -201,6 +209,7 @@ MBProgressHUD *HUD;
     }
     else {
         NSLog(@"%i",[ProspectTableData count]+1);
+        //return [ProspectTableData count]+1;
         return [ProspectTableData count]+1;
     }
 }
@@ -1570,6 +1579,9 @@ MBProgressHUD *HUD;
             sqlite3_close(contactDB);
             querySQL = Nil;
         }*/
+        [ProspectTableData removeAllObjects];
+        [self.myTableView reloadData];
+        
         ProspectTableData=[modelProspectProfile searchProspectProfileByName:nametxt.text BranchName:_txtBranchName.text DOB:_outletDOB.titleLabel.text Order:@"ProspectName" Method:@"ASC" ID:txtIDNumber.text];
     }
     [self getMobileNo];

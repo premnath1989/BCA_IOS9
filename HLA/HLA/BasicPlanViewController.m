@@ -262,6 +262,28 @@ bool WPTPD30RisDeleted = FALSE;
     parPayoutField.backgroundColor = [UIColor lightGrayColor];
 }
 
+-(void)resetField
+{
+    premiType = @"S";
+    [yearlyIncomeField setText:@""];
+    [_basicPremiField setText:@""];
+    [_extraPremiPercentField setText:@""];
+    [_extraPremiNumberField setText:@""];
+    [_masaExtraPremiField setText:@""];
+    [_extraBasicPremiField setText:@""];
+    [_totalPremiWithLoadingField setText:@""];
+    [_masaPembayaranButton setTitle:@"--Please Select---" forState:UIControlStateNormal];
+    [_frekuensiPembayaranButton setTitle:@"--Please Select---" forState:UIControlStateNormal];
+    FRekeunsiPembayaranMode = @"";
+    [_KKLKPembelianKeBtn setTitle:@"--Please Select---" forState:UIControlStateNormal];
+    [_KKLKDiskaunBtn setText:@"0"];
+    BasisSumAssured = 0;
+    discountPembelian=0;
+    PembelianKEString =@"0";
+    PaymentDescMDKK = FRekeunsiPembayaranMode;
+}
+
+
 -(void)resetData{
     cashDividendHLACP = @"";
     cashDividend = @"";
@@ -342,7 +364,9 @@ bool WPTPD30RisDeleted = FALSE;
         _masaPembayaranButton.hidden = NO;
          ExtraPremiDasarLBL.hidden = NO;
         //yearlyIncomeField.text = @"";
+    
 //    }
+    
     [self PremiDasarAct];
     [self PremiDasarActB];
 }
@@ -363,7 +387,7 @@ bool WPTPD30RisDeleted = FALSE;
     FrekuensiPembayaranChecking =@"10 Tahun";
     //yearlyIncomeField.text = @"";
     //    }
-    
+   
     [self PremiDasarActKeluargaku:FRekeunsiPembayaranMode];
     [self calculateRiderPremi];
 }
@@ -1104,7 +1128,7 @@ bool WPTPD30RisDeleted = FALSE;
     
     ////BasicPremiRate/////
     
-    AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT %@ FROM Keluargaku_Rates_basicPrem Where BasicCode = '%@' AND EntryAge = %i",LASex,@"KLK",LAAge];
+    AnsuransiDasarQuery = [NSString stringWithFormat:@"SELECT MALE,FEMALE FROM Keluargaku_Rates_basicPrem Where BasicCode = '%@' AND EntryAge = %i",@"KLK",LAAge];
     results = [database executeQuery:AnsuransiDasarQuery];
     
     NSString*RatesPremiumRate;
@@ -1116,7 +1140,7 @@ bool WPTPD30RisDeleted = FALSE;
     
     while([results next])
     {
-        if ([PayorSex isEqualToString:@"Male"]||[PayorSex isEqualToString:@"MALE"]){
+        if ([LASex isEqualToString:@"Male"]||[LASex isEqualToString:@"MALE"]){
             RatesPremiumRate  = [results stringForColumn:@"Male"];
         }
         else{
@@ -1183,7 +1207,7 @@ bool WPTPD30RisDeleted = FALSE;
     while([results5 next])
     {
         if ([PayorSex isEqualToString:@"Male"]||[PayorSex isEqualToString:@"MALE"]){
-            RatesPremiumRate5  = [results5 stringForColumn:@"Male"];
+                RatesPremiumRate5  = [results5 stringForColumn:@"Male"];
         }
         else{
             RatesPremiumRate5 = [results5 stringForColumn:@"Female"];
@@ -1336,9 +1360,12 @@ bool WPTPD30RisDeleted = FALSE;
     {
         PaymentMode = 1;
     }
-    if ([FRekeunsiPembayaranMode isEqualToString:@"Bulanan"])
+    else if ([FRekeunsiPembayaranMode isEqualToString:@"Bulanan"])
     {
         PaymentMode = 0.1;
+    }
+    else{
+        PaymentMode = 0;
     }
     
     double RatesInt = [RatesPremiumRate doubleValue];
@@ -1843,8 +1870,8 @@ bool WPTPD30RisDeleted = FALSE;
     
     //ExtraPrecenttotal = Extraprem;
     ExtraPrecenttotal = totalB;
-    long long ExtraPrem1 = ExtraPremiTotal + ExtraPrecenttotal;
-    //double ExtraPrem1 = ExtraPremiTotal + ExtraPrecenttotal;
+    //long long ExtraPrem1 = ExtraPremiTotal + ExtraPrecenttotal;
+    double ExtraPrem1 = ExtraPremiTotal + ExtraPrecenttotal;
 
     
     
@@ -2123,6 +2150,22 @@ bool WPTPD30RisDeleted = FALSE;
     }
     appDelegate.isNeedPromptSaveMsg = YES;
 	
+}
+
+-(void)setPODictionaryFromRoot:(NSMutableDictionary *)dictionaryRootPO{
+    if ([_dictionaryPOForInsert count]>0){
+        if (![[_dictionaryPOForInsert valueForKey:@"ProductName"] isEqualToString:[dictionaryRootPO valueForKey:@"ProductName"]]){
+            [self resetField];
+            _dictionaryPOForInsert=dictionaryRootPO;
+        }
+        else{
+        
+        }
+        
+    }
+    else{
+        _dictionaryPOForInsert=dictionaryRootPO;
+    }
 }
 
 -(NSMutableDictionary *)setDataBasicPlan{

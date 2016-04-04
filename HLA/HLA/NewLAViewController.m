@@ -528,7 +528,7 @@ id dobtanngal;
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];    
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
     
-    [self loadDataFromList];
+    //[self loadDataFromList];
     //test disable the fields
     [self checkEditingMode];
 }
@@ -1434,7 +1434,7 @@ id dobtanngal;
         self.OccupationListPopover = [[UIPopoverController alloc] initWithContentViewController:_OccupationList];
     }
     
-    [self.OccupationListPopover presentPopoverFromRect:[sender frame]  inView:scrollLA permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+    [self.OccupationListPopover presentPopoverFromRect:[sender frame]  inView:scrollLA permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 	
     appDelegate.isNeedPromptSaveMsg = YES;
 	
