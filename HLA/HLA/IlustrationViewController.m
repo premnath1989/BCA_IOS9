@@ -45,8 +45,8 @@
     page =1;
     pdfCreated=false;
     if ([[_dictionaryForBasicPlan valueForKey:@"ProductCode"] isEqualToString:@"BCAKK"]){
-        [self joinHTMLKeluargaku];
         [self getRiderValue];
+        [self joinHTMLKeluargaku];
     }
     else{
         [self loadPremi];
@@ -900,6 +900,12 @@
     NSString *javaScriptP1H21;
     NSString *javaScriptP1H22;
     NSString *javaScriptP1H16;
+
+    NSString *javaScriptP1H23;
+    NSString *javaScriptP1H24;
+    NSString *javaScriptP1H25;
+    NSString *javaScriptP1H26;
+
     NSString* manfaatBebasPremiText;
     if(([RelWithLA isEqualToString:@"DIRI SENDIRI"])||([RelWithLA isEqualToString:@"SELF"]))
     {
@@ -908,13 +914,21 @@
         javaScriptP1H22=[NSString stringWithFormat:@"document.getElementById('MasaExtraPremiLA').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"ExtraPremiumTerm"]];
         javaScriptP1H16=[NSString stringWithFormat:@"document.getElementById('SelfRelation').innerHTML =\"%@\";", @"Ya"];
         
+        javaScriptP1H23=[NSString stringWithFormat:@"document.getElementById('ExtraPremiPercentPO').innerHTML ="";"];
+        javaScriptP1H24=[NSString stringWithFormat:@"document.getElementById('ExtraPremiPerMilPO').innerHTML ="";"];
+        javaScriptP1H25=[NSString stringWithFormat:@"document.getElementById('MasaExtraPremiPO').innerHTML ="";"];
+
         manfaatBebasPremiText = @"Jika Tertanggung cacat tetap total karena sebab apapun maka Polis menjadi Bebas Premi.";
 
     }
     else{
-        javaScriptP1H20=[NSString stringWithFormat:@"document.getElementById('ExtraPremiPercentPO').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"ExtraPremiumPercentage"]];
-        javaScriptP1H21=[NSString stringWithFormat:@"document.getElementById('ExtraPremiPerMilPO').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"ExtraPremiumSum"]];
-        javaScriptP1H22=[NSString stringWithFormat:@"document.getElementById('MasaExtraPremiPO').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"ExtraPremiumTerm"]];
+        javaScriptP1H20=[NSString stringWithFormat:@"document.getElementById('ExtraPremiPercentLA').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"ExtraPremiumPercentage"]];
+        javaScriptP1H21=[NSString stringWithFormat:@"document.getElementById('ExtraPremiPerMilLA').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"ExtraPremiumSum"]];
+        javaScriptP1H22=[NSString stringWithFormat:@"document.getElementById('MasaExtraPremiLA').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"ExtraPremiumTerm"]];
+
+        javaScriptP1H23=[NSString stringWithFormat:@"document.getElementById('ExtraPremiPercentPO').innerHTML =\"%@\";", [dictBebasPremi valueForKey:@"ExtraPremiPercent"]];
+        javaScriptP1H24=[NSString stringWithFormat:@"document.getElementById('ExtraPremiPerMilPO').innerHTML =\"%@\";", [dictBebasPremi valueForKey:@"ExtraPremiMil"]];
+        javaScriptP1H25=[NSString stringWithFormat:@"document.getElementById('MasaExtraPremiPO').innerHTML =\"%@\";", [dictBebasPremi valueForKey:@"MasaExtraPremi"]];
         javaScriptP1H16=[NSString stringWithFormat:@"document.getElementById('SelfRelation').innerHTML =\"%@\";", @"Tidak"];
         
         manfaatBebasPremiText = @"Jika Pemegang Polis meninggal dunia karena sebab apapun maka Polis menjadi Bebas Premi.";
@@ -932,9 +946,16 @@
         NSString *javaScriptP1H15=[NSString stringWithFormat:@"document.getElementById('LAGender').innerHTML =\"%@\";", sexLA];
         NSString *javaScriptP1H18=[NSString stringWithFormat:@"document.getElementById('SIDate').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"SIDate"]];
 
-    
+        int discount = [[_dictionaryForBasicPlan valueForKey:@"Discount"] intValue];
+        NSString *javaScriptP1H14;
         NSNumber *myNumber = [formatter convertNumberFromString:[_dictionaryForBasicPlan valueForKey:@"Sum_Assured"]];
-        NSString *javaScriptP1H14=[NSString stringWithFormat:@"document.getElementById('SIDiscount').innerHTML =\"(%@)\";", [_dictionaryForBasicPlan valueForKey:@"Discount"]];
+        if (discount>0){
+        javaScriptP1H14=[NSString stringWithFormat:@"document.getElementById('SIDiscount').innerHTML =\"(%@)\";", [_dictionaryForBasicPlan valueForKey:@"Discount"]];
+        }
+        else{
+        javaScriptP1H14=[NSString stringWithFormat:@"document.getElementById('SIDiscount').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"Discount"]];
+        }
+    
         NSString *javaScriptP1H17=[NSString stringWithFormat:@"document.getElementById('TotalPremi').innerHTML =\"%@\";", [NSString stringWithFormat:@"%@",[formatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:totalDibayar]]]];
         NSString *javaScriptP1H1=[NSString stringWithFormat:@"document.getElementById('SumAssured').innerHTML =\"%@\";", [formatter numberToCurrencyDecimalFormatted:myNumber]];
         NSString *javaScriptP1H4=[NSString stringWithFormat:@"document.getElementById('Loading').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"LA_Name"]];
@@ -985,6 +1006,9 @@
         [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1H20];
         [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1H21];
         [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1H22];
+        [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1H23];
+        [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1H24];
+        [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1H25];
     
         [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1T1];
         [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP1T2];
