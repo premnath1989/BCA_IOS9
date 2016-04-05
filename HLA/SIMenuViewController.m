@@ -169,12 +169,19 @@ BOOL isFirstLoad;
                 if (_LAController == nil) {
                     self.LAController = [self.storyboard instantiateViewControllerWithIdentifier:@"LAView"];
                     _LAController.delegate = self;
+                    self.LAController.requestSINo = [self.requestSINo description];
+                    self.LAController.requesteProposalStatus = eProposalStatus;
+                    self.LAController.EAPPorSI = [self.EAPPorSI description];
+                    
+                    [self.RightView addSubview:self.LAController.view];
+                }else{
+                    self.LAController.requestSINo = [self.requestSINo description];
+                    self.LAController.requesteProposalStatus = eProposalStatus;
+                    self.LAController.EAPPorSI = [self.EAPPorSI description];
+                    
+                    [self.LAController.view removeFromSuperview];
+                    [self.RightView addSubview:self.LAController.view];
                 }
-                self.LAController.requestSINo = [self.requestSINo description];
-                self.LAController.requesteProposalStatus = eProposalStatus;
-                self.LAController.EAPPorSI = [self.EAPPorSI description];
-                
-                [self.RightView addSubview:self.LAController.view];
                 [_LAController processLifeAssured];
                 
                 NSString *msg = @"Please be informed that this SI is attached to a pending eApp case. System will auto delete the eApp case should you wish to amend the SI";
@@ -301,28 +308,28 @@ BOOL isFirstLoad;
 - (void)HTMLtoPDFDidFail:(NDHTMLtoPDF*)htmlToPDF {
 }
 
--(void)loadLAPage
-{
-	_LAController.delegate = self;
-	if (getSINo) {
-		self.LAController.requestSINo = getSINo;
-		self.LAController.EAPPorSI = [self.EAPPorSI description];
-		self.LAController.requesteProposalStatus = eProposalStatus;
-        
-	} else {
-		self.LAController.requestIndexNo = getLAIndexNo;
-		self.LAController.requestLastIDPay = getIdPay;
-		self.LAController.requestLastIDProf = getIdProf;
-		self.LAController.requestCommDate = getCommDate;
-		self.LAController.requestSex = getSex;
-		self.LAController.requestSmoker = getSmoker;
-		self.LAController.requesteProposalStatus = eProposalStatus;
-		
-	}
-    [self.RightView addSubview:self.LAController.view];
-    [_LAController processLifeAssured];
-    
-}
+//-(void)loadLAPage
+//{
+//	_LAController.delegate = self;
+//	if (getSINo) {
+//		self.LAController.requestSINo = getSINo;
+//		self.LAController.EAPPorSI = [self.EAPPorSI description];
+//		self.LAController.requesteProposalStatus = eProposalStatus;
+//        
+//	} else {
+//		self.LAController.requestIndexNo = getLAIndexNo;
+//		self.LAController.requestLastIDPay = getIdPay;
+//		self.LAController.requestLastIDProf = getIdProf;
+//		self.LAController.requestCommDate = getCommDate;
+//		self.LAController.requestSex = getSex;
+//		self.LAController.requestSmoker = getSmoker;
+//		self.LAController.requesteProposalStatus = eProposalStatus;
+//		
+//	}
+//    [self.RightView addSubview:self.LAController.view];
+//    [_LAController processLifeAssured];
+//    
+//}
 
 -(void)loadSecondLAPage
 {
@@ -877,6 +884,8 @@ BOOL isFirstLoad;
             [self.RightView addSubview:_PremiumController.view];
         }
         [_PremiumController setPremiumDictionary:newDictionaryForBasicPlan];
+        [_PremiumController.view removeFromSuperview];
+        [self.RightView addSubview:_PremiumController.view];
         [self.RightView bringSubviewToFront:_PremiumController.view];
     }
 }
