@@ -886,6 +886,7 @@ BOOL isFirstLoad;
         [_PremiumController setPremiumDictionary:newDictionaryForBasicPlan];
         [_PremiumController.view removeFromSuperview];
         [self.RightView addSubview:_PremiumController.view];
+        _PremiumController.requestSINo = [dictionaryPOForInsert valueForKey:@"SINO"];
         [self.RightView bringSubviewToFront:_PremiumController.view];
     }
 }
@@ -1291,6 +1292,8 @@ BOOL isFirstLoad;
             
             [self.BasicController loadData];
             
+            [self.BasicController.view removeFromSuperview];
+            [self.RightView addSubview:self.BasicController.view];
             [self.RightView bringSubviewToFront:self.BasicController.view];
         } else {
             if (CurrentPath == SIMENU_QUOTATION) {
@@ -1606,6 +1609,8 @@ BOOL isFirstLoad;
 //            [self addChildViewController:self.BasicController];
             [self.RightView addSubview:self.BasicController.view];
         } else {
+            [self.BasicController.view removeFromSuperview];
+            [self.RightView addSubview:self.BasicController.view];
             [self.RightView bringSubviewToFront:self.BasicController.view];
         }
         
@@ -3027,6 +3032,7 @@ BOOL isFirstLoad;
                         [self pullSIData];
                         [_PremiumController setPremiumDictionary:newDictionaryForBasicPlan];
                         [_PremiumController loadDataFromDB];
+                        _PremiumController.requestSINo = [dictionaryPOForInsert valueForKey:@"SINO"];
                         [self.RightView bringSubviewToFront:_PremiumController.view];
                         
                         @try {
@@ -3266,6 +3272,7 @@ BOOL isFirstLoad;
         [_PremiumController setPremiumDictionary:newDictionaryForBasicPlan];
         [_PremiumController loadDataFromDB];
         [_PremiumController.view removeFromSuperview];
+        _PremiumController.requestSINo = [dictionaryPOForInsert valueForKey:@"SINO"];
         [self.RightView addSubview:_PremiumController.view];
         [self.RightView bringSubviewToFront:_PremiumController.view];
     }
@@ -5791,6 +5798,7 @@ BOOL isFirstLoad;
             [self.RightView addSubview:_PremiumController.view];
         }
         [_PremiumController setPremiumDictionary:newDictionaryForBasicPlan];
+        _PremiumController.requestSINo = [dictionaryPOForInsert valueForKey:@"SINO"];
         [self.RightView bringSubviewToFront:_PremiumController.view];
     }
     else

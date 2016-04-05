@@ -62,7 +62,7 @@
 - (void) checkEditingMode {
     
     LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
-    NSString *EditMode = [loginDB EditIllustration:SINo];
+    NSString *EditMode = [loginDB EditIllustration:[self.requestSINo description]];
     NSLog(@" Edit Mode %@ : %@", EditMode, SINo);
     //disable all text fields
     if([EditMode caseInsensitiveCompare:@"0"] == NSOrderedSame){
@@ -4554,7 +4554,6 @@
             NSLog(@"ok");
             LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
             [loginDB updateSIMaster:[self.requestSINo description] EnableEditing:@"0"];
-            simpan.enabled = NO;
             [delegate heritageSimpan];
         }
             break;
