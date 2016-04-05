@@ -732,19 +732,23 @@ int maxGycc = 0;
 - (int) validateTextFields{
 
     int valid = 1;
-    if (([[_dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"SELF"])||([[_dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"])){
-        return valid;
-    }
-    else{
-        valid = [self validateExtraPremiNumber:_extraPremiNumberField];
-        if(valid == 1){
-            valid = [self validateMasaExtraPremi:_masaExtraPremiField];
-        }
-        if(valid == 1){
-            valid = [self validateExtraPremiPercent:_extraPremiPercentField];
-        }
-    }
     
+    if([_extraPremiNumberField.text isEqualToString:@"0"] && [_masaExtraPremiField.text isEqualToString:@"0"] && [_extraPremiPercentField.text isEqualToString:@"0"]){
+        return valid;
+    }else{
+        if (([[_dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"SELF"])||([[_dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"])){
+            return valid;
+        }
+        else{
+            valid = [self validateExtraPremiNumber:_extraPremiNumberField];
+            if(valid == 1){
+                valid = [self validateMasaExtraPremi:_masaExtraPremiField];
+            }
+            if(valid == 1){
+                valid = [self validateExtraPremiPercent:_extraPremiPercentField];
+            }
+        }
+    }
     return valid;
 }
 
