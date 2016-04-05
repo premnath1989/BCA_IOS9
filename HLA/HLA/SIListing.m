@@ -535,7 +535,7 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
         //[cell.labelSumAssured setText:@"0"];
         
         NSString *status = @"";
-        if([[SIQQStatus objectAtIndex:indexPath.row] caseInsensitiveCompare:@"false"] == NSOrderedSame){
+        if([[SIQQStatus objectAtIndex:indexPath.row] caseInsensitiveCompare:@"0"] == NSOrderedSame){
             status = @"";
         }else{
             status = @"Q";

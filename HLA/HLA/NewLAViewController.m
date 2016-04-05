@@ -528,7 +528,10 @@ id dobtanngal;
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];    
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
     
-    //[self loadDataFromList];
+//    [self loadDataFromList];
+    _modelSIPOData = [[ModelSIPOData alloc]init];
+    dictPOData=[[NSDictionary alloc]initWithDictionary:[_modelSIPOData getPO_DataFor:requestSINo]];
+    [_SINumberBCA setText:[dictPOData valueForKey:@"SINO"]];
     //test disable the fields
     [self checkEditingMode];
 }
