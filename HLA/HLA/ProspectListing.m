@@ -210,7 +210,7 @@ MBProgressHUD *HUD;
     else {
         NSLog(@"%i",[ProspectTableData count]+1);
         //return [ProspectTableData count]+1;
-        return [ProspectTableData count]+1;
+        return [ProspectTableData count];
     }
 }
 

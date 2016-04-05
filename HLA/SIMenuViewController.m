@@ -3139,6 +3139,31 @@ BOOL isFirstLoad;
     }
     else{
         selfRelation = NO;
+        dictionaryPOForInsert = [NSMutableDictionary dictionaryWithDictionary:dataPO];
+        dictionaryMasterForInsert = [[NSMutableDictionary alloc]initWithObjectsAndKeys:[dictionaryPOForInsert valueForKey:@"SINO"],@"SINO",@"1.1",@"SI_Version",@"Not Created",@"ProposalStatus", nil];
+        
+        [arrayIntValidate replaceObjectAtIndex:1 withObject:@"1"];
+        
+        if (self.requestSINo){
+            if ([_modelSIPOData getPODataCount:[self.requestSINo description]]>0){
+                [_modelSIPOData updatePOData:dictionaryPOForInsert];
+                [_modelSIMaster updateIlustrationMaster:dictionaryMasterForInsert];
+            }
+            else{
+                [_modelSIPOData savePODate:dictionaryPOForInsert];
+                [_modelSIMaster saveIlustrationMaster:dictionaryMasterForInsert];
+            }
+        }
+        else{
+            if ([_modelSIPOData getPODataCount:[dictionaryPOForInsert valueForKey:@"SINO"]]>0){
+                [_modelSIPOData updatePOData:dictionaryPOForInsert];
+                [_modelSIMaster updateIlustrationMaster:dictionaryMasterForInsert];
+            }
+            else{
+                [_modelSIPOData savePODate:dictionaryPOForInsert];
+                [_modelSIMaster saveIlustrationMaster:dictionaryMasterForInsert];
+            }
+        }
         [self loadSecondLAPage];
         //[self.SecondLAController resetField];
         [self.myTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:SIMENU_SECOND_LIFE_ASSURED inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];

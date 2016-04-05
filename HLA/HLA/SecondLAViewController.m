@@ -464,16 +464,33 @@ id dobtemp;
                 clientProfileID = [[dictPOData valueForKey:@"LA_ClientID"] intValue];
                 [nameField setText:[dictPOData valueForKey:@"LA_Name"]];
                 [ageField setText:[dictPOData valueForKey:@"LA_Age"]];
-                [_BtnTanggalLahir setTitle:[dictPOData valueForKey:@"LA_DOB"] forState:UIControlStateNormal];
-                [btnOccp setTitle:[dictPOData valueForKey:@"LA_Occp"] forState:UIControlStateNormal];
-                
-                sex=[[NSString alloc]initWithString:[dictPOData valueForKey:@"LA_Gender"]];
-                if ([sex isEqualToString:@"MALE"]){
-                    [sexSegment setSelectedSegmentIndex:0];
+                if ([[dictPOData valueForKey:@"LA_DOB"] isEqualToString:@""]){
+                    [_BtnTanggalLahir setTitle:@"--Please Select--" forState:UIControlStateNormal];
                 }
                 else{
-                    [sexSegment setSelectedSegmentIndex:1];
+                    [_BtnTanggalLahir setTitle:[dictPOData valueForKey:@"LA_DOB"] forState:UIControlStateNormal];
                 }
+                if ([[dictPOData valueForKey:@"LA_Occp"] isEqualToString:@""]){
+                    [btnOccp setTitle:@"--Please Select--" forState:UIControlStateNormal];
+                }
+                else{
+                    [btnOccp setTitle:[dictPOData valueForKey:@"LA_Occp"] forState:UIControlStateNormal];
+                }
+                
+                
+                sex=[[NSString alloc]initWithString:[dictPOData valueForKey:@"LA_Gender"]];
+                if ([sex length]>0){
+                    if ([sex isEqualToString:@"MALE"]){
+                        [sexSegment setSelectedSegmentIndex:0];
+                    }
+                    else{
+                        [sexSegment setSelectedSegmentIndex:1];
+                    }
+                }
+                else{
+                    [sexSegment setSelectedSegmentIndex:UISegmentedControlNoSegment];
+                }
+                
                 
                 DOB = _BtnTanggalLahir.titleLabel.text;
                 [self calculateAge];

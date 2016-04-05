@@ -1181,6 +1181,15 @@ id dobtanngal;
         [dictionaryNewLA setObject:occuCode forKey:@"LA_OccpCode"];
         [dictionaryNewLA setObject:occupationDesc forKey:@"LA_Occp"];
     }
+    else{
+        [dictionaryNewLA setObject:@"" forKey:@"LA_ClientID"];
+        [dictionaryNewLA setObject:@"" forKey:@"LA_Name"];
+        [dictionaryNewLA setObject:@"" forKey:@"LA_DOB"];
+        [dictionaryNewLA setObject:@"" forKey:@"LA_Age"];
+        [dictionaryNewLA setObject:@"" forKey:@"LA_Gender"];
+        [dictionaryNewLA setObject:@"" forKey:@"LA_OccpCode"];
+        [dictionaryNewLA setObject:@"" forKey:@"LA_Occp"];
+    }
     return dictionaryNewLA;
 }
 
@@ -1958,8 +1967,8 @@ id dobtanngal;
                  andCommDate:commDate andSmoker:smoker DiffClient:DiffClient bEDDCase:EDDCase];
         Inserted = YES;
         AppDelegate *del= (AppDelegate*)[[UIApplication sharedApplication] delegate ];
-        del.SICompleted = NO;
-        
+        //del.SICompleted = NO;
+        del.SICompleted = YES;
         sqlite3_close(contactDB);
     }
     return YES;
@@ -2935,7 +2944,8 @@ id dobtanngal;
         
         [self.prospectPopover dismissPopoverAnimated:YES];
         outletDone.enabled = TRUE;
-        del.SICompleted = NO; //added by Edwin 9-10-2013
+        //del.SICompleted = NO; //added by Edwin 9-10-2013
+        del.SICompleted = YES;
 	}	
 }
 
