@@ -697,45 +697,64 @@ int maxGycc = 0;
 }
 
 
--(IBAction)validateMasaExtraPremi:(UITextField *)sender{
+-(int)validateMasaExtraPremi:(UITextField *)sender{
+    int Success = 1;
     if (([_extraPremiNumberField.text length]>0)||([_extraPremiPercentField.text length]>0)){
         int masaExtraPremi=[sender.text intValue];
         if (masaExtraPremi<1 || masaExtraPremi>10){
             [self createAlertViewAndShow:@"Masa extra premi tidak boleh lebih dari 10 dan kurang dari 1" tag:0];
             [sender setText:@""];
-            [sender becomeFirstResponder];
+            Success = 0;
         }
     }
+    return  Success;
 }
 
--(IBAction)validateExtraPremiPercent:(UITextField *)sender{
+-(int)validateExtraPremiPercent:(UITextField *)sender{
     NSString *validationExtraPremi=@"Extra Premi harus 25%,50%,75%,100%.....300%";
-    
+    int Success = 1;
     if ([sender.text length]>0){
         int intText=[sender.text intValue];
         if (intText > 300){
             [self createAlertViewAndShow:validationExtraPremi tag:0];
-            [sender becomeFirstResponder];
+            Success = 0;
         }
         else{
             if (intText%25!=0){
                 [self createAlertViewAndShow:validationExtraPremi tag:0];
-                [sender becomeFirstResponder];
+                Success = 0;
             }
         }
     }
+    return Success;
 }
 
--(IBAction)validateExtraPremiNumber:(UITextField *)sender{
+- (int) validateTextFields{
+    int valid = 1;
+
+    valid = [self validateExtraPremiNumber:_extraPremiNumberField];
+    if(valid == 1){
+        valid = [self validateMasaExtraPremi:_masaExtraPremiField];
+    }
+    if(valid == 1){
+        valid = [self validateExtraPremiPercent:_extraPremiPercentField];
+    }
+    
+    return valid;
+}
+
+-(int)validateExtraPremiNumber:(UITextField *)sender{
     NSString *validationExtraNumber=@"Extra Premi 0/100 harus 1-10";
 
+    int Success = 1;
     if ([sender.text length]>0){
         int intText=[sender.text intValue];
-        if (intText > 10){
+        if ((intText > 10) || (intText < 1)){
             [self createAlertViewAndShow:validationExtraNumber tag:0];
-            [sender becomeFirstResponder];
+            Success = 0;
         }
     }
+    return Success;
 }
 
 -(void)setElementActive{
@@ -2936,8 +2955,10 @@ int maxGycc = 0;
 - (IBAction)doSaveRider:(id)sender
 {
     //[self calculateRiderPremi];
-    [self calculateBPPremi];
-    [_delegate saveAll];
+    if([self validateTextFields] == 1){
+        [self calculateBPPremi];
+        [_delegate saveAll];
+    }
 }
 
 - (IBAction)editPressed:(id)sender

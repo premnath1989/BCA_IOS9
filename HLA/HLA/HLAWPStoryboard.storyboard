@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15C50" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
@@ -4082,7 +4082,6 @@
                                         <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                         <connections>
-                                            <action selector="validateExtraPremiPercent:" destination="il8-A2-VxN" eventType="editingDidEnd" id="zbw-IP-Ua4"/>
                                             <outlet property="delegate" destination="il8-A2-VxN" id="7G8-ul-T2W"/>
                                         </connections>
                                     </textField>
@@ -4093,7 +4092,6 @@
                                         <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                         <connections>
-                                            <action selector="validateExtraPremiNumber:" destination="il8-A2-VxN" eventType="editingDidEnd" id="0g8-gq-Cvl"/>
                                             <outlet property="delegate" destination="il8-A2-VxN" id="Jmi-mD-2RU"/>
                                         </connections>
                                     </textField>
@@ -4104,7 +4102,6 @@
                                         <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                         <connections>
-                                            <action selector="validateMasaExtraPremi:" destination="il8-A2-VxN" eventType="editingDidEnd" id="1I4-Lh-DbV"/>
                                             <outlet property="delegate" destination="il8-A2-VxN" id="1XQ-sn-pOg"/>
                                         </connections>
                                     </textField>
