@@ -524,14 +524,14 @@ id dobtanngal;
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];    
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];    
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
+    [super viewDidAppear:animated];
     
-//    [self loadDataFromList];
+    //force the page to load new sino and modify the textfield
     _modelSIPOData = [[ModelSIPOData alloc]init];
     dictPOData=[[NSDictionary alloc]initWithDictionary:[_modelSIPOData getPO_DataFor:requestSINo]];
-    [_SINumberBCA setText:[dictPOData valueForKey:@"SINO"]];
+    if ([dictPOData count]!=0){
+        [_SINumberBCA setText:[dictPOData valueForKey:@"SINO"]];
+    }
     //test disable the fields
     [self checkEditingMode];
 }
