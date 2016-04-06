@@ -1156,10 +1156,13 @@ id dobtanngal;
     else{
         numberBoolQuickQuote=[NSNumber numberWithInt:0];
     }
+    NSDictionary *originalDictionaryPO = [_modelSIPOData getPO_DataFor:[self.requestSINo description]];
+    
     
     NSString *occupationDesc=btnOccp.titleLabel.text;
     NSString *relationDesc=_BtnHubungan.titleLabel.text;
     NSString *productName=NamaProduk.titleLabel.text;
+    NSString *originalRelation = [originalDictionaryPO valueForKey:@"RelWithLA"];
     NSMutableDictionary *dictionaryNewLA=[[NSMutableDictionary alloc]initWithObjectsAndKeys:
                                           _SINumberBCA.text,@"SINO",
                                           ilustrationProductCode,@"ProductCode",
@@ -1173,7 +1176,8 @@ id dobtanngal;
                                           occuCode,@"PO_OccpCode",
                                           occupationDesc,@"PO_Occp",
                                           numberIntClientProfile,@"PO_ClientID",
-                                          relationDesc,@"RelWithLA",nil];
+                                          relationDesc,@"RelWithLA",
+                                          originalRelation,@"originalRelation",nil];
     
     if (([relationDesc isEqualToString:@"DIRI SENDIRI"])||([relationDesc isEqualToString:@"SELF"])){
         [dictionaryNewLA setObject:numberIntClientProfile forKey:@"LA_ClientID"];

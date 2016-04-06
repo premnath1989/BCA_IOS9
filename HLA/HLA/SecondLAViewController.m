@@ -54,6 +54,8 @@ id dobtemp;
     CustomColor = [[ColorHexCode alloc] init ];
     appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate ];
 	
+    _modelSIPOData = [[ModelSIPOData alloc]init];
+    
     self.view.backgroundColor=[UIColor whiteColor];//[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg10.jpg"]];
     
     NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -644,7 +646,11 @@ id dobtemp;
     [self.dobPopover presentPopoverFromRect:[sender bounds]  inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:NO];
 }
 
--(void)setPODictionaryFromRoot:(NSMutableDictionary *)dictionaryRootPO{
+-(void)setPODictionaryRegular:(NSMutableDictionary *)dictionaryRootPO{
+    _poDictionaryPO=dictionaryRootPO;
+}
+
+-(void)setPODictionaryFromRoot:(NSMutableDictionary *)dictionaryRootPO originalRelation:(NSString *)OriginalRelation{
     if ([_poDictionaryPO count]>0){
         if (![[_poDictionaryPO valueForKey:@"RelWithLA"] isEqualToString:[dictionaryRootPO valueForKey:@"RelWithLA"]]){
             [self resetField];
@@ -655,8 +661,13 @@ id dobtemp;
         }
     }
     else{
-        [self resetField];
-       _poDictionaryPO=dictionaryRootPO;
+        if (![OriginalRelation isEqualToString:[dictionaryRootPO valueForKey:@"RelWithLA"]]){
+            [self resetField];
+            _poDictionaryPO=dictionaryRootPO;
+        }
+        else{
+            _poDictionaryPO=dictionaryRootPO;
+        }
     }
 }
 

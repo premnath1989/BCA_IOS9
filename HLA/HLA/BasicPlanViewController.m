@@ -5689,8 +5689,9 @@ bool WPTPD30RisDeleted = FALSE;
     }
     else
     {
-         [self PremiDasarAct];
+        [self PremiDasarAct];
         [self PremiDasarActB];
+        [self ExtraNumbPremi];
     }
     
 }

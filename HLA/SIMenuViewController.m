@@ -94,7 +94,9 @@ BOOL isFirstLoad;
     self.RiderController = [self.storyboard instantiateViewControllerWithIdentifier:@"RiderView"];
     _RiderController.delegate = self;
     
-    
+    _SecondLAController = [self.storyboard instantiateViewControllerWithIdentifier:@"secondLAView"];
+    _SecondLAController.delegate = self;
+
     dictionaryPOForInsert = [[NSMutableDictionary alloc]init];
     
     [self.view setBackgroundColor:[UIColor darkGrayColor]];
@@ -370,7 +372,7 @@ BOOL isFirstLoad;
         previousPath = selectedPath;
         blocked = NO;
         //[self.SecondLAController setPoDictionaryPO:dictionaryPOForInsert];
-        [self.SecondLAController setPODictionaryFromRoot:dictionaryPOForInsert];
+        [self.SecondLAController setPODictionaryFromRoot:dictionaryPOForInsert originalRelation:[dictionaryPOForInsert valueForKey:@"originalRelation"]];
         [self hideSeparatorLine];
         //[myTableView reloadData];
         [self.myTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
@@ -3164,6 +3166,7 @@ BOOL isFirstLoad;
                 [_modelSIMaster saveIlustrationMaster:dictionaryMasterForInsert];
             }
         }
+        [self.SecondLAController setPODictionaryRegular:dictionaryPOForInsert];
         [self loadBasicPlanPage:YES];
         [self.myTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:SIMENU_BASIC_PLAN inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
 
