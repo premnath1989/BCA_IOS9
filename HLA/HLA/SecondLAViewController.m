@@ -655,6 +655,7 @@ id dobtemp;
         }
     }
     else{
+        [self resetField];
        _poDictionaryPO=dictionaryRootPO;
     }
 }

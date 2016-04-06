@@ -94,6 +94,7 @@ BOOL isFirstLoad;
     self.RiderController = [self.storyboard instantiateViewControllerWithIdentifier:@"RiderView"];
     _RiderController.delegate = self;
     
+    
     dictionaryPOForInsert = [[NSMutableDictionary alloc]init];
     
     [self.view setBackgroundColor:[UIColor darkGrayColor]];
@@ -3163,7 +3164,6 @@ BOOL isFirstLoad;
                 [_modelSIMaster saveIlustrationMaster:dictionaryMasterForInsert];
             }
         }
-        
         [self loadBasicPlanPage:YES];
         [self.myTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:SIMENU_BASIC_PLAN inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
 
