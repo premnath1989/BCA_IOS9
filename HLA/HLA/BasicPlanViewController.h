@@ -239,6 +239,7 @@
 -(IBAction)validationExtraPremiField:(UITextField *)sender;
 - (bool)validationDataBasicPlan;
 -(void)setPODictionaryFromRoot:(NSMutableDictionary *)dictionaryRootPO;
+-(void)calculateValue;
 //end of added by faiz
 
 //for SINo

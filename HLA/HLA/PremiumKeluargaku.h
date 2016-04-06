@@ -10,6 +10,7 @@
 #import "FMDatabase.h"
 #import "Formatter.h"
 #import "RiderCalculation.h"
+#import "ModelSIRider.h"
 
 @class PremiumKeluargaku;
 @protocol PremiumKeluargaKuProtocol
@@ -18,6 +19,7 @@
 
 
 @interface PremiumKeluargaku : UIViewController{
+    ModelSIRider *_modelSIRider;
     NSString *SINO;
     double DiscountCalculation;
     Formatter* classFormatter;

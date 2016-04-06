@@ -841,7 +841,13 @@ BOOL isFirstLoad;
     }
     else{
         @try {
-            newDictionaryForBasicPlan=[NSMutableDictionary dictionaryWithDictionary:[_BasicController setDataBasicPlan]];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                [_BasicController calculateValue];
+                // Some long running task you want on another thread
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    newDictionaryForBasicPlan=[NSMutableDictionary dictionaryWithDictionary:[_BasicController setDataBasicPlan]];
+                });
+            });
         }
         @catch (NSException *exception) {
             

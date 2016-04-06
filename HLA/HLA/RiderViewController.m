@@ -701,11 +701,14 @@ int maxGycc = 0;
     int Success = 1;
     if (([_extraPremiNumberField.text length]>0)||([_extraPremiPercentField.text length]>0)){
         int masaExtraPremi=[sender.text intValue];
-        if (masaExtraPremi<1 || masaExtraPremi>10){
-            [self createAlertViewAndShow:@"Masa extra premi tidak boleh lebih dari 10 dan kurang dari 1" tag:0];
-            [sender setText:@""];
-            Success = 0;
+        if (([_extraPremiNumberField.text intValue]>0)||([_extraPremiPercentField.text intValue]>0)){
+            if (masaExtraPremi<1 || masaExtraPremi>10){
+                [self createAlertViewAndShow:@"Masa extra premi tidak boleh lebih dari 10 dan kurang dari 1" tag:0];
+                [sender setText:@""];
+                Success = 0;
+            }
         }
+        
     }
     return  Success;
 }
@@ -742,11 +745,12 @@ int maxGycc = 0;
         else{
             valid = [self validateExtraPremiNumber:_extraPremiNumberField];
             if(valid == 1){
-                valid = [self validateMasaExtraPremi:_masaExtraPremiField];
-            }
-            if(valid == 1){
                 valid = [self validateExtraPremiPercent:_extraPremiPercentField];
             }
+            if(valid == 1){
+                valid = [self validateMasaExtraPremi:_masaExtraPremiField];
+            }
+            
         }
     }
     return valid;
@@ -756,9 +760,10 @@ int maxGycc = 0;
     NSString *validationExtraNumber=@"Extra Premi 0/100 harus 1-10";
 
     int Success = 1;
-    if ([sender.text length]>0){
+    if (([sender.text length]>0)||([sender.text intValue]>0)){
         int intText=[sender.text intValue];
-        if ((intText > 10) || (intText < 1)){
+//        if ((intText > 10) || (intText < 1)){
+        if (intText > 10){
             [self createAlertViewAndShow:validationExtraNumber tag:0];
             Success = 0;
         }

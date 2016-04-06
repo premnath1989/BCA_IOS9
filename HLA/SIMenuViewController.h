@@ -239,5 +239,4 @@
 @property (nonatomic, strong) NSMutableDictionary *riderCode;
 - (IBAction)brochureTapped:(UIButton *)sender;
 - (IBAction)SaveTapped:(UIButton *)sender;
-
 @end

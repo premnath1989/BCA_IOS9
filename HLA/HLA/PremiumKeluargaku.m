@@ -31,6 +31,7 @@
 {
     [super viewDidLoad];
     //[self updatePremiLabel];
+    _modelSIRider = [[ModelSIRider alloc]init];
     
     classFormatter = [[Formatter alloc]init];
     riderCalculation = [[RiderCalculation alloc]init];
@@ -424,13 +425,14 @@
 }
 
 -(NSMutableDictionary *)getDictCalculatePPremi:(NSDictionary *)dictPO{
-    NSMutableDictionary* dictForCalculateBPPremi;
+    NSDictionary* dictRiderBP = [[NSDictionary alloc]initWithDictionary:[_modelSIRider getRider:[_dictionaryPOForInsert valueForKey:@"SINO"] RiderCode:@"BP"]];
     
+    NSMutableDictionary* dictForCalculateBPPremi;
     if (([[dictPO valueForKey:@"RelWithLA"] isEqualToString:@"SELF"])||([[dictPO valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"])){
         dictForCalculateBPPremi=[[NSMutableDictionary alloc]initWithObjectsAndKeys:[_dictionaryForBasicPlan valueForKey:@"ExtraPremiumPercentage"],@"ExtraPremiPerCent",[_dictionaryForBasicPlan valueForKey:@"ExtraPremiumSum"],@"ExtraPremiPerMil",[_dictionaryForBasicPlan valueForKey:@"ExtraPremiumTerm"],@"MasaExtraPremi", nil];
     }
     else{
-        dictForCalculateBPPremi=[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"0",@"ExtraPremiPerCent",@"0",@"ExtraPremiPerMil",@"0",@"MasaExtraPremi", nil];
+        dictForCalculateBPPremi=[[NSMutableDictionary alloc]initWithObjectsAndKeys:[NSString stringWithFormat:@"%i",[[dictRiderBP valueForKey:@"ExtraPremiPercent"] intValue]] ,@"ExtraPremiPerCent",[NSString stringWithFormat:@"%i",[[dictRiderBP valueForKey:@"ExtraPremiMil"] intValue]],@"ExtraPremiPerMil",[NSString stringWithFormat:@"%i",[[dictRiderBP valueForKey:@"MasaExtraPremi"] intValue]],@"MasaExtraPremi", nil];
     }
     
     return dictForCalculateBPPremi;
