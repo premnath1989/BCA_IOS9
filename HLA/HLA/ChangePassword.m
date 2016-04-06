@@ -312,7 +312,12 @@
                 [spinnerLoading startLoadingSpinner:self.view label:@"Loading..."];
                 WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
                 if(flagFirstLogin){
-                    [webservice FirstTimeLogin:self AgentCode:txtAgentCode.text password:txtOldPwd.text newPassword:txtNewPwd.text UUID:[[[UIDevice currentDevice] identifierForVendor] UUIDString]];
+                    
+                    [spinnerLoading stopLoadingSpinner];
+                    [spinnerLoading startLoadingSpinner:self.view label:@"Sync sedang berjalan"];
+                    WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
+                    [webservice fullSync:txtAgentCode.text delegate:self];
+                    flagFullSync = TRUE;
                 }else{
                     [webservice chgPassword:self AgentCode:txtAgentCode.text password:txtOldPwd.text newPassword:txtNewPwd.text UUID:[[[UIDevice currentDevice] identifierForVendor] UUIDString]];
                 }
@@ -394,8 +399,11 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
                 //we insert/update the table
                 [loginDB fullSyncTable:returnObj];
                 [spinnerLoading stopLoadingSpinner];
-                [loginDB updateLoginDate];
-                [self gotoCarousel];
+
+                
+                WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
+                [webservice FirstTimeLogin:self AgentCode:txtAgentCode.text password:txtOldPwd.text newPassword:txtNewPwd.text UUID:[[[UIDevice currentDevice] identifierForVendor] UUIDString]];
+                
             }else if([rateResponse.strStatus caseInsensitiveCompare:@"False"] == NSOrderedSame){
                 [spinnerLoading stopLoadingSpinner];
                 UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Proses Login anda gagal, periksa username dan password anda" message:@"" delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
@@ -419,11 +427,8 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
                 [self parseXML:root objBuff:returnObj index:0];
                 int result = [loginDB fullSyncTable:returnObj];
                 if(result == TABLE_INSERTION_SUCCESS){
-                    [spinnerLoading stopLoadingSpinner];
-                    [spinnerLoading startLoadingSpinner:self.view label:@"Sync sedang berjalan"];
-                    WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
-                    [webservice fullSync:txtAgentCode.text delegate:self];
-                    flagFullSync = TRUE;
+                    [loginDB updateLoginDate];
+                    [self gotoCarousel];
                 }
             }else if([rateResponse.strStatus caseInsensitiveCompare:@"False"] == NSOrderedSame){
                 [spinnerLoading stopLoadingSpinner];

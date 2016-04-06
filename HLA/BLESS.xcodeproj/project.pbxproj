@@ -263,7 +263,6 @@
 		4239AEF01946DAE200BD6F53 /* Preview_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4239AEAF1946DAE200BD6F53 /* Preview_icon.png */; };
 		4239AEF11946DAE200BD6F53 /* tick-snapshot.png in Resources */ = {isa = PBXBuildFile; fileRef = 4239AEB01946DAE200BD6F53 /* tick-snapshot.png */; };
 		4239AEF21946DAE200BD6F53 /* SnapGen.m in Sources */ = {isa = PBXBuildFile; fileRef = 4239AEB31946DAE200BD6F53 /* SnapGen.m */; };
-		4239AEF41946DC8D00BD6F53 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4239AEF31946DC8D00BD6F53 /* CoreBluetooth.framework */; };
 		423A853518502D92008EC5D4 /* SelectCFFCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 423A853318502D92008EC5D4 /* SelectCFFCell.m */; };
 		423A853618502D92008EC5D4 /* SelectCFFCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 423A853418502D92008EC5D4 /* SelectCFFCell.xib */; };
 		423E8BAD176FFEF400E60C20 /* CustomerPersonalData.m in Sources */ = {isa = PBXBuildFile; fileRef = 423E8BAC176FFEF400E60C20 /* CustomerPersonalData.m */; };
@@ -393,7 +392,6 @@
 		6A6ED0A417D59186009FFA56 /* Religion.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A6ED0A317D59186009FFA56 /* Religion.plist */; };
 		6A6ED0A717D591DC009FFA56 /* Religion.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A6ED0A617D591DC009FFA56 /* Religion.m */; };
 		6A6ED0AD17D5E97E009FFA56 /* Country.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A6ED0AC17D5E97E009FFA56 /* Country.plist */; };
-		6AA2AABA199A12DB00491126 /* Nominee & Trustee Guideline.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA2AAB9199A12DB00491126 /* Nominee & Trustee Guideline.pdf */; };
 		6AA6CCFD1994D70800B09730 /* CloseButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 6AA6CCFC1994D70800B09730 /* CloseButton.png */; };
 		6AA78DB1199E114400013566 /* DiscloseBtnFinea.png in Resources */ = {isa = PBXBuildFile; fileRef = 6AA78DB0199E114400013566 /* DiscloseBtnFinea.png */; };
 		6AFBD8F41A36A66700550896 /* CardTypePopoverVCDC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AFBD8F31A36A66700550896 /* CardTypePopoverVCDC.m */; };
@@ -1252,7 +1250,6 @@
 		4239AEB01946DAE200BD6F53 /* tick-snapshot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tick-snapshot.png"; sourceTree = "<group>"; };
 		4239AEB21946DAE200BD6F53 /* SnapGen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SnapGen.h; sourceTree = "<group>"; };
 		4239AEB31946DAE200BD6F53 /* SnapGen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SnapGen.m; sourceTree = "<group>"; };
-		4239AEF31946DC8D00BD6F53 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CoreBluetooth.framework; sourceTree = "<group>"; };
 		423A853218502D92008EC5D4 /* SelectCFFCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectCFFCell.h; sourceTree = "<group>"; };
 		423A853318502D92008EC5D4 /* SelectCFFCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectCFFCell.m; sourceTree = "<group>"; };
 		423A853418502D92008EC5D4 /* SelectCFFCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectCFFCell.xib; sourceTree = "<group>"; };
@@ -1537,7 +1534,6 @@
 		6A6ED0A517D591DC009FFA56 /* Religion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Religion.h; sourceTree = "<group>"; };
 		6A6ED0A617D591DC009FFA56 /* Religion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Religion.m; sourceTree = "<group>"; };
 		6A6ED0AC17D5E97E009FFA56 /* Country.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Country.plist; sourceTree = "<group>"; };
-		6AA2AAB9199A12DB00491126 /* Nominee & Trustee Guideline.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Nominee & Trustee Guideline.pdf"; sourceTree = "<group>"; };
 		6AA6CCFC1994D70800B09730 /* CloseButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseButton.png; sourceTree = "<group>"; };
 		6AA78DB0199E114400013566 /* DiscloseBtnFinea.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DiscloseBtnFinea.png; sourceTree = "<group>"; };
 		6AFBD8F21A36A66700550896 /* CardTypePopoverVCDC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardTypePopoverVCDC.h; sourceTree = "<group>"; };
@@ -2148,7 +2144,7 @@
 		C4FCDDDF16395F290065D024 /* btn_setting_home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_setting_home.png; sourceTree = "<group>"; };
 		C4FCDDE016395F290065D024 /* btn_SI_home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_SI_home.png; sourceTree = "<group>"; };
 		DE06FFCB1CABBBC800E4DE3A /* xibLibrary.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = xibLibrary.bundle; path = FTPSync/xibLibrary.bundle; sourceTree = "<group>"; };
-		DE06FFCD1CABBC2800E4DE3A /* xibLibrary.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = xibLibrary.bundle; path = FTPSync/xibLibrary.bundle; sourceTree = "<group>"; };
+		DE06FFCD1CABBC2800E4DE3A /* xibLibrary.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = xibLibrary.bundle; path = ../FTPSync/xibLibrary.bundle; sourceTree = "<group>"; };
 		DE06FFD11CABCB8200E4DE3A /* libFTPFileSynchronization.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFTPFileSynchronization.a; path = FTPSync/libFTPFileSynchronization.a; sourceTree = "<group>"; };
 		DE07AF3D1CAE225100258521 /* PremiumViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PremiumViewControllerDelegate.h; sourceTree = "<group>"; };
 		DE1CC95E1CA283850058B595 /* PremiumKeluargaku.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PremiumKeluargaku.h; sourceTree = "<group>"; };
@@ -2322,7 +2318,6 @@
 				C4E9D1951612C64900016053 /* UIKit.framework in Frameworks */,
 				C4E9D1971612C64900016053 /* Foundation.framework in Frameworks */,
 				6A5E1C931897459E00815C33 /* libchilkatIos.a in Frameworks */,
-				4239AEF41946DC8D00BD6F53 /* CoreBluetooth.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4087,7 +4082,6 @@
 		C4E9D1851612C64900016053 = {
 			isa = PBXGroup;
 			children = (
-				DE06FFCD1CABBC2800E4DE3A /* xibLibrary.bundle */,
 				43F7C3161C9D409D0074F464 /* Formatter */,
 				43FA6C151C87CD5D0098BA47 /* HTML USED */,
 				AA4EF77D1C8687DC0050CCD8 /* Brochure */,
@@ -4104,10 +4098,8 @@
 				6A0C06DB19DA5A39008DD450 /* x5.png */,
 				6AA6CCFC1994D70800B09730 /* CloseButton.png */,
 				6AA78DB0199E114400013566 /* DiscloseBtnFinea.png */,
-				6AA2AAB9199A12DB00491126 /* Nominee & Trustee Guideline.pdf */,
 				42B190631980F62C00B6BE34 /* delete25.png */,
 				428F84A11978310F0016B7E8 /* GDataXml */,
-				4239AEF31946DC8D00BD6F53 /* CoreBluetooth.framework */,
 				4239AE241946DAE100BD6F53 /* eSignature */,
 				428BB4801941CF4600FDF1E2 /* NullValidations */,
 				2994B3D818E1211600B0D4D2 /* XMLToPDF */,
@@ -4247,6 +4239,7 @@
 		C4E9D19B1612C64900016053 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				DE06FFCD1CABBC2800E4DE3A /* xibLibrary.bundle */,
 				DE80E4231CA3F7FB00D9E775 /* BlackRaccoon-Info.plist */,
 				DE80E4241CA3F7FB00D9E775 /* BlackRaccoon-Prefix.pch */,
 				C34B421518ED620B00BD92C9 /* IDTypeForCO.plist */,
@@ -5232,7 +5225,6 @@
 				42B190641980F62D00B6BE34 /* delete25.png in Resources */,
 				162C3C0F1BBBD7270022CAF0 /* dbupdates in Resources */,
 				6AA6CCFD1994D70800B09730 /* CloseButton.png in Resources */,
-				6AA2AABA199A12DB00491126 /* Nominee & Trustee Guideline.pdf in Resources */,
 				AA4EF7531C85A4260050CCD8 /* Reader-Email@3x.png in Resources */,
 				A15F5A4A199A22BF00FE892D /* P5-Row.jpg in Resources */,
 				A17D8A2C199C611200C2A269 /* P5-Line.jpg in Resources */,

@@ -292,7 +292,7 @@ static NSString *labelVers;
             if([(NSString *)rateResponse.AdminLoginResult caseInsensitiveCompare:@"TRUE"]== NSOrderedSame){
                 [self loginSuccess];
             }else{
-                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Informasi" message:@"Username/Password yang Anda masukkan salah" delegate:self cancelButtonTitle:@"Download" otherButtonTitles:nil];
+                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Informasi" message:@"Username/Password yang Anda masukkan salah" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
                 [alert show];
             }
         }
@@ -1092,7 +1092,7 @@ static NSString *labelVers;
             break;
         }
         case 100:{
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://mpos-0i0p0bbi.cloudapp.net/AgentWebService/LoginSite.aspx"]];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://mpos-production.cloudapp.net/AgentWebService/LoginSite.aspx"]];
             [self appVersionChecker];
             break;
         }
