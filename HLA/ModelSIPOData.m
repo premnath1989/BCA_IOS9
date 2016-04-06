@@ -84,6 +84,68 @@
     [database close];
 }
 
+-(void)savePartialPODate:(NSDictionary *)dataPO{
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    BOOL success = [database executeUpdate:@"insert into SI_PO_Data (SINO, ProductCode, ProductName, QuickQuote,SIDate,PO_Name,PO_DOB,PO_Gender,PO_Age,PO_OccpCode,PO_Occp,PO_ClientID,RelWithLA,CreatedDate,UpdatedDate) values (?,?,?,?,?,?,?,?,?,?,?,?,?,""datetime(\"now\", \"+7 hour\")"",""datetime(\"now\", \"+7 hour\")"")" ,
+                    [dataPO valueForKey:@"SINO"],
+                    [dataPO valueForKey:@"ProductCode"],
+                    [dataPO valueForKey:@"ProductName"],
+                    [dataPO valueForKey:@"QuickQuote"],
+                    [dataPO valueForKey:@"SIDate"],
+                    [dataPO valueForKey:@"PO_Name"],
+                    [dataPO valueForKey:@"PO_DOB"],
+                    [dataPO valueForKey:@"PO_Gender"],
+                    [dataPO valueForKey:@"PO_Age"],
+                    [dataPO valueForKey:@"PO_OccpCode"],
+                    [dataPO valueForKey:@"PO_Occp"],
+                    [dataPO valueForKey:@"PO_ClientID"],
+                    [dataPO valueForKey:@"RelWithLA"]
+/*,
+                                                    [dataPO valueForKey:@"CreatedDate"],
+                                                    [dataPO valueForKey:@"UpdatedDate"]*/];
+    
+    if (!success) {
+        NSLog(@"%s: insert error: %@", __FUNCTION__, [database lastErrorMessage]);
+        // do whatever you need to upon error
+    }
+    [results close];
+    [database close];
+}
+
+-(void)updatePartialPOData:(NSDictionary *)dataPO{
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    BOOL success = [database executeUpdate:@"update SI_PO_Data set ProductCode=?, ProductName=?, QuickQuote=?,SIDate=?,PO_Name=?,PO_DOB=?,PO_Gender=?,PO_Age=?,PO_OccpCode=?,PO_Occp=?,PO_ClientID=?,RelWithLA=?,UpdatedDate=""datetime(\"now\", \"+7 hour\")"" where SINO=?" ,
+                    [dataPO valueForKey:@"ProductCode"],
+                    [dataPO valueForKey:@"ProductName"],
+                    [dataPO valueForKey:@"QuickQuote"],
+                    [dataPO valueForKey:@"SIDate"],
+                    [dataPO valueForKey:@"PO_Name"],
+                    [dataPO valueForKey:@"PO_DOB"],
+                    [dataPO valueForKey:@"PO_Gender"],
+                    [dataPO valueForKey:@"PO_Age"],
+                    [dataPO valueForKey:@"PO_OccpCode"],
+                    [dataPO valueForKey:@"PO_Occp"],
+                    [dataPO valueForKey:@"PO_ClientID"],
+                    [dataPO valueForKey:@"RelWithLA"],
+                    [dataPO valueForKey:@"SINO"]];
+    
+    if (!success) {
+        NSLog(@"%s: insert error: %@", __FUNCTION__, [database lastErrorMessage]);
+        // do whatever you need to upon error
+    }
+    [results close];
+    [database close];
+}
+
+
 -(void)deletePOData:(NSString *)siNo{
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];

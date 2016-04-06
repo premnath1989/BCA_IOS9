@@ -14,9 +14,11 @@
     FMResultSet *results;
 }
 -(void)savePODate:(NSDictionary *)dataPO;
+-(void)savePartialPODate:(NSDictionary *)dataPO;
 -(void)deletePOData:(NSString *)siNo;
 -(NSDictionary *)getPO_DataFor:(NSString *)SINo;
 -(void)updatePOData:(NSDictionary *)dataPO;
+-(void)updatePartialPOData:(NSDictionary *)dataPO;
 -(int)getPODataCount:(NSString *)SINo;
 -(int)getLADataCount:(NSString *)prospectProfileID;
 @end

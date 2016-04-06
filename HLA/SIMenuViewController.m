@@ -3089,11 +3089,21 @@ BOOL isFirstLoad;
 
 -(void)saveLAForTableDidSelect{
     if ([_modelSIPOData getPODataCount:[dictionaryPOForInsert valueForKey:@"SINO"]]>0){
-        [_modelSIPOData updatePOData:dictionaryPOForInsert];
+        if ([[dictionaryPOForInsert valueForKey:@"LA_Name"] length] > 0){
+            [_modelSIPOData updatePOData:dictionaryPOForInsert];
+        }
+        else{
+            [_modelSIPOData updatePartialPOData:dictionaryPOForInsert];
+        }
         [_modelSIMaster updateIlustrationMaster:dictionaryMasterForInsert];
     }
     else{
-        [_modelSIPOData savePODate:dictionaryPOForInsert];
+        if ([[dictionaryPOForInsert valueForKey:@"LA_Name"] length] > 0){
+            [_modelSIPOData savePODate:dictionaryPOForInsert];
+        }
+        else{
+            [_modelSIPOData savePartialPODate:dictionaryPOForInsert];
+        }
         [_modelSIMaster saveIlustrationMaster:dictionaryMasterForInsert];
     }
 }
@@ -3119,7 +3129,7 @@ BOOL isFirstLoad;
     dictionaryPOForInsert = [NSMutableDictionary dictionaryWithDictionary:dataPO];
     [arrayIntValidate replaceObjectAtIndex:0 withObject:@"1"];
     [self.myTableView reloadData];
-    if (([[dataPO valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"])||([[dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"SELF"])){
+    if ([[dataPO valueForKey:@"LA_Name"] length] > 0){
         selfRelation = YES;
         [self clearData2ndLA];
         dictionaryPOForInsert = [NSMutableDictionary dictionaryWithDictionary:dataPO];
@@ -3161,21 +3171,21 @@ BOOL isFirstLoad;
         
         if (self.requestSINo){
             if ([_modelSIPOData getPODataCount:[self.requestSINo description]]>0){
-                [_modelSIPOData updatePOData:dictionaryPOForInsert];
+                [_modelSIPOData updatePartialPOData:dictionaryPOForInsert];
                 [_modelSIMaster updateIlustrationMaster:dictionaryMasterForInsert];
             }
             else{
-                [_modelSIPOData savePODate:dictionaryPOForInsert];
+                [_modelSIPOData savePartialPODate:dictionaryPOForInsert];
                 [_modelSIMaster saveIlustrationMaster:dictionaryMasterForInsert];
             }
         }
         else{
             if ([_modelSIPOData getPODataCount:[dictionaryPOForInsert valueForKey:@"SINO"]]>0){
-                [_modelSIPOData updatePOData:dictionaryPOForInsert];
+                [_modelSIPOData updatePartialPOData:dictionaryPOForInsert];
                 [_modelSIMaster updateIlustrationMaster:dictionaryMasterForInsert];
             }
             else{
-                [_modelSIPOData savePODate:dictionaryPOForInsert];
+                [_modelSIPOData savePartialPODate:dictionaryPOForInsert];
                 [_modelSIMaster saveIlustrationMaster:dictionaryMasterForInsert];
             }
         }
