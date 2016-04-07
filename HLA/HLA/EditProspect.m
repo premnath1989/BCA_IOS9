@@ -3625,9 +3625,11 @@ NSMutableArray *DelGroupArr;
 
 -(void)OtheriDDidChange:(UITextField *) sender
 {
-    if (![[sender text] isEqualToString:pp.OtherIDTypeNo]){
+    //if (![[sender text] isEqualToString:pp.OtherIDTypeNo]){
+    if (clickDone != 1){
         [self OtherIDValidation];
     }
+    //}
 }
 
 -(void)EditTextFieldBegin:(id)sender
@@ -8579,7 +8581,7 @@ NSMutableArray *DelGroupArr;
 	NSString *OldSmoker = pp.Smoker;
 	
 	
-    if ([self Validation] == TRUE) {
+    if ([self Validation] == TRUE && [self OtherIDValidation] == TRUE) {
         int usedInSI=[modelSIPOData getLADataCount:pp.ProspectID];
         if (usedInSI>0){
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Ada kasus eApp tertunda untuk klien ini. Jika Anda ingin melanjutkan, sistem akan otomatis menghapus semua kasus eApp tertunda terkait dan Anda diminta untuk membuat ulang data ini jika Anda berharap untuk mengirim ulang kasus ini." delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
@@ -8969,48 +8971,55 @@ NSMutableArray *DelGroupArr;
 
 - (BOOL) OtherIDValidation
 {
-    OTHERID_Hold_Alert = NO;
-	NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
-	if (![[ClientProfile objectForKey:@"TabBar1"] isEqualToString:@"1"] && clickDone != 1) {
-		NSString *otherIDType = [OtherIDType.titleLabel.text stringByTrimmingCharactersInSet:
-								 [NSCharacterSet whitespaceCharacterSet]];
-		NSString *input = [txtOtherIDType.text lowercaseString];
-		NSString *str_otherid;
-        NSString *db_otherid;
-        NSString *indexno;
-		for (NSArray* row in _tableCheckSameRecord.rows){
-			str_otherid  = [[row objectAtIndex:0] lowercaseString];
-            db_otherid = [[row objectAtIndex:1] stringByTrimmingCharactersInSet:
-									[NSCharacterSet whitespaceCharacterSet]];
-            indexno = [row objectAtIndex:2];
-			
-			db_otherid = [db_otherid uppercaseString];
-			
-			//convert db_otherid to desc
-			db_otherid = [self getIDTypeDesc:db_otherid];
-						
-			if ([input isEqualToString:str_otherid] && [otherIDType isEqualToString:db_otherid])
-            {
-				if(Update_record == FALSE)
-				{
-					getSameRecord_Indexno = indexno;
-					SameID_type = @"OTHERID";
-					UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
-																	message:@"Data Nasabah sudah ada." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-					
-					alert.tag = 6000;
-					[alert show];
-					
-					[ClientProfile setObject:@"NO" forKey:@"isNew"];
-					OTHERID_Hold_Alert = YES;
-					idValidationChecker = NO;
-					return false;
-				}
-			}
-		}
-	}
-    idValidationChecker = YES;
-    return true;
+    if (![[txtOtherIDType text] isEqualToString:pp.OtherIDTypeNo]){
+        OTHERID_Hold_Alert = NO;
+        NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
+        //if (![[ClientProfile objectForKey:@"TabBar1"] isEqualToString:@"1"] && clickDone != 1) {
+        if (![[ClientProfile objectForKey:@"TabBar1"] isEqualToString:@"1"]) {
+            NSString *otherIDType = [OtherIDType.titleLabel.text stringByTrimmingCharactersInSet:
+                                     [NSCharacterSet whitespaceCharacterSet]];
+            NSString *input = [txtOtherIDType.text lowercaseString];
+            NSString *str_otherid;
+            NSString *db_otherid;
+            NSString *indexno;
+            for (NSArray* row in _tableCheckSameRecord.rows){
+                str_otherid  = [[row objectAtIndex:0] lowercaseString];
+                db_otherid = [[row objectAtIndex:1] stringByTrimmingCharactersInSet:
+                              [NSCharacterSet whitespaceCharacterSet]];
+                indexno = [row objectAtIndex:2];
+                
+                db_otherid = [db_otherid uppercaseString];
+                
+                //convert db_otherid to desc
+                db_otherid = [self getIDTypeDesc:db_otherid];
+                
+                if ([input isEqualToString:str_otherid] && [otherIDType isEqualToString:db_otherid])
+                {
+                    if(Update_record == FALSE)
+                    {
+                        getSameRecord_Indexno = indexno;
+                        SameID_type = @"OTHERID";
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
+                                                                        message:@"Data Nasabah sudah ada." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                        
+                        alert.tag = 6000;
+                        [alert show];
+                        
+                        [ClientProfile setObject:@"NO" forKey:@"isNew"];
+                        OTHERID_Hold_Alert = YES;
+                        idValidationChecker = NO;
+                        clickDone = 0;
+                        return false;
+                    }
+                }
+            }
+        }
+        idValidationChecker = YES;
+        return true;
+    }
+    else{
+        return true;
+    }
 }
 
 - (bool) Validation
