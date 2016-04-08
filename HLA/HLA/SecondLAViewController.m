@@ -661,9 +661,14 @@ id dobtemp;
         }
     }
     else{
-        if (![OriginalRelation isEqualToString:[dictionaryRootPO valueForKey:@"RelWithLA"]]){
-            [self resetField];
-            _poDictionaryPO=dictionaryRootPO;
+        if (OriginalRelation){
+            if (![OriginalRelation isEqualToString:[dictionaryRootPO valueForKey:@"RelWithLA"]]){
+                [self resetField];
+                _poDictionaryPO=dictionaryRootPO;
+            }
+            else{
+                _poDictionaryPO=dictionaryRootPO;
+            }
         }
         else{
             _poDictionaryPO=dictionaryRootPO;

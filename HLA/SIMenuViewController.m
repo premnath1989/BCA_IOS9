@@ -704,6 +704,7 @@ BOOL isFirstLoad;
     } else {
         [self loadSecondLAPage];
     }
+    [self loadSecondLAPage];
     [self loadBasicPlanPage:YES];
 
     [self.RightView bringSubviewToFront:self.LAController.view];
@@ -3506,7 +3507,7 @@ BOOL isFirstLoad;
             break;
         case 3:
             if ([_LAController validateSave]){
-                if ((![[dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"])&&(![[dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"SELF"]))
+                if ((![[dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"])&&(![[dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"SELF"])){
                     if ([_SecondLAController validateSave]){
                         if ([_BasicController validationDataBasicPlan]) {
                             [arrayIntValidate replaceObjectAtIndex:2 withObject:@"1"];
@@ -3523,7 +3524,6 @@ BOOL isFirstLoad;
                             [arrayIntValidate replaceObjectAtIndex:0 withObject:@"1"];
                             lastIndexSelected=2;
                             [self loadBasicPlanPage:YES];
-                            [arrayIntValidate replaceObjectAtIndex:1 withObject:@"1"];
                         }
                     }
                     else{
@@ -3532,27 +3532,28 @@ BOOL isFirstLoad;
                         [arrayIntValidate replaceObjectAtIndex:0 withObject:@"1"];
                         lastIndexSelected=1;
                         [self loadSecondLAPage];
+                    }
+
+                }
+                else{
+                    if ([_BasicController validationDataBasicPlan]) {
+                        [arrayIntValidate replaceObjectAtIndex:2 withObject:@"1"];
+                        [arrayIntValidate replaceObjectAtIndex:1 withObject:@"1"];
                         [arrayIntValidate replaceObjectAtIndex:0 withObject:@"1"];
+                        lastIndexSelected=3;
+                        [self LoadIlustrationPage];
+                        [tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
+                        
                     }
                     else{
-                        if ([_BasicController validationDataBasicPlan]) {
-                            [arrayIntValidate replaceObjectAtIndex:2 withObject:@"1"];
-                            [arrayIntValidate replaceObjectAtIndex:1 withObject:@"1"];
-                            [arrayIntValidate replaceObjectAtIndex:0 withObject:@"1"];
-                            lastIndexSelected=3;
-                            [self LoadIlustrationPage];
-                            [tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
-                            
-                        }
-                        else{
-                            [arrayIntValidate replaceObjectAtIndex:2 withObject:@"0"];
-                            [arrayIntValidate replaceObjectAtIndex:1 withObject:@"1"];
-                            [arrayIntValidate replaceObjectAtIndex:0 withObject:@"1"];
-                            lastIndexSelected=2;
-                            [self loadBasicPlanPage:YES];
-                            [arrayIntValidate replaceObjectAtIndex:1 withObject:@"1"];
-                        }
+                        [arrayIntValidate replaceObjectAtIndex:2 withObject:@"0"];
+                        [arrayIntValidate replaceObjectAtIndex:1 withObject:@"1"];
+                        [arrayIntValidate replaceObjectAtIndex:0 withObject:@"1"];
+                        lastIndexSelected=2;
+                        [self loadBasicPlanPage:YES];
+                        [arrayIntValidate replaceObjectAtIndex:1 withObject:@"1"];
                     }
+                }
             }
             else{
                 if (_LAController == nil) {
