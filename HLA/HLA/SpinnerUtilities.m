@@ -11,6 +11,11 @@
 
 @implementation SpinnerUtilities
 
+
+@synthesize _hudView;
+@synthesize _activityIndicatorView;
+@synthesize _captionLabel;
+
 - (instancetype) init{
     
     _hudView = [[UIView alloc] initWithFrame:CGRectMake(75, 155, 170, 170)];
@@ -42,6 +47,7 @@
 
 - (void)stopLoadingSpinner{
     _hudView.hidden = TRUE;
+    _captionLabel.text = @"";
     [_activityIndicatorView stopAnimating];
     [_hudView removeFromSuperview];
 }

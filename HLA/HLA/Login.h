@@ -102,8 +102,6 @@ static NSString* DATE_FORMAT = @"yyyy-MM-dd";
 @property (weak, nonatomic) IBOutlet UITextField *txtUsername;
 @property (weak, nonatomic) IBOutlet UITextField *txtPassword;
 @property (weak, nonatomic) IBOutlet UILabel *lblForgotPwd;
-@property (strong, nonatomic) IBOutlet UILabel *labelVersion;
-@property (strong, nonatomic) IBOutlet UILabel *labelUpdated;
 @property (weak, nonatomic) IBOutlet UILabel *lblLastLogin;
 @property (weak, nonatomic) IBOutlet UILabel *lblTimeRemaining;
 @property (weak, nonatomic) IBOutlet UILabel *lblVersinBuild;

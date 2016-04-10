@@ -23,7 +23,6 @@
     BOOL flagFullSync;
     NSString *strAgentCode;
     LoginDBManagement *loginDB;
-    SpinnerUtilities *spinnerLoading;
 }
 
 @property (nonatomic, assign,readwrite) int userID;
@@ -35,6 +34,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtConfirmPwd;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *btnBarCancel;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *btnBarDone;
+@property (nonatomic,strong) SpinnerUtilities *spinnerLoading;
 - (IBAction)btnChange:(id)sender;
 - (IBAction)btnCancel:(id)sender;
 - (IBAction)btnDone:(id)sender;

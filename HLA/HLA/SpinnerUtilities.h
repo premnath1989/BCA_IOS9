@@ -8,11 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SpinnerUtilities : NSObject{
-    UIView *_hudView;
-    UIActivityIndicatorView *_activityIndicatorView;
-    UILabel *_captionLabel;
-}
+@interface SpinnerUtilities : NSObject
+
+
+@property (nonatomic,strong) UIView *_hudView;
+@property (nonatomic,strong) UIActivityIndicatorView *_activityIndicatorView;
+@property (nonatomic,strong) UILabel *_captionLabel;
 
 - (instancetype) init;
 - (void) stopLoadingSpinner;

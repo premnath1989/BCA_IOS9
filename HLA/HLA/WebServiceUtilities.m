@@ -33,6 +33,18 @@
     return 1;
 }
 
+-(int)checkuserpass:(NSString *)username password:(NSString *)password delegate:(id)delegate{
+    AgentWSSoapBinding *binding = [AgentWS AgentWSSoapBinding];
+    binding.logXMLInOut = YES;
+    
+    AgentWS_LoginAPI *agentCodea = [[AgentWS_LoginAPI alloc]init];
+    agentCodea.strAgentCode = username;
+    agentCodea.strPass = password;
+    agentCodea.strStatus = @"";
+    [binding LoginAPIAsyncUsingParameters:agentCodea delegate:delegate];
+    return 1;
+}
+
 
 -(int)fullSync:(NSString *)username delegate:(id)delegate{
     AgentWSSoapBinding *binding = [AgentWS AgentWSSoapBinding];

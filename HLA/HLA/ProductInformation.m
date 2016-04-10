@@ -364,11 +364,13 @@
 }
 
 - (void)downloadisError{
+    [spinnerLoading stopLoadingSpinner];
     UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Koneksi ke FTP Gagal" message:[NSString stringWithFormat:@"Pastikan perangkat terhubung ke internet yang stabil untuk mengakses FTP"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     [alert show];
 }
 
 - (void)failedConnectToFTP{
+    [spinnerLoading stopLoadingSpinner];
     UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Koneksi ke FTP Gagal" message:[NSString stringWithFormat:@"Pastikan perangkat terhubung ke internet yang stabil untuk mengakses FTP"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     [alert show];
 }

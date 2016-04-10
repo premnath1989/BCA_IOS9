@@ -36,6 +36,7 @@
 @synthesize txtAgentCode;
 @synthesize btnBarCancel;
 @synthesize btnBarDone;
+@synthesize spinnerLoading;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -312,12 +313,8 @@
                 [spinnerLoading startLoadingSpinner:self.view label:@"Loading..."];
                 WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
                 if(flagFirstLogin){
-                    
-                    [spinnerLoading stopLoadingSpinner];
-                    [spinnerLoading startLoadingSpinner:self.view label:@"Sync sedang berjalan"];
                     WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
-                    [webservice fullSync:txtAgentCode.text delegate:self];
-                    flagFullSync = TRUE;
+                    [webservice checkuserpass:txtAgentCode.text password:txtOldPwd.text delegate:self];
                 }else{
                     [webservice chgPassword:self AgentCode:txtAgentCode.text password:txtOldPwd.text newPassword:txtNewPwd.text UUID:[[[UIDevice currentDevice] identifierForVendor] UUIDString]];
                 }
@@ -381,28 +378,71 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
         }
         
         /****
+         * is it AgentWS_LoginAPIResponse
+         ****/
+        else if([bodyPart isKindOfClass:[AgentWS_LoginAPIResponse class]]) {
+            AgentWS_LoginAPIResponse* rateResponse = bodyPart;
+            if([rateResponse.LoginAPIResult caseInsensitiveCompare:@"TRUE"]== NSOrderedSame){
+                
+                [spinnerLoading stopLoadingSpinner];
+                [spinnerLoading startLoadingSpinner:self.view label:@"Sync sedang berjalan 1/4"];
+                
+                flagFullSync = TRUE;
+                WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
+                [webservice fullSync:txtAgentCode.text delegate:self];
+            }else{
+                [spinnerLoading stopLoadingSpinner];
+                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Ubah Password Gagal!" message:[NSString stringWithFormat:@"Username/Password yang di masukan salah"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                [alert show];
+            }
+        }
+        
+        /****
          * is it AgentWS_FullSyncTableResponse
          ****/
         else if([bodyPart isKindOfClass:[AgentWS_FullSyncTableResponse class]]) {
             AgentWS_FullSyncTableResponse* rateResponse = bodyPart;
             if([rateResponse.strStatus caseInsensitiveCompare:@"True"] == NSOrderedSame){
-                flagFullSync = FALSE;
-                // create XMLDocument object
-                DDXMLDocument *xml = [[DDXMLDocument alloc] initWithXMLString:
-                                      rateResponse.FullSyncTableResult.xmlDetails options:0 error:nil];
                 
-                // Get root element - DataSetMenu for your XMLfile
-                DDXMLElement *root = [xml rootElement];
-                WebResponObj *returnObj = [[WebResponObj alloc]init];
-                [self parseXML:root objBuff:returnObj index:0];
-                
-                //we insert/update the table
-                [loginDB fullSyncTable:returnObj];
-                [spinnerLoading stopLoadingSpinner];
-
-                
-                WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
-                [webservice FirstTimeLogin:self AgentCode:txtAgentCode.text password:txtOldPwd.text newPassword:txtNewPwd.text UUID:[[[UIDevice currentDevice] identifierForVendor] UUIDString]];
+                //nested async to avoid ui changes in same queue
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [spinnerLoading stopLoadingSpinner];
+                    [spinnerLoading startLoadingSpinner:self.view label:@"Sync sedang berjalan 2/4"];
+                    
+                    dispatch_async(dispatch_get_global_queue(
+                        DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                        flagFullSync = FALSE;
+                        // create XMLDocument object
+                        DDXMLDocument *xml = [[DDXMLDocument alloc] initWithXMLString:
+                                              rateResponse.FullSyncTableResult.xmlDetails options:0 error:nil];
+                        
+                        // Get root element - DataSetMenu for your XMLfile
+                        DDXMLElement *root = [xml rootElement];
+                        WebResponObj *returnObj = [[WebResponObj alloc]init];
+                        [self parseXML:root objBuff:returnObj index:0];
+                        
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                        [spinnerLoading stopLoadingSpinner];
+                        [spinnerLoading startLoadingSpinner:self.view label:@"Sync sedang berjalan 3/4"];
+                        
+                          dispatch_async(dispatch_get_global_queue(
+                            DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                            //we insert/update the table
+                            [loginDB fullSyncTable:returnObj];
+                            
+                              dispatch_async(dispatch_get_main_queue(), ^{
+                                  [spinnerLoading stopLoadingSpinner];
+                                  [spinnerLoading startLoadingSpinner:self.view label:@"Sync sedang berjalan 4/4"];
+                                  
+                                  dispatch_async(dispatch_get_main_queue(), ^{
+                                    WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
+                                    [webservice FirstTimeLogin:self AgentCode:txtAgentCode.text password:txtOldPwd.text newPassword:txtNewPwd.text UUID:[[[UIDevice currentDevice] identifierForVendor] UUIDString]];
+                                                          });
+                              });
+                          });
+                        });
+                    });
+                });
                 
             }else if([rateResponse.strStatus caseInsensitiveCompare:@"False"] == NSOrderedSame){
                 [spinnerLoading stopLoadingSpinner];
@@ -432,7 +472,7 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
                 }
             }else if([rateResponse.strStatus caseInsensitiveCompare:@"False"] == NSOrderedSame){
                 [spinnerLoading stopLoadingSpinner];
-                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Proses Login anda gagal" message:@"" delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
+                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Username/Password yang di masukan salah" message:@"" delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
                 [alert show];
             }
         }
@@ -440,25 +480,17 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
 }
 
 - (void) parseXML:(DDXMLElement *)root objBuff:(WebResponObj *)obj index:(int)index{
+    
     // go through all elements in root element (DataSetMenu element)
     for (DDXMLElement *DataSetMenuElement in [root children]) {
         // if the element name's is MenuCategories then do something
         if([[DataSetMenuElement children] count] <= 0){
-            if([[DataSetMenuElement name] caseInsensitiveCompare:@"xs:element"]==NSOrderedSame){
-                //                DDXMLNode *name = [DataSetMenuElement attributeForName: @"name"];
-                //                DDXMLNode *type = [DataSetMenuElement attributeForName: @"type"];
-                //                NSLog(@"%@ : %@", [name stringValue], [type stringValue]);
-                //
-                //                DDXMLNode *tableName = [[[DataSetMenuElement parent] parent] parent];
-                //                [obj addRow:[tableName ] columnNames:[name stringValue] data:@""];
-            }else{
+            if([[DataSetMenuElement name] caseInsensitiveCompare:@"xs:element"]!=NSOrderedSame){
                 NSArray *elements = [root elementsForName:[DataSetMenuElement name]];
                 if([[[elements objectAtIndex:0]stringValue] caseInsensitiveCompare:@""] != NSOrderedSame){
-                    NSLog(@"%d %@ = %@", index,[[DataSetMenuElement parent]name], [[elements objectAtIndex:0]stringValue]);
                     NSString *tableName = [NSString stringWithFormat:@"%@&%d",[[[DataSetMenuElement parent] parent]name], index];
                     [obj addRow:tableName columnNames:[[DataSetMenuElement parent]name] data:[[elements objectAtIndex:0]stringValue]];
                 }else{
-                    NSLog(@"%d %@ = %@",index, [DataSetMenuElement name], [[elements objectAtIndex:0]stringValue]);
                     NSString *tableName = [NSString stringWithFormat:@"%@&%d",[[DataSetMenuElement parent]name], index];
                     [obj addRow:tableName columnNames:[DataSetMenuElement name] data:[[elements objectAtIndex:0]stringValue]];
                 }
@@ -466,7 +498,6 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
         }else{
             DDXMLNode *name = [DataSetMenuElement attributeForName: @"diffgr:id"];
             if(name != nil){
-                NSLog(@"diffgr : %@",[[DataSetMenuElement attributeForName:@"diffgr:id"] stringValue]);
                 index++;
             }
         }

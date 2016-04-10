@@ -382,7 +382,6 @@
 		6A3D70D1188A4B8B000B2097 /* PRxml.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3D70CE188A4B8B000B2097 /* PRxml.m */; };
 		6A3D70D2188A4B8B000B2097 /* SIxml.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3D70D0188A4B8B000B2097 /* SIxml.m */; };
 		6A4ACBBE17EA9F500037C358 /* Country.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A4ACBBD17EA9F500037C358 /* Country.m */; };
-		6A4B72AD19ECB3A800F4DE62 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A4B72AC19ECB3A800F4DE62 /* AdSupport.framework */; };
 		6A55483A188B6BA400994B42 /* FormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A554839188B6BA400994B42 /* FormViewController.m */; };
 		6A5E1C931897459E00815C33 /* libchilkatIos.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A5E1C921897459E00815C33 /* libchilkatIos.a */; };
 		6A6ED09717D49937009FFA56 /* Race.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A6ED09617D49937009FFA56 /* Race.plist */; };
@@ -779,6 +778,7 @@
 		C4FCDDE816395F290065D024 /* btn_prospect_home.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FCDDDC16395F290065D024 /* btn_prospect_home.png */; };
 		C4FCDDEB16395F290065D024 /* btn_setting_home.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FCDDDF16395F290065D024 /* btn_setting_home.png */; };
 		C4FCDDEC16395F290065D024 /* btn_SI_home.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FCDDE016395F290065D024 /* btn_SI_home.png */; };
+		DE0296921CB4ED5600C1D5DF /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0296911CB4ED5600C1D5DF /* AdSupport.framework */; };
 		DE06FFCE1CABBC2800E4DE3A /* xibLibrary.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DE06FFCD1CABBC2800E4DE3A /* xibLibrary.bundle */; };
 		DE06FFD21CABCB8200E4DE3A /* libFTPFileSynchronization.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DE06FFD11CABCB8200E4DE3A /* libFTPFileSynchronization.a */; };
 		DE1CC9621CA284A70058B595 /* PremiumKeluargaku.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE1CC9611CA284A70058B595 /* PremiumKeluargaku.xib */; };
@@ -1444,7 +1444,6 @@
 		6A4ACBB817EA9EE30037C358 /* HLA_Rates.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = HLA_Rates.sqlite; sourceTree = "<group>"; };
 		6A4ACBBC17EA9F500037C358 /* Country.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Country.h; sourceTree = "<group>"; };
 		6A4ACBBD17EA9F500037C358 /* Country.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Country.m; sourceTree = "<group>"; };
-		6A4B72AC19ECB3A800F4DE62 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		6A554838188B6BA400994B42 /* FormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormViewController.h; sourceTree = "<group>"; };
 		6A554839188B6BA400994B42 /* FormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormViewController.m; sourceTree = "<group>"; };
 		6A5E1C461897459E00815C33 /* CkoAtom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CkoAtom.h; sourceTree = "<group>"; };
@@ -2143,6 +2142,7 @@
 		C4FCDDDC16395F290065D024 /* btn_prospect_home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_prospect_home.png; sourceTree = "<group>"; };
 		C4FCDDDF16395F290065D024 /* btn_setting_home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_setting_home.png; sourceTree = "<group>"; };
 		C4FCDDE016395F290065D024 /* btn_SI_home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_SI_home.png; sourceTree = "<group>"; };
+		DE0296911CB4ED5600C1D5DF /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		DE06FFCB1CABBBC800E4DE3A /* xibLibrary.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = xibLibrary.bundle; path = FTPSync/xibLibrary.bundle; sourceTree = "<group>"; };
 		DE06FFCD1CABBC2800E4DE3A /* xibLibrary.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = xibLibrary.bundle; path = ../FTPSync/xibLibrary.bundle; sourceTree = "<group>"; };
 		DE06FFD11CABCB8200E4DE3A /* libFTPFileSynchronization.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFTPFileSynchronization.a; path = FTPSync/libFTPFileSynchronization.a; sourceTree = "<group>"; };
@@ -2290,12 +2290,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE0296921CB4ED5600C1D5DF /* AdSupport.framework in Frameworks */,
 				DE80E44A1CA3FCEE00D9E775 /* CFNetwork.framework in Frameworks */,
 				C486D9E3163E6747009F8F21 /* MediaPlayer.framework in Frameworks */,
 				AA4EF7781C85A9C50050CCD8 /* ImageIO.framework in Frameworks */,
 				C4E9D1CC1612C9C300016053 /* QuartzCore.framework in Frameworks */,
 				C4E9D1991612C64900016053 /* CoreGraphics.framework in Frameworks */,
-				6A4B72AD19ECB3A800F4DE62 /* AdSupport.framework in Frameworks */,
 				428F84A719783E5C0016B7E8 /* libxml2.dylib in Frameworks */,
 				6A002CFA1850287200161727 /* libz.dylib in Frameworks */,
 				6A002CF81850286600161727 /* libstdc++.dylib in Frameworks */,
@@ -4093,7 +4093,6 @@
 				A9B8F3D11C5B5EA5005C9646 /* HLADB Model */,
 				FA24FFBA1BA025B7000D53C0 /* database */,
 				29071F021A256811002F7FB1 /* alert_block */,
-				6A4B72AC19ECB3A800F4DE62 /* AdSupport.framework */,
 				428F84A619783E5C0016B7E8 /* libxml2.dylib */,
 				6A0C06DB19DA5A39008DD450 /* x5.png */,
 				6AA6CCFC1994D70800B09730 /* CloseButton.png */,
@@ -4143,6 +4142,7 @@
 		C4E9D1931612C64900016053 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DE0296911CB4ED5600C1D5DF /* AdSupport.framework */,
 				DE06FFD11CABCB8200E4DE3A /* libFTPFileSynchronization.a */,
 				DE06FFCB1CABBBC800E4DE3A /* xibLibrary.bundle */,
 				DE80E4491CA3FCEE00D9E775 /* CFNetwork.framework */,

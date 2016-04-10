@@ -460,8 +460,6 @@
         sql = [sql substringToIndex:[sql length]-1];
         sql = [sql stringByAppendingString:@")"];
     
-        NSLog(@"%@",sql);
-    
         char *error;
         if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
         {

@@ -11139,9 +11139,6 @@
                                         <state key="normal" title="Button">
                                             <color key="titleColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </state>
-                                        <connections>
-                                            <action selector="passLogin:" destination="ds4-DI-v8U" eventType="touchUpInside" id="pQ9-fS-oeu"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                             </scrollView>

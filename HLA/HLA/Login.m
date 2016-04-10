@@ -49,7 +49,7 @@ NSString *ProceedStatus = @"";
 @synthesize txtPassword;
 @synthesize lblForgotPwd;
 @synthesize statusLogin,indexNo,agentID;
-@synthesize labelUpdated,labelVersion,outletLogin,agentPortalLoginID,agentPortalPassword,lblVersinBuild;
+@synthesize outletLogin,agentPortalLoginID,agentPortalPassword,lblVersinBuild;
 @synthesize delegate = _delegate;
 @synthesize previousElementName, agentCode;
 @synthesize elementName, msg, lblLastLogin, lblTimeRemaining;
@@ -91,42 +91,15 @@ NSString *ProceedStatus = @"";
     tap.cancelsTouchesInView = NO;
     [self.view addGestureRecognizer:tap];
     
-    NSString *deviceId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
-    
     NSLog(@"devideId %@", [[[UIDevice currentDevice] identifierForVendor] UUIDString]);
     [self ShowLoginDate];
-    
-    NSString *version = [NSString stringWithFormat:
-                         @"%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
-    NSDate *endDate =  [[NSDate date] dateByAddingTimeInterval:8 *60 * 60 ];
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init ];
-    [formatter setDateFormat:@"yyyy-MM-dd"];
-    NSDate *StartDate = [formatter dateFromString:@"2013-04-03"];
-    
-    NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *components = [gregorianCalendar components:NSDayCalendarUnit
-                                                        fromDate:StartDate
-                                                          toDate:endDate
-                                                         options:0];
-    
-    labelVersion.text = @"BCA V 1.4.0.240";
-    labelVers = labelVersion.text;
-    labelUpdated.text = @"Last Updated: 02 OCT 2014 11:00AM";
+
     outletLogin.hidden = FALSE;
     
     NSString *BCAversion= [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     NSString *build= [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
     
-    UILabel  * label = [[UILabel alloc] initWithFrame:CGRectMake(3, 710, 600, 50)];
-    label.backgroundColor = [UIColor clearColor];
-    label.textColor=[UIColor blackColor];
-    label.numberOfLines=0;
-    label.lineBreakMode=NSLineBreakByWordWrapping;
-    
     lblVersinBuild.text =[NSString stringWithFormat:@"%@ b%@",BCAversion, build];
-    
-    [self UATFunctions];
-
 }
 
 
@@ -476,7 +449,7 @@ static NSString *labelVers;
 
 - (void)FirstTimeAlert:(NSString *)title{
     
-    UIAlertView* alert = [[UIAlertView alloc]initWithTitle:title message:[NSString stringWithFormat:@"Pastikan perangkat terhubung ke internet untuk melakukan login perdana"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    UIAlertView* alert = [[UIAlertView alloc]initWithTitle:title message:[NSString stringWithFormat:@"Pastikan perangkat terhubung ke internet untuk melakukan login perdana (dapat berlangsung hingga 3 menit)"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     [alert show];
 }
 
@@ -522,49 +495,6 @@ static NSString *labelVers;
         lblTimeRemaining.textColor = [UIColor whiteColor];
         lblTimeRemaining.text = [NSString stringWithFormat:@"%d hari", dayRem];
     }
-}
-
-- (void)UATFunctions{
-    switch ([loginDB AgentStatus:txtUsername.text]) {
-        case AGENT_IS_ACTIVE:
-        {
-            uatAgentStatus.text = @"Status Agen : active";
-            break;
-        }
-        case AGENT_IS_INACTIVE:
-        {
-            uatAgentStatus.text = @"Status Agen : inactive";
-            break;
-        }
-        case AGENT_IS_TERMINATED:
-        {
-            uatAgentStatus.text = @"Status Agen : terminated";
-            break;
-        }
-        default:
-            break;
-    }
-    
-    switch ([loginDB DeviceStatus:txtUsername.text]) {
-        case DEVICE_IS_ACTIVE:
-        {
-            uatDeviceLabel.text = @"Status device : aktif";
-            break;
-        }
-        case DEVICE_IS_INACTIVE:
-        {
-            uatDeviceLabel.text = @"Status device : tidak aktif";
-            break;
-        }
-        case DEVICE_IS_TERMINATED:
-        {
-            uatDeviceLabel.text = @"Status device : terminate";
-            break;
-        }
-        default:
-            break;
-    }
-
 }
 
 - (BOOL) validToLogin{
@@ -1052,10 +982,6 @@ static NSString *labelVers;
     [self setLblForgotPwd:nil];
     [self setScrollViewLogin:nil];
     [self setOutletReset:nil];
-    [self setLabelVersion:nil];
-    [self setLabelUpdated:nil];
-    [self setLabelUpdated:nil];
-    [self setLabelVersion:nil];
     [self setOutletLogin:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.

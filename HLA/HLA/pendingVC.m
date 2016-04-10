@@ -10,7 +10,6 @@
 #include "CkoCrypt2.h"
 #import "AgentPortalLogin.h"
 #import "eAppReport.h"
-#import <AdSupport/ASIdentifierManager.h>
 
 // TODO: To remove dependency
 #import "NSStringAdditions.h"
@@ -1524,95 +1523,95 @@
 }
 
 - (void)loginAction {
-    if (self.logintextField.text.length <= 0) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Username is required" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alert show];
-
-        [self.ipasswordTextField becomeFirstResponder];
-        alert = Nil;
-    } else if (self.ipasswordTextField.text.length <= 0) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Password is required" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alert show];
-
-        [self.ipasswordTextField becomeFirstResponder];
-        alert = Nil;
-    } else {
-        if ([[Reachability reachabilityWithHostname:@"www.hla.com.my"] currentReachabilityStatus] == NotReachable) {
-            // Show alert because no wifi or 3g is available..
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
-            [HUD hide:YES afterDelay:1];
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Error in connecting to Web service. Please check your internet connection" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-            [alert show];
-
-            alert = Nil;
-        } else {
-            [self checkingFirstLogin];
-            NSLog(@"loginstatus:%d", _statusLogin);
-
-            if (_statusLogin == 2) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Please Contact System Admin." delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                [alert show];
-
-                alert = Nil;
-                return;
-            } else if (agentCode.length == 0) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Invalid Password. Please check your password" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                [alert show];
-
-                alert = Nil;
-                return;
-            } else {
-                HUD = [[MBProgressHUD alloc] initWithView:self.view];
-                [self.view addSubview:HUD];
-                HUD.labelText = @"Please Wait";
-                [HUD show:YES];
-
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-                    xmlType = XML_TYPE_VALIDATE_LOGIN;
-
-                    NSString *sBadAttempt = [NSString stringWithFormat:@"%d", [self getBadAttempts]];
-
-
-                    NSString *deviceId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
-
-                    NSLog(@"devideId %@", [[[UIDevice currentDevice] identifierForVendor] UUIDString]);
-
-
-                    NSString *strURL = [NSString stringWithFormat:@"%@eSubmissionWS/eSubmissionXMLService.asmx/iValidateLogin?"
-                                        "Input1=%@&Input2=%@&Input3=%@&Input4=%@&Input5=%@&Input6=%@",
-                                        [SIUtilities WSLogin],  self.logintextField.text, self.ipasswordTextField.text, [self getIPAddress], sBadAttempt, agentCode, deviceId];
-
-                    NSURL *url = [NSURL URLWithString:strURL];
-                    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:0 timeoutInterval:20];
-
-                    AFXMLRequestOperation *operation = [AFXMLRequestOperation XMLParserRequestOperationWithRequest:request
-                                                                                                           success:^(NSURLRequest *request, NSHTTPURLResponse *response, NSXMLParser *XMLParser) {
-                            XMLParser.delegate = self;
-                            [XMLParser setShouldProcessNamespaces:YES];
-                            [XMLParser parse];
-
-                            if ([SuccessString isEqualToString:@""]) {
-                                [self submitAfterSuccessFulllogin];
-                            } else {
-                                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:SuccessString delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                                [alert show];
-
-                                alert = Nil;
-                            }
-                        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSXMLParser *XMLParser) {
-                            [MBProgressHUD hideHUDForView:self.view animated:YES];
-                            [HUD hide:YES afterDelay:1];
-                            NSLog(@"error in calling web service");
-                        }];
-                    [operation start];
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                            [MBProgressHUD hideHUDForView:self.view animated:YES];
-                            [HUD hide:YES afterDelay:1];
-                        });
-                });
-            }
-        }
-    }
+//    if (self.logintextField.text.length <= 0) {
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Username is required" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//        [alert show];
+//
+//        [self.ipasswordTextField becomeFirstResponder];
+//        alert = Nil;
+//    } else if (self.ipasswordTextField.text.length <= 0) {
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Password is required" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//        [alert show];
+//
+//        [self.ipasswordTextField becomeFirstResponder];
+//        alert = Nil;
+//    } else {
+//        if ([[Reachability reachabilityWithHostname:@"www.hla.com.my"] currentReachabilityStatus] == NotReachable) {
+//            // Show alert because no wifi or 3g is available..
+//            [MBProgressHUD hideHUDForView:self.view animated:YES];
+//            [HUD hide:YES afterDelay:1];
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Error in connecting to Web service. Please check your internet connection" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//            [alert show];
+//
+//            alert = Nil;
+//        } else {
+//            [self checkingFirstLogin];
+//            NSLog(@"loginstatus:%d", _statusLogin);
+//
+//            if (_statusLogin == 2) {
+//                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Please Contact System Admin." delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//                [alert show];
+//
+//                alert = Nil;
+//                return;
+//            } else if (agentCode.length == 0) {
+//                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Invalid Password. Please check your password" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//                [alert show];
+//
+//                alert = Nil;
+//                return;
+//            } else {
+//                HUD = [[MBProgressHUD alloc] initWithView:self.view];
+//                [self.view addSubview:HUD];
+//                HUD.labelText = @"Please Wait";
+//                [HUD show:YES];
+//
+//                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+//                    xmlType = XML_TYPE_VALIDATE_LOGIN;
+//
+//                    NSString *sBadAttempt = [NSString stringWithFormat:@"%d", [self getBadAttempts]];
+//
+//
+//                    NSString *deviceId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
+//
+//                    NSLog(@"devideId %@", [[[UIDevice currentDevice] identifierForVendor] UUIDString]);
+//
+//
+//                    NSString *strURL = [NSString stringWithFormat:@"%@eSubmissionWS/eSubmissionXMLService.asmx/iValidateLogin?"
+//                                        "Input1=%@&Input2=%@&Input3=%@&Input4=%@&Input5=%@&Input6=%@",
+//                                        [SIUtilities WSLogin],  self.logintextField.text, self.ipasswordTextField.text, [self getIPAddress], sBadAttempt, agentCode, deviceId];
+//
+//                    NSURL *url = [NSURL URLWithString:strURL];
+//                    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:0 timeoutInterval:20];
+//
+//                    AFXMLRequestOperation *operation = [AFXMLRequestOperation XMLParserRequestOperationWithRequest:request
+//                                                                                                           success:^(NSURLRequest *request, NSHTTPURLResponse *response, NSXMLParser *XMLParser) {
+//                            XMLParser.delegate = self;
+//                            [XMLParser setShouldProcessNamespaces:YES];
+//                            [XMLParser parse];
+//
+//                            if ([SuccessString isEqualToString:@""]) {
+//                                [self submitAfterSuccessFulllogin];
+//                            } else {
+//                                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:SuccessString delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//                                [alert show];
+//
+//                                alert = Nil;
+//                            }
+//                        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSXMLParser *XMLParser) {
+//                            [MBProgressHUD hideHUDForView:self.view animated:YES];
+//                            [HUD hide:YES afterDelay:1];
+//                            NSLog(@"error in calling web service");
+//                        }];
+//                    [operation start];
+//                    dispatch_async(dispatch_get_main_queue(), ^{
+//                            [MBProgressHUD hideHUDForView:self.view animated:YES];
+//                            [HUD hide:YES afterDelay:1];
+//                        });
+//                });
+//            }
+//        }
+//    }
 }
 
 - (void)checkingFirstLogin {
