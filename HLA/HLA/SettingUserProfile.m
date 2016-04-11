@@ -364,39 +364,6 @@ id temp;
         }
     }
     
-    
-    //new
-//    if (![[txtICNo.text stringByReplacingOccurrencesOfString:@" " withString:@"" ] isEqualToString:@""]) {
-//        if (txtICNo.text.length != 12) {
-//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
-//                                                            message:@"Invalid IC No length. IC No length should be 12 characters long" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-//            [alert show];
-//            [txtICNo becomeFirstResponder];
-//            return false;
-//        }
-//        
-//        BOOL valid;
-//        NSCharacterSet *alphaNums = [NSCharacterSet decimalDigitCharacterSet];
-//        NSCharacterSet *inStringSet = [NSCharacterSet characterSetWithCharactersInString:txtICNo.text];
-//        valid = [alphaNums isSupersetOfSet:inStringSet];
-//        if (!valid) {
-//            
-//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
-//                                                            message:@"Agent's IC No must be numeric" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-//            [alert show];
-//            
-//            [txtICNo becomeFirstResponder];
-//            return false;
-//        }
-//    }
-//    else {
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
-//                                                        message:@"Agent's IC No is required." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-//        [alert show];
-//        [txtICNo becomeFirstResponder];
-//        return false;
-//    }
-    
     if (contDate.length == 0 || [self.btnContractDate.titleLabel.text isEqualToString:@""]) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
                                                         message:@"Agent's Contract Date is required." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
@@ -432,23 +399,6 @@ id temp;
         [txtEmail becomeFirstResponder];
         return FALSE;
     }
-    /*
-	if ([[txtAgencyPortalLogin.text stringByReplacingOccurrencesOfString:@" " withString:@"" ] isEqualToString:@""]) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
-                                                        message:@"Agent Portal Login ID is required." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alert show];
-        [txtAgencyPortalLogin becomeFirstResponder];
-        return false;
-    }
-	
-	if ([[txtAgencyPortalPwd.text stringByReplacingOccurrencesOfString:@" " withString:@"" ] isEqualToString:@""]) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
-                                                        message:@"Agent Portal Login Password is required." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alert show];
-        [txtAgencyPortalPwd becomeFirstResponder];
-        return false;
-    }
-	*/
     return TRUE;
 }
 
@@ -474,9 +424,8 @@ id temp;
 - (IBAction)btnSync:(id)sender { //no longer using
     [self.view endEditing:TRUE];
     [self resignFirstResponder];
-    [spinnerLoading startLoadingSpinner:self.view label:@"Sync sedang berjalan"];
+    [spinnerLoading startLoadingSpinner:self.view label:@"Sync sedang berjalan 1/3"];
     WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
-//    [webservice checkVersion:@"1" delegate:self];
     [webservice fullSync:txtAgentCode.text delegate:self];
 }
 
@@ -519,11 +468,31 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
                 // Get root element - DataSetMenu for your XMLfile
                 DDXMLElement *root = [xml rootElement];
                 WebResponObj *returnObj = [[WebResponObj alloc]init];
-                [self parseXML:root objBuff:returnObj index:0];
                 
-                //we insert/update the table
-                [loginDB fullSyncTable:returnObj];
-                [spinnerLoading stopLoadingSpinner];
+                //nested async to avoid ui changes in same queue
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [spinnerLoading stopLoadingSpinner];
+                    [spinnerLoading startLoadingSpinner:self.view label:@"Sync sedang berjalan 2/3"];
+                    
+                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                        [self parseXML:root objBuff:returnObj index:0];
+                        
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [spinnerLoading stopLoadingSpinner];
+                            [spinnerLoading startLoadingSpinner:self.view label:@"Sync sedang berjalan 3/3"];
+                            
+                            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                                //we insert/update the table
+                                [loginDB fullSyncTable:returnObj];
+                                [spinnerLoading stopLoadingSpinner];
+                                
+                                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Sync telah selesai" message:@"" delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
+                                [alert show];
+                            });
+                        });
+                       
+                     });
+               });
             }else if([rateResponse.strStatus caseInsensitiveCompare:@"False"] == NSOrderedSame){
                 [spinnerLoading stopLoadingSpinner];
                 UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Proses Login anda gagal" message:@"" delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
@@ -565,19 +534,16 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
             }else{
                 NSArray *elements = [root elementsForName:[DataSetMenuElement name]];
                 if([[[elements objectAtIndex:0]stringValue] caseInsensitiveCompare:@""] != NSOrderedSame){
-                    NSLog(@"%d %@ = %@", index,[[DataSetMenuElement parent]name], [[elements objectAtIndex:0]stringValue]);
                     NSString *tableName = [NSString stringWithFormat:@"%@&%d",[[[DataSetMenuElement parent] parent]name], index];
                     [obj addRow:tableName columnNames:[[DataSetMenuElement parent]name] data:[[elements objectAtIndex:0]stringValue]];
                 }else{
-                    NSLog(@"%d %@ = %@",index, [DataSetMenuElement name], [[elements objectAtIndex:0]stringValue]);
                     NSString *tableName = [NSString stringWithFormat:@"%@&%d",[[DataSetMenuElement parent]name], index];
                     [obj addRow:tableName columnNames:[DataSetMenuElement name] data:[[elements objectAtIndex:0]stringValue]];
                 }
             }
         }else{
-            DDXMLNode *name = [DataSetMenuElement attributeForName: @"diffgr:id"];
-            if(name != nil){
-                NSLog(@"diffgr : %@",[[DataSetMenuElement attributeForName:@"diffgr:id"] stringValue]);
+            DDXMLNode *nameNode = [DataSetMenuElement attributeForName: @"diffgr:id"];
+            if(nameNode != nil){
                 index++;
             }
         }

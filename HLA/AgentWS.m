@@ -5257,11 +5257,19 @@
 }
 + (AgentWSSoapBinding *)AgentWSSoapBinding
 {
-	return [[[AgentWSSoapBinding alloc] initWithAddress:@"http://mpos-production.cloudapp.net/AgentWebService/AgentWS.asmx"] autorelease];
+     if(![(AppDelegate*)[[UIApplication sharedApplication] delegate] serverUAT]){
+        return [[[AgentWSSoapBinding alloc] initWithAddress:@"http://mpos-production.cloudapp.net/AgentWebService/AgentWS.asmx"] autorelease];
+     }else{
+    	return [[[AgentWSSoapBinding alloc] initWithAddress:@"http://mpos-0i0p0bbi.cloudapp.net/agentwebservice/agentws.asmx"] autorelease];
+     }
 }
 + (AgentWSSoap12Binding *)AgentWSSoap12Binding
 {
-	return [[[AgentWSSoap12Binding alloc] initWithAddress:@"http://mpos-production.cloudapp.net/AgentWebService/AgentWS.asmx"] autorelease];
+    if(![(AppDelegate*)[[UIApplication sharedApplication] delegate] serverUAT]){
+        return [[[AgentWSSoap12Binding alloc] initWithAddress:@"http://mpos-production.cloudapp.net/AgentWebService/AgentWS.asmx"] autorelease];
+    }else{
+        return [[[AgentWSSoap12Binding alloc] initWithAddress:@"http://mpos-0i0p0bbi.cloudapp.net/agentwebservice/agentws.asmx"] autorelease];
+    }
 }
 @end
 @implementation AgentWSSoapBinding

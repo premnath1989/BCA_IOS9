@@ -17,6 +17,10 @@
 #import "DDXMLElementAdditions.h"
 #import "DDXMLNode.h"
 
+
+#import "StringEncryption.h"
+#import "NSData+Base64.h"
+
 #import "LoginMacros.h"
 
 @interface ChangePassword ()

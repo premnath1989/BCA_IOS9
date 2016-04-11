@@ -35,6 +35,7 @@
 @property (nonatomic, retain) NSString* secondLAsex;
 @property (nonatomic, retain) NSString* planChoose;
 @property (nonatomic, assign) BOOL isLoggedIn;
+@property (nonatomic, assign) BOOL serverUAT;
 @property (nonatomic, assign) BOOL ViewFromPendingBool;
 @property (nonatomic, assign) BOOL ViewFromSubmissionBool;
 @property (nonatomic, assign) BOOL ViewDeleteSubmissionBool;

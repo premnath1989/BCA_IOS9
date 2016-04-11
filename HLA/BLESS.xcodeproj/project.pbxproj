@@ -781,6 +781,9 @@
 		DE0296921CB4ED5600C1D5DF /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0296911CB4ED5600C1D5DF /* AdSupport.framework */; };
 		DE06FFCE1CABBC2800E4DE3A /* xibLibrary.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DE06FFCD1CABBC2800E4DE3A /* xibLibrary.bundle */; };
 		DE06FFD21CABCB8200E4DE3A /* libFTPFileSynchronization.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DE06FFD11CABCB8200E4DE3A /* libFTPFileSynchronization.a */; };
+		DE15788C1CBB792900CE171B /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = DE1578891CBB792900CE171B /* NSData+Base64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		DE15788D1CBB792900CE171B /* StringEncryption.m in Sources */ = {isa = PBXBuildFile; fileRef = DE15788B1CBB792900CE171B /* StringEncryption.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		DE1578901CBB8F7000CE171B /* EncryptDecryptWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = DE15788F1CBB8F7000CE171B /* EncryptDecryptWrapper.m */; };
 		DE1CC9621CA284A70058B595 /* PremiumKeluargaku.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE1CC9611CA284A70058B595 /* PremiumKeluargaku.xib */; };
 		DE80E43A1CA3F7FB00D9E775 /* BlackRaccoon-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DE80E4231CA3F7FB00D9E775 /* BlackRaccoon-Info.plist */; };
 		DE80E44A1CA3FCEE00D9E775 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE80E4491CA3FCEE00D9E775 /* CFNetwork.framework */; };
@@ -2147,6 +2150,12 @@
 		DE06FFCD1CABBC2800E4DE3A /* xibLibrary.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = xibLibrary.bundle; path = ../FTPSync/xibLibrary.bundle; sourceTree = "<group>"; };
 		DE06FFD11CABCB8200E4DE3A /* libFTPFileSynchronization.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFTPFileSynchronization.a; path = FTPSync/libFTPFileSynchronization.a; sourceTree = "<group>"; };
 		DE07AF3D1CAE225100258521 /* PremiumViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PremiumViewControllerDelegate.h; sourceTree = "<group>"; };
+		DE1578881CBB792900CE171B /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+Base64.h"; path = "Encryption/NSData+Base64.h"; sourceTree = "<group>"; };
+		DE1578891CBB792900CE171B /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+Base64.m"; path = "Encryption/NSData+Base64.m"; sourceTree = "<group>"; };
+		DE15788A1CBB792900CE171B /* StringEncryption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StringEncryption.h; path = Encryption/StringEncryption.h; sourceTree = "<group>"; };
+		DE15788B1CBB792900CE171B /* StringEncryption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StringEncryption.m; path = Encryption/StringEncryption.m; sourceTree = "<group>"; };
+		DE15788E1CBB8F5100CE171B /* EncryptDecryptWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EncryptDecryptWrapper.h; sourceTree = "<group>"; };
+		DE15788F1CBB8F7000CE171B /* EncryptDecryptWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EncryptDecryptWrapper.m; sourceTree = "<group>"; };
 		DE1CC95E1CA283850058B595 /* PremiumKeluargaku.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PremiumKeluargaku.h; sourceTree = "<group>"; };
 		DE1CC9611CA284A70058B595 /* PremiumKeluargaku.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PremiumKeluargaku.xib; sourceTree = "<group>"; };
 		DE38E4891CAA25E300B3051B /* GroupDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GroupDelegate.h; sourceTree = "<group>"; };
@@ -4176,6 +4185,7 @@
 		C4E9D19A1612C64900016053 /* HLA */ = {
 			isa = PBXGroup;
 			children = (
+				DE1578871CBB78E600CE171B /* Encryption */,
 				AADD7E4B1C7380EF00D87750 /* kissXML */,
 				AAAC9CF51C717C45002E3190 /* WebServices */,
 				431F5FE01C6D93B700A9CA6C /* tableViewCell */,
@@ -4623,6 +4633,19 @@
 				C4FCDDE016395F290065D024 /* btn_SI_home.png */,
 			);
 			name = icon;
+			sourceTree = "<group>";
+		};
+		DE1578871CBB78E600CE171B /* Encryption */ = {
+			isa = PBXGroup;
+			children = (
+				DE1578881CBB792900CE171B /* NSData+Base64.h */,
+				DE1578891CBB792900CE171B /* NSData+Base64.m */,
+				DE15788A1CBB792900CE171B /* StringEncryption.h */,
+				DE15788B1CBB792900CE171B /* StringEncryption.m */,
+				DE15788E1CBB8F5100CE171B /* EncryptDecryptWrapper.h */,
+				DE15788F1CBB8F7000CE171B /* EncryptDecryptWrapper.m */,
+			);
+			name = Encryption;
 			sourceTree = "<group>";
 		};
 		DED179571CACE37700CD0AA1 /* DisableView */ = {
@@ -5407,6 +5430,7 @@
 				42867EB3175F75E6001CE661 /* TitleViewController.m in Sources */,
 				174DD2551C9A54C400D56274 /* Pembelianke.m in Sources */,
 				C4E9F3D21765E2430070EA8A /* EverSeriesMasterViewController.m in Sources */,
+				DE15788D1CBB792900CE171B /* StringEncryption.m in Sources */,
 				EFEB7A5B1766F2DF004FF3CE /* CFFTabBarController.m in Sources */,
 				EFEB7A5C1766F2DF004FF3CE /* CFFTabBar.m in Sources */,
 				EFEB7A5D1766F2DF004FF3CE /* CFFTabBarButton.m in Sources */,
@@ -5467,6 +5491,7 @@
 				2958A85017E95EC80090A791 /* ChildrenDependents.m in Sources */,
 				2958A85117E95EC80090A791 /* ChildrenViewController.m in Sources */,
 				2958A85217E95EC80090A791 /* CustomerClientProfile.m in Sources */,
+				DE15788C1CBB792900CE171B /* NSData+Base64.m in Sources */,
 				2958A85317E95EC80090A791 /* CustomerViewController.m in Sources */,
 				2958A85417E95EC80090A791 /* PartnerClientProfile.m in Sources */,
 				2958A85517E95EC80090A791 /* PartnerViewController.m in Sources */,
@@ -5475,6 +5500,7 @@
 				2958A85817E95EC80090A791 /* SpouseViewController.m in Sources */,
 				2958A85C17E95EE80090A791 /* TableCheckBox.m in Sources */,
 				2958A86017E95F1A0090A791 /* CustomerChoice.m in Sources */,
+				DE1578901CBB8F7000CE171B /* EncryptDecryptWrapper.m in Sources */,
 				2958A86517E95F3F0090A791 /* PriorityViewController.m in Sources */,
 				2958A86817E95F5D0090A791 /* PotentialAreas.m in Sources */,
 				AA4EF7671C85A4260050CCD8 /* ReaderContentView.m in Sources */,

@@ -86,8 +86,6 @@ static NSString* DATE_FORMAT = @"yyyy-MM-dd";
     SpinnerUtilities *spinnerLoading;
 }
 
-
-
 @property (nonatomic, strong) id<LoginDelegate> delegate;
 
 @property (nonatomic, assign) int statusLogin;
@@ -118,6 +116,9 @@ static NSString* DATE_FORMAT = @"yyyy-MM-dd";
 @property (weak, nonatomic) IBOutlet UIButton *outletReset;
 @property (weak, nonatomic) IBOutlet UILabel *uatDeviceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *uatAgentStatus;
+
+@property (weak, nonatomic) IBOutlet UILabel *serverOption;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *serverSegmented;
 
 +(NSString *)getLabelVersion;
 
