@@ -353,6 +353,7 @@ bool WPTPD30RisDeleted = FALSE;
     if([[_dictionaryPOForInsert valueForKey:@"ProductName"] isEqualToString:@"BCA Life Heritage Protection"]){
         [self PremiDasarAct];
         [self PremiDasarActB];
+        [self ExtraNumbPremi];
     }
     /*else{
         [self PremiDasarActKeluargaku:FRekeunsiPembayaranMode];
@@ -380,6 +381,7 @@ bool WPTPD30RisDeleted = FALSE;
     
     [self PremiDasarAct];
     [self PremiDasarActB];
+    [self ExtraNumbPremi];
 }
 
 -(void)KeluargakuEnable
@@ -861,6 +863,20 @@ bool WPTPD30RisDeleted = FALSE;
     [self.planPopover setPopoverContentSize:CGSizeMake(350.0f, 200.0f)];
     [self.planPopover presentPopoverFromRect:rect  inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 
+}
+
+-(NSString *)getPremiType:(NSString *)FrekuensiPembayaran{
+    NSString* localPremiType;
+    if ([FrekuensiPembayaran isEqualToString:@"Premi Tunggal"]){
+        localPremiType=@"S";
+    }
+    else if ([FrekuensiPembayaran isEqualToString:@"Premi 5 Tahun"]){
+        localPremiType=@"R";
+    }
+    else if ([FrekuensiPembayaran isEqualToString:@"10 Tahun"]){
+        localPremiType=@"S";
+    }
+    return localPremiType;
 }
 
 -(IBAction)actionFrekuensiPembayaran:(id)sender
@@ -1940,7 +1956,7 @@ bool WPTPD30RisDeleted = FALSE;
     _modelSIPremium = [[Model_SI_Premium alloc]init];
     NSDictionary* dictPremiData=[[NSDictionary alloc]initWithDictionary:[_modelSIPremium getPremium_For:[self.requestSINo description]]];
     if ([dictPremiData count]!=0){
-        premiType = @"S";
+        premiType = [self getPremiType:[dictPremiData valueForKey:@"Payment_Term"]];
         [yearlyIncomeField setText:[dictPremiData valueForKey:@"Sum_Assured"]];
         [_basicPremiField setText:[dictPremiData valueForKey:@"PremiumPolicyA"]];
         [_extraPremiPercentField setText:[dictPremiData valueForKey:@"ExtraPremiumPercentage"]];
@@ -2316,6 +2332,7 @@ bool WPTPD30RisDeleted = FALSE;
     {
         [self PremiDasarAct];
         [self PremiDasarActB];
+        [self ExtraNumbPremi];
     }
 
     

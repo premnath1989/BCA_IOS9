@@ -704,8 +704,9 @@ BOOL isFirstLoad;
     } else {
         [self loadSecondLAPage];
     }
-    [self loadSecondLAPage];
     [self loadBasicPlanPage:YES];
+    [self loadSecondLAPage];
+
 
     [self.RightView bringSubviewToFront:self.LAController.view];
     [_LAController processLifeAssured];
@@ -827,7 +828,7 @@ BOOL isFirstLoad;
     }
     else{
         @try {
-            if ((![[dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"])||(![[dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"SELF"])){
+            if ((![[dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"])&&(![[dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"SELF"])){
                 [dictionaryPOForInsert addEntriesFromDictionary:[_SecondLAController setDictionarySecondLA]];
             }
         }
