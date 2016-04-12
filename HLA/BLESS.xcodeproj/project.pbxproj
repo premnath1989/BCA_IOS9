@@ -340,6 +340,8 @@
 		43B590971CA2702400DC53AC /* KeluargakuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B590951CA2702400DC53AC /* KeluargakuTableViewCell.m */; };
 		43B5909B1CA2704200DC53AC /* RiderCalculation.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B5909A1CA2704200DC53AC /* RiderCalculation.m */; };
 		43B5909E1CA29D7200DC53AC /* ModelSIRider.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B5909D1CA29D7200DC53AC /* ModelSIRider.m */; };
+		43BB38BB1CBCA4CC00A5F5C5 /* IlustrationSignatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43BB38BA1CBCA4CC00A5F5C5 /* IlustrationSignatureViewController.m */; };
+		43BB38C11CBCBBF700A5F5C5 /* mySmoothLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43BB38C01CBCBBF700A5F5C5 /* mySmoothLineView.m */; };
 		43C166191C99448500001691 /* ModelKodepos.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C166181C99448500001691 /* ModelKodepos.m */; };
 		43C1661C1C99489000001691 /* KodePosInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C1661B1C99489000001691 /* KodePosInfo.m */; };
 		43DA4BD91C76A59A0038C92C /* ModelAgentProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DA4BD81C76A59A0038C92C /* ModelAgentProfile.m */; };
@@ -1384,6 +1386,10 @@
 		43B5909A1CA2704200DC53AC /* RiderCalculation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RiderCalculation.m; sourceTree = "<group>"; };
 		43B5909C1CA29D7200DC53AC /* ModelSIRider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelSIRider.h; sourceTree = "<group>"; };
 		43B5909D1CA29D7200DC53AC /* ModelSIRider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelSIRider.m; sourceTree = "<group>"; };
+		43BB38B91CBCA4CC00A5F5C5 /* IlustrationSignatureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IlustrationSignatureViewController.h; sourceTree = "<group>"; };
+		43BB38BA1CBCA4CC00A5F5C5 /* IlustrationSignatureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IlustrationSignatureViewController.m; sourceTree = "<group>"; };
+		43BB38BF1CBCBBF700A5F5C5 /* mySmoothLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mySmoothLineView.h; sourceTree = "<group>"; };
+		43BB38C01CBCBBF700A5F5C5 /* mySmoothLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mySmoothLineView.m; sourceTree = "<group>"; };
 		43C166171C99448500001691 /* ModelKodepos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelKodepos.h; sourceTree = "<group>"; };
 		43C166181C99448500001691 /* ModelKodepos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelKodepos.m; sourceTree = "<group>"; };
 		43C1661A1C99489000001691 /* KodePosInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KodePosInfo.h; sourceTree = "<group>"; };
@@ -3245,6 +3251,17 @@
 			name = RiderCalculation;
 			sourceTree = "<group>";
 		};
+		43BB38B51CBCA47A00A5F5C5 /* Ilustration Signature */ = {
+			isa = PBXGroup;
+			children = (
+				43BB38BF1CBCBBF700A5F5C5 /* mySmoothLineView.h */,
+				43BB38C01CBCBBF700A5F5C5 /* mySmoothLineView.m */,
+				43BB38B91CBCA4CC00A5F5C5 /* IlustrationSignatureViewController.h */,
+				43BB38BA1CBCA4CC00A5F5C5 /* IlustrationSignatureViewController.m */,
+			);
+			name = "Ilustration Signature";
+			sourceTree = "<group>";
+		};
 		43F7C3161C9D409D0074F464 /* Formatter */ = {
 			isa = PBXGroup;
 			children = (
@@ -4688,6 +4705,7 @@
 		EF05984D161A9230004A9095 /* BasicPlan */ = {
 			isa = PBXGroup;
 			children = (
+				43BB38B51CBCA47A00A5F5C5 /* Ilustration Signature */,
 				EF059847161A912A004A9095 /* BasicPlanViewController.h */,
 				174BAA431C86799B002EEEEC /* IlustrationViewController.h */,
 				174BAA441C86799B002EEEEC /* IlustrationViewController.m */,
@@ -4904,7 +4922,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0460;
-				ORGANIZATIONNAME = "Hong Leong Assurance";
+				ORGANIZATIONNAME = "InfoConnect Sdn Bhd";
 				TargetAttributes = {
 					C4E9D18F1612C64900016053 = {
 						DevelopmentTeam = 87JN2XNQTS;
@@ -5350,6 +5368,7 @@
 				C4E7B388161B119E00066CBF /* SIListing.m in Sources */,
 				C4E7B38B161B147800066CBF /* siListingSortBy.m in Sources */,
 				DE9E89661CA26A2400BF6D0D /* PremiumKeluargaku.m in Sources */,
+				43BB38C11CBCBBF700A5F5C5 /* mySmoothLineView.m in Sources */,
 				EF28C319161BE224009585CC /* SIMenuViewController.m in Sources */,
 				EFB9389E161C3CB800B97101 /* BasicPlanHandler.m in Sources */,
 				C4F08D60161DBDBB008BCC1A /* SIDate.m in Sources */,
@@ -5652,6 +5671,7 @@
 				AA4EF76D1C85A4260050CCD8 /* ReaderThumbFetch.m in Sources */,
 				42D3277618487F2D0030AA7A /* NewGroupListing.m in Sources */,
 				EF509EC7184F30110058CCD8 /* ClientProfileListingSortBy.m in Sources */,
+				43BB38BB1CBCA4CC00A5F5C5 /* IlustrationSignatureViewController.m in Sources */,
 				423A853518502D92008EC5D4 /* SelectCFFCell.m in Sources */,
 				C416C2B61855BA9B00D29E46 /* SettingUserProfileReg.m in Sources */,
 				C416C2C11855BBA700D29E46 /* ChangePasswordReg.m in Sources */,

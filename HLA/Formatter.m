@@ -57,6 +57,17 @@
     return myNumber;
 }
 
+-(NSNumber *)convertAnyNonDecimalNumberToString:(NSString *)stringNumber{
+    NSString *returnNumber = stringNumber;
+    returnNumber = [returnNumber stringByReplacingOccurrencesOfString:@" " withString:@""];
+    returnNumber = [returnNumber stringByReplacingOccurrencesOfString:@"," withString:@""];
+    returnNumber = [returnNumber stringByReplacingOccurrencesOfString:@"." withString:@""];
+    returnNumber = [returnNumber stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    
+    long long newNumber=[returnNumber longLongValue];
+    return [NSNumber numberWithLongLong:newNumber];
+}
+
 -(double)formatToTwoDecimal:(double)valueToFormat{
     NSNumberFormatter *format21 = [[NSNumberFormatter alloc]init];
     [format21 setNumberStyle:NSNumberFormatterNoStyle];

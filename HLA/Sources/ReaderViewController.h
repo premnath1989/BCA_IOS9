@@ -26,6 +26,7 @@
 #import <UIKit/UIKit.h>
 
 #import "ReaderDocument.h"
+#import "IlustrationSignatureViewController.h"
 
 @class ReaderViewController;
 

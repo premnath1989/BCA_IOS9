@@ -272,10 +272,10 @@ bool WPTPD30RisDeleted = FALSE;
     [_masaExtraPremiField setText:@""];
     [_extraBasicPremiField setText:@""];
     [_totalPremiWithLoadingField setText:@""];
-    [_masaPembayaranButton setTitle:@"--Please Select---" forState:UIControlStateNormal];
-    [_frekuensiPembayaranButton setTitle:@"--Please Select---" forState:UIControlStateNormal];
+    [_masaPembayaranButton setTitle:@"--Please Select--" forState:UIControlStateNormal];
+    [_frekuensiPembayaranButton setTitle:@"--Please Select--" forState:UIControlStateNormal];
     FRekeunsiPembayaranMode = @"";
-    [_KKLKPembelianKeBtn setTitle:@"--Please Select---" forState:UIControlStateNormal];
+    [_KKLKPembelianKeBtn setTitle:@"--Please Select--" forState:UIControlStateNormal];
     [_KKLKDiskaunBtn setText:@"0"];
     BasisSumAssured = 0;
     discountPembelian=0;
@@ -777,7 +777,8 @@ bool WPTPD30RisDeleted = FALSE;
     double ExtraPrem1 = ExtraPremiTotal + ExtraPrecenttotal;
     
     //long long Alltotal = TotalA +ExtraPrem1;
-    double Alltotal = TotalA +ExtraPrem1;
+    //double Alltotal = TotalA +ExtraPrem1;
+
     
     NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setFormatterBehavior: NSNumberFormatterBehavior10_4];
@@ -787,8 +788,11 @@ bool WPTPD30RisDeleted = FALSE;
     [numberFormatter setMinimumFractionDigits:0];
     
     NSString *numberExtraBasicPremi = [numberFormatter stringFromNumber: [NSNumber numberWithDouble:ExtraPrem1]];
-    NSString *numberExtraBasicTotal = [numberFormatter stringFromNumber: [NSNumber numberWithDouble:Alltotal]];
+    
 
+    long long Alltotal = [[classFormatter convertAnyNonDecimalNumberToString:_basicPremiField.text] longLongValue] + [[classFormatter convertAnyNonDecimalNumberToString:numberExtraBasicPremi] longLongValue];
+    
+    NSString *numberExtraBasicTotal = [numberFormatter stringFromNumber: [NSNumber numberWithLongLong:Alltotal]];
     [_extraBasicPremiField setText:[NSString stringWithFormat:@"%@", numberExtraBasicPremi]];
     [_totalPremiWithLoadingField setText:[NSString stringWithFormat:@"%@", numberExtraBasicTotal]];
 }
@@ -1902,7 +1906,7 @@ bool WPTPD30RisDeleted = FALSE;
 
     
     
-    double TotalAB = TotalA + ExtraPrem1;
+    //double TotalAB = TotalA + ExtraPrem1;
     
     [self ExtraNumbPremi];
     
@@ -1918,7 +1922,11 @@ bool WPTPD30RisDeleted = FALSE;
     
     NSString *numberExtraBasicPremi = [numberFormatter stringFromNumber: [NSNumber numberWithDouble:ExtraPrem1]];
     
-    NSString *totalPremiWithLoading = [numberFormatter stringFromNumber: [NSNumber numberWithDouble:TotalAB]];
+    //NSString *totalPremiWithLoading = [numberFormatter stringFromNumber: [NSNumber numberWithDouble:TotalAB]];
+    long long TotalAB = [[classFormatter convertAnyNonDecimalNumberToString:_basicPremiField.text] longLongValue] + [[classFormatter convertAnyNonDecimalNumberToString:numberExtraBasicPremi] longLongValue];
+    
+    NSString *totalPremiWithLoading = [numberFormatter stringFromNumber: [NSNumber numberWithLongLong:TotalAB]];
+
     
     [_extraBasicPremiField setText:[NSString stringWithFormat:@"%@", numberExtraBasicPremi]];
     [_totalPremiWithLoadingField setText:[NSString stringWithFormat:@"%@", totalPremiWithLoading]];
