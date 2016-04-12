@@ -2,6 +2,7 @@
 #import "USAdditions.h"
 #import <libxml/tree.h>
 #import "USGlobals.h"
+#import "AppDelegate.h"
 @class AgentWS_ValidateAgentAndDevice;
 @class AgentWS_ValidateAgentAndDeviceResponse;
 @class AgentWS_ValidateLogin;
