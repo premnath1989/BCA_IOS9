@@ -810,17 +810,23 @@ bool WPTPD30RisDeleted = FALSE;
 }
 
 -(IBAction)MasaExtraPremiTextFieldDidBegin:(UITextField *)sender{
-    if ([_masaPembayaranButton.titleLabel.text isEqualToString:@"Premi Tunggal"]){
-        [MasaExtraPremiLBL setText:@"Min 1 | Max 1"];
+    NSString *PlanTypeProduct = [_dictionaryPOForInsert valueForKey:@"ProductName"];
+    if([PlanTypeProduct isEqualToString:@"BCA Life Heritage Protection"]){
+        if ([_masaPembayaranButton.titleLabel.text isEqualToString:@"Premi Tunggal"]){
+            [MasaExtraPremiLBL setText:@"Min 1 | Max 1"];
+        }
+        else if ([_masaPembayaranButton.titleLabel.text isEqualToString:@"Premi 5 Tahun"]){
+            [MasaExtraPremiLBL setText:@"Min 1 | Max 5"];
+        }
     }
-    else if ([_masaPembayaranButton.titleLabel.text isEqualToString:@"Premi 5 Tahun"]){
-        [MasaExtraPremiLBL setText:@"Min 1 | Max 5"];
+    else{
+        [MasaExtraPremiLBL setText:@"Min 1 | Max 10"];
     }
     [MasaExtraPremiLBL setHidden:NO];
 }
 
 -(IBAction)MasaExtraPremiTextFieldDidEnd:(UITextField *)sender {
-    //[MasaExtraPremiLBL setHidden:YES];
+    [MasaExtraPremiLBL setHidden:YES];
     if([PlanType isEqualToString:@"BCA Life Keluargaku"])
     {
         [self PremiDasarActKeluargaku:FRekeunsiPembayaranMode];
