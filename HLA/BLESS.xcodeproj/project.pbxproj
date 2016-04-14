@@ -2054,7 +2054,6 @@
 		C4E9D19C1612C64900016053 /* BLESS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BLESS-Info.plist"; sourceTree = "<group>"; };
 		C4E9D19E1612C64900016053 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C4E9D1A01612C64900016053 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		C4E9D1A21612C64900016053 /* iMobile Planner-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iMobile Planner-Prefix.pch"; sourceTree = "<group>"; };
 		C4E9D1A31612C64900016053 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C4E9D1A41612C64900016053 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		C4E9D1A71612C64900016053 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
@@ -2158,6 +2157,7 @@
 		DE15788F1CBB8F7000CE171B /* EncryptDecryptWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EncryptDecryptWrapper.m; sourceTree = "<group>"; };
 		DE1CC95E1CA283850058B595 /* PremiumKeluargaku.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PremiumKeluargaku.h; sourceTree = "<group>"; };
 		DE1CC9611CA284A70058B595 /* PremiumKeluargaku.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PremiumKeluargaku.xib; sourceTree = "<group>"; };
+		DE20EAD51CBF3D4800B1E6AE /* BLESS-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "BLESS-Prefix.pch"; path = "../BLESS-Prefix.pch"; sourceTree = "<group>"; };
 		DE38E4891CAA25E300B3051B /* GroupDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GroupDelegate.h; sourceTree = "<group>"; };
 		DE80E4231CA3F7FB00D9E775 /* BlackRaccoon-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "BlackRaccoon-Info.plist"; path = "BlackRacoon/BlackRaccoon-Info.plist"; sourceTree = "<group>"; };
 		DE80E4241CA3F7FB00D9E775 /* BlackRaccoon-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "BlackRaccoon-Prefix.pch"; path = "BlackRacoon/BlackRaccoon-Prefix.pch"; sourceTree = "<group>"; };
@@ -4249,6 +4249,7 @@
 		C4E9D19B1612C64900016053 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				DE20EAD51CBF3D4800B1E6AE /* BLESS-Prefix.pch */,
 				DE06FFCD1CABBC2800E4DE3A /* xibLibrary.bundle */,
 				DE80E4231CA3F7FB00D9E775 /* BlackRaccoon-Info.plist */,
 				DE80E4241CA3F7FB00D9E775 /* BlackRaccoon-Prefix.pch */,
@@ -4270,7 +4271,6 @@
 				C486D9D3163E6622009F8F21 /* Cordova.plist */,
 				C4E9D19D1612C64900016053 /* InfoPlist.strings */,
 				C4E9D1A01612C64900016053 /* main.m */,
-				C4E9D1A21612C64900016053 /* iMobile Planner-Prefix.pch */,
 				FAF16A251B7B4D6E0034F16C /* ReleaseDate.plist */,
 			);
 			name = "Supporting Files";

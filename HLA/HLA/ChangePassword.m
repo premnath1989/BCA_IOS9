@@ -17,10 +17,6 @@
 #import "DDXMLElementAdditions.h"
 #import "DDXMLNode.h"
 
-
-#import "StringEncryption.h"
-#import "NSData+Base64.h"
-
 #import "LoginMacros.h"
 
 @interface ChangePassword ()
@@ -82,6 +78,7 @@
     [btnBarDone setTintColor: [UIColor clearColor]];
     
     
+    encryptWrapper = [[EncryptDecryptWrapper alloc]init];
     spinnerLoading = [[SpinnerUtilities alloc]init];
 
     if(flagFirstLogin){
@@ -223,7 +220,9 @@
     if (sqlite3_open(dbpath, &contactDB) == SQLITE_OK)
     {
        // NSString *querySQL = [NSString stringWithFormat:@"UPDATE User_Profile SET AgentPassword= \"%@\" WHERE IndexNo=\"%d\"",txtNewPwd.text,self.userID];
-        NSString *querySQL = [NSString stringWithFormat:@"UPDATE Agent_Profile SET AgentPassword= \"%@\" WHERE IndexNo=\"%d\"",txtNewPwd.text,self.userID];
+        
+        NSString *encryptedPass = [encryptWrapper encrypt:txtNewPwd.text];
+        NSString *querySQL = [NSString stringWithFormat:@"UPDATE Agent_Profile SET AgentPassword= \"%@\" WHERE IndexNo=\"%d\"",encryptedPass,self.userID];
         
         const char *query_stmt = [querySQL UTF8String];
         
@@ -316,11 +315,13 @@
             if ([txtNewPwd.text isEqualToString:txtConfirmPwd.text]) {
                 [spinnerLoading startLoadingSpinner:self.view label:@"Loading..."];
                 WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
+                NSString *encryptedOldPass = [encryptWrapper encrypt:txtOldPwd.text];
+                NSString *encryptedNewPass = [encryptWrapper encrypt:txtNewPwd.text];
                 if(flagFirstLogin){
                     WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
-                    [webservice checkuserpass:txtAgentCode.text password:txtOldPwd.text delegate:self];
+                    [webservice checkuserpass:txtAgentCode.text password:encryptedOldPass delegate:self];
                 }else{
-                    [webservice chgPassword:self AgentCode:txtAgentCode.text password:txtOldPwd.text newPassword:txtNewPwd.text UUID:[[[UIDevice currentDevice] identifierForVendor] UUIDString]];
+                    [webservice chgPassword:self AgentCode:txtAgentCode.text password:encryptedOldPass newPassword:encryptedNewPass UUID:[[[UIDevice currentDevice] identifierForVendor] UUIDString]];
                 }
             }
             else {
@@ -373,7 +374,8 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
             if([rateResponse.ChangePasswordResult caseInsensitiveCompare:@"TRUE"]== NSOrderedSame){
                 UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Ubah Password Sukses!"message:[NSString stringWithFormat:@"Password Anda telah berhasil di ubah"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
                 [alert show];
-                [loginDB updatePassword:txtNewPwd.text];
+                NSString *encryptedPass = [encryptWrapper encrypt:txtNewPwd.text];
+                [loginDB updatePassword:encryptedPass];
                 [self dismissModalViewControllerAnimated:YES];
             }else{
                 UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Ubah Password Gagal!"message:[NSString stringWithFormat:@"Password Anda gagal di ubah"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
@@ -440,7 +442,9 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
                                   
                                   dispatch_async(dispatch_get_main_queue(), ^{
                                     WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
-                                    [webservice FirstTimeLogin:self AgentCode:txtAgentCode.text password:txtOldPwd.text newPassword:txtNewPwd.text UUID:[[[UIDevice currentDevice] identifierForVendor] UUIDString]];
+                                    NSString *encryptedNewPass = [encryptWrapper encrypt:txtNewPwd.text];
+                                    NSString *encryptedOldPass = [encryptWrapper encrypt:txtOldPwd.text];
+                                    [webservice FirstTimeLogin:self AgentCode:txtAgentCode.text password:encryptedOldPass newPassword:encryptedNewPass UUID:[[[UIDevice currentDevice] identifierForVendor] UUIDString]];
                                                           });
                               });
                           });
@@ -476,6 +480,7 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
                 }
             }else if([rateResponse.strStatus caseInsensitiveCompare:@"False"] == NSOrderedSame){
                 [spinnerLoading stopLoadingSpinner];
+                [loginDB DeleteAgentProfile];
                 UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Username/Password yang di masukan salah" message:@"" delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
                 [alert show];
             }

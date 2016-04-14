@@ -12,6 +12,7 @@
 #import "AgentWS.h"
 #import "LoginDBManagement.h"
 #import "SpinnerUtilities.h"
+#import "EncryptDecryptWrapper.h"
 
 @interface ChangePassword : UIViewController<PasswordTipDelegate, AgentWSSoapBindingResponseDelegate>{
     NSString *databasePath;
@@ -23,6 +24,7 @@
     BOOL flagFullSync;
     NSString *strAgentCode;
     LoginDBManagement *loginDB;
+    EncryptDecryptWrapper *encryptWrapper;
 }
 
 @property (nonatomic, assign,readwrite) int userID;

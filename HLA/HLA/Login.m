@@ -56,6 +56,7 @@ NSString *ProceedStatus = @"";
 @synthesize uatAgentStatus, uatDeviceLabel;
 @synthesize serverOption;
 @synthesize serverSegmented;
+@synthesize viewWrapper;
 
 - (void)viewDidLoad
 {
@@ -69,6 +70,7 @@ NSString *ProceedStatus = @"";
     
     ONLINE_PROCESS = FALSE;
     OFFLINE_PROCESS = FALSE;
+    encryptWrapper = [[EncryptDecryptWrapper alloc]init];
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = TRUE;
     
@@ -110,6 +112,7 @@ NSString *ProceedStatus = @"";
         serverSegmented.hidden = TRUE;
         serverSegmented.selectedSegmentIndex = 1;
         delegate.serverUAT = FALSE;
+        viewWrapper.hidden = TRUE;
     }else{
         serverSegmented.selectedSegmentIndex = 0;
         delegate.serverUAT = TRUE;
@@ -519,10 +522,13 @@ static NSString *labelVers;
     
     BOOL validFlag = true;
     
-    if(![loginDB SpvAdmValidation:txtUsername.text password:txtPassword.text]){
+    
+    NSString *encryptedPass = [encryptWrapper encrypt:txtPassword.text];
+    if(![loginDB SpvAdmValidation:txtUsername.text password:encryptedPass]){
         switch ([loginDB AgentStatus:txtUsername.text]) {
             case AGENT_IS_INACTIVE:
             {
+                [spinnerLoading stopLoadingSpinner];
                 UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Status Agen adalah inactive"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
                 [alert show];
                 validFlag = false;
@@ -530,6 +536,7 @@ static NSString *labelVers;
             }
             case AGENT_IS_NOT_FOUND:
             {
+                [spinnerLoading stopLoadingSpinner];
                 UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Username/Password yang di masukan salah"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
                 [alert show];
                 validFlag = false;
@@ -537,6 +544,7 @@ static NSString *labelVers;
             }
             case AGENT_IS_TERMINATED:
             {
+                [spinnerLoading stopLoadingSpinner];
                 UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Status Agen adalah terminated"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
                 [alert show];
                 validFlag = false;
@@ -548,6 +556,7 @@ static NSString *labelVers;
         switch ([[dateFormatter dateFromString:[loginDB expiryDate:txtUsername.text]] compare:[NSDate date]]) {
             case NSOrderedAscending:
             {
+                [spinnerLoading stopLoadingSpinner];
                 UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Lisensi Agen telah expired"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
                 [alert show];
                 validFlag = false;
@@ -559,6 +568,7 @@ static NSString *labelVers;
     }
     
     if([[loginDB localDBUDID] caseInsensitiveCompare:[[[UIDevice currentDevice] identifierForVendor] UUIDString]]!= NSOrderedSame){
+        [spinnerLoading stopLoadingSpinner];
         UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Agen login di device yang tidak terdaftar"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alert show];
         validFlag = false;
@@ -567,6 +577,7 @@ static NSString *labelVers;
     switch ([loginDB DeviceStatus:txtUsername.text]) {
         case DEVICE_IS_INACTIVE:
         {
+            [spinnerLoading stopLoadingSpinner];
             UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Status Perangkat anda tidak aktif"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [alert show];
             validFlag = false;
@@ -574,6 +585,7 @@ static NSString *labelVers;
         }
         case DEVICE_IS_TERMINATED:
         {
+            [spinnerLoading stopLoadingSpinner];
             UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Status Perangkat anda telah di terminate"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [alert show];
             validFlag = false;
@@ -591,6 +603,7 @@ static NSString *labelVers;
     //check the agentstatus and expiry date
     if(!firstLogin){
         
+        NSString *encryptedPass = [encryptWrapper encrypt:txtPassword.text];
         //online login
         int dateDifference = [self syncDaysLeft];
         if(dateDifference>0)
@@ -606,14 +619,14 @@ static NSString *labelVers;
                     switch (usernameTemp) {
                         case USERNAME_IS_AGENT:{
                             WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
-                            [webservice ValidateLogin:txtUsername.text password:txtPassword.text UUID:[[[UIDevice currentDevice] identifierForVendor] UUIDString] delegate:self];
+                            [webservice ValidateLogin:txtUsername.text password:encryptedPass UUID:[[[UIDevice currentDevice] identifierForVendor] UUIDString] delegate:self];
                             break;
                         }
                         case USERNAME_IS_SPV:{
                             
                             if([loginDB SpvStatus:txtUsername.text] == AGENT_IS_ACTIVE){
                                 WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
-                                [webservice spvLogin:[loginDB AgentCodeLocal] delegate:self spvCode:txtUsername.text spvPass:txtPassword.text];
+                                [webservice spvLogin:[loginDB AgentCodeLocal] delegate:self spvCode:txtUsername.text spvPass:encryptedPass];
                             }else{
                                 UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Status Agen adalah inactive"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
                                 [alert show];
@@ -622,8 +635,9 @@ static NSString *labelVers;
                             break;
                         }
                         case USERNAME_IS_ADMIN:{
+                            
                             WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
-                            [webservice adminLogin:[loginDB AgentCodeLocal] delegate:self adminCode:txtUsername.text  adminPass:txtPassword.text];
+                            [webservice adminLogin:[loginDB AgentCodeLocal] delegate:self adminCode:txtUsername.text  adminPass:encryptedPass];
                             break;
                         }
                         default:
@@ -753,7 +767,6 @@ static NSString *labelVers;
 
 - (IBAction)btnReset:(id)sender
 {
-//    [self loginSuccess];
     txtUsername.text = @"";
     txtPassword.text = @"";
 }
@@ -934,9 +947,10 @@ static NSString *labelVers;
         Admin = [[result1 objectForColumnName:@"Admin"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
         AdminPassword = [[result1 objectForColumnName:@"AdminPassword"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
         
+        NSString *encryptedPass = [encryptWrapper encrypt:txtPassword.text];
         if(!spvAdminBypass){
             if ([txtUsername.text isEqualToString:AgentName]) {
-                if ([txtPassword.text isEqualToString:AgentPassword]) {
+                if ([encryptedPass isEqualToString:AgentPassword]) {
                     successLog = TRUE;
                 }else{
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Username/Password yang Anda masukkan salah" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
@@ -950,9 +964,9 @@ static NSString *labelVers;
             }
         }else{
             if([txtUsername.text isEqualToString:AgentName] || [txtUsername.text isEqualToString:SupervisorCode] || [txtUsername.text isEqualToString:Admin]){
-                if (([txtUsername.text isEqualToString:AgentName] && [txtPassword.text isEqualToString:AgentPassword])
-                    ||([txtUsername.text isEqualToString:SupervisorCode] && [txtPassword.text isEqualToString:SupervisorPass])
-                    || ([txtUsername.text isEqualToString:Admin] && [txtPassword.text isEqualToString:AdminPassword])) {
+                if (([txtUsername.text isEqualToString:AgentName] && [encryptedPass isEqualToString:AgentPassword])
+                    ||([txtUsername.text isEqualToString:SupervisorCode] && [encryptedPass isEqualToString:SupervisorPass])
+                    || ([txtUsername.text isEqualToString:Admin] && [encryptedPass isEqualToString:AdminPassword])) {
                     successLog = TRUE;
                 }else{
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Username/Password yang Anda masukkan salah" delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];

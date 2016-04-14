@@ -11140,21 +11140,6 @@
                                             <color key="titleColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Server :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="r2t-xk-K6H">
-                                        <rect key="frame" x="40" y="699" width="59" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="vFv-qU-rlM">
-                                        <rect key="frame" x="107" y="696" width="163" height="29"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <segments>
-                                            <segment title="UAT"/>
-                                            <segment title="Production"/>
-                                        </segments>
-                                    </segmentedControl>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mRL-Kt-Ruw">
                                         <rect key="frame" x="955" y="359" width="61" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -11165,6 +11150,28 @@
                                             <action selector="passLogin:" destination="ds4-DI-v8U" eventType="touchUpInside" id="4VY-18-10f"/>
                                         </connections>
                                     </button>
+                                    <view contentMode="scaleToFill" id="Fri-3U-ihT">
+                                        <rect key="frame" x="776" y="650" width="240" height="52"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Server :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="r2t-xk-K6H">
+                                                <rect key="frame" x="5" y="15" width="59" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="vFv-qU-rlM">
+                                                <rect key="frame" x="72" y="12" width="163" height="29"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <segments>
+                                                    <segment title="UAT"/>
+                                                    <segment title="Production"/>
+                                                </segments>
+                                            </segmentedControl>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.95558934563758391" green="0.94187814597315433" blue="0.97166002516778527" alpha="0.56239224137931032" colorSpace="calibratedRGB"/>
+                                    </view>
                                 </subviews>
                             </scrollView>
                         </subviews>
@@ -11183,6 +11190,7 @@
                         <outlet property="serverSegmented" destination="vFv-qU-rlM" id="Wb7-7k-rDx"/>
                         <outlet property="txtPassword" destination="RCg-Da-r9X" id="q2f-UY-KXC"/>
                         <outlet property="txtUsername" destination="6Ha-4F-7Pu" id="Y3d-mI-kEG"/>
+                        <outlet property="viewWrapper" destination="Fri-3U-ihT" id="3mx-UT-SRh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lle-yx-obi" userLabel="First Responder" sceneMemberID="firstResponder"/>

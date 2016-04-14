@@ -84,6 +84,7 @@ static NSString* DATE_FORMAT = @"yyyy-MM-dd";
     BOOL showLogout;
     ChangePassword * UserProfileView;
     SpinnerUtilities *spinnerLoading;
+    EncryptDecryptWrapper *encryptWrapper;
 }
 
 @property (nonatomic, strong) id<LoginDelegate> delegate;
@@ -119,6 +120,7 @@ static NSString* DATE_FORMAT = @"yyyy-MM-dd";
 
 @property (weak, nonatomic) IBOutlet UILabel *serverOption;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *serverSegmented;
+@property (weak, nonatomic) IBOutlet UIView *viewWrapper;
 
 +(NSString *)getLabelVersion;
 
