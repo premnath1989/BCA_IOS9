@@ -1614,6 +1614,7 @@ MBProgressHUD *HUD;
     [self hideKeyboard];
     nametxt.text = @"";
     txtIDTypeNo.text = @"";
+    txtIDNumber.text = @"";
     _txtBranchName.text = @"";
     [_outletDOB setTitle:@"" forState:UIControlStateNormal];
     

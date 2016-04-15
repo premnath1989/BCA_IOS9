@@ -150,6 +150,10 @@ NSMutableArray *DelGroupArr;
 	
     [super viewDidLoad];
     modelSIPOData=[[ModelSIPOData alloc]init];
+    modelSIRider=[[ModelSIRider alloc]init];
+    modelSIPremium=[[Model_SI_Premium alloc]init];
+    modelSIMaster=[[Model_SI_Master alloc]init];
+
     borderColor=[[UIColor alloc]initWithRed:250.0/255.0 green:175.0/255.0 blue:50.0/255.0 alpha:1.0];
     
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LoadDisplay) name:@"reloadEdit" object:nil];
@@ -5180,6 +5184,16 @@ NSMutableArray *DelGroupArr;
 		
 }
 
+-(void)clearSIData{
+    NSMutableArray *usedSI = [[NSMutableArray alloc]initWithArray:[modelSIPOData getSINumberForProspectProfileID:pp.ProspectID]];//
+    for (int i=0; i<[usedSI count];i++){
+        [modelSIMaster deleteIlustrationMaster:[usedSI objectAtIndex:i]];
+        [modelSIPOData deletePOData:[usedSI objectAtIndex:i]];
+        [modelSIPremium deletePremium:[usedSI objectAtIndex:i]];
+        [modelSIRider deleteRiderData:[usedSI objectAtIndex:i]];
+    }
+}
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     sqlite3_stmt *statement;
@@ -5248,6 +5262,7 @@ NSMutableArray *DelGroupArr;
 			else if(alertView.tag == 1004)
 			{
 				[[NSUserDefaults standardUserDefaults]setValue:nil forKey:@"data"];
+                [self clearSIData];
 				[self saveToDB];
 			}
         }
@@ -8975,7 +8990,8 @@ NSMutableArray *DelGroupArr;
         OTHERID_Hold_Alert = NO;
         NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
         //if (![[ClientProfile objectForKey:@"TabBar1"] isEqualToString:@"1"] && clickDone != 1) {
-        if (![[ClientProfile objectForKey:@"TabBar1"] isEqualToString:@"1"]) {
+        //if (![[ClientProfile objectForKey:@"TabBar1"] isEqualToString:@"1"]) {
+        //if ([[ClientProfile objectForKey:@"TabBar1"] isEqualToString:@"1"]) {
             NSString *otherIDType = [OtherIDType.titleLabel.text stringByTrimmingCharactersInSet:
                                      [NSCharacterSet whitespaceCharacterSet]];
             NSString *input = [txtOtherIDType.text lowercaseString];
@@ -9012,7 +9028,7 @@ NSMutableArray *DelGroupArr;
                         return false;
                     }
                 }
-            }
+            //}
         }
         idValidationChecker = YES;
         return true;
