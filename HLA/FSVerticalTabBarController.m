@@ -343,6 +343,10 @@ BOOL isBusy;
             [alert show];
             alert = Nil;
         } else {
+            if (indexPath.row==3){
+                UIViewController *selectedViewController = [self.viewControllers objectAtIndex:indexPath.row];
+                [(SIMenuViewController *)selectedViewController clearSINO];
+            }
             [self setSelectedIndex:indexPath.row];
         }
 

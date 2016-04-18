@@ -19,6 +19,7 @@
 -(BOOL)shouldProceedToSelectedViewControllerDiscard:(UIViewController*)viewController;
 -(BOOL)shouldProceedToSelectedViewControllerSave:(UIViewController*)viewController;
 -(BOOL)RevertBackSIStatus:(UIViewController*)viewController;
+
 @end
 
 
@@ -30,7 +31,7 @@
     NSIndexPath *currentIndexPath;
     NSIndexPath *selectedIndexPath;
 }
-
+@property (nonatomic,strong) id requestSINo;
 @property (nonatomic, readwrite, assign) id<FSTabBarControllerDelegate> delegate;
 @property (nonatomic, readwrite, strong) FSVerticalTabBar *tabBar;
 @property (nonatomic, readwrite, copy) NSArray *viewControllers;

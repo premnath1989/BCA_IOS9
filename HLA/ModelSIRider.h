@@ -17,4 +17,5 @@
 -(int)getRiderCount:(NSString *)SINo RiderCode:(NSString *)riderCode;
 -(void)updateRider:(NSDictionary *)dataRider;
 -(NSDictionary *)getRider:(NSString *)SINo RiderCode:(NSString *)riderCode;
+-(void)deleteRiderData:(NSString *)siNo;
 @end

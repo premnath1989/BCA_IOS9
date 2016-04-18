@@ -209,6 +209,7 @@
 @property(nonatomic , retain) NSString *NamePayor;
 
 @property (nonatomic,strong) id SIshowQuotation;
+-(void)clearSINO;
 -(void)Reset;
 -(void)saveAll;
 -(BOOL)performSaveSI:(BOOL)saveChanges;//to save or to revert SI upon pressing fs vertical bar

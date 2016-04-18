@@ -21,4 +21,5 @@
 -(void)updatePartialPOData:(NSDictionary *)dataPO;
 -(int)getPODataCount:(NSString *)SINo;
 -(int)getLADataCount:(NSString *)prospectProfileID;
+-(NSMutableArray *)getSINumberForProspectProfileID:(NSString *)prospectProfileID;
 @end

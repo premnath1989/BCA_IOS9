@@ -278,7 +278,7 @@
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     [database open];
     
-    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select count(*) from SI_PO_Data where LA_ClientID = \"%@\"",prospectProfileID]];
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select count(*) from SI_PO_Data where LA_ClientID = \"%@\" or PO_ClientID = \"%@\"",prospectProfileID,prospectProfileID]];
     while ([s next]) {
         count = [s intForColumn:@"count(*)"];
     }
@@ -286,6 +286,25 @@
     [results close];
     [database close];
     return count;
+}
+
+-(NSMutableArray *)getSINumberForProspectProfileID:(NSString *)prospectProfileID{
+    NSMutableArray *SINumberArray = [[NSMutableArray alloc]init];
+    
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select SINO from SI_PO_Data where LA_ClientID = \"%@\" or PO_ClientID = \"%@\"",prospectProfileID,prospectProfileID]];
+    while ([s next]) {
+        [SINumberArray addObject:[s stringForColumn:@"SINO"]];
+    }
+    
+    [results close];
+    [database close];
+    return SINumberArray;
 }
 
 @end

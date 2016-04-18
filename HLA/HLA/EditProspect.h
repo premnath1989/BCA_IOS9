@@ -29,6 +29,9 @@
 #import "ModelDataReferral.h"
 #import "KodePosInfo.h"
 #import "ModelSIPOData.h"
+#import "Model_SI_Master.h"
+#import "Model_SI_Premium.h"
+#import "ModelSIRider.h"
 #import "NIPInfo.h"
 
 @class DataTable,DBController;
@@ -50,6 +53,9 @@
     
     //added  by faiz
     ModelSIPOData* modelSIPOData;
+    ModelSIRider* modelSIRider;
+    Model_SI_Premium* modelSIPremium;
+    Model_SI_Master* modelSIMaster;
     ModelDataReferral* modelDataReferral;
     ModelAgentProfile* modelAgentProfil;
     SourceIncome *_sourceIncome;
