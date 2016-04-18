@@ -723,6 +723,11 @@ BOOL isFirstLoad;
 	return YES;
 }
 
+-(void)clearSINO{
+    self.requestSINo = nil;
+    self.requestSINo2 = nil;
+}
+
 -(void)Reset
 {
     if ([self.requestSINo isEqualToString:self.requestSINo2] || (self.requestSINo == NULL && self.requestSINo2 == NULL) ) {        

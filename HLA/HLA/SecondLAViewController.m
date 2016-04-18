@@ -916,9 +916,11 @@ id dobtemp;
     NSUInteger newLength = [textField.text length] + [string length] - range.length;
     if (textField == nameField)
     {
-        NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:@"ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz./@'()-"] invertedSet];
-        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
-        return (([string isEqualToString:filtered]) && newLength <= 40);
+        NSUInteger newLength = [textField.text length] + [string length] - range.length;
+        /*NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:@"ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz./@'()-"] invertedSet];
+         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+         return (([string isEqualToString:filtered]) && newLength <= 40);*/
+        return (newLength <= 40);
     }
     return YES;
 }
