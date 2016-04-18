@@ -142,51 +142,6 @@ static NSString *labelVers;
     [activeInstance performSelector:@selector(dismissKeyboard)];
 }
 
-
-- (void) doOnlineLogin
-{
-    xmlType = XML_TYPE_GET_AGENT_INFO;
-    
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        
-        NSString *strURL = [NSString stringWithFormat:@"%@eSubmissionWS/eSubmissionXMLService.asmx/"
-                            "GetAgentInfo?Input1=%@&Input2=%@",
-                            [SIUtilities WSLogin],  agentCode, [self getDeviceSerial]];
-        
-        NSLog(@"%@", strURL);
-        NSURL *url = [NSURL URLWithString:strURL];
-        NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:0 timeoutInterval:20];
-        
-        AFXMLRequestOperation *operation = [AFXMLRequestOperation XMLParserRequestOperationWithRequest:request
-           success:^(NSURLRequest *request, NSHTTPURLResponse *response, NSXMLParser *XMLParser) {
-               
-               XMLParser.delegate = self;
-               [XMLParser setShouldProcessNamespaces:YES];
-               [XMLParser parse];
-               
-           } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSXMLParser *XMLParser) {
-               [MBProgressHUD hideHUDForView:self.view animated:YES];
-               NSLog(@"error in calling web service");
-               UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
-                                                               message:@"Anda tidak dapat menghubungi server. Anda akan diarahkan untuk offline login."
-                                                              delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-               alert.tag = 10;
-               [alert show];
-               
-               alert = Nil;
-           }];
-        [operation start];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
-        });
-    });
-    
-    
-}
-
-
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     if (interfaceOrientation==UIInterfaceOrientationLandscapeRight || interfaceOrientation == UIInterfaceOrientationLandscapeLeft)
