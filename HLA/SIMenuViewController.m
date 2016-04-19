@@ -2998,28 +2998,10 @@ BOOL isFirstLoad;
                     [self.BasicController.view removeFromSuperview];
                     [self.RightView addSubview:self.BasicController.view];
                 }
-                [self.RightView bringSubviewToFront:self.BasicController.view];
-                break;
-            case 1:
-                if(![self.RiderController.view isDescendantOfView:self.RightView]) {
-                    [_RiderController setDictionaryPOForInsert:dictionaryPOForInsert];
-                    [_RiderController setDictionaryForBasicPlan:newDictionaryForBasicPlan];
-                    [_RiderController setElementActive];
-                    [_RiderController loadInitialRiderDataFromDatabase];
-                    [self.RightView addSubview:self.RiderController.view];
-                } else {
-                    [_RiderController setDictionaryPOForInsert:dictionaryPOForInsert];
-                    [_RiderController setDictionaryForBasicPlan:newDictionaryForBasicPlan];
-                    [_RiderController setElementActive];
-                    [_RiderController loadInitialRiderDataFromDatabase];
-                    [self.RiderController.view removeFromSuperview];
-                    [self.RightView addSubview:self.RiderController.view];
-                    [self.RightView bringSubviewToFront:self.RiderController.view];
-                }
-                [_RiderController loadInitialRiderDataFromDatabase];
                 @try {
-                    [self saveLAForTableDidSelect];
-                    //[self saveBasicPlanForTableDidSelect];
+                    if([self.RiderController.view isDescendantOfView:self.RightView]) {
+                        [_RiderController localSaveRider];
+                    }
                 }
                 @catch (NSException *exception) {
                     
@@ -3027,52 +3009,93 @@ BOOL isFirstLoad;
                 @finally {
                     
                 }
+
+                [self.RightView bringSubviewToFront:self.BasicController.view];
+                break;
+            case 1:
+                if ([_BasicController validationDataBasicPlan]) {
+                    newDictionaryForBasicPlan=[NSMutableDictionary dictionaryWithDictionary:[_BasicController setDataBasicPlan]];
+                    if(![self.RiderController.view isDescendantOfView:self.RightView]) {
+                        [_RiderController setPODictionaryFromRoot:dictionaryPOForInsert];
+                        [_RiderController setDictionaryForBasicPlan:newDictionaryForBasicPlan];
+                        [_RiderController setElementActive];
+                        [_RiderController loadInitialRiderDataFromDatabase];
+                        [self.RightView addSubview:self.RiderController.view];
+                    } else {
+                        [_RiderController setPODictionaryFromRoot:dictionaryPOForInsert];
+                        [_RiderController setDictionaryForBasicPlan:newDictionaryForBasicPlan];
+                        [_RiderController setElementActive];
+                        [_RiderController loadInitialRiderDataFromDatabase];
+                        [self.RiderController.view removeFromSuperview];
+                        [self.RightView addSubview:self.RiderController.view];
+                        [self.RightView bringSubviewToFront:self.RiderController.view];
+                    }
+                    @try {
+                        [self saveLAForTableDidSelect];
+                        [self saveBasicPlanForTableDidSelect];
+
+                    }
+                    @catch (NSException *exception) {
+                        
+                    }
+                    @finally {
+                        
+                    }
+                    
+                    [_RiderController loadInitialRiderDataFromDatabase];
+                    [_RiderController calculateRiderPremi];
+                }
                 break;
             case 2:
-                if([[dictionaryPOForInsert valueForKey:@"ProductName"] isEqualToString:@"BCA Life Heritage Protection"]){
-                    if([_BasicController validationDataBasicPlan]){
-                        if (!_PremiumController) {
-                            _PremiumController = [self.storyboard instantiateViewControllerWithIdentifier:@"premiumView"];
-                            _PremiumController.delegate = self;
+                if ([_BasicController validationDataBasicPlan]) {
+                    if([[dictionaryPOForInsert valueForKey:@"ProductName"] isEqualToString:@"BCA Life Heritage Protection"]){
+                        if([_BasicController validationDataBasicPlan]){
+                            if (!_PremiumController) {
+                                _PremiumController = [self.storyboard instantiateViewControllerWithIdentifier:@"premiumView"];
+                                _PremiumController.delegate = self;
+                                _PremiumController.requestSINo = [dictionaryPOForInsert valueForKey:@"SINO"];
+                                
+                                [self.RightView addSubview:_PremiumController.view];
+                                
+                            }else{
+                                [_PremiumController.view removeFromSuperview];
+                                [self.RightView addSubview:_PremiumController.view];
+                            }
+                            //[_PremiumController setDictionaryPremium:newDictionaryForBasicPlan];
+                            //[_PremiumController setDictionaryPremium:newDictionaryForBasicPlan];
+                            
+                            [self pullSIData];
+                            [_PremiumController setPremiumDictionary:newDictionaryForBasicPlan];
+                            [_PremiumController loadDataFromDB];
                             _PremiumController.requestSINo = [dictionaryPOForInsert valueForKey:@"SINO"];
+                            [self.RightView bringSubviewToFront:_PremiumController.view];
+                            
+                            @try {
+                                [self saveLAForTableDidSelect];
+                                [self saveBasicPlanForTableDidSelect];
+                                if([self.RiderController.view isDescendantOfView:self.RightView]) {
+                                    [_RiderController localSaveRider];
+                                }
 
-                            [self.RightView addSubview:_PremiumController.view];
-                            
-                        }else{
-                            [_PremiumController.view removeFromSuperview];
-                            [self.RightView addSubview:_PremiumController.view];
-                        }
-                        //[_PremiumController setDictionaryPremium:newDictionaryForBasicPlan];
-                        //[_PremiumController setDictionaryPremium:newDictionaryForBasicPlan];
-                        
-                        [self pullSIData];
-                        [_PremiumController setPremiumDictionary:newDictionaryForBasicPlan];
-                        [_PremiumController loadDataFromDB];
-                        _PremiumController.requestSINo = [dictionaryPOForInsert valueForKey:@"SINO"];
-                        [self.RightView bringSubviewToFront:_PremiumController.view];
-                        
-                        @try {
-                            [self saveLAForTableDidSelect];
-                            [self saveBasicPlanForTableDidSelect];
-                        }
-                        @catch (NSException *exception) {
-                            
-                        }
-                        @finally {
-                            
+                            }
+                            @catch (NSException *exception) {
+                                
+                            }
+                            @finally {
+                                
+                            }
                         }
                     }
+                    else{
+                        PremiumKeluargaku *premiK = [[PremiumKeluargaku alloc]initWithNibName:@"PremiumKeluargaku" bundle:nil SINO:[dictionaryPOForInsert valueForKey:@"SINO"]];
+                        premiK.delegate = self;
+                        [premiK setDictionaryPOForInsert:dictionaryPOForInsert];
+                        [premiK setDictionaryForBasicPlan:newDictionaryForBasicPlan];
+                        [self addChildViewController:premiK];
+                        [self.RightView addSubview:premiK.view];
+                        [self.RightView bringSubviewToFront:premiK.view];
+                    }
                 }
-                else{
-                    PremiumKeluargaku *premiK = [[PremiumKeluargaku alloc]initWithNibName:@"PremiumKeluargaku" bundle:nil SINO:[dictionaryPOForInsert valueForKey:@"SINO"]];
-                    premiK.delegate = self;
-                    [premiK setDictionaryPOForInsert:dictionaryPOForInsert];
-                    [premiK setDictionaryForBasicPlan:newDictionaryForBasicPlan];
-                    [self addChildViewController:premiK];
-                    [self.RightView addSubview:premiK.view];
-                    [self.RightView bringSubviewToFront:premiK.view];
-                }
-                
                 break;
             default:
                 break;
@@ -3136,7 +3159,7 @@ BOOL isFirstLoad;
         self.RiderController = [self.storyboard instantiateViewControllerWithIdentifier:@"RiderView"];
         _RiderController.delegate = self;
     }
-    [_RiderController setDictionaryPOForInsert:dictionaryPOForInsert];
+    [_RiderController setPODictionaryFromRoot:dictionaryPOForInsert];
     [_RiderController setDictionaryForBasicPlan:newDictionaryForBasicPlan];
     //[_RiderController calculateRiderPremi];
 }
@@ -3304,13 +3327,13 @@ BOOL isFirstLoad;
     }
     else{
         if(![self.RiderController.view isDescendantOfView:self.RightView]) {
-            [_RiderController setDictionaryPOForInsert:dictionaryPOForInsert];
+            [_RiderController setPODictionaryFromRoot:dictionaryPOForInsert];
             [_RiderController setDictionaryForBasicPlan:newDictionaryForBasicPlan];
             [_RiderController setElementActive];
             [_RiderController loadInitialRiderData];
             [self.RightView addSubview:self.RiderController.view];
         } else {
-            [_RiderController setDictionaryPOForInsert:dictionaryPOForInsert];
+            [_RiderController setPODictionaryFromRoot:dictionaryPOForInsert];
             [_RiderController setDictionaryForBasicPlan:newDictionaryForBasicPlan];
             [_RiderController setElementActive];
             [_RiderController loadInitialRiderData];
@@ -3427,6 +3450,10 @@ BOOL isFirstLoad;
                 @try {
                     [self saveLAForTableDidSelect];
                     [self saveBasicPlanForTableDidSelect];
+                    if([self.RiderController.view isDescendantOfView:self.RightView]) {
+                        [_RiderController localSaveRider];
+                    }
+
                 }
                 @catch (NSException *exception) {
                     
@@ -3483,6 +3510,10 @@ BOOL isFirstLoad;
                 @try {
                     [self saveLAForTableDidSelect];
                     [self saveBasicPlanForTableDidSelect];
+                    if([self.RiderController.view isDescendantOfView:self.RightView]) {
+                        [_RiderController localSaveRider];
+                    }
+
                 }
                 @catch (NSException *exception) {
                     

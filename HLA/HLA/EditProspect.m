@@ -8599,7 +8599,7 @@ NSMutableArray *DelGroupArr;
     if ([self Validation] == TRUE && [self OtherIDValidation] == TRUE) {
         int usedInSI=[modelSIPOData getLADataCount:pp.ProspectID];
         if (usedInSI>0){
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Ada kasus eApp tertunda untuk klien ini. Jika Anda ingin melanjutkan, sistem akan otomatis menghapus semua kasus eApp tertunda terkait dan Anda diminta untuk membuat ulang data ini jika Anda berharap untuk mengirim ulang kasus ini." delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Nasabah telah memiliki Ilustrasi/SPAJ, bila ada perubahan data, data Ilustrasi/SPAJ akan terhapus dan perlu dilakukan pengisian Ilustrasi/SPAJ ulang" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
             [alert setTag:1004];
             [alert show];
         }

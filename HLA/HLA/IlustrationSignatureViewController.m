@@ -8,7 +8,10 @@
 
 #import "IlustrationSignatureViewController.h"
 
-@interface IlustrationSignatureViewController ()
+@interface IlustrationSignatureViewController (){
+    UIImage* imageCustomerSignature;
+    UIImage* imageAgentSignature;
+}
 
 @end
 
@@ -29,6 +32,7 @@
 }
 
 - (IBAction)ActionSaveSign:(UIBarButtonItem *)sender {
+    imageAgentSignature = viewToSign.image;
 }
 
 - (IBAction)ActionClearSign:(UIButton *)sender {

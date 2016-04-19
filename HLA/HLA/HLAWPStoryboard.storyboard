@@ -5415,11 +5415,11 @@
             <objects>
                 <viewController storyboardIdentifier="SignVC" id="oon-Vk-1nV" customClass="IlustrationSignatureViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NBh-Qg-oFP">
-                        <rect key="frame" x="0.0" y="0.0" width="400" height="400"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="400"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" id="pts-jw-UJe">
-                                <rect key="frame" x="0.0" y="0.0" width="400" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="Tanda Tangan" id="TJQ-Pa-iiU">
@@ -5437,7 +5437,7 @@
                                 </items>
                             </navigationBar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="nuF-12-dfi">
-                                <rect key="frame" x="21" y="359" width="359" height="30"/>
+                                <rect key="frame" x="21" y="359" width="559" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Hapus Tanda Tangan"/>
                                 <connections>
@@ -5445,14 +5445,14 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tanda Tangan Pemegang Polis" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kLL-Fp-TT5">
-                                <rect key="frame" x="20" y="55" width="360" height="30"/>
+                                <rect key="frame" x="20" y="55" width="560" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" id="GWI-Ro-col" customClass="mySmoothLineView">
-                                <rect key="frame" x="0.0" y="93" width="400" height="258"/>
+                                <rect key="frame" x="0.0" y="93" width="600" height="258"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -5463,7 +5463,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="400" height="400"/>
+                    <size key="freeformSize" width="600" height="400"/>
                     <connections>
                         <outlet property="labelSigner" destination="kLL-Fp-TT5" id="1Wi-8U-GXh"/>
                         <outlet property="viewToSign" destination="GWI-Ro-col" id="hcy-bu-iau"/>

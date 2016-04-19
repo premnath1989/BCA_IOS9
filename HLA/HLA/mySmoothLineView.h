@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface mySmoothLineView : UIView
+@interface mySmoothLineView : UIImageView
 
 -(void)clearView;
 @end

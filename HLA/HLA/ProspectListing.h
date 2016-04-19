@@ -16,9 +16,19 @@
 #import "SIDate.h"
 #import "ModelProspectProfile.h"
 #import "ProspectListingTableViewCell.h"
+#import "ModelSIPOData.h"
+#import "Model_SI_Master.h"
+#import "Model_SI_Premium.h"
+#import "ModelSIRider.h"
 
 @interface ProspectListing : UIViewController<EditProspectDelegate, ProspectViewControllerDelegate,UITableViewDelegate,UITableViewDataSource,GroupDelegate, ClientProfileListingDelegate,CustomAlertBoxDelegate, UITabBarDelegate, UITextFieldDelegate,SIDateDelegate>
 {
+    //added  by faiz
+    ModelSIPOData* modelSIPOData;
+    ModelSIRider* modelSIRider;
+    Model_SI_Premium* modelSIPremium;
+    Model_SI_Master* modelSIMaster;
+
     SIDate *_SIDate;
     
     NSString *databasePath;

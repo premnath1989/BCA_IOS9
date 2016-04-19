@@ -46,6 +46,11 @@ MBProgressHUD *HUD;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    modelSIPOData=[[ModelSIPOData alloc]init];
+    modelSIRider=[[ModelSIRider alloc]init];
+    modelSIPremium=[[Model_SI_Premium alloc]init];
+    modelSIMaster=[[Model_SI_Master alloc]init];
+
     ClearData *CleanData =[[ClearData alloc]init];
     [CleanData ClientWipeOff];
     
@@ -1662,6 +1667,25 @@ MBProgressHUD *HUD;
     return YES;
 }
 
+-(void)clearSIData{
+    for (UITableViewCell *cell in [self.myTableView visibleCells])
+    {
+        if (cell.selected == TRUE) {
+            NSIndexPath *selectedIndexPath = [self.myTableView indexPathForCell:cell];
+            
+            ProspectProfile *pp = [ProspectTableData objectAtIndex:selectedIndexPath.row];
+            NSMutableArray *usedSI = [[NSMutableArray alloc]initWithArray:[modelSIPOData getSINumberForProspectProfileID:pp.ProspectID]];//
+            for (int i=0; i<[usedSI count];i++){
+                [modelSIMaster deleteIlustrationMaster:[usedSI objectAtIndex:i]];
+                [modelSIPOData deletePOData:[usedSI objectAtIndex:i]];
+                [modelSIPremium deletePremium:[usedSI objectAtIndex:i]];
+                [modelSIRider deleteRiderData:[usedSI objectAtIndex:i]];
+            }
+        }
+    }
+    
+}
+
 - (IBAction)deletePressed:(id)sender
 {
     BOOL status_delete;
@@ -1685,7 +1709,7 @@ MBProgressHUD *HUD;
                 clt = pp.ProspectName;
             }
 			
-			if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK) {
+			/*if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK) {
                 // For Trad product should check trad_lapayor and not ul_payor table.
                 NSString *SQL = [NSString stringWithFormat:@"select * from trad_lapayor as A, clt_profile as B, prospect_profile as C where A.custcode = B.custcode AND B.indexno = c.indexno AND  C.indexNo = '%@' ", pp.ProspectID];
            
@@ -1727,7 +1751,11 @@ MBProgressHUD *HUD;
 					sqlite3_finalize(statement);
 				}
                 sqlite3_close(contactDB);
-			}
+			}*/
+            int usedInSI=[modelSIPOData getLADataCount:pp.ProspectID];
+            if (usedInSI>0){
+                CanDelete = FALSE;
+            }
 			
 			if (CanDelete == FALSE) {
 				break;
@@ -1764,7 +1792,7 @@ MBProgressHUD *HUD;
 		status_delete = FALSE;
     }
 		
-	if (CanDelete == FALSE && status_delete == TRUE) {
+	/*if (CanDelete == FALSE && status_delete == TRUE) {
 		NSString *msg = @"There are pending eApp cases for this client. Should you wish to proceed, system will auto delete all the pending eApp cases and you are required to recreate the necessary should you wish to resubmit the case.";
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:msg delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
         [alert setTag:1002];
@@ -1777,6 +1805,13 @@ MBProgressHUD *HUD;
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:msg delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
         [alert setTag:1002];
 		[alert show];
+    }
+    else */if(CanDelete == FALSE)
+    {
+        NSString *msg = @"Nasabah telah memiliki Ilustrasi/SPAJ, bila ada perubahan data, data Ilustrasi/SPAJ akan terhapus dan perlu dilakukan pengisian Ilustrasi/SPAJ ulang";
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:msg delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+        [alert setTag:1002];
+        [alert show];
     }
 	else {
 		NSString *msg;
@@ -1855,6 +1890,7 @@ MBProgressHUD *HUD;
     
     if (alertView.tag==1002 && buttonIndex == 0)
     {
+        [self clearSIData];
         [self delete_prospect_eApp];
         
         NSString *msg = @"Profil klien berhasil dihapus";//Client Profile has been successfully deleted.";

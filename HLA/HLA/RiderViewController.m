@@ -20,6 +20,7 @@
 #import "LoginDBManagement.h"
 
 @interface RiderViewController (){
+    BOOL relationChanged;
     int lastSelectedIndex;
     NSString* personCharacterType;
     
@@ -108,6 +109,8 @@ int maxGycc = 0;
 
 - (void)viewDidLoad
 {
+    relationChanged = false;
+    
     riderCalculation = [[RiderCalculation alloc]init];
     CustomColor = [[ColorHexCode alloc]init];
     formatter = [[Formatter alloc]init];
@@ -689,6 +692,17 @@ int maxGycc = 0;
 
 #pragma mark - added by faiz
 //added by faiz
+-(void)setPODictionaryFromRoot:(NSMutableDictionary *)dictionaryRootPO{
+    if ([_dictionaryPOForInsert count]>0){
+        if (![[_dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:[dictionaryRootPO valueForKey:@"RelWithLA"]]){
+            _dictionaryPOForInsert=dictionaryRootPO;
+            relationChanged = true;
+        }
+    }
+    else{
+        _dictionaryPOForInsert=dictionaryRootPO;
+    }
+}
 - (void)createAlertViewAndShow:(NSString *)message tag:(int)alertTag{
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
                                                     message:[NSString stringWithFormat:@"%@",message] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
@@ -5981,8 +5995,21 @@ int maxGycc = 0;
     }
     else{
         //if (indexSelected==2){
+        NSDictionary* dictRiderBP = [[NSDictionary alloc]initWithDictionary:[_modelSIRider getRider:[_dictionaryPOForInsert valueForKey:@"SINO"] RiderCode:@"BP"]];
+        
+        int extraPremiPercentage=[[dictRiderBP valueForKey:@"ExtraPremiPercent"] integerValue];
+        int extraPremiumMil=[[dictRiderBP valueForKey:@"ExtraPremiMil"] integerValue];
+        int masaPremium=[[dictRiderBP valueForKey:@"MasaExtraPremi"] integerValue];
+        
         [self tiePersonType:0];
-        dictForCalculateBPPremi=[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"0",@"ExtraPremiPerCent",@"0",@"ExtraPremiPerMil",@"0",@"MasaExtraPremi", nil];
+        if (relationChanged){
+            dictForCalculateBPPremi=[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"0",@"ExtraPremiPerCent",@"0",@"ExtraPremiPerMil",@"0",@"MasaExtraPremi", nil];
+        }
+        else{
+            dictForCalculateBPPremi=[[NSMutableDictionary alloc]initWithObjectsAndKeys:[NSNumber numberWithInt:extraPremiPercentage],@"ExtraPremiPerCent",[NSNumber numberWithInt:extraPremiumMil],@"ExtraPremiPerMil",[NSNumber numberWithInt:masaPremium],@"MasaExtraPremi", nil];
+        }
+        
+        relationChanged = false;
         //}
         //else{
         //    [self tiePersonType:1];
@@ -6087,12 +6114,22 @@ int maxGycc = 0;
 -(NSDictionary *)dictBebasPremi{
     NSDictionary* dictRiderBP = [[NSDictionary alloc]initWithDictionary:[_modelSIRider getRider:[_dictionaryPOForInsert valueForKey:@"SINO"] RiderCode:@"BP"]];
     
-    //int extraPremiPercentage=[[dictRiderBP valueForKey:@"ExtraPremiPercent"] integerValue];
-    //int extraPremiumMil=[[dictRiderBP valueForKey:@"ExtraPremiMil"] integerValue];
-    //int masaPremium=[[dictRiderBP valueForKey:@"MasaExtraPremi"] integerValue];
-    int extraPremiPercentage=[[_dictionaryForBasicPlan valueForKey:@"ExtraPremiumPercentage"] integerValue];
-    int extraPremiumMil=[[_dictionaryForBasicPlan valueForKey:@"ExtraPremiumSum"] integerValue];
-    int masaPremium=[[_dictionaryForBasicPlan valueForKey:@"ExtraPremiumTerm"] integerValue];
+    int extraPremiPercentage;
+    int extraPremiumMil;
+    int masaPremium;
+    
+    if (([[_dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"SELF"])||([[_dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"])){
+        extraPremiPercentage=[[_dictionaryForBasicPlan valueForKey:@"ExtraPremiumPercentage"] integerValue];
+        extraPremiumMil=[[_dictionaryForBasicPlan valueForKey:@"ExtraPremiumSum"] integerValue];
+        masaPremium=[[_dictionaryForBasicPlan valueForKey:@"ExtraPremiumTerm"] integerValue];
+    }
+    else{
+        extraPremiPercentage=[[dictRiderBP valueForKey:@"ExtraPremiPercent"] integerValue];
+        extraPremiumMil=[[dictRiderBP valueForKey:@"ExtraPremiMil"] integerValue];
+        masaPremium=[[dictRiderBP valueForKey:@"MasaExtraPremi"] integerValue];
+
+    }
+    
 
     dictBebasPremi=[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"Bebas Premi",@"RiderName",
                              @"BP",@"RiderCode",
@@ -6176,6 +6213,93 @@ int maxGycc = 0;
 
 }
 
+-(void)localSaveRider{
+    @try {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSMutableDictionary* dictForCalculate=[[NSMutableDictionary alloc]initWithDictionary:[arrayDataRiders objectAtIndex:2]];
+            [dictForCalculate setObject:_extraPremiPercentField.text forKey:@"ExtraPremiPerCent"];
+            [dictForCalculate setObject:_extraPremiNumberField.text forKey:@"ExtraPremiPerMil"];
+            [dictForCalculate setObject:_masaExtraPremiField.text forKey:@"MasaExtraPremi"];
+            
+            if (([[_dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"SELF"])||([[_dictionaryPOForInsert valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"])){
+                [self tiePersonType:1];
+            }
+            else{
+                //if (indexSelected==2){
+                [self tiePersonType:0];
+                //}
+                //else{
+                //    [self tiePersonType:1];
+                //}
+            }
+            
+            double RiderPremium = [riderCalculation calculateBPPremi:dictForCalculate DictionaryBasicPlan:_dictionaryForBasicPlan DictionaryPO:_dictionaryPOForInsert BasicCode:@"KLK" PaymentCode:[self getPaymentType] PersonType:personCharacterType];
+            double MDBKK = [riderCalculation calculateMDBKK:dictForCalculate DictionaryBasicPlan:_dictionaryForBasicPlan DictionaryPO:_dictionaryPOForInsert BasicCode:@"KLK" PaymentCode:[self getPaymentType] PersonType:personCharacterType];
+            double MDBKKLoading = [riderCalculation calculateMDBKKLoading:dictForCalculate DictionaryBasicPlan:_dictionaryForBasicPlan DictionaryPO:_dictionaryPOForInsert BasicCode:@"KLK" PaymentCode:[self getPaymentType] PersonType:personCharacterType];
+            double RiderLoading = [riderCalculation calculateBPPremiLoading:dictForCalculate DictionaryBasicPlan:_dictionaryForBasicPlan DictionaryPO:_dictionaryPOForInsert BasicCode:@"KLK" PaymentCode:[self getPaymentType] PersonType:personCharacterType];
+            
+            NSString *mdbkkFormatted = [formatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:MDBKK]];
+            NSString *riderPremiFormatted = [formatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:RiderPremium]];
+            NSString *riderPremiLoadingFormatted = [formatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:RiderLoading]];
+            NSString *mdbkkLoadingFormatted = [formatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:MDBKKLoading]];
+            
+            [dictMDBKK setObject:mdbkkFormatted forKey:@"PremiRp"];
+            [dictMDBKK setObject:mdbkkLoadingFormatted forKey:@"ExtraPremiRp"];
+            
+            [dictBebasPremi setObject:riderPremiFormatted forKey:@"PremiRp"];
+            [dictBebasPremi setObject:riderPremiLoadingFormatted forKey:@"ExtraPremiRp"];
+            [dictBebasPremi setObject:_extraPremiPercentField.text forKey:@"ExtraPremiPerCent"];
+            [dictBebasPremi setObject:_extraPremiNumberField.text forKey:@"ExtraPremiPerMil"];
+            [dictBebasPremi setObject:_masaExtraPremiField.text forKey:@"MasaExtraPremi"];
+            
+            arrayDataRiders=[[NSMutableArray alloc]initWithObjects:dictMDBKK,dictMBKK,dictBebasPremi, nil];
+            [myTableView reloadData];
+            
+            // Some long running task you want on another thread
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self saveRiderToDB];
+            });
+        });
+
+    }
+    @catch (NSException *exception) {
+        
+    }
+    @finally {
+        
+    }
+}
+
+-(void)saveRiderToDB{
+    NSMutableDictionary *mutableMDBKK=[[NSMutableDictionary alloc]initWithDictionary:dictMDBKK];
+    NSMutableDictionary *mutableMDKK=[[NSMutableDictionary alloc]initWithDictionary:dictMBKK];
+    NSMutableDictionary *mutableBP=[[NSMutableDictionary alloc]initWithDictionary:dictBebasPremi];
+    
+    [mutableMDBKK setObject:[_dictionaryPOForInsert valueForKey:@"SINO"] forKey:@"SINO"];
+    [mutableMDKK setObject:[_dictionaryPOForInsert valueForKey:@"SINO"] forKey:@"SINO"];
+    [mutableBP setObject:[_dictionaryPOForInsert valueForKey:@"SINO"] forKey:@"SINO"];
+    if ([_modelSIRider getRiderCount:[_dictionaryPOForInsert valueForKey:@"SINO"] RiderCode:[dictMDBKK valueForKey:@"RiderCode"]]<=0){
+        [_modelSIRider saveRider:mutableMDBKK];
+    }
+    else{
+        [_modelSIRider updateRider:mutableMDBKK];
+    }
+    
+    if ([_modelSIRider getRiderCount:[_dictionaryPOForInsert valueForKey:@"SINO"] RiderCode:[dictMBKK valueForKey:@"RiderCode"]]<=0){
+        [_modelSIRider saveRider:mutableMDKK];
+    }
+    else{
+        [_modelSIRider updateRider:mutableMDKK];
+    }
+    
+    if ([_modelSIRider getRiderCount:[_dictionaryPOForInsert valueForKey:@"SINO"] RiderCode:[dictBebasPremi valueForKey:@"RiderCode"]]<=0){
+        [_modelSIRider saveRider:mutableBP];
+    }
+    else{
+        [_modelSIRider updateRider:mutableBP];
+    }
+
+}
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

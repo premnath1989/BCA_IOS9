@@ -54,6 +54,17 @@
                     [dataRider valueForKey:@"PremiRp"],
                     [dataRider valueForKey:@"SINO"],
                     [dataRider valueForKey:@"RiderCode"]];
+    NSLog(@"%@",[NSString stringWithFormat:@"update SI_Temp_Trad_Rider set SumAssured=%@, MasaAsuransi=%@, Unit=%@,ExtraPremiPercent=%@,ExtraPremiMil=%@,MasaExtraPremi=%@,ExtraPremiRp=%@,PremiRp=%@ where SINo=%@ and RiderCode=%@" ,
+                 [dataRider valueForKey:@"SumAssured"],
+                 [dataRider valueForKey:@"MasaAsuransi"],
+                 [dataRider valueForKey:@"Unit"],
+                 [dataRider valueForKey:@"ExtraPremiPerCent"],
+                 [dataRider valueForKey:@"ExtraPremiPerMil"],
+                 [dataRider valueForKey:@"MasaExtraPremi"],
+                 [dataRider valueForKey:@"ExtraPremiRp"],
+                 [dataRider valueForKey:@"PremiRp"],
+                 [dataRider valueForKey:@"SINO"],
+                 [dataRider valueForKey:@"RiderCode"]]);
     
     if (!success) {
         NSLog(@"%s: insert error: %@", __FUNCTION__, [database lastErrorMessage]);
