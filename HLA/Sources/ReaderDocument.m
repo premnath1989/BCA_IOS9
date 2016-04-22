@@ -30,13 +30,13 @@
 @interface ReaderDocument ()
 
 @property (nonatomic, strong, readwrite) NSString *password;
-@property (nonatomic, strong, readwrite) NSString *filePath;
+//@property (nonatomic, strong, readwrite) NSString *filePath;
 
 @end
 
 @implementation ReaderDocument
 {
-	NSString *_guid;
+    NSString *_guid;
 
 	NSDate *_fileDate;
 

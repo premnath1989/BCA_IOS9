@@ -13,6 +13,7 @@
     int page;
     bool pdfCreated;
     
+    BOOL pdfNeedToLoad;
     NSDictionary* dictMDBKK;
     NSDictionary* dictMBKK;
     NSDictionary* dictBebasPremi;
@@ -45,12 +46,37 @@
     page =1;
     pdfCreated=false;
     if ([[_dictionaryForBasicPlan valueForKey:@"ProductCode"] isEqualToString:@"BCAKK"]){
-        [self getRiderValue];
-        [self joinHTMLKeluargaku];
+        NSArray* path_forDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+        NSString* documentsDirectory = [path_forDirectory objectAtIndex:0];
+        NSString *pdfPathOutput = [NSString stringWithFormat:@"%@/%@_%@.pdf",documentsDirectory,[_dictionaryPOForInsert valueForKey:@"ProductName"],[_dictionaryPOForInsert valueForKey:@"SINO"]];
+        BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:pdfPathOutput];
+        if (fileExists){
+            if (pdfNeedToLoad){
+                [self seePDF];
+                pdfNeedToLoad = FALSE;
+            }
+        }
+        else{
+            [self getRiderValue];
+            [self joinHTMLKeluargaku];
+        }
     }
     else{
-        [self loadPremi];
-        [self joinHTML];
+        NSArray* path_forDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+        NSString* documentsDirectory = [path_forDirectory objectAtIndex:0];
+        NSString *pdfPathOutput = [NSString stringWithFormat:@"%@/%@_%@.pdf",documentsDirectory,[_dictionaryPOForInsert valueForKey:@"ProductName"],[_dictionaryPOForInsert valueForKey:@"SINO"]];
+        BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:pdfPathOutput];
+        if (fileExists){
+            if (pdfNeedToLoad){
+                [self seePDF];
+                pdfNeedToLoad = FALSE;
+            }
+            
+        }
+        else{
+            [self loadPremi];
+            [self joinHTML];
+        }
     }
     
     //[self loadHTMLToWebView];
@@ -64,6 +90,8 @@
     formatter = [[Formatter alloc]init];
     modelSIRider = [[ModelSIRider alloc]init];
     riderCalculation = [[RiderCalculation alloc]init];
+
+    pdfNeedToLoad = TRUE;
     
     NSMutableDictionary *newAttributes = [[NSMutableDictionary alloc] init];
     [newAttributes setObject:[UIFont systemFontOfSize:18] forKey:UITextAttributeFont];
@@ -680,8 +708,18 @@
     // Pass the selected object to the new view controller.
 }
 */
+
 - (void)dismissReaderViewController:(ReaderViewController *)viewController {
     [self dismissModalViewControllerAnimated:YES];
+    pdfNeedToLoad=FALSE;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self dismissViewControllerAnimated:YES completion:nil];
+    });
+}
+
+- (void)dismissReaderViewControllerWithReload:(ReaderViewController *)viewController{
+    [self dismissModalViewControllerAnimated:YES];
+    pdfNeedToLoad=TRUE;
     dispatch_async(dispatch_get_main_queue(), ^{
         [self dismissViewControllerAnimated:YES completion:nil];
     });

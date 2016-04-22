@@ -73,6 +73,9 @@ NSString *ProceedStatus = @"";
     encryptWrapper = [[EncryptDecryptWrapper alloc]init];
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = TRUE;
+
+    NSUUID* deviceID=[UIDevice currentDevice].identifierForVendor;
+    [labelUDID setText:[deviceID UUIDString]];
     
     txtUsername.delegate = self;
     txtUsername.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0);

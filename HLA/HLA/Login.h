@@ -41,6 +41,8 @@ static NSString* DATE_FORMAT = @"yyyy-MM-dd";
 
 @interface Login : UIViewController<NSXMLParserDelegate, UITextFieldDelegate, AgentWSSoapBindingResponseDelegate,UIAlertViewDelegate>
 {
+    IBOutlet UILabel *labelUDID;
+    
     UITextField *activeField;
     id<LoginDelegate> _delegate;
     Reachability *internetReachableFoo;

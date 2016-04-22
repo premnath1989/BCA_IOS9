@@ -33,12 +33,13 @@
 @protocol ReaderViewControllerDelegate <NSObject>
 
 @optional // Delegate protocols
-
+- (void)seePDF;
 - (void)dismissReaderViewController:(ReaderViewController *)viewController;
+- (void)dismissReaderViewControllerWithReload:(ReaderViewController *)viewController;
 
 @end
 
-@interface ReaderViewController : UIViewController
+@interface ReaderViewController : UIViewController<SignatureDelegate>
 
 @property (nonatomic,retain)NSString *subjectEmail;
 @property (nonatomic,retain)NSString *bodyEmail;

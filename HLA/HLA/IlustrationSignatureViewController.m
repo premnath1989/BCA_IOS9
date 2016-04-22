@@ -11,6 +11,9 @@
 @interface IlustrationSignatureViewController (){
     UIImage* imageCustomerSignature;
     UIImage* imageAgentSignature;
+    
+    BOOL customerSigned;
+    BOOL agentSigned;
 }
 
 @end
@@ -19,6 +22,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    customerSigned = FALSE;
+    agentSigned = FALSE;
     // Do any additional setup after loading the view.
 }
 
@@ -32,7 +37,36 @@
 }
 
 - (IBAction)ActionSaveSign:(UIBarButtonItem *)sender {
-    imageAgentSignature = viewToSign.image;
+    if (!customerSigned){
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            UIView *view = viewToSign;
+            UIGraphicsBeginImageContext(view.bounds.size);
+            [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+            imageCustomerSignature = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self ActionClearSign:nil];
+                [labelSigner setText:@"Tanda Tangan Agen Asuransi"];
+                customerSigned = TRUE;
+            });
+        });
+    }
+    else{
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            UIView *view = viewToSign;
+            UIGraphicsBeginImageContext(view.bounds.size);
+            [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+            imageAgentSignature = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self ActionClearSign:nil];
+                agentSigned = TRUE;
+                [_delegate capturedSignature:imageCustomerSignature AgentSignature:imageAgentSignature];
+                [self dismissViewControllerAnimated:YES completion:nil];
+            });
+        });
+    }
+    
 }
 
 - (IBAction)ActionClearSign:(UIButton *)sender {

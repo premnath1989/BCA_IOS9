@@ -27,6 +27,7 @@
 
 @interface ReaderDocument : NSObject <NSObject, NSCoding>
 
+@property (nonatomic, strong, readwrite) NSString *filePath;
 @property (nonatomic, strong, readonly) NSString *guid;
 @property (nonatomic, strong, readonly) NSDate *fileDate;
 @property (nonatomic, strong, readwrite) NSDate *lastOpen;
