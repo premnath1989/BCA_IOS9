@@ -17,6 +17,7 @@
 #import "Formatter.h"
 #import "ModelSIRider.h"
 #import "RiderCalculation.h"
+#import "Model_SI_Master.h"
 
 @interface IlustrationViewController : UIViewController<ReaderViewControllerDelegate,NDHTMLtoPDFDelegate,UIWebViewDelegate,MFMailComposeViewControllerDelegate,PagesControllerDelegate>{
     IBOutlet UIWebView* webIlustration;
@@ -25,6 +26,7 @@
     ModelAgentProfile* modelAgentProfile;
     RateModel* modelRate;
     ModelSIRider* modelSIRider;
+    Model_SI_Master* modelSIMaster;
     RiderCalculation* riderCalculation;
     Formatter* formatter;
     UIBarButtonItem *email;

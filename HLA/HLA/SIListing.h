@@ -15,9 +15,12 @@
 #import "Model_SI_Master.h"
 #import "Model_SI_Premium.h"
 #import "ModelSIPOData.h"
+#import "ModelAgentProfile.h"
 #import "SIListingTableViewCell.h"
+#import "ReaderViewController.h"
 
-@interface SIListing : UIViewController<UITableViewDelegate, UITableViewDataSource, siListingDelegate, SIDateDelegate, NDHTMLtoPDFDelegate>
+
+@interface SIListing : UIViewController<UITableViewDelegate, UITableViewDataSource,ReaderViewControllerDelegate, siListingDelegate, SIDateDelegate, NDHTMLtoPDFDelegate>
 {
     NSString *databasePath;
     sqlite3 *contactDB;
@@ -27,7 +30,8 @@
     Model_SI_Master *_modelSIMaster;
     ModelSIPOData *_modelSIPOData;
     Model_SI_Premium *_modelSIPremium;
-
+    ModelAgentProfile *_modelAgentProfile;
+    
     UIPopoverController *_Popover;
     SIDate *_SIDate;
     UIPopoverController *_SIDatePopover;
@@ -75,6 +79,7 @@
 @property (retain, nonatomic) NSMutableArray *SIValidStatus;
 @property (retain, nonatomic) NSMutableArray *SIQQStatus;
 @property (retain, nonatomic) NSMutableArray *SIEditStatus;
+@property (retain, nonatomic) NSMutableArray *SISignedStatus;
 
 @property (retain, nonatomic) NSMutableArray *FilteredSINO;
 @property (retain, nonatomic) NSMutableArray *FilteredDateCreated;

@@ -31,7 +31,7 @@
 @synthesize outletGender;
 @synthesize outletEdit;
 @synthesize lblSINO, DBDateTo, DBDateFrom,OrderBy;
-@synthesize lblDateCreated, SIQQStatus, SIEditStatus;
+@synthesize lblDateCreated, SIQQStatus, SIEditStatus,SISignedStatus;
 @synthesize lblName;
 @synthesize lblPlan;
 @synthesize lblBasicSA;
@@ -68,6 +68,7 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _modelAgentProfile=[[ModelAgentProfile alloc]init];
     _modelSIMaster=[[Model_SI_Master alloc]init];
     _modelSIPremium=[[Model_SI_Premium alloc]init];
     _modelSIPOData=[[ModelSIPOData alloc]init];
@@ -527,6 +528,10 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
         cell = [nib objectAtIndex:0];
     }
     if (indexPath.row < [SINO count]){
+        [cell.buttonShowIlustrasi setTag:indexPath.row];
+        [cell.buttonShowIlustrasi addTarget:self action:@selector(showIlustrasi:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.buttonShowIlustrasi setHidden:YES];
+        
         [cell.labelIlusrationNo setText:[SINO objectAtIndex:indexPath.row]];
         [cell.labelIlustrationDate setText:[DateCreated objectAtIndex:indexPath.row]];
         [cell.labelPOName setText:[Name objectAtIndex:indexPath.row]];
@@ -542,7 +547,12 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
         }
         
         if([[SIEditStatus objectAtIndex:indexPath.row] caseInsensitiveCompare:@"0"] == NSOrderedSame){
-            status = [NSString stringWithFormat:@"%@S",status];
+            status = [NSString stringWithFormat:@"%@|S",status];
+        }
+        
+        if([[SISignedStatus objectAtIndex:indexPath.row] caseInsensitiveCompare:@"0"] == NSOrderedSame){
+            status = [NSString stringWithFormat:@"%@|TT",status];
+            [cell.buttonShowIlustrasi setHidden:NO];
         }
         [cell.labelStatus setText:status];
     }
@@ -811,6 +821,12 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
         OrderBy = @"DESC";
     }
 }
+#pragma mark - delegate
+- (void)dismissReaderViewController:(ReaderViewController *)viewController {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self dismissViewControllerAnimated:YES completion:nil];
+    });
+}
 
 #pragma mark - void added by faiz
 -(void)getDataForTable{
@@ -836,6 +852,7 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
     BasicSA = [[NSMutableArray alloc] initWithArray:[dictIlustrationData valueForKey:@"Sum_Assured"]];
     SIQQStatus =[[NSMutableArray alloc] initWithArray:[dictIlustrationData valueForKey:@"QuickQuote"]];
     SIEditStatus = [[NSMutableArray alloc] initWithArray:[dictIlustrationData valueForKey:@"EnableEditing"]];
+    SISignedStatus = [[NSMutableArray alloc] initWithArray:[dictIlustrationData valueForKey:@"IllustrationSigned"]];
     
     NSLog(@"SINO %@",dictIlustrationData);
 }
@@ -1546,6 +1563,41 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
 
 -(void)CloseWindow {
     [self.SIDatePopover dismissPopoverAnimated:YES];
+}
+
+-(void)showIlustrasi:(UIButton *)sender{
+    NSDictionary *_dictionaryPOForInsert=[[NSDictionary alloc]initWithDictionary:[_modelSIPOData getPO_DataFor:[SINO objectAtIndex:sender.tag]]];
+    
+    NSDictionary *_dictionaryForAgentProfile=[[NSDictionary alloc]initWithDictionary:[_modelAgentProfile getAgentData]];
+    NSArray* path_forDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+    NSString* documentsDirectory = [path_forDirectory objectAtIndex:0];
+    NSString *pdfPathOutput = [NSString stringWithFormat:@"%@/%@_%@.pdf",documentsDirectory,[_dictionaryPOForInsert valueForKey:@"ProductName"],[_dictionaryPOForInsert valueForKey:@"SINO"]];
+    //NSString *file = [[NSBundle mainBundle] pathForResource:@"Brochure_ProdukBCALIfeKeluargaku_21012016" ofType:@"pdf"];
+    
+    //compose the subject and body
+
+    NSString *sexPO;
+    if ([[_dictionaryPOForInsert valueForKey:@"PO_Gender"] isEqualToString:@"MALE"]){
+        sexPO=@"Bapak";
+    }
+    else{
+        sexPO=@"Ibu";
+    }
+    
+    NSString* AgentName = [_dictionaryForAgentProfile valueForKey:@"AgentName"];
+    NSString *mailComposerText=[NSString stringWithFormat:@"Kepada %@ %@ <br/><br/>Calon Nasabah BCA Life,Terima kasih atas kesempatan yang diberikan kepada Financial Advisor kami %@ untuk menjelaskan mengenai produk perlindungan asuransi yang %@ butuhkan. <br/><br/>Terlampir kami kirimkan Ilustrasi yang sudah dibuat oleh Financial Advisor kami. Silahkan buka dan pelajari apakah sudah sesuai dengan kebutuhan jaminan masa depan %@. <br/><br/>Untuk informasi produk asuransi lainnya, silahkan mengunjungi website kami di www.bcalife.co.id atau menghubungi customer service HALO BCA 1500888.<br/><br/>Terima Kasih<br/>PT Asuransi Jiwa BCA",sexPO,[_dictionaryPOForInsert valueForKey:@"PO_Name"],AgentName,sexPO,sexPO];
+    
+    ReaderDocument *document = [ReaderDocument withDocumentFilePath:pdfPathOutput password:nil];
+    
+    ReaderViewController *readerViewController = [[ReaderViewController alloc] initWithReaderDocument:document];
+    readerViewController.delegate = self;
+    readerViewController.bodyEmail = mailComposerText;
+    readerViewController.subjectEmail = [NSString stringWithFormat:@"BCALife Illustration %@",[_dictionaryPOForInsert valueForKey:@"SINO"]];
+    BOOL illustrationSigned = [_modelSIMaster isSignedIlustration:[_dictionaryPOForInsert valueForKey:@"SINO"]];
+    readerViewController.illustrationSignature = illustrationSigned;
+    readerViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    readerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+    [self presentViewController:readerViewController animated:YES completion:Nil];
 }
 
 - (IBAction)btnReset:(id)sender {

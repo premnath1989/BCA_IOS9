@@ -87,6 +87,7 @@
     NSMutableArray* arraySIVersion=[[NSMutableArray alloc] init];
     NSMutableArray* arraySIQQ=[[NSMutableArray alloc] init];
     NSMutableArray* arrayEdit=[[NSMutableArray alloc] init];
+    NSMutableArray* arraySigned=[[NSMutableArray alloc] init];
     
    // FMResultSet *s = [database executeQuery:@"SELECT sim.*, po.ProductName,po.PO_Name,premi.Sum_Assured FROM SI_master sim, SI_PO_Data po,SI_Premium premi WHERE sim.SINO = po.SINO and sim.SINO = premi.SINO"];
      FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select sim.*, po.ProductName,po.PO_Name,ifnull(sip.Sum_Assured,0) as Sum_Assured, po.QuickQuote FROM SI_master sim left join SI_PO_Data po on sim.SINO=po.SINO left join SI_Premium sip on sim.SINO=sip.SINO group by sim.ID order by %@ %@",orderBy,sortMethod]];
@@ -103,6 +104,7 @@
         NSString *sumAssured = [NSString stringWithFormat:@"%@",[s stringForColumn:@"Sum_Assured"]];
         NSString *qqStr = [NSString stringWithFormat:@"%@",[s stringForColumn:@"QuickQuote"]];
         NSString *editStr = [NSString stringWithFormat:@"%@",[s stringForColumn:@"EnableEditing"]];
+        NSString *signedStr = [NSString stringWithFormat:@"%@",[s stringForColumn:@"IllustrationSigned"]];
         
         
         NSLog(@"sumassured %@",sumAssured);
@@ -115,8 +117,9 @@
         [arraySIVersion addObject:stringSIVersion];
         [arraySIQQ addObject:qqStr];
         [arrayEdit addObject:editStr];
+        [arraySigned addObject:signedStr];
     }
-    dict = [[NSDictionary alloc] initWithObjectsAndKeys:arraySINo,@"SINO", arrayCreatedDate,@"CreatedDate", arrayPOName,@"PO_Name",arrayProductName,@"ProductName",arrayProposalStatus,@"ProposalStatus",arraySIVersion,@"SI_Version",arraySumAssured,@"Sum_Assured", arraySIQQ, @"QuickQuote",arrayEdit, @"EnableEditing", nil];
+    dict = [[NSDictionary alloc] initWithObjectsAndKeys:arraySINo,@"SINO", arrayCreatedDate,@"CreatedDate", arrayPOName,@"PO_Name",arrayProductName,@"ProductName",arrayProposalStatus,@"ProposalStatus",arraySIVersion,@"SI_Version",arraySumAssured,@"Sum_Assured", arraySIQQ, @"QuickQuote",arrayEdit, @"EnableEditing",arraySigned,@"IllustrationSigned", nil];
     
     [results close];
     [database close];
@@ -204,5 +207,44 @@
     return dict;
 }
 
+-(void)signIlustrationMaster:(NSString *)SINO{
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    BOOL success = [database executeUpdate:@"update SI_Master set IllustrationSigned=\"0\" where SINO=?",SINO];
+    
+    if (!success) {
+        NSLog(@"%s: insert error: %@", __FUNCTION__, [database lastErrorMessage]);
+        // do whatever you need to upon error
+    }
+    [results close];
+    [database close];
+}
+
+-(BOOL)isSignedIlustration:(NSString *)SINo{
+    NSString* signedIllustration;
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select IllustrationSigned from SI_Master where SINO = \"%@\"",SINo]];
+    while ([s next]) {
+        signedIllustration = [s stringForColumn:@"IllustrationSigned"];
+    }
+    
+    [results close];
+    [database close];
+    
+    if ([signedIllustration isEqualToString:@"0"]){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
 
 @end

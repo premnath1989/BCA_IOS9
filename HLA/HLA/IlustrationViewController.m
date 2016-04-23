@@ -93,7 +93,7 @@
     formatter = [[Formatter alloc]init];
     modelSIRider = [[ModelSIRider alloc]init];
     riderCalculation = [[RiderCalculation alloc]init];
-
+    modelSIMaster=[[Model_SI_Master alloc]init];
     pdfNeedToLoad = TRUE;
     
     NSMutableDictionary *newAttributes = [[NSMutableDictionary alloc] init];
@@ -679,6 +679,8 @@
     readerViewController.delegate = self;
     readerViewController.bodyEmail = mailComposerText;
     readerViewController.subjectEmail = [NSString stringWithFormat:@"BCALife Illustration %@",[_dictionaryPOForInsert valueForKey:@"SINO"]];
+    BOOL illustrationSigned = [modelSIMaster isSignedIlustration:[_dictionaryPOForInsert valueForKey:@"SINO"]];
+    readerViewController.illustrationSignature = illustrationSigned;
     readerViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     readerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:readerViewController animated:YES completion:Nil];
@@ -722,6 +724,7 @@
 
 - (void)dismissReaderViewControllerWithReload:(ReaderViewController *)viewController{
     pdfNeedToLoad=TRUE;
+    [modelSIMaster signIlustrationMaster:[_dictionaryPOForInsert valueForKey:@"SINO"]];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self dismissViewControllerAnimated:YES completion:nil];
     });

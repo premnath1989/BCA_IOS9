@@ -41,8 +41,10 @@
 
 @interface ReaderViewController : UIViewController<SignatureDelegate>
 
+@property (nonatomic,assign)BOOL illustrationSignature;
 @property (nonatomic,retain)NSString *subjectEmail;
 @property (nonatomic,retain)NSString *bodyEmail;
+
 
 @property (nonatomic, weak, readwrite) id <ReaderViewControllerDelegate> delegate;
 

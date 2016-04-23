@@ -84,6 +84,7 @@
 @synthesize delegate;
 @synthesize subjectEmail;
 @synthesize bodyEmail;
+@synthesize illustrationSignature;
 
 #pragma mark - ReaderViewController methods
 
@@ -863,13 +864,14 @@
 	{
 		[document.bookmarks addIndex:currentPage]; [mainToolbar setBookmarkState:YES];
 	}*/
-    UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"HLAWPStoryboard" bundle:nil];
-    IlustrationSignatureViewController *ilustrationSignVC = [secondStoryBoard instantiateViewControllerWithIdentifier:@"SignVC"];
-    ilustrationSignVC.delegate=self;
-    
-    ilustrationSignVC.modalPresentationStyle = UIModalPresentationFormSheet;
-    [self presentViewController:ilustrationSignVC animated:YES completion:nil];
-
+    if (!illustrationSignature){
+        UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"HLAWPStoryboard" bundle:nil];
+        IlustrationSignatureViewController *ilustrationSignVC = [secondStoryBoard instantiateViewControllerWithIdentifier:@"SignVC"];
+        ilustrationSignVC.delegate=self;
+        
+        ilustrationSignVC.modalPresentationStyle = UIModalPresentationFormSheet;
+        [self presentViewController:ilustrationSignVC animated:YES completion:nil];
+    }
 #endif // end of READER_BOOKMARKS Option
 }
 
