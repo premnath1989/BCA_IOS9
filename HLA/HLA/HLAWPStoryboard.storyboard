@@ -600,8 +600,8 @@
                                 <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Q - Quick Quote | S - Ilustrasi sudah di simpan" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="p61-TB-S7P">
-                                <rect key="frame" x="547" y="208" width="408" height="30"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Q - Quick Quote | S - Ilustrasi sudah disimpan | TT - Ilustrasi sudah ditandatangani" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="p61-TB-S7P">
+                                <rect key="frame" x="510" y="208" width="445" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="12"/>
                                 <color key="textColor" red="0.85490196939999996" green="0.1921568662" blue="0.33333334329999997" alpha="1" colorSpace="calibratedRGB"/>
