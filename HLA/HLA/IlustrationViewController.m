@@ -53,7 +53,9 @@
         if (fileExists){
             if (pdfNeedToLoad){
                 [self seePDF];
-                pdfNeedToLoad = FALSE;
+            }
+            else{
+                pdfNeedToLoad = TRUE;
             }
         }
         else{
@@ -69,9 +71,10 @@
         if (fileExists){
             if (pdfNeedToLoad){
                 [self seePDF];
-                pdfNeedToLoad = FALSE;
             }
-            
+            else{
+                pdfNeedToLoad = TRUE;
+            }
         }
         else{
             [self loadPremi];
@@ -718,7 +721,6 @@
 }
 
 - (void)dismissReaderViewControllerWithReload:(ReaderViewController *)viewController{
-    [self dismissModalViewControllerAnimated:YES];
     pdfNeedToLoad=TRUE;
     dispatch_async(dispatch_get_main_queue(), ^{
         [self dismissViewControllerAnimated:YES completion:nil];

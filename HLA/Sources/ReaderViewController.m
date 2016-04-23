@@ -955,7 +955,7 @@
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 // Background work
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    //[self closeDocumentWithReload];
+                    [self closeDocumentWithReload];
                 });
             });
         });
@@ -1207,11 +1207,11 @@
     CGContextDrawPDFPage(pdfContext, page);
     
     // Draw the signature on pdfContext
-    pageRect = CGRectMake(343, 40,101 , 43);
+    pageRect = CGRectMake(343, 47,101 , 43);
     CGImageRef pageImage = [imgSignature CGImage];
     CGContextDrawImage(pdfContext, pageRect, pageImage);
     
-    pageRect = CGRectMake(638, 40,101 , 43);
+    pageRect = CGRectMake(638, 47,101 , 43);
     CGImageRef pageCustomerSignatureImage = [customerSignature CGImage];
     CGContextDrawImage(pdfContext, pageRect, pageCustomerSignatureImage);
     
