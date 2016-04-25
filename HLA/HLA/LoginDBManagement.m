@@ -621,7 +621,7 @@
         if (success)
         {
             if([tableName caseInsensitiveCompare:@"SI_Master"]==NSOrderedSame){
-            createSQL = [NSString stringWithFormat:@"UPDATE tmp SET %@ =\"%@\",EnableEditing='1',id = ((Select max(id) from %@)+1)",column,newValue,tableName];
+            createSQL = [NSString stringWithFormat:@"UPDATE tmp SET %@ =\"%@\",EnableEditing='1',IllustrationSigned='1',id = ((Select max(id) from %@)+1)",column,newValue,tableName];
             }else if([tableName caseInsensitiveCompare:@"SI_Temp_Trad_Rider"]==NSOrderedSame){
                 createSQL = [NSString stringWithFormat:@"UPDATE tmp SET %@ =\"%@\",rowid = ((Select max(id) from %@)+1)",column,newValue,tableName];
             }else{

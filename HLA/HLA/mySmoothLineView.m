@@ -11,10 +11,11 @@
 @implementation mySmoothLineView
 {
     UIBezierPath *path;
-    UIImage *incrementalImage;
+    //UIImage *incrementalImage;
     CGPoint pts[5]; // we now need to keep track of the four points of a Bezier segment and the first control point of the next segment
     uint ctr;
 }
+@synthesize incrementalImage,touchMove;
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder])
@@ -23,6 +24,7 @@
         [self setBackgroundColor:[UIColor whiteColor]];
         path = [UIBezierPath bezierPath];
         [path setLineWidth:2.0];
+        touchMove = 0;
     }
     return self;
     
@@ -34,6 +36,7 @@
         [self setMultipleTouchEnabled:NO];
         path = [UIBezierPath bezierPath];
         [path setLineWidth:2.0];
+        touchMove = 0;
     }
     return self;
 }
@@ -49,6 +52,7 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     ctr = 0;
+    
     UITouch *touch = [touches anyObject];
     pts[0] = [touch locationInView:self];
 }
@@ -58,6 +62,7 @@
     UITouch *touch = [touches anyObject];
     CGPoint p = [touch locationInView:self];
     ctr++;
+    touchMove++;
     pts[ctr] = p;
     if (ctr == 4)
     {
@@ -106,6 +111,7 @@
 }
 
 -(void)clearView{
+    touchMove = 0;
     incrementalImage = nil;
     [self drawBitmap];
     [self setNeedsDisplay];

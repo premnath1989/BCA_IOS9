@@ -10,5 +10,8 @@
 
 @interface mySmoothLineView : UIView
 
+@property (nonatomic)int touchMove;
+@property (strong, atomic)UIImage *incrementalImage;
 -(void)clearView;
+
 @end
