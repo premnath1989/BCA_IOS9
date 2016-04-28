@@ -44,6 +44,10 @@
 @property (nonatomic,assign)BOOL illustrationSignature;
 @property (nonatomic,retain)NSString *subjectEmail;
 @property (nonatomic,retain)NSString *bodyEmail;
+@property (nonatomic,retain)NSString *AgentName;
+@property (nonatomic,retain)NSString *AgentKTP;
+@property (nonatomic,retain)NSString *POName;
+@property (nonatomic,retain)NSString *POKtp;
 
 
 @property (nonatomic, weak, readwrite) id <ReaderViewControllerDelegate> delegate;

@@ -85,6 +85,7 @@
 @synthesize subjectEmail;
 @synthesize bodyEmail;
 @synthesize illustrationSignature;
+@synthesize POName,POKtp,AgentName,AgentKTP;
 
 #pragma mark - ReaderViewController methods
 
@@ -868,6 +869,11 @@
         UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"HLAWPStoryboard" bundle:nil];
         IlustrationSignatureViewController *ilustrationSignVC = [secondStoryBoard instantiateViewControllerWithIdentifier:@"SignVC"];
         ilustrationSignVC.delegate=self;
+        
+        [ilustrationSignVC setAgentName:AgentName];
+        [ilustrationSignVC setAgentID:AgentKTP];
+        [ilustrationSignVC setPOName:POName];
+        [ilustrationSignVC setPOKtp:POKtp];
         
         ilustrationSignVC.modalPresentationStyle = UIModalPresentationFormSheet;
         [self presentViewController:ilustrationSignVC animated:YES completion:nil];

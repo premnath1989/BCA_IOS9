@@ -331,6 +331,12 @@
 		4373949A1C9BE5C2004522A2 /* NIPInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 437394981C9BE5C2004522A2 /* NIPInfo.m */; };
 		4374ACFD1C911FF00006522A /* eng_BCALKK_Page1.html in Resources */ = {isa = PBXBuildFile; fileRef = 4374ACFB1C911FF00006522A /* eng_BCALKK_Page1.html */; };
 		4374ACFE1C911FF00006522A /* eng_BCALKK_Page2.html in Resources */ = {isa = PBXBuildFile; fileRef = 4374ACFC1C911FF00006522A /* eng_BCALKK_Page2.html */; };
+		4376DF181CD1934400816BB6 /* undo.png in Resources */ = {isa = PBXBuildFile; fileRef = 4376DF161CD1934400816BB6 /* undo.png */; };
+		4376DF191CD1934400816BB6 /* undo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4376DF171CD1934400816BB6 /* undo@2x.png */; };
+		4376DF1E1CD196EC00816BB6 /* cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = 4376DF1A1CD196EC00816BB6 /* cancel.png */; };
+		4376DF1F1CD196EC00816BB6 /* cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4376DF1B1CD196EC00816BB6 /* cancel@2x.png */; };
+		4376DF201CD196EC00816BB6 /* check_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4376DF1C1CD196EC00816BB6 /* check_icon.png */; };
+		4376DF211CD196EC00816BB6 /* check_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4376DF1D1CD196EC00816BB6 /* check_icon@2x.png */; };
 		439985BB1C62F7890003B037 /* SourceIncome.m in Sources */ = {isa = PBXBuildFile; fileRef = 439985BA1C62F7890003B037 /* SourceIncome.m */; };
 		439985BE1C62F8A70003B037 /* ModelPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = 439985BD1C62F8A70003B037 /* ModelPopover.m */; };
 		439985C11C630C4D0003B037 /* VIPClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 439985C01C630C4D0003B037 /* VIPClass.m */; };
@@ -348,6 +354,8 @@
 		43DA4BE31C770AA90038C92C /* SIMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DA4BE11C770AA90038C92C /* SIMenuTableViewCell.m */; };
 		43DA4BE41C770AA90038C92C /* SIMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43DA4BE21C770AA90038C92C /* SIMenuTableViewCell.xib */; };
 		43DA4BE61C770B3C0038C92C /* icon_leads_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 43DA4BE51C770B3C0038C92C /* icon_leads_2.png */; };
+		43E171861CCB5411008B2235 /* Signature Filled.png in Resources */ = {isa = PBXBuildFile; fileRef = 43E171841CCB5411008B2235 /* Signature Filled.png */; };
+		43E171871CCB5411008B2235 /* Signature Filled@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43E171851CCB5411008B2235 /* Signature Filled@2x.png */; };
 		43EFEB731C93915A00B9AA2A /* LogoBCALife.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 43EFEB721C93915A00B9AA2A /* LogoBCALife.jpg */; };
 		43F7C3191C9D40B70074F464 /* Formatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F7C3171C9D40B70074F464 /* Formatter.m */; };
 		43F8B5511C81E71B006F3F6C /* SIListingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43F8B54E1C81E71A006F3F6C /* SIListingTableViewCell.xib */; };
@@ -1372,6 +1380,12 @@
 		43739B891C649F9B00A1788A /* LoginMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginMacros.h; sourceTree = "<group>"; };
 		4374ACFB1C911FF00006522A /* eng_BCALKK_Page1.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = eng_BCALKK_Page1.html; path = SI/eng_BCALKK_Page1.html; sourceTree = "<group>"; };
 		4374ACFC1C911FF00006522A /* eng_BCALKK_Page2.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = eng_BCALKK_Page2.html; path = SI/eng_BCALKK_Page2.html; sourceTree = "<group>"; };
+		4376DF161CD1934400816BB6 /* undo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = undo.png; sourceTree = "<group>"; };
+		4376DF171CD1934400816BB6 /* undo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "undo@2x.png"; sourceTree = "<group>"; };
+		4376DF1A1CD196EC00816BB6 /* cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel.png; sourceTree = "<group>"; };
+		4376DF1B1CD196EC00816BB6 /* cancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancel@2x.png"; sourceTree = "<group>"; };
+		4376DF1C1CD196EC00816BB6 /* check_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check_icon.png; sourceTree = "<group>"; };
+		4376DF1D1CD196EC00816BB6 /* check_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "check_icon@2x.png"; sourceTree = "<group>"; };
 		439985B91C62F7890003B037 /* SourceIncome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourceIncome.h; sourceTree = "<group>"; };
 		439985BA1C62F7890003B037 /* SourceIncome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SourceIncome.m; sourceTree = "<group>"; };
 		439985BC1C62F8A70003B037 /* ModelPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelPopover.h; sourceTree = "<group>"; };
@@ -1403,6 +1417,8 @@
 		43DA4BE11C770AA90038C92C /* SIMenuTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMenuTableViewCell.m; sourceTree = "<group>"; };
 		43DA4BE21C770AA90038C92C /* SIMenuTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SIMenuTableViewCell.xib; sourceTree = "<group>"; };
 		43DA4BE51C770B3C0038C92C /* icon_leads_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_leads_2.png; sourceTree = "<group>"; };
+		43E171841CCB5411008B2235 /* Signature Filled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Signature Filled.png"; sourceTree = "<group>"; };
+		43E171851CCB5411008B2235 /* Signature Filled@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Signature Filled@2x.png"; sourceTree = "<group>"; };
 		43EFEB721C93915A00B9AA2A /* LogoBCALife.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = LogoBCALife.jpg; path = SI/LogoBCALife.jpg; sourceTree = "<group>"; };
 		43F7C3171C9D40B70074F464 /* Formatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Formatter.m; sourceTree = "<group>"; };
 		43F7C3181C9D40B70074F464 /* Formatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Formatter.h; sourceTree = "<group>"; };
@@ -4312,6 +4328,14 @@
 		C4E9D1BF1612C6A500016053 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				4376DF1A1CD196EC00816BB6 /* cancel.png */,
+				4376DF1B1CD196EC00816BB6 /* cancel@2x.png */,
+				4376DF1C1CD196EC00816BB6 /* check_icon.png */,
+				4376DF1D1CD196EC00816BB6 /* check_icon@2x.png */,
+				4376DF161CD1934400816BB6 /* undo.png */,
+				4376DF171CD1934400816BB6 /* undo@2x.png */,
+				43E171841CCB5411008B2235 /* Signature Filled.png */,
+				43E171851CCB5411008B2235 /* Signature Filled@2x.png */,
 				AAFE1AAE1C7B05E1008D4B9C /* Login Page Bless_english_final_2-01.jpg */,
 				17F10EAE1C6C85DA002C32D3 /* btn_login.png */,
 				17F10EB21C6C85EF002C32D3 /* login_box.png */,
@@ -4978,7 +5002,9 @@
 				DE06FFCE1CABBC2800E4DE3A /* xibLibrary.bundle in Resources */,
 				AA4EF77B1C8687CF0050CCD8 /* Brochure_ProdukBCALIfeKeluargaku_21012016.pdf in Resources */,
 				AA4EF77C1C8687CF0050CCD8 /* Brochure_ProdukBCALIfeKeluargaku.pdf in Resources */,
+				4376DF201CD196EC00816BB6 /* check_icon.png in Resources */,
 				178A076C1C8232A100B91582 /* BCA_Rates.sqlite in Resources */,
+				43E171861CCB5411008B2235 /* Signature Filled.png in Resources */,
 				17A2990F1C60A0DB00C2537A /* HelveticaInseratLTStd-Roman.otf in Resources */,
 				17A299101C60A0DB00C2537A /* HelveticaLTStd-Blk.otf in Resources */,
 				17A299111C60A0DB00C2537A /* HelveticaLTStd-BlkCond.otf in Resources */,
@@ -5034,6 +5060,7 @@
 				C4660EBC1625047800BA4AFE /* prospect_btnB_144.png in Resources */,
 				5D3967981C02C89700464BCC /* HLAWPStoryboard.storyboard in Resources */,
 				C4660EBD1625047800BA4AFE /* prospect_btnB.png in Resources */,
+				4376DF1E1CD196EC00816BB6 /* cancel.png in Resources */,
 				178765DB1C74C25D0036F31A /* Images.xcassets in Resources */,
 				AA4EF7451C85A4260050CCD8 /* AppIcon-152.png in Resources */,
 				C4660EBE1625047800BA4AFE /* prospect_btnB2_144.png in Resources */,
@@ -5064,8 +5091,10 @@
 				5D59C88E1C16893900F5C028 /* SharedStoryboard.storyboard in Resources */,
 				AA4EF7471C85A4260050CCD8 /* AppIcon-180.png in Resources */,
 				C4FCDDE816395F290065D024 /* btn_prospect_home.png in Resources */,
+				4376DF211CD196EC00816BB6 /* check_icon@2x.png in Resources */,
 				17983C331C473373009E2977 /* HealthQuestionPO.storyboard in Resources */,
 				AA4EF7421C85A4260050CCD8 /* AppIcon-114.png in Resources */,
+				4376DF191CD1934400816BB6 /* undo@2x.png in Resources */,
 				43DA4BE41C770AA90038C92C /* SIMenuTableViewCell.xib in Resources */,
 				C4FCDDEB16395F290065D024 /* btn_setting_home.png in Resources */,
 				C4FCDDEC16395F290065D024 /* btn_SI_home.png in Resources */,
@@ -5088,6 +5117,7 @@
 				AA4EF75B1C85A4260050CCD8 /* Reader-Mark-Y@2x.png in Resources */,
 				C4F45DF3165C6C430035CAA9 /* viewer.plist in Resources */,
 				C4F45E03165F12350035CAA9 /* f-spot-question-mark.png in Resources */,
+				43E171871CCB5411008B2235 /* Signature Filled@2x.png in Resources */,
 				A9E550A51C591F7900C9DAC2 /* Expand Arrow.png in Resources */,
 				AA4EF7541C85A4260050CCD8 /* Reader-Export.png in Resources */,
 				5D39679A1C02CA9000464BCC /* ClientProfileStoryboard.storyboard in Resources */,
@@ -5108,12 +5138,14 @@
 				C4E5A47A168AAA89007848CE /* Profile64.png in Resources */,
 				C4E5A47B168AAA89007848CE /* Profile72.png in Resources */,
 				A1FCF07C1CA80B92000D85E1 /* Icon_Brochure.png in Resources */,
+				4376DF181CD1934400816BB6 /* undo.png in Resources */,
 				C4E5A47C168AAA89007848CE /* Profile96.png in Resources */,
 				C4E5A47D168AAA89007848CE /* Profile128.png in Resources */,
 				43B590961CA2702400DC53AC /* KeluargakuTableViewCell.xib in Resources */,
 				A1EEF95A1C8D8E520016BB3D /* Icon Brochure & save as-01-04.png in Resources */,
 				C4E5A47E168AAA89007848CE /* SecurityQuestion16.png in Resources */,
 				AA4EF74B1C85A4260050CCD8 /* Reader-Button-H.png in Resources */,
+				4376DF1F1CD196EC00816BB6 /* cancel@2x.png in Resources */,
 				C4E5A47F168AAA89007848CE /* SecurityQuestion32.png in Resources */,
 				AA4EF7591C85A4260050CCD8 /* Reader-Mark-N@3x.png in Resources */,
 				C4E5A480168AAA89007848CE /* SecurityQuestion48.png in Resources */,
@@ -5981,7 +6013,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bcalife.bless;
 				PRODUCT_NAME = BLESS;
-				PROVISIONING_PROFILE = "64cb3c38-7b10-432b-ab19-7416cf6d2833";
+				PROVISIONING_PROFILE = "460ae584-3c48-4f80-a890-f5fbee798767";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = "armv7 armv6 i386";

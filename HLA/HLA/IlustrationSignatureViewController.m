@@ -19,11 +19,18 @@
 @end
 
 @implementation IlustrationSignatureViewController
+@synthesize POKtp,POName,AgentName,AgentID;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    formatter = [[Formatter alloc]init];
+    
     customerSigned = FALSE;
     agentSigned = FALSE;
+    //POName=@"-";
+    //POKtp=@"-";
+    NSString *datetime=[formatter getDateToday:@"dd-MM-yyyy hh:mm:ss"];
+    [labelName setText:[NSString stringWithFormat:@"%@/%@/%@",POName,POKtp,datetime]];
     // Do any additional setup after loading the view.
 }
 
@@ -39,12 +46,11 @@
     [alert show];
 }
 
-
-- (IBAction)ActionCancelSign:(UIBarButtonItem *)sender {
+- (IBAction)ActionCancelSign:(UIButton *)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (IBAction)ActionSaveSign:(UIBarButtonItem *)sender {
+- (IBAction)ActionSaveSign:(UIButton *)sender {
     
     if ((viewToSign.touchMove<=0)){
         [self createAlertViewAndShow:@"Empty Signature. Please Sign first" tag:0];
@@ -60,6 +66,9 @@
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self ActionClearSign:nil];
                     [labelSigner setText:@"Tanda Tangan Agen Asuransi"];
+                    [labelAgreement setText:@"Saya Telah Menjelaskan Isi Ilustrasi Kepada Calon Pemegang Polis."];
+                    NSString *datetime=[formatter getDateToday:@"dd-MM-yyyy hh:mm:ss"];
+                    [labelName setText:[NSString stringWithFormat:@"%@/%@/%@",AgentName,AgentID,datetime]];
                     customerSigned = TRUE;
                 });
             });

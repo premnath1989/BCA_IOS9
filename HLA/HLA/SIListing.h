@@ -18,7 +18,7 @@
 #import "ModelAgentProfile.h"
 #import "SIListingTableViewCell.h"
 #import "ReaderViewController.h"
-
+#import "ModelProspectProfile.h"
 
 @interface SIListing : UIViewController<UITableViewDelegate, UITableViewDataSource,ReaderViewControllerDelegate, siListingDelegate, SIDateDelegate, NDHTMLtoPDFDelegate>
 {
@@ -27,6 +27,7 @@
     Boolean isFilter;
     siListingSortBy *_SortBy;
     
+    ModelProspectProfile *modelProspectProfile;
     Model_SI_Master *_modelSIMaster;
     ModelSIPOData *_modelSIPOData;
     Model_SI_Premium *_modelSIPremium;

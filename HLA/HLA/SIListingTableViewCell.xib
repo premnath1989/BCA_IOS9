@@ -62,7 +62,7 @@
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MXh-1A-2Ue">
                         <rect key="frame" x="854" y="8" width="86" height="33"/>
-                        <state key="normal" image="Signature Filled.png"/>
+                        <state key="normal" image="undo.png"/>
                     </button>
                 </subviews>
             </tableViewCellContentView>
@@ -80,6 +80,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="Signature Filled.png" width="25" height="25"/>
+        <image name="undo.png" width="32" height="32"/>
     </resources>
 </document>

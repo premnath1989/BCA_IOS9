@@ -68,6 +68,7 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    modelProspectProfile=[[ModelProspectProfile alloc]init];
     _modelAgentProfile=[[ModelAgentProfile alloc]init];
     _modelSIMaster=[[Model_SI_Master alloc]init];
     _modelSIPremium=[[Model_SI_Premium alloc]init];
@@ -547,7 +548,12 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
         }
         
         if([[SIEditStatus objectAtIndex:indexPath.row] caseInsensitiveCompare:@"0"] == NSOrderedSame){
-            status = [NSString stringWithFormat:@"%@|S",status];
+            if ([status length]>0){
+                status = [NSString stringWithFormat:@"%@|S",status];
+            }
+            else{
+                status = [NSString stringWithFormat:@"%@S",status];
+            }
         }
         
         if([[SISignedStatus objectAtIndex:indexPath.row] caseInsensitiveCompare:@"0"] == NSOrderedSame){
@@ -1587,12 +1593,24 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
     NSString* AgentName = [_dictionaryForAgentProfile valueForKey:@"AgentName"];
     NSString *mailComposerText=[NSString stringWithFormat:@"Kepada %@ %@ <br/><br/>Calon Nasabah BCA Life,Terima kasih atas kesempatan yang diberikan kepada Financial Advisor kami %@ untuk menjelaskan mengenai produk perlindungan asuransi yang %@ butuhkan. <br/><br/>Terlampir kami kirimkan Ilustrasi yang sudah dibuat oleh Financial Advisor kami. Silahkan buka dan pelajari apakah sudah sesuai dengan kebutuhan jaminan masa depan %@. <br/><br/>Untuk informasi produk asuransi lainnya, silahkan mengunjungi website kami di www.bcalife.co.id atau menghubungi customer service HALO BCA 1500888.<br/><br/>Terima Kasih<br/>PT Asuransi Jiwa BCA",sexPO,[_dictionaryPOForInsert valueForKey:@"PO_Name"],AgentName,sexPO,sexPO];
     
+    ProspectProfile* pp;
+    NSMutableArray *TempProspectTableData = [[NSMutableArray alloc]initWithArray:[modelProspectProfile searchProspectProfileByID:[[_dictionaryPOForInsert valueForKey:@"PO_ClientID"] intValue]]];
+    pp = [TempProspectTableData objectAtIndex:0];
+    NSString* idType = pp.OtherIDType;
+    NSString* idTypeNo = pp.OtherIDTypeNo;
+    if (![idType isEqualToString:@"KTP"]){
+        idTypeNo = @"-";
+    }
+    
     ReaderDocument *document = [ReaderDocument withDocumentFilePath:pdfPathOutput password:nil];
     
     ReaderViewController *readerViewController = [[ReaderViewController alloc] initWithReaderDocument:document];
     readerViewController.delegate = self;
     readerViewController.bodyEmail = mailComposerText;
     readerViewController.subjectEmail = [NSString stringWithFormat:@"BCALife Illustration %@",[_dictionaryPOForInsert valueForKey:@"SINO"]];
+    readerViewController.POName = [_dictionaryPOForInsert valueForKey:@"PO_Name"];
+    readerViewController.AgentName = [_dictionaryForAgentProfile valueForKey:@"AgentName"];
+    readerViewController.AgentKTP = [_dictionaryForAgentProfile valueForKey:@"AgentCode"];
     BOOL illustrationSigned = [_modelSIMaster isSignedIlustration:[_dictionaryPOForInsert valueForKey:@"SINO"]];
     readerViewController.illustrationSignature = illustrationSigned;
     readerViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;

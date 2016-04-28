@@ -8,10 +8,13 @@
 #define kPaperSizeA4 CGSizeMake(842,595)
 
 #import "IlustrationViewController.h"
+#import "ProspectProfile.h"
+#import "ModelProspectProfile.h"
 
 @interface IlustrationViewController (){
     int page;
     bool pdfCreated;
+    ModelProspectProfile *modelProspectProfile;
     
     BOOL pdfNeedToLoad;
     NSDictionary* dictMDBKK;
@@ -88,6 +91,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    modelProspectProfile=[[ModelProspectProfile alloc]init];
     modelAgentProfile=[[ModelAgentProfile alloc]init];
     modelRate = [[RateModel alloc]init];
     formatter = [[Formatter alloc]init];
@@ -656,6 +660,7 @@
 }
 
 - (void)seePDF{
+    _dictionaryForAgentProfile = [[NSMutableDictionary alloc]initWithDictionary:[modelAgentProfile getAgentData]];
     NSArray* path_forDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
     NSString* documentsDirectory = [path_forDirectory objectAtIndex:0];
     NSString *pdfPathOutput = [NSString stringWithFormat:@"%@/%@_%@.pdf",documentsDirectory,[_dictionaryPOForInsert valueForKey:@"ProductName"],[_dictionaryPOForInsert valueForKey:@"SINO"]];
@@ -672,6 +677,23 @@
     
     NSString* AgentName = [_dictionaryForAgentProfile valueForKey:@"AgentName"];
     NSString *mailComposerText=[NSString stringWithFormat:@"Kepada %@ %@ <br/><br/>Calon Nasabah BCA Life,Terima kasih atas kesempatan yang diberikan kepada Financial Advisor kami %@ untuk menjelaskan mengenai produk perlindungan asuransi yang %@ butuhkan. <br/><br/>Terlampir kami kirimkan Ilustrasi yang sudah dibuat oleh Financial Advisor kami. Silahkan buka dan pelajari apakah sudah sesuai dengan kebutuhan jaminan masa depan %@. <br/><br/>Untuk informasi produk asuransi lainnya, silahkan mengunjungi website kami di www.bcalife.co.id atau menghubungi customer service HALO BCA 1500888.<br/><br/>Terima Kasih<br/>PT Asuransi Jiwa BCA",sexPO,[_dictionaryPOForInsert valueForKey:@"PO_Name"],AgentName,sexPO,sexPO];
+
+    ProspectProfile* pp;
+    int clinetID = [[_dictionaryPOForInsert valueForKey:@"PO_ClientID"] intValue];
+    NSMutableArray *ProspectTableData = [[NSMutableArray alloc]initWithArray:[modelProspectProfile searchProspectProfileByID:clinetID]];
+    NSString* idTypeNo;
+    if ([ProspectTableData count]>0){
+        pp = [ProspectTableData objectAtIndex:0];
+        NSString* idType = pp.OtherIDType;
+        idTypeNo = pp.OtherIDTypeNo;
+        if (![idType isEqualToString:@"1"]){
+            idTypeNo = @"-";
+        }
+    }
+    else{
+        idTypeNo = @"-";
+    }
+    
     
     ReaderDocument *document = [ReaderDocument withDocumentFilePath:pdfPathOutput password:nil];
     
@@ -679,6 +701,10 @@
     readerViewController.delegate = self;
     readerViewController.bodyEmail = mailComposerText;
     readerViewController.subjectEmail = [NSString stringWithFormat:@"BCALife Illustration %@",[_dictionaryPOForInsert valueForKey:@"SINO"]];
+    readerViewController.POName = [_dictionaryPOForInsert valueForKey:@"PO_Name"];
+    readerViewController.POKtp = idTypeNo;
+    readerViewController.AgentName = [_dictionaryForAgentProfile valueForKey:@"AgentName"];
+    readerViewController.AgentKTP = [_dictionaryForAgentProfile valueForKey:@"AgentCode"];
     BOOL illustrationSigned = [modelSIMaster isSignedIlustration:[_dictionaryPOForInsert valueForKey:@"SINO"]];
     readerViewController.illustrationSignature = illustrationSigned;
     readerViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
