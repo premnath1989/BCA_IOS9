@@ -549,7 +549,7 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
         
         if([[SIEditStatus objectAtIndex:indexPath.row] caseInsensitiveCompare:@"0"] == NSOrderedSame){
             if ([status length]>0){
-                status = [NSString stringWithFormat:@"%@|S",status];
+                status = [NSString stringWithFormat:@"%@ | S",status];
             }
             else{
                 status = [NSString stringWithFormat:@"%@S",status];
@@ -557,7 +557,7 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
         }
         
         if([[SISignedStatus objectAtIndex:indexPath.row] caseInsensitiveCompare:@"0"] == NSOrderedSame){
-            status = [NSString stringWithFormat:@"%@|TT",status];
+            status = [NSString stringWithFormat:@"%@ | TT",status];
             [cell.buttonShowIlustrasi setHidden:NO];
         }
         [cell.labelStatus setText:status];
