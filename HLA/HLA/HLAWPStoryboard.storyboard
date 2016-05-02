@@ -5433,8 +5433,13 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" id="kEt-aW-MVu">
+                                <rect key="frame" x="116" y="126" width="367" height="192"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <view contentMode="scaleToFill" id="GWI-Ro-col" customClass="mySmoothLineView">
-                                <rect key="frame" x="0.0" y="127" width="600" height="190"/>
+                                <rect key="frame" x="117" y="127" width="365" height="190"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" name="selectedTextBackgroundColor" catalog="System" colorSpace="catalog"/>
                             </view>
@@ -5487,6 +5492,7 @@
                         <outlet property="labelAgreement" destination="pMT-Ev-8cp" id="O7m-xJ-EBD"/>
                         <outlet property="labelName" destination="WtX-z7-oq1" id="nC3-Vx-Eal"/>
                         <outlet property="labelSigner" destination="kLL-Fp-TT5" id="1Wi-8U-GXh"/>
+                        <outlet property="viewBorder" destination="kEt-aW-MVu" id="0Gl-Ii-TxS"/>
                         <outlet property="viewToSign" destination="GWI-Ro-col" id="kRv-2e-If8"/>
                     </connections>
                 </viewController>

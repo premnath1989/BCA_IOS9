@@ -1595,10 +1595,16 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
     
     ProspectProfile* pp;
     NSMutableArray *TempProspectTableData = [[NSMutableArray alloc]initWithArray:[modelProspectProfile searchProspectProfileByID:[[_dictionaryPOForInsert valueForKey:@"PO_ClientID"] intValue]]];
-    pp = [TempProspectTableData objectAtIndex:0];
-    NSString* idType = pp.OtherIDType;
-    NSString* idTypeNo = pp.OtherIDTypeNo;
-    if (![idType isEqualToString:@"KTP"]){
+    NSString* idTypeNo;
+    if ([TempProspectTableData count]>0){
+        pp = [TempProspectTableData objectAtIndex:0];
+        NSString* idType = pp.OtherIDType;
+        idTypeNo = pp.OtherIDTypeNo;
+        if (![idType isEqualToString:@"1"]){
+            idTypeNo = @"-";
+        }
+    }
+    else{
         idTypeNo = @"-";
     }
     

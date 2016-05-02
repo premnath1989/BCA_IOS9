@@ -1004,11 +1004,13 @@
     CGContextDrawPDFPage(pdfContext, page);
     
     // Draw the signature on pdfContext
-    pageRect = CGRectMake(343, 35,101 , 43);
+    //pageRect = CGRectMake(343, 35,101 , 43);
+    pageRect = CGRectMake(343, 35,86 , 43);
     CGImageRef pageImage = [imgSignature CGImage];
     CGContextDrawImage(pdfContext, pageRect, pageImage);
     
-    pageRect = CGRectMake(638, 35,101 , 43);
+    //pageRect = CGRectMake(638, 35,101 , 43);
+    pageRect = CGRectMake(638, 35,86 , 43);
     CGImageRef pageCustomerSignatureImage = [customerSignature CGImage];
     CGContextDrawImage(pdfContext, pageRect, pageCustomerSignatureImage);
     
@@ -1048,11 +1050,13 @@
     CGContextDrawPDFPage(pdfContext, page);
     
     // Draw the signature on pdfContext
-    pageRect = CGRectMake(343, 45,101 , 43);
+    //pageRect = CGRectMake(343, 45,101 , 43);
+    pageRect = CGRectMake(343, 45,86 , 43);
     CGImageRef pageImage = [imgSignature CGImage];
     CGContextDrawImage(pdfContext, pageRect, pageImage);
     
-    pageRect = CGRectMake(638, 45,101 , 43);
+    //pageRect = CGRectMake(638, 45,101 , 43);
+    pageRect = CGRectMake(638, 45,86 , 43);
     CGImageRef pageCustomerSignatureImage = [customerSignature CGImage];
     CGContextDrawImage(pdfContext, pageRect, pageCustomerSignatureImage);
     
@@ -1092,11 +1096,13 @@
     CGContextDrawPDFPage(pdfContext, page);
     
     // Draw the signature on pdfContext
-    pageRect = CGRectMake(343, 45,101 , 43);
+    //pageRect = CGRectMake(343, 45,101 , 43);
+    pageRect = CGRectMake(343, 45,86 , 43);
     CGImageRef pageImage = [imgSignature CGImage];
     CGContextDrawImage(pdfContext, pageRect, pageImage);
     
-    pageRect = CGRectMake(638, 45,101 , 43);
+    //pageRect = CGRectMake(638, 45,101 , 43);
+    pageRect = CGRectMake(638, 45,86 , 43);
     CGImageRef pageCustomerSignatureImage = [customerSignature CGImage];
     CGContextDrawImage(pdfContext, pageRect, pageCustomerSignatureImage);
     
@@ -1215,11 +1221,13 @@
     CGContextDrawPDFPage(pdfContext, page);
     
     // Draw the signature on pdfContext
-    pageRect = CGRectMake(343, 47,101 , 43);
+    //pageRect = CGRectMake(343, 47,101 , 43);
+    pageRect = CGRectMake(343, 47,86 , 43);
     CGImageRef pageImage = [imgSignature CGImage];
     CGContextDrawImage(pdfContext, pageRect, pageImage);
     
-    pageRect = CGRectMake(638, 47,101 , 43);
+    //pageRect = CGRectMake(638, 47,101 , 43);
+    pageRect = CGRectMake(638, 47,86 , 43);
     CGImageRef pageCustomerSignatureImage = [customerSignature CGImage];
     CGContextDrawImage(pdfContext, pageRect, pageCustomerSignatureImage);
     
@@ -1259,11 +1267,13 @@
     CGContextDrawPDFPage(pdfContext, page);
     
     // Draw the signature on pdfContext
-    pageRect = CGRectMake(343, 40,101 , 43);
+    //pageRect = CGRectMake(343, 40,101 , 43);
+    pageRect = CGRectMake(343, 40,86 , 43);
     CGImageRef pageImage = [imgSignature CGImage];
     CGContextDrawImage(pdfContext, pageRect, pageImage);
     
-    pageRect = CGRectMake(638, 40,101 , 43);
+    //pageRect = CGRectMake(638, 40,101 , 43);
+    pageRect = CGRectMake(638, 40,86 , 43);
     CGImageRef pageCustomerSignatureImage = [customerSignature CGImage];
     CGContextDrawImage(pdfContext, pageRect, pageCustomerSignatureImage);
     

@@ -23,6 +23,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    viewBorder.layer.borderWidth=1.0;
+    viewBorder.layer.borderColor=[UIColor blackColor].CGColor;
     formatter = [[Formatter alloc]init];
     
     customerSigned = FALSE;

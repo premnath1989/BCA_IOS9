@@ -18,6 +18,7 @@
     Formatter *formatter;
     id <SignatureDelegate> _delegate;
     
+    IBOutlet UIView *viewBorder;
     IBOutlet mySmoothLineView *viewToSign;
     IBOutlet UILabel *labelSigner;
     IBOutlet UILabel *labelAgreement;

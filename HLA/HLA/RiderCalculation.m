@@ -271,7 +271,8 @@
     
     int intbpRiderPremium = round(bpRiderPremium);
     
-    double Rounded = 100.0 * floor((intbpRiderPremium/100.0)+0.5);
+    //double Rounded = 100.0 * floor((intbpRiderPremium/100.0)+0.5);
+    double Rounded = 100.0 * floor((bpRiderPremium/100.0)+0.5);
     //double Rounded = [resultFromDecimal doubleValue];
     return Rounded;
 }

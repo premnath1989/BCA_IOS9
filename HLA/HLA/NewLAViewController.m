@@ -2714,7 +2714,7 @@ id dobtanngal;
         return NO;
     }
     
-    else if ([btnOccp.titleLabel.text isEqualToString:@"(null)"] ||[btnOccp.titleLabel.text isEqualToString:@"--Please Select--"] || btnOccp.titleLabel.text.length == 0)
+    else if ([btnOccp.titleLabel.text isEqualToString:@"(null)"]||[btnOccp.titleLabel.text isEqualToString:@" - SELECT -"]||[btnOccp.titleLabel.text isEqualToString:@"- SELECT -"]||[btnOccp.titleLabel.text isEqualToString:@"--Please Select--"] || btnOccp.titleLabel.text.length == 0)
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Pekerjaan Pemegang Polis harus diisi."
                                                        delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
@@ -2722,7 +2722,7 @@ id dobtanngal;
         return NO;
     }
     
-    else if ([_BtnHubungan.titleLabel.text isEqualToString:@"(null)"] ||[_BtnHubungan.titleLabel.text isEqualToString:@"--Please Select--"] || _BtnHubungan.titleLabel.text.length == 0)
+    else if ([_BtnHubungan.titleLabel.text isEqualToString:@"(null)"] ||[_BtnHubungan.titleLabel.text isEqualToString:@"--Please Select--"] ||[_BtnHubungan.titleLabel.text isEqualToString:@"- SELECT -"] || _BtnHubungan.titleLabel.text.length == 0)
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Hubungan Dengan Tertannggung harus diisi"
                                                        delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];

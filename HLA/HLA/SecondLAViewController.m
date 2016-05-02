@@ -1563,7 +1563,7 @@ id dobtemp;
     bool valid=true;
     NSString *PlanTypeProduct = [_poDictionaryPO valueForKey:@"ProductName"];
 
-    NSArray* validationSet=[[NSArray alloc]initWithObjects:@"",@"- SELECT -",@"- Select -",@"--Please Select--", nil];
+    NSArray* validationSet=[[NSArray alloc]initWithObjects:@"",@" - SELECT -",@"- SELECT -",@"- Select -",@"--Please Select--", nil];
     int DOBDate =[msgAge intValue];
     //validation message data refferal
     NSString *validationNamaTertanggung=@"Nama Tertanggung harus diisi";
@@ -1607,6 +1607,26 @@ id dobtemp;
         [self createAlertViewAndShow:validationTanggalLahir tag:0];
        // [_BtnTanggalLahir setBackgroundColor:[UIColor redColor]];
         return false;
+    }
+    
+    else if (sexSegment.selectedSegmentIndex == -1){
+        [self createAlertViewAndShow:validationJenisKelamin tag:0];
+        return false;
+    }
+    
+    else if (sexSegment.selectedSegmentIndex==UISegmentedControlNoSegment){
+        [self createAlertViewAndShow:validationJenisKelamin tag:0];
+        return false;
+    }
+    
+    else if ([validationSet containsObject:occupation]||occupation==NULL){
+        [self createAlertViewAndShow:validationPekerjaan tag:0];
+        //[btnOccp setBackgroundColor:[UIColor redColor]];
+        return false;
+    }
+    else if ([validationSet containsObject:occupation]||occupation==NULL)
+    {
+        
     }
     
     else if([PlanTypeProduct isEqualToString:@"BCA Life Heritage Protection"]){
@@ -1663,20 +1683,6 @@ id dobtemp;
     
     
     
-    else if (sexSegment.selectedSegmentIndex==UISegmentedControlNoSegment){
-        [self createAlertViewAndShow:validationJenisKelamin tag:0];
-        return false;
-    }
-
-    else if ([validationSet containsObject:occupation]||occupation==NULL){
-        [self createAlertViewAndShow:validationPekerjaan tag:0];
-        //[btnOccp setBackgroundColor:[UIColor redColor]];
-        return false;
-    }
-    else if ([validationSet containsObject:occupation]||occupation==NULL)
-    {
-        
-    }
     return valid;
 }
 
