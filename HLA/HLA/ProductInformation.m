@@ -42,6 +42,9 @@
         spinnerLoading = [[SpinnerUtilities alloc]init];
         [spinnerLoading startLoadingSpinner:spinnerHolder label:@"Loading Informasi Produk"];
         [self FTPFileListing];
+    }else{
+        UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Koneksi ke FTP Gagal" message:[NSString stringWithFormat:@"Pastikan perangkat terhubung ke internet yang stabil untuk mengakses FTP"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
     }
     
     NSMutableDictionary *newAttributes = [[NSMutableDictionary alloc] init];
