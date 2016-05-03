@@ -239,7 +239,8 @@
     {
         ReaderViewController *readerViewController = [[ReaderViewController alloc] initWithReaderDocument:document];
         readerViewController.delegate = self;
-        
+        BOOL illustrationSigned = 1;
+        readerViewController.illustrationSignature = illustrationSigned;
         readerViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
         readerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
         

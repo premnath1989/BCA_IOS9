@@ -5417,7 +5417,8 @@ BOOL isFirstLoad;
 - (NSString *)generateSINO{
     NSDate *currDate = [NSDate date];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:@"YYYYMMddHHmmss"];
+   // [dateFormatter setDateFormat:@"YYYYMMddHHmmss"];
+    [dateFormatter setDateFormat:@"YYMMddHHmmss"];
     NSString *dateString = [dateFormatter stringFromDate:currDate];
     NSLog(@"%@",dateString);
     

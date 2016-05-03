@@ -157,6 +157,7 @@
     NSMutableArray* arraySIVersion=[[NSMutableArray alloc] init];
     NSMutableArray* arrayQQ=[[NSMutableArray alloc] init];
     NSMutableArray* arrayEdit=[[NSMutableArray alloc] init];
+    NSMutableArray* arraySigned=[[NSMutableArray alloc] init];
     
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
@@ -188,7 +189,7 @@
         NSString *sumAssured = [NSString stringWithFormat:@"%@",[s stringForColumn:@"Sum_Assured"]];
         NSString *qqStr = [NSString stringWithFormat:@"%@",[s stringForColumn:@"QuickQuote"]];
         NSString *editStr = [NSString stringWithFormat:@"%@",[s stringForColumn:@"EnableEditing"]];
-        
+        NSString *signedStr = [NSString stringWithFormat:@"%@",[s stringForColumn:@"IllustrationSigned"]];
         
         [arraySINo addObject:stringSINo];
         [arrayCreatedDate addObject:stringCreatedDate];
@@ -199,8 +200,9 @@
         [arraySIVersion addObject:stringSIVersion];
         [arrayQQ addObject:qqStr];
         [arrayEdit addObject:editStr];
+        [arraySigned addObject:signedStr];
     }
-    dict = [[NSDictionary alloc] initWithObjectsAndKeys:arraySINo,@"SINO", arrayCreatedDate,@"CreatedDate", arrayPOName,@"PO_Name",arrayProductName,@"ProductName",arrayProposalStatus,@"ProposalStatus",arraySIVersion,@"SI_Version",arraySumAssured,@"Sum_Assured",arrayQQ, @"QuickQuote", arrayEdit, @"EnableEditing", nil];
+    dict = [[NSDictionary alloc] initWithObjectsAndKeys:arraySINo,@"SINO", arrayCreatedDate,@"CreatedDate", arrayPOName,@"PO_Name",arrayProductName,@"ProductName",arrayProposalStatus,@"ProposalStatus",arraySIVersion,@"SI_Version",arraySumAssured,@"Sum_Assured",arrayQQ, @"QuickQuote", arrayEdit, @"EnableEditing",arraySigned,@"IllustrationSigned", nil];
     
     [results close];
     [database close];

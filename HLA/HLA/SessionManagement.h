@@ -10,7 +10,7 @@
 
 //The length of time before your application "times out".
 //This number actually represents seconds, so we'll have to multiple it by 60 in the .m file
-#define kApplicationTimeoutInMinutes 0.5
+#define kApplicationTimeoutInMinutes 10
 
 //the notification your AppDelegate needs to watch for in order to know that it has indeed "timed out"
 #define kApplicationDidTimeoutNotification @"AppTimeOut"
