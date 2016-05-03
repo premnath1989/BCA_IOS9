@@ -552,15 +552,7 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
 	Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
 	id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
 	[activeInstance performSelector:@selector(dismissKeyboard)];
-	
-    /*
-     if (txtOldPwd.text.length <= 0 || txtNewPwd.text.length <= 0 || txtConfirmPwd.text.length <= 0) {
-     
-     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Please fill up all field!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-     [alert show];
-     
-     }
-     */
+
     if ([txtOldPwd.text stringByReplacingOccurrencesOfString:@" " withString:@"" ].length <= 0 ) {
         
         valid = FALSE;

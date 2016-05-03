@@ -14,6 +14,7 @@
 #import "Reachability.h"
 #import "ProgressBar.h"
 #import "ChangePassword.h"
+#import "UIView+viewRecursion.h"
 
 @implementation ProductInformation
 
@@ -33,8 +34,13 @@
     [self directoryFileListing];
     
     if([self connected]){
+        
+        UIView *spinnerHolder = [[UIView alloc]initWithFrame:CGRectMake(150, 80, 500, 500)];
+        spinnerHolder.tag = 501;
+        [self.view addSubview:spinnerHolder];
+        
         spinnerLoading = [[SpinnerUtilities alloc]init];
-        [spinnerLoading startLoadingSpinner:self.view label:@"Loading Informasi Produk"];
+        [spinnerLoading startLoadingSpinner:spinnerHolder label:@"Loading Informasi Produk"];
         [self FTPFileListing];
     }
     
@@ -353,6 +359,10 @@
     [FTPItemsList addObject:[NSMutableArray arrayWithObjects:[NSString stringWithFormat:@"%d",fileIndex],fileName, fileFormat,fileSize,fileExist,nil]];
     
     [spinnerLoading stopLoadingSpinner];
+    for(UIView *v in [self.view allSubViews]){
+        if(v.tag == 501)
+            v.hidden = YES;
+    }
 }
 
 - (void)downloadisFinished{
@@ -365,12 +375,20 @@
 
 - (void)downloadisError{
     [spinnerLoading stopLoadingSpinner];
+    for(UIView *v in [self.view allSubViews]){
+        if(v.tag == 501)
+            v.hidden = YES;
+    }
     UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Koneksi ke FTP Gagal" message:[NSString stringWithFormat:@"Pastikan perangkat terhubung ke internet yang stabil untuk mengakses FTP"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     [alert show];
 }
 
 - (void)failedConnectToFTP{
     [spinnerLoading stopLoadingSpinner];
+    for(UIView *v in [self.view allSubViews]){
+        if(v.tag == 501)
+            v.hidden = YES;
+    }
     UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Koneksi ke FTP Gagal" message:[NSString stringWithFormat:@"Pastikan perangkat terhubung ke internet yang stabil untuk mengakses FTP"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     [alert show];
 }
