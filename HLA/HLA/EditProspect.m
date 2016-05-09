@@ -4016,12 +4016,16 @@ NSMutableArray *DelGroupArr;
 	}
     
     if (textField == txtOtherIDType) {
+        /*myString = [txtContact4.text stringByReplacingCharactersInRange:range withString:string];
+         if (myString.length > 10) {
+         return NO;
+         }*/
         NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
         
-        return (([string isEqualToString:filtered]));
-        //return ((newLength <= CHARACTER_LIMIT_OtherID));
+        return (([string isEqualToString:filtered])&&(newLength <= 20));
     }
+
     
     if (textField == txtBussinessType) {
         return ((newLength <= CHARACTER_LIMIT_Bussiness));
@@ -14083,6 +14087,7 @@ NSMutableArray *DelGroupArr;
     if ([selectedIDType isEqualToString:@"- SELECT -"]) {
         OtherIDType.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
         txtOtherIDType.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+        [txtOtherIDType setText:@""];
         txtOtherIDType.enabled = NO;
     }
     else{

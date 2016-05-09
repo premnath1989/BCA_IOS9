@@ -5220,6 +5220,7 @@ bool WPTPD30RisDeleted = FALSE;
     NSString *validationMasaPembayaran=@"Masa Pembayaran harus diisi";
     NSString *validationFrekuensiPembayaran=@"Frekuensi Pembayaran harus diisi";
     NSString *validationMasaExtraPremi=@"Masa Extra Premi harus diisi";
+    NSString *validationEmptyExtraPremi=@"Extra Premi harus diisi";
     NSString *validationUanglebih=@"Uang Pertangungan Dasar Min:Rp1,000,000,000 Max:Rp300,000,000,000";
     NSString *validationUanglebihkk=@"Uang Pertangungan Dasar Min:Rp30,000,000 Max:Rp1,500,000,000";
     NSString *validationExtraPremi=@"Extra Premi harus 25%,50%,75%,100%.....300%";
@@ -5298,7 +5299,14 @@ bool WPTPD30RisDeleted = FALSE;
             }
         }
         
-        
+        else if ([_masaExtraPremiField.text length]>0)
+        {
+            if (([_extraPremiPercentField.text length]==0)&&([_extraPremiNumberField.text length]==0))
+            {
+                [self createAlertViewAndShow:validationEmptyExtraPremi tag:0];
+                return false;
+            }
+        }
         return valid;
 
         
@@ -5345,7 +5353,6 @@ bool WPTPD30RisDeleted = FALSE;
             return false;
         }
         
-        
         else if (([_extraPremiPercentField.text length]>0)||([_extraPremiNumberField.text length]>0))
         {
             if ([validationSet containsObject:masaEktraPremi]||masaEktraPremi==NULL)
@@ -5356,9 +5363,15 @@ bool WPTPD30RisDeleted = FALSE;
             }
         }
         
-        
+        else if ([_masaExtraPremiField.text length]>0)
+        {
+            if (([_extraPremiPercentField.text length]==0)&&([_extraPremiNumberField.text length]==0))
+            {
+                [self createAlertViewAndShow:validationEmptyExtraPremi tag:0];
+                return false;
+            }
+        }
         return valid;
-  
     }
     
 }
