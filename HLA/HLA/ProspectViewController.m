@@ -8975,6 +8975,7 @@ bool RegDatehandling;
     if ([selectedIDType isEqualToString:@"- SELECT -"]) {
         OtherIDType.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
         txtOtherIDType.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+        [txtOtherIDType setText:@""];
         txtOtherIDType.enabled = NO;
     }
     else{

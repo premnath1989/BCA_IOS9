@@ -109,6 +109,15 @@
 //    NSString *numberString = [formatter stringFromNumber:[NSNumber numberWithFloat:22.368511]];
 }
 
+-(NSNumberFormatter *)formatterForCurrencyText{
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc]init];
+    [formatter setMaximumFractionDigits:2];
+    [formatter setUsesGroupingSeparator:YES];
+    [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    [formatter setLocale:[NSLocale localeWithLocaleIdentifier:@"in_ID"]];
+    return formatter;
+}
+
 /*-(NSString *)convertSpecialCharacter:(NSString *)originalString{
     NSString *someString = originalString;
     NSString *newString = [someString stringByReplacingOccurrencesOfString:@"[/,@"'; ]+" withString:@"-" options: NSRegularExpressionSearch range:NSMakeRange(0, someString.length)];

@@ -315,6 +315,7 @@
 		42D3277618487F2D0030AA7A /* NewGroupListing.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D3277518487F2D0030AA7A /* NewGroupListing.m */; };
 		42F8590F1772E4EF003907CD /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = 42F8590D1772E4EF003907CD /* add.png */; };
 		42F859101772E4EF003907CD /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 42F8590E1772E4EF003907CD /* delete.png */; };
+		43100C751CE1C00B006ECC7F /* HeritageCalculation.m in Sources */ = {isa = PBXBuildFile; fileRef = 43100C741CE1C00B006ECC7F /* HeritageCalculation.m */; };
 		431C065F1C823A9B001824FD /* Model_SI_Premium.m in Sources */ = {isa = PBXBuildFile; fileRef = 431C065D1C823A9B001824FD /* Model_SI_Premium.m */; };
 		431F5FDF1C6D781A00A9CA6C /* BranchInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 431F5FDE1C6D781A00A9CA6C /* BranchInfo.m */; };
 		431F5FE41C6D93E800A9CA6C /* ProspectListingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 431F5FE21C6D93E800A9CA6C /* ProspectListingTableViewCell.m */; };
@@ -1351,6 +1352,8 @@
 		42D3277518487F2D0030AA7A /* NewGroupListing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewGroupListing.m; sourceTree = "<group>"; };
 		42F8590D1772E4EF003907CD /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
 		42F8590E1772E4EF003907CD /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete.png; sourceTree = "<group>"; };
+		43100C731CE1C00B006ECC7F /* HeritageCalculation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeritageCalculation.h; sourceTree = "<group>"; };
+		43100C741CE1C00B006ECC7F /* HeritageCalculation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeritageCalculation.m; sourceTree = "<group>"; };
 		431C065D1C823A9B001824FD /* Model_SI_Premium.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Model_SI_Premium.m; sourceTree = "<group>"; };
 		431C065E1C823A9B001824FD /* Model_SI_Premium.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model_SI_Premium.h; sourceTree = "<group>"; };
 		431F5FDD1C6D781A00A9CA6C /* BranchInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BranchInfo.h; sourceTree = "<group>"; };
@@ -3231,6 +3234,15 @@
 			path = "TBXML+NSDictionary";
 			sourceTree = "<group>";
 		};
+		43100C721CE1BFEE006ECC7F /* Heritage Calculation */ = {
+			isa = PBXGroup;
+			children = (
+				43100C731CE1C00B006ECC7F /* HeritageCalculation.h */,
+				43100C741CE1C00B006ECC7F /* HeritageCalculation.m */,
+			);
+			name = "Heritage Calculation";
+			sourceTree = "<group>";
+		};
 		431F5FE01C6D93B700A9CA6C /* tableViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -4752,6 +4764,7 @@
 		EF05984D161A9230004A9095 /* BasicPlan */ = {
 			isa = PBXGroup;
 			children = (
+				43100C721CE1BFEE006ECC7F /* Heritage Calculation */,
 				43BB38B51CBCA47A00A5F5C5 /* Ilustration Signature */,
 				EF059847161A912A004A9095 /* BasicPlanViewController.h */,
 				174BAA431C86799B002EEEEC /* IlustrationViewController.h */,
@@ -5787,6 +5800,7 @@
 				437343151C6B1CBD001516D9 /* ReferralSource.m in Sources */,
 				42B8B1471917339500E09A34 /* PRPage6.m in Sources */,
 				42B8B1481917339500E09A34 /* PRPage7.m in Sources */,
+				43100C751CE1C00B006ECC7F /* HeritageCalculation.m in Sources */,
 				42B8B1491917339500E09A34 /* PRPage8.m in Sources */,
 				42B8B14A1917339500E09A34 /* PRPage9.m in Sources */,
 				439985C11C630C4D0003B037 /* VIPClass.m in Sources */,
