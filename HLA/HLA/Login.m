@@ -227,7 +227,7 @@ static NSString *labelVers;
             AgentWS_VersionCheckerResponse* rateResponse = bodyPart;
             
             if([(NSString *)rateResponse.VersionCheckerResult caseInsensitiveCompare:@"TRUE"]== NSOrderedSame){
-                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Informasi" message:@"Harap Download applikasi versi terbaru" delegate:self cancelButtonTitle:@"Download" otherButtonTitles:nil];
+                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Informasi" message:@"Harap Download applikasi versi terbaru" delegate:self cancelButtonTitle:@"Download" otherButtonTitles:@"Cancel", nil];
                 [alert show];
                 alert.tag = 100;
             }
@@ -320,6 +320,7 @@ static NSString *labelVers;
         }
     }
 }
+
 
 - (void) parseXML:(DDXMLElement *)root objBuff:(WebResponObj *)obj index:(int)index{
     // go through all elements in root element (DataSetMenu element)
@@ -984,15 +985,16 @@ static NSString *labelVers;
 
 - (BOOL)alertViewShouldEnableFirstOtherButton:(UIAlertView *)alertView
 {
-    NSString *inputText = [[alertView textFieldAtIndex:0] text];
-    if( [inputText length] > 0)
-    {
-        return YES;
-    }
-    else
-    {
-        return NO;
-    }
+//    NSString *inputText = [[alertView textFieldAtIndex:0] text];
+//    if( [inputText length] > 0)
+//    {
+//        return YES;
+//    }
+//    else
+//    {
+//        return NO;
+//    }
+    return YES;
 }
 
 
@@ -1006,12 +1008,14 @@ static NSString *labelVers;
             break;
         }
         case 100:{
-            if(![(AppDelegate*)[[UIApplication sharedApplication] delegate] serverUAT]){
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://mpos-production.cloudapp.net/AgentWebService/LoginSite.aspx"]];
-            }else{
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://mpos-0i0p0bbi.cloudapp.net/AgentWebService/LoginSite.aspx"]];
+            if(buttonIndex == 0){
+                if(![(AppDelegate*)[[UIApplication sharedApplication] delegate] serverUAT]){
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://mpos-production.cloudapp.net/AgentWebService/LoginSite.aspx"]];
+                }else{
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://mpos-0i0p0bbi.cloudapp.net/AgentWebService/LoginSite.aspx"]];
+                }
+                [self appVersionChecker];
             }
-            [self appVersionChecker];
             break;
         }
         default:
