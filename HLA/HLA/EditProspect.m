@@ -825,6 +825,7 @@ NSMutableArray *DelGroupArr;
     //validation message data alamat tempat tinggal
     NSString *validationAlamat=@"Alamat Tempat Tinggal harus diisi";
     NSString *validationNegara=@"Negara Tempat Tinggal harus diisi";
+    NSString *validationNegaraKantor=@"Negara Kantor harus diisi";
     NSString *validationAreaTelponRumah=[NSString stringWithFormat:@"Nomor kode telepon rumah yang dimasukkan minimal %i digit atau lebih",prefixHomeOfficeLimit];
     NSString *validationNumberTelponRumah=@"Nomor telepon rumah yang dimasukkan minimal 6 digit atau lebih";
     NSString *validationAreaHPUtama=@"Nomor Kode HP Utama harus diisi";
@@ -863,6 +864,7 @@ NSMutableArray *DelGroupArr;
     NSString *textcontact4=txtContact4.text;
     //outletCountry
     NSString *homeCountry=btnHomeCountry.titleLabel.text;
+    NSString *officeCountry=btnOfficeCountry.titleLabel.text;
     
     if ([texthomeaddress1 isEqualToString:@""]||texthomeaddress1==NULL){
         [self createAlertViewAndShow:validationAlamat tag:0];
@@ -899,6 +901,15 @@ NSMutableArray *DelGroupArr;
         if ([validationSet containsObject:homeCountry]||homeCountry==NULL){
             [self createAlertViewAndShow:validationNegara tag:0];
             [btnHomeCountry setBackgroundColor:[UIColor redColor]];
+            [ClientProfile setObject:@"NO" forKey:@"TabBar"];
+            return false;
+        }
+    }
+    
+    else if ([_switchCountryOffice isOn]){
+        if ([validationSet containsObject:officeCountry]||officeCountry==NULL){
+            [self createAlertViewAndShow:validationNegara tag:0];
+            [btnOfficeCountry setBackgroundColor:[UIColor redColor]];
             [ClientProfile setObject:@"NO" forKey:@"TabBar"];
             return false;
         }
@@ -2442,7 +2453,9 @@ NSMutableArray *DelGroupArr;
     }
     else {
         [self.OtherIDType setTitle:@"- SELECT -" forState:UIControlStateNormal];
-        txtOtherIDType.text = @"";
+        txtOtherIDType.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+        [txtOtherIDType setText:@""];
+        txtOtherIDType.enabled = NO;
     }
     
     if ([pp.IDTypeNo isEqualToString:@""] || pp.IDTypeNo == NULL) {
@@ -2495,7 +2508,9 @@ NSMutableArray *DelGroupArr;
     
     //HOME ADD - Eliminate "null" value
     if ([pp.OtherIDTypeNo isEqualToString:@"(null)"] || pp.OtherIDTypeNo == NULL) {
-        txtOtherIDType.text = @"";
+        txtOtherIDType.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+        [txtOtherIDType setText:@""];
+        txtOtherIDType.enabled = NO;
     }
     else {
         txtOtherIDType.text = pp.OtherIDTypeNo;
@@ -3096,7 +3111,7 @@ NSMutableArray *DelGroupArr;
     txtIDType.enabled = FALSE;
     txtIDType.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
 	if (![OtherIDType.titleLabel.text isEqualToString:@"- SELECT -"]) {
-		txtOtherIDType.enabled = NO;
+		txtOtherIDType.enabled = YES;
 		txtOtherIDType.backgroundColor = [CustomColor colorWithHexString:@"FFFFFF"];
 		
 		OtherIDType.enabled = NO;
@@ -3321,8 +3336,8 @@ NSMutableArray *DelGroupArr;
     
     //segGender.enabled = YES;
     txtDOB.hidden=YES;
-    [txtOtherIDType setEnabled:YES];
-    [txtOtherIDType setBackgroundColor:[UIColor whiteColor]];
+    //[txtOtherIDType setEnabled:YES];
+    //[txtOtherIDType setBackgroundColor:[UIColor whiteColor]];
 
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"dd/MM/yyyy"];
@@ -5918,8 +5933,9 @@ NSMutableArray *DelGroupArr;
     }
     else {
         [self.OtherIDType setTitle:@"- SELECT -" forState:UIControlStateNormal];
-        txtOtherIDType.text = @"";
-        
+        txtOtherIDType.backgroundColor = [CustomColor colorWithHexString:@"EEEEEE"];
+        [txtOtherIDType setText:@""];
+        txtOtherIDType.enabled = NO;
     }
     
     if ([prospectprofile.IDTypeNo isEqualToString:@""] || prospectprofile.IDTypeNo == NULL) {

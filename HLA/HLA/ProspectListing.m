@@ -35,6 +35,7 @@
 @synthesize GroupPopover = _GroupPopover;
 @synthesize dataMobile,dataPrefix,dataIndex;
 @synthesize OrderBy;
+//@synthesize outletDOB;
 //@synthesize SIDate = _SIDate;
 
 int RecDelete = 0;
@@ -58,11 +59,11 @@ MBProgressHUD *HUD;
     
     borderColor=[[UIColor alloc]initWithRed:250.0/255.0 green:175.0/255.0 blue:50.0/255.0 alpha:1.0];
     
-    _outletDOB.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    _outletDOB.imageEdgeInsets = UIEdgeInsetsMake(0., _outletDOB.frame.size.width - (24 + 10.0), 0., 0.);
-    _outletDOB.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
-    _outletDOB.layer.borderColor = borderColor.CGColor;
-    _outletDOB.layer.borderWidth = 1.0;
+    outletDOB.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    outletDOB.imageEdgeInsets = UIEdgeInsetsMake(0., outletDOB.frame.size.width - (24 + 10.0), 0., 0.);
+    outletDOB.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
+    outletDOB.layer.borderColor = borderColor.CGColor;
+    outletDOB.layer.borderWidth = 1.0;
     
     
     [self setTextfieldBorder];
@@ -717,8 +718,8 @@ MBProgressHUD *HUD;
         [alert show];
     }
     else{
-        _outletDOB.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        [_outletDOB setTitle:strDate forState:UIControlStateNormal];
+        outletDOB.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        [outletDOB setTitle:strDate forState:UIControlStateNormal];
     }
     df = Nil, d = Nil, d2 = Nil;
 }
@@ -1311,7 +1312,7 @@ MBProgressHUD *HUD;
         sortedBy=@"DateModified";
     }
     
-    ProspectTableData=[modelProspectProfile searchProspectProfileByName:nametxt.text BranchName:_txtBranchName.text DOB:_outletDOB.titleLabel.text Order:sortedBy Method:sortMethod ID:txtIDNumber.text];
+    ProspectTableData=[modelProspectProfile searchProspectProfileByName:nametxt.text BranchName:_txtBranchName.text DOB:outletDOB.titleLabel.text Order:sortedBy Method:sortMethod ID:txtIDNumber.text];
     [self getMobileNo];
     TotalData = ProspectTableData.count;
     [self.myTableView reloadData];
@@ -1587,7 +1588,7 @@ MBProgressHUD *HUD;
         [ProspectTableData removeAllObjects];
         [self.myTableView reloadData];
         
-        ProspectTableData=[modelProspectProfile searchProspectProfileByName:nametxt.text BranchName:_txtBranchName.text DOB:_outletDOB.titleLabel.text Order:@"ProspectName" Method:@"ASC" ID:txtIDNumber.text];
+        ProspectTableData=[modelProspectProfile searchProspectProfileByName:nametxt.text BranchName:_txtBranchName.text DOB:outletDOB.titleLabel.text Order:@"ProspectName" Method:@"ASC" ID:txtIDNumber.text];
     }
     [self getMobileNo];
     
@@ -1621,7 +1622,12 @@ MBProgressHUD *HUD;
     txtIDTypeNo.text = @"";
     txtIDNumber.text = @"";
     _txtBranchName.text = @"";
-    [_outletDOB setTitle:@"" forState:UIControlStateNormal];
+    [outletDOB setTitle:@"" forState:UIControlStateNormal];
+    [outletDOB.titleLabel setText:@""];
+    NSMutableAttributedString *titleText = [[NSMutableAttributedString alloc] initWithString:@""];
+    // Set the font to bold from the beginning of the string to the ","
+    // Set the attributed string as the buttons' title text
+    [outletDOB setAttributedTitle:titleText forState:UIControlStateNormal];
     
     idTypeLabel.highlighted= false;
     [btnGroup setTitle:@"- SELECT -" forState:UIControlStateNormal];
