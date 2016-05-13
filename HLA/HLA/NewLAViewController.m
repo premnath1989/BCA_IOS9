@@ -25,6 +25,7 @@
 @interface NewLAViewController (){
     NSString *ilustrationProductCode;
     int clientProfileID;
+    NSNumber *numberIntInternalStaff;
 }
 
 @end
@@ -219,6 +220,11 @@ id dobtanngal;
     //TanggalIllustrasi.enabled = [quickQuoteFlag isOn];
     
 }
+
+- (IBAction)InternalStaffFunc:(UISwitch *)sender{
+
+}
+
 
 
 - (IBAction)QuickQuoteFunc:(UISwitch *)sender
@@ -913,6 +919,14 @@ id dobtanngal;
         else{
             [sexSegment setSelectedSegmentIndex:1];
         }
+        
+        if ([ilustrationProductCode isEqualToString:@"BCALHST"]){
+            numberIntInternalStaff = [NSNumber numberWithInt:1];
+        }
+        else{
+            numberIntInternalStaff = [NSNumber numberWithInt:0];
+        }
+
         [_delegate setPODictionaryWhenLoadFromList:dictPOData];
     }
 }
@@ -1011,9 +1025,17 @@ id dobtanngal;
 //            txtPolicyTerm.text =  [NSString stringWithFormat:@"25"];
 //        }
     
-
+    
+    
         ilustrationProductCode = aaCode;
+        if ([ilustrationProductCode isEqualToString:@"BCALHST"]){
+            numberIntInternalStaff = [NSNumber numberWithInt:1];
+        }
+        else{
+            numberIntInternalStaff = [NSNumber numberWithInt:0];
+        }
         [NamaProduk setTitle:aaDesc forState:UIControlStateNormal];
+        [_BtnHubungan setTitle:@"--Please Select--" forState:UIControlStateNormal];
         [self.planPopover dismissPopoverAnimated:YES];
        // getPlanCode = aaCode;
         
@@ -1146,9 +1168,19 @@ id dobtanngal;
 -(NSDictionary *)setDictionaryLA{
     NSNumber *numberBoolQuickQuote;
     NSNumber *numberIntClientProfile;
+    //NSNumber *numberIntInternalStaff;
+    
     if ([quickQuoteFlag isOn]){
         clientProfileID = -1;
     }
+    
+    if ([ilustrationProductCode isEqualToString:@"BCALHST"]){
+        numberIntInternalStaff = [NSNumber numberWithInt:1];
+    }
+    else{
+        numberIntInternalStaff = [NSNumber numberWithInt:0];
+    }
+    
     numberIntClientProfile = [NSNumber numberWithInt:clientProfileID];
     
     if ([quickQuoteFlag isOn]){
@@ -1178,7 +1210,9 @@ id dobtanngal;
                                           occupationDesc,@"PO_Occp",
                                           numberIntClientProfile,@"PO_ClientID",
                                           relationDesc,@"RelWithLA",
-                                          originalRelation,@"originalRelation",nil];
+                                          numberIntInternalStaff,@"IsInternalStaff",
+                                          originalRelation,@"originalRelation",
+                                          nil];
     
     if (([relationDesc isEqualToString:@"DIRI SENDIRI"])||([relationDesc isEqualToString:@"SELF"])){
         [dictionaryNewLA setObject:numberIntClientProfile forKey:@"LA_ClientID"];
@@ -3077,14 +3111,14 @@ id dobtanngal;
         //_RshipTypePicker.rowToUpdate = _rowToUpdate;
     }
     
-    if (_RshipTypePickerPopover == nil) {
-        
+    //if (_RshipTypePickerPopover == nil) {
+        [_RshipTypePicker loadData:numberIntInternalStaff];
         _RshipTypePickerPopover = [[UIPopoverController alloc] initWithContentViewController:_RshipTypePicker];
         [_RshipTypePickerPopover presentPopoverFromRect:[sender bounds] inView:sender permittedArrowDirections:UIPopoverArrowDirectionLeft animated:YES];
-    } else {
+    /*} else {
         [_RshipTypePickerPopover dismissPopoverAnimated:YES];
         _RshipTypePickerPopover = nil;
-    }
+    }*/
     
     
     

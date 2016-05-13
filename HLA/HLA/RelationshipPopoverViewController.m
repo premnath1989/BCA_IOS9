@@ -23,64 +23,6 @@
 {
     self = [super initWithStyle:style];
     if (self) {
-        NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *docsDir = [dirPaths objectAtIndex:0];
-        
-        databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
-
-        
-        
-        self.clearsSelectionOnViewWillAppear = NO;
-        self.contentSizeForViewInPopover = CGSizeMake(700.0, 400.0);
-        self.IDTypes = [NSMutableArray array];
-        self.IDCodes = [NSMutableArray array];
-       
-        
-        //Add "-Select-" in first row
-        [_IDTypes addObject:@"- SELECT -"];
-       
-        
-        
-        
-        const char *dbpath = [databasePath UTF8String];
-        sqlite3_stmt *statement;
-        if (sqlite3_open(dbpath, &contactDB) == SQLITE_OK){
-            //NSString *querySQL = [NSString stringWithFormat:@"SELECT OccpCode, OccpDesc, Class FROM Adm_Occp_Loading_Penta where status = 'A' ORDER BY OccpDesc ASC"];
-            NSString *querySQL = [NSString stringWithFormat:@"SELECT RelCode,RelDesc FROM eProposal_Relation where status = 'A' ORDER BY RelDesc ASC"];
-            const char *query_stmt = [querySQL UTF8String];
-            if (sqlite3_prepare_v2(contactDB, query_stmt, -1, &statement, NULL) == SQLITE_OK)
-            {
-                
-                NSString *IDTypes;
-                NSString *IDCodes;
-                while (sqlite3_step(statement) == SQLITE_ROW){
-                
-                    IDTypes = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 1)];
-                    IDCodes = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 0)];
-                    
-                    [_IDTypes addObject:IDTypes];
-                    [_IDCodes addObject:IDCodes];
-                                    }
-            }
-            
-            sqlite3_close(contactDB);
-        }
-        
-        /*UISearchBar *searchbar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 200, 50) ];
-         
-         searchbar.opaque = false;
-         searchbar.delegate = (id) self;
-         self.tableView.tableHeaderView = searchbar;
-         CGRect searchbarFrame = searchbar.frame;
-         [self.tableView scrollRectToVisible:searchbarFrame animated:NO];*/
-        UISearchBar *zzz = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 200, 50) ];
-        
-        zzz.opaque = false;
-        zzz.delegate = (id) self;
-        self.tableView.tableHeaderView = zzz;
-        CGRect searchbarFrame = zzz.frame;
-        [self.tableView scrollRectToVisible:searchbarFrame animated:NO];
-        
     }
     return self;
 
@@ -102,6 +44,76 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)loadData:(NSNumber*)numberIsInternalStaff{
+    NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsDir = [dirPaths objectAtIndex:0];
+    
+    databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
+    
+    
+    
+    self.clearsSelectionOnViewWillAppear = NO;
+    self.contentSizeForViewInPopover = CGSizeMake(700.0, 400.0);
+    self.IDTypes = [NSMutableArray array];
+    self.IDCodes = [NSMutableArray array];
+    
+    
+    //Add "-Select-" in first row
+    [_IDTypes addObject:@"- SELECT -"];
+    [_IDCodes addObject:@"-1"];
+    
+    
+    
+    
+    const char *dbpath = [databasePath UTF8String];
+    sqlite3_stmt *statement;
+    if (sqlite3_open(dbpath, &contactDB) == SQLITE_OK){
+        //NSString *querySQL = [NSString stringWithFormat:@"SELECT OccpCode, OccpDesc, Class FROM Adm_Occp_Loading_Penta where status = 'A' ORDER BY OccpDesc ASC"];
+        NSString *querySQL;
+        if ([numberIsInternalStaff intValue]==1){
+            querySQL = [NSString stringWithFormat:@"SELECT RelCode,RelDesc FROM eProposal_Relation where status = 'AS' ORDER BY RelDesc ASC"];
+        }
+        else{
+            querySQL = [NSString stringWithFormat:@"SELECT RelCode,RelDesc FROM eProposal_Relation where status = 'A' or status = 'AS' ORDER BY RelDesc ASC"];
+        }
+        
+        
+        const char *query_stmt = [querySQL UTF8String];
+        if (sqlite3_prepare_v2(contactDB, query_stmt, -1, &statement, NULL) == SQLITE_OK)
+        {
+            
+            NSString *IDTypes;
+            NSString *IDCodes;
+            while (sqlite3_step(statement) == SQLITE_ROW){
+                
+                IDTypes = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 1)];
+                IDCodes = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 0)];
+                
+                [_IDTypes addObject:IDTypes];
+                [_IDCodes addObject:IDCodes];
+            }
+        }
+        
+        sqlite3_close(contactDB);
+    }
+    
+    /*UISearchBar *searchbar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 200, 50) ];
+     
+     searchbar.opaque = false;
+     searchbar.delegate = (id) self;
+     self.tableView.tableHeaderView = searchbar;
+     CGRect searchbarFrame = searchbar.frame;
+     [self.tableView scrollRectToVisible:searchbarFrame animated:NO];*/
+    UISearchBar *zzz = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 200, 50) ];
+    
+    zzz.opaque = false;
+    zzz.delegate = (id) self;
+    self.tableView.tableHeaderView = zzz;
+    CGRect searchbarFrame = zzz.frame;
+    [self.tableView reloadData];
+    [self.tableView scrollRectToVisible:searchbarFrame animated:NO];
 }
 
 #pragma mark - Table view data source

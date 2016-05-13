@@ -93,6 +93,7 @@ bool WPTPD30RisDeleted = FALSE;
     [super viewDidLoad];
     riderCalculation = [[RiderCalculation alloc]init];
     classFormatter=[[Formatter alloc]init];
+    heritageCalculation = [[HeritageCalculation alloc]init];
     discountPembelian = 0;
 
     CustomColor = [[ColorHexCode alloc] init ];
@@ -236,13 +237,15 @@ bool WPTPD30RisDeleted = FALSE;
     [_basicPremiField addTarget:self action:@selector(PremiDasarIncomeChange:) forControlEvents:UIControlEventEditingDidEnd];
     
     NSString *detectedPlanType = [_dictionaryPOForInsert valueForKey:@"ProductName"];
-    if([detectedPlanType isEqualToString:@"BCA Life Heritage Protection"])
+    //if([detectedPlanType isEqualToString:@"BCA Life Heritage Protection"])
+    if([detectedPlanType isEqualToString:@"BCA Life Keluargaku"])
     {
-        [self KeluargakuDisable];
+        [self KeluargakuEnable];
+        
     }
     else
     {
-        [self KeluargakuEnable];
+        [self KeluargakuDisable];
     }
   }
 
@@ -354,6 +357,7 @@ bool WPTPD30RisDeleted = FALSE;
         [self PremiDasarAct];
         [self PremiDasarActB];
         [self ExtraNumbPremi];
+        [self loadHeritageCalculation];
     }
     /*else{
         [self PremiDasarActKeluargaku:FRekeunsiPembayaranMode];
@@ -365,10 +369,20 @@ bool WPTPD30RisDeleted = FALSE;
 -(void)KeluargakuDisable
 {
     NSLog(@"%@",PlanType);
-//    if ([PlanType isEqualToString:@"BCA Life Heritage"])
-//    {
+    int IsInternalStaff =[[_dictionaryPOForInsert valueForKey:@"IsInternalStaff"] intValue];
+    if (IsInternalStaff==0){
         _KKLKDiskaunBtn.hidden = YES;
         _KKLKDiskaunLbl.hidden = YES;
+        [ExtraPremiDasarLBL setText:@"Min  Rp 1,000,000,000  Max Rp 300,000,000,000"];
+    }
+    else{
+        _KKLKDiskaunBtn.hidden = NO;
+        _KKLKDiskaunLbl.hidden = NO;
+        [ExtraPremiDasarLBL setText:@"Min  Rp 500,000,000  Max Rp 300,000,000,000"];
+    }
+//    if ([PlanType isEqualToString:@"BCA Life Heritage"])
+//    {
+    
         _KKLKExtraPremiDasarLBL.hidden = YES;
         _KKLKPembelianKeBtn.hidden = YES;
         _KKLKPembelianKeLbl.hidden = YES;
@@ -743,6 +757,7 @@ bool WPTPD30RisDeleted = FALSE;
         [self PremiDasarAct];
         [self PremiDasarActB];
         [self ExtraNumbPremi];
+        [self loadHeritageCalculation];
     }
 
     
@@ -836,6 +851,7 @@ bool WPTPD30RisDeleted = FALSE;
         [self PremiDasarAct];
         [self PremiDasarActB];
         [self ExtraNumbPremi];
+        [self loadHeritageCalculation];
     }
 }
 
@@ -2195,6 +2211,9 @@ bool WPTPD30RisDeleted = FALSE;
 
 -(void)setPODictionaryFromRoot:(NSMutableDictionary *)dictionaryRootPO{
     if ([_dictionaryPOForInsert count]>0){
+        int rootIsInternalStaff=[[dictionaryRootPO valueForKey:@"IsInternalStaff"] intValue];
+        int isInternalStaff=[[_dictionaryPOForInsert valueForKey:@"IsInternalStaff"] intValue];
+        
         if (![[_dictionaryPOForInsert valueForKey:@"ProductName"] isEqualToString:[dictionaryRootPO valueForKey:@"ProductName"]]){
             [self resetField];
             _dictionaryPOForInsert=dictionaryRootPO;
@@ -2216,6 +2235,10 @@ bool WPTPD30RisDeleted = FALSE;
             _dictionaryPOForInsert=dictionaryRootPO;
         }
         else if (![[_dictionaryPOForInsert valueForKey:@"PO_Gender"] isEqualToString:[dictionaryRootPO valueForKey:@"PO_Gender"]]){
+            [self resetField];
+            _dictionaryPOForInsert=dictionaryRootPO;
+        }
+        else if (isInternalStaff!=rootIsInternalStaff){
             [self resetField];
             _dictionaryPOForInsert=dictionaryRootPO;
         }
@@ -2347,6 +2370,7 @@ bool WPTPD30RisDeleted = FALSE;
         [self PremiDasarAct];
         [self PremiDasarActB];
         [self ExtraNumbPremi];
+        [self loadHeritageCalculation];
     }
 
     
@@ -5221,7 +5245,8 @@ bool WPTPD30RisDeleted = FALSE;
     NSString *validationFrekuensiPembayaran=@"Frekuensi Pembayaran harus diisi";
     NSString *validationMasaExtraPremi=@"Masa Extra Premi harus diisi";
     NSString *validationEmptyExtraPremi=@"Extra Premi harus diisi";
-    NSString *validationUanglebih=@"Uang Pertangungan Dasar Min:Rp1,000,000,000 Max:Rp300,000,000,000";
+    NSString *validationUanglebih;
+    
     NSString *validationUanglebihkk=@"Uang Pertangungan Dasar Min:Rp30,000,000 Max:Rp1,500,000,000";
     NSString *validationExtraPremi=@"Extra Premi harus 25%,50%,75%,100%.....300%";
     NSString *validationExtraNumber=@"Extra Premi 0/100 harus 1-10";
@@ -5238,7 +5263,18 @@ bool WPTPD30RisDeleted = FALSE;
     
     long long sumAssured = [myNumber longLongValue];
     long long maxNumber = 300000000000;
-    long long minNumber = 1000000000;
+    long long minNumber;
+    int IsInternalStaff =[[_dictionaryPOForInsert valueForKey:@"IsInternalStaff"] intValue];
+    if (IsInternalStaff==0){
+        minNumber= 1000000000;
+        validationUanglebih=@"Uang Pertangungan Dasar Min:Rp1,000,000,000 Max:Rp300,000,000,000";
+    }
+    else{
+        minNumber= 500000000;
+        validationUanglebih=@"Uang Pertangungan Dasar Min:Rp500,000,000 Max:Rp300,000,000,000";
+    }
+    
+    
     long long maxNumberkk = 1500000000;
     long long minNumberkk = 30000000;
     
@@ -5736,6 +5772,7 @@ bool WPTPD30RisDeleted = FALSE;
         [self PremiDasarAct];
         [self PremiDasarActB];
         [self ExtraNumbPremi];
+        [self loadHeritageCalculation];
     }
     
 }
@@ -5749,6 +5786,55 @@ bool WPTPD30RisDeleted = FALSE;
 {
     [self getExistingBasic:false];
     [self toggleExistingField];
+}
+#pragma mark - Heritage Calculation
+-(void)loadHeritageCalculation{
+    NSMutableDictionary* dictionaryBasicPlan = [[NSMutableDictionary alloc]initWithDictionary:[self setDataBasicPlan]];
+    [dictionaryBasicPlan addEntriesFromDictionary:_dictionaryPOForInsert];
+    
+    NSNumber *myNumber = [classFormatter convertAnyNonDecimalNumberToString:[dictionaryBasicPlan valueForKey:@"Sum_Assured"]];
+    if(myNumber != nil){
+        [dictionaryBasicPlan setObject:myNumber forKey:@"Number_Sum_Assured"];
+    }
+    
+    [heritageCalculation setPremiumDictionary:dictionaryBasicPlan];
+    
+    //premi Dasar
+    NSString* premiDasar;
+    NSString* extraBasicPremi;
+    NSString* totalPremi;
+    NSString* diskon;
+    if ([FRekeunsiPembayaranMode isEqualToString:@"Pembayaran Sekaligus"])
+    {
+        premiDasar = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getPremiDasarSekaligus]]];
+        extraBasicPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation extraPremiSekaligus]]];
+        totalPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiSekaligus]]];
+        diskon = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getDiskonSekaligus]]];
+    }
+    else if ([FRekeunsiPembayaranMode isEqualToString:@"Bulanan"])
+    {
+        premiDasar = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getPremiDasarBulanan]]];
+        extraBasicPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation extraPremiBulanan]]];
+        totalPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiBulanan]]];
+        diskon = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getDiskonBulanan]]];
+    }
+    else if ([FRekeunsiPembayaranMode isEqualToString:@"Tahunan"])
+    {
+        premiDasar = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getPremiDasarTahunan]]];
+        extraBasicPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation extraPremiTahunan]]];
+        totalPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiTahunan]]];
+        diskon = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getDiskonTahunan]]];
+    }
+    else{
+        
+    }
+    /*[_basicPremiField setText:premiDasar];
+     [_extraBasicPremiField setText:extraBasicPremi];
+     [_totalPremiWithLoadingField setText:totalPremi];*/
+    [_KKLKDiskaunBtn setText:diskon];
+    NSLog(@"premi dasar %@",premiDasar);
+    NSLog(@"extra premi %@",extraBasicPremi);
+    NSLog(@"total premi %@",totalPremi);
 }
 
 #pragma mark - Memory Management

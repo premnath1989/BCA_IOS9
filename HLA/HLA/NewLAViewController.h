@@ -214,6 +214,7 @@
 @property(nonatomic , retain) NSString *GenderPP;
 @property(nonatomic , retain) NSString *OccpCodePP;
 - (IBAction)QuickQuoteFunc:(id)sender;
+- (IBAction)InternalStaffFunc:(id)sender;
 
 @property (retain, nonatomic) NSMutableArray *arrExistRiderCode;
 @property (retain, nonatomic) NSMutableArray *arrExistPlanChoice;
@@ -221,6 +222,7 @@
 @property(nonatomic , retain) NSMutableArray *atcRidCode;
 @property(nonatomic , retain) NSMutableArray *atcPlanChoice;
 @property (strong, nonatomic) IBOutlet UISwitch *quickQuoteFlag;
+@property (strong, nonatomic) IBOutlet UISwitch *switchInternalStaff;
 //@property (nonatomic, retain) SIObj* siObj;
 
 - (IBAction)sexSegmentPressed:(id)sender;

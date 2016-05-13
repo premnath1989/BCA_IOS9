@@ -16,45 +16,8 @@
     
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     [database open];
-    BOOL success = [database executeUpdate:@"insert into SI_PO_Data (SINO, ProductCode, ProductName, QuickQuote,SIDate,PO_Name,PO_DOB,PO_Gender,PO_Age,PO_OccpCode,PO_Occp,PO_ClientID,RelWithLA,LA_ClientID,LA_Name,LA_DOB,LA_Age,LA_Gender,LA_OccpCode,LA_Occp,CreatedDate,UpdatedDate) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,""datetime(\"now\", \"+7 hour\")"",""datetime(\"now\", \"+7 hour\")"")" ,
+    BOOL success = [database executeUpdate:@"insert into SI_PO_Data (SINO, ProductCode, ProductName, QuickQuote,SIDate,PO_Name,PO_DOB,PO_Gender,PO_Age,PO_OccpCode,PO_Occp,PO_ClientID,RelWithLA,LA_ClientID,LA_Name,LA_DOB,LA_Age,LA_Gender,LA_OccpCode,LA_Occp,CreatedDate,UpdatedDate,IsInternalStaff) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,""datetime(\"now\", \"+7 hour\")"",""datetime(\"now\", \"+7 hour\")"",?)" ,
                     [dataPO valueForKey:@"SINO"],
-                    [dataPO valueForKey:@"ProductCode"],
-                    [dataPO valueForKey:@"ProductName"],
-                    [dataPO valueForKey:@"QuickQuote"],
-                    [dataPO valueForKey:@"SIDate"],
-                    [dataPO valueForKey:@"PO_Name"],
-                    [dataPO valueForKey:@"PO_DOB"],
-                    [dataPO valueForKey:@"PO_Gender"],
-                    [dataPO valueForKey:@"PO_Age"],
-                    [dataPO valueForKey:@"PO_OccpCode"],
-                    [dataPO valueForKey:@"PO_Occp"],
-                    [dataPO valueForKey:@"PO_ClientID"],
-                    [dataPO valueForKey:@"RelWithLA"],
-                    [dataPO valueForKey:@"LA_ClientID"],
-                    [dataPO valueForKey:@"LA_Name"],
-                    [dataPO valueForKey:@"LA_DOB"],
-                    [dataPO valueForKey:@"LA_Age"],
-                    [dataPO valueForKey:@"LA_Gender"],
-                    [dataPO valueForKey:@"LA_OccpCode"],
-                    [dataPO valueForKey:@"LA_Occp"]/*,
-                    [dataPO valueForKey:@"CreatedDate"],
-                    [dataPO valueForKey:@"UpdatedDate"]*/];
-    
-    if (!success) {
-        NSLog(@"%s: insert error: %@", __FUNCTION__, [database lastErrorMessage]);
-        // do whatever you need to upon error
-    }
-    [results close];
-    [database close];
-}
-
--(void)updatePOData:(NSDictionary *)dataPO{
-    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
-    
-    FMDatabase *database = [FMDatabase databaseWithPath:path];
-    [database open];
-    BOOL success = [database executeUpdate:@"update SI_PO_Data set ProductCode=?, ProductName=?, QuickQuote=?,SIDate=?,PO_Name=?,PO_DOB=?,PO_Gender=?,PO_Age=?,PO_OccpCode=?,PO_Occp=?,PO_ClientID=?,RelWithLA=?,LA_ClientID=?,LA_Name=?,LA_DOB=?,LA_Age=?,LA_Gender=?,LA_OccpCode=?,LA_Occp=?,UpdatedDate=""datetime(\"now\", \"+7 hour\")"" where SINO=?" ,
                     [dataPO valueForKey:@"ProductCode"],
                     [dataPO valueForKey:@"ProductName"],
                     [dataPO valueForKey:@"QuickQuote"],
@@ -74,6 +37,45 @@
                     [dataPO valueForKey:@"LA_Gender"],
                     [dataPO valueForKey:@"LA_OccpCode"],
                     [dataPO valueForKey:@"LA_Occp"],
+                    [dataPO valueForKey:@"IsInternalStaff"]/*,
+                    [dataPO valueForKey:@"CreatedDate"],
+                    [dataPO valueForKey:@"UpdatedDate"]*/];
+    
+    if (!success) {
+        NSLog(@"%s: insert error: %@", __FUNCTION__, [database lastErrorMessage]);
+        // do whatever you need to upon error
+    }
+    [results close];
+    [database close];
+}
+
+-(void)updatePOData:(NSDictionary *)dataPO{
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    BOOL success = [database executeUpdate:@"update SI_PO_Data set ProductCode=?, ProductName=?, QuickQuote=?,SIDate=?,PO_Name=?,PO_DOB=?,PO_Gender=?,PO_Age=?,PO_OccpCode=?,PO_Occp=?,PO_ClientID=?,RelWithLA=?,LA_ClientID=?,LA_Name=?,LA_DOB=?,LA_Age=?,LA_Gender=?,LA_OccpCode=?,LA_Occp=?,UpdatedDate=""datetime(\"now\", \"+7 hour\")"",IsInternalStaff=? where SINO=?" ,
+                    [dataPO valueForKey:@"ProductCode"],
+                    [dataPO valueForKey:@"ProductName"],
+                    [dataPO valueForKey:@"QuickQuote"],
+                    [dataPO valueForKey:@"SIDate"],
+                    [dataPO valueForKey:@"PO_Name"],
+                    [dataPO valueForKey:@"PO_DOB"],
+                    [dataPO valueForKey:@"PO_Gender"],
+                    [dataPO valueForKey:@"PO_Age"],
+                    [dataPO valueForKey:@"PO_OccpCode"],
+                    [dataPO valueForKey:@"PO_Occp"],
+                    [dataPO valueForKey:@"PO_ClientID"],
+                    [dataPO valueForKey:@"RelWithLA"],
+                    [dataPO valueForKey:@"LA_ClientID"],
+                    [dataPO valueForKey:@"LA_Name"],
+                    [dataPO valueForKey:@"LA_DOB"],
+                    [dataPO valueForKey:@"LA_Age"],
+                    [dataPO valueForKey:@"LA_Gender"],
+                    [dataPO valueForKey:@"LA_OccpCode"],
+                    [dataPO valueForKey:@"LA_Occp"],
+                    [dataPO valueForKey:@"IsInternalStaff"],
                     [dataPO valueForKey:@"SINO"]];
     
     if (!success) {
@@ -90,7 +92,7 @@
     
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     [database open];
-    BOOL success = [database executeUpdate:@"insert into SI_PO_Data (SINO, ProductCode, ProductName, QuickQuote,SIDate,PO_Name,PO_DOB,PO_Gender,PO_Age,PO_OccpCode,PO_Occp,PO_ClientID,RelWithLA,CreatedDate,UpdatedDate) values (?,?,?,?,?,?,?,?,?,?,?,?,?,""datetime(\"now\", \"+7 hour\")"",""datetime(\"now\", \"+7 hour\")"")" ,
+    BOOL success = [database executeUpdate:@"insert into SI_PO_Data (SINO, ProductCode, ProductName, QuickQuote,SIDate,PO_Name,PO_DOB,PO_Gender,PO_Age,PO_OccpCode,PO_Occp,PO_ClientID,RelWithLA,CreatedDate,UpdatedDate,IsInternalStaff) values (?,?,?,?,?,?,?,?,?,?,?,?,?,""datetime(\"now\", \"+7 hour\")"",""datetime(\"now\", \"+7 hour\")"",?)" ,
                     [dataPO valueForKey:@"SINO"],
                     [dataPO valueForKey:@"ProductCode"],
                     [dataPO valueForKey:@"ProductName"],
@@ -103,7 +105,8 @@
                     [dataPO valueForKey:@"PO_OccpCode"],
                     [dataPO valueForKey:@"PO_Occp"],
                     [dataPO valueForKey:@"PO_ClientID"],
-                    [dataPO valueForKey:@"RelWithLA"]
+                    [dataPO valueForKey:@"RelWithLA"],
+                    [dataPO valueForKey:@"IsInternalStaff"]
 /*,
                                                     [dataPO valueForKey:@"CreatedDate"],
                                                     [dataPO valueForKey:@"UpdatedDate"]*/];
@@ -122,7 +125,7 @@
     
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     [database open];
-    BOOL success = [database executeUpdate:@"update SI_PO_Data set ProductCode=?, ProductName=?, QuickQuote=?,SIDate=?,PO_Name=?,PO_DOB=?,PO_Gender=?,PO_Age=?,PO_OccpCode=?,PO_Occp=?,PO_ClientID=?,RelWithLA=?,UpdatedDate=""datetime(\"now\", \"+7 hour\")"" where SINO=?" ,
+    BOOL success = [database executeUpdate:@"update SI_PO_Data set ProductCode=?, ProductName=?, QuickQuote=?,SIDate=?,PO_Name=?,PO_DOB=?,PO_Gender=?,PO_Age=?,PO_OccpCode=?,PO_Occp=?,PO_ClientID=?,RelWithLA=?,UpdatedDate=""datetime(\"now\", \"+7 hour\")"",PO_OccpCode=?,IsInternalStaff=? where SINO=?" ,
                     [dataPO valueForKey:@"ProductCode"],
                     [dataPO valueForKey:@"ProductName"],
                     [dataPO valueForKey:@"QuickQuote"],
@@ -135,6 +138,7 @@
                     [dataPO valueForKey:@"PO_Occp"],
                     [dataPO valueForKey:@"PO_ClientID"],
                     [dataPO valueForKey:@"RelWithLA"],
+                    [dataPO valueForKey:@"IsInternalStaff"],
                     [dataPO valueForKey:@"SINO"]];
     
     if (!success) {
@@ -187,6 +191,7 @@
     NSString *LA_Occp;
     NSString *CreatedDate;
     NSString *UpdatedDate;
+    NSString *IsInternalStaff;
     
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
@@ -219,6 +224,7 @@
         LA_Occp = [s stringForColumn:@"LA_Occp"];
         CreatedDate = [s stringForColumn:@"CreatedDate"];
         UpdatedDate = [s stringForColumn:@"UpdatedDate"];
+        IsInternalStaff = [s stringForColumn:@"IsInternalStaff"];
     }
 
     dict=[[NSDictionary alloc]initWithObjectsAndKeys:
@@ -243,7 +249,8 @@
                                           LA_OccpCode,@"LA_OccpCode",
                                           LA_Occp,@"LA_Occp",
                                           CreatedDate,@"CreatedDate",
-                                          UpdatedDate,@"UpdatedDate",nil];
+                                          UpdatedDate,@"UpdatedDate",
+                                          IsInternalStaff,@"IsInternalStaff",nil];
     
    [results close];
    [database close];

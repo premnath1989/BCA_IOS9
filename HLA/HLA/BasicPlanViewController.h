@@ -23,6 +23,7 @@
 #import "ColorHexCode.h"
 #import "Formatter.h"
 #import "RiderCalculation.h"
+#import "HeritageCalculation.h"
 
 @class BasicPlanViewController;
 @protocol BasicPlanViewControllerDelegate
@@ -43,6 +44,7 @@
 
 @interface BasicPlanViewController : UIViewController <UITextFieldDelegate,PlanListDelegate,MasaPembayaranDelegate,FrekeunsiDelegate,PembeliaKeDelegate>{
     Formatter* classFormatter;
+    HeritageCalculation* heritageCalculation;
     
     NSString *databasePath;
     NSString *RatesDatabasePath;

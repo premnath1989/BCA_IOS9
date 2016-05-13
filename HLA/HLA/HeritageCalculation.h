@@ -65,6 +65,9 @@
 -(double)getPremiDasarBulanan;
 -(double)getPremiDasarTahunan;
 -(double)getPremiDasarSekaligus;
+-(double)getDiskonTahunan;
+-(double)getDiskonBulanan;
+-(double)getDiskonSekaligus;
 -(double)calculateExtraPremiPercentSekaligus;
 -(double)calculateExtraPremiPercentTahunan;
 -(double)calculateExtraPremiPercentBulanan;

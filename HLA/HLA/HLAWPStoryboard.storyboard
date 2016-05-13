@@ -125,6 +125,7 @@
             <string>BPreplay</string>
             <string>BPreplay</string>
             <string>BPreplay</string>
+            <string>BPreplay</string>
         </mutableArray>
         <mutableArray key="BPreplayItalics.otf">
             <string>BPreplay-Italic</string>
@@ -3030,112 +3031,112 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Nama Pemegang Polis " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="oY3-F3-mUl">
-                                        <rect key="frame" x="38" y="200" width="161" height="30"/>
+                                        <rect key="frame" x="38" y="239" width="161" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
                                         <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aDp-Zc-OEW">
-                                        <rect key="frame" x="703" y="114" width="7" height="30"/>
+                                        <rect key="frame" x="703" y="153" width="7" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
                                         <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="R9S-if-U3X">
-                                        <rect key="frame" x="490" y="150" width="7" height="30"/>
+                                        <rect key="frame" x="490" y="189" width="7" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
                                         <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XjF-Of-k7Z">
-                                        <rect key="frame" x="702" y="317" width="7" height="30"/>
+                                        <rect key="frame" x="702" y="356" width="7" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
                                         <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7Ly-Vt-cA0">
-                                        <rect key="frame" x="703" y="201" width="7" height="30"/>
+                                        <rect key="frame" x="703" y="240" width="7" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
                                         <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gTW-Uz-Wqc">
-                                        <rect key="frame" x="490" y="239" width="7" height="30"/>
+                                        <rect key="frame" x="490" y="278" width="7" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
                                         <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7S5-TM-Yeb">
-                                        <rect key="frame" x="490" y="279" width="7" height="30"/>
+                                        <rect key="frame" x="490" y="318" width="7" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
                                         <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="No. Ilustrasi" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="SgW-r5-GQ2">
-                                        <rect key="frame" x="38" y="74" width="100" height="30"/>
+                                        <rect key="frame" x="38" y="113" width="100" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
                                         <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Jenis Kelamin Pemegang Polis" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="mqO-Pu-4do">
-                                        <rect key="frame" x="35" y="277" width="224" height="30"/>
+                                        <rect key="frame" x="35" y="316" width="224" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
                                         <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Tanggal Lahir Pemegang Polis " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="Ar7-Bb-PZE">
-                                        <rect key="frame" x="38" y="238" width="242" height="30"/>
+                                        <rect key="frame" x="38" y="277" width="242" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
                                         <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Usia Pemegang Polis" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="utV-4g-jx0">
-                                        <rect key="frame" x="498" y="239" width="166" height="30"/>
+                                        <rect key="frame" x="498" y="278" width="166" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
                                         <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Tanggal Ilustrasi " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="7PE-UF-OTe">
-                                        <rect key="frame" x="38" y="150" width="133" height="30"/>
+                                        <rect key="frame" x="38" y="189" width="133" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
                                         <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Pekerjaan Pemegang Polis" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="Va3-6c-iF6">
-                                        <rect key="frame" x="38" y="317" width="221" height="30"/>
+                                        <rect key="frame" x="38" y="356" width="221" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
                                         <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Hubungan Dengan Tertanggung " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="qkc-qw-ZQ4">
-                                        <rect key="frame" x="38" y="355" width="221" height="30"/>
+                                        <rect key="frame" x="38" y="394" width="221" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
                                         <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="16" clearButtonMode="whileEditing" id="cLX-v8-mxG">
-                                        <rect key="frame" x="269" y="200" width="430" height="30"/>
+                                        <rect key="frame" x="269" y="239" width="430" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="textColor" red="0.34509803919999998" green="0.34901960780000002" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="16" id="jcl-rV-8gf">
-                                        <rect key="frame" x="267" y="74" width="430" height="30"/>
+                                        <rect key="frame" x="267" y="113" width="430" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="textColor" red="0.34509803919999998" green="0.34901960780000002" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -3143,7 +3144,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <segmentedControl contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" id="afS-7k-o9O">
-                                        <rect key="frame" x="269" y="279" width="220" height="29"/>
+                                        <rect key="frame" x="269" y="318" width="220" height="29"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <segments>
@@ -3156,7 +3157,7 @@
                                         </connections>
                                     </segmentedControl>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="vX4-d6-lrT">
-                                        <rect key="frame" x="269" y="239" width="220" height="30"/>
+                                        <rect key="frame" x="269" y="278" width="220" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.85490196080000003" green="0.19215686269999999" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="BPreplay-Italic" family="BPreplay" pointSize="16"/>
@@ -3170,7 +3171,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="AOj-LW-GaO">
-                                        <rect key="frame" x="269" y="317" width="430" height="30"/>
+                                        <rect key="frame" x="269" y="356" width="430" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.85490196080000003" green="0.19215686269999999" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="BPreplay-Italic" family="BPreplay" pointSize="16"/>
@@ -3184,14 +3185,14 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="T0u-fO-x6M">
-                                        <rect key="frame" x="35" y="419" width="385" height="29"/>
+                                        <rect key="frame" x="35" y="458" width="385" height="29"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="16"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Nama Produk" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="0Ty-wK-5HD">
-                                        <rect key="frame" x="38" y="112" width="161" height="30"/>
+                                        <rect key="frame" x="38" y="151" width="161" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
                                         <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -3207,7 +3208,7 @@
                                         </connections>
                                     </switch>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="dNu-X0-M4B">
-                                        <rect key="frame" x="359" y="445" width="50" height="50"/>
+                                        <rect key="frame" x="359" y="484" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="14"/>
                                         <state key="normal" backgroundImage="prospect_100_3.png">
@@ -3222,7 +3223,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Vii-pi-Ut0">
-                                        <rect key="frame" x="268" y="112" width="430" height="30"/>
+                                        <rect key="frame" x="268" y="151" width="430" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.85490196080000003" green="0.19215686269999999" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="BPreplay-Italic" family="BPreplay" pointSize="16"/>
@@ -3235,7 +3236,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="R01-7c-7Hp">
-                                        <rect key="frame" x="269" y="355" width="220" height="30"/>
+                                        <rect key="frame" x="269" y="394" width="220" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.85490196080000003" green="0.19215686269999999" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="BPreplay-Italic" family="BPreplay" pointSize="16"/>
@@ -3249,14 +3250,14 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5h7-qN-i89">
-                                        <rect key="frame" x="490" y="355" width="7" height="30"/>
+                                        <rect key="frame" x="490" y="394" width="7" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
                                         <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="iC1-uv-r8a">
-                                        <rect key="frame" x="268" y="150" width="220" height="30"/>
+                                        <rect key="frame" x="268" y="189" width="220" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
@@ -3269,12 +3270,12 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" id="EKY-ui-3Dd">
-                                        <rect key="frame" x="38" y="188" width="701" height="1"/>
+                                        <rect key="frame" x="38" y="227" width="701" height="1"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.85490196080000003" green="0.19215686269999999" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="hPv-sx-1L3">
-                                        <rect key="frame" x="705" y="199" width="34" height="34"/>
+                                        <rect key="frame" x="705" y="238" width="34" height="34"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="14"/>
                                         <state key="normal" backgroundImage="prospect_100_2.png">
@@ -3296,13 +3297,29 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="16" id="oTO-s8-vO6">
-                                        <rect key="frame" x="669" y="238" width="30" height="31"/>
+                                        <rect key="frame" x="669" y="277" width="30" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="STx-Gd-PMj">
+                                        <rect key="frame" x="648" y="74" width="51" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="tintColor" red="0.94901960780000005" green="0.4431372549" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="onTintColor" red="0.85490196080000003" green="0.19215686269999999" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="InternalStaffFunc:" destination="gBu-Hz-A8j" eventType="valueChanged" id="ajo-Rv-AjS"/>
+                                        </connections>
+                                    </switch>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Karyawan BCA" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="EOG-2z-Rb1">
+                                        <rect key="frame" x="267" y="75" width="133" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
+                                        <color key="textColor" red="0.81176470590000005" green="0.098039215690000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                             </scrollView>
                         </subviews>
@@ -3329,6 +3346,7 @@
                         <outlet property="scrollLA" destination="9q7-6a-XHh" id="Toc-Xq-vYl"/>
                         <outlet property="sexSegment" destination="afS-7k-o9O" id="iVL-lH-Qhb"/>
                         <outlet property="statusLabel" destination="T0u-fO-x6M" id="6gq-bq-bdY"/>
+                        <outlet property="switchInternalStaff" destination="STx-Gd-PMj" id="n04-1t-Hem"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UyB-Z1-pnj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -5470,14 +5488,14 @@
                                 <rect key="frame" x="20" y="84" width="560" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nama Pemegang Polis / Nomor KTP / Date &amp; Time" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WtX-z7-oq1">
                                 <rect key="frame" x="20" y="370" width="560" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>

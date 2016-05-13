@@ -24,8 +24,9 @@
     
 
 }
-
+-(void)loadData:(NSNumber*)numberIsInternalStaff;
 @property (nonatomic, strong) NSMutableArray *IDTypes, *IDCodes;
+
 @property (nonatomic, weak) id<RelationshipPopoverViewControllerDelegate> delegate;
 
 @property(nonatomic, assign) int rowToUpdate;

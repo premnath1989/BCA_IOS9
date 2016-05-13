@@ -455,13 +455,14 @@ BOOL isFirstLoad;
                 [self.BasicController setRelWithLA:[dictionaryPOForInsert valueForKey:@"RelWithLA"]];
                 NSString *PlanType = [dictionaryPOForInsert valueForKey:@"ProductName"];
                 
-                if([PlanType isEqualToString:@"BCA Life Heritage Protection"])
+                //if([PlanType isEqualToString:@"BCA Life Heritage Protection"])
+                if([PlanType isEqualToString:@"BCA Life Keluargaku"])
                 {
-                    [self.BasicController KeluargakuDisable];
+                    [self.BasicController KeluargakuEnable];
                 }
                 else
                 {
-                    [self.BasicController KeluargakuEnable];
+                    [self.BasicController KeluargakuDisable];
                 }
 
             }
@@ -477,13 +478,14 @@ BOOL isFirstLoad;
                 [self.BasicController setRelWithLA:[dictionaryPOForInsert valueForKey:@"RelWithLA"]];
                 NSString *PlanType = [dictionaryPOForInsert valueForKey:@"ProductName"];
                 
-                if([PlanType isEqualToString:@"BCA Life Heritage Protection"])
+                //if([PlanType isEqualToString:@"BCA Life Heritage Protection"])
+                if([PlanType isEqualToString:@"BCA Life Keluargaku"])
                 {
-                    [self.BasicController KeluargakuDisable];
+                    [self.BasicController KeluargakuEnable];
                 }
                 else
                 {
-                    [self.BasicController KeluargakuEnable];
+                    [self.BasicController KeluargakuDisable];
                 }
 
             }
@@ -539,13 +541,14 @@ BOOL isFirstLoad;
                 
                 NSString *PlanType = [dictionaryPOForInsert valueForKey:@"ProductName"];
                 
-                if([PlanType isEqualToString:@"BCA Life Heritage Protection"])
+                //if([PlanType isEqualToString:@"BCA Life Heritage Protection"])
+                if([PlanType isEqualToString:@"BCA Life Keluargaku"])
                 {
-                    [self.BasicController KeluargakuDisable];
+                    [self.BasicController KeluargakuEnable];
                 }
                 else
                 {
-                    [self.BasicController KeluargakuEnable];
+                    [self.BasicController KeluargakuDisable];
                 }
 
             }
@@ -561,13 +564,14 @@ BOOL isFirstLoad;
                 [self.BasicController setRelWithLA:[dictPO valueForKey:@"RelWithLA"]];
                 NSString *PlanType = [dictionaryPOForInsert valueForKey:@"ProductName"];
                 
-                if([PlanType isEqualToString:@"BCA Life Heritage Protection"])
+                //if([PlanType isEqualToString:@"BCA Life Heritage Protection"])
+                if([PlanType isEqualToString:@"BCA Life Keluargaku"])
                 {
-                    [self.BasicController KeluargakuDisable];
+                    [self.BasicController KeluargakuEnable];
                 }
                 else
                 {
-                    [self.BasicController KeluargakuEnable];
+                    [self.BasicController KeluargakuDisable];
                 }
 
             }
@@ -3310,22 +3314,8 @@ BOOL isFirstLoad;
 
     NSString *PlanType = [dictionaryPOForInsert valueForKey:@"ProductName"];
     
-    if([PlanType isEqualToString:@"BCA Life Heritage Protection"])
+    if([PlanType isEqualToString:@"BCA Life Keluargaku"])
     {
-        if (!_PremiumController) {
-            _PremiumController = [self.storyboard instantiateViewControllerWithIdentifier:@"premiumView"];
-            _PremiumController.delegate = self;
-            _PremiumController.requestSINo = [dictionaryPOForInsert valueForKey:@"SINO"];
-            [self.RightView addSubview:_PremiumController.view];
-        }
-        [_PremiumController setPremiumDictionary:newDictionaryForBasicPlan];
-        [_PremiumController loadDataFromDB];
-        [_PremiumController.view removeFromSuperview];
-        _PremiumController.requestSINo = [dictionaryPOForInsert valueForKey:@"SINO"];
-        [self.RightView addSubview:_PremiumController.view];
-        [self.RightView bringSubviewToFront:_PremiumController.view];
-    }
-    else{
         if(![self.RiderController.view isDescendantOfView:self.RightView]) {
             [_RiderController setPODictionaryFromRoot:dictionaryPOForInsert];
             [_RiderController setDictionaryForBasicPlan:newDictionaryForBasicPlan];
@@ -3342,6 +3332,20 @@ BOOL isFirstLoad;
             [self.RightView bringSubviewToFront:self.RiderController.view];
         }
         [_RiderController calculateRiderPremi];
+    }
+    else{
+        if (!_PremiumController) {
+            _PremiumController = [self.storyboard instantiateViewControllerWithIdentifier:@"premiumView"];
+            _PremiumController.delegate = self;
+            _PremiumController.requestSINo = [dictionaryPOForInsert valueForKey:@"SINO"];
+            [self.RightView addSubview:_PremiumController.view];
+        }
+        [_PremiumController setPremiumDictionary:newDictionaryForBasicPlan];
+        [_PremiumController loadDataFromDB];
+        [_PremiumController.view removeFromSuperview];
+        _PremiumController.requestSINo = [dictionaryPOForInsert valueForKey:@"SINO"];
+        [self.RightView addSubview:_PremiumController.view];
+        [self.RightView bringSubviewToFront:_PremiumController.view];
     }
     
     

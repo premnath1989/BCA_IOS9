@@ -180,6 +180,15 @@
     return [self calculateExtraPremiPercentTahunan] + [self calculateExtraPremiNumberTahunan] + [self getPremiDasarTahunan];
 }
 
+-(double)getPremiDasarSekaligus{
+    double PaymentMode=1;
+    double RatesInt = [[self getRatesIntPremiDasar] doubleValue];
+    double test = PaymentMode * RatesInt;
+    long long BasisSumAssured = [[dictionaryPremium valueForKey:@"Number_Sum_Assured"] longLongValue];
+    double test2 = (test * BasisSumAssured)/1000;
+    return test2;
+}
+
 -(double)getPremiDasarBulanan{
     double PaymentMode=0.1;
     double RatesInt = [[self getRatesIntPremiDasar] doubleValue];
@@ -198,15 +207,26 @@
     return test2;
 }
 
--(double)getPremiDasarSekaligus{
-    double PaymentMode=1;
-    double RatesInt = [[self getRatesIntPremiDasar] doubleValue];
-    double test = PaymentMode * RatesInt;
-    long long BasisSumAssured = [[dictionaryPremium valueForKey:@"Number_Sum_Assured"] longLongValue];
-    double test2 = (test * BasisSumAssured)/1000;
-    return test2;
+-(double)getDiskonSekaligus{
+    double discountPercent=8/100;
+    double premiDasar = [self getPremiDasarSekaligus];
+    double discount = discountPercent * premiDasar;
+    return discount;
 }
 
+-(double)getDiskonBulanan{
+    double discountPercent=8/100;
+    double premiDasar = [self getPremiDasarBulanan];
+    double discount = discountPercent * premiDasar;
+    return discount;
+}
+
+-(double)getDiskonTahunan{
+    double discountPercent=8/100;
+    double premiDasar = [self getPremiDasarTahunan];
+    double discount = discountPercent * premiDasar;
+    return discount;
+}
 
 -(double)calculateExtraPremiPercentSekaligus{
     double PaymentMode=1;
