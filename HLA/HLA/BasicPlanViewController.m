@@ -2253,6 +2253,21 @@ bool WPTPD30RisDeleted = FALSE;
 
 -(NSMutableDictionary *)setDataBasicPlan{
     @try {
+        NSString *discountText;
+        NSString *purchaseNumberText;
+        if (!_KKLKDiskaunBtn.text){
+            discountText=@"";
+        }
+        else{
+            discountText=_KKLKDiskaunBtn.text;
+        }
+        
+        if (!_KKLKPembelianKeBtn.titleLabel.text){
+            purchaseNumberText=@"";
+        }
+        else{
+            purchaseNumberText=_KKLKPembelianKeBtn.titleLabel.text;
+        }
         
         NSMutableDictionary *dictionaryBasicPlan=[[NSMutableDictionary alloc]initWithObjectsAndKeys:
                                                   yearlyIncomeField.text,@"Sum_Assured",
@@ -2266,8 +2281,8 @@ bool WPTPD30RisDeleted = FALSE;
                                                   _extraBasicPremiField.text,@"ExtraPremiumPolicy",
                                                   _totalPremiWithLoadingField.text,@"TotalPremiumLoading",
                                                   @"0",@"SubTotalPremium",
-                                                  _KKLKPembelianKeBtn.titleLabel.text,@"PurchaseNumber",
-                                                  _KKLKDiskaunBtn.text,@"Discount",nil];
+                                                  discountText,@"Discount",
+                                                  purchaseNumberText,@"PurchaseNumber",nil];
         return dictionaryBasicPlan;
         
     }

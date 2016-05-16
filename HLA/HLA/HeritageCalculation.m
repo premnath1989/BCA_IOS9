@@ -208,21 +208,21 @@
 }
 
 -(double)getDiskonSekaligus{
-    double discountPercent=8/100;
+    double discountPercent=0.08;
     double premiDasar = [self getPremiDasarSekaligus];
     double discount = discountPercent * premiDasar;
     return discount;
 }
 
 -(double)getDiskonBulanan{
-    double discountPercent=8/100;
+    double discountPercent=0.08;
     double premiDasar = [self getPremiDasarBulanan];
     double discount = discountPercent * premiDasar;
     return discount;
 }
 
 -(double)getDiskonTahunan{
-    double discountPercent=8/100;
+    double discountPercent=0.08;
     double premiDasar = [self getPremiDasarTahunan];
     double discount = discountPercent * premiDasar;
     return discount;
