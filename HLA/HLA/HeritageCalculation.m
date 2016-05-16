@@ -92,21 +92,21 @@
     return RatesPremiumRate;
 }
 
--(NSString *)getRatesIntPremiDasar{
+-(NSString *)getRatesIntPremiDasar:(NSString *)premType{
     NSString*AnsuransiDasarQuery;
     
     NSArray *paths2 = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docsPath2 = [paths2 objectAtIndex:0];
     NSString *path2 = [docsPath2 stringByAppendingPathComponent:@"BCA_Rates.sqlite"];
     
-    NSString* premType;
+    /*NSString* premType;
     
-    if ([PremiType isEqualToString:@"Premi 5 Tahun"]){
+    if ([premType isEqualToString:@"Premi 5 Tahun"]){
         premType = @"R";
     }
     else{
         premType = @"S";
-    }
+    }*/
     
     
     
@@ -168,6 +168,14 @@
     return [self calculateExtraPremiPercentTahunan] + [self calculateExtraPremiNumberTahunan];
 }
 
+-(double)totalPremiDiscount:(double)discount BasicPremi:(double)basicPremi{
+    return basicPremi-discount;
+}
+
+-(double)totalPremiAll:(double)basicPremi ExtraPremi:(double)extraPremi{
+    return basicPremi+extraPremi;
+}
+
 -(double)totalPremiSekaligus{
     return [self calculateExtraPremiPercentSekaligus] + [self calculateExtraPremiNumberSekaligus] + [self getPremiDasarSekaligus];
 }
@@ -182,7 +190,7 @@
 
 -(double)getPremiDasarSekaligus{
     double PaymentMode=1;
-    double RatesInt = [[self getRatesIntPremiDasar] doubleValue];
+    double RatesInt = [[self getRatesIntPremiDasar:@"S"] doubleValue];
     double test = PaymentMode * RatesInt;
     long long BasisSumAssured = [[dictionaryPremium valueForKey:@"Number_Sum_Assured"] longLongValue];
     double test2 = (test * BasisSumAssured)/1000;
@@ -191,7 +199,7 @@
 
 -(double)getPremiDasarBulanan{
     double PaymentMode=0.1;
-    double RatesInt = [[self getRatesIntPremiDasar] doubleValue];
+    double RatesInt = [[self getRatesIntPremiDasar:@"R"] doubleValue];
     double test = PaymentMode * RatesInt;
     long long BasisSumAssured = [[dictionaryPremium valueForKey:@"Number_Sum_Assured"] longLongValue];
     double test2 = (test * BasisSumAssured)/1000;
@@ -200,7 +208,7 @@
 
 -(double)getPremiDasarTahunan{
     double PaymentMode=1;
-    double RatesInt = [[self getRatesIntPremiDasar] doubleValue];
+    double RatesInt = [[self getRatesIntPremiDasar:@"R"] doubleValue];
     double test = PaymentMode * RatesInt;
     long long BasisSumAssured = [[dictionaryPremium valueForKey:@"Number_Sum_Assured"] longLongValue];
     double test2 = (test * BasisSumAssured)/1000;

@@ -3289,6 +3289,7 @@ BOOL isFirstLoad;
         [newDictionaryForBasicPlan setObject:[dictPOData valueForKey:@"LA_Gender"] forKey:@"LA_Gender"];
         [newDictionaryForBasicPlan setObject:[dictPOData valueForKey:@"RelWithLA"] forKey:@"RelWithLA"];
         [newDictionaryForBasicPlan setObject:[dictPOData valueForKey:@"LA_Age"] forKey:@"LA_Age"];
+        [newDictionaryForBasicPlan setObject:[dictPOData valueForKey:@"IsInternalStaff"] forKey:@"IsInternalStaff"];
         if ([_modelSIPremium getPremiumCount:[self.requestSINo description]]>0){
             [_modelSIPremium updatePremium:newDictionaryForBasicPlan];
         }
@@ -3309,6 +3310,7 @@ BOOL isFirstLoad;
         [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"RelWithLA"] forKey:@"RelWithLA"];
         [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"LA_Age"] forKey:@"LA_Age"];
         [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"SINO"] forKey:@"SINO"];
+        [newDictionaryForBasicPlan setObject:[dictPOData valueForKey:@"IsInternalStaff"] forKey:@"IsInternalStaff"];
         [_modelSIPremium savePremium:newDictionaryForBasicPlan];
     }
 

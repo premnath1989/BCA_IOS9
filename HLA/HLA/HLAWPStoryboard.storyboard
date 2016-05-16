@@ -126,6 +126,12 @@
             <string>BPreplay</string>
             <string>BPreplay</string>
             <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
         </mutableArray>
         <mutableArray key="BPreplayItalics.otf">
             <string>BPreplay-Italic</string>
@@ -3430,8 +3436,8 @@
                                         <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                     </textField>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Total Premi With Loading (A+B)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="17" adjustsFontSizeToFit="NO" id="8QA-l7-pT1">
-                                        <rect key="frame" x="38" y="474" width="234" height="30"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Total Premi (A-B)+C" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="17" adjustsFontSizeToFit="NO" id="8QA-l7-pT1">
+                                        <rect key="frame" x="282" y="474" width="234" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
                                         <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -3476,8 +3482,8 @@
                                             <action selector="incomeSegmentPressed:" destination="Bg9-Wf-jjW" eventType="valueChanged" id="8IM-pv-ltR"/>
                                         </connections>
                                     </segmentedControl>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Extra Premi Dasar (B)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="17" adjustsFontSizeToFit="NO" id="p76-Ow-DbN">
-                                        <rect key="frame" x="38" y="422" width="234" height="30"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Extra Premi Dasar (C)" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="17" adjustsFontSizeToFit="NO" id="p76-Ow-DbN">
+                                        <rect key="frame" x="282" y="422" width="234" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
                                         <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -3558,13 +3564,6 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                     </view>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Premi Dasar (A)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="17" adjustsFontSizeToFit="NO" id="E47-z2-5PL">
-                                        <rect key="frame" x="38" y="230" width="234" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
-                                        <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="CV4-Cq-YRz">
                                         <rect key="frame" x="401" y="475" width="266" height="29"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -3610,7 +3609,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Language :" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ls2-gi-T4v">
-                                        <rect key="frame" x="38" y="473" width="85" height="31"/>
+                                        <rect key="frame" x="264" y="473" width="85" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -3716,7 +3715,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="16" id="Csr-9E-LP8">
-                                        <rect key="frame" x="277" y="230" width="236" height="30"/>
+                                        <rect key="frame" x="277" y="192" width="236" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="textColor" red="0.34509803919999998" green="0.34901960780000002" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -3726,7 +3725,7 @@
                                             <outlet property="delegate" destination="Bg9-Wf-jjW" id="d8d-re-z4T"/>
                                         </connections>
                                     </textField>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Diskon" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="17" adjustsFontSizeToFit="NO" id="kAj-9z-Kxh">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Premi Dasar (A)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="17" adjustsFontSizeToFit="NO" id="kAj-9z-Kxh">
                                         <rect key="frame" x="38" y="192" width="234" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
@@ -3734,7 +3733,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="16" id="39Y-Nb-YAu">
-                                        <rect key="frame" x="277" y="192" width="236" height="30"/>
+                                        <rect key="frame" x="277" y="230" width="236" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="textColor" red="0.34509803919999998" green="0.34901960780000002" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -3767,7 +3766,7 @@
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="16" id="eiw-Lr-JdY">
-                                        <rect key="frame" x="277" y="422" width="236" height="30"/>
+                                        <rect key="frame" x="521" y="422" width="236" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="textColor" red="0.34509803919999998" green="0.34901960780000002" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -3778,7 +3777,7 @@
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="16" id="3Iu-gr-FML">
-                                        <rect key="frame" x="277" y="474" width="236" height="30"/>
+                                        <rect key="frame" x="521" y="474" width="236" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="textColor" red="0.34509803919999998" green="0.34901960780000002" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -3902,12 +3901,12 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" id="2EW-lS-umz">
-                                        <rect key="frame" x="38" y="274" width="701" height="1"/>
+                                        <rect key="frame" x="38" y="274" width="725" height="1"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.85490196080000003" green="0.19215686269999999" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                     <view contentMode="scaleToFill" id="AaC-Hh-dek">
-                                        <rect key="frame" x="38" y="460" width="701" height="1"/>
+                                        <rect key="frame" x="38" y="460" width="725" height="1"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.85490196080000003" green="0.19215686269999999" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
@@ -3932,6 +3931,31 @@
                                         <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="16" id="3pS-GG-OQ0">
+                                        <rect key="frame" x="521" y="230" width="236" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.34509803919999998" green="0.34901960780000002" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="Bg9-Wf-jjW" id="zra-CA-UGa"/>
+                                        </connections>
+                                    </textField>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Premi Dasar (A) - Diskon (B)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="17" adjustsFontSizeToFit="NO" id="jOd-To-hnH">
+                                        <rect key="frame" x="521" y="192" width="236" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
+                                        <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Diskon (B)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="17" adjustsFontSizeToFit="NO" id="E47-z2-5PL">
+                                        <rect key="frame" x="38" y="230" width="234" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
+                                        <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                             </scrollView>
                         </subviews>
@@ -3945,7 +3969,7 @@
                         <outlet property="HLField" destination="MP2-VJ-6Vx" id="5Yc-71-K50"/>
                         <outlet property="HLTermField" destination="dXx-JY-TjJ" id="cOH-9s-VqA"/>
                         <outlet property="KKLKDiskaunBtn" destination="39Y-Nb-YAu" id="fOW-3f-fca"/>
-                        <outlet property="KKLKDiskaunLbl" destination="kAj-9z-Kxh" id="lA4-JJ-enp"/>
+                        <outlet property="KKLKDiskaunLbl" destination="E47-z2-5PL" id="1sA-Uq-Umm"/>
                         <outlet property="KKLKExtraPremiDasarLBL" destination="R2E-3o-LqR" id="Dm7-ln-leN"/>
                         <outlet property="KKLKMasaPembayaran" destination="1GV-Zv-eH8" id="ra6-rs-Zo2"/>
                         <outlet property="KKLKPembelianKeBtn" destination="kap-z4-Yjk" id="2uf-90-tz9"/>
@@ -3955,6 +3979,7 @@
                         <outlet property="S100MOPSegment" destination="NfY-zv-Rhe" id="g6a-Ms-HLJ"/>
                         <outlet property="advanceIncomeSegment" destination="e0n-58-WxS" id="E4u-O3-D9g"/>
                         <outlet property="basicPremiField" destination="Csr-9E-LP8" id="ZQY-8o-C7O"/>
+                        <outlet property="basicPremiFieldAfterDiscount" destination="3pS-GG-OQ0" id="S5B-BG-ack"/>
                         <outlet property="btnPlan" destination="CV4-Cq-YRz" id="1h9-Fr-s8z"/>
                         <outlet property="cashDivSgmntCP" destination="xc4-Pu-xmY" id="afY-bI-XbS"/>
                         <outlet property="cashDividendSegment" destination="of1-D3-p5Q" id="iWr-zf-rfE"/>
@@ -4914,6 +4939,50 @@
                                         </subviews>
                                         <color key="backgroundColor" red="0.85490196080000003" green="0.19215686269999999" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
+                                    <view contentMode="scaleToFill" id="fgc-tp-UmE">
+                                        <rect key="frame" x="33" y="226" width="701" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Diskon" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="m1F-9D-mEU">
+                                                <rect key="frame" x="5" y="5" width="145" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
+                                                <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" id="fCa-bY-8Or">
+                                                <rect key="frame" x="0.0" y="30" width="701" height="1"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.85490196080000003" green="0.19215686269999999" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99,000,000.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hki-VQ-F4O">
+                                                <rect key="frame" x="395" y="5" width="145" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
+                                                <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99,000,000.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9DP-8n-44G">
+                                                <rect key="frame" x="548" y="5" width="145" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
+                                                <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99,000,000.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="maq-vs-zIT">
+                                                <rect key="frame" x="242" y="5" width="145" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
+                                                <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -4929,6 +4998,9 @@
                         <outlet property="lblAsuransiDasarBulanan" destination="HPR-2b-fKI" id="Iiu-HX-MPb"/>
                         <outlet property="lblAsuransiDasarSekaligus" destination="s6N-51-t9L" id="WgY-1g-WDo"/>
                         <outlet property="lblAsuransiDasarTahunan" destination="8Fg-NW-4Nh" id="klf-SZ-cbE"/>
+                        <outlet property="lblDiskonBulanan" destination="hki-VQ-F4O" id="9OE-UK-RI0"/>
+                        <outlet property="lblDiskonSekaligus" destination="9DP-8n-44G" id="UEy-Ub-9MJ"/>
+                        <outlet property="lblDiskonTahunan" destination="maq-vs-zIT" id="bCt-6G-R7b"/>
                         <outlet property="lblExtraPremiNumberBulanan" destination="zov-F7-MX8" id="aS2-8Q-zAI"/>
                         <outlet property="lblExtraPremiNumberSekaligus" destination="haF-Xq-R4t" id="3Ky-V2-8dl"/>
                         <outlet property="lblExtraPremiNumberTahunan" destination="Ulv-FD-Jlw" id="zKW-Kg-uCg"/>

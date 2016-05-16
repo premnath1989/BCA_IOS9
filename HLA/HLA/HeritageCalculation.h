@@ -53,12 +53,13 @@
 
 -(void)setPremiumDictionary:(NSMutableDictionary *)premiumDictionary;
 -(NSString *)getRatesInt;
--(NSString *)getRatesIntPremiDasar;
+-(NSString *)getRatesIntPremiDasar:(NSString *)premType;
 
 -(double)extraPremiBulanan;
 -(double)extraPremiTahunan;
 -(double)extraPremiSekaligus;
-
+-(double)totalPremiDiscount:(double)discount BasicPremi:(double)basicPremi;
+-(double)totalPremiAll:(double)basicPremi ExtraPremi:(double)extraPremi;
 -(double)totalPremiBulanan;
 -(double)totalPremiTahunan;
 -(double)totalPremiSekaligus;
