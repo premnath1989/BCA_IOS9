@@ -15,6 +15,7 @@
 #import "ChangePassword.h"
 #import "WebServiceUtilities.h"
 #import "SpinnerUtilities.h"
+#import "AppDisclaimer.h"
 
 @protocol LoginDelegate
 - (void)Dismiss: (NSString *)ViewToBePresented;
@@ -39,7 +40,7 @@ static NSString* APP_TYPE_HLA_FAST = @"HLA_FAST";
 static NSString* DATE_FORMAT = @"yyyy-MM-dd";
 
 
-@interface Login : UIViewController<NSXMLParserDelegate, UITextFieldDelegate, AgentWSSoapBindingResponseDelegate,UIAlertViewDelegate>
+@interface Login : UIViewController<NSXMLParserDelegate, UITextFieldDelegate, AgentWSSoapBindingResponseDelegate,UIAlertViewDelegate, AppDisclaimerDelegate>
 {
     IBOutlet UILabel *labelUDID;
     

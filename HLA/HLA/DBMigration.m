@@ -26,11 +26,11 @@
 @implementation DBMigration
 
 #pragma mark - Updating functions
--(void)updateDatabase
+-(void)updateDatabase:(NSString*)dbName
 {
-    tempDir = [NSTemporaryDirectory() stringByAppendingPathComponent:@"hladb.sqlite"];
+    tempDir = [NSTemporaryDirectory() stringByAppendingPathComponent:dbName];
     dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    defaultDBPath = [[dirPaths objectAtIndex:0] stringByAppendingPathComponent:@"hladb.sqlite"];
+    defaultDBPath = [[dirPaths objectAtIndex:0] stringByAppendingPathComponent:dbName];
     
     // compare database version with the version saved in the plist
     NSString *dbVersion = [NSString stringWithFormat:
@@ -124,6 +124,31 @@
         [[NSUserDefaults standardUserDefaults] setObject:bundleDBVersion forKey:@"dbVersion"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
+    }
+}
+
+-(void)hardUpdateDatabase:(NSString*)dbName
+{
+    tempDir = [NSTemporaryDirectory() stringByAppendingPathComponent:dbName];
+    dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    defaultDBPath = [[dirPaths objectAtIndex:0] stringByAppendingPathComponent:dbName];
+    
+    // compare database version with the version saved in the plist
+    NSString *dbVersion = [NSString stringWithFormat:
+                           @"%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"dbVersion"]];
+    NSLog(@"dbversion New: %@",dbVersion);
+    NSString *bundleDBVersion = @"0.0";
+    sqlite3 *database;
+    if (sqlite3_open([defaultDBPath UTF8String], &database) == SQLITE_OK) {
+        bundleDBVersion = [self getDBVersionNumber:database];
+    }
+    sqlite3_close(database);
+    
+    if ([bundleDBVersion compare:dbVersion] == NSOrderedAscending) {
+        
+        [self moveDBFromDefault:defaultDBPath ToTemp:tempDir];
+        loginDB = [[LoginDBManagement alloc]init];
+        [loginDB makeDBCopy];
     }
 }
 

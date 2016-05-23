@@ -29,6 +29,7 @@
     NSString *tempDir;
 }
 
--(void)updateDatabase;
+-(void)updateDatabase:(NSString*)dbName;
+-(void)hardUpdateDatabase:(NSString*)dbName;
 
 @end
