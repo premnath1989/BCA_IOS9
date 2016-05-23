@@ -70,9 +70,8 @@
     return Rate;
 }
 
--(double)getWaiverRate:(NSString *)Gender EntryAge:(int)entryAge PersonType:(NSString *)personType{
+-(CGFloat)getWaiverRate:(NSString *)Gender EntryAge:(int)entryAge PersonType:(NSString *)personType{
     double Rate;
-    
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *path = [docsDir stringByAppendingPathComponent: @"BCA_Rates.sqlite"];
     
@@ -82,7 +81,26 @@
     FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"SELECT \"%@\" FROM KLK_Waiver Where EntryAge = %i AND PersonType = \"%@\"",Gender,entryAge,personType]];
 
     while ([s next]) {
-        Rate = [s doubleForColumn:Gender];
+        Rate = [[s stringForColumn:Gender] floatValue];
+    }
+   
+    [results close];
+    [database close];
+    return Rate;
+}
+
+-(NSString *)getWaiverRateAsString:(NSString *)Gender EntryAge:(int)entryAge PersonType:(NSString *)personType{
+    NSString* Rate;
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"BCA_Rates.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"SELECT \"%@\" FROM KLK_Waiver Where EntryAge = %i AND PersonType = \"%@\"",Gender,entryAge,personType]];
+    
+    while ([s next]) {
+        Rate = [s stringForColumn:Gender];
     }
     
     [results close];

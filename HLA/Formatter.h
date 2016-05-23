@@ -18,4 +18,5 @@
 -(NSString *)roundTwoDigit:(double)originalNumber;
 -(NSNumber *)convertAnyNonDecimalNumberToString:(NSString *)stringNumber;
 -(NSNumberFormatter *)formatterForCurrencyText;
+-(int)decimalDigitFromString:(NSString *)decimalString DecimalSeparator:(NSString *)decimalSeparator;
 @end

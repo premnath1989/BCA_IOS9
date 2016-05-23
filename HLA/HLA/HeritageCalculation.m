@@ -26,20 +26,20 @@
     ExtraPercentagePremi = [dictionaryPremium valueForKey:@"ExtraPremiumPercentage"];
 }
 
--(NSString *)getRatesInt{
+-(NSString *)getRatesInt:(NSString *)premType{
     NSString*AnsuransiDasarQuery;
     NSArray *paths2 = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docsPath2 = [paths2 objectAtIndex:0];
     NSString *path2 = [docsPath2 stringByAppendingPathComponent:@"BCA_Rates.sqlite"];
     
-    NSString* premType;
+    /*NSString* premType;
     
     if ([PremiType isEqualToString:@"Premi 5 Tahun"]){
         premType = @"R";
     }
     else{
         premType = @"S";
-    }
+    }*/
     
     FMDatabase *database = [FMDatabase databaseWithPath:path2];
     [database open];
@@ -92,21 +92,21 @@
     return RatesPremiumRate;
 }
 
--(NSString *)getRatesIntPremiDasar{
+-(NSString *)getRatesIntPremiDasar:(NSString *)premType{
     NSString*AnsuransiDasarQuery;
     
     NSArray *paths2 = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docsPath2 = [paths2 objectAtIndex:0];
     NSString *path2 = [docsPath2 stringByAppendingPathComponent:@"BCA_Rates.sqlite"];
     
-    NSString* premType;
+    /*NSString* premType;
     
-    if ([PremiType isEqualToString:@"Premi 5 Tahun"]){
+    if ([premType isEqualToString:@"Premi 5 Tahun"]){
         premType = @"R";
     }
     else{
         premType = @"S";
-    }
+    }*/
     
     
     
@@ -168,6 +168,14 @@
     return [self calculateExtraPremiPercentTahunan] + [self calculateExtraPremiNumberTahunan];
 }
 
+-(double)totalPremiDiscount:(double)discount BasicPremi:(double)basicPremi{
+    return basicPremi-discount;
+}
+
+-(double)totalPremiAll:(double)basicPremi ExtraPremi:(double)extraPremi{
+    return basicPremi+extraPremi;
+}
+
 -(double)totalPremiSekaligus{
     return [self calculateExtraPremiPercentSekaligus] + [self calculateExtraPremiNumberSekaligus] + [self getPremiDasarSekaligus];
 }
@@ -182,7 +190,7 @@
 
 -(double)getPremiDasarSekaligus{
     double PaymentMode=1;
-    double RatesInt = [[self getRatesIntPremiDasar] doubleValue];
+    double RatesInt = [[self getRatesIntPremiDasar:@"S"] doubleValue];
     double test = PaymentMode * RatesInt;
     long long BasisSumAssured = [[dictionaryPremium valueForKey:@"Number_Sum_Assured"] longLongValue];
     double test2 = (test * BasisSumAssured)/1000;
@@ -191,7 +199,7 @@
 
 -(double)getPremiDasarBulanan{
     double PaymentMode=0.1;
-    double RatesInt = [[self getRatesIntPremiDasar] doubleValue];
+    double RatesInt = [[self getRatesIntPremiDasar:@"R"] doubleValue];
     double test = PaymentMode * RatesInt;
     long long BasisSumAssured = [[dictionaryPremium valueForKey:@"Number_Sum_Assured"] longLongValue];
     double test2 = (test * BasisSumAssured)/1000;
@@ -200,7 +208,7 @@
 
 -(double)getPremiDasarTahunan{
     double PaymentMode=1;
-    double RatesInt = [[self getRatesIntPremiDasar] doubleValue];
+    double RatesInt = [[self getRatesIntPremiDasar:@"R"] doubleValue];
     double test = PaymentMode * RatesInt;
     long long BasisSumAssured = [[dictionaryPremium valueForKey:@"Number_Sum_Assured"] longLongValue];
     double test2 = (test * BasisSumAssured)/1000;
@@ -208,21 +216,21 @@
 }
 
 -(double)getDiskonSekaligus{
-    double discountPercent=8/100;
+    double discountPercent=0.08;
     double premiDasar = [self getPremiDasarSekaligus];
     double discount = discountPercent * premiDasar;
     return discount;
 }
 
 -(double)getDiskonBulanan{
-    double discountPercent=8/100;
+    double discountPercent=0.08;
     double premiDasar = [self getPremiDasarBulanan];
     double discount = discountPercent * premiDasar;
     return discount;
 }
 
 -(double)getDiskonTahunan{
-    double discountPercent=8/100;
+    double discountPercent=0.08;
     double premiDasar = [self getPremiDasarTahunan];
     double discount = discountPercent * premiDasar;
     return discount;
@@ -230,7 +238,7 @@
 
 -(double)calculateExtraPremiPercentSekaligus{
     double PaymentMode=1;
-    double RatesInt0 = [[self getRatesInt] doubleValue];
+    double RatesInt0 = [[self getRatesInt:@"S"] doubleValue];
     double percent = [[dictionaryPremium valueForKey:@"ExtraPremiumPercentage"] doubleValue] / 100;
     double RatesInt = percent * RatesInt0;
     double valueofTotal =(PaymentMode * RatesInt);
@@ -242,7 +250,7 @@
 
 -(double)calculateExtraPremiPercentTahunan{
     double PaymentMode=1;
-    double RatesInt0 = [[self getRatesInt] doubleValue];
+    double RatesInt0 = [[self getRatesInt:@"R"] doubleValue];
     double percent = [[dictionaryPremium valueForKey:@"ExtraPremiumPercentage"] doubleValue] / 100;
     double RatesInt = percent * RatesInt0;
     double valueofTotal =(PaymentMode * RatesInt);
@@ -255,7 +263,7 @@
 
 -(double)calculateExtraPremiPercentBulanan{
     double PaymentMode=0.1;
-    double RatesInt0 = [[self getRatesInt] doubleValue];
+    double RatesInt0 = [[self getRatesInt:@"R"] doubleValue];
     double percent = [[dictionaryPremium valueForKey:@"ExtraPremiumPercentage"] doubleValue] / 100;
     double RatesInt = percent * RatesInt0;
     double valueofTotal =(PaymentMode * RatesInt);

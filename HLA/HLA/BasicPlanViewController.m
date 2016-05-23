@@ -230,7 +230,7 @@ bool WPTPD30RisDeleted = FALSE;
     themeColour = [UIColor colorWithRed:218.0f/255.0f green:49.0f/255.0f blue:85.0f/255.0f alpha:1];
     
     
-    
+    [yearlyIncomeField addTarget:self action:@selector(RealTimeFormat:) forControlEvents:UIControlEventEditingChanged];
     [yearlyIncomeField addTarget:self action:@selector(AnnualIncomeChange:) forControlEvents:UIControlEventEditingDidEnd];
     [self setTextfieldBorder];
     
@@ -284,6 +284,7 @@ bool WPTPD30RisDeleted = FALSE;
     discountPembelian=0;
     PembelianKEString =@"0";
     PaymentDescMDKK = FRekeunsiPembayaranMode;
+    [_basicPremiFieldAfterDiscount setText:@"0"];
 }
 
 
@@ -371,18 +372,19 @@ bool WPTPD30RisDeleted = FALSE;
     NSLog(@"%@",PlanType);
     int IsInternalStaff =[[_dictionaryPOForInsert valueForKey:@"IsInternalStaff"] intValue];
     if (IsInternalStaff==0){
-        _KKLKDiskaunBtn.hidden = YES;
-        _KKLKDiskaunLbl.hidden = YES;
+        //_KKLKDiskaunBtn.hidden = YES;
+        //_KKLKDiskaunLbl.hidden = YES;
         [ExtraPremiDasarLBL setText:@"Min  Rp 1,000,000,000  Max Rp 300,000,000,000"];
     }
     else{
-        _KKLKDiskaunBtn.hidden = NO;
-        _KKLKDiskaunLbl.hidden = NO;
+        //_KKLKDiskaunBtn.hidden = NO;
+        //_KKLKDiskaunLbl.hidden = NO;
         [ExtraPremiDasarLBL setText:@"Min  Rp 500,000,000  Max Rp 300,000,000,000"];
     }
 //    if ([PlanType isEqualToString:@"BCA Life Heritage"])
 //    {
-    
+        _KKLKDiskaunBtn.hidden = NO;
+        _KKLKDiskaunLbl.hidden = NO;
         _KKLKExtraPremiDasarLBL.hidden = YES;
         _KKLKPembelianKeBtn.hidden = YES;
         _KKLKPembelianKeLbl.hidden = YES;
@@ -396,6 +398,7 @@ bool WPTPD30RisDeleted = FALSE;
     [self PremiDasarAct];
     [self PremiDasarActB];
     [self ExtraNumbPremi];
+    [self loadHeritageCalculation];
 }
 
 -(void)KeluargakuEnable
@@ -675,6 +678,7 @@ bool WPTPD30RisDeleted = FALSE;
         else
         {
              [self PremiDasarActB];
+            [self loadHeritageCalculation];
         }
 
            //_masaExtraPremiField.text =@"0";
@@ -696,6 +700,7 @@ bool WPTPD30RisDeleted = FALSE;
                 }
                 else{
                     [self PremiDasarActB];
+                    [self loadHeritageCalculation];
                 }
             }
             else{
@@ -708,6 +713,7 @@ bool WPTPD30RisDeleted = FALSE;
                 }
                 else{
                     [self PremiDasarActB];
+                    [self loadHeritageCalculation];
                 }
             }
         }
@@ -1208,7 +1214,8 @@ bool WPTPD30RisDeleted = FALSE;
  
     NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
     f.numberStyle = NSNumberFormatterDecimalStyle;
-    NSNumber *myNumber = [f numberFromString:yearlyIncomeField.text];
+    //NSNumber *myNumber = [f numberFromString:yearlyIncomeField.text];
+    NSNumber *myNumber = [classFormatter convertAnyNonDecimalNumberToString:yearlyIncomeField.text];
     
     BasisSumAssured = [myNumber longLongValue];
     
@@ -1999,10 +2006,12 @@ bool WPTPD30RisDeleted = FALSE;
         FRekeunsiPembayaranMode = [dictPremiData valueForKey:@"Payment_Frequency"];
         [_KKLKPembelianKeBtn setTitle:[dictPremiData valueForKey:@"PurchaseNumber"] forState:UIControlStateNormal];
         [_KKLKDiskaunBtn setText:[dictPremiData valueForKey:@"Discount"]];
+        [_basicPremiFieldAfterDiscount setText:[dictPremiData valueForKey:@"SubTotalPremium"]];
         
         NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
         f.numberStyle = NSNumberFormatterDecimalStyle;
-        NSNumber *myNumber = [f numberFromString:[dictPremiData valueForKey:@"Sum_Assured"]];
+        //NSNumber *myNumber = [f numberFromString:[dictPremiData valueForKey:@"Sum_Assured"]];
+        NSNumber *myNumber = [classFormatter convertAnyNonDecimalNumberToString:[dictPremiData valueForKey:@"Sum_Assured"]];
         
         BasisSumAssured = [myNumber longLongValue];
 
@@ -2253,10 +2262,26 @@ bool WPTPD30RisDeleted = FALSE;
 
 -(NSMutableDictionary *)setDataBasicPlan{
     @try {
+        NSString *discountText;
+        NSString *purchaseNumberText;
+        if (!_KKLKDiskaunBtn.text){
+            discountText=@"";
+        }
+        else{
+            discountText=_KKLKDiskaunBtn.text;
+        }
+        
+        if (!_KKLKPembelianKeBtn.titleLabel.text){
+            purchaseNumberText=@"";
+        }
+        else{
+            purchaseNumberText=_KKLKPembelianKeBtn.titleLabel.text;
+        }
         
         NSMutableDictionary *dictionaryBasicPlan=[[NSMutableDictionary alloc]initWithObjectsAndKeys:
                                                   yearlyIncomeField.text,@"Sum_Assured",
-                                                  [classFormatter convertNumberFromString:yearlyIncomeField.text],@"Number_Sum_Assured",
+                                                  //[classFormatter convertNumberFromString:yearlyIncomeField.text],@"Number_Sum_Assured",
+                                                  [classFormatter convertAnyNonDecimalNumberToString:yearlyIncomeField.text],@"Number_Sum_Assured",
                                                   _masaPembayaranButton.titleLabel.text,@"Payment_Term",
                                                   _frekuensiPembayaranButton.titleLabel.text,@"Payment_Frequency",
                                                   _basicPremiField.text,@"PremiumPolicyA",
@@ -2265,9 +2290,9 @@ bool WPTPD30RisDeleted = FALSE;
                                                   _masaExtraPremiField.text,@"ExtraPremiumTerm",
                                                   _extraBasicPremiField.text,@"ExtraPremiumPolicy",
                                                   _totalPremiWithLoadingField.text,@"TotalPremiumLoading",
-                                                  @"0",@"SubTotalPremium",
-                                                  _KKLKPembelianKeBtn.titleLabel.text,@"PurchaseNumber",
-                                                  _KKLKDiskaunBtn.text,@"Discount",nil];
+                                                  _basicPremiFieldAfterDiscount.text,@"SubTotalPremium",
+                                                  discountText,@"Discount",
+                                                  purchaseNumberText,@"PurchaseNumber",nil];
         return dictionaryBasicPlan;
         
     }
@@ -2320,6 +2345,11 @@ bool WPTPD30RisDeleted = FALSE;
 }
 
 
+-(void)RealTimeFormat:(UITextField *)sender{
+    NSNumber *plainNumber = [classFormatter convertAnyNonDecimalNumberToString:sender.text];
+    [sender setText:[classFormatter numberToCurrencyDecimalFormatted:plainNumber]];
+}
+
 -(void)AnnualIncomeChange:(id) sender
 {
     BasisSumAssured = [(yearlyIncomeField.text) longLongValue];
@@ -2331,11 +2361,42 @@ bool WPTPD30RisDeleted = FALSE;
     
     NSString *result;
     
-    NSNumberFormatter *formatter = [[NSNumberFormatter alloc]init];
+    /*NSNumberFormatter *formatter = [[NSNumberFormatter alloc]init];
     [formatter setMaximumFractionDigits:2];
     [formatter setUsesGroupingSeparator:YES];
     [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
     
+    double entryFieldFloat = [yearlyIncomeField.text doubleValue];
+    
+    if ([yearlyIncomeField.text rangeOfString:@""].length == 3) {
+        formatter.alwaysShowsDecimalSeparator = YES;
+        result =[formatter stringFromNumber:[NSNumber numberWithDouble:entryFieldFloat]];
+        result = [result stringByAppendingFormat:@"00"];
+        
+    } else  if ([yearlyIncomeField.text rangeOfString:@"."].length == 1) {
+        formatter.alwaysShowsDecimalSeparator = YES;
+        result =[formatter stringFromNumber:[NSNumber numberWithDouble:entryFieldFloat]];
+        
+    } else if ([yearlyIncomeField.text rangeOfString:@"."].length != 1) {
+        formatter.alwaysShowsDecimalSeparator = NO;
+        result =[formatter stringFromNumber:[NSNumber numberWithDouble:entryFieldFloat]];
+        result = [result stringByAppendingFormat:@""];
+        
+    }
+    
+    
+    if(yearlyIncomeField.text.length==0) {
+        yearlyIncomeField.text = @"";
+    } else {
+        yearlyIncomeField.text = result;
+    }*/
+    
+    /*NSNumberFormatter *formatter = [[NSNumberFormatter alloc]init];
+     [formatter setMaximumFractionDigits:2];
+     [formatter setUsesGroupingSeparator:YES];
+     [formatter setNumberStyle:NSNumberFormatterDecimalStyle];*/
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc]init];
+    formatter = [classFormatter formatterForCurrencyText];
     double entryFieldFloat = [yearlyIncomeField.text doubleValue];
     
     if ([yearlyIncomeField.text rangeOfString:@""].length == 3) {
@@ -2585,6 +2646,9 @@ bool WPTPD30RisDeleted = FALSE;
     } else if (alertView.tag==1011){
         btnPlan.titleLabel.text = @"";
         [self togglePlan];
+    }
+    else if (alertView.tag==2){
+        [self loadHeritageCalculation];
     }
 }
 
@@ -3056,9 +3120,11 @@ bool WPTPD30RisDeleted = FALSE;
     NSString *PremiDasar = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:premiDasar]];
     NSString *ExtraPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:extrapremi]];
     NSString *TotalPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:totalPremi]];
+    NSString *TotalPremiAfterDiscount = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:MDBKKPremi]];
     [_basicPremiField setText:PremiDasar];
     [_extraBasicPremiField setText:ExtraPremi];
     [_totalPremiWithLoadingField setText:TotalPremi];
+    [_basicPremiFieldAfterDiscount setText:TotalPremiAfterDiscount];
 }
 
 
@@ -5235,6 +5301,7 @@ bool WPTPD30RisDeleted = FALSE;
     [alert show];
 }
 
+
 - (bool)validationDataBasicPlan{
     bool valid=true;
     NSArray* validationSet=[[NSArray alloc]initWithObjects:@"",@"- SELECT -",@"- Select -",@"--Please Select--", nil];
@@ -5245,6 +5312,7 @@ bool WPTPD30RisDeleted = FALSE;
     NSString *validationFrekuensiPembayaran=@"Frekuensi Pembayaran harus diisi";
     NSString *validationMasaExtraPremi=@"Masa Extra Premi harus diisi";
     NSString *validationEmptyExtraPremi=@"Extra Premi harus diisi";
+    NSString *validationDiskonLebih=@"Diskon untuk produk ini tidak boleh lebih dari 0. Tekan tombol OK untuk melakukan penghitungan ulang";
     NSString *validationUanglebih;
     
     NSString *validationUanglebihkk=@"Uang Pertangungan Dasar Min:Rp30,000,000 Max:Rp1,500,000,000";
@@ -5259,12 +5327,14 @@ bool WPTPD30RisDeleted = FALSE;
     
     NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
     f.numberStyle = NSNumberFormatterDecimalStyle;
-    NSNumber *myNumber = [f numberFromString:uangPertanggunganDasar];
+    //NSNumber *myNumber = [f numberFromString:uangPertanggunganDasar];
+    NSNumber *myNumber = [classFormatter convertAnyNonDecimalNumberToString:uangPertanggunganDasar];
     
     long long sumAssured = [myNumber longLongValue];
     long long maxNumber = 300000000000;
     long long minNumber;
     int IsInternalStaff =[[_dictionaryPOForInsert valueForKey:@"IsInternalStaff"] intValue];
+    NSNumber* diskonPremi = [classFormatter convertAnyNonDecimalNumberToString:_KKLKDiskaunBtn.text];
     if (IsInternalStaff==0){
         minNumber= 1000000000;
         validationUanglebih=@"Uang Pertangungan Dasar Min:Rp1,000,000,000 Max:Rp300,000,000,000";
@@ -5374,6 +5444,13 @@ bool WPTPD30RisDeleted = FALSE;
             //[btnOccp setBackgroundColor:[UIColor redColor]];
             return false;
         }
+        else if (IsInternalStaff==0){
+            if ([diskonPremi longLongValue]>0){
+                [self createAlertViewAndShow:validationDiskonLebih tag:2];
+                return false;
+            }
+        }
+        
         else if ((![_extraPremiPercentField.text isEqualToString:@""] && ![_extraPremiPercentField.text isEqualToString:@"0"])&&![_extraPremiPercentField.text isEqualToString:@"25"]&&![_extraPremiPercentField.text isEqualToString:@"50"]&&![_extraPremiPercentField.text isEqualToString:@"75"]&&![_extraPremiPercentField.text isEqualToString:@"100"]&&![_extraPremiPercentField.text isEqualToString:@"125"]&&![_extraPremiPercentField.text isEqualToString:@"150"]&&![_extraPremiPercentField.text isEqualToString:@"175"]&&![_extraPremiPercentField.text isEqualToString:@"200"]&&![_extraPremiPercentField.text isEqualToString:@"225"]&&![_extraPremiPercentField.text isEqualToString:@"250"]&&![_extraPremiPercentField.text isEqualToString:@"275"]&&![_extraPremiPercentField.text isEqualToString:@"300"])
         {
             
@@ -5804,34 +5881,71 @@ bool WPTPD30RisDeleted = FALSE;
     NSString* extraBasicPremi;
     NSString* totalPremi;
     NSString* diskon;
+    NSString* totalPremiAfterDiscount;
+    int IsInternalStaff =[[_dictionaryPOForInsert valueForKey:@"IsInternalStaff"] intValue];
     if ([FRekeunsiPembayaranMode isEqualToString:@"Pembayaran Sekaligus"])
     {
         premiDasar = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getPremiDasarSekaligus]]];
         extraBasicPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation extraPremiSekaligus]]];
-        totalPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiSekaligus]]];
-        diskon = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getDiskonSekaligus]]];
+        //totalPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiSekaligus]]];
+        
+        if (IsInternalStaff==1){
+            diskon = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getDiskonSekaligus]]];
+            totalPremiAfterDiscount = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiDiscount:[heritageCalculation getDiskonSekaligus] BasicPremi:[heritageCalculation getPremiDasarSekaligus]]]];
+            totalPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:[heritageCalculation getDiskonSekaligus] BasicPremi:[heritageCalculation getPremiDasarSekaligus]] ExtraPremi:[heritageCalculation extraPremiSekaligus]]]];
+        }
+        else{
+            diskon = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:0]];
+            totalPremiAfterDiscount = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiDiscount:0 BasicPremi:[heritageCalculation getPremiDasarSekaligus]]]];
+            totalPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:0 BasicPremi:[heritageCalculation getPremiDasarSekaligus]] ExtraPremi:[heritageCalculation extraPremiSekaligus]]]];
+        }
+        
+        
     }
     else if ([FRekeunsiPembayaranMode isEqualToString:@"Bulanan"])
     {
         premiDasar = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getPremiDasarBulanan]]];
         extraBasicPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation extraPremiBulanan]]];
         totalPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiBulanan]]];
-        diskon = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getDiskonBulanan]]];
+        if (IsInternalStaff==1){
+            diskon = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getDiskonBulanan]]];
+            totalPremiAfterDiscount = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiDiscount:[heritageCalculation getDiskonBulanan] BasicPremi:[heritageCalculation getPremiDasarBulanan]]]];
+            totalPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:[heritageCalculation getDiskonBulanan] BasicPremi:[heritageCalculation getPremiDasarBulanan]] ExtraPremi:[heritageCalculation extraPremiBulanan]]]];
+        }
+        else{
+            diskon = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:0]];
+            totalPremiAfterDiscount = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiDiscount:0 BasicPremi:[heritageCalculation getPremiDasarBulanan]]]];
+            totalPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:0 BasicPremi:[heritageCalculation getPremiDasarBulanan]] ExtraPremi:[heritageCalculation extraPremiBulanan]]]];
+        }
+        
+
     }
     else if ([FRekeunsiPembayaranMode isEqualToString:@"Tahunan"])
     {
         premiDasar = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getPremiDasarTahunan]]];
         extraBasicPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation extraPremiTahunan]]];
         totalPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiTahunan]]];
-        diskon = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getDiskonTahunan]]];
+        if (IsInternalStaff==1){
+            diskon = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getDiskonTahunan]]];
+            totalPremiAfterDiscount = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiDiscount:[heritageCalculation getDiskonTahunan] BasicPremi:[heritageCalculation getPremiDasarTahunan]]]];
+            totalPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:[heritageCalculation getDiskonTahunan] BasicPremi:[heritageCalculation getPremiDasarTahunan]] ExtraPremi:[heritageCalculation extraPremiTahunan]]]];
+        }
+        else{
+            diskon = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:0]];
+            totalPremiAfterDiscount = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiDiscount:0 BasicPremi:[heritageCalculation getPremiDasarTahunan]]]];
+            totalPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:0 BasicPremi:[heritageCalculation getPremiDasarTahunan]] ExtraPremi:[heritageCalculation extraPremiTahunan]]]];
+        }
+        
+
     }
     else{
         
     }
-    /*[_basicPremiField setText:premiDasar];
-     [_extraBasicPremiField setText:extraBasicPremi];
-     [_totalPremiWithLoadingField setText:totalPremi];*/
+    [_basicPremiField setText:premiDasar];
+    [_extraBasicPremiField setText:extraBasicPremi];
     [_KKLKDiskaunBtn setText:diskon];
+    [_basicPremiFieldAfterDiscount setText:totalPremiAfterDiscount];
+    [_totalPremiWithLoadingField setText:totalPremi];
     NSLog(@"premi dasar %@",premiDasar);
     NSLog(@"extra premi %@",extraBasicPremi);
     NSLog(@"total premi %@",totalPremi);

@@ -220,6 +220,7 @@
 //Added by faiz
 @property (retain, nonatomic) NSMutableDictionary* dictionaryPOForInsert;
 @property (strong, nonatomic) IBOutlet UITextField *basicPremiField;
+@property (strong, nonatomic) IBOutlet UITextField *basicPremiFieldAfterDiscount;
 @property (strong, nonatomic) IBOutlet UITextField *extraPremiPercentField;
 @property (strong, nonatomic) IBOutlet UITextField *extraPremiNumberField;
 @property (strong, nonatomic) IBOutlet UITextField *masaExtraPremiField;

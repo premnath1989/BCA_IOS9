@@ -118,6 +118,14 @@
     return formatter;
 }
 
+-(int)decimalDigitFromString:(NSString *)decimalString DecimalSeparator:(NSString *)decimalSeparator {
+    NSString *string = decimalString;
+    NSCharacterSet *charSet = [NSCharacterSet characterSetWithCharactersInString:decimalSeparator];
+    NSRange range = [string rangeOfCharacterFromSet:charSet];
+    NSUInteger *position = &range.location;
+    NSUInteger result = decimalString.length - (int)position - 1;
+    return (int)result;
+}
 /*-(NSString *)convertSpecialCharacter:(NSString *)originalString{
     NSString *someString = originalString;
     NSString *newString = [someString stringByReplacingOccurrencesOfString:@"[/,@"'; ]+" withString:@"-" options: NSRegularExpressionSearch range:NSMakeRange(0, someString.length)];

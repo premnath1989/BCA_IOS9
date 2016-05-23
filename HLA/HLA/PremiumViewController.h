@@ -12,9 +12,13 @@
 #import "SIMenuViewController.h"
 #import "Model_SI_Premium.h"
 #import "PremiumViewControllerDelegate.h"
+#import "HeritageCalculation.h"
+#import "Formatter.h"
 
 @interface PremiumViewController : UIViewController {
+    Formatter* classFormatter;
     Model_SI_Premium* modelSIPremium;
+    HeritageCalculation* heritageCalculation;
     
     NSString *databasePath;
 	NSString *RatesDatabasePath;
@@ -72,6 +76,10 @@
     IBOutlet UILabel *lblTotalTahunan;
     IBOutlet UILabel *lblTotalBulanan;
     IBOutlet UILabel *lblTotalSekaligus;
+    
+    IBOutlet UILabel *lblDiskonTahunan;
+    IBOutlet UILabel *lblDiskonBulanan;
+    IBOutlet UILabel *lblDiskonSekaligus;
     double Pertanggungan_Dasar;
     double Pertanggungan_ExtrePremi;
     NSString *PayorSex;
