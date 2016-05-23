@@ -230,7 +230,7 @@ bool WPTPD30RisDeleted = FALSE;
     themeColour = [UIColor colorWithRed:218.0f/255.0f green:49.0f/255.0f blue:85.0f/255.0f alpha:1];
     
     
-    
+    [yearlyIncomeField addTarget:self action:@selector(RealTimeFormat:) forControlEvents:UIControlEventEditingChanged];
     [yearlyIncomeField addTarget:self action:@selector(AnnualIncomeChange:) forControlEvents:UIControlEventEditingDidEnd];
     [self setTextfieldBorder];
     
@@ -1214,7 +1214,8 @@ bool WPTPD30RisDeleted = FALSE;
  
     NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
     f.numberStyle = NSNumberFormatterDecimalStyle;
-    NSNumber *myNumber = [f numberFromString:yearlyIncomeField.text];
+    //NSNumber *myNumber = [f numberFromString:yearlyIncomeField.text];
+    NSNumber *myNumber = [classFormatter convertAnyNonDecimalNumberToString:yearlyIncomeField.text];
     
     BasisSumAssured = [myNumber longLongValue];
     
@@ -2009,7 +2010,8 @@ bool WPTPD30RisDeleted = FALSE;
         
         NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
         f.numberStyle = NSNumberFormatterDecimalStyle;
-        NSNumber *myNumber = [f numberFromString:[dictPremiData valueForKey:@"Sum_Assured"]];
+        //NSNumber *myNumber = [f numberFromString:[dictPremiData valueForKey:@"Sum_Assured"]];
+        NSNumber *myNumber = [classFormatter convertAnyNonDecimalNumberToString:[dictPremiData valueForKey:@"Sum_Assured"]];
         
         BasisSumAssured = [myNumber longLongValue];
 
@@ -2278,7 +2280,8 @@ bool WPTPD30RisDeleted = FALSE;
         
         NSMutableDictionary *dictionaryBasicPlan=[[NSMutableDictionary alloc]initWithObjectsAndKeys:
                                                   yearlyIncomeField.text,@"Sum_Assured",
-                                                  [classFormatter convertNumberFromString:yearlyIncomeField.text],@"Number_Sum_Assured",
+                                                  //[classFormatter convertNumberFromString:yearlyIncomeField.text],@"Number_Sum_Assured",
+                                                  [classFormatter convertAnyNonDecimalNumberToString:yearlyIncomeField.text],@"Number_Sum_Assured",
                                                   _masaPembayaranButton.titleLabel.text,@"Payment_Term",
                                                   _frekuensiPembayaranButton.titleLabel.text,@"Payment_Frequency",
                                                   _basicPremiField.text,@"PremiumPolicyA",
@@ -2342,6 +2345,11 @@ bool WPTPD30RisDeleted = FALSE;
 }
 
 
+-(void)RealTimeFormat:(UITextField *)sender{
+    NSNumber *plainNumber = [classFormatter convertAnyNonDecimalNumberToString:sender.text];
+    [sender setText:[classFormatter numberToCurrencyDecimalFormatted:plainNumber]];
+}
+
 -(void)AnnualIncomeChange:(id) sender
 {
     BasisSumAssured = [(yearlyIncomeField.text) longLongValue];
@@ -2353,11 +2361,42 @@ bool WPTPD30RisDeleted = FALSE;
     
     NSString *result;
     
-    NSNumberFormatter *formatter = [[NSNumberFormatter alloc]init];
+    /*NSNumberFormatter *formatter = [[NSNumberFormatter alloc]init];
     [formatter setMaximumFractionDigits:2];
     [formatter setUsesGroupingSeparator:YES];
     [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
     
+    double entryFieldFloat = [yearlyIncomeField.text doubleValue];
+    
+    if ([yearlyIncomeField.text rangeOfString:@""].length == 3) {
+        formatter.alwaysShowsDecimalSeparator = YES;
+        result =[formatter stringFromNumber:[NSNumber numberWithDouble:entryFieldFloat]];
+        result = [result stringByAppendingFormat:@"00"];
+        
+    } else  if ([yearlyIncomeField.text rangeOfString:@"."].length == 1) {
+        formatter.alwaysShowsDecimalSeparator = YES;
+        result =[formatter stringFromNumber:[NSNumber numberWithDouble:entryFieldFloat]];
+        
+    } else if ([yearlyIncomeField.text rangeOfString:@"."].length != 1) {
+        formatter.alwaysShowsDecimalSeparator = NO;
+        result =[formatter stringFromNumber:[NSNumber numberWithDouble:entryFieldFloat]];
+        result = [result stringByAppendingFormat:@""];
+        
+    }
+    
+    
+    if(yearlyIncomeField.text.length==0) {
+        yearlyIncomeField.text = @"";
+    } else {
+        yearlyIncomeField.text = result;
+    }*/
+    
+    /*NSNumberFormatter *formatter = [[NSNumberFormatter alloc]init];
+     [formatter setMaximumFractionDigits:2];
+     [formatter setUsesGroupingSeparator:YES];
+     [formatter setNumberStyle:NSNumberFormatterDecimalStyle];*/
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc]init];
+    formatter = [classFormatter formatterForCurrencyText];
     double entryFieldFloat = [yearlyIncomeField.text doubleValue];
     
     if ([yearlyIncomeField.text rangeOfString:@""].length == 3) {
@@ -3081,9 +3120,11 @@ bool WPTPD30RisDeleted = FALSE;
     NSString *PremiDasar = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:premiDasar]];
     NSString *ExtraPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:extrapremi]];
     NSString *TotalPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:totalPremi]];
+    NSString *TotalPremiAfterDiscount = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:MDBKKPremi]];
     [_basicPremiField setText:PremiDasar];
     [_extraBasicPremiField setText:ExtraPremi];
     [_totalPremiWithLoadingField setText:TotalPremi];
+    [_basicPremiFieldAfterDiscount setText:TotalPremiAfterDiscount];
 }
 
 
@@ -5286,7 +5327,8 @@ bool WPTPD30RisDeleted = FALSE;
     
     NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
     f.numberStyle = NSNumberFormatterDecimalStyle;
-    NSNumber *myNumber = [f numberFromString:uangPertanggunganDasar];
+    //NSNumber *myNumber = [f numberFromString:uangPertanggunganDasar];
+    NSNumber *myNumber = [classFormatter convertAnyNonDecimalNumberToString:uangPertanggunganDasar];
     
     long long sumAssured = [myNumber longLongValue];
     long long maxNumber = 300000000000;
@@ -5901,7 +5943,6 @@ bool WPTPD30RisDeleted = FALSE;
     }
     [_basicPremiField setText:premiDasar];
     [_extraBasicPremiField setText:extraBasicPremi];
-    /* [_totalPremiWithLoadingField setText:totalPremi];*/
     [_KKLKDiskaunBtn setText:diskon];
     [_basicPremiFieldAfterDiscount setText:totalPremiAfterDiscount];
     [_totalPremiWithLoadingField setText:totalPremi];

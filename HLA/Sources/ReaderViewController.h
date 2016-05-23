@@ -48,6 +48,7 @@
 @property (nonatomic,retain)NSString *AgentKTP;
 @property (nonatomic,retain)NSString *POName;
 @property (nonatomic,retain)NSString *POKtp;
+@property (nonatomic,retain)NSNumber* IsInternalStaff;
 
 
 @property (nonatomic, weak, readwrite) id <ReaderViewControllerDelegate> delegate;

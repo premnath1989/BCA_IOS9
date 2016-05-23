@@ -26,20 +26,20 @@
     ExtraPercentagePremi = [dictionaryPremium valueForKey:@"ExtraPremiumPercentage"];
 }
 
--(NSString *)getRatesInt{
+-(NSString *)getRatesInt:(NSString *)premType{
     NSString*AnsuransiDasarQuery;
     NSArray *paths2 = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docsPath2 = [paths2 objectAtIndex:0];
     NSString *path2 = [docsPath2 stringByAppendingPathComponent:@"BCA_Rates.sqlite"];
     
-    NSString* premType;
+    /*NSString* premType;
     
     if ([PremiType isEqualToString:@"Premi 5 Tahun"]){
         premType = @"R";
     }
     else{
         premType = @"S";
-    }
+    }*/
     
     FMDatabase *database = [FMDatabase databaseWithPath:path2];
     [database open];
@@ -238,7 +238,7 @@
 
 -(double)calculateExtraPremiPercentSekaligus{
     double PaymentMode=1;
-    double RatesInt0 = [[self getRatesInt] doubleValue];
+    double RatesInt0 = [[self getRatesInt:@"S"] doubleValue];
     double percent = [[dictionaryPremium valueForKey:@"ExtraPremiumPercentage"] doubleValue] / 100;
     double RatesInt = percent * RatesInt0;
     double valueofTotal =(PaymentMode * RatesInt);
@@ -250,7 +250,7 @@
 
 -(double)calculateExtraPremiPercentTahunan{
     double PaymentMode=1;
-    double RatesInt0 = [[self getRatesInt] doubleValue];
+    double RatesInt0 = [[self getRatesInt:@"R"] doubleValue];
     double percent = [[dictionaryPremium valueForKey:@"ExtraPremiumPercentage"] doubleValue] / 100;
     double RatesInt = percent * RatesInt0;
     double valueofTotal =(PaymentMode * RatesInt);
@@ -263,7 +263,7 @@
 
 -(double)calculateExtraPremiPercentBulanan{
     double PaymentMode=0.1;
-    double RatesInt0 = [[self getRatesInt] doubleValue];
+    double RatesInt0 = [[self getRatesInt:@"R"] doubleValue];
     double percent = [[dictionaryPremium valueForKey:@"ExtraPremiumPercentage"] doubleValue] / 100;
     double RatesInt = percent * RatesInt0;
     double valueofTotal =(PaymentMode * RatesInt);

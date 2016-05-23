@@ -949,6 +949,9 @@
             [self addSignature1:agentSignature CustomerSignature:customerSignature onPDFData:data];
             [self addSignature2:agentSignature CustomerSignature:customerSignature onPDFData:data];
             [self addSignature3:agentSignature CustomerSignature:customerSignature onPDFData:data];
+            if ([_IsInternalStaff intValue]==1){
+                [self addSignature4:agentSignature CustomerSignature:customerSignature onPDFData:data];
+            }
         }
         
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -1117,6 +1120,51 @@
     [outputPDFData writeToFile:pdfFilePath atomically:YES];
 }
 
+-(void) addSignature4:(UIImage *) imgSignature CustomerSignature:(UIImage *)customerSignature onPDFData:(NSData *)pdfData {
+    
+    NSMutableData* outputPDFData = [[NSMutableData alloc] init];
+    CGDataConsumerRef dataConsumer = CGDataConsumerCreateWithCFData((CFMutableDataRef)outputPDFData);
+    
+    CFMutableDictionaryRef attrDictionary = NULL;
+    attrDictionary = CFDictionaryCreateMutable(NULL, 0, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
+    CFDictionarySetValue(attrDictionary, kCGPDFContextTitle, CFSTR("My Doc"));
+    CGContextRef pdfContext = CGPDFContextCreate(dataConsumer, NULL, attrDictionary);
+    CFRelease(dataConsumer);
+    CFRelease(attrDictionary);
+    CGRect pageRect;
+    
+    // Draw the old "pdfData" on pdfContext
+    CFDataRef myPDFData = (__bridge CFDataRef) pdfData;
+    CGDataProviderRef provider = CGDataProviderCreateWithCFData(myPDFData);
+    CGPDFDocumentRef pdf = CGPDFDocumentCreateWithProvider(provider);
+    CGDataProviderRelease(provider);
+    CGPDFPageRef page = CGPDFDocumentGetPage(pdf, 4);
+    pageRect = CGPDFPageGetBoxRect(page, kCGPDFMediaBox);
+    CGContextBeginPage(pdfContext, &pageRect);
+    CGContextDrawPDFPage(pdfContext, page);
+    
+    // Draw the signature on pdfContext
+    //pageRect = CGRectMake(343, 45,101 , 43);
+    pageRect = CGRectMake(343, 45,86 , 43);
+    CGImageRef pageImage = [imgSignature CGImage];
+    CGContextDrawImage(pdfContext, pageRect, pageImage);
+    
+    //pageRect = CGRectMake(638, 45,101 , 43);
+    pageRect = CGRectMake(638, 45,86 , 43);
+    CGImageRef pageCustomerSignatureImage = [customerSignature CGImage];
+    CGContextDrawImage(pdfContext, pageRect, pageCustomerSignatureImage);
+    
+    // release the allocated memory
+    CGPDFContextEndPage(pdfContext);
+    CGPDFContextClose(pdfContext);
+    CGContextRelease(pdfContext);
+    
+    // write new PDFData in "outPutPDF.pdf" file in document directory
+    NSString *docsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *pdfFilePath =[NSString stringWithFormat:@"%@/outPutPDF4.pdf",docsDirectory];
+    [outputPDFData writeToFile:pdfFilePath atomically:YES];
+}
+
 -(void)joinMultiplePDF{
     NSString *originalFileName = document.fileName;
     NSString *ModifiedFileName = [originalFileName stringByReplacingOccurrencesOfString:@".pdf" withString:@""];
@@ -1126,6 +1174,7 @@
     NSString *pdfPath1 = [NSString stringWithFormat:@"%@/outPutPDF1.pdf",docsDirectory];
     NSString *pdfPath2 = [NSString stringWithFormat:@"%@/outPutPDF2.pdf",docsDirectory];
     NSString *pdfPath3 = [NSString stringWithFormat:@"%@/outPutPDF3.pdf",docsDirectory];
+    
     NSString *pdfPathOutput =[NSString stringWithFormat:@"%@/%@.pdf",docsDirectory,ModifiedFileName];
     
     // File URLs - bridge casting for ARC
@@ -1139,10 +1188,12 @@
     CGPDFDocumentRef pdfRef2 = CGPDFDocumentCreateWithURL((CFURLRef) pdfURL2);
     CGPDFDocumentRef pdfRef3 = CGPDFDocumentCreateWithURL((CFURLRef) pdfURL3);
     
+    
     // Number of pages
     NSInteger numberOfPages1 = CGPDFDocumentGetNumberOfPages(pdfRef1);
     NSInteger numberOfPages2 = CGPDFDocumentGetNumberOfPages(pdfRef2);
     NSInteger numberOfPages3 = CGPDFDocumentGetNumberOfPages(pdfRef3);
+    
     
     // Create the output context
     CGContextRef writeContext = CGPDFContextCreateWithURL(pdfURLOutput, NULL, NULL);
@@ -1183,6 +1234,27 @@
     }
     NSLog(@"DONE!");
     
+    NSString *pdfPath4;
+    CFURLRef pdfURL4;
+    CGPDFDocumentRef pdfRef4 = NULL;
+    if ([_IsInternalStaff intValue]==1){
+        pdfPath4 = [NSString stringWithFormat:@"%@/outPutPDF4.pdf",docsDirectory];
+        pdfURL4 = (__bridge_retained CFURLRef)[[NSURL alloc] initFileURLWithPath:(NSString *)pdfPath4];//(CFURLRef)
+        pdfRef4 = CGPDFDocumentCreateWithURL((CFURLRef) pdfURL4);
+        NSInteger numberOfPages4 = CGPDFDocumentGetNumberOfPages(pdfRef4);
+        // Read the second PDF and generate the output pages
+        NSLog(@"GENERATING PAGES FROM PDF 4 (%i)...", numberOfPages4);
+        for (int i=1; i<=numberOfPages4; i++) {
+            page = CGPDFDocumentGetPage(pdfRef4, i);
+            mediaBox = CGPDFPageGetBoxRect(page, kCGPDFMediaBox);
+            CGContextBeginPage(writeContext, &mediaBox);
+            CGContextDrawPDFPage(writeContext, page);
+            CGContextEndPage(writeContext);
+        }
+        NSLog(@"DONE!");
+    }
+    
+    
     // Finalize the output file
     CGPDFContextClose(writeContext);
     
@@ -1190,10 +1262,17 @@
     CFRelease(pdfURL1);
     CFRelease(pdfURL2);
     CFRelease(pdfURL3);
+    
     CFRelease(pdfURLOutput);
     CGPDFDocumentRelease(pdfRef1);
     CGPDFDocumentRelease(pdfRef2);
     CGPDFDocumentRelease(pdfRef3);
+    
+    if ([_IsInternalStaff intValue]==1){
+        CFRelease(pdfURL4);
+        CGPDFDocumentRelease(pdfRef4);
+    }
+    
     CGContextRelease(writeContext);
 }
 

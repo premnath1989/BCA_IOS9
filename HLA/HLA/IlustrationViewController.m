@@ -236,23 +236,39 @@
     NSString *path1 = [[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page1" ofType:@"html"]; //changed for language
     NSString *path2 = [[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page2" ofType:@"html"]; //changed for language
     NSString *path3 = [[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page3" ofType:@"html"]; //changed for language
+    NSString *path4 = [[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page4" ofType:@"html"]; //changed for language
     
     NSString *pathImage = [[NSBundle mainBundle] pathForResource:@"LogoBCALife" ofType:@"jpg"]; //
     
     NSURL *pathURL1 = [NSURL fileURLWithPath:path1];
     NSURL *pathURL2 = [NSURL fileURLWithPath:path2];
     NSURL *pathURL3 = [NSURL fileURLWithPath:path3];
+    NSURL *pathURL4 = [NSURL fileURLWithPath:path4];
 
     NSURL *pathURLImage = [NSURL fileURLWithPath:pathImage];
     
     NSArray* path_forDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
     NSString* documentsDirectory = [path_forDirectory objectAtIndex:0];
     
-    NSMutableData* data = [NSMutableData dataWithContentsOfURL:pathURL1];
-    NSData* data2 = [NSData dataWithContentsOfURL:pathURL2];
-    NSData* data3 = [NSData dataWithContentsOfURL:pathURL3];
-    [data appendData:data2];
-    [data appendData:data3];
+    NSMutableData* data;
+    int IsInternalStaff =[[_dictionaryPOForInsert valueForKey:@"IsInternalStaff"] intValue];
+    if (IsInternalStaff==1){
+        data = [NSMutableData dataWithContentsOfURL:pathURL4];
+        NSData* data1 = [NSData dataWithContentsOfURL:pathURL1];
+        NSData* data2 = [NSData dataWithContentsOfURL:pathURL2];
+        NSData* data3 = [NSData dataWithContentsOfURL:pathURL3];
+        [data appendData:data1];
+        [data appendData:data2];
+        [data appendData:data3];
+    }
+    else{
+        data = [NSMutableData dataWithContentsOfURL:pathURL1];
+        NSData* data2 = [NSData dataWithContentsOfURL:pathURL2];
+        NSData* data3 = [NSData dataWithContentsOfURL:pathURL3];
+        [data appendData:data2];
+        [data appendData:data3];
+    }
+    
 
     NSData* dataImage = [NSData dataWithContentsOfURL:pathURLImage];
     
@@ -393,6 +409,16 @@
     NSString *javaScriptF2 = [NSString stringWithFormat:@"document.getElementById('FooterPrintDate').innerHTML =\"%@\";",[formatter getDateToday:@"yyyy-MM-dd hh:mm:ss"]];
     NSString *javaScriptF3 = [NSString stringWithFormat:@"document.getElementById('FooterAgentCode').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"AgentCode"]];
     NSString *javaScriptF4 = [NSString stringWithFormat:@"document.getElementById('FooterBranch').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"BranchName"]];
+    NSString *javaScriptTotalPage;
+    int IsInternalStaff =[[_dictionaryPOForInsert valueForKey:@"IsInternalStaff"] intValue];
+    if (IsInternalStaff==0){
+        javaScriptTotalPage = [NSString stringWithFormat:@"document.getElementById('TotalPage1').innerHTML =\"%@\";", @"3"];
+    }
+    else{
+        javaScriptTotalPage = [NSString stringWithFormat:@"document.getElementById('TotalPage1').innerHTML =\"%@\";", @"4"];
+    }
+    
+    
     
     // Make the UIWebView method call
     NSString *response = [webIlustration stringByEvaluatingJavaScriptFromString:javaScript];
@@ -411,7 +437,7 @@
     NSString *responseF2 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptF2];
     NSString *responseF3 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptF3];
     NSString *responseF4 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptF4];
-    
+    [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptTotalPage];
     /*NSString *responseP21 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H1];
     NSString *responseP22 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H2];
     NSString *responseP23 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H3];
@@ -515,7 +541,8 @@
     
     NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
     f.numberStyle = NSNumberFormatterDecimalStyle;
-    NSNumber *myNumber = [f numberFromString:[_dictionaryForBasicPlan valueForKey:@"Sum_Assured"]];
+    //NSNumber *myNumber = [f numberFromString:[_dictionaryForBasicPlan valueForKey:@"Sum_Assured"]];
+    NSNumber *myNumber = [formatter convertAnyNonDecimalNumberToString:[_dictionaryForBasicPlan valueForKey:@"Sum_Assured"]];
     
     NSLog(@"formatted %@",[formatter numberToCurrencyDecimalFormatted:myNumber]);
     
@@ -561,6 +588,14 @@
     NSString *javaScriptF2 = [NSString stringWithFormat:@"document.getElementById('FooterPrintDate2').innerHTML =\"%@\";",[formatter getDateToday:@"yyyy-MM-dd hh:mm:ss"]];
     NSString *javaScriptF3 = [NSString stringWithFormat:@"document.getElementById('FooterAgentCode2').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"AgentCode"]];
     NSString *javaScriptF4 = [NSString stringWithFormat:@"document.getElementById('FooterBranch2').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"BranchName"]];
+    NSString *javaScriptTotalPage;
+    int IsInternalStaff =[[_dictionaryPOForInsert valueForKey:@"IsInternalStaff"] intValue];
+    if (IsInternalStaff==0){
+        javaScriptTotalPage = [NSString stringWithFormat:@"document.getElementById('TotalPage2').innerHTML =\"%@\";", @"3"];
+    }
+    else{
+        javaScriptTotalPage = [NSString stringWithFormat:@"document.getElementById('TotalPage2').innerHTML =\"%@\";", @"4"];
+    }
     
     NSMutableArray* valRate1Year=[[NSMutableArray alloc]initWithArray:[self getRateTunggal:laAge]];
     NSString *string = [[valRate1Year valueForKey:@"description"] componentsJoinedByString:@","];
@@ -597,7 +632,8 @@
      [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H14];
      [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H15];
      [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H16];
-    [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H17];
+     [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H17];
+     [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptTotalPage];
 }
 
 -(void)setValuePage3{
@@ -608,7 +644,14 @@
     NSString *javaScriptF2 = [NSString stringWithFormat:@"document.getElementById('FooterPrintDate3').innerHTML =\"%@\";",[formatter getDateToday:@"yyyy-MM-dd hh:mm:ss"]];
     NSString *javaScriptF3 = [NSString stringWithFormat:@"document.getElementById('FooterAgentCode3').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"AgentCode"]];
     NSString *javaScriptF4 = [NSString stringWithFormat:@"document.getElementById('FooterBranch3').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"BranchName"]];
-    
+    NSString *javaScriptTotalPage;
+    int IsInternalStaff =[[_dictionaryPOForInsert valueForKey:@"IsInternalStaff"] intValue];
+    if (IsInternalStaff==0){
+        javaScriptTotalPage = [NSString stringWithFormat:@"document.getElementById('TotalPage3').innerHTML =\"%@\";", @"3"];
+    }
+    else{
+        javaScriptTotalPage = [NSString stringWithFormat:@"document.getElementById('TotalPage3').innerHTML =\"%@\";", @"4"];
+    }
     // Make the UIWebView method call
     NSString *response = [webIlustration stringByEvaluatingJavaScriptFromString:javaScript];
     
@@ -616,6 +659,7 @@
     NSString *responseF2 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptF2];
     NSString *responseF3 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptF3];
     NSString *responseF4 = [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptF4];
+    [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptTotalPage];
     
     NSLog(@"javascript result: %@", response);
     
@@ -624,6 +668,87 @@
     NSLog(@"javascript result: %@", responseF3);
     NSLog(@"javascript result: %@", responseF4);
 }
+
+-(void)setValuePage4{
+    NSString *javaScript = [NSString stringWithFormat:@"document.getElementById('SINumber4').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"SINO"]];
+    
+    NSString *javaScriptP4H1 = [NSString stringWithFormat:@"document.getElementById('SumAssured4').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"Sum_Assured"]];
+    NSString *javaScriptP4H2 = [NSString stringWithFormat:@"document.getElementById('FrekuensiPembayaran4').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"Payment_Frequency"]];
+    NSString *javaScriptP4H3 = [NSString stringWithFormat:@"document.getElementById('BasicPremi4').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"PremiumPolicyA"]];
+    
+    int discount = [[_dictionaryForBasicPlan valueForKey:@"Discount"] intValue];
+    NSString *javaScriptP4H4;
+    if (discount>0){
+        javaScriptP4H4=[NSString stringWithFormat:@"document.getElementById('Diskon4').innerHTML =\"(%@)\";", [_dictionaryForBasicPlan valueForKey:@"Discount"]];
+    }
+    else{
+        javaScriptP4H4=[NSString stringWithFormat:@"document.getElementById('Diskon4').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"Discount"]];
+    }
+    
+    NSString *javaScriptP4H5 = [NSString stringWithFormat:@"document.getElementById('PremiAfterDiskon4').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"SubTotalPremium"]];
+    NSString *javaScriptP4H6 = [NSString stringWithFormat:@"document.getElementById('ExtraPremi4').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"ExtraPremiumPolicy"]];
+    NSString *javaScriptP4H7 = [NSString stringWithFormat:@"document.getElementById('TotalPremi4').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"TotalPremiumLoading"]];
+    
+    NSString *javaScriptP4H81;
+    NSString *javaScriptP4H82;
+    NSString *javaScriptP4H83;
+    NSString *javaScriptP4H84;
+    NSString *javaScriptP4H85;
+    NSString *javaScriptP4H9;
+    if ([[_dictionaryForBasicPlan valueForKey:@"Payment_Frequency"] isEqualToString:@"Tahunan"]){
+        javaScriptP4H81 = [NSString stringWithFormat:@"document.getElementById('MasaPembayaran4.1').innerHTML =\"%@\";", @"per tahun"];
+        javaScriptP4H82 = [NSString stringWithFormat:@"document.getElementById('MasaPembayaran4.2').innerHTML =\"%@\";", @"per tahun"];
+        javaScriptP4H83 = [NSString stringWithFormat:@"document.getElementById('MasaPembayaran4.3').innerHTML =\"%@\";", @"per tahun"];
+        javaScriptP4H84 = [NSString stringWithFormat:@"document.getElementById('MasaPembayaran4.4').innerHTML =\"%@\";", @"per tahun"];
+        javaScriptP4H85 = [NSString stringWithFormat:@"document.getElementById('MasaPembayaran4.5').innerHTML =\"%@\";", @"per tahun"];
+        javaScriptP4H9 = [NSString stringWithFormat:@"document.getElementById('RegularAdditionalNote').innerHTML =\"%@\";", @"- Besarnya diskon premi yang diberikan akan sama setiap pembayaran premi selama 5 tahun masa pembayaran premi."];
+    }
+    else if ([[_dictionaryForBasicPlan valueForKey:@"Payment_Frequency"] isEqualToString:@"Bulanan"]){
+        javaScriptP4H81 = [NSString stringWithFormat:@"document.getElementById('MasaPembayaran4.1').innerHTML =\"%@\";", @"per bulan"];
+        javaScriptP4H82 = [NSString stringWithFormat:@"document.getElementById('MasaPembayaran4.2').innerHTML =\"%@\";", @"per bulan"];
+        javaScriptP4H83 = [NSString stringWithFormat:@"document.getElementById('MasaPembayaran4.3').innerHTML =\"%@\";", @"per bulan"];
+        javaScriptP4H84 = [NSString stringWithFormat:@"document.getElementById('MasaPembayaran4.4').innerHTML =\"%@\";", @"per bulan"];
+        javaScriptP4H85 = [NSString stringWithFormat:@"document.getElementById('MasaPembayaran4.5').innerHTML =\"%@\";", @"per bulan"];
+        javaScriptP4H9 = [NSString stringWithFormat:@"document.getElementById('RegularAdditionalNote').innerHTML =\"%@\";", @"- Besarnya diskon premi yang diberikan akan sama setiap pembayaran premi selama 5 tahun masa pembayaran premi."];
+    }
+    else{
+        javaScriptP4H81 = [NSString stringWithFormat:@"document.getElementById('MasaPembayaran4.1').innerHTML =\"%@\";", @""];
+        javaScriptP4H82 = [NSString stringWithFormat:@"document.getElementById('MasaPembayaran4.2').innerHTML =\"%@\";", @""];
+        javaScriptP4H83 = [NSString stringWithFormat:@"document.getElementById('MasaPembayaran4.3').innerHTML =\"%@\";", @""];
+        javaScriptP4H84 = [NSString stringWithFormat:@"document.getElementById('MasaPembayaran4.4').innerHTML =\"%@\";", @""];
+        javaScriptP4H85 = [NSString stringWithFormat:@"document.getElementById('MasaPembayaran4.5').innerHTML =\"%@\";", @""];
+        javaScriptP4H9 = [NSString stringWithFormat:@"document.getElementById('RegularAdditionalNote').innerHTML =\"%@\";", @""];
+    }
+    
+    //footer agent data
+    NSString *javaScriptF1 = [NSString stringWithFormat:@"document.getElementById('FooterAgentName4').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"AgentName"]];
+    NSString *javaScriptF2 = [NSString stringWithFormat:@"document.getElementById('FooterPrintDate4').innerHTML =\"%@\";",[formatter getDateToday:@"yyyy-MM-dd hh:mm:ss"]];
+    NSString *javaScriptF3 = [NSString stringWithFormat:@"document.getElementById('FooterAgentCode4').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"AgentCode"]];
+    NSString *javaScriptF4 = [NSString stringWithFormat:@"document.getElementById('FooterBranch4').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"BranchName"]];
+    
+    // Make the UIWebView method call
+    [webIlustration stringByEvaluatingJavaScriptFromString:javaScript];
+    
+    [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP4H1];
+    [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP4H2];
+    [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP4H3];
+    [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP4H4];
+    [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP4H5];
+    [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP4H6];
+    [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP4H7];
+    [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP4H81];
+    [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP4H82];
+    [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP4H83];
+    [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP4H84];
+    [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP4H85];
+    [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP4H9];
+    
+    [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptF1];
+    [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptF2];
+    [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptF3];
+    [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptF4];
+}
+
 
 -(void)makePDF{
     UIPrintPageRenderer *render = [[UIPrintPageRenderer alloc] init];
@@ -705,6 +830,7 @@
     readerViewController.POKtp = idTypeNo;
     readerViewController.AgentName = [_dictionaryForAgentProfile valueForKey:@"AgentName"];
     readerViewController.AgentKTP = [_dictionaryForAgentProfile valueForKey:@"AgentCode"];
+    readerViewController.IsInternalStaff = [NSNumber numberWithInt:[[_dictionaryPOForInsert valueForKey:@"IsInternalStaff"] intValue]];
     BOOL illustrationSigned = [modelSIMaster isSignedIlustration:[_dictionaryPOForInsert valueForKey:@"SINO"]];
     readerViewController.illustrationSignature = illustrationSigned;
     readerViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
@@ -723,6 +849,7 @@
         [self setValuePage1];
         [self setValuePage2];
         [self setValuePage3];
+        [self setValuePage4];
     }
     
     if (!pdfCreated){
@@ -928,7 +1055,7 @@
     int paymentFreq=[modelRate getKeluargakuMOPFreq:[riderCalculation getPaymentType:paymentDesc]];
     
     NSString* premiRP = [dictMDBKK valueForKey:@"PremiRp"];
-    NSNumber* numberPremiRp=[formatter convertNumberFromStringCurrency:premiRP];
+    NSNumber* numberPremiRp=[formatter convertAnyNonDecimalNumberToString:premiRP];
     NSLog(@"numberpremi %@",numberPremiRp);
     NSString *javaScript = [NSString stringWithFormat:@"document.getElementById('SINumber2').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"SINO"]];
     

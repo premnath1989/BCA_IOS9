@@ -46,10 +46,17 @@
     return [rateModel getKeluargakuEMRate:gender EntryAge:entryAge];
 }
 
--(double)getWaiverRate:(NSString *)Gender EntryAge:(int)entryAge PersonType:(NSString *)personType{
-    double waiverRate = 0;
+-(CGFloat)getWaiverRate:(NSString *)Gender EntryAge:(int)entryAge PersonType:(NSString *)personType{
+    CGFloat waiverRate = 0;
     rateModel = [[RateModel alloc]init];
     waiverRate  = [rateModel getWaiverRate:Gender EntryAge:entryAge PersonType:personType];
+    return waiverRate;
+}
+
+-(NSString *)getWaiverRateAsString:(NSString *)Gender EntryAge:(int)entryAge PersonType:(NSString *)personType{
+    NSString* waiverRate;
+    rateModel = [[RateModel alloc]init];
+    waiverRate  = [rateModel getWaiverRateAsString:Gender EntryAge:entryAge PersonType:personType];
     return waiverRate;
 }
 
@@ -241,8 +248,8 @@
     }
     
     
-    double waiverRate = [self getWaiverRate:sex EntryAge:age PersonType:personType];
-    
+    CGFloat waiverRate = [self getWaiverRate:sex EntryAge:age PersonType:personType];
+    NSLog(@"%.02f",waiverRate);
     NSString* stringWaiverRate = [formatter roundTwoDigit:waiverRate];
     
     double MDBKK = [self calculateMDBKK:dictCalculate DictionaryBasicPlan:dictionaryBasicPlan DictionaryPO:dictPO BasicCode:basicCode PaymentCode:paymentCode PersonType:personType];
@@ -256,7 +263,7 @@
                                        raiseOnUnderflow:NO
                                        raiseOnDivideByZero:YES];
 
-    NSDecimalNumber *waiverDecimal = [NSDecimalNumber decimalNumberWithString:stringWaiverRate];
+    NSDecimalNumber *waiverDecimal = [NSDecimalNumber decimalNumberWithString:@"1.4"];
     NSDecimalNumber *waiverDecimalDivide = [NSDecimalNumber decimalNumberWithString:@"100"];
     NSDecimalNumber *DecimalMDBKK = [[NSDecimalNumber alloc]initWithDouble:MDBKK];
     NSDecimalNumber *DecimalMDBKKLoading = [[NSDecimalNumber alloc]initWithDouble:MDBKKLoading];
@@ -268,12 +275,13 @@
     NSString* resultFromDecimal = [NSString stringWithFormat:@"%@",totalResult];*/
     
     double bpRiderPremium = (waiverRate/100) * (MDBKK+MDBKKLoading);
-    
+    NSLog(@"riderpremium %f",bpRiderPremium);
     int intbpRiderPremium = round(bpRiderPremium);
     
     //double Rounded = 100.0 * floor((intbpRiderPremium/100.0)+0.5);
     double Rounded = 100.0 * floor((bpRiderPremium/100.0)+0.5);
     //double Rounded = [resultFromDecimal doubleValue];
+    //Rounded = [totalResult doubleValue];
     return Rounded;
 }
 
@@ -317,5 +325,9 @@
     return PaymentType;
 }
 
+
+-(double)totalPremiDiscount:(double)discount BasicPremi:(double)basicPremi{
+    return basicPremi-discount;
+}
 
 @end
