@@ -532,6 +532,7 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
         [cell.buttonShowIlustrasi setTag:indexPath.row];
         [cell.buttonShowIlustrasi addTarget:self action:@selector(showIlustrasi:) forControlEvents:UIControlEventTouchUpInside];
         [cell.buttonShowIlustrasi setHidden:YES];
+        [cell.imageShowIlustrasi setHidden:YES];
         
         [cell.labelIlusrationNo setText:[SINO objectAtIndex:indexPath.row]];
         [cell.labelIlustrationDate setText:[DateCreated objectAtIndex:indexPath.row]];
@@ -549,16 +550,17 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
         
         if([[SIEditStatus objectAtIndex:indexPath.row] caseInsensitiveCompare:@"0"] == NSOrderedSame){
             if ([status length]>0){
-                status = [NSString stringWithFormat:@"%@ | S",status];
+                status = [NSString stringWithFormat:@"%@ S",status];
             }
             else{
-                status = [NSString stringWithFormat:@"%@S",status];
+                status = [NSString stringWithFormat:@"%@ S",status];
             }
         }
         
         if([[SISignedStatus objectAtIndex:indexPath.row] caseInsensitiveCompare:@"0"] == NSOrderedSame){
-            status = [NSString stringWithFormat:@"%@ | TT",status];
+            status = [NSString stringWithFormat:@"%@ TT",status];
             [cell.buttonShowIlustrasi setHidden:NO];
+            [cell.imageShowIlustrasi setHidden:NO];
         }
         [cell.labelStatus setText:status];
     }

@@ -60,15 +60,19 @@
                         <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="pensign.png" translatesAutoresizingMaskIntoConstraints="NO" id="uIO-FN-0DC">
+                        <rect key="frame" x="907" y="8" width="33" height="33"/>
+                    </imageView>
                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MXh-1A-2Ue">
-                        <rect key="frame" x="854" y="8" width="86" height="33"/>
-                        <state key="normal" image="undo.png"/>
+                        <rect key="frame" x="854" y="0.0" width="86" height="49"/>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="-22" maxY="0.0"/>
                     </button>
                 </subviews>
             </tableViewCellContentView>
             <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
                 <outlet property="buttonShowIlustrasi" destination="MXh-1A-2Ue" id="hRC-1a-fYf"/>
+                <outlet property="imageShowIlustrasi" destination="uIO-FN-0DC" id="Qvf-zF-34X"/>
                 <outlet property="labelIlusrationNo" destination="PCF-Cs-CCi" id="sBO-NB-ofi"/>
                 <outlet property="labelIlustrationDate" destination="bhq-aL-vkh" id="ZyO-zo-axS"/>
                 <outlet property="labelPOName" destination="F0G-cJ-Iy1" id="5Wg-kf-VU5"/>
@@ -80,6 +84,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="undo.png" width="32" height="32"/>
+        <image name="pensign.png" width="59" height="59"/>
     </resources>
 </document>

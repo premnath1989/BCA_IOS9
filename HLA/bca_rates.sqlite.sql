@@ -212,7 +212,7 @@ INSERT INTO "Keluargaku_Rates_AnuityRate" VALUES(3,'Kuartalan',30.846);
 INSERT INTO "Keluargaku_Rates_AnuityRate" VALUES(4,'Bulanan',94.152);
 
 DROP TABLE IF EXISTS "EMRate";
-CREATE TABLE "EMRate" ("BasicPlan" , "EntryAge" , "Male" , "Female" , "PremType" );
+CREATE TABLE "EMRate" ("BasicCode" VARCHAR, "EntryAge" INTEGER, "Male" DOUBLE, "Female" DOUBLE, "PremType" VARCHAR);
 INSERT INTO "EMRate" VALUES('HRT','0','6.38','5.57','R');
 INSERT INTO "EMRate" VALUES('HRT','1','6.78','5.97','R');
 INSERT INTO "EMRate" VALUES('HRT','2','7.51','6.67','R');

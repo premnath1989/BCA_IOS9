@@ -12,6 +12,7 @@
 
 }
 @property (nonatomic, weak) IBOutlet UIButton* buttonShowIlustrasi;
+@property (nonatomic, weak) IBOutlet UIImageView* imageShowIlustrasi;
 @property (nonatomic, weak) IBOutlet UILabel* labelIlusrationNo;
 @property (nonatomic, weak) IBOutlet UILabel* labelIlustrationDate;
 @property (nonatomic, weak) IBOutlet UILabel* labelPOName;

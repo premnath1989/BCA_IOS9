@@ -625,11 +625,11 @@ bool WPTPD30RisDeleted = FALSE;
         NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
         NSString *PlanTypeProduct = [_dictionaryPOForInsert valueForKey:@"ProductName"];
-        if([PlanTypeProduct isEqualToString:@"BCA Life Heritage Protection"]){
-            return (([string isEqualToString:filtered]) && newLength <= 1);
+        if([PlanTypeProduct isEqualToString:@"BCA Life Keluargaku"]){
+            return (([string isEqualToString:filtered]) && newLength <= 2);
         }
         else{
-            return (([string isEqualToString:filtered]) && newLength <= 2);
+            return (([string isEqualToString:filtered]) && newLength <= 1);
         }
        
     }
@@ -689,7 +689,19 @@ bool WPTPD30RisDeleted = FALSE;
         int masaExtraPremi=[textField.text intValue];
         NSString *PlanTypeProduct = [_dictionaryPOForInsert valueForKey:@"ProductName"];
         
-        if([PlanTypeProduct isEqualToString:@"BCA Life Heritage Protection"]){
+        if([PlanTypeProduct isEqualToString:@"BCA Life Keluargaku"]){
+            if (([_extraPremiNumberField.text length]>0)||([_extraPremiPercentField.text length]>0)){
+                if (masaExtraPremi<1 || masaExtraPremi>10){
+                    [self createAlertViewAndShow:@"Masa extra premi tidak boleh lebih dari 10 dan kurang dari 1" tag:0];
+                    [textField setText:@""];
+                    [textField becomeFirstResponder];
+                }
+            }
+            else{
+                [self calculateRiderPremi];
+            }
+        }
+        else{
             if ([_masaPembayaranButton.titleLabel.text isEqualToString:@"Premi Tunggal"]){
                 if (([_extraPremiNumberField.text length]>0)||([_extraPremiPercentField.text length]>0)){
                     if (masaExtraPremi != 1){
@@ -717,23 +729,7 @@ bool WPTPD30RisDeleted = FALSE;
                 }
             }
         }
-        else{
-            if (([_extraPremiNumberField.text length]>0)||([_extraPremiPercentField.text length]>0)){
-                if (masaExtraPremi<1 || masaExtraPremi>10){
-                    [self createAlertViewAndShow:@"Masa extra premi tidak boleh lebih dari 10 dan kurang dari 1" tag:0];
-                    [textField setText:@""];
-                    [textField becomeFirstResponder];
-                }
-            }
-            else{
-                [self calculateRiderPremi];
-            }
-        }
-        
-        
     }
-
-    
 }
 
 
@@ -832,7 +828,7 @@ bool WPTPD30RisDeleted = FALSE;
 
 -(IBAction)MasaExtraPremiTextFieldDidBegin:(UITextField *)sender{
     NSString *PlanTypeProduct = [_dictionaryPOForInsert valueForKey:@"ProductName"];
-    if([PlanTypeProduct isEqualToString:@"BCA Life Heritage Protection"]){
+    /*if(([PlanTypeProduct isEqualToString:@"BCA Life Heritage Protection"])||([PlanTypeProduct isEqualToString:@"BCA Life Heritage Protection - For BCA Staff"])){
         if ([_masaPembayaranButton.titleLabel.text isEqualToString:@"Premi Tunggal"]){
             [MasaExtraPremiLBL setText:@"Min 1 | Max 1"];
         }
@@ -842,6 +838,17 @@ bool WPTPD30RisDeleted = FALSE;
     }
     else{
         [MasaExtraPremiLBL setText:@"Min 1 | Max 10"];
+    }*/
+    if([PlanTypeProduct isEqualToString:@"BCA Life Keluargaku"]){
+        [MasaExtraPremiLBL setText:@"Min 1 | Max 10"];
+    }
+    else{
+        if ([_masaPembayaranButton.titleLabel.text isEqualToString:@"Premi Tunggal"]){
+            [MasaExtraPremiLBL setText:@"Min 1 | Max 1"];
+        }
+        else if ([_masaPembayaranButton.titleLabel.text isEqualToString:@"Premi 5 Tahun"]){
+            [MasaExtraPremiLBL setText:@"Min 1 | Max 5"];
+        }
     }
     [MasaExtraPremiLBL setHidden:NO];
 }

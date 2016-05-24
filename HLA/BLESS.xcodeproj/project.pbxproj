@@ -322,6 +322,7 @@
 		4321B3331C8B3496006B9402 /* htmlStyle.css in Resources */ = {isa = PBXBuildFile; fileRef = 4321B3321C8B3496006B9402 /* htmlStyle.css */; };
 		432466541C9000EC001EE22F /* ModelDataReferral.m in Sources */ = {isa = PBXBuildFile; fileRef = 432466531C9000EC001EE22F /* ModelDataReferral.m */; };
 		4329213A1C7FFC26000D1064 /* Model_SI_Master.m in Sources */ = {isa = PBXBuildFile; fileRef = 432921391C7FFC26000D1064 /* Model_SI_Master.m */; };
+		43346FB61CF4080F001A6C25 /* pensign.png in Resources */ = {isa = PBXBuildFile; fileRef = 43346FB51CF4080F001A6C25 /* pensign.png */; };
 		4353C9481C61E95000AE1ED9 /* ModelNationality.m in Sources */ = {isa = PBXBuildFile; fileRef = 4353C9471C61E95000AE1ED9 /* ModelNationality.m */; };
 		4353C94B1C61F3A000AE1ED9 /* ModelMaritalStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 4353C94A1C61F3A000AE1ED9 /* ModelMaritalStatus.m */; };
 		4353C94E1C61F6F800AE1ED9 /* ModelReligion.m in Sources */ = {isa = PBXBuildFile; fileRef = 4353C94D1C61F6F800AE1ED9 /* ModelReligion.m */; };
@@ -1366,6 +1367,7 @@
 		432466531C9000EC001EE22F /* ModelDataReferral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelDataReferral.m; sourceTree = "<group>"; };
 		432921381C7FFC26000D1064 /* Model_SI_Master.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model_SI_Master.h; sourceTree = "<group>"; };
 		432921391C7FFC26000D1064 /* Model_SI_Master.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Model_SI_Master.m; sourceTree = "<group>"; };
+		43346FB51CF4080F001A6C25 /* pensign.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pensign.png; sourceTree = "<group>"; };
 		4353C9461C61E95000AE1ED9 /* ModelNationality.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelNationality.h; sourceTree = "<group>"; };
 		4353C9471C61E95000AE1ED9 /* ModelNationality.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelNationality.m; sourceTree = "<group>"; };
 		4353C9491C61F3A000AE1ED9 /* ModelMaritalStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelMaritalStatus.h; sourceTree = "<group>"; };
@@ -4335,6 +4337,7 @@
 		C4E9D1BF1612C6A500016053 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				43346FB51CF4080F001A6C25 /* pensign.png */,
 				4376DF1A1CD196EC00816BB6 /* cancel.png */,
 				4376DF1B1CD196EC00816BB6 /* cancel@2x.png */,
 				4376DF1C1CD196EC00816BB6 /* check_icon.png */,
@@ -5338,6 +5341,7 @@
 				04B15E0A19DA8D0900FF7039 /* HeaderHLA.png in Resources */,
 				04B15E0B19DA8D0900FF7039 /* e-Application@2x.png in Resources */,
 				17F10EB01C6C85DA002C32D3 /* btn_login.png in Resources */,
+				43346FB61CF4080F001A6C25 /* pensign.png in Resources */,
 				AA4EF7501C85A4260050CCD8 /* Reader-Button-N@3x.png in Resources */,
 				04B15E0C19DA8D0900FF7039 /* Customer_Fact_Find@2x.png in Resources */,
 				04B15E0D19DA8D0900FF7039 /* Client_Profile@2x.png in Resources */,
