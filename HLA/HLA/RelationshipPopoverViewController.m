@@ -73,10 +73,10 @@
         //NSString *querySQL = [NSString stringWithFormat:@"SELECT OccpCode, OccpDesc, Class FROM Adm_Occp_Loading_Penta where status = 'A' ORDER BY OccpDesc ASC"];
         NSString *querySQL;
         if ([numberIsInternalStaff intValue]==1){
-            querySQL = [NSString stringWithFormat:@"SELECT RelCode,RelDesc FROM eProposal_Relation where status = 'AS' ORDER BY RelDesc ASC"];
+            querySQL = [NSString stringWithFormat:@"SELECT RelCode,RelDesc FROM eProposal_Relation where status = 'A' and InternalStaff='Y' ORDER BY RelDesc ASC"];
         }
         else{
-            querySQL = [NSString stringWithFormat:@"SELECT RelCode,RelDesc FROM eProposal_Relation where status = 'A' or status = 'AS' ORDER BY RelDesc ASC"];
+            querySQL = [NSString stringWithFormat:@"SELECT RelCode,RelDesc FROM eProposal_Relation where status = 'A' ORDER BY RelDesc ASC"];
         }
         
         

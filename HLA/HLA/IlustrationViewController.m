@@ -525,6 +525,7 @@
 }
 
 -(void)setValuePage2{
+    int IsInternalStaff =[[_dictionaryPOForInsert valueForKey:@"IsInternalStaff"] intValue];
     NSString *javaScript = [NSString stringWithFormat:@"document.getElementById('SINumber2').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"SINO"]];
     
     //int poAge=[[_dictionaryPOForInsert valueForKey:@"PO_Age"] intValue];
@@ -581,6 +582,16 @@
     if ([myNumberPremiB intValue]>0){
         javaScriptP2H17 = [NSString stringWithFormat:@"document.getElementById('HeaderExtraPremiNumber').innerHTML =\"%@\";", [NSString stringWithFormat:@"%@‰",myNumberPremiB]];
     }
+    
+    NSString *javaScriptP2H18;
+    
+    if (IsInternalStaff==1){
+        javaScriptP2H18= [NSString stringWithFormat:@"document.getElementById('gstPage2').innerHTML =\"%@\";", @"<br/><br/>"];
+    }
+    else{
+        javaScriptP2H18= [NSString stringWithFormat:@"document.getElementById('gstPage2').innerHTML =\"%@\";", @"<br/>"];
+    }
+    
 
     
     //footer agent data
@@ -589,7 +600,8 @@
     NSString *javaScriptF3 = [NSString stringWithFormat:@"document.getElementById('FooterAgentCode2').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"AgentCode"]];
     NSString *javaScriptF4 = [NSString stringWithFormat:@"document.getElementById('FooterBranch2').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"BranchName"]];
     NSString *javaScriptTotalPage;
-    int IsInternalStaff =[[_dictionaryPOForInsert valueForKey:@"IsInternalStaff"] intValue];
+    
+    //int IsInternalStaff =[[_dictionaryPOForInsert valueForKey:@"IsInternalStaff"] intValue];
     if (IsInternalStaff==0){
         javaScriptTotalPage = [NSString stringWithFormat:@"document.getElementById('TotalPage2').innerHTML =\"%@\";", @"3"];
     }
@@ -633,6 +645,7 @@
      [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H15];
      [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H16];
      [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H17];
+     [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H18];
      [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptTotalPage];
 }
 

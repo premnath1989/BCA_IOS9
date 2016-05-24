@@ -53,6 +53,13 @@
     return waiverRate;
 }
 
+-(NSString *)getWaiverRateAsStrig:(NSString *)Gender EntryAge:(int)entryAge PersonType:(NSString *)personType{
+    NSString* waiverRate = @"0";
+    rateModel = [[RateModel alloc]init];
+    waiverRate  = [rateModel getWaiverRateAsString:Gender EntryAge:entryAge PersonType:personType];
+    return waiverRate;
+}
+
 -(NSString *)getWaiverRateAsString:(NSString *)Gender EntryAge:(int)entryAge PersonType:(NSString *)personType{
     NSString* waiverRate;
     rateModel = [[RateModel alloc]init];
@@ -255,31 +262,26 @@
     double MDBKK = [self calculateMDBKK:dictCalculate DictionaryBasicPlan:dictionaryBasicPlan DictionaryPO:dictPO BasicCode:basicCode PaymentCode:paymentCode PersonType:personType];
     double MDBKKLoading  = [self calculateMDBKKLoading:dictCalculate DictionaryBasicPlan:dictionaryBasicPlan DictionaryPO:dictPO BasicCode:basicCode PaymentCode:paymentCode PersonType:personType];
     
-    /*NSDecimalNumberHandler *roundUp = [NSDecimalNumberHandler
-                                       decimalNumberHandlerWithRoundingMode:NSRoundUp
-                                       scale:-2
-                                       raiseOnExactness:NO
-                                       raiseOnOverflow:NO
-                                       raiseOnUnderflow:NO
-                                       raiseOnDivideByZero:YES];
-
-    NSDecimalNumber *waiverDecimal = [NSDecimalNumber decimalNumberWithString:@"1.4"];
+   
+    NSDecimalNumber *waiverDecimal = [NSDecimalNumber decimalNumberWithString:[self getWaiverRateAsString:sex EntryAge:age PersonType:personType]];
     NSDecimalNumber *waiverDecimalDivide = [NSDecimalNumber decimalNumberWithString:@"100"];
     NSDecimalNumber *DecimalMDBKK = [[NSDecimalNumber alloc]initWithDouble:MDBKK];
     NSDecimalNumber *DecimalMDBKKLoading = [[NSDecimalNumber alloc]initWithDouble:MDBKKLoading];
 
     NSDecimalNumber *result = [waiverDecimal decimalNumberByDividingBy:waiverDecimalDivide];
     NSDecimalNumber *premiDecimal = [DecimalMDBKK decimalNumberByAdding:DecimalMDBKKLoading];
-    NSDecimalNumber *totalResult = [result decimalNumberByMultiplyingBy:premiDecimal withBehavior:roundUp];
+    //NSDecimalNumber *totalResult = [result decimalNumberByMultiplyingBy:premiDecimal withBehavior:roundUp];
+    NSDecimalNumber *totalResult = [result decimalNumberByMultiplyingBy:premiDecimal];
     
-    NSString* resultFromDecimal = [NSString stringWithFormat:@"%@",totalResult];*/
+    //NSString* resultFromDecimal = [NSString stringWithFormat:@"%@",totalResult];
     
-    double bpRiderPremium = (waiverRate/100) * (MDBKK+MDBKKLoading);
-    NSLog(@"riderpremium %f",bpRiderPremium);
-    int intbpRiderPremium = round(bpRiderPremium);
+    //double bpRiderPremium = (waiverRate/100) * (MDBKK+MDBKKLoading);
+    //int intbpRiderPremium = round(bpRiderPremium);
     
     //double Rounded = 100.0 * floor((intbpRiderPremium/100.0)+0.5);
-    double Rounded = 100.0 * floor((bpRiderPremium/100.0)+0.5);
+    double Rounded;
+    Rounded = [totalResult doubleValue];
+    Rounded = 100.0 * floor((Rounded/100.0)+0.5);
     //double Rounded = [resultFromDecimal doubleValue];
     //Rounded = [totalResult doubleValue];
     return Rounded;
