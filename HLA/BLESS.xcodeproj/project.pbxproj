@@ -792,7 +792,7 @@
 		DE06BE301CEEF5070091DE47 /* AppDisclaimer.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE06BE2F1CEEF5070091DE47 /* AppDisclaimer.xib */; };
 		DE06FFCE1CABBC2800E4DE3A /* xibLibrary.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DE06FFCD1CABBC2800E4DE3A /* xibLibrary.bundle */; };
 		DE06FFD21CABCB8200E4DE3A /* libFTPFileSynchronization.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DE06FFD11CABCB8200E4DE3A /* libFTPFileSynchronization.a */; };
-		DE0F59F81CF2F9900087483D /* BCA_Rates.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = DE0F59F71CF2F9900087483D /* BCA_Rates.sqlite */; };
+		DE0F59FC1CF2FF5C0087483D /* BCA_Rates.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = DE0F59FB1CF2FF5C0087483D /* BCA_Rates.sqlite */; };
 		DE15788C1CBB792900CE171B /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = DE1578891CBB792900CE171B /* NSData+Base64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		DE15788D1CBB792900CE171B /* StringEncryption.m in Sources */ = {isa = PBXBuildFile; fileRef = DE15788B1CBB792900CE171B /* StringEncryption.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		DE1578901CBB8F7000CE171B /* EncryptDecryptWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = DE15788F1CBB8F7000CE171B /* EncryptDecryptWrapper.m */; };
@@ -2177,7 +2177,7 @@
 		DE06FFCD1CABBC2800E4DE3A /* xibLibrary.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = xibLibrary.bundle; path = ../FTPSync/xibLibrary.bundle; sourceTree = "<group>"; };
 		DE06FFD11CABCB8200E4DE3A /* libFTPFileSynchronization.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFTPFileSynchronization.a; path = FTPSync/libFTPFileSynchronization.a; sourceTree = "<group>"; };
 		DE07AF3D1CAE225100258521 /* PremiumViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PremiumViewControllerDelegate.h; sourceTree = "<group>"; };
-		DE0F59F71CF2F9900087483D /* BCA_Rates.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = BCA_Rates.sqlite; sourceTree = "<group>"; };
+		DE0F59FB1CF2FF5C0087483D /* BCA_Rates.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = BCA_Rates.sqlite; sourceTree = "<group>"; };
 		DE1578881CBB792900CE171B /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+Base64.h"; path = "Encryption/NSData+Base64.h"; sourceTree = "<group>"; };
 		DE1578891CBB792900CE171B /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+Base64.m"; path = "Encryption/NSData+Base64.m"; sourceTree = "<group>"; };
 		DE15788A1CBB792900CE171B /* StringEncryption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StringEncryption.h; path = Encryption/StringEncryption.h; sourceTree = "<group>"; };
@@ -4610,7 +4610,7 @@
 				FA49F2881B9EE4E500B20169 /* DBUpdater.m */,
 				161EA6BB1B131A9E009AF454 /* hladb.sqlite.sql */,
 				DE06BE311CF2DD910091DE47 /* bca_rates.sqlite.sql */,
-				DE0F59F71CF2F9900087483D /* BCA_Rates.sqlite */,
+				DE0F59FB1CF2FF5C0087483D /* BCA_Rates.sqlite */,
 				420AC655181F83E200946C31 /* UL_Rates.sqlite */,
 				6A4ACBB817EA9EE30037C358 /* HLA_Rates.sqlite */,
 				C4E643811724F175001DF8F8 /* Rates.json */,
@@ -5047,7 +5047,6 @@
 				17A299221C60A0DB00C2537A /* HelveticaLTStd-UltraComp.otf in Resources */,
 				17A299231C60A0DB00C2537A /* BPreplay.otf in Resources */,
 				17A299241C60A0DB00C2537A /* BPreplayBold.otf in Resources */,
-				DE0F59F81CF2F9900087483D /* BCA_Rates.sqlite in Resources */,
 				17A299251C60A0DB00C2537A /* BPreplayBoldItalics.otf in Resources */,
 				17A299261C60A0DB00C2537A /* BPreplayItalics.otf in Resources */,
 				C4E9D19F1612C64900016053 /* InfoPlist.strings in Resources */,
@@ -5192,6 +5191,7 @@
 				EFBECF3C1791167E00C3D177 /* iconNotComplete.png in Resources */,
 				EF30C75F17A63E61009A301A /* Nationality.plist in Resources */,
 				AA4EF7481C85A4260050CCD8 /* Default-568h@2x.png in Resources */,
+				DE0F59FC1CF2FF5C0087483D /* BCA_Rates.sqlite in Resources */,
 				C38190B31C28F1FA001E0C9E /* EappChecklist.storyboard in Resources */,
 				C4EEB6A217C4AFAF00F268B3 /* EverLife_SI in Resources */,
 				AA4EF6DD1C8572B00050CCD8 /* ProductInformation.xib in Resources */,
@@ -5995,7 +5995,7 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Erwin Lim (9838FHPX2V)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -6035,7 +6035,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bcalife.bless;
 				PRODUCT_NAME = BLESS;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "64cb3c38-7b10-432b-ab19-7416cf6d2833";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = "armv7 armv6 i386";
@@ -6049,7 +6049,7 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Asuransi Jiwa BCA, PT";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -6090,7 +6090,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bcalife.bless;
 				PRODUCT_NAME = BLESS;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "954ccc9a-01f8-4583-9ed7-fc4107de17e9";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = "armv7 armv6 i386";
@@ -6143,7 +6143,7 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Asuransi Jiwa BCA, PT";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -6186,7 +6186,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bcalife.bless;
 				PRODUCT_NAME = BLESS;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "954ccc9a-01f8-4583-9ed7-fc4107de17e9";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = "armv7 armv6 i386";
