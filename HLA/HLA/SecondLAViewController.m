@@ -1629,7 +1629,7 @@ id dobtemp;
         
     }
     
-    else if([PlanTypeProduct isEqualToString:@"BCA Life Heritage Protection"]){
+    else if(([PlanTypeProduct isEqualToString:@"BCA Life Heritage Protection"])||([PlanTypeProduct isEqualToString:@"BCA Life Heritage Protection – For BCA Staff"])){
          if(age >70)
          {
              [self createAlertViewAndShow:validation70 tag:0];
@@ -1643,7 +1643,7 @@ id dobtemp;
              return false;
          }
     }
-    else if([PlanTypeProduct isEqualToString:@"BCA Life Heritage Protection"]){
+    else if(([PlanTypeProduct isEqualToString:@"BCA Life Heritage Protection"])||([PlanTypeProduct isEqualToString:@"BCA Life Heritage Protection – For BCA Staff"])){
         if(age >70)
         {
             [self createAlertViewAndShow:validation70 tag:0];
