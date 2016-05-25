@@ -315,6 +315,7 @@
 		42F8590F1772E4EF003907CD /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = 42F8590D1772E4EF003907CD /* add.png */; };
 		42F859101772E4EF003907CD /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 42F8590E1772E4EF003907CD /* delete.png */; };
 		43100C751CE1C00B006ECC7F /* HeritageCalculation.m in Sources */ = {isa = PBXBuildFile; fileRef = 43100C741CE1C00B006ECC7F /* HeritageCalculation.m */; };
+		431253921CF581C700A874B7 /* eng_BCALH_Page4.html in Resources */ = {isa = PBXBuildFile; fileRef = 431253911CF581C700A874B7 /* eng_BCALH_Page4.html */; };
 		431C065F1C823A9B001824FD /* Model_SI_Premium.m in Sources */ = {isa = PBXBuildFile; fileRef = 431C065D1C823A9B001824FD /* Model_SI_Premium.m */; };
 		431F5FDF1C6D781A00A9CA6C /* BranchInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 431F5FDE1C6D781A00A9CA6C /* BranchInfo.m */; };
 		431F5FE41C6D93E800A9CA6C /* ProspectListingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 431F5FE21C6D93E800A9CA6C /* ProspectListingTableViewCell.m */; };
@@ -351,7 +352,6 @@
 		43BB38C11CBCBBF700A5F5C5 /* mySmoothLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43BB38C01CBCBBF700A5F5C5 /* mySmoothLineView.m */; };
 		43C166191C99448500001691 /* ModelKodepos.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C166181C99448500001691 /* ModelKodepos.m */; };
 		43C1661C1C99489000001691 /* KodePosInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C1661B1C99489000001691 /* KodePosInfo.m */; };
-		43D5B4281CE9CC42009F4305 /* eng_BCALH_Page4.html in Resources */ = {isa = PBXBuildFile; fileRef = 43D5B4271CE9CC42009F4305 /* eng_BCALH_Page4.html */; };
 		43DA4BD91C76A59A0038C92C /* ModelAgentProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DA4BD81C76A59A0038C92C /* ModelAgentProfile.m */; };
 		43DA4BE31C770AA90038C92C /* SIMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DA4BE11C770AA90038C92C /* SIMenuTableViewCell.m */; };
 		43DA4BE41C770AA90038C92C /* SIMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43DA4BE21C770AA90038C92C /* SIMenuTableViewCell.xib */; };
@@ -1355,6 +1355,7 @@
 		42F8590E1772E4EF003907CD /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete.png; sourceTree = "<group>"; };
 		43100C731CE1C00B006ECC7F /* HeritageCalculation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeritageCalculation.h; sourceTree = "<group>"; };
 		43100C741CE1C00B006ECC7F /* HeritageCalculation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeritageCalculation.m; sourceTree = "<group>"; };
+		431253911CF581C700A874B7 /* eng_BCALH_Page4.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = eng_BCALH_Page4.html; path = SI/eng_BCALH_Page4.html; sourceTree = "<group>"; };
 		431C065D1C823A9B001824FD /* Model_SI_Premium.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Model_SI_Premium.m; sourceTree = "<group>"; };
 		431C065E1C823A9B001824FD /* Model_SI_Premium.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model_SI_Premium.h; sourceTree = "<group>"; };
 		431F5FDD1C6D781A00A9CA6C /* BranchInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BranchInfo.h; sourceTree = "<group>"; };
@@ -1416,7 +1417,6 @@
 		43C166181C99448500001691 /* ModelKodepos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelKodepos.m; sourceTree = "<group>"; };
 		43C1661A1C99489000001691 /* KodePosInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KodePosInfo.h; sourceTree = "<group>"; };
 		43C1661B1C99489000001691 /* KodePosInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KodePosInfo.m; sourceTree = "<group>"; };
-		43D5B4271CE9CC42009F4305 /* eng_BCALH_Page4.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = eng_BCALH_Page4.html; path = SI/eng_BCALH_Page4.html; sourceTree = "<group>"; };
 		43DA4BD71C76A59A0038C92C /* ModelAgentProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelAgentProfile.h; sourceTree = "<group>"; };
 		43DA4BD81C76A59A0038C92C /* ModelAgentProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelAgentProfile.m; sourceTree = "<group>"; };
 		43DA4BE01C770AA90038C92C /* SIMenuTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIMenuTableViewCell.h; sourceTree = "<group>"; };
@@ -3326,7 +3326,7 @@
 				43FA6C161C87CD7F0098BA47 /* eng_BCALH_Page1.html */,
 				43FA6C171C87CD7F0098BA47 /* eng_BCALH_Page2.html */,
 				43FA6C181C87CD7F0098BA47 /* eng_BCALH_Page3.html */,
-				43D5B4271CE9CC42009F4305 /* eng_BCALH_Page4.html */,
+				431253911CF581C700A874B7 /* eng_BCALH_Page4.html */,
 			);
 			name = "HTML USED";
 			sourceTree = "<group>";
@@ -5169,9 +5169,9 @@
 				4376DF1F1CD196EC00816BB6 /* cancel@2x.png in Resources */,
 				C4E5A47F168AAA89007848CE /* SecurityQuestion32.png in Resources */,
 				AA4EF7591C85A4260050CCD8 /* Reader-Mark-N@3x.png in Resources */,
-				43D5B4281CE9CC42009F4305 /* eng_BCALH_Page4.html in Resources */,
 				C4E5A480168AAA89007848CE /* SecurityQuestion48.png in Resources */,
 				C4E5A481168AAA89007848CE /* SecurityQuestion128.png in Resources */,
+				431253921CF581C700A874B7 /* eng_BCALH_Page4.html in Resources */,
 				C4B84472169C63C500E1A0D3 /* 20130108Login.png in Resources */,
 				AA4EF75C1C85A4260050CCD8 /* Reader-Mark-Y@3x.png in Resources */,
 				178765D91C7409F00036F31A /* menu_selectoption.png in Resources */,

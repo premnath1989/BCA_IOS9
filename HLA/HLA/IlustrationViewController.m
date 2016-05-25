@@ -571,9 +571,20 @@
     if ([[_dictionaryForBasicPlan valueForKey:@"ExtraPremiumPercentage"] intValue]>0){
         javaScriptP2H10 = [NSString stringWithFormat:@"document.getElementById('HeaderExtraPremiPercent').innerHTML =\"%@\";", [NSString stringWithFormat:@":&nbsp;&nbsp;&nbsp;%@%%",[_dictionaryForBasicPlan valueForKey:@"ExtraPremiumPercentage"]]];
     }
+    else{
+        javaScriptP2H10 = [NSString stringWithFormat:@"document.getElementById('HeaderExtraPremiPercent').innerHTML =\"%@\";", [NSString stringWithFormat:@":&nbsp;&nbsp;&nbsp;%@%%",@"0"]];
+    }
         
     NSString *javaScriptP2H11 = [NSString stringWithFormat:@"document.getElementById('HeaderPOAge').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"PO_Age"]];
-    NSString *javaScriptP2H12 = [NSString stringWithFormat:@"document.getElementById('HeaderExtraPremiDuration1').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"ExtraPremiumTerm"]];
+    
+    NSString *javaScriptP2H12;
+    if ([[_dictionaryForBasicPlan valueForKey:@"ExtraPremiumTerm"] length]>0){
+        javaScriptP2H12 = [NSString stringWithFormat:@"document.getElementById('HeaderExtraPremiDuration1').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"ExtraPremiumTerm"]];
+    }
+    else{
+        javaScriptP2H12 = [NSString stringWithFormat:@"document.getElementById('HeaderExtraPremiDuration1').innerHTML =\"%@\";", @"0"];
+    }
+    
     NSString *javaScriptP2H13 = [NSString stringWithFormat:@"document.getElementById('HeaderLAAge').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"LA_Age"]];
     NSString *javaScriptP2H14 = [NSString stringWithFormat:@"document.getElementById('HeaderExtraPremiUWLoading').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"ExtraPremiumPolicy"]];
     NSString *javaScriptP2H15 = [NSString stringWithFormat:@"document.getElementById('HeaderPOSex').innerHTML =\"%@\";", sexPO];
@@ -581,6 +592,9 @@
     NSString *javaScriptP2H17;
     if ([myNumberPremiB intValue]>0){
         javaScriptP2H17 = [NSString stringWithFormat:@"document.getElementById('HeaderExtraPremiNumber').innerHTML =\"%@\";", [NSString stringWithFormat:@":&nbsp;&nbsp;&nbsp;%@‰",myNumberPremiB]];
+    }
+    else{
+        javaScriptP2H17 = [NSString stringWithFormat:@"document.getElementById('HeaderExtraPremiNumber').innerHTML =\"%@\";", [NSString stringWithFormat:@":&nbsp;&nbsp;&nbsp;%@‰",@"0"]];
     }
     
     NSString *javaScriptP2H18;
