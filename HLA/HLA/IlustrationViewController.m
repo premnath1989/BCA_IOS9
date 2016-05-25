@@ -569,7 +569,7 @@
     
     NSString *javaScriptP2H10;
     if ([[_dictionaryForBasicPlan valueForKey:@"ExtraPremiumPercentage"] intValue]>0){
-        javaScriptP2H10 = [NSString stringWithFormat:@"document.getElementById('HeaderExtraPremiPercent').innerHTML =\"%@\";", [NSString stringWithFormat:@"%@%%",[_dictionaryForBasicPlan valueForKey:@"ExtraPremiumPercentage"]]];
+        javaScriptP2H10 = [NSString stringWithFormat:@"document.getElementById('HeaderExtraPremiPercent').innerHTML =\"%@\";", [NSString stringWithFormat:@":&nbsp;&nbsp;&nbsp;%@%%",[_dictionaryForBasicPlan valueForKey:@"ExtraPremiumPercentage"]]];
     }
         
     NSString *javaScriptP2H11 = [NSString stringWithFormat:@"document.getElementById('HeaderPOAge').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"PO_Age"]];
@@ -580,7 +580,7 @@
     NSString *javaScriptP2H16 = [NSString stringWithFormat:@"document.getElementById('HeaderPremiPay').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"TotalPremiumLoading"]];
     NSString *javaScriptP2H17;
     if ([myNumberPremiB intValue]>0){
-        javaScriptP2H17 = [NSString stringWithFormat:@"document.getElementById('HeaderExtraPremiNumber').innerHTML =\"%@\";", [NSString stringWithFormat:@"%@‰",myNumberPremiB]];
+        javaScriptP2H17 = [NSString stringWithFormat:@"document.getElementById('HeaderExtraPremiNumber').innerHTML =\"%@\";", [NSString stringWithFormat:@":&nbsp;&nbsp;&nbsp;%@‰",myNumberPremiB]];
     }
     
     NSString *javaScriptP2H18;
@@ -708,13 +708,15 @@
     NSString *javaScriptP4H84;
     NSString *javaScriptP4H85;
     NSString *javaScriptP4H9;
+    NSString *javaScriptP4H10;
     if ([[_dictionaryForBasicPlan valueForKey:@"Payment_Frequency"] isEqualToString:@"Tahunan"]){
         javaScriptP4H81 = [NSString stringWithFormat:@"document.getElementById('MasaPembayaran4.1').innerHTML =\"%@\";", @"per tahun"];
         javaScriptP4H82 = [NSString stringWithFormat:@"document.getElementById('MasaPembayaran4.2').innerHTML =\"%@\";", @"per tahun"];
         javaScriptP4H83 = [NSString stringWithFormat:@"document.getElementById('MasaPembayaran4.3').innerHTML =\"%@\";", @"per tahun"];
         javaScriptP4H84 = [NSString stringWithFormat:@"document.getElementById('MasaPembayaran4.4').innerHTML =\"%@\";", @"per tahun"];
         javaScriptP4H85 = [NSString stringWithFormat:@"document.getElementById('MasaPembayaran4.5').innerHTML =\"%@\";", @"per tahun"];
-        javaScriptP4H9 = [NSString stringWithFormat:@"document.getElementById('RegularAdditionalNote').innerHTML =\"%@\";", @"- Besarnya diskon premi yang diberikan akan sama setiap pembayaran premi selama 5 tahun masa pembayaran premi."];
+        javaScriptP4H9 = [NSString stringWithFormat:@"document.getElementById('RegularAdditionalNote1').innerHTML =\"%@\";", @"- Besarnya diskon premi yang diberikan akan sama setiap pembayaran premi selama 5 tahun masa pembayaran premi."];
+        javaScriptP4H10 = [NSString stringWithFormat:@"document.getElementById('RegularAdditionalNote2').innerHTML =\"%@\";", @"- Total Premi yang dibayarkan mengacu kepada Total Premi Dibayar Setelah Diskon yang tercantum pada tabel diatas."];
     }
     else if ([[_dictionaryForBasicPlan valueForKey:@"Payment_Frequency"] isEqualToString:@"Bulanan"]){
         javaScriptP4H81 = [NSString stringWithFormat:@"document.getElementById('MasaPembayaran4.1').innerHTML =\"%@\";", @"per bulan"];
@@ -722,7 +724,8 @@
         javaScriptP4H83 = [NSString stringWithFormat:@"document.getElementById('MasaPembayaran4.3').innerHTML =\"%@\";", @"per bulan"];
         javaScriptP4H84 = [NSString stringWithFormat:@"document.getElementById('MasaPembayaran4.4').innerHTML =\"%@\";", @"per bulan"];
         javaScriptP4H85 = [NSString stringWithFormat:@"document.getElementById('MasaPembayaran4.5').innerHTML =\"%@\";", @"per bulan"];
-        javaScriptP4H9 = [NSString stringWithFormat:@"document.getElementById('RegularAdditionalNote').innerHTML =\"%@\";", @"- Besarnya diskon premi yang diberikan akan sama setiap pembayaran premi selama 5 tahun masa pembayaran premi."];
+        javaScriptP4H9 = [NSString stringWithFormat:@"document.getElementById('RegularAdditionalNote1').innerHTML =\"%@\";", @"- Besarnya diskon premi yang diberikan akan sama setiap pembayaran premi selama 5 tahun masa pembayaran premi."];
+        javaScriptP4H10 = [NSString stringWithFormat:@"document.getElementById('RegularAdditionalNote2').innerHTML =\"%@\";", @"- Total Premi yang dibayarkan mengacu kepada Total Premi Dibayar Setelah Diskon yang tercantum pada tabel diatas."];
     }
     else{
         javaScriptP4H81 = [NSString stringWithFormat:@"document.getElementById('MasaPembayaran4.1').innerHTML =\"%@\";", @""];
@@ -730,7 +733,8 @@
         javaScriptP4H83 = [NSString stringWithFormat:@"document.getElementById('MasaPembayaran4.3').innerHTML =\"%@\";", @""];
         javaScriptP4H84 = [NSString stringWithFormat:@"document.getElementById('MasaPembayaran4.4').innerHTML =\"%@\";", @""];
         javaScriptP4H85 = [NSString stringWithFormat:@"document.getElementById('MasaPembayaran4.5').innerHTML =\"%@\";", @""];
-        javaScriptP4H9 = [NSString stringWithFormat:@"document.getElementById('RegularAdditionalNote').innerHTML =\"%@\";", @""];
+        javaScriptP4H9 = [NSString stringWithFormat:@"document.getElementById('RegularAdditionalNote1').innerHTML =\"%@\";", @"- Total Premi yang dibayarkan mengacu kepada Total Premi Dibayar Setelah Diskon yang tercantum pada tabel diatas."];
+        javaScriptP4H10 = [NSString stringWithFormat:@"document.getElementById('RegularAdditionalNote2').innerHTML =\"%@\";", @""];
     }
     
     //footer agent data
@@ -755,6 +759,7 @@
     [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP4H84];
     [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP4H85];
     [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP4H9];
+    [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP4H10];
     
     [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptF1];
     [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptF2];
