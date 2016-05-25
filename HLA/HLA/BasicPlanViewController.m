@@ -2285,6 +2285,10 @@ bool WPTPD30RisDeleted = FALSE;
             purchaseNumberText=_KKLKPembelianKeBtn.titleLabel.text;
         }
         
+        NSNumber* discount=[classFormatter convertAnyNonDecimalNumberToString:_KKLKDiskaunBtn.text];
+        NSNumber* totalPremi=[classFormatter convertAnyNonDecimalNumberToString:_totalPremiWithLoadingField.text];
+        
+        double totalPremiWODiscount = [totalPremi doubleValue]+[discount doubleValue];
         NSMutableDictionary *dictionaryBasicPlan=[[NSMutableDictionary alloc]initWithObjectsAndKeys:
                                                   yearlyIncomeField.text,@"Sum_Assured",
                                                   //[classFormatter convertNumberFromString:yearlyIncomeField.text],@"Number_Sum_Assured",
@@ -2299,7 +2303,8 @@ bool WPTPD30RisDeleted = FALSE;
                                                   _totalPremiWithLoadingField.text,@"TotalPremiumLoading",
                                                   _basicPremiFieldAfterDiscount.text,@"SubTotalPremium",
                                                   discountText,@"Discount",
-                                                  purchaseNumberText,@"PurchaseNumber",nil];
+                                                  purchaseNumberText,@"PurchaseNumber",
+                                                  [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:totalPremiWODiscount]],@"TotalPremiWithoutDiscount",nil];
         return dictionaryBasicPlan;
         
     }
