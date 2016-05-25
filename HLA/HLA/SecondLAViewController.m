@@ -1572,6 +1572,7 @@ id dobtemp;
     NSString *validationPekerjaan=@"Pekerjaan Tertanggung harus diisi";
     NSString *validation70=@"Usia tidak boleh lebih dari 70 tahun";
     NSString *validation180=@"Usia tidak boleh kurang dari 180 hari atau lebih dari 55 tahun";
+    NSString *validation180Heritage=@"Usia tidak boleh kurang dari 180 hari atau lebih dari 70 tahun";
     NSString *validationUsiaSuamiIstri=@"Usia tidak boleh kurang dari 19 atau lebih dari 55 tahun";
     NSString *validationUsiaParents=@"Usia tidak boleh kurang dari 180 hari atau lebih dari 18 tahun";
     NSString *validationOthers=@"Usia tidak boleh kurang dari 18 tahun atau lebih dari 55 tahun";
@@ -1638,7 +1639,7 @@ id dobtemp;
          }
          else if(diffDaysValiation <180)
          {
-             [self createAlertViewAndShow:validation180 tag:0];
+             [self createAlertViewAndShow:validation180Heritage tag:0];
          //[_BtnTanggalLahir setBackgroundColor:[UIColor redColor]];
              return false;
          }
@@ -1652,7 +1653,7 @@ id dobtemp;
         }
         else if(diffDaysValiation <180)
         {
-            [self createAlertViewAndShow:validation180 tag:0];
+            [self createAlertViewAndShow:validation180Heritage tag:0];
             //[_BtnTanggalLahir setBackgroundColor:[UIColor redColor]];
             return false;
         }
