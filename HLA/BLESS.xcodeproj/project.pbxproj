@@ -793,6 +793,7 @@
 		DE06BE301CEEF5070091DE47 /* AppDisclaimer.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE06BE2F1CEEF5070091DE47 /* AppDisclaimer.xib */; };
 		DE06FFCE1CABBC2800E4DE3A /* xibLibrary.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DE06FFCD1CABBC2800E4DE3A /* xibLibrary.bundle */; };
 		DE06FFD21CABCB8200E4DE3A /* libFTPFileSynchronization.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DE06FFD11CABCB8200E4DE3A /* libFTPFileSynchronization.a */; };
+		DE0E49991CF6EAB200812C2E /* DataReferral.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = DE0E49981CF6E98E00812C2E /* DataReferral.sqlite */; };
 		DE0F59FC1CF2FF5C0087483D /* BCA_Rates.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = DE0F59FB1CF2FF5C0087483D /* BCA_Rates.sqlite */; };
 		DE15788C1CBB792900CE171B /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = DE1578891CBB792900CE171B /* NSData+Base64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		DE15788D1CBB792900CE171B /* StringEncryption.m in Sources */ = {isa = PBXBuildFile; fileRef = DE15788B1CBB792900CE171B /* StringEncryption.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -2179,6 +2180,7 @@
 		DE06FFCD1CABBC2800E4DE3A /* xibLibrary.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = xibLibrary.bundle; path = ../FTPSync/xibLibrary.bundle; sourceTree = "<group>"; };
 		DE06FFD11CABCB8200E4DE3A /* libFTPFileSynchronization.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFTPFileSynchronization.a; path = FTPSync/libFTPFileSynchronization.a; sourceTree = "<group>"; };
 		DE07AF3D1CAE225100258521 /* PremiumViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PremiumViewControllerDelegate.h; sourceTree = "<group>"; };
+		DE0E49981CF6E98E00812C2E /* DataReferral.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = DataReferral.sqlite; sourceTree = "<group>"; };
 		DE0F59FB1CF2FF5C0087483D /* BCA_Rates.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = BCA_Rates.sqlite; sourceTree = "<group>"; };
 		DE1578881CBB792900CE171B /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+Base64.h"; path = "Encryption/NSData+Base64.h"; sourceTree = "<group>"; };
 		DE1578891CBB792900CE171B /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+Base64.m"; path = "Encryption/NSData+Base64.m"; sourceTree = "<group>"; };
@@ -4614,6 +4616,7 @@
 				161EA6BB1B131A9E009AF454 /* hladb.sqlite.sql */,
 				DE06BE311CF2DD910091DE47 /* bca_rates.sqlite.sql */,
 				DE0F59FB1CF2FF5C0087483D /* BCA_Rates.sqlite */,
+				DE0E49981CF6E98E00812C2E /* DataReferral.sqlite */,
 				420AC655181F83E200946C31 /* UL_Rates.sqlite */,
 				6A4ACBB817EA9EE30037C358 /* HLA_Rates.sqlite */,
 				C4E643811724F175001DF8F8 /* Rates.json */,
@@ -5066,6 +5069,7 @@
 				C4EB49131615327E00C7FC8C /* header.png in Resources */,
 				43DA4BE61C770B3C0038C92C /* icon_leads_2.png in Resources */,
 				C4EB49151615327E00C7FC8C /* login.png in Resources */,
+				DE0E49991CF6EAB200812C2E /* DataReferral.sqlite in Resources */,
 				C4EB49161615327E00C7FC8C /* menu_hover.png in Resources */,
 				C4EB49171615327E00C7FC8C /* menu.png in Resources */,
 				C4EB49181615327E00C7FC8C /* protectGlobe.png in Resources */,
