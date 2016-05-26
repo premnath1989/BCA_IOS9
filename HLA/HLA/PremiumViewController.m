@@ -4576,13 +4576,13 @@
         [lblTotalTahunan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:[heritageCalculation getDiskonTahunan] BasicPremi:[heritageCalculation getPremiDasarTahunan]] ExtraPremi:[heritageCalculation extraPremiTahunan]]]]]];
     }
     else{
-        [lblDiskonSekaligus setText:[NSString stringWithFormat:@"(%@)",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:0]]]];
+        [lblDiskonSekaligus setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:0]]]];
         [lblTotalSekaligus setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:0 BasicPremi:[heritageCalculation getPremiDasarSekaligus]] ExtraPremi:[heritageCalculation extraPremiSekaligus]]]]]];
         
-        [lblDiskonBulanan setText:[NSString stringWithFormat:@"(%@)",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:0]]]];
+        [lblDiskonBulanan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:0]]]];
         [lblTotalBulanan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:0 BasicPremi:[heritageCalculation getPremiDasarBulanan]] ExtraPremi:[heritageCalculation extraPremiBulanan]]]]]];
         
-        [lblDiskonTahunan setText:[NSString stringWithFormat:@"(%@)",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:0]]]];
+        [lblDiskonTahunan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:0]]]];
         [lblTotalTahunan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:0 BasicPremi:[heritageCalculation getPremiDasarTahunan]] ExtraPremi:[heritageCalculation extraPremiTahunan]]]]]];
     }
     

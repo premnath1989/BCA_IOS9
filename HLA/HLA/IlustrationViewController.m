@@ -608,7 +608,7 @@
         javaScriptP2H18= [NSString stringWithFormat:@"document.getElementById('gstPage2').innerHTML =\"%@\";", @"<br/>"];
     }
     
-
+    
     
     //footer agent data
     NSString *javaScriptF1 = [NSString stringWithFormat:@"document.getElementById('FooterAgentName2').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"AgentName"]];
@@ -662,6 +662,7 @@
      [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H16];
      [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H17];
      [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptP2H18];
+    
      [webIlustration stringByEvaluatingJavaScriptFromString:javaScriptTotalPage];
 }
 

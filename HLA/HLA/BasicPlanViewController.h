@@ -102,8 +102,11 @@
     NSString *PlanType;
     NSString *PembelianKEString;
     
-    
-    
+    IBOutlet UILabel* labelDiscount;
+    IBOutlet UILabel* labelbasicPremi;
+    IBOutlet UILabel* labelTotalPremiAfterDiscount;
+    IBOutlet UILabel* labelExtraPremi;
+    IBOutlet UILabel* labelTotalPremi;
 }
 
 @property (nonatomic, retain) UIPopoverController *planPopover;

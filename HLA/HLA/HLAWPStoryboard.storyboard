@@ -3989,9 +3989,14 @@
                         <outlet property="frekuensiPembayaranButton" destination="JO8-Pc-igK" id="Oiy-dh-w0U"/>
                         <outlet property="healthLoadingView" destination="4pu-gc-5r2" id="XzO-kv-5f5"/>
                         <outlet property="incomeSegment" destination="yzq-8i-OgN" id="nOM-fG-mbG"/>
+                        <outlet property="labelDiscount" destination="E47-z2-5PL" id="x6J-v9-f8B"/>
+                        <outlet property="labelExtraPremi" destination="p76-Ow-DbN" id="Kxg-XD-tfN"/>
                         <outlet property="labelParAcc" destination="2GM-r7-QFq" id="kTL-t8-wAT"/>
                         <outlet property="labelParPayout" destination="vf2-rg-raW" id="2PH-dn-ow1"/>
                         <outlet property="labelPercent1" destination="2U4-in-7TM" id="l5v-pL-wkC"/>
+                        <outlet property="labelTotalPremi" destination="8QA-l7-pT1" id="xuJ-OU-F64"/>
+                        <outlet property="labelTotalPremiAfterDiscount" destination="jOd-To-hnH" id="CwF-t1-0gK"/>
+                        <outlet property="labelbasicPremi" destination="kAj-9z-Kxh" id="dk2-pb-ceF"/>
                         <outlet property="masaExtraPremiField" destination="D1i-Jd-i2o" id="2DL-fG-b6W"/>
                         <outlet property="masaPembayaranButton" destination="HyI-we-kLy" id="En6-hP-F0q"/>
                         <outlet property="maxSALabel" destination="DMc-5N-1wy" id="WLy-hR-hUJ"/>

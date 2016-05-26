@@ -10,6 +10,7 @@
 
 @implementation ModelSIPOData
 
+
 -(void)savePODate:(NSDictionary *)dataPO{
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
@@ -53,7 +54,7 @@
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
     
-    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    FMDatabase *database = [FMDatabase databaseWithPath:path] ;
     [database open];
     BOOL success = [database executeUpdate:@"update SI_PO_Data set ProductCode=?, ProductName=?, QuickQuote=?,SIDate=?,PO_Name=?,PO_DOB=?,PO_Gender=?,PO_Age=?,PO_OccpCode=?,PO_Occp=?,PO_ClientID=?,RelWithLA=?,LA_ClientID=?,LA_Name=?,LA_DOB=?,LA_Age=?,LA_Gender=?,LA_OccpCode=?,LA_Occp=?,UpdatedDate=""datetime(\"now\", \"+7 hour\")"",IsInternalStaff=? where SINO=?" ,
                     [dataPO valueForKey:@"ProductCode"],
@@ -125,7 +126,7 @@
     
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     [database open];
-    BOOL success = [database executeUpdate:@"update SI_PO_Data set ProductCode=?, ProductName=?, QuickQuote=?,SIDate=?,PO_Name=?,PO_DOB=?,PO_Gender=?,PO_Age=?,PO_OccpCode=?,PO_Occp=?,PO_ClientID=?,RelWithLA=?,UpdatedDate=""datetime(\"now\", \"+7 hour\")"",PO_OccpCode=?,IsInternalStaff=? where SINO=?" ,
+    BOOL success = [database executeUpdate:@"update SI_PO_Data set ProductCode=?, ProductName=?, QuickQuote=?,SIDate=?,PO_Name=?,PO_DOB=?,PO_Gender=?,PO_Age=?,PO_OccpCode=?,PO_Occp=?,PO_ClientID=?,RelWithLA=?,UpdatedDate=""datetime(\"now\", \"+7 hour\")"",IsInternalStaff=? where SINO=?" ,
                     [dataPO valueForKey:@"ProductCode"],
                     [dataPO valueForKey:@"ProductName"],
                     [dataPO valueForKey:@"QuickQuote"],

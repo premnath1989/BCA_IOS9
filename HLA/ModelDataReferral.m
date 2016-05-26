@@ -14,7 +14,7 @@
     NSDictionary *dict;
     
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"DataReferral.sqlite"];
     
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     [database open];
@@ -42,7 +42,7 @@
     NSDictionary *dict;
     
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"DataReferral.sqlite"];
     
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     [database open];
@@ -70,7 +70,7 @@
 -(NSString *)getReferralName:(NSString *)referralNIP{
     NSString *referralName;
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"DataReferral.sqlite"];
     
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     [database open];
