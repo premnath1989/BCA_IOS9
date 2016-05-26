@@ -15,6 +15,7 @@
 
 @implementation AppDisclaimer
 @synthesize delegate = _delegate;
+@synthesize homeController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -44,10 +45,7 @@
 
 
 - (IBAction)approve:(id)sender {
-    CarouselViewController *carouselMenu = [self.storyboard instantiateViewControllerWithIdentifier:@"carouselView"];
-    carouselMenu.getInternet = @"No";
-    [self presentViewController:carouselMenu animated:YES completion:Nil];
-    [_delegate CloseWindow];
+    [self presentViewController:homeController animated:YES completion:Nil];
     
 }
 @end

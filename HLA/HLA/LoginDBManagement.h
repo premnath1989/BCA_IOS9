@@ -14,6 +14,7 @@
     NSString *RatesDatabasePath;
     NSString *UL_RatesDatabasePath;
     NSString *CommDatabasePath;
+    NSString *RefDatabasePath;
     sqlite3 *contactDB;
 }
 

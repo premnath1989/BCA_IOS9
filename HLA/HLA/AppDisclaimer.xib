@@ -31,7 +31,7 @@
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QRa-DY-M1n">
                     <rect key="frame" x="21" y="49" width="500" height="417"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <mutableString key="text">Aplikasi Mobile Point of Sales ini beserta semua informasi di dalamnya adalah aset yang sangat penting milik PT Asuransi Jiwa BCA (BCA Life) dan hanya boleh digunakan untuk kepentingan bisnis BCA Life.Setiap pengguna wajib menaati ketentuan hukum dan peraturan yang berlaku. Pengguna wajib melindungi segala bentuk informasi dan komunikasi yang terjadi dalam Aplikasi ini . 
+                    <string key="text">Aplikasi Mobile Point of Sales ini beserta semua informasi di dalamnya adalah aset yang sangat penting milik PT Asuransi Jiwa BCA (BCA Life) dan hanya boleh digunakan untuk kepentingan bisnis BCA Life.Setiap pengguna wajib menaati ketentuan hukum dan peraturan yang berlaku. Pengguna wajib melindungi segala bentuk informasi dan komunikasi yang terjadi dalam Aplikasi ini . 
 
 Pengguna dilarang untuk :
 	•	Memberikan informasi kepada pihak lain dengan cara apapun, kecuali diwajibkan oleh peraturan yang berlaku dan/atau telah mendapat persetujuan tertulis dari konsumen. 
@@ -40,7 +40,7 @@ Pengguna dilarang untuk :
 Pendistribusian informasi kepada pihak lain harus disesuaikan dengan wewenang dan prosedur kerja, atau berdasarkan persetujuan atasan terkait
 Pengguna memahami bahwa pelanggaran terhadap kerahasiaan dan keamanan informasi dapat dikenakan sanksi yang berlaku di BCA Life sesuai dengan tingkat risiko dan dampaknya.Pengguna menyatakan akan selalu bertanggung jawab dalam menggunakan dan mengelola kerahasiaan, ketersediaan dan integritas dari informasi yang ada di dalam aplikasi ini. 
 
-</mutableString>
+</string>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>

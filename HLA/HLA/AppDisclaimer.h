@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CarouselViewController.h"
 
 @protocol AppDisclaimerDelegate
 - (void)CloseWindow;
@@ -14,8 +15,11 @@
 
 @interface AppDisclaimer : UIViewController{
     id<AppDisclaimerDelegate> _delegate;
+    CarouselViewController *homeController;
 }
 @property (nonatomic, strong) id<AppDisclaimerDelegate> delegate;
+@property (nonatomic, strong) CarouselViewController *homeController;
+
 - (IBAction)approve:(id)sender;
 
 

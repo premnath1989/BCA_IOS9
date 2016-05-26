@@ -646,17 +646,20 @@ static NSString *labelVers;
 - (void) openHome
 {
     
-//    AppDisclaimer *disclaimerContent= [[AppDisclaimer alloc] initWithNibName:@"AppDisclaimer"
-//                                                                      bundle:nil];
-//    disclaimerContent.delegate = self;
-//    UIPopoverController *disclaimer = [[UIPopoverController alloc] initWithContentViewController:disclaimerContent];
-//    
-//    [disclaimer setPopoverContentSize:CGSizeMake(600, 600)];
-//    [disclaimer presentPopoverFromRect:CGRectMake(150, 50, 700, 748) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-
     CarouselViewController *carouselMenu = [self.storyboard instantiateViewControllerWithIdentifier:@"carouselView"];
     carouselMenu.getInternet = @"No";
-    [self presentViewController:carouselMenu animated:YES completion:Nil];
+    
+    AppDisclaimer *disclaimerContent= [[AppDisclaimer alloc] initWithNibName:@"AppDisclaimer"
+                                                                      bundle:nil];
+    disclaimerContent.delegate = self;
+    disclaimerContent.homeController = carouselMenu;
+    UIPopoverController *disclaimer = [[UIPopoverController alloc] initWithContentViewController:disclaimerContent];
+    
+    [disclaimer setPopoverContentSize:CGSizeMake(600, 600)];
+    [disclaimer presentPopoverFromRect:CGRectMake(325, 50, 450, 700) inView:self.view permittedArrowDirections:0 animated:YES];
+}
+
+- (void)CloseWindow{
 }
 
 - (int)syncDaysLeft{
