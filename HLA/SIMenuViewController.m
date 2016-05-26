@@ -3052,7 +3052,7 @@ BOOL isFirstLoad;
                 break;
             case 2:
                 if ([_BasicController validationDataBasicPlan]) {
-                    if([[dictionaryPOForInsert valueForKey:@"ProductName"] isEqualToString:@"BCA Life Heritage Protection"]){
+                    if(([[dictionaryPOForInsert valueForKey:@"ProductName"] isEqualToString:@"BCA Life Heritage Protection"])||([[dictionaryPOForInsert valueForKey:@"ProductName"] isEqualToString:@"BCA Life Heritage Protection – For BCA Staff"])){
                         if([_BasicController validationDataBasicPlan]){
                             if (!_PremiumController) {
                                 _PremiumController = [self.storyboard instantiateViewControllerWithIdentifier:@"premiumView"];
