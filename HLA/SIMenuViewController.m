@@ -883,6 +883,7 @@ BOOL isFirstLoad;
         [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"LA_Gender"] forKey:@"LA_Gender"];
         [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"LA_Age"] forKey:@"LA_Age"];
         [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"SINO"] forKey:@"SINO"];
+        [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"IsInternalStaff"] forKey:@"IsInternalStaff"];
     }
     @catch (NSException *exception) {
         
@@ -3124,6 +3125,7 @@ BOOL isFirstLoad;
     [newDictionaryForBasicPlan setObject:[dictPOData valueForKey:@"LA_Gender"] forKey:@"LA_Gender"];
     [newDictionaryForBasicPlan setObject:[dictPOData valueForKey:@"RelWithLA"] forKey:@"RelWithLA"];
     [newDictionaryForBasicPlan setObject:[dictPOData valueForKey:@"LA_Age"] forKey:@"LA_Age"];
+    [newDictionaryForBasicPlan setObject:[dictPOData valueForKey:@"IsInternalStaff"] forKey:@"IsInternalStaff"];
 }
 
 -(void)setPODictionaryWhenLoadFromList:(NSDictionary *)dataPO{
