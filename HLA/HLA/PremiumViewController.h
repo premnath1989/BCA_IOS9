@@ -77,6 +77,8 @@
     IBOutlet UILabel *lblTotalBulanan;
     IBOutlet UILabel *lblTotalSekaligus;
     
+    IBOutlet UIView *viewDiskon;
+    IBOutlet UILabel *lblDiskon;
     IBOutlet UILabel *lblDiskonTahunan;
     IBOutlet UILabel *lblDiskonBulanan;
     IBOutlet UILabel *lblDiskonSekaligus;

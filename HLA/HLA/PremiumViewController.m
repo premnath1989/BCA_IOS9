@@ -4574,6 +4574,8 @@
         
         [lblDiskonTahunan setText:[NSString stringWithFormat:@"(%@)",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getDiskonTahunan]]]]];
         [lblTotalTahunan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:[heritageCalculation getDiskonTahunan] BasicPremi:[heritageCalculation getPremiDasarTahunan]] ExtraPremi:[heritageCalculation extraPremiTahunan]]]]]];
+        
+        [viewDiskon setHidden:NO];
     }
     else{
         [lblDiskonSekaligus setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:0]]]];
@@ -4584,6 +4586,8 @@
         
         [lblDiskonTahunan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:0]]]];
         [lblTotalTahunan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:0 BasicPremi:[heritageCalculation getPremiDasarTahunan]] ExtraPremi:[heritageCalculation extraPremiTahunan]]]]]];
+        
+        [viewDiskon setHidden:YES];
     }
     
     if ([Highlight isEqualToString:@"Pembayaran Sekaligus"])

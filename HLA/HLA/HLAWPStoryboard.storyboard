@@ -5002,6 +5002,7 @@
                         <outlet property="lblAsuransiDasarBulanan" destination="HPR-2b-fKI" id="Iiu-HX-MPb"/>
                         <outlet property="lblAsuransiDasarSekaligus" destination="s6N-51-t9L" id="WgY-1g-WDo"/>
                         <outlet property="lblAsuransiDasarTahunan" destination="8Fg-NW-4Nh" id="klf-SZ-cbE"/>
+                        <outlet property="lblDiskon" destination="m1F-9D-mEU" id="Z36-Iv-Xhx"/>
                         <outlet property="lblDiskonBulanan" destination="hki-VQ-F4O" id="9OE-UK-RI0"/>
                         <outlet property="lblDiskonSekaligus" destination="9DP-8n-44G" id="UEy-Ub-9MJ"/>
                         <outlet property="lblDiskonTahunan" destination="maq-vs-zIT" id="bCt-6G-R7b"/>
@@ -5024,6 +5025,7 @@
                         <outlet property="navItem" destination="Grc-rY-MoE" id="V6R-JL-dkc"/>
                         <outlet property="navigationBar" destination="XPc-vk-TS1" id="0H9-ma-2wI"/>
                         <outlet property="simpan" destination="39S-wd-vPe" id="Y8g-Fk-Txk"/>
+                        <outlet property="viewDiskon" destination="fgc-tp-UmE" id="sW3-30-NFk"/>
                         <outlet property="viewSubTotal" destination="nbb-Ul-SOP" id="07U-aW-565"/>
                     </connections>
                 </viewController>

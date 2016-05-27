@@ -5487,11 +5487,12 @@ bool WPTPD30RisDeleted = FALSE;
             //[btnOccp setBackgroundColor:[UIColor redColor]];
             return false;
         }
-        else if (IsInternalStaff==0){
-            if ([diskonPremi longLongValue]>0){
+        
+        else if ((IsInternalStaff==0)&&([diskonPremi longLongValue]>0)){
+            //if ([diskonPremi longLongValue]>0){
                 [self createAlertViewAndShow:validationDiskonLebih tag:2];
                 return false;
-            }
+            //}
         }
         
         else if ((![_extraPremiPercentField.text isEqualToString:@""] && ![_extraPremiPercentField.text isEqualToString:@"0"])&&![_extraPremiPercentField.text isEqualToString:@"25"]&&![_extraPremiPercentField.text isEqualToString:@"50"]&&![_extraPremiPercentField.text isEqualToString:@"75"]&&![_extraPremiPercentField.text isEqualToString:@"100"]&&![_extraPremiPercentField.text isEqualToString:@"125"]&&![_extraPremiPercentField.text isEqualToString:@"150"]&&![_extraPremiPercentField.text isEqualToString:@"175"]&&![_extraPremiPercentField.text isEqualToString:@"200"]&&![_extraPremiPercentField.text isEqualToString:@"225"]&&![_extraPremiPercentField.text isEqualToString:@"250"]&&![_extraPremiPercentField.text isEqualToString:@"275"]&&![_extraPremiPercentField.text isEqualToString:@"300"])
@@ -5527,6 +5528,8 @@ bool WPTPD30RisDeleted = FALSE;
                 return false;
             }
         }
+        
+        
         return valid;
     }
     
