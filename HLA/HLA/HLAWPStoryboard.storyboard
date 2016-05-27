@@ -3989,7 +3989,6 @@
                         <outlet property="frekuensiPembayaranButton" destination="JO8-Pc-igK" id="Oiy-dh-w0U"/>
                         <outlet property="healthLoadingView" destination="4pu-gc-5r2" id="XzO-kv-5f5"/>
                         <outlet property="incomeSegment" destination="yzq-8i-OgN" id="nOM-fG-mbG"/>
-                        <outlet property="labelDiscount" destination="E47-z2-5PL" id="x6J-v9-f8B"/>
                         <outlet property="labelExtraPremi" destination="p76-Ow-DbN" id="Kxg-XD-tfN"/>
                         <outlet property="labelParAcc" destination="2GM-r7-QFq" id="kTL-t8-wAT"/>
                         <outlet property="labelParPayout" destination="vf2-rg-raW" id="2PH-dn-ow1"/>

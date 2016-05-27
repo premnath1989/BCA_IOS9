@@ -379,7 +379,7 @@ bool WPTPD30RisDeleted = FALSE;
     else{
         //_KKLKDiskaunBtn.hidden = NO;
         //_KKLKDiskaunLbl.hidden = NO;
-        [ExtraPremiDasarLBL setText:@"Min  Rp 500,000,000  Max Rp 300,000,000,000"];
+        [ExtraPremiDasarLBL setText:@"Min  Rp 500,000,000    Max Rp 300,000,000,000"];
     }
 //    if ([PlanType isEqualToString:@"BCA Life Heritage"])
 //    {
@@ -394,6 +394,7 @@ bool WPTPD30RisDeleted = FALSE;
         //yearlyIncomeField.text = @"";
     
 //    }
+    [self SetDisplayForProduct:[_dictionaryPOForInsert valueForKey:@"ProductCode"]];
     
     [self PremiDasarAct];
     [self PremiDasarActB];
@@ -417,9 +418,39 @@ bool WPTPD30RisDeleted = FALSE;
     FrekuensiPembayaranChecking =@"10 Tahun";
     //yearlyIncomeField.text = @"";
     //    }
-   
+    [self SetDisplayForProduct:[_dictionaryPOForInsert valueForKey:@"ProductCode"]];
     [self PremiDasarActKeluargaku:FRekeunsiPembayaranMode];
     [self calculateRiderPremi];
+}
+
+-(void)SetDisplayForProduct:(NSString *)productCode{
+    if ([productCode isEqualToString:@"BCALH"]){
+        [labelExtraPremi setText:@"Extra Premi Dasar (B)"];
+        [labelTotalPremi setText:@"Total Premi (A+B)"];
+        
+        [_KKLKDiskaunLbl setHidden:YES];
+        [labelTotalPremiAfterDiscount setHidden:YES];
+        [_KKLKDiskaunBtn setHidden:YES];
+        [_basicPremiFieldAfterDiscount setHidden:YES];
+    }
+    else if ([productCode isEqualToString:@"BCALHST"]){
+        [labelExtraPremi setText:@"Extra Premi Dasar (C)"];
+        [labelTotalPremi setText:@"Total Premi (A-B)+C"];
+        
+        [_KKLKDiskaunLbl setHidden:NO];
+        [labelTotalPremiAfterDiscount setHidden:NO];
+        [_KKLKDiskaunBtn setHidden:NO];
+        [_basicPremiFieldAfterDiscount setHidden:NO];
+    }
+    else if ([productCode isEqualToString:@"BCAKK"]){
+        [labelExtraPremi setText:@"Extra Premi Dasar (C)"];
+        [labelTotalPremi setText:@"Total Premi (A-B)+C"];
+        
+        [_KKLKDiskaunLbl setHidden:NO];
+        [labelTotalPremiAfterDiscount setHidden:NO];
+        [_KKLKDiskaunBtn setHidden:NO];
+        [_basicPremiFieldAfterDiscount setHidden:NO];
+    }
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
