@@ -1109,12 +1109,19 @@ BOOL isFirstLoad;
                     [loginDB duplicateRow:@"SI_PO_Data" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
                     [loginDB duplicateRow:@"SI_Temp_Trad_Raider" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
                 }
+                
+                //update SI created date for newSiNo
+                [_modelSIPOData updatePODataDate:newSiNo Date:[formatter getDateToday:@"dd/MM/yyyy"]];
+                [_modelSIMaster updateIlustrationMasterDate:newSiNo];
+                [_modelSIPremium updatePremiumDate:newSiNo];
+                
                 getSINo = newSiNo;
                 self.requestSINo = getSINo;
                 outletSaveAs.hidden = YES;
                 [dictionaryPOForInsert setValue:getSINo forKey:@"SINO"];
                 [_LAController updateSINO:getSINo];
                 [self LoadViewController];
+                [_LAController loadDataAfterSaveAs:newSiNo];
                 arrayIntValidate = [[NSMutableArray alloc] initWithObjects:@"0",@"0",@"0",@"0", nil];                
             }
                 break;

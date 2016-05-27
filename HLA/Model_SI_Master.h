@@ -22,4 +22,5 @@
 -(void)deleteIlustrationMaster:(NSString *)siNo;
 -(void)signIlustrationMaster:(NSString *)SINO;
 -(BOOL)isSignedIlustration:(NSString *)SINo;
+-(void)updateIlustrationMasterDate:(NSString *)SINO;
 @end

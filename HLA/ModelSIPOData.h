@@ -22,4 +22,5 @@
 -(int)getPODataCount:(NSString *)SINo;
 -(int)getLADataCount:(NSString *)prospectProfileID;
 -(NSMutableArray *)getSINumberForProspectProfileID:(NSString *)prospectProfileID;
+-(void)updatePODataDate:(NSString *)SINO Date:(NSString *)date;
 @end

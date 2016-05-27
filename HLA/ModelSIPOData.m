@@ -87,6 +87,24 @@
     [database close];
 }
 
+-(void)updatePODataDate:(NSString *)SINO Date:(NSString *)date{
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path] ;
+    [database open];
+    BOOL success = [database executeUpdate:@"update SI_PO_Data set CreatedDate=""datetime(\"now\", \"+7 hour\")"",UpdatedDate=""datetime(\"now\", \"+7 hour\")"",SIDate=? where SINO=?" ,
+                    date,SINO];
+    //NSLog(@"update SI_PO_Data set SIDate=""select strftime(\"'%@/%m/%Y'\", datetime(\"now\"))"" where SINO=%@",SINO);
+    if (!success) {
+        NSLog(@"%s: insert error: %@", __FUNCTION__, [database lastErrorMessage]);
+        // do whatever you need to upon error
+    }
+    [results close];
+    [database close];
+}
+
+
 -(void)savePartialPODate:(NSDictionary *)dataPO{
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];

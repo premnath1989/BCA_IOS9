@@ -17,4 +17,5 @@
 -(NSDictionary *)getPremium_For:(NSString *)SINo;
 -(void)updatePremium:(NSDictionary *)dataPremium;
 -(int)getPremiumCount:(NSString *)SINo;
+-(void)updatePremiumDate:(NSString *)SINO;
 @end

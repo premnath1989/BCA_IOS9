@@ -931,6 +931,14 @@ id dobtanngal;
     }
 }
 
+-(void)loadDataAfterSaveAs:(NSString *)SINO{
+    _modelSIPOData = [[ModelSIPOData alloc]init];
+    NSDictionary *localdictPOData=[[NSDictionary alloc]initWithDictionary:[_modelSIPOData getPO_DataFor:SINO]];
+    if ([localdictPOData count]!=0){
+        [TanggalIllustrasi setTitle:[localdictPOData valueForKey:@"SIDate"] forState:UIControlStateNormal];
+    }
+}
+
 #pragma mark - Action
 
 - (IBAction)ActionEAPP:(id)sender

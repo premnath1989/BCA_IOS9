@@ -248,6 +248,7 @@
 
 -(BOOL)validateSave;
 -(void)loadDataFromList;
+-(void)loadDataAfterSaveAs:(NSString *)SINO;
 -(NSDictionary *)setDictionaryLA;
 @end
 
