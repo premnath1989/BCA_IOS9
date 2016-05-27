@@ -534,7 +534,7 @@
     int numberOfRow=[self calculateRowNumber:laAge];
     
     NSString *sexPO;
-    if ([[_dictionaryPOForInsert valueForKey:@"PO_Gender"] isEqualToString:@"MALE"]){
+    if ([[_dictionaryPOForInsert valueForKey:@"LA_Gender"] isEqualToString:@"MALE"]){
         sexPO=@"Pria";
     }
     else{
