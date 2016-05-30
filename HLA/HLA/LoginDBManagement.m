@@ -63,14 +63,14 @@
         ULRatesPath= Nil;
     }
     
-    if([fileManager fileExistsAtPath:UL_RatesDatabasePath] == FALSE ){
+    if([fileManager fileExistsAtPath:RatesDatabasePath] == FALSE ){
         
-        NSString *ULRatesPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"UL_Rates.sqlite"];
-        success = [fileManager copyItemAtPath:ULRatesPath toPath:UL_RatesDatabasePath error:&DBerror];
+        NSString *RatesPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"BCA_Rates.sqlite"];
+        success = [fileManager copyItemAtPath:RatesPath toPath:RatesDatabasePath error:&DBerror];
         if (!success) {
             NSAssert1(0, @"Failed to create UL Rates file with message '%@'.", [DBerror localizedDescription]);
         }
-        ULRatesPath= Nil;
+        RatesPath= Nil;
     }
 
     if([fileManager fileExistsAtPath:RefDatabasePath] == FALSE ){
