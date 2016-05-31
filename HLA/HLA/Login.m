@@ -315,8 +315,6 @@ static NSString *labelVers;
                 [spinnerLoading stopLoadingSpinner];
                 UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Username/Password yang Anda masukkan salah"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
                 [alert show];
-                
-
             }
         }
     }
@@ -527,12 +525,12 @@ static NSString *labelVers;
         }
     }
     
-    if([[loginDB localDBUDID] caseInsensitiveCompare:[[[UIDevice currentDevice] identifierForVendor] UUIDString]]!= NSOrderedSame){
-        [spinnerLoading stopLoadingSpinner];
-        UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Agen login di device yang tidak terdaftar"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        [alert show];
-        validFlag = false;
-    }
+//    if([[loginDB localDBUDID] caseInsensitiveCompare:[[[UIDevice currentDevice] identifierForVendor] UUIDString]]!= NSOrderedSame){
+//        [spinnerLoading stopLoadingSpinner];
+//        UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Agen login di device yang tidak terdaftar"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+//        [alert show];
+//        validFlag = false;
+//    }
     
     switch ([loginDB DeviceStatus:txtUsername.text]) {
         case DEVICE_IS_INACTIVE:
@@ -880,11 +878,11 @@ static NSString *labelVers;
         statusUsername = USERNAME_IS_ADMIN;
     }
     
-    if([[loginDB localDBUDID] caseInsensitiveCompare:[[[UIDevice currentDevice] identifierForVendor] UUIDString]]!= NSOrderedSame){
-        UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Agen login di device yang tidak terdaftar"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        [alert show];
-        statusUsername = USERNAME_IS_INVALID;
-    }
+//    if([[loginDB localDBUDID] caseInsensitiveCompare:[[[UIDevice currentDevice] identifierForVendor] UUIDString]]!= NSOrderedSame){
+//        UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Agen login di device yang tidak terdaftar"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+//        [alert show];
+//        statusUsername = USERNAME_IS_INVALID;
+//    }
     
     [db close];
     
