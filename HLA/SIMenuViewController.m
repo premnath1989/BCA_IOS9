@@ -3320,7 +3320,13 @@ BOOL isFirstLoad;
         [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"LA_Age"] forKey:@"LA_Age"];
         [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"SINO"] forKey:@"SINO"];
         [newDictionaryForBasicPlan setObject:[dictionaryPOForInsert valueForKey:@"IsInternalStaff"] forKey:@"IsInternalStaff"];
-        [_modelSIPremium savePremium:newDictionaryForBasicPlan];
+        
+        if ([_modelSIPremium getPremiumCount:[dictionaryPOForInsert valueForKey:@"SINO"]]>0){
+            [_modelSIPremium updatePremium:newDictionaryForBasicPlan];
+        }
+        else{
+            [_modelSIPremium savePremium:newDictionaryForBasicPlan];
+        }
     }
 
     NSString *PlanType = [dictionaryPOForInsert valueForKey:@"ProductName"];
