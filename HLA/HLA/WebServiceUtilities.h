@@ -29,4 +29,5 @@
 - (int)adminLogin:(NSString *)agentCode delegate:(id)delegate adminCode:(NSString *)adminCode adminPass:(NSString *)adminPass;
 - (int)spvLogin:(NSString *)agentCode delegate:(id)delegate spvCode:(NSString *)spvCode spvPass:(NSString *)spvPass;
 - (int)checkuserpass:(NSString *)username password:(NSString *)password delegate:(id)delegate;
+- (int)changeUDID:(NSString *)username udid:(NSString *)udid delegate:(id)delegate;
 @end

@@ -5249,6 +5249,370 @@
 {
 }
 @end
+
+@implementation AgentWS_ChangeUDID
+- (id)init
+{
+    if((self = [super init])) {
+        strAgentcode = 0;
+        strUDID = 0;
+        strStatus = 0;
+    }
+    
+    return self;
+}
+- (void)dealloc
+{
+    if(strAgentcode != nil) [strAgentcode release];
+    if(strUDID != nil) [strUDID release];
+    if(strStatus != nil) [strStatus release];
+    
+    [super dealloc];
+}
+- (NSString *)nsPrefix
+{
+    return @"AgentWS";
+}
+- (xmlNodePtr)xmlNodeForDoc:(xmlDocPtr)doc elementName:(NSString *)elName elementNSPrefix:(NSString *)elNSPrefix
+{
+    NSString *nodeName = nil;
+    if(elNSPrefix != nil && [elNSPrefix length] > 0)
+    {
+        nodeName = [NSString stringWithFormat:@"%@:%@", elNSPrefix, elName];
+    }
+    else
+    {
+        nodeName = [NSString stringWithFormat:@"%@:%@", @"AgentWS", elName];
+    }
+    
+    xmlNodePtr node = xmlNewDocNode(doc, NULL, [nodeName xmlString], NULL);
+    
+    
+    [self addAttributesToNode:node];
+    
+    [self addElementsToNode:node];
+    
+    return node;
+}
+- (void)addAttributesToNode:(xmlNodePtr)node
+{
+    
+}
+- (void)addElementsToNode:(xmlNodePtr)node
+{
+    
+    if(self.strAgentcode != 0) {
+        xmlAddChild(node, [self.strAgentcode xmlNodeForDoc:node->doc elementName:@"strAgentcode" elementNSPrefix:@"AgentWS"]);
+    }
+    if(self.strUDID != 0) {
+        xmlAddChild(node, [self.strUDID xmlNodeForDoc:node->doc elementName:@"strUDID" elementNSPrefix:@"AgentWS"]);
+    }
+    if(self.strStatus != 0) {
+        xmlAddChild(node, [self.strStatus xmlNodeForDoc:node->doc elementName:@"strStatus" elementNSPrefix:@"AgentWS"]);
+    }
+}
+/* elements */
+@synthesize strAgentcode;
+@synthesize strUDID;
+@synthesize strStatus;
+/* attributes */
+- (NSDictionary *)attributes
+{
+    NSMutableDictionary *attributes = [NSMutableDictionary dictionary];
+    
+    return attributes;
+}
++ (AgentWS_ChangeUDID *)deserializeNode:(xmlNodePtr)cur
+{
+    AgentWS_ChangeUDID *newObject = [[AgentWS_ChangeUDID new] autorelease];
+    
+    [newObject deserializeAttributesFromNode:cur];
+    [newObject deserializeElementsFromNode:cur];
+    
+    return newObject;
+}
+- (void)deserializeAttributesFromNode:(xmlNodePtr)cur
+{
+}
+- (void)deserializeElementsFromNode:(xmlNodePtr)cur
+{
+    
+    
+    for( cur = cur->children ; cur != NULL ; cur = cur->next ) {
+        if(cur->type == XML_ELEMENT_NODE) {
+            xmlChar *elementText = xmlNodeListGetString(cur->doc, cur->children, 1);
+            NSString *elementString = nil;
+            
+            if(elementText != NULL) {
+                elementString = [NSString stringWithCString:(char*)elementText encoding:NSUTF8StringEncoding];
+                [elementString self]; // avoid compiler warning for unused var
+                xmlFree(elementText);
+            }
+            if(xmlStrEqual(cur->name, (const xmlChar *) "strAgentcode")) {
+                
+                Class elementClass = nil;
+                xmlChar *instanceType = xmlGetNsProp(cur, (const xmlChar *) "type", (const xmlChar *) "http://www.w3.org/2001/XMLSchema-instance");
+                if(instanceType == NULL) {
+                    elementClass = [NSString  class];
+                } else {
+                    NSString *elementTypeString = [NSString stringWithCString:(char*)instanceType encoding:NSUTF8StringEncoding];
+                    
+                    NSArray *elementTypeArray = [elementTypeString componentsSeparatedByString:@":"];
+                    
+                    NSString *elementClassString = nil;
+                    if([elementTypeArray count] > 1) {
+                        NSString *prefix = [elementTypeArray objectAtIndex:0];
+                        NSString *localName = [elementTypeArray objectAtIndex:1];
+                        
+                        xmlNsPtr elementNamespace = xmlSearchNs(cur->doc, cur, [prefix xmlString]);
+                        
+                        NSString *standardPrefix = [[USGlobals sharedInstance].wsdlStandardNamespaces objectForKey:[NSString stringWithCString:(char*)elementNamespace->href encoding:NSUTF8StringEncoding]];
+                        
+                        elementClassString = [NSString stringWithFormat:@"%@_%@", standardPrefix, localName];
+                    } else {
+                        elementClassString = [elementTypeString stringByReplacingOccurrencesOfString:@":" withString:@"_" options:0 range:NSMakeRange(0, [elementTypeString length])];
+                    }
+                    
+                    elementClass = NSClassFromString(elementClassString);
+                    xmlFree(instanceType);
+                }
+                
+                id newChild = [elementClass deserializeNode:cur];
+                
+                self.strAgentcode = newChild;
+            }
+            if(xmlStrEqual(cur->name, (const xmlChar *) "strUDID")) {
+                
+                Class elementClass = nil;
+                xmlChar *instanceType = xmlGetNsProp(cur, (const xmlChar *) "type", (const xmlChar *) "http://www.w3.org/2001/XMLSchema-instance");
+                if(instanceType == NULL) {
+                    elementClass = [NSString  class];
+                } else {
+                    NSString *elementTypeString = [NSString stringWithCString:(char*)instanceType encoding:NSUTF8StringEncoding];
+                    
+                    NSArray *elementTypeArray = [elementTypeString componentsSeparatedByString:@":"];
+                    
+                    NSString *elementClassString = nil;
+                    if([elementTypeArray count] > 1) {
+                        NSString *prefix = [elementTypeArray objectAtIndex:0];
+                        NSString *localName = [elementTypeArray objectAtIndex:1];
+                        
+                        xmlNsPtr elementNamespace = xmlSearchNs(cur->doc, cur, [prefix xmlString]);
+                        
+                        NSString *standardPrefix = [[USGlobals sharedInstance].wsdlStandardNamespaces objectForKey:[NSString stringWithCString:(char*)elementNamespace->href encoding:NSUTF8StringEncoding]];
+                        
+                        elementClassString = [NSString stringWithFormat:@"%@_%@", standardPrefix, localName];
+                    } else {
+                        elementClassString = [elementTypeString stringByReplacingOccurrencesOfString:@":" withString:@"_" options:0 range:NSMakeRange(0, [elementTypeString length])];
+                    }
+                    
+                    elementClass = NSClassFromString(elementClassString);
+                    xmlFree(instanceType);
+                }
+                
+                id newChild = [elementClass deserializeNode:cur];
+                
+                self.strUDID = newChild;
+            }
+            if(xmlStrEqual(cur->name, (const xmlChar *) "strStatus")) {
+                
+                Class elementClass = nil;
+                xmlChar *instanceType = xmlGetNsProp(cur, (const xmlChar *) "type", (const xmlChar *) "http://www.w3.org/2001/XMLSchema-instance");
+                if(instanceType == NULL) {
+                    elementClass = [NSString  class];
+                } else {
+                    NSString *elementTypeString = [NSString stringWithCString:(char*)instanceType encoding:NSUTF8StringEncoding];
+                    
+                    NSArray *elementTypeArray = [elementTypeString componentsSeparatedByString:@":"];
+                    
+                    NSString *elementClassString = nil;
+                    if([elementTypeArray count] > 1) {
+                        NSString *prefix = [elementTypeArray objectAtIndex:0];
+                        NSString *localName = [elementTypeArray objectAtIndex:1];
+                        
+                        xmlNsPtr elementNamespace = xmlSearchNs(cur->doc, cur, [prefix xmlString]);
+                        
+                        NSString *standardPrefix = [[USGlobals sharedInstance].wsdlStandardNamespaces objectForKey:[NSString stringWithCString:(char*)elementNamespace->href encoding:NSUTF8StringEncoding]];
+                        
+                        elementClassString = [NSString stringWithFormat:@"%@_%@", standardPrefix, localName];
+                    } else {
+                        elementClassString = [elementTypeString stringByReplacingOccurrencesOfString:@":" withString:@"_" options:0 range:NSMakeRange(0, [elementTypeString length])];
+                    }
+                    
+                    elementClass = NSClassFromString(elementClassString);
+                    xmlFree(instanceType);
+                }
+                
+                id newChild = [elementClass deserializeNode:cur];
+                
+                self.strStatus = newChild;
+            }
+        }
+    }
+}
+@end
+@implementation AgentWS_ChangeUDIDResponse
+- (id)init
+{
+    if((self = [super init])) {
+        ChangeUDIDResult = 0;
+        strStatus = 0;
+    }
+    
+    return self;
+}
+- (void)dealloc
+{
+    if(ChangeUDIDResult != nil) [ChangeUDIDResult release];
+    if(strStatus != nil) [strStatus release];
+    
+    [super dealloc];
+}
+- (NSString *)nsPrefix
+{
+    return @"AgentWS";
+}
+- (xmlNodePtr)xmlNodeForDoc:(xmlDocPtr)doc elementName:(NSString *)elName elementNSPrefix:(NSString *)elNSPrefix
+{
+    NSString *nodeName = nil;
+    if(elNSPrefix != nil && [elNSPrefix length] > 0)
+    {
+        nodeName = [NSString stringWithFormat:@"%@:%@", elNSPrefix, elName];
+    }
+    else
+    {
+        nodeName = [NSString stringWithFormat:@"%@:%@", @"AgentWS", elName];
+    }
+    
+    xmlNodePtr node = xmlNewDocNode(doc, NULL, [nodeName xmlString], NULL);
+    
+    
+    [self addAttributesToNode:node];
+    
+    [self addElementsToNode:node];
+    
+    return node;
+}
+- (void)addAttributesToNode:(xmlNodePtr)node
+{
+    
+}
+- (void)addElementsToNode:(xmlNodePtr)node
+{
+    
+    if(self.ChangeUDIDResult != 0) {
+        xmlAddChild(node, [self.ChangeUDIDResult xmlNodeForDoc:node->doc elementName:@"ChangeUDIDResult" elementNSPrefix:@"AgentWS"]);
+    }
+    if(self.strStatus != 0) {
+        xmlAddChild(node, [self.strStatus xmlNodeForDoc:node->doc elementName:@"strStatus" elementNSPrefix:@"AgentWS"]);
+    }
+}
+/* elements */
+@synthesize ChangeUDIDResult;
+@synthesize strStatus;
+/* attributes */
+- (NSDictionary *)attributes
+{
+    NSMutableDictionary *attributes = [NSMutableDictionary dictionary];
+    
+    return attributes;
+}
++ (AgentWS_ChangeUDIDResponse *)deserializeNode:(xmlNodePtr)cur
+{
+    AgentWS_ChangeUDIDResponse *newObject = [[AgentWS_ChangeUDIDResponse new] autorelease];
+    
+    [newObject deserializeAttributesFromNode:cur];
+    [newObject deserializeElementsFromNode:cur];
+    
+    return newObject;
+}
+- (void)deserializeAttributesFromNode:(xmlNodePtr)cur
+{
+}
+- (void)deserializeElementsFromNode:(xmlNodePtr)cur
+{
+    
+    
+    for( cur = cur->children ; cur != NULL ; cur = cur->next ) {
+        if(cur->type == XML_ELEMENT_NODE) {
+            xmlChar *elementText = xmlNodeListGetString(cur->doc, cur->children, 1);
+            NSString *elementString = nil;
+            
+            if(elementText != NULL) {
+                elementString = [NSString stringWithCString:(char*)elementText encoding:NSUTF8StringEncoding];
+                [elementString self]; // avoid compiler warning for unused var
+                xmlFree(elementText);
+            }
+            if(xmlStrEqual(cur->name, (const xmlChar *) "ChangeUDIDResult")) {
+                
+                Class elementClass = nil;
+                xmlChar *instanceType = xmlGetNsProp(cur, (const xmlChar *) "type", (const xmlChar *) "http://www.w3.org/2001/XMLSchema-instance");
+                if(instanceType == NULL) {
+                    elementClass = [NSString  class];
+                } else {
+                    NSString *elementTypeString = [NSString stringWithCString:(char*)instanceType encoding:NSUTF8StringEncoding];
+                    
+                    NSArray *elementTypeArray = [elementTypeString componentsSeparatedByString:@":"];
+                    
+                    NSString *elementClassString = nil;
+                    if([elementTypeArray count] > 1) {
+                        NSString *prefix = [elementTypeArray objectAtIndex:0];
+                        NSString *localName = [elementTypeArray objectAtIndex:1];
+                        
+                        xmlNsPtr elementNamespace = xmlSearchNs(cur->doc, cur, [prefix xmlString]);
+                        
+                        NSString *standardPrefix = [[USGlobals sharedInstance].wsdlStandardNamespaces objectForKey:[NSString stringWithCString:(char*)elementNamespace->href encoding:NSUTF8StringEncoding]];
+                        
+                        elementClassString = [NSString stringWithFormat:@"%@_%@", standardPrefix, localName];
+                    } else {
+                        elementClassString = [elementTypeString stringByReplacingOccurrencesOfString:@":" withString:@"_" options:0 range:NSMakeRange(0, [elementTypeString length])];
+                    }
+                    
+                    elementClass = NSClassFromString(elementClassString);
+                    xmlFree(instanceType);
+                }
+                
+                id newChild = [elementClass deserializeNode:cur];
+                
+                self.ChangeUDIDResult = newChild;
+            }
+            if(xmlStrEqual(cur->name, (const xmlChar *) "strStatus")) {
+                
+                Class elementClass = nil;
+                xmlChar *instanceType = xmlGetNsProp(cur, (const xmlChar *) "type", (const xmlChar *) "http://www.w3.org/2001/XMLSchema-instance");
+                if(instanceType == NULL) {
+                    elementClass = [NSString  class];
+                } else {
+                    NSString *elementTypeString = [NSString stringWithCString:(char*)instanceType encoding:NSUTF8StringEncoding];
+                    
+                    NSArray *elementTypeArray = [elementTypeString componentsSeparatedByString:@":"];
+                    
+                    NSString *elementClassString = nil;
+                    if([elementTypeArray count] > 1) {
+                        NSString *prefix = [elementTypeArray objectAtIndex:0];
+                        NSString *localName = [elementTypeArray objectAtIndex:1];
+                        
+                        xmlNsPtr elementNamespace = xmlSearchNs(cur->doc, cur, [prefix xmlString]);
+                        
+                        NSString *standardPrefix = [[USGlobals sharedInstance].wsdlStandardNamespaces objectForKey:[NSString stringWithCString:(char*)elementNamespace->href encoding:NSUTF8StringEncoding]];
+                        
+                        elementClassString = [NSString stringWithFormat:@"%@_%@", standardPrefix, localName];
+                    } else {
+                        elementClassString = [elementTypeString stringByReplacingOccurrencesOfString:@":" withString:@"_" options:0 range:NSMakeRange(0, [elementTypeString length])];
+                    }
+                    
+                    elementClass = NSClassFromString(elementClassString);
+                    xmlFree(instanceType);
+                }
+                
+                id newChild = [elementClass deserializeNode:cur];
+                
+                self.strStatus = newChild;
+            }
+        }
+    }
+}
+@end
 @implementation AgentWS
 + (void)initialize
 {
@@ -5492,6 +5856,18 @@
 	[self performAsynchronousOperation: [[(AgentWSSoapBinding_AdminLogin*)[AgentWSSoapBinding_AdminLogin alloc] initWithBinding:self delegate:responseDelegate
 																							 parameters:aParameters
 																							 ] autorelease]];
+}
+- (AgentWSSoapBindingResponse *)ChangeUDIDUsingParameters:(AgentWS_ChangeUDID *)aParameters
+{
+    return [self performSynchronousOperation:[[(AgentWSSoapBinding_ChangeUDID*)[AgentWSSoapBinding_ChangeUDID alloc] initWithBinding:self delegate:self
+                                                                                                                          parameters:aParameters
+                                               ] autorelease]];
+}
+- (void)ChangeUDIDAsyncUsingParameters:(AgentWS_ChangeUDID *)aParameters  delegate:(id<AgentWSSoapBindingResponseDelegate>)responseDelegate
+{
+    [self performAsynchronousOperation: [[(AgentWSSoapBinding_ChangeUDID*)[AgentWSSoapBinding_ChangeUDID alloc] initWithBinding:self delegate:responseDelegate
+                                                                                                                     parameters:aParameters
+                                          ] autorelease]];
 }
 - (void)sendHTTPCallUsingBody:(NSString *)outputBody soapAction:(NSString *)soapAction forOperation:(AgentWSSoapBindingOperation *)operation
 {
@@ -6927,6 +7303,99 @@ parameters:(AgentWS_AdminLogin *)aParameters
 	}
 }
 @end
+@implementation AgentWSSoapBinding_ChangeUDID
+@synthesize parameters;
+- (id)initWithBinding:(AgentWSSoapBinding *)aBinding delegate:(id<AgentWSSoapBindingResponseDelegate>)responseDelegate
+           parameters:(AgentWS_ChangeUDID *)aParameters
+{
+    if((self = [super initWithBinding:aBinding delegate:responseDelegate])) {
+        self.parameters = aParameters;
+    }
+    
+    return self;
+}
+- (void)dealloc
+{
+    if(parameters != nil) [parameters release];
+    
+    [super dealloc];
+}
+- (void)main
+{
+    [response autorelease];
+    response = [AgentWSSoapBindingResponse new];
+    
+    AgentWSSoapBinding_envelope *envelope = [AgentWSSoapBinding_envelope sharedInstance];
+    
+    NSMutableDictionary *headerElements = nil;
+    headerElements = [NSMutableDictionary dictionary];
+    
+    NSMutableDictionary *bodyElements = nil;
+    bodyElements = [NSMutableDictionary dictionary];
+    if(parameters != nil) [bodyElements setObject:parameters forKey:@"ChangeUDID"];
+    
+    NSString *operationXMLString = [envelope serializedFormUsingHeaderElements:headerElements bodyElements:bodyElements];
+    
+    [binding sendHTTPCallUsingBody:operationXMLString soapAction:@"http://tempuri.org/ChangeUDID" forOperation:self];
+}
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+    if (responseData != nil && delegate != nil)
+    {
+        xmlDocPtr doc;
+        xmlNodePtr cur;
+        
+        if (binding.logXMLInOut) {
+            NSLog(@"ResponseBody:\n%@", [[[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding] autorelease]);
+        }
+        
+        doc = xmlParseMemory([responseData bytes], [responseData length]);
+        
+        if (doc == NULL) {
+            NSDictionary *userInfo = [NSDictionary dictionaryWithObject:@"Errors while parsing returned XML" forKey:NSLocalizedDescriptionKey];
+            
+            response.error = [NSError errorWithDomain:@"AgentWSSoapBindingResponseXML" code:1 userInfo:userInfo];
+            [delegate operation:self completedWithResponse:response];
+        } else {
+            cur = xmlDocGetRootElement(doc);
+            cur = cur->children;
+            
+            for( ; cur != NULL ; cur = cur->next) {
+                if(cur->type == XML_ELEMENT_NODE) {
+                    
+                    if(xmlStrEqual(cur->name, (const xmlChar *) "Body")) {
+                        NSMutableArray *responseBodyParts = [NSMutableArray array];
+                        
+                        xmlNodePtr bodyNode;
+                        for(bodyNode=cur->children ; bodyNode != NULL ; bodyNode = bodyNode->next) {
+                            if(cur->type == XML_ELEMENT_NODE) {
+                                if(xmlStrEqual(bodyNode->name, (const xmlChar *) "ChangeUDIDResponse")) {
+                                    AgentWS_ChangeUDIDResponse *bodyObject = [AgentWS_ChangeUDIDResponse deserializeNode:bodyNode];
+                                    //NSAssert1(bodyObject != nil, @"Errors while parsing body %s", bodyNode->name);
+                                    if (bodyObject != nil) [responseBodyParts addObject:bodyObject];
+                                }
+                                if (xmlStrEqual(bodyNode->ns->prefix, cur->ns->prefix) &&
+                                    xmlStrEqual(bodyNode->name, (const xmlChar *) "Fault")) {
+                                    SOAPFault *bodyObject = [SOAPFault deserializeNode:bodyNode];
+                                    //NSAssert1(bodyObject != nil, @"Errors while parsing body %s", bodyNode->name);
+                                    if (bodyObject != nil) [responseBodyParts addObject:bodyObject];
+                                }
+                            }
+                        }
+                        
+                        response.bodyParts = responseBodyParts;
+                    }
+                }
+            }
+            
+            xmlFreeDoc(doc);
+        }
+        
+        xmlCleanupParser();
+        [delegate operation:self completedWithResponse:response];
+    }
+}
+@end
 static AgentWSSoapBinding_envelope *AgentWSSoapBindingSharedEnvelopeInstance = nil;
 @implementation AgentWSSoapBinding_envelope
 + (AgentWSSoapBinding_envelope *)sharedInstance
@@ -7233,6 +7702,18 @@ static AgentWSSoapBinding_envelope *AgentWSSoapBindingSharedEnvelopeInstance = n
 	[self performAsynchronousOperation: [[(AgentWSSoap12Binding_AdminLogin*)[AgentWSSoap12Binding_AdminLogin alloc] initWithBinding:self delegate:responseDelegate
 																							 parameters:aParameters
 																							 ] autorelease]];
+}
+- (AgentWSSoap12BindingResponse *)ChangeUDIDUsingParameters:(AgentWS_ChangeUDID *)aParameters
+{
+    return [self performSynchronousOperation:[[(AgentWSSoap12Binding_ChangeUDID*)[AgentWSSoap12Binding_ChangeUDID alloc] initWithBinding:self delegate:self
+                                                                                                                              parameters:aParameters
+                                               ] autorelease]];
+}
+- (void)ChangeUDIDAsyncUsingParameters:(AgentWS_ChangeUDID *)aParameters  delegate:(id<AgentWSSoap12BindingResponseDelegate>)responseDelegate
+{
+    [self performAsynchronousOperation: [[(AgentWSSoap12Binding_ChangeUDID*)[AgentWSSoap12Binding_ChangeUDID alloc] initWithBinding:self delegate:responseDelegate
+                                                                                                                         parameters:aParameters
+                                          ] autorelease]];
 }
 - (void)sendHTTPCallUsingBody:(NSString *)outputBody soapAction:(NSString *)soapAction forOperation:(AgentWSSoap12BindingOperation *)operation
 {
@@ -8666,6 +9147,99 @@ parameters:(AgentWS_AdminLogin *)aParameters
 		xmlCleanupParser();
 		[delegate operation:self completedWithResponse:response];
 	}
+}
+@end
+@implementation AgentWSSoap12Binding_ChangeUDID
+@synthesize parameters;
+- (id)initWithBinding:(AgentWSSoap12Binding *)aBinding delegate:(id<AgentWSSoap12BindingResponseDelegate>)responseDelegate
+           parameters:(AgentWS_ChangeUDID *)aParameters
+{
+    if((self = [super initWithBinding:aBinding delegate:responseDelegate])) {
+        self.parameters = aParameters;
+    }
+    
+    return self;
+}
+- (void)dealloc
+{
+    if(parameters != nil) [parameters release];
+    
+    [super dealloc];
+}
+- (void)main
+{
+    [response autorelease];
+    response = [AgentWSSoap12BindingResponse new];
+    
+    AgentWSSoap12Binding_envelope *envelope = [AgentWSSoap12Binding_envelope sharedInstance];
+    
+    NSMutableDictionary *headerElements = nil;
+    headerElements = [NSMutableDictionary dictionary];
+    
+    NSMutableDictionary *bodyElements = nil;
+    bodyElements = [NSMutableDictionary dictionary];
+    if(parameters != nil) [bodyElements setObject:parameters forKey:@"ChangeUDID"];
+    
+    NSString *operationXMLString = [envelope serializedFormUsingHeaderElements:headerElements bodyElements:bodyElements];
+    
+    [binding sendHTTPCallUsingBody:operationXMLString soapAction:@"http://tempuri.org/ChangeUDID" forOperation:self];
+}
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+    if (responseData != nil && delegate != nil)
+    {
+        xmlDocPtr doc;
+        xmlNodePtr cur;
+        
+        if (binding.logXMLInOut) {
+            NSLog(@"ResponseBody:\n%@", [[[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding] autorelease]);
+        }
+        
+        doc = xmlParseMemory([responseData bytes], [responseData length]);
+        
+        if (doc == NULL) {
+            NSDictionary *userInfo = [NSDictionary dictionaryWithObject:@"Errors while parsing returned XML" forKey:NSLocalizedDescriptionKey];
+            
+            response.error = [NSError errorWithDomain:@"AgentWSSoap12BindingResponseXML" code:1 userInfo:userInfo];
+            [delegate operation:self completedWithResponse:response];
+        } else {
+            cur = xmlDocGetRootElement(doc);
+            cur = cur->children;
+            
+            for( ; cur != NULL ; cur = cur->next) {
+                if(cur->type == XML_ELEMENT_NODE) {
+                    
+                    if(xmlStrEqual(cur->name, (const xmlChar *) "Body")) {
+                        NSMutableArray *responseBodyParts = [NSMutableArray array];
+                        
+                        xmlNodePtr bodyNode;
+                        for(bodyNode=cur->children ; bodyNode != NULL ; bodyNode = bodyNode->next) {
+                            if(cur->type == XML_ELEMENT_NODE) {
+                                if(xmlStrEqual(bodyNode->name, (const xmlChar *) "ChangeUDIDResponse")) {
+                                    AgentWS_ChangeUDIDResponse *bodyObject = [AgentWS_ChangeUDIDResponse deserializeNode:bodyNode];
+                                    //NSAssert1(bodyObject != nil, @"Errors while parsing body %s", bodyNode->name);
+                                    if (bodyObject != nil) [responseBodyParts addObject:bodyObject];
+                                }
+                                if (xmlStrEqual(bodyNode->ns->prefix, cur->ns->prefix) &&
+                                    xmlStrEqual(bodyNode->name, (const xmlChar *) "Fault")) {
+                                    SOAPFault *bodyObject = [SOAPFault deserializeNode:bodyNode];
+                                    //NSAssert1(bodyObject != nil, @"Errors while parsing body %s", bodyNode->name);
+                                    if (bodyObject != nil) [responseBodyParts addObject:bodyObject];
+                                }
+                            }
+                        }
+                        
+                        response.bodyParts = responseBodyParts;
+                    }
+                }
+            }
+            
+            xmlFreeDoc(doc);
+        }
+        
+        xmlCleanupParser();
+        [delegate operation:self completedWithResponse:response];
+    }
 }
 @end
 static AgentWSSoap12Binding_envelope *AgentWSSoap12BindingSharedEnvelopeInstance = nil;

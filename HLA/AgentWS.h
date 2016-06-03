@@ -37,6 +37,8 @@
 @class AgentWS_SupervisorLoginResult;
 @class AgentWS_AdminLogin;
 @class AgentWS_AdminLoginResponse;
+@class AgentWS_ChangeUDID;
+@class AgentWS_ChangeUDIDResponse;
 @class AgentWS_DataSet;
 @interface AgentWS_ValidateAgentAndDevice : NSObject {
 	
@@ -729,6 +731,50 @@
 /* attributes */
 - (NSDictionary *)attributes;
 @end
+
+@interface AgentWS_ChangeUDID : NSObject {
+    
+    /* elements */
+    NSString * strAgentcode;
+    NSString * strUDID;
+    NSString * strStatus;
+    /* attributes */
+}
+- (NSString *)nsPrefix;
+- (xmlNodePtr)xmlNodeForDoc:(xmlDocPtr)doc elementName:(NSString *)elName elementNSPrefix:(NSString *)elNSPrefix;
+- (void)addAttributesToNode:(xmlNodePtr)node;
+- (void)addElementsToNode:(xmlNodePtr)node;
++ (AgentWS_ChangeUDID *)deserializeNode:(xmlNodePtr)cur;
+- (void)deserializeAttributesFromNode:(xmlNodePtr)cur;
+- (void)deserializeElementsFromNode:(xmlNodePtr)cur;
+/* elements */
+@property (retain) NSString * strAgentcode;
+@property (retain) NSString * strUDID;
+@property (retain) NSString * strStatus;
+/* attributes */
+- (NSDictionary *)attributes;
+@end
+@interface AgentWS_ChangeUDIDResponse : NSObject {
+    
+    /* elements */
+    NSString * ChangeUDIDResult;
+    NSString * strStatus;
+    /* attributes */
+}
+- (NSString *)nsPrefix;
+- (xmlNodePtr)xmlNodeForDoc:(xmlDocPtr)doc elementName:(NSString *)elName elementNSPrefix:(NSString *)elNSPrefix;
+- (void)addAttributesToNode:(xmlNodePtr)node;
+- (void)addElementsToNode:(xmlNodePtr)node;
++ (AgentWS_ChangeUDIDResponse *)deserializeNode:(xmlNodePtr)cur;
+- (void)deserializeAttributesFromNode:(xmlNodePtr)cur;
+- (void)deserializeElementsFromNode:(xmlNodePtr)cur;
+/* elements */
+@property (retain) NSString * ChangeUDIDResult;
+@property (retain) NSString * strStatus;
+/* attributes */
+- (NSDictionary *)attributes;
+@end
+
 /* Cookies handling provided by http://en.wikibooks.org/wiki/Programming:WebObjects/Web_Services/Web_Service_Provider */
 #import <libxml/parser.h>
 #import "xsd.h"
@@ -792,6 +838,8 @@
 - (void)SupervisorLoginAsyncUsingParameters:(AgentWS_SupervisorLogin *)aParameters  delegate:(id<AgentWSSoapBindingResponseDelegate>)responseDelegate;
 - (AgentWSSoapBindingResponse *)AdminLoginUsingParameters:(AgentWS_AdminLogin *)aParameters ;
 - (void)AdminLoginAsyncUsingParameters:(AgentWS_AdminLogin *)aParameters  delegate:(id<AgentWSSoapBindingResponseDelegate>)responseDelegate;
+- (AgentWSSoapBindingResponse *)ChangeUDIDUsingParameters:(AgentWS_ChangeUDID *)aParameters ;
+- (void)ChangeUDIDAsyncUsingParameters:(AgentWS_ChangeUDID *)aParameters  delegate:(id<AgentWSSoapBindingResponseDelegate>)responseDelegate;
 @end
 @interface AgentWSSoapBindingOperation : NSOperation {
 	AgentWSSoapBinding *binding;
@@ -917,6 +965,14 @@
 @property (retain) AgentWS_AdminLogin * parameters;
 - (id)initWithBinding:(AgentWSSoapBinding *)aBinding delegate:(id<AgentWSSoapBindingResponseDelegate>)aDelegate
 	parameters:(AgentWS_AdminLogin *)aParameters
+;
+@end
+@interface AgentWSSoapBinding_ChangeUDID : AgentWSSoapBindingOperation {
+    AgentWS_ChangeUDID * parameters;
+}
+@property (retain) AgentWS_ChangeUDID * parameters;
+- (id)initWithBinding:(AgentWSSoapBinding *)aBinding delegate:(id<AgentWSSoapBindingResponseDelegate>)aDelegate
+           parameters:(AgentWS_ChangeUDID *)aParameters
 ;
 @end
 @interface AgentWSSoapBinding_envelope : NSObject {
@@ -1109,6 +1165,14 @@
 @property (retain) AgentWS_AdminLogin * parameters;
 - (id)initWithBinding:(AgentWSSoap12Binding *)aBinding delegate:(id<AgentWSSoap12BindingResponseDelegate>)aDelegate
 	parameters:(AgentWS_AdminLogin *)aParameters
+;
+@end
+@interface AgentWSSoap12Binding_ChangeUDID : AgentWSSoap12BindingOperation {
+    AgentWS_ChangeUDID * parameters;
+}
+@property (retain) AgentWS_ChangeUDID * parameters;
+- (id)initWithBinding:(AgentWSSoap12Binding *)aBinding delegate:(id<AgentWSSoap12BindingResponseDelegate>)aDelegate
+           parameters:(AgentWS_ChangeUDID *)aParameters
 ;
 @end
 @interface AgentWSSoap12Binding_envelope : NSObject {

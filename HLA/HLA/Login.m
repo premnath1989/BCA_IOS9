@@ -36,6 +36,7 @@
 #import "SynchdaysCounter.h"
 #import "WebResponObj.h"
 #import "DBMigration.h"
+#import "SSKeychain.h"
 
 @interface Login ()
 
@@ -75,8 +76,7 @@ NSString *ProceedStatus = @"";
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = TRUE;
 
-    NSUUID* deviceID=[UIDevice currentDevice].identifierForVendor;
-    [labelUDID setText:[deviceID UUIDString]];
+    [labelUDID setText:[self getUniqueDeviceIdentifierAsString]];
     
     txtUsername.delegate = self;
     txtUsername.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0);
@@ -258,6 +258,22 @@ static NSString *labelVers;
             }else{
                 UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Gagal!" message:[NSString stringWithFormat:@"Periksa lagi koneksi internet anda"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
                 [alert show];
+            }
+        }
+        
+        /****
+         * is it AgentWS_ChangeUDIDResponse
+         ****/
+        else if([bodyPart isKindOfClass:[AgentWS_ChangeUDIDResponse class]]) {
+            [spinnerLoading stopLoadingSpinner];
+            AgentWS_ChangeUDIDResponse* rateResponse = bodyPart;
+            if([(NSString *)rateResponse.ChangeUDIDResult caseInsensitiveCompare:@"TRUE"]== NSOrderedSame){
+                
+                NSString *encryptedPass = [encryptWrapper encrypt:txtPassword.text];
+                WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
+                [webservice ValidateLogin:txtUsername.text password:encryptedPass UUID:[[[UIDevice currentDevice] identifierForVendor] UUIDString] delegate:self];
+            }else{
+                
             }
         }
         
@@ -525,12 +541,12 @@ static NSString *labelVers;
         }
     }
     
-//    if([[loginDB localDBUDID] caseInsensitiveCompare:[[[UIDevice currentDevice] identifierForVendor] UUIDString]]!= NSOrderedSame){
-//        [spinnerLoading stopLoadingSpinner];
-//        UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Agen login di device yang tidak terdaftar"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-//        [alert show];
-//        validFlag = false;
-//    }
+    if([[loginDB localDBUDID] caseInsensitiveCompare:[self getUniqueDeviceIdentifierAsString]]!= NSOrderedSame){
+        [spinnerLoading stopLoadingSpinner];
+        UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Agen login di device yang tidak terdaftar"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+        validFlag = false;
+    }
     
     switch ([loginDB DeviceStatus:txtUsername.text]) {
         case DEVICE_IS_INACTIVE:
@@ -576,8 +592,7 @@ static NSString *labelVers;
                 if(usernameTemp != 0){
                     switch (usernameTemp) {
                         case USERNAME_IS_AGENT:{
-                            WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
-                            [webservice ValidateLogin:txtUsername.text password:encryptedPass UUID:[[[UIDevice currentDevice] identifierForVendor] UUIDString] delegate:self];
+                            [self getUDIDLogin];
                             break;
                         }
                         case USERNAME_IS_SPV:{
@@ -640,6 +655,44 @@ static NSString *labelVers;
     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     appDelegate.isLoggedIn = FALSE;
 }
+
+//we store the UDID into the Keychain
+-(NSString *)getUniqueDeviceIdentifierAsString
+{
+    
+    NSString *appName=[[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString*)kCFBundleNameKey];
+    
+    NSString *strApplicationUUID = [SSKeychain passwordForService:appName account:@"incoding"];
+    if (strApplicationUUID == nil)
+    {
+        strApplicationUUID  = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+        [SSKeychain setPassword:strApplicationUUID forService:appName account:@"incoding"];
+        
+    }
+    return strApplicationUUID;
+}
+
+//just a flag of login udid
+-(NSString *)getUDIDLogin
+{
+    
+    NSString *appName=[[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString*)kCFBundleNameKey];
+    
+    NSString *strApplicationUUID = [SSKeychain passwordForService:appName account:@"incodingLogin"];
+    if (strApplicationUUID == nil)
+    {
+        strApplicationUUID  = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+        [SSKeychain setPassword:strApplicationUUID forService:appName account:@"incodingLogin"];
+        
+        WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
+        
+        //change the udid
+        [webservice changeUDID:txtUsername.text udid:[SSKeychain passwordForService:appName account:@"incoding"] delegate:self];
+        
+    }
+    return strApplicationUUID;
+}
+
 
 - (void) openHome
 {
@@ -831,7 +884,6 @@ static NSString *labelVers;
 -(NSString *) getLastSyncDate
 {
     return [loginDB checkingLastLogout];
-    
 }
 
 -(int) UsernameUDIDChecking
@@ -878,7 +930,7 @@ static NSString *labelVers;
         statusUsername = USERNAME_IS_ADMIN;
     }
     
-//    if([[loginDB localDBUDID] caseInsensitiveCompare:[[[UIDevice currentDevice] identifierForVendor] UUIDString]]!= NSOrderedSame){
+//    if([[loginDB localDBUDID] caseInsensitiveCompare:[self getUniqueDeviceIdentifierAsString]]!= NSOrderedSame){
 //        UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Agen login di device yang tidak terdaftar"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
 //        [alert show];
 //        statusUsername = USERNAME_IS_INVALID;

@@ -793,6 +793,8 @@
 		DE06BE301CEEF5070091DE47 /* AppDisclaimer.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE06BE2F1CEEF5070091DE47 /* AppDisclaimer.xib */; };
 		DE06FFCE1CABBC2800E4DE3A /* xibLibrary.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DE06FFCD1CABBC2800E4DE3A /* xibLibrary.bundle */; };
 		DE06FFD21CABCB8200E4DE3A /* libFTPFileSynchronization.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DE06FFD11CABCB8200E4DE3A /* libFTPFileSynchronization.a */; };
+		DE09815F1CFD5C56008BC359 /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = DE09815C1CFD5C56008BC359 /* SSKeychain.m */; };
+		DE0981601CFD5C56008BC359 /* SSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = DE09815E1CFD5C56008BC359 /* SSKeychainQuery.m */; };
 		DE0E49991CF6EAB200812C2E /* DataReferral.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = DE0E49981CF6E98E00812C2E /* DataReferral.sqlite */; };
 		DE0F59FC1CF2FF5C0087483D /* BCA_Rates.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = DE0F59FB1CF2FF5C0087483D /* BCA_Rates.sqlite */; };
 		DE15788C1CBB792900CE171B /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = DE1578891CBB792900CE171B /* NSData+Base64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -2180,6 +2182,10 @@
 		DE06FFCD1CABBC2800E4DE3A /* xibLibrary.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = xibLibrary.bundle; path = ../FTPSync/xibLibrary.bundle; sourceTree = "<group>"; };
 		DE06FFD11CABCB8200E4DE3A /* libFTPFileSynchronization.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFTPFileSynchronization.a; path = FTPSync/libFTPFileSynchronization.a; sourceTree = "<group>"; };
 		DE07AF3D1CAE225100258521 /* PremiumViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PremiumViewControllerDelegate.h; sourceTree = "<group>"; };
+		DE09815B1CFD5C56008BC359 /* SSKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKeychain.h; sourceTree = "<group>"; };
+		DE09815C1CFD5C56008BC359 /* SSKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKeychain.m; sourceTree = "<group>"; };
+		DE09815D1CFD5C56008BC359 /* SSKeychainQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKeychainQuery.h; sourceTree = "<group>"; };
+		DE09815E1CFD5C56008BC359 /* SSKeychainQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKeychainQuery.m; sourceTree = "<group>"; };
 		DE0E49981CF6E98E00812C2E /* DataReferral.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = DataReferral.sqlite; sourceTree = "<group>"; };
 		DE0F59FB1CF2FF5C0087483D /* BCA_Rates.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = BCA_Rates.sqlite; sourceTree = "<group>"; };
 		DE1578881CBB792900CE171B /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+Base64.h"; path = "Encryption/NSData+Base64.h"; sourceTree = "<group>"; };
@@ -2332,6 +2338,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A002CF01850280A00161727 /* Security.framework in Frameworks */,
 				DE0296921CB4ED5600C1D5DF /* AdSupport.framework in Frameworks */,
 				DE80E44A1CA3FCEE00D9E775 /* CFNetwork.framework in Frameworks */,
 				C486D9E3163E6747009F8F21 /* MediaPlayer.framework in Frameworks */,
@@ -2344,7 +2351,6 @@
 				6A002CF61850285600161727 /* CoreText.framework in Frameworks */,
 				6A002CF41850284A00161727 /* CoreFoundation.framework in Frameworks */,
 				6A002CF21850282D00161727 /* OpenGLES.framework in Frameworks */,
-				6A002CF01850280A00161727 /* Security.framework in Frameworks */,
 				6A002CEE185027FD00161727 /* Accelerate.framework in Frameworks */,
 				DE06FFD21CABCB8200E4DE3A /* libFTPFileSynchronization.a in Frameworks */,
 				C4E64379171669D2001DF8F8 /* MessageUI.framework in Frameworks */,
@@ -4566,6 +4572,7 @@
 		C4EB48EC16152E8800C7FC8C /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				DE09815A1CFD5C46008BC359 /* Keychains */,
 				DE06BE2B1CEEF3D70091DE47 /* Disclaimer */,
 				AADD7E741C76AAEC00D87750 /* SessionManagement */,
 				AAD5455C1C643FF00029631D /* LoginUtilities */,
@@ -4699,6 +4706,17 @@
 				DE06BE2F1CEEF5070091DE47 /* AppDisclaimer.xib */,
 			);
 			name = Disclaimer;
+			sourceTree = "<group>";
+		};
+		DE09815A1CFD5C46008BC359 /* Keychains */ = {
+			isa = PBXGroup;
+			children = (
+				DE09815B1CFD5C56008BC359 /* SSKeychain.h */,
+				DE09815C1CFD5C56008BC359 /* SSKeychain.m */,
+				DE09815D1CFD5C56008BC359 /* SSKeychainQuery.h */,
+				DE09815E1CFD5C56008BC359 /* SSKeychainQuery.m */,
+			);
+			name = Keychains;
 			sourceTree = "<group>";
 		};
 		DE1578871CBB78E600CE171B /* Encryption */ = {
@@ -5728,6 +5746,7 @@
 				C333A2B91831E98F00FA8200 /* AddPolicyPOTableVC.m in Sources */,
 				C333A2BB1831E98F00FA8200 /* ExistingPoliciesPersonType.m in Sources */,
 				C333A2BC1831E98F00FA8200 /* ExistingPolicyLA2Listing.m in Sources */,
+				DE0981601CFD5C56008BC359 /* SSKeychainQuery.m in Sources */,
 				C333A2BD1831E98F00FA8200 /* ExistingPolicyPOListing.m in Sources */,
 				C333A2BE1831E98F00FA8200 /* MainAddPolicyLA2VC.m in Sources */,
 				C333A2BF1831E98F00FA8200 /* MainAddPolicyPOVC.m in Sources */,
@@ -5844,6 +5863,7 @@
 				4239AEDC1946DAE200BD6F53 /* PDFFormContainer.m in Sources */,
 				4239AEDD1946DAE200BD6F53 /* PDFObject.m in Sources */,
 				AA4EF7741C85A4260050CCD8 /* ThumbsMainToolbar.m in Sources */,
+				DE09815F1CFD5C56008BC359 /* SSKeychain.m in Sources */,
 				4239AEDE1946DAE200BD6F53 /* PDFPage.m in Sources */,
 				AAD5455F1C6443080029631D /* LoginDBManagement.m in Sources */,
 				4239AEDF1946DAE200BD6F53 /* PDFStream.m in Sources */,
@@ -6003,7 +6023,7 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Erwin Lim (9838FHPX2V)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -6043,7 +6063,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bcalife.bless;
 				PRODUCT_NAME = BLESS;
-				PROVISIONING_PROFILE = "64cb3c38-7b10-432b-ab19-7416cf6d2833";
+				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = "armv7 armv6 i386";
@@ -6057,7 +6077,7 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Asuransi Jiwa BCA, PT";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -6098,7 +6118,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bcalife.bless;
 				PRODUCT_NAME = BLESS;
-				PROVISIONING_PROFILE = "954ccc9a-01f8-4583-9ed7-fc4107de17e9";
+				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = "armv7 armv6 i386";
@@ -6151,7 +6171,7 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Asuransi Jiwa BCA, PT";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -6194,7 +6214,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bcalife.bless;
 				PRODUCT_NAME = BLESS;
-				PROVISIONING_PROFILE = "954ccc9a-01f8-4583-9ed7-fc4107de17e9";
+				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = "armv7 armv6 i386";

@@ -45,6 +45,18 @@
     return 1;
 }
 
+-(int)changeUDID:(NSString *)username udid:(NSString *)udid delegate:(id)delegate{
+    AgentWSSoapBinding *binding = [AgentWS AgentWSSoapBinding];
+    binding.logXMLInOut = YES;
+    
+    AgentWS_ChangeUDID *agentCodea = [[AgentWS_ChangeUDID alloc]init];
+    agentCodea.strAgentcode = username;
+    agentCodea.strUDID = udid;
+    agentCodea.strStatus = @"";
+    [binding ChangeUDIDAsyncUsingParameters:agentCodea delegate:delegate];
+    return 1;
+}
+
 
 -(int)fullSync:(NSString *)username delegate:(id)delegate{
     AgentWSSoapBinding *binding = [AgentWS AgentWSSoapBinding];
