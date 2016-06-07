@@ -689,6 +689,10 @@ static NSString *labelVers;
         //change the udid
         [webservice changeUDID:txtUsername.text udid:[SSKeychain passwordForService:appName account:@"incoding"] delegate:self];
         
+    }else{
+        NSString *encryptedPass = [encryptWrapper encrypt:txtPassword.text];
+        WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
+        [webservice ValidateLogin:txtUsername.text password:encryptedPass UUID:[[[UIDevice currentDevice] identifierForVendor] UUIDString] delegate:self];
     }
     return strApplicationUUID;
 }
@@ -700,18 +704,6 @@ static NSString *labelVers;
     CarouselViewController *carouselMenu = [self.storyboard instantiateViewControllerWithIdentifier:@"carouselView"];
     carouselMenu.getInternet = @"No";
     [self presentViewController:carouselMenu animated:YES completion:Nil];
-    
-//    AppDisclaimer *disclaimerContent= [[AppDisclaimer alloc] initWithNibName:@"AppDisclaimer"
-//                                                                      bundle:nil];
-//    disclaimerContent.delegate = self;
-//    disclaimerContent.homeController = carouselMenu;
-//    UIPopoverController *disclaimer = [[UIPopoverController alloc] initWithContentViewController:disclaimerContent];
-//    
-//    [disclaimer setPopoverContentSize:CGSizeMake(600, 600)];
-//    [disclaimer presentPopoverFromRect:CGRectMake(325, 50, 450, 700) inView:self.view permittedArrowDirections:0 animated:YES];
-}
-
-- (void)CloseWindow{
 }
 
 - (int)syncDaysLeft{

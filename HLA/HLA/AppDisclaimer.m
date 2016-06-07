@@ -15,7 +15,6 @@
 
 @implementation AppDisclaimer
 @synthesize delegate = _delegate;
-@synthesize homeController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -45,7 +44,7 @@
 
 
 - (IBAction)approve:(id)sender {
-    [self presentViewController:homeController animated:YES completion:Nil];
+    [self dismissModalViewControllerAnimated:true];
     
 }
 @end

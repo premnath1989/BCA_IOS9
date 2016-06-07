@@ -67,7 +67,7 @@ const int numberOfModule = 7;
 //     CGRect frame = CGRectMake(0, 20, 1024, 720);
 //    [_myView setFrame:frame];
 //    self.view.backgroundColor = [UIColor clearColor];
-    
+
     UIButton *exitBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [exitBtn addTarget:self action:@selector(goToHome:) forControlEvents:UIControlEventTouchUpInside];
     [exitBtn setBackgroundImage:[UIImage imageNamed:@"house.png"] forState:UIControlStateNormal];
@@ -173,6 +173,21 @@ const int numberOfModule = 7;
     return ac;
 }
 #endif
+
+//app disclaimer
+- (void)showDisclaimer{
+    AppDisclaimer *disclaimerContent= [[AppDisclaimer alloc] initWithNibName:@"AppDisclaimer"
+                                                                      bundle:nil];
+    disclaimerContent.delegate = self;
+    UIPopoverController *disclaimer = [[UIPopoverController alloc] initWithContentViewController:disclaimerContent];
+
+    [disclaimer setPopoverContentSize:CGSizeMake(600, 600)];
+    [disclaimer presentPopoverFromRect:CGRectMake(325, 50, 450, 700) inView:self.view permittedArrowDirections:0 animated:YES];
+}
+
+- (void)CloseWindow{
+    //no functions needed
+}
 
 - (void)goToHome:(id)sender {
     UIApplication *app = [UIApplication sharedApplication];

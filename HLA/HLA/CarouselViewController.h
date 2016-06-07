@@ -8,12 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
+#import "AppDisclaimer.h"
 
 @protocol CarouselDelegate
 - (void)PresentMain;
 @end
 
-@interface CarouselViewController : UIViewController< NSXMLParserDelegate> {
+@interface CarouselViewController : UIViewController< NSXMLParserDelegate, AppDisclaimerDelegate> {
     sqlite3 *contactDB;
 }
 

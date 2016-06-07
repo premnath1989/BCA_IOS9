@@ -40,7 +40,7 @@ static NSString* APP_TYPE_HLA_FAST = @"HLA_FAST";
 static NSString* DATE_FORMAT = @"yyyy-MM-dd";
 
 
-@interface Login : UIViewController<NSXMLParserDelegate, UITextFieldDelegate, AgentWSSoapBindingResponseDelegate,UIAlertViewDelegate, AppDisclaimerDelegate>
+@interface Login : UIViewController<NSXMLParserDelegate, UITextFieldDelegate, AgentWSSoapBindingResponseDelegate,UIAlertViewDelegate>
 {
     IBOutlet UILabel *labelUDID;
     
