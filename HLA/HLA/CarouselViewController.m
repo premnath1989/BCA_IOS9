@@ -63,10 +63,6 @@ const int numberOfModule = 7;
     [super viewDidLoad];
     
     [self createBlackStatusBar];
-//    _myView.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"Tablet-App-Redesign-Slices.jpg"]];
-//     CGRect frame = CGRectMake(0, 20, 1024, 720);
-//    [_myView setFrame:frame];
-//    self.view.backgroundColor = [UIColor clearColor];
 
     UIButton *exitBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [exitBtn addTarget:self action:@selector(goToHome:) forControlEvents:UIControlEventTouchUpInside];
@@ -74,7 +70,8 @@ const int numberOfModule = 7;
     exitBtn.frame = CGRectMake(980.1, 17, 27.0, 29.0);
     [outletNavBar addSubview:exitBtn];
     
-   
+    //the disclaimer function
+//    [self showDisclaimer];
     
     NSString *version= [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     NSString *build= [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
@@ -176,13 +173,17 @@ const int numberOfModule = 7;
 
 //app disclaimer
 - (void)showDisclaimer{
-    AppDisclaimer *disclaimerContent= [[AppDisclaimer alloc] initWithNibName:@"AppDisclaimer"
-                                                                      bundle:nil];
-    disclaimerContent.delegate = self;
-    UIPopoverController *disclaimer = [[UIPopoverController alloc] initWithContentViewController:disclaimerContent];
+    NSString *prevController = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-2];
+    
+    if([prevController isEqualToString:@"Login"]){
+        AppDisclaimer *disclaimerContent= [[AppDisclaimer alloc] initWithNibName:@"AppDisclaimer"
+                                                                          bundle:nil];
+        disclaimerContent.delegate = self;
+        UIPopoverController *disclaimer = [[UIPopoverController alloc] initWithContentViewController:disclaimerContent];
 
-    [disclaimer setPopoverContentSize:CGSizeMake(600, 600)];
-    [disclaimer presentPopoverFromRect:CGRectMake(325, 50, 450, 700) inView:self.view permittedArrowDirections:0 animated:YES];
+        [disclaimer setPopoverContentSize:CGSizeMake(600, 600)];
+        [disclaimer presentPopoverFromRect:CGRectMake(325, 50, 450, 700) inView:self.view permittedArrowDirections:0 animated:YES];
+       }
 }
 
 - (void)CloseWindow{
