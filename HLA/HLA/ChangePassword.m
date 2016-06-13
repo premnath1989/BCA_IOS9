@@ -16,6 +16,7 @@
 #import "DDXMLDocument.h"
 #import "DDXMLElementAdditions.h"
 #import "DDXMLNode.h"
+#import "SSKeychain.h"
 
 #import "LoginMacros.h"
 
@@ -321,7 +322,8 @@
                     WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
                     [webservice checkuserpass:txtAgentCode.text password:encryptedOldPass delegate:self];
                 }else{
-                    [webservice chgPassword:self AgentCode:txtAgentCode.text password:encryptedOldPass newPassword:encryptedNewPass UUID:[[[UIDevice currentDevice] identifierForVendor] UUIDString]];
+                    
+                    [webservice chgPassword:self AgentCode:txtAgentCode.text password:encryptedOldPass newPassword:encryptedNewPass UUID:[loginDB getUniqueDeviceIdentifierAsString]];
                 }
             }
             else {
@@ -396,6 +398,9 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
                 flagFullSync = TRUE;
                 WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
                 [webservice fullSync:txtAgentCode.text delegate:self];
+                
+                //we update the referral data paralelly
+                //[webservice dataReferralSync:<#(NSString *)#> delegate:self];
             }else{
                 [spinnerLoading stopLoadingSpinner];
                 UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Ubah Password Gagal!" message:[NSString stringWithFormat:@"Username/Password yang di masukan salah"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];

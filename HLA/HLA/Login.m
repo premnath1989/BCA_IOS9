@@ -76,7 +76,7 @@ NSString *ProceedStatus = @"";
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = TRUE;
 
-    [labelUDID setText:[self getUniqueDeviceIdentifierAsString]];
+    [labelUDID setText:[loginDB getUniqueDeviceIdentifierAsString]];
     
     txtUsername.delegate = self;
     txtUsername.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0);
@@ -541,7 +541,7 @@ static NSString *labelVers;
         }
     }
     
-    if([[loginDB localDBUDID] caseInsensitiveCompare:[self getUniqueDeviceIdentifierAsString]]!= NSOrderedSame){
+    if([[loginDB localDBUDID] caseInsensitiveCompare:[loginDB getUniqueDeviceIdentifierAsString]]!= NSOrderedSame){
         [spinnerLoading stopLoadingSpinner];
         UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Agen login di device yang tidak terdaftar"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alert show];
@@ -654,22 +654,6 @@ static NSString *labelVers;
 {
     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     appDelegate.isLoggedIn = FALSE;
-}
-
-//we store the UDID into the Keychain
--(NSString *)getUniqueDeviceIdentifierAsString
-{
-    
-    NSString *appName=[[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString*)kCFBundleNameKey];
-    
-    NSString *strApplicationUUID = [SSKeychain passwordForService:appName account:@"incoding"];
-    if (strApplicationUUID == nil)
-    {
-        strApplicationUUID  = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
-        [SSKeychain setPassword:strApplicationUUID forService:appName account:@"incoding"];
-        
-    }
-    return strApplicationUUID;
 }
 
 //just a flag of login udid

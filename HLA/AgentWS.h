@@ -40,6 +40,9 @@
 @class AgentWS_ChangeUDID;
 @class AgentWS_ChangeUDIDResponse;
 @class AgentWS_DataSet;
+@class AgentWS_Syncdatareferral;
+@class AgentWS_SyncdatareferralResponse;
+@class AgentWS_SyncdatareferralResult;
 @interface AgentWS_ValidateAgentAndDevice : NSObject {
 	
 /* elements */
@@ -481,10 +484,26 @@
 @end
 @interface AgentWS_PartialSync : NSObject {
 	
-/* elements */
-	NSString * strAgentcode;
-	NSString * strXML;
-/* attributes */
+    /* elements */
+    NSString * MasterInfo;
+    NSString * DataCabang;
+    NSString * eProposalCreditCardBank;
+    NSString * eProposalIdentification;
+    NSString * eProposalLADetails;
+    NSString * eProposalMaritalStatus;
+    NSString * eProposalNationality;
+    NSString * eProposalOCCP;
+    NSString * eProposalReferralSource;
+    NSString * eProposalRelation;
+    NSString * eProposalReligion;
+    NSString * eProposalSourceIncome;
+    NSString * eProposalTitle;
+    NSString * eProposalVIPClass;
+    NSString * DataReferral;
+    NSString * kodepos;
+    NSString * strStatus;
+    /* attributes */
+
 }
 - (NSString *)nsPrefix;
 - (xmlNodePtr)xmlNodeForDoc:(xmlDocPtr)doc elementName:(NSString *)elName elementNSPrefix:(NSString *)elNSPrefix;
@@ -494,8 +513,23 @@
 - (void)deserializeAttributesFromNode:(xmlNodePtr)cur;
 - (void)deserializeElementsFromNode:(xmlNodePtr)cur;
 /* elements */
-@property (retain) NSString * strAgentcode;
-@property (retain) NSString * strXML;
+@property (retain) NSString * MasterInfo;
+@property (retain) NSString * DataCabang;
+@property (retain) NSString * eProposalCreditCardBank;
+@property (retain) NSString * eProposalIdentification;
+@property (retain) NSString * eProposalLADetails;
+@property (retain) NSString * eProposalMaritalStatus;
+@property (retain) NSString * eProposalNationality;
+@property (retain) NSString * eProposalOCCP;
+@property (retain) NSString * eProposalReferralSource;
+@property (retain) NSString * eProposalRelation;
+@property (retain) NSString * eProposalReligion;
+@property (retain) NSString * eProposalSourceIncome;
+@property (retain) NSString * eProposalTitle;
+@property (retain) NSString * eProposalVIPClass;
+@property (retain) NSString * DataReferral;
+@property (retain) NSString * kodepos;
+@property (retain) NSString * strStatus;
 /* attributes */
 - (NSDictionary *)attributes;
 @end
@@ -774,6 +808,63 @@
 /* attributes */
 - (NSDictionary *)attributes;
 @end
+@interface AgentWS_Syncdatareferral : NSObject {
+    
+    /* elements */
+    NSString * strUpdateDate;
+    NSString * strstatus;
+    /* attributes */
+}
+- (NSString *)nsPrefix;
+- (xmlNodePtr)xmlNodeForDoc:(xmlDocPtr)doc elementName:(NSString *)elName elementNSPrefix:(NSString *)elNSPrefix;
+- (void)addAttributesToNode:(xmlNodePtr)node;
+- (void)addElementsToNode:(xmlNodePtr)node;
++ (AgentWS_Syncdatareferral *)deserializeNode:(xmlNodePtr)cur;
+- (void)deserializeAttributesFromNode:(xmlNodePtr)cur;
+- (void)deserializeElementsFromNode:(xmlNodePtr)cur;
+/* elements */
+@property (retain) NSString * strUpdateDate;
+@property (retain) NSString * strstatus;
+/* attributes */
+- (NSDictionary *)attributes;
+@end
+@interface AgentWS_SyncdatareferralResult : NSObject {
+    
+    /* elements */
+    /* attributes */
+}
+- (NSString *)nsPrefix;
+- (xmlNodePtr)xmlNodeForDoc:(xmlDocPtr)doc elementName:(NSString *)elName elementNSPrefix:(NSString *)elNSPrefix;
+- (void)addAttributesToNode:(xmlNodePtr)node;
+- (void)addElementsToNode:(xmlNodePtr)node;
++ (AgentWS_SyncdatareferralResult *)deserializeNode:(xmlNodePtr)cur;
+- (void)deserializeAttributesFromNode:(xmlNodePtr)cur;
+- (void)deserializeElementsFromNode:(xmlNodePtr)cur;
+/* elements */
+/* attributes */
+- (NSDictionary *)attributes;
+@end
+@interface AgentWS_SyncdatareferralResponse : NSObject {
+    
+    /* elements */
+    AgentWS_SyncdatareferralResult * SyncdatareferralResult;
+    NSString * strstatus;
+    /* attributes */
+}
+- (NSString *)nsPrefix;
+- (xmlNodePtr)xmlNodeForDoc:(xmlDocPtr)doc elementName:(NSString *)elName elementNSPrefix:(NSString *)elNSPrefix;
+- (void)addAttributesToNode:(xmlNodePtr)node;
+- (void)addElementsToNode:(xmlNodePtr)node;
++ (AgentWS_SyncdatareferralResponse *)deserializeNode:(xmlNodePtr)cur;
+- (void)deserializeAttributesFromNode:(xmlNodePtr)cur;
+- (void)deserializeElementsFromNode:(xmlNodePtr)cur;
+/* elements */
+@property (retain) AgentWS_SyncdatareferralResult * SyncdatareferralResult;
+@property (retain) NSString * strstatus;
+/* attributes */
+- (NSDictionary *)attributes;
+@end
+
 
 /* Cookies handling provided by http://en.wikibooks.org/wiki/Programming:WebObjects/Web_Services/Web_Service_Provider */
 #import <libxml/parser.h>
@@ -840,6 +931,8 @@
 - (void)AdminLoginAsyncUsingParameters:(AgentWS_AdminLogin *)aParameters  delegate:(id<AgentWSSoapBindingResponseDelegate>)responseDelegate;
 - (AgentWSSoapBindingResponse *)ChangeUDIDUsingParameters:(AgentWS_ChangeUDID *)aParameters ;
 - (void)ChangeUDIDAsyncUsingParameters:(AgentWS_ChangeUDID *)aParameters  delegate:(id<AgentWSSoapBindingResponseDelegate>)responseDelegate;
+- (AgentWSSoapBindingResponse *)SyncdatareferralUsingParameters:(AgentWS_Syncdatareferral *)aParameters ;
+- (void)SyncdatareferralAsyncUsingParameters:(AgentWS_Syncdatareferral *)aParameters  delegate:(id<AgentWSSoapBindingResponseDelegate>)responseDelegate;
 @end
 @interface AgentWSSoapBindingOperation : NSOperation {
 	AgentWSSoapBinding *binding;
@@ -975,6 +1068,14 @@
            parameters:(AgentWS_ChangeUDID *)aParameters
 ;
 @end
+@interface AgentWSSoapBinding_Syncdatareferral : AgentWSSoapBindingOperation {
+    AgentWS_Syncdatareferral * parameters;
+}
+@property (retain) AgentWS_Syncdatareferral * parameters;
+- (id)initWithBinding:(AgentWSSoapBinding *)aBinding delegate:(id<AgentWSSoapBindingResponseDelegate>)aDelegate
+           parameters:(AgentWS_Syncdatareferral *)aParameters
+;
+@end
 @interface AgentWSSoapBinding_envelope : NSObject {
 }
 + (AgentWSSoapBinding_envelope *)sharedInstance;
@@ -1040,6 +1141,10 @@
 - (void)SupervisorLoginAsyncUsingParameters:(AgentWS_SupervisorLogin *)aParameters  delegate:(id<AgentWSSoap12BindingResponseDelegate>)responseDelegate;
 - (AgentWSSoap12BindingResponse *)AdminLoginUsingParameters:(AgentWS_AdminLogin *)aParameters ;
 - (void)AdminLoginAsyncUsingParameters:(AgentWS_AdminLogin *)aParameters  delegate:(id<AgentWSSoap12BindingResponseDelegate>)responseDelegate;
+- (AgentWSSoap12BindingResponse *)ChangeUDIDUsingParameters:(AgentWS_ChangeUDID *)aParameters ;
+- (void)ChangeUDIDAsyncUsingParameters:(AgentWS_ChangeUDID *)aParameters  delegate:(id<AgentWSSoap12BindingResponseDelegate>)responseDelegate;
+- (AgentWSSoap12BindingResponse *)SyncdatareferralUsingParameters:(AgentWS_Syncdatareferral *)aParameters ;
+- (void)SyncdatareferralAsyncUsingParameters:(AgentWS_Syncdatareferral *)aParameters  delegate:(id<AgentWSSoap12BindingResponseDelegate>)responseDelegate;
 @end
 @interface AgentWSSoap12BindingOperation : NSOperation {
 	AgentWSSoap12Binding *binding;
@@ -1173,6 +1278,14 @@
 @property (retain) AgentWS_ChangeUDID * parameters;
 - (id)initWithBinding:(AgentWSSoap12Binding *)aBinding delegate:(id<AgentWSSoap12BindingResponseDelegate>)aDelegate
            parameters:(AgentWS_ChangeUDID *)aParameters
+;
+@end
+@interface AgentWSSoap12Binding_Syncdatareferral : AgentWSSoap12BindingOperation {
+    AgentWS_Syncdatareferral * parameters;
+}
+@property (retain) AgentWS_Syncdatareferral * parameters;
+- (id)initWithBinding:(AgentWSSoap12Binding *)aBinding delegate:(id<AgentWSSoap12BindingResponseDelegate>)aDelegate
+           parameters:(AgentWS_Syncdatareferral *)aParameters
 ;
 @end
 @interface AgentWSSoap12Binding_envelope : NSObject {

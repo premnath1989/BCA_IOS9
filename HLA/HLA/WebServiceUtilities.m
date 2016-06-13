@@ -45,6 +45,17 @@
     return 1;
 }
 
+-(int)dataReferralSync:(NSString *)lastUpdateDate delegate:(id)delegate{
+    AgentWSSoapBinding *binding = [AgentWS AgentWSSoapBinding];
+    binding.logXMLInOut = YES;
+    
+    AgentWS_Syncdatareferral *agentCodea = [[AgentWS_Syncdatareferral alloc]init];
+    agentCodea.strUpdateDate = lastUpdateDate;
+    agentCodea.strstatus = @"";
+    [binding SyncdatareferralAsyncUsingParameters:agentCodea delegate:delegate];
+    return 1;
+}
+
 -(int)changeUDID:(NSString *)username udid:(NSString *)udid delegate:(id)delegate{
     AgentWSSoapBinding *binding = [AgentWS AgentWSSoapBinding];
     binding.logXMLInOut = YES;
@@ -127,8 +138,8 @@
     binding.logXMLInOut = YES;
     
     AgentWS_PartialSync *agentCodea = [[AgentWS_PartialSync alloc]init];
-    agentCodea.strAgentcode = agentCode;
-    agentCodea.strXML = XMLTable;
+//    agentCodea.strAgentcode = agentCode;
+//    agentCodea.strXML = XMLTable;
     [binding PartialSyncAsyncUsingParameters:agentCodea delegate:delegate];
     return 1;
 }
