@@ -386,6 +386,20 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
         }
         
         /****
+         * is it AgentWS_SyncdatareferralResponse
+         ****/
+        else if([bodyPart isKindOfClass:[AgentWS_SyncdatareferralResponse class]]) {
+            [spinnerLoading stopLoadingSpinner];
+            AgentWS_SyncdatareferralResponse* rateResponse = bodyPart;
+            if([rateResponse.strstatus caseInsensitiveCompare:@"TRUE"]== NSOrderedSame){
+                
+            }else{
+               
+            }
+        }
+
+        
+        /****
          * is it AgentWS_LoginAPIResponse
          ****/
         else if([bodyPart isKindOfClass:[AgentWS_LoginAPIResponse class]]) {
@@ -400,7 +414,7 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
                 [webservice fullSync:txtAgentCode.text delegate:self];
                 
                 //we update the referral data paralelly
-                //[webservice dataReferralSync:<#(NSString *)#> delegate:self];
+                //[webservice dataReferralSync:[loginDB getLastUpdateReferral] delegate:self];
             }else{
                 [spinnerLoading stopLoadingSpinner];
                 UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Ubah Password Gagal!" message:[NSString stringWithFormat:@"Username/Password yang di masukan salah"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
@@ -449,7 +463,7 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
                                     WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
                                     NSString *encryptedNewPass = [encryptWrapper encrypt:txtNewPwd.text];
                                     NSString *encryptedOldPass = [encryptWrapper encrypt:txtOldPwd.text];
-                                    [webservice FirstTimeLogin:self AgentCode:txtAgentCode.text password:encryptedOldPass newPassword:encryptedNewPass UUID:[[[UIDevice currentDevice] identifierForVendor] UUIDString]];
+                                    [webservice FirstTimeLogin:self AgentCode:txtAgentCode.text password:encryptedOldPass newPassword:encryptedNewPass UUID:[loginDB getUniqueDeviceIdentifierAsString]];
                                                           });
                               });
                           });
@@ -618,7 +632,6 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
                     txtConfirmPwd.text = @"";
                     alert.tag = 03;
                     [alert show];
-                    //[txtNewPwd becomeFirstResponder];
                 }
                 else {
                     if ([txtNewPwd.text isEqualToString:txtConfirmPwd.text]) {

@@ -848,38 +848,28 @@
     return strApplicationUUID;
 }
 
-//-(NSString *) getLastUpdateReferral
-//{
-//    NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//    NSString *docsDir = [dirPaths objectAtIndex:0];
-//    NSString *dbPath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
-//    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
-//    
-//    [db open];
-//    NSString *AgentName;
-//    NSString *AgentPassword;
-//    NSString *SupervisorCode;
-//    NSString *SupervisorPass;
-//    NSString *Admin;
-//    NSString *AdminPassword;
-//    
-//    FMResultSet *result1 = [db executeQuery:@"select UpdateTime from DataReferral"];
-//    
-//    while ([result1 next]) {
-//        AgentName = [[result1 objectForColumnName:@"AgentCode"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-//        AgentPassword = [[result1 objectForColumnName:@"AgentPassword"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-//        
-//        SupervisorCode = [[result1 objectForColumnName:@"DirectSupervisorCode"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-//        SupervisorPass = [[result1 objectForColumnName:@"DirectSupervisorPassword"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-//        
-//        Admin = [[result1 objectForColumnName:@"Admin"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-//        AdminPassword = [[result1 objectForColumnName:@"AdminPassword"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-//    }
-//    
-//    [db close];
-//    
-//    return AgentName;
-//}
+-(NSString *) getLastUpdateReferral
+{
+    sqlite3_stmt *statement;
+    NSString *LastDate = @"";
+    if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
+    {
+        NSString *querySQL = [NSString stringWithFormat: @"SELECT max(CreateTime) FROM DataReferral"];
+        
+        if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK){
+            if (sqlite3_step(statement) == SQLITE_ROW) {
+                if((const char *) sqlite3_column_text(statement, 0) != NULL){
+                    LastDate = [[NSString alloc]
+                            initWithUTF8String:
+                            (const char *) sqlite3_column_text(statement, 0)];
+                }
+            }
+            sqlite3_finalize(statement);
+        }
+        sqlite3_close(contactDB);
+    }
+    return LastDate;
+}
 
 - (void) updateSIMaster:(NSString *)SINO EnableEditing:(NSString *)EditFlag{
     

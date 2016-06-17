@@ -99,7 +99,7 @@ NSString *ProceedStatus = @"";
     tap.cancelsTouchesInView = NO;
     [self.view addGestureRecognizer:tap];
     
-    NSLog(@"devideId %@", [[[UIDevice currentDevice] identifierForVendor] UUIDString]);
+    NSLog(@"devideId %@", [loginDB getUniqueDeviceIdentifierAsString]);
     [self ShowLoginDate];
 
     outletLogin.hidden = FALSE;
@@ -271,7 +271,7 @@ static NSString *labelVers;
                 
                 NSString *encryptedPass = [encryptWrapper encrypt:txtPassword.text];
                 WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
-                [webservice ValidateLogin:txtUsername.text password:encryptedPass UUID:[[[UIDevice currentDevice] identifierForVendor] UUIDString] delegate:self];
+                [webservice ValidateLogin:txtUsername.text password:encryptedPass UUID:[loginDB getUniqueDeviceIdentifierAsString] delegate:self];
             }else{
                 
             }
@@ -665,7 +665,7 @@ static NSString *labelVers;
     NSString *strApplicationUUID = [SSKeychain passwordForService:appName account:@"incodingLogin"];
     if (strApplicationUUID == nil)
     {
-        strApplicationUUID  = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+        strApplicationUUID  = [loginDB getUniqueDeviceIdentifierAsString];
         [SSKeychain setPassword:strApplicationUUID forService:appName account:@"incodingLogin"];
         
         WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
@@ -676,7 +676,7 @@ static NSString *labelVers;
     }else{
         NSString *encryptedPass = [encryptWrapper encrypt:txtPassword.text];
         WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
-        [webservice ValidateLogin:txtUsername.text password:encryptedPass UUID:[[[UIDevice currentDevice] identifierForVendor] UUIDString] delegate:self];
+        [webservice ValidateLogin:txtUsername.text password:encryptedPass UUID:strApplicationUUID delegate:self];
     }
     return strApplicationUUID;
 }
@@ -1025,15 +1025,6 @@ static NSString *labelVers;
 
 - (BOOL)alertViewShouldEnableFirstOtherButton:(UIAlertView *)alertView
 {
-//    NSString *inputText = [[alertView textFieldAtIndex:0] text];
-//    if( [inputText length] > 0)
-//    {
-//        return YES;
-//    }
-//    else
-//    {
-//        return NO;
-//    }
     return YES;
 }
 
