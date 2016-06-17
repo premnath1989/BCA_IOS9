@@ -10,6 +10,7 @@
 #import "CFFQuestionsViewController.h"
 #import "DataNasabahViewController.h"
 #import "AreaPotensialDiskusiViewController.h"
+#import "AnalisaKebutuhanNasabahViewController.h"
 
 @interface CFFQuestionsViewController ()
 
@@ -18,6 +19,7 @@
 @implementation CFFQuestionsViewController{
     DataNasabahViewController* dataNasabahVC;
     AreaPotensialDiskusiViewController* areaPotensialDiskusiVC;
+    AnalisaKebutuhanNasabahViewController* analisaKebutuhanNasabahVC;
     
     IBOutlet UITableView *myTableView;
     IBOutlet UIView *childView;
@@ -35,6 +37,7 @@
     [super viewDidLoad];
     dataNasabahVC = [[DataNasabahViewController alloc]initWithNibName:@"DataNasabahViewController" bundle:nil];
     areaPotensialDiskusiVC = [[AreaPotensialDiskusiViewController alloc]initWithNibName:@"AreaPotensialDiskusiViewController" bundle:nil];
+    analisaKebutuhanNasabahVC = [[AnalisaKebutuhanNasabahViewController alloc]initWithNibName:@"AnalisaKebutuhanNasabahViewController" bundle:nil];
     
     NumberListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"1", @"2", @"3", @"4",@"5", nil];
     ListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"Data Nasabah", @"Area Potensial Untuk Diskusi", @"Profil Resiko Nasabah", @"Analisa Kebutuhan Nasabah",@"Pernyataan Nasabah", nil];
@@ -66,6 +69,16 @@
     }
 }
 
+-(void)loadAnalisaKebutuhanNasabahView{
+    if ([analisaKebutuhanNasabahVC.view isDescendantOfView:childView]){
+        [childView bringSubviewToFront:analisaKebutuhanNasabahVC.view];
+    }
+    else{
+        [childView addSubview:analisaKebutuhanNasabahVC.view];
+    }
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -80,6 +93,9 @@
             break;
         case 1:
             [self loadAreaPotensialDiskusiView];
+            break;
+        case 3:
+            [self loadAnalisaKebutuhanNasabahView];
             break;
         default:
             break;
