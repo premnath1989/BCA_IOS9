@@ -42,8 +42,6 @@
 - (NSString *)EditIllustration:(NSString *)SIno;
 - (NSMutableDictionary *)getAgentDetails;
 -(NSMutableDictionary *)premiKeluargaku:(NSString *)SINo;
--(NSString *)getUniqueDeviceIdentifierAsString;
--(NSString *) getLastUpdateReferral;
 //- (int) InsertAgentProfile:(NSString *) urlStr;
 
 @end

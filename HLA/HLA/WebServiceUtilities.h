@@ -30,5 +30,4 @@
 - (int)spvLogin:(NSString *)agentCode delegate:(id)delegate spvCode:(NSString *)spvCode spvPass:(NSString *)spvPass;
 - (int)checkuserpass:(NSString *)username password:(NSString *)password delegate:(id)delegate;
 - (int)changeUDID:(NSString *)username udid:(NSString *)udid delegate:(id)delegate;
-- (int)dataReferralSync:(NSString *)lastUpdateDate delegate:(id)delegate;
 @end

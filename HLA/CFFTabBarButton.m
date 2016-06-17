@@ -110,7 +110,9 @@
                                        self.bounds.size.width,
                                        self.textLabel.font.lineHeight);
     textLabelFrame.origin.y = self.bounds.size.height-textLabelFrame.size.height - 15;
+    [self.textLabel setTextColor:[UIColor whiteColor]];
     self.textLabel.frame = textLabelFrame;
+
 }
 
 

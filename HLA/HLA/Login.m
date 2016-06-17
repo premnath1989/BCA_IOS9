@@ -76,7 +76,7 @@ NSString *ProceedStatus = @"";
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = TRUE;
 
-    [labelUDID setText:[loginDB getUniqueDeviceIdentifierAsString]];
+    [labelUDID setText:[self getUniqueDeviceIdentifierAsString]];
     
     txtUsername.delegate = self;
     txtUsername.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0);
@@ -99,7 +99,7 @@ NSString *ProceedStatus = @"";
     tap.cancelsTouchesInView = NO;
     [self.view addGestureRecognizer:tap];
     
-    NSLog(@"devideId %@", [loginDB getUniqueDeviceIdentifierAsString]);
+    NSLog(@"devideId %@", [[[UIDevice currentDevice] identifierForVendor] UUIDString]);
     [self ShowLoginDate];
 
     outletLogin.hidden = FALSE;
@@ -271,7 +271,7 @@ static NSString *labelVers;
                 
                 NSString *encryptedPass = [encryptWrapper encrypt:txtPassword.text];
                 WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
-                [webservice ValidateLogin:txtUsername.text password:encryptedPass UUID:[loginDB getUniqueDeviceIdentifierAsString] delegate:self];
+                [webservice ValidateLogin:txtUsername.text password:encryptedPass UUID:[[[UIDevice currentDevice] identifierForVendor] UUIDString] delegate:self];
             }else{
                 
             }
@@ -541,7 +541,7 @@ static NSString *labelVers;
         }
     }
     
-    if([[loginDB localDBUDID] caseInsensitiveCompare:[loginDB getUniqueDeviceIdentifierAsString]]!= NSOrderedSame){
+    if([[loginDB localDBUDID] caseInsensitiveCompare:[self getUniqueDeviceIdentifierAsString]]!= NSOrderedSame){
         [spinnerLoading stopLoadingSpinner];
         UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Agen login di device yang tidak terdaftar"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alert show];
@@ -656,6 +656,22 @@ static NSString *labelVers;
     appDelegate.isLoggedIn = FALSE;
 }
 
+//we store the UDID into the Keychain
+-(NSString *)getUniqueDeviceIdentifierAsString
+{
+    
+    NSString *appName=[[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString*)kCFBundleNameKey];
+    
+    NSString *strApplicationUUID = [SSKeychain passwordForService:appName account:@"incoding"];
+    if (strApplicationUUID == nil)
+    {
+        strApplicationUUID  = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+        [SSKeychain setPassword:strApplicationUUID forService:appName account:@"incoding"];
+        
+    }
+    return strApplicationUUID;
+}
+
 //just a flag of login udid
 -(NSString *)getUDIDLogin
 {
@@ -665,7 +681,7 @@ static NSString *labelVers;
     NSString *strApplicationUUID = [SSKeychain passwordForService:appName account:@"incodingLogin"];
     if (strApplicationUUID == nil)
     {
-        strApplicationUUID  = [loginDB getUniqueDeviceIdentifierAsString];
+        strApplicationUUID  = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
         [SSKeychain setPassword:strApplicationUUID forService:appName account:@"incodingLogin"];
         
         WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
@@ -676,7 +692,7 @@ static NSString *labelVers;
     }else{
         NSString *encryptedPass = [encryptWrapper encrypt:txtPassword.text];
         WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
-        [webservice ValidateLogin:txtUsername.text password:encryptedPass UUID:strApplicationUUID delegate:self];
+        [webservice ValidateLogin:txtUsername.text password:encryptedPass UUID:[[[UIDevice currentDevice] identifierForVendor] UUIDString] delegate:self];
     }
     return strApplicationUUID;
 }
@@ -1025,6 +1041,15 @@ static NSString *labelVers;
 
 - (BOOL)alertViewShouldEnableFirstOtherButton:(UIAlertView *)alertView
 {
+//    NSString *inputText = [[alertView textFieldAtIndex:0] text];
+//    if( [inputText length] > 0)
+//    {
+//        return YES;
+//    }
+//    else
+//    {
+//        return NO;
+//    }
     return YES;
 }
 

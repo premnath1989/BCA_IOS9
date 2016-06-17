@@ -11,6 +11,7 @@
 #import "DBUpdater.h"
 #import "SessionManagement.h"
 #import "Login.h"
+#import "CFFListingViewController.h"
 
 @implementation AppDelegate
 @synthesize indexNo;
@@ -30,6 +31,9 @@ NSString *uatAgentCode;
 #endif
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    UIViewController *cffListingNavigation=[[CFFListingViewController alloc]initWithNibName:@"CFFListingViewController" bundle:nil];
+    self.navController=[[UINavigationController alloc]initWithRootViewController:cffListingNavigation];
+    
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     databasePath = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];

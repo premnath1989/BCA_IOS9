@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "SIUtilities.h"
 
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate> {
     NSString *databasePath;
 }
-
+@property(nonatomic, retain) UINavigationController *navController;
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic, assign,readwrite) int indexNo;
 @property (nonatomic, assign,readwrite) int HomeIndex;

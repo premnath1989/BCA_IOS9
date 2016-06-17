@@ -8902,7 +8902,7 @@
                                             <action selector="selectSalesIllustration:" destination="k0P-Te-cR8" eventType="touchUpInside" id="5cc-RR-Xl1"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="6JE-s0-LBK">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="6JE-s0-LBK">
                                         <rect key="frame" x="736" y="254" width="289" height="51"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>

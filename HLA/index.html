@@ -1,0 +1,161 @@
+<html><head>
+    <link rel="stylesheet" href="HTMLResources.bundle/jquery.mobile-1.4.5.min.css" />
+    <script type='text/javascript' src="HTMLResources.bundle/jquery-1.11.1.min.js"></script>
+    <script type='text/javascript' src="HTMLResources.bundle/jquery.mobile-1.4.5.min.js"></script>
+    <script type='text/javascript'>
+    
+    __functionIndexMap = {};
+    
+    <!-- core wrapper to client -->
+    function calliOSFunction(functionName, successCallback, errorCallback, callInfo)
+    {
+        var url = 'js-frame:';
+        
+        callInfo.functionname = functionName;
+        
+        if (successCallback)
+        {
+            if (typeof successCallback == 'function')
+            {
+                var callbackFuncName = createCallbackFunction(functionName + '_' + 'successCallback', successCallback);
+                callInfo.success = callbackFuncName;
+            }
+            else
+            callInfo.success = successCallback;
+        }
+        
+        if (errorCallback)
+        {
+            if (typeof errorCallback == 'function')
+            {
+                var callbackFuncName = createCallbackFunction(functionName + '_' + 'errorCallback', errorCallback);
+                callInfo.error = callbackFuncName;
+            }
+            else
+            callInfo.error = errorCallback;
+        }
+        
+        url += JSON.stringify(callInfo);
+        
+        var iFrame = createIFrame(url);
+        //remove the frame now
+        iFrame.parentNode.removeChild(iFrame);
+    }
+
+    function createCallbackFunction (funcName, callbackFunc)
+    {
+        if (callbackFunc && callbackFunc.name != null && callbackFunc.name.length > 0)
+        {
+            return callbackFunc.name;
+        }
+        
+        if (typeof window[funcName+0] != 'function')
+        {
+            window[funcName+0] = callbackFunc;
+            __functionIndexMap[funcName] = 0;
+            return funcName+0
+            
+        } else
+        {
+            var maxIndex = __functionIndexMap[funcName];
+            var callbackFuncStr = callbackFunc.toString();
+            for (var i = 0; i <= maxIndex; i++)
+            {
+                var tmpName = funcName + i;
+                if (window[tmpName].toString() == callbackFuncStr)
+                return tmpName;
+            }
+            
+            var newIndex = ++__functionIndexMap[funcName];
+            window[funcName+newIndex] = callbackFunc;
+            return funcName+newIndex;
+        }
+    }
+
+    function createIFrame(src)
+    {
+        var rootElm = document.documentElement;
+        var newFrameElm = document.createElement('IFRAME');
+        newFrameElm.setAttribute('src',src);
+        rootElm.appendChild(newFrameElm);
+        return newFrameElm;
+    }
+
+    function onSuccess (ret)
+    {
+        if (ret)
+        {
+            var returnRet = JSON.parse(ret);
+            alert(returnRet.result);
+        }
+    }
+    
+    function onError (ret)
+    {
+        if (ret)
+        {
+            var returnRet = JSON.parse(ret);
+            alert(returnRet.error);
+        }
+    }
+
+    function readfromDB() {
+        var callInfo = {};
+        callInfo.data = {};
+        callInfo.data.CFFAnswers = {};
+        callInfo.data.CFFAnswers.columns = 'elementID,Value,CFFID,CustomerID';
+        callInfo.data.CFFAnswers.where = '';
+        
+        calliOSFunction('readfromDB:',onSuccess,onError, callInfo);
+    }
+    
+    function savetoDB() {
+        
+        //we fill up the parameters here
+        var callInfo = {};
+        callInfo.data = {};
+        callInfo.data.CFFAnswers = [{},{}];
+        
+        //if the table inserted is same with multiple rows.
+        //treat the data as array
+        callInfo.data.CFFAnswers[0].elementID = 'nameText';
+        callInfo.data.CFFAnswers[0].Value = document.getElementsByName('nameText')[0].value;
+        callInfo.data.CFFAnswers[0].CFFID = '1';
+        callInfo.data.CFFAnswers[0].CustomerID = '1';
+        
+        callInfo.data.CFFAnswers[1].elementID = 'statusText';
+        callInfo.data.CFFAnswers[1].Value = document.getElementsByName('statusText')[0].value;
+        callInfo.data.CFFAnswers[1].CFFID = '1';
+        callInfo.data.CFFAnswers[1].CustomerID = '1';
+        
+        //call the wrapper with the parameterized info
+        calliOSFunction('savetoDB:',onSuccess,onError, callInfo);
+    }
+    
+    </script></head>
+    <body><h1>
+        <label for="male">Male</label>
+        <input type="radio" name="gender" id="male" value="male"><br>
+        
+        <label>Name</label>
+        <input type="text" name="nameText"><br>
+        
+        <label>Status</label>
+        <input type="text" name="statusText"><br>
+        
+        <label for="male">Smoking</label>
+        <a href="#myPopup" data-rel="popup" class="ui-btn ui-btn-inline ui-corner-all ui-icon-check ui-btn-icon-left">Yes</a>
+        <button onclick="">No</button><br>
+        
+        <div data-role="popup" id="myPopup" class="ui-content" style="min-width:250px;">
+                <div>
+                    <h3>Berapa Banyak anda merokok dalam sehari?</h3>
+                    <input type="text" name="SmokingText"><br>
+                </div>
+        </div>
+        
+        <button onclick="savetoDB()">Save Variables to DB</button>
+        <button onclick="readfromDB()">Read From DB</button>
+    </h1>
+    </body>
+</html>

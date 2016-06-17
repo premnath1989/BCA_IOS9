@@ -31,7 +31,7 @@
 @property (nonatomic, readwrite, assign) UIViewController *selectedViewController;
 @property (nonatomic, readwrite, assign) NSUInteger selectedIndex;
 @property (nonatomic, readwrite, assign) CGFloat tabBarWidth;
-
+@property (nonatomic, readwrite, assign) UIColor *tabBarColor;
 
 - (void)setViewControllers:(NSArray *)viewControllers animated:(BOOL)animated;
 - (void)updateTabBar;

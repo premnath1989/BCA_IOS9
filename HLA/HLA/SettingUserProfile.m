@@ -427,17 +427,15 @@ id temp;
     [spinnerLoading startLoadingSpinner:self.view label:@"Sync sedang berjalan 1/3"];
     WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
     [webservice fullSync:txtAgentCode.text delegate:self];
-    
-    //paralelly we sync the data referral
-    //[webservice dataReferralSync:[loginDB getLastUpdateReferral] delegate:self];
 }
 
 //here is our function for every response from webservice
 - (void) operation:(AgentWSSoapBindingOperation *)operation
 completedWithResponse:(AgentWSSoapBindingResponse *)response
 {
+    [spinnerLoading stopLoadingSpinner];
     NSArray *responseBodyParts = response.bodyParts;
-    if([[response.error localizedDescription] caseInsensitiveCompare:@""] != NSOrderedSame){[spinnerLoading stopLoadingSpinner];
+    if([[response.error localizedDescription] caseInsensitiveCompare:@""] != NSOrderedSame){
         UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Periksa lagi koneksi internet anda" message:@"" delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
         [alert show];
     }
@@ -448,7 +446,6 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
          ****/
         if ([bodyPart isKindOfClass:[SOAPFault class]]) {
             
-            [spinnerLoading stopLoadingSpinner];
             //You can get the error like this:
             NSString* errorMesg = ((SOAPFault *)bodyPart).simpleFaultString;
             UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Please check your connection" message:errorMesg delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
@@ -524,20 +521,6 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
                  NSLog(@"same version");
              }
          }
-        
-        /****
-         * is it AgentWS_SyncdatareferralResponse
-         ****/
-        else if([bodyPart isKindOfClass:[AgentWS_SyncdatareferralResponse class]]) {
-            [spinnerLoading stopLoadingSpinner];
-            AgentWS_SyncdatareferralResponse* rateResponse = bodyPart;
-            if([rateResponse.strstatus caseInsensitiveCompare:@"TRUE"]== NSOrderedSame){
-                
-            }else{
-                
-            }
-        }
-
     }
 }
 
@@ -546,7 +529,9 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
     for (DDXMLElement *DataSetMenuElement in [root children]) {
         // if the element name's is MenuCategories then do something
         if([[DataSetMenuElement children] count] <= 0){
-            if([[DataSetMenuElement name] caseInsensitiveCompare:@"xs:element"]!=NSOrderedSame){
+            if([[DataSetMenuElement name] caseInsensitiveCompare:@"xs:element"]==NSOrderedSame){
+                //we dont need this value
+            }else{
                 NSArray *elements = [root elementsForName:[DataSetMenuElement name]];
                 if([[[elements objectAtIndex:0]stringValue] caseInsensitiveCompare:@""] != NSOrderedSame){
                     NSString *tableName = [NSString stringWithFormat:@"%@&%d",[[[DataSetMenuElement parent] parent]name], index];
@@ -557,8 +542,8 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
                 }
             }
         }else{
-            DDXMLNode *name = [DataSetMenuElement attributeForName: @"diffgr:id"];
-            if(name != nil){
+            DDXMLNode *nameNode = [DataSetMenuElement attributeForName: @"diffgr:id"];
+            if(nameNode != nil){
                 index++;
             }
         }
@@ -573,6 +558,8 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
     mainLogin.modalPresentationStyle = UIModalPresentationFullScreen;
     mainLogin.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [self presentViewController:mainLogin animated:YES completion:nil];
+//    [self.view endEditing:TRUE];
+//    [self resignFirstResponder];
 }
 
 - (IBAction)btnContractDatePressed:(id)sender     //--bob

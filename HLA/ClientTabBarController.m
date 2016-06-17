@@ -188,7 +188,7 @@ int rrr;
     self.tabBarWidth = DEFAULT_TAB_BAR_HEIGHT;
     self.selectedIndex = INT_MAX;
     _tabBarColor = [UIColor colorWithRed:250.0/255.0 green:175.0/255.0 blue:50.0/255.0 alpha:1.0];
-}
+}        
 
 #pragma mark -
 #pragma mark UIViewController

@@ -162,6 +162,35 @@
     return dict;
 }
 
+-(NSDictionary *)getOccupationByCode:(NSString *)occupCode{
+    NSDictionary *dict;
+    
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    NSString* stringOccpCode=[[NSString alloc] init];
+    NSString* stringOccpDesc=[[NSString alloc] init];
+    NSString* stringOccpClass=[[NSString alloc] init];
+    NSString* stringStatus=[[NSString alloc] init];
+    
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"SELECT * FROM eProposal_OCCP where occp_Code = \"%@\"",occupCode]];
+    while ([s next]) {
+        stringOccpCode = [NSString stringWithFormat:@"%@",[s stringForColumn:@"occp_Code"]];
+        stringOccpDesc = [NSString stringWithFormat:@"%@",[s stringForColumn:@"OccpDesc"]];
+        stringOccpClass = [NSString stringWithFormat:@"%@",[s stringForColumn:@"OccpClass"]];
+        stringStatus = [NSString stringWithFormat:@"%@",[s stringForColumn:@"Status"]];
+    }
+    dict = [[NSDictionary alloc] initWithObjectsAndKeys:stringOccpCode,@"OccpCode", stringOccpDesc,@"OccpDesc", stringOccpClass,@"occpClass",stringStatus,@"Status",nil];
+    
+    [results close];
+    [database close];
+    return dict;
+}
+
+
 -(NSDictionary *)getBranchInfo:(NSString *)columnOrder{
     NSDictionary *dict;
     

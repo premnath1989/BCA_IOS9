@@ -17,6 +17,7 @@
 -(NSDictionary *)getVIPClass;
 -(NSDictionary *)getReferralSource;
 -(NSDictionary *)getOccupation;
+-(NSDictionary *)getOccupationByCode:(NSString *)occupCode;
 -(NSDictionary *)getTitle;
 -(NSDictionary *)getBranchInfo:(NSString *)columnOrder;
 -(NSDictionary *)getBranchInfoFilter:(NSString *)columnFilter ColumnValue:(NSString *)columnValue;

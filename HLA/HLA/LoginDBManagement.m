@@ -10,8 +10,6 @@
 #import "LoginDBManagement.h"
 #import "FMDatabase.h"
 #import "LoginMacros.h"
-#import "SSKeychain.h"
-#import "WebServiceUtilities.h"
 
 @implementation LoginDBManagement
 
@@ -830,45 +828,6 @@
     [db close];
     
     return AgentName;
-}
-
-//we store the UDID into the Keychain
--(NSString *)getUniqueDeviceIdentifierAsString
-{
-    
-    NSString *appName=[[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString*)kCFBundleNameKey];
-    
-    NSString *strApplicationUUID = [SSKeychain passwordForService:appName account:@"incoding"];
-    if (strApplicationUUID == nil)
-    {
-        strApplicationUUID  = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
-        [SSKeychain setPassword:strApplicationUUID forService:appName account:@"incoding"];
-        
-    }
-    return strApplicationUUID;
-}
-
--(NSString *) getLastUpdateReferral
-{
-    sqlite3_stmt *statement;
-    NSString *LastDate = @"";
-    if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
-    {
-        NSString *querySQL = [NSString stringWithFormat: @"SELECT max(CreateTime) FROM DataReferral"];
-        
-        if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK){
-            if (sqlite3_step(statement) == SQLITE_ROW) {
-                if((const char *) sqlite3_column_text(statement, 0) != NULL){
-                    LastDate = [[NSString alloc]
-                            initWithUTF8String:
-                            (const char *) sqlite3_column_text(statement, 0)];
-                }
-            }
-            sqlite3_finalize(statement);
-        }
-        sqlite3_close(contactDB);
-    }
-    return LastDate;
 }
 
 - (void) updateSIMaster:(NSString *)SINO EnableEditing:(NSString *)EditFlag{

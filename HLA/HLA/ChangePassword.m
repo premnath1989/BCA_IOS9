@@ -16,7 +16,6 @@
 #import "DDXMLDocument.h"
 #import "DDXMLElementAdditions.h"
 #import "DDXMLNode.h"
-#import "SSKeychain.h"
 
 #import "LoginMacros.h"
 
@@ -322,8 +321,7 @@
                     WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
                     [webservice checkuserpass:txtAgentCode.text password:encryptedOldPass delegate:self];
                 }else{
-                    
-                    [webservice chgPassword:self AgentCode:txtAgentCode.text password:encryptedOldPass newPassword:encryptedNewPass UUID:[loginDB getUniqueDeviceIdentifierAsString]];
+                    [webservice chgPassword:self AgentCode:txtAgentCode.text password:encryptedOldPass newPassword:encryptedNewPass UUID:[[[UIDevice currentDevice] identifierForVendor] UUIDString]];
                 }
             }
             else {
@@ -386,20 +384,6 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
         }
         
         /****
-         * is it AgentWS_SyncdatareferralResponse
-         ****/
-        else if([bodyPart isKindOfClass:[AgentWS_SyncdatareferralResponse class]]) {
-            [spinnerLoading stopLoadingSpinner];
-            AgentWS_SyncdatareferralResponse* rateResponse = bodyPart;
-            if([rateResponse.strstatus caseInsensitiveCompare:@"TRUE"]== NSOrderedSame){
-                
-            }else{
-               
-            }
-        }
-
-        
-        /****
          * is it AgentWS_LoginAPIResponse
          ****/
         else if([bodyPart isKindOfClass:[AgentWS_LoginAPIResponse class]]) {
@@ -412,9 +396,6 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
                 flagFullSync = TRUE;
                 WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
                 [webservice fullSync:txtAgentCode.text delegate:self];
-                
-                //we update the referral data paralelly
-                //[webservice dataReferralSync:[loginDB getLastUpdateReferral] delegate:self];
             }else{
                 [spinnerLoading stopLoadingSpinner];
                 UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Ubah Password Gagal!" message:[NSString stringWithFormat:@"Username/Password yang di masukan salah"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
@@ -463,7 +444,7 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
                                     WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
                                     NSString *encryptedNewPass = [encryptWrapper encrypt:txtNewPwd.text];
                                     NSString *encryptedOldPass = [encryptWrapper encrypt:txtOldPwd.text];
-                                    [webservice FirstTimeLogin:self AgentCode:txtAgentCode.text password:encryptedOldPass newPassword:encryptedNewPass UUID:[loginDB getUniqueDeviceIdentifierAsString]];
+                                    [webservice FirstTimeLogin:self AgentCode:txtAgentCode.text password:encryptedOldPass newPassword:encryptedNewPass UUID:[[[UIDevice currentDevice] identifierForVendor] UUIDString]];
                                                           });
                               });
                           });
@@ -632,6 +613,7 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
                     txtConfirmPwd.text = @"";
                     alert.tag = 03;
                     [alert show];
+                    //[txtNewPwd becomeFirstResponder];
                 }
                 else {
                     if ([txtNewPwd.text isEqualToString:txtConfirmPwd.text]) {
