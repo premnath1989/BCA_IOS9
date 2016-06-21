@@ -14,5 +14,6 @@
     FMResultSet *results;
 }
 -(void)saveCFFTransaction:(NSDictionary *)cffTransactionDictionary;
--(NSMutableArray *)getAllCFF;
+-(NSMutableArray *)getAllCFF:(NSString *)sortedBy SortMethod:(NSString *)sortMethod;
+-(NSMutableArray *)searchCFF:(NSDictionary *)dictSearch;
 @end
