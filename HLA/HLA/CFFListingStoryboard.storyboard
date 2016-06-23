@@ -77,6 +77,9 @@
                                     <color key="titleColor" red="0.98039215690000003" green="0.68627450980000004" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="actionSearchCFF:" destination="xic-73-QET" eventType="touchUpInside" id="Lew-uZ-g1J"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" id="bwo-oa-KhZ">
                                 <rect key="frame" x="10" y="156" width="948" height="50"/>
@@ -97,6 +100,9 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="174" height="50"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="15"/>
+                                                <connections>
+                                                    <action selector="actionSortBy:" destination="xic-73-QET" eventType="touchUpInside" id="Qtd-0n-pLg"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.98039215690000003" green="0.68627450980000004" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
@@ -116,6 +122,9 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="128" height="50"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
+                                                <connections>
+                                                    <action selector="actionSortBy:" destination="xic-73-QET" eventType="touchUpInside" id="frW-w7-o6E"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.98039215690000003" green="0.68627450980000004" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
@@ -131,6 +140,13 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="74l-7p-JXf">
+                                                <rect key="frame" x="0.0" y="0.0" width="128" height="50"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <connections>
+                                                    <action selector="actionSortBy:" destination="xic-73-QET" eventType="touchUpInside" id="EUT-cW-03S"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.98039215690000003" green="0.68627450980000004" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
@@ -148,6 +164,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="6Sz-pJ-yH1">
                                                 <rect key="frame" x="0.0" y="0.0" width="128" height="50"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <connections>
+                                                    <action selector="actionSortBy:" destination="xic-73-QET" eventType="touchUpInside" id="YFP-cV-KGX"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.98039215690000003" green="0.68627450980000004" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
@@ -166,6 +185,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="xXZ-U4-y3k">
                                                 <rect key="frame" x="0.0" y="0.0" width="128" height="50"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <connections>
+                                                    <action selector="actionSortBy:" destination="xic-73-QET" eventType="touchUpInside" id="5pX-l5-oxE"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.98039215690000003" green="0.68627450980000004" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
@@ -185,6 +207,9 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="128" height="50"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="15"/>
+                                                <connections>
+                                                    <action selector="actionSortBy:" destination="xic-73-QET" eventType="touchUpInside" id="gLU-1Y-v9P"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.98039215690000003" green="0.68627450980000004" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
@@ -203,6 +228,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="KWS-mB-nyT">
                                                 <rect key="frame" x="0.0" y="0.0" width="128" height="50"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <connections>
+                                                    <action selector="actionSortBy:" destination="xic-73-QET" eventType="touchUpInside" id="fSw-jf-bEj"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.98039215690000003" green="0.68627450980000004" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
@@ -210,15 +238,6 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="KE6-mJ-49m">
-                                <rect key="frame" x="160" y="57" width="285" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
-                                <state key="normal" image="Expand Arrow.png">
-                                    <color key="titleColor" red="0.34509803919999998" green="0.34901960780000002" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="DwG-gh-PQC">
                                 <rect key="frame" x="339" y="110" width="106" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -228,6 +247,9 @@
                                     <color key="titleColor" red="0.98039215690000003" green="0.68627450980000004" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="actionClear:" destination="xic-73-QET" eventType="touchUpInside" id="bYo-F5-5Nl"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="16" clearButtonMode="whileEditing" id="vDA-bw-HTz">
                                 <rect key="frame" x="160" y="15" width="285" height="30"/>
@@ -285,6 +307,18 @@
                                 <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="16"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="KE6-mJ-49m">
+                                <rect key="frame" x="160" y="57" width="285" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
+                                <state key="normal" image="Expand Arrow.png">
+                                    <color key="titleColor" red="0.34509803919999998" green="0.34901960780000002" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="actionDate:" destination="xic-73-QET" eventType="touchUpInside" id="J67-Ic-iLX"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -294,7 +328,18 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="1024" height="768"/>
                     <connections>
+                        <outlet property="btnSortBranchName" destination="6Sz-pJ-yH1" id="Yle-en-NRP"/>
+                        <outlet property="btnSortDOB" destination="ewi-0b-GNA" id="4tO-3m-eWP"/>
+                        <outlet property="btnSortDateCreated" destination="xXZ-U4-y3k" id="PS6-Gj-NSC"/>
+                        <outlet property="btnSortDateModified" destination="ln6-Qh-NkF" id="1ei-Jk-HGu"/>
+                        <outlet property="btnSortFullName" destination="ECp-QH-zrT" id="Eyu-iV-XzJ"/>
+                        <outlet property="btnSortPhoneNumber" destination="74l-7p-JXf" id="hKc-5M-HBa"/>
+                        <outlet property="btnSortStatus" destination="KWS-mB-nyT" id="eu3-sH-plu"/>
+                        <outlet property="outletDate" destination="KE6-mJ-49m" id="uUj-5k-cor"/>
+                        <outlet property="outletSearch" destination="q5g-2Y-Zw9" id="JC7-Af-OUa"/>
                         <outlet property="tableCFFListing" destination="rcg-bc-Fne" id="rUz-4a-dd8"/>
+                        <outlet property="textBranch" destination="7E9-HA-gnx" id="0os-1V-4WS"/>
+                        <outlet property="textName" destination="vDA-bw-HTz" id="thS-hg-Fka"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PYy-Wd-Fqj" userLabel="First Responder" sceneMemberID="firstResponder"/>
