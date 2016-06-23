@@ -29,6 +29,7 @@
 #import "ClearData.h"
 #import "ProductInformation.h"
 #import "ProductInformation.h"
+#import "SPAJ Main.h"
 
 const int numberOfModule = 7;
 
@@ -149,6 +150,16 @@ const int numberOfModule = 7;
 //    [outletSI setFrame:CGRectMake(715, positionY, width, height)];
 //    [outletEAPP setFrame:CGRectMake(860, 300, width, 160)]; // EAPP words consist of one line only
 }
+
+
+// SPAJ
+
+- (IBAction)goToSPAJ:(id)sender
+{
+    SPAJMain* viewController = [[SPAJMain alloc] initWithNibName:@"SPAJ Main" bundle:nil];
+    [self presentViewController:viewController animated:true completion:nil];
+}
+
 
 #ifdef UAT_BUILD
 - (NSString *) getAgentCode {

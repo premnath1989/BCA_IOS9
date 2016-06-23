@@ -38,6 +38,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *ButtonInfoLabel;
 @property (weak, nonatomic) IBOutlet UILabel *AgentName;
 
+@property (weak, nonatomic) IBOutlet UIButton *buttonSPAJ;
+
 
 -(IBAction)NamaProdukDropDown:(id)sender;
 - (IBAction)selectClientProfile:(id)sender;
