@@ -14,49 +14,77 @@
 #import "ColorHexCode.h"
 #import "ModelProspectSpouse.h"
 #import "ModelPopover.h"
+#import "CFFValidation.h"
+#import "ProspectProfile.h"
+#import "ModelProspectProfile.h"
+#import "Formatter.h"
 
-@interface AddSpouseViewController ()<SIDateDelegate,IDTypeDelegate,NatinalityDelegate,OccupationListDelegate>{
+@interface AddSpouseViewController ()<SIDateDelegate,IDTypeDelegate,NatinalityDelegate,OccupationListDelegate,UITextFieldDelegate>{
+    Formatter* formatter;
+    ProspectProfile* pp;
     SIDate* datePickerViewController;
     IDTypeViewController *IDTypePicker;
     Nationality *nationalityList;
     OccupationList *occupationList;
     ModelProspectSpouse *modelProspectSpouse;
+    ModelProspectProfile* modelProspectProfile;
     ModelPopover* modelPopOver;
+    CFFValidation* cffValidation;
 }
 
 @end
 
 @implementation AddSpouseViewController{
+    UIColor *borderColor;
+    
     NSString *IDTypeCodeSelected;
     NSString *OccupCodeSelected;
     NSString *gender;
     NSString *ClientSmoker;
+    NSMutableArray *ProspectTableData;
     
     IBOutlet UINavigationBar *navigationBar;
+    IBOutlet UIView *viewParent;
     IBOutlet UIButton *outletRelation;
     IBOutlet UIButton *outletDOB;
     IBOutlet UIButton *OtherIDType;
     IBOutlet UITextField *txtOtherIDType;
     IBOutlet UITextField *txtYearsInsured;
     IBOutlet UITextField *txtName;
+    IBOutlet UITextField *txtAge;
     IBOutlet UIButton *outletNationality;
     IBOutlet UIButton *outletOccupation;
     IBOutlet UISegmentedControl *segGender;
     IBOutlet UISegmentedControl *segSmoker;
     UIPopoverController *popoverController;
-    
-    UIColor *borderColor;
 }
 @synthesize prospectProfileID,cffTransactionID,delegate,DictSpouseData;
 
+- (void)viewWillLayoutSubviews{
+    [super viewWillLayoutSubviews];
+    self.view.superview.bounds = CGRectMake(0, 0, 824, 415);
+    [self.view.superview setBackgroundColor:[UIColor whiteColor]];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    modelProspectSpouse = [[ModelProspectSpouse alloc]init];
-    modelPopOver = [[ModelPopover alloc]init];
-    borderColor=[[UIColor alloc]initWithRed:250.0/255.0 green:175.0/255.0 blue:50.0/255.0 alpha:1.0];
+    borderColor=[[UIColor alloc]initWithRed:0/255.0 green:102.0/255.0 blue:179.0/255.0 alpha:1.0];
+    [self.navigationController.navigationBar setTitleTextAttributes:
+     @{NSForegroundColorAttributeName:[UIColor colorWithRed:88.0f/255.0f green:89.0f/255.0f blue:92.0f/255.0f alpha:1],NSFontAttributeName: [UIFont fontWithName:@"BPreplay" size:17.0f]}];
     
+    modelProspectSpouse = [[ModelProspectSpouse alloc]init];
+    modelProspectProfile=[[ModelProspectProfile alloc]init];
+    modelPopOver = [[ModelPopover alloc]init];
+    cffValidation = [[CFFValidation alloc]init];
+    formatter = [[Formatter alloc]init];
+    
+    ProspectTableData = [modelProspectProfile searchProspectProfileByID:[prospectProfileID intValue]];
+    pp = [ProspectTableData objectAtIndex:0];
+    
+    [self autoSelectGender];
     [self setButtonImageAndTextAlignment];
-    [outletRelation setTitle:@"Spouse" forState:UIControlStateNormal];
+    [self setTextfieldBorder];
+    [self autoSelectRelation];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -91,6 +119,37 @@
     outletRelation.layer.borderColor = borderColor.CGColor;
 }
 
+-(void)setTextfieldBorder{
+    UIFont *fontSegment= [UIFont fontWithName:@"BPreplay" size:16.0f];
+    NSDictionary *attributes = [NSDictionary dictionaryWithObject:fontSegment forKey:UITextAttributeFont];
+    [segSmoker setTitleTextAttributes:attributes forState:UIControlStateNormal];
+    [segGender setTitleTextAttributes:attributes forState:UIControlStateNormal];
+    
+    UIFont *font= [UIFont fontWithName:@"BPreplay" size:16.0f];
+    for (UIView *view in [viewParent subviews]) {
+        if ([view isKindOfClass:[UITextField class]]) {
+            UITextField *textField = (UITextField *)view;
+            textField.layer.borderColor=borderColor.CGColor;
+            textField.layer.borderWidth=1.0;
+            textField.delegate=self;
+            [textField setFont:font];
+            
+            UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 20)];
+            textField.leftView = paddingView;
+            textField.leftViewMode = UITextFieldViewModeAlways;
+        }
+    }
+    
+    for (UIView *view in [viewParent subviews]) {
+        if ([view isKindOfClass:[UIButton class]]) {
+            UIButton *button = (UIButton *)view;
+            button.layer.borderColor=borderColor.CGColor;
+            button.layer.borderWidth=1.0;
+        }
+    }
+    
+}
+
 
 -(void)setNavigationAttribute{
     NSMutableDictionary *newAttributes = [[NSMutableDictionary alloc] init];
@@ -105,26 +164,58 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+#pragma mark auto select
+-(void)autoSelectGender{
+    /*ProspectProfile* pp;
+    NSMutableArray *ProspectTableData = [modelProspectProfile searchProspectProfileByID:[prospectProfileID intValue]];
+    pp = [ProspectTableData objectAtIndex:0];*/
+    if ([pp.ProspectGender.uppercaseString isEqualToString:@"MALE"]){
+        [segGender setSelectedSegmentIndex:1];
+    }
+    else{
+        [segGender setSelectedSegmentIndex:0];
+    }
+    [self ActionGender:(UISegmentedControl *)segGender];
+}
+
+-(void)autoSelectRelation{
+    /*ProspectProfile* pp;
+    NSMutableArray *ProspectTableData = [modelProspectProfile searchProspectProfileByID:[prospectProfileID intValue]];
+    pp = [ProspectTableData objectAtIndex:0];*/
+    if ([pp.ProspectGender.uppercaseString isEqualToString:@"MALE"]){
+        [outletRelation setTitle:@"Istri" forState:UIControlStateNormal];
+    }
+    else{
+        [outletRelation setTitle:@"Suami" forState:UIControlStateNormal];
+    }
+}
 
 -(IBAction)actionDismissModal:(id)sender{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(IBAction)actionSaveSpouse:(id)sender{
-    if ([DictSpouseData count]>0){
-        if ([modelProspectSpouse chekcExistingRecord:[[DictSpouseData valueForKey:@"IndexNo"] intValue]]>0){
-            [modelProspectSpouse updateProspectSpouse:[self setDictionarySpouse]];
+    if ([cffValidation validateSpouse:[self setDictionaryObjectSpouse]]){
+        NSString* nasabahID = [NSString stringWithFormat:@"%@%@",pp.OtherIDType,pp.OtherIDTypeNo];
+        if ([cffValidation validateOtherIDNumber:OtherIDType TextIDNumber:txtOtherIDType IDNasabah:nasabahID IDTypeCodeSelected:IDTypeCodeSelected]){
+            if ([DictSpouseData count]>0){
+                if ([modelProspectSpouse chekcExistingRecord:[[DictSpouseData valueForKey:@"IndexNo"] intValue]]>0){
+                    [modelProspectSpouse updateProspectSpouse:[self setDictionarySpouse]];
+                }
+                else{
+                    [modelProspectSpouse saveProspectSpouse:[self setDictionarySpouse]];
+                }
+            }
+            else{
+                [modelProspectSpouse saveProspectSpouse:[self setDictionarySpouse]];
+            }
+            
+            [self dismissViewControllerAnimated:YES completion:^{[delegate reloadProspectData];}];
         }
         else{
-            [modelProspectSpouse saveProspectSpouse:[self setDictionarySpouse]];
+            
         }
     }
-    else{
-        [modelProspectSpouse saveProspectSpouse:[self setDictionarySpouse]];
-    }
-    
-    
-    [self dismissViewControllerAnimated:YES completion:^{[delegate reloadProspectData];}];
 }
 
 - (IBAction)actionNationality:(id)sender
@@ -165,12 +256,12 @@
         dateString= [dateFormatter stringFromDate:[NSDate date]];
     }
     
-    if (datePickerViewController == Nil) {
+    //if (datePickerViewController == Nil) {
         UIStoryboard *clientProfileStoryBoard = [UIStoryboard storyboardWithName:@"ClientProfileStoryboard" bundle:nil];
         datePickerViewController = [clientProfileStoryBoard instantiateViewControllerWithIdentifier:@"SIDate"];
         datePickerViewController.delegate = self;
         popoverController = [[UIPopoverController alloc] initWithContentViewController:datePickerViewController];
-    }
+    //}
     datePickerViewController.ProspectDOB = dateString;
     [popoverController setPopoverContentSize:CGSizeMake(300.0f, 255.0f)];
     [popoverController presentPopoverFromRect:[sender bounds]  inView:sender permittedArrowDirections:UIPopoverArrowDirectionLeft animated:NO];
@@ -188,12 +279,12 @@
     NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
     [ClientProfile setObject:@"YES" forKey:@"isNew"];
     
-    if (IDTypePicker == nil) {
+    //if (IDTypePicker == nil) {
         IDTypePicker = [[IDTypeViewController alloc] initWithStyle:UITableViewStylePlain];
         IDTypePicker.delegate = self;
         IDTypePicker.requestType = @"CO";
         popoverController = [[UIPopoverController alloc] initWithContentViewController:IDTypePicker];
-    }
+    //}
     [popoverController presentPopoverFromRect:[sender bounds] inView:sender permittedArrowDirections:UIPopoverArrowDirectionLeft animated:YES];
 }
 
@@ -209,11 +300,11 @@
     id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
     [activeInstance performSelector:@selector(dismissKeyboard)];
     
-    if (occupationList == nil) {
+    //if (occupationList == nil) {
         occupationList = [[OccupationList alloc] initWithStyle:UITableViewStylePlain];
         occupationList.delegate = self;
         popoverController = [[UIPopoverController alloc] initWithContentViewController:occupationList];
-    }
+    //}
     [popoverController presentPopoverFromRect:[sender bounds]  inView:sender permittedArrowDirections:UIPopoverArrowDirectionLeft animated:YES];
 }
 
@@ -320,10 +411,28 @@
 
 
 #pragma mark setDictionary
+-(NSMutableDictionary *)setDictionaryObjectSpouse{
+    NSMutableDictionary* dictionarySpouse;
+    
+    dictionarySpouse = [[NSMutableDictionary alloc]initWithObjectsAndKeys:txtName,@"ProspectSpouseName",
+                        outletDOB,@"ProspectSpouseDOB",
+                        OtherIDType,@"OtherIDType",
+                        txtOtherIDType,@"OtherIDTypeNo",
+                        outletNationality,@"Nationality",
+                        outletRelation,@"Relation",
+                        txtYearsInsured,@"YearsInsured",
+                        outletOccupation,@"ProspectSpouseOccupationCode",
+                        prospectProfileID,@"ProspectIndexNo",
+                        cffTransactionID,@"CFFTransactionID",
+                        segGender,@"ProspectSpouseGender",
+                        segSmoker,@"Smoker",nil];
+    return dictionarySpouse;
+}
+
 -(NSMutableDictionary *)setDictionarySpouse{
     NSMutableDictionary* dictionarySpouse;
     NSString* spouseName = txtName.text;
-    NSString* spouseDOB = outletDOB.titleLabel.text;
+    NSString* spouseDOB = outletDOB.currentTitle;
     NSString* spouseOtherIDType = OtherIDType.titleLabel.text;
     NSString* spouseOtherIDNumber = txtOtherIDType.text;
     NSString* spouseNationality = outletNationality.titleLabel.text;
@@ -333,7 +442,7 @@
     
     dictionarySpouse = [[NSMutableDictionary alloc]initWithObjectsAndKeys:spouseName,@"ProspectSpouseName",
                         spouseDOB,@"ProspectSpouseDOB",
-                        spouseOtherIDType,@"OtherIDType",
+                        IDTypeCodeSelected,@"OtherIDType",
                         spouseOtherIDNumber,@"OtherIDTypeNo",
                         spouseNationality,@"Nationality",
                         spouseRelation,@"Relation",
@@ -382,17 +491,17 @@
     NSDate *d = [NSDate date];
     NSDate* d2 = [df dateFromString:strDate];
     
-    NSDateFormatter *formatter;
+    NSDateFormatter *dateformatter;
     NSString *dateString;
     NSString *clientDateString;
     
-    formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"dd/MM/yyyy"];
+    dateformatter = [[NSDateFormatter alloc] init];
+    [dateformatter setDateFormat:@"dd/MM/yyyy"];
     
     NSDateFormatter* clientDateFormmater = [[NSDateFormatter alloc] init];
     [clientDateFormmater setDateFormat:@"yyyy-MM-dd"];
     
-    dateString = [formatter stringFromDate:[NSDate date]];
+    dateString = [dateformatter stringFromDate:[NSDate date]];
     clientDateString = [clientDateFormmater stringFromDate:d2];
     
     if ([d compare:d2] == NSOrderedAscending){
@@ -405,6 +514,7 @@
         outletDOB.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         [outletDOB setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", strDate] forState:UIControlStateNormal];
         [outletDOB setBackgroundColor:[UIColor clearColor]];
+        [txtAge setText:[NSString stringWithFormat:@"%i",[formatter calculateAge:strDate]]];
     }
     df = Nil, d = Nil, d2 = Nil;
 }

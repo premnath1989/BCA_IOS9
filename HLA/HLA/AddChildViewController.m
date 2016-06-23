@@ -6,6 +6,8 @@
 //  Copyright © 2016 InfoConnect Sdn Bhd. All rights reserved.
 //
 
+#define NUMBERS_ONLY @"0123456789"
+
 #import "AddChildViewController.h"
 #import "SIDate.h"
 #import "Nationality.h"
@@ -14,14 +16,22 @@
 #import "ColorHexCode.h"
 #import "ModelProspectChild.h"
 #import "ModelPopover.h"
+#import "CFFValidation.h"
+#import "ProspectProfile.h"
+#import "ModelProspectProfile.h"
+#import "Formatter.h"
 
-@interface AddChildViewController ()<SIDateDelegate,IDTypeDelegate,NatinalityDelegate,OccupationListDelegate>{
+@interface AddChildViewController ()<SIDateDelegate,IDTypeDelegate,NatinalityDelegate,OccupationListDelegate,UITextFieldDelegate>{
+    Formatter* formatter;
     SIDate* datePickerViewController;
+    ProspectProfile* pp;
     IDTypeViewController *IDTypePicker;
     Nationality *nationalityList;
     OccupationList *occupationList;
     ModelProspectChild *modelProspectChild;
     ModelPopover* modelPopOver;
+    ModelProspectProfile* modelProspectProfile;
+    CFFValidation* cffValidation;
 }
 
 @end
@@ -31,14 +41,20 @@
     NSString *OccupCodeSelected;
     NSString *gender;
     NSString *ClientSmoker;
+    NSMutableArray *ProspectTableData;
     
+    UITextField *activeField;
     IBOutlet UINavigationBar *navigationBar;
+    IBOutlet UIScrollView *scrollAddChild;
+    IBOutlet UIScrollView *myScrollView;
+    IBOutlet UIView *viewParent;
     IBOutlet UIButton *outletRelation;
     IBOutlet UIButton *outletDOB;
     IBOutlet UIButton *OtherIDType;
     IBOutlet UITextField *txtOtherIDType;
     IBOutlet UITextField *txtYearsInsured;
     IBOutlet UITextField *txtName;
+    IBOutlet UITextField *txtAge;
     IBOutlet UIButton *outletNationality;
     IBOutlet UIButton *outletOccupation;
     IBOutlet UISegmentedControl *segGender;
@@ -50,24 +66,56 @@
 
 @synthesize prospectProfileID,cffTransactionID,delegate,DictChildData;
 
+- (void)viewWillLayoutSubviews{
+    [super viewWillLayoutSubviews];
+    self.view.superview.bounds = CGRectMake(0, 0, 824, 415);
+    [self.view.superview setBackgroundColor:[UIColor whiteColor]];
+}
+
 -(void)viewWillAppear:(BOOL)animated{
     [self loadChildData];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
+    [cffValidation setProspectProfileID:prospectProfileID];
+    [cffValidation  setCffTransactionID:cffTransactionID];
+    
+    myScrollView.contentSize = CGSizeMake(801, 500);
     [self loadChildData];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     modelProspectChild = [[ModelProspectChild alloc]init];
+    modelProspectProfile=[[ModelProspectProfile alloc]init];
     modelPopOver = [[ModelPopover alloc]init];
-    borderColor=[[UIColor alloc]initWithRed:250.0/255.0 green:175.0/255.0 blue:50.0/255.0 alpha:1.0];
+    cffValidation = [[CFFValidation alloc]init];
+    formatter = [[Formatter alloc]init];
+    
+    ProspectTableData = [modelProspectProfile searchProspectProfileByID:[prospectProfileID intValue]];
+    pp = [ProspectTableData objectAtIndex:0];
+    
+    borderColor=[[UIColor alloc]initWithRed:0/255.0 green:102.0/255.0 blue:179.0/255.0 alpha:1.0];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+    
+    [self.navigationController.navigationBar setTitleTextAttributes:
+     @{NSForegroundColorAttributeName:[UIColor colorWithRed:88.0f/255.0f green:89.0f/255.0f blue:92.0f/255.0f alpha:1],NSFontAttributeName: [UIFont fontWithName:@"BPreplay" size:17.0f]}];
     
     [self setButtonImageAndTextAlignment];
+    [self setTextfieldBorder];
     [outletRelation setTitle:@"Child" forState:UIControlStateNormal];
     // Do any additional setup after loading the view from its nib.
 }
+
 
 -(void)setButtonImageAndTextAlignment{
     outletDOB.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
@@ -100,6 +148,38 @@
     outletRelation.layer.borderColor = borderColor.CGColor;
 }
 
+-(void)setTextfieldBorder{
+    UIFont *fontSegment= [UIFont fontWithName:@"BPreplay" size:16.0f];
+    NSDictionary *attributes = [NSDictionary dictionaryWithObject:fontSegment forKey:UITextAttributeFont];
+    [segSmoker setTitleTextAttributes:attributes forState:UIControlStateNormal];
+    [segGender setTitleTextAttributes:attributes forState:UIControlStateNormal];
+    
+    UIFont *font= [UIFont fontWithName:@"BPreplay" size:16.0f];
+    for (UIView *view in [viewParent subviews]) {
+        if ([view isKindOfClass:[UITextField class]]) {
+            UITextField *textField = (UITextField *)view;
+            textField.layer.borderColor=borderColor.CGColor;
+            textField.layer.borderWidth=1.0;
+            textField.delegate=self;
+            [textField setFont:font];
+            
+            UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 20)];
+            textField.leftView = paddingView;
+            textField.leftViewMode = UITextFieldViewModeAlways;
+        }
+    }
+    
+    for (UIView *view in [viewParent subviews]) {
+        if ([view isKindOfClass:[UIButton class]]) {
+            UIButton *button = (UIButton *)view;
+            button.layer.borderColor=borderColor.CGColor;
+            button.layer.borderWidth=1.0;
+        }
+    }
+    
+}
+
+
 -(void)setNavigationAttribute{
     NSMutableDictionary *newAttributes = [[NSMutableDictionary alloc] init];
     [newAttributes setObject:[UIFont systemFontOfSize:18] forKey:UITextAttributeFont];
@@ -121,19 +201,27 @@
 }
 
 -(IBAction)actionSaveChild:(id)sender{
-    if ([DictChildData count]>0){
-        if ([modelProspectChild chekcExistingRecord:[[DictChildData valueForKey:@"IndexNo"] intValue]]>0){
-            [modelProspectChild updateProspectChild:[self setDictionaryChild]];
-        }
-        else{
-            [modelProspectChild saveProspectChild:[self setDictionaryChild]];
+    if ([cffValidation validateChild:[self setDictionaryObjectChild]]){
+        NSString* nasabahID = [NSString stringWithFormat:@"%@%@",pp.OtherIDType,pp.OtherIDTypeNo];
+        if ([cffValidation validateOtherIDNumberForChild:OtherIDType TextIDNumber:txtOtherIDType IDNasabah:nasabahID IDTypeCodeSelected:IDTypeCodeSelected]){
+            if ([DictChildData count]>0){
+                if ([modelProspectChild chekcExistingRecord:[[DictChildData valueForKey:@"IndexNo"] intValue]]>0){
+                    [modelProspectChild updateProspectChild:[self setDictionaryChild]];
+                }
+                else{
+                    [modelProspectChild saveProspectChild:[self setDictionaryChild]];
+                }
+            }
+            else{
+                [modelProspectChild saveProspectChild:[self setDictionaryChild]];
+            }
+            
+            [self dismissViewControllerAnimated:YES completion:^{[delegate reloadProspectData];}];
         }
     }
     else{
-        [modelProspectChild saveProspectChild:[self setDictionaryChild]];
-    }
     
-    [self dismissViewControllerAnimated:YES completion:^{[delegate reloadProspectData];}];
+    }
 }
 
 - (IBAction)actionNationality:(id)sender
@@ -146,11 +234,11 @@
     id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
     [activeInstance performSelector:@selector(dismissKeyboard)];
     
-    if (nationalityList == nil) {
+    //if (nationalityList == nil) {
         nationalityList = [[Nationality alloc] initWithStyle:UITableViewStylePlain];
         nationalityList.delegate = self;
         popoverController = [[UIPopoverController alloc] initWithContentViewController:nationalityList];
-    }
+    //}
     [popoverController presentPopoverFromRect:[sender bounds]  inView:sender permittedArrowDirections:UIPopoverArrowDirectionLeft animated:YES];
 }
 
@@ -174,12 +262,12 @@
         dateString= [dateFormatter stringFromDate:[NSDate date]];
     }
     
-    if (datePickerViewController == Nil) {
+    //if (datePickerViewController == Nil) {
         UIStoryboard *clientProfileStoryBoard = [UIStoryboard storyboardWithName:@"ClientProfileStoryboard" bundle:nil];
         datePickerViewController = [clientProfileStoryBoard instantiateViewControllerWithIdentifier:@"SIDate"];
         datePickerViewController.delegate = self;
         popoverController = [[UIPopoverController alloc] initWithContentViewController:datePickerViewController];
-    }
+    //}
     datePickerViewController.ProspectDOB = dateString;
     [popoverController setPopoverContentSize:CGSizeMake(300.0f, 255.0f)];
     [popoverController presentPopoverFromRect:[sender bounds]  inView:sender permittedArrowDirections:UIPopoverArrowDirectionLeft animated:NO];
@@ -197,12 +285,12 @@
     NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
     [ClientProfile setObject:@"YES" forKey:@"isNew"];
     
-    if (IDTypePicker == nil) {
+    //if (IDTypePicker == nil) {
         IDTypePicker = [[IDTypeViewController alloc] initWithStyle:UITableViewStylePlain];
         IDTypePicker.delegate = self;
         IDTypePicker.requestType = @"CO";
         popoverController = [[UIPopoverController alloc] initWithContentViewController:IDTypePicker];
-    }
+    //}
     [popoverController presentPopoverFromRect:[sender bounds] inView:sender permittedArrowDirections:UIPopoverArrowDirectionLeft animated:YES];
 }
 
@@ -218,11 +306,11 @@
     id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
     [activeInstance performSelector:@selector(dismissKeyboard)];
     
-    if (occupationList == nil) {
+    //if (occupationList == nil) {
         occupationList = [[OccupationList alloc] initWithStyle:UITableViewStylePlain];
         occupationList.delegate = self;
         popoverController = [[UIPopoverController alloc] initWithContentViewController:occupationList];
-    }
+    //}
     [popoverController presentPopoverFromRect:[sender bounds]  inView:sender permittedArrowDirections:UIPopoverArrowDirectionLeft animated:YES];
 }
 
@@ -266,7 +354,7 @@
 
 #pragma mark load Data
 -(void)loadChildData{
-    if (DictChildData != NULL){
+    if ([DictChildData count]>0){
         NSDictionary* dictOccup=[[NSDictionary alloc]initWithDictionary:[modelPopOver getOccupationByCode:[DictChildData valueForKey:@"ProspectChildOccupationCode"]]];
         txtName.text = [DictChildData valueForKey:@"ProspectChildName"];
         [outletDOB setTitle:[DictChildData valueForKey:@"ProspectChildDOB"] forState:UIControlStateNormal];
@@ -302,7 +390,7 @@
         [OtherIDType setTitle:@"" forState:UIControlStateNormal];
         txtOtherIDType.text=@"";
         [outletNationality setTitle:@"" forState:UIControlStateNormal];
-        [outletRelation setTitle:@"" forState:UIControlStateNormal];
+        [outletRelation setTitle:@"Child" forState:UIControlStateNormal];
         txtYearsInsured.text=@"";
         [outletOccupation setTitle:@"" forState:UIControlStateNormal];
         OccupCodeSelected = @"";
@@ -313,7 +401,6 @@
     }
 }
 
-#pragma mark setDictionary
 -(NSMutableDictionary *)setDictionaryChild{
     NSMutableDictionary* dictionaryChild;
     NSString* childName = txtName.text;
@@ -327,7 +414,7 @@
     
     dictionaryChild = [[NSMutableDictionary alloc]initWithObjectsAndKeys:childName,@"ProspectChildName",
                         childDOB,@"ProspectChildDOB",
-                        childOtherIDType,@"OtherIDType",
+                        IDTypeCodeSelected,@"OtherIDType",
                         childOtherIDNumber,@"OtherIDTypeNo",
                         childNationality,@"Nationality",
                         childRelation,@"Relation",
@@ -344,7 +431,69 @@
     return dictionaryChild;
 }
 
+-(NSMutableDictionary *)setDictionaryObjectChild{
+    NSMutableDictionary* dictionaryChild;
+    
+    dictionaryChild = [[NSMutableDictionary alloc]initWithObjectsAndKeys:txtName,@"ProspectChildName",
+                       outletDOB,@"ProspectChildDOB",
+                       OtherIDType,@"OtherIDType",
+                       txtOtherIDType,@"OtherIDTypeNo",
+                       outletNationality,@"Nationality",
+                       outletRelation,@"Relation",
+                       txtYearsInsured,@"YearsInsured",
+                       outletOccupation,@"ProspectChildOccupationCode",
+                       prospectProfileID,@"ProspectIndexNo",
+                       cffTransactionID,@"CFFTransactionID",
+                       segGender,@"ProspectChildGender",
+                       segSmoker,@"Smoker",nil];
+    return dictionaryChild;
+}
+
+#pragma mark keyboard appearance
+- (void)keyboardWasShown:(NSNotification *)notification
+{
+    /*added by faiz*/
+    // Step 1: Get the size of the keyboard.
+    
+    NSDictionary *userInfo = [notification userInfo];
+    CGSize kbSize = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    // Step 2: Adjust the bottom content inset of your scroll view by the keyboard height.
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height+44, 0.0);
+    scrollAddChild.contentInset = contentInsets;
+    scrollAddChild.scrollIndicatorInsets = contentInsets;
+    
+    // Step 3: Scroll the target text field into view.
+    CGRect aRect = self.view.frame;
+    aRect.size.height -= kbSize.height;
+    if (!CGRectContainsPoint(aRect, activeField.frame.origin) ) {
+        CGPoint scrollPoint = CGPointMake(0.0, activeField.frame.origin.y - (kbSize.height-15));
+        [scrollAddChild setContentOffset:scrollPoint animated:YES];
+    }
+    
+}
+
+- (void) keyboardWillHide:(NSNotification *)notification {
+    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+    scrollAddChild.contentInset = contentInsets;
+    scrollAddChild.scrollIndicatorInsets = contentInsets;
+}
+
 #pragma mark delegate
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
+    [ClientProfile setObject:@"YES" forKey:@"isNew"];
+    //NSUInteger newLength = [textField.text length] + [string length] - range.length;
+    if (textField == txtYearsInsured){
+        NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
+        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        
+        return ([string isEqualToString:filtered]);
+    }
+    return YES;
+}
+
 -(void)CloseWindow
 {
     [self resignFirstResponder];
@@ -374,17 +523,17 @@
     NSDate *d = [NSDate date];
     NSDate* d2 = [df dateFromString:strDate];
     
-    NSDateFormatter *formatter;
+    NSDateFormatter *dateformatter;
     NSString *dateString;
     NSString *clientDateString;
     
-    formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"dd/MM/yyyy"];
+    dateformatter = [[NSDateFormatter alloc] init];
+    [dateformatter setDateFormat:@"dd/MM/yyyy"];
     
     NSDateFormatter* clientDateFormmater = [[NSDateFormatter alloc] init];
     [clientDateFormmater setDateFormat:@"yyyy-MM-dd"];
     
-    dateString = [formatter stringFromDate:[NSDate date]];
+    dateString = [dateformatter stringFromDate:[NSDate date]];
     clientDateString = [clientDateFormmater stringFromDate:d2];
     
     if ([d compare:d2] == NSOrderedAscending){
@@ -397,6 +546,7 @@
         outletDOB.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         [outletDOB setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", strDate] forState:UIControlStateNormal];
         [outletDOB setBackgroundColor:[UIColor clearColor]];
+        [txtAge setText:[NSString stringWithFormat:@"%i",[formatter calculateAge:strDate]]];
     }
     df = Nil, d = Nil, d2 = Nil;
 }

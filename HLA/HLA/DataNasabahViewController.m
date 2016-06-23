@@ -48,15 +48,15 @@
     addSpouseVC.delegate=self;
     addSpouseVC.prospectProfileID=prospectProfileID;
     addSpouseVC.cffTransactionID=cffTransactionID;
-    addSpouseVC.modalPresentationStyle = UIModalPresentationFormSheet;
-    addSpouseVC.preferredContentSize = CGSizeMake(addSpouseVC.view.frame.size.width, addSpouseVC.view.frame.size.width);
+    addSpouseVC.modalPresentationStyle = UIModalPresentationPageSheet;
     addSpouseVC.preferredContentSize = CGSizeMake(824, 415);
+    //addSpouseVC.view.superview.bounds = CGRectMake(0, 0, 824, 415);
     
     addChildVC = [[AddChildViewController alloc]initWithNibName:@"AddChildViewController" bundle:nil];
     addChildVC.delegate = self;
     addChildVC.prospectProfileID=prospectProfileID;
     addChildVC.cffTransactionID=cffTransactionID;
-    addChildVC.modalPresentationStyle = UIModalPresentationFormSheet;
+    addChildVC.modalPresentationStyle = UIModalPresentationPageSheet;
     addChildVC.preferredContentSize = CGSizeMake(824, 415);
     
     ListDataNasabah = [[NSMutableArray alloc] initWithObjects:@"Nama Nasabah :", @"Tambah Data Pasangan :", nil];
@@ -206,6 +206,23 @@
     return @"";
 }
 
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *tempView = [[UIView alloc] init];
+    tempView.backgroundColor=[UIColor colorWithRed:247/255.0f green:247/255.0f blue:247/255.0f alpha:1.0f];
+    
+    UILabel *tempLabel=[[UILabel alloc]initWithFrame:CGRectMake(15,0,300,30)];
+    tempLabel.backgroundColor=[UIColor clearColor];
+    tempLabel.shadowColor = [UIColor blackColor];
+    tempLabel.shadowOffset = CGSizeMake(0,0);
+    tempLabel.textColor = [UIColor colorWithRed:0/255.0f green:102.0f/255.0f blue:179.0f/255.0f alpha:1]; //here you can change the text color of header.
+    tempLabel.text=[self tableView:tableView titleForHeaderInSection:section];
+    
+    [tempView addSubview:tempLabel];
+    
+    return tempView;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *FirstLevelCell= @"FirstLevelCell";
@@ -222,6 +239,7 @@
             cell.textLabel.text = [NSString stringWithFormat:@"%@ %@",[ListDataAnak objectAtIndex: [indexPath row] ],[SupplementaryListDataAnak objectAtIndex: [indexPath row]]];
             break;
     }
+    cell.textLabel.textColor = [UIColor colorWithRed:0/255.0f green:102.0f/255.0f blue:179.0f/255.0f alpha:1];
     return cell;
 }
 

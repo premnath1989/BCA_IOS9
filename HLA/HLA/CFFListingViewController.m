@@ -9,26 +9,41 @@
 #import "CFFListingViewController.h"
 #import "ListingTbViewController.h"
 #import "ModelCFFTransaction.h"
+#import "ModelProspectSpouse.h"
+#import "ModelProspectChild.h"
+#import "ModelCFFAnswers.h"
 #import "Formatter.h"
 #import "SIDate.h"
 
-@interface CFFListingViewController ()<SIDateDelegate,ListingTbViewControllerDelegate>{
+@interface CFFListingViewController ()<SIDateDelegate,ListingTbViewControllerDelegate,UITextFieldDelegate>{
     SIDate* datePickerViewController;
     ListingTbViewController *ProspectList;
     ModelCFFTransaction *modelCFFTransaction;
+    ModelProspectChild *modelProspectChild;
+    ModelProspectSpouse *modelProspectSpouse;
+    ModelCFFAnswers *modelCFFAnswers;
     Formatter* formatter;
 }
 
 @end
 
 @implementation CFFListingViewController{
+    UIColor *borderColor;
+    
+    NSMutableArray *ItemToBeDeleted;
+    NSMutableArray *indexPaths;
+    
     IBOutlet UITableView *tableCFFListing;
     UIPopoverController *prospectPopover;
     int clientProfileID;
     NSString* sortedBy;
     NSString* sortMethod;
+    NSString *databasePath;
     
     NSMutableArray* arrayCFFTransaction;
+    IBOutlet UIButton *outletEditBtn;
+    IBOutlet UIButton *outletDeleteBtn;
+
     IBOutlet UIButton *outletDate;
     IBOutlet UIButton *outletSearch;
     IBOutlet UITextField *textName;
@@ -43,18 +58,33 @@
     IBOutlet UIButton *btnSortStatus;
 
     UIPopoverController *popoverController;
+    int RecDelete;
 }
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.navigationController.navigationBar setTitleTextAttributes:
+     @{NSForegroundColorAttributeName:[UIColor colorWithRed:88.0f/255.0f green:89.0f/255.0f blue:92.0f/255.0f alpha:1],NSFontAttributeName: [UIFont fontWithName:@"BPreplay" size:17.0f]}];
+    borderColor=[[UIColor alloc]initWithRed:0/255.0 green:102.0/255.0 blue:179.0/255.0 alpha:1.0];
+    RecDelete = 0;
     [self createBlackStatusBar];
     [self setButtonImageAndTextAlignment];
+    [self setTextfieldBorder];
     
     modelCFFTransaction = [[ModelCFFTransaction alloc]init];
+    modelCFFAnswers = [[ModelCFFAnswers alloc]init];
+    modelProspectSpouse = [[ModelProspectSpouse alloc]init];
+    modelProspectChild = [[ModelProspectChild alloc]init];
+    
     formatter = [[Formatter alloc]init];
     
     sortedBy=@"CFFT.CFFDateModified";
     sortMethod=@"DESC";
+    
+    outletDeleteBtn.hidden = TRUE;
+    outletDeleteBtn.enabled = FALSE;
+    ItemToBeDeleted = [[NSMutableArray alloc] init];
     
     [self loadCFFTransaction];
     // Do any additional setup after loading the view from its nib.
@@ -68,6 +98,25 @@
     //outletDOB.layer.borderWidth = 1.0;
     
 }
+
+-(void)setTextfieldBorder{
+    UIFont *font= [UIFont fontWithName:@"BPreplay" size:16.0f];
+    for (UIView *view in [self.view subviews]) {
+        if ([view isKindOfClass:[UITextField class]]) {
+            UITextField *textField = (UITextField *)view;
+            textField.layer.borderColor=borderColor.CGColor;
+            textField.layer.borderWidth=1.0;
+            textField.delegate=self;
+            [textField setFont:font];
+            
+            UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 20)];
+            textField.leftView = paddingView;
+            textField.leftViewMode = UITextFieldViewModeAlways;
+        }
+    }
+    
+}
+
 
 
 -(void)createBlackStatusBar{
@@ -92,6 +141,46 @@
 
 
 #pragma mark select prospect from list
+- (IBAction)actionEdit:(id)sender
+{
+    
+    [self resignFirstResponder];
+    if ([tableCFFListing isEditing]) {
+        [tableCFFListing setEditing:NO animated:TRUE];
+        outletDeleteBtn.hidden = true;
+        outletDeleteBtn.enabled = false;
+        [outletEditBtn setTitle:@"Delete" forState:UIControlStateNormal ];
+        
+        ItemToBeDeleted = [[NSMutableArray alloc] init];
+        indexPaths = [[NSMutableArray alloc] init];
+        
+        RecDelete = 0;
+    }
+    else {
+        
+        [tableCFFListing setEditing:YES animated:TRUE];
+        outletDeleteBtn.hidden = FALSE;
+        //[deleteBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal ];
+        [outletEditBtn setTitle:@"Cancel" forState:UIControlStateNormal ];
+    }
+}
+
+- (IBAction)deletePressed:(id)sender
+{
+     NSString *msg;
+     if (RecDelete == 1) {
+         msg = @"Apakah anda yakin ingin menghapus klien ini ?";//Are you sure want to delete these Clients?";
+     }
+     else {
+         msg = @"Apakah anda yakin ingin menghapus klien ini ?";//Are you sure want to delete these Clients?";
+     }
+     
+     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:msg delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+     [alert setTag:1001];
+     [alert show];
+}
+
+
 - (IBAction)actionSortBy:(UIButton *)sender
 {
     if (sender==btnSortFullName){
@@ -218,6 +307,43 @@
             [self loadCFFTransaction];
         }
     }
+    
+    else if (alertView.tag==1001 && buttonIndex == 0) //delete
+    {
+        if (ItemToBeDeleted.count < 1) {
+            return;
+        }
+        else {
+            NSLog(@"itemToBeDeleted:%d", ItemToBeDeleted.count);
+        }
+        
+        NSArray *sorted = [[NSArray alloc] init ];
+        sorted = [ItemToBeDeleted sortedArrayUsingComparator:^(id firstObject, id secondObject){
+            return [((NSString *)firstObject) compare:((NSString *)secondObject) options:NSNumericSearch];
+        }];
+        int value;
+        for(int a=0; a<sorted.count; a++) {
+            value = [[sorted objectAtIndex:a] intValue] - a;
+            [modelCFFTransaction deleteCFFTransaction:[[[arrayCFFTransaction objectAtIndex:value] valueForKey:@"CFFTransactionID"] intValue]];
+            [modelProspectChild deleteProspectChildByCFFTransID:[[[arrayCFFTransaction objectAtIndex:value] valueForKey:@"CFFTransactionID"] intValue]];
+            [modelProspectSpouse deleteProspectSpouseByCFFTransID:[[[arrayCFFTransaction objectAtIndex:value] valueForKey:@"CFFTransactionID"] intValue]];
+            [modelCFFAnswers deleteCFFAnswerByCFFTransID:[[[arrayCFFTransaction objectAtIndex:value] valueForKey:@"CFFTransactionID"] intValue]];
+            //remove array for index value
+        }
+        [ItemToBeDeleted removeAllObjects];
+        [indexPaths removeAllObjects];
+        outletDeleteBtn.enabled = FALSE;
+        //[deleteBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal ];
+        
+        [self loadCFFTransaction];
+        
+        NSString *msg = @"Profil klien berhasil dihapus";//Client Profile has been successfully deleted.";
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:msg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        
+        [alert show];
+        alert = nil;
+        
+    }
 }
 
 
@@ -230,6 +356,25 @@
 {
     return 1;
 }
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Remove seperator inset
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    // Prevent the cell from inheriting the Table View's margin settings
+    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
+        [cell setPreservesSuperviewLayoutMargins:NO];
+    }
+    
+    // Explictly set your cell's layout margins
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+}
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -257,8 +402,66 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self showDetailsForIndexPath:indexPath];
+    RecDelete = RecDelete+1;
+    if ([tableCFFListing isEditing] == TRUE ) {
+        BOOL gotRowSelected = FALSE;
+        
+        for (UITableViewCell *zzz in [tableCFFListing visibleCells])
+        {
+            if (zzz.selected  == TRUE) {
+                gotRowSelected = TRUE;
+                break;
+            }
+        }
+        
+        if (!gotRowSelected) {
+            ////[deleteBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal ];
+            outletDeleteBtn.enabled = FALSE;
+        }
+        else {
+            ////[deleteBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            outletDeleteBtn.enabled = TRUE;
+        }
+        
+        NSString *zzz = [NSString stringWithFormat:@"%d", indexPath.row];
+        [ItemToBeDeleted addObject:zzz];
+        [indexPaths addObject:indexPath];
+    }
+    else {
+        [self showDetailsForIndexPath:indexPath];
+    }
 }
+
+-(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    RecDelete = RecDelete - 1;
+    
+    if ([tableCFFListing isEditing] == TRUE ) {
+        BOOL gotRowSelected = FALSE;
+        
+        for (UITableViewCell *zzz in [tableCFFListing visibleCells])
+        {
+            if (zzz.selected  == TRUE) {
+                gotRowSelected = TRUE;
+                break;
+            }
+        }
+        
+        if (RecDelete < 1) {
+            ////[deleteBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal ];
+            outletDeleteBtn.enabled = FALSE;
+        }
+        else {
+            ////[deleteBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            outletDeleteBtn.enabled = TRUE;
+        }
+        
+        NSString *zzz = [NSString stringWithFormat:@"%d", indexPath.row];
+        [ItemToBeDeleted removeObject:zzz];
+        [indexPaths removeObject:indexPath];
+    }
+}
+
 
 #pragma mark - delegate
 -(void)CloseWindow
