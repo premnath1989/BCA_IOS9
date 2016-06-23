@@ -44,6 +44,30 @@
 
     @end
 
+    @implementation LabelMenuHint
+
+        // INITIALIZE
+
+        - (void)awakeFromNib
+        {
+            [self setupStyle];
+        }
+
+
+        // FUNCTION
+
+        - (void)setupStyle
+        {
+            UserInterface *objectUserInterface = [[UserInterface alloc] init];
+            
+            [self setTextColor : [objectUserInterface generateUIColor:THEME_COLOR_SENARY floatOpacity:1.0]];
+            [self setFont : [UIFont fontWithName:THEME_FONT_PRIMARY size:FONTSIZE_FORM_FIELD]];
+            self.textAlignment = NSTextAlignmentLeft;
+            self.numberOfLines = 1;
+        }
+
+    @end
+
     // NOTE
 
     @implementation LabelNoteHeader

@@ -68,8 +68,8 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pi0-Ce-Ifd" customClass="ViewPageSubHeader">
                     <rect key="frame" x="0.0" y="60" width="600" height="30"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NKd-r9-sYN" customClass="LabelPageTitle">
-                            <rect key="frame" x="279" y="4" width="42" height="21"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NKd-r9-sYN" customClass="LabelMenuHint">
+                            <rect key="frame" x="20" y="4" width="42" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -79,14 +79,14 @@
                     <constraints>
                         <constraint firstItem="NKd-r9-sYN" firstAttribute="centerY" secondItem="pi0-Ce-Ifd" secondAttribute="centerY" id="YOG-Xy-PqL"/>
                         <constraint firstAttribute="height" constant="30" id="f3Q-9Y-rkJ"/>
-                        <constraint firstItem="NKd-r9-sYN" firstAttribute="centerX" secondItem="pi0-Ce-Ifd" secondAttribute="centerX" id="xWX-A1-4rj"/>
+                        <constraint firstItem="NKd-r9-sYN" firstAttribute="leading" secondItem="pi0-Ce-Ifd" secondAttribute="leading" constant="20" id="gfg-eg-RiT"/>
                     </constraints>
                 </view>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Tnk-va-LaM" customClass="StackViewGuideMenuContainer">
-                    <rect key="frame" x="0.0" y="90" width="600" height="180"/>
+                <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Tnk-va-LaM" customClass="StackViewGuideMenuContainer">
+                    <rect key="frame" x="0.0" y="90" width="600" height="300"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pDg-BU-x6G" customClass="ViewGuideMenuSelected">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="30"/>
+                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pDg-BU-x6G" customClass="ViewGuideMenuSelected">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="xcY-qt-Kur" customClass="StackViewGuideMenuHorizontal">
                                     <rect key="frame" x="10" y="-11" width="580" height="52"/>
@@ -132,8 +132,8 @@
                                 <constraint firstItem="lnZ-K4-H9p" firstAttribute="top" secondItem="pDg-BU-x6G" secondAttribute="top" id="zkx-9v-BLk"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="buI-Tv-IiQ" customClass="ViewGuideMenuSelected">
-                            <rect key="frame" x="0.0" y="30" width="600" height="30"/>
+                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="buI-Tv-IiQ" customClass="ViewGuideMenuSelected">
+                            <rect key="frame" x="0.0" y="50" width="600" height="50"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="utj-z3-yFg" customClass="StackViewGuideMenuHorizontal">
                                     <rect key="frame" x="10" y="-11" width="580" height="52"/>
@@ -179,8 +179,8 @@
                                 <constraint firstAttribute="trailing" secondItem="iXD-ZI-9GH" secondAttribute="trailing" id="xqk-pb-mOa"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zi2-cg-J0b" customClass="ViewGuideMenuNotSelected">
-                            <rect key="frame" x="0.0" y="60" width="600" height="30"/>
+                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zi2-cg-J0b" customClass="ViewGuideMenuNotSelected">
+                            <rect key="frame" x="0.0" y="100" width="600" height="50"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Wwg-Ai-VE5" customClass="StackViewGuideMenuHorizontal">
                                     <rect key="frame" x="10" y="5" width="580" height="21"/>
@@ -215,8 +215,8 @@
                                 <constraint firstAttribute="trailing" secondItem="Wwg-Ai-VE5" secondAttribute="trailing" constant="10" id="XGY-Wg-kdx"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gc9-mq-FYk" customClass="ViewGuideMenuNotSelected">
-                            <rect key="frame" x="0.0" y="90" width="600" height="30"/>
+                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gc9-mq-FYk" customClass="ViewGuideMenuNotSelected">
+                            <rect key="frame" x="0.0" y="150" width="600" height="50"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="dOF-z7-Jim" customClass="StackViewGuideMenuHorizontal">
                                     <rect key="frame" x="10" y="5" width="580" height="21"/>
@@ -251,8 +251,8 @@
                                 <constraint firstItem="dOF-z7-Jim" firstAttribute="leading" secondItem="Gc9-mq-FYk" secondAttribute="leading" constant="10" id="ftG-L1-fTp"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t2M-kW-VHN" customClass="ViewGuideMenuNotSelected">
-                            <rect key="frame" x="0.0" y="120" width="600" height="30"/>
+                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t2M-kW-VHN" customClass="ViewGuideMenuNotSelected">
+                            <rect key="frame" x="0.0" y="200" width="600" height="50"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ImS-fB-fCt" customClass="StackViewGuideMenuHorizontal">
                                     <rect key="frame" x="10" y="5" width="580" height="21"/>
@@ -287,8 +287,8 @@
                                 <constraint firstItem="YfC-nK-9xE" firstAttribute="leading" secondItem="t2M-kW-VHN" secondAttribute="leading" id="icW-Xq-aw9"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cuF-oE-bKo" customClass="ViewGuideMenuNotSelected">
-                            <rect key="frame" x="0.0" y="150" width="600" height="30"/>
+                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cuF-oE-bKo" customClass="ViewGuideMenuNotSelected">
+                            <rect key="frame" x="0.0" y="250" width="600" height="50"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="aXq-OH-dDb" customClass="StackViewGuideMenuHorizontal">
                                     <rect key="frame" x="10" y="5" width="580" height="21"/>
@@ -352,18 +352,18 @@
                     <state key="normal" title="Button"/>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Zh-Ka-Pyq">
-                    <rect key="frame" x="60" y="320" width="480" height="206"/>
+                    <rect key="frame" x="60" y="340" width="480" height="226"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x9i-1R-axA" customClass="LabelInformationHeader">
-                            <rect key="frame" x="10" y="10" width="42" height="21"/>
+                            <rect key="frame" x="20" y="20" width="42" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="UhE-1C-2IB">
-                            <rect key="frame" x="10" y="51" width="460" height="145"/>
+                            <rect key="frame" x="20" y="61" width="440" height="145"/>
                             <subviews>
-                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="wHK-iD-v1W">
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="wHK-iD-v1W">
                                     <rect key="frame" x="0.0" y="0.0" width="104" height="21"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KQw-Kc-oSj" customClass="LabelInformationDetail">
@@ -380,7 +380,7 @@
                                         </label>
                                     </subviews>
                                 </stackView>
-                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="0SW-CY-vj4">
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="0SW-CY-vj4">
                                     <rect key="frame" x="0.0" y="31" width="104" height="21"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J1c-rj-UBu" customClass="LabelInformationDetail">
@@ -397,7 +397,7 @@
                                         </label>
                                     </subviews>
                                 </stackView>
-                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Ye9-IS-77H">
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Ye9-IS-77H">
                                     <rect key="frame" x="0.0" y="62" width="104" height="21"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rT9-s5-3QD" customClass="LabelInformationDetail">
@@ -414,7 +414,7 @@
                                         </label>
                                     </subviews>
                                 </stackView>
-                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="M67-5k-7aC">
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="M67-5k-7aC">
                                     <rect key="frame" x="0.0" y="93" width="104" height="21"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p13-u7-RIP" customClass="LabelInformationDetail">
@@ -431,7 +431,7 @@
                                         </label>
                                     </subviews>
                                 </stackView>
-                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="yN2-Jm-9uh">
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="yN2-Jm-9uh">
                                     <rect key="frame" x="0.0" y="124" width="104" height="21"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mfH-0M-wHx" customClass="LabelInformationDetail">
@@ -453,12 +453,12 @@
                     </subviews>
                     <color key="backgroundColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstItem="x9i-1R-axA" firstAttribute="top" secondItem="6Zh-Ka-Pyq" secondAttribute="top" constant="10" id="EZo-AO-cmY"/>
-                        <constraint firstAttribute="trailing" secondItem="UhE-1C-2IB" secondAttribute="trailing" constant="10" id="JZ9-Q2-Z9E"/>
-                        <constraint firstAttribute="bottom" secondItem="UhE-1C-2IB" secondAttribute="bottom" constant="10" id="JgR-Uh-q7U"/>
+                        <constraint firstItem="x9i-1R-axA" firstAttribute="top" secondItem="6Zh-Ka-Pyq" secondAttribute="top" constant="20" id="EZo-AO-cmY"/>
+                        <constraint firstAttribute="trailing" secondItem="UhE-1C-2IB" secondAttribute="trailing" constant="20" id="JZ9-Q2-Z9E"/>
+                        <constraint firstAttribute="bottom" secondItem="UhE-1C-2IB" secondAttribute="bottom" constant="20" id="JgR-Uh-q7U"/>
                         <constraint firstItem="UhE-1C-2IB" firstAttribute="top" secondItem="x9i-1R-axA" secondAttribute="bottom" constant="20" id="KQT-UW-7sP"/>
-                        <constraint firstItem="UhE-1C-2IB" firstAttribute="leading" secondItem="6Zh-Ka-Pyq" secondAttribute="leading" constant="10" id="eiY-nZ-kWR"/>
-                        <constraint firstItem="x9i-1R-axA" firstAttribute="leading" secondItem="6Zh-Ka-Pyq" secondAttribute="leading" constant="10" id="lEX-Uk-Yzc"/>
+                        <constraint firstItem="UhE-1C-2IB" firstAttribute="leading" secondItem="6Zh-Ka-Pyq" secondAttribute="leading" constant="20" id="eiY-nZ-kWR"/>
+                        <constraint firstItem="x9i-1R-axA" firstAttribute="leading" secondItem="6Zh-Ka-Pyq" secondAttribute="leading" constant="20" id="lEX-Uk-Yzc"/>
                     </constraints>
                 </view>
             </subviews>
@@ -467,7 +467,7 @@
                 <constraint firstItem="qLA-Ph-RKi" firstAttribute="top" secondItem="Tnk-va-LaM" secondAttribute="bottom" id="6wV-lO-qFe"/>
                 <constraint firstAttribute="trailing" secondItem="qLA-Ph-RKi" secondAttribute="trailing" id="9n7-uM-lsT"/>
                 <constraint firstItem="6Zh-Ka-Pyq" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="60" id="Aqf-jc-tel"/>
-                <constraint firstItem="6Zh-Ka-Pyq" firstAttribute="top" secondItem="qLA-Ph-RKi" secondAttribute="bottom" constant="20" id="DMm-bL-wFD"/>
+                <constraint firstItem="6Zh-Ka-Pyq" firstAttribute="top" secondItem="qLA-Ph-RKi" secondAttribute="bottom" constant="40" id="DMm-bL-wFD"/>
                 <constraint firstItem="Tnk-va-LaM" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="HIm-XD-vEu"/>
                 <constraint firstItem="Tnk-va-LaM" firstAttribute="top" secondItem="pi0-Ce-Ifd" secondAttribute="bottom" id="Hgb-9F-upe"/>
                 <constraint firstItem="pi5-52-vFL" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="UaH-Sw-U7d"/>

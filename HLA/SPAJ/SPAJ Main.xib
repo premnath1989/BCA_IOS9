@@ -20,7 +20,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ft1-6d-2IT" customClass="ViewNavigation">
-                    <rect key="frame" x="0.0" y="0.0" width="46" height="600"/>
+                    <rect key="frame" x="0.0" y="20" width="46" height="580"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="6yl-4f-OaM" customClass="StackViewNavigation">
                             <rect key="frame" x="0.0" y="0.0" width="46" height="120"/>
@@ -61,17 +61,17 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jYj-Nk-O93">
-                    <rect key="frame" x="46" y="0.0" width="554" height="600"/>
+                    <rect key="frame" x="46" y="20" width="554" height="580"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="jYj-Nk-O93" firstAttribute="leading" secondItem="ft1-6d-2IT" secondAttribute="trailing" id="81L-XQ-dv9"/>
-                <constraint firstItem="ft1-6d-2IT" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Bba-LO-6eZ"/>
+                <constraint firstItem="ft1-6d-2IT" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="Bba-LO-6eZ"/>
                 <constraint firstAttribute="bottom" secondItem="jYj-Nk-O93" secondAttribute="bottom" id="Gea-XO-Z7e"/>
                 <constraint firstAttribute="bottom" secondItem="ft1-6d-2IT" secondAttribute="bottom" id="LLz-Mb-eCo"/>
-                <constraint firstItem="jYj-Nk-O93" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="NFP-Q0-jib"/>
+                <constraint firstItem="jYj-Nk-O93" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="NFP-Q0-jib"/>
                 <constraint firstAttribute="trailing" secondItem="jYj-Nk-O93" secondAttribute="trailing" id="h3t-Yl-vxj"/>
                 <constraint firstItem="ft1-6d-2IT" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="kcD-5u-F1q"/>
             </constraints>
