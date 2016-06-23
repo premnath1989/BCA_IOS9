@@ -1,0 +1,113 @@
+//
+//  TextFieldPrimary.m
+//  Practice
+//
+//  Created by Ibrahim on 20/05/2016.
+//  Copyright © 2016 Ibrahim. All rights reserved.
+//
+
+
+// IMPORT
+
+#import "Button.h"
+#import "Theme.h"
+#import "Font Size.h"
+#import "User Interface.h"
+
+
+// IMPLEMENTATION
+
+    // NAVIGATION
+
+    @implementation ButtonNavigation
+
+        // INITIALIZE
+
+        - (void)awakeFromNib
+        {
+            [self setupStyle];
+        }
+
+
+        // FUNCTION
+
+        - (void)setupStyle
+        {
+            UserInterface *objectUserInterface = [[UserInterface alloc] init];
+            
+            self.backgroundColor = [objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0];
+        }
+
+    @end
+
+    // FORM
+
+    @implementation ButtonFormPrimary
+
+        // INITIALIZE
+
+        - (void)awakeFromNib
+        {
+            [self setupStyle];
+        }
+
+
+        // FUNCTION
+
+        - (void)setupStyle
+        {
+            UserInterface *objectUserInterface = [[UserInterface alloc] init];
+            
+            self.backgroundColor = [objectUserInterface generateUIColor:THEME_COLOR_QUINARY floatOpacity:1.0];
+            [self setTitleColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0] forState:UIControlStateNormal];
+            [self.titleLabel setFont:[UIFont fontWithName:THEME_FONT_PRIMARY size:FONTSIZE_FORM_BUTTON]];
+        }
+
+    @end
+
+    // GUIDE
+
+    @implementation ButtonGuideMenu
+
+        // INITIALIZE
+
+        - (void)awakeFromNib
+        {
+            [self setupStyle];
+        }
+
+
+        // FUNCTION
+
+        - (void)setupStyle
+        {
+            UserInterface *objectUserInterface = [[UserInterface alloc] init];
+            
+            self.backgroundColor = [objectUserInterface generateUIColor:THEME_COLOR_QUINARY floatOpacity:0.0];
+            [self setTitle:@"" forState:UIControlStateNormal];
+        }
+
+    @end
+
+    @implementation ButtonConfirmSPAJ
+
+        // INITIALIZE
+
+        - (void)awakeFromNib
+        {
+            [self setupStyle];
+        }
+
+
+        // FUNCTION
+
+        - (void)setupStyle
+        {
+            UserInterface *objectUserInterface = [[UserInterface alloc] init];
+            
+            self.backgroundColor = [objectUserInterface generateUIColor:THEME_COLOR_TERTIARY floatOpacity:1.0];
+            [self setTitleColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0] forState:UIControlStateNormal];
+            [self.titleLabel setFont:[UIFont fontWithName:THEME_FONT_SECONDARY size:FONTSIZE_FORM_BUTTON]];
+        }
+
+    @end
