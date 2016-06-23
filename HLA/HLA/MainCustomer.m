@@ -51,7 +51,7 @@
     
     NSArray *colors = [NSArray arrayWithObjects:(id)[UIColor whiteColor].CGColor,(id)[UIColor lightGrayColor].CGColor, nil];
     //self.tabBar.backgroundGradientColors = colors;
-    [self.tabBar setBackgroundColor:[UIColor colorWithRed:250.0/255.0 green:175.0/255.0 blue:50.0/255.0 alpha:1.0]];
+    [self.tabBar setBackgroundColor:[UIColor colorWithRed:0/255.0 green:102.0/255.0 blue:179.0/255.0 alpha:1.0]];
     
     if (self.IndexTab) {
         clickIndex = IndexTab;

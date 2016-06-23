@@ -18,5 +18,5 @@
 -(NSMutableArray *)selectProspectChild:(int)prospectIndexNo CFFTransctoinID:(int)cffTransactionID;
 -(void)updateProspectChild:(NSDictionary *)dictProspectChild;
 -(int)chekcExistingRecord:(int)prospectChildIndexNo;
-
+-(void)deleteProspectChildByCFFTransID:(int)cffTransactionID;
 @end

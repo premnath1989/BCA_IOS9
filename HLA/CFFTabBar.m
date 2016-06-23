@@ -166,7 +166,7 @@
     }
     
     cell.selectedBackgroundView = [[UIImageView alloc] initWithImage:self.selectionIndicatorImage];
-     cell.backgroundColor = [[UIColor alloc]initWithRed:250.0/255.0 green:175.0/255.0 blue:50.0/255.0 alpha:1.0];
+    cell.backgroundColor = [[UIColor alloc]initWithRed:0/255.0 green:102.0/255.0 blue:179.0/255.0 alpha:1.0];
     UITabBarItem *item = [self.items objectAtIndex:indexPath.row];
     cell.textLabel.text = item.title;
     cell.iconImage = item.image;

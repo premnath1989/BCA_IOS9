@@ -11,8 +11,13 @@
 #import "DataNasabahViewController.h"
 #import "AreaPotensialDiskusiViewController.h"
 #import "AnalisaKebutuhanNasabahViewController.h"
+#import "ProspectProfile.h"
+#import "ModelProspectProfile.h"
 
-@interface CFFQuestionsViewController ()
+
+@interface CFFQuestionsViewController (){
+    ModelProspectProfile* modelProspectProfile;
+}
 
 @end
 
@@ -29,12 +34,17 @@
 }
 @synthesize prospectProfileID,cffTransactionID;
 
--(void)viewDidAppear:(BOOL)animated{
-    
+-(void)viewWillAppear:(BOOL)animated{
+    ProspectProfile* pp;
+    NSMutableArray *ProspectTableData = [modelProspectProfile searchProspectProfileByID:[prospectProfileID intValue]];
+    pp = [ProspectTableData objectAtIndex:0];
+    [self.navigationItem setTitle:[NSString stringWithFormat:@"Customer Fact Find Untuk %@",pp.ProspectName]];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    modelProspectProfile=[[ModelProspectProfile alloc]init];
+    
     dataNasabahVC = [[DataNasabahViewController alloc]initWithNibName:@"DataNasabahViewController" bundle:nil];
     areaPotensialDiskusiVC = [[AreaPotensialDiskusiViewController alloc]initWithNibName:@"AreaPotensialDiskusiViewController" bundle:nil];
     analisaKebutuhanNasabahVC = [[AnalisaKebutuhanNasabahViewController alloc]initWithNibName:@"AnalisaKebutuhanNasabahViewController" bundle:nil];
@@ -150,7 +160,7 @@
         [cell setBackgroundColor:[UIColor colorWithRed:204.0/255.0 green:203.0/255.0 blue:205.0/255.0 alpha:1.0]];
     }
     
-    bgColorView.backgroundColor = [UIColor colorWithRed:218.0f/255.0f green:49.0f/255.0f blue:85.0f/255.0f alpha:1];
+    bgColorView.backgroundColor = [UIColor colorWithRed:0/255.0f green:102.0f/255.0f blue:179.0f/255.0f alpha:1];
     [cell setSelectedBackgroundView:bgColorView];
     [cell.labelNumber setText:[NumberListOfSubMenu objectAtIndex:indexPath.row]];
     [cell.labelDesc setText:[ListOfSubMenu objectAtIndex:indexPath.row]];

@@ -356,6 +356,7 @@
 		439985BB1C62F7890003B037 /* SourceIncome.m in Sources */ = {isa = PBXBuildFile; fileRef = 439985BA1C62F7890003B037 /* SourceIncome.m */; };
 		439985BE1C62F8A70003B037 /* ModelPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = 439985BD1C62F8A70003B037 /* ModelPopover.m */; };
 		439985C11C630C4D0003B037 /* VIPClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 439985C01C630C4D0003B037 /* VIPClass.m */; };
+		439EFBFA1D1A621500A0B8B0 /* CFFValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = 439EFBF91D1A621500A0B8B0 /* CFFValidation.m */; };
 		43B346AA1D110DE300B8DE32 /* ModelProspectChild.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B346A91D110DE300B8DE32 /* ModelProspectChild.m */; };
 		43B346AF1D112AA500B8DE32 /* AreaPotensialDiskusiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B346AD1D112AA500B8DE32 /* AreaPotensialDiskusiViewController.m */; };
 		43B346B01D112AA500B8DE32 /* AreaPotensialDiskusiViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43B346AE1D112AA500B8DE32 /* AreaPotensialDiskusiViewController.xib */; };
@@ -374,6 +375,7 @@
 		43BB38C11CBCBBF700A5F5C5 /* mySmoothLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43BB38C01CBCBBF700A5F5C5 /* mySmoothLineView.m */; };
 		43C166191C99448500001691 /* ModelKodepos.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C166181C99448500001691 /* ModelKodepos.m */; };
 		43C1661C1C99489000001691 /* KodePosInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C1661B1C99489000001691 /* KodePosInfo.m */; };
+		43CDBA671D190F5C00AC299F /* ModelCFFAnswers.m in Sources */ = {isa = PBXBuildFile; fileRef = 43CDBA661D190F5C00AC299F /* ModelCFFAnswers.m */; };
 		43DA4BD91C76A59A0038C92C /* ModelAgentProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DA4BD81C76A59A0038C92C /* ModelAgentProfile.m */; };
 		43DA4BE31C770AA90038C92C /* SIMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DA4BE11C770AA90038C92C /* SIMenuTableViewCell.m */; };
 		43DA4BE41C770AA90038C92C /* SIMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43DA4BE21C770AA90038C92C /* SIMenuTableViewCell.xib */; };
@@ -1445,6 +1447,8 @@
 		439985BD1C62F8A70003B037 /* ModelPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelPopover.m; sourceTree = "<group>"; };
 		439985BF1C630C4D0003B037 /* VIPClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIPClass.h; sourceTree = "<group>"; };
 		439985C01C630C4D0003B037 /* VIPClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VIPClass.m; sourceTree = "<group>"; };
+		439EFBF81D1A621500A0B8B0 /* CFFValidation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFFValidation.h; sourceTree = "<group>"; };
+		439EFBF91D1A621500A0B8B0 /* CFFValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFFValidation.m; sourceTree = "<group>"; };
 		43B346A81D110DE300B8DE32 /* ModelProspectChild.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelProspectChild.h; sourceTree = "<group>"; };
 		43B346A91D110DE300B8DE32 /* ModelProspectChild.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelProspectChild.m; sourceTree = "<group>"; };
 		43B346AC1D112AA500B8DE32 /* AreaPotensialDiskusiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AreaPotensialDiskusiViewController.h; sourceTree = "<group>"; };
@@ -1474,6 +1478,8 @@
 		43C166181C99448500001691 /* ModelKodepos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelKodepos.m; sourceTree = "<group>"; };
 		43C1661A1C99489000001691 /* KodePosInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KodePosInfo.h; sourceTree = "<group>"; };
 		43C1661B1C99489000001691 /* KodePosInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KodePosInfo.m; sourceTree = "<group>"; };
+		43CDBA651D190F5C00AC299F /* ModelCFFAnswers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelCFFAnswers.h; sourceTree = "<group>"; };
+		43CDBA661D190F5C00AC299F /* ModelCFFAnswers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelCFFAnswers.m; sourceTree = "<group>"; };
 		43DA4BD71C76A59A0038C92C /* ModelAgentProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelAgentProfile.h; sourceTree = "<group>"; };
 		43DA4BD81C76A59A0038C92C /* ModelAgentProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelAgentProfile.m; sourceTree = "<group>"; };
 		43DA4BE01C770AA90038C92C /* SIMenuTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIMenuTableViewCell.h; sourceTree = "<group>"; };
@@ -3414,6 +3420,15 @@
 			name = "CFF Question";
 			sourceTree = "<group>";
 		};
+		439EFBF71D1A620200A0B8B0 /* Validation */ = {
+			isa = PBXGroup;
+			children = (
+				439EFBF81D1A621500A0B8B0 /* CFFValidation.h */,
+				439EFBF91D1A621500A0B8B0 /* CFFValidation.m */,
+			);
+			name = Validation;
+			sourceTree = "<group>";
+		};
 		43B346AB1D112A5E00B8DE32 /* Section 2 Area Potensial Untuk Diskusi */ = {
 			isa = PBXGroup;
 			children = (
@@ -3610,6 +3625,8 @@
 		A9B8F3D11C5B5EA5005C9646 /* HLADB Model */ = {
 			isa = PBXGroup;
 			children = (
+				43CDBA651D190F5C00AC299F /* ModelCFFAnswers.h */,
+				43CDBA661D190F5C00AC299F /* ModelCFFAnswers.m */,
 				431C065D1C823A9B001824FD /* Model_SI_Premium.m */,
 				431C065E1C823A9B001824FD /* Model_SI_Premium.h */,
 				A9B8F3D21C5B5EE2005C9646 /* ModelProspectProfile.h */,
@@ -5014,6 +5031,7 @@
 		EF5B6120173C9EE400751157 /* CFF */ = {
 			isa = PBXGroup;
 			children = (
+				439EFBF71D1A620200A0B8B0 /* Validation */,
 				439982681D07CFEE009CFEB2 /* CFF Question */,
 				439982651D07CFCC009CFEB2 /* CFF Listing */,
 				2958A8D417E97DF80090A791 /* popover */,
@@ -5695,6 +5713,7 @@
 				C4E9F3D9176879190070EA8A /* EverRiderViewController.m in Sources */,
 				C4E9F3DC17687D4A0070EA8A /* EverLAViewController.m in Sources */,
 				42C9E415176B0CC500B7EFF8 /* DisclosureStatus.m in Sources */,
+				439EFBFA1D1A621500A0B8B0 /* CFFValidation.m in Sources */,
 				423E8BAD176FFEF400E60C20 /* CustomerPersonalData.m in Sources */,
 				C4E1D5F81779D75C002BDE51 /* EverSecondLAViewController.m in Sources */,
 				C4E1D5FB1779D76D002BDE51 /* EverPayorViewController.m in Sources */,
@@ -5946,6 +5965,7 @@
 				C416C2C21855BBA700D29E46 /* NSString+MD5Addition.m in Sources */,
 				C416C2C31855BBA700D29E46 /* NSString+URLEncode.m in Sources */,
 				C416C2C41855BBA700D29E46 /* StoreVarFirstTimeReg.m in Sources */,
+				43CDBA671D190F5C00AC299F /* ModelCFFAnswers.m in Sources */,
 				C416C2C51855BBA700D29E46 /* UIDevice+IdentifierAddition.m in Sources */,
 				C416C2CB1855BC2B00D29E46 /* AgentProfile.m in Sources */,
 				EFC580B81862E4A9001C5458 /* AgentPortalLogin.m in Sources */,

@@ -18,4 +18,5 @@
 -(void)updateProspectSpouse:(NSDictionary *)dictProspectSpouse;
 -(NSDictionary *)selectProspectSpouse:(int)prospectIndexNo CFFTransctoinID:(int)cffTransactionID;
 -(int)chekcExistingRecord:(int)prospectSpuseIndexNo;
+-(void)deleteProspectSpouseByCFFTransID:(int)cffTransactionID;
 @end
