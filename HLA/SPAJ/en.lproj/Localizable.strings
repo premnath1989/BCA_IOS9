@@ -83,3 +83,7 @@ BUTTON_RESET = "Reset";
 BUTTON_DELETE = "Delete";
 BUTTON_ADD = "Add";
 BUTTON_CONFIRMSPAJ = "Confirm & Assign SPAJ Number";
+BUTTON_HOME = "Home";
+BUTTON_EXISTINGLIST = "Existing List";
+BUTTON_SUBMITTEDLIST = "Submitted List";
+BUTTON_ADD = "Add";

@@ -23,8 +23,8 @@
     UInt32 const THEME_COLOR_QUINARY = 0xffffff; // White
     UInt32 const THEME_COLOR_SENARY = 0x3c3c3c; // Dark Black
     UInt32 const THEME_COLOR_SEPTENARY = 0x787878; // Light Black
-    UInt32 const THEME_COLOR_OCTONARY = 0xa01e1e; // Dark Red
-    UInt32 const THEME_COLOR_NONARY = 0xa01e1e; // Dark Red
+    UInt32 const THEME_COLOR_OCTONARY = 0xd2d2d2; // Darker Background
+    UInt32 const THEME_COLOR_NONARY = 0xc3c3c3; // Darkest Background
 
 
     // FONT

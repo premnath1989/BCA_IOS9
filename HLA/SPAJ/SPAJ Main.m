@@ -38,13 +38,6 @@
         
         // LAYOUT DECLARATION
         
-        //self.viewContent =
-        
-        
-        
-        /* ProductInformation *view = [[ProductInformation alloc] initWithNibName:@"ProductInformation" bundle:nil];
-        view.modalTransitionStyle = UIModalPresentationFullScreen;
-        [self presentViewController:view animated:NO completion:nil];\ */
         
         
         // LOCALIZATION
@@ -58,7 +51,24 @@
                 NSLog(@"  %@", name);
             }
         } */
+        
+        [_buttonHome setTitle:NSLocalizedString(@"BUTTON_HOME", nil) forState:UIControlStateNormal];
+        [_buttonExistingList setTitle:NSLocalizedString(@"BUTTON_EXISTINGLIST", nil) forState:UIControlStateNormal];
+        [_buttonSubmittedList setTitle:NSLocalizedString(@"BUTTON_SUBMITTEDLIST", nil) forState:UIControlStateNormal];
+        [_buttonAdd setTitle:NSLocalizedString(@"BUTTON_ADD", nil) forState:UIControlStateNormal];
     }
+
+
+    // VIEW DID APPEAR
+
+    - (void) viewDidAppear:(BOOL)animated
+    {
+        // DEFAULT CHILD VIEW
+        
+        SPAJExistingList* viewController = [[SPAJExistingList alloc] initWithNibName:@"SPAJ Existing List" bundle:nil];
+        viewController.view.frame = self.viewContent.bounds;
+        [self.viewContent addSubview:viewController.view];
+    };
 
 
     // ACTION
@@ -66,23 +76,21 @@
     - (IBAction)actionGoToExistingList:(id)sender
     {
         SPAJExistingList* viewController = [[SPAJExistingList alloc] initWithNibName:@"SPAJ Existing List" bundle:nil];
-        /* [[viewController.view widthAnchor] constraintEqualToConstant:self.viewContent.frame.size.width].active = true;
-        [[viewController.view heightAnchor] constraintEqualToConstant:self.viewContent.frame.size.height].active = true;
-        viewController.modalTransitionStyle = UIModalPresentationFullScreen;
-        [viewController.view setAutoresizingMask:(UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight)];
-        [viewController.view setAutoresizesSubviews:true]; */
+        viewController.view.frame = self.viewContent.bounds;
         [self.viewContent addSubview:viewController.view];
     };
 
     - (IBAction)actionGoToSubmittedList:(id)sender
     {
         SPAJSubmittedList* viewController = [[SPAJSubmittedList alloc] initWithNibName:@"SPAJ Submitted List" bundle:nil];
+        viewController.view.frame = self.viewContent.bounds;
         [self.viewContent addSubview:viewController.view];
     };
 
     - (IBAction)actionGoToAddMenu:(id)sender
     {
         SPAJAddMenu* viewController = [[SPAJAddMenu alloc] initWithNibName:@"SPAJ Add Menu" bundle:nil];
+        viewController.view.frame = self.viewContent.bounds;
         [self.viewContent addSubview:viewController.view];
     };
 
