@@ -150,6 +150,7 @@
         [self moveDBFromDefault:defaultDBPath ToTemp:tempDir];
         loginDB = [[LoginDBManagement alloc]init];
         [loginDB makeDBCopy];
+        [self updateDBVersion:defaultDBPath NewVersion:dbVersion Remark:@""];
     }
 }
 
