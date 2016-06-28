@@ -1522,7 +1522,7 @@
 		43B346AD1D112AA500B8DE32 /* AreaPotensialDiskusiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AreaPotensialDiskusiViewController.m; sourceTree = "<group>"; };
 		43B346AE1D112AA500B8DE32 /* AreaPotensialDiskusiViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AreaPotensialDiskusiViewController.xib; sourceTree = "<group>"; };
 		43B346B11D112C4000B8DE32 /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
-		43B346B51D112C8300B8DE32 /* HTMLResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = HTMLResources.bundle; path = Third_Party/HTMLResources.bundle; sourceTree = "<group>"; };
+		43B346B51D112C8300B8DE32 /* HTMLResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = HTMLResources.bundle; path = ../Third_Party/HTMLResources.bundle; sourceTree = "<group>"; };
 		43B346B71D112CBB00B8DE32 /* libHtmlGenerator.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libHtmlGenerator.a; path = Third_Party/libHtmlGenerator.a; sourceTree = "<group>"; };
 		43B56A8A1C7EDDB100145D35 /* ModelSIPOData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelSIPOData.h; sourceTree = "<group>"; };
 		43B56A8B1C7EDDB100145D35 /* ModelSIPOData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelSIPOData.m; sourceTree = "<group>"; };
@@ -4472,8 +4472,6 @@
 		C4E9D1851612C64900016053 = {
 			isa = PBXGroup;
 			children = (
-				43B346B71D112CBB00B8DE32 /* libHtmlGenerator.a */,
-				43B346B51D112C8300B8DE32 /* HTMLResources.bundle */,
 				43E7FA151D20E05B0090DF2D /* index3.html */,
 				43E7FA171D20E3A50090DF2D /* index2.html */,
 				43B346B11D112C4000B8DE32 /* index.html */,
@@ -4537,6 +4535,7 @@
 		C4E9D1931612C64900016053 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				43B346B71D112CBB00B8DE32 /* libHtmlGenerator.a */,
 				DE0296911CB4ED5600C1D5DF /* AdSupport.framework */,
 				DE06FFD11CABCB8200E4DE3A /* libFTPFileSynchronization.a */,
 				DE06FFCB1CABBBC800E4DE3A /* xibLibrary.bundle */,
@@ -4635,6 +4634,7 @@
 		C4E9D19B1612C64900016053 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				43B346B51D112C8300B8DE32 /* HTMLResources.bundle */,
 				DE20EAD51CBF3D4800B1E6AE /* BLESS-Prefix.pch */,
 				DE06FFCD1CABBC2800E4DE3A /* xibLibrary.bundle */,
 				DE80E4231CA3F7FB00D9E775 /* BlackRaccoon-Info.plist */,
