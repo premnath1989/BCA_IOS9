@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "HtmlGenerator/HtmlGenerator.h"
 
-@interface AreaPotensialDiskusiViewController : HtmlGenerator
+@interface AreaPotensialDiskusiViewController : HtmlGenerator{
+    NSString *filePath;
+}
 @property (strong, nonatomic) NSNumber* prospectProfileID;
 @property (strong, nonatomic) NSNumber* cffTransactionID;
 

@@ -16,9 +16,35 @@
 @synthesize prospectProfileID,cffTransactionID;
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:YES];
-    NSString *localURL = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"index.html"];
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"CFFfolder"];
+    [self createDirectory];
+    
+    NSString *localURL = [[NSString alloc] initWithString:
+                          [docsDir stringByAppendingPathComponent: @"CFFfolder/index.html"]];
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localURL]];
     [webview loadRequest:urlRequest];
+    
+//    NSString *localURL = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"index2.html"];
+//    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localURL]];
+//    [webview loadRequest:urlRequest];
+
+}
+
+- (void)createDirectory{
+    //create Directory
+    NSError *error;
+    if (![[NSFileManager defaultManager] fileExistsAtPath:filePath])	//Does directory already exist?
+    {
+        if (![[NSFileManager defaultManager] createDirectoryAtPath:filePath
+                                       withIntermediateDirectories:NO
+                                                        attributes:nil
+                                                             error:&error])
+        {
+            NSLog(@"Create directory error: %@", error);
+        }
+    }
 }
 
 - (void)viewDidLoad {
