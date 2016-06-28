@@ -12,5 +12,6 @@
 @interface AreaPotensialDiskusiViewController : HtmlGenerator
 @property (strong, nonatomic) NSNumber* prospectProfileID;
 @property (strong, nonatomic) NSNumber* cffTransactionID;
-
+@property (strong, nonatomic) NSString* htmlFileName;
+@property (strong, nonatomic) NSNumber* cffID;
 @end

@@ -67,6 +67,7 @@
     NSString *CFFStatus;
     int ProspectIndex;
     int CFFTransactionID;
+    int CFFID;
     
     
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
@@ -80,6 +81,7 @@
     while ([s next]) {
         ProspectIndex = [s intForColumn:@"IndexNo"];
         CFFTransactionID = [s intForColumn:@"CFFTransactionID"];
+        CFFID = [s intForColumn:@"CFFID"];
         ProspectName = [s stringForColumn:@"ProspectName"];
         ProspectIDNumber = [s stringForColumn:@"OtherIDTypeNo"];
         ProspectDOB = [s stringForColumn:@"ProspectDOB"];
@@ -94,6 +96,7 @@
         dict=[[NSDictionary alloc]initWithObjectsAndKeys:
               [NSNumber numberWithInt:ProspectIndex],@"IndexNo",
               [NSNumber numberWithInt:CFFTransactionID],@"CFFTransactionID",
+              [NSNumber numberWithInt:CFFID],@"CFFID",
               ProspectName,@"ProspectName",
               ProspectIDNumber,@"OtherIDTypeNo",
               ProspectDOB,@"ProspectDOB",
@@ -183,6 +186,24 @@
     [database close];
     return arrayDictCFF;
 }
+
+-(void)updateCFFDateModified:(int)cffTransactionID{
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    BOOL success = [database executeUpdate:[NSString stringWithFormat:@"update CFFTransaction set CFFDateModified=""datetime(\"now\", \"+7 hour\")"" where CFFTransactionID = %i",cffTransactionID]];
+    
+    if (!success) {
+        NSLog(@"%s: insert error: %@", __FUNCTION__, [database lastErrorMessage]);
+        // do whatever you need to upon error
+    }
+    [results close];
+    [database close];
+}
+
 
 
 @end

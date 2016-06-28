@@ -1,0 +1,19 @@
+//
+//  CFFHtml.h
+//  BLESS
+//
+//  Created by Basvi on 6/27/16.
+//  Copyright © 2016 InfoConnect Sdn Bhd. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import "FMDatabase.h"
+#import "FMResultSet.h"
+
+@interface ModelCFFHtml : NSObject{
+    FMResultSet *results;
+}
+-(void)saveHtmlData:(NSDictionary *)dictHtmlData;
+-(NSMutableArray *)selectHtmlData:(int)CFFHtmlID;
+-(NSDictionary *)selectActiveHtml;
+@end

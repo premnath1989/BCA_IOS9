@@ -14,6 +14,7 @@
 #import "ModelCFFAnswers.h"
 #import "Formatter.h"
 #import "SIDate.h"
+#import "ModelCFFHtml.h"
 
 @interface CFFListingViewController ()<SIDateDelegate,ListingTbViewControllerDelegate,UITextFieldDelegate>{
     SIDate* datePickerViewController;
@@ -23,6 +24,7 @@
     ModelProspectSpouse *modelProspectSpouse;
     ModelCFFAnswers *modelCFFAnswers;
     Formatter* formatter;
+    ModelCFFHtml* modelCFFHtml;
 }
 
 @end
@@ -76,6 +78,7 @@
     modelCFFAnswers = [[ModelCFFAnswers alloc]init];
     modelProspectSpouse = [[ModelProspectSpouse alloc]init];
     modelProspectChild = [[ModelProspectChild alloc]init];
+    modelCFFHtml=[[ModelCFFHtml alloc]init];
     
     formatter = [[Formatter alloc]init];
     
@@ -136,6 +139,7 @@
     CFFQuestionsViewController* cFFQuestionsVC = [[CFFQuestionsViewController alloc]initWithNibName:@"CFFQuestionsViewController" bundle:nil];
     cFFQuestionsVC.prospectProfileID = [arrayCFFTransaction[indexPath.row] valueForKey:@"IndexNo"];
     cFFQuestionsVC.cffTransactionID = [arrayCFFTransaction[indexPath.row] valueForKey:@"CFFTransactionID"];
+    cFFQuestionsVC.cffID = [arrayCFFTransaction[indexPath.row] valueForKey:@"CFFID"];
     [self.navigationController pushViewController:cFFQuestionsVC animated:YES];
 }
 
@@ -489,7 +493,9 @@
 #pragma mark save to CFFTransaction
 -(void)CreateNewCFFTransaction{
     NSString* dateToday=[formatter getDateToday:@"yyyy-MM-dd"];
-    NSDictionary* dictCFFTransaction = [[NSDictionary alloc]initWithObjectsAndKeys:@"1",@"CFFID",[NSNumber numberWithInteger:clientProfileID],@"ProspectIndexNo",dateToday,@"CFFDateCreated",@"",@"CreatedBy",dateToday,@"CFFDateModified",@"",@"ModifiedBy",@"Not Complete",@"CFFStatus", nil];
+    NSDictionary* dictActiveHtml = [[NSDictionary alloc]initWithDictionary:[modelCFFHtml selectActiveHtml]];
+    
+    NSDictionary* dictCFFTransaction = [[NSDictionary alloc]initWithObjectsAndKeys:[dictActiveHtml valueForKey:@"CFFHtmlID"],@"CFFID",[NSNumber numberWithInteger:clientProfileID],@"ProspectIndexNo",dateToday,@"CFFDateCreated",@"",@"CreatedBy",dateToday,@"CFFDateModified",@"",@"ModifiedBy",@"Not Complete",@"CFFStatus", nil];
     [modelCFFTransaction saveCFFTransaction:dictCFFTransaction];
 }
 
