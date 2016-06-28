@@ -23,6 +23,12 @@
 
     @end
 
+    @interface LabelMenuHint : UILabel
+
+        - (void)setupStyle;
+
+    @end
+
     // NOTE
 
     @interface LabelNoteHeader : UILabel

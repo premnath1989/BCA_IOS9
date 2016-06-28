@@ -770,8 +770,38 @@
 	documentInteraction = [UIDocumentInteractionController interactionControllerWithURL:fileURL];
 
 	documentInteraction.delegate = self; // UIDocumentInteractionControllerDelegate
+    
+//	[documentInteraction presentOpenInMenuFromRect:button.bounds inView:button animated:YES];
+    
+    NSData *pdfData = [NSData dataWithContentsOfURL:fileURL];
+    
+    NSArray *objectsToShare = @[bodyEmail, pdfData];
+    
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:objectsToShare applicationActivities:nil];
+    
+    NSArray *excludeActivities = @[UIActivityTypeAirDrop,
+                                   UIActivityTypePrint,
+                                   UIActivityTypeAssignToContact,
+                                   UIActivityTypeSaveToCameraRoll,
+                                   UIActivityTypeAddToReadingList,
+                                   UIActivityTypePostToFlickr,
+                                   UIActivityTypePostToVimeo];
+    
+    activityVC.excludedActivityTypes = excludeActivities;
+    activityVC.popoverPresentationController.sourceView = button;
+    
+    [activityVC setCompletionWithItemsHandler:^(NSString *activityType, BOOL completed, NSArray *returnedItems, NSError *activityError) {
+        NSLog(@"completed: %@, \n%d, \n%@, \n%@,", activityType, completed, returnedItems, activityError);
+        
+    }];
+    
+    
+    [self presentViewController:activityVC animated:YES completion:nil];
+}
 
-	[documentInteraction presentOpenInMenuFromRect:button.bounds inView:button animated:YES];
+- (NSString *)activityViewController:(UIActivityViewController *)activityViewController
+              subjectForActivityType:(NSString *)activityType{
+    return subjectEmail;
 }
 
 - (void)tappedInToolbar:(ReaderMainToolbar *)toolbar printButton:(UIButton *)button

@@ -10,6 +10,7 @@
 // IMPORT
 
 #import "SPAJ Add Menu.h"
+#import "String.h"
 
 
 // DECLARATION
@@ -44,7 +45,7 @@
         // LOCALIZATION
         
         _labelPageTitle.text = NSLocalizedString(@"TITLE_SPAJEXISTINGLIST", nil);
-        _labelMenuHint.text = NSLocalizedString(@"NOTE_GUIDEMENU", nil);
+        _labelMenuHint.text = NSLocalizedString(@"NOTE_GUIDEMENU", nil).uppercaseString;
         
         _labelStep1.text = NSLocalizedString(@"GUIDE_SPAJMENU_STEP1", nil);
         _labelHeader1.text = NSLocalizedString(@"GUIDE_SPAJMENU_HEADER1", nil);
@@ -74,11 +75,11 @@
         _labelFieldExpiredDate.text = NSLocalizedString(@"FIELD_SPAJEXPIRED", nil);
         _labelFieldLastUpdate.text = NSLocalizedString(@"FIELD_SPAJLASTUPDATED", nil);
         _labelFieldTimeRemaining.text = NSLocalizedString(@"FIELD_TIMEREMAINING", nil);
-        _labelPropertyCustomerSignature.text = NSLocalizedString(@"STATE_CAPTURED", nil);
-        _labelPropertyDateTime.text = dateCurrent;
-        _labelPropertyExpiredDate.text = dateCurrent;
-        _labelPropertyLastUpdate.text = dateCurrent;
-        _labelPropertyTimeRemining.text = dateCurrent;
+        _labelPropertyCustomerSignature.text = [CHARACTER_DOUBLEDOT stringByAppendingString:NSLocalizedString(@"STATE_CAPTURED", nil)];
+        _labelPropertyDateTime.text = [CHARACTER_DOUBLEDOT stringByAppendingString:dateCurrent];
+        _labelPropertyExpiredDate.text = [CHARACTER_DOUBLEDOT stringByAppendingString:dateCurrent];
+        _labelPropertyLastUpdate.text = [CHARACTER_DOUBLEDOT stringByAppendingString:dateCurrent];
+        _labelPropertyTimeRemining.text = [CHARACTER_DOUBLEDOT stringByAppendingString:dateCurrent];
     }
 
 

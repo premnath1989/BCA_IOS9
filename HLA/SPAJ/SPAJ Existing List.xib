@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
@@ -119,25 +119,25 @@
                         </stackView>
                     </subviews>
                 </stackView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Clt-GV-ifg">
-                    <rect key="frame" x="20" y="181" width="46" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Clt-GV-ifg" customClass="ButtonFormPrimary">
+                    <rect key="frame" x="20" y="201" width="46" height="30"/>
                     <state key="normal" title="Button"/>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H3t-V8-ySt">
-                    <rect key="frame" x="106" y="181" width="46" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H3t-V8-ySt" customClass="ButtonFormPrimary">
+                    <rect key="frame" x="106" y="201" width="46" height="30"/>
                     <state key="normal" title="Button"/>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DSo-Iu-ZyS">
-                    <rect key="frame" x="534" y="181" width="46" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DSo-Iu-ZyS" customClass="ButtonFormPrimary">
+                    <rect key="frame" x="534" y="201" width="46" height="30"/>
                     <state key="normal" title="Button"/>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="DSo-Iu-ZyS" secondAttribute="trailing" constant="20" id="0sM-EJ-Pnm"/>
                 <constraint firstItem="H3t-V8-ySt" firstAttribute="leading" secondItem="Clt-GV-ifg" secondAttribute="trailing" constant="40" id="4sO-KV-XMB"/>
                 <constraint firstAttribute="trailing" secondItem="Cvn-UT-alj" secondAttribute="trailing" id="9hm-f4-MmT"/>
-                <constraint firstItem="Clt-GV-ifg" firstAttribute="top" secondItem="jZn-Pz-jXn" secondAttribute="bottom" constant="20" id="QRd-EC-zVm"/>
+                <constraint firstItem="DSo-Iu-ZyS" firstAttribute="trailing" secondItem="TQ4-uy-ARq" secondAttribute="trailing" id="Kel-JG-ysj"/>
+                <constraint firstItem="Clt-GV-ifg" firstAttribute="top" secondItem="jZn-Pz-jXn" secondAttribute="bottom" constant="40" id="QRd-EC-zVm"/>
                 <constraint firstItem="jZn-Pz-jXn" firstAttribute="top" secondItem="Cvn-UT-alj" secondAttribute="bottom" constant="20" id="VwN-mh-h3b"/>
                 <constraint firstItem="DSo-Iu-ZyS" firstAttribute="centerY" secondItem="H3t-V8-ySt" secondAttribute="centerY" id="drw-LD-iSZ"/>
                 <constraint firstAttribute="trailing" secondItem="jZn-Pz-jXn" secondAttribute="trailing" constant="20" id="eGR-vc-MV1"/>
@@ -147,6 +147,7 @@
                 <constraint firstItem="Cvn-UT-alj" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="oUK-Nn-v81"/>
                 <constraint firstItem="Cvn-UT-alj" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="p5r-Rp-fIK"/>
             </constraints>
+            <point key="canvasLocation" x="471" y="436"/>
         </view>
     </objects>
 </document>

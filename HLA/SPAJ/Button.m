@@ -13,6 +13,7 @@
 #import "Theme.h"
 #import "Font Size.h"
 #import "User Interface.h"
+#import "Dimension.h"
 
 
 // IMPLEMENTATION
@@ -36,6 +37,7 @@
             UserInterface *objectUserInterface = [[UserInterface alloc] init];
             
             self.backgroundColor = [objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0];
+            [self setTitleColor:[objectUserInterface generateUIColor:THEME_COLOR_QUINARY floatOpacity:1.0] forState:UIControlStateNormal];
         }
 
     @end
@@ -105,7 +107,9 @@
         {
             UserInterface *objectUserInterface = [[UserInterface alloc] init];
             
-            self.backgroundColor = [objectUserInterface generateUIColor:THEME_COLOR_TERTIARY floatOpacity:1.0];
+            [self.heightAnchor constraintEqualToConstant:BUTTON_CONFIRMSPAJ_HEIGHT].active = true;
+            
+            self.backgroundColor = [objectUserInterface generateUIColor:THEME_COLOR_NONARY floatOpacity:1.0];
             [self setTitleColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0] forState:UIControlStateNormal];
             [self.titleLabel setFont:[UIFont fontWithName:THEME_FONT_SECONDARY size:FONTSIZE_FORM_BUTTON]];
         }

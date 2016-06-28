@@ -115,7 +115,7 @@
             
             UserInterface *objectUserInterface = [[UserInterface alloc] init];
             
-            self.backgroundColor = [objectUserInterface generateUIColor:THEME_COLOR_TERTIARY floatOpacity:1.0];
+            self.backgroundColor = [objectUserInterface generateUIColor:THEME_COLOR_NONARY floatOpacity:1.0];
         }
 
     @end
@@ -137,8 +137,9 @@
         - (void)setupStyle
         {
             self.axis = UILayoutConstraintAxisHorizontal;
-            self.distribution = UIStackViewDistributionEqualSpacing;
+            self.distribution = UIStackViewDistributionFill;
             self.alignment = UIStackViewAlignmentCenter;
+            self.spacing = FORM_STACKVIEWCOLUMN_HORIZONTALSPACING;
         }
 
     @end
@@ -228,7 +229,7 @@
             UserInterface *objectUserInterface = [[UserInterface alloc] init];
             
             [self.heightAnchor constraintEqualToConstant:GUIDEMENU_CONTAINER_HEIGHT].active = true;
-            self.backgroundColor = [objectUserInterface generateUIColor:THEME_COLOR_TERTIARY floatOpacity:1.0];
+            self.backgroundColor = [objectUserInterface generateUIColor:THEME_COLOR_OCTONARY floatOpacity:1.0];
         }
 
     @end
