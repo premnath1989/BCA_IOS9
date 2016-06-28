@@ -7,28 +7,27 @@
 //
 
 #import "AreaPotensialDiskusiViewController.h"
+#import "ModelCFFTransaction.h"
 
-@interface AreaPotensialDiskusiViewController ()
+@interface AreaPotensialDiskusiViewController (){
+    ModelCFFTransaction* modelCFFTransaction;
+}
 
 @end
 
 @implementation AreaPotensialDiskusiViewController
-@synthesize prospectProfileID,cffTransactionID;
+@synthesize prospectProfileID,cffTransactionID,htmlFileName,cffID;
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:YES];
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"CFFfolder"];
+    filePath = [docsDir stringByAppendingPathComponent:@"CFFfolder"];
     [self createDirectory];
     
+    NSString *htmlfilePath = [NSString stringWithFormat:@"CFFfolder/%@",htmlFileName];
     NSString *localURL = [[NSString alloc] initWithString:
-                          [docsDir stringByAppendingPathComponent: @"CFFfolder/index.html"]];
+                          [docsDir stringByAppendingPathComponent: htmlfilePath]];
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localURL]];
     [webview loadRequest:urlRequest];
-    
-//    NSString *localURL = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"index2.html"];
-//    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localURL]];
-//    [webview loadRequest:urlRequest];
 
 }
 
@@ -48,6 +47,7 @@
 }
 
 - (void)viewDidLoad {
+    modelCFFTransaction = [[ModelCFFTransaction alloc]init];
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     databasePath = [[NSString alloc] initWithString:
                     [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
@@ -68,8 +68,33 @@
 - (void)savetoDB:(NSDictionary *)params{
     //add another key to db
     //
+    NSMutableDictionary* modifiedParams = [[NSMutableDictionary alloc]initWithDictionary:[params valueForKey:@"data"]];
+    [modifiedParams setObject:[cffID stringValue] forKey:@"CFFHtmlID"];
+    [modifiedParams setObject:[cffTransactionID stringValue] forKey:@"CFFTransactionID"];
+    [modifiedParams setObject:[cffID stringValue] forKey:@"CFFID"];
+    [modifiedParams setObject:[prospectProfileID stringValue] forKey:@"CustomerID"];
     
-    [super savetoDB:params];
+    NSMutableArray* arrayCFFAnswers = [[NSMutableArray alloc]initWithArray:[modifiedParams valueForKey:@"CFFAnswers"]];
+    NSMutableArray* modifiedArrayCFFAnswers = [[NSMutableArray alloc]init];
+    if ([arrayCFFAnswers count]>0){
+        for (int i = 0;i<[arrayCFFAnswers count];i++){
+            NSMutableDictionary* tempDict = [[NSMutableDictionary alloc] initWithDictionary:[arrayCFFAnswers objectAtIndex:i]];
+            [tempDict setObject:[cffID stringValue] forKey:@"CFFHtmlID"];
+            [tempDict setObject:[cffTransactionID stringValue] forKey:@"CFFTransactionID"];
+            [tempDict setObject:[cffID stringValue] forKey:@"CFFID"];
+            [tempDict setObject:[prospectProfileID stringValue] forKey:@"CustomerID"];
+            
+            [modifiedArrayCFFAnswers addObject:tempDict];
+        }
+    }
+    
+    NSMutableDictionary* finalArrayDictionary = [[NSMutableDictionary alloc]init];
+    [finalArrayDictionary setObject:modifiedArrayCFFAnswers forKey:@"CFFAnswers"];
+    
+    NSMutableDictionary* finalDictionary = [[NSMutableDictionary alloc]init];
+    [finalDictionary setObject:finalArrayDictionary forKey:@"data"];
+    [modelCFFTransaction updateCFFDateModified:[cffTransactionID intValue]];
+    [super savetoDB:finalDictionary];
 }
 
 - (NSMutableDictionary*)readfromDB:(NSMutableDictionary*) params{

@@ -48,7 +48,7 @@
     addSpouseVC.delegate=self;
     addSpouseVC.prospectProfileID=prospectProfileID;
     addSpouseVC.cffTransactionID=cffTransactionID;
-    addSpouseVC.modalPresentationStyle = UIModalPresentationPageSheet;
+    addSpouseVC.modalPresentationStyle = UIModalPresentationFormSheet;
     addSpouseVC.preferredContentSize = CGSizeMake(824, 415);
     //addSpouseVC.view.superview.bounds = CGRectMake(0, 0, 824, 415);
     
@@ -56,7 +56,7 @@
     addChildVC.delegate = self;
     addChildVC.prospectProfileID=prospectProfileID;
     addChildVC.cffTransactionID=cffTransactionID;
-    addChildVC.modalPresentationStyle = UIModalPresentationPageSheet;
+    addChildVC.modalPresentationStyle = UIModalPresentationFormSheet;
     addChildVC.preferredContentSize = CGSizeMake(824, 415);
     
     ListDataNasabah = [[NSMutableArray alloc] initWithObjects:@"Nama Nasabah :", @"Tambah Data Pasangan :", nil];

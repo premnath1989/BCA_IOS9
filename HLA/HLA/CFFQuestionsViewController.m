@@ -13,10 +13,11 @@
 #import "AnalisaKebutuhanNasabahViewController.h"
 #import "ProspectProfile.h"
 #import "ModelProspectProfile.h"
-
+#import "ModelCFFHtml.h"
 
 @interface CFFQuestionsViewController (){
     ModelProspectProfile* modelProspectProfile;
+    ModelCFFHtml* modelCFFHtml;
 }
 
 @end
@@ -32,7 +33,7 @@
     NSMutableArray *NumberListOfSubMenu;
     NSMutableArray *ListOfSubMenu;
 }
-@synthesize prospectProfileID,cffTransactionID;
+@synthesize prospectProfileID,cffTransactionID,cffID;
 
 -(void)viewWillAppear:(BOOL)animated{
     ProspectProfile* pp;
@@ -44,6 +45,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     modelProspectProfile=[[ModelProspectProfile alloc]init];
+    modelCFFHtml=[[ModelCFFHtml alloc]init];
     
     dataNasabahVC = [[DataNasabahViewController alloc]initWithNibName:@"DataNasabahViewController" bundle:nil];
     areaPotensialDiskusiVC = [[AreaPotensialDiskusiViewController alloc]initWithNibName:@"AreaPotensialDiskusiViewController" bundle:nil];
@@ -69,8 +71,11 @@
 }
 
 -(void)loadAreaPotensialDiskusiView{
+    NSMutableArray *arrayHtml = [modelCFFHtml selectHtmlData:[cffID intValue]];
     areaPotensialDiskusiVC.prospectProfileID = prospectProfileID;
     areaPotensialDiskusiVC.cffTransactionID  = cffTransactionID;
+    areaPotensialDiskusiVC.cffID = cffID;
+    areaPotensialDiskusiVC.htmlFileName = [[arrayHtml objectAtIndex:0]valueForKey:@"CFFHtmlName"];
     if ([areaPotensialDiskusiVC.view isDescendantOfView:childView]){
         [childView bringSubviewToFront:areaPotensialDiskusiVC.view];
     }
