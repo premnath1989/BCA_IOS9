@@ -92,7 +92,8 @@
     [database open];
     NSMutableArray* ProspectTableData=[[NSMutableArray alloc]init];
     //results = [database executeQuery:@"SELECT * FROM prospect_profile WHERE QQFlag = 'false'  order by LOWER(ProspectName) ASC LIMIT 20)", Nil];
-    FMResultSet *s = [database executeQuery:@"SELECT * FROM prospect_profile WHERE QQFlag = 'false'  order by DateModified DESC LIMIT 20"];
+    //FMResultSet *s = [database executeQuery:@"SELECT * FROM prospect_profile WHERE QQFlag = 'false'  order by DateModified DESC LIMIT 20"];
+    FMResultSet *s = [database executeQuery:@"SELECT pp.*,ep.* FROM prospect_profile pp left join eProposal_Identification ep on pp.OtherIDType=ep.IdentityCode or pp.OtherIDType=ep.DataIdentifier  WHERE QQFlag = 'false' order by DateModified DESC"];
     while ([s next]) {
         //occpToEnableSection = [results stringForColumn:@"OccpCode"];
         int ID = [s intForColumn:@"IndexNo"];
@@ -128,7 +129,8 @@
         ProspectGroup = [s stringForColumn:@"ProspectGroup"];;
         ProspectTitle = [s stringForColumn:@"ProspectTitle"];;
         IDTypeNo = [s stringForColumn:@"IDTypeNo"];;
-        OtherIDType = [s stringForColumn:@"OtherIDType"];;
+        //OtherIDType = [s stringForColumn:@"OtherIDType"];;
+        OtherIDType = [s stringForColumn:@"IdentityDesc"];
         OtherIDTypeNo = [s stringForColumn:@"OtherIDTypeNo"];;
         Smoker = [s stringForColumn:@"Smoker"];;
         
@@ -308,18 +310,18 @@
     //results = [database executeQuery:@"SELECT * FROM prospect_profile WHERE QQFlag = 'false'  order by LOWER(ProspectName) ASC LIMIT 20)", Nil];
     FMResultSet *s;
     if ([dateOfBirth length]>0){
-        s = [database executeQuery:[NSString stringWithFormat:@"SELECT * FROM prospect_profile WHERE ProspectName like \"%%%@%%\" and OtherIDTypeNo like \"%%%@%%\"  and BranchName like \"%%%@%%\" and ProspectDOB = \"%@\" and QQFlag = 'false'  order by LOWER(\"%@\") %@",searchName, IDNumber,branchName,dateOfBirth,orderBy,method]];
+        s = [database executeQuery:[NSString stringWithFormat:@"SELECT pp.*,ep.* FROM prospect_profile pp left join eProposal_Identification ep on pp.OtherIDType=ep.IdentityCode or pp.OtherIDType=ep.DataIdentifier WHERE ProspectName like \"%%%@%%\" and OtherIDTypeNo like \"%%%@%%\"  and BranchName like \"%%%@%%\" and ProspectDOB = \"%@\" and QQFlag = 'false'  order by LOWER(\"%@\") %@",searchName, IDNumber,branchName,dateOfBirth,orderBy,method]];
 
-        NSLog(@"query %@",[NSString stringWithFormat:@"SELECT * FROM prospect_profile WHERE ProspectName like \"%%%@%%\" and OtherIDTypeNo like \"%%%@%%\" and BranchName like \"%%%@%%\" and ProspectDOB = \"%@\" and QQFlag = 'false'  order by LOWER(\"%@\") %@",searchName, IDNumber, branchName,dateOfBirth,orderBy,method]);
+        NSLog(@"query %@",[NSString stringWithFormat:@"SELECT pp.*,ep.* FROM prospect_profile pp left join eProposal_Identification ep on pp.OtherIDType=ep.IdentityCode or pp.OtherIDType=ep.DataIdentifier WHERE ProspectName like \"%%%@%%\" and OtherIDTypeNo like \"%%%@%%\" and BranchName like \"%%%@%%\" and ProspectDOB = \"%@\" and QQFlag = 'false'  order by LOWER(\"%@\") %@",searchName, IDNumber, branchName,dateOfBirth,orderBy,method]);
     }
     else if ([orderBy isEqualToString:@"ProspectDOB"]){
-        s = [database executeQuery:[NSString stringWithFormat:@"SELECT *, (select substr(ProspectDOB,7,4)||'-'||substr(ProspectDOB,4,2)||'-'||substr(ProspectDOB,1,2)) as properDB FROM prospect_profile WHERE ProspectName like \"%%%@%%\" and OtherIDTypeNo like \"%%%@%%\" and BranchName like \"%%%@%%\" and QQFlag = 'false'  order by date(properDB) %@",searchName, IDNumber,branchName,method]];
+        s = [database executeQuery:[NSString stringWithFormat:@"SELECT pp.*,ep.*, (select substr(ProspectDOB,7,4)||'-'||substr(ProspectDOB,4,2)||'-'||substr(ProspectDOB,1,2)) as properDB FROM prospect_profile pp left join eProposal_Identification ep on pp.OtherIDType=ep.IdentityCode or pp.OtherIDType=ep.DataIdentifier WHERE ProspectName like \"%%%@%%\" and OtherIDTypeNo like \"%%%@%%\" and BranchName like \"%%%@%%\" and QQFlag = 'false'  order by date(properDB) %@",searchName, IDNumber,branchName,method]];
     }
     else if ([orderBy isEqualToString:@"DateCreated"]||[orderBy isEqualToString:@"DateModified"]){
-        s = [database executeQuery:[NSString stringWithFormat:@"SELECT * FROM prospect_profile WHERE ProspectName like \"%%%@%%\" and OtherIDTypeNo like \"%%%@%%\" and BranchName like \"%%%@%%\" and QQFlag = 'false'  order by datetime(%@) %@",searchName, IDNumber,branchName,orderBy,method]];
+        s = [database executeQuery:[NSString stringWithFormat:@"SELECT pp.*,ep.* FROM prospect_profile pp left join eProposal_Identification ep on pp.OtherIDType=ep.IdentityCode or pp.OtherIDType=ep.DataIdentifier WHERE ProspectName like \"%%%@%%\" and OtherIDTypeNo like \"%%%@%%\" and BranchName like \"%%%@%%\" and QQFlag = 'false'  order by datetime(%@) %@",searchName, IDNumber,branchName,orderBy,method]];
     }
     else{
-        s = [database executeQuery:[NSString stringWithFormat:@"SELECT * FROM prospect_profile WHERE ProspectName like \"%%%@%%\" and OtherIDTypeNo like \"%%%@%%\" and BranchName like \"%%%@%%\" and QQFlag = 'false'  order by %@ %@",searchName, IDNumber,branchName,orderBy,method]];
+        s = [database executeQuery:[NSString stringWithFormat:@"SELECT * FROM prospect_profile pp left join eProposal_Identification ep on pp.OtherIDType=ep.IdentityCode or pp.OtherIDType=ep.DataIdentifier WHERE ProspectName like \"%%%@%%\" and OtherIDTypeNo like \"%%%@%%\" and BranchName like \"%%%@%%\" and QQFlag = 'false'  order by %@ %@",searchName, IDNumber,branchName,orderBy,method]];
 
         NSLog(@"query %@",[NSString stringWithFormat:@"SELECT * FROM prospect_profile WHERE ProspectName like \"%%%@%%\" and OtherIDTypeNo like \"%%%@%%\" and BranchName like \"%%%@%%\" and QQFlag = 'false'  order by LOWER(\"%@\") %@",searchName,IDNumber, branchName,orderBy,method]);
     }
@@ -359,7 +361,8 @@
         ProspectGroup = [s stringForColumn:@"ProspectGroup"];;
         ProspectTitle = [s stringForColumn:@"ProspectTitle"];;
         IDTypeNo = [s stringForColumn:@"IDTypeNo"];;
-        OtherIDType = [s stringForColumn:@"OtherIDType"];;
+        //OtherIDType = [s stringForColumn:@"OtherIDType"];;
+        OtherIDType = [s stringForColumn:@"IdentityDesc"];
         OtherIDTypeNo = [s stringForColumn:@"OtherIDTypeNo"];;
         Smoker = [s stringForColumn:@"Smoker"];;
         

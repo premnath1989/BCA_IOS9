@@ -279,6 +279,7 @@
 @property (nonatomic, copy) NSString *gender;
 @property (nonatomic, copy) NSString *DOB;
 @property (nonatomic, copy) NSString *IDTypeCodeSelected;
+@property (nonatomic, copy) NSString *IDTypeIdentifierSelected;
 @property (nonatomic, copy) NSString *TitleCodeSelected;
 @property (nonatomic, copy) NSString *OccpCatCode;
 @property (nonatomic, copy) NSString *OccupCodeSelected;

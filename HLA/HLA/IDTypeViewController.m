@@ -78,9 +78,11 @@ NSUInteger selectedIndex;
     NSDictionary *dict = [modelIdentificationType getIDType];
     _IDTypeDesc = [dict objectForKey:@"IdentityDesc"];
     _IDTypeCode = [dict objectForKey:@"IdentityCode"];
+    _IDTypeIdentifier = [dict objectForKey:@"DataIdentifier"];
 
     [_IDTypeDesc insertObject:@"- SELECT -" atIndex:0];
     [_IDTypeCode insertObject:@"" atIndex:0];
+    [_IDTypeIdentifier insertObject:@"" atIndex:0];
     /*modified by faiz due to fetch data to database*/
     /*sqlite3_stmt *statement;
     if (sqlite3_open([databasePath UTF8String], &contactDB) == SQLITE_OK)
@@ -160,7 +162,9 @@ NSUInteger selectedIndex;
 		[_delegate IDTypeDescSelected:IDTypeDesc];
 		
 		NSString *IDTypeCode = [_IDTypeCode objectAtIndex:indexPath.row];
+        NSString *IDTypeIdentifier = [_IDTypeIdentifier objectAtIndex:indexPath.row];
 		[_delegate IDTypeCodeSelected:IDTypeCode];
+        [_delegate IDTypeCodeSelectedWithIdentifier:IDTypeCode Identifier:IDTypeIdentifier];
 		
 		SelectedString = [_IDTypeDesc objectAtIndex:indexPath.row ];
 	}

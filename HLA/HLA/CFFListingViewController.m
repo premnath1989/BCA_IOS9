@@ -392,8 +392,19 @@
         NSString* prefix=[[arrayCFFTransaction objectAtIndex:indexPath.row] valueForKey:@"Prefix"];
         NSString* mobileNumber=[[arrayCFFTransaction objectAtIndex:indexPath.row] valueForKey:@"ContactNo"];
         
+        NSString *idDesc = @"";
+        if ([[[arrayCFFTransaction objectAtIndex:indexPath.row] valueForKey:@"IdentityDesc"] length]>0){
+            idDesc = [NSString stringWithFormat:@"%@ : ",[[arrayCFFTransaction objectAtIndex:indexPath.row] valueForKey:@"IdentityDesc"] ];
+            
+        }
+        NSString *idNumber = @"";
+        if ([[[arrayCFFTransaction objectAtIndex:indexPath.row] valueForKey:@"OtherIDTypeNo"] length]>0){
+            idNumber = [[arrayCFFTransaction objectAtIndex:indexPath.row] valueForKey:@"OtherIDTypeNo"];
+        }
+        NSString* prospectID = [NSString stringWithFormat:@"%@%@",idDesc,idNumber];
+        
         [cell1.labelName setText:[[arrayCFFTransaction objectAtIndex:indexPath.row] valueForKey:@"ProspectName"]];
-        [cell1.labelidNum setText:[[arrayCFFTransaction objectAtIndex:indexPath.row] valueForKey:@"OtherIDTypeNo"]];
+        [cell1.labelidNum setText:prospectID];
         [cell1.labelDOB setText:[[arrayCFFTransaction objectAtIndex:indexPath.row] valueForKey:@"ProspectDOB"]];
         [cell1.labelBranchName setText:[[arrayCFFTransaction objectAtIndex:indexPath.row] valueForKey:@"BranchName"]];
         [cell1.labelPhone1 setText: [NSString stringWithFormat:@"%@ - %@",prefix,mobileNumber]];
