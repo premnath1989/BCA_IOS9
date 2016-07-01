@@ -15,6 +15,7 @@
 #import "Formatter.h"
 #import "SIDate.h"
 #import "ModelCFFHtml.h"
+#import "CFFAPIController.h"
 
 @interface CFFListingViewController ()<SIDateDelegate,ListingTbViewControllerDelegate,UITextFieldDelegate>{
     SIDate* datePickerViewController;
@@ -25,6 +26,7 @@
     ModelCFFAnswers *modelCFFAnswers;
     Formatter* formatter;
     ModelCFFHtml* modelCFFHtml;
+    CFFAPIController* cffAPIController;
 }
 
 @end
@@ -66,6 +68,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSForegroundColorAttributeName:[UIColor colorWithRed:88.0f/255.0f green:89.0f/255.0f blue:92.0f/255.0f alpha:1],NSFontAttributeName: [UIFont fontWithName:@"BPreplay" size:17.0f]}];
     borderColor=[[UIColor alloc]initWithRed:0/255.0 green:102.0/255.0 blue:179.0/255.0 alpha:1.0];
@@ -79,6 +82,7 @@
     modelProspectSpouse = [[ModelProspectSpouse alloc]init];
     modelProspectChild = [[ModelProspectChild alloc]init];
     modelCFFHtml=[[ModelCFFHtml alloc]init];
+    cffAPIController = [[CFFAPIController alloc]init];
     
     formatter = [[Formatter alloc]init];
     
@@ -90,6 +94,10 @@
     ItemToBeDeleted = [[NSMutableArray alloc] init];
     
     [self loadCFFTransaction];
+    NSString* fileName = @"20160701171527.html";
+    [cffAPIController apiCallCFFHtmtable:@"http://192.168.0.109:8282/Service2.svc/getAllData"];
+    [cffAPIController apiCallCrateCFFHtml:[NSString stringWithFormat:@"http://192.168.0.109:8282/Service2.svc/GetHtmlFile?fileName=%@",fileName]];
+    //[self createHTMLFile];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -142,7 +150,6 @@
     cFFQuestionsVC.cffID = [arrayCFFTransaction[indexPath.row] valueForKey:@"CFFID"];
     [self.navigationController pushViewController:cFFQuestionsVC animated:YES];
 }
-
 
 #pragma mark select prospect from list
 - (IBAction)actionEdit:(id)sender
@@ -506,7 +513,7 @@
     NSString* dateToday=[formatter getDateToday:@"yyyy-MM-dd"];
     NSDictionary* dictActiveHtml = [[NSDictionary alloc]initWithDictionary:[modelCFFHtml selectActiveHtml]];
     
-    NSDictionary* dictCFFTransaction = [[NSDictionary alloc]initWithObjectsAndKeys:[dictActiveHtml valueForKey:@"CFFHtmlID"],@"CFFID",[NSNumber numberWithInteger:clientProfileID],@"ProspectIndexNo",dateToday,@"CFFDateCreated",@"",@"CreatedBy",dateToday,@"CFFDateModified",@"",@"ModifiedBy",@"Not Complete",@"CFFStatus", nil];
+    NSDictionary* dictCFFTransaction = [[NSDictionary alloc]initWithObjectsAndKeys:[dictActiveHtml valueForKey:@"CFFID"],@"CFFID",[NSNumber numberWithInteger:clientProfileID],@"ProspectIndexNo",dateToday,@"CFFDateCreated",@"",@"CreatedBy",dateToday,@"CFFDateModified",@"",@"ModifiedBy",@"Not Complete",@"CFFStatus", nil];
     [modelCFFTransaction saveCFFTransaction:dictCFFTransaction];
 }
 
