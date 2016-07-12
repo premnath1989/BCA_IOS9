@@ -11,11 +11,34 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "Query SPAJ Header.h"
+#import "User Interface.h"
+#import "Alert.h"
 
 
 // DECLARATION
 
-@interface SPAJSubmittedList : UIViewController
+@interface SPAJSubmittedList : UIViewController <UITableViewDelegate, UITableViewDataSource>
+
+    // OBJECT
+
+    @property (retain, strong) QuerySPAJHeader *querySPAJHeader;
+    @property (retain, strong) UserInterface *functionUserInterface;
+    @property (retain, strong) Alert *functionAlert;
+
+    // QUERY
+
+    @property (retain, strong) NSArray *arrayQuerySubmitted;
+
+    // VARIABLE
+
+    @property (retain, strong) NSMutableArray *arrayTextField;
+    @property (retain, strong) NSNumber *intQueryID;
+    @property (retain, strong) NSString *stringQueryName;
+
+    // TABLE
+
+    @property (nonatomic, weak) IBOutlet UITableView *tableView;
 
     // LABEL
 
@@ -23,6 +46,13 @@
     @property (nonatomic, weak) IBOutlet UILabel *labelFieldName;
     @property (nonatomic, weak) IBOutlet UILabel *labelFieldSPAJNumber;
     @property (nonatomic, weak) IBOutlet UILabel *labelFieldSocialNumber;
+
+    @property (nonatomic, weak) IBOutlet UILabel *labelTablePolicyHolder;
+    @property (nonatomic, weak) IBOutlet UILabel *labelTableSPAJNumber;
+    @property (nonatomic, weak) IBOutlet UILabel *labelTableSubmittedDate;
+    @property (nonatomic, weak) IBOutlet UILabel *labelTableProduct;
+    @property (nonatomic, weak) IBOutlet UILabel *labelTableState;
+    @property (nonatomic, weak) IBOutlet UILabel *labelTableView;
 
     // TEXTFIELD
 
@@ -35,5 +65,9 @@
     @property (nonatomic, weak) IBOutlet UIButton *buttonSearch;
     @property (nonatomic, weak) IBOutlet UIButton *buttonReset;
     @property (nonatomic, weak) IBOutlet UIButton *buttonDelete;
+
+    // FUNCTION
+
+    - (void) generateQuery;
 
 @end

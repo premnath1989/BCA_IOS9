@@ -65,6 +65,28 @@
 
     @end
 
+    @implementation ViewGuideDetail
+
+        // INITIALIZE
+
+        - (void)awakeFromNib
+        {
+            [self setupStyle];
+        }
+
+
+        // FUNCTION
+
+        - (void)setupStyle
+        {
+            UserInterface *objectUserInterface = [[UserInterface alloc] init];
+            
+            [self.widthAnchor constraintEqualToConstant:GUIDEDETAIL_CONTAINER_WIDTH].active = true;
+            self.backgroundColor = [objectUserInterface generateUIColor:THEME_COLOR_TERTIARY floatOpacity:1.0];
+        }
+
+    @end
+
     // PAGE
 
     @implementation ViewPageHeader
@@ -295,6 +317,50 @@
             self.distribution = UIStackViewDistributionFill;
             self.alignment = UIStackViewAlignmentLeading;
             self.spacing = GUIDEMENU_STACKVIEW_VERTICALSPACING;
+        }
+
+    @end
+
+    // TABLE
+
+    @implementation StackViewTableHorizontal
+
+        // INITIALIZE
+
+        - (void)awakeFromNib
+        {
+            [self setupStyle];
+        }
+
+
+        // FUNCTION
+
+        - (void)setupStyle
+        {
+            self.axis = UILayoutConstraintAxisHorizontal;
+            self.distribution = UIStackViewDistributionFillEqually;
+            self.alignment = UIStackViewAlignmentCenter;
+            self.spacing = TABLE_STACKVIEW_SPACING;
+        }
+
+    @end
+
+    @implementation ViewTableHorizontal
+
+        // INITIALIZE
+
+        - (void)awakeFromNib
+        {
+            [self setupStyle];
+        }
+
+
+        // FUNCTION
+
+        - (void)setupStyle
+        {
+            UserInterface* objectUserInterface = [[UserInterface alloc] init];
+            self.backgroundColor = [objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0];
         }
 
     @end

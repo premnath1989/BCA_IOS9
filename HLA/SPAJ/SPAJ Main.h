@@ -24,8 +24,13 @@
     // BUTTON
 
     @property (nonatomic, weak) IBOutlet UIButton *buttonHome;
+    @property (nonatomic, weak) IBOutlet UIButton *buttonEApplicationList;
     @property (nonatomic, weak) IBOutlet UIButton *buttonExistingList;
     @property (nonatomic, weak) IBOutlet UIButton *buttonSubmittedList;
     @property (nonatomic, weak) IBOutlet UIButton *buttonAdd;
+
+    // FUNCTION
+
+    - (void) actionGoToAddDetail;
 
 @end

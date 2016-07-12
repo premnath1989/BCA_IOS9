@@ -18,8 +18,27 @@
 
 @interface UserInterface : NSObject
 
-    // FUNCTION
+    // COLOR
 
     - (UIColor*) generateUIColor : (UInt32) intHex floatOpacity : (CGFloat) floatOpacity;
+
+
+    // TABLE HELPER
+
+    - (NSString*) generateTimeRemaining : (NSDate*) dateCreatedOn;
+
+    - (NSString*) generateDate : (NSDate*) dateRaw;
+
+    - (NSString*) generateTime : (NSDate*) dateRaw;
+
+
+    // QUERY HELPER
+
+    - (NSString*) generateQueryParameter : (NSString*) stringRaw;
+
+
+    // FORM HELPER
+
+    - (void) resetTextField : (NSMutableArray*) arrayTextField;
 
 @end
