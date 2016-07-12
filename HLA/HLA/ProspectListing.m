@@ -329,14 +329,17 @@ MBProgressHUD *HUD;
                 int indexArray = [dataIndex indexOfObject:pp.ProspectID];
                 [cell1.labelPhone1 setText:[NSString stringWithFormat:@"%@ - %@",[dataPrefix objectAtIndex:indexArray],[dataMobile objectAtIndex:indexArray]]];
             }
-            NSString *identityType = @"";
+            //NSString *identityType = @"";
             NSString *identity = @"";
-            if([pp.OtherIDType caseInsensitiveCompare:@"1"]==NSOrderedSame){
+            /*if([pp.OtherIDType caseInsensitiveCompare:@"1"]==NSOrderedSame){
                 identityType = @"KTP";
                 identity = [NSString stringWithFormat:@"%@ : %@",identityType, pp.OtherIDTypeNo];
             }else if([pp.OtherIDType caseInsensitiveCompare:@"2"]==NSOrderedSame){
                 identityType = @"PASSPOR";
                 identity = [NSString stringWithFormat:@"%@ : %@",identityType, pp.OtherIDTypeNo];
+            }*/
+            if ([pp.OtherIDTypeNo length]>0){
+                identity = [NSString stringWithFormat:@"%@ : %@",pp.OtherIDType, pp.OtherIDTypeNo];
             }
             
             [cell1.labelName setText:pp.ProspectName];

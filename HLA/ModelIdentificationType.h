@@ -14,5 +14,5 @@
     FMResultSet *results;
 }
 -(NSDictionary *)getIDType;
-
+-(NSString*)getOtherTypeDesc : (NSString*)otherId;
 @end

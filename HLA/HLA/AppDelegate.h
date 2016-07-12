@@ -12,6 +12,7 @@
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate> {
     NSString *databasePath;
+    NSString *fileJqueryLibsPath;
 }
 @property(nonatomic, retain) UINavigationController *navController;
 @property (strong, nonatomic) UIWindow *window;

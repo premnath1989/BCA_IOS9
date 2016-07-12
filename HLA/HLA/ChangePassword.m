@@ -16,6 +16,7 @@
 #import "DDXMLDocument.h"
 #import "DDXMLElementAdditions.h"
 #import "DDXMLNode.h"
+#import "SSKeychain.h"
 
 #import "LoginMacros.h"
 
@@ -80,7 +81,7 @@
     
     encryptWrapper = [[EncryptDecryptWrapper alloc]init];
     spinnerLoading = [[SpinnerUtilities alloc]init];
-
+    
     if(flagFirstLogin){
         btnBarCancel.enabled = NO;
         [btnBarCancel setTintColor: [UIColor clearColor]];
@@ -89,7 +90,7 @@
         txtAgentCode.backgroundColor = [UIColor lightGrayColor];
         txtAgentCode.enabled = NO;
     }
-        
+    
     AppDelegate *zzz= (AppDelegate*)[[UIApplication sharedApplication] delegate ];
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = TRUE;
@@ -107,14 +108,14 @@
     [lblTips addGestureRecognizer:gestureQOne ];
     lblTips.userInteractionEnabled = YES;
     
-	UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
-								   initWithTarget:self
-								   action:@selector(hideKeyboard)];
-	tap.cancelsTouchesInView = NO;
-	tap.numberOfTapsRequired = 1;
-	
-	[self.view addGestureRecognizer:tap];
-	
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(hideKeyboard)];
+    tap.cancelsTouchesInView = NO;
+    tap.numberOfTapsRequired = 1;
+    
+    [self.view addGestureRecognizer:tap];
+    
 }
 
 -(void) setFirstLogin
@@ -138,9 +139,9 @@
 }
 
 -(void)hideKeyboard{
-	Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
-	id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
-	[activeInstance performSelector:@selector(dismissKeyboard)];
+    Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
+    id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
+    [activeInstance performSelector:@selector(dismissKeyboard)];
 }
 
 - (void)viewDidUnload
@@ -158,7 +159,7 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-	if (interfaceOrientation==UIInterfaceOrientationLandscapeRight || interfaceOrientation == UIInterfaceOrientationLandscapeLeft)
+    if (interfaceOrientation==UIInterfaceOrientationLandscapeRight || interfaceOrientation == UIInterfaceOrientationLandscapeLeft)
         return YES;
     
     return NO;
@@ -174,7 +175,7 @@
         //NSString *querySQL = [NSString stringWithFormat:@"SELECT AgentPassword FROM User_Profile WHERE IndexNO=\"%d\"",self.userID];
         NSString *querySQL = [NSString stringWithFormat:@"SELECT AgentPassword FROM Agent_Profile WHERE IndexNO=\"%d\"",self.userID];
         
-//        NSLog(@"%@", querySQL);
+        //        NSLog(@"%@", querySQL);
         const char *query_stmt = [querySQL UTF8String];
         if (sqlite3_prepare_v2(contactDB, query_stmt, -1, &statement, NULL) == SQLITE_OK)
         {
@@ -219,7 +220,7 @@
     
     if (sqlite3_open(dbpath, &contactDB) == SQLITE_OK)
     {
-       // NSString *querySQL = [NSString stringWithFormat:@"UPDATE User_Profile SET AgentPassword= \"%@\" WHERE IndexNo=\"%d\"",txtNewPwd.text,self.userID];
+        // NSString *querySQL = [NSString stringWithFormat:@"UPDATE User_Profile SET AgentPassword= \"%@\" WHERE IndexNo=\"%d\"",txtNewPwd.text,self.userID];
         
         NSString *encryptedPass = [encryptWrapper encrypt:txtNewPwd.text];
         NSString *querySQL = [NSString stringWithFormat:@"UPDATE Agent_Profile SET AgentPassword= \"%@\" WHERE IndexNo=\"%d\"",encryptedPass,self.userID];
@@ -299,7 +300,7 @@
                         
                     }
                 }
-        }
+            }
         }
     }
     
@@ -321,7 +322,8 @@
                     WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
                     [webservice checkuserpass:txtAgentCode.text password:encryptedOldPass delegate:self];
                 }else{
-                    [webservice chgPassword:self AgentCode:txtAgentCode.text password:encryptedOldPass newPassword:encryptedNewPass UUID:[[[UIDevice currentDevice] identifierForVendor] UUIDString]];
+                    
+                    [webservice chgPassword:self AgentCode:txtAgentCode.text password:encryptedOldPass newPassword:encryptedNewPass UUID:[loginDB getUniqueDeviceIdentifierAsString]];
                 }
             }
             else {
@@ -384,6 +386,44 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
         }
         
         /****
+         * is it AgentWS_SyncdatareferralResponse
+         ****/
+        else if([bodyPart isKindOfClass:[AgentWS_SyncdatareferralResponse class]]) {
+            [spinnerLoading stopLoadingSpinner];
+            AgentWS_SyncdatareferralResponse* rateResponse = bodyPart;
+            if([rateResponse.strstatus caseInsensitiveCompare:@"TRUE"]== NSOrderedSame){
+                
+                // create XMLDocument object
+                DDXMLDocument *xml = [[DDXMLDocument alloc] initWithXMLString:
+                                      rateResponse.SyncdatareferralResult.xmlDetails options:0 error:nil];
+                
+                // Get root element - DataSetMenu for your XMLfile
+                DDXMLElement *root = [xml rootElement];
+                WebResponObj *returnObj = [[WebResponObj alloc]init];
+                [self parseXML:root objBuff:returnObj index:0];
+                int result = [loginDB ReferralSyncTable:returnObj];
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [spinnerLoading stopLoadingSpinner];
+                    [spinnerLoading startLoadingSpinner:self.view label:@"Sync sedang berjalan 4/4"];
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
+                        NSString *encryptedNewPass = [encryptWrapper encrypt:txtNewPwd.text];
+                        NSString *encryptedOldPass = [encryptWrapper encrypt:txtOldPwd.text];
+                        [webservice FirstTimeLogin:self AgentCode:txtAgentCode.text password:encryptedOldPass newPassword:encryptedNewPass UUID:[loginDB getUniqueDeviceIdentifierAsString]];
+                    });
+                });
+                
+                
+                
+            }else{
+                
+            }
+        }
+        
+        
+        /****
          * is it AgentWS_LoginAPIResponse
          ****/
         else if([bodyPart isKindOfClass:[AgentWS_LoginAPIResponse class]]) {
@@ -416,7 +456,7 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
                     [spinnerLoading startLoadingSpinner:self.view label:@"Sync sedang berjalan 2/4"];
                     
                     dispatch_async(dispatch_get_global_queue(
-                        DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                                                             DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                         flagFullSync = FALSE;
                         // create XMLDocument object
                         DDXMLDocument *xml = [[DDXMLDocument alloc] initWithXMLString:
@@ -428,29 +468,23 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
                         [self parseXML:root objBuff:returnObj index:0];
                         
                         dispatch_async(dispatch_get_main_queue(), ^{
-                        [spinnerLoading stopLoadingSpinner];
-                        [spinnerLoading startLoadingSpinner:self.view label:@"Sync sedang berjalan 3/4"];
-                        
-                          dispatch_async(dispatch_get_global_queue(
-                            DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                            //we insert/update the table
-                            [loginDB fullSyncTable:returnObj];
+                            [spinnerLoading stopLoadingSpinner];
+                            [spinnerLoading startLoadingSpinner:self.view label:@"Sync sedang berjalan 3/4"];
                             
-                              dispatch_async(dispatch_get_main_queue(), ^{
-                                  [spinnerLoading stopLoadingSpinner];
-                                  [spinnerLoading startLoadingSpinner:self.view label:@"Sync sedang berjalan 4/4"];
-                                  
-                                  dispatch_async(dispatch_get_main_queue(), ^{
-                                    WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
-                                    NSString *encryptedNewPass = [encryptWrapper encrypt:txtNewPwd.text];
-                                    NSString *encryptedOldPass = [encryptWrapper encrypt:txtOldPwd.text];
-                                    [webservice FirstTimeLogin:self AgentCode:txtAgentCode.text password:encryptedOldPass newPassword:encryptedNewPass UUID:[[[UIDevice currentDevice] identifierForVendor] UUIDString]];
-                                                          });
-                              });
-                          });
+                            dispatch_async(dispatch_get_global_queue(
+                                                                     DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                                //we insert/update the table
+                                [loginDB fullSyncTable:returnObj];
+                                
+
+                            });
                         });
                     });
                 });
+                
+                //we update the referral data paralelly
+                WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
+                [webservice dataReferralSync:[loginDB getLastUpdateReferral] delegate:self];
                 
             }else if([rateResponse.strStatus caseInsensitiveCompare:@"False"] == NSOrderedSame){
                 [spinnerLoading stopLoadingSpinner];
@@ -522,7 +556,7 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
     NSCharacterSet *upperCaseChars = [NSCharacterSet characterSetWithCharactersInString:@"ABCDEFGHIJKLKMNOPQRSTUVWXYZ"];
     
     NSCharacterSet *numbers = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
-	
+    
     
     BOOL lower = [password rangeOfCharacterFromSet:lowerCaseChars].location != NSNotFound;
     BOOL upper = [password rangeOfCharacterFromSet:upperCaseChars].location != NSNotFound;
@@ -549,10 +583,10 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
     bool valid;
     bool passwordValid = [self isPasswordLegal:txtNewPwd.text];
     
-	Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
-	id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
-	[activeInstance performSelector:@selector(dismissKeyboard)];
-
+    Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
+    id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
+    [activeInstance performSelector:@selector(dismissKeyboard)];
+    
     if ([txtOldPwd.text stringByReplacingOccurrencesOfString:@" " withString:@"" ].length <= 0 ) {
         
         valid = FALSE;
@@ -613,7 +647,6 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
                     txtConfirmPwd.text = @"";
                     alert.tag = 03;
                     [alert show];
-                    //[txtNewPwd becomeFirstResponder];
                 }
                 else {
                     if ([txtNewPwd.text isEqualToString:txtConfirmPwd.text]) {
@@ -665,10 +698,10 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
     
 }
 - (IBAction)btnTips:(id)sender {
-	Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
-	id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
-	[activeInstance performSelector:@selector(dismissKeyboard)];
-	
+    Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
+    id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
+    [activeInstance performSelector:@selector(dismissKeyboard)];
+    
     if (_PasswordTips == Nil) {
         self.PasswordTips = [self.storyboard instantiateViewControllerWithIdentifier:@"Tip"];
         _PasswordTips.delegate = self;
@@ -681,10 +714,10 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
 }
 
 -(void)DisplayTips{
-	Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
-	id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
-	[activeInstance performSelector:@selector(dismissKeyboard)];
-	
+    Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
+    id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
+    [activeInstance performSelector:@selector(dismissKeyboard)];
+    
     if (_PasswordTips == Nil) {
         self.PasswordTips = [self.storyboard instantiateViewControllerWithIdentifier:@"Tip"];
         _PasswordTips.delegate = self;

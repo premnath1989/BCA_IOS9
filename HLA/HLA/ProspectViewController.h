@@ -281,6 +281,7 @@
 @property (nonatomic, copy) NSString *OccpCatCode;
 @property (nonatomic, copy) NSString *OccupCodeSelected;
 @property (nonatomic, copy) NSString *IDTypeCodeSelected;
+@property (nonatomic, copy) NSString *IDTypeIdentifierSelected;
 @property (nonatomic, copy) NSString *TitleCodeSelected;
 @property (nonatomic, copy) NSString *SelectedStateCode;
 @property (nonatomic, copy) NSString *SelectedOfficeStateCode;

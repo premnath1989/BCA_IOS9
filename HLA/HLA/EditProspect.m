@@ -122,7 +122,7 @@ int name_repeat;
 @synthesize nationalityList2 = _nationalityList2;
 @synthesize CountryListPopover = _CountryListPopover;
 @synthesize Country2ListPopover = _Country2ListPopover;
-@synthesize TitleCodeSelected, IDTypeCodeSelected;
+@synthesize TitleCodeSelected, IDTypeCodeSelected,IDTypeIdentifierSelected;
 @synthesize edited;
 @synthesize AddGroup, ViewGroup, SegIsGrouping;
 @synthesize UDGroup, ProsGroupArr, ProsGroupStr, isGrouping;
@@ -8501,7 +8501,7 @@ NSMutableArray *DelGroupArr;
 	
     FMDatabase *db = [FMDatabase databaseWithPath:databasePath];
     [db open];
-    FMResultSet *result = [db executeQuery:@"SELECT IdentityDesc FROM eProposal_identification WHERE IdentityCode = ?", IDtype];
+    FMResultSet *result = [db executeQuery:@"SELECT IdentityDesc FROM eProposal_identification WHERE IdentityCode = ? or DataIdentifier = ?", IDtype,IDtype];
     
 	NSInteger *count = 0;
     while ([result next]) {
@@ -8533,10 +8533,12 @@ NSMutableArray *DelGroupArr;
 	
     FMDatabase *db = [FMDatabase databaseWithPath:databasePath];
     [db open];
-    FMResultSet *result = [db executeQuery:@"SELECT IdentityCode FROM eProposal_identification WHERE IdentityDesc = ?", IDtype];
+    //FMResultSet *result = [db executeQuery:@"SELECT IdentityCode FROM eProposal_identification WHERE IdentityDesc = ?", IDtype];
+    FMResultSet *result = [db executeQuery:@"SELECT DataIdentifier FROM eProposal_Identification WHERE IdentityDesc = ?", IDtype];
     
     while ([result next]) {
-        code =[result objectForColumnName:@"IdentityCode"];
+        //code =[result objectForColumnName:@"IdentityCode"];
+        code =[result objectForColumnName:@"DataIdentifier"];
     }
 	
     [result close];
@@ -13568,6 +13570,11 @@ NSMutableArray *DelGroupArr;
 
 -(void)IDTypeCodeSelected:(NSString *)IDTypeCode {
     IDTypeCodeSelected = IDTypeCode;
+}
+
+- (void)IDTypeCodeSelectedWithIdentifier:(NSString *) IDTypeCode Identifier:(NSString *)identifier{
+    IDTypeCodeSelected = identifier;
+    IDTypeIdentifierSelected = identifier;
 }
 
 -(void)IDTypeDescSelected:(NSString *)selectedIDType

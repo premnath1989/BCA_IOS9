@@ -20,6 +20,7 @@
 #import "ProspectProfile.h"
 #import "ModelProspectProfile.h"
 #import "Formatter.h"
+#import "ModelIdentificationType.h"
 
 @interface AddChildViewController ()<SIDateDelegate,IDTypeDelegate,NatinalityDelegate,OccupationListDelegate,UITextFieldDelegate>{
     Formatter* formatter;
@@ -29,6 +30,7 @@
     Nationality *nationalityList;
     OccupationList *occupationList;
     ModelProspectChild *modelProspectChild;
+    ModelIdentificationType* modelIdentificationType;
     ModelPopover* modelPopOver;
     ModelProspectProfile* modelProspectProfile;
     CFFValidation* cffValidation;
@@ -68,8 +70,8 @@
 
 - (void)viewWillLayoutSubviews{
     [super viewWillLayoutSubviews];
-    self.view.superview.bounds = CGRectMake(0, 0, 824, 415);
-    [self.view.superview setBackgroundColor:[UIColor whiteColor]];
+    //self.view.superview.bounds = CGRectMake(0, 0, 824, 415);
+    //[self.view.superview setBackgroundColor:[UIColor whiteColor]];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -88,6 +90,7 @@
     [super viewDidLoad];
     modelProspectChild = [[ModelProspectChild alloc]init];
     modelProspectProfile=[[ModelProspectProfile alloc]init];
+    modelIdentificationType = [[ModelIdentificationType alloc]init];
     modelPopOver = [[ModelPopover alloc]init];
     cffValidation = [[CFFValidation alloc]init];
     formatter = [[Formatter alloc]init];
@@ -151,8 +154,8 @@
 -(void)setTextfieldBorder{
     UIFont *fontSegment= [UIFont fontWithName:@"BPreplay" size:16.0f];
     NSDictionary *attributes = [NSDictionary dictionaryWithObject:fontSegment forKey:UITextAttributeFont];
-    [segSmoker setTitleTextAttributes:attributes forState:UIControlStateNormal];
-    [segGender setTitleTextAttributes:attributes forState:UIControlStateNormal];
+    //[segSmoker setTitleTextAttributes:attributes forState:UIControlStateNormal];
+    //[segGender setTitleTextAttributes:attributes forState:UIControlStateNormal];
     
     UIFont *font= [UIFont fontWithName:@"BPreplay" size:16.0f];
     for (UIView *view in [viewParent subviews]) {
@@ -202,7 +205,7 @@
 
 -(IBAction)actionSaveChild:(id)sender{
     if ([cffValidation validateChild:[self setDictionaryObjectChild]]){
-        NSString* nasabahID = [NSString stringWithFormat:@"%@%@",pp.OtherIDType,pp.OtherIDTypeNo];
+        NSString* nasabahID = [NSString stringWithFormat:@"%@%@",[modelIdentificationType getOtherTypeDesc:pp.OtherIDType],pp.OtherIDTypeNo];
         if ([cffValidation validateOtherIDNumberForChild:OtherIDType TextIDNumber:txtOtherIDType IDNasabah:nasabahID IDTypeCodeSelected:IDTypeCodeSelected]){
             if ([DictChildData count]>0){
                 if ([modelProspectChild chekcExistingRecord:[[DictChildData valueForKey:@"IndexNo"] intValue]]>0){
@@ -358,7 +361,7 @@
         NSDictionary* dictOccup=[[NSDictionary alloc]initWithDictionary:[modelPopOver getOccupationByCode:[DictChildData valueForKey:@"ProspectChildOccupationCode"]]];
         txtName.text = [DictChildData valueForKey:@"ProspectChildName"];
         [outletDOB setTitle:[DictChildData valueForKey:@"ProspectChildDOB"] forState:UIControlStateNormal];
-        [OtherIDType setTitle:[DictChildData valueForKey:@"OtherIDType"] forState:UIControlStateNormal];
+        [OtherIDType setTitle:[modelIdentificationType getOtherTypeDesc:[DictChildData valueForKey:@"OtherIDType"]] forState:UIControlStateNormal];
         txtOtherIDType.text=[DictChildData valueForKey:@"OtherIDTypeNo"];
         [outletNationality setTitle:[DictChildData valueForKey:@"Nationality"] forState:UIControlStateNormal];
         [outletRelation setTitle:[DictChildData valueForKey:@"Relation"] forState:UIControlStateNormal];
@@ -554,6 +557,10 @@
 
 -(void)IDTypeCodeSelected:(NSString *)IDTypeCode {
     IDTypeCodeSelected = IDTypeCode;
+}
+
+- (void)IDTypeCodeSelectedWithIdentifier:(NSString *) IDTypeCode Identifier:(NSString *)identifier{
+    IDTypeCodeSelected = identifier;
 }
 
 -(void)IDTypeDescSelected:(NSString *)selectedIDType

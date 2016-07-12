@@ -17,4 +17,5 @@
 -(NSMutableArray *)getAllCFF:(NSString *)sortedBy SortMethod:(NSString *)sortMethod;
 -(NSMutableArray *)searchCFF:(NSDictionary *)dictSearch;
 -(void)deleteCFFTransaction:(int)cffTransactionID;
+-(void)updateCFFDateModified:(int)cffTransactionID;
 @end
