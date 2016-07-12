@@ -7,6 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SPAJMain">
             <connections>
                 <outlet property="buttonAdd" destination="7hp-Mb-GWr" id="tDz-5h-TJB"/>
+                <outlet property="buttonEApplicationList" destination="TWM-DY-RE5" id="va4-UV-4fi"/>
                 <outlet property="buttonExistingList" destination="93Z-kW-y6W" id="mRb-T9-xEh"/>
                 <outlet property="buttonHome" destination="vo3-Dn-ebm" id="iql-X0-YKd"/>
                 <outlet property="buttonSubmittedList" destination="Xjb-6e-2fk" id="Rjn-ZA-aa3"/>
@@ -15,36 +16,44 @@
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB">
+        <view opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ft1-6d-2IT" customClass="ViewNavigation">
-                    <rect key="frame" x="0.0" y="20" width="46" height="580"/>
+                    <rect key="frame" x="0.0" y="0.0" width="46" height="600"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="6yl-4f-OaM" customClass="StackViewNavigation">
-                            <rect key="frame" x="0.0" y="0.0" width="46" height="120"/>
+                            <rect key="frame" x="0.0" y="0.0" width="46" height="150"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vo3-Dn-ebm" customClass="ButtonNavigation">
                                     <rect key="frame" x="0.0" y="0.0" width="46" height="30"/>
                                     <state key="normal" title="Button"/>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="93Z-kW-y6W" customClass="ButtonNavigation">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TWM-DY-RE5" customClass="ButtonNavigation">
                                     <rect key="frame" x="0.0" y="30" width="46" height="30"/>
+                                    <state key="normal" title="Button"/>
+                                    <connections>
+                                        <action selector="actionGoToAddMenu:" destination="-1" eventType="touchUpInside" id="Yjx-Sa-4SA"/>
+                                        <action selector="actionGoToEApplicationList:" destination="-1" eventType="touchUpInside" id="R9W-La-Vxc"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="93Z-kW-y6W" customClass="ButtonNavigation">
+                                    <rect key="frame" x="0.0" y="60" width="46" height="30"/>
                                     <state key="normal" title="Button"/>
                                     <connections>
                                         <action selector="actionGoToExistingList:" destination="-1" eventType="touchUpInside" id="qUU-LZ-hWo"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xjb-6e-2fk" customClass="ButtonNavigation">
-                                    <rect key="frame" x="0.0" y="60" width="46" height="30"/>
+                                    <rect key="frame" x="0.0" y="90" width="46" height="30"/>
                                     <state key="normal" title="Button"/>
                                     <connections>
                                         <action selector="actionGoToSubmittedList:" destination="-1" eventType="touchUpInside" id="jdc-Tp-oI3"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7hp-Mb-GWr" customClass="ButtonNavigation">
-                                    <rect key="frame" x="0.0" y="90" width="46" height="30"/>
+                                    <rect key="frame" x="0.0" y="120" width="46" height="30"/>
                                     <state key="normal" title="Button"/>
                                     <connections>
                                         <action selector="actionGoToAddMenu:" destination="-1" eventType="touchUpInside" id="hMx-rh-ABb"/>
@@ -60,18 +69,24 @@
                         <constraint firstAttribute="trailing" secondItem="6yl-4f-OaM" secondAttribute="trailing" id="erX-AT-EFD"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jYj-Nk-O93">
-                    <rect key="frame" x="46" y="20" width="554" height="580"/>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jYj-Nk-O93">
+                    <rect key="frame" x="46" y="0.0" width="554" height="600"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <accessibility key="accessibilityConfiguration">
+                        <bool key="isElement" value="YES"/>
+                    </accessibility>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <accessibility key="accessibilityConfiguration">
+                <bool key="isElement" value="YES"/>
+            </accessibility>
             <constraints>
                 <constraint firstItem="jYj-Nk-O93" firstAttribute="leading" secondItem="ft1-6d-2IT" secondAttribute="trailing" id="81L-XQ-dv9"/>
-                <constraint firstItem="ft1-6d-2IT" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="Bba-LO-6eZ"/>
+                <constraint firstItem="ft1-6d-2IT" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Bba-LO-6eZ"/>
                 <constraint firstAttribute="bottom" secondItem="jYj-Nk-O93" secondAttribute="bottom" id="Gea-XO-Z7e"/>
                 <constraint firstAttribute="bottom" secondItem="ft1-6d-2IT" secondAttribute="bottom" id="LLz-Mb-eCo"/>
-                <constraint firstItem="jYj-Nk-O93" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="NFP-Q0-jib"/>
+                <constraint firstItem="jYj-Nk-O93" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="NFP-Q0-jib"/>
                 <constraint firstAttribute="trailing" secondItem="jYj-Nk-O93" secondAttribute="trailing" id="h3t-Yl-vxj"/>
                 <constraint firstItem="ft1-6d-2IT" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="kcD-5u-F1q"/>
             </constraints>

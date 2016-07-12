@@ -38,6 +38,8 @@
 		04B15E0D19DA8D0900FF7039 /* Client_Profile@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04B15E0419DA8D0900FF7039 /* Client_Profile@2x.png */; };
 		04B15E0E19DA8D0900FF7039 /* Bachground.png in Resources */ = {isa = PBXBuildFile; fileRef = 04B15E0519DA8D0900FF7039 /* Bachground.png */; };
 		04D7C8B41C1FA9580053F651 /* EverStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04D7C8B31C1FA9580053F651 /* EverStoryboard.storyboard */; };
+		0F2A0CB21D24F306009D11F6 /* SPAJ E Application List.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2A0CB01D24F306009D11F6 /* SPAJ E Application List.m */; };
+		0F2A0CB31D24F306009D11F6 /* SPAJ E Application List.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F2A0CB11D24F306009D11F6 /* SPAJ E Application List.xib */; };
 		0F3268461D1A93A4001A9021 /* Bless_SPAJ.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0F3268211D1A93A4001A9021 /* Bless_SPAJ.xcdatamodeld */; };
 		0F3268471D1A93A4001A9021 /* Button.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F3268241D1A93A4001A9021 /* Button.m */; };
 		0F3268481D1A93A4001A9021 /* Dimension.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F3268261D1A93A4001A9021 /* Dimension.m */; };
@@ -62,6 +64,19 @@
 		0F32685E1D1A96EA001A9021 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0F3268601D1A96EA001A9021 /* Localizable.strings */; };
 		0F3268721D1BBDCB001A9021 /* String.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F3268711D1BBDCB001A9021 /* String.m */; };
 		0F3268741D1BD140001A9021 /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F3268731D1BD140001A9021 /* Image.xcassets */; };
+		0F48376C1D334B16009A45D4 /* Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F48376B1D334B16009A45D4 /* Alert.m */; };
+		0FF8455C1D227383008CF861 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF8455B1D227383008CF861 /* CoreData.framework */; };
+		0FF8455E1D2376A8008CF861 /* SPAJ Submitted List Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FF8455D1D2376A8008CF861 /* SPAJ Submitted List Cell.xib */; };
+		0FF845641D237732008CF861 /* SPAJ Existing List Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF845601D237732008CF861 /* SPAJ Existing List Cell.m */; };
+		0FF845651D237732008CF861 /* SPAJ Existing List Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FF845611D237732008CF861 /* SPAJ Existing List Cell.xib */; };
+		0FF845661D237732008CF861 /* SPAJ Submitted List Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF845631D237732008CF861 /* SPAJ Submitted List Cell.m */; };
+		0FF845C41D23ACC2008CF861 /* SPAJ E Application List Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF845C21D23ACC2008CF861 /* SPAJ E Application List Cell.m */; };
+		0FF845C51D23ACC2008CF861 /* SPAJ E Application List Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FF845C31D23ACC2008CF861 /* SPAJ E Application List Cell.xib */; };
+		0FFA185F1D1D1FB100C63A47 /* SPAJ Add Detail.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FFA185D1D1D1FB100C63A47 /* SPAJ Add Detail.m */; };
+		0FFA18601D1D1FB100C63A47 /* SPAJ Add Detail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FFA185E1D1D1FB100C63A47 /* SPAJ Add Detail.xib */; };
+		0FFA18641D21283300C63A47 /* Entity SPAJ Header.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FFA18631D21283300C63A47 /* Entity SPAJ Header.m */; };
+		0FFA187D1D2134AD00C63A47 /* Query SPAJ Header.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FFA187B1D2134AD00C63A47 /* Query SPAJ Header.m */; };
+		0FFA18801D2262E700C63A47 /* Insert Initialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FFA187F1D2262E700C63A47 /* Insert Initialization.m */; };
 		162C3C0F1BBBD7270022CAF0 /* dbupdates in Resources */ = {isa = PBXBuildFile; fileRef = 162C3C0E1BBBD7270022CAF0 /* dbupdates */; };
 		1706BD4C1C7169A40038D1DB /* menu_customerfactfind.png in Resources */ = {isa = PBXBuildFile; fileRef = 1706BD451C7169A40038D1DB /* menu_customerfactfind.png */; };
 		1706BD4D1C7169A40038D1DB /* menu_datanasabah.png in Resources */ = {isa = PBXBuildFile; fileRef = 1706BD461C7169A40038D1DB /* menu_datanasabah.png */; };
@@ -959,6 +974,9 @@
 		04B15E0419DA8D0900FF7039 /* Client_Profile@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Client_Profile@2x.png"; sourceTree = "<group>"; };
 		04B15E0519DA8D0900FF7039 /* Bachground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Bachground.png; sourceTree = "<group>"; };
 		04D7C8B31C1FA9580053F651 /* EverStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EverStoryboard.storyboard; sourceTree = "<group>"; };
+		0F2A0CAF1D24F306009D11F6 /* SPAJ E Application List.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SPAJ E Application List.h"; path = "SPAJ/SPAJ E Application List.h"; sourceTree = "<group>"; };
+		0F2A0CB01D24F306009D11F6 /* SPAJ E Application List.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "SPAJ E Application List.m"; path = "SPAJ/SPAJ E Application List.m"; sourceTree = "<group>"; };
+		0F2A0CB11D24F306009D11F6 /* SPAJ E Application List.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "SPAJ E Application List.xib"; path = "SPAJ/SPAJ E Application List.xib"; sourceTree = "<group>"; };
 		0F3268221D1A93A4001A9021 /* Bless_SPAJ.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Bless_SPAJ.xcdatamodel; sourceTree = "<group>"; };
 		0F3268231D1A93A4001A9021 /* Button.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Button.h; path = SPAJ/Button.h; sourceTree = "<group>"; };
 		0F3268241D1A93A4001A9021 /* Button.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Button.m; path = SPAJ/Button.m; sourceTree = "<group>"; };
@@ -1000,6 +1018,27 @@
 		0F3268701D1BBDCB001A9021 /* String.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = String.h; path = SPAJ/String.h; sourceTree = "<group>"; };
 		0F3268711D1BBDCB001A9021 /* String.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = String.m; path = SPAJ/String.m; sourceTree = "<group>"; };
 		0F3268731D1BD140001A9021 /* Image.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Image.xcassets; path = SPAJ/Image.xcassets; sourceTree = "<group>"; };
+		0F48376A1D334B16009A45D4 /* Alert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Alert.h; path = SPAJ/Alert.h; sourceTree = "<group>"; };
+		0F48376B1D334B16009A45D4 /* Alert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Alert.m; path = SPAJ/Alert.m; sourceTree = "<group>"; };
+		0FF8455B1D227383008CF861 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		0FF8455D1D2376A8008CF861 /* SPAJ Submitted List Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "SPAJ Submitted List Cell.xib"; path = "SPAJ/SPAJ Submitted List Cell.xib"; sourceTree = "<group>"; };
+		0FF8455F1D237732008CF861 /* SPAJ Existing List Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SPAJ Existing List Cell.h"; path = "SPAJ/SPAJ Existing List Cell.h"; sourceTree = "<group>"; };
+		0FF845601D237732008CF861 /* SPAJ Existing List Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "SPAJ Existing List Cell.m"; path = "SPAJ/SPAJ Existing List Cell.m"; sourceTree = "<group>"; };
+		0FF845611D237732008CF861 /* SPAJ Existing List Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "SPAJ Existing List Cell.xib"; path = "SPAJ/SPAJ Existing List Cell.xib"; sourceTree = "<group>"; };
+		0FF845621D237732008CF861 /* SPAJ Submitted List Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SPAJ Submitted List Cell.h"; path = "SPAJ/SPAJ Submitted List Cell.h"; sourceTree = "<group>"; };
+		0FF845631D237732008CF861 /* SPAJ Submitted List Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "SPAJ Submitted List Cell.m"; path = "SPAJ/SPAJ Submitted List Cell.m"; sourceTree = "<group>"; };
+		0FF845C11D23ACC2008CF861 /* SPAJ E Application List Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SPAJ E Application List Cell.h"; path = "SPAJ/SPAJ E Application List Cell.h"; sourceTree = "<group>"; };
+		0FF845C21D23ACC2008CF861 /* SPAJ E Application List Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "SPAJ E Application List Cell.m"; path = "SPAJ/SPAJ E Application List Cell.m"; sourceTree = "<group>"; };
+		0FF845C31D23ACC2008CF861 /* SPAJ E Application List Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "SPAJ E Application List Cell.xib"; path = "SPAJ/SPAJ E Application List Cell.xib"; sourceTree = "<group>"; };
+		0FFA185C1D1D1FB100C63A47 /* SPAJ Add Detail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SPAJ Add Detail.h"; path = "SPAJ/SPAJ Add Detail.h"; sourceTree = "<group>"; };
+		0FFA185D1D1D1FB100C63A47 /* SPAJ Add Detail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "SPAJ Add Detail.m"; path = "SPAJ/SPAJ Add Detail.m"; sourceTree = "<group>"; };
+		0FFA185E1D1D1FB100C63A47 /* SPAJ Add Detail.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "SPAJ Add Detail.xib"; path = "SPAJ/SPAJ Add Detail.xib"; sourceTree = "<group>"; };
+		0FFA18621D21283300C63A47 /* Entity SPAJ Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Entity SPAJ Header.h"; path = "SPAJ/Entity SPAJ Header.h"; sourceTree = "<group>"; };
+		0FFA18631D21283300C63A47 /* Entity SPAJ Header.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Entity SPAJ Header.m"; path = "SPAJ/Entity SPAJ Header.m"; sourceTree = "<group>"; };
+		0FFA187B1D2134AD00C63A47 /* Query SPAJ Header.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Query SPAJ Header.m"; path = "SPAJ/Query SPAJ Header.m"; sourceTree = "<group>"; };
+		0FFA187C1D2134AD00C63A47 /* Query SPAJ Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Query SPAJ Header.h"; path = "SPAJ/Query SPAJ Header.h"; sourceTree = "<group>"; };
+		0FFA187E1D2262E700C63A47 /* Insert Initialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Insert Initialization.h"; path = "SPAJ/Insert Initialization.h"; sourceTree = "<group>"; };
+		0FFA187F1D2262E700C63A47 /* Insert Initialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Insert Initialization.m"; path = "SPAJ/Insert Initialization.m"; sourceTree = "<group>"; };
 		161EA6BB1B131A9E009AF454 /* hladb.sqlite.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = hladb.sqlite.sql; path = database/src/hladb.sqlite.sql; sourceTree = "<group>"; };
 		162C3C0C1BBBD6430022CAF0 /* dbupdates-sample.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "dbupdates-sample.json"; sourceTree = "<group>"; };
 		162C3C0E1BBBD7270022CAF0 /* dbupdates */ = {isa = PBXFileReference; lastKnownFileType = folder; path = dbupdates; sourceTree = "<group>"; };
@@ -2463,6 +2502,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0FF8455C1D227383008CF861 /* CoreData.framework in Frameworks */,
 				6A002CF01850280A00161727 /* Security.framework in Frameworks */,
 				DE0296921CB4ED5600C1D5DF /* AdSupport.framework in Frameworks */,
 				DE80E44A1CA3FCEE00D9E775 /* CFNetwork.framework in Frameworks */,
@@ -2501,7 +2541,7 @@
 		0F3268201D1A9260001A9021 /* SPAJ */ = {
 			isa = PBXGroup;
 			children = (
-				0F3268211D1A93A4001A9021 /* Bless_SPAJ.xcdatamodeld */,
+				0FFA18611D21266000C63A47 /* Database */,
 				0F3268731D1BD140001A9021 /* Image.xcassets */,
 				0F3268631D1A97B9001A9021 /* Variable */,
 				0F3268621D1A979A001A9021 /* Style */,
@@ -2530,6 +2570,7 @@
 		0F3268631D1A97B9001A9021 /* Variable */ = {
 			isa = PBXGroup;
 			children = (
+				0FFA18651D21283800C63A47 /* Entity */,
 				0F3268651D1A97C8001A9021 /* Object */,
 				0F3268641D1A97C1001A9021 /* Constant */,
 			);
@@ -2566,10 +2607,13 @@
 		0F3268661D1A97F8001A9021 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0FFA185E1D1D1FB100C63A47 /* SPAJ Add Detail.xib */,
 				0F3268321D1A93A4001A9021 /* SPAJ Add Menu.xib */,
+				0F2A0CB11D24F306009D11F6 /* SPAJ E Application List.xib */,
 				0F3268351D1A93A4001A9021 /* SPAJ Existing List.xib */,
 				0F32683A1D1A93A4001A9021 /* SPAJ Main.xib */,
 				0F32683D1D1A93A4001A9021 /* SPAJ Submitted List.xib */,
+				0FF845741D23A3A4008CF861 /* Cell */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -2577,8 +2621,13 @@
 		0F3268681D1A99AE001A9021 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				0FF845751D23A3BB008CF861 /* Cell */,
+				0FFA185C1D1D1FB100C63A47 /* SPAJ Add Detail.h */,
+				0FFA185D1D1D1FB100C63A47 /* SPAJ Add Detail.m */,
 				0F3268301D1A93A4001A9021 /* SPAJ Add Menu.h */,
 				0F3268311D1A93A4001A9021 /* SPAJ Add Menu.m */,
+				0F2A0CAF1D24F306009D11F6 /* SPAJ E Application List.h */,
+				0F2A0CB01D24F306009D11F6 /* SPAJ E Application List.m */,
 				0F3268331D1A93A4001A9021 /* SPAJ Existing List.h */,
 				0F3268341D1A93A4001A9021 /* SPAJ Existing List.m */,
 				0F3268361D1A93A4001A9021 /* SPAJ Launch.h */,
@@ -2596,10 +2645,56 @@
 			children = (
 				0F3268401D1A93A4001A9021 /* User Interface.h */,
 				0F3268411D1A93A4001A9021 /* User Interface.m */,
+				0F48376A1D334B16009A45D4 /* Alert.h */,
+				0F48376B1D334B16009A45D4 /* Alert.m */,
 				0F3268441D1A93A4001A9021 /* Validation.h */,
 				0F3268451D1A93A4001A9021 /* Validation.m */,
 			);
 			name = Function;
+			sourceTree = "<group>";
+		};
+		0FF845741D23A3A4008CF861 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				0FF845C31D23ACC2008CF861 /* SPAJ E Application List Cell.xib */,
+				0FF845611D237732008CF861 /* SPAJ Existing List Cell.xib */,
+				0FF8455D1D2376A8008CF861 /* SPAJ Submitted List Cell.xib */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		0FF845751D23A3BB008CF861 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				0FF845C11D23ACC2008CF861 /* SPAJ E Application List Cell.h */,
+				0FF845C21D23ACC2008CF861 /* SPAJ E Application List Cell.m */,
+				0FF8455F1D237732008CF861 /* SPAJ Existing List Cell.h */,
+				0FF845601D237732008CF861 /* SPAJ Existing List Cell.m */,
+				0FF845621D237732008CF861 /* SPAJ Submitted List Cell.h */,
+				0FF845631D237732008CF861 /* SPAJ Submitted List Cell.m */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		0FFA18611D21266000C63A47 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				0F3268211D1A93A4001A9021 /* Bless_SPAJ.xcdatamodeld */,
+				0FFA187C1D2134AD00C63A47 /* Query SPAJ Header.h */,
+				0FFA187B1D2134AD00C63A47 /* Query SPAJ Header.m */,
+				0FFA187E1D2262E700C63A47 /* Insert Initialization.h */,
+				0FFA187F1D2262E700C63A47 /* Insert Initialization.m */,
+			);
+			name = Database;
+			sourceTree = "<group>";
+		};
+		0FFA18651D21283800C63A47 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				0FFA18621D21283300C63A47 /* Entity SPAJ Header.h */,
+				0FFA18631D21283300C63A47 /* Entity SPAJ Header.m */,
+			);
+			name = Entity;
 			sourceTree = "<group>";
 		};
 		17A298F51C6091EB00C2537A /* BcaFont */ = {
@@ -4488,8 +4583,8 @@
 				4239AE241946DAE100BD6F53 /* eSignature */,
 				428BB4801941CF4600FDF1E2 /* NullValidations */,
 				2994B3D818E1211600B0D4D2 /* XMLToPDF */,
-				6C0B08CD18D1979B00826FC9 /* underwriting */,
 				6A5E1C441897459E00815C33 /* chilkat */,
+				6C0B08CD18D1979B00826FC9 /* underwriting */,
 				0F3268201D1A9260001A9021 /* SPAJ */,
 				6A3D70CC188A4B8B000B2097 /* XMLObjects */,
 				6A16C1A018893C0E00F7EFFA /* NDHTMLtoPDF */,
@@ -4529,6 +4624,7 @@
 		C4E9D1931612C64900016053 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0FF8455B1D227383008CF861 /* CoreData.framework */,
 				DE0296911CB4ED5600C1D5DF /* AdSupport.framework */,
 				DE06FFD11CABCB8200E4DE3A /* libFTPFileSynchronization.a */,
 				DE06FFCB1CABBBC800E4DE3A /* xibLibrary.bundle */,
@@ -5397,6 +5493,7 @@
 				17A2991F1C60A0DB00C2537A /* HelveticaLTStd-LightObl.otf in Resources */,
 				17A299201C60A0DB00C2537A /* HelveticaLTStd-Obl.otf in Resources */,
 				17F10EB11C6C85DA002C32D3 /* btn_reset.png in Resources */,
+				0F2A0CB31D24F306009D11F6 /* SPAJ E Application List.xib in Resources */,
 				17A299211C60A0DB00C2537A /* HelveticaLTStd-Roman.otf in Resources */,
 				A1FCF07E1CA80B92000D85E1 /* Icon_SaveAs.png in Resources */,
 				17A299221C60A0DB00C2537A /* HelveticaLTStd-UltraComp.otf in Resources */,
@@ -5415,6 +5512,7 @@
 				C4E9D1C71612C78400016053 /* magnifying-glass@2x.png in Resources */,
 				C4EB49101615327E00C7FC8C /* button_hover.png in Resources */,
 				C4EB49111615327E00C7FC8C /* button.png in Resources */,
+				0FF845651D237732008CF861 /* SPAJ Existing List Cell.xib in Resources */,
 				C4EB49121615327E00C7FC8C /* header-repeted.png in Resources */,
 				AA4EF7611C85A4260050CCD8 /* Reader-Thumbs@2x.png in Resources */,
 				C4EB49131615327E00C7FC8C /* header.png in Resources */,
@@ -5552,6 +5650,7 @@
 				EF90B0C6178D38BF00FEC129 /* disclosure_indicator.png in Resources */,
 				431376CE1D0E6E35007D3BF1 /* DataNasabahViewController.xib in Resources */,
 				EF90B0CE178E7EBC00FEC129 /* Relationship.plist in Resources */,
+				0FFA18601D1D1FB100C63A47 /* SPAJ Add Detail.xib in Resources */,
 				EFBECF3B1791167E00C3D177 /* iconComplete.png in Resources */,
 				EFBECF3C1791167E00C3D177 /* iconNotComplete.png in Resources */,
 				EF30C75F17A63E61009A301A /* Nationality.plist in Resources */,
@@ -5559,6 +5658,7 @@
 				439982721D07FEE9009CFEB2 /* CFFQuestionsViewController.xib in Resources */,
 				DE0F59FC1CF2FF5C0087483D /* BCA_Rates.sqlite in Resources */,
 				C38190B31C28F1FA001E0C9E /* EappChecklist.storyboard in Resources */,
+				0FF845C51D23ACC2008CF861 /* SPAJ E Application List Cell.xib in Resources */,
 				C4EEB6A217C4AFAF00F268B3 /* EverLife_SI in Resources */,
 				AA4EF6DD1C8572B00050CCD8 /* ProductInformation.xib in Resources */,
 				6A6ED09717D49937009FFA56 /* Race.plist in Resources */,
@@ -5695,6 +5795,7 @@
 				A17D8A2C199C611200C2A269 /* P5-Line.jpg in Resources */,
 				A1442C531C819834009B14C9 /* Icon Brochure & save as-01-01.png in Resources */,
 				6AA78DB1199E114400013566 /* DiscloseBtnFinea.png in Resources */,
+				0FF8455E1D2376A8008CF861 /* SPAJ Submitted List Cell.xib in Resources */,
 				A1A8312019A1978400C0302D /* P2-1-Row3.jpg in Resources */,
 				A1A8312219A1978D00C0302D /* P2-1-Row2.jpg in Resources */,
 				A170C12E19A6052A0073325B /* P2-1Full.png in Resources */,
@@ -5804,6 +5905,7 @@
 				EF059839161A8BD1004A9095 /* NewLAViewController.m in Sources */,
 				EF05983F161A8C85004A9095 /* ListingTbViewController.m in Sources */,
 				43C166191C99448500001691 /* ModelKodepos.m in Sources */,
+				0F48376C1D334B16009A45D4 /* Alert.m in Sources */,
 				EF059842161A901A004A9095 /* PayorViewController.m in Sources */,
 				EF059845161A9055004A9095 /* SecondLAViewController.m in Sources */,
 				0F3268491D1A93A4001A9021 /* Font Size.m in Sources */,
@@ -5831,6 +5933,7 @@
 				C418112816561D87006A05B9 /* SettingUserProfile.m in Sources */,
 				C4F45DF1165B38A20035CAA9 /* PasswordTips.m in Sources */,
 				EF1343BD165C7CD600BF69B3 /* RiderDeducTb.m in Sources */,
+				0F2A0CB21D24F306009D11F6 /* SPAJ E Application List.m in Sources */,
 				EF1343C1165C7CFD00BF69B3 /* RiderPlanTb.m in Sources */,
 				C4F45DFF165D0C8B0035CAA9 /* SettingSecurityQuestion.m in Sources */,
 				EFB3D5871685604400A7B517 /* PayorHandler.m in Sources */,
@@ -5901,6 +6004,7 @@
 				EFD44A9C177D2072002456F5 /* MasterMenuCFF.m in Sources */,
 				EF1ADDD217812AED00996388 /* PotentialArea.m in Sources */,
 				EF1ADDD51781372D00996388 /* Retirement.m in Sources */,
+				0FF845661D237732008CF861 /* SPAJ Submitted List Cell.m in Sources */,
 				EF1ADDD817815F7300996388 /* RecordAdvice.m in Sources */,
 				178A076B1C7DAD7300B91582 /* ExtraPremi.m in Sources */,
 				EF1ADDE117826CCC00996388 /* Education.m in Sources */,
@@ -6096,6 +6200,7 @@
 				C30A25F517F3CB7100613A0F /* MainSubDetailsVC.m in Sources */,
 				C30A25F617F3CB7100613A0F /* MainTrusteesVC.m in Sources */,
 				C30A25F717F3CB7100613A0F /* MainViewInsured.m in Sources */,
+				0FFA18641D21283300C63A47 /* Entity SPAJ Header.m in Sources */,
 				C30A25F817F3CB7100613A0F /* MasterMenuCFFWithData.m in Sources */,
 				C30A25F917F3CB7100613A0F /* PolicyDetails.m in Sources */,
 				C30A25FA17F3CB7100613A0F /* ViewInsuredRecord.m in Sources */,
@@ -6135,9 +6240,11 @@
 				DEE2B7C71C9FADCF00B7283A /* DBMigration.m in Sources */,
 				431F5FE41C6D93E800A9CA6C /* ProspectListingTableViewCell.m in Sources */,
 				4212708118459CBB000C2156 /* HealthQuestionsPO.m in Sources */,
+				0FFA185F1D1D1FB100C63A47 /* SPAJ Add Detail.m in Sources */,
 				4212708218459CBB000C2156 /* HealthQuestionsVC.m in Sources */,
 				4212708818459FC0000C2156 /* eAppReport.m in Sources */,
 				4212708918459FC0000C2156 /* ReportCell.m in Sources */,
+				0FF845C41D23ACC2008CF861 /* SPAJ E Application List Cell.m in Sources */,
 				4212708C1845DF33000C2156 /* eConfirmationCell.m in Sources */,
 				AA4EF76D1C85A4260050CCD8 /* ReaderThumbFetch.m in Sources */,
 				42D3277618487F2D0030AA7A /* NewGroupListing.m in Sources */,
@@ -6184,6 +6291,7 @@
 				2994B42418E121AE00B0D4D2 /* P2Table.m in Sources */,
 				2994B42618E121AE00B0D4D2 /* Table2.m in Sources */,
 				2994B42818E121AE00B0D4D2 /* Table3.m in Sources */,
+				0FFA18801D2262E700C63A47 /* Insert Initialization.m in Sources */,
 				2994B42B18E121AE00B0D4D2 /* XMLDictionary.m in Sources */,
 				6CB3126118EE4E2B00A323A4 /* LoginVar.m in Sources */,
 				0F3268501D1A93A4001A9021 /* SPAJ Existing List.m in Sources */,
@@ -6243,6 +6351,7 @@
 				0F3268591D1A93A4001A9021 /* User.m in Sources */,
 				4239AEDF1946DAE200BD6F53 /* PDFStream.m in Sources */,
 				43B590971CA2702400DC53AC /* KeluargakuTableViewCell.m in Sources */,
+				0FF845641D237732008CF861 /* SPAJ Existing List Cell.m in Sources */,
 				4239AEE01946DAE200BD6F53 /* PDFObjectParser.m in Sources */,
 				4239AEE11946DAE200BD6F53 /* PDFUtility.m in Sources */,
 				4239AEE21946DAE200BD6F53 /* PDFFormButtonField.m in Sources */,
@@ -6285,6 +6394,7 @@
 				C39046DE1B8EBB0700DE1E5B /* CameraViewController.m in Sources */,
 				C35EC8601B983C5D00738933 /* PymtWebViewViewController.m in Sources */,
 				AA4EF7721C85A4260050CCD8 /* ReaderThumbView.m in Sources */,
+				0FFA187D1D2134AD00C63A47 /* Query SPAJ Header.m in Sources */,
 				FA49F2891B9EE4E500B20169 /* DBUpdater.m in Sources */,
 				FA9C9D341B95772300E15346 /* WBSummaryBenefitObject.m in Sources */,
 				AAAC9D0A1C71BAF3002E3190 /* WebServiceUtilities.m in Sources */,

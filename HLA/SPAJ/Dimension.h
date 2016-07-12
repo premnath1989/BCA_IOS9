@@ -81,3 +81,7 @@
     extern int const BUTTON_HEIGHT_PURE;
 
     extern int const BUTTON_CONFIRMSPAJ_HEIGHT;
+
+    // TABLE
+
+    extern int const TABLE_STACKVIEW_SPACING;

@@ -9,15 +9,16 @@
 
 // IMPORT
 
-#import "SPAJ Submitted List.h"
+#import "SPAJ E Application List.h"
 #import "Query SPAJ Header.h"
-#import "SPAJ Submitted List Cell.h"
+#import "SPAJ E Application List Cell.h"
 #import "String.h"
+
 
 
 // DECLARATION
 
-@interface SPAJSubmittedList ()
+@interface SPAJEApplicationList ()
 
 
 
@@ -26,17 +27,17 @@
 
 // IMPLEMENTATION
 
-@implementation SPAJSubmittedList
+@implementation SPAJEApplicationList
 
     // SYNTHESIZE
 
     @synthesize querySPAJHeader = _querySPAJHeader;
-    @synthesize arrayQuerySubmitted = _arrayQuerySubmitted;
     @synthesize functionUserInterface = _functionUserInterface;
+    @synthesize arrayQueryEApplication = _arrayQueryEApplication;
     @synthesize arrayTextField = _arrayTextField;
+    @synthesize functionAlert = _functionAlert;
     @synthesize intQueryID = _intQueryID;
     @synthesize stringQueryName = _stringQueryName;
-    @synthesize functionAlert = _functionAlert;
 
 
     // DID LOAD
@@ -49,7 +50,7 @@
         
         // INITIALIZATION
         
-        _querySPAJHeader = [[QuerySPAJHeader alloc] init];
+        _querySPAJHeader = [[QuerySPAJHeader alloc]init];
         _functionUserInterface = [[UserInterface alloc] init];
         _functionAlert = [[Alert alloc] init];
         
@@ -58,8 +59,7 @@
         
         _arrayTextField = [[NSMutableArray alloc] init];
         [_arrayTextField addObject:_textFieldName];
-        [_arrayTextField addObject:_textFieldSocialNumber];
-        [_arrayTextField addObject:_textFieldSPAJNumber];
+        [_arrayTextField addObject:_textFieldEApplicationNumber];
         
         [_tableView.delegate self];
         [_tableView.dataSource self];
@@ -71,19 +71,16 @@
         
         
         // LOCALIZATION
-        
-        _labelPageTitle.text = NSLocalizedString(@"TITLE_SPAJSUBMITTEDLIST", nil);
+          
+        _labelPageTitle.text = NSLocalizedString(@"TITLE_EAPPLICATIONLIST", nil);
         
         _labelFieldName.text = NSLocalizedString(@"FIELD_NAME", nil);
-        _labelFieldSPAJNumber.text = NSLocalizedString(@"FIELD_SPAJNUMBER", nil);
-        _labelFieldSocialNumber.text = NSLocalizedString(@"FIELD_SOCIALNUMBER", nil);
-        
+        _labelFieldEApplicationNumber.text = NSLocalizedString(@"FIELD_EAPPLICATIONNUMBER", nil);
         _labelTablePolicyHolder.text = NSLocalizedString(@"TABLE_HEADER_POLICYHOLDER", nil);
         _labelTableSPAJNumber.text = NSLocalizedString(@"TABLE_HEADER_SPAJNUMBER", nil);
-        _labelTableSubmittedDate.text = NSLocalizedString(@"TABLE_HEADER_SUBMITTEDDATE", nil);
-        _labelTableProduct.text = NSLocalizedString(@"TABLE_HEADER_PRODUCT", nil);
+        _labelTableLastUpdateOn.text = NSLocalizedString(@"TABLE_HEADER_LASTUPDATEDON", nil);
+        _labelTableEApp.text = NSLocalizedString(@"TABLE_HEADER_EAPPLICATIONNUMBER", nil);
         _labelTableState.text = NSLocalizedString(@"TABLE_HEADER_STATUS", nil);
-        _labelTableView.text = NSLocalizedString(@"TABLE_HEADER_VIEW", nil);
         
         [_buttonSearch setTitle:NSLocalizedString(@"BUTTON_SEARCH", nil) forState:UIControlStateNormal];
         [_buttonReset setTitle:NSLocalizedString(@"BUTTON_RESET", nil) forState:UIControlStateNormal];
@@ -91,31 +88,22 @@
     }
 
 
-    // ON PAGE FUNCTION
+    // FUNCTION ON PAGE
 
     - (void) generateQuery
     {
         NSString* stringName = [_functionUserInterface generateQueryParameter:_textFieldName.text];
-        NSString* stringSocialNumber = [_functionUserInterface generateQueryParameter:_textFieldSocialNumber.text];
-        NSString* stringSPAJNumber = [_functionUserInterface generateQueryParameter:_textFieldSPAJNumber.text];
+        NSString* stringEApplicationNumber = [_functionUserInterface generateQueryParameter:_textFieldEApplicationNumber.text];
         
-        _arrayQuerySubmitted = [_querySPAJHeader selectForSubmittedList:stringName stringSocialNumber:stringSocialNumber stringSPAJNumber:stringSPAJNumber];
+        _arrayQueryEApplication = [_querySPAJHeader selectForEApplicationList:stringName stringEApplicationNumber:stringEApplicationNumber];
         
         [self.tableView reloadData];
     }
-
 
     // ACTION
 
     - (IBAction)actionSearch:(id)sender
     {
-        [self generateQuery];
-    };
-
-    - (IBAction)actionReset:(id)sender
-    {
-        [_functionUserInterface resetTextField:_arrayTextField];
-        
         [self generateQuery];
     };
 
@@ -129,12 +117,19 @@
         [self presentViewController:alertController animated:true completion:nil];
     };
 
+    - (IBAction)actionReset:(id)sender
+    {
+        [_functionUserInterface resetTextField:_arrayTextField];
+        
+        [self generateQuery];
+    };
+
 
     // TABLE
 
     - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
     {
-        return _arrayQuerySubmitted.count;
+        return _arrayQueryEApplication.count;
     }
 
     - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
@@ -149,40 +144,39 @@
 
     - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
     {
-        SPAJSubmittedListCell *cellSPAJSubmitted = (SPAJSubmittedListCell *)[tableView dequeueReusableCellWithIdentifier:@"SPAJSubmittedListCell"];
+        SPAJEApplicationListCell *cellSPAJEApplication = (SPAJEApplicationListCell *)[tableView dequeueReusableCellWithIdentifier:@"SPAJEApplicationListCell"];
         
-        if (cellSPAJSubmitted == nil)
+        if (cellSPAJEApplication == nil)
         {
-            NSArray *arrayNIB = [[NSBundle mainBundle] loadNibNamed:@"SPAJ Submitted List Cell" owner:self options:nil];
-            cellSPAJSubmitted = [arrayNIB objectAtIndex:0];
+            NSArray *arrayNIB = [[NSBundle mainBundle] loadNibNamed:@"SPAJ E Application List Cell" owner:self options:nil];
+            cellSPAJEApplication = [arrayNIB objectAtIndex:0];
         }
         else
         {
             
         }
         
-        NSManagedObject* querySubmitted = [_arrayQuerySubmitted objectAtIndex:[indexPath row]];
+        NSManagedObject* queryEApplication = [_arrayQueryEApplication objectAtIndex:[indexPath row]];
         
-        NSString* stringUpdatedOnDate = [_functionUserInterface generateDate:[querySubmitted valueForKey:COLUMN_SPAJHEADER_UPDATEDON]];
-        NSString* stringUpdatedOnTime = [_functionUserInterface generateTime:[querySubmitted valueForKey:COLUMN_SPAJHEADER_UPDATEDON] ];
+        NSString* stringUpdatedOnDate = [_functionUserInterface generateDate:[queryEApplication valueForKey:COLUMN_SPAJHEADER_UPDATEDON]];
+        NSString* stringUpdatedOnTime = [_functionUserInterface generateTime:[queryEApplication valueForKey:COLUMN_SPAJHEADER_UPDATEDON] ];
         
-        [cellSPAJSubmitted.labelName setText: [querySubmitted valueForKey:COLUMN_SPAJHEADER_NAME]];
-        [cellSPAJSubmitted.labelSocialNumber setText: [querySubmitted valueForKey:COLUMN_SPAJHEADER_SOCIALNUMBER]];
-        [cellSPAJSubmitted.labelSPAJNumber setText: [querySubmitted valueForKey:COLUMN_SPAJHEADER_SPAJNUMBER]];
-        [cellSPAJSubmitted.labelUpdatedOnDate setText: stringUpdatedOnDate];
-        [cellSPAJSubmitted.labelUpdatedOnTime setText: stringUpdatedOnTime];
-        [cellSPAJSubmitted.labelProduct setText: [querySubmitted valueForKey:COLUMN_SPAJHEADER_PRODUCTID]];
-        [cellSPAJSubmitted.labelState setText: [querySubmitted valueForKey:COLUMN_SPAJHEADER_STATE]];
-        [cellSPAJSubmitted.buttonView  setTitle:NSLocalizedString(@"BUTTON_VIEW", nil) forState:UIControlStateNormal];
-        return cellSPAJSubmitted;
+        [cellSPAJEApplication.labelName setText: [queryEApplication valueForKey:COLUMN_SPAJHEADER_NAME]];
+        [cellSPAJEApplication.labelSocialNumber setText: [queryEApplication valueForKey:COLUMN_SPAJHEADER_SOCIALNUMBER]];
+        [cellSPAJEApplication.labelEApplicationNumber setText: [queryEApplication valueForKey:COLUMN_SPAJHEADER_EAPPLICATIONNUMBER]];
+        [cellSPAJEApplication.labelSPAJNumber setText: [queryEApplication valueForKey:COLUMN_SPAJHEADER_SPAJNUMBER]];
+        [cellSPAJEApplication.labelUpdatedOnDate setText: stringUpdatedOnDate];
+        [cellSPAJEApplication.labelUpdatedOnTime setText: stringUpdatedOnTime];
+        [cellSPAJEApplication.labelState setText: [queryEApplication valueForKey:COLUMN_SPAJHEADER_STATE]];
+        return cellSPAJEApplication;
     }
 
     - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     {
-        SPAJSubmittedListCell *cellSPAJSubmitted = [tableView cellForRowAtIndexPath:indexPath];
+        SPAJEApplicationListCell *cellSPAJEApplication = [tableView cellForRowAtIndexPath:indexPath];
         
-        _intQueryID = [cellSPAJSubmitted intID];
-        _stringQueryName = [cellSPAJSubmitted.labelName text];
+        _intQueryID = [cellSPAJEApplication intID];
+        _stringQueryName = [cellSPAJEApplication.labelName text];
     }
 
 
