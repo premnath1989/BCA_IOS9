@@ -14,6 +14,8 @@
     FMResultSet *results;
 }
 -(void)saveHtmlData:(NSDictionary *)dictHtmlData;
+-(void)saveGlobalHtmlData:(NSDictionary *)dictHtmlData;
+-(void)updateGlobalHtmlData:(NSString *)htmlSection;
 -(void)updateHtmlData:(NSDictionary *)dictHtmlData;
 -(NSMutableArray *)selectHtmlData:(int)CFFHtmlID HtmlSection:(NSString *)cffHtmlSection;
 -(NSDictionary *)selectActiveHtml;
