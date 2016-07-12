@@ -50,7 +50,14 @@
                                         [item objectForKey:@"CFFSection"],@"CFFHtmlSection",
                                         [item objectForKey:@"FileName"],@"CFFHtmlName",
                                         [item objectForKey:@"Status"],@"CFFHtmlStatus", nil];
-            [modelCFFHtml saveHtmlData:dictHtmlData];
+
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                [modelCFFHtml updateHtmlData:dictHtmlData];
+                // Some long running task you want on another thread
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [modelCFFHtml saveHtmlData:dictHtmlData];
+                });
+            });
         }
     }
     else{

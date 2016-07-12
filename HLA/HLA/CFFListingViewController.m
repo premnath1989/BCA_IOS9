@@ -95,8 +95,8 @@
     
     [self loadCFFTransaction];
     NSString* fileName = @"20160701171527.html";
-    [cffAPIController apiCallCFFHtmtable:@"http://192.168.0.109:8282/Service2.svc/getAllData"];
-    [cffAPIController apiCallCrateCFFHtml:[NSString stringWithFormat:@"http://192.168.0.109:8282/Service2.svc/GetHtmlFile?fileName=%@",fileName]];
+    [cffAPIController apiCallCFFHtmtable:@"http://mposws.azurewebsites.net/Service2.svc/getAllData"];
+    [cffAPIController apiCallCrateCFFHtml:[NSString stringWithFormat:@"http://mposws.azurewebsites.net/Service2.svc/GetHtmlFile?fileName=%@",fileName]];
     //[self createHTMLFile];
     // Do any additional setup after loading the view from its nib.
 }
@@ -512,8 +512,12 @@
 -(void)CreateNewCFFTransaction{
     NSString* dateToday=[formatter getDateToday:@"yyyy-MM-dd"];
     NSDictionary* dictActiveHtml = [[NSDictionary alloc]initWithDictionary:[modelCFFHtml selectActiveHtml]];
+    NSDictionary* dictCustomerStatementCFFID=[[NSDictionary alloc]initWithDictionary:[modelCFFHtml selectActiveHtmlForSection:@"CS"]];
+    NSDictionary* dictCustomerNeedsCFFID=[[NSDictionary alloc]initWithDictionary:[modelCFFHtml selectActiveHtmlForSection:@"CN"]];
+    NSDictionary* dictCustomerRiskCFFID=[[NSDictionary alloc]initWithDictionary:[modelCFFHtml selectActiveHtmlForSection:@"CR"]];
+    NSDictionary* dictPotentialDiscussionCFFID=[[NSDictionary alloc]initWithDictionary:[modelCFFHtml selectActiveHtmlForSection:@"PD"]];
     
-    NSDictionary* dictCFFTransaction = [[NSDictionary alloc]initWithObjectsAndKeys:[dictActiveHtml valueForKey:@"CFFID"],@"CFFID",[NSNumber numberWithInteger:clientProfileID],@"ProspectIndexNo",dateToday,@"CFFDateCreated",@"",@"CreatedBy",dateToday,@"CFFDateModified",@"",@"ModifiedBy",@"Not Complete",@"CFFStatus", nil];
+    NSDictionary* dictCFFTransaction = [[NSDictionary alloc]initWithObjectsAndKeys:[dictActiveHtml valueForKey:@"CFFID"],@"CFFID",[NSNumber numberWithInteger:clientProfileID],@"ProspectIndexNo",dateToday,@"CFFDateCreated",@"",@"CreatedBy",dateToday,@"CFFDateModified",@"",@"ModifiedBy",@"Not Complete",@"CFFStatus",[dictCustomerStatementCFFID valueForKey:@"CFFID"],@"CustomerStatementCFFID",[dictCustomerNeedsCFFID valueForKey:@"CFFID"],@"CustomerNeedsCFFID",[dictCustomerRiskCFFID valueForKey:@"CFFID"],@"CustomerRiskCFFID",[dictPotentialDiscussionCFFID valueForKey:@"CFFID"],@"PotentialDiscussionCFFID", nil];
     [modelCFFTransaction saveCFFTransaction:dictCFFTransaction];
 }
 

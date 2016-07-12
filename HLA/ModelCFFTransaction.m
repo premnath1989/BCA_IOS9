@@ -17,14 +17,18 @@
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     [database open];
     
-    BOOL success = [database executeUpdate:@"insert into CFFTransaction (CFFID, ProspectIndexNo, CFFDateCreated, CreatedBy,CFFDateModified,ModifiedBy,CFFStatus) values (?,?,?,?,?,?,?)" ,
+    BOOL success = [database executeUpdate:@"insert into CFFTransaction (CFFID, ProspectIndexNo, CFFDateCreated, CreatedBy,CFFDateModified,ModifiedBy,CFFStatus,CustomerStatementCFFID,CustomerNeedsCFFID,CustomerRiskCFFID,PotentialDiscussionCFFID) values (?,?,?,?,?,?,?,?,?,?,?)" ,
                     [cffTransactionDictionary valueForKey:@"CFFID"],
                     [cffTransactionDictionary valueForKey:@"ProspectIndexNo"],
                     [cffTransactionDictionary valueForKey:@"CFFDateCreated"],
                     [cffTransactionDictionary valueForKey:@"CreatedBy"],
                     [cffTransactionDictionary valueForKey:@"CFFDateModified"],
                     [cffTransactionDictionary valueForKey:@"ModifiedBy"],
-                    [cffTransactionDictionary valueForKey:@"CFFStatus"]];
+                    [cffTransactionDictionary valueForKey:@"CFFStatus"],
+                    [cffTransactionDictionary valueForKey:@"CustomerStatementCFFID"],
+                    [cffTransactionDictionary valueForKey:@"CustomerNeedsCFFID"],
+                    [cffTransactionDictionary valueForKey:@"CustomerRiskCFFID"],
+                    [cffTransactionDictionary valueForKey:@"PotentialDiscussionCFFID"]];
     
     if (!success) {
         NSLog(@"%s: insert error: %@", __FUNCTION__, [database lastErrorMessage]);
