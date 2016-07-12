@@ -110,7 +110,7 @@
 @synthesize outletOccup,ClientSmoker,btnOfficeCountry,GSTRigperson,GSTRigExempted,outletRigDate;
 @synthesize myScrollView,outletGroup,OtherIDType,txtIDType,txtOtherIDType;
 @synthesize txtFullName, ContactTypeTracker,segSmoker,outletTitle,outletNationality,outletRace,outletMaritalStatus,outletReligion,segRigPerson,txtRigDate,txtRigNO,segRigExempted,btnregDare;
-@synthesize segGender, ContactType, DOB, gender, SelectedStateCode, SelectedOfficeStateCode, IDTypeCodeSelected,OccupCodeSelected,pp,OccpCatCode;
+@synthesize segGender, ContactType, DOB, gender, SelectedStateCode, SelectedOfficeStateCode, IDTypeCodeSelected,IDTypeIdentifierSelected,OccupCodeSelected,pp,OccpCatCode;
 @synthesize OccupationList = _OccupationList;
 @synthesize OccupationListPopover = _OccupationListPopover;
 @synthesize SIDate = _SIDate;
@@ -2931,7 +2931,8 @@ bool RegDatehandling;
                 religion = [outletReligion.titleLabel.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
                 
                 //ENS: Save othertype with code
-                othertype = IDTypeCodeSelected;
+                //othertype = IDTypeCodeSelected;
+                othertype = IDTypeIdentifierSelected;
                 if (IDTypeCodeSelected == NULL) {
                     othertype = @"";
                 }
@@ -3072,7 +3073,7 @@ bool RegDatehandling;
                     
                     insertSQL = [NSString stringWithFormat:
                                  @"UPDATE prospect_profile set \"ProspectName\"=\'%@\', \"ProspectDOB\"=\"%@\",\"GST_registered\"=\"%@\",\"GST_registrationNo\"=\"%@\",\"GST_registrationDate\"=\"%@\",\"GST_exempted\"=\"%@\", \"ProspectGender\"=\"%@\", \"ResidenceAddress1\"=\"%@\", \"ResidenceAddress2\"=\"%@\", \"ResidenceAddress3\"=\"%@\", \"ResidenceAddressTown\"=\"%@\", \"ResidenceAddressState\"=\"%@\", \"ResidenceAddressPostCode\"=\"%@\", \"ResidenceAddressCountry\"=\"%@\", \"OfficeAddress1\"=\"%@\", \"OfficeAddress2\"=\"%@\", \"OfficeAddress3\"=\"%@\", \"OfficeAddressTown\"=\"%@\",\"OfficeAddressState\"=\"%@\", \"OfficeAddressPostCode\"=\"%@\", \"OfficeAddressCountry\"=\"%@\", \"ProspectEmail\"= \"%@\", \"ProspectOccupationCode\"=\"%@\", \"ExactDuties\"=\"%@\", \"ProspectRemark\"=\"%@\", \"DateModified\"=%@,\"ModifiedBy\"=\"%@\", \"ProspectGroup\"=\"%@\", \"ProspectTitle\"=\"%@\", \"IDTypeNo\"=\"%@\", \"OtherIDType\"=\"%@\", \"OtherIDTypeNo\"=\"%@\", \"Smoker\"=\"%@\", \"AnnualIncome\"=\"%@\", \"BussinessType\"=\"%@\", \"Race\"=\"%@\", \"MaritalStatus\"=\"%@\", \"Nationality\"=\"%@\", \"Religion\"=\"%@\",\"ProspectProfileChangesCounter\"=\"%@\", \"Prospect_IsGrouping\"=\"%@\", \"CountryOfBirth\"=\"%@\" where IndexNo = \"%@\" " ,
-                                 txtFullName.text, strDOB, GSTRigperson, txtRigNO.text, Rigdateoutlet,GSTRigExempted,gender, txtHomeAddr1.text, txtHomeAddr2.text, txtHomeAddr3.text, txtHomeTown.text, SelectedStateCode, txtHomePostCode.text, HomeCountry, txtOfficeAddr1.text, txtOfficeAddr2.text, txtOfficeAddr3.text, txtOfficeTown.text, SelectedOfficeStateCode, txtOfficePostcode.text, OffCountry, txtEmail.text, OccupCodeSelected, txtExactDuties.text, txtRemark.text, @"datetime(\"now\", \"+8 hour\")", @"1", group, TitleCodeSelected, txtIDType.text, [NSString stringWithFormat:@"VID%@",othertype], txtOtherIDType.text, ClientSmoker, txtAnnIncome.text, txtBussinessType.text, race, marital, nation, religion, str_counter,isGrouping, CountryOfBirth, prosID];
+                                 txtFullName.text, strDOB, GSTRigperson, txtRigNO.text, Rigdateoutlet,GSTRigExempted,gender, txtHomeAddr1.text, txtHomeAddr2.text, txtHomeAddr3.text, txtHomeTown.text, SelectedStateCode, txtHomePostCode.text, HomeCountry, txtOfficeAddr1.text, txtOfficeAddr2.text, txtOfficeAddr3.text, txtOfficeTown.text, SelectedOfficeStateCode, txtOfficePostcode.text, OffCountry, txtEmail.text, OccupCodeSelected, txtExactDuties.text, txtRemark.text, @"datetime(\"now\", \"+8 hour\")", @"1", group, TitleCodeSelected, txtIDType.text, othertype, txtOtherIDType.text, ClientSmoker, txtAnnIncome.text, txtBussinessType.text, race, marital, nation, religion, str_counter,isGrouping, CountryOfBirth, prosID];
                     
                 } else {
                     
@@ -5129,9 +5130,8 @@ bool RegDatehandling;
 	NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
 //	if (![[ClientProfile objectForKey:@"TabBar1"] isEqualToString:@"1"] && clickDone != 1) {
     if (![[ClientProfile objectForKey:@"TabBar1"] isEqualToString:@"1"]) {
-		NSString *otherIDType = [OtherIDType.titleLabel.text stringByTrimmingCharactersInSet:
-								 [NSCharacterSet whitespaceCharacterSet]];
-		NSString *input = [txtOtherIDType.text lowercaseString];
+		NSString *otherIDType = [OtherIDType.titleLabel.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        NSString *input = [txtOtherIDType.text lowercaseString];
 		NSString *str_otherid;
 		
 		for (NSArray* row in _tableCheckSameRecord.rows) {
@@ -5140,10 +5140,22 @@ bool RegDatehandling;
 			NSString *indexno = [row objectAtIndex:2];
 			
 			db_otherid = [db_otherid uppercaseString];
-			//convert db_otherid to desc
+			///convert db_otherid to desc
 			db_otherid = [self getOtherTypeDesc:db_otherid];
+            bool idTypeCodeChecking;
+            //NSString* db_otheridName;
+            /*if ([db_otherid length]>3){
+                idTypeCodeChecking = [IDTypeIdentifierSelected isEqualToString:db_otherid];
+            }
+            else{
+                idTypeCodeChecking = [IDTypeCodeSelected isEqualToString:db_otherid];
+            }*/
+            //db_otheridName = [self getOtherTypeDesc:db_otherid];
+            idTypeCodeChecking = [otherIDType isEqualToString:db_otherid];
+            
 			
-			if ([input isEqualToString:str_otherid] && [otherIDType isEqualToString:db_otherid]) {
+			//if ([input isEqualToString:str_otherid] && [otherIDType isEqualToString:db_otherid]) {
+            if ([input isEqualToString:str_otherid] && idTypeCodeChecking) {
 				if(Update_record == FALSE) {
 					getSameRecord_Indexno = indexno;
 					UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
@@ -8992,6 +9004,11 @@ bool RegDatehandling;
 	IDTypeCodeSelected = IDTypeCode;
 }
 
+- (void)IDTypeCodeSelectedWithIdentifier:(NSString *) IDTypeCode Identifier:(NSString *)identifier{
+	IDTypeCodeSelected = IDTypeCode;
+    IDTypeIdentifierSelected = identifier;
+}
+
 - (void)OccupCodeSelected:(NSString *)OccupCode {
     OccupCodeSelected = OccupCode;
     [self get_unemploy];
@@ -9215,7 +9232,7 @@ bool RegDatehandling;
 	
     FMDatabase *db = [FMDatabase databaseWithPath:databasePath];
     [db open];
-    FMResultSet *result = [db executeQuery:@"SELECT IdentityDesc FROM eProposal_Identification WHERE IdentityCode = ?", otherId];
+    FMResultSet *result = [db executeQuery:@"SELECT IdentityDesc FROM eProposal_Identification WHERE IdentityCode = ? or DataIdentifier = ?", otherId,otherId];
     
     NSInteger *count = 0;
     while ([result next]) {
@@ -9243,12 +9260,14 @@ bool RegDatehandling;
 	
     FMDatabase *db = [FMDatabase databaseWithPath:databasePath];
     [db open];
-    FMResultSet *result = [db executeQuery:@"SELECT IdentityCode FROM eProposal_Identification WHERE IdentityDesc = ?", otherId];
+    //FMResultSet *result = [db executeQuery:@"SELECT IdentityCode FROM eProposal_Identification WHERE IdentityDesc = ?", otherId];
+    FMResultSet *result = [db executeQuery:@"SELECT DataIdentifier FROM eProposal_Identification WHERE IdentityDesc = ?", otherId];
     
     NSInteger *count = 0;
     while ([result next]) {
 		count = count + 1;
-        code =[result objectForColumnName:@"IdentityCode"];
+        //code =[result objectForColumnName:@"IdentityCode"];
+        code =[result objectForColumnName:@"DataIdentifier"];
     }
     [result close];
     

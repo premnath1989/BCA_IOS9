@@ -10,7 +10,9 @@
 #import "CFFQuestionsViewController.h"
 #import "DataNasabahViewController.h"
 #import "AreaPotensialDiskusiViewController.h"
+#import "ProfilResikoViewController.h"
 #import "AnalisaKebutuhanNasabahViewController.h"
+#import "PernyataanNasabahViewController.h"
 #import "ProspectProfile.h"
 #import "ModelProspectProfile.h"
 #import "ModelCFFHtml.h"
@@ -26,6 +28,8 @@
     DataNasabahViewController* dataNasabahVC;
     AreaPotensialDiskusiViewController* areaPotensialDiskusiVC;
     AnalisaKebutuhanNasabahViewController* analisaKebutuhanNasabahVC;
+    ProfilResikoViewController* profilResikoVC;
+    PernyataanNasabahViewController* pernyataanNasabahVC;
     
     IBOutlet UITableView *myTableView;
     IBOutlet UIView *childView;
@@ -49,7 +53,9 @@
     
     dataNasabahVC = [[DataNasabahViewController alloc]initWithNibName:@"DataNasabahViewController" bundle:nil];
     areaPotensialDiskusiVC = [[AreaPotensialDiskusiViewController alloc]initWithNibName:@"AreaPotensialDiskusiViewController" bundle:nil];
+    profilResikoVC = [[ProfilResikoViewController alloc]initWithNibName:@"ProfilResikoViewController" bundle:nil];
     analisaKebutuhanNasabahVC = [[AnalisaKebutuhanNasabahViewController alloc]initWithNibName:@"AnalisaKebutuhanNasabahViewController" bundle:nil];
+    pernyataanNasabahVC = [[PernyataanNasabahViewController alloc]initWithNibName:@"PernyataanNasabahViewController" bundle:nil];
     
     NumberListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"1", @"2", @"3", @"4",@"5", nil];
     ListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"Data Nasabah", @"Area Potensial Untuk Diskusi", @"Profil Resiko Nasabah", @"Analisa Kebutuhan Nasabah",@"Pernyataan Nasabah", nil];
@@ -67,11 +73,10 @@
     else{
         [childView addSubview:dataNasabahVC.view];
     }
-    
 }
 
 -(void)loadAreaPotensialDiskusiView{
-    NSMutableArray *arrayHtml = [modelCFFHtml selectHtmlData:[cffID intValue]];
+    NSMutableArray *arrayHtml = [modelCFFHtml selectHtmlData:[cffID intValue] HtmlSection:@"PD"];
     areaPotensialDiskusiVC.prospectProfileID = prospectProfileID;
     areaPotensialDiskusiVC.cffTransactionID  = cffTransactionID;
     areaPotensialDiskusiVC.cffID = cffID;
@@ -84,6 +89,20 @@
     }
 }
 
+-(void)loadProfilResikoNasabahView{
+    NSMutableArray *arrayHtml = [modelCFFHtml selectHtmlData:[cffID intValue] HtmlSection:@"CR"];
+    profilResikoVC.prospectProfileID = prospectProfileID;
+    profilResikoVC.cffTransactionID  = cffTransactionID;
+    profilResikoVC.cffID = cffID;
+    profilResikoVC.htmlFileName = [[arrayHtml objectAtIndex:0]valueForKey:@"CFFHtmlName"];
+    if ([profilResikoVC.view isDescendantOfView:childView]){
+        [childView bringSubviewToFront:profilResikoVC.view];
+    }
+    else{
+        [childView addSubview:profilResikoVC.view];
+    }
+}
+
 -(void)loadAnalisaKebutuhanNasabahView{
     if ([analisaKebutuhanNasabahVC.view isDescendantOfView:childView]){
         [childView bringSubviewToFront:analisaKebutuhanNasabahVC.view];
@@ -93,7 +112,19 @@
     }
 }
 
-
+-(void)loadPernyataanNasabahView{
+    NSMutableArray *arrayHtml = [modelCFFHtml selectHtmlData:[cffID intValue] HtmlSection:@"CS"];
+    pernyataanNasabahVC.prospectProfileID = prospectProfileID;
+    pernyataanNasabahVC.cffTransactionID  = cffTransactionID;
+    pernyataanNasabahVC.cffID = cffID;
+    pernyataanNasabahVC.htmlFileName = [[arrayHtml objectAtIndex:0]valueForKey:@"CFFHtmlName"];
+    if ([pernyataanNasabahVC.view isDescendantOfView:childView]){
+        [childView bringSubviewToFront:pernyataanNasabahVC.view];
+    }
+    else{
+        [childView addSubview:pernyataanNasabahVC.view];
+    }
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -109,8 +140,14 @@
         case 1:
             [self loadAreaPotensialDiskusiView];
             break;
+        case 2:
+            [self loadProfilResikoNasabahView];
+            break;
         case 3:
             [self loadAnalisaKebutuhanNasabahView];
+            break;
+        case 4:
+            [self loadPernyataanNasabahView];
             break;
         default:
             break;

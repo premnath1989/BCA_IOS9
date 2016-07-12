@@ -18,6 +18,7 @@
 #import "ProspectProfile.h"
 #import "ModelProspectProfile.h"
 #import "Formatter.h"
+#import "ModelIdentificationType.h"
 
 @interface AddSpouseViewController ()<SIDateDelegate,IDTypeDelegate,NatinalityDelegate,OccupationListDelegate,UITextFieldDelegate>{
     Formatter* formatter;
@@ -28,6 +29,7 @@
     OccupationList *occupationList;
     ModelProspectSpouse *modelProspectSpouse;
     ModelProspectProfile* modelProspectProfile;
+    ModelIdentificationType* modelIdentificationType;
     ModelPopover* modelPopOver;
     CFFValidation* cffValidation;
 }
@@ -68,6 +70,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    modelIdentificationType = [[ModelIdentificationType alloc]init];
     borderColor=[[UIColor alloc]initWithRed:0/255.0 green:102.0/255.0 blue:179.0/255.0 alpha:1.0];
     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSForegroundColorAttributeName:[UIColor colorWithRed:88.0f/255.0f green:89.0f/255.0f blue:92.0f/255.0f alpha:1],NSFontAttributeName: [UIFont fontWithName:@"BPreplay" size:17.0f]}];
@@ -196,7 +199,7 @@
 
 -(IBAction)actionSaveSpouse:(id)sender{
     if ([cffValidation validateSpouse:[self setDictionaryObjectSpouse]]){
-        NSString* nasabahID = [NSString stringWithFormat:@"%@%@",pp.OtherIDType,pp.OtherIDTypeNo];
+        NSString* nasabahID = [NSString stringWithFormat:@"%@%@",[modelIdentificationType getOtherTypeDesc:pp.OtherIDType],pp.OtherIDTypeNo];
         if ([cffValidation validateOtherIDNumber:OtherIDType TextIDNumber:txtOtherIDType IDNasabah:nasabahID IDTypeCodeSelected:IDTypeCodeSelected]){
             if ([DictSpouseData count]>0){
                 if ([modelProspectSpouse chekcExistingRecord:[[DictSpouseData valueForKey:@"IndexNo"] intValue]]>0){
@@ -352,7 +355,7 @@
         NSDictionary* dictOccup=[[NSDictionary alloc]initWithDictionary:[modelPopOver getOccupationByCode:[dictSpouseData valueForKey:@"ProspectSpouseOccupationCode"]]];
         txtName.text = [dictSpouseData valueForKey:@"ProspectSpouseName"];
         [outletDOB setTitle:[dictSpouseData valueForKey:@"ProspectSpouseDOB"] forState:UIControlStateNormal];
-        [OtherIDType setTitle:[dictSpouseData valueForKey:@"OtherIDType"] forState:UIControlStateNormal];
+        [OtherIDType setTitle:[modelIdentificationType getOtherTypeDesc:[dictSpouseData valueForKey:@"OtherIDType"]] forState:UIControlStateNormal];
         txtOtherIDType.text=[dictSpouseData valueForKey:@"OtherIDTypeNo"];
         [outletNationality setTitle:[dictSpouseData valueForKey:@"Nationality"] forState:UIControlStateNormal];
         [outletRelation setTitle:[dictSpouseData valueForKey:@"Relation"] forState:UIControlStateNormal];
@@ -522,6 +525,10 @@
 
 -(void)IDTypeCodeSelected:(NSString *)IDTypeCode {
     IDTypeCodeSelected = IDTypeCode;
+}
+
+- (void)IDTypeCodeSelectedWithIdentifier:(NSString *) IDTypeCode Identifier:(NSString *)identifier{
+    IDTypeCodeSelected = identifier;
 }
 
 -(void)IDTypeDescSelected:(NSString *)selectedIDType

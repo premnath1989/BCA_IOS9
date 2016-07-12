@@ -8,9 +8,11 @@
 
 #import "AreaPotensialDiskusiViewController.h"
 #import "ModelCFFTransaction.h"
+#import "ModelCFFHtml.h"
 
 @interface AreaPotensialDiskusiViewController (){
     ModelCFFTransaction* modelCFFTransaction;
+    ModelCFFHtml* modelCFFHtml;
 }
 
 @end
@@ -48,6 +50,8 @@
 
 - (void)viewDidLoad {
     modelCFFTransaction = [[ModelCFFTransaction alloc]init];
+    modelCFFHtml = [[ModelCFFHtml alloc]init];
+    
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     databasePath = [[NSString alloc] initWithString:
                     [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
@@ -69,7 +73,7 @@
     //add another key to db
     //
     NSMutableDictionary* modifiedParams = [[NSMutableDictionary alloc]initWithDictionary:[params valueForKey:@"data"]];
-    [modifiedParams setObject:[cffID stringValue] forKey:@"CFFHtmlID"];
+    [modifiedParams setObject:[[modelCFFHtml selectActiveHtmlForSection:@"PD"] valueForKey:@"CFFHtmlID"] forKey:@"CFFHtmlID"];
     [modifiedParams setObject:[cffTransactionID stringValue] forKey:@"CFFTransactionID"];
     [modifiedParams setObject:[cffID stringValue] forKey:@"CFFID"];
     [modifiedParams setObject:[prospectProfileID stringValue] forKey:@"CustomerID"];

@@ -9,6 +9,7 @@
 #import "CFFValidation.h"
 #import "ModelProspectSpouse.h"
 #import "ModelProspectChild.h"
+#import "ModelIdentificationType.h"
 
 NSString *validationNamaLengkap=@"Nama lengkap harus diisi";
 NSString *validationJenisKelamin=@"Jenis Kelamin harus diisi";
@@ -29,6 +30,7 @@ NSString *validationID=@"Data identitas sudah ada. Silahkan gunakan data indetit
 @implementation CFFValidation{
     ModelProspectSpouse* modelProspectSpouse;
     ModelProspectChild* modelProspectChild;
+    ModelIdentificationType* modelIdentificationType;
 }
 @synthesize prospectProfileID,cffTransactionID;
 
@@ -40,9 +42,10 @@ NSString *validationID=@"Data identitas sudah ada. Silahkan gunakan data indetit
 }
 
 -(bool)validateOtherIDNumber:(UIButton *)buttonOtherIDType TextIDNumber:(UITextField *)textIDNumber IDNasabah:(NSString *)idNasabah IDTypeCodeSelected:(NSString *)idTypeCodeSelected{
+    modelIdentificationType = [[ModelIdentificationType alloc]init];
     if (([buttonOtherIDType.currentTitle length]>0)&&(![buttonOtherIDType.currentTitle isEqualToString:@"- SELECT -"])){
         if ([textIDNumber.text length]>0){
-            NSString* spouseID = [NSString stringWithFormat:@"%@%@",idTypeCodeSelected,textIDNumber.text];
+            NSString* spouseID = [NSString stringWithFormat:@"%@%@",[modelIdentificationType getOtherTypeDesc:idTypeCodeSelected],textIDNumber.text];
             if (![self IdentityValidation:idNasabah CompareWith:spouseID]){
                 [self createAlertViewAndShow:validationID tag:0];
             }
@@ -54,7 +57,7 @@ NSString *validationID=@"Data identitas sudah ada. Silahkan gunakan data indetit
     }
     else if ([textIDNumber.text length]>0){
         if (([buttonOtherIDType.currentTitle length]>0)&&(![buttonOtherIDType.currentTitle isEqualToString:@"- SELECT -"])){
-            NSString* spouseID = [NSString stringWithFormat:@"%@%@",idTypeCodeSelected,textIDNumber.text];
+            NSString* spouseID = [NSString stringWithFormat:@"%@%@",[modelIdentificationType getOtherTypeDesc:idTypeCodeSelected],textIDNumber.text];
             return [self IdentityValidation:idNasabah CompareWith:spouseID];
         }
         else{
@@ -203,6 +206,7 @@ NSString *validationID=@"Data identitas sudah ada. Silahkan gunakan data indetit
 }
 
 -(bool)validateOtherIDNumberForChild:(UIButton *)buttonOtherIDType TextIDNumber:(UITextField *)textIDNumber IDNasabah:(NSString *)idNasabah IDTypeCodeSelected:(NSString *)idTypeCodeSelected{
+    modelIdentificationType = [[ModelIdentificationType alloc]init];
     
     //validate with data nasbah
     bool validateWithNasabah = [self detailChildValidate:buttonOtherIDType TextIDNumber:textIDNumber IDNasabah:idNasabah IDTypeCodeSelected:idTypeCodeSelected];
@@ -210,7 +214,7 @@ NSString *validationID=@"Data identitas sudah ada. Silahkan gunakan data indetit
     //validate with data spouse
     modelProspectSpouse = [[ModelProspectSpouse alloc]init];
     NSDictionary *dataSpouse = [[NSDictionary alloc]initWithDictionary:[modelProspectSpouse selectProspectSpouse:[prospectProfileID intValue] CFFTransctoinID:[cffTransactionID intValue]]];
-    NSString *idSpouse=[NSString stringWithFormat:@"%@%@",[dataSpouse valueForKey:@"OtherIDType"],[dataSpouse valueForKey:@"OtherIDTypeNo"]];
+    NSString *idSpouse=[NSString stringWithFormat:@"%@%@",[modelIdentificationType getOtherTypeDesc:[dataSpouse valueForKey:@"OtherIDType"]],[dataSpouse valueForKey:@"OtherIDTypeNo"]];
     bool validateWithspouse = [self detailChildValidate:buttonOtherIDType TextIDNumber:textIDNumber IDNasabah:idSpouse IDTypeCodeSelected:idTypeCodeSelected];
     
     //validate with data dependants
@@ -220,7 +224,7 @@ NSString *validationID=@"Data identitas sudah ada. Silahkan gunakan data indetit
     NSString* idChild;
     if ([arrayChild count]>0){
         for (int i=0;i<[arrayChild count];i++){
-            idChild=[NSString stringWithFormat:@"%@%@",[[arrayChild objectAtIndex:i] valueForKey:@"OtherIDType"],[[arrayChild objectAtIndex:i] valueForKey:@"OtherIDTypeNo"]];
+            idChild=[NSString stringWithFormat:@"%@%@",[modelIdentificationType getOtherTypeDesc:[[arrayChild objectAtIndex:i] valueForKey:@"OtherIDType"]],[[arrayChild objectAtIndex:i] valueForKey:@"OtherIDTypeNo"]];
             validateWithchild = [self detailChildValidate:buttonOtherIDType TextIDNumber:textIDNumber IDNasabah:idChild IDTypeCodeSelected:idTypeCodeSelected];
             if (!validateWithchild){
                 break;
@@ -240,9 +244,10 @@ NSString *validationID=@"Data identitas sudah ada. Silahkan gunakan data indetit
 }
 
 -(bool)detailChildValidate:(UIButton *)buttonOtherIDType TextIDNumber:(UITextField *)textIDNumber IDNasabah:(NSString *)idNasabah IDTypeCodeSelected:(NSString *)idTypeCodeSelected{
+    modelIdentificationType = [[ModelIdentificationType alloc]init];
     if (([buttonOtherIDType.currentTitle length]>0)&&(![buttonOtherIDType.currentTitle isEqualToString:@"- SELECT -"])){
         if ([textIDNumber.text length]>0){
-            NSString* childID = [NSString stringWithFormat:@"%@%@",idTypeCodeSelected,textIDNumber.text];
+            NSString* childID = [NSString stringWithFormat:@"%@%@",[modelIdentificationType getOtherTypeDesc:idTypeCodeSelected],textIDNumber.text];
             return [self IdentityValidation:idNasabah CompareWith:childID];
         }
         else{
@@ -251,7 +256,7 @@ NSString *validationID=@"Data identitas sudah ada. Silahkan gunakan data indetit
     }
     else if ([textIDNumber.text length]>0){
         if (([buttonOtherIDType.currentTitle length]>0)&&(![buttonOtherIDType.currentTitle isEqualToString:@"- SELECT -"])){
-            NSString* chidlID = [NSString stringWithFormat:@"%@%@",idTypeCodeSelected,textIDNumber.text];
+            NSString* chidlID = [NSString stringWithFormat:@"%@%@",[modelIdentificationType getOtherTypeDesc:idTypeCodeSelected],textIDNumber.text];
             return [self IdentityValidation:idNasabah CompareWith:chidlID];
         }
         else{

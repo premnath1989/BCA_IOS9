@@ -15,6 +15,7 @@
 //- (void)selectedIDType:(NSString *)selectedIDType;
 - (void)IDTypeDescSelected:(NSString *) IDTypeDesc;
 - (void)IDTypeCodeSelected:(NSString *) IDTypeCode;
+- (void)IDTypeCodeSelectedWithIdentifier:(NSString *) IDTypeCode Identifier:(NSString *)identifier;
 @end
 
 @interface IDTypeViewController : UITableViewController {
@@ -28,6 +29,7 @@
 @property (nonatomic, strong) NSMutableArray *IDTypes;
 @property (nonatomic, retain) NSMutableArray *IDTypeDesc;
 @property (nonatomic, retain) NSMutableArray *IDTypeCode;
+@property (nonatomic, retain) NSMutableArray *IDTypeIdentifier;
 @property (nonatomic, strong) id<IDTypeDelegate> delegate;
 @property (nonatomic, weak) id requestType;
 @property (nonatomic, weak) id IDSelect;
