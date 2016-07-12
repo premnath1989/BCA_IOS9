@@ -34,10 +34,7 @@
 }
 
 -(void)insertJsonToDB:(NSData *)jsonData{
-    //NSString *filePath = [[NSBundle mainBundle] pathForResource:@"result" ofType:@"json"];
-    //NSString *jsonString =[[NSString alloc] initWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:NULL];
     NSError *error =  nil;
-    //NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:&error];
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&error];
     
     NSArray *items = [json valueForKeyPath:@"d"];
@@ -70,19 +67,75 @@
     }
 }
 
-#pragma mark create html
--(void)apiCallCrateCFFHtml:(NSString *)URL{
+#pragma mark AFNetworking For Global Use
+-(void)apiCallHtmlTable:(NSString *)URL JSONKey:(NSArray *)jsonKey TableDictionary:(NSDictionary *)tableDictionary{
     NSURLSession *session = [NSURLSession sharedSession];
     [[session dataTaskWithURL:[NSURL URLWithString:URL]
             completionHandler:^(NSData *data,
                                 NSURLResponse *response,
                                 NSError *error) {
                 // handle response
-                [self createHTMLFile:data];
+                [self insertJsonToDB:data JSONKey:jsonKey TableDictionary:tableDictionary];
             }] resume];
 }
 
--(void)createHTMLFile:(NSData *)jsonData{
+-(void)insertJsonToDB:(NSData *)jsonData JSONKey:(NSArray *)jsonKey TableDictionary:(NSDictionary *)tableDictionary{
+    NSError *error =  nil;
+    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&error];
+    
+    NSArray *items = [json valueForKeyPath:@"d"];
+    
+    if ([[json valueForKeyPath:@"d"] isKindOfClass:[NSArray class]]){
+        NSEnumerator *enumerator = [items objectEnumerator];
+        NSDictionary* item;
+        while (item = (NSDictionary*)[enumerator nextObject]) {
+            NSString* stringID=[NSString stringWithFormat:@"\"%@\"",[item objectForKey:[jsonKey objectAtIndex:0]]];
+            NSString* stringFileName=[NSString stringWithFormat:@"\"%@\"",[item objectForKey:[jsonKey objectAtIndex:1]]];
+            NSString* stringStatus=[NSString stringWithFormat:@"\"%@\"",[item objectForKey:[jsonKey objectAtIndex:2]]];
+            NSString* stringSection=[NSString stringWithFormat:@"\"%@\"",[item objectForKey:[jsonKey objectAtIndex:3]]];
+            NSArray* tableValue= [[NSArray alloc]initWithObjects:stringID,stringFileName,stringStatus,stringSection, nil];
+            
+            NSMutableDictionary* dictDataTable = [[NSMutableDictionary alloc]initWithDictionary:tableDictionary];
+            [dictDataTable setObject:tableValue forKey:@"columnValue"];
+            
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                [modelCFFHtml updateGlobalHtmlData:[item objectForKey:[jsonKey objectAtIndex:3]]];
+                // Some long running task you want on another thread
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [modelCFFHtml saveGlobalHtmlData:dictDataTable];
+                });
+            });
+        }
+    }
+    else{
+        NSDictionary *itemsDict = [json valueForKeyPath:@"d"];
+        NSArray* tableValue= [[NSArray alloc]initWithObjects:[itemsDict objectForKey:[jsonKey objectAtIndex:0]],[itemsDict objectForKey:[jsonKey objectAtIndex:1]],[itemsDict objectForKey:[jsonKey objectAtIndex:2]],[itemsDict objectForKey:[jsonKey objectAtIndex:3]], nil];
+        NSMutableDictionary* dictDataTable = [[NSMutableDictionary alloc]initWithDictionary:tableDictionary];
+        [dictDataTable setObject:tableValue forKey:@"columnValue"];
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [modelCFFHtml updateGlobalHtmlData:[itemsDict objectForKey:[jsonKey objectAtIndex:3]]];
+            // Some long running task you want on another thread
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [modelCFFHtml saveGlobalHtmlData:dictDataTable];
+            });
+        });
+    }
+}
+
+#pragma mark create html
+-(void)apiCallCrateHtmlFile:(NSString *)URL RootPathFolder:(NSString *)rootPathFolder{
+    NSURLSession *session = [NSURLSession sharedSession];
+    [[session dataTaskWithURL:[NSURL URLWithString:URL]
+            completionHandler:^(NSData *data,
+                                NSURLResponse *response,
+                                NSError *error) {
+                // handle response
+                [self createHTMLFile:data RootPathFolder:rootPathFolder];
+            }] resume];
+}
+
+-(void)createHTMLFile:(NSData *)jsonData RootPathFolder:(NSString *)rootPathFolder{
     //NSString *filePath = [[NSBundle mainBundle] pathForResource:@"result" ofType:@"json"];
     //NSString *jsonString =[[NSString alloc] initWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:NULL];
     NSError *error =  nil;
@@ -99,7 +152,7 @@
             NSString* fileName = [NSString stringWithFormat:@"%@",[item objectForKey:@"FileName"]];
             
             NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-            NSString *filePathApp = [docsDir stringByAppendingPathComponent:@"CFFfolder"];
+            NSString *filePathApp = [docsDir stringByAppendingPathComponent:rootPathFolder];
             [self createDirectory:filePathApp];
             
             [self createFileDirectory:[NSString stringWithFormat:@"%@/%@",filePathApp,folderName]];

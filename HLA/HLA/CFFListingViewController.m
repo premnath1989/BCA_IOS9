@@ -94,11 +94,21 @@
     ItemToBeDeleted = [[NSMutableArray alloc] init];
     
     [self loadCFFTransaction];
-    NSString* fileName = @"20160701171527.html";
-    [cffAPIController apiCallCFFHtmtable:@"http://mposws.azurewebsites.net/Service2.svc/getAllData"];
-    [cffAPIController apiCallCrateCFFHtml:[NSString stringWithFormat:@"http://mposws.azurewebsites.net/Service2.svc/GetHtmlFile?fileName=%@",fileName]];
-    //[self createHTMLFile];
+//    NSString* fileName = @"20160701171527.html";
+//    [cffAPIController apiCallCFFHtmtable:@"http://mposws.azurewebsites.net/Service2.svc/getAllData"];
+//    [cffAPIController apiCallCrateHtmlFile:[NSString stringWithFormat:@"http://mposws.azurewebsites.net/Service2.svc/GetHtmlFile?fileName=%@",fileName] RootPathFolder:@"CFFFolder"];
+    [self fetchHTMLInfo];
     // Do any additional setup after loading the view from its nib.
+}
+
+-(void)fetchHTMLInfo{
+    NSString* fileName = @"20160701171527.html";
+    NSArray* arrayJSONKey = [[NSArray alloc]initWithObjects:@"CFFId",@"FileName",@"Status",@"CFFSection", nil];
+    NSArray* tableColumn= [[NSArray alloc]initWithObjects:@"CFFID",@"CFFHtmlName",@"CFFHtmlStatus",@"CFFHtmlSection", nil];
+    NSDictionary *dictCFFTable = [[NSDictionary alloc]initWithObjectsAndKeys:@"CFFHtml",@"tableName",tableColumn,@"columnName", nil];
+    
+    [cffAPIController apiCallHtmlTable:@"http://mposws.azurewebsites.net/Service2.svc/getAllData" JSONKey:arrayJSONKey TableDictionary:dictCFFTable];
+    [cffAPIController apiCallCrateHtmlFile:[NSString stringWithFormat:@"http://mposws.azurewebsites.net/Service2.svc/GetHtmlFile?fileName=%@",fileName] RootPathFolder:@"CFFFolder"];
 }
 
 -(void)setButtonImageAndTextAlignment{
