@@ -11,15 +11,38 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "Query SPAJ Header.h"
+#import "User Interface.h"
+#import "Alert.h"
 
 
 // DECLARATION
 
-@interface SPAJExistingList : UIViewController
+@interface SPAJExistingList : UIViewController <UITableViewDelegate, UITableViewDataSource>
+
+    // OBJECT
+
+    @property (strong, retain) QuerySPAJHeader *querySPAJHeader;
+    @property (strong, retain) UserInterface *functionUserInterface;
+    @property (strong, retain) Alert *functionAlert;
+
+    // QUERY
+
+    @property (strong, retain) NSArray *arrayQueryExisting;
+
+    // VARIABLE
+
+    @property (strong, retain) NSMutableArray *arrayTextField;
+    @property (strong, retain) NSString *stringQueryName;
+    @property (strong, retain) NSNumber *intQueryID;
 
     // LAYOUT
 
     @property (nonatomic, weak) IBOutlet UIStackView *stackViewNote;
+
+    // TABLE
+
+    @property (nonatomic, weak) IBOutlet UITableView *tableView;
 
     // LABEL
 
@@ -29,6 +52,13 @@
     @property (nonatomic, weak) IBOutlet UILabel *labelFieldName;
     @property (nonatomic, weak) IBOutlet UILabel *labelFieldSPAJNumber;
     @property (nonatomic, weak) IBOutlet UILabel *labelFieldSocialNumber;
+
+    @property (nonatomic, weak) IBOutlet UILabel *labelTablePolicyHolder;
+    @property (nonatomic, weak) IBOutlet UILabel *labelTableSPAJNumber;
+    @property (nonatomic, weak) IBOutlet UILabel *labelTableLastUpdateOn;
+    @property (nonatomic, weak) IBOutlet UILabel *labelTableSIVersion;
+    @property (nonatomic, weak) IBOutlet UILabel *labelTableTimeRemaining;
+    @property (nonatomic, weak) IBOutlet UILabel *labelTableView;
 
     // TEXTFIELD
 
@@ -41,5 +71,9 @@
     @property (nonatomic, weak) IBOutlet UIButton *buttonSearch;
     @property (nonatomic, weak) IBOutlet UIButton *buttonReset;
     @property (nonatomic, weak) IBOutlet UIButton *buttonDelete;
+
+    // FUNCTION
+
+    - (void) generateQuery;
 
 @end

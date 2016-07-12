@@ -31,6 +31,45 @@
     [database close];
 }
 
+-(void)saveGlobalHtmlData:(NSDictionary *)dictHtmlData{
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    NSString* tableColumn = [[dictHtmlData valueForKey:@"columnName"] componentsJoinedByString:@","];
+    NSString* tableValue = [[dictHtmlData valueForKey:@"columnValue"] componentsJoinedByString:@","];
+    
+    
+    BOOL success = [database executeUpdate:[NSString stringWithFormat:@"insert into %@ (%@) values (%@)",[dictHtmlData valueForKey:@"tableName"],tableColumn,tableValue]];
+    
+    if (!success) {
+        NSLog(@"%s: insert error: %@", __FUNCTION__, [database lastErrorMessage]);
+        // do whatever you need to upon error
+    }
+    [results close];
+    [database close];
+}
+
+-(void)updateGlobalHtmlData:(NSString *)htmlSection{
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    BOOL success = [database executeUpdate:@"update CFFHtml set CFFHtmlStatus = 'I' where CFFHtmlSection = ?" ,htmlSection];
+    
+    if (!success) {
+        NSLog(@"%s: insert error: %@", __FUNCTION__, [database lastErrorMessage]);
+        // do whatever you need to upon error
+    }
+    [results close];
+    [database close];
+}
+
+
 -(void)updateHtmlData:(NSDictionary *)dictHtmlData{
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];

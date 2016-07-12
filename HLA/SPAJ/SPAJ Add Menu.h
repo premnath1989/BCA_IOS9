@@ -15,7 +15,17 @@
 
 // DECLARATION
 
+@protocol SPAJMainDelegate
+
+    - (void) voidGoToAddDetail;
+
+@end
+
 @interface SPAJAddMenu : UIViewController
+
+    // PROTOCOL
+
+    @property (nonatomic,strong) id <SPAJMainDelegate> delegateSPAJMain;
 
     // VIEW
 

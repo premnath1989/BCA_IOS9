@@ -10,7 +10,9 @@
 // IMPORT
 
 #import "SPAJ Add Menu.h"
+#import "SPAJ Add Detail.h"
 #import "String.h"
+#import "SPAJ Main.h"
 
 
 // DECLARATION
@@ -25,6 +27,11 @@
 // IMPLEMENTATION
 
 @implementation SPAJAddMenu
+
+    // SYNTHESIZE
+
+    @synthesize delegateSPAJMain = _delegateSPAJMain;
+
 
     // DID LOAD
 
@@ -97,7 +104,12 @@
 
     - (IBAction)actionGoToStep3:(id)sender
     {
-
+        // CHANGE PAGE
+        
+        /*  SPAJAddDetail* viewController = [[SPAJAddDetail alloc] initWithNibName:@"SPAJ Add Detail" bundle:nil];
+            [self presentViewController:viewController animated:true completion:nil]; */
+        
+        [_delegateSPAJMain voidGoToAddDetail];
     };
 
     - (IBAction)actionGoToStep4:(id)sender

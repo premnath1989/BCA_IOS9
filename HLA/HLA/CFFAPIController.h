@@ -10,5 +10,6 @@
 
 @interface CFFAPIController : NSObject
 -(void)apiCallCFFHtmtable:(NSString *)URL;
--(void)apiCallCrateCFFHtml:(NSString *)URL;
+-(void)apiCallHtmlTable:(NSString *)URL JSONKey:(NSArray *)jsonKey TableDictionary:(NSDictionary *)tableDictionary;
+-(void)apiCallCrateHtmlFile:(NSString *)URL RootPathFolder:(NSString *)rootPathFolder;
 @end

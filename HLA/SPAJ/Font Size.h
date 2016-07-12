@@ -44,6 +44,11 @@
     extern CGFloat const FONTSIZE_INFORMATION_HEADER;
     extern CGFloat const FONTSIZE_INFORMATION_DETAIL;
 
+    // INFORMATION
+
+    extern CGFloat const FONTSIZE_TABLE_HEADER;
+    extern CGFloat const FONTSIZE_TABLE_DETAIL;
+
     // BUTTON
 
     extern CGFloat const FONTSIZE_FORM_BUTTON;

@@ -29,6 +29,12 @@
 
     @end
 
+    @interface ViewGuideDetail : UIView
+
+        - (void)setupStyle;
+
+    @end
+
     // PAGE
 
     @interface ViewPageHeader : UIView
@@ -90,6 +96,21 @@
     @end
 
     @interface StackViewGuideMenuHorizontal : UIStackView
+
+        - (void)setupStyle;
+
+    @end
+
+
+    //  TABLE
+
+    @interface StackViewTableHorizontal : UIStackView
+
+        - (void)setupStyle;
+
+    @end
+
+    @interface ViewTableHorizontal : UIView
 
         - (void)setupStyle;
 

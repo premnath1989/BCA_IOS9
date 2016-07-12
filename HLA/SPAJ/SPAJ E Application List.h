@@ -18,7 +18,7 @@
 
 // DECLARATION
 
-@interface SPAJSubmittedList : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface SPAJEApplicationList : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
     // OBJECT
 
@@ -28,7 +28,7 @@
 
     // QUERY
 
-    @property (retain, strong) NSArray *arrayQuerySubmitted;
+    @property (retain, strong) NSArray *arrayQueryEApplication;
 
     // VARIABLE
 
@@ -44,21 +44,18 @@
 
     @property (nonatomic, weak) IBOutlet UILabel *labelPageTitle;
     @property (nonatomic, weak) IBOutlet UILabel *labelFieldName;
-    @property (nonatomic, weak) IBOutlet UILabel *labelFieldSPAJNumber;
-    @property (nonatomic, weak) IBOutlet UILabel *labelFieldSocialNumber;
+    @property (nonatomic, weak) IBOutlet UILabel *labelFieldEApplicationNumber;
 
     @property (nonatomic, weak) IBOutlet UILabel *labelTablePolicyHolder;
     @property (nonatomic, weak) IBOutlet UILabel *labelTableSPAJNumber;
-    @property (nonatomic, weak) IBOutlet UILabel *labelTableSubmittedDate;
-    @property (nonatomic, weak) IBOutlet UILabel *labelTableProduct;
+    @property (nonatomic, weak) IBOutlet UILabel *labelTableLastUpdateOn;
+    @property (nonatomic, weak) IBOutlet UILabel *labelTableEApp;
     @property (nonatomic, weak) IBOutlet UILabel *labelTableState;
-    @property (nonatomic, weak) IBOutlet UILabel *labelTableView;
 
     // TEXTFIELD
 
     @property (nonatomic, weak) IBOutlet UITextField *textFieldName;
-    @property (nonatomic, weak) IBOutlet UITextField *textFieldSPAJNumber;
-    @property (nonatomic, weak) IBOutlet UITextField *textFieldSocialNumber;
+    @property (nonatomic, weak) IBOutlet UITextField *textFieldEApplicationNumber;
 
     // BUTTON
 
