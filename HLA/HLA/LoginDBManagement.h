@@ -25,6 +25,7 @@
 - (int) AgentStatus:(NSString *)AgentID;
 - (int) DeleteAgentProfile;
 - (int) fullSyncTable:(WebResponObj *)obj;
+- (int) ReferralSyncTable:(WebResponObj *)obj;
 - (int) DeviceStatus:(NSString *)AgentID;
 - (int) SpvStatus:(NSString *)spvID;
 - (void) updatePassword:(NSString *)newPassword;
@@ -42,6 +43,8 @@
 - (NSString *)EditIllustration:(NSString *)SIno;
 - (NSMutableDictionary *)getAgentDetails;
 -(NSMutableDictionary *)premiKeluargaku:(NSString *)SINo;
+-(NSString *)getUniqueDeviceIdentifierAsString;
+-(NSString *) getLastUpdateReferral;
 //- (int) InsertAgentProfile:(NSString *) urlStr;
 
 @end

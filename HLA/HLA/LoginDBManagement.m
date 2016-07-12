@@ -10,6 +10,8 @@
 #import "LoginDBManagement.h"
 #import "FMDatabase.h"
 #import "LoginMacros.h"
+#import "SSKeychain.h"
+#import "WebServiceUtilities.h"
 
 @implementation LoginDBManagement
 
@@ -30,21 +32,21 @@
     BOOL success;
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSError *DBerror;
-
+    
     success = [fileManager fileExistsAtPath:databasePath];
     if (!success) {
-
+        
         NSString *defaultDBPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"hladb.sqlite"];
         success = [fileManager copyItemAtPath:defaultDBPath toPath:databasePath error:&DBerror];
         if (!success) {
             NSAssert1(0, @"Failed to create writable database file with message '%@'.", [DBerror localizedDescription]);
         }
-
+        
         defaultDBPath = Nil;
     }
-
+    
     if([fileManager fileExistsAtPath:CommDatabasePath] == FALSE ){
-
+        
         NSString *CommissionRatesPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Rates.json"];
         success = [fileManager copyItemAtPath:CommissionRatesPath toPath:CommDatabasePath error:&DBerror];
         if (!success) {
@@ -52,9 +54,9 @@
         }
         CommissionRatesPath= Nil;
     }
-
+    
     if([fileManager fileExistsAtPath:UL_RatesDatabasePath] == FALSE ){
-
+        
         NSString *ULRatesPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"UL_Rates.sqlite"];
         success = [fileManager copyItemAtPath:ULRatesPath toPath:UL_RatesDatabasePath error:&DBerror];
         if (!success) {
@@ -72,7 +74,7 @@
         }
         RatesPath= Nil;
     }
-
+    
     if([fileManager fileExistsAtPath:RefDatabasePath] == FALSE ){
         NSString *RefDBPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"DataReferral.sqlite"];
         success = [fileManager copyItemAtPath:RefDBPath toPath:RefDatabasePath error:&DBerror];
@@ -84,7 +86,7 @@
     else {
         return;
     }
-
+    
     fileManager = Nil;
 }
 
@@ -100,7 +102,7 @@
     if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
     {
         NSString *querySQL = [NSString stringWithFormat: @"SELECT * FROM Agent_Profile WHERE AgentLoginID=\"%@\" ", AgentID];
-
+        
         if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK){
             if (sqlite3_step(statement) == SQLITE_ROW) AgentFound = AGENT_IS_FOUND;
             else AgentFound = AGENT_IS_NOT_FOUND;
@@ -228,8 +230,8 @@
         if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK){
             if (sqlite3_step(statement) == SQLITE_ROW) {
                 nsdate = [[NSString alloc]
-                                           initWithUTF8String:
-                                           (const char *) sqlite3_column_text(statement, 0)];
+                          initWithUTF8String:
+                          (const char *) sqlite3_column_text(statement, 0)];
             }
             sqlite3_finalize(statement);
         }
@@ -273,8 +275,8 @@
         if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK){
             if (sqlite3_step(statement) == SQLITE_ROW) {
                 NSString *strFirstLogin = [[NSString alloc]
-                                          initWithUTF8String:
-                                          (const char *) sqlite3_column_text(statement, 0)];
+                                           initWithUTF8String:
+                                           (const char *) sqlite3_column_text(statement, 0)];
                 FirstLogin = [strFirstLogin intValue];
             }
             sqlite3_finalize(statement);
@@ -389,6 +391,10 @@
 }
 
 -(int)fullSyncTable:(WebResponObj *)obj{
+    [self SyncTable:obj dbString:databasePath];
+}
+
+-(int)SyncTable:(WebResponObj *)obj dbString:(NSString *)DB{
     int insertProc = TABLE_INSERTION_FAILED;
     
     for(dataCollection *data in [obj getDataWrapper]){
@@ -400,32 +406,37 @@
         }
         sql = [sql substringToIndex:[sql length]-1];
         sql = [sql stringByAppendingString:@") VALUES ("];
-    
+        
         for(NSString *keys in data.dataRows){
             NSString *value = @"";
             if([data.dataRows valueForKey:keys] != NULL)
-            value = [NSString stringWithFormat:@"'%@',",[data.dataRows valueForKey:keys]];
+                value = [NSString stringWithFormat:@"'%@',",[data.dataRows valueForKey:keys]];
             else
-            value = [NSString stringWithFormat:@"'',"];
-    
+                value = [NSString stringWithFormat:@"'',"];
+            
             sql = [sql stringByAppendingString:value];
         }
         sql = [sql substringToIndex:[sql length]-1];
         sql = [sql stringByAppendingString:@")"];
-    
+        
         char *error;
-        if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
+        if (sqlite3_open([DB UTF8String ], &contactDB) == SQLITE_OK)
         {
             sqlite3_exec(contactDB, [sql UTF8String], NULL, NULL, &error);
-                if (error == NULL || (error[0] == '\0')) {
-                    insertProc = TABLE_INSERTION_SUCCESS;
-                }
+            if (error == NULL || (error[0] == '\0')) {
+                insertProc = TABLE_INSERTION_SUCCESS;
+            }
             
             sqlite3_close(contactDB);
         }
     }
     return insertProc;
 }
+
+-(int)ReferralSyncTable:(WebResponObj *)obj{
+    return [self SyncTable:obj dbString:RefDatabasePath];
+}
+
 
 -(NSString *)RiderCode:(NSString *)SINo riderCode:(NSString *)code{
     
@@ -496,47 +507,47 @@
         }
         sqlite3_close(contactDB);
     }
-
+    
     return premiDetails;
 }
 
 -(int)insertAgentProfile:(WebResponObj *)obj
 {
-//    int insertProc = TABLE_INSERTION_FAILED;
-//    NSString *sql = @"insert into Agent_profile (";
-//    
-//    for(NSString *keys in obj){
-//        NSString *key = [NSString stringWithFormat:@"%@,",keys];
-//        sql = [sql stringByAppendingString:key];
-//    }
-//    sql = [sql substringToIndex:[sql length]-1];
-//    sql = [sql stringByAppendingString:@") VALUES ("];
-//    
-//    for(NSString *keys in obj.DataRows){
-//        NSString *value = @"";
-//        if([obj.DataRows valueForKey:keys] != NULL)
-//        value = [NSString stringWithFormat:@"'%@',",[obj.DataRows valueForKey:keys]];
-//        else
-//        value = [NSString stringWithFormat:@"'',"];
-//        
-//        sql = [sql stringByAppendingString:value];
-//    }
-//    sql = [sql substringToIndex:[sql length]-1];
-//    sql = [sql stringByAppendingString:@")"];
-//    
-//    NSLog(@"%@",sql);
-//    
-//    char *error;
-//    if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
-//    {
-//        sqlite3_exec(contactDB, [sql UTF8String], NULL, NULL, &error);
-//            if (error == NULL || (error[0] == '\0')) {
-//                insertProc = TABLE_INSERTION_SUCCESS;
-//            }
-//        
-//        sqlite3_close(contactDB);
-//    }
-//    return insertProc;
+    //    int insertProc = TABLE_INSERTION_FAILED;
+    //    NSString *sql = @"insert into Agent_profile (";
+    //
+    //    for(NSString *keys in obj){
+    //        NSString *key = [NSString stringWithFormat:@"%@,",keys];
+    //        sql = [sql stringByAppendingString:key];
+    //    }
+    //    sql = [sql substringToIndex:[sql length]-1];
+    //    sql = [sql stringByAppendingString:@") VALUES ("];
+    //
+    //    for(NSString *keys in obj.DataRows){
+    //        NSString *value = @"";
+    //        if([obj.DataRows valueForKey:keys] != NULL)
+    //        value = [NSString stringWithFormat:@"'%@',",[obj.DataRows valueForKey:keys]];
+    //        else
+    //        value = [NSString stringWithFormat:@"'',"];
+    //
+    //        sql = [sql stringByAppendingString:value];
+    //    }
+    //    sql = [sql substringToIndex:[sql length]-1];
+    //    sql = [sql stringByAppendingString:@")"];
+    //
+    //    NSLog(@"%@",sql);
+    //
+    //    char *error;
+    //    if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
+    //    {
+    //        sqlite3_exec(contactDB, [sql UTF8String], NULL, NULL, &error);
+    //            if (error == NULL || (error[0] == '\0')) {
+    //                insertProc = TABLE_INSERTION_SUCCESS;
+    //            }
+    //
+    //        sqlite3_close(contactDB);
+    //    }
+    //    return insertProc;
 }
 
 -(NSString *)checkingLastLogout
@@ -552,8 +563,8 @@
             if (sqlite3_step(statement) == SQLITE_ROW) {
                 if((const char *) sqlite3_column_text(statement, 0) != NULL){
                     nsdate = [[NSString alloc]
-                          initWithUTF8String:
-                          (const char *) sqlite3_column_text(statement, 0)];
+                              initWithUTF8String:
+                              (const char *) sqlite3_column_text(statement, 0)];
                 }
             }
             sqlite3_finalize(statement);
@@ -568,35 +579,35 @@
     if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
     {
         NSString *createSQL = [NSString stringWithFormat:@"CREATE TEMPORARY TABLE tmp AS SELECT * FROM %@ where %@=\"%@\"",tableName,column,oldValue];
-
+        
         BOOL success = [self sqlStatement:createSQL];
-
+        
         if (success)
         {
             if([tableName caseInsensitiveCompare:@"SI_Master"]==NSOrderedSame){
-            createSQL = [NSString stringWithFormat:@"UPDATE tmp SET %@ =\"%@\",EnableEditing='1',IllustrationSigned='1',id = ((Select max(id) from %@)+1)",column,newValue,tableName];
+                createSQL = [NSString stringWithFormat:@"UPDATE tmp SET %@ =\"%@\",EnableEditing='1',IllustrationSigned='1',id = ((Select max(id) from %@)+1)",column,newValue,tableName];
             }else if([tableName caseInsensitiveCompare:@"SI_Temp_Trad_Rider"]==NSOrderedSame){
                 createSQL = [NSString stringWithFormat:@"UPDATE tmp SET %@ =\"%@\",rowid = ((Select max(id) from %@)+1)",column,newValue,tableName];
             }else{
                 createSQL = [NSString stringWithFormat:@"UPDATE tmp SET %@ =\"%@\",id = ((Select max(id) from %@)+1)",column,newValue,tableName];
             }
             success = [self sqlStatement:createSQL];
-
+            
             if (success)
             {
                 createSQL = [NSString stringWithFormat:@"INSERT INTO %@ SELECT * FROM tmp",tableName];
                 success = [self sqlStatement:createSQL];
-
+                
                 if(success)
                 {
                     createSQL = @"DROP TABLE tmp";
                     [self sqlStatement:createSQL];
-
-//                    if (success) {
-//                        createSQL = [NSString stringWithFormat:@"UPDATE %@ SET CustCode=\"%@\" WHERE CustCode='0'",tableName,nextCustCode];
-//
-//                        [self sqlStatement:createSQL];
-//                    }
+                    
+                    //                    if (success) {
+                    //                        createSQL = [NSString stringWithFormat:@"UPDATE %@ SET CustCode=\"%@\" WHERE CustCode='0'",tableName,nextCustCode];
+                    //
+                    //                        [self sqlStatement:createSQL];
+                    //                    }
                 }
             }
             
@@ -631,8 +642,8 @@
             if (sqlite3_step(statement) == SQLITE_ROW) {
                 if((const char *) sqlite3_column_text(statement, 0) != NULL){
                     EditMode = [[NSString alloc]
-                            initWithUTF8String:
-                            (const char *) sqlite3_column_text(statement, 0)];
+                                initWithUTF8String:
+                                (const char *) sqlite3_column_text(statement, 0)];
                 }
             }
             sqlite3_finalize(statement);
@@ -655,8 +666,8 @@
             if (sqlite3_step(statement) == SQLITE_ROW) {
                 if((const char *) sqlite3_column_text(statement, 0) != NULL){
                     UDID = [[NSString alloc]
-                              initWithUTF8String:
-                              (const char *) sqlite3_column_text(statement, 0)];
+                            initWithUTF8String:
+                            (const char *) sqlite3_column_text(statement, 0)];
                 }
             }
             sqlite3_finalize(statement);
@@ -679,8 +690,8 @@
             while(sqlite3_step(statement) == SQLITE_ROW)
             {
                 NSString *columnName = [[NSString alloc]
-                                   initWithUTF8String:
-                                   (const char *) sqlite3_column_text(statement, 1)];
+                                        initWithUTF8String:
+                                        (const char *) sqlite3_column_text(statement, 1)];
                 [columns addObject:columnName];
                 //do something with colName because it contains the column's name
             }
@@ -731,7 +742,7 @@
     
     NSString *querySQL = [NSString stringWithFormat: @"SELECT %@ FROM Agent_Profile", sql];
     NSLog(@"%@",querySQL);
-
+    
     if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
     {
         int rc = sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL);
@@ -745,8 +756,8 @@
                     NSString *value = @"";
                     if((const char *) sqlite3_column_text(statement, index) != NULL){
                         value = [[NSString alloc]
-                                        initWithUTF8String:
-                                        (const char *) sqlite3_column_text(statement, index)];
+                                 initWithUTF8String:
+                                 (const char *) sqlite3_column_text(statement, index)];
                     }
                     
                     [agentDetails setValue:value forKey:[columnArray objectAtIndex:index]];
@@ -828,6 +839,45 @@
     [db close];
     
     return AgentName;
+}
+
+//we store the UDID into the Keychain
+-(NSString *)getUniqueDeviceIdentifierAsString
+{
+    
+    NSString *appName=[[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString*)kCFBundleNameKey];
+    
+    NSString *strApplicationUUID = [SSKeychain passwordForService:appName account:@"incoding"];
+    if (strApplicationUUID == nil)
+    {
+        strApplicationUUID  = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+        [SSKeychain setPassword:strApplicationUUID forService:appName account:@"incoding"];
+        
+    }
+    return strApplicationUUID;
+}
+
+-(NSString *) getLastUpdateReferral
+{
+    sqlite3_stmt *statement;
+    NSString *LastDate = @"";
+    if (sqlite3_open([RefDatabasePath UTF8String ], &contactDB) == SQLITE_OK)
+    {
+        NSString *querySQL = [NSString stringWithFormat: @"SELECT max(UpdateTime) FROM DataReferral"];
+        
+        if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK){
+            if (sqlite3_step(statement) == SQLITE_ROW) {
+                if((const char *) sqlite3_column_text(statement, 0) != NULL){
+                    LastDate = [[NSString alloc]
+                                initWithUTF8String:
+                                (const char *) sqlite3_column_text(statement, 0)];
+                }
+            }
+            sqlite3_finalize(statement);
+        }
+        sqlite3_close(contactDB);
+    }
+    return LastDate;
 }
 
 - (void) updateSIMaster:(NSString *)SINO EnableEditing:(NSString *)EditFlag{

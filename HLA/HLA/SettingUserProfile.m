@@ -64,7 +64,7 @@ id temp;
     
     loginDB = [[LoginDBManagement alloc]init];
     agentDetails =[loginDB getAgentDetails];
-        
+    
     NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docsDir = [dirPaths objectAtIndex:0];
     databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
@@ -78,13 +78,13 @@ id temp;
     outletChgPassword.layer.cornerRadius = 10.0f;
     outletChgPassword.clipsToBounds = YES;
     
-	txtAddress1.delegate = self;
-	txtAddress2.delegate = self;
-	txtAddress3.delegate = self;
-	
-	txtAgentCode.enabled = FALSE;
-	txtAgentName.enabled = FALSE;
-	btnContractDate.enabled = FALSE;
+    txtAddress1.delegate = self;
+    txtAddress2.delegate = self;
+    txtAddress3.delegate = self;
+    
+    txtAgentCode.enabled = FALSE;
+    txtAgentName.enabled = FALSE;
+    btnContractDate.enabled = FALSE;
 }
 
 - (void) setValueProperty{
@@ -130,7 +130,7 @@ id temp;
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-	if (interfaceOrientation==UIInterfaceOrientationLandscapeRight || interfaceOrientation == UIInterfaceOrientationLandscapeLeft)
+    if (interfaceOrientation==UIInterfaceOrientationLandscapeRight || interfaceOrientation == UIInterfaceOrientationLandscapeLeft)
         return YES;
     
     return NO;
@@ -153,50 +153,50 @@ id temp;
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-	[super viewWillDisappear:animated];
+    [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-	[super viewDidDisappear:animated];
+    [super viewDidDisappear:animated];
 }
 
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-        if (alertView.tag == 1) {
-            if ([getLatest isEqualToString:@"Yes"]) { //not need check latest version when user edit on user profile
-					NSString *strURL = [NSString stringWithFormat:@"%@eSubmissionWS/eSubmissionXMLService.asmx/"
-										"GetSIVersion_TRADUL?Type=IPAD_TRAD&Remarks=Agency&OSType=32", [SIUtilities WSLogin]];
-					NSLog(@"%@", strURL);
-					NSURL *url = [NSURL URLWithString:strURL];
-					NSURLRequest *request = [NSURLRequest requestWithURL:url];
-					
-					AFXMLRequestOperation *operation =
-					[AFXMLRequestOperation XMLParserRequestOperationWithRequest:request
-																		success:^(NSURLRequest *request, NSHTTPURLResponse *response, NSXMLParser *XMLParser) {
-																			
-																			XMLParser.delegate = self;
-																			[XMLParser setShouldProcessNamespaces:YES];
-																			[XMLParser parse];
-																			
-																		} failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSXMLParser *XMLParser) {
-																			NSLog(@"error in calling web service");
-																		}];
-					
-					[operation start];
-				}
-				
-			}
-			else if (alertView.tag == 2 && buttonIndex == 0){
-				//download latest version
-				[[UIApplication sharedApplication] openURL:[NSURL URLWithString:
-									@"http://www.hla.com.my/agencyportal/includes/DLrotate2.asp?file=iMP/iMP.plist"]];
-				
-			}
-			else if (alertView.tag == 3){
-				exit(0);
-			}
+    if (alertView.tag == 1) {
+        if ([getLatest isEqualToString:@"Yes"]) { //not need check latest version when user edit on user profile
+            NSString *strURL = [NSString stringWithFormat:@"%@eSubmissionWS/eSubmissionXMLService.asmx/"
+                                "GetSIVersion_TRADUL?Type=IPAD_TRAD&Remarks=Agency&OSType=32", [SIUtilities WSLogin]];
+            NSLog(@"%@", strURL);
+            NSURL *url = [NSURL URLWithString:strURL];
+            NSURLRequest *request = [NSURLRequest requestWithURL:url];
+            
+            AFXMLRequestOperation *operation =
+            [AFXMLRequestOperation XMLParserRequestOperationWithRequest:request
+                                                                success:^(NSURLRequest *request, NSHTTPURLResponse *response, NSXMLParser *XMLParser) {
+                                                                    
+                                                                    XMLParser.delegate = self;
+                                                                    [XMLParser setShouldProcessNamespaces:YES];
+                                                                    [XMLParser parse];
+                                                                    
+                                                                } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSXMLParser *XMLParser) {
+                                                                    NSLog(@"error in calling web service");
+                                                                }];
+            
+            [operation start];
+        }
+        
+    }
+    else if (alertView.tag == 2 && buttonIndex == 0){
+        //download latest version
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:
+                                                    @"http://www.hla.com.my/agencyportal/includes/DLrotate2.asp?file=iMP/iMP.plist"]];
+        
+    }
+    else if (alertView.tag == 3){
+        exit(0);
+    }
 }
 
 - (IBAction)ChangePassword:(id)sender
@@ -213,44 +213,44 @@ id temp;
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-	
+    
     activeField = textField;
     return YES;
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-	if (string.length == 0) {
-		return YES;
-	}
-	
-	if (textField == txtAddress1 || textField == txtAddress2 || textField == txtAddress3 ) {
-		if ([textField.text stringByReplacingOccurrencesOfString:@" " withString:@""].length > 31) {
-			return NO;
-		}
-		else{
-			return YES;
-		}
-	}
-	else{
-		return YES;	
-	}
-	
-	
+    if (string.length == 0) {
+        return YES;
+    }
+    
+    if (textField == txtAddress1 || textField == txtAddress2 || textField == txtAddress3 ) {
+        if ([textField.text stringByReplacingOccurrencesOfString:@" " withString:@""].length > 31) {
+            return NO;
+        }
+        else{
+            return YES;
+        }
+    }
+    else{
+        return YES;
+    }
+    
+    
 }
 
 -(void)keyboardDidShow:(NSNotificationCenter *)notification
 {
     self.myScrollView.frame = CGRectMake(0, 44, 768, 704-352);
     self.myScrollView.contentSize = CGSizeMake(768, 605);
-	
+    
     CGRect textFieldRect = [activeField frame];
     textFieldRect.origin.y += 30;
-	
+    
     [self.myScrollView scrollRectToVisible:textFieldRect animated:YES];
     activeField = nil;
-	activeField = [[UITextField alloc] init ];
-
+    activeField = [[UITextField alloc] init ];
+    
 }
 
 -(void)keyboardDidHide:(NSNotificationCenter *)notification
@@ -276,10 +276,10 @@ id temp;
     else {
         if (txtAgentCode.text.length != 8) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
-                                                        message:@"Invalid Agent Code length. Agent Code length should be exact 8 characters long"
-                                                       delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                                                            message:@"Invalid Agent Code length. Agent Code length should be exact 8 characters long"
+                                                           delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [alert show];
-        
+            
             [txtAgentCode becomeFirstResponder];
             return FALSE;
         }
@@ -334,7 +334,7 @@ id temp;
         BOOL valid;
         NSCharacterSet *alphaNums = [NSCharacterSet decimalDigitCharacterSet];
         NSCharacterSet *inStringSet = [NSCharacterSet characterSetWithCharactersInString:txtMobileNumber.text];
-        valid = [alphaNums isSupersetOfSet:inStringSet]; 
+        valid = [alphaNums isSupersetOfSet:inStringSet];
         if (!valid) {
             
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
@@ -404,7 +404,7 @@ id temp;
 
 -(BOOL) NSStringIsValidEmail:(NSString *)checkString
 {
-    BOOL stricterFilter = YES; 
+    BOOL stricterFilter = YES;
     NSString *stricterFilterString = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
     NSString *laxString = @".+@.+\\.[A-Za-z]{2}[A-Za-z]*";
     NSString *emailRegex = stricterFilter ? stricterFilterString : laxString;
@@ -427,15 +427,17 @@ id temp;
     [spinnerLoading startLoadingSpinner:self.view label:@"Sync sedang berjalan 1/3"];
     WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
     [webservice fullSync:txtAgentCode.text delegate:self];
+    
+    //paralelly we sync the data referral
+    //[webservice dataReferralSync:[loginDB getLastUpdateReferral] delegate:self];
 }
 
 //here is our function for every response from webservice
 - (void) operation:(AgentWSSoapBindingOperation *)operation
 completedWithResponse:(AgentWSSoapBindingResponse *)response
 {
-    [spinnerLoading stopLoadingSpinner];
     NSArray *responseBodyParts = response.bodyParts;
-    if([[response.error localizedDescription] caseInsensitiveCompare:@""] != NSOrderedSame){
+    if([[response.error localizedDescription] caseInsensitiveCompare:@""] != NSOrderedSame){[spinnerLoading stopLoadingSpinner];
         UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Periksa lagi koneksi internet anda" message:@"" delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
         [alert show];
     }
@@ -446,6 +448,7 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
          ****/
         if ([bodyPart isKindOfClass:[SOAPFault class]]) {
             
+            [spinnerLoading stopLoadingSpinner];
             //You can get the error like this:
             NSString* errorMesg = ((SOAPFault *)bodyPart).simpleFaultString;
             UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Please check your connection" message:errorMesg delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
@@ -484,15 +487,16 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
                             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                                 //we insert/update the table
                                 [loginDB fullSyncTable:returnObj];
-                                [spinnerLoading stopLoadingSpinner];
                                 
-                                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Sync telah selesai" message:@"" delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
-                                [alert show];
                             });
                         });
-                       
-                     });
-               });
+                        
+                    });
+                });
+                
+                WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
+                [webservice dataReferralSync:[loginDB getLastUpdateReferral] delegate:self];
+                
             }else if([rateResponse.strStatus caseInsensitiveCompare:@"False"] == NSOrderedSame){
                 [spinnerLoading stopLoadingSpinner];
                 UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Proses Login anda gagal" message:@"" delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
@@ -501,26 +505,60 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
         }
         
         else if([bodyPart isKindOfClass:[AgentWS_CheckVersionResponse class]]) {
-             AgentWS_CheckVersionResponse* rateResponse = bodyPart;
-             if([rateResponse.strStatus caseInsensitiveCompare:@"True"] == NSOrderedSame){
-                 // create XMLDocument object
-                 DDXMLDocument *xml = [[DDXMLDocument alloc] initWithXMLString:
-                                       rateResponse.CheckVersionResult.xmlDetails options:0 error:nil];
-                 
-                 // Get root element - DataSetMenu for your XMLfile
-                 DDXMLElement *root = [xml rootElement];
-                 WebResponObj *returnObj = [[WebResponObj alloc]init];
-                 [self parseXML:root objBuff:returnObj index:0];
-//                 for(dataCollection *data in [returnObj getDataWrapper]){
-//                 }
-                 //partialsync
-                 NSString *xmlDummy = @"<?xml version='1.0'?><!-- This is a sample XML document --><Master><SyncDate>2016-02-25</SyncDate><TableName>Data_Cabang</TableName><TableName>eProposal_Credit_Card_Bank</TableName><TableName>eProposal_Identification</TableName></Master>";
-                 WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
-                 [webservice partialSync:@"1024" delegate:self xml:xmlDummy];
-             }else{
-                 NSLog(@"same version");
-             }
-         }
+            AgentWS_CheckVersionResponse* rateResponse = bodyPart;
+            if([rateResponse.strStatus caseInsensitiveCompare:@"True"] == NSOrderedSame){
+                // create XMLDocument object
+                DDXMLDocument *xml = [[DDXMLDocument alloc] initWithXMLString:
+                                      rateResponse.CheckVersionResult.xmlDetails options:0 error:nil];
+                
+                // Get root element - DataSetMenu for your XMLfile
+                DDXMLElement *root = [xml rootElement];
+                WebResponObj *returnObj = [[WebResponObj alloc]init];
+                [self parseXML:root objBuff:returnObj index:0];
+                //                 for(dataCollection *data in [returnObj getDataWrapper]){
+                //                 }
+                //partialsync
+                NSString *xmlDummy = @"<?xml version='1.0'?><!-- This is a sample XML document --><Master><SyncDate>2016-02-25</SyncDate><TableName>Data_Cabang</TableName><TableName>eProposal_Credit_Card_Bank</TableName><TableName>eProposal_Identification</TableName></Master>";
+                WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
+                [webservice partialSync:@"1024" delegate:self xml:xmlDummy];
+            }else{
+                NSLog(@"same version");
+            }
+        }
+        
+        /****
+         * is it AgentWS_SyncdatareferralResponse
+         ****/
+        else if([bodyPart isKindOfClass:[AgentWS_SyncdatareferralResponse class]]) {
+            [spinnerLoading stopLoadingSpinner];
+            AgentWS_SyncdatareferralResponse* rateResponse = bodyPart;
+            if([rateResponse.strstatus caseInsensitiveCompare:@"TRUE"]== NSOrderedSame){
+                
+                // create XMLDocument object
+                DDXMLDocument *xml = [[DDXMLDocument alloc] initWithXMLString:
+                                      rateResponse.SyncdatareferralResult.xmlDetails options:0 error:nil];
+                
+                // Get root element - DataSetMenu for your XMLfile
+                DDXMLElement *root = [xml rootElement];
+                WebResponObj *returnObj = [[WebResponObj alloc]init];
+                [self parseXML:root objBuff:returnObj index:0];
+                int result = [loginDB ReferralSyncTable:returnObj];
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    [spinnerLoading stopLoadingSpinner];
+                    
+                    UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Sync telah selesai" message:@"" delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
+                    [alert show];
+                });
+
+                
+                
+            }else{
+                
+            }
+        }
+        
     }
 }
 
@@ -529,9 +567,7 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
     for (DDXMLElement *DataSetMenuElement in [root children]) {
         // if the element name's is MenuCategories then do something
         if([[DataSetMenuElement children] count] <= 0){
-            if([[DataSetMenuElement name] caseInsensitiveCompare:@"xs:element"]==NSOrderedSame){
-                //we dont need this value
-            }else{
+            if([[DataSetMenuElement name] caseInsensitiveCompare:@"xs:element"]!=NSOrderedSame){
                 NSArray *elements = [root elementsForName:[DataSetMenuElement name]];
                 if([[[elements objectAtIndex:0]stringValue] caseInsensitiveCompare:@""] != NSOrderedSame){
                     NSString *tableName = [NSString stringWithFormat:@"%@&%d",[[[DataSetMenuElement parent] parent]name], index];
@@ -542,8 +578,8 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
                 }
             }
         }else{
-            DDXMLNode *nameNode = [DataSetMenuElement attributeForName: @"diffgr:id"];
-            if(nameNode != nil){
+            DDXMLNode *name = [DataSetMenuElement attributeForName: @"diffgr:id"];
+            if(name != nil){
                 index++;
             }
         }
@@ -558,8 +594,6 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
     mainLogin.modalPresentationStyle = UIModalPresentationFullScreen;
     mainLogin.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [self presentViewController:mainLogin animated:YES completion:nil];
-//    [self.view endEditing:TRUE];
-//    [self resignFirstResponder];
 }
 
 - (IBAction)btnContractDatePressed:(id)sender     //--bob
@@ -612,143 +646,143 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName
     attributes:(NSDictionary *)attributeDict  {
     
-	self.previousElementName = self.elementName;
-	
+    self.previousElementName = self.elementName;
+    
     if (qName) {
         self.elementName = qName;
     }
-	
+    
 }
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
     if (!self.elementName){
         return;
     }
-	
-	if([self.elementName isEqualToString:@"LoginError"]){
-		
-		if ([string isEqualToString:@""]) {
-			UIAlertView *success = [[UIAlertView alloc] initWithTitle:@" "
-															  message:@"Record saved" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil ];
-			success.tag = 1;
-			[success show];
-			
-			sqlite3_stmt *statement;
-			if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
-			{
-				NSString *querySQL = [NSString stringWithFormat: @"UPDATE Agent_Profile set AgentStatus = \"1\" WHERE "
-									  "AgentLoginID=\"hla\" "];
-               /* NSString *querySQL = [NSString stringWithFormat: @"UPDATE User_Profile set AgentStatus = \"1\" WHERE "
-									  "AgentLoginID=\"hla\" "];*/
-				
-				if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK){
-					if (sqlite3_step(statement) == SQLITE_DONE){
-						
-					}
-					
-					sqlite3_finalize(statement);
-				}
-				
-				sqlite3_close(contactDB);
-				querySQL = Nil;
-			}
-			statement = nil;
-			
-		}
-		else if ([string isEqualToString:@"Account suspended."]) {
-			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
-															message:[NSString stringWithFormat:@"Your Account is suspended. Please contact Hong Leong Assurance."]
-														   delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-			alert.tag = 3;
-			[alert show];
-			
-			alert = Nil;
-			
-			sqlite3_stmt *statement;
-			if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
-			{
-				/*NSString *querySQL = [NSString stringWithFormat: @"UPDATE User_Profile set AgentStatus = \"0\" WHERE "
-									  "AgentLoginID=\"hla\" "];*/
-				NSString *querySQL = [NSString stringWithFormat: @"UPDATE Agent_Profile set AgentStatus = \"0\" WHERE "
-									  "AgentLoginID=\"hla\" "];
+    
+    if([self.elementName isEqualToString:@"LoginError"]){
+        
+        if ([string isEqualToString:@""]) {
+            UIAlertView *success = [[UIAlertView alloc] initWithTitle:@" "
+                                                              message:@"Record saved" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil ];
+            success.tag = 1;
+            [success show];
+            
+            sqlite3_stmt *statement;
+            if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
+            {
+                NSString *querySQL = [NSString stringWithFormat: @"UPDATE Agent_Profile set AgentStatus = \"1\" WHERE "
+                                      "AgentLoginID=\"hla\" "];
+                /* NSString *querySQL = [NSString stringWithFormat: @"UPDATE User_Profile set AgentStatus = \"1\" WHERE "
+                 "AgentLoginID=\"hla\" "];*/
                 
-				if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK){
-					if (sqlite3_step(statement) == SQLITE_DONE){
-						
-					}
-					
-					sqlite3_finalize(statement);
-				}
-				
-				sqlite3_close(contactDB);
-				querySQL = Nil;
-			}
-			statement = nil;
-			
-		}
-		else{
-			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
-									message:string delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil ];
-			
-			[alert show];
-			
-		}
-		
-	}
-	
-	else if([self.elementName isEqualToString:@"BadAttempts"]){
-		
-	}
-	
-	else if([self.elementName isEqualToString:@"string"]){
-		
-		NSString *strURL = [NSString stringWithFormat:@"%@",  string];
-		NSLog(@"%@", strURL);
-		NSURL *url = [NSURL URLWithString:strURL];
-		NSURLRequest *request = [NSURLRequest requestWithURL:url];
-		
-		AFXMLRequestOperation *operation =
-		[AFXMLRequestOperation XMLParserRequestOperationWithRequest:request
-															success:^(NSURLRequest *request, NSHTTPURLResponse *response, NSXMLParser *XMLParser) {
-																
-																XMLParser.delegate = self;
-																[XMLParser setShouldProcessNamespaces:YES];
-																[XMLParser parse];
-																
-															} failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSXMLParser *XMLParser) {
-																NSLog(@"error in calling web service");
-															}];
-		
-		[operation start];
-	}
-	else if ([self.elementName isEqualToString:@"SITradVersion"]){
-		NSString * AppsVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"];
-		
-		if (![string isEqualToString:AppsVersion]) {
-				NSLog(@"latest version is available %@", AppsVersion);
-			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
-															message:[NSString stringWithFormat:@"Latest version is available for download. Do you want to download now ? "]
-														   delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
-			alert.tag = 2;
-			[alert show];
-			alert = Nil;
-		}
-		NSLog(@"%@", string);
-	}
-	else if ([self.elementName isEqualToString:@"DLURL"]){
-		NSLog(@"%@", string);
-	}
-	else if ([self.elementName isEqualToString:@"DLFilename"]){
-		NSLog(@"%@", string);
-	}
+                if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK){
+                    if (sqlite3_step(statement) == SQLITE_DONE){
+                        
+                    }
+                    
+                    sqlite3_finalize(statement);
+                }
+                
+                sqlite3_close(contactDB);
+                querySQL = Nil;
+            }
+            statement = nil;
+            
+        }
+        else if ([string isEqualToString:@"Account suspended."]) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
+                                                            message:[NSString stringWithFormat:@"Your Account is suspended. Please contact Hong Leong Assurance."]
+                                                           delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            alert.tag = 3;
+            [alert show];
+            
+            alert = Nil;
+            
+            sqlite3_stmt *statement;
+            if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
+            {
+                /*NSString *querySQL = [NSString stringWithFormat: @"UPDATE User_Profile set AgentStatus = \"0\" WHERE "
+                 "AgentLoginID=\"hla\" "];*/
+                NSString *querySQL = [NSString stringWithFormat: @"UPDATE Agent_Profile set AgentStatus = \"0\" WHERE "
+                                      "AgentLoginID=\"hla\" "];
+                
+                if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK){
+                    if (sqlite3_step(statement) == SQLITE_DONE){
+                        
+                    }
+                    
+                    sqlite3_finalize(statement);
+                }
+                
+                sqlite3_close(contactDB);
+                querySQL = Nil;
+            }
+            statement = nil;
+            
+        }
+        else{
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
+                                                            message:string delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil ];
+            
+            [alert show];
+            
+        }
+        
+    }
+    
+    else if([self.elementName isEqualToString:@"BadAttempts"]){
+        
+    }
+    
+    else if([self.elementName isEqualToString:@"string"]){
+        
+        NSString *strURL = [NSString stringWithFormat:@"%@",  string];
+        NSLog(@"%@", strURL);
+        NSURL *url = [NSURL URLWithString:strURL];
+        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+        
+        AFXMLRequestOperation *operation =
+        [AFXMLRequestOperation XMLParserRequestOperationWithRequest:request
+                                                            success:^(NSURLRequest *request, NSHTTPURLResponse *response, NSXMLParser *XMLParser) {
+                                                                
+                                                                XMLParser.delegate = self;
+                                                                [XMLParser setShouldProcessNamespaces:YES];
+                                                                [XMLParser parse];
+                                                                
+                                                            } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSXMLParser *XMLParser) {
+                                                                NSLog(@"error in calling web service");
+                                                            }];
+        
+        [operation start];
+    }
+    else if ([self.elementName isEqualToString:@"SITradVersion"]){
+        NSString * AppsVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"];
+        
+        if (![string isEqualToString:AppsVersion]) {
+            NSLog(@"latest version is available %@", AppsVersion);
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
+                                                            message:[NSString stringWithFormat:@"Latest version is available for download. Do you want to download now ? "]
+                                                           delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+            alert.tag = 2;
+            [alert show];
+            alert = Nil;
+        }
+        NSLog(@"%@", string);
+    }
+    else if ([self.elementName isEqualToString:@"DLURL"]){
+        NSLog(@"%@", string);
+    }
+    else if ([self.elementName isEqualToString:@"DLFilename"]){
+        NSLog(@"%@", string);
+    }
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
-	self.elementName = nil;
+    self.elementName = nil;
 }
 
 -(void) parserDidEndDocument:(NSXMLParser *)parser {
-	
+    
 }
 
 #pragma mark - sqlite DB
@@ -760,10 +794,10 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
     if (sqlite3_open(dbpath, &contactDB) == SQLITE_OK)
     {
         NSString *querySQL = [NSString stringWithFormat:@"SELECT IndexNo, AgentLoginID, AgentCode, AgentName, AgentContactNo, "
-							  "ImmediateLeaderCode, ImmediateLeaderName, BusinessRegNumber, AgentEmail, AgentICNo, "
-							  "AgentContractDate, AgentAddr1, AgentAddr2, AgentAddr3, AgentPortalLoginID, AgentPortalPassword "
-							  "FROM Agent_Profile WHERE IndexNo=\"%d\"",
-							  self.indexNo];
+                              "ImmediateLeaderCode, ImmediateLeaderName, BusinessRegNumber, AgentEmail, AgentICNo, "
+                              "AgentContractDate, AgentAddr1, AgentAddr2, AgentAddr3, AgentPortalLoginID, AgentPortalPassword "
+                              "FROM Agent_Profile WHERE IndexNo=\"%d\"",
+                              self.indexNo];
         const char *query_stmt = [querySQL UTF8String];
         
         if (sqlite3_prepare_v2(contactDB, query_stmt, -1, &statement, NULL) == SQLITE_OK)
@@ -808,13 +842,13 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
                 const char *add3 = (const char*)sqlite3_column_text(statement, 13);
                 Addr3 = add3 == NULL ? @"" : [[NSString alloc] initWithUTF8String:add3];
                 
-				const char *temp1 = (const char*)sqlite3_column_text(statement, 14);
+                const char *temp1 = (const char*)sqlite3_column_text(statement, 14);
                 AgentPortalLoginID = temp1 == NULL ? @"" : [[NSString alloc] initWithUTF8String:temp1];
                 
-				const char *temp2 = (const char*)sqlite3_column_text(statement, 15);
+                const char *temp2 = (const char*)sqlite3_column_text(statement, 15);
                 AgentPortalPassword = temp2 == NULL ? @"" : [[NSString alloc] initWithUTF8String:temp2];
                 
-				
+                
                 txtAgentCode.text = code;
                 txtAgentName.text = name;
                 txtEmail.text = email;
@@ -856,11 +890,11 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
 //    if([self Validation] == TRUE){
 //        const char *dbpath = [databasePath UTF8String];
 //        sqlite3_stmt *statement;
-//        
-//        
+//
+//
 //        if (sqlite3_open(dbpath, &contactDB) == SQLITE_OK)
 //        {
-//            
+//
 //            NSString *querySQL = [NSString stringWithFormat:@"UPDATE Agent_Profile SET AgentCode= \"%@\", AgentName= \"%@\", "
 //								  "AgentContactNo= \"%@\", ImmediateLeaderCode= \"%@\", ImmediateLeaderName= \"%@\", "
 //								  "BusinessRegNumber = \"%@\", AgentEmail= \"%@\", AgentICNo=\"%@\", AgentContractDate=\"%@\", "
@@ -869,8 +903,8 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
 //								  txtAgentCode.text, txtAgentName.text, txtAgentContactNo.text, txtLeaderCode.text,
 //								  txtLeaderName.text,txtBixRegNo.text,txtEmail.text,txtICNo.text, contDate, txtAddr1.text,
 //								  txtAddr2.text, txtAddr3.text, txtAgencyPortalLogin.text, txtAgencyPortalPwd.text, self.indexNo];
-//            
-//            
+//
+//
 //            const char *query_stmt = [querySQL UTF8String];
 //            
 //            //NSLog(@"%@",querySQL);
