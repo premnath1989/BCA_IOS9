@@ -2,11 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "add.png",
+      "filename" : "icon_spajeapplicationlist_secondary.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "icon_spajeapplicationlist_secondary-1.png",
       "scale" : "2x"
     },
     {

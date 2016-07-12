@@ -65,6 +65,7 @@
 		0F3268721D1BBDCB001A9021 /* String.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F3268711D1BBDCB001A9021 /* String.m */; };
 		0F3268741D1BD140001A9021 /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F3268731D1BD140001A9021 /* Image.xcassets */; };
 		0F48376C1D334B16009A45D4 /* Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F48376B1D334B16009A45D4 /* Alert.m */; };
+		0F48376F1D34F262009A45D4 /* ModelCFFHtml.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F48376E1D34F262009A45D4 /* ModelCFFHtml.m */; };
 		0FF8455C1D227383008CF861 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF8455B1D227383008CF861 /* CoreData.framework */; };
 		0FF8455E1D2376A8008CF861 /* SPAJ Submitted List Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FF8455D1D2376A8008CF861 /* SPAJ Submitted List Cell.xib */; };
 		0FF845641D237732008CF861 /* SPAJ Existing List Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF845601D237732008CF861 /* SPAJ Existing List Cell.m */; };
@@ -440,7 +441,6 @@
 		4386250C1D24C2C500F1BDC7 /* tv-off.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 438624DF1D24C2C500F1BDC7 /* tv-off.jpg */; };
 		4386250D1D24C2C500F1BDC7 /* tv-on.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 438624E01D24C2C500F1BDC7 /* tv-on.jpg */; };
 		4386250E1D24C2C500F1BDC7 /* TweenMax.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 438624E11D24C2C500F1BDC7 /* TweenMax.min.js */; };
-		4386250F1D24C2C500F1BDC7 /* wear-black-on.png in Resources */ = {isa = PBXBuildFile; fileRef = 438624E21D24C2C500F1BDC7 /* wear-black-on.png */; };
 		438625101D24C2C500F1BDC7 /* wear-off.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 438624E31D24C2C500F1BDC7 /* wear-off.jpg */; };
 		438625111D24C2C500F1BDC7 /* wear-on.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 438624E41D24C2C500F1BDC7 /* wear-on.jpg */; };
 		438625121D24C2C500F1BDC7 /* wear-silver-on.png in Resources */ = {isa = PBXBuildFile; fileRef = 438624E51D24C2C500F1BDC7 /* wear-silver-on.png */; };
@@ -486,7 +486,6 @@
 		43DA4BE61C770B3C0038C92C /* icon_leads_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 43DA4BE51C770B3C0038C92C /* icon_leads_2.png */; };
 		43E171861CCB5411008B2235 /* Signature Filled.png in Resources */ = {isa = PBXBuildFile; fileRef = 43E171841CCB5411008B2235 /* Signature Filled.png */; };
 		43E171871CCB5411008B2235 /* Signature Filled@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43E171851CCB5411008B2235 /* Signature Filled@2x.png */; };
-		43E7FA141D20CF560090DF2D /* ModelCFFHtml.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E7FA131D20CF560090DF2D /* ModelCFFHtml.m */; };
 		43E7FA161D20E05B0090DF2D /* index3.html in Resources */ = {isa = PBXBuildFile; fileRef = 43E7FA151D20E05B0090DF2D /* index3.html */; };
 		43E7FA181D20E3A50090DF2D /* index2.html in Resources */ = {isa = PBXBuildFile; fileRef = 43E7FA171D20E3A50090DF2D /* index2.html */; };
 		43EFEB731C93915A00B9AA2A /* LogoBCALife.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 43EFEB721C93915A00B9AA2A /* LogoBCALife.jpg */; };
@@ -1088,6 +1087,8 @@
 		0F3268731D1BD140001A9021 /* Image.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Image.xcassets; path = SPAJ/Image.xcassets; sourceTree = "<group>"; };
 		0F48376A1D334B16009A45D4 /* Alert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Alert.h; path = SPAJ/Alert.h; sourceTree = "<group>"; };
 		0F48376B1D334B16009A45D4 /* Alert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Alert.m; path = SPAJ/Alert.m; sourceTree = "<group>"; };
+		0F48376D1D34F262009A45D4 /* ModelCFFHtml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelCFFHtml.h; sourceTree = "<group>"; };
+		0F48376E1D34F262009A45D4 /* ModelCFFHtml.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelCFFHtml.m; sourceTree = "<group>"; };
 		0FF8455B1D227383008CF861 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		0FF8455D1D2376A8008CF861 /* SPAJ Submitted List Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "SPAJ Submitted List Cell.xib"; path = "SPAJ/SPAJ Submitted List Cell.xib"; sourceTree = "<group>"; };
 		0FF8455F1D237732008CF861 /* SPAJ Existing List Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SPAJ Existing List Cell.h"; path = "SPAJ/SPAJ Existing List Cell.h"; sourceTree = "<group>"; };
@@ -1728,8 +1729,6 @@
 		43DA4BE51C770B3C0038C92C /* icon_leads_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_leads_2.png; sourceTree = "<group>"; };
 		43E171841CCB5411008B2235 /* Signature Filled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Signature Filled.png"; sourceTree = "<group>"; };
 		43E171851CCB5411008B2235 /* Signature Filled@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Signature Filled@2x.png"; sourceTree = "<group>"; };
-		43E7FA121D20CF560090DF2D /* ModelCFFHtml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelCFFHtml.h; sourceTree = "<group>"; };
-		43E7FA131D20CF560090DF2D /* ModelCFFHtml.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelCFFHtml.m; sourceTree = "<group>"; };
 		43E7FA151D20E05B0090DF2D /* index3.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index3.html; sourceTree = "<group>"; };
 		43E7FA171D20E3A50090DF2D /* index2.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index2.html; sourceTree = "<group>"; };
 		43EFEB721C93915A00B9AA2A /* LogoBCALife.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = LogoBCALife.jpg; path = SI/LogoBCALife.jpg; sourceTree = "<group>"; };
@@ -4169,8 +4168,8 @@
 				438726561D0FE6FB00F92A6B /* ModelProspectSpouse.m */,
 				43B346A81D110DE300B8DE32 /* ModelProspectChild.h */,
 				43B346A91D110DE300B8DE32 /* ModelProspectChild.m */,
-				43E7FA121D20CF560090DF2D /* ModelCFFHtml.h */,
-				43E7FA131D20CF560090DF2D /* ModelCFFHtml.m */,
+				0F48376D1D34F262009A45D4 /* ModelCFFHtml.h */,
+				0F48376E1D34F262009A45D4 /* ModelCFFHtml.m */,
 			);
 			name = "HLADB Model";
 			sourceTree = "<group>";
@@ -5695,7 +5694,7 @@
 				ORGANIZATIONNAME = "InfoConnect Sdn Bhd";
 				TargetAttributes = {
 					C4E9D18F1612C64900016053 = {
-						DevelopmentTeam = 25W8386326;
+						DevelopmentTeam = 87JN2XNQTS;
 					};
 				};
 			};
@@ -6539,6 +6538,7 @@
 				AA4EF7701C85A4260050CCD8 /* ReaderThumbRequest.m in Sources */,
 				C3A8D1081833AEB700E65FC9 /* LA1DetailsVC.m in Sources */,
 				C3A8D1091833AEB700E65FC9 /* LA2DetailsVC.m in Sources */,
+				0F48376F1D34F262009A45D4 /* ModelCFFHtml.m in Sources */,
 				C3A8D10A1833AEB700E65FC9 /* MainLA1DetailsVC.m in Sources */,
 				C3A8D10B1833AEB700E65FC9 /* PayorDetailsVC.m in Sources */,
 				C3A8D10E1833CF9B00E65FC9 /* ExistingPoliciesVC.m in Sources */,
@@ -6861,7 +6861,7 @@
 					"\"$(SRCROOT)/Third_Party/include\"",
 				);
 				INFOPLIST_FILE = "HLA/BLESS-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -6918,7 +6918,7 @@
 					"\"$(SRCROOT)/Third_Party/include\"",
 				);
 				INFOPLIST_FILE = "HLA/BLESS-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -7013,7 +7013,7 @@
 					"\"$(SRCROOT)/Third_Party/include\"",
 				);
 				INFOPLIST_FILE = "HLA/BLESS-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",

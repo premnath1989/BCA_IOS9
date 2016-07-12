@@ -36,8 +36,19 @@
         {
             UserInterface *objectUserInterface = [[UserInterface alloc] init];
             
-            self.backgroundColor = [objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0];
+            self.backgroundColor = [objectUserInterface generateUIColor:THEME_COLOR_SENARY floatOpacity:0.0];
             [self setTitleColor:[objectUserInterface generateUIColor:THEME_COLOR_QUINARY floatOpacity:1.0] forState:UIControlStateNormal];
+            [self.widthAnchor constraintEqualToConstant:NAVIGATION_CONTAINER_WIDTH].active = true;
+            [self.heightAnchor constraintEqualToConstant:NAVIGATION_CONTAINER_WIDTH].active = true;
+            [self setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
+            [self setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
+            [self setTitleEdgeInsets:UIEdgeInsetsMake(70, -48, 0, 0)];
+            [self setImageEdgeInsets:UIEdgeInsetsMake(0, 14, 0, 0)];
+            [self setContentEdgeInsets:UIEdgeInsetsMake(-20, 0, 0, 0)];
+            [self setClipsToBounds:false];
+            [self.titleLabel setFont:[UIFont fontWithName:THEME_FONT_PRIMARY size:FONTSIZE_NAVIGATION_BUTTON]];
+            [self.titleLabel setLineBreakMode:NSLineBreakByWordWrapping];
+            [self.titleLabel setTextAlignment:NSTextAlignmentCenter];
         }
 
     @end
@@ -62,7 +73,7 @@
             
             self.backgroundColor = [objectUserInterface generateUIColor:THEME_COLOR_QUINARY floatOpacity:1.0];
             [self setTitleColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0] forState:UIControlStateNormal];
-            [self.titleLabel setFont:[UIFont fontWithName:THEME_FONT_PRIMARY size:FONTSIZE_FORM_BUTTON]];
+            [self.titleLabel setFont:[UIFont fontWithName:THEME_FONT_PRIMARY size:FONTSIZE_NAVIGATION_BUTTON]];
         }
 
     @end
