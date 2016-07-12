@@ -488,14 +488,16 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
                                 //we insert/update the table
                                 [loginDB fullSyncTable:returnObj];
                                 
+                                dispatch_async(dispatch_get_main_queue(), ^{
+                                    //we update the referral data serially
+                                    WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
+                                    [webservice dataReferralSync:[loginDB getLastUpdateReferral] delegate:self];
+                                });
                             });
                         });
                         
                     });
                 });
-                
-                WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
-                [webservice dataReferralSync:[loginDB getLastUpdateReferral] delegate:self];
                 
             }else if([rateResponse.strStatus caseInsensitiveCompare:@"False"] == NSOrderedSame){
                 [spinnerLoading stopLoadingSpinner];

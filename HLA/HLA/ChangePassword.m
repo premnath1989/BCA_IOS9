@@ -407,15 +407,18 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
                     [spinnerLoading stopLoadingSpinner];
                     [spinnerLoading startLoadingSpinner:self.view label:@"Sync sedang berjalan 4/4"];
                     
-                    dispatch_async(dispatch_get_main_queue(), ^{
+                    dispatch_async(dispatch_get_global_queue(
+                                                             DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                        
                         WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
                         NSString *encryptedNewPass = [encryptWrapper encrypt:txtNewPwd.text];
                         NSString *encryptedOldPass = [encryptWrapper encrypt:txtOldPwd.text];
-                        [webservice FirstTimeLogin:self AgentCode:txtAgentCode.text password:encryptedOldPass newPassword:encryptedNewPass UUID:[loginDB getUniqueDeviceIdentifierAsString]];
+                        
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [webservice FirstTimeLogin:self AgentCode:txtAgentCode.text password:encryptedOldPass newPassword:encryptedNewPass UUID:[loginDB getUniqueDeviceIdentifierAsString]];
+                        });
                     });
                 });
-                
-                
                 
             }else{
                 
@@ -476,15 +479,17 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
                                 //we insert/update the table
                                 [loginDB fullSyncTable:returnObj];
                                 
+                                
+                                 dispatch_async(dispatch_get_main_queue(), ^{
+                                    //we update the referral data serially
+                                    WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
+                                    [webservice dataReferralSync:[loginDB getLastUpdateReferral] delegate:self];
+                                 });
 
                             });
                         });
                     });
                 });
-                
-                //we update the referral data paralelly
-                WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
-                [webservice dataReferralSync:[loginDB getLastUpdateReferral] delegate:self];
                 
             }else if([rateResponse.strStatus caseInsensitiveCompare:@"False"] == NSOrderedSame){
                 [spinnerLoading stopLoadingSpinner];
@@ -508,10 +513,10 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
                 WebResponObj *returnObj = [[WebResponObj alloc]init];
                 [self parseXML:root objBuff:returnObj index:0];
                 int result = [loginDB fullSyncTable:returnObj];
-                if(result == TABLE_INSERTION_SUCCESS){
+//                if(result == TABLE_INSERTION_SUCCESS){
                     [loginDB updateLoginDate];
                     [self gotoCarousel];
-                }
+//                }
             }else if([rateResponse.strStatus caseInsensitiveCompare:@"False"] == NSOrderedSame){
                 [spinnerLoading stopLoadingSpinner];
                 [loginDB DeleteAgentProfile];
