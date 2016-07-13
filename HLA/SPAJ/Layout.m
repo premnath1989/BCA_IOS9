@@ -60,7 +60,7 @@
             self.axis = UILayoutConstraintAxisVertical;
             self.distribution = UIStackViewDistributionFill;
             self.alignment = UIStackViewAlignmentCenter;
-            self.spacing = FORM_STACKVIEW_VERTICALSPACING;
+            // self.spacing = FORM_STACKVIEW_VERTICALSPACING;
         }
 
     @end

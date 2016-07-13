@@ -16,6 +16,7 @@
 #import "SPAJ Add Detail.h"
 #import "SPAJ E Application List.h"
 #import "Insert Initialization.h"
+#import "CarouselViewController.h"
 
 
 // DECLARATION
@@ -58,7 +59,7 @@
         } */
         
         [_buttonHome setTitle:NSLocalizedString(@"BUTTON_HOME", nil) forState:UIControlStateNormal];
-        [_buttonEApplicationList setTitle:NSLocalizedString(@"BUTTON_HOME", nil) forState:UIControlStateNormal];
+        [_buttonEApplicationList setTitle:NSLocalizedString(@"BUTTON_EAPPLICATIONLIST", nil) forState:UIControlStateNormal];
         [_buttonExistingList setTitle:NSLocalizedString(@"BUTTON_EXISTINGLIST", nil) forState:UIControlStateNormal];
         [_buttonSubmittedList setTitle:NSLocalizedString(@"BUTTON_SUBMITTEDLIST", nil) forState:UIControlStateNormal];
         [_buttonAdd setTitle:NSLocalizedString(@"BUTTON_ADD", nil) forState:UIControlStateNormal];
@@ -119,6 +120,17 @@
         viewController.view.frame = self.viewContent.bounds;
         [self addChildViewController:viewController];
         [self.viewContent addSubview:viewController.view];
+    }
+
+    - (IBAction)actionGoToHome:(id)sender
+    {
+        // CarouselViewController* viewController = [[CarouselViewController alloc] initWithNibName:@"SPAJ Add Detail" bundle:nil];
+        // [self presentViewController:viewController animated:true completion:nil];
+        
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"CarouselStoryboard" bundle:Nil];
+        
+        CarouselViewController *viewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"carouselView"];
+        [self presentViewController:viewController animated:NO completion:Nil];
     }
 
 

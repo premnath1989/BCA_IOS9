@@ -52,3 +52,4 @@
     // BUTTON
 
     extern CGFloat const FONTSIZE_FORM_BUTTON;
+    extern CGFloat const FONTSIZE_NAVIGATION_BUTTON;

@@ -65,6 +65,7 @@
 		0F3268721D1BBDCB001A9021 /* String.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F3268711D1BBDCB001A9021 /* String.m */; };
 		0F3268741D1BD140001A9021 /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F3268731D1BD140001A9021 /* Image.xcassets */; };
 		0F48376C1D334B16009A45D4 /* Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F48376B1D334B16009A45D4 /* Alert.m */; };
+		0F48376F1D34F262009A45D4 /* ModelCFFHtml.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F48376E1D34F262009A45D4 /* ModelCFFHtml.m */; };
 		0FF8455C1D227383008CF861 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF8455B1D227383008CF861 /* CoreData.framework */; };
 		0FF8455E1D2376A8008CF861 /* SPAJ Submitted List Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FF8455D1D2376A8008CF861 /* SPAJ Submitted List Cell.xib */; };
 		0FF845641D237732008CF861 /* SPAJ Existing List Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF845601D237732008CF861 /* SPAJ Existing List Cell.m */; };
@@ -1087,6 +1088,8 @@
 		0F3268731D1BD140001A9021 /* Image.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Image.xcassets; path = SPAJ/Image.xcassets; sourceTree = "<group>"; };
 		0F48376A1D334B16009A45D4 /* Alert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Alert.h; path = SPAJ/Alert.h; sourceTree = "<group>"; };
 		0F48376B1D334B16009A45D4 /* Alert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Alert.m; path = SPAJ/Alert.m; sourceTree = "<group>"; };
+		0F48376D1D34F262009A45D4 /* ModelCFFHtml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelCFFHtml.h; sourceTree = "<group>"; };
+		0F48376E1D34F262009A45D4 /* ModelCFFHtml.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelCFFHtml.m; sourceTree = "<group>"; };
 		0FF8455B1D227383008CF861 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		0FF8455D1D2376A8008CF861 /* SPAJ Submitted List Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "SPAJ Submitted List Cell.xib"; path = "SPAJ/SPAJ Submitted List Cell.xib"; sourceTree = "<group>"; };
 		0FF8455F1D237732008CF861 /* SPAJ Existing List Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SPAJ Existing List Cell.h"; path = "SPAJ/SPAJ Existing List Cell.h"; sourceTree = "<group>"; };
@@ -4168,8 +4171,8 @@
 				438726561D0FE6FB00F92A6B /* ModelProspectSpouse.m */,
 				43B346A81D110DE300B8DE32 /* ModelProspectChild.h */,
 				43B346A91D110DE300B8DE32 /* ModelProspectChild.m */,
-				4313E81A1D34F3B40036A6B7 /* ModelCFFHtml.h */,
-				4313E81B1D34F3B40036A6B7 /* ModelCFFHtml.m */,
+				0F48376D1D34F262009A45D4 /* ModelCFFHtml.h */,
+				0F48376E1D34F262009A45D4 /* ModelCFFHtml.m */,
 			);
 			name = "HLADB Model";
 			sourceTree = "<group>";
@@ -6538,7 +6541,7 @@
 				AA4EF7701C85A4260050CCD8 /* ReaderThumbRequest.m in Sources */,
 				C3A8D1081833AEB700E65FC9 /* LA1DetailsVC.m in Sources */,
 				C3A8D1091833AEB700E65FC9 /* LA2DetailsVC.m in Sources */,
-				4313E81C1D34F3B40036A6B7 /* ModelCFFHtml.m in Sources */,
+				0F48376F1D34F262009A45D4 /* ModelCFFHtml.m in Sources */,
 				C3A8D10A1833AEB700E65FC9 /* MainLA1DetailsVC.m in Sources */,
 				C3A8D10B1833AEB700E65FC9 /* PayorDetailsVC.m in Sources */,
 				C3A8D10E1833CF9B00E65FC9 /* ExistingPoliciesVC.m in Sources */,
@@ -6861,7 +6864,7 @@
 					"\"$(SRCROOT)/Third_Party/include\"",
 				);
 				INFOPLIST_FILE = "HLA/BLESS-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -6918,7 +6921,7 @@
 					"\"$(SRCROOT)/Third_Party/include\"",
 				);
 				INFOPLIST_FILE = "HLA/BLESS-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -7013,7 +7016,7 @@
 					"\"$(SRCROOT)/Third_Party/include\"",
 				);
 				INFOPLIST_FILE = "HLA/BLESS-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
