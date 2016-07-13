@@ -17,7 +17,7 @@
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     [database open];
     
-    BOOL success = [database executeUpdate:@"insert into CFFTransaction (CFFID, ProspectIndexNo, CFFDateCreated, CreatedBy,CFFDateModified,ModifiedBy,CFFStatus,CustomerStatementCFFID,CustomerNeedsCFFID,CustomerRiskCFFID,PotentialDiscussionCFFID) values (?,?,?,?,?,?,?,?,?,?,?)" ,
+    BOOL success = [database executeUpdate:@"insert into CFFTransaction (CFFID, ProspectIndexNo, CFFDateCreated, CreatedBy,CFFDateModified,ModifiedBy,CFFStatus,CustomerStatementCFFID,CustomerNeedsCFFID,CustomerRiskCFFID,PotentialDiscussionCFFID,ProteksiCFFID,PensiunCFFID,PendidikanCFFID,WarisanCFFID,InvestasiCFFID) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)" ,
                     [cffTransactionDictionary valueForKey:@"CFFID"],
                     [cffTransactionDictionary valueForKey:@"ProspectIndexNo"],
                     [cffTransactionDictionary valueForKey:@"CFFDateCreated"],
@@ -28,7 +28,12 @@
                     [cffTransactionDictionary valueForKey:@"CustomerStatementCFFID"],
                     [cffTransactionDictionary valueForKey:@"CustomerNeedsCFFID"],
                     [cffTransactionDictionary valueForKey:@"CustomerRiskCFFID"],
-                    [cffTransactionDictionary valueForKey:@"PotentialDiscussionCFFID"]];
+                    [cffTransactionDictionary valueForKey:@"PotentialDiscussionCFFID"],
+                    [cffTransactionDictionary valueForKey:@"ProteksiCFFID"],
+                    [cffTransactionDictionary valueForKey:@"PensiunCFFID"],
+                    [cffTransactionDictionary valueForKey:@"PendidikanCFFID"],
+                    [cffTransactionDictionary valueForKey:@"WarisanCFFID"],
+                    [cffTransactionDictionary valueForKey:@"InvestasiCFFID"]];
     
     if (!success) {
         NSLog(@"%s: insert error: %@", __FUNCTION__, [database lastErrorMessage]);

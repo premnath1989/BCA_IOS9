@@ -450,6 +450,14 @@
 		438625141D24C2C500F1BDC7 /* Android.htm in Resources */ = {isa = PBXBuildFile; fileRef = 438624E71D24C2C500F1BDC7 /* Android.htm */; };
 		438625191D24C30200F1BDC7 /* PernyataanNasabahViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 438625171D24C30200F1BDC7 /* PernyataanNasabahViewController.m */; };
 		4386251A1D24C30200F1BDC7 /* PernyataanNasabahViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 438625181D24C30200F1BDC7 /* PernyataanNasabahViewController.xib */; };
+		43870C9F1D35FEAF0035143C /* CustomerNeeds.html in Resources */ = {isa = PBXBuildFile; fileRef = 43870C971D35FEAF0035143C /* CustomerNeeds.html */; };
+		43870CA01D35FEAF0035143C /* CustomerStatement.html in Resources */ = {isa = PBXBuildFile; fileRef = 43870C981D35FEAF0035143C /* CustomerStatement.html */; };
+		43870CA11D35FEAF0035143C /* Investasi.html in Resources */ = {isa = PBXBuildFile; fileRef = 43870C991D35FEAF0035143C /* Investasi.html */; };
+		43870CA21D35FEAF0035143C /* Pensiun.html in Resources */ = {isa = PBXBuildFile; fileRef = 43870C9A1D35FEAF0035143C /* Pensiun.html */; };
+		43870CA31D35FEAF0035143C /* PotentialDiscussion.html in Resources */ = {isa = PBXBuildFile; fileRef = 43870C9B1D35FEAF0035143C /* PotentialDiscussion.html */; };
+		43870CA41D35FEAF0035143C /* ProfileRisk.html in Resources */ = {isa = PBXBuildFile; fileRef = 43870C9C1D35FEAF0035143C /* ProfileRisk.html */; };
+		43870CA51D35FEAF0035143C /* Proteksi.html in Resources */ = {isa = PBXBuildFile; fileRef = 43870C9D1D35FEAF0035143C /* Proteksi.html */; };
+		43870CA61D35FEAF0035143C /* Warisan.html in Resources */ = {isa = PBXBuildFile; fileRef = 43870C9E1D35FEAF0035143C /* Warisan.html */; };
 		438726541D0FB55F00F92A6B /* ModelCFFTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = 438726531D0FB55F00F92A6B /* ModelCFFTransaction.m */; };
 		438726571D0FE6FB00F92A6B /* ModelProspectSpouse.m in Sources */ = {isa = PBXBuildFile; fileRef = 438726561D0FE6FB00F92A6B /* ModelProspectSpouse.m */; };
 		4399826C1D07D025009CFEB2 /* CFFListingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4399826A1D07D025009CFEB2 /* CFFListingViewController.m */; };
@@ -1670,6 +1678,14 @@
 		438625161D24C30200F1BDC7 /* PernyataanNasabahViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PernyataanNasabahViewController.h; sourceTree = "<group>"; };
 		438625171D24C30200F1BDC7 /* PernyataanNasabahViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PernyataanNasabahViewController.m; sourceTree = "<group>"; };
 		438625181D24C30200F1BDC7 /* PernyataanNasabahViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PernyataanNasabahViewController.xib; sourceTree = "<group>"; };
+		43870C971D35FEAF0035143C /* CustomerNeeds.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = CustomerNeeds.html; sourceTree = "<group>"; };
+		43870C981D35FEAF0035143C /* CustomerStatement.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = CustomerStatement.html; sourceTree = "<group>"; };
+		43870C991D35FEAF0035143C /* Investasi.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Investasi.html; sourceTree = "<group>"; };
+		43870C9A1D35FEAF0035143C /* Pensiun.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Pensiun.html; sourceTree = "<group>"; };
+		43870C9B1D35FEAF0035143C /* PotentialDiscussion.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = PotentialDiscussion.html; sourceTree = "<group>"; };
+		43870C9C1D35FEAF0035143C /* ProfileRisk.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ProfileRisk.html; sourceTree = "<group>"; };
+		43870C9D1D35FEAF0035143C /* Proteksi.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Proteksi.html; sourceTree = "<group>"; };
+		43870C9E1D35FEAF0035143C /* Warisan.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Warisan.html; sourceTree = "<group>"; };
 		438726521D0FB55F00F92A6B /* ModelCFFTransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelCFFTransaction.h; sourceTree = "<group>"; };
 		438726531D0FB55F00F92A6B /* ModelCFFTransaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelCFFTransaction.m; sourceTree = "<group>"; };
 		438726551D0FE6FB00F92A6B /* ModelProspectSpouse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelProspectSpouse.h; sourceTree = "<group>"; };
@@ -4813,6 +4829,14 @@
 				43E7FA151D20E05B0090DF2D /* index3.html */,
 				4313E81D1D34FDBA0036A6B7 /* index1.html */,
 				4313E81E1D34FDBA0036A6B7 /* index2.html */,
+				43870C971D35FEAF0035143C /* CustomerNeeds.html */,
+				43870C981D35FEAF0035143C /* CustomerStatement.html */,
+				43870C991D35FEAF0035143C /* Investasi.html */,
+				43870C9A1D35FEAF0035143C /* Pensiun.html */,
+				43870C9B1D35FEAF0035143C /* PotentialDiscussion.html */,
+				43870C9C1D35FEAF0035143C /* ProfileRisk.html */,
+				43870C9D1D35FEAF0035143C /* Proteksi.html */,
+				43870C9E1D35FEAF0035143C /* Warisan.html */,
 				43F7C3161C9D409D0074F464 /* Formatter */,
 				43FA6C151C87CD5D0098BA47 /* HTML USED */,
 				AA4EF6E61C85A3F20050CCD8 /* PDFReader */,
@@ -5819,6 +5843,7 @@
 				C4660EC71625047800BA4AFE /* SI_button2_144.png in Resources */,
 				C4660EC81625047800BA4AFE /* SI_button2.png in Resources */,
 				AA4EF75A1C85A4260050CCD8 /* Reader-Mark-Y.png in Resources */,
+				43870CA01D35FEAF0035143C /* CustomerStatement.html in Resources */,
 				173E81601C28F9C600BDAAE9 /* EappListing.storyboard in Resources */,
 				438625001D24C2C500F1BDC7 /* mode-logo.png in Resources */,
 				C4660EC91625047800BA4AFE /* SI_buttonB_144.png in Resources */,
@@ -5849,6 +5874,7 @@
 				C486D9CB163E5319009F8F21 /* btn_prospect_off.png in Resources */,
 				C486D9CC163E5319009F8F21 /* btn_prospect_on.png in Resources */,
 				43F8B5511C81E71B006F3F6C /* SIListingTableViewCell.xib in Resources */,
+				43870CA51D35FEAF0035143C /* Proteksi.html in Resources */,
 				C486D9CE163E5319009F8F21 /* btn_SIlisting_on.png in Resources */,
 				438625141D24C2C500F1BDC7 /* Android.htm in Resources */,
 				C486D9D1163E5466009F8F21 /* btn_home.png in Resources */,
@@ -5879,6 +5905,7 @@
 				C4E5A471168AAA89007848CE /* ChgPwd_32.png in Resources */,
 				C4E5A472168AAA89007848CE /* ChgPwd_48.png in Resources */,
 				C4E5A473168AAA89007848CE /* ChgPwd_64.png in Resources */,
+				43870CA11D35FEAF0035143C /* Investasi.html in Resources */,
 				0F3268561D1A93A4001A9021 /* SPAJ Submitted List.xib in Resources */,
 				438625031D24C2C500F1BDC7 /* more-from-2.png in Resources */,
 				C4E5A474168AAA89007848CE /* ChgPwd_128.png in Resources */,
@@ -5899,6 +5926,7 @@
 				4376DF181CD1934400816BB6 /* undo.png in Resources */,
 				C4E5A47C168AAA89007848CE /* Profile96.png in Resources */,
 				C4E5A47D168AAA89007848CE /* Profile128.png in Resources */,
+				43870C9F1D35FEAF0035143C /* CustomerNeeds.html in Resources */,
 				43B590961CA2702400DC53AC /* KeluargakuTableViewCell.xib in Resources */,
 				438624F11D24C2C500F1BDC7 /* auto-on_mobile.jpg in Resources */,
 				A1EEF95A1C8D8E520016BB3D /* Icon Brochure & save as-01-04.png in Resources */,
@@ -5928,6 +5956,7 @@
 				438624AF1D24B82E00F1BDC7 /* main.built.css in Resources */,
 				438624B31D24B82E00F1BDC7 /* Apple.html in Resources */,
 				A9E550A61C591F7900C9DAC2 /* Expand Arrow@2x.png in Resources */,
+				43870CA61D35FEAF0035143C /* Warisan.html in Resources */,
 				EF90B0BA178C133A00FEC129 /* emptyCheckBox.png in Resources */,
 				EF90B0BB178C133A00FEC129 /* tickCheckBox.png in Resources */,
 				EF90B0C6178D38BF00FEC129 /* disclosure_indicator.png in Resources */,
@@ -5994,6 +6023,7 @@
 				1706BD4F1C7169A40038D1DB /* menu_productinformation.png in Resources */,
 				C3560C941805119400745FC6 /* priority.plist in Resources */,
 				425092AE180E71E80022FED3 /* prospect_100_2.png in Resources */,
+				43870CA41D35FEAF0035143C /* ProfileRisk.html in Resources */,
 				425092AF180E71E80022FED3 /* prospect_100_3.png in Resources */,
 				438625111D24C2C500F1BDC7 /* wear-on.jpg in Resources */,
 				AA4EF7491C85A4260050CCD8 /* Default-667h@2x.png in Resources */,
@@ -6041,6 +6071,7 @@
 				2994B41718E121AE00B0D4D2 /* P2-1.jpg in Resources */,
 				438624AA1D24B82E00F1BDC7 /* ac-globalnav.built.css in Resources */,
 				2994B41818E121AE00B0D4D2 /* P2-2.jpg in Resources */,
+				43870CA31D35FEAF0035143C /* PotentialDiscussion.html in Resources */,
 				2994B41918E121AE00B0D4D2 /* P3-footer.jpg in Resources */,
 				2994B41A18E121AE00B0D4D2 /* P3-header.jpg in Resources */,
 				438624FF1D24C2C500F1BDC7 /* main.min.js in Resources */,
@@ -6050,6 +6081,7 @@
 				2994B41D18E121AE00B0D4D2 /* P4.jpg in Resources */,
 				2994B41E18E121AE00B0D4D2 /* P5-bg.jpg in Resources */,
 				AA4EF7461C85A4260050CCD8 /* AppIcon-167.png in Resources */,
+				43870CA21D35FEAF0035143C /* Pensiun.html in Resources */,
 				0F32684F1D1A93A4001A9021 /* SPAJ Add Menu.xib in Resources */,
 				A1FCF07B1CA80B92000D85E1 /* Icon_Brochure_Gray_BG.png in Resources */,
 				2994B41F18E121AE00B0D4D2 /* P5-footer.jpg in Resources */,

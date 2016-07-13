@@ -1,0 +1,680 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='utf-8'>
+<title>Quesioner</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<link rel="stylesheet" href="../jqueryLibrary/jquery.mobile-1.4.5.min.css">
+<script type='text/javascript' src="../jqueryLibrary/jquery-1.11.1.min.js"></script>
+<script type='text/javascript' src="../jqueryLibrary/jquery.mobile-1.4.5.min.js"></script>
+<script type='text/javascript' src="../jqueryLibrary/jquery.validate.min.js"></script>
+
+<script type='text/javascript'>
+var TextName0var = '';
+var TextName1var = '';
+var TextName2var = '';
+var TextName3var = '';
+var TextName4var = '';
+var TextName5var = '';
+var TextName6var = '';
+var TextName7var = '';
+var TextName8var = '';
+var TextName9var = '';
+var TextName10var = '';
+var TextName11var = '';
+var TextName12var = '';
+var TextName13var = '';
+var TextName14var = '';
+var TextName15var = '';
+var TextName16var = '';
+var TextName17var = '';
+var TextName18var = '';
+var TextName19var = '';
+var TextName20var = '';
+var TextName21var = '';
+var TextName22var = '';
+var TextName23var = '';
+var TextName24var = '';
+var TextName25var = '';
+var TextName26var = '';
+var TextName27var = '';
+var TextName28var = '';
+var TextName29var = '';
+var TextName30var = '';
+var TextName31var = '';
+var TextName32var = '';
+var TextName33var = '';
+var TextName34var = '';
+var TextName35var = '';
+var TextName36var = '';
+
+__functionIndexMap = {};
+<!-- core wrapper to client -->
+function calliOSFunction(functionName, successCallback, errorCallback, callInfo)
+{
+    var url = 'js-frame:';
+callInfo.functionname = functionName;
+if (successCallback)
+{
+if (typeof successCallback == 'function')
+{
+var callbackFuncName = createCallbackFunction(functionName + '_' + 'successCallback', successCallback);
+callInfo.success = callbackFuncName;
+}
+else
+callInfo.success = successCallback;
+}
+if (errorCallback)
+{
+if (typeof errorCallback == 'function')
+{
+var callbackFuncName = createCallbackFunction(functionName + '_' + 'errorCallback', errorCallback);
+callInfo.error = callbackFuncName;
+}
+else
+callInfo.error = errorCallback;
+}
+url += JSON.stringify(callInfo);
+var iFrame = createIFrame(url);
+//remove the frame now
+iFrame.parentNode.removeChild(iFrame);
+}
+function createCallbackFunction (funcName, callbackFunc)
+{
+if (callbackFunc && callbackFunc.name != null && callbackFunc.name.length > 0)
+{
+return callbackFunc.name;
+}
+if (typeof window[funcName+0] != 'function')
+{
+window[funcName+0] = callbackFunc;
+__functionIndexMap[funcName] = 0;
+return funcName+0
+} else
+{
+var maxIndex = __functionIndexMap[funcName];
+var callbackFuncStr = callbackFunc.toString();
+for (var i = 0; i <= maxIndex; i++)
+{
+var tmpName = funcName + i;
+if (window[tmpName].toString() == callbackFuncStr)
+return tmpName;
+}
+var newIndex = ++__functionIndexMap[funcName];
+window[funcName+newIndex] = callbackFunc;
+return funcName+newIndex;
+}
+}
+function createIFrame(src)
+{
+var rootElm = document.documentElement;
+var newFrameElm = document.createElement('IFRAME');
+newFrameElm.setAttribute('src',src);
+rootElm.appendChild(newFrameElm);
+return newFrameElm;
+}
+function onSuccess (ret)
+{
+if (ret)
+{
+var returnRet = JSON.parse(ret);
+alert(returnRet.result);
+}
+}
+function onError (ret)
+{
+if (ret)
+{
+var returnRet = JSON.parse(ret);
+alert(returnRet.error);
+}
+}
+function readfromDB() {
+var callInfo = {};
+callInfo.data = {};
+callInfo.data.CFFAnswers = {};
+callInfo.data.CFFAnswers.columns = 'elementID,Value,CFFID,CustomerID';
+callInfo.data.CFFAnswers.where = '';
+calliOSFunction('readfromDB:',onSuccess,onError, callInfo);
+}
+function savetoDB() {
+//we fill up the parameters here
+var callInfo = {};
+callInfo.data = {};
+callInfo.data.CFFAnswers = [{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}];
+//if the table inserted is same with multiple rows.
+//treat the data as array
+callInfo.data.CFFAnswers[0].elementID = 'TextID0';
+callInfo.data.CFFAnswers[0].Value = document.getElementsByName('TextName0')[0].value;
+callInfo.data.CFFAnswers[0].CFFID = '1';
+callInfo.data.CFFAnswers[0].CustomerID = '1';
+
+callInfo.data.CFFAnswers[1].elementID = 'TextID1';
+callInfo.data.CFFAnswers[1].Value = document.getElementsByName('TextName1')[0].value;
+callInfo.data.CFFAnswers[1].CFFID = '1';
+callInfo.data.CFFAnswers[1].CustomerID = '1';
+
+callInfo.data.CFFAnswers[2].elementID = 'TextID2';
+callInfo.data.CFFAnswers[2].Value = document.getElementsByName('TextName2')[0].value;
+callInfo.data.CFFAnswers[2].CFFID = '1';
+callInfo.data.CFFAnswers[2].CustomerID = '1';
+
+callInfo.data.CFFAnswers[3].elementID = 'TextID3';
+callInfo.data.CFFAnswers[3].Value = document.getElementsByName('TextName3')[0].value;
+callInfo.data.CFFAnswers[3].CFFID = '1';
+callInfo.data.CFFAnswers[3].CustomerID = '1';
+
+callInfo.data.CFFAnswers[4].elementID = 'TextID4';
+callInfo.data.CFFAnswers[4].Value = document.getElementsByName('TextName4')[0].value;
+callInfo.data.CFFAnswers[4].CFFID = '1';
+callInfo.data.CFFAnswers[4].CustomerID = '1';
+
+callInfo.data.CFFAnswers[5].elementID = 'TextID5';
+callInfo.data.CFFAnswers[5].Value = document.getElementsByName('TextName5')[0].value;
+callInfo.data.CFFAnswers[5].CFFID = '1';
+callInfo.data.CFFAnswers[5].CustomerID = '1';
+
+callInfo.data.CFFAnswers[6].elementID = 'TextID6';
+callInfo.data.CFFAnswers[6].Value = document.getElementsByName('TextName6')[0].value;
+callInfo.data.CFFAnswers[6].CFFID = '1';
+callInfo.data.CFFAnswers[6].CustomerID = '1';
+
+callInfo.data.CFFAnswers[7].elementID = 'TextID7';
+callInfo.data.CFFAnswers[7].Value = document.getElementsByName('TextName7')[0].value;
+callInfo.data.CFFAnswers[7].CFFID = '1';
+callInfo.data.CFFAnswers[7].CustomerID = '1';
+
+callInfo.data.CFFAnswers[8].elementID = 'TextID8';
+callInfo.data.CFFAnswers[8].Value = document.getElementsByName('TextName8')[0].value;
+callInfo.data.CFFAnswers[8].CFFID = '1';
+callInfo.data.CFFAnswers[8].CustomerID = '1';
+
+callInfo.data.CFFAnswers[9].elementID = 'TextID9';
+callInfo.data.CFFAnswers[9].Value = document.getElementsByName('TextName9')[0].value;
+callInfo.data.CFFAnswers[9].CFFID = '1';
+callInfo.data.CFFAnswers[9].CustomerID = '1';
+
+callInfo.data.CFFAnswers[10].elementID = 'TextID10';
+callInfo.data.CFFAnswers[10].Value = document.getElementsByName('TextName10')[0].value;
+callInfo.data.CFFAnswers[10].CFFID = '1';
+callInfo.data.CFFAnswers[10].CustomerID = '1';
+
+callInfo.data.CFFAnswers[11].elementID = 'TextID11';
+callInfo.data.CFFAnswers[11].Value = document.getElementsByName('TextName11')[0].value;
+callInfo.data.CFFAnswers[11].CFFID = '1';
+callInfo.data.CFFAnswers[11].CustomerID = '1';
+
+callInfo.data.CFFAnswers[12].elementID = 'TextID12';
+callInfo.data.CFFAnswers[12].Value = document.getElementsByName('TextName12')[0].value;
+callInfo.data.CFFAnswers[12].CFFID = '1';
+callInfo.data.CFFAnswers[12].CustomerID = '1';
+
+callInfo.data.CFFAnswers[13].elementID = 'TextID13';
+callInfo.data.CFFAnswers[13].Value = document.getElementsByName('TextName13')[0].value;
+callInfo.data.CFFAnswers[13].CFFID = '1';
+callInfo.data.CFFAnswers[13].CustomerID = '1';
+
+callInfo.data.CFFAnswers[14].elementID = 'TextID14';
+callInfo.data.CFFAnswers[14].Value = document.getElementsByName('TextName14')[0].value;
+callInfo.data.CFFAnswers[14].CFFID = '1';
+callInfo.data.CFFAnswers[14].CustomerID = '1';
+
+callInfo.data.CFFAnswers[15].elementID = 'TextID15';
+callInfo.data.CFFAnswers[15].Value = document.getElementsByName('TextName15')[0].value;
+callInfo.data.CFFAnswers[15].CFFID = '1';
+callInfo.data.CFFAnswers[15].CustomerID = '1';
+
+callInfo.data.CFFAnswers[16].elementID = 'TextID16';
+callInfo.data.CFFAnswers[16].Value = document.getElementsByName('TextName16')[0].value;
+callInfo.data.CFFAnswers[16].CFFID = '1';
+callInfo.data.CFFAnswers[16].CustomerID = '1';
+
+callInfo.data.CFFAnswers[17].elementID = 'TextID17';
+callInfo.data.CFFAnswers[17].Value = document.getElementsByName('TextName17')[0].value;
+callInfo.data.CFFAnswers[17].CFFID = '1';
+callInfo.data.CFFAnswers[17].CustomerID = '1';
+
+callInfo.data.CFFAnswers[18].elementID = 'TextID18';
+callInfo.data.CFFAnswers[18].Value = document.getElementsByName('TextName18')[0].value;
+callInfo.data.CFFAnswers[18].CFFID = '1';
+callInfo.data.CFFAnswers[18].CustomerID = '1';
+
+callInfo.data.CFFAnswers[19].elementID = 'TextID19';
+callInfo.data.CFFAnswers[19].Value = document.getElementsByName('TextName19')[0].value;
+callInfo.data.CFFAnswers[19].CFFID = '1';
+callInfo.data.CFFAnswers[19].CustomerID = '1';
+
+callInfo.data.CFFAnswers[20].elementID = 'TextID20';
+callInfo.data.CFFAnswers[20].Value = document.getElementsByName('TextName20')[0].value;
+callInfo.data.CFFAnswers[20].CFFID = '1';
+callInfo.data.CFFAnswers[20].CustomerID = '1';
+
+callInfo.data.CFFAnswers[21].elementID = 'TextID21';
+callInfo.data.CFFAnswers[21].Value = document.getElementsByName('TextName21')[0].value;
+callInfo.data.CFFAnswers[21].CFFID = '1';
+callInfo.data.CFFAnswers[21].CustomerID = '1';
+
+callInfo.data.CFFAnswers[22].elementID = 'TextID22';
+callInfo.data.CFFAnswers[22].Value = document.getElementsByName('TextName22')[0].value;
+callInfo.data.CFFAnswers[22].CFFID = '1';
+callInfo.data.CFFAnswers[22].CustomerID = '1';
+
+callInfo.data.CFFAnswers[23].elementID = 'TextID23';
+callInfo.data.CFFAnswers[23].Value = document.getElementsByName('TextName23')[0].value;
+callInfo.data.CFFAnswers[23].CFFID = '1';
+callInfo.data.CFFAnswers[23].CustomerID = '1';
+
+callInfo.data.CFFAnswers[24].elementID = 'TextID24';
+callInfo.data.CFFAnswers[24].Value = document.getElementsByName('TextName24')[0].value;
+callInfo.data.CFFAnswers[24].CFFID = '1';
+callInfo.data.CFFAnswers[24].CustomerID = '1';
+
+callInfo.data.CFFAnswers[25].elementID = 'TextID25';
+callInfo.data.CFFAnswers[25].Value = document.getElementsByName('TextName25')[0].value;
+callInfo.data.CFFAnswers[25].CFFID = '1';
+callInfo.data.CFFAnswers[25].CustomerID = '1';
+
+callInfo.data.CFFAnswers[26].elementID = 'TextID26';
+callInfo.data.CFFAnswers[26].Value = document.getElementsByName('TextName26')[0].value;
+callInfo.data.CFFAnswers[26].CFFID = '1';
+callInfo.data.CFFAnswers[26].CustomerID = '1';
+
+callInfo.data.CFFAnswers[27].elementID = 'TextID27';
+callInfo.data.CFFAnswers[27].Value = document.getElementsByName('TextName27')[0].value;
+callInfo.data.CFFAnswers[27].CFFID = '1';
+callInfo.data.CFFAnswers[27].CustomerID = '1';
+
+callInfo.data.CFFAnswers[28].elementID = 'TextID28';
+callInfo.data.CFFAnswers[28].Value = document.getElementsByName('TextName28')[0].value;
+callInfo.data.CFFAnswers[28].CFFID = '1';
+callInfo.data.CFFAnswers[28].CustomerID = '1';
+
+callInfo.data.CFFAnswers[29].elementID = 'TextID29';
+callInfo.data.CFFAnswers[29].Value = document.getElementsByName('TextName29')[0].value;
+callInfo.data.CFFAnswers[29].CFFID = '1';
+callInfo.data.CFFAnswers[29].CustomerID = '1';
+
+callInfo.data.CFFAnswers[30].elementID = 'TextID30';
+callInfo.data.CFFAnswers[30].Value = document.getElementsByName('TextName30')[0].value;
+callInfo.data.CFFAnswers[30].CFFID = '1';
+callInfo.data.CFFAnswers[30].CustomerID = '1';
+
+callInfo.data.CFFAnswers[31].elementID = 'TextID31';
+callInfo.data.CFFAnswers[31].Value = document.getElementsByName('TextName31')[0].value;
+callInfo.data.CFFAnswers[31].CFFID = '1';
+callInfo.data.CFFAnswers[31].CustomerID = '1';
+
+callInfo.data.CFFAnswers[32].elementID = 'TextID32';
+callInfo.data.CFFAnswers[32].Value = document.getElementsByName('TextName32')[0].value;
+callInfo.data.CFFAnswers[32].CFFID = '1';
+callInfo.data.CFFAnswers[32].CustomerID = '1';
+
+callInfo.data.CFFAnswers[33].elementID = 'TextID33';
+callInfo.data.CFFAnswers[33].Value = document.getElementsByName('TextName33')[0].value;
+callInfo.data.CFFAnswers[33].CFFID = '1';
+callInfo.data.CFFAnswers[33].CustomerID = '1';
+
+callInfo.data.CFFAnswers[34].elementID = 'TextID34';
+callInfo.data.CFFAnswers[34].Value = document.getElementsByName('TextName34')[0].value;
+callInfo.data.CFFAnswers[34].CFFID = '1';
+callInfo.data.CFFAnswers[34].CustomerID = '1';
+
+callInfo.data.CFFAnswers[35].elementID = 'TextID35';
+callInfo.data.CFFAnswers[35].Value = document.getElementsByName('TextName35')[0].value;
+callInfo.data.CFFAnswers[35].CFFID = '1';
+callInfo.data.CFFAnswers[35].CustomerID = '1';
+
+callInfo.data.CFFAnswers[36].elementID = 'TextID36';
+callInfo.data.CFFAnswers[36].Value = document.getElementsByName('TextName36')[0].value;
+callInfo.data.CFFAnswers[36].CFFID = '1';
+callInfo.data.CFFAnswers[36].CustomerID = '1';
+
+//call the wrapper with the parameterized info
+calliOSFunction('savetoDB:',onSuccess,onError, callInfo);
+TextName0var = name = $('input[name=TextName0]').val();
+TextName1var = name = $('input[name=TextName1]').val();
+TextName2var = name = $('input[name=TextName2]').val();
+TextName3var = name = $('input[name=TextName3]').val();
+TextName4var = name = $('input[name=TextName4]').val();
+TextName5var = name = $('input[name=TextName5]').val();
+TextName6var = name = $('input[name=TextName6]').val();
+TextName7var = name = $('input[name=TextName7]').val();
+TextName8var = name = $('input[name=TextName8]').val();
+TextName9var = name = $('input[name=TextName9]').val();
+TextName10var = name = $('input[name=TextName10]').val();
+TextName11var = name = $('input[name=TextName11]').val();
+TextName12var = name = $('input[name=TextName12]').val();
+TextName13var = name = $('input[name=TextName13]').val();
+TextName14var = name = $('input[name=TextName14]').val();
+TextName15var = name = $('input[name=TextName15]').val();
+TextName16var = name = $('input[name=TextName16]').val();
+TextName17var = name = $('input[name=TextName17]').val();
+TextName18var = name = $('input[name=TextName18]').val();
+TextName19var = name = $('input[name=TextName19]').val();
+TextName20var = name = $('input[name=TextName20]').val();
+TextName21var = name = $('input[name=TextName21]').val();
+TextName22var = name = $('input[name=TextName22]').val();
+TextName23var = name = $('input[name=TextName23]').val();
+TextName24var = name = $('input[name=TextName24]').val();
+TextName25var = name = $('input[name=TextName25]').val();
+TextName26var = name = $('input[name=TextName26]').val();
+TextName27var = name = $('input[name=TextName27]').val();
+TextName28var = name = $('input[name=TextName28]').val();
+TextName29var = name = $('input[name=TextName29]').val();
+TextName31var = name = $('input[name=TextName31]').val();
+TextName32var = name = $('input[name=TextName32]').val();
+TextName33var = name = $('input[name=TextName33]').val();
+TextName34var = name = $('input[name=TextName34]').val();
+TextName35var = name = $('input[name=TextName35]').val();
+TextName36var = name = $('input[name=TextName36]').val();
+
+console.log(JSON.stringify(callInfo));
+}
+function PrintData()
+{
+    savetoDB();
+}
+function ReadData()
+{
+var radio = 'radio';
+var checkbox = 'checkbox';
+$('input[name=TextName0]').val(TextName0var);
+$('input[name=TextName1]').val(TextName1var);
+$('input[name=TextName2]').val(TextName2var);
+$('input[name=TextName3]').val(TextName3var);
+$('input[name=TextName4]').val(TextName4var);
+$('input[name=TextName5]').val(TextName5var);
+$('input[name=TextName6]').val(TextName6var);
+$('input[name=TextName7]').val(TextName7var);
+$('input[name=TextName8]').val(TextName8var);
+$('input[name=TextName9]').val(TextName9var);
+$('input[name=TextName10]').val(TextName10var);
+$('input[name=TextName11]').val(TextName11var);
+$('input[name=TextName12]').val(TextName12var);
+$('input[name=TextName13]').val(TextName13var);
+$('input[name=TextName14]').val(TextName14var);
+$('input[name=TextName15]').val(TextName15var);
+$('input[name=TextName16]').val(TextName16var);
+$('input[name=TextName17]').val(TextName17var);
+$('input[name=TextName18]').val(TextName18var);
+$('input[name=TextName19]').val(TextName19var);
+$('input[name=TextName20]').val(TextName20var);
+$('input[name=TextName21]').val(TextName21var);
+$('input[name=TextName22]').val(TextName22var);
+$('input[name=TextName23]').val(TextName23var);
+$('input[name=TextName24]').val(TextName24var);
+$('input[name=TextName25]').val(TextName25var);
+$('input[name=TextName26]').val(TextName26var);
+$('input[name=TextName27]').val(TextName27var);
+$('input[name=TextName28]').val(TextName28var);
+$('input[name=TextName29]').val(TextName29var);
+$('input[name=TextName30]').val(TextName30var);
+$('input[name=TextName31]').val(TextName31var);
+$('input[name=TextName32]').val(TextName32var);
+$('input[name=TextName33]').val(TextName33var);
+$('input[name=TextName34]').val(TextName34var);
+$('input[name=TextName35]').val(TextName35var);
+$('input[name=TextName36]').val(TextName36var);
+}
+</script>
+
+<style>
+label.error {
+color: red;
+font-size: 16px;
+font-weight: normal;
+line-height: 1.4;
+margin-top: 0.5em;
+width: 100%;
+float: none;
+}
+@media screen and (orientation: portrait) {
+label.error {
+margin-left: 0;
+display: block;
+}
+}
+@media screen and (orientation: landscape) {
+label.error {
+display: inline-block;
+margin-left: 0%;
+}
+}
+em {
+color: red;
+font-weight: bold;
+padding-right: .25em;
+}  
+</style>
+</head>
+<body>
+<div id='page1' data-role='page'>
+<div data-role='content'>
+<form id='myform'>
+<div data-role='main' class='ui-content'>
+Pilih bila nasabah tidak mempunyai rencana asuransi
+<table data-role="table" class="ui-responsive table-stroke">
+     <thead>
+         <th data-priority="2"></th>
+         <th class="style7">PRIBADI</th>
+         <th data-priority="3">Nominal Saat ini</th>
+         <th data-priority="1" class="style3">Nominal yang dibutuhkan</th>
+         <th data-priority="5" class="style5">Selisih</th>
+       </tr>
+     </thead>
+     <tbody>
+         <tr>
+         <th class="style2">&nbsp;</th>
+         <td class="style8">Total Uang Pertanggungan<br />
+             (Death &amp; Disability)</td>
+         <td class="style2">            
+             <input id="TextID0" name="TextName0" type="text" /></td>
+         <td class="style4">            
+             <input id="TextID1" name="TextName1" type="text" /></td>
+         <td class="style6">
+             <input id="TextID2" name="TextName2" type="text" disabled/></td>
+         </tr>
+         <tr>
+         <th class="style2">&nbsp;</th>
+         <td class="style8">Total Uang Pertanggungan<br />
+             (Critical Illnes)</td>
+         <td class="style2">            
+             <input id="TextID3" name="TextName3" type="text" /></td>
+         <td class="style4">            
+             <input id="TextID4" name="TextName4" type="text" /></td>
+         <td class="style6">
+             <input id="TextID5" name="TextName5" type="text" disabled/></td>
+         </tr>
+         <tr>
+         <th class="style2">&nbsp;</th>
+         <td class="style8">Total Uang Pertanggungan<br />
+             (Rumah Sakit per hari)</td>
+         <td class="style2">            
+             <input id="TextID6" name="TextName6" type="text" /></td>
+         <td class="style4">            
+             <input id="TextID7" name="TextName7" type="text" /></td>
+         <td class="style6">
+             <input id="TextID8" name="TextName8" type="text" disabled/></td>
+         </tr>
+         <tr>
+         <th class="style2">&nbsp;</th>
+         <td class="style8">Total Uang Pertanggungan (Personal Accident)</td>
+         <td class="style2">            
+             <input id="TextID9" name="TextName9" type="text" /></td>
+         <td class="style4">            
+             <input id="TextID10" name="TextName10" type="text" /></td>
+         <td class="style6">
+             <input id="TextID11" name="TextName11" type="text" disabled/></td>
+         </tr>
+         <tr>
+         <th data-priority="2"></th>
+         <th class="style7">PASANGAN</th>
+         <th data-priority="3">Nominal Saat ini</th>
+         <th data-priority="1" class="style3">Nominal yang dibutuhkan</th>
+         <th data-priority="5" class="style5">Selisih</th>
+         </tr>
+         <tr>
+         <th class="style2">&nbsp;</th>
+         <td class="style8">Total Uang Pertanggungan<br />
+             (Death &amp; Disability)</td>
+         <td class="style2">            
+             <input id="TextID12" name="TextName12" type="text" /></td>
+         <td class="style4">            
+             <input id="TextID13" name="TextName13" type="text" /></td>
+         <td class="style6">
+             <input id="TextID14" name="TextName14" type="text" disabled/></td>
+         </tr>
+         <tr>
+         <th class="style2">&nbsp;</th>
+         <td class="style8">Total Uang Pertanggungan<br />
+             (Critical Illnes)</td>
+         <td class="style2">            
+             <input id="TextID15" name="TextName15" type="text" /></td>
+         <td class="style4">            
+             <input id="TextID16" name="TextName16" type="text" /></td>
+         <td class="style6">
+             <input id="TextID17" name="TextName17" type="text" disabled/></td>
+         </tr>
+         <tr>
+         <th class="style2">&nbsp;</th>
+         <td class="style8">Total Uang Pertanggungan<br />
+             (Rumah Sakit per hari)</td>
+         <td class="style2">            
+             <input id="TextID18" name="TextName18" type="text" /></td>
+         <td class="style4">            
+             <input id="TextID19" name="TextName19" type="text" /></td>
+         <td class="style6">
+             <input id="TextID20" name="TextName20" type="text" disabled/></td>
+         </tr>
+         <tr>
+         <th class="style2">&nbsp;</th>
+         <td class="style8">Total Uang Pertanggungan (Personal Accident)</td>
+         <td class="style2">            
+             <input id="TextID21" name="TextName21" type="text" /></td>
+         <td class="style4">            
+             <input id="TextID22" name="TextName22" type="text" /></td>
+         <td class="style6">
+             <input id="TextID23" name="TextName23" type="text" disabled/></td>
+         </tr>
+         <tr>
+         <th data-priority="2"></th>
+         <th class="style7">ANAK</th>
+         <th data-priority="3">Nominal Saat ini</th>
+         <th data-priority="1" class="style3">Nominal yang dibutuhkan</th>
+         <th data-priority="5" class="style5">Selisih</th>
+         </tr>
+         <tr>
+         <th class="style2">&nbsp;</th>
+         <td class="style8">Total Uang Pertanggungan<br />
+             (Death &amp; Disability)</td>
+         <td class="style2">            
+             <input id="TextID24" name="TextName24" type="text" /></td>
+         <td class="style4">            
+             <input id="TextID25" name="TextName25" type="text" /></td>
+         <td class="style6">
+             <input id="TextID26" name="TextName26" type="text" disabled/></td>
+         </tr>
+         <tr>
+         <th class="style2">&nbsp;</th>
+         <td class="style8">Total Uang Pertanggungan<br />
+             (Critical Illnes)</td>
+         <td class="style2">            
+             <input id="TextID27" name="TextName27" type="text" /></td>
+         <td class="style4">            
+             <input id="TextID28" name="TextName28" type="text" /></td>
+         <td class="style6">
+             <input id="TextID29" name="TextName29" type="text" disabled/></td>
+         </tr>
+         <tr>
+         <th class="style2">&nbsp;</th>
+         <td class="style8">Total Uang Pertanggungan<br />
+             (Rumah Sakit per hari)</td>
+          <td class="style2">            
+             <input id="TextID30" name="TextName30" type="text" /></td>
+         <td class="style4">            
+             <input id="TextID31" name="TextName31" type="text" /></td>
+         <td class="style6">
+             <input id="TextID32" name="TextName32" type="text" disabled/></td>
+         </tr>
+         <tr>
+         <th class="style2">&nbsp;</th>
+         <td class="style8">Total Uang Pertanggungan (Personal Accident)</td>
+         <td class="style2">            
+             <input id="TextID33" name="TextName33" type="text" /></td>
+         <td class="style4">            
+             <input id="TextID34" name="TextName34" type="text" /></td>
+         <td class="style6">
+             <input id="TextID35" name="TextName35" type="text" disabled/></td>
+         </tr>
+         <tr>
+         <th class="style2">&nbsp;</th>
+         <td class="style8" colspan="4">Berapa jumlah pendapatan yang ingin dialokasikan 
+             untuk asuransi proteksi per bulan ?</td>
+         </tr>
+         <tr>
+         <th class="style2">&nbsp;</th>
+         <td class="style8">Total Pendapatan Nasabah + Pasangan (Rp.)</td>
+         <td class="style2">            
+             <input id="TextID36" name="TextName36" type="text" />
+         <td class="style4">            
+             &nbsp;</td>
+         <td class="style6">&nbsp;</td>
+         </tr>
+     </tbody>
+   </table>
+   <div><button class="ui-btn ui-btn-inline" id="save">Save</button>
+    <button class="ui-btn ui-btn-inline" id="read">Read</button>
+</div>
+</div>
+</form>
+</div>
+</div>
+<script>
+$(document).ready(function () {
+$.validator.addMethod('valueNotEquals', function(value, element, arg){
+return arg != value;
+}, 'Value must not equal arg.');
+$('#myform').validate({ // initialize the plugin
+rules: {
+TextName0: {
+required: true,
+},
+RangeName1: {
+required: true,
+range: [5, 50]
+},
+CheckBoxName3:{required:true,'minlength':2},
+ SelectName4 : { valueNotEquals: 'Choose' },
+},
+messages:
+{
+CheckBoxName3:
+{
+minlength:'Please select at least {0} options'
+},
+    SelectName4: { valueNotEquals: 'Please select an item!' },
+},
+errorPlacement: function( error, element ) {
+if ( element.is(':checkbox') ) 
+    {
+        error.appendTo( element.parents('.container') );
+    }
+else
+{
+error.insertAfter( element.parent() );
+}
+}
+})
+$('#save').click(function(e) {
+e.preventDefault();
+PrintData();
+$('#myform')[0].reset();
+});
+$('#read').click(function(e) {
+e.preventDefault();
+ReadData();
+});
+});
+</script>
+</body>
+</html>

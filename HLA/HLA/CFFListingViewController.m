@@ -98,8 +98,14 @@
 //    [cffAPIController apiCallCFFHtmtable:@"http://mposws.azurewebsites.net/Service2.svc/getAllData"];
 //    [cffAPIController apiCallCrateHtmlFile:[NSString stringWithFormat:@"http://mposws.azurewebsites.net/Service2.svc/GetHtmlFile?fileName=%@",fileName] RootPathFolder:@"CFFFolder"];
     [self fetchHTMLInfo];
-    [self copyHTMLFile:@"index1"];
-    [self copyHTMLFile:@"index2"];
+    [self copyHTMLFile:@"PotentialDiscussion"];
+    [self copyHTMLFile:@"ProfileRisk"];
+    [self copyHTMLFile:@"Proteksi"];
+    [self copyHTMLFile:@"Pensiun"];
+    [self copyHTMLFile:@"Pendidikan"];
+    [self copyHTMLFile:@"Warisan"];
+    [self copyHTMLFile:@"Investasi"];
+    [self copyHTMLFile:@"CustomerStatement"];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -110,7 +116,7 @@
     NSDictionary *dictCFFTable = [[NSDictionary alloc]initWithObjectsAndKeys:@"CFFHtml",@"tableName",tableColumn,@"columnName", nil];
     
     [cffAPIController apiCallHtmlTable:@"http://mposws.azurewebsites.net/Service2.svc/getAllData" JSONKey:arrayJSONKey TableDictionary:dictCFFTable];
-    [cffAPIController apiCallCrateHtmlFile:[NSString stringWithFormat:@"http://mposws.azurewebsites.net/Service2.svc/GetHtmlFile?fileName=%@",fileName] RootPathFolder:@"CFFFolder"];
+    [cffAPIController apiCallCrateHtmlFile:[NSString stringWithFormat:@"http://mposws.azurewebsites.net/Service2.svc/GetHtmlFile?fileName=%@",fileName] RootPathFolder:@"CFFfolder"];
 }
 
 -(void)copyHTMLFile:(NSString *)fileName{
@@ -538,8 +544,13 @@
     NSDictionary* dictCustomerNeedsCFFID=[[NSDictionary alloc]initWithDictionary:[modelCFFHtml selectActiveHtmlForSection:@"CN"]];
     NSDictionary* dictCustomerRiskCFFID=[[NSDictionary alloc]initWithDictionary:[modelCFFHtml selectActiveHtmlForSection:@"CR"]];
     NSDictionary* dictPotentialDiscussionCFFID=[[NSDictionary alloc]initWithDictionary:[modelCFFHtml selectActiveHtmlForSection:@"PD"]];
+    NSDictionary* dictProteksiCFFID=[[NSDictionary alloc]initWithDictionary:[modelCFFHtml selectActiveHtmlForSection:@"PRT"]];
+    NSDictionary* dictPensiunCFFID=[[NSDictionary alloc]initWithDictionary:[modelCFFHtml selectActiveHtmlForSection:@"PSN"]];
+    NSDictionary* dictPendidikanCFFID=[[NSDictionary alloc]initWithDictionary:[modelCFFHtml selectActiveHtmlForSection:@"PND"]];
+    NSDictionary* dictWarisanCFFID=[[NSDictionary alloc]initWithDictionary:[modelCFFHtml selectActiveHtmlForSection:@"WRS"]];
+    NSDictionary* dictInvestasiCFFID=[[NSDictionary alloc]initWithDictionary:[modelCFFHtml selectActiveHtmlForSection:@"INV"]];
     
-    NSDictionary* dictCFFTransaction = [[NSDictionary alloc]initWithObjectsAndKeys:[dictActiveHtml valueForKey:@"CFFID"],@"CFFID",[NSNumber numberWithInteger:clientProfileID],@"ProspectIndexNo",dateToday,@"CFFDateCreated",@"",@"CreatedBy",dateToday,@"CFFDateModified",@"",@"ModifiedBy",@"Not Complete",@"CFFStatus",[dictCustomerStatementCFFID valueForKey:@"CFFID"],@"CustomerStatementCFFID",[dictCustomerNeedsCFFID valueForKey:@"CFFID"],@"CustomerNeedsCFFID",[dictCustomerRiskCFFID valueForKey:@"CFFID"],@"CustomerRiskCFFID",[dictPotentialDiscussionCFFID valueForKey:@"CFFID"],@"PotentialDiscussionCFFID", nil];
+    NSDictionary* dictCFFTransaction = [[NSDictionary alloc]initWithObjectsAndKeys:[dictActiveHtml valueForKey:@"CFFID"],@"CFFID",[NSNumber numberWithInteger:clientProfileID],@"ProspectIndexNo",dateToday,@"CFFDateCreated",@"",@"CreatedBy",dateToday,@"CFFDateModified",@"",@"ModifiedBy",@"Not Complete",@"CFFStatus",[dictCustomerStatementCFFID valueForKey:@"CFFID"],@"CustomerStatementCFFID",[dictCustomerNeedsCFFID valueForKey:@"CFFID"],@"CustomerNeedsCFFID",[dictCustomerRiskCFFID valueForKey:@"CFFID"],@"CustomerRiskCFFID",[dictPotentialDiscussionCFFID valueForKey:@"CFFID"],@"PotentialDiscussionCFFID",[dictProteksiCFFID valueForKey:@"CFFID"],@"ProteksiCFFID",[dictPensiunCFFID valueForKey:@"CFFID"],@"PensiunCFFID",[dictPendidikanCFFID valueForKey:@"CFFID"],@"PendidikanCFFID",[dictWarisanCFFID valueForKey:@"CFFID"],@"WarisanCFFID",[dictInvestasiCFFID valueForKey:@"CFFID"],@"InvestasiCFFID", nil];
     [modelCFFTransaction saveCFFTransaction:dictCFFTransaction];
 }
 
