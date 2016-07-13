@@ -81,6 +81,7 @@
     areaPotensialDiskusiVC.cffTransactionID  = cffTransactionID;
     areaPotensialDiskusiVC.cffID = cffID;
     areaPotensialDiskusiVC.htmlFileName = [[arrayHtml objectAtIndex:0]valueForKey:@"CFFHtmlName"];
+    //areaPotensialDiskusiVC.htmlFileName = @"index1.html";
     if ([areaPotensialDiskusiVC.view isDescendantOfView:childView]){
         [childView bringSubviewToFront:areaPotensialDiskusiVC.view];
     }
@@ -95,6 +96,7 @@
     profilResikoVC.cffTransactionID  = cffTransactionID;
     profilResikoVC.cffID = cffID;
     profilResikoVC.htmlFileName = [[arrayHtml objectAtIndex:0]valueForKey:@"CFFHtmlName"];
+    //profilResikoVC.htmlFileName = @"index2.html";
     if ([profilResikoVC.view isDescendantOfView:childView]){
         [childView bringSubviewToFront:profilResikoVC.view];
     }

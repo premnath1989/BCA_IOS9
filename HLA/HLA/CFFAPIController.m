@@ -168,7 +168,7 @@
         NSString* fileName = [NSString stringWithFormat:@"%@",[itemsDict objectForKey:@"FileName"]];
         
         NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-        NSString *filePathApp = [docsDir stringByAppendingPathComponent:@"CFFfolder"];
+        NSString *filePathApp = [docsDir stringByAppendingPathComponent:rootPathFolder];
         
         [self createDirectory:filePathApp];
         

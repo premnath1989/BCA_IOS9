@@ -98,6 +98,8 @@
 //    [cffAPIController apiCallCFFHtmtable:@"http://mposws.azurewebsites.net/Service2.svc/getAllData"];
 //    [cffAPIController apiCallCrateHtmlFile:[NSString stringWithFormat:@"http://mposws.azurewebsites.net/Service2.svc/GetHtmlFile?fileName=%@",fileName] RootPathFolder:@"CFFFolder"];
     [self fetchHTMLInfo];
+    [self copyHTMLFile:@"index1"];
+    [self copyHTMLFile:@"index2"];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -109,6 +111,16 @@
     
     [cffAPIController apiCallHtmlTable:@"http://mposws.azurewebsites.net/Service2.svc/getAllData" JSONKey:arrayJSONKey TableDictionary:dictCFFTable];
     [cffAPIController apiCallCrateHtmlFile:[NSString stringWithFormat:@"http://mposws.azurewebsites.net/Service2.svc/GetHtmlFile?fileName=%@",fileName] RootPathFolder:@"CFFFolder"];
+}
+
+-(void)copyHTMLFile:(NSString *)fileName{
+    NSError *error =  nil;
+    [cffAPIController createDirectory:@"CFFfolder"];
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *filePathApp = [docsDir stringByAppendingPathComponent:@"CFFfolder"];
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"html"];
+    NSData *htmlData = [NSData dataWithContentsOfFile:filePath];
+    [htmlData writeToFile:[NSString stringWithFormat:@"%@/%@.html",filePathApp,fileName] options:NSDataWritingAtomic error:&error];
 }
 
 -(void)setButtonImageAndTextAlignment{
