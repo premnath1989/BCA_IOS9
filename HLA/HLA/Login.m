@@ -703,6 +703,7 @@ static NSString *labelVers;
     
     CarouselViewController *carouselMenu = [self.storyboard instantiateViewControllerWithIdentifier:@"carouselView"];
     carouselMenu.getInternet = @"No";
+    carouselMenu.loginPreviousController = @"Login";
     [self presentViewController:carouselMenu animated:YES completion:Nil];
 }
 
