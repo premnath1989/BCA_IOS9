@@ -21,8 +21,8 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ft1-6d-2IT" customClass="ViewNavigation">
-                    <rect key="frame" x="0.0" y="0.0" width="46" height="600"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ft1-6d-2IT" customClass="ViewNavigation">
+                    <rect key="frame" x="0.0" y="0.0" width="102" height="600"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="6yl-4f-OaM" customClass="StackViewNavigation">
                             <rect key="frame" x="0.0" y="0.0" width="102" height="240"/>
@@ -73,8 +73,8 @@
                         <constraint firstAttribute="trailing" secondItem="6yl-4f-OaM" secondAttribute="trailing" id="erX-AT-EFD"/>
                     </constraints>
                 </view>
-                <view clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jYj-Nk-O93">
-                    <rect key="frame" x="46" y="0.0" width="554" height="600"/>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jYj-Nk-O93">
+                    <rect key="frame" x="102" y="0.0" width="498" height="600"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <accessibility key="accessibilityConfiguration">
                         <bool key="isElement" value="YES"/>

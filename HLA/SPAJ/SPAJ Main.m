@@ -126,6 +126,11 @@
     {
         // CarouselViewController* viewController = [[CarouselViewController alloc] initWithNibName:@"SPAJ Add Detail" bundle:nil];
         // [self presentViewController:viewController animated:true completion:nil];
+        
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"CarouselStoryboard" bundle:Nil];
+        
+        CarouselViewController *viewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"carouselView"];
+        [self presentViewController:viewController animated:NO completion:Nil];
     }
 
 
