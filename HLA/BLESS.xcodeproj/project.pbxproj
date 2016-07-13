@@ -5694,7 +5694,7 @@
 				ORGANIZATIONNAME = "InfoConnect Sdn Bhd";
 				TargetAttributes = {
 					C4E9D18F1612C64900016053 = {
-						DevelopmentTeam = 25W8386326;
+						DevelopmentTeam = 87JN2XNQTS;
 					};
 				};
 			};
