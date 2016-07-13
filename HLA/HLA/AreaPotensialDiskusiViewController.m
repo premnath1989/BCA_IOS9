@@ -99,6 +99,9 @@
     NSMutableDictionary* finalDictionary = [[NSMutableDictionary alloc]init];
     [finalDictionary setObject:finalArrayDictionary forKey:@"data"];
     [modelCFFTransaction updateCFFDateModified:[cffTransactionID intValue]];
+    
+    [finalDictionary setValue:[params valueForKey:@"successCallBack"] forKey:@"successCallBack"];
+    [finalDictionary setValue:[params valueForKey:@"errorCallback"] forKey:@"errorCallback"];
     [super savetoDB:finalDictionary];
 }
 
