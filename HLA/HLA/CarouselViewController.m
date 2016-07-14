@@ -138,8 +138,7 @@ const int numberOfModule = 7;
 
 //app disclaimer
 - (void)showDisclaimer{
-    NSString *prevController = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-2];
-
+    
     if([loginPreviousController isEqualToString:@"Login"]){
         AppDisclaimer *disclaimerContent= [[AppDisclaimer alloc] initWithNibName:@"AppDisclaimer"
                                                                           bundle:nil];

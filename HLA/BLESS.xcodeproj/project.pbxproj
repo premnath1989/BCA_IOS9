@@ -362,7 +362,6 @@
 		431376C81D0E6821007D3BF1 /* AddChildViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 431376C61D0E6821007D3BF1 /* AddChildViewController.xib */; };
 		431376CD1D0E6E35007D3BF1 /* DataNasabahViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 431376CB1D0E6E35007D3BF1 /* DataNasabahViewController.m */; };
 		431376CE1D0E6E35007D3BF1 /* DataNasabahViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 431376CC1D0E6E35007D3BF1 /* DataNasabahViewController.xib */; };
-		4313E81C1D34F3B40036A6B7 /* ModelCFFHtml.m in Sources */ = {isa = PBXBuildFile; fileRef = 4313E81B1D34F3B40036A6B7 /* ModelCFFHtml.m */; };
 		4313E81F1D34FDBA0036A6B7 /* index1.html in Resources */ = {isa = PBXBuildFile; fileRef = 4313E81D1D34FDBA0036A6B7 /* index1.html */; };
 		4313E8201D34FDBA0036A6B7 /* index2.html in Resources */ = {isa = PBXBuildFile; fileRef = 4313E81E1D34FDBA0036A6B7 /* index2.html */; };
 		431C065F1C823A9B001824FD /* Model_SI_Premium.m in Sources */ = {isa = PBXBuildFile; fileRef = 431C065D1C823A9B001824FD /* Model_SI_Premium.m */; };
@@ -1566,8 +1565,6 @@
 		431376CA1D0E6E35007D3BF1 /* DataNasabahViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataNasabahViewController.h; sourceTree = "<group>"; };
 		431376CB1D0E6E35007D3BF1 /* DataNasabahViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataNasabahViewController.m; sourceTree = "<group>"; };
 		431376CC1D0E6E35007D3BF1 /* DataNasabahViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DataNasabahViewController.xib; sourceTree = "<group>"; };
-		4313E81A1D34F3B40036A6B7 /* ModelCFFHtml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelCFFHtml.h; sourceTree = "<group>"; };
-		4313E81B1D34F3B40036A6B7 /* ModelCFFHtml.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelCFFHtml.m; sourceTree = "<group>"; };
 		4313E81D1D34FDBA0036A6B7 /* index1.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index1.html; sourceTree = "<group>"; };
 		4313E81E1D34FDBA0036A6B7 /* index2.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index2.html; sourceTree = "<group>"; };
 		431C065D1C823A9B001824FD /* Model_SI_Premium.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Model_SI_Premium.m; sourceTree = "<group>"; };
@@ -6897,7 +6894,7 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Asuransi Jiwa BCA, PT";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -6940,7 +6937,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bcalife.bless;
 				PRODUCT_NAME = BLESS;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "954ccc9a-01f8-4583-9ed7-fc4107de17e9";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = "armv7 armv6 i386";
