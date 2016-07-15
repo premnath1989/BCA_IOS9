@@ -39,7 +39,7 @@ const int numberOfModule = 7;
 @end
 
 @implementation CarouselViewController
-@synthesize elementName, previousElementName, getInternet, getValid, indexNo, ErrorMsg,outletNavBar, outletClientProfile, outletCustomerFF, outletEAPP,outletSI;
+@synthesize elementName, previousElementName, getInternet, getValid, indexNo, ErrorMsg,outletNavBar, outletClientProfile, outletCustomerFF, outletEAPP,outletSI, loginPreviousController;
 @synthesize delegate = _delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -52,10 +52,6 @@ const int numberOfModule = 7;
 }
 
 -(void)viewDidLayoutSubviews {
-//    [outletNavBar setBackgroundImage:[UIImage imageNamed:@"NewHLAHeader.png"] forBarMetrics:UIBarMetricsDefault];
-//    CGRect frame = CGRectMake(0, 20, 1024, 60);
-//    [outletNavBar setFrame:frame];
-    
 }
 
 - (void)viewDidLoad
@@ -69,9 +65,6 @@ const int numberOfModule = 7;
     [exitBtn setBackgroundImage:[UIImage imageNamed:@"house.png"] forState:UIControlStateNormal];
     exitBtn.frame = CGRectMake(980.1, 17, 27.0, 29.0);
     [outletNavBar addSubview:exitBtn];
-    
-    //the disclaimer function
-//    [self showDisclaimer];
     
     NSString *version= [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     NSString *build= [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
@@ -95,36 +88,6 @@ const int numberOfModule = 7;
     labelbg.numberOfLines=0;
     labelbg.lineBreakMode=NSLineBreakByWordWrapping;
     [self.view addSubview:labelbg];
-
-    
-    NSString *id = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
-    
-//    UILabel  * label1 = [[UILabel alloc] initWithFrame:CGRectMake(3, 700, 600, 50)];
-//    label1.backgroundColor = [UIColor clearColor];
-//    label1.textColor=[UIColor blackColor];
-//    label1.numberOfLines=0;
-//    label1.lineBreakMode=NSLineBreakByWordWrapping;
-//    label1.text =[NSString stringWithFormat:@"Ad Id : %@",id];
-//    
-//    UILabel  * label2 = [[UILabel alloc] initWithFrame:CGRectMake(3, 640, 600, 50)];
-//    label2.backgroundColor = [UIColor clearColor];
-//    label2.textColor=[UIColor blackColor];
-//    label2.numberOfLines=0;
-//    label2.lineBreakMode=NSLineBreakByWordWrapping;
-    
-//    UIButton *AgentProfile = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [AgentProfile addTarget:self action:@selector(ButtonInfo) forControlEvents:UIControlEventTouchUpInside];
-//    [AgentProfile setBackgroundImage:[UIImage imageNamed:@"Setting_btnB.png"] forState:UIControlStateNormal];
-//    AgentProfile.frame = CGRectMake(980.1, 50, 27.0, 29.0);
-//    [self.view addSubview:AgentProfile];
-
-    NSString *string =[SIUtilities WSLogin];
-    
-//    if ([string rangeOfString:@"echannel.dev"].location == NSNotFound) {
-//        label2.text =[NSString stringWithFormat:@"App type : Production"];
-//    } else {
-//        label2.text =[NSString stringWithFormat:@"App type : Development"];
-//    }
     
     NSArray *paths2 = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docsPath2 = [paths2 objectAtIndex:0];
@@ -139,15 +102,6 @@ const int numberOfModule = 7;
          _AgentName.text  = [results stringForColumn:@"AgentName"];
     }
     
-    
-    int width = 128;
-    int height = 160;
-    int positionY = 310;
-    
-//    [outletClientProfile setFrame:CGRectMake(420, positionY, width, height)];
-//    [outletCustomerFF setFrame:CGRectMake(565, positionY, width, height)];
-//    [outletSI setFrame:CGRectMake(715, positionY, width, height)];
-//    [outletEAPP setFrame:CGRectMake(860, 300, width, 160)]; // EAPP words consist of one line only
 }
 
 
@@ -183,18 +137,18 @@ const int numberOfModule = 7;
 
 //app disclaimer
 - (void)showDisclaimer{
-    NSString *prevController = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-2];
     
-    if([prevController isEqualToString:@"Login"]){
+    if([loginPreviousController isEqualToString:@"Login"]){
         AppDisclaimer *disclaimerContent= [[AppDisclaimer alloc] initWithNibName:@"AppDisclaimer"
                                                                           bundle:nil];
         disclaimerContent.delegate = self;
-        UIPopoverController *disclaimer = [[UIPopoverController alloc] initWithContentViewController:disclaimerContent];
-
-        [disclaimer setPopoverContentSize:CGSizeMake(600, 600)];
-        [disclaimer presentPopoverFromRect:CGRectMake(325, 50, 450, 700) inView:self.view permittedArrowDirections:0 animated:YES];
+        
+        disclaimerContent.modalPresentationStyle = UIModalPresentationFormSheet;
+        disclaimerContent.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [self presentViewController:disclaimerContent animated:YES completion:nil];
        }
 }
+
 
 - (void)CloseWindow{
     //no functions needed
@@ -342,19 +296,9 @@ const int numberOfModule = 7;
 
 -(void)viewDidAppear:(BOOL)animated{
     AppDelegate *appDele= (AppDelegate*)[[UIApplication sharedApplication] delegate ];
-
-//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//    if (! [defaults boolForKey:@"Terminated"]) {
-//        if(appDele.checkLoginStatus == YES) {
-//            UIApplication *app = [UIApplication sharedApplication];
-//            NSURL *hlafastUrl = [NSURL URLWithString:[@"com.hla.fast://" stringByAppendingString:[@"imsLoginAssistant" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
-//            if ([app canOpenURL:hlafastUrl]) {
-//                [app openURL:hlafastUrl];
-//            } else {
-//         //       [self showDialogAppLaunchWithHLAFast];
-//            }
-//        }
-//    }
+    
+    //the disclaimer function
+    [self showDisclaimer];
 }
 
 -(void) showDialogAppLaunchWithHLAFast {

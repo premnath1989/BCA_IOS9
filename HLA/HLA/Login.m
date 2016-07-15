@@ -700,9 +700,10 @@ static NSString *labelVers;
 
 - (void) openHome
 {
-    
-    CarouselViewController *carouselMenu = [self.storyboard instantiateViewControllerWithIdentifier:@"carouselView"];
+    UIStoryboard *carouselStoryboard = [UIStoryboard storyboardWithName:@"CarouselStoryboard" bundle:Nil];
+    CarouselViewController* carouselMenu = [carouselStoryboard instantiateViewControllerWithIdentifier:@"carouselView"];
     carouselMenu.getInternet = @"No";
+    carouselMenu.loginPreviousController = @"Login";
     [self presentViewController:carouselMenu animated:YES completion:Nil];
 }
 
