@@ -1,0 +1,332 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='utf-8'>
+<title>Quesioner</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+
+<link rel="stylesheet" href="../jqueryLibrary/jquery.mobile-1.4.5.min.css">
+<script type='text/javascript' src="../jqueryLibrary/jquery-1.11.1.min.js"></script>
+<script type='text/javascript' src="../jqueryLibrary/jquery.mobile-1.4.5.min.js"></script>
+<script type='text/javascript' src="../jqueryLibrary/jquery.validate.min.js"></script>
+
+<script type='text/javascript'>
+var TextName0var = '';
+var TextName1var = '';
+var TextName2var = '';
+var TextName3var = '';
+var TextName4var = '';
+
+__functionIndexMap = {};
+<!-- core wrapper to client -->
+function calliOSFunction(functionName, successCallback, errorCallback, callInfo)
+{
+    var url = 'js-frame:';
+callInfo.functionname = functionName;
+if (successCallback)
+{
+if (typeof successCallback == 'function')
+{
+var callbackFuncName = createCallbackFunction(functionName + '_' + 'successCallback', successCallback);
+callInfo.success = callbackFuncName;
+}
+else
+callInfo.success = successCallback;
+}
+if (errorCallback)
+{
+if (typeof errorCallback == 'function')
+{
+var callbackFuncName = createCallbackFunction(functionName + '_' + 'errorCallback', errorCallback);
+callInfo.error = callbackFuncName;
+}
+else
+callInfo.error = errorCallback;
+}
+url += JSON.stringify(callInfo);
+var iFrame = createIFrame(url);
+//remove the frame now
+iFrame.parentNode.removeChild(iFrame);
+}
+function createCallbackFunction (funcName, callbackFunc)
+{
+if (callbackFunc && callbackFunc.name != null && callbackFunc.name.length > 0)
+{
+return callbackFunc.name;
+}
+if (typeof window[funcName+0] != 'function')
+{
+window[funcName+0] = callbackFunc;
+__functionIndexMap[funcName] = 0;
+return funcName+0
+} else
+{
+var maxIndex = __functionIndexMap[funcName];
+var callbackFuncStr = callbackFunc.toString();
+for (var i = 0; i <= maxIndex; i++)
+{
+var tmpName = funcName + i;
+if (window[tmpName].toString() == callbackFuncStr)
+return tmpName;
+}
+var newIndex = ++__functionIndexMap[funcName];
+window[funcName+newIndex] = callbackFunc;
+return funcName+newIndex;
+}
+}
+function createIFrame(src)
+{
+var rootElm = document.documentElement;
+var newFrameElm = document.createElement('IFRAME');
+newFrameElm.setAttribute('src',src);
+rootElm.appendChild(newFrameElm);
+return newFrameElm;
+}
+function onSuccess (ret)
+{
+if (ret)
+{
+var returnRet = JSON.parse(ret);
+alert(returnRet.result);
+}
+}
+function onError (ret)
+{
+if (ret)
+{
+var returnRet = JSON.parse(ret);
+alert(returnRet.error);
+}
+}
+function readfromDB() {
+var callInfo = {};
+callInfo.data = {};
+callInfo.data.CFFAnswers = {};
+callInfo.data.CFFAnswers.columns = 'elementID,Value,CFFID,CustomerID';
+callInfo.data.CFFAnswers.where = '';
+calliOSFunction('readfromDB:',onSuccess,onError, callInfo);
+}
+function savetoDB() {
+//we fill up the parameters here
+var callInfo = {};
+callInfo.data = {};
+callInfo.data.CFFAnswers = [{},{},{},{},{}];
+//if the table inserted is same with multiple rows.
+//treat the data as array
+callInfo.data.CFFAnswers[0].elementID = 'TextID0';
+callInfo.data.CFFAnswers[0].Value = $('#TextID0').val();
+callInfo.data.CFFAnswers[0].CFFID = '1';
+callInfo.data.CFFAnswers[0].CustomerID = '1';
+
+callInfo.data.CFFAnswers[1].elementID = 'TextID1';
+callInfo.data.CFFAnswers[1].Value = $('#TextID1').val();
+callInfo.data.CFFAnswers[1].CFFID = '1';
+callInfo.data.CFFAnswers[1].CustomerID = '1';
+
+callInfo.data.CFFAnswers[2].elementID = 'TextID2';
+callInfo.data.CFFAnswers[2].Value =  $('#TextID2').val();
+callInfo.data.CFFAnswers[2].CFFID = '1';
+callInfo.data.CFFAnswers[2].CustomerID = '1';
+
+callInfo.data.CFFAnswers[3].elementID = 'TextID3';
+callInfo.data.CFFAnswers[3].Value =  $('#TextID3').val();
+callInfo.data.CFFAnswers[3].CFFID = '1';
+callInfo.data.CFFAnswers[3].CustomerID = '1';
+
+callInfo.data.CFFAnswers[4].elementID = 'TextID4';
+callInfo.data.CFFAnswers[4].Value =  $('#TextID4').val();
+callInfo.data.CFFAnswers[4].CFFID = '1';
+callInfo.data.CFFAnswers[4].CustomerID = '1';
+
+//call the wrapper with the parameterized info
+calliOSFunction('savetoDB:',onSuccess,onError, callInfo);
+TextName0var = $('textarea#TextID0').val();
+TextName1var = $('textarea#TextID1').val();
+TextName2var = $('textarea#TextID2').val();
+TextName3var = $('textarea#TextID3').val();
+TextName4var = $('textarea#TextID4').val();
+
+console.log(JSON.stringify(callInfo));
+}
+function PrintData()
+{
+    savetoDB();
+}
+function ReadData()
+{
+$('#TextID0').val(TextName0var);
+$('#TextID1').val(TextName1var);
+$('#TextID2').val(TextName2var);
+$('#TextID3').val(TextName3var);
+$('#TextID4').val(TextName4var);
+}
+</script>
+
+<style>
+label.error {
+color: red;
+font-size: 16px;
+font-weight: normal;
+line-height: 1.4;
+margin-top: 0.5em;
+width: 100%;
+float: none;
+}
+@media screen and (orientation: portrait) {
+label.error {
+margin-left: 0;
+display: block;
+}
+}
+@media screen and (orientation: landscape) {
+label.error {
+display: inline-block;
+margin-left: 0%;
+}
+}
+em {
+color: red;
+font-weight: bold;
+padding-right: .25em;
+}    
+    </style>
+</head>
+<body>
+<div id='page1' data-role='page'>
+<div data-role='content'>
+<form id='myform'>
+<div data-role='main' class='ui-content'>
+
+<table data-role="table" class="ui-responsive table-stroke">
+     <thead>
+       <tr style="background-color: blue; color: white;" >
+         <th data-priority="2" class="style1"></th>
+         <th class="style1">RISK PROFILING QUESTIONER</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <th>1</th>
+         <td>Manakah dari keterangan dibawah ini yang sesuai dengan tahapan kehidupan Anda saat ini?<br />
+         <textarea name="TextName0" id="TextID0"></textarea></td>        
+       </tr>
+       <tr>
+         <th>2</th>
+         <td>Nilai investasi Anda dapat berkurang karena fluktuasi pasar. Seberapa jauh penurunan investasi yang dapat Anda toleransi?<br />
+        <textarea name="TextName1" id="TextID1"></textarea></td>
+       </tr>
+       <tr>
+         <th>3</th>
+         <td>Jika Nilai Investasi Anda saat ini mengalami penurunan sebesar 10% dibandingkan Nilai Investasi Anda 6 bulan yang lalu, apakah yang Anda lakukan?
+         <textarea name="TextName2" id="TextID2"></textarea></td>
+       </tr>
+       <tr>
+         <th>4</th>
+          <td>Berapa lama Investasi yang akan Anda lakukan?
+         <textarea name="TextName3" id="TextID3"></textarea></td>
+       </tr>
+       <tr>
+         <th>5</th>
+         <td>Berapa lama Investasi yang akan Anda lakukan?
+         <textarea name="TextName4" id="TextID4"></textarea></td>
+       </tr>      
+     </tbody>
+   </table>   
+    <br />
+<div><button class="ui-btn ui-btn-inline" id="save">Save</button>
+    <button class="ui-btn ui-btn-inline" id="read">Read</button>
+</div>
+<br />
+<table data-role="table" class="ui-responsive table-stroke">
+     <thead>
+       <tr> 
+         <th data-priority="2" colspan="2">INTERPRETASI NILAI&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+             SKOR ANDA : 25</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <th>&nbsp;</th>
+         <td style="background-color: Blue; color: White;"><strong>Konservatif (Nilai&lt;28)</strong><br />
+             Anda mengharapkan pertumbuhan nilai 
+             Investasi yang stabil dan penerimaan hasil investasi secara periodik. Anda<br />
+             hanya bersedia menoleransi risiko yang minimal dan cenderung akan melakukan 
+             pencarian dana Investasi Anda jika<br />
+             terjadi penurunan Nilai Investasi/kerugian</td>
+       </tr>
+       <tr>
+         <th>&nbsp;</th>
+         <td><strong>Moderat (Nilai 28-40)<br />
+             </strong>Anda berinvestasi dengan tujuan mendapatkan pendapatan secara periodik 
+             dan pertumbuhan modal dalam jangka
+             <br />
+             menengah sampai panjang. Anda dapat menerima resiko penurunan investasi dalam 
+             jangka pendek untuk<br />
+             memperoleh potensi pertumbuhan modal yang lebih tinggi dalam jangka menengah 
+             sampai panjang. </td>
+       </tr>
+       <tr>
+         <th>&nbsp;</th>
+         <td><strong>Agresif (Nilai &gt; 40)<br />
+             </strong>Anda bertujuan mengembangkan pokok investasi dalam jangka panjang 
+             dengan tingkat imbal hasil yang besar. Anda<br />
+             bersedia mengambil resiko yang lebih tinggi untuk memperoleh pertumbuhan nilai 
+             investasi yang lebih tinggi
+         </td>
+       </tr>
+     </tbody>
+   </table>
+   
+</div>
+</form>
+</div>
+</div>
+<script>
+$(document).ready(function () {
+$.validator.addMethod('valueNotEquals', function(value, element, arg){
+return arg != value;
+}, 'Value must not equal arg.');
+$('#myform').validate({ // initialize the plugin
+rules: {
+TextName0: {
+required: true,
+},
+RangeName1: {
+required: true,
+range: [5, 50]
+},
+CheckBoxName3:{required:true,'minlength':2},
+ SelectName4 : { valueNotEquals: 'Choose' },
+},
+messages:
+{
+CheckBoxName3:
+{
+minlength:'Please select at least {0} options'
+},
+    SelectName4: { valueNotEquals: 'Please select an item!' },
+},
+errorPlacement: function( error, element ) {
+if ( element.is(':checkbox') ) 
+    {
+        error.appendTo( element.parents('.container') );
+    }
+else
+{
+error.insertAfter( element.parent() );
+}
+}
+})
+$('#save').click(function(e) {
+e.preventDefault();
+PrintData();
+$('#myform')[0].reset();
+});
+$('#read').click(function(e) {
+e.preventDefault();
+ReadData();
+});
+});
+</script>
+</body>
+</html>

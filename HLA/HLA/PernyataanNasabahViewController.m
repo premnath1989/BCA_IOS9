@@ -7,13 +7,17 @@
 //
 
 #import "PernyataanNasabahViewController.h"
-
-@interface PernyataanNasabahViewController ()
+#import "ModelCFFTransaction.h"
+#import "ModelCFFHtml.h"
+@interface PernyataanNasabahViewController (){
+    ModelCFFTransaction* modelCFFTransaction;
+    ModelCFFHtml* modelCFFHtml;
+}
 
 @end
 
 @implementation PernyataanNasabahViewController
-@synthesize prospectProfileID,cffTransactionID,htmlFileName,cffID;
+@synthesize prospectProfileID,cffTransactionID,htmlFileName,cffID,cffHeaderSelectedDictionary;
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:YES];
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
@@ -29,6 +33,9 @@
 }
 
 - (void)viewDidLoad {
+    modelCFFTransaction = [[ModelCFFTransaction alloc]init];
+    modelCFFHtml = [[ModelCFFHtml alloc]init];
+    
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     databasePath = [[NSString alloc] initWithString:
                     [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
@@ -59,6 +66,48 @@
         }
     }
 }
+
+- (void)savetoDB:(NSDictionary *)params{
+    //add another key to db
+    //
+    cffID = [cffHeaderSelectedDictionary valueForKey:@"CustomerStatementCFFID"];
+    NSMutableDictionary* modifiedParams = [[NSMutableDictionary alloc]initWithDictionary:[params valueForKey:@"data"]];
+    [modifiedParams setObject:[[modelCFFHtml selectActiveHtmlForSection:@"CS"] valueForKey:@"CFFHtmlID"] forKey:@"CFFHtmlID"];
+    //[modifiedParams setObject:@"1" forKey:@"CFFHtmlID"];
+    [modifiedParams setObject:[cffTransactionID stringValue] forKey:@"CFFTransactionID"];
+    [modifiedParams setObject:[cffID stringValue] forKey:@"CFFID"];
+    [modifiedParams setObject:[prospectProfileID stringValue] forKey:@"CustomerID"];
+    
+    NSMutableArray* arrayCFFAnswers = [[NSMutableArray alloc]initWithArray:[modifiedParams valueForKey:@"CFFAnswers"]];
+    NSMutableArray* modifiedArrayCFFAnswers = [[NSMutableArray alloc]init];
+    if ([arrayCFFAnswers count]>0){
+        for (int i = 0;i<[arrayCFFAnswers count];i++){
+            NSMutableDictionary* tempDict = [[NSMutableDictionary alloc] initWithDictionary:[arrayCFFAnswers objectAtIndex:i]];
+            [tempDict setObject:[[modelCFFHtml selectActiveHtmlForSection:@"CS"] valueForKey:@"CFFHtmlID"] forKey:@"CFFHtmlID"];
+            [tempDict setObject:[cffTransactionID stringValue] forKey:@"CFFTransactionID"];
+            [tempDict setObject:[cffID stringValue] forKey:@"CFFID"];
+            [tempDict setObject:[prospectProfileID stringValue] forKey:@"CustomerID"];
+            
+            [modifiedArrayCFFAnswers addObject:tempDict];
+        }
+    }
+    
+    NSMutableDictionary* finalArrayDictionary = [[NSMutableDictionary alloc]init];
+    [finalArrayDictionary setObject:modifiedArrayCFFAnswers forKey:@"CFFAnswers"];
+    
+    NSMutableDictionary* finalDictionary = [[NSMutableDictionary alloc]init];
+    [finalDictionary setObject:finalArrayDictionary forKey:@"data"];
+    [modelCFFTransaction updateCFFDateModified:[cffTransactionID intValue]];
+    
+    [finalDictionary setValue:[params valueForKey:@"successCallBack"] forKey:@"successCallBack"];
+    [finalDictionary setValue:[params valueForKey:@"errorCallback"] forKey:@"errorCallback"];
+    [super savetoDB:finalDictionary];
+}
+
+- (NSMutableDictionary*)readfromDB:(NSMutableDictionary*) params{
+    return [super readfromDB:params];
+}
+
 
 /*
 #pragma mark - Navigation

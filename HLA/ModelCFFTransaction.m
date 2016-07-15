@@ -17,7 +17,7 @@
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     [database open];
     
-    BOOL success = [database executeUpdate:@"insert into CFFTransaction (CFFID, ProspectIndexNo, CFFDateCreated, CreatedBy,CFFDateModified,ModifiedBy,CFFStatus,CustomerStatementCFFID,CustomerNeedsCFFID,CustomerRiskCFFID,PotentialDiscussionCFFID) values (?,?,?,?,?,?,?,?,?,?,?)" ,
+    BOOL success = [database executeUpdate:@"insert into CFFTransaction (CFFID, ProspectIndexNo, CFFDateCreated, CreatedBy,CFFDateModified,ModifiedBy,CFFStatus,CustomerStatementCFFID,CustomerNeedsCFFID,CustomerRiskCFFID,PotentialDiscussionCFFID,ProteksiCFFID,PensiunCFFID,PendidikanCFFID,WarisanCFFID,InvestasiCFFID) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)" ,
                     [cffTransactionDictionary valueForKey:@"CFFID"],
                     [cffTransactionDictionary valueForKey:@"ProspectIndexNo"],
                     [cffTransactionDictionary valueForKey:@"CFFDateCreated"],
@@ -28,7 +28,12 @@
                     [cffTransactionDictionary valueForKey:@"CustomerStatementCFFID"],
                     [cffTransactionDictionary valueForKey:@"CustomerNeedsCFFID"],
                     [cffTransactionDictionary valueForKey:@"CustomerRiskCFFID"],
-                    [cffTransactionDictionary valueForKey:@"PotentialDiscussionCFFID"]];
+                    [cffTransactionDictionary valueForKey:@"PotentialDiscussionCFFID"],
+                    [cffTransactionDictionary valueForKey:@"ProteksiCFFID"],
+                    [cffTransactionDictionary valueForKey:@"PensiunCFFID"],
+                    [cffTransactionDictionary valueForKey:@"PendidikanCFFID"],
+                    [cffTransactionDictionary valueForKey:@"WarisanCFFID"],
+                    [cffTransactionDictionary valueForKey:@"InvestasiCFFID"]];
     
     if (!success) {
         NSLog(@"%s: insert error: %@", __FUNCTION__, [database lastErrorMessage]);
@@ -70,6 +75,15 @@
     NSString *CFFDateCreated;
     NSString *CFFDateModified;
     NSString *CFFStatus;
+    NSString *CustomerStatementCFFID;
+    NSString *CustomerNeedsCFFID;
+    NSString *CustomerRiskCFFID;
+    NSString *PotentialDiscussionCFFID;
+    NSString *ProteksiCFFID;
+    NSString *PensiunCFFID;
+    NSString *PendidikanCFFID;
+    NSString *WarisanCFFID;
+    NSString *InvestasiCFFID;
     int ProspectIndex;
     int CFFTransactionID;
     int CFFID;
@@ -98,6 +112,15 @@
         CFFDateCreated = [s stringForColumn:@"CFFDateCreated"];
         CFFDateModified = [s stringForColumn:@"CFFDateModified"];
         CFFStatus = [s stringForColumn:@"CFFStatus"];
+        CustomerStatementCFFID = [s stringForColumn:@"CustomerStatementCFFID"];
+        CustomerNeedsCFFID = [s stringForColumn:@"CustomerNeedsCFFID"];
+        CustomerRiskCFFID = [s stringForColumn:@"CustomerRiskCFFID"];
+        PotentialDiscussionCFFID = [s stringForColumn:@"PotentialDiscussionCFFID"];
+        ProteksiCFFID = [s stringForColumn:@"ProteksiCFFID"];
+        PensiunCFFID = [s stringForColumn:@"PensiunCFFID"];
+        PendidikanCFFID = [s stringForColumn:@"PendidikanCFFID"];
+        WarisanCFFID = [s stringForColumn:@"WarisanCFFID"];
+        InvestasiCFFID = [s stringForColumn:@"InvestasiCFFID"];
         
         dict=[[NSDictionary alloc]initWithObjectsAndKeys:
               [NSNumber numberWithInt:ProspectIndex],@"IndexNo",
@@ -112,7 +135,16 @@
               CFFDateCreated,@"CFFDateCreated",
               CFFDateModified,@"CFFDateModified",
               CFFStatus,@"CFFStatus",
-              ProspectIDDesc,@"IdentityDesc",nil];
+              ProspectIDDesc,@"IdentityDesc",
+              CustomerStatementCFFID,@"CustomerStatementCFFID",
+              CustomerNeedsCFFID,@"CustomerNeedsCFFID",
+              CustomerRiskCFFID,@"CustomerRiskCFFID",
+              PotentialDiscussionCFFID,@"PotentialDiscussionCFFID",
+              ProteksiCFFID ,@"ProteksiCFFID",
+              PensiunCFFID ,@"PensiunCFFID",
+              PendidikanCFFID,@"PendidikanCFFID",
+              WarisanCFFID ,@"WarisanCFFID",
+              InvestasiCFFID,@"InvestasiCFFID",nil];
         
         [arrayDictCFF addObject:dict];
     }
@@ -138,6 +170,15 @@
     NSString *CFFDateCreated;
     NSString *CFFDateModified;
     NSString *CFFStatus;
+    NSString *CustomerStatementCFFID;
+    NSString *CustomerNeedsCFFID;
+    NSString *CustomerRiskCFFID;
+    NSString *PotentialDiscussionCFFID;
+    NSString *ProteksiCFFID;
+    NSString *PensiunCFFID;
+    NSString *PendidikanCFFID;
+    NSString *WarisanCFFID;
+    NSString *InvestasiCFFID;
     int ProspectIndex;
     int CFFTransactionID;
     
@@ -172,6 +213,15 @@
         CFFDateCreated = [s stringForColumn:@"CFFDateCreated"];
         CFFDateModified = [s stringForColumn:@"CFFDateModified"];
         CFFStatus = [s stringForColumn:@"CFFStatus"];
+        CustomerStatementCFFID = [s stringForColumn:@"CustomerStatementCFFID"];
+        CustomerNeedsCFFID = [s stringForColumn:@"CustomerNeedsCFFID"];
+        CustomerRiskCFFID = [s stringForColumn:@"CustomerRiskCFFID"];
+        PotentialDiscussionCFFID = [s stringForColumn:@"PotentialDiscussionCFFID"];
+        ProteksiCFFID = [s stringForColumn:@"ProteksiCFFID"];
+        PensiunCFFID = [s stringForColumn:@"PensiunCFFID"];
+        PendidikanCFFID = [s stringForColumn:@"PendidikanCFFID"];
+        WarisanCFFID = [s stringForColumn:@"WarisanCFFID"];
+        InvestasiCFFID = [s stringForColumn:@"InvestasiCFFID"];
         
         dict=[[NSDictionary alloc]initWithObjectsAndKeys:
               [NSNumber numberWithInt:ProspectIndex],@"IndexNo",
@@ -185,7 +235,16 @@
               CFFDateCreated,@"CFFDateCreated",
               CFFDateModified,@"CFFDateModified",
               CFFStatus,@"CFFStatus",
-              ProspectIDDesc,@"IdentityDesc",nil];
+              ProspectIDDesc,@"IdentityDesc",
+              CustomerStatementCFFID,@"CustomerStatementCFFID",
+              CustomerNeedsCFFID,@"CustomerNeedsCFFID",
+              CustomerRiskCFFID,@"CustomerRiskCFFID",
+              PotentialDiscussionCFFID,@"PotentialDiscussionCFFID",
+              ProteksiCFFID ,@"ProteksiCFFID",
+              PensiunCFFID ,@"PensiunCFFID",
+              PendidikanCFFID,@"PendidikanCFFID",
+              WarisanCFFID ,@"WarisanCFFID",
+              InvestasiCFFID,@"InvestasiCFFID",nil];
         
         [arrayDictCFF addObject:dict];
     }

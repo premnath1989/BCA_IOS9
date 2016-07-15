@@ -65,7 +65,6 @@
     int RecDelete;
 }
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -76,6 +75,7 @@
     [self createBlackStatusBar];
     [self setButtonImageAndTextAlignment];
     [self setTextfieldBorder];
+    
     
     modelCFFTransaction = [[ModelCFFTransaction alloc]init];
     modelCFFAnswers = [[ModelCFFAnswers alloc]init];
@@ -94,12 +94,16 @@
     ItemToBeDeleted = [[NSMutableArray alloc] init];
     
     [self loadCFFTransaction];
-//    NSString* fileName = @"20160701171527.html";
-//    [cffAPIController apiCallCFFHtmtable:@"http://mposws.azurewebsites.net/Service2.svc/getAllData"];
-//    [cffAPIController apiCallCrateHtmlFile:[NSString stringWithFormat:@"http://mposws.azurewebsites.net/Service2.svc/GetHtmlFile?fileName=%@",fileName] RootPathFolder:@"CFFFolder"];
+
+    [self copyHTMLFile:@"PotentialDiscussion"];
+    [self copyHTMLFile:@"ProfileRisk"];
+    [self copyHTMLFile:@"Proteksi"];
+    [self copyHTMLFile:@"Pensiun"];
+    [self copyHTMLFile:@"Pendidikan"];
+    [self copyHTMLFile:@"Warisan"];
+    [self copyHTMLFile:@"Investasi"];
+    [self copyHTMLFile:@"CustomerStatement"];
     [self fetchHTMLInfo];
-    [self copyHTMLFile:@"index1"];
-    [self copyHTMLFile:@"index2"];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -110,14 +114,14 @@
     NSDictionary *dictCFFTable = [[NSDictionary alloc]initWithObjectsAndKeys:@"CFFHtml",@"tableName",tableColumn,@"columnName", nil];
     
     [cffAPIController apiCallHtmlTable:@"http://mposws.azurewebsites.net/Service2.svc/getAllData" JSONKey:arrayJSONKey TableDictionary:dictCFFTable];
-    [cffAPIController apiCallCrateHtmlFile:[NSString stringWithFormat:@"http://mposws.azurewebsites.net/Service2.svc/GetHtmlFile?fileName=%@",fileName] RootPathFolder:@"CFFFolder"];
+    [cffAPIController apiCallCrateHtmlFile:[NSString stringWithFormat:@"http://mposws.azurewebsites.net/Service2.svc/GetHtmlFile?fileName=%@",fileName] RootPathFolder:@"CFFfolder"];
 }
 
 -(void)copyHTMLFile:(NSString *)fileName{
     NSError *error =  nil;
-    [cffAPIController createDirectory:@"CFFfolder"];
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *filePathApp = [docsDir stringByAppendingPathComponent:@"CFFfolder"];
+    [cffAPIController createDirectory:filePathApp];
     NSString *filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"html"];
     NSData *htmlData = [NSData dataWithContentsOfFile:filePath];
     [htmlData writeToFile:[NSString stringWithFormat:@"%@/%@.html",filePathApp,fileName] options:NSDataWritingAtomic error:&error];
@@ -170,6 +174,7 @@
     cFFQuestionsVC.prospectProfileID = [arrayCFFTransaction[indexPath.row] valueForKey:@"IndexNo"];
     cFFQuestionsVC.cffTransactionID = [arrayCFFTransaction[indexPath.row] valueForKey:@"CFFTransactionID"];
     cFFQuestionsVC.cffID = [arrayCFFTransaction[indexPath.row] valueForKey:@"CFFID"];
+    cFFQuestionsVC.cffHeaderSelectedDictionary = [[NSDictionary alloc]initWithDictionary:arrayCFFTransaction[indexPath.row]];
     [self.navigationController pushViewController:cFFQuestionsVC animated:YES];
 }
 
@@ -538,8 +543,13 @@
     NSDictionary* dictCustomerNeedsCFFID=[[NSDictionary alloc]initWithDictionary:[modelCFFHtml selectActiveHtmlForSection:@"CN"]];
     NSDictionary* dictCustomerRiskCFFID=[[NSDictionary alloc]initWithDictionary:[modelCFFHtml selectActiveHtmlForSection:@"CR"]];
     NSDictionary* dictPotentialDiscussionCFFID=[[NSDictionary alloc]initWithDictionary:[modelCFFHtml selectActiveHtmlForSection:@"PD"]];
+    NSDictionary* dictProteksiCFFID=[[NSDictionary alloc]initWithDictionary:[modelCFFHtml selectActiveHtmlForSection:@"PRT"]];
+    NSDictionary* dictPensiunCFFID=[[NSDictionary alloc]initWithDictionary:[modelCFFHtml selectActiveHtmlForSection:@"PSN"]];
+    NSDictionary* dictPendidikanCFFID=[[NSDictionary alloc]initWithDictionary:[modelCFFHtml selectActiveHtmlForSection:@"PND"]];
+    NSDictionary* dictWarisanCFFID=[[NSDictionary alloc]initWithDictionary:[modelCFFHtml selectActiveHtmlForSection:@"WRS"]];
+    NSDictionary* dictInvestasiCFFID=[[NSDictionary alloc]initWithDictionary:[modelCFFHtml selectActiveHtmlForSection:@"INV"]];
     
-    NSDictionary* dictCFFTransaction = [[NSDictionary alloc]initWithObjectsAndKeys:[dictActiveHtml valueForKey:@"CFFID"],@"CFFID",[NSNumber numberWithInteger:clientProfileID],@"ProspectIndexNo",dateToday,@"CFFDateCreated",@"",@"CreatedBy",dateToday,@"CFFDateModified",@"",@"ModifiedBy",@"Not Complete",@"CFFStatus",[dictCustomerStatementCFFID valueForKey:@"CFFID"],@"CustomerStatementCFFID",[dictCustomerNeedsCFFID valueForKey:@"CFFID"],@"CustomerNeedsCFFID",[dictCustomerRiskCFFID valueForKey:@"CFFID"],@"CustomerRiskCFFID",[dictPotentialDiscussionCFFID valueForKey:@"CFFID"],@"PotentialDiscussionCFFID", nil];
+    NSDictionary* dictCFFTransaction = [[NSDictionary alloc]initWithObjectsAndKeys:[dictActiveHtml valueForKey:@"CFFID"],@"CFFID",[NSNumber numberWithInteger:clientProfileID],@"ProspectIndexNo",dateToday,@"CFFDateCreated",@"",@"CreatedBy",dateToday,@"CFFDateModified",@"",@"ModifiedBy",@"Not Complete",@"CFFStatus",[dictCustomerStatementCFFID valueForKey:@"CFFID"],@"CustomerStatementCFFID",[dictCustomerNeedsCFFID valueForKey:@"CFFID"],@"CustomerNeedsCFFID",[dictCustomerRiskCFFID valueForKey:@"CFFID"],@"CustomerRiskCFFID",[dictPotentialDiscussionCFFID valueForKey:@"CFFID"],@"PotentialDiscussionCFFID",[dictProteksiCFFID valueForKey:@"CFFID"],@"ProteksiCFFID",[dictPensiunCFFID valueForKey:@"CFFID"],@"PensiunCFFID",[dictPendidikanCFFID valueForKey:@"CFFID"],@"PendidikanCFFID",[dictWarisanCFFID valueForKey:@"CFFID"],@"WarisanCFFID",[dictInvestasiCFFID valueForKey:@"CFFID"],@"InvestasiCFFID", nil];
     [modelCFFTransaction saveCFFTransaction:dictCFFTransaction];
 }
 

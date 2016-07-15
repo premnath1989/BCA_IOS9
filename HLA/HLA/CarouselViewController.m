@@ -34,7 +34,6 @@
 const int numberOfModule = 7;
 
 @interface CarouselViewController ()<UIActionSheetDelegate>{
-    
 }
 
 @end
@@ -60,7 +59,7 @@ const int numberOfModule = 7;
     [super viewDidLoad];
     
     [self createBlackStatusBar];
-
+    
     UIButton *exitBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [exitBtn addTarget:self action:@selector(goToHome:) forControlEvents:UIControlEventTouchUpInside];
     [exitBtn setBackgroundImage:[UIImage imageNamed:@"house.png"] forState:UIControlStateNormal];

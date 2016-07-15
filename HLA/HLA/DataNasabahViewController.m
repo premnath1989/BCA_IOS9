@@ -32,7 +32,7 @@
     NSString* nameChild4;
     NSString* nameChild5;
 }
-@synthesize prospectProfileID,cffTransactionID;
+@synthesize prospectProfileID,cffTransactionID,cffHeaderSelectedDictionary;
 
 -(void)viewWillAppear:(BOOL)animated{
     //[self loadData];

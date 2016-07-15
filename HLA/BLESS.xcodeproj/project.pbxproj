@@ -450,6 +450,24 @@
 		438625141D24C2C500F1BDC7 /* Android.htm in Resources */ = {isa = PBXBuildFile; fileRef = 438624E71D24C2C500F1BDC7 /* Android.htm */; };
 		438625191D24C30200F1BDC7 /* PernyataanNasabahViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 438625171D24C30200F1BDC7 /* PernyataanNasabahViewController.m */; };
 		4386251A1D24C30200F1BDC7 /* PernyataanNasabahViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 438625181D24C30200F1BDC7 /* PernyataanNasabahViewController.xib */; };
+		43870C9F1D35FEAF0035143C /* CustomerNeeds.html in Resources */ = {isa = PBXBuildFile; fileRef = 43870C971D35FEAF0035143C /* CustomerNeeds.html */; };
+		43870CA01D35FEAF0035143C /* CustomerStatement.html in Resources */ = {isa = PBXBuildFile; fileRef = 43870C981D35FEAF0035143C /* CustomerStatement.html */; };
+		43870CA11D35FEAF0035143C /* Investasi.html in Resources */ = {isa = PBXBuildFile; fileRef = 43870C991D35FEAF0035143C /* Investasi.html */; };
+		43870CA21D35FEAF0035143C /* Pensiun.html in Resources */ = {isa = PBXBuildFile; fileRef = 43870C9A1D35FEAF0035143C /* Pensiun.html */; };
+		43870CA31D35FEAF0035143C /* PotentialDiscussion.html in Resources */ = {isa = PBXBuildFile; fileRef = 43870C9B1D35FEAF0035143C /* PotentialDiscussion.html */; };
+		43870CA41D35FEAF0035143C /* ProfileRisk.html in Resources */ = {isa = PBXBuildFile; fileRef = 43870C9C1D35FEAF0035143C /* ProfileRisk.html */; };
+		43870CA51D35FEAF0035143C /* Proteksi.html in Resources */ = {isa = PBXBuildFile; fileRef = 43870C9D1D35FEAF0035143C /* Proteksi.html */; };
+		43870CA61D35FEAF0035143C /* Warisan.html in Resources */ = {isa = PBXBuildFile; fileRef = 43870C9E1D35FEAF0035143C /* Warisan.html */; };
+		43870CAF1D362A0D0035143C /* AnalisaKebutuhanProteksiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43870CAD1D362A0D0035143C /* AnalisaKebutuhanProteksiViewController.m */; };
+		43870CB01D362A0D0035143C /* AnalisaKebutuhanProteksiViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43870CAE1D362A0D0035143C /* AnalisaKebutuhanProteksiViewController.xib */; };
+		43870CB41D362A220035143C /* AnalisaKebutuhanPensiunViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43870CB21D362A220035143C /* AnalisaKebutuhanPensiunViewController.m */; };
+		43870CB51D362A220035143C /* AnalisaKebutuhanPensiunViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43870CB31D362A220035143C /* AnalisaKebutuhanPensiunViewController.xib */; };
+		43870CB91D362AB90035143C /* AnalisaKebutuhanPendidikanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43870CB71D362AB90035143C /* AnalisaKebutuhanPendidikanViewController.m */; };
+		43870CBA1D362AB90035143C /* AnalisaKebutuhanPendidikanViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43870CB81D362AB90035143C /* AnalisaKebutuhanPendidikanViewController.xib */; };
+		43870CBE1D362AD00035143C /* AnalisaKebutuhanWarisanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43870CBC1D362AD00035143C /* AnalisaKebutuhanWarisanViewController.m */; };
+		43870CBF1D362AD00035143C /* AnalisaKebutuhanWarisanViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43870CBD1D362AD00035143C /* AnalisaKebutuhanWarisanViewController.xib */; };
+		43870CC31D362AE70035143C /* AnalisaKebutuhanInvestasiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43870CC11D362AE70035143C /* AnalisaKebutuhanInvestasiViewController.m */; };
+		43870CC41D362AE70035143C /* AnalisaKebutuhanInvestasiViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43870CC21D362AE70035143C /* AnalisaKebutuhanInvestasiViewController.xib */; };
 		438726541D0FB55F00F92A6B /* ModelCFFTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = 438726531D0FB55F00F92A6B /* ModelCFFTransaction.m */; };
 		438726571D0FE6FB00F92A6B /* ModelProspectSpouse.m in Sources */ = {isa = PBXBuildFile; fileRef = 438726561D0FE6FB00F92A6B /* ModelProspectSpouse.m */; };
 		4399826C1D07D025009CFEB2 /* CFFListingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4399826A1D07D025009CFEB2 /* CFFListingViewController.m */; };
@@ -478,6 +496,7 @@
 		43B59E281D0A72E8007DBFED /* CFFListingStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43B59E271D0A72E8007DBFED /* CFFListingStoryboard.storyboard */; };
 		43BB38BB1CBCA4CC00A5F5C5 /* IlustrationSignatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43BB38BA1CBCA4CC00A5F5C5 /* IlustrationSignatureViewController.m */; };
 		43BB38C11CBCBBF700A5F5C5 /* mySmoothLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43BB38C01CBCBBF700A5F5C5 /* mySmoothLineView.m */; };
+		43BB5A551D3738EC0067D189 /* Pendidikan.html in Resources */ = {isa = PBXBuildFile; fileRef = 43BB5A541D3738EC0067D189 /* Pendidikan.html */; };
 		43C166191C99448500001691 /* ModelKodepos.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C166181C99448500001691 /* ModelKodepos.m */; };
 		43C1661C1C99489000001691 /* KodePosInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C1661B1C99489000001691 /* KodePosInfo.m */; };
 		43CDBA671D190F5C00AC299F /* ModelCFFAnswers.m in Sources */ = {isa = PBXBuildFile; fileRef = 43CDBA661D190F5C00AC299F /* ModelCFFAnswers.m */; };
@@ -1670,6 +1689,29 @@
 		438625161D24C30200F1BDC7 /* PernyataanNasabahViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PernyataanNasabahViewController.h; sourceTree = "<group>"; };
 		438625171D24C30200F1BDC7 /* PernyataanNasabahViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PernyataanNasabahViewController.m; sourceTree = "<group>"; };
 		438625181D24C30200F1BDC7 /* PernyataanNasabahViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PernyataanNasabahViewController.xib; sourceTree = "<group>"; };
+		43870C971D35FEAF0035143C /* CustomerNeeds.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = CustomerNeeds.html; sourceTree = "<group>"; };
+		43870C981D35FEAF0035143C /* CustomerStatement.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = CustomerStatement.html; sourceTree = "<group>"; };
+		43870C991D35FEAF0035143C /* Investasi.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Investasi.html; sourceTree = "<group>"; };
+		43870C9A1D35FEAF0035143C /* Pensiun.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Pensiun.html; sourceTree = "<group>"; };
+		43870C9B1D35FEAF0035143C /* PotentialDiscussion.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = PotentialDiscussion.html; sourceTree = "<group>"; };
+		43870C9C1D35FEAF0035143C /* ProfileRisk.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ProfileRisk.html; sourceTree = "<group>"; };
+		43870C9D1D35FEAF0035143C /* Proteksi.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Proteksi.html; sourceTree = "<group>"; };
+		43870C9E1D35FEAF0035143C /* Warisan.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Warisan.html; sourceTree = "<group>"; };
+		43870CAC1D362A0D0035143C /* AnalisaKebutuhanProteksiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalisaKebutuhanProteksiViewController.h; sourceTree = "<group>"; };
+		43870CAD1D362A0D0035143C /* AnalisaKebutuhanProteksiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalisaKebutuhanProteksiViewController.m; sourceTree = "<group>"; };
+		43870CAE1D362A0D0035143C /* AnalisaKebutuhanProteksiViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnalisaKebutuhanProteksiViewController.xib; sourceTree = "<group>"; };
+		43870CB11D362A220035143C /* AnalisaKebutuhanPensiunViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalisaKebutuhanPensiunViewController.h; sourceTree = "<group>"; };
+		43870CB21D362A220035143C /* AnalisaKebutuhanPensiunViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalisaKebutuhanPensiunViewController.m; sourceTree = "<group>"; };
+		43870CB31D362A220035143C /* AnalisaKebutuhanPensiunViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnalisaKebutuhanPensiunViewController.xib; sourceTree = "<group>"; };
+		43870CB61D362AB90035143C /* AnalisaKebutuhanPendidikanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalisaKebutuhanPendidikanViewController.h; sourceTree = "<group>"; };
+		43870CB71D362AB90035143C /* AnalisaKebutuhanPendidikanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalisaKebutuhanPendidikanViewController.m; sourceTree = "<group>"; };
+		43870CB81D362AB90035143C /* AnalisaKebutuhanPendidikanViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnalisaKebutuhanPendidikanViewController.xib; sourceTree = "<group>"; };
+		43870CBB1D362AD00035143C /* AnalisaKebutuhanWarisanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalisaKebutuhanWarisanViewController.h; sourceTree = "<group>"; };
+		43870CBC1D362AD00035143C /* AnalisaKebutuhanWarisanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalisaKebutuhanWarisanViewController.m; sourceTree = "<group>"; };
+		43870CBD1D362AD00035143C /* AnalisaKebutuhanWarisanViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnalisaKebutuhanWarisanViewController.xib; sourceTree = "<group>"; };
+		43870CC01D362AE70035143C /* AnalisaKebutuhanInvestasiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalisaKebutuhanInvestasiViewController.h; sourceTree = "<group>"; };
+		43870CC11D362AE70035143C /* AnalisaKebutuhanInvestasiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalisaKebutuhanInvestasiViewController.m; sourceTree = "<group>"; };
+		43870CC21D362AE70035143C /* AnalisaKebutuhanInvestasiViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnalisaKebutuhanInvestasiViewController.xib; sourceTree = "<group>"; };
 		438726521D0FB55F00F92A6B /* ModelCFFTransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelCFFTransaction.h; sourceTree = "<group>"; };
 		438726531D0FB55F00F92A6B /* ModelCFFTransaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelCFFTransaction.m; sourceTree = "<group>"; };
 		438726551D0FE6FB00F92A6B /* ModelProspectSpouse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelProspectSpouse.h; sourceTree = "<group>"; };
@@ -1716,6 +1758,7 @@
 		43BB38BA1CBCA4CC00A5F5C5 /* IlustrationSignatureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IlustrationSignatureViewController.m; sourceTree = "<group>"; };
 		43BB38BF1CBCBBF700A5F5C5 /* mySmoothLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mySmoothLineView.h; sourceTree = "<group>"; };
 		43BB38C01CBCBBF700A5F5C5 /* mySmoothLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mySmoothLineView.m; sourceTree = "<group>"; };
+		43BB5A541D3738EC0067D189 /* Pendidikan.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Pendidikan.html; sourceTree = "<group>"; };
 		43C166171C99448500001691 /* ModelKodepos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelKodepos.h; sourceTree = "<group>"; };
 		43C166181C99448500001691 /* ModelKodepos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelKodepos.m; sourceTree = "<group>"; };
 		43C1661A1C99489000001691 /* KodePosInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KodePosInfo.h; sourceTree = "<group>"; };
@@ -3755,6 +3798,11 @@
 		432E8F661D13F2AE0030F0C4 /* Section 4 Analisa Kebutuhan Nasabah */ = {
 			isa = PBXGroup;
 			children = (
+				43870CAB1D3629D90035143C /* Investasi */,
+				43870CAA1D3629D00035143C /* Warisan */,
+				43870CA91D3629C00035143C /* Pendidikan */,
+				43870CA81D3629B90035143C /* Pensiun */,
+				43870CA71D3629AD0035143C /* Proteksi */,
 				432E8F671D13F36D0030F0C4 /* AnalisaKebutuhanNasabahViewController.h */,
 				432E8F681D13F36D0030F0C4 /* AnalisaKebutuhanNasabahViewController.m */,
 				432E8F691D13F36D0030F0C4 /* AnalisaKebutuhanNasabahViewController.xib */,
@@ -3868,6 +3916,56 @@
 				438625181D24C30200F1BDC7 /* PernyataanNasabahViewController.xib */,
 			);
 			name = "Section 5 Pernyataan Nasabah";
+			sourceTree = "<group>";
+		};
+		43870CA71D3629AD0035143C /* Proteksi */ = {
+			isa = PBXGroup;
+			children = (
+				43870CAC1D362A0D0035143C /* AnalisaKebutuhanProteksiViewController.h */,
+				43870CAD1D362A0D0035143C /* AnalisaKebutuhanProteksiViewController.m */,
+				43870CAE1D362A0D0035143C /* AnalisaKebutuhanProteksiViewController.xib */,
+			);
+			name = Proteksi;
+			sourceTree = "<group>";
+		};
+		43870CA81D3629B90035143C /* Pensiun */ = {
+			isa = PBXGroup;
+			children = (
+				43870CB11D362A220035143C /* AnalisaKebutuhanPensiunViewController.h */,
+				43870CB21D362A220035143C /* AnalisaKebutuhanPensiunViewController.m */,
+				43870CB31D362A220035143C /* AnalisaKebutuhanPensiunViewController.xib */,
+			);
+			name = Pensiun;
+			sourceTree = "<group>";
+		};
+		43870CA91D3629C00035143C /* Pendidikan */ = {
+			isa = PBXGroup;
+			children = (
+				43870CB61D362AB90035143C /* AnalisaKebutuhanPendidikanViewController.h */,
+				43870CB71D362AB90035143C /* AnalisaKebutuhanPendidikanViewController.m */,
+				43870CB81D362AB90035143C /* AnalisaKebutuhanPendidikanViewController.xib */,
+			);
+			name = Pendidikan;
+			sourceTree = "<group>";
+		};
+		43870CAA1D3629D00035143C /* Warisan */ = {
+			isa = PBXGroup;
+			children = (
+				43870CBB1D362AD00035143C /* AnalisaKebutuhanWarisanViewController.h */,
+				43870CBC1D362AD00035143C /* AnalisaKebutuhanWarisanViewController.m */,
+				43870CBD1D362AD00035143C /* AnalisaKebutuhanWarisanViewController.xib */,
+			);
+			name = Warisan;
+			sourceTree = "<group>";
+		};
+		43870CAB1D3629D90035143C /* Investasi */ = {
+			isa = PBXGroup;
+			children = (
+				43870CC01D362AE70035143C /* AnalisaKebutuhanInvestasiViewController.h */,
+				43870CC11D362AE70035143C /* AnalisaKebutuhanInvestasiViewController.m */,
+				43870CC21D362AE70035143C /* AnalisaKebutuhanInvestasiViewController.xib */,
+			);
+			name = Investasi;
 			sourceTree = "<group>";
 		};
 		439982651D07CFCC009CFEB2 /* CFF Listing */ = {
@@ -4813,6 +4911,15 @@
 				43E7FA151D20E05B0090DF2D /* index3.html */,
 				4313E81D1D34FDBA0036A6B7 /* index1.html */,
 				4313E81E1D34FDBA0036A6B7 /* index2.html */,
+				43870C971D35FEAF0035143C /* CustomerNeeds.html */,
+				43870C981D35FEAF0035143C /* CustomerStatement.html */,
+				43870C991D35FEAF0035143C /* Investasi.html */,
+				43BB5A541D3738EC0067D189 /* Pendidikan.html */,
+				43870C9A1D35FEAF0035143C /* Pensiun.html */,
+				43870C9B1D35FEAF0035143C /* PotentialDiscussion.html */,
+				43870C9C1D35FEAF0035143C /* ProfileRisk.html */,
+				43870C9D1D35FEAF0035143C /* Proteksi.html */,
+				43870C9E1D35FEAF0035143C /* Warisan.html */,
 				43F7C3161C9D409D0074F464 /* Formatter */,
 				43FA6C151C87CD5D0098BA47 /* HTML USED */,
 				AA4EF6E61C85A3F20050CCD8 /* PDFReader */,
@@ -5732,6 +5839,7 @@
 				4386250D1D24C2C500F1BDC7 /* tv-on.jpg in Resources */,
 				17A299131C60A0DB00C2537A /* HelveticaLTStd-BlkObl.otf in Resources */,
 				17A299141C60A0DB00C2537A /* HelveticaLTStd-Bold.otf in Resources */,
+				43870CB01D362A0D0035143C /* AnalisaKebutuhanProteksiViewController.xib in Resources */,
 				17A299151C60A0DB00C2537A /* HelveticaLTStd-BoldCond.otf in Resources */,
 				17A299161C60A0DB00C2537A /* HelveticaLTStd-BoldCondObl.otf in Resources */,
 				438624F61D24C2C500F1BDC7 /* devices.jpg in Resources */,
@@ -5770,6 +5878,7 @@
 				C4E9D1C61612C78400016053 /* magnifying-glass.png in Resources */,
 				438624FB1D24C2C500F1BDC7 /* icon-dots.svg in Resources */,
 				C4E9D1C71612C78400016053 /* magnifying-glass@2x.png in Resources */,
+				43BB5A551D3738EC0067D189 /* Pendidikan.html in Resources */,
 				C4EB49101615327E00C7FC8C /* button_hover.png in Resources */,
 				C4EB49111615327E00C7FC8C /* button.png in Resources */,
 				0FF845651D237732008CF861 /* SPAJ Existing List Cell.xib in Resources */,
@@ -5819,6 +5928,7 @@
 				C4660EC71625047800BA4AFE /* SI_button2_144.png in Resources */,
 				C4660EC81625047800BA4AFE /* SI_button2.png in Resources */,
 				AA4EF75A1C85A4260050CCD8 /* Reader-Mark-Y.png in Resources */,
+				43870CA01D35FEAF0035143C /* CustomerStatement.html in Resources */,
 				173E81601C28F9C600BDAAE9 /* EappListing.storyboard in Resources */,
 				438625001D24C2C500F1BDC7 /* mode-logo.png in Resources */,
 				C4660EC91625047800BA4AFE /* SI_buttonB_144.png in Resources */,
@@ -5849,10 +5959,12 @@
 				C486D9CB163E5319009F8F21 /* btn_prospect_off.png in Resources */,
 				C486D9CC163E5319009F8F21 /* btn_prospect_on.png in Resources */,
 				43F8B5511C81E71B006F3F6C /* SIListingTableViewCell.xib in Resources */,
+				43870CA51D35FEAF0035143C /* Proteksi.html in Resources */,
 				C486D9CE163E5319009F8F21 /* btn_SIlisting_on.png in Resources */,
 				438625141D24C2C500F1BDC7 /* Android.htm in Resources */,
 				C486D9D1163E5466009F8F21 /* btn_home.png in Resources */,
 				A1EEF9591C8D8E520016BB3D /* Icon Brochure & save as-01-03.png in Resources */,
+				43870CB51D362A220035143C /* AnalisaKebutuhanPensiunViewController.xib in Resources */,
 				C486D9D2163E5466009F8F21 /* btn_SIlisting_off.png in Resources */,
 				0F32685E1D1A96EA001A9021 /* Localizable.strings in Resources */,
 				C486D9D4163E6622009F8F21 /* Cordova.plist in Resources */,
@@ -5879,6 +5991,7 @@
 				C4E5A471168AAA89007848CE /* ChgPwd_32.png in Resources */,
 				C4E5A472168AAA89007848CE /* ChgPwd_48.png in Resources */,
 				C4E5A473168AAA89007848CE /* ChgPwd_64.png in Resources */,
+				43870CA11D35FEAF0035143C /* Investasi.html in Resources */,
 				0F3268561D1A93A4001A9021 /* SPAJ Submitted List.xib in Resources */,
 				438625031D24C2C500F1BDC7 /* more-from-2.png in Resources */,
 				C4E5A474168AAA89007848CE /* ChgPwd_128.png in Resources */,
@@ -5899,6 +6012,8 @@
 				4376DF181CD1934400816BB6 /* undo.png in Resources */,
 				C4E5A47C168AAA89007848CE /* Profile96.png in Resources */,
 				C4E5A47D168AAA89007848CE /* Profile128.png in Resources */,
+				43870C9F1D35FEAF0035143C /* CustomerNeeds.html in Resources */,
+				43870CBF1D362AD00035143C /* AnalisaKebutuhanWarisanViewController.xib in Resources */,
 				43B590961CA2702400DC53AC /* KeluargakuTableViewCell.xib in Resources */,
 				438624F11D24C2C500F1BDC7 /* auto-on_mobile.jpg in Resources */,
 				A1EEF95A1C8D8E520016BB3D /* Icon Brochure & save as-01-04.png in Resources */,
@@ -5928,6 +6043,7 @@
 				438624AF1D24B82E00F1BDC7 /* main.built.css in Resources */,
 				438624B31D24B82E00F1BDC7 /* Apple.html in Resources */,
 				A9E550A61C591F7900C9DAC2 /* Expand Arrow@2x.png in Resources */,
+				43870CA61D35FEAF0035143C /* Warisan.html in Resources */,
 				EF90B0BA178C133A00FEC129 /* emptyCheckBox.png in Resources */,
 				EF90B0BB178C133A00FEC129 /* tickCheckBox.png in Resources */,
 				EF90B0C6178D38BF00FEC129 /* disclosure_indicator.png in Resources */,
@@ -5974,6 +6090,7 @@
 				2958A8D317E965CA0090A791 /* mengcheong_Storyboard.storyboard in Resources */,
 				AA4EF75F1C85A4260050CCD8 /* Reader-Print@3x.png in Resources */,
 				2958A8D917E986620090A791 /* status.plist in Resources */,
+				43870CC41D362AE70035143C /* AnalisaKebutuhanInvestasiViewController.xib in Resources */,
 				43A401E91D26094E0057D558 /* result.json in Resources */,
 				29A3EEC517EAA71100E1CE8B /* cb_glossy_off.png in Resources */,
 				438624AD1D24B82E00F1BDC7 /* auto-init.js in Resources */,
@@ -5994,6 +6111,7 @@
 				1706BD4F1C7169A40038D1DB /* menu_productinformation.png in Resources */,
 				C3560C941805119400745FC6 /* priority.plist in Resources */,
 				425092AE180E71E80022FED3 /* prospect_100_2.png in Resources */,
+				43870CA41D35FEAF0035143C /* ProfileRisk.html in Resources */,
 				425092AF180E71E80022FED3 /* prospect_100_3.png in Resources */,
 				438625111D24C2C500F1BDC7 /* wear-on.jpg in Resources */,
 				AA4EF7491C85A4260050CCD8 /* Default-667h@2x.png in Resources */,
@@ -6041,6 +6159,7 @@
 				2994B41718E121AE00B0D4D2 /* P2-1.jpg in Resources */,
 				438624AA1D24B82E00F1BDC7 /* ac-globalnav.built.css in Resources */,
 				2994B41818E121AE00B0D4D2 /* P2-2.jpg in Resources */,
+				43870CA31D35FEAF0035143C /* PotentialDiscussion.html in Resources */,
 				2994B41918E121AE00B0D4D2 /* P3-footer.jpg in Resources */,
 				2994B41A18E121AE00B0D4D2 /* P3-header.jpg in Resources */,
 				438624FF1D24C2C500F1BDC7 /* main.min.js in Resources */,
@@ -6050,6 +6169,7 @@
 				2994B41D18E121AE00B0D4D2 /* P4.jpg in Resources */,
 				2994B41E18E121AE00B0D4D2 /* P5-bg.jpg in Resources */,
 				AA4EF7461C85A4260050CCD8 /* AppIcon-167.png in Resources */,
+				43870CA21D35FEAF0035143C /* Pensiun.html in Resources */,
 				0F32684F1D1A93A4001A9021 /* SPAJ Add Menu.xib in Resources */,
 				A1FCF07B1CA80B92000D85E1 /* Icon_Brochure_Gray_BG.png in Resources */,
 				2994B41F18E121AE00B0D4D2 /* P5-footer.jpg in Resources */,
@@ -6154,6 +6274,7 @@
 				AA4EF7441C85A4260050CCD8 /* AppIcon-144.png in Resources */,
 				043FDBAB1A1AF226008EDC24 /* sales_illustration@2x_20141118.png in Resources */,
 				043FDBAC1A1AF226008EDC24 /* eAplication@2x_20141118.png in Resources */,
+				43870CBA1D362AB90035143C /* AnalisaKebutuhanPendidikanViewController.xib in Resources */,
 				043FDBAD1A1AF226008EDC24 /* customer_fact_find@2x_20141118.png in Resources */,
 				043FDBAE1A1AF226008EDC24 /* client_profile@2x_20141118.png in Resources */,
 				043FDBB01A1B5376008EDC24 /* backgroundWithBox.png in Resources */,
@@ -6205,6 +6326,7 @@
 				C4EA9BD21616DB7F00D51FE9 /* SecurityQuesTbViewController.m in Sources */,
 				C4EA9BDB16171E5200D51FE9 /* RetreivePwdTbViewController.m in Sources */,
 				C4EA9BDE16171F4800D51FE9 /* ForgotPwd.m in Sources */,
+				43870CB41D362A220035143C /* AnalisaKebutuhanPensiunViewController.m in Sources */,
 				C4EA9BEA16181FFB00D51FE9 /* ProspectViewController.m in Sources */,
 				43B5909E1CA29D7200DC53AC /* ModelSIRider.m in Sources */,
 				C4EA9BED1619359D00D51FE9 /* OccupationList.m in Sources */,
@@ -6281,6 +6403,7 @@
 				C4E7C0DD172FC9CD00038FA9 /* AFXMLRequestOperation.m in Sources */,
 				437223E61C89372200D94B2F /* RateModel.m in Sources */,
 				C4E7C0DE172FC9CD00038FA9 /* UIImageView+AFNetworking.m in Sources */,
+				43870CBE1D362AD00035143C /* AnalisaKebutuhanWarisanViewController.m in Sources */,
 				EF5B611F173C9ED900751157 /* CustomerProfile.m in Sources */,
 				EF5B612A1740B70C00751157 /* SIUtilities.m in Sources */,
 				431376C21D0E5B2D007D3BF1 /* AddSpouseViewController.m in Sources */,
@@ -6427,6 +6550,7 @@
 				29A38DC217EAEBC800454787 /* eAppCell.m in Sources */,
 				29A38DC317EAEBC800454787 /* PolicyOwnerCell.m in Sources */,
 				4353C94E1C61F6F800AE1ED9 /* ModelReligion.m in Sources */,
+				43870CB91D362AB90035143C /* AnalisaKebutuhanPendidikanViewController.m in Sources */,
 				29A38DC417EAEBC800454787 /* SICell.m in Sources */,
 				29A38DCA17EAF51000454787 /* eSubMenu.m in Sources */,
 				29A38DD017EAF58B00454787 /* pendingVC.m in Sources */,
@@ -6518,6 +6642,7 @@
 				C30A25F717F3CB7100613A0F /* MainViewInsured.m in Sources */,
 				0FFA18641D21283300C63A47 /* Entity SPAJ Header.m in Sources */,
 				C30A25F817F3CB7100613A0F /* MasterMenuCFFWithData.m in Sources */,
+				43870CC31D362AE70035143C /* AnalisaKebutuhanInvestasiViewController.m in Sources */,
 				C30A25F917F3CB7100613A0F /* PolicyDetails.m in Sources */,
 				C30A25FA17F3CB7100613A0F /* ViewInsuredRecord.m in Sources */,
 				298C96F217FAE1AF007D696F /* PolicyOwnerData.m in Sources */,
@@ -6608,6 +6733,7 @@
 				2994B42418E121AE00B0D4D2 /* P2Table.m in Sources */,
 				2994B42618E121AE00B0D4D2 /* Table2.m in Sources */,
 				2994B42818E121AE00B0D4D2 /* Table3.m in Sources */,
+				43870CAF1D362A0D0035143C /* AnalisaKebutuhanProteksiViewController.m in Sources */,
 				0FFA18801D2262E700C63A47 /* Insert Initialization.m in Sources */,
 				2994B42B18E121AE00B0D4D2 /* XMLDictionary.m in Sources */,
 				6CB3126118EE4E2B00A323A4 /* LoginVar.m in Sources */,

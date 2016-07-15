@@ -80,47 +80,54 @@
 }
 
 -(void)insertJsonToDB:(NSData *)jsonData JSONKey:(NSArray *)jsonKey TableDictionary:(NSDictionary *)tableDictionary{
-    NSError *error =  nil;
-    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&error];
-    
-    NSArray *items = [json valueForKeyPath:@"d"];
-    
-    if ([[json valueForKeyPath:@"d"] isKindOfClass:[NSArray class]]){
-        NSEnumerator *enumerator = [items objectEnumerator];
-        NSDictionary* item;
-        while (item = (NSDictionary*)[enumerator nextObject]) {
-            NSString* stringID=[NSString stringWithFormat:@"\"%@\"",[item objectForKey:[jsonKey objectAtIndex:0]]];
-            NSString* stringFileName=[NSString stringWithFormat:@"\"%@\"",[item objectForKey:[jsonKey objectAtIndex:1]]];
-            NSString* stringStatus=[NSString stringWithFormat:@"\"%@\"",[item objectForKey:[jsonKey objectAtIndex:2]]];
-            NSString* stringSection=[NSString stringWithFormat:@"\"%@\"",[item objectForKey:[jsonKey objectAtIndex:3]]];
-            NSArray* tableValue= [[NSArray alloc]initWithObjects:stringID,stringFileName,stringStatus,stringSection, nil];
-            
+    @try {
+        NSError *error =  nil;
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&error];
+        
+        NSArray *items = [json valueForKeyPath:@"d"];
+        
+        if ([[json valueForKeyPath:@"d"] isKindOfClass:[NSArray class]]){
+            NSEnumerator *enumerator = [items objectEnumerator];
+            NSDictionary* item;
+            while (item = (NSDictionary*)[enumerator nextObject]) {
+                NSString* stringID=[NSString stringWithFormat:@"\"%@\"",[item objectForKey:[jsonKey objectAtIndex:0]]];
+                NSString* stringFileName=[NSString stringWithFormat:@"\"%@\"",[item objectForKey:[jsonKey objectAtIndex:1]]];
+                NSString* stringStatus=[NSString stringWithFormat:@"\"%@\"",[item objectForKey:[jsonKey objectAtIndex:2]]];
+                NSString* stringSection=[NSString stringWithFormat:@"\"%@\"",[item objectForKey:[jsonKey objectAtIndex:3]]];
+                NSArray* tableValue= [[NSArray alloc]initWithObjects:stringID,stringFileName,stringStatus,stringSection, nil];
+                
+                NSMutableDictionary* dictDataTable = [[NSMutableDictionary alloc]initWithDictionary:tableDictionary];
+                [dictDataTable setObject:tableValue forKey:@"columnValue"];
+                
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                    [modelCFFHtml updateGlobalHtmlData:[item objectForKey:[jsonKey objectAtIndex:3]]];
+                    // Some long running task you want on another thread
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [modelCFFHtml saveGlobalHtmlData:dictDataTable];
+                    });
+                });
+            }
+        }
+        else{
+            NSDictionary *itemsDict = [json valueForKeyPath:@"d"];
+            NSArray* tableValue= [[NSArray alloc]initWithObjects:[itemsDict objectForKey:[jsonKey objectAtIndex:0]],[itemsDict objectForKey:[jsonKey objectAtIndex:1]],[itemsDict objectForKey:[jsonKey objectAtIndex:2]],[itemsDict objectForKey:[jsonKey objectAtIndex:3]], nil];
             NSMutableDictionary* dictDataTable = [[NSMutableDictionary alloc]initWithDictionary:tableDictionary];
             [dictDataTable setObject:tableValue forKey:@"columnValue"];
             
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                [modelCFFHtml updateGlobalHtmlData:[item objectForKey:[jsonKey objectAtIndex:3]]];
+                [modelCFFHtml updateGlobalHtmlData:[itemsDict objectForKey:[jsonKey objectAtIndex:3]]];
                 // Some long running task you want on another thread
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [modelCFFHtml saveGlobalHtmlData:dictDataTable];
                 });
             });
         }
-    }
-    else{
-        NSDictionary *itemsDict = [json valueForKeyPath:@"d"];
-        NSArray* tableValue= [[NSArray alloc]initWithObjects:[itemsDict objectForKey:[jsonKey objectAtIndex:0]],[itemsDict objectForKey:[jsonKey objectAtIndex:1]],[itemsDict objectForKey:[jsonKey objectAtIndex:2]],[itemsDict objectForKey:[jsonKey objectAtIndex:3]], nil];
-        NSMutableDictionary* dictDataTable = [[NSMutableDictionary alloc]initWithDictionary:tableDictionary];
-        [dictDataTable setObject:tableValue forKey:@"columnValue"];
+    } @catch (NSException *exception) {
         
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            [modelCFFHtml updateGlobalHtmlData:[itemsDict objectForKey:[jsonKey objectAtIndex:3]]];
-            // Some long running task you want on another thread
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [modelCFFHtml saveGlobalHtmlData:dictDataTable];
-            });
-        });
+    } @finally {
+        
     }
+    
 }
 
 #pragma mark create html
@@ -136,23 +143,38 @@
 }
 
 -(void)createHTMLFile:(NSData *)jsonData RootPathFolder:(NSString *)rootPathFolder{
-    //NSString *filePath = [[NSBundle mainBundle] pathForResource:@"result" ofType:@"json"];
-    //NSString *jsonString =[[NSString alloc] initWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:NULL];
-    NSError *error =  nil;
-    //NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:&error];
-    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&error];
-    
-    if ([[json valueForKeyPath:@"d"] isKindOfClass:[NSArray class]]){
-        NSArray *items = [json valueForKeyPath:@"d"];
-        NSEnumerator *enumerator = [items objectEnumerator];
-        NSDictionary* item;
-        while (item = (NSDictionary*)[enumerator nextObject]) {
-            NSString* base64String = [NSString stringWithFormat:@"%@",[item objectForKey:@"Base64File"]];
-            NSString* folderName = [NSString stringWithFormat:@"%@",[item objectForKey:@"FolderName"]];
-            NSString* fileName = [NSString stringWithFormat:@"%@",[item objectForKey:@"FileName"]];
+    @try {
+        NSError *error =  nil;
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&error];
+        
+        if ([[json valueForKeyPath:@"d"] isKindOfClass:[NSArray class]]){
+            NSArray *items = [json valueForKeyPath:@"d"];
+            NSEnumerator *enumerator = [items objectEnumerator];
+            NSDictionary* item;
+            while (item = (NSDictionary*)[enumerator nextObject]) {
+                NSString* base64String = [NSString stringWithFormat:@"%@",[item objectForKey:@"Base64File"]];
+                NSString* folderName = [NSString stringWithFormat:@"%@",[item objectForKey:@"FolderName"]];
+                NSString* fileName = [NSString stringWithFormat:@"%@",[item objectForKey:@"FileName"]];
+                
+                NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+                NSString *filePathApp = [docsDir stringByAppendingPathComponent:rootPathFolder];
+                [self createDirectory:filePathApp];
+                
+                [self createFileDirectory:[NSString stringWithFormat:@"%@/%@",filePathApp,folderName]];
+                
+                NSData *htmlData = [self dataFromBase64EncodedString:base64String];
+                [htmlData writeToFile:[NSString stringWithFormat:@"%@/%@/%@",filePathApp,folderName,fileName] options:NSDataWritingAtomic error:&error];
+            }
+        }
+        else{
+            NSDictionary *itemsDict = [json valueForKeyPath:@"d"];
+            NSString* base64String = [NSString stringWithFormat:@"%@",[itemsDict objectForKey:@"Base64File"]];
+            NSString* folderName = [NSString stringWithFormat:@"%@",[itemsDict objectForKey:@"FolderName"]];
+            NSString* fileName = [NSString stringWithFormat:@"%@",[itemsDict objectForKey:@"FileName"]];
             
             NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
             NSString *filePathApp = [docsDir stringByAppendingPathComponent:rootPathFolder];
+            
             [self createDirectory:filePathApp];
             
             [self createFileDirectory:[NSString stringWithFormat:@"%@/%@",filePathApp,folderName]];
@@ -160,24 +182,11 @@
             NSData *htmlData = [self dataFromBase64EncodedString:base64String];
             [htmlData writeToFile:[NSString stringWithFormat:@"%@/%@/%@",filePathApp,folderName,fileName] options:NSDataWritingAtomic error:&error];
         }
+    } @catch (NSException *exception) {
+        
+    } @finally {
+        
     }
-    else{
-        NSDictionary *itemsDict = [json valueForKeyPath:@"d"];
-        NSString* base64String = [NSString stringWithFormat:@"%@",[itemsDict objectForKey:@"Base64File"]];
-        NSString* folderName = [NSString stringWithFormat:@"%@",[itemsDict objectForKey:@"FolderName"]];
-        NSString* fileName = [NSString stringWithFormat:@"%@",[itemsDict objectForKey:@"FileName"]];
-        
-        NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-        NSString *filePathApp = [docsDir stringByAppendingPathComponent:rootPathFolder];
-        
-        [self createDirectory:filePathApp];
-        
-        [self createFileDirectory:[NSString stringWithFormat:@"%@/%@",filePathApp,folderName]];
-        
-        NSData *htmlData = [self dataFromBase64EncodedString:base64String];
-        [htmlData writeToFile:[NSString stringWithFormat:@"%@/%@/%@",filePathApp,folderName,fileName] options:NSDataWritingAtomic error:&error];
-    }
-    
 }
 
 -(NSData *)dataFromBase64EncodedString:(NSString *)string{

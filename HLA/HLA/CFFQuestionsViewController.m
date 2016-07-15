@@ -37,7 +37,7 @@
     NSMutableArray *NumberListOfSubMenu;
     NSMutableArray *ListOfSubMenu;
 }
-@synthesize prospectProfileID,cffTransactionID,cffID;
+@synthesize prospectProfileID,cffTransactionID,cffID,cffHeaderSelectedDictionary;
 
 -(void)viewWillAppear:(BOOL)animated{
     ProspectProfile* pp;
@@ -76,12 +76,13 @@
 }
 
 -(void)loadAreaPotensialDiskusiView{
+    cffID = [cffHeaderSelectedDictionary valueForKey:@"PotentialDiscussionCFFID"];
     NSMutableArray *arrayHtml = [modelCFFHtml selectHtmlData:[cffID intValue] HtmlSection:@"PD"];
+    areaPotensialDiskusiVC.cffHeaderSelectedDictionary = [[NSDictionary alloc]initWithDictionary:cffHeaderSelectedDictionary];
     areaPotensialDiskusiVC.prospectProfileID = prospectProfileID;
     areaPotensialDiskusiVC.cffTransactionID  = cffTransactionID;
     areaPotensialDiskusiVC.cffID = cffID;
     areaPotensialDiskusiVC.htmlFileName = [[arrayHtml objectAtIndex:0]valueForKey:@"CFFHtmlName"];
-    //areaPotensialDiskusiVC.htmlFileName = @"index1.html";
     if ([areaPotensialDiskusiVC.view isDescendantOfView:childView]){
         [childView bringSubviewToFront:areaPotensialDiskusiVC.view];
     }
@@ -91,7 +92,9 @@
 }
 
 -(void)loadProfilResikoNasabahView{
+    cffID = [cffHeaderSelectedDictionary valueForKey:@"CustomerRiskCFFID"];
     NSMutableArray *arrayHtml = [modelCFFHtml selectHtmlData:[cffID intValue] HtmlSection:@"CR"];
+    profilResikoVC.cffHeaderSelectedDictionary = [[NSDictionary alloc]initWithDictionary:cffHeaderSelectedDictionary];
     profilResikoVC.prospectProfileID = prospectProfileID;
     profilResikoVC.cffTransactionID  = cffTransactionID;
     profilResikoVC.cffID = cffID;
@@ -106,6 +109,10 @@
 }
 
 -(void)loadAnalisaKebutuhanNasabahView{
+    analisaKebutuhanNasabahVC.cffHeaderSelectedDictionary = [[NSDictionary alloc]initWithDictionary:cffHeaderSelectedDictionary];
+    analisaKebutuhanNasabahVC.prospectProfileID = prospectProfileID;
+    analisaKebutuhanNasabahVC.cffTransactionID  = cffTransactionID;
+    analisaKebutuhanNasabahVC.cffID = cffID;
     if ([analisaKebutuhanNasabahVC.view isDescendantOfView:childView]){
         [childView bringSubviewToFront:analisaKebutuhanNasabahVC.view];
     }
@@ -115,7 +122,9 @@
 }
 
 -(void)loadPernyataanNasabahView{
+    cffID = [cffHeaderSelectedDictionary valueForKey:@"CustomerStatementCFFID"];
     NSMutableArray *arrayHtml = [modelCFFHtml selectHtmlData:[cffID intValue] HtmlSection:@"CS"];
+    pernyataanNasabahVC.cffHeaderSelectedDictionary = [[NSDictionary alloc]initWithDictionary:cffHeaderSelectedDictionary];
     pernyataanNasabahVC.prospectProfileID = prospectProfileID;
     pernyataanNasabahVC.cffTransactionID  = cffTransactionID;
     pernyataanNasabahVC.cffID = cffID;
