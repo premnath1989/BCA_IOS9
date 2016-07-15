@@ -290,11 +290,11 @@ static NSString *labelVers;
                 WebResponObj *returnObj = [[WebResponObj alloc]init];
                 [self parseXML:root objBuff:returnObj index:0];
                 int result = [loginDB fullSyncTable:returnObj];
-                if(result == TABLE_INSERTION_SUCCESS){
+//                if(result == TABLE_INSERTION_SUCCESS){
                     [spinnerLoading stopLoadingSpinner];
                     if([self validToLogin] && [self CredentialChecking:TRUE])
                         [self loginSuccess];
-                }
+//                }
             }else if([rateResponse.strStatus caseInsensitiveCompare:@"False"] == NSOrderedSame){
                 
                 [spinnerLoading stopLoadingSpinner];
@@ -321,11 +321,11 @@ static NSString *labelVers;
                 WebResponObj *returnObj = [[WebResponObj alloc]init];
                 [self parseXML:root objBuff:returnObj index:0];
                 int result = [loginDB fullSyncTable:returnObj];
-                if(result == TABLE_INSERTION_SUCCESS){
+//                if(result == TABLE_INSERTION_SUCCESS){
                     [spinnerLoading stopLoadingSpinner];
                     if([self validToLogin] && [self CredentialChecking:FALSE])
                         [self loginSuccess];
-                }
+//                }
             }else if([rateResponse.strStatus caseInsensitiveCompare:@"False"] == NSOrderedSame){
                 
                 [spinnerLoading stopLoadingSpinner];
