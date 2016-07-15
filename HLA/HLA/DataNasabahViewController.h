@@ -24,5 +24,6 @@
 
 @property (strong, nonatomic) NSNumber* prospectProfileID;
 @property (strong, nonatomic) NSNumber* cffTransactionID;
+@property (strong, nonatomic) NSDictionary* cffHeaderSelectedDictionary;
 
 @end

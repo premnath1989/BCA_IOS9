@@ -466,13 +466,13 @@ id dobtemp;
                 clientProfileID = [[dictPOData valueForKey:@"LA_ClientID"] intValue];
                 [nameField setText:[dictPOData valueForKey:@"LA_Name"]];
                 [ageField setText:[dictPOData valueForKey:@"LA_Age"]];
-                if ([[dictPOData valueForKey:@"LA_DOB"] isEqualToString:@""]){
+                if (([[dictPOData valueForKey:@"LA_DOB"] isEqualToString:@""])||(![dictPOData objectForKey:@"LA_DOB"])){
                     [_BtnTanggalLahir setTitle:@"--Please Select--" forState:UIControlStateNormal];
                 }
                 else{
                     [_BtnTanggalLahir setTitle:[dictPOData valueForKey:@"LA_DOB"] forState:UIControlStateNormal];
                 }
-                if ([[dictPOData valueForKey:@"LA_Occp"] isEqualToString:@""]){
+                if (([[dictPOData valueForKey:@"LA_Occp"] isEqualToString:@""])||(![dictPOData objectForKey:@"LA_Occp"])){
                     [btnOccp setTitle:@"--Please Select--" forState:UIControlStateNormal];
                 }
                 else{

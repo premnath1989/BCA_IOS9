@@ -65,7 +65,6 @@
     int RecDelete;
 }
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -76,6 +75,7 @@
     [self createBlackStatusBar];
     [self setButtonImageAndTextAlignment];
     [self setTextfieldBorder];
+    
     
     modelCFFTransaction = [[ModelCFFTransaction alloc]init];
     modelCFFAnswers = [[ModelCFFAnswers alloc]init];
@@ -94,10 +94,7 @@
     ItemToBeDeleted = [[NSMutableArray alloc] init];
     
     [self loadCFFTransaction];
-//    NSString* fileName = @"20160701171527.html";
-//    [cffAPIController apiCallCFFHtmtable:@"http://mposws.azurewebsites.net/Service2.svc/getAllData"];
-//    [cffAPIController apiCallCrateHtmlFile:[NSString stringWithFormat:@"http://mposws.azurewebsites.net/Service2.svc/GetHtmlFile?fileName=%@",fileName] RootPathFolder:@"CFFFolder"];
-    [self fetchHTMLInfo];
+
     [self copyHTMLFile:@"PotentialDiscussion"];
     [self copyHTMLFile:@"ProfileRisk"];
     [self copyHTMLFile:@"Proteksi"];
@@ -106,6 +103,7 @@
     [self copyHTMLFile:@"Warisan"];
     [self copyHTMLFile:@"Investasi"];
     [self copyHTMLFile:@"CustomerStatement"];
+    [self fetchHTMLInfo];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -121,9 +119,9 @@
 
 -(void)copyHTMLFile:(NSString *)fileName{
     NSError *error =  nil;
-    [cffAPIController createDirectory:@"CFFfolder"];
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *filePathApp = [docsDir stringByAppendingPathComponent:@"CFFfolder"];
+    [cffAPIController createDirectory:filePathApp];
     NSString *filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"html"];
     NSData *htmlData = [NSData dataWithContentsOfFile:filePath];
     [htmlData writeToFile:[NSString stringWithFormat:@"%@/%@.html",filePathApp,fileName] options:NSDataWritingAtomic error:&error];
@@ -176,6 +174,7 @@
     cFFQuestionsVC.prospectProfileID = [arrayCFFTransaction[indexPath.row] valueForKey:@"IndexNo"];
     cFFQuestionsVC.cffTransactionID = [arrayCFFTransaction[indexPath.row] valueForKey:@"CFFTransactionID"];
     cFFQuestionsVC.cffID = [arrayCFFTransaction[indexPath.row] valueForKey:@"CFFID"];
+    cFFQuestionsVC.cffHeaderSelectedDictionary = [[NSDictionary alloc]initWithDictionary:arrayCFFTransaction[indexPath.row]];
     [self.navigationController pushViewController:cFFQuestionsVC animated:YES];
 }
 

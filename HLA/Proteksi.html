@@ -10,44 +10,6 @@
 <script type='text/javascript' src="../jqueryLibrary/jquery.validate.min.js"></script>
 
 <script type='text/javascript'>
-var TextName0var = '';
-var TextName1var = '';
-var TextName2var = '';
-var TextName3var = '';
-var TextName4var = '';
-var TextName5var = '';
-var TextName6var = '';
-var TextName7var = '';
-var TextName8var = '';
-var TextName9var = '';
-var TextName10var = '';
-var TextName11var = '';
-var TextName12var = '';
-var TextName13var = '';
-var TextName14var = '';
-var TextName15var = '';
-var TextName16var = '';
-var TextName17var = '';
-var TextName18var = '';
-var TextName19var = '';
-var TextName20var = '';
-var TextName21var = '';
-var TextName22var = '';
-var TextName23var = '';
-var TextName24var = '';
-var TextName25var = '';
-var TextName26var = '';
-var TextName27var = '';
-var TextName28var = '';
-var TextName29var = '';
-var TextName30var = '';
-var TextName31var = '';
-var TextName32var = '';
-var TextName33var = '';
-var TextName34var = '';
-var TextName35var = '';
-var TextName36var = '';
-
 __functionIndexMap = {};
 <!-- core wrapper to client -->
 function calliOSFunction(functionName, successCallback, errorCallback, callInfo)
@@ -118,7 +80,49 @@ function onSuccess (ret)
 if (ret)
 {
 var returnRet = JSON.parse(ret);
-alert(returnRet.result);
+
+theTypeIs = Object.keys(returnRet.result)[0];
+
+if (theTypeIs == 'readFromDB')
+{
+$('input[name=TextName0]').val(returnRet.result.readFromDB[0].Value);
+$('input[name=TextName1]').val(returnRet.result.readFromDB[1].Value);
+$('input[name=TextName2]').val(returnRet.result.readFromDB[2].Value);
+$('input[name=TextName3]').val(returnRet.result.readFromDB[3].Value);
+$('input[name=TextName4]').val(returnRet.result.readFromDB[4].Value);
+$('input[name=TextName5]').val(returnRet.result.readFromDB[5].Value);
+$('input[name=TextName6]').val(returnRet.result.readFromDB[6].Value);
+$('input[name=TextName7]').val(returnRet.result.readFromDB[7].Value);
+$('input[name=TextName8]').val(returnRet.result.readFromDB[8].Value);
+$('input[name=TextName9]').val(returnRet.result.readFromDB[9].Value);
+$('input[name=TextName10]').val(returnRet.result.readFromDB[10].Value);
+$('input[name=TextName11]').val(returnRet.result.readFromDB[11].Value);
+$('input[name=TextName12]').val(returnRet.result.readFromDB[12].Value);
+$('input[name=TextName13]').val(returnRet.result.readFromDB[13].Value);
+$('input[name=TextName14]').val(returnRet.result.readFromDB[14].Value);
+$('input[name=TextName15]').val(returnRet.result.readFromDB[15].Value);
+$('input[name=TextName16]').val(returnRet.result.readFromDB[16].Value);
+$('input[name=TextName17]').val(returnRet.result.readFromDB[17].Value);
+$('input[name=TextName18]').val(returnRet.result.readFromDB[18].Value);
+$('input[name=TextName19]').val(returnRet.result.readFromDB[19].Value);
+$('input[name=TextName20]').val(returnRet.result.readFromDB[20].Value);
+$('input[name=TextName21]').val(returnRet.result.readFromDB[21].Value);
+$('input[name=TextName22]').val(returnRet.result.readFromDB[22].Value);
+$('input[name=TextName23]').val(returnRet.result.readFromDB[23].Value);
+$('input[name=TextName24]').val(returnRet.result.readFromDB[24].Value);
+$('input[name=TextName25]').val(returnRet.result.readFromDB[25].Value);
+$('input[name=TextName26]').val(returnRet.result.readFromDB[26].Value);
+$('input[name=TextName27]').val(returnRet.result.readFromDB[27].Value);
+$('input[name=TextName28]').val(returnRet.result.readFromDB[28].Value);
+$('input[name=TextName29]').val(returnRet.result.readFromDB[29].Value);
+$('input[name=TextName30]').val(returnRet.result.readFromDB[30].Value);
+$('input[name=TextName31]').val(returnRet.result.readFromDB[31].Value);
+$('input[name=TextName32]').val(returnRet.result.readFromDB[32].Value);
+$('input[name=TextName33]').val(returnRet.result.readFromDB[33].Value);
+$('input[name=TextName34]').val(returnRet.result.readFromDB[34].Value);
+$('input[name=TextName35]').val(returnRet.result.readFromDB[35].Value);
+$('input[name=TextName36]').val(returnRet.result.readFromDB[36].Value);
+}
 }
 }
 function onError (ret)
@@ -136,6 +140,57 @@ callInfo.data.CFFAnswers = {};
 callInfo.data.CFFAnswers.columns = 'elementID,Value,CFFID,CustomerID';
 callInfo.data.CFFAnswers.where = '';
 calliOSFunction('readfromDB:',onSuccess,onError, callInfo);
+
+/*var text = '{"result":{"readFromDB":[{"elementID":"TextID0","Value":"2","CFFID":"1","CustomerID":"1"},{"elementID":"TextID1","Value":"2","CFFID":"1","CustomerID":"1"},{"elementID":"TextID2","Value":"","CFFID":"1","CustomerID":"1"},{"elementID":"TextID3","Value":"5","CFFID":"1","CustomerID":"1"},{"elementID":"TextID4","Value":"7","CFFID":"1","CustomerID":"1"},{"elementID":"TextID5","Value":"","CFFID":"1","CustomerID":"1"},{"elementID":"TextID6","Value":"5","CFFID":"1","CustomerID":"1"},{"elementID":"TextID7","Value":"7","CFFID":"1","CustomerID":"1"},{"elementID":"TextID8","Value":"","CFFID":"1","CustomerID":"1"},{"elementID":"TextID9","Value":"3","CFFID":"1","CustomerID":"1"},{"elementID":"TextID10","Value":"5","CFFID":"1","CustomerID":"1"},{"elementID":"TextID11","Value":"","CFFID":"1","CustomerID":"1"},{"elementID":"TextID12","Value":"3","CFFID":"1","CustomerID":"1"},{"elementID":"TextID13","Value":"5","CFFID":"1","CustomerID":"1"},{"elementID":"TextID14","Value":"","CFFID":"1","CustomerID":"1"},{"elementID":"TextID15","Value":"6","CFFID":"1","CustomerID":"1"},{"elementID":"TextID16","Value":"8","CFFID":"1","CustomerID":"1"},{"elementID":"TextID17","Value":"","CFFID":"1","CustomerID":"1"},{"elementID":"TextID18","Value":"4","CFFID":"1","CustomerID":"1"},{"elementID":"TextID19","Value":"5","CFFID":"1","CustomerID":"1"},{"elementID":"TextID20","Value":"","CFFID":"1","CustomerID":"1"},{"elementID":"TextID21","Value":"2","CFFID":"1","CustomerID":"1"},{"elementID":"TextID22","Value":"5","CFFID":"1","CustomerID":"1"},{"elementID":"TextID23","Value":"","CFFID":"1","CustomerID":"1"},{"elementID":"TextID24","Value":"2","CFFID":"1","CustomerID":"1"},{"elementID":"TextID25","Value":"5","CFFID":"1","CustomerID":"1"},{"elementID":"TextID26","Value":"","CFFID":"1","CustomerID":"1"},{"elementID":"TextID27","Value":"5","CFFID":"1","CustomerID":"1"},{"elementID":"TextID28","Value":"7","CFFID":"1","CustomerID":"1"},{"elementID":"TextID29","Value":"","CFFID":"1","CustomerID":"1"},{"elementID":"TextID30","Value":"4","CFFID":"1","CustomerID":"1"},{"elementID":"TextID31","Value":"6","CFFID":"1","CustomerID":"1"},{"elementID":"TextID32","Value":"","CFFID":"1","CustomerID":"1"},{"elementID":"TextID33","Value":"3","CFFID":"1","CustomerID":"1"},{"elementID":"TextID34","Value":"5","CFFID":"1","CustomerID":"1"},{"elementID":"TextID35","Value":"","CFFID":"1","CustomerID":"1"},{"elementID":"TextID36","Value":"2","CFFID":"1","CustomerID":"1"}]},"functionname":"savetoDB:","success":"onSuccess","error":"onError"}'
+
+var obj = JSON.parse(text);
+
+theTypeIs = Object.keys(obj.result)[0];
+
+if (theTypeIs == 'readFromDB')
+{
+    $('input[name=TextName0]').val(obj.result.readFromDB[0].Value);
+    $('input[name=TextName1]').val(obj.result.readFromDB[1].Value);
+    $('input[name=TextName2]').val(obj.result.readFromDB[2].Value);
+    $('input[name=TextName3]').val(obj.result.readFromDB[3].Value);
+    $('input[name=TextName4]').val(obj.result.readFromDB[4].Value);
+    $('input[name=TextName5]').val(obj.result.readFromDB[5].Value);
+    $('input[name=TextName6]').val(obj.result.readFromDB[6].Value);
+    $('input[name=TextName7]').val(obj.result.readFromDB[7].Value);
+    $('input[name=TextName8]').val(obj.result.readFromDB[8].Value);
+    $('input[name=TextName9]').val(obj.result.readFromDB[9].Value);
+    $('input[name=TextName10]').val(obj.result.readFromDB[10].Value);
+    $('input[name=TextName11]').val(obj.result.readFromDB[11].Value);
+    $('input[name=TextName12]').val(obj.result.readFromDB[12].Value);
+    $('input[name=TextName13]').val(obj.result.readFromDB[13].Value);
+    $('input[name=TextName14]').val(obj.result.readFromDB[14].Value);
+    $('input[name=TextName15]').val(obj.result.readFromDB[15].Value);
+    $('input[name=TextName16]').val(obj.result.readFromDB[16].Value);
+    $('input[name=TextName17]').val(obj.result.readFromDB[17].Value);
+    $('input[name=TextName18]').val(obj.result.readFromDB[18].Value);
+    $('input[name=TextName19]').val(obj.result.readFromDB[19].Value);
+    $('input[name=TextName20]').val(obj.result.readFromDB[20].Value);
+    $('input[name=TextName21]').val(obj.result.readFromDB[21].Value);
+    $('input[name=TextName22]').val(obj.result.readFromDB[22].Value);
+    $('input[name=TextName23]').val(obj.result.readFromDB[23].Value);
+    $('input[name=TextName24]').val(obj.result.readFromDB[24].Value);
+    $('input[name=TextName25]').val(obj.result.readFromDB[25].Value);
+    $('input[name=TextName26]').val(obj.result.readFromDB[26].Value);
+    $('input[name=TextName27]').val(obj.result.readFromDB[27].Value);
+    $('input[name=TextName28]').val(obj.result.readFromDB[28].Value);
+    $('input[name=TextName29]').val(obj.result.readFromDB[29].Value);
+    $('input[name=TextName30]').val(obj.result.readFromDB[30].Value);
+    $('input[name=TextName31]').val(obj.result.readFromDB[31].Value);
+    $('input[name=TextName32]').val(obj.result.readFromDB[32].Value);
+    $('input[name=TextName33]').val(obj.result.readFromDB[33].Value);
+    $('input[name=TextName34]').val(obj.result.readFromDB[34].Value);
+    $('input[name=TextName35]').val(obj.result.readFromDB[35].Value);
+    $('input[name=TextName36]').val(obj.result.readFromDB[36].Value);
+}
+else
+{
+    alert('bukan')
+}*/
 }
 function savetoDB() {
 //we fill up the parameters here
@@ -331,43 +386,6 @@ callInfo.data.CFFAnswers[36].CustomerID = '1';
 
 //call the wrapper with the parameterized info
 calliOSFunction('savetoDB:',onSuccess,onError, callInfo);
-TextName0var = name = $('input[name=TextName0]').val();
-TextName1var = name = $('input[name=TextName1]').val();
-TextName2var = name = $('input[name=TextName2]').val();
-TextName3var = name = $('input[name=TextName3]').val();
-TextName4var = name = $('input[name=TextName4]').val();
-TextName5var = name = $('input[name=TextName5]').val();
-TextName6var = name = $('input[name=TextName6]').val();
-TextName7var = name = $('input[name=TextName7]').val();
-TextName8var = name = $('input[name=TextName8]').val();
-TextName9var = name = $('input[name=TextName9]').val();
-TextName10var = name = $('input[name=TextName10]').val();
-TextName11var = name = $('input[name=TextName11]').val();
-TextName12var = name = $('input[name=TextName12]').val();
-TextName13var = name = $('input[name=TextName13]').val();
-TextName14var = name = $('input[name=TextName14]').val();
-TextName15var = name = $('input[name=TextName15]').val();
-TextName16var = name = $('input[name=TextName16]').val();
-TextName17var = name = $('input[name=TextName17]').val();
-TextName18var = name = $('input[name=TextName18]').val();
-TextName19var = name = $('input[name=TextName19]').val();
-TextName20var = name = $('input[name=TextName20]').val();
-TextName21var = name = $('input[name=TextName21]').val();
-TextName22var = name = $('input[name=TextName22]').val();
-TextName23var = name = $('input[name=TextName23]').val();
-TextName24var = name = $('input[name=TextName24]').val();
-TextName25var = name = $('input[name=TextName25]').val();
-TextName26var = name = $('input[name=TextName26]').val();
-TextName27var = name = $('input[name=TextName27]').val();
-TextName28var = name = $('input[name=TextName28]').val();
-TextName29var = name = $('input[name=TextName29]').val();
-TextName31var = name = $('input[name=TextName31]').val();
-TextName32var = name = $('input[name=TextName32]').val();
-TextName33var = name = $('input[name=TextName33]').val();
-TextName34var = name = $('input[name=TextName34]').val();
-TextName35var = name = $('input[name=TextName35]').val();
-TextName36var = name = $('input[name=TextName36]').val();
-
 console.log(JSON.stringify(callInfo));
 }
 function PrintData()
@@ -376,49 +394,28 @@ function PrintData()
 }
 function ReadData()
 {
-var radio = 'radio';
-var checkbox = 'checkbox';
-$('input[name=TextName0]').val(TextName0var);
-$('input[name=TextName1]').val(TextName1var);
-$('input[name=TextName2]').val(TextName2var);
-$('input[name=TextName3]').val(TextName3var);
-$('input[name=TextName4]').val(TextName4var);
-$('input[name=TextName5]').val(TextName5var);
-$('input[name=TextName6]').val(TextName6var);
-$('input[name=TextName7]').val(TextName7var);
-$('input[name=TextName8]').val(TextName8var);
-$('input[name=TextName9]').val(TextName9var);
-$('input[name=TextName10]').val(TextName10var);
-$('input[name=TextName11]').val(TextName11var);
-$('input[name=TextName12]').val(TextName12var);
-$('input[name=TextName13]').val(TextName13var);
-$('input[name=TextName14]').val(TextName14var);
-$('input[name=TextName15]').val(TextName15var);
-$('input[name=TextName16]').val(TextName16var);
-$('input[name=TextName17]').val(TextName17var);
-$('input[name=TextName18]').val(TextName18var);
-$('input[name=TextName19]').val(TextName19var);
-$('input[name=TextName20]').val(TextName20var);
-$('input[name=TextName21]').val(TextName21var);
-$('input[name=TextName22]').val(TextName22var);
-$('input[name=TextName23]').val(TextName23var);
-$('input[name=TextName24]').val(TextName24var);
-$('input[name=TextName25]').val(TextName25var);
-$('input[name=TextName26]').val(TextName26var);
-$('input[name=TextName27]').val(TextName27var);
-$('input[name=TextName28]').val(TextName28var);
-$('input[name=TextName29]').val(TextName29var);
-$('input[name=TextName30]').val(TextName30var);
-$('input[name=TextName31]').val(TextName31var);
-$('input[name=TextName32]').val(TextName32var);
-$('input[name=TextName33]').val(TextName33var);
-$('input[name=TextName34]').val(TextName34var);
-$('input[name=TextName35]').val(TextName35var);
-$('input[name=TextName36]').val(TextName36var);
+readfromDB();
 }
 </script>
 
-<style>
+<style> 
+/*@font-face 
+{
+    /* ttf, otf, svz, woff, wot */
+    font-family: 'BPreplay_Regular';
+    src: url('../jqueryLibrary/BPreplay.eot'); /* IE9 Compat Modes */
+    src: url('../jqueryLibrary/BPreplay.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('../jqueryLibrary/BPreplay.woff2') format('woff2'), /* Super Modern Browsers */
+    url('../jqueryLibrary/BPreplay.woff') format('woff'), /* Pretty Modern Browsers */
+    url('../jqueryLibrary/BPreplay.ttf')  format('truetype'), /* Safari, Android, iOS */
+    url('../jqueryLibrary/BPreplay.svg#BPreplay') format('svg'); /* Legacy iOS */
+}
+    
+body
+{
+    font-family: 'BPreplay_Regular'; 
+}*/
+    
 label.error {
 color: red;
 font-size: 16px;
@@ -456,169 +453,169 @@ Pilih bila nasabah tidak mempunyai rencana asuransi
 <table data-role="table" class="ui-responsive table-stroke">
      <thead>
          <th data-priority="2"></th>
-         <th class="style7">PRIBADI</th>
+         <th>PRIBADI</th>
          <th data-priority="3">Nominal Saat ini</th>
-         <th data-priority="1" class="style3">Nominal yang dibutuhkan</th>
-         <th data-priority="5" class="style5">Selisih</th>
+         <th data-priority="1">Nominal yang dibutuhkan</th>
+         <th data-priority="5">Selisih</th>
        </tr>
      </thead>
      <tbody>
          <tr>
-         <th class="style2">&nbsp;</th>
-         <td class="style8">Total Uang Pertanggungan<br />
+         <th>&nbsp;</th>
+         <td>Total Uang Pertanggungan<br />
              (Death &amp; Disability)</td>
-         <td class="style2">            
+         <td>            
              <input id="TextID0" name="TextName0" type="text" /></td>
-         <td class="style4">            
+         <td>            
              <input id="TextID1" name="TextName1" type="text" /></td>
-         <td class="style6">
+         <td>
              <input id="TextID2" name="TextName2" type="text" disabled/></td>
          </tr>
          <tr>
-         <th class="style2">&nbsp;</th>
-         <td class="style8">Total Uang Pertanggungan<br />
+         <th>&nbsp;</th>
+         <td>Total Uang Pertanggungan<br />
              (Critical Illnes)</td>
-         <td class="style2">            
+         <td>            
              <input id="TextID3" name="TextName3" type="text" /></td>
-         <td class="style4">            
+         <td>            
              <input id="TextID4" name="TextName4" type="text" /></td>
-         <td class="style6">
+         <td>
              <input id="TextID5" name="TextName5" type="text" disabled/></td>
          </tr>
          <tr>
-         <th class="style2">&nbsp;</th>
-         <td class="style8">Total Uang Pertanggungan<br />
+         <th>&nbsp;</th>
+         <td>Total Uang Pertanggungan<br />
              (Rumah Sakit per hari)</td>
-         <td class="style2">            
+         <td>            
              <input id="TextID6" name="TextName6" type="text" /></td>
-         <td class="style4">            
+         <td>            
              <input id="TextID7" name="TextName7" type="text" /></td>
-         <td class="style6">
+         <td>
              <input id="TextID8" name="TextName8" type="text" disabled/></td>
          </tr>
          <tr>
-         <th class="style2">&nbsp;</th>
-         <td class="style8">Total Uang Pertanggungan (Personal Accident)</td>
-         <td class="style2">            
+         <th>&nbsp;</th>
+         <td>Total Uang Pertanggungan (Personal Accident)</td>
+         <td>            
              <input id="TextID9" name="TextName9" type="text" /></td>
-         <td class="style4">            
+         <td>            
              <input id="TextID10" name="TextName10" type="text" /></td>
-         <td class="style6">
+         <td>
              <input id="TextID11" name="TextName11" type="text" disabled/></td>
          </tr>
          <tr>
          <th data-priority="2"></th>
-         <th class="style7">PASANGAN</th>
+         <th>PASANGAN</th>
          <th data-priority="3">Nominal Saat ini</th>
-         <th data-priority="1" class="style3">Nominal yang dibutuhkan</th>
-         <th data-priority="5" class="style5">Selisih</th>
+         <th data-priority="1">Nominal yang dibutuhkan</th>
+         <th data-priority="5">Selisih</th>
          </tr>
          <tr>
-         <th class="style2">&nbsp;</th>
-         <td class="style8">Total Uang Pertanggungan<br />
+         <th>&nbsp;</th>
+         <td>Total Uang Pertanggungan<br />
              (Death &amp; Disability)</td>
-         <td class="style2">            
+         <td>            
              <input id="TextID12" name="TextName12" type="text" /></td>
-         <td class="style4">            
+         <td>            
              <input id="TextID13" name="TextName13" type="text" /></td>
-         <td class="style6">
+         <td>
              <input id="TextID14" name="TextName14" type="text" disabled/></td>
          </tr>
          <tr>
-         <th class="style2">&nbsp;</th>
-         <td class="style8">Total Uang Pertanggungan<br />
+         <th>&nbsp;</th>
+         <td>Total Uang Pertanggungan<br />
              (Critical Illnes)</td>
-         <td class="style2">            
+         <td>            
              <input id="TextID15" name="TextName15" type="text" /></td>
-         <td class="style4">            
+         <td>            
              <input id="TextID16" name="TextName16" type="text" /></td>
-         <td class="style6">
+         <td>
              <input id="TextID17" name="TextName17" type="text" disabled/></td>
          </tr>
          <tr>
-         <th class="style2">&nbsp;</th>
-         <td class="style8">Total Uang Pertanggungan<br />
+         <th>&nbsp;</th>
+         <td>Total Uang Pertanggungan<br />
              (Rumah Sakit per hari)</td>
-         <td class="style2">            
+         <td>            
              <input id="TextID18" name="TextName18" type="text" /></td>
-         <td class="style4">            
+         <td>            
              <input id="TextID19" name="TextName19" type="text" /></td>
-         <td class="style6">
+         <td>
              <input id="TextID20" name="TextName20" type="text" disabled/></td>
          </tr>
          <tr>
-         <th class="style2">&nbsp;</th>
-         <td class="style8">Total Uang Pertanggungan (Personal Accident)</td>
-         <td class="style2">            
+         <th>&nbsp;</th>
+         <td>Total Uang Pertanggungan (Personal Accident)</td>
+         <td>            
              <input id="TextID21" name="TextName21" type="text" /></td>
-         <td class="style4">            
+         <td>            
              <input id="TextID22" name="TextName22" type="text" /></td>
-         <td class="style6">
+         <td>
              <input id="TextID23" name="TextName23" type="text" disabled/></td>
          </tr>
          <tr>
          <th data-priority="2"></th>
-         <th class="style7">ANAK</th>
+         <th>ANAK</th>
          <th data-priority="3">Nominal Saat ini</th>
-         <th data-priority="1" class="style3">Nominal yang dibutuhkan</th>
-         <th data-priority="5" class="style5">Selisih</th>
+         <th data-priority="1">Nominal yang dibutuhkan</th>
+         <th data-priority="5">Selisih</th>
          </tr>
          <tr>
-         <th class="style2">&nbsp;</th>
-         <td class="style8">Total Uang Pertanggungan<br />
+         <th>&nbsp;</th>
+         <td>Total Uang Pertanggungan<br />
              (Death &amp; Disability)</td>
-         <td class="style2">            
+         <td>            
              <input id="TextID24" name="TextName24" type="text" /></td>
-         <td class="style4">            
+         <td>            
              <input id="TextID25" name="TextName25" type="text" /></td>
-         <td class="style6">
+         <td>
              <input id="TextID26" name="TextName26" type="text" disabled/></td>
          </tr>
          <tr>
-         <th class="style2">&nbsp;</th>
-         <td class="style8">Total Uang Pertanggungan<br />
+         <th>&nbsp;</th>
+         <td>Total Uang Pertanggungan<br />
              (Critical Illnes)</td>
-         <td class="style2">            
+         <td>            
              <input id="TextID27" name="TextName27" type="text" /></td>
-         <td class="style4">            
+         <td>            
              <input id="TextID28" name="TextName28" type="text" /></td>
-         <td class="style6">
+         <td>
              <input id="TextID29" name="TextName29" type="text" disabled/></td>
          </tr>
          <tr>
-         <th class="style2">&nbsp;</th>
-         <td class="style8">Total Uang Pertanggungan<br />
+         <th>&nbsp;</th>
+         <td>Total Uang Pertanggungan<br />
              (Rumah Sakit per hari)</td>
-          <td class="style2">            
+          <td>            
              <input id="TextID30" name="TextName30" type="text" /></td>
-         <td class="style4">            
+         <td>            
              <input id="TextID31" name="TextName31" type="text" /></td>
-         <td class="style6">
+         <td>
              <input id="TextID32" name="TextName32" type="text" disabled/></td>
          </tr>
          <tr>
-         <th class="style2">&nbsp;</th>
-         <td class="style8">Total Uang Pertanggungan (Personal Accident)</td>
-         <td class="style2">            
+         <th>&nbsp;</th>
+         <td>Total Uang Pertanggungan (Personal Accident)</td>
+         <td>            
              <input id="TextID33" name="TextName33" type="text" /></td>
-         <td class="style4">            
+         <td>            
              <input id="TextID34" name="TextName34" type="text" /></td>
-         <td class="style6">
+         <td>
              <input id="TextID35" name="TextName35" type="text" disabled/></td>
          </tr>
          <tr>
-         <th class="style2">&nbsp;</th>
-         <td class="style8" colspan="4">Berapa jumlah pendapatan yang ingin dialokasikan 
+         <th>&nbsp;</th>
+         <td colspan="4">Berapa jumlah pendapatan yang ingin dialokasikan 
              untuk asuransi proteksi per bulan ?</td>
          </tr>
          <tr>
-         <th class="style2">&nbsp;</th>
-         <td class="style8">Total Pendapatan Nasabah + Pasangan (Rp.)</td>
-         <td class="style2">            
+         <th>&nbsp;</th>
+         <td>Total Pendapatan Nasabah + Pasangan (Rp.)</td>
+         <td>            
              <input id="TextID36" name="TextName36" type="text" />
-         <td class="style4">            
+         <td>            
              &nbsp;</td>
-         <td class="style6">&nbsp;</td>
+         <td>&nbsp;</td>
          </tr>
      </tbody>
    </table>

@@ -231,11 +231,11 @@
     id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
     [activeInstance performSelector:@selector(dismissKeyboard)];
     
-    if (nationalityList == nil) {
+    //if (nationalityList == nil) {
         nationalityList = [[Nationality alloc] initWithStyle:UITableViewStylePlain];
         nationalityList.delegate = self;
         popoverController = [[UIPopoverController alloc] initWithContentViewController:nationalityList];
-    }
+    //}
     [popoverController presentPopoverFromRect:[sender bounds]  inView:sender permittedArrowDirections:UIPopoverArrowDirectionLeft animated:YES];
 }
 

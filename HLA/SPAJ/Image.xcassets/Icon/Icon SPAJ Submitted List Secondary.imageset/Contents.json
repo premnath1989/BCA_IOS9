@@ -2,11 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "btn_SIlisting_on.png",
+      "filename" : "icon_spajsubmittedlist_secondary.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "icon_spajsubmittedlist_secondary-1.png",
       "scale" : "2x"
     },
     {

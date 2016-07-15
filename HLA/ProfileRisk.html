@@ -11,11 +11,11 @@
 <script type='text/javascript' src="../jqueryLibrary/jquery.validate.min.js"></script>
 
 <script type='text/javascript'>
-var TextName0var = '';
-var TextName1var = '';
-var TextName2var = '';
-var TextName3var = '';
-var TextName4var = '';
+//var TextName0var = '';
+//var TextName1var = '';
+//var TextName2var = '';
+//var TextName3var = '';
+//var TextName4var = '';
 
 __functionIndexMap = {};
 <!-- core wrapper to client -->
@@ -87,7 +87,17 @@ function onSuccess (ret)
 if (ret)
 {
 var returnRet = JSON.parse(ret);
-alert(returnRet.result);
+
+theTypeIs = Object.keys(returnRet.result)[0];
+
+if (theTypeIs == 'readFromDB')
+{
+$('#TextID0').val(returnRet.result.readFromDB[0].Value);
+$('#TextID1').val(returnRet.result.readFromDB[1].Value);
+$('#TextID2').val(returnRet.result.readFromDB[2].Value);
+$('#TextID3').val(returnRet.result.readFromDB[3].Value);
+$('#TextID4').val(returnRet.result.readFromDB[4].Value);
+}
 }
 }
 function onError (ret)
@@ -105,6 +115,25 @@ callInfo.data.CFFAnswers = {};
 callInfo.data.CFFAnswers.columns = 'elementID,Value,CFFID,CustomerID';
 callInfo.data.CFFAnswers.where = '';
 calliOSFunction('readfromDB:',onSuccess,onError, callInfo);
+
+/*var text = '{"result":{"readFromDB":[{"elementID":"TextID0","Value":"sd","CFFID":"1","CustomerID":"1"},{"elementID":"TextID1","Value":"sd","CFFID":"1","CustomerID":"1"},{"elementID":"TextID2","Value":"sd","CFFID":"1","CustomerID":"1"},{"elementID":"TextID3","Value":"sd","CFFID":"1","CustomerID":"1"},{"elementID":"TextID4","Value":"sd","CFFID":"1","CustomerID":"1"}]},"functionname":"savetoDB:","success":"onSuccess","error":"onError"}'
+
+var obj = JSON.parse(text);
+
+theTypeIs = Object.keys(obj.result)[0];
+
+if (theTypeIs == 'readFromDB')
+{
+    $('#TextID0').val(obj.result.readFromDB[0].Value);
+    $('#TextID1').val(obj.result.readFromDB[1].Value);
+    $('#TextID2').val(obj.result.readFromDB[2].Value);
+    $('#TextID3').val(obj.result.readFromDB[3].Value);
+    $('#TextID4').val(obj.result.readFromDB[4].Value);
+}
+else
+{
+    alert('bukan')
+}*/
 }
 function savetoDB() {
 //we fill up the parameters here
@@ -140,11 +169,6 @@ callInfo.data.CFFAnswers[4].CustomerID = '1';
 
 //call the wrapper with the parameterized info
 calliOSFunction('savetoDB:',onSuccess,onError, callInfo);
-TextName0var = $('textarea#TextID0').val();
-TextName1var = $('textarea#TextID1').val();
-TextName2var = $('textarea#TextID2').val();
-TextName3var = $('textarea#TextID3').val();
-TextName4var = $('textarea#TextID4').val();
 
 console.log(JSON.stringify(callInfo));
 }
@@ -154,15 +178,13 @@ function PrintData()
 }
 function ReadData()
 {
-$('#TextID0').val(TextName0var);
-$('#TextID1').val(TextName1var);
-$('#TextID2').val(TextName2var);
-$('#TextID3').val(TextName3var);
-$('#TextID4').val(TextName4var);
+readfromDB();
 }
 </script>
 
 <style>
+  
+    
 label.error {
 color: red;
 font-size: 16px;
@@ -199,7 +221,7 @@ padding-right: .25em;
 
 <table data-role="table" class="ui-responsive table-stroke">
      <thead>
-       <tr style="background-color: #e6ffe6; color: #006683;" >
+       <tr style="background-color: #f2f3f2; color: #006683;" >
          <th data-priority="2" class="style1"></th>
          <th class="style1">RISK PROFILING QUESTIONAIRS</th>
        </tr>

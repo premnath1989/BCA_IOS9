@@ -10,12 +10,6 @@
 <script type='text/javascript' src="../jqueryLibrary/jquery.validate.min.js"></script>
 
 <script type='text/javascript'>
-var TextName0var = '';
-var TextName1var = '';
-var TextName2var = '';
-var TextName3var = '';
-var TextName4var = '';
-var TextName5var = '';
 
 __functionIndexMap = {};
 <!-- core wrapper to client -->
@@ -87,7 +81,18 @@ function onSuccess (ret)
 if (ret)
 {
 var returnRet = JSON.parse(ret);
-alert(returnRet.result);
+
+theTypeIs = Object.keys(returnRet.result)[0];
+
+if (theTypeIs == 'readFromDB')
+{
+$('#TextID0').val(returnRet.result.readFromDB[0].Value);
+$('#TextID1').val(returnRet.result.readFromDB[1].Value);
+$('#TextID2').val(returnRet.result.readFromDB[2].Value);
+$('#TextID3').val(returnRet.result.readFromDB[3].Value);
+$('#TextID4').val(returnRet.result.readFromDB[4].Value);
+$('#TextID5').val(returnRet.result.readFromDB[5].Value);
+}
 }
 }
 function onError (ret)
@@ -105,6 +110,26 @@ callInfo.data.CFFAnswers = {};
 callInfo.data.CFFAnswers.columns = 'elementID,Value,CFFID,CustomerID';
 callInfo.data.CFFAnswers.where = '';
 calliOSFunction('readfromDB:',onSuccess,onError, callInfo);
+
+/*var text = '{"result":{"readFromDB":[{"elementID":"TextID0","Value":"2","CFFID":"1","CustomerID":"1"},{"elementID":"TextID1","Value":"2","CFFID":"1","CustomerID":"1"},{"elementID":"TextID2","Value":"","CFFID":"1","CustomerID":"1"},{"elementID":"TextID3","Value":"2","CFFID":"1","CustomerID":"1"},{"elementID":"TextID4","Value":"2","CFFID":"1","CustomerID":"1"},{"elementID":"TextID5","Value":"2","CFFID":"1","CustomerID":"1"}]},"functionname":"savetoDB:","success":"onSuccess","error":"onError"}'
+
+var obj = JSON.parse(text);
+
+theTypeIs = Object.keys(obj.result)[0];
+
+if (theTypeIs == 'readFromDB')
+{
+    $('#TextID0').val(obj.result.readFromDB[0].Value);
+    $('#TextID1').val(obj.result.readFromDB[1].Value);
+    $('#TextID2').val(obj.result.readFromDB[2].Value);
+    $('#TextID3').val(obj.result.readFromDB[3].Value);
+    $('#TextID4').val(obj.result.readFromDB[4].Value);
+    $('#TextID5').val(obj.result.readFromDB[5].Value);
+}
+else
+{
+    alert('bukan')
+}*/
 }
 function savetoDB() {
 //we fill up the parameters here
@@ -141,13 +166,6 @@ callInfo.data.CFFAnswers[5].CustomerID = '1';
 
 //call the wrapper with the parameterized info
 calliOSFunction('savetoDB:',onSuccess,onError, callInfo);
-TextName0var = name = $('input[name=TextName0]').val();
-TextName1var = name = $('input[name=TextName1]').val();
-TextName2var = name = $('input[name=TextName2]').val();
-TextName3var = name = $('input[name=TextName3]').val();
-TextName4var = name = $('input[name=TextName4]').val();
-TextName5var = name = $('input[name=TextName5]').val();
-
 console.log(JSON.stringify(callInfo));
 }
 function PrintData()
@@ -156,16 +174,12 @@ function PrintData()
 }
 function ReadData()
 {
-$('input[name=TextName0]').val(TextName0var);
-$('input[name=TextName1]').val(TextName1var);
-$('input[name=TextName2]').val(TextName2var);
-$('input[name=TextName3]').val(TextName3var);
-$('input[name=TextName4]').val(TextName4var);
-$('input[name=TextName5]').val(TextName5var);
+readfromDB();
 }
 </script>
 
 <style>
+    
 label.error {
 color: red;
 font-size: 16px;

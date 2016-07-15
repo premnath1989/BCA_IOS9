@@ -10,10 +10,6 @@
 <script type='text/javascript' src="../jqueryLibrary/jquery.validate.min.js"></script>
 
 <script type='text/javascript'>
-var TextName0var = '';
-var TextName1var = '';
-var TextName2var = '';
-var TextName3var = '';
 
 __functionIndexMap = {};
 <!-- core wrapper to client -->
@@ -85,7 +81,16 @@ function onSuccess (ret)
 if (ret)
 {
 var returnRet = JSON.parse(ret);
-alert(returnRet.result);
+
+theTypeIs = Object.keys(returnRet.result)[0];
+
+if (theTypeIs == 'readFromDB')
+{
+$('#TextID0').val(returnRet.result.readFromDB[0].Value);
+$('#TextID1').val(returnRet.result.readFromDB[1].Value);
+$('#TextID2').val(returnRet.result.readFromDB[2].Value);
+$('#TextID3').val(returnRet.result.readFromDB[3].Value);
+}
 }
 }
 function onError (ret)
@@ -103,6 +108,24 @@ callInfo.data.CFFAnswers = {};
 callInfo.data.CFFAnswers.columns = 'elementID,Value,CFFID,CustomerID';
 callInfo.data.CFFAnswers.where = '';
 calliOSFunction('readfromDB:',onSuccess,onError, callInfo);
+
+/*var text = '{"result":{"readFromDB":[{"elementID":"TextID0","Value":"2","CFFID":"1","CustomerID":"1"},{"elementID":"TextID1","Value":"2","CFFID":"1","CustomerID":"1"},{"elementID":"TextID2","Value":"","CFFID":"1","CustomerID":"1"},{"elementID":"TextID3","Value":"222","CFFID":"1","CustomerID":"1"}]},"functionname":"savetoDB:","success":"onSuccess","error":"onError"}'
+
+var obj = JSON.parse(text);
+
+theTypeIs = Object.keys(obj.result)[0];
+
+if (theTypeIs == 'readFromDB')
+{
+    $('#TextID0').val(obj.result.readFromDB[0].Value);
+    $('#TextID1').val(obj.result.readFromDB[1].Value);
+    $('#TextID2').val(obj.result.readFromDB[2].Value);
+    $('#TextID3').val(obj.result.readFromDB[3].Value);   
+}
+else
+{
+    alert('bukan')
+}*/
 }
 function savetoDB() {
 //we fill up the parameters here
@@ -129,10 +152,6 @@ callInfo.data.CFFAnswers[3].CFFID = '1';
 callInfo.data.CFFAnswers[3].CustomerID = '1';
 //call the wrapper with the parameterized info
 calliOSFunction('savetoDB:',onSuccess,onError, callInfo);
-TextName0var = name = $('input[name=TextName0]').val();
-TextName1var = name = $('input[name=TextName1]').val();
-TextName2var = name = $('input[name=TextName2]').val();
-TextName3var = name = $('input[name=TextName3]').val();
 console.log(JSON.stringify(callInfo));
 }
 function PrintData()
@@ -141,10 +160,7 @@ function PrintData()
 }
 function ReadData()
 {
-$('input[name=TextName0]').val(TextName0var);
-$('input[name=TextName1]').val(TextName1var);
-$('input[name=TextName2]').val(TextName2var);
-$('input[name=TextName3]').val(TextName3var);
+readfromDB();
 }
 </script>
 
@@ -216,7 +232,7 @@ padding-right: .25em;
          <th class="style2">&nbsp;</th>
          <td class="style8">Total Pendapatan Nasabah + Pasangan (Rp.)</td>
          <td class="style2">            
-             <input id="Text3" name="TextName3" type="text" /></td>
+             <input id="TextID3" name="TextName3" type="text" /></td>
          <td class="style4">            
              &nbsp;</td>
          <td class="style6">&nbsp;</td>

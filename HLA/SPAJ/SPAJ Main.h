@@ -31,6 +31,6 @@
 
     // FUNCTION
 
-    - (void) actionGoToAddDetail;
+    - (void) voidGoToAddDetail;
 
 @end

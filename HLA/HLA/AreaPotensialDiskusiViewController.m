@@ -18,7 +18,7 @@
 @end
 
 @implementation AreaPotensialDiskusiViewController
-@synthesize prospectProfileID,cffTransactionID,htmlFileName,cffID;
+@synthesize prospectProfileID,cffTransactionID,htmlFileName,cffID,cffHeaderSelectedDictionary;
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:YES];
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
@@ -71,7 +71,7 @@
 
 - (void)savetoDB:(NSDictionary *)params{
     //add another key to db
-    //
+    cffID = [cffHeaderSelectedDictionary valueForKey:@"PotentialDiscussionCFFID"];
     NSMutableDictionary* modifiedParams = [[NSMutableDictionary alloc]initWithDictionary:[params valueForKey:@"data"]];
     [modifiedParams setObject:[[modelCFFHtml selectActiveHtmlForSection:@"PD"] valueForKey:@"CFFHtmlID"] forKey:@"CFFHtmlID"];
     //[modifiedParams setObject:@"1" forKey:@"CFFHtmlID"];
@@ -84,7 +84,7 @@
     if ([arrayCFFAnswers count]>0){
         for (int i = 0;i<[arrayCFFAnswers count];i++){
             NSMutableDictionary* tempDict = [[NSMutableDictionary alloc] initWithDictionary:[arrayCFFAnswers objectAtIndex:i]];
-            [tempDict setObject:[cffID stringValue] forKey:@"CFFHtmlID"];
+            [tempDict setObject:[[modelCFFHtml selectActiveHtmlForSection:@"PD"] valueForKey:@"CFFHtmlID"] forKey:@"CFFHtmlID"];
             [tempDict setObject:[cffTransactionID stringValue] forKey:@"CFFTransactionID"];
             [tempDict setObject:[cffID stringValue] forKey:@"CFFID"];
             [tempDict setObject:[prospectProfileID stringValue] forKey:@"CustomerID"];
@@ -99,6 +99,9 @@
     NSMutableDictionary* finalDictionary = [[NSMutableDictionary alloc]init];
     [finalDictionary setObject:finalArrayDictionary forKey:@"data"];
     [modelCFFTransaction updateCFFDateModified:[cffTransactionID intValue]];
+    
+    [finalDictionary setValue:[params valueForKey:@"successCallBack"] forKey:@"successCallBack"];
+    [finalDictionary setValue:[params valueForKey:@"errorCallback"] forKey:@"errorCallback"];
     [super savetoDB:finalDictionary];
 }
 
