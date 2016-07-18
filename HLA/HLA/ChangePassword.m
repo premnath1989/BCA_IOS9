@@ -60,7 +60,8 @@
 
 
 - (void)gotoCarousel{
-    CarouselViewController *carouselMenu = [self.storyboard instantiateViewControllerWithIdentifier:@"carouselView"];
+    UIStoryboard *carouselStoryboard = [UIStoryboard storyboardWithName:@"CarouselStoryboard" bundle:Nil];
+    CarouselViewController* carouselMenu = [carouselStoryboard instantiateViewControllerWithIdentifier:@"carouselView"];
     carouselMenu.getInternet = @"No";
     [self presentViewController:carouselMenu animated:YES completion:Nil];
 }
