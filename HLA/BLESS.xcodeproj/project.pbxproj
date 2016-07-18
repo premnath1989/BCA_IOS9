@@ -477,6 +477,8 @@
 		439985BB1C62F7890003B037 /* SourceIncome.m in Sources */ = {isa = PBXBuildFile; fileRef = 439985BA1C62F7890003B037 /* SourceIncome.m */; };
 		439985BE1C62F8A70003B037 /* ModelPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = 439985BD1C62F8A70003B037 /* ModelPopover.m */; };
 		439985C11C630C4D0003B037 /* VIPClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 439985C01C630C4D0003B037 /* VIPClass.m */; };
+		439B954B1D3896AD00C86F93 /* SPAJ Add Signature.m in Sources */ = {isa = PBXBuildFile; fileRef = 439B95491D3896AD00C86F93 /* SPAJ Add Signature.m */; };
+		439B954C1D3896AD00C86F93 /* SPAJ Add Signature.xib in Resources */ = {isa = PBXBuildFile; fileRef = 439B954A1D3896AD00C86F93 /* SPAJ Add Signature.xib */; };
 		439EFBFA1D1A621500A0B8B0 /* CFFValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = 439EFBF91D1A621500A0B8B0 /* CFFValidation.m */; };
 		43A401E91D26094E0057D558 /* result.json in Resources */ = {isa = PBXBuildFile; fileRef = 43A401E81D26094E0057D558 /* result.json */; };
 		43A401EB1D2614AB0057D558 /* base64result.json in Resources */ = {isa = PBXBuildFile; fileRef = 43A401EA1D2614AB0057D558 /* base64result.json */; };
@@ -1728,6 +1730,9 @@
 		439985BD1C62F8A70003B037 /* ModelPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelPopover.m; sourceTree = "<group>"; };
 		439985BF1C630C4D0003B037 /* VIPClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIPClass.h; sourceTree = "<group>"; };
 		439985C01C630C4D0003B037 /* VIPClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VIPClass.m; sourceTree = "<group>"; };
+		439B95481D3896AD00C86F93 /* SPAJ Add Signature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SPAJ Add Signature.h"; sourceTree = "<group>"; };
+		439B95491D3896AD00C86F93 /* SPAJ Add Signature.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SPAJ Add Signature.m"; sourceTree = "<group>"; };
+		439B954A1D3896AD00C86F93 /* SPAJ Add Signature.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SPAJ Add Signature.xib"; sourceTree = "<group>"; };
 		439EFBF81D1A621500A0B8B0 /* CFFValidation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFFValidation.h; sourceTree = "<group>"; };
 		439EFBF91D1A621500A0B8B0 /* CFFValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFFValidation.m; sourceTree = "<group>"; };
 		43A401E81D26094E0057D558 /* result.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = result.json; sourceTree = "<group>"; };
@@ -2789,6 +2794,7 @@
 		0F3268661D1A97F8001A9021 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				439B954A1D3896AD00C86F93 /* SPAJ Add Signature.xib */,
 				0FFA185E1D1D1FB100C63A47 /* SPAJ Add Detail.xib */,
 				0F3268321D1A93A4001A9021 /* SPAJ Add Menu.xib */,
 				0F2A0CB11D24F306009D11F6 /* SPAJ E Application List.xib */,
@@ -2818,6 +2824,8 @@
 				0F3268391D1A93A4001A9021 /* SPAJ Main.m */,
 				0F32683B1D1A93A4001A9021 /* SPAJ Submitted List.h */,
 				0F32683C1D1A93A4001A9021 /* SPAJ Submitted List.m */,
+				439B95481D3896AD00C86F93 /* SPAJ Add Signature.h */,
+				439B95491D3896AD00C86F93 /* SPAJ Add Signature.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -5900,6 +5908,7 @@
 				C4660EB81625047800BA4AFE /* exit_btnB.png in Resources */,
 				C4660EB91625047800BA4AFE /* home_144.png in Resources */,
 				C4660EBA1625047800BA4AFE /* home_btn.png in Resources */,
+				439B954C1D3896AD00C86F93 /* SPAJ Add Signature.xib in Resources */,
 				C4660EBB1625047800BA4AFE /* prospect_100.png in Resources */,
 				C4660EBC1625047800BA4AFE /* prospect_btnB_144.png in Resources */,
 				5D3967981C02C89700464BCC /* HLAWPStoryboard.storyboard in Resources */,
@@ -6769,6 +6778,7 @@
 				42B8B14D1917339500E09A34 /* PRHtmlHandler.m in Sources */,
 				42B8B14E1917339500E09A34 /* PRSQLHelper.m in Sources */,
 				42B8B1501917339500E09A34 /* TBXML+Compression.m in Sources */,
+				439B954B1D3896AD00C86F93 /* SPAJ Add Signature.m in Sources */,
 				42B8B1511917339500E09A34 /* TBXML+HTTP.m in Sources */,
 				42B8B1521917339500E09A34 /* TBXML.m in Sources */,
 				42B8B1541917339500E09A34 /* TBXML+NSDictionary.m in Sources */,

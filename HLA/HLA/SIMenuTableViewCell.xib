@@ -8,6 +8,7 @@
         <mutableArray key="BPreplay.otf">
             <string>BPreplay</string>
             <string>BPreplay</string>
+            <string>BPreplay</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -20,6 +21,12 @@
                 <rect key="frame" x="0.0" y="0.0" width="205" height="83"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X7l-q2-5Jk" userLabel="labelSubtitle">
+                        <rect key="frame" x="48" y="46" width="147" height="21"/>
+                        <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="14"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9J6-CF-8AO">
                         <rect key="frame" x="8" y="0.0" width="32" height="84"/>
                         <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="60"/>
@@ -27,7 +34,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Asuransi Dasar, Asuransi Tambahan, Premi" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xjp-w3-AQA">
-                        <rect key="frame" x="48" y="0.0" width="147" height="84"/>
+                        <rect key="frame" x="48" y="0.0" width="147" height="85"/>
                         <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -45,7 +52,7 @@
                         <rect key="frame" x="48" y="11" width="147" height="19"/>
                     </button>
                     <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6c7-EK-JHD">
-                        <rect key="frame" x="48" y="34" width="147" height="19"/>
+                        <rect key="frame" x="48" y="49" width="147" height="19"/>
                     </button>
                     <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="trv-A4-y7w">
                         <rect key="frame" x="48" y="57" width="147" height="19"/>
@@ -60,6 +67,7 @@
                 <outlet property="button3" destination="trv-A4-y7w" id="Wjq-4w-gdU"/>
                 <outlet property="labelDesc" destination="Xjp-w3-AQA" id="pgm-BZ-L1W"/>
                 <outlet property="labelNumber" destination="9J6-CF-8AO" id="iq3-Zb-NEm"/>
+                <outlet property="labelSubtitle" destination="X7l-q2-5Jk" id="UUN-x3-Rw6"/>
                 <outlet property="labelWide" destination="ARb-aR-NMc" id="yyh-dL-RlE"/>
             </connections>
         </tableViewCell>

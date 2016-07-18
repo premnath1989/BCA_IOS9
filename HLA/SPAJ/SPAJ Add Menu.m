@@ -124,7 +124,7 @@
 
     - (IBAction)actionGoToStep6:(id)sender
     {
-
+        [_delegateSPAJMain voidGoToAddSignature];
     };
 
 

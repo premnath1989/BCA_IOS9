@@ -18,6 +18,7 @@
 @protocol SPAJMainDelegate
 
     - (void) voidGoToAddDetail;
+    - (void) voidGoToAddSignature;
 
 @end
 

@@ -852,6 +852,7 @@ BOOL isFirstLoad;
     
     if (!_BasicController) {
         newDictionaryForBasicPlan=[NSMutableDictionary dictionaryWithDictionary:[_modelSIPremium getPremium_For:[self.requestSINo description]]];
+        [newDictionaryForBasicPlan addEntriesFromDictionary:dictionaryPOForInsert];
     }
     else{
         @try {
@@ -860,6 +861,7 @@ BOOL isFirstLoad;
                 // Some long running task you want on another thread
                 dispatch_async(dispatch_get_main_queue(), ^{
                     newDictionaryForBasicPlan=[NSMutableDictionary dictionaryWithDictionary:[_BasicController setDataBasicPlan]];
+                    [newDictionaryForBasicPlan addEntriesFromDictionary:dictionaryPOForInsert];
                 });
             });
         }

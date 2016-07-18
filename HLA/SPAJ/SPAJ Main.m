@@ -15,6 +15,7 @@
 #import "SPAJ Add Menu.h"
 #import "SPAJ Add Detail.h"
 #import "SPAJ E Application List.h"
+#import "SPAJ Add Signature.h"
 #import "Insert Initialization.h"
 #import "CarouselViewController.h"
 
@@ -117,6 +118,15 @@
     - (void)voidGoToAddDetail
     {
         SPAJAddDetail* viewController = [[SPAJAddDetail alloc] initWithNibName:@"SPAJ Add Detail" bundle:nil];
+        viewController.view.frame = self.viewContent.bounds;
+        [self addChildViewController:viewController];
+        [self.viewContent addSubview:viewController.view];
+    }
+
+    //added by faiz
+    - (void)voidGoToAddSignature
+    {
+        SPAJ_Add_Signature* viewController = [[SPAJ_Add_Signature alloc] initWithNibName:@"SPAJ Add Signature" bundle:nil];
         viewController.view.frame = self.viewContent.bounds;
         [self addChildViewController:viewController];
         [self.viewContent addSubview:viewController.view];
