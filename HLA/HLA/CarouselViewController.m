@@ -298,7 +298,7 @@ const int numberOfModule = 7;
     AppDelegate *appDele= (AppDelegate*)[[UIApplication sharedApplication] delegate ];
     
     //the disclaimer function
-    [self showDisclaimer];
+//    [self showDisclaimer];
 }
 
 -(void) showDialogAppLaunchWithHLAFast {
