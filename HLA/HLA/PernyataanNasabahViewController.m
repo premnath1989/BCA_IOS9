@@ -18,6 +18,7 @@
 
 @implementation PernyataanNasabahViewController
 @synthesize prospectProfileID,cffTransactionID,htmlFileName,cffID,cffHeaderSelectedDictionary;
+@synthesize delegate;
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:YES];
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
@@ -50,6 +51,12 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)voidDoneCFFData{
+    NSLog(@"CFFHeader selected %@",cffHeaderSelectedDictionary);
+    [modelCFFTransaction updateCFFStatu:@"Completed" CFFTransactionID:[[cffHeaderSelectedDictionary valueForKey:@"CFFTransactionID"] intValue]];
+    [delegate voidCompleteCFFData];
 }
 
 - (void)createDirectory{

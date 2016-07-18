@@ -34,6 +34,7 @@
     IBOutlet UIButton* buttonInvestasi;
     
     IBOutlet UIView *childView;
+    UIButton *buttonSelected;
 }
 @synthesize prospectProfileID,cffTransactionID,cffID,cffHeaderSelectedDictionary;
 - (void)viewDidLoad {
@@ -45,6 +46,8 @@
     proteksiVC = [[AnalisaKebutuhanProteksiViewController alloc]initWithNibName:@"AnalisaKebutuhanProteksiViewController" bundle:nil];
     investasiVC = [[AnalisaKebutuhanInvestasiViewController alloc]initWithNibName:@"AnalisaKebutuhanInvestasiViewController" bundle:nil];
     pendidikanVC = [[AnalisaKebutuhanPendidikanViewController alloc]initWithNibName:@"AnalisaKebutuhanPendidikanViewController" bundle:nil];
+    
+    [self actionChangeTabPage:buttonProteksi];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -124,7 +127,28 @@
             [childView addSubview:investasiVC.view];
         }
     }
+    buttonSelected = sender;
 }
+
+#pragma mark UIBarButtonItem Action
+-(void)voidDoneAnalisaKebutuhanNasabah{
+    if (buttonSelected==buttonProteksi){
+        [proteksiVC voidDoneProteksi];
+    }
+    else if (buttonSelected==buttonPensiun){
+        [pensiunVC voidDonePensiun];
+    }
+    else if (buttonSelected==buttonPendidikan){
+        [pendidikanVC voidDonePendidikan];
+    }
+    else if (buttonSelected==buttonWarisan){
+        [warisanVC voidDoneWarisan];
+    }
+    else if (buttonSelected==buttonInvestasi){
+        [investasiVC voidDoneInvestasi];
+    }
+}
+
 
 /*
 #pragma mark - Navigation

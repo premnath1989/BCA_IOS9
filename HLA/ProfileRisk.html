@@ -16,6 +16,72 @@
 //var TextName2var = '';
 //var TextName3var = '';
 //var TextName4var = '';
+$( document ).ready(function() {    
+    calculateTotalSkor();
+
+    $('input:radio[name=radio-choice-1]').change(function() {        
+        calculateTotalSkor();            
+    });
+
+    $('input:radio[name=radio-choice-2]').change(function() {        
+        calculateTotalSkor();            
+    });
+
+    $('input:radio[name=radio-choice-3]').change(function() {        
+        calculateTotalSkor();            
+    });
+
+    $('input:radio[name=radio-choice-4]').change(function() {        
+        calculateTotalSkor();            
+    });
+
+    $('input:radio[name=radio-choice-5]').change(function() {        
+        calculateTotalSkor();            
+    });
+});
+
+function calculateTotalSkor()
+{
+    var totalSkor = 0;    
+
+    var radioSkor1 = $("input[name='radio-choice-1']:checked"). val();
+    var radioSkor2 = $("input[name='radio-choice-2']:checked"). val();
+    var radioSkor3 = $("input[name='radio-choice-3']:checked"). val();
+    var radioSkor4 = $("input[name='radio-choice-4']:checked"). val();    
+    var radioSkor5 = $("input[name='radio-choice-5']:checked"). val(); 
+    
+    totalSkor = parseInt(radioSkor1) + parseInt(radioSkor2) + parseInt(radioSkor3) + parseInt(radioSkor4) + parseInt(radioSkor5);       
+    
+    $('.replacement').html(totalSkor);
+    
+    setCSSTotalSkor(totalSkor);  
+}
+
+function setCSSTotalSkor(totalSkor)
+{
+   if (totalSkor < 28)
+   {
+        $('.konservatif').css({'background-color': '#006683', 'color': 'white'});  
+        $('.moderat').removeAttr('style');
+        $('.agresif').removeAttr('style');       
+   }   
+   else if(totalSkor > 28 && totalSkor < 40 )
+   {
+        $('.moderat').css({'background-color': '#006683', 'color': 'white'}); 
+        $('.konservatif').removeAttr('style');
+        $('.agresif').removeAttr('style');
+   }
+   else if(totalSkor > 40)
+   {
+        $('.agresif').css({'background-color': '#006683', 'color': 'white'});
+        $('.konservatif').removeAttr('style');
+        $('.moderat').removeAttr('style'); 
+   }
+   else
+   {
+        //DO NOTHING
+   }
+}
 
 __functionIndexMap = {};
 <!-- core wrapper to client -->
@@ -92,11 +158,15 @@ theTypeIs = Object.keys(returnRet.result)[0];
 
 if (theTypeIs == 'readFromDB')
 {
-$('#TextID0').val(returnRet.result.readFromDB[0].Value);
-$('#TextID1').val(returnRet.result.readFromDB[1].Value);
-$('#TextID2').val(returnRet.result.readFromDB[2].Value);
-$('#TextID3').val(returnRet.result.readFromDB[3].Value);
-$('#TextID4').val(returnRet.result.readFromDB[4].Value);
+    var radio = 'radio';
+
+    $('input[name=radio-choice-1][value=' + returnRet.result.readFromDB[0].Value + ']').attr('checked', true);
+    $('input[name=radio-choice-2][value=' + returnRet.result.readFromDB[1].Value + ']').attr('checked', true);
+    $('input[name=radio-choice-3][value=' + returnRet.result.readFromDB[2].Value + ']').attr('checked', true);
+    $('input[name=radio-choice-4][value=' + returnRet.result.readFromDB[3].Value + ']').attr('checked', true);
+    $('input[name=radio-choice-5][value=' + returnRet.result.readFromDB[4].Value + ']').attr('checked', true);
+
+    $('input[type='+ radio +']').checkboxradio('refresh');
 }
 }
 }
@@ -116,19 +186,23 @@ callInfo.data.CFFAnswers.columns = 'elementID,Value,CFFID,CustomerID';
 callInfo.data.CFFAnswers.where = '';
 calliOSFunction('readfromDB:',onSuccess,onError, callInfo);
 
-/*var text = '{"result":{"readFromDB":[{"elementID":"TextID0","Value":"sd","CFFID":"1","CustomerID":"1"},{"elementID":"TextID1","Value":"sd","CFFID":"1","CustomerID":"1"},{"elementID":"TextID2","Value":"sd","CFFID":"1","CustomerID":"1"},{"elementID":"TextID3","Value":"sd","CFFID":"1","CustomerID":"1"},{"elementID":"TextID4","Value":"sd","CFFID":"1","CustomerID":"1"}]},"functionname":"savetoDB:","success":"onSuccess","error":"onError"}'
+/*var text = '{"result":{"readFromDB":[{"elementID":"radio-choice-1","Value":"10","CFFID":"1","CustomerID":"1"},{"elementID":"radio-choice-2","Value":"2","CFFID":"1","CustomerID":"1"},{"elementID":"radio-choice-3","Value":"2","CFFID":"1","CustomerID":"1"},{"elementID":"radio-choice-4","Value":"6","CFFID":"1","CustomerID":"1"},{"elementID":"radio-choice-5","Value":"2","CFFID":"1","CustomerID":"1"}]},"functionname":"savetoDB:","success":"onSuccess","error":"onError"}'
 
 var obj = JSON.parse(text);
 
 theTypeIs = Object.keys(obj.result)[0];
 
+var radio = 'radio';
+
 if (theTypeIs == 'readFromDB')
-{
-    $('#TextID0').val(obj.result.readFromDB[0].Value);
-    $('#TextID1').val(obj.result.readFromDB[1].Value);
-    $('#TextID2').val(obj.result.readFromDB[2].Value);
-    $('#TextID3').val(obj.result.readFromDB[3].Value);
-    $('#TextID4').val(obj.result.readFromDB[4].Value);
+{        
+    $('input[name=radio-choice-1][value=' + obj.result.readFromDB[0].Value + ']').attr('checked', true);
+    $('input[name=radio-choice-2][value=' + obj.result.readFromDB[1].Value + ']').attr('checked', true);
+    $('input[name=radio-choice-3][value=' + obj.result.readFromDB[2].Value + ']').attr('checked', true);
+    $('input[name=radio-choice-4][value=' + obj.result.readFromDB[3].Value + ']').attr('checked', true);
+    $('input[name=radio-choice-5][value=' + obj.result.readFromDB[4].Value + ']').attr('checked', true);
+
+    $('input[type='+ radio +']').checkboxradio('refresh');
 }
 else
 {
@@ -142,28 +216,28 @@ callInfo.data = {};
 callInfo.data.CFFAnswers = [{},{},{},{},{}];
 //if the table inserted is same with multiple rows.
 //treat the data as array
-callInfo.data.CFFAnswers[0].elementID = 'TextID0';
-callInfo.data.CFFAnswers[0].Value = $('#TextID0').val();
+callInfo.data.CFFAnswers[0].elementID = 'radio-choice-1';
+callInfo.data.CFFAnswers[0].Value = $('input[name=radio-choice-1]:checked').val();
 callInfo.data.CFFAnswers[0].CFFID = '1';
 callInfo.data.CFFAnswers[0].CustomerID = '1';
 
-callInfo.data.CFFAnswers[1].elementID = 'TextID1';
-callInfo.data.CFFAnswers[1].Value = $('#TextID1').val();
+callInfo.data.CFFAnswers[1].elementID = 'radio-choice-2';
+callInfo.data.CFFAnswers[1].Value = $('input[name=radio-choice-2]:checked').val();
 callInfo.data.CFFAnswers[1].CFFID = '1';
 callInfo.data.CFFAnswers[1].CustomerID = '1';
 
-callInfo.data.CFFAnswers[2].elementID = 'TextID2';
-callInfo.data.CFFAnswers[2].Value =  $('#TextID2').val();
+callInfo.data.CFFAnswers[2].elementID = 'radio-choice-3';
+callInfo.data.CFFAnswers[2].Value =  $('input[name=radio-choice-3]:checked').val();
 callInfo.data.CFFAnswers[2].CFFID = '1';
 callInfo.data.CFFAnswers[2].CustomerID = '1';
 
-callInfo.data.CFFAnswers[3].elementID = 'TextID3';
-callInfo.data.CFFAnswers[3].Value =  $('#TextID3').val();
+callInfo.data.CFFAnswers[3].elementID = 'radio-choice-4';
+callInfo.data.CFFAnswers[3].Value =  $('input[name=radio-choice-4]:checked').val();
 callInfo.data.CFFAnswers[3].CFFID = '1';
 callInfo.data.CFFAnswers[3].CustomerID = '1';
 
-callInfo.data.CFFAnswers[4].elementID = 'TextID4';
-callInfo.data.CFFAnswers[4].Value =  $('#TextID4').val();
+callInfo.data.CFFAnswers[4].elementID = 'radio-choice-5';
+callInfo.data.CFFAnswers[4].Value =  $('input[name=radio-choice-5]:checked').val();
 callInfo.data.CFFAnswers[4].CFFID = '1';
 callInfo.data.CFFAnswers[4].CustomerID = '1';
 
@@ -230,46 +304,136 @@ padding-right: .25em;
        <tr>
          <th>1</th>
          <td>Manakah dari keterangan dibawah ini yang sesuai dengan tahapan kehidupan Anda saat ini?<br />
-         <textarea name="TextName0" id="TextID0"></textarea></td>        
+         <fieldset data-role="controlgroup">        
+            <input type="radio" name="radio-choice-1" id="radio1" value="2" checked="checked">
+            <label for="radio1">
+            Saya ingin  berinvestasi pada instrumen investasi yang  hampir tidak ada risiko penurunan Nilai investasi awal saya. Saya tidak siap menerima penurunan Nilai investasi dalam jangka pendek.
+            </label>
+            <input type="radio" name="radio-choice-1" id="radio2" value="4">
+            <label for="radio2">
+            Saya ingin mempertahankan Nilai investasi awal saya, namun saya bersedia menerima sedikit penurunan Nilai investasi dalam jangka pendek. 
+            </label>
+            <input type="radio" name="radio-choice-1" id="radio3" value="8">
+            <label for="radio3">
+            Saya mengharapkan Nilai investasi saya tumbuh dan memperoleh tingkat pengembalian yang tinggi. Saya dapat menerima kemungkinan penurunan Nilai investasi awal.
+            </label>
+            <input type="radio" name="radio-choice-1" id="radio4" value="10">
+            <label for="radio4">
+            Saya mengharapkan Nilai investasi saya tumbuh sangat pesat dan memperoleh tingkat pengembalian yang sangat tinggi. Saya dapat menerima kemungkinan penurunan Nilai investasi atau kehilangan seluruh modal investasi awal.
+            </label>
+        </fieldset>
+        </td>        
        </tr>
        <tr>
          <th>2</th>
          <td>Nilai investasi Anda dapat berkurang karena fluktuasi pasar. Seberapa jauh penurunan investasi yang dapat Anda toleransi?<br />
-        <textarea name="TextName1" id="TextID1"></textarea></td>
+        <fieldset data-role="controlgroup">        
+            <input type="radio" name="radio-choice-2" id="radio5" value="2" checked="checked">
+            <label for="radio5">
+            Saya tidak bisa menerima penurunan sekecil apapun.
+            </label>
+            <input type="radio" name="radio-choice-2" id="radio6" value="4">
+            <label for="radio6">
+            < 10%. 
+            </label>
+            <input type="radio" name="radio-choice-2" id="radio7" value="6">
+            <label for="radio7">
+            10-30%
+            </label>
+            <input type="radio" name="radio-choice-2" id="radio8" value="8">
+            <label for="radio8">
+            > 30-50%
+            </label>
+            <input type="radio" name="radio-choice-2" id="radio9" value="10">
+            <label for="radio9">
+            > 50%
+            </label>
+        </fieldset>
+        </td>
        </tr>
        <tr>
          <th>3</th>
          <td>Jika Nilai Investasi Anda saat ini mengalami penurunan sebesar 10% dibandingkan Nilai Investasi Anda 6 bulan yang lalu, apakah yang Anda lakukan?
-         <textarea name="TextName2" id="TextID2"></textarea></td>
+         <fieldset data-role="controlgroup">        
+            <input type="radio" name="radio-choice-3" id="radio10" value="2" checked="checked">
+            <label for="radio10">
+            Segera mencairkan investasi karena saya tidak bisa menerima penurunan Nilai investasi awal.
+            </label>
+            <input type="radio" name="radio-choice-3" id="radio11" value="4">
+            <label for="radio11">
+            Tidak akan melakukan pencairan, namun untuk selanjutnya akan lebih sering memantau pergerakan Nilai investasi saya. 
+            </label>
+            <input type="radio" name="radio-choice-3" id="radio12" value="8">
+            <label for="radio12">
+            Tidak akan melakukan pencairan. Saya bisa menerima penurunan investasi dalam jangka pendek karena saya mempunyai tujuan investasi jangka panjang.
+            </label>
+            <input type="radio" name="radio-choice-3" id="radio13" value="10">
+            <label for="radio13">
+            Akan menambah jumlah investasi saya. Penurunan Nilai investasi dalam jangka pendek tersebut adalah peluang saya untuk menambahkan Nilai investasi sehingga memperoleh hasil maksimal.
+            </label>
+        </fieldset>
+         </td>
        </tr>
        <tr>
          <th>4</th>
           <td>Berapa lama Investasi yang akan Anda lakukan?
-         <textarea name="TextName3" id="TextID3"></textarea></td>
+          <fieldset data-role="controlgroup">        
+            <input type="radio" name="radio-choice-4" id="radio14" value="6" checked="checked">
+            <label for="radio14">
+            7 s/d 10 tahun.
+            </label>
+            <input type="radio" name="radio-choice-4" id="radio15" value="8">
+            <label for="radio15">
+            11 s/d 15 tahun
+            </label>
+            <input type="radio" name="radio-choice-4" id="radio16" value="10">
+            <label for="radio16">
+            16 s/d 20 tahun
+            </label>           
+        </fieldset>
+          </td>
        </tr>
        <tr>
          <th>5</th>
          <td>Berapa lama Investasi yang akan Anda lakukan?
-         <textarea name="TextName4" id="TextID4"></textarea></td>
+         <fieldset data-role="controlgroup">        
+            <input type="radio" name="radio-choice-5" id="radio17" value="2" checked="checked">
+            <label for="radio17">
+            Segera mencairkan investasi karena saya tidak bisa menerima penurunan Nilai investasi awal.
+            </label>
+            <input type="radio" name="radio-choice-5" id="radio18" value="4">
+            <label for="radio18">
+            Saya tidak terlalu memahami produk Asuransi Jiwa Unit Link.. 
+            </label>
+            <input type="radio" name="radio-choice-5" id="radio19" value="6">
+            <label for="radio19">
+            Saya memahami dan memiliki pengetahuan umum mengenai produk Asuransi Jiwa Unit Link.
+            </label>
+            <input type="radio" name="radio-choice-5" id="radio20" value="8">
+            <label for="radio20">
+            Saya memahami produk Asuransi Jiwa Unit Link termasuk beberapa faktor yang mempengaruhi naik-turunnya Nilai investasi.
+            </label>
+        </fieldset>
+         </td>
        </tr>      
      </tbody>
    </table>   
     <br />
-<div><button class="ui-btn ui-btn-inline" id="save">Save</button>
+<!--<div><button class="ui-btn ui-btn-inline" id="save">Save</button>
     <button class="ui-btn ui-btn-inline" id="read">Read</button>
-</div>
+</div>-->
 <br />
 <table data-role="table" class="ui-responsive table-stroke">
      <thead>
        <tr> 
          <th data-priority="2" colspan="2">INTERPRETASI NILAI&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-             SKOR ANDA : 25</th>
+             SKOR ANDA : <span class="replacement"></span></th>
        </tr>
      </thead>
      <tbody>
        <tr>
          <th>&nbsp;</th>
-         <td style="background-color: #006683; color: White;"><strong>Konservatif (Nilai&lt;28)</strong><br />
+         <td class="konservatif"><strong>Konservatif (Nilai &lt; 28)</strong><br />
              Anda mengharapkan pertumbuhan nilai 
              Investasi yang stabil dan penerimaan hasil investasi secara periodik. Anda<br />
              hanya bersedia menoleransi risiko yang minimal dan cenderung akan melakukan 
@@ -278,7 +442,7 @@ padding-right: .25em;
        </tr>
        <tr>
          <th>&nbsp;</th>
-         <td><strong>Moderat (Nilai 28-40)<br />
+         <td class="moderat"><strong>Moderat (Nilai 28-40)<br />
              </strong>Anda berinvestasi dengan tujuan mendapatkan pendapatan secara periodik 
              dan pertumbuhan modal dalam jangka
              <br />
@@ -289,7 +453,7 @@ padding-right: .25em;
        </tr>
        <tr>
          <th>&nbsp;</th>
-         <td><strong>Agresif (Nilai &gt; 40)<br />
+         <td class="agresif"><strong>Agresif (Nilai &gt; 40)<br />
              </strong>Anda bertujuan mengembangkan pokok investasi dalam jangka panjang 
              dengan tingkat imbal hasil yang besar. Anda<br />
              bersedia mengambil resiko yang lebih tinggi untuk memperoleh pertumbuhan nilai 

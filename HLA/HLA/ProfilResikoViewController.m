@@ -66,6 +66,15 @@
     }
 }
 
+#pragma mark call save function in HTML
+- (void)voidDoneProfileRisk{
+    [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"document.getElementById('save').click()"]];
+}
+
+- (void)voidReadProfileRisk{
+    [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"document.getElementById('read').click()"]];
+}
+
 - (void)savetoDB:(NSDictionary *)params{
     //add another key to db
     //
@@ -74,7 +83,7 @@
     [modifiedParams setObject:[[modelCFFHtml selectActiveHtmlForSection:@"CR"] valueForKey:@"CFFHtmlID"] forKey:@"CFFHtmlID"];
     //[modifiedParams setObject:@"1" forKey:@"CFFHtmlID"];
     [modifiedParams setObject:[cffTransactionID stringValue] forKey:@"CFFTransactionID"];
-    [modifiedParams setObject:[cffID stringValue] forKey:@"CFFID"];
+    [modifiedParams setObject:cffID  forKey:@"CFFID"];
     [modifiedParams setObject:[prospectProfileID stringValue] forKey:@"CustomerID"];
     
     NSMutableArray* arrayCFFAnswers = [[NSMutableArray alloc]initWithArray:[modifiedParams valueForKey:@"CFFAnswers"]];
@@ -107,6 +116,9 @@
     return [super readfromDB:params];
 }
 
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    [self voidReadProfileRisk];
+}
 
 /*
 #pragma mark - Navigation

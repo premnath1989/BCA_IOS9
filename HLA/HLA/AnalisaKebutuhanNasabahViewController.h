@@ -13,4 +13,5 @@
 @property (strong, nonatomic) NSNumber* cffTransactionID;
 @property (strong, nonatomic) NSNumber* cffID;
 @property (strong, nonatomic) NSDictionary* cffHeaderSelectedDictionary;
+-(void)voidDoneAnalisaKebutuhanNasabah;
 @end

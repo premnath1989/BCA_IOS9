@@ -65,6 +65,10 @@
     int RecDelete;
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [self loadCFFTransaction];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     

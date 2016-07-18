@@ -101,26 +101,26 @@
         ProspectIndex = [s intForColumn:@"IndexNo"];
         CFFTransactionID = [s intForColumn:@"CFFTransactionID"];
         CFFID = [s intForColumn:@"CFFID"];
-        ProspectName = [s stringForColumn:@"ProspectName"];
-        ProspectIDDesc = [s stringForColumn:@"IdentityDesc"];
-        ProspectIDNumber = [s stringForColumn:@"OtherIDTypeNo"];
-        ProspectDOB = [s stringForColumn:@"ProspectDOB"];
-        ProspectPrefix = [s stringForColumn:@"Prefix"];
-        ProspectMobileNumber = [s stringForColumn:@"ContactNo"];
-        ProspectBranch = [s stringForColumn:@"BranchName"];
+        ProspectName = [s stringForColumn:@"ProspectName"]?:@"";
+        ProspectIDDesc = [s stringForColumn:@"IdentityDesc"]?:@"";
+        ProspectIDNumber = [s stringForColumn:@"OtherIDTypeNo"]?:@"";
+        ProspectDOB = [s stringForColumn:@"ProspectDOB"]?:@"";
+        ProspectPrefix = [s stringForColumn:@"Prefix"]?:@"";
+        ProspectMobileNumber = [s stringForColumn:@"ContactNo"]?:@"";
+        ProspectBranch = [s stringForColumn:@"BranchName"]?:@"";
         //ProspectBranch = @"";
-        CFFDateCreated = [s stringForColumn:@"CFFDateCreated"];
-        CFFDateModified = [s stringForColumn:@"CFFDateModified"];
-        CFFStatus = [s stringForColumn:@"CFFStatus"];
-        CustomerStatementCFFID = [s stringForColumn:@"CustomerStatementCFFID"];
-        CustomerNeedsCFFID = [s stringForColumn:@"CustomerNeedsCFFID"];
-        CustomerRiskCFFID = [s stringForColumn:@"CustomerRiskCFFID"];
-        PotentialDiscussionCFFID = [s stringForColumn:@"PotentialDiscussionCFFID"];
-        ProteksiCFFID = [s stringForColumn:@"ProteksiCFFID"];
-        PensiunCFFID = [s stringForColumn:@"PensiunCFFID"];
-        PendidikanCFFID = [s stringForColumn:@"PendidikanCFFID"];
-        WarisanCFFID = [s stringForColumn:@"WarisanCFFID"];
-        InvestasiCFFID = [s stringForColumn:@"InvestasiCFFID"];
+        CFFDateCreated = [s stringForColumn:@"CFFDateCreated"]?:@"";
+        CFFDateModified = [s stringForColumn:@"CFFDateModified"]?:@"";
+        CFFStatus = [s stringForColumn:@"CFFStatus"]?:@"";
+        CustomerStatementCFFID = [s stringForColumn:@"CustomerStatementCFFID"]?:@"";
+        CustomerNeedsCFFID = [s stringForColumn:@"CustomerNeedsCFFID"]?:@"";
+        CustomerRiskCFFID = [s stringForColumn:@"CustomerRiskCFFID"]?:@"";
+        PotentialDiscussionCFFID = [s stringForColumn:@"PotentialDiscussionCFFID"]?:@"";
+        ProteksiCFFID = [s stringForColumn:@"ProteksiCFFID"]?:@"";
+        PensiunCFFID = [s stringForColumn:@"PensiunCFFID"]?:@"";
+        PendidikanCFFID = [s stringForColumn:@"PendidikanCFFID"]?:@"";
+        WarisanCFFID = [s stringForColumn:@"WarisanCFFID"]?:@"";
+        InvestasiCFFID = [s stringForColumn:@"InvestasiCFFID"]?:@"";
         
         dict=[[NSDictionary alloc]initWithObjectsAndKeys:
               [NSNumber numberWithInt:ProspectIndex],@"IndexNo",
@@ -181,7 +181,7 @@
     NSString *InvestasiCFFID;
     int ProspectIndex;
     int CFFTransactionID;
-    
+    int CFFID;
     
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
@@ -202,30 +202,32 @@
     while ([s next]) {
         ProspectIndex = [s intForColumn:@"IndexNo"];
         CFFTransactionID = [s intForColumn:@"CFFTransactionID"];
-        ProspectName = [s stringForColumn:@"ProspectName"];
-        ProspectIDDesc = [s stringForColumn:@"IdentityDesc"];
-        ProspectIDNumber = [s stringForColumn:@"OtherIDTypeNo"];
-        ProspectDOB = [s stringForColumn:@"ProspectDOB"];
-        ProspectPrefix = [s stringForColumn:@"Prefix"];
-        ProspectMobileNumber = [s stringForColumn:@"ContactNo"];
-        ProspectBranch = [s stringForColumn:@"BranchName"];
+        CFFID = [s intForColumn:@"CFFID"];
+        ProspectName = [s stringForColumn:@"ProspectName"]?:@"";
+        ProspectIDDesc = [s stringForColumn:@"IdentityDesc"]?:@"";
+        ProspectIDNumber = [s stringForColumn:@"OtherIDTypeNo"]?:@"";
+        ProspectDOB = [s stringForColumn:@"ProspectDOB"]?:@"";
+        ProspectPrefix = [s stringForColumn:@"Prefix"]?:@"";
+        ProspectMobileNumber = [s stringForColumn:@"ContactNo"]?:@"";
+        ProspectBranch = [s stringForColumn:@"BranchName"]?:@"";
         //ProspectBranch = @"";
-        CFFDateCreated = [s stringForColumn:@"CFFDateCreated"];
-        CFFDateModified = [s stringForColumn:@"CFFDateModified"];
-        CFFStatus = [s stringForColumn:@"CFFStatus"];
-        CustomerStatementCFFID = [s stringForColumn:@"CustomerStatementCFFID"];
-        CustomerNeedsCFFID = [s stringForColumn:@"CustomerNeedsCFFID"];
-        CustomerRiskCFFID = [s stringForColumn:@"CustomerRiskCFFID"];
-        PotentialDiscussionCFFID = [s stringForColumn:@"PotentialDiscussionCFFID"];
-        ProteksiCFFID = [s stringForColumn:@"ProteksiCFFID"];
-        PensiunCFFID = [s stringForColumn:@"PensiunCFFID"];
-        PendidikanCFFID = [s stringForColumn:@"PendidikanCFFID"];
-        WarisanCFFID = [s stringForColumn:@"WarisanCFFID"];
-        InvestasiCFFID = [s stringForColumn:@"InvestasiCFFID"];
+        CFFDateCreated = [s stringForColumn:@"CFFDateCreated"]?:@"";
+        CFFDateModified = [s stringForColumn:@"CFFDateModified"]?:@"";
+        CFFStatus = [s stringForColumn:@"CFFStatus"]?:@"";
+        CustomerStatementCFFID = [s stringForColumn:@"CustomerStatementCFFID"]?:@"";
+        CustomerNeedsCFFID = [s stringForColumn:@"CustomerNeedsCFFID"]?:@"";
+        CustomerRiskCFFID = [s stringForColumn:@"CustomerRiskCFFID"]?:@"";
+        PotentialDiscussionCFFID = [s stringForColumn:@"PotentialDiscussionCFFID"]?:@"";
+        ProteksiCFFID = [s stringForColumn:@"ProteksiCFFID"]?:@"";
+        PensiunCFFID = [s stringForColumn:@"PensiunCFFID"]?:@"";
+        PendidikanCFFID = [s stringForColumn:@"PendidikanCFFID"]?:@"";
+        WarisanCFFID = [s stringForColumn:@"WarisanCFFID"]?:@"";
+        InvestasiCFFID = [s stringForColumn:@"InvestasiCFFID"]?:@"";
         
         dict=[[NSDictionary alloc]initWithObjectsAndKeys:
               [NSNumber numberWithInt:ProspectIndex],@"IndexNo",
               [NSNumber numberWithInt:CFFTransactionID],@"CFFTransactionID",
+              [NSNumber numberWithInt:CFFID],@"CFFID",
               ProspectName,@"ProspectName",
               ProspectIDNumber,@"OtherIDTypeNo",
               ProspectDOB,@"ProspectDOB",
@@ -264,6 +266,23 @@
     [database open];
     
     BOOL success = [database executeUpdate:[NSString stringWithFormat:@"update CFFTransaction set CFFDateModified=""datetime(\"now\", \"+7 hour\")"" where CFFTransactionID = %i",cffTransactionID]];
+    
+    if (!success) {
+        NSLog(@"%s: insert error: %@", __FUNCTION__, [database lastErrorMessage]);
+        // do whatever you need to upon error
+    }
+    [results close];
+    [database close];
+}
+
+-(void)updateCFFStatu:(NSString *)stringCFFStatus CFFTransactionID:(int)intCFFTransactionID{
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    BOOL success = [database executeUpdate:[NSString stringWithFormat:@"update CFFTransaction set CFFStatus=\"%@\" where CFFTransactionID = %i",stringCFFStatus,intCFFTransactionID]];
     
     if (!success) {
         NSLog(@"%s: insert error: %@", __FUNCTION__, [database lastErrorMessage]);

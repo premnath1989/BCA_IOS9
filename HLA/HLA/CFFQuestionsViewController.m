@@ -17,7 +17,7 @@
 #import "ModelProspectProfile.h"
 #import "ModelCFFHtml.h"
 
-@interface CFFQuestionsViewController (){
+@interface CFFQuestionsViewController ()<PernyataanNasabahViewControllerDelegate>{
     ModelProspectProfile* modelProspectProfile;
     ModelCFFHtml* modelCFFHtml;
 }
@@ -33,6 +33,7 @@
     
     IBOutlet UITableView *myTableView;
     IBOutlet UIView *childView;
+    UIBarButtonItem* rightButton;
 
     NSMutableArray *NumberListOfSubMenu;
     NSMutableArray *ListOfSubMenu;
@@ -56,14 +57,61 @@
     profilResikoVC = [[ProfilResikoViewController alloc]initWithNibName:@"ProfilResikoViewController" bundle:nil];
     analisaKebutuhanNasabahVC = [[AnalisaKebutuhanNasabahViewController alloc]initWithNibName:@"AnalisaKebutuhanNasabahViewController" bundle:nil];
     pernyataanNasabahVC = [[PernyataanNasabahViewController alloc]initWithNibName:@"PernyataanNasabahViewController" bundle:nil];
+    pernyataanNasabahVC.delegate = self;
     
     NumberListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"1", @"2", @"3", @"4",@"5", nil];
     ListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"Data Nasabah", @"Area Potensial Untuk Diskusi", @"Profil Resiko Nasabah", @"Analisa Kebutuhan Nasabah",@"Pernyataan Nasabah", nil];
     
     [self loadDataNasabahView];
+    [self voidCreateRightBarButton];
     // Do any additional setup after loading the view from its nib.
 }
 
+-(void)voidCreateRightBarButton{
+    rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Simpan" style:UIBarButtonItemStylePlain target:self
+                                                                  action:@selector(actionRightBarButtonPressed:)];
+    self.navigationItem.rightBarButtonItem = rightButton;
+}
+
+-(IBAction)actionRightBarButtonPressed:(UIBarButtonItem *)sender{
+    if ([[dataNasabahVC.view.superview.subviews lastObject] isEqual: dataNasabahVC.view]){
+        NSLog(@"bisa ");
+    }
+    else if ([[areaPotensialDiskusiVC.view.superview.subviews lastObject] isEqual: areaPotensialDiskusiVC.view]){
+        NSLog(@"bisa ");
+    }
+    else if ([[profilResikoVC.view.superview.subviews lastObject] isEqual: profilResikoVC.view]){
+        NSLog(@"bisa ");
+    }
+    else if ([[analisaKebutuhanNasabahVC.view.superview.subviews lastObject] isEqual: analisaKebutuhanNasabahVC.view]){
+        NSLog(@"bisa ");
+    }
+    else if ([[pernyataanNasabahVC.view.superview.subviews lastObject] isEqual: pernyataanNasabahVC.view]){
+        NSLog(@"bisa ");
+        [pernyataanNasabahVC voidDoneCFFData];
+    }
+}
+
+#pragma mark UIBarButtonItem Action
+
+-(void)voidDataNasabahDoneButton:(UIBarButtonItem *)sender{
+    //[pernyataanNasabahVC voidDoneCFFData];
+}
+-(void)voidAreaPotensialDiskusiDoneButton:(UIBarButtonItem *)sender{
+    [areaPotensialDiskusiVC voidDoneAreaPotential];
+}
+-(void)voidProfileRiskDoneButton:(UIBarButtonItem *)sender{
+    //[pernyataanNasabahVC voidDoneCFFData];
+}
+-(void)voidAnalisaKebutuhanNasabahDoneButton:(UIBarButtonItem *)sender{
+    [analisaKebutuhanNasabahVC voidDoneAnalisaKebutuhanNasabah];
+}
+
+-(void)voidPernyataanNasabahDoneButton:(UIBarButtonItem *)sender{
+    [pernyataanNasabahVC voidDoneCFFData];
+}
+
+#pragma mark load view controller
 -(void)loadDataNasabahView{
     dataNasabahVC.prospectProfileID = prospectProfileID;
     dataNasabahVC.cffTransactionID  = cffTransactionID;
@@ -147,18 +195,28 @@
     switch (indexPath.row) {
         case 0:
             [self loadDataNasabahView];
+            [rightButton setTitle:@"Simpan"];
+            [rightButton setAction:@selector(voidDataNasabahDoneButton:)];
             break;
         case 1:
             [self loadAreaPotensialDiskusiView];
+            [rightButton setTitle:@"Simpan"];
+            [rightButton setAction:@selector(voidAreaPotensialDiskusiDoneButton:)];
             break;
         case 2:
             [self loadProfilResikoNasabahView];
+            [rightButton setTitle:@"Simpan"];
+            [rightButton setAction:@selector(voidProfileRiskDoneButton:)];
             break;
         case 3:
             [self loadAnalisaKebutuhanNasabahView];
+            [rightButton setTitle:@"Simpan"];
+            [rightButton setAction:@selector(voidAnalisaKebutuhanNasabahDoneButton:)];
             break;
         case 4:
             [self loadPernyataanNasabahView];
+            [rightButton setTitle:@"Done"];
+            [rightButton setAction:@selector(voidPernyataanNasabahDoneButton:)];
             break;
         default:
             break;
@@ -231,7 +289,10 @@
     [self showDetailsForIndexPath:indexPath];
 }
 
-
+#pragma mark delegate
+-(void)voidCompleteCFFData{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 /*
 #pragma mark - Navigation
 

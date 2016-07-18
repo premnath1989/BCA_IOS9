@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "SIMenuTableViewCell.h"
 
-
 @interface CFFQuestionsViewController : UIViewController
 
 @property (strong, nonatomic) NSNumber* prospectProfileID;

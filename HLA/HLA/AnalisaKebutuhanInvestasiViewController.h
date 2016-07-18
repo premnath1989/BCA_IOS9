@@ -16,4 +16,5 @@
 @property (strong, nonatomic) NSString* htmlFileName;
 @property (strong, nonatomic) NSNumber* cffID;
 @property (strong, nonatomic) NSDictionary* cffHeaderSelectedDictionary;
+-(void)voidDoneInvestasi;
 @end

@@ -18,4 +18,5 @@
 -(NSMutableArray *)searchCFF:(NSDictionary *)dictSearch;
 -(void)deleteCFFTransaction:(int)cffTransactionID;
 -(void)updateCFFDateModified:(int)cffTransactionID;
+-(void)updateCFFStatu:(NSString *)stringCFFStatus CFFTransactionID:(int)intCFFTransactionID;
 @end

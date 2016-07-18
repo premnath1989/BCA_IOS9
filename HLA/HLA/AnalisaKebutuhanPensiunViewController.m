@@ -51,6 +51,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark call save function in HTML
+- (void)voidDonePensiun{
+    [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"document.getElementById('save').click()"]];
+}
+
+- (void)voidReadPensiun{
+    [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"document.getElementById('read').click()"]];
+}
 - (void)savetoDB:(NSDictionary *)params{
     //add another key to db
     //
@@ -59,7 +67,7 @@
     [modifiedParams setObject:[[modelCFFHtml selectActiveHtmlForSection:@"PSN"] valueForKey:@"CFFHtmlID"] forKey:@"CFFHtmlID"];
     //[modifiedParams setObject:@"1" forKey:@"CFFHtmlID"];
     [modifiedParams setObject:[cffTransactionID stringValue] forKey:@"CFFTransactionID"];
-    [modifiedParams setObject:[cffID stringValue] forKey:@"CFFID"];
+    [modifiedParams setObject:cffID forKey:@"CFFID"];
     [modifiedParams setObject:[prospectProfileID stringValue] forKey:@"CustomerID"];
     
     NSMutableArray* arrayCFFAnswers = [[NSMutableArray alloc]initWithArray:[modifiedParams valueForKey:@"CFFAnswers"]];
@@ -69,7 +77,7 @@
             NSMutableDictionary* tempDict = [[NSMutableDictionary alloc] initWithDictionary:[arrayCFFAnswers objectAtIndex:i]];
             [tempDict setObject:[[modelCFFHtml selectActiveHtmlForSection:@"PSN"] valueForKey:@"CFFHtmlID"] forKey:@"CFFHtmlID"];
             [tempDict setObject:[cffTransactionID stringValue] forKey:@"CFFTransactionID"];
-            [tempDict setObject:[cffID stringValue] forKey:@"CFFID"];
+            [tempDict setObject:cffID forKey:@"CFFID"];
             [tempDict setObject:[prospectProfileID stringValue] forKey:@"CustomerID"];
             
             [modifiedArrayCFFAnswers addObject:tempDict];
@@ -90,6 +98,10 @@
 
 - (NSMutableDictionary*)readfromDB:(NSMutableDictionary*) params{
     return [super readfromDB:params];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    [self voidReadPensiun];
 }
 
 /*
