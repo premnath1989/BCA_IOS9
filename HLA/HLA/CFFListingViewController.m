@@ -99,7 +99,8 @@
     
     [self loadCFFTransaction];
 
-    [self copyHTMLFile:@"PotentialDiscussion"];
+    //Penyebab lambat
+    /*[self copyHTMLFile:@"PotentialDiscussion"];
     [self copyHTMLFile:@"ProfileRisk"];
     [self copyHTMLFile:@"Proteksi"];
     [self copyHTMLFile:@"Pensiun"];
@@ -107,7 +108,7 @@
     [self copyHTMLFile:@"Warisan"];
     [self copyHTMLFile:@"Investasi"];
     [self copyHTMLFile:@"CustomerStatement"];
-    [self fetchHTMLInfo];
+    [self fetchHTMLInfo];*/
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -553,7 +554,7 @@
     NSDictionary* dictWarisanCFFID=[[NSDictionary alloc]initWithDictionary:[modelCFFHtml selectActiveHtmlForSection:@"WRS"]];
     NSDictionary* dictInvestasiCFFID=[[NSDictionary alloc]initWithDictionary:[modelCFFHtml selectActiveHtmlForSection:@"INV"]];
     
-    NSDictionary* dictCFFTransaction = [[NSDictionary alloc]initWithObjectsAndKeys:[dictActiveHtml valueForKey:@"CFFID"],@"CFFID",[NSNumber numberWithInteger:clientProfileID],@"ProspectIndexNo",dateToday,@"CFFDateCreated",@"",@"CreatedBy",dateToday,@"CFFDateModified",@"",@"ModifiedBy",@"Not Complete",@"CFFStatus",[dictCustomerStatementCFFID valueForKey:@"CFFID"],@"CustomerStatementCFFID",[dictCustomerNeedsCFFID valueForKey:@"CFFID"],@"CustomerNeedsCFFID",[dictCustomerRiskCFFID valueForKey:@"CFFID"],@"CustomerRiskCFFID",[dictPotentialDiscussionCFFID valueForKey:@"CFFID"],@"PotentialDiscussionCFFID",[dictProteksiCFFID valueForKey:@"CFFID"],@"ProteksiCFFID",[dictPensiunCFFID valueForKey:@"CFFID"],@"PensiunCFFID",[dictPendidikanCFFID valueForKey:@"CFFID"],@"PendidikanCFFID",[dictWarisanCFFID valueForKey:@"CFFID"],@"WarisanCFFID",[dictInvestasiCFFID valueForKey:@"CFFID"],@"InvestasiCFFID", nil];
+    NSDictionary* dictCFFTransaction = [[NSDictionary alloc]initWithObjectsAndKeys:[dictActiveHtml valueForKey:@"CFFID"],@"CFFID",[NSNumber numberWithInteger:clientProfileID],@"ProspectIndexNo",dateToday,@"CFFDateCreated",@"",@"CreatedBy",dateToday,@"CFFDateModified",@"",@"ModifiedBy",@"Not Complete",@"CFFStatus",[NSString stringWithFormat:@"%@",[dictCustomerStatementCFFID valueForKey:@"CFFID"]],@"CustomerStatementCFFID",[NSString stringWithFormat:@"%@",[dictCustomerNeedsCFFID valueForKey:@"CFFID"]],@"CustomerNeedsCFFID",[NSString stringWithFormat:@"%@",[dictCustomerRiskCFFID valueForKey:@"CFFID"]],@"CustomerRiskCFFID",[NSString stringWithFormat:@"%@",[dictPotentialDiscussionCFFID valueForKey:@"CFFID"]],@"PotentialDiscussionCFFID",[NSString stringWithFormat:@"%@",[dictProteksiCFFID valueForKey:@"CFFID"]],@"ProteksiCFFID",[NSString stringWithFormat:@"%@",[dictPensiunCFFID valueForKey:@"CFFID"]],@"PensiunCFFID",[NSString stringWithFormat:@"%@",[dictPendidikanCFFID valueForKey:@"CFFID"]],@"PendidikanCFFID",[NSString stringWithFormat:@"%@",[dictWarisanCFFID valueForKey:@"CFFID"]],@"WarisanCFFID",[NSString stringWithFormat:@"%@",[dictInvestasiCFFID valueForKey:@"CFFID"]],@"InvestasiCFFID", nil];
     [modelCFFTransaction saveCFFTransaction:dictCFFTransaction];
 }
 

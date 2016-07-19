@@ -115,10 +115,9 @@
     
     [self setButtonImageAndTextAlignment];
     [self setTextfieldBorder];
-    [outletRelation setTitle:@"Child" forState:UIControlStateNormal];
+    [outletRelation setTitle:@"Anak" forState:UIControlStateNormal];
     // Do any additional setup after loading the view from its nib.
 }
-
 
 -(void)setButtonImageAndTextAlignment{
     outletDOB.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
@@ -145,10 +144,10 @@
     outletOccupation.layer.borderColor = borderColor.CGColor;
     //outletOccupation.layer.borderWidth = 1.0;
     
-    outletRelation.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    /*outletRelation.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     outletRelation.imageEdgeInsets = UIEdgeInsetsMake(0., outletRelation.frame.size.width - (24 + 10.0), 0., 0.);
     outletRelation.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
-    outletRelation.layer.borderColor = borderColor.CGColor;
+    outletRelation.layer.borderColor = borderColor.CGColor;*/
 }
 
 -(void)setTextfieldBorder{
@@ -176,7 +175,7 @@
         if ([view isKindOfClass:[UIButton class]]) {
             UIButton *button = (UIButton *)view;
             button.layer.borderColor=borderColor.CGColor;
-            button.layer.borderWidth=1.0;
+            //button.layer.borderWidth=1.0;
         }
     }
     
@@ -393,7 +392,7 @@
         [OtherIDType setTitle:@"" forState:UIControlStateNormal];
         txtOtherIDType.text=@"";
         [outletNationality setTitle:@"" forState:UIControlStateNormal];
-        [outletRelation setTitle:@"Child" forState:UIControlStateNormal];
+        [outletRelation setTitle:@"Anak" forState:UIControlStateNormal];
         txtYearsInsured.text=@"";
         [outletOccupation setTitle:@"" forState:UIControlStateNormal];
         OccupCodeSelected = @"";
@@ -494,6 +493,12 @@
         
         return ([string isEqualToString:filtered]);
     }
+    if (textField == txtName)
+    {
+        NSUInteger newLength = [textField.text length] + [string length] - range.length;
+        return (newLength <= 40);
+    }
+
     return YES;
 }
 
@@ -539,8 +544,15 @@
     dateString = [dateformatter stringFromDate:[NSDate date]];
     clientDateString = [clientDateFormmater stringFromDate:d2];
     
+    int differenceDay = [formatter calculateDifferenceDay:strDate];
     if ([d compare:d2] == NSOrderedAscending){
         NSString *validationTanggalLahirFuture=@"Tanggal lahir tidak dapat lebih besar dari tanggal hari ini";
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
+                                                        message:validationTanggalLahirFuture delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil];
+        [alert show];
+    }
+    else if (differenceDay<180){
+        NSString *validationTanggalLahirFuture=@"Usia tidak boleh kurang dari 180 hari";
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
                                                         message:validationTanggalLahirFuture delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil];
         [alert show];

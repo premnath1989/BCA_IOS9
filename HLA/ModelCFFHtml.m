@@ -42,7 +42,7 @@
     NSString* tableValue = [[dictHtmlData valueForKey:@"columnValue"] componentsJoinedByString:@","];
     
     
-    BOOL success = [database executeUpdate:[NSString stringWithFormat:@"insert into %@ (%@) values (%@)",[dictHtmlData valueForKey:@"tableName"],tableColumn,tableValue]];
+    BOOL success = [database executeUpdate:[NSString stringWithFormat:@"insert or replace into %@ (%@) values (%@)",[dictHtmlData valueForKey:@"tableName"],tableColumn,tableValue]];
     
     if (!success) {
         NSLog(@"%s: insert error: %@", __FUNCTION__, [database lastErrorMessage]);

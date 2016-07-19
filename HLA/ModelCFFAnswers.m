@@ -27,4 +27,26 @@
     [results close];
     [database close];
 }
+
+-(int)getCFFAnswersCount:(int)intCFFTransactionID CFFSection:(NSString *)stringCFFSection{
+    int count;
+    
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"SELECT count(*) FROM CFFAnswers cffa join CFFHtml cffh on cffa.CFFHtmlID = cffh.CFFHtmlID where cffa.CFFTransactionID = %i and cffh.CFFHtmlSection=\"%@\"",intCFFTransactionID,stringCFFSection]];
+    while ([s next]) {
+        count = [s intForColumn:@"count(*)"];
+    }
+    
+    [results close];
+    [database close];
+    return count;
+}
+
+
+
 @end

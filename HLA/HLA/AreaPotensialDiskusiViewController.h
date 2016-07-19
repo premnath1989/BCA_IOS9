@@ -8,10 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "HtmlGenerator/HtmlGenerator.h"
+@protocol AreaPotensialDiskusiViewControllerDelegate
+-(void)voidSetAreaPotentialBoolValidate:(BOOL)boolValidate;
+@end
 
 @interface AreaPotensialDiskusiViewController : HtmlGenerator{
     NSString *filePath;
 }
+@property (nonatomic,strong) id <AreaPotensialDiskusiViewControllerDelegate> delegate;
 @property (strong, nonatomic) NSNumber* prospectProfileID;
 @property (strong, nonatomic) NSNumber* cffTransactionID;
 @property (strong, nonatomic) NSString* htmlFileName;

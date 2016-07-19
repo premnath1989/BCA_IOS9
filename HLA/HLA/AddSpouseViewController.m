@@ -91,6 +91,19 @@
     // Do any additional setup after loading the view from its nib.
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    
+    if (textField == txtName)
+    {
+        NSUInteger newLength = [textField.text length] + [string length] - range.length;
+        return (newLength <= 40);
+    }
+    
+    return YES;
+}
+
+
 -(void)setButtonImageAndTextAlignment{
     outletDOB.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     outletDOB.imageEdgeInsets = UIEdgeInsetsMake(0., outletDOB.frame.size.width - (24 + 10.0), 0., 0.);
@@ -116,10 +129,10 @@
     outletOccupation.layer.borderColor = borderColor.CGColor;
     //outletOccupation.layer.borderWidth = 1.0;
     
-    outletRelation.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    /*outletRelation.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     outletRelation.imageEdgeInsets = UIEdgeInsetsMake(0., outletRelation.frame.size.width - (24 + 10.0), 0., 0.);
     outletRelation.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
-    outletRelation.layer.borderColor = borderColor.CGColor;
+    outletRelation.layer.borderColor = borderColor.CGColor;*/
 }
 
 -(void)setTextfieldBorder{
@@ -147,7 +160,7 @@
         if ([view isKindOfClass:[UIButton class]]) {
             UIButton *button = (UIButton *)view;
             button.layer.borderColor=borderColor.CGColor;
-            button.layer.borderWidth=1.0;
+            //button.layer.borderWidth=1.0;
         }
     }
     
@@ -400,7 +413,7 @@
         [OtherIDType setTitle:@"" forState:UIControlStateNormal];
         txtOtherIDType.text=@"";
         [outletNationality setTitle:@"" forState:UIControlStateNormal];
-        [outletRelation setTitle:@"Spouse" forState:UIControlStateNormal];
+        [outletRelation setTitle:@"" forState:UIControlStateNormal];
         txtYearsInsured.text=@"";
         [outletOccupation setTitle:@"" forState:UIControlStateNormal];
         OccupCodeSelected = @"";

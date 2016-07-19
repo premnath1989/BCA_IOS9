@@ -216,6 +216,100 @@
     return age;
 }
 
+-(int)calculateDifferenceDay:(NSString *)DOB
+{
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+    NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
+    
+    
+    NSArray *comm = [dateString componentsSeparatedByString: @"/"];
+    NSString *commDay = [comm objectAtIndex:0];
+    NSString *commMonth = [comm objectAtIndex:1];
+    NSString *commYear = [comm objectAtIndex:2];
+    
+    
+    NSArray *foo = [DOB componentsSeparatedByString: @"/"];
+    NSString *birthDay = [foo objectAtIndex: 0];
+    NSString *birthMonth = [foo objectAtIndex: 1];
+    NSString *birthYear = [foo objectAtIndex: 2];
+    
+    int yearN = [commYear intValue];
+    int yearB = [birthYear intValue];
+    int monthN = [commMonth intValue];
+    int monthB = [birthMonth intValue];
+    int dayN = [commDay intValue];
+    int dayB = [birthDay intValue];
+    
+    int ALB = yearN - yearB;
+    int newALB;
+    int newANB;
+    
+    
+    if (yearN > yearB) {
+        if (monthN < monthB) {
+            newALB = ALB - 1;
+        } else if (monthN == monthB && dayN < dayB) {
+            newALB = ALB - 1;
+        } else if (monthN == monthB && dayN == dayB) { //edited by heng
+            newALB = ALB ;  //edited by heng
+        } else {
+            newALB = ALB;
+        }
+        
+        if (monthN > monthB) {
+            newANB = ALB + 1;
+        } else if (monthN == monthB && dayN > dayB) {
+            newANB = ALB + 1;
+        } else if (monthN == monthB && dayN == dayB) { // edited by heng
+            newANB = ALB; //edited by heng
+        } else {
+            newANB = ALB;
+        }
+        //age = newALB;
+        //ANB = newANB;
+    } else if (yearN == yearB) {
+        [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+        NSString *selectDate = DOB;
+        NSDate *startDate = [dateFormatter dateFromString:selectDate];
+        
+        NSDate *endDate = [dateFormatter dateFromString:dateString];
+        
+        unsigned flags = NSDayCalendarUnit;
+        NSDateComponents *difference = [[NSCalendar currentCalendar] components:flags fromDate:startDate toDate:endDate options:0];
+        int diffDays = [difference day];
+        
+        //age = 0;
+        //ANB = 1;
+    } else {
+        [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+        NSString *selectDate = DOB;
+        NSDate *startDate = [dateFormatter dateFromString:selectDate];
+        
+        NSDate *endDate = [dateFormatter dateFromString:dateString];
+        
+        unsigned flags = NSDayCalendarUnit;
+        NSDateComponents *difference = [[NSCalendar currentCalendar] components:flags fromDate:startDate toDate:endDate options:0];
+        int diffDays = [difference day];
+        
+        //age = 0;
+        //ANB = 1;
+    }
+    
+    [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+    NSString *selectDate = DOB;
+    NSDate *startDate = [dateFormatter dateFromString:selectDate];
+    
+    NSDate *endDate = [dateFormatter dateFromString:dateString];
+    
+    unsigned flags = NSDayCalendarUnit;
+    NSDateComponents *difference = [[NSCalendar currentCalendar] components:flags fromDate:startDate toDate:endDate options:0];
+    
+    return [difference day];
+    
+}
+
 /*-(NSString *)convertSpecialCharacter:(NSString *)originalString{
     NSString *someString = originalString;
     NSString *newString = [someString stringByReplacingOccurrencesOfString:@"[/,@"'; ]+" withString:@"-" options: NSRegularExpressionSearch range:NSMakeRange(0, someString.length)];

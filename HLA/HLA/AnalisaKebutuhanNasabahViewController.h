@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol AnalisaKebutuhanNasabahViewControllerDelegate
+-(void)voidSetAnalisaKebutuhanNasabahBoolValidate:(BOOL)boolValidate;
+@end
 
 @interface AnalisaKebutuhanNasabahViewController : UIViewController
+@property (nonatomic,strong) id <AnalisaKebutuhanNasabahViewControllerDelegate> delegate;
 @property (strong, nonatomic) NSNumber* prospectProfileID;
 @property (strong, nonatomic) NSNumber* cffTransactionID;
 @property (strong, nonatomic) NSNumber* cffID;

@@ -8,9 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "HtmlGenerator/HtmlGenerator.h"
+@protocol AnalisaKebutuhanWarisanViewControllerDelegate
+-(void)voidSetAnalisaKebutuhanWarisanBoolValidate:(BOOL)boolValidate;
+@end
+
 @interface AnalisaKebutuhanWarisanViewController : HtmlGenerator{
     NSString *filePath;
 }
+@property (nonatomic,strong) id <AnalisaKebutuhanWarisanViewControllerDelegate> delegate;
 @property (strong, nonatomic) NSNumber* prospectProfileID;
 @property (strong, nonatomic) NSNumber* cffTransactionID;
 @property (strong, nonatomic) NSString* htmlFileName;

@@ -9,16 +9,19 @@
 #import "AreaPotensialDiskusiViewController.h"
 #import "ModelCFFTransaction.h"
 #import "ModelCFFHtml.h"
-
+#import "Formatter.h"
 @interface AreaPotensialDiskusiViewController (){
     ModelCFFTransaction* modelCFFTransaction;
     ModelCFFHtml* modelCFFHtml;
+    Formatter* formatter;
 }
 
 @end
 
 @implementation AreaPotensialDiskusiViewController
 @synthesize prospectProfileID,cffTransactionID,htmlFileName,cffID,cffHeaderSelectedDictionary;
+@synthesize delegate;
+
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:YES];
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
@@ -51,6 +54,7 @@
 - (void)viewDidLoad {
     modelCFFTransaction = [[ModelCFFTransaction alloc]init];
     modelCFFHtml = [[ModelCFFHtml alloc]init];
+    formatter = [[Formatter alloc]init];
     
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     databasePath = [[NSString alloc] initWithString:
@@ -72,10 +76,17 @@
 #pragma mark call save function in HTML
 - (void)voidDoneAreaPotential{
     [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"document.getElementById('save').click()"]];
+    
 }
 
 - (void)voidReadAreaPotential{
     [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"document.getElementById('read').click()"]];
+}
+
+- (void)voidSetPriorityData{
+    NSLog(@"dob %@",[formatter convertDateFrom:@"dd/MM/yyyy" TargetDateFormat:@"yyyy-MM-dd" DateValue:[cffHeaderSelectedDictionary valueForKey:@"ProspectDOB"]]);
+    NSString* prospectDOB  = [formatter convertDateFrom:@"dd/MM/yyyy" TargetDateFormat:@"yyyy-MM-dd" DateValue:[cffHeaderSelectedDictionary valueForKey:@"ProspectDOB"]];
+    [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"calculatePriority('%@')", prospectDOB]];
 }
 
 
@@ -112,6 +123,7 @@
     [finalDictionary setValue:[params valueForKey:@"successCallBack"] forKey:@"successCallBack"];
     [finalDictionary setValue:[params valueForKey:@"errorCallback"] forKey:@"errorCallback"];
     [super savetoDB:finalDictionary];
+    [delegate voidSetAreaPotentialBoolValidate:true];
 }
 
 - (NSMutableDictionary*)readfromDB:(NSMutableDictionary*) params{
@@ -120,6 +132,7 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     [self voidReadAreaPotential];
+    [self voidSetPriorityData];
 }
 /*
 #pragma mark - Navigation

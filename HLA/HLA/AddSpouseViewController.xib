@@ -100,6 +100,9 @@
                             <color key="textColor" red="0.34509803919999998" green="0.34901960780000002" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="fDj-Xn-mgN"/>
+                            </connections>
                         </textField>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="16" id="MzG-B1-GHN">
                             <rect key="frame" x="194" y="77" width="207" height="30"/>
@@ -183,7 +186,7 @@
                             <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                         </textField>
-                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" id="69P-Ua-Qmu">
+                        <segmentedControl opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" id="69P-Ua-Qmu">
                             <rect key="frame" x="194" y="39" width="207" height="29"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
@@ -308,8 +311,8 @@
                                 <action selector="actionNationality:" destination="-1" eventType="touchUpInside" id="Scx-YN-xR7"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="SyG-dL-QDn">
-                            <rect key="frame" x="194" y="228" width="207" height="30"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="SyG-dL-QDn">
+                            <rect key="frame" x="202" y="228" width="207" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>

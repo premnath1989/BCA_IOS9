@@ -18,6 +18,8 @@
 
 @implementation ProfilResikoViewController
 @synthesize prospectProfileID,cffTransactionID,htmlFileName,cffID,cffHeaderSelectedDictionary;
+@synthesize delegate;
+
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:YES];
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
@@ -93,7 +95,7 @@
             NSMutableDictionary* tempDict = [[NSMutableDictionary alloc] initWithDictionary:[arrayCFFAnswers objectAtIndex:i]];
             [tempDict setObject:[[modelCFFHtml selectActiveHtmlForSection:@"CR"] valueForKey:@"CFFHtmlID"] forKey:@"CFFHtmlID"];
             [tempDict setObject:[cffTransactionID stringValue] forKey:@"CFFTransactionID"];
-            [tempDict setObject:[cffID stringValue] forKey:@"CFFID"];
+            [tempDict setObject:cffID forKey:@"CFFID"];
             [tempDict setObject:[prospectProfileID stringValue] forKey:@"CustomerID"];
             
             [modifiedArrayCFFAnswers addObject:tempDict];
@@ -110,6 +112,7 @@
     [finalDictionary setValue:[params valueForKey:@"successCallBack"] forKey:@"successCallBack"];
     [finalDictionary setValue:[params valueForKey:@"errorCallback"] forKey:@"errorCallback"];
     [super savetoDB:finalDictionary];
+    [delegate voidSetProfileRiskBoolValidate:true];
 }
 
 - (NSMutableDictionary*)readfromDB:(NSMutableDictionary*) params{

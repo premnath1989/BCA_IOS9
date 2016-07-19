@@ -13,5 +13,5 @@
     FMResultSet *results;
 }
 -(void)deleteCFFAnswerByCFFTransID:(int)cffTransactionID;
-
+-(int)getCFFAnswersCount:(int)intCFFTransactionID CFFSection:(NSString *)stringCFFSection;
 @end

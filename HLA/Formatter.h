@@ -13,6 +13,7 @@
 -(NSString *)convertDateFrom:(NSString *)originalDateFormat TargetDateFormat:(NSString *)targetDateFormat DateValue:(NSString *)dateValue;
 -(NSString *)getDateToday:(NSString *)dateFormat;
 -(int)calculateAge:(NSString *)DOB;
+-(int)calculateDifferenceDay:(NSString *)DOB;
 -(NSString *)stringToCurrencyDecimalFormatted:(NSString  *)stringNumber;
 -(NSNumber *)convertNumberFromString:(NSString *)stringNumber;
 -(NSNumber *)convertNumberFromStringCurrency:(NSString *)stringNumber;

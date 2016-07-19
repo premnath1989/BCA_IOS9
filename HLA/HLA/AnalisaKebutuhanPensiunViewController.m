@@ -20,6 +20,7 @@
 
 @implementation AnalisaKebutuhanPensiunViewController
 @synthesize prospectProfileID,cffTransactionID,htmlFileName,cffID,cffHeaderSelectedDictionary;
+@synthesize delegate;
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:YES];
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
@@ -94,6 +95,7 @@
     [finalDictionary setValue:[params valueForKey:@"successCallBack"] forKey:@"successCallBack"];
     [finalDictionary setValue:[params valueForKey:@"errorCallback"] forKey:@"errorCallback"];
     [super savetoDB:finalDictionary];
+    [delegate voidSetAnalisaKebutuhanPensiunBoolValidate:true];
 }
 
 - (NSMutableDictionary*)readfromDB:(NSMutableDictionary*) params{

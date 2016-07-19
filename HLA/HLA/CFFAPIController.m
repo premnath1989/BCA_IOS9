@@ -67,6 +67,8 @@
     }
 }
 
+
+
 #pragma mark AFNetworking For Global Use
 -(void)apiCallHtmlTable:(NSString *)URL JSONKey:(NSArray *)jsonKey TableDictionary:(NSDictionary *)tableDictionary{
     NSURLSession *session = [NSURLSession sharedSession];
@@ -91,7 +93,7 @@
             NSDictionary* item;
             while (item = (NSDictionary*)[enumerator nextObject]) {
                 NSString* stringID=[NSString stringWithFormat:@"\"%@\"",[item objectForKey:[jsonKey objectAtIndex:0]]];
-                NSString* stringFileName=[NSString stringWithFormat:@"\"%@\"",[item objectForKey:[jsonKey objectAtIndex:1]]];
+                NSString* stringFileName=[NSString stringWithFormat:@"\"%@/\%@\"",[item objectForKey:[jsonKey objectAtIndex:4]],[item objectForKey:[jsonKey objectAtIndex:1]]];
                 NSString* stringStatus=[NSString stringWithFormat:@"\"%@\"",[item objectForKey:[jsonKey objectAtIndex:2]]];
                 NSString* stringSection=[NSString stringWithFormat:@"\"%@\"",[item objectForKey:[jsonKey objectAtIndex:3]]];
                 NSArray* tableValue= [[NSArray alloc]initWithObjects:stringID,stringFileName,stringStatus,stringSection, nil];
@@ -99,13 +101,14 @@
                 NSMutableDictionary* dictDataTable = [[NSMutableDictionary alloc]initWithDictionary:tableDictionary];
                 [dictDataTable setObject:tableValue forKey:@"columnValue"];
                 
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                [modelCFFHtml saveGlobalHtmlData:dictDataTable];
+                /*dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                     [modelCFFHtml updateGlobalHtmlData:[item objectForKey:[jsonKey objectAtIndex:3]]];
                     // Some long running task you want on another thread
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [modelCFFHtml saveGlobalHtmlData:dictDataTable];
                     });
-                });
+                });*/
             }
         }
         else{
@@ -114,13 +117,14 @@
             NSMutableDictionary* dictDataTable = [[NSMutableDictionary alloc]initWithDictionary:tableDictionary];
             [dictDataTable setObject:tableValue forKey:@"columnValue"];
             
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [modelCFFHtml saveGlobalHtmlData:dictDataTable];
+            /*dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 [modelCFFHtml updateGlobalHtmlData:[itemsDict objectForKey:[jsonKey objectAtIndex:3]]];
                 // Some long running task you want on another thread
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [modelCFFHtml saveGlobalHtmlData:dictDataTable];
                 });
-            });
+            });*/
         }
     } @catch (NSException *exception) {
         

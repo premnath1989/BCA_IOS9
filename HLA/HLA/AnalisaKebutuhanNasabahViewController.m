@@ -14,7 +14,8 @@
 #import "AnalisaKebutuhanPendidikanViewController.h"
 #import "ModelCFFHtml.h"
 
-@interface AnalisaKebutuhanNasabahViewController (){
+@interface AnalisaKebutuhanNasabahViewController ()<AnalisaKebutuhanProteksiViewControllerDelegate,AnalisaKebutuhanPensiunViewControllerDelegate,AnalisaKebutuhanWarisanViewControllerDelegate,AnalisaKebutuhanInvestasiViewControllerDelegate,AnalisaKebutuhanPendidikanViewControllerDelegate>{
+    
     AnalisaKebutuhanPensiunViewController *pensiunVC;
     AnalisaKebutuhanWarisanViewController *warisanVC;
     AnalisaKebutuhanProteksiViewController *proteksiVC;
@@ -37,15 +38,25 @@
     UIButton *buttonSelected;
 }
 @synthesize prospectProfileID,cffTransactionID,cffID,cffHeaderSelectedDictionary;
+@synthesize delegate;
 - (void)viewDidLoad {
     [super viewDidLoad];
     modelCFFHtml=[[ModelCFFHtml alloc]init];
     
     pensiunVC = [[AnalisaKebutuhanPensiunViewController alloc]initWithNibName:@"AnalisaKebutuhanPensiunViewController" bundle:nil];
+    pensiunVC.delegate=self;
+    
     warisanVC = [[AnalisaKebutuhanWarisanViewController alloc]initWithNibName:@"AnalisaKebutuhanWarisanViewController" bundle:nil];
+    warisanVC.delegate=self;
+    
     proteksiVC = [[AnalisaKebutuhanProteksiViewController alloc]initWithNibName:@"AnalisaKebutuhanProteksiViewController" bundle:nil];
+    proteksiVC.delegate=self;
+    
     investasiVC = [[AnalisaKebutuhanInvestasiViewController alloc]initWithNibName:@"AnalisaKebutuhanInvestasiViewController" bundle:nil];
+    investasiVC.delegate=self;
+    
     pendidikanVC = [[AnalisaKebutuhanPendidikanViewController alloc]initWithNibName:@"AnalisaKebutuhanPendidikanViewController" bundle:nil];
+    pendidikanVC.delegate=self;
     
     [self actionChangeTabPage:buttonProteksi];
     // Do any additional setup after loading the view from its nib.
@@ -64,6 +75,7 @@
         proteksiVC.cffTransactionID  = cffTransactionID;
         proteksiVC.cffID = cffID;
         proteksiVC.htmlFileName = [[arrayHtml objectAtIndex:0]valueForKey:@"CFFHtmlName"];
+        proteksiVC.cffHeaderSelectedDictionary = [[NSDictionary alloc]initWithDictionary:cffHeaderSelectedDictionary];
         if ([proteksiVC.view isDescendantOfView:childView]){
             [childView bringSubviewToFront:proteksiVC.view];
         }
@@ -78,6 +90,7 @@
         pensiunVC.cffTransactionID  = cffTransactionID;
         pensiunVC.cffID = cffID;
         pensiunVC.htmlFileName = [[arrayHtml objectAtIndex:0]valueForKey:@"CFFHtmlName"];
+        pensiunVC.cffHeaderSelectedDictionary = [[NSDictionary alloc]initWithDictionary:cffHeaderSelectedDictionary];
         if ([pensiunVC.view isDescendantOfView:childView]){
             [childView bringSubviewToFront:pensiunVC.view];
         }
@@ -92,6 +105,7 @@
         pendidikanVC.cffTransactionID  = cffTransactionID;
         pendidikanVC.cffID = cffID;
         pendidikanVC.htmlFileName = [[arrayHtml objectAtIndex:0]valueForKey:@"CFFHtmlName"];
+        pendidikanVC.cffHeaderSelectedDictionary = [[NSDictionary alloc]initWithDictionary:cffHeaderSelectedDictionary];
         if ([pendidikanVC.view isDescendantOfView:childView]){
             [childView bringSubviewToFront:pendidikanVC.view];
         }
@@ -106,6 +120,7 @@
         warisanVC.cffTransactionID  = cffTransactionID;
         warisanVC.cffID = cffID;
         warisanVC.htmlFileName = [[arrayHtml objectAtIndex:0]valueForKey:@"CFFHtmlName"];
+        warisanVC.cffHeaderSelectedDictionary = [[NSDictionary alloc]initWithDictionary:cffHeaderSelectedDictionary];
         if ([warisanVC.view isDescendantOfView:childView]){
             [childView bringSubviewToFront:warisanVC.view];
         }
@@ -120,6 +135,7 @@
         investasiVC.cffTransactionID  = cffTransactionID;
         investasiVC.cffID = cffID;
         investasiVC.htmlFileName = [[arrayHtml objectAtIndex:0]valueForKey:@"CFFHtmlName"];
+        investasiVC.cffHeaderSelectedDictionary = [[NSDictionary alloc]initWithDictionary:cffHeaderSelectedDictionary];
         if ([investasiVC.view isDescendantOfView:childView]){
             [childView bringSubviewToFront:investasiVC.view];
         }
@@ -149,6 +165,22 @@
     }
 }
 
+#pragma mark delegate
+-(void)voidSetAnalisaKebutuhanProteksiBoolValidate:(BOOL)boolValidate{
+    [self actionChangeTabPage:buttonPensiun];
+}
+-(void)voidSetAnalisaKebutuhanPensiunBoolValidate:(BOOL)boolValidate{
+    [self actionChangeTabPage:buttonPendidikan];
+}
+-(void)voidSetAnalisaKebutuhanPendidikanBoolValidate:(BOOL)boolValidate{
+    [self actionChangeTabPage:buttonWarisan];
+}
+-(void)voidSetAnalisaKebutuhanWarisanBoolValidate:(BOOL)boolValidate{
+    [self actionChangeTabPage:buttonInvestasi];
+}
+-(void)voidSetAnalisaKebutuhanInvestasiBoolValidate:(BOOL)boolValidate{
+    [delegate voidSetAnalisaKebutuhanNasabahBoolValidate:true];
+}
 
 /*
 #pragma mark - Navigation

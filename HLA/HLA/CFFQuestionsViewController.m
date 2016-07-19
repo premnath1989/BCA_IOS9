@@ -16,10 +16,12 @@
 #import "ProspectProfile.h"
 #import "ModelProspectProfile.h"
 #import "ModelCFFHtml.h"
+#import "ModelCFFAnswers.h"
 
-@interface CFFQuestionsViewController ()<PernyataanNasabahViewControllerDelegate>{
+@interface CFFQuestionsViewController ()<PernyataanNasabahViewControllerDelegate,AreaPotensialDiskusiViewControllerDelegate,ProfilResikoViewControllerDelegate,AnalisaKebutuhanNasabahViewControllerDelegate>{
     ModelProspectProfile* modelProspectProfile;
     ModelCFFHtml* modelCFFHtml;
+    ModelCFFAnswers* modelCFFAnswers;
 }
 
 @end
@@ -37,6 +39,17 @@
 
     NSMutableArray *NumberListOfSubMenu;
     NSMutableArray *ListOfSubMenu;
+    
+    BOOL boolDataNasabah;
+    BOOL boolAreaPotensial;
+    BOOL boolProfileRisk;
+    BOOL boolAnalisaKebutuhanNasabah;
+    BOOL boolProteksi;
+    BOOL boolPensiun;
+    BOOL boolPendidikan;
+    BOOL boolWarisan;
+    BOOL boolInvestasi;
+    BOOL boolPernyataanNasabah;
 }
 @synthesize prospectProfileID,cffTransactionID,cffID,cffHeaderSelectedDictionary;
 
@@ -45,27 +58,47 @@
     NSMutableArray *ProspectTableData = [modelProspectProfile searchProspectProfileByID:[prospectProfileID intValue]];
     pp = [ProspectTableData objectAtIndex:0];
     [self.navigationItem setTitle:[NSString stringWithFormat:@"Customer Fact Find Untuk %@",pp.ProspectName]];
+    
+    [self setBooleanValidationValue];
+    [myTableView reloadData];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     modelProspectProfile=[[ModelProspectProfile alloc]init];
     modelCFFHtml=[[ModelCFFHtml alloc]init];
+    modelCFFAnswers=[[ModelCFFAnswers alloc]init];
     
     dataNasabahVC = [[DataNasabahViewController alloc]initWithNibName:@"DataNasabahViewController" bundle:nil];
+    
     areaPotensialDiskusiVC = [[AreaPotensialDiskusiViewController alloc]initWithNibName:@"AreaPotensialDiskusiViewController" bundle:nil];
+    areaPotensialDiskusiVC.delegate = self;
+    
     profilResikoVC = [[ProfilResikoViewController alloc]initWithNibName:@"ProfilResikoViewController" bundle:nil];
+    profilResikoVC.delegate = self;
+    
     analisaKebutuhanNasabahVC = [[AnalisaKebutuhanNasabahViewController alloc]initWithNibName:@"AnalisaKebutuhanNasabahViewController" bundle:nil];
+    analisaKebutuhanNasabahVC.delegate=self;
+    
     pernyataanNasabahVC = [[PernyataanNasabahViewController alloc]initWithNibName:@"PernyataanNasabahViewController" bundle:nil];
     pernyataanNasabahVC.delegate = self;
     
     NumberListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"1", @"2", @"3", @"4",@"5", nil];
     ListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"Data Nasabah", @"Area Potensial Untuk Diskusi", @"Profil Resiko Nasabah", @"Analisa Kebutuhan Nasabah",@"Pernyataan Nasabah", nil];
     
+    boolDataNasabah = true;
+    boolAreaPotensial = false;
+    boolProfileRisk = false;
+    boolAnalisaKebutuhanNasabah = true;
+    boolPernyataanNasabah = false;
+    
     [self loadDataNasabahView];
     [self voidCreateRightBarButton];
     // Do any additional setup after loading the view from its nib.
 }
+
+
+
 
 -(void)voidCreateRightBarButton{
     rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Simpan" style:UIBarButtonItemStylePlain target:self
@@ -101,7 +134,7 @@
     [areaPotensialDiskusiVC voidDoneAreaPotential];
 }
 -(void)voidProfileRiskDoneButton:(UIBarButtonItem *)sender{
-    //[pernyataanNasabahVC voidDoneCFFData];
+    [profilResikoVC voidDoneProfileRisk];
 }
 -(void)voidAnalisaKebutuhanNasabahDoneButton:(UIBarButtonItem *)sender{
     [analisaKebutuhanNasabahVC voidDoneAnalisaKebutuhanNasabah];
@@ -223,6 +256,42 @@
     }
 }
 
+-(bool)getValidation:(int)CFFTransactionID CFFSection:(NSString *)stringCFFSection{
+    int countReturn;
+    countReturn = [modelCFFAnswers getCFFAnswersCount:CFFTransactionID CFFSection:stringCFFSection];
+    if (countReturn>0) {
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+-(void)setBooleanValidationValue{
+    boolDataNasabah=true;
+    boolAreaPotensial = [self getValidation:[[cffHeaderSelectedDictionary valueForKey:@"CFFTransactionID"] intValue] CFFSection:@"PD"];
+    boolProfileRisk = [self getValidation:[[cffHeaderSelectedDictionary valueForKey:@"CFFTransactionID"] intValue] CFFSection:@"CR"];
+    
+    boolProteksi = [self getValidation:[[cffHeaderSelectedDictionary valueForKey:@"CFFTransactionID"] intValue] CFFSection:@"PRT"];
+    boolPensiun = [self getValidation:[[cffHeaderSelectedDictionary valueForKey:@"CFFTransactionID"] intValue] CFFSection:@"PSN"];
+    boolPendidikan = [self getValidation:[[cffHeaderSelectedDictionary valueForKey:@"CFFTransactionID"] intValue] CFFSection:@"PND"];
+    boolWarisan = [self getValidation:[[cffHeaderSelectedDictionary valueForKey:@"CFFTransactionID"] intValue] CFFSection:@"WRS"];
+    boolInvestasi = [self getValidation:[[cffHeaderSelectedDictionary valueForKey:@"CFFTransactionID"] intValue] CFFSection:@"INV"];
+    
+    if ((boolProteksi)||(boolInvestasi)||(boolPensiun)||(boolPendidikan)||(boolWarisan)){
+        boolAnalisaKebutuhanNasabah=true;
+    }
+    else{
+        boolAnalisaKebutuhanNasabah=false;
+    }
+    
+    if ((boolAreaPotensial)&&(boolProfileRisk)){
+        boolPernyataanNasabah=true;
+    }
+    else{
+        boolPernyataanNasabah=false;
+    }
+}
 
 #pragma mark - table view
 
@@ -259,6 +328,7 @@
 {
     static NSString *CellIdentifier = @"Cell";
     SIMenuTableViewCell *cell = (SIMenuTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UIColor *selectedColor = [UIColor colorWithRed:0/255.0f green:102.0f/255.0f blue:179.0f/255.0f alpha:1];
     if (cell == nil) {
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SIMenuTableViewCell" owner:self options:nil];
         cell = [nib objectAtIndex:0];
@@ -277,6 +347,68 @@
     [cell.labelDesc setText:[ListOfSubMenu objectAtIndex:indexPath.row]];
     [cell.labelWide setText:@""];
     
+    if (boolDataNasabah){
+        if (indexPath.row == 0){
+            [cell setBackgroundColor:selectedColor];
+        }
+        else{
+        
+        }
+    }
+    if (boolAreaPotensial){
+        if (indexPath.row == 1){
+            [cell setBackgroundColor:selectedColor];
+        }
+        else if (indexPath.row == 2){
+            [cell setUserInteractionEnabled:true];
+        }
+        else{
+            
+        }
+    }
+    else{
+        if (indexPath.row == 2){
+            [cell setUserInteractionEnabled:false];
+        }
+        else{
+            
+        }
+    }
+    
+    if (boolProfileRisk){
+        if (indexPath.row == 2){
+            [cell setBackgroundColor:selectedColor];
+        }
+        else{
+            
+        }
+    }
+    if (boolAnalisaKebutuhanNasabah){
+        if (indexPath.row == 3){
+            [cell setBackgroundColor:selectedColor];
+        }
+        else{
+            
+        }
+    }
+    if (boolPernyataanNasabah){
+        if (indexPath.row == 4){
+            //[cell setBackgroundColor:selectedColor];
+            [cell setUserInteractionEnabled:true];
+        }
+        else{
+            
+        }
+    }
+    else{
+        if (indexPath.row == 4){
+            [cell setUserInteractionEnabled:false];
+        }
+        else{
+        
+        }
+    }
+    
     [cell.button1 setEnabled:false];
     [cell.button2 setEnabled:false];
     [cell.button3 setEnabled:false];
@@ -287,6 +419,29 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self showDetailsForIndexPath:indexPath];
+}
+
+#pragma mark BOOL setter
+-(void)voidSetAreaPotentialBoolValidate:(BOOL)boolValidate{
+    [self setBooleanValidationValue];
+    [myTableView reloadData];
+    [self tableView:myTableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
+    [myTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
+}
+
+-(void)voidSetProfileRiskBoolValidate:(BOOL)boolValidate{
+    [self setBooleanValidationValue];
+    [myTableView reloadData];
+    [self tableView:myTableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
+    [myTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
+}
+
+-(void)voidSetAnalisaKebutuhanNasabahBoolValidate:(BOOL)boolValidate{
+    [self setBooleanValidationValue];
+    [myTableView reloadData];
+    [self tableView:myTableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:4 inSection:0]];
+    [myTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:4 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
+
 }
 
 #pragma mark delegate

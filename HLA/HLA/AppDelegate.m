@@ -5,6 +5,8 @@
 //  Created by Md. Nazmus Saadat on 9/26/12.
 //  Copyright (c) 2012 InfoConnect Sdn Bhd. All rights reserved.
 //
+#define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0) //1
+#define kLatestKivaLoansURL [NSURL URLWithString:@"http://mposws.azurewebsites.net/Service2.svc/getAllData"] //2
 
 #import "AppDelegate.h"
 #import "ClearData.h"
@@ -13,6 +15,7 @@
 #import "Login.h"
 #import "CFFListingViewController.h"
 #import <CoreData/CoreData.h>
+#import "CFFAPIController.h"
 
 @implementation AppDelegate
 @synthesize indexNo;
@@ -63,7 +66,8 @@ NSString *uatAgentCode;
     ExitIndex = 4;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidTimeout:) name:kApplicationDidTimeoutNotification object:nil];
-
+    [self getHTMLDataTable];
+    [self getCFFHTMLFile];
     [self copyJqueryLibstoDir];
     
 #ifdef UAT_BUILD
@@ -210,6 +214,43 @@ NSString *uatAgentCode;
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
             abort();
         }
+    }
+}
+
+#pragma mark gethtml table
+-(void)getHTMLDataTable{
+    CFFAPIController* cffAPIController;
+    cffAPIController = [[CFFAPIController alloc]init];
+    
+    NSArray* arrayJSONKey = [[NSArray alloc]initWithObjects:@"CFFId",@"FileName",@"Status",@"CFFSection",@"FolderName", nil];
+    NSArray* tableColumn= [[NSArray alloc]initWithObjects:@"CFFID",@"CFFHtmlName",@"CFFHtmlStatus",@"CFFHtmlSection", nil];
+    NSDictionary *dictCFFTable = [[NSDictionary alloc]initWithObjectsAndKeys:@"CFFHtml",@"tableName",tableColumn,@"columnName", nil];
+    
+    [cffAPIController apiCallHtmlTable:@"http://mposws.azurewebsites.net/Service2.svc/getAllData" JSONKey:arrayJSONKey TableDictionary:dictCFFTable];
+}
+
+-(void)getCFFHTMLFile{
+    dispatch_async(kBgQueue, ^{
+        NSData* data = [NSData dataWithContentsOfURL:
+                        kLatestKivaLoansURL];
+        [self performSelectorOnMainThread:@selector(createHTMLFile:)
+                               withObject:data waitUntilDone:YES];
+    });
+}
+
+-(void)createHTMLFile:(NSData *)responseData{
+    CFFAPIController* cffAPIController;
+    cffAPIController = [[CFFAPIController alloc]init];
+    NSError* error;
+    NSDictionary* json = [NSJSONSerialization
+                          JSONObjectWithData:responseData //1
+                          
+                          options:kNilOptions
+                          error:&error];
+    
+    NSArray* arrayFileName = [[json objectForKey:@"d"] valueForKey:@"FileName"]; //2
+    for (int i=0;i<[arrayFileName count];i++){
+    [cffAPIController apiCallCrateHtmlFile:[NSString stringWithFormat:@"http://mposws.azurewebsites.net/Service2.svc/GetHtmlFile?fileName=%@",[arrayFileName objectAtIndex:i]] RootPathFolder:@"CFFfolder"];
     }
 }
 

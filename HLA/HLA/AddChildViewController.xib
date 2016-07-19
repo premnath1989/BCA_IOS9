@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -43,6 +44,7 @@
                 <outlet property="scrollAddChild" destination="g1i-uE-2SR" id="9Os-1X-Tu5"/>
                 <outlet property="segGender" destination="QdF-Xj-i0Z" id="yBA-w5-90e"/>
                 <outlet property="segSmoker" destination="Bwj-zZ-54P" id="zYH-gE-c9l"/>
+                <outlet property="txtAge" destination="TBi-TB-T6p" id="xkn-db-AHa"/>
                 <outlet property="txtName" destination="7oH-Fg-kv4" id="BaS-gD-b4n"/>
                 <outlet property="txtOtherIDType" destination="fjV-L4-5cp" id="hO3-yO-YCL"/>
                 <outlet property="txtYearsInsured" destination="yzf-qR-8TO" id="3xn-6u-4s6"/>
@@ -106,6 +108,9 @@
                             <color key="textColor" red="0.34509803919999998" green="0.34901960780000002" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="wW8-cc-AIy"/>
+                            </connections>
                         </textField>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="16" id="SmY-wz-vfg">
                             <rect key="frame" x="194" y="77" width="207" height="30"/>
@@ -188,7 +193,7 @@
                             <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                         </textField>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Umur 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ied-As-1Z7">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Umur" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ied-As-1Z7">
                             <rect key="frame" x="423" y="76" width="120" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
@@ -302,12 +307,12 @@
                                 <action selector="actionNationality:" destination="-1" eventType="touchUpInside" id="SqT-Ny-ewk"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Xpo-Rw-Z2L">
-                            <rect key="frame" x="194" y="228" width="207" height="30"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Xpo-Rw-Z2L">
+                            <rect key="frame" x="202" y="228" width="207" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
-                            <state key="normal" image="Expand Arrow.png">
+                            <state key="normal">
                                 <color key="titleColor" red="0.34509803919999998" green="0.34901960780000002" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                         </button>
