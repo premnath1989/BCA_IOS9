@@ -30,6 +30,7 @@
 }
 
 -(void)updateDatabase:(NSString*)dbName;
--(void)hardUpdateDatabase:(NSString*)dbName;
+-(void)updateDatabaseUseNewDB:(NSString*)dbName;
+-(BOOL)hardUpdateDatabase:(NSString*)dbName;
 
 @end

@@ -69,7 +69,7 @@
                     [tempTablesDict setValue:tempColumnDict forKey:tableName];
             }else{
                 
-                //insert new column into tempDir
+                //insert new table into tempDir
                 NSString *sqlTable = [NSString stringWithFormat:@"CREATE TABLE %@ (",tableName];
                 NSString *sqlIndex = @"";
                 if (sqlite3_open([tempDir UTF8String], &database) == SQLITE_OK) {
@@ -118,6 +118,40 @@
             }
         }
         
+        //we check the tempTablesDict
+        //if the existing table has different schema from the new one.
+        //we rename the old table, move the data into the new one. then drop the old table.
+        
+//        BOOL tableDiff = FALSE;
+//        if (sqlite3_open([tempDir UTF8String], &database) == SQLITE_OK) {
+//            for(NSString *tableName in [tempTablesDict allKeys]){
+//                //we construct query from temp dictionary
+//                for(NSString *columnName in [tempTablesDict valueForKey:tableName]){
+//                    ColumnDetails *newColumnType = (ColumnDetails *)[[tempTablesDict valueForKey:tableName]valueForKey:columnName];
+//                    ColumnDetails *oldColumnType = (ColumnDetails *)[[oldTablesDict valueForKey:tableName]valueForKey:columnName];
+//                    if([newColumnType.PK caseInsensitiveCompare:oldColumnType.PK] != NSOrderedSame)
+//                        tableDiff = TRUE;
+//                }
+//                //we create sql for table migration here
+//                //after we sure that the old table schema is different with the new one
+//                if(tableDiff){
+//                    
+//                    NSString *sql = [NSString stringWithFormat:@"ALTER TABLE %@ RENAME TO %@_",
+//                                     tableName, tableName];
+//                    sqlite3_stmt *statement;
+//                    if (sqlite3_prepare_v2(database, [sql UTF8String], -1, &statement, NULL) == SQLITE_OK) {
+//                        sqlite3_step(statement);
+//                    }
+//                    sqlite3_finalize(statement);
+//                }
+//                
+//                
+//                tableDiff = FALSE;
+//            }
+//        }
+
+        
+        
         sqlite3_close(database);
         [self moveDBFromTemp:tempDir ToDefault:defaultDBPath];
         [self updateDBVersion:defaultDBPath NewVersion:dbVersion Remark:@""];
@@ -128,7 +162,52 @@
     }
 }
 
--(void)hardUpdateDatabase:(NSString*)dbName
+//implementation of update DB
+//we use the new DB and insert the data from the older DB.
+-(void)updateDatabaseUseNewDB:(NSString*)dbName{
+    if([self hardUpdateDatabase:dbName]){
+    
+        defaultDBPath = [[dirPaths objectAtIndex:0] stringByAppendingPathComponent:dbName];
+        
+        NSString *dbVersion = [NSString stringWithFormat:
+                               @"%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"dbVersion"]];
+        NSLog(@"dbversion New: %@",dbVersion);
+        NSString *bundleDBVersion = @"0.0";
+        sqlite3 *database;
+        if (sqlite3_open([defaultDBPath UTF8String], &database) == SQLITE_OK) {
+            bundleDBVersion = [self getDBVersionNumber:database];
+        }
+        sqlite3_close(database);
+            
+        NSMutableDictionary *oldTablesDict =  [self getTablesName:tempDir];
+        NSMutableDictionary *newTablesDict =  [self getTablesName:defaultDBPath];
+        char *error;
+        for(NSString *tableName in [oldTablesDict allKeys]){
+            if([newTablesDict valueForKey:tableName] != nil){
+                if(sqlite3_open([defaultDBPath UTF8String], &database) == SQLITE_OK){
+                    NSString *sql = [NSString stringWithFormat:@"ATTACH \"%@\" AS defDB",
+                                     tempDir];
+                    sqlite3_exec(database, [sql UTF8String], NULL, NULL, &error);
+                    if (error) {
+                        NSLog(@"Error to Attach = %s",error);
+                    }
+                    
+                    sql = [NSString stringWithFormat:
+                           @"INSERT INTO %@ SELECT * FROM defDB.%@;",
+                           tableName, tableName];
+                    sqlite3_exec(database, [sql UTF8String], NULL, NULL,&error);
+                    if (error) {
+                        NSLog(@"Error to insert = %s",error);
+                    }
+                }
+                sqlite3_close(database);
+            }
+        }
+        [self updateDBVersion:defaultDBPath NewVersion:dbVersion Remark:@""];
+    }
+}
+
+-(BOOL)hardUpdateDatabase:(NSString*)dbName
 {
     tempDir = [NSTemporaryDirectory() stringByAppendingPathComponent:dbName];
     dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -151,7 +230,9 @@
         loginDB = [[LoginDBManagement alloc]init];
         [loginDB makeDBCopy];
         [self updateDBVersion:defaultDBPath NewVersion:dbVersion Remark:@""];
+        return TRUE;
     }
+    return FALSE;
 }
 
 - (int)DbSchema{
