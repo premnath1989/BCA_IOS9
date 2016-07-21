@@ -47,6 +47,30 @@
     return count;
 }
 
+-(int)voidGetDuplicateRowID:(NSDictionary *)dictionaryCFFAnswers{
+    int IndexNo;
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select IndexNo from CFFAnswers where CustomerID=\"%@\" and CFFID=\"%@\" and CFFTransactionID=\"%@\" and elementID=\"%@\" and CFFHtmlID=\"%@\"",
+        [dictionaryCFFAnswers valueForKey:@"CustomerID"],
+        [dictionaryCFFAnswers valueForKey:@"CFFID"],
+        [dictionaryCFFAnswers valueForKey:@"CFFTransactionID"],
+        [dictionaryCFFAnswers valueForKey:@"elementID"],
+        [dictionaryCFFAnswers valueForKey:@"CFFHtmlID"]]];
+    
+    while ([s next]) {
+        IndexNo = [s intForColumn:@"IndexNo"];
+    }
+    
+    [results close];
+    [database close];
+    return IndexNo;
+}
+
 
 
 @end

@@ -518,6 +518,25 @@
 
 
 #pragma mark - delegate
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
+    [ClientProfile setObject:@"YES" forKey:@"isNew"];
+    //NSUInteger newLength = [textField.text length] + [string length] - range.length;
+    if (textField == textName)
+    {
+        NSUInteger newLength = [textField.text length] + [string length] - range.length;
+        return (newLength <= 40);
+    }
+    if (textField == textBranch)
+    {
+        NSUInteger newLength = [textField.text length] + [string length] - range.length;
+        return (newLength <= 20);
+    }
+    
+    return YES;
+}
+
 -(void)CloseWindow
 {
     [self resignFirstResponder];
@@ -527,7 +546,34 @@
 
 -(void)DateSelected:(NSString *)strDate :(NSString *)dbDate
 {
-    [outletDate setTitle:strDate forState:UIControlStateNormal];
+    NSDateFormatter* df = [[NSDateFormatter alloc] init];
+    [df setDateFormat:@"dd/MM/yyyy"];
+    
+    NSDate *d = [NSDate date];
+    NSDate* d2 = [df dateFromString:strDate];
+    
+    NSDateFormatter *dateformatter;
+    NSString *dateString;
+    NSString *clientDateString;
+    
+    dateformatter = [[NSDateFormatter alloc] init];
+    [dateformatter setDateFormat:@"dd/MM/yyyy"];
+    
+    NSDateFormatter* clientDateFormmater = [[NSDateFormatter alloc] init];
+    [clientDateFormmater setDateFormat:@"yyyy-MM-dd"];
+    
+    dateString = [dateformatter stringFromDate:[NSDate date]];
+    clientDateString = [clientDateFormmater stringFromDate:d2];
+    
+    if ([d compare:d2] == NSOrderedAscending){
+        NSString *validationTanggalLahirFuture=@"Tanggal lahir tidak dapat lebih besar dari tanggal hari ini";
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
+                                                        message:validationTanggalLahirFuture delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil];
+        [alert show];
+    }
+    else{
+        [outletDate setTitle:strDate forState:UIControlStateNormal];
+    }
     //DBDateFrom = strDate;
     //DBDateFrom2 = [self convertToDateFormat:strDate];
 }

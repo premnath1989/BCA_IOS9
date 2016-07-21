@@ -69,6 +69,26 @@
     [database close];
 }
 
+//dataTable array = 1.tableColumn 2.tableName 3.
+-(int)voidGetDuplicateRowID:(NSString *)stringQuery ColumnReturn:(NSString *)stringColumn{
+    int IndexNo;
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"%@",stringQuery]];
+    
+    while ([s next]) {
+        IndexNo = [s intForColumn:stringColumn];
+    }
+    
+    [results close];
+    [database close];
+    return IndexNo;
+}
+
 
 -(void)updateHtmlData:(NSDictionary *)dictHtmlData{
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];

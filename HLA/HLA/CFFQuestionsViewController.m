@@ -101,7 +101,7 @@
 
 
 -(void)voidCreateRightBarButton{
-    rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Simpan" style:UIBarButtonItemStylePlain target:self
+    rightButton = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:self
                                                                   action:@selector(actionRightBarButtonPressed:)];
     self.navigationItem.rightBarButtonItem = rightButton;
 }
@@ -228,7 +228,7 @@
     switch (indexPath.row) {
         case 0:
             [self loadDataNasabahView];
-            [rightButton setTitle:@"Simpan"];
+            [rightButton setTitle:@""];
             [rightButton setAction:@selector(voidDataNasabahDoneButton:)];
             break;
         case 1:

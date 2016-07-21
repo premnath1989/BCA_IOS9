@@ -136,6 +136,15 @@
                 NSString* stringSection=[NSString stringWithFormat:@"\"%@\"",[item objectForKey:[jsonKey objectAtIndex:3]]];
                 NSArray* tableValue= [[NSArray alloc]initWithObjects:stringID,stringFileName,stringStatus,stringSection, nil];
                 
+                //check duplicate value
+                NSString* query=[NSString stringWithFormat:@"select CFFHtmlID from CFFHtml where CFFID=%@ and CFFHtmlName=%@ and CFFHtmlStatus=%@ and CFFHtmlSection=%@",stringID,stringFileName,stringStatus,stringSection];
+                NSString* columnReturn = @"CFFHtmlID";
+                
+                int duplicateRow = [modelCFFHtml voidGetDuplicateRowID:query ColumnReturn:columnReturn];
+                if (duplicateRow>0){
+                    
+                }
+                
                 NSMutableDictionary* dictDataTable = [[NSMutableDictionary alloc]initWithDictionary:tableDictionary];
                 [dictDataTable setObject:tableValue forKey:@"columnValue"];
                 

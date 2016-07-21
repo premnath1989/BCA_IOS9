@@ -235,6 +235,9 @@
                                 <color key="textColor" red="0.34509803919999998" green="0.34901960780000002" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                                <connections>
+                                    <outlet property="delegate" destination="xic-73-QET" id="Lru-vh-xKV"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="16" clearButtonMode="whileEditing" id="7E9-HA-gnx">
                                 <rect key="frame" x="624" y="15" width="285" height="30"/>
@@ -242,6 +245,9 @@
                                 <color key="textColor" red="0.34509803919999998" green="0.34901960780000002" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                                <connections>
+                                    <outlet property="delegate" destination="xic-73-QET" id="LfO-NJ-f9Y"/>
+                                </connections>
                             </textField>
                             <view contentMode="scaleToFill" id="yxa-Bf-FL4">
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="20"/>
