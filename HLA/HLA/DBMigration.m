@@ -171,7 +171,7 @@
         
         NSString *dbVersion = [NSString stringWithFormat:
                                @"%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"dbVersion"]];
-        NSLog(@"dbversion New: %@",dbVersion);
+        NSLog(@"dbName = %@, dbversion New: %@",dbName, dbVersion);
         NSString *bundleDBVersion = @"0.0";
         sqlite3 *database;
         if (sqlite3_open([defaultDBPath UTF8String], &database) == SQLITE_OK) {
@@ -216,7 +216,7 @@
     // compare database version with the version saved in the plist
     NSString *dbVersion = [NSString stringWithFormat:
                            @"%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"dbVersion"]];
-    NSLog(@"dbversion New: %@",dbVersion);
+    NSLog(@"dbName = %@, dbversion New: %@",dbName, dbVersion);
     NSString *bundleDBVersion = @"0.0";
     sqlite3 *database;
     if (sqlite3_open([defaultDBPath UTF8String], &database) == SQLITE_OK) {

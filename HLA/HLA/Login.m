@@ -45,6 +45,7 @@ NSString *ProceedStatus = @"";
 
 @implementation Login
 @synthesize outletReset;
+@synthesize outletReport;
 @synthesize scrollViewLogin;
 @synthesize txtUsername;
 @synthesize txtPassword;
@@ -62,14 +63,7 @@ NSString *ProceedStatus = @"";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    loginDB = [[LoginDBManagement alloc]init];
-    [loginDB makeDBCopy];
-    
-    DBMigration *migration = [[DBMigration alloc]init];
-    [migration updateDatabase:@"hladb.sqlite"];
-    //[migration updateDatabaseUseNewDB:@"hladb.sqlite"];
-    [migration hardUpdateDatabase:@"BCA_Rates.sqlite"];
+    [self DBInitialized];
     
     ONLINE_PROCESS = FALSE;
     OFFLINE_PROCESS = FALSE;
@@ -122,6 +116,16 @@ NSString *ProceedStatus = @"";
         serverSegmented.selectedSegmentIndex = 0;
         delegate.serverUAT = TRUE;
     }
+}
+
+- (void)DBInitialized{
+    loginDB = [[LoginDBManagement alloc]init];
+    [loginDB makeDBCopy];
+    
+    DBMigration *migration = [[DBMigration alloc]init];
+//    [migration updateDatabase:@"hladb.sqlite"];
+    [migration updateDatabaseUseNewDB:@"hladb.sqlite"];
+    [migration hardUpdateDatabase:@"BCA_Rates.sqlite"];
 }
 
 
@@ -438,6 +442,59 @@ static NSString *labelVers;
         }
     }
 }
+
+- (IBAction)btnReport:(id)sender {
+    NSMutableDictionary *agentDetails = [loginDB getAgentDetails];
+    //compose the agent Details into NSString
+    NSString *agentDetailsStr = @" ";
+    for(NSString *key in agentDetails.allKeys){
+        agentDetailsStr = [agentDetailsStr stringByAppendingString:key];
+        agentDetailsStr = [agentDetailsStr stringByAppendingString:[NSString stringWithFormat:@"= %@ \n ",[agentDetails valueForKey:key]]];
+    }
+    
+    NSString *dbVersion = [NSString stringWithFormat:
+                           @"%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"dbVersion"]];
+    NSString *BCAversion= [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    NSString *build= [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+    NSString *iosVersion = [[UIDevice currentDevice]systemVersion];
+    
+    NSString *ErrorLog = [NSString stringWithFormat:@"%@APP Version : %@ %@ \n iOS Version : %@ \n DB Version : %@ \n Data Version : ", agentDetailsStr,BCAversion, build, iosVersion, dbVersion];
+    [self writeStringToFile:ErrorLog];
+    [self sendByEmail:agentDetails];
+    
+    
+}
+
+- (void)sendByEmail:(NSMutableDictionary*)agentDetails{
+    NSString* filePath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString* fileName = @"errorlog.txt";
+    NSString* fileAtPath = [filePath stringByAppendingPathComponent:fileName];
+    
+    MFMailComposeViewController *mc = [[MFMailComposeViewController alloc]init];
+    mc.mailComposeDelegate = self;
+    [mc addAttachmentData:[NSData dataWithContentsOfFile:fileAtPath] mimeType:@"text/csv" fileName:fileName];
+    [mc setSubject:[NSString stringWithFormat:@"Error Log of Agent %@", [agentDetails valueForKey:@"AgentCode"]]];
+    [self presentViewController:mc animated:YES completion:nil];
+}
+
+- (void)writeStringToFile:(NSString*)aString {
+    
+    // Build the path, and create if needed.
+    NSString* filePath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString* fileName = @"errorlog.txt";
+    NSString* fileAtPath = [filePath stringByAppendingPathComponent:fileName];
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:fileAtPath]) {
+        [[NSFileManager defaultManager] createFileAtPath:fileAtPath contents:nil attributes:nil];
+    }else{
+        [[NSFileManager defaultManager] removeItemAtPath:fileAtPath error:NULL];
+        [[NSFileManager defaultManager] createFileAtPath:fileAtPath contents:nil attributes:nil];
+    }
+    
+    // The main act...
+    [[aString dataUsingEncoding:NSUTF8StringEncoding] writeToFile:fileAtPath atomically:NO];
+}
+
 
 - (void)FirstTimeAlert:(NSString *)title{
     
