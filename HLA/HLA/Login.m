@@ -472,9 +472,16 @@ static NSString *labelVers;
     
     MFMailComposeViewController *mc = [[MFMailComposeViewController alloc]init];
     mc.mailComposeDelegate = self;
+    [mc setToRecipients:[NSArray arrayWithObject: @"sales_support@bcalife.co.id"]];
     [mc addAttachmentData:[NSData dataWithContentsOfFile:fileAtPath] mimeType:@"text/csv" fileName:fileName];
     [mc setSubject:[NSString stringWithFormat:@"Error Log of Agent %@", [agentDetails valueForKey:@"AgentCode"]]];
     [self presentViewController:mc animated:YES completion:nil];
+}
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error{
+    // NEVER REACHES THIS PLACE
+    [self dismissModalViewControllerAnimated:YES];
+    NSLog (@"mail finished");
 }
 
 - (void)writeStringToFile:(NSString*)aString {
