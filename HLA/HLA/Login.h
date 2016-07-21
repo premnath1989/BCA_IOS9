@@ -16,6 +16,7 @@
 #import "WebServiceUtilities.h"
 #import "SpinnerUtilities.h"
 #import "AppDisclaimer.h"
+#import <MessageUI/MFMailComposeViewController.h>
 
 @protocol LoginDelegate
 - (void)Dismiss: (NSString *)ViewToBePresented;
@@ -40,7 +41,7 @@ static NSString* APP_TYPE_HLA_FAST = @"HLA_FAST";
 static NSString* DATE_FORMAT = @"yyyy-MM-dd";
 
 
-@interface Login : UIViewController<NSXMLParserDelegate, UITextFieldDelegate, AgentWSSoapBindingResponseDelegate,UIAlertViewDelegate>
+@interface Login : UIViewController<NSXMLParserDelegate, UITextFieldDelegate, AgentWSSoapBindingResponseDelegate,UIAlertViewDelegate, MFMailComposeViewControllerDelegate>
 {
     IBOutlet UILabel *labelUDID;
     
@@ -112,12 +113,14 @@ static NSString* DATE_FORMAT = @"yyyy-MM-dd";
 @property(strong) NSString *elementName;
 
 - (IBAction)btnLogin:(id)sender;
-@property (weak, nonatomic) IBOutlet UIButton *outletLogin;
+- (IBAction)btnReset:(id)sender;
+- (IBAction)btnReport:(id)sender;
 
 -(void)keyboardDidShow:(NSNotificationCenter *)notification;
 -(void)keyboardDidHide:(NSNotificationCenter *)notification;
-- (IBAction)btnReset:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *outletReset;
+@property (weak, nonatomic) IBOutlet UIButton *outletReport;
+@property (weak, nonatomic) IBOutlet UIButton *outletLogin;
 @property (weak, nonatomic) IBOutlet UILabel *uatDeviceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *uatAgentStatus;
 
@@ -127,7 +130,6 @@ static NSString* DATE_FORMAT = @"yyyy-MM-dd";
 
 +(NSString *)getLabelVersion;
 
--(void)doOnceADayCheck:(BOOL)debugF;
 +(bool)forSMPD_Acturial:(NSString*) password;
 +(void)setFirstDevice;
 - (IBAction)passLogin:(id)sender;
