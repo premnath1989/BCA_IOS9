@@ -14,4 +14,5 @@
 }
 -(void)deleteCFFAnswerByCFFTransID:(int)cffTransactionID;
 -(int)getCFFAnswersCount:(int)intCFFTransactionID CFFSection:(NSString *)stringCFFSection;
+-(int)voidGetDuplicateRowID:(NSDictionary *)dictionaryCFFAnswers;
 @end

@@ -520,8 +520,15 @@
     dateString = [dateformatter stringFromDate:[NSDate date]];
     clientDateString = [clientDateFormmater stringFromDate:d2];
     
+    int age  = [formatter calculateAge:strDate];
     if ([d compare:d2] == NSOrderedAscending){
         NSString *validationTanggalLahirFuture=@"Tanggal lahir tidak dapat lebih besar dari tanggal hari ini";
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
+                                                        message:validationTanggalLahirFuture delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil];
+        [alert show];
+    }
+    else if (age<16){
+        NSString *validationTanggalLahirFuture=@"Usia tidak boleh kurang dari 16 tahun";
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
                                                         message:validationTanggalLahirFuture delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil];
         [alert show];

@@ -66,8 +66,8 @@ NSString *uatAgentCode;
     ExitIndex = 4;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidTimeout:) name:kApplicationDidTimeoutNotification object:nil];
-    [self getHTMLDataTable];
-    [self getCFFHTMLFile];
+    //[self getHTMLDataTable];
+    //[self getCFFHTMLFile];
     [self copyJqueryLibstoDir];
     
 #ifdef UAT_BUILD
@@ -133,12 +133,14 @@ NSString *uatAgentCode;
     NSString *JMobileJSPath   = [[myLibraryBundle resourcePath] stringByAppendingPathComponent:@"jquery.mobile-1.4.5.min.js"];
     NSString *JMobilecssJSPath   = [[myLibraryBundle resourcePath] stringByAppendingPathComponent:@"jquery.mobile-1.4.5.min.css"];
     NSString *JvalidatePath   = [[myLibraryBundle resourcePath] stringByAppendingPathComponent:@"jquery.validate.min.js"];
+    NSString *JNumberJSPath   = [[myLibraryBundle resourcePath] stringByAppendingPathComponent:@"jquery.number.js"];
     
     [[NSFileManager defaultManager] copyItemAtPath:addJSPath toPath:[fileJqueryLibsPath stringByAppendingPathComponent:@"additional-methods.min.js"] error:NULL];
     [[NSFileManager defaultManager] copyItemAtPath:JqueryPath toPath:[fileJqueryLibsPath stringByAppendingPathComponent:@"jquery-1.11.1.min.js"] error:NULL];
     [[NSFileManager defaultManager] copyItemAtPath:JMobileJSPath toPath:[fileJqueryLibsPath stringByAppendingPathComponent:@"jquery.mobile-1.4.5.min.js"] error:NULL];
     [[NSFileManager defaultManager] copyItemAtPath:JMobilecssJSPath toPath:[fileJqueryLibsPath stringByAppendingPathComponent:@"jquery.mobile-1.4.5.min.css"] error:NULL];
     [[NSFileManager defaultManager] copyItemAtPath:JvalidatePath toPath:[fileJqueryLibsPath stringByAppendingPathComponent:@"jquery.validate.min.js"] error:NULL];
+    [[NSFileManager defaultManager] copyItemAtPath:JNumberJSPath toPath:[fileJqueryLibsPath stringByAppendingPathComponent:@"jquery.number.js"] error:NULL];
 }
 
 #pragma mark - Core Data stack
@@ -218,7 +220,7 @@ NSString *uatAgentCode;
 }
 
 #pragma mark gethtml table
--(void)getHTMLDataTable{
+/*-(void)getHTMLDataTable{
     CFFAPIController* cffAPIController;
     cffAPIController = [[CFFAPIController alloc]init];
     
@@ -252,6 +254,6 @@ NSString *uatAgentCode;
     for (int i=0;i<[arrayFileName count];i++){
     [cffAPIController apiCallCrateHtmlFile:[NSString stringWithFormat:@"http://mposws.azurewebsites.net/Service2.svc/GetHtmlFile?fileName=%@",[arrayFileName objectAtIndex:i]] RootPathFolder:@"CFFfolder"];
     }
-}
+}*/
 
 @end

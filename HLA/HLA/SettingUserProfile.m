@@ -5,6 +5,8 @@
 //  Created by Md. Nazmus Saadat on 11/16/12.
 //  Copyright (c) 2012 InfoConnect Sdn Bhd. All rights reserved.
 //
+#define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0) //1
+#define kLatestKivaLoansURL [NSURL URLWithString:@"http://mposws.azurewebsites.net/Service2.svc/getAllData"] //2
 
 #import "SettingUserProfile.h"
 #import "Login.h"
@@ -19,6 +21,7 @@
 #import "DDXMLElementAdditions.h"
 #import "DDXMLNode.h"
 
+#import "CFFAPIController.h"
 @interface SettingUserProfile ()
 
 @end
@@ -498,7 +501,8 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
                         
                     });
                 });
-                
+                [self getHTMLDataTable];
+                [self getCFFHTMLFile];
             }else if([rateResponse.strStatus caseInsensitiveCompare:@"False"] == NSOrderedSame){
                 [spinnerLoading stopLoadingSpinner];
                 UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Proses Login anda gagal" message:@"" delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
@@ -965,5 +969,40 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
 //}
 
 
+#pragma mark gethtml table
+-(void)getHTMLDataTable{
+    CFFAPIController* cffAPIController;
+    cffAPIController = [[CFFAPIController alloc]init];
+    
+    NSArray* arrayJSONKey = [[NSArray alloc]initWithObjects:@"CFFId",@"FileName",@"Status",@"CFFSection",@"FolderName", nil];
+    NSArray* tableColumn= [[NSArray alloc]initWithObjects:@"CFFID",@"CFFHtmlName",@"CFFHtmlStatus",@"CFFHtmlSection", nil];
+    NSDictionary *dictCFFTable = [[NSDictionary alloc]initWithObjectsAndKeys:@"CFFHtml",@"tableName",tableColumn,@"columnName", nil];
+    
+    [cffAPIController apiCallHtmlTable:@"http://mposws.azurewebsites.net/Service2.svc/getAllData" JSONKey:arrayJSONKey TableDictionary:dictCFFTable];
+}
 
+-(void)getCFFHTMLFile{
+    dispatch_async(kBgQueue, ^{
+        NSData* data = [NSData dataWithContentsOfURL:
+                        kLatestKivaLoansURL];
+        [self performSelectorOnMainThread:@selector(createHTMLFile:)
+                               withObject:data waitUntilDone:YES];
+    });
+}
+
+-(void)createHTMLFile:(NSData *)responseData{
+    CFFAPIController* cffAPIController;
+    cffAPIController = [[CFFAPIController alloc]init];
+    NSError* error;
+    NSDictionary* json = [NSJSONSerialization
+                          JSONObjectWithData:responseData //1
+                          
+                          options:kNilOptions
+                          error:&error];
+    
+    NSArray* arrayFileName = [[json objectForKey:@"d"] valueForKey:@"FileName"]; //2
+    for (int i=0;i<[arrayFileName count];i++){
+        [cffAPIController apiCallCrateHtmlFile:[NSString stringWithFormat:@"http://mposws.azurewebsites.net/Service2.svc/GetHtmlFile?fileName=%@",[arrayFileName objectAtIndex:i]] RootPathFolder:@"CFFfolder"];
+    }
+}
 @end

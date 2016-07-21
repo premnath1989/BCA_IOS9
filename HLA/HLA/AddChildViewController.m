@@ -545,6 +545,7 @@
     clientDateString = [clientDateFormmater stringFromDate:d2];
     
     int differenceDay = [formatter calculateDifferenceDay:strDate];
+    int age  = [formatter calculateAge:strDate];
     if ([d compare:d2] == NSOrderedAscending){
         NSString *validationTanggalLahirFuture=@"Tanggal lahir tidak dapat lebih besar dari tanggal hari ini";
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
@@ -553,6 +554,12 @@
     }
     else if (differenceDay<180){
         NSString *validationTanggalLahirFuture=@"Usia tidak boleh kurang dari 180 hari";
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
+                                                        message:validationTanggalLahirFuture delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil];
+        [alert show];
+    }
+    else if (age>99){
+        NSString *validationTanggalLahirFuture=@"Usia tidak boleh lebih dari 99 tahun";
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" "
                                                         message:validationTanggalLahirFuture delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:Nil, nil];
         [alert show];

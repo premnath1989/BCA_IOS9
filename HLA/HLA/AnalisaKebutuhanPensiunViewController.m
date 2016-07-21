@@ -9,10 +9,11 @@
 #import "AnalisaKebutuhanPensiunViewController.h"
 #import "ModelCFFTransaction.h"
 #import "ModelCFFHtml.h"
-
+#import "ModelCFFAnswers.h"
 @interface AnalisaKebutuhanPensiunViewController (){
     ModelCFFTransaction* modelCFFTransaction;
     ModelCFFHtml* modelCFFHtml;
+    ModelCFFAnswers* modelCFFAsnwers;
 }
 
 
@@ -35,7 +36,7 @@
 - (void)viewDidLoad {
     modelCFFTransaction = [[ModelCFFTransaction alloc]init];
     modelCFFHtml = [[ModelCFFHtml alloc]init];
-    
+    modelCFFAsnwers = [[ModelCFFAnswers alloc]init];
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     databasePath = [[NSString alloc] initWithString:
                     [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
@@ -80,7 +81,12 @@
             [tempDict setObject:[cffTransactionID stringValue] forKey:@"CFFTransactionID"];
             [tempDict setObject:cffID forKey:@"CFFID"];
             [tempDict setObject:[prospectProfileID stringValue] forKey:@"CustomerID"];
+            [tempDict setObject:@"PSN" forKey:@"CFFHtmlSection"];
+            int indexNo = [modelCFFAsnwers voidGetDuplicateRowID:tempDict];
             
+            if (indexNo>0){
+                [tempDict setObject:[NSNumber numberWithInt:indexNo] forKey:@"IndexNo"];
+            }
             [modifiedArrayCFFAnswers addObject:tempDict];
         }
     }
@@ -99,7 +105,19 @@
 }
 
 - (NSMutableDictionary*)readfromDB:(NSMutableDictionary*) params{
-    return [super readfromDB:params];
+    NSMutableDictionary* modifiedParams = [[NSMutableDictionary alloc]initWithDictionary:[params valueForKey:@"data"]];
+    NSMutableDictionary* tempDict = [[NSMutableDictionary alloc] initWithDictionary:[modifiedParams valueForKey:@"CFFAnswers"]];
+    NSString* stringWhere = [NSString stringWithFormat:@"where CustomerID=%@ and CFFID=%@ and CFFTransactionID=%@ and CFFHtmlSection='PSN'",prospectProfileID,[cffHeaderSelectedDictionary valueForKey:@"PensiunCFFID"],[cffHeaderSelectedDictionary valueForKey:@"CFFTransactionID"]];
+    [tempDict setObject:stringWhere forKey:@"where"];
+    
+    NSMutableDictionary* answerDictionary = [[NSMutableDictionary alloc]init];
+    [answerDictionary setObject:tempDict forKey:@"CFFAnswers"];
+    
+    NSMutableDictionary* finalDictionary = [[NSMutableDictionary alloc]init];
+    [finalDictionary setObject:answerDictionary forKey:@"data"];
+    [finalDictionary setValue:[params valueForKey:@"successCallBack"] forKey:@"successCallBack"];
+    [finalDictionary setValue:[params valueForKey:@"errorCallback"] forKey:@"errorCallback"];
+    return [super readfromDB:finalDictionary];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
