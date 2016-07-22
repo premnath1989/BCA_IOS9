@@ -110,7 +110,7 @@
 
     @end
 
-    @interface ViewTableHorizontal : UIView
+    @interface TableViewGeneral : UITableView
 
         - (void)setupStyle;
 

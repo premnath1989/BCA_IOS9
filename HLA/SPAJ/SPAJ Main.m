@@ -16,6 +16,8 @@
 #import "SPAJ Add Detail.h"
 #import "SPAJ E Application List.h"
 #import "SPAJ Add Signature.h"
+#import "SPAJ Form Generation.h"
+#import "SPAJ Capture Identification.h"
 #import "Insert Initialization.h"
 #import "CarouselViewController.h"
 
@@ -118,6 +120,22 @@
     - (void)voidGoToAddDetail
     {
         SPAJAddDetail* viewController = [[SPAJAddDetail alloc] initWithNibName:@"SPAJ Add Detail" bundle:nil];
+        viewController.view.frame = self.viewContent.bounds;
+        [self addChildViewController:viewController];
+        [self.viewContent addSubview:viewController.view];
+    }
+
+    - (void)voidGoToFormGeneration
+    {
+        SPAJFormGeneration* viewController = [[SPAJFormGeneration alloc] initWithNibName:@"SPAJ Form Generation" bundle:nil];
+        viewController.view.frame = self.viewContent.bounds;
+        [self addChildViewController:viewController];
+        [self.viewContent addSubview:viewController.view];
+    }
+
+    - (void)voidGoToCaptureIdentification
+    {
+        SPAJAddDetail* viewController = [[SPAJAddDetail alloc] initWithNibName:@"SPAJ Capture Identification" bundle:nil];
         viewController.view.frame = self.viewContent.bounds;
         [self addChildViewController:viewController];
         [self.viewContent addSubview:viewController.view];

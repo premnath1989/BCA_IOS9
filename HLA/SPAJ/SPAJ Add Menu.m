@@ -114,12 +114,12 @@
 
     - (IBAction)actionGoToStep4:(id)sender
     {
-
+        [_delegateSPAJMain voidGoToFormGeneration];
     };
 
     - (IBAction)actionGoToStep5:(id)sender
     {
-
+        [_delegateSPAJMain voidGoToCaptureIdentification];
     };
 
     - (IBAction)actionGoToStep6:(id)sender

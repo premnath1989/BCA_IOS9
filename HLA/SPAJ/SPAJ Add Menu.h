@@ -18,6 +18,8 @@
 @protocol SPAJMainDelegate
 
     - (void) voidGoToAddDetail;
+    - (void) voidGoToFormGeneration;
+    - (void) voidGoToCaptureIdentification;
     - (void) voidGoToAddSignature;
 
 @end

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -42,6 +42,12 @@
                 <outlet property="labelStep6" destination="qqq-Ho-jj3" id="Cqf-hf-uFf"/>
                 <outlet property="labelTitleImportantInformation" destination="x9i-1R-axA" id="zXO-Vb-YFV"/>
                 <outlet property="view" destination="iN0-l3-epB" id="poK-cu-8Lg"/>
+                <outlet property="viewStep1" destination="pDg-BU-x6G" id="hM2-Nv-GdK"/>
+                <outlet property="viewStep2" destination="buI-Tv-IiQ" id="4DW-Hy-PQk"/>
+                <outlet property="viewStep3" destination="zi2-cg-J0b" id="t7c-Nm-LTF"/>
+                <outlet property="viewStep4" destination="Gc9-mq-FYk" id="S8g-eZ-kSM"/>
+                <outlet property="viewStep5" destination="t2M-kW-VHN" id="E0N-qq-G5u"/>
+                <outlet property="viewStep6" destination="cuF-oE-bKo" id="VAg-kn-UNK"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -120,6 +126,9 @@
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lnZ-K4-H9p" customClass="ButtonGuideMenu">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="30"/>
                                     <state key="normal" title="Button"/>
+                                    <connections>
+                                        <action selector="actionGoToStep1:" destination="-1" eventType="touchUpInside" id="k4s-2c-myn"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -167,6 +176,9 @@
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iXD-ZI-9GH" customClass="ButtonGuideMenu">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="30"/>
                                     <state key="normal" title="Button"/>
+                                    <connections>
+                                        <action selector="actionGoToStep2:" destination="-1" eventType="touchUpInside" id="AjR-3g-veu"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -244,6 +256,9 @@
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MsA-Lq-Ivf" customClass="ButtonGuideMenu">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="30"/>
                                     <state key="normal" title="Button"/>
+                                    <connections>
+                                        <action selector="actionGoToStep4:" destination="-1" eventType="touchUpInside" id="ffa-VA-kCD"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -280,6 +295,9 @@
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YfC-nK-9xE" customClass="ButtonGuideMenu">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="30"/>
                                     <state key="normal" title="Button"/>
+                                    <connections>
+                                        <action selector="actionGoToStep5:" destination="-1" eventType="touchUpInside" id="QXY-BV-wd9"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -128,60 +128,49 @@
                         <action selector="actionDelete:" destination="-1" eventType="touchUpInside" id="yHi-tV-tDF"/>
                     </connections>
                 </button>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o86-Bo-SGC" customClass="ViewTableHorizontal">
-                    <rect key="frame" x="20" y="250" width="560" height="41"/>
+                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z40-e0-iiz" customClass="StackViewTableHorizontal">
+                    <rect key="frame" x="20" y="250" width="560" height="21"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z40-e0-iiz" customClass="StackViewTableHorizontal">
-                            <rect key="frame" x="0.0" y="10" width="560" height="21"/>
-                            <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TUK-zh-kTl" customClass="LabelTableHeader">
-                                    <rect key="frame" x="0.0" y="0.0" width="42" height="21"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JBu-0M-A03" customClass="LabelTableHeader">
-                                    <rect key="frame" x="42" y="0.0" width="42" height="21"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KPn-jk-cZp" customClass="LabelTableHeader">
-                                    <rect key="frame" x="84" y="0.0" width="42" height="21"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5MU-pI-gal" customClass="LabelTableHeader">
-                                    <rect key="frame" x="126" y="0.0" width="42" height="21"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vJD-PD-HYN" customClass="LabelTableHeader">
-                                    <rect key="frame" x="168" y="0.0" width="42" height="21"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8l6-oY-DxL" customClass="LabelTableHeader">
-                                    <rect key="frame" x="210" y="0.0" width="350" height="21"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                            </subviews>
-                        </stackView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TUK-zh-kTl" customClass="LabelTableHeader">
+                            <rect key="frame" x="0.0" y="0.0" width="42" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JBu-0M-A03" customClass="LabelTableHeader">
+                            <rect key="frame" x="42" y="0.0" width="42" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KPn-jk-cZp" customClass="LabelTableHeader">
+                            <rect key="frame" x="84" y="0.0" width="42" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5MU-pI-gal" customClass="LabelTableHeader">
+                            <rect key="frame" x="126" y="0.0" width="42" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vJD-PD-HYN" customClass="LabelTableHeader">
+                            <rect key="frame" x="168" y="0.0" width="42" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8l6-oY-DxL" customClass="LabelTableHeader">
+                            <rect key="frame" x="210" y="0.0" width="350" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
-                    <constraints>
-                        <constraint firstItem="z40-e0-iiz" firstAttribute="top" secondItem="o86-Bo-SGC" secondAttribute="top" constant="10" id="Ubo-Nk-0r6"/>
-                        <constraint firstAttribute="bottom" secondItem="z40-e0-iiz" secondAttribute="bottom" constant="10" id="dHV-ap-MQE"/>
-                        <constraint firstAttribute="trailing" secondItem="z40-e0-iiz" secondAttribute="trailing" id="mF5-XF-efb"/>
-                        <constraint firstItem="z40-e0-iiz" firstAttribute="leading" secondItem="o86-Bo-SGC" secondAttribute="leading" id="nVf-Y0-Nyb"/>
-                    </constraints>
-                </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ADJ-Yn-3fb">
-                    <rect key="frame" x="20" y="293" width="560" height="287"/>
+                </stackView>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ADJ-Yn-3fb" customClass="TableViewGeneral">
+                    <rect key="frame" x="20" y="273" width="560" height="307"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="vwn-fD-eWd"/>
@@ -194,22 +183,22 @@
                 <constraint firstItem="blY-qd-HhY" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="0hs-Si-oDu"/>
                 <constraint firstItem="65q-JK-1X9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="1FJ-1Y-b7R"/>
                 <constraint firstItem="TOx-yW-nhn" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="1g0-6W-btg"/>
-                <constraint firstItem="o86-Bo-SGC" firstAttribute="top" secondItem="blY-qd-HhY" secondAttribute="bottom" constant="40" id="2hN-Zx-aJz"/>
-                <constraint firstAttribute="trailing" secondItem="o86-Bo-SGC" secondAttribute="trailing" constant="20" id="EXK-y3-RGm"/>
-                <constraint firstItem="o86-Bo-SGC" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="IUe-XO-74W"/>
                 <constraint firstItem="CrI-Mg-aQd" firstAttribute="centerY" secondItem="WSE-QD-iNr" secondAttribute="centerY" id="KoB-cq-Gbg"/>
                 <constraint firstAttribute="bottom" secondItem="ADJ-Yn-3fb" secondAttribute="bottom" constant="20" id="R3w-4G-Y58"/>
                 <constraint firstItem="CrI-Mg-aQd" firstAttribute="trailing" secondItem="Teh-JR-WaZ" secondAttribute="trailing" id="RNc-Ue-3oI"/>
                 <constraint firstAttribute="trailing" secondItem="65q-JK-1X9" secondAttribute="trailing" constant="20" id="S7n-3P-XP2"/>
                 <constraint firstItem="blY-qd-HhY" firstAttribute="top" secondItem="65q-JK-1X9" secondAttribute="bottom" constant="40" id="WGI-hu-fwn"/>
+                <constraint firstItem="z40-e0-iiz" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="dlG-Ag-OtY"/>
                 <constraint firstItem="TOx-yW-nhn" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ebB-oP-RdN"/>
                 <constraint firstItem="WSE-QD-iNr" firstAttribute="leading" secondItem="blY-qd-HhY" secondAttribute="trailing" constant="40" id="m1e-eP-qWM"/>
                 <constraint firstItem="WSE-QD-iNr" firstAttribute="centerY" secondItem="blY-qd-HhY" secondAttribute="centerY" id="qQZ-vX-Uma"/>
+                <constraint firstItem="z40-e0-iiz" firstAttribute="top" secondItem="CrI-Mg-aQd" secondAttribute="bottom" constant="40" id="qeh-Rz-sPt"/>
+                <constraint firstItem="ADJ-Yn-3fb" firstAttribute="top" secondItem="z40-e0-iiz" secondAttribute="bottom" constant="2" id="qgI-4P-5yh"/>
                 <constraint firstAttribute="trailing" secondItem="TOx-yW-nhn" secondAttribute="trailing" id="t2Y-SN-B4k"/>
                 <constraint firstItem="ADJ-Yn-3fb" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="t9S-lg-Shx"/>
                 <constraint firstItem="65q-JK-1X9" firstAttribute="top" secondItem="TOx-yW-nhn" secondAttribute="bottom" constant="20" id="u5N-af-jEU"/>
                 <constraint firstAttribute="trailing" secondItem="ADJ-Yn-3fb" secondAttribute="trailing" constant="20" id="vqN-bG-XPB"/>
-                <constraint firstItem="ADJ-Yn-3fb" firstAttribute="top" secondItem="o86-Bo-SGC" secondAttribute="bottom" constant="2" id="zuA-JM-dKS"/>
+                <constraint firstAttribute="trailing" secondItem="z40-e0-iiz" secondAttribute="trailing" constant="20" id="x3b-Sy-cMn"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="465" y="347"/>

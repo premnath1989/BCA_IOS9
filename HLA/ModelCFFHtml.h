@@ -16,6 +16,7 @@
 -(void)saveHtmlData:(NSDictionary *)dictHtmlData;
 -(void)saveGlobalHtmlData:(NSDictionary *)dictHtmlData;
 -(void)updateGlobalHtmlData:(NSString *)htmlSection;
+-(int)voidGetDuplicateRowID:(NSString *)stringQuery ColumnReturn:(NSString *)stringColumn;
 -(void)updateHtmlData:(NSDictionary *)dictHtmlData;
 -(NSMutableArray *)selectHtmlData:(int)CFFHtmlID HtmlSection:(NSString *)cffHtmlSection;
 -(NSDictionary *)selectActiveHtml;
