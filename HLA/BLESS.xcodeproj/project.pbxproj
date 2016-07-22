@@ -881,6 +881,8 @@
 		DE06BE301CEEF5070091DE47 /* AppDisclaimer.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE06BE2F1CEEF5070091DE47 /* AppDisclaimer.xib */; };
 		DE06FFCE1CABBC2800E4DE3A /* xibLibrary.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DE06FFCD1CABBC2800E4DE3A /* xibLibrary.bundle */; };
 		DE06FFD21CABCB8200E4DE3A /* libFTPFileSynchronization.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DE06FFD11CABCB8200E4DE3A /* libFTPFileSynchronization.a */; };
+		DE07EAD11D41D71B0046AFA1 /* SPAJ Form Generation.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE07EAD01D41D71B0046AFA1 /* SPAJ Form Generation.xib */; };
+		DE07EAD41D41D72A0046AFA1 /* SPAJ Form Generation.m in Sources */ = {isa = PBXBuildFile; fileRef = DE07EAD31D41D72A0046AFA1 /* SPAJ Form Generation.m */; };
 		DE09815F1CFD5C56008BC359 /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = DE09815C1CFD5C56008BC359 /* SSKeychain.m */; };
 		DE0981601CFD5C56008BC359 /* SSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = DE09815E1CFD5C56008BC359 /* SSKeychainQuery.m */; };
 		DE0E49991CF6EAB200812C2E /* DataReferral.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = DE0E49981CF6E98E00812C2E /* DataReferral.sqlite */; };
@@ -2406,6 +2408,9 @@
 		DE06FFCD1CABBC2800E4DE3A /* xibLibrary.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = xibLibrary.bundle; path = ../FTPSync/xibLibrary.bundle; sourceTree = "<group>"; };
 		DE06FFD11CABCB8200E4DE3A /* libFTPFileSynchronization.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFTPFileSynchronization.a; path = FTPSync/libFTPFileSynchronization.a; sourceTree = "<group>"; };
 		DE07AF3D1CAE225100258521 /* PremiumViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PremiumViewControllerDelegate.h; sourceTree = "<group>"; };
+		DE07EAD01D41D71B0046AFA1 /* SPAJ Form Generation.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "SPAJ Form Generation.xib"; path = "SPAJ/SPAJ Form Generation.xib"; sourceTree = "<group>"; };
+		DE07EAD21D41D72A0046AFA1 /* SPAJ Form Generation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SPAJ Form Generation.h"; path = "SPAJ/SPAJ Form Generation.h"; sourceTree = "<group>"; };
+		DE07EAD31D41D72A0046AFA1 /* SPAJ Form Generation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "SPAJ Form Generation.m"; path = "SPAJ/SPAJ Form Generation.m"; sourceTree = "<group>"; };
 		DE09815B1CFD5C56008BC359 /* SSKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKeychain.h; sourceTree = "<group>"; };
 		DE09815C1CFD5C56008BC359 /* SSKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKeychain.m; sourceTree = "<group>"; };
 		DE09815D1CFD5C56008BC359 /* SSKeychainQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKeychainQuery.h; sourceTree = "<group>"; };
@@ -2674,6 +2679,7 @@
 				0F3268351D1A93A4001A9021 /* SPAJ Existing List.xib */,
 				0F32683A1D1A93A4001A9021 /* SPAJ Main.xib */,
 				0F32683D1D1A93A4001A9021 /* SPAJ Submitted List.xib */,
+				DE07EAD01D41D71B0046AFA1 /* SPAJ Form Generation.xib */,
 				0FF845741D23A3A4008CF861 /* Cell */,
 			);
 			name = View;
@@ -2683,6 +2689,8 @@
 			isa = PBXGroup;
 			children = (
 				0FF845751D23A3BB008CF861 /* Cell */,
+				DE07EAD21D41D72A0046AFA1 /* SPAJ Form Generation.h */,
+				DE07EAD31D41D72A0046AFA1 /* SPAJ Form Generation.m */,
 				0FFA185C1D1D1FB100C63A47 /* SPAJ Add Detail.h */,
 				0FFA185D1D1D1FB100C63A47 /* SPAJ Add Detail.m */,
 				0F3268301D1A93A4001A9021 /* SPAJ Add Menu.h */,
@@ -5698,6 +5706,7 @@
 				C4660EB81625047800BA4AFE /* exit_btnB.png in Resources */,
 				C4660EB91625047800BA4AFE /* home_144.png in Resources */,
 				C4660EBA1625047800BA4AFE /* home_btn.png in Resources */,
+				DE07EAD11D41D71B0046AFA1 /* SPAJ Form Generation.xib in Resources */,
 				439B954C1D3896AD00C86F93 /* SPAJ Add Signature.xib in Resources */,
 				C4660EBB1625047800BA4AFE /* prospect_100.png in Resources */,
 				C4660EBC1625047800BA4AFE /* prospect_btnB_144.png in Resources */,
@@ -6107,6 +6116,7 @@
 				43BB38C11CBCBBF700A5F5C5 /* mySmoothLineView.m in Sources */,
 				EF28C319161BE224009585CC /* SIMenuViewController.m in Sources */,
 				EFB9389E161C3CB800B97101 /* BasicPlanHandler.m in Sources */,
+				DE07EAD41D41D72A0046AFA1 /* SPAJ Form Generation.m in Sources */,
 				C4F08D60161DBDBB008BCC1A /* SIDate.m in Sources */,
 				C4660E63161F118B00BA4AFE /* ColorHexCode.m in Sources */,
 				C4660EED16259AD700BA4AFE /* CarouselViewController.m in Sources */,
