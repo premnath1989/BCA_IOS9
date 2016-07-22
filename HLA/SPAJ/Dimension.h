@@ -80,8 +80,11 @@
     extern int const BUTTON_WIDTH_PURE;
     extern int const BUTTON_HEIGHT_PURE;
 
+    extern int const BUTTON_NAVIGATION_WIDTH;
+    extern int const BUTTON_NAVIGATION_HEIGHT;
     extern int const BUTTON_CONFIRMSPAJ_HEIGHT;
 
     // TABLE
 
     extern int const TABLE_STACKVIEW_SPACING;
+    extern int const TABLE_HEADER_HEIGHT;

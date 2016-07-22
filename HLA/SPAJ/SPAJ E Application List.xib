@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -109,54 +109,43 @@
                         <action selector="actionDelete:" destination="-1" eventType="touchUpInside" id="1Cv-E1-KWJ"/>
                     </connections>
                 </button>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BGB-jw-LvC" customClass="ViewTableHorizontal">
-                    <rect key="frame" x="20" y="220" width="560" height="41"/>
+                <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1fN-aQ-8Ka" customClass="StackViewTableHorizontal">
+                    <rect key="frame" x="20" y="290" width="560" height="21"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1fN-aQ-8Ka" customClass="StackViewTableHorizontal">
-                            <rect key="frame" x="0.0" y="10" width="560" height="21"/>
-                            <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f7w-XP-f6m" customClass="LabelTableHeader">
-                                    <rect key="frame" x="0.0" y="0.0" width="42" height="21"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WOd-CF-5gk" customClass="LabelTableHeader">
-                                    <rect key="frame" x="42" y="0.0" width="42" height="21"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4n1-gn-Mjz" customClass="LabelTableHeader">
-                                    <rect key="frame" x="84" y="0.0" width="42" height="21"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eLP-eD-aVO" customClass="LabelTableHeader">
-                                    <rect key="frame" x="126" y="0.0" width="42" height="21"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="btu-tA-7EI" customClass="LabelTableHeader">
-                                    <rect key="frame" x="168" y="0.0" width="392" height="21"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                            </subviews>
-                        </stackView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f7w-XP-f6m" customClass="LabelTableHeader">
+                            <rect key="frame" x="0.0" y="0.0" width="42" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WOd-CF-5gk" customClass="LabelTableHeader">
+                            <rect key="frame" x="42" y="0.0" width="42" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4n1-gn-Mjz" customClass="LabelTableHeader">
+                            <rect key="frame" x="84" y="0.0" width="42" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eLP-eD-aVO" customClass="LabelTableHeader">
+                            <rect key="frame" x="126" y="0.0" width="42" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="btu-tA-7EI" customClass="LabelTableHeader">
+                            <rect key="frame" x="168" y="0.0" width="392" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
-                    <constraints>
-                        <constraint firstItem="1fN-aQ-8Ka" firstAttribute="top" secondItem="BGB-jw-LvC" secondAttribute="top" constant="10" id="0xD-38-24M"/>
-                        <constraint firstItem="1fN-aQ-8Ka" firstAttribute="leading" secondItem="BGB-jw-LvC" secondAttribute="leading" id="d8H-Bc-Jz7"/>
-                        <constraint firstAttribute="bottom" secondItem="1fN-aQ-8Ka" secondAttribute="bottom" constant="10" id="ftQ-Ms-USR"/>
-                        <constraint firstAttribute="trailing" secondItem="1fN-aQ-8Ka" secondAttribute="trailing" id="syJ-je-DFm"/>
-                    </constraints>
-                </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5sz-Ve-x1P">
-                    <rect key="frame" x="20" y="263" width="560" height="317"/>
+                </stackView>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5sz-Ve-x1P" customClass="TableViewGeneral">
+                    <rect key="frame" x="20" y="243" width="560" height="337"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="8P9-Cq-jxi"/>
@@ -170,6 +159,7 @@
             </accessibility>
             <constraints>
                 <constraint firstItem="H3t-V8-ySt" firstAttribute="leading" secondItem="Clt-GV-ifg" secondAttribute="trailing" constant="40" id="4sO-KV-XMB"/>
+                <constraint firstItem="1fN-aQ-8Ka" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="6m9-Eg-108"/>
                 <constraint firstAttribute="trailing" secondItem="Cvn-UT-alj" secondAttribute="trailing" id="9hm-f4-MmT"/>
                 <constraint firstAttribute="trailing" secondItem="5sz-Ve-x1P" secondAttribute="trailing" constant="20" id="Jge-Yx-KSb"/>
                 <constraint firstItem="DSo-Iu-ZyS" firstAttribute="trailing" secondItem="TQ4-uy-ARq" secondAttribute="trailing" id="Kel-JG-ysj"/>
@@ -177,17 +167,16 @@
                 <constraint firstAttribute="bottom" secondItem="5sz-Ve-x1P" secondAttribute="bottom" constant="20" id="PgV-mB-hHn"/>
                 <constraint firstItem="Clt-GV-ifg" firstAttribute="top" secondItem="jZn-Pz-jXn" secondAttribute="bottom" constant="40" id="QRd-EC-zVm"/>
                 <constraint firstItem="jZn-Pz-jXn" firstAttribute="top" secondItem="Cvn-UT-alj" secondAttribute="bottom" constant="20" id="VwN-mh-h3b"/>
-                <constraint firstAttribute="trailing" secondItem="BGB-jw-LvC" secondAttribute="trailing" constant="20" id="WKP-bb-6Ru"/>
-                <constraint firstItem="5sz-Ve-x1P" firstAttribute="top" secondItem="BGB-jw-LvC" secondAttribute="bottom" constant="2" id="cyF-hv-CCK"/>
+                <constraint firstItem="1fN-aQ-8Ka" firstAttribute="top" secondItem="DSo-Iu-ZyS" secondAttribute="bottom" constant="40" id="Xyx-Rv-xcd"/>
                 <constraint firstItem="DSo-Iu-ZyS" firstAttribute="centerY" secondItem="H3t-V8-ySt" secondAttribute="centerY" id="drw-LD-iSZ"/>
                 <constraint firstAttribute="trailing" secondItem="jZn-Pz-jXn" secondAttribute="trailing" constant="20" id="eGR-vc-MV1"/>
                 <constraint firstItem="jZn-Pz-jXn" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="gBH-Vp-BW4"/>
+                <constraint firstItem="5sz-Ve-x1P" firstAttribute="top" secondItem="1fN-aQ-8Ka" secondAttribute="bottom" constant="2" id="gxv-7W-jEG"/>
                 <constraint firstItem="H3t-V8-ySt" firstAttribute="centerY" secondItem="Clt-GV-ifg" secondAttribute="centerY" id="lGp-6h-WlO"/>
                 <constraint firstItem="Clt-GV-ifg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="nVP-Y5-SyA"/>
                 <constraint firstItem="Cvn-UT-alj" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="oUK-Nn-v81"/>
-                <constraint firstItem="BGB-jw-LvC" firstAttribute="top" secondItem="Clt-GV-ifg" secondAttribute="bottom" constant="40" id="p4b-8B-hNW"/>
                 <constraint firstItem="Cvn-UT-alj" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="p5r-Rp-fIK"/>
-                <constraint firstItem="BGB-jw-LvC" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="pUC-H1-Szv"/>
+                <constraint firstAttribute="trailing" secondItem="1fN-aQ-8Ka" secondAttribute="trailing" constant="20" id="xjq-VG-Dqu"/>
             </constraints>
             <point key="canvasLocation" x="471" y="436"/>
         </view>

@@ -21,7 +21,7 @@
     UInt32 const THEME_COLOR_TERTIARY = 0xe1e1e1; // Dark Background
     UInt32 const THEME_COLOR_QUATERNARY = 0xf0f0f0; // Light Background
     UInt32 const THEME_COLOR_QUINARY = 0xffffff; // White
-    UInt32 const THEME_COLOR_SENARY = 0x3c3c3c; // Dark Black
+    UInt32 const THEME_COLOR_SENARY = 0x5a5a5a;  // 3c3c3c // Dark Black
     UInt32 const THEME_COLOR_SEPTENARY = 0x787878; // Light Black
     UInt32 const THEME_COLOR_OCTONARY = 0xd2d2d2; // Darker Background
     UInt32 const THEME_COLOR_NONARY = 0xc3c3c3; // Darkest Background

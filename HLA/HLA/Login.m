@@ -444,23 +444,28 @@ static NSString *labelVers;
 }
 
 - (IBAction)btnReport:(id)sender {
-    NSMutableDictionary *agentDetails = [loginDB getAgentDetails];
-    //compose the agent Details into NSString
-    NSString *agentDetailsStr = @" ";
-    for(NSString *key in agentDetails.allKeys){
-        agentDetailsStr = [agentDetailsStr stringByAppendingString:key];
-        agentDetailsStr = [agentDetailsStr stringByAppendingString:[NSString stringWithFormat:@"= %@ \n ",[agentDetails valueForKey:key]]];
+    if([self connected]){
+        NSMutableDictionary *agentDetails = [loginDB getAgentDetails];
+        //compose the agent Details into NSString
+        NSString *agentDetailsStr = @" ";
+        for(NSString *key in agentDetails.allKeys){
+            agentDetailsStr = [agentDetailsStr stringByAppendingString:key];
+            agentDetailsStr = [agentDetailsStr stringByAppendingString:[NSString stringWithFormat:@"= %@ \n ",[agentDetails valueForKey:key]]];
+        }
+        
+        NSString *dbVersion = [NSString stringWithFormat:
+                               @"%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"dbVersion"]];
+        NSString *BCAversion= [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+        NSString *build= [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+        NSString *iosVersion = [[UIDevice currentDevice]systemVersion];
+        
+        NSString *ErrorLog = [NSString stringWithFormat:@"%@APP Version : %@ %@ \n iOS Version : %@ \n DB Version : %@ \n Data Version : ", agentDetailsStr,BCAversion, build, iosVersion, dbVersion];
+        [self writeStringToFile:ErrorLog];
+        [self sendByEmail:agentDetails];
+    }else{
+        UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"No Internet" message:[NSString stringWithFormat:@"Periksa lagi internet anda untuk mengirim error report"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
     }
-    
-    NSString *dbVersion = [NSString stringWithFormat:
-                           @"%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"dbVersion"]];
-    NSString *BCAversion= [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-    NSString *build= [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
-    NSString *iosVersion = [[UIDevice currentDevice]systemVersion];
-    
-    NSString *ErrorLog = [NSString stringWithFormat:@"%@APP Version : %@ %@ \n iOS Version : %@ \n DB Version : %@ \n Data Version : ", agentDetailsStr,BCAversion, build, iosVersion, dbVersion];
-    [self writeStringToFile:ErrorLog];
-    [self sendByEmail:agentDetails];
     
     
 }
@@ -472,9 +477,16 @@ static NSString *labelVers;
     
     MFMailComposeViewController *mc = [[MFMailComposeViewController alloc]init];
     mc.mailComposeDelegate = self;
+    [mc setToRecipients:[NSArray arrayWithObject: @"sales_support@bcalife.co.id"]];
     [mc addAttachmentData:[NSData dataWithContentsOfFile:fileAtPath] mimeType:@"text/csv" fileName:fileName];
     [mc setSubject:[NSString stringWithFormat:@"Error Log of Agent %@", [agentDetails valueForKey:@"AgentCode"]]];
     [self presentViewController:mc animated:YES completion:nil];
+}
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error{
+    // NEVER REACHES THIS PLACE
+    [self dismissModalViewControllerAnimated:YES];
+    NSLog (@"mail finished");
 }
 
 - (void)writeStringToFile:(NSString*)aString {
@@ -1091,12 +1103,7 @@ static NSString *labelVers;
     // Release any retained subviews of the main view.
 }
 
-- (BOOL)IsConnected
-{
-    Reachability *reachability = [Reachability reachabilityForInternetConnection];
-    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
-    return networkStatus != NotReachable;
-}
+
 
 - (BOOL)alertViewShouldEnableFirstOtherButton:(UIAlertView *)alertView
 {

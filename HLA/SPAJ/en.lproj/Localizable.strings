@@ -29,6 +29,8 @@ TITLE_EAPPLICATIONLIST = "E Application List";
 TITLE_EAPPLICATIONGUIDE = "eApplication Checklist";
 
 TITLE_IMPORTANTINFORMATION = "Important Information";
+TITLE_CAPTUREDID = "Capture Identification Documents";
+TITLE_FORMGENERATION = "E Application Forms Generation";
 
 
 // TABLE
@@ -78,6 +80,24 @@ GUIDE_SPAJDETAIL_HEADER4 = "Benefit Holder";
 GUIDE_SPAJDETAIL_HEADER5 = "Payment";
 GUIDE_SPAJDETAIL_HEADER6 = "Health";
 
+GUIDE_FORMGENERATION_STEP1 = "1";
+GUIDE_FORMGENERATION_STEP2 = "2";
+GUIDE_FORMGENERATION_STEP3 = "3";
+
+GUIDE_FORMGENERATION_HEADER1 = "SPAJ";
+GUIDE_FORMGENERATION_HEADER2 = "Supplementary Form";
+GUIDE_FORMGENERATION_HEADER3 = "Additional Health Questionnaires";
+
+GUIDE_CAPTUREID_STEP1 = "1";
+GUIDE_CAPTUREID_STEP2 = "2";
+GUIDE_CAPTUREID_STEP3 = "3";
+GUIDE_CAPTUREID_STEP4 = "4";
+
+GUIDE_CAPTUREID_HEADER1 = "Policy Holder";
+GUIDE_CAPTUREID_HEADER2 = "Payor Holder";
+GUIDE_CAPTUREID_HEADER3 = "Parent / Guardian";
+GUIDE_CAPTUREID_HEADER4 = "Agent";
+
 
 // ALERT
 
@@ -97,6 +117,12 @@ NOTE_GUIDEMENU = "Please complete the following items before submission";
 STATE_CAPTURED = "Captured";
 
 
+// LABEL
+
+LABEL_FRONT = "Front";
+LABEL_BACK = "Back";
+
+
 // BUTTON
 
 BUTTON_SEARCH = "Search";
@@ -105,7 +131,7 @@ BUTTON_DELETE = "Delete";
 BUTTON_ADD = "Add";
 BUTTON_CONFIRMSPAJ = "Confirm & Assign SPAJ Number";
 BUTTON_HOME = "Home";
-BUTTON_EAPPLICATIONLIST = "E Application\nList";
+BUTTON_EAPPLICATIONLIST = "E App\nList";
 BUTTON_EXISTINGLIST = "Existing\nList";
 BUTTON_SUBMITTEDLIST = "Submitted\nList";
 BUTTON_ADD = "Add";
@@ -113,3 +139,5 @@ BUTTON_VIEW = "View";
 BUTTON_CLOSE = "Close";
 BUTTON_DONE = "Done";
 BUTTON_CANCEL = "Cancel";
+BUTTON_GENERATEFORM = "Generato Form";
+BUTTON_SAVE = "Save";

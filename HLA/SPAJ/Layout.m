@@ -339,13 +339,15 @@
         {
             self.axis = UILayoutConstraintAxisHorizontal;
             self.distribution = UIStackViewDistributionFillEqually;
-            self.alignment = UIStackViewAlignmentCenter;
+            self.alignment = UIStackViewAlignmentFill;
             self.spacing = TABLE_STACKVIEW_SPACING;
+            
+            [self.heightAnchor constraintEqualToConstant:TABLE_HEADER_HEIGHT].active = true;
         }
 
     @end
 
-    @implementation ViewTableHorizontal
+    @implementation TableViewGeneral
 
         // INITIALIZE
 
@@ -360,7 +362,11 @@
         - (void)setupStyle
         {
             UserInterface* objectUserInterface = [[UserInterface alloc] init];
-            self.backgroundColor = [objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0];
+            self.backgroundColor = [objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:0.0];
+            
+            self.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+            self.separatorColor = [objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0];
+            self.separatorInset = UIEdgeInsetsMake(0, -10, 0, 0);
         }
 
     @end

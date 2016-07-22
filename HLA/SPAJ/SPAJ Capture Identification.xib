@@ -5,34 +5,26 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SPAJAddDetail">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SPAJCaptureIdentification">
             <connections>
                 <outlet property="buttonStep1" destination="lnZ-K4-H9p" id="Fkv-LO-GpA"/>
                 <outlet property="buttonStep2" destination="iXD-ZI-9GH" id="N83-6a-b33"/>
                 <outlet property="buttonStep3" destination="hFC-J1-7WK" id="KS8-KN-a5l"/>
                 <outlet property="buttonStep4" destination="iD9-Z6-1XM" id="tZR-Hl-pet"/>
-                <outlet property="buttonStep5" destination="pqx-bH-93E" id="jrE-X8-sJz"/>
-                <outlet property="buttonStep6" destination="yLt-Z3-dfu" id="JoF-Sv-GHN"/>
                 <outlet property="labelHeader1" destination="oId-WE-NEh" id="csI-YT-ayT"/>
                 <outlet property="labelHeader2" destination="ctD-fX-KFg" id="rWt-Im-4Sk"/>
                 <outlet property="labelHeader3" destination="BFe-ye-0jR" id="7z9-tj-KMe"/>
                 <outlet property="labelHeader4" destination="0Dx-47-ZuR" id="kyH-Ak-xde"/>
-                <outlet property="labelHeader5" destination="rfA-jy-Ufp" id="3S8-C1-aXn"/>
-                <outlet property="labelHeader6" destination="z2O-9O-zTX" id="Yo3-nu-Ydq"/>
                 <outlet property="labelStep1" destination="Nag-pd-L6l" id="3Vh-X0-cC0"/>
                 <outlet property="labelStep2" destination="kCh-3K-1kP" id="7DG-zk-n3E"/>
                 <outlet property="labelStep3" destination="FQS-yO-lc4" id="xcj-pG-ZpZ"/>
                 <outlet property="labelStep4" destination="fWk-RF-MUu" id="Dc8-nZ-DNB"/>
-                <outlet property="labelStep5" destination="gnm-nL-mfK" id="bRL-hM-QJf"/>
-                <outlet property="labelStep6" destination="raO-a2-yDO" id="HsH-dD-lbT"/>
                 <outlet property="view" destination="iN0-l3-epB" id="TTX-GH-ZKM"/>
                 <outlet property="viewContent" destination="DOb-zR-NEV" id="Xub-LS-0C2"/>
-                <outlet property="viewStep1" destination="pDg-BU-x6G" id="N53-np-3rD"/>
-                <outlet property="viewStep2" destination="buI-Tv-IiQ" id="Zfo-tv-s7A"/>
-                <outlet property="viewStep3" destination="0U5-Kc-uvD" id="JMI-jo-7XD"/>
-                <outlet property="viewStep4" destination="7DA-i8-FQk" id="gLk-Kg-CzD"/>
-                <outlet property="viewStep5" destination="hIx-f2-EV0" id="wOC-oQ-COX"/>
-                <outlet property="viewStep6" destination="KrB-hH-dXD" id="xOb-uA-BkA"/>
+                <outlet property="viewStep1" destination="pDg-BU-x6G" id="Xjh-of-uvS"/>
+                <outlet property="viewStep2" destination="buI-Tv-IiQ" id="B8A-zC-4Iy"/>
+                <outlet property="viewStep3" destination="0U5-Kc-uvD" id="rdB-oi-WKI"/>
+                <outlet property="viewStep4" destination="7DA-i8-FQk" id="aat-d7-Bhz"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -47,11 +39,11 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fpz-qC-QgG" customClass="ViewGuideDetail">
                     <rect key="frame" x="0.0" y="0.0" width="124" height="600"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Tnk-va-LaM" customClass="StackViewGuideMenuContainer">
-                            <rect key="frame" x="0.0" y="0.0" width="124" height="180"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Tnk-va-LaM" customClass="StackViewGuideMenuContainer">
+                            <rect key="frame" x="0.0" y="0.0" width="124" height="200"/>
                             <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pDg-BU-x6G" customClass="ViewGuideMenuSelected">
-                                    <rect key="frame" x="0.0" y="0.0" width="124" height="30"/>
+                                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pDg-BU-x6G" customClass="ViewGuideMenuNotSelected">
+                                    <rect key="frame" x="0.0" y="0.0" width="124" height="50"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="xcY-qt-Kur" customClass="StackViewGuideMenuHorizontal">
                                             <rect key="frame" x="10" y="5" width="104" height="21"/>
@@ -86,8 +78,8 @@
                                         <constraint firstItem="lnZ-K4-H9p" firstAttribute="top" secondItem="pDg-BU-x6G" secondAttribute="top" id="zkx-9v-BLk"/>
                                     </constraints>
                                 </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="buI-Tv-IiQ" customClass="ViewGuideMenuSelected">
-                                    <rect key="frame" x="0.0" y="30" width="124" height="30"/>
+                                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="buI-Tv-IiQ" customClass="ViewGuideMenuNotSelected">
+                                    <rect key="frame" x="0.0" y="50" width="124" height="50"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="utj-z3-yFg" customClass="StackViewGuideMenuHorizontal">
                                             <rect key="frame" x="10" y="5" width="104" height="21"/>
@@ -122,8 +114,8 @@
                                         <constraint firstAttribute="trailing" secondItem="iXD-ZI-9GH" secondAttribute="trailing" id="xqk-pb-mOa"/>
                                     </constraints>
                                 </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0U5-Kc-uvD" customClass="ViewGuideMenuNotSelected">
-                                    <rect key="frame" x="0.0" y="60" width="124" height="30"/>
+                                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0U5-Kc-uvD" customClass="ViewGuideMenuNotSelected">
+                                    <rect key="frame" x="0.0" y="100" width="124" height="50"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Zbb-HP-tjB" customClass="StackViewGuideMenuHorizontal">
                                             <rect key="frame" x="10" y="5" width="104" height="21"/>
@@ -158,8 +150,8 @@
                                         <constraint firstItem="Zbb-HP-tjB" firstAttribute="centerY" secondItem="0U5-Kc-uvD" secondAttribute="centerY" id="dRG-Xv-q32"/>
                                     </constraints>
                                 </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7DA-i8-FQk" customClass="ViewGuideMenuNotSelected">
-                                    <rect key="frame" x="0.0" y="90" width="124" height="30"/>
+                                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7DA-i8-FQk" customClass="ViewGuideMenuNotSelected">
+                                    <rect key="frame" x="0.0" y="150" width="124" height="50"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="51u-AW-m9e" customClass="StackViewGuideMenuHorizontal">
                                             <rect key="frame" x="10" y="5" width="104" height="21"/>
@@ -194,90 +186,14 @@
                                         <constraint firstItem="iD9-Z6-1XM" firstAttribute="leading" secondItem="7DA-i8-FQk" secondAttribute="leading" id="rrB-6v-dvK"/>
                                     </constraints>
                                 </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hIx-f2-EV0" customClass="ViewGuideMenuNotSelected">
-                                    <rect key="frame" x="0.0" y="120" width="124" height="30"/>
-                                    <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="fSO-rK-UbP" customClass="StackViewGuideMenuHorizontal">
-                                            <rect key="frame" x="10" y="5" width="104" height="21"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gnm-nL-mfK" customClass="LabelGuideMenuStep">
-                                                    <rect key="frame" x="0.0" y="0.0" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rfA-jy-Ufp" customClass="LabelGuideMenuHeader">
-                                                    <rect key="frame" x="62" y="0.0" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </stackView>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pqx-bH-93E" customClass="ButtonGuideMenu">
-                                            <rect key="frame" x="0.0" y="0.0" width="124" height="30"/>
-                                            <state key="normal" title="Button"/>
-                                        </button>
-                                    </subviews>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <constraints>
-                                        <constraint firstItem="fSO-rK-UbP" firstAttribute="leading" secondItem="hIx-f2-EV0" secondAttribute="leading" constant="10" id="21E-Cs-HkS"/>
-                                        <constraint firstItem="pqx-bH-93E" firstAttribute="leading" secondItem="hIx-f2-EV0" secondAttribute="leading" id="38Y-WB-HRX"/>
-                                        <constraint firstAttribute="trailing" secondItem="pqx-bH-93E" secondAttribute="trailing" id="8f5-5Y-bZc"/>
-                                        <constraint firstItem="pqx-bH-93E" firstAttribute="top" secondItem="hIx-f2-EV0" secondAttribute="top" id="RNN-1w-ZoI"/>
-                                        <constraint firstAttribute="bottom" secondItem="pqx-bH-93E" secondAttribute="bottom" id="XtC-XC-mSQ"/>
-                                        <constraint firstItem="fSO-rK-UbP" firstAttribute="centerY" secondItem="hIx-f2-EV0" secondAttribute="centerY" id="uIP-lq-IRf"/>
-                                        <constraint firstAttribute="trailing" secondItem="fSO-rK-UbP" secondAttribute="trailing" constant="10" id="wis-Zj-Q4q"/>
-                                    </constraints>
-                                </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KrB-hH-dXD" customClass="ViewGuideMenuNotSelected">
-                                    <rect key="frame" x="0.0" y="150" width="124" height="30"/>
-                                    <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="WBt-MI-Shm" customClass="StackViewGuideMenuHorizontal">
-                                            <rect key="frame" x="10" y="5" width="104" height="21"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="raO-a2-yDO" customClass="LabelGuideMenuStep">
-                                                    <rect key="frame" x="0.0" y="0.0" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z2O-9O-zTX" customClass="LabelGuideMenuHeader">
-                                                    <rect key="frame" x="62" y="0.0" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </stackView>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yLt-Z3-dfu" customClass="ButtonGuideMenu">
-                                            <rect key="frame" x="0.0" y="0.0" width="124" height="30"/>
-                                            <state key="normal" title="Button"/>
-                                        </button>
-                                    </subviews>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="yLt-Z3-dfu" secondAttribute="trailing" id="CEb-Ob-KhT"/>
-                                        <constraint firstItem="WBt-MI-Shm" firstAttribute="leading" secondItem="KrB-hH-dXD" secondAttribute="leading" constant="10" id="KGj-Xv-7Hd"/>
-                                        <constraint firstItem="WBt-MI-Shm" firstAttribute="centerY" secondItem="KrB-hH-dXD" secondAttribute="centerY" id="mKh-3T-pyW"/>
-                                        <constraint firstItem="yLt-Z3-dfu" firstAttribute="leading" secondItem="KrB-hH-dXD" secondAttribute="leading" id="oL4-Qk-2Vu"/>
-                                        <constraint firstItem="yLt-Z3-dfu" firstAttribute="top" secondItem="KrB-hH-dXD" secondAttribute="top" id="rDk-gz-IJW"/>
-                                        <constraint firstAttribute="bottom" secondItem="yLt-Z3-dfu" secondAttribute="bottom" id="wwL-OM-xBt"/>
-                                        <constraint firstAttribute="trailing" secondItem="WBt-MI-Shm" secondAttribute="trailing" constant="10" id="zLP-nO-fXd"/>
-                                    </constraints>
-                                </view>
                             </subviews>
                             <constraints>
                                 <constraint firstItem="buI-Tv-IiQ" firstAttribute="leading" secondItem="Tnk-va-LaM" secondAttribute="leading" id="4NW-Zq-FNS"/>
-                                <constraint firstItem="KrB-hH-dXD" firstAttribute="leading" secondItem="Tnk-va-LaM" secondAttribute="leading" id="6do-8T-h9i"/>
                                 <constraint firstAttribute="trailing" secondItem="buI-Tv-IiQ" secondAttribute="trailing" id="Aud-4n-iUH"/>
-                                <constraint firstItem="hIx-f2-EV0" firstAttribute="leading" secondItem="Tnk-va-LaM" secondAttribute="leading" id="EJA-o5-bsQ"/>
                                 <constraint firstAttribute="trailing" secondItem="7DA-i8-FQk" secondAttribute="trailing" id="Jv5-BK-2UP"/>
                                 <constraint firstItem="0U5-Kc-uvD" firstAttribute="leading" secondItem="Tnk-va-LaM" secondAttribute="leading" id="K5u-aY-1vd"/>
-                                <constraint firstAttribute="trailing" secondItem="hIx-f2-EV0" secondAttribute="trailing" id="KLW-kI-MAi"/>
                                 <constraint firstAttribute="trailing" secondItem="pDg-BU-x6G" secondAttribute="trailing" id="MAr-fc-Yhq"/>
                                 <constraint firstAttribute="trailing" secondItem="0U5-Kc-uvD" secondAttribute="trailing" id="eJn-Vy-zF2"/>
-                                <constraint firstAttribute="trailing" secondItem="KrB-hH-dXD" secondAttribute="trailing" id="qrb-EO-8u1"/>
                                 <constraint firstItem="7DA-i8-FQk" firstAttribute="leading" secondItem="Tnk-va-LaM" secondAttribute="leading" id="vGh-lw-3mm"/>
                                 <constraint firstItem="pDg-BU-x6G" firstAttribute="leading" secondItem="Tnk-va-LaM" secondAttribute="leading" id="wwL-qQ-NLv"/>
                             </constraints>
