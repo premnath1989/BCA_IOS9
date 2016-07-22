@@ -421,9 +421,6 @@
 		439B954B1D3896AD00C86F93 /* SPAJ Add Signature.m in Sources */ = {isa = PBXBuildFile; fileRef = 439B95491D3896AD00C86F93 /* SPAJ Add Signature.m */; };
 		439B954C1D3896AD00C86F93 /* SPAJ Add Signature.xib in Resources */ = {isa = PBXBuildFile; fileRef = 439B954A1D3896AD00C86F93 /* SPAJ Add Signature.xib */; };
 		439EFBFA1D1A621500A0B8B0 /* CFFValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = 439EFBF91D1A621500A0B8B0 /* CFFValidation.m */; };
-		43A401E91D26094E0057D558 /* result.json in Resources */ = {isa = PBXBuildFile; fileRef = 43A401E81D26094E0057D558 /* result.json */; };
-		43A401EB1D2614AB0057D558 /* base64result.json in Resources */ = {isa = PBXBuildFile; fileRef = 43A401EA1D2614AB0057D558 /* base64result.json */; };
-		43A401ED1D26259B0057D558 /* filename.json in Resources */ = {isa = PBXBuildFile; fileRef = 43A401EC1D26259B0057D558 /* filename.json */; };
 		43A401F11D26415D0057D558 /* CFFAPIController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A401F01D26415D0057D558 /* CFFAPIController.m */; };
 		43B346AA1D110DE300B8DE32 /* ModelProspectChild.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B346A91D110DE300B8DE32 /* ModelProspectChild.m */; };
 		43B346AF1D112AA500B8DE32 /* AreaPotensialDiskusiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B346AD1D112AA500B8DE32 /* AreaPotensialDiskusiViewController.m */; };
@@ -1615,9 +1612,6 @@
 		439B954A1D3896AD00C86F93 /* SPAJ Add Signature.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SPAJ Add Signature.xib"; sourceTree = "<group>"; };
 		439EFBF81D1A621500A0B8B0 /* CFFValidation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFFValidation.h; sourceTree = "<group>"; };
 		439EFBF91D1A621500A0B8B0 /* CFFValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFFValidation.m; sourceTree = "<group>"; };
-		43A401E81D26094E0057D558 /* result.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = result.json; sourceTree = "<group>"; };
-		43A401EA1D2614AB0057D558 /* base64result.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = base64result.json; sourceTree = "<group>"; };
-		43A401EC1D26259B0057D558 /* filename.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = filename.json; sourceTree = "<group>"; };
 		43A401EF1D26415D0057D558 /* CFFAPIController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFFAPIController.h; sourceTree = "<group>"; };
 		43A401F01D26415D0057D558 /* CFFAPIController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFFAPIController.m; sourceTree = "<group>"; };
 		43B346A81D110DE300B8DE32 /* ModelProspectChild.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelProspectChild.h; sourceTree = "<group>"; };
@@ -4717,9 +4711,6 @@
 		C4E9D1851612C64900016053 = {
 			isa = PBXGroup;
 			children = (
-				43A401EA1D2614AB0057D558 /* base64result.json */,
-				43A401E81D26094E0057D558 /* result.json */,
-				43A401EC1D26259B0057D558 /* filename.json */,
 				43F7C3161C9D409D0074F464 /* Formatter */,
 				43FA6C151C87CD5D0098BA47 /* HTML USED */,
 				AA4EF6E61C85A3F20050CCD8 /* PDFReader */,
@@ -5874,7 +5865,6 @@
 				AA4EF75F1C85A4260050CCD8 /* Reader-Print@3x.png in Resources */,
 				2958A8D917E986620090A791 /* status.plist in Resources */,
 				43870CC41D362AE70035143C /* AnalisaKebutuhanInvestasiViewController.xib in Resources */,
-				43A401E91D26094E0057D558 /* result.json in Resources */,
 				29A3EEC517EAA71100E1CE8B /* cb_glossy_off.png in Resources */,
 				049B29341C3CF88A00BD509B /* CFF_1.storyboard in Resources */,
 				29A3EEC617EAA71100E1CE8B /* cb_glossy_on.png in Resources */,
@@ -5905,7 +5895,6 @@
 				17F10EB31C6C85EF002C32D3 /* login_box.png in Resources */,
 				C394D6BB1C48861500722C07 /* PolicyOwner.storyboard in Resources */,
 				EF671896186302D0000BCE45 /* btn_exit.png in Resources */,
-				43A401ED1D26259B0057D558 /* filename.json in Resources */,
 				6A16C1A51889410700F7EFFA /* ProposalForm in Resources */,
 				6A0B175C188A36DE00931673 /* ApplicationAuthorization in Resources */,
 				6A0B175E188A36DE00931673 /* CA in Resources */,
@@ -5950,7 +5939,6 @@
 				2994B42518E121AE00B0D4D2 /* P2Table.xib in Resources */,
 				DE80E43A1CA3F7FB00D9E775 /* BlackRaccoon-Info.plist in Resources */,
 				2994B42718E121AE00B0D4D2 /* Table2.xib in Resources */,
-				43A401EB1D2614AB0057D558 /* base64result.json in Resources */,
 				2994B42918E121AE00B0D4D2 /* Table3.xib in Resources */,
 				C34B421618ED620B00BD92C9 /* IDTypeForCO.plist in Resources */,
 				42B8B13A1917339500E09A34 /* CA_Form.xib in Resources */,

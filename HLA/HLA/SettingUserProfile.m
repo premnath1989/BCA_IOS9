@@ -502,7 +502,6 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
                     });
                 });
                 [self getHTMLDataTable];
-                [self getCFFHTMLFile];
             }else if([rateResponse.strStatus caseInsensitiveCompare:@"False"] == NSOrderedSame){
                 [spinnerLoading stopLoadingSpinner];
                 UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Proses Login anda gagal" message:@"" delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];

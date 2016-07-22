@@ -6,6 +6,9 @@
 //  Copyright © 2016 InfoConnect Sdn Bhd. All rights reserved.
 //
 
+#define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0) //1
+#define kLatestKivaLoansURL [NSURL URLWithString:@"http://mposws.azurewebsites.net/Service2.svc/getAllData"] //2
+
 #import "CFFAPIController.h"
 #import "ModelCFFHtml.h"
 
@@ -71,15 +74,50 @@
 
 #pragma mark AFNetworking For Global Use
 -(void)apiCallHtmlTable:(NSString *)URL JSONKey:(NSArray *)jsonKey TableDictionary:(NSDictionary *)tableDictionary{
+    // handle response
     NSURLSession *session = [NSURLSession sharedSession];
     [[session dataTaskWithURL:[NSURL URLWithString:URL]
             completionHandler:^(NSData *data,
                                 NSURLResponse *response,
                                 NSError *error) {
                 // handle response
-                [self insertJsonToDB:data JSONKey:jsonKey TableDictionary:tableDictionary];
+                if(data != nil){
+                    [self insertJsonToDB:data JSONKey:jsonKey TableDictionary:tableDictionary];
+                    [self getCFFHTMLFile];
+                }
             }] resume];
 }
+
+-(void)getCFFHTMLFile{
+    // handle response
+    NSLog(@"getCFFHTMLFile");
+    dispatch_async(kBgQueue, ^{
+        NSData* data = [NSData dataWithContentsOfURL:
+                        kLatestKivaLoansURL];
+        
+        NSLog(@"respond getCFFHTMLFile exceeded");
+        if(data != nil)
+            [self performSelectorOnMainThread:@selector(createHTMLFile:)
+                                   withObject:data waitUntilDone:YES];
+    });
+}
+
+-(void)createHTMLFile:(NSData *)responseData{
+    CFFAPIController* cffAPIController;
+    cffAPIController = [[CFFAPIController alloc]init];
+    NSError* error;
+    NSDictionary* json = [NSJSONSerialization
+                          JSONObjectWithData:responseData //1
+                          
+                          options:kNilOptions
+                          error:&error];
+    
+    NSArray* arrayFileName = [[json objectForKey:@"d"] valueForKey:@"FileName"]; //2
+    for (int i=0;i<[arrayFileName count];i++){
+        [cffAPIController apiCallCrateHtmlFile:[NSString stringWithFormat:@"http://mposws.azurewebsites.net/Service2.svc/GetHtmlFile?fileName=%@",[arrayFileName objectAtIndex:i]] RootPathFolder:@"CFFfolder"];
+    }
+}
+
 
 -(void)insertJsonToDB:(NSData *)jsonData JSONKey:(NSArray *)jsonKey TableDictionary:(NSDictionary *)tableDictionary{
     @try {

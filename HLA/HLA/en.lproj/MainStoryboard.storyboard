@@ -10994,6 +10994,24 @@
                                     </label>
                                 </subviews>
                             </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="LxD-IA-0Vo">
+                                <rect key="frame" x="236" y="710" width="108" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Error Report">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="btnReport:" destination="ds4-DI-v8U" eventType="touchUpInside" id="TdU-30-teh"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -11005,6 +11023,7 @@
                         <outlet property="lblTimeRemaining" destination="W0o-w7-yn1" id="guP-2S-tig"/>
                         <outlet property="lblVersinBuild" destination="qlO-kb-24G" id="dlI-oc-cwk"/>
                         <outlet property="outletLogin" destination="bKx-ZE-ZlB" id="2Ld-76-W0G"/>
+                        <outlet property="outletReport" destination="LxD-IA-0Vo" id="OTe-r2-XIg"/>
                         <outlet property="outletReset" destination="e4o-1F-YoA" id="hLg-tR-Lev"/>
                         <outlet property="scrollViewLogin" destination="Yrw-oj-gAe" id="nFs-hi-Sle"/>
                         <outlet property="serverOption" destination="r2t-xk-K6H" id="HxI-KV-MLm"/>

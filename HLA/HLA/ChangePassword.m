@@ -497,7 +497,6 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
                 });
                 
                 [self getHTMLDataTable];
-                [self getCFFHTMLFile];
             }else if([rateResponse.strStatus caseInsensitiveCompare:@"False"] == NSOrderedSame){
                 [spinnerLoading stopLoadingSpinner];
                 UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Proses Login anda gagal, periksa username dan password anda" message:@"" delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
