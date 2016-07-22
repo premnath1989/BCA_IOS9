@@ -205,7 +205,27 @@
 -(IBAction)actionSaveChild:(id)sender{
     if ([cffValidation validateChild:[self setDictionaryObjectChild]]){
         NSString* nasabahID = [NSString stringWithFormat:@"%@%@",[modelIdentificationType getOtherTypeDesc:pp.OtherIDType],pp.OtherIDTypeNo];
-        if ([cffValidation validateOtherIDNumberForChild:OtherIDType TextIDNumber:txtOtherIDType IDNasabah:nasabahID IDTypeCodeSelected:IDTypeCodeSelected]){
+        NSString* childIDInterface = [NSString stringWithFormat:@"%@%@",[modelIdentificationType getOtherTypeDesc:IDTypeCodeSelected],txtOtherIDType.text];
+        NSString* childID = [NSString stringWithFormat:@"%@%@",[modelIdentificationType getOtherTypeDesc:[DictChildData valueForKey:@"OtherIDType"]],[DictChildData valueForKey:@"OtherIDTypeNo"]];
+        
+        if (![childIDInterface isEqualToString:childID]){
+            if ([cffValidation validateOtherIDNumberForChild:OtherIDType TextIDNumber:txtOtherIDType IDNasabah:nasabahID IDTypeCodeSelected:IDTypeCodeSelected]){
+                if ([DictChildData count]>0){
+                    if ([modelProspectChild chekcExistingRecord:[[DictChildData valueForKey:@"IndexNo"] intValue]]>0){
+                        [modelProspectChild updateProspectChild:[self setDictionaryChild]];
+                    }
+                    else{
+                        [modelProspectChild saveProspectChild:[self setDictionaryChild]];
+                    }
+                }
+                else{
+                    [modelProspectChild saveProspectChild:[self setDictionaryChild]];
+                }
+                
+                [self dismissViewControllerAnimated:YES completion:^{[delegate reloadProspectData];}];
+            }
+        }
+        else{
             if ([DictChildData count]>0){
                 if ([modelProspectChild chekcExistingRecord:[[DictChildData valueForKey:@"IndexNo"] intValue]]>0){
                     [modelProspectChild updateProspectChild:[self setDictionaryChild]];
@@ -220,6 +240,7 @@
             
             [self dismissViewControllerAnimated:YES completion:^{[delegate reloadProspectData];}];
         }
+        
     }
     else{
     
@@ -360,6 +381,7 @@
         NSDictionary* dictOccup=[[NSDictionary alloc]initWithDictionary:[modelPopOver getOccupationByCode:[DictChildData valueForKey:@"ProspectChildOccupationCode"]]];
         txtName.text = [DictChildData valueForKey:@"ProspectChildName"];
         [outletDOB setTitle:[DictChildData valueForKey:@"ProspectChildDOB"] forState:UIControlStateNormal];
+        IDTypeCodeSelected = [DictChildData valueForKey:@"OtherIDType"];
         [OtherIDType setTitle:[modelIdentificationType getOtherTypeDesc:[DictChildData valueForKey:@"OtherIDType"]] forState:UIControlStateNormal];
         txtOtherIDType.text=[DictChildData valueForKey:@"OtherIDTypeNo"];
         [outletNationality setTitle:[DictChildData valueForKey:@"Nationality"] forState:UIControlStateNormal];

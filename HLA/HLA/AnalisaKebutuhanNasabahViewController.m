@@ -78,6 +78,7 @@
         proteksiVC.cffHeaderSelectedDictionary = [[NSDictionary alloc]initWithDictionary:cffHeaderSelectedDictionary];
         if ([proteksiVC.view isDescendantOfView:childView]){
             [childView bringSubviewToFront:proteksiVC.view];
+            [proteksiVC viewDidAppear:NO];
         }
         else{
             [childView addSubview:proteksiVC.view];
@@ -93,6 +94,7 @@
         pensiunVC.cffHeaderSelectedDictionary = [[NSDictionary alloc]initWithDictionary:cffHeaderSelectedDictionary];
         if ([pensiunVC.view isDescendantOfView:childView]){
             [childView bringSubviewToFront:pensiunVC.view];
+            [pensiunVC viewDidAppear:NO];
         }
         else{
             [childView addSubview:pensiunVC.view];
@@ -108,6 +110,7 @@
         pendidikanVC.cffHeaderSelectedDictionary = [[NSDictionary alloc]initWithDictionary:cffHeaderSelectedDictionary];
         if ([pendidikanVC.view isDescendantOfView:childView]){
             [childView bringSubviewToFront:pendidikanVC.view];
+            [pendidikanVC viewDidAppear:NO];
         }
         else{
             [childView addSubview:pendidikanVC.view];
@@ -123,6 +126,7 @@
         warisanVC.cffHeaderSelectedDictionary = [[NSDictionary alloc]initWithDictionary:cffHeaderSelectedDictionary];
         if ([warisanVC.view isDescendantOfView:childView]){
             [childView bringSubviewToFront:warisanVC.view];
+            [warisanVC viewDidAppear:NO];
         }
         else{
             [childView addSubview:warisanVC.view];
@@ -138,6 +142,7 @@
         investasiVC.cffHeaderSelectedDictionary = [[NSDictionary alloc]initWithDictionary:cffHeaderSelectedDictionary];
         if ([investasiVC.view isDescendantOfView:childView]){
             [childView bringSubviewToFront:investasiVC.view];
+            [investasiVC viewDidAppear:NO];
         }
         else{
             [childView addSubview:investasiVC.view];
