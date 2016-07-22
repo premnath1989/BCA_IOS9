@@ -191,7 +191,7 @@
     
     FMResultSet *s;
     if ([dictSearch valueForKey:@"Date"] != nil){
-        s = [database executeQuery:[NSString stringWithFormat:@"select CFFT.*,pp.*,ci.*,ep.* from CFFTransaction CFFT join prospect_profile pp join contact_input ci on CFFT.ProspectIndexNo=pp.IndexNo and CFFT.ProspectIndexNo=ci.IndexNo left join eProposal_Identification ep on pp.OtherIDType=ep.DataIdentifier or pp.OtherIDType=ep.IdentityCode where ci.ContactCode='CONT008' and pp.ProspectName like \"%%%@%%\" and pp.BranchName like \"%%%@%%\" and CFFT.CFFDateCreated = \"%@\"",[dictSearch valueForKey:@"Name"],[dictSearch valueForKey:@"BranchName"],[dictSearch valueForKey:@"Date"]]];
+        s = [database executeQuery:[NSString stringWithFormat:@"select CFFT.*,pp.*,ci.*,ep.* from CFFTransaction CFFT join prospect_profile pp join contact_input ci on CFFT.ProspectIndexNo=pp.IndexNo and CFFT.ProspectIndexNo=ci.IndexNo left join eProposal_Identification ep on pp.OtherIDType=ep.DataIdentifier or pp.OtherIDType=ep.IdentityCode where ci.ContactCode='CONT008' and pp.ProspectName like \"%%%@%%\" and pp.BranchName like \"%%%@%%\" and pp.ProspectDOB = \"%@\"",[dictSearch valueForKey:@"Name"],[dictSearch valueForKey:@"BranchName"],[dictSearch valueForKey:@"Date"]]];
         
     }
     else{

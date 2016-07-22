@@ -134,7 +134,9 @@
                 NSString* stringFileName=[NSString stringWithFormat:@"\"%@/\%@\"",[item objectForKey:[jsonKey objectAtIndex:4]],[item objectForKey:[jsonKey objectAtIndex:1]]];
                 NSString* stringStatus=[NSString stringWithFormat:@"\"%@\"",[item objectForKey:[jsonKey objectAtIndex:2]]];
                 NSString* stringSection=[NSString stringWithFormat:@"\"%@\"",[item objectForKey:[jsonKey objectAtIndex:3]]];
-                NSArray* tableValue= [[NSArray alloc]initWithObjects:stringID,stringFileName,stringStatus,stringSection, nil];
+                
+                NSMutableArray* tableValue = [[NSMutableArray alloc]initWithObjects:stringID,stringFileName,stringStatus,stringSection, nil];
+                NSMutableArray* tableColumn = [[NSMutableArray alloc] initWithArray:[tableDictionary valueForKey:@"columnName"]];
                 
                 //check duplicate value
                 NSString* query=[NSString stringWithFormat:@"select CFFHtmlID from CFFHtml where CFFID=%@ and CFFHtmlName=%@ and CFFHtmlStatus=%@ and CFFHtmlSection=%@",stringID,stringFileName,stringStatus,stringSection];
@@ -142,11 +144,13 @@
                 
                 int duplicateRow = [modelCFFHtml voidGetDuplicateRowID:query ColumnReturn:columnReturn];
                 if (duplicateRow>0){
-                    
+                    [tableColumn addObject:columnReturn];
+                    [tableValue addObject:[NSNumber numberWithInt:duplicateRow]];
                 }
                 
                 NSMutableDictionary* dictDataTable = [[NSMutableDictionary alloc]initWithDictionary:tableDictionary];
                 [dictDataTable setObject:tableValue forKey:@"columnValue"];
+                [dictDataTable setObject:tableColumn forKey:@"columnName"];
                 
                 [modelCFFHtml saveGlobalHtmlData:dictDataTable];
                 /*dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
