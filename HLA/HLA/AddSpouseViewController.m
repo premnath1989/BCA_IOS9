@@ -388,6 +388,7 @@
         [outletOccupation setTitle:[dictOccup valueForKey:@"OccpDesc"] forState:UIControlStateNormal];
         OccupCodeSelected = [dictOccup valueForKey:@"OccpCode"];
         
+        [txtAge setText:[NSString stringWithFormat:@"%i",[formatter calculateAge:[dictSpouseData valueForKey:@"ProspectSpouseDOB"]]]];
         if ([[dictSpouseData valueForKey:@"ProspectSpouseGender"] isEqualToString:@"MALE"]) {
             gender = @"MALE";
             segGender.selectedSegmentIndex = 0;
@@ -450,6 +451,8 @@
         txtYearsInsured.text=[DictSpouseData valueForKey:@"YearsInsured"];
         [outletOccupation setTitle:[dictOccup valueForKey:@"OccpDesc"] forState:UIControlStateNormal];
         OccupCodeSelected = [dictOccup valueForKey:@"OccpCode"];
+        
+        [txtAge setText:[NSString stringWithFormat:@"%i",[formatter calculateAge:[DictSpouseData valueForKey:@"ProspectSpouseDOB"]]]];
         
         if ([[DictSpouseData valueForKey:@"ProspectSpouseGender"] isEqualToString:@"MALE"]) {
             gender = @"MALE";

@@ -389,7 +389,7 @@
         txtYearsInsured.text=[DictChildData valueForKey:@"YearsInsured"];
         [outletOccupation setTitle:[dictOccup valueForKey:@"OccpDesc"] forState:UIControlStateNormal];
         OccupCodeSelected = [dictOccup valueForKey:@"OccpCode"];
-        
+         [txtAge setText:[NSString stringWithFormat:@"%i",[formatter calculateAge:[DictChildData valueForKey:@"ProspectChildDOB"]]]];
         if ([[DictChildData valueForKey:@"ProspectChildGender"] isEqualToString:@"MALE"]) {
             gender = @"MALE";
             segGender.selectedSegmentIndex = 0;

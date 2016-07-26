@@ -9,8 +9,11 @@
 #import "SPAJ Add Signature.h"
 #import "SIMenuTableViewCell.h"
 #import "mySmoothLineView.h"
+#import "Theme.h"
+#import "User Interface.h"
 
 @interface SPAJ_Add_Signature (){
+    IBOutlet UILabel *labelSignatureParty;
     IBOutlet UITableView *tablePartiesSignature;
     IBOutlet UIView *viewChild;
     
@@ -21,6 +24,8 @@
 @end
 
 @implementation SPAJ_Add_Signature {
+    UserInterface *objectUserInterface;
+    
     NSMutableArray *mutableArrayNumberListOfSubMenu;
     NSMutableArray *mutableArrayListOfSubMenu;
     NSMutableArray *mutableArrayListOfSubTitleMenu;
@@ -34,6 +39,11 @@
     NSString *stringTableRow2;
     NSString *stringTableRow3;
     NSString *stringTableRow4;
+    
+    BOOL boolPemegangPolis;
+    BOOL boolTertanggung;
+    BOOL boolOrangTuaWali;
+    BOOL boolTenagaPenjual;
 }
 
 - (void)viewDidLoad {
@@ -41,7 +51,33 @@
     viewBorder.layer.borderWidth=1.0;
     viewBorder.layer.borderColor=[UIColor blackColor].CGColor;
     [self voidArrayInitialization];
+    objectUserInterface = [[UserInterface alloc] init];
+    
+    boolPemegangPolis = true;
+    boolTertanggung = false;
+    boolOrangTuaWali = false;
+    boolTenagaPenjual = false;
     // Do any additional setup after loading the view from its nib.
+}
+
+-(void) showDetailsForIndexPath:(NSIndexPath*)indexPath
+{
+    switch (indexPath.row) {
+        case 0:
+            labelSignatureParty.text = @"Tanda Tangan Pemegang Polis";
+            break;
+        case 1:
+            labelSignatureParty.text = @"Tanda Tangan Calon Tertanggung";
+            break;
+        case 2:
+            labelSignatureParty.text = @"Tanda Tangan Orang Tua/Wali";
+            break;
+        case 3:
+            labelSignatureParty.text = @"Tanda Tangan Tenaga Penjual";
+            break;
+        default:
+            break;
+    }
 }
 
 -(void)voidArrayInitialization{
@@ -71,6 +107,26 @@
     //viewToSign.layer.sublayers = nil;
 }
 
+- (IBAction)actionCompleteSignature:(id)sender{
+    if (boolPemegangPolis){
+        boolTertanggung = true;
+        boolOrangTuaWali =  false;
+        boolTenagaPenjual = false;
+    }
+    if (boolTertanggung){
+        boolOrangTuaWali =  true;
+        boolTenagaPenjual = false;
+    }
+    if (boolOrangTuaWali){
+        boolTenagaPenjual = true;
+    }
+    if (boolTenagaPenjual){
+        boolTertanggung = true;
+        boolOrangTuaWali =  true;
+        boolTenagaPenjual = true;
+    }
+    [tablePartiesSignature reloadData];
+}
 
 #pragma mark - table view
 
@@ -111,16 +167,6 @@
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SIMenuTableViewCell" owner:self options:nil];
         cell = [nib objectAtIndex:0];
     }
-    /*UIView *bgColorView = [[UIView alloc] init];
-    if (indexPath.row<5){
-        [cell setBackgroundColor:[UIColor colorWithRed:204.0/255.0 green:203.0/255.0 blue:205.0/255.0 alpha:1.0]];
-    }
-    else{
-        [cell setBackgroundColor:[UIColor colorWithRed:204.0/255.0 green:203.0/255.0 blue:205.0/255.0 alpha:1.0]];
-    }
-    
-    bgColorView.backgroundColor = [UIColor colorWithRed:0/255.0f green:102.0f/255.0f blue:179.0f/255.0f alpha:1];*/
-    //[cell setSelectedBackgroundView:bgColorView];
     [cell setBackgroundColor:[UIColor whiteColor]];
     
     [cell.labelSubtitle setHidden:NO];
@@ -138,13 +184,86 @@
     [cell.button1 setEnabled:false];
     [cell.button2 setEnabled:false];
     [cell.button3 setEnabled:false];
+
+    if (boolPemegangPolis){
+        if (indexPath.row == 0){
+            [cell setUserInteractionEnabled:true];
+            [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
+        }
+        else{
+        
+        }
+    }
+    else{
+        if (indexPath.row == 0){
+            [cell setUserInteractionEnabled:false];
+        }
+        else{
+            
+        }
+    }
+    
+    
+    if (boolTertanggung){
+        if (indexPath.row == 1){
+            [cell setUserInteractionEnabled:true];
+            [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
+        }
+        else{
+            
+        }
+    }
+    else{
+        if (indexPath.row == 1){
+            [cell setUserInteractionEnabled:false];
+        }
+        else{
+            
+        }
+    }
+    
+    if (boolOrangTuaWali){
+        if (indexPath.row == 2){
+            [cell setUserInteractionEnabled:true];
+            [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
+        }
+        else{
+            
+        }
+    }
+    else{
+        if (indexPath.row == 2){
+            [cell setUserInteractionEnabled:false];
+        }
+        else{
+            
+        }
+    }
+    
+    if (boolTenagaPenjual){
+        if (indexPath.row == 3){
+            [cell setUserInteractionEnabled:true];
+            [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
+        }
+        else{
+            
+        }
+    }
+    else{
+        if (indexPath.row == 3){
+            [cell setUserInteractionEnabled:false];
+        }
+        else{
+            
+        }
+    }
     
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //[self showDetailsForIndexPath:indexPath];
+    [self showDetailsForIndexPath:indexPath];
 }
 
 /*

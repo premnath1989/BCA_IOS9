@@ -13,6 +13,7 @@
                 <outlet property="buttonProteksi" destination="V3F-RP-yNq" id="vp9-g7-Ese"/>
                 <outlet property="buttonWarisan" destination="hA9-mW-6HC" id="W9d-K0-UAD"/>
                 <outlet property="childView" destination="sJg-fm-8uy" id="5VZ-i3-HNE"/>
+                <outlet property="segmentPage4" destination="aB1-47-9KZ" id="Mca-Ck-5Lq"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -25,7 +26,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="760" height="42"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="V3F-RP-yNq">
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="V3F-RP-yNq">
                             <rect key="frame" x="0.0" y="0.0" width="152" height="42"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="PROTEKSI"/>
@@ -33,7 +34,7 @@
                                 <action selector="actionChangeTabPage:" destination="-1" eventType="touchUpInside" id="I8d-XV-6Vh"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="UXU-em-yrL">
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="UXU-em-yrL">
                             <rect key="frame" x="608" y="0.0" width="152" height="42"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="INVESTASI"/>
@@ -41,7 +42,7 @@
                                 <action selector="actionChangeTabPage:" destination="-1" eventType="touchUpInside" id="5lV-be-SK0"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="wuU-Po-o6a">
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="wuU-Po-o6a">
                             <rect key="frame" x="152" y="0.0" width="152" height="42"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="PENSIUN"/>
@@ -49,7 +50,7 @@
                                 <action selector="actionChangeTabPage:" destination="-1" eventType="touchUpInside" id="lem-kL-pDV"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="cJK-tF-6Xx">
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="cJK-tF-6Xx">
                             <rect key="frame" x="304" y="0.0" width="152" height="42"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="PENDIDIKAN"/>
@@ -57,7 +58,7 @@
                                 <action selector="actionChangeTabPage:" destination="-1" eventType="touchUpInside" id="IpU-xB-n0R"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hA9-mW-6HC">
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hA9-mW-6HC">
                             <rect key="frame" x="456" y="0.0" width="152" height="42"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="WARISAN"/>
@@ -65,6 +66,20 @@
                                 <action selector="actionChangeTabPage:" destination="-1" eventType="touchUpInside" id="dM5-2A-Z09"/>
                             </connections>
                         </button>
+                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="aB1-47-9KZ">
+                            <rect key="frame" x="8" y="7" width="744" height="29"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="Proteksi"/>
+                                <segment title="Pensiun"/>
+                                <segment title="Pendidikan"/>
+                                <segment title="Warisan"/>
+                                <segment title="Investasi"/>
+                            </segments>
+                            <connections>
+                                <action selector="actionChangeMenuPage:" destination="-1" eventType="valueChanged" id="vfr-1e-UNa"/>
+                            </connections>
+                        </segmentedControl>
                     </subviews>
                     <color key="backgroundColor" red="0.92549019610000005" green="0.92549019610000005" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
