@@ -7,10 +7,12 @@
 //
 
 #import "DataNasabahViewController.h"
-
+#import "ModelCFFTransaction.h"
 
 @interface DataNasabahViewController ()
-
+{
+    ModelCFFTransaction* modelCFFTransaction;
+}
 @end
 
 @implementation DataNasabahViewController{
@@ -40,6 +42,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    modelCFFTransaction = [[ModelCFFTransaction alloc]init];
     modelProspectProfile=[[ModelProspectProfile alloc]init];
     modelProspectSpouse=[[ModelProspectSpouse alloc]init];
     modelProspectChild=[[ModelProspectChild alloc]init];
@@ -251,6 +254,7 @@
 #pragma mark delegate
 -(void)reloadProspectData{
     [self loadData];
+    [modelCFFTransaction updateCFFDateModified:[cffTransactionID intValue]];
 }
 
 

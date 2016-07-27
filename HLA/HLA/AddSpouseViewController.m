@@ -68,6 +68,15 @@
     [self.view.superview setBackgroundColor:[UIColor whiteColor]];
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [self loadSpouseData];
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [self loadSpouseData];
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     modelIdentificationType = [[ModelIdentificationType alloc]init];
@@ -187,9 +196,11 @@
     pp = [ProspectTableData objectAtIndex:0];*/
     if ([pp.ProspectGender.uppercaseString isEqualToString:@"MALE"]){
         [segGender setSelectedSegmentIndex:1];
+        [outletRelation setTitle:@"Istri" forState:UIControlStateNormal];
     }
     else{
         [segGender setSelectedSegmentIndex:0];
+        [outletRelation setTitle:@"Suami" forState:UIControlStateNormal];
     }
     [self ActionGender:(UISegmentedControl *)segGender];
 }
@@ -368,6 +379,7 @@
         NSDictionary* dictOccup=[[NSDictionary alloc]initWithDictionary:[modelPopOver getOccupationByCode:[dictSpouseData valueForKey:@"ProspectSpouseOccupationCode"]]];
         txtName.text = [dictSpouseData valueForKey:@"ProspectSpouseName"];
         [outletDOB setTitle:[dictSpouseData valueForKey:@"ProspectSpouseDOB"] forState:UIControlStateNormal];
+        IDTypeCodeSelected = [dictSpouseData valueForKey:@"OtherIDType"];
         [OtherIDType setTitle:[modelIdentificationType getOtherTypeDesc:[dictSpouseData valueForKey:@"OtherIDType"]] forState:UIControlStateNormal];
         txtOtherIDType.text=[dictSpouseData valueForKey:@"OtherIDTypeNo"];
         [outletNationality setTitle:[dictSpouseData valueForKey:@"Nationality"] forState:UIControlStateNormal];
@@ -424,6 +436,71 @@
     }
 
 }
+
+-(void)loadSpouseData{
+    if ([DictSpouseData count]>0){
+        NSDictionary* dictOccup=[[NSDictionary alloc]initWithDictionary:[modelPopOver getOccupationByCode:[DictSpouseData valueForKey:@"ProspectSpouseOccupationCode"]]];
+        txtName.text = [DictSpouseData valueForKey:@"ProspectSpouseName"];
+        [outletDOB setTitle:[DictSpouseData valueForKey:@"ProspectSpouseDOB"] forState:UIControlStateNormal];
+        IDTypeCodeSelected = [DictSpouseData valueForKey:@"OtherIDType"];
+        [OtherIDType setTitle:[modelIdentificationType getOtherTypeDesc:[DictSpouseData valueForKey:@"OtherIDType"]] forState:UIControlStateNormal];
+        txtOtherIDType.text=[DictSpouseData valueForKey:@"OtherIDTypeNo"];
+        [outletNationality setTitle:[DictSpouseData valueForKey:@"Nationality"] forState:UIControlStateNormal];
+        [outletRelation setTitle:[DictSpouseData valueForKey:@"Relation"] forState:UIControlStateNormal];
+        txtYearsInsured.text=[DictSpouseData valueForKey:@"YearsInsured"];
+        [outletOccupation setTitle:[dictOccup valueForKey:@"OccpDesc"] forState:UIControlStateNormal];
+        OccupCodeSelected = [dictOccup valueForKey:@"OccpCode"];
+        
+        if ([[DictSpouseData valueForKey:@"ProspectSpouseGender"] isEqualToString:@"MALE"]) {
+            gender = @"MALE";
+            segGender.selectedSegmentIndex = 0;
+        }
+        else {
+            gender = @"FEMALE";
+            segGender.selectedSegmentIndex = 1;
+        }
+        
+        if ([[DictSpouseData valueForKey:@"Smoker"] isEqualToString:@"Y"]) {
+            ClientSmoker = @"Y";
+            segSmoker.selectedSegmentIndex = 0;
+        }
+        else {
+            ClientSmoker = @"N";
+            segSmoker.selectedSegmentIndex = 1;
+        }
+        
+        /*dictionarySpouse = [[NSDictionary alloc]initWithObjectsAndKeys:spouseName,@"ProspectSpouseName",
+         spouseDOB,@"ProspectSpouseDOB",
+         spouseOtherIDType,@"OtherIDType",
+         spouseOtherIDNumber,@"OtherIDTypeNo",
+         spouseNationality,@"Nationality",
+         spouseRelation,@"Relation",
+         spouseYearsInsured,@"YearsInsured",
+         spouseOccupationCode,@"ProspectSpouseOccupationCode",
+         prospectProfileID,@"ProspectIndexNo",
+         cffTransactionID,@"CFFTransactionID",
+         gender,@"ProspectSpouseGender",
+         ClientSmoker,@"Smoker",nil];*/
+    }
+    else{
+        txtName.text = @"";
+        [outletDOB setTitle:@"" forState:UIControlStateNormal];
+        [OtherIDType setTitle:@"" forState:UIControlStateNormal];
+        txtOtherIDType.text=@"";
+        [outletNationality setTitle:@"" forState:UIControlStateNormal];
+        [outletRelation setTitle:@"" forState:UIControlStateNormal];
+        txtYearsInsured.text=@"";
+        [outletOccupation setTitle:@"" forState:UIControlStateNormal];
+        OccupCodeSelected = @"";
+        gender = @"";
+        segGender.selectedSegmentIndex = 0;
+        ClientSmoker = @"";
+        segSmoker.selectedSegmentIndex = 0;
+        [self autoSelectGender];
+    }
+    
+}
+
 
 
 #pragma mark setDictionary

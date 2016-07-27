@@ -78,6 +78,10 @@
 		0FFA18641D21283300C63A47 /* Entity SPAJ Header.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FFA18631D21283300C63A47 /* Entity SPAJ Header.m */; };
 		0FFA187D1D2134AD00C63A47 /* Query SPAJ Header.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FFA187B1D2134AD00C63A47 /* Query SPAJ Header.m */; };
 		0FFA18801D2262E700C63A47 /* Insert Initialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FFA187F1D2262E700C63A47 /* Insert Initialization.m */; };
+		0FFF77871D41F2E30045616F /* SPAJ Capture Identification.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FFF77821D41F2E30045616F /* SPAJ Capture Identification.m */; };
+		0FFF77881D41F2E30045616F /* SPAJ Capture Identification.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FFF77831D41F2E30045616F /* SPAJ Capture Identification.xib */; };
+		0FFF77891D41F2E30045616F /* SPAJ Form Generation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FFF77851D41F2E30045616F /* SPAJ Form Generation.m */; };
+		0FFF778A1D41F2E30045616F /* SPAJ Form Generation.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FFF77861D41F2E30045616F /* SPAJ Form Generation.xib */; };
 		162C3C0F1BBBD7270022CAF0 /* dbupdates in Resources */ = {isa = PBXBuildFile; fileRef = 162C3C0E1BBBD7270022CAF0 /* dbupdates */; };
 		1706BD4C1C7169A40038D1DB /* menu_customerfactfind.png in Resources */ = {isa = PBXBuildFile; fileRef = 1706BD451C7169A40038D1DB /* menu_customerfactfind.png */; };
 		1706BD4D1C7169A40038D1DB /* menu_datanasabah.png in Resources */ = {isa = PBXBuildFile; fileRef = 1706BD461C7169A40038D1DB /* menu_datanasabah.png */; };
@@ -1068,6 +1072,12 @@
 		0FFA187C1D2134AD00C63A47 /* Query SPAJ Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Query SPAJ Header.h"; path = "SPAJ/Query SPAJ Header.h"; sourceTree = "<group>"; };
 		0FFA187E1D2262E700C63A47 /* Insert Initialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Insert Initialization.h"; path = "SPAJ/Insert Initialization.h"; sourceTree = "<group>"; };
 		0FFA187F1D2262E700C63A47 /* Insert Initialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Insert Initialization.m"; path = "SPAJ/Insert Initialization.m"; sourceTree = "<group>"; };
+		0FFF77811D41F2E30045616F /* SPAJ Capture Identification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SPAJ Capture Identification.h"; path = "SPAJ/SPAJ Capture Identification.h"; sourceTree = "<group>"; };
+		0FFF77821D41F2E30045616F /* SPAJ Capture Identification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "SPAJ Capture Identification.m"; path = "SPAJ/SPAJ Capture Identification.m"; sourceTree = "<group>"; };
+		0FFF77831D41F2E30045616F /* SPAJ Capture Identification.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "SPAJ Capture Identification.xib"; path = "SPAJ/SPAJ Capture Identification.xib"; sourceTree = "<group>"; };
+		0FFF77841D41F2E30045616F /* SPAJ Form Generation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SPAJ Form Generation.h"; path = "SPAJ/SPAJ Form Generation.h"; sourceTree = "<group>"; };
+		0FFF77851D41F2E30045616F /* SPAJ Form Generation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "SPAJ Form Generation.m"; path = "SPAJ/SPAJ Form Generation.m"; sourceTree = "<group>"; };
+		0FFF77861D41F2E30045616F /* SPAJ Form Generation.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "SPAJ Form Generation.xib"; path = "SPAJ/SPAJ Form Generation.xib"; sourceTree = "<group>"; };
 		161EA6BB1B131A9E009AF454 /* hladb.sqlite.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = hladb.sqlite.sql; path = database/src/hladb.sqlite.sql; sourceTree = "<group>"; };
 		162C3C0C1BBBD6430022CAF0 /* dbupdates-sample.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "dbupdates-sample.json"; sourceTree = "<group>"; };
 		162C3C0E1BBBD7270022CAF0 /* dbupdates */ = {isa = PBXFileReference; lastKnownFileType = folder; path = dbupdates; sourceTree = "<group>"; };
@@ -2679,7 +2689,12 @@
 				0F3268351D1A93A4001A9021 /* SPAJ Existing List.xib */,
 				0F32683A1D1A93A4001A9021 /* SPAJ Main.xib */,
 				0F32683D1D1A93A4001A9021 /* SPAJ Submitted List.xib */,
+<<<<<<< HEAD
+				0FFF77831D41F2E30045616F /* SPAJ Capture Identification.xib */,
+				0FFF77861D41F2E30045616F /* SPAJ Form Generation.xib */,
+=======
 				DE07EAD01D41D71B0046AFA1 /* SPAJ Form Generation.xib */,
+>>>>>>> bddb151f9bf3f6721fc8a8c750479cc84affbe8d
 				0FF845741D23A3A4008CF861 /* Cell */,
 			);
 			name = View;
@@ -2695,6 +2710,10 @@
 				0FFA185D1D1D1FB100C63A47 /* SPAJ Add Detail.m */,
 				0F3268301D1A93A4001A9021 /* SPAJ Add Menu.h */,
 				0F3268311D1A93A4001A9021 /* SPAJ Add Menu.m */,
+				0FFF77811D41F2E30045616F /* SPAJ Capture Identification.h */,
+				0FFF77821D41F2E30045616F /* SPAJ Capture Identification.m */,
+				0FFF77841D41F2E30045616F /* SPAJ Form Generation.h */,
+				0FFF77851D41F2E30045616F /* SPAJ Form Generation.m */,
 				0F2A0CAF1D24F306009D11F6 /* SPAJ E Application List.h */,
 				0F2A0CB01D24F306009D11F6 /* SPAJ E Application List.m */,
 				0F3268331D1A93A4001A9021 /* SPAJ Existing List.h */,
@@ -5926,9 +5945,11 @@
 				2994B41418E121AE00B0D4D2 /* P1.jpg in Resources */,
 				2994B41518E121AE00B0D4D2 /* P2-1-Header.jpg in Resources */,
 				1706BD4D1C7169A40038D1DB /* menu_datanasabah.png in Resources */,
+				0FFF77881D41F2E30045616F /* SPAJ Capture Identification.xib in Resources */,
 				2994B41618E121AE00B0D4D2 /* P2-1-Row.jpg in Resources */,
 				2994B41718E121AE00B0D4D2 /* P2-1.jpg in Resources */,
 				2994B41818E121AE00B0D4D2 /* P2-2.jpg in Resources */,
+				0FFF778A1D41F2E30045616F /* SPAJ Form Generation.xib in Resources */,
 				43870CA31D35FEAF0035143C /* PotentialDiscussion.html in Resources */,
 				2994B41918E121AE00B0D4D2 /* P3-footer.jpg in Resources */,
 				2994B41A18E121AE00B0D4D2 /* P3-header.jpg in Resources */,
@@ -6127,6 +6148,7 @@
 				C4F45DF1165B38A20035CAA9 /* PasswordTips.m in Sources */,
 				EF1343BD165C7CD600BF69B3 /* RiderDeducTb.m in Sources */,
 				0F2A0CB21D24F306009D11F6 /* SPAJ E Application List.m in Sources */,
+				0FFF77871D41F2E30045616F /* SPAJ Capture Identification.m in Sources */,
 				EF1343C1165C7CFD00BF69B3 /* RiderPlanTb.m in Sources */,
 				C4F45DFF165D0C8B0035CAA9 /* SettingSecurityQuestion.m in Sources */,
 				EFB3D5871685604400A7B517 /* PayorHandler.m in Sources */,
@@ -6568,6 +6590,7 @@
 				4239AEEC1946DAE200BD6F53 /* IDTypePicker.m in Sources */,
 				432466541C9000EC001EE22F /* ModelDataReferral.m in Sources */,
 				AAFFE17F1C7D475E001B91BF /* NSDate+ISO8601Unparsing.m in Sources */,
+				0FFF77891D41F2E30045616F /* SPAJ Form Generation.m in Sources */,
 				4239AEF21946DAE200BD6F53 /* SnapGen.m in Sources */,
 				428F84A5197831450016B7E8 /* GDataXMLNode.m in Sources */,
 				2900CABC19931BBC0003B4F7 /* eAppStatusListforSubmitted.m in Sources */,

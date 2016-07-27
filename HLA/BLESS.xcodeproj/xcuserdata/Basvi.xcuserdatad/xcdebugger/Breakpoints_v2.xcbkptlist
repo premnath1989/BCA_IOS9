@@ -1814,11 +1814,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HLA/CFFListingViewController.m"
-            timestampString = "490530842.050681"
+            timestampString = "490780148.627205"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "302"
-            endingLineNumber = "302"
+            startingLineNumber = "327"
+            endingLineNumber = "327"
             landmarkName = "-actionSearchCFF:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1836,6 +1836,22 @@
             startingLineNumber = "815"
             endingLineNumber = "815"
             landmarkName = "-pullSIData"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HLA/ProfilResikoViewController.m"
+            timestampString = "490766386.239849"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "138"
+            endingLineNumber = "138"
+            landmarkName = "-readfromDB:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

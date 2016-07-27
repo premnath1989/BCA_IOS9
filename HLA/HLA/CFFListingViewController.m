@@ -17,7 +17,7 @@
 #import "ModelCFFHtml.h"
 #import "CFFAPIController.h"
 
-@interface CFFListingViewController ()<SIDateDelegate,ListingTbViewControllerDelegate,UITextFieldDelegate>{
+@interface CFFListingViewController ()<SIDateDelegate,ListingTbViewControllerDelegate,UITextFieldDelegate,UIPopoverPresentationControllerDelegate>{
     SIDate* datePickerViewController;
     ListingTbViewController *ProspectList;
     ModelCFFTransaction *modelCFFTransaction;
@@ -33,6 +33,8 @@
 
 @implementation CFFListingViewController{
     UIColor *borderColor;
+    
+    UIBarButtonItem* rightButton;
     
     NSMutableArray *ItemToBeDeleted;
     NSMutableArray *indexPaths;
@@ -77,6 +79,7 @@
     borderColor=[[UIColor alloc]initWithRed:0/255.0 green:102.0/255.0 blue:179.0/255.0 alpha:1.0];
     RecDelete = 0;
     [self createBlackStatusBar];
+    [self voidCreateRightBarButton];
     [self setButtonImageAndTextAlignment];
     [self setTextfieldBorder];
     
@@ -110,6 +113,28 @@
     [self copyHTMLFile:@"CustomerStatement"];
     [self fetchHTMLInfo];*/
     // Do any additional setup after loading the view from its nib.
+}
+
+-(void)voidCreateRightBarButton{
+    rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Add" style:UIBarButtonItemStylePlain target:self
+                                                  action:@selector(actionRightBarButtonPressed:)];
+    self.navigationItem.rightBarButtonItem = rightButton;
+}
+
+-(IBAction)actionRightBarButtonPressed:(UIBarButtonItem *)sender{
+    if (ProspectList == nil) {
+        ProspectList = [[ListingTbViewController alloc] initWithStyle:UITableViewStylePlain];
+        ProspectList.delegate = self;
+        
+    }
+    ProspectList.modalPresentationStyle = UIModalPresentationPopover;
+    [self presentViewController:ProspectList animated:YES completion:nil];
+    
+    // configure the Popover presentation controller
+    UIPopoverPresentationController *popController = [ProspectList popoverPresentationController];
+    popController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+    popController.barButtonItem = rightButton;
+    popController.delegate = self;
 }
 
 -(void)fetchHTMLInfo{
@@ -293,7 +318,7 @@
     NSDictionary* dictSearch;
     NSString* dbDate = [formatter convertDateFrom:@"dd/MM/yyyy" TargetDateFormat:@"yyyy-MM-dd" DateValue:outletDate.titleLabel.text];
     if ([outletDate.currentTitle length]>0){
-        dictSearch = [[NSDictionary alloc]initWithObjectsAndKeys:textName.text,@"Name",textBranch.text,@"BranchName",dbDate,@"Date", nil];
+        dictSearch = [[NSDictionary alloc]initWithObjectsAndKeys:textName.text,@"Name",textBranch.text,@"BranchName",outletDate.currentTitle,@"Date", nil];
     }
     else{
         dictSearch = [[NSDictionary alloc]initWithObjectsAndKeys:textName.text,@"Name",textBranch.text,@"BranchName", nil];
@@ -348,7 +373,9 @@
         else{
             [self CreateNewCFFTransaction];
             [self loadCFFTransaction];
+            [self dismissViewControllerAnimated:YES completion:nil];
         }
+        
     }
     
     else if (alertView.tag==1001 && buttonIndex == 0) //delete
@@ -584,6 +611,7 @@
     clientProfileID = [aaIndex intValue];
     [self createAlertTwoOptionViewAndShow:@"Yakin ingin membuat CFF dengan data nasabah ini ?" tag:1];
     [prospectPopover dismissPopoverAnimated:YES];
+    
 }
 
 #pragma mark save to CFFTransaction
