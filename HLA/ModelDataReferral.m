@@ -22,7 +22,7 @@
     NSMutableArray* arrayNIP=[[NSMutableArray alloc] init];
     NSMutableArray* arrayNamaReferral=[[NSMutableArray alloc] init];
     
-    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select NIP,Name from DataReferral order by NIP ASC"]];
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select NIP,Name from DataReferral WHERE Status = 'A' order by NIP ASC"]];
     
     while ([s next]) {
         NSString *nip = [NSString stringWithFormat:@"%@",[s stringForColumn:@"NIP"]];
