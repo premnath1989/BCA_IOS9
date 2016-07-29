@@ -126,6 +126,7 @@ NSString *ProceedStatus = @"";
 //    [migration updateDatabase:@"hladb.sqlite"];
     [migration updateDatabaseUseNewDB:@"hladb.sqlite"];
     [migration hardUpdateDatabase:@"BCA_Rates.sqlite"];
+    [migration hardUpdateDatabase:@"DataReferral.sqlite"];
 }
 
 

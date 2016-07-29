@@ -377,9 +377,6 @@ bool RegDatehandling;
     
     dictAgentData=[[NSDictionary alloc]initWithDictionary:[modelAgentProfil getAgentData]];
     [_txtChannelName setText:[NSString stringWithFormat:@"%@ - %@",[dictAgentData valueForKey:@"ChannelCode"],[dictAgentData valueForKey:@"ChannelName"]]];
-    //[txtKanwil setText:[dictAgentData valueForKey:@"Kanwil"]];
-    //txtHomeCountry.text=@"Indonesia";
-    //txtOfficeCountry.text=@"Indonesia";
 }
 
 #pragma mark - added by faiz
