@@ -13,11 +13,14 @@
 #import "SPAJ Add Detail.h"
 #import "String.h"
 #import "SPAJ Main.h"
-
+#import "CFFAPIController.h"
+#import "SIListingPopOver.h"
+#import "ModelSIPOData.h"
+#import "ModelSPAJTransaction.h"
 
 // DECLARATION
 
-@interface SPAJAddMenu ()
+@interface SPAJAddMenu ()<SIListingDelegate,UIPopoverPresentationControllerDelegate>
 
 
 
@@ -26,11 +29,16 @@
 
 // IMPLEMENTATION
 
-@implementation SPAJAddMenu
+@implementation SPAJAddMenu {
+    SIListingPopOver *siListingPopOver;
+    ModelSIPOData *modelSIPOData;
+    ModelSPAJTransaction *modelSPAJTransaction;
+}
 
     // SYNTHESIZE
 
     @synthesize delegateSPAJMain = _delegateSPAJMain;
+    @synthesize stringEAPPNumber;
 
 
     // DID LOAD
@@ -87,14 +95,30 @@
         _labelPropertyExpiredDate.text = [CHARACTER_DOUBLEDOT stringByAppendingString:dateCurrent];
         _labelPropertyLastUpdate.text = [CHARACTER_DOUBLEDOT stringByAppendingString:dateCurrent];
         _labelPropertyTimeRemining.text = [CHARACTER_DOUBLEDOT stringByAppendingString:dateCurrent];
+        
+        modelSIPOData = [[ModelSIPOData alloc]init];
+        modelSPAJTransaction = [[ModelSPAJTransaction alloc]init];
     }
 
 
     // ACTION
 
-    - (IBAction)actionGoToStep1:(id)sender
+    - (IBAction)actionGoToStep1:(UIButton *)sender
     {
+        if (siListingPopOver == nil) {
+            siListingPopOver = [[SIListingPopOver alloc] initWithStyle:UITableViewStylePlain];
+            siListingPopOver.delegate = self;
+            
+        }
+        siListingPopOver.modalPresentationStyle = UIModalPresentationPopover;
+        [self presentViewController:siListingPopOver animated:YES completion:nil];
         
+        // configure the Popover presentation controller
+        UIPopoverPresentationController *popController = [siListingPopOver popoverPresentationController];
+        popController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+        popController.sourceRect = sender.bounds;
+        popController.sourceView = sender;
+        popController.delegate = self;
     };
 
     - (IBAction)actionGoToStep2:(id)sender
@@ -127,7 +151,29 @@
         [_delegateSPAJMain voidGoToAddSignature];
     };
 
+    - (IBAction)actionConfirmAndAssignSPAJNumber:(UIButton *)sender
+    {
+        CFFAPIController* cffAPIController;
+        cffAPIController = [[CFFAPIController alloc]init];
+        [cffAPIController apiCall:@"http://192.168.0.114/E-Submission/SpajHandler.ashx?operation=getRemoteFtpPath&spajNumber=60000000022&product=BCALife"];
+    };
 
+
+    #pragma mark delegate
+    -(void)selectedSI:(NSString *)SINO
+    {
+        NSDictionary* dictionaryPOData = [[NSDictionary alloc]initWithDictionary:[modelSIPOData getPO_DataFor:SINO]];
+        NSString *stringSINO = SINO;
+        NSString *stringLAName = [dictionaryPOData valueForKey:@"LA_Name"];
+        NSString *stringProduct = [dictionaryPOData valueForKey:@"ProductName"];
+        
+        NSString* stringLabelDetail = [NSString stringWithFormat:@"Nomor SI : %@    Tertanggung Polis : %@    Produk : %@",stringSINO,stringLAName,stringProduct];
+        
+        [modelSPAJTransaction updateSPAJTransaction:@"SPAJSINO" StringColumnValue:stringSINO StringWhereName:@"SPAJEappNumber" StringWhereValue:stringEAPPNumber];
+        [_labelDetail1 setText:stringLabelDetail];
+        
+        [siListingPopOver dismissViewControllerAnimated:YES completion:nil];
+    }
     // DID RECEIVE MEMOY WARNING
 
     - (void)didReceiveMemoryWarning

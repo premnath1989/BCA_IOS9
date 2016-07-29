@@ -21,4 +21,8 @@
 -(NSNumber *)convertAnyNonDecimalNumberToString:(NSString *)stringNumber;
 -(NSNumberFormatter *)formatterForCurrencyText;
 -(int)decimalDigitFromString:(NSString *)decimalString DecimalSeparator:(NSString *)decimalSeparator;
+
+-(int)getRandomNumberBetween:(int)minValue MaxValue:(int)maxValue;
+
+- (void)createDirectory:(NSString *)documentRootDirectory;
 @end

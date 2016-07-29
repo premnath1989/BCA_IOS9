@@ -11,26 +11,52 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-
+#import "CameraViewController.h"
+#import "IDTypeViewController.h"
+#import "SIMenuTableViewCell.h"
+#import "Theme.h"
+#import "User Interface.h"
+#import "Alert.h"
 
 // DECLARATION
 
-@protocol SPAJMainDelegate
+/*@protocol SPAJMainDelegate
 
     - (void) voidGoToAddDetail;
     - (void) voidGoToFormGeneration;
     - (void) voidGoToCaptureIdentification;
     - (void) voidGoToAddSignature;
 
+@end*/
+@protocol SPAJCaptureIdentificationDelegate
+    -(NSString *)voidGetEAPPNumber;
 @end
 
-@interface SPAJCaptureIdentification : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface SPAJCaptureIdentification : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate,IDTypeDelegate,UIPopoverPresentationControllerDelegate>
+
+    {
+        
+        CGRect imagePickerRect;
+        Alert* alert;
+        UserInterface *objectUserInterface;
+        
+        CameraViewController *imagePickerController;
+        BOOL cameraFront;
+        
+        IDTypeViewController *IDTypePicker;
+        
+        //variable for IDType
+        NSString* stringIDTypeCode;
+        NSString* stringIDTypeIdentifier;
+    }
 
     // PROTOCOL
 
-    @property (nonatomic,strong) id <SPAJMainDelegate> delegateSPAJMain;
+    @property (nonatomic,strong) id <SPAJCaptureIdentificationDelegate> SPAJCaptureIdentificationDelegate;
 
     // VIEW
+    @property (nonatomic, weak) IBOutlet UIView* viewCaptureFront;
+    @property (nonatomic, weak) IBOutlet UIView* viewCaptureBack;
 
     @property (nonatomic, weak) IBOutlet UIView* viewContent;
 
@@ -38,6 +64,10 @@
     @property (nonatomic, weak) IBOutlet UIView* viewStep2;
     @property (nonatomic, weak) IBOutlet UIView* viewStep3;
     @property (nonatomic, weak) IBOutlet UIView* viewStep4;
+
+    // IMAGEVIEW
+    @property (nonatomic, weak) IBOutlet UIImageView* imageViewFront;
+    @property (nonatomic, weak) IBOutlet UIImageView* imageViewBack;
 
     // LABEL
 
@@ -56,10 +86,17 @@
     @property (nonatomic, weak) IBOutlet UILabel* labelHeader4;
 
     // BUTTON
+    @property (nonatomic, weak) IBOutlet UIButton* buttonCaptureFront;
+    @property (nonatomic, weak) IBOutlet UIButton* buttonCaptureBack;
+
+    @property (nonatomic, weak) IBOutlet UIButton* buttonIDTypeSelection;
 
     @property (nonatomic, weak) IBOutlet UIButton* buttonStep1;
     @property (nonatomic, weak) IBOutlet UIButton* buttonStep2;
     @property (nonatomic, weak) IBOutlet UIButton* buttonStep3;
     @property (nonatomic, weak) IBOutlet UIButton* buttonStep4;
+
+    // UITableView
+    @property (nonatomic, weak) IBOutlet UITableView *tablePartiesCaprture;
 
 @end

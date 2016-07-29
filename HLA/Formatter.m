@@ -310,6 +310,27 @@
     
 }
 
+#pragma mark get random number
+-(int)getRandomNumberBetween:(int)minValue MaxValue:(int)maxValue{
+    int randomNumber =  (arc4random() % minValue+1) + maxValue;
+    return randomNumber;
+}
+
+#pragma mark create root directory for supporting files
+- (void)createDirectory:(NSString *)documentRootDirectory{
+    //create Directory
+    NSError *error;
+    if (![[NSFileManager defaultManager] fileExistsAtPath:documentRootDirectory])	//Does directory already exist?
+    {
+        if (![[NSFileManager defaultManager] createDirectoryAtPath:documentRootDirectory
+                                       withIntermediateDirectories:NO
+                                                        attributes:nil
+                                                             error:&error])
+        {
+            NSLog(@"Create directory error: %@", error);
+        }
+    }
+}
 /*-(NSString *)convertSpecialCharacter:(NSString *)originalString{
     NSString *someString = originalString;
     NSString *newString = [someString stringByReplacingOccurrencesOfString:@"[/,@"'; ]+" withString:@"-" options: NSRegularExpressionSearch range:NSMakeRange(0, someString.length)];

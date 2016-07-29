@@ -30,6 +30,10 @@
 
     @property (nonatomic,strong) id <SPAJMainDelegate> delegateSPAJMain;
 
+    //NSString
+
+    @property (strong, nonatomic) NSString* stringEAPPNumber;
+
     // VIEW
 
     @property (nonatomic, weak) IBOutlet UIView *viewStep1;

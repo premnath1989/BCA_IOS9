@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface CFFAPIController : NSObject
+-(void)apiCall:(NSString *)URL;
 -(void)apiCallCFFHtmtable:(NSString *)URL;
 -(void)apiCallHtmlTable:(NSString *)URL JSONKey:(NSArray *)jsonKey TableDictionary:(NSDictionary *)tableDictionary;
 -(void)apiCallCrateHtmlFile:(NSString *)URL RootPathFolder:(NSString *)rootPathFolder;

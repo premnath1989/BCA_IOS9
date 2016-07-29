@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SPAJ_Add_Signature">
             <connections>
+                <outlet property="labelSignatureParty" destination="V7U-au-Mxy" id="Rjp-oT-a31"/>
                 <outlet property="tablePartiesSignature" destination="5jS-K8-MHz" id="bXZ-e0-yZC"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="viewBorder" destination="LID-r5-2FR" id="D5Z-lL-TOB"/>
@@ -15,12 +16,12 @@
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="922" height="768"/>
+        <view clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="964" height="768"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" id="uyx-9y-Gw1">
-                    <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                    <rect key="frame" x="0.0" y="0.0" width="964" height="768"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" separatorStyle="none" rowHeight="83" sectionHeaderHeight="22" sectionFooterHeight="22" id="5jS-K8-MHz">
@@ -37,15 +38,15 @@
                             </connections>
                         </tableView>
                         <view contentMode="scaleToFill" id="Cna-Jc-zCj" userLabel="View-Data Nasabah">
-                            <rect key="frame" x="205" y="44" width="717" height="724"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <rect key="frame" x="205" y="44" width="759" height="724"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <view contentMode="scaleToFill" id="8Z4-Xq-uaK">
-                                    <rect key="frame" x="59" y="162" width="600" height="400"/>
+                                <view clipsSubviews="YES" contentMode="scaleToFill" id="8Z4-Xq-uaK">
+                                    <rect key="frame" x="108" y="162" width="543" height="400"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="n4g-jv-NuW">
-                                            <rect key="frame" x="505" y="325" width="32" height="32"/>
+                                            <rect key="frame" x="475" y="325" width="32" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" image="undo.png"/>
                                             <connections>
@@ -53,48 +54,44 @@
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tanda Tangan Pemegang Polis" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="V7U-au-Mxy">
-                                            <rect key="frame" x="20" y="55" width="560" height="30"/>
+                                            <rect key="frame" x="0.0" y="55" width="543" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" id="LID-r5-2FR">
-                                            <rect key="frame" x="116" y="126" width="367" height="192"/>
+                                            <rect key="frame" x="88" y="126" width="369" height="192"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </view>
                                         <view contentMode="scaleToFill" id="OmQ-W6-1JD" customClass="mySmoothLineView">
-                                            <rect key="frame" x="117" y="127" width="365" height="190"/>
+                                            <rect key="frame" x="89" y="127" width="365" height="190"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" name="selectedTextBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </view>
                                         <view contentMode="scaleToFill" id="DR4-9I-kIa">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="543" height="50"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="p0F-SP-VfH">
-                                                    <rect key="frame" x="249" y="5" width="40" height="40"/>
+                                                    <rect key="frame" x="217" y="5" width="40" height="40"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" image="cancel.png"/>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="lH7-Cd-ek4">
-                                                    <rect key="frame" x="311" y="5" width="40" height="40"/>
+                                                    <rect key="frame" x="286" y="5" width="40" height="40"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" image="check_icon.png"/>
+                                                    <connections>
+                                                        <action selector="actionCompleteSignature:" destination="-1" eventType="touchUpInside" id="ryZ-l7-dJc"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" red="0.36862745099999999" green="0.61960784310000006" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
                                         </view>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Saya telah memahami dan menyetujui penjelasan yang diberikan atas ilustrasi manfaat asuransi yang diuraikan pada halaman ini" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EXg-bm-6sR">
-                                            <rect key="frame" x="20" y="84" width="560" height="35"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nama Pemegang Polis / Nomor KTP / Date &amp; Time" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="idD-00-c8w">
-                                            <rect key="frame" x="20" y="370" width="560" height="25"/>
+                                            <rect key="frame" x="8" y="370" width="527" height="25"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -107,9 +104,9 @@
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.94901960780000005" green="0.4431372549" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
-                <navigationBar contentMode="scaleToFill" id="C4n-5D-K8z">
+                <navigationBar contentMode="scaleToFill" translucent="NO" id="C4n-5D-K8z">
                     <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.81176470590000005" green="0.098039215690000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>

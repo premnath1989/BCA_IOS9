@@ -20,11 +20,11 @@
 #import "SPAJ Capture Identification.h"
 #import "Insert Initialization.h"
 #import "CarouselViewController.h"
-
-
+#import "Formatter.h"
+#import "ModelSPAJTransaction.h"
 // DECLARATION
 
-@interface SPAJMain ()<SPAJMainDelegate>
+@interface SPAJMain ()<SPAJMainDelegate,SPAJCaptureIdentificationDelegate,SPAJAddSignatureDelegate>
 
     
 
@@ -33,7 +33,12 @@
 
 // IMPLEMENTATION
 
-@implementation SPAJMain
+@implementation SPAJMain{
+    ModelSPAJTransaction* modelSPAJTransaction;
+    Formatter* formatter;
+    
+    NSString* stringGlobalEAPPNumber;
+}
 
     // DID LOAD
 
@@ -42,6 +47,9 @@
         [super viewDidLoad];
         // Do any additional setup after loading the view, typically from a nib.
         
+        
+        modelSPAJTransaction = [[ModelSPAJTransaction alloc]init];
+        formatter = [[Formatter alloc]init];
         
         // LAYOUT DECLARATION
         
@@ -110,11 +118,14 @@
 
     - (IBAction)actionGoToAddMenu:(id)sender
     {
+        stringGlobalEAPPNumber = [self createSPAJTransactionNumber];
         SPAJAddMenu* viewController = [[SPAJAddMenu alloc] initWithNibName:@"SPAJ Add Menu" bundle:nil];
         viewController.view.frame = self.viewContent.bounds;
         viewController.delegateSPAJMain = self;
         [self addChildViewController:viewController];
         [self.viewContent addSubview:viewController.view];
+        [viewController setStringEAPPNumber:stringGlobalEAPPNumber];
+        [self createSPAJTransactionData:stringGlobalEAPPNumber];
     };
 
     - (void)voidGoToAddDetail
@@ -135,7 +146,9 @@
 
     - (void)voidGoToCaptureIdentification
     {
-        SPAJAddDetail* viewController = [[SPAJAddDetail alloc] initWithNibName:@"SPAJ Capture Identification" bundle:nil];
+       // SPAJAddDetail* viewController = [[SPAJAddDetail alloc] initWithNibName:@"SPAJ Capture Identification" bundle:nil];
+        SPAJCaptureIdentification* viewController = [[SPAJCaptureIdentification alloc] initWithNibName:@"SPAJ Capture Identification" bundle:nil];
+        viewController.SPAJCaptureIdentificationDelegate = self;
         viewController.view.frame = self.viewContent.bounds;
         [self addChildViewController:viewController];
         [self.viewContent addSubview:viewController.view];
@@ -146,6 +159,7 @@
     {
         SPAJ_Add_Signature* viewController = [[SPAJ_Add_Signature alloc] initWithNibName:@"SPAJ Add Signature" bundle:nil];
         viewController.view.frame = self.viewContent.bounds;
+        viewController.SPAJAddSignatureDelegate = self;
         [self addChildViewController:viewController];
         [self.viewContent addSubview:viewController.view];
     }
@@ -161,6 +175,52 @@
         [self presentViewController:viewController animated:NO completion:Nil];
     }
 
+#pragma mark create SPAJ Transaction
+    // Save New SPAJ to DB
+    -(NSString *)createSPAJTransactionNumber
+    {
+        int randomNumber = [formatter getRandomNumberBetween:1000 MaxValue:9999];
+        NSString* EAPPNumber = [NSString stringWithFormat:@"EAPPRN%i",randomNumber];
+        return EAPPNumber;
+    }
+
+    -(void)createSPAJTransactionData:(NSString *)stringEAPPNo;
+    {
+        NSMutableDictionary* dictionarySPAJTransaction = [[NSMutableDictionary alloc]init];
+        NSString* dateToday=[formatter getDateToday:@"yyyy-MM-dd hh:mm:ss"];
+        
+        NSString* stringEAPPNumber = stringEAPPNo;//[self createSPAJTransactionNumber];
+        
+        [dictionarySPAJTransaction setObject:@"1" forKey:@"SPAJID"];
+        [dictionarySPAJTransaction setObject:stringEAPPNumber forKey:@"SPAJEappNumber"];
+        [dictionarySPAJTransaction setObject:@"" forKey:@"SPAJNumber"];
+        [dictionarySPAJTransaction setObject:@"" forKey:@"SPAJSINO"];
+        [dictionarySPAJTransaction setObject:dateToday forKey:@"SPAJDateCreated"];
+        [dictionarySPAJTransaction setObject:@"" forKey:@"CreatedBy"];
+        [dictionarySPAJTransaction setObject:dateToday forKey:@"SPAJDateModified"];
+        [dictionarySPAJTransaction setObject:@"" forKey:@"ModifiedBy"];
+        [dictionarySPAJTransaction setObject:@"Not Complete" forKey:@"SPAJStatus"];
+        
+        [modelSPAJTransaction saveSPAJTransaction:dictionarySPAJTransaction];
+        
+        [self voidCreateSPAJFolderDocument:stringEAPPNumber];
+    }
+
+    -(void)voidCreateSPAJFolderDocument:(NSString *)stringEAPPNumber
+    {
+        NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        NSString *rootFilePathApp = [docsDir stringByAppendingPathComponent:@"SPAJ"];
+        NSString *filePathApp = [rootFilePathApp stringByAppendingPathComponent:stringEAPPNumber];
+        
+        [formatter createDirectory:rootFilePathApp];
+        
+        [formatter createDirectory:filePathApp];
+    }
+
+    #pragma mark delegate
+    -(NSString *)voidGetEAPPNumber{
+        return stringGlobalEAPPNumber;
+    }
 
     // DID RECEIVE MEMOY WARNING
 
