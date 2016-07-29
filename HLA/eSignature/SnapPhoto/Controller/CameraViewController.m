@@ -14,6 +14,11 @@
 
 @implementation CameraViewController
 
+-(void)viewDidAppear:(BOOL)animated{
+    NSLog(@"frame %@",NSStringFromCGRect(self.view.bounds));
+    NSLog(@"frame top %@",NSStringFromCGRect(self.topViewController.view.bounds));
+}
+
 - (BOOL)shouldAutorotate {
     return YES;
 }

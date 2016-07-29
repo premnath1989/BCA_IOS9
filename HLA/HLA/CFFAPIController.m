@@ -73,6 +73,21 @@
 
 
 #pragma mark AFNetworking For Global Use
+-(void)apiCall:(NSString *)URL {
+    // handle response
+    NSURLSession *session = [NSURLSession sharedSession];
+    [[session dataTaskWithURL:[NSURL URLWithString:URL]
+            completionHandler:^(NSData *data,
+                                NSURLResponse *response,
+                                NSError *error) {
+                // handle response
+                if(data != nil){
+                    NSString *stringPath = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+                    NSLog(@"json %@",stringPath);
+                }
+            }] resume];
+}
+
 -(void)apiCallHtmlTable:(NSString *)URL JSONKey:(NSArray *)jsonKey TableDictionary:(NSDictionary *)tableDictionary{
     // handle response
     NSURLSession *session = [NSURLSession sharedSession];

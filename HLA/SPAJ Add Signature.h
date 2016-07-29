@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol SPAJAddSignatureDelegate
+    -(NSString *)voidGetEAPPNumber;
+@end
 
 @interface SPAJ_Add_Signature : UIViewController
 
+// PROTOCOL
+
+@property (nonatomic,strong) id <SPAJAddSignatureDelegate> SPAJAddSignatureDelegate;
 @end

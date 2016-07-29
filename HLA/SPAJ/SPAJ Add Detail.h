@@ -11,11 +11,18 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-
+#import "CameraViewController.h"
 
 // DECLARATION
 
-@interface SPAJAddDetail : UIViewController
+@interface SPAJAddDetail : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+
+    {
+        CGRect imagePickerRect;
+        CameraViewController *imagePickerController;
+        BOOL cameraFront;
+    }
+
 
     // VIEW
 
@@ -27,6 +34,10 @@
     @property (nonatomic, weak) IBOutlet UIView* viewStep4;
     @property (nonatomic, weak) IBOutlet UIView* viewStep5;
     @property (nonatomic, weak) IBOutlet UIView* viewStep6;
+
+    // IMAGEVIEW
+    @property (nonatomic, weak) IBOutlet UIImageView* imageViewFront;
+    @property (nonatomic, weak) IBOutlet UIImageView* imageViewBack;
 
     // LABEL
 
@@ -49,6 +60,8 @@
     @property (nonatomic, weak) IBOutlet UILabel* labelHeader6;
 
     // BUTTON
+    @property (nonatomic, weak) IBOutlet UIButton* buttonCaptureFront;
+    @property (nonatomic, weak) IBOutlet UIButton* buttonCaptureBack;
 
     @property (nonatomic, weak) IBOutlet UIButton* buttonStep1;
     @property (nonatomic, weak) IBOutlet UIButton* buttonStep2;

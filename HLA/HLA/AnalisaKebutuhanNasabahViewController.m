@@ -202,7 +202,7 @@
         else{
             [childView addSubview:pendidikanVC.view];
         }
-        buttonSelected = buttonPensiun;
+        buttonSelected = buttonPendidikan;
     }
     else if (sender.selectedSegmentIndex==3){
         cffID = [cffHeaderSelectedDictionary valueForKey:@"WarisanCFFID"];
