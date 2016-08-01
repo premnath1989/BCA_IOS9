@@ -22,6 +22,9 @@
 #import "CarouselViewController.h"
 #import "Formatter.h"
 #import "ModelSPAJTransaction.h"
+#import "ModelSPAJSignature.h"
+#import "ModelSPAJIDCapture.h"
+
 // DECLARATION
 
 @interface SPAJMain ()<SPAJMainDelegate,SPAJCaptureIdentificationDelegate,SPAJAddSignatureDelegate>
@@ -35,6 +38,8 @@
 
 @implementation SPAJMain{
     ModelSPAJTransaction* modelSPAJTransaction;
+    ModelSPAJSignature* modelSPAJSignature;
+    ModelSPAJIDCapture* modelSPAJIDCapture;
     Formatter* formatter;
     
     NSString* stringGlobalEAPPNumber;
@@ -49,6 +54,8 @@
         
         
         modelSPAJTransaction = [[ModelSPAJTransaction alloc]init];
+        modelSPAJSignature = [[ModelSPAJSignature alloc]init];
+        modelSPAJIDCapture = [[ModelSPAJIDCapture alloc]init];
         formatter = [[Formatter alloc]init];
         
         // LAYOUT DECLARATION
@@ -125,7 +132,21 @@
         [self addChildViewController:viewController];
         [self.viewContent addSubview:viewController.view];
         [viewController setStringEAPPNumber:stringGlobalEAPPNumber];
-        [self createSPAJTransactionData:stringGlobalEAPPNumber];
+        
+        dispatch_queue_t serialQueue = dispatch_queue_create("com.blah.queue", DISPATCH_QUEUE_SERIAL);
+        
+        dispatch_async(serialQueue, ^{
+            [self createSPAJTransactionData:stringGlobalEAPPNumber];
+        });
+        
+        dispatch_async(serialQueue, ^{
+            [self createSPAJSignatureData:stringGlobalEAPPNumber];
+        });
+        
+        dispatch_async(serialQueue, ^{
+            [self createSPAJIDCaptureData:stringGlobalEAPPNumber];
+        });
+        
     };
 
     - (void)voidGoToAddDetail
@@ -204,6 +225,42 @@
         [modelSPAJTransaction saveSPAJTransaction:dictionarySPAJTransaction];
         
         [self voidCreateSPAJFolderDocument:stringEAPPNumber];
+    }
+
+    -(void)createSPAJSignatureData:(NSString *)stringEAPPNo;
+    {
+        NSMutableDictionary* dictionarySPAJTransaction = [[NSMutableDictionary alloc]init];
+        
+        NSString* stringEAPPNumber = stringEAPPNo;
+        
+        [dictionarySPAJTransaction setObject:stringEAPPNumber forKey:@"SPAJEappNumber"];
+        [dictionarySPAJTransaction setObject:@"0" forKey:@"SPAJSignatureParty1"];
+        [dictionarySPAJTransaction setObject:@"0" forKey:@"SPAJSignatureParty2"];
+        [dictionarySPAJTransaction setObject:@"0" forKey:@"SPAJSignatureParty3"];
+        [dictionarySPAJTransaction setObject:@"0" forKey:@"SPAJSignatureParty4"];
+        
+        
+        [modelSPAJSignature saveSPAJSignature:dictionarySPAJTransaction];
+    }
+
+    -(void)createSPAJIDCaptureData:(NSString *)stringEAPPNo;
+    {
+        NSMutableDictionary* dictionarySPAJTransaction = [[NSMutableDictionary alloc]init];
+        
+        NSString* stringEAPPNumber = stringEAPPNo;
+        
+        [dictionarySPAJTransaction setObject:stringEAPPNumber forKey:@"SPAJEappNumber"];
+        [dictionarySPAJTransaction setObject:@"0" forKey:@"SPAJIDCaptureParty1"];
+        [dictionarySPAJTransaction setObject:@"0" forKey:@"SPAJIDCaptureParty2"];
+        [dictionarySPAJTransaction setObject:@"0" forKey:@"SPAJIDCaptureParty3"];
+        [dictionarySPAJTransaction setObject:@"0" forKey:@"SPAJIDCaptureParty4"];
+        [dictionarySPAJTransaction setObject:@"null" forKey:@"SPAJIDTypeParty1"];
+        [dictionarySPAJTransaction setObject:@"null" forKey:@"SPAJIDTypeParty2"];
+        [dictionarySPAJTransaction setObject:@"null" forKey:@"SPAJIDTypeParty3"];
+        [dictionarySPAJTransaction setObject:@"null" forKey:@"SPAJIDTypeParty4"];
+        
+        
+        [modelSPAJIDCapture saveSPAJIDCapture:dictionarySPAJTransaction];
     }
 
     -(void)voidCreateSPAJFolderDocument:(NSString *)stringEAPPNumber

@@ -14,6 +14,7 @@
 #import "Formatter.h"
 #import "ModelSPAJTransaction.h"
 #import "ModelSIPOData.h"
+#import "ModelSPAJSignature.h"
 
 @interface SPAJ_Add_Signature (){
     IBOutlet UILabel *labelSignatureParty;
@@ -33,6 +34,7 @@
     UserInterface *objectUserInterface;
     ModelSPAJTransaction* modelSPAJTransaction;
     ModelSIPOData* modelSIPOData;
+    ModelSPAJSignature* modelSPAJSignature;
     
     NSMutableArray *mutableArrayNumberListOfSubMenu;
     NSMutableArray *mutableArrayListOfSubMenu;
@@ -66,6 +68,7 @@
     formatter = [[Formatter alloc]init];
     modelSPAJTransaction = [[ModelSPAJTransaction alloc]init];
     modelSIPOData = [[ModelSIPOData alloc]init];
+    modelSPAJSignature = [[ModelSPAJSignature alloc]init];
     
     viewBorder.layer.borderWidth=1.0;
     viewBorder.layer.borderColor=[UIColor blackColor].CGColor;
@@ -76,6 +79,8 @@
     boolTertanggung = false;
     boolOrangTuaWali = false;
     boolTenagaPenjual = false;
+    
+    [self initializeBooleanBasedOnTheRule];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -85,20 +90,7 @@
     
     NSDictionary* dictionaryPOData = [[NSDictionary alloc]initWithDictionary:[modelSIPOData getPO_DataFor:SINO]];
     stringSIRelation = [dictionaryPOData valueForKey:@"RelWithLA"];
-    
-    if ([stringSIRelation isEqualToString:@"DIRI SENDIRI"]){
-        boolTertanggung = false;
-        boolOrangTuaWali = false;
-    }
-    else{
-        LAAge = [[dictionaryPOData valueForKey:@"LA_Age"] intValue];
-        if (LAAge<21){
-            boolTertanggung = false;
-        }
-        else{
-            boolOrangTuaWali = false;
-        }
-    }
+    LAAge = [[dictionaryPOData valueForKey:@"LA_Age"] intValue];
 }
 
 -(void) showDetailsForIndexPath:(NSIndexPath*)indexPath
@@ -195,15 +187,88 @@
 
 - (IBAction)actionCompleteSignature:(id)sender{
     if ([stringSIRelation isEqualToString:@"DIRI SENDIRI"]){
-    
+        if (boolTenagaPenjual && boolPemegangPolis){
+            boolPemegangPolis = true;
+            boolTertanggung = false;
+            boolOrangTuaWali =  false;
+            boolTenagaPenjual = true;
+            [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
+            [self voidCreateAlertTextFieldViewAndShow:@"Masukkan lokasi pengambilan tanda tangan" tag:0];
+            //update signature party4
+            NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty4=1 where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",[SPAJAddSignatureDelegate voidGetEAPPNumber]];
+            [modelSPAJSignature updateSPAJSignature:stringUpdate];
+        }
+        else if (boolPemegangPolis){
+            NSString *date = [formatter getDateToday:@"dd/MM/yyyy"];
+            NSString *time = [formatter getDateToday:@"hh:mm"];
+            NSString* alertString = [NSString stringWithFormat:@"Mohon agar menandatangani aplikasi dengan benar dan menyerahkannya sebelum tanggal (%@) dan waktu (%@ WIB). Jika tidak maka aplikasi ini akan menjadi tidak valid.\n\nTidak diperbolehkan adanya perubahan data pada aplikasi setelah Anda menyimpannya.\nApakah Anda yakin ingin menyimpan ?",date,time];
+            [self voidCreateAlertTwoOptionViewAndShow:alertString tag:0];
+            return;
+        }
     }
     else{
         if (LAAge<21){
+            if (boolTenagaPenjual && boolOrangTuaWali && boolPemegangPolis){
+                boolPemegangPolis = true;
+                boolTertanggung = false;
+                boolOrangTuaWali =  true;
+                boolTenagaPenjual = true;
+                [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
+                [self voidCreateAlertTextFieldViewAndShow:@"Masukkan lokasi pengambilan tanda tangan" tag:0];
+                //update signature party4
+                NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty4=1 where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",[SPAJAddSignatureDelegate voidGetEAPPNumber]];
+                [modelSPAJSignature updateSPAJSignature:stringUpdate];
+            }
+            else if (boolOrangTuaWali && boolPemegangPolis){
+                boolPemegangPolis = true;
+                boolTertanggung = false;
+                boolOrangTuaWali =  true;
+                boolTenagaPenjual = true;
+                [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
+                //update signature party3
+                NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty3=1 where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",[SPAJAddSignatureDelegate voidGetEAPPNumber]];
+                [modelSPAJSignature updateSPAJSignature:stringUpdate];
+            }
+            else if (boolPemegangPolis){
+                NSString *date = [formatter getDateToday:@"dd/MM/yyyy"];
+                NSString *time = [formatter getDateToday:@"hh:mm"];
+                NSString* alertString = [NSString stringWithFormat:@"Mohon agar menandatangani aplikasi dengan benar dan menyerahkannya sebelum tanggal (%@) dan waktu (%@ WIB). Jika tidak maka aplikasi ini akan menjadi tidak valid.\n\nTidak diperbolehkan adanya perubahan data pada aplikasi setelah Anda menyimpannya.\nApakah Anda yakin ingin menyimpan ?",date,time];
+                [self voidCreateAlertTwoOptionViewAndShow:alertString tag:0];
+                return;
+            }
         }
         else{
+            if (boolTenagaPenjual  && boolPemegangPolis && boolTertanggung){
+                boolPemegangPolis = true;
+                boolTertanggung = true;
+                boolOrangTuaWali =  false;
+                boolTenagaPenjual = true;
+                [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
+                [self voidCreateAlertTextFieldViewAndShow:@"Masukkan lokasi pengambilan tanda tangan" tag:0];
+                //update signature party4
+                NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty4=1 where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",[SPAJAddSignatureDelegate voidGetEAPPNumber]];
+                [modelSPAJSignature updateSPAJSignature:stringUpdate];
+            }
+            else if (boolPemegangPolis && boolTertanggung){
+                boolPemegangPolis = true;
+                boolTertanggung = true;
+                boolOrangTuaWali =  false;
+                boolTenagaPenjual = true;
+                [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
+                //update signature party2
+                NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty2=1 where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",[SPAJAddSignatureDelegate voidGetEAPPNumber]];
+                [modelSPAJSignature updateSPAJSignature:stringUpdate];
+            }
+            else if (boolPemegangPolis){
+                NSString *date = [formatter getDateToday:@"dd/MM/yyyy"];
+                NSString *time = [formatter getDateToday:@"hh:mm"];
+                NSString* alertString = [NSString stringWithFormat:@"Mohon agar menandatangani aplikasi dengan benar dan menyerahkannya sebelum tanggal (%@) dan waktu (%@ WIB). Jika tidak maka aplikasi ini akan menjadi tidak valid.\n\nTidak diperbolehkan adanya perubahan data pada aplikasi setelah Anda menyimpannya.\nApakah Anda yakin ingin menyimpan ?",date,time];
+                [self voidCreateAlertTwoOptionViewAndShow:alertString tag:0];
+                return;
+            }
         }
     }
-    if (boolTenagaPenjual && boolOrangTuaWali && boolPemegangPolis && boolTertanggung){
+    /*if (boolTenagaPenjual && boolOrangTuaWali && boolPemegangPolis && boolTertanggung){
         boolPemegangPolis = true;
         boolTertanggung = true;
         boolOrangTuaWali =  true;
@@ -231,7 +296,7 @@
         NSString* alertString = [NSString stringWithFormat:@"Mohon agar menandatangani aplikasi dengan benar dan menyerahkannya sebelum tanggal (%@) dan waktu (%@ WIB). Jika tidak maka aplikasi ini akan menjadi tidak valid.\n\nTidak diperbolehkan adanya perubahan data pada aplikasi setelah Anda menyimpannya.\nApakah Anda yakin ingin menyimpan ?",date,time];
         [self voidCreateAlertTwoOptionViewAndShow:alertString tag:0];
         return;
-    }
+    }*/
     [self actionClearSign:nil];
     [tablePartiesSignature reloadData];
 }
@@ -266,6 +331,10 @@
     [self actionClearSign:nil];
     [tablePartiesSignature reloadData];
     [alertController dismissViewControllerAnimated:YES completion:nil];
+    
+    NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty1=1 where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",[SPAJAddSignatureDelegate voidGetEAPPNumber]];
+    [modelSPAJSignature updateSPAJSignature:stringUpdate];
+    //update signature party1
 }
 
 -(void)voidDismissAlertSignature{
