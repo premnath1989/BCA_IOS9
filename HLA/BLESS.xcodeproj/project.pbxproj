@@ -370,6 +370,7 @@
 		431F5FE41C6D93E800A9CA6C /* ProspectListingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 431F5FE21C6D93E800A9CA6C /* ProspectListingTableViewCell.m */; };
 		431F5FE51C6D93E800A9CA6C /* ProspectListingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 431F5FE31C6D93E800A9CA6C /* ProspectListingTableViewCell.xib */; };
 		4321B3331C8B3496006B9402 /* htmlStyle.css in Resources */ = {isa = PBXBuildFile; fileRef = 4321B3321C8B3496006B9402 /* htmlStyle.css */; };
+		432209141D4F37E300971DF3 /* ModelSPAJIDCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 432209131D4F37E300971DF3 /* ModelSPAJIDCapture.m */; };
 		432466541C9000EC001EE22F /* ModelDataReferral.m in Sources */ = {isa = PBXBuildFile; fileRef = 432466531C9000EC001EE22F /* ModelDataReferral.m */; };
 		4329213A1C7FFC26000D1064 /* Model_SI_Master.m in Sources */ = {isa = PBXBuildFile; fileRef = 432921391C7FFC26000D1064 /* Model_SI_Master.m */; };
 		432E8F6A1D13F36D0030F0C4 /* AnalisaKebutuhanNasabahViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 432E8F681D13F36D0030F0C4 /* AnalisaKebutuhanNasabahViewController.m */; };
@@ -423,6 +424,7 @@
 		439985BB1C62F7890003B037 /* SourceIncome.m in Sources */ = {isa = PBXBuildFile; fileRef = 439985BA1C62F7890003B037 /* SourceIncome.m */; };
 		439985BE1C62F8A70003B037 /* ModelPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = 439985BD1C62F8A70003B037 /* ModelPopover.m */; };
 		439985C11C630C4D0003B037 /* VIPClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 439985C01C630C4D0003B037 /* VIPClass.m */; };
+		4399D2181D4B48730023558B /* ModelSPAJSignature.m in Sources */ = {isa = PBXBuildFile; fileRef = 4399D2171D4B48730023558B /* ModelSPAJSignature.m */; };
 		439B954B1D3896AD00C86F93 /* SPAJ Add Signature.m in Sources */ = {isa = PBXBuildFile; fileRef = 439B95491D3896AD00C86F93 /* SPAJ Add Signature.m */; };
 		439B954C1D3896AD00C86F93 /* SPAJ Add Signature.xib in Resources */ = {isa = PBXBuildFile; fileRef = 439B954A1D3896AD00C86F93 /* SPAJ Add Signature.xib */; };
 		439EFBFA1D1A621500A0B8B0 /* CFFValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = 439EFBF91D1A621500A0B8B0 /* CFFValidation.m */; };
@@ -1543,6 +1545,8 @@
 		431F5FE21C6D93E800A9CA6C /* ProspectListingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProspectListingTableViewCell.m; sourceTree = "<group>"; };
 		431F5FE31C6D93E800A9CA6C /* ProspectListingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProspectListingTableViewCell.xib; sourceTree = "<group>"; };
 		4321B3321C8B3496006B9402 /* htmlStyle.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = htmlStyle.css; path = SI/css/htmlStyle.css; sourceTree = "<group>"; };
+		432209121D4F37E300971DF3 /* ModelSPAJIDCapture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelSPAJIDCapture.h; sourceTree = "<group>"; };
+		432209131D4F37E300971DF3 /* ModelSPAJIDCapture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelSPAJIDCapture.m; sourceTree = "<group>"; };
 		432466521C9000EC001EE22F /* ModelDataReferral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelDataReferral.h; sourceTree = "<group>"; };
 		432466531C9000EC001EE22F /* ModelDataReferral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelDataReferral.m; sourceTree = "<group>"; };
 		432921381C7FFC26000D1064 /* Model_SI_Master.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model_SI_Master.h; sourceTree = "<group>"; };
@@ -1623,6 +1627,8 @@
 		439985BD1C62F8A70003B037 /* ModelPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelPopover.m; sourceTree = "<group>"; };
 		439985BF1C630C4D0003B037 /* VIPClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIPClass.h; sourceTree = "<group>"; };
 		439985C01C630C4D0003B037 /* VIPClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VIPClass.m; sourceTree = "<group>"; };
+		4399D2161D4B48730023558B /* ModelSPAJSignature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelSPAJSignature.h; sourceTree = "<group>"; };
+		4399D2171D4B48730023558B /* ModelSPAJSignature.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelSPAJSignature.m; sourceTree = "<group>"; };
 		439B95481D3896AD00C86F93 /* SPAJ Add Signature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SPAJ Add Signature.h"; sourceTree = "<group>"; };
 		439B95491D3896AD00C86F93 /* SPAJ Add Signature.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SPAJ Add Signature.m"; sourceTree = "<group>"; };
 		439B954A1D3896AD00C86F93 /* SPAJ Add Signature.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SPAJ Add Signature.xib"; sourceTree = "<group>"; };
@@ -4107,6 +4113,10 @@
 				0F48376E1D34F262009A45D4 /* ModelCFFHtml.m */,
 				438DB5F21D49C28F00B92FEF /* ModelSPAJTransaction.h */,
 				438DB5F31D49C28F00B92FEF /* ModelSPAJTransaction.m */,
+				4399D2161D4B48730023558B /* ModelSPAJSignature.h */,
+				4399D2171D4B48730023558B /* ModelSPAJSignature.m */,
+				432209121D4F37E300971DF3 /* ModelSPAJIDCapture.h */,
+				432209131D4F37E300971DF3 /* ModelSPAJIDCapture.m */,
 			);
 			name = "HLADB Model";
 			sourceTree = "<group>";
@@ -6104,6 +6114,7 @@
 				C4E9D1A11612C64900016053 /* main.m in Sources */,
 				AAFFE1701C7C4F14001B91BF /* WebResponObj.m in Sources */,
 				A9B8F3D41C5B5EE2005C9646 /* ModelProspectProfile.m in Sources */,
+				4399D2181D4B48730023558B /* ModelSPAJSignature.m in Sources */,
 				C4E9D1A51612C64900016053 /* AppDelegate.m in Sources */,
 				C4E9D1AB1612C64900016053 /* ViewController.m in Sources */,
 				C4E9D1BA1612C68200016053 /* FSVerticalTabBar.m in Sources */,
@@ -6526,6 +6537,7 @@
 				C319633918D98A0C00565B1C /* SupplementaryProposalForm1.m in Sources */,
 				2994B40A18E121AE00B0D4D2 /* myLable.m in Sources */,
 				2994B40B18E121AE00B0D4D2 /* myTextView.m in Sources */,
+				432209141D4F37E300971DF3 /* ModelSPAJIDCapture.m in Sources */,
 				AA4EF7711C85A4260050CCD8 /* ReaderThumbsView.m in Sources */,
 				2994B42418E121AE00B0D4D2 /* P2Table.m in Sources */,
 				2994B42618E121AE00B0D4D2 /* Table2.m in Sources */,

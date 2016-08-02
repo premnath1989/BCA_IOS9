@@ -17,6 +17,7 @@
 #import "Theme.h"
 #import "User Interface.h"
 #import "Alert.h"
+#import "ModelSPAJIDCapture.h"
 
 // DECLARATION
 
@@ -39,6 +40,7 @@
         CGRect imagePickerRect;
         Alert* alert;
         UserInterface *objectUserInterface;
+        ModelSPAJIDCapture *modelSPAJIDCapture;
         
         CameraViewController *imagePickerController;
         BOOL cameraFront;
