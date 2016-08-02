@@ -390,12 +390,12 @@
     statement = Nil;
 }
 
--(int)fullSyncTable:(WebResponObj *)obj{
-    [self SyncTable:obj dbString:databasePath];
+-(BOOL)fullSyncTable:(WebResponObj *)obj{
+    return [self SyncTable:obj dbString:databasePath];
 }
 
--(int)SyncTable:(WebResponObj *)obj dbString:(NSString *)DB{
-    int insertProc = TABLE_INSERTION_FAILED;
+-(BOOL)SyncTable:(WebResponObj *)obj dbString:(NSString *)DB{
+    BOOL insertProc = FALSE;
     
     for(dataCollection *data in [obj getDataWrapper]){
         NSString *tableName = [[data.tableName componentsSeparatedByString:@"&"] objectAtIndex: 0];
@@ -427,7 +427,7 @@
         {
             sqlite3_exec(contactDB, [sql UTF8String], NULL, NULL, &error);
             if (error == NULL || (error[0] == '\0')) {
-                insertProc = TABLE_INSERTION_SUCCESS;
+                insertProc = TRUE;
             }
             
             sqlite3_close(contactDB);

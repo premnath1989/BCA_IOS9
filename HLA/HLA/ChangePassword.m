@@ -518,11 +518,10 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
                 DDXMLElement *root = [xml rootElement];
                 WebResponObj *returnObj = [[WebResponObj alloc]init];
                 [self parseXML:root objBuff:returnObj index:0];
-                int result = [loginDB fullSyncTable:returnObj];
-//                if(result == TABLE_INSERTION_SUCCESS){
+                if([loginDB fullSyncTable:returnObj]){
                     [loginDB updateLoginDate];
                     [self gotoCarousel];
-//                }
+                }
             }else if([rateResponse.strStatus caseInsensitiveCompare:@"False"] == NSOrderedSame){
                 [spinnerLoading stopLoadingSpinner];
                 [loginDB DeleteAgentProfile];

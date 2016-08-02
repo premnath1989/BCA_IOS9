@@ -16,6 +16,7 @@
 #import "ChangePassword.h"
 #import "LoginDatabaseManagement.h"
 #import "ProgressBar.h"
+#import "SPAJDisNumber.h"
 
 #import "DDXMLDocument.h"
 #import "DDXMLElementAdditions.h"
@@ -216,23 +217,27 @@ id temp;
 }
 
 - (IBAction)syncSPAJNumber:(id)sender{
-    NSLog(@"Sync SPAJ Number");
-    [spinnerLoading startLoadingSpinner:self.view label:@"Requesting SPAJ Number"];
-    NSURLSession *session = [NSURLSession sharedSession];
+//    NSLog(@"Sync SPAJ Number");
+//    [spinnerLoading startLoadingSpinner:self.view label:@"Requesting SPAJ Number"];
+//    NSURLSession *session = [NSURLSession sharedSession];
+//    
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//        [[session dataTaskWithURL:[NSURL
+//                                   URLWithString:@"http://mposws.azurewebsites.net/Service2.svc/getAllData"]
+//                completionHandler:^(NSData *data,
+//                                    NSURLResponse *response,
+//                                    NSError *error){
+//                    dispatch_async(dispatch_get_main_queue(), ^{
+//                        // handle response
+//                        [spinnerLoading stopLoadingSpinner];
+//                    });
+//                }] resume];
+//    });
+    SPAJDisNumber * SPAJDisNum = [[SPAJDisNumber alloc] initWithNibName:@"SPAJDisNumber" bundle:nil];
+    SPAJDisNum.modalPresentationStyle = UIModalPresentationPageSheet;
+    SPAJDisNum.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [[session dataTaskWithURL:[NSURL
-                                   URLWithString:@"http://mposws.azurewebsites.net/Service2.svc/getAllData"]
-                completionHandler:^(NSData *data,
-                                    NSURLResponse *response,
-                                    NSError *error){
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        // handle response
-                        [spinnerLoading stopLoadingSpinner];
-                    });
-                }] resume];
-    });
-    
+    [self presentViewController:SPAJDisNum animated:YES completion:nil];
   
 
 }

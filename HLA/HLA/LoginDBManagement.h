@@ -24,7 +24,7 @@
 - (int) AgentRecord;
 - (int) AgentStatus:(NSString *)AgentID;
 - (int) DeleteAgentProfile;
-- (int) fullSyncTable:(WebResponObj *)obj;
+- (BOOL) fullSyncTable:(WebResponObj *)obj;
 - (int) ReferralSyncTable:(WebResponObj *)obj;
 - (int) DeviceStatus:(NSString *)AgentID;
 - (int) SpvStatus:(NSString *)spvID;
