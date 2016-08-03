@@ -140,6 +140,10 @@
                             <integer key="value" value="10"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="btnSync:" destination="-1" eventType="touchUpOutside" id="nwV-Hi-YRi"/>
+                        <action selector="btnSync:" destination="-1" eventType="touchDown" id="o77-wt-qHB"/>
+                    </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3gs-1I-eU0">
                     <rect key="frame" x="37" y="218" width="11" height="21"/>

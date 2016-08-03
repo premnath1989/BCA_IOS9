@@ -11,5 +11,6 @@
 @interface SPAJDisNumber : UIViewController
 
 - (IBAction)btnClose:(id)sender;
+- (IBAction)btnSync:(id)sender;
 
 @end

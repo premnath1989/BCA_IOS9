@@ -125,8 +125,10 @@ NSString *ProceedStatus = @"";
     DBMigration *migration = [[DBMigration alloc]init];
 //    [migration updateDatabase:@"hladb.sqlite"];
     [migration updateDatabaseUseNewDB:@"hladb.sqlite"];
-    [migration hardUpdateDatabase:@"BCA_Rates.sqlite"];
-    [migration hardUpdateDatabase:@"DataReferral.sqlite"];
+    [migration hardUpdateDatabase:@"BCA_Rates.sqlite" versionNumber:[NSString stringWithFormat:
+                            @"%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"dbVersion"]]];
+    [migration hardUpdateDatabase:@"DataReferral.sqlite"versionNumber:[NSString stringWithFormat:
+                            @"%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"dbReferralVersion"]]];
 }
 
 
