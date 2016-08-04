@@ -8,7 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SPAJDisNumber : UIViewController
+@interface SPAJDisNumber : UIViewController<UITableViewDataSource>{
+    
+    NSMutableArray *tableDataSubmission;
+    NSMutableArray *tableDataRequest;
+}
+
+@property (weak, nonatomic) IBOutlet UITextField *txtSPAJAllocated;
+@property (weak, nonatomic) IBOutlet UITextField *txtSPAJBalance;
+@property (weak, nonatomic) IBOutlet UITextField *txtSPAJUsed;
+
+
+@property (weak, nonatomic) IBOutlet UITableView *SPAJSubmissionTable;
+@property (weak, nonatomic) IBOutlet UITableView *SPAJRequestTable;
 
 - (IBAction)btnClose:(id)sender;
 - (IBAction)btnSync:(id)sender;

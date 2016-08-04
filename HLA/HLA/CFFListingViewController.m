@@ -161,8 +161,6 @@
     outletDate.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     outletDate.imageEdgeInsets = UIEdgeInsetsMake(0., outletDate.frame.size.width - (24 + 10.0), 0., 0.);
     outletDate.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
-    //outletDate.layer.borderColor = borderColor.CGColor;
-    //outletDOB.layer.borderWidth = 1.0;
     
 }
 
@@ -181,7 +179,6 @@
             textField.leftViewMode = UITextFieldViewModeAlways;
         }
     }
-    
 }
 
 

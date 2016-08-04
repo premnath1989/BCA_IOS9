@@ -457,11 +457,7 @@ id temp;
     [self resignFirstResponder];
     [spinnerLoading startLoadingSpinner:self.view label:@"Sync sedang berjalan 1/3"];
     WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
-    [webservice fullSync:txtAgentCode.text delegate:self];
-    
-    //paralelly we sync the data referral
-    //[webservice dataReferralSync:[loginDB getLastUpdateReferral] delegate:self];
-}
+    [webservice fullSync:txtAgentCode.text delegate:self];}
 
 //here is our function for every response from webservice
 - (void) operation:(AgentWSSoapBindingOperation *)operation

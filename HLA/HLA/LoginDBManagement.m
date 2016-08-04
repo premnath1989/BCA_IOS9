@@ -440,6 +440,208 @@
     return [self SyncTable:obj dbString:RefDatabasePath];
 }
 
+-(long long)SPAJAllocated{
+    long long SPAJCount = 0;
+    
+    sqlite3_stmt *statement;
+    NSString *valueStart = @"";
+    NSString *valueEnd = @"";
+    
+    NSString *querySQL = [NSString stringWithFormat: @"SELECT SPAJAllocationBegin, SPAJAllocationEnd FROM SPAJPackNumber"];
+    NSLog(@"%@",querySQL);
+    
+    if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
+    {
+        int rc = sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL);
+        
+        if (rc==SQLITE_OK)
+        {
+            while(sqlite3_step(statement) == SQLITE_ROW)
+            {
+                if((const char *) sqlite3_column_text(statement, 0) != NULL){
+                    valueStart = [[NSString alloc]
+                             initWithUTF8String:
+                             (const char *) sqlite3_column_text(statement, 0)];
+                    valueEnd = [[NSString alloc]
+                                  initWithUTF8String:
+                                  (const char *) sqlite3_column_text(statement, 1)];
+                    SPAJCount = SPAJCount + ([valueEnd longLongValue]-[valueStart longLongValue]) + 1;
+                }
+            }
+        }
+        sqlite3_close(contactDB);
+    }
+    return SPAJCount;
+}
+
+-(long long)SPAJUsed{
+    long long SPAJCount = [self SPAJNonActive];
+    
+    sqlite3_stmt *statement;
+    NSString *valueStart = @"";
+    NSString *valueEnd = @"";
+    
+    NSString *querySQL = [NSString stringWithFormat: @"SELECT SPAJAllocationBegin, SPAJAllocationEnd, LastUsedSPAJNo FROM SPAJPackNumber WHERE STATUS = 'ACTIVE'"];
+    NSLog(@"%@",querySQL);
+    
+    if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
+    {
+        int rc = sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL);
+        
+        if (rc==SQLITE_OK)
+        {
+            while(sqlite3_step(statement) == SQLITE_ROW)
+            {
+                if((const char *) sqlite3_column_text(statement, 2) == NULL){
+                    valueStart = [[NSString alloc]
+                                  initWithUTF8String:
+                                  (const char *) sqlite3_column_text(statement, 0)];
+                    valueEnd = [[NSString alloc]
+                                initWithUTF8String:
+                                (const char *) sqlite3_column_text(statement, 1)];
+                    SPAJCount = SPAJCount + ([valueEnd longLongValue]-[valueStart longLongValue]) + 1;
+                }else{
+                    valueStart = [[NSString alloc]
+                                  initWithUTF8String:
+                                  (const char *) sqlite3_column_text(statement, 2)];
+                    valueEnd = [[NSString alloc]
+                                initWithUTF8String:
+                                (const char *) sqlite3_column_text(statement, 1)];
+                    SPAJCount = SPAJCount + ([valueEnd longLongValue]-[valueStart longLongValue]);
+                }
+            }
+        }
+        sqlite3_close(contactDB);
+    }
+    return SPAJCount;
+}
+
+- (NSMutableArray *)SPAJRetrievePackID{
+    
+    NSMutableArray *PackIDWrapper = [[NSMutableArray alloc]init];
+    
+    sqlite3_stmt *statement;
+    
+    NSString *querySQL = [NSString stringWithFormat: @"SELECT PACKID, SPAJAllocationBegin, SPAJAllocationEnd, CreatedDate FROM SPAJPackNumber"];
+    NSLog(@"%@",querySQL);
+    
+    if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
+    {
+        int rc = sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL);
+        
+        if (rc==SQLITE_OK)
+        {
+            while(sqlite3_step(statement) == SQLITE_ROW)
+            {
+                if((const char *) sqlite3_column_text(statement, 3) != NULL){
+                    NSMutableDictionary *PackIDContent = [[NSMutableDictionary alloc]init];
+                    [PackIDContent setValue:[[NSString alloc]
+                                             initWithUTF8String:
+                                             (const char *) sqlite3_column_text(statement, 0)] forKey:@"PackID"];
+                    [PackIDContent setValue:[[NSString alloc]
+                                             initWithUTF8String:
+                                             (const char *) sqlite3_column_text(statement, 1)] forKey:@"SPAJAllocationBegin"];
+                    [PackIDContent setValue:[[NSString alloc]
+                                             initWithUTF8String:
+                                             (const char *) sqlite3_column_text(statement, 2)] forKey:@"SPAJAllocationEnd"];
+                    [PackIDContent setValue:[[NSString alloc]
+                                             initWithUTF8String:
+                                             (const char *) sqlite3_column_text(statement, 3)] forKey:@"CreatedDate"];
+                    [PackIDWrapper addObject:PackIDContent];
+                }
+            }
+        }
+        sqlite3_close(contactDB);
+    }
+    return PackIDWrapper;
+}
+
+
+-(long long)SPAJNonActive{
+    long long SPAJCount = 0;
+    
+    sqlite3_stmt *statement;
+    NSString *valueStart = @"";
+    NSString *valueEnd = @"";
+    
+    NSString *querySQL = [NSString stringWithFormat: @"SELECT SPAJAllocationBegin, SPAJAllocationEnd, LastUsedSPAJNo FROM SPAJPackNumber WHERE STATUS = 'NONACTIVE'"];
+    NSLog(@"%@",querySQL);
+    
+    if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
+    {
+        int rc = sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL);
+        
+        if (rc==SQLITE_OK)
+        {
+            while(sqlite3_step(statement) == SQLITE_ROW)
+            {
+                if((const char *) sqlite3_column_text(statement, 2) == NULL){
+                    valueStart = [[NSString alloc]
+                                  initWithUTF8String:
+                                  (const char *) sqlite3_column_text(statement, 0)];
+                    valueEnd = [[NSString alloc]
+                                initWithUTF8String:
+                                (const char *) sqlite3_column_text(statement, 1)];
+                    SPAJCount = SPAJCount + ([valueEnd longLongValue]-[valueStart longLongValue]) + 1;
+                }else{
+                    valueStart = [[NSString alloc]
+                                  initWithUTF8String:
+                                  (const char *) sqlite3_column_text(statement, 2)];
+                    valueEnd = [[NSString alloc]
+                                initWithUTF8String:
+                                (const char *) sqlite3_column_text(statement, 1)];
+                    SPAJCount = SPAJCount + ([valueEnd longLongValue]-[valueStart longLongValue]);
+                }
+            }
+        }
+        sqlite3_close(contactDB);
+    }
+    return SPAJCount;
+}
+
+
+-(long long)SPAJBalance{
+    long long SPAJCount = 0;
+    
+    sqlite3_stmt *statement;
+    NSString *valueStart = @"";
+    NSString *valueEnd = @"";
+    
+    NSString *querySQL = [NSString stringWithFormat: @"SELECT SPAJAllocationBegin, SPAJAllocationEnd, LastUsedSPAJNo FROM SPAJPackNumber WHERE STATUS = 'ACTIVE'"];
+    NSLog(@"%@",querySQL);
+    
+    if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
+    {
+        int rc = sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL);
+        
+        if (rc==SQLITE_OK)
+        {
+            while(sqlite3_step(statement) == SQLITE_ROW)
+            {
+                if((const char *) sqlite3_column_text(statement, 2) == NULL){
+                    valueStart = [[NSString alloc]
+                                  initWithUTF8String:
+                                  (const char *) sqlite3_column_text(statement, 0)];
+                    valueEnd = [[NSString alloc]
+                                initWithUTF8String:
+                                (const char *) sqlite3_column_text(statement, 1)];
+                    SPAJCount = SPAJCount + ([valueEnd longLongValue]-[valueStart longLongValue]) + 1;
+                }else{
+                    valueStart = [[NSString alloc]
+                                  initWithUTF8String:
+                                  (const char *) sqlite3_column_text(statement, 2)];
+                    valueEnd = [[NSString alloc]
+                                initWithUTF8String:
+                                (const char *) sqlite3_column_text(statement, 1)];
+                    SPAJCount = SPAJCount + ([valueEnd longLongValue]-[valueStart longLongValue]);
+                }
+            }
+        }
+        sqlite3_close(contactDB);
+    }
+    return SPAJCount;
+}
+
 
 -(NSString *)RiderCode:(NSString *)SINo riderCode:(NSString *)code{
     
@@ -616,6 +818,54 @@
             
         }
     }
+}
+
+-(int)insertTableFromJSON:(NSDictionary*) params databasePath:(NSString *)dbName{
+    int insertProc = 0;
+    sqlite3 *instanceDB;
+    
+    NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *dbPath = [[dirPaths objectAtIndex:0] stringByAppendingPathComponent:dbName];
+    
+    //first loop for the table name
+    for(NSString *tableName in [params allKeys]){
+        
+        //now we do loop for each data inside the table
+        for(NSDictionary *dataArray in [params valueForKey:tableName]){
+            NSString *sql =  [NSString stringWithFormat:@"insert or replace into %@ (",tableName ];
+            for(NSString *keys in [dataArray allKeys]){
+                NSString *key = [NSString stringWithFormat:@"%@,",keys];
+                sql = [sql stringByAppendingString:key];
+            }
+            sql = [sql substringToIndex:[sql length]-1];
+            sql = [sql stringByAppendingString:@") VALUES ("];
+            
+            for(NSString *keys in [dataArray allKeys]){
+                NSString *value = @"";
+                if([[params valueForKey:tableName][0] valueForKey:keys] != NULL)
+                    value = [NSString stringWithFormat:@"'%@',",[dataArray valueForKey:keys]];
+                else
+                    value = [NSString stringWithFormat:@"'',"];
+                
+                sql = [sql stringByAppendingString:value];
+            }
+            sql = [sql substringToIndex:[sql length]-1];
+            sql = [sql stringByAppendingString:@")"];
+            
+            NSLog(@"query : %@", sql);
+            
+            char *error;
+            if (sqlite3_open([dbPath UTF8String], &instanceDB) == SQLITE_OK)
+            {
+                sqlite3_exec(instanceDB, [sql UTF8String], NULL, NULL, &error);
+                if (error == NULL || (error[0] == '\0')) {
+                    insertProc = 1;
+                }
+                sqlite3_close(instanceDB);
+            }
+        }
+    }
+    return insertProc;
 }
 
 -(BOOL)sqlStatement:(NSString*)querySQL
