@@ -16,6 +16,7 @@
 #import "ChangePassword.h"
 #import "LoginDatabaseManagement.h"
 #import "ProgressBar.h"
+#import "SPAJDisNumber.h"
 
 #import "DDXMLDocument.h"
 #import "DDXMLElementAdditions.h"
@@ -27,7 +28,7 @@
 @end
 
 @implementation SettingUserProfile
-@synthesize outletSave;
+
 @synthesize username, code, name, contactNo ;
 @synthesize leaderCode, leaderName, registerNo, email;
 @synthesize idRequest, indexNo;
@@ -37,7 +38,8 @@
 @synthesize DatePicker = _DatePicker;
 @synthesize previousElementName, elementName, getLatest;
 @synthesize outletChgPassword;
-
+@synthesize outletSave;
+@synthesize outletSyncSPAJNumber;
 @synthesize txtAgentCode;
 @synthesize txtAgentName;
 @synthesize txtCabang;
@@ -212,6 +214,32 @@ id temp;
     [UserProfileView setAgentCode:[agentDetails valueForKey:@"AgentCode"]];
     
     [self presentViewController:UserProfileView animated:YES completion:nil];
+}
+
+- (IBAction)syncSPAJNumber:(id)sender{
+//    NSLog(@"Sync SPAJ Number");
+//    [spinnerLoading startLoadingSpinner:self.view label:@"Requesting SPAJ Number"];
+//    NSURLSession *session = [NSURLSession sharedSession];
+//    
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//        [[session dataTaskWithURL:[NSURL
+//                                   URLWithString:@"http://mposws.azurewebsites.net/Service2.svc/getAllData"]
+//                completionHandler:^(NSData *data,
+//                                    NSURLResponse *response,
+//                                    NSError *error){
+//                    dispatch_async(dispatch_get_main_queue(), ^{
+//                        // handle response
+//                        [spinnerLoading stopLoadingSpinner];
+//                    });
+//                }] resume];
+//    });
+    SPAJDisNumber * SPAJDisNum = [[SPAJDisNumber alloc] initWithNibName:@"SPAJDisNumber" bundle:nil];
+    SPAJDisNum.modalPresentationStyle = UIModalPresentationPageSheet;
+    SPAJDisNum.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    
+    [self presentViewController:SPAJDisNum animated:YES completion:nil];
+  
+
 }
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
@@ -429,11 +457,7 @@ id temp;
     [self resignFirstResponder];
     [spinnerLoading startLoadingSpinner:self.view label:@"Sync sedang berjalan 1/3"];
     WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
-    [webservice fullSync:txtAgentCode.text delegate:self];
-    
-    //paralelly we sync the data referral
-    //[webservice dataReferralSync:[loginDB getLastUpdateReferral] delegate:self];
-}
+    [webservice fullSync:txtAgentCode.text delegate:self];}
 
 //here is our function for every response from webservice
 - (void) operation:(AgentWSSoapBindingOperation *)operation
@@ -553,12 +577,9 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
                 dispatch_async(dispatch_get_main_queue(), ^{
                     
                     [spinnerLoading stopLoadingSpinner];
-                    
                     UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Sync telah selesai" message:@"" delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
                     [alert show];
                 });
-
-                
                 
             }else{
                 

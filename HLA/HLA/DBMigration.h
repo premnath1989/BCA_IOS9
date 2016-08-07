@@ -31,6 +31,6 @@
 
 -(void)updateDatabase:(NSString*)dbName;
 -(void)updateDatabaseUseNewDB:(NSString*)dbName;
--(BOOL)hardUpdateDatabase:(NSString*)dbName;
+-(BOOL)hardUpdateDatabase:(NSString*)dbName versionNumber:(NSString *)dbVersion;
 
 @end

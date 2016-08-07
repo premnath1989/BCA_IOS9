@@ -540,6 +540,14 @@
                                         <color key="textColor" red="0.34509803919999998" green="0.34901960780000002" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="po0-0A-NnM">
+                                        <rect key="frame" x="635" y="618" width="46" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="syncSPAJNumber:" destination="Xma-Uf-txG" eventType="touchUpInside" id="llS-uj-ncC"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </scrollView>
                             <navigationBar contentMode="scaleToFill" id="KPl-Vd-1Ur">
@@ -577,6 +585,7 @@
                         <outlet property="myScrollView" destination="J6L-bp-dYG" id="fEX-qw-h7n"/>
                         <outlet property="outletChgPassword" destination="SbK-xb-lBO" id="jBz-5z-j5z"/>
                         <outlet property="outletSave" destination="Kjs-eG-Zzm" id="7Ni-VM-kJM"/>
+                        <outlet property="outletSyncSPAJNumber" destination="po0-0A-NnM" id="J20-Bh-a39"/>
                         <outlet property="txtAddress1" destination="68P-fA-IhU" id="4yJ-lR-7JI"/>
                         <outlet property="txtAddress2" destination="SSd-XD-i2F" id="JQW-sv-wGt"/>
                         <outlet property="txtAddress3" destination="B6q-Hw-guN" id="u7p-d7-6u3"/>
@@ -596,7 +605,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sgP-0B-tHw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1412" y="847"/>
+            <point key="canvasLocation" x="1580" y="824"/>
         </scene>
         <!--UserProfile-->
         <scene sceneID="uz3-PN-Ure">

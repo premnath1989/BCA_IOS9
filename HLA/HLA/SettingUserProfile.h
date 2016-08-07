@@ -53,6 +53,7 @@
 @property (nonatomic, copy) NSString *email;
 @property (weak, nonatomic) IBOutlet UIButton *outletSave;
 @property (weak, nonatomic) IBOutlet UIButton *outletChgPassword;
+@property (weak, nonatomic) IBOutlet UIButton *outletSyncSPAJNumber;
 
 @property(strong) NSString *previousElementName;
 @property(strong) NSString *elementName;
@@ -61,6 +62,7 @@
 - (IBAction)btnSync:(id)sender;
 - (IBAction)btnDone:(id)sender;
 - (IBAction)ChangePassword:(id)sender;
+- (IBAction)syncSPAJNumber:(id)sender;
 
 //--bob
 @property (strong, nonatomic) IBOutlet UIScrollView *myScrollView;

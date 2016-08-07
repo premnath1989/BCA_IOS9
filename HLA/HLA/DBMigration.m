@@ -165,7 +165,9 @@
 //implementation of update DB
 //we use the new DB and insert the data from the older DB.
 -(void)updateDatabaseUseNewDB:(NSString*)dbName{
-    if([self hardUpdateDatabase:dbName]){
+    NSString *dbVersion = [NSString stringWithFormat:
+                           @"%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"dbVersion"]];
+    if([self hardUpdateDatabase:dbName versionNumber:dbVersion]){
     
         defaultDBPath = [[dirPaths objectAtIndex:0] stringByAppendingPathComponent:dbName];
         
@@ -207,15 +209,13 @@
     }
 }
 
--(BOOL)hardUpdateDatabase:(NSString*)dbName
+-(BOOL)hardUpdateDatabase:(NSString*)dbName versionNumber:(NSString *)dbVersion
 {
     tempDir = [NSTemporaryDirectory() stringByAppendingPathComponent:dbName];
     dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     defaultDBPath = [[dirPaths objectAtIndex:0] stringByAppendingPathComponent:dbName];
     
     // compare database version with the version saved in the plist
-    NSString *dbVersion = [NSString stringWithFormat:
-                           @"%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"dbVersion"]];
     NSLog(@"dbName = %@, dbversion New: %@",dbName, dbVersion);
     NSString *bundleDBVersion = @"0.0";
     sqlite3 *database;

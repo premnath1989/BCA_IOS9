@@ -905,12 +905,18 @@
 		DE07EAD41D41D72A0046AFA1 /* SPAJ Form Generation.m in Sources */ = {isa = PBXBuildFile; fileRef = DE07EAD31D41D72A0046AFA1 /* SPAJ Form Generation.m */; };
 		DE09815F1CFD5C56008BC359 /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = DE09815C1CFD5C56008BC359 /* SSKeychain.m */; };
 		DE0981601CFD5C56008BC359 /* SSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = DE09815E1CFD5C56008BC359 /* SSKeychainQuery.m */; };
+		DE0E3EFC1D4F3A7E00873967 /* SPAJDisNumber.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE0E3EFB1D4F3A7E00873967 /* SPAJDisNumber.xib */; };
+		DE0E3EFF1D4F3AA500873967 /* SPAJDisNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = DE0E3EFE1D4F3AA500873967 /* SPAJDisNumber.m */; };
 		DE0E49991CF6EAB200812C2E /* DataReferral.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = DE0E49981CF6E98E00812C2E /* DataReferral.sqlite */; };
 		DE0F59FC1CF2FF5C0087483D /* BCA_Rates.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = DE0F59FB1CF2FF5C0087483D /* BCA_Rates.sqlite */; };
 		DE15788C1CBB792900CE171B /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = DE1578891CBB792900CE171B /* NSData+Base64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		DE15788D1CBB792900CE171B /* StringEncryption.m in Sources */ = {isa = PBXBuildFile; fileRef = DE15788B1CBB792900CE171B /* StringEncryption.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		DE1578901CBB8F7000CE171B /* EncryptDecryptWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = DE15788F1CBB8F7000CE171B /* EncryptDecryptWrapper.m */; };
 		DE1CC9621CA284A70058B595 /* PremiumKeluargaku.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE1CC9611CA284A70058B595 /* PremiumKeluargaku.xib */; };
+		DE7B8C4F1D5321B1002C7EDF /* SPAJTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DE7B8C4E1D5321B1002C7EDF /* SPAJTableCell.m */; };
+		DE7B8C561D532DE6002C7EDF /* SPAJTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE7B8C551D532DE6002C7EDF /* SPAJTableCell.xib */; };
+		DE7B8C591D5341E8002C7EDF /* SPAJRequestCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE7B8C581D5341E8002C7EDF /* SPAJRequestCell.xib */; };
+		DE7B8C5B1D5341F8002C7EDF /* SPAJRequestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DE7B8C5A1D5341F8002C7EDF /* SPAJRequestCell.m */; };
 		DE80E43A1CA3F7FB00D9E775 /* BlackRaccoon-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DE80E4231CA3F7FB00D9E775 /* BlackRaccoon-Info.plist */; };
 		DE80E44A1CA3FCEE00D9E775 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE80E4491CA3FCEE00D9E775 /* CFNetwork.framework */; };
 		DE8D29C71C94512900727765 /* TabValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = DE8D29C61C94512900727765 /* TabValidation.m */; };
@@ -2467,6 +2473,9 @@
 		DE09815C1CFD5C56008BC359 /* SSKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKeychain.m; sourceTree = "<group>"; };
 		DE09815D1CFD5C56008BC359 /* SSKeychainQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKeychainQuery.h; sourceTree = "<group>"; };
 		DE09815E1CFD5C56008BC359 /* SSKeychainQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKeychainQuery.m; sourceTree = "<group>"; };
+		DE0E3EFB1D4F3A7E00873967 /* SPAJDisNumber.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SPAJDisNumber.xib; sourceTree = "<group>"; };
+		DE0E3EFD1D4F3A9900873967 /* SPAJDisNumber.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SPAJDisNumber.h; sourceTree = "<group>"; };
+		DE0E3EFE1D4F3AA500873967 /* SPAJDisNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPAJDisNumber.m; sourceTree = "<group>"; };
 		DE0E49981CF6E98E00812C2E /* DataReferral.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = DataReferral.sqlite; sourceTree = "<group>"; };
 		DE0F59FB1CF2FF5C0087483D /* BCA_Rates.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = BCA_Rates.sqlite; sourceTree = "<group>"; };
 		DE1578881CBB792900CE171B /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+Base64.h"; path = "Encryption/NSData+Base64.h"; sourceTree = "<group>"; };
@@ -2479,6 +2488,12 @@
 		DE1CC9611CA284A70058B595 /* PremiumKeluargaku.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PremiumKeluargaku.xib; sourceTree = "<group>"; };
 		DE20EAD51CBF3D4800B1E6AE /* BLESS-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "BLESS-Prefix.pch"; path = "../BLESS-Prefix.pch"; sourceTree = "<group>"; };
 		DE38E4891CAA25E300B3051B /* GroupDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GroupDelegate.h; sourceTree = "<group>"; };
+		DE7B8C4E1D5321B1002C7EDF /* SPAJTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPAJTableCell.m; sourceTree = "<group>"; };
+		DE7B8C501D5321BF002C7EDF /* SPAJTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SPAJTableCell.h; sourceTree = "<group>"; };
+		DE7B8C551D532DE6002C7EDF /* SPAJTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SPAJTableCell.xib; sourceTree = "<group>"; };
+		DE7B8C581D5341E8002C7EDF /* SPAJRequestCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SPAJRequestCell.xib; sourceTree = "<group>"; };
+		DE7B8C5A1D5341F8002C7EDF /* SPAJRequestCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPAJRequestCell.m; sourceTree = "<group>"; };
+		DE7B8C5C1D534204002C7EDF /* SPAJRequestCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SPAJRequestCell.h; sourceTree = "<group>"; };
 		DE80E4231CA3F7FB00D9E775 /* BlackRaccoon-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "BlackRaccoon-Info.plist"; path = "BlackRacoon/BlackRaccoon-Info.plist"; sourceTree = "<group>"; };
 		DE80E4241CA3F7FB00D9E775 /* BlackRaccoon-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "BlackRaccoon-Prefix.pch"; path = "BlackRacoon/BlackRaccoon-Prefix.pch"; sourceTree = "<group>"; };
 		DE80E4491CA3FCEE00D9E775 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -4653,6 +4668,7 @@
 		C41811251655E614006A05B9 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				DE0E3EFA1D4F3A4700873967 /* SPAJDisNumber */,
 				C485CB9F187BA74C0031E7F5 /* SettingSecurityQuestion2.h */,
 				C485CBA0187BA74C0031E7F5 /* SettingSecurityQuestion2.m */,
 				C418112616561D87006A05B9 /* SettingUserProfile.h */,
@@ -5391,6 +5407,18 @@
 			name = Keychains;
 			sourceTree = "<group>";
 		};
+		DE0E3EFA1D4F3A4700873967 /* SPAJDisNumber */ = {
+			isa = PBXGroup;
+			children = (
+				DE7B8C571D53403F002C7EDF /* SPAJRequestCell */,
+				DE7B8C4D1D532197002C7EDF /* SPAJSubmissionCell */,
+				DE0E3EFB1D4F3A7E00873967 /* SPAJDisNumber.xib */,
+				DE0E3EFD1D4F3A9900873967 /* SPAJDisNumber.h */,
+				DE0E3EFE1D4F3AA500873967 /* SPAJDisNumber.m */,
+			);
+			name = SPAJDisNumber;
+			sourceTree = "<group>";
+		};
 		DE1578871CBB78E600CE171B /* Encryption */ = {
 			isa = PBXGroup;
 			children = (
@@ -5419,6 +5447,26 @@
 			);
 			name = CFF_Forms;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		DE7B8C4D1D532197002C7EDF /* SPAJSubmissionCell */ = {
+			isa = PBXGroup;
+			children = (
+				DE7B8C4E1D5321B1002C7EDF /* SPAJTableCell.m */,
+				DE7B8C501D5321BF002C7EDF /* SPAJTableCell.h */,
+				DE7B8C551D532DE6002C7EDF /* SPAJTableCell.xib */,
+			);
+			name = SPAJSubmissionCell;
+			sourceTree = "<group>";
+		};
+		DE7B8C571D53403F002C7EDF /* SPAJRequestCell */ = {
+			isa = PBXGroup;
+			children = (
+				DE7B8C581D5341E8002C7EDF /* SPAJRequestCell.xib */,
+				DE7B8C5A1D5341F8002C7EDF /* SPAJRequestCell.m */,
+				DE7B8C5C1D534204002C7EDF /* SPAJRequestCell.h */,
+			);
+			name = SPAJRequestCell;
 			sourceTree = "<group>";
 		};
 		DED179571CACE37700CD0AA1 /* DisableView */ = {
@@ -5947,8 +5995,10 @@
 				6A6ED0A217D57FD6009FFA56 /* MaritalStatus.plist in Resources */,
 				6A6ED0A417D59186009FFA56 /* Religion.plist in Resources */,
 				6A6ED0AD17D5E97E009FFA56 /* Country.plist in Resources */,
+				DE7B8C561D532DE6002C7EDF /* SPAJTableCell.xib in Resources */,
 				2958A88017E960150090A791 /* marker.png in Resources */,
 				AA4EF7621C85A4260050CCD8 /* Reader-Thumbs@3x.png in Resources */,
+				DE7B8C591D5341E8002C7EDF /* SPAJRequestCell.xib in Resources */,
 				2958A88117E960150090A791 /* marker@2x.png in Resources */,
 				2958A88217E960150090A791 /* slider_blue.png in Resources */,
 				AA4EF7431C85A4260050CCD8 /* AppIcon-120.png in Resources */,
@@ -6016,6 +6066,7 @@
 				C3D174B718B766030076F078 /* view.png in Resources */,
 				6C0B08CE18D1979B00826FC9 /* underwriting in Resources */,
 				2994B41018E121AE00B0D4D2 /* CA_bg.png in Resources */,
+				DE0E3EFC1D4F3A7E00873967 /* SPAJDisNumber.xib in Resources */,
 				2994B41118E121AE00B0D4D2 /* CA_HeaderImage.png in Resources */,
 				AAFE1AAF1C7B05E1008D4B9C /* Login Page Bless_english_final_2-01.jpg in Resources */,
 				2994B41218E121AE00B0D4D2 /* Footer.png in Resources */,
@@ -6305,6 +6356,7 @@
 				EF1ADDD51781372D00996388 /* Retirement.m in Sources */,
 				0FF845661D237732008CF861 /* SPAJ Submitted List Cell.m in Sources */,
 				EF1ADDD817815F7300996388 /* RecordAdvice.m in Sources */,
+				DE7B8C4F1D5321B1002C7EDF /* SPAJTableCell.m in Sources */,
 				178A076B1C7DAD7300B91582 /* ExtraPremi.m in Sources */,
 				EF1ADDE117826CCC00996388 /* Education.m in Sources */,
 				EF1ADDE417826F2700996388 /* SavingCFF.m in Sources */,
@@ -6318,6 +6370,7 @@
 				C47F40E6178BA5230023D9EF /* EverFundMaturityViewController.m in Sources */,
 				C4C6C0A6178BB0F50006B00D /* PopOverFundViewController.m in Sources */,
 				EF90B0C9178E56A800FEC129 /* eAppStatusList.m in Sources */,
+				DE0E3EFF1D4F3AA500873967 /* SPAJDisNumber.m in Sources */,
 				EF90B0D1178E7F1800FEC129 /* Relationship.m in Sources */,
 				AADD7E721C743A1E00D87750 /* DDXMLElement.m in Sources */,
 				EF30C76217A63E94009A301A /* Nationality.m in Sources */,
@@ -6438,6 +6491,7 @@
 				C30A25A317F3C8D500613A0F /* eSubmission.m in Sources */,
 				C30A25A417F3C8D500613A0F /* HealthQuestionnaire.m in Sources */,
 				C30A25A517F3C8D500613A0F /* HealthQuestionnaire2.m in Sources */,
+				DE7B8C5B1D5341F8002C7EDF /* SPAJRequestCell.m in Sources */,
 				C30A25A617F3C8D500613A0F /* HealthQuestionnaire3.m in Sources */,
 				AAFEE0381C6C239E00702F64 /* ColumnHeaderStyle.m in Sources */,
 				C30A25A717F3C8D500613A0F /* HealthQuestionnaire5.m in Sources */,

@@ -18,14 +18,14 @@
     sqlite3 *contactDB;
 }
 
+//Agent Profile functions
 - (int) SearchAgent:(NSString *)AgentID;
 - (int) insertAgentProfile:(WebResponObj *)obj;
 - (int) FirstLogin:(NSString *)AgentID;
+- (NSMutableDictionary *)getAgentDetails;
 - (int) AgentRecord;
 - (int) AgentStatus:(NSString *)AgentID;
 - (int) DeleteAgentProfile;
-- (int) fullSyncTable:(WebResponObj *)obj;
-- (int) ReferralSyncTable:(WebResponObj *)obj;
 - (int) DeviceStatus:(NSString *)AgentID;
 - (int) SpvStatus:(NSString *)spvID;
 - (void) updatePassword:(NSString *)newPassword;
@@ -33,6 +33,19 @@
 - (void) makeDBCopy;
 - (void) updateLoginDate;
 - (void) updateLogoutDate;
+
+//general functions
+- (int)insertTableFromJSON:(NSDictionary*) params databasePath:(NSString *)dbName;
+- (BOOL) fullSyncTable:(WebResponObj *)obj;
+- (int) ReferralSyncTable:(WebResponObj *)obj;
+
+//SPAJ Functions
+- (long long)SPAJAllocated;
+- (long long)SPAJBalance;
+- (long long)SPAJUsed;
+- (NSMutableArray *)SPAJRetrievePackID;
+
+//SI functions
 - (void) updateSIMaster:(NSString *)SINO EnableEditing:(NSString *)EditFlag;
 - (BOOL) SpvAdmValidation:(NSString *)username password:(NSString *)password;
 - (NSString *)RiderCode:(NSString *)SINo riderCode:(NSString *)code;
@@ -41,7 +54,6 @@
 - (NSString *) localDBUDID;
 - (NSString *) AgentCodeLocal;
 - (NSString *)EditIllustration:(NSString *)SIno;
-- (NSMutableDictionary *)getAgentDetails;
 -(NSMutableDictionary *)premiKeluargaku:(NSString *)SINo;
 -(NSString *)getUniqueDeviceIdentifierAsString;
 -(NSString *) getLastUpdateReferral;

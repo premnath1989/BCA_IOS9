@@ -125,8 +125,10 @@ NSString *ProceedStatus = @"";
     DBMigration *migration = [[DBMigration alloc]init];
 //    [migration updateDatabase:@"hladb.sqlite"];
     [migration updateDatabaseUseNewDB:@"hladb.sqlite"];
-    [migration hardUpdateDatabase:@"BCA_Rates.sqlite"];
-    [migration hardUpdateDatabase:@"DataReferral.sqlite"];
+    [migration hardUpdateDatabase:@"BCA_Rates.sqlite" versionNumber:[NSString stringWithFormat:
+                            @"%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"dbVersion"]]];
+    [migration hardUpdateDatabase:@"DataReferral.sqlite"versionNumber:[NSString stringWithFormat:
+                            @"%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"dbReferralVersion"]]];
 }
 
 
@@ -280,6 +282,12 @@ static NSString *labelVers;
                 [webservice ValidateLogin:txtUsername.text password:encryptedPass UUID:[[[UIDevice currentDevice] identifierForVendor] UUIDString] delegate:self];
             }else{
                 
+                NSString *appName=[[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString*)kCFBundleNameKey];
+                [SSKeychain setPassword:nil forService:appName account:@"incodingLogin"];
+                
+                [spinnerLoading stopLoadingSpinner];
+                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"Periksa lagi koneksi internet anda"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                [alert show];
             }
         }
         
@@ -295,12 +303,11 @@ static NSString *labelVers;
                 DDXMLElement *root = [xml rootElement];
                 WebResponObj *returnObj = [[WebResponObj alloc]init];
                 [self parseXML:root objBuff:returnObj index:0];
-                int result = [loginDB fullSyncTable:returnObj];
-//                if(result == TABLE_INSERTION_SUCCESS){
+                if([loginDB fullSyncTable:returnObj]){
                     [spinnerLoading stopLoadingSpinner];
                     if([self validToLogin] && [self CredentialChecking:TRUE])
                         [self loginSuccess];
-//                }
+                }
             }else if([rateResponse.strStatus caseInsensitiveCompare:@"False"] == NSOrderedSame){
                 
                 [spinnerLoading stopLoadingSpinner];
@@ -326,12 +333,11 @@ static NSString *labelVers;
                 DDXMLElement *root = [xml rootElement];
                 WebResponObj *returnObj = [[WebResponObj alloc]init];
                 [self parseXML:root objBuff:returnObj index:0];
-                int result = [loginDB fullSyncTable:returnObj];
-//                if(result == TABLE_INSERTION_SUCCESS){
+                if([loginDB fullSyncTable:returnObj]){
                     [spinnerLoading stopLoadingSpinner];
                     if([self validToLogin] && [self CredentialChecking:FALSE])
                         [self loginSuccess];
-//                }
+                }
             }else if([rateResponse.strStatus caseInsensitiveCompare:@"False"] == NSOrderedSame){
                 
                 [spinnerLoading stopLoadingSpinner];
@@ -750,20 +756,18 @@ static NSString *labelVers;
     NSString *appName=[[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString*)kCFBundleNameKey];
     
     NSString *strApplicationUUID = [SSKeychain passwordForService:appName account:@"incodingLogin"];
+    WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
     if (strApplicationUUID == nil)
     {
         strApplicationUUID  = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
         [SSKeychain setPassword:strApplicationUUID forService:appName account:@"incodingLogin"];
-        
-        WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
         
         //change the udid
         [webservice changeUDID:txtUsername.text udid:[SSKeychain passwordForService:appName account:@"incoding"] delegate:self];
         
     }else{
         NSString *encryptedPass = [encryptWrapper encrypt:txtPassword.text];
-        WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
-        [webservice ValidateLogin:txtUsername.text password:encryptedPass UUID:[[[UIDevice currentDevice] identifierForVendor] UUIDString] delegate:self];
+        [webservice ValidateLogin:txtUsername.text password:encryptedPass UUID:strApplicationUUID delegate:self];
     }
     return strApplicationUUID;
 }
