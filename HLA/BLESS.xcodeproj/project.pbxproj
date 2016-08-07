@@ -425,6 +425,7 @@
 		439985BE1C62F8A70003B037 /* ModelPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = 439985BD1C62F8A70003B037 /* ModelPopover.m */; };
 		439985C11C630C4D0003B037 /* VIPClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 439985C01C630C4D0003B037 /* VIPClass.m */; };
 		4399D2181D4B48730023558B /* ModelSPAJSignature.m in Sources */ = {isa = PBXBuildFile; fileRef = 4399D2171D4B48730023558B /* ModelSPAJSignature.m */; };
+		439B0B7D1D54743F00C28F19 /* SPAJEAppListStoryBoard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 439B0B7C1D54743F00C28F19 /* SPAJEAppListStoryBoard.storyboard */; };
 		439B954B1D3896AD00C86F93 /* SPAJ Add Signature.m in Sources */ = {isa = PBXBuildFile; fileRef = 439B95491D3896AD00C86F93 /* SPAJ Add Signature.m */; };
 		439B954C1D3896AD00C86F93 /* SPAJ Add Signature.xib in Resources */ = {isa = PBXBuildFile; fileRef = 439B954A1D3896AD00C86F93 /* SPAJ Add Signature.xib */; };
 		439EFBFA1D1A621500A0B8B0 /* CFFValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = 439EFBF91D1A621500A0B8B0 /* CFFValidation.m */; };
@@ -446,6 +447,19 @@
 		43BB5A551D3738EC0067D189 /* Pendidikan.html in Resources */ = {isa = PBXBuildFile; fileRef = 43BB5A541D3738EC0067D189 /* Pendidikan.html */; };
 		43C166191C99448500001691 /* ModelKodepos.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C166181C99448500001691 /* ModelKodepos.m */; };
 		43C1661C1C99489000001691 /* KodePosInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C1661B1C99489000001691 /* KodePosInfo.m */; };
+		43C98DFE1D519D5900A3F911 /* SPAJ Calon Pemegang Polis.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C98DFC1D519D5900A3F911 /* SPAJ Calon Pemegang Polis.m */; };
+		43C98DFF1D519D5900A3F911 /* SPAJ Calon Pemegang Polis.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43C98DFD1D519D5900A3F911 /* SPAJ Calon Pemegang Polis.xib */; };
+		43C98E021D51A20100A3F911 /* datacalonpemegangpolis.html in Resources */ = {isa = PBXBuildFile; fileRef = 43C98E011D51A20100A3F911 /* datacalonpemegangpolis.html */; };
+		43C98E051D51A5D100A3F911 /* ModelSPAJHtml.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C98E041D51A5D100A3F911 /* ModelSPAJHtml.m */; };
+		43C98E091D51D1F500A3F911 /* SPAJ Calon Tertanggung.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C98E071D51D1F500A3F911 /* SPAJ Calon Tertanggung.m */; };
+		43C98E0A1D51D1F500A3F911 /* SPAJ Calon Tertanggung.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43C98E081D51D1F500A3F911 /* SPAJ Calon Tertanggung.xib */; };
+		43C98E0E1D51D20E00A3F911 /* SPAJ Perusahaan.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C98E0C1D51D20D00A3F911 /* SPAJ Perusahaan.m */; };
+		43C98E0F1D51D20E00A3F911 /* SPAJ Perusahaan.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43C98E0D1D51D20D00A3F911 /* SPAJ Perusahaan.xib */; };
+		43C98E131D51D23100A3F911 /* SPAJ Calon Penerima Manfaat.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C98E111D51D23100A3F911 /* SPAJ Calon Penerima Manfaat.m */; };
+		43C98E141D51D23100A3F911 /* SPAJ Calon Penerima Manfaat.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43C98E121D51D23100A3F911 /* SPAJ Calon Penerima Manfaat.xib */; };
+		43C98E181D51D24600A3F911 /* SPAJ Pembayaran Premi.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C98E161D51D24600A3F911 /* SPAJ Pembayaran Premi.m */; };
+		43C98E191D51D24600A3F911 /* SPAJ Pembayaran Premi.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43C98E171D51D24600A3F911 /* SPAJ Pembayaran Premi.xib */; };
+		43C98E1C1D51FF5E00A3F911 /* ModelSPAJAnswers.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C98E1B1D51FF5E00A3F911 /* ModelSPAJAnswers.m */; };
 		43CDBA671D190F5C00AC299F /* ModelCFFAnswers.m in Sources */ = {isa = PBXBuildFile; fileRef = 43CDBA661D190F5C00AC299F /* ModelCFFAnswers.m */; };
 		43DA4BD91C76A59A0038C92C /* ModelAgentProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DA4BD81C76A59A0038C92C /* ModelAgentProfile.m */; };
 		43DA4BE31C770AA90038C92C /* SIMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DA4BE11C770AA90038C92C /* SIMenuTableViewCell.m */; };
@@ -1627,6 +1641,7 @@
 		439985C01C630C4D0003B037 /* VIPClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VIPClass.m; sourceTree = "<group>"; };
 		4399D2161D4B48730023558B /* ModelSPAJSignature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelSPAJSignature.h; sourceTree = "<group>"; };
 		4399D2171D4B48730023558B /* ModelSPAJSignature.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelSPAJSignature.m; sourceTree = "<group>"; };
+		439B0B7C1D54743F00C28F19 /* SPAJEAppListStoryBoard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SPAJEAppListStoryBoard.storyboard; sourceTree = "<group>"; };
 		439B95481D3896AD00C86F93 /* SPAJ Add Signature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SPAJ Add Signature.h"; sourceTree = "<group>"; };
 		439B95491D3896AD00C86F93 /* SPAJ Add Signature.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SPAJ Add Signature.m"; sourceTree = "<group>"; };
 		439B954A1D3896AD00C86F93 /* SPAJ Add Signature.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SPAJ Add Signature.xib"; sourceTree = "<group>"; };
@@ -1662,6 +1677,26 @@
 		43C166181C99448500001691 /* ModelKodepos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelKodepos.m; sourceTree = "<group>"; };
 		43C1661A1C99489000001691 /* KodePosInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KodePosInfo.h; sourceTree = "<group>"; };
 		43C1661B1C99489000001691 /* KodePosInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KodePosInfo.m; sourceTree = "<group>"; };
+		43C98DFB1D519D5900A3F911 /* SPAJ Calon Pemegang Polis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SPAJ Calon Pemegang Polis.h"; sourceTree = "<group>"; };
+		43C98DFC1D519D5900A3F911 /* SPAJ Calon Pemegang Polis.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SPAJ Calon Pemegang Polis.m"; sourceTree = "<group>"; };
+		43C98DFD1D519D5900A3F911 /* SPAJ Calon Pemegang Polis.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SPAJ Calon Pemegang Polis.xib"; sourceTree = "<group>"; };
+		43C98E011D51A20100A3F911 /* datacalonpemegangpolis.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = datacalonpemegangpolis.html; sourceTree = "<group>"; };
+		43C98E031D51A5D100A3F911 /* ModelSPAJHtml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelSPAJHtml.h; sourceTree = "<group>"; };
+		43C98E041D51A5D100A3F911 /* ModelSPAJHtml.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelSPAJHtml.m; sourceTree = "<group>"; };
+		43C98E061D51D1F500A3F911 /* SPAJ Calon Tertanggung.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SPAJ Calon Tertanggung.h"; sourceTree = "<group>"; };
+		43C98E071D51D1F500A3F911 /* SPAJ Calon Tertanggung.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SPAJ Calon Tertanggung.m"; sourceTree = "<group>"; };
+		43C98E081D51D1F500A3F911 /* SPAJ Calon Tertanggung.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SPAJ Calon Tertanggung.xib"; sourceTree = "<group>"; };
+		43C98E0B1D51D20D00A3F911 /* SPAJ Perusahaan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SPAJ Perusahaan.h"; sourceTree = "<group>"; };
+		43C98E0C1D51D20D00A3F911 /* SPAJ Perusahaan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SPAJ Perusahaan.m"; sourceTree = "<group>"; };
+		43C98E0D1D51D20D00A3F911 /* SPAJ Perusahaan.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SPAJ Perusahaan.xib"; sourceTree = "<group>"; };
+		43C98E101D51D23100A3F911 /* SPAJ Calon Penerima Manfaat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SPAJ Calon Penerima Manfaat.h"; sourceTree = "<group>"; };
+		43C98E111D51D23100A3F911 /* SPAJ Calon Penerima Manfaat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SPAJ Calon Penerima Manfaat.m"; sourceTree = "<group>"; };
+		43C98E121D51D23100A3F911 /* SPAJ Calon Penerima Manfaat.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SPAJ Calon Penerima Manfaat.xib"; sourceTree = "<group>"; };
+		43C98E151D51D24600A3F911 /* SPAJ Pembayaran Premi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SPAJ Pembayaran Premi.h"; sourceTree = "<group>"; };
+		43C98E161D51D24600A3F911 /* SPAJ Pembayaran Premi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SPAJ Pembayaran Premi.m"; sourceTree = "<group>"; };
+		43C98E171D51D24600A3F911 /* SPAJ Pembayaran Premi.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SPAJ Pembayaran Premi.xib"; sourceTree = "<group>"; };
+		43C98E1A1D51FF5E00A3F911 /* ModelSPAJAnswers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelSPAJAnswers.h; sourceTree = "<group>"; };
+		43C98E1B1D51FF5E00A3F911 /* ModelSPAJAnswers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelSPAJAnswers.m; sourceTree = "<group>"; };
 		43CDBA651D190F5C00AC299F /* ModelCFFAnswers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelCFFAnswers.h; sourceTree = "<group>"; };
 		43CDBA661D190F5C00AC299F /* ModelCFFAnswers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelCFFAnswers.m; sourceTree = "<group>"; };
 		43DA4BD71C76A59A0038C92C /* ModelAgentProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelAgentProfile.h; sourceTree = "<group>"; };
@@ -2623,6 +2658,7 @@
 		0F3268201D1A9260001A9021 /* SPAJ */ = {
 			isa = PBXGroup;
 			children = (
+				43C98E001D51A1E200A3F911 /* SPAJ Forms */,
 				0FFA18611D21266000C63A47 /* Database */,
 				0F3268731D1BD140001A9021 /* Image.xcassets */,
 				0F3268631D1A97B9001A9021 /* Variable */,
@@ -2698,7 +2734,13 @@
 				0F32683D1D1A93A4001A9021 /* SPAJ Submitted List.xib */,
 				0FFF77831D41F2E30045616F /* SPAJ Capture Identification.xib */,
 				0FFF77861D41F2E30045616F /* SPAJ Form Generation.xib */,
+				43C98DFD1D519D5900A3F911 /* SPAJ Calon Pemegang Polis.xib */,
+				43C98E081D51D1F500A3F911 /* SPAJ Calon Tertanggung.xib */,
+				43C98E0D1D51D20D00A3F911 /* SPAJ Perusahaan.xib */,
+				43C98E121D51D23100A3F911 /* SPAJ Calon Penerima Manfaat.xib */,
+				43C98E171D51D24600A3F911 /* SPAJ Pembayaran Premi.xib */,
 				0FF845741D23A3A4008CF861 /* Cell */,
+				439B0B7C1D54743F00C28F19 /* SPAJEAppListStoryBoard.storyboard */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -2727,6 +2769,16 @@
 				0F32683C1D1A93A4001A9021 /* SPAJ Submitted List.m */,
 				439B95481D3896AD00C86F93 /* SPAJ Add Signature.h */,
 				439B95491D3896AD00C86F93 /* SPAJ Add Signature.m */,
+				43C98DFB1D519D5900A3F911 /* SPAJ Calon Pemegang Polis.h */,
+				43C98DFC1D519D5900A3F911 /* SPAJ Calon Pemegang Polis.m */,
+				43C98E061D51D1F500A3F911 /* SPAJ Calon Tertanggung.h */,
+				43C98E071D51D1F500A3F911 /* SPAJ Calon Tertanggung.m */,
+				43C98E0B1D51D20D00A3F911 /* SPAJ Perusahaan.h */,
+				43C98E0C1D51D20D00A3F911 /* SPAJ Perusahaan.m */,
+				43C98E101D51D23100A3F911 /* SPAJ Calon Penerima Manfaat.h */,
+				43C98E111D51D23100A3F911 /* SPAJ Calon Penerima Manfaat.m */,
+				43C98E151D51D24600A3F911 /* SPAJ Pembayaran Premi.h */,
+				43C98E161D51D24600A3F911 /* SPAJ Pembayaran Premi.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -3900,6 +3952,14 @@
 			name = "Ilustration Signature";
 			sourceTree = "<group>";
 		};
+		43C98E001D51A1E200A3F911 /* SPAJ Forms */ = {
+			isa = PBXGroup;
+			children = (
+				43C98E011D51A20100A3F911 /* datacalonpemegangpolis.html */,
+			);
+			name = "SPAJ Forms";
+			sourceTree = "<group>";
+		};
 		43F7C3161C9D409D0074F464 /* Formatter */ = {
 			isa = PBXGroup;
 			children = (
@@ -4112,6 +4172,10 @@
 				4399D2171D4B48730023558B /* ModelSPAJSignature.m */,
 				432209121D4F37E300971DF3 /* ModelSPAJIDCapture.h */,
 				432209131D4F37E300971DF3 /* ModelSPAJIDCapture.m */,
+				43C98E031D51A5D100A3F911 /* ModelSPAJHtml.h */,
+				43C98E041D51A5D100A3F911 /* ModelSPAJHtml.m */,
+				43C98E1A1D51FF5E00A3F911 /* ModelSPAJAnswers.h */,
+				43C98E1B1D51FF5E00A3F911 /* ModelSPAJAnswers.m */,
 			);
 			name = "HLADB Model";
 			sourceTree = "<group>";
@@ -5676,6 +5740,7 @@
 				DE06FFCE1CABBC2800E4DE3A /* xibLibrary.bundle in Resources */,
 				4376DF201CD196EC00816BB6 /* check_icon.png in Resources */,
 				43E171861CCB5411008B2235 /* Signature Filled.png in Resources */,
+				43C98E021D51A20100A3F911 /* datacalonpemegangpolis.html in Resources */,
 				17A2990F1C60A0DB00C2537A /* HelveticaInseratLTStd-Roman.otf in Resources */,
 				17A299101C60A0DB00C2537A /* HelveticaLTStd-Blk.otf in Resources */,
 				17A299111C60A0DB00C2537A /* HelveticaLTStd-BlkCond.otf in Resources */,
@@ -5762,6 +5827,7 @@
 				AA4EF75A1C85A4260050CCD8 /* Reader-Mark-Y.png in Resources */,
 				43870CA01D35FEAF0035143C /* CustomerStatement.html in Resources */,
 				173E81601C28F9C600BDAAE9 /* EappListing.storyboard in Resources */,
+				43C98E0A1D51D1F500A3F911 /* SPAJ Calon Tertanggung.xib in Resources */,
 				C4660EC91625047800BA4AFE /* SI_buttonB_144.png in Resources */,
 				C4660ECA1625047800BA4AFE /* SI_buttonB.png in Resources */,
 				C4F83005162E503D00EF8FAA /* iconHLwithbackground.png in Resources */,
@@ -5787,12 +5853,14 @@
 				43870CA51D35FEAF0035143C /* Proteksi.html in Resources */,
 				C486D9CE163E5319009F8F21 /* btn_SIlisting_on.png in Resources */,
 				C486D9D1163E5466009F8F21 /* btn_home.png in Resources */,
+				43C98E141D51D23100A3F911 /* SPAJ Calon Penerima Manfaat.xib in Resources */,
 				A1EEF9591C8D8E520016BB3D /* Icon Brochure & save as-01-03.png in Resources */,
 				43870CB51D362A220035143C /* AnalisaKebutuhanPensiunViewController.xib in Resources */,
 				C486D9D2163E5466009F8F21 /* btn_SIlisting_off.png in Resources */,
 				0F32685E1D1A96EA001A9021 /* Localizable.strings in Resources */,
 				C486D9D4163E6622009F8F21 /* Cordova.plist in Resources */,
 				C486DAB8163FB928009F8F21 /* Databases.db in Resources */,
+				43C98E0F1D51D20E00A3F911 /* SPAJ Perusahaan.xib in Resources */,
 				43FA6C1A1C87CD7F0098BA47 /* eng_BCALH_Page2.html in Resources */,
 				43B59E281D0A72E8007DBFED /* CFFListingStoryboard.storyboard in Resources */,
 				4399826D1D07D025009CFEB2 /* CFFListingViewController.xib in Resources */,
@@ -5846,6 +5914,7 @@
 				AA4EF75C1C85A4260050CCD8 /* Reader-Mark-Y@3x.png in Resources */,
 				178765D91C7409F00036F31A /* menu_selectoption.png in Resources */,
 				EF1F6C7C16A7C1CC001EDC81 /* pdfData.plist in Resources */,
+				439B0B7D1D54743F00C28F19 /* SPAJEAppListStoryBoard.storyboard in Resources */,
 				046735971C23A61300DEE400 /* CFFStoryboard.storyboard in Resources */,
 				C4E1B9471714091000D7F83B /* SI in Resources */,
 				C4E643801724E821001DF8F8 /* PDS in Resources */,
@@ -5871,6 +5940,7 @@
 				DE0F59FC1CF2FF5C0087483D /* BCA_Rates.sqlite in Resources */,
 				C38190B31C28F1FA001E0C9E /* EappChecklist.storyboard in Resources */,
 				0FF845C51D23ACC2008CF861 /* SPAJ E Application List Cell.xib in Resources */,
+				43C98E191D51D24600A3F911 /* SPAJ Pembayaran Premi.xib in Resources */,
 				C4EEB6A217C4AFAF00F268B3 /* EverLife_SI in Resources */,
 				AA4EF6DD1C8572B00050CCD8 /* ProductInformation.xib in Resources */,
 				6A6ED09717D49937009FFA56 /* Race.plist in Resources */,
@@ -5989,6 +6059,7 @@
 				43B346B01D112AA500B8DE32 /* AreaPotensialDiskusiViewController.xib in Resources */,
 				4239AEB51946DAE200BD6F53 /* eSignController.xib in Resources */,
 				1706E6B31C2A8AC3005E36EF /* MenuEapp.storyboard in Resources */,
+				43C98DFF1D519D5900A3F911 /* SPAJ Calon Pemegang Polis.xib in Resources */,
 				AA4EF75E1C85A4260050CCD8 /* Reader-Print@2x.png in Resources */,
 				4239AECE1946DAE200BD6F53 /* au-p1.jpg in Resources */,
 				4239AECF1946DAE200BD6F53 /* au-p2.jpg in Resources */,
@@ -6100,6 +6171,7 @@
 				4399D2181D4B48730023558B /* ModelSPAJSignature.m in Sources */,
 				C4E9D1A51612C64900016053 /* AppDelegate.m in Sources */,
 				C4E9D1AB1612C64900016053 /* ViewController.m in Sources */,
+				43C98E051D51A5D100A3F911 /* ModelSPAJHtml.m in Sources */,
 				C4E9D1BA1612C68200016053 /* FSVerticalTabBar.m in Sources */,
 				C4E9D1BB1612C68200016053 /* FSVerticalTabBarButton.m in Sources */,
 				C4E9D1BC1612C68200016053 /* FSVerticalTabBarController.m in Sources */,
@@ -6175,6 +6247,7 @@
 				C4E1B93B1713FE9500D7F83B /* FMDatabasePool.m in Sources */,
 				C4E1B93C1713FE9500D7F83B /* FMDatabaseQueue.m in Sources */,
 				C4E1B93D1713FE9500D7F83B /* FMResultSet.m in Sources */,
+				43C98E091D51D1F500A3F911 /* SPAJ Calon Tertanggung.m in Sources */,
 				C4E1B93E1713FE9500D7F83B /* NDHTMLtoPDF.m in Sources */,
 				43F8B5521C81E71B006F3F6C /* SIListingTableViewCell.m in Sources */,
 				C4E1B9441713FFBC00D7F83B /* DataTable.m in Sources */,
@@ -6478,6 +6551,7 @@
 				4212708918459FC0000C2156 /* ReportCell.m in Sources */,
 				0FF845C41D23ACC2008CF861 /* SPAJ E Application List Cell.m in Sources */,
 				4212708C1845DF33000C2156 /* eConfirmationCell.m in Sources */,
+				43C98E0E1D51D20E00A3F911 /* SPAJ Perusahaan.m in Sources */,
 				AA4EF76D1C85A4260050CCD8 /* ReaderThumbFetch.m in Sources */,
 				42D3277618487F2D0030AA7A /* NewGroupListing.m in Sources */,
 				EF509EC7184F30110058CCD8 /* ClientProfileListingSortBy.m in Sources */,
@@ -6487,6 +6561,7 @@
 				C416C2C11855BBA700D29E46 /* ChangePasswordReg.m in Sources */,
 				C416C2C21855BBA700D29E46 /* NSString+MD5Addition.m in Sources */,
 				C416C2C31855BBA700D29E46 /* NSString+URLEncode.m in Sources */,
+				43C98DFE1D519D5900A3F911 /* SPAJ Calon Pemegang Polis.m in Sources */,
 				C416C2C41855BBA700D29E46 /* StoreVarFirstTimeReg.m in Sources */,
 				43CDBA671D190F5C00AC299F /* ModelCFFAnswers.m in Sources */,
 				C416C2C51855BBA700D29E46 /* UIDevice+IdentifierAddition.m in Sources */,
@@ -6507,6 +6582,7 @@
 				6A0B1761188A36DE00931673 /* FFform.m in Sources */,
 				6A0B1765188A36DE00931673 /* SupplementaryProposalForm.m in Sources */,
 				6A3D70D1188A4B8B000B2097 /* PRxml.m in Sources */,
+				43C98E181D51D24600A3F911 /* SPAJ Pembayaran Premi.m in Sources */,
 				AADD7E6F1C743A1E00D87750 /* DDXMLElementAdditions.m in Sources */,
 				0F3268551D1A93A4001A9021 /* SPAJ Submitted List.m in Sources */,
 				6A3D70D2188A4B8B000B2097 /* SIxml.m in Sources */,
@@ -6524,6 +6600,7 @@
 				2994B42418E121AE00B0D4D2 /* P2Table.m in Sources */,
 				2994B42618E121AE00B0D4D2 /* Table2.m in Sources */,
 				2994B42818E121AE00B0D4D2 /* Table3.m in Sources */,
+				43C98E131D51D23100A3F911 /* SPAJ Calon Penerima Manfaat.m in Sources */,
 				43870CAF1D362A0D0035143C /* AnalisaKebutuhanProteksiViewController.m in Sources */,
 				0FFA18801D2262E700C63A47 /* Insert Initialization.m in Sources */,
 				2994B42B18E121AE00B0D4D2 /* XMLDictionary.m in Sources */,
@@ -6568,6 +6645,7 @@
 				428BB4831941CF4600FDF1E2 /* NullValidations.m in Sources */,
 				0468DE4119454A2B002FEFFD /* DeductiblePostRetirement.m in Sources */,
 				4239AE231946013900BD6F53 /* SupportingDocCell.m in Sources */,
+				43C98E1C1D51FF5E00A3F911 /* ModelSPAJAnswers.m in Sources */,
 				4239AEB41946DAE200BD6F53 /* eSignController.m in Sources */,
 				4239AEB61946DAE200BD6F53 /* ESignGenerator.m in Sources */,
 				4239AED31946DAE200BD6F53 /* PDFSerializer.m in Sources */,

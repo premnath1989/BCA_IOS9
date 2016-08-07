@@ -9,6 +9,8 @@
 #define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0) //1
 #define kLatestKivaLoansURL [NSURL URLWithString:@"http://mposws.azurewebsites.net/Service2.svc/getAllData"] //2
 
+#define SPAJkLatestKivaLoansURL [NSURL URLWithString:@"http://mposws.azurewebsites.net/SPAJHTMLForm.svc/GetAllData"] //2
+
 #import "CFFAPIController.h"
 #import "ModelCFFHtml.h"
 
@@ -88,7 +90,7 @@
             }] resume];
 }
 
--(void)apiCallHtmlTable:(NSString *)URL JSONKey:(NSArray *)jsonKey TableDictionary:(NSDictionary *)tableDictionary{
+-(void)apiCallHtmlTable:(NSString *)URL JSONKey:(NSArray *)jsonKey TableDictionary:(NSDictionary *)tableDictionary DictionaryDuplicateChecker:(NSDictionary *)dictDuplicate WebServiceModule:(NSString *)stringWebService{
     // handle response
     NSURLSession *session = [NSURLSession sharedSession];
     [[session dataTaskWithURL:[NSURL URLWithString:URL]
@@ -97,44 +99,58 @@
                                 NSError *error) {
                 // handle response
                 if(data != nil){
-                    [self insertJsonToDB:data JSONKey:jsonKey TableDictionary:tableDictionary];
-                    [self getCFFHTMLFile];
+                    [self insertJsonToDB:data JSONKey:jsonKey TableDictionary:tableDictionary DictionaryDuplicateChecker:dictDuplicate];
+                    [self getCFFHTMLFile:stringWebService];
                 }
             }] resume];
 }
 
--(void)getCFFHTMLFile{
+-(void)getCFFHTMLFile :(NSString *)stringWebService{
     // handle response
     NSLog(@"getCFFHTMLFile");
     dispatch_async(kBgQueue, ^{
-        NSData* data = [NSData dataWithContentsOfURL:
-                        kLatestKivaLoansURL];
+        NSData* data ;
+        if ([stringWebService isEqualToString:@"CFF"]){
+            data = [NSData dataWithContentsOfURL:kLatestKivaLoansURL];
+        }
+        else if ([stringWebService isEqualToString:@"SPAJ"]){
+            data = [NSData dataWithContentsOfURL:SPAJkLatestKivaLoansURL];
+        }
         
         NSLog(@"respond getCFFHTMLFile exceeded");
         if(data != nil)
-            [self performSelectorOnMainThread:@selector(createHTMLFile:)
-                                   withObject:data waitUntilDone:YES];
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                //[self doSomething:1 b:2 c:3 d:4 e:5];
+                [self createHTMLFile:data WebServiceModule:stringWebService];
+            });
+            //[self performSelectorOnMainThread:@selector(createHTMLFile:) withObject:data waitUntilDone:YES];
     });
 }
 
--(void)createHTMLFile:(NSData *)responseData{
+-(void)createHTMLFile:(NSData *)responseData WebServiceModule:(NSString *)stringWebService{
     CFFAPIController* cffAPIController;
     cffAPIController = [[CFFAPIController alloc]init];
     NSError* error;
     NSDictionary* json = [NSJSONSerialization
                           JSONObjectWithData:responseData //1
-                          
                           options:kNilOptions
                           error:&error];
     
     NSArray* arrayFileName = [[json objectForKey:@"d"] valueForKey:@"FileName"]; //2
-    for (int i=0;i<[arrayFileName count];i++){
-        [cffAPIController apiCallCrateHtmlFile:[NSString stringWithFormat:@"http://mposws.azurewebsites.net/Service2.svc/GetHtmlFile?fileName=%@",[arrayFileName objectAtIndex:i]] RootPathFolder:@"CFFfolder"];
+    if ([stringWebService isEqualToString:@"CFF"]){
+        for (int i=0;i<[arrayFileName count];i++){
+            [cffAPIController apiCallCrateHtmlFile:[NSString stringWithFormat:@"http://mposws.azurewebsites.net/Service2.svc/GetHtmlFile?fileName=%@",[arrayFileName objectAtIndex:i]] RootPathFolder:@"CFFfolder"];
+        }
+    }
+    else if ([stringWebService isEqualToString:@"SPAJ"]){
+        for (int i=0;i<[arrayFileName count];i++){
+            [cffAPIController apiCallCrateHtmlFile:[NSString stringWithFormat:@"http://mposws.azurewebsites.net/SPAJHTMLForm.svc/GetHtmlFile?fileName=%@",[arrayFileName objectAtIndex:i]] RootPathFolder:@"SPAJ"];
+        }
     }
 }
 
 
--(void)insertJsonToDB:(NSData *)jsonData JSONKey:(NSArray *)jsonKey TableDictionary:(NSDictionary *)tableDictionary{
+-(void)insertJsonToDB:(NSData *)jsonData JSONKey:(NSArray *)jsonKey TableDictionary:(NSDictionary *)tableDictionary DictionaryDuplicateChecker:(NSDictionary *)dictDuplicate{
     @try {
         NSError *error =  nil;
         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&error];
@@ -153,10 +169,19 @@
                 NSMutableArray* tableValue = [[NSMutableArray alloc]initWithObjects:stringID,stringFileName,stringStatus,stringSection, nil];
                 NSMutableArray* tableColumn = [[NSMutableArray alloc] initWithArray:[tableDictionary valueForKey:@"columnName"]];
                 
-                //check duplicate value
-                NSString* query=[NSString stringWithFormat:@"select CFFHtmlID from CFFHtml where CFFID=%@ and CFFHtmlName=%@ and CFFHtmlStatus=%@ and CFFHtmlSection=%@",stringID,stringFileName,stringStatus,stringSection];
-                NSString* columnReturn = @"CFFHtmlID";
+                NSString* stringDuplicateCheckerColumnName = [dictDuplicate valueForKey:@"DuplicateCheckerColumnName"];
+                NSString* stringDuplicateCheckerTableName = [dictDuplicate valueForKey:@"DuplicateCheckerTableName"];
+                NSString* stringDuplicateCheckerWhere1 = [dictDuplicate valueForKey:@"DuplicateCheckerWhere1"];
+                NSString* stringDuplicateCheckerWhere2 = [dictDuplicate valueForKey:@"DuplicateCheckerWhere2"];
+                NSString* stringDuplicateCheckerWhere3 = [dictDuplicate valueForKey:@"DuplicateCheckerWhere3"];
+                NSString* stringDuplicateCheckerWhere4 = [dictDuplicate valueForKey:@"DuplicateCheckerWhere4"];
                 
+                //check duplicate value
+                //NSString* query=[NSString stringWithFormat:@"select CFFHtmlID from CFFHtml where CFFID=%@ and CFFHtmlName=%@ and CFFHtmlStatus=%@ and CFFHtmlSection=%@",stringID,stringFileName,stringStatus,stringSection];
+                NSString* query=[NSString stringWithFormat:@"select count(%@) as %@ from %@ where %@=%@ and %@=%@ and %@=%@ and %@=%@",stringDuplicateCheckerColumnName,stringDuplicateCheckerColumnName,stringDuplicateCheckerTableName,stringDuplicateCheckerWhere1,stringID,stringDuplicateCheckerWhere2,stringFileName,stringDuplicateCheckerWhere3,stringStatus,stringDuplicateCheckerWhere4,stringSection];
+                //NSString* columnReturn = @"CFFHtmlID";
+                NSString* columnReturn = stringDuplicateCheckerColumnName;
+
                 int duplicateRow = [modelCFFHtml voidGetDuplicateRowID:query ColumnReturn:columnReturn];
                 if (duplicateRow>0){
                     [tableColumn addObject:columnReturn];

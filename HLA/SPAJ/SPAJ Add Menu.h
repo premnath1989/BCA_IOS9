@@ -26,6 +26,8 @@
 
 @interface SPAJAddMenu : UIViewController
 
+    @property (strong, nonatomic) NSDictionary* dictTransaction;
+
     // PROTOCOL
 
     @property (nonatomic,strong) id <SPAJMainDelegate> delegateSPAJMain;

@@ -1,0 +1,1144 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset='utf-8'>
+<title>Quesioner</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+
+    <link rel="stylesheet" href="../../jqueryLibrary/jquery.mobile-1.4.5.min.css">
+    <script type='text/javascript' src="../../jqueryLibrary/jquery-1.11.1.min.js"></script>
+    <script type='text/javascript' src="../../jqueryLibrary/jquery.mobile-1.4.5.min.js"></script>
+    <script type='text/javascript' src="../../jqueryLibrary/jquery.validate.min.js"></script>
+
+<script type='text/javascript'>
+
+__functionIndexMap = {};
+<!-- core wrapper to client -->
+function calliOSFunction(functionName, successCallback, errorCallback, callInfo)
+{
+    var url = 'js-frame:';
+callInfo.functionname = functionName;
+if (successCallback)
+{
+if (typeof successCallback == 'function')
+{
+var callbackFuncName = createCallbackFunction(functionName + '_' + 'successCallback', successCallback);
+callInfo.success = callbackFuncName;
+}
+else
+callInfo.success = successCallback;
+}
+if (errorCallback)
+{
+if (typeof errorCallback == 'function')
+{
+var callbackFuncName = createCallbackFunction(functionName + '_' + 'errorCallback', errorCallback);
+callInfo.error = callbackFuncName;
+}
+else
+callInfo.error = errorCallback;
+}
+url += JSON.stringify(callInfo);
+var iFrame = createIFrame(url);
+//remove the frame now
+iFrame.parentNode.removeChild(iFrame);
+}
+function createCallbackFunction (funcName, callbackFunc)
+{
+if (callbackFunc && callbackFunc.name != null && callbackFunc.name.length > 0)
+{
+return callbackFunc.name;
+}
+if (typeof window[funcName+0] != 'function')
+{
+window[funcName+0] = callbackFunc;
+__functionIndexMap[funcName] = 0;
+return funcName+0
+} else
+{
+var maxIndex = __functionIndexMap[funcName];
+var callbackFuncStr = callbackFunc.toString();
+for (var i = 0; i <= maxIndex; i++)
+{
+var tmpName = funcName + i;
+if (window[tmpName].toString() == callbackFuncStr)
+return tmpName;
+}
+var newIndex = ++__functionIndexMap[funcName];
+window[funcName+newIndex] = callbackFunc;
+return funcName+newIndex;
+}
+}
+function createIFrame(src)
+{
+var rootElm = document.documentElement;
+var newFrameElm = document.createElement('IFRAME');
+newFrameElm.setAttribute('src',src);
+rootElm.appendChild(newFrameElm);
+return newFrameElm;
+}
+function onSuccess (ret)
+{
+if (ret)
+{
+var returnRet = JSON.parse(ret);
+
+theTypeIs = Object.keys(returnRet.result)[0];
+
+if (theTypeIs == 'readFromDB')
+{
+$("#SelectID0").val(returnRet.result.readFromDB[0].Value).slider('refresh');
+$("#SelectID1").val(returnRet.result.readFromDB[1].Value).slider('refresh');
+$("#SelectID2").val(returnRet.result.readFromDB[2].Value).slider('refresh');
+$("#SelectID3").val(returnRet.result.readFromDB[3].Value).slider('refresh');
+$("#SelectID4").val(returnRet.result.readFromDB[4].Value).slider('refresh');
+$("#SelectID5").val(returnRet.result.readFromDB[5].Value).slider('refresh');
+$("#SelectID6").val(returnRet.result.readFromDB[6].Value).slider('refresh');
+$("#SelectID7").val(returnRet.result.readFromDB[7].Value).slider('refresh');
+$("#SelectID8").val(returnRet.result.readFromDB[8].Value).slider('refresh');
+$("#SelectID9").val(returnRet.result.readFromDB[9].Value).slider('refresh');
+$("#SelectID10").val(returnRet.result.readFromDB[10].Value).slider('refresh');
+$("#SelectID11").val(returnRet.result.readFromDB[11].Value).slider('refresh');
+$("#SelectID12").val(returnRet.result.readFromDB[12].Value).slider('refresh');
+$("#SelectID13").val(returnRet.result.readFromDB[13].Value).slider('refresh');
+}
+}
+}
+function onError (ret)
+{
+if (ret)
+{
+var returnRet = JSON.parse(ret);
+alert(returnRet.error);
+}
+}
+function readfromDB() {
+var callInfo = {};
+callInfo.data = {};
+callInfo.data.CFFAnswers = {};
+callInfo.data.CFFAnswers.columns = 'elementID,Value,CFFID,CustomerID';
+callInfo.data.CFFAnswers.where = '';
+calliOSFunction('readfromDB:',onSuccess,onError, callInfo);
+
+//var text = '{"result":{"readFromDB":[{"elementID":"SelectID0","CFFID":"1","CustomerID":"1","Value":"Y"},{"elementID":"SelectID1","CFFID":"1","CustomerID":"1","Value":"Y"},{"elementID":"SelectID2","CFFID":"1","CustomerID":"1","Value":"Y"},{"elementID":"SelectID3","CFFID":"1","CustomerID":"1","Value":"T"},{"elementID":"SelectID4","CFFID":"1","CustomerID":"1","Value":"T"},{"elementID":"SelectID5","CFFID":"1","CustomerID":"1","Value":"T"},{"elementID":"SelectID6","CFFID":"1","CustomerID":"1","Value":"T"},{"elementID":"SelectID7","CFFID":"1","CustomerID":"1","Value":"T"},{"elementID":"SelectID8","CFFID":"1","CustomerID":"1","Value":"T"},{"elementID":"SelectID9","CFFID":"1","CustomerID":"1","Value":"T"},{"elementID":"SelectID10","CFFID":"1","CustomerID":"1","Value":"T"},{"elementID":"SelectID11","CFFID":"1","CustomerID":"1","Value":"T"},{"elementID":"SelectID12","CFFID":"1","CustomerID":"1","Value":"T"},{"elementID":"SelectID13","CFFID":"1","CustomerID":"1","Value":"T"}]}}'
+
+var dummy = '{"result":{"readFromDB":[{"NamaLengkap":"Yosi Oliver","JenisIdentitas":"KTP","NomorIdentitasDiri":"1234567890","MasaBerlaku":"12-02-2019","TempatLahir":"Lhokseumawe","TanggalLahir":"09-01-1987","Usia":"29","Kewarganegaraan":"Indonesia","JenisKelamin":"P","Agama":"Kristen","PekerjaanUtama":"Karyawan Swasta","AlamatTinggal1":"Jalan","AlamatTinggal2":"Apa aja","AlamatTinggal3":"Disini Juga bisa","KotaTinggal":"Bekasi","KodePosTinggal":"17114","NomorTeleponPribadi":"021-299388171","NomorHPUtama":"08122234567","Email":"yosioliver@gmail.com","AlamatKantor1":"Thamrin Residence Office Park","AlamatKantor2":"Ruko A.12","KotaKantor":"Jakarta","KodePosKantor":"13776","TelpKantor":"021-12345654","HubunganDenganCalonTertanggung":"Suami","NomorNPWP":"1223334444"}]}}'
+
+var obj = JSON.parse(dummy);
+
+theTypeIs = Object.keys(obj.result)[0];
+
+if (theTypeIs == 'readFromDB')
+{
+    $("#TextNamaLengkap").val(obj.result.readFromDB[0].NamaLengkap);
+    $("#TextJenisIdentitasDiri").val(obj.result.readFromDB[0].JenisIdentitas);
+    $("#TextNomorIdentitasDiri").val(obj.result.readFromDB[0].NomorIdentitasDiri);
+    $("#TextMasaBerlaku").val(obj.result.readFromDB[0].MasaBerlaku);
+    $("#TextTempatLahir").val(obj.result.readFromDB[0].TempatLahir);
+    $("#TextTanggalLahir").val(obj.result.readFromDB[0].TanggalLahir);
+    $("#TextUsia").val(obj.result.readFromDB[0].Usia);
+    $("#TextKewarganegaraan").val(obj.result.readFromDB[0].Kewarganegaraan);
+
+    var radio = 'radio';
+
+    $('input[name=radioJenisKelamin][value=' + obj.result.readFromDB[0].JenisKelamin + ']').attr('checked', true);    
+
+    $('input[type='+ radio +']').checkboxradio('refresh');
+
+    $("#TextAgama").val(obj.result.readFromDB[0].Agama);
+    $("#TextPekerjaanUtama").val(obj.result.readFromDB[0].PekerjaanUtama);
+    $("#TextAlamatTempatTinggal1").val(obj.result.readFromDB[0].AlamatTinggal1);
+    $("#TextAlamatTempatTinggal2").val(obj.result.readFromDB[0].AlamatTinggal2);
+    $("#TextAlamatTempatTinggal3").val(obj.result.readFromDB[0].AlamatTinggal3);    
+
+    $("#TextKotaRumah").val(obj.result.readFromDB[0].KotaTinggal);
+    $("#TextKodePosRumah").val(obj.result.readFromDB[0].KodePosTinggal);
+    $("#TextNomorTeleponRumah").val(obj.result.readFromDB[0].NomorTeleponPribadi);
+    $("#TextNomorHPUtama").val(obj.result.readFromDB[0].NomorHPUtama);
+    $("#TextEmail").val(obj.result.readFromDB[0].Email);    
+
+    $("#TextAlamatKantor1").val(obj.result.readFromDB[0].AlamatKantor1);
+    $("#TextAlamatKantor2").val(obj.result.readFromDB[0].AlamatKantor2);
+    $("#TextKotaKantor").val(obj.result.readFromDB[0].KotaKantor);
+    $("#TextKodePosKantor").val(obj.result.readFromDB[0].KodePosKantor);
+    $("#TextNomorTeleponKantor").val(obj.result.readFromDB[0].TelpKantor);
+    $("#TextHubunganDenganCalonTertanggung").val(obj.result.readFromDB[0].HubunganDenganCalonTertanggung);
+    $("#TextNomorNPWP").val(obj.result.readFromDB[0].NomorNPWP);
+        
+    //$("#SelectID10").val(obj.result.readFromDB[10].Value).slider('refresh');
+    //$("#SelectID11").val(obj.result.readFromDB[11].Value).slider('refresh');
+    //$("#SelectID12").val(obj.result.readFromDB[12].Value).slider('refresh');
+    //$("#SelectID13").val(obj.result.readFromDB[13].Value).slider('refresh');    
+}
+else
+{
+    alert('bukan')
+}
+} 
+
+function readfromDBAll() {
+var callInfo = {};
+callInfo.data = {};
+callInfo.data.SPAJAnswers = {};
+callInfo.data.SPAJAnswers.columns = 'elementID,Value,SPAJID,CustomerID';
+callInfo.data.SPAJAnswers.where = '';
+calliOSFunction('readfromDB:',onSuccess,onError, callInfo);
+
+//var text = '{"result":{"readFromDB":[{"elementID":"SelectID0","CFFID":"1","CustomerID":"1","Value":"Y"},{"elementID":"SelectID1","CFFID":"1","CustomerID":"1","Value":"Y"},{"elementID":"SelectID2","CFFID":"1","CustomerID":"1","Value":"Y"},{"elementID":"SelectID3","CFFID":"1","CustomerID":"1","Value":"T"},{"elementID":"SelectID4","CFFID":"1","CustomerID":"1","Value":"T"},{"elementID":"SelectID5","CFFID":"1","CustomerID":"1","Value":"T"},{"elementID":"SelectID6","CFFID":"1","CustomerID":"1","Value":"T"},{"elementID":"SelectID7","CFFID":"1","CustomerID":"1","Value":"T"},{"elementID":"SelectID8","CFFID":"1","CustomerID":"1","Value":"T"},{"elementID":"SelectID9","CFFID":"1","CustomerID":"1","Value":"T"},{"elementID":"SelectID10","CFFID":"1","CustomerID":"1","Value":"T"},{"elementID":"SelectID11","CFFID":"1","CustomerID":"1","Value":"T"},{"elementID":"SelectID12","CFFID":"1","CustomerID":"1","Value":"T"},{"elementID":"SelectID13","CFFID":"1","CustomerID":"1","Value":"T"}]}}'
+
+var dummyAll = '{"result":{"readFromDBAll":[{"NamaLengkap":"Yosi Oliver","JenisIdentitas":"KTP","NomorIdentitasDiri":"1234567890","MasaBerlaku":"12-02-2019","TempatLahir":"Lhokseumawe","TanggalLahir":"09-01-1987","Usia":"29","Kewarganegaraan":"Indonesia","JenisKelamin":"P","Agama":"Kristen","PekerjaanUtama":"Karyawan Swasta","AlamatTinggal1":"Jalan","AlamatTinggal2":"Apa aja","AlamatTinggal3":"Disini Juga bisa","KotaTinggal":"Bekasi","KodePosTinggal":"17114","NomorTeleponPribadi":"021-299388171","NomorHPUtama":"08122234567","Email":"yosioliver@gmail.com","AlamatKantor1":"Thamrin Residence Office Park","AlamatKantor2":"Ruko A.12","KotaKantor":"Jakarta","KodePosKantor":"13776","TelpKantor":"021-12345654","HubunganDenganCalonTertanggung":"Suami","NomorNPWP":"1223334444"}]}}'
+
+var obj = JSON.parse(dummyAll);
+
+theTypeIs = Object.keys(obj.result)[0];
+
+if (theTypeIs == 'readFromDBAll')
+{
+    $("#TextNamaLengkap").val(obj.result.readFromDB[0].NamaLengkap);
+    $("#TextJenisIdentitasDiri").val(obj.result.readFromDB[0].JenisIdentitas);
+    $("#TextNomorIdentitasDiri").val(obj.result.readFromDB[0].NomorIdentitasDiri);
+    $("#TextMasaBerlaku").val(obj.result.readFromDB[0].MasaBerlaku);
+    $("#TextTempatLahir").val(obj.result.readFromDB[0].TempatLahir);
+    $("#TextTanggalLahir").val(obj.result.readFromDB[0].TanggalLahir);
+    $("#TextUsia").val(obj.result.readFromDB[0].Usia);
+    $("#TextKewarganegaraan").val(obj.result.readFromDB[0].Kewarganegaraan);
+
+    var radio = 'radio';
+
+    $('input[name=radioWargaAmrik][value=' + obj.result.readFromDB[0].WargaAmerikaKenaPajak + ']').attr('checked', true);  
+
+    $('input[name=radioJenisKelamin][value=' + obj.result.readFromDB[0].JenisKelamin + ']').attr('checked', true);                
+
+    $('input[type='+ radio +']').checkboxradio('refresh');        
+    
+    $("#TextStatusPernikahan").val(obj.result.readFromDB[0].StatusPernikahan);
+    $("#TextAgama").val(obj.result.readFromDB[0].Agama);
+    $("#TextPerusahaanInstansiSekolah").val(obj.result.readFromDB[0].PerusahaanInstansiSekolah);
+    $("#TextPekerjaanUtama").val(obj.result.readFromDB[0].PekerjaanUtama);
+    $("#TextBidangUsaha").val(obj.result.readFromDB[0].BidangUsaha);
+    $("#TextJabatan").val(obj.result.readFromDB[0].Jabatan);
+    $("#TextUraianPekerjaan").val(obj.result.readFromDB[0].UraianPekerjaan);
+    $("#TextPekerjaanTambahan").val(obj.result.readFromDB[0].PekerjaanTambahan);
+    $("#TextAlamatTempatTinggal1").val(obj.result.readFromDB[0].AlamatTinggal1);
+    $("#TextAlamatTempatTinggal2").val(obj.result.readFromDB[0].AlamatTinggal2);
+    $("#TextAlamatTempatTinggal3").val(obj.result.readFromDB[0].AlamatTinggal3);    
+
+    $("#TextKotaRumah").val(obj.result.readFromDB[0].KotaTinggal);
+    $("#TextKodePosRumah").val(obj.result.readFromDB[0].KodePosTinggal);
+    $("#TextNomorTeleponRumah").val(obj.result.readFromDB[0].NomorTeleponPribadi);
+    $("#TextNomorHPUtama").val(obj.result.readFromDB[0].NomorHPUtama);
+    $("#TextEmail").val(obj.result.readFromDB[0].Email);    
+
+    $("#TextAlamatKantor1").val(obj.result.readFromDB[0].AlamatKantor1);
+    $("#TextAlamatKantor2").val(obj.result.readFromDB[0].AlamatKantor2);
+    $("#TextKotaKantor").val(obj.result.readFromDB[0].KotaKantor);
+    $("#TextKodePosKantor").val(obj.result.readFromDB[0].KodePosKantor);
+    $("#TextNomorTeleponKantor").val(obj.result.readFromDB[0].TelpKantor);
+    $("#TextHubunganDenganCalonTertanggung").val(obj.result.readFromDB[0].HubunganDenganCalonTertanggung);
+    $("#TextNomorNPWP").val(obj.result.readFromDB[0].NomorNPWP);
+        
+    //$("#SelectID10").val(obj.result.readFromDB[10].Value).slider('refresh');
+    //$("#SelectID11").val(obj.result.readFromDB[11].Value).slider('refresh');
+    //$("#SelectID12").val(obj.result.readFromDB[12].Value).slider('refresh');
+    //$("#SelectID13").val(obj.result.readFromDB[13].Value).slider('refresh');    
+}
+else
+{
+    alert('bukan')
+}
+} 
+
+function pad(numb) {
+    return (numb < 10 ? '0' : '') + numb;
+}
+
+function dob(dobstr){
+    if(dobstr != ''){
+    var str=dobstr.split('-');    
+    var firstdate=new Date(str[0],str[1],str[2]);
+    var today = new Date();        
+    var dayDiff = Math.ceil(today.getTime() - firstdate.getTime()) / (1000 * 60 * 60 * 24 * 365);
+    var age = parseInt(dayDiff);   
+    
+    return age; 
+}   
+}
+
+function calculatePriority(birthOfDate){
+var dobVal = dob(birthOfDate);
+
+if(dobVal < 25)
+{
+    $('.proteksiPribadiPrio').html(1);
+    $('.proteksiPasanganPrio').html(4);
+    $('.proteksiAnakPrio').html(7);
+    $('.proteksiPensiunPrio').html(3);
+    $('.proteksiPendidikanAnakPrio').html(5);
+    $('.proteksiWarisanPrio').html(6);
+    $('.proteksiInvestasiPrio').html(2);
+}
+else if(dobVal > 26 && dobVal < 35)
+{
+    $('.proteksiPribadiPrio').html(1);
+    $('.proteksiPasanganPrio').html(2);
+    $('.proteksiAnakPrio').html(7);
+    $('.proteksiPensiunPrio').html(4);
+    $('.proteksiPendidikanAnakPrio').html(5);
+    $('.proteksiWarisanPrio').html(6);
+    $('.proteksiInvestasiPrio').html(3);
+}
+else if(dobVal > 36 && dobVal < 45)
+{
+    $('.proteksiPribadiPrio').html(1);
+    $('.proteksiPasanganPrio').html(2);
+    $('.proteksiAnakPrio').html(3);
+    $('.proteksiPensiunPrio').html(6);
+    $('.proteksiPendidikanAnakPrio').html(4);
+    $('.proteksiWarisanPrio').html(7);
+    $('.proteksiInvestasiPrio').html(5);
+}
+else if(dobVal > 46 && dobVal < 55)
+{
+    $('.proteksiPribadiPrio').html(1);
+    $('.proteksiPasanganPrio').html(5);
+    $('.proteksiAnakPrio').html(6);
+    $('.proteksiPensiunPrio').html(2);
+    $('.proteksiPendidikanAnakPrio').html(7);
+    $('.proteksiWarisanPrio').html(3);
+    $('.proteksiInvestasiPrio').html(4);
+}
+else if(dobVal > 60)
+{
+    $('.proteksiPribadiPrio').html(1);
+    $('.proteksiPasanganPrio').html(5);
+    $('.proteksiAnakPrio').html(6);
+    $('.proteksiPensiunPrio').html(2);
+    $('.proteksiPendidikanAnakPrio').html(7);
+    $('.proteksiWarisanPrio').html(3);
+    $('.proteksiInvestasiPrio').html(4);
+}
+else
+{
+    //DO NOTHING
+}
+
+}
+
+function savetoDB() {
+//we fill up the parameters here
+
+//var date     = new Date();
+
+//var year  = pad(date.getFullYear());
+//var month = pad(date.getMonth() + 1);
+//var day   = pad(date.getDate());
+
+//var yyyymmdd = year + '-' + month + '-' + day;
+
+var callInfo = {};
+callInfo.data = {};
+callInfo.data.SPAJAnswers = [{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}];
+//if the table inserted is same with multiple rows.
+//treat the data as array
+
+callInfo.data.SPAJAnswers[0].elementID = 'TextNomorCIN';
+callInfo.data.SPAJAnswers[0].Value = $('#TextNomorCIN').val();
+callInfo.data.SPAJAnswers[0].SPAJID = '1';
+callInfo.data.SPAJAnswers[0].CustomerID = '1';
+
+callInfo.data.SPAJAnswers[1].elementID = 'TextNamaLengkap';
+callInfo.data.SPAJAnswers[1].Value = $('#TextNamaLengkap').val();
+callInfo.data.SPAJAnswers[1].SPAJID = '1';
+callInfo.data.SPAJAnswers[1].CustomerID = '1';
+
+callInfo.data.SPAJAnswers[2].elementID = 'TextJenisIdentitasDiri';
+callInfo.data.SPAJAnswers[2].Value = $('#TextJenisIdentitasDiri').val();
+callInfo.data.SPAJAnswers[2].SPAJID = '1';
+callInfo.data.SPAJAnswers[2].CustomerID = '1';
+
+callInfo.data.SPAJAnswers[3].elementID = 'TextNomorIdentitasDiri';
+callInfo.data.SPAJAnswers[3].Value = $('#TextNomorIdentitasDiri').val();
+callInfo.data.SPAJAnswers[3].SPAJID = '1';
+callInfo.data.SPAJAnswers[3].CustomerID = '1';
+
+callInfo.data.SPAJAnswers[4].elementID = 'TextMasaBerlaku';
+callInfo.data.SPAJAnswers[4].Value = $('#TextMasaBerlaku').val();
+callInfo.data.SPAJAnswers[4].SPAJID = '1';
+callInfo.data.SPAJAnswers[4].CustomerID = '1';
+
+callInfo.data.SPAJAnswers[5].elementID = 'TextTempatLahir';
+callInfo.data.SPAJAnswers[5].Value = $('#TextTempatLahir').val();
+callInfo.data.SPAJAnswers[5].SPAJID = '1';
+callInfo.data.SPAJAnswers[5].CustomerID = '1';
+
+callInfo.data.SPAJAnswers[6].elementID = 'TextTanggalLahir';
+callInfo.data.SPAJAnswers[6].Value = $('#TextTanggalLahir').val();
+callInfo.data.SPAJAnswers[6].SPAJID = '1';
+callInfo.data.SPAJAnswers[6].CustomerID = '1';
+
+callInfo.data.SPAJAnswers[7].elementID = 'TextUsia';
+callInfo.data.SPAJAnswers[7].Value = $('#TextUsia').val();
+callInfo.data.SPAJAnswers[7].SPAJID = '1';
+callInfo.data.SPAJAnswers[7].CustomerID = '1';
+
+callInfo.data.SPAJAnswers[8].elementID = 'TextKewarganegaraan';
+callInfo.data.SPAJAnswers[8].Value = $('#TextKewarganegaraan').val();
+callInfo.data.SPAJAnswers[8].SPAJID = '1';
+callInfo.data.SPAJAnswers[8].CustomerID = '1';
+
+callInfo.data.SPAJAnswers[9].elementID = 'radioWargaAmrik';
+callInfo.data.SPAJAnswers[9].Value = $('input[name=radioWargaAmrik]:checked').val();
+callInfo.data.SPAJAnswers[9].SPAJID = '1';
+callInfo.data.SPAJAnswers[9].CustomerID = '1';
+
+callInfo.data.SPAJAnswers[10].elementID = 'radioJenisKelamin';
+callInfo.data.SPAJAnswers[10].Value = $('input[name=radioJenisKelamin]:checked').val();
+callInfo.data.SPAJAnswers[10].SPAJID = '1';
+callInfo.data.SPAJAnswers[10].CustomerID = '1';
+
+callInfo.data.SPAJAnswers[11].elementID = 'TextKewarganegaraan';
+callInfo.data.SPAJAnswers[11].Value = $('#TextKewarganegaraan').val();
+callInfo.data.SPAJAnswers[11].SPAJID = '1';
+callInfo.data.SPAJAnswers[11].CustomerID = '1';
+
+callInfo.data.SPAJAnswers[12].elementID = 'TextStatusPernikahan';
+callInfo.data.SPAJAnswers[12].Value = $('#TextStatusPernikahan').val();
+callInfo.data.SPAJAnswers[12].SPAJID = '1';
+callInfo.data.SPAJAnswers[12].CustomerID = '1';
+
+callInfo.data.SPAJAnswers[13].elementID = 'TextAgama';
+callInfo.data.SPAJAnswers[13].Value = $('#TextAgama').val();
+callInfo.data.SPAJAnswers[13].SPAJID = '1';
+callInfo.data.SPAJAnswers[13].CustomerID = '1';
+
+callInfo.data.SPAJAnswers[14].elementID = 'TextPerusahaanInstansiSekolah';
+callInfo.data.SPAJAnswers[14].Value = $('#TextPerusahaanInstansiSekolah').val();
+callInfo.data.SPAJAnswers[14].SPAJID = '1';
+callInfo.data.SPAJAnswers[14].CustomerID = '1';
+
+callInfo.data.SPAJAnswers[15].elementID = 'TextPekerjaanUtama';
+callInfo.data.SPAJAnswers[15].Value = $('#TextPekerjaanUtama').val();
+callInfo.data.SPAJAnswers[15].SPAJID = '1';
+callInfo.data.SPAJAnswers[15].CustomerID = '1';
+
+callInfo.data.SPAJAnswers[16].elementID = 'TextBidangUsaha';
+callInfo.data.SPAJAnswers[16].Value = $('#TextBidangUsaha').val();
+callInfo.data.SPAJAnswers[16].SPAJID = '1';
+callInfo.data.SPAJAnswers[16].CustomerID = '1';
+
+callInfo.data.SPAJAnswers[17].elementID = 'TextJabatan';
+callInfo.data.SPAJAnswers[17].Value = $('#TextJabatan').val();
+callInfo.data.SPAJAnswers[17].SPAJID = '1';
+callInfo.data.SPAJAnswers[17].CustomerID = '1';
+
+callInfo.data.SPAJAnswers[18].elementID = 'TextUraianPekerjaan';
+callInfo.data.SPAJAnswers[18].Value = $('#TextUraianPekerjaan').val();
+callInfo.data.SPAJAnswers[18].SPAJID = '1';
+callInfo.data.SPAJAnswers[18].CustomerID = '1';
+
+callInfo.data.SPAJAnswers[19].elementID = 'TextPekerjaanTambahan';
+callInfo.data.SPAJAnswers[19].Value = $('#TextPekerjaanTambahan').val();
+callInfo.data.SPAJAnswers[19].SPAJID = '1';
+callInfo.data.SPAJAnswers[19].CustomerID = '1';
+
+callInfo.data.SPAJAnswers[20].elementID = 'TextAlamatTempatTinggal1';
+callInfo.data.SPAJAnswers[20].Value = $('#TextAlamatTempatTinggal1').val();
+callInfo.data.SPAJAnswers[20].SPAJID = '1';
+callInfo.data.SPAJAnswers[20].CustomerID = '1';
+
+callInfo.data.SPAJAnswers[21].elementID = 'TextAlamatTempatTinggal2';
+callInfo.data.SPAJAnswers[21].Value = $('#TextAlamatTempatTinggal2').val();
+callInfo.data.SPAJAnswers[21].SPAJID = '1';
+callInfo.data.SPAJAnswers[21].CustomerID = '1';
+
+callInfo.data.SPAJAnswers[22].elementID = 'TextAlamatTempatTinggal3';
+callInfo.data.SPAJAnswers[22].Value = $('#TextAlamatTempatTinggal3').val();
+callInfo.data.SPAJAnswers[22].SPAJID = '1';
+callInfo.data.SPAJAnswers[22].CustomerID = '1';
+
+callInfo.data.SPAJAnswers[23].elementID = 'TextKotaRumah';
+callInfo.data.SPAJAnswers[23].Value = $('#TextKotaRumah').val();
+callInfo.data.SPAJAnswers[23].SPAJID = '1';
+callInfo.data.SPAJAnswers[23].CustomerID = '1';
+
+callInfo.data.SPAJAnswers[24].elementID = 'TextKodePosRumah';
+callInfo.data.SPAJAnswers[24].Value = $('#TextKodePosRumah').val();
+callInfo.data.SPAJAnswers[24].SPAJID = '1';
+callInfo.data.SPAJAnswers[24].CustomerID = '1';
+
+callInfo.data.SPAJAnswers[25].elementID = 'TextNomorHPUtama';
+callInfo.data.SPAJAnswers[25].Value = $('#TextNomorHPUtama').val();
+callInfo.data.SPAJAnswers[25].SPAJID = '1';
+callInfo.data.SPAJAnswers[25].CustomerID = '1';
+
+callInfo.data.SPAJAnswers[26].elementID = 'TextNomorHP2';
+callInfo.data.SPAJAnswers[26].Value = $('#TextNomorHP2').val();
+callInfo.data.SPAJAnswers[26].SPAJID = '1';
+callInfo.data.SPAJAnswers[26].CustomerID = '1';
+
+callInfo.data.SPAJAnswers[27].elementID = 'TextEmail';
+callInfo.data.SPAJAnswers[27].Value = $('#TextEmail').val();
+callInfo.data.SPAJAnswers[27].SPAJID = '1';
+callInfo.data.SPAJAnswers[27].CustomerID = '1';
+
+callInfo.data.SPAJAnswers[28].elementID = 'TextAlamatKantor1';
+callInfo.data.SPAJAnswers[28].Value = $('#TextAlamatKantor1').val();
+callInfo.data.SPAJAnswers[28].SPAJID = '1';
+callInfo.data.SPAJAnswers[28].CustomerID = '1';
+
+callInfo.data.SPAJAnswers[29].elementID = 'TextAlamatKantor2';
+callInfo.data.SPAJAnswers[29].Value = $('#TextAlamatKantor2').val();
+callInfo.data.SPAJAnswers[29].SPAJID = '1';
+callInfo.data.SPAJAnswers[29].CustomerID = '1';
+
+callInfo.data.SPAJAnswers[30].elementID = 'TextKotaKantor';
+callInfo.data.SPAJAnswers[30].Value = $('#TextKotaKantor').val();
+callInfo.data.SPAJAnswers[30].SPAJID = '1';
+callInfo.data.SPAJAnswers[30].CustomerID = '1';
+
+callInfo.data.SPAJAnswers[31].elementID = 'TextKodePosKantor';
+callInfo.data.SPAJAnswers[31].Value = $('#TextKodePosKantor').val();
+callInfo.data.SPAJAnswers[31].SPAJID = '1';
+callInfo.data.SPAJAnswers[31].CustomerID = '1';
+
+callInfo.data.SPAJAnswers[32].elementID = 'TextNomorTeleponKantor';
+callInfo.data.SPAJAnswers[32].Value = $('#TextNomorTeleponKantor').val();
+callInfo.data.SPAJAnswers[32].SPAJID = '1';
+callInfo.data.SPAJAnswers[32].CustomerID = '1';
+
+callInfo.data.SPAJAnswers[33].elementID = 'radioAlamatKorespondensi';
+callInfo.data.SPAJAnswers[33].Value = $('input[name=radioAlamatKorespondensi]:checked').val();
+callInfo.data.SPAJAnswers[33].SPAJID = '1';
+callInfo.data.SPAJAnswers[33].CustomerID = '1';
+
+callInfo.data.SPAJAnswers[34].elementID = 'TextHubunganDenganCalonTertanggung';
+callInfo.data.SPAJAnswers[34].Value = $('#TextHubunganDenganCalonTertanggung').val();
+callInfo.data.SPAJAnswers[34].SPAJID = '1';
+callInfo.data.SPAJAnswers[34].CustomerID = '1';
+
+callInfo.data.SPAJAnswers[35].elementID = 'radioTujuanPembelian';
+callInfo.data.SPAJAnswers[35].Value = $('input[name=radioTujuanPembelian]:checked').val();
+callInfo.data.SPAJAnswers[35].SPAJID = '1';
+callInfo.data.SPAJAnswers[35].CustomerID = '1';
+
+callInfo.data.SPAJAnswers[36].elementID = 'TextTujuanPembelianAsuransiLainnya';
+callInfo.data.SPAJAnswers[36].Value = $('#TextTujuanPembelianAsuransiLainnya').val();
+callInfo.data.SPAJAnswers[36].SPAJID = '1';
+callInfo.data.SPAJAnswers[36].CustomerID = '1';
+
+callInfo.data.SPAJAnswers[37].elementID = 'TextNomorNPWP';
+callInfo.data.SPAJAnswers[37].Value = $('#TextNomorNPWP').val();
+callInfo.data.SPAJAnswers[37].SPAJID = '1';
+callInfo.data.SPAJAnswers[37].CustomerID = '1';
+
+callInfo.data.SPAJAnswers[38].elementID = 'TextTglBerlaku';
+callInfo.data.SPAJAnswers[38].Value = $('#TextTglBerlaku').val();
+callInfo.data.SPAJAnswers[38].SPAJID = '1';
+callInfo.data.SPAJAnswers[38].CustomerID = '1';
+
+callInfo.data.SPAJAnswers[39].elementID = 'radioKursGaji';
+callInfo.data.SPAJAnswers[39].Value =  $('input[name=radioKursGaji]:checked').val();
+callInfo.data.SPAJAnswers[39].SPAJID = '1';
+callInfo.data.SPAJAnswers[39].CustomerID = '1';
+
+callInfo.data.SPAJAnswers[40].elementID = 'TextGajiPerTahun';
+callInfo.data.SPAJAnswers[40].Value = $('#TextGajiPerTahun').val();
+callInfo.data.SPAJAnswers[40].SPAJID = '1';
+callInfo.data.SPAJAnswers[40].CustomerID = '1';
+
+callInfo.data.SPAJAnswers[41].elementID = 'radioHasilUsaha';
+callInfo.data.SPAJAnswers[41].Value = $('input[name=radioHasilUsaha]:checked').val();
+callInfo.data.SPAJAnswers[41].SPAJID = '1';
+callInfo.data.SPAJAnswers[41].CustomerID = '1';
+
+callInfo.data.SPAJAnswers[42].elementID = 'TextHasilUsaha';
+callInfo.data.SPAJAnswers[42].Value = $('#TextHasilUsaha').val();
+callInfo.data.SPAJAnswers[42].SPAJID = '1';
+callInfo.data.SPAJAnswers[42].CustomerID = '1';
+
+callInfo.data.SPAJAnswers[43].elementID = 'radioPenghasilanLainnya';
+callInfo.data.SPAJAnswers[43].Value = $('input[name=radioPenghasilanLainnya]:checked').val();
+callInfo.data.SPAJAnswers[43].SPAJID = '1';
+callInfo.data.SPAJAnswers[43].CustomerID = '1';
+
+callInfo.data.SPAJAnswers[44].elementID = 'TextPenghasilanLainnya';
+callInfo.data.SPAJAnswers[44].Value = $('#TextPenghasilanLainnya').val();
+callInfo.data.SPAJAnswers[44].SPAJID = '1';
+callInfo.data.SPAJAnswers[44].CustomerID = '1';
+
+callInfo.data.SPAJAnswers[45].elementID = 'TextJelaskanSumbernya';
+callInfo.data.SPAJAnswers[45].Value = $('#TextJelaskanSumbernya').val();
+callInfo.data.SPAJAnswers[45].SPAJID = '1';
+callInfo.data.SPAJAnswers[45].CustomerID = '1';
+
+//call the wrapper with the parameterized info
+calliOSFunction('savetoDB:',onSuccess,onError, callInfo);
+
+console.log(JSON.stringify(callInfo));
+}
+
+function PrintData()
+{
+    savetoDB();
+}
+
+function ReadData()
+{
+readfromDB();
+}
+</script>
+
+<style>
+/* @font-face 
+{
+    /* ttf, otf, svz, woff, wot */
+    font-family: 'BPreplay_Regular';
+    src: url('../../jqueryLibrary/BPreplay.eot'); /* IE9 Compat Modes */
+    src: url('../../jqueryLibrary/BPreplay.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('../../jqueryLibrary/BPreplay.woff2') format('woff2'), /* Super Modern Browsers */
+    url('../../jqueryLibrary/BPreplay.woff') format('woff'), /* Pretty Modern Browsers */
+    url('../../jqueryLibrary/BPreplay.ttf')  format('truetype'), /* Safari, Android, iOS */
+    url('../../jqueryLibrary/BPreplay.svg#BPreplay') format('svg'); /* Legacy iOS */
+}
+    
+body
+{
+    font-family: 'BPreplay_Regular'; 
+}*/
+
+label.error {
+color: red;
+font-size: 16px;
+font-weight: normal;
+line-height: 1.4;
+margin-top: 0.5em;
+width: 100%;
+float: none;
+}
+@media screen and (orientation: portrait) {
+label.error {
+margin-left: 0;
+display: block;
+}
+}
+@media screen and (orientation: landscape) {
+label.error {
+color: red;    
+display: inline-block;
+margin-left: 0%;
+}
+}
+em {
+color: red;
+font-weight: bold;
+padding-right: .25em;
+}  
+
+table, tr, td {border: 0px solid black; }
+  tr.noBorder td {border: 0; }
+
+</style>
+</head>
+<body>
+<div id='page1' data-role='page'>
+<div data-role='content'>
+<form id='myform'>
+<div data-role='main' class='ui-content'>
+
+<table data-role="table" class="ui-responsive table-stroke">
+     <thead>
+       <tr style="color: #006683;" >
+         <th data-priority="2"></th>
+         <th colspan="7">Data Calon Pemegang Polis</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr class="noBorder">
+         <td style="vertical-align: middle; width: 15%;">Nomor CIN</td>
+         <td>            
+            <input type="text" name="TextNomorCIN" id="TextNomorCIN" value="">            
+         </td>
+         <td colspan="2">
+         
+         </td>
+         <td colspan="2">
+         
+         </td>
+         <td>
+         
+         </td>
+         <td>
+         
+         </td>
+       </tr>
+       <tr class="noBorder">
+         <td style="vertical-align: middle; width: 15%;">Nama Lengkap</td>
+         <td colspan="7">            
+            <input type="text" name="TextNamaLengkap" id="TextNamaLengkap" value="">            
+         </td>
+       </tr>
+       <tr class="noBorder">
+            <td style="vertical-align: middle; width: 15%;">Jenis Identitas Diri</td>
+            <td>
+                <input type="text" name="TextJenisIdentitasDiri" id="TextJenisIdentitasDiri" value="">
+            </td>
+            <td style="vertical-align: middle; text-align: right;" colspan="2">Nomor Identitas Diri</td>
+            <td colspan="2">                
+                <input type="text" name="TextNomorIdentitasDiri" id="TextNomorIdentitasDiri" value="">                
+            </td>
+            <td style="vertical-align: middle; text-align: right;">Masa Berlaku</td>
+            <td>                
+                <input type="text" name="TextMasaBerlaku" id="TextMasaBerlaku" value="">                
+            </td>
+       </tr>
+       <tr  class="noBorder">
+            <td style="vertical-align: middle; width: 15%;">Tempat Lahir</td>
+            <td>
+                <input type="text" name="TextTempatLahir" id="TextTempatLahir" value="">
+            </td>
+            <td style="vertical-align: middle; text-align: right;" colspan="2">Tanggal Lahir</td>
+            <td colspan="2">                
+                <input type="text" name="TextTanggalLahir" id="TextTanggalLahir" value="">                
+            </td>
+            <td style="vertical-align: middle; text-align: right;">Usia</td>
+            <td>                
+                <input type="text" name="TextUsia" id="TextUsia" value="">                
+            </td>
+       </tr>
+       <tr class="noBorder">
+            <td style="vertical-align: middle; width: 15%;">Kewarganegaraan</td>
+            <td>
+                <input type="text" name="TextKewarganegaraan" id="TextKewarganegaraan" value="">
+            </td>
+            <td colspan="2">                                                                                              
+            </td>
+            <td colspan="2">                               
+            </td>
+            <td></td>
+            <td></td>
+       </tr>
+       <tr class="noBorder">
+            <td style="vertical-align: middle;" colspan="4">Apakah Anda Warga Negara Atau Wajib Pajak Amerika</td>
+            <td colspan="2">
+                <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">   
+                    <input type="radio" name="radioWargaAmrik" id="radioWargaAmrikY" value="Y">
+                    <label for="radioWargaAmrikY">Ya</label>
+                    <input type="radio" name="radioWargaAmrik" id="radioWargaAmrikT" value="T">
+                    <label for="radioWargaAmrikT">Tidak</label>    
+                </fieldset>
+            </td>
+            <td colspan="2" style="vertical-align: middle;">(Jika jawaban "YA" mohon lampir formulir WB/W9)</td>
+       </tr>
+       <tr class="noBorder">
+            <td style="vertical-align: middle;">Jenis Kelamin</td>
+            <td colspan="3"><fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">   
+                    <input type="radio" name="radioJenisKelamin" id="radioJenisKelaminL" value="P">
+                    <label for="radioJenisKelaminL">Pria</label>
+                    <input type="radio" name="radioJenisKelamin" id="radioJenisKelaminP" value="W">
+                    <label for="radioJenisKelaminP">Wanita</label>    
+                </fieldset></td>
+            <td colspan="2"></td>
+            <td></td>
+            <td></td>
+       </tr>
+       <tr class="noBorder">
+            <td style="vertical-align: middle; width: 15%;">Status Pernikahan</td>
+            <td>
+                <input type="text" name="TextStatusPernikahan" id="TextStatusPernikahan" value="">
+            </td>
+            <td colspan="2">                                                                                              
+            </td>
+            <td colspan="2">                               
+            </td>
+            <td></td>
+            <td></td>
+       </tr>
+       <tr class="noBorder">
+            <td style="vertical-align: middle; width: 15%;">Agama</td>
+            <td>
+                <input type="text" name="TextAgama" id="TextAgama" value="">
+            </td>
+            <td colspan="2">                                                                                              
+            </td>
+            <td colspan="2">                               
+            </td>
+            <td></td>
+            <td></td>
+       </tr>
+       <tr class="noBorder">
+            <td style="vertical-align: middle;">
+                Nama Perusahaan / Instansi / Sekolah                                                                              
+            </td>         
+            <td colspan="7">            
+            <input type="text" name="TextPerusahaanInstansiSekolah" id="TextPerusahaanInstansiSekolah" value="">            
+         </td>
+       </tr>       
+       <tr class="noBorder">
+         <td style="vertical-align: middle; width: 15%;">Pekerjaan Utama</td>
+         <td colspan="7">            
+            <input type="text" name="TextPekerjaanUtama" id="TextPekerjaanUtama" value="">            
+         </td>
+       </tr>
+       <tr class="noBorder">
+         <td style="vertical-align: middle; width: 15%;">Bidang Usaha</td>
+         <td colspan="7">            
+            <input type="text" name="TextBidangUsaha" id="TextBidangUsaha" value="">            
+         </td>
+       </tr>
+
+        <tr class="noBorder">
+         <td style="vertical-align: middle; width: 15%;">Jabatan</td>
+         <td colspan="7">            
+            <input type="text" name="TextJabatan" id="TextJabatan" value="">            
+         </td>
+       </tr>
+        <tr class="noBorder">
+         <td style="vertical-align: middle; width: 15%;">Uraian Pekerjaan</td>
+         <td colspan="7">            
+            <input type="text" name="TextUraianPekerjaan" id="TextUraianPekerjaan" value="">            
+         </td>
+       </tr>      
+       <tr class="noBorder">
+         <td style="vertical-align: middle; width: 15%;">Pekerjaan Tambahan</td>
+         <td colspan="7">            
+            <input type="text" name="TextPekerjaanTambahan" id="TextPekerjaanTambahan" value="">            
+         </td>
+       </tr>
+       <tr class="noBorder">
+         <td style="vertical-align: middle; width: 15%;">Alamat Tempat Tinggal           
+         </td>
+         <td colspan="7">            
+            <input type="text" name="TextAlamatTempatTinggal1" id="TextAlamatTempatTinggal1" value="">            
+         </td>
+       </tr>
+       <tr class="noBorder">
+         <td style="width: 15%;">
+             <a href="#popupInfo" data-rel="popup" data-transition="pop" class="my-tooltip-btn ui-btn ui-alt-icon ui-nodisc-icon ui-btn-inline ui-icon-info ui-btn-icon-notext" title="Learn more">Learn more</a>
+            <div data-role="popup" id="popupInfo" class="ui-content" data-theme="a" style="max-width:350px;">
+                    <p>(Bila tidak sesuai kartu identitas Diri, diisi dengan lengkap menginformasikan nomor rumah, RT, RW, Kelurahan & Kecamatan)</p>
+            </div>
+         </td>
+         <td colspan="7">            
+            <input type="text" name="TextAlamatTempatTinggal2" id="TextAlamatTempatTinggal2" value="">            
+         </td>
+       </tr>
+       <tr class="noBorder">
+         <td style="vertical-align: middle; width: 15%;"></td>
+         <td colspan="7">            
+            <input type="text" name="TextAlamatTempatTinggal3" id="TextAlamatTempatTinggal3" value="">            
+         </td>
+       </tr>
+       <tr class="noBorder">
+         <td style="vertical-align: middle; width: 15%;"></td>
+         <td style="vertical-align: middle;">            
+            Kota            
+         </td>
+         <td colspan="4">
+            <input type="text" name="TextKotaRumah" id="TextKotaRumah" value="">
+         </td>
+         <td style="vertical-align: middle;">         
+             Kode Pos
+         </td>
+         <td>
+                <input type="text" name="TextKodePosRumah" id="TextKodePosRumah" value="">
+         </td>
+       </tr>
+       <tr class="noBorder">
+         <td style="vertical-align: middle; width: 15%;"></td>
+         <td style="vertical-align: middle;">            
+             Nomor Telepon</td>
+         <td colspan="4">
+            <input type="text" name="TextNomorTeleponRumah" id="TextNomorTeleponRumah" value="">
+         </td>
+         <td>
+         
+             &nbsp;</td>
+         <td>
+                &nbsp;</td>
+       </tr>
+       <tr class="noBorder">
+            <td style="vertical-align: middle; width: 15%;">Nomor HP Utama</td>
+            <td>
+                <input type="text" name="TextNomorHPUtama" id="TextNomorHPUtama" value="">
+            </td>
+            <td style="vertical-align: middle; text-align: right;" colspan="2">Nomor HP 2</td>
+            <td colspan="2">                
+                <input type="text" name="TextNomorHP2" id="TextNomorHP2" value="">                
+            </td>
+            <td></td>
+            <td>                
+                
+            </td>
+       </tr>
+       <tr class="noBorder">
+         <td style="vertical-align: middle; width: 15%;">Email</td>
+         <td colspan="7">            
+            <input type="text" name="TextEmail" id="TextEmail" value="">            
+         </td>
+       </tr>  
+       <tr class="noBorder">
+         <td style="vertical-align: middle; width: 15%;">Alamat Kantor          
+         </td>
+         <td colspan="7">            
+            <input type="text" name="TextAlamatKantor1" id="TextAlamatKantor1" value="">            
+         </td>
+       </tr>
+       <tr class="noBorder">
+         <td style="width: 15%;">            
+         </td>
+         <td colspan="7">            
+            <input type="text" name="TextAlamatKantor2" id="TextAlamatKantor2" value="">            
+         </td>
+       </tr> 
+       <tr class="noBorder">
+         <td style="vertical-align: middle; width: 15%;"></td>
+         <td style="vertical-align: middle;">            
+            Kota            
+         </td>
+         <td colspan="4">
+            <input type="text" name="TextKotaKantor" id="TextKotaKantor" value="">
+         </td>
+         <td style="vertical-align: middle;">         
+             Kode Pos
+         </td>
+         <td>
+                <input type="text" name="TextKodePosKantor" id="TextKodePosKantor" value="">
+         </td>
+       </tr>
+       <tr class="noBorder">
+         <td style="vertical-align: middle; width: 15%;"></td>
+         <td style="vertical-align: middle;">            
+             Telp</td>
+         <td colspan="4">
+            <input type="text" name="TextNomorTeleponKantor" id="TextNomorTeleponKantor" value="">
+         </td>
+         <td>
+         
+             </td>
+         <td>
+                </td>
+       </tr>  
+       <tr class="noBorder">
+            <td style="vertical-align: middle;">Alamat Korespondensi</td>            
+            <td colspan="5">                
+                <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                    <p class="container">   
+                    <input type="radio" name="radioAlamatKorespondensi" id="radioAlamatKorespondensi1" value="ATT">
+                    <label for="radioAlamatKorespondensi1">Alamat Tempat Tinggal</label>
+                    <input type="radio" name="radioAlamatKorespondensi" id="radioAlamatKorespondensi2" value="AKT">
+                    <label for="radioAlamatKorespondensi2">Alamat Kantor</label>    
+                    </p>
+                </fieldset>                
+                </td>            
+            <td></td>
+            <td></td>
+       </tr>     
+       <tr class="noBorder">
+            <td style="vertical-align: middle; width: 15%;">Hubungan dengan Calon Tertanggung</td>
+            <td>
+                <input type="text" name="TextHubunganDenganCalonTertanggung" id="TextHubunganDenganCalonTertanggung" value="">
+            </td>
+            <td>                                                                                              
+            </td>
+            <td>                               
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+       </tr>
+       <tr class="noBorder">
+         <td style="vertical-align: middle;">Tujuan Pembelian Asuransi</td>
+         <td colspan="6">
+            <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">   
+                <input type="radio" name="radioTujuanPembelian" id="radioTujuanPembelian1" value="T">
+                <label for="radioTujuanPembelian1">Tabungan</label>
+                <input type="radio" name="radioTujuanPembelian" id="radioTujuanPembelian2" value="P">
+                <label for="radioTujuanPembelian2">Proteksi</label>  
+                <input type="radio" name="radioTujuanPembelian" id="radioTujuanPembelian3" value="I">
+                <label for="radioTujuanPembelian3">Investasi</label>
+                <input type="radio" name="radioTujuanPembelian" id="radioTujuanPembelian4" value="P">
+                <label for="radioTujuanPembelian4">Pendidikan</label>    
+                <input type="radio" name="radioTujuanPembelian" id="radioTujuanPembelian5" value="L">
+                <label for="radioTujuanPembelian5">Lainnya</label>                                           
+            </fieldset>                
+         </td>
+         <td><input type="text" name="TextTujuanPembelianAsuransiLainnya" id="TextTujuanPembelianAsuransiLainnya" value=""></td>                 
+       </tr>
+       <tr class="noBorder">
+            <td style="vertical-align: middle; width: 15%;">Nomor NPWP</td>
+            <td>
+                <input type="text" name="TextNomorNPWP" id="TextNomorNPWP" value="">
+            </td>
+            <td>                                                                                              
+            </td>
+            <td>                               
+            </td>
+            <td></td>            
+            <td style="vertical-align: middle;" colspan="2">Tanggal Berlaku</td>
+            <td>
+                <input type="text" name="TextTglBerlaku" id="TextTglBerlaku" value="">
+            </td>
+       </tr>
+       <tr class="noBorder">
+         <td style="vertical-align: middle;" colspan="2">Penghasilan Kotor Per Tahun</td>
+         <td colspan="2">
+         
+         </td>
+         <td colspan="2">
+         
+         </td>
+         <td>
+         
+         </td>
+         <td>
+         
+         </td>
+       </tr>
+       <tr class="noBorder">
+         <td style="vertical-align: middle; width: 15%">Gaji</td>
+         <td>
+         
+         </td>
+         <td colspan="3">
+            <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">   
+                <input type="radio" name="radioKursGaji" id="radioKursGaji1" value="RP">
+                <label for="radioKursGaji1">RP</label>
+                <input type="radio" name="radioKursGaji" id="radioKursGaji2" value="USD">
+                <label for="radioKursGaji2">USD</label>                                                       
+            </fieldset>  
+         </td>
+         <td style="vertical-align: middle;" colspan="2">
+         
+             Jumlah Penghasilan / Tahun</td>
+         <td>
+            <input type="text" name="TextGajiPerTahun" id="TextGajiPerTahun" value="">
+         </td>
+       </tr>
+       <tr class="noBorder">
+         <td style="vertical-align: middle; width: 15%">Hasil Usaha</td>
+         <td>
+         
+         </td>
+         <td colspan="3">
+            <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">   
+                <input type="radio" name="radioHasilUsaha" id="radioHasilUsaha1" value="RP">
+                <label for="radioHasilUsaha1">RP</label>
+                <input type="radio" name="radioHasilUsaha" id="radioHasilUsaha2" value="USD">
+                <label for="radioHasilUsaha2">USD</label>                                                       
+            </fieldset>  
+         </td>
+         <td style="vertical-align: middle;" colspan="2">
+         
+             Jumlah Penghasilan / Tahun</td>
+         <td>
+            <input type="text" name="TextHasilUsaha" id="TextHasilUsaha" value="">
+         </td>
+       </tr>
+       <tr class="noBorder">
+         <td style="vertical-align: middle; width: 15%">Penghasilan Lainnya</td>
+         <td>
+         
+         </td>
+         <td colspan="3">
+            <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">   
+                <input type="radio" name="radioPenghasilanLainnya" id="radioPenghasilanLainnya1" value="RP">
+                <label for="radioPenghasilanLainnya1">RP</label>
+                <input type="radio" name="radioPenghasilanLainnya" id="radioPenghasilanLainnya2" value="USD">
+                <label for="radioPenghasilanLainnya2">USD</label>                                                       
+            </fieldset>  
+         </td>
+         <td style="vertical-align: middle;" colspan="2">
+         
+             Jumlah Penghasilan / Tahun</td>
+         <td>
+            <input type="text" name="TextPenghasilanLainnya" id="TextPenghasilanLainnya" value="">
+         </td>
+       </tr>
+       <tr class="noBorder">
+         <td style="vertical-align: middle; width: 15%;">Jelaskan Sumbernya</td>
+         <td colspan="7">            
+            <input type="text" name="TextJelaskanSumbernya" id="TextJelaskanSumbernya" value="">            
+         </td>
+       </tr>  
+     </tbody>
+   </table>
+
+<div style="display: block;"><button class="ui-btn ui-btn-inline" id="save">Save</button>
+    <button class="ui-btn ui-btn-inline" id="read">Read</button>
+</div>
+</div>
+</form>
+</div>
+</div>
+<script>
+$(document).ready(function () {
+$.validator.addMethod('valueNotEquals', function(value, element, arg){
+return arg != value;
+}, 'Value must not equal arg.');
+$('#myform').validate({ // initialize the plugin
+rules: {
+TextStatusPernikahan: {
+required: true,
+},
+radioAlamatKorespondensi: {
+required: true
+},
+RangeName1: {
+required: true,
+range: [5, 50]
+},
+CheckBoxName3:{required:true,'minlength':2},
+ SelectName4 : { valueNotEquals: 'Choose' },
+},
+messages:
+{
+TextStatusPernikahan:
+{
+required:"Status Pernikahan mohon diisi."
+},
+radioAlamatKorespondensi:
+{
+required:"Mohon pilih salahsatu."
+},
+CheckBoxName3:
+{
+minlength:'Please select at least {0} options'
+},
+    SelectName4: { valueNotEquals: 'Please select an item!' },
+},
+errorPlacement: function( error, element ) {
+if ( element.is(':checkbox') ) 
+{
+    error.appendTo( element.parents('.container') );
+}
+else if ( element.is(":radio") ) 
+{
+    error.appendTo( element.parents('.container') );
+}
+else
+{
+error.insertAfter( element.parent() );
+}
+}
+})
+$('#save').click(function(e) {
+if ($('#myform').valid()) {
+console.log('form is valid - not submitted');
+e.preventDefault();
+PrintData();
+$('#myform')[0].reset();
+} else {
+console.log('form is not valid');
+}
+} 
+);
+$('#read').click(function(e) {
+e.preventDefault();
+ReadData();
+});
+});
+
+</script>
+</body>
+</html>

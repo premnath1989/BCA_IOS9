@@ -90,10 +90,14 @@
     {
         // DEFAULT CHILD VIEW
         
-        SPAJExistingList* viewController = [[SPAJExistingList alloc] initWithNibName:@"SPAJ Existing List" bundle:nil];
+        //SPAJExistingList* viewController = [[SPAJExistingList alloc] initWithNibName:@"SPAJ Existing List" bundle:nil];
+        //SPAJEApplicationList* viewController = [[SPAJEApplicationList alloc] initWithNibName:@"SPAJ E Application List" bundle:nil];
+        UIStoryboard *spajStoryboard = [UIStoryboard storyboardWithName:@"SPAJEAppListStoryBoard" bundle:Nil];
+        SPAJEApplicationList *viewController = [spajStoryboard instantiateViewControllerWithIdentifier:@"EAppListRootVC"];
         viewController.view.frame = self.viewContent.bounds;
         [self addChildViewController:viewController];
         [self.viewContent addSubview:viewController.view];
+        //[self actionGoToEApplicationList:nil];
     };
 
 
@@ -101,10 +105,21 @@
 
     - (IBAction)actionGoToEApplicationList:(id)sender
     {
-        SPAJEApplicationList* viewController = [[SPAJEApplicationList alloc] initWithNibName:@"SPAJ E Application List" bundle:nil];
+        /*SPAJEApplicationList* viewController = [[SPAJEApplicationList alloc] initWithNibName:@"SPAJ E Application List" bundle:nil];
+        viewController.view.frame = self.viewContent.bounds;
+        [self addChildViewController:viewController];
+        [self.viewContent addSubview:viewController.view];*/
+        UIStoryboard *spajStoryboard = [UIStoryboard storyboardWithName:@"SPAJEAppListStoryBoard" bundle:Nil];
+        SPAJEApplicationList *viewController = [spajStoryboard instantiateViewControllerWithIdentifier:@"EAppListRootVC"];
         viewController.view.frame = self.viewContent.bounds;
         [self addChildViewController:viewController];
         [self.viewContent addSubview:viewController.view];
+        //viewController.modalPresentationStyle = UIModalPresentationFullScreen;*/
+        //viewController.IndexTab = 1;
+        //[self presentViewController:viewController animated:NO completion:Nil];
+        //viewController = Nil;
+        //AppDelegate *appdlg = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+        //appdlg.eApp=NO;
     };
 
     - (IBAction)actionGoToExistingList:(id)sender
@@ -153,6 +168,7 @@
     {
         SPAJAddDetail* viewController = [[SPAJAddDetail alloc] initWithNibName:@"SPAJ Add Detail" bundle:nil];
         viewController.view.frame = self.viewContent.bounds;
+        [viewController setStringGlobalEAPPNumber:stringGlobalEAPPNumber];
         [self addChildViewController:viewController];
         [self.viewContent addSubview:viewController.view];
     }

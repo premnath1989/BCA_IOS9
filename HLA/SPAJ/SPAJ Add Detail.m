@@ -11,11 +11,19 @@
 
 #import "SPAJ Add Detail.h"
 #import "String.h"
-
+#import "SPAJ Calon Pemegang Polis.h"
+#import "SPAJ Calon Tertanggung.h"
+#import "SPAJ Perusahaan.h"
+#import "SPAJ Calon Penerima Manfaat.h"
+#import "SPAJ Pembayaran Premi.h"
+#import "ModelSPAJHtml.h"
+#import "SIMenuTableViewCell.h"
+#import "Theme.h"
+#import "User Interface.h"
 
 // DECLARATION
 
-@interface SPAJAddDetail ()
+@interface SPAJAddDetail ()<SPAJCalonPemegangPolisDelegate,SPAJCalonTertanggungDelegate>
 
 
 
@@ -24,17 +32,54 @@
 
 // IMPLEMENTATION
 
-@implementation SPAJAddDetail
-@synthesize buttonCaptureBack,buttonCaptureFront;
-@synthesize imageViewFront,imageViewBack;
+@implementation SPAJAddDetail{
+    SPAJ_Calon_Pemegang_Polis* spajCalonPemegangPolis;
+    SPAJ_Calon_Tertanggung* spajCalonTertanggung;
+    SPAJ_Perusahaan* spajPerusahaan;
+    SPAJ_Calon_Penerima_Manfaat* spajCalonPenerimaManfaat;
+    SPAJ_Pembayaran_Premi* spajPembayaranPremi;
+    
+    UserInterface *objectUserInterface;
+    
+    ModelSPAJHtml *modelSPAJHtml;
 
-        // DID LOAD
+    NSMutableArray *NumberListOfSubMenu;
+    NSMutableArray *ListOfSubMenu;
+}
+@synthesize buttonCaptureBack,buttonCaptureFront,rightButton;
+@synthesize imageViewFront,imageViewBack;
+@synthesize stringGlobalEAPPNumber;
+@synthesize dictTransaction;
+
+
+    -(void)viewDidAppear:(BOOL)animated{
+        [_tableSection selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
+        [self tableView:_tableSection didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    }
+
+    // DID LOAD
 
     - (void)viewDidLoad
     {
         [super viewDidLoad];
         // Do any additional setup after loading the view, typically from a nib.
         
+        //INITIALIZATION
+        objectUserInterface = [[UserInterface alloc] init];
+        
+        spajCalonPemegangPolis = [[SPAJ_Calon_Pemegang_Polis alloc]initWithNibName:@"SPAJ Calon Pemegang Polis" bundle:nil];
+        [spajCalonPemegangPolis setDelegate:self];
+        
+        spajCalonTertanggung = [[SPAJ_Calon_Tertanggung alloc]initWithNibName:@"SPAJ Calon Tertanggung" bundle:nil];
+        [spajCalonTertanggung setDelegate:self];
+        
+        spajPerusahaan = [[SPAJ_Perusahaan alloc]initWithNibName:@"SPAJ Perusahaan" bundle:nil];
+        
+        spajCalonPenerimaManfaat = [[SPAJ_Calon_Penerima_Manfaat alloc]initWithNibName:@"SPAJ Calon Penerima Manfaat" bundle:nil];
+        
+        spajPembayaranPremi = [[SPAJ_Pembayaran_Premi alloc]initWithNibName:@"SPAJ Pembayaran Premi" bundle:nil];
+        
+        modelSPAJHtml = [[ModelSPAJHtml alloc]init];
         
         // LOCALIZATION
         
@@ -56,35 +101,70 @@
         _labelStep6.text = NSLocalizedString(@"GUIDE_SPAJDETAIL_STEP6", nil);
         _labelHeader6.text = NSLocalizedString(@"GUIDE_SPAJDETAIL_HEADER6", nil);
         
-        //[self voidSetButtonShapeToCircle];
+        //ARRAY INITIALIZATION
+        NumberListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"1", @"2", @"3", @"4",@"5",@"6", nil];
+        ListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"Calon Pemegang Polis", @"Calon Tertanggung", @"Perusahaan / Berbadan Hukum", @"Calon Penerima Manfaat",@"Pembayaran Premi", @"Kesehatan", nil];
+        
+    
     }
+
+
+    -(IBAction)actionRightBarButtonPressed:(UIBarButtonItem *)sender{
+        if ([[spajCalonPemegangPolis.view.superview.subviews lastObject] isEqual: spajCalonPemegangPolis.view]){
+            NSLog(@"bisa ");
+        }
+        else if ([[spajCalonTertanggung.view.superview.subviews lastObject] isEqual: spajCalonTertanggung.view]){
+            NSLog(@"bisa ");
+        }
+        else if ([[spajPerusahaan.view.superview.subviews lastObject] isEqual: spajPerusahaan.view]){
+            NSLog(@"bisa ");
+        }
+        else if ([[spajCalonPenerimaManfaat.view.superview.subviews lastObject] isEqual: spajCalonPenerimaManfaat.view]){
+            NSLog(@"bisa ");
+        }
+        else if ([[spajPembayaranPremi.view.superview.subviews lastObject] isEqual: spajPembayaranPremi.view]){
+            NSLog(@"bisa ");
+            //[pernyataanNasabahVC voidDoneCFFData];
+        }
+    }
+
 
 
     // ACTION
 
     - (IBAction)actionGoToStep1:(id)sender
     {
-        
+        NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PO"];
+        [spajCalonPemegangPolis setHtmlFileName:stringHTMLName];
+        [self loadSPAJCalonPemegangPolis];
     };
 
     - (IBAction)actionGoToStep2:(id)sender
     {
-        
+        NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"TR"];
+        [spajCalonTertanggung setHtmlFileName:stringHTMLName];
+        [self loadSPAJCalonTertanggung];
     };
 
     - (IBAction)actionGoToStep3:(id)sender
     {
-        NSLog(@"test");
+        NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PR"];
+        [spajPerusahaan setHtmlFileName:stringHTMLName];
+        [self loadSPAJPerusahaan];
     };
 
     - (IBAction)actionGoToStep4:(id)sender
     {
-
+        NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PM"];
+        [spajCalonPenerimaManfaat setHtmlFileName:stringHTMLName];
+        [self loadSPAJCalonPenerimaManfaat];
     };
 
     - (IBAction)actionGoToStep5:(id)sender
     {
-
+        NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PP"];
+        [spajPembayaranPremi setHtmlFileName:stringHTMLName];
+        [self loadSPAJPembayaranPremi];
     };
 
     - (IBAction)actionGoToStep6:(id)sender
@@ -97,7 +177,7 @@
     
     };
 
-    -(IBAction)actionSnapFrontID:(UIButton *)sender{
+    /*-(IBAction)actionSnapFrontID:(UIButton *)sender{
         cameraFront = true;
         UIImagePickerControllerSourceType source = UIImagePickerControllerSourceTypeCamera;
         if ([UIImagePickerController isSourceTypeAvailable:source])
@@ -177,7 +257,246 @@
                 [self presentViewController:alertController animated:YES completion:nil];
             });
         }
+    }*/
+
+    -(void) showDetailsForIndexPath:(NSIndexPath*)indexPath
+    {
+        switch (indexPath.row) {
+            case 0:
+            {
+                NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PO"];
+                [spajCalonPemegangPolis setHtmlFileName:stringHTMLName];
+                [self loadSPAJCalonPemegangPolis];
+                [rightButton setAction:@selector(voidDoneSPAJCalonPemegangPolis:)];
+                break;
+            }
+            case 1:
+            {
+                NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"TR"];
+                [spajCalonTertanggung setHtmlFileName:stringHTMLName];
+                [self loadSPAJCalonTertanggung];
+                [rightButton setAction:@selector(voidDoneSPAJCalonTertanggung:)];
+                break;
+            }
+            case 2:
+            {
+                NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PR"];
+                [spajPerusahaan setHtmlFileName:stringHTMLName];
+                [self loadSPAJPerusahaan];
+                [rightButton setAction:@selector(voidDoneSPAJPerusahaan:)];
+                break;
+            }
+            case 3:
+            {
+                NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PM"];
+                [spajCalonPenerimaManfaat setHtmlFileName:stringHTMLName];
+                [self loadSPAJCalonPenerimaManfaat];
+                [rightButton setAction:@selector(voidDoneSPAJPenerimaManfaat:)];
+                break;
+            }
+            case 4:
+            {
+                NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PP"];
+                [spajPembayaranPremi setHtmlFileName:stringHTMLName];
+                [self loadSPAJPembayaranPremi];
+                [rightButton setAction:@selector(voidDoneSPAJPembayaranPremi:)];
+                break;
+            }
+            default:
+                break;
+        }
     }
+
+    #pragma mark UIBarButtonItem Action
+
+    -(void)voidDoneSPAJCalonPemegangPolis:(UIBarButtonItem *)sender{
+        [spajCalonPemegangPolis voidDoneSPAJCalonPemegangPolis];
+    }
+    -(void)voidDoneSPAJCalonTertanggung:(UIBarButtonItem *)sender{
+        [spajCalonTertanggung voidDoneSPAJCalonTertanggung];
+    }
+    -(void)voidDoneSPAJPerusahaan:(UIBarButtonItem *)sender{
+        [spajPerusahaan voidDoneSPAJPerusahaan];
+    }
+    -(void)voidDoneSPAJPenerimaManfaat:(UIBarButtonItem *)sender{
+        [spajCalonPenerimaManfaat voidDoneSPAJPenerimaManfaat];
+    }
+
+    -(void)voidDoneSPAJPembayaranPremi:(UIBarButtonItem *)sender{
+        [spajPembayaranPremi voidDoneSPAJPembayaranPremi];
+    }
+
+    #pragma mark load view controller
+    -(void)loadSPAJCalonPemegangPolis{
+        if ([spajCalonPemegangPolis.view isDescendantOfView:_viewContent]){
+            [_viewContent bringSubviewToFront:spajCalonPemegangPolis.view];
+        }
+        else{
+            [_viewContent addSubview:spajCalonPemegangPolis.view];
+        }
+    }
+    -(void)loadSPAJCalonTertanggung{
+        if ([spajCalonTertanggung.view isDescendantOfView:_viewContent]){
+            [_viewContent bringSubviewToFront:spajCalonTertanggung.view];
+        }
+        else{
+            [_viewContent addSubview:spajCalonTertanggung.view];
+        }
+    }
+    -(void)loadSPAJPerusahaan{
+        if ([spajPerusahaan.view isDescendantOfView:_viewContent]){
+            [_viewContent bringSubviewToFront:spajPerusahaan.view];
+        }
+        else{
+            [_viewContent addSubview:spajPerusahaan.view];
+        }
+    }
+    -(void)loadSPAJCalonPenerimaManfaat{
+        if ([spajCalonPenerimaManfaat.view isDescendantOfView:_viewContent]){
+            [_viewContent bringSubviewToFront:spajCalonPenerimaManfaat.view];
+        }
+        else{
+            [_viewContent addSubview:spajCalonPenerimaManfaat.view];
+        }
+    }
+    -(void)loadSPAJPembayaranPremi{
+        if ([spajPembayaranPremi.view isDescendantOfView:_viewContent]){
+            [_viewContent bringSubviewToFront:spajPembayaranPremi.view];
+        }
+        else{
+            [_viewContent addSubview:spajPembayaranPremi.view];
+        }
+    }
+
+    #pragma mark - table view
+
+    - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+    {
+        return 1;
+    }
+
+    - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+    {
+        return ListOfSubMenu.count;
+    }
+
+    -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+    {
+        // Remove seperator inset
+        if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+            [cell setSeparatorInset:UIEdgeInsetsZero];
+        }
+        
+        // Prevent the cell from inheriting the Table View's margin settings
+        if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
+            [cell setPreservesSuperviewLayoutMargins:NO];
+        }
+        
+        // Explictly set your cell's layout margins
+        if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+            [cell setLayoutMargins:UIEdgeInsetsZero];
+        }
+    }
+
+
+    - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+    {
+        static NSString *CellIdentifier = @"Cell";
+        SIMenuTableViewCell *cell = (SIMenuTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        //UIColor *selectedColor = [UIColor colorWithRed:0/255.0f green:102.0f/255.0f blue:179.0f/255.0f alpha:1];
+        if (cell == nil) {
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SIMenuTableViewCell" owner:self options:nil];
+            cell = [nib objectAtIndex:0];
+        }
+        UIView *bgColorView = [[UIView alloc] init];
+        if (indexPath.row<5){
+            [cell setBackgroundColor:[UIColor colorWithRed:204.0/255.0 green:203.0/255.0 blue:205.0/255.0 alpha:1.0]];
+        }
+        else{
+            [cell setBackgroundColor:[UIColor colorWithRed:204.0/255.0 green:203.0/255.0 blue:205.0/255.0 alpha:1.0]];
+        }
+        
+        bgColorView.backgroundColor = [objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0];
+        [cell setSelectedBackgroundView:bgColorView];
+        [cell.labelNumber setText:[NumberListOfSubMenu objectAtIndex:indexPath.row]];
+        [cell.labelDesc setText:[ListOfSubMenu objectAtIndex:indexPath.row]];
+        [cell.labelWide setText:@""];
+        
+        /*if (boolDataNasabah){
+            if (indexPath.row == 0){
+                [cell setBackgroundColor:selectedColor];
+            }
+            else{
+                
+            }
+        }
+        if (boolAreaPotensial){
+            if (indexPath.row == 1){
+                [cell setBackgroundColor:selectedColor];
+            }
+            else if (indexPath.row == 2){
+                [cell setUserInteractionEnabled:true];
+            }
+            else{
+                
+            }
+        }
+        else{
+            if (indexPath.row == 2){
+                [cell setUserInteractionEnabled:false];
+            }
+            else{
+                
+            }
+        }
+        
+        if (boolProfileRisk){
+            if (indexPath.row == 2){
+                [cell setBackgroundColor:selectedColor];
+            }
+            else{
+                
+            }
+        }
+        if (boolAnalisaKebutuhanNasabah){
+            if (indexPath.row == 3){
+                [cell setBackgroundColor:selectedColor];
+            }
+            else{
+                
+            }
+        }
+        if (boolPernyataanNasabah){
+            if (indexPath.row == 4){
+                //[cell setBackgroundColor:selectedColor];
+                [cell setUserInteractionEnabled:true];
+            }
+            else{
+                
+            }
+        }
+        else{
+            if (indexPath.row == 4){
+                [cell setUserInteractionEnabled:false];
+            }
+            else{
+                
+            }
+        }*/
+        
+        [cell.button1 setEnabled:false];
+        [cell.button2 setEnabled:false];
+        [cell.button3 setEnabled:false];
+        
+        return cell;
+    }
+
+    - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+    {
+        [self showDetailsForIndexPath:indexPath];
+    }
+
+
 
 #pragma mark crop function
     - (UIImage *)crop:(UIImage *)image {
@@ -212,7 +531,11 @@
         
     }
 
-
+#pragma mark delegate
+    -(NSString *)voidGetEAPPNumber{
+        //return stringGlobalEAPPNumber;
+        return [dictTransaction valueForKey:@"SPAJEappNumber"];
+    }
 #pragma mark delegate image picker
     - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
     {

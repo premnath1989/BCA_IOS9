@@ -494,7 +494,7 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
                                 dispatch_async(dispatch_get_main_queue(), ^{
                                     //we update the referral data serially
                                     WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
-                                    [webservice dataReferralSync:[loginDB getLastUpdateReferral] delegate:self];
+                                    //[webservice dataReferralSync:[loginDB getLastUpdateReferral] delegate:self];
                                 });
                             });
                         });
@@ -502,6 +502,7 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
                     });
                 });
                 [self getHTMLDataTable];
+                [self getSPAJHTMLDataTable];
             }else if([rateResponse.strStatus caseInsensitiveCompare:@"False"] == NSOrderedSame){
                 [spinnerLoading stopLoadingSpinner];
                 UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Proses Login anda gagal" message:@"" delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
@@ -977,8 +978,36 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
     NSArray* tableColumn= [[NSArray alloc]initWithObjects:@"CFFID",@"CFFHtmlName",@"CFFHtmlStatus",@"CFFHtmlSection", nil];
     NSDictionary *dictCFFTable = [[NSDictionary alloc]initWithObjectsAndKeys:@"CFFHtml",@"tableName",tableColumn,@"columnName", nil];
     
-    [cffAPIController apiCallHtmlTable:@"http://mposws.azurewebsites.net/Service2.svc/getAllData" JSONKey:arrayJSONKey TableDictionary:dictCFFTable];
+    NSMutableDictionary* dictDuplicateChecker = [[NSMutableDictionary alloc]init];
+    [dictDuplicateChecker setObject:@"CFFHtmlID" forKey:@"DuplicateCheckerColumnName"];
+    [dictDuplicateChecker setObject:@"CFFHtml" forKey:@"DuplicateCheckerTableName"];
+    [dictDuplicateChecker setObject:@"CFFID" forKey:@"DuplicateCheckerWhere1"];
+    [dictDuplicateChecker setObject:@"CFFHtmlName" forKey:@"DuplicateCheckerWhere2"];
+    [dictDuplicateChecker setObject:@"CFFHtmlStatus" forKey:@"DuplicateCheckerWhere3"];
+    [dictDuplicateChecker setObject:@"CFFHtmlSection" forKey:@"DuplicateCheckerWhere4"];
+    
+    [cffAPIController apiCallHtmlTable:@"http://mposws.azurewebsites.net/Service2.svc/getAllData" JSONKey:arrayJSONKey TableDictionary:dictCFFTable DictionaryDuplicateChecker:dictDuplicateChecker WebServiceModule:@"CFF"];
 }
+
+-(void)getSPAJHTMLDataTable{
+    CFFAPIController* cffAPIController;
+    cffAPIController = [[CFFAPIController alloc]init];
+    
+    NSArray* arrayJSONKey = [[NSArray alloc]initWithObjects:@"SPAJId",@"FileName",@"Status",@"SPAJSection",@"FolderName", nil];
+    NSArray* tableColumn= [[NSArray alloc]initWithObjects:@"SPAJID",@"SPAJHtmlName",@"SPAJHtmlStatus",@"SPAJHtmlSection", nil];
+    NSDictionary *dictCFFTable = [[NSDictionary alloc]initWithObjectsAndKeys:@"SPAJHtml",@"tableName",tableColumn,@"columnName", nil];
+    
+    NSMutableDictionary* dictDuplicateChecker = [[NSMutableDictionary alloc]init];
+    [dictDuplicateChecker setObject:@"SPAJHtmlID" forKey:@"DuplicateCheckerColumnName"];
+    [dictDuplicateChecker setObject:@"SPAJHtml" forKey:@"DuplicateCheckerTableName"];
+    [dictDuplicateChecker setObject:@"SPAJID" forKey:@"DuplicateCheckerWhere1"];
+    [dictDuplicateChecker setObject:@"SPAJHtmlName" forKey:@"DuplicateCheckerWhere2"];
+    [dictDuplicateChecker setObject:@"SPAJHtmlStatus" forKey:@"DuplicateCheckerWhere3"];
+    [dictDuplicateChecker setObject:@"SPAJHtmlSection" forKey:@"DuplicateCheckerWhere4"];
+    
+    [cffAPIController apiCallHtmlTable:@"http://mposws.azurewebsites.net/SPAJHTMLForm.svc/GetAllData" JSONKey:arrayJSONKey TableDictionary:dictCFFTable DictionaryDuplicateChecker:dictDuplicateChecker WebServiceModule:@"SPAJ"];
+}
+
 
 -(void)getCFFHTMLFile{
     dispatch_async(kBgQueue, ^{

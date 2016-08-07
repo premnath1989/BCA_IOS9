@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SPAJAddDetail">
             <connections>
+                <outlet property="barDetail" destination="7AC-tW-2ao" id="q0G-Wr-HsL"/>
                 <outlet property="buttonStep1" destination="lnZ-K4-H9p" id="Fkv-LO-GpA"/>
                 <outlet property="buttonStep2" destination="iXD-ZI-9GH" id="N83-6a-b33"/>
                 <outlet property="buttonStep3" destination="hFC-J1-7WK" id="KS8-KN-a5l"/>
@@ -25,6 +26,8 @@
                 <outlet property="labelStep4" destination="fWk-RF-MUu" id="Dc8-nZ-DNB"/>
                 <outlet property="labelStep5" destination="gnm-nL-mfK" id="bRL-hM-QJf"/>
                 <outlet property="labelStep6" destination="raO-a2-yDO" id="HsH-dD-lbT"/>
+                <outlet property="rightButton" destination="3s5-Dt-dxl" id="Ieb-IY-lk9"/>
+                <outlet property="tableSection" destination="J3J-BO-pYe" id="hUi-mZ-b59"/>
                 <outlet property="view" destination="iN0-l3-epB" id="TTX-GH-ZKM"/>
                 <outlet property="viewContent" destination="DOb-zR-NEV" id="Xub-LS-0C2"/>
                 <outlet property="viewStep1" destination="pDg-BU-x6G" id="N53-np-3rD"/>
@@ -37,270 +40,260 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DOb-zR-NEV">
-                    <rect key="frame" x="124" y="0.0" width="476" height="600"/>
+                <view contentMode="scaleToFill" id="DOb-zR-NEV">
+                    <rect key="frame" x="205" y="44" width="819" height="724"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fpz-qC-QgG" customClass="ViewGuideDetail">
-                    <rect key="frame" x="0.0" y="0.0" width="124" height="600"/>
+                <view hidden="YES" contentMode="scaleToFill" id="Fpz-qC-QgG" customClass="ViewGuideDetail">
+                    <rect key="frame" x="0.0" y="0.0" width="124" height="568"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Tnk-va-LaM" customClass="StackViewGuideMenuContainer">
-                            <rect key="frame" x="0.0" y="0.0" width="124" height="180"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" id="Tnk-va-LaM" customClass="StackViewGuideMenuContainer">
+                            <rect key="frame" x="0.0" y="0.0" width="124" height="300"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pDg-BU-x6G" customClass="ViewGuideMenuSelected">
-                                    <rect key="frame" x="0.0" y="0.0" width="124" height="30"/>
+                                <view contentMode="scaleToFill" id="pDg-BU-x6G" customClass="ViewGuideMenuSelected">
+                                    <rect key="frame" x="0.0" y="0.0" width="124" height="50"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="xcY-qt-Kur" customClass="StackViewGuideMenuHorizontal">
+                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" id="xcY-qt-Kur" customClass="StackViewGuideMenuHorizontal">
                                             <rect key="frame" x="10" y="5" width="104" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nag-pd-L6l" customClass="LabelGuideMenuStep">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Nag-pd-L6l" customClass="LabelGuideMenuStep">
                                                     <rect key="frame" x="0.0" y="0.0" width="42" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oId-WE-NEh" customClass="LabelGuideMenuHeader">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="oId-WE-NEh" customClass="LabelGuideMenuHeader">
                                                     <rect key="frame" x="62" y="0.0" width="42" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                         </stackView>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lnZ-K4-H9p" customClass="ButtonGuideMenu">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="lnZ-K4-H9p" customClass="ButtonGuideMenu">
                                             <rect key="frame" x="0.0" y="0.0" width="124" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" title="Button"/>
+                                            <connections>
+                                                <action selector="actionGoToStep1:" destination="-1" eventType="touchUpInside" id="3Zo-5v-YWp"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="xcY-qt-Kur" secondAttribute="trailing" constant="10" id="9uN-lQ-Rle"/>
-                                        <constraint firstItem="xcY-qt-Kur" firstAttribute="leading" secondItem="pDg-BU-x6G" secondAttribute="leading" constant="10" id="QKG-hs-7Qj"/>
-                                        <constraint firstAttribute="trailing" secondItem="lnZ-K4-H9p" secondAttribute="trailing" id="dOL-AA-GyH"/>
-                                        <constraint firstAttribute="bottom" secondItem="lnZ-K4-H9p" secondAttribute="bottom" id="kAl-nS-M46"/>
-                                        <constraint firstItem="xcY-qt-Kur" firstAttribute="centerY" secondItem="pDg-BU-x6G" secondAttribute="centerY" id="lmc-Sa-7sT"/>
-                                        <constraint firstItem="lnZ-K4-H9p" firstAttribute="leading" secondItem="pDg-BU-x6G" secondAttribute="leading" id="tJE-Sp-LxI"/>
-                                        <constraint firstItem="lnZ-K4-H9p" firstAttribute="top" secondItem="pDg-BU-x6G" secondAttribute="top" id="zkx-9v-BLk"/>
-                                    </constraints>
                                 </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="buI-Tv-IiQ" customClass="ViewGuideMenuSelected">
-                                    <rect key="frame" x="0.0" y="30" width="124" height="30"/>
+                                <view contentMode="scaleToFill" id="buI-Tv-IiQ" customClass="ViewGuideMenuSelected">
+                                    <rect key="frame" x="0.0" y="50" width="124" height="50"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="utj-z3-yFg" customClass="StackViewGuideMenuHorizontal">
+                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" id="utj-z3-yFg" customClass="StackViewGuideMenuHorizontal">
                                             <rect key="frame" x="10" y="5" width="104" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kCh-3K-1kP" customClass="LabelGuideMenuStep">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kCh-3K-1kP" customClass="LabelGuideMenuStep">
                                                     <rect key="frame" x="0.0" y="0.0" width="42" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ctD-fX-KFg" customClass="LabelGuideMenuHeader">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ctD-fX-KFg" customClass="LabelGuideMenuHeader">
                                                     <rect key="frame" x="62" y="0.0" width="42" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                         </stackView>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iXD-ZI-9GH" customClass="ButtonGuideMenu">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="iXD-ZI-9GH" customClass="ButtonGuideMenu">
                                             <rect key="frame" x="0.0" y="0.0" width="124" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" title="Button"/>
+                                            <connections>
+                                                <action selector="actionGoToStep2:" destination="-1" eventType="touchUpInside" id="R6E-gI-5va"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <constraints>
-                                        <constraint firstItem="iXD-ZI-9GH" firstAttribute="leading" secondItem="buI-Tv-IiQ" secondAttribute="leading" id="0IH-Ny-0ek"/>
-                                        <constraint firstItem="utj-z3-yFg" firstAttribute="centerY" secondItem="buI-Tv-IiQ" secondAttribute="centerY" id="7N1-eM-TqJ"/>
-                                        <constraint firstItem="utj-z3-yFg" firstAttribute="leading" secondItem="buI-Tv-IiQ" secondAttribute="leading" constant="10" id="CAd-Od-nkV"/>
-                                        <constraint firstAttribute="bottom" secondItem="iXD-ZI-9GH" secondAttribute="bottom" id="JKn-u7-FO0"/>
-                                        <constraint firstAttribute="trailing" secondItem="utj-z3-yFg" secondAttribute="trailing" constant="10" id="i5s-kA-te7"/>
-                                        <constraint firstItem="iXD-ZI-9GH" firstAttribute="top" secondItem="buI-Tv-IiQ" secondAttribute="top" id="r9J-7Z-vb5"/>
-                                        <constraint firstAttribute="trailing" secondItem="iXD-ZI-9GH" secondAttribute="trailing" id="xqk-pb-mOa"/>
-                                    </constraints>
                                 </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0U5-Kc-uvD" customClass="ViewGuideMenuNotSelected">
-                                    <rect key="frame" x="0.0" y="60" width="124" height="30"/>
+                                <view contentMode="scaleToFill" id="0U5-Kc-uvD" customClass="ViewGuideMenuNotSelected">
+                                    <rect key="frame" x="0.0" y="100" width="124" height="50"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Zbb-HP-tjB" customClass="StackViewGuideMenuHorizontal">
+                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" id="Zbb-HP-tjB" customClass="StackViewGuideMenuHorizontal">
                                             <rect key="frame" x="10" y="5" width="104" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FQS-yO-lc4" customClass="LabelGuideMenuStep">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FQS-yO-lc4" customClass="LabelGuideMenuStep">
                                                     <rect key="frame" x="0.0" y="0.0" width="42" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BFe-ye-0jR" customClass="LabelGuideMenuHeader">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BFe-ye-0jR" customClass="LabelGuideMenuHeader">
                                                     <rect key="frame" x="62" y="0.0" width="42" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                         </stackView>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hFC-J1-7WK" customClass="ButtonGuideMenu">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hFC-J1-7WK" customClass="ButtonGuideMenu">
                                             <rect key="frame" x="0.0" y="0.0" width="124" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" title="Button"/>
+                                            <connections>
+                                                <action selector="actionGoToStep3:" destination="-1" eventType="touchUpInside" id="MR7-lv-wBP"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <constraints>
-                                        <constraint firstItem="Zbb-HP-tjB" firstAttribute="leading" secondItem="0U5-Kc-uvD" secondAttribute="leading" constant="10" id="4aB-Bh-z1d"/>
-                                        <constraint firstAttribute="bottom" secondItem="hFC-J1-7WK" secondAttribute="bottom" id="4yX-Y6-6qL"/>
-                                        <constraint firstAttribute="trailing" secondItem="Zbb-HP-tjB" secondAttribute="trailing" constant="10" id="712-PV-KnP"/>
-                                        <constraint firstItem="hFC-J1-7WK" firstAttribute="leading" secondItem="0U5-Kc-uvD" secondAttribute="leading" id="SmC-ly-9aa"/>
-                                        <constraint firstItem="hFC-J1-7WK" firstAttribute="top" secondItem="0U5-Kc-uvD" secondAttribute="top" id="WhS-Vu-h1N"/>
-                                        <constraint firstAttribute="trailing" secondItem="hFC-J1-7WK" secondAttribute="trailing" id="Wy0-Jv-sIM"/>
-                                        <constraint firstItem="Zbb-HP-tjB" firstAttribute="centerY" secondItem="0U5-Kc-uvD" secondAttribute="centerY" id="dRG-Xv-q32"/>
-                                    </constraints>
                                 </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7DA-i8-FQk" customClass="ViewGuideMenuNotSelected">
-                                    <rect key="frame" x="0.0" y="90" width="124" height="30"/>
+                                <view contentMode="scaleToFill" id="7DA-i8-FQk" customClass="ViewGuideMenuNotSelected">
+                                    <rect key="frame" x="0.0" y="150" width="124" height="50"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="51u-AW-m9e" customClass="StackViewGuideMenuHorizontal">
+                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" id="51u-AW-m9e" customClass="StackViewGuideMenuHorizontal">
                                             <rect key="frame" x="10" y="5" width="104" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fWk-RF-MUu" customClass="LabelGuideMenuStep">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fWk-RF-MUu" customClass="LabelGuideMenuStep">
                                                     <rect key="frame" x="0.0" y="0.0" width="42" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Dx-47-ZuR" customClass="LabelGuideMenuHeader">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0Dx-47-ZuR" customClass="LabelGuideMenuHeader">
                                                     <rect key="frame" x="62" y="0.0" width="42" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                         </stackView>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iD9-Z6-1XM" customClass="ButtonGuideMenu">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="iD9-Z6-1XM" customClass="ButtonGuideMenu">
                                             <rect key="frame" x="0.0" y="0.0" width="124" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" title="Button"/>
+                                            <connections>
+                                                <action selector="actionGoToStep4:" destination="-1" eventType="touchUpInside" id="WMU-e7-baw"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="iD9-Z6-1XM" secondAttribute="bottom" id="0an-Qz-cux"/>
-                                        <constraint firstItem="51u-AW-m9e" firstAttribute="leading" secondItem="7DA-i8-FQk" secondAttribute="leading" constant="10" id="8io-IO-hcB"/>
-                                        <constraint firstAttribute="trailing" secondItem="51u-AW-m9e" secondAttribute="trailing" constant="10" id="CHy-a3-wcc"/>
-                                        <constraint firstItem="51u-AW-m9e" firstAttribute="centerY" secondItem="7DA-i8-FQk" secondAttribute="centerY" id="QnQ-ep-wA0"/>
-                                        <constraint firstAttribute="trailing" secondItem="iD9-Z6-1XM" secondAttribute="trailing" id="Rur-yS-LT6"/>
-                                        <constraint firstItem="iD9-Z6-1XM" firstAttribute="top" secondItem="7DA-i8-FQk" secondAttribute="top" id="lCU-g1-uSm"/>
-                                        <constraint firstItem="iD9-Z6-1XM" firstAttribute="leading" secondItem="7DA-i8-FQk" secondAttribute="leading" id="rrB-6v-dvK"/>
-                                    </constraints>
                                 </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hIx-f2-EV0" customClass="ViewGuideMenuNotSelected">
-                                    <rect key="frame" x="0.0" y="120" width="124" height="30"/>
+                                <view contentMode="scaleToFill" id="hIx-f2-EV0" customClass="ViewGuideMenuNotSelected">
+                                    <rect key="frame" x="0.0" y="200" width="124" height="50"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="fSO-rK-UbP" customClass="StackViewGuideMenuHorizontal">
+                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" id="fSO-rK-UbP" customClass="StackViewGuideMenuHorizontal">
                                             <rect key="frame" x="10" y="5" width="104" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gnm-nL-mfK" customClass="LabelGuideMenuStep">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gnm-nL-mfK" customClass="LabelGuideMenuStep">
                                                     <rect key="frame" x="0.0" y="0.0" width="42" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rfA-jy-Ufp" customClass="LabelGuideMenuHeader">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rfA-jy-Ufp" customClass="LabelGuideMenuHeader">
                                                     <rect key="frame" x="62" y="0.0" width="42" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                         </stackView>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pqx-bH-93E" customClass="ButtonGuideMenu">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="pqx-bH-93E" customClass="ButtonGuideMenu">
                                             <rect key="frame" x="0.0" y="0.0" width="124" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" title="Button"/>
+                                            <connections>
+                                                <action selector="actionGoToStep5:" destination="-1" eventType="touchUpInside" id="EDZ-GD-qsG"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <constraints>
-                                        <constraint firstItem="fSO-rK-UbP" firstAttribute="leading" secondItem="hIx-f2-EV0" secondAttribute="leading" constant="10" id="21E-Cs-HkS"/>
-                                        <constraint firstItem="pqx-bH-93E" firstAttribute="leading" secondItem="hIx-f2-EV0" secondAttribute="leading" id="38Y-WB-HRX"/>
-                                        <constraint firstAttribute="trailing" secondItem="pqx-bH-93E" secondAttribute="trailing" id="8f5-5Y-bZc"/>
-                                        <constraint firstItem="pqx-bH-93E" firstAttribute="top" secondItem="hIx-f2-EV0" secondAttribute="top" id="RNN-1w-ZoI"/>
-                                        <constraint firstAttribute="bottom" secondItem="pqx-bH-93E" secondAttribute="bottom" id="XtC-XC-mSQ"/>
-                                        <constraint firstItem="fSO-rK-UbP" firstAttribute="centerY" secondItem="hIx-f2-EV0" secondAttribute="centerY" id="uIP-lq-IRf"/>
-                                        <constraint firstAttribute="trailing" secondItem="fSO-rK-UbP" secondAttribute="trailing" constant="10" id="wis-Zj-Q4q"/>
-                                    </constraints>
                                 </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KrB-hH-dXD" customClass="ViewGuideMenuNotSelected">
-                                    <rect key="frame" x="0.0" y="150" width="124" height="30"/>
+                                <view contentMode="scaleToFill" id="KrB-hH-dXD" customClass="ViewGuideMenuNotSelected">
+                                    <rect key="frame" x="0.0" y="250" width="124" height="50"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="WBt-MI-Shm" customClass="StackViewGuideMenuHorizontal">
+                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" id="WBt-MI-Shm" customClass="StackViewGuideMenuHorizontal">
                                             <rect key="frame" x="10" y="5" width="104" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="raO-a2-yDO" customClass="LabelGuideMenuStep">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="raO-a2-yDO" customClass="LabelGuideMenuStep">
                                                     <rect key="frame" x="0.0" y="0.0" width="42" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z2O-9O-zTX" customClass="LabelGuideMenuHeader">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="z2O-9O-zTX" customClass="LabelGuideMenuHeader">
                                                     <rect key="frame" x="62" y="0.0" width="42" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                         </stackView>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yLt-Z3-dfu" customClass="ButtonGuideMenu">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="yLt-Z3-dfu" customClass="ButtonGuideMenu">
                                             <rect key="frame" x="0.0" y="0.0" width="124" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" title="Button"/>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="yLt-Z3-dfu" secondAttribute="trailing" id="CEb-Ob-KhT"/>
-                                        <constraint firstItem="WBt-MI-Shm" firstAttribute="leading" secondItem="KrB-hH-dXD" secondAttribute="leading" constant="10" id="KGj-Xv-7Hd"/>
-                                        <constraint firstItem="WBt-MI-Shm" firstAttribute="centerY" secondItem="KrB-hH-dXD" secondAttribute="centerY" id="mKh-3T-pyW"/>
-                                        <constraint firstItem="yLt-Z3-dfu" firstAttribute="leading" secondItem="KrB-hH-dXD" secondAttribute="leading" id="oL4-Qk-2Vu"/>
-                                        <constraint firstItem="yLt-Z3-dfu" firstAttribute="top" secondItem="KrB-hH-dXD" secondAttribute="top" id="rDk-gz-IJW"/>
-                                        <constraint firstAttribute="bottom" secondItem="yLt-Z3-dfu" secondAttribute="bottom" id="wwL-OM-xBt"/>
-                                        <constraint firstAttribute="trailing" secondItem="WBt-MI-Shm" secondAttribute="trailing" constant="10" id="zLP-nO-fXd"/>
-                                    </constraints>
                                 </view>
                             </subviews>
-                            <constraints>
-                                <constraint firstItem="buI-Tv-IiQ" firstAttribute="leading" secondItem="Tnk-va-LaM" secondAttribute="leading" id="4NW-Zq-FNS"/>
-                                <constraint firstItem="KrB-hH-dXD" firstAttribute="leading" secondItem="Tnk-va-LaM" secondAttribute="leading" id="6do-8T-h9i"/>
-                                <constraint firstAttribute="trailing" secondItem="buI-Tv-IiQ" secondAttribute="trailing" id="Aud-4n-iUH"/>
-                                <constraint firstItem="hIx-f2-EV0" firstAttribute="leading" secondItem="Tnk-va-LaM" secondAttribute="leading" id="EJA-o5-bsQ"/>
-                                <constraint firstAttribute="trailing" secondItem="7DA-i8-FQk" secondAttribute="trailing" id="Jv5-BK-2UP"/>
-                                <constraint firstItem="0U5-Kc-uvD" firstAttribute="leading" secondItem="Tnk-va-LaM" secondAttribute="leading" id="K5u-aY-1vd"/>
-                                <constraint firstAttribute="trailing" secondItem="hIx-f2-EV0" secondAttribute="trailing" id="KLW-kI-MAi"/>
-                                <constraint firstAttribute="trailing" secondItem="pDg-BU-x6G" secondAttribute="trailing" id="MAr-fc-Yhq"/>
-                                <constraint firstAttribute="trailing" secondItem="0U5-Kc-uvD" secondAttribute="trailing" id="eJn-Vy-zF2"/>
-                                <constraint firstAttribute="trailing" secondItem="KrB-hH-dXD" secondAttribute="trailing" id="qrb-EO-8u1"/>
-                                <constraint firstItem="7DA-i8-FQk" firstAttribute="leading" secondItem="Tnk-va-LaM" secondAttribute="leading" id="vGh-lw-3mm"/>
-                                <constraint firstItem="pDg-BU-x6G" firstAttribute="leading" secondItem="Tnk-va-LaM" secondAttribute="leading" id="wwL-qQ-NLv"/>
-                            </constraints>
                         </stackView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstItem="Tnk-va-LaM" firstAttribute="leading" secondItem="Fpz-qC-QgG" secondAttribute="leading" id="SDs-CN-pyM"/>
-                        <constraint firstItem="Tnk-va-LaM" firstAttribute="top" secondItem="Fpz-qC-QgG" secondAttribute="top" id="Wa1-bs-pGJ"/>
-                        <constraint firstAttribute="trailing" secondItem="Tnk-va-LaM" secondAttribute="trailing" id="yac-UP-Zf5"/>
-                    </constraints>
                 </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" separatorStyle="none" rowHeight="83" sectionHeaderHeight="22" sectionFooterHeight="22" id="J3J-BO-pYe">
+                    <rect key="frame" x="0.0" y="44" width="205" height="724"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.80000000000000004" green="0.79607843140000001" blue="0.80392156859999997" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="separatorColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="sectionIndexBackgroundColor" red="0.80000000000000004" green="0.79607843140000001" blue="0.80392156859999997" alpha="1" colorSpace="calibratedRGB"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="ach-JI-Vv3"/>
+                        <outlet property="delegate" destination="-1" id="Spw-AL-NKY"/>
+                    </connections>
+                </tableView>
+                <navigationBar contentMode="scaleToFill" id="7AC-tW-2ao">
+                    <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <items>
+                        <navigationItem title="Title" id="wjN-A4-lUf">
+                            <barButtonItem key="rightBarButtonItem" title="Simpan" id="3s5-Dt-dxl"/>
+                        </navigationItem>
+                    </items>
+                </navigationBar>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <constraints>
-                <constraint firstItem="Fpz-qC-QgG" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="FuV-4s-8LR"/>
-                <constraint firstItem="Fpz-qC-QgG" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Gm5-da-N6l"/>
-                <constraint firstItem="DOb-zR-NEV" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="LBC-Mb-c78"/>
-                <constraint firstAttribute="bottom" secondItem="DOb-zR-NEV" secondAttribute="bottom" id="W7z-Q9-ZjE"/>
-                <constraint firstAttribute="trailing" secondItem="DOb-zR-NEV" secondAttribute="trailing" id="XYb-DY-xu8"/>
-                <constraint firstAttribute="bottom" secondItem="Fpz-qC-QgG" secondAttribute="bottom" id="oDg-HS-G3c"/>
-                <constraint firstItem="DOb-zR-NEV" firstAttribute="leading" secondItem="Fpz-qC-QgG" secondAttribute="trailing" id="ot8-f5-TVP"/>
-            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="495" y="278"/>
         </view>
     </objects>
 </document>

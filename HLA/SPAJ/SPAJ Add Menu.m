@@ -17,6 +17,10 @@
 #import "SIListingPopOver.h"
 #import "ModelSIPOData.h"
 #import "ModelSPAJTransaction.h"
+#import "SPAJ Add Detail.h"
+#import "SPAJ Capture Identification.h"
+#import "SPAJ Add Signature.h"
+#import "SPAJ Form Generation.h"
 
 // DECLARATION
 
@@ -39,9 +43,12 @@
 
     @synthesize delegateSPAJMain = _delegateSPAJMain;
     @synthesize stringEAPPNumber;
-
+    @synthesize dictTransaction;
 
     // DID LOAD
+    -(void)viewDidAppear:(BOOL)animated{
+        [self voidLoadSIInformation];
+    }
 
     - (void)viewDidLoad
     {
@@ -101,11 +108,25 @@
     }
 
 
+
+    // VOID
+    -(void)voidLoadSIInformation{
+        NSString *stringSINO = [dictTransaction valueForKey:@"SPAJSINO"];
+        NSDictionary* dictionaryPOData = [[NSDictionary alloc]initWithDictionary:[modelSIPOData getPO_DataFor:stringSINO]];
+        
+        NSString *stringLAName = [dictionaryPOData valueForKey:@"LA_Name"];
+        NSString *stringProduct = [dictionaryPOData valueForKey:@"ProductName"];
+        
+        NSString* stringLabelDetail = [NSString stringWithFormat:@"Nomor SI : %@    Tertanggung Polis : %@    Produk : %@",stringSINO,stringLAName,stringProduct];
+        
+        [_labelDetail1 setText:stringLabelDetail];
+    }
+
     // ACTION
 
     - (IBAction)actionGoToStep1:(UIButton *)sender
     {
-        if (siListingPopOver == nil) {
+        /*if (siListingPopOver == nil) {
             siListingPopOver = [[SIListingPopOver alloc] initWithStyle:UITableViewStylePlain];
             siListingPopOver.delegate = self;
             
@@ -118,7 +139,7 @@
         popController.permittedArrowDirections = UIPopoverArrowDirectionAny;
         popController.sourceRect = sender.bounds;
         popController.sourceView = sender;
-        popController.delegate = self;
+        popController.delegate = self;*/
     };
 
     - (IBAction)actionGoToStep2:(id)sender
@@ -133,22 +154,38 @@
         /*  SPAJAddDetail* viewController = [[SPAJAddDetail alloc] initWithNibName:@"SPAJ Add Detail" bundle:nil];
             [self presentViewController:viewController animated:true completion:nil]; */
         
-        [_delegateSPAJMain voidGoToAddDetail];
+        //[_delegateSPAJMain voidGoToAddDetail];
+        SPAJAddDetail* viewController = [[SPAJAddDetail alloc] initWithNibName:@"SPAJ Add Detail" bundle:nil];
+        //[viewController setStringEAPPNumber:stringGlobalEAPPNumber];
+        [viewController setDictTransaction:dictTransaction];
+        [self.navigationController pushViewController:viewController animated:YES];
     };
 
     - (IBAction)actionGoToStep4:(id)sender
     {
-        [_delegateSPAJMain voidGoToFormGeneration];
+        //[_delegateSPAJMain voidGoToFormGeneration];
+        SPAJFormGeneration* viewController = [[SPAJFormGeneration alloc] initWithNibName:@"SPAJ Form Generation" bundle:nil];
+        //[viewController setStringEAPPNumber:stringGlobalEAPPNumber];
+        //[viewController setDictTransaction:[arraySPAJTransaction objectAtIndex:indexPath.row]];
+        [self.navigationController pushViewController:viewController animated:YES];
     };
 
     - (IBAction)actionGoToStep5:(id)sender
     {
-        [_delegateSPAJMain voidGoToCaptureIdentification];
+        //[_delegateSPAJMain voidGoToCaptureIdentification];
+        SPAJCaptureIdentification* viewController = [[SPAJCaptureIdentification alloc] initWithNibName:@"SPAJ Capture Identification" bundle:nil];
+        //[viewController setStringEAPPNumber:stringGlobalEAPPNumber];
+        //[viewController setDictTransaction:[arraySPAJTransaction objectAtIndex:indexPath.row]];
+        [self.navigationController pushViewController:viewController animated:YES];
     };
 
     - (IBAction)actionGoToStep6:(id)sender
     {
-        [_delegateSPAJMain voidGoToAddSignature];
+        //[_delegateSPAJMain voidGoToAddSignature];
+        SPAJ_Add_Signature* viewController = [[SPAJ_Add_Signature alloc] initWithNibName:@"SPAJ Add Signature" bundle:nil];
+        //[viewController setStringEAPPNumber:stringGlobalEAPPNumber];
+        //[viewController setDictTransaction:[arraySPAJTransaction objectAtIndex:indexPath.row]];
+        [self.navigationController pushViewController:viewController animated:YES];
     };
 
     - (IBAction)actionConfirmAndAssignSPAJNumber:(UIButton *)sender

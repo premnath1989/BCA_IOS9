@@ -753,7 +753,15 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
     NSArray* tableColumn= [[NSArray alloc]initWithObjects:@"CFFID",@"CFFHtmlName",@"CFFHtmlStatus",@"CFFHtmlSection", nil];
     NSDictionary *dictCFFTable = [[NSDictionary alloc]initWithObjectsAndKeys:@"CFFHtml",@"tableName",tableColumn,@"columnName", nil];
     
-    [cffAPIController apiCallHtmlTable:@"http://mposws.azurewebsites.net/Service2.svc/getAllData" JSONKey:arrayJSONKey TableDictionary:dictCFFTable];
+    NSMutableDictionary* dictDuplicateChecker = [[NSMutableDictionary alloc]init];
+    [dictDuplicateChecker setObject:@"CFFHtmlID" forKey:@"DuplicateCheckerColumnName"];
+    [dictDuplicateChecker setObject:@"CFFHtml" forKey:@"DuplicateCheckerTableName"];
+    [dictDuplicateChecker setObject:@"CFFID" forKey:@"DuplicateCheckerWhere1"];
+    [dictDuplicateChecker setObject:@"CFFHtmlName" forKey:@"DuplicateCheckerWhere2"];
+    [dictDuplicateChecker setObject:@"CFFHtmlStatus" forKey:@"DuplicateCheckerWhere3"];
+    [dictDuplicateChecker setObject:@"CFFHtmlSection" forKey:@"DuplicateCheckerWhere4"];
+    
+    [cffAPIController apiCallHtmlTable:@"http://mposws.azurewebsites.net/Service2.svc/getAllData" JSONKey:arrayJSONKey TableDictionary:dictCFFTable DictionaryDuplicateChecker:dictDuplicateChecker WebServiceModule:@"CFF"];
 }
 
 -(void)getCFFHTMLFile{
