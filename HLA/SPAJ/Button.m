@@ -102,6 +102,28 @@
 
     @end
 
+    @implementation ButtonOverlay
+
+        // INITIALIZE
+
+        - (void)awakeFromNib
+        {
+            [self setupStyle];
+        }
+
+
+        // FUNCTION
+
+        - (void)setupStyle
+        {
+            UserInterface *objectUserInterface = [[UserInterface alloc] init];
+            
+            self.backgroundColor = [objectUserInterface generateUIColor:THEME_COLOR_QUINARY floatOpacity:0.0];
+            [self setTitle:@"" forState:UIControlStateNormal];
+        }
+
+    @end
+
     @implementation ButtonConfirmSPAJ
 
         // INITIALIZE

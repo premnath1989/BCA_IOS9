@@ -39,6 +39,12 @@
 
     @end
 
+    @interface ButtonOverlay : UIButton
+
+        - (void)setupStyle;
+
+    @end
+
     @interface ButtonConfirmSPAJ : UIButton
 
         - (void)setupStyle;

@@ -21,9 +21,14 @@
         CGRect imagePickerRect;
         CameraViewController *imagePickerController;
         BOOL cameraFront;
+        
+        //UINAvigation Bar
+        IBOutlet UINavigationBar* barDetail;
     }
 
+    @property (strong, nonatomic) NSDictionary* dictTransaction;
 
+    @property (strong, nonatomic) NSString* stringGlobalEAPPNumber;
     // VIEW
 
     @property (nonatomic, weak) IBOutlet UIView* viewContent;
@@ -34,6 +39,9 @@
     @property (nonatomic, weak) IBOutlet UIView* viewStep4;
     @property (nonatomic, weak) IBOutlet UIView* viewStep5;
     @property (nonatomic, weak) IBOutlet UIView* viewStep6;
+
+    // UITABLEVIEW
+    @property (nonatomic, weak) IBOutlet UITableView* tableSection;
 
     // IMAGEVIEW
     @property (nonatomic, weak) IBOutlet UIImageView* imageViewFront;
@@ -59,7 +67,11 @@
     @property (nonatomic, weak) IBOutlet UILabel* labelStep6;
     @property (nonatomic, weak) IBOutlet UILabel* labelHeader6;
 
+
+
     // BUTTON
+    @property (nonatomic, strong) IBOutlet UIBarButtonItem* rightButton;
+
     @property (nonatomic, weak) IBOutlet UIButton* buttonCaptureFront;
     @property (nonatomic, weak) IBOutlet UIButton* buttonCaptureBack;
 

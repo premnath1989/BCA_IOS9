@@ -614,5 +614,48 @@
     return ProspectTableData;
 }
 
+-(NSMutableArray *)getColumnNames:(NSString *)stringTableName{
+    NSMutableArray *arrayColumnNames = [[NSMutableArray alloc]init];
+    
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    FMResultSet *s;
+    s = [database executeQuery:[NSString stringWithFormat:@"PRAGMA table_info(%@)",stringTableName]];
+    
+    while ([s next]) {
+        //occpToEnableSection = [results stringForColumn:@"OccpCode"];
+        [arrayColumnNames addObject:[s stringForColumn:@"name"]];
+    }
+    [results close];
+    [database close];
+    return arrayColumnNames;
+}
+
+-(NSMutableArray *)getColumnValue:(NSString *)stringProspectID ColumnCount:(int)intColumnCount{
+    NSMutableArray *arrayColumnValue = [[NSMutableArray alloc]init];
+    
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    FMResultSet *s;
+    s = [database executeQuery:[NSString stringWithFormat:@"select * from prospect_profile where IndexNo=%i",[stringProspectID intValue]]];
+    
+    while ([s next]) {
+        //[arrayColumnNames addObject:[s stringForColumn:@"name"]];
+        for (int i=0;i<intColumnCount;i++){
+            [arrayColumnValue addObject:[s stringForColumnIndex:i]?[s stringForColumnIndex:i]:@""];
+            NSLog(@"column %i value %@",i,[s stringForColumnIndex:i]);
+        }
+    }
+    [results close];
+    [database close];
+    return arrayColumnValue;
+}
+
 
 @end
