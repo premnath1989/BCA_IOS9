@@ -21,5 +21,6 @@
 - (void)failedConnectToFTP;
 - (void)percentCompletedfromFTP:(float)percent;
 - (void)downloadCompletedfromFTP;
+- (void)uploadCompletedtoFTP;
 
 @end

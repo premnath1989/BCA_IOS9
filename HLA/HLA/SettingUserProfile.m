@@ -522,7 +522,6 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
                                 });
                             });
                         });
-                        
                     });
                 });
                 [self getHTMLDataTable];

@@ -44,6 +44,7 @@
 - (long long)SPAJBalance;
 - (long long)SPAJUsed;
 - (NSMutableArray *)SPAJRetrievePackID;
+- (long long)getLastActiveSPAJNum;
 
 //SI functions
 - (void) updateSIMaster:(NSString *)SINO EnableEditing:(NSString *)EditFlag;

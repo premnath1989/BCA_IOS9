@@ -12,6 +12,7 @@
 #import "LoginDBManagement.h"
 #import "SPAJTableCell.h"
 #import "SPAJRequestCell.h"
+#import "ProgressBar.h"
 
 @implementation SPAJDisNumber
 
@@ -55,11 +56,11 @@
         if(tableDataSubmission != nil){
             if(tableDataSubmission.count >0){
                 cell.labelDate.text = [[tableDataSubmission objectAtIndex:indexPath.row] valueForKey:@"CreatedDate"];
-                cell.labelName.text = [[tableDataSubmission objectAtIndex:indexPath.row] valueForKey:@"PackID"];
-                cell.labelSINO.text = [[tableDataSubmission objectAtIndex:indexPath.row] valueForKey:@"PackID"];
-                cell.labelSPAJ.text = [[tableDataSubmission objectAtIndex:indexPath.row] valueForKey:@"PackID"];
+                cell.labelName.text = [[tableDataSubmission objectAtIndex:indexPath.row] valueForKey:@"SPAJAllocationBegin"];
+                cell.labelSINO.text = [[tableDataSubmission objectAtIndex:indexPath.row] valueForKey:@"SPAJAllocationBegin"];
+                cell.labelSPAJ.text = [[tableDataSubmission objectAtIndex:indexPath.row] valueForKey:@"SPAJAllocationBegin"];
                 cell.labelStatus.text = [[tableDataSubmission objectAtIndex:indexPath.row] valueForKey:@"PackID"];
-                cell.labelProduk.text = [[tableDataSubmission objectAtIndex:indexPath.row] valueForKey:@"PackID"];
+                cell.labelProduk.text = [[tableDataSubmission objectAtIndex:indexPath.row] valueForKey:@"SPAJAllocationBegin"];
             }
         }
         return cell;
@@ -157,8 +158,46 @@
                     });
                 }
             }] resume];
+}
 
+- (IBAction)btnTestUpload:(id)sender{
+    NSArray * dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *defaultDBPath = [[dirPaths objectAtIndex:0] stringByAppendingPathComponent:@"hladb.sqlite"];
+    NSBundle *myLibraryBundle = [NSBundle bundleWithURL:[[NSBundle mainBundle]
+                                                         URLForResource:@"xibLibrary" withExtension:@"bundle"]];
+    ProgressBar *progressBar = [[ProgressBar alloc]initWithNibName:@"ProgressBar" bundle:myLibraryBundle];
+    progressBar.TitleFileName = [NSString stringWithFormat: @"%@.%@",@"hladb", @"sqlite"];
+    progressBar.progressDelegate = self;
+    progressBar.ftpfolderdestination = @"60000000009";
+    progressBar.ftpfiletoUpload = defaultDBPath;
+    progressBar.ftpFunction = @"upload";
+    progressBar.modalPresentationStyle = UIModalPresentationFormSheet;
+    progressBar.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    progressBar.preferredContentSize = CGSizeMake(600, 200);
+    [self presentViewController:progressBar animated:YES completion:nil];
+}
 
+- (IBAction)btnTestAssign:(id)sender{
+    LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
+
+    NSLog(@"%lld",[loginDB getLastActiveSPAJNum]);
+}
+
+- (void)downloadisFinished{
+}
+
+- (void)percentCompletedfromFTP:(float)percent{
+    //left this blank
+}
+
+- (void)downloadisError{
+    UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Koneksi ke FTP Gagal" message:[NSString stringWithFormat:@"Pastikan perangkat terhubung ke internet yang stabil untuk mengakses FTP"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    [alert show];
+}
+
+- (void)failedConnectToFTP{
+    UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Koneksi ke FTP Gagal" message:[NSString stringWithFormat:@"Pastikan perangkat terhubung ke internet yang stabil untuk mengakses FTP"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    [alert show];
 }
 
 @end
