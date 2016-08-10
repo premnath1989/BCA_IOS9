@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ProductInfoItemsDelegate.h"
+#import "ProgressBarDelegate.h"
 
-@interface SPAJDisNumber : UIViewController<UITableViewDataSource>{
+@interface SPAJDisNumber : UIViewController<UITableViewDataSource, ProductInfoItemsDelegate, ProgressBarDelegate>{
     
     NSMutableArray *tableDataSubmission;
     NSMutableArray *tableDataRequest;
@@ -24,5 +26,7 @@
 
 - (IBAction)btnClose:(id)sender;
 - (IBAction)btnSync:(id)sender;
+- (IBAction)btnTestUpload:(id)sender;
+- (IBAction)btnTestAssign:(id)sender;
 
 @end

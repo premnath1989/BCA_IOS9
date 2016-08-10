@@ -299,6 +299,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <navigationBar contentMode="scaleToFill" id="KPl-Vd-1Ur">
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="0.76470595600000002" green="0.83137261870000001" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                                <items>
+                                    <navigationItem id="bKU-F0-up0">
+                                        <barButtonItem key="leftBarButtonItem" title="Close" id="Xly-1i-G15">
+                                            <connections>
+                                                <action selector="btnClose:" destination="Xma-Uf-txG" id="XeH-1Z-4Bu"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Logout" id="hx4-zM-xzi">
+                                            <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <connections>
+                                                <action selector="btnDone:" destination="Xma-Uf-txG" id="kkv-0n-411"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Data Tenaga Penjual" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0cs-15-4xT">
+                                <rect key="frame" x="279" y="1" width="211" height="43"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="20"/>
+                                <color key="textColor" red="0.34509803919999998" green="0.34901960780000002" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="J6L-bp-dYG">
                                 <rect key="frame" x="0.0" y="44" width="1024" height="724"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -540,43 +567,26 @@
                                         <color key="textColor" red="0.34509803919999998" green="0.34901960780000002" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="po0-0A-NnM">
-                                        <rect key="frame" x="635" y="618" width="46" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="av2-Bz-avD">
+                                        <rect key="frame" x="631" y="610" width="79" height="47"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Button"/>
+                                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="SPAJ #">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="syncSPAJNumber:" destination="Xma-Uf-txG" eventType="touchUpInside" id="llS-uj-ncC"/>
+                                            <action selector="syncSPAJNumber:" destination="Xma-Uf-txG" eventType="touchUpInside" id="kyQ-RP-WPc"/>
                                         </connections>
                                     </button>
                                 </subviews>
                             </scrollView>
-                            <navigationBar contentMode="scaleToFill" id="KPl-Vd-1Ur">
-                                <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" red="0.76470595600000002" green="0.83137261870000001" blue="1" alpha="1" colorSpace="deviceRGB"/>
-                                <items>
-                                    <navigationItem id="bKU-F0-up0">
-                                        <barButtonItem key="leftBarButtonItem" title="Close" id="Xly-1i-G15">
-                                            <connections>
-                                                <action selector="btnClose:" destination="Xma-Uf-txG" id="XeH-1Z-4Bu"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="Logout" id="hx4-zM-xzi">
-                                            <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <connections>
-                                                <action selector="btnDone:" destination="Xma-Uf-txG" id="kkv-0n-411"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Data Tenaga Penjual" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0cs-15-4xT">
-                                <rect key="frame" x="279" y="1" width="211" height="43"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="20"/>
-                                <color key="textColor" red="0.34509803919999998" green="0.34901960780000002" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -585,7 +595,6 @@
                         <outlet property="myScrollView" destination="J6L-bp-dYG" id="fEX-qw-h7n"/>
                         <outlet property="outletChgPassword" destination="SbK-xb-lBO" id="jBz-5z-j5z"/>
                         <outlet property="outletSave" destination="Kjs-eG-Zzm" id="7Ni-VM-kJM"/>
-                        <outlet property="outletSyncSPAJNumber" destination="po0-0A-NnM" id="J20-Bh-a39"/>
                         <outlet property="txtAddress1" destination="68P-fA-IhU" id="4yJ-lR-7JI"/>
                         <outlet property="txtAddress2" destination="SSd-XD-i2F" id="JQW-sv-wGt"/>
                         <outlet property="txtAddress3" destination="B6q-Hw-guN" id="u7p-d7-6u3"/>

@@ -16,6 +16,9 @@
 
 @property (nonatomic, strong) UIProgressView *progressView;
 @property (nonatomic,retain)NSString *TitleFileName;
+@property (nonatomic,retain)NSString *ftpFunction;
+@property (nonatomic,retain)NSString *ftpfiletoUpload;
+@property (nonatomic,retain)NSString *ftpfolderdestination;
 @property float TotalFileSize;
 
 @property (nonatomic, assign) id<ProgressBarDelegate>  progressDelegate;

@@ -8,7 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "BRRequestListDirectory.h"
+#import "BRRequestCreateDirectory.h"
+#import "BRRequestUpload.h"
 #import "BRRequestDownload.h"
+#import "BRRequestDelete.h"
 #import "BRRequest+_UserData.h"
 #import "ProductInfoItemsDelegate.h"
 
@@ -16,12 +19,16 @@
     BRRequestListDirectory *listDir;
     NSMutableData *downloadData;
     BRRequestDownload * downloadFile;
+    NSData *uploadData;
+    BRRequestUpload *uploadFile;
     NSString *fileName;
 }
 
 - (void) listDirectory;
 - (void) downloadFile:(NSString *)fileNameTemp;
 - (void) cancelAction;
+- (void) uploadFile:(NSString *)filePath destinationFolder:(NSString *)destinationFolder
+           fileName:(NSString *)fileNameUpload;
 @property (nonatomic, assign) id<ProductInfoItemsDelegate>  ftpDelegate;
 
 @end

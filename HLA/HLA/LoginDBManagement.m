@@ -492,22 +492,14 @@
         {
             while(sqlite3_step(statement) == SQLITE_ROW)
             {
-                if((const char *) sqlite3_column_text(statement, 2) == NULL){
+                if((const char *) sqlite3_column_text(statement, 2) != NULL){
                     valueStart = [[NSString alloc]
                                   initWithUTF8String:
                                   (const char *) sqlite3_column_text(statement, 0)];
                     valueEnd = [[NSString alloc]
                                 initWithUTF8String:
-                                (const char *) sqlite3_column_text(statement, 1)];
-                    SPAJCount = SPAJCount + ([valueEnd longLongValue]-[valueStart longLongValue]) + 1;
-                }else{
-                    valueStart = [[NSString alloc]
-                                  initWithUTF8String:
-                                  (const char *) sqlite3_column_text(statement, 2)];
-                    valueEnd = [[NSString alloc]
-                                initWithUTF8String:
-                                (const char *) sqlite3_column_text(statement, 1)];
-                    SPAJCount = SPAJCount + ([valueEnd longLongValue]-[valueStart longLongValue]);
+                                (const char *) sqlite3_column_text(statement, 2)];
+                    SPAJCount = SPAJCount + ([valueEnd longLongValue]-[valueStart longLongValue]) + 2;
                 }
             }
         }
@@ -590,7 +582,12 @@
                     valueEnd = [[NSString alloc]
                                 initWithUTF8String:
                                 (const char *) sqlite3_column_text(statement, 1)];
-                    SPAJCount = SPAJCount + ([valueEnd longLongValue]-[valueStart longLongValue]);
+                    if([valueStart caseInsensitiveCompare:valueEnd] == NSOrderedSame){
+                        valueStart = [[NSString alloc]
+                                      initWithUTF8String:
+                                      (const char *) sqlite3_column_text(statement, 0)];
+                    }
+                    SPAJCount = SPAJCount + ([valueEnd longLongValue]-[valueStart longLongValue])+1;
                 }
             }
         }
@@ -633,7 +630,7 @@
                     valueEnd = [[NSString alloc]
                                 initWithUTF8String:
                                 (const char *) sqlite3_column_text(statement, 1)];
-                    SPAJCount = SPAJCount + ([valueEnd longLongValue]-[valueStart longLongValue]);
+                    SPAJCount = SPAJCount + ([valueEnd longLongValue]-[valueStart longLongValue]) - 1;
                 }
             }
         }
@@ -641,6 +638,87 @@
     }
     return SPAJCount;
 }
+
+- (void) updatePackIDStatus:(NSString *)packID status:(NSString *)status
+                   lastused:(NSString *)lastSPAJused{
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+    NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
+    
+    sqlite3_stmt *statement;
+    
+    if (sqlite3_open([databasePath UTF8String], &contactDB) == SQLITE_OK)
+    {
+        NSString *querySQL = [NSString stringWithFormat:@"UPDATE SPAJPackNumber SET LastUsedSPAJNo = \"%@\", STATUS= \"%@\",UpdatedDate=\"%@\" WHERE PACKID=\"%@\"",lastSPAJused,status,dateString,packID];
+        
+       
+        if (sqlite3_exec(contactDB, [querySQL UTF8String], NULL, NULL, NULL) == SQLITE_OK)
+        {
+            NSLog(@"Status update!");
+            
+        } else {
+            NSLog(@"Status update Failed!");
+        }
+        sqlite3_close(contactDB);
+    }
+}
+
+-(long long)getLastActiveSPAJNum{
+    
+    sqlite3_stmt *statement;
+    NSString *valueEnd = @"";
+    NSString *valueCurrent = @"";
+    NSString *valuePackID = @"";
+    NSString *valueStatus = @"";
+    
+    NSString *querySQL = [NSString stringWithFormat: @"SELECT PACKID, SPAJAllocationBegin, SPAJAllocationEnd, LastUsedSPAJNo FROM SPAJPackNumber WHERE Status='ACTIVE' order by rowid LIMIT 1"];
+    NSLog(@"%@",querySQL);
+    
+    if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
+    {
+        int rc = sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL);
+        
+        if (rc==SQLITE_OK)
+        {
+            while(sqlite3_step(statement) == SQLITE_ROW)
+            {
+                if((const char *) sqlite3_column_text(statement, 3) != NULL){
+                    valuePackID = [[NSString alloc]
+                                initWithUTF8String:
+                                (const char *) sqlite3_column_text(statement, 0)];
+                    valueEnd = [[NSString alloc]
+                                initWithUTF8String:
+                                (const char *) sqlite3_column_text(statement, 2)];
+                    valueCurrent = [[NSString alloc]
+                                initWithUTF8String:
+                                (const char *) sqlite3_column_text(statement, 3)];
+                    valueCurrent = [NSString stringWithFormat:@"%lld",[valueCurrent longLongValue] + 1];
+                    if([valueCurrent caseInsensitiveCompare:valueEnd] == NSOrderedSame){
+                        valueStatus = @"NONACTIVE";
+                    }else{
+                        valueStatus = @"ACTIVE";
+                    }
+                }else{
+                    valuePackID = [[NSString alloc]
+                                   initWithUTF8String:
+                                   (const char *) sqlite3_column_text(statement, 0)];
+                    valueCurrent = [[NSString alloc]
+                                    initWithUTF8String:
+                                    (const char *) sqlite3_column_text(statement, 1)];
+                    valueStatus = @"ACTIVE";
+                   
+                }
+            }
+        }
+        sqlite3_finalize(statement);
+        sqlite3_close(contactDB);
+        
+        [self updatePackIDStatus:valuePackID status:valueStatus lastused:valueCurrent];
+    }
+    return [valueCurrent longLongValue];
+}
+
 
 
 -(NSString *)RiderCode:(NSString *)SINo riderCode:(NSString *)code{
