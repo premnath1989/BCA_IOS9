@@ -67,11 +67,6 @@
         [super viewDidLoad];
         // Do any additional setup after loading the view, typically from a nib.
         
-        [self.navigationController.navigationBar setTitleTextAttributes:
-         @{NSForegroundColorAttributeName:[UIColor colorWithRed:88.0f/255.0f green:89.0f/255.0f blue:92.0f/255.0f alpha:1],NSFontAttributeName: [UIFont fontWithName:@"BPreplay" size:17.0f]}];
-        [self voidCreateRightBarButton];
-
-        
         // INITIALIZATION
         modelSPAJTransaction = [[ModelSPAJTransaction alloc]init];
         modelSPAJSignature = [[ModelSPAJSignature alloc]init];
@@ -82,6 +77,8 @@
         _functionUserInterface = [[UserInterface alloc] init];
         _functionAlert = [[Alert alloc] init];
         
+        [self setNavigationBar];
+        [self voidCreateRightBarButton];
         
         // LAYOUT SETTING
         
@@ -121,6 +118,16 @@
         sortMethod=@"DESC";
         
         [self loadSPAJTransaction];
+    }
+
+    -(void)setNavigationBar{
+        [self.navigationItem setTitle:@"eApplication Listing"];
+        [self.navigationController.navigationBar setTitleTextAttributes:
+         @{NSForegroundColorAttributeName:[formatter navigationBarTitleColor],NSFontAttributeName: [formatter navigationBarTitleFont]}];
+    }
+
+    -(void)setElementColor {
+
     }
 
     -(void)voidCreateRightBarButton{

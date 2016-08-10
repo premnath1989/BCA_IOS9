@@ -1,0 +1,378 @@
+/* @charset "utf-8"; */
+/* CSS Document */
+/* @charset "utf-8"; */
+/* CSS Document */
+/* @charset "utf-8"; */
+/* CSS Document */
+/* FUNCTION */
+/* ANIMATION */
+/* HEADER */
+/* FORM */
+/* NOTE */
+/* SIGNATURE */
+/* FOOTER */
+/* GENERAL */
+/* ICON */
+/* LAYOUT */
+/* FORM INITIALIZATION */
+/* LABEL */
+/* BOX */
+/* TABLE INITIALIZATION */
+/* TABLE */
+/* RESOURCE */
+/* TYPEFACE */
+/* HEADER */
+header h1 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 1.6em;
+}
+
+/* FORM */
+main section h2 {
+  margin-bottom: 15px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  font-size: 1em;
+  text-align: center;
+  vertical-align: midde;
+}
+
+main section h3 {
+  margin-bottom: 10px;
+  padding-top: 2px;
+  padding-right: 5px;
+  padding-left: 5px;
+  padding-bottom: 2px;
+  font-size: 1em;
+  vertical-align: middle;
+  display: inline-block;
+  border-radius: 4px;
+  -ms-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+
+main section label {
+  font-size: 0.75em;
+  vertical-align: top;
+}
+
+main section label:after {
+  float: right;
+  display: inline-block;
+  margin-right: 5px;
+  content: ' : ';
+}
+
+main section label.RadioButton {
+  padding: 5px;
+  vertical-align: middle;
+}
+
+main section label.RadioButton.Short {
+  width: 75px;
+}
+
+main section label.RadioButton:after {
+  content: '';
+}
+
+main section label.RadioButton.Medium {
+  width: 105px;
+}
+
+main section label.Wrap, main section span.Wrap {
+  margin-right: 5px;
+  width: auto;
+}
+
+main section label.Short, main section span.Short {
+  width: 75px;
+}
+
+main section label.Medium, main section span.Medium {
+  width: 154px;
+}
+
+main section label.Long, main section span.Long {
+  width: 210px;
+}
+
+main section label.FirstIndent {
+  margin-left: 15px;
+}
+
+main section label.SecondIndent {
+  margin-left: 30px;
+}
+
+main section label.Short.FirstIndent {
+  width: 60px;
+}
+
+main section label.Medium.FirstIndent {
+  width: 139px;
+}
+
+main section label.Long.FirstIndent {
+  width: 195px;
+}
+
+main section label.Short.SecondIndent {
+  width: 45px;
+}
+
+main section label.Medium.SecondIndent {
+  width: 124px;
+}
+
+main section label.Long.SecondIndent {
+  width: 180px;
+}
+
+main section label.Single {
+  height: 20px;
+  line-height: 20px;
+}
+
+main section label.Multi {
+  min-height: 60px;
+  vertical-align: top;
+}
+
+main section label.Box, main section label.Separator {
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+main section label.Separator:after, main section label.Description:after, main section label.Note:after {
+  margin-right: 0px;
+  content: '';
+}
+
+main section span.Separator {
+  padding: 5px;
+  font-size: 0.75em;
+}
+
+main section span.Description, main section label.Description {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-size: 0.7em;
+}
+
+main section span.Note, main section label.Note {
+  margin: 0px;
+  padding: 5px;
+  font-size: 0.4em;
+  border: none;
+}
+
+main section table.BoxSquare {
+  border-collapse: collapse;
+  font-size: 0.75em;
+}
+
+main section table.BoxSquare tbody tr td {
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  vertical-align: middle;
+  border-style: solid;
+  border-width: 1px;
+}
+
+main section table.BoxSquare tfoot tr td {
+  text-align: center;
+  vertical-align: middle;
+  border-style: none;
+}
+
+main section .LineDot, main section .LineStraight {
+  margin-right: 5px;
+  height: 20px;
+}
+
+main section .LineDot {
+  border-top-style: none;
+  border-right-style: none;
+  border-left-style: none;
+  border-bottom-style: dotted;
+  border-bottom-width: 1px;
+}
+
+main section .LineStraight {
+  border-top-style: none;
+  border-right-style: none;
+  border-left-style: none;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+}
+
+main section .BoxRound {
+  width: 20px;
+  height: 20px;
+  font-size: 0.75em;
+  text-align: center;
+  vertical-align: middle;
+  border-style: solid;
+  border-width: 1px;
+  display: inline-block;
+  border-radius: 4px;
+  -ms-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+
+main section p {
+  font-size: 0.75em;
+}
+
+main section ol, main section ul {
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-left: 15px;
+  margin-bottom: 0px;
+  padding: 0px;
+  font-size: 0.75em;
+}
+
+main section ol li, main section ul li {
+  margin-bottom: 5px;
+}
+
+main section ol li ol li, main section ol li ul li, main section ul li ol li, main section ul li ul li {
+  font-size: 1.3;
+}
+
+main section .Note {
+  text-align: left;
+}
+
+main section .Note h3 {
+  margin-bottom: 10px;
+  padding: 0px;
+  font-size: 0.7em;
+}
+
+main section .Note p {
+  font-size: 0.7em;
+}
+
+main section .Note ol, main section .Note ul {
+  font-size: 0.7em;
+}
+
+main section .Note ol li, main section .Note ul li {
+  margin-bottom: 5px;
+}
+
+main section table.SignatureSmall {
+  width: 144px;
+  padding: 0px;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 4px;
+  -ms-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+
+main section table.SignatureSmall thead tr th {
+  padding: 2px;
+  font-size: 0.6em;
+  text-align: center;
+  border-bottom-style: solid;
+  border-width: 1px;
+}
+
+main section table.SignatureSmall tbody tr td {
+  height: 48px;
+}
+
+main section table.SignatureSmall tfoot tr td {
+  font-size: 0.5em;
+  text-align: center;
+}
+
+main section table.SignatureMedium {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  min-width: 144px;
+  padding: 0px;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 4px;
+  -ms-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+
+main section table.SignatureMedium thead tr th {
+  padding: 2px;
+  font-size: 0.75em;
+  text-align: center;
+  border-bottom-style: solid;
+  border-width: 1px;
+}
+
+main section table.SignatureMedium tbody tr td {
+  height: 72px;
+}
+
+main section table.SignatureMedium tfoot tr td {
+  font-size: 0.75em;
+  text-align: center;
+}
+
+/* TABLE */
+table.Square, table.Round, table.Space {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+table.Square {
+  border-style: solid;
+  border-width: 1px;
+}
+
+table.Square thead tr th {
+  border-style: solid;
+  border-width: 1px;
+}
+
+table.Square tbody tr td {
+  border-top-style: none;
+  border-right-style: solid;
+  border-left-style: solid;
+  border-bottom-style: none;
+  border-width: 1px;
+}
+
+table.Round {
+  border-radius: 4px;
+  -ms-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+
+table.Round thead tr th {
+  border-style: solid;
+  border-width: 1px;
+}
+
+table.Round tbody tr td {
+  border-style: solid;
+  border-width: 1px;
+}
+
+table.Space thead tr th {
+  border-style: solid;
+  border-width: 1px;
+}
+
+table.Space tbody tr td {
+  border-style: solid;
+  border-width: 1px;
+}

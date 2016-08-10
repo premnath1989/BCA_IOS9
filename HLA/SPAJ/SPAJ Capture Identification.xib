@@ -121,6 +121,9 @@
                             <rect key="frame" x="633" y="381" width="117" height="34"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="View"/>
+                            <connections>
+                                <action selector="actionViewPhoto:" destination="-1" eventType="touchUpInside" id="aGE-N2-vBT"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="D1G-MS-cFn">
                             <rect key="frame" x="8" y="8" width="743" height="29"/>

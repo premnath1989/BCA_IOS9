@@ -261,7 +261,7 @@
     }
 }
 
-#pragma mark delegate
+
 -(void)voidSetAnalisaKebutuhanProteksiBoolValidate:(BOOL)boolValidate{
     [self actionChangeTabPage:buttonPensiun];
     segmentPage4.selectedSegmentIndex = 1;

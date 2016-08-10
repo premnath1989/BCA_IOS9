@@ -50,5 +50,30 @@
     [database close];
 }
 
+-(bool)voidSignatureCaptured:(int)intTransactionSPAJID{
+    int signatureCaptured = 0;
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select count (*) as SignatureCaptured from SPAJSignature where SPAJTransactionID=%i and SPAJSignatureParty1=1 and SPAJSignatureParty2=1 and SPAJSignatureParty3=1 and SPAJSignatureParty4=1",intTransactionSPAJID]];
+    
+    while ([s next]) {
+        signatureCaptured = [s intForColumn:@"SignatureCaptured"];
+    }
+    
+    [results close];
+    [database close];
+    if (signatureCaptured>0){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+
 
 @end

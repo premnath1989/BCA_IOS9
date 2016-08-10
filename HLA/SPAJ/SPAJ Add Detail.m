@@ -20,10 +20,11 @@
 #import "SIMenuTableViewCell.h"
 #import "Theme.h"
 #import "User Interface.h"
+#import "Formatter.h"
 
 // DECLARATION
 
-@interface SPAJAddDetail ()<SPAJCalonPemegangPolisDelegate,SPAJCalonTertanggungDelegate>
+@interface SPAJAddDetail ()<SPAJCalonPemegangPolisDelegate,SPAJCalonTertanggungDelegate,SPAJPerusahaanDelegate,SPAJCalonPenerimaManfaatDelegate,SPAJPembayaranPremiDelegate>
 
 
 
@@ -33,20 +34,29 @@
 // IMPLEMENTATION
 
 @implementation SPAJAddDetail{
+    UIBarButtonItem* rightButton;
+    
     SPAJ_Calon_Pemegang_Polis* spajCalonPemegangPolis;
     SPAJ_Calon_Tertanggung* spajCalonTertanggung;
     SPAJ_Perusahaan* spajPerusahaan;
     SPAJ_Calon_Penerima_Manfaat* spajCalonPenerimaManfaat;
     SPAJ_Pembayaran_Premi* spajPembayaranPremi;
-    
+    Formatter *formatter;
     UserInterface *objectUserInterface;
     
     ModelSPAJHtml *modelSPAJHtml;
 
     NSMutableArray *NumberListOfSubMenu;
     NSMutableArray *ListOfSubMenu;
+    
+    BOOL boolPemegangPolis;
+    BOOL boolTertanggung;
+    BOOL boolPerusahaan;
+    BOOL boolPenerimaManfaat;
+    BOOL boolPembayaranPremi;
+    BOOL boolKesehatan;
 }
-@synthesize buttonCaptureBack,buttonCaptureFront,rightButton;
+@synthesize buttonCaptureBack,buttonCaptureFront;
 @synthesize imageViewFront,imageViewBack;
 @synthesize stringGlobalEAPPNumber;
 @synthesize dictTransaction;
@@ -66,6 +76,9 @@
         
         //INITIALIZATION
         objectUserInterface = [[UserInterface alloc] init];
+        formatter = [[Formatter alloc]init];
+        
+        [self setNavigationBar];
         
         spajCalonPemegangPolis = [[SPAJ_Calon_Pemegang_Polis alloc]initWithNibName:@"SPAJ Calon Pemegang Polis" bundle:nil];
         [spajCalonPemegangPolis setDelegate:self];
@@ -74,10 +87,13 @@
         [spajCalonTertanggung setDelegate:self];
         
         spajPerusahaan = [[SPAJ_Perusahaan alloc]initWithNibName:@"SPAJ Perusahaan" bundle:nil];
+        [spajPerusahaan setDelegate:self];
         
         spajCalonPenerimaManfaat = [[SPAJ_Calon_Penerima_Manfaat alloc]initWithNibName:@"SPAJ Calon Penerima Manfaat" bundle:nil];
+        [spajCalonPenerimaManfaat setDelegate:self];
         
         spajPembayaranPremi = [[SPAJ_Pembayaran_Premi alloc]initWithNibName:@"SPAJ Pembayaran Premi" bundle:nil];
+        [spajPembayaranPremi setDelegate:self];
         
         modelSPAJHtml = [[ModelSPAJHtml alloc]init];
         
@@ -105,25 +121,43 @@
         NumberListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"1", @"2", @"3", @"4",@"5",@"6", nil];
         ListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"Calon Pemegang Polis", @"Calon Tertanggung", @"Perusahaan / Berbadan Hukum", @"Calon Penerima Manfaat",@"Pembayaran Premi", @"Kesehatan", nil];
         
-    
+        boolPemegangPolis = true;
+        boolTertanggung = false;
+        boolPerusahaan = false;
+        boolPenerimaManfaat = false;
+        boolPembayaranPremi = false;
+        boolKesehatan = false;
+        
+        [self voidCreateRightBarButton];
     }
 
+    -(void)setNavigationBar{
+        [self.navigationItem setTitle:@"Data Calon Pemegang Polis"];
+        [self.navigationController.navigationBar setTitleTextAttributes:
+         @{NSForegroundColorAttributeName:[formatter navigationBarTitleColor],NSFontAttributeName: [formatter navigationBarTitleFont]}];
+    }
+
+    -(void)voidCreateRightBarButton{
+        rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Simpan" style:UIBarButtonItemStylePlain target:self
+                                                      action:@selector(actionRightBarButtonPressed:)];
+        self.navigationItem.rightBarButtonItem = rightButton;
+    }
 
     -(IBAction)actionRightBarButtonPressed:(UIBarButtonItem *)sender{
         if ([[spajCalonPemegangPolis.view.superview.subviews lastObject] isEqual: spajCalonPemegangPolis.view]){
-            NSLog(@"bisa ");
+            
         }
         else if ([[spajCalonTertanggung.view.superview.subviews lastObject] isEqual: spajCalonTertanggung.view]){
-            NSLog(@"bisa ");
+            
         }
         else if ([[spajPerusahaan.view.superview.subviews lastObject] isEqual: spajPerusahaan.view]){
-            NSLog(@"bisa ");
+            
         }
         else if ([[spajCalonPenerimaManfaat.view.superview.subviews lastObject] isEqual: spajCalonPenerimaManfaat.view]){
-            NSLog(@"bisa ");
+            
         }
         else if ([[spajPembayaranPremi.view.superview.subviews lastObject] isEqual: spajPembayaranPremi.view]){
-            NSLog(@"bisa ");
+            
             //[pernyataanNasabahVC voidDoneCFFData];
         }
     }
@@ -422,20 +456,47 @@
         [cell.labelDesc setText:[ListOfSubMenu objectAtIndex:indexPath.row]];
         [cell.labelWide setText:@""];
         
-        /*if (boolDataNasabah){
+        if (boolPemegangPolis){
             if (indexPath.row == 0){
-                [cell setBackgroundColor:selectedColor];
+                [cell setUserInteractionEnabled:true];
+                [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
             }
             else{
                 
             }
         }
-        if (boolAreaPotensial){
-            if (indexPath.row == 1){
-                [cell setBackgroundColor:selectedColor];
+        else{
+            if (indexPath.row == 0){
+                [cell setUserInteractionEnabled:false];
             }
-            else if (indexPath.row == 2){
+            else{
+                
+            }
+        }
+        
+        
+        if (boolTertanggung){
+            if (indexPath.row == 1){
                 [cell setUserInteractionEnabled:true];
+                [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
+            }
+            else{
+                
+            }
+        }
+        else{
+            if (indexPath.row == 1){
+                [cell setUserInteractionEnabled:false];
+            }
+            else{
+                
+            }
+        }
+        
+        if (boolPerusahaan){
+            if (indexPath.row == 2){
+                [cell setUserInteractionEnabled:true];
+                [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
             }
             else{
                 
@@ -450,26 +511,28 @@
             }
         }
         
-        if (boolProfileRisk){
-            if (indexPath.row == 2){
-                [cell setBackgroundColor:selectedColor];
-            }
-            else{
-                
-            }
-        }
-        if (boolAnalisaKebutuhanNasabah){
+        if (boolPenerimaManfaat){
             if (indexPath.row == 3){
-                [cell setBackgroundColor:selectedColor];
+                [cell setUserInteractionEnabled:true];
+                [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
             }
             else{
                 
             }
         }
-        if (boolPernyataanNasabah){
+        else{
+            if (indexPath.row == 3){
+                [cell setUserInteractionEnabled:false];
+            }
+            else{
+                
+            }
+        }
+        
+        if (boolPembayaranPremi){
             if (indexPath.row == 4){
-                //[cell setBackgroundColor:selectedColor];
                 [cell setUserInteractionEnabled:true];
+                [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
             }
             else{
                 
@@ -482,7 +545,25 @@
             else{
                 
             }
-        }*/
+        }
+        
+        if (boolKesehatan){
+            if (indexPath.row == 5){
+                [cell setUserInteractionEnabled:true];
+                [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
+            }
+            else{
+                
+            }
+        }
+        else{
+            if (indexPath.row == 5){
+                [cell setUserInteractionEnabled:false];
+            }
+            else{
+                
+            }
+        }
         
         [cell.button1 setEnabled:false];
         [cell.button2 setEnabled:false];
@@ -535,6 +616,51 @@
     -(NSString *)voidGetEAPPNumber{
         //return stringGlobalEAPPNumber;
         return [dictTransaction valueForKey:@"SPAJEappNumber"];
+    }
+
+    -(void)voidSetCalonPemegangPolisBoolValidate:(BOOL)boolValidate{
+        boolTertanggung = true;
+        [self.navigationItem setTitle:@"Data Calon Tertanggung"];
+        NSIndexPath* indexPathSelect = [NSIndexPath indexPathForRow:1 inSection:0];
+        [self showDetailsForIndexPath:indexPathSelect];
+        [_tableSection reloadData];
+        [_tableSection selectRowAtIndexPath:indexPathSelect animated:YES scrollPosition:UITableViewScrollPositionTop];
+    }
+
+    -(void)voidSetCalonTertnggungBoolValidate:(BOOL)boolValidate{
+        boolPerusahaan = true;
+        [self.navigationItem setTitle:@"Data Perusahaan / Badan Hukum"];
+        NSIndexPath* indexPathSelect = [NSIndexPath indexPathForRow:2 inSection:0];
+        [self showDetailsForIndexPath:indexPathSelect];
+        [_tableSection reloadData];
+        [_tableSection selectRowAtIndexPath:indexPathSelect animated:YES scrollPosition:UITableViewScrollPositionTop];
+    }
+
+    -(void)voidSetPerusahaanBoolValidate:(BOOL)boolValidate{
+        boolPenerimaManfaat = true;
+        [self.navigationItem setTitle:@"Data Calon Penerima Manfaat"];
+        NSIndexPath* indexPathSelect = [NSIndexPath indexPathForRow:3 inSection:0];
+        [self showDetailsForIndexPath:indexPathSelect];
+        [_tableSection reloadData];
+        [_tableSection selectRowAtIndexPath:indexPathSelect animated:YES scrollPosition:UITableViewScrollPositionTop];
+    }
+
+    -(void)voidSetPenerimaManfaatBoolValidate:(BOOL)boolValidate{
+        boolPembayaranPremi = true;
+        [self.navigationItem setTitle:@"Data Pembayaran Premi"];
+        NSIndexPath* indexPathSelect = [NSIndexPath indexPathForRow:4 inSection:0];
+        [self showDetailsForIndexPath:indexPathSelect];
+        [_tableSection reloadData];
+        [_tableSection selectRowAtIndexPath:indexPathSelect animated:YES scrollPosition:UITableViewScrollPositionTop];
+    }
+
+    -(void)voidSetPembayaranPremiBoolValidate:(BOOL)boolValidate{
+        boolKesehatan = true;
+        [self.navigationItem setTitle:@"Data Kesehatan"];
+        NSIndexPath* indexPathSelect = [NSIndexPath indexPathForRow:5 inSection:0];
+        [self showDetailsForIndexPath:indexPathSelect];
+        [_tableSection reloadData];
+        [_tableSection selectRowAtIndexPath:indexPathSelect animated:YES scrollPosition:UITableViewScrollPositionTop];
     }
 #pragma mark delegate image picker
     - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info

@@ -15,7 +15,8 @@
 #import "ModelSIPOData.h"
 
 @protocol SPAJCalonTertanggungDelegate
--(NSString *)voidGetEAPPNumber;
+    -(NSString *)voidGetEAPPNumber;
+    -(void)voidSetCalonTertnggungBoolValidate:(BOOL)boolValidate;
 @end
 
 @interface SPAJ_Calon_Tertanggung : HtmlGenerator{

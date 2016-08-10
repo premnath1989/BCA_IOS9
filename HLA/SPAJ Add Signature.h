@@ -16,4 +16,5 @@
 // PROTOCOL
 
 @property (nonatomic,strong) id <SPAJAddSignatureDelegate> SPAJAddSignatureDelegate;
+@property (strong, nonatomic) NSDictionary* dictTransaction;
 @end

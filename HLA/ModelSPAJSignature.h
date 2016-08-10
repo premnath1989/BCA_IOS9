@@ -15,4 +15,5 @@
 }
 -(void)saveSPAJSignature:(NSDictionary *)spajSignatureDictionary;
 -(void)updateSPAJSignature:(NSString *)setString;
+-(bool)voidSignatureCaptured:(int)intTransactionSPAJID;
 @end

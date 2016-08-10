@@ -89,7 +89,7 @@
     [finalDictionary setValue:[params valueForKey:@"successCallBack"] forKey:@"successCallBack"];
     [finalDictionary setValue:[params valueForKey:@"errorCallback"] forKey:@"errorCallback"];
     [super savetoDB:finalDictionary];
-    //[delegate voidSetAreaPotentialBoolValidate:true];
+    [delegate voidSetPembayaranPremiBoolValidate:true];
 }
 
 - (NSMutableDictionary*)readfromDB:(NSMutableDictionary*) params{

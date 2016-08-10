@@ -25,4 +25,7 @@
 -(int)getRandomNumberBetween:(int)minValue MaxValue:(int)maxValue;
 
 - (void)createDirectory:(NSString *)documentRootDirectory;
+
+-(UIColor *)navigationBarTitleColor;
+-(UIFont *)navigationBarTitleFont;
 @end

@@ -337,4 +337,12 @@
     return newString;
 }*/
 
+-(UIColor *)navigationBarTitleColor
+{
+    return [UIColor colorWithRed:88.0f/255.0f green:89.0f/255.0f blue:92.0f/255.0f alpha:1];
+}
+
+-(UIFont *)navigationBarTitleFont {
+    return [UIFont fontWithName:@"BPreplay" size:17.0f];
+}
 @end
