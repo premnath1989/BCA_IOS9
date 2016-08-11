@@ -155,26 +155,40 @@
                     
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self viewDidLoad];
+                        UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Success" message:[NSString stringWithFormat:@"SPAJ Number telah di terima."] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                        [alert show];
                     });
                 }
             }] resume];
 }
 
 - (IBAction)btnTestUpload:(id)sender{
-    NSArray * dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *defaultDBPath = [[dirPaths objectAtIndex:0] stringByAppendingPathComponent:@"hladb.sqlite"];
-    NSBundle *myLibraryBundle = [NSBundle bundleWithURL:[[NSBundle mainBundle]
-                                                         URLForResource:@"xibLibrary" withExtension:@"bundle"]];
-    ProgressBar *progressBar = [[ProgressBar alloc]initWithNibName:@"ProgressBar" bundle:myLibraryBundle];
-    progressBar.TitleFileName = [NSString stringWithFormat: @"%@.%@",@"hladb", @"sqlite"];
-    progressBar.progressDelegate = self;
-    progressBar.ftpfolderdestination = @"60000000009";
-    progressBar.ftpfiletoUpload = defaultDBPath;
-    progressBar.ftpFunction = @"upload";
-    progressBar.modalPresentationStyle = UIModalPresentationFormSheet;
-    progressBar.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    progressBar.preferredContentSize = CGSizeMake(600, 200);
-    [self presentViewController:progressBar animated:YES completion:nil];
+    
+    NSURLSession *session = [NSURLSession sharedSession];
+    [[session dataTaskWithURL:[NSURL URLWithString:@"http://mposws.azurewebsites.net/Service2.svc/CreateRemoteFtpFolder?spajNumber=60000000009"]
+            completionHandler:^(NSData *data,
+                                NSURLResponse *response,
+                                NSError *error) {
+                // handle response
+                if(data != nil){
+                    NSArray * dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+                    NSString *defaultDBPath = [[dirPaths objectAtIndex:0] stringByAppendingPathComponent:@"hladb.sqlite"];
+                    NSBundle *myLibraryBundle = [NSBundle bundleWithURL:[[NSBundle mainBundle]
+                                                                         URLForResource:@"xibLibrary" withExtension:@"bundle"]];
+                    ProgressBar *progressBar = [[ProgressBar alloc]initWithNibName:@"ProgressBar" bundle:myLibraryBundle];
+                    progressBar.TitleFileName = [NSString stringWithFormat: @"%@.%@",@"hladb", @"sqlite"];
+                    progressBar.progressDelegate = self;
+                    progressBar.ftpfolderdestination = @"60000000009";
+                    progressBar.ftpfiletoUpload = defaultDBPath;
+                    progressBar.ftpFunction = @"upload";
+                    progressBar.modalPresentationStyle = UIModalPresentationFormSheet;
+                    progressBar.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+                    progressBar.preferredContentSize = CGSizeMake(600, 200);
+                    [self presentViewController:progressBar animated:YES completion:nil];
+                }
+            }] resume];
+    
+   
 }
 
 - (IBAction)btnTestAssign:(id)sender{
@@ -184,6 +198,25 @@
 }
 
 - (void)downloadisFinished{
+    NSString *urlStr = @"http://mposws.azurewebsites.net/Service2.svc/UpdateOnPostUploadData?spajNumber=60000000001&producName=Heritage Product&polisOwner=Johan Regar";
+    urlStr = [urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    
+    NSURLSession *session = [NSURLSession sharedSession];
+    [[session dataTaskWithURL:[NSURL URLWithString:urlStr]
+            completionHandler:^(NSData *data,
+                                NSURLResponse *response,
+                                NSError *error) {
+                // handle response
+                if(data != nil){
+                    NSMutableDictionary* json = [NSJSONSerialization
+                                                 JSONObjectWithData:data //1
+                                                 options:NSJSONReadingMutableContainers
+                                                 error:&error];
+                    NSLog(@"%@", json);
+                    
+                }
+            }] resume];
+
 }
 
 - (void)percentCompletedfromFTP:(float)percent{

@@ -518,7 +518,7 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
                                 dispatch_async(dispatch_get_main_queue(), ^{
                                     //we update the referral data serially
                                     WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
-                                    //[webservice dataReferralSync:[loginDB getLastUpdateReferral] delegate:self];
+                                    [webservice dataReferralSync:[loginDB getLastUpdateReferral] delegate:self];
                                 });
                             });
                         });
