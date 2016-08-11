@@ -13,7 +13,8 @@
 #import "ModelSPAJAnswers.h"
 
 @protocol SPAJCalonPenerimaManfaatDelegate
--(NSString *)voidGetEAPPNumber;
+    -(NSString *)voidGetEAPPNumber;
+    -(void)voidSetPenerimaManfaatBoolValidate:(BOOL)boolValidate;
 @end
 
 @interface SPAJ_Calon_Penerima_Manfaat : HtmlGenerator{

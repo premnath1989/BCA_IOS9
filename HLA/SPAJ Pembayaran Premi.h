@@ -14,6 +14,7 @@
 
 @protocol SPAJPembayaranPremiDelegate
     -(NSString *)voidGetEAPPNumber;
+    -(void)voidSetPembayaranPremiBoolValidate:(BOOL)boolValidate;
 @end
 
 @interface SPAJ_Pembayaran_Premi : HtmlGenerator{

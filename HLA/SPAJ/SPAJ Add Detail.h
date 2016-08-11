@@ -23,7 +23,7 @@
         BOOL cameraFront;
         
         //UINAvigation Bar
-        IBOutlet UINavigationBar* barDetail;
+        //IBOutlet UINavigationBar* barDetail;
     }
 
     @property (strong, nonatomic) NSDictionary* dictTransaction;
@@ -70,7 +70,7 @@
 
 
     // BUTTON
-    @property (nonatomic, strong) IBOutlet UIBarButtonItem* rightButton;
+    //@property (nonatomic, strong) IBOutlet UIBarButtonItem* rightButton;
 
     @property (nonatomic, weak) IBOutlet UIButton* buttonCaptureFront;
     @property (nonatomic, weak) IBOutlet UIButton* buttonCaptureBack;

@@ -69,6 +69,9 @@
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lnZ-K4-H9p" customClass="ButtonGuideMenu">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="30"/>
                                     <state key="normal" title="Button"/>
+                                    <connections>
+                                        <action selector="actionGoToStep1:" destination="-1" eventType="touchUpInside" id="Su1-nX-8mb"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -105,6 +108,9 @@
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iXD-ZI-9GH" customClass="ButtonGuideMenu">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="30"/>
                                     <state key="normal" title="Button"/>
+                                    <connections>
+                                        <action selector="actionGoToStep2:" destination="-1" eventType="touchUpInside" id="7nG-b5-ghl"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -143,6 +149,9 @@
                                     <state key="normal" title="Button">
                                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="actionGoToStep3:" destination="-1" eventType="touchUpInside" id="1z3-UW-724"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

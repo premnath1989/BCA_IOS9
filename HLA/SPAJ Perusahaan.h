@@ -13,7 +13,8 @@
 #import "ModelSPAJAnswers.h"
 
 @protocol SPAJPerusahaanDelegate
--(NSString *)voidGetEAPPNumber;
+    -(NSString *)voidGetEAPPNumber;
+    -(void)voidSetPerusahaanBoolValidate:(BOOL)boolValidate;
 @end
 
 @interface SPAJ_Perusahaan : HtmlGenerator{

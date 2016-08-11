@@ -52,6 +52,10 @@
     @property (nonatomic, weak) IBOutlet UILabel *labelTableEApp;
     @property (nonatomic, weak) IBOutlet UILabel *labelTableState;
 
+    // UIView
+
+    @property (nonatomic, weak) IBOutlet UIView *viewTableHeader;
+
     // TEXTFIELD
 
     @property (nonatomic, weak) IBOutlet UITextField *textFieldName;

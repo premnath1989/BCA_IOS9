@@ -62,6 +62,7 @@
 }
 
 @synthesize SPAJAddSignatureDelegate;
+@synthesize dictTransaction;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -69,6 +70,8 @@
     modelSPAJTransaction = [[ModelSPAJTransaction alloc]init];
     modelSIPOData = [[ModelSIPOData alloc]init];
     modelSPAJSignature = [[ModelSPAJSignature alloc]init];
+    
+    [self setNavigationBar];
     
     viewBorder.layer.borderWidth=1.0;
     viewBorder.layer.borderColor=[UIColor blackColor].CGColor;
@@ -81,16 +84,31 @@
     boolTenagaPenjual = false;
     
     [self initializeBooleanBasedOnTheRule];
+    [self voidCheckBooleanLastState];
     // Do any additional setup after loading the view from its nib.
 }
 
+-(void)setNavigationBar{
+    [self.navigationItem setTitle:@"To Obtain e-Signatures From Respective Parties"];
+    [self.navigationController.navigationBar setTitleTextAttributes:
+     @{NSForegroundColorAttributeName:[formatter navigationBarTitleColor],NSFontAttributeName: [formatter navigationBarTitleFont]}];
+}
+
 -(void)initializeBooleanBasedOnTheRule{
-    NSString* stringEAppNumber = [SPAJAddSignatureDelegate voidGetEAPPNumber];
+    NSString* stringEAppNumber = [dictTransaction valueForKey:@"SPAJEappNumber"];//[SPAJAddSignatureDelegate voidGetEAPPNumber];
     NSString* SINO = [modelSPAJTransaction getSPAJTransactionData:@"SPAJSINO" StringWhereName:@"SPAJEappNumber" StringWhereValue:stringEAppNumber];
     
     NSDictionary* dictionaryPOData = [[NSDictionary alloc]initWithDictionary:[modelSIPOData getPO_DataFor:SINO]];
     stringSIRelation = [dictionaryPOData valueForKey:@"RelWithLA"];
     LAAge = [[dictionaryPOData valueForKey:@"LA_Age"] intValue];
+}
+
+-(void)voidCheckBooleanLastState {
+    
+    boolPemegangPolis = true;
+    boolTertanggung = [modelSPAJSignature voidCertainSignaturePartyCaptured:[[dictTransaction valueForKey:@"SPAJEappNumber"] intValue] SignatureParty:@"SignatureParty2"];
+    boolOrangTuaWali = [modelSPAJSignature voidCertainSignaturePartyCaptured:[[dictTransaction valueForKey:@"SPAJEappNumber"] intValue] SignatureParty:@"SignatureParty3"];
+    boolTenagaPenjual = [modelSPAJSignature voidCertainSignaturePartyCaptured:[[dictTransaction valueForKey:@"SPAJEappNumber"] intValue] SignatureParty:@"SignatureParty4"];
 }
 
 -(void) showDetailsForIndexPath:(NSIndexPath*)indexPath
@@ -192,10 +210,14 @@
             boolTertanggung = false;
             boolOrangTuaWali =  false;
             boolTenagaPenjual = true;
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                [self voidSaveSignatureToPDF:3];
+            });
             [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
             [self voidCreateAlertTextFieldViewAndShow:@"Masukkan lokasi pengambilan tanda tangan" tag:0];
             //update signature party4
-            NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty4=1 where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",[SPAJAddSignatureDelegate voidGetEAPPNumber]];
+            NSString* dateToday=[formatter getDateToday:@"yyyy-MM-dd hh:mm:ss"];
+            NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty4=1,SPAJDateSignatureParty4='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",dateToday,[dictTransaction valueForKey:@"SPAJEappNumber"]];
             [modelSPAJSignature updateSPAJSignature:stringUpdate];
         }
         else if (boolPemegangPolis){
@@ -213,10 +235,14 @@
                 boolTertanggung = false;
                 boolOrangTuaWali =  true;
                 boolTenagaPenjual = true;
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                    [self voidSaveSignatureToPDF:3];
+                });
                 [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
                 [self voidCreateAlertTextFieldViewAndShow:@"Masukkan lokasi pengambilan tanda tangan" tag:0];
                 //update signature party4
-                NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty4=1 where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",[SPAJAddSignatureDelegate voidGetEAPPNumber]];
+                NSString* dateToday=[formatter getDateToday:@"yyyy-MM-dd hh:mm:ss"];
+                NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty4=1,SPAJDateSignatureParty4='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",dateToday,[dictTransaction valueForKey:@"SPAJEappNumber"]];
                 [modelSPAJSignature updateSPAJSignature:stringUpdate];
             }
             else if (boolOrangTuaWali && boolPemegangPolis){
@@ -224,9 +250,13 @@
                 boolTertanggung = false;
                 boolOrangTuaWali =  true;
                 boolTenagaPenjual = true;
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                    [self voidSaveSignatureToPDF:2];
+                });
                 [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
                 //update signature party3
-                NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty3=1 where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",[SPAJAddSignatureDelegate voidGetEAPPNumber]];
+                NSString* dateToday=[formatter getDateToday:@"yyyy-MM-dd hh:mm:ss"];
+                NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty3=1,SPAJDateSignatureParty3='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",dateToday,[dictTransaction valueForKey:@"SPAJEappNumber"]];
                 [modelSPAJSignature updateSPAJSignature:stringUpdate];
             }
             else if (boolPemegangPolis){
@@ -243,10 +273,14 @@
                 boolTertanggung = true;
                 boolOrangTuaWali =  false;
                 boolTenagaPenjual = true;
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                    [self voidSaveSignatureToPDF:3];
+                });
                 [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
                 [self voidCreateAlertTextFieldViewAndShow:@"Masukkan lokasi pengambilan tanda tangan" tag:0];
                 //update signature party4
-                NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty4=1 where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",[SPAJAddSignatureDelegate voidGetEAPPNumber]];
+                NSString* dateToday=[formatter getDateToday:@"yyyy-MM-dd hh:mm:ss"];
+                NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty4=1,SPAJDateSignatureParty4='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",dateToday,[dictTransaction valueForKey:@"SPAJEappNumber"]];
                 [modelSPAJSignature updateSPAJSignature:stringUpdate];
             }
             else if (boolPemegangPolis && boolTertanggung){
@@ -254,9 +288,13 @@
                 boolTertanggung = true;
                 boolOrangTuaWali =  false;
                 boolTenagaPenjual = true;
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                    [self voidSaveSignatureToPDF:1];
+                });
                 [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
                 //update signature party2
-                NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty2=1 where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",[SPAJAddSignatureDelegate voidGetEAPPNumber]];
+                NSString* dateToday=[formatter getDateToday:@"yyyy-MM-dd hh:mm:ss"];
+                NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty2=1,SPAJDateSignatureParty2='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",dateToday,[dictTransaction valueForKey:@"SPAJEappNumber"]];
                 [modelSPAJSignature updateSPAJSignature:stringUpdate];
             }
             else if (boolPemegangPolis){
@@ -268,35 +306,6 @@
             }
         }
     }
-    /*if (boolTenagaPenjual && boolOrangTuaWali && boolPemegangPolis && boolTertanggung){
-        boolPemegangPolis = true;
-        boolTertanggung = true;
-        boolOrangTuaWali =  true;
-        boolTenagaPenjual = true;
-        [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
-        [self voidCreateAlertTextFieldViewAndShow:@"Masukkan lokasi pengambilan tanda tangan" tag:0];
-    }
-    else if (boolOrangTuaWali && boolPemegangPolis && boolTertanggung){
-        boolPemegangPolis = true;
-        boolTertanggung = true;
-        boolOrangTuaWali =  true;
-        boolTenagaPenjual = true;
-        [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
-    }
-    else if (boolPemegangPolis && boolTertanggung){
-        boolPemegangPolis = true;
-        boolTertanggung = true;
-        boolOrangTuaWali =  true;
-        boolTenagaPenjual = false;
-        [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
-    }
-    else if (boolPemegangPolis){
-        NSString *date = [formatter getDateToday:@"dd/MM/yyyy"];
-        NSString *time = [formatter getDateToday:@"hh:mm"];
-        NSString* alertString = [NSString stringWithFormat:@"Mohon agar menandatangani aplikasi dengan benar dan menyerahkannya sebelum tanggal (%@) dan waktu (%@ WIB). Jika tidak maka aplikasi ini akan menjadi tidak valid.\n\nTidak diperbolehkan adanya perubahan data pada aplikasi setelah Anda menyimpannya.\nApakah Anda yakin ingin menyimpan ?",date,time];
-        [self voidCreateAlertTwoOptionViewAndShow:alertString tag:0];
-        return;
-    }*/
     [self actionClearSign:nil];
     [tablePartiesSignature reloadData];
 }
@@ -328,14 +337,168 @@
             [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
         }
     }
-    [self actionClearSign:nil];
-    [tablePartiesSignature reloadData];
-    [alertController dismissViewControllerAnimated:YES completion:nil];
-    
-    NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty1=1 where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",[SPAJAddSignatureDelegate voidGetEAPPNumber]];
-    [modelSPAJSignature updateSPAJSignature:stringUpdate];
+    //[self voidSaveSignatureToPDF:0];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    [self voidSaveSignatureToPDF:0];
+        dispatch_async(dispatch_get_main_queue(), ^{
+        [self actionClearSign:nil];
+        [tablePartiesSignature reloadData];
+        [alertController dismissViewControllerAnimated:YES completion:nil];
+        NSString* dateToday=[formatter getDateToday:@"yyyy-MM-dd hh:mm:ss"];
+        NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty1=1,SPAJDateSignatureParty1='%@'  where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",dateToday,[dictTransaction valueForKey:@"SPAJEappNumber"]];
+        [modelSPAJSignature updateSPAJSignature:stringUpdate];
+        });
+    });
     //update signature party1
 }
+
+-(void)voidSaveSignatureToPDF:(int)index{
+    UIView *view = viewToSign;
+    UIGraphicsBeginImageContextWithOptions(view.bounds.size, NO, 1);
+    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage* imageSignature = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self drawSignatureInPDF:imageSignature Index:index];
+    });
+}
+
+-(void)drawSignatureInPDF:(UIImage *)signatureImage Index:(int)index{
+    NSArray* path_forDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+    NSString* documentsDirectory = [path_forDirectory objectAtIndex:0];
+    NSString* filePath = [NSString stringWithFormat:@"%@/SPAJ/%@/SPAJ.pdf",documentsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"]];
+    NSData *data = [[NSFileManager defaultManager] contentsAtPath:filePath];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    [self addSignature:signatureImage onPDFData:data Index:index];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self joinMultiplePDF];
+        });
+    });
+}
+
+-(void) addSignature:(UIImage *)imgSignature onPDFData:(NSData *)pdfData Index:(int)index{
+    
+    NSMutableData* outputPDFData = [[NSMutableData alloc] init];
+    CGDataConsumerRef dataConsumer = CGDataConsumerCreateWithCFData((CFMutableDataRef)outputPDFData);
+    
+    CFMutableDictionaryRef attrDictionary = NULL;
+    attrDictionary = CFDictionaryCreateMutable(NULL, 0, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
+    CFDictionarySetValue(attrDictionary, kCGPDFContextTitle, CFSTR("My Doc"));
+    CGContextRef pdfContext = CGPDFContextCreate(dataConsumer, NULL, attrDictionary);
+    CFRelease(dataConsumer);
+    CFRelease(attrDictionary);
+    CGRect pageRect;
+    
+    // Draw the old "pdfData" on pdfContext
+    CFDataRef myPDFData = (__bridge CFDataRef) pdfData;
+    CGDataProviderRef provider = CGDataProviderCreateWithCFData(myPDFData);
+    CGPDFDocumentRef pdf = CGPDFDocumentCreateWithProvider(provider);
+    CGDataProviderRelease(provider);
+    CGPDFPageRef page = CGPDFDocumentGetPage(pdf, 4);
+    pageRect = CGPDFPageGetBoxRect(page, kCGPDFMediaBox);
+    CGContextBeginPage(pdfContext, &pageRect);
+    CGContextDrawPDFPage(pdfContext, page);
+    
+    // Draw the signature on pdfContext
+    //pageRect = CGRectMake(343, 35,101 , 43);
+    switch (index) {
+        case 0:
+            pageRect = CGRectMake(67, 1195,96 , 53);
+            break;
+        case 1:
+            pageRect = CGRectMake(239, 1195,96 , 53);
+            break;
+        case 2:
+            pageRect = CGRectMake(407, 1195,96 , 53);
+            break;
+        case 3:
+            pageRect = CGRectMake(575, 1195,96 , 53);
+            break;
+            
+        default:
+            break;
+    }
+    
+    CGImageRef pageImage = [imgSignature CGImage];
+    CGContextDrawImage(pdfContext, pageRect, pageImage);
+    
+    // release the allocated memory
+    CGPDFContextEndPage(pdfContext);
+    CGPDFContextClose(pdfContext);
+    CGContextRelease(pdfContext);
+    
+    // write new PDFData in "outPutPDF.pdf" file in document directory
+    NSString *docsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *pdfFilePath =[NSString stringWithFormat:@"%@/SPAJ/%@/SPAJSigned.pdf",docsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"]];
+    [outputPDFData writeToFile:pdfFilePath atomically:YES];
+}
+
+-(void)joinMultiplePDF{
+    NSArray* path_forDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+    NSString* documentsDirectory = [path_forDirectory objectAtIndex:0];
+    NSString *docsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    
+    // File paths
+    NSString* filePath = [NSString stringWithFormat:@"%@/SPAJ/%@/SPAJ.pdf",documentsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"]];
+    NSString *pdfPath1 = [NSString stringWithFormat:@"%@/SPAJ/%@/SPAJSigned.pdf",docsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"]];
+    
+    NSString *pdfPathOutput = filePath;
+    
+    // File URLs - bridge casting for ARC
+    CFURLRef pdfURLFilePath = (__bridge_retained CFURLRef)[[NSURL alloc] initFileURLWithPath:(NSString *)filePath];//(CFURLRef) NSURL
+    CFURLRef pdfURL1 = (__bridge_retained CFURLRef)[[NSURL alloc] initFileURLWithPath:(NSString *)pdfPath1];//(CFURLRef) NSURL
+    CFURLRef pdfURLOutput =(__bridge_retained CFURLRef) [[NSURL alloc] initFileURLWithPath:(NSString *)pdfPathOutput];//(CFURLRef)
+    
+    // File references
+    CGPDFDocumentRef pdfRefFilePath = CGPDFDocumentCreateWithURL((CFURLRef) pdfURLFilePath);
+    CGPDFDocumentRef pdfRef1 = CGPDFDocumentCreateWithURL((CFURLRef) pdfURL1);
+    
+    
+    // Number of pages
+    NSInteger numberOfPagesFilePath = CGPDFDocumentGetNumberOfPages(pdfRefFilePath);
+    NSInteger numberOfPages1 = CGPDFDocumentGetNumberOfPages(pdfRef1);
+    
+    
+    // Create the output context
+    CGContextRef writeContext = CGPDFContextCreateWithURL(pdfURLOutput, NULL, NULL);
+    
+    // Loop variables
+    CGPDFPageRef page;
+    CGRect mediaBox;
+    
+    // Read the first PDF and generate the output pages
+    NSLog(@"GENERATING PAGES FROM PDF 1 (%i)...", numberOfPagesFilePath);
+    for (int i=1; i<=numberOfPagesFilePath-1; i++) {
+        page = CGPDFDocumentGetPage(pdfRefFilePath, i);
+        mediaBox = CGPDFPageGetBoxRect(page, kCGPDFMediaBox);
+        CGContextBeginPage(writeContext, &mediaBox);
+        CGContextDrawPDFPage(writeContext, page);
+        CGContextEndPage(writeContext);
+    }
+    
+    for (int i=1; i<=numberOfPages1; i++) {
+        page = CGPDFDocumentGetPage(pdfRef1, i);
+        mediaBox = CGPDFPageGetBoxRect(page, kCGPDFMediaBox);
+        CGContextBeginPage(writeContext, &mediaBox);
+        CGContextDrawPDFPage(writeContext, page);
+        CGContextEndPage(writeContext);
+    }
+    
+    // Finalize the output file
+    CGPDFContextClose(writeContext);
+    
+    // Release from memory
+    CFRelease(pdfURLFilePath);
+    CFRelease(pdfURL1);
+    
+    CFRelease(pdfURLOutput);
+    CGPDFDocumentRelease(pdfRefFilePath);
+    CGPDFDocumentRelease(pdfRef1);
+    
+    CGContextRelease(writeContext);
+}
+
+
 
 -(void)voidDismissAlertSignature{
     [alertController dismissViewControllerAnimated:YES completion:nil];

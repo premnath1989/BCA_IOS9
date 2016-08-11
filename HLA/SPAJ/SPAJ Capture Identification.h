@@ -18,6 +18,8 @@
 #import "User Interface.h"
 #import "Alert.h"
 #import "ModelSPAJIDCapture.h"
+#import "ModelIdentificationType.h"
+#import "Formatter.h"
 
 // DECLARATION
 
@@ -41,6 +43,8 @@
         Alert* alert;
         UserInterface *objectUserInterface;
         ModelSPAJIDCapture *modelSPAJIDCapture;
+        Formatter* formatter;
+        ModelIdentificationType* modelIdentificationType;
         
         CameraViewController *imagePickerController;
         BOOL cameraFront;
@@ -55,6 +59,8 @@
     // PROTOCOL
 
     @property (nonatomic,strong) id <SPAJCaptureIdentificationDelegate> SPAJCaptureIdentificationDelegate;
+
+    @property (strong, nonatomic) NSDictionary* dictTransaction;
 
     // VIEW
     @property (nonatomic, weak) IBOutlet UIView* viewCaptureFront;

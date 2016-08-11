@@ -13,19 +13,24 @@
 #import "ModelSPAJAnswers.h"
 #import "ModelProspectProfile.h"
 #import "ModelSIPOData.h"
+#import "ModelIdentificationType.h"
+#import "Formatter.h"
 
 @protocol SPAJCalonPemegangPolisDelegate
     -(NSString *)voidGetEAPPNumber;
+    -(void)voidSetCalonPemegangPolisBoolValidate:(BOOL)boolValidate;
 @end
 
 
 @interface SPAJ_Calon_Pemegang_Polis : HtmlGenerator{
     NSString *filePath;
+    Formatter* formatter;
     ModelProspectProfile *modelProspectProfile;
     ModelSPAJTransaction *modelSPAJTransaction;
     ModelSPAJHtml* modelSPAJHtml;
     ModelSPAJAnswers* modelSPAJAnswers;
     ModelSIPOData* modelSIPData;
+    ModelIdentificationType* modelIdentificationType;
 }
 @property (strong, nonatomic) NSString* htmlFileName;
 @property (nonatomic,strong) id <SPAJCalonPemegangPolisDelegate> delegate;

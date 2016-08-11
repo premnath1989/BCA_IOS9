@@ -1,0 +1,2065 @@
+<!DOCTYPE html>
+<html>
+  <!-- HEAD -->
+  <head>
+    <!-- META DATA -->
+    <meta charset='utf-8'>
+    <meta content='BCA Life - BLESS' name='application-name'>
+    <meta content='BCA Life Electronic Submission.' name='description'>
+    <meta content='BCA Life Electronic Submission.' name='keywords'>
+    <meta content='BCA Life' name='author'>
+    <meta content='Ibrahim Aziz' name='designer'>
+    <meta content='Copyright 2016 BCA Life' name='copyright'>
+    <meta content='BCA Life Electronic Submission.' name='dcterms.description'>
+    <meta content='BCA Life' name='dcterms.creator'>
+    <meta content='BCA Life' name='dcterms.rightsHolder'>
+    <meta content='All rights reserved. No part of this document may be reproduced or transmitted in any form or by any means, electronic, mechanical, photocopying, recording, or otherwise, without prior written permission from the Author, BCA Life.' name='dcterms.rights'>
+    <meta content='2016' name='dcterms.dateCopyrighted'>
+    <meta content='width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no' name='viewport'>
+    <!-- FAVICON -->
+    <!-- %link{ :rel => "shortcut icon", :href => "#{urlResource}logo_favicon.ico" } -->
+    <!-- %link{ :rel => "shortcut icon", :href => "#{urlResource}logo_favicon.ico", :type => "image/x-icon" } -->
+    <!-- %link{ :rel => "icon", :href => "#{urlResource}logo_favicon.ico", :type => "image/x-icon" } -->
+    <!-- CSS -->
+    <link href='../../Style/CSS/spajpdf-layout-general.css' id='csslayout' rel='stylesheet' type='text/css'>
+    <link href='../../Style/CSS/spajpdf-font-general.css' id='cssfont' rel='stylesheet' type='text/css'>
+    <!-- %link{ :id => "cssinput", :href => "#{urlCSS}#{urlCSSSectionPrefix}-input-general.css", :rel => "stylesheet", :type => "text/css" } -->
+    <!-- %link{ :id => "csslink", :href => "#{urlCSS}#{urlCSSSectionPrefix}-link-general.css", :rel => "stylesheet", :type => "text/css" } -->
+    <link href='../../Style/CSS/bless-fontsize-medium.css' id='cssfontsize' rel='stylesheet' type='text/css'>
+    <link href='../../Style/CSS/spajpdf-fontfamily-bpreplay.css' id='cssfontfamily' rel='stylesheet' type='text/css'>
+    <link href='../../Style/CSS/spajpdf-theme-turqoise-svg.css' id='csstheme' rel='stylesheet' type='text/css'>
+    <!-- %link{ :id => "cssresponsive", :href => "#{urlCSS}#{urlCSSSectionPrefix}-responsive-general.css", :rel => "stylesheet", :type => "text/css" } -->
+    <!-- JAVA SCRIPT -->
+    <script src='../../Java Script/Minimized/jquery-1.11.1.min.js' type='text/javascript'></script>
+    <script src='../../Java Script/Minimized/jquery-migrate-1.2.1.min.js' type='text/javascript'></script>
+    <script src='../../Java Script/Minimized/ibrahimaziz-dist.js' type='text/javascript'></script>
+    <title>BCA Life - BLESS, SPAJ PDF</title>
+    <!-- JQUERY -->
+    <script>
+      $(document).ready(function()
+      {
+          // SECTION GENERAL
+      
+          boxGenerator("#BoxSPAJNumber", 11, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxPolicyNumber", 11, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxVANumber", 16, boxTypeWithoutLabel, null);
+      
+          // SECTION AGENT PROFILE
+      
+          boxGenerator("#BoxAgentName", 16, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxAgentCode", 11, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxProductCode", 11, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxLicenseNumber", 16, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxActiveDateDay", 2, boxTypeWithBottomLabel, labelDay);
+          boxGenerator("#BoxActiveDateMonth", 2, boxTypeWithBottomLabel, labelMonth);
+          boxGenerator("#BoxActiveDateYear", 4, boxTypeWithBottomLabel, labelYear);
+          boxGenerator("#BoxProductName", 16, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxReferenceName", 30, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxBranchName", 30, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxBranchCode", 16, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxArea", 16, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxAgentID", 13, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxReferenceDateDay", 2, boxTypeWithBottomLabel, labelDay);
+          boxGenerator("#BoxReferenceDateMonth", 2, boxTypeWithBottomLabel, labelMonth);
+          boxGenerator("#BoxReferenceDateYear", 4, boxTypeWithBottomLabel, labelYear);
+      
+          // SECTION POLICY HOLDER
+      
+          boxGenerator("#BoxPolicyHolderCIN", 7, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxPolicyHolderFullName", 30, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxPolicyHolderID", 16, boxTypeWithoutLabel, null);
+          lineGenerator("#LinePolicyHolderOtherID", 11);
+          boxGenerator("#BoxPolicyHolderActiveDateDay", 2, boxTypeWithBottomLabel, labelDay);
+          boxGenerator("#BoxPolicyHolderActiveDateMonth", 2, boxTypeWithBottomLabel, labelMonth);
+          boxGenerator("#BoxPolicyHolderActiveDateYear", 4, boxTypeWithBottomLabel, labelYear);
+          lineGenerator("#LinePolicyHolderPlace", 8);
+          boxGenerator("#BoxPolicyHolderDateOfBirthDay", 2, boxTypeWithBottomLabel, labelDay);
+          boxGenerator("#BoxPolicyHolderDateOfBirthMonth", 2, boxTypeWithBottomLabel, labelMonth);
+          boxGenerator("#BoxPolicyHolderDateOfBirthYear", 4, boxTypeWithBottomLabel, labelYear);
+          boxGenerator("#BoxPolicyHolderAge", 2, boxTypeWithoutLabel, null);
+          lineGenerator("#LinePolicyHolderWNA", 4);
+          boxGenerator("#BoxPolicyHolderCompany", 25, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxPolicyHolderMainJob", 30, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxPolicyHolderWorkScope", 30, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxPolicyHolderPosition", 30, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxPolicyHolderJobDescription", 30, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxPolicyHolderSideJob", 30, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxPolicyHolderHomeAddress1", 30, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxPolicyHolderHomeAddress2", 30, boxTypeWithoutLabel, null);
+          labelGenerator("#LabelPolicyHolderHomeCity", 2)
+          boxGenerator("#BoxPolicyHolderHomeCity", 19, boxTypeWithoutLabel, null);
+          labelGenerator("#LabelPolicyHolderHomePostalCode", 3)
+          boxGenerator("#BoxPolicyHolderHomePostalCode", 6, boxTypeWithoutLabel, null);
+          labelGenerator("#LabelPolicyHolderHomeTelephonePrefix", 2)
+          boxGenerator("#BoxPolicyHolderHomeTelephonePrefix", 4, boxTypeWithoutLabel, null);
+          labelGenerator("#LabelPolicyHolderHomeTelephoneInfix", 1)
+          boxGenerator("#BoxPolicyHolderHomeTelephoneInfix", 9, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxPolicyHolderOfficeAddress1", 30, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxPolicyHolderOfficeAddress2", 30, boxTypeWithoutLabel, null);
+          labelGenerator("#LabelPolicyHolderOfficeCity", 2)
+          boxGenerator("#BoxPolicyHolderOfficeCity", 19, boxTypeWithoutLabel, null);
+          labelGenerator("#LabelPolicyHolderOfficePostalCode", 3)
+          boxGenerator("#BoxPolicyHolderOfficePostalCode", 6, boxTypeWithoutLabel, null);
+          labelGenerator("#LabelPolicyHolderOfficeTelephonePrefix", 2)
+          boxGenerator("#BoxPolicyHolderOfficeTelephonePrefix", 4, boxTypeWithoutLabel, null);
+          labelGenerator("#LabelPolicyHolderOfficeTelephoneInfix", 1)
+          boxGenerator("#BoxPolicyHolderOfficeTelephoneInfix", 9, boxTypeWithoutLabel, null);
+          lineGenerator("#LinePolicyHolderOtherRelationship", 5);
+          lineGenerator("#LinePolicyHolderOtherPurpose", 5);
+          boxGenerator("#BoxPolicyHolderEmail", 30, boxTypeWithoutLabel, null);
+          labelGenerator("#LabelPolicyHolderTelephone1", 1)
+          boxGenerator("#BoxPolicyHolderTelephone1", 9, boxTypeWithoutLabel, null);
+          labelGenerator("#LabelPolicyHolderTelephone2", 1)
+          boxGenerator("#BoxPolicyHolderTelephone2", 9, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxPolicyHolderNPWP", 16, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxPolicyHolderNPWPActiveDateDay", 2, boxTypeWithBottomLabel, labelDay);
+          boxGenerator("#BoxPolicyHolderNPWPActiveDateMonth", 2, boxTypeWithBottomLabel, labelMonth);
+          boxGenerator("#BoxPolicyHolderNPWPActiveDateYear", 4, boxTypeWithBottomLabel, labelYear);
+          boxGenerator("#BoxPolicyHolderSalary", 17, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxPolicyHolderRevenue", 17, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxPolicyHolderOtherIncome", 17, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxPolicyHolderSource", 30, boxTypeWithoutLabel, null);
+          
+          // SECTION POLICY HOLDER
+      
+          // SUB A
+      
+          boxGenerator("#BoxInsuranceHolderCIN", 7, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxInsuranceHolderFullName", 30, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxInsuranceHolderID", 16, boxTypeWithoutLabel, null);
+          lineGenerator("#LineInsuranceHolderOtherID", 11);
+          boxGenerator("#BoxInsuranceHolderActiveDateDay", 2, boxTypeWithBottomLabel, labelDay);
+          boxGenerator("#BoxInsuranceHolderActiveDateMonth", 2, boxTypeWithBottomLabel, labelMonth);
+          boxGenerator("#BoxInsuranceHolderActiveDateYear", 4, boxTypeWithBottomLabel, labelYear);
+          lineGenerator("#LineInsuranceHolderPlace", 8);
+          boxGenerator("#BoxInsuranceHolderDateOfBirthDay", 2, boxTypeWithBottomLabel, labelDay);
+          boxGenerator("#BoxInsuranceHolderDateOfBirthMonth", 2, boxTypeWithBottomLabel, labelMonth);
+          boxGenerator("#BoxInsuranceHolderDateOfBirthYear", 4, boxTypeWithBottomLabel, labelYear);
+          boxGenerator("#BoxInsuranceHolderAge", 2, boxTypeWithoutLabel, null);
+          lineGenerator("#LineInsuranceHolderWNA", 4);
+          boxGenerator("#BoxInsuranceHolderCompany", 25, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxInsuranceHolderMainJob", 30, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxInsuranceHolderWorkScope", 30, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxInsuranceHolderPosition", 30, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxInsuranceHolderJobDescription", 30, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxInsuranceHolderSideJob", 30, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxInsuranceHolderHomeAddress1", 30, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxInsuranceHolderHomeAddress2", 30, boxTypeWithoutLabel, null);
+          labelGenerator("#LabelInsuranceHolderHomeCity", 2)
+          boxGenerator("#BoxInsuranceHolderHomeCity", 19, boxTypeWithoutLabel, null);
+          labelGenerator("#LabelInsuranceHolderHomePostalCode", 3)
+          boxGenerator("#BoxInsuranceHolderHomePostalCode", 6, boxTypeWithoutLabel, null);
+          labelGenerator("#LabelInsuranceHolderHomeTelephonePrefix", 2)
+          boxGenerator("#BoxInsuranceHolderHomeTelephonePrefix", 4, boxTypeWithoutLabel, null);
+          labelGenerator("#LabelInsuranceHolderHomeTelephoneInfix", 1)
+          boxGenerator("#BoxInsuranceHolderHomeTelephoneInfix", 9, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxInsuranceHolderOfficeAddress1", 30, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxInsuranceHolderOfficeAddress2", 30, boxTypeWithoutLabel, null);
+          labelGenerator("#LabelInsuranceHolderOfficeCity", 2)
+          boxGenerator("#BoxInsuranceHolderOfficeCity", 19, boxTypeWithoutLabel, null);
+          labelGenerator("#LabelInsuranceHolderOfficePostalCode", 3)
+          boxGenerator("#BoxInsuranceHolderOfficePostalCode", 6, boxTypeWithoutLabel, null);
+          labelGenerator("#LabelInsuranceHolderOfficeTelephonePrefix", 2)
+          boxGenerator("#BoxInsuranceHolderOfficeTelephonePrefix", 4, boxTypeWithoutLabel, null);
+          labelGenerator("#LabelInsuranceHolderOfficeTelephoneInfix", 1)
+          boxGenerator("#BoxInsuranceHolderOfficeTelephoneInfix", 9, boxTypeWithoutLabel, null);
+          lineGenerator("#LineInsuranceHolderOtherRelationship", 5);
+          lineGenerator("#LineInsuranceHolderOtherPurpose", 5);
+          boxGenerator("#BoxInsuranceHolderEmail", 30, boxTypeWithoutLabel, null);
+          labelGenerator("#LabelInsuranceHolderTelephone1", 1)
+          boxGenerator("#BoxInsuranceHolderTelephone1", 9, boxTypeWithoutLabel, null);
+          labelGenerator("#LabelInsuranceHolderTelephone2", 1)
+          boxGenerator("#BoxInsuranceHolderTelephone2", 9, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxInsuranceHolderNPWP", 16, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxInsuranceHolderNPWPActiveDateDay", 2, boxTypeWithBottomLabel, labelDay);
+          boxGenerator("#BoxInsuranceHolderNPWPActiveDateMonth", 2, boxTypeWithBottomLabel, labelMonth);
+          boxGenerator("#BoxInsuranceHolderNPWPActiveDateYear", 4, boxTypeWithBottomLabel, labelYear);
+          boxGenerator("#BoxInsuranceHolderSalary", 17, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxInsuranceHolderRevenue", 17, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxInsuranceHolderOtherIncome", 17, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxInsuranceHolderSource", 30, boxTypeWithoutLabel, null);
+          
+          // SUB B
+          
+          boxGenerator("#BoxPolicyHolderCompanyName", 30, boxTypeWithoutLabel, null);
+          lineGenerator("#LinePolicyHolderCompanyOther", 11);
+          boxGenerator("#BoxPolicyHolderCompanyNoAnggaranDasar", 21, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxPolicyHolderCompanyAnggaranDateOfExpiredDay", 2, boxTypeWithBottomLabel, labelDay);
+          boxGenerator("#BoxPolicyHolderCompanyAnggaranDateOfExpiredMonth", 2, boxTypeWithBottomLabel, labelMonth);
+          boxGenerator("#BoxPolicyHolderCompanyAnggaranDateOfExpiredYear", 4, boxTypeWithBottomLabel, labelYear); 
+          boxGenerator("#BoxPolicyHolderCompanyNoSuratIjinUsaha", 21, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxPolicyHolderCompanySIUPDateOfExpiredDay", 2, boxTypeWithBottomLabel, labelDay);
+          boxGenerator("#BoxPolicyHolderCompanySIUPDateOfExpiredMonth", 2, boxTypeWithBottomLabel, labelMonth);
+          boxGenerator("#BoxPolicyHolderCompanySIUPDateOfExpiredYear", 4, boxTypeWithBottomLabel, labelYear);
+          boxGenerator("#BoxPolicyHolderCompanyNoTDP", 21, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxPolicyHolderCompanyTDPDateOfExpiredDay", 2, boxTypeWithBottomLabel, labelDay);
+          boxGenerator("#BoxPolicyHolderCompanyTDPDateOfExpiredMonth", 2, boxTypeWithBottomLabel, labelMonth);
+          boxGenerator("#BoxPolicyHolderCompanyTDPDateOfExpiredYear", 4, boxTypeWithBottomLabel, labelYear);
+          boxGenerator("#BoxPolicyHolderCompanyNoSKDP", 21, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxPolicyHolderCompanySKDPDateOfExpiredDay", 2, boxTypeWithBottomLabel, labelDay);
+          boxGenerator("#BoxPolicyHolderCompanySKDPDateOfExpiredMonth", 2, boxTypeWithBottomLabel, labelMonth);
+          boxGenerator("#BoxPolicyHolderCompanySKDPDateOfExpiredYear", 4, boxTypeWithBottomLabel, labelYear);
+          boxGenerator("#BoxPolicyHolderCompanyNoNPWP", 16, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxPolicyHolderCompanyNoNPWPDateDay", 2, boxTypeWithBottomLabel, labelDay);
+          boxGenerator("#BoxPolicyHolderCompanyNoNPWPDateMonth", 2, boxTypeWithBottomLabel, labelMonth);
+          boxGenerator("#BoxPolicyHolderCompanyNoNPWPDateYear", 4, boxTypeWithBottomLabel, labelYear);
+          boxGenerator("#BoxPolicyHolderCompanySector", 30, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxPolicyHolderCompanyAddress", 30, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxPolicyHolderCompanyCity", 19, boxTypeWithoutLabel, null);
+          labelGenerator("#LabelPolicyHolderCompanyPostalCode", 3);
+          boxGenerator("#BoxPolicyHolderCompanyPostalCode", 6, boxTypeWithoutLabel, null);
+          
+          // SECTION COMPANY REPRESENTATIVE
+          boxGenerator("#BoxPolicyHolderCompanyRepresentativeFullName", 30, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxPolicyHolderCompanyRepresentativePosition", 28, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxPolicyHolderCompanyRepresentativeID", 16, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxPolicyHolderCompanyRepresentativeActiveDateDay", 2, boxTypeWithBottomLabel, labelDay);
+          boxGenerator("#BoxPolicyHolderCompanyRepresentativeActiveDateMonth", 2, boxTypeWithBottomLabel, labelMonth);
+          boxGenerator("#BoxPolicyHolderCompanyRepresentativeActiveDateYear", 4, boxTypeWithBottomLabel, labelYear);
+          lineGenerator("#LinePolicyHolderCompanyRepresentativeOtherRelationship", 19);
+          lineGenerator("#LinePolicyHolderCompanyRepresentativeOtherPurpose", 6);
+      
+          // SECTION ILLUSTRATION
+          
+          boxGenerator("#BoxIllustrationAgentName", 30, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxIllustrationNumber", 10, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxIllustrationDateDay", 2, boxTypeWithBottomLabel, labelDay);
+          boxGenerator("#BoxIllustrationDateMonth", 2, boxTypeWithBottomLabel, labelMonth);
+          boxGenerator("#BoxIllustrationDateYear", 4, boxTypeWithBottomLabel, labelYear);
+          boxGenerator("#BoxIllustrationAgentCode", 13, boxTypeWithoutLabel, null);
+          
+          // SECTION PREMI PAYMENT
+          
+          labelGenerator("#LabelPremiPaymentFrequencyYear", 5)
+          labelGenerator("#LabelPremiPaymentFrequencySemester", 4)
+          labelGenerator("#LabelPremiPaymentFrequencyTriwulan", 4)
+          labelGenerator("#LabelPremiPaymentFrequencyMonth", 4)
+          labelGenerator("#LabelPremiPaymentFrequencyFull", 4)
+          labelGenerator("#LabelPremiPaymentPolicyHolder", 5)
+          labelGenerator("#LabelPremiPaymentPolicyHolderCompany", 12)
+          labelGenerator("#LabelPremiPaymentPolicyHolderTertanggung", 5)
+          labelGenerator("#LabelPremiPaymentPolicyHolderThirdParty", 18)
+          labelGenerator("#LabelPremiPaymentDebitAccount", 5)
+          labelGenerator("#LabelPremiPaymentCreditCardAccount", 9)  
+          labelGenerator("#LabelPremiPaymentOtherAccount", 5) 
+          lineGenerator("#LinePremiPaymentOtherAccount", 9);
+          boxGenerator("#BoxPremiDescriptionCreditCardHolderName", 27, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxPremiDescriptionDebitCreditNumber", 27, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxPremiDescriptionBankName", 27, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxPremiDescriptionBankBranch", 27, boxTypeWithoutLabel, null);
+      
+          // SECTION HEALTH
+          
+          boxGenerator("#BoxProspectiveInsuredHeight", 3, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxPolicyHolderHeight", 3, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxProspectiveInsuredWeight", 3, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxPolicyHolderWeight", 3, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxProspectiveInsuredSmokeAmount", 2, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxPolicyHolderSmokeAmount", 2, boxTypeWithoutLabel, null);
+          
+          boxGenerator("#BoxProspectiveInsured1Month", 2, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxProspectiveInsured1Year", 2, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxProspectiveInsured2Month", 2, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxProspectiveInsured2Year", 2, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxProspectiveInsured3Month", 2, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxProspectiveInsured3Year", 2, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxPolicyHolder1Month", 2, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxPolicyHolder1Year", 2, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxPolicyHolder2Month", 2, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxPolicyHolder2Year", 2, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxPolicyHolder3Month", 2, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxPolicyHolder3Year", 2, boxTypeWithoutLabel, null);
+          
+          boxGenerator("#BoxProspectiveInsuredBabyHeight", 2, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxProspectiveInsuredBabyWeight", 2, boxTypeWithoutLabel, null);
+          boxGenerator("#BoxProspectiveInsuredPregnancyAge", 2, boxTypeWithoutLabel, null);
+      
+          // SECTION AGREEMENT
+          
+          lineGenerator("#LineSignedPlace", 8);
+          lineGenerator("#LineSignedDateDay", 2);
+          lineGenerator("#LineSignedDateMonth", 2);
+          lineGenerator("#LineSignedDateYear", 4);
+      
+          // SET TEXT
+      
+          boxSetter("#BoxSPAJNumber", "Andy Phan");
+      
+          // GET TEXT
+      
+          alert(boxGetter("#BoxSPAJNumber", 11));
+      });
+    </script>
+  </head>
+  <!-- BODY -->
+  <body id='A4'>
+    <!-- HEADER -->
+    <header>
+      <h1>SURAT PENGAJUAN ASURANSI JIWA (SPAJ)</h1>
+      <img src='../../Resource/Logo/logo_bcalife.svg'>
+      <br>
+    </header>
+    <!-- MAIN -->
+    <main>
+      <section id='SectionGeneral'>
+        <label class='Medium Single PositionerLeft' for='BoxSPAJNumber'>Nomor SPAJ</label>
+        <table class='BoxSquare PositionerLeft' id='BoxSPAJNumber'></table>
+        <table class='BoxSquare PositionerRight' id='BoxPolicyNumber'></table>
+        <label class='Wrap Single PositionerRight' for='BoxPolicyNumber'>Nomor Polis</label>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxVANumber'>Nomor VA</label>
+        <table class='BoxSquare PositionerLeft' id='BoxVANumber'></table>
+        <br>
+      </section>
+      <section id='SectionAgentProfile'>
+        <h2>DATA TENAGA PENJUAL (Wajib dilengkapi sebelum dikirm ke kantor pusat)</h2>
+        <label class='Medium Single PositionerLeft' for='BoxAgentName'>Nama Tenaga Penjual</label>
+        <table class='BoxSquare PositionerLeft' id='BoxAgentName'></table>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxAgentCode'>Kode Tenaga Penjual</label>
+        <table class='BoxSquare PositionerLeft' id='BoxAgentCode'></table>
+        <table class='BoxSquare PositionerRight' id='BoxProductCode'></table>
+        <label class='Wrap Single PositionerRight' for='BoxProductCode'>Kode Produk</label>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxLicenseNumber'>License Number</label>
+        <table class='BoxSquare PositionerLeft' id='BoxLicenseNumber'></table>
+        <table class='BoxSquare PositionerRight' id='BoxActiveDateYear'></table>
+        <span class='Separator PositionerRight' for='BoxActiveDateYear'>/</span>
+        <table class='BoxSquare PositionerRight' id='BoxActiveDateMonth'></table>
+        <span class='Separator PositionerRight' for='BoxActiveDateMonth'>/</span>
+        <table class='BoxSquare PositionerRight' id='BoxActiveDateDay'></table>
+        <label class='Wrap Single PositionerRight' for='BoxActiveDateDay'>Masa Berlaku</label>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxProductName'>Nama Produk</label>
+        <table class='BoxSquare PositionerLeft' id='BoxProductName'></table>
+        <br>
+        <span class='Description PositionerLeft' for='BoxProductName'>Data pemberi referensi (harap diisi sebelum dikirm ke kantor pusat)</span>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxReferenceName'>Nama Pemberi Referal</label>
+        <table class='BoxSquare PositionerLeft' id='BoxReferenceName'></table>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxBranchName'>Nama Cabang</label>
+        <table class='BoxSquare PositionerLeft' id='BoxBranchName'></table>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxBranchCode'>Kode Cabang</label>
+        <table class='BoxSquare PositionerLeft' id='BoxBranchCode'></table>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxArea'>Area / Kanwil</label>
+        <table class='BoxSquare PositionerLeft' id='BoxArea'></table>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxAgentID'>AgentID</label>
+        <table class='BoxSquare PositionerLeft' id='BoxAgentID'></table>
+        <table class='BoxSquare PositionerRight' id='BoxReferenceDateYear'></table>
+        <span class='Separator PositionerRight'>/</span>
+        <table class='BoxSquare PositionerRight' id='BoxReferenceDateMonth'></table>
+        <span class='Separator PositionerRight'>/</span>
+        <table class='BoxSquare PositionerRight' id='BoxReferenceDateDay'></table>
+        <label class='Wrap Single PositionerRight'>Tanggal Referal</label>
+        <br>
+        <div class='Note'>
+          <h3>Informasi Penting Pengisian Surat Pengajuan Asuan Jiwa</h3>
+          <ol>
+            <li>Wajib mengisi dengan benar dan lengkap pertanyaan di bawah ini berikut pertanyaan dalam setiap pemeriksaan kesehatan formulir tambahan yang diperlukan atau perubahannya, sesuai dengan keadaan sebenarnya.</li>
+            <li>Diisi menggunakan tinta hitam dan menggunakan huruf besar/kapital.</li>
+            <li>Gunakan tanda silang (X) pada pilihan kolom kotak dan wajib menandatangani setiap koreksi penulisan atau pengisian dalam bentuk coretan.</li>
+            <li>Melampirkan fotokopi Identitas Diri (KTP/Paspor) sedangkan untuk WNA melampirkan Paspor & KITAS yang masih berlaku.</li>
+          </ol>
+        </div>
+        <div class='Note'>
+          <h3>Catatan Penting Yang Harus Diperhatikan</h3>
+          <ol>
+            <li>Produk Asuransi ini adalah produk asuransi milik PT Asuransi Jiwa BCA (selanjutnya disebut "Penanggung").</li>
+            <li>PT Bank Central Asia, Tbk (selanjutnya disebut "Bank"), hanya bertindak sebagai pihak yang mereferensikan atau merekomendasikan produk asuransi Penanggung kepada Calon Pemegang Polis, karenanya Bank tidak bertanggung jawab atas kinerja produk asuransi ini.</li>
+            <li>Produk ini bukan merupakan produk dan tanggung jawab Bank sehingga tidak dijamin oleh Bank serta tidak termasuk dalam cakupan program penjaminan sebagaimana dimaksud dalam ketentuan perundang-undangan mengenai lembaga penjamin simpanan. Khusus untuk produk Unit Link, Bank juga tidak bertanggung jawab terhadap keuntungan atau kerugian dari jumlah premi yang dibayarkan kepada Penanggung.</li>
+            <li>Bank tidak bertanggung jawab atas segala informasi serta materi yang dikeluarkan atau disebarluaskan sebagaimana tercantum dalam brosur dari produk asuransi ini berikut setiap perubahannya atau dokumen lain yang secara resmi disetujui dan dikeluarkan oleh Penanggung sehubungan dengan produk asuransi ini.</li>
+            <li>Sebelum memutuskan untuk membeli produk asuransi ini, Calon Pemegang Polis terlebih dahulu harus memahami dan mempertimbangkan segala risiko terkait dengan produk asuransi ini.</li>
+            <li>Calon Pemegang Polis dengan ini membebaskan Bank, dan/atau Karyawan Bank yang mereferensikan atau merekomendasikan produk asuransi milik Penanggung dari segala tuntutan dan / atau gugatan dari siapapun dan dalam bentuk apapun termasuk dari Calon Pemegang Polis sehubungan dengan transaksi pembelian produk asuransi ini.</li>
+            <li>
+              Penanggung bertanggung jawab sepenuhnya atas persetujuan atau penolakan pengajuan asuransi,
+              <br>
+              penerbitan Polis dan pembayaran atau penolakan klaim.
+            </li>
+          </ol>
+          <table class='SignatureSmall PositionerRight' style='margin-top: -40px;'>
+            <thead>
+              <tr>
+                <th>Telah dibaca dan disetujui oleh pemegang polis</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td></td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td>Nama dan tanda tangan calon pemegang polis</td>
+              </tr>
+            </tfoot>
+          </table>
+          <br>
+        </div>
+      </section>
+      <section id='SectionPolicyHolder'>
+        <h2>A. Data Calon Pemegang Polis</h2>
+        <br>
+        <h3>A1. Perorangan</h3>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxPolicyHolderCIN'>1. Nomor CIN</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderCIN'></table>
+        <span class='Note Single PositionerLeft'>(Dilengkapi oleh bank)</span>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxPolicyHolderFullName'>2. Nama Lengkap</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderFullName'></table>
+        <br>
+        <span class='Description PositionerLeft'>(sesuai dengan identitas diri)</span>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxPolicyHolderIDType'>3. Jenis Identifikasi Diri</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderKTP'></div>
+        <label class='RadioButton PositionerLeft' for='BoxPolicyHolderKTP'>KTP</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderSIM'></div>
+        <label class='RadioButton PositionerLeft' for='BoxPolicyHolderSIM'>SIM</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderPaspor'></div>
+        <span class='Separator PositionerLeft' for='BoxPolicyHolderPaspor'>Paspor</span>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderKIMSKITAS'></div>
+        <label class='RadioButton PositionerLeft' for='BoxPolicyHolderKIMSKITAS'>KIMS / KITAS</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderOtherID'></div>
+        <label class='RadioButton PositionerLeft' for='BoxPolicyHolderOtherID'>Lainnya, sebutkan</label>
+        <div class='LineDot PositionerLeft' id='LinePolicyHolderOtherID'></div>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxPolicyHolderID'>4. Nomor Identitas Diri</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderID'></table>
+        <table class='BoxSquare PositionerRight' id='BoxPolicyHolderActiveDateYear'></table>
+        <label class='Separator Single PositionerRight' for='BoxPolicyHolderActiveDateYear'>/</label>
+        <table class='BoxSquare PositionerRight' id='BoxPolicyHolderActiveDateMonth'></table>
+        <label class='Separator Single PositionerRight' for='BoxPolicyHolderActiveDateMonth'>/</label>
+        <table class='BoxSquare PositionerRight' id='BoxPolicyHolderActiveDateDay'></table>
+        <label class='Wrap Single PositionerRight' for='BoxPolicyHolderActiveDateDay'>Masa Berlaku</label>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxPolicyHolderDateOfBirth'>5. Tempat Tanggal Lahir</label>
+        <div class='LineStraight PositionerLeft' id='LinePolicyHolderPlace'></div>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderDateOfBirthDay'></table>
+        <span class='Separator Single PositionerLeft' for='BoxPolicyHolderDateOfBirthMonth'>/</span>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderDateOfBirthMonth'></table>
+        <label class='Separator Single PositionerLeft' for='BoxPolicyHolderDateOfBirthYear'>/</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderDateOfBirthYear'></table>
+        <label class='Separator Single PositionerLeft' for='BoxPolicyHolderAge'>Age</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderAge'></table>
+        <span class='Separator Single PositionerLeft'>Tahun</span>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxPolicyHolderWNI'>6. Kewarganegaraan</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderWNI'></div>
+        <label class='RadioButton PositionerLeft' for='BoxPolicyHolderWNI'>WNI</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderWNA'></div>
+        <label class='RadioButton PositionerLeft' for='BoxPolicyHolderWNA'>WNA, sebutkan</label>
+        <div class='LineDot PositionerLeft' id='LinePolicyHolderWNA'></div>
+        <span class='Note PositionerLeft'>(Jika jawaban "WNA" mohon melampirkan fotokopi KITAS & Paspor dan melengkapi kuesioner WNA)</span>
+        <br>
+        <label class='Wrap Single PositionerLeft' for='BoxPolicyHolderUSACitizenNo'>7. Apakah Anda merupakan warga negara atau wajib pajak Amerika Serikat ?</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderUSACitizenYes'></div>
+        <label class='RadioButton PositionerLeft' for='BoxPolicyHolderUSACitizenYes'>YA</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderUSACitizenNo'></div>
+        <label class='RadioButton PositionerLeft' for='BoxPolicyHolderUSACitizenNo'>TIDAK</label>
+        <span class='Note PositionerLeft'>(Jika jawaban "YA" mohon lampirkan formulir W8 / W9)</span>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxPolicyHolderMale'>8. Jenis Kelamin</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderMale'></div>
+        <label class='RadioButton Medium PositionerLeft' for='BoxPolicyHolderMale'>Laki Laki</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderFemale'></div>
+        <label class='RadioButton Medium PositionerLeft' for='BoxPolicyHolderFemale'>Wanita</label>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxPolicyHolderSingle'>9. Status Pernikahan</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderSingle'></div>
+        <label class='RadioButton Medium PositionerLeft' for='BoxPolicyHolderSingle'>Belum Menikah</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderMarried'></div>
+        <label class='RadioButton Medium PositionerLeft' for='BoxPolicyHolderMarried'>Menikah</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderWasMarried'></div>
+        <label class='RadioButton Medium PositionerLeft' for='BoxPolicyHolderWasMarried'>Janda / Duda</label>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxPolicyHolderIslam'>10. Agama</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderIslam'></div>
+        <label class='RadioButton Medium PositionerLeft' for='BoxPolicyHolderIslam'>Islam</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderCatholic'></div>
+        <label class='RadioButton Medium PositionerLeft' for='BoxPolicyHolderChatolic'>Kristen Katolik</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderProtestan'></div>
+        <label class='RadioButton PositionerLeft' for='BoxPolicyHolderProtestan'>Kristen Protestan</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderHindu'></div>
+        <label class='RadioButton PositionerLeft' for='BoxPolicyHolderHindu'>Hindu</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderBudha'></div>
+        <label class='RadioButton PositionerLeft' for='BoxPolicyHolderBudha'>Budha</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderKongHuChu'></div>
+        <label class='RadioButton PositionerLeft' for='BoxPolicyHolderKongHuChu'>Kong Hu Chu</label>
+        <br>
+        <label class='Wrap Single PositionerLeft' for='BoxPolicyHolderCompany'>11. a. Nama Perusahaan/Instansi/Sekolah</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderCompany' style='margin-left: 4px'></table>
+        <br>
+        <label class='Medium SecondIndent Single PositionerLeft' for='BoxPolicyHolderMainJob'>Pekerjaan Utama</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderMainJob'></table>
+        <br>
+        <label class='Medium SecondIndent Single PositionerLeft' for='BoxPolicyHolderWorkScope'>Bidang Usaha</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderWorkScope'></table>
+        <br>
+        <label class='Medium SecondIndent Single PositionerLeft' for='BoxPolicyHolderPosition'>Jabatan</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderPosition'></table>
+        <br>
+        <label class='Medium SecondIndent Single PositionerLeft' for='BoxPolicyHolderJobDescription'>Uraian Pekerjaan</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderJobDescription'></table>
+        <br>
+        <label class='Medium FirstIndent Single PositionerLeft' for='BoxPolicyHolderSideJob'>b. Pekerjaan Tambahan</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderSideJob'></table>
+        <br>
+        <label class='Medium Multi PositionerLeft' for='BoxPolicyHolderHomeAddress1' style='height: 112px'>12. Alamat Tempat Tinggal</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderHomeAddress1'></table>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderHomeAddress2'></table>
+        <label class='Box Single PositionerLeft' for='BoxPolicyHolderHomeCity' id='LabelPolicyHolderHomeCity'>Kota</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderHomeCity'></table>
+        <label class='Box Single PositionerLeft' for='BoxPolicyHolderHomePostalCode' id='LabelPolicyHolderHomePostalCode'>Kode Pos</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderHomePostalCode'></table>
+        <label class='Box Single PositionerLeft' for='BoxPolicyHolderHomeTelephonePrefix' id='LabelPolicyHolderHomeTelephonePrefix'>Telp</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderHomeTelephonePrefix'></table>
+        <label class='Box Single PositionerLeft' for='BoxPolicyHolderHomeTelephoneInfix' id='LabelPolicyHolderHomeTeleponeInfix'>/</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderHomeTelephoneInfix'></table>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxPolicyHolderTelephone1'>13. Nomor Ponsel</label>
+        <label class='Box Single PositionerLeft' for='BoxPolicyHolderTelephone1' id='LabelPolicyHolderTelephone1'>1.</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderTelephone1'></table>
+        <label class='Box Single PositionerLeft' for='BoxPolicyHolderTelephone2' id='LabelPolicyHolderTelephone2'>2.</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderTelephone2'></table>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxPolicyHolderEmail'>14. Alamat Email</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderEmail'></table>
+        <br>
+        <label class='Medium Multi PositionerLeft' for='BoxPolicyHolderAddress1' style='height: 112px'>15. Alamat Kantor</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderOfficeAddress1'></table>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderOfficeAddress2'></table>
+        <label class='Box Single PositionerLeft' for='BoxPolicyHolderOfficeCity' id='LabelPolicyHolderOfficeCity'>Kota</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderOfficeCity'></table>
+        <label class='Box Single PositionerLeft' for='BoxPolicyHolderOfficePostalCode' id='LabelPolicyHolderOfficePostalCode'>Kode Pos</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderOfficePostalCode'></table>
+        <label class='Box Single PositionerLeft' for='BoxPolicyHolderOfficeTelephonePrefix' id='LabelPolicyHolderOfficeTelephonePrefix'>Telp</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderOfficeTelephonePrefix'></table>
+        <label class='Box Single PositionerLeft' for='BoxPolicyHolderOfficeTelephoneInfix' id='LabelPolicyHolderOfficeTeleponeInfix'>/</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderOfficeTelephoneInfix'></table>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxPolicyHolderCorrespondanceHomeAddress'>16. Alamat Korespondensi</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderCorrespondanceHomeAddress'></div>
+        <label class='RadioButton PositionerLeft' for='BoxPolicyHolderCorrespondanceHomeAddress'>Alamat Tempat Tinggal</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderCorrespondanceOfficeAddress'></div>
+        <label class='RadioButton PositionerLeft' for='BoxPolicyHolderCorrespondanceOfficeAddress'>Alamat Kantor</label>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxPolicyHolderSelf'>17. Hubungan dengan Calon Tertangung</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderSelf'></div>
+        <label class='RadioButton Short PositionerLeft' for='BoxPolicyHolderSelf'>Diri Sendiri</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderSpouse'></div>
+        <label class='RadioButton Short PositionerLeft' for='BoxPolicyHolderSpouse'>Suami / Istri</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderFamily'></div>
+        <label class='RadioButton Short PositionerLeft' for='BoxPolicyHolderFamily'>Orang Tua / Anak</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderColleague'></div>
+        <label class='RadioButton Short PositionerLeft' for='BoxPolicyHolderColleague'>Perusahaan / Karyawan</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderOtherRelationship'></div>
+        <label class='RadioButton PositionerLeft' for='BoxPolicyHolderOtherRelationship'>Lainnya, sebutkan</label>
+        <div class='LineDot PositionerLeft' id='LinePolicyHolderOtherRelationship'></div>
+        <br>
+        <label class='Wrap Single PositionerLeft' for='BoxPolicyHolderSaving'>18. Tujuan Pembelian Asuransi</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderSaving'></div>
+        <label class='RadioButton Short PositionerLeft' for='BoxPolicyHolderSaving'>Tabungan</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderProtection'></div>
+        <label class='RadioButton Short PositionerLeft' for='BoxPolicyHolderProtection'>Proteksi</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderInvestation'></div>
+        <label class='RadioButton Short PositionerLeft' for='BoxPolicyHolderInvestation'>Investasi</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderEducation'></div>
+        <label class='RadioButton Short PositionerLeft' for='BoxPolicyHolderEducation'>Edukasi</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderOtherPurpose'></div>
+        <label class='RadioButton PositionerLeft' for='BoxPolicyHolderOtherPurpose'>Lainnya, sebutkan</label>
+        <div class='LineDot PositionerLeft' id='LinePolicyHolderOtherPurpose'></div>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxPolicyHolderNPWP'>19. Nomor NPWP (jika ada)</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderNPWP'></table>
+        <table class='BoxSquare PositionerRight' id='BoxPolicyHolderNPWPActiveDateYear'></table>
+        <label class='Separator Single PositionerRight' for='BoxPolicyHolderNPWPActiveDateYear'>/</label>
+        <table class='BoxSquare PositionerRight' id='BoxPolicyHolderNPWPActiveDateMonth'></table>
+        <label class='Separator Single PositionerRight' for='BoxPolicyHolderNPWPActiveDateMonth'>/</label>
+        <table class='BoxSquare PositionerRight' id='BoxPolicyHolderNPWPActiveDateDay'></table>
+        <label class='Wrap Single PositionerRight' for='BoxPolicyHolderNPWPActiveDateDay'>Masa Berlaku</label>
+        <br>
+        <label class='Wrap Single PositionerLeft' for='BoxPolicyHolderSalaryIDR'>20. Penghasilan Kotor Per Tahun</label>
+        <br>
+        <label class='Medium Single FirstIndent PositionerLeft' for='BoxPolicyHolderSalaryIDR'>Gaji</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderSalaryIDR'></div>
+        <label class='RadioButton PositionerLeft' for='BoxPolicyHolderSalaryIDR'>Rp</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderSalaryUSD'></div>
+        <label class='RadioButton PositionerLeft' for='BoxPolicyHolderSalaryUSD'>USD</label>
+        <label class='Wrap Single PositionerLeft' for='BoxPolicyHolderSalary'>Jumlah Penghasilan / tahun</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderSalary'></table>
+        <br>
+        <label class='Medium Single FirstIndent PositionerLeft' for='BoxPolicyHolderRevenueIDR'>Hasil Usaha</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderRevenueIDR'></div>
+        <label class='RadioButton PositionerLeft' for='BoxPolicyHolderrRevenueIDR'>Rp</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderRevenueUSD'></div>
+        <label class='RadioButton PositionerLeft' for='BoxPolicyHolderRevenueUSD'>USD</label>
+        <label class='RadioButton PositionerLeft' for='BoxPolicyHolderRevenue'>Jumlah Penghasilan / tahun</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderRevenue'></table>
+        <br>
+        <label class='Medium FirstIndent Single PositionerLeft' for='BoxPolicyHolderOtherIncomeIDR'>Penghasilan Lainnya</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderOtherIncomeIDR'></div>
+        <label class='RadioButton PositionerLeft' for='BoxPolicyHolderOtherIncomeIDR'>Rp</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderOtherIncomeUSD'></div>
+        <label class='RadioButton PositionerLeft' for='BoxPolicyHolderOtherIncomeUSD'>USD</label>
+        <label class='RadioButton PositionerLeft' for='BoxPolicyHolderOtherIncome'>Jumlah Penghasilan / tahun</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderOtherIncome'></table>
+        <br>
+        <label class='Medium Single FirstIndent PositionerLeft' for='BoxPolicyHolderSource'>Jelaskan Sumbernya</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderSource'></table>
+        <br>
+        <br>
+        <h3>A2. PERUSAHAAN/BERBADAN HUKUM</h3>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxPolicyHolderCompanyName'>1. Nama Perusahaan</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderCompanyName'></table>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxPolicyHolderCompanyType'>2. Jenis Perusahaan</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderCompanyPT'></div>
+        <label class='RadioButton PositionerLeft' for='BoxPolicyHolderCompanyPT'>Perseroan Terbatas</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderCompanyYayasan'></div>
+        <label class='RadioButton PositionerLeft' for='BoxPolicyHolderCompanyYayasan'>Yayasan</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderCompanyBUMN'></div>
+        <label class='RadioButton PositionerLeft' for='BoxPolicyHolderCompanyBUMN'>BUMN</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderCompanyBUMN'></div>
+        <label class='RadioButton PositionerLeft' for='BoxPolicyHolderCompanyOther'>Lainnya, sebutkan</label>
+        <div class='LineDot PositionerLeft' id='LinePolicyHolderCompanyOther'></div>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxPolicyHolderCompanyNoAnggaranDasar'>3. Nomor Anggaran Dasar/Akta Pendirian</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderCompanyNoAnggaranDasar'></table>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxPolicyHolderCompanyAnggaranDateOfExpired'></label>
+        <label class='Medium Single PositionerLeft' for='BoxPolicyHolderCompanyDateOfExpiredTitle'>Tanggal Berlaku</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderCompanyAnggaranDateOfExpiredDay'></table>
+        <span class='Separator Single PositionerLeft' for='BoxPolicyHolderCompanyAnggaranDateOfExpiredMonth'>/</span>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderCompanyAnggaranDateOfExpiredMonth'></table>
+        <label class='Separator Single PositionerLeft' for='BoxPolicyHolderCompanyAnggaranDateOfExpiredYear'>/</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderCompanyAnggaranDateOfExpiredYear'></table>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxPolicyHolderCompanyNoSuratIjinUsaha'>4. Nomor Surat Ijin Usaha</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderCompanyNoSuratIjinUsaha'></table>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxPolicyHolderCompanySIUPDateOfExpired'></label>
+        <label class='Medium Single PositionerLeft' for='BoxPolicyHolderCompanySIUPDateOfExpiredTitle'>Tanggal Berlaku</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderCompanySIUPDateOfExpiredDay'></table>
+        <span class='Separator Single PositionerLeft' for='BoxPolicyHolderCompanySIUPDateOfExpiredMonth'>/</span>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderCompanySIUPDateOfExpiredMonth'></table>
+        <label class='Separator Single PositionerLeft' for='BoxPolicyHolderCompanySIUPDateOfExpiredYear'>/</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderCompanySIUPDateOfExpiredYear'></table>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxPolicyHolderCompanyNoTDP'>5. Nomor TDP</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderCompanyNoTDP'></table>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxPolicyHolderCompanyTDPDateOfExpired'></label>
+        <label class='Medium Single PositionerLeft' for='BoxPolicyHolderCompanyTDPDateOfExpiredTitle'>Tanggal Berlaku</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderCompanyTDPDateOfExpiredDay'></table>
+        <span class='Separator Single PositionerLeft' for='BoxPolicyHolderCompanyTDPDateOfExpiredMonth'>/</span>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderCompanyTDPDateOfExpiredMonth'></table>
+        <label class='Separator Single PositionerLeft' for='BoxPolicyHolderCompanyTDPDateOfExpiredYear'>/</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderCompanyTDPDateOfExpiredYear'></table>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxPolicyHolderCompanyNoSKDP'>6. Nomor SKDP (Domisili)</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderCompanyNoSKDP'></table>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxPolicyHolderCompanySKDPDateOfExpired'></label>
+        <label class='Medium Single PositionerLeft' for='BoxPolicyHolderCompanySKDPDateOfExpiredTitle'>Tanggal Berlaku</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderCompanySKDPDateOfExpiredDay'></table>
+        <span class='Separator Single PositionerLeft' for='BoxPolicyHolderCompanySKDPDateOfExpiredMonth'>/</span>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderCompanySKDPDateOfExpiredMonth'></table>
+        <label class='Separator Single PositionerLeft' for='BoxPolicyHolderCompanySKDPDateOfExpiredYear'>/</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderCompanySKDPDateOfExpiredYear'></table>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxPolicyHolderCompanyNoNPWP'>7. Nomor NPWP (jika ada)</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderCompanyNoNPWP'></table>
+        <table class='BoxSquare PositionerRight' id='BoxPolicyHolderCompanyNoNPWPDateYear'></table>
+        <span class='Separator PositionerRight'>/</span>
+        <table class='BoxSquare PositionerRight' id='BoxPolicyHolderCompanyNoNPWPDateMonth'></table>
+        <span class='Separator PositionerRight'>/</span>
+        <table class='BoxSquare PositionerRight' id='BoxPolicyHolderCompanyNoNPWPDateDay'></table>
+        <label class='Wrap Single PositionerRight'>Tanggal Berlaku</label>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxPolicyHolderCompanySector'>8. Bidang Usaha</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderCompanySector'></table>
+        <br>
+        <label class='Medium Multi PositionerLeft' for='BoxPolicyHolderCompanyAddress'>9. Alamat Perusahaan (sesuai SKDP)</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderCompanyAddress'></table>
+        <label class='Box Single PositionerLeft' for='BoxPolicyHolderCompanyCity' id='LabelPolicyHolderCompanyCity'>Kota</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderCompanyCity'></table>
+        <label class='Box Single PositionerLeft' for='BoxPolicyHolderCompanyPostalCode' id='LabelPolicyHolderCompanyPostalCode'>Kode Pos</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderCompanyPostalCode'></table>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxPolicyHolderCompanyAsset'>10. Aset Perusahaan (Rp)</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderCompanyAsset'></div>
+        <label class='RadioButton Wrap PositionerLeft' for='BoxPolicyHolderCompanyAsset'><100 Juta</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderCompanyAsset2'></div>
+        <label class='RadioButton Wrap PositionerLeft' for='BoxPolicyHolderCompanyAsset2'>100 Juta - 1 Miliar</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderCompanyAsset3'></div>
+        <label class='RadioButton Wrap PositionerLeft' for='BoxPolicyHolderCompanyAsset3'>>1 Miliar - 10 Miliar</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderCompanyAsset4'></div>
+        <label class='RadioButton Wrap PositionerLeft' for='BoxPolicyHolderCompanyAsset4'>>10 Miliar - 100 Miliar</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderCompanyAsset5'></div>
+        <label class='RadioButton PositionerLeft' for='BoxPolicyHolderCompanyAsset5'>>100 Miliar</label>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxPolicyHolderCompanyAsset6'>11. Aset Perusahaan (Rp)</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderCompanyAsset6'></div>
+        <label class='RadioButton Wrap PositionerLeft' for='BoxPolicyHolderCompanyAsset6'><100 Juta</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderCompanyAsset7'></div>
+        <label class='RadioButton Wrap PositionerLeft' for='BoxPolicyHolderCompanyAsset7'>100 Juta - 500 Juta</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderCompanyAsset8'></div>
+        <label class='RadioButton Wrap PositionerLeft' for='BoxPolicyHolderCompanyAsset8'>>500 Juta - 1 Miliar</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderCompanyAsset9'></div>
+        <label class='RadioButton Wrap PositionerLeft' for='BoxPolicyHolderCompanyAsset9'>>1 Miliar - 10 Miliar</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderCompanyAsset10'></div>
+        <label class='RadioButton PositionerLeft' for='BoxPolicyHolderCompanyAsset10'>>10 Miliar</label>
+        <br>
+      </section>
+      <section id='SectionCompanyRepresentative'>
+        <h2>Pihak Yang Ditunjuk Untuk Menerima Kuasa dan Berwenang Untuk Bertindak Untuk dan Atas Nama Perusahaan</h2>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxPolicyHolderCompanyRepresentativeFullName'>1. Nama Lengkap</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderCompanyRepresentativeFullName'></table>
+        <span class='Description PositionerLeft'>(sesuai dengan identitas diri)</span>
+        <br>
+        <label class='Wrap Single PositionerLeft' for='BoxPolicyHolderCompanyRepresentativePosition'>2. Jabatan/Pangkat/Golongan</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderCompanyRepresentativePosition'></table>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxPolicyHolderCompanyRepresentativeID'>3. Nomor Identitas Diri</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderCompanyRepresentativeID'></table>
+        <table class='BoxSquare PositionerRight' id='BoxPolicyHolderCompanyRepresentativeActiveDateYear'></table>
+        <label class='Separator Single PositionerRight' for='BoxPolicyHolderCompanyRepresentativeActiveDateYear'>/</label>
+        <table class='BoxSquare PositionerRight' id='BoxPolicyHolderCompanyRepresentativeActiveDateMonth'></table>
+        <label class='Separator Single PositionerRight' for='BoxPolicyHolderCompanyRepresentativeActiveDateMonth'>/</label>
+        <table class='BoxSquare PositionerRight' id='BoxPolicyHolderCompanyRepresentativeActiveDateDay'></table>
+        <label class='Wrap Single PositionerRight' for='BoxPolicyHolderCompanyRepresentativeActiveDateDay'>Masa Berlaku</label>
+        <br>
+        <label class='Medium Wrap PositionerLeft' for='BoxPolicyHolderCompanyRepresentativeSelf'>4. Hubungan dengan Calon Tertanggung</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderCompanyRepresentativeSelf'></div>
+        <label class='RadioButton Wrap PositionerLeft' for='BoxPolicyHolderCompanyRepresentativeEmployee'>Perusahaan / Karyawan</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderCompanyRepresentativeEmployee'></div>
+        <label class='RadioButton PositionerLeft' for='BoxPolicyHolderCompanyRepresentativeOtherRelationship'>Lainnya, sebutkan</label>
+        <div class='LineDot PositionerLeft' id='LinePolicyHolderCompanyRepresentativeOtherRelationship'></div>
+        <br>
+        <label class='Medium Wrap PositionerLeft' for='BoxPolicyHolderCompanyRepresentativeSaving'>5. Tujuan Pembelian Asuransi</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderCompanyRepresentativeSaving'></div>
+        <label class='RadioButton Short PositionerLeft' for='BoxPolicyHolderCompanyRepresentativeSaving'>Tabungan</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderCompanyRepresentativeProtection'></div>
+        <label class='RadioButton Short PositionerLeft' for='BoxPolicyHolderCompanyRepresentativeProtection'>Proteksi</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderCompanyRepresentativeInvestation'></div>
+        <label class='RadioButton Short PositionerLeft' for='BoxPolicyHolderCompanyRepresentativeInvestation'>Investasi</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderCompanyRepresentativeEducation'></div>
+        <label class='RadioButton Short PositionerLeft' for='BoxPolicyHolderCompanyRepresentativeEducation'>Edukasi</label>
+        <div class='BoxRound PositionerLeft' id='BoxPolicyHolderCompanyRepresentativeOtherPurpose'></div>
+        <label class='RadioButton PositionerLeft' for='BoxPolicyHolderCompanyRepresentativeOtherPurpose'>Lainnya, sebutkan</label>
+        <div class='LineDot PositionerLeft' id='LinePolicyHolderCompanyRepresentativeOtherPurpose'></div>
+        <br>
+        <div class='Note'>
+          <h3>Informasi Penting Jika Calon Pemegang Polis Perusahaan/Badan Hukum wajib melampirkan dokumen:</h3>
+          <ol>
+            <li>Fotokopi Akta Pendirian/Anggaran Dasar Perusahaan berikut perubahan Anggaran Dasar beserta pengesahannya oleh Menteri Hukum dan HAM/Instansi terkait.</li>
+            <li>Fotokopi Surat Izin Usaha (SIUP) atau Surat Izin Tempat Usaha (SITU) atau Surat Izin lainnya dari instansi berwenang.</li>
+            <li>Fotokopi Surat Keterangan Domisili.</li>
+            <li>Fotokopi Nomor Pokok Wajib Pajak (NPWP).</li>
+            <li>Fotokopi Laporan Keuangan yang telah di audit.</li>
+            <li>Fotokopi Identitas Diri (KTP/Paspor & KITAS) yang masih berlaku Direktur atau Pemilik Perusahaan/Badan Hukum.</li>
+            <li>Surat Kuasa kepada pihak-pihak yang ditunjuk untuk bertindak untuk dan atas nama Perusahaan/Badan Hukum dalam melakukan hubungan usaha dengan</li>
+            perusahaan asuransi (Bila dikuasakan).
+            <li>Fotokopi Identitas Diri (KTP/Paspor & KITAS) yang masih berlaku pihak-pihak yang ditunjuk untuk bertindak untuk dan atas nama Perusahaan/Badan Hukum dalam</li>
+            melakukan hubungan usaha dengan perusahaan asuransi (Bila dikuasakan).
+          </ol>
+        </div>
+        <br>
+      </section>
+      <section id='SectionInsuranceHolder'>
+        <h2>A. Data Calon Tertanggung</h2>
+        <br>
+        <h3>1. Perorangan</h3>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxInsuranceHolderCIN'>1. Nomor CIN</label>
+        <table class='BoxSquare PositionerLeft' id='BoxInsuranceHolderCIN'></table>
+        <span class='Note Single PositionerLeft'>(Dilengkapi oleh bank)</span>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxInsuranceHolderFullName'>2. Nama Lengkap</label>
+        <table class='BoxSquare PositionerLeft' id='BoxInsuranceHolderFullName'></table>
+        <br>
+        <span class='Description PositionerLeft'>(sesuai dengan identitas diri)</span>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxInsuranceHolderIDType'>3. Jenis Identifikasi Diri</label>
+        <div class='BoxRound PositionerLeft' id='BoxInsuranceHolderKTP'></div>
+        <label class='RadioButton PositionerLeft' for='BoxInsuranceHolderKTP'>KTP</label>
+        <div class='BoxRound PositionerLeft' id='BoxInsuranceHolderSIM'></div>
+        <label class='RadioButton PositionerLeft' for='BoxInsuranceHolderSIM'>SIM</label>
+        <div class='BoxRound PositionerLeft' id='BoxInsuranceHolderPaspor'></div>
+        <span class='Separator PositionerLeft' for='BoxInsuranceHolderPaspor'>Paspor</span>
+        <div class='BoxRound PositionerLeft' id='BoxInsuranceHolderKIMSKITAS'></div>
+        <label class='RadioButton PositionerLeft' for='BoxInsuranceHolderKIMSKITAS'>KIMS / KITAS</label>
+        <div class='BoxRound PositionerLeft' id='BoxInsuranceHolderOtherID'></div>
+        <label class='RadioButton PositionerLeft' for='BoxInsuranceHolderOtherID'>Lainnya, sebutkan</label>
+        <div class='LineDot PositionerLeft' id='LineInsuranceHolderOtherID'></div>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxInsuranceHolderID'>4. Nomor Identitas Diri</label>
+        <table class='BoxSquare PositionerLeft' id='BoxInsuranceHolderID'></table>
+        <table class='BoxSquare PositionerRight' id='BoxInsuranceHolderActiveDateYear'></table>
+        <label class='Separator Single PositionerRight' for='BoxInsuranceHolderActiveDateYear'>/</label>
+        <table class='BoxSquare PositionerRight' id='BoxInsuranceHolderActiveDateMonth'></table>
+        <label class='Separator Single PositionerRight' for='BoxInsuranceHolderActiveDateMonth'>/</label>
+        <table class='BoxSquare PositionerRight' id='BoxInsuranceHolderActiveDateDay'></table>
+        <label class='Wrap Single PositionerRight' for='BoxInsuranceHolderActiveDateDay'>Masa Berlaku</label>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxInsuranceHolderDateOfBirth'>5. Tempat Tanggal Lahir</label>
+        <div class='LineStraight PositionerLeft' id='LineInsuranceHolderPlace'></div>
+        <table class='BoxSquare PositionerLeft' id='BoxInsuranceHolderDateOfBirthDay'></table>
+        <span class='Separator Single PositionerLeft' for='BoxInsuranceHolderDateOfBirthMonth'>/</span>
+        <table class='BoxSquare PositionerLeft' id='BoxInsuranceHolderDateOfBirthMonth'></table>
+        <label class='Separator Single PositionerLeft' for='BoxInsuranceHolderDateOfBirthYear'>/</label>
+        <table class='BoxSquare PositionerLeft' id='BoxInsuranceHolderDateOfBirthYear'></table>
+        <label class='Separator Single PositionerLeft' for='BoxInsuranceHolderAge'>Age</label>
+        <table class='BoxSquare PositionerLeft' id='BoxInsuranceHolderAge'></table>
+        <span class='Separator Single PositionerLeft'>Tahun</span>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxInsuranceHolderWNI'>6. Kewarganegaraan</label>
+        <div class='BoxRound PositionerLeft' id='BoxInsuranceHolderWNI'></div>
+        <label class='RadioButton PositionerLeft' for='BoxInsuranceHolderWNI'>WNI</label>
+        <div class='BoxRound PositionerLeft' id='BoxInsuranceHolderWNA'></div>
+        <label class='RadioButton PositionerLeft' for='BoxInsuranceHolderWNA'>WNA, sebutkan</label>
+        <div class='LineDot PositionerLeft' id='LineInsuranceHolderWNA'></div>
+        <span class='Note PositionerLeft'>(Jika jawaban "WNA" mohon melampirkan fotokopi KITAS & Paspor dan melengkapi kuesioner WNA)</span>
+        <br>
+        <label class='Wrap Single PositionerLeft' for='BoxInsuranceHolderUSACitizenNo'>7. Apakah Anda merupakan warga negara atau wajib pajak Amerika Serikat ?</label>
+        <div class='BoxRound PositionerLeft' id='BoxInsuranceHolderUSACitizenYes'></div>
+        <label class='RadioButton PositionerLeft' for='BoxInsuranceHolderUSACitizenYes'>YA</label>
+        <div class='BoxRound PositionerLeft' id='BoxInsuranceHolderUSACitizenNo'></div>
+        <label class='RadioButton PositionerLeft' for='BoxInsuranceHolderUSACitizenNo'>TIDAK</label>
+        <span class='Note PositionerLeft'>(Jika jawaban "YA" mohon lampirkan formulir W8 / W9)</span>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxInsuranceHolderMale'>8. Jenis Kelamin</label>
+        <div class='BoxRound PositionerLeft' id='BoxInsuranceHolderMale'></div>
+        <label class='RadioButton Medium PositionerLeft' for='BoxInsuranceHolderMale'>Laki Laki</label>
+        <div class='BoxRound PositionerLeft' id='BoxInsuranceHolderFemale'></div>
+        <label class='RadioButton Medium PositionerLeft' for='BoxInsuranceHolderFemale'>Wanita</label>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxInsuranceHolderSingle'>9. Status Pernikahan</label>
+        <div class='BoxRound PositionerLeft' id='BoxInsuranceHolderSingle'></div>
+        <label class='RadioButton Medium PositionerLeft' for='BoxInsuranceHolderSingle'>Belum Menikah</label>
+        <div class='BoxRound PositionerLeft' id='BoxInsuranceHolderMarried'></div>
+        <label class='RadioButton Medium PositionerLeft' for='BoxInsuranceHolderMarried'>Menikah</label>
+        <div class='BoxRound PositionerLeft' id='BoxInsuranceHolderWasMarried'></div>
+        <label class='RadioButton Medium PositionerLeft' for='BoxInsuranceHolderWasMarried'>Janda / Duda</label>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxInsuranceHolderIslam'>10. Agama</label>
+        <div class='BoxRound PositionerLeft' id='BoxInsuranceHolderIslam'></div>
+        <label class='RadioButton Medium PositionerLeft' for='BoxInsuranceHolderIslam'>Islam</label>
+        <div class='BoxRound PositionerLeft' id='BoxInsuranceHolderCatholic'></div>
+        <label class='RadioButton Medium PositionerLeft' for='BoxInsuranceHolderChatolic'>Kristen Katolik</label>
+        <div class='BoxRound PositionerLeft' id='BoxInsuranceHolderProtestan'></div>
+        <label class='RadioButton PositionerLeft' for='BoxInsuranceHolderProtestan'>Kristen Protestan</label>
+        <div class='BoxRound PositionerLeft' id='BoxInsuranceHolderHindu'></div>
+        <label class='RadioButton PositionerLeft' for='BoxInsuranceHolderHindu'>Hindu</label>
+        <div class='BoxRound PositionerLeft' id='BoxInsuranceHolderBudha'></div>
+        <label class='RadioButton PositionerLeft' for='BoxInsuranceHolderBudha'>Budha</label>
+        <div class='BoxRound PositionerLeft' id='BoxInsuranceHolderKongHuChu'></div>
+        <label class='RadioButton PositionerLeft' for='BoxInsuranceHolderKongHuChu'>Kong Hu Chu</label>
+        <br>
+        <label class='Wrap Single PositionerLeft' for='BoxInsuranceHolderCompany'>11. a. Nama Perusahaan/Instansi/Sekolah</label>
+        <table class='BoxSquare PositionerLeft' id='BoxInsuranceHolderCompany' style='margin-left: 4px'></table>
+        <br>
+        <label class='Medium SecondIndent Single PositionerLeft' for='BoxInsuranceHolderMainJob'>Pekerjaan Utama</label>
+        <table class='BoxSquare PositionerLeft' id='BoxInsuranceHolderMainJob'></table>
+        <br>
+        <label class='Medium SecondIndent Single PositionerLeft' for='BoxInsuranceHolderWorkScope'>Bidang Usaha</label>
+        <table class='BoxSquare PositionerLeft' id='BoxInsuranceHolderWorkScope'></table>
+        <br>
+        <label class='Medium SecondIndent Single PositionerLeft' for='BoxInsuranceHolderPosition'>Jabatan</label>
+        <table class='BoxSquare PositionerLeft' id='BoxInsuranceHolderPosition'></table>
+        <br>
+        <label class='Medium SecondIndent Single PositionerLeft' for='BoxInsuranceHolderJobDescription'>Uraian Pekerjaan</label>
+        <table class='BoxSquare PositionerLeft' id='BoxInsuranceHolderJobDescription'></table>
+        <br>
+        <label class='Medium FirstIndent Single PositionerLeft' for='BoxInsuranceHolderSideJob'>b. Pekerjaan Tambahan</label>
+        <table class='BoxSquare PositionerLeft' id='BoxInsuranceHolderSideJob'></table>
+        <br>
+        <label class='Medium Multi PositionerLeft' for='BoxInsuranceHolderHomeAddress1' style='height: 112px'>12. Alamat Tempat Tinggal</label>
+        <table class='BoxSquare PositionerLeft' id='BoxInsuranceHolderHomeAddress1'></table>
+        <table class='BoxSquare PositionerLeft' id='BoxInsuranceHolderHomeAddress2'></table>
+        <label class='Box Single PositionerLeft' for='BoxInsuranceHolderHomeCity' id='LabelInsuranceHolderHomeCity'>Kota</label>
+        <table class='BoxSquare PositionerLeft' id='BoxInsuranceHolderHomeCity'></table>
+        <label class='Box Single PositionerLeft' for='BoxInsuranceHolderHomePostalCode' id='LabelInsuranceHolderHomePostalCode'>Kode Pos</label>
+        <table class='BoxSquare PositionerLeft' id='BoxInsuranceHolderHomePostalCode'></table>
+        <label class='Box Single PositionerLeft' for='BoxInsuranceHolderHomeTelephonePrefix' id='LabelInsuranceHolderHomeTelephonePrefix'>Telp</label>
+        <table class='BoxSquare PositionerLeft' id='BoxInsuranceHolderHomeTelephonePrefix'></table>
+        <label class='Box Single PositionerLeft' for='BoxInsuranceHolderHomeTelephoneInfix' id='LabelInsuranceHolderHomeTeleponeInfix'>/</label>
+        <table class='BoxSquare PositionerLeft' id='BoxInsuranceHolderHomeTelephoneInfix'></table>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxInsuranceHolderTelephone1'>13. Nomor Ponsel</label>
+        <label class='Box Single PositionerLeft' for='BoxInsuranceHolderTelephone1' id='LabelInsuranceHolderTelephone1'>1.</label>
+        <table class='BoxSquare PositionerLeft' id='BoxInsuranceHolderTelephone1'></table>
+        <label class='Box Single PositionerLeft' for='BoxInsuranceHolderTelephone2' id='LabelInsuranceHolderTelephone2'>2.</label>
+        <table class='BoxSquare PositionerLeft' id='BoxInsuranceHolderTelephone2'></table>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxInsuranceHolderEmail'>14. Alamat Email</label>
+        <table class='BoxSquare PositionerLeft' id='BoxInsuranceHolderEmail'></table>
+        <br>
+        <label class='Medium Multi PositionerLeft' for='BoxInsuranceHolderAddress1' style='height: 112px'>15. Alamat Kantor</label>
+        <table class='BoxSquare PositionerLeft' id='BoxInsuranceHolderOfficeAddress1'></table>
+        <table class='BoxSquare PositionerLeft' id='BoxInsuranceHolderOfficeAddress2'></table>
+        <label class='Box Single PositionerLeft' for='BoxInsuranceHolderOfficeCity' id='LabelInsuranceHolderOfficeCity'>Kota</label>
+        <table class='BoxSquare PositionerLeft' id='BoxInsuranceHolderOfficeCity'></table>
+        <label class='Box Single PositionerLeft' for='BoxInsuranceHolderOfficePostalCode' id='LabelInsuranceHolderOfficePostalCode'>Kode Pos</label>
+        <table class='BoxSquare PositionerLeft' id='BoxInsuranceHolderOfficePostalCode'></table>
+        <label class='Box Single PositionerLeft' for='BoxInsuranceHolderOfficeTelephonePrefix' id='LabelInsuranceHolderOfficeTelephonePrefix'>Telp</label>
+        <table class='BoxSquare PositionerLeft' id='BoxInsuranceHolderOfficeTelephonePrefix'></table>
+        <label class='Box Single PositionerLeft' for='BoxInsuranceHolderOfficeTelephoneInfix' id='LabelInsuranceHolderOfficeTeleponeInfix'>/</label>
+        <table class='BoxSquare PositionerLeft' id='BoxInsuranceHolderOfficeTelephoneInfix'></table>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxInsuranceHolderCorrespondanceHomeAddress'>16. Alamat Korespondensi</label>
+        <div class='BoxRound PositionerLeft' id='BoxInsuranceHolderCorrespondanceHomeAddress'></div>
+        <label class='RadioButton PositionerLeft' for='BoxInsuranceHolderCorrespondanceHomeAddress'>Alamat Tempat Tinggal</label>
+        <div class='BoxRound PositionerLeft' id='BoxInsuranceHolderCorrespondanceOfficeAddress'></div>
+        <label class='RadioButton PositionerLeft' for='BoxInsuranceHolderCorrespondanceOfficeAddress'>Alamat Kantor</label>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxInsuranceHolderSelf'>17. Hubungan dengan Calon Tertangung</label>
+        <div class='BoxRound PositionerLeft' id='BoxInsuranceHolderSelf'></div>
+        <label class='RadioButton Short PositionerLeft' for='BoxInsuranceHolderSelf'>Diri Sendiri</label>
+        <div class='BoxRound PositionerLeft' id='BoxInsuranceHolderSpouse'></div>
+        <label class='RadioButton Short PositionerLeft' for='BoxInsuranceHolderSpouse'>Suami / Istri</label>
+        <div class='BoxRound PositionerLeft' id='BoxInsuranceHolderFamily'></div>
+        <label class='RadioButton Short PositionerLeft' for='BoxInsuranceHolderFamily'>Orang Tua / Anak</label>
+        <div class='BoxRound PositionerLeft' id='BoxInsuranceHolderColleague'></div>
+        <label class='RadioButton Short PositionerLeft' for='BoxInsuranceHolderColleague'>Perusahaan / Karyawan</label>
+        <div class='BoxRound PositionerLeft' id='BoxInsuranceHolderOtherRelationship'></div>
+        <label class='RadioButton PositionerLeft' for='BoxInsuranceHolderOtherRelationship'>Lainnya, sebutkan</label>
+        <div class='LineDot PositionerLeft' id='LineInsuranceHolderOtherRelationship'></div>
+        <br>
+        <label class='Wrap Single PositionerLeft' for='BoxInsuranceHolderSaving'>18. Tujuan Pembelian Asuransi</label>
+        <div class='BoxRound PositionerLeft' id='BoxInsuranceHolderSaving'></div>
+        <label class='RadioButton Short PositionerLeft' for='BoxInsuranceHolderSaving'>Tabungan</label>
+        <div class='BoxRound PositionerLeft' id='BoxInsuranceHolderProtection'></div>
+        <label class='RadioButton Short PositionerLeft' for='BoxInsuranceHolderProtection'>Proteksi</label>
+        <div class='BoxRound PositionerLeft' id='BoxInsuranceHolderInvestation'></div>
+        <label class='RadioButton Short PositionerLeft' for='BoxInsuranceHolderInvestation'>Investasi</label>
+        <div class='BoxRound PositionerLeft' id='BoxInsuranceHolderEducation'></div>
+        <label class='RadioButton Short PositionerLeft' for='BoxInsuranceHolderEducation'>Edukasi</label>
+        <div class='BoxRound PositionerLeft' id='BoxInsuranceHolderOtherPurpose'></div>
+        <label class='RadioButton PositionerLeft' for='BoxInsuranceHolderOtherPurpose'>Lainnya, sebutkan</label>
+        <div class='LineDot PositionerLeft' id='LineInsuranceHolderOtherPurpose'></div>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxInsuranceHolderNPWP'>19. Nomor NPWP (jika ada)</label>
+        <table class='BoxSquare PositionerLeft' id='BoxInsuranceHolderNPWP'></table>
+        <table class='BoxSquare PositionerRight' id='BoxInsuranceHolderNPWPActiveDateYear'></table>
+        <label class='Separator Single PositionerRight' for='BoxInsuranceHolderNPWPActiveDateYear'>/</label>
+        <table class='BoxSquare PositionerRight' id='BoxInsuranceHolderNPWPActiveDateMonth'></table>
+        <label class='Separator Single PositionerRight' for='BoxInsuranceHolderNPWPActiveDateMonth'>/</label>
+        <table class='BoxSquare PositionerRight' id='BoxInsuranceHolderNPWPActiveDateDay'></table>
+        <label class='Wrap Single PositionerRight' for='BoxInsuranceHolderNPWPActiveDateDay'>Masa Berlaku</label>
+        <br>
+        <label class='Wrap Single PositionerLeft' for='BoxInsuranceHolderSalaryIDR'>20. Penghasilan Kotor Per Tahun</label>
+        <br>
+        <label class='Medium Single FirstIndent PositionerLeft' for='BoxInsuranceHolderSalaryIDR'>Gaji</label>
+        <div class='BoxRound PositionerLeft' id='BoxInsuranceHolderSalaryIDR'></div>
+        <label class='RadioButton PositionerLeft' for='BoxInsuranceHolderSalaryIDR'>Rp</label>
+        <div class='BoxRound PositionerLeft' id='BoxInsuranceHolderSalaryUSD'></div>
+        <label class='RadioButton PositionerLeft' for='BoxInsuranceHolderSalaryUSD'>USD</label>
+        <label class='Wrap Single PositionerLeft' for='BoxInsuranceHolderSalary'>Jumlah Penghasilan / tahun</label>
+        <table class='BoxSquare PositionerLeft' id='BoxInsuranceHolderSalary'></table>
+        <br>
+        <label class='Medium Single FirstIndent PositionerLeft' for='BoxInsuranceHolderRevenueIDR'>Hasil Usaha</label>
+        <div class='BoxRound PositionerLeft' id='BoxInsuranceHolderRevenueIDR'></div>
+        <label class='RadioButton PositionerLeft' for='BoxInsuranceHolderrRevenueIDR'>Rp</label>
+        <div class='BoxRound PositionerLeft' id='BoxInsuranceHolderRevenueUSD'></div>
+        <label class='RadioButton PositionerLeft' for='BoxInsuranceHolderRevenueUSD'>USD</label>
+        <label class='RadioButton PositionerLeft' for='BoxInsuranceHolderRevenue'>Jumlah Penghasilan / tahun</label>
+        <table class='BoxSquare PositionerLeft' id='BoxInsuranceHolderRevenue'></table>
+        <br>
+        <label class='Medium FirstIndent Single PositionerLeft' for='BoxInsuranceHolderOtherIncomeIDR'>Penghasilan Lainnya</label>
+        <div class='BoxRound PositionerLeft' id='BoxInsuranceHolderOtherIncomeIDR'></div>
+        <label class='RadioButton PositionerLeft' for='BoxInsuranceHolderOtherIncomeIDR'>Rp</label>
+        <div class='BoxRound PositionerLeft' id='BoxInsuranceHolderOtherIncomeUSD'></div>
+        <label class='RadioButton PositionerLeft' for='BoxInsuranceHolderOtherIncomeUSD'>USD</label>
+        <label class='RadioButton PositionerLeft' for='BoxInsuranceHolderOtherIncome'>Jumlah Penghasilan / tahun</label>
+        <table class='BoxSquare PositionerLeft' id='BoxInsuranceHolderOtherIncome'></table>
+        <br>
+        <label class='Medium Single FirstIndent PositionerLeft' for='BoxInsuranceHolderSource'>Jelaskan Sumbernya</label>
+        <table class='BoxSquare PositionerLeft' id='BoxInsuranceHolderSource'></table>
+        <br>
+      </section>
+      <section id='SectionProspectiveBeneficiariesList'>
+        <h2>C. Data Calon Penerima Manfaat</h2>
+        <table class='Round' id='TableProspectiveBeneficiaries'>
+          <thead>
+            <tr>
+              <th rowspan='2'>No.</th>
+              <th rowspan='2'>Nama Lengkap (Diisi sesuai dengan Identitas Diri yang berlaku)</th>
+              <th colspan='6'>Tanggal Lahir</th>
+              <th rowspan='2' style='white-space: nowrap'>L / P</th>
+              <th rowspan='2'>Hubungan dengan Calon Tertanggung</th>
+              <th rowspan='2'>Kewarganegaraan</th>
+            </tr>
+            <tr>
+              <th colspan='2'>Tanggal</th>
+              <th colspan='2'>Bulan</th>
+              <th colspan='2'>Tahun</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1.</td>
+              <td></td>
+              <td colspan='2'></td>
+              <td colspan='2'></td>
+              <td colspan='2'></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>2.</td>
+              <td></td>
+              <td colspan='2'></td>
+              <td colspan='2'></td>
+              <td colspan='2'></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>3.</td>
+              <td></td>
+              <td colspan='2'></td>
+              <td colspan='2'></td>
+              <td colspan='2'></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>4.</td>
+              <td></td>
+              <td colspan='2'></td>
+              <td colspan='2'></td>
+              <td colspan='2'></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>5.</td>
+              <td></td>
+              <td colspan='2'></td>
+              <td colspan='2'></td>
+              <td colspan='2'></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section id='SectionIllustration'>
+        <h2>D. Ilustrasi</h2>
+        <span class='Wrap PosiitionerLeft'>
+          Segala ketentuan yang terkait dengan Manfaat Asuransi Dasar dan Asuransi Tambahan, usia Calon Pemegang Polis/Calon Tertanggung, Uang Pertanggungan, frekuensi pembayaran adalah sebagaimana yang terdapat pada ilustrasi yang dilampirkan sebagai berikut:
+        </span>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxIllustrationAgentName'>Nama Tenaga Penjual</label>
+        <table class='BoxSquare PositionerLeft' id='BoxIllustrationAgentName'></table>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxIllustrationNumber'>Nomor Ilustrasi</label>
+        <table class='BoxSquare PositionerLeft' id='BoxIllustrationNumber'></table>
+        <label class='Wrap FirstIndent Single PositionerLeft' for='BoxIllustrationDateDay'>Tanggal</label>
+        <table class='BoxSquare PositionerLeft' id='BoxIllustrationDateDay'></table>
+        <label class='Separator Single PositionerLeft' for='BoxIllustrationDateMonth'>/</label>
+        <table class='BoxSquare PositionerLeft' id='BoxIllustrationDateMonth'></table>
+        <label class='Separator Single PositionerLeft' for='BoxIllustrationDateYear'>/</label>
+        <table class='BoxSquare PositionerLeft' id='BoxIllustrationDateYear'></table>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxIllustrationAgentCode'>Kode Tenaga Penjual</label>
+        <table class='BoxSquare PositionerLeft' id='BoxIllustrationAgentCode'></table>
+        <br>
+        <span class='Wrap MediumIndent PosiitionerLeft'>
+          * Wajib lengkapi sesuai dengan ilustrasi yang dilampirkan
+        </span>
+        <br>
+      </section>
+      <section id='SectionIPremiPayment'>
+        <h2>E. Data Pembayaran Premi</h2>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxPremiPaymentKurs'>1. Mata Uang</label>
+        <div class='BoxRound PositionerLeft' id='BoxPremiPaymentKursIDR'></div>
+        <label class='RadioButton PositionerLeft' for='BoxPremiPaymentKursIDR'>Rupiah</label>
+        <div class='BoxRound PositionerLeft' id='BoxPremiPaymentKursUSD'></div>
+        <label class='RadioButton PositionerLeft' for='BoxPremiPaymentKursUSD'>USD</label>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxPremiPaymentFrequency'>2. Frekuensi Pembayaran</label>
+        <div class='BoxRound PositionerLeft' id='BoxPremiPaymentFrequencyThn'></div>
+        <label class='RadioButton PositionerLeft' for='BoxPremiPaymentFrequencyThn' id='LabelPremiPaymentFrequencyYear'>Tahunan</label>
+        <div class='BoxRound PositionerLeft' id='BoxPremiPaymentFrequencySemester'></div>
+        <label class='RadioButton PositionerLeft' for='BoxPremiPaymentFrequencySemester' id='LabelPremiPaymentFrequencySemester'>Semesteran</label>
+        <div class='BoxRound PositionerLeft' id='BoxPremiPaymentFrequencyTriwulan'></div>
+        <label class='RadioButton PositionerLeft' for='BoxPremiPaymentFrequencyTriwulan' id='LabelPremiPaymentFrequencyTriwulan'>Triwulan</label>
+        <div class='BoxRound PositionerLeft' id='BoxPremiPaymentFrequencyMonth'></div>
+        <label class='RadioButton PositionerLeft' for='BoxPremiPaymentFrequencyMonth' id='LabelPremiPaymentFrequencyMonth'>Bulanan</label>
+        <div class='BoxRound PositionerLeft' id='BoxPremiPaymentFrequencyFull'></div>
+        <label class='RadioButton PositionerLeft' for='BoxPremiPaymentFrequencyFull' id='LabelPremiPaymentFrequencyFull'>Sekaligus</label>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxPremiPaymentPayor'>3. Pembayar Premi</label>
+        <div class='BoxRound PositionerLeft' id='BoxPremiPaymentPolicyHolder'></div>
+        <label class='RadioButton PositionerLeft' for='BoxPremiPaymentPolicyHolder' id='LabelPremiPaymentPolicyHolder'>Pemegang Polis</label>
+        <div class='BoxRound PositionerLeft' id='BoxPremiPaymentPolicyHolderCompany'></div>
+        <label class='RadioButton PositionerLeft' for='BoxPremiPaymentPolicyHolderCompany' id='LabelPremiPaymentPolicyHolderCompany'>Pemegang Polis Perusahaan/Badan Hukum</label>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxPremiPaymentPayor2'></label>
+        <div class='BoxRound PositionerLeft' id='BoxPremiPaymentPolicyHolderTertanggung'></div>
+        <label class='RadioButton PositionerLeft' for='BoxPremiPaymentPolicyHolderTertanggung' id='LabelPremiPaymentPolicyHolderTertanggung'>Tertanggung</label>
+        <div class='BoxRound PositionerLeft' id='BoxPremiPaymentPolicyHolderThirdParty'></div>
+        <label class='RadioButton PositionerLeft' for='BoxPremiPaymentPolicyHolderThirdParty' id='LabelPremiPaymentPolicyHolderThirdParty'>Pihak ketiga (selain Pemegang Polis dan Tertanggung)</label>
+        <br>
+        <label class='Medium Single PositionerLeft' for='BoxPremiPaymentWay'>4. Cara Pembayaran Premi</label>
+        <div class='BoxRound PositionerLeft' id='BoxPremiPaymentDebitAccount'></div>
+        <label class='RadioButton PositionerLeft' for='BoxPremiPaymentDebitAccount' id='LabelPremiPaymentDebitAccount'>Debit Rekening</label>
+        <div class='BoxRound PositionerLeft' id='BoxPremiPaymentCreditCardAccount'></div>
+        <label class='RadioButton PositionerLeft' for='BoxPremiPaymentCreditCardAccount' id='LabelPremiPaymentCreditCardAccount'>Debit Kartu Kredit</label>
+        <div class='BoxRound PositionerLeft' id='BoxPremiPaymentOtherAccount'></div>
+        <label class='RadioButton PositionerLeft' for='BoxPremiPaymentOtherAccount' id='LabelPremiPaymentOtherAccount'>Lainnya, Sebutkan</label>
+        <div class='LineDot PositionerLeft' id='LinePremiPaymentOtherAccount'></div>
+        <br>
+        <label class='Wrap Single PositionerLeft' for='BoxPremiDescription'>5. Wajib diisi untuk pengembalian Premi dan untuk media pembayaran Premi Lanjutan melalui Debit Rekening/Debit Kartu Kredit</label>
+        <br>
+        <label class='Long Single FirstIndent PositionerLeft' for='BoxPremiDescriptionCreditCardHolderName'>Nama Pemilik Rekening/Kartu Kredit</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPremiDescriptionCreditCardHolderName'></table>
+        <br>
+        <label class='Long Single FirstIndent PositionerLeft' for='BoxPremiDescriptionDebitCreditNumber'>Nomor Rekening/Kartu Kredit</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPremiDescriptionDebitCreditNumber'></table>
+        <br>
+        <label class='Long Single FirstIndent PositionerLeft' for='BoxPremiDescriptionBankName'>Nama Bank</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPremiDescriptionBankName'></table>
+        <br>
+        <label class='Long Single FirstIndent PositionerLeft' for='BoxPremiDescriptionBankBranch'>Nama Cabang</label>
+        <table class='BoxSquare PositionerLeft' id='BoxPremiDescriptionBankBranch'></table>
+        <br>
+        <label class='Wrap Single PositionerLeft' for='BoxPremiDescription2'>6. Apakah dalam pengajuan asuransi Anda, selain Anda dan Calon Tertanggung terdapat Pihak ketiga yang meminta mengajukan asuransi ini,</label>
+        <br>
+        <label class='Wrap Single FirstIndent PositionerLeft' for='BoxPremiDescription3'>menjadi pembayar Premi meminta hak atas manfaat Polis?</label>
+        <div class='BoxRound PositionerLeft' id='BoxPremiDescription3YesBox'></div>
+        <label class='RadioButton PositionerLeft' for='BoxPremiDescription3YesBox' id='LabelPremiDescription3YesBox'>Ya</label>
+        <div class='BoxRound PositionerLeft' id='BoxPremiDescription3NoBox'></div>
+        <label class='RadioButton PositionerLeft' for='BoxPremiDescription3NoBox' id='LabelPremiDescription3NoBox'>Tidak</label>
+        <label class='Wrap Single FirstIndent PositionerLeft' for='BoxPremiDescriptionYesStatement'>Bila jawaban Anda “Ya”, mohon isi dan lengkapi Formulir Keterangan Tambahan untuk Pihak ketiga.</label>
+        <br>
+      </section>
+      <section id='SectionProspectiveHealth'>
+        <h2>Data Kesehatan</h2>
+        <table class='Square'>
+          <thead>
+            <tr>
+              <th>Pertanyaan Kesehatan</th>
+              <th>Calon Tertanggung</th>
+              <th>Calon Pemegang Polis</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                1.  a. Tinggi Badan
+                <br>
+                b. Berat Badan
+                <br>
+                Apakah berat badan Anda mengalami penurunan atau kenaikan drastis (≥ 10% dalam 1 (satu) bulan) dalam 6 (enam) bulan terakhir?
+              </td>
+              <td>
+                <table class='BoxSquare PositionerCenter' id='BoxProspectiveInsuredHeight'></table>
+                <span class='PositionerCenter'>Cm</span>
+                <br>
+                <table class='BoxSquare PositionerCenter' id='BoxProspectiveInsuredWeight'></table>
+                <span class='PositionerCenter'>Kg</span>
+                <br>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredWeightChangeYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredWeightChangeYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredWeightChangeNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspeciveInsuredWeightChangeNo'>Tidak</label>
+              </td>
+              <td>
+                <table class='BoxSquare PositionerCenter' id='BoxPolicyHolderHeight'></table>
+                <span class='PositionerCenter'>Cm</span>
+                <br>
+                <table class='BoxSquare PositionerCenter' id='BoxPolicyHolderWeight'></table>
+                <span class='PositionerCenter'>Kg</span>
+                <br>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderWeightChangeYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderWeightChangeYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderWeightChangeNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderWeightChangeNo'>Tidak</label>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                2. Apakah Anda merokok dalam 12 (dua belas) bulan terakhir (termasuk rokok elektronik atau produk tembakau lainnya)?
+                <br>
+                Jika “Ya”, berapa batang per hari?
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredSmokeActivityYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredSmokeActivityYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredSmokeActivityNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredSmokeActivityYes'>Tidak</label>
+                <br>
+                <table class='BoxSquare PositionerCenter' id='BoxProspectiveInsuredSmokeAmount'></table>
+                <span class='PositionerCenter'>Batang</span>
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderSmokeAcivityYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderSmokeActivityYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderSmokeActivityNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderSmokeActivityNo'>Tidak</label>
+                <br>
+                <table class='BoxSquare PositionerCenter' id='BoxPolicyHolderSmokeAmount'></table>
+                <span class='PositionerCenter'>Batang</span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                3. Apakah Anda memiliki kebiasaan atau pernah menggunakan narkotika, zat adiktif atau obat-obatan lainnya, minum alkohol secara berlebihan? Jika “Ya”, jelaskan jumlah serta frekuensi mengkonsumsinya. Serta jelaskan jika ada riwayat perawatan/mendapat terapi karena hal tersebut?
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredJunkieYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredJunkieYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredJunkieNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredJunkieNo'>Tidak</label>
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderJunkieYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderJunkieYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderJunkieNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderJunkieNo'>Tidak</label>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                4. Apakah Anda memiliki hobi atau sewaktu-waktu melakukan kegiatan yang beresiko tinggi/bahaya atau masih aktif dalam pekerjaan beresiko tinggi (menyelam, panjat tebing, mendaki gunung, terjun payung, paralayang, balap motor/mobil, pertambangan, minyak dan gas bumi, Kelautan, TNI/Polri, penerbangan (selain dari penumpang resmi penerbangan terjadwal))? (Jika jawaban “Ya” mohon melengkapi kuesioner yang sesuai hobi/kegiatan/peker- jaan tersebut dan dilampirkan bersama SPAJ ini).
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredExtremeSportYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredExtremeSportYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredExtremeSportNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredExtremeSportNo'>Tidak</label>
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderExtremeSportYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderExtremeSportYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderExtremeSportNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderExtremeSportNo'>Tidak</label>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                5. Apakah Anda dalam 12 bulan terakhir ini/mendatang Anda pernah/memiliki rencana bepergian/tinggal di luar negeri? Jika “Ya”, jelaskan kapan waktu bepergiannya, negara tujuan, lama tinggal, serta kepentingannya.
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredAbroadYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredAbroadYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredAbroadNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredAbroadNo'>Tidak</label>
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderAbroadYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderAbroadYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderAbroadNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderAbroadNo'>Tidak</label>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                6. Apakah Anda pernah/sedang menderita penyakit atau menjalani pemeriksaan/perawatan, pengobatan, operasi untuk penyakit/kelainan dibawah ini:
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredMedicalTreatmentYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredMedicalTreatmentYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredMedicalTreatmentNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredMedicalTreatmentNo'>Tidak</label>
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderMedicalTreatmentYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderMedicalTreatmentYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderMedicalTreatmentNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderMedicalTreatmentNo'>Tidak</label>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span class='FirstIndent'>a. Gangguan fungsi/sistem penglihatan dan gangguan pada mata lainnya?</span>
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredVisionYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredVisionYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredVisionNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredVisionNo'>Tidak</label>
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderVisionYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderVisionYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderMedicalVisionNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderVisionNo'>Tidak</label>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span class='FirstIndent'>b. Gangguan fungsi/sistem pada Telinga, Hidung, Tenggorokan (THT)?</span>
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredENTYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredENTYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredENTNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredENTNo'>Tidak</label>
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderENTYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderENTYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderENTNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderENTNo'>Tidak</label>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span class='FirstIndent'>c. Gangguan fungsi/sistem Pernapasan, Paru-paru, Asma, Bronkitis, Tuberkulosis, Batuk Darah dan lainnya?</span>
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredRespiratoryYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredRespiratoryYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredMedicalTreatmentNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredResoiratoryNo'>Tidak</label>
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderRespiratoryYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderRespiratoryYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderRespiratoryNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderRespiratoryNo'>Tidak</label>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span class='FirstIndent'>d. Gangguan fungsi/sistem Jantung dan Pembuluh Darah, Nyeri Dada, Serangan Jantung, Demam, Jantung, Rematik, Tekanan Darah Tinggi (Hipertensi)/Rendah, (Hipotensi), Hiperkolesterol, Penyempitan/Penyumbatan Pembuluh Darah Otak dan lainnya?</span>
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredCardiacYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredCardiacYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredCardiacNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredCardiacNo'>Tidak</label>
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderCardiacYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderCardiacYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderCardiacNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderCardiacNo'>Tidak</label>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span class='FirstIndent'>e. Gangguan fungsi/sistem Pencernaan & Organ dalam Perut/Lambung, Maag, Hernia, Hepatitis dan lainnya?</span>
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredDigestYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredDigestYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredDigestNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredDigestNo'>Tidak</label>
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderDigestYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderDigestYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderDigestNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderDigestNo'>Tidak</label>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span class='FirstIndent'>f. Gangguan fungsi/sistem Saraf dan Otot, Vertigo, Stroke, Sering Pusing atau Pingsan, Epilepsi (kejang), Kelumpuhan, Kesemutan, Baal, Gangguan Kejiwaan dan lainnya?</span>
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredNerveYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredNerveYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredNerveNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredNerveNo'>Tidak</label>
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderNerveYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderNerveYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderNerveNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderNerveNo'>Tidak</label>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span class='FirstIndent'>g. Gangguan fungsi/sistem Hati dan Pankreas, Kencing Manis (Diabetes Melitus), Batu Empedu, Tumor Hati, penyakit Limpa dan lainnya?</span>
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredLiverYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredLiverYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredLiverNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredLiverNo'>Tidak</label>
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderLiverYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderLiverYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderLiverNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderLiverNo'>Tidak</label>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span class='FirstIndent'>h. Gangguan fungsi/sistem Kemih, Batu Ginjal, Gangguan Prostat, Gagal Ginjal, Organ Kelamin dan penyakit akibat hubungan seksual?</span>
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredReproductionYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredRedproductionYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredReproductionNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredReproductionNo'>Tidak</label>
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderReproductionYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderReproductionYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderReproductionNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderReproductionNo'>Tidak</label>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span class='FirstIndent'>i. Gangguan fungsi/sistem Tulang, Otot, Sendi, Kulit?</span>
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredMotionYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredMotionYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredMotionNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredMotionNo'>Tidak</label>
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderMotionYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderMotionYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderMotionNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderMotionNo'>Tidak</label>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span class='FirstIndent'>j. Gangguan fungsi/sistem Kelenjar dan Darah, Kelenjar Gondok, Kelenjar Getah Bening, Gangguan Hormon, Hemofilia, Anemia, Thalassemia, Leukemia?</span>
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredBloodYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredBloodYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredBloodNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredBloodNo'>Tidak</label>
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderBloodYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderBloodYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderBloodNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderBloodNo'>Tidak</label>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span class='FirstIndent'>k. Gangguan fungsi/sistem Kekebalan Tubuh,HIV/AIDS atau segala gejala yang berhubungan dengan AIDS (demam, diare kronis, penurunan berat badan yang tidak diketahui penyebabnya), Malaria, Lupus dan lainnya?</span>
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredImmuneYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredImmuneYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredImmuneNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredImmuneNo'>Tidak</label>
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderImmuneYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderImmuneYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderImmuneNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderImmuneNo'>Tidak</label>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span class='FirstIndent'>l. Gangguan fungsi Pertumbuhan Sel, Tumor, Kista, Kanker, Benjolan pada permukaan kulit atau pertumbuhan abnormal lainnya?</span>
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredCancerYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredCancerYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredCancerNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredCancerNo'>Tidak</label>
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderCancerYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderCanceYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderCanceNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderCancerNo'>Tidak</label>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span class='FirstIndent'>m. Gangguan Kesehatan lainnya yang tidak/belum dinyatakan diatas termasuk namun tidak terbatas pada kelainan bentuk tubuh, kelainan/cacat fisik, kelainan/cacat bawaan dan lainnya?</span>
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredOtherIllnessYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredOtherIllnessYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredOtherIllnessNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredOtherIllnessNo'>Tidak</label>
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderOtherIllnessYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderOtherIllnessYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderOtherIllnessNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderOtherIllnessNo'>Tidak</label>
+              </td>
+            </tr>
+            <tr>
+              <td class='Child' colspan='3'>
+                Jika pertanyaan nomor 6 dijawab "Ya" maka mohon agar melengkapi kolom dibawah ini
+                Apabila diperlukan dapat memberikan keterangan pada lembar tambahan. Lembar tambahan tersebut harus ditandatangani oleh Calon Pemegang Polis/Calon Tertanggung dan menjadi bagian yang tidak terpisahkan dari SPAJ ini.
+                <br>
+                <h3>Calon Tertanggung</h3>
+                <table class='Space' id='TableProspectiveInsuredIllness'>
+                  <thead>
+                    <tr>
+                      <th>No.</th>
+                      <th>Nama Penyakit</th>
+                      <th>Kapan Mulai Sakit</th>
+                      <th>Lama Sakit</th>
+                      <th>Nama Dokter</th>
+                      <th>Rumah Sakit / Klinik / Laboratorium / Puskesmas</th>
+                      <th>Alamat dan Nomor Telepon</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td>
+                        <label class='Single Wrap PositionerCenter' for='#BoxProspectiveInsured1Month'>Bulan</label>
+                        <table class='BoxSquare PositionerCenter' id='BoxProspectiveInsured1Month'></table>
+                        <label class='Single Wrap PositionerCenter' for='#BoxProspectiveInsured1Year'>Tahun</label>
+                        <table class='BoxSquare PositionerCenter' id='BoxProspectiveInsured1Year'></table>
+                      </td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td>
+                        <label class='Single Wrap PositionerCenter' for='#BoxProspectiveInsured2Month'>Bulan</label>
+                        <table class='BoxSquare PositionerCenter' id='BoxProspectiveInsured2Month'></table>
+                        <label class='Single Wrap PositionerCenter' for='#BoxProspectiveInsured2Year'>Tahun</label>
+                        <table class='BoxSquare PositionerCenter' id='BoxProspectiveInsured2Year'></table>
+                      </td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td>
+                        <label class='Single Wrap PositionerCenter' for='#BoxProspectiveInsured3Month'>Bulan</label>
+                        <table class='BoxSquare PositionerCenter' id='BoxProspectiveInsured3Month'></table>
+                        <label class='Single Wrap PositionerCenter' for='#BoxProspectiveInsured3Year'>Tahun</label>
+                        <table class='BoxSquare PositionerCenter' id='BoxProspectiveInsured3Year'></table>
+                      </td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <h3>Calon Pemegang Polis</h3>
+                <table class='Space' id='TablePolicyHolderIllness'>
+                  <thead>
+                    <tr>
+                      <th>No.</th>
+                      <th>Nama Penyakit</th>
+                      <th>Kapan Mulai Sakit</th>
+                      <th>Lama Sakit</th>
+                      <th>Nama Dokter</th>
+                      <th>Rumah Sakit / Klinik / Laboratorium / Puskesmas</th>
+                      <th>Alamat dan Nomor Telepon</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td>
+                        <label class='Single Wrap PositionerCenter' for='#BoxPolicyHolder1Month'>Bulan</label>
+                        <table class='BoxSquare PositionerCenter' id='BoxPolicyHolder1Month'></table>
+                        <label class='Single Wrap PositionerCenter' for='#BoxPolicyHolder1Year'>Tahun</label>
+                        <table class='BoxSquare PositionerCenter' id='BoxPolicyHolder1Year'></table>
+                      </td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td>
+                        <label class='Single Wrap PositionerCenter' for='#BoxPolicyHolder2Month'>Bulan</label>
+                        <table class='BoxSquare PositionerCenter' id='BoxPolicyHolder2Month'></table>
+                        <label class='Single Wrap PositionerCenter' for='#BoxPolicyHolder2Year'>Tahun</label>
+                        <table class='BoxSquare PositionerCenter' id='BoxPolicyHolder2Year'></table>
+                      </td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td>
+                        <label class='Single Wrap PositionerCenter' for='#BoxPolicyHolder3Month'>Bulan</label>
+                        <table class='BoxSquare PositionerCenter' id='BoxPolicyHolder3Month'></table>
+                        <label class='Single Wrap PositionerCenter' for='#BoxPolicyHolder3Year'>Tahun</label>
+                        <table class='BoxSquare PositionerCenter' id='BoxPolicyHolder3Year'></table>
+                      </td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td class='Child'>
+                7. Apakah Anda telah memiliki atau sedang mengajukan pertanggungan Asuransi Jiwa, kecelakaan, kesehatan, pemulihan polis? Serta apakah pengajuan Anda pernah ditolak/ ditangguhkan/dikenakan ekstra Premi diubah dalam bentuk apapun oleh perusahaan Asuransi Jiwa?
+                Apabila jawaban “Ya” maka mohon agar melengkapi kolom dibawah ini.
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredSPAJProposalYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredSPAJProposalYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredSPAJProposalNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredSPAJProposalNo'>Tidak</label>
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderSPAJProposalYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderSPAJProposalYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderSPAJProposalNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderSPAJProposalNo'>Tidak</label>
+              </td>
+            </tr>
+            <tr>
+              <td class='Child' colspan='3'>
+                Jika pertanyaan nomor 6 dijawab "Ya" maka mohon agar melengkapi kolom dibawah ini
+                Apabila diperlukan dapat memberikan keterangan pada lembar tambahan. Lembar tambahan tersebut harus ditandatangani oleh Calon Pemegang Polis/Calon Tertanggung dan menjadi bagian yang tidak terpisahkan dari SPAJ ini.
+                <br>
+                <h3>Calon Tertanggung</h3>
+                <table class='Space' id='TableProspectiveInsuredSPAJProposal'>
+                  <thead>
+                    <tr>
+                      <th>No.</th>
+                      <th>Nama Perusahaan</th>
+                      <th>Nomor Polis</th>
+                      <th>Tanggal Diterbitkan</th>
+                      <th>Uang Pertanggungan</th>
+                      <th>Hasil Keputusan</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <h3>Calon Pemegang Polis</h3>
+                <table class='Space' id='TablePolicyHolderSPAJProposal'>
+                  <thead>
+                    <tr>
+                      <th>No.</th>
+                      <th>Nama Perusahaan</th>
+                      <th>Nomor Polis</th>
+                      <th>Tanggal Diterbitkan</th>
+                      <th>Uang Pertanggungan</th>
+                      <th>Hasil Keputusan</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                8. Apakah Anda pernah mengajukan klaim ke perusahaan Asuransi Jiwa? Jika “Ya, mohon jelaskan alasannya.
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredClaimYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredClaimYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredClaimNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredClaimNo'>Tidak</label>
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderClaimYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderClaimYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderClaimNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderClaimNo'>Tidak</label>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                9. Apakah Anda pernah mendapatkan atau bermaksud menjalani pemeriksaan kesehatan diagnostik, seperti Sinar-X, USG, CT-scan, MRI, EKG, Treadmill, pemeriksaan darah, pemeriksaan urin, dan lain-lain?
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredDiagnosticYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredDiagnosticYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredDiagnosticNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredDiagnosticNo'>Tidak</label>
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderOtherIllnessYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderOtherIllnessYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderOtherIllnessNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderOtherIllnessNo'>Tidak</label>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                10. Khusus Calon Tertanggung anak-anak (usia ≤ 5 (lima) tahun):
+                <br>
+                <label class='FirstIndent PositionerLeft'>Waktu lahir</label>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredNormalPregnancy'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredNormalPregnancy'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredPrematurPregnancy'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredPrematurPregnancy'>Tidak</label>
+                <br>
+                <label class='FirstIndent PositionerLeft'>Panjang dan berat saat lahir</label>
+                <table class='BoxSquare PositionerLeft' id='BoxProspectiveInsuredBabyHeight'></table>
+                <span class='PositionerLeft'>Cm</span>
+                <table class='BoxSquare PositionerLeft' id='BoxProspectiveInsuredBabyWeight'></table>
+                <span class='PositionerLeft'>Kg</span>
+              </td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                11. Pertanyaan khusus untuk wanita:
+              </td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <span class='FirstIndent PositionerLeft'>a. Apakah Anda sedang hamil? Usia kehamilan</span>
+                <table class='BoxSquare PositionerLeft' id='BoxProspectiveInsuredPregnancyAge'></table>
+                <span class='PositionerLeft'>Minggu</span>
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredPregnantYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredPregnantYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredPregnantNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredPregmantNo'>Tidak</label>
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderPregnantYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderPregnantYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderPregnantNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderPregnantNo'>Tidak</label>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span class='FirstIndent'>b. Adakah komplikasi pada kehamilan termasuk persalinan secara sectio caesaria yang dilakukan karena menderita suatu penyakit (Darah Tinggi, Hepatitis, Diabetes dan lain-lain)?</span>
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredPregnantIllnessYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredPregnantIllnessYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredPregnantIllnessNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredPregnantIllnessNo'>Tidak</label>
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderPregnantIllnessYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderPregnantIllnessYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderPregnantIllnessNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderPregnantIllnessNo'>Tidak</label>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span class='FirstIndent'>c. Apakah Anda mempunyai kelainan payudara/organ kewanitaan lainnya termasuk haid yang tidak teratur? Jika “Ya” jelaskan nama kelainan atau komplikasi dan nama dokter yang merawat pada kolom (Siapa, Apa, Kapan, Dimana, Pengobatan yang dilakukan, Bagaimana).</span>
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredFemaleAbnormalityYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredFemaleAbnormalityYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredFemaleAbnormalityNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredFemaleAbnormalityNo'>Tidak</label>
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderFemaleAbnormalityYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderFemaleAbnormalityYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderFemaleAbnormalityNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderFemaleAbnormailtyNo'>Tidak</label>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span class='FirstIndent'>d. Apakah Anda pernah melakukan pemeriksaan Pap Smear dalam 1 (satu) tahun terakhir? Jika “Ya” jelaskan bagaimana hasilnya dan kapan dilakukan pemeriksaan tersebut?</span>
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredPapSmearYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredPapSmearYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredPapSmearNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredPapSmearNo'>Tidak</label>
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderPapSmearYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderPapSmearYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderPapSmearNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderPapSmearNo'>Tidak</label>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                12. Apakah ada anggota keluarga Anda (orang tua, anak, saudara kandung) yang menderita/dinyatakan terdiagnosa mengidap kelainan Jantung Koroner, Stroke, Kencing Manis (Diabetes Melitus), Kanker atau penyakit keturunan lainnya? (Jika “Ya” mohon agar dijelaskan pada kolom dibawah ini)
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredHeartDissorderYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredHeartDissorderYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredHeartDissorderNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredHeartDissorderNo'>Tidak</label>
+              </td>
+              <td>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderHeartDissorderYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderHeartDissorderYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderHeartDissorderNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderHeartDissorderNo'>Tidak</label>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <table class='SignatureMedium PositionerCenter' style='height: 240px;'>
+          <thead>
+            <tr>
+              <th>Kolom penjelasan jawaban "Ya" untuk seluruh pertanyaan pada bagian Data Kesehatan (Siapa, Apa, Kapan, Bagaimana, Di mana, Pengobatan yang dilakukan)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td></td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td></td>
+            </tr>
+          </tfoot>
+        </table>
+        <br>
+        <span class='Wrap PositionerCenter'>Apabila diperlukan dapat memberikan keterangan pada lembar tambahan. Lembar tambahan tersebut harus ditandatangani oleh Calon Pemegang Polis/Calon Tertanggung dan menjadi bagian yang tidak terpisahkan dari SPAJ ini.</span>
+      </section>
+      <section id='DeclarationAgreement'>
+        <h2>G. PERNYATAAN DAN SURAT KUASA</h2>
+        <p>Saya/Kami, Calon Tertanggung/Pemegang Polis yang namanya tercantum dalam SPAJ ini menyatakan:</p>
+        <ol>
+          <li>
+            Saya/Kami telah membaca, mengerti dan memahami semua pertanyaan dan pernyataan dalam Surat Pengajuan Asuransi Jiwa (SPAJ) ini serta telah menjawab dan mengisi dengan lengkap dan benar. Saya/Kami menyetujui apabila pernyataan dan jawaban diatas tidak benar, maka PT Asuransi Jiwa BCA selaku "Penanggung" berhak untuk melakukan pembatalan Asuransi Jiwa ini sejak awal dan tidak wajib mengembalikan premi yang sudah dibayarkan, membayar manfaat klaim asuransi, serta memberikan ganti rugi apapun. Saya/Kami mempunyai kewajiban untuk memberitahukan kepada Penanggung setiap ada perubahan yang menyangkut kesehatan Saya/Kami, baik berupa penyakit atau cacat yang timbul/diderita setelah pengisian surat ini dan/atau pemeriksaan medis, bila ada.
+          </li>
+          <li>
+            Saya/Kami telah mendapatkan penjelasan mengenai karakteristik asuransi mencakup antara lain: fitur, risiko, manfaat, biaya-biaya asuransi, persyaratan kepesertaan dan prosedur klaim.
+          </li>
+          <li>
+            Saya/Kami menyetujui untuk membebaskan Penanggung dari segala klaim, tuntutan baik Pidana maupun Perdata dari pihak manapun dan kerugian apapun yang mungkin timbul apabila pernyataan, keterangan dan jawaban Saya/Kami dalam SPAJ ini, dalam pemeriksaan kesehatan, kuesioner yang diperlukan atau perubahannya atau dokumen-dokumen lainnya bersama dengan SPAJ ini adalah tidak ben
+          </li>
+          <li>
+            Saya/Kami menyetujui bahwa perlindungan asuransi dinyatakan mulai berlaku sejak tanggal berlaku yang dicantumkan dalam Polis & Tertanggung masih hidup serta dalam keadaan sehat pada saat Polis diterima oleh Saya/Kami serta Premi telah dibayar penuh dan lunas sesuai dengan ketentuan dan peraturan yang berlaku. Saya/Kami mengerti bahwa Polis juga memberlakukan ketentuan pengecualian untuk kondisi tertentu.
+          </li>
+          <li>
+            Saya/Kami setuju bahwa dalam hal Saya/Kami tidak melengkapi persyaratan pengajuan asuransi jiwa yang diminta oleh Penanggung dalam waktu 60 (enam puluh) Hari Kalender sejak SPAJ sudah terdaftar pada sistem di Kantor Pusat Penanggung, atau Saya/Kami membatalkan pengajuan asuransi jiwa, maka Penanggung akan mengembalikan seluruh premi yang telah dibayarkan, tanpa disertai tingkat hasil investasi, dikurangi dengan semua biaya administrasi serta biaya pemeriksaan kesehatan yang timbul (jika ada) dan pengajuan SPAJ dianggap batal.
+          </li>
+          <li>
+            Saya/Kami dengan ini mengizinkan Penanggung untuk menggunakan atau memberikan informasi atau keterangan mengenai Saya/Kami yang tersedia, diperoleh atau disimpan oleh Penanggung (sesuai yang tercantum dalam SPAJ ini atau sarana lain), kepada pihak-pihak lain (termasuk tetapi tidak terbatas pada perusahaan reasuransi, asuransi, lembaga, bank atau badan hukum lain baik di dalam maupun di luar negeri) yang memiliki hubungan kerjasama dengan Penanggung dalam rangka pengajuan SPAJ ini, pembayaran klaim dan pelayanan nasabah. Saya/Kami juga mengerti bahwa Saya/Kami berhak untuk melakukan koreksi atau penambahan atas informasi dan keterangan mengenai Saya/Kami tersebut dengan menghubungi Kantor Pusat Penanggung.
+          </li>
+          <li>
+            Saya/Kami menyetujui membayar kepada Penanggung semua biaya pemeriksaan kesehatan yang timbul jika Saya/Kami membatalkan SPAJ dalam proses Underwriting atau setelah diputuskan dengan risiko standar.
+          </li>
+          <li>
+            Saya/Kami menyetujui bahwa atas pembayaran Premi pertama yang telah diterima Penanggung sesuai dengan cara pembayaran yang Saya paraf, maka Calon Tertanggung berhak mendapat Asuransi Kematian Akibat Kecelakaan yang berlaku sejak tanggal diterimanya SPAJ di Kantor Penanggung. Asuransi Kematian Akibat Kecelakaan akan berakhir dalam jangka waktu 60 (enam puluh) Hari Kalender sejak tanggal penerimaan SPAJ atau akan berakhir secara otomatis pada tanggal mulai berlaku Polis. Uang Pertanggungan Asuransi Kematian Akibat Kecelakaan untuk risiko meninggal akibat kecelakaan adalah sebesar Uang Pertanggungan yang tercantum dalam ilustrasi yang Saya/Kami tanda tangani dan ajukan ke Penanggung dengan ketentuan tidak melebihi Rp 50.000.000,- (lima puluh juta rupiah). Syarat dan ketentuan Asuransi Kematian Akibat Kecelakaan ini mengikuti ketentuan yang berlaku pada Penanggung. Apabila manfaat Asuransi Kematian Akibat Kecelakaan ini dibayarkan, maka Premi yang telah dibayarkan akan dikembalikan setelah dikurangi dengan biaya-biaya lainnya (jika ada).
+          </li>
+          <li>
+            Saya/Kami menyatakan bahwa setiap atau seluruh dana dan aset yang ditempatkan pada Penanggung dan hasil pengembangan investasi dan/atau Nilai Tunai yang mungkin timbul atas penempatan dana tersebut akan tunduk pada hukum dan ketentuan perpajakan yang berlaku, baik di negara di mana Saya/Kami berdomisili dan/atau negara di mana Saya/Kami menjadi warga negaranya.
+          </li>
+          <li>
+            Saya/Kami menyatakan bahwa pembayaran premi untuk Polis yang Saya/Kami ajukan berdasarkan SPAJ ini tidak berasal dari/untuk tujuan tindak pidana pencucian uang (Money Laundering) sebagaimana dimaksud dalam Peraturan dan Perundang-undangan yang berlaku tentang Pencegahan dan Pemberantasan Tindakan Pidana Pencucian Uang dan pendanaan terorisme. Apabila pembayaran yang dilakukan terindikasi sebagai transaksi keuangan yang mencurigakan maka Penanggung akan melaksanakan kewajibannya sesuai dengan ketentuan yang berlaku, termasuk melakukan kewajiban pelaporan atas transaksi keuangan yang mencurigakan.
+          </li>
+        </ol>
+        <div class='Note'>
+          <h3>Khusus untuk produk Unit Link:</h3>
+          <ul>
+            <li>
+              Saya/Kami telah mendapatkan penjelasan bahwa, nilai dari masing-masing jenis dana investasi yang Saya/Kami pilih dapat meningkat atau menurun tanpa jaminan dari Penanggung akan adanya batas minimal dan maksimal dan segala risiko pemilihan jenis dana investasi sepenuhnya menjadi tanggung jawab Saya/Kami.
+            </li>
+            <li>
+              Saya/Kami menyetujui untuk membayar semua biaya-biaya yang timbul sehubungan dengan perlindungan asuransi Unit Link ini termasuk tetapi tidak terbatas pada biaya akuisisi dan biaya penebusan.
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section id='SectionAgreement'>
+        <h2>Selanjutnya dengan ini Saya/Kami memberi Kuasa kepada:</h2>
+        <ol>
+          <li>
+            Dokter/Rumah Sakit/Klinik, Puskesmas, Perusahaan Asuransi Jiwa, Organisasi lain atau orang lain yang mempunyai catatan atau mengetahui keadaan kesehatan Saya/Kami untuk memberitahukan kepada Penanggung segala keterangan mengenai diri dan kesehatan Saya/Kami yang diperlukan dalam hubungan dengan perjanjian asuransi ini.
+            <br>
+            Pemberian kuasa ini tidak dapat ditarik kembali dan tetap berlaku selamanya pada waktu Saya/Kami masih hidup atau dalam keadaan cacat ataupun telah meninggal dunia.
+          </li>
+          <li>
+            Penanggung untuk meminta dan memperoleh keterangan dan data-data mengenai rekening dan/atau kondisi keuangan atas nama Saya/Kami dari Bank/Lembaga/Organisasi/Instansi atau pihak lainnya sehubungan dengan pelaksanaan Peraturan Mengenai Penerapan Prinsip Mengenal Nasabah bagi Lembaga Keuangan Non Bank yang berlaku.
+            <br>
+            Pemberi Kuasa sebagaimana maksud tersebut diatas merupakan bagian yang tidak dapat dipisahkan dari SPAJ ini dan tidak akan berakhir karena sebab-sebab yang tercantum dalam Pasal 1813 KUH Perdata. Dalam hal meninggalnya Saya/Kami, Saya/Kami mewajibkan Penerima Manfaat atau Pengganti Saya/Kami yang sah untuk menegaskan kembali atau melakukan suatu dan segala hal yang perlu agar hal-hal yang termasuk dalam Pemberian Kuasa ini tetap berlaku.
+            <br>
+            Penanggung dapat menggunakan fotokopi Surat Kuasa ini untuk keperluan yang sah.
+            <br>
+            Mengacu kepada Peraturan Otoritas Keuangan No. 1/POJK.7/2013 tentang Perlindungan Konsumen Sektor Jasa Keuangan, dengan ini Saya/Kami menyatakan setuju untuk dihubungi oleh PT Asuransi Jiwa BCA sehubungan dengan hal-hal sebagai berikut:
+            <ol>
+              <li>
+                Pemberitahuan tentang penerimaan dan/penolakan pengajuan SPAJ ini.
+              </li>
+              <li>
+                Pemberitahuan mengenai proses yang terjadi sehubungan dengan Polis yang akan diterbitkan berdasarkan SPAJ ini selama masa asuransi berlangsung.
+              </li>
+            </ol>
+          </li>
+        </ol>
+        <br>
+        <label class='Single PositionerLeft' for='LineSignedPlace'>Ditandatangani di</label>
+        <div class='LineStraight PositionerLeft' id='LineSignedPlace'></div>
+        <label class='Single PositionerLeft' for='LineSignedDateDay'>Pada Tanggal</label>
+        <div class='LineStraight PositionerLeft' id='LineSignedDateDay'></div>
+        <label class='Single Separator PositionerLeft' for='LineSignedDateMonth'>/</label>
+        <div class='LineStraight PositionerLeft' id='LineSignedDateMonth'></div>
+        <label class='Single Separator PositionerLeft' for='LineSignedDateYear'>/</label>
+        <div class='LineStraight PositionerLeft' id='LineSignedDateYear'></div>
+        <span class='Single Wrap PositionerLeft'>(Tanggal/Bulan/Tahun).</span>
+        <br>
+        <table class='SignatureMedium Horizontal25of100'>
+          <thead>
+            <tr>
+              <th>Telah dibaca dan disetujui oleh pemegang polis</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td></td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td>Nama dan tanda tangan calon pemegang polis</td>
+            </tr>
+          </tfoot>
+        </table>
+        <table class='SignatureMedium Horizontal25of100'>
+          <thead>
+            <tr>
+              <th>Telah dibaca dan disetujui oleh pemegang polis</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td></td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td>Nama dan tanda tangan calon pemegang polis</td>
+            </tr>
+          </tfoot>
+        </table>
+        <table class='SignatureMedium Horizontal25of100'>
+          <thead>
+            <tr>
+              <th>Telah dibaca dan disetujui oleh pemegang polis</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td></td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td>Nama dan tanda tangan calon pemegang polis</td>
+            </tr>
+          </tfoot>
+        </table>
+        <table class='SignatureMedium Horizontal25of100'>
+          <thead>
+            <tr>
+              <th>Telah dibaca dan disetujui oleh pemegang polis</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td></td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td>Nama dan tanda tangan calon pemegang polis</td>
+            </tr>
+          </tfoot>
+        </table>
+        <br>
+        <p>
+          WAJIB DIBACA
+          <br>
+          Mohon agar menandatangani SPAJ, jika Anda telah mengisi semua pertanyaan dan pernyataan dengan benar dan lengkap sesuai dengan keadaan sebenarnya. Segala risiko yang timbul akibat dari SPAJ yang ditandatangani dalam keadaan kosong atau tidak sesuai dengan kondisi sebenarnya merupakan tanggung jawab Pemegang Polis.
+        </p>
+      </section>
+    </main>
+  </body>
+</html>

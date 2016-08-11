@@ -8,6 +8,7 @@
 
 
 // IMPORT
+#import <objc/runtime.h>
 
 #import "SPAJ Add Menu.h"
 #import "SPAJ Add Detail.h"
@@ -21,7 +22,13 @@
 #import "SPAJ Capture Identification.h"
 #import "SPAJ Add Signature.h"
 #import "SPAJ Form Generation.h"
-
+#import "ModelSPAJSignature.h"
+#import "ModelSPAJIDCapture.h"
+#import "ModelSPAJDetail.h"
+#import "ModelSPAJFormGeneration.h"
+#import "Formatter.h"
+#import "Layout.h"
+#import "User Interface.h"
 // DECLARATION
 
 @interface SPAJAddMenu ()<SIListingDelegate,UIPopoverPresentationControllerDelegate>
@@ -37,6 +44,13 @@
     SIListingPopOver *siListingPopOver;
     ModelSIPOData *modelSIPOData;
     ModelSPAJTransaction *modelSPAJTransaction;
+    ModelSPAJSignature *modelSPAJSignature;
+    ModelSPAJIDCapture *modelSPAJIDCapture;
+    ModelSPAJFormGeneration* modelSPAJFormGeneration;
+    ModelSPAJDetail* modelSPAJDetail;
+    Formatter* formatter;
+    
+    UserInterface *objectUserInterface;
 }
 
     // SYNTHESIZE
@@ -46,6 +60,11 @@
     @synthesize dictTransaction;
 
     // DID LOAD
+    -(void)viewWillAppear:(BOOL)animated{
+        [self voidCheckListCompletion];
+        [self voidGetFooterInformation];
+    }
+
     -(void)viewDidAppear:(BOOL)animated{
         [self voidLoadSIInformation];
     }
@@ -56,6 +75,18 @@
         // Do any additional setup after loading the view, typically from a nib.
         
         // DATE
+        modelSIPOData = [[ModelSIPOData alloc]init];
+        modelSPAJTransaction = [[ModelSPAJTransaction alloc]init];
+        modelSPAJSignature = [[ModelSPAJSignature alloc]init];
+        modelSPAJIDCapture = [[ModelSPAJIDCapture alloc]init];
+        modelSPAJDetail = [[ModelSPAJDetail alloc]init];
+        modelSPAJFormGeneration = [[ModelSPAJFormGeneration alloc]init];
+        objectUserInterface = [[UserInterface alloc] init];
+        
+        formatter = [[Formatter alloc]init];
+        
+        [self setNavigationBar];
+        
         
         NSLocale* currentLocale = [NSLocale currentLocale];
         [[NSDate date] descriptionWithLocale:currentLocale];
@@ -103,11 +134,63 @@
         _labelPropertyLastUpdate.text = [CHARACTER_DOUBLEDOT stringByAppendingString:dateCurrent];
         _labelPropertyTimeRemining.text = [CHARACTER_DOUBLEDOT stringByAppendingString:dateCurrent];
         
-        modelSIPOData = [[ModelSIPOData alloc]init];
-        modelSPAJTransaction = [[ModelSPAJTransaction alloc]init];
+        
     }
 
 
+    -(void)setNavigationBar{
+        [self.navigationItem setTitle:@"eApplication Checklist"];
+        [self.navigationController.navigationBar setTitleTextAttributes:
+         @{NSForegroundColorAttributeName:[formatter navigationBarTitleColor],NSFontAttributeName: [formatter navigationBarTitleFont]}];
+    }
+
+    -(void)voidCheckListCompletion{
+        bool signatureCaptured  = [modelSPAJSignature voidSignatureCaptured:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
+        bool idCaptured = [modelSPAJIDCapture voidIDCaptured:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
+        bool detailCapture = [modelSPAJDetail voidDetailCaptured:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
+        bool formGeneration = [modelSPAJFormGeneration voidFormGenerated:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
+        
+        if (signatureCaptured){
+            [_viewStep6 setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
+        }
+        else{
+            [_viewStep6 setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_OCTONARY floatOpacity:1.0]];
+        }
+
+        if (idCaptured){
+            [_viewStep5 setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
+        }
+        else{
+            [_viewStep5 setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_OCTONARY floatOpacity:1.0]];
+        }
+
+        if (formGeneration){
+            [_viewStep4 setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
+        }
+        else{
+            [_viewStep4 setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_OCTONARY floatOpacity:1.0]];
+        }
+
+        if (detailCapture){
+            [_viewStep3 setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
+        }
+        else{
+            [_viewStep3 setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_OCTONARY floatOpacity:1.0]];
+        }
+    }
+
+    -(void)voidGetFooterInformation{
+        NSDictionary* dictFooter = [[NSDictionary alloc]initWithDictionary:[modelSPAJSignature voidSignaturePartyCaptured:[[dictTransaction valueForKey:@"SPAJEappNumber"] intValue] SignatureParty:@"SPAJSignatureParty1"]];
+        bool customerSignatureCaptured = [[dictFooter valueForKey:@"SignatureCaptured"] boolValue];
+        
+        if (customerSignatureCaptured>0){
+            [_labelPropertyCustomerSignature setText:[CHARACTER_DOUBLEDOT stringByAppendingString:@"Captured"]];
+        }
+        else{
+            [_labelPropertyCustomerSignature setText:[CHARACTER_DOUBLEDOT stringByAppendingString:@"Not Captured"]];
+        }
+        [_labelPropertyDateTime setText:[CHARACTER_DOUBLEDOT stringByAppendingString:[dictFooter valueForKey:@"SPAJDateSignatureParty1"]]];
+    }
 
     // VOID
     -(void)voidLoadSIInformation{
@@ -165,6 +248,7 @@
     {
         //[_delegateSPAJMain voidGoToFormGeneration];
         SPAJFormGeneration* viewController = [[SPAJFormGeneration alloc] initWithNibName:@"SPAJ Form Generation" bundle:nil];
+        [viewController setDictTransaction:dictTransaction];
         //[viewController setStringEAPPNumber:stringGlobalEAPPNumber];
         //[viewController setDictTransaction:[arraySPAJTransaction objectAtIndex:indexPath.row]];
         [self.navigationController pushViewController:viewController animated:YES];
@@ -174,6 +258,7 @@
     {
         //[_delegateSPAJMain voidGoToCaptureIdentification];
         SPAJCaptureIdentification* viewController = [[SPAJCaptureIdentification alloc] initWithNibName:@"SPAJ Capture Identification" bundle:nil];
+        [viewController setDictTransaction:dictTransaction];
         //[viewController setStringEAPPNumber:stringGlobalEAPPNumber];
         //[viewController setDictTransaction:[arraySPAJTransaction objectAtIndex:indexPath.row]];
         [self.navigationController pushViewController:viewController animated:YES];
@@ -183,6 +268,7 @@
     {
         //[_delegateSPAJMain voidGoToAddSignature];
         SPAJ_Add_Signature* viewController = [[SPAJ_Add_Signature alloc] initWithNibName:@"SPAJ Add Signature" bundle:nil];
+        [viewController setDictTransaction:dictTransaction];
         //[viewController setStringEAPPNumber:stringGlobalEAPPNumber];
         //[viewController setDictTransaction:[arraySPAJTransaction objectAtIndex:indexPath.row]];
         [self.navigationController pushViewController:viewController animated:YES];

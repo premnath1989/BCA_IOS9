@@ -12,7 +12,8 @@
 #import "SPAJ Form Generation.h"
 #import "String.h"
 #import "SPAJ Main.h"
-
+#import "Formatter.h"
+#import "SPAJPDFWebViewController.h"
 
 // DECLARATION
 
@@ -25,8 +26,11 @@
 
 // IMPLEMENTATION
 
-@implementation SPAJFormGeneration
-
+@implementation SPAJFormGeneration{
+    Formatter* formatter;
+    SPAJPDFWebViewController* spajPDFWebView;
+}
+@synthesize dictTransaction;
     // SYNTHESIZE
 
     @synthesize delegateSPAJMain = _delegateSPAJMain;
@@ -38,6 +42,12 @@
     {
         [super viewDidLoad];
         // Do any additional setup after loading the view, typically from a nib.
+        
+        // INITIALIZATION
+        formatter = [[Formatter alloc]init];
+        
+        
+        [self setNavigationBar];
         
         // LOCALIZATION
         
@@ -56,11 +66,23 @@
     }
 
 
+    -(void)setNavigationBar{
+        [self.navigationItem setTitle:@"eApplication Forms Generation"];
+        [self.navigationController.navigationBar setTitleTextAttributes:
+         @{NSForegroundColorAttributeName:[formatter navigationBarTitleColor],NSFontAttributeName: [formatter navigationBarTitleFont]}];
+    }
+
     // ACTION
 
     - (IBAction)actionGoToStep1:(id)sender
     {
-        
+        spajPDFWebView = [[SPAJPDFWebViewController alloc]initWithNibName:@"SPAJPDFWebViewController" bundle:nil];
+        [spajPDFWebView setDictTransaction:dictTransaction];
+        spajPDFWebView.modalPresentationStyle = UIModalPresentationFormSheet;
+        //spajPDFWebView.preferredContentSize = CGSizeMake(950, 768);
+        [self presentViewController:spajPDFWebView animated:YES completion:nil];
+        //spajPDFWebView.view.superview.frame = CGRectMake(0, 0, 950, 768);
+        //pajPDFWebView.view.superview.center = self.view.center;
     };
 
     - (IBAction)actionGoToStep2:(id)sender

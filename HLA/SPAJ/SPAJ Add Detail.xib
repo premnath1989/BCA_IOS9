@@ -7,7 +7,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SPAJAddDetail">
             <connections>
-                <outlet property="barDetail" destination="7AC-tW-2ao" id="q0G-Wr-HsL"/>
                 <outlet property="buttonStep1" destination="lnZ-K4-H9p" id="Fkv-LO-GpA"/>
                 <outlet property="buttonStep2" destination="iXD-ZI-9GH" id="N83-6a-b33"/>
                 <outlet property="buttonStep3" destination="hFC-J1-7WK" id="KS8-KN-a5l"/>
@@ -26,7 +25,6 @@
                 <outlet property="labelStep4" destination="fWk-RF-MUu" id="Dc8-nZ-DNB"/>
                 <outlet property="labelStep5" destination="gnm-nL-mfK" id="bRL-hM-QJf"/>
                 <outlet property="labelStep6" destination="raO-a2-yDO" id="HsH-dD-lbT"/>
-                <outlet property="rightButton" destination="3s5-Dt-dxl" id="Ieb-IY-lk9"/>
                 <outlet property="tableSection" destination="J3J-BO-pYe" id="hUi-mZ-b59"/>
                 <outlet property="view" destination="iN0-l3-epB" id="TTX-GH-ZKM"/>
                 <outlet property="viewContent" destination="DOb-zR-NEV" id="Xub-LS-0C2"/>
@@ -279,15 +277,6 @@
                         <outlet property="delegate" destination="-1" id="Spw-AL-NKY"/>
                     </connections>
                 </tableView>
-                <navigationBar contentMode="scaleToFill" id="7AC-tW-2ao">
-                    <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                    <items>
-                        <navigationItem title="Title" id="wjN-A4-lUf">
-                            <barButtonItem key="rightBarButtonItem" title="Simpan" id="3s5-Dt-dxl"/>
-                        </navigationItem>
-                    </items>
-                </navigationBar>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>

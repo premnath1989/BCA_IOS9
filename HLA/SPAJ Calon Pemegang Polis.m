@@ -33,6 +33,8 @@
     modelSPAJHtml = [[ModelSPAJHtml alloc]init];
     modelSPAJAnswers = [[ModelSPAJAnswers alloc]init];
     modelSIPData = [[ModelSIPOData alloc]init];
+    modelIdentificationType = [[ModelIdentificationType alloc]init];
+    formatter = [[Formatter alloc]init];
     
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     databasePath = [[NSString alloc] initWithString:
@@ -99,7 +101,7 @@
     [finalDictionary setValue:[params valueForKey:@"successCallBack"] forKey:@"successCallBack"];
     [finalDictionary setValue:[params valueForKey:@"errorCallback"] forKey:@"errorCallback"];
     [super savetoDB:finalDictionary];
-    //[delegate voidSetAreaPotentialBoolValidate:true];
+    [delegate voidSetCalonPemegangPolisBoolValidate:true];
 }
 
 - (NSMutableDictionary*)readfromDB:(NSMutableDictionary*) params{
@@ -127,14 +129,20 @@
 }
 
 -(NSDictionary *)dictForAutoPopulate{
+    NSString *SINO = [modelSPAJTransaction getSPAJTransactionData:@"SPAJSINO" StringWhereName:@"SPAJEappNumber" StringWhereValue:[delegate voidGetEAPPNumber]];
     NSMutableArray* columnNames = [[NSMutableArray alloc]initWithArray:[modelProspectProfile getColumnNames:@"prospect_profile"]];
     NSMutableArray* columnValue = [[NSMutableArray alloc]initWithArray:[modelProspectProfile getColumnValue:[self getPOIndexNumber] ColumnCount:[columnNames count]]];
+    NSDictionary* dictPOData = [[NSDictionary alloc ]initWithDictionary:[modelSIPData getPO_DataFor:SINO]];
     
     //create dictionary
     NSMutableDictionary* dictDetail = [[NSMutableDictionary alloc]init];
     for (int i=0;i<[columnNames count];i++){
         [dictDetail setObject:[columnValue objectAtIndex:i] forKey:[columnNames objectAtIndex:i]];
     }
+    NSString* identityDesc = [modelIdentificationType getOtherTypeDesc:[dictDetail valueForKey:@"OtherIDType"]];
+    
+    [dictDetail setObject:identityDesc forKey:@"OtherIDType"];
+    [dictDetail setObject:[dictPOData valueForKey:@"RelWithLA"] forKey:@"RelWithLA"];
     
     NSDictionary *readFromDB=[[NSDictionary alloc]initWithObjectsAndKeys:dictDetail,@"readFromDB", nil];
     NSDictionary *result=[[NSDictionary alloc]initWithObjectsAndKeys:readFromDB,@"result", nil];

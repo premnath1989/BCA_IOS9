@@ -50,5 +50,91 @@
     [database close];
 }
 
+-(bool)voidSignatureCaptured:(int)intTransactionSPAJID{
+    int signatureCaptured = 0;
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select count (*) as SignatureCaptured from SPAJSignature where SPAJTransactionID=%i and SPAJSignatureParty1=1 and SPAJSignatureParty2=1 and SPAJSignatureParty3=1 and SPAJSignatureParty4=1",intTransactionSPAJID]];
+    
+    while ([s next]) {
+        signatureCaptured = [s intForColumn:@"SignatureCaptured"];
+    }
+    
+    [results close];
+    [database close];
+    if (signatureCaptured>0){
+        return true;
+        
+    }
+    else{
+        return false;
+    }
+}
+
+-(bool)voidCertainSignaturePartyCaptured:(int)intTransactionSPAJID SignatureParty:(NSString *)stringSignatureParty{
+    int signatureCaptured = 0;
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select %@ from SPAJSignature where SPAJTransactionID=%i",stringSignatureParty,intTransactionSPAJID]];
+    
+    while ([s next]) {
+        signatureCaptured = [s intForColumn:stringSignatureParty];
+    }
+    
+    [results close];
+    [database close];
+    if (signatureCaptured>0){
+        return true;
+        
+    }
+    else{
+        return false;
+    }
+}
+
+
+-(NSMutableDictionary *)voidSignaturePartyCaptured:(int)intTransactionSPAJID SignatureParty:(NSString *)stringSignatureParty{
+    NSMutableDictionary* dictSignatureCaptured = [[NSMutableDictionary alloc] init];
+    int signatureCaptured = 0;
+    NSString* stringDateParty1;
+
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select count (*) as SignatureCaptured,SPAJDateSignatureParty1 from SPAJSignature where SPAJTransactionID=%i and %@=1",intTransactionSPAJID,stringSignatureParty]];
+    
+    while ([s next]) {
+        signatureCaptured = [s intForColumn:@"SignatureCaptured"];
+        stringDateParty1 = [s stringForColumn:@"SPAJDateSignatureParty1"];
+    }
+    
+    [results close];
+    [database close];
+    if (signatureCaptured>0){
+//        return true;
+        [dictSignatureCaptured setObject:@true forKey:@"SignatureCaptured"];
+        [dictSignatureCaptured setObject:stringDateParty1?:@"" forKey:@"SPAJDateSignatureParty1"];
+    }
+    else{
+//        return false;
+        [dictSignatureCaptured setObject:@false forKey:@"SignatureCaptured"];
+        [dictSignatureCaptured setObject:stringDateParty1?:@"" forKey:@"SPAJDateSignatureParty1"];
+    }
+    return dictSignatureCaptured;
+}
+
+
+
 
 @end

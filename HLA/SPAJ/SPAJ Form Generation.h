@@ -25,6 +25,7 @@
 @end
 
 @interface SPAJFormGeneration : UIViewController
+    @property (strong, nonatomic) NSDictionary* dictTransaction;
 
     // PROTOCOL
 
