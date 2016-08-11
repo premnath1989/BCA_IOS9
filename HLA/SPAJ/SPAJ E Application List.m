@@ -19,6 +19,8 @@
 #import "ModelSPAJTransaction.h"
 #import "ModelSPAJSignature.h"
 #import "ModelSPAJIDCapture.h"
+#import "ModelSPAJDetail.h"
+#import "ModelSPAJFormGeneration.h"
 #import "SPAJ Add Menu.h"
 // DECLARATION
 
@@ -37,8 +39,11 @@
 @implementation SPAJEApplicationList{
     ModelSPAJSignature* modelSPAJSignature;
     ModelSPAJIDCapture* modelSPAJIDCapture;
+    ModelSPAJFormGeneration* modelSPAJFormGeneration;
+    ModelSPAJDetail* modelSPAJDetail;
     SIListingPopOver *siListingPopOver;
     Formatter* formatter;
+    
     UIAlertController *alertController;
     NSMutableArray* arraySPAJTransaction;
     
@@ -71,6 +76,8 @@
         modelSPAJTransaction = [[ModelSPAJTransaction alloc]init];
         modelSPAJSignature = [[ModelSPAJSignature alloc]init];
         modelSPAJIDCapture = [[ModelSPAJIDCapture alloc]init];
+        modelSPAJDetail = [[ModelSPAJDetail alloc]init];
+        modelSPAJFormGeneration = [[ModelSPAJFormGeneration alloc]init];
         formatter = [[Formatter alloc]init];
         
         _querySPAJHeader = [[QuerySPAJHeader alloc]init];
@@ -283,6 +290,14 @@
             [self createSPAJIDCaptureData:stringGlobalEAPPNumber];
         });
         
+        dispatch_async(serialQueue, ^{
+            [self createSPAJDetail:stringGlobalEAPPNumber];
+        });
+        
+        dispatch_async(serialQueue, ^{
+            [self createSPAJFormGeneration:stringGlobalEAPPNumber];
+        });
+        
         //dispatch_async(serialQueue, ^{
             //[self loadSPAJTransaction];
         //});
@@ -452,6 +467,37 @@
         
         
         [modelSPAJIDCapture saveSPAJIDCapture:dictionarySPAJTransaction];
+    }
+
+    -(void)createSPAJFormGeneration:(NSString *)stringEAPPNo;
+    {
+        NSMutableDictionary* dictionarySPAJTransaction = [[NSMutableDictionary alloc]init];
+        
+        NSString* stringEAPPNumber = stringEAPPNo;
+        
+        [dictionarySPAJTransaction setObject:stringEAPPNumber forKey:@"SPAJEappNumber"];
+        [dictionarySPAJTransaction setObject:@"0" forKey:@"SPAJFormGeneration1"];
+        [dictionarySPAJTransaction setObject:@"0" forKey:@"SPAJFormGeneration2"];
+        [dictionarySPAJTransaction setObject:@"0" forKey:@"SPAJFormGeneration3"];
+        
+        [modelSPAJFormGeneration saveSPAJFormGeneration:dictionarySPAJTransaction];
+    }
+
+    -(void)createSPAJDetail:(NSString *)stringEAPPNo;
+    {
+        NSMutableDictionary* dictionarySPAJTransaction = [[NSMutableDictionary alloc]init];
+        
+        NSString* stringEAPPNumber = stringEAPPNo;
+        
+        [dictionarySPAJTransaction setObject:stringEAPPNumber forKey:@"SPAJEappNumber"];
+        [dictionarySPAJTransaction setObject:@"0" forKey:@"SPAJDetail1"];
+        [dictionarySPAJTransaction setObject:@"0" forKey:@"SPAJDetail2"];
+        [dictionarySPAJTransaction setObject:@"0" forKey:@"SPAJDetail3"];
+        [dictionarySPAJTransaction setObject:@"0" forKey:@"SPAJDetail4"];
+        [dictionarySPAJTransaction setObject:@"0" forKey:@"SPAJDetail5"];
+        [dictionarySPAJTransaction setObject:@"0" forKey:@"SPAJDetail6"];
+        
+        [modelSPAJDetail saveSPAJDetail:dictionarySPAJTransaction];
     }
 
     -(void)voidCreateSPAJFolderDocument:(NSString *)stringEAPPNumber

@@ -84,6 +84,7 @@
     boolTenagaPenjual = false;
     
     [self initializeBooleanBasedOnTheRule];
+    [self voidCheckBooleanLastState];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -100,6 +101,14 @@
     NSDictionary* dictionaryPOData = [[NSDictionary alloc]initWithDictionary:[modelSIPOData getPO_DataFor:SINO]];
     stringSIRelation = [dictionaryPOData valueForKey:@"RelWithLA"];
     LAAge = [[dictionaryPOData valueForKey:@"LA_Age"] intValue];
+}
+
+-(void)voidCheckBooleanLastState {
+    
+    boolPemegangPolis = true;
+    boolTertanggung = [modelSPAJSignature voidCertainSignaturePartyCaptured:[[dictTransaction valueForKey:@"SPAJEappNumber"] intValue] SignatureParty:@"SignatureParty2"];
+    boolOrangTuaWali = [modelSPAJSignature voidCertainSignaturePartyCaptured:[[dictTransaction valueForKey:@"SPAJEappNumber"] intValue] SignatureParty:@"SignatureParty3"];
+    boolTenagaPenjual = [modelSPAJSignature voidCertainSignaturePartyCaptured:[[dictTransaction valueForKey:@"SPAJEappNumber"] intValue] SignatureParty:@"SignatureParty4"];
 }
 
 -(void) showDetailsForIndexPath:(NSIndexPath*)indexPath
@@ -207,7 +216,8 @@
             [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
             [self voidCreateAlertTextFieldViewAndShow:@"Masukkan lokasi pengambilan tanda tangan" tag:0];
             //update signature party4
-            NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty4=1 where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",[SPAJAddSignatureDelegate voidGetEAPPNumber]];
+            NSString* dateToday=[formatter getDateToday:@"yyyy-MM-dd hh:mm:ss"];
+            NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty4=1,SPAJDateSignatureParty4='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",dateToday,[dictTransaction valueForKey:@"SPAJEappNumber"]];
             [modelSPAJSignature updateSPAJSignature:stringUpdate];
         }
         else if (boolPemegangPolis){
@@ -231,7 +241,8 @@
                 [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
                 [self voidCreateAlertTextFieldViewAndShow:@"Masukkan lokasi pengambilan tanda tangan" tag:0];
                 //update signature party4
-                NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty4=1 where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",[SPAJAddSignatureDelegate voidGetEAPPNumber]];
+                NSString* dateToday=[formatter getDateToday:@"yyyy-MM-dd hh:mm:ss"];
+                NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty4=1,SPAJDateSignatureParty4='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",dateToday,[dictTransaction valueForKey:@"SPAJEappNumber"]];
                 [modelSPAJSignature updateSPAJSignature:stringUpdate];
             }
             else if (boolOrangTuaWali && boolPemegangPolis){
@@ -244,7 +255,8 @@
                 });
                 [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
                 //update signature party3
-                NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty3=1 where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",[SPAJAddSignatureDelegate voidGetEAPPNumber]];
+                NSString* dateToday=[formatter getDateToday:@"yyyy-MM-dd hh:mm:ss"];
+                NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty3=1,SPAJDateSignatureParty3='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",dateToday,[dictTransaction valueForKey:@"SPAJEappNumber"]];
                 [modelSPAJSignature updateSPAJSignature:stringUpdate];
             }
             else if (boolPemegangPolis){
@@ -267,7 +279,8 @@
                 [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
                 [self voidCreateAlertTextFieldViewAndShow:@"Masukkan lokasi pengambilan tanda tangan" tag:0];
                 //update signature party4
-                NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty4=1 where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",[SPAJAddSignatureDelegate voidGetEAPPNumber]];
+                NSString* dateToday=[formatter getDateToday:@"yyyy-MM-dd hh:mm:ss"];
+                NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty4=1,SPAJDateSignatureParty4='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",dateToday,[dictTransaction valueForKey:@"SPAJEappNumber"]];
                 [modelSPAJSignature updateSPAJSignature:stringUpdate];
             }
             else if (boolPemegangPolis && boolTertanggung){
@@ -280,7 +293,8 @@
                 });
                 [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
                 //update signature party2
-                NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty2=1 where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",[SPAJAddSignatureDelegate voidGetEAPPNumber]];
+                NSString* dateToday=[formatter getDateToday:@"yyyy-MM-dd hh:mm:ss"];
+                NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty2=1,SPAJDateSignatureParty2='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",dateToday,[dictTransaction valueForKey:@"SPAJEappNumber"]];
                 [modelSPAJSignature updateSPAJSignature:stringUpdate];
             }
             else if (boolPemegangPolis){
@@ -330,8 +344,8 @@
         [self actionClearSign:nil];
         [tablePartiesSignature reloadData];
         [alertController dismissViewControllerAnimated:YES completion:nil];
-        
-        NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty1=1 where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",[SPAJAddSignatureDelegate voidGetEAPPNumber]];
+        NSString* dateToday=[formatter getDateToday:@"yyyy-MM-dd hh:mm:ss"];
+        NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty1=1,SPAJDateSignatureParty1='%@'  where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",dateToday,[dictTransaction valueForKey:@"SPAJEappNumber"]];
         [modelSPAJSignature updateSPAJSignature:stringUpdate];
         });
     });

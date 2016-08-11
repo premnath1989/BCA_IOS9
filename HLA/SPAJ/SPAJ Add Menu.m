@@ -24,6 +24,8 @@
 #import "SPAJ Form Generation.h"
 #import "ModelSPAJSignature.h"
 #import "ModelSPAJIDCapture.h"
+#import "ModelSPAJDetail.h"
+#import "ModelSPAJFormGeneration.h"
 #import "Formatter.h"
 #import "Layout.h"
 #import "User Interface.h"
@@ -44,6 +46,8 @@
     ModelSPAJTransaction *modelSPAJTransaction;
     ModelSPAJSignature *modelSPAJSignature;
     ModelSPAJIDCapture *modelSPAJIDCapture;
+    ModelSPAJFormGeneration* modelSPAJFormGeneration;
+    ModelSPAJDetail* modelSPAJDetail;
     Formatter* formatter;
     
     UserInterface *objectUserInterface;
@@ -58,6 +62,7 @@
     // DID LOAD
     -(void)viewWillAppear:(BOOL)animated{
         [self voidCheckListCompletion];
+        [self voidGetFooterInformation];
     }
 
     -(void)viewDidAppear:(BOOL)animated{
@@ -73,11 +78,15 @@
         modelSIPOData = [[ModelSIPOData alloc]init];
         modelSPAJTransaction = [[ModelSPAJTransaction alloc]init];
         modelSPAJSignature = [[ModelSPAJSignature alloc]init];
-        formatter = [[Formatter alloc]init];
         modelSPAJIDCapture = [[ModelSPAJIDCapture alloc]init];
+        modelSPAJDetail = [[ModelSPAJDetail alloc]init];
+        modelSPAJFormGeneration = [[ModelSPAJFormGeneration alloc]init];
         objectUserInterface = [[UserInterface alloc] init];
         
+        formatter = [[Formatter alloc]init];
+        
         [self setNavigationBar];
+        
         
         NSLocale* currentLocale = [NSLocale currentLocale];
         [[NSDate date] descriptionWithLocale:currentLocale];
@@ -138,6 +147,8 @@
     -(void)voidCheckListCompletion{
         bool signatureCaptured  = [modelSPAJSignature voidSignatureCaptured:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
         bool idCaptured = [modelSPAJIDCapture voidIDCaptured:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
+        bool detailCapture = [modelSPAJDetail voidDetailCaptured:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
+        bool formGeneration = [modelSPAJFormGeneration voidFormGenerated:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
         
         if (signatureCaptured){
             [_viewStep6 setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
@@ -153,6 +164,32 @@
             [_viewStep5 setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_OCTONARY floatOpacity:1.0]];
         }
 
+        if (formGeneration){
+            [_viewStep4 setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
+        }
+        else{
+            [_viewStep4 setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_OCTONARY floatOpacity:1.0]];
+        }
+
+        if (detailCapture){
+            [_viewStep3 setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
+        }
+        else{
+            [_viewStep3 setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_OCTONARY floatOpacity:1.0]];
+        }
+    }
+
+    -(void)voidGetFooterInformation{
+        NSDictionary* dictFooter = [[NSDictionary alloc]initWithDictionary:[modelSPAJSignature voidSignaturePartyCaptured:[[dictTransaction valueForKey:@"SPAJEappNumber"] intValue] SignatureParty:@"SPAJSignatureParty1"]];
+        bool customerSignatureCaptured = [[dictFooter valueForKey:@"SignatureCaptured"] boolValue];
+        
+        if (customerSignatureCaptured>0){
+            [_labelPropertyCustomerSignature setText:[CHARACTER_DOUBLEDOT stringByAppendingString:@"Captured"]];
+        }
+        else{
+            [_labelPropertyCustomerSignature setText:[CHARACTER_DOUBLEDOT stringByAppendingString:@"Not Captured"]];
+        }
+        [_labelPropertyDateTime setText:[CHARACTER_DOUBLEDOT stringByAppendingString:[dictFooter valueForKey:@"SPAJDateSignatureParty1"]]];
     }
 
     // VOID

@@ -16,6 +16,7 @@
 #import "SPAJ Perusahaan.h"
 #import "SPAJ Calon Penerima Manfaat.h"
 #import "SPAJ Pembayaran Premi.h"
+#import "ModelSPAJDetail.h"
 #import "ModelSPAJHtml.h"
 #import "SIMenuTableViewCell.h"
 #import "Theme.h"
@@ -45,7 +46,8 @@
     UserInterface *objectUserInterface;
     
     ModelSPAJHtml *modelSPAJHtml;
-
+    ModelSPAJDetail *modelSPAJDetail;
+    
     NSMutableArray *NumberListOfSubMenu;
     NSMutableArray *ListOfSubMenu;
     
@@ -96,6 +98,7 @@
         [spajPembayaranPremi setDelegate:self];
         
         modelSPAJHtml = [[ModelSPAJHtml alloc]init];
+        modelSPAJDetail = [[ModelSPAJDetail alloc]init];
         
         // LOCALIZATION
         
@@ -623,6 +626,8 @@
         [self.navigationItem setTitle:@"Data Calon Tertanggung"];
         NSIndexPath* indexPathSelect = [NSIndexPath indexPathForRow:1 inSection:0];
         [self showDetailsForIndexPath:indexPathSelect];
+        NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJDetail1=1 where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",[dictTransaction valueForKey:@"SPAJEappNumber"]];
+        [modelSPAJDetail updateSPAJDetail:stringUpdate];
         [_tableSection reloadData];
         [_tableSection selectRowAtIndexPath:indexPathSelect animated:YES scrollPosition:UITableViewScrollPositionTop];
     }
@@ -632,6 +637,8 @@
         [self.navigationItem setTitle:@"Data Perusahaan / Badan Hukum"];
         NSIndexPath* indexPathSelect = [NSIndexPath indexPathForRow:2 inSection:0];
         [self showDetailsForIndexPath:indexPathSelect];
+        NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJDetail2=1 where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",[dictTransaction valueForKey:@"SPAJEappNumber"]];
+        [modelSPAJDetail updateSPAJDetail:stringUpdate];
         [_tableSection reloadData];
         [_tableSection selectRowAtIndexPath:indexPathSelect animated:YES scrollPosition:UITableViewScrollPositionTop];
     }
@@ -641,6 +648,8 @@
         [self.navigationItem setTitle:@"Data Calon Penerima Manfaat"];
         NSIndexPath* indexPathSelect = [NSIndexPath indexPathForRow:3 inSection:0];
         [self showDetailsForIndexPath:indexPathSelect];
+        NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJDetail3=1 where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",[dictTransaction valueForKey:@"SPAJEappNumber"]];
+        [modelSPAJDetail updateSPAJDetail:stringUpdate];
         [_tableSection reloadData];
         [_tableSection selectRowAtIndexPath:indexPathSelect animated:YES scrollPosition:UITableViewScrollPositionTop];
     }
@@ -650,6 +659,8 @@
         [self.navigationItem setTitle:@"Data Pembayaran Premi"];
         NSIndexPath* indexPathSelect = [NSIndexPath indexPathForRow:4 inSection:0];
         [self showDetailsForIndexPath:indexPathSelect];
+        NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJDetail4=1 where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",[dictTransaction valueForKey:@"SPAJEappNumber"]];
+        [modelSPAJDetail updateSPAJDetail:stringUpdate];
         [_tableSection reloadData];
         [_tableSection selectRowAtIndexPath:indexPathSelect animated:YES scrollPosition:UITableViewScrollPositionTop];
     }
@@ -659,8 +670,16 @@
         [self.navigationItem setTitle:@"Data Kesehatan"];
         NSIndexPath* indexPathSelect = [NSIndexPath indexPathForRow:5 inSection:0];
         [self showDetailsForIndexPath:indexPathSelect];
+        NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJDetail5=1 where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",[dictTransaction valueForKey:@"SPAJEappNumber"]];
+        [modelSPAJDetail updateSPAJDetail:stringUpdate];
         [_tableSection reloadData];
         [_tableSection selectRowAtIndexPath:indexPathSelect animated:YES scrollPosition:UITableViewScrollPositionTop];
+    }
+
+    -(void)voidSetKesehatanBoolValidate:(BOOL)boolValidate{
+        boolKesehatan = true;
+        NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJDetail6=1 where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",[dictTransaction valueForKey:@"SPAJEappNumber"]];
+        [modelSPAJDetail updateSPAJDetail:stringUpdate];
     }
 #pragma mark delegate image picker
     - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info

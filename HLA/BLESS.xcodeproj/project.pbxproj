@@ -417,6 +417,8 @@
 		438726571D0FE6FB00F92A6B /* ModelProspectSpouse.m in Sources */ = {isa = PBXBuildFile; fileRef = 438726561D0FE6FB00F92A6B /* ModelProspectSpouse.m */; };
 		438DB5F41D49C28F00B92FEF /* ModelSPAJTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = 438DB5F31D49C28F00B92FEF /* ModelSPAJTransaction.m */; };
 		438DB5F81D49F52100B92FEF /* SIListingPopOver.m in Sources */ = {isa = PBXBuildFile; fileRef = 438DB5F71D49F52100B92FEF /* SIListingPopOver.m */; };
+		438E79021D5B2C0100C78AB2 /* ModelSPAJDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 438E79011D5B2C0100C78AB2 /* ModelSPAJDetail.m */; };
+		438E79051D5B2C1800C78AB2 /* ModelSPAJFormGeneration.m in Sources */ = {isa = PBXBuildFile; fileRef = 438E79041D5B2C1800C78AB2 /* ModelSPAJFormGeneration.m */; };
 		4399826C1D07D025009CFEB2 /* CFFListingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4399826A1D07D025009CFEB2 /* CFFListingViewController.m */; };
 		4399826D1D07D025009CFEB2 /* CFFListingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4399826B1D07D025009CFEB2 /* CFFListingViewController.xib */; };
 		439982711D07FEE9009CFEB2 /* CFFQuestionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4399826F1D07FEE9009CFEB2 /* CFFQuestionsViewController.m */; };
@@ -1636,6 +1638,10 @@
 		438DB5F31D49C28F00B92FEF /* ModelSPAJTransaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelSPAJTransaction.m; sourceTree = "<group>"; };
 		438DB5F61D49F52100B92FEF /* SIListingPopOver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIListingPopOver.h; sourceTree = "<group>"; };
 		438DB5F71D49F52100B92FEF /* SIListingPopOver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIListingPopOver.m; sourceTree = "<group>"; };
+		438E79001D5B2C0100C78AB2 /* ModelSPAJDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelSPAJDetail.h; sourceTree = "<group>"; };
+		438E79011D5B2C0100C78AB2 /* ModelSPAJDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelSPAJDetail.m; sourceTree = "<group>"; };
+		438E79031D5B2C1800C78AB2 /* ModelSPAJFormGeneration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelSPAJFormGeneration.h; sourceTree = "<group>"; };
+		438E79041D5B2C1800C78AB2 /* ModelSPAJFormGeneration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelSPAJFormGeneration.m; sourceTree = "<group>"; };
 		439982691D07D025009CFEB2 /* CFFListingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFFListingViewController.h; sourceTree = "<group>"; };
 		4399826A1D07D025009CFEB2 /* CFFListingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFFListingViewController.m; sourceTree = "<group>"; };
 		4399826B1D07D025009CFEB2 /* CFFListingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CFFListingViewController.xib; sourceTree = "<group>"; };
@@ -4202,6 +4208,10 @@
 				43C98E041D51A5D100A3F911 /* ModelSPAJHtml.m */,
 				43C98E1A1D51FF5E00A3F911 /* ModelSPAJAnswers.h */,
 				43C98E1B1D51FF5E00A3F911 /* ModelSPAJAnswers.m */,
+				438E79001D5B2C0100C78AB2 /* ModelSPAJDetail.h */,
+				438E79011D5B2C0100C78AB2 /* ModelSPAJDetail.m */,
+				438E79031D5B2C1800C78AB2 /* ModelSPAJFormGeneration.h */,
+				438E79041D5B2C1800C78AB2 /* ModelSPAJFormGeneration.m */,
 			);
 			name = "HLADB Model";
 			sourceTree = "<group>";
@@ -6281,6 +6291,7 @@
 				AAFEE0411C6DA60E00702F64 /* UIElementsManagement.m in Sources */,
 				EF05984B161A91EF004A9095 /* RiderViewController.m in Sources */,
 				0F3268471D1A93A4001A9021 /* Button.m in Sources */,
+				438E79051D5B2C1800C78AB2 /* ModelSPAJFormGeneration.m in Sources */,
 				EF059850161A92C4004A9095 /* DateViewController.m in Sources */,
 				EF059853161A92E3004A9095 /* JobListTbViewController.m in Sources */,
 				EF059856161A9373004A9095 /* PremiumViewController.m in Sources */,
@@ -6603,6 +6614,7 @@
 				C3A8D1081833AEB700E65FC9 /* LA1DetailsVC.m in Sources */,
 				C3A8D1091833AEB700E65FC9 /* LA2DetailsVC.m in Sources */,
 				0F48376F1D34F262009A45D4 /* ModelCFFHtml.m in Sources */,
+				438E79021D5B2C0100C78AB2 /* ModelSPAJDetail.m in Sources */,
 				C3A8D10A1833AEB700E65FC9 /* MainLA1DetailsVC.m in Sources */,
 				C3A8D10B1833AEB700E65FC9 /* PayorDetailsVC.m in Sources */,
 				C3A8D10E1833CF9B00E65FC9 /* ExistingPoliciesVC.m in Sources */,
