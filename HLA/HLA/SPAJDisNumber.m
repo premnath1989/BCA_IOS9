@@ -126,9 +126,9 @@
         }
         
         if(tableDataRequest != nil){
-            if((tableDataRequest.count >0)&&(tableDataSubmission.count >0)){
+            if((tableDataRequest.count >0)){
                 
-                long long total = [[[tableDataRequest objectAtIndex:indexPath.row] valueForKey:@"SPAJAllocationEnd"] longLongValue] - [[[tableDataSubmission objectAtIndex:indexPath.row] valueForKey:@"SPAJAllocationBegin"] longLongValue] + 1;
+                long long total = [[[tableDataRequest objectAtIndex:indexPath.row] valueForKey:@"SPAJAllocationEnd"] longLongValue] - [[[tableDataRequest objectAtIndex:indexPath.row] valueForKey:@"SPAJAllocationBegin"] longLongValue] + 1;
                 
                 cell.labelDate.text = [[tableDataRequest objectAtIndex:indexPath.row] valueForKey:@"CreatedDate"];
                 cell.labelPackID.text = [[tableDataRequest objectAtIndex:indexPath.row] valueForKey:@"PackID"];
@@ -206,6 +206,11 @@
                     
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self viewDidLoad];
+                        
+                        if([loginDB SPAJBalance] > 30){
+                            [btnSPAJSync setHidden:YES];
+                        }
+                        
                         UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Success" message:[NSString stringWithFormat:@"SPAJ Number telah di terima."] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
                         [alert show];
                     });
