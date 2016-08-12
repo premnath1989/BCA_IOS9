@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="BPreplay.otf">
+        <mutableArray key="BPreplay_Regular.ttf">
             <string>BPreplay</string>
             <string>BPreplay</string>
             <string>BPreplay</string>
@@ -18,6 +18,7 @@
             <connections>
                 <outlet property="SPAJRequestTable" destination="bZw-qQ-1k8" id="qWS-AR-Ino"/>
                 <outlet property="SPAJSubmissionTable" destination="ACH-kz-suT" id="UpF-aZ-Ogt"/>
+                <outlet property="btnSPAJSync" destination="EQ0-0o-utB" id="3Nx-X3-9lA"/>
                 <outlet property="txtSPAJAllocated" destination="H2t-W7-Idh" id="mfa-pD-EuO"/>
                 <outlet property="txtSPAJBalance" destination="25H-RN-m3f" id="RBR-OB-vM3"/>
                 <outlet property="txtSPAJUsed" destination="RK1-jL-edQ" id="YlJ-QT-AUn"/>
@@ -150,8 +151,7 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                     <connections>
-                        <action selector="btnSync:" destination="-1" eventType="touchUpOutside" id="nwV-Hi-YRi"/>
-                        <action selector="btnSync:" destination="-1" eventType="touchDown" id="o77-wt-qHB"/>
+                        <action selector="btnSync:" destination="-1" eventType="touchUpInside" id="cyv-sS-HOR"/>
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3gs-1I-eU0">
