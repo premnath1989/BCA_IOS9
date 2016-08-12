@@ -27,6 +27,7 @@
 
 @synthesize SPAJSubmissionTable;
 @synthesize SPAJRequestTable;
+@synthesize btnSPAJSync;
 
 
 - (void)viewDidLoad{
@@ -49,6 +50,9 @@
     [SPAJRequestTable reloadData];
     [SPAJSubmissionTable reloadData];
 
+    if([loginDB SPAJBalance] > 30){
+        [btnSPAJSync setHidden:YES];
+    }
 }
 
 -(IBAction)actionSearch:(id)sender{
@@ -200,6 +204,13 @@
                         UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Success" message:[NSString stringWithFormat:@"SPAJ Number telah di terima."] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
                         [alert show];
                     });
+                }else{
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self viewDidLoad];
+                        UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Periksa lagi koneksi internet anda" message:[NSString stringWithFormat:@""] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                        [alert show];
+                    });
+
                 }
             }] resume];
 }
@@ -213,6 +224,7 @@
                                 NSError *error) {
                 // handle response
                 if(data != nil){
+                    dispatch_async(dispatch_get_main_queue(), ^{
                     NSArray * dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
                     NSString *defaultDBPath = [[dirPaths objectAtIndex:0] stringByAppendingPathComponent:@"hladb.sqlite"];
                     NSBundle *myLibraryBundle = [NSBundle bundleWithURL:[[NSBundle mainBundle]
@@ -227,16 +239,16 @@
                     progressBar.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
                     progressBar.preferredContentSize = CGSizeMake(600, 200);
                     [self presentViewController:progressBar animated:YES completion:nil];
+                    });
                 }
             }] resume];
-    
-   
 }
 
 - (IBAction)btnTestAssign:(id)sender{
     LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
-
     NSLog(@"%lld",[loginDB getLastActiveSPAJNum]);
+    
+    
 }
 
 - (void)downloadisFinished{

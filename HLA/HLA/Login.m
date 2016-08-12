@@ -123,7 +123,6 @@ NSString *ProceedStatus = @"";
     [loginDB makeDBCopy];
     
     DBMigration *migration = [[DBMigration alloc]init];
-//    [migration updateDatabase:@"hladb.sqlite"];
     [migration updateDatabaseUseNewDB:@"hladb.sqlite"];
     [migration hardUpdateDatabase:@"BCA_Rates.sqlite" versionNumber:[NSString stringWithFormat:
                             @"%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"dbVersion"]]];

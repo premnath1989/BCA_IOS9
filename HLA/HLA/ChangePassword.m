@@ -424,9 +424,19 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
                         });
                     });
                 });
-                
             }else{
-                
+                dispatch_async(dispatch_get_global_queue(
+                                                         DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                    
+                    WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
+                    NSString *encryptedNewPass = [encryptWrapper encrypt:txtNewPwd.text];
+                    NSString *encryptedOldPass = [encryptWrapper encrypt:txtOldPwd.text];
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [webservice FirstTimeLogin:self AgentCode:txtAgentCode.text password:encryptedOldPass newPassword:encryptedNewPass UUID:[loginDB getUniqueDeviceIdentifierAsString]];
+                    });
+                });
+
             }
         }
         

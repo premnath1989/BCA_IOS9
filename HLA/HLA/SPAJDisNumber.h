@@ -22,6 +22,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtSPAJBalance;
 @property (weak, nonatomic) IBOutlet UITextField *txtSPAJUsed;
 
+@property (weak, nonatomic) IBOutlet UIButton *btnSPAJSync;
+
 
 @property (weak, nonatomic) IBOutlet UITableView *SPAJSubmissionTable;
 @property (weak, nonatomic) IBOutlet UITableView *SPAJRequestTable;

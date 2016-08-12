@@ -22,29 +22,30 @@
 - (int) SearchAgent:(NSString *)AgentID;
 - (int) insertAgentProfile:(WebResponObj *)obj;
 - (int) FirstLogin:(NSString *)AgentID;
-- (NSMutableDictionary *)getAgentDetails;
 - (int) AgentRecord;
 - (int) AgentStatus:(NSString *)AgentID;
 - (int) DeleteAgentProfile;
 - (int) DeviceStatus:(NSString *)AgentID;
 - (int) SpvStatus:(NSString *)spvID;
 - (void) updatePassword:(NSString *)newPassword;
-- (void) duplicateRow:(NSString *)tableName param:(NSString *)column oldValue:(NSString *)oldValue newValue:(NSString *)newValue;
 - (void) makeDBCopy;
 - (void) updateLoginDate;
 - (void) updateLogoutDate;
+- (void) duplicateRow:(NSString *)tableName param:(NSString *)column
+             oldValue:(NSString *)oldValue newValue:(NSString *)newValue;
+- (NSMutableDictionary *)getAgentDetails;
 
 //general functions
 - (int)insertTableFromJSON:(NSDictionary*) params databasePath:(NSString *)dbName;
-- (BOOL) fullSyncTable:(WebResponObj *)obj;
 - (int) ReferralSyncTable:(WebResponObj *)obj;
+- (BOOL) fullSyncTable:(WebResponObj *)obj;
 
 //SPAJ Functions
 - (long long)SPAJAllocated;
 - (long long)SPAJBalance;
 - (long long)SPAJUsed;
-- (NSMutableArray *)SPAJRetrievePackID;
 - (long long)getLastActiveSPAJNum;
+- (NSMutableArray *)SPAJRetrievePackID;
 
 //SI functions
 - (void) updateSIMaster:(NSString *)SINO EnableEditing:(NSString *)EditFlag;
@@ -55,9 +56,8 @@
 - (NSString *) localDBUDID;
 - (NSString *) AgentCodeLocal;
 - (NSString *)EditIllustration:(NSString *)SIno;
--(NSMutableDictionary *)premiKeluargaku:(NSString *)SINo;
--(NSString *)getUniqueDeviceIdentifierAsString;
--(NSString *) getLastUpdateReferral;
-//- (int) InsertAgentProfile:(NSString *) urlStr;
+- (NSString *)getUniqueDeviceIdentifierAsString;
+- (NSString *) getLastUpdateReferral;
+- (NSMutableDictionary *)premiKeluargaku:(NSString *)SINo;
 
 @end

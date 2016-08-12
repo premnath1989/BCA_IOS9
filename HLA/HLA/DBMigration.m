@@ -167,8 +167,9 @@
 -(void)updateDatabaseUseNewDB:(NSString*)dbName{
     NSString *dbVersion = [NSString stringWithFormat:
                            @"%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"dbVersion"]];
-    if([self hardUpdateDatabase:dbName versionNumber:dbVersion]){
     
+    if([self hardUpdateDatabase:dbName versionNumber:dbVersion]){
+        
         defaultDBPath = [[dirPaths objectAtIndex:0] stringByAppendingPathComponent:dbName];
         
         NSString *dbVersion = [NSString stringWithFormat:
@@ -194,9 +195,18 @@
                         NSLog(@"Error to Attach = %s",error);
                     }
                     
+                    NSString *tablesCol = @"(";
+                    
+                    for(NSString *tableColName in [[oldTablesDict valueForKey:tableName] allKeys]){
+                        tablesCol = [tablesCol stringByAppendingString:[NSString stringWithFormat:@"%@,",tableColName]];
+                    }
+                    tablesCol = [tablesCol substringToIndex:[tablesCol length]-1];
+                    tablesCol = [tablesCol stringByAppendingString:@")"];
+                    
                     sql = [NSString stringWithFormat:
-                           @"INSERT INTO %@ SELECT * FROM defDB.%@;",
-                           tableName, tableName];
+                           @"INSERT INTO %@ %@ SELECT * FROM defDB.%@;",
+                           tableName,tablesCol, tableName];
+                    NSLog(@"%@", sql);
                     sqlite3_exec(database, [sql UTF8String], NULL, NULL,&error);
                     if (error) {
                         NSLog(@"Error to insert = %s",error);

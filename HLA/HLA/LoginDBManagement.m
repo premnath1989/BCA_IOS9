@@ -499,7 +499,7 @@
                     valueEnd = [[NSString alloc]
                                 initWithUTF8String:
                                 (const char *) sqlite3_column_text(statement, 2)];
-                    SPAJCount = SPAJCount + ([valueEnd longLongValue]-[valueStart longLongValue]) + 2;
+                    SPAJCount = SPAJCount + ([valueEnd longLongValue]-[valueStart longLongValue]) + 1;
                 }
             }
         }
@@ -630,7 +630,7 @@
                     valueEnd = [[NSString alloc]
                                 initWithUTF8String:
                                 (const char *) sqlite3_column_text(statement, 1)];
-                    SPAJCount = SPAJCount + ([valueEnd longLongValue]-[valueStart longLongValue]) - 1;
+                    SPAJCount = SPAJCount + ([valueEnd longLongValue]-[valueStart longLongValue]);
                 }
             }
         }
@@ -792,45 +792,6 @@
     }
     
     return premiDetails;
-}
-
--(int)insertAgentProfile:(WebResponObj *)obj
-{
-    //    int insertProc = TABLE_INSERTION_FAILED;
-    //    NSString *sql = @"insert into Agent_profile (";
-    //
-    //    for(NSString *keys in obj){
-    //        NSString *key = [NSString stringWithFormat:@"%@,",keys];
-    //        sql = [sql stringByAppendingString:key];
-    //    }
-    //    sql = [sql substringToIndex:[sql length]-1];
-    //    sql = [sql stringByAppendingString:@") VALUES ("];
-    //
-    //    for(NSString *keys in obj.DataRows){
-    //        NSString *value = @"";
-    //        if([obj.DataRows valueForKey:keys] != NULL)
-    //        value = [NSString stringWithFormat:@"'%@',",[obj.DataRows valueForKey:keys]];
-    //        else
-    //        value = [NSString stringWithFormat:@"'',"];
-    //
-    //        sql = [sql stringByAppendingString:value];
-    //    }
-    //    sql = [sql substringToIndex:[sql length]-1];
-    //    sql = [sql stringByAppendingString:@")"];
-    //
-    //    NSLog(@"%@",sql);
-    //
-    //    char *error;
-    //    if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
-    //    {
-    //        sqlite3_exec(contactDB, [sql UTF8String], NULL, NULL, &error);
-    //            if (error == NULL || (error[0] == '\0')) {
-    //                insertProc = TABLE_INSERTION_SUCCESS;
-    //            }
-    //
-    //        sqlite3_close(contactDB);
-    //    }
-    //    return insertProc;
 }
 
 -(NSString *)checkingLastLogout
