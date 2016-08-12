@@ -196,16 +196,19 @@
                     }
                     
                     NSString *tablesCol = @"(";
+                    NSString *tablesColSelection = @"";
                     
                     for(NSString *tableColName in [[oldTablesDict valueForKey:tableName] allKeys]){
                         tablesCol = [tablesCol stringByAppendingString:[NSString stringWithFormat:@"%@,",tableColName]];
+                        tablesColSelection =[tablesColSelection stringByAppendingString:[NSString stringWithFormat:@"%@,",tableColName]];
                     }
                     tablesCol = [tablesCol substringToIndex:[tablesCol length]-1];
+                    tablesColSelection = [tablesColSelection substringToIndex:[tablesCol length]-1];
                     tablesCol = [tablesCol stringByAppendingString:@")"];
                     
                     sql = [NSString stringWithFormat:
-                           @"INSERT INTO %@ %@ SELECT * FROM defDB.%@;",
-                           tableName,tablesCol, tableName];
+                           @"INSERT INTO %@ %@ SELECT %@ FROM defDB.%@;",
+                           tableName,tablesCol, tablesColSelection, tableName];
                     NSLog(@"%@", sql);
                     sqlite3_exec(database, [sql UTF8String], NULL, NULL,&error);
                     if (error) {

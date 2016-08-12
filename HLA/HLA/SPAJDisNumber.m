@@ -133,16 +133,15 @@
                 long long total = [[[tableDataRequest objectAtIndex:indexPath.row] valueForKey:@"SPAJAllocationEnd"] longLongValue] - [[[tableDataRequest objectAtIndex:indexPath.row] valueForKey:@"SPAJAllocationBegin"] longLongValue] + 1;
                 
                 cell.labelDate.text = [[tableDataRequest objectAtIndex:indexPath.row] valueForKey:@"CreatedDate"];
-                cell.labelPackID.text = [[tableDataRequest objectAtIndex:indexPath.row] valueForKey:@"PackID"];
+                cell.labelPackID.text = [[tableDataRequest objectAtIndex:indexPath.row]
+                    valueForKey:@"PackID"];
                 cell.labelTotal.text = [NSString stringWithFormat:@"%lld",total];
                 cell.labelSPAJStart.text = [[tableDataRequest objectAtIndex:indexPath.row] valueForKey:@"SPAJAllocationBegin"];
                 cell.labelSPAJEnd.text = [[tableDataRequest objectAtIndex:indexPath.row] valueForKey:@"SPAJAllocationEnd"];
             }
         }
         return cell;
-
     }
-    
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -227,7 +226,6 @@
                         UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Periksa lagi koneksi internet anda" message:[NSString stringWithFormat:@""] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
                         [alert show];
                     });
-
                 }
             }] resume];
 }
