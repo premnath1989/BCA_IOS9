@@ -14,7 +14,8 @@
 #import "SPAJ Existing List Cell.h"
 #import "String.h"
 #import "Alert.h"
-
+#import "ModelSPAJTransaction.h"
+#import "SPAJFilesViewController.h"
 
 // DECLARATION
 
@@ -28,7 +29,14 @@
 // IMPLEMENTATION
 
 
-@implementation SPAJExistingList
+@implementation SPAJExistingList{
+    ModelSPAJTransaction* modelSPAJTransaction;
+    SPAJFilesViewController* spajFilesViewController;
+    NSMutableArray* arraySPAJTransaction;
+    
+    NSString* sortedBy;
+    NSString* sortMethod;
+}
 
     // SYNTHESIZE
 
@@ -50,7 +58,7 @@
         
         
         // INITIALIZATION
-        
+        modelSPAJTransaction = [[ModelSPAJTransaction alloc]init];
         _querySPAJHeader = [[QuerySPAJHeader alloc]init];
         _functionUserInterface = [[UserInterface alloc] init];
         _functionAlert = [[Alert alloc]init];
@@ -94,6 +102,15 @@
         [_buttonSearch setTitle:NSLocalizedString(@"BUTTON_SEARCH", nil) forState:UIControlStateNormal];
         [_buttonReset setTitle:NSLocalizedString(@"BUTTON_RESET", nil) forState:UIControlStateNormal];
         [_buttonDelete setTitle:NSLocalizedString(@"BUTTON_DELETE", nil) forState:UIControlStateNormal];
+        
+        sortedBy=@"datetime(spajtrans.SPAJDateModified)";
+        sortMethod=@"DESC";
+        [self loadSPAJTransaction];
+    }
+
+    -(void)loadSPAJTransaction{
+        arraySPAJTransaction=[[NSMutableArray alloc]initWithArray:[modelSPAJTransaction getAllReadySPAJ:sortedBy SortMethod:sortMethod]];
+        [_tableView reloadData];
     }
 
 
@@ -115,7 +132,10 @@
 
     - (IBAction)actionSearch:(id)sender
     {
-        [self generateQuery];
+        //[self generateQuery];
+        NSDictionary *dictSearch = [[NSDictionary alloc]initWithObjectsAndKeys:_textFieldName.text,@"Name",_textFieldSPAJNumber.text,@"SPAJNumber",_textFieldSocialNumber.text,@"IDNo", nil];
+        arraySPAJTransaction = [[NSMutableArray alloc]initWithArray:[modelSPAJTransaction searchReadySPAJ:dictSearch]];
+        [_tableView reloadData];
     };
 
     - (IBAction)actionDelete:(id)sender
@@ -130,17 +150,30 @@
 
     - (IBAction)actionReset:(id)sender
     {
-        [_functionUserInterface resetTextField:_arrayTextField];
+        /*[_functionUserInterface resetTextField:_arrayTextField];
         
-        [self generateQuery];
+         [self generateQuery];*/
+        [_textFieldName setText:@""];
+        [_textFieldSPAJNumber setText:@""];
+        [_textFieldSocialNumber setText:@""];
+        [self loadSPAJTransaction];
     };
 
+    - (IBAction)actionShowFilesList:(UIButton *)sender{
+        spajFilesViewController = [[SPAJFilesViewController alloc]initWithNibName:@"SPAJFilesViewController" bundle:nil];
+        [spajFilesViewController setDictTransaction:[arraySPAJTransaction objectAtIndex:sender.tag]];
+        spajFilesViewController.modalPresentationStyle = UIModalPresentationFormSheet;
+        //spajPDFWebView.preferredContentSize = CGSizeMake(950, 768);
+        [self presentViewController:spajFilesViewController animated:YES completion:nil];
+        //spajPDFWebView.view.superview.frame = CGRectMake(0, 0, 950, 768);
+        //pajPDFWebView.view.superview.center = self.view.center;
+    }
 
     // TABLE
 
     - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
     {
-        return _arrayQueryExisting.count;
+        return [arraySPAJTransaction count];
     }
 
     - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
@@ -167,7 +200,7 @@
             
         }
         
-        NSManagedObject* queryExisting = [_arrayQueryExisting objectAtIndex:[indexPath row]];
+        /*NSManagedObject* queryExisting = [_arrayQueryExisting objectAtIndex:[indexPath row]];
         
         NSString* stringUpdatedOnDate = [_functionUserInterface generateDate:[queryExisting valueForKey:COLUMN_SPAJHEADER_UPDATEDON]];
         NSString* stringUpdatedOnTime = [_functionUserInterface generateTime:[queryExisting valueForKey:COLUMN_SPAJHEADER_UPDATEDON] ];
@@ -180,8 +213,31 @@
         [cellSPAJExisting.labelUpdatedOnTime setText: stringUpdatedOnTime];
         [cellSPAJExisting.labelSalesIllustration setText: [queryExisting valueForKey:COLUMN_SPAJHEADER_ILLUSTRATIONID]];
         [cellSPAJExisting.labelTimeRemaining setText: stringTimeRemaining];
-        [cellSPAJExisting.buttonView  setTitle:NSLocalizedString(@"BUTTON_VIEW", nil) forState:UIControlStateNormal];
-        
+        [cellSPAJExisting.buttonView  setTitle:NSLocalizedString(@"BUTTON_VIEW", nil) forState:UIControlStateNormal];*/
+        if (indexPath.row<[arraySPAJTransaction count]){
+            NSString *idDesc = @"";
+            if ([[[arraySPAJTransaction objectAtIndex:indexPath.row] valueForKey:@"IdentityDesc"] length]>0){
+                idDesc = [NSString stringWithFormat:@"%@ : ",[[arraySPAJTransaction objectAtIndex:indexPath.row] valueForKey:@"IdentityDesc"] ];
+                
+            }
+            NSString *idNumber = @"";
+            if ([[[arraySPAJTransaction objectAtIndex:indexPath.row] valueForKey:@"OtherIDTypeNo"] length]>0){
+                idNumber = [[arraySPAJTransaction objectAtIndex:indexPath.row] valueForKey:@"OtherIDTypeNo"];
+            }
+            NSString* prospectID = [NSString stringWithFormat:@"%@%@",idDesc,idNumber];
+            [cellSPAJExisting.labelName setText:[[arraySPAJTransaction objectAtIndex:indexPath.row] valueForKey:@"ProspectName"]];
+            [cellSPAJExisting.labelSocialNumber setText:prospectID];
+            [cellSPAJExisting.labelSPAJNumber setText: [[arraySPAJTransaction objectAtIndex:indexPath.row] valueForKey:@"SPAJNumber"]];
+            [cellSPAJExisting.labelUpdatedOnDate setText:[[arraySPAJTransaction objectAtIndex:indexPath.row] valueForKey:@"SPAJDateModified"]];
+            [cellSPAJExisting.labelUpdatedOnTime setText:[[arraySPAJTransaction objectAtIndex:indexPath.row] valueForKey:@"SPAJDateModified"]];
+            [cellSPAJExisting.labelSalesIllustration setText:[[arraySPAJTransaction objectAtIndex:indexPath.row] valueForKey:@"SI_Version"]];
+            [cellSPAJExisting.labelTimeRemaining setText:@""];
+            [cellSPAJExisting.buttonView  setTitle:NSLocalizedString(@"BUTTON_VIEW", nil) forState:UIControlStateNormal];
+            
+            [cellSPAJExisting.buttonView addTarget:self
+                       action:@selector(actionShowFilesList:) forControlEvents:UIControlEventTouchUpInside];
+            [cellSPAJExisting.buttonView setTag:indexPath.row];
+        }
         return cellSPAJExisting;
     }
 

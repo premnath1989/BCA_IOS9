@@ -14,6 +14,8 @@
     
     NSMutableArray *tableDataSubmission;
     NSMutableArray *tableDataRequest;
+    
+    IBOutlet UITextField* textSearch;
 }
 
 @property (weak, nonatomic) IBOutlet UITextField *txtSPAJAllocated;

@@ -345,4 +345,22 @@
 -(UIFont *)navigationBarTitleFont {
     return [UIFont fontWithName:@"BPreplay" size:17.0f];
 }
+
+//generate spaj file directory
+-(NSString *)generateSPAJFileDirectory:(NSString *)stringEappDirectory{
+    NSString *stringDirectory;
+    NSArray* path_forDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+    NSString* documentsDirectory = [path_forDirectory objectAtIndex:0];
+    stringDirectory = [NSString stringWithFormat:@"%@/SPAJ/%@",documentsDirectory,stringEappDirectory];
+    return stringDirectory;
+}
+
+//get file type
+- (NSString *)findExtensionOfFileInUrl:(NSURL *)url{
+    
+    NSString *urlString = [url absoluteString];
+    NSArray *componentsArray = [urlString componentsSeparatedByString:@"."];
+    NSString *fileExtension = [componentsArray lastObject];
+    return  fileExtension;
+}
 @end

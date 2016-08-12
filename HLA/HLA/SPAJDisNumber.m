@@ -13,8 +13,13 @@
 #import "SPAJTableCell.h"
 #import "SPAJRequestCell.h"
 #import "ProgressBar.h"
+#import "ModelSPAJTransaction.h"
+#import "Formatter.h"
 
-@implementation SPAJDisNumber
+@implementation SPAJDisNumber{
+    Formatter* formatter;
+    ModelSPAJTransaction* modelSPAJTransaction;
+}
 
 @synthesize txtSPAJAllocated;
 @synthesize txtSPAJBalance;
@@ -28,11 +33,15 @@
     [super viewDidLoad];
     
     LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
+    formatter = [[Formatter alloc]init];
+
+    modelSPAJTransaction = [[ModelSPAJTransaction alloc]init];
     [txtSPAJAllocated setText:[NSString stringWithFormat:@"%lli", [loginDB SPAJAllocated]]];
     [txtSPAJBalance setText:[NSString stringWithFormat:@"%lli", [loginDB SPAJBalance]]];
     [txtSPAJUsed setText:[NSString stringWithFormat:@"%lli", [loginDB SPAJUsed]]];
     
-    tableDataSubmission = [loginDB SPAJRetrievePackID];
+    //tableDataSubmission = [loginDB SPAJRetrievePackID];
+    tableDataSubmission = [[NSMutableArray alloc]initWithArray:[modelSPAJTransaction getAllReadySPAJ:@"datetime(spajtrans.SPAJDateModified)" SortMethod:@"DESC"]];
     tableDataRequest = [loginDB SPAJRetrievePackID];
     
     [SPAJSubmissionTable setTag:1];
@@ -41,6 +50,38 @@
     [SPAJSubmissionTable reloadData];
 
 }
+
+-(IBAction)actionSearch:(id)sender{
+    NSDictionary *dictSearch = [[NSDictionary alloc]initWithObjectsAndKeys:@"",@"Name",textSearch.text,@"SPAJNumber",@"",@"IDNo", nil];
+    tableDataSubmission = [modelSPAJTransaction searchReadySPAJ:dictSearch];
+    [SPAJSubmissionTable reloadData];
+}
+
+-(IBAction)actionReset:(id)sender{
+    [textSearch setText:@""];
+    tableDataSubmission = [[NSMutableArray alloc]initWithArray:[modelSPAJTransaction getAllReadySPAJ:@"datetime(spajtrans.SPAJDateModified)" SortMethod:@"DESC"]];
+    [SPAJSubmissionTable reloadData];
+    
+}
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Remove seperator inset
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    // Prevent the cell from inheriting the Table View's margin settings
+    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
+        [cell setPreservesSuperviewLayoutMargins:NO];
+    }
+    
+    // Explictly set your cell's layout margins
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+}
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if([tableView tag] == 1){
@@ -55,12 +96,13 @@
         
         if(tableDataSubmission != nil){
             if(tableDataSubmission.count >0){
-                cell.labelDate.text = [[tableDataSubmission objectAtIndex:indexPath.row] valueForKey:@"CreatedDate"];
-                cell.labelName.text = [[tableDataSubmission objectAtIndex:indexPath.row] valueForKey:@"SPAJAllocationBegin"];
-                cell.labelSINO.text = [[tableDataSubmission objectAtIndex:indexPath.row] valueForKey:@"SPAJAllocationBegin"];
-                cell.labelSPAJ.text = [[tableDataSubmission objectAtIndex:indexPath.row] valueForKey:@"SPAJAllocationBegin"];
-                cell.labelStatus.text = [[tableDataSubmission objectAtIndex:indexPath.row] valueForKey:@"PackID"];
-                cell.labelProduk.text = [[tableDataSubmission objectAtIndex:indexPath.row] valueForKey:@"SPAJAllocationBegin"];
+                NSString* date = [formatter convertDateFrom:@"yyyy-MM-dd HH:mm:ss" TargetDateFormat:@"dd/MM/yyyy" DateValue:[[tableDataSubmission objectAtIndex:indexPath.row] valueForKey:@"SPAJDateCreated"]];
+                cell.labelDate.text = date;
+                cell.labelName.text = [[tableDataSubmission objectAtIndex:indexPath.row] valueForKey:@"ProspectName"];
+                cell.labelSINO.text = [[tableDataSubmission objectAtIndex:indexPath.row] valueForKey:@"SPAJSINO"];
+                cell.labelSPAJ.text = [[tableDataSubmission objectAtIndex:indexPath.row] valueForKey:@"SPAJNumber"];
+                cell.labelStatus.text = [[tableDataSubmission objectAtIndex:indexPath.row] valueForKey:@"SPAJStatus"];
+                cell.labelProduk.text = [[tableDataSubmission objectAtIndex:indexPath.row] valueForKey:@"ProductName"];
             }
         }
         return cell;
@@ -75,7 +117,7 @@
         }
         
         if(tableDataRequest != nil){
-            if(tableDataRequest.count >0){
+            if((tableDataRequest.count >0)&&(tableDataSubmission.count >0)){
                 
                 long long total = [[[tableDataRequest objectAtIndex:indexPath.row] valueForKey:@"SPAJAllocationEnd"] longLongValue] - [[[tableDataSubmission objectAtIndex:indexPath.row] valueForKey:@"SPAJAllocationBegin"] longLongValue] + 1;
                 
@@ -104,7 +146,7 @@
             return 0;
         }
     }else{
-        if(tableDataRequest !=nil){
+        if((tableDataRequest !=nil)&&(tableDataSubmission !=nil)){
             return [tableDataRequest count];
         }else{
             return 0;

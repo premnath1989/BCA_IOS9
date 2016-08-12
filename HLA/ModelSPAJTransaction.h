@@ -14,7 +14,9 @@
     FMResultSet *results;
 }
 -(NSMutableArray *)searchSPAJ:(NSDictionary *)dictSearch;
+-(NSMutableArray *)searchReadySPAJ:(NSDictionary *)stringSPAJNumber;
 -(NSMutableArray *)getAllSPAJ:(NSString *)sortedBy SortMethod:(NSString *)sortMethod;
+-(NSMutableArray *)getAllReadySPAJ:(NSString *)sortedBy SortMethod:(NSString *)sortMethod;
 -(void)saveSPAJTransaction:(NSDictionary *)spajTransactionDictionary;
 -(void)updateSPAJTransaction:(NSString *)stringColumnName StringColumnValue:(NSString *)stringColumnValue StringWhereName:(NSString *)stringWhereName StringWhereValue:(NSString *)stringWhereValue;
 -(NSString *)getSPAJTransactionData:(NSString *)stringColumnName StringWhereName:(NSString *)stringWhereName StringWhereValue:(NSString *)stringWhereValue;

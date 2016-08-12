@@ -391,6 +391,8 @@
 		4376DF1F1CD196EC00816BB6 /* cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4376DF1B1CD196EC00816BB6 /* cancel@2x.png */; };
 		4376DF201CD196EC00816BB6 /* check_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4376DF1C1CD196EC00816BB6 /* check_icon.png */; };
 		4376DF211CD196EC00816BB6 /* check_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4376DF1D1CD196EC00816BB6 /* check_icon@2x.png */; };
+		438035DE1D5D8847003A9199 /* SPAJFilesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 438035DC1D5D8847003A9199 /* SPAJFilesViewController.m */; };
+		438035DF1D5D8847003A9199 /* SPAJFilesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 438035DD1D5D8847003A9199 /* SPAJFilesViewController.xib */; };
 		438624B81D24B8B300F1BDC7 /* ProfilResikoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 438624B61D24B8B300F1BDC7 /* ProfilResikoViewController.m */; };
 		438624B91D24B8B300F1BDC7 /* ProfilResikoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 438624B71D24B8B300F1BDC7 /* ProfilResikoViewController.xib */; };
 		438625191D24C30200F1BDC7 /* PernyataanNasabahViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 438625171D24C30200F1BDC7 /* PernyataanNasabahViewController.m */; };
@@ -1601,6 +1603,9 @@
 		4376DF1B1CD196EC00816BB6 /* cancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancel@2x.png"; sourceTree = "<group>"; };
 		4376DF1C1CD196EC00816BB6 /* check_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check_icon.png; sourceTree = "<group>"; };
 		4376DF1D1CD196EC00816BB6 /* check_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "check_icon@2x.png"; sourceTree = "<group>"; };
+		438035DB1D5D8847003A9199 /* SPAJFilesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPAJFilesViewController.h; sourceTree = "<group>"; };
+		438035DC1D5D8847003A9199 /* SPAJFilesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPAJFilesViewController.m; sourceTree = "<group>"; };
+		438035DD1D5D8847003A9199 /* SPAJFilesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SPAJFilesViewController.xib; sourceTree = "<group>"; };
 		438624B51D24B8B300F1BDC7 /* ProfilResikoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfilResikoViewController.h; sourceTree = "<group>"; };
 		438624B61D24B8B300F1BDC7 /* ProfilResikoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfilResikoViewController.m; sourceTree = "<group>"; };
 		438624B71D24B8B300F1BDC7 /* ProfilResikoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfilResikoViewController.xib; sourceTree = "<group>"; };
@@ -2771,6 +2776,7 @@
 				0FF845741D23A3A4008CF861 /* Cell */,
 				439B0B7C1D54743F00C28F19 /* SPAJEAppListStoryBoard.storyboard */,
 				439E45811D585C0B009098EF /* SPAJPDFWebViewController.xib */,
+				438035DD1D5D8847003A9199 /* SPAJFilesViewController.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -2799,6 +2805,8 @@
 				0F3268391D1A93A4001A9021 /* SPAJ Main.m */,
 				0F32683B1D1A93A4001A9021 /* SPAJ Submitted List.h */,
 				0F32683C1D1A93A4001A9021 /* SPAJ Submitted List.m */,
+				438035DB1D5D8847003A9199 /* SPAJFilesViewController.h */,
+				438035DC1D5D8847003A9199 /* SPAJFilesViewController.m */,
 				439B95481D3896AD00C86F93 /* SPAJ Add Signature.h */,
 				439B95491D3896AD00C86F93 /* SPAJ Add Signature.m */,
 				43C98DFB1D519D5900A3F911 /* SPAJ Calon Pemegang Polis.h */,
@@ -5970,6 +5978,7 @@
 				C4E5A478168AAA89007848CE /* Profile32.png in Resources */,
 				A1FCF07D1CA80B92000D85E1 /* Icon_SaveAs_Gray_BG.png in Resources */,
 				C4E5A479168AAA89007848CE /* Profile48.png in Resources */,
+				438035DF1D5D8847003A9199 /* SPAJFilesViewController.xib in Resources */,
 				C4E5A47A168AAA89007848CE /* Profile64.png in Resources */,
 				C4E5A47B168AAA89007848CE /* Profile72.png in Resources */,
 				A1FCF07C1CA80B92000D85E1 /* Icon_Brochure.png in Resources */,
@@ -6393,6 +6402,7 @@
 				178A076B1C7DAD7300B91582 /* ExtraPremi.m in Sources */,
 				EF1ADDE117826CCC00996388 /* Education.m in Sources */,
 				EF1ADDE417826F2700996388 /* SavingCFF.m in Sources */,
+				438035DE1D5D8847003A9199 /* SPAJFilesViewController.m in Sources */,
 				EF1ADDE71782771200996388 /* RecordAdviceII.m in Sources */,
 				EF1ADDEA178285B700996388 /* CustomerPartner.m in Sources */,
 				EF1ADDED1782A73C00996388 /* CustomerPartnerII.m in Sources */,

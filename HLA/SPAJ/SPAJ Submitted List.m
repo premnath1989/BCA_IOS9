@@ -13,7 +13,7 @@
 #import "Query SPAJ Header.h"
 #import "SPAJ Submitted List Cell.h"
 #import "String.h"
-
+#import "ModelSPAJTransaction.h"
 
 // DECLARATION
 
@@ -26,7 +26,13 @@
 
 // IMPLEMENTATION
 
-@implementation SPAJSubmittedList
+@implementation SPAJSubmittedList{
+    ModelSPAJTransaction* modelSPAJTransaction;
+    NSMutableArray* arraySPAJTransaction;
+    
+    NSString* sortedBy;
+    NSString* sortMethod;
+}
 
     // SYNTHESIZE
 
@@ -48,7 +54,7 @@
         
         
         // INITIALIZATION
-        
+        modelSPAJTransaction = [[ModelSPAJTransaction alloc]init];
         _querySPAJHeader = [[QuerySPAJHeader alloc] init];
         _functionUserInterface = [[UserInterface alloc] init];
         _functionAlert = [[Alert alloc] init];
@@ -88,6 +94,15 @@
         [_buttonSearch setTitle:NSLocalizedString(@"BUTTON_SEARCH", nil) forState:UIControlStateNormal];
         [_buttonReset setTitle:NSLocalizedString(@"BUTTON_RESET", nil) forState:UIControlStateNormal];
         [_buttonDelete setTitle:NSLocalizedString(@"BUTTON_DELETE", nil) forState:UIControlStateNormal];
+        
+        sortedBy=@"datetime(spajtrans.SPAJDateModified)";
+        sortMethod=@"DESC";
+        [self loadSPAJTransaction];
+    }
+
+    -(void)loadSPAJTransaction{
+        arraySPAJTransaction=[[NSMutableArray alloc]initWithArray:[modelSPAJTransaction getAllReadySPAJ:sortedBy SortMethod:sortMethod]];
+        [_tableView reloadData];
     }
 
 
@@ -109,14 +124,21 @@
 
     - (IBAction)actionSearch:(id)sender
     {
-        [self generateQuery];
+        //[self generateQuery];
+        NSDictionary *dictSearch = [[NSDictionary alloc]initWithObjectsAndKeys:_textFieldName.text,@"Name",_textFieldSPAJNumber.text,@"SPAJNumber",_textFieldSocialNumber.text,@"IDNo", nil];
+        arraySPAJTransaction = [modelSPAJTransaction searchReadySPAJ:dictSearch];
+        [_tableView reloadData];
     };
 
     - (IBAction)actionReset:(id)sender
     {
-        [_functionUserInterface resetTextField:_arrayTextField];
+        /*[_functionUserInterface resetTextField:_arrayTextField];
         
-        [self generateQuery];
+        [self generateQuery];*/
+        [_textFieldName setText:@""];
+        [_textFieldSPAJNumber setText:@""];
+        [_textFieldSocialNumber setText:@""];
+        [self loadSPAJTransaction];
     };
 
     - (IBAction)actionDelete:(id)sender
@@ -134,7 +156,7 @@
 
     - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
     {
-        return _arrayQuerySubmitted.count;
+        return [arraySPAJTransaction count];
     }
 
     - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
@@ -161,7 +183,7 @@
             
         }
         
-        NSManagedObject* querySubmitted = [_arrayQuerySubmitted objectAtIndex:[indexPath row]];
+        /*NSManagedObject* querySubmitted = [_arrayQuerySubmitted objectAtIndex:[indexPath row]];
         
         NSString* stringUpdatedOnDate = [_functionUserInterface generateDate:[querySubmitted valueForKey:COLUMN_SPAJHEADER_UPDATEDON]];
         NSString* stringUpdatedOnTime = [_functionUserInterface generateTime:[querySubmitted valueForKey:COLUMN_SPAJHEADER_UPDATEDON] ];
@@ -173,7 +195,29 @@
         [cellSPAJSubmitted.labelUpdatedOnTime setText: stringUpdatedOnTime];
         [cellSPAJSubmitted.labelProduct setText: [querySubmitted valueForKey:COLUMN_SPAJHEADER_PRODUCTID]];
         [cellSPAJSubmitted.labelState setText: [querySubmitted valueForKey:COLUMN_SPAJHEADER_STATE]];
-        [cellSPAJSubmitted.buttonView  setTitle:NSLocalizedString(@"BUTTON_VIEW", nil) forState:UIControlStateNormal];
+        [cellSPAJSubmitted.buttonView  setTitle:NSLocalizedString(@"BUTTON_VIEW", nil) forState:UIControlStateNormal];*/
+        if (indexPath.row<[arraySPAJTransaction count]){
+            /*NSString* stringUpdatedOnDate = [_functionUserInterface generateDate:[querySubmitted valueForKey:COLUMN_SPAJHEADER_UPDATEDON]];
+            NSString* stringUpdatedOnTime = [_functionUserInterface generateTime:[querySubmitted valueForKey:COLUMN_SPAJHEADER_UPDATEDON] ];*/
+            NSString *idDesc = @"";
+            if ([[[arraySPAJTransaction objectAtIndex:indexPath.row] valueForKey:@"IdentityDesc"] length]>0){
+                idDesc = [NSString stringWithFormat:@"%@ : ",[[arraySPAJTransaction objectAtIndex:indexPath.row] valueForKey:@"IdentityDesc"] ];
+                
+            }
+            NSString *idNumber = @"";
+            if ([[[arraySPAJTransaction objectAtIndex:indexPath.row] valueForKey:@"OtherIDTypeNo"] length]>0){
+                idNumber = [[arraySPAJTransaction objectAtIndex:indexPath.row] valueForKey:@"OtherIDTypeNo"];
+            }
+            NSString* prospectID = [NSString stringWithFormat:@"%@%@",idDesc,idNumber];
+            [cellSPAJSubmitted.labelName setText: [[arraySPAJTransaction objectAtIndex:indexPath.row] valueForKey:@"ProspectName"]];
+            [cellSPAJSubmitted.labelSocialNumber setText: prospectID];
+            [cellSPAJSubmitted.labelSPAJNumber setText: [[arraySPAJTransaction objectAtIndex:indexPath.row] valueForKey:@"SPAJNumber"]];
+            [cellSPAJSubmitted.labelUpdatedOnDate setText: [[arraySPAJTransaction objectAtIndex:indexPath.row] valueForKey:@"SPAJDateModified"]];
+            [cellSPAJSubmitted.labelUpdatedOnTime setText: [[arraySPAJTransaction objectAtIndex:indexPath.row] valueForKey:@"SPAJDateModified"]];
+            [cellSPAJSubmitted.labelProduct setText: [[arraySPAJTransaction objectAtIndex:indexPath.row] valueForKey:@"ProductName"]];
+            [cellSPAJSubmitted.labelState setText: [[arraySPAJTransaction objectAtIndex:indexPath.row] valueForKey:@"SPAJStatus"]];
+            [cellSPAJSubmitted.buttonView  setTitle:NSLocalizedString(@"BUTTON_VIEW", nil) forState:UIControlStateNormal];
+        }
         return cellSPAJSubmitted;
     }
 

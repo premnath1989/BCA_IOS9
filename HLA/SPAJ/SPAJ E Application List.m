@@ -25,7 +25,7 @@
 // DECLARATION
 
 @interface SPAJEApplicationList ()<SIListingDelegate,UIPopoverPresentationControllerDelegate>{
-    ModelSPAJTransaction* modelSPAJTransaction;
+    
     UIBarButtonItem* rightButton;
 }
 
@@ -37,6 +37,7 @@
 // IMPLEMENTATION
 
 @implementation SPAJEApplicationList{
+    ModelSPAJTransaction* modelSPAJTransaction;
     ModelSPAJSignature* modelSPAJSignature;
     ModelSPAJIDCapture* modelSPAJIDCapture;
     ModelSPAJFormGeneration* modelSPAJFormGeneration;
@@ -121,7 +122,7 @@
         _labelFieldName.text = @"Nama :";
         _labelFieldEApplicationNumber.text = @"Nomor Eapp :";
         
-        sortedBy=@"spajtrans.SPAJDateModified";
+        sortedBy=@"datetime(spajtrans.SPAJDateModified)";
         sortMethod=@"DESC";
         
         [self loadSPAJTransaction];
@@ -240,7 +241,7 @@
             sortedBy=@"spajtrans.SPAJEappNumber";
         }
         else if (sender==buttonSortLastModified){
-            sortedBy=@"spajtrans.SPAJDateModified";
+            sortedBy=@"datetime(spajtrans.SPAJDateModified)";
         }
         else if (sender==buttonSortStatus){
             sortedBy=@"spajtrans.SPAJDateModified";
@@ -372,10 +373,10 @@
             [cellSPAJEApplication.labelName setText: [[arraySPAJTransaction objectAtIndex:indexPath.row] valueForKey:@"ProspectName"]];
             [cellSPAJEApplication.labelSocialNumber setText:prospectID];
             [cellSPAJEApplication.labelEApplicationNumber setText:[[arraySPAJTransaction objectAtIndex:indexPath.row] valueForKey:@"SPAJEappNumber"]];
-            [cellSPAJEApplication.labelSPAJNumber setText:@"" ];
+            [cellSPAJEApplication.labelSPAJNumber setText:[[arraySPAJTransaction objectAtIndex:indexPath.row] valueForKey:@"SPAJNumber"]];
             [cellSPAJEApplication.labelUpdatedOnDate setText:[[arraySPAJTransaction objectAtIndex:indexPath.row] valueForKey:@"SPAJDateModified"]];
             //[cellSPAJEApplication.labelUpdatedOnTime setText:];
-            [cellSPAJEApplication.labelState setText: @"Not Complete"];
+            [cellSPAJEApplication.labelState setText: [[arraySPAJTransaction objectAtIndex:indexPath.row] valueForKey:@"SPAJCompleteness"]];
         }
         /*NSManagedObject* queryEApplication = [_arrayQueryEApplication objectAtIndex:[indexPath row]];
         
@@ -414,7 +415,7 @@
     -(void)createSPAJTransactionData:(NSString *)stringEAPPNo SINO:(NSString *)stringSINO;
     {
         NSMutableDictionary* dictionarySPAJTransaction = [[NSMutableDictionary alloc]init];
-        NSString* dateToday=[formatter getDateToday:@"yyyy-MM-dd hh:mm:ss"];
+        NSString* dateToday=[formatter getDateToday:@"yyyy-MM-dd HH:mm:ss"];
         
         NSString* stringEAPPNumber = stringEAPPNo;//[self createSPAJTransactionNumber];
         
@@ -426,7 +427,8 @@
         [dictionarySPAJTransaction setObject:@"" forKey:@"CreatedBy"];
         [dictionarySPAJTransaction setObject:dateToday forKey:@"SPAJDateModified"];
         [dictionarySPAJTransaction setObject:@"" forKey:@"ModifiedBy"];
-        [dictionarySPAJTransaction setObject:@"Not Complete" forKey:@"SPAJStatus"];
+        [dictionarySPAJTransaction setObject:@"EAPP" forKey:@"SPAJStatus"];
+        [dictionarySPAJTransaction setObject:@"Tidak Lengkap" forKey:@"SPAJCompleteness"];
         
         [modelSPAJTransaction saveSPAJTransaction:dictionarySPAJTransaction];
         

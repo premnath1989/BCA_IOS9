@@ -140,7 +140,7 @@
 
     - (IBAction)actionGoToAddMenu:(id)sender
     {
-        stringGlobalEAPPNumber = [self createSPAJTransactionNumber];
+        /*stringGlobalEAPPNumber = [self createSPAJTransactionNumber];
         SPAJAddMenu* viewController = [[SPAJAddMenu alloc] initWithNibName:@"SPAJ Add Menu" bundle:nil];
         viewController.view.frame = self.viewContent.bounds;
         viewController.delegateSPAJMain = self;
@@ -160,7 +160,7 @@
         
         dispatch_async(serialQueue, ^{
             [self createSPAJIDCaptureData:stringGlobalEAPPNumber];
-        });
+        });*/
         
     };
 

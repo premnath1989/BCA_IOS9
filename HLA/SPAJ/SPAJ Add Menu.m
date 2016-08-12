@@ -29,6 +29,7 @@
 #import "Formatter.h"
 #import "Layout.h"
 #import "User Interface.h"
+#import "LoginDBManagement.h"
 // DECLARATION
 
 @interface SPAJAddMenu ()<SIListingDelegate,UIPopoverPresentationControllerDelegate>
@@ -276,9 +277,14 @@
 
     - (IBAction)actionConfirmAndAssignSPAJNumber:(UIButton *)sender
     {
-        CFFAPIController* cffAPIController;
+        /*CFFAPIController* cffAPIController;
         cffAPIController = [[CFFAPIController alloc]init];
-        [cffAPIController apiCall:@"http://192.168.0.114/E-Submission/SpajHandler.ashx?operation=getRemoteFtpPath&spajNumber=60000000022&product=BCALife"];
+        [cffAPIController apiCall:@"http://192.168.0.114/E-Submission/SpajHandler.ashx?operation=getRemoteFtpPath&spajNumber=60000000022&product=BCALife"];*/
+        
+        LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
+        [modelSPAJTransaction updateSPAJTransaction:@"SPAJNumber" StringColumnValue:[[NSNumber numberWithLongLong:[loginDB getLastActiveSPAJNum]] stringValue] StringWhereName:@"SPAJEappNumber" StringWhereValue:[dictTransaction valueForKey:@"SPAJEappNumber"]];
+        
+        [modelSPAJTransaction updateSPAJTransaction:@"SPAJStatus" StringColumnValue:@"ExistingList" StringWhereName:@"SPAJEappNumber" StringWhereValue:[dictTransaction valueForKey:@"SPAJEappNumber"]];
     };
 
 

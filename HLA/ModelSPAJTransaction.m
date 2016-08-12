@@ -19,9 +19,11 @@
     NSString *ProspectIDDesc;
     NSString *ProspectIDNumber;
     NSString *SPAJEAppNumber;
+    NSString *SPAJNumber;
     NSString *SPAJDateCreated;
     NSString *SPAJDateModified;
     NSString *SPAJStatus;
+    NSString *SPAJCompleteness;
     NSString *SPAJSINO;
     
     int ProspectIndex;
@@ -47,7 +49,9 @@
         SPAJDateCreated = [s stringForColumn:@"SPAJDateCreated"]?:@"";
         SPAJDateModified = [s stringForColumn:@"SPAJDateModified"]?:@"";
         SPAJStatus = [s stringForColumn:@"SPAJStatus"]?:@"";
+        SPAJCompleteness = [s stringForColumn:@"SPAJCompleteness"]?:@"";
         SPAJEAppNumber = [s stringForColumn:@"SPAJEappNumber"]?:@"";
+        SPAJNumber = [s stringForColumn:@"SPAJNumber"]?:@"";
         SPAJSINO = [s stringForColumn:@"SPAJSINO"]?:@"";
         
         dict=[[NSDictionary alloc]initWithObjectsAndKeys:
@@ -59,8 +63,10 @@
               SPAJDateCreated,@"SPAJDateCreated",
               SPAJDateModified,@"SPAJDateModified",
               SPAJStatus,@"SPAJStatus",
+              SPAJCompleteness,@"SPAJCompleteness",
               ProspectIDDesc,@"IdentityDesc",
               SPAJEAppNumber,@"SPAJEappNumber",
+              SPAJNumber,@"SPAJNumber",
               SPAJSINO,@"SPAJSINO",nil];
         
         [arrayDictSPAJ addObject:dict];
@@ -71,6 +77,157 @@
     return arrayDictSPAJ;
 }
 
+-(NSMutableArray *)getAllReadySPAJ:(NSString *)sortedBy SortMethod:(NSString *)sortMethod{
+    NSMutableArray* arrayDictSPAJ = [[NSMutableArray alloc]init];
+    NSDictionary *dict;
+    
+    NSString *ProspectName;
+    NSString *ProspectIDDesc;
+    NSString *ProspectIDNumber;
+    NSString *SPAJEAppNumber;
+    NSString *SPAJNumber;
+    NSString *SPAJProduct;
+    NSString *SPAJDateCreated;
+    NSString *SPAJDateModified;
+    NSString *SPAJStatus;
+    NSString *SPAJCompleteness;
+    NSString *SPAJSINO;
+    NSString *SPAJSIVersion;
+    
+    int ProspectIndex;
+    int SPAJTransactionID;
+    int SPAJID;
+    
+    
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"SELECT spajtrans.*,sipo.*,pp.*,ep.*,sim.SI_Version FROM SPAJTransaction spajtrans left join SI_Master sim on spajtrans.SPAJSINO = sim.SINO left join SI_PO_Data sipo on spajtrans.SPAJSINO = sipo.SINO left join prospect_profile pp on sipo.PO_ClientID = pp.IndexNo left join eProposal_Identification ep on pp.OtherIDType=ep.DataIdentifier where spajtrans.SPAJNumber <>'' order by %@ %@",sortedBy,sortMethod]];
+    
+    while ([s next]) {
+        ProspectIndex = [s intForColumn:@"IndexNo"];
+        SPAJTransactionID = [s intForColumn:@"SPAJTransactionID"];
+        SPAJID = [s intForColumn:@"SPAJID"];
+        ProspectName = [s stringForColumn:@"ProspectName"]?:@"";
+        ProspectIDDesc = [s stringForColumn:@"IdentityDesc"]?:@"";
+        ProspectIDNumber = [s stringForColumn:@"OtherIDTypeNo"]?:@"";
+        SPAJDateCreated = [s stringForColumn:@"SPAJDateCreated"]?:@"";
+        SPAJDateModified = [s stringForColumn:@"SPAJDateModified"]?:@"";
+        SPAJStatus = [s stringForColumn:@"SPAJStatus"]?:@"";
+        SPAJCompleteness = [s stringForColumn:@"SPAJCompleteness"]?:@"";
+        SPAJEAppNumber = [s stringForColumn:@"SPAJEappNumber"]?:@"";
+        SPAJNumber = [s stringForColumn:@"SPAJNumber"]?:@"";
+        SPAJProduct = [s stringForColumn:@"ProductName"]?:@"";
+        SPAJSINO = [s stringForColumn:@"SPAJSINO"]?:@"";
+        SPAJSIVersion = [s stringForColumn:@"SI_Version"]?:@"";
+        
+        dict=[[NSDictionary alloc]initWithObjectsAndKeys:
+              [NSNumber numberWithInt:ProspectIndex],@"IndexNo",
+              [NSNumber numberWithInt:SPAJTransactionID],@"SPAJTransactionID",
+              [NSNumber numberWithInt:SPAJID],@"SPAJID",
+              ProspectName,@"ProspectName",
+              ProspectIDNumber,@"OtherIDTypeNo",
+              SPAJDateCreated,@"SPAJDateCreated",
+              SPAJDateModified,@"SPAJDateModified",
+              SPAJStatus,@"SPAJStatus",
+              SPAJCompleteness,@"SPAJCompleteness",
+              ProspectIDDesc,@"IdentityDesc",
+              SPAJEAppNumber,@"SPAJEappNumber",
+              SPAJNumber,@"SPAJNumber",
+              SPAJProduct,@"ProductName",
+              SPAJSINO,@"SPAJSINO",
+              SPAJSIVersion,@"SI_Version",nil];
+        
+        [arrayDictSPAJ addObject:dict];
+    }
+    
+    //[results close];
+    [database close];
+    return arrayDictSPAJ;
+}
+
+-(NSMutableArray *)searchReadySPAJ:(NSDictionary *)dictSearch{
+    NSMutableArray* arrayDictSPAJ = [[NSMutableArray alloc]init];
+    NSDictionary *dict;
+    
+    NSString *ProspectName;
+    NSString *ProspectIDDesc;
+    NSString *ProspectIDNumber;
+    NSString *SPAJEAppNumber;
+    NSString *SPAJNumber;
+    NSString *SPAJProduct;
+    NSString *SPAJDateCreated;
+    NSString *SPAJDateModified;
+    NSString *SPAJStatus;
+    NSString *SPAJCompleteness;
+    NSString *SPAJSINO;
+    NSString *SPAJSIVersion;
+    
+    int ProspectIndex;
+    int SPAJTransactionID;
+    int SPAJID;
+    
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    NSString *stringIDNumber = [dictSearch valueForKey:@"IDNo"];
+    NSString *stringName = [dictSearch valueForKey:@"Name"];
+    NSString *stringSPAJNumber = [dictSearch valueForKey:@"SPAJNumber"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"SELECT spajtrans.*,sipo.*,pp.*,ep.*,sim.SI_Version FROM SPAJTransaction spajtrans left join SI_Master sim on spajtrans.SPAJSINO = sim.SINO left join SI_PO_Data sipo on spajtrans.SPAJSINO = sipo.SINO left join prospect_profile pp on sipo.PO_ClientID = pp.IndexNo left join eProposal_Identification ep on pp.OtherIDType=ep.DataIdentifier where spajtrans.SPAJNumber like \"%%%@%%\" and pp.ProspectName like \"%%%@%%\" and pp.OtherIDTypeNo like \"%%%@%%\"",stringSPAJNumber,stringName,stringIDNumber]];
+    
+    
+    NSLog(@"query %@",[NSString stringWithFormat:@"SELECT spajtrans.*,sipo.*,pp.*,ep.*,sim.SI_Version FROM SPAJTransaction spajtrans SI_Master sim on spajtrans.SPAJSINO = sim.SINO left join SI_PO_Data sipo on spajtrans.SPAJSINO = sipo.SINO left join prospect_profile pp on sipo.PO_ClientID = pp.IndexNo left join eProposal_Identification ep on pp.OtherIDType=ep.DataIdentifier where spajtrans.SPAJNumber like \"%%%@%%\" and pp.ProspectName like \"%%%@%%\" and pp.OtherIDTypeNo like \"%%%@%%\"",stringSPAJNumber,stringName,stringIDNumber]);
+    while ([s next]) {
+        ProspectIndex = [s intForColumn:@"IndexNo"];
+        SPAJTransactionID = [s intForColumn:@"SPAJTransactionID"];
+        SPAJID = [s intForColumn:@"SPAJID"];
+        ProspectName = [s stringForColumn:@"ProspectName"]?:@"";
+        ProspectIDDesc = [s stringForColumn:@"IdentityDesc"]?:@"";
+        ProspectIDNumber = [s stringForColumn:@"OtherIDTypeNo"]?:@"";
+        SPAJDateCreated = [s stringForColumn:@"SPAJDateCreated"]?:@"";
+        SPAJDateModified = [s stringForColumn:@"SPAJDateModified"]?:@"";
+        SPAJStatus = [s stringForColumn:@"SPAJStatus"]?:@"";
+        SPAJCompleteness = [s stringForColumn:@"SPAJCompleteness"]?:@"";
+        SPAJEAppNumber = [s stringForColumn:@"SPAJEappNumber"]?:@"";
+        SPAJNumber = [s stringForColumn:@"SPAJNumber"]?:@"";
+        SPAJProduct = [s stringForColumn:@"ProductName"]?:@"";
+        SPAJSINO = [s stringForColumn:@"SPAJSINO"]?:@"";
+        SPAJSIVersion = [s stringForColumn:@"SI_Version"]?:@"";
+        
+        dict=[[NSDictionary alloc]initWithObjectsAndKeys:
+              [NSNumber numberWithInt:ProspectIndex],@"IndexNo",
+              [NSNumber numberWithInt:SPAJTransactionID],@"SPAJTransactionID",
+              [NSNumber numberWithInt:SPAJID],@"SPAJID",
+              ProspectName,@"ProspectName",
+              ProspectIDNumber,@"OtherIDTypeNo",
+              SPAJDateCreated,@"SPAJDateCreated",
+              SPAJDateModified,@"SPAJDateModified",
+              SPAJStatus,@"SPAJStatus",
+              SPAJCompleteness,@"SPAJCompleteness",
+              ProspectIDDesc,@"IdentityDesc",
+              SPAJEAppNumber,@"SPAJEappNumber",
+              SPAJNumber,@"SPAJNumber",
+              SPAJProduct,@"ProductName",
+              SPAJSINO,@"SPAJSINO",
+              SPAJSIVersion,@"SI_Version",nil];
+        
+        
+        [arrayDictSPAJ addObject:dict];
+    }
+    
+    [results close];
+    [database close];
+    return arrayDictSPAJ;
+}
+
+
 -(NSMutableArray *)searchSPAJ:(NSDictionary *)dictSearch{
     NSMutableArray* arrayDictSPAJ = [[NSMutableArray alloc]init];
     NSDictionary *dict;
@@ -79,9 +236,11 @@
     NSString *ProspectIDDesc;
     NSString *ProspectIDNumber;
     NSString *SPAJEAppNumber;
+    NSString *SPAJNumber;
     NSString *SPAJDateCreated;
     NSString *SPAJDateModified;
     NSString *SPAJStatus;
+    NSString *SPAJSINO;
     
     int ProspectIndex;
     int SPAJTransactionID;
@@ -109,6 +268,8 @@
         SPAJDateModified = [s stringForColumn:@"SPAJDateModified"]?:@"";
         SPAJStatus = [s stringForColumn:@"SPAJStatus"]?:@"";
         SPAJEAppNumber = [s stringForColumn:@"SPAJEappNumber"]?:@"";
+        SPAJNumber = [s stringForColumn:@"SPAJNumber"]?:@"";
+        SPAJSINO = [s stringForColumn:@"SPAJSINO"]?:@"";
         
         dict=[[NSDictionary alloc]initWithObjectsAndKeys:
               [NSNumber numberWithInt:ProspectIndex],@"IndexNo",
@@ -120,7 +281,10 @@
               SPAJDateModified,@"SPAJDateModified",
               SPAJStatus,@"SPAJStatus",
               ProspectIDDesc,@"IdentityDesc",
-              SPAJEAppNumber,@"SPAJEappNumber",nil];
+              SPAJEAppNumber,@"SPAJEappNumber",
+              SPAJNumber,@"SPAJNumber",
+              SPAJSINO,@"SPAJSINO",nil];
+
         
         [arrayDictSPAJ addObject:dict];
     }
@@ -139,7 +303,7 @@
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     [database open];
     
-    BOOL success = [database executeUpdate:@"insert into SPAJTransaction (SPAJID,SPAJEappNumber,SPAJNumber,SPAJSINO, SPAJDateCreated,CreatedBy,SPAJDateModified,ModifiedBy,SPAJStatus) values (?,?,?,?,?,?,?,?,?)" ,
+    BOOL success = [database executeUpdate:@"insert into SPAJTransaction (SPAJID,SPAJEappNumber,SPAJNumber,SPAJSINO, SPAJDateCreated,CreatedBy,SPAJDateModified,ModifiedBy,SPAJStatus,SPAJCompleteness) values (?,?,?,?,?,?,?,?,?,?)" ,
                     [spajTransactionDictionary valueForKey:@"SPAJID"],
                     [spajTransactionDictionary valueForKey:@"SPAJEappNumber"],
                     [spajTransactionDictionary valueForKey:@"SPAJNumber"],
@@ -148,7 +312,8 @@
                     [spajTransactionDictionary valueForKey:@"CreatedBy"],
                     [spajTransactionDictionary valueForKey:@"SPAJDateModified"],
                     [spajTransactionDictionary valueForKey:@"ModifiedBy"],
-                    [spajTransactionDictionary valueForKey:@"SPAJStatus"]];
+                    [spajTransactionDictionary valueForKey:@"SPAJStatus"],
+                    [spajTransactionDictionary valueForKey:@"SPAJCompleteness"]];
     
     if (!success) {
         NSLog(@"%s: insert error: %@", __FUNCTION__, [database lastErrorMessage]);

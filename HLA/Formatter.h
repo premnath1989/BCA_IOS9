@@ -28,4 +28,7 @@
 
 -(UIColor *)navigationBarTitleColor;
 -(UIFont *)navigationBarTitleFont;
+
+-(NSString *)generateSPAJFileDirectory:(NSString *)stringEappDirectory;
+- (NSString *)findExtensionOfFileInUrl:(NSURL *)url;
 @end
