@@ -54,6 +54,8 @@
     [SPAJRequestTable setTag:2];
     [SPAJRequestTable reloadData];
     [SPAJSubmissionTable reloadData];
+    
+    spinnerLoading = [[SpinnerUtilities alloc]init];
 
     if([loginDB SPAJBalance] > 30){
         [btnSPAJSync setHidden:YES];
@@ -172,11 +174,16 @@
 
 - (IBAction)btnSync:(id)sender
 {
+    [spinnerLoading startLoadingSpinner:self.view label:@"Loading"];
+    
     NSURLSession *session = [NSURLSession sharedSession];
     [[session dataTaskWithURL:[NSURL URLWithString:@"http://mposws.azurewebsites.net/Service2.svc/AllocateSpajForAgent?agentCode=11600026"]
             completionHandler:^(NSData *data,
                                 NSURLResponse *response,
                                 NSError *error) {
+                 dispatch_async(dispatch_get_main_queue(), ^{
+                    [spinnerLoading stopLoadingSpinner];
+                 });
                 // handle response
                 if(data != nil){
                     NSMutableDictionary* json = [NSJSONSerialization
