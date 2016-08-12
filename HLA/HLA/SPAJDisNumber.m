@@ -187,8 +187,6 @@
                     [self presentViewController:progressBar animated:YES completion:nil];
                 }
             }] resume];
-    
-   
 }
 
 - (IBAction)btnTestAssign:(id)sender{
