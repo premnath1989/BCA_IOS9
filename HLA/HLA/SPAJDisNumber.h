@@ -9,11 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "ProductInfoItemsDelegate.h"
 #import "ProgressBarDelegate.h"
+#import "SpinnerUtilities.h"
 
 @interface SPAJDisNumber : UIViewController<UITableViewDataSource, ProductInfoItemsDelegate, ProgressBarDelegate>{
     
     NSMutableArray *tableDataSubmission;
     NSMutableArray *tableDataRequest;
+    SpinnerUtilities *spinnerLoading;
     
     IBOutlet UITextField* textSearch;
 }

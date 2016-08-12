@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="BPreplay.otf">
+        <mutableArray key="BPreplay_Regular.ttf">
             <string>BPreplay</string>
             <string>BPreplay</string>
             <string>BPreplay</string>
@@ -32,6 +32,7 @@
             <connections>
                 <outlet property="SPAJRequestTable" destination="bZw-qQ-1k8" id="qWS-AR-Ino"/>
                 <outlet property="SPAJSubmissionTable" destination="ACH-kz-suT" id="UpF-aZ-Ogt"/>
+                <outlet property="btnSPAJSync" destination="EQ0-0o-utB" id="N81-SG-Kjf"/>
                 <outlet property="textSearch" destination="Vhj-Fl-Xpc" id="1W5-e9-TWq"/>
                 <outlet property="txtSPAJAllocated" destination="H2t-W7-Idh" id="mfa-pD-EuO"/>
                 <outlet property="txtSPAJBalance" destination="25H-RN-m3f" id="RBR-OB-vM3"/>
@@ -171,8 +172,7 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                     <connections>
-                        <action selector="btnSync:" destination="-1" eventType="touchUpOutside" id="nwV-Hi-YRi"/>
-                        <action selector="btnSync:" destination="-1" eventType="touchDown" id="o77-wt-qHB"/>
+                        <action selector="btnSync:" destination="-1" eventType="touchUpInside" id="e5H-2e-X2b"/>
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3gs-1I-eU0">

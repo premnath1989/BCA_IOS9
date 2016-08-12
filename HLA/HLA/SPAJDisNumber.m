@@ -54,6 +54,8 @@
     [SPAJRequestTable setTag:2];
     [SPAJRequestTable reloadData];
     [SPAJSubmissionTable reloadData];
+    
+    spinnerLoading = [[SpinnerUtilities alloc]init];
 
     if([loginDB SPAJBalance] > 30){
         [btnSPAJSync setHidden:YES];
@@ -126,21 +128,20 @@
         }
         
         if(tableDataRequest != nil){
-            if((tableDataRequest.count >0)&&(tableDataSubmission.count >0)){
+            if((tableDataRequest.count >0)){
                 
-                long long total = [[[tableDataRequest objectAtIndex:indexPath.row] valueForKey:@"SPAJAllocationEnd"] longLongValue] - [[[tableDataSubmission objectAtIndex:indexPath.row] valueForKey:@"SPAJAllocationBegin"] longLongValue] + 1;
+                long long total = [[[tableDataRequest objectAtIndex:indexPath.row] valueForKey:@"SPAJAllocationEnd"] longLongValue] - [[[tableDataRequest objectAtIndex:indexPath.row] valueForKey:@"SPAJAllocationBegin"] longLongValue] + 1;
                 
                 cell.labelDate.text = [[tableDataRequest objectAtIndex:indexPath.row] valueForKey:@"CreatedDate"];
-                cell.labelPackID.text = [[tableDataRequest objectAtIndex:indexPath.row] valueForKey:@"PackID"];
+                cell.labelPackID.text = [[tableDataRequest objectAtIndex:indexPath.row]
+                    valueForKey:@"PackID"];
                 cell.labelTotal.text = [NSString stringWithFormat:@"%lld",total];
                 cell.labelSPAJStart.text = [[tableDataRequest objectAtIndex:indexPath.row] valueForKey:@"SPAJAllocationBegin"];
                 cell.labelSPAJEnd.text = [[tableDataRequest objectAtIndex:indexPath.row] valueForKey:@"SPAJAllocationEnd"];
             }
         }
         return cell;
-
     }
-    
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -172,11 +173,16 @@
 
 - (IBAction)btnSync:(id)sender
 {
+    [spinnerLoading startLoadingSpinner:self.view label:@"Loading"];
+    
     NSURLSession *session = [NSURLSession sharedSession];
     [[session dataTaskWithURL:[NSURL URLWithString:@"http://mposws.azurewebsites.net/Service2.svc/AllocateSpajForAgent?agentCode=11600026"]
             completionHandler:^(NSData *data,
                                 NSURLResponse *response,
                                 NSError *error) {
+                 dispatch_async(dispatch_get_main_queue(), ^{
+                    [spinnerLoading stopLoadingSpinner];
+                 });
                 // handle response
                 if(data != nil){
                     NSMutableDictionary* json = [NSJSONSerialization
@@ -206,6 +212,11 @@
                     
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self viewDidLoad];
+                        
+                        if([loginDB SPAJBalance] > 30){
+                            [btnSPAJSync setHidden:YES];
+                        }
+                        
                         UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Success" message:[NSString stringWithFormat:@"SPAJ Number telah di terima."] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
                         [alert show];
                     });
@@ -215,7 +226,6 @@
                         UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Periksa lagi koneksi internet anda" message:[NSString stringWithFormat:@""] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
                         [alert show];
                     });
-
                 }
             }] resume];
 }

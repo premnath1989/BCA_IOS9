@@ -91,6 +91,7 @@
         
         [self setNavigationBar];
         [self voidCreateRightBarButton];
+        [self setTextfieldBorder];
         
         // LAYOUT SETTING
         
