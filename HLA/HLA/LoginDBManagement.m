@@ -499,7 +499,7 @@
                     valueEnd = [[NSString alloc]
                                 initWithUTF8String:
                                 (const char *) sqlite3_column_text(statement, 2)];
-                    SPAJCount = SPAJCount + ([valueEnd longLongValue]-[valueStart longLongValue]) + 2;
+                    SPAJCount = SPAJCount + ([valueEnd longLongValue]-[valueStart longLongValue]) + 1;
                 }
             }
         }
@@ -630,7 +630,7 @@
                     valueEnd = [[NSString alloc]
                                 initWithUTF8String:
                                 (const char *) sqlite3_column_text(statement, 1)];
-                    SPAJCount = SPAJCount + ([valueEnd longLongValue]-[valueStart longLongValue]) - 1;
+                    SPAJCount = SPAJCount + ([valueEnd longLongValue]-[valueStart longLongValue]);
                 }
             }
         }
