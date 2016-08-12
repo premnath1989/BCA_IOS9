@@ -24,7 +24,7 @@
 #import "SPAJ Add Menu.h"
 // DECLARATION
 
-@interface SPAJEApplicationList ()<SIListingDelegate,UIPopoverPresentationControllerDelegate>{
+@interface SPAJEApplicationList ()<SIListingDelegate,UIPopoverPresentationControllerDelegate,UITextFieldDelegate>{
     
     UIBarButtonItem* rightButton;
 }
@@ -67,6 +67,10 @@
 
 
     // DID LOAD
+
+    -(void) viewWillAppear:(BOOL)animated{
+        [self loadSPAJTransaction];
+    }
 
     - (void)viewDidLoad
     {
@@ -134,9 +138,23 @@
          @{NSForegroundColorAttributeName:[formatter navigationBarTitleColor],NSFontAttributeName: [formatter navigationBarTitleFont]}];
     }
 
-    -(void)setElementColor {
-
+    -(void)setTextfieldBorder{
+        UIFont *font= [UIFont fontWithName:@"BPreplay" size:16.0f];
+        for (UIView *view in [self.view subviews]) {
+            if ([view isKindOfClass:[UITextField class]]) {
+                UITextField *textField = (UITextField *)view;
+                textField.layer.borderColor=[_functionUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0].CGColor;
+                textField.layer.borderWidth=1.0;
+                textField.delegate=self;
+                [textField setFont:font];
+                
+                UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 20)];
+                textField.leftView = paddingView;
+                textField.leftViewMode = UITextFieldViewModeAlways;
+            }
+        }
     }
+
 
     -(void)voidCreateRightBarButton{
         rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Add" style:UIBarButtonItemStylePlain target:self
@@ -299,11 +317,15 @@
             [self createSPAJFormGeneration:stringGlobalEAPPNumber];
         });
         
-        //dispatch_async(serialQueue, ^{
-            //[self loadSPAJTransaction];
-        //});
+        dispatch_async(serialQueue, ^{
+            [self loadSPAJTransaction];
+        });
         
-        [self performSelector:@selector(loadSPAJTransaction) withObject:nil afterDelay:1.0];
+        dispatch_async(serialQueue, ^{
+            [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+        });
+        
+        //[self performSelector:@selector(loadSPAJTransaction) withObject:nil afterDelay:1.0];
         //[siListingPopOver dismissViewControllerAnimated:YES completion:nil];
         [alertController dismissViewControllerAnimated:YES completion:nil];
     

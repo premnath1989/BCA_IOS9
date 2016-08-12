@@ -111,10 +111,10 @@
 }
 
 - (NSMutableDictionary*)readfromDB:(NSMutableDictionary*) params{
-    /*NSString *SPAJTransactionID = [modelSPAJTransaction getSPAJTransactionData:@"SPAJTransactionID" StringWhereName:@"SPAJEappNumber" StringWhereValue:[delegate voidGetEAPPNumber]];
+    NSString *SPAJTransactionID = [dictTransaction valueForKey:@"SPAJTransactionID"];
     NSMutableDictionary* modifiedParams = [[NSMutableDictionary alloc]initWithDictionary:[params valueForKey:@"data"]];
     NSMutableDictionary* tempDict = [[NSMutableDictionary alloc] initWithDictionary:[modifiedParams valueForKey:@"SPAJAnswers"]];
-    NSString* stringWhere = [NSString stringWithFormat:@"where CustomerID=%@ and SPAJID=%@ and SPAJTransactionID=%@ and SPAJHtmlSection='PO'",@"1",@"1",SPAJTransactionID];
+    NSString* stringWhere = [NSString stringWithFormat:@"where CustomerID=%@ and SPAJID=%@ and SPAJTransactionID=%@ ",@"1",@"1",SPAJTransactionID];
     [tempDict setObject:stringWhere forKey:@"where"];
     
     NSMutableDictionary* answerDictionary = [[NSMutableDictionary alloc]init];
@@ -124,7 +124,7 @@
     [finalDictionary setObject:answerDictionary forKey:@"data"];
     [finalDictionary setValue:[params valueForKey:@"successCallBack"] forKey:@"successCallBack"];
     [finalDictionary setValue:[params valueForKey:@"errorCallback"] forKey:@"errorCallback"];
-    return [super readfromDB:finalDictionary];*/
+    return [super readfromDB:finalDictionary];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
