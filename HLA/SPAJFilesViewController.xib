@@ -13,7 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SPAJFilesViewController">
             <connections>
                 <outlet property="buttonClose" destination="Mfm-2Z-hMN" id="KAX-PQ-JOf"/>
-                <outlet property="buttonSubmit" destination="E7Y-5L-1Cg" id="3cx-PU-2J6"/>
+                <outlet property="buttonSubmit" destination="E7Y-5L-1Cg" id="yhv-kM-yg5"/>
                 <outlet property="imageViewDisplayImage" destination="q4m-pQ-wQn" id="RB6-TP-l9u"/>
                 <outlet property="tableFileList" destination="LWL-1i-g0F" id="pql-Gv-3KO"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>

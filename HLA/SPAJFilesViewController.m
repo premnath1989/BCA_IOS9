@@ -10,6 +10,9 @@
 #import "Formatter.h"
 #import "ProgressBar.h"
 #import "ProgressBarDelegate.h"
+#import "ModelSPAJTransaction.h"
+#import "Alert.h"
+
 @interface SPAJFilesViewController ()<ProgressBarDelegate>{
     ProgressBar *progressBar;
     
@@ -19,18 +22,21 @@
     IBOutlet UIWebView* webViewDisplayPDF;
     
     IBOutlet UIButton* buttonClose;
-    IBOutlet UIButton* buttonSubmit;
+    
 }
 
 @end
 
 @implementation SPAJFilesViewController{
     Formatter* formatter;
+    ModelSPAJTransaction* modelSPAJTransaction;
+    Alert* alert;
     NSArray *directoryContent;
     
     int intUploadCount;
 }
 @synthesize dictTransaction;
+@synthesize buttonSubmit;
 
 - (void)viewWillLayoutSubviews{
     [super viewWillLayoutSubviews];
@@ -46,6 +52,8 @@
     [super viewDidLoad];
     
     formatter = [[Formatter alloc]init];
+    modelSPAJTransaction = [[ModelSPAJTransaction alloc]init];
+    alert = [[Alert alloc]init];
     intUploadCount = 0;
     // Do any additional setup after loading the view from its nib.
 }
@@ -125,13 +133,15 @@
 
 -(IBAction)actionSubmit:(UIButton *)sender{
     NSURLSession *session = [NSURLSession sharedSession];
-    [[session dataTaskWithURL:[NSURL URLWithString:@"http://mposws.azurewebsites.net/Service2.svc/CreateRemoteFtpFolder?spajNumber=60000000009"]
+    [[session dataTaskWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://mposws.azurewebsites.net/Service2.svc/CreateRemoteFtpFolder?spajNumber=%@",[dictTransaction valueForKey:@"SPAJNumber"] ]]
             completionHandler:^(NSData *data,
                                 NSURLResponse *response,
                                 NSError *error) {
                 // handle response
                 if(data != nil){
-                    [self voidUploadFile];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self voidUploadFile];
+                    });
                 }
             }] resume];
 
@@ -179,7 +189,17 @@
                                                      options:NSJSONReadingMutableContainers
                                                      error:&error];
                         NSLog(@"%@", json);
-                        [progressBar dismissViewControllerAnimated:YES completion:^{}];
+                        [modelSPAJTransaction updateSPAJTransaction:@"SPAJStatus" StringColumnValue:@"Submitted" StringWhereName:@"SPAJEappNumber" StringWhereValue:[dictTransaction valueForKey:@"SPAJEappNumber"]];
+                        
+                        UIAlertController* alertController = [UIAlertController alertControllerWithTitle:@"Sukses Upload" message:@"Data berhasil diupload" preferredStyle:UIAlertControllerStyleAlert];
+                        
+                        [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                                [progressBar dismissViewControllerAnimated:YES completion:^{}];
+                        }]];
+                        //dispatch_async(dispatch_get_main_queue(), ^ {
+                            [self presentViewController:alertController animated:YES completion:nil];
+                        //});
+                        
                     }
                 }] resume];
     }

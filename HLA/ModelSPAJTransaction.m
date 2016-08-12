@@ -77,7 +77,7 @@
     return arrayDictSPAJ;
 }
 
--(NSMutableArray *)getAllReadySPAJ:(NSString *)sortedBy SortMethod:(NSString *)sortMethod{
+-(NSMutableArray *)getAllReadySPAJ:(NSString *)sortedBy SortMethod:(NSString *)sortMethod SPAJStatus:(NSString *)stringSPAJStatus{
     NSMutableArray* arrayDictSPAJ = [[NSMutableArray alloc]init];
     NSDictionary *dict;
     
@@ -105,7 +105,7 @@
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     [database open];
     
-    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"SELECT spajtrans.*,sipo.*,pp.*,ep.*,sim.SI_Version FROM SPAJTransaction spajtrans left join SI_Master sim on spajtrans.SPAJSINO = sim.SINO left join SI_PO_Data sipo on spajtrans.SPAJSINO = sipo.SINO left join prospect_profile pp on sipo.PO_ClientID = pp.IndexNo left join eProposal_Identification ep on pp.OtherIDType=ep.DataIdentifier where spajtrans.SPAJNumber <>'' order by %@ %@",sortedBy,sortMethod]];
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"SELECT spajtrans.*,sipo.*,pp.*,ep.*,sim.SI_Version FROM SPAJTransaction spajtrans left join SI_Master sim on spajtrans.SPAJSINO = sim.SINO left join SI_PO_Data sipo on spajtrans.SPAJSINO = sipo.SINO left join prospect_profile pp on sipo.PO_ClientID = pp.IndexNo left join eProposal_Identification ep on pp.OtherIDType=ep.DataIdentifier where spajtrans.SPAJNumber <>'' and spajtrans.SPAJStatus in (%@) order by %@ %@",stringSPAJStatus,sortedBy,sortMethod]];
     
     while ([s next]) {
         ProspectIndex = [s intForColumn:@"IndexNo"];
@@ -176,11 +176,12 @@
     NSString *stringIDNumber = [dictSearch valueForKey:@"IDNo"];
     NSString *stringName = [dictSearch valueForKey:@"Name"];
     NSString *stringSPAJNumber = [dictSearch valueForKey:@"SPAJNumber"];
+    NSString *stringSPAJStatus = [dictSearch valueForKey:@"SPAJStatus"];
     
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     [database open];
     
-    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"SELECT spajtrans.*,sipo.*,pp.*,ep.*,sim.SI_Version FROM SPAJTransaction spajtrans left join SI_Master sim on spajtrans.SPAJSINO = sim.SINO left join SI_PO_Data sipo on spajtrans.SPAJSINO = sipo.SINO left join prospect_profile pp on sipo.PO_ClientID = pp.IndexNo left join eProposal_Identification ep on pp.OtherIDType=ep.DataIdentifier where spajtrans.SPAJNumber like \"%%%@%%\" and pp.ProspectName like \"%%%@%%\" and pp.OtherIDTypeNo like \"%%%@%%\"",stringSPAJNumber,stringName,stringIDNumber]];
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"SELECT spajtrans.*,sipo.*,pp.*,ep.*,sim.SI_Version FROM SPAJTransaction spajtrans left join SI_Master sim on spajtrans.SPAJSINO = sim.SINO left join SI_PO_Data sipo on spajtrans.SPAJSINO = sipo.SINO left join prospect_profile pp on sipo.PO_ClientID = pp.IndexNo left join eProposal_Identification ep on pp.OtherIDType=ep.DataIdentifier where spajtrans.SPAJNumber like \"%%%@%%\" and pp.ProspectName like \"%%%@%%\" and pp.OtherIDTypeNo like \"%%%@%%\" and spajtrans.SPAJStatus in (%@)",stringSPAJNumber,stringName,stringIDNumber,stringSPAJStatus]];
     
     
     NSLog(@"query %@",[NSString stringWithFormat:@"SELECT spajtrans.*,sipo.*,pp.*,ep.*,sim.SI_Version FROM SPAJTransaction spajtrans SI_Master sim on spajtrans.SPAJSINO = sim.SINO left join SI_PO_Data sipo on spajtrans.SPAJSINO = sipo.SINO left join prospect_profile pp on sipo.PO_ClientID = pp.IndexNo left join eProposal_Identification ep on pp.OtherIDType=ep.DataIdentifier where spajtrans.SPAJNumber like \"%%%@%%\" and pp.ProspectName like \"%%%@%%\" and pp.OtherIDTypeNo like \"%%%@%%\"",stringSPAJNumber,stringName,stringIDNumber]);

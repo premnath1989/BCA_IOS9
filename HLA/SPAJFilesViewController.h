@@ -11,4 +11,5 @@
 @interface SPAJFilesViewController : UIViewController
 @property (strong, nonatomic) NSDictionary* dictTransaction;
 
+@property (nonatomic, strong) IBOutlet UIButton* buttonSubmit;
 @end

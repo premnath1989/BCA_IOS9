@@ -24,8 +24,8 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ft1-6d-2IT" customClass="ViewNavigation">
                     <rect key="frame" x="0.0" y="20" width="102" height="600"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="6yl-4f-OaM" customClass="StackViewNavigation">
-                            <rect key="frame" x="0.0" y="0.0" width="102" height="240"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="6yl-4f-OaM" customClass="StackViewNavigation">
+                            <rect key="frame" x="0.0" y="0.0" width="102" height="192"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vo3-Dn-ebm" customClass="ButtonNavigation">
                                     <rect key="frame" x="0.0" y="0.0" width="102" height="48"/>
@@ -55,8 +55,8 @@
                                         <action selector="actionGoToSubmittedList:" destination="-1" eventType="touchUpInside" id="jdc-Tp-oI3"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7hp-Mb-GWr" customClass="ButtonNavigation">
-                                    <rect key="frame" x="0.0" y="192" width="102" height="48"/>
+                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7hp-Mb-GWr" customClass="ButtonNavigation">
+                                    <rect key="frame" x="0.0" y="192" width="102" height="0.0"/>
                                     <state key="normal" title="Button" image="Icon SPAJ Add Secondary"/>
                                     <connections>
                                         <action selector="actionGoToAddMenu:" destination="-1" eventType="touchUpInside" id="hMx-rh-ABb"/>

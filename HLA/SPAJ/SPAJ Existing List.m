@@ -17,6 +17,8 @@
 #import "ModelSPAJTransaction.h"
 #import "SPAJFilesViewController.h"
 
+
+
 // DECLARATION
 
 @interface SPAJExistingList ()
@@ -36,6 +38,7 @@
     
     NSString* sortedBy;
     NSString* sortMethod;
+    NSString* SPAJStatus;
 }
 
     // SYNTHESIZE
@@ -56,6 +59,7 @@
         [super viewDidLoad];
         // Do any additional setup after loading the view, typically from a nib.
         
+        SPAJStatus = @"'ExistingList'";
         
         // INITIALIZATION
         modelSPAJTransaction = [[ModelSPAJTransaction alloc]init];
@@ -109,7 +113,7 @@
     }
 
     -(void)loadSPAJTransaction{
-        arraySPAJTransaction=[[NSMutableArray alloc]initWithArray:[modelSPAJTransaction getAllReadySPAJ:sortedBy SortMethod:sortMethod]];
+        arraySPAJTransaction=[[NSMutableArray alloc]initWithArray:[modelSPAJTransaction getAllReadySPAJ:sortedBy SortMethod:sortMethod SPAJStatus:SPAJStatus]];
         [_tableView reloadData];
     }
 
@@ -133,7 +137,7 @@
     - (IBAction)actionSearch:(id)sender
     {
         //[self generateQuery];
-        NSDictionary *dictSearch = [[NSDictionary alloc]initWithObjectsAndKeys:_textFieldName.text,@"Name",_textFieldSPAJNumber.text,@"SPAJNumber",_textFieldSocialNumber.text,@"IDNo", nil];
+        NSDictionary *dictSearch = [[NSDictionary alloc]initWithObjectsAndKeys:_textFieldName.text,@"Name",_textFieldSPAJNumber.text,@"SPAJNumber",_textFieldSocialNumber.text,@"IDNo",SPAJStatus,@"SPAJStatus", nil];
         arraySPAJTransaction = [[NSMutableArray alloc]initWithArray:[modelSPAJTransaction searchReadySPAJ:dictSearch]];
         [_tableView reloadData];
     };

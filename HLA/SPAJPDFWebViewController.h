@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HtmlGenerator/HtmlGenerator.h"
 
-@interface SPAJPDFWebViewController : UIViewController
+@interface SPAJPDFWebViewController : HtmlGenerator{
+    NSString *filePath;
+}
 @property (strong, nonatomic) NSDictionary* dictTransaction;
 
 @end

@@ -16,9 +16,12 @@
 #import "ModelSPAJTransaction.h"
 #import "Formatter.h"
 
+
 @implementation SPAJDisNumber{
     Formatter* formatter;
     ModelSPAJTransaction* modelSPAJTransaction;
+    
+    NSString* SPAJStatus;
 }
 
 @synthesize txtSPAJAllocated;
@@ -32,6 +35,8 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
+
+    SPAJStatus = @"'Submitted','ExistingList'";
     
     LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
     formatter = [[Formatter alloc]init];
@@ -42,7 +47,7 @@
     [txtSPAJUsed setText:[NSString stringWithFormat:@"%lli", [loginDB SPAJUsed]]];
     
     //tableDataSubmission = [loginDB SPAJRetrievePackID];
-    tableDataSubmission = [[NSMutableArray alloc]initWithArray:[modelSPAJTransaction getAllReadySPAJ:@"datetime(spajtrans.SPAJDateModified)" SortMethod:@"DESC"]];
+    tableDataSubmission = [[NSMutableArray alloc]initWithArray:[modelSPAJTransaction getAllReadySPAJ:@"datetime(spajtrans.SPAJDateModified)" SortMethod:@"DESC" SPAJStatus:SPAJStatus]];
     tableDataRequest = [loginDB SPAJRetrievePackID];
     
     [SPAJSubmissionTable setTag:1];
@@ -56,14 +61,14 @@
 }
 
 -(IBAction)actionSearch:(id)sender{
-    NSDictionary *dictSearch = [[NSDictionary alloc]initWithObjectsAndKeys:@"",@"Name",textSearch.text,@"SPAJNumber",@"",@"IDNo", nil];
+    NSDictionary *dictSearch = [[NSDictionary alloc]initWithObjectsAndKeys:@"",@"Name",textSearch.text,@"SPAJNumber",@"",@"IDNo",SPAJStatus,@"SPAJStatus", nil];
     tableDataSubmission = [modelSPAJTransaction searchReadySPAJ:dictSearch];
     [SPAJSubmissionTable reloadData];
 }
 
 -(IBAction)actionReset:(id)sender{
     [textSearch setText:@""];
-    tableDataSubmission = [[NSMutableArray alloc]initWithArray:[modelSPAJTransaction getAllReadySPAJ:@"datetime(spajtrans.SPAJDateModified)" SortMethod:@"DESC"]];
+    tableDataSubmission = [[NSMutableArray alloc]initWithArray:[modelSPAJTransaction getAllReadySPAJ:@"datetime(spajtrans.SPAJDateModified)" SortMethod:@"DESC" SPAJStatus:SPAJStatus]];
     [SPAJSubmissionTable reloadData];
     
 }

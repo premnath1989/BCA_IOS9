@@ -14,6 +14,7 @@
 #import "SPAJ Submitted List Cell.h"
 #import "String.h"
 #import "ModelSPAJTransaction.h"
+#import "SPAJFilesViewController.h"
 
 // DECLARATION
 
@@ -28,10 +29,12 @@
 
 @implementation SPAJSubmittedList{
     ModelSPAJTransaction* modelSPAJTransaction;
+    SPAJFilesViewController* spajFilesViewController;
     NSMutableArray* arraySPAJTransaction;
     
     NSString* sortedBy;
     NSString* sortMethod;
+    NSString* SPAJStatus;
 }
 
     // SYNTHESIZE
@@ -52,6 +55,7 @@
         [super viewDidLoad];
         // Do any additional setup after loading the view, typically from a nib.
         
+        SPAJStatus = @"'Submitted'";
         
         // INITIALIZATION
         modelSPAJTransaction = [[ModelSPAJTransaction alloc]init];
@@ -101,7 +105,8 @@
     }
 
     -(void)loadSPAJTransaction{
-        arraySPAJTransaction=[[NSMutableArray alloc]initWithArray:[modelSPAJTransaction getAllReadySPAJ:sortedBy SortMethod:sortMethod]];
+        
+        arraySPAJTransaction=[[NSMutableArray alloc]initWithArray:[modelSPAJTransaction getAllReadySPAJ:sortedBy SortMethod:sortMethod SPAJStatus:SPAJStatus]];
         [_tableView reloadData];
     }
 
@@ -125,7 +130,7 @@
     - (IBAction)actionSearch:(id)sender
     {
         //[self generateQuery];
-        NSDictionary *dictSearch = [[NSDictionary alloc]initWithObjectsAndKeys:_textFieldName.text,@"Name",_textFieldSPAJNumber.text,@"SPAJNumber",_textFieldSocialNumber.text,@"IDNo", nil];
+        NSDictionary *dictSearch = [[NSDictionary alloc]initWithObjectsAndKeys:_textFieldName.text,@"Name",_textFieldSPAJNumber.text,@"SPAJNumber",_textFieldSocialNumber.text,@"IDNo",SPAJStatus,@"SPAJStatus", nil];
         arraySPAJTransaction = [modelSPAJTransaction searchReadySPAJ:dictSearch];
         [_tableView reloadData];
     };
@@ -140,6 +145,15 @@
         [_textFieldSocialNumber setText:@""];
         [self loadSPAJTransaction];
     };
+
+    - (IBAction)actionShowFilesList:(UIButton *)sender{
+        spajFilesViewController = [[SPAJFilesViewController alloc]initWithNibName:@"SPAJFilesViewController" bundle:nil];
+        [spajFilesViewController setDictTransaction:[arraySPAJTransaction objectAtIndex:sender.tag]];
+        spajFilesViewController.modalPresentationStyle = UIModalPresentationFormSheet;
+        [self presentViewController:spajFilesViewController animated:YES completion:nil];
+        [spajFilesViewController.buttonSubmit setHidden:YES];
+    }
+
 
     - (IBAction)actionDelete:(id)sender
     {
@@ -217,6 +231,10 @@
             [cellSPAJSubmitted.labelProduct setText: [[arraySPAJTransaction objectAtIndex:indexPath.row] valueForKey:@"ProductName"]];
             [cellSPAJSubmitted.labelState setText: [[arraySPAJTransaction objectAtIndex:indexPath.row] valueForKey:@"SPAJStatus"]];
             [cellSPAJSubmitted.buttonView  setTitle:NSLocalizedString(@"BUTTON_VIEW", nil) forState:UIControlStateNormal];
+            
+            [cellSPAJSubmitted.buttonView addTarget:self
+                                            action:@selector(actionShowFilesList:) forControlEvents:UIControlEventTouchUpInside];
+            [cellSPAJSubmitted.buttonView setTag:indexPath.row];
         }
         return cellSPAJSubmitted;
     }
