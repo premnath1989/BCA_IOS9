@@ -118,6 +118,11 @@
         [self insertIntoTableData:[fileURL lastPathComponent] size:[fileSizeNumber stringValue] index:index];
         index++;
     }
+    [spinnerLoading stopLoadingSpinner];
+    for(UIView *v in [self.view allSubViews]){
+        if(v.tag == 501)
+            v.hidden = YES;
+    }
 }
 
 - (void)setupTableColumn{

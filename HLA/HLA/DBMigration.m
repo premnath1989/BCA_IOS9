@@ -118,40 +118,6 @@
             }
         }
         
-        //we check the tempTablesDict
-        //if the existing table has different schema from the new one.
-        //we rename the old table, move the data into the new one. then drop the old table.
-        
-//        BOOL tableDiff = FALSE;
-//        if (sqlite3_open([tempDir UTF8String], &database) == SQLITE_OK) {
-//            for(NSString *tableName in [tempTablesDict allKeys]){
-//                //we construct query from temp dictionary
-//                for(NSString *columnName in [tempTablesDict valueForKey:tableName]){
-//                    ColumnDetails *newColumnType = (ColumnDetails *)[[tempTablesDict valueForKey:tableName]valueForKey:columnName];
-//                    ColumnDetails *oldColumnType = (ColumnDetails *)[[oldTablesDict valueForKey:tableName]valueForKey:columnName];
-//                    if([newColumnType.PK caseInsensitiveCompare:oldColumnType.PK] != NSOrderedSame)
-//                        tableDiff = TRUE;
-//                }
-//                //we create sql for table migration here
-//                //after we sure that the old table schema is different with the new one
-//                if(tableDiff){
-//                    
-//                    NSString *sql = [NSString stringWithFormat:@"ALTER TABLE %@ RENAME TO %@_",
-//                                     tableName, tableName];
-//                    sqlite3_stmt *statement;
-//                    if (sqlite3_prepare_v2(database, [sql UTF8String], -1, &statement, NULL) == SQLITE_OK) {
-//                        sqlite3_step(statement);
-//                    }
-//                    sqlite3_finalize(statement);
-//                }
-//                
-//                
-//                tableDiff = FALSE;
-//            }
-//        }
-
-        
-        
         sqlite3_close(database);
         [self moveDBFromTemp:tempDir ToDefault:defaultDBPath];
         [self updateDBVersion:defaultDBPath NewVersion:dbVersion Remark:@""];
