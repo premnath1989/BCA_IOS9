@@ -127,20 +127,13 @@ NSString *uatAgentCode;
 - (void)moveLibs{
     NSBundle *myLibraryBundle = [NSBundle bundleWithURL:[[NSBundle mainBundle]
                                                          URLForResource:@"HTMLResources" withExtension:@"bundle"]];
-    NSString *addJSPath   = [[myLibraryBundle resourcePath]
-                             stringByAppendingPathComponent:@"additional-methods.min.js"];
-    NSString *JqueryPath   = [[myLibraryBundle resourcePath] stringByAppendingPathComponent:@"jquery-1.11.1.min.js"];
-    NSString *JMobileJSPath   = [[myLibraryBundle resourcePath] stringByAppendingPathComponent:@"jquery.mobile-1.4.5.min.js"];
-    NSString *JMobilecssJSPath   = [[myLibraryBundle resourcePath] stringByAppendingPathComponent:@"jquery.mobile-1.4.5.min.css"];
-    NSString *JvalidatePath   = [[myLibraryBundle resourcePath] stringByAppendingPathComponent:@"jquery.validate.min.js"];
-    NSString *JNumberJSPath   = [[myLibraryBundle resourcePath] stringByAppendingPathComponent:@"jquery.number.js"];
     
-    [[NSFileManager defaultManager] copyItemAtPath:addJSPath toPath:[fileJqueryLibsPath stringByAppendingPathComponent:@"additional-methods.min.js"] error:NULL];
-    [[NSFileManager defaultManager] copyItemAtPath:JqueryPath toPath:[fileJqueryLibsPath stringByAppendingPathComponent:@"jquery-1.11.1.min.js"] error:NULL];
-    [[NSFileManager defaultManager] copyItemAtPath:JMobileJSPath toPath:[fileJqueryLibsPath stringByAppendingPathComponent:@"jquery.mobile-1.4.5.min.js"] error:NULL];
-    [[NSFileManager defaultManager] copyItemAtPath:JMobilecssJSPath toPath:[fileJqueryLibsPath stringByAppendingPathComponent:@"jquery.mobile-1.4.5.min.css"] error:NULL];
-    [[NSFileManager defaultManager] copyItemAtPath:JvalidatePath toPath:[fileJqueryLibsPath stringByAppendingPathComponent:@"jquery.validate.min.js"] error:NULL];
-    [[NSFileManager defaultManager] copyItemAtPath:JNumberJSPath toPath:[fileJqueryLibsPath stringByAppendingPathComponent:@"jquery.number.js"] error:NULL];
+    NSError * error;
+    for(NSString *fileName in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[myLibraryBundle resourcePath] error:&error]){
+        [[NSFileManager defaultManager] copyItemAtPath: [[myLibraryBundle resourcePath]
+                                                         stringByAppendingPathComponent:fileName]
+                                                toPath:[fileJqueryLibsPath stringByAppendingPathComponent:fileName] error:NULL];
+    }
 }
 
 #pragma mark - Core Data stack
