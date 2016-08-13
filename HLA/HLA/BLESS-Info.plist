@@ -46,6 +46,10 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>Prod_Webservices</key>
+	<string></string>
+	<key>UAT_Webservices</key>
+	<string>http://mposws.azurewebsites.net</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>BPreplay.otf</string>
