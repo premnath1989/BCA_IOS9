@@ -905,6 +905,7 @@
 		C4FCDDEB16395F290065D024 /* btn_setting_home.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FCDDDF16395F290065D024 /* btn_setting_home.png */; };
 		C4FCDDEC16395F290065D024 /* btn_SI_home.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FCDDE016395F290065D024 /* btn_SI_home.png */; };
 		DE0296921CB4ED5600C1D5DF /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0296911CB4ED5600C1D5DF /* AdSupport.framework */; };
+		DE0489A21D5EC624000D1C81 /* SPAJSubmissionFiles.m in Sources */ = {isa = PBXBuildFile; fileRef = DE0489A11D5EC624000D1C81 /* SPAJSubmissionFiles.m */; };
 		DE06BE2E1CEEF44E0091DE47 /* AppDisclaimer.m in Sources */ = {isa = PBXBuildFile; fileRef = DE06BE2D1CEEF44E0091DE47 /* AppDisclaimer.m */; };
 		DE06BE301CEEF5070091DE47 /* AppDisclaimer.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE06BE2F1CEEF5070091DE47 /* AppDisclaimer.xib */; };
 		DE06FFCE1CABBC2800E4DE3A /* xibLibrary.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DE06FFCD1CABBC2800E4DE3A /* xibLibrary.bundle */; };
@@ -2481,6 +2482,8 @@
 		C4FCDDDF16395F290065D024 /* btn_setting_home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_setting_home.png; sourceTree = "<group>"; };
 		C4FCDDE016395F290065D024 /* btn_SI_home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_SI_home.png; sourceTree = "<group>"; };
 		DE0296911CB4ED5600C1D5DF /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		DE0489A11D5EC624000D1C81 /* SPAJSubmissionFiles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPAJSubmissionFiles.m; sourceTree = "<group>"; };
+		DE0489A31D5EC63A000D1C81 /* SPAJSubmissionFiles.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SPAJSubmissionFiles.h; sourceTree = "<group>"; };
 		DE06BE2C1CEEF43F0091DE47 /* AppDisclaimer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDisclaimer.h; sourceTree = "<group>"; };
 		DE06BE2D1CEEF44E0091DE47 /* AppDisclaimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDisclaimer.m; sourceTree = "<group>"; };
 		DE06BE2F1CEEF5070091DE47 /* AppDisclaimer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppDisclaimer.xib; sourceTree = "<group>"; };
@@ -5515,6 +5518,8 @@
 		DED8EB9E1D597C8800373A8F /* SPAJSubmission */ = {
 			isa = PBXGroup;
 			children = (
+				DE0489A31D5EC63A000D1C81 /* SPAJSubmissionFiles.h */,
+				DE0489A11D5EC624000D1C81 /* SPAJSubmissionFiles.m */,
 			);
 			name = SPAJSubmission;
 			sourceTree = "<group>";
@@ -6426,6 +6431,7 @@
 				C4EEB64617C1A98900F268B3 /* demo.m in Sources */,
 				6A6ED09D17D49B73009FFA56 /* Race.m in Sources */,
 				6A6ED0A017D57F9B009FFA56 /* MaritalStatus.m in Sources */,
+				DE0489A21D5EC624000D1C81 /* SPAJSubmissionFiles.m in Sources */,
 				6A6ED0A717D591DC009FFA56 /* Religion.m in Sources */,
 				2958A81917E95C070090A791 /* MainCustomer.m in Sources */,
 				2958A81C17E95E0E0090A791 /* ContactTypeClass.m in Sources */,

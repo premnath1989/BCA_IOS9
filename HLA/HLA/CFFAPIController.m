@@ -7,12 +7,10 @@
 //
 
 #define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0) //1
-#define kLatestKivaLoansURL [NSURL URLWithString:@"http://mposws.azurewebsites.net/Service2.svc/getAllData"] //2
-
-#define SPAJkLatestKivaLoansURL [NSURL URLWithString:@"http://mposws.azurewebsites.net/SPAJHTMLForm.svc/GetAllData"] //2
 
 #import "CFFAPIController.h"
 #import "ModelCFFHtml.h"
+#import "AppDelegate.h"
 
 
 @implementation CFFAPIController{
@@ -106,15 +104,20 @@
 }
 
 -(void)getCFFHTMLFile :(NSString *)stringWebService{
+    
+    NSString *kLatestKivaLoansURL = [NSString stringWithFormat:@"%@/Service2.svc/getAllData", [(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL]];
+    
+    NSString *SPAJkLatestKivaLoansURL = [NSString stringWithFormat:@"%@/Service2.svc/SPAJHTMLForm.svc/GetAllData", [(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL]];
+    
     // handle response
     NSLog(@"getCFFHTMLFile");
     dispatch_async(kBgQueue, ^{
         NSData* data ;
         if ([stringWebService isEqualToString:@"CFF"]){
-            data = [NSData dataWithContentsOfURL:kLatestKivaLoansURL];
+            data = [NSData dataWithContentsOfURL:[NSURL URLWithString:kLatestKivaLoansURL]];
         }
         else if ([stringWebService isEqualToString:@"SPAJ"]){
-            data = [NSData dataWithContentsOfURL:SPAJkLatestKivaLoansURL];
+            data = [NSData dataWithContentsOfURL:[NSURL URLWithString:SPAJkLatestKivaLoansURL]];
         }
         
         NSLog(@"respond getCFFHTMLFile exceeded");
@@ -139,12 +142,12 @@
     NSArray* arrayFileName = [[json objectForKey:@"d"] valueForKey:@"FileName"]; //2
     if ([stringWebService isEqualToString:@"CFF"]){
         for (int i=0;i<[arrayFileName count];i++){
-            [cffAPIController apiCallCrateHtmlFile:[NSString stringWithFormat:@"http://mposws.azurewebsites.net/Service2.svc/GetHtmlFile?fileName=%@",[arrayFileName objectAtIndex:i]] RootPathFolder:@"CFFfolder"];
+            [cffAPIController apiCallCrateHtmlFile:[NSString stringWithFormat:@"%@/Service2.svc/GetHtmlFile?fileName=%@", [(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL],[arrayFileName objectAtIndex:i]] RootPathFolder:@"CFFfolder"];
         }
     }
     else if ([stringWebService isEqualToString:@"SPAJ"]){
         for (int i=0;i<[arrayFileName count];i++){
-            [cffAPIController apiCallCrateHtmlFile:[NSString stringWithFormat:@"http://mposws.azurewebsites.net/SPAJHTMLForm.svc/GetHtmlFile?fileName=%@",[arrayFileName objectAtIndex:i]] RootPathFolder:@"SPAJ"];
+            [cffAPIController apiCallCrateHtmlFile:[NSString stringWithFormat:@"%@/SPAJHTMLForm.svc/GetHtmlFile?fileName=%@",[(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL],[arrayFileName objectAtIndex:i]] RootPathFolder:@"SPAJ"];
         }
     }
 }

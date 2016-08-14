@@ -6618,19 +6618,13 @@
 }
 + (AgentWSSoapBinding *)AgentWSSoapBinding
 {
-    if(![(AppDelegate*)[[UIApplication sharedApplication] delegate] serverUAT]){
-        return [[[AgentWSSoapBinding alloc] initWithAddress:@"http://mpos-production.cloudapp.net/AgentWebService/AgentWS.asmx"] autorelease];
-    }else{
-        return [[[AgentWSSoapBinding alloc] initWithAddress:@"http://mpos-0i0p0bbi.cloudapp.net/agentwebservice/agentws.asmx"] autorelease];
-    }
+    NSString *serverURL = [NSString stringWithFormat:@"%@/webservices/AgentWS.asmx", [(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL]];
+    return [[[AgentWSSoapBinding alloc] initWithAddress:serverURL] autorelease];
 }
 + (AgentWSSoap12Binding *)AgentWSSoap12Binding
 {
-    if(![(AppDelegate*)[[UIApplication sharedApplication] delegate] serverUAT]){
-        return [[[AgentWSSoap12Binding alloc] initWithAddress:@"http://mpos-production.cloudapp.net/AgentWebService/AgentWS.asmx"] autorelease];
-    }else{
-        return [[[AgentWSSoap12Binding alloc] initWithAddress:@"http://mpos-0i0p0bbi.cloudapp.net/agentwebservice/agentws.asmx"] autorelease];
-    }
+    NSString *serverURL = [NSString stringWithFormat:@"%@/webservices/AgentWS.asmx", [(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL]];
+    return [[[AgentWSSoap12Binding alloc] initWithAddress:serverURL] autorelease];
 }
 @end
 @implementation AgentWSSoapBinding

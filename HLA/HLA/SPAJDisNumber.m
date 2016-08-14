@@ -15,6 +15,8 @@
 #import "ProgressBar.h"
 #import "ModelSPAJTransaction.h"
 #import "Formatter.h"
+#import "SPAJSubmissionFiles.h"
+#import "AppDelegate.h"
 
 
 @implementation SPAJDisNumber{
@@ -175,8 +177,10 @@
 {
     [spinnerLoading startLoadingSpinner:self.view label:@"Loading"];
     
+    NSString *serverURL = [NSString stringWithFormat:@"%@/Service2.svc/AllocateSpajForAgent?agentCode=11600026",[(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL]];
+    
     NSURLSession *session = [NSURLSession sharedSession];
-    [[session dataTaskWithURL:[NSURL URLWithString:@"http://mposws.azurewebsites.net/Service2.svc/AllocateSpajForAgent?agentCode=11600026"]
+    [[session dataTaskWithURL:[NSURL URLWithString:serverURL]
             completionHandler:^(NSData *data,
                                 NSURLResponse *response,
                                 NSError *error) {
@@ -230,10 +234,16 @@
             }] resume];
 }
 
+- (IBAction)btnTestCreateFile:(id)sender{
+    NSArray * dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *defaultDBPath = [[dirPaths objectAtIndex:0] stringByAppendingPathComponent:@"image.jpg"];
+}
+
 - (IBAction)btnTestUpload:(id)sender{
     
     NSURLSession *session = [NSURLSession sharedSession];
-    [[session dataTaskWithURL:[NSURL URLWithString:@"http://mposws.azurewebsites.net/Service2.svc/CreateRemoteFtpFolder?spajNumber=60000000009"]
+    NSString *serverURL = [NSString stringWithFormat:@"%@/Service2.svc/CreateRemoteFtpFolder?spajNumber=60000000009",[(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL]];
+    [[session dataTaskWithURL:[NSURL URLWithString:serverURL]
             completionHandler:^(NSData *data,
                                 NSURLResponse *response,
                                 NSError *error) {
@@ -262,12 +272,10 @@
 - (IBAction)btnTestAssign:(id)sender{
     LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
     NSLog(@"%lld",[loginDB getLastActiveSPAJNum]);
-    
-    
 }
 
 - (void)downloadisFinished{
-    NSString *urlStr = @"http://mposws.azurewebsites.net/Service2.svc/UpdateOnPostUploadData?spajNumber=60000000001&producName=Heritage Product&polisOwner=Johan Regar";
+    NSString *urlStr = [NSString stringWithFormat:@"%@/Service2.svc/UpdateOnPostUploadData?spajNumber=60000000001&producName=Heritage Product&polisOwner=Johan Regar", [(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL]];
     urlStr = [urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     
     NSURLSession *session = [NSURLSession sharedSession];

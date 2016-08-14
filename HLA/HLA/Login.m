@@ -110,11 +110,11 @@ NSString *ProceedStatus = @"";
         serverOption.hidden = TRUE;
         serverSegmented.hidden = TRUE;
         serverSegmented.selectedSegmentIndex = 1;
-        delegate.serverUAT = FALSE;
+        delegate.serverURL = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"Prod_Webservices"];
         viewWrapper.hidden = TRUE;
     }else{
         serverSegmented.selectedSegmentIndex = 0;
-        delegate.serverUAT = TRUE;
+        delegate.serverURL = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"UAT_Webservices"];
     }
 }
 
@@ -865,7 +865,7 @@ static NSString *labelVers;
 - (IBAction)passLogin:(id)sender
 {
     
-    if([(AppDelegate*)[[UIApplication sharedApplication] delegate] serverUAT])
+    if([[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"] containsString:@"UAT"])
         [self loginSuccess];
 }
 
@@ -1111,21 +1111,13 @@ static NSString *labelVers;
 
 - (BOOL)alertViewShouldEnableFirstOtherButton:(UIAlertView *)alertView
 {
-//    NSString *inputText = [[alertView textFieldAtIndex:0] text];
-//    if( [inputText length] > 0)
-//    {
-//        return YES;
-//    }
-//    else
-//    {
-//        return NO;
-//    }
     return YES;
 }
 
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
 
+    NSString *serverURL = [NSString stringWithFormat:@"%@/webservices/LoginSite.aspx", [(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL]];
     switch (alertView.tag) {
         case USERNAME_PASSWORD_VALIDATION:
         {
@@ -1135,11 +1127,7 @@ static NSString *labelVers;
         }
         case 100:{
             if(buttonIndex == 0){
-                if(![(AppDelegate*)[[UIApplication sharedApplication] delegate] serverUAT]){
-                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://mpos-production.cloudapp.net/AgentWebService/LoginSite.aspx"]];
-                }else{
-                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://mpos-0i0p0bbi.cloudapp.net/AgentWebService/LoginSite.aspx"]];
-                }
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:serverURL]];
                 [self appVersionChecker];
             }
             break;

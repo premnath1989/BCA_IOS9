@@ -12,6 +12,7 @@
 #import "ProgressBarDelegate.h"
 #import "ModelSPAJTransaction.h"
 #import "Alert.h"
+#import "AppDelegate.h"
 
 @interface SPAJFilesViewController ()<ProgressBarDelegate>{
     ProgressBar *progressBar;
@@ -132,8 +133,10 @@
 }
 
 -(IBAction)actionSubmit:(UIButton *)sender{
+    NSString *serverURL = [NSString stringWithFormat:@"%@/Service2.svc/CreateRemoteFtpFolder?spajNumber=%@",[(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL], [dictTransaction valueForKey:@"SPAJNumber"]];
+    
     NSURLSession *session = [NSURLSession sharedSession];
-    [[session dataTaskWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://mposws.azurewebsites.net/Service2.svc/CreateRemoteFtpFolder?spajNumber=%@",[dictTransaction valueForKey:@"SPAJNumber"] ]]
+    [[session dataTaskWithURL:[NSURL URLWithString:serverURL]
             completionHandler:^(NSData *data,
                                 NSURLResponse *response,
                                 NSError *error) {
@@ -170,11 +173,15 @@
 - (void)downloadisFinished{
     intUploadCount = intUploadCount + 1;
     if (intUploadCount == [directoryContent count]){
+        
+        
         NSString* stringSPAJNumber=[dictTransaction valueForKey:@"SPAJNumber"];
         NSString* stringProductName=[dictTransaction valueForKey:@"ProductName"];
         NSString* stringPemegangPolis=[dictTransaction valueForKey:@"ProspectName"];
         
-        NSString *urlStr = [NSString stringWithFormat:@"http://mposws.azurewebsites.net/Service2.svc/UpdateOnPostUploadData?spajNumber=%@&producName=%@&polisOwner=%@",stringSPAJNumber,stringProductName,stringPemegangPolis];
+        NSString *urlStr = [NSString stringWithFormat:@"%@/Service2.svc/UpdateOnPostUploadData?spajNumber=%@&producName=%@&polisOwner=%@", [(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL], stringSPAJNumber,stringProductName,stringPemegangPolis];
+
+        
         urlStr = [urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
         
         NSURLSession *session = [NSURLSession sharedSession];
