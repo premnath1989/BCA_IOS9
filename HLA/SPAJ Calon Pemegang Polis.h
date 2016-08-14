@@ -18,7 +18,7 @@
 
 @protocol SPAJCalonPemegangPolisDelegate
     -(NSString *)voidGetEAPPNumber;
-    -(void)voidSetCalonPemegangPolisBoolValidate:(BOOL)boolValidate;
+-(void)voidSetCalonPemegangPolisBoolValidate:(BOOL)boolValidate StringSection:(NSString *)stringSection;
 @end
 
 
@@ -33,6 +33,12 @@
     ModelIdentificationType* modelIdentificationType;
 }
 @property (strong, nonatomic) NSString* htmlFileName;
+-(void)loadFirstHTML:(NSString*)stringHTMLName PageSection:(NSString *)stringPageSection;
+-(void)loadSecondHTML:(NSString*)stringHTMLName PageSection:(NSString *)stringPageSection;
+-(void)loadThirdHTML:(NSString*)stringHTMLName PageSection:(NSString *)stringPageSection;
+-(void)loadFourthHTML:(NSString*)stringHTMLName PageSection:(NSString *)stringPageSection;
+-(void)loadFivethHTML:(NSString*)stringHTMLName PageSection:(NSString *)stringPageSection;
+-(void)loadSixthHTML:(NSString*)stringHTMLName PageSection:(NSString *)stringPageSection;
 @property (nonatomic,strong) id <SPAJCalonPemegangPolisDelegate> delegate;
 -(void)voidDoneSPAJCalonPemegangPolis;
 @end

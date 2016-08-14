@@ -35,6 +35,11 @@
     NSString* sortedBy;
     NSString* sortMethod;
     NSString* SPAJStatus;
+    
+    NSMutableArray *ItemToBeDeleted;
+    NSMutableArray *indexPaths;
+    
+    int RecDelete;
 }
 
     // SYNTHESIZE
@@ -47,7 +52,9 @@
     @synthesize stringQueryName = _stringQueryName;
     @synthesize functionAlert = _functionAlert;
 
+    @synthesize buttonSortStatus,buttonSortProduct,buttonSortFullName,buttonSortDateSumbit,buttonSortSPAJNumber;
 
+    @synthesize buttonEdit,buttonReset,buttonDelete,buttonSearch;
     // DID LOAD
 
     - (void)viewDidLoad
@@ -63,6 +70,8 @@
         _functionUserInterface = [[UserInterface alloc] init];
         _functionAlert = [[Alert alloc] init];
         
+        RecDelete = 0;
+        ItemToBeDeleted = [[NSMutableArray alloc] init];
         
         // LAYOUT SETTING
         
@@ -95,9 +104,10 @@
         _labelTableState.text = NSLocalizedString(@"TABLE_HEADER_STATUS", nil);
         _labelTableView.text = NSLocalizedString(@"TABLE_HEADER_VIEW", nil);
         
-        [_buttonSearch setTitle:NSLocalizedString(@"BUTTON_SEARCH", nil) forState:UIControlStateNormal];
-        [_buttonReset setTitle:NSLocalizedString(@"BUTTON_RESET", nil) forState:UIControlStateNormal];
-        [_buttonDelete setTitle:NSLocalizedString(@"BUTTON_DELETE", nil) forState:UIControlStateNormal];
+        [buttonSearch setTitle:NSLocalizedString(@"BUTTON_SEARCH", nil) forState:UIControlStateNormal];
+        [buttonReset setTitle:NSLocalizedString(@"BUTTON_RESET", nil) forState:UIControlStateNormal];
+        [buttonDelete setTitle:NSLocalizedString(@"BUTTON_DELETE", nil) forState:UIControlStateNormal];
+        [buttonEdit setTitle:NSLocalizedString(@"BUTTON_EDIT", nil) forState:UIControlStateNormal];
         
         sortedBy=@"datetime(spajtrans.SPAJDateModified)";
         sortMethod=@"DESC";
@@ -146,6 +156,35 @@
         [self loadSPAJTransaction];
     };
 
+    - (IBAction)actionSortBy:(UIButton *)sender
+    {
+        if (sender==buttonSortFullName){
+            sortedBy=@"pp.ProspectName";
+        }
+        else if (sender==buttonSortSPAJNumber){
+            sortedBy=@"spajtrans.SPAJSPAJNumber";
+        }
+        else if (sender==buttonSortDateSumbit){
+            sortedBy=@"datetime(spajtrans.SPAJDateModified)";
+        }
+        else if (sender==buttonSortProduct){
+            sortedBy=@"sipo.ProductName";
+        }
+        else if (sender==buttonSortStatus){
+            sortedBy=@"spajtrans.SPAJDateModified";
+        }
+        
+        
+        if ([sortMethod isEqualToString:@"ASC"]){
+            sortMethod=@"DESC";
+        }
+        else{
+            sortMethod=@"ASC";
+        }
+        [self loadSPAJTransaction];
+    }
+
+
     - (IBAction)actionShowFilesList:(UIButton *)sender{
         spajFilesViewController = [[SPAJFilesViewController alloc]initWithNibName:@"SPAJFilesViewController" bundle:nil];
         [spajFilesViewController setDictTransaction:[arraySPAJTransaction objectAtIndex:sender.tag]];
@@ -154,17 +193,99 @@
         [spajFilesViewController.buttonSubmit setHidden:YES];
     }
 
+    - (IBAction)actionEdit:(id)sender
+    {
+        
+        [self resignFirstResponder];
+        [self resignFirstResponder];
+        if ([_tableView isEditing]) {
+            [_tableView setEditing:NO animated:TRUE];
+            buttonDelete.hidden = true;
+            buttonDelete.enabled = false;
+            [buttonEdit setTitle:NSLocalizedString(@"BUTTON_EDIT", nil) forState: UIControlStateNormal];
+            
+            ItemToBeDeleted = [[NSMutableArray alloc] init];
+            indexPaths = [[NSMutableArray alloc] init];
+            
+            RecDelete = 0;
+        }
+        else {
+            
+            [_tableView setEditing:YES animated:TRUE];
+            buttonDelete.hidden = FALSE;
+            //[deleteBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal ];
+            [buttonEdit setTitle:NSLocalizedString(@"BUTTON_EDIT_CANCEL", nil) forState:UIControlStateNormal];
+        }
+    }
 
     - (IBAction)actionDelete:(id)sender
     {
-        NSString *stringTitle = [ NSString stringWithFormat:@"%@%@", NSLocalizedString(@"ALERT_TITLE_TABLEDELETE", nil), TABLE_NAME_SPAJHEADER];
-        NSString *stringMessage = [NSString stringWithFormat:@"%@%@", NSLocalizedString(@"ALERT_MESSAGE_TABLEDELETE", nil), _stringQueryName];
-        
-        UIAlertController* alertController = [_functionAlert alertTableDelete : stringTitle stringMessage : stringMessage];
-        
-        [self presentViewController:alertController animated:true completion:nil];
+        /*NSString *stringTitle = [ NSString stringWithFormat:@"%@%@", NSLocalizedString(@"ALERT_TITLE_TABLEDELETE", nil), TABLE_NAME_SPAJHEADER];
+         NSString *stringMessage = [NSString stringWithFormat:@"%@%@", NSLocalizedString(@"ALERT_MESSAGE_TABLEDELETE", nil), _stringQueryName];
+         
+         UIAlertController* alertController = [_functionAlert alertTableDelete : stringTitle stringMessage : stringMessage];
+         
+         [self presentViewController:alertController animated:true completion:nil];*/
+        [self alertDeleteEapp];
     };
 
+    - (void)alertDeleteEapp{
+        UIAlertController *alertDeleteController = [UIAlertController alertControllerWithTitle:@"Konfirmasi" message:@"Yakin ingin menghapus transaksi ini?" preferredStyle:UIAlertControllerStyleAlert];
+        
+        [alertDeleteController addAction:[UIAlertAction actionWithTitle:@"Ya" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            [self confirmDeleteTransaction];
+            [alertDeleteController dismissViewControllerAnimated:YES completion:nil];
+        }]];
+        
+        [alertDeleteController addAction:[UIAlertAction actionWithTitle:@"Tidak" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            [alertDeleteController dismissViewControllerAnimated:YES completion:nil];
+        }]];
+        
+        dispatch_async(dispatch_get_main_queue(), ^ {
+            [self presentViewController:alertDeleteController animated:YES completion:nil];
+        });
+    }
+
+    -(void)confirmDeleteTransaction
+    {
+        if (ItemToBeDeleted.count < 1) {
+            return;
+        }
+        else {
+            NSLog(@"itemToBeDeleted:%d", ItemToBeDeleted.count);
+        }
+        
+        NSArray *sorted = [[NSArray alloc] init ];
+        sorted = [ItemToBeDeleted sortedArrayUsingComparator:^(id firstObject, id secondObject){
+            return [((NSString *)firstObject) compare:((NSString *)secondObject) options:NSNumericSearch];
+        }];
+        int value;
+        for(int a=0; a<sorted.count; a++) {
+            value = [[sorted objectAtIndex:a] intValue] - a;
+            NSString* transactionID = [[arraySPAJTransaction objectAtIndex:value] valueForKey:@"SPAJTransactionID"];
+            
+            [modelSPAJTransaction deleteSPAJTransaction:@"SPAJTransaction" StringWhereName:@"SPAJTransactionID" StringWhereValue:transactionID];
+            [modelSPAJTransaction deleteSPAJTransaction:@"SPAJSignature" StringWhereName:@"SPAJTransactionID" StringWhereValue:transactionID];
+            [modelSPAJTransaction deleteSPAJTransaction:@"SPAJIDCapture" StringWhereName:@"SPAJTransactionID" StringWhereValue:transactionID];
+            [modelSPAJTransaction deleteSPAJTransaction:@"SPAJFormGeneration" StringWhereName:@"SPAJTransactionID" StringWhereValue:transactionID];
+            [modelSPAJTransaction deleteSPAJTransaction:@"SPAJDetail" StringWhereName:@"SPAJTransactionID" StringWhereValue:transactionID];
+            [modelSPAJTransaction deleteSPAJTransaction:@"SPAJAnswers" StringWhereName:@"SPAJTransactionID" StringWhereValue:transactionID];
+            //remove array for index value
+        }
+        [ItemToBeDeleted removeAllObjects];
+        [indexPaths removeAllObjects];
+        buttonDelete.enabled = FALSE;
+        //[deleteBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal ];
+        
+        [self loadSPAJTransaction];
+        
+        NSString *msg = @"Transaksi berhasil dihapus";//Client Profile has been successfully deleted.";
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:msg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        
+        [alert show];
+        [self actionEdit:nil];
+        alert = nil;
+    }
 
     // TABLE
 
@@ -241,10 +362,37 @@
 
     - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     {
-        SPAJSubmittedListCell *cellSPAJSubmitted = [tableView cellForRowAtIndexPath:indexPath];
-        
-        _intQueryID = [cellSPAJSubmitted intID];
-        _stringQueryName = [cellSPAJSubmitted.labelName text];
+        RecDelete = RecDelete+1;
+        if ([_tableView isEditing] == TRUE ) {
+            BOOL gotRowSelected = FALSE;
+            
+            for (UITableViewCell *zzz in [_tableView visibleCells])
+            {
+                if (zzz.selected  == TRUE) {
+                    gotRowSelected = TRUE;
+                    break;
+                }
+            }
+            
+            if (!gotRowSelected) {
+                ////[deleteBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal ];
+                buttonDelete.enabled = FALSE;
+            }
+            else {
+                ////[deleteBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+                buttonDelete.enabled = TRUE;
+            }
+            
+            NSString *zzz = [NSString stringWithFormat:@"%d", indexPath.row];
+            [ItemToBeDeleted addObject:zzz];
+            [indexPaths addObject:indexPath];
+        }
+        else {
+            SPAJSubmittedListCell *cellSPAJSubmitted = [tableView cellForRowAtIndexPath:indexPath];
+            
+            _intQueryID = [cellSPAJSubmitted intID];
+            _stringQueryName = [cellSPAJSubmitted.labelName text];
+        }
     }
 
 

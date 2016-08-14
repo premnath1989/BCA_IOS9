@@ -97,6 +97,12 @@
 
     // TABLE
 
+    @interface ViewTableHeader : UIView
+
+        - (void)setupStyle;
+
+    @end
+
     @interface LabelTableHeader : UILabel
 
         - (void)setupStyle;

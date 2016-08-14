@@ -16,5 +16,6 @@
 -(NSString *)selectIDType:(NSString *)stringColumnName SPAJSection:(int)intSpajTransactionID;
 -(void)saveSPAJIDCapture:(NSDictionary *)spajIDCaptureDictionary;
 -(void)updateSPAJIDCapture:(NSString *)setString;
--(bool)voidIDCaptured:(int)intTransactionSPAJID;
+-(bool)voidIDCaptured:(int)intTransactionSPAJID Relationship:(NSString*)stringRelation LAAge:(int)laAge;
+-(bool)voidCertainIDPartyCaptured:(int)intTransactionSPAJID IDParty:(NSString *)stringIDParty;
 @end

@@ -135,12 +135,20 @@ NSString *uatAgentCode;
     NSString *JvalidatePath   = [[myLibraryBundle resourcePath] stringByAppendingPathComponent:@"jquery.validate.min.js"];
     NSString *JNumberJSPath   = [[myLibraryBundle resourcePath] stringByAppendingPathComponent:@"jquery.number.js"];
     
+    NSString *jtsagedatebox4CSS   = [[myLibraryBundle resourcePath] stringByAppendingPathComponent:@"jtsage-datebox-4.0.0.jqm.min.css"];
+    NSString *jtsagedatebox4   = [[myLibraryBundle resourcePath] stringByAppendingPathComponent:@"jtsage-datebox-4.0.0.jqm.min.js"];
+    NSString *jtsagedatebox18   = [[myLibraryBundle resourcePath] stringByAppendingPathComponent:@"jtsage-datebox.i18n.id.utf8.min.js"];
+    
     [[NSFileManager defaultManager] copyItemAtPath:addJSPath toPath:[fileJqueryLibsPath stringByAppendingPathComponent:@"additional-methods.min.js"] error:NULL];
     [[NSFileManager defaultManager] copyItemAtPath:JqueryPath toPath:[fileJqueryLibsPath stringByAppendingPathComponent:@"jquery-1.11.1.min.js"] error:NULL];
     [[NSFileManager defaultManager] copyItemAtPath:JMobileJSPath toPath:[fileJqueryLibsPath stringByAppendingPathComponent:@"jquery.mobile-1.4.5.min.js"] error:NULL];
     [[NSFileManager defaultManager] copyItemAtPath:JMobilecssJSPath toPath:[fileJqueryLibsPath stringByAppendingPathComponent:@"jquery.mobile-1.4.5.min.css"] error:NULL];
     [[NSFileManager defaultManager] copyItemAtPath:JvalidatePath toPath:[fileJqueryLibsPath stringByAppendingPathComponent:@"jquery.validate.min.js"] error:NULL];
     [[NSFileManager defaultManager] copyItemAtPath:JNumberJSPath toPath:[fileJqueryLibsPath stringByAppendingPathComponent:@"jquery.number.js"] error:NULL];
+
+    [[NSFileManager defaultManager] copyItemAtPath:jtsagedatebox4CSS toPath:[fileJqueryLibsPath stringByAppendingPathComponent:@"jtsage-datebox-4.0.0.jqm.min.css"] error:NULL];
+    [[NSFileManager defaultManager] copyItemAtPath:jtsagedatebox4 toPath:[fileJqueryLibsPath stringByAppendingPathComponent:@"jtsage-datebox-4.0.0.jqm.min.js"] error:NULL];
+    [[NSFileManager defaultManager] copyItemAtPath:jtsagedatebox18 toPath:[fileJqueryLibsPath stringByAppendingPathComponent:@"jtsage-datebox.i18n.id.utf8.min.js"] error:NULL];
 }
 
 #pragma mark - Core Data stack

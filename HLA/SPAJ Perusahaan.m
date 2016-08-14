@@ -22,6 +22,7 @@
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     filePath = [docsDir stringByAppendingPathComponent:@"SPAJ"];
     
+    
     NSString *htmlfilePath = [NSString stringWithFormat:@"SPAJ/%@",htmlFileName];
     NSString *localURL = [[NSString alloc] initWithString:
                           [docsDir stringByAppendingPathComponent: htmlfilePath]];

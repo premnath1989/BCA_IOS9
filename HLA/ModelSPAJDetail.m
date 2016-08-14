@@ -59,7 +59,8 @@
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     [database open];
     
-    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select count (*) as DetailCaptured from SPAJDetail where SPAJTransactionID=%i and SPAJDetail1=1 and SPAJDetail2=1 and SPAJDetail3=1 and SPAJDetail4=1 and SPAJDetail5=1 and SPAJDetail6=1",intTransactionSPAJID]];
+    //FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select count (*) as DetailCaptured from SPAJDetail where SPAJTransactionID=%i and SPAJDetail1=1 and SPAJDetail2=1 and SPAJDetail3=1 and SPAJDetail4=1 and SPAJDetail5=1 and SPAJDetail6=1",intTransactionSPAJID]];
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select count (*) as DetailCaptured from SPAJDetail where SPAJTransactionID=%i and SPAJDetail1=1 and SPAJDetail2=1 and SPAJDetail4=1 and SPAJDetail5=1 and SPAJDetail6=1",intTransactionSPAJID]];
     
     while ([s next]) {
         signatureCaptured = [s intForColumn:@"DetailCaptured"];
@@ -69,6 +70,31 @@
     [database close];
     if (signatureCaptured>0){
         return true;
+    }
+    else{
+        return false;
+    }
+}
+
+-(bool)voidCertainDetailCaptured:(int)intTransactionSPAJID DetailParty:(NSString *)stringDetailSPAJ{
+    int DetailCaptured = 0;
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select %@ from SPAJDetail where SPAJTransactionID=%i",stringDetailSPAJ,intTransactionSPAJID]];
+    
+    while ([s next]) {
+        DetailCaptured = [s intForColumn:stringDetailSPAJ];
+    }
+    
+    [results close];
+    [database close];
+    if (DetailCaptured>0){
+        return true;
+        
     }
     else{
         return false;

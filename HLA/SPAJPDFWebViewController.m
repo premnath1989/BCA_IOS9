@@ -11,10 +11,12 @@
 
 #import "SPAJPDFWebViewController.h"
 #import "NDHTMLtoPDF.h"
+#import "Formatter.h"
 
 @interface SPAJPDFWebViewController ()<UIWebViewDelegate>{
     IBOutlet UIWebView* webSPAJ;
     NDHTMLtoPDF *PDFCreator;
+    Formatter* formatter;
 }
 
 @end
@@ -33,17 +35,9 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated{
-    NSURL *url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"page_spaj_pdf" ofType:@"html" inDirectory:@"Build/Page/HTML"]];
-    [webview loadRequest:[NSURLRequest requestWithURL:url]];
-    /*NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    filePath = [docsDir stringByAppendingPathComponent:@"SPAJ"];
-    
-    NSString *htmlfilePath = [NSString stringWithFormat:@"SPAJ/%@",htmlFileName];
-    NSString *localURL = [[NSString alloc] initWithString:
-                          [docsDir stringByAppendingPathComponent: htmlfilePath]];
-    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localURL]];
-    [webview loadRequest:urlRequest];
-    [self loadHTML];*/
+    /*NSURL *url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"page_spaj_pdf" ofType:@"html" inDirectory:@"Build/Page/HTML"]];
+    [webview loadRequest:[NSURLRequest requestWithURL:url]];*/
+    [self loadFile];
 }
 
 - (void)viewDidLoad {
@@ -54,6 +48,8 @@
     //define the webview coordinate
     webview=[[UIWebView alloc]initWithFrame:CGRectMake(0, 44, 950,768)];
     webview.scrollView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
+    
+    formatter = [[Formatter alloc]init];
     [super viewDidLoad];
     
     // Do any additional setup after loading the view from its nib.
@@ -62,6 +58,13 @@
 -(void)loadHTML{
     NSURL *url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"page_spaj_pdf" ofType:@"html" inDirectory:@"Build/Page/HTML"]];
     [webSPAJ loadRequest:[NSURLRequest requestWithURL:url]];
+}
+
+-(void)loadFile{
+    NSString* fileName = @"SPAJ.pdf";
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[formatter generateSPAJFileDirectory:[dictTransaction valueForKey:@"SPAJEappNumber"]],fileName]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [webview loadRequest:request];
 }
 
 -(IBAction)actionMakePDF:(UIBarButtonItem *)sender{

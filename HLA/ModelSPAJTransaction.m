@@ -345,6 +345,23 @@
     [database close];
 }
 
+-(void)deleteSPAJTransaction:(NSString *)stringTableName StringWhereName:(NSString *)stringWhereName StringWhereValue:(NSString *)stringWhereValue{
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    BOOL success = [database executeUpdate:[NSString stringWithFormat:@"delete from  %@ where %@ = '%@'",stringTableName,stringWhereName,stringWhereValue]];
+    
+    if (!success) {
+        NSLog(@"%s: insert error: %@", __FUNCTION__, [database lastErrorMessage]);
+        // do whatever you need to upon error
+    }
+    [results close];
+    [database close];
+}
+
 
 -(NSString *)getSPAJTransactionData:(NSString *)stringColumnName StringWhereName:(NSString *)stringWhereName StringWhereValue:(NSString *)stringWhereValue{
     NSString *returnValue;

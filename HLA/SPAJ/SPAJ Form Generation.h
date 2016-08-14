@@ -11,7 +11,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-
+#import "HtmlGenerator/HtmlGenerator.h"
 
 // DECLARATION
 
@@ -24,7 +24,9 @@
 
 @end
 
-@interface SPAJFormGeneration : UIViewController
+@interface SPAJFormGeneration : HtmlGenerator{
+    NSString *filePath;
+}
     @property (strong, nonatomic) NSDictionary* dictTransaction;
 
     // PROTOCOL

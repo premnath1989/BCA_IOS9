@@ -54,15 +54,26 @@
     [database close];
 }
 
--(bool)voidIDCaptured:(int)intTransactionSPAJID{
+-(bool)voidIDCaptured:(int)intTransactionSPAJID Relationship:(NSString*)stringRelation LAAge:(int)laAge{
     int signatureCaptured = 0;
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
     
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     [database open];
-    
-    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select count (*) as IDCaptured from SPAJIDCapture where SPAJTransactionID=%i and SPAJIDCaptureParty1=1 and SPAJIDCaptureParty2=1 and SPAJIDCaptureParty3=1 and SPAJIDCaptureParty4=1",intTransactionSPAJID]];
+    FMResultSet *s;
+    //FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select count (*) as IDCaptured from SPAJIDCapture where SPAJTransactionID=%i and SPAJIDCaptureParty1=1 and SPAJIDCaptureParty2=1 and SPAJIDCaptureParty3=1 and SPAJIDCaptureParty4=1",intTransactionSPAJID]];
+    if ([stringRelation isEqualToString:@"DIRI SENDIRI"]){
+        s = [database executeQuery:[NSString stringWithFormat:@"select count (*) as IDCaptured from SPAJIDCapture where SPAJTransactionID=%i and SPAJIDCaptureParty1=1",intTransactionSPAJID]];
+    }
+    else{
+        if (laAge<21){
+            s = [database executeQuery:[NSString stringWithFormat:@"select count (*) as IDCaptured from SPAJIDCapture where SPAJTransactionID=%i and SPAJIDCaptureParty1=1 and SPAJIDCaptureParty3=1",intTransactionSPAJID]];
+        }
+        else{
+            s = [database executeQuery:[NSString stringWithFormat:@"select count (*) as IDCaptured from SPAJIDCapture where SPAJTransactionID=%i and SPAJIDCaptureParty1=1 and SPAJIDCaptureParty2=1",intTransactionSPAJID]];
+        }
+    }
     
     while ([s next]) {
         signatureCaptured = [s intForColumn:@"IDCaptured"];
@@ -96,6 +107,30 @@
     return stringReturn;
 }
 
+-(bool)voidCertainIDPartyCaptured:(int)intTransactionSPAJID IDParty:(NSString *)stringIDParty{
+    int IDCaptured = 0;
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select %@ from SPAJIDCapture where SPAJTransactionID=%i",stringIDParty,intTransactionSPAJID]];
+    
+    while ([s next]) {
+        IDCaptured = [s intForColumn:stringIDParty];
+    }
+    
+    [results close];
+    [database close];
+    if (IDCaptured>0){
+        return true;
+        
+    }
+    else{
+        return false;
+    }
+}
 
 
 @end

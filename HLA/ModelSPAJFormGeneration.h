@@ -15,5 +15,5 @@
 -(void)saveSPAJFormGeneration:(NSDictionary *)spajFormGenerationDictionary;
 -(void)updateSPAJFormGeneration:(NSString *)setString;
 -(bool)voidFormGenerated:(int)intTransactionSPAJID;
-
+-(bool)voidCertainFormGenerateCaptured:(int)intTransactionSPAJID FormType:(NSString *)stringFormType;
 @end

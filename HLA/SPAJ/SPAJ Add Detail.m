@@ -22,6 +22,8 @@
 #import "Theme.h"
 #import "User Interface.h"
 #import "Formatter.h"
+#import "ModelSPAJSignature.h"
+#import "Alert.h"
 
 // DECLARATION
 
@@ -44,12 +46,18 @@
     SPAJ_Pembayaran_Premi* spajPembayaranPremi;
     Formatter *formatter;
     UserInterface *objectUserInterface;
-    
+    ModelSPAJSignature* modelSPAJSignature;
     ModelSPAJHtml *modelSPAJHtml;
     ModelSPAJDetail *modelSPAJDetail;
     
+    Alert* alert;
+    
     NSMutableArray *NumberListOfSubMenu;
     NSMutableArray *ListOfSubMenu;
+    
+    int indexSelected;
+    
+    UIView *lastView;
     
     BOOL boolPemegangPolis;
     BOOL boolTertanggung;
@@ -57,6 +65,8 @@
     BOOL boolPenerimaManfaat;
     BOOL boolPembayaranPremi;
     BOOL boolKesehatan;
+    
+    BOOL boolTenagaPenjualSigned;
 }
 @synthesize buttonCaptureBack,buttonCaptureFront;
 @synthesize imageViewFront,imageViewBack;
@@ -65,8 +75,9 @@
 
 
     -(void)viewDidAppear:(BOOL)animated{
-        [_tableSection selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
-        [self tableView:_tableSection didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+        /*[_tableSection selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
+        [self tableView:_tableSection didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];*/
+        
     }
 
     // DID LOAD
@@ -79,6 +90,8 @@
         //INITIALIZATION
         objectUserInterface = [[UserInterface alloc] init];
         formatter = [[Formatter alloc]init];
+        alert = [[Alert alloc]init];
+        modelSPAJSignature = [[ModelSPAJSignature alloc]init];
         
         [self setNavigationBar];
         
@@ -100,6 +113,7 @@
         modelSPAJHtml = [[ModelSPAJHtml alloc]init];
         modelSPAJDetail = [[ModelSPAJDetail alloc]init];
         
+        [self loadSPAJCalonPemegangPolis];
         // LOCALIZATION
         
         _labelStep1.text = NSLocalizedString(@"GUIDE_SPAJDETAIL_STEP1", nil);
@@ -124,15 +138,65 @@
         NumberListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"1", @"2", @"3", @"4",@"5",@"6", nil];
         ListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"Calon Pemegang Polis", @"Calon Tertanggung", @"Perusahaan / Berbadan Hukum", @"Calon Penerima Manfaat",@"Pembayaran Premi", @"Kesehatan", nil];
         
-        boolPemegangPolis = true;
+        boolPemegangPolis = false;
         boolTertanggung = false;
         boolPerusahaan = false;
         boolPenerimaManfaat = false;
         boolPembayaranPremi = false;
         boolKesehatan = false;
+        [self voidCheckBooleanLastState];
         
         [self voidCreateRightBarButton];
     }
+
+    -(void)voidCheckBooleanLastState {
+        boolPemegangPolis = [modelSPAJDetail voidCertainDetailCaptured:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue] DetailParty:@"SPAJDetail1"];
+        boolTertanggung = [modelSPAJDetail voidCertainDetailCaptured:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue] DetailParty:@"SPAJDetail2"];
+        boolPerusahaan = [modelSPAJDetail voidCertainDetailCaptured:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue] DetailParty:@"SPAJDetail3"];
+        boolPenerimaManfaat = [modelSPAJDetail voidCertainDetailCaptured:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue] DetailParty:@"SPAJDetail4"];
+        boolPembayaranPremi = [modelSPAJDetail voidCertainDetailCaptured:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue] DetailParty:@"SPAJDetail5"];
+        boolKesehatan = [modelSPAJDetail voidCertainDetailCaptured:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue] DetailParty:@"SPAJDetail6"] ;
+        
+        boolTenagaPenjualSigned = [modelSPAJSignature voidCertainSignaturePartyCaptured:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue] SignatureParty:@"SPAJSignatureParty4"];
+        [self voidTableCellLastStateChecker:boolPemegangPolis BOOLTR:boolTertanggung BOOLPR:boolPerusahaan BOOLPM:boolPenerimaManfaat BOOLPP:boolPembayaranPremi BOOLKS:boolKesehatan];
+    }
+
+    -(void)voidTableCellLastStateChecker:(BOOL)boolPO BOOLTR:(BOOL)boolTR BOOLPR:(BOOL)boolPR BOOLPM:(BOOL)boolPM BOOLPP:(BOOL)boolPP BOOLKS:(BOOL)boolKS{
+        if (boolPO){
+            if (boolTR){
+                if (boolPR){
+                    if (boolPM){
+                        if (boolPP){
+                            if (boolKS){
+                                [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:5 inSection:0]];
+                            }
+                            else{
+                                [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:5 inSection:0]];
+                            }
+                        }
+                        else{
+                            [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:4 inSection:0]];
+                        }
+                    }
+                    else{
+                        [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
+                    }
+                }
+                else{
+                    [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
+                }
+            }
+            else{
+                [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+            }
+        }
+        else{
+            [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+        }
+        [_tableSection reloadData];
+        [_tableSection selectRowAtIndexPath:[NSIndexPath indexPathForRow:indexSelected inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
+    }
+
 
     -(void)setNavigationBar{
         [self.navigationItem setTitle:@"Data Calon Pemegang Polis"];
@@ -142,7 +206,7 @@
 
     -(void)voidCreateRightBarButton{
         rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Simpan" style:UIBarButtonItemStylePlain target:self
-                                                      action:@selector(actionRightBarButtonPressed:)];
+                                                      action:@selector(voidDoneSPAJCalonPemegangPolis:)];
         self.navigationItem.rightBarButtonItem = rightButton;
     }
 
@@ -214,96 +278,17 @@
     
     };
 
-    /*-(IBAction)actionSnapFrontID:(UIButton *)sender{
-        cameraFront = true;
-        UIImagePickerControllerSourceType source = UIImagePickerControllerSourceTypeCamera;
-        if ([UIImagePickerController isSourceTypeAvailable:source])
-        {
-            imagePickerController= [[CameraViewController alloc] init];
-            imagePickerController.sourceType = source;
-            
-            CGRect rect = imagePickerController.view.frame;
-            imagePickerRect = rect;
-            CGSize frameSize = CGSizeMake(738,562.5);
-            
-            //CGRect frameRect = CGRectMake((rect.size.width-frameSize.width)/2, (rect.size.height-frameSize.height)/2, frameSize.width, frameSize.height);
-            CGRect frameRect = CGRectMake(15, 94, frameSize.width, frameSize.height);
-            
-            UIView *view = [[UIView alloc]initWithFrame:frameRect];
-            [view setBackgroundColor:[UIColor clearColor]];
-            
-            view.layer.borderWidth = 5.0;
-            view.layer.borderColor = [UIColor redColor].CGColor;
-            UILabel *lbl = [[UILabel alloc]initWithFrame:CGRectMake(10, -80, 300, 200)];
-            lbl.backgroundColor = [UIColor clearColor];
-            lbl.text = @"Please snap within the red frame";
-            [view addSubview:lbl];
-            
-            //imagePickerController.cameraOverlayView = view;
-            
-            imagePickerController.delegate = self;
-            imagePickerController.modalPresentationStyle = UIModalPresentationPageSheet;
-            [self presentViewController:imagePickerController animated:YES completion:nil];
-        }
-        else
-        {
-            
-            UIAlertController* alertController = [UIAlertController alertControllerWithTitle:@"" message:@"Your device has no camera!!" preferredStyle:UIAlertControllerStyleAlert];
-            dispatch_async(dispatch_get_main_queue(), ^ {
-                [self presentViewController:alertController animated:YES completion:nil];
-            });
-        }
-    }
-
-    -(IBAction)actionSnapBackID:(UIButton *)sender{
-        cameraFront=false;
-        UIImagePickerControllerSourceType source = UIImagePickerControllerSourceTypeCamera;
-        if ([UIImagePickerController isSourceTypeAvailable:source])
-        {
-            imagePickerController= [[CameraViewController alloc] init];
-            imagePickerController.sourceType = source;
-            
-            CGRect rect = imagePickerController.view.frame;
-            imagePickerRect = rect;
-            CGSize frameSize = CGSizeMake(738,562.5);
-            
-            //CGRect frameRect = CGRectMake((rect.size.width-frameSize.width)/2, (rect.size.height-frameSize.height)/2, frameSize.width, frameSize.height);
-            CGRect frameRect = CGRectMake(15, 94, frameSize.width, frameSize.height);
-            
-            UIView *view = [[UIView alloc]initWithFrame:frameRect];
-            [view setBackgroundColor:[UIColor clearColor]];
-            
-            view.layer.borderWidth = 5.0;
-            view.layer.borderColor = [UIColor redColor].CGColor;
-            UILabel *lbl = [[UILabel alloc]initWithFrame:CGRectMake(10, -80, 300, 200)];
-            lbl.backgroundColor = [UIColor clearColor];
-            lbl.text = @"Please snap within the red frame";
-            [view addSubview:lbl];
-            
-            //imagePickerController.cameraOverlayView = view;
-            
-            imagePickerController.delegate = self;
-            imagePickerController.modalPresentationStyle = UIModalPresentationPageSheet;
-            [self presentViewController:imagePickerController animated:YES completion:nil];
-        }
-        else
-        {
-            
-            UIAlertController* alertController = [UIAlertController alertControllerWithTitle:@"" message:@"Your device has no camera!!" preferredStyle:UIAlertControllerStyleAlert];
-            dispatch_async(dispatch_get_main_queue(), ^ {
-                [self presentViewController:alertController animated:YES completion:nil];
-            });
-        }
-    }*/
 
     -(void) showDetailsForIndexPath:(NSIndexPath*)indexPath
     {
+        indexSelected=indexPath.row;
         switch (indexPath.row) {
             case 0:
             {
                 NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PO"];
                 [spajCalonPemegangPolis setHtmlFileName:stringHTMLName];
-                [self loadSPAJCalonPemegangPolis];
+                //[self loadSPAJCalonPemegangPolis];
+                [spajCalonPemegangPolis loadFirstHTML:stringHTMLName PageSection:@"PO"];
                 [rightButton setAction:@selector(voidDoneSPAJCalonPemegangPolis:)];
                 break;
             }
@@ -311,32 +296,40 @@
             {
                 NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"TR"];
                 [spajCalonTertanggung setHtmlFileName:stringHTMLName];
-                [self loadSPAJCalonTertanggung];
-                [rightButton setAction:@selector(voidDoneSPAJCalonTertanggung:)];
+                //[self loadSPAJCalonTertanggung];
+                [spajCalonPemegangPolis loadSecondHTML:stringHTMLName PageSection:@"TR"];
+                //[rightButton setAction:@selector(voidDoneSPAJCalonTertanggung:)];
+                [rightButton setAction:@selector(voidDoneSPAJCalonPemegangPolis:)];
                 break;
             }
             case 2:
             {
                 NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PR"];
                 [spajPerusahaan setHtmlFileName:stringHTMLName];
-                [self loadSPAJPerusahaan];
-                [rightButton setAction:@selector(voidDoneSPAJPerusahaan:)];
+                //[self loadSPAJPerusahaan];
+                [spajCalonPemegangPolis loadThirdHTML:stringHTMLName PageSection:@"PR"];
+                //[rightButton setAction:@selector(voidDoneSPAJPerusahaan:)];
+                [rightButton setAction:@selector(voidDoneSPAJCalonPemegangPolis:)];
                 break;
             }
             case 3:
             {
                 NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PM"];
                 [spajCalonPenerimaManfaat setHtmlFileName:stringHTMLName];
-                [self loadSPAJCalonPenerimaManfaat];
-                [rightButton setAction:@selector(voidDoneSPAJPenerimaManfaat:)];
+                //[self loadSPAJCalonPenerimaManfaat];
+                [spajCalonPemegangPolis loadFourthHTML:stringHTMLName PageSection:@"PM"];
+                //[rightButton setAction:@selector(voidDoneSPAJPenerimaManfaat:)];
+                [rightButton setAction:@selector(voidDoneSPAJCalonPemegangPolis:)];
                 break;
             }
             case 4:
             {
                 NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PP"];
                 [spajPembayaranPremi setHtmlFileName:stringHTMLName];
-                [self loadSPAJPembayaranPremi];
-                [rightButton setAction:@selector(voidDoneSPAJPembayaranPremi:)];
+                //[self loadSPAJPembayaranPremi];
+                [spajCalonPemegangPolis loadSixthHTML:stringHTMLName PageSection:@"PP"];
+                //[rightButton setAction:@selector(voidDoneSPAJPembayaranPremi:)];
+                [rightButton setAction:@selector(voidDoneSPAJCalonPemegangPolis:)];
                 break;
             }
             default:
@@ -347,7 +340,13 @@
     #pragma mark UIBarButtonItem Action
 
     -(void)voidDoneSPAJCalonPemegangPolis:(UIBarButtonItem *)sender{
-        [spajCalonPemegangPolis voidDoneSPAJCalonPemegangPolis];
+        if (!boolTenagaPenjualSigned){
+            [spajCalonPemegangPolis voidDoneSPAJCalonPemegangPolis];
+        }
+        else{
+            UIAlertController *alertLockForm = [alert alertInformation:NSLocalizedString(@"ALERT_TITLE_LOCK", nil) stringMessage:NSLocalizedString(@"ALERT_MESSAGE_LOCK", nil)];
+            [self presentViewController:alertLockForm animated:YES completion:nil];
+        }
     }
     -(void)voidDoneSPAJCalonTertanggung:(UIBarButtonItem *)sender{
         [spajCalonTertanggung voidDoneSPAJCalonTertanggung];
@@ -365,44 +364,55 @@
 
     #pragma mark load view controller
     -(void)loadSPAJCalonPemegangPolis{
-        if ([spajCalonPemegangPolis.view isDescendantOfView:_viewContent]){
-            [_viewContent bringSubviewToFront:spajCalonPemegangPolis.view];
-        }
-        else{
+//        if ([spajCalonPemegangPolis.view isDescendantOfView:_viewContent]){
+//            [_viewContent bringSubviewToFront:spajCalonPemegangPolis.view];
+//        }
+//        else{
             [_viewContent addSubview:spajCalonPemegangPolis.view];
-        }
+            lastView = spajCalonPemegangPolis.view;
+//        }
     }
     -(void)loadSPAJCalonTertanggung{
-        if ([spajCalonTertanggung.view isDescendantOfView:_viewContent]){
-            [_viewContent bringSubviewToFront:spajCalonTertanggung.view];
-        }
-        else{
+//        if ([spajCalonTertanggung.view isDescendantOfView:_viewContent]){
+//            [_viewContent bringSubviewToFront:spajCalonTertanggung.view];
+//        }
+//        else{
+            [spajCalonPemegangPolis.view removeFromSuperview];
+            //[lastView removeFromSuperview];
             [_viewContent addSubview:spajCalonTertanggung.view];
-        }
+            lastView = spajCalonTertanggung.view;
+//        }
     }
     -(void)loadSPAJPerusahaan{
-        if ([spajPerusahaan.view isDescendantOfView:_viewContent]){
-            [_viewContent bringSubviewToFront:spajPerusahaan.view];
-        }
-        else{
+//        if ([spajPerusahaan.view isDescendantOfView:_viewContent]){
+//            [_viewContent bringSubviewToFront:spajPerusahaan.view];
+//        }
+//        else{
+            [spajCalonPemegangPolis.view removeFromSuperview];
+            [spajCalonTertanggung.view removeFromSuperview];
             [_viewContent addSubview:spajPerusahaan.view];
-        }
+            lastView = spajPerusahaan.view;
+//        }
     }
     -(void)loadSPAJCalonPenerimaManfaat{
-        if ([spajCalonPenerimaManfaat.view isDescendantOfView:_viewContent]){
-            [_viewContent bringSubviewToFront:spajCalonPenerimaManfaat.view];
-        }
-        else{
+//        if ([spajCalonPenerimaManfaat.view isDescendantOfView:_viewContent]){
+//            [_viewContent bringSubviewToFront:spajCalonPenerimaManfaat.view];
+//        }
+//        else{
+            lastView = spajCalonPemegangPolis.view;
             [_viewContent addSubview:spajCalonPenerimaManfaat.view];
-        }
+            lastView = spajCalonPenerimaManfaat.view;
+//        }
     }
     -(void)loadSPAJPembayaranPremi{
-        if ([spajPembayaranPremi.view isDescendantOfView:_viewContent]){
-            [_viewContent bringSubviewToFront:spajPembayaranPremi.view];
-        }
-        else{
+//        if ([spajPembayaranPremi.view isDescendantOfView:_viewContent]){
+//            [_viewContent bringSubviewToFront:spajPembayaranPremi.view];
+//        }
+//        else{
+            [lastView removeFromSuperview];
             [_viewContent addSubview:spajPembayaranPremi.view];
-        }
+            lastView = spajPembayaranPremi.view;
+//        }
     }
 
     #pragma mark - table view
@@ -445,7 +455,7 @@
             NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SIMenuTableViewCell" owner:self options:nil];
             cell = [nib objectAtIndex:0];
         }
-        UIView *bgColorView = [[UIView alloc] init];
+        
         if (indexPath.row<5){
             [cell setBackgroundColor:[UIColor colorWithRed:204.0/255.0 green:203.0/255.0 blue:205.0/255.0 alpha:1.0]];
         }
@@ -453,118 +463,85 @@
             [cell setBackgroundColor:[UIColor colorWithRed:204.0/255.0 green:203.0/255.0 blue:205.0/255.0 alpha:1.0]];
         }
         
-        bgColorView.backgroundColor = [objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0];
+        UIView *bgColorView = [[UIView alloc] init];
+        bgColorView.backgroundColor = [UIColor colorWithRed:0/255.0f green:102.0f/255.0f blue:179.0f/255.0f alpha:1];
         [cell setSelectedBackgroundView:bgColorView];
+        
         [cell.labelNumber setText:[NumberListOfSubMenu objectAtIndex:indexPath.row]];
         [cell.labelDesc setText:[ListOfSubMenu objectAtIndex:indexPath.row]];
         [cell.labelWide setText:@""];
         
         if (boolPemegangPolis){
-            if (indexPath.row == 0){
+            if (boolTertanggung){
+                if (boolPerusahaan){
+                    if (boolPenerimaManfaat){
+                        if (boolPembayaranPremi){
+                            if (boolKesehatan){
+                                if (indexPath.row < 6){
+                                    [cell setUserInteractionEnabled:true];
+                                    [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
+                                }
+                                else{
+                                    [cell setUserInteractionEnabled:false];
+                                }
+                            }
+                            else{
+                                if (indexPath.row < 6){
+                                    [cell setUserInteractionEnabled:true];
+                                    [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
+                                }
+                                else{
+                                    [cell setUserInteractionEnabled:false];
+                                }
+                            }
+                        }
+                        else{
+                            if (indexPath.row < 5){
+                                [cell setUserInteractionEnabled:true];
+                                [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
+                            }
+                            else{
+                                [cell setUserInteractionEnabled:false];
+                            }
+                        }
+                    }
+                    else{
+                        if (indexPath.row < 4){
+                            [cell setUserInteractionEnabled:true];
+                            [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
+                        }
+                        else{
+                            [cell setUserInteractionEnabled:false];
+                        }
+                    }
+                }
+                else{
+                    if (indexPath.row < 3){
+                        [cell setUserInteractionEnabled:true];
+                        [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
+                    }
+                    else{
+                        [cell setUserInteractionEnabled:false];
+                    }
+                }
+            }
+            else{
+                if (indexPath.row < 2){
+                    [cell setUserInteractionEnabled:true];
+                    [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
+                }
+                else{
+                    [cell setUserInteractionEnabled:false];
+                }
+            }
+        }
+        else{
+            if (indexPath.row < 1){
                 [cell setUserInteractionEnabled:true];
                 [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
             }
             else{
-                
-            }
-        }
-        else{
-            if (indexPath.row == 0){
                 [cell setUserInteractionEnabled:false];
-            }
-            else{
-                
-            }
-        }
-        
-        
-        if (boolTertanggung){
-            if (indexPath.row == 1){
-                [cell setUserInteractionEnabled:true];
-                [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
-            }
-            else{
-                
-            }
-        }
-        else{
-            if (indexPath.row == 1){
-                [cell setUserInteractionEnabled:false];
-            }
-            else{
-                
-            }
-        }
-        
-        if (boolPerusahaan){
-            if (indexPath.row == 2){
-                [cell setUserInteractionEnabled:true];
-                [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
-            }
-            else{
-                
-            }
-        }
-        else{
-            if (indexPath.row == 2){
-                [cell setUserInteractionEnabled:false];
-            }
-            else{
-                
-            }
-        }
-        
-        if (boolPenerimaManfaat){
-            if (indexPath.row == 3){
-                [cell setUserInteractionEnabled:true];
-                [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
-            }
-            else{
-                
-            }
-        }
-        else{
-            if (indexPath.row == 3){
-                [cell setUserInteractionEnabled:false];
-            }
-            else{
-                
-            }
-        }
-        
-        if (boolPembayaranPremi){
-            if (indexPath.row == 4){
-                [cell setUserInteractionEnabled:true];
-                [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
-            }
-            else{
-                
-            }
-        }
-        else{
-            if (indexPath.row == 4){
-                [cell setUserInteractionEnabled:false];
-            }
-            else{
-                
-            }
-        }
-        
-        if (boolKesehatan){
-            if (indexPath.row == 5){
-                [cell setUserInteractionEnabled:true];
-                [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
-            }
-            else{
-                
-            }
-        }
-        else{
-            if (indexPath.row == 5){
-                [cell setUserInteractionEnabled:false];
-            }
-            else{
-                
             }
         }
         
@@ -621,65 +598,89 @@
         return [dictTransaction valueForKey:@"SPAJEappNumber"];
     }
 
-    -(void)voidSetCalonPemegangPolisBoolValidate:(BOOL)boolValidate{
-        boolTertanggung = true;
-        [self.navigationItem setTitle:@"Data Calon Tertanggung"];
-        NSIndexPath* indexPathSelect = [NSIndexPath indexPathForRow:1 inSection:0];
-        [self showDetailsForIndexPath:indexPathSelect];
-        NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJDetail1=1 where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",[dictTransaction valueForKey:@"SPAJEappNumber"]];
-        [modelSPAJDetail updateSPAJDetail:stringUpdate];
-        [_tableSection reloadData];
-        [_tableSection selectRowAtIndexPath:indexPathSelect animated:YES scrollPosition:UITableViewScrollPositionTop];
+    -(void)voidSetCalonPemegangPolisBoolValidate:(BOOL)boolValidate StringSection:(NSString *)stringSection{
+        
+        if ([stringSection isEqualToString:@"PO"]){
+            [self.navigationItem setTitle:@"Data Calon Tertanggung"];
+            //NSIndexPath* indexPathSelect = [NSIndexPath indexPathForRow:1 inSection:0];
+            //[self showDetailsForIndexPath:indexPathSelect];
+            NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJDetail1=1 where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",[dictTransaction valueForKey:@"SPAJEappNumber"]];
+            [modelSPAJDetail updateSPAJDetail:stringUpdate];
+            //[_tableSection reloadData];
+            //[_tableSection selectRowAtIndexPath:indexPathSelect animated:YES scrollPosition:UITableViewScrollPositionTop];
+            [self voidCheckBooleanLastState];
+        }
+        else if ([stringSection isEqualToString:@"TR"]){
+            [self voidSetCalonTertnggungBoolValidate:true];
+        }
+        else if ([stringSection isEqualToString:@"PR"]){
+            [self voidSetPerusahaanBoolValidate:true];
+        }
+        else if ([stringSection isEqualToString:@"PM"]){
+            [self voidSetPenerimaManfaatBoolValidate:true];
+        }
+        else if ([stringSection isEqualToString:@"PP"]){
+            [self voidSetPembayaranPremiBoolValidate:true];
+        }
+        else if ([stringSection isEqualToString:@"PO"]){
+            [self voidSetKesehatanBoolValidate:true];
+        }
+        
     }
 
     -(void)voidSetCalonTertnggungBoolValidate:(BOOL)boolValidate{
-        boolPerusahaan = true;
+        //boolPerusahaan = true;
         [self.navigationItem setTitle:@"Data Perusahaan / Badan Hukum"];
-        NSIndexPath* indexPathSelect = [NSIndexPath indexPathForRow:2 inSection:0];
-        [self showDetailsForIndexPath:indexPathSelect];
+        //NSIndexPath* indexPathSelect = [NSIndexPath indexPathForRow:2 inSection:0];
+        //[self showDetailsForIndexPath:indexPathSelect];
         NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJDetail2=1 where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",[dictTransaction valueForKey:@"SPAJEappNumber"]];
         [modelSPAJDetail updateSPAJDetail:stringUpdate];
-        [_tableSection reloadData];
-        [_tableSection selectRowAtIndexPath:indexPathSelect animated:YES scrollPosition:UITableViewScrollPositionTop];
+        //[_tableSection reloadData];
+        //[_tableSection selectRowAtIndexPath:indexPathSelect animated:YES scrollPosition:UITableViewScrollPositionTop];
+        [self voidCheckBooleanLastState];
     }
 
     -(void)voidSetPerusahaanBoolValidate:(BOOL)boolValidate{
-        boolPenerimaManfaat = true;
+        //boolPenerimaManfaat = true;
         [self.navigationItem setTitle:@"Data Calon Penerima Manfaat"];
-        NSIndexPath* indexPathSelect = [NSIndexPath indexPathForRow:3 inSection:0];
-        [self showDetailsForIndexPath:indexPathSelect];
+        //NSIndexPath* indexPathSelect = [NSIndexPath indexPathForRow:3 inSection:0];
+        //[self showDetailsForIndexPath:indexPathSelect];
         NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJDetail3=1 where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",[dictTransaction valueForKey:@"SPAJEappNumber"]];
         [modelSPAJDetail updateSPAJDetail:stringUpdate];
-        [_tableSection reloadData];
-        [_tableSection selectRowAtIndexPath:indexPathSelect animated:YES scrollPosition:UITableViewScrollPositionTop];
+        //[_tableSection reloadData];
+        //[_tableSection selectRowAtIndexPath:indexPathSelect animated:YES scrollPosition:UITableViewScrollPositionTop];
+        [self voidCheckBooleanLastState];
     }
 
     -(void)voidSetPenerimaManfaatBoolValidate:(BOOL)boolValidate{
-        boolPembayaranPremi = true;
+        //boolPembayaranPremi = true;
         [self.navigationItem setTitle:@"Data Pembayaran Premi"];
-        NSIndexPath* indexPathSelect = [NSIndexPath indexPathForRow:4 inSection:0];
-        [self showDetailsForIndexPath:indexPathSelect];
+        //NSIndexPath* indexPathSelect = [NSIndexPath indexPathForRow:4 inSection:0];
+        //[self showDetailsForIndexPath:indexPathSelect];
         NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJDetail4=1 where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",[dictTransaction valueForKey:@"SPAJEappNumber"]];
         [modelSPAJDetail updateSPAJDetail:stringUpdate];
-        [_tableSection reloadData];
-        [_tableSection selectRowAtIndexPath:indexPathSelect animated:YES scrollPosition:UITableViewScrollPositionTop];
+        //[_tableSection reloadData];
+        //[_tableSection selectRowAtIndexPath:indexPathSelect animated:YES scrollPosition:UITableViewScrollPositionTop];
+        [self voidCheckBooleanLastState];
     }
 
     -(void)voidSetPembayaranPremiBoolValidate:(BOOL)boolValidate{
-        boolKesehatan = true;
+        //boolKesehatan = true;
         [self.navigationItem setTitle:@"Data Kesehatan"];
-        NSIndexPath* indexPathSelect = [NSIndexPath indexPathForRow:5 inSection:0];
-        [self showDetailsForIndexPath:indexPathSelect];
+        //NSIndexPath* indexPathSelect = [NSIndexPath indexPathForRow:5 inSection:0];
+        //[self showDetailsForIndexPath:indexPathSelect];
         NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJDetail5=1 where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",[dictTransaction valueForKey:@"SPAJEappNumber"]];
         [modelSPAJDetail updateSPAJDetail:stringUpdate];
-        [_tableSection reloadData];
-        [_tableSection selectRowAtIndexPath:indexPathSelect animated:YES scrollPosition:UITableViewScrollPositionTop];
+        //[_tableSection reloadData];
+        //[_tableSection selectRowAtIndexPath:indexPathSelect animated:YES scrollPosition:UITableViewScrollPositionTop];
+        [self voidCheckBooleanLastState];
     }
 
     -(void)voidSetKesehatanBoolValidate:(BOOL)boolValidate{
         boolKesehatan = true;
         NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJDetail6=1 where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",[dictTransaction valueForKey:@"SPAJEappNumber"]];
         [modelSPAJDetail updateSPAJDetail:stringUpdate];
+        [self voidCheckBooleanLastState];
     }
 #pragma mark delegate image picker
     - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info

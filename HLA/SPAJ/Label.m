@@ -331,7 +331,7 @@
 
     // TABLE
 
-    @implementation LabelTableHeader
+    @implementation ViewTableHeader
 
         // INITIALIZE
 
@@ -348,6 +348,26 @@
             UserInterface *objectUserInterface = [[UserInterface alloc] init];
             
             self.backgroundColor = [objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0];
+        }
+
+    @end
+
+    @implementation LabelTableHeader
+
+        // INITIALIZE
+
+        - (void)awakeFromNib
+        {
+            [self setupStyle];
+        }
+
+
+        // FUNCTION
+
+        - (void)setupStyle
+        {
+            UserInterface *objectUserInterface = [[UserInterface alloc] init];
+            
             [self setTextColor : [objectUserInterface generateUIColor:THEME_COLOR_QUINARY floatOpacity:1.0]];
             [self setFont : [UIFont fontWithName:THEME_FONT_PRIMARY size:FONTSIZE_TABLE_HEADER]];
             self.textAlignment = NSTextAlignmentCenter;

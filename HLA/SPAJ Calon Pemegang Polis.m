@@ -11,20 +11,96 @@
 
 @end
 
-@implementation SPAJ_Calon_Pemegang_Polis
+@implementation SPAJ_Calon_Pemegang_Polis{
+    NSString *stringSection;
+}
 @synthesize htmlFileName;
 @synthesize delegate;
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:YES];
-    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    /*NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     filePath = [docsDir stringByAppendingPathComponent:@"SPAJ"];
     
     NSString *htmlfilePath = [NSString stringWithFormat:@"SPAJ/%@",htmlFileName];
     NSString *localURL = [[NSString alloc] initWithString:
                           [docsDir stringByAppendingPathComponent: htmlfilePath]];
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localURL]];
+    [webview loadRequest:urlRequest];*/
+}
+
+-(void)loadFirstHTML:(NSString*)stringHTMLName PageSection:(NSString *)stringPageSection{
+    stringSection = stringPageSection;
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    filePath = [docsDir stringByAppendingPathComponent:@"SPAJ"];
+    
+    NSString *htmlfilePath = [NSString stringWithFormat:@"SPAJ/%@",stringHTMLName];
+    NSString *localURL = [[NSString alloc] initWithString:
+                          [docsDir stringByAppendingPathComponent: htmlfilePath]];
+    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localURL]];
     [webview loadRequest:urlRequest];
 }
+
+
+-(void)loadSecondHTML:(NSString*)stringHTMLName PageSection:(NSString *)stringPageSection{
+    stringSection = stringPageSection;
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    filePath = [docsDir stringByAppendingPathComponent:@"SPAJ"];
+    
+    NSString *htmlfilePath = [NSString stringWithFormat:@"SPAJ/%@",stringHTMLName];
+    NSString *localURL = [[NSString alloc] initWithString:
+                          [docsDir stringByAppendingPathComponent: htmlfilePath]];
+    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localURL]];
+    [webview loadRequest:urlRequest];
+}
+
+-(void)loadThirdHTML:(NSString*)stringHTMLName PageSection:(NSString *)stringPageSection{
+    stringSection = stringPageSection;
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    filePath = [docsDir stringByAppendingPathComponent:@"SPAJ"];
+    
+    NSString *htmlfilePath = [NSString stringWithFormat:@"SPAJ/%@",stringHTMLName];
+    NSString *localURL = [[NSString alloc] initWithString:
+                          [docsDir stringByAppendingPathComponent: htmlfilePath]];
+    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localURL]];
+    [webview loadRequest:urlRequest];
+}
+
+-(void)loadFourthHTML:(NSString*)stringHTMLName PageSection:(NSString *)stringPageSection{
+    stringSection = stringPageSection;
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    filePath = [docsDir stringByAppendingPathComponent:@"SPAJ"];
+    
+    NSString *htmlfilePath = [NSString stringWithFormat:@"SPAJ/%@",stringHTMLName];
+    NSString *localURL = [[NSString alloc] initWithString:
+                          [docsDir stringByAppendingPathComponent: htmlfilePath]];
+    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localURL]];
+    [webview loadRequest:urlRequest];
+}
+
+-(void)loadFivethHTML:(NSString*)stringHTMLName PageSection:(NSString *)stringPageSection{
+    stringSection = stringPageSection;
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    filePath = [docsDir stringByAppendingPathComponent:@"SPAJ"];
+    
+    NSString *htmlfilePath = [NSString stringWithFormat:@"SPAJ/%@",stringHTMLName];
+    NSString *localURL = [[NSString alloc] initWithString:
+                          [docsDir stringByAppendingPathComponent: htmlfilePath]];
+    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localURL]];
+    [webview loadRequest:urlRequest];
+}
+
+-(void)loadSixthHTML:(NSString*)stringHTMLName PageSection:(NSString *)stringPageSection{
+    stringSection = stringPageSection;
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    filePath = [docsDir stringByAppendingPathComponent:@"SPAJ"];
+    
+    NSString *htmlfilePath = [NSString stringWithFormat:@"SPAJ/%@",stringHTMLName];
+    NSString *localURL = [[NSString alloc] initWithString:
+                          [docsDir stringByAppendingPathComponent: htmlfilePath]];
+    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localURL]];
+    [webview loadRequest:urlRequest];
+}
+
 
 
 - (void)viewDidLoad {
@@ -67,7 +143,7 @@
     NSString*spajTransactionID = [modelSPAJTransaction getSPAJTransactionData:@"SPAJTransactionID" StringWhereName:@"SPAJEappNumber" StringWhereValue:[delegate voidGetEAPPNumber]];
     //cffID = [cffHeaderSelectedDictionary valueForKey:@"PotentialDiscussionCFFID"];
     NSMutableDictionary* modifiedParams = [[NSMutableDictionary alloc]initWithDictionary:[params valueForKey:@"data"]];
-    [modifiedParams setObject:[[modelSPAJHtml selectActiveHtmlForSection:@"PO"] valueForKey:@"SPAJHtmlID"] forKey:@"SPAJHtmlID"];
+    [modifiedParams setObject:[[modelSPAJHtml selectActiveHtmlForSection:stringSection] valueForKey:@"SPAJHtmlID"] forKey:@"SPAJHtmlID"];
     [modifiedParams setObject:spajTransactionID forKey:@"SPAJTransactionID"];
     //[modifiedParams setObject:cffID forKey:@"SPAJID"];
     //[modifiedParams setObject:[prospectProfileID stringValue] forKey:@"CustomerID"];
@@ -77,11 +153,11 @@
     if ([arraySPAJAnswers count]>0){
         for (int i = 0;i<[arraySPAJAnswers count];i++){
             NSMutableDictionary* tempDict = [[NSMutableDictionary alloc] initWithDictionary:[arraySPAJAnswers objectAtIndex:i]];
-            [tempDict setObject:[[modelSPAJHtml selectActiveHtmlForSection:@"PO"] valueForKey:@"SPAJHtmlID"] forKey:@"SPAJHtmlID"];
+            [tempDict setObject:[[modelSPAJHtml selectActiveHtmlForSection:stringSection] valueForKey:@"SPAJHtmlID"] forKey:@"SPAJHtmlID"];
             [tempDict setObject:spajTransactionID forKey:@"SPAJTransactionID"];
             //[tempDict setObject:cffID forKey:@"SPAJID"];
             //[tempDict setObject:[prospectProfileID stringValue] forKey:@"CustomerID"];
-            [tempDict setObject:@"PO" forKey:@"SPAJHtmlSection"];
+            [tempDict setObject:stringSection forKey:@"SPAJHtmlSection"];
             int indexNo = [modelSPAJAnswers voidGetDuplicateRowID:tempDict];
             
             if (indexNo>0){
@@ -101,14 +177,14 @@
     [finalDictionary setValue:[params valueForKey:@"successCallBack"] forKey:@"successCallBack"];
     [finalDictionary setValue:[params valueForKey:@"errorCallback"] forKey:@"errorCallback"];
     [super savetoDB:finalDictionary];
-    [delegate voidSetCalonPemegangPolisBoolValidate:true];
+    [delegate voidSetCalonPemegangPolisBoolValidate:true StringSection:stringSection];
 }
 
 - (NSMutableDictionary*)readfromDB:(NSMutableDictionary*) params{
     NSString *SPAJTransactionID = [modelSPAJTransaction getSPAJTransactionData:@"SPAJTransactionID" StringWhereName:@"SPAJEappNumber" StringWhereValue:[delegate voidGetEAPPNumber]];
     NSMutableDictionary* modifiedParams = [[NSMutableDictionary alloc]initWithDictionary:[params valueForKey:@"data"]];
     NSMutableDictionary* tempDict = [[NSMutableDictionary alloc] initWithDictionary:[modifiedParams valueForKey:@"SPAJAnswers"]];
-    NSString* stringWhere = [NSString stringWithFormat:@"where CustomerID=%@ and SPAJID=%@ and SPAJTransactionID=%@ and SPAJHtmlSection='PO'",@"1",@"1",SPAJTransactionID];
+    NSString* stringWhere = [NSString stringWithFormat:@"where CustomerID=%@ and SPAJID=%@ and SPAJTransactionID=%@ and SPAJHtmlSection='%@'",@"1",@"1",SPAJTransactionID,stringSection];
     [tempDict setObject:stringWhere forKey:@"where"];
     
     NSMutableDictionary* answerDictionary = [[NSMutableDictionary alloc]init];
@@ -124,12 +200,19 @@
 -(NSString *)getPOIndexNumber{
     NSString *SINO = [modelSPAJTransaction getSPAJTransactionData:@"SPAJSINO" StringWhereName:@"SPAJEappNumber" StringWhereValue:[delegate voidGetEAPPNumber]];
     NSDictionary* dictPOData = [[NSDictionary alloc ]initWithDictionary:[modelSIPData getPO_DataFor:SINO]];
-    NSString *stringPOClientID = [dictPOData valueForKey:@"PO_ClientID"];
+    NSString *stringPOClientID;
+    if ([stringSection isEqualToString:@"PO"]){
+        stringPOClientID = [dictPOData valueForKey:@"PO_ClientID"];
+    }
+    else{
+        stringPOClientID = [dictPOData valueForKey:@"LA_ClientID"];
+    }
+    
     return stringPOClientID;
 }
 
 -(NSDictionary *)dictForAutoPopulate{
-    NSString *SINO = [modelSPAJTransaction getSPAJTransactionData:@"SPAJSINO" StringWhereName:@"SPAJEappNumber" StringWhereValue:[delegate voidGetEAPPNumber]];
+    /*NSString *SINO = [modelSPAJTransaction getSPAJTransactionData:@"SPAJSINO" StringWhereName:@"SPAJEappNumber" StringWhereValue:[delegate voidGetEAPPNumber]];
     NSMutableArray* columnNames = [[NSMutableArray alloc]initWithArray:[modelProspectProfile getColumnNames:@"prospect_profile"]];
     NSMutableArray* columnValue = [[NSMutableArray alloc]initWithArray:[modelProspectProfile getColumnValue:[self getPOIndexNumber] ColumnCount:[columnNames count]]];
     NSDictionary* dictPOData = [[NSDictionary alloc ]initWithDictionary:[modelSIPData getPO_DataFor:SINO]];
@@ -138,7 +221,19 @@
     NSMutableDictionary* dictDetail = [[NSMutableDictionary alloc]init];
     for (int i=0;i<[columnNames count];i++){
         [dictDetail setObject:[columnValue objectAtIndex:i] forKey:[columnNames objectAtIndex:i]];
+    }*/
+    NSString *SINO = [modelSPAJTransaction getSPAJTransactionData:@"SPAJSINO" StringWhereName:@"SPAJEappNumber" StringWhereValue:[delegate voidGetEAPPNumber]];
+    NSDictionary* dictPOData = [[NSDictionary alloc ]initWithDictionary:[modelSIPData getPO_DataFor:SINO]];
+    
+    NSMutableArray* columnNames = [[NSMutableArray alloc]initWithArray:[modelProspectProfile getColumnNames:@"prospect_profile"]];
+    NSMutableArray* columnValue = [[NSMutableArray alloc]initWithArray:[modelProspectProfile getColumnValue:[self getPOIndexNumber] ColumnCount:[columnNames count]]];
+    
+    //create dictionary
+    NSMutableDictionary* dictDetail = [[NSMutableDictionary alloc]init];
+    for (int i=0;i<[columnNames count];i++){
+        [dictDetail setObject:[columnValue objectAtIndex:i] forKey:[columnNames objectAtIndex:i]];
     }
+
     NSString* identityDesc = [modelIdentificationType getOtherTypeDesc:[dictDetail valueForKey:@"OtherIDType"]];
     
     [dictDetail setObject:identityDesc forKey:@"OtherIDType"];

@@ -52,6 +52,9 @@
     Formatter* formatter;
     
     UserInterface *objectUserInterface;
+    
+    NSDictionary* dictionaryPOData;
+    NSString *stringSINO;
 }
 
     // SYNTHESIZE
@@ -146,8 +149,11 @@
     }
 
     -(void)voidCheckListCompletion{
-        bool signatureCaptured  = [modelSPAJSignature voidSignatureCaptured:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
-        bool idCaptured = [modelSPAJIDCapture voidIDCaptured:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
+        NSString* stringRelation = [dictionaryPOData valueForKey:@"RelWithLA"];
+        int laAge = [[dictionaryPOData valueForKey:@"LA_Age"] intValue];
+        
+        bool signatureCaptured  = [modelSPAJSignature voidSignatureCaptured:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue] Relationship:stringRelation LAAge:laAge];
+        bool idCaptured = [modelSPAJIDCapture voidIDCaptured:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue] Relationship:stringRelation LAAge:laAge];
         bool detailCapture = [modelSPAJDetail voidDetailCaptured:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
         bool formGeneration = [modelSPAJFormGeneration voidFormGenerated:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
         
@@ -178,6 +184,13 @@
         else{
             [_viewStep3 setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_OCTONARY floatOpacity:1.0]];
         }
+        
+        if ((detailCapture)&&(formGeneration)&&(idCaptured)&&(signatureCaptured)){
+            [_buttonConfirmSPAJ setEnabled:YES];
+        }
+        else{
+            [_buttonConfirmSPAJ setEnabled:NO];
+        }
     }
 
     -(void)voidGetFooterInformation{
@@ -195,8 +208,8 @@
 
     // VOID
     -(void)voidLoadSIInformation{
-        NSString *stringSINO = [dictTransaction valueForKey:@"SPAJSINO"];
-        NSDictionary* dictionaryPOData = [[NSDictionary alloc]initWithDictionary:[modelSIPOData getPO_DataFor:stringSINO]];
+        stringSINO = [dictTransaction valueForKey:@"SPAJSINO"];
+        dictionaryPOData = [[NSDictionary alloc]initWithDictionary:[modelSIPOData getPO_DataFor:stringSINO]];
         
         NSString *stringLAName = [dictionaryPOData valueForKey:@"LA_Name"];
         NSString *stringProduct = [dictionaryPOData valueForKey:@"ProductName"];
@@ -285,6 +298,7 @@
         [modelSPAJTransaction updateSPAJTransaction:@"SPAJNumber" StringColumnValue:[[NSNumber numberWithLongLong:[loginDB getLastActiveSPAJNum]] stringValue] StringWhereName:@"SPAJEappNumber" StringWhereValue:[dictTransaction valueForKey:@"SPAJEappNumber"]];
         
         [modelSPAJTransaction updateSPAJTransaction:@"SPAJStatus" StringColumnValue:@"ExistingList" StringWhereName:@"SPAJEappNumber" StringWhereValue:[dictTransaction valueForKey:@"SPAJEappNumber"]];
+        
     };
 
 

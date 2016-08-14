@@ -56,7 +56,8 @@
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     [database open];
     
-    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select count (*) as FormGenerationCaptured from SPAJFormGeneration where SPAJTransactionID=%i and SPAJFormGeneration1=1 and SPAJFormGeneration2=1 and SPAJFormGeneration3=1 ",intTransactionSPAJID]];
+    //FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select count (*) as FormGenerationCaptured from SPAJFormGeneration where SPAJTransactionID=%i and SPAJFormGeneration1=1 and SPAJFormGeneration2=1 and SPAJFormGeneration3=1 ",intTransactionSPAJID]];
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select count (*) as FormGenerationCaptured from SPAJFormGeneration where SPAJTransactionID=%i and SPAJFormGeneration1=1 ",intTransactionSPAJID]];
     
     while ([s next]) {
         signatureCaptured = [s intForColumn:@"FormGenerationCaptured"];
@@ -71,5 +72,31 @@
         return false;
     }
 }
+
+-(bool)voidCertainFormGenerateCaptured:(int)intTransactionSPAJID FormType:(NSString *)stringFormType{
+    int FormGenerated = 0;
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select %@ from SPAJFormGeneration where SPAJTransactionID=%i",stringFormType,intTransactionSPAJID]];
+    
+    while ([s next]) {
+        FormGenerated = [s intForColumn:stringFormType];
+    }
+    
+    [results close];
+    [database close];
+    if (FormGenerated>0){
+        return true;
+        
+    }
+    else{
+        return false;
+    }
+}
+
 
 @end

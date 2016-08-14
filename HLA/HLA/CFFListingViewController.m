@@ -224,10 +224,10 @@
 {
      NSString *msg;
      if (RecDelete == 1) {
-         msg = @"Apakah anda yakin ingin menghapus klien ini ?";//Are you sure want to delete these Clients?";
+         msg = @"Apakah anda yakin ingin menghapus CFF ini ?";//Are you sure want to delete these Clients?";
      }
      else {
-         msg = @"Apakah anda yakin ingin menghapus klien ini ?";//Are you sure want to delete these Clients?";
+         msg = @"Apakah anda yakin ingin menghapus CFF ini ?";//Are you sure want to delete these Clients?";
      }
      
      UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:msg delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];

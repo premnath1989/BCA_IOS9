@@ -71,6 +71,13 @@
     @property (nonatomic, weak) IBOutlet UIButton *buttonSearch;
     @property (nonatomic, weak) IBOutlet UIButton *buttonReset;
     @property (nonatomic, weak) IBOutlet UIButton *buttonDelete;
+    @property (nonatomic, weak) IBOutlet UIButton *buttonEdit;
+
+    @property (nonatomic, weak) IBOutlet UIButton *buttonSortFullName;
+    @property (nonatomic, weak) IBOutlet UIButton *buttonSortSPAJNumber;
+    @property (nonatomic, weak) IBOutlet UIButton *buttonSortLastModified;
+    @property (nonatomic, weak) IBOutlet UIButton *buttonSortSIVersion;
+    @property (nonatomic, weak) IBOutlet UIButton *buttonSortTimeRemaining;
 
     // FUNCTION
 

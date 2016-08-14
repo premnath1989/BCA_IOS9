@@ -15,5 +15,5 @@
 -(void)saveSPAJDetail:(NSDictionary *)spajDetailDictionary;
 -(void)updateSPAJDetail:(NSString *)setString;
 -(bool)voidDetailCaptured:(int)intTransactionSPAJID;
-
+-(bool)voidCertainDetailCaptured:(int)intTransactionSPAJID DetailParty:(NSString *)stringDetailSPAJ;
 @end

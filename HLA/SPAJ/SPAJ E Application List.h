@@ -66,6 +66,7 @@
     @property (nonatomic, weak) IBOutlet UIButton *buttonSearch;
     @property (nonatomic, weak) IBOutlet UIButton *buttonReset;
     @property (nonatomic, weak) IBOutlet UIButton *buttonDelete;
+    @property (nonatomic, weak) IBOutlet UIButton *buttonEdit;
 
     @property (nonatomic, weak) IBOutlet UIButton *buttonSortFullName;
     @property (nonatomic, weak) IBOutlet UIButton *buttonSortEappNumber;

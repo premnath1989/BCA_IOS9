@@ -20,6 +20,9 @@
 #import "ModelSPAJIDCapture.h"
 #import "ModelIdentificationType.h"
 #import "Formatter.h"
+#import "ModelSPAJTransaction.h"
+#import "ModelSIPOData.h"
+#import "ModelSPAJSignature.h"
 
 // DECLARATION
 
@@ -43,8 +46,11 @@
         Alert* alert;
         UserInterface *objectUserInterface;
         ModelSPAJIDCapture *modelSPAJIDCapture;
+        ModelSPAJTransaction* modelSPAJTransaction;
+        ModelSIPOData* modelSIPOData;
         Formatter* formatter;
         ModelIdentificationType* modelIdentificationType;
+        ModelSPAJSignature* modelSPAJSignature;
         
         CameraViewController *imagePickerController;
         BOOL cameraFront;

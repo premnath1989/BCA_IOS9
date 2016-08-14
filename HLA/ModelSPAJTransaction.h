@@ -20,4 +20,5 @@
 -(void)saveSPAJTransaction:(NSDictionary *)spajTransactionDictionary;
 -(void)updateSPAJTransaction:(NSString *)stringColumnName StringColumnValue:(NSString *)stringColumnValue StringWhereName:(NSString *)stringWhereName StringWhereValue:(NSString *)stringWhereValue;
 -(NSString *)getSPAJTransactionData:(NSString *)stringColumnName StringWhereName:(NSString *)stringWhereName StringWhereValue:(NSString *)stringWhereValue;
+-(void)deleteSPAJTransaction:(NSString *)stringTableName StringWhereName:(NSString *)stringWhereName StringWhereValue:(NSString *)stringWhereValue;
 @end

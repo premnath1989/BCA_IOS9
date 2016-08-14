@@ -15,6 +15,7 @@
 #import "ModelSPAJTransaction.h"
 #import "ModelSIPOData.h"
 #import "ModelSPAJSignature.h"
+#import "Alert.h"
 
 @interface SPAJ_Add_Signature (){
     IBOutlet UILabel *labelSignatureParty;
@@ -25,6 +26,7 @@
     IBOutlet mySmoothLineView *viewToSign;
     
     UIAlertController *alertController;
+    Alert* alert;
 }
 
 @end
@@ -55,6 +57,8 @@
     NSString* stringSIRelation;
     int LAAge;
     
+    int indexSelected;
+    
     BOOL boolPemegangPolis;
     BOOL boolTertanggung;
     BOOL boolOrangTuaWali;
@@ -64,21 +68,26 @@
 @synthesize SPAJAddSignatureDelegate;
 @synthesize dictTransaction;
 
+-(void)viewWillAppear:(BOOL)animated{
+    [self voidCreateDotInLine:viewBorder];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    alert = [[Alert alloc]init];
     formatter = [[Formatter alloc]init];
     modelSPAJTransaction = [[ModelSPAJTransaction alloc]init];
     modelSIPOData = [[ModelSIPOData alloc]init];
     modelSPAJSignature = [[ModelSPAJSignature alloc]init];
     
     [self setNavigationBar];
+
     
-    viewBorder.layer.borderWidth=1.0;
-    viewBorder.layer.borderColor=[UIColor blackColor].CGColor;
     [self voidArrayInitialization];
     objectUserInterface = [[UserInterface alloc] init];
     
-    boolPemegangPolis = true;
+    boolPemegangPolis = false;
     boolTertanggung = false;
     boolOrangTuaWali = false;
     boolTenagaPenjual = false;
@@ -104,15 +113,50 @@
 }
 
 -(void)voidCheckBooleanLastState {
+    boolPemegangPolis = [modelSPAJSignature voidCertainSignaturePartyCaptured:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue] SignatureParty:@"SPAJSignatureParty1"];
+    boolTertanggung = [modelSPAJSignature voidCertainSignaturePartyCaptured:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue] SignatureParty:@"SPAJSignatureParty2"];
+    boolOrangTuaWali = [modelSPAJSignature voidCertainSignaturePartyCaptured:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue] SignatureParty:@"SPAJSignatureParty3"];
+    boolTenagaPenjual = [modelSPAJSignature voidCertainSignaturePartyCaptured:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue] SignatureParty:@"SPAJSignatureParty4"];
     
-    boolPemegangPolis = true;
-    boolTertanggung = [modelSPAJSignature voidCertainSignaturePartyCaptured:[[dictTransaction valueForKey:@"SPAJEappNumber"] intValue] SignatureParty:@"SignatureParty2"];
-    boolOrangTuaWali = [modelSPAJSignature voidCertainSignaturePartyCaptured:[[dictTransaction valueForKey:@"SPAJEappNumber"] intValue] SignatureParty:@"SignatureParty3"];
-    boolTenagaPenjual = [modelSPAJSignature voidCertainSignaturePartyCaptured:[[dictTransaction valueForKey:@"SPAJEappNumber"] intValue] SignatureParty:@"SignatureParty4"];
+    [self voidTableCellLastStateChecker:boolPemegangPolis BOOLTR:boolTertanggung BOOLOW:boolOrangTuaWali BOOLTP:boolTenagaPenjual];
+}
+
+-(void)voidTableCellLastStateChecker:(BOOL)boolPO BOOLTR:(BOOL)boolTR BOOLOW:(BOOL)boolOW BOOLTP:(BOOL)boolTP{
+    if (boolPO){
+        if ([stringSIRelation isEqualToString:@"DIRI SENDIRI"]){
+            [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
+        }
+        else{
+            if (LAAge<21){
+                if (boolOW){
+                    [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
+                }
+                else{
+                    [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
+                }
+            }
+            else{
+                if (boolTR){
+                    [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
+                }
+                else{
+                    [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+                }
+            }
+        }
+    }
+    else{
+        [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    }
+    
+    [tablePartiesSignature selectRowAtIndexPath:[NSIndexPath indexPathForRow:indexSelected inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
+
+    
 }
 
 -(void) showDetailsForIndexPath:(NSIndexPath*)indexPath
 {
+    indexSelected = indexPath.row;
     switch (indexPath.row) {
         case 0:
             labelSignatureParty.text = @"Tanda Tangan Pemegang Polis";
@@ -197,6 +241,19 @@
     });
 }
 
+-(void)voidCreateDotInLine:(UIView *)sender {
+    CGFloat lineWidth = sender.frame.size.width;
+    CGFloat dotWidth = 5;
+    int numberOfDot = (lineWidth/2);
+    int xStart=0;
+    for (int i=0;i<numberOfDot;i++){
+        UIView* viewDot = [[UIView alloc]initWithFrame:CGRectMake(xStart, 0, dotWidth, 1)];
+        [viewDot setBackgroundColor:[UIColor blackColor]];
+        [sender addSubview:viewDot];
+        xStart = dotWidth * i * 2;
+    }
+}
+
 
 - (IBAction)actionClearSign:(UIButton *)sender {
     [viewToSign clearView];
@@ -204,62 +261,28 @@
 }
 
 - (IBAction)actionCompleteSignature:(id)sender{
-    if ([stringSIRelation isEqualToString:@"DIRI SENDIRI"]){
-        if (boolTenagaPenjual && boolPemegangPolis){
-            boolPemegangPolis = true;
-            boolTertanggung = false;
-            boolOrangTuaWali =  false;
-            boolTenagaPenjual = true;
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                [self voidSaveSignatureToPDF:3];
-            });
-            [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
-            [self voidCreateAlertTextFieldViewAndShow:@"Masukkan lokasi pengambilan tanda tangan" tag:0];
-            //update signature party4
-            NSString* dateToday=[formatter getDateToday:@"yyyy-MM-dd hh:mm:ss"];
-            NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty4=1,SPAJDateSignatureParty4='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",dateToday,[dictTransaction valueForKey:@"SPAJEappNumber"]];
-            [modelSPAJSignature updateSPAJSignature:stringUpdate];
-        }
-        else if (boolPemegangPolis){
-            NSString *date = [formatter getDateToday:@"dd/MM/yyyy"];
-            NSString *time = [formatter getDateToday:@"hh:mm"];
-            NSString* alertString = [NSString stringWithFormat:@"Mohon agar menandatangani aplikasi dengan benar dan menyerahkannya sebelum tanggal (%@) dan waktu (%@ WIB). Jika tidak maka aplikasi ini akan menjadi tidak valid.\n\nTidak diperbolehkan adanya perubahan data pada aplikasi setelah Anda menyimpannya.\nApakah Anda yakin ingin menyimpan ?",date,time];
-            [self voidCreateAlertTwoOptionViewAndShow:alertString tag:0];
-            return;
-        }
-    }
-    else{
-        if (LAAge<21){
-            if (boolTenagaPenjual && boolOrangTuaWali && boolPemegangPolis){
-                boolPemegangPolis = true;
-                boolTertanggung = false;
-                boolOrangTuaWali =  true;
-                boolTenagaPenjual = true;
+    if (!boolTenagaPenjual){
+        if ([stringSIRelation isEqualToString:@"DIRI SENDIRI"]){
+            //if (boolTenagaPenjual && boolPemegangPolis){
+            if (indexSelected == 3){
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                     [self voidSaveSignatureToPDF:3];
                 });
-                [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
                 [self voidCreateAlertTextFieldViewAndShow:@"Masukkan lokasi pengambilan tanda tangan" tag:0];
                 //update signature party4
                 NSString* dateToday=[formatter getDateToday:@"yyyy-MM-dd hh:mm:ss"];
                 NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty4=1,SPAJDateSignatureParty4='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",dateToday,[dictTransaction valueForKey:@"SPAJEappNumber"]];
                 [modelSPAJSignature updateSPAJSignature:stringUpdate];
+                [self voidCheckBooleanLastState];
             }
-            else if (boolOrangTuaWali && boolPemegangPolis){
-                boolPemegangPolis = true;
-                boolTertanggung = false;
-                boolOrangTuaWali =  true;
-                boolTenagaPenjual = true;
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                    [self voidSaveSignatureToPDF:2];
-                });
-                [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
-                //update signature party3
-                NSString* dateToday=[formatter getDateToday:@"yyyy-MM-dd hh:mm:ss"];
-                NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty3=1,SPAJDateSignatureParty3='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",dateToday,[dictTransaction valueForKey:@"SPAJEappNumber"]];
-                [modelSPAJSignature updateSPAJSignature:stringUpdate];
+            else if (indexSelected==2){
+            
             }
-            else if (boolPemegangPolis){
+            else if (indexSelected == 1){
+            
+            }
+            //else if (boolPemegangPolis){
+            else if (indexSelected == 0){
                 NSString *date = [formatter getDateToday:@"dd/MM/yyyy"];
                 NSString *time = [formatter getDateToday:@"hh:mm"];
                 NSString* alertString = [NSString stringWithFormat:@"Mohon agar menandatangani aplikasi dengan benar dan menyerahkannya sebelum tanggal (%@) dan waktu (%@ WIB). Jika tidak maka aplikasi ini akan menjadi tidak valid.\n\nTidak diperbolehkan adanya perubahan data pada aplikasi setelah Anda menyimpannya.\nApakah Anda yakin ingin menyimpan ?",date,time];
@@ -268,88 +291,99 @@
             }
         }
         else{
-            if (boolTenagaPenjual  && boolPemegangPolis && boolTertanggung){
-                boolPemegangPolis = true;
-                boolTertanggung = true;
-                boolOrangTuaWali =  false;
-                boolTenagaPenjual = true;
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                    [self voidSaveSignatureToPDF:3];
-                });
-                [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
-                [self voidCreateAlertTextFieldViewAndShow:@"Masukkan lokasi pengambilan tanda tangan" tag:0];
-                //update signature party4
-                NSString* dateToday=[formatter getDateToday:@"yyyy-MM-dd hh:mm:ss"];
-                NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty4=1,SPAJDateSignatureParty4='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",dateToday,[dictTransaction valueForKey:@"SPAJEappNumber"]];
-                [modelSPAJSignature updateSPAJSignature:stringUpdate];
+            if (LAAge<21){
+                //if (boolTenagaPenjual && boolOrangTuaWali && boolPemegangPolis){
+                if (indexSelected == 3){
+                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                        [self voidSaveSignatureToPDF:3];
+                    });
+                    [self voidCreateAlertTextFieldViewAndShow:@"Masukkan lokasi pengambilan tanda tangan" tag:0];
+                    //update signature party4
+                    NSString* dateToday=[formatter getDateToday:@"yyyy-MM-dd hh:mm:ss"];
+                    NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty4=1,SPAJDateSignatureParty4='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",dateToday,[dictTransaction valueForKey:@"SPAJEappNumber"]];
+                    [modelSPAJSignature updateSPAJSignature:stringUpdate];
+                    [self voidCheckBooleanLastState];
+                }
+                //else if (boolOrangTuaWali && boolPemegangPolis){
+                else if (indexSelected == 2){
+                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                        [self voidSaveSignatureToPDF:2];
+                    });
+                    //update signature party3
+                    NSString* dateToday=[formatter getDateToday:@"yyyy-MM-dd hh:mm:ss"];
+                    NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty3=1,SPAJDateSignatureParty3='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",dateToday,[dictTransaction valueForKey:@"SPAJEappNumber"]];
+                    [modelSPAJSignature updateSPAJSignature:stringUpdate];
+                    [self voidCheckBooleanLastState];
+                }
+                else if (indexSelected == 1){
+                
+                }
+                //else if (boolPemegangPolis){
+                else if (indexSelected == 0){
+                    NSString *date = [formatter getDateToday:@"dd/MM/yyyy"];
+                    NSString *time = [formatter getDateToday:@"hh:mm"];
+                    NSString* alertString = [NSString stringWithFormat:@"Mohon agar menandatangani aplikasi dengan benar dan menyerahkannya sebelum tanggal (%@) dan waktu (%@ WIB). Jika tidak maka aplikasi ini akan menjadi tidak valid.\n\nTidak diperbolehkan adanya perubahan data pada aplikasi setelah Anda menyimpannya.\nApakah Anda yakin ingin menyimpan ?",date,time];
+                    [self voidCreateAlertTwoOptionViewAndShow:alertString tag:0];
+                    return;
+                }
             }
-            else if (boolPemegangPolis && boolTertanggung){
-                boolPemegangPolis = true;
-                boolTertanggung = true;
-                boolOrangTuaWali =  false;
-                boolTenagaPenjual = true;
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                    [self voidSaveSignatureToPDF:1];
-                });
-                [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
-                //update signature party2
-                NSString* dateToday=[formatter getDateToday:@"yyyy-MM-dd hh:mm:ss"];
-                NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty2=1,SPAJDateSignatureParty2='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",dateToday,[dictTransaction valueForKey:@"SPAJEappNumber"]];
-                [modelSPAJSignature updateSPAJSignature:stringUpdate];
-            }
-            else if (boolPemegangPolis){
-                NSString *date = [formatter getDateToday:@"dd/MM/yyyy"];
-                NSString *time = [formatter getDateToday:@"hh:mm"];
-                NSString* alertString = [NSString stringWithFormat:@"Mohon agar menandatangani aplikasi dengan benar dan menyerahkannya sebelum tanggal (%@) dan waktu (%@ WIB). Jika tidak maka aplikasi ini akan menjadi tidak valid.\n\nTidak diperbolehkan adanya perubahan data pada aplikasi setelah Anda menyimpannya.\nApakah Anda yakin ingin menyimpan ?",date,time];
-                [self voidCreateAlertTwoOptionViewAndShow:alertString tag:0];
-                return;
+            else{
+                //if (boolTenagaPenjual  && boolPemegangPolis && boolTertanggung){
+                if (indexSelected == 3){
+                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                        [self voidSaveSignatureToPDF:3];
+                    });
+                    [self voidCreateAlertTextFieldViewAndShow:@"Masukkan lokasi pengambilan tanda tangan" tag:0];
+                    //update signature party4
+                    NSString* dateToday=[formatter getDateToday:@"yyyy-MM-dd hh:mm:ss"];
+                    NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty4=1,SPAJDateSignatureParty4='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",dateToday,[dictTransaction valueForKey:@"SPAJEappNumber"]];
+                    [modelSPAJSignature updateSPAJSignature:stringUpdate];
+                    [self voidCheckBooleanLastState];
+                }
+                else if (indexSelected == 2){}
+                //else if (boolPemegangPolis && boolTertanggung){
+                else if (indexSelected == 1){
+                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                        [self voidSaveSignatureToPDF:1];
+                    });
+                    //update signature party2
+                    NSString* dateToday=[formatter getDateToday:@"yyyy-MM-dd hh:mm:ss"];
+                    NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty2=1,SPAJDateSignatureParty2='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",dateToday,[dictTransaction valueForKey:@"SPAJEappNumber"]];
+                    [modelSPAJSignature updateSPAJSignature:stringUpdate];
+                    [self voidCheckBooleanLastState];
+                }
+                //else if (boolPemegangPolis){
+                else if (indexSelected == 0){
+                    NSString *date = [formatter getDateToday:@"dd/MM/yyyy"];
+                    NSString *time = [formatter getDateToday:@"hh:mm"];
+                    NSString* alertString = [NSString stringWithFormat:@"Mohon agar menandatangani aplikasi dengan benar dan menyerahkannya sebelum tanggal (%@) dan waktu (%@ WIB). Jika tidak maka aplikasi ini akan menjadi tidak valid.\n\nTidak diperbolehkan adanya perubahan data pada aplikasi setelah Anda menyimpannya.\nApakah Anda yakin ingin menyimpan ?",date,time];
+                    [self voidCreateAlertTwoOptionViewAndShow:alertString tag:0];
+                    return;
+                }
             }
         }
+        [self actionClearSign:nil];
+        [tablePartiesSignature reloadData];
     }
-    [self actionClearSign:nil];
-    [tablePartiesSignature reloadData];
+    else{
+        UIAlertController *alertLockForm = [alert alertInformation:NSLocalizedString(@"ALERT_TITLE_LOCK", nil) stringMessage:NSLocalizedString(@"ALERT_MESSAGE_LOCK", nil)];
+        [self presentViewController:alertLockForm animated:YES completion:nil];
+    }
 }
 
 -(void)voidSavePOSignature{
-    if ([stringSIRelation isEqualToString:@"DIRI SENDIRI"]){
-        boolPemegangPolis = true;
-        boolTertanggung = false;
-        boolOrangTuaWali =  false;
-        boolTenagaPenjual = true;
-        
-        [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
-    }
-    else{
-        if (LAAge<21){
-            boolPemegangPolis = true;
-            boolTertanggung = false;
-            boolOrangTuaWali =  true;
-            boolTenagaPenjual = false;
-            
-            [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
-        }
-        else{
-            boolPemegangPolis = true;
-            boolTertanggung = true;
-            boolOrangTuaWali =  false;
-            boolTenagaPenjual = false;
-            
-            [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
-        }
-    }
-    //[self voidSaveSignatureToPDF:0];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     [self voidSaveSignatureToPDF:0];
         dispatch_async(dispatch_get_main_queue(), ^{
-        [self actionClearSign:nil];
-        [tablePartiesSignature reloadData];
-        [alertController dismissViewControllerAnimated:YES completion:nil];
-        NSString* dateToday=[formatter getDateToday:@"yyyy-MM-dd hh:mm:ss"];
-        NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty1=1,SPAJDateSignatureParty1='%@'  where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",dateToday,[dictTransaction valueForKey:@"SPAJEappNumber"]];
-        [modelSPAJSignature updateSPAJSignature:stringUpdate];
+            [self actionClearSign:nil];
+            [tablePartiesSignature reloadData];
+            [alertController dismissViewControllerAnimated:YES completion:nil];
+            NSString* dateToday=[formatter getDateToday:@"yyyy-MM-dd hh:mm:ss"];
+            NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty1=1,SPAJDateSignatureParty1='%@'  where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",dateToday,[dictTransaction valueForKey:@"SPAJEappNumber"]];
+            [modelSPAJSignature updateSPAJSignature:stringUpdate];
+            [self voidCheckBooleanLastState];
         });
     });
-    //update signature party1
 }
 
 -(void)voidSaveSignatureToPDF:(int)index{
@@ -548,14 +582,18 @@
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SIMenuTableViewCell" owner:self options:nil];
         cell = [nib objectAtIndex:0];
     }
-    [cell setBackgroundColor:[UIColor whiteColor]];
-    
+    if (indexPath.row<3){
+        [cell setBackgroundColor:[UIColor colorWithRed:204.0/255.0 green:203.0/255.0 blue:205.0/255.0 alpha:1.0]];
+    }
+    else{
+        [cell setBackgroundColor:[UIColor colorWithRed:204.0/255.0 green:203.0/255.0 blue:205.0/255.0 alpha:1.0]];
+    }
+    UIView *bgColorView = [[UIView alloc] init];
+    bgColorView.backgroundColor = [UIColor colorWithRed:0/255.0f green:102.0f/255.0f blue:179.0f/255.0f alpha:1];
+    [cell setSelectedBackgroundView:bgColorView];
+
     [cell.labelSubtitle setHidden:NO];
     
-    [cell.labelNumber setTextColor:[UIColor blackColor]];
-    [cell.labelDesc setTextColor:[UIColor blackColor]];
-    [cell.labelWide setTextColor:[UIColor blackColor]];
-    [cell.labelSubtitle setTextColor:[UIColor blackColor]];
     
     [cell.labelNumber setText:[mutableArrayNumberListOfSubMenu objectAtIndex:indexPath.row]];
     [cell.labelDesc setText:[mutableArrayListOfSubMenu objectAtIndex:indexPath.row]];
@@ -565,8 +603,70 @@
     [cell.button1 setEnabled:false];
     [cell.button2 setEnabled:false];
     [cell.button3 setEnabled:false];
-
+    
     if (boolPemegangPolis){
+        if ([stringSIRelation isEqualToString:@"DIRI SENDIRI"]){
+            if ((indexPath.row == 0)||(indexPath.row == 3)){
+                [cell setUserInteractionEnabled:true];
+                [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
+            }
+            else{
+                [cell setUserInteractionEnabled:false];
+            }
+        }
+        else{
+            if (LAAge<21){
+                if (boolOrangTuaWali){
+                    if ((indexPath.row == 0)||(indexPath.row == 2)||(indexPath.row == 3)){
+                        [cell setUserInteractionEnabled:true];
+                        [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
+                    }
+                    else{
+                        [cell setUserInteractionEnabled:false];
+                    }
+                }
+                else{
+                    if ((indexPath.row == 0)||(indexPath.row == 2)){
+                        [cell setUserInteractionEnabled:true];
+                        [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
+                    }
+                    else{
+                        [cell setUserInteractionEnabled:false];
+                    }
+                }
+            }
+            else{
+                if (boolTertanggung){
+                    if ((indexPath.row == 0)||(indexPath.row == 1)||(indexPath.row == 3)){
+                        [cell setUserInteractionEnabled:true];
+                        [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
+                    }
+                    else{
+                        [cell setUserInteractionEnabled:false];
+                    }
+                }
+                else{
+                    if ((indexPath.row == 0)||(indexPath.row == 1)){
+                        [cell setUserInteractionEnabled:true];
+                        [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
+                    }
+                    else{
+                        [cell setUserInteractionEnabled:false];
+                    }
+                }
+            }
+        }
+    }
+    else{
+        if (indexPath.row == 0){
+            [cell setUserInteractionEnabled:true];
+            [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
+        }
+        else{
+            
+        }
+    }
+    /*if (boolPemegangPolis){
         if (indexPath.row == 0){
             [cell setUserInteractionEnabled:true];
             [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
@@ -577,7 +677,8 @@
     }
     else{
         if (indexPath.row == 0){
-            [cell setUserInteractionEnabled:false];
+            [cell setUserInteractionEnabled:true];
+            [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
         }
         else{
             
@@ -637,7 +738,7 @@
         else{
             
         }
-    }
+    }*/
     
     return cell;
 }

@@ -1639,6 +1639,10 @@
 		438726531D0FB55F00F92A6B /* ModelCFFTransaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelCFFTransaction.m; sourceTree = "<group>"; };
 		438726551D0FE6FB00F92A6B /* ModelProspectSpouse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelProspectSpouse.h; sourceTree = "<group>"; };
 		438726561D0FE6FB00F92A6B /* ModelProspectSpouse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelProspectSpouse.m; sourceTree = "<group>"; };
+		4388122A1D5EDB23002C633E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4388122B1D5EDB97002C633E /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4388122C1D5EDB97002C633E /* id */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = id; path = id.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		4388122D1D5EDB97002C633E /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		438DB5F21D49C28F00B92FEF /* ModelSPAJTransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelSPAJTransaction.h; sourceTree = "<group>"; };
 		438DB5F31D49C28F00B92FEF /* ModelSPAJTransaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelSPAJTransaction.m; sourceTree = "<group>"; };
 		438DB5F61D49F52100B92FEF /* SIListingPopOver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIListingPopOver.h; sourceTree = "<group>"; };
@@ -5806,6 +5810,7 @@
 			knownRegions = (
 				en,
 				de,
+				id,
 			);
 			mainGroup = C4E9D1851612C64900016053;
 			productRefGroup = C4E9D1911612C64900016053 /* Products */;
@@ -6820,6 +6825,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				0F3268611D1A96EF001A9021 /* en */,
+				4388122A1D5EDB23002C633E /* de */,
+				4388122B1D5EDB97002C633E /* id */,
 			);
 			name = Localizable.strings;
 			path = SPAJ;
@@ -6829,6 +6836,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				C4E9D19E1612C64900016053 /* en */,
+				4388122D1D5EDB97002C633E /* id */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -6837,6 +6845,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				C4E9D1A71612C64900016053 /* en */,
+				4388122C1D5EDB97002C633E /* id */,
 			);
 			name = MainStoryboard.storyboard;
 			sourceTree = "<group>";
