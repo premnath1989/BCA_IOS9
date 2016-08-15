@@ -149,14 +149,14 @@
                         <action selector="actionEdit:" destination="-1" eventType="touchUpInside" id="Ixl-Zl-hMx"/>
                     </connections>
                 </button>
-                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="z40-e0-iiz" customClass="StackViewTableHorizontal">
-                    <rect key="frame" x="20" y="250" width="560" height="30"/>
+                <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="z40-e0-iiz" customClass="StackViewTableHorizontal">
+                    <rect key="frame" x="20" y="250" width="560" height="50"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lqJ-dt-d4z" customClass="ViewTableHeader">
-                            <rect key="frame" x="0.0" y="0.0" width="93" height="30"/>
+                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lqJ-dt-d4z" customClass="ViewTableHeader">
+                            <rect key="frame" x="0.0" y="0.0" width="93" height="50"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wk3-WX-QgS" customClass="LabelTableHeader">
-                                    <rect key="frame" x="26" y="5" width="42" height="21"/>
+                                    <rect key="frame" x="10" y="5" width="73" height="21"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -171,16 +171,25 @@
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
+                                <constraint firstItem="Wk3-WX-QgS" firstAttribute="centerY" secondItem="lqJ-dt-d4z" secondAttribute="centerY" id="1uE-Po-RhX"/>
                                 <constraint firstItem="Wk3-WX-QgS" firstAttribute="centerX" secondItem="lqJ-dt-d4z" secondAttribute="centerX" id="589-Np-2xC"/>
                                 <constraint firstItem="zAw-CQ-7Lw" firstAttribute="top" secondItem="lqJ-dt-d4z" secondAttribute="top" id="Ff9-lN-YJJ"/>
                                 <constraint firstAttribute="bottom" secondItem="zAw-CQ-7Lw" secondAttribute="bottom" id="JvA-Zn-xHw"/>
                                 <constraint firstItem="zAw-CQ-7Lw" firstAttribute="leading" secondItem="lqJ-dt-d4z" secondAttribute="leading" id="NQ8-wW-dTk"/>
+                                <constraint firstAttribute="trailing" secondItem="Wk3-WX-QgS" secondAttribute="trailing" constant="10" id="Tpv-QE-GPB"/>
                                 <constraint firstAttribute="trailing" secondItem="zAw-CQ-7Lw" secondAttribute="trailing" id="e7n-hf-WNF"/>
+                                <constraint firstItem="Wk3-WX-QgS" firstAttribute="leading" secondItem="lqJ-dt-d4z" secondAttribute="leading" constant="10" id="eqm-FH-282"/>
                                 <constraint firstItem="Wk3-WX-QgS" firstAttribute="centerY" secondItem="lqJ-dt-d4z" secondAttribute="centerY" id="tBC-Kw-r9Z"/>
                             </constraints>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="589-Np-2xC"/>
+                                    <exclude reference="tBC-Kw-r9Z"/>
+                                </mask>
+                            </variation>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5yT-RG-LSh" customClass="ViewTableHeader">
-                            <rect key="frame" x="93" y="0.0" width="94" height="30"/>
+                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5yT-RG-LSh" customClass="ViewTableHeader">
+                            <rect key="frame" x="93" y="0.0" width="94" height="50"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Bn-6A-Vna" customClass="LabelTableHeader">
                                     <rect key="frame" x="26" y="5" width="42" height="21"/>
@@ -206,8 +215,8 @@
                                 <constraint firstItem="Yuh-BD-rSR" firstAttribute="leading" secondItem="5yT-RG-LSh" secondAttribute="leading" id="v2Y-Bd-lFI"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LyZ-sa-vs7" customClass="ViewTableHeader">
-                            <rect key="frame" x="187" y="0.0" width="93" height="30"/>
+                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LyZ-sa-vs7" customClass="ViewTableHeader">
+                            <rect key="frame" x="187" y="0.0" width="93" height="50"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zcf-FD-zCt" customClass="LabelTableHeader">
                                     <rect key="frame" x="25" y="5" width="42" height="21"/>
@@ -230,8 +239,8 @@
                                 <constraint firstItem="zcf-FD-zCt" firstAttribute="centerY" secondItem="LyZ-sa-vs7" secondAttribute="centerY" id="x6P-UC-qpt"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZGx-VX-4Ip" customClass="ViewTableHeader">
-                            <rect key="frame" x="280" y="0.0" width="93" height="30"/>
+                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZGx-VX-4Ip" customClass="ViewTableHeader">
+                            <rect key="frame" x="280" y="0.0" width="93" height="50"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FpA-7H-Aoo" customClass="LabelTableHeader">
                                     <rect key="frame" x="26" y="5" width="42" height="21"/>
@@ -257,8 +266,8 @@
                                 <constraint firstAttribute="bottom" secondItem="OJh-GY-YvH" secondAttribute="bottom" id="qvI-ih-07H"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A68-Hl-17p" customClass="ViewTableHeader">
-                            <rect key="frame" x="373" y="0.0" width="94" height="30"/>
+                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A68-Hl-17p" customClass="ViewTableHeader">
+                            <rect key="frame" x="373" y="0.0" width="94" height="50"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j52-85-HSL" customClass="LabelTableHeader">
                                     <rect key="frame" x="26" y="5" width="42" height="21"/>
@@ -281,8 +290,8 @@
                                 <constraint firstAttribute="bottom" secondItem="tr4-Ul-LPc" secondAttribute="bottom" id="yYW-4X-EIb"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g85-Pr-gV1" customClass="ViewTableHeader">
-                            <rect key="frame" x="467" y="0.0" width="93" height="30"/>
+                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g85-Pr-gV1" customClass="ViewTableHeader">
+                            <rect key="frame" x="467" y="0.0" width="93" height="50"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4CL-bu-6GX" customClass="LabelTableHeader">
                                     <rect key="frame" x="25" y="5" width="42" height="21"/>

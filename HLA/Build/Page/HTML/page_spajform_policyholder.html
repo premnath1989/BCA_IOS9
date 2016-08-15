@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+  <!-- HEAD -->
+  <head>
+    <!-- META DATA -->
+    <meta charset='utf-8'>
+    <meta content='BCA Life - BLESS' name='application-name'>
+    <meta content='BCA Life Electronic Submission.' name='description'>
+    <meta content='BCA Life Electronic Submission.' name='keywords'>
+    <meta content='BCA Life' name='author'>
+    <meta content='Ibrahim Aziz' name='designer'>
+    <meta content='Copyright 2016 BCA Life' name='copyright'>
+    <meta content='BCA Life Electronic Submission.' name='dcterms.description'>
+    <meta content='BCA Life' name='dcterms.creator'>
+    <meta content='BCA Life' name='dcterms.rightsHolder'>
+    <meta content='All rights reserved. No part of this document may be reproduced or transmitted in any form or by any means, electronic, mechanical, photocopying, recording, or otherwise, without prior written permission from the Author, BCA Life.' name='dcterms.rights'>
+    <meta content='2016' name='dcterms.dateCopyrighted'>
+    <meta content='width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no' name='viewport'>
+    <!-- FAVICON -->
+    <!-- %link{ :rel => "shortcut icon", :href => "#{urlResource}logo_favicon.ico" } -->
+    <!-- %link{ :rel => "shortcut icon", :href => "#{urlResource}logo_favicon.ico", :type => "image/x-icon" } -->
+    <!-- %link{ :rel => "icon", :href => "#{urlResource}logo_favicon.ico", :type => "image/x-icon" } -->
+    <!-- CSS -->
+    <link href='../../Style/CSS/spajform-layout-general.css' id='csslayout' rel='stylesheet' type='text/css'>
+    <link href='../../Style/CSS/spajform-font-general.css' id='cssfont' rel='stylesheet' type='text/css'>
+    <link href='../../Style/CSS/spajform-input-general.css' id='cssinput' rel='stylesheet' type='text/css'>
+    <!-- %link{ :id => "csslink", :href => "#{urlCSS}#{urlCSSSectionPrefix}-link-general.css", :rel => "stylesheet", :type => "text/css" } -->
+    <link href='../../Style/CSS/bless-fontsize-medium.css' id='cssfontsize' rel='stylesheet' type='text/css'>
+    <link href='../../Style/CSS/spajform-fontfamily-bpreplay.css' id='cssfontfamily' rel='stylesheet' type='text/css'>
+    <link href='../../Style/CSS/spajform-theme-turqoise-svg.css' id='csstheme' rel='stylesheet' type='text/css'>
+    <!-- %link{ :id => "cssresponsive", :href => "#{urlCSS}#{urlCSSSectionPrefix}-responsive-general.css", :rel => "stylesheet", :type => "text/css" } -->
+    <!-- JAVA SCRIPT -->
+    <script src='../../Java Script/Minimized/jquery-1.11.1.min.js' type='text/javascript'></script>
+    <script src='../../Java Script/Minimized/jquery-migrate-1.2.1.min.js' type='text/javascript'></script>
+    <script src='../../Java Script/Minimized/ibrahimaziz.min.js' type='text/javascript'></script>
+    <title>BCA Life - BLESS, Health Questionnaire 1 Form</title>
+    <!-- JQUERY -->
+    <script>
+      $(document).ready(function()
+      {
+          // SETTER
+          
+          // radioButtonSetter("WeightChange", true);
+          
+          // GETTER
+          
+          // radioButtonGetter("WeightChange");
+      });
+    </script>
+  </head>
+  <!-- BODY -->
+  <body id='Main'>
+    <!-- HEADER -->
+    <header>
+      <h1>Data Calon Pemegang Polis</h1>
+    </header>
+    <!-- MAIN -->
+    <main>
+      <form>
+        <label class='Medium Single PositionerLeft' for='TextProspectiveInsuredCIN'>Nomor CIN</label>
+        <input class='Medium Single PositionerLeft' id='TextProspectiveInsuredCIN' type='text'>
+        <br>
+        <div class='ContainerFit'>
+          <label class='Medium Single Item' for='TextProspectiveInsuredFullName'>Nama Lengkap</label>
+          <input class='Full Single Item' id='TextProspectiveInsuredFullName' type='text'>
+        </div>
+        <div class='ContainerFit'>
+          <label class='Medium Single Item' for='SelectProspectiveInsuredIDType'>Jenis Identitas Diri</label>
+          <select class='Medium Single Item' id='SelectProspectiveInsuredIDType'>
+            <option value='KTP'>KTP</option>
+            <option value='SIM'>SIM</option>
+            <option value='paspor'>Paspor</option>
+            <option value='KIMSKITAS'>KIMS / KITAS</option>
+            <option value='other'>Lainnya</option>
+          </select>
+          <label class='Medium Single Item' for='TextProspectiveInsuredID'>Nomor Identitas Diri</label>
+          <input class='Medium Single Item' id='TextProspectiveInsuredID' type='text'>
+          <label class='Medium Single Item' for='DateProspectiveInsuredActive'>Masa berlaku</label>
+          <input class='Medium Single Item' id='DateProspectiveInsuredActive' type='text'>
+        </div>
+        <div class='ContainerFit'>
+          <label class='Medium Single Item' for='TextProspectiveInsuredPlace'>Tempat lahir</label>
+          <input class='Medium Single Item' id='TextProspectiveInsuredPlace' type='text'>
+          <label class='Medium Single Item' for='DateProspectiveInsuredBirthday'>Tanggal lahir</label>
+          <input class='Medium Single Item' id='ProspectiveInsuredBirthday' type='text'>
+          <label class='Medium Single Item' for='DateProspectiveInsuredAge'>Umur</label>
+          <input class='Medium Single Item' id='DateProspectiveInsuredAge' type='text'>
+        </div>
+        <div class='ContainerLeft'>
+          <label class='Medium Single Item' for='RadioButtonProspectiveInsuredNatioanlity'>Kewarganegaraan</label>
+          <div class='RadioButton Item'>
+            <input class='Medium Single' id='RadioButtonProspectiveInsuredNationalityWNI' name='RadioButtonProspectiveInsuredNationality' type='radio' value='WNI'>
+            <label class='RadioButton' for='RadioButtonProspectiveInsuredNationalityWNI'>WNI</label>
+            <div class='Separator'></div>
+            <input class='Medium Single' id='RadioButtonProspectiveInsuredNationalityWNA' name='RadioButtonProspectiveInsuredNationality' type='radio' value='WNA'>
+            <label class='RadioButton' for='RadioButtonProspectiveInsuredNationalityWNA'>WNA</label>
+          </div>
+        </div>
+        <label class='Wrap Single PositionerLeft' for='RadioButtonProspectiveInsuredAmericanYes'>Apakah anda merupakan warga negara atau wajib pajak amerika ?</label>
+        <div class='RadioButton PositionerLeft'>
+          <input class='Medium Single' id='RadioButtonProspectiveInsuredAmericanYes' name='RadioButtonProspectiveInsuredAmerican' type='radio' value='yes'>
+          <label class='RadioButton' for='RadioButtonProspectiveInsuredAmericanYes'>Ya</label>
+          <div class='Separator'></div>
+          <input class='Medium Single' id='RadioButtonProspectiveInsuredAmericanNo' name='RadioButtonProspectiveInsuredAmerican' type='radio' value='no'>
+          <label class='RadioButton' for='RadioButtonProspectiveInsuredAmericanNo'>Tidak</label>
+        </div>
+        <label class='Wrap Single PositionerLeft' for='RadioButtonProspectiveInsuredAmericanYes'>(Jika jawaban "Ya" mohon lampirkan formulir W8 / W9).</label>
+        <br>
+        <label class='Medium Single PositionerLeft' for='RadioButtonProspectiveInsuredSex'>Jenis Kelamin</label>
+        <div class='RadioButton PositionerLeft'>
+          <input class='Medium Single' id='RadioButtonProspectiveInsuredSexMale' name='RadioButtonProspectiveInsuredSex' type='radio' value='male'>
+          <label class='RadioButton' for='RadioButtonProspectiveInsuredSexMale'>Pria</label>
+          <div class='Separator'></div>
+          <input class='Medium Single' id='RadioButtonProspectiveInsuredSexFemale' name='RadioButtonProspectiveInsuredSex' type='radio' value='female'>
+          <label class='RadioButton' for='RadioButtonProspectiveInsuredSexFemale'>Wanita</label>
+        </div>
+        <br>
+        <label class='Medium Single PositionerLeft' for='RadioButtonProspectiveInsuredStatusSingle'>Status Pernikahan</label>
+        <div class='RadioButton PositionerLeft'>
+          <input class='Medium Single' id='RadioButtonProspectiveInsuredStatusSingle' name='RadioButtonProspectiveInsuredStatus' type='radio' value='single'>
+          <label class='RadioButton' for='RadioButtonProspectiveInsuredStatusSingle'>Belum Menikah</label>
+          <div class='Separator'></div>
+          <input class='Medium Single' id='RadioButtonProspectiveInsuredStatusMarried' name='RadioButtonProspectiveInsuredStates' type='radio' value='married'>
+          <label class='RadioButton' for='RadioButtonProspectiveInsuredStatusMarried'>Menikah</label>
+          <div class='Separator'></div>
+          <input class='Medium Single' id='RadioButtonProspectiveInsuredStatusDivorced' name='RadioButtonProspectiveInsuredStatus' type='radio' value='divorced'>
+          <label class='RadioButton' for='RadioButtonProspectiveInsuredStatusDivorced'>Bercerai</label>
+        </div>
+        <br>
+        <label class='Medium Single PositionerLeft' for='SelectProspectiveInsuredIDType'>Agama</label>
+        <select class='Medium Single PositionerLeft' id='SelectProspectiveInsuredIDType'>
+          <option value='islam'>Islam</option>
+          <option value='kristenprotestan'>Kristen Protestan</option>
+          <option value='kristenkatolik'>Kristen Katolik</option>
+          <option value='budha'>Budha</option>
+          <option value='hindu'>Hindu</option>
+          <option value='konghucu'>Kong Hu Cu</option>
+        </select>
+        <br>
+        <div class='ContainerFit'>
+          <label class='Medium Single Item' for='TextProspectiveInsuredCompany'>Nama Perusahaan / Instansi / Sekolah</label>
+          <input class='Full Single Item' id='TextProspectiveInsuredCompany' type='text'>
+        </div>
+        <div class='ContainerFit'>
+          <label class='Medium Single Item' for='TextProspectiveInsuredMainJob'>Pekerjaan Utama</label>
+          <input class='Full Single Item' id='TextProspectiveInsuredMainJob' type='text'>
+        </div>
+        <div class='ContainerFit'>
+          <label class='Medium Single Item' for='TextProspectiveInsuredScopeWork'>Bidang Usaha</label>
+          <input class='Full Single Item' id='TextProspectiveInsuredScopeWork' type='text'>
+        </div>
+        <div class='ContainerFit'>
+          <label class='Medium Single Item' for='TextProspectiveInsuredPosition'>Jabatan</label>
+          <input class='Full Single Item' id='TextProspectiveInsuredPosition' type='text'>
+        </div>
+        <div class='ContainerFit'>
+          <label class='Medium Single Item' for='TextProspectiveInsuredJobDescription'>Uraian Pekerjaan</label>
+          <input class='Full Single Item' id='TextProspectiveInsuredJobDescription' type='text'>
+        </div>
+        <div class='ContainerFit'>
+          <label class='Medium Single Item' for='TextProspectiveInsuredSideJob'>Pekerjaan Tambahan</label>
+          <input class='Full Single Item' id='TextProspectiveInsuredSideJob' type='text'>
+        </div>
+        <div class='ContainerFit'>
+          <label class='Medium Single Item' for='TextProspectiveInsuredHomeAddress1'>Alamat Tempat Tinggal</label>
+          <input class='Full Single Item' id='TextProspectiveInsuredHomeAddress1' type='text'>
+        </div>
+        <div class='ContainerFit'>
+          <label class='Medium Single Item' for='TextProspectiveInsuredHomeAddress2'></label>
+          <input class='Full Single Item' id='TextProspectiveInsuredHomeAddress2' type='text'>
+        </div>
+        <div class='ContainerFit'>
+          <label class='Medium Single Item' for='TextProspectiveInsuredHomeAddress3'></label>
+          <input class='Full Single Item' id='TextProspectiveInsuredHomeAddress3' type='text'>
+        </div>
+        <div class='ContainerFit'>
+          <label class='Medium Single Item' for='TextProspectiveInsuredHomeCity'></label>
+          <label class='Medium Single Item' for='TextProspectiveInsuredHomeCity'>City</label>
+          <input class='Medium Single Item' id='TextProspectiveInsuredHomeCity' type='text'>
+          <label class='Medium Single Item' for='TextProspectiveInsuredHomePostalCode'>Postal Code</label>
+          <input class='Medium Single Item' id='TextProspectiveInsuredPostalCode' type='text'>
+        </div>
+        <div class='ContainerFit'>
+          <label class='Medium Single Item' for='TextProspectiveInsuredHomeTelephone'></label>
+          <label class='MediumFix Single Item' for='TextProspectiveInsuredHomeTelephone'>Telephone</label>
+          <input class='Full Single Item' id='TextProspectiveInsuredHomeTelephone' type='text'>
+        </div>
+        <br>
+        <label class='Medium Single PositionerLeft' for='TextProspectiveInsuredHandphone'>Nomor Handphone</label>
+        <input class='Long Single PositionerLeft' id='TextProspectiveInsuredCIN' type='text'>
+        <br>
+        <label class='Medium Single PositionerLeft' for='TextProspectiveInsuredEmail'>Alamat Email</label>
+        <input class='Long Single PositionerLeft' id='TextProspectiveInsuredEmail' type='text'>
+        <br>
+        <div class='ContainerFit'>
+          <label class='Medium Single Item' for='TextProspectiveInsuredHomeAddress1'>Alamat Tempat Tinggal</label>
+          <input class='Full Single Item' id='TextProspectiveInsuredHomeAddress1' type='text'>
+        </div>
+        <div class='ContainerFit'>
+          <label class='Medium Single Item' for='TextProspectiveInsuredHomeAddress2'></label>
+          <input class='Full Single Item' id='TextProspectiveInsuredHomeAddress2' type='text'>
+        </div>
+        <div class='ContainerFit'>
+          <label class='Medium Single Item' for='TextProspectiveInsuredHomeAddress3'></label>
+          <input class='Full Single Item' id='TextProspectiveInsuredHomeAddress3' type='text'>
+        </div>
+        <div class='ContainerFit'>
+          <label class='Medium Single Item' for='TextProspectiveInsuredHomeCity'></label>
+          <label class='Medium Single Item' for='TextProspectiveInsuredHomeCity'>City</label>
+          <input class='Medium Single Item' id='TextProspectiveInsuredHomeCity' type='text'>
+          <label class='Medum Single Item' for='TextProspectiveInsuredHomePostalCode'>Postal Code</label>
+          <input class='Medium Single Item' id='TextProspectiveInsuredPostalCode' type='text'>
+        </div>
+        <div class='ContainerFit'>
+          <label class='Medium Single Item' for='TextProspectiveInsuredHomeTelephone'></label>
+          <label class='MediumFix Single Item' for='TextProspectiveInsuredHomeTelephone'>Telephone</label>
+          <input class='Medium Single Item' id='TextProspectiveInsuredHomeTelephone' type='text'>
+        </div>
+      </form>
+    </main>
+  </body>
+</html>

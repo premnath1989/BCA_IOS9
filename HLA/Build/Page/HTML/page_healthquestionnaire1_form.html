@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html>
+  <!-- HEAD -->
+  <head>
+    <!-- META DATA -->
+    <meta charset='utf-8'>
+    <meta content='BCA Life - BLESS' name='application-name'>
+    <meta content='BCA Life Electronic Submission.' name='description'>
+    <meta content='BCA Life Electronic Submission.' name='keywords'>
+    <meta content='BCA Life' name='author'>
+    <meta content='Ibrahim Aziz' name='designer'>
+    <meta content='Copyright 2016 BCA Life' name='copyright'>
+    <meta content='BCA Life Electronic Submission.' name='dcterms.description'>
+    <meta content='BCA Life' name='dcterms.creator'>
+    <meta content='BCA Life' name='dcterms.rightsHolder'>
+    <meta content='All rights reserved. No part of this document may be reproduced or transmitted in any form or by any means, electronic, mechanical, photocopying, recording, or otherwise, without prior written permission from the Author, BCA Life.' name='dcterms.rights'>
+    <meta content='2016' name='dcterms.dateCopyrighted'>
+    <meta content='width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no' name='viewport'>
+    <!-- FAVICON -->
+    <!-- %link{ :rel => "shortcut icon", :href => "#{urlResource}logo_favicon.ico" } -->
+    <!-- %link{ :rel => "shortcut icon", :href => "#{urlResource}logo_favicon.ico", :type => "image/x-icon" } -->
+    <!-- %link{ :rel => "icon", :href => "#{urlResource}logo_favicon.ico", :type => "image/x-icon" } -->
+    <!-- CSS -->
+    <link href='../../Style/CSS/healthquestionnaire-layout-general.css' id='csslayout' rel='stylesheet' type='text/css'>
+    <link href='../../Style/CSS/healthquestionnaire-font-general.css' id='cssfont' rel='stylesheet' type='text/css'>
+    <link href='../../Style/CSS/healthquestionnaire-input-general.css' id='cssinput' rel='stylesheet' type='text/css'>
+    <!-- %link{ :id => "csslink", :href => "#{urlCSS}#{urlCSSSectionPrefix}-link-general.css", :rel => "stylesheet", :type => "text/css" } -->
+    <link href='../../Style/CSS/bless-fontsize-medium.css' id='cssfontsize' rel='stylesheet' type='text/css'>
+    <link href='../../Style/CSS/healthquestionnaire-fontfamily-bpreplay.css' id='cssfontfamily' rel='stylesheet' type='text/css'>
+    <link href='../../Style/CSS/healthquestionnaire-theme-turqoise-svg.css' id='csstheme' rel='stylesheet' type='text/css'>
+    <!-- %link{ :id => "cssresponsive", :href => "#{urlCSS}#{urlCSSSectionPrefix}-responsive-general.css", :rel => "stylesheet", :type => "text/css" } -->
+    <!-- JAVA SCRIPT -->
+    <script src='../../Java Script/Minimized/jquery-1.11.1.min.js' type='text/javascript'></script>
+    <script src='../../Java Script/Minimized/jquery-migrate-1.2.1.min.js' type='text/javascript'></script>
+    <script src='../../Java Script/Minimized/ibrahimaziz.min.js' type='text/javascript'></script>
+    <title>BCA Life - BLESS, Health Questionnaire 1 Form</title>
+    <!-- JQUERY -->
+    <script>
+      $(document).ready(function()
+      {
+          // SETTER
+          
+          radioButtonSetter("WeightChange", true);
+          
+          // GETTER
+          
+          
+          
+          // GENERATOR
+          
+          additionalQuestionGenerator("WeightChange");
+          additionalQuestionGenerator("Smoker");
+          additionalQuestionGenerator("Junkie");
+          additionalQuestionGenerator("ExtremeSport");
+          additionalQuestionGenerator("Abroad");
+          additionalQuestionGenerator("HealthDissorder");
+          additionalQuestionGenerator("Vision");
+          additionalQuestionGenerator("ENT");
+          additionalQuestionGenerator("Respiratory");
+          additionalQuestionGenerator("Cardiac");
+          additionalQuestionGenerator("Digest");
+          additionalQuestionGenerator("Nerve");
+          additionalQuestionGenerator("Liver");
+          additionalQuestionGenerator("Reproduction");
+          additionalQuestionGenerator("Motion");
+          additionalQuestionGenerator("Blood");
+          additionalQuestionGenerator("Immune");
+          additionalQuestionGenerator("Cancer");
+          additionalQuestionGenerator("OtherIllness");
+          additionalQuestionGenerator("SPAJProposal");
+          additionalQuestionGenerator("Claim");
+          additionalQuestionGenerator("Diagnostic");
+          additionalQuestionGenerator("Pregnant");
+          additionalQuestionGenerator("Pregnancy");
+          additionalQuestionGenerator("PregnancyIllness");
+          additionalQuestionGenerator("FemaleAbnormality");
+          additionalQuestionGenerator("PapSmear");
+          additionalQuestionGenerator("HeartDissorder");
+          
+          // BUTTON
+      
+          buttonAdditionalQuestionGenerator("#PopUpAdditionalQuestion", "#TextAdditionalQuestion")
+          
+          $("#ButtonXML").click(function()
+          {
+              textGetter("#Height");
+              textGetter("#Weight");
+              radioButtonGetter("WeightChange");
+              radioButtonGetter("Smoker");
+              
+              validationMessage("Harap lengkapi form terlebih dahulu !.", "Form sukses diinput !.");
+          });
+      });
+    </script>
+  </head>
+  <!-- BODY -->
+  <body id='Main'>
+    <!-- HEADER -->
+    <header>
+      <h1>Data Kesehatan</h1>
+      <input class='ButtonPrimary PositionerRight' id='ButtonXML' type='button' value='Done'>
+      <div class='Highlighted'>
+        <label class='Medium Single'>Calon</label>
+        <div class='RadioButton' style='margin-left: 80px'>
+          <input id='ProspectiveInsured' name='UserType' type='radio'>
+          <label class='RadioButton' for='ProspectiveInsured'>Tertanggung</label>
+          <div class='Separator'></div>
+          <input id='PolicyHolder' name='UserType' type='radio'>
+          <label class='RadioButton' for='PolicyHolder'>Pemegang Polis</label>
+        </div>
+      </div>
+      <h2>Pertanyaan Kesehatan</h2>
+    </header>
+    <!-- MAIN -->
+    <main>
+      <form id='HealthQuestionnaireMain'>
+        <ol>
+          <li>
+            <ol>
+              <li>
+                <div class='Container'>
+                  <label class='Item' for='Height'>Tinggi Badan</label>
+                  <div class='Item'>
+                    <input class='Short Single' id='Height' type='text'>
+                    <label class='Suffix Single' for='Height'>Cm</label>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class='Container'>
+                  <label class='Item' for='Weight'>Berat Badan</label>
+                  <div class='Item'>
+                    <input class='Short Single' id='Weight' type='text'>
+                    <label class='Suffix Single' for='Weight'>Kg</label>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class='Container'>
+                  <label class='Item' for='WeightChangeYes' id='LabelWeightChange'>Adakah berat badan Anda mengalami penurunan atau kenaikan drastis (> 10% dalam 1 (satu) bulan) dalam 6 (enam) bulan terakhir?</label>
+                  <div class='RadioButton Item'>
+                    <input id='WeightChangeYes' name='WeightChange' type='radio' value='true'>
+                    <label class='RadioButton' for='WeightChangeYes'>Ya</label>
+                    <div class='Separator'></div>
+                    <input id='WeightChangeNo' name='WeightChange' type='radio' value='false'>
+                    <label class='RadioButton' for='WeightChangeNo'>Tidak</label>
+                  </div>
+                </div>
+              </li>
+            </ol>
+          </li>
+          <hr>
+          <li>
+            <div class='Container'>
+              <label class='Item' for='SmokerYes' id='LabelSmoker'>
+                Apakah Anda merokok dalam 12 (dua belas) bulan terakhir (termasuk rokok elektronik atau produk tembakau lainnya)?
+              </label>
+              <div class='RadioButton Item'>
+                <input id='SmokerYes' name='Smoker' type='radio' value='true'>
+                <label class='RadioButton' for='SmokerYes'>Ya</label>
+                <div class='Separator'></div>
+                <input id='SmokerNo' name='Smoker' type='radio' value='false'>
+                <label class='RadioButton' for='SmokerNo'>Tidak</label>
+              </div>
+            </div>
+          </li>
+          <hr>
+          <li>
+            <div class='Container'>
+              <label class='Item' for='JunkieYes' id='LabelJunkie'>
+                Apakah Anda memiliki kebiasaan atau pernah menggunakan narkotika, zat adiktif atau obat-obatan lainnya, minum alkohol secara berlebihan? Jika “Ya”, jelaskan jumlah serta frekuensi mengkonsumsinya. Serta jelaskan jika ada riwayat perawatan/mendapat terapi karena hal tersebut?
+              </label>
+              <div class='RadioButton Item'>
+                <input id='JunkieYes' name='Junkie' type='radio' value='true'>
+                <label class='RadioButton' for='JunkieYes'>Ya</label>
+                <div class='Separator'></div>
+                <input id='JunkieNo' name='Junkie' type='radio' value='false'>
+                <label class='RadioButton' for='JunkieNo'>Tidak</label>
+              </div>
+            </div>
+          </li>
+          <hr>
+          <li>
+            <div class='Container'>
+              <label class='Item' for='ExtremeSportYes' id='LabelExtremeSport'>
+                Apakah Anda memiliki hobi atau sewaktu-waktu melakukan kegiatan yang beresiko tinggi/bahaya atau masih aktif dalam pekerjaan beresiko tinggi (menyelam, panjat tebing, mendaki gunung, terjun payung, paralayang, balap motor/mobil, pertambangan, minyak dan gas bumi, Kelautan, TNI/Polri, penerbangan (selain dari penumpang resmi penerbangan terjadwal))? (Jika jawaban “Ya” mohon melengkapi kuesioner yang sesuai hobi/kegiatan/pekerjaan tersebut dan dilampirkan bersama SPAJ ini).
+              </label>
+              <div class='RadioButton Item'>
+                <input id='ExtremeSportYes' name='ExtremeSport' type='radio' value='true'>
+                <label class='RadioButton' for='ExtremeSportYes'>Ya</label>
+                <div class='Separator'></div>
+                <input id='ExtremeSportNo' name='ExtremeSport' type='radio' value='false'>
+                <label class='RadioButton' for='ExtremeSportNo'>Tidak</label>
+              </div>
+            </div>
+          </li>
+          <hr>
+          <li>
+            <div class='Container'>
+              <label class='Item' for='AbroadYes' id='LabelAbroad'>
+                Apakah Anda dalam 12 bulan terakhir ini/mendatang Anda pernah/memiliki rencana bepergian/tinggal di luar negeri? Jika “Ya”, jelaskan kapan waktu bepergiannya, negara tujuan, lama tinggal, serta kepentingannya.
+              </label>
+              <div class='RadioButton Item'>
+                <input id='AbroadYes' name='Abroad' type='radio' value='true'>
+                <label class='RadioButton' for='AbroadYes'>Ya</label>
+                <div class='Separator'></div>
+                <input id='AbroadNo' name='Abroad' type='radio' value='false'>
+                <label class='RadioButton' for='AbroadNo'>Tidak</label>
+              </div>
+            </div>
+          </li>
+          <hr>
+          <li>
+            <div class='Container'>
+              <label class='Item' for='HealthDissorderYes' id='LabelHealthDissorder'>
+                Apakah Anda pernah/sedang menderita penyakit atau menjalani pemeriksaan/perawatan, pengobatan, operasi untuk penyakit/kelainan dibawah ini:
+              </label>
+              <div class='RadioButton Item'>
+                <input id='HealthDissorderYes' name='HealthDissorder' type='radio' value='true'>
+                <label class='RadioButton' for='HealthDissorderYes'>Ya</label>
+                <div class='Separator'></div>
+                <input id='HealthDissorderNo' name='HealthDissorder' type='radio' value='false'>
+                <label class='RadioButton' for='HealthDissorderNo'>Tidak</label>
+              </div>
+            </div>
+            <ol>
+              <li>
+                <div class='Container'>
+                  <label class='Item' for='VisionYes'>
+                    Gangguan fungsi/sistem penglihatan dan gangguan pada mata lainnya?
+                  </label>
+                  <div class='RadioButton Item' id='LabelVision'>
+                    <input id='VisionYes' name='Vision' type='radio' value='true'>
+                    <label class='RadioButton' for='VisionYes'>Ya</label>
+                    <div class='Separator'></div>
+                    <input id='VisionNo' name='Vision' type='radio' value='false'>
+                    <label class='RadioButton' for='VisionNo'>Tidak</label>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class='Container'>
+                  <label class='Item' for='ENTYes' id='LabelENT'>
+                    Gangguan fungsi/sistem pada Telinga, Hidung, Tenggorokan (THT)?
+                  </label>
+                  <div class='RadioButton Item'>
+                    <input id='ENTYes' name='ENT' type='radio' value='true'>
+                    <label class='RadioButton' for='ENTYes'>Ya</label>
+                    <div class='Separator'></div>
+                    <input id='ENTNo' name='ENT' type='radio' value='false'>
+                    <label class='RadioButton' for='ENTNo'>Tidak</label>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class='Container'>
+                  <label class='Item' for='RespiratoryYes' id='LabelRespiratory'>
+                    Gangguan fungsi/sistem Pernapasan, Paru-paru, Asma, Bronkitis, Tuberkulosis, Batuk Darah dan lainnya?
+                  </label>
+                  <div class='RadioButton Item'>
+                    <input id='RespiratoryYes' name='Respiratory' type='radio' value='true'>
+                    <label class='RadioButton' for='RespiratoryYes'>Ya</label>
+                    <div class='Separator'></div>
+                    <input id='RespiratoryNo' name='Respiratory' type='radio' value='false'>
+                    <label class='RadioButton' for='RespiratoryNo'>Tidak</label>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class='Container'>
+                  <label class='Item' for='CardiacYes' id='LabelCardiac'>
+                    Gangguan fungsi/sistem Jantung dan Pembuluh Darah, Nyeri Dada, Serangan Jantung, Demam, Jantung, Rematik, Tekanan Darah Tinggi (Hipertensi)/Rendah, (Hipotensi), Hiperkolesterol, Penyempitan/Penyumbatan Pembuluh Darah Otak dan lainnya?
+                  </label>
+                  <div class='RadioButton Item'>
+                    <input id='CardiacYes' name='Cardiac' type='radio' value='true'>
+                    <label class='RadioButton' for='CardiacYes'>Ya</label>
+                    <div class='Separator'></div>
+                    <input id='CardiacNo' name='Caridac' type='radio' value='false'>
+                    <label class='RadioButton' for='CardiacNo'>Tidak</label>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class='Container'>
+                  <label class='Item' for='DigestYes' id='LabelDigest'>
+                    Gangguan fungsi/sistem Pencernaan & Organ dalam Perut/Lambung, Maag, Hernia, Hepatitis dan lainnya?
+                  </label>
+                  <div class='RadioButton Item'>
+                    <input id='DigestYes' name='Digest' type='radio' value='true'>
+                    <label class='RadioButton' for='DigestYes'>Ya</label>
+                    <div class='Separator'></div>
+                    <input id='DigestNo' name='Digest' type='radio' value='false'>
+                    <label class='RadioButton' for='DigestNo'>Tidak</label>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class='Container'>
+                  <label class='Item' for='NerveYes' id='LabelNerve'>
+                    Gangguan fungsi/sistem Saraf dan Otot, Vertigo, Stroke, Sering Pusing atau Pingsan, Epilepsi (kejang), Kelumpuhan, Kesemutan, Baal, Gangguan Kejiwaan dan lainnya?
+                  </label>
+                  <div class='RadioButton Item'>
+                    <input id='NerveYes' name='Nerve' type='radio' value='true'>
+                    <label class='RadioButton' for='NerveYes'>Ya</label>
+                    <div class='Separator'></div>
+                    <input id='NerveNo' name='Nerve' type='radio' value='false'>
+                    <label class='RadioButton' for='NerveNo'>Tidak</label>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class='Container'>
+                  <label class='Item' for='LiverYes' id='LabelLiver'>
+                    Gangguan fungsi/sistem Hati dan Pankreas, Kencing Manis (Diabetes Melitus), Batu Empedu, Tumor Hati, penyakit Limpa dan lainnya?
+                  </label>
+                  <div class='RadioButton Item'>
+                    <input id='LiverYes' name='Liver' type='radio' value='true'>
+                    <label class='RadioButton' for='LiverYes'>Ya</label>
+                    <div class='Separator'></div>
+                    <input id='LiverNo' name='Liver' type='radio' value='false'>
+                    <label class='RadioButton' for='LiverNo'>Tidak</label>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class='Container'>
+                  <label class='Item' for='ReproductionYes' id='LabelReproduction'>
+                    Gangguan fungsi/sistem Kemih, Batu Ginjal, Gangguan Prostat, Gagal Ginjal, Organ Kelamin dan penyakit akibat hubungan seksual?
+                  </label>
+                  <div class='RadioButton Item'>
+                    <input id='ReproductionYes' name='Reproduction' type='radio' value='true'>
+                    <label class='RadioButton' for='ReproductionYes'>Ya</label>
+                    <div class='Separator'></div>
+                    <input id='ReproductionNo' name='Reproduction' type='radio' value='false'>
+                    <label class='RadioButton' for='ReproductionNo'>Tidak</label>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class='Container'>
+                  <label class='Item' for='MotionYes' id='LabelMotion'>
+                    Gangguan fungsi/sistem Tulang, Otot, Sendi, Kulit?
+                  </label>
+                  <div class='RadioButton Item'>
+                    <input id='MotionYes' name='Motion' type='radio' value='true'>
+                    <label class='RadioButton' for='MotionYes'>Ya</label>
+                    <div class='Separator'></div>
+                    <input id='MotionNo' name='Motion' type='radio' value='false'>
+                    <label class='RadioButton' for='MotionNo'>Tidak</label>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class='Container'>
+                  <label class='Item' for='BloodYes' id='LabelBlood'>
+                    Gangguan fungsi/sistem Kelenjar dan Darah, Kelenjar Gondok, Kelenjar Getah Bening, Gangguan Hormon, Hemofilia, Anemia, Thalassemia, Leukemia?
+                  </label>
+                  <div class='RadioButton Item'>
+                    <input id='BloodYes' name='Blood' type='radio' value='true'>
+                    <label class='RadioButton' for='BloodYes'>Ya</label>
+                    <div class='Separator'></div>
+                    <input id='BloodNo' name='Blood' type='radio' value='false'>
+                    <label class='RadioButton' for='BloodNo'>Tidak</label>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class='Container'>
+                  <label class='Item' for='ImmuneYes' id='LabelImmune'>
+                    Gangguan fungsi/sistem Kekebalan Tubuh,HIV/AIDS atau segala gejala yang berhubungan dengan AIDS (demam, diare kronis, penurunan berat badan yang tidak diketahui penyebabnya), Malaria, Lupus dan lainnya?
+                  </label>
+                  <div class='RadioButton Item'>
+                    <input id='ImmuneYes' name='Immune' type='radio' value='true'>
+                    <label class='RadioButton' for='ImmuneYes'>Ya</label>
+                    <div class='Separator'></div>
+                    <input id='ImmuneNo' name='Immune' type='radio' value='false'>
+                    <label class='RadioButton' for='ImmuneNo'>Tidak</label>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class='Container'>
+                  <label class='Item' for='CancerYes' id='LabelCancer'>
+                    Gangguan fungsi Pertumbuhan Sel, Tumor, Kista, Kanker, Benjolan pada permukaan kulit atau pertumbuhan abnormal lainnya?
+                  </label>
+                  <div class='RadioButton Item'>
+                    <input id='CancerYes' name='Cancer' type='radio' value='true'>
+                    <label class='RadioButton' for='CancerYes'>Ya</label>
+                    <div class='Separator'></div>
+                    <input id='CancerNo' name='Cancer' type='radio' value='false'>
+                    <label class='RadioButton' for='CancerNo'>Tidak</label>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class='Container'>
+                  <label class='Item' for='OtherIllnessYes' id='LabelOtherIllness'>
+                    Gangguan Kesehatan lainnya yang tidak/belum dinyatakan diatas termasuk namun tidak terbatas pada kelainan bentuk tubuh, kelainan/cacat fisik, kelainan/cacat bawaan dan lainnya?
+                  </label>
+                  <div class='RadioButton Item'>
+                    <input id='OtherIllnessYes' name='OtherIllness' type='radio' value='true'>
+                    <label class='RadioButton' for='OtherIllnessYes'>Ya</label>
+                    <div class='Separator'></div>
+                    <input id='OtherIllnessNo' name='OtherIllness' type='radio' value='false'>
+                    <label class='RadioButton' for='OtherIllnessNo'>Tidak</label>
+                  </div>
+                </div>
+              </li>
+            </ol>
+          </li>
+          <hr>
+          <li>
+            <div class='Container'>
+              <label class='Item' for='SPAJProposalYes' id='LabelSPAJProposal'>
+                Apakah Anda telah memiliki atau sedang mengajukan pertanggungan Asuransi Jiwa, kecelakaan, kesehatan, pemulihan polis? Serta apakah pengajuan Anda pernah ditolak/ ditangguhkan/dikenakan ekstra Premi diubah dalam bentuk apapun oleh perusahaan Asuransi Jiwa?
+              </label>
+              <div class='RadioButton Item'>
+                <input id='SPAJProposalYes' name='SPAJProposal' type='radio' value='true'>
+                <label class='RadioButton' for='SPAJProposalYes'>Ya</label>
+                <div class='Separator'></div>
+                <input id='SPAJProposalNo' name='SPAJProposal' type='radio'>
+                <label class='RadioButton' for='SPAJProposalNo'>Tidak</label>
+              </div>
+            </div>
+          </li>
+          <hr>
+          <li>
+            <div class='Container'>
+              <label class='Item' for='ClaimYes' id='LabelClaim'>
+                Apakah Anda pernah mengajukan klaim ke perusahaan Asuransi Jiwa? Jika “Ya, mohon jelaskan alasannya.
+              </label>
+              <div class='RadioButton Item'>
+                <input id='ClaimYes' name='Claim' type='radio' value='true'>
+                <label class='RadioButton' for='ClaimYes'>Ya</label>
+                <div class='Separator'></div>
+                <input id='ClaimNo' name='Claim' type='radio' value='false'>
+                <label class='RadioButton' for='ClaimNo'>Tidak</label>
+              </div>
+            </div>
+          </li>
+          <hr>
+          <li>
+            <div class='Container'>
+              <label class='Item' for='DiagnosticYes' id='LabelDiagnostic'>
+                Apakah Anda pernah mendapatkan atau bermaksud menjalani pemeriksaan kesehatan diagnostik, seperti Sinar-X, USG, CT-scan, MRI, EKG, Treadmill, pemeriksaan darah, pemeriksaan urin, dan lain-lain?
+              </label>
+              <div class='RadioButton Item'>
+                <input id='DiagnosticYes' name='Diagnostic' type='radio' value='true'>
+                <label class='RadioButton' for='DiagnosticYes'>Ya</label>
+                <div class='Separator'></div>
+                <input id='DiagnosticNo' name='Diagnostic' type='radio'>
+                <label class='RadioButton' for='DiagnosticNo' value='false'>Tidak</label>
+              </div>
+            </div>
+          </li>
+          <hr>
+          <li>
+            <label class='PositionerLeft' for='PregnancyYes'>Khusus Calon Tertanggung anak-anak (usia ≤ 5 (lima) tahun):</label>
+            <br>
+            <label class='PositionerLeft' for='PregnancyYes'>Waktu lahir</label>
+            <div class='RadioButton PositionerLeft'>
+              <input id='PregnancyNormal' name='Pregnancy' type='radio' value='true'>
+              <label class='RadioButton' for='PregnancyNormal'>Cukup Bulan</label>
+              <div class='Separator'></div>
+              <input id='PregnancyPrematur' name='Pregnancy' type='radio' value='false'>
+              <label class='RadioButton' for='PregnancyPrematur'>Prematur</label>
+            </div>
+            <br>
+            <label class='PositionerLeft' for='BabyHeight'>Panjang dan berat saat lahir</label>
+            <br>
+            <br>
+            <input class='Short PositionerLeft' id='BabyHeight' style='margin-right: 10px;' type='text'>
+            <label class='PositionerLeft' for='BabyHeight'>Cm</label>
+            <input class='Short PositionerLeft' id='BabyWeight' style='margin-left: 10px; margin-right: 10px;' type='text'>
+            <label class='PositionerLeft' for='BabyWeight'>Kg</label>
+          </li>
+          <hr>
+          <li>
+            <label class='Item' for='HealthDissorderYes'>
+              Pertanyaan khusus untuk wanita:
+            </label>
+            <ol>
+              <li>
+                <div class='Container'>
+                  <label class='Item' for='Pregnant' id='LabelPregnant'>
+                    Apakah Anda sedang hamil?
+                  </label>
+                  <div class='RadioButton Item'>
+                    <input id='PregnantStateYes' name='Pregnant' type='radio' value='true'>
+                    <label class='RadioButton' for='PregnantStateYes'>Ya</label>
+                    <div class='Separator'></div>
+                    <input id='PregnantStateNo' name='PregnantS' type='radio' value='false'>
+                    <label class='RadioButton' for='PregnantStateNo'>Tidak</label>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class='Container'>
+                  <label class='Item' for='PregnancyIllnessYes' id='LabelPregnancyIllness'>
+                    Adakah komplikasi pada kehamilan termasuk persalinan secara sectio caesaria yang dilakukan karena menderita suatu penyakit (Darah Tinggi, Hepatitis, Diabetes dan lain-lain)?
+                  </label>
+                  <div class='RadioButton Item'>
+                    <input id='PregnancyIllnessYes' name='PregnancyIllness' type='radio' value='true'>
+                    <label class='RadioButton' for='PregnantIllnessYes'>Ya</label>
+                    <div class='Separator'></div>
+                    <input id='PregnancyIllnessNo' name='PregnancyIllness' type='radio' value='false'>
+                    <label class='RadioButton' for='PregnantIllnessNo'>Tidak</label>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class='Container'>
+                  <label class='Item' for='FemaleAbnormalityYes' id='LabelFemaleAbnormality'>
+                    Apakah Anda mempunyai kelainan payudara/organ kewanitaan lainnya termasuk haid yang tidak teratur? Jika “Ya” jelaskan nama kelainan atau komplikasi dan nama dokter yang merawat pada kolom (Siapa, Apa, Kapan, Dimana, Pengobatan yang dilakukan, Bagaimana).
+                  </label>
+                  <div class='RadioButton Item'>
+                    <input id='FemaleAbnormalityYes' name='FemaleAbnormality' type='radio' value='true'>
+                    <label class='RadioButton' for='HealthDissorderYes'>Ya</label>
+                    <div class='Separator'></div>
+                    <input id='FemaleAbnormalityNo' name='FemaleAbnormality' type='radio' value='false'>
+                    <label class='RadioButton' for='FemaleAbnormalityNo'>Tidak</label>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class='Container'>
+                  <label class='Item' for='PapSmearYes' id='LabelPapSmear'>
+                    Apakah Anda pernah melakukan pemeriksaan Pap Smear dalam 1 (satu) tahun terakhir? Jika “Ya” jelaskan bagaimana hasilnya dan kapan dilakukan pemeriksaan tersebut?
+                  </label>
+                  <div class='RadioButton Item'>
+                    <input id='PapSmearYes' name='PapSmear' type='radio' value='true'>
+                    <label class='RadioButton' for='PapSmearYes'>Ya</label>
+                    <div class='Separator'></div>
+                    <input id='PapSmearNo' name='PapSmear' type='radio' value='false'>
+                    <label class='RadioButton' for='PapSmearNo'>Tidak</label>
+                  </div>
+                </div>
+              </li>
+            </ol>
+          </li>
+          <hr>
+          <li>
+            <div class='Container'>
+              <label class='Item' for='HeartDissorderYes' id='LabelHeartDissorder'>
+                Apakah ada anggota keluarga Anda (orang tua, anak, saudara kandung) yang menderita/dinyatakan terdiagnosa mengidap kelainan Jantung Koroner, Stroke, Kencing Manis (Diabetes Melitus), Kanker atau penyakit keturunan lainnya? (Jika “Ya” mohon agar dijelaskan pada kolom dibawah ini)
+              </label>
+              <div class='RadioButton Item'>
+                <input id='HealthDissorderYes' name='HeartDissorder' type='radio' value='true'>
+                <label class='RadioButton' for='HeartDissorderYes'>Ya</label>
+                <div class='Separator'></div>
+                <input id='HealthDissorderNo' name='HeartDissorder' type='radio' value='false'>
+                <label class='RadioButton' for='HeartDissorderNo'>Tidak</label>
+              </div>
+            </div>
+          </li>
+          <hr>
+        </ol>
+      </form>
+      <section id='PopUpAdditionalQuestion'>
+        <form id='FormAdditionalQuestion'>
+          <header>
+            <input class='ButtonPrimary PositionerLeft' id='ButtonAdditionalQuestionCancel' type='button' value='Cancel'>
+            <input class='ButtonPrimary PositionerRight' id='ButtonAdditionalQuestionDone' type='button' value='Done'>
+            <h2>Pertanyaan Kesehatan</h2>
+          </header>
+          <fieldset>
+            <label class='Wrap' for='TextAdditionalQuestion' id='LabelAdditionalQuestion'></label>
+            <label class='Wrap' for='TextAdditionalQuestion' id='LabelAdditionalNote'>silahkan memberikan rincian lebih lanjut</label>
+            <input class='Full Multi' id='TextAdditionalQuestion' type='text'>
+          </fieldset>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>

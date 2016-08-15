@@ -107,7 +107,7 @@
     
     NSString *kLatestKivaLoansURL = [NSString stringWithFormat:@"%@/Service2.svc/getAllData", [(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL]];
     
-    NSString *SPAJkLatestKivaLoansURL = [NSString stringWithFormat:@"%@/Service2.svc/SPAJHTMLForm.svc/GetAllData", [(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL]];
+    NSString *SPAJkLatestKivaLoansURL = [NSString stringWithFormat:@"%@/SPAJHTMLForm.svc/GetAllData", [(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL]];
     
     // handle response
     NSLog(@"getCFFHTMLFile");
