@@ -208,9 +208,9 @@
         NSString* stringLastUpdate = [formatter convertDateFrom:@"yyyy-MM-dd HH:mm:ss" TargetDateFormat:@"dd/MM/yyyy (HH:mm)" DateValue:[dictTransaction valueForKey:@"SPAJDateModified"]];
         NSString* stringExpirationDate = [formatter convertDateFrom:@"yyyy-MM-dd HH:mm:ss" TargetDateFormat:@"dd/MM/yyyy (HH:mm)" DateValue:[dictTransaction valueForKey:@"SPAJDateExpired"]];
         
-        [_labelPropertyExpiredDate setText:[CHARACTER_DOUBLEDOT stringByAppendingString:stringExpirationDate]];
-        [_labelPropertyLastUpdate setText:[CHARACTER_DOUBLEDOT stringByAppendingString:stringLastUpdate]];
-        [_labelPropertyTimeRemining setText:[CHARACTER_DOUBLEDOT stringByAppendingString:[formatter calculateTimeRemaining:[dictTransaction valueForKey:@"SPAJDateExpired"]]]];
+        [_labelPropertyExpiredDate setText:[CHARACTER_DOUBLEDOT stringByAppendingString:stringExpirationDate?:@""]];
+        [_labelPropertyLastUpdate setText:[CHARACTER_DOUBLEDOT stringByAppendingString:stringLastUpdate?:@""]];
+        [_labelPropertyTimeRemining setText:[CHARACTER_DOUBLEDOT stringByAppendingString:[formatter calculateTimeRemaining:[dictTransaction valueForKey:@"SPAJDateExpired"]]?:@""]];
     }
 
     // VOID
