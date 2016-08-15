@@ -327,7 +327,16 @@
                 NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PP"];
                 [spajPembayaranPremi setHtmlFileName:stringHTMLName];
                 //[self loadSPAJPembayaranPremi];
-                [spajCalonPemegangPolis loadSixthHTML:stringHTMLName PageSection:@"PP"];
+                [spajCalonPemegangPolis loadFivethHTML:stringHTMLName PageSection:@"PP"];
+                //[rightButton setAction:@selector(voidDoneSPAJPembayaranPremi:)];
+                [rightButton setAction:@selector(voidDoneSPAJCalonPemegangPolis:)];
+                break;
+            }
+            case 5:
+            {
+                NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"KS"];
+                //[self loadSPAJPembayaranPremi];
+                [spajCalonPemegangPolis loadSixthHTML:stringHTMLName PageSection:@"KS"];
                 //[rightButton setAction:@selector(voidDoneSPAJPembayaranPremi:)];
                 [rightButton setAction:@selector(voidDoneSPAJCalonPemegangPolis:)];
                 break;

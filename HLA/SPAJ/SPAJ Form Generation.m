@@ -181,7 +181,12 @@
                 //NSLog(@"datat %@",[NSString stringWithFormat:@"%@/%@_%@.pdf",documentsDirectory,[_dictionaryPOForInsert valueForKey:@"PO_Name"],[_dictionaryPOForInsert valueForKey:@"SINO"]]);
                 NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJFormGeneration1=1 where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",[dictTransaction valueForKey:@"SPAJEappNumber"]];
                 [modelSPAJFormGeneration updateSPAJFormGeneration:stringUpdate];
-
+                
+                
+                UIAlertController *alertLockForm = [alert alertInformation:@"Berhasil" stringMessage:@"File SPAJ.pdf berhasil dibuat"];
+                [self presentViewController:alertLockForm animated:YES completion:nil];
+                
+                [self voidCheckBooleanLastState];
             }
             else
             {
