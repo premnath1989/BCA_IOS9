@@ -31,4 +31,7 @@
 
 -(NSString *)generateSPAJFileDirectory:(NSString *)stringEappDirectory;
 - (NSString *)findExtensionOfFileInUrl:(NSURL *)url;
+-(NSString *)getDateTodayByAddingDays:(NSString *)dateFormat DaysAdded:(int)intDaysAdded;
+
+-(NSString *)calculateTimeRemaining:(NSString *)stringExpiredDate;
 @end

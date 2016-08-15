@@ -22,6 +22,7 @@
     NSString *SPAJNumber;
     NSString *SPAJDateCreated;
     NSString *SPAJDateModified;
+    NSString *SPAJDateExpired;
     NSString *SPAJStatus;
     NSString *SPAJCompleteness;
     NSString *SPAJSINO;
@@ -48,6 +49,7 @@
         ProspectIDNumber = [s stringForColumn:@"OtherIDTypeNo"]?:@"";
         SPAJDateCreated = [s stringForColumn:@"SPAJDateCreated"]?:@"";
         SPAJDateModified = [s stringForColumn:@"SPAJDateModified"]?:@"";
+        SPAJDateExpired = [s stringForColumn:@"SPAJDateExpired"]?:@"";
         SPAJStatus = [s stringForColumn:@"SPAJStatus"]?:@"";
         SPAJCompleteness = [s stringForColumn:@"SPAJCompleteness"]?:@"";
         SPAJEAppNumber = [s stringForColumn:@"SPAJEappNumber"]?:@"";
@@ -62,6 +64,7 @@
               ProspectIDNumber,@"OtherIDTypeNo",
               SPAJDateCreated,@"SPAJDateCreated",
               SPAJDateModified,@"SPAJDateModified",
+              SPAJDateExpired,@"SPAJDateExpired",
               SPAJStatus,@"SPAJStatus",
               SPAJCompleteness,@"SPAJCompleteness",
               ProspectIDDesc,@"IdentityDesc",
@@ -89,6 +92,7 @@
     NSString *SPAJProduct;
     NSString *SPAJDateCreated;
     NSString *SPAJDateModified;
+    NSString *SPAJDateExpired;
     NSString *SPAJStatus;
     NSString *SPAJCompleteness;
     NSString *SPAJSINO;
@@ -116,6 +120,7 @@
         ProspectIDNumber = [s stringForColumn:@"OtherIDTypeNo"]?:@"";
         SPAJDateCreated = [s stringForColumn:@"SPAJDateCreated"]?:@"";
         SPAJDateModified = [s stringForColumn:@"SPAJDateModified"]?:@"";
+        SPAJDateExpired = [s stringForColumn:@"SPAJDateExpired"]?:@"";
         SPAJStatus = [s stringForColumn:@"SPAJStatus"]?:@"";
         SPAJCompleteness = [s stringForColumn:@"SPAJCompleteness"]?:@"";
         SPAJEAppNumber = [s stringForColumn:@"SPAJEappNumber"]?:@"";
@@ -132,6 +137,7 @@
               ProspectIDNumber,@"OtherIDTypeNo",
               SPAJDateCreated,@"SPAJDateCreated",
               SPAJDateModified,@"SPAJDateModified",
+              SPAJDateExpired,@"SPAJDateExpired",
               SPAJStatus,@"SPAJStatus",
               SPAJCompleteness,@"SPAJCompleteness",
               ProspectIDDesc,@"IdentityDesc",
@@ -161,6 +167,7 @@
     NSString *SPAJProduct;
     NSString *SPAJDateCreated;
     NSString *SPAJDateModified;
+    NSString *SPAJDateExpired;
     NSString *SPAJStatus;
     NSString *SPAJCompleteness;
     NSString *SPAJSINO;
@@ -194,6 +201,7 @@
         ProspectIDNumber = [s stringForColumn:@"OtherIDTypeNo"]?:@"";
         SPAJDateCreated = [s stringForColumn:@"SPAJDateCreated"]?:@"";
         SPAJDateModified = [s stringForColumn:@"SPAJDateModified"]?:@"";
+        SPAJDateExpired = [s stringForColumn:@"SPAJDateExpired"]?:@"";
         SPAJStatus = [s stringForColumn:@"SPAJStatus"]?:@"";
         SPAJCompleteness = [s stringForColumn:@"SPAJCompleteness"]?:@"";
         SPAJEAppNumber = [s stringForColumn:@"SPAJEappNumber"]?:@"";
@@ -210,6 +218,7 @@
               ProspectIDNumber,@"OtherIDTypeNo",
               SPAJDateCreated,@"SPAJDateCreated",
               SPAJDateModified,@"SPAJDateModified",
+              SPAJDateExpired,@"SPAJDateExpired",
               SPAJStatus,@"SPAJStatus",
               SPAJCompleteness,@"SPAJCompleteness",
               ProspectIDDesc,@"IdentityDesc",
@@ -240,6 +249,7 @@
     NSString *SPAJNumber;
     NSString *SPAJDateCreated;
     NSString *SPAJDateModified;
+    NSString *SPAJDateExpired;
     NSString *SPAJStatus;
     NSString *SPAJSINO;
     
@@ -267,6 +277,7 @@
         ProspectIDNumber = [s stringForColumn:@"OtherIDTypeNo"]?:@"";
         SPAJDateCreated = [s stringForColumn:@"SPAJDateCreated"]?:@"";
         SPAJDateModified = [s stringForColumn:@"SPAJDateModified"]?:@"";
+        SPAJDateExpired = [s stringForColumn:@"SPAJDateExpired"]?:@"";
         SPAJStatus = [s stringForColumn:@"SPAJStatus"]?:@"";
         SPAJEAppNumber = [s stringForColumn:@"SPAJEappNumber"]?:@"";
         SPAJNumber = [s stringForColumn:@"SPAJNumber"]?:@"";
@@ -280,6 +291,7 @@
               ProspectIDNumber,@"OtherIDTypeNo",
               SPAJDateCreated,@"SPAJDateCreated",
               SPAJDateModified,@"SPAJDateModified",
+              SPAJDateExpired,@"SPAJDateExpired",
               SPAJStatus,@"SPAJStatus",
               ProspectIDDesc,@"IdentityDesc",
               SPAJEAppNumber,@"SPAJEappNumber",

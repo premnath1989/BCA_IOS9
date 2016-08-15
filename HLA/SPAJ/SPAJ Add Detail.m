@@ -622,7 +622,7 @@
         else if ([stringSection isEqualToString:@"PP"]){
             [self voidSetPembayaranPremiBoolValidate:true];
         }
-        else if ([stringSection isEqualToString:@"PO"]){
+        else if ([stringSection isEqualToString:@"KS"]){
             [self voidSetKesehatanBoolValidate:true];
         }
         

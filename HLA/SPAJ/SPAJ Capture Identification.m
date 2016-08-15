@@ -583,65 +583,6 @@ NSString* const Back = @"Back";
                         }
                     }
                 }
-                /*if (boolTenagaPenjual && boolOrangTuaWali && boolPemegangPolis && boolTertanggung){
-                    boolPemegangPolis = true;
-                    boolTertanggung = true;
-                    boolOrangTuaWali =  true;
-                    boolTenagaPenjual = true;
-                    indexSelected = 3;
-                    [self copyIDImagesToSPAJFolder:imageViewFront Party:TenagaPenjual IDType:stringIDTypeIdentifier Side:Front];
-                    [self copyIDImagesToSPAJFolder:imageViewBack Party:TenagaPenjual IDType:stringIDTypeIdentifier Side:Back];
-                    
-                    //update party4
-                    NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJIDCaptureParty4=1,SPAJIDTypeParty4='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",stringIDTypeIdentifier,[dictTransaction valueForKey:@"SPAJEappNumber"]];
-                    
-                    [modelSPAJIDCapture updateSPAJIDCapture:stringUpdate];
-                }
-                else if (boolOrangTuaWali && boolPemegangPolis && boolTertanggung){
-                    boolPemegangPolis = true;
-                    boolTertanggung = true;
-                    boolOrangTuaWali =  true;
-                    boolTenagaPenjual = true;
-                    indexSelected = 3;
-                    [self copyIDImagesToSPAJFolder:imageViewFront Party:OrangTuaWali IDType:stringIDTypeIdentifier Side:Front];
-                    [self copyIDImagesToSPAJFolder:imageViewBack Party:OrangTuaWali IDType:stringIDTypeIdentifier Side:Back];
-                    
-                    //update party3
-                    NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJIDCaptureParty3=1,SPAJIDTypeParty3='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",stringIDTypeIdentifier,[dictTransaction valueForKey:@"SPAJEappNumber"]];
-                    
-                    [modelSPAJIDCapture updateSPAJIDCapture:stringUpdate];
-                }
-                else if (boolPemegangPolis && boolTertanggung){
-                    boolPemegangPolis = true;
-                    boolTertanggung = true;
-                    boolOrangTuaWali =  true;
-                    boolTenagaPenjual = false;
-                    
-                    indexSelected = 2;
-                    [self copyIDImagesToSPAJFolder:imageViewFront Party:Tertanggung IDType:stringIDTypeIdentifier Side:Front];
-                    [self copyIDImagesToSPAJFolder:imageViewBack Party:Tertanggung IDType:stringIDTypeIdentifier Side:Back];
-                    
-                    //update party2
-                    NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJIDCaptureParty2=1,SPAJIDTypeParty2='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",stringIDTypeIdentifier,[dictTransaction valueForKey:@"SPAJEappNumber"]];
-                    
-                    [modelSPAJIDCapture updateSPAJIDCapture:stringUpdate];
-                }
-                else if (boolPemegangPolis){
-                    boolPemegangPolis = true;
-                    boolTertanggung = true;
-                    boolOrangTuaWali =  false;
-                    boolTenagaPenjual = false;
-                    indexSelected = 1;
-                    [self copyIDImagesToSPAJFolder:imageViewFront Party:PemegangPolis IDType:stringIDTypeIdentifier Side:Front];
-                    [self copyIDImagesToSPAJFolder:imageViewBack Party:PemegangPolis IDType:stringIDTypeIdentifier Side:Back];
-                    
-                    //update party1
-                    NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJIDCaptureParty1=1,SPAJIDTypeParty1='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",stringIDTypeIdentifier,[dictTransaction valueForKey:@"SPAJEappNumber"]];
-                    
-                    [modelSPAJIDCapture updateSPAJIDCapture:stringUpdate];
-                }
-                [imageViewFront setImage:nil];
-                [imageViewBack setImage:nil];*/
                 [tablePartiesCaprture reloadData];
             }
         }
@@ -871,7 +812,7 @@ NSString* const Back = @"Back";
                 [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
             }
             else{
-                
+                [cell setUserInteractionEnabled:false];
             }
         }
         /*if (boolPemegangPolis){

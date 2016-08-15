@@ -16,7 +16,7 @@
 #import "Alert.h"
 #import "ModelSPAJTransaction.h"
 #import "SPAJFilesViewController.h"
-
+#import "Formatter.h"
 
 
 // DECLARATION
@@ -34,6 +34,8 @@
 @implementation SPAJExistingList{
     ModelSPAJTransaction* modelSPAJTransaction;
     SPAJFilesViewController* spajFilesViewController;
+    Formatter* formatter;
+    
     NSMutableArray* arraySPAJTransaction;
     
     NSString* sortedBy;
@@ -71,6 +73,7 @@
         
         // INITIALIZATION
         modelSPAJTransaction = [[ModelSPAJTransaction alloc]init];
+        formatter = [[Formatter alloc]init];
         _querySPAJHeader = [[QuerySPAJHeader alloc]init];
         _functionUserInterface = [[UserInterface alloc] init];
         _functionAlert = [[Alert alloc]init];
@@ -359,7 +362,7 @@
             [cellSPAJExisting.labelUpdatedOnDate setText:[[arraySPAJTransaction objectAtIndex:indexPath.row] valueForKey:@"SPAJDateModified"]];
             [cellSPAJExisting.labelUpdatedOnTime setText:[[arraySPAJTransaction objectAtIndex:indexPath.row] valueForKey:@"SPAJDateModified"]];
             [cellSPAJExisting.labelSalesIllustration setText:[[arraySPAJTransaction objectAtIndex:indexPath.row] valueForKey:@"SI_Version"]];
-            [cellSPAJExisting.labelTimeRemaining setText:@""];
+            [cellSPAJExisting.labelTimeRemaining setText:[formatter calculateTimeRemaining:[[arraySPAJTransaction objectAtIndex:indexPath.row]valueForKey:@"SPAJDateExpired"]]];
             [cellSPAJExisting.buttonView  setTitle:NSLocalizedString(@"BUTTON_VIEW", nil) forState:UIControlStateNormal];
             
             [cellSPAJExisting.buttonView addTarget:self

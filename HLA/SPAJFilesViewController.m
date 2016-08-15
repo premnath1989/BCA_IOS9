@@ -13,6 +13,8 @@
 #import "ModelSPAJTransaction.h"
 #import "Alert.h"
 #import "AppDelegate.h"
+#import "ModelSPAJSubmitTracker.h"
+#import "Alert.h"
 
 @interface SPAJFilesViewController ()<ProgressBarDelegate>{
     ProgressBar *progressBar;
@@ -23,7 +25,6 @@
     IBOutlet UIWebView* webViewDisplayPDF;
     
     IBOutlet UIButton* buttonClose;
-    
 }
 
 @end
@@ -31,6 +32,7 @@
 @implementation SPAJFilesViewController{
     Formatter* formatter;
     ModelSPAJTransaction* modelSPAJTransaction;
+    ModelSPAJSubmitTracker* modelSPAJSubmitTracker;
     Alert* alert;
     NSArray *directoryContent;
     
@@ -52,8 +54,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    alert = [[Alert alloc]init];
     formatter = [[Formatter alloc]init];
     modelSPAJTransaction = [[ModelSPAJTransaction alloc]init];
+    modelSPAJSubmitTracker = [[ModelSPAJSubmitTracker alloc]init];
     alert = [[Alert alloc]init];
     intUploadCount = 0;
     // Do any additional setup after loading the view from its nib.
@@ -133,21 +137,27 @@
 }
 
 -(IBAction)actionSubmit:(UIButton *)sender{
-    NSString *serverURL = [NSString stringWithFormat:@"%@/Service2.svc/CreateRemoteFtpFolder?spajNumber=%@",[(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL], [dictTransaction valueForKey:@"SPAJNumber"]];
-    
-    NSURLSession *session = [NSURLSession sharedSession];
-    [[session dataTaskWithURL:[NSURL URLWithString:serverURL]
-            completionHandler:^(NSData *data,
-                                NSURLResponse *response,
-                                NSError *error) {
-                // handle response
-                if(data != nil){
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [self voidUploadFile];
-                    });
-                }
-            }] resume];
-
+    bool maximumReach = [modelSPAJSubmitTracker voidMaximumSubmitReached:[formatter getDateToday:@"yyyy-MM-dd"]];
+    if (!maximumReach){
+        NSString *serverURL = [NSString stringWithFormat:@"%@/Service2.svc/CreateRemoteFtpFolder?spajNumber=%@",[(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL], [dictTransaction valueForKey:@"SPAJNumber"]];
+        
+        NSURLSession *session = [NSURLSession sharedSession];
+        [[session dataTaskWithURL:[NSURL URLWithString:serverURL]
+                completionHandler:^(NSData *data,
+                                    NSURLResponse *response,
+                                    NSError *error) {
+                    // handle response
+                    if(data != nil){
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self voidUploadFile];
+                        });
+                    }
+                }] resume];
+    }
+    else{
+        UIAlertController *alertLockForm = [alert alertInformation:@"Peringatan" stringMessage:@"Anda tidak dapat melakukan submission karena telah melebihi batas jumlah submit per hari"];
+        [self presentViewController:alertLockForm animated:YES completion:nil];
+    }
 }
 
 -(void)voidUploadFile{
@@ -206,7 +216,7 @@
                         //dispatch_async(dispatch_get_main_queue(), ^ {
                             [self presentViewController:alertController animated:YES completion:nil];
                         //});
-                        
+                        [modelSPAJSubmitTracker saveSPAJSubmitDate:[dictTransaction valueForKey:@"SPAJNumber"] SubmitDate:[formatter getDateToday:@"yyyy-MM-dd HH:mm:ss"]];
                     }
                 }] resume];
     }

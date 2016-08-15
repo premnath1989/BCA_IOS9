@@ -97,6 +97,60 @@
     return targetDateString;
 }
 
+-(NSString *)getDateTodayByAddingDays:(NSString *)dateFormat DaysAdded:(int)intDaysAdded{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:[NSString stringWithFormat:@"%@",dateFormat]];
+    //NSString *targetDateString = [dateFormatter stringFromDate:[NSDate date]];
+    NSDate *now = [NSDate date];
+    NSDate *daysAdded = [now dateByAddingTimeInterval:intDaysAdded*24*60*60];
+    NSString *targetDateString = [dateFormatter stringFromDate:daysAdded];
+    return targetDateString;
+}
+
+-(NSString *)calculateTimeRemaining:(NSString *)stringExpiredDate{
+    int hoursToAdd = 160;
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    NSDateFormatter *dateFormatter1 = [[NSDateFormatter alloc] init];
+    // this is imporant - we set our input date format to match our input string
+    // if format doesn't match you'll get nil from your string, so be careful
+    [dateFormatter1 setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate *dateFromString1 = [[NSDate alloc] init];
+    // voila!
+    dateFromString1 = [dateFormatter1 dateFromString:stringExpiredDate];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    
+    NSDateComponents *components = [[NSDateComponents alloc] init];
+    [components setHour:hoursToAdd];
+    NSLog(@"components %@",components);
+    //NSDate *newDate= [calendar dateByAddingComponents:components toDate:FinalDate options:0];
+    NSDate *newDate= [dateFormatter dateFromString:stringExpiredDate];
+    
+    [df setDateFormat:@"dd/MM/yyyy ( HH:mm a )"];
+    //NSString *strNewDate = [df stringFromDate:newDate];
+    
+    NSDate *mydate = [NSDate date];
+    NSTimeInterval secondsInEightHours = 8 * 60 * 60;
+    NSDate *currentDate = [mydate dateByAddingTimeInterval:secondsInEightHours];
+    NSDate *expireDate = [newDate dateByAddingTimeInterval:secondsInEightHours];
+    
+    NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *componentsDay = [gregorianCalendar components:NSCalendarUnitDay
+                                                           fromDate:currentDate
+                                                             toDate:expireDate
+                                                            options:NSCalendarWrapComponents];
+    int days1 = [componentsDay day];
+    
+    int countdown = -[currentDate timeIntervalSinceDate:expireDate];//pay attention here.
+    int minutes = (countdown / 60) % 60;
+    int hours = (countdown / 3600) % 24;
+    
+    NSString *DateRemaining =[NSString stringWithFormat:@"%d Hari %d Jam\n %d Menit",days1,hours,minutes];
+    return DateRemaining;
+}
+
+
 -(NSString *)roundTwoDigit:(double)originalNumber{
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
     

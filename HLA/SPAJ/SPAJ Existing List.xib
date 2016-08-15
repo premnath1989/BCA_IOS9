@@ -159,8 +159,8 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3V8-z2-Glu" customClass="ViewTableHeader">
                             <rect key="frame" x="0.0" y="0.0" width="93" height="50"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wmJ-f4-VWI" customClass="LabelTableHeader">
-                                    <rect key="frame" x="26" y="15" width="42" height="21"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wmJ-f4-VWI" customClass="LabelTableHeader">
+                                    <rect key="frame" x="10" y="15" width="73" height="21"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -175,13 +175,22 @@
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
+                                <constraint firstItem="wmJ-f4-VWI" firstAttribute="leading" secondItem="3V8-z2-Glu" secondAttribute="leading" constant="10" id="2aF-Vz-slN"/>
                                 <constraint firstItem="JA6-bc-Zvh" firstAttribute="leading" secondItem="3V8-z2-Glu" secondAttribute="leading" id="5YQ-lI-Zkx"/>
                                 <constraint firstAttribute="trailing" secondItem="JA6-bc-Zvh" secondAttribute="trailing" id="8WG-lO-HDE"/>
                                 <constraint firstItem="JA6-bc-Zvh" firstAttribute="top" secondItem="3V8-z2-Glu" secondAttribute="top" id="G6E-Ue-Op3"/>
+                                <constraint firstAttribute="trailing" secondItem="wmJ-f4-VWI" secondAttribute="trailing" constant="10" id="Yg6-Se-lIE"/>
                                 <constraint firstAttribute="bottom" secondItem="JA6-bc-Zvh" secondAttribute="bottom" id="gdL-pA-Zs4"/>
                                 <constraint firstItem="wmJ-f4-VWI" firstAttribute="centerX" secondItem="3V8-z2-Glu" secondAttribute="centerX" id="hZF-r9-eQL"/>
                                 <constraint firstItem="wmJ-f4-VWI" firstAttribute="centerY" secondItem="3V8-z2-Glu" secondAttribute="centerY" id="itL-Xu-bgy"/>
+                                <constraint firstItem="wmJ-f4-VWI" firstAttribute="centerY" secondItem="3V8-z2-Glu" secondAttribute="centerY" id="iuv-gv-8Ox"/>
                             </constraints>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="hZF-r9-eQL"/>
+                                    <exclude reference="itL-Xu-bgy"/>
+                                </mask>
+                            </variation>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7zn-tR-OAS" customClass="ViewTableHeader">
                             <rect key="frame" x="93" y="0.0" width="94" height="50"/>
@@ -214,7 +223,7 @@
                             <rect key="frame" x="187" y="0.0" width="93" height="50"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RCf-4n-omj" customClass="LabelTableHeader">
-                                    <rect key="frame" x="25" y="15" width="42" height="21"/>
+                                    <rect key="frame" x="10" y="15" width="73" height="21"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -229,13 +238,22 @@
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
+                                <constraint firstItem="RCf-4n-omj" firstAttribute="centerY" secondItem="CnZ-9t-aNY" secondAttribute="centerY" id="97E-wn-GSl"/>
+                                <constraint firstItem="RCf-4n-omj" firstAttribute="leading" secondItem="CnZ-9t-aNY" secondAttribute="leading" constant="10" id="Jpw-hW-FmE"/>
                                 <constraint firstItem="RCf-4n-omj" firstAttribute="centerX" secondItem="CnZ-9t-aNY" secondAttribute="centerX" id="NEp-9f-rEE"/>
                                 <constraint firstAttribute="trailing" secondItem="d1C-R6-gOZ" secondAttribute="trailing" id="YkX-4G-0ux"/>
                                 <constraint firstAttribute="bottom" secondItem="d1C-R6-gOZ" secondAttribute="bottom" id="hzX-eJ-s4M"/>
                                 <constraint firstItem="d1C-R6-gOZ" firstAttribute="top" secondItem="CnZ-9t-aNY" secondAttribute="top" id="mvV-BY-dJx"/>
+                                <constraint firstAttribute="trailing" secondItem="RCf-4n-omj" secondAttribute="trailing" constant="10" id="oQa-ov-dRT"/>
                                 <constraint firstItem="RCf-4n-omj" firstAttribute="centerY" secondItem="CnZ-9t-aNY" secondAttribute="centerY" id="sjJ-ft-xfO"/>
                                 <constraint firstItem="d1C-R6-gOZ" firstAttribute="leading" secondItem="CnZ-9t-aNY" secondAttribute="leading" id="ytS-Up-1GY"/>
                             </constraints>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="NEp-9f-rEE"/>
+                                    <exclude reference="sjJ-ft-xfO"/>
+                                </mask>
+                            </variation>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2HT-n1-x1w" customClass="ViewTableHeader">
                             <rect key="frame" x="280" y="0.0" width="93" height="50"/>
