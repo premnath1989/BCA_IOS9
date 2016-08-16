@@ -15,10 +15,17 @@
 #import "User Interface.h"
 #import "Alert.h"
 
+@protocol SPAJEappListDelegate
+
+    - (IBAction)actionGoToExistingList:(id)sender;
+
+@end
 
 // DECLARATION
 
 @interface SPAJEApplicationList : UIViewController <UITableViewDelegate, UITableViewDataSource>
+
+    @property (nonatomic,strong) id <SPAJEappListDelegate> delegateSPAJEappList;
 
     // OBJECT
 

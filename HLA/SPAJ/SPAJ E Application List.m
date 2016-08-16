@@ -24,7 +24,7 @@
 #import "SPAJ Add Menu.h"
 // DECLARATION
 
-@interface SPAJEApplicationList ()<SIListingDelegate,UIPopoverPresentationControllerDelegate,UITextFieldDelegate>{
+@interface SPAJEApplicationList ()<SPAJMainDelegate,SIListingDelegate,UIPopoverPresentationControllerDelegate,UITextFieldDelegate>{
     
     UIBarButtonItem* rightButton;
 }
@@ -191,6 +191,7 @@
     -(void) showDetailsForIndexPath:(NSIndexPath*)indexPath
     {
         SPAJAddMenu* viewController = [[SPAJAddMenu alloc] initWithNibName:@"SPAJ Add Menu" bundle:nil];
+        [viewController setDelegateSPAJMain:self];
         [viewController setStringEAPPNumber:stringGlobalEAPPNumber];
         [viewController setDictTransaction:[arraySPAJTransaction objectAtIndex:indexPath.row]];
         //cFFQuestionsVC.prospectProfileID = [arrayCFFTransaction[indexPath.row] valueForKey:@"IndexNo"];
@@ -205,6 +206,10 @@
         [_tableView reloadData];
     }
 
+    - (IBAction)actionGoToExistingList:(id)sender{
+        //[_delegateSPAJEappList actionGoToExistingList:nil];
+         [[NSNotificationCenter defaultCenter] postNotificationName:@"GOTOSPAJ" object:self];
+    }
     // FUNCTION ON PAGE
 
     - (void) generateQuery
@@ -435,6 +440,8 @@
             [modelSPAJTransaction deleteSPAJTransaction:@"SPAJFormGeneration" StringWhereName:@"SPAJTransactionID" StringWhereValue:transactionID];
             [modelSPAJTransaction deleteSPAJTransaction:@"SPAJDetail" StringWhereName:@"SPAJTransactionID" StringWhereValue:transactionID];
             [modelSPAJTransaction deleteSPAJTransaction:@"SPAJAnswers" StringWhereName:@"SPAJTransactionID" StringWhereValue:transactionID];
+            
+            [arraySPAJTransaction removeObjectAtIndex:value];
             //remove array for index value
         }
         [ItemToBeDeleted removeAllObjects];

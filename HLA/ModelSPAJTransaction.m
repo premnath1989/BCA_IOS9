@@ -38,7 +38,7 @@
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     [database open];
     
-    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"SELECT spajtrans.*,sipo.*,pp.*,ep.* FROM SPAJTransaction spajtrans left join SI_PO_Data sipo on spajtrans.SPAJSINO = sipo.SINO left join prospect_profile pp on sipo.PO_ClientID = pp.IndexNo left join eProposal_Identification ep on pp.OtherIDType=ep.DataIdentifier order by %@ %@",sortedBy,sortMethod]];
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"SELECT spajtrans.*,sipo.*,pp.*,ep.* FROM SPAJTransaction spajtrans left join SI_PO_Data sipo on spajtrans.SPAJSINO = sipo.SINO left join prospect_profile pp on sipo.PO_ClientID = pp.IndexNo left join eProposal_Identification ep on pp.OtherIDType=ep.DataIdentifier where spajtrans.SPAJStatus='EAPP' order by %@ %@",sortedBy,sortMethod]];
     
     while ([s next]) {
         ProspectIndex = [s intForColumn:@"IndexNo"];

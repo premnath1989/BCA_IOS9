@@ -27,7 +27,7 @@
 
 // DECLARATION
 
-@interface SPAJMain ()<SPAJMainDelegate,SPAJCaptureIdentificationDelegate,SPAJAddSignatureDelegate>
+@interface SPAJMain ()<SPAJMainDelegate,SPAJCaptureIdentificationDelegate,SPAJAddSignatureDelegate,SPAJEappListDelegate>
 
     
 
@@ -51,12 +51,19 @@
     {
         [super viewDidLoad];
         // Do any additional setup after loading the view, typically from a nib.
-        
+        SPAJAddMenu* viewController = [[SPAJAddMenu alloc] initWithNibName:@"SPAJ Add Menu" bundle:nil];
+        viewController.delegateSPAJMain = self;
         
         modelSPAJTransaction = [[ModelSPAJTransaction alloc]init];
         modelSPAJSignature = [[ModelSPAJSignature alloc]init];
         modelSPAJIDCapture = [[ModelSPAJIDCapture alloc]init];
         formatter = [[Formatter alloc]init];
+        
+        //NSNOTIFICATION CENTER
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(receiveNotification:)
+                                                     name:@"GOTOSPAJ"
+                                                   object:nil];
         
         // LAYOUT DECLARATION
         
@@ -94,11 +101,21 @@
         //SPAJEApplicationList* viewController = [[SPAJEApplicationList alloc] initWithNibName:@"SPAJ E Application List" bundle:nil];
         UIStoryboard *spajStoryboard = [UIStoryboard storyboardWithName:@"SPAJEAppListStoryBoard" bundle:Nil];
         SPAJEApplicationList *viewController = [spajStoryboard instantiateViewControllerWithIdentifier:@"EAppListRootVC"];
+        //viewController.delegateSPAJEappList = self;
         viewController.view.frame = self.viewContent.bounds;
         [self addChildViewController:viewController];
         [self.viewContent addSubview:viewController.view];
         //[self actionGoToEApplicationList:nil];
     };
+
+    //NOTIFICATION RECEIVE
+    - (void)receiveNotification:(NSNotification *)notification
+    {
+        if ([[notification name] isEqualToString:@"GOTOSPAJ"]) {
+            //doSomething here.
+            [self actionGoToExistingList:nil];
+        }
+    }
 
 
     // ACTION
@@ -112,6 +129,7 @@
         UIStoryboard *spajStoryboard = [UIStoryboard storyboardWithName:@"SPAJEAppListStoryBoard" bundle:Nil];
         SPAJEApplicationList *viewController = [spajStoryboard instantiateViewControllerWithIdentifier:@"EAppListRootVC"];
         viewController.view.frame = self.viewContent.bounds;
+        //viewController.delegateSPAJEappList = self;
         [self addChildViewController:viewController];
         [self.viewContent addSubview:viewController.view];
         //viewController.modalPresentationStyle = UIModalPresentationFullScreen;*/

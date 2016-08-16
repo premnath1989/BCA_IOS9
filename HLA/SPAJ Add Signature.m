@@ -273,6 +273,7 @@
                 NSString* dateToday=[formatter getDateToday:@"yyyy-MM-dd hh:mm:ss"];
                 NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty4=1,SPAJDateSignatureParty4='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",dateToday,[dictTransaction valueForKey:@"SPAJEappNumber"]];
                 [modelSPAJSignature updateSPAJSignature:stringUpdate];
+                [modelSPAJTransaction updateSPAJTransaction:@"SPAJCompleteness" StringColumnValue:@"Lengkap" StringWhereName:@"SPAJTransactionID" StringWhereValue:[dictTransaction valueForKey:@"SPAJTransactionID"]];
                 [self voidCheckBooleanLastState];
             }
             else if (indexSelected==2){
@@ -304,6 +305,7 @@
                     NSString* dateToday=[formatter getDateToday:@"yyyy-MM-dd hh:mm:ss"];
                     NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty4=1,SPAJDateSignatureParty4='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",dateToday,[dictTransaction valueForKey:@"SPAJEappNumber"]];
                     [modelSPAJSignature updateSPAJSignature:stringUpdate];
+                    [modelSPAJTransaction updateSPAJTransaction:@"SPAJCompleteness" StringColumnValue:@"Lengkap" StringWhereName:@"SPAJTransactionID" StringWhereValue:[dictTransaction valueForKey:@"SPAJTransactionID"]];
                     [self voidCheckBooleanLastState];
                 }
                 //else if (boolOrangTuaWali && boolPemegangPolis){
@@ -342,6 +344,7 @@
                     NSString* dateToday=[formatter getDateToday:@"yyyy-MM-dd hh:mm:ss"];
                     NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty4=1,SPAJDateSignatureParty4='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",dateToday,[dictTransaction valueForKey:@"SPAJEappNumber"]];
                     [modelSPAJSignature updateSPAJSignature:stringUpdate];
+                    [modelSPAJTransaction updateSPAJTransaction:@"SPAJCompleteness" StringColumnValue:@"Lengkap" StringWhereName:@"SPAJTransactionID" StringWhereValue:[dictTransaction valueForKey:@"SPAJTransactionID"]];
                     [self voidCheckBooleanLastState];
                 }
                 else if (indexSelected == 2){}
@@ -437,7 +440,7 @@
     CGDataProviderRef provider = CGDataProviderCreateWithCFData(myPDFData);
     CGPDFDocumentRef pdf = CGPDFDocumentCreateWithProvider(provider);
     CGDataProviderRelease(provider);
-    CGPDFPageRef page = CGPDFDocumentGetPage(pdf, 4);
+    CGPDFPageRef page = CGPDFDocumentGetPage(pdf, 7);
     pageRect = CGPDFPageGetBoxRect(page, kCGPDFMediaBox);
     CGContextBeginPage(pdfContext, &pageRect);
     CGContextDrawPDFPage(pdfContext, page);
@@ -549,7 +552,10 @@
 
 -(void)voidSaveSignatureLocation:(NSString *)stringSignatureLocationFromAlert{
     stringSignatureLocation = stringSignatureLocationFromAlert;
+    NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureLocation='%@'  where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",stringSignatureLocation,[dictTransaction valueForKey:@"SPAJEappNumber"]];
+    [modelSPAJSignature updateSPAJSignature:stringUpdate];
     [alertController dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - table view
