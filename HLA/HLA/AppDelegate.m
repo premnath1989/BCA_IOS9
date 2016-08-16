@@ -69,12 +69,14 @@ NSString *uatAgentCode;
     //[self getHTMLDataTable];
     //[self getCFFHTMLFile];
     [self copyJqueryLibstoDir];
-    
+    ClearData *CleanData =[[ClearData alloc]init];
+    [CleanData SPAJExpiredWipeOff];
+
 #ifdef UAT_BUILD
     if (uatAgentCode != NULL && ![uatAgentCode isEqualToString:@"A8888888"]) {
 #endif
-    ClearData *CleanData =[[ClearData alloc]init];
-    [CleanData ClientWipeOff];            
+    [CleanData ClientWipeOff];
+    
 #ifdef UAT_BUILD
     }
 #endif

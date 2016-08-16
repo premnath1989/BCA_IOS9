@@ -208,7 +208,7 @@
             sortedBy=@"pp.ProspectName";
         }
         else if (sender==buttonSortSPAJNumber){
-            sortedBy=@"spajtrans.SPAJSPAJNumber";
+            sortedBy=@"spajtrans.SPAJNumber";
         }
         else if (sender==buttonSortLastModified){
             sortedBy=@"datetime(spajtrans.SPAJDateModified)";
@@ -217,7 +217,7 @@
             sortedBy=@"sim.SI_Version";
         }
         else if (sender==buttonSortTimeRemaining){
-            sortedBy=@"spajtrans.SPAJDateModified";
+            sortedBy=@"spajtrans.SPAJDateExpired";
         }
         
         

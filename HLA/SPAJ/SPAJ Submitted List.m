@@ -162,7 +162,7 @@
             sortedBy=@"pp.ProspectName";
         }
         else if (sender==buttonSortSPAJNumber){
-            sortedBy=@"spajtrans.SPAJSPAJNumber";
+            sortedBy=@"spajtrans.SPAJNumber";
         }
         else if (sender==buttonSortDateSumbit){
             sortedBy=@"datetime(spajtrans.SPAJDateModified)";

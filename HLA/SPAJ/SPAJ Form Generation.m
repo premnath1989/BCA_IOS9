@@ -227,6 +227,9 @@
         return [super readfromDB:finalDictionary];
     }
 
+    - (void)webViewDidFinishLoad:(UIWebView *)webView{
+       [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"document.getElementById('read').click()"]];
+    }
 
 
     // DID RECEIVE MEMOY WARNING

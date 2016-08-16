@@ -21,6 +21,6 @@
 -(void)deleteOldPdfs:(NSString *)proposal;
 -(void)deleteEApp:(NSString *)proposal database:(FMDatabase *)db;
 -(void)deleteCFF:(NSString *)prospectID database:(FMDatabase *)db;
-
+-(void)SPAJExpiredWipeOff;
 
 @end

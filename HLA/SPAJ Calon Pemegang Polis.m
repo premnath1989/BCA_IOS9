@@ -101,8 +101,6 @@
     [webview loadRequest:urlRequest];
 }
 
-
-
 - (void)viewDidLoad {
     modelProspectProfile = [[ModelProspectProfile alloc]init];
     modelSPAJTransaction = [[ModelSPAJTransaction alloc]init];
@@ -211,7 +209,7 @@
     return stringPOClientID;
 }
 
-/*-(NSDictionary *)OriginalDictionaryForAutoPopulate:(NSDictionary *)dictColumn DictValue:(NSDictionary *)dictValue{
+-(NSDictionary *)OriginalDictionaryForAutoPopulate{
     NSMutableArray* columnNames = [[NSMutableArray alloc]initWithArray:[modelProspectProfile getColumnNames:@"prospect_profile"]];
     NSMutableArray* columnValue = [[NSMutableArray alloc]initWithArray:[modelProspectProfile getColumnValue:[self getPOIndexNumber] ColumnCount:[columnNames count]]];
     
@@ -221,26 +219,47 @@
         [dictDetail setObject:[columnValue objectAtIndex:i] forKey:[columnNames objectAtIndex:i]];
     }
     return dictDetail;
-}*/
+}
 
-/*-(NSMutableDictionary *)ModifiedDictionary:(NSDictionary *)originalDictionary{
-    NSMutableDictionary *modiFiedDictionary = [[NSMutableDictionary alloc]initWithDictionary:originalDictionary];
-    [modiFiedDictionary setObject:[originalDictionary valueForKey:@""] forKey:@""];
-}*/
+-(NSMutableDictionary *)ModifiedDictionary:(NSDictionary *)originalDictionary{
+      NSMutableDictionary *modiFiedDictionary = [[NSMutableDictionary alloc]initWithDictionary:originalDictionary];
+     [modiFiedDictionary setObject:[originalDictionary valueForKey:@"ProspectName"] forKey:@"TextProspectiveInsuredFullName"];
+     [modiFiedDictionary setObject:[originalDictionary valueForKey:@"ProspectDOB"] forKey:@"ProspectiveInsuredBirthday"];
+     [modiFiedDictionary setObject:[originalDictionary valueForKey:@"ProspectGender"] forKey:@"RadioButtonProspectiveInsuredSex"];
+     [modiFiedDictionary setObject:[originalDictionary valueForKey:@"ResidenceAddress1"] forKey:@"TextProspectiveInsuredHomeAddress1"];
+     [modiFiedDictionary setObject:[originalDictionary valueForKey:@"ResidenceAddress2"] forKey:@"TextProspectiveInsuredHomeAddress2"];
+     [modiFiedDictionary setObject:[originalDictionary valueForKey:@"ResidenceAddress3"] forKey:@"TextProspectiveInsuredHomeAddress3"];
+     [modiFiedDictionary setObject:[originalDictionary valueForKey:@"ResidenceAddressTown"] forKey:@"TextProspectiveInsuredHomeCity"];
+     [modiFiedDictionary setObject:[originalDictionary valueForKey:@"ResidenceAddressPostCode"] forKey:@"TextProspectiveInsuredPostalCode"];
+     [modiFiedDictionary setObject:[originalDictionary valueForKey:@"OfficeAddress1"] forKey:@"TextProspectiveInsuredHomeAddress1"];
+     [modiFiedDictionary setObject:[originalDictionary valueForKey:@"OfficeAddress2"] forKey:@"TextProspectiveInsuredHomeAddress2"];
+     [modiFiedDictionary setObject:[originalDictionary valueForKey:@"OfficeAddress3"] forKey:@"TextProspectiveInsuredHomeAddress3"];
+     [modiFiedDictionary setObject:[originalDictionary valueForKey:@"OfficeAddressTown"] forKey:@"TextProspectiveInsuredHomeCity"];
+     [modiFiedDictionary setObject:[originalDictionary valueForKey:@"OfficeAddressPostCode"] forKey:@"TextProspectiveInsuredPostalCode"];
+     [modiFiedDictionary setObject:[originalDictionary valueForKey:@"ProspectEmail"] forKey:@"TextProspectiveInsuredEmail"];
+     [modiFiedDictionary setObject:[originalDictionary valueForKey:@"ProspectOccupationCode"] forKey:@"TextProspectiveInsuredMainJob"];
+     [modiFiedDictionary setObject:[originalDictionary valueForKey:@"OtherIDType"] forKey:@"SelectProspectiveInsuredIDType"];
+     [modiFiedDictionary setObject:[originalDictionary valueForKey:@"OtherIDTypeNo"] forKey:@"TextProspectiveInsuredID"];
+     [modiFiedDictionary setObject:[originalDictionary valueForKey:@"Nationality"] forKey:@"RadioButtonProspectiveInsuredNationality"];
+     [modiFiedDictionary setObject:[originalDictionary valueForKey:@"CountryOfBirth"] forKey:@"TextProspectiveInsuredPlace"];
+     [modiFiedDictionary setObject:[originalDictionary valueForKey:@"IDExpiryDate"] forKey:@"DateProspectiveInsuredActive"];
+    
+     return modiFiedDictionary;
+}
 
 -(NSDictionary *)dictForAutoPopulate{
     NSString *SINO = [modelSPAJTransaction getSPAJTransactionData:@"SPAJSINO" StringWhereName:@"SPAJEappNumber" StringWhereValue:[delegate voidGetEAPPNumber]];
     NSDictionary* dictPOData = [[NSDictionary alloc ]initWithDictionary:[modelSIPData getPO_DataFor:SINO]];
     
-    NSMutableArray* columnNames = [[NSMutableArray alloc]initWithArray:[modelProspectProfile getColumnNames:@"prospect_profile"]];
-    NSMutableArray* columnValue = [[NSMutableArray alloc]initWithArray:[modelProspectProfile getColumnValue:[self getPOIndexNumber] ColumnCount:[columnNames count]]];
+    //NSMutableArray* columnNames = [[NSMutableArray alloc]initWithArray:[modelProspectProfile getColumnNames:@"prospect_profile"]];
+    //NSMutableArray* columnValue = [[NSMutableArray alloc]initWithArray:[modelProspectProfile getColumnValue:[self getPOIndexNumber] ColumnCount:[columnNames count]]];
     
     //create dictionary
-    NSMutableDictionary* dictDetail = [[NSMutableDictionary alloc]init];
-    for (int i=0;i<[columnNames count];i++){
+    NSMutableDictionary* dictDetail = [[NSMutableDictionary alloc]initWithDictionary:[self ModifiedDictionary:[self OriginalDictionaryForAutoPopulate]]];
+    /*for (int i=0;i<[columnNames count];i++){
         [dictDetail setObject:[columnValue objectAtIndex:i] forKey:[columnNames objectAtIndex:i]];
-    }
-
+    }*/
+    
     NSString* identityDesc = [modelIdentificationType getOtherTypeDesc:[dictDetail valueForKey:@"OtherIDType"]];
     
     [dictDetail setObject:identityDesc forKey:@"OtherIDType"];

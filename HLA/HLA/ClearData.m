@@ -11,6 +11,7 @@
 #import "FMDatabaseAdditions.h"
 #import "FMDatabase.h"
 #import "Cleanup.h"
+#import "ModelSPAJTransaction.h"
 
 @implementation ClearData
 
@@ -518,6 +519,11 @@ NSMutableArray *EProArr;
     } else {
 		return 0; //no delete
     }
+}
+
+-(void)SPAJExpiredWipeOff {
+    ModelSPAJTransaction *modelSPAJTransaction = [[ModelSPAJTransaction alloc]init];
+    [modelSPAJTransaction voidHideExpiredSPAJ];
 }
 
 @end

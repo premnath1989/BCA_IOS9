@@ -264,7 +264,7 @@
     [database open];
     
     FMResultSet *s;
-    s = [database executeQuery:[NSString stringWithFormat:@"SELECT spajtrans.*,sipo.*,pp.*,ep.* FROM SPAJTransaction spajtrans left join SI_PO_Data sipo on spajtrans.SPAJSINO = sipo.SINO left join prospect_profile pp on sipo.PO_ClientID = pp.IndexNo left join eProposal_Identification ep on pp.OtherIDType=ep.DataIdentifier where pp.ProspectName like \"%%%@%%\" and spajtrans.SPAJEappNumber like \"%%%@%%\"",[dictSearch valueForKey:@"Name"],[dictSearch valueForKey:@"SPAJEappNumber"]]];
+    s = [database executeQuery:[NSString stringWithFormat:@"SELECT spajtrans.*,sipo.*,pp.*,ep.* FROM SPAJTransaction spajtrans left join SI_PO_Data sipo on spajtrans.SPAJSINO = sipo.SINO left join prospect_profile pp on sipo.PO_ClientID = pp.IndexNo left join eProposal_Identification ep on pp.OtherIDType=ep.DataIdentifier where where spajtrans.SPAJStatus='EAPP' and pp.ProspectName like \"%%%@%%\" and spajtrans.SPAJEappNumber like \"%%%@%%\"",[dictSearch valueForKey:@"Name"],[dictSearch valueForKey:@"SPAJEappNumber"]]];
     
     
     //NSLog(@"query %@",[NSString stringWithFormat:@"select * from SI_Premium where SINO = \"%@\" and RiderCode=\"%@\"",SINo,riderCode]);
@@ -348,6 +348,23 @@
                     stringColumnValue,
                     stringWhereName,
                     stringWhereValue]];
+    
+    if (!success) {
+        NSLog(@"%s: insert error: %@", __FUNCTION__, [database lastErrorMessage]);
+        // do whatever you need to upon error
+    }
+    [results close];
+    [database close];
+}
+
+-(void)voidHideExpiredSPAJ{
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    BOOL success = [database executeUpdate:@"Update SPAJTransaction set  SPAJStatus = ? where SPAJStatus in ('EAPP','ExistingList') and datetime(\"now\",\"+7 hour\") > SPAJDateExpired",@"VOID"];
     
     if (!success) {
         NSLog(@"%s: insert error: %@", __FUNCTION__, [database lastErrorMessage]);
