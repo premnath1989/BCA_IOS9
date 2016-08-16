@@ -195,7 +195,6 @@
 
     - (IBAction)actionEdit:(id)sender
     {
-        
         [self resignFirstResponder];
         [self resignFirstResponder];
         if ([_tableView isEditing]) {
@@ -270,6 +269,8 @@
             [modelSPAJTransaction deleteSPAJTransaction:@"SPAJFormGeneration" StringWhereName:@"SPAJTransactionID" StringWhereValue:transactionID];
             [modelSPAJTransaction deleteSPAJTransaction:@"SPAJDetail" StringWhereName:@"SPAJTransactionID" StringWhereValue:transactionID];
             [modelSPAJTransaction deleteSPAJTransaction:@"SPAJAnswers" StringWhereName:@"SPAJTransactionID" StringWhereValue:transactionID];
+            
+            [arraySPAJTransaction removeObjectAtIndex:value];
             //remove array for index value
         }
         [ItemToBeDeleted removeAllObjects];

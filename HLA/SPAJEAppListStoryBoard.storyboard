@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="BPreplay_Regular.otf">
+        <mutableArray key="BPreplay_Regular.ttf">
             <string>BPreplay</string>
             <string>BPreplay</string>
             <string>BPreplay</string>
@@ -262,18 +262,18 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" id="XI2-38-ySJ">
-                                        <rect key="frame" x="0.0" y="0.0" width="188" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="236" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Nama" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" id="BhF-ju-pzG">
-                                                <rect key="frame" x="5" y="0.0" width="179" height="50"/>
+                                                <rect key="frame" x="5" y="0.0" width="223" height="50"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hYK-NR-fWw">
-                                                <rect key="frame" x="0.0" y="0.0" width="189" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="228" height="50"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="15"/>
                                                 <connections>
@@ -284,18 +284,18 @@
                                         <color key="backgroundColor" red="0.0" green="0.62745098040000002" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                     <view contentMode="scaleToFill" id="KJe-8Y-RPy">
-                                        <rect key="frame" x="189" y="0.0" width="188" height="50"/>
+                                        <rect key="frame" x="237" y="0.0" width="236" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Nomor Eapp" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" id="d8x-CL-f8e">
-                                                <rect key="frame" x="5" y="0.0" width="179" height="50"/>
+                                                <rect key="frame" x="5" y="0.0" width="223" height="50"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="yKp-qW-3IV">
-                                                <rect key="frame" x="0.0" y="0.0" width="189" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="228" height="50"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
                                                 <connections>
@@ -305,7 +305,7 @@
                                         </subviews>
                                         <color key="backgroundColor" red="0.0" green="0.62745098040000002" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
-                                    <view contentMode="scaleToFill" id="F9o-0j-CrM">
+                                    <view hidden="YES" contentMode="scaleToFill" id="F9o-0j-CrM">
                                         <rect key="frame" x="378" y="0.0" width="188" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
@@ -327,18 +327,18 @@
                                         <color key="backgroundColor" red="0.0" green="0.62745098040000002" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                     <view contentMode="scaleToFill" id="WNv-u8-5i9">
-                                        <rect key="frame" x="567" y="0.0" width="188" height="50"/>
+                                        <rect key="frame" x="474" y="0.0" width="236" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Tanggal Terkahir Diupdate" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" id="OVB-lH-pyR">
-                                                <rect key="frame" x="5" y="0.0" width="179" height="50"/>
+                                                <rect key="frame" x="5" y="0.0" width="223" height="50"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="j9c-3e-2pa">
-                                                <rect key="frame" x="0.0" y="0.0" width="189" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="228" height="50"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <connections>
                                                     <action selector="actionSortBy:" destination="3qj-Ae-Pzs" eventType="touchUpInside" id="Eai-I4-qUU"/>
@@ -348,18 +348,18 @@
                                         <color key="backgroundColor" red="0.0" green="0.62745098040000002" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                     <view contentMode="scaleToFill" id="pgd-Cb-m5Z">
-                                        <rect key="frame" x="756" y="0.0" width="189" height="50"/>
+                                        <rect key="frame" x="711" y="0.0" width="237" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Status" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" id="lUD-l8-YY0">
-                                                <rect key="frame" x="5" y="0.0" width="179" height="50"/>
+                                                <rect key="frame" x="5" y="0.0" width="224" height="50"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="NBS-5K-kmR">
-                                                <rect key="frame" x="0.0" y="0.0" width="189" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="237" height="50"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <connections>
                                                     <action selector="actionSortBy:" destination="3qj-Ae-Pzs" eventType="touchUpInside" id="3yq-gu-maY"/>

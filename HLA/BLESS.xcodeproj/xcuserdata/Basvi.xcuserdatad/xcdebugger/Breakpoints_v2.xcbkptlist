@@ -1894,11 +1894,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SPAJ/SPAJ E Application List.m"
-            timestampString = "492763683.056925"
+            timestampString = "493014624.755532"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "241"
-            endingLineNumber = "241"
+            startingLineNumber = "246"
+            endingLineNumber = "246"
             landmarkName = "-actionEdit:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1926,12 +1926,44 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SPAJ Add Signature.m"
-            timestampString = "492927615.519369"
+            timestampString = "492951018.787791"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "678"
-            endingLineNumber = "678"
+            startingLineNumber = "684"
+            endingLineNumber = "684"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ModelSPAJTransaction.m"
+            timestampString = "493014960.527347"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "-getAllSPAJ:SortMethod:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SPAJ Calon Pemegang Polis.m"
+            timestampString = "493022623.199552"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "244"
+            endingLineNumber = "244"
+            landmarkName = "-dictForAutoPopulate"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -30,6 +30,7 @@
 #import "Layout.h"
 #import "User Interface.h"
 #import "LoginDBManagement.h"
+#import "Alert.h"
 // DECLARATION
 
 @interface SPAJAddMenu ()<SIListingDelegate,UIPopoverPresentationControllerDelegate>
@@ -55,6 +56,8 @@
     
     NSDictionary* dictionaryPOData;
     NSString *stringSINO;
+    
+    Alert* alert;
 }
 
     // SYNTHESIZE
@@ -88,6 +91,7 @@
         objectUserInterface = [[UserInterface alloc] init];
         
         formatter = [[Formatter alloc]init];
+        alert = [[Alert alloc]init];
         
         [self setNavigationBar];
         
@@ -185,12 +189,12 @@
             [_viewStep3 setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_OCTONARY floatOpacity:1.0]];
         }
         
-        if ((detailCapture)&&(formGeneration)&&(idCaptured)&&(signatureCaptured)){
+        /*if ((detailCapture)&&(formGeneration)&&(idCaptured)&&(signatureCaptured)){
             [_buttonConfirmSPAJ setEnabled:YES];
         }
         else{
             [_buttonConfirmSPAJ setEnabled:NO];
-        }
+        }*/
     }
 
     -(void)voidGetFooterInformation{
@@ -300,12 +304,33 @@
         /*CFFAPIController* cffAPIController;
         cffAPIController = [[CFFAPIController alloc]init];
         [cffAPIController apiCall:@"http://192.168.0.114/E-Submission/SpajHandler.ashx?operation=getRemoteFtpPath&spajNumber=60000000022&product=BCALife"];*/
-        
-        LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
-        [modelSPAJTransaction updateSPAJTransaction:@"SPAJNumber" StringColumnValue:[[NSNumber numberWithLongLong:[loginDB getLastActiveSPAJNum]] stringValue] StringWhereName:@"SPAJEappNumber" StringWhereValue:[dictTransaction valueForKey:@"SPAJEappNumber"]];
-        
-        [modelSPAJTransaction updateSPAJTransaction:@"SPAJStatus" StringColumnValue:@"ExistingList" StringWhereName:@"SPAJEappNumber" StringWhereValue:[dictTransaction valueForKey:@"SPAJEappNumber"]];
-        
+        NSString* SPAJNumber  = [modelSPAJTransaction getSPAJTransactionData:@"SPAJNumber" StringWhereName:@"SPAJTransactionID" StringWhereValue:[dictTransaction valueForKey:@"SPAJTransactionID"]];
+        if (!([SPAJNumber length]>0)){
+            LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
+            long long spajNumber = [loginDB getLastActiveSPAJNum];
+            if (spajNumber > 0){
+                [modelSPAJTransaction updateSPAJTransaction:@"SPAJNumber" StringColumnValue:[[NSNumber numberWithLongLong:spajNumber] stringValue] StringWhereName:@"SPAJEappNumber" StringWhereValue:[dictTransaction valueForKey:@"SPAJEappNumber"]];
+                [modelSPAJTransaction updateSPAJTransaction:@"SPAJStatus" StringColumnValue:@"ExistingList" StringWhereName:@"SPAJEappNumber" StringWhereValue:[dictTransaction valueForKey:@"SPAJEappNumber"]];
+                
+                [CATransaction begin];
+                [CATransaction setCompletionBlock:^{
+                        [_delegateSPAJMain actionGoToExistingList:nil];// handle completion here
+                }];
+                
+                [self.navigationController popViewControllerAnimated:YES];
+                
+                [CATransaction commit];
+
+            }
+            else{
+                UIAlertController *alertNoSPAJNumber = [alert alertInformation:@"Peringatan" stringMessage:@"Alokasi Nomor SPAJ Bleum ada. Silahkan lakukan permintaan nomor SPAJ"];
+                [self presentViewController:alertNoSPAJNumber animated:YES completion:nil];
+            }
+        }
+        else{
+            UIAlertController *alertHaveSPAJNumber = [alert alertInformation:@"Peringatan" stringMessage:@"Nomor SPAJ sudah ada"];
+            [self presentViewController:alertHaveSPAJNumber animated:YES completion:nil];
+        }
     };
 
 

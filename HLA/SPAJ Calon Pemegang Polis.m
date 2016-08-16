@@ -211,17 +211,24 @@
     return stringPOClientID;
 }
 
--(NSDictionary *)dictForAutoPopulate{
-    /*NSString *SINO = [modelSPAJTransaction getSPAJTransactionData:@"SPAJSINO" StringWhereName:@"SPAJEappNumber" StringWhereValue:[delegate voidGetEAPPNumber]];
+/*-(NSDictionary *)OriginalDictionaryForAutoPopulate:(NSDictionary *)dictColumn DictValue:(NSDictionary *)dictValue{
     NSMutableArray* columnNames = [[NSMutableArray alloc]initWithArray:[modelProspectProfile getColumnNames:@"prospect_profile"]];
     NSMutableArray* columnValue = [[NSMutableArray alloc]initWithArray:[modelProspectProfile getColumnValue:[self getPOIndexNumber] ColumnCount:[columnNames count]]];
-    NSDictionary* dictPOData = [[NSDictionary alloc ]initWithDictionary:[modelSIPData getPO_DataFor:SINO]];
     
     //create dictionary
     NSMutableDictionary* dictDetail = [[NSMutableDictionary alloc]init];
     for (int i=0;i<[columnNames count];i++){
         [dictDetail setObject:[columnValue objectAtIndex:i] forKey:[columnNames objectAtIndex:i]];
-    }*/
+    }
+    return dictDetail;
+}*/
+
+/*-(NSMutableDictionary *)ModifiedDictionary:(NSDictionary *)originalDictionary{
+    NSMutableDictionary *modiFiedDictionary = [[NSMutableDictionary alloc]initWithDictionary:originalDictionary];
+    [modiFiedDictionary setObject:[originalDictionary valueForKey:@""] forKey:@""];
+}*/
+
+-(NSDictionary *)dictForAutoPopulate{
     NSString *SINO = [modelSPAJTransaction getSPAJTransactionData:@"SPAJSINO" StringWhereName:@"SPAJEappNumber" StringWhereValue:[delegate voidGetEAPPNumber]];
     NSDictionary* dictPOData = [[NSDictionary alloc ]initWithDictionary:[modelSIPData getPO_DataFor:SINO]];
     

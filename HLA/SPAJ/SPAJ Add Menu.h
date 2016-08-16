@@ -21,6 +21,7 @@
     - (void) voidGoToFormGeneration;
     - (void) voidGoToCaptureIdentification;
     - (void) voidGoToAddSignature;
+    - (IBAction)actionGoToExistingList:(id)sender;
 
 @end
 
