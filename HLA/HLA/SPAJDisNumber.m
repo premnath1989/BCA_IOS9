@@ -251,11 +251,11 @@
                 if(data != nil){
                     dispatch_async(dispatch_get_main_queue(), ^{
                     NSArray * dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-                    NSString *defaultDBPath = [[dirPaths objectAtIndex:0] stringByAppendingPathComponent:@"hladb.sqlite"];
+                    NSString *defaultDBPath = [[dirPaths objectAtIndex:0] stringByAppendingPathComponent:@"SI_Temp.html"];
                     NSBundle *myLibraryBundle = [NSBundle bundleWithURL:[[NSBundle mainBundle]
                                                                          URLForResource:@"xibLibrary" withExtension:@"bundle"]];
                     ProgressBar *progressBar = [[ProgressBar alloc]initWithNibName:@"ProgressBar" bundle:myLibraryBundle];
-                    progressBar.TitleFileName = [NSString stringWithFormat: @"%@.%@",@"hladb", @"sqlite"];
+                    progressBar.TitleFileName = [NSString stringWithFormat: @"%@.%@",@"SI_Temp", @"html"];
                     progressBar.progressDelegate = self;
                     progressBar.ftpfolderdestination = @"60000000009";
                     progressBar.ftpfiletoUpload = defaultDBPath;
@@ -275,7 +275,7 @@
 }
 
 - (void)downloadisFinished{
-    NSString *urlStr = [NSString stringWithFormat:@"%@/Service2.svc/UpdateOnPostUploadData?spajNumber=60000000001&producName=Heritage Product&polisOwner=Johan Regar", [(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL]];
+    NSString *urlStr = [NSString stringWithFormat:@"%@/Service2.svc/UpdateOnPostUploadData?spajNumber=60000000009&producName=Heritage Product&polisOwner=Johan Regar", [(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL]];
     urlStr = [urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     
     NSURLSession *session = [NSURLSession sharedSession];
