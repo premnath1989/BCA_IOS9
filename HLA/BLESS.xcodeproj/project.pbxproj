@@ -393,6 +393,7 @@
 		4376DF211CD196EC00816BB6 /* check_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4376DF1D1CD196EC00816BB6 /* check_icon@2x.png */; };
 		438035DE1D5D8847003A9199 /* SPAJFilesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 438035DC1D5D8847003A9199 /* SPAJFilesViewController.m */; };
 		438035DF1D5D8847003A9199 /* SPAJFilesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 438035DD1D5D8847003A9199 /* SPAJFilesViewController.xib */; };
+		4385C9651D6661A600D2DEB4 /* watermark overlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 4385C9641D6661A600D2DEB4 /* watermark overlay.png */; };
 		438624B81D24B8B300F1BDC7 /* ProfilResikoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 438624B61D24B8B300F1BDC7 /* ProfilResikoViewController.m */; };
 		438624B91D24B8B300F1BDC7 /* ProfilResikoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 438624B71D24B8B300F1BDC7 /* ProfilResikoViewController.xib */; };
 		438625191D24C30200F1BDC7 /* PernyataanNasabahViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 438625171D24C30200F1BDC7 /* PernyataanNasabahViewController.m */; };
@@ -1608,6 +1609,7 @@
 		438035DB1D5D8847003A9199 /* SPAJFilesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPAJFilesViewController.h; sourceTree = "<group>"; };
 		438035DC1D5D8847003A9199 /* SPAJFilesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPAJFilesViewController.m; sourceTree = "<group>"; };
 		438035DD1D5D8847003A9199 /* SPAJFilesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SPAJFilesViewController.xib; sourceTree = "<group>"; };
+		4385C9641D6661A600D2DEB4 /* watermark overlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "watermark overlay.png"; sourceTree = "<group>"; };
 		438624B51D24B8B300F1BDC7 /* ProfilResikoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfilResikoViewController.h; sourceTree = "<group>"; };
 		438624B61D24B8B300F1BDC7 /* ProfilResikoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfilResikoViewController.m; sourceTree = "<group>"; };
 		438624B71D24B8B300F1BDC7 /* ProfilResikoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfilResikoViewController.xib; sourceTree = "<group>"; };
@@ -5073,6 +5075,7 @@
 		C4E9D1BF1612C6A500016053 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				4385C9641D6661A600D2DEB4 /* watermark overlay.png */,
 				43346FB51CF4080F001A6C25 /* pensign.png */,
 				4376DF1A1CD196EC00816BB6 /* cancel.png */,
 				4376DF1B1CD196EC00816BB6 /* cancel@2x.png */,
@@ -6233,6 +6236,7 @@
 				043FDBA61A1AEF14008EDC24 /* client_profilev3.png in Resources */,
 				043FDBA31A1AEF14008EDC24 /* sales_illustrationv3.png in Resources */,
 				1706BD4C1C7169A40038D1DB /* menu_customerfactfind.png in Resources */,
+				4385C9651D6661A600D2DEB4 /* watermark overlay.png in Resources */,
 				AA4EF7441C85A4260050CCD8 /* AppIcon-144.png in Resources */,
 				043FDBAB1A1AF226008EDC24 /* sales_illustration@2x_20141118.png in Resources */,
 				043FDBAC1A1AF226008EDC24 /* eAplication@2x_20141118.png in Resources */,

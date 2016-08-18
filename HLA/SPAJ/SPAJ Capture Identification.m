@@ -634,7 +634,7 @@ NSString* const Back = @"Back";
         //filename combination is EAPPNumberPartyIDTypeBack
         NSString* fileName = [NSString stringWithFormat:@"%@%@%@%@",stringEAPPPath,stringParty,stringIDType,stringSide];
         
-        NSData *imageData = UIImageJPEGRepresentation(imageView.image, 0.8);
+        NSData *imageData = UIImageJPEGRepresentation([self generateWatermarkForImage:imageView.image], 0.8);
         [imageData writeToFile:[NSString stringWithFormat:@"%@/%@.jpg",filePathApp,fileName] options:NSDataWritingAtomic error:&error];
     }
 
@@ -691,6 +691,24 @@ NSString* const Back = @"Back";
     {
         stringIDTypeCode = IDTypeCode;
         stringIDTypeIdentifier = identifier;
+    }
+
+    -(UIImage *) generateWatermarkForImage:(UIImage *) mainImg{
+        UIImage *backgroundImage = mainImg;
+        UIImage *watermarkImage = [UIImage imageNamed:@"watermark overlay.png"];
+        
+        
+        //Now re-drawing your  Image using drawInRect method
+        UIGraphicsBeginImageContext(backgroundImage.size);
+        [backgroundImage drawInRect:CGRectMake(0, 0, backgroundImage.size.width, backgroundImage.size.height)];
+        // set watermark position/frame a s(xposition,yposition,width,height)
+        // [watermarkImage drawInRect:CGRectMake(backgroundImage.size.width - watermarkImage.size.width, backgroundImage.size.height - watermarkImage.size.height, watermarkImage.size.width, watermarkImage.size.height)];
+        [watermarkImage drawInRect:CGRectMake(0, 0, 490, 306)];
+        
+        // now merging two images into one
+        UIImage *result = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        return result;
     }
 
 #pragma mark - table view
@@ -815,79 +833,6 @@ NSString* const Back = @"Back";
                 [cell setUserInteractionEnabled:false];
             }
         }
-        /*if (boolPemegangPolis){
-            if (indexPath.row == 0){
-                [cell setUserInteractionEnabled:true];
-                [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
-            }
-            else{
-                
-            }
-        }
-        else{
-            if (indexPath.row == 0){
-                [cell setUserInteractionEnabled:false];
-            }
-            else{
-                
-            }
-        }
-        
-        
-        if (boolTertanggung){
-            if (indexPath.row == 1){
-                [cell setUserInteractionEnabled:true];
-                [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
-            }
-            else{
-                
-            }
-        }
-        else{
-            if (indexPath.row == 1){
-                [cell setUserInteractionEnabled:false];
-            }
-            else{
-                
-            }
-        }
-        
-        if (boolOrangTuaWali){
-            if (indexPath.row == 2){
-                [cell setUserInteractionEnabled:true];
-                [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
-            }
-            else{
-                
-            }
-        }
-        else{
-            if (indexPath.row == 2){
-                [cell setUserInteractionEnabled:false];
-            }
-            else{
-                
-            }
-        }
-        
-        if (boolTenagaPenjual){
-            if (indexPath.row == 3){
-                [cell setUserInteractionEnabled:true];
-                [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
-            }
-            else{
-                
-            }
-        }
-        else{
-            if (indexPath.row == 3){
-                [cell setUserInteractionEnabled:false];
-            }
-            else{
-                
-            }
-        }*/
-        
         return cell;
     }
 
