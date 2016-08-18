@@ -107,7 +107,12 @@ function onError (ret)
 
 function readfromDB()
 {
-    
+    var callInfo = {};
+    callInfo.data = {};
+    callInfo.data.SPAJAnswers = {};
+    callInfo.data.SPAJAnswers.columns = 'elementID,Value,SPAJID,CustomerID';
+    callInfo.data.SPAJAnswers.where = '';
+    calliOSFunction('readfromDB:',onSuccess,onError, callInfo);
 }
 
 function savetoDB() 
@@ -143,9 +148,4 @@ function AutoPopulate(jsonObject)
 function ReadData()
 {
     readfromDB();
-}
-
-function test2()
-{
-    alert("2");
 }

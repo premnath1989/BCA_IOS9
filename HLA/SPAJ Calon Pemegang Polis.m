@@ -222,8 +222,9 @@
 }
 
 -(NSMutableDictionary *)ModifiedDictionary:(NSDictionary *)originalDictionary{
-      NSMutableDictionary *modiFiedDictionary = [[NSMutableDictionary alloc]initWithDictionary:originalDictionary];
-     [modiFiedDictionary setObject:[originalDictionary valueForKey:@"ProspectName"] forKey:@"TextProspectiveInsuredFullName"];
+      //NSMutableDictionary *modiFiedDictionary = [[NSMutableDictionary alloc]initWithDictionary:originalDictionary];
+     NSMutableDictionary *modiFiedDictionary = [[NSMutableDictionary alloc]init];
+     /*[modiFiedDictionary setObject:[originalDictionary valueForKey:@"ProspectName"] forKey:@"TextProspectiveInsuredFullName"];
      [modiFiedDictionary setObject:[originalDictionary valueForKey:@"ProspectDOB"] forKey:@"ProspectiveInsuredBirthday"];
      [modiFiedDictionary setObject:[originalDictionary valueForKey:@"ProspectGender"] forKey:@"RadioButtonProspectiveInsuredSex"];
      [modiFiedDictionary setObject:[originalDictionary valueForKey:@"ResidenceAddress1"] forKey:@"TextProspectiveInsuredHomeAddress1"];
@@ -238,11 +239,12 @@
      [modiFiedDictionary setObject:[originalDictionary valueForKey:@"OfficeAddressPostCode"] forKey:@"TextProspectiveInsuredPostalCode"];
      [modiFiedDictionary setObject:[originalDictionary valueForKey:@"ProspectEmail"] forKey:@"TextProspectiveInsuredEmail"];
      [modiFiedDictionary setObject:[originalDictionary valueForKey:@"ProspectOccupationCode"] forKey:@"TextProspectiveInsuredMainJob"];
-     [modiFiedDictionary setObject:[originalDictionary valueForKey:@"OtherIDType"] forKey:@"SelectProspectiveInsuredIDType"];
-     [modiFiedDictionary setObject:[originalDictionary valueForKey:@"OtherIDTypeNo"] forKey:@"TextProspectiveInsuredID"];
-     [modiFiedDictionary setObject:[originalDictionary valueForKey:@"Nationality"] forKey:@"RadioButtonProspectiveInsuredNationality"];
+     [modiFiedDictionary setObject:[originalDictionary valueForKey:@"OtherIDType"] forKey:@"SelectProspectiveInsuredIDType"];*/
+     [modiFiedDictionary setObject:@"TextPolicyHolderID" forKey:@"elementID"];
+     [modiFiedDictionary setObject:[originalDictionary valueForKey:@"OtherIDTypeNo"] forKey:@"Value"];
+     /*[modiFiedDictionary setObject:[originalDictionary valueForKey:@"Nationality"] forKey:@"RadioButtonProspectiveInsuredNationality"];
      [modiFiedDictionary setObject:[originalDictionary valueForKey:@"CountryOfBirth"] forKey:@"TextProspectiveInsuredPlace"];
-     [modiFiedDictionary setObject:[originalDictionary valueForKey:@"IDExpiryDate"] forKey:@"DateProspectiveInsuredActive"];
+     [modiFiedDictionary setObject:[originalDictionary valueForKey:@"IDExpiryDate"] forKey:@"DateProspectiveInsuredActive"];*/
     
      return modiFiedDictionary;
 }
@@ -260,12 +262,15 @@
         [dictDetail setObject:[columnValue objectAtIndex:i] forKey:[columnNames objectAtIndex:i]];
     }*/
     
-    NSString* identityDesc = [modelIdentificationType getOtherTypeDesc:[dictDetail valueForKey:@"OtherIDType"]];
+    /*NSString* identityDesc = [modelIdentificationType getOtherTypeDesc:[dictDetail valueForKey:@"OtherIDType"]];
     
     [dictDetail setObject:identityDesc forKey:@"OtherIDType"];
-    [dictDetail setObject:[dictPOData valueForKey:@"RelWithLA"] forKey:@"RelWithLA"];
+    [dictDetail setObject:[dictPOData valueForKey:@"RelWithLA"] forKey:@"RelWithLA"];*/
+    NSMutableArray* arrayValue = [[NSMutableArray alloc] init];
+    [arrayValue addObject:dictDetail];
     
-    NSDictionary *readFromDB=[[NSDictionary alloc]initWithObjectsAndKeys:dictDetail,@"readFromDB", nil];
+    //NSDictionary *readFromDB=[[NSDictionary alloc]initWithObjectsAndKeys:dictDetail,@"readFromDB", nil];
+    NSDictionary *readFromDB=[[NSDictionary alloc]initWithObjectsAndKeys:arrayValue,@"readFromDB", nil];
     NSDictionary *result=[[NSDictionary alloc]initWithObjectsAndKeys:readFromDB,@"result", nil];
     
     return result;

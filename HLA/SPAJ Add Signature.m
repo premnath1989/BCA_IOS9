@@ -450,6 +450,17 @@
     switch (index) {
         case 0:
             pageRect = CGRectMake(67, 1195,96 , 53);
+            
+            /*CFDataRef myPDFDataPage1 = (__bridge CFDataRef) pdfData;
+            CGDataProviderRef providerPage1 = CGDataProviderCreateWithCFData(myPDFDataPage1);
+            CGPDFDocumentRef pdfPage1 = CGPDFDocumentCreateWithProvider(providerPage1);
+            CGDataProviderRelease(providerPage1);
+            CGPDFPageRef pagePage1 = CGPDFDocumentGetPage(pdfPage1, 1);
+            CGRect pageRectPage1 = CGPDFPageGetBoxRect(pagePage1, kCGPDFMediaBox);
+            CGContextBeginPage(pdfContext, &pageRectPage1);
+            CGContextDrawPDFPage(pdfContext, pagePage1);
+            CGImageRef pageImagePage1 = [imgSignature CGImage];
+            CGContextDrawImage(pdfContext, pageRectPage1, pageImagePage1);*/
             break;
         case 1:
             pageRect = CGRectMake(239, 1195,96 , 53);
@@ -604,7 +615,7 @@
         [cell setBackgroundColor:[UIColor colorWithRed:204.0/255.0 green:203.0/255.0 blue:205.0/255.0 alpha:1.0]];
     }
     UIView *bgColorView = [[UIView alloc] init];
-    bgColorView.backgroundColor = [UIColor colorWithRed:0/255.0f green:102.0f/255.0f blue:179.0f/255.0f alpha:1];
+    bgColorView.backgroundColor = [objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0];
     [cell setSelectedBackgroundView:bgColorView];
 
     [cell.labelSubtitle setHidden:NO];
@@ -623,7 +634,8 @@
         if ([stringSIRelation isEqualToString:@"DIRI SENDIRI"]){
             if ((indexPath.row == 0)||(indexPath.row == 3)){
                 [cell setUserInteractionEnabled:true];
-                [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
+                [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_ACTIVE_CELL floatOpacity:1.0]];
+                
             }
             else{
                 [cell setUserInteractionEnabled:false];
@@ -634,7 +646,7 @@
                 if (boolOrangTuaWali){
                     if ((indexPath.row == 0)||(indexPath.row == 2)||(indexPath.row == 3)){
                         [cell setUserInteractionEnabled:true];
-                        [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
+                        [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_ACTIVE_CELL floatOpacity:1.0]];
                     }
                     else{
                         [cell setUserInteractionEnabled:false];
@@ -643,7 +655,7 @@
                 else{
                     if ((indexPath.row == 0)||(indexPath.row == 2)){
                         [cell setUserInteractionEnabled:true];
-                        [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
+                        [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_ACTIVE_CELL floatOpacity:1.0]];
                     }
                     else{
                         [cell setUserInteractionEnabled:false];
@@ -654,7 +666,7 @@
                 if (boolTertanggung){
                     if ((indexPath.row == 0)||(indexPath.row == 1)||(indexPath.row == 3)){
                         [cell setUserInteractionEnabled:true];
-                        [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
+                        [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_ACTIVE_CELL floatOpacity:1.0]];
                     }
                     else{
                         [cell setUserInteractionEnabled:false];
@@ -663,7 +675,7 @@
                 else{
                     if ((indexPath.row == 0)||(indexPath.row == 1)){
                         [cell setUserInteractionEnabled:true];
-                        [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
+                        [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_ACTIVE_CELL floatOpacity:1.0]];
                     }
                     else{
                         [cell setUserInteractionEnabled:false];
@@ -675,10 +687,10 @@
     else{
         if (indexPath.row == 0){
             [cell setUserInteractionEnabled:true];
-            [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
+            [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_ACTIVE_CELL floatOpacity:1.0]];
         }
         else{
-            
+            [cell setUserInteractionEnabled:false];
         }
     }
     /*if (boolPemegangPolis){

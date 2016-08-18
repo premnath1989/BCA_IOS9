@@ -740,7 +740,7 @@ NSString* const Back = @"Back";
             [cell setBackgroundColor:[UIColor colorWithRed:204.0/255.0 green:203.0/255.0 blue:205.0/255.0 alpha:1.0]];
         }
         UIView *bgColorView = [[UIView alloc] init];
-        bgColorView.backgroundColor = [UIColor colorWithRed:0/255.0f green:102.0f/255.0f blue:179.0f/255.0f alpha:1];
+        bgColorView.backgroundColor = [objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0];
         [cell setSelectedBackgroundView:bgColorView];
         [cell.labelSubtitle setHidden:NO];
         
@@ -757,7 +757,7 @@ NSString* const Back = @"Back";
             if ([stringSIRelation isEqualToString:@"DIRI SENDIRI"]){
                 if ((indexPath.row == 0)||(indexPath.row == 3)){
                     [cell setUserInteractionEnabled:true];
-                    [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
+                    [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_ACTIVE_CELL floatOpacity:1.0]];
                 }
                 else{
                     [cell setUserInteractionEnabled:false];
@@ -768,7 +768,7 @@ NSString* const Back = @"Back";
                     if (boolOrangTuaWali){
                         if ((indexPath.row == 0)||(indexPath.row == 2)||(indexPath.row == 3)){
                             [cell setUserInteractionEnabled:true];
-                            [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
+                            [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_ACTIVE_CELL floatOpacity:1.0]];
                         }
                         else{
                             [cell setUserInteractionEnabled:false];
@@ -777,7 +777,7 @@ NSString* const Back = @"Back";
                     else{
                         if ((indexPath.row == 0)||(indexPath.row == 2)){
                             [cell setUserInteractionEnabled:true];
-                            [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
+                            [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_ACTIVE_CELL floatOpacity:1.0]];
                         }
                         else{
                             [cell setUserInteractionEnabled:false];
@@ -788,7 +788,7 @@ NSString* const Back = @"Back";
                     if (boolTertanggung){
                         if ((indexPath.row == 0)||(indexPath.row == 1)||(indexPath.row == 3)){
                             [cell setUserInteractionEnabled:true];
-                            [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
+                            [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_ACTIVE_CELL floatOpacity:1.0]];
                         }
                         else{
                             [cell setUserInteractionEnabled:false];
@@ -797,7 +797,7 @@ NSString* const Back = @"Back";
                     else{
                         if ((indexPath.row == 0)||(indexPath.row == 1)){
                             [cell setUserInteractionEnabled:true];
-                            [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
+                            [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_ACTIVE_CELL floatOpacity:1.0]];
                         }
                         else{
                             [cell setUserInteractionEnabled:false];
@@ -809,7 +809,7 @@ NSString* const Back = @"Back";
         else{
             if (indexPath.row == 0){
                 [cell setUserInteractionEnabled:true];
-                [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
+                [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_ACTIVE_CELL floatOpacity:1.0]];
             }
             else{
                 [cell setUserInteractionEnabled:false];

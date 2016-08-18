@@ -25,6 +25,7 @@
     extern UInt32 const THEME_COLOR_SEPTENARY;
     extern UInt32 const THEME_COLOR_OCTONARY;
     extern UInt32 const THEME_COLOR_NONARY;
+    extern UInt32 const THEME_COLOR_ACTIVE_CELL;
 
 
     // FONT
