@@ -68,7 +68,7 @@
         //define the webview coordinate
         webview=[[UIWebView alloc]initWithFrame:CGRectMake(5, 0, 960,728)];
         webview.scrollView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
-        [webview setHidden:YES];
+        //[webview setHidden:YES];
         
         [super viewDidLoad];
         // Do any additional setup after loading the view, typically from a nib.
@@ -215,7 +215,9 @@
         NSMutableDictionary* modifiedParams = [[NSMutableDictionary alloc]initWithDictionary:[params valueForKey:@"data"]];
         NSMutableDictionary* tempDict = [[NSMutableDictionary alloc] initWithDictionary:[modifiedParams valueForKey:@"SPAJAnswers"]];
         NSString* stringWhere = [NSString stringWithFormat:@"where CustomerID=%@ and SPAJID=%@ and SPAJTransactionID=%@ ",@"1",@"1",SPAJTransactionID];
+        
         [tempDict setObject:stringWhere forKey:@"where"];
+        [tempDict setObject:[tempDict valueForKey:@"columns"] forKey:@"columns"];
         
         NSMutableDictionary* answerDictionary = [[NSMutableDictionary alloc]init];
         [answerDictionary setObject:tempDict forKey:@"SPAJAnswers"];
@@ -228,7 +230,8 @@
     }
 
     - (void)webViewDidFinishLoad:(UIWebView *)webView{
-       [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"document.getElementById('read').click()"]];
+       //[webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"document.getElementById('read').click()"]];
+        [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"readfromDB();"]];
     }
 
 

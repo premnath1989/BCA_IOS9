@@ -142,9 +142,9 @@
       {
           var callInfo = {};
           callInfo.data = {};
-          callInfo.data.CFFAnswers = {};
-          callInfo.data.CFFAnswers.columns = 'elementID,Value,CFFID,CustomerID';
-          callInfo.data.CFFAnswers.where = '';
+          callInfo.data.SPAJAnswers = {};
+          callInfo.data.SPAJAnswers.columns = 'elementID,Value,SPAJID,CustomerID';
+          callInfo.data.SPAJAnswers.where = '';
           calliOSFunction('readfromDB:',onSuccess,onError, callInfo);					
       
           /*var dummyAll = '{"result":{"readFromDB":[{"NamaLengkap":"Iwan False","JenisIdentitas":"KTP","NomorIdentitasDiri":"1234567890","MasaBerlaku":"12-02-2019","TempatLahir":"Lhokseumawe","TanggalLahir":"09-01-1987","Usia":"29","Kewarganegaraan":"Indonesia","JenisKelamin":"P","Agama":"Kristen","PekerjaanUtama":"Karyawan Swasta","AlamatTinggal1":"Jalan","AlamatTinggal2":"Apa aja","AlamatTinggal3":"Disini Juga bisa","KotaTinggal":"Bekasi","KodePosTinggal":"17114","NomorTeleponPribadi":"021-299388171","NomorHPUtama":"08122234567","Email":"yosioliver@gmail.com","AlamatKantor1":"Thamrin Residence Office Park","AlamatKantor2":"Ruko A.12","KotaKantor":"Jakarta","KodePosKantor":"13776","TelpKantor":"021-12345654","HubunganDenganCalonTertanggung":"Suami","NomorNPWP":"1223334444"}]}}'
