@@ -452,8 +452,8 @@
     //pageRect = CGRectMake(343, 35,101 , 43);
     switch (index) {
         case 0:
-            pageRect = CGRectMake(67, 1195,96 , 53);
-            
+            //pageRect = CGRectMake(67, 1195,96 , 53);
+            pageRect = CGRectMake(67, 255,96 , 53);
             /*CFDataRef myPDFDataPage1 = (__bridge CFDataRef) pdfData;
             CGDataProviderRef providerPage1 = CGDataProviderCreateWithCFData(myPDFDataPage1);
             CGPDFDocumentRef pdfPage1 = CGPDFDocumentCreateWithProvider(providerPage1);
@@ -466,13 +466,16 @@
             CGContextDrawImage(pdfContext, pageRectPage1, pageImagePage1);*/
             break;
         case 1:
-            pageRect = CGRectMake(239, 1195,96 , 53);
+            //pageRect = CGRectMake(239, 1195,96 , 53);
+            pageRect = CGRectMake(239, 255,96 , 53);
             break;
         case 2:
-            pageRect = CGRectMake(407, 1195,96 , 53);
+            //pageRect = CGRectMake(407, 1195,96 , 53);
+            pageRect = CGRectMake(407, 255,96 , 53);
             break;
         case 3:
-            pageRect = CGRectMake(575, 1195,96 , 53);
+            //pageRect = CGRectMake(575, 1195,96 , 53);
+            pageRect = CGRectMake(575, 255,96 , 53);
             break;
             
         default:
