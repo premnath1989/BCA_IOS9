@@ -165,16 +165,16 @@ NSString* const Back = @"Back";
         indexSelected=indexPath.row;
         switch (indexPath.row) {
             case 0:
-                [self actionViewPhoto:nil];
+                //[self actionViewPhoto:nil];
                 break;
             case 1:
-                [self actionViewPhoto:nil];
+                //[self actionViewPhoto:nil];
                 break;
             case 2:
-                [self actionViewPhoto:nil];
+                //[self actionViewPhoto:nil];
                 break;
             case 3:
-                [self actionViewPhoto:nil];
+                //[self actionViewPhoto:nil];
                 break;
             default:
                 break;
@@ -469,7 +469,7 @@ NSString* const Back = @"Back";
                 lbl.text = @"Please snap within the red frame";
                 [view addSubview:lbl];
                 
-                //imagePickerController.cameraOverlayView = view;
+                imagePickerController.cameraOverlayView = view;
                 
                 imagePickerController.delegate = self;
                 imagePickerController.modalPresentationStyle = UIModalPresentationCustom;

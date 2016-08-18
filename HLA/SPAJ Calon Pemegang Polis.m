@@ -115,7 +115,7 @@
                     [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
     
     //define the webview coordinate
-    webview=[[UIWebView alloc]initWithFrame:CGRectMake(5, 0, 745,728)];
+    webview=[[UIWebView alloc]initWithFrame:CGRectMake(5, 0, 745,708)];
     webview.scrollView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.

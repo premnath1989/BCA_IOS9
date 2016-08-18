@@ -414,12 +414,15 @@
     NSString* documentsDirectory = [path_forDirectory objectAtIndex:0];
     NSString* filePath = [NSString stringWithFormat:@"%@/SPAJ/%@/SPAJ.pdf",documentsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"]];
     NSData *data = [[NSFileManager defaultManager] contentsAtPath:filePath];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-    [self addSignature:signatureImage onPDFData:data Index:index];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self joinMultiplePDF];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if ([fileManager fileExistsAtPath:filePath]){
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [self addSignature:signatureImage onPDFData:data Index:index];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self joinMultiplePDF];
+            });
         });
-    });
+    }
 }
 
 -(void) addSignature:(UIImage *)imgSignature onPDFData:(NSData *)pdfData Index:(int)index{

@@ -82,39 +82,47 @@
 }
 
 -(void)showFileSelected:(int)indexSelected{
-    [UIView animateWithDuration:0.3 animations:^{
-        
-        [tableFileList setFrame:CGRectMake(-tableFileList.frame.size.width, tableFileList.frame.origin.y, tableFileList.frame.size.width, tableFileList.frame.size.height)];
-        [viewDisplay setFrame:CGRectMake(0, viewDisplay.frame.origin.y, viewDisplay.frame.size.width, viewDisplay.frame.size.height)];
-        [buttonClose setTitle:@"Back" forState:UIControlStateNormal];
-        [buttonClose setEnabled:false];
-        [buttonSubmit setHidden:true];
-    } completion:^ (BOOL completed) {
-        [buttonClose setEnabled:true];
-        [self voidLoadFile:indexSelected];
-    }];
+        [UIView animateWithDuration:0.3 animations:^{
+            
+            [tableFileList setFrame:CGRectMake(-tableFileList.frame.size.width, tableFileList.frame.origin.y, tableFileList.frame.size.width, tableFileList.frame.size.height)];
+            [viewDisplay setFrame:CGRectMake(0, viewDisplay.frame.origin.y, viewDisplay.frame.size.width, viewDisplay.frame.size.height)];
+            [buttonClose setTitle:@"Back" forState:UIControlStateNormal];
+            [buttonClose setEnabled:false];
+            [buttonSubmit setHidden:true];
+        } completion:^ (BOOL completed) {
+            [buttonClose setEnabled:true];
+            [self voidLoadFile:indexSelected];
+        }];
+    
 }
 
 -(void)voidLoadFile:(int)arrayIndex{
-    NSString* fileName = [directoryContent objectAtIndex:arrayIndex];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[formatter generateSPAJFileDirectory:[dictTransaction valueForKey:@"SPAJEappNumber"]],fileName]];
+    @try {
+        NSString* fileName = [directoryContent objectAtIndex:arrayIndex];
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[formatter generateSPAJFileDirectory:[dictTransaction valueForKey:@"SPAJEappNumber"]],fileName]];
+        
+        NSString* fileType = [formatter findExtensionOfFileInUrl:url];
+        [imageViewDisplayImage setImage:nil];
+        [webViewDisplayPDF loadHTMLString:@"" baseURL:nil];
+        if ([fileType isEqualToString:@"pdf"]){
+            [webViewDisplayPDF setHidden:NO];
+            [imageViewDisplayImage setHidden:YES];
+            
+            NSURLRequest *request = [NSURLRequest requestWithURL:url];
+            [webViewDisplayPDF loadRequest:request];
+        }
+        else{
+            [webViewDisplayPDF setHidden:YES];
+            [imageViewDisplayImage setHidden:NO];
+            
+            [imageViewDisplayImage setImage:[UIImage imageWithContentsOfFile:[NSString stringWithFormat:@"%@/%@",[formatter generateSPAJFileDirectory:[dictTransaction valueForKey:@"SPAJEappNumber"]],fileName]]];
+        }
+    } @catch (NSException *exception) {
+        
+    } @finally {
+        
+    }
     
-    NSString* fileType = [formatter findExtensionOfFileInUrl:url];
-    [imageViewDisplayImage setImage:nil];
-    [webViewDisplayPDF loadHTMLString:@"" baseURL:nil];
-    if ([fileType isEqualToString:@"pdf"]){
-        [webViewDisplayPDF setHidden:NO];
-        [imageViewDisplayImage setHidden:YES];
-        
-        NSURLRequest *request = [NSURLRequest requestWithURL:url];
-        [webViewDisplayPDF loadRequest:request];
-    }
-    else{
-        [webViewDisplayPDF setHidden:YES];
-        [imageViewDisplayImage setHidden:NO];
-        
-        [imageViewDisplayImage setImage:[UIImage imageWithContentsOfFile:[NSString stringWithFormat:@"%@/%@",[formatter generateSPAJFileDirectory:[dictTransaction valueForKey:@"SPAJEappNumber"]],fileName]]];
-    }
 }
 
 -(IBAction)actionClose:(UIButton *)sender{
