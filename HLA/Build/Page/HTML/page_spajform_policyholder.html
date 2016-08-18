@@ -21,6 +21,7 @@
     <!-- %link{ :rel => "shortcut icon", :href => "#{urlResource}logo_favicon.ico", :type => "image/x-icon" } -->
     <!-- %link{ :rel => "icon", :href => "#{urlResource}logo_favicon.ico", :type => "image/x-icon" } -->
     <!-- CSS -->
+    <link href='../../Style/CSS/jquery.mobile-1.4.5.min.css' id='cssresponsive' rel='stylesheet' type='text/css'>
     <link href='../../Style/CSS/spajform-layout-general.css' id='csslayout' rel='stylesheet' type='text/css'>
     <link href='../../Style/CSS/spajform-font-general.css' id='cssfont' rel='stylesheet' type='text/css'>
     <link href='../../Style/CSS/spajform-input-general.css' id='cssinput' rel='stylesheet' type='text/css'>
@@ -31,8 +32,7 @@
     <!-- %link{ :id => "cssresponsive", :href => "#{urlCSS}#{urlCSSSectionPrefix}-responsive-general.css", :rel => "stylesheet", :type => "text/css" } -->
     <link href='../../Java Script/Minimized/DateTimePicker.min.css' id='cssresponsive' rel='stylesheet' type='text/css'>
     <!-- JAVA SCRIPT -->
-    <script src='../../Java Script/Minimized/jquery-1.11.1.min.js' type='text/javascript'></script>
-    <script src='../../Java Script/Minimized/jquery-migrate-1.2.1.min.js' type='text/javascript'></script>
+    <script src='../../Java Script/Minimized/jquery.mobile-1.4.5.min.js' type='text/javascript'></script>
     <script src='../../Java Script/Minimized/ibrahimaziz.min.js' type='text/javascript'></script>
     <script src='../../Java Script/Minimized/DateTimePicker.min.js' type='text/javascript'></script>
     <script src='../../Java Script/Minimized/DateTimePicker-i18n.js' type='text/javascript'></script>
@@ -63,14 +63,14 @@
           
           // BUTTON
           
-          $("#ButtonRead").click(function()
+          $("#read").click(function()
           {
-      
+              
           });
           
-          $("#ButtonWrite").click(function()
+          $("#save").click(function()
           {
-              savetoDB();
+              
           });
           
           $("#ButtonXML").click(function()
@@ -86,9 +86,9 @@
     <header>
       <h1>
         <!-- Data Calon Pemegang Polis -->
-        <input class='ButtonPrimary' id='ButtonRead' type='button'>Read</input>
-        <input class='ButtonPrimary' id='ButtonWrite' type='button'>Write</input>
-        <input class='ButtonPrimary' id='ButtonXML' type='button'>XML</input>
+        <input class='ButtonPrimary' id='read' style='display: none;' type='button' value='Read'>
+        <input class='ButtonPrimary' id='save' style='display: none;' type='button' value='Write'>
+        <input class='ButtonPrimary' id='ButtonXML' style='display: none;' type='button' value='XML'>
       </h1>
     </header>
     <!-- MAIN -->

@@ -56,6 +56,7 @@
     // DID LOAD
     - (void)viewDidAppear:(BOOL)animated{
         NSURL *url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"page_spaj_pdf" ofType:@"html" inDirectory:@"Build/Page/HTML"]];
+        //NSURL *url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"20160803113501" ofType:@"html" inDirectory:@"Build/Page/HTML"]];
         [webview loadRequest:[NSURLRequest requestWithURL:url]];
     }
 
@@ -68,7 +69,7 @@
         //define the webview coordinate
         webview=[[UIWebView alloc]initWithFrame:CGRectMake(5, 0, 960,728)];
         webview.scrollView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
-        //[webview setHidden:YES];
+        [webview setHidden:YES];
         
         [super viewDidLoad];
         // Do any additional setup after loading the view, typically from a nib.
