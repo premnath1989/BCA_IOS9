@@ -396,6 +396,7 @@
 		438410BE1D66A07200FD4152 /* watermarkID.png in Resources */ = {isa = PBXBuildFile; fileRef = 438410BD1D66A07200FD4152 /* watermarkID.png */; };
 		438410C21D66A2F700FD4152 /* SPAJIDCapturedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 438410C01D66A2F700FD4152 /* SPAJIDCapturedViewController.m */; };
 		438410C31D66A2F700FD4152 /* SPAJIDCapturedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 438410C11D66A2F700FD4152 /* SPAJIDCapturedViewController.xib */; };
+		438410C61D66E9AA00FD4152 /* ModelOccupation.m in Sources */ = {isa = PBXBuildFile; fileRef = 438410C51D66E9AA00FD4152 /* ModelOccupation.m */; };
 		4385C9651D6661A600D2DEB4 /* watermark overlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 4385C9641D6661A600D2DEB4 /* watermark overlay.png */; };
 		438624B81D24B8B300F1BDC7 /* ProfilResikoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 438624B61D24B8B300F1BDC7 /* ProfilResikoViewController.m */; };
 		438624B91D24B8B300F1BDC7 /* ProfilResikoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 438624B71D24B8B300F1BDC7 /* ProfilResikoViewController.xib */; };
@@ -1616,6 +1617,8 @@
 		438410BF1D66A2F700FD4152 /* SPAJIDCapturedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPAJIDCapturedViewController.h; sourceTree = "<group>"; };
 		438410C01D66A2F700FD4152 /* SPAJIDCapturedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPAJIDCapturedViewController.m; sourceTree = "<group>"; };
 		438410C11D66A2F700FD4152 /* SPAJIDCapturedViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SPAJIDCapturedViewController.xib; sourceTree = "<group>"; };
+		438410C41D66E9AA00FD4152 /* ModelOccupation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelOccupation.h; sourceTree = "<group>"; };
+		438410C51D66E9AA00FD4152 /* ModelOccupation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelOccupation.m; sourceTree = "<group>"; };
 		4385C9641D6661A600D2DEB4 /* watermark overlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "watermark overlay.png"; sourceTree = "<group>"; };
 		438624B51D24B8B300F1BDC7 /* ProfilResikoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfilResikoViewController.h; sourceTree = "<group>"; };
 		438624B61D24B8B300F1BDC7 /* ProfilResikoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfilResikoViewController.m; sourceTree = "<group>"; };
@@ -4244,6 +4247,8 @@
 				438E79041D5B2C1800C78AB2 /* ModelSPAJFormGeneration.m */,
 				438CBC781D616D1C00FF44B1 /* ModelSPAJSubmitTracker.h */,
 				438CBC791D616D1C00FF44B1 /* ModelSPAJSubmitTracker.m */,
+				438410C41D66E9AA00FD4152 /* ModelOccupation.h */,
+				438410C51D66E9AA00FD4152 /* ModelOccupation.m */,
 			);
 			name = "HLADB Model";
 			sourceTree = "<group>";
@@ -6510,6 +6515,7 @@
 				431376C71D0E6821007D3BF1 /* AddChildViewController.m in Sources */,
 				2958A8C117E960D80090A791 /* FinancialAnalysis.m in Sources */,
 				2958A8C217E960D80090A791 /* ProtectionPlans.m in Sources */,
+				438410C61D66E9AA00FD4152 /* ModelOccupation.m in Sources */,
 				2958A8C317E960D80090A791 /* RetirementPlans.m in Sources */,
 				2958A8C417E960D80090A791 /* SavingsPlans.m in Sources */,
 				2958A8C817E960FE0090A791 /* DataClass.m in Sources */,

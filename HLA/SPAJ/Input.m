@@ -42,6 +42,10 @@
         self.borderStyle = UITextBorderStyleLine;
         self.layer.borderWidth = INPUT_BORDER_WIDTH;
         self.layer.borderColor = [objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0].CGColor;
+
+        UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 20)];
+        self.leftView = paddingView;
+        self.leftViewMode = UITextFieldViewModeAlways;
     }
 
 @end

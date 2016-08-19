@@ -226,6 +226,27 @@
     return dataPrefix;
 }
 
+-(NSString *)getDataMobileAndPrefix:(NSString *)ContactCode IndexNo:(NSString *)IndexNo
+{
+    NSString *MobileNo;
+    
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    FMResultSet *s = [database executeQuery:@"SELECT IndexNo, ContactCode, ContactNo, Prefix FROM contact_input where indexNo = ? AND ContactCode = ?", IndexNo, ContactCode, Nil];
+    
+    while ([s next]) {
+        MobileNo = [NSString stringWithFormat:@"%@ - %@",[s stringForColumn:@"Prefix"],[s stringForColumn:@"ContactNo"]];
+    }
+    
+    [results close];
+    [database close];
+    return MobileNo;
+}
+
 -(NSMutableArray *)searchProspectProfileByName:(NSString *)searchName BranchName:(NSString *)branchName DOB:(NSString *)dateOfBirth Order:(NSString *)orderBy Method:(NSString *)method ID:(NSString *)IDNumber{
     NSString *ProspectID = @"";
     NSString *NickName = @"";

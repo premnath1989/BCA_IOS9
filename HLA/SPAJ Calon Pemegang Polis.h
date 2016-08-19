@@ -15,6 +15,7 @@
 #import "ModelSIPOData.h"
 #import "ModelIdentificationType.h"
 #import "Formatter.h"
+#import "ModelOccupation.h"
 
 @protocol SPAJCalonPemegangPolisDelegate
     -(NSString *)voidGetEAPPNumber;
@@ -25,6 +26,7 @@
 @interface SPAJ_Calon_Pemegang_Polis : HtmlGenerator{
     NSString *filePath;
     Formatter* formatter;
+    ModelOccupation *modelOccupation;
     ModelProspectProfile *modelProspectProfile;
     ModelSPAJTransaction *modelSPAJTransaction;
     ModelSPAJHtml* modelSPAJHtml;

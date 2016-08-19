@@ -87,7 +87,7 @@ function onSuccess (ret)
 
         if (stringType == "readFromDB")
         {
-            getFromDatabase(objectContent.result.readFromDB, stringPageTypeCurrent);
+            getFromDatabase(objectContent.result.readFromDB, stringPageTypeForm);
         }
         else
         {
@@ -107,8 +107,6 @@ function onError (ret)
 
 function readfromDB()
 {
-    alert("read from db");
-    
     var callInfo = {};
     callInfo.data = {};
     callInfo.data.SPAJAnswers = {};
@@ -119,22 +117,12 @@ function readfromDB()
 
 function savetoDB() 
 {
-    var objectContent;
-    
-    if (arrayHealthQuestionnaire.length > 0)
-    {
-        alert("no getter !, arrayHealthQuestionnaire length : " + arrayHealthQuestionnaire.length);
-        objectContent = arrayHealthQuestionnaire;
-    }
-    else
-    {
-        alert("with getter !, arrayHealthQuestionnaire length : " + arrayHealthQuestionnaire.length);
-        objectContent = setToDatabase(stringPageTypeCurrent);
-    }
-    
+    alert("b");
+    var objectContent = setToDatabase(stringPageTypeForm);
     var jsonToDatabase = JSONGenerator(objectContent);
-    
-    calliOSFunction('savetoDB:',onSuccess,onError, jsonToDatabase);    
+
+    calliOSFunction('savetoDB:',onSuccess,onError, jsonToDatabase);
+    alert("c")
 }
 
 function PrintData()
@@ -144,14 +132,12 @@ function PrintData()
 
 function AutoPopulate(jsonObject)
 {
-    alert("masuk auto populate");
-    
     var objectContent = JSON.parse(jsonObject);
     var stringType = Object.keys(objectContent.result)[0];
 
-    if (stringType == "autopopulateFromDB")
+    if (stringType == "readFromDB")
     {
-        getFromDatabase(objectContent.result.readFromDB, stringPageTypeCurrent);
+        getFromDatabase(objectContent.result.readFromDB, stringPageTypeForm);
     }
     else
     {

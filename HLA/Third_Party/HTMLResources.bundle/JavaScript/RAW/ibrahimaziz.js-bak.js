@@ -14,9 +14,10 @@ var labelDay = "Hari";
 var labelMonth = "Bulan";
 var labelYear = "Tahun";
 var sizeBox = 20;
-var arrayHealthQuestionnaire = [];
-var stringRadioButtonName;
-var stringDetailSuffix = "Detail";
+var arrayAdditionalQuestion = [];
+var stringKey;
+var stringRadioButtonSuffix = "RadioButton";
+var stringAdditionalQuestionSuffix = "AdditionalQuestion";
 var stringCheckboxSuffix = "Checkbox";
 var boxTypeStraight = "Text";
 var boxTypeDate = "Date";
@@ -28,7 +29,6 @@ var stringIDPrefix = "Prefix";
 var stringIDInfix = "Infix";
 var stringIDSuffix = "Suffix";
 var stringIDLine = "Line";
-var stringHealthSuffix = "Health"
 var stringKres = "#";
 var stringSeparatorDate = "/";
 var stringSeparatorTelephone = "-";
@@ -39,11 +39,7 @@ var stringPrefixText = "Text";
 var stringPrefixRadioButton = "RadioButton";
 var stringPrefixCheckbox = "Checkbox";
 var stringPrefixDate = "Date";
-var stringPrefixLabel = "Label";
 var stringPrefixSelect = "Select";
-var stringPopUpTypeGeneral = "general";
-var stringPopUpTypeHealth = "health";
-var stringPopUpTypeSPAJProposal = "spajproposal";
 
 
 // GENERATOR
@@ -84,149 +80,78 @@ function lineGenerator(lineID, lineAmount)
     $(lineID).css("width", ((sizeBox * lineAmount) + 2) + "px");
 }
 
-function additionalQuestionGenerator()
+function additionalQuestionGenerator(radioButtonName)
 {
-    $("input[type=radio]").each(function()
+    $("input:radio[name=" + radioButtonName + "]").change(function()
     {
-        // console.log("radioButtonName : " + $(this).attr("name") + ", data type : " + $(this).data("popup-type"));
-        
-        if ($(this).data("popup-type") == stringPopUpTypeGeneral)
+        if($(this).val() == "true")
         {
-            $("input:radio[name='" + $(this).attr("name") + "']").change(function()
-            {
-                if ($(this).val() == "true")
-                {
-                    $("#PopUpGeneral").css("display", "block");
-                    $("#LabelDetail").append($(stringKres + stringPrefixLabel + $(this).attr("name").substring(11, $(this).attr("name").length)).text());
-                    $("#TextDetail").empty();
-                }
-                else
-                {
-                    $("#PopUpGeneral").css("display", "none");
-                    $("#LabelDetail").empty();
-                }
-
-                stringRadioButtonName = $(this).attr("name");
-            });
-        }
-        else if ($(this).data("popup-type") == stringPopUpTypeHealth)
-        {
-            $("input:radio[name='" + $(this).attr("name") + "']").change(function()
-            {
-                if ($(this).val() == "true")
-                {
-                    $("#PopUpHealth").css("display", "block");
-                    $("#TextAdditionalQuestion").empty();
-                }
-                else
-                {
-                    $("#PopUpHealth").css("display", "none");
-                }
-                
-                stringRadioButtonName = $(this).attr("name");
-            });
-        }
-        else if ($(this).data("popup-type") == stringPopUpTypeSPAJProposal)
-        {
-            $("input:radio[name='" + $(this).attr("name") + "']").change(function()
-            {
-                if ($(this).val() == "true")
-                {
-                    $("#PopUpSPAJProposal").css("display", "block");
-                    // $("#LabelAdditionalQuestion").append($("#Label" + radioButtonName).text());
-                    // $("#TextAdditionalQuestion").empty();
-                }
-                else
-                {
-                    $("#PopUpSPAJProposal").css("display", "none");
-                    // $("#LabelAdditionalQuestion").empty();
-                }
-
-                stringRadioButtonName = $(this).attr("name");
-            });
+            $("#PopUpAdditionalQuestion").css("display", "block");
+            $("#LabelAdditionalQuestion").append($("#Label" + radioButtonName).text());
+            $("#TextAdditionalQuestion").empty();
         }
         else
         {
-            
+            $("#PopUpAdditionalQuestion").css("display", "none");
+            $("#LabelAdditionalQuestion").empty();
         }
+        
+        stringKey = radioButtonName;
     });
 }
 
-function arrayAdd(arrayObject, stringKey, stringValue)
+function buttonAdditionalQuestionGenerator(popUpID, textID)
 {
-    var booleanPushState = true;
-    
-    if (arrayObject.length > 0)
+    $("#ButtonAdditionalQuestionCancel").click(function()
     {
-        for (var i = 0; i < arrayObject.length; i++)
+        $(popUpID).css("display", "none");
+    });
+
+    $("#ButtonAdditionalQuestionDone").click(function()
+    {
+        var booleanPushState = true;
+        var stringTextKey = stringKey + stringAdditionalQuestionSuffix;
+        var stringTextValue = $(textID).val();
+
+        if (validateTextGeneral(textID) == true)
         {
-            if (arrayObject[i].elementID == stringKey)
+            if (arrayAdditionalQuestion.length > 0)
             {
-                arrayObject[i].Value = stringValue;
-                booleanPushState = false;
+                for (var i = 0; i < arrayAdditionalQuestion.length; i++)
+                {
+                    if (arrayAdditionalQuestion[i].key == stringTextKey)
+                    {
+                        arrayAdditionalQuestion[i].value = stringTextValue;
+                        booleanPushState = false;
+                    }
+                    else
+                    {
+
+                    }
+                }
+
+                if (booleanPushState == true)
+                {
+                    arrayAdditionalQuestion.push({ key: stringTextKey, value: stringTextValue });
+                }
+                else
+                {
+
+                }
             }
             else
             {
-
+                arrayAdditionalQuestion.push({ key: stringTextKey, value: stringTextValue });
             }
-        }
 
-        if (booleanPushState == true)
-        {
-            arrayObject.push({ elementID: stringKey, Value: stringValue });
-        }
-        else
-        {
-
-        }
-    }
-    else
-    {
-        arrayObject.push({ elementID: stringKey, Value: stringValue });
-    }
-}
-
-function buttonPopUpGeneralGenerator()
-{
-    var stringRadioButtonKey;
-    var stringRadioButtonValue;
-    var stringDetailKey;
-    var stringDetailValue;
-    
-    $("#PopUpGeneral #ButtonCancel").click(function()
-    {
-        setRadioButtonGeneral(stringRadioButtonKey, "false");
-        stringRadioButtonKey = stringRadioButtonName;
-        stringRadioButtonValue = getRadioButtonGeneral(stringRadioButtonName);
-        stringDetailkey = stringRadioButtonName + stringDetailSuffix;
-        stringDetailValue = $("#TextDetail").val();
-        
-        arrayAdd(arrayHealthQuestionnaire, stringRadioButtonKey, stringRadioButtonValue);
-        $("#PopUpGeneral").css("display", "none");
-    });
-
-    $("#PopUpGeneral #ButtonDone").click(function()
-    {
-        alert("general");
-        
-        stringRadioButtonKey = stringRadioButtonName;
-        stringRadioButtonValue = getRadioButtonGeneral(stringRadioButtonName);
-        stringDetailKey = stringRadioButtonName + stringDetailSuffix;
-        stringDetailValue = $("#TextDetail").val();
-        
-        if (validateTextGeneral("#TextDetail") == true)
-        {
-            arrayAdd(arrayHealthQuestionnaire, stringRadioButtonKey, stringRadioButtonValue);
-            arrayAdd(arrayHealthQuestionnaire, stringDetailKey, stringDetailValue);
-
-            $("#PopUpGeneral").css("display", "none");
-            $("#TextDetail").empty();
+            $(popUpID).css("display", "none");
+            $(textID).empty();
 
             var stringObjectPreview = "";
 
-            for (var i = 0; i < arrayHealthQuestionnaire.length; i++)
+            for (var i = 0; i < arrayAdditionalQuestion.length; i++)
             {
-                stringObjectPreview += "key : " + arrayHealthQuestionnaire[i].elementID + "\nvalue : " + arrayHealthQuestionnaire[i].Value + "\n";
+                stringObjectPreview += "key : " + arrayAdditionalQuestion[i].key + "\nvalue : " + arrayAdditionalQuestion[i].value + "\n";
             }
 
             alert(stringObjectPreview);
@@ -238,76 +163,21 @@ function buttonPopUpGeneralGenerator()
     });
 }
 
-function buttonPopUpHealthGenerator()
-{
-    var stringRadioButtonKey;
-    var stringRadioButtonValue;
-    
-    $("#PopUpHealth #ButtonCancel").click(function()
-    {
-        setRadioButtonGeneral(stringRadioButtonKey, "false");
-        stringRadioButtonKey = stringRadioButtonName;
-        stringRadioButtonValue = getRadioButtonGeneral(stringRadioButtonName);
-        arrayAdd(arrayHealthQuestionnaire, stringRadioButtonKey, stringRadioButtonValue);
-        
-//        $("#PopUpHealth form input[type=text]").each(function()
-//        {
-//            stringKey = $(this).attr("id") + stringHealthSuffix;
-//            stringValue = getTextGeneral(stringKey);
-//
-//            if (validateTextGeneral("#TextDetail") == true)
-//            {
-//                arrayAdd(arrayHealthQuestionnaire, stringKey, stringValue);
-//            }
-//            else
-//            {
-//                validationMessage("Harap lengkapi form terlebih dahulu !.", null);
-//            }
-//        });
-        
-        $("#PopUpHealth").css("display", "none");
-    });
-
-    $("#PopUpHealth #ButtonDone").click(function()
-    {
-        alert("health");
-        
-        stringRadioButtonKey = stringRadioButtonName;
-        stringRadioButtonValue = getRadioButtonGeneral(stringRadioButtonName);
-        arrayAdd(arrayHealthQuestionnaire, stringRadioButtonKey, stringRadioButtonValue);
-
-        $("#PopUpHealth form input[type=text]").each(function()
-        {
-            stringKey = $(this).attr("id") + stringHealthSuffix;
-            stringValue = getTextGeneral($(this).attr("id"));
-
-            if (validateTextGeneral("#TextDetail") == true)
-            {
-                arrayAdd(arrayHealthQuestionnaire, stringKey, stringValue);
-            }
-            else
-            {
-                validationMessage("Harap lengkapi form terlebih dahulu !.", null);
-            }
-        });
-
-        $("#PopUpHealth").css("display", "none");
-
-        $("#PopUpHealth form input[type=text]").each(function()
-        {
-            $(this).empty();
-        });
-
-        var stringObjectPreview = "";
-
-        for (var i = 0; i < arrayHealthQuestionnaire.length; i++)
-        {
-            stringObjectPreview += "key : " + arrayHealthQuestionnaire[i].elementID + "\nvalue : " + arrayHealthQuestionnaire[i].Value + "\n";
-        }
-
-        alert(stringObjectPreview);
-    });
-}
+//function inputSetter(stringKey, stringValue)
+//{
+//    if (suffixGetter(stringKey) == stringRadioButtonSuffix)
+//    {
+//        radioButtonSetter(stringKey.substring(stringKey.length - stringRadioButtonSuffix.length, stringKey.length), stringValue);
+//    }
+//    else if (suffixGetter(stringValue) == stringRadioButtonSuffix)
+//    {
+//        checkboxSetter(stringKey.substring(stringKey.length - stringRadioButtonSuffix.length, stringKey.length), stringValue)
+//    }
+//    else
+//    {
+//        $("#" + stringKey).val(stringValue);
+//    }
+//}
 
 
 // VALIDATE
@@ -489,10 +359,6 @@ function setTextPDF(stringID, stringValue)
         {
             setLineGeneral(stringID, stringValue);
         }
-        else if ($(stringJQueryID).is("td") == true)
-        {
-            setTextGeneral(stringID, stringValue);
-        }
         else
         {
             setBoxGeneral(stringID, stringValue);
@@ -550,13 +416,13 @@ function getTextGeneral(stringID)
 
 //var booleanPushState = true;
 //        
-//        if (arrayHealthQuestionnaire.length > 0)
+//        if (arrayAdditionalQuestion.length > 0)
 //        {
-//            for (var i = 0; i < arrayHealthQuestionnaire.length; i++)
+//            for (var i = 0; i < arrayAdditionalQuestion.length; i++)
 //            {
-//                if (arrayHealthQuestionnaire[i].key == stringName)
+//                if (arrayAdditionalQuestion[i].key == stringName)
 //                {
-//                    arrayHealthQuestionnaire[i].value = stringRadioButtonValue;
+//                    arrayAdditionalQuestion[i].value = stringRadioButtonValue;
 //                    booleanPushState = false;
 //                }
 //                else
@@ -567,7 +433,7 @@ function getTextGeneral(stringID)
 //
 //            if (booleanPushState == true)
 //            {
-//                arrayHealthQuestionnaire.push({ key: stringName, value: stringRadioButtonValue});
+//                arrayAdditionalQuestion.push({ key: stringName, value: stringRadioButtonValue});
 //            }
 //            else
 //            {
@@ -576,7 +442,7 @@ function getTextGeneral(stringID)
 //        }
 //        else
 //        {
-//            arrayHealthQuestionnaire.push({ key: stringName, value: stringRadioButtonValue});
+//            arrayAdditionalQuestion.push({ key: stringName, value: stringRadioButtonValue});
 //        }
 
 function getRadioButtonGeneral(stringName)
@@ -623,13 +489,13 @@ function getCheckboxGeneral(stringName)
 
 //var booleanPushState = true;
 //         
-//        if (arrayHealthQuestionnaire.length > 0)
+//        if (arrayAdditionalQuestion.length > 0)
 //        {
-//            for (var i = 0; i < arrayHealthQuestionnaire.length; i++)
+//            for (var i = 0; i < arrayAdditionalQuestion.length; i++)
 //            {
-//                if (arrayHealthQuestionnaire[i].key == stringTextKey)
+//                if (arrayAdditionalQuestion[i].key == stringTextKey)
 //                {
-//                    arrayHealthQuestionnaire[i].value = stringTextValue;
+//                    arrayAdditionalQuestion[i].value = stringTextValue;
 //                    booleanPushState = false;
 //                }
 //                else
@@ -640,7 +506,7 @@ function getCheckboxGeneral(stringName)
 //
 //            if (booleanPushState == true)
 //            {
-//                arrayHealthQuestionnaire.push({ key: stringTextKey, value: stringTextValue});
+//                arrayAdditionalQuestion.push({ key: stringTextKey, value: stringTextValue});
 //            }
 //            else
 //            {
@@ -649,7 +515,7 @@ function getCheckboxGeneral(stringName)
 //        }
 //        else
 //        {
-//            arrayHealthQuestionnaire.push({ key: stringTextKey, value: stringTextValue});
+//            arrayAdditionalQuestion.push({ key: stringTextKey, value: stringTextValue});
 //        }
 
 function getTextForm(stringID)
@@ -684,10 +550,6 @@ function getTextPDF(stringID)
         {
             stringContent += getBoxGeneral(stringJQueryID);
         }
-    }
-    else if (stringJQueryID.is("td") == true)
-    {
-        stringContent = $(stringJQueryID).text();
     }
     else
     {

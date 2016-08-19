@@ -144,5 +144,5 @@ BUTTON_VIEW = "View";
 BUTTON_CLOSE = "Close";
 BUTTON_DONE = "Done";
 BUTTON_CANCEL = "Cancel";
-BUTTON_GENERATEFORM = "Generato Form";
+BUTTON_GENERATEFORM = "Generate Form";
 BUTTON_SAVE = "Save";

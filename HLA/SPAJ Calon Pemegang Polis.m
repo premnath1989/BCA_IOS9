@@ -13,21 +13,17 @@
 
 @implementation SPAJ_Calon_Pemegang_Polis{
     NSString *stringSection;
+    
     NSArray* newElementArrayName;
     NSArray* originalElementArrayName;
+    
+    NSArray* newElementArrayTertanggungName;
+    NSArray* originalElementArrayTertanggungName;
 }
 @synthesize htmlFileName;
 @synthesize delegate;
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:YES];
-    /*NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    filePath = [docsDir stringByAppendingPathComponent:@"SPAJ"];
-    
-    NSString *htmlfilePath = [NSString stringWithFormat:@"SPAJ/%@",htmlFileName];
-    NSString *localURL = [[NSString alloc] initWithString:
-                          [docsDir stringByAppendingPathComponent: htmlfilePath]];
-    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localURL]];
-    [webview loadRequest:urlRequest];*/
 }
 
 -(void)loadFirstHTML:(NSString*)stringHTMLName PageSection:(NSString *)stringPageSection{
@@ -104,6 +100,7 @@
 }
 
 - (void)viewDidLoad {
+    modelOccupation = [[ModelOccupation alloc]init];
     modelProspectProfile = [[ModelProspectProfile alloc]init];
     modelSPAJTransaction = [[ModelSPAJTransaction alloc]init];
     modelSPAJHtml = [[ModelSPAJHtml alloc]init];
@@ -113,6 +110,7 @@
     formatter = [[Formatter alloc]init];
     
     [self initialArrayPolicyData];
+    [self initialArrayTertanggungData];
     
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     databasePath = [[NSString alloc] initWithString:
@@ -151,7 +149,12 @@
                            @"TextPolicyHolderID",
                            @"RadioButtonPolicyHolderNationality",
                            @"TextPolicyHolderPlace",
-                           @"DatePolicyHolderActive"
+                           @"DatePolicyHolderActive",
+                           @"TextPolicyHolderNPWP",
+                           @"TextPolicyHolderHomeTelephone",
+                           @"TextPolicyHolderHandphone1",
+                           @"TextPolicyHolderHandphone2",
+                           @"TextPolicyHolderOfficeTelephone"
                            , nil];
     
     originalElementArrayName= [[NSArray alloc]initWithObjects:
@@ -174,9 +177,73 @@
                                @"OtherIDTypeNo",
                                @"Nationality",
                                @"CountryOfBirth",
-                               @"IDExpiryDate"
+                               @"IDExpiryDate",
+                               @"NPWPNo",
+                               @"CONT006",
+                               @"CONT008",
+                               @"CONT007",
+                               @"CONT009"
                                , nil];
 
+};
+
+-(void)initialArrayTertanggungData{
+    newElementArrayTertanggungName = [[NSArray alloc]initWithObjects:
+                           @"TextProspectiveInsuredFullName",
+                           @"DateProspectiveInsuredBirthday",
+                           @"RadioButtonProspectiveInsuredSex",
+                           @"TextProspectiveInsuredHomeAddress1",
+                           @"TextProspectiveInsuredHomeAddress2",
+                           @"TextProspectiveInsuredHomeAddress3",
+                           @"TextProspectiveInsuredHomeCity",
+                           @"TextProspectiveInsuredPostalCode",
+                           @"TextProspectiveInsuredOfficeAddress1",
+                           @"TextProspectiveInsuredOfficeAddress2",
+                           @"TextProspectiveInsuredOfficeAddress3",
+                           @"TextProspectiveInsuredOfficeCity",
+                           @"TextProspectiveInsuredOfficePostalCode",
+                           @"TextProspectiveInsuredEmail",
+                           @"TextProspectiveInsuredMainJob",
+                           @"SelectProspectiveInsuredIDType",
+                           @"TextProspectiveInsuredID",
+                           @"RadioButtonProspectiveInsuredNationality",
+                           @"TextProspectiveInsuredPlace",
+                           @"DateProspectiveInsuredActive",
+                           @"TextProspectiveInsuredNPWP",
+                           @"TextProspectiveInsuredHomeTelephone",
+                           @"TextProspectiveInsuredHandphone1",
+                           @"TextProspectiveInsuredHandphone2",
+                           @"TextProspectiveInsuredOfficeTelephone"
+                           , nil];
+    
+    originalElementArrayTertanggungName= [[NSArray alloc]initWithObjects:
+                               @"ProspectName",
+                               @"ProspectDOB",
+                               @"ProspectGender",
+                               @"ResidenceAddress1",
+                               @"ResidenceAddress2",
+                               @"ResidenceAddress3",
+                               @"ResidenceAddressTown",
+                               @"ResidenceAddressPostCode",
+                               @"OfficeAddress1",
+                               @"OfficeAddress2",
+                               @"OfficeAddress3",
+                               @"OfficeAddressTown",
+                               @"OfficeAddressPostCode",
+                               @"ProspectEmail",
+                               @"ProspectOccupationCode",
+                               @"OtherIDType",
+                               @"OtherIDTypeNo",
+                               @"Nationality",
+                               @"CountryOfBirth",
+                               @"IDExpiryDate",
+                               @"NPWPNo",
+                               @"CONT006",
+                               @"CONT008",
+                               @"CONT007",
+                               @"CONT009"
+                               , nil];
+    
 };
 
 #pragma mark call save function in HTML
@@ -223,7 +290,6 @@
     
     NSMutableDictionary* finalDictionary = [[NSMutableDictionary alloc]init];
     [finalDictionary setObject:finalArrayDictionary forKey:@"data"];
-    //[modelCFFTransaction updateCFFDateModified:[cffTransactionID intValue]];
     
     [finalDictionary setValue:[params valueForKey:@"successCallBack"] forKey:@"successCallBack"];
     [finalDictionary setValue:[params valueForKey:@"errorCallback"] forKey:@"errorCallback"];
@@ -275,106 +341,99 @@
 }
 
 -(NSMutableDictionary *)ModifiedDictionary:(NSDictionary *)originalDictionary OriginalElementName:(NSString *)stringOriginalElementName NewElementName:(NSString *)stringNewElementName{
-      //NSMutableDictionary *modiFiedDictionary = [[NSMutableDictionary alloc]initWithDictionary:originalDictionary];
-     NSMutableDictionary *modiFiedDictionary = [[NSMutableDictionary alloc]init];
-     /*[modiFiedDictionary setObject:[originalDictionary valueForKey:@"ProspectName"] forKey:@"TextProspectivePolicyHolderFullName"];
-     [modiFiedDictionary setObject:[originalDictionary valueForKey:@"ProspectDOB"] forKey:@"ProspectivePolicyHolderBirthday"];
-     [modiFiedDictionary setObject:[originalDictionary valueForKey:@"ProspectGender"] forKey:@"RadioButtonProspectivePolicyHolderSex"];
-     [modiFiedDictionary setObject:[originalDictionary valueForKey:@"ResidenceAddress1"] forKey:@"TextProspectivePolicyHolderHomeAddress1"];
-     [modiFiedDictionary setObject:[originalDictionary valueForKey:@"ResidenceAddress2"] forKey:@"TextProspectivePolicyHolderHomeAddress2"];
-     [modiFiedDictionary setObject:[originalDictionary valueForKey:@"ResidenceAddress3"] forKey:@"TextProspectivePolicyHolderHomeAddress3"];
-     [modiFiedDictionary setObject:[originalDictionary valueForKey:@"ResidenceAddressTown"] forKey:@"TextProspectivePolicyHolderHomeCity"];
-     [modiFiedDictionary setObject:[originalDictionary valueForKey:@"ResidenceAddressPostCode"] forKey:@"TextProspectivePolicyHolderPostalCode"];
-     [modiFiedDictionary setObject:[originalDictionary valueForKey:@"OfficeAddress1"] forKey:@"TextProspectivePolicyHolderOfficeAddress1"];
-     [modiFiedDictionary setObject:[originalDictionary valueForKey:@"OfficeAddress2"] forKey:@"TextProspectivePolicyHolderOfficeAddress2"];
-     [modiFiedDictionary setObject:[originalDictionary valueForKey:@"OfficeAddress3"] forKey:@"TextProspectivePolicyHolderOfficeAddress3"];
-     [modiFiedDictionary setObject:[originalDictionary valueForKey:@"OfficeAddressTown"] forKey:@"TextProspectivePolicyHolderOfficeCity"];
-     [modiFiedDictionary setObject:[originalDictionary valueForKey:@"OfficeAddressPostCode"] forKey:@"TextProspectivePolicyHolderOfficePostalCode"];
-     [modiFiedDictionary setObject:[originalDictionary valueForKey:@"ProspectEmail"] forKey:@"TextProspectivePolicyHolderEmail"];
-     [modiFiedDictionary setObject:[originalDictionary valueForKey:@"ProspectOccupationCode"] forKey:@"TextProspectivePolicyHolderMainJob"];
-     [modiFiedDictionary setObject:[originalDictionary valueForKey:@"OtherIDType"] forKey:@"SelectProspectivePolicyHolderIDType"];*/
-     //[modiFiedDictionary setObject:@"TextPolicyHolderID" forKey:@"elementID"];
-     //[modiFiedDictionary setObject:[originalDictionary valueForKey:@"OtherIDTypeNo"] forKey:@"Value"];
-     [modiFiedDictionary setObject:stringNewElementName forKey:@"elementID"];
-     [modiFiedDictionary setObject:[originalDictionary valueForKey:stringOriginalElementName] forKey:@"Value"];
-     /*[modiFiedDictionary setObject:[originalDictionary valueForKey:@"Nationality"] forKey:@"RadioButtonProspectivePolicyHolderNationality"];
-     [modiFiedDictionary setObject:[originalDictionary valueForKey:@"CountryOfBirth"] forKey:@"TextProspectivePolicyHolderPlace"];
-     [modiFiedDictionary setObject:[originalDictionary valueForKey:@"IDExpiryDate"] forKey:@"DateProspectivePolicyHolderActive"];*/
-     /*newElementArrayName = [[NSArray alloc]initWithObjects:
-                                     @"TextProspectivePolicyHolderFullName",
-                                     @"ProspectivePolicyHolderBirthday",
-                                     @"RadioButtonProspectivePolicyHolderSex",
-                                     @"TextProspectivePolicyHolderHomeAddress1",
-                                     @"TextProspectivePolicyHolderHomeAddress2",
-                                     @"TextProspectivePolicyHolderHomeAddress3",
-                                     @"TextProspectivePolicyHolderHomeCity",
-                                     @"TextProspectivePolicyHolderPostalCode",
-                                     @"TextProspectivePolicyHolderOfficeAddress1",
-                                     @"TextProspectivePolicyHolderOfficeAddress2",
-                                     @"TextProspectivePolicyHolderOfficeAddress3",
-                                     @"TextProspectivePolicyHolderOfficeCity",
-                                     @"TextProspectivePolicyHolderOfficePostalCode",
-                                     @"TextProspectivePolicyHolderEmail",
-                                     @"TextProspectivePolicyHolderMainJob",
-                                     @"SelectProspectivePolicyHolderIDType",
-                                     @"TextPolicyHolderID",
-                                     @"RadioButtonProspectivePolicyHolderNationality",
-                                     @"TextProspectivePolicyHolderPlace",
-                                     @"DateProspectivePolicyHolderActive"
-                                     , nil];
-    
-    originalElementArrayName= [[NSArray alloc]initWithObjects:
-                                        @"ProspectName",
-                                        @"ProspectDOB",
-                                        @"ProspectGender",
-                                        @"ResidenceAddress1",
-                                        @"ResidenceAddress2",
-                                        @"ResidenceAddress3",
-                                        @"ResidenceAddressTown",
-                                        @"ResidenceAddressPostCode",
-                                        @"OfficeAddress1",
-                                        @"OfficeAddress2",
-                                        @"OfficeAddress3",
-                                        @"OfficeAddressTown",
-                                        @"OfficeAddressPostCode",
-                                        @"ProspectEmail",
-                                        @"ProspectOccupationCode",
-                                        @"OtherIDType",
-                                        @"OtherIDTypeNo",
-                                        @"Nationality",
-                                        @"CountryOfBirth",
-                                        @"IDExpiryDate"
-                                        , nil];*/
-    
-    
-     return modiFiedDictionary;
+      NSMutableDictionary *modiFiedDictionary = [[NSMutableDictionary alloc]init];
+        NSString* prospectID = [NSString stringWithFormat:@"%@",[originalDictionary valueForKey:@"IndexNo"]];
+        if ([stringOriginalElementName isEqualToString:@"ProspectOccupationCode"]){
+            NSString* occupationDesc = [modelOccupation getOccupationDesc:[originalDictionary valueForKey:stringOriginalElementName]];
+            [modiFiedDictionary setObject:stringNewElementName forKey:@"elementID"];
+            [modiFiedDictionary setObject:occupationDesc forKey:@"Value"];
+            return modiFiedDictionary;
+        }
+        else if ([stringOriginalElementName isEqualToString:@"OtherIDType"]){
+            NSString* identityDesc = [modelIdentificationType getOtherTypeDesc:[originalDictionary valueForKey:stringOriginalElementName]];
+            [modiFiedDictionary setObject:stringNewElementName forKey:@"elementID"];
+            [modiFiedDictionary setObject:identityDesc forKey:@"Value"];
+            return modiFiedDictionary;
+        }
+        else if ([stringOriginalElementName isEqualToString:@"CONT006"]){
+            NSString* stringTelp = [modelProspectProfile getDataMobileAndPrefix:stringOriginalElementName IndexNo:prospectID];
+            [modiFiedDictionary setObject:stringNewElementName forKey:@"elementID"];
+            [modiFiedDictionary setObject:stringTelp forKey:@"Value"];
+            return modiFiedDictionary;
+        }
+        else if ([stringOriginalElementName isEqualToString:@"CONT008"]){
+           NSString* stringTelp = [modelProspectProfile getDataMobileAndPrefix:stringOriginalElementName IndexNo:prospectID ];
+            [modiFiedDictionary setObject:stringNewElementName forKey:@"elementID"];
+            [modiFiedDictionary setObject:stringTelp forKey:@"Value"];
+            return modiFiedDictionary;
+        }
+        else if ([stringOriginalElementName isEqualToString:@"CONT007"]){
+            NSString* stringTelp = [modelProspectProfile getDataMobileAndPrefix:stringOriginalElementName IndexNo:prospectID ];
+            [modiFiedDictionary setObject:stringNewElementName forKey:@"elementID"];
+            [modiFiedDictionary setObject:stringTelp forKey:@"Value"];
+            return modiFiedDictionary;
+        }
+        else if ([stringOriginalElementName isEqualToString:@"CONT009"]){
+            NSString* stringTelp = [modelProspectProfile getDataMobileAndPrefix:stringOriginalElementName IndexNo:prospectID];
+            [modiFiedDictionary setObject:stringNewElementName forKey:@"elementID"];
+            [modiFiedDictionary setObject:stringTelp forKey:@"Value"];
+            return modiFiedDictionary;
+        }
+        else{
+            [modiFiedDictionary setObject:stringNewElementName forKey:@"elementID"];
+            [modiFiedDictionary setObject:[originalDictionary valueForKey:stringOriginalElementName] forKey:@"Value"];
+            return modiFiedDictionary;
+        }
 }
 
 -(NSDictionary *)dictForAutoPopulate{
     NSString *SINO = [modelSPAJTransaction getSPAJTransactionData:@"SPAJSINO" StringWhereName:@"SPAJEappNumber" StringWhereValue:[delegate voidGetEAPPNumber]];
     NSDictionary* dictPOData = [[NSDictionary alloc ]initWithDictionary:[modelSIPData getPO_DataFor:SINO]];
     
-    //NSMutableArray* columnNames = [[NSMutableArray alloc]initWithArray:[modelProspectProfile getColumnNames:@"prospect_profile"]];
-    //NSMutableArray* columnValue = [[NSMutableArray alloc]initWithArray:[modelProspectProfile getColumnValue:[self getPOIndexNumber] ColumnCount:[columnNames count]]];
-    
-    //create dictionary
-    //NSMutableDictionary* dictDetail = [[NSMutableDictionary alloc]initWithDictionary:[self ModifiedDictionary:[self OriginalDictionaryForAutoPopulate]]];
-    /*for (int i=0;i<[columnNames count];i++){
-        [dictDetail setObject:[columnValue objectAtIndex:i] forKey:[columnNames objectAtIndex:i]];
-    }*/
-    
-    /*NSString* identityDesc = [modelIdentificationType getOtherTypeDesc:[dictDetail valueForKey:@"OtherIDType"]];
-    
-    [dictDetail setObject:identityDesc forKey:@"OtherIDType"];
-    [dictDetail setObject:[dictPOData valueForKey:@"RelWithLA"] forKey:@"RelWithLA"];*/
     NSMutableArray* arrayValue = [[NSMutableArray alloc] init];
-    for (int i=0;i<[newElementArrayName count];i++){
-        NSMutableDictionary* dictDetail = [[NSMutableDictionary alloc]initWithDictionary:[self ModifiedDictionary:[self OriginalDictionaryForAutoPopulate] OriginalElementName:[originalElementArrayName objectAtIndex:i] NewElementName:[newElementArrayName objectAtIndex:i]]];
-        [arrayValue addObject:dictDetail];
+    if ([stringSection isEqualToString:@"PO"]){
+        for (int i=0;i<[newElementArrayName count];i++){
+            NSMutableDictionary* dictDetail = [[NSMutableDictionary alloc]initWithDictionary:[self ModifiedDictionary:[self OriginalDictionaryForAutoPopulate] OriginalElementName:[originalElementArrayName objectAtIndex:i] NewElementName:[newElementArrayName objectAtIndex:i]]];
+            [arrayValue addObject:dictDetail];
+        }
+    }
+    else if ([stringSection isEqualToString:@"TR"]){
+        for (int i=0;i<[newElementArrayTertanggungName count];i++){
+            NSMutableDictionary* dictDetail = [[NSMutableDictionary alloc]initWithDictionary:[self ModifiedDictionary:[self OriginalDictionaryForAutoPopulate] OriginalElementName:[originalElementArrayTertanggungName objectAtIndex:i] NewElementName:[newElementArrayTertanggungName objectAtIndex:i]]];
+            [arrayValue addObject:dictDetail];
+        }
     }
     
+    NSMutableDictionary* dictRelWithLa = [[NSMutableDictionary alloc]initWithObjectsAndKeys:@"RadioButtonPolicyHolderRelationAssured",@"elementID",[dictPOData valueForKey:@"RelWithLA"],@"Value", nil];
     
-    //NSDictionary *readFromDB=[[NSDictionary alloc]initWithObjectsAndKeys:arrayValue,@"readFromDB", nil];
+    [arrayValue addObject:dictRelWithLa];
+    NSDictionary *readFromDB=[[NSDictionary alloc]initWithObjectsAndKeys:arrayValue,@"autopopulateFromDB", nil];
+    NSDictionary *result=[[NSDictionary alloc]initWithObjectsAndKeys:readFromDB,@"result", nil];
+    
+    return result;
+}
+
+-(NSDictionary *)dictForAutoPopulateTertanggung{
+    NSString *SINO = [modelSPAJTransaction getSPAJTransactionData:@"SPAJSINO" StringWhereName:@"SPAJEappNumber" StringWhereValue:[delegate voidGetEAPPNumber]];
+    NSDictionary* dictLAData = [[NSDictionary alloc ]initWithDictionary:[modelSIPData getPO_DataFor:SINO]];
+    
+    NSMutableArray* arrayValue = [[NSMutableArray alloc] init];
+    if ([stringSection isEqualToString:@"PO"]){
+        for (int i=0;i<[newElementArrayName count];i++){
+            NSMutableDictionary* dictDetail = [[NSMutableDictionary alloc]initWithDictionary:[self ModifiedDictionary:[self OriginalDictionaryForAutoPopulate] OriginalElementName:[originalElementArrayName objectAtIndex:i] NewElementName:[newElementArrayName objectAtIndex:i]]];
+            [arrayValue addObject:dictDetail];
+        }
+    }
+    else if ([stringSection isEqualToString:@"TR"]){
+        for (int i=0;i<[newElementArrayTertanggungName count];i++){
+            NSMutableDictionary* dictDetail = [[NSMutableDictionary alloc]initWithDictionary:[self ModifiedDictionary:[self OriginalDictionaryForAutoPopulate] OriginalElementName:[originalElementArrayTertanggungName objectAtIndex:i] NewElementName:[newElementArrayTertanggungName objectAtIndex:i]]];
+            [arrayValue addObject:dictDetail];
+        }
+    }
+    
+    NSMutableDictionary* dictRelWithLa = [[NSMutableDictionary alloc]initWithObjectsAndKeys:@"RadioButtonPolicyHolderRelationAssured",@"elementID",[dictLAData valueForKey:@"RelWithLA"],@"Value", nil];
+    
+    [arrayValue addObject:dictRelWithLa];
     NSDictionary *readFromDB=[[NSDictionary alloc]initWithObjectsAndKeys:arrayValue,@"autopopulateFromDB", nil];
     NSDictionary *result=[[NSDictionary alloc]initWithObjectsAndKeys:readFromDB,@"result", nil];
     
@@ -382,8 +441,6 @@
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
-    //autoPopulate()
-    NSLog(@"dictPopulate %@",[self dictForAutoPopulate]);
     NSString *jsonString;
     NSError *error;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:[self dictForAutoPopulate]
@@ -398,8 +455,6 @@
         NSLog(@"json string %@",jsonString);
     }
     
-    
-    //[webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"document.getElementById('read').click()"]];
     [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"readfromDB();"]];
 }
 

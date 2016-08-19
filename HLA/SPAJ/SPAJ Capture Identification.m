@@ -711,6 +711,10 @@ NSString* const Back = @"Back";
                     }
                 }
                 [tablePartiesCaprture reloadData];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [tablePartiesCaprture selectRowAtIndexPath:[NSIndexPath indexPathForRow:indexSelected inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
+                });
+                
             }
         }
         else{

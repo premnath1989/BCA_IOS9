@@ -134,8 +134,6 @@ function PrintData()
 
 function AutoPopulate(jsonObject)
 {
-    alert("masuk auto populate");
-    
     var objectContent = JSON.parse(jsonObject);
     var stringType = Object.keys(objectContent.result)[0];
     

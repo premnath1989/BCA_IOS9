@@ -21,4 +21,5 @@
 
 -(NSMutableArray *)getColumnNames:(NSString *)stringTableName;
 -(NSMutableArray *)getColumnValue:(NSString *)stringProspectID ColumnCount:(int)intColumnCount;
+-(NSString *)getDataMobileAndPrefix:(NSString *)ContactCode IndexNo:(NSString *)IndexNo;
 @end
