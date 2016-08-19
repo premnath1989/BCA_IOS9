@@ -295,8 +295,6 @@ const int numberOfModule = 7;
 
 
 -(void)viewDidAppear:(BOOL)animated{
-    AppDelegate *appDele= (AppDelegate*)[[UIApplication sharedApplication] delegate ];
-    
     //the disclaimer function
 //    [self showDisclaimer];
 }
