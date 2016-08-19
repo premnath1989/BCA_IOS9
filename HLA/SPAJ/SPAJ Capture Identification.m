@@ -20,7 +20,9 @@ NSString* const Front = @"Front";
 NSString* const Back = @"Back";
 // DECLARATION
 
-@interface SPAJCaptureIdentification ()
+@interface SPAJCaptureIdentification (){
+    SPAJIDCapturedViewController* spajIDCapturedViewController;
+}
 
 
 
@@ -31,6 +33,8 @@ NSString* const Back = @"Back";
 
 @implementation SPAJCaptureIdentification
 {
+    NSDictionary* dictionaryPOData;
+    
     NSMutableArray *mutableArrayNumberListOfSubMenu;
     NSMutableArray *mutableArrayListOfSubMenu;
     NSMutableArray *mutableArrayListOfSubTitleMenu;
@@ -114,7 +118,7 @@ NSString* const Back = @"Back";
         NSString* stringEAppNumber = [dictTransaction valueForKey:@"SPAJEappNumber"];//[SPAJAddSignatureDelegate voidGetEAPPNumber];
         NSString* SINO = [modelSPAJTransaction getSPAJTransactionData:@"SPAJSINO" StringWhereName:@"SPAJEappNumber" StringWhereValue:stringEAppNumber];
         
-        NSDictionary* dictionaryPOData = [[NSDictionary alloc]initWithDictionary:[modelSIPOData getPO_DataFor:SINO]];
+        dictionaryPOData = [[NSDictionary alloc]initWithDictionary:[modelSIPOData getPO_DataFor:SINO]];
         stringSIRelation = [dictionaryPOData valueForKey:@"RelWithLA"];
         LAAge = [[dictionaryPOData valueForKey:@"LA_Age"] intValue];
     }
@@ -254,8 +258,8 @@ NSString* const Back = @"Back";
     }
 
     -(IBAction)actionViewPhoto:(UIButton *)sender{
-        [self voidShowFrontPhoto:indexSelected];
-        [self voidShowBackPhoto:indexSelected];
+        //[self voidShowFrontPhoto:indexSelected];
+        //[self voidShowBackPhoto:indexSelected];
         
         switch (indexSelected) {
             case 0:
@@ -275,12 +279,30 @@ NSString* const Back = @"Back";
         }
         NSString* identityDesc ;
         if ([modelIdentificationType getOtherTypeDesc:stringIDTypeIdentifier].length>0){
+            NSString* stringName;
+            if (indexSelected == 0){
+                stringName = [NSString stringWithFormat:@"%@ (Calon Pemegang Polis)",[dictionaryPOData valueForKey:@"PO_Name"]];
+                
+            }
+            else{
+                stringName = [NSString stringWithFormat:@"%@ (Calon Tertanggung)",[dictionaryPOData valueForKey:@"LA_Name"]];
+            }
+            
             identityDesc =[modelIdentificationType getOtherTypeDesc:stringIDTypeIdentifier];
+            UIImage* imageFrontPhoto = [self getFrontPhoto:indexSelected];
+            UIImage* imageBackPhoto = [self getBackPhoto:indexSelected];
+            NSDictionary*dictIDInfo = [[NSDictionary alloc]initWithObjectsAndKeys:identityDesc,@"IDType",imageFrontPhoto,@"imageFrontPhoto",imageBackPhoto,@"imageBackPhoto", stringName,@"stringName",nil];
+            spajIDCapturedViewController = [[SPAJIDCapturedViewController alloc]initWithNibName:@"SPAJIDCapturedViewController" bundle:nil];
+            [spajIDCapturedViewController setDictionaryIDData:dictIDInfo];
+            
+            spajIDCapturedViewController.modalPresentationStyle = UIModalPresentationFormSheet;
+            [self presentViewController:spajIDCapturedViewController animated:YES completion:nil];
         }
         else{
             identityDesc = @"Select Identification Type";
         }
-        [buttonIDTypeSelection setTitle:identityDesc forState:UIControlStateNormal];
+        //[buttonIDTypeSelection setTitle:identityDesc forState:UIControlStateNormal];
+        
     }
 
     -(void)voidShowFrontPhoto:(int)indexPositionSelected{
@@ -382,6 +404,111 @@ NSString* const Back = @"Back";
             default:
                 break;
         }
+    }
+
+    -(UIImage *)getFrontPhoto:(int)indexPositionSelected{
+        NSString* docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        NSString* rootFilePathApp = [docsDir stringByAppendingPathComponent:@"SPAJ"];
+        NSString* stringEAPPPath = [dictTransaction valueForKey:@"SPAJEappNumber"];
+        NSString* filePathApp = [rootFilePathApp stringByAppendingPathComponent:stringEAPPPath];
+        
+        //filename combination is EAPPNumberPartyIDTypeFront
+        //filename combination is EAPPNumberPartyIDTypeBack
+        NSString* fileName;
+        NSString* stringIDIdentifier;
+        NSString* imagePath;
+        UIImage *imageID;
+        switch (indexPositionSelected) {
+            case 0:
+            {
+                stringIDIdentifier = [modelSPAJIDCapture selectIDType:@"SPAJIDTypeParty1" SPAJSection:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
+                fileName = [NSString stringWithFormat:@"/%@%@%@%@.jpg",stringEAPPPath,PemegangPolis,stringIDIdentifier,Front];
+                imagePath = [filePathApp stringByAppendingString:fileName];
+                imageID = [UIImage imageWithContentsOfFile:imagePath];
+                return imageID;
+                break;
+            }
+            case 1:{
+                stringIDIdentifier = [modelSPAJIDCapture selectIDType:@"SPAJIDTypeParty2" SPAJSection:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
+                fileName = [NSString stringWithFormat:@"/%@%@%@%@.jpg",stringEAPPPath,Tertanggung,stringIDIdentifier,Front];
+                imagePath = [filePathApp stringByAppendingString:fileName];
+                imageID = [UIImage imageWithContentsOfFile:imagePath];
+                return imageID;
+                break;
+            }
+            case 2:{
+                stringIDIdentifier = [modelSPAJIDCapture selectIDType:@"SPAJIDTypeParty3" SPAJSection:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
+                fileName = [NSString stringWithFormat:@"/%@%@%@%@.jpg",stringEAPPPath,OrangTuaWali,stringIDIdentifier,Front];
+                imagePath = [filePathApp stringByAppendingString:fileName];
+                imageID = [UIImage imageWithContentsOfFile:imagePath];
+                return imageID;
+                break;
+            }
+            case 3:{
+                stringIDIdentifier = [modelSPAJIDCapture selectIDType:@"SPAJIDTypeParty4" SPAJSection:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
+                fileName = [NSString stringWithFormat:@"/%@%@%@%@.jpg",stringEAPPPath,TenagaPenjual,stringIDIdentifier,Front];
+                imagePath = [filePathApp stringByAppendingString:fileName];
+                imageID = [UIImage imageWithContentsOfFile:imagePath];
+                return imageID;
+                break;
+            }
+            default:
+                break;
+        }
+        return imageID;
+        
+    }
+
+    -(UIImage *)getBackPhoto:(int)indexPositionSelected{
+        NSString* docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        NSString* rootFilePathApp = [docsDir stringByAppendingPathComponent:@"SPAJ"];
+        NSString* stringEAPPPath = [dictTransaction valueForKey:@"SPAJEappNumber"];
+        NSString* filePathApp = [rootFilePathApp stringByAppendingPathComponent:stringEAPPPath];
+        
+        //filename combination is EAPPNumberPartyIDTypeFront
+        //filename combination is EAPPNumberPartyIDTypeBack
+        NSString* fileName;
+        NSString* stringIDIdentifier;
+        NSString* imagePath;
+        UIImage *imageID;
+        switch (indexPositionSelected) {
+            case 0:
+            {
+                stringIDIdentifier = [modelSPAJIDCapture selectIDType:@"SPAJIDTypeParty1" SPAJSection:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
+                fileName = [NSString stringWithFormat:@"/%@%@%@%@.jpg",stringEAPPPath,PemegangPolis,stringIDIdentifier,Back];
+                imagePath = [filePathApp stringByAppendingString:fileName];
+                imageID = [UIImage imageWithContentsOfFile:imagePath];
+                return imageID;
+                break;
+            }
+            case 1:{
+                stringIDIdentifier = [modelSPAJIDCapture selectIDType:@"SPAJIDTypeParty2" SPAJSection:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
+                fileName = [NSString stringWithFormat:@"/%@%@%@%@.jpg",stringEAPPPath,Tertanggung,stringIDIdentifier,Back];
+                imagePath = [filePathApp stringByAppendingString:fileName];
+                imageID = [UIImage imageWithContentsOfFile:imagePath];
+                return imageID;
+                break;
+            }
+            case 2:{
+                stringIDIdentifier = [modelSPAJIDCapture selectIDType:@"SPAJIDTypeParty3" SPAJSection:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
+                fileName = [NSString stringWithFormat:@"/%@%@%@%@.jpg",stringEAPPPath,OrangTuaWali,stringIDIdentifier,Back];
+                imagePath = [filePathApp stringByAppendingString:fileName];
+                imageID = [UIImage imageWithContentsOfFile:imagePath];
+                return imageID;
+                break;
+            }
+            case 3:{
+                stringIDIdentifier = [modelSPAJIDCapture selectIDType:@"SPAJIDTypeParty4" SPAJSection:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
+                fileName = [NSString stringWithFormat:@"/%@%@%@%@.jpg",stringEAPPPath,TenagaPenjual,stringIDIdentifier,Back];
+                imagePath = [filePathApp stringByAppendingString:fileName];
+                imageID = [UIImage imageWithContentsOfFile:imagePath];
+                return imageID;
+                break;
+            }
+            default:
+                break;
+        }
+        return imageID;
     }
 
     -(IBAction)actionSnapFrontID:(UIButton *)sender{

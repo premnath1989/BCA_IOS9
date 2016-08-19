@@ -69,7 +69,7 @@
         [super viewDidLoad];
         // Do any additional setup after loading the view, typically from a nib.
         
-        SPAJStatus = @"'ExistingList'";
+        SPAJStatus = @"'Not Submitted'";
         
         // INITIALIZATION
         modelSPAJTransaction = [[ModelSPAJTransaction alloc]init];

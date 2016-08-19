@@ -394,6 +394,8 @@
 		438035DE1D5D8847003A9199 /* SPAJFilesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 438035DC1D5D8847003A9199 /* SPAJFilesViewController.m */; };
 		438035DF1D5D8847003A9199 /* SPAJFilesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 438035DD1D5D8847003A9199 /* SPAJFilesViewController.xib */; };
 		438410BE1D66A07200FD4152 /* watermarkID.png in Resources */ = {isa = PBXBuildFile; fileRef = 438410BD1D66A07200FD4152 /* watermarkID.png */; };
+		438410C21D66A2F700FD4152 /* SPAJIDCapturedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 438410C01D66A2F700FD4152 /* SPAJIDCapturedViewController.m */; };
+		438410C31D66A2F700FD4152 /* SPAJIDCapturedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 438410C11D66A2F700FD4152 /* SPAJIDCapturedViewController.xib */; };
 		4385C9651D6661A600D2DEB4 /* watermark overlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 4385C9641D6661A600D2DEB4 /* watermark overlay.png */; };
 		438624B81D24B8B300F1BDC7 /* ProfilResikoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 438624B61D24B8B300F1BDC7 /* ProfilResikoViewController.m */; };
 		438624B91D24B8B300F1BDC7 /* ProfilResikoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 438624B71D24B8B300F1BDC7 /* ProfilResikoViewController.xib */; };
@@ -1611,6 +1613,9 @@
 		438035DC1D5D8847003A9199 /* SPAJFilesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPAJFilesViewController.m; sourceTree = "<group>"; };
 		438035DD1D5D8847003A9199 /* SPAJFilesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SPAJFilesViewController.xib; sourceTree = "<group>"; };
 		438410BD1D66A07200FD4152 /* watermarkID.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = watermarkID.png; sourceTree = "<group>"; };
+		438410BF1D66A2F700FD4152 /* SPAJIDCapturedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPAJIDCapturedViewController.h; sourceTree = "<group>"; };
+		438410C01D66A2F700FD4152 /* SPAJIDCapturedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPAJIDCapturedViewController.m; sourceTree = "<group>"; };
+		438410C11D66A2F700FD4152 /* SPAJIDCapturedViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SPAJIDCapturedViewController.xib; sourceTree = "<group>"; };
 		4385C9641D6661A600D2DEB4 /* watermark overlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "watermark overlay.png"; sourceTree = "<group>"; };
 		438624B51D24B8B300F1BDC7 /* ProfilResikoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfilResikoViewController.h; sourceTree = "<group>"; };
 		438624B61D24B8B300F1BDC7 /* ProfilResikoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfilResikoViewController.m; sourceTree = "<group>"; };
@@ -2791,6 +2796,7 @@
 				439B0B7C1D54743F00C28F19 /* SPAJEAppListStoryBoard.storyboard */,
 				439E45811D585C0B009098EF /* SPAJPDFWebViewController.xib */,
 				438035DD1D5D8847003A9199 /* SPAJFilesViewController.xib */,
+				438410C11D66A2F700FD4152 /* SPAJIDCapturedViewController.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -2799,6 +2805,8 @@
 			isa = PBXGroup;
 			children = (
 				0FF845751D23A3BB008CF861 /* Cell */,
+				438410BF1D66A2F700FD4152 /* SPAJIDCapturedViewController.h */,
+				438410C01D66A2F700FD4152 /* SPAJIDCapturedViewController.m */,
 				439E457F1D585C0B009098EF /* SPAJPDFWebViewController.h */,
 				439E45801D585C0B009098EF /* SPAJPDFWebViewController.m */,
 				DE07EAD21D41D72A0046AFA1 /* SPAJ Form Generation.h */,
@@ -5905,6 +5913,7 @@
 				C4660EB71625047800BA4AFE /* exit_btnB_144.png in Resources */,
 				C4660EB81625047800BA4AFE /* exit_btnB.png in Resources */,
 				C4660EB91625047800BA4AFE /* home_144.png in Resources */,
+				438410C31D66A2F700FD4152 /* SPAJIDCapturedViewController.xib in Resources */,
 				C4660EBA1625047800BA4AFE /* home_btn.png in Resources */,
 				439B954C1D3896AD00C86F93 /* SPAJ Add Signature.xib in Resources */,
 				C4660EBB1625047800BA4AFE /* prospect_100.png in Resources */,
@@ -6650,6 +6659,7 @@
 				C3A8D1091833AEB700E65FC9 /* LA2DetailsVC.m in Sources */,
 				0F48376F1D34F262009A45D4 /* ModelCFFHtml.m in Sources */,
 				438E79021D5B2C0100C78AB2 /* ModelSPAJDetail.m in Sources */,
+				438410C21D66A2F700FD4152 /* SPAJIDCapturedViewController.m in Sources */,
 				C3A8D10A1833AEB700E65FC9 /* MainLA1DetailsVC.m in Sources */,
 				C3A8D10B1833AEB700E65FC9 /* PayorDetailsVC.m in Sources */,
 				C3A8D10E1833CF9B00E65FC9 /* ExistingPoliciesVC.m in Sources */,

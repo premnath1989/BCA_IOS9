@@ -310,7 +310,7 @@
             long long spajNumber = [loginDB getLastActiveSPAJNum];
             if (spajNumber > 0){
                 [modelSPAJTransaction updateSPAJTransaction:@"SPAJNumber" StringColumnValue:[[NSNumber numberWithLongLong:spajNumber] stringValue] StringWhereName:@"SPAJEappNumber" StringWhereValue:[dictTransaction valueForKey:@"SPAJEappNumber"]];
-                [modelSPAJTransaction updateSPAJTransaction:@"SPAJStatus" StringColumnValue:@"ExistingList" StringWhereName:@"SPAJEappNumber" StringWhereValue:[dictTransaction valueForKey:@"SPAJEappNumber"]];
+                [modelSPAJTransaction updateSPAJTransaction:@"SPAJStatus" StringColumnValue:@"Not Submitted" StringWhereName:@"SPAJEappNumber" StringWhereValue:[dictTransaction valueForKey:@"SPAJEappNumber"]];
                 
                 [CATransaction begin];
                 [CATransaction setCompletionBlock:^{

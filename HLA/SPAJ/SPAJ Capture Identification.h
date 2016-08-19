@@ -23,7 +23,7 @@
 #import "ModelSPAJTransaction.h"
 #import "ModelSIPOData.h"
 #import "ModelSPAJSignature.h"
-
+#import "SPAJIDCapturedViewController.h"
 // DECLARATION
 
 /*@protocol SPAJMainDelegate
