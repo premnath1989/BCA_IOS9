@@ -18,6 +18,7 @@
     NSArray *sorted;
     NSMutableArray* arrayPOName;
     NSMutableArray* arraySINo;
+    NSMutableArray* arraySIDate;
 }
 @property (nonatomic, strong) id <SIListingDelegate> delegate;
 @property (nonatomic, strong) NSNumber *data;

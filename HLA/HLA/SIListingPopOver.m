@@ -33,6 +33,7 @@ NSString *SelectedString;
     NSDictionary* dictSIInfo = [[NSDictionary alloc]initWithDictionary:[modelSIMaster getNonQuickQuoteIlustrationata:@"sim.SINO" Method:@"DESC"]];
     arrayPOName = [[NSMutableArray alloc] initWithArray:[dictSIInfo valueForKey:@"PO_Name"]];;
     arraySINo = [[NSMutableArray alloc] initWithArray:[dictSIInfo valueForKey:@"SINO"]];
+    arraySIDate = [[NSMutableArray alloc] initWithArray:[dictSIInfo valueForKey:@"CreatedDate"]];
     
     sorted  =  [arraySINo sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     NSInteger rowsCount = [arraySINo count];
@@ -138,7 +139,7 @@ NSString *SelectedString;
         NSString *ms;
         ms = [arrayPOName objectAtIndex:indexPath.row];
         cell.textLabel.text = ms;
-        cell.detailTextLabel.text = [arraySINo objectAtIndex:indexPath.row];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ - %@",[arraySIDate objectAtIndex:indexPath.row],[arraySINo objectAtIndex:indexPath.row]];
         if (ms == SelectedString) {
             cell.accessoryType= UITableViewCellAccessoryCheckmark;
         }
