@@ -695,7 +695,7 @@ NSString* const Back = @"Back";
 
     -(UIImage *) generateWatermarkForImage:(UIImage *) mainImg{
         UIImage *backgroundImage = mainImg;
-        UIImage *watermarkImage = [UIImage imageNamed:@"watermark overlay.png"];
+        UIImage *watermarkImage = [UIImage imageNamed:@"watermarkID.png"];
         
         
         //Now re-drawing your  Image using drawInRect method
@@ -703,7 +703,7 @@ NSString* const Back = @"Back";
         [backgroundImage drawInRect:CGRectMake(0, 0, backgroundImage.size.width, backgroundImage.size.height)];
         // set watermark position/frame a s(xposition,yposition,width,height)
         // [watermarkImage drawInRect:CGRectMake(backgroundImage.size.width - watermarkImage.size.width, backgroundImage.size.height - watermarkImage.size.height, watermarkImage.size.width, watermarkImage.size.height)];
-        [watermarkImage drawInRect:CGRectMake(0, 0, 490, 306)];
+        [watermarkImage drawInRect:CGRectMake(0, 0, watermarkImage.size.width, watermarkImage.size.height)];
         
         // now merging two images into one
         UIImage *result = UIGraphicsGetImageFromCurrentImageContext();

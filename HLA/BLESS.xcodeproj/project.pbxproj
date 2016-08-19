@@ -393,6 +393,7 @@
 		4376DF211CD196EC00816BB6 /* check_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4376DF1D1CD196EC00816BB6 /* check_icon@2x.png */; };
 		438035DE1D5D8847003A9199 /* SPAJFilesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 438035DC1D5D8847003A9199 /* SPAJFilesViewController.m */; };
 		438035DF1D5D8847003A9199 /* SPAJFilesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 438035DD1D5D8847003A9199 /* SPAJFilesViewController.xib */; };
+		438410BE1D66A07200FD4152 /* watermarkID.png in Resources */ = {isa = PBXBuildFile; fileRef = 438410BD1D66A07200FD4152 /* watermarkID.png */; };
 		4385C9651D6661A600D2DEB4 /* watermark overlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 4385C9641D6661A600D2DEB4 /* watermark overlay.png */; };
 		438624B81D24B8B300F1BDC7 /* ProfilResikoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 438624B61D24B8B300F1BDC7 /* ProfilResikoViewController.m */; };
 		438624B91D24B8B300F1BDC7 /* ProfilResikoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 438624B71D24B8B300F1BDC7 /* ProfilResikoViewController.xib */; };
@@ -1609,6 +1610,7 @@
 		438035DB1D5D8847003A9199 /* SPAJFilesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPAJFilesViewController.h; sourceTree = "<group>"; };
 		438035DC1D5D8847003A9199 /* SPAJFilesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPAJFilesViewController.m; sourceTree = "<group>"; };
 		438035DD1D5D8847003A9199 /* SPAJFilesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SPAJFilesViewController.xib; sourceTree = "<group>"; };
+		438410BD1D66A07200FD4152 /* watermarkID.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = watermarkID.png; sourceTree = "<group>"; };
 		4385C9641D6661A600D2DEB4 /* watermark overlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "watermark overlay.png"; sourceTree = "<group>"; };
 		438624B51D24B8B300F1BDC7 /* ProfilResikoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfilResikoViewController.h; sourceTree = "<group>"; };
 		438624B61D24B8B300F1BDC7 /* ProfilResikoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfilResikoViewController.m; sourceTree = "<group>"; };
@@ -5075,6 +5077,7 @@
 		C4E9D1BF1612C6A500016053 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				438410BD1D66A07200FD4152 /* watermarkID.png */,
 				4385C9641D6661A600D2DEB4 /* watermark overlay.png */,
 				43346FB51CF4080F001A6C25 /* pensign.png */,
 				4376DF1A1CD196EC00816BB6 /* cancel.png */,
@@ -6215,6 +6218,7 @@
 				04B15E0C19DA8D0900FF7039 /* Customer_Fact_Find@2x.png in Resources */,
 				04B15E0D19DA8D0900FF7039 /* Client_Profile@2x.png in Resources */,
 				04B15E0E19DA8D0900FF7039 /* Bachground.png in Resources */,
+				438410BE1D66A07200FD4152 /* watermarkID.png in Resources */,
 				4321B3331C8B3496006B9402 /* htmlStyle.css in Resources */,
 				04508E5419DE34BD00B4502A /* NewHLAHeader.png in Resources */,
 				04328CC719EBC12B005E7D32 /* house.png in Resources */,
