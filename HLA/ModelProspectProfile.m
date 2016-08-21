@@ -678,5 +678,22 @@
     return arrayColumnValue;
 }
 
+-(NSString *)selectProspectData:(NSString *)stringColumnName ProspectIndex:(int)intIndexNo{
+    NSString *stringReturn;
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select %@ from prospect_profile where IndexNo = %i",stringColumnName,intIndexNo]];
+    while ([s next]) {
+        stringReturn = [s stringForColumn:stringColumnName];
+    }
+    
+    [results close];
+    [database close];
+    return stringReturn;
+}
 
 @end

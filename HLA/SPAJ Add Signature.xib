@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SPAJ_Add_Signature">
             <connections>
+                <outlet property="labelSignatureFooter" destination="idD-00-c8w" id="p7A-Fu-MAS"/>
                 <outlet property="labelSignatureParty" destination="V7U-au-Mxy" id="Rjp-oT-a31"/>
                 <outlet property="tablePartiesSignature" destination="5jS-K8-MHz" id="bXZ-e0-yZC"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
