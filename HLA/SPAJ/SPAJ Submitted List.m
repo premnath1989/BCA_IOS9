@@ -188,7 +188,7 @@
     - (IBAction)actionShowFilesList:(UIButton *)sender{
         spajFilesViewController = [[SPAJFilesViewController alloc]initWithNibName:@"SPAJFilesViewController" bundle:nil];
         [spajFilesViewController setDictTransaction:[arraySPAJTransaction objectAtIndex:sender.tag]];
-        spajFilesViewController.modalPresentationStyle = UIModalPresentationFormSheet;
+        spajFilesViewController.modalPresentationStyle = UIModalPresentationOverFullScreen;
         [self presentViewController:spajFilesViewController animated:YES completion:nil];
         [spajFilesViewController.buttonSubmit setHidden:YES];
     }

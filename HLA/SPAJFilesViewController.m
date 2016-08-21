@@ -43,8 +43,8 @@
 
 - (void)viewWillLayoutSubviews{
     [super viewWillLayoutSubviews];
-    self.view.superview.bounds = CGRectMake(0, 0, 600, 600);
-    [self.view.superview setBackgroundColor:[UIColor whiteColor]];
+    self.view.superview.bounds = CGRectMake(0, -10, 1024, 748);
+    [self.view.superview setBackgroundColor:[UIColor clearColor]];
 }
 
 -(void)viewDidAppear:(BOOL)animated{

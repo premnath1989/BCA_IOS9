@@ -198,7 +198,7 @@
     }
 
     -(void)voidGetFooterInformation{
-        NSDictionary* dictFooter = [[NSDictionary alloc]initWithDictionary:[modelSPAJSignature voidSignaturePartyCaptured:[[dictTransaction valueForKey:@"SPAJEappNumber"] intValue] SignatureParty:@"SPAJSignatureParty1"]];
+        NSDictionary* dictFooter = [[NSDictionary alloc]initWithDictionary:[modelSPAJSignature voidSignaturePartyCaptured:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue] SignatureParty:@"SPAJSignatureParty1"]];
         bool customerSignatureCaptured = [[dictFooter valueForKey:@"SignatureCaptured"] boolValue];
         
         if (customerSignatureCaptured>0){
@@ -207,10 +207,14 @@
         else{
             [_labelPropertyCustomerSignature setText:[CHARACTER_DOUBLEDOT stringByAppendingString:@"Not Captured"]];
         }
-        [_labelPropertyDateTime setText:[CHARACTER_DOUBLEDOT stringByAppendingString:[dictFooter valueForKey:@"SPAJDateSignatureParty1"]]];
+        NSString* stringSignatureCapture = [formatter convertDateFrom:@"yyyy-MM-dd HH:mm:ss" TargetDateFormat:@"dd/MM/yyyy (HH:mm)" DateValue:[dictFooter valueForKey:@"SPAJDateSignatureParty1"]];
+        [_labelPropertyDateTime setText:[CHARACTER_DOUBLEDOT stringByAppendingString:stringSignatureCapture?:@""]];
         
-        NSString* stringLastUpdate = [formatter convertDateFrom:@"yyyy-MM-dd HH:mm:ss" TargetDateFormat:@"dd/MM/yyyy (HH:mm)" DateValue:[dictTransaction valueForKey:@"SPAJDateModified"]];
-        NSString* stringExpirationDate = [formatter convertDateFrom:@"yyyy-MM-dd HH:mm:ss" TargetDateFormat:@"dd/MM/yyyy (HH:mm)" DateValue:[dictTransaction valueForKey:@"SPAJDateExpired"]];
+        NSString* dateModified = [modelSPAJTransaction getSPAJTransactionData:@"SPAJDateModified" StringWhereName:@"SPAJTransactionID" StringWhereValue:[dictTransaction valueForKey:@"SPAJTransactionID"]];
+        NSString* dateExpired = [modelSPAJTransaction getSPAJTransactionData:@"SPAJDateExpired" StringWhereName:@"SPAJTransactionID" StringWhereValue:[dictTransaction valueForKey:@"SPAJTransactionID"]];
+        
+        NSString* stringLastUpdate = [formatter convertDateFrom:@"yyyy-MM-dd HH:mm:ss" TargetDateFormat:@"dd/MM/yyyy (HH:mm)" DateValue:dateModified];
+        NSString* stringExpirationDate = [formatter convertDateFrom:@"yyyy-MM-dd HH:mm:ss" TargetDateFormat:@"dd/MM/yyyy (HH:mm)" DateValue:dateExpired];
         
         [_labelPropertyExpiredDate setText:[CHARACTER_DOUBLEDOT stringByAppendingString:stringExpirationDate?:@""]];
         [_labelPropertyLastUpdate setText:[CHARACTER_DOUBLEDOT stringByAppendingString:stringLastUpdate?:@""]];
@@ -301,9 +305,6 @@
 
     - (IBAction)actionConfirmAndAssignSPAJNumber:(UIButton *)sender
     {
-        /*CFFAPIController* cffAPIController;
-        cffAPIController = [[CFFAPIController alloc]init];
-        [cffAPIController apiCall:@"http://192.168.0.114/E-Submission/SpajHandler.ashx?operation=getRemoteFtpPath&spajNumber=60000000022&product=BCALife"];*/
         NSString* SPAJNumber  = [modelSPAJTransaction getSPAJTransactionData:@"SPAJNumber" StringWhereName:@"SPAJTransactionID" StringWhereValue:[dictTransaction valueForKey:@"SPAJTransactionID"]];
         if (!([SPAJNumber length]>0)){
             LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
@@ -314,6 +315,8 @@
                 
                 [CATransaction begin];
                 [CATransaction setCompletionBlock:^{
+                        UIAlertController *alertNoSPAJNumber = [alert alertInformation:@"Sukses" stringMessage:[NSString stringWithFormat:@"Nomor SPAJ anda adalah %lli",spajNumber]];
+                        [self presentViewController:alertNoSPAJNumber animated:YES completion:nil];
                         [_delegateSPAJMain actionGoToExistingList:nil];// handle completion here
                 }];
                 

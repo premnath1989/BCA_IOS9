@@ -286,8 +286,8 @@
             else if (indexSelected == 0){
                 //NSString *date = [formatter getDateToday:@"dd/MM/yyyy"];
                 //NSString *time = [formatter getDateToday:@"hh:mm"];
-                NSString* date = [formatter getDateTodayByAddingDays:@"dd-MM-yyyy" DaysAdded:5];
-                NSString* time = [formatter getDateTodayByAddingDays:@"HH:mm" DaysAdded:5];
+                NSString* date = [formatter getDateTodayByAddingDays:@"dd-MM-yyyy" DaysAdded:30];
+                NSString* time = [formatter getDateTodayByAddingDays:@"HH:mm" DaysAdded:30];
                 NSString* alertString = [NSString stringWithFormat:@"Mohon agar menandatangani aplikasi dengan benar dan menyerahkannya sebelum tanggal (%@) dan waktu (%@ WIB). Jika tidak maka aplikasi ini akan menjadi tidak valid.\n\nTidak diperbolehkan adanya perubahan data pada aplikasi setelah Anda menyimpannya.\nApakah Anda yakin ingin menyimpan ?",date,time];
                 [self voidCreateAlertTwoOptionViewAndShow:alertString tag:0];
                 return;
@@ -326,8 +326,8 @@
                 else if (indexSelected == 0){
                     //NSString *date = [formatter getDateToday:@"dd/MM/yyyy"];
                     //NSString *time = [formatter getDateToday:@"hh:mm"];
-                    NSString* date = [formatter getDateTodayByAddingDays:@"dd-MM-yyyy" DaysAdded:5];
-                    NSString* time = [formatter getDateTodayByAddingDays:@"HH:mm" DaysAdded:5];
+                    NSString* date = [formatter getDateTodayByAddingDays:@"dd-MM-yyyy" DaysAdded:30];
+                    NSString* time = [formatter getDateTodayByAddingDays:@"HH:mm" DaysAdded:30];
                     NSString* alertString = [NSString stringWithFormat:@"Mohon agar menandatangani aplikasi dengan benar dan menyerahkannya sebelum tanggal (%@) dan waktu (%@ WIB). Jika tidak maka aplikasi ini akan menjadi tidak valid.\n\nTidak diperbolehkan adanya perubahan data pada aplikasi setelah Anda menyimpannya.\nApakah Anda yakin ingin menyimpan ?",date,time];
                     [self voidCreateAlertTwoOptionViewAndShow:alertString tag:0];
                     return;
@@ -363,8 +363,8 @@
                 else if (indexSelected == 0){
                     //NSString *date = [formatter getDateToday:@"dd/MM/yyyy"];
                     //NSString *time = [formatter getDateToday:@"hh:mm"];
-                    NSString* date = [formatter getDateTodayByAddingDays:@"dd-MM-yyyy" DaysAdded:5];
-                    NSString* time = [formatter getDateTodayByAddingDays:@"HH:mm" DaysAdded:5];
+                    NSString* date = [formatter getDateTodayByAddingDays:@"dd-MM-yyyy" DaysAdded:30];
+                    NSString* time = [formatter getDateTodayByAddingDays:@"HH:mm" DaysAdded:30];
                     NSString* alertString = [NSString stringWithFormat:@"Mohon agar menandatangani aplikasi dengan benar dan menyerahkannya sebelum tanggal (%@) dan waktu (%@ WIB). Jika tidak maka aplikasi ini akan menjadi tidak valid.\n\nTidak diperbolehkan adanya perubahan data pada aplikasi setelah Anda menyimpannya.\nApakah Anda yakin ingin menyimpan ?",date,time];
                     [self voidCreateAlertTwoOptionViewAndShow:alertString tag:0];
                     return;
@@ -391,7 +391,7 @@
             NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty1=1,SPAJDateSignatureParty1='%@'  where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",dateToday,[dictTransaction valueForKey:@"SPAJEappNumber"]];
             [modelSPAJSignature updateSPAJSignature:stringUpdate];
             
-            NSString* dateExpired = [formatter getDateTodayByAddingDays:@"yyyy-MM-dd HH:mm:ss" DaysAdded:5];
+            NSString* dateExpired = [formatter getDateTodayByAddingDays:@"yyyy-MM-dd HH:mm:ss" DaysAdded:30];
             [modelSPAJTransaction updateSPAJTransaction:@"SPAJDateExpired" StringColumnValue:dateExpired StringWhereName:@"SPAJTransactionID" StringWhereValue:[dictTransaction valueForKey:@"SPAJTransactionID"]];
             [self voidCheckBooleanLastState];
         });

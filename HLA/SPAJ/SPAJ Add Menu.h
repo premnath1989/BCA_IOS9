@@ -21,6 +21,7 @@
     - (void) voidGoToFormGeneration;
     - (void) voidGoToCaptureIdentification;
     - (void) voidGoToAddSignature;
+    - (NSDictionary *)getUpdatedDictTransaction;
     - (IBAction)actionGoToExistingList:(id)sender;
 
 @end

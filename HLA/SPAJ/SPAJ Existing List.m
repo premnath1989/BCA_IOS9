@@ -234,7 +234,7 @@
     - (IBAction)actionShowFilesList:(UIButton *)sender{
         spajFilesViewController = [[SPAJFilesViewController alloc]initWithNibName:@"SPAJFilesViewController" bundle:nil];
         [spajFilesViewController setDictTransaction:[arraySPAJTransaction objectAtIndex:sender.tag]];
-        spajFilesViewController.modalPresentationStyle = UIModalPresentationFormSheet;
+        spajFilesViewController.modalPresentationStyle = UIModalPresentationOverFullScreen;
         //spajPDFWebView.preferredContentSize = CGSizeMake(950, 768);
         [self presentViewController:spajFilesViewController animated:YES completion:nil];
         //spajPDFWebView.view.superview.frame = CGRectMake(0, 0, 950, 768);

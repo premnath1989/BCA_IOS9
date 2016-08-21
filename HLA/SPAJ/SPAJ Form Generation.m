@@ -47,7 +47,8 @@
     BOOL boolSPAJPDF;
     BOOL boolTenagaPenjualSigned;
 }
-@synthesize dictTransaction;
+    @synthesize dictTransaction;
+@synthesize viewActivityIndicator;
     // SYNTHESIZE
 
     @synthesize delegateSPAJMain = _delegateSPAJMain;
@@ -157,42 +158,8 @@
     - (IBAction)actionGoToStep4:(id)sender
     {
         if (!boolTenagaPenjualSigned){
-            UIPrintPageRenderer *render = [[UIPrintPageRenderer alloc] init];
-            [render addPrintFormatter:webview.viewPrintFormatter startingAtPageAtIndex:0];
-            //increase these values according to your requirement
-            float topPadding = 0.0f;
-            float bottomPadding = 0.0f;
-            float leftPadding = 0.0f;
-            float rightPadding = 0.0f;
-            NSLog(@"size %@",NSStringFromCGSize(kPaperSizeA4Portrait));
-            CGRect printableRect = CGRectMake(leftPadding,
-                                              topPadding,
-                                              kPaperSizeA4Portrait.width-leftPadding-rightPadding,
-                                              kPaperSizeA4Portrait.height-topPadding-bottomPadding);
-            CGRect paperRect = CGRectMake(0, 0, kPaperSizeA4Portrait.width, kPaperSizeA4Portrait.height);
-            [render setValue:[NSValue valueWithCGRect:paperRect] forKey:@"paperRect"];
-            [render setValue:[NSValue valueWithCGRect:printableRect] forKey:@"printableRect"];
-            
-            NSData *pdfData = [render printToPDF];
-            
-            NSArray* path_forDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
-            NSString* documentsDirectory = [path_forDirectory objectAtIndex:0];
-            if (pdfData) {
-                [pdfData writeToFile:[NSString stringWithFormat:@"%@/SPAJ/%@/SPAJ.pdf",documentsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"]] atomically:YES];
-                //NSLog(@"datat %@",[NSString stringWithFormat:@"%@/%@_%@.pdf",documentsDirectory,[_dictionaryPOForInsert valueForKey:@"PO_Name"],[_dictionaryPOForInsert valueForKey:@"SINO"]]);
-                NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJFormGeneration1=1 where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",[dictTransaction valueForKey:@"SPAJEappNumber"]];
-                [modelSPAJFormGeneration updateSPAJFormGeneration:stringUpdate];
-                
-                
-                UIAlertController *alertLockForm = [alert alertInformation:@"Berhasil" stringMessage:@"File SPAJ.pdf berhasil dibuat"];
-                [self presentViewController:alertLockForm animated:YES completion:nil];
-                
-                [self voidCheckBooleanLastState];
-            }
-            else
-            {
-                NSLog(@"PDF couldnot be created");
-            }
+            [viewActivityIndicator setHidden:NO];
+            [self performSelector:@selector(voidCreateThePDF) withObject:nil afterDelay:2.0];
         }
         else{
             UIAlertController *alertLockForm = [alert alertInformation:NSLocalizedString(@"ALERT_TITLE_LOCK", nil) stringMessage:NSLocalizedString(@"ALERT_MESSAGE_LOCK", nil)];
@@ -200,6 +167,47 @@
         }
 
     };
+
+    -(void)voidCreateThePDF{
+        UIPrintPageRenderer *render = [[UIPrintPageRenderer alloc] init];
+        [render addPrintFormatter:webview.viewPrintFormatter startingAtPageAtIndex:0];
+        //increase these values according to your requirement
+        float topPadding = 0.0f;
+        float bottomPadding = 0.0f;
+        float leftPadding = 0.0f;
+        float rightPadding = 0.0f;
+        NSLog(@"size %@",NSStringFromCGSize(kPaperSizeA4Portrait));
+        CGRect printableRect = CGRectMake(leftPadding,
+                                          topPadding,
+                                          kPaperSizeA4Portrait.width-leftPadding-rightPadding,
+                                          kPaperSizeA4Portrait.height-topPadding-bottomPadding);
+        CGRect paperRect = CGRectMake(0, 0, kPaperSizeA4Portrait.width, kPaperSizeA4Portrait.height);
+        [render setValue:[NSValue valueWithCGRect:paperRect] forKey:@"paperRect"];
+        [render setValue:[NSValue valueWithCGRect:printableRect] forKey:@"printableRect"];
+        
+        NSData *pdfData = [render printToPDF];
+        
+        NSArray* path_forDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+        NSString* documentsDirectory = [path_forDirectory objectAtIndex:0];
+        if (pdfData) {
+            [pdfData writeToFile:[NSString stringWithFormat:@"%@/SPAJ/%@/SPAJ.pdf",documentsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"]] atomically:YES];
+            //NSLog(@"datat %@",[NSString stringWithFormat:@"%@/%@_%@.pdf",documentsDirectory,[_dictionaryPOForInsert valueForKey:@"PO_Name"],[_dictionaryPOForInsert valueForKey:@"SINO"]]);
+            NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJFormGeneration1=1 where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",[dictTransaction valueForKey:@"SPAJEappNumber"]];
+            [modelSPAJFormGeneration updateSPAJFormGeneration:stringUpdate];
+            
+            
+            UIAlertController *alertLockForm = [alert alertInformation:@"Berhasil" stringMessage:@"File SPAJ.pdf berhasil dibuat"];
+            [self presentViewController:alertLockForm animated:YES completion:nil];
+            [viewActivityIndicator setHidden:YES];
+            
+            [self voidCheckBooleanLastState];
+        }
+        else
+        {
+            NSLog(@"PDF couldnot be created");
+        }
+
+    }
 
     - (IBAction)actionGoToStep5:(id)sender
     {
