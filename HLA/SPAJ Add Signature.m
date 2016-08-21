@@ -449,6 +449,11 @@
             [self addSignature:signatureImage onPDFData:data Index:index];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self joinMultiplePDF];
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self removeSPAJSigned];
+                    });
+                });
             });
         });
     }
@@ -590,6 +595,25 @@
     CGContextRelease(writeContext);
 }
 
+-(void)removeSPAJSigned{
+    NSArray* path_forDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+    NSString* documentsDirectory = [path_forDirectory objectAtIndex:0];
+    NSString *docsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    
+    // File paths
+    NSString *pdfPath1 = [NSString stringWithFormat:@"%@/SPAJ/%@/SPAJSigned.pdf",docsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"]];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    NSError *error;
+    BOOL success = [fileManager removeItemAtPath:pdfPath1 error:&error];
+    if (success) {
+        
+    }
+    else
+    {
+        NSLog(@"Could not delete file -:%@ ",[error localizedDescription]);
+    }
+}
 
 
 -(void)voidDismissAlertSignature{
