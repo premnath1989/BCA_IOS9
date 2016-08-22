@@ -1778,22 +1778,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "HLA/EditProspect.m"
-            timestampString = "488791752.05212"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "7167"
-            endingLineNumber = "7167"
-            landmarkName = "-saveToDB"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -1938,16 +1922,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SPAJ Calon Pemegang Polis.m"
-            timestampString = "493293239.235292"
+            filePath = "SPAJ/SPAJ Add Detail.m"
+            timestampString = "493528833.046424"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "428"
-            endingLineNumber = "428"
-            landmarkName = "-dictForAutoPopulateTertanggung"
+            startingLineNumber = "161"
+            endingLineNumber = "161"
+            landmarkName = "-voidCheckBooleanLastState"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1957,13 +1941,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SPAJ Calon Pemegang Polis.m"
-            timestampString = "493293239.235292"
+            filePath = "HLA/ProspectViewController.m"
+            timestampString = "493539688.332068"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "422"
-            endingLineNumber = "422"
-            landmarkName = "-dictForAutoPopulateTertanggung"
+            startingLineNumber = "8210"
+            endingLineNumber = "8210"
+            landmarkName = "-selectedNationality:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

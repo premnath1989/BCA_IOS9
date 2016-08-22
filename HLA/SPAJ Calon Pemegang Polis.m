@@ -350,31 +350,31 @@
             return modiFiedDictionary;
         }
         else if ([stringOriginalElementName isEqualToString:@"OtherIDType"]){
-            NSString* identityDesc = [modelIdentificationType getOtherTypeDesc:[originalDictionary valueForKey:stringOriginalElementName]];
+            NSString* identityDesc = [modelIdentificationType getOtherTypeDesc:[originalDictionary valueForKey:stringOriginalElementName]]?:@"";
             [modiFiedDictionary setObject:stringNewElementName forKey:@"elementID"];
             [modiFiedDictionary setObject:identityDesc forKey:@"Value"];
             return modiFiedDictionary;
         }
         else if ([stringOriginalElementName isEqualToString:@"CONT006"]){
-            NSString* stringTelp = [modelProspectProfile getDataMobileAndPrefix:stringOriginalElementName IndexNo:prospectID];
+            NSString* stringTelp = [modelProspectProfile getDataMobileAndPrefix:stringOriginalElementName IndexNo:prospectID]?:@"";
             [modiFiedDictionary setObject:stringNewElementName forKey:@"elementID"];
             [modiFiedDictionary setObject:stringTelp forKey:@"Value"];
             return modiFiedDictionary;
         }
         else if ([stringOriginalElementName isEqualToString:@"CONT008"]){
-           NSString* stringTelp = [modelProspectProfile getDataMobileAndPrefix:stringOriginalElementName IndexNo:prospectID ];
+           NSString* stringTelp = [modelProspectProfile getDataMobileAndPrefix:stringOriginalElementName IndexNo:prospectID ]?:@"";
             [modiFiedDictionary setObject:stringNewElementName forKey:@"elementID"];
             [modiFiedDictionary setObject:stringTelp forKey:@"Value"];
             return modiFiedDictionary;
         }
         else if ([stringOriginalElementName isEqualToString:@"CONT007"]){
-            NSString* stringTelp = [modelProspectProfile getDataMobileAndPrefix:stringOriginalElementName IndexNo:prospectID ];
+            NSString* stringTelp = [modelProspectProfile getDataMobileAndPrefix:stringOriginalElementName IndexNo:prospectID ]?:@"";
             [modiFiedDictionary setObject:stringNewElementName forKey:@"elementID"];
             [modiFiedDictionary setObject:stringTelp forKey:@"Value"];
             return modiFiedDictionary;
         }
         else if ([stringOriginalElementName isEqualToString:@"CONT009"]){
-            NSString* stringTelp = [modelProspectProfile getDataMobileAndPrefix:stringOriginalElementName IndexNo:prospectID];
+            NSString* stringTelp = [modelProspectProfile getDataMobileAndPrefix:stringOriginalElementName IndexNo:prospectID]?:@"";
             [modiFiedDictionary setObject:stringNewElementName forKey:@"elementID"];
             [modiFiedDictionary setObject:stringTelp forKey:@"Value"];
             return modiFiedDictionary;
@@ -393,6 +393,7 @@
     NSMutableArray* arrayValue = [[NSMutableArray alloc] init];
     if ([stringSection isEqualToString:@"PO"]){
         for (int i=0;i<[newElementArrayName count];i++){
+            NSLog(@"indexpop %i",i);
             NSMutableDictionary* dictDetail = [[NSMutableDictionary alloc]initWithDictionary:[self ModifiedDictionary:[self OriginalDictionaryForAutoPopulate] OriginalElementName:[originalElementArrayName objectAtIndex:i] NewElementName:[newElementArrayName objectAtIndex:i]]];
             [arrayValue addObject:dictDetail];
         }

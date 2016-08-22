@@ -8205,8 +8205,9 @@ bool RegDatehandling;
     } else {
         outletNationality.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
-    outletNationality.titleLabel.text = selectedNationality;
-    [outletNationality setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",selectedNationality]forState:UIControlStateNormal];
+    //outletNationality.titleLabel.text = selectedNationality;
+    //[outletNationality setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",selectedNationality]forState:UIControlStateNormal];
+    [outletNationality setTitle:selectedNationality forState:UIControlStateNormal];
     [outletNationality setBackgroundColor:[UIColor clearColor]];
     [self.nationalityPopover dismissPopoverAnimated:YES];
 }

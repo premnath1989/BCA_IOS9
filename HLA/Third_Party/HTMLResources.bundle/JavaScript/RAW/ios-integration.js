@@ -106,9 +106,7 @@ function onError (ret)
 }
 
 function readfromDB()
-{
-    alert("read from db");
-    
+{    
     var callInfo = {};
     callInfo.data = {};
     callInfo.data.SPAJAnswers = {};
@@ -143,15 +141,13 @@ function PrintData()
 }
 
 function AutoPopulate(jsonObject)
-{
-    alert("masuk auto populate");
-    
+{        
     var objectContent = JSON.parse(jsonObject);
     var stringType = Object.keys(objectContent.result)[0];
 
     if (stringType == "autopopulateFromDB")
     {
-        getFromDatabase(objectContent.result.readFromDB, stringPageTypeCurrent);
+        getFromDatabase(objectContent.result.autopopulateFromDB, stringPageTypeCurrent);
     }
     else
     {

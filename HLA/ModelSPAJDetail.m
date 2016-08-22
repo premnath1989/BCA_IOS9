@@ -86,6 +86,7 @@
     
     FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select %@ from SPAJDetail where SPAJTransactionID=%i",stringDetailSPAJ,intTransactionSPAJID]];
     
+    DetailCaptured = [s intForColumn:stringDetailSPAJ];
     while ([s next]) {
         DetailCaptured = [s intForColumn:stringDetailSPAJ];
     }
