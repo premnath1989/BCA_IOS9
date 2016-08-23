@@ -46,6 +46,13 @@ var stringPopUpTypeGeneral = "general";
 var stringPopUpTypeHealth = "health";
 var stringPopUpTypeSPAJProposal = "spajproposal";
 var stringInputTypeAutoPopulate = "autopopulate";
+var stringTablePrefix = "Table";
+var stringBodyPrefix = "Body";
+var stringRowPrefix = "Row";
+var stringCellPrefix = "Cell";
+var stringNumberPrefix = "Number"; 
+var arrayHealthTableHeader = ["DiseaseName", "SickFrom", "SickDuration", "DoctorName", "Hospital", "Address", "Telephone"];
+var arraySPAJProposalTableHeader = ["CompanyName", "PolicyNumber", "PublishedDate", "BasicSumAssured", "Decision"];
 
 
 // GENERATOR
@@ -85,6 +92,138 @@ function lineGenerator(lineID, lineAmount)
 {
     $(lineID).css("width", ((sizeBox * lineAmount) + 2) + "px");
 }
+
+function headerGenerator(stringID)
+{
+	$(stringID).each(function(index)
+	{
+		var stringTableOriginalJavaScriptID = $(this).attr("id");
+		var stringTableOriginalJQueryID = stringKres + stringTableOriginalJavaScriptID;
+		var stringTableUpdatedJavaScriptID = $(this).attr("id") + index;
+		var stringTableUpdatedJQueryID = stringKres + stringTableUpdatedJavaScriptID;
+
+		$(this).attr("id", stringTableUpdatedJavaScriptID);
+
+		boxGenerator(stringTableUpdatedJQueryID, 11, boxTypeWithoutLabel, null);
+	});
+}
+
+function tableHealthGenerator(stringTableID, intRow)
+{
+	var stringInfixName = stringTableID.substring(stringTablePrefix.length, stringTableID.length);
+	var stringTableJQueryID = stringKres + stringTableID;
+	var stringRowJavaScriptID;
+	var stringRowJQueryID;
+	var stringCellJavaScriptID;
+	var stringCellJQueryID;
+	var stringMonthJavaScriptID;
+	var stringMonthJQueryID;
+	var stringYearJavaScriptID;
+	var stringYearJQueryID;
+	var stringBodyJavaScriptID = stringBodyPrefix + stringInfixName;
+	var stringBodyJQueryID = stringKres + stringBodyJavaScriptID;
+	
+	$(stringTableJQueryID).append("<tbody id='" + stringBodyJavaScriptID + "'></tbody>");
+	
+	for (var i = 0; i < intRow; i++)
+	{
+		stringRowJavaScriptID = stringRowPrefix + stringInfixName + i;
+		stringRowJQueryID = stringKres + stringRowJavaScriptID;
+		
+		$(stringTableJQueryID + " " + stringBodyJQueryID).append("<tr id='" + stringRowJavaScriptID + "'></tr>");
+		
+		stringCellJavaScriptID = stringCellPrefix + stringInfixName + stringNumberPrefix + i;
+		stringCellJQueryID = stringKres + stringCellJavaScriptID;
+
+		$(stringRowJQueryID).append("<td id='" + stringCellJavaScriptID + "'></td>");
+		
+		for (var j = 0; j < arrayHealthTableHeader.length - 1; j++)
+		{
+			stringCellJavaScriptID = stringCellPrefix + stringInfixName + arrayHealthTableHeader[j] + i;
+			stringCellJQueryID = stringKres + stringCellJavaScriptID;
+			stringMonthJavaScriptID = stringPrefixDate + stringInfixName + arrayHealthTableHeader[j] + stringIDMonth + i;
+			stringMonthJQueryID = stringKres + stringMonthJavaScriptID;
+			stringYearJavaScriptID = stringPrefixDate + stringInfixName + arrayHealthTableHeader[j] + stringIDYear + i;
+			stringYearJQueryID = stringKres + stringYearJavaScriptID;
+			
+			$(stringRowJQueryID).append("<td id='" + stringCellJavaScriptID + "'></td>");
+			
+			if (j == 2)
+			{
+				$(stringRowJQueryID + " " + stringCellJQueryID).append("<label for='" + stringMonthJavaScriptID + "' class='Wrap Single PositionerCenter'>Bulan</label>");
+				$(stringRowJQueryID + " " + stringCellJQueryID).append("<table id='" + stringMonthJavaScriptID + "' class='BoxSquare PositionerCenter'></table><br>");
+				$(stringRowJQueryID + " " + stringCellJQueryID).append("<label for='" + stringYearJavaScriptID + "' class='Wrap Single PositionerCenter'>Tahun</label>");
+				$(stringRowJQueryID + " " + stringCellJQueryID).append("<table id='" + stringYearJavaScriptID + "' class='BoxSquare PositionerCenter'></table>");
+				
+                boxGenerator(stringMonthJQueryID, 2, boxTypeWithoutLabel, null);
+                boxGenerator(stringYearJQueryID, 2, boxTypeWithoutLabel, null);
+			}
+			else
+			{
+				
+			}
+		}
+	}
+}
+
+function tableSPAJProposalGenerator(stringTableID, intRow)
+{
+	var stringInfixName = stringTableID.substring(stringTablePrefix.length, stringTableID.length);
+	var stringTableJQueryID = stringKres + stringTableID;
+	var stringRowJavaScriptID;
+	var stringRowJQueryID;
+	var stringCellJavaScriptID;
+	var stringCellJQueryID;
+	var stringBodyJavaScriptID = stringBodyPrefix + stringInfixName;
+	var stringBodyJQueryID = stringKres + stringBodyJavaScriptID;
+	
+	$(stringTableJQueryID).append("<tbody id='" + stringBodyJavaScriptID + "'></tbody>");
+	
+	for (var i = 0; i < intRow; i++)
+	{
+		stringRowJavaScriptID = stringRowPrefix + stringInfixName + i;
+		stringRowJQueryID = stringKres + stringRowJavaScriptID;
+		
+		$(stringTableJQueryID + " " + stringBodyJQueryID).append("<tr id='" + stringRowJavaScriptID + "'></tr>");
+		
+		stringCellJavaScriptID = stringCellPrefix + stringInfixName + stringNumberPrefix + i;
+		stringCellJQueryID = stringKres + stringCellJavaScriptID;
+
+		$(stringRowJQueryID).append("<td id='" + stringCellJavaScriptID + "'></td>");
+		
+		for (var j = 0; j < arraySPAJProposalTableHeader.length; j++)
+		{
+			stringCellJavaScriptID = stringCellPrefix + stringInfixName + arraySPAJProposalTableHeader[j] + i;
+			stringCellJQueryID = stringKres + stringCellJavaScriptID;
+			
+			$(stringRowJQueryID).append("<td id='" + stringCellJavaScriptID + "'></td>");
+		}
+	}
+}
+
+//function setTableHealth(stringTableID, stringKey, stringValue)
+//{
+//    var stringTableJQueryID = stringKres + stringTableID;
+//	var stringRowJQueryID = stringRowPrefix + stringTableID;
+//    
+//	for (var i = 0; i < 3; i++)
+//	{
+//		for (var j = 0; j < arrayTableHeader.length; j++)
+//		{
+//			if (stringKey.substring(stringKey.length - arrayTableHeader[j].length, stringKey.length) == arrayTableHeader[j])
+//			{
+//				$(stringTableJQueryID + " tbody" + " " + stringRowJQueryID + i + " td").each(function()
+//				{
+//					setTextGeneral($(this).attr("id"), stringValue);
+//				});
+//			}
+//			else
+//			{
+//
+//			}
+//		}
+//	}
+//}
 
 function radioButtonHealthQuestionnaireDefault()
 {
@@ -730,37 +869,6 @@ function getTextGeneral(stringID)
     return $(stringJQueryID).val();
 }
 
-//var booleanPushState = true;
-//        
-//        if (arrayHealthQuestionnaire.length > 0)
-//        {
-//            for (var i = 0; i < arrayHealthQuestionnaire.length; i++)
-//            {
-//                if (arrayHealthQuestionnaire[i].key == stringName)
-//                {
-//                    arrayHealthQuestionnaire[i].value = stringRadioButtonValue;
-//                    booleanPushState = false;
-//                }
-//                else
-//                {
-//
-//                }
-//            }
-//
-//            if (booleanPushState == true)
-//            {
-//                arrayHealthQuestionnaire.push({ key: stringName, value: stringRadioButtonValue});
-//            }
-//            else
-//            {
-//
-//            }
-//        }
-//        else
-//        {
-//            arrayHealthQuestionnaire.push({ key: stringName, value: stringRadioButtonValue});
-//        }
-
 function getRadioButtonGeneral(stringName)
 {
     var stringRadioButtonValue;
@@ -802,37 +910,6 @@ function getCheckboxGeneral(stringName)
     
     return stringCheckboxValue;
 }
-
-//var booleanPushState = true;
-//         
-//        if (arrayHealthQuestionnaire.length > 0)
-//        {
-//            for (var i = 0; i < arrayHealthQuestionnaire.length; i++)
-//            {
-//                if (arrayHealthQuestionnaire[i].key == stringTextKey)
-//                {
-//                    arrayHealthQuestionnaire[i].value = stringTextValue;
-//                    booleanPushState = false;
-//                }
-//                else
-//                {
-//                    
-//                }
-//            }
-//
-//            if (booleanPushState == true)
-//            {
-//                arrayHealthQuestionnaire.push({ key: stringTextKey, value: stringTextValue});
-//            }
-//            else
-//            {
-//
-//            }
-//        }
-//        else
-//        {
-//            arrayHealthQuestionnaire.push({ key: stringTextKey, value: stringTextValue});
-//        }
 
 function getTextForm(stringID)
 {
@@ -900,15 +977,48 @@ function getFromDatabase(objectContent, stringPageType)
         var stringValue = objectContent[i].Value;               
         
         if (stringKey.substring(0, 4) == stringPrefixText)
-        {            
-            if (stringPageType == stringPageTypePDF)
-            {
-                setTextPDF(stringKey, stringValue);        
-            }
-            else
-            {
-                setTextForm(stringKey, stringValue);
-            }
+        {
+//			for (var j = 0; j < arrayHealthTableHeader.length; j++)
+//			{
+//				if (stringKey.substring(stringKey.length - arrayHealthTableHeader[j].length, stringKey.length) == arrayHealthTableHeader[j])
+//				{
+//					var stringIndicatorPrefix = stringKey.substring(stringPrefixText.length, string.PrefixText.length + 3);
+//					var stringIndicatorPolicyHolder = "Pol";
+//					var stringIndicatorProspectiveInsured = "Pro";
+//					
+//					if (stringIndicatorPrefix == stringIndicatorPolicyHolder)
+//					{
+//						$("#TableProspectiveInsuredIllness tbody tr").each(function()
+//						{
+//							
+//						});
+//					}
+//					else
+//					{
+//						
+//					}
+//					
+////					$(stringTableJQueryID + " tbody" + " " + stringRowJQueryID + i + " td").each(function()
+////					{
+////						setTextGeneral($(this).attr("id"), stringValue);
+////					});
+//					
+//					alert(stringKey + " == " + arrayHealthTableHeader[j]);
+//				}
+//				else
+//				{
+//
+//				}
+//			}
+			
+			if (stringPageType == stringPageTypePDF)
+			{
+				setTextPDF(stringKey, stringValue);        
+			}
+			else
+			{
+				setTextForm(stringKey, stringValue);
+			}
         }
         else if (stringKey.substring(0, stringPrefixRadioButton.length) == stringPrefixRadioButton)
         {            
@@ -1118,30 +1228,32 @@ function calculateAge(stringBirthdayID, stringAgeID)
 
 function autoPopulateState()
 {
-    var stringJQueryID;
-    
-    $("input[data-input-type='" + stringInputTypeAutoPopulate + "']").each(function()
-    {
-        stringJQueryID = stringKres +$(this).attr("id");
+   var stringJQueryID;
 
-        $(stringJQueryID).prop("readonly", true);
-    });
+   $("input[data-input-type='" + stringInputTypeAutoPopulate +
+"']").each(function()
+   {
+       stringJQueryID = stringKres +$(this).attr("id");
+
+       $(stringJQueryID).prop("readonly", true);
+   });
 }
 
-function radioButtonOtherGenerator(stringRadioButtonName, stringTextID, stringValue)
+function radioButtonOtherGenerator(stringRadioButtonName, stringTextID,
+stringValue)
 {
-    $(stringTextID).prop("readonly", true);
-    
-    $("input:radio[name='" + stringRadioButtonName + "']").change(function()
-    {
-        if (getRadioButtonGeneral(stringRadioButtonName) == stringValue)
-        {
-            $(stringTextID).prop("readonly", false);
-        }
-        else
-        {
-            $(stringTextID).prop("readonly", true);
-            $(stringTextID).val('');
-        }
-    });
+   $(stringTextID).prop("readonly", true);
+
+   $("input:radio[name='" + stringRadioButtonName + "']").change(function()
+   {
+       if (getRadioButtonGeneral(stringRadioButtonName) == stringValue)
+       {
+           $(stringTextID).prop("readonly", false);
+       }
+       else
+       {
+           $(stringTextID).prop("readonly", true);
+           $(stringTextID).val('');
+       }
+   });
 }

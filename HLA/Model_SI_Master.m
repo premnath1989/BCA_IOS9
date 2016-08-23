@@ -164,7 +164,7 @@
     [database open];
     
        // FMResultSet *s = [database executeQuery:@"SELECT sim.*, po.ProductName,po.PO_Name,premi.Sum_Assured FROM SI_master sim, SI_PO_Data po,SI_Premium premi WHERE sim.SINO = po.SINO and sim.SINO = premi.SINO"];
-    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select sim.*, po.ProductName,po.PO_Name,ifnull(sip.Sum_Assured,0) as Sum_Assured, po.QuickQuote FROM SI_master sim left join SI_PO_Data po on sim.SINO=po.SINO left join SI_Premium sip on sim.SINO=sip.SINO where sim.SINO = %@ group by sim.ID ",SINO]];
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select * FROM SI_master where SINO = \"%@\"",SINO]];
     
     while ([s next]) {
         stringSINo = [NSString stringWithFormat:@"%@",[s stringForColumn:@"SINO"]];

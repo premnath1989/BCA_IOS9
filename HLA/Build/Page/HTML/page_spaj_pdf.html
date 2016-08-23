@@ -31,14 +31,14 @@
     <link href='../../Style/CSS/spajpdf-theme-turqoise-svg.css' id='csstheme' rel='stylesheet' type='text/css'>
     <!-- %link{ :id => "cssresponsive", :href => "#{urlCSS}#{urlCSSSectionPrefix}-responsive-general.css", :rel => "stylesheet", :type => "text/css" } -->
     <!-- JAVA SCRIPT -->
-    <script src='../../JavaScript/Minimized/jquery.mobile-1.4.5.min.js' type='text/javascript'></script>
-    <script src='../../JavaScript/Minimized/jquery-1.11.1.min.js' type='text/javascript'></script>
+    <script src='../../Java Script/Minimized/jquery.mobile-1.4.5.min.js' type='text/javascript'></script>
+    <script src='../../Java Script/Minimized/jquery-1.11.1.min.js' type='text/javascript'></script>
     <!-- %script{ :type => "text/javascript", :src => "#{urlJavaScript}jquery-migrate-1.2.1.min.js" } -->
-    <script src='../../JavaScript/Minimized/ibrahimaziz.min.js' type='text/javascript'></script>
+    <script src='../../Java Script/Minimized/ibrahimaziz.min.js' type='text/javascript'></script>
     <script>
       var stringPageTypeCurrent = stringPageTypePDF;
     </script>
-    <script src='../../JavaScript/RAW/ios-integration.js' type='text/javascript'></script>
+    <script src='../../Java Script/Minimized/ios-integration.min.js' type='text/javascript'></script>
     <title>BCA Life - BLESS, SPAJ PDF</title>
     <!-- JQUERY -->
     <script>
@@ -46,251 +46,262 @@
       
       $(document).ready(function()
       {
-          // SECTION GENERAL
+      	var jsonDummy = '{"result":{"readFromDB":[{"elementID":"TextPolicyHolderFullName","Value":"Yosi Oliver"},{"elementID":"RadioButtonPolicyHolderAmerican","Value":"true"},{"elementID":"DatePolicyHolderActive","Value":"01/02/2016"},{"elementID":"RadioButtonProspectiveInsuredReligion","Value":"budha"},{"elementID":"RadioButtonProspectiveInsuredSmoker","Value":"true"},{"elementID":"RadioButtonProspectiveInsuredJunkie","Value":"false"},{"elementID":"RadioButtonPolicyHolderExtremeSport","Value":"true"},{"elementID":"RadioButtonPolicyHolderAbroad","Value":"false"},{"elementID":"TextPolicyHolderAbroad","Value":"false"},{"elementID":"TextPolicyHolderAbroad","Value":"false"},{"elementID":"TextProspectiveInsuredAbroad","Value":"false"},{"elementID":"TextProspectiveInsuredVisionDiseaseName","Value":"belekan"},{"elementID":"TextProspectiveInsuredVisionSickFrom","Value":"01/07/2016"},{"elementID":"TextProspectiveInsuredVisionSickDuration","Value":"2 minggu"},{"elementID":"TextProspectiveInsuredVisionDoctorName","Value":"anto"},{"elementID":"TextProspectiveInsuredVisionHosipital","Value":"rsib"},{"elementID":"TextProspectiveInsuredVisionAddress","Value":"bintaro"},{"elementID":"TextProspectiveInsuredVisionTelephone","Value":"123"},{"elementID":"TextProspectiveInsuredENTDiseaseName","Value":"congean"},{"elementID":"TextProspectiveInsuredRespiratoryDiseaseName","Value":"pilek"},{"elementID":"TextProspectiveInsuredCardiacDiseaseName","Value":"sesek"},{"elementID":"TextProspectiveInsuredCardiacDoctorName","Value":"surianto"}]}}'
       
-          boxGenerator("#TextSPAJNumber", 11, boxTypeWithoutLabel, null);
-          boxGenerator("#TextPolicyNumber", 11, boxTypeWithoutLabel, null);
-          boxGenerator("#TextVANumber", 16, boxTypeWithoutLabel, null);
+      	// SECTION GENERAL
       
-          // SECTION AGENT PROFILE
+      	boxGenerator("#TextSPAJNumber", 11, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextPolicyNumber", 11, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextVANumber", 16, boxTypeWithoutLabel, null);
       
-          boxGenerator("#TextAgentName", 16, boxTypeWithoutLabel, null);
-          boxGenerator("#TextAgentCode", 11, boxTypeWithoutLabel, null);
-          boxGenerator("#TextProductCode", 11, boxTypeWithoutLabel, null);
-          boxGenerator("#TextLicenseNumber", 16, boxTypeWithoutLabel, null);
-          boxGenerator("#DateActiveDay", 2, boxTypeWithBottomLabel, labelDay);
-          boxGenerator("#DateActiveMonth", 2, boxTypeWithBottomLabel, labelMonth);
-          boxGenerator("#DateActiveYear", 4, boxTypeWithBottomLabel, labelYear);
-          boxGenerator("#TextProductName", 16, boxTypeWithoutLabel, null);
-          boxGenerator("#TextReferenceName", 30, boxTypeWithoutLabel, null);
-          boxGenerator("#TextBranchName", 30, boxTypeWithoutLabel, null);
-          boxGenerator("#TextBranchCode", 16, boxTypeWithoutLabel, null);
-          boxGenerator("#TextArea", 16, boxTypeWithoutLabel, null);
-          boxGenerator("#TextAgentID", 13, boxTypeWithoutLabel, null);
-          boxGenerator("#DateReferenceDay", 2, boxTypeWithBottomLabel, labelDay);
-          boxGenerator("#DateReferenceMonth", 2, boxTypeWithBottomLabel, labelMonth);
-          boxGenerator("#DateReferenceYear", 4, boxTypeWithBottomLabel, labelYear);
+      	// SECTION AGENT PROFILE
       
-          // SECTION POLICY HOLDER
+      	boxGenerator("#TextAgentName", 16, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextAgentCode", 11, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextProductCode", 11, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextLicenseNumber", 16, boxTypeWithoutLabel, null);
+      	boxGenerator("#DateActiveDay", 2, boxTypeWithBottomLabel, labelDay);
+      	boxGenerator("#DateActiveMonth", 2, boxTypeWithBottomLabel, labelMonth);
+      	boxGenerator("#DateActiveYear", 4, boxTypeWithBottomLabel, labelYear);
+      	boxGenerator("#TextProductName", 16, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextReferenceName", 30, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextBranchName", 30, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextBranchCode", 16, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextArea", 16, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextAgentID", 13, boxTypeWithoutLabel, null);
+      	boxGenerator("#DateReferenceDay", 2, boxTypeWithBottomLabel, labelDay);
+      	boxGenerator("#DateReferenceMonth", 2, boxTypeWithBottomLabel, labelMonth);
+      	boxGenerator("#DateReferenceYear", 4, boxTypeWithBottomLabel, labelYear);
       
-          boxGenerator("#TextPolicyHolderCIN", 7, boxTypeWithoutLabel, null);
-          boxGenerator("#TextPolicyHolderFullName", 30, boxTypeWithoutLabel, null);
-          boxGenerator("#TextPolicyHolderID", 16, boxTypeWithoutLabel, null);
-          lineGenerator("#TextPolicyHolderOtherID", 11);
-          boxGenerator("#DatePolicyHolderActiveDay", 2, boxTypeWithBottomLabel, labelDay);
-          boxGenerator("#DatePolicyHolderActiveMonth", 2, boxTypeWithBottomLabel, labelMonth);
-          boxGenerator("#DatePolicyHolderActiveYear", 4, boxTypeWithBottomLabel, labelYear);
-          lineGenerator("#TextPolicyHolderPlace", 11);
-          boxGenerator("#DateHolderOfBirthDay", 2, boxTypeWithBottomLabel, labelDay);
-          boxGenerator("#DateHolderOfBirthMonth", 2, boxTypeWithBottomLabel, labelMonth);
-          boxGenerator("#DateHolderOfBirthYear", 4, boxTypeWithBottomLabel, labelYear);
-          lineGenerator("#LinePolicyHolderPlace", 8);                                     
-          boxGenerator("#BoxPolicyHolderAge", 2, boxTypeWithoutLabel, null);
-          lineGenerator("#TextPolicyHolderWNA", 4);
-          boxGenerator("#TextPolicyHolderCompany", 25, boxTypeWithoutLabel, null);
-          boxGenerator("#TextPolicyHolderMainJob", 30, boxTypeWithoutLabel, null);
-          boxGenerator("#TextPolicyHolderWorkScope", 30, boxTypeWithoutLabel, null);
-          boxGenerator("#TextPolicyHolderPosition", 30, boxTypeWithoutLabel, null);
-          boxGenerator("#TextPolicyHolderJobDescription", 30, boxTypeWithoutLabel, null);
-          boxGenerator("#TextPolicyHolderSideJob", 30, boxTypeWithoutLabel, null);
-          boxGenerator("#TextPolicyHolderHomeAddress1", 30, boxTypeWithoutLabel, null);
-          boxGenerator("#TextPolicyHolderHomeAddress2", 30, boxTypeWithoutLabel, null);
-          labelGenerator("#LabelPolicyHolderHomeCity", 2)
-          boxGenerator("#TextPolicyHolderHomeCity", 19, boxTypeWithoutLabel, null);
-          labelGenerator("#LabelPolicyHolderHomePostalCode", 3)
-          boxGenerator("#TextPolicyHolderHomePostalCode", 6, boxTypeWithoutLabel, null);
-          labelGenerator("#LabelPolicyHolderHomeTelephonePrefix", 2)
-          boxGenerator("#TextPolicyHolderHomeTelephonePrefix", 4, boxTypeWithoutLabel, null);
-          labelGenerator("#LabelPolicyHolderHomeTelephoneInfix", 1)
-          boxGenerator("#TextPolicyHolderHomeTelephoneInfix", 9, boxTypeWithoutLabel, null);
-          boxGenerator("#TextPolicyHolderOfficeAddress1", 30, boxTypeWithoutLabel, null);
-          boxGenerator("#TextPolicyHolderOfficeAddress2", 30, boxTypeWithoutLabel, null);
-          labelGenerator("#LabelPolicyHolderOfficeCity", 2)
-          boxGenerator("#TextPolicyHolderOfficeCity", 19, boxTypeWithoutLabel, null);
-          labelGenerator("#LabelPolicyHolderOfficePostalCode", 3)
-          boxGenerator("#TextPolicyHolderOfficePostalCode", 6, boxTypeWithoutLabel, null);
-          labelGenerator("#LabelPolicyHolderOfficeTelephonePrefix", 2)
-          boxGenerator("#TextPolicyHolderOfficeTelephonePrefix", 4, boxTypeWithoutLabel, null);
-          labelGenerator("#LabelPolicyHolderOfficeTelephoneInfix", 1)
-          boxGenerator("#TextPolicyHolderOfficeTelephoneInfix", 9, boxTypeWithoutLabel, null);
-          lineGenerator("#LinePolicyHolderOtherRelationship", 5);
-          lineGenerator("#LinePolicyHolderOtherPurpose", 5);
-          boxGenerator("#TextPolicyHolderEmail", 30, boxTypeWithoutLabel, null);
-          labelGenerator("#LabelPolicyHolderTelephone1", 1)
-          boxGenerator("#TextPolicyHolderTelephone1", 9, boxTypeWithoutLabel, null);
-          labelGenerator("#LabelPolicyHolderTelephone2", 1)
-          boxGenerator("#TextPolicyHolderTelephone2", 9, boxTypeWithoutLabel, null);
-          boxGenerator("#TextPolicyHolderNPWP", 16, boxTypeWithoutLabel, null);
-          boxGenerator("#DatePolicyHolderNPWPActiveDay", 2, boxTypeWithBottomLabel, labelDay);
-          boxGenerator("#DatePolicyHolderNPWPActiveMonth", 2, boxTypeWithBottomLabel, labelMonth);
-          boxGenerator("#DatePolicyHolderNPWPActiveYear", 4, boxTypeWithBottomLabel, labelYear);
-          boxGenerator("#TextPolicyHolderSalary", 17, boxTypeWithoutLabel, null);
-          boxGenerator("#TextPolicyHolderRevenue", 17, boxTypeWithoutLabel, null);
-          boxGenerator("#TextPolicyHolderOtherIncome", 17, boxTypeWithoutLabel, null);
-          boxGenerator("#TextPolicyHolderSource", 30, boxTypeWithoutLabel, null);
-          
-          // SECTION POLICY HOLDER
+      	// SECTION POLICY HOLDER
       
-          // SUB A
-          
-          boxGenerator("#TextProspectiveInsuredCIN", 7, boxTypeWithoutLabel, null);
-          boxGenerator("#TextProspectiveInsuredFullName", 30, boxTypeWithoutLabel, null);
-          boxGenerator("#TextProspectiveInsuredID", 16, boxTypeWithoutLabel, null);
-          lineGenerator("#LineProspectiveInsuredIDTypeOther", 11);
-          boxGenerator("#TextProspectiveInsuredActiveDateDay", 2, boxTypeWithBottomLabel, labelDay);
-          boxGenerator("#TextProspectiveInsuredActiveDateMonth", 2, boxTypeWithBottomLabel, labelMonth);
-          boxGenerator("#TextProspectiveInsuredActiveDateYear", 4, boxTypeWithBottomLabel, labelYear);
-          lineGenerator("#LineProspectiveInsuredPlace", 8);
-          boxGenerator("#TextProspectiveInsuredDateOfBirthDay", 2, boxTypeWithBottomLabel, labelDay);
-          boxGenerator("#TextProspectiveInsuredDateOfBirthMonth", 2, boxTypeWithBottomLabel, labelMonth);
-          boxGenerator("#TextProspectiveInsuredDateOfBirthYear", 4, boxTypeWithBottomLabel, labelYear);
-          boxGenerator("#TextProspectiveInsuredAge", 2, boxTypeWithoutLabel, null);
-          lineGenerator("#LineProspectiveInsuredNationalityWNA", 4);
-          boxGenerator("#TextProspectiveInsuredCompany", 25, boxTypeWithoutLabel, null);
-          boxGenerator("#TextProspectiveInsuredMainJob", 30, boxTypeWithoutLabel, null);
-          boxGenerator("#TextProspectiveInsuredWorkScope", 30, boxTypeWithoutLabel, null);
-          boxGenerator("#TextProspectiveInsuredPosition", 30, boxTypeWithoutLabel, null);
-          boxGenerator("#TextProspectiveInsuredJobDescription", 30, boxTypeWithoutLabel, null);
-          boxGenerator("#TextProspectiveInsuredSideJob", 30, boxTypeWithoutLabel, null);
-          boxGenerator("#TextProspectiveInsuredHomeAddress1", 30, boxTypeWithoutLabel, null);
-          boxGenerator("#TextProspectiveInsuredHomeAddress2", 30, boxTypeWithoutLabel, null);
-          labelGenerator("#LabelProspectiveInsuredHomeCity", 2)
-          boxGenerator("#TextProspectiveInsuredHomeCity", 19, boxTypeWithoutLabel, null);
-          labelGenerator("#LabelProspectiveInsuredHomePostalCode", 3)
-          boxGenerator("#TextProspectiveInsuredHomePostalCode", 6, boxTypeWithoutLabel, null);
-          labelGenerator("#LabelProspectiveInsuredHomeTelephonePrefix", 2)
-          boxGenerator("#TextProspectiveInsuredHomeTelephonePrefix", 4, boxTypeWithoutLabel, null);
-          labelGenerator("#LabelProspectiveInsuredHomeTelephoneInfix", 1)
-          boxGenerator("#TextProspectiveInsuredHomeTelephoneInfix", 9, boxTypeWithoutLabel, null);
-          boxGenerator("#TextProspectiveInsuredOfficeAddress1", 30, boxTypeWithoutLabel, null);
-          boxGenerator("#TextProspectiveInsuredOfficeAddress2", 30, boxTypeWithoutLabel, null);
-          labelGenerator("#LabelProspectiveInsuredOfficeCity", 2)
-          boxGenerator("#TextProspectiveInsuredOfficeCity", 19, boxTypeWithoutLabel, null);
-          labelGenerator("#LabelProspectiveInsuredOfficePostalCode", 3)
-          boxGenerator("#TextProspectiveInsuredOfficePostalCode", 6, boxTypeWithoutLabel, null);
-          labelGenerator("#LabelProspectiveInsuredOfficeTelephonePrefix", 2)
-          boxGenerator("#TextProspectiveInsuredOfficeTelephonePrefix", 4, boxTypeWithoutLabel, null);
-          labelGenerator("#LabelProspectiveInsuredOfficeTelephoneInfix", 1)
-          boxGenerator("#TextProspectiveInsuredOfficeTelephoneInfix", 9, boxTypeWithoutLabel, null);
-          lineGenerator("#LineProspectiveInsuredOtherRelationship", 5);
-          lineGenerator("#LineProspectiveInsuredOtherPurpose", 5);
-          boxGenerator("#TextProspectiveInsuredEmail", 30, boxTypeWithoutLabel, null);
-          labelGenerator("#LabelProspectiveInsuredTelephone1", 1)
-          boxGenerator("#TextProspectiveInsuredTelephone1", 9, boxTypeWithoutLabel, null);
-          labelGenerator("#LabelProspectiveInsuredTelephone2", 1)
-          boxGenerator("#TextProspectiveInsuredTelephone2", 9, boxTypeWithoutLabel, null);
-          boxGenerator("#TextProspectiveInsuredNPWP", 16, boxTypeWithoutLabel, null);
-          boxGenerator("#TextProspectiveInsuredNPWPActiveDateDay", 2, boxTypeWithBottomLabel, labelDay);
-          boxGenerator("#TextProspectiveInsuredNPWPActiveDateMonth", 2, boxTypeWithBottomLabel, labelMonth);
-          boxGenerator("#TextProspectiveInsuredNPWPActiveDateYear", 4, boxTypeWithBottomLabel, labelYear);
-          boxGenerator("#TextProspectiveInsuredSalary", 17, boxTypeWithoutLabel, null);
-          boxGenerator("#TextProspectiveInsuredRevenue", 17, boxTypeWithoutLabel, null);
-          boxGenerator("#TextProspectiveInsuredOtherIncome", 17, boxTypeWithoutLabel, null);
-          boxGenerator("#TextProspectiveInsuredSource", 30, boxTypeWithoutLabel, null);
-          
-          // SUB B
-          
-          boxGenerator("#TextPolicyHolderCompanyName", 30, boxTypeWithoutLabel, null);
-          lineGenerator("#LinePolicyHolderCompanyTypeOther", 11);
-          lineGenerator("#LinePolicyHolderComanyIDTypeOther", 11);
-          boxGenerator("#TextPolicyHolderCompanyNoAnggaranDasar", 21, boxTypeWithoutLabel, null);
-          boxGenerator("#DatePolicyHolderCompanyDateOfExpiredDay", 2, boxTypeWithBottomLabel, labelDay);
-          boxGenerator("#DatePolicyHolderCompanyDateOfExpiredMonth", 2, boxTypeWithBottomLabel, labelMonth);
-          boxGenerator("#DatePolicyHolderCompanyDateOfExpiredYear", 4, boxTypeWithBottomLabel, labelYear); 
-          boxGenerator("#TextPolicyHolderCompanyNoSuratIjinUsaha", 21, boxTypeWithoutLabel, null);
-          boxGenerator("#DatePolicyHolderCompanySIUPDateOfExpiredDay", 2, boxTypeWithBottomLabel, labelDay);
-          boxGenerator("#DatePolicyHolderCompanySIUPDateOfExpiredMonth", 2, boxTypeWithBottomLabel, labelMonth);
-          boxGenerator("#DatePolicyHolderCompanySIUPDateOfExpiredYear", 4, boxTypeWithBottomLabel, labelYear);
-          boxGenerator("#TextPolicyHolderCompanyNoTDP", 21, boxTypeWithoutLabel, null);
-          boxGenerator("#DatePolicyHolderCompanyTDPDateOfExpiredDay", 2, boxTypeWithBottomLabel, labelDay);
-          boxGenerator("#DatePolicyHolderCompanyTDPDateOfExpiredMonth", 2, boxTypeWithBottomLabel, labelMonth);
-          boxGenerator("#DatePolicyHolderCompanyTDPDateOfExpiredYear", 4, boxTypeWithBottomLabel, labelYear);
-          boxGenerator("#TextPolicyHolderCompanyNoSKDP", 21, boxTypeWithoutLabel, null);
-          boxGenerator("#DatePolicyHolderCompanySKDPDateOfExpiredDay", 2, boxTypeWithBottomLabel, labelDay);
-          boxGenerator("#DatePolicyHolderCompanySKDPDateOfExpiredMonth", 2, boxTypeWithBottomLabel, labelMonth);
-          boxGenerator("#DatePolicyHolderCompanySKDPDateOfExpiredYear", 4, boxTypeWithBottomLabel, labelYear);
-          boxGenerator("#TextPolicyHolderCompanyNoNPWP", 16, boxTypeWithoutLabel, null);
-          boxGenerator("#DatePolicyHolderCompanyNoNPWPDay", 2, boxTypeWithBottomLabel, labelDay);
-          boxGenerator("#DatePolicyHolderCompanyNoNPWPMonth", 2, boxTypeWithBottomLabel, labelMonth);
-          boxGenerator("#DatePolicyHolderCompanyNoNPWPYear", 4, boxTypeWithBottomLabel, labelYear);
-          boxGenerator("#TextPolicyHolderCompanySector", 30, boxTypeWithoutLabel, null);
-          boxGenerator("#TextPolicyHolderCompanyAddress", 30, boxTypeWithoutLabel, null);
-          boxGenerator("#TextPolicyHolderCompanyCity", 19, boxTypeWithoutLabel, null);
-          labelGenerator("#LabelPolicyHolderCompanyPostalCode", 3);
-          boxGenerator("#TextPolicyHolderCompanyPostalCode", 6, boxTypeWithoutLabel, null);
-          
-          // SECTION COMPANY REPRESENTATIVE
-          
-          boxGenerator("#TextPolicyHolderCompanyRepresentativeFullName", 30, boxTypeWithoutLabel, null);
-          boxGenerator("#TextPolicyHolderCompanyRepresentativePosition", 28, boxTypeWithoutLabel, null);
-          boxGenerator("#TextPolicyHolderCompanyRepresentativeID", 16, boxTypeWithoutLabel, null);
-          boxGenerator("#DatePolicyHolderCompanyRepresentativeActiveDay", 2, boxTypeWithBottomLabel, labelDay);
-          boxGenerator("#DatePolicyHolderCompanyRepresentativeActiveMonth", 2, boxTypeWithBottomLabel, labelMonth);
-          boxGenerator("#DatePolicyHolderCompanyRepresentativeActiveYear", 4, boxTypeWithBottomLabel, labelYear);
-          lineGenerator("#TextPolicyHolderCompanyRepresentativeRelationshipOther", 19);
-          lineGenerator("#TextPolicyHolderCompanyRepresentativeInsurancePurposeOther", 5);
+      	boxGenerator("#TextPolicyHolderCIN", 7, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextPolicyHolderFullName", 30, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextPolicyHolderIDNumber", 16, boxTypeWithoutLabel, null);
+      	lineGenerator("#TextPolicyHolderIDTypeOther", 11);
+      	boxGenerator("#DatePolicyHolderActiveDay", 2, boxTypeWithBottomLabel, labelDay);
+      	boxGenerator("#DatePolicyHolderActiveMonth", 2, boxTypeWithBottomLabel, labelMonth);
+      	boxGenerator("#DatePolicyHolderActiveYear", 4, boxTypeWithBottomLabel, labelYear);
+      	lineGenerator("#TextPolicyHolderBirthPlace", 11);
+      	boxGenerator("#DatePolicyHolderBirthDay", 2, boxTypeWithBottomLabel, labelDay);
+      	boxGenerator("#DatePolicyHolderBirthMonth", 2, boxTypeWithBottomLabel, labelMonth);
+      	boxGenerator("#DatePolicyHolderBirthYear", 4, boxTypeWithBottomLabel, labelYear);
+      	lineGenerator("#LinePolicyHolderPlace", 8);                                     
+      	boxGenerator("#TextPolicyHolderAge", 2, boxTypeWithoutLabel, null);
+      	lineGenerator("#TextPolicyHolderWNA", 4);
+      	boxGenerator("#TextPolicyHolderCompany", 25, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextPolicyHolderMainJob", 30, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextPolicyHolderWorkScope", 30, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextPolicyHolderPosition", 30, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextPolicyHolderJobDescription", 30, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextPolicyHolderSideJob", 30, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextPolicyHolderHomeAddress1", 30, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextPolicyHolderHomeAddress2", 30, boxTypeWithoutLabel, null);
+      	labelGenerator("#LabelPolicyHolderHomeCity", 2)
+      	boxGenerator("#TextPolicyHolderHomeCity", 19, boxTypeWithoutLabel, null);
+      	labelGenerator("#LabelPolicyHolderHomePostalCode", 3)
+      	boxGenerator("#TextPolicyHolderHomePostalCode", 6, boxTypeWithoutLabel, null);
+      	labelGenerator("#LabelPolicyHolderHomeTelephonePrefix", 2)
+      	boxGenerator("#TextPolicyHolderHomeTelephonePrefix", 4, boxTypeWithoutLabel, null);
+      	labelGenerator("#LabelPolicyHolderHomeTelephoneInfix", 1)
+      	boxGenerator("#TextPolicyHolderHomeTelephoneInfix", 9, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextPolicyHolderOfficeAddress1", 30, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextPolicyHolderOfficeAddress2", 30, boxTypeWithoutLabel, null);
+      	labelGenerator("#LabelPolicyHolderOfficeCity", 2)
+      	boxGenerator("#TextPolicyHolderOfficeCity", 19, boxTypeWithoutLabel, null);
+      	labelGenerator("#LabelPolicyHolderOfficePostalCode", 3)
+      	boxGenerator("#TextPolicyHolderOfficePostalCode", 6, boxTypeWithoutLabel, null);
+      	labelGenerator("#LabelPolicyHolderOfficeTelephonePrefix", 2)
+      	boxGenerator("#TextPolicyHolderOfficeTelephonePrefix", 4, boxTypeWithoutLabel, null);
+      	labelGenerator("#LabelPolicyHolderOfficeTelephoneInfix", 1)
+      	boxGenerator("#TextPolicyHolderOfficeTelephoneInfix", 9, boxTypeWithoutLabel, null);
+      	lineGenerator("#LinePolicyHolderOtherRelationship", 5);
+      	lineGenerator("#LinePolicyHolderOtherPurpose", 5);
+      	boxGenerator("#TextPolicyHolderEmail", 30, boxTypeWithoutLabel, null);
+      	labelGenerator("#LabelPolicyHolderTelephone1", 1)
+      	boxGenerator("#TextPolicyHolderTelephone1", 9, boxTypeWithoutLabel, null);
+      	labelGenerator("#LabelPolicyHolderTelephone2", 1)
+      	boxGenerator("#TextPolicyHolderTelephone2", 9, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextPolicyHolderNPWP", 16, boxTypeWithoutLabel, null);
+      	boxGenerator("#DatePolicyHolderNPWPActiveDay", 2, boxTypeWithBottomLabel, labelDay);
+      	boxGenerator("#DatePolicyHolderNPWPActiveMonth", 2, boxTypeWithBottomLabel, labelMonth);
+      	boxGenerator("#DatePolicyHolderNPWPActiveYear", 4, boxTypeWithBottomLabel, labelYear);
+      	boxGenerator("#TextPolicyHolderSalary", 17, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextPolicyHolderRevenue", 17, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextPolicyHolderOtherIncome", 17, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextPolicyHolderSource", 30, boxTypeWithoutLabel, null);
       
-          // SECTION ILLUSTRATION
-          
-          boxGenerator("#BoxIllustrationAgentName", 30, boxTypeWithoutLabel, null);
-          boxGenerator("#BoxIllustrationNumber", 10, boxTypeWithoutLabel, null);
-          boxGenerator("#BoxIllustrationDateDay", 2, boxTypeWithBottomLabel, labelDay);
-          boxGenerator("#BoxIllustrationDateMonth", 2, boxTypeWithBottomLabel, labelMonth);
-          boxGenerator("#BoxIllustrationDateYear", 4, boxTypeWithBottomLabel, labelYear);
-          boxGenerator("#BoxIllustrationAgentCode", 13, boxTypeWithoutLabel, null);
-          
-          // SECTION PREMI PAYMENT
-          
-          labelGenerator("#LabelPremiPaymentFrequencyYear", 5)
-          labelGenerator("#LabelPremiPaymentFrequencySemester", 4)
-          labelGenerator("#LabelPremiPaymentFrequencyTriwulan", 4)
-          labelGenerator("#LabelPremiPaymentFrequencyMonth", 4)
-          labelGenerator("#LabelPremiPaymentFrequencyFull", 4)
-          labelGenerator("#LabelPremiPaymentPolicyHolder", 5)
-          labelGenerator("#LabelPremiPaymentPolicyHolderCompany", 12)
-          labelGenerator("#LabelPremiPaymentPolicyHolderTertanggung", 5)
-          labelGenerator("#LabelPremiPaymentPolicyHolderThirdParty", 18)
-          labelGenerator("#LabelPremiPaymentDebitAccount", 5)
-          labelGenerator("#LabelPremiPaymentCreditCardAccount", 9)  
-          labelGenerator("#LabelPremiPaymentOtherAccount", 5)
-          lineGenerator("#LinePremiPaymentOtherAccount", 9);
-          boxGenerator("#TextPremiDescriptionCreditCardHolderName", 27, boxTypeWithoutLabel, null);
-          boxGenerator("#TextPremiDescriptionDebitCreditNumber", 27, boxTypeWithoutLabel, null);
-          boxGenerator("#TextPremiDescriptionBankName", 27, boxTypeWithoutLabel, null);
-          boxGenerator("#TextPremiDescriptionBankBranch", 27, boxTypeWithoutLabel, null);
+      	// SECTION POLICY HOLDER
       
-          // SECTION HEALTH
-          
-          boxGenerator("#TextProspectiveInsuredHeight", 3, boxTypeWithoutLabel, null);
-          boxGenerator("#TextPolicyHolderHeight", 3, boxTypeWithoutLabel, null);
-          boxGenerator("#TextProspectiveInsuredWeight", 3, boxTypeWithoutLabel, null);
-          boxGenerator("#TextPolicyHolderWeight", 3, boxTypeWithoutLabel, null);
-          boxGenerator("#TextProspectiveInsuredSmokeAmount", 2, boxTypeWithoutLabel, null);
-          boxGenerator("#TextPolicyHolderSmokeAmount", 2, boxTypeWithoutLabel, null);
-          
-          boxGenerator("#BoxProspectiveInsured1Month", 2, boxTypeWithoutLabel, null);
-          boxGenerator("#BoxProspectiveInsured1Year", 2, boxTypeWithoutLabel, null);
-          boxGenerator("#BoxProspectiveInsured2Month", 2, boxTypeWithoutLabel, null);
-          boxGenerator("#BoxProspectiveInsured2Year", 2, boxTypeWithoutLabel, null);
-          boxGenerator("#BoxProspectiveInsured3Month", 2, boxTypeWithoutLabel, null);
-          boxGenerator("#BoxProspectiveInsured3Year", 2, boxTypeWithoutLabel, null);
-          boxGenerator("#BoxPolicyHolder1Month", 2, boxTypeWithoutLabel, null);
-          boxGenerator("#BoxPolicyHolder1Year", 2, boxTypeWithoutLabel, null);
-          boxGenerator("#BoxPolicyHolder2Month", 2, boxTypeWithoutLabel, null);
-          boxGenerator("#BoxPolicyHolder2Year", 2, boxTypeWithoutLabel, null);
-          boxGenerator("#BoxPolicyHolder3Month", 2, boxTypeWithoutLabel, null);
-          boxGenerator("#BoxPolicyHolder3Year", 2, boxTypeWithoutLabel, null);
-          
-          boxGenerator("#TextProspectiveInsuredBabyHeight", 2, boxTypeWithoutLabel, null);
-          boxGenerator("#TextProspectiveInsuredBabyWeight", 2, boxTypeWithoutLabel, null);
-          boxGenerator("#TextProspectiveInsuredPregnancyAge", 2, boxTypeWithoutLabel, null);
+      	// SUB A
       
-          // SECTION AGREEMENT
-          
-          lineGenerator("#LineSignedPlace", 8);
-          lineGenerator("#LineSignedDateDay", 2);
-          lineGenerator("#LineSignedDateMonth", 2);
-          lineGenerator("#LineSignedDateYear", 4);            
+      	boxGenerator("#TextProspectiveInsuredCIN", 7, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextProspectiveInsuredFullName", 30, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextProspectiveInsuredIDNumber", 16, boxTypeWithoutLabel, null);
+      	lineGenerator("#LineProspectiveInsuredIDTypeOther", 11);
+      	boxGenerator("#TextProspectiveInsuredActiveDateDay", 2, boxTypeWithBottomLabel, labelDay);
+      	boxGenerator("#TextProspectiveInsuredActiveDateMonth", 2, boxTypeWithBottomLabel, labelMonth);
+      	boxGenerator("#TextProspectiveInsuredActiveDateYear", 4, boxTypeWithBottomLabel, labelYear);
+      	lineGenerator("#TextProspectiveInsuredBirthPlace", 8);
+      	boxGenerator("#DateProspectiveInsuredBirthDay", 2, boxTypeWithBottomLabel, labelDay);
+      	boxGenerator("#DateProspectiveInsuredBirthMonth", 2, boxTypeWithBottomLabel, labelMonth);
+      	boxGenerator("#DateProspectiveInsuredBirthYear", 4, boxTypeWithBottomLabel, labelYear);
+      	boxGenerator("#TextProspectiveInsuredAge", 2, boxTypeWithoutLabel, null);
+      	lineGenerator("#LineProspectiveInsuredNationalityWNA", 4);
+      	boxGenerator("#TextProspectiveInsuredCompany", 25, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextProspectiveInsuredMainJob", 30, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextProspectiveInsuredWorkScope", 30, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextProspectiveInsuredPosition", 30, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextProspectiveInsuredJobDescription", 30, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextProspectiveInsuredSideJob", 30, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextProspectiveInsuredHomeAddress1", 30, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextProspectiveInsuredHomeAddress2", 30, boxTypeWithoutLabel, null);
+      	labelGenerator("#LabelProspectiveInsuredHomeCity", 2)
+      	boxGenerator("#TextProspectiveInsuredHomeCity", 19, boxTypeWithoutLabel, null);
+      	labelGenerator("#LabelProspectiveInsuredHomePostalCode", 3)
+      	boxGenerator("#TextProspectiveInsuredHomePostalCode", 6, boxTypeWithoutLabel, null);
+      	labelGenerator("#LabelProspectiveInsuredHomeTelephonePrefix", 2)
+      	boxGenerator("#TextProspectiveInsuredHomeTelephonePrefix", 4, boxTypeWithoutLabel, null);
+      	labelGenerator("#LabelProspectiveInsuredHomeTelephoneInfix", 1)
+      	boxGenerator("#TextProspectiveInsuredHomeTelephoneInfix", 9, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextProspectiveInsuredOfficeAddress1", 30, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextProspectiveInsuredOfficeAddress2", 30, boxTypeWithoutLabel, null);
+      	labelGenerator("#LabelProspectiveInsuredOfficeCity", 2)
+      	boxGenerator("#TextProspectiveInsuredOfficeCity", 19, boxTypeWithoutLabel, null);
+      	labelGenerator("#LabelProspectiveInsuredOfficePostalCode", 3)
+      	boxGenerator("#TextProspectiveInsuredOfficePostalCode", 6, boxTypeWithoutLabel, null);
+      	labelGenerator("#LabelProspectiveInsuredOfficeTelephonePrefix", 2)
+      	boxGenerator("#TextProspectiveInsuredOfficeTelephonePrefix", 4, boxTypeWithoutLabel, null);
+      	labelGenerator("#LabelProspectiveInsuredOfficeTelephoneInfix", 1)
+      	boxGenerator("#TextProspectiveInsuredOfficeTelephoneInfix", 9, boxTypeWithoutLabel, null);
+      	lineGenerator("#LineProspectiveInsuredOtherRelationship", 5);
+      	lineGenerator("#LineProspectiveInsuredOtherPurpose", 5);
+      	boxGenerator("#TextProspectiveInsuredEmail", 30, boxTypeWithoutLabel, null);
+      	labelGenerator("#LabelProspectiveInsuredTelephone1", 1)
+      	boxGenerator("#TextProspectiveInsuredTelephone1", 9, boxTypeWithoutLabel, null);
+      	labelGenerator("#LabelProspectiveInsuredTelephone2", 1)
+      	boxGenerator("#TextProspectiveInsuredTelephone2", 9, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextProspectiveInsuredNPWP", 16, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextProspectiveInsuredNPWPActiveDateDay", 2, boxTypeWithBottomLabel, labelDay);
+      	boxGenerator("#TextProspectiveInsuredNPWPActiveDateMonth", 2, boxTypeWithBottomLabel, labelMonth);
+      	boxGenerator("#TextProspectiveInsuredNPWPActiveDateYear", 4, boxTypeWithBottomLabel, labelYear);
+      	boxGenerator("#TextProspectiveInsuredSalary", 17, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextProspectiveInsuredRevenue", 17, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextProspectiveInsuredOtherIncome", 17, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextProspectiveInsuredSource", 30, boxTypeWithoutLabel, null);
+      
+      	// SUB B
+      
+      	boxGenerator("#TextPolicyHolderCompanyName", 30, boxTypeWithoutLabel, null);
+      	lineGenerator("#LinePolicyHolderCompanyTypeOther", 11);
+      	lineGenerator("#LinePolicyHolderComanyIDTypeOther", 11);
+      	boxGenerator("#TextPolicyHolderCompanyNoAnggaranDasar", 21, boxTypeWithoutLabel, null);
+      	boxGenerator("#DatePolicyHolderCompanyNoAnggaranDasarExpiredDay", 2, boxTypeWithBottomLabel, labelDay);
+      	boxGenerator("#DatePolicyHolderCompanyNoAnggaranDasarExpiredMonth", 2, boxTypeWithBottomLabel, labelMonth);
+      	boxGenerator("#DatePolicyHolderCompanyNoAnggaranDasarExpiredYear", 4, boxTypeWithBottomLabel, labelYear); 
+      	boxGenerator("#TextPolicyHolderCompanyNoSIUP", 21, boxTypeWithoutLabel, null);
+      	boxGenerator("#DatePolicyHolderCompanySIUPExpiredDay", 2, boxTypeWithBottomLabel, labelDay);
+      	boxGenerator("#DatePolicyHolderCompanySIUPExpiredMonth", 2, boxTypeWithBottomLabel, labelMonth);
+      	boxGenerator("#DatePolicyHolderCompanySIUPExpiredYear", 4, boxTypeWithBottomLabel, labelYear);
+      	boxGenerator("#TextPolicyHolderCompanyNoTDP", 21, boxTypeWithoutLabel, null);
+      	boxGenerator("#DatePolicyHolderCompanyNoTDPExpiredDay", 2, boxTypeWithBottomLabel, labelDay);
+      	boxGenerator("#DatePolicyHolderCompanyNoTDPExpiredMonth", 2, boxTypeWithBottomLabel, labelMonth);
+      	boxGenerator("#DatePolicyHolderCompanyNoTDPExpiredYear", 4, boxTypeWithBottomLabel, labelYear);
+      	boxGenerator("#TextPolicyHolderCompanyNoSKDP", 21, boxTypeWithoutLabel, null);
+      	boxGenerator("#DatePolicyHolderCompanyNoSKDPExpiredDay", 2, boxTypeWithBottomLabel, labelDay);
+      	boxGenerator("#DatePolicyHolderCompanyNoSKDPExpiredMonth", 2, boxTypeWithBottomLabel, labelMonth);
+      	boxGenerator("#DatePolicyHolderCompanyNoSKDPExpiredYear", 4, boxTypeWithBottomLabel, labelYear);
+      	boxGenerator("#TextPolicyHolderCompanyNoNPWP", 16, boxTypeWithoutLabel, null);
+      	boxGenerator("#DatePolicyHolderCompanyNoNPWPDay", 2, boxTypeWithBottomLabel, labelDay);
+      	boxGenerator("#DatePolicyHolderCompanyNoNPWPMonth", 2, boxTypeWithBottomLabel, labelMonth);
+      	boxGenerator("#DatePolicyHolderCompanyNoNPWPYear", 4, boxTypeWithBottomLabel, labelYear);
+      	boxGenerator("#TextPolicyHolderCompanySector", 30, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextPolicyHolderCompanyAddress", 30, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextPolicyHolderCompanyCity", 19, boxTypeWithoutLabel, null);
+      	labelGenerator("#LabelPolicyHolderCompanyPostalCode", 3);
+      	boxGenerator("#TextPolicyHolderCompanyPostalCode", 6, boxTypeWithoutLabel, null);
+      
+      	// SECTION COMPANY REPRESENTATIVE
+      
+      	boxGenerator("#TextPolicyHolderCompanyRepresentativeFullName", 30, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextPolicyHolderCompanyRepresentativePosition", 28, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextPolicyHolderCompanyRepresentativeIDNumber", 16, boxTypeWithoutLabel, null);
+      	boxGenerator("#DatePolicyHolderCompanyRepresentativeIDExpiredDay", 2, boxTypeWithBottomLabel, labelDay);
+      	boxGenerator("#DatePolicyHolderCompanyRepresentativeIDExpiredMonth", 2, boxTypeWithBottomLabel, labelMonth);
+      	boxGenerator("#DatePolicyHolderCompanyRepresentativeIDExpiredYear", 4, boxTypeWithBottomLabel, labelYear);
+      	lineGenerator("#TextPolicyHolderCompanyRepresentativeRelationshipOther", 19);
+      	lineGenerator("#TextPolicyHolderCompanyRepresentativeInsurancePurposeOther", 5);
+      
+      	// SECTION ILLUSTRATION
+      
+      	boxGenerator("#TextIllustrationAgentName", 30, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextIllustrationNumber", 10, boxTypeWithoutLabel, null);
+      	boxGenerator("#DateIllustrationDay", 2, boxTypeWithBottomLabel, labelDay);
+      	boxGenerator("#DateIllustrationMonth", 2, boxTypeWithBottomLabel, labelMonth);
+      	boxGenerator("#DateIllustrationYear", 4, boxTypeWithBottomLabel, labelYear);
+      	boxGenerator("#TextIllustrationAgentCode", 13, boxTypeWithoutLabel, null);
+      
+      	// SECTION PREMI PAYMENT
+      
+      	labelGenerator("#LabelPremiPaymentFrequencyYear", 5)
+      	labelGenerator("#LabelPremiPaymentFrequencySemester", 4)
+      	labelGenerator("#LabelPremiPaymentFrequencyTriwulan", 4)
+      	labelGenerator("#LabelPremiPaymentFrequencyMonth", 4)
+      	labelGenerator("#LabelPremiPaymentFrequencyFull", 4)
+      	labelGenerator("#LabelPremiPaymentPayorHolder", 5)
+      	labelGenerator("#LabelPremiPaymentPayorCompany", 12)
+      	labelGenerator("#LabelPremiPaymentPayorInsured", 5)
+      	labelGenerator("#LabelPremiPaymentPayorThirdParty", 18)
+      	labelGenerator("#LabelPremiPaymentDebitAccount", 5)
+      	labelGenerator("#LabelPremiPaymentCreditCardAccount", 9)  
+      	labelGenerator("#LabelPremiPaymentOtherAccount", 5)
+      	lineGenerator("#LinePremiPaymentOtherAccount", 9);
+      	boxGenerator("#TextPremiPaymentBankAccountDetailsName", 27, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextPremiPaymentBankAccountDetailsNumber", 27, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextPremiPaymentBankAccountDetailsBankName", 27, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextPremiPaymentBankAccountDetailsBankBranch", 27, boxTypeWithoutLabel, null);
+      
+      	// SECTION HEALTH
+      
+      	boxGenerator("#TextProspectiveInsuredHeight", 3, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextPolicyHolderHeight", 3, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextProspectiveInsuredWeight", 3, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextPolicyHolderWeight", 3, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextProspectiveInsuredSmokeAmount", 2, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextPolicyHolderSmokeAmount", 2, boxTypeWithoutLabel, null);
+      
+      	tableHealthGenerator("TableProspectiveInsuredIllness", 3);
+      	tableHealthGenerator("TablePolicyHolderIllness", 3);
+      	tableSPAJProposalGenerator("TableProspectiveInsuredSPAJProposal", 3);
+      	tableSPAJProposalGenerator("TablePolicyHolderSPAJProposal", 3);
+      
+      	boxGenerator("#TextProspectiveInsuredBabyHeight", 2, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextProspectiveInsuredBabyWeight", 2, boxTypeWithoutLabel, null);
+      	boxGenerator("#TextProspectiveInsuredPregnancyAge", 2, boxTypeWithoutLabel, null);
+      
+      	// SECTION AGREEMENT
+      
+      	lineGenerator("#LineSignedPlace", 8);
+      	lineGenerator("#LineSignedDateDay", 2);
+      	lineGenerator("#LineSignedDateMonth", 2);
+      	lineGenerator("#LineSignedDateYear", 4);  
+      
+      	// SETTER
+      
+      	var objectContent = JSON.parse(jsonDummy);
+      	// getFromDatabase(objectContent.result.readFromDB, stringPageTypePDF);
+      	
+      	headerGenerator(".HeaderGeneral table");
+      	
+      	var stringSectionHeader = "#SectionHeader";
+      	var stringSectionHeaderSuffix;
+      	
+      	for (var i = 1; i < 9; i++)
+      	{
+      		stringSectionHeaderSuffix = stringSectionHeader + i;
+      		
+      		alert("SectionHeader" + i + " -> x = " + $(stringSectionHeaderSuffix).position().left + ", y = " + $(stringSectionHeaderSuffix).position().top);
+      	}
       });
     </script>
   </head>
@@ -315,7 +326,7 @@
         <br>
       </section>
       <section id='SectionAgentProfile'>
-        <h2>DATA TENAGA PENJUAL (Wajib dilengkapi sebelum dikirm ke kantor pusat)</h2>
+        <h2>DATA TENAGA PENJUAL (Wajib dilengkapi sebelum dikirim ke kantor pusat)</h2>
         <label class='Medium Single PositionerLeft' for='TextAgentName'>Nama Tenaga Penjual</label>
         <table class='BoxSquare PositionerLeft' id='TextAgentName'></table>
         <br>
@@ -346,9 +357,25 @@
         <br>
         <label class='Medium Single PositionerLeft' for='TextBranchCode'>Kode Cabang</label>
         <table class='BoxSquare PositionerLeft' id='TextBranchCode'></table>
+        <input class='Plain' id='RadioButtonPolicyHolderReferenceSourceOther' name='RadioButtonReferenceSource' type='radio' value='Other'>
+        <label class='RadioButton PositionerRight' for='RadioButtonPolicyHolderReferenceSourceOther'>Other</label>
+        <span class='Separator Tight PositionerRight'>/</span>
+        <input class='Plain' id='RadioButtonPolicyHolderReferenceSourceAccountManager' name='RadioButtonReferenceSource' type='radio' value='AccountManager'>
+        <label class='RadioButton PositionerRight' for='RadioButtonPolicyHolderReferenceSourceAccountManager'>AM</label>
+        <span class='Separator Tight PositionerRight'>/</span>
+        <input class='Plain' id='RadioButtonPolicyHolderReferenceSourceAccountOfficer' name='RadioButtonReferenceSource' type='radio' value='AccountOfficer'>
+        <label class='RadioButton PositionerRight' for='RadioButtonPolicyHolderReferenceSourceAccountOfficer'>AO</label>
+        <span class='Separator Tight PositionerRight'>/</span>
+        <input class='Plain' id='RadioButtonPolicyHolderReferenceSourceTeller' name='RadioButtonReferenceSource' type='radio' value='Teller'>
+        <label class='RadioButton PositionerRight' for='RadioButtonPolicyHolderReferenceSourceTeller'>Teller</label>
+        <span class='Separator Tight PositionerRight'>/</span>
+        <input class='Plain' id='RadioButtonPolicyHolderReferenceSourceCustomerService' name='RadioButtonReferenceSource' type='radio' value='CustomerService'>
+        <label class='RadioButton PositionerRight' for='RadioButtonPolicyHolderReferenceSourceCustomerService'>CS</label>
+        <label class='Wrap Single PositionerRight'>Tanggal Referal</label>
         <br>
         <label class='Medium Single PositionerLeft' for='TextArea'>Area / Kanwil</label>
         <table class='BoxSquare PositionerLeft' id='TextArea'></table>
+        <label class='Note Wrap Single PositionerRight' style='margin-top: -10px'>(harap dapat dilingkari)</label>
         <br>
         <label class='Medium Single PositionerLeft' for='TextAgentID'>AgentID</label>
         <table class='BoxSquare PositionerLeft' id='TextAgentID'></table>
@@ -417,26 +444,26 @@
         <br>
         <span class='Description PositionerLeft'>(sesuai dengan identitas diri)</span>
         <br>
-        <label class='Medium Single PositionerLeft' for='RadioButtonPolicyHolderIDType'>3. Jenis Identitas Diri</label>
-        <input id='RadioButtonPolicyHolderKTP' name='RadioButtonPolicyHolderIDType' type='radio' value='KTP'>
-        <div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderKTP'></div>
-        <label class='RadioButton PositionerLeft' for='RadioButtonPolicyHolderKTP'>KTP</label>
-        <input id='RadioButtonPolicyHolderSIM' name='RadioButtonPolicyHolderIDType' type='radio' value='SIM'>
-        <div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderSIM'></div>
-        <label class='RadioButton PositionerLeft' for='RadioButtonPolicyHolderSIM'>SIM</label>
-        <input id='RadioButtonPolicyHolderPaspor' name='RadioButtonPolicyHolderIDType' type='radio' value='Paspor'>
-        <div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderPaspor'></div>
-        <label class='RadioButton PositionerLeft' for='RadioButtonPolicyHolderPaspor'>Paspor</label>
-        <input id='RadioButtonPolicyHolderKIMSKITAS' name='RadioButtonPolicyHolderIDType' type='radio' value='KIMSKITAS'>
-        <div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderKIMSKITAS'></div>
-        <label class='RadioButton PositionerLeft' for='RadioButtonPolicyHolderKIMSKITAS'>KIMS / KITAS</label>
-        <input id='RadioButtonPolicyHolderOtherID' name='RadioButtonPolicyHolderIDType' type='radio' value='Other'>
-        <div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderOtherID'></div>
-        <label class='RadioButton PositionerLeft' for='RadioButtonPolicyHolderOtherID'>Lainnya, sebutkan</label>
-        <div class='LineDot PositionerLeft' id='TextPolicyHolderOtherID'></div>
+        <label class='Medium Single PositionerLeft' for='RadioButtonPolicyHolderIDTypeKTP'>3. Jenis Identitas Diri</label>
+        <input id='RadioButtonPolicyHolderIDTypeKTP' name='RadioButtonPolicyHolderIDType' type='radio' value='KTP'>
+        <div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderIDTypeKTP'></div>
+        <label class='RadioButton PositionerLeft' for='RadioButtonPolicyHolderIDTypeKTP'>KTP</label>
+        <input id='RadioButtonPolicyHolderIDTypeSIM' name='RadioButtonPolicyHolderIDType' type='radio' value='SIM'>
+        <div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderIDTypeSIM'></div>
+        <label class='RadioButton PositionerLeft' for='RadioButtonPolicyHolderIDTypeSIM'>SIM</label>
+        <input id='RadioButtonPolicyHolderIDTypePassport' name='RadioButtonPolicyHolderIDType' type='radio' value='Paspor'>
+        <div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderIDTypePassport'></div>
+        <label class='RadioButton PositionerLeft' for='RadioButtonPolicyHolderIDTypePassport'>Paspor</label>
+        <input id='RadioButtonPolicyHolderIDTypeKIMSKITAS' name='RadioButtonPolicyHolderIDType' type='radio' value='KIMSKITAS'>
+        <div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderIDTypeKIMSKITAS'></div>
+        <label class='RadioButton PositionerLeft' for='RadioButtonPolicyHolderIDTypeKIMSKITAS'>KIMS / KITAS</label>
+        <input id='RadioButtonPolicyHolderIDTypeOther' name='RadioButtonPolicyHolderIDType' type='radio' value='Other'>
+        <div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderIDTypeOther'></div>
+        <label class='RadioButton PositionerLeft' for='RadioButtonPolicyHolderIDTypeOther'>Lainnya, sebutkan</label>
+        <div class='LineDot PositionerLeft' id='TextPolicyHolderIDTypeOther'></div>
         <br>
-        <label class='Medium Single PositionerLeft' for='TextPolicyHolderID'>4. Nomor Identitas Diri</label>
-        <table class='BoxSquare PositionerLeft' id='TextPolicyHolderID'></table>
+        <label class='Medium Single PositionerLeft' for='TextPolicyHolderIDNumber'>4. Nomor Identitas Diri</label>
+        <table class='BoxSquare PositionerLeft' id='TextPolicyHolderIDNumber'></table>
         <table class='BoxSquare PositionerRight' id='DatePolicyHolderActiveYear'></table>
         <label class='Separator Single PositionerRight' for='DatePolicyHolderActiveYear'>/</label>
         <table class='BoxSquare PositionerRight' id='DatePolicyHolderActiveMonth'></table>
@@ -444,22 +471,22 @@
         <table class='BoxSquare PositionerRight' id='DatePolicyHolderActiveDay'></table>
         <label class='Wrap Single PositionerRight' for='DatePolicyHolderActiveDay'>Masa Berlaku</label>
         <br>
-        <label class='Medium Single PositionerLeft' for='TextPolicyHolderDateOfBirth'>5. Tempat Tanggal Lahir</label>
-        <div class='LineStraight PositionerLeft' id='TextPolicyHolderPlace'></div>
-        <table class='BoxSquare PositionerLeft' id='DateHolderOfBirthDay'></table>
-        <span class='Separator Single PositionerLeft' for='DateHolderOfBirthMonth'>/</span>
-        <table class='BoxSquare PositionerLeft' id='DateHolderOfBirthMonth'></table>
-        <label class='Separator Single PositionerLeft' for='DateHolderOfBirthYear'>/</label>
-        <table class='BoxSquare PositionerLeft' id='DateHolderOfBirthYear'></table>
-        <label class='Separator Single PositionerLeft' for='BoxPolicyHolderAge'>Age</label>
-        <table class='BoxSquare PositionerLeft' id='BoxPolicyHolderAge'></table>
+        <label class='Medium Single PositionerLeft' for='TextPolicyHolderBirthPlace'>5. Tempat Tanggal Lahir</label>
+        <div class='LineStraight PositionerLeft' id='TextPolicyHolderBirthPlace'></div>
+        <table class='BoxSquare PositionerLeft' id='DatePolicyHolderBirthDay'></table>
+        <span class='Separator Single PositionerLeft' for='DatePolicyHolderBirthMonth'>/</span>
+        <table class='BoxSquare PositionerLeft' id='DatePolicyHolderBirthMonth'></table>
+        <label class='Separator Single PositionerLeft' for='DatePolicyHolderBirthYear'>/</label>
+        <table class='BoxSquare PositionerLeft' id='DatePolicyHolderBirthYear'></table>
+        <label class='Separator Single PositionerLeft' for='TextPolicyHolderAge'>Usia</label>
+        <table class='BoxSquare PositionerLeft' id='TextPolicyHolderAge'></table>
         <span class='Separator Single PositionerLeft'>Tahun</span>
         <br>
         <label class='Medium Single PositionerLeft' for='RadioButtonPolicyHolderNationalityWNI'>6. Kewarganegaraan</label>
-        <input id='RadioButtonPolicyHolderWNI' name='RadioButtonPolicyHolderNationality' type='radio' value='wni'>
+        <input id='RadioButtonPolicyHolderNationalityWNI' name='RadioButtonPolicyHolderNationality' type='radio' value='wni'>
         <div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderNationalityWNI'></div>
         <label class='RadioButton PositionerLeft' for='RadioButtonPolicyHolderNationalityWNI'>WNI</label>
-        <input id='RadioButtonPolicyHolderWNA' name='RadioButtonPolicyHolderNationality' type='radio' value='wna'>
+        <input id='RadioButtonPolicyHolderNationalityWNA' name='RadioButtonPolicyHolderNationality' type='radio' value='wna'>
         <div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderNationalityWNA'></div>
         <label class='RadioButton PositionerLeft' for='RadioButtonPolicyHolderNationalityWNA'>WNA, sebutkan</label>
         <div class='LineDot PositionerLeft' id='TextPolicyHolderWNA'></div>
@@ -467,7 +494,7 @@
         <br>
         <label class='Wrap Single PositionerLeft' for='RadioButtonPolicyHolderUSACitizenYes'>7. Apakah Anda merupakan warga negara atau wajib pajak Amerika Serikat ?</label>
         <input id='RadioButtonPolicyHolderUSACitizenYes' name='RadioButtonPolicyHolderUSACitizen' type='radio' value='yes'>
-        <div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderUSACitizenNo'></div>
+        <div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderUSACitizenYes'></div>
         <label class='RadioButton PositionerLeft' for='RadioButtonPolicyHolderUSACitizenYes'>YA</label>
         <input id='RadioButtonPolicyHolderUSACitizenNo' name='RadioButtonPolicyHolderUSACitizen' type='radio' value='no'>
         <div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderUSACitizenNo'></div>
@@ -516,6 +543,27 @@
         <label class='Wrap Single PositionerLeft' for='TextPolicyHolderCompany'>11. a. Nama Perusahaan/Instansi/Sekolah</label>
         <table class='BoxSquare PositionerLeft' id='TextPolicyHolderCompany' style='margin-left: 4px'></table>
         <br>
+        <section class='SectionFooter'>
+          <div class='FooterContainer'>
+            <div class='FooterGeneral'>
+              <span class='Note Single PositionerLeft'>OP/NB/0104/031602 Hal 1 / 8</span>
+              <span class='Note Single PositionerRight'>PT Asuransi Jiwa BCA telah terdaftar dan diawasi oleh Otoritas Jasa Keuangan.</span>
+              <br>
+            </div>
+          </div>
+          <div class='PageBreak'></div>
+        </section>
+        <section id='SectionHeader1'>
+          <div class='HeaderContainer'>
+            <div class='HeaderGeneral'>
+              <table class='BoxSquare PositionerRight' id='TextHeaderSPAJNumber'></table>
+              <label class='Short Single PositionerRight' for='TextHeaderSPAJNumber'>Nomor SPAJ</label>
+              <br>
+              <hr>
+            </div>
+          </div>
+          <div class='HeaderBreak'></div>
+        </section>
         <label class='Medium SecondIndent Single PositionerLeft' for='TextPolicyHolderMainJob'>Pekerjaan Utama</label>
         <table class='BoxSquare PositionerLeft' id='TextPolicyHolderMainJob'></table>
         <br>
@@ -626,7 +674,7 @@
         <input id='RadioButtonPolicyHolderSalaryUSD' name='RadioButtonPolicyHolderSalary' type='radio' value='usd'>
         <div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderSalaryUSD'></div>
         <label class='RadioButton PositionerLeft' for='RadioButtonPolicyHolderSalaryUSD'>USD</label>
-        <label class='Wrap Single PositionerLeft' for='TextPolicyHolderSalary'>Jumlah Penghasilan / tahun</label>
+        <label class='RadioButton PositionerLeft' for='TextPolicyHolderSalary'>Jumlah Penghasilan / tahun</label>
         <table class='BoxSquare PositionerLeft' id='TextPolicyHolderSalary'></table>
         <br>
         <label class='Medium Single FirstIndent PositionerLeft' for='RadioButtonPolicyHolderRevenueIDR'>Hasil Usaha</label>
@@ -659,19 +707,19 @@
         <table class='BoxSquare PositionerLeft' id='TextPolicyHolderCompanyName'></table>
         <br>
         <label class='Medium Single PositionerLeft' for='RadioButtonPolicyHolderComanyIDTypeKTP'>3. Jenis Identitas Diri</label>
-        <input id='RadioButtonPolicyHolderComanyIDTypeKTP' name='RadioButtonPolicyHolderComanyIDType' type='radio' value='ktp'>
+        <input id='RadioButtonPolicyHolderComanyIDTypeKTP' name='RadioButtonPolicyHolderComanyIDType' type='radio' value='KTP'>
         <div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderComanyIDTypeKTP'></div>
         <label class='RadioButton PositionerLeft' for='RadioButtonPolicyHolderComanyIDTypeKTP'>KTP</label>
-        <input id='RadioButtonPolicyHolderComanyIDTypeSIM' name='RadioButtonPolicyHolderComanyIDType' type='radio' value='sim'>
+        <input id='RadioButtonPolicyHolderComanyIDTypeSIM' name='RadioButtonPolicyHolderComanyIDType' type='radio' value='SIM'>
         <div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderComanyIDTypeSIM'></div>
         <label class='RadioButton PositionerLeft' for='RadioButtonPolicyHolderComanyIDTypeSIM'>SIM</label>
-        <input id='RadioButtonPolicyHolderComanyIDTypePassport' name='RadioButtonPolicyHolderComanyIDType' type='radio' value='paspor'>
+        <input id='RadioButtonPolicyHolderComanyIDTypePassport' name='RadioButtonPolicyHolderComanyIDType' type='radio' value='PASPOR'>
         <div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderComanyIDTypePassport'></div>
         <label class='RadioButton PositionerLeft' for='RadioButtonPolicyHolderComanyIDTypePassport'>Paspor</label>
-        <input id='RadioButtonPolicyHolderComanyIDTypeKIMKITAS' name='RadioButtonPolicyHolderComanyIDType' type='radio' value='kimskitas'>
+        <input id='RadioButtonPolicyHolderComanyIDTypeKIMKITAS' name='RadioButtonPolicyHolderComanyIDType' type='radio' value='KIMSKITAS'>
         <div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderComanyIDTypeKIMKITAS'></div>
         <label class='RadioButton PositionerLeft' for='RadioButtonPolicyHolderComanyIDTypeKIMKITAS'>KIMS / KITAS</label>
-        <input id='RadioButtonPolicyHolderComanyIDTypeOther' name='RadioButtonPolicyHolderComanyIDType' type='radio' value='other'>
+        <input id='RadioButtonPolicyHolderComanyIDTypeOther' name='RadioButtonPolicyHolderComanyIDType' type='radio' value='OTHER'>
         <div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderComanyIDTypeOther'></div>
         <label class='RadioButton PositionerLeft' for='RadioButtonPolicyHolderComanyIDTypeOther'>Lainnya, sebutkan</label>
         <div class='LineDot PositionerLeft' id='LinePolicyHolderComanyIDTypeOther'></div>
@@ -694,46 +742,46 @@
         <label class='Medium Single PositionerLeft' for='TextPolicyHolderCompanyNoAnggaranDasar'>3. Nomor Anggaran Dasar/Akta Pendirian</label>
         <table class='BoxSquare PositionerLeft' id='TextPolicyHolderCompanyNoAnggaranDasar'></table>
         <br>
-        <label class='Medium Single PositionerLeft' for='BoxPolicyHolderCompanyAnggaranDateOfExpired'></label>
-        <label class='Medium Single PositionerLeft' for='DatePolicyHolderCompanyDateOfExpiredDay'>Tanggal Berlaku</label>
-        <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanyDateOfExpiredDay'></table>
-        <span class='Separator Single PositionerLeft' for='DatePolicyHolderCompanyDateOfExpiredMonth'>/</span>
-        <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanyDateOfExpiredMonth'></table>
-        <label class='Separator Single PositionerLeft' for='DatePolicyHolderCompanyDateOfExpiredYear'>/</label>
-        <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanyDateOfExpiredYear'></table>
+        <label class='Medium Single PositionerLeft' for='DatePolicyHolderCompanyNoAnggaranDasarExpired'></label>
+        <label class='Medium Single PositionerLeft' for='DatePolicyHolderCompanyNoAnggaranDasarExpiredDay'>Tanggal Berlaku</label>
+        <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanyNoAnggaranDasarExpiredDay'></table>
+        <span class='Separator Single PositionerLeft' for='DatePolicyHolderCompanyNoAnggaranDasarExpiredMonth'>/</span>
+        <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanyNoAnggaranDasarExpiredMonth'></table>
+        <label class='Separator Single PositionerLeft' for='DatePolicyHolderCompanyNoAnggaranDasarExpiredYear'>/</label>
+        <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanyNoAnggaranDasarExpiredYear'></table>
         <br>
-        <label class='Medium Single PositionerLeft' for='TextPolicyHolderCompanyNoSuratIjinUsaha'>4. Nomor Surat Ijin Usaha</label>
-        <table class='BoxSquare PositionerLeft' id='TextPolicyHolderCompanyNoSuratIjinUsaha'></table>
+        <label class='Medium Single PositionerLeft' for='TextPolicyHolderCompanyNoSIUP'>4. Nomor Surat Ijin Usaha</label>
+        <table class='BoxSquare PositionerLeft' id='TextPolicyHolderCompanyNoSIUP'></table>
         <br>
-        <label class='Medium Single PositionerLeft' for='BoxPolicyHolderCompanySIUPDateOfExpired'></label>
-        <label class='Medium Single PositionerLeft' for='DatePolicyHolderCompanySIUPDateOfExpiredDay'>Tanggal Berlaku</label>
-        <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanySIUPDateOfExpiredDay'></table>
-        <span class='Separator Single PositionerLeft' for='DatePolicyHolderCompanySIUPDateOfExpiredMonth'>/</span>
-        <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanySIUPDateOfExpiredMonth'></table>
-        <label class='Separator Single PositionerLeft' for='DatePolicyHolderCompanySIUPDateOfExpiredYear'>/</label>
-        <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanySIUPDateOfExpiredYear'></table>
+        <label class='Medium Single PositionerLeft' for='DatePolicyHolderCompanySIUPExpired'></label>
+        <label class='Medium Single PositionerLeft' for='DatePolicyHolderCompanySIUPExpiredDay'>Tanggal Berlaku</label>
+        <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanySIUPExpiredDay'></table>
+        <span class='Separator Single PositionerLeft' for='DatePolicyHolderCompanySIUPExpiredMonth'>/</span>
+        <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanySIUPExpiredMonth'></table>
+        <label class='Separator Single PositionerLeft' for='DatePolicyHolderCompanySIUPExpiredYear'>/</label>
+        <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanySIUPExpiredYear'></table>
         <br>
         <label class='Medium Single PositionerLeft' for='TextPolicyHolderCompanyNoTDP'>5. Nomor TDP</label>
         <table class='BoxSquare PositionerLeft' id='TextPolicyHolderCompanyNoTDP'></table>
         <br>
-        <label class='Medium Single PositionerLeft' for='BoxPolicyHolderCompanyTDPDateOfExpired'></label>
-        <label class='Medium Single PositionerLeft' for='DatePolicyHolderCompanyTDPDateOfExpiredDay'>Tanggal Berlaku</label>
-        <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanyTDPDateOfExpiredDay'></table>
-        <span class='Separator Single PositionerLeft' for='DatePolicyHolderCompanyTDPDateOfExpiredMonth'>/</span>
-        <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanyTDPDateOfExpiredMonth'></table>
-        <label class='Separator Single PositionerLeft' for='DatePolicyHolderCompanyTDPDateOfExpiredYear'>/</label>
-        <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanyTDPDateOfExpiredYear'></table>
+        <label class='Medium Single PositionerLeft' for='DatePolicyHolderCompanyNoTDPExpired'></label>
+        <label class='Medium Single PositionerLeft' for='DatePolicyHolderCompanyNoTDPExpiredDay'>Tanggal Berlaku</label>
+        <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanyNoTDPExpiredDay'></table>
+        <span class='Separator Single PositionerLeft' for='DatePolicyHolderCompanyNoTDPExpiredMonth'>/</span>
+        <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanyNoTDPExpiredMonth'></table>
+        <label class='Separator Single PositionerLeft' for='DatePolicyHolderCompanyNoTDPExpiredYear'>/</label>
+        <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanyNoTDPExpiredYear'></table>
         <br>
         <label class='Medium Single PositionerLeft' for='TextPolicyHolderCompanyNoSKDP'>6. Nomor SKDP (Domisili)</label>
         <table class='BoxSquare PositionerLeft' id='TextPolicyHolderCompanyNoSKDP'></table>
         <br>
-        <label class='Medium Single PositionerLeft' for='BoxPolicyHolderCompanySKDPDateOfExpired'></label>
-        <label class='Medium Single PositionerLeft' for='DatePolicyHolderCompanySKDPDateOfExpiredDay'>Tanggal Berlaku</label>
-        <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanySKDPDateOfExpiredDay'></table>
-        <span class='Separator Single PositionerLeft' for='DatePolicyHolderCompanySKDPDateOfExpiredMonth'>/</span>
-        <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanySKDPDateOfExpiredMonth'></table>
-        <label class='Separator Single PositionerLeft' for='DatePolicyHolderCompanySKDPDateOfExpiredYear'>/</label>
-        <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanySKDPDateOfExpiredYear'></table>
+        <label class='Medium Single PositionerLeft' for='DatePolicyHolderCompanyNoSKDPExpired'></label>
+        <label class='Medium Single PositionerLeft' for='DatePolicyHolderCompanyNoSKDPExpiredDay'>Tanggal Berlaku</label>
+        <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanyNoSKDPExpiredDay'></table>
+        <span class='Separator Single PositionerLeft' for='DatePolicyHolderCompanyNoSKDPExpiredMonth'>/</span>
+        <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanyNoSKDPExpiredMonth'></table>
+        <label class='Separator Single PositionerLeft' for='DatePolicyHolderCompanyNoSKDPExpiredYear'>/</label>
+        <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanyNoSKDPExpiredYear'></table>
         <br>
         <label class='Medium Single PositionerLeft' for='TextPolicyHolderCompanyNoNPWP'>7. Nomor NPWP (jika ada)</label>
         <table class='BoxSquare PositionerLeft' id='TextPolicyHolderCompanyNoNPWP'></table>
@@ -747,6 +795,27 @@
         <label class='Medium Single PositionerLeft' for='TextPolicyHolderCompanySector'>8. Bidang Usaha</label>
         <table class='BoxSquare PositionerLeft' id='TextPolicyHolderCompanySector'></table>
         <br>
+        <section class='SectionFooter'>
+          <div class='FooterContainer'>
+            <div class='FooterGeneral'>
+              <span class='Note Single PositionerLeft'>OP/NB/0104/031602 Hal 1 / 8</span>
+              <span class='Note Single PositionerRight'>PT Asuransi Jiwa BCA telah terdaftar dan diawasi oleh Otoritas Jasa Keuangan.</span>
+              <br>
+            </div>
+          </div>
+          <div class='PageBreak'></div>
+        </section>
+        <section id='SectionHeader2'>
+          <div class='HeaderContainer'>
+            <div class='HeaderGeneral'>
+              <table class='BoxSquare PositionerRight' id='TextHeaderSPAJNumber'></table>
+              <label class='Short Single PositionerRight' for='TextHeaderSPAJNumber'>Nomor SPAJ</label>
+              <br>
+              <hr>
+            </div>
+          </div>
+          <div class='HeaderBreak'></div>
+        </section>
         <label class='Medium Multi PositionerLeft' for='TextPolicyHolderCompanyAddress'>9. Alamat Perusahaan (sesuai SKDP)</label>
         <table class='BoxSquare PositionerLeft' id='TextPolicyHolderCompanyAddress'></table>
         <label class='Box Single PositionerLeft' for='TextPolicyHolderCompanyCity' id='LabelPolicyHolderCompanyCity'>Kota</label>
@@ -799,14 +868,14 @@
         <label class='Wrap Single PositionerLeft' for='TextPolicyHolderCompanyRepresentativePosition'>2. Jabatan/Pangkat/Golongan</label>
         <table class='BoxSquare PositionerLeft' id='TextPolicyHolderCompanyRepresentativePosition'></table>
         <br>
-        <label class='Medium Single PositionerLeft' for='TextPolicyHolderCompanyRepresentativeID'>3. Nomor Identitas Diri</label>
-        <table class='BoxSquare PositionerLeft' id='TextPolicyHolderCompanyRepresentativeID'></table>
-        <table class='BoxSquare PositionerRight' id='DatePolicyHolderCompanyRepresentativeActiveYear'></table>
-        <label class='Separator Single PositionerRight' for='DatePolicyHolderCompanyRepresentativeActiveYear'>/</label>
-        <table class='BoxSquare PositionerRight' id='DatePolicyHolderCompanyRepresentativeActiveMonth'></table>
-        <label class='Separator Single PositionerRight' for='DatePolicyHolderCompanyRepresentativeActiveMonth'>/</label>
-        <table class='BoxSquare PositionerRight' id='DatePolicyHolderCompanyRepresentativeActiveDay'></table>
-        <label class='Wrap Single PositionerRight' for='DatePolicyHolderCompanyRepresentativeActiveDay'>Masa Berlaku</label>
+        <label class='Medium Single PositionerLeft' for='TextPolicyHolderCompanyRepresentativeIDNumber'>3. Nomor Identitas Diri</label>
+        <table class='BoxSquare PositionerLeft' id='TextPolicyHolderCompanyRepresentativeIDNumber'></table>
+        <table class='BoxSquare PositionerRight' id='DatePolicyHolderCompanyRepresentativeIDExpiredYear'></table>
+        <label class='Separator Single PositionerRight' for='DatePolicyHolderCompanyRepresentativeIDExpiredYear'>/</label>
+        <table class='BoxSquare PositionerRight' id='DatePolicyHolderCompanyRepresentativeIDExpiredMonth'></table>
+        <label class='Separator Single PositionerRight' for='DatePolicyHolderCompanyRepresentativeIDExpiredMonth'>/</label>
+        <table class='BoxSquare PositionerRight' id='DatePolicyHolderCompanyRepresentativeIDExpiredDay'></table>
+        <label class='Wrap Single PositionerRight' for='DatePolicyHolderCompanyRepresentativeIDExpiredDay'>Masa Berlaku</label>
         <br>
         <label class='Medium Wrap PositionerLeft' for='RadioButtonPolicyHolderCompanyRepresentativeRelationshipColleague'>4. Hubungan dengan Calon Tertanggung</label>
         <input id='RadioButtonPolicyHolderCompanyRepresentativeRelationshipColleague' name='RadioButtonPolicyHolderCompanyRepresentativeRelationship' type='radio' value='perusahaankaryawan'>
@@ -817,7 +886,7 @@
         <label class='RadioButton PositionerLeft' for='RadioButtonPolicyHolderCompanyRepresentativeRelationshipOther'>Lainnya, sebutkan</label>
         <div class='LineDot PositionerLeft' id='TextPolicyHolderCompanyRepresentativeRelationshipOther'></div>
         <br>
-        <label class='Wrap Single PositionerLeft' for='RadioButtonPolicyHolderCompanyRepresentativeInsurancePurposeSavings'>18. Tujuan Pembelian Asuransi</label>
+        <label class='Wrap Single PositionerLeft' for='RadioButtonPolicyHolderCompanyRepresentativeInsurancePurposeSavings'>5. Tujuan Pembelian Asuransi</label>
         <input id='RadioButtonPolicyHolderCompanyRepresentativeInsurancePurposeSavings' name='RadioButtonPolicyHolderCompanyRepresentativeInsurancePurpose' type='radio' value='tabungan'>
         <div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderCompanyRepresentativeInsurancePurposeSavings'></div>
         <label class='RadioButton Short PositionerLeft' for='RadioButtonPolicyHolderCompanyRepresentativeInsurancePurposeSavings'>Tabungan</label>
@@ -884,8 +953,8 @@
         <label class='RadioButton PositionerLeft' for='RadioButtonProspectiveInsuredIDTypeOther'>Lainnya, sebutkan</label>
         <div class='LineDot PositionerLeft' id='LineProspectiveInsuredIDTypeOther'></div>
         <br>
-        <label class='Medium Single PositionerLeft' for='TextProspectiveInsuredID'>4. Nomor Identitas Diri</label>
-        <table class='BoxSquare PositionerLeft' id='TextProspectiveInsuredID'></table>
+        <label class='Medium Single PositionerLeft' for='TextProspectiveInsuredIDNumber'>4. Nomor Identitas Diri</label>
+        <table class='BoxSquare PositionerLeft' id='TextProspectiveInsuredIDNumber'></table>
         <table class='BoxSquare PositionerRight' id='TextProspectiveInsuredActiveDateYear'></table>
         <label class='Separator Single PositionerRight' for='TextProspectiveInsuredActiveDateYear'>/</label>
         <table class='BoxSquare PositionerRight' id='TextProspectiveInsuredActiveDateMonth'></table>
@@ -893,14 +962,14 @@
         <table class='BoxSquare PositionerRight' id='TextProspectiveInsuredActiveDateDay'></table>
         <label class='Wrap Single PositionerRight' for='TextProspectiveInsuredActiveDateDay'>Masa Berlaku</label>
         <br>
-        <label class='Medium Single PositionerLeft' for='TextProspectiveInsuredDateOfBirth'>5. Tempat Tanggal Lahir</label>
-        <div class='LineStraight PositionerLeft' id='LineProspectiveInsuredPlace'></div>
-        <table class='BoxSquare PositionerLeft' id='TextProspectiveInsuredDateOfBirthDay'></table>
-        <span class='Separator Single PositionerLeft' for='TextProspectiveInsuredDateOfBirthMonth'>/</span>
-        <table class='BoxSquare PositionerLeft' id='TextProspectiveInsuredDateOfBirthMonth'></table>
-        <label class='Separator Single PositionerLeft' for='TextProspectiveInsuredDateOfBirthYear'>/</label>
-        <table class='BoxSquare PositionerLeft' id='TextProspectiveInsuredDateOfBirthYear'></table>
-        <label class='Separator Single PositionerLeft' for='TextProspectiveInsuredAge'>Age</label>
+        <label class='Medium Single PositionerLeft' for='TextProspectiveInsuredBirthPlace'>5. Tempat Tanggal Lahir</label>
+        <div class='LineStraight PositionerLeft' id='TextProspectiveInsuredBirthPlace'></div>
+        <table class='BoxSquare PositionerLeft' id='DateProspectiveInsuredBirthDay'></table>
+        <span class='Separator Single PositionerLeft' for='DateProspectiveInsuredBirthMonth'>/</span>
+        <table class='BoxSquare PositionerLeft' id='DateProspectiveInsuredBirthMonth'></table>
+        <label class='Separator Single PositionerLeft' for='DateProspectiveInsuredBirthYear'>/</label>
+        <table class='BoxSquare PositionerLeft' id='DateProspectiveInsuredBirthYear'></table>
+        <label class='Separator Single PositionerLeft' for='TextProspectiveInsuredAge'>Usia</label>
         <table class='BoxSquare PositionerLeft' id='TextProspectiveInsuredAge'></table>
         <span class='Separator Single PositionerLeft'>Tahun</span>
         <br>
@@ -1001,6 +1070,27 @@
         <label class='Medium Single PositionerLeft' for='TextProspectiveInsuredEmail'>14. Alamat Email</label>
         <table class='BoxSquare PositionerLeft' id='TextProspectiveInsuredEmail'></table>
         <br>
+        <section class='SectionFooter'>
+          <div class='FooterContainer'>
+            <div class='FooterGeneral'>
+              <span class='Note Single PositionerLeft'>OP/NB/0104/031602 Hal 1 / 8</span>
+              <span class='Note Single PositionerRight'>PT Asuransi Jiwa BCA telah terdaftar dan diawasi oleh Otoritas Jasa Keuangan.</span>
+              <br>
+            </div>
+          </div>
+          <div class='PageBreak'></div>
+        </section>
+        <section id='SectionHeader3'>
+          <div class='HeaderContainer'>
+            <div class='HeaderGeneral'>
+              <table class='BoxSquare PositionerRight' id='TextHeaderSPAJNumber'></table>
+              <label class='Short Single PositionerRight' for='TextHeaderSPAJNumber'>Nomor SPAJ</label>
+              <br>
+              <hr>
+            </div>
+          </div>
+          <div class='HeaderBreak'></div>
+        </section>
         <label class='Medium Multi PositionerLeft' for='TextProspectiveInsuredOfficeAddress1' style='height: 112px'>15. Alamat Kantor</label>
         <table class='BoxSquare PositionerLeft' id='TextProspectiveInsuredOfficeAddress1'></table>
         <table class='BoxSquare PositionerLeft' id='TextProspectiveInsuredOfficeAddress2'></table>
@@ -1014,10 +1104,10 @@
         <table class='BoxSquare PositionerLeft' id='TextProspectiveInsuredOfficeTelephoneInfix'></table>
         <br>
         <label class='Medium Single PositionerLeft' for='RadioButtonProspectiveInsuredCorrespondanceHomeAddress'>16. Alamat Korespondensi</label>
-        <input id='RadioButtonProspectiveInsuredCorrespondanceHomeAddress' name='RadioButtonPolicyHolderCorrespondanceAddress' type='radio' value='home'>
+        <input id='RadioButtonProspectiveInsuredCorrespondanceHomeAddress' name='RadioButtonProspectiveInsuredCorrespondanceAddress' type='radio' value='home'>
         <div class='BoxRound PositionerLeft' id='RadioButtonProspectiveInsuredCorrespondanceHomeAddress'></div>
         <label class='RadioButton PositionerLeft' for='RadioButtonProspectiveInsuredCorrespondanceHomeAddress'>Alamat Tempat Tinggal</label>
-        <input id='RadioButtonProspectiveInsuredCorrespondanceOfficeAddress' name='RadioButtonPolicyHolderCorrespondanceAddress' type='radio' value='office'>
+        <input id='RadioButtonProspectiveInsuredCorrespondanceOfficeAddress' name='RadioButtonProspectiveInsuredCorrespondanceAddress' type='radio' value='office'>
         <div class='BoxRound PositionerLeft' id='RadioButtonProspectiveInsuredCorrespondanceOfficeAddress'></div>
         <label class='RadioButton PositionerLeft' for='RadioButtonProspectiveInsuredCorrespondanceOfficeAddress'>Alamat Kantor</label>
         <br>
@@ -1069,13 +1159,13 @@
         <label class='Wrap Single PositionerLeft' for='BoxProspectiveInsuredSalaryIDR'>20. Penghasilan Kotor Per Tahun</label>
         <br>
         <label class='Medium Single FirstIndent PositionerLeft' for='BoxProspectiveInsuredSalaryIDR'>Gaji</label>
-        <input id='RadioButtonProspectiveInsuredSalaryIDR' name='RadioButtonPolicyHolderSalary' type='radio' value='idr'>
+        <input id='RadioButtonProspectiveInsuredSalaryIDR' name='RadioButtonProspectiveInsuredSalary' type='radio' value='idr'>
         <div class='BoxRound PositionerLeft' id='RadioButtonProspectiveInsuredSalaryIDR'></div>
         <label class='RadioButton PositionerLeft' for='RadioButtonProspectiveInsuredSalaryIDR'>Rp</label>
-        <input id='RadioButtonProspectiveInsuredSalaryUSD' name='RadioButtonPolicyHolderSalary' type='radio' value='USD'>
+        <input id='RadioButtonProspectiveInsuredSalaryUSD' name='RadioButtonProspectiveInsuredSalary' type='radio' value='USD'>
         <div class='BoxRound PositionerLeft' id='RadioButtonProspectiveInsuredSalaryUSD'></div>
         <label class='RadioButton PositionerLeft' for='RadioButtonProspectiveInsuredSalaryUSD'>USD</label>
-        <label class='Wrap Single PositionerLeft' for='TextProspectiveInsuredSalary'>Jumlah Penghasilan / tahun</label>
+        <label class='RadioButton PositionerLeft' for='TextProspectiveInsuredSalary'>Jumlah Penghasilan / tahun</label>
         <table class='BoxSquare PositionerLeft' id='TextProspectiveInsuredSalary'></table>
         <br>
         <label class='Medium Single FirstIndent PositionerLeft' for='RadioButtonProspectiveInsuredRevenueIDR'>Hasil Usaha</label>
@@ -1180,20 +1270,20 @@
           Segala ketentuan yang terkait dengan Manfaat Asuransi Dasar dan Asuransi Tambahan, usia Calon Pemegang Polis/Calon Tertanggung, Uang Pertanggungan, frekuensi pembayaran adalah sebagaimana yang terdapat pada ilustrasi yang dilampirkan sebagai berikut:
         </span>
         <br>
-        <label class='Medium Single PositionerLeft' for='BoxIllustrationAgentName'>Nama Tenaga Penjual</label>
-        <table class='BoxSquare PositionerLeft' id='BoxIllustrationAgentName'></table>
+        <label class='Medium Single PositionerLeft' for='TextIllustrationAgentName'>Nama Tenaga Penjual</label>
+        <table class='BoxSquare PositionerLeft' id='TextIllustrationAgentName'></table>
         <br>
-        <label class='Medium Single PositionerLeft' for='BoxIllustrationNumber'>Nomor Ilustrasi</label>
-        <table class='BoxSquare PositionerLeft' id='BoxIllustrationNumber'></table>
-        <label class='Wrap FirstIndent Single PositionerLeft' for='BoxIllustrationDateDay'>Tanggal</label>
-        <table class='BoxSquare PositionerLeft' id='BoxIllustrationDateDay'></table>
-        <label class='Separator Single PositionerLeft' for='BoxIllustrationDateMonth'>/</label>
-        <table class='BoxSquare PositionerLeft' id='BoxIllustrationDateMonth'></table>
-        <label class='Separator Single PositionerLeft' for='BoxIllustrationDateYear'>/</label>
-        <table class='BoxSquare PositionerLeft' id='BoxIllustrationDateYear'></table>
+        <label class='Medium Single PositionerLeft' for='TextIllustrationNumber'>Nomor Ilustrasi</label>
+        <table class='BoxSquare PositionerLeft' id='TextIllustrationNumber'></table>
+        <label class='Wrap FirstIndent Single PositionerLeft' for='DateIllustrationDay'>Tanggal</label>
+        <table class='BoxSquare PositionerLeft' id='DateIllustrationDay'></table>
+        <label class='Separator Single PositionerLeft' for='DateIllustrationMonth'>/</label>
+        <table class='BoxSquare PositionerLeft' id='DateIllustrationMonth'></table>
+        <label class='Separator Single PositionerLeft' for='DateIllustrationYear'>/</label>
+        <table class='BoxSquare PositionerLeft' id='DateIllustrationYear'></table>
         <br>
-        <label class='Medium Single PositionerLeft' for='BoxIllustrationAgentCode'>Kode Tenaga Penjual</label>
-        <table class='BoxSquare PositionerLeft' id='BoxIllustrationAgentCode'></table>
+        <label class='Medium Single PositionerLeft' for='TextIllustrationAgentCode'>Kode Tenaga Penjual</label>
+        <table class='BoxSquare PositionerLeft' id='TextIllustrationAgentCode'></table>
         <br>
         <span class='Wrap MediumIndent PosiitionerLeft'>
           * Wajib lengkapi sesuai dengan ilustrasi yang dilampirkan
@@ -1229,20 +1319,20 @@
         <label class='RadioButton PositionerLeft' for='RadionButtonPremiPaymentFrequencyFull' id='LabelPremiPaymentFrequencyFull'>Sekaligus</label>
         <br>
         <label class='Medium Single PositionerLeft' for='RadioButtonPremiPaymentPayorHolder'>3. Pembayar Premi</label>
-        <input id='RadioButtonPremiPaymentPayorHolder' name='RadioButtonPremiPaymentPayor' type='radio' value='holder'>
+        <input id='RadioButtonPremiPaymentPayorHolder' name='RadioButtonPremiPaymentPayor' type='radio' value='dirisendiri'>
         <div class='BoxRound PositionerLeft' id='RadioButtonPremiPaymentPayorHolder'></div>
-        <label class='RadioButton PositionerLeft' for='RadioButtonPremiPaymentPayorHolder' id='LabelPremiPaymentPolicyHolder'>Pemegang Polis</label>
-        <input id='RadioButtonPremiPaymentPayorHolderCompany' name='RadioButtonPremiPaymentPayor' type='radio' value='holderCompany'>
-        <div class='BoxRound PositionerLeft' id='RadioButtonPremiPaymentPayorHolderCompany'></div>
-        <label class='RadioButton PositionerLeft' for='RadioButtonPremiPaymentPayorHolderCompany' id='LabelPremiPaymentPolicyHolderCompany'>Pemegang Polis Perusahaan/Badan Hukum</label>
+        <label class='RadioButton PositionerLeft' for='RadioButtonPremiPaymentPayorHolder'>Pemegang Polis</label>
+        <input id='RadioButtonPremiPaymentPayorCompany' name='RadioButtonPremiPaymentPayor' type='radio' value='perusahaan'>
+        <div class='BoxRound PositionerLeft' id='RadioButtonPremiPaymentPayorCompany'></div>
+        <label class='RadioButton PositionerLeft' for='RadioButtonPremiPaymentPayorCompany'>Pemegang Polis Perusahaan/Badan Hukum</label>
         <br>
-        <label class='Medium Single PositionerLeft' for='RadioButtonPremiPaymentPayorHolder2Insured'></label>
-        <input id='RadioButtonPremiPaymentPayor2HolderInsured' name='RadioButtonPremiPaymentPayorHolder2' type='radio' value='insured'>
-        <div class='BoxRound PositionerLeft' id='RadioButtonPremiPaymentPayor2HolderInsured'></div>
-        <label class='RadioButton PositionerLeft' for='RadioButtonPremiPaymentPayor2HolderInsured' id='LabelPremiPaymentPolicyHolderTertanggung'>Tertanggung</label>
-        <input id='RadioButtonPremiPaymentPayor2HolderThirdParty' name='RadioButtonPremiPaymentPayorHolder2' type='radio' value='thirdParty'>
-        <div class='BoxRound PositionerLeft' id='RadioButtonPremiPaymentPayor2HolderThirdParty'></div>
-        <label class='RadioButton PositionerLeft' for='RadioButtonPremiPaymentPayor2HolderThirdParty' id='LabelPremiPaymentPolicyHolderThirdParty'>Pihak ketiga (selain Pemegang Polis dan Tertanggung)</label>
+        <label class='Medium Single PositionerLeft' for='RadioButtonPremiPaymentPayorInsured'></label>
+        <input id='RadioButtonPremiPaymentPayorInsured' name='RadioButtonPremiPaymentPayor' type='radio' value='tertanggung'>
+        <div class='BoxRound PositionerLeft' id='RadioButtonPremiPaymentPayorInsured'></div>
+        <label class='RadioButton PositionerLeft' for='RadioButtonPremiPaymentPayorInsured'>Tertanggung</label>
+        <input id='RadioButtonPremiPaymentPayorThirdParty' name='RadioButtonPremiPaymentPayor' type='radio' value='pihakketiga'>
+        <div class='BoxRound PositionerLeft' id='RadioButtonPremiPaymentPayorThirdParty'></div>
+        <label class='RadioButton PositionerLeft' for='RadioButtonPremiPaymentPayorThirdParty'>Pihak ketiga (selain Pemegang Polis dan Tertanggung)</label>
         <br>
         <label class='Medium Single PositionerLeft' for='RadioButtonPremiPaymentWayDebit'>4. Cara Pembayaran Premi</label>
         <input id='RadioButtonPremiPaymentWayDebit' name='RadioButtonPremiPaymentWay' type='radio' value='debit'>
@@ -1256,33 +1346,54 @@
         <label class='RadioButton PositionerLeft' for='RadioButtonPremiPaymentWayOther' id='LabelPremiPaymentOtherAccount'>Lainnya, Sebutkan</label>
         <div class='LineDot PositionerLeft' id='LinePremiPaymentOtherAccount'></div>
         <br>
-        <label class='Wrap Single PositionerLeft' for='BoxPremiDescription'>5. Wajib diisi untuk pengembalian Premi dan untuk media pembayaran Premi Lanjutan melalui Debit Rekening/Debit Kartu Kredit</label>
+        <label class='Wrap Single PositionerLeft' for='TextPremiPaymentBankAccountDetails'>5. Wajib diisi untuk pengembalian Premi dan untuk media pembayaran Premi Lanjutan melalui Debit Rekening/Debit Kartu Kredit</label>
         <br>
-        <label class='Long Single FirstIndent PositionerLeft' for='TextPremiDescriptionCreditCardHolderName'>Nama Pemilik Rekening/Kartu Kredit</label>
-        <table class='BoxSquare PositionerLeft' id='BoxPremiDescriptionCreditCardHolderName'></table>
+        <label class='Long Single FirstIndent PositionerLeft' for='TextPremiPaymentBankAccountDetailsName'>Nama Pemilik Rekening/Kartu Kredit</label>
+        <table class='BoxSquare PositionerLeft' id='TextPremiPaymentBankAccountDetailsName'></table>
         <br>
-        <label class='Long Single FirstIndent PositionerLeft' for='TextPremiDescriptionDebitCreditNumber'>Nomor Rekening/Kartu Kredit</label>
-        <table class='BoxSquare PositionerLeft' id='BoxPremiDescriptionDebitCreditNumber'></table>
+        <label class='Long Single FirstIndent PositionerLeft' for='TextPremiPaymentBankAccountDetailsNumber'>Nomor Rekening/Kartu Kredit</label>
+        <table class='BoxSquare PositionerLeft' id='TextPremiPaymentBankAccountDetailsNumber'></table>
         <br>
-        <label class='Long Single FirstIndent PositionerLeft' for='TextPremiDescriptionBankName'>Nama Bank</label>
-        <table class='BoxSquare PositionerLeft' id='BoxPremiDescriptionBankName'></table>
+        <label class='Long Single FirstIndent PositionerLeft' for='TextPremiPaymentBankAccountDetailsBankName'>Nama Bank</label>
+        <table class='BoxSquare PositionerLeft' id='TextPremiPaymentBankAccountDetailsBankName'></table>
         <br>
-        <label class='Long Single FirstIndent PositionerLeft' for='TextPremiDescriptionBankBranch'>Nama Cabang</label>
-        <table class='BoxSquare PositionerLeft' id='BoxPremiDescriptionBankBranch'></table>
+        <label class='Long Single FirstIndent PositionerLeft' for='TextPremiPaymentBankAccountDetailsBankBranch'>Nama Cabang</label>
+        <table class='BoxSquare PositionerLeft' id='TextPremiPaymentBankAccountDetailsBankBranch'></table>
         <br>
-        <label class='Wrap Single PositionerLeft' for='BoxPremiDescription2'>6. Apakah dalam pengajuan asuransi Anda, selain Anda dan Calon Tertanggung terdapat Pihak ketiga yang meminta mengajukan asuransi ini,</label>
+        <label class='Wrap Single PositionerLeft' for='TextPremiPaymentThirdPartyAnswer'>6. Apakah dalam pengajuan asuransi Anda, selain Anda dan Calon Tertanggung terdapat Pihak ketiga yang meminta mengajukan asuransi ini,</label>
         <br>
-        <label class='Wrap Single FirstIndent PositionerLeft' for='BoxPremiDescription3'>menjadi pembayar Premi meminta hak atas manfaat Polis?</label>
-        <input id='BoxPremiDescription3BoxYes' name='BoxPremiDescription3Box' type='radio' value='yes'>
-        <div class='BoxRound PositionerLeft' id='BoxPremiDescription3BoxYes'></div>
-        <label class='RadioButton PositionerLeft' for='BoxPremiDescription3BoxYes' id='LabelPremiDescription3YesBox'>Ya</label>
-        <input id='BoxPremiDescription3BoxNo' name='BoxPremiDescription3Box' type='radio' value='no'>
-        <div class='BoxRound PositionerLeft' id='BoxPremiDescription3BoxNo'></div>
-        <label class='RadioButton PositionerLeft' for='BoxPremiDescription3BoxNo' id='LabelPremiDescription3NoBox'>Tidak</label>
-        <label class='Wrap Single FirstIndent PositionerLeft' for='BoxPremiDescriptionYesStatement'>Bila jawaban Anda “Ya”, mohon isi dan lengkapi Formulir Keterangan Tambahan untuk Pihak ketiga.</label>
+        <label class='Wrap Single FirstIndent PositionerLeft' for='RadioButtonPremiPaymentThirdPartyAnswerYes'>menjadi pembayar Premi meminta hak atas manfaat Polis?</label>
+        <input id='RadioButtonPremiPaymentThirdPartyAnswerYes' name='RadioButtonPremiPaymentThirdPartyAnswer' type='radio' value='yes'>
+        <div class='BoxRound PositionerLeft' id='RadioButtonPremiPaymentThirdPartyAnswerYes'></div>
+        <label class='RadioButton PositionerLeft' for='RadioButtonPremiPaymentThirdPartyAnswerYes' id='LabelPremiPaymentThirdPartyAnswerYes'>Ya</label>
+        <input id='RadioButtonPremiPaymentThirdPartyAnswerNo' name='RadioButtonPremiPaymentThirdPartyAnswer' type='radio' value='no'>
+        <div class='BoxRound PositionerLeft' id='RadioButtonPremiPaymentThirdPartyAnswerNo'></div>
+        <label class='RadioButton PositionerLeft' for='RadioButtonPremiPaymentThirdPartyAnswerNo' id='LabelPremiPaymentThirdPartyAnswerNo'>Tidak</label>
+        <label class='Wrap Single FirstIndent PositionerLeft' for='TextPremiPaymentThirdPartyAnswerYesStatement'>Bila jawaban Anda “Ya”, mohon isi dan lengkapi Formulir Keterangan Tambahan untuk Pihak ketiga.</label>
         <br>
+        <section class='SectionFooter'>
+          <div class='FooterContainer'>
+            <div class='FooterGeneral'>
+              <span class='Note Single PositionerLeft'>OP/NB/0104/031602 Hal 1 / 8</span>
+              <span class='Note Single PositionerRight'>PT Asuransi Jiwa BCA telah terdaftar dan diawasi oleh Otoritas Jasa Keuangan.</span>
+              <br>
+            </div>
+          </div>
+          <div class='PageBreak'></div>
+        </section>
       </section>
       <section id='SectionProspectiveHealth'>
+        <section id='SectionHeader4'>
+          <div class='HeaderContainer'>
+            <div class='HeaderGeneral'>
+              <table class='BoxSquare PositionerRight' id='TextHeaderSPAJNumber'></table>
+              <label class='Short Single PositionerRight' for='TextHeaderSPAJNumber'>Nomor SPAJ</label>
+              <br>
+              <hr>
+            </div>
+          </div>
+          <div class='HeaderBreak'></div>
+        </section>
         <h2>Data Kesehatan</h2>
         <table class='Square'>
           <thead>
@@ -1322,12 +1433,12 @@
                 <table class='BoxSquare PositionerCenter' id='TextPolicyHolderWeight'></table>
                 <span class='PositionerCenter'>Kg</span>
                 <br>
-                <input id='RadioButtonPolicyHolderWeightChangeYes' name='RadioButtonPolicyHolderWeightChange' type='radio' value='yes'>
-                <div class='BoxRound PositionerCenter' id='RadioButtonPolicyHolderWeightChangeYes'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonPolicyHolderWeightChangeYes'>Ya</label>
-                <input id='RadioButtonPolicyHolderWeightChangeNo' name='RadioButtonPolicyHolderWeightChange' type='radio' value='no'>
-                <div class='BoxRound PositionerCenter' id='RadioButtonPolicyHolderWeightChangeNo'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonPolicyHolderWeightChangeNo'>Tidak</label>
+                <input id='RadioButtonPolicyHolderWeightChangeYes' name='RadioButtonProspectiveInsuredWeightChange' type='radio' value='yes'>
+                <div class='BoxRound PositionerCenter' id='RadioButtonProspectiveInsuredWeightChangeYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredWeightChangeYes'>Ya</label>
+                <input id='RadioButtonProspectiveInsuredWeightChangeNo' name='RadioButtonProspectiveInsuredWeightChange' type='radio' value='no'>
+                <div class='BoxRound PositionerCenter' id='RadioButtonProspectiveInsuredWeightChangeNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredWeightChangeNo'>Tidak</label>
               </td>
             </tr>
             <tr>
@@ -1348,14 +1459,14 @@
                 <span class='PositionerCenter'>Batang</span>
               </td>
               <td>
-                <input id='RadioButtonPolicyHolderSmokeActivityYes' name='RadioButtonPolicyHolderSmokeActivity' type='radio' value='yes'>
-                <div class='BoxRound PositionerCenter' id='RadioButtonPolicyHolderSmokeActivityYes'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonPolicyHolderSmokeActivityYes'>Ya</label>
-                <input id='RadioButtonPolicyHolderSmokeActivityNo' name='RadioButtonPolicyHolderSmokeActivity' type='radio' value='no'>
-                <div class='BoxRound PositionerCenter' id='RadioButtonPolicyHolderSmokeActivityNo'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonPolicyHolderSmokeActivityNo'>Tidak</label>
+                <input id='RadioButtonProspectiveInsuredSmokeActivityYes' name='RadioButtonProspectiveInsuredSmokeActivity' type='radio' value='yes'>
+                <div class='BoxRound PositionerCenter' id='RadioButtonProspectiveInsuredSmokeActivityYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredSmokeActivityYes'>Ya</label>
+                <input id='RadioButtonProspectiveInsuredSmokeActivityNo' name='RadioButtonProspectiveInsuredSmokeActivity' type='radio' value='no'>
+                <div class='BoxRound PositionerCenter' id='RadioButtonProspectiveInsuredSmokeActivityNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredSmokeActivityNo'>Tidak</label>
                 <br>
-                <table class='BoxSquare PositionerCenter' id='TextPolicyHolderSmokeAmount'></table>
+                <table class='BoxSquare PositionerCenter' id='TextProspectiveInsuredSmokeAmount'></table>
                 <span class='PositionerCenter'>Batang</span>
               </td>
             </tr>
@@ -1372,12 +1483,12 @@
                 <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredJunkieNo'>Tidak</label>
               </td>
               <td>
-                <input id='RadioButtonPolicyHolderJunkieYes' name='RadioButtonPolicyHolderJunkie' type='radio' value='yes'>
-                <div class='BoxRound PositionerCenter' id='RadioButtonPolicyHolderJunkieYes'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonPolicyHolderJunkieYes'>Ya</label>
-                <input id='RadioButtonPolicyHolderJunkieNo' name='RadioButtonPolicyHolderJunkie' type='radio' value='no'>
-                <div class='BoxRound PositionerCenter' id='RadioButtonPolicyHolderJunkieNo'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonPolicyHolderJunkieNo'>Tidak</label>
+                <input id='RadioButtonProspectiveInsuredJunkieYes' name='RadioButtonProspectiveInsuredJunkie' type='radio' value='yes'>
+                <div class='BoxRound PositionerCenter' id='RadioButtonProspectiveInsuredJunkieYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredJunkieYes'>Ya</label>
+                <input id='RadioButtonProspectiveInsuredJunkieNo' name='RadioButtonProspectiveInsuredJunkie' type='radio' value='no'>
+                <div class='BoxRound PositionerCenter' id='RadioButtonProspectiveInsuredJunkieNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredJunkieNo'>Tidak</label>
               </td>
             </tr>
             <tr>
@@ -1393,12 +1504,12 @@
                 <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredExtremeSportNo'>Tidak</label>
               </td>
               <td>
-                <input id='RadioButtonPolicyHolderExtremeSportYes' name='RadioButtonPolicyHolderExtremeSport' type='radio' value='yes'>
-                <div class='BoxRound PositionerCenter' id='RadioButtonPolicyHolderExtremeSportYes'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonPolicyHolderExtremeSportYes'>Ya</label>
-                <input id='RadioButtonPolicyHolderExtremeSportNo' name='RadioButtonPolicyHolderExtremeSport' type='radio' value='no'>
-                <div class='BoxRound PositionerCenter' id='RadioButtonPolicyHolderExtremeSportNo'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonPolicyHolderExtremeSportNo'>Tidak</label>
+                <input id='RadioButtonProspectiveInsuredExtremeSportYes' name='RadioButtonProspectiveInsuredExtremeSport' type='radio' value='yes'>
+                <div class='BoxRound PositionerCenter' id='RadioButtonProspectiveInsuredExtremeSportYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredExtremeSportYes'>Ya</label>
+                <input id='RadioButtonProspectiveInsuredExtremeSportNo' name='RadioButtonProspectiveInsuredExtremeSport' type='radio' value='no'>
+                <div class='BoxRound PositionerCenter' id='RadioButtonProspectiveInsuredExtremeSportNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredExtremeSportNo'>Tidak</label>
               </td>
             </tr>
             <tr>
@@ -1414,12 +1525,12 @@
                 <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredAbroadNo'>Tidak</label>
               </td>
               <td>
-                <input id='RadioButtonPolicyHolderAbroadYes' name='RadioButtonPolicyHolderAbroad' type='radio' value='yes'>
-                <div class='BoxRound PositionerCenter' id='RadioButtonPolicyHolderAbroadYes'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonPolicyHolderAbroadYes'>Ya</label>
-                <input id='RadioButtonPolicyHolderAbroadNo' name='RadioButtonPolicyHolderAbroad' type='radio' value='no'>
-                <div class='BoxRound PositionerCenter' id='RadioButtonPolicyHolderAbroadNo'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonPolicyHolderAbroadNo'>Tidak</label>
+                <input id='RadioButtonProspectiveInsuredAbroadYes' name='RadioButtonProspectiveInsuredAbroad' type='radio' value='yes'>
+                <div class='BoxRound PositionerCenter' id='RadioButtonProspectiveInsuredAbroadYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredAbroadYes'>Ya</label>
+                <input id='RadioButtonProspectiveInsuredAbroadNo' name='RadioButtonProspectiveInsuredAbroad' type='radio' value='no'>
+                <div class='BoxRound PositionerCenter' id='RadioButtonProspectiveInsuredAbroadNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredAbroadNo'>Tidak</label>
               </td>
             </tr>
             <tr>
@@ -1435,12 +1546,12 @@
                 <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredMedicalTreatmentNo'>Tidak</label>
               </td>
               <td>
-                <input id='RadioButtonPolicyHolderMedicalTreatmentYes' name='RadioButtonPolicyHolderMedicalTreatment' type='radio' value='yes'>
-                <div class='BoxRound PositionerCenter' id='RadioButtonPolicyHolderMedicalTreatmentYes'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonPolicyHolderMedicalTreatmentYes'>Ya</label>
-                <input id='RadioButtonPolicyHolderMedicalTreatmentNo' name='RadioButtonPolicyHolderMedicalTreatment' type='radio' value='no'>
-                <div class='BoxRound PositionerCenter' id='RadioButtonPolicyHolderMedicalTreatmentNo'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonPolicyHolderMedicalTreatmentNo'>Tidak</label>
+                <input id='RadioButtonProspectiveInsuredMedicalTreatmentYes' name='RadioButtonProspectiveInsuredMedicalTreatment' type='radio' value='yes'>
+                <div class='BoxRound PositionerCenter' id='RadioButtonProspectiveInsuredMedicalTreatmentYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredMedicalTreatmentYes'>Ya</label>
+                <input id='RadioButtonProspectiveInsuredMedicalTreatmentNo' name='RadioButtonProspectiveInsuredMedicalTreatment' type='radio' value='no'>
+                <div class='BoxRound PositionerCenter' id='RadioButtonProspectiveInsuredMedicalTreatmentNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredMedicalTreatmentNo'>Tidak</label>
               </td>
             </tr>
             <tr>
@@ -1456,12 +1567,12 @@
                 <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredVisionNo'>Tidak</label>
               </td>
               <td>
-                <input id='RadioButtonPolicyHolderVisionYes' name='RadioButtonPolicyHolderVision' type='radio' value='yes'>
-                <div class='BoxRound PositionerCenter' id='RadioButtonPolicyHolderVisionYes'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonPolicyHolderVisionYes'>Ya</label>
-                <input id='RadioButtonPolicyHolderVisionNo' name='RadioButtonPolicyHolderVision' type='radio' value='no'>
-                <div class='BoxRound PositionerCenter' id='RadioButtonPolicyHolderVisionNo'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonPolicyHolderVisionNo'>Tidak</label>
+                <input id='RadioButtonProspectiveInsuredVisionYes' name='RadioButtonProspectiveInsuredVision' type='radio' value='yes'>
+                <div class='BoxRound PositionerCenter' id='RadioButtonProspectiveInsuredVisionYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredVisionYes'>Ya</label>
+                <input id='RadioButtonProspectiveInsuredVisionNo' name='RadioButtonProspectiveInsuredVision' type='radio' value='no'>
+                <div class='BoxRound PositionerCenter' id='RadioButtonProspectiveInsuredVisionNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredVisionNo'>Tidak</label>
               </td>
             </tr>
             <tr>
@@ -1477,10 +1588,10 @@
                 <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredENTNo'>Tidak</label>
               </td>
               <td>
-                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderENTYes'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderENTYes'>Ya</label>
-                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderENTNo'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='BoxPolicyHolderENTNo'>Tidak</label>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredENTYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredENTYes'>Ya</label>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredENTNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='BoxProspectiveInsuredENTNo'>Tidak</label>
               </td>
             </tr>
             <tr>
@@ -1496,12 +1607,12 @@
                 <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredResoiratoryNo'>Tidak</label>
               </td>
               <td>
-                <input id='RadioButtonPolicyHolderRespiratoryYes' name='RadioButtonPolicyHolderRespiratory' type='radio' value='yes'>
-                <div class='BoxRound PositionerCenter' id='RadioButtonPolicyHolderRespiratoryYes'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonPolicyHolderRespiratoryYes'>Ya</label>
-                <input id='RadioButtonPolicyHolderRespiratoryNo' name='RadioButtonPolicyHolderRespiratory' type='radio' value='no'>
-                <div class='BoxRound PositionerCenter' id='RadioButtonPolicyHolderRespiratoryNo'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonPolicyHolderRespiratoryNo'>Tidak</label>
+                <input id='RadioButtonProspectiveInsuredRespiratoryYes' name='RadioButtonProspectiveInsuredRespiratory' type='radio' value='yes'>
+                <div class='BoxRound PositionerCenter' id='RadioButtonProspectiveInsuredRespiratoryYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredRespiratoryYes'>Ya</label>
+                <input id='RadioButtonProspectiveInsuredRespiratoryNo' name='RadioButtonProspectiveInsuredRespiratory' type='radio' value='no'>
+                <div class='BoxRound PositionerCenter' id='RadioButtonProspectiveInsuredRespiratoryNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredRespiratoryNo'>Tidak</label>
               </td>
             </tr>
             <tr>
@@ -1517,12 +1628,12 @@
                 <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredCardiacNo'>Tidak</label>
               </td>
               <td>
-                <input id='RadioButtonPolicyHolderCardiacYes' name='RadioButtonPolicyHolderCardiac' type='radio' value='yes'>
-                <div class='BoxRound PositionerCenter' id='RadioButtonPolicyHolderCardiacYes'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonPolicyHolderCardiacYes'>Ya</label>
-                <input id='RadioButtonPolicyHolderCardiacNo' name='RadioButtonPolicyHolderCardiac' type='radio' value='no'>
-                <div class='BoxRound PositionerCenter' id='RadioButtonPolicyHolderCardiacNo'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonPolicyHolderCardiacNo'>Tidak</label>
+                <input id='RadioButtonProspectiveInsuredCardiacYes' name='RadioButtonProspectiveInsuredCardiac' type='radio' value='yes'>
+                <div class='BoxRound PositionerCenter' id='RadioButtonProspectiveInsuredCardiacYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredCardiacYes'>Ya</label>
+                <input id='RadioButtonProspectiveInsuredCardiacNo' name='RadioButtonProspectiveInsuredCardiac' type='radio' value='no'>
+                <div class='BoxRound PositionerCenter' id='RadioButtonProspectiveInsuredCardiacNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredCardiacNo'>Tidak</label>
               </td>
             </tr>
             <tr>
@@ -1538,12 +1649,12 @@
                 <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredDigestNo'>Tidak</label>
               </td>
               <td>
-                <input id='RadioButtonPolicyHolderDigestYes' name='RadioButtonPolicyHolderDigest' type='radio' value='yes'>
-                <div class='BoxRound PositionerCenter' id='RadioButtonPolicyHolderDigestYes'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonPolicyHolderDigestYes'>Ya</label>
-                <input id='RadioButtonPolicyHolderDigestNo' name='RadioButtonPolicyHolderDigest' type='radio' value='no'>
-                <div class='BoxRound PositionerCenter' id='RadioButtonPolicyHolderDigestNo'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonPolicyHolderDigestNo'>Tidak</label>
+                <input id='RadioButtonProspectiveInsuredDigestYes' name='RadioButtonProspectiveInsuredDigest' type='radio' value='yes'>
+                <div class='BoxRound PositionerCenter' id='RadioButtonProspectiveInsuredDigestYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredDigestYes'>Ya</label>
+                <input id='RadioButtonProspectiveInsuredDigestNo' name='RadioButtonProspectiveInsuredDigest' type='radio' value='no'>
+                <div class='BoxRound PositionerCenter' id='RadioButtonProspectiveInsuredDigestNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredDigestNo'>Tidak</label>
               </td>
             </tr>
             <tr>
@@ -1559,12 +1670,12 @@
                 <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredNerveNo'>Tidak</label>
               </td>
               <td>
-                <input id='RadioButtonPolicyHolderNerveYes' name='RadioButtonPolicyHolderNerve' type='radio' value='yes'>
-                <div class='BoxRound PositionerCenter' id='BoxPolicyHolderNerveYes'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonPolicyHolderNerveYes'>Ya</label>
-                <input id='RadioButtonPolicyHolderNerveNo' name='RadioButtonPolicyHolderNerve' type='radio' value='no'>
-                <div class='BoxRound PositionerCenter' id='RadioButtonPolicyHolderNerveNo'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonPolicyHolderNerveNo'>Tidak</label>
+                <input id='RadioButtonProspectiveInsuredNerveYes' name='RadioButtonProspectiveInsuredNerve' type='radio' value='yes'>
+                <div class='BoxRound PositionerCenter' id='BoxProspectiveInsuredNerveYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredNerveYes'>Ya</label>
+                <input id='RadioButtonProspectiveInsuredNerveNo' name='RadioButtonProspectiveInsuredNerve' type='radio' value='no'>
+                <div class='BoxRound PositionerCenter' id='RadioButtonProspectiveInsuredNerveNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredNerveNo'>Tidak</label>
               </td>
             </tr>
             <tr>
@@ -1574,17 +1685,18 @@
               <td>
                 <input id='RadioButtonProspectiveInsuredLiverYes' name='RadioButtonProspectiveInsuredLiver' type='radio' value='yes'>
                 <div class='BoxRound PositionerCenter' id='RadioButtonProspectiveInsuredLiverYes'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredLiverYes'>Ya            %input#RadioButtonProspectiveInsuredLiverNo{ :type => "radio", :name => "RadioButtonProspectiveInsuredLiver", :value => "no" }</label>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredLiverYes'>Ya</label>
+                <input id='RadioButtonProspectiveInsuredLiverNo' name='RadioButtonProspectiveInsuredLiver' type='radio' value='no'>
                 <div class='BoxRound PositionerCenter' id='RadioButtonProspectiveInsuredLiverNo'></div>
                 <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredLiverNo'>Tidak</label>
               </td>
               <td>
-                <input id='RadioButtonPolicyHolderLiverYes' name='RadioButtonPolicyHolderLiver' type='radio' value='yes'>
-                <div class='BoxRound PositionerCenter' id='RadioButtonPolicyHolderLiverYes'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonPolicyHolderLiverYes'>Ya</label>
-                <input id='RadioButtonPolicyHolderLiverNo' name='RadioButtonPolicyHolderLiver' type='radio' value='no'>
-                <div class='BoxRound PositionerCenter' id='RadioButtonPolicyHolderLiverNo'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonPolicyHolderLiverNo'>Tidak</label>
+                <input id='RadioButtonProspectiveInsuredLiverYes' name='RadioButtonProspectiveInsuredLiver' type='radio' value='yes'>
+                <div class='BoxRound PositionerCenter' id='RadioButtonProspectiveInsuredLiverYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredLiverYes'>Ya</label>
+                <input id='RadioButtonProspectiveInsuredLiverNo' name='RadioButtonProspectiveInsuredLiver' type='radio' value='no'>
+                <div class='BoxRound PositionerCenter' id='RadioButtonProspectiveInsuredLiverNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredLiverNo'>Tidak</label>
               </td>
             </tr>
             <tr>
@@ -1600,12 +1712,12 @@
                 <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredReproductionNo'>Tidak</label>
               </td>
               <td>
-                <input id='RadioButtonPolicyHolderReproductionYes' name='RadioButtonPolicyHolderReproduction' type='radio' value='yes'>
-                <div class='BoxRound PositionerCenter' id='RadioButtonPolicyHolderReproductionYes'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonPolicyHolderReproductionYes'>Ya</label>
-                <input id='RadioButtonPolicyHolderReproductionNo' name='RadioButtonPolicyHolderReproduction' type='radio' value='yes'>
-                <div class='BoxRound PositionerCenter' id='RadioButtonPolicyHolderReproductionNo'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonPolicyHolderReproductionNo'>Tidak</label>
+                <input id='RadioButtonProspectiveInsuredReproductionYes' name='RadioButtonProspectiveInsuredReproduction' type='radio' value='yes'>
+                <div class='BoxRound PositionerCenter' id='RadioButtonProspectiveInsuredReproductionYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredReproductionYes'>Ya</label>
+                <input id='RadioButtonProspectiveInsuredReproductionNo' name='RadioButtonProspectiveInsuredReproduction' type='radio' value='yes'>
+                <div class='BoxRound PositionerCenter' id='RadioButtonProspectiveInsuredReproductionNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredReproductionNo'>Tidak</label>
               </td>
             </tr>
             <tr>
@@ -1621,12 +1733,12 @@
                 <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredMotionNo'>Tidak</label>
               </td>
               <td>
-                <input id='RadioButtonPolicyHolderMotionYes' name='RadioButtonPolicyHolderMotion' type='radio' value='yes'>
-                <div class='BoxRound PositionerCenter' id='RadioButtonPolicyHolderMotionYes'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonPolicyHolderMotionYes'>Ya</label>
-                <input id='RadioButtonPolicyHolderMotionNo' name='RadioButtonPolicyHolderMotion' type='radio' value='no'>
-                <div class='BoxRound PositionerCenter' id='RadioButtonPolicyHolderMotionNo'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonPolicyHolderMotionNo'>Tidak</label>
+                <input id='RadioButtonProspectiveInsuredMotionYes' name='RadioButtonProspectiveInsuredMotion' type='radio' value='yes'>
+                <div class='BoxRound PositionerCenter' id='RadioButtonProspectiveInsuredMotionYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredMotionYes'>Ya</label>
+                <input id='RadioButtonProspectiveInsuredMotionNo' name='RadioButtonProspectiveInsuredMotion' type='radio' value='no'>
+                <div class='BoxRound PositionerCenter' id='RadioButtonProspectiveInsuredMotionNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredMotionNo'>Tidak</label>
               </td>
             </tr>
             <tr>
@@ -1642,12 +1754,12 @@
                 <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredBloodNo'>Tidak</label>
               </td>
               <td>
-                <input id='RadioButtonPolicyHolderBloodYes' name='RadioButtonPolicyHolderBlood' type='radio' value='yes'>
-                <div class='BoxRound PositionerCenter' id='RadioButtonPolicyHolderBloodYes'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonPolicyHolderBloodYes'>Ya</label>
-                <input id='RadioButtonPolicyHolderBloodNo' name='RadioButtonPolicyHolderBlood' type='radio' value='no'>
-                <div class='BoxRound PositionerCenter' id='RadioButtonPolicyHolderBloodNo'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonPolicyHolderBloodNo'>Tidak</label>
+                <input id='RadioButtonProspectiveInsuredBloodYes' name='RadioButtonProspectiveInsuredBlood' type='radio' value='yes'>
+                <div class='BoxRound PositionerCenter' id='RadioButtonProspectiveInsuredBloodYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredBloodYes'>Ya</label>
+                <input id='RadioButtonProspectiveInsuredBloodNo' name='RadioButtonProspectiveInsuredBlood' type='radio' value='no'>
+                <div class='BoxRound PositionerCenter' id='RadioButtonProspectiveInsuredBloodNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredBloodNo'>Tidak</label>
               </td>
             </tr>
             <tr>
@@ -1663,12 +1775,12 @@
                 <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredImmuneNo'>Tidak</label>
               </td>
               <td>
-                <input id='RadioButtonPolicyHolderImmuneYes' name='RadioButtonPolicyHolderImmune' type='radio' value='yes'>
-                <div class='BoxRound PositionerCenter' id='RadioButtonPolicyHolderImmuneYes'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonPolicyHolderImmuneYes'>Ya</label>
-                <input id='RadioButtonPolicyHolderImmuneNo' name='RadioButtonPolicyHolderImmune' type='radio' value='no'>
-                <div class='BoxRound PositionerCenter' id='RadioButtonPolicyHolderImmuneNo'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonPolicyHolderImmuneNo'>Tidak</label>
+                <input id='RadioButtonProspectiveInsuredImmuneYes' name='RadioButtonProspectiveInsuredImmune' type='radio' value='yes'>
+                <div class='BoxRound PositionerCenter' id='RadioButtonProspectiveInsuredImmuneYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredImmuneYes'>Ya</label>
+                <input id='RadioButtonProspectiveInsuredImmuneNo' name='RadioButtonProspectiveInsuredImmune' type='radio' value='no'>
+                <div class='BoxRound PositionerCenter' id='RadioButtonProspectiveInsuredImmuneNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredImmuneNo'>Tidak</label>
               </td>
             </tr>
             <tr>
@@ -1684,12 +1796,12 @@
                 <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredCancerNo'>Tidak</label>
               </td>
               <td>
-                <input id='RadioButtonPolicyHolderCanceYes' name='RadioButtonPolicyHolderCance' type='radio' value='yes'>
-                <div class='BoxRound PositionerCenter' id='RadioButtonPolicyHolderCanceYes'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonPolicyHolderCanceYes'>Ya</label>
-                <input id='RadioButtonPolicyHolderCancerNo' name='RadioButtonPolicyHolderCance' type='radio' value='no'>
-                <div class='BoxRound PositionerCenter' id='RadioButtonPolicyHolderCancerNo'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonPolicyHolderCancerNo'>Tidak</label>
+                <input id='RadioButtonProspectiveInsuredCanceYes' name='RadioButtonProspectiveInsuredCance' type='radio' value='yes'>
+                <div class='BoxRound PositionerCenter' id='RadioButtonProspectiveInsuredCanceYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredCanceYes'>Ya</label>
+                <input id='RadioButtonProspectiveInsuredCancerNo' name='RadioButtonProspectiveInsuredCance' type='radio' value='no'>
+                <div class='BoxRound PositionerCenter' id='RadioButtonProspectiveInsuredCancerNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredCancerNo'>Tidak</label>
               </td>
             </tr>
             <tr>
@@ -1705,12 +1817,12 @@
                 <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredOtherIllnessNo'>Tidak</label>
               </td>
               <td>
-                <input id='RadioButtonPolicyHolderOtherIllnessYes' name='RadioButtonPolicyHolderOtherIllness' type='radio' value='yes'>
-                <div class='BoxRound PositionerCenter' id='RadioButtonPolicyHolderOtherIllnessYes'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonPolicyHolderOtherIllnessYes'>Ya</label>
-                <input id='RadioButtonPolicyHolderOtherIllnessNo' name='RadioButtonPolicyHolderOtherIllness' type='radio' value='no'>
-                <div class='BoxRound PositionerCenter' id='RadioButtonPolicyHolderOtherIllnessNo'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonPolicyHolderOtherIllnessNo'>Tidak</label>
+                <input id='RadioButtonProspectiveInsuredOtherIllnessYes' name='RadioButtonProspectiveInsuredOtherIllness' type='radio' value='yes'>
+                <div class='BoxRound PositionerCenter' id='RadioButtonProspectiveInsuredOtherIllnessYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredOtherIllnessYes'>Ya</label>
+                <input id='RadioButtonProspectiveInsuredOtherIllnessNo' name='RadioButtonProspectiveInsuredOtherIllness' type='radio' value='no'>
+                <div class='BoxRound PositionerCenter' id='RadioButtonProspectiveInsuredOtherIllnessNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredOtherIllnessNo'>Tidak</label>
               </td>
             </tr>
             <tr>
@@ -1731,50 +1843,6 @@
                       <th>Alamat dan Nomor Telepon</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td>
-                        <label class='Single Wrap PositionerCenter' for='#BoxProspectiveInsured1Month'>Bulan</label>
-                        <table class='BoxSquare PositionerCenter' id='BoxProspectiveInsured1Month'></table>
-                        <label class='Single Wrap PositionerCenter' for='#BoxProspectiveInsured1Year'>Tahun</label>
-                        <table class='BoxSquare PositionerCenter' id='BoxProspectiveInsured1Year'></table>
-                      </td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td>
-                        <label class='Single Wrap PositionerCenter' for='#BoxProspectiveInsured2Month'>Bulan</label>
-                        <table class='BoxSquare PositionerCenter' id='BoxProspectiveInsured2Month'></table>
-                        <label class='Single Wrap PositionerCenter' for='#BoxProspectiveInsured2Year'>Tahun</label>
-                        <table class='BoxSquare PositionerCenter' id='BoxProspectiveInsured2Year'></table>
-                      </td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td>
-                        <label class='Single Wrap PositionerCenter' for='#BoxProspectiveInsured3Month'>Bulan</label>
-                        <table class='BoxSquare PositionerCenter' id='BoxProspectiveInsured3Month'></table>
-                        <label class='Single Wrap PositionerCenter' for='#BoxProspectiveInsured3Year'>Tahun</label>
-                        <table class='BoxSquare PositionerCenter' id='BoxProspectiveInsured3Year'></table>
-                      </td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                  </tbody>
                 </table>
                 <h3>Calon Pemegang Polis</h3>
                 <table class='Space' id='TablePolicyHolderIllness'>
@@ -1789,53 +1857,41 @@
                       <th>Alamat dan Nomor Telepon</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td>
-                        <label class='Single Wrap PositionerCenter' for='#BoxPolicyHolder1Month'>Bulan</label>
-                        <table class='BoxSquare PositionerCenter' id='BoxPolicyHolder1Month'></table>
-                        <label class='Single Wrap PositionerCenter' for='#BoxPolicyHolder1Year'>Tahun</label>
-                        <table class='BoxSquare PositionerCenter' id='BoxPolicyHolder1Year'></table>
-                      </td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td>
-                        <label class='Single Wrap PositionerCenter' for='#BoxPolicyHolder2Month'>Bulan</label>
-                        <table class='BoxSquare PositionerCenter' id='BoxPolicyHolder2Month'></table>
-                        <label class='Single Wrap PositionerCenter' for='#BoxPolicyHolder2Year'>Tahun</label>
-                        <table class='BoxSquare PositionerCenter' id='BoxPolicyHolder2Year'></table>
-                      </td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td>
-                        <label class='Single Wrap PositionerCenter' for='#BoxPolicyHolder3Month'>Bulan</label>
-                        <table class='BoxSquare PositionerCenter' id='BoxPolicyHolder3Month'></table>
-                        <label class='Single Wrap PositionerCenter' for='#BoxPolicyHolder3Year'>Tahun</label>
-                        <table class='BoxSquare PositionerCenter' id='BoxPolicyHolder3Year'></table>
-                      </td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                  </tbody>
                 </table>
               </td>
             </tr>
+          </tbody>
+        </table>
+        <section class='SectionFooter'>
+          <div class='FooterContainer'>
+            <div class='FooterGeneral'>
+              <span class='Note Single PositionerLeft'>OP/NB/0104/031602 Hal 1 / 8</span>
+              <span class='Note Single PositionerRight'>PT Asuransi Jiwa BCA telah terdaftar dan diawasi oleh Otoritas Jasa Keuangan.</span>
+              <br>
+            </div>
+          </div>
+          <div class='PageBreak'></div>
+        </section>
+        <section id='SectionHeader5'>
+          <div class='HeaderContainer'>
+            <div class='HeaderGeneral'>
+              <table class='BoxSquare PositionerRight' id='TextHeaderSPAJNumber'></table>
+              <label class='Short Single PositionerRight' for='TextHeaderSPAJNumber'>Nomor SPAJ</label>
+              <br>
+              <hr>
+            </div>
+          </div>
+          <div class='HeaderBreak'></div>
+        </section>
+        <table class='Square'>
+          <thead>
+            <tr>
+              <th>Pertanyaan Kesehatan</th>
+              <th>Calon Tertanggung</th>
+              <th>Calon Pemegang Polis</th>
+            </tr>
+          </thead>
+          <tbody>
             <tr>
               <td class='Child'>
                 7. Apakah Anda telah memiliki atau sedang mengajukan pertanggungan Asuransi Jiwa, kecelakaan, kesehatan, pemulihan polis? Serta apakah pengajuan Anda pernah ditolak/ ditangguhkan/dikenakan ekstra Premi diubah dalam bentuk apapun oleh perusahaan Asuransi Jiwa?
@@ -1850,12 +1906,12 @@
                 <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredSPAJProposalNo'>Tidak</label>
               </td>
               <td>
-                <input id='RadioButtonPolicyHolderSPAJProposalYes' name='RadioButtonPolicyHolderSPAJProposal' type='radio' value='yes'>
-                <div class='BoxRound PositionerCenter' id='RadioButtonPolicyHolderSPAJProposalYes'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonPolicyHolderSPAJProposalYes'>Ya</label>
-                <input id='RadioButtonPolicyHolderSPAJProposalNo' name='RadioButtonPolicyHolderSPAJProposal' type='radio' value='no'>
-                <div class='BoxRound PositionerCenter' id='RadioButtonPolicyHolderSPAJProposalNo'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonPolicyHolderSPAJProposalNo'>Tidak</label>
+                <input id='RadioButtonProspectiveInsuredSPAJProposalYes' name='RadioButtonProspectiveInsuredSPAJProposal' type='radio' value='yes'>
+                <div class='BoxRound PositionerCenter' id='RadioButtonProspectiveInsuredSPAJProposalYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredSPAJProposalYes'>Ya</label>
+                <input id='RadioButtonProspectiveInsuredSPAJProposalNo' name='RadioButtonProspectiveInsuredSPAJProposal' type='radio' value='no'>
+                <div class='BoxRound PositionerCenter' id='RadioButtonProspectiveInsuredSPAJProposalNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredSPAJProposalNo'>Tidak</label>
               </td>
             </tr>
             <tr>
@@ -1875,32 +1931,6 @@
                       <th>Hasil Keputusan</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                  </tbody>
                 </table>
                 <h3>Calon Pemegang Polis</h3>
                 <table class='Space' id='TablePolicyHolderSPAJProposal'>
@@ -1914,32 +1944,6 @@
                       <th>Hasil Keputusan</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                  </tbody>
                 </table>
               </td>
             </tr>
@@ -1956,12 +1960,12 @@
                 <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredClaimNo'>Tidak</label>
               </td>
               <td>
-                <input id='RadioButtonPolicyHolderClaimYes' name='RadioButtonPolicyHolderClaim' type='radio' value='yes'>
-                <div class='BoxRound PositionerCenter' id='RadioButtonPolicyHolderClaimYes'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonPolicyHolderClaimYes'>Ya</label>
-                <input id='RadioButtonPolicyHolderClaimNo' name='RadioButtonPolicyHolderClaim' type='radio' value='no'>
-                <div class='BoxRound PositionerCenter' id='RadioButtonPolicyHolderClaimNo'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonPolicyHolderClaimNo'>Tidak</label>
+                <input id='RadioButtonProspectiveInsuredClaimYes' name='RadioButtonProspectiveInsuredClaim' type='radio' value='yes'>
+                <div class='BoxRound PositionerCenter' id='RadioButtonProspectiveInsuredClaimYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredClaimYes'>Ya</label>
+                <input id='RadioButtonProspectiveInsuredClaimNo' name='RadioButtonProspectiveInsuredClaim' type='radio' value='no'>
+                <div class='BoxRound PositionerCenter' id='RadioButtonProspectiveInsuredClaimNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredClaimNo'>Tidak</label>
               </td>
             </tr>
             <tr>
@@ -1977,12 +1981,12 @@
                 <label class='RadioButton Wrap PositionerCenter' for='RadioBoxProspectiveInsuredDiagnosticNo'>Tidak</label>
               </td>
               <td>
-                <input id='RadioBoxPolicyHolderOtherIllnessYes' name='RadioBoxPolicyHolderOtherIllness' type='radio' value='yes'>
-                <div class='BoxRound PositionerCenter' id='RadioBoxPolicyHolderOtherIllnessYes'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioBoxPolicyHolderOtherIllnessYes'>Ya</label>
-                <input id='RadioBoxPolicyHolderOtherIllnessNo' name='RadioBoxPolicyHolderOtherIllness' type='radio' value='no'>
-                <div class='BoxRound PositionerCenter' id='RadioBoxPolicyHolderOtherIllnessNo'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioBoxPolicyHolderOtherIllnessNo'>Tidak</label>
+                <input id='RadioBoxProspectiveInsuredOtherIllnessYes' name='RadioBoxProspectiveInsuredOtherIllness' type='radio' value='yes'>
+                <div class='BoxRound PositionerCenter' id='RadioBoxProspectiveInsuredOtherIllnessYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioBoxProspectiveInsuredOtherIllnessYes'>Ya</label>
+                <input id='RadioBoxProspectiveInsuredOtherIllnessNo' name='RadioBoxProspectiveInsuredOtherIllness' type='radio' value='no'>
+                <div class='BoxRound PositionerCenter' id='RadioBoxProspectiveInsuredOtherIllnessNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioBoxProspectiveInsuredOtherIllnessNo'>Tidak</label>
               </td>
             </tr>
             <tr>
@@ -2006,6 +2010,38 @@
               <td></td>
               <td></td>
             </tr>
+          </tbody>
+        </table>
+        <section class='SectionFooter'>
+          <div class='FooterContainer'>
+            <div class='FooterGeneral'>
+              <span class='Note Single PositionerLeft'>OP/NB/0104/031602 Hal 1 / 8</span>
+              <span class='Note Single PositionerRight'>PT Asuransi Jiwa BCA telah terdaftar dan diawasi oleh Otoritas Jasa Keuangan.</span>
+              <br>
+            </div>
+          </div>
+          <div class='PageBreak'></div>
+        </section>
+        <section id='SectionHeader6'>
+          <div class='HeaderContainer'>
+            <div class='HeaderGeneral'>
+              <table class='BoxSquare PositionerRight' id='TextHeaderSPAJNumber'></table>
+              <label class='Short Single PositionerRight' for='TextHeaderSPAJNumber'>Nomor SPAJ</label>
+              <br>
+              <hr>
+            </div>
+          </div>
+          <div class='HeaderBreak'></div>
+        </section>
+        <table class='Square'>
+          <thead>
+            <tr>
+              <th>Pertanyaan Kesehatan</th>
+              <th>Calon Tertanggung</th>
+              <th>Calon Pemegang Polis</th>
+            </tr>
+          </thead>
+          <tbody>
             <tr>
               <td>
                 11. Pertanyaan khusus untuk wanita:
@@ -2028,12 +2064,12 @@
                 <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredPregnantNo'>Tidak</label>
               </td>
               <td>
-                <input id='RadioButtonPolicyHolderPregnantYes' name='RadioButtonPolicyHolderPregnant' type='radio' value='yes'>
-                <div class='BoxRound PositionerCenter' id='RadioButtonPolicyHolderPregnantYes'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonPolicyHolderPregnantYes'>Ya</label>
-                <input id='RadioButtonPolicyHolderPregnantNo' name='RadioButtonPolicyHolderPregnant' type='radio' value='no'>
-                <div class='BoxRound PositionerCenter' id='RadioButtonPolicyHolderPregnantNo'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonPolicyHolderPregnantNo'>Tidak</label>
+                <input id='RadioButtonProspectiveInsuredPregnantYes' name='RadioButtonProspectiveInsuredPregnant' type='radio' value='yes'>
+                <div class='BoxRound PositionerCenter' id='RadioButtonProspectiveInsuredPregnantYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredPregnantYes'>Ya</label>
+                <input id='RadioButtonProspectiveInsuredPregnantNo' name='RadioButtonProspectiveInsuredPregnant' type='radio' value='no'>
+                <div class='BoxRound PositionerCenter' id='RadioButtonProspectiveInsuredPregnantNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredPregnantNo'>Tidak</label>
               </td>
             </tr>
             <tr>
@@ -2049,12 +2085,12 @@
                 <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredPregnancyIllnessNo'>Tidak</label>
               </td>
               <td>
-                <input id='RadioButtonPolicyHolderPregnancyIllnessYes' name='RadioButtonPolicyHolderPregnancyIllness' type='radio' value='yes'>
-                <div class='BoxRound PositionerCenter' id='RadioButtonPolicyHolderPregnancyIllnessYes'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonPolicyHolderPregnancyIllnessYes'>Ya</label>
-                <input id='RadioButtonPolicyHolderPregnancyIllnessNo' name='RadioButtonPolicyHolderPregnancyIllness' type='radio' value='no'>
-                <div class='BoxRound PositionerCenter' id='RadioButtonPolicyHolderPregnancyIllnessNo'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonPolicyHolderPregnancyIllnessNo'>Tidak</label>
+                <input id='RadioButtonProspectiveInsuredPregnancyIllnessYes' name='RadioButtonProspectiveInsuredPregnancyIllness' type='radio' value='yes'>
+                <div class='BoxRound PositionerCenter' id='RadioButtonProspectiveInsuredPregnancyIllnessYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredPregnancyIllnessYes'>Ya</label>
+                <input id='RadioButtonProspectiveInsuredPregnancyIllnessNo' name='RadioButtonProspectiveInsuredPregnancyIllness' type='radio' value='no'>
+                <div class='BoxRound PositionerCenter' id='RadioButtonProspectiveInsuredPregnancyIllnessNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredPregnancyIllnessNo'>Tidak</label>
               </td>
             </tr>
             <tr>
@@ -2070,12 +2106,12 @@
                 <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredFemaleAbnormalityNo'>Tidak</label>
               </td>
               <td>
-                <input id='RadioButtonPolicyHolderFemaleAbnormalityYes' name='RadioButtonPolicyHolderFemaleAbnormality' type='radio' value='yes'>
-                <div class='BoxRound PositionerCenter' id='RadioButtonPolicyHolderFemaleAbnormalityYes'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonPolicyHolderFemaleAbnormalityYes'>Ya</label>
-                <input id='RadioButtonPolicyHolderFemaleAbnormailtyNo' name='RadioButtonPolicyHolderFemaleAbnormality' type='radio' value='no'>
-                <div class='BoxRound PositionerCenter' id='RadioButtonPolicyHolderFemaleAbnormailtyNo'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonPolicyHolderFemaleAbnormailtyNo'>Tidak</label>
+                <input id='RadioButtonProspectiveInsuredFemaleAbnormalityYes' name='RadioButtonProspectiveInsuredFemaleAbnormality' type='radio' value='yes'>
+                <div class='BoxRound PositionerCenter' id='RadioButtonProspectiveInsuredFemaleAbnormalityYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredFemaleAbnormalityYes'>Ya</label>
+                <input id='RadioButtonProspectiveInsuredFemaleAbnormailtyNo' name='RadioButtonProspectiveInsuredFemaleAbnormality' type='radio' value='no'>
+                <div class='BoxRound PositionerCenter' id='RadioButtonProspectiveInsuredFemaleAbnormailtyNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredFemaleAbnormailtyNo'>Tidak</label>
               </td>
             </tr>
             <tr>
@@ -2091,12 +2127,12 @@
                 <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredPapSmearNo'>Tidak</label>
               </td>
               <td>
-                <input id='RadioButtonPolicyHolderPapSmearYes' name='RadioButtonPolicyHolderPapSmear' type='radio' value='yes'>
-                <div class='BoxRound PositionerCenter' id='RadioButtonPolicyHolderPapSmearYes'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonPolicyHolderPapSmearYes'>Ya</label>
-                <input id='RadioButtonPolicyHolderPapSmearNo' name='RadioButtonPolicyHolderPapSmear' type='radio' value='no'>
-                <div class='BoxRound PositionerCenter' id='RadioButtonPolicyHolderPapSmearNo'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonPolicyHolderPapSmearNo'>Tidak</label>
+                <input id='RadioButtonProspectiveInsuredPapSmearYes' name='RadioButtonProspectiveInsuredPapSmear' type='radio' value='yes'>
+                <div class='BoxRound PositionerCenter' id='RadioButtonProspectiveInsuredPapSmearYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredPapSmearYes'>Ya</label>
+                <input id='RadioButtonProspectiveInsuredPapSmearNo' name='RadioButtonProspectiveInsuredPapSmear' type='radio' value='no'>
+                <div class='BoxRound PositionerCenter' id='RadioButtonProspectiveInsuredPapSmearNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredPapSmearNo'>Tidak</label>
               </td>
             </tr>
             <tr>
@@ -2112,12 +2148,12 @@
                 <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredHeartDissorderNo'>Tidak</label>
               </td>
               <td>
-                <input id='RadioButtonPolicyHolderHeartDissorderYes' name='RadioButtonPolicyHolderHeartDissorder' type='radio' value='yes'>
-                <div class='BoxRound PositionerCenter' id='RadioButtonPolicyHolderHeartDissorderYes'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonPolicyHolderHeartDissorderYes'>Ya</label>
-                <input id='RadioButtonPolicyHolderHeartDissorderNo' name='RadioButtonPolicyHolderHeartDissorder' type='radio' value='no'>
-                <div class='BoxRound PositionerCenter' id='RadioButtonPolicyHolderHeartDissorderNo'></div>
-                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonPolicyHolderHeartDissorderNo'>Tidak</label>
+                <input id='RadioButtonProspectiveInsuredHeartDissorderYes' name='RadioButtonProspectiveInsuredHeartDissorder' type='radio' value='yes'>
+                <div class='BoxRound PositionerCenter' id='RadioButtonProspectiveInsuredHeartDissorderYes'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredHeartDissorderYes'>Ya</label>
+                <input id='RadioButtonProspectiveInsuredHeartDissorderNo' name='RadioButtonProspectiveInsuredHeartDissorder' type='radio' value='no'>
+                <div class='BoxRound PositionerCenter' id='RadioButtonProspectiveInsuredHeartDissorderNo'></div>
+                <label class='RadioButton Wrap PositionerCenter' for='RadioButtonProspectiveInsuredHeartDissorderNo'>Tidak</label>
               </td>
             </tr>
           </tbody>
@@ -2164,6 +2200,29 @@
           <li>
             Saya/Kami dengan ini mengizinkan Penanggung untuk menggunakan atau memberikan informasi atau keterangan mengenai Saya/Kami yang tersedia, diperoleh atau disimpan oleh Penanggung (sesuai yang tercantum dalam SPAJ ini atau sarana lain), kepada pihak-pihak lain (termasuk tetapi tidak terbatas pada perusahaan reasuransi, asuransi, lembaga, bank atau badan hukum lain baik di dalam maupun di luar negeri) yang memiliki hubungan kerjasama dengan Penanggung dalam rangka pengajuan SPAJ ini, pembayaran klaim dan pelayanan nasabah. Saya/Kami juga mengerti bahwa Saya/Kami berhak untuk melakukan koreksi atau penambahan atas informasi dan keterangan mengenai Saya/Kami tersebut dengan menghubungi Kantor Pusat Penanggung.
           </li>
+        </ol>
+        <section class='SectionFooter'>
+          <div class='FooterContainer'>
+            <div class='FooterGeneral'>
+              <span class='Note Single PositionerLeft'>OP/NB/0104/031602 Hal 1 / 8</span>
+              <span class='Note Single PositionerRight'>PT Asuransi Jiwa BCA telah terdaftar dan diawasi oleh Otoritas Jasa Keuangan.</span>
+              <br>
+            </div>
+          </div>
+          <div class='PageBreak'></div>
+        </section>
+        <section id='SectionHeader7'>
+          <div class='HeaderContainer'>
+            <div class='HeaderGeneral'>
+              <table class='BoxSquare PositionerRight' id='TextHeaderSPAJNumber'></table>
+              <label class='Short Single PositionerRight' for='TextHeaderSPAJNumber'>Nomor SPAJ</label>
+              <br>
+              <hr>
+            </div>
+          </div>
+          <div class='HeaderBreak'></div>
+        </section>
+        <ol>
           <li>
             Saya/Kami menyetujui membayar kepada Penanggung semua biaya pemeriksaan kesehatan yang timbul jika Saya/Kami membatalkan SPAJ dalam proses Underwriting atau setelah diputuskan dengan risiko standar.
           </li>
@@ -2300,6 +2359,18 @@
           <br>
           Mohon agar menandatangani SPAJ, jika Anda telah mengisi semua pertanyaan dan pernyataan dengan benar dan lengkap sesuai dengan keadaan sebenarnya. Segala risiko yang timbul akibat dari SPAJ yang ditandatangani dalam keadaan kosong atau tidak sesuai dengan kondisi sebenarnya merupakan tanggung jawab Pemegang Polis.
         </p>
+      </section>
+      <section class='SectionFooter'>
+        <div class='FooterContainerLast'>
+          <div class='FooterLast'>
+            <img class='Medium PositionerRight' src='../../Resource/Icon/Turqoise/icon_halobca.svg'>
+            <br>
+            <span class='Note Single PositionerLeft'>OP/NB/0104/031602 Hal 1 / 8</span>
+            <span class='Note Single PositionerRight'>PT Asuransi Jiwa BCA telah terdaftar dan diawasi oleh Otoritas Jasa Keuangan.</span>
+            <br>
+          </div>
+        </div>
+        <div class='PageBreak'></div>
       </section>
     </main>
   </body>

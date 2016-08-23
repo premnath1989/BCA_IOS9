@@ -201,7 +201,7 @@
         [arrayDBSIData addObject:@"SINO"];
         [arrayDBSIData addObject:@"CreatedDate"];
         arrayHTMLSIData =[[NSMutableArray alloc]init];
-        [arrayHTMLSIData addObject:@"BoxIllustrationNumber"];
+        [arrayHTMLSIData addObject:@"TextIllustrationNumber"];
         [arrayHTMLSIData addObject:@"BoxIllustrationDateDay"];
     }
 
@@ -432,8 +432,6 @@
             [modifieArray addObject:[self getDictionaryForSignature:[arrayDBSignature objectAtIndex:i] HTMLID:[arrayHTMLSignature objectAtIndex:i]]];
         }
 
-
-        
         [dictOriginal setObject:modifieArray forKey:@"readFromDB"];
         //return [super readfromDB:finalDictionary];
         [self callSuccessCallback:[params valueForKey:@"successCallBack"] withRetValue:dictOriginal];

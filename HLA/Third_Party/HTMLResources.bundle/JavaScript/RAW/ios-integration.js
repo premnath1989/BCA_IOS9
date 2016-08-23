@@ -143,15 +143,11 @@ function PrintData()
 function AutoPopulate(jsonObject)
 {        
     var objectContent = JSON.parse(jsonObject);
-    var stringType = Object.keys(objectContent.result)[0];        
-    
-    calculateAge("DatePolicyHolderBirthday", "TextPolicyHolderAge");
+    var stringType = Object.keys(objectContent.result)[0];                
     
     if (stringType == "autopopulateFromDB")
     {
-        getFromDatabase(objectContent.result.autopopulateFromDB, stringPageTypeCurrent);
-        
-        
+        getFromDatabase(objectContent.result.autopopulateFromDB, stringPageTypeCurrent);                
     }
     else
     {

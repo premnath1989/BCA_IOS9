@@ -21,93 +21,63 @@
     <!-- %link{ :rel => "shortcut icon", :href => "#{urlResource}logo_favicon.ico", :type => "image/x-icon" } -->
     <!-- %link{ :rel => "icon", :href => "#{urlResource}logo_favicon.ico", :type => "image/x-icon" } -->
     <!-- CSS -->
+    <!-- %link{ :id => "csslayout", :href => "#{urlCSS}#{urlCSSSectionPrefix}-layout-general.css", :rel => "stylesheet", :type => "text/css" } -->
     <link href='../../Style/CSS/healthquestionnaire-layout-general.css' id='csslayout' rel='stylesheet' type='text/css'>
     <link href='../../Style/CSS/healthquestionnaire-font-general.css' id='cssfont' rel='stylesheet' type='text/css'>
     <link href='../../Style/CSS/healthquestionnaire-input-general.css' id='cssinput' rel='stylesheet' type='text/css'>
-    <!-- %link{ :id => "csslink", :href => "#{urlCSS}#{urlCSSSectionPrefix}-link-general.css", :rel => "stylesheet", :type => "text/css" } -->
+    <link href='../../Style/CSS/healthquestionnaire-link-general.css' id='csslink' rel='stylesheet' type='text/css'>
     <link href='../../Style/CSS/bless-fontsize-medium.css' id='cssfontsize' rel='stylesheet' type='text/css'>
     <link href='../../Style/CSS/healthquestionnaire-fontfamily-bpreplay.css' id='cssfontfamily' rel='stylesheet' type='text/css'>
     <link href='../../Style/CSS/healthquestionnaire-theme-turqoise-svg.css' id='csstheme' rel='stylesheet' type='text/css'>
     <!-- %link{ :id => "cssresponsive", :href => "#{urlCSS}#{urlCSSSectionPrefix}-responsive-general.css", :rel => "stylesheet", :type => "text/css" } -->
     <!-- JAVA SCRIPT -->
+    <!-- %script{ :type => "text/javascript", :src => "#{urlJavaScript}jquery.mobile-1.4.5.min.js" } -->
     <script src='../../Java Script/Minimized/jquery-1.11.1.min.js' type='text/javascript'></script>
     <script src='../../Java Script/Minimized/jquery-migrate-1.2.1.min.js' type='text/javascript'></script>
     <script src='../../Java Script/Minimized/ibrahimaziz.min.js' type='text/javascript'></script>
+    <script>
+      var stringPageTypeCurrent = stringPageTypeForm;
+    </script>
+    <script src='../../Java Script/Minimized/ios-integration.min.js' type='text/javascript'></script>
     <title>BCA Life - BLESS, Health Questionnaire 1 Form</title>
     <!-- JQUERY -->
     <script>
       $(document).ready(function()
       {
-          // SETTER
-          
-          //radioButtonSetter("WeightChange", true);
-          
-          // GETTER
-          
-          
-          
+          // SETUP
+      
+          // radioButtonHealthQuestionnaireDefault();
+      
           // GENERATOR
           
-          additionalQuestionGenerator("RadioButtonProspectiveInsuredWeightChange");
-          additionalQuestionGenerator("RadioButtonProspectiveInsuredSmoker");
-          additionalQuestionGenerator("RadioButtonProspectiveInsuredJunkie");
-          additionalQuestionGenerator("RadioButtonProspectiveInsuredExtremeSport");
-          additionalQuestionGenerator("RadioButtonProspectiveInsuredAbroad");
-          additionalQuestionGenerator("RadioButtonProspectiveInsuredHealthDissorder");
-          additionalQuestionGenerator("RadioButtonProspectiveInsuredVision");
-          additionalQuestionGenerator("RadioButtonProspectiveInsuredENT");
-          additionalQuestionGenerator("RadioButtonProspectiveInsuredRespiratory");
-          additionalQuestionGenerator("RadioButtonProspectiveInsuredCardiac");
-          additionalQuestionGenerator("RadioButtonProspectiveInsuredDigest");
-          additionalQuestionGenerator("RadioButtonProspectiveInsuredNerve");
-          additionalQuestionGenerator("RadioButtonProspectiveInsuredLiver");
-          additionalQuestionGenerator("RadioButtonProspectiveInsuredReproduction");
-          additionalQuestionGenerator("RadioButtonProspectiveInsuredMotion");
-          additionalQuestionGenerator("RadioButtonProspectiveInsuredBlood");
-          additionalQuestionGenerator("RadioButtonProspectiveInsuredImmune");
-          additionalQuestionGenerator("RadioButtonProspectiveInsuredCancer");
-          additionalQuestionGenerator("RadioButtonProspectiveInsuredOtherIllness");
-          additionalQuestionGenerator("RadioButtonProspectiveInsuredSPAJProposal");
-          additionalQuestionGenerator("RadioButtonProspectiveInsuredClaim");
-          additionalQuestionGenerator("RadioButtonProspectiveInsuredDiagnostic");
-          additionalQuestionGenerator("RadioButtonProspectiveInsuredPregnant");
-          additionalQuestionGenerator("RadioButtonProspectiveInsuredPregnancy");
-          additionalQuestionGenerator("RadioButtonProspectiveInsuredPregnancyIllness");
-          additionalQuestionGenerator("RadioButtonProspectiveInsuredFemaleAbnormality");
-          additionalQuestionGenerator("RadioButtonProspectiveInsuredPapSmear");
-          additionalQuestionGenerator("RadioButtonProspectiveInsuredHeartDissorder");
+          additionalQuestionGenerator();
+          
           
           // BUTTON
       
-          buttonAdditionalQuestionGenerator("#PopUpAdditionalQuestion", "#TextAdditionalQuestion")
+          buttonPopUpGeneralGenerator();
+          buttonPopUpHealthGenerator();
           
-          $("#ButtonXML").click(function()
+          /* $("#MainForm #ButtonDone").click(function()
           {
-              textGetter("#Height");
-              textGetter("#Weight");
-              radioButtonGetter("WeightChange");
-              radioButtonGetter("Smoker");
-              
-              validationMessage("Harap lengkapi form terlebih dahulu !.", "Form sukses diinput !.");
-          });
+              savetoDB();
+          }); */
       });
     </script>
   </head>
   <!-- BODY -->
   <body id='Main'>
     <!-- HEADER -->
-    <header>
+    <header id='MainForm'>
       <h1></h1>
-      <input class='ButtonPrimary PositionerRight' id='ButtonXML' type='button' value='Done'>
+      <!-- %input#ButtonDone.ButtonPrimary.PositionerRight{ :type => "button", :value => "Done" } -->
       <div class='Highlighted'>
         <label class='Medium Single'>Calon</label>
-        <div class='RadioButton' style='margin-left: 80px'>
-          <input id='ProspectiveInsured' name='UserType' type='radio'>
-          <label class='RadioButton' for='ProspectiveInsured'>Tertanggung</label>
+        <nav class='RadioButton' style='margin-left: 80px'>
+          <a class='Clear' href='../../Page/HTML/page_healthquestionnaire1_policyholder.html'>Pemegang Polis</a>
           <div class='Separator'></div>
-          <input id='ProspectiveInsured' name='UserType' type='radio'>
-          <label class='RadioButton' for='ProspectiveInsured'>Pemegang Polis</label>
-        </div>
+          <a class='Clear Selected' href='../../Page/HTML/page_healthquestionnaire1_prospectiveinsured.html'>Tertanggung</a>
+        </nav>
       </div>
       <h2>Pertanyaan Kesehatan</h2>
     </header>
@@ -119,25 +89,25 @@
             <ol>
               <li>
                 <div class='Container'>
-                  <label class='Item' for='Height'>Tinggi Badan</label>
+                  <label class='Item' for='TextProspectiveInsuredHeight'>Tinggi Badan</label>
                   <div class='Item'>
-                    <input class='Short Single' id='Height' type='text'>
-                    <label class='Suffix Single' for='Height'>Cm</label>
+                    <input class='Short Single' id='TextProspectiveInsuredHeight' type='text'>
+                    <label class='Suffix Single' for='TextProspectiveInsuredHeight'>Cm</label>
                   </div>
                 </div>
               </li>
               <li>
                 <div class='Container'>
-                  <label class='Item' for='Weight'>Berat Badan</label>
+                  <label class='Item' for='TextProspectiveInsuredWeight'>Berat Badan</label>
                   <div class='Item'>
-                    <input class='Short Single' id='Weight' type='text'>
+                    <input class='Short Single' id='TextProspectiveInsuredWeight' type='text'>
                     <label class='Suffix Single' for='Weight'>Kg</label>
                   </div>
                 </div>
               </li>
               <li>
                 <div class='Container'>
-                  <label class='Item' for='WeightChangeYes' id='LabelWeightChange'>Adakah berat badan Anda mengalami penurunan atau kenaikan drastis (> 10% dalam 1 (satu) bulan) dalam 6 (enam) bulan terakhir?</label>
+                  <label class='Item' for='RadioButtonWeightChangeYes' id='LabelWeightChange'>Adakah berat badan Anda mengalami penurunan atau kenaikan drastis (> 10% dalam 1 (satu) bulan) dalam 6 (enam) bulan terakhir?</label>
                   <div class='RadioButton Item'>
                     <input id='RadioButtonProspectiveInsuredWeightChangeYes' name='RadioButtonProspectiveInsuredWeightChange' type='radio' value='true'>
                     <label class='RadioButton' for='RadioButtonProspectiveInsuredWeightChangeYes'>Ya</label>
@@ -152,273 +122,290 @@
           <hr>
           <li>
             <div class='Container'>
-              <label class='Item' for='SmokerYes' id='LabelSmoker'>
+              <label class='Item' for='RadioButtonProspectiveInsuredSmokerYes' id='LabelProspectiveInsuredSmoker'>
                 Apakah Anda merokok dalam 12 (dua belas) bulan terakhir (termasuk rokok elektronik atau produk tembakau lainnya)?
               </label>
               <div class='RadioButton Item'>
-                <input id='RadioButtonProspectiveInsuredSmokerYes' name='RadioButtonProspectiveInsuredSmoker' type='radio' value='true'>
+                <input data-popup-type='general' id='RadioButtonProspectiveInsuredSmokerYes' name='RadioButtonProspectiveInsuredSmoker' type='radio' value='true'>
                 <label class='RadioButton' for='RadioButtonProspectiveInsuredSmokerYes'>Ya</label>
                 <div class='Separator'></div>
-                <input id='RadioButtonProspectiveInsuredSmokerNo' name='RadioButtonProspectiveInsuredSmoker' type='radio' value='false'>
+                <input data-popup-type='general' id='RadioButtonProspectiveInsuredSmokerNo' name='RadioButtonProspectiveInsuredSmoker' type='radio' value='false'>
                 <label class='RadioButton' for='RadioButtonProspectiveInsuredSmokerNo'>Tidak</label>
               </div>
             </div>
+            <input class='ButtonPreview' data-popup-type='general' id='ButtonPreviewProspectiveInsuredSmoker' name='RadioButtonProspectiveInsuredSmoker' type='button' value='View recent input'>
           </li>
           <hr>
           <li>
             <div class='Container'>
-              <label class='Item' for='JunkieYes' id='LabelJunkie'>
+              <label class='Item' for='RadioButtonProspectiveInsuredJunkieYes' id='LabelProspectiveInsuredJunkie'>
                 Apakah Anda memiliki kebiasaan atau pernah menggunakan narkotika, zat adiktif atau obat-obatan lainnya, minum alkohol secara berlebihan? Jika “Ya”, jelaskan jumlah serta frekuensi mengkonsumsinya. Serta jelaskan jika ada riwayat perawatan/mendapat terapi karena hal tersebut?
               </label>
               <div class='RadioButton Item'>
-                <input id='RadioButtonProspectiveInsuredJunkieYes' name='RadioButtonProspectiveInsuredJunkie' type='radio' value='true'>
+                <input data-popup-type='general' id='RadioButtonProspectiveInsuredJunkieYes' name='RadioButtonProspectiveInsuredJunkie' type='radio' value='true'>
                 <label class='RadioButton' for='RadioButtonProspectiveInsuredJunkieYes'>Ya</label>
                 <div class='Separator'></div>
-                <input id='RadioButtonProspectiveInsuredJunkieNo' name='RadioButtonProspectiveInsuredJunkie' type='radio' value='false'>
+                <input data-popup-type='general' id='RadioButtonProspectiveInsuredJunkieNo' name='RadioButtonProspectiveInsuredJunkie' type='radio' value='false'>
                 <label class='RadioButton' for='RadioButtonProspectiveInsuredJunkieNo'>Tidak</label>
               </div>
             </div>
+            <input class='ButtonPreview' data-popup-type='general' id='ButtonPreviewProspectiveInsuredJunkie' name='RadioButtonProspectiveInsuredJunkie' type='button' value='View recent input'>
           </li>
           <hr>
           <li>
             <div class='Container'>
-              <label class='Item' for='ExtremeSportYes' id='LabelExtremeSport'>
+              <label class='Item' for='RadioButtonProspectiveInsuredExtremeSportYes' id='LabelProspectiveInsuredExtremeSport'>
                 Apakah Anda memiliki hobi atau sewaktu-waktu melakukan kegiatan yang beresiko tinggi/bahaya atau masih aktif dalam pekerjaan beresiko tinggi (menyelam, panjat tebing, mendaki gunung, terjun payung, paralayang, balap motor/mobil, pertambangan, minyak dan gas bumi, Kelautan, TNI/Polri, penerbangan (selain dari penumpang resmi penerbangan terjadwal))? (Jika jawaban “Ya” mohon melengkapi kuesioner yang sesuai hobi/kegiatan/pekerjaan tersebut dan dilampirkan bersama SPAJ ini).
               </label>
               <div class='RadioButton Item'>
-                <input id='RadioButtonProspectiveInsuredExtremeSportYes' name='RadioButtonProspectiveInsuredExtremeSport' type='radio' value='true'>
+                <input data-popup-type='general' id='RadioButtonProspectiveInsuredExtremeSportYes' name='RadioButtonProspectiveInsuredExtremeSport' type='radio' value='true'>
                 <label class='RadioButton' for='RadioButtonProspectiveInsuredExtremeSportYes'>Ya</label>
                 <div class='Separator'></div>
-                <input id='RadioButtonProspectiveInsuredExtremeSportNo' name='RadioButtonProspectiveInsuredExtremeSport' type='radio' value='false'>
+                <input data-popup-type='general' id='RadioButtonProspectiveInsuredExtremeSportNo' name='RadioButtonProspectiveInsuredExtremeSport' type='radio' value='false'>
                 <label class='RadioButton' for='RadioButtonProspectiveInsuredExtremeSportNo'>Tidak</label>
               </div>
             </div>
+            <input class='ButtonPreview' data-popup-type='general' id='ButtonPreviewProspectiveInsuredExtremeSport' name='RadioButtonProspectiveInsuredExtremeSport' type='button' value='View recent input'>
           </li>
           <hr>
           <li>
             <div class='Container'>
-              <label class='Item' for='AbroadYes' id='LabelAbroad'>
+              <label class='Item' for='RadioButtonProspectiveInsuredAbroadYes' id='LabelProspectiveInsuredAbroad'>
                 Apakah Anda dalam 12 bulan terakhir ini/mendatang Anda pernah/memiliki rencana bepergian/tinggal di luar negeri? Jika “Ya”, jelaskan kapan waktu bepergiannya, negara tujuan, lama tinggal, serta kepentingannya.
               </label>
               <div class='RadioButton Item'>
-                <input id='RadioButtonProspectiveInsuredAbroadYes' name='RadioButtonProspectiveInsuredAbroad' type='radio' value='true'>
+                <input data-popup-type='general' id='RadioButtonProspectiveInsuredAbroadYes' name='RadioButtonProspectiveInsuredAbroad' type='radio' value='true'>
                 <label class='RadioButton' for='RadioButtonProspectiveInsuredAbroadYes'>Ya</label>
                 <div class='Separator'></div>
-                <input id='RadioButtonProspectiveInsuredAbroadNo' name='RadioButtonProspectiveInsuredAbroad' type='radio' value='false'>
+                <input data-popup-type='general' id='RadioButtonProspectiveInsuredAbroadNo' name='RadioButtonProspectiveInsuredAbroad' type='radio' value='false'>
                 <label class='RadioButton' for='RadioButtonProspectiveInsuredAbroadNo'>Tidak</label>
               </div>
             </div>
+            <input class='ButtonPreview' data-popup-type='general' id='ButtonPreviewProspectiveInsuredAbroad' name='RadioButtonProspectiveInsuredAbroad' type='button' value='View recent input'>
           </li>
           <hr>
           <li>
             <div class='Container'>
-              <label class='Item' for='HealthDissorderYes' id='LabelHealthDissorder'>
+              <label class='Item' for='RadioButtonProspectiveInsuredHealthDissorderYes' id='LabelProspectiveInsuredHealthDissorder'>
                 Apakah Anda pernah/sedang menderita penyakit atau menjalani pemeriksaan/perawatan, pengobatan, operasi untuk penyakit/kelainan dibawah ini:
               </label>
               <div class='RadioButton Item'>
-                <input id='RadioButtonProspectiveInsuredHealthDissorderYes' name='RadioButtonProspectiveInsuredHealthDissorder' type='radio' value='true'>
+                <input data-popup-type='general' id='RadioButtonProspectiveInsuredHealthDissorderYes' name='RadioButtonProspectiveInsuredHealthDissorder' type='radio' value='true'>
                 <label class='RadioButton' for='RadioButtonProspectiveInsuredHealthDissorderYes'>Ya</label>
                 <div class='Separator'></div>
-                <input id='RadioButtonProspectiveInsuredHealthDissorderNo' name='RadioButtonProspectiveInsuredHealthDissorder' type='radio' value='false'>
+                <input data-popup-type='general' id='RadioButtonProspectiveInsuredHealthDissorderNo' name='RadioButtonProspectiveInsuredHealthDissorder' type='radio' value='false'>
                 <label class='RadioButton' for='RadioButtonProspectiveInsuredHealthDissorderNo'>Tidak</label>
               </div>
             </div>
             <ol>
               <li>
                 <div class='Container'>
-                  <label class='Item' for='VisionYes'>
+                  <label class='Item' for='RadioButtonProspectiveInsuredVisionYes' id='LabelProspectiveInsuredVision'>
                     Gangguan fungsi/sistem penglihatan dan gangguan pada mata lainnya?
                   </label>
                   <div class='RadioButton Item' id='LabelVision'>
-                    <input id='RadioButtonProspectiveInsuredVisionYes' name='RadioButtonProspectiveInsuredVision' type='radio' value='true'>
+                    <input data-popup-type='health' id='RadioButtonProspectiveInsuredVisionYes' name='RadioButtonProspectiveInsuredVision' type='radio' value='true'>
                     <label class='RadioButton' for='RadioButtonProspectiveInsuredVisionYes'>Ya</label>
                     <div class='Separator'></div>
-                    <input id='RadioButtonProspectiveInsuredVisionNo' name='RadioButtonProspectiveInsuredVision' type='radio' value='false'>
+                    <input data-popup-type='health' id='RadioButtonProspectiveInsuredVisionNo' name='RadioButtonProspectiveInsuredVision' type='radio' value='false'>
                     <label class='RadioButton' for='RadioButtonProspectiveInsuredVisionNo'>Tidak</label>
                   </div>
                 </div>
+                <input class='ButtonPreview' data-popup-type='health' id='ButtonPreviewProspectiveInsuredVision' name='RadioButtonProspectiveInsuredVision' type='button' value='View recent input'>
               </li>
               <li>
                 <div class='Container'>
-                  <label class='Item' for='ENTYes' id='LabelENT'>
+                  <label class='Item' for='RadioButtonProspectiveInsuredENTYes' id='LabelENT'>
                     Gangguan fungsi/sistem pada Telinga, Hidung, Tenggorokan (THT)?
                   </label>
                   <div class='RadioButton Item'>
-                    <input id='RadioButtonProspectiveInsuredENTYes' name='RadioButtonProspectiveInsuredENT' type='radio' value='true'>
+                    <input data-popup-type='health' id='RadioButtonProspectiveInsuredENTYes' name='RadioButtonProspectiveInsuredENT' type='radio' value='true'>
                     <label class='RadioButton' for='RadioButtonProspectiveInsuredENTYes'>Ya</label>
                     <div class='Separator'></div>
-                    <input id='RadioButtonProspectiveInsuredENTNo' name='RadioButtonProspectiveInsuredENT' type='radio' value='false'>
+                    <input data-popup-type='health' id='RadioButtonProspectiveInsuredENTNo' name='RadioButtonProspectiveInsuredENT' type='radio' value='false'>
                     <label class='RadioButton' for='RadioButtonProspectiveInsuredENTNo'>Tidak</label>
                   </div>
                 </div>
+                <input class='ButtonPreview' data-popup-type='health' id='ButtonPreviewProspectiveInsuredENT' name='RadioButtonProspectiveInsuredENT' type='button' value='View recent input'>
               </li>
               <li>
                 <div class='Container'>
-                  <label class='Item' for='RespiratoryYes' id='LabelRespiratory'>
+                  <label class='Item' for='RadioButtonProspectiveInsuredRespiratoryYes' id='LabelProspectiveInsuredRespiratory'>
                     Gangguan fungsi/sistem Pernapasan, Paru-paru, Asma, Bronkitis, Tuberkulosis, Batuk Darah dan lainnya?
                   </label>
                   <div class='RadioButton Item'>
-                    <input id='RadioButtonProspectiveInsuredRespiratoryYes' name='RadioButtonProspectiveInsuredRespiratory' type='radio' value='true'>
+                    <input data-popup-type='health' id='RadioButtonProspectiveInsuredRespiratoryYes' name='RadioButtonProspectiveInsuredRespiratory' type='radio' value='true'>
                     <label class='RadioButton' for='RadioButtonProspectiveInsuredRespiratoryYes'>Ya</label>
                     <div class='Separator'></div>
-                    <input id='RadioButtonProspectiveInsuredRespiratoryNo' name='RadioButtonProspectiveInsuredRespiratory' type='radio' value='false'>
+                    <input data-popup-type='health' id='RadioButtonProspectiveInsuredRespiratoryNo' name='RadioButtonProspectiveInsuredRespiratory' type='radio' value='false'>
                     <label class='RadioButton' for='RadioButtonProspectiveInsuredRespiratoryNo'>Tidak</label>
                   </div>
                 </div>
+                <input class='ButtonPreview' data-popup-type='health' id='ButtonPreviewProspectiveInsuredRespiratory' name='RadioButtonProspectiveInsuredRespiratory' type='button' value='View recent input'>
               </li>
               <li>
                 <div class='Container'>
-                  <label class='Item' for='CardiacYes' id='LabelCardiac'>
+                  <label class='Item' for='RadioButtonProspectiveInsuredCardiacYes' id='LabelProspectiveInsuredCardiac'>
                     Gangguan fungsi/sistem Jantung dan Pembuluh Darah, Nyeri Dada, Serangan Jantung, Demam, Jantung, Rematik, Tekanan Darah Tinggi (Hipertensi)/Rendah, (Hipotensi), Hiperkolesterol, Penyempitan/Penyumbatan Pembuluh Darah Otak dan lainnya?
                   </label>
                   <div class='RadioButton Item'>
-                    <input id='RadioButtonProspectiveInsuredCardiacYes' name='RadioButtonProspectiveInsuredCardiac' type='radio' value='true'>
+                    <input data-popup-type='health' id='RadioButtonProspectiveInsuredCardiacYes' name='RadioButtonProspectiveInsuredCardiac' type='radio' value='true'>
                     <label class='RadioButton' for='RadioButtonProspectiveInsuredCardiacYes'>Ya</label>
                     <div class='Separator'></div>
-                    <input id='RadioButtonProspectiveInsuredCardiacNo' name='RadioButtonProspectiveInsuredCaridac' type='radio' value='false'>
+                    <input data-popup-type='health' id='RadioButtonProspectiveInsuredCardiacNo' name='RadioButtonProspectiveInsuredCaridac' type='radio' value='false'>
                     <label class='RadioButton' for='RadioButtonProspectiveInsuredCardiacNo'>Tidak</label>
                   </div>
                 </div>
+                <input class='ButtonPreview' data-popup-type='health' id='ButtonPreviewProspectiveInsuredCardiac' name='RadioButtonProspectiveInsuredCardiac' type='button' value='View recent input'>
               </li>
               <li>
                 <div class='Container'>
-                  <label class='Item' for='DigestYes' id='LabelDigest'>
+                  <label class='Item' for='RadioButtonProspectiveInsuredDigestYes' id='LabelProspectiveInsuredDigest'>
                     Gangguan fungsi/sistem Pencernaan & Organ dalam Perut/Lambung, Maag, Hernia, Hepatitis dan lainnya?
                   </label>
                   <div class='RadioButton Item'>
-                    <input id='RadioButtonProspectiveInsuredDigestYes' name='RadioButtonProspectiveInsuredDigest' type='radio' value='true'>
+                    <input data-popup-type='health' id='RadioButtonProspectiveInsuredDigestYes' name='RadioButtonProspectiveInsuredDigest' type='radio' value='true'>
                     <label class='RadioButton' for='RadioButtonProspectiveInsuredDigestYes'>Ya</label>
                     <div class='Separator'></div>
-                    <input id='RadioButtonProspectiveInsuredDigestNo' name='RadioButtonProspectiveInsuredDigest' type='radio' value='false'>
+                    <input data-popup-type='health' id='RadioButtonProspectiveInsuredDigestNo' name='RadioButtonProspectiveInsuredDigest' type='radio' value='false'>
                     <label class='RadioButton' for='RadioButtonProspectiveInsuredDigestNo'>Tidak</label>
                   </div>
                 </div>
+                <input class='ButtonPreview' data-popup-type='health' id='ButtonPreviewProspectiveInsuredDigest' name='RadioButtonProspectiveInsuredDigest' type='button' value='View recent input'>
               </li>
               <li>
                 <div class='Container'>
-                  <label class='Item' for='NerveYes' id='LabelNerve'>
+                  <label class='Item' for='RadioButtonProspectiveInsuredNerveYes' id='LabelProspectiveInsuredNerve'>
                     Gangguan fungsi/sistem Saraf dan Otot, Vertigo, Stroke, Sering Pusing atau Pingsan, Epilepsi (kejang), Kelumpuhan, Kesemutan, Baal, Gangguan Kejiwaan dan lainnya?
                   </label>
                   <div class='RadioButton Item'>
-                    <input id='RadioButtonProspectiveInsuredNerveYes' name='RadioButtonProspectiveInsuredNerve' type='radio' value='true'>
+                    <input data-popup-type='health' id='RadioButtonProspectiveInsuredNerveYes' name='RadioButtonProspectiveInsuredNerve' type='radio' value='true'>
                     <label class='RadioButton' for='RadioButtonProspectiveInsuredNerveYes'>Ya</label>
                     <div class='Separator'></div>
-                    <input id='RadioButtonProspectiveInsuredNerveNo' name='RadioButtonProspectiveInsuredNerve' type='radio' value='false'>
+                    <input data-popup-type='health' id='RadioButtonProspectiveInsuredNerveNo' name='RadioButtonProspectiveInsuredNerve' type='radio' value='false'>
                     <label class='RadioButton' for='RadioButtonProspectiveInsuredNerveNo'>Tidak</label>
                   </div>
                 </div>
+                <input class='ButtonPreview' data-popup-type='health' id='ButtonPreviewProspectiveInsurednerve' name='RadioButtonProspectiveInsuredNerve' type='button' value='View recent input'>
               </li>
               <li>
                 <div class='Container'>
-                  <label class='Item' for='LiverYes' id='LabelLiver'>
+                  <label class='Item' for='RadioButtonProspectiveInsuredLiverYes' id='LabelProspectiveInsuredLiver'>
                     Gangguan fungsi/sistem Hati dan Pankreas, Kencing Manis (Diabetes Melitus), Batu Empedu, Tumor Hati, penyakit Limpa dan lainnya?
                   </label>
                   <div class='RadioButton Item'>
-                    <input id='RadioButtonProspectiveInsuredLiverYes' name='RadioButtonProspectiveInsuredLiver' type='radio' value='true'>
+                    <input data-popup-type='health' id='RadioButtonProspectiveInsuredLiverYes' name='RadioButtonProspectiveInsuredLiver' type='radio' value='true'>
                     <label class='RadioButton' for='RadioButtonProspectiveInsuredLiverYes'>Ya</label>
                     <div class='Separator'></div>
-                    <input id='RadioButtonProspectiveInsuredLiverNo' name='RadioButtonProspectiveInsuredLiver' type='radio' value='false'>
+                    <input data-popup-type='health' id='RadioButtonProspectiveInsuredLiverNo' name='RadioButtonProspectiveInsuredLiver' type='radio' value='false'>
                     <label class='RadioButton' for='RadioButtonProspectiveInsuredLiverNo'>Tidak</label>
                   </div>
                 </div>
+                <input class='ButtonPreview' data-popup-type='health' id='ButtonPreviewProspectiveInsuredLiver' name='RadioButtonProspectiveInsuredLiver' type='button' value='View recent input'>
               </li>
               <li>
                 <div class='Container'>
-                  <label class='Item' for='ReproductionYes' id='LabelReproduction'>
+                  <label class='Item' for='RadioButtonProspectiveInsuredReproductionYes' id='LabelProspectiveInsuredReproduction'>
                     Gangguan fungsi/sistem Kemih, Batu Ginjal, Gangguan Prostat, Gagal Ginjal, Organ Kelamin dan penyakit akibat hubungan seksual?
                   </label>
                   <div class='RadioButton Item'>
-                    <input id='RadioButtonProspectiveInsuredReproductionYes' name='RadioButtonProspectiveInsuredReproduction' type='radio' value='true'>
+                    <input data-popup-type='health' id='RadioButtonProspectiveInsuredReproductionYes' name='RadioButtonProspectiveInsuredReproduction' type='radio' value='true'>
                     <label class='RadioButton' for='RadioButtonProspectiveInsuredReproductionYes'>Ya</label>
                     <div class='Separator'></div>
-                    <input id='RadioButtonProspectiveInsuredReproductionNo' name='RadioButtonProspectiveInsuredReproduction' type='radio' value='false'>
+                    <input data-popup-type='health' id='RadioButtonProspectiveInsuredReproductionNo' name='RadioButtonProspectiveInsuredReproduction' type='radio' value='false'>
                     <label class='RadioButton' for='RadioButtonProspectiveInsuredReproductionNo'>Tidak</label>
                   </div>
                 </div>
+                <input class='ButtonPreview' data-popup-type='health' id='ButtonPreviewProspectiveInsuredReproduction' name='RadioButtonProspectiveInsuredReproduction' type='button' value='View recent input'>
               </li>
               <li>
                 <div class='Container'>
-                  <label class='Item' for='MotionYes' id='LabelMotion'>
+                  <label class='Item' for='RadioButtonProspectiveInsuredMotionYes' id='LabelProspectiveInsuredMotion'>
                     Gangguan fungsi/sistem Tulang, Otot, Sendi, Kulit?
                   </label>
                   <div class='RadioButton Item'>
-                    <input id='RadioButtonProspectiveInsuredMotionYes' name='RadioButtonProspectiveInsuredMotion' type='radio' value='true'>
+                    <input data-popup-type='health' id='RadioButtonProspectiveInsuredMotionYes' name='RadioButtonProspectiveInsuredMotion' type='radio' value='true'>
                     <label class='RadioButton' for='RadioButtonProspectiveInsuredMotionYes'>Ya</label>
                     <div class='Separator'></div>
-                    <input id='RadioButtonProspectiveInsuredMotionNo' name='RadioButtonProspectiveInsuredMotion' type='radio' value='false'>
+                    <input data-popup-type='health' id='RadioButtonProspectiveInsuredMotionNo' name='RadioButtonProspectiveInsuredMotion' type='radio' value='false'>
                     <label class='RadioButton' for='RadioButtonProspectiveInsuredMotionNo'>Tidak</label>
                   </div>
                 </div>
+                <input class='ButtonPreview' data-popup-type='health' id='ButtonPreviewProspectiveInsuredMotion' name='RadioButtonProspectiveInsuredMotion' type='button' value='View recent input'>
               </li>
               <li>
                 <div class='Container'>
-                  <label class='Item' for='BloodYes' id='LabelBlood'>
+                  <label class='Item' for='RadioButtonProspectiveInsuredBloodYes' id='LabelProspectiveInsuredBlood'>
                     Gangguan fungsi/sistem Kelenjar dan Darah, Kelenjar Gondok, Kelenjar Getah Bening, Gangguan Hormon, Hemofilia, Anemia, Thalassemia, Leukemia?
                   </label>
                   <div class='RadioButton Item'>
-                    <input id='RadioButtonProspectiveInsuredBloodYes' name='RadioButtonProspectiveInsuredBlood' type='radio' value='true'>
+                    <input data-popup-type='health' id='RadioButtonProspectiveInsuredBloodYes' name='RadioButtonProspectiveInsuredBlood' type='radio' value='true'>
                     <label class='RadioButton' for='RadioButtonProspectiveInsuredBloodYes'>Ya</label>
                     <div class='Separator'></div>
-                    <input id='RadioButtonProspectiveInsuredBloodNo' name='RadioButtonProspectiveInsuredBlood' type='radio' value='false'>
+                    <input data-popup-type='health' id='RadioButtonProspectiveInsuredBloodNo' name='RadioButtonProspectiveInsuredBlood' type='radio' value='false'>
                     <label class='RadioButton' for='RadioButtonProspectiveInsuredBloodNo'>Tidak</label>
                   </div>
                 </div>
+                <input class='ButtonPreview' data-popup-type='health' id='ButtonPreviewProspectiveInsuredBlood' name='RadioButtonProspectiveInsuredBlood' type='button' value='View recent input'>
               </li>
               <li>
                 <div class='Container'>
-                  <label class='Item' for='ImmuneYes' id='LabelImmune'>
+                  <label class='Item' for='RadioButtonProspectiveInsuredImmuneYes' id='LabelProspectiveInsuredImmune'>
                     Gangguan fungsi/sistem Kekebalan Tubuh,HIV/AIDS atau segala gejala yang berhubungan dengan AIDS (demam, diare kronis, penurunan berat badan yang tidak diketahui penyebabnya), Malaria, Lupus dan lainnya?
                   </label>
                   <div class='RadioButton Item'>
-                    <input id='RadioButtonProspectiveInsuredImmuneYes' name='RadioButtonProspectiveInsuredImmune' type='radio' value='true'>
+                    <input data-popup-type='health' id='RadioButtonProspectiveInsuredImmuneYes' name='RadioButtonProspectiveInsuredImmune' type='radio' value='true'>
                     <label class='RadioButton' for='RadioButtonProspectiveInsuredImmuneYes'>Ya</label>
                     <div class='Separator'></div>
-                    <input id='RadioButtonProspectiveInsuredImmuneNo' name='RadioButtonProspectiveInsuredImmune' type='radio' value='false'>
+                    <input data-popup-type='health' id='RadioButtonProspectiveInsuredImmuneNo' name='RadioButtonProspectiveInsuredImmune' type='radio' value='false'>
                     <label class='RadioButton' for='RadioButtonProspectiveInsuredImmuneNo'>Tidak</label>
                   </div>
                 </div>
+                <input class='ButtonPreview' data-popup-type='health' id='ButtonPreviewProspectiveInsuredImmune' name='RadioButtonProspectiveInsuredImmune' type='button' value='View recent input'>
               </li>
               <li>
                 <div class='Container'>
-                  <label class='Item' for='CancerYes' id='LabelCancer'>
+                  <label class='Item' for='RadioButtonProspectiveInsuredCancerYes' id='LabelProspectiveInsuredCancer'>
                     Gangguan fungsi Pertumbuhan Sel, Tumor, Kista, Kanker, Benjolan pada permukaan kulit atau pertumbuhan abnormal lainnya?
                   </label>
                   <div class='RadioButton Item'>
-                    <input id='RadioButtonProspectiveInsuredCancerYes' name='RadioButtonProspectiveInsuredCancer' type='radio' value='true'>
+                    <input data-popup-type='health' id='RadioButtonProspectiveInsuredCancerYes' name='RadioButtonProspectiveInsuredCancer' type='radio' value='true'>
                     <label class='RadioButton' for='RadioButtonProspectiveInsuredCancerYes'>Ya</label>
                     <div class='Separator'></div>
-                    <input id='RadioButtonProspectiveInsuredCancerNo' name='RadioButtonProspectiveInsuredCancer' type='radio' value='false'>
+                    <input data-popup-type='health' id='RadioButtonProspectiveInsuredCancerNo' name='RadioButtonProspectiveInsuredCancer' type='radio' value='false'>
                     <label class='RadioButton' for='RadioButtonProspectiveInsuredCancerNo'>Tidak</label>
                   </div>
                 </div>
+                <input class='ButtonPreview' data-popup-type='health' id='ButtonPreviewProspectiveInsuredCancer' name='RadioButtonProspectiveInsuredCancer' type='button' value='View recent input'>
               </li>
               <li>
                 <div class='Container'>
-                  <label class='Item' for='OtherIllnessYes' id='LabelOtherIllness'>
+                  <label class='Item' for='RadioButtonProspectiveInsuredOtherIllnessYes' id='LabelProspectiveInsuredOtherIllness'>
                     Gangguan Kesehatan lainnya yang tidak/belum dinyatakan diatas termasuk namun tidak terbatas pada kelainan bentuk tubuh, kelainan/cacat fisik, kelainan/cacat bawaan dan lainnya?
                   </label>
                   <div class='RadioButton Item'>
-                    <input id='RadioButtonProspectiveInsuredOtherIllnessYes' name='RadioButtonProspectiveInsuredOtherIllness' type='radio' value='true'>
+                    <input data-popup-type='health' id='RadioButtonProspectiveInsuredOtherIllnessYes' name='RadioButtonProspectiveInsuredOtherIllness' type='radio' value='true'>
                     <label class='RadioButton' for='RadioButtonProspectiveInsuredOtherIllnessYes'>Ya</label>
                     <div class='Separator'></div>
-                    <input id='RadioButtonProspectiveInsuredOtherIllnessNo' name='RadioButtonProspectiveInsuredOtherIllness' type='radio' value='false'>
+                    <input data-popup-type='health' id='RadioButtonProspectiveInsuredOtherIllnessNo' name='RadioButtonProspectiveInsuredOtherIllness' type='radio' value='false'>
                     <label class='RadioButton' for='RadioButtonProspectiveInsuredOtherIllnessNo'>Tidak</label>
                   </div>
                 </div>
+                <input class='ButtonPreview' data-popup-type='health' id='ButtonPreviewProspectiveInsuredOtherIllness' name='RadioButtonProspectiveInsuredOtherIllness' type='button' value='View recent input'>
               </li>
             </ol>
           </li>
           <hr>
           <li>
             <div class='Container'>
-              <label class='Item' for='SPAJProposalYes' id='LabelSPAJProposal'>
+              <label class='Item' for='RadioButtonProspectiveInsuredSPAJProposalYes' id='LabelProspectiveInsuredSPAJProposal'>
                 Apakah Anda telah memiliki atau sedang mengajukan pertanggungan Asuransi Jiwa, kecelakaan, kesehatan, pemulihan polis? Serta apakah pengajuan Anda pernah ditolak/ ditangguhkan/dikenakan ekstra Premi diubah dalam bentuk apapun oleh perusahaan Asuransi Jiwa?
               </label>
               <div class='RadioButton Item'>
-                <input id='RadioButtonProspectiveInsuredSPAJProposalYes' name='RadioButtonProspectiveInsuredSPAJProposal' type='radio' value='true'>
+                <input data-popup-type='spajproposal' id='RadioButtonProspectiveInsuredSPAJProposalYes' name='RadioButtonProspectiveInsuredSPAJProposal' type='radio' value='true'>
                 <label class='RadioButton' for='RadioButtonProspectiveInsuredSPAJProposalYes'>Ya</label>
                 <div class='Separator'></div>
-                <input id='RadioButtonProspectiveInsuredSPAJProposalNo' name='RadioButtonProspectiveInsuredSPAJProposal' type='radio'>
+                <input data-popup-type='spajproposal' id='RadioButtonProspectiveInsuredSPAJProposalNo' name='RadioButtonProspectiveInsuredSPAJProposal' type='radio'>
                 <label class='RadioButton' for='RadioButtonProspectiveInsuredSPAJProposalNo'>Tidak</label>
               </div>
             </div>
@@ -426,14 +413,14 @@
           <hr>
           <li>
             <div class='Container'>
-              <label class='Item' for='ClaimYes' id='LabelClaim'>
+              <label class='Item' for='RadioButtonProspectiveInsuredClaimYes' id='LabelProspectiveInsuredClaim'>
                 Apakah Anda pernah mengajukan klaim ke perusahaan Asuransi Jiwa? Jika “Ya, mohon jelaskan alasannya.
               </label>
               <div class='RadioButton Item'>
-                <input id='RadioButtonProspectiveInsuredClaimYes' name='RadioButtonProspectiveInsuredClaim' type='radio' value='true'>
+                <input data-popup-type='general' id='RadioButtonProspectiveInsuredClaimYes' name='RadioButtonProspectiveInsuredClaim' type='radio' value='true'>
                 <label class='RadioButton' for='RadioButtonProspectiveInsuredClaimYes'>Ya</label>
                 <div class='Separator'></div>
-                <input id='RadioButtonProspectiveInsuredClaimNo' name='RadioButtonProspectiveInsuredClaim' type='radio' value='false'>
+                <input data-popup-type='general' id='RadioButtonProspectiveInsuredClaimNo' name='RadioButtonProspectiveInsuredClaim' type='radio' value='false'>
                 <label class='RadioButton' for='RadioButtonProspectiveInsuredClaimNo'>Tidak</label>
               </div>
             </div>
@@ -441,15 +428,15 @@
           <hr>
           <li>
             <div class='Container'>
-              <label class='Item' for='DiagnosticYes' id='LabelDiagnostic'>
+              <label class='Item' for='RadioButtonProspectiveInsuredDiagnosticYes' id='LabelProspectiveInsuredDiagnostic'>
                 Apakah Anda pernah mendapatkan atau bermaksud menjalani pemeriksaan kesehatan diagnostik, seperti Sinar-X, USG, CT-scan, MRI, EKG, Treadmill, pemeriksaan darah, pemeriksaan urin, dan lain-lain?
               </label>
               <div class='RadioButton Item'>
-                <input id='RadioButtonProspectiveInsuredDiagnosticYes' name='RadioButtonProspectiveInsuredDiagnostic' type='radio' value='true'>
+                <input data-popup-type='general' id='RadioButtonProspectiveInsuredDiagnosticYes' name='RadioButtonProspectiveInsuredDiagnostic' type='radio' value='true'>
                 <label class='RadioButton' for='RadioButtonProspectiveInsuredDiagnosticYes'>Ya</label>
                 <div class='Separator'></div>
                 <input id='RadioButtonProspectiveInsuredDiagnosticNo' name='RadioButtonProspectiveInsuredDiagnostic' type='radio'>
-                <label class='RadioButton' for='RadioButtonProspectiveInsuredDiagnosticNo' value='false'>Tidak</label>
+                <label class='RadioButton' data-popup-type='general' for='RadioButtonProspectiveInsuredDiagnosticNo' value='false'>Tidak</label>
               </div>
             </div>
           </li>
@@ -482,56 +469,56 @@
             <ol>
               <li>
                 <div class='Container'>
-                  <label class='Item' for='Pregnant' id='LabelPregnant'>
+                  <label class='Item' for='RadioButtonProspectiveInsuredPregnantYes' id='LabelProspectiveInsuredPregnant'>
                     Apakah Anda sedang hamil?
                   </label>
                   <div class='RadioButton Item'>
-                    <input id='RadioButtonProspectiveInsuredPregnantStateYes' name='RadioButtonProspectiveInsuredPregnant' type='radio' value='true'>
+                    <input data-popup-type='general' id='RadioButtonProspectiveInsuredPregnantStateYes' name='RadioButtonProspectiveInsuredPregnant' type='radio' value='true'>
                     <label class='RadioButton' for='RadioButtonProspectiveInsuredPregnantStateYes'>Ya</label>
                     <div class='Separator'></div>
-                    <input id='RadioButtonProspectiveInsuredPregnantStateNo' name='RadioButtonProspectiveInsuredPregnant' type='radio' value='false'>
+                    <input data-popup-type='general' id='RadioButtonProspectiveInsuredPregnantStateNo' name='RadioButtonProspectiveInsuredPregnant' type='radio' value='false'>
                     <label class='RadioButton' for='RadioButtonProspectiveInsuredPregnantStateNo'>Tidak</label>
                   </div>
                 </div>
               </li>
               <li>
                 <div class='Container'>
-                  <label class='Item' for='PregnancyIllnessYes' id='LabelPregnancyIllness'>
+                  <label class='Item' for='RadioButtonProspectiveInsuredPregnancyIllnessYes' id='LabelProspectiveInsuredPregnancyIllness'>
                     Adakah komplikasi pada kehamilan termasuk persalinan secara sectio caesaria yang dilakukan karena menderita suatu penyakit (Darah Tinggi, Hepatitis, Diabetes dan lain-lain)?
                   </label>
                   <div class='RadioButton Item'>
-                    <input id='RadioButtonProspectiveInsuredPregnancyIllnessYes' name='RadioButtonProspectiveInsuredPregnancyIllness' type='radio' value='true'>
+                    <input data-popup-type='general' id='RadioButtonProspectiveInsuredPregnancyIllnessYes' name='RadioButtonProspectiveInsuredPregnancyIllness' type='radio' value='true'>
                     <label class='RadioButton' for='RadioButtonProspectiveInsuredPregnancyIllnessYes'>Ya</label>
                     <div class='Separator'></div>
-                    <input id='RadioButtonProspectiveInsuredPregnancyIllnessNo' name='RadioButtonProspectiveInsuredPregnancyIllness' type='radio' value='false'>
+                    <input data-popup-type='general' id='RadioButtonProspectiveInsuredPregnancyIllnessNo' name='RadioButtonProspectiveInsuredPregnancyIllness' type='radio' value='false'>
                     <label class='RadioButton' for='RadioButtonProspectiveInsuredPregnancyIllnessNo'>Tidak</label>
                   </div>
                 </div>
               </li>
               <li>
                 <div class='Container'>
-                  <label class='Item' for='FemaleAbnormalityYes' id='LabelFemaleAbnormality'>
+                  <label class='Item' for='RadioButtonProspectiveInsuredFemaleAbnormalityYes' id='LabelProspectiveInsuredFemaleAbnormality'>
                     Apakah Anda mempunyai kelainan payudara/organ kewanitaan lainnya termasuk haid yang tidak teratur? Jika “Ya” jelaskan nama kelainan atau komplikasi dan nama dokter yang merawat pada kolom (Siapa, Apa, Kapan, Dimana, Pengobatan yang dilakukan, Bagaimana).
                   </label>
                   <div class='RadioButton Item'>
-                    <input id='RadioButtonProspectiveInsuredFemaleAbnormalityYes' name='RadioButtonProspectiveInsuredFemaleAbnormality' type='radio' value='true'>
+                    <input data-popup-type='general' id='RadioButtonProspectiveInsuredFemaleAbnormalityYes' name='RadioButtonProspectiveInsuredFemaleAbnormality' type='radio' value='true'>
                     <label class='RadioButton' for='RadioButtonProspectiveInsuredFemaleAbnormalityYes'>Ya</label>
                     <div class='Separator'></div>
-                    <input id='RadioButtonProspectiveInsuredFemaleAbnormalityNo' name='RadioButtonProspectiveInsuredFemaleAbnormality' type='radio' value='false'>
+                    <input data-popup-type='general' id='RadioButtonProspectiveInsuredFemaleAbnormalityNo' name='RadioButtonProspectiveInsuredFemaleAbnormality' type='radio' value='false'>
                     <label class='RadioButton' for='RadioButtonProspectiveInsuredFemaleAbnormalityNo'>Tidak</label>
                   </div>
                 </div>
               </li>
               <li>
                 <div class='Container'>
-                  <label class='Item' for='PapSmearYes' id='LabelPapSmear'>
+                  <label class='Item' for='RadioButtonProspectiveInsuredPapSmearYes' id='LabelProspectiveInsuredPapSmear'>
                     Apakah Anda pernah melakukan pemeriksaan Pap Smear dalam 1 (satu) tahun terakhir? Jika “Ya” jelaskan bagaimana hasilnya dan kapan dilakukan pemeriksaan tersebut?
                   </label>
                   <div class='RadioButton Item'>
-                    <input id='RadioButtonProspectiveInsuredPapSmearYes' name='RadioButtonProspectiveInsuredPapSmear' type='radio' value='true'>
+                    <input data-popup-type='general' id='RadioButtonProspectiveInsuredPapSmearYes' name='RadioButtonProspectiveInsuredPapSmear' type='radio' value='true'>
                     <label class='RadioButton' for='RadioButtonProspectiveInsuredPapSmearYes'>Ya</label>
                     <div class='Separator'></div>
-                    <input id='RadioButtonProspectiveInsuredPapSmearNo' name='RadioButtonProspectiveInsuredPapSmear' type='radio' value='false'>
+                    <input data-popup-type='general' id='RadioButtonProspectiveInsuredPapSmearNo' name='RadioButtonProspectiveInsuredPapSmear' type='radio' value='false'>
                     <label class='RadioButton' for='RadioButtonProspectiveInsuredPapSmearNo'>Tidak</label>
                   </div>
                 </div>
@@ -541,14 +528,14 @@
           <hr>
           <li>
             <div class='Container'>
-              <label class='Item' for='HeartDissorderYes' id='LabelHeartDissorder'>
+              <label class='Item' for='RadioButtonProspectiveInsuredHeartDissorderYes' id='LabelProspectiveInsuredHeartDissorder'>
                 Apakah ada anggota keluarga Anda (orang tua, anak, saudara kandung) yang menderita/dinyatakan terdiagnosa mengidap kelainan Jantung Koroner, Stroke, Kencing Manis (Diabetes Melitus), Kanker atau penyakit keturunan lainnya? (Jika “Ya” mohon agar dijelaskan pada kolom dibawah ini)
               </label>
               <div class='RadioButton Item'>
-                <input id='RadioButtonProspectiveInsuredHeartDissorderYes' name='RadioButtonProspectiveInsuredHeartDissorder' type='radio' value='true'>
+                <input data-popup-type='general' id='RadioButtonProspectiveInsuredHeartDissorderYes' name='RadioButtonProspectiveInsuredHeartDissorder' type='radio' value='true'>
                 <label class='RadioButton' for='RadioButtonProspectiveInsuredHeartDissorderYes'>Ya</label>
                 <div class='Separator'></div>
-                <input id='RadioButtonProspectiveInsuredHeartDissorderYes' name='RadioButtonProspectiveInsuredHeartDissorder' type='radio' value='false'>
+                <input data-popup-type='general' id='RadioButtonProspectiveInsuredHeartDissorderYes' name='RadioButtonProspectiveInsuredHeartDissorder' type='radio' value='false'>
                 <label class='RadioButton' for='RadioButtonProspectiveInsuredHeartDissorderNo'>Tidak</label>
               </div>
             </div>
@@ -556,17 +543,63 @@
           <hr>
         </ol>
       </form>
-      <section id='PopUpAdditionalQuestion'>
+      <section id='PopUpGeneral'>
         <form id='FormAdditionalQuestion'>
           <header>
-            <input class='ButtonPrimary PositionerLeft' id='ButtonAdditionalQuestionCancel' type='button' value='Cancel'>
-            <input class='ButtonPrimary PositionerRight' id='ButtonAdditionalQuestionDone' type='button' value='Done'>
+            <input class='ButtonPrimary PositionerLeft' id='ButtonCancel' type='button' value='Cancel'>
+            <input class='ButtonPrimary PositionerRight' id='ButtonDone' type='button' value='Done'>
             <h2>Pertanyaan Kesehatan</h2>
           </header>
           <fieldset>
-            <label class='Wrap' for='TextAdditionalQuestion' id='LabelAdditionalQuestion'></label>
-            <label class='Wrap' for='TextAdditionalQuestion' id='LabelAdditionalNote'>silahkan memberikan rincian lebih lanjut</label>
-            <input class='Full Multi' id='TextAdditionalQuestion' type='text'>
+            <label class='Wrap' for='TextDetail' id='LabelDetail'></label>
+            <label class='Wrap' for='TextDetail' id='LabelNote'>silahkan memberikan rincian lebih lanjut</label>
+            <input class='Full Single' id='TextDetail' type='text'>
+          </fieldset>
+        </form>
+      </section>
+      <section id='PopUpHealth'>
+        <form id='FormAdditionalQuestion'>
+          <header>
+            <input class='ButtonPrimary PositionerLeft' id='ButtonCancel' type='button' value='Cancel'>
+            <input class='ButtonPrimary PositionerRight' id='ButtonDone' type='button' value='Done'>
+            <h2>Pertanyaan Kesehatan</h2>
+          </header>
+          <fieldset>
+            <label class='Wrap' for='TextDiseaseName' id='LabelDiseaseName'>Nama Penyakit</label>
+            <input class='Full Single' id='TextDiseaseName' type='text'>
+            <label class='Wrap' for='DateSickFrom' id='LabelSickFrom'>Kapan Mulai Sakit</label>
+            <input class='Full Single' id='DateSickFrom' type='text'>
+            <label class='Wrap' for='TextSickDuration' id='LabelSickDuration'>Lama Sakit</label>
+            <input class='Full Single' id='TextSickDuration' type='text'>
+            <label class='Wrap' for='TextDoctorName' id='LabelDoctorName'>Nama Dokter</label>
+            <input class='Full Single' id='TextDoctorName' type='text'>
+            <label class='Wrap' for='TextHospital' id='LabelHospital'>Rumah Sakit / Klinik / Laboratorium / Puskesmas</label>
+            <input class='Full Single' id='TextHospital' type='text'>
+            <label class='Wrap' for='TextAddress' id='LabelAddress'>Alamat</label>
+            <input class='Full Single' id='TextAddress' type='text'>
+            <label class='Wrap' for='TextTelephone' id='LabelTelephone'>Nomor Telepon</label>
+            <input class='Full Single' id='TextTelephone' type='text'>
+          </fieldset>
+        </form>
+      </section>
+      <section id='PopUpSPAJProposal'>
+        <form id='FormAdditionalQuestion'>
+          <header>
+            <input class='ButtonPrimary PositionerLeft' id='ButtonCancel' type='button' value='Cancel'>
+            <input class='ButtonPrimary PositionerRight' id='ButtonDone' type='button' value='Done'>
+            <h2>Pertanyaan Kesehatan</h2>
+          </header>
+          <fieldset>
+            <label class='Wrap' for='TextCompanyName' id='LabelCompanyName'>Nama Perusahaan</label>
+            <input class='Full Single' id='TextCompanyName' type='text'>
+            <label class='Wrap' for='TextPolicyNumber' id='LabelPolicyNumber'>Nomor Polix</label>
+            <input class='Full Single' id='TextPolicyNumber' type='text'>
+            <label class='Wrap' for='DatePublished' id='LabelDatePubliched'>Tanggal Diterbitkan</label>
+            <input class='Full Single' id='DatePublished' type='text'>
+            <label class='Wrap' for='TextBasicSumAssured' id='LabelBasicSumAssured'>Uang Pertanggungan</label>
+            <input class='Full Single' id='TextBasicSumAssured' type='text'>
+            <label class='Wrap' for='TextDecision' id='LabelDecision'>Hasil Keputusan</label>
+            <input class='Full Multi' id='TextDecision' type='text'>
           </fieldset>
         </form>
       </section>
