@@ -26,4 +26,5 @@
 -(void)signIlustrationMaster:(NSString *)SINO;
 -(BOOL)isSignedIlustration:(NSString *)SINo;
 -(void)updateIlustrationMasterDate:(NSString *)SINO;
+-(NSDictionary *)getIlustrationDataForSI:(NSString *)SINO;
 @end
