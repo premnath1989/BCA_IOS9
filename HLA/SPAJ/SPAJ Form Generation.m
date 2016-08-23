@@ -21,6 +21,7 @@
 #import "NDHTMLtoPDF.h"
 #import "ModelSPAJSignature.h"
 #import "Alert.h"
+#import "ModelAgentProfile.h"
 // DECLARATION
 
 @interface SPAJFormGeneration ()
@@ -39,6 +40,7 @@
     Formatter* formatter;
     SPAJPDFWebViewController* spajPDFWebView;
     ModelSPAJFormGeneration* modelSPAJFormGeneration;
+    ModelAgentProfile* modelAgentProfile;
     NDHTMLtoPDF *PDFCreator;
     ModelSPAJSignature* modelSPAJSignature;
     Alert* alert;
@@ -79,6 +81,7 @@
         alert = [[Alert alloc]init];
         formatter = [[Formatter alloc]init];
         modelSPAJFormGeneration = [[ModelSPAJFormGeneration alloc]init];
+        modelAgentProfile = [[ModelAgentProfile alloc]init];
         objectUserInterface = [[UserInterface alloc] init];
         modelSPAJSignature = [[ModelSPAJSignature alloc]init];
         [self setNavigationBar];
@@ -218,6 +221,28 @@
     {
         [_delegateSPAJMain voidGoToAddSignature];
     };
+
+    #pragma mark create additional dictionary
+    -(NSDictionary *)getDictionaryForReferralData{
+        NSMutableDictionary* dictProspectReferral=[[NSMutableDictionary alloc]initWithDictionary:[modelAgentProfile getAgentData]];
+        NSMutableDictionary* dictReferralData=[[NSMutableDictionary alloc]init];
+        [dictReferralData setObject:[dictProspectReferral valueForKey:@""] forKey:@""];
+        return dictReferralData;
+    }
+
+    -(NSDictionary *)getDictionaryForAgentData{
+        NSMutableDictionary* dictAgentProfile=[[NSMutableDictionary alloc]initWithDictionary:[modelAgentProfile getAgentData]];
+        NSMutableDictionary* dictAgentData=[[NSMutableDictionary alloc]init];
+        [dictAgentData setObject:[dictAgentProfile valueForKey:@""] forKey:@""];
+        return dictAgentData;
+    }
+
+    -(NSDictionary *)getDictionaryForIllustrationData{
+        NSMutableDictionary* dictIllustration=[[NSMutableDictionary alloc]initWithDictionary:[modelAgentProfile getAgentData]];
+        NSMutableDictionary* dictIllustrationData=[[NSMutableDictionary alloc]init];
+        [dictIllustrationData setObject:[dictIllustration valueForKey:@""] forKey:@""];
+        return dictIllustrationData;
+    }
 
     - (NSMutableDictionary*)readfromDB:(NSMutableDictionary*) params{
         NSString *SPAJTransactionID = [dictTransaction valueForKey:@"SPAJTransactionID"];

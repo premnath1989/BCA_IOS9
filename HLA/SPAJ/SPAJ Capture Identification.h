@@ -24,6 +24,7 @@
 #import "ModelSIPOData.h"
 #import "ModelSPAJSignature.h"
 #import "SPAJIDCapturedViewController.h"
+#import "ModelProspectProfile.h"
 // DECLARATION
 
 /*@protocol SPAJMainDelegate
@@ -45,6 +46,7 @@
         CGRect imagePickerRect;
         Alert* alert;
         UserInterface *objectUserInterface;
+        ModelProspectProfile *modelProspectProfile;
         ModelSPAJIDCapture *modelSPAJIDCapture;
         ModelSPAJTransaction* modelSPAJTransaction;
         ModelSIPOData* modelSIPOData;

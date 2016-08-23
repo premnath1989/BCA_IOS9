@@ -57,7 +57,8 @@
     NSInteger *count = 0;
     while ([result next]) {
         count = count + 1;
-        desc =[result objectForColumnName:@"IdentityDesc"];
+        //desc =[result objectForColumnName:@"IdentityDesc"];
+        desc =[result stringForColumn:@"IdentityDesc"];
     }
     [result close];
     

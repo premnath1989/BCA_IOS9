@@ -34,4 +34,10 @@
 -(NSString *)getDateTodayByAddingDays:(NSString *)dateFormat DaysAdded:(int)intDaysAdded;
 
 -(NSString *)calculateTimeRemaining:(NSString *)stringExpiredDate;
+
+-(NSString *)getGenderNameForHtml:(NSString *)stringGender;
+-(NSString *)getIDNameForHtml:(NSString *)stringID;
+-(NSString *)getNationalityNameForHtml:(NSString *)stringNationality;
+-(NSString *)getReligionNameForHtml:(NSString *)stringReligion;
+-(NSString *)getRelationNameForHtml:(NSString *)stringRelation;
 @end

@@ -15,7 +15,8 @@
 NSString* const PemegangPolis = @"PemegangPolis";
 NSString* const Tertanggung = @"Tertanggung";
 NSString* const OrangTuaWali = @"OrangTuaWali";
-NSString* const TenagaPenjual = @"TenagaPenjual";
+NSString* const Payment = @"Payment";
+NSString* const Other = @"Other";
 NSString* const Front = @"Front";
 NSString* const Back = @"Back";
 // DECLARATION
@@ -42,12 +43,15 @@ NSString* const Back = @"Back";
     BOOL boolPemegangPolis;
     BOOL boolTertanggung;
     BOOL boolOrangTuaWali;
-    BOOL boolTenagaPenjual;
+    BOOL boolPayment;
+    BOOL boolOthers;
+    
     BOOL boolTenagaPenjualSigned;
     
     int indexSelected;
     NSString* stringSIRelation;
     int LAAge;
+    NSMutableArray* arrayIDBackDisabled;
 }
 @synthesize SPAJCaptureIdentificationDelegate;
 @synthesize buttonCaptureBack,buttonCaptureFront,buttonIDTypeSelection;
@@ -65,6 +69,7 @@ NSString* const Back = @"Back";
         
         alert = [[Alert alloc]init];
         objectUserInterface = [[UserInterface alloc] init];
+        modelProspectProfile = [[ModelProspectProfile alloc]init];
         modelSPAJIDCapture = [[ModelSPAJIDCapture alloc]init];
         modelSPAJTransaction = [[ModelSPAJTransaction alloc]init];
         modelSIPOData = [[ModelSIPOData alloc]init];
@@ -93,10 +98,10 @@ NSString* const Back = @"Back";
         boolPemegangPolis = false;
         boolTertanggung = false;
         boolOrangTuaWali = false;
-        boolTenagaPenjual = false;
+        boolPayment = false;
         [self initializeBooleanBasedOnTheRule];
         [self voidCheckBooleanLastState];
-        [self voidTableCellLastStateChecker:boolPemegangPolis BOOLTR:boolTertanggung BOOLOW:boolOrangTuaWali BOOLTP:boolTenagaPenjual];
+        [self voidTableCellLastStateChecker:boolPemegangPolis BOOLTR:boolTertanggung BOOLOW:boolOrangTuaWali BOOLTP:boolPayment BOOLOthers:boolOthers];
     }
 
     -(void)setNavigationBar{
@@ -109,9 +114,10 @@ NSString* const Back = @"Back";
         //mutableArrayNumberListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"1", @"2", @"3", @"4", nil];
         //mutableArrayListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"Calon Pemegang Polis ", @"Calon Tertanggung", @"Orang Tua / Wali yang sah", @"Tenaga Penjual", nil];
         //mutableArrayListOfSubTitleMenu = [[NSMutableArray alloc] initWithObjects:@"", @"",@"", @"", nil];
-        mutableArrayNumberListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"1", @"2", @"3", nil];
-        mutableArrayListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"Calon Pemegang Polis ", @"Calon Tertanggung", @"Orang Tua / Wali yang sah", nil];
-        mutableArrayListOfSubTitleMenu = [[NSMutableArray alloc] initWithObjects:@"", @"",@"", nil];
+        arrayIDBackDisabled = [[NSMutableArray alloc]initWithObjects:@"PASPOR",@"KITAS",@"KIMS/KITAS", nil];
+        mutableArrayNumberListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"1", @"2", @"3",@"4",@"5", nil];
+        mutableArrayListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"Calon Pemegang Polis ", @"Calon Tertanggung", @"Orang Tua / Wali yang sah",@"Payment",@"Other", nil];
+        mutableArrayListOfSubTitleMenu = [[NSMutableArray alloc] initWithObjects:@"", @"",@"",@"",@"", nil];
     }
 
     -(void)initializeBooleanBasedOnTheRule{
@@ -127,21 +133,33 @@ NSString* const Back = @"Back";
         boolPemegangPolis = [modelSPAJIDCapture voidCertainIDPartyCaptured:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue] IDParty:@"SPAJIDCaptureParty1"];
         boolTertanggung = [modelSPAJIDCapture voidCertainIDPartyCaptured:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue] IDParty:@"SPAJIDCaptureParty2"];
         boolOrangTuaWali = [modelSPAJIDCapture voidCertainIDPartyCaptured:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue] IDParty:@"SPAJIDCaptureParty3"];
-        boolTenagaPenjual = [modelSPAJIDCapture voidCertainIDPartyCaptured:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue] IDParty:@"SPAJIDCaptureParty4"];
+        boolPayment = [modelSPAJIDCapture voidCertainIDPartyCaptured:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue] IDParty:@"SPAJIDCaptureParty4"];
+        boolOthers = [modelSPAJIDCapture voidCertainIDPartyCaptured:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue] IDParty:@"SPAJIDCaptureParty5"];
         
         boolTenagaPenjualSigned = [modelSPAJSignature voidCertainSignaturePartyCaptured:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue] SignatureParty:@"SPAJSignatureParty4"];
         //[self voidTableCellLastStateChecker:boolPemegangPolis BOOLTR:boolTertanggung BOOLOW:boolOrangTuaWali BOOLTP:boolTenagaPenjual];
     }
 
-    -(void)voidTableCellLastStateChecker:(BOOL)boolPO BOOLTR:(BOOL)boolTR BOOLOW:(BOOL)boolOW BOOLTP:(BOOL)boolTP{
+    -(void)voidTableCellLastStateChecker:(BOOL)boolPO BOOLTR:(BOOL)boolTR BOOLOW:(BOOL)boolOW BOOLTP:(BOOL)boolTP BOOLOthers:(BOOL)boolOthers{
         if (boolPO){
             if ([stringSIRelation isEqualToString:@"DIRI SENDIRI"]){
-                //[self showDetailsForIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
+                if (boolPayment){
+                    [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:4 inSection:0]];
+                }
+                else{
+                    [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
+                }
+                
             }
             else{
                 if (LAAge<21){
                     if (boolOW){
-                        //[self showDetailsForIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
+                        if (boolPayment){
+                            [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:4 inSection:0]];
+                        }
+                        else{
+                            [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
+                        }
                     }
                     else{
                         [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
@@ -149,7 +167,12 @@ NSString* const Back = @"Back";
                 }
                 else{
                     if (boolTR){
-                        //[self showDetailsForIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
+                        if (boolPayment){
+                            [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:4 inSection:0]];
+                        }
+                        else{
+                            [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
+                        }
                     }
                     else{
                         [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
@@ -170,15 +193,25 @@ NSString* const Back = @"Back";
         switch (indexPath.row) {
             case 0:
                 //[self actionViewPhoto:nil];
+                [self showIDType:indexSelected];
+                [buttonIDTypeSelection setEnabled:false];
                 break;
             case 1:
                 //[self actionViewPhoto:nil];
+                [self showIDType:indexSelected];
+                [buttonIDTypeSelection setEnabled:false];
                 break;
             case 2:
                 //[self actionViewPhoto:nil];
+                [buttonIDTypeSelection setEnabled:true];
                 break;
             case 3:
                 //[self actionViewPhoto:nil];
+                [buttonIDTypeSelection setEnabled:false];
+                break;
+            case 4:
+                //[self actionViewPhoto:nil];
+                [buttonIDTypeSelection setEnabled:false];
                 break;
             default:
                 break;
@@ -255,6 +288,20 @@ NSString* const Back = @"Back";
         picker.cameraDevice = UIImagePickerControllerCameraDeviceFront;
         picker.showsCameraControls = NO;
         [self presentViewController:picker animated:YES completion:^ { [picker takePicture]; }];
+    }
+
+    -(void)showIDType:(int)IndexRow{
+        if (IndexRow<2)
+        {
+            stringIDTypeIdentifier = [modelProspectProfile selectProspectData:@"OtherIDType" ProspectIndex:[[dictionaryPOData valueForKey:@"PO_ClientID"] intValue]] ;
+            NSString* identityDesc = [modelIdentificationType getOtherTypeDesc:stringIDTypeIdentifier] ;
+            [buttonIDTypeSelection setTitle:identityDesc forState:UIControlStateNormal];
+        }
+        else{
+            stringIDTypeIdentifier = @"VID17" ;
+            NSString* identityDesc = [modelIdentificationType getOtherTypeDesc:stringIDTypeIdentifier] ;
+            [buttonIDTypeSelection setTitle:identityDesc forState:UIControlStateNormal];
+        }
     }
 
     -(IBAction)actionViewPhoto:(UIButton *)sender{
@@ -344,7 +391,7 @@ NSString* const Back = @"Back";
             }
             case 3:{
                 stringIDIdentifier = [modelSPAJIDCapture selectIDType:@"SPAJIDTypeParty4" SPAJSection:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
-                fileName = [NSString stringWithFormat:@"/%@%@%@%@.jpg",stringEAPPPath,TenagaPenjual,stringIDIdentifier,Front];
+                fileName = [NSString stringWithFormat:@"/%@%@%@%@.jpg",stringEAPPPath,Payment,stringIDIdentifier,Front];
                 imagePath = [filePathApp stringByAppendingString:fileName];
                 UIImage *imageID = [UIImage imageWithContentsOfFile:imagePath];
                 [imageViewFront setImage:imageID];
@@ -395,7 +442,7 @@ NSString* const Back = @"Back";
             }
             case 3:{
                 stringIDIdentifier = [modelSPAJIDCapture selectIDType:@"SPAJIDTypeParty4" SPAJSection:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
-                fileName = [NSString stringWithFormat:@"/%@%@%@%@.jpg",stringEAPPPath,TenagaPenjual,stringIDIdentifier,Back];
+                fileName = [NSString stringWithFormat:@"/%@%@%@%@.jpg",stringEAPPPath,Payment,stringIDIdentifier,Back];
                 imagePath = [filePathApp stringByAppendingString:fileName];
                 UIImage *imageID = [UIImage imageWithContentsOfFile:imagePath];
                 [imageViewBack setImage:imageID];
@@ -446,7 +493,7 @@ NSString* const Back = @"Back";
             }
             case 3:{
                 stringIDIdentifier = [modelSPAJIDCapture selectIDType:@"SPAJIDTypeParty4" SPAJSection:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
-                fileName = [NSString stringWithFormat:@"/%@%@%@%@.jpg",stringEAPPPath,TenagaPenjual,stringIDIdentifier,Front];
+                fileName = [NSString stringWithFormat:@"/%@%@%@%@.jpg",stringEAPPPath,Payment,stringIDIdentifier,Front];
                 imagePath = [filePathApp stringByAppendingString:fileName];
                 imageID = [UIImage imageWithContentsOfFile:imagePath];
                 return imageID;
@@ -499,7 +546,7 @@ NSString* const Back = @"Back";
             }
             case 3:{
                 stringIDIdentifier = [modelSPAJIDCapture selectIDType:@"SPAJIDTypeParty4" SPAJSection:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
-                fileName = [NSString stringWithFormat:@"/%@%@%@%@.jpg",stringEAPPPath,TenagaPenjual,stringIDIdentifier,Back];
+                fileName = [NSString stringWithFormat:@"/%@%@%@%@.jpg",stringEAPPPath,Payment,stringIDIdentifier,Back];
                 imagePath = [filePathApp stringByAppendingString:fileName];
                 imageID = [UIImage imageWithContentsOfFile:imagePath];
                 return imageID;
@@ -572,47 +619,49 @@ NSString* const Back = @"Back";
         }
         else
         {
-            cameraFront=false;
-            UIImagePickerControllerSourceType source = UIImagePickerControllerSourceTypeCamera;
-            if ([UIImagePickerController isSourceTypeAvailable:source])
-            {
-                imagePickerController= [[CameraViewController alloc] init];
-                imagePickerController.sourceType = source;
-                
-                CGRect rect = imagePickerController.view.frame;
-                imagePickerRect = rect;
-                CGSize frameSize = CGSizeMake(800,562.5);
-                
-                CGRect frameRect = CGRectMake((rect.size.width-frameSize.width)/2, (rect.size.height-frameSize.height)/2, frameSize.width, frameSize.height);
-                //CGRect frameRect = CGRectMake(15, 94, frameSize.width, frameSize.height);
-                
-                UIView *view = [[UIView alloc]initWithFrame:frameRect];
-                [view setBackgroundColor:[UIColor clearColor]];
-                
-                view.layer.borderWidth = 5.0;
-                view.layer.borderColor = [UIColor redColor].CGColor;
-                UILabel *lbl = [[UILabel alloc]initWithFrame:CGRectMake(10, -80, 300, 200)];
-                lbl.backgroundColor = [UIColor clearColor];
-                lbl.text = @"Please snap within the red frame";
-                [view addSubview:lbl];
-                
-                imagePickerController.cameraOverlayView = view;
-                
-                imagePickerController.delegate = self;
-                imagePickerController.modalPresentationStyle = UIModalPresentationCustom;
-                [self presentViewController:imagePickerController animated:YES completion:nil];
-            }
-            else
-            {
-                
-                UIAlertController* alertController = [UIAlertController alertControllerWithTitle:@"" message:@"Your device has no camera!!" preferredStyle:UIAlertControllerStyleAlert];
-                
-                [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            if (![arrayIDBackDisabled containsObject:buttonIDTypeSelection.currentTitle]){
+                cameraFront=false;
+                UIImagePickerControllerSourceType source = UIImagePickerControllerSourceTypeCamera;
+                if ([UIImagePickerController isSourceTypeAvailable:source])
+                {
+                    imagePickerController= [[CameraViewController alloc] init];
+                    imagePickerController.sourceType = source;
                     
-                }]];
-                dispatch_async(dispatch_get_main_queue(), ^ {
-                    [self presentViewController:alertController animated:YES completion:nil];
-                });
+                    CGRect rect = imagePickerController.view.frame;
+                    imagePickerRect = rect;
+                    CGSize frameSize = CGSizeMake(800,562.5);
+                    
+                    CGRect frameRect = CGRectMake((rect.size.width-frameSize.width)/2, (rect.size.height-frameSize.height)/2, frameSize.width, frameSize.height);
+                    //CGRect frameRect = CGRectMake(15, 94, frameSize.width, frameSize.height);
+                    
+                    UIView *view = [[UIView alloc]initWithFrame:frameRect];
+                    [view setBackgroundColor:[UIColor clearColor]];
+                    
+                    view.layer.borderWidth = 5.0;
+                    view.layer.borderColor = [UIColor redColor].CGColor;
+                    UILabel *lbl = [[UILabel alloc]initWithFrame:CGRectMake(10, -80, 300, 200)];
+                    lbl.backgroundColor = [UIColor clearColor];
+                    lbl.text = @"Please snap within the red frame";
+                    [view addSubview:lbl];
+                    
+                    imagePickerController.cameraOverlayView = view;
+                    
+                    imagePickerController.delegate = self;
+                    imagePickerController.modalPresentationStyle = UIModalPresentationCustom;
+                    [self presentViewController:imagePickerController animated:YES completion:nil];
+                }
+                else
+                {
+                    
+                    UIAlertController* alertController = [UIAlertController alertControllerWithTitle:@"" message:@"Your device has no camera!!" preferredStyle:UIAlertControllerStyleAlert];
+                    
+                    [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                        
+                    }]];
+                    dispatch_async(dispatch_get_main_queue(), ^ {
+                        [self presentViewController:alertController animated:YES completion:nil];
+                    });
+                }
             }
         }
     }
@@ -627,9 +676,18 @@ NSString* const Back = @"Back";
             else
             {
                 if ([stringSIRelation isEqualToString:@"DIRI SENDIRI"]){
-                    if (indexSelected == 3){
-                        [self copyIDImagesToSPAJFolder:imageViewFront Party:TenagaPenjual IDType:stringIDTypeIdentifier Side:Front];
-                        [self copyIDImagesToSPAJFolder:imageViewBack Party:TenagaPenjual IDType:stringIDTypeIdentifier Side:Back];
+                    if (indexSelected == 4){
+                        [self copyIDImagesToSPAJFolder:imageViewFront Party:Other IDType:stringIDTypeIdentifier Side:Front];
+                        [self copyIDImagesToSPAJFolder:imageViewBack Party:Other IDType:stringIDTypeIdentifier Side:Back];
+                        NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJIDCaptureParty5=1,SPAJIDTypeParty5='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",stringIDTypeIdentifier,[dictTransaction valueForKey:@"SPAJEappNumber"]];
+                        
+                        [modelSPAJIDCapture updateSPAJIDCapture:stringUpdate];
+                        [self voidCheckBooleanLastState];
+                    }
+
+                    else if (indexSelected == 3){
+                        [self copyIDImagesToSPAJFolder:imageViewFront Party:Payment IDType:stringIDTypeIdentifier Side:Front];
+                        [self copyIDImagesToSPAJFolder:imageViewBack Party:Payment IDType:stringIDTypeIdentifier Side:Back];
                         NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJIDCaptureParty4=1,SPAJIDTypeParty4='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",stringIDTypeIdentifier,[dictTransaction valueForKey:@"SPAJEappNumber"]];
                         
                         [modelSPAJIDCapture updateSPAJIDCapture:stringUpdate];
@@ -653,8 +711,8 @@ NSString* const Back = @"Back";
                 else{
                     if (LAAge<21){
                         if (indexSelected == 3){
-                            [self copyIDImagesToSPAJFolder:imageViewFront Party:TenagaPenjual IDType:stringIDTypeIdentifier Side:Front];
-                            [self copyIDImagesToSPAJFolder:imageViewBack Party:TenagaPenjual IDType:stringIDTypeIdentifier Side:Back];
+                            [self copyIDImagesToSPAJFolder:imageViewFront Party:Payment IDType:stringIDTypeIdentifier Side:Front];
+                            [self copyIDImagesToSPAJFolder:imageViewBack Party:Payment IDType:stringIDTypeIdentifier Side:Back];
                             NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJIDCaptureParty4=1,SPAJIDTypeParty4='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",stringIDTypeIdentifier,[dictTransaction valueForKey:@"SPAJEappNumber"]];
                             
                             [modelSPAJIDCapture updateSPAJIDCapture:stringUpdate];
@@ -682,8 +740,8 @@ NSString* const Back = @"Back";
                     }
                     else{
                         if (indexSelected == 3){
-                            [self copyIDImagesToSPAJFolder:imageViewFront Party:TenagaPenjual IDType:stringIDTypeIdentifier Side:Front];
-                            [self copyIDImagesToSPAJFolder:imageViewBack Party:TenagaPenjual IDType:stringIDTypeIdentifier Side:Back];
+                            [self copyIDImagesToSPAJFolder:imageViewFront Party:Payment IDType:stringIDTypeIdentifier Side:Front];
+                            [self copyIDImagesToSPAJFolder:imageViewBack Party:Payment IDType:stringIDTypeIdentifier Side:Back];
                             NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJIDCaptureParty4=1,SPAJIDTypeParty4='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",stringIDTypeIdentifier,[dictTransaction valueForKey:@"SPAJEappNumber"]];
                             
                             [modelSPAJIDCapture updateSPAJIDCapture:stringUpdate];
@@ -765,7 +823,8 @@ NSString* const Back = @"Back";
         //filename combination is EAPPNumberPartyIDTypeBack
         NSString* fileName = [NSString stringWithFormat:@"%@%@%@%@",stringEAPPPath,stringParty,stringIDType,stringSide];
         
-        NSData *imageData = UIImageJPEGRepresentation([self generateWatermarkForImage:imageView.image], 0.8);
+        //NSData *imageData = UIImageJPEGRepresentation([self generateWatermarkForImage:imageView.image], 0.8);
+        NSData *imageData = UIImageJPEGRepresentation(imageView.image, 0.8);
         [imageData writeToFile:[NSString stringWithFormat:@"%@/%@.jpg",filePathApp,fileName] options:NSDataWritingAtomic error:&error];
     }
 
@@ -904,7 +963,7 @@ NSString* const Back = @"Back";
         
         if (boolPemegangPolis){
             if ([stringSIRelation isEqualToString:@"DIRI SENDIRI"]){
-                if ((indexPath.row == 0)||(indexPath.row == 3)){
+                if ((indexPath.row == 0)||(indexPath.row == 3)||(indexPath.row == 4)){
                     [cell setUserInteractionEnabled:true];
                     [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_ACTIVE_CELL floatOpacity:1.0]];
                 }
@@ -915,7 +974,7 @@ NSString* const Back = @"Back";
             else{
                 if (LAAge<21){
                     if (boolOrangTuaWali){
-                        if ((indexPath.row == 0)||(indexPath.row == 2)||(indexPath.row == 3)){
+                        if ((indexPath.row == 0)||(indexPath.row == 2)||(indexPath.row == 3)||(indexPath.row == 4)){
                             [cell setUserInteractionEnabled:true];
                             [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_ACTIVE_CELL floatOpacity:1.0]];
                         }
@@ -935,7 +994,7 @@ NSString* const Back = @"Back";
                 }
                 else{
                     if (boolTertanggung){
-                        if ((indexPath.row == 0)||(indexPath.row == 1)||(indexPath.row == 3)){
+                        if ((indexPath.row == 0)||(indexPath.row == 1)||(indexPath.row == 3)||(indexPath.row == 4)){
                             [cell setUserInteractionEnabled:true];
                             [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_ACTIVE_CELL floatOpacity:1.0]];
                         }

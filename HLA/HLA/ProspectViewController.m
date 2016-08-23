@@ -2900,7 +2900,7 @@ bool RegDatehandling;
                     strDOB = outletDOB.titleLabel.text;
                 }
                 
-                strExpiryDate = outletExpiryDate.titleLabel.text;
+                strExpiryDate = outletExpiryDate.titleLabel.text?:@"";
                 
                 if(gender == nil || gender==NULL || segGender.selectedSegmentIndex == -1) {
                     gender = @"";

@@ -669,7 +669,11 @@
     while ([s next]) {
         //[arrayColumnNames addObject:[s stringForColumn:@"name"]];
         for (int i=0;i<intColumnCount;i++){
-            [arrayColumnValue addObject:[s stringForColumnIndex:i]?[s stringForColumnIndex:i]:@""];
+            NSString* stringResult  = [s stringForColumnIndex:i];
+            if ([stringResult isEqualToString:@"(null)"]){
+                stringResult = @"";
+            }
+            [arrayColumnValue addObject:stringResult?stringResult:@""];
             NSLog(@"column %i value %@",i,[s stringForColumnIndex:i]);
         }
     }

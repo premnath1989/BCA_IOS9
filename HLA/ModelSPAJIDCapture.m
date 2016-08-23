@@ -17,16 +17,18 @@
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     [database open];
     
-    BOOL success = [database executeUpdate:[NSString stringWithFormat:@"insert into SPAJIDCapture (SPAJTransactionID,SPAJIDCaptureParty1,SPAJIDCaptureParty2,SPAJIDCaptureParty3, SPAJIDCaptureParty4,SPAJIDTypeParty1,SPAJIDTypeParty2,SPAJIDTypeParty3,SPAJIDTypeParty4) values ((select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@'),%@,%@,%@,%@,%@,%@,%@,%@)" ,
+    BOOL success = [database executeUpdate:[NSString stringWithFormat:@"insert into SPAJIDCapture (SPAJTransactionID,SPAJIDCaptureParty1,SPAJIDCaptureParty2,SPAJIDCaptureParty3, SPAJIDCaptureParty4,SPAJIDTypeParty1,SPAJIDTypeParty2,SPAJIDTypeParty3,SPAJIDTypeParty4,SPAJIDTypeParty5) values ((select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@'),%@,%@,%@,%@,%@,%@,%@,%@,%@,%@)" ,
                                             [spajIDCaptureDictionary valueForKey:@"SPAJEappNumber"],
                                             [spajIDCaptureDictionary valueForKey:@"SPAJIDCaptureParty1"],
                                             [spajIDCaptureDictionary valueForKey:@"SPAJIDCaptureParty2"],
                                             [spajIDCaptureDictionary valueForKey:@"SPAJIDCaptureParty3"],
                                             [spajIDCaptureDictionary valueForKey:@"SPAJIDCaptureParty4"],
+                                            [spajIDCaptureDictionary valueForKey:@"SPAJIDCaptureParty5"],
                                             [spajIDCaptureDictionary valueForKey:@"SPAJIDTypeParty1"],
                                             [spajIDCaptureDictionary valueForKey:@"SPAJIDTypeParty2"],
                                             [spajIDCaptureDictionary valueForKey:@"SPAJIDTypeParty3"],
-                                            [spajIDCaptureDictionary valueForKey:@"SPAJIDTypeParty4"]]];
+                                            [spajIDCaptureDictionary valueForKey:@"SPAJIDTypeParty4"],
+                                            [spajIDCaptureDictionary valueForKey:@"SPAJIDTypeParty5"]]];
    
     if (!success) {
         NSLog(@"%s: insert error: %@", __FUNCTION__, [database lastErrorMessage]);
