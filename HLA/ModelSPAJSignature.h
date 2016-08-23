@@ -18,4 +18,5 @@
 -(bool)voidSignatureCaptured:(int)intTransactionSPAJID Relationship:(NSString*)stringRelation LAAge:(int)laAge;
 -(NSMutableDictionary *)voidSignaturePartyCaptured:(int)intTransactionSPAJID SignatureParty:(NSString *)stringSignatureParty;
 -(bool)voidCertainSignaturePartyCaptured:(int)intTransactionSPAJID SignatureParty:(NSString *)stringSignatureParty;
+-(NSString *)selectSPAJSignatureData:(NSString *)stringColumnName SPAJTransactionID:(int)intSpajTransactionID;
 @end

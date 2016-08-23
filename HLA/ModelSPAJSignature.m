@@ -145,6 +145,23 @@
     return dictSignatureCaptured;
 }
 
+-(NSString *)selectSPAJSignatureData:(NSString *)stringColumnName SPAJTransactionID:(int)intSpajTransactionID{
+    NSString *stringReturn;
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select %@ from SPAJSignature where SPAJTransactionID = %i",stringColumnName,intSpajTransactionID]];
+    while ([s next]) {
+        stringReturn = [s stringForColumn:stringColumnName];
+    }
+    
+    [results close];
+    [database close];
+    return stringReturn;
+}
 
 
 
