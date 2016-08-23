@@ -128,7 +128,7 @@ input[type="text"], input[type="password"] {
 }
 
 input[type="text"]:disabled, input[type="password"]:disabled {
-  background-color: #e47d3a;
+  background-color: #f5f5f5;
 }
 
 input[type="text"]:read-only, input[type="password"]:read-only {

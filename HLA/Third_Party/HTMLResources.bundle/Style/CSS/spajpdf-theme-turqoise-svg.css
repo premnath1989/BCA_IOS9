@@ -111,6 +111,16 @@ section .LineStraight, section .LineDot {
   border-color: #000000;
 }
 
+input[type="radio"].Plain + label {
+  color: #000000;
+  background-color: transparent;
+}
+
+input[type="radio"].Plain:checked + label {
+  color: #ffffff;
+  background-color: #00a6b3;
+}
+
 /* TABLE */
 section table.Square tbody tr td table.BoxSquare tbody tr td, section table.Square tbody tr td table.BoxRound tbody tr td, section table.Round tbody tr td table.BoxSquare tbody tr td, section table.Round tbody tr td table.BoxRound tbody tr td, section table.Space tbody tr td table.BoxSquare tbody tr td, section table.Space tbody tr td table.BoxRound tbody tr td {
   border-color: #000000;
@@ -166,4 +176,18 @@ section table.Space tbody tr td {
   background-color: #ebecec;
   color: #000000;
   border-color: #ffffff;
+}
+
+/* FOOTER */
+.FooterContainer, .HeaderContainer, .FooterContainerLast {
+  background-color: #00a6b3;
+}
+
+.FooterContainer .FooterGeneral, .FooterContainer .FooterLast, .FooterContainer .HeaderGeneral, .HeaderContainer .FooterGeneral, .HeaderContainer .FooterLast, .HeaderContainer .HeaderGeneral, .FooterContainerLast .FooterGeneral, .FooterContainerLast .FooterLast, .FooterContainerLast .HeaderGeneral {
+  background-color: #ffffff;
+}
+
+.FooterContainer hr, .HeaderContainer hr, .FooterContainerLast hr {
+  border-color: #00a6b3;
+  background-color: transparent;
 }

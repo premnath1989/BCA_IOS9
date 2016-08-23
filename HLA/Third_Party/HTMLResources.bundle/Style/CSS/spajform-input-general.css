@@ -133,10 +133,10 @@ input[type="text"]:disabled, input[type="password"]:disabled {
   padding-right: 5px;
   padding-bottom: 2px;
   font-size: 0.8em;
-  border-radius: 4px;
-  -ms-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
+  border-radius: 6px;
+  -ms-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
 }
 
 /* SELECT */

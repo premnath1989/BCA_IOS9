@@ -86,7 +86,7 @@ input[type="text"].Multi, input[type="password"].Multi {
 .RadioButton label.RadioButton {
   padding-top: 2px;
   padding-right: 5px;
-  padding-right: 5px;
+  padding-left: 5px;
   padding-bottom: 2px;
   font-size: 0.8em;
   border-radius: 4px;

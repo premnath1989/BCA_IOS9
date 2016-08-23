@@ -34,3 +34,15 @@ input[type="radio"] {
 input[type="radio"]:checked + .BoxRound {
   background-image: url("../../Resource/Input/input_checkbox_checked.svg");
 }
+
+input[type="radio"].Plain {
+  display: none;
+}
+
+input[type="radio"].Plain + label {
+  text-align: center;
+  border-radius: 6px;
+  -ms-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+}

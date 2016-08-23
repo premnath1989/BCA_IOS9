@@ -164,6 +164,11 @@ main section span.Separator {
   font-size: 0.75em;
 }
 
+main section span.Tight {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
 main section span.Description, main section label.Description {
   padding-top: 5px;
   padding-bottom: 5px;
@@ -259,8 +264,8 @@ main section ol li ol li, main section ol li ul li, main section ul li ol li, ma
 }
 
 main section .Note {
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   text-align: left;
 }
 

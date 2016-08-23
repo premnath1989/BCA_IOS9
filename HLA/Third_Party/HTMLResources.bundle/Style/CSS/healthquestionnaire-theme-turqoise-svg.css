@@ -139,6 +139,17 @@ input[type="text"] {
   color: #ebecec;
 }
 
+/* NAVIGATION */
+nav a {
+  color: #00a6b3;
+  background-color: transparent;
+}
+
+nav a.Selected {
+  color: #ffffff;
+  background-color: #00a6b3;
+}
+
 /* BUTTON */
 .ButtonPrimary, .ButtonPreview {
   background-color: transparent;
