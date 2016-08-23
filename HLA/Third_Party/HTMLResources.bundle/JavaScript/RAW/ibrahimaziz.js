@@ -1127,3 +1127,21 @@ function autoPopulateState()
         $(stringJQueryID).prop("readonly", true);
     });
 }
+
+function radioButtonOtherGenerator(stringRadioButtonName, stringTextID, stringValue)
+{
+    $(stringTextID).prop("readonly", true);
+    
+    $("input:radio[name='" + stringRadioButtonName + "']").change(function()
+    {
+        if (getRadioButtonGeneral(stringRadioButtonName) == stringValue)
+        {
+            $(stringTextID).prop("readonly", false);
+        }
+        else
+        {
+            $(stringTextID).prop("readonly", true);
+            $(stringTextID).val('');
+        }
+    });
+}

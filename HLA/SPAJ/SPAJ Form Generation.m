@@ -22,6 +22,8 @@
 #import "ModelSPAJSignature.h"
 #import "Alert.h"
 #import "ModelAgentProfile.h"
+#import "ModelProspectProfile.h"
+#import "ModelSIPOData.h"
 // DECLARATION
 
 @interface SPAJFormGeneration ()
@@ -40,7 +42,9 @@
     Formatter* formatter;
     SPAJPDFWebViewController* spajPDFWebView;
     ModelSPAJFormGeneration* modelSPAJFormGeneration;
+    ModelProspectProfile* modelProspectProfile;
     ModelAgentProfile* modelAgentProfile;
+    ModelSIPOData* modelSIPOData;
     NDHTMLtoPDF *PDFCreator;
     ModelSPAJSignature* modelSPAJSignature;
     Alert* alert;
@@ -48,9 +52,21 @@
     UserInterface *objectUserInterface;
     BOOL boolSPAJPDF;
     BOOL boolTenagaPenjualSigned;
+    
+    NSMutableDictionary* dictAgentProfile;
+    NSDictionary *dictionaryPOData;
+    
+    NSMutableArray * arrayDBAgentID;
+    NSMutableArray * arrayHTMLAgentID;
+    
+    NSMutableArray * arrayDBReferral;
+    NSMutableArray * arrayHTMLReferal;
+    
+    NSMutableArray * arrayDBPOData;
+    NSMutableArray * arrayHTMLPOData;
 }
     @synthesize dictTransaction;
-@synthesize viewActivityIndicator;
+    @synthesize viewActivityIndicator;
     // SYNTHESIZE
 
     @synthesize delegateSPAJMain = _delegateSPAJMain;
@@ -82,10 +98,16 @@
         formatter = [[Formatter alloc]init];
         modelSPAJFormGeneration = [[ModelSPAJFormGeneration alloc]init];
         modelAgentProfile = [[ModelAgentProfile alloc]init];
+        modelProspectProfile = [[ModelProspectProfile alloc]init];
         objectUserInterface = [[UserInterface alloc] init];
         modelSPAJSignature = [[ModelSPAJSignature alloc]init];
+        modelSIPOData = [[ModelSIPOData alloc]init];
         [self setNavigationBar];
         
+        
+        [self arrayInitializeReferral];
+        [self arrayInitializeAgentProfile];
+        [self arrayInitializePOData];
         // LOCALIZATION
         
         _labelPageTitle.text = NSLocalizedString(@"TITLE_FORMGENERATION", nil);
@@ -102,8 +124,54 @@
         
         [_buttonGenerate setTitle:NSLocalizedString(@"BUTTON_GENERATEFORM", nil) forState:UIControlStateNormal];
         
+        dictAgentProfile=[[NSMutableDictionary alloc]initWithDictionary:[modelAgentProfile getAgentData]];
+        
         boolSPAJPDF = false;
+        dictionaryPOData = [[NSDictionary alloc]initWithDictionary:[modelSIPOData getPO_DataFor:[dictTransaction valueForKey:@"SPAJSINO"]]];
         [self voidCheckBooleanLastState];
+    }
+
+    #pragma mark arrayInitialization
+    -(void)arrayInitializeAgentProfile{
+        arrayDBAgentID =[[NSMutableArray alloc]init];
+        [arrayDBAgentID addObject:@"AgentName"];
+        [arrayDBAgentID addObject:@"AgentCode"];
+        [arrayDBAgentID addObject:@""];
+        [arrayDBAgentID addObject:@"AgentName"];
+        [arrayDBAgentID addObject:@"AgentCode"];
+        
+        arrayHTMLAgentID =[[NSMutableArray alloc]init];
+        [arrayHTMLAgentID addObject:@"TextAgentName"];
+        [arrayHTMLAgentID addObject:@"TextAgentCode"];
+        [arrayHTMLAgentID addObject:@"TextLicenseNumber"];
+        [arrayHTMLAgentID addObject:@"BoxIllustrationAgentName"];
+        [arrayHTMLAgentID addObject:@"BoxIllustrationAgentCode"];
+    }
+
+    -(void)arrayInitializeReferral{
+        arrayDBReferral =[[NSMutableArray alloc]init];
+        [arrayDBReferral addObject:@"ReferralName"];
+        [arrayDBReferral addObject:@"BranchName"];
+        [arrayDBReferral addObject:@"BranchCode"];
+        [arrayDBReferral addObject:@"Kanwil"];
+        [arrayDBReferral addObject:@"NIP"];
+        
+        arrayHTMLReferal =[[NSMutableArray alloc]init];
+        [arrayHTMLReferal addObject:@"TextReferenceName"];
+        [arrayHTMLReferal addObject:@"TextBranchName"];
+        [arrayHTMLReferal addObject:@"TextBranchCode"];
+        [arrayHTMLReferal addObject:@"TextArea"];
+        [arrayHTMLReferal addObject:@"TextAgentID"];
+    }
+
+    -(void)arrayInitializePOData{
+        arrayDBPOData =[[NSMutableArray alloc]init];
+        [arrayDBPOData addObject:@"ProductName"];
+        [arrayDBPOData addObject:@"ProductCode"];
+        
+        arrayHTMLPOData =[[NSMutableArray alloc]init];
+        [arrayHTMLPOData addObject:@"TextProductName"];
+        [arrayHTMLPOData addObject:@"TextProductCode"];
     }
 
     -(void)voidCheckBooleanLastState {
@@ -223,18 +291,33 @@
     };
 
     #pragma mark create additional dictionary
-    -(NSDictionary *)getDictionaryForReferralData{
-        NSMutableDictionary* dictProspectReferral=[[NSMutableDictionary alloc]initWithDictionary:[modelAgentProfile getAgentData]];
+
+    -(NSDictionary *)getDictionaryForAgentData:(NSString *)stringDBColumnName HTMLID:(NSString *)stringHTMLID{
+    
+        NSMutableDictionary* dictAgentData=[[NSMutableDictionary alloc]init];
+        [dictAgentData setObject:stringHTMLID forKey:@"elementID"];
+        [dictAgentData setObject:[dictAgentProfile valueForKey:stringDBColumnName]?:@"" forKey:@"Value"];
+        [dictAgentData setObject:@"1" forKey:@"CustomerID"];
+        [dictAgentData setObject:@"1" forKey:@"SPAJID"];
+        return dictAgentData;
+    }
+
+    -(NSDictionary *)getDictionaryForReferralData:(NSString *)stringDBColumnName HTMLID:(NSString *)stringHTMLID{
         NSMutableDictionary* dictReferralData=[[NSMutableDictionary alloc]init];
-        [dictReferralData setObject:[dictProspectReferral valueForKey:@""] forKey:@""];
+        [dictReferralData setObject:stringHTMLID forKey:@"elementID"];
+        [dictReferralData setObject:[modelProspectProfile selectProspectData:stringDBColumnName ProspectIndex:[[dictionaryPOData valueForKey:@"PO_ClientID"] intValue]]?:@"" forKey:@"Value"];
+        [dictReferralData setObject:@"1" forKey:@"CustomerID"];
+        [dictReferralData setObject:@"1" forKey:@"SPAJID"];
         return dictReferralData;
     }
 
-    -(NSDictionary *)getDictionaryForAgentData{
-        NSMutableDictionary* dictAgentProfile=[[NSMutableDictionary alloc]initWithDictionary:[modelAgentProfile getAgentData]];
-        NSMutableDictionary* dictAgentData=[[NSMutableDictionary alloc]init];
-        [dictAgentData setObject:[dictAgentProfile valueForKey:@""] forKey:@""];
-        return dictAgentData;
+    -(NSDictionary *)getDictionaryForPOData:(NSString *)stringDBColumnName HTMLID:(NSString *)stringHTMLID{
+        NSMutableDictionary* dictReferralData=[[NSMutableDictionary alloc]init];
+        [dictReferralData setObject:stringHTMLID forKey:@"elementID"];
+        [dictReferralData setObject:[dictionaryPOData valueForKey:stringDBColumnName]?:@"" forKey:@"Value"];
+        [dictReferralData setObject:@"1" forKey:@"CustomerID"];
+        [dictReferralData setObject:@"1" forKey:@"SPAJID"];
+        return dictReferralData;
     }
 
     -(NSDictionary *)getDictionaryForIllustrationData{
@@ -260,7 +343,26 @@
         [finalDictionary setObject:answerDictionary forKey:@"data"];
         [finalDictionary setValue:[params valueForKey:@"successCallBack"] forKey:@"successCallBack"];
         [finalDictionary setValue:[params valueForKey:@"errorCallback"] forKey:@"errorCallback"];
-        return [super readfromDB:finalDictionary];
+        
+        NSMutableDictionary *dictOriginal = [[NSMutableDictionary alloc]initWithDictionary:[super readfromDB:finalDictionary]];
+        
+        NSMutableArray *modifieArray = [[NSMutableArray alloc]initWithArray:[dictOriginal valueForKey:@"readFromDB"]];
+        for (int i=0; i<[arrayHTMLAgentID count];i++){
+            [modifieArray addObject:[self getDictionaryForAgentData:[arrayDBAgentID objectAtIndex:i] HTMLID:[arrayHTMLAgentID objectAtIndex:i]]];
+        }
+        
+        for (int i=0; i<[arrayHTMLReferal count];i++){
+            [modifieArray addObject:[self getDictionaryForReferralData:[arrayDBReferral objectAtIndex:i] HTMLID:[arrayHTMLReferal objectAtIndex:i]]];
+        }
+        
+        for (int i=0; i<[arrayHTMLPOData count];i++){
+            [modifieArray addObject:[self getDictionaryForPOData:[arrayDBPOData objectAtIndex:i] HTMLID:[arrayHTMLPOData objectAtIndex:i]]];
+        }
+        
+        [dictOriginal setObject:modifieArray forKey:@"readFromDB"];
+        //return [super readfromDB:finalDictionary];
+        [self callSuccessCallback:[params valueForKey:@"successCallBack"] withRetValue:dictOriginal];
+        return dictOriginal;
     }
 
     - (void)webViewDidFinishLoad:(UIWebView *)webView{
