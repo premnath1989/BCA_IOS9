@@ -417,4 +417,105 @@
     NSString *fileExtension = [componentsArray lastObject];
     return  fileExtension;
 }
+
+-(NSString *)getGenderNameForHtml:(NSString *)stringGender{
+    NSString* stringReturn;
+    if ([stringGender isEqualToString:@"MALE"]){
+        stringReturn = @"male";
+    }
+    else if ([stringGender isEqualToString:@"FEMALE"]){
+        stringReturn =  @"female";
+    }
+    return stringReturn;
+}
+
+-(NSString *)getIDNameForHtml:(NSString *)stringID{
+    NSString* stringReturn;
+    if ([stringID caseInsensitiveCompare:@"KTP"]== NSOrderedSame){
+        stringReturn = @"KTP";
+    }
+    else if ([stringID caseInsensitiveCompare:@"KIMS/KITAS"]== NSOrderedSame){
+        stringReturn =  @"KIMSKITAS";
+    }
+    else if ([stringID caseInsensitiveCompare:@"SIM"]== NSOrderedSame){
+        stringReturn =  @"SIM";
+    }
+    else if ([stringID caseInsensitiveCompare:@"PASPOR"]== NSOrderedSame){
+        stringReturn =  @"PASPOR";
+    }
+    else if ([stringID caseInsensitiveCompare:@"KITAS"]== NSOrderedSame){
+        stringReturn =  @"KIMSKITAS";
+    }
+    else if ([stringID caseInsensitiveCompare:@"Others"]== NSOrderedSame){
+        stringReturn =  @"OTHER";
+    }
+    return stringReturn;
+}
+
+-(NSString *)getNationalityNameForHtml:(NSString *)stringNationality{
+    NSString* stringReturn;
+    if ([stringNationality caseInsensitiveCompare:@"INDONESIA"]== NSOrderedSame){
+        stringReturn = @"wni";
+    }
+    else if ([stringNationality caseInsensitiveCompare:@"INDONESIAN"]== NSOrderedSame){
+        stringReturn = @"wni";
+    }
+    else {
+        stringReturn =  @"wna";
+    }
+    return stringReturn;
+}
+
+-(NSString *)getReligionNameForHtml:(NSString *)stringReligion{
+    NSString* stringReturn;
+    if ([stringReligion caseInsensitiveCompare:@"ISLAM"]== NSOrderedSame){
+        stringReturn = @"islam";
+    }
+    else if ([stringReligion caseInsensitiveCompare:@"KRISTEN PROTESTAN"]== NSOrderedSame){
+        stringReturn = @"kristen";
+    }
+    else if ([stringReligion caseInsensitiveCompare:@"KATOLIK"]== NSOrderedSame){
+        stringReturn = @"katolik";
+    }
+    else if ([stringReligion caseInsensitiveCompare:@"HINDU"]== NSOrderedSame){
+        stringReturn = @"hindu";
+    }
+    else if ([stringReligion caseInsensitiveCompare:@"BUDHA"]== NSOrderedSame){
+        stringReturn = @"budha";
+    }
+    else if ([stringReligion caseInsensitiveCompare:@"KONG HU CHU"]== NSOrderedSame){
+        stringReturn = @"konghuchu";
+    }
+    else if ([stringReligion caseInsensitiveCompare:@"LAIN-LAIN"]== NSOrderedSame){
+        stringReturn = @"";
+    }
+
+    
+    return stringReturn;
+}
+
+-(NSString *)getRelationNameForHtml:(NSString *)stringRelation{
+    NSString* stringReturn;
+    if ([stringRelation caseInsensitiveCompare:@"DIRI SENDIRI"]== NSOrderedSame){
+        stringReturn = @"dirisendiri";
+    }
+    else if ([stringRelation caseInsensitiveCompare:@"SUAMI/ISTRI"]== NSOrderedSame){
+        stringReturn = @"suamiistri";
+    }
+    else if ([stringRelation caseInsensitiveCompare:@"ORANG TUA"]== NSOrderedSame){
+        stringReturn = @"orangtuaanak";
+    }
+    else if ([stringRelation caseInsensitiveCompare:@"ANAK"]== NSOrderedSame){
+        stringReturn = @"orangtuaanak";
+    }
+    else if ([stringRelation caseInsensitiveCompare:@"KARYAWAN"]== NSOrderedSame){
+        stringReturn = @"perusahaankaryawan";
+    }
+    else {
+        stringReturn = @"lainnya";
+    }
+
+    return stringReturn;
+}
+
 @end

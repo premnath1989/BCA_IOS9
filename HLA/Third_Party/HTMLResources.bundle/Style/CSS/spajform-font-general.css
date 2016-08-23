@@ -103,19 +103,18 @@ main form label.Long, main form span.Long {
 }
 
 main form label.ShortFix, main form span.ShortFix {
+  width: 40px;
   max-width: 40px;
 }
 
 main form label.MediumFix, main form span.MediumFix {
+  width: 126px;
   max-width: 126px;
 }
 
 main form label.LongFix, main form span.LongFix {
-  max-width: 120px;
-}
-
-main form label.LongFix, main form span.LongFix {
-  max-width: 100%;
+  width: 240px;
+  max-width: 240px;
 }
 
 main form label.Short:first-child, main form span.Short:first-child {

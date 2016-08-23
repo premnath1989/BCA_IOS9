@@ -145,8 +145,9 @@
                            @"TextPolicyHolderOfficePostalCode",
                            @"TextPolicyHolderEmail",
                            @"TextPolicyHolderMainJob",
-                           @"SelectPolicyHolderIDType",
-                           @"TextPolicyHolderID",
+                           @"RadioButtonPolicyHolderIDType",
+                           @"TextPolicyHolderIDNumber",
+                           @"RadioButtonPolicyHolderReligion",
                            @"RadioButtonPolicyHolderNationality",
                            @"TextPolicyHolderPlace",
                            @"DatePolicyHolderActive",
@@ -154,7 +155,8 @@
                            @"TextPolicyHolderHomeTelephone",
                            @"TextPolicyHolderHandphone1",
                            @"TextPolicyHolderHandphone2",
-                           @"TextPolicyHolderOfficeTelephone"
+                           @"TextPolicyHolderOfficeTelephone",
+                           @"TextPolicyHolderAge"
                            , nil];
     
     originalElementArrayName= [[NSArray alloc]initWithObjects:
@@ -175,6 +177,7 @@
                                @"ProspectOccupationCode",
                                @"OtherIDType",
                                @"OtherIDTypeNo",
+                               @"Religion",
                                @"Nationality",
                                @"CountryOfBirth",
                                @"IDExpiryDate",
@@ -182,7 +185,8 @@
                                @"CONT006",
                                @"CONT008",
                                @"CONT007",
-                               @"CONT009"
+                               @"CONT009",
+                               @"Age"
                                , nil];
 
 };
@@ -204,8 +208,9 @@
                            @"TextProspectiveInsuredOfficePostalCode",
                            @"TextProspectiveInsuredEmail",
                            @"TextProspectiveInsuredMainJob",
-                           @"SelectProspectiveInsuredIDType",
-                           @"TextProspectiveInsuredID",
+                           @"RadioButtonProspectiveInsuredIDType",
+                           @"TextProspectiveInsuredIDNumber",
+                           @"RadioButtonProspectiveInsuredReligion",
                            @"RadioButtonProspectiveInsuredNationality",
                            @"TextProspectiveInsuredPlace",
                            @"DateProspectiveInsuredActive",
@@ -213,8 +218,9 @@
                            @"TextProspectiveInsuredHomeTelephone",
                            @"TextProspectiveInsuredHandphone1",
                            @"TextProspectiveInsuredHandphone2",
-                           @"TextProspectiveInsuredOfficeTelephone"
-                           , nil];
+                           @"TextProspectiveInsuredOfficeTelephone",
+                           @"TextProspectiveInsuredAge",
+                            nil];
     
     originalElementArrayTertanggungName= [[NSArray alloc]initWithObjects:
                                @"ProspectName",
@@ -234,6 +240,7 @@
                                @"ProspectOccupationCode",
                                @"OtherIDType",
                                @"OtherIDTypeNo",
+                               @"Religion",
                                @"Nationality",
                                @"CountryOfBirth",
                                @"IDExpiryDate",
@@ -241,8 +248,9 @@
                                @"CONT006",
                                @"CONT008",
                                @"CONT007",
-                               @"CONT009"
-                               , nil];
+                               @"CONT009",
+                               @"Age",
+                                nil];
     
 };
 
@@ -351,8 +359,9 @@
         }
         else if ([stringOriginalElementName isEqualToString:@"OtherIDType"]){
             NSString* identityDesc = [modelIdentificationType getOtherTypeDesc:[originalDictionary valueForKey:stringOriginalElementName]]?:@"";
+            NSString* stringIdtype = [formatter getIDNameForHtml:identityDesc];
             [modiFiedDictionary setObject:stringNewElementName forKey:@"elementID"];
-            [modiFiedDictionary setObject:identityDesc forKey:@"Value"];
+            [modiFiedDictionary setObject:stringIdtype forKey:@"Value"];
             return modiFiedDictionary;
         }
         else if ([stringOriginalElementName isEqualToString:@"CONT006"]){
@@ -379,6 +388,33 @@
             [modiFiedDictionary setObject:stringTelp forKey:@"Value"];
             return modiFiedDictionary;
         }
+    
+    
+        else if ([stringOriginalElementName isEqualToString:@"ProspectGender"]){
+            NSString* stringGender = [formatter getGenderNameForHtml:[originalDictionary valueForKey:stringOriginalElementName]];
+            [modiFiedDictionary setObject:stringNewElementName forKey:@"elementID"];
+            [modiFiedDictionary setObject:stringGender forKey:@"Value"];
+            return modiFiedDictionary;
+        }
+        else if ([stringOriginalElementName isEqualToString:@"Age"]){
+            int personAge = [formatter calculateAge:[originalDictionary valueForKey:@"ProspectDOB"]];
+            [modiFiedDictionary setObject:stringNewElementName forKey:@"elementID"];
+            [modiFiedDictionary setObject:[NSNumber numberWithInt:personAge] forKey:@"Value"];
+            return modiFiedDictionary;
+        }
+        else if ([stringOriginalElementName isEqualToString:@"Nationality"]){
+            NSString* stringNationality = [formatter getNationalityNameForHtml:[originalDictionary valueForKey:stringOriginalElementName]];
+            [modiFiedDictionary setObject:stringNewElementName forKey:@"elementID"];
+            [modiFiedDictionary setObject:stringNationality forKey:@"Value"];
+            return modiFiedDictionary;
+        }
+        else if ([stringOriginalElementName isEqualToString:@"Religion"]){
+            NSString* stringReligion = [formatter getReligionNameForHtml:[originalDictionary valueForKey:stringOriginalElementName]];
+            [modiFiedDictionary setObject:stringNewElementName forKey:@"elementID"];
+            [modiFiedDictionary setObject:stringReligion forKey:@"Value"];
+            return modiFiedDictionary;
+        }
+    
         else{
             [modiFiedDictionary setObject:stringNewElementName forKey:@"elementID"];
             [modiFiedDictionary setObject:[originalDictionary valueForKey:stringOriginalElementName] forKey:@"Value"];
@@ -397,18 +433,26 @@
             NSMutableDictionary* dictDetail = [[NSMutableDictionary alloc]initWithDictionary:[self ModifiedDictionary:[self OriginalDictionaryForAutoPopulate] OriginalElementName:[originalElementArrayName objectAtIndex:i] NewElementName:[newElementArrayName objectAtIndex:i]]];
             [arrayValue addObject:dictDetail];
         }
+        
+        NSString* stringRelation = [formatter getRelationNameForHtml:[dictPOData valueForKey:@"RelWithLA"]];
+        NSMutableDictionary* dictRelWithLa = [[NSMutableDictionary alloc]initWithObjectsAndKeys:@"RadioButtonPolicyHolderRelationAssured",@"elementID",stringRelation,@"Value", nil];
+        [arrayValue addObject:dictRelWithLa];
     }
     else if ([stringSection isEqualToString:@"TR"]){
         for (int i=0;i<[newElementArrayTertanggungName count];i++){
             NSMutableDictionary* dictDetail = [[NSMutableDictionary alloc]initWithDictionary:[self ModifiedDictionary:[self OriginalDictionaryForAutoPopulate] OriginalElementName:[originalElementArrayTertanggungName objectAtIndex:i] NewElementName:[newElementArrayTertanggungName objectAtIndex:i]]];
             [arrayValue addObject:dictDetail];
         }
+        NSString* stringRelation = [formatter getRelationNameForHtml:[dictPOData valueForKey:@"RelWithLA"]];
+        NSMutableDictionary* dictRelWithLa = [[NSMutableDictionary alloc]initWithObjectsAndKeys:@"RadioButtonProspectiveInsuredRelationAssured",@"elementID",stringRelation,@"Value", nil];
+        [arrayValue addObject:dictRelWithLa];
     }
     
-    NSMutableDictionary* dictRelWithLa = [[NSMutableDictionary alloc]initWithObjectsAndKeys:@"RadioButtonPolicyHolderRelationAssured",@"elementID",[dictPOData valueForKey:@"RelWithLA"],@"Value", nil];
+   
     
-    [arrayValue addObject:dictRelWithLa];
-    NSDictionary *readFromDB=[[NSDictionary alloc]initWithObjectsAndKeys:arrayValue,@"autopopulateFromDB", nil];
+   
+    
+        NSDictionary *readFromDB=[[NSDictionary alloc]initWithObjectsAndKeys:arrayValue,@"autopopulateFromDB", nil];
     NSDictionary *result=[[NSDictionary alloc]initWithObjectsAndKeys:readFromDB,@"result", nil];
     
     return result;

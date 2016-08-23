@@ -91,7 +91,7 @@ function onSuccess (ret)
         }
         else
         {
-            alert("Not read from database method !.");
+            //alert("Not read from database method !.");
         }
     }
 }
@@ -121,12 +121,12 @@ function savetoDB()
     
     if (arrayHealthQuestionnaire.length > 0)
     {
-        alert("no getter !, arrayHealthQuestionnaire length : " + arrayHealthQuestionnaire.length);
+        //alert("no getter !, arrayHealthQuestionnaire length : " + arrayHealthQuestionnaire.length);
         objectContent = arrayHealthQuestionnaire;
     }
     else
     {
-        alert("with getter !, arrayHealthQuestionnaire length : " + arrayHealthQuestionnaire.length);
+        //alert("with getter !, arrayHealthQuestionnaire length : " + arrayHealthQuestionnaire.length);
         objectContent = setToDatabase(stringPageTypeCurrent);
     }
     
@@ -143,15 +143,19 @@ function PrintData()
 function AutoPopulate(jsonObject)
 {        
     var objectContent = JSON.parse(jsonObject);
-    var stringType = Object.keys(objectContent.result)[0];
-
+    var stringType = Object.keys(objectContent.result)[0];        
+    
+    calculateAge("DatePolicyHolderBirthday", "TextPolicyHolderAge");
+    
     if (stringType == "autopopulateFromDB")
     {
         getFromDatabase(objectContent.result.autopopulateFromDB, stringPageTypeCurrent);
+        
+        
     }
     else
     {
-        alert("Not read from database method !.");
+        //alert("Not read from database method !.");
     }
 }
 
