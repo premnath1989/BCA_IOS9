@@ -17,7 +17,7 @@
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     [database open];
     
-    BOOL success = [database executeUpdate:[NSString stringWithFormat:@"insert into SPAJIDCapture (SPAJTransactionID,SPAJIDCaptureParty1,SPAJIDCaptureParty2,SPAJIDCaptureParty3, SPAJIDCaptureParty4,SPAJIDTypeParty1,SPAJIDTypeParty2,SPAJIDTypeParty3,SPAJIDTypeParty4,SPAJIDTypeParty5) values ((select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@'),%@,%@,%@,%@,%@,%@,%@,%@,%@,%@)" ,
+    BOOL success = [database executeUpdate:[NSString stringWithFormat:@"insert into SPAJIDCapture (SPAJTransactionID,SPAJIDCaptureParty1,SPAJIDCaptureParty2,SPAJIDCaptureParty3, SPAJIDCaptureParty4,SPAJIDCaptureParty5,SPAJIDTypeParty1,SPAJIDTypeParty2,SPAJIDTypeParty3,SPAJIDTypeParty4,SPAJIDTypeParty5) values ((select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@'),%@,%@,%@,%@,%@,%@,%@,%@,%@,%@)" ,
                                             [spajIDCaptureDictionary valueForKey:@"SPAJEappNumber"],
                                             [spajIDCaptureDictionary valueForKey:@"SPAJIDCaptureParty1"],
                                             [spajIDCaptureDictionary valueForKey:@"SPAJIDCaptureParty2"],

@@ -207,10 +207,12 @@ NSString* const Back = @"Back";
                 break;
             case 3:
                 //[self actionViewPhoto:nil];
+                [self showIDType:indexSelected];
                 [buttonIDTypeSelection setEnabled:false];
                 break;
             case 4:
                 //[self actionViewPhoto:nil];
+                [self showIDType:indexSelected];
                 [buttonIDTypeSelection setEnabled:false];
                 break;
             default:
@@ -821,11 +823,32 @@ NSString* const Back = @"Back";
         
         //filename combination is EAPPNumberPartyIDTypeFront
         //filename combination is EAPPNumberPartyIDTypeBack
-        NSString* fileName = [NSString stringWithFormat:@"%@%@%@%@",stringEAPPPath,stringParty,stringIDType,stringSide];
+        NSString* fileName = [NSString stringWithFormat:@"%@_%@_%@_%@",stringEAPPPath,stringParty,stringIDType,stringSide];
         
         //NSData *imageData = UIImageJPEGRepresentation([self generateWatermarkForImage:imageView.image], 0.8);
         NSData *imageData = UIImageJPEGRepresentation(imageView.image, 0.8);
-        [imageData writeToFile:[NSString stringWithFormat:@"%@/%@.jpg",filePathApp,fileName] options:NSDataWritingAtomic error:&error];
+        
+        if ((indexSelected==3)||(indexSelected==4)){
+            NSString* target=[NSString stringWithFormat:@"%@/%@.jpg",filePathApp,fileName];
+            NSString* fname = [target lastPathComponent];
+            NSString* fnameNoExt = [fname stringByDeletingPathExtension];
+            NSString* extension = [fname pathExtension];
+            
+            int fileIndex = 1;
+            while ([[NSFileManager defaultManager] fileExistsAtPath:target])
+            {
+                //NSLog(@"FNAME : %@",fname);
+                fname = [NSString stringWithFormat:@"%@ (%i).%@", fnameNoExt, fileIndex, extension];
+                //NSLog(@"Setting filename to :: %@",fname);
+                fileIndex++;
+                target = [filePathApp stringByAppendingPathComponent:fname];
+            }
+            [imageData writeToFile:target options:NSDataWritingAtomic error:&error];
+        }
+        else{
+            NSString* target=[NSString stringWithFormat:@"%@/%@.jpg",filePathApp,fileName];
+            [imageData writeToFile:target options:NSDataWritingAtomic error:&error];
+        }
     }
 
     #pragma mark delegate image picker
