@@ -24,6 +24,7 @@
 #import "ModelAgentProfile.h"
 #import "ModelProspectProfile.h"
 #import "ModelSIPOData.h"
+#import "Model_SI_Master.h"
 // DECLARATION
 
 @interface SPAJFormGeneration ()
@@ -45,6 +46,7 @@
     ModelProspectProfile* modelProspectProfile;
     ModelAgentProfile* modelAgentProfile;
     ModelSIPOData* modelSIPOData;
+    Model_SI_Master* modelSIMaster;
     NDHTMLtoPDF *PDFCreator;
     ModelSPAJSignature* modelSPAJSignature;
     Alert* alert;
@@ -55,6 +57,7 @@
     
     NSMutableDictionary* dictAgentProfile;
     NSDictionary *dictionaryPOData;
+    NSDictionary *dictionarySIMaster;
     
     NSMutableArray * arrayDBAgentID;
     NSMutableArray * arrayHTMLAgentID;
@@ -64,6 +67,17 @@
     
     NSMutableArray * arrayDBPOData;
     NSMutableArray * arrayHTMLPOData;
+    
+    NSMutableArray * arrayDBSIData;
+    NSMutableArray * arrayHTMLSIData;
+    
+    NSMutableArray * arrayDBSignature;
+    NSMutableArray * arrayHTMLSignature;
+
+    
+
+    
+    
 }
     @synthesize dictTransaction;
     @synthesize viewActivityIndicator;
@@ -102,12 +116,18 @@
         objectUserInterface = [[UserInterface alloc] init];
         modelSPAJSignature = [[ModelSPAJSignature alloc]init];
         modelSIPOData = [[ModelSIPOData alloc]init];
+        modelSIMaster = [[Model_SI_Master alloc]init];
+
         [self setNavigationBar];
         
         
         [self arrayInitializeReferral];
         [self arrayInitializeAgentProfile];
         [self arrayInitializePOData];
+        [self arrayInitializeSIMaster];
+        [self arrayInitializeSignature];
+        
+        
         // LOCALIZATION
         
         _labelPageTitle.text = NSLocalizedString(@"TITLE_FORMGENERATION", nil);
@@ -128,6 +148,7 @@
         
         boolSPAJPDF = false;
         dictionaryPOData = [[NSDictionary alloc]initWithDictionary:[modelSIPOData getPO_DataFor:[dictTransaction valueForKey:@"SPAJSINO"]]];
+        dictionarySIMaster = [[NSDictionary alloc]initWithDictionary:[modelSIMaster getIlustrationDataForSI:[dictTransaction valueForKey:@"SPAJSINO"]]];
         [self voidCheckBooleanLastState];
     }
 
@@ -173,6 +194,30 @@
         [arrayHTMLPOData addObject:@"TextProductName"];
         [arrayHTMLPOData addObject:@"TextProductCode"];
     }
+
+
+    -(void)arrayInitializeSIMaster{ //premnath Vijaykumar
+         arrayDBSIData=[[NSMutableArray alloc]init];
+        [arrayDBSIData addObject:@"SINO"];
+        [arrayDBSIData addObject:@"CreatedDate"];
+        arrayHTMLSIData =[[NSMutableArray alloc]init];
+        [arrayHTMLSIData addObject:@"BoxIllustrationNumber"];
+        [arrayHTMLSIData addObject:@"BoxIllustrationDateDay"];
+    }
+
+    -(void)arrayInitializeSignature{ //premnath Vijaykumar
+        arrayDBSignature=[[NSMutableArray alloc]init];
+        [arrayDBSignature addObject:@"SPAJSignatureLocation"];
+        [arrayDBSignature addObject:@"SPAJDateSignatureParty4"];
+        arrayHTMLSignature =[[NSMutableArray alloc]init];
+        [arrayHTMLSignature addObject:@"LineSignedPlace"];
+        [arrayHTMLSignature addObject:@"LineSignedDateDay"];
+    }
+
+
+
+
+
 
     -(void)voidCheckBooleanLastState {
         boolSPAJPDF = [modelSPAJFormGeneration voidCertainFormGenerateCaptured:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue] FormType:@"SPAJFormGeneration1"];
@@ -320,6 +365,26 @@
         return dictReferralData;
     }
 
+    -(NSDictionary *)getDictionaryForSIMaster:(NSString *)stringDBColumnName HTMLID:(NSString *)stringHTMLID{
+        NSMutableDictionary* dictSIMaster=[[NSMutableDictionary alloc]init];
+        [dictSIMaster setObject:stringHTMLID forKey:@"elementID"];
+        [dictSIMaster setObject:[dictionarySIMaster valueForKey:stringDBColumnName]?:@"" forKey:@"Value"];
+        [dictSIMaster setObject:@"1" forKey:@"CustomerID"];
+        [dictSIMaster setObject:@"1" forKey:@"SPAJID"];
+        return dictSIMaster;
+    }
+
+
+    -(NSDictionary *)getDictionaryForSignature:(NSString *)stringDBColumnName HTMLID:(NSString *)stringHTMLID{
+        NSMutableDictionary* dictForSignature=[[NSMutableDictionary alloc]init];
+        [dictForSignature setObject:stringHTMLID forKey:@"elementID"];
+        [dictForSignature setObject:[modelSPAJSignature selectSPAJSignatureData:stringDBColumnName SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]]?:@"" forKey:@"Value"];
+        [dictForSignature setObject:@"1" forKey:@"CustomerID"];
+        [dictForSignature setObject:@"1" forKey:@"SPAJID"];
+        return dictForSignature;
+    }
+
+
     -(NSDictionary *)getDictionaryForIllustrationData{
         NSMutableDictionary* dictIllustration=[[NSMutableDictionary alloc]initWithDictionary:[modelAgentProfile getAgentData]];
         NSMutableDictionary* dictIllustrationData=[[NSMutableDictionary alloc]init];
@@ -358,6 +423,16 @@
         for (int i=0; i<[arrayHTMLPOData count];i++){
             [modifieArray addObject:[self getDictionaryForPOData:[arrayDBPOData objectAtIndex:i] HTMLID:[arrayHTMLPOData objectAtIndex:i]]];
         }
+        
+        for (int i=0; i<[arrayHTMLSIData count];i++){
+            [modifieArray addObject:[self getDictionaryForSIMaster:[arrayDBSIData objectAtIndex:i] HTMLID:[arrayHTMLSIData objectAtIndex:i]]];
+        }
+        
+        for (int i=0; i<[arrayHTMLSignature count];i++){
+            [modifieArray addObject:[self getDictionaryForSignature:[arrayDBSignature objectAtIndex:i] HTMLID:[arrayHTMLSignature objectAtIndex:i]]];
+        }
+
+
         
         [dictOriginal setObject:modifieArray forKey:@"readFromDB"];
         //return [super readfromDB:finalDictionary];

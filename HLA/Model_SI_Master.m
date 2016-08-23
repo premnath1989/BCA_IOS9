@@ -143,6 +143,50 @@
     return dict;
 }
 
+-(NSDictionary *)getIlustrationDataForSI:(NSString *)SINO {
+    NSDictionary *dict;
+    
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    NSString *stringSINo;
+    NSString *stringCreatedDate;
+    NSString *stringPOName;
+    NSString *stringProductName;
+    NSString *stringProposalStatus;
+    NSString *stringSIVersion;
+    NSString *sumAssured;
+    NSString *qqStr;
+    NSString *editStr;
+    NSString *signedStr;
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+       // FMResultSet *s = [database executeQuery:@"SELECT sim.*, po.ProductName,po.PO_Name,premi.Sum_Assured FROM SI_master sim, SI_PO_Data po,SI_Premium premi WHERE sim.SINO = po.SINO and sim.SINO = premi.SINO"];
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select sim.*, po.ProductName,po.PO_Name,ifnull(sip.Sum_Assured,0) as Sum_Assured, po.QuickQuote FROM SI_master sim left join SI_PO_Data po on sim.SINO=po.SINO left join SI_Premium sip on sim.SINO=sip.SINO where sim.SINO = %@ group by sim.ID ",SINO]];
+    
+    while ([s next]) {
+        stringSINo = [NSString stringWithFormat:@"%@",[s stringForColumn:@"SINO"]];
+        stringCreatedDate = [NSString stringWithFormat:@"%@",[s stringForColumn:@"CreatedDate"]];
+        stringPOName = [NSString stringWithFormat:@"%@",[s stringForColumn:@"PO_Name"]];
+        stringProductName = [NSString stringWithFormat:@"%@",[s stringForColumn:@"ProductName"]];
+        stringProposalStatus = [NSString stringWithFormat:@"%@",[s stringForColumn:@"ProposalStatus"]];
+        stringSIVersion = [NSString stringWithFormat:@"%@",[s stringForColumn:@"SI_Version"]];
+        sumAssured = [NSString stringWithFormat:@"%@",[s stringForColumn:@"Sum_Assured"]];
+        qqStr = [NSString stringWithFormat:@"%@",[s stringForColumn:@"QuickQuote"]];
+        editStr = [NSString stringWithFormat:@"%@",[s stringForColumn:@"EnableEditing"]];
+        signedStr = [NSString stringWithFormat:@"%@",[s stringForColumn:@"IllustrationSigned"]];
+        
+        NSLog(@"sumassured %@",sumAssured);
+}
+    dict = [[NSDictionary alloc] initWithObjectsAndKeys:stringSINo,@"SINO", stringCreatedDate,@"CreatedDate", stringPOName,@"PO_Name",stringProductName,@"ProductName",stringProposalStatus,@"ProposalStatus",stringSIVersion,@"SI_Version",sumAssured,@"Sum_Assured", qqStr, @"QuickQuote",editStr, @"EnableEditing",signedStr,@"IllustrationSigned", nil];
+    
+    [results close];
+    [database close];
+    return dict;
+}
+
 
 -(NSDictionary *)getNonQuickQuoteIlustrationata:(NSString *)orderBy Method:(NSString *)sortMethod{
     NSDictionary *dict;
