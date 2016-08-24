@@ -166,7 +166,7 @@
         [arrayHTMLAgentID addObject:@"TextAgentName"];
         [arrayHTMLAgentID addObject:@"TextAgentCode"];
         [arrayHTMLAgentID addObject:@"TextLicenseNumber"];
-        [arrayHTMLAgentID addObject:@"DateActive"];
+        [arrayHTMLAgentID addObject:@"DateActiveAgentExpired"];
         [arrayHTMLAgentID addObject:@"TextIllustrationAgentName"];
         [arrayHTMLAgentID addObject:@"TextIllustrationAgentCode"];
     }

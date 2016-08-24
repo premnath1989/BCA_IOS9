@@ -54,6 +54,8 @@ var stringNumberPrefix = "Number";
 var arrayHealthTableHeader = ["DiseaseName", "SickFrom", "SickDuration", "DoctorName", "Hospital", "Address", "Telephone"];
 var arraySPAJProposalTableHeader = ["CompanyName", "PolicyNumber", "PublishedDate", "BasicSumAssured", "Decision"];
 var stringAreaPrefix = "Area";
+var stringProspectiveInsuredPrefix = "ProspectiveInsured";
+var stringPolicyHolderPrefix = "PolicyHolder";
 
 
 // GENERATOR
@@ -843,7 +845,7 @@ function setAreaForm(stringID, stringValue)
     setTextGeneral(stringID, stringValue);
 }
 
-function setAreaPDF(stringID, stringContent)
+function setAreaPDF(stringID, stringValue)
 {
     setBoxGeneral(stringID, stringValue);
 }
@@ -1011,7 +1013,10 @@ function getFromDatabase(objectContent, stringPageType)
 //					{
 //						$("#TablePolicyHolderIllness tbody tr").each(function()
 //						{
-//							
+//                            var stringCellID = $(this).attr("id");
+//                            var stringCellInfix = 
+//                            
+//							if ()
 //						});
 //					}
 //					else

@@ -1958,28 +1958,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SPAJ/SPAJ Form Generation.m"
-            timestampString = "493706011.78937"
+            timestampString = "493720087.012644"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "434"
             endingLineNumber = "434"
             landmarkName = "-readfromDB:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SPAJ Add Signature.m"
-            timestampString = "493712840.917443"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "600"
-            endingLineNumber = "600"
-            landmarkName = "-joinMultiplePDF"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
