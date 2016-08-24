@@ -843,7 +843,7 @@ NSString* const Back = @"Back";
                 fileIndex++;
                 target = [filePathApp stringByAppendingPathComponent:fname];
             }
-            [imageData writeToFile:target options:NSDataWritingAtomic error:&error];
+                [imageData writeToFile:target options:NSDataWritingAtomic error:&error];
         }
         else{
             NSString* target=[NSString stringWithFormat:@"%@/%@.jpg",filePathApp,fileName];

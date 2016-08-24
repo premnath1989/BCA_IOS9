@@ -110,7 +110,8 @@
 <label class='Wrap Single PositionerLeft' for='TextPolicyHolderCompany'>11. a. Nama Perusahaan/Instansi/Sekolah</label>
 <table class='BoxSquare PositionerLeft' id='TextPolicyHolderCompany' style='margin-left: 4px'></table>
 <br>
-<section class='SectionFooter'>
+<!-- / QUICK FIX -->
+<section class='SectionFooter' style='margin-top: 3px'>
   <div class='FooterContainer'>
     <div class='FooterGeneral'>
       <span class='Note Single PositionerLeft'>OP/NB/0104/031602 Hal 1 / 8</span>
@@ -187,7 +188,7 @@
 <div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderCorrespondanceOfficeAddress'></div>
 <label class='RadioButton PositionerLeft' for='RadioButtonPolicyHolderCorrespondanceOfficeAddress'>Alamat Kantor</label>
 <br>
-<label class='Medium Single PositionerLeft' for='RadioButtonPolicyHolderRelationAssuredSelf'>17. Hubungan dengan Calon Tertangung</label>
+<label class='Medium Double PositionerLeft' for='RadioButtonPolicyHolderRelationAssuredSelf'>17. Hubungan dengan Calon Tertangung</label>
 <input id='RadioButtonPolicyHolderRelationAssuredSelf' name='RadioButtonPolicyHolderRelationAssured' type='radio' value='dirisendiri'>
 <div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderRelationAssuredSelf'></div>
 <label class='RadioButton Short PositionerLeft' for='RadioButtonPolicyHolderRelationAssuredSelf'>Diri Sendiri</label>
@@ -205,7 +206,7 @@
 <label class='RadioButton PositionerLeft' for='RadioButtonPolicyHolderRelationAssuredOther'>Lainnya, sebutkan</label>
 <div class='LineDot PositionerLeft' id='LinePolicyHolderOtherRelationship'></div>
 <br>
-<label class='Wrap Single PositionerLeft' for='RadioButtonPolicyHolderInsurancePurposeSavings'>18. Tujuan Pembelian Asuransi</label>
+<label class='Medium Double PositionerLeft' for='RadioButtonPolicyHolderInsurancePurposeSavings'>18. Tujuan Pembelian Asuransi</label>
 <input id='RadioButtonPolicyHolderInsurancePurposeSavings' name='RadioButtonPolicyHolderInsurancePurpose' type='radio' value='tabungan'>
 <div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderInsurancePurposeSavings'></div>
 <label class='RadioButton Short PositionerLeft' for='RadioButtonPolicyHolderInsurancePurposeSavings'>Tabungan</label>
@@ -268,7 +269,8 @@
 <table class='BoxSquare PositionerLeft' id='TextPolicyHolderSource'></table>
 <br>
 <br>
-<h3>A2. PERUSAHAAN/BERBADAN HUKUM</h3>
+<!-- / QUICK FIX -->
+<h3 style='margin-top: 25px; margin-bottom: 21px;'>A2. PERUSAHAAN/BERBADAN HUKUM</h3>
 <br>
 <label class='Medium Single PositionerLeft' for='TextPolicyHolderCompanyName'>1. Nama Perusahaan</label>
 <table class='BoxSquare PositionerLeft' id='TextPolicyHolderCompanyName'></table>
@@ -306,63 +308,76 @@
 <label class='RadioButton PositionerLeft' for='RadioButtonPolicyHolderCompanyTypeOther'>Lainnya, sebutkan</label>
 <div class='LineDot PositionerLeft' id='LinePolicyHolderCompanyTypeOther'></div>
 <br>
-<label class='Medium Single PositionerLeft' for='TextPolicyHolderCompanyNoAnggaranDasar'>3. Nomor Anggaran Dasar/Akta Pendirian</label>
+<!-- / QUICK FIX START -->
+<label class='Medium Double PositionerLeft' for='TextPolicyHolderCompanyNoAnggaranDasar'>3. Nomor Anggaran Dasar/Akta Pendirian</label>
 <table class='BoxSquare PositionerLeft' id='TextPolicyHolderCompanyNoAnggaranDasar'></table>
 <br>
-<label class='Medium Single PositionerLeft' for='DatePolicyHolderCompanyNoAnggaranDasarExpired'></label>
-<label class='Medium Single PositionerLeft' for='DatePolicyHolderCompanyNoAnggaranDasarExpiredDay'>Tanggal Berlaku</label>
-<table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanyNoAnggaranDasarExpiredDay'></table>
-<span class='Separator Single PositionerLeft' for='DatePolicyHolderCompanyNoAnggaranDasarExpiredMonth'>/</span>
-<table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanyNoAnggaranDasarExpiredMonth'></table>
-<label class='Separator Single PositionerLeft' for='DatePolicyHolderCompanyNoAnggaranDasarExpiredYear'>/</label>
-<table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanyNoAnggaranDasarExpiredYear'></table>
-<br>
+<div style='margin-top: 10px;'>
+  <label class='Medium Single PositionerLeft' for='DatePolicyHolderCompanyNoAnggaranDasarExpired'></label>
+  <label class='Medium Single PositionerLeft' for='DatePolicyHolderCompanyNoAnggaranDasarExpiredDay'>Tanggal Berlaku</label>
+  <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanyNoAnggaranDasarExpiredDay'></table>
+  <span class='Separator Single PositionerLeft' for='DatePolicyHolderCompanyNoAnggaranDasarExpiredMonth'>/</span>
+  <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanyNoAnggaranDasarExpiredMonth'></table>
+  <label class='Separator Single PositionerLeft' for='DatePolicyHolderCompanyNoAnggaranDasarExpiredYear'>/</label>
+  <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanyNoAnggaranDasarExpiredYear'></table>
+  <br>
+</div>
 <label class='Medium Single PositionerLeft' for='TextPolicyHolderCompanyNoSIUP'>4. Nomor Surat Ijin Usaha</label>
 <table class='BoxSquare PositionerLeft' id='TextPolicyHolderCompanyNoSIUP'></table>
 <br>
-<label class='Medium Single PositionerLeft' for='DatePolicyHolderCompanySIUPExpired'></label>
-<label class='Medium Single PositionerLeft' for='DatePolicyHolderCompanySIUPExpiredDay'>Tanggal Berlaku</label>
-<table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanySIUPExpiredDay'></table>
-<span class='Separator Single PositionerLeft' for='DatePolicyHolderCompanySIUPExpiredMonth'>/</span>
-<table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanySIUPExpiredMonth'></table>
-<label class='Separator Single PositionerLeft' for='DatePolicyHolderCompanySIUPExpiredYear'>/</label>
-<table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanySIUPExpiredYear'></table>
-<br>
+<div style='margin-top: 10px;'>
+  <label class='Medium Single PositionerLeft' for='DatePolicyHolderCompanySIUPExpired'></label>
+  <label class='Medium Single PositionerLeft' for='DatePolicyHolderCompanySIUPExpiredDay'>Tanggal Berlaku</label>
+  <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanySIUPExpiredDay'></table>
+  <span class='Separator Single PositionerLeft' for='DatePolicyHolderCompanySIUPExpiredMonth'>/</span>
+  <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanySIUPExpiredMonth'></table>
+  <label class='Separator Single PositionerLeft' for='DatePolicyHolderCompanySIUPExpiredYear'>/</label>
+  <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanySIUPExpiredYear'></table>
+  <br>
+</div>
 <label class='Medium Single PositionerLeft' for='TextPolicyHolderCompanyNoTDP'>5. Nomor TDP</label>
 <table class='BoxSquare PositionerLeft' id='TextPolicyHolderCompanyNoTDP'></table>
 <br>
-<label class='Medium Single PositionerLeft' for='DatePolicyHolderCompanyNoTDPExpired'></label>
-<label class='Medium Single PositionerLeft' for='DatePolicyHolderCompanyNoTDPExpiredDay'>Tanggal Berlaku</label>
-<table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanyNoTDPExpiredDay'></table>
-<span class='Separator Single PositionerLeft' for='DatePolicyHolderCompanyNoTDPExpiredMonth'>/</span>
-<table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanyNoTDPExpiredMonth'></table>
-<label class='Separator Single PositionerLeft' for='DatePolicyHolderCompanyNoTDPExpiredYear'>/</label>
-<table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanyNoTDPExpiredYear'></table>
-<br>
+<div style='margin-top: 10px;'>
+  <label class='Medium Single PositionerLeft' for='DatePolicyHolderCompanyNoTDPExpired'></label>
+  <label class='Medium Single PositionerLeft' for='DatePolicyHolderCompanyNoTDPExpiredDay'>Tanggal Berlaku</label>
+  <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanyNoTDPExpiredDay'></table>
+  <span class='Separator Single PositionerLeft' for='DatePolicyHolderCompanyNoTDPExpiredMonth'>/</span>
+  <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanyNoTDPExpiredMonth'></table>
+  <label class='Separator Single PositionerLeft' for='DatePolicyHolderCompanyNoTDPExpiredYear'>/</label>
+  <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanyNoTDPExpiredYear'></table>
+  <br>
+</div>
 <label class='Medium Single PositionerLeft' for='TextPolicyHolderCompanyNoSKDP'>6. Nomor SKDP (Domisili)</label>
 <table class='BoxSquare PositionerLeft' id='TextPolicyHolderCompanyNoSKDP'></table>
 <br>
-<label class='Medium Single PositionerLeft' for='DatePolicyHolderCompanyNoSKDPExpired'></label>
-<label class='Medium Single PositionerLeft' for='DatePolicyHolderCompanyNoSKDPExpiredDay'>Tanggal Berlaku</label>
-<table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanyNoSKDPExpiredDay'></table>
-<span class='Separator Single PositionerLeft' for='DatePolicyHolderCompanyNoSKDPExpiredMonth'>/</span>
-<table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanyNoSKDPExpiredMonth'></table>
-<label class='Separator Single PositionerLeft' for='DatePolicyHolderCompanyNoSKDPExpiredYear'>/</label>
-<table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanyNoSKDPExpiredYear'></table>
-<br>
-<label class='Medium Single PositionerLeft' for='TextPolicyHolderCompanyNoNPWP'>7. Nomor NPWP (jika ada)</label>
-<table class='BoxSquare PositionerLeft' id='TextPolicyHolderCompanyNoNPWP'></table>
-<table class='BoxSquare PositionerRight' id='DatePolicyHolderCompanyNoNPWPYear'></table>
-<span class='Separator PositionerRight'>/</span>
-<table class='BoxSquare PositionerRight' id='DatePolicyHolderCompanyNoNPWPMonth'></table>
-<span class='Separator PositionerRight'>/</span>
-<table class='BoxSquare PositionerRight' id='DatePolicyHolderCompanyNoNPWPDay'></table>
-<label class='Wrap Single PositionerRight'>Tanggal Berlaku</label>
-<br>
+<div style='margin-top: 10px;'>
+  <label class='Medium Single PositionerLeft' for='DatePolicyHolderCompanyNoSKDPExpired'></label>
+  <label class='Medium Single PositionerLeft' for='DatePolicyHolderCompanyNoSKDPExpiredDay'>Tanggal Berlaku</label>
+  <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanyNoSKDPExpiredDay'></table>
+  <span class='Separator Single PositionerLeft' for='DatePolicyHolderCompanyNoSKDPExpiredMonth'>/</span>
+  <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanyNoSKDPExpiredMonth'></table>
+  <label class='Separator Single PositionerLeft' for='DatePolicyHolderCompanyNoSKDPExpiredYear'>/</label>
+  <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanyNoSKDPExpiredYear'></table>
+  <br>
+</div>
+<div style='margin-top: 10px;'>
+  <label class='Medium Single PositionerLeft' for='TextPolicyHolderCompanyNoNPWP'>7. Nomor NPWP (jika ada)</label>
+  <table class='BoxSquare PositionerLeft' id='TextPolicyHolderCompanyNoNPWP'></table>
+  <table class='BoxSquare PositionerRight' id='DatePolicyHolderCompanyNoNPWPYear'></table>
+  <span class='Separator PositionerRight'>/</span>
+  <table class='BoxSquare PositionerRight' id='DatePolicyHolderCompanyNoNPWPMonth'></table>
+  <span class='Separator PositionerRight'>/</span>
+  <table class='BoxSquare PositionerRight' id='DatePolicyHolderCompanyNoNPWPDay'></table>
+  <label class='Wrap Single PositionerRight'>Tanggal Berlaku</label>
+  <br>
+</div>
+<!-- / QUICK FIX END -->
 <label class='Medium Single PositionerLeft' for='TextPolicyHolderCompanySector'>8. Bidang Usaha</label>
 <table class='BoxSquare PositionerLeft' id='TextPolicyHolderCompanySector'></table>
 <br>
-<section class='SectionFooter'>
+<!-- / QUICK FIX -->
+<section class='SectionFooter' style='margin-top: 119px'>
   <div class='FooterContainer'>
     <div class='FooterGeneral'>
       <span class='Note Single PositionerLeft'>OP/NB/0104/031602 Hal 1 / 8</span>

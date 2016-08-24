@@ -53,6 +53,7 @@ var stringCellPrefix = "Cell";
 var stringNumberPrefix = "Number"; 
 var arrayHealthTableHeader = ["DiseaseName", "SickFrom", "SickDuration", "DoctorName", "Hospital", "Address", "Telephone"];
 var arraySPAJProposalTableHeader = ["CompanyName", "PolicyNumber", "PublishedDate", "BasicSumAssured", "Decision"];
+var stringAreaPrefix = "Area";
 
 
 // GENERATOR
@@ -837,6 +838,16 @@ function setDatePDF(stringID, stringContent)
     }
 }
 
+function setAreaForm(stringID, stringValue)
+{
+    setTextGeneral(stringID, stringValue);
+}
+
+function setAreaPDF(stringID, stringContent)
+{
+    setBoxGeneral(stringID, stringValue);
+}
+
 
 // GETTER
 
@@ -966,6 +977,16 @@ function getDatePDF(stringID)
     return getBoxGeneral(stringID);
 }
 
+function getAreaForm(stringID)
+{
+    return getBoxGeneral(stringID);
+}
+
+function getAreaPDF(stringID)
+{
+    return getBoxGeneral(stringID);
+}
+
 
 // GET FROM DATABASE
 
@@ -976,7 +997,7 @@ function getFromDatabase(objectContent, stringPageType)
         var stringKey = objectContent[i].elementID;
         var stringValue = objectContent[i].Value;               
         
-        if (stringKey.substring(0, 4) == stringPrefixText)
+        if (stringKey.substring(0, stringPrefixText.length) == stringPrefixText)
         {
 //			for (var j = 0; j < arrayHealthTableHeader.length; j++)
 //			{
@@ -988,20 +1009,23 @@ function getFromDatabase(objectContent, stringPageType)
 //					
 //					if (stringIndicatorPrefix == stringIndicatorPolicyHolder)
 //					{
-//						$("#TableProspectiveInsuredIllness tbody tr").each(function()
+//						$("#TablePolicyHolderIllness tbody tr").each(function()
 //						{
 //							
 //						});
 //					}
 //					else
 //					{
-//						
+//						$("#TableProspectiveInsuredIllness tbody tr").each(function()
+//						{
+//							
+//						});
 //					}
 //					
-////					$(stringTableJQueryID + " tbody" + " " + stringRowJQueryID + i + " td").each(function()
-////					{
-////						setTextGeneral($(this).attr("id"), stringValue);
-////					});
+//					$(stringTableJQueryID + " tbody" + " " + stringRowJQueryID + i + " td").each(function()
+//					{
+//						setTextGeneral($(this).attr("id"), stringValue);
+//					});
 //					
 //					alert(stringKey + " == " + arrayHealthTableHeader[j]);
 //				}
@@ -1024,11 +1048,11 @@ function getFromDatabase(objectContent, stringPageType)
         {            
             setRadioButtonGeneral(stringKey, stringValue);
         }
-        else if (stringKey.substring(0, 8) == stringPrefixCheckbox)
+        else if (stringKey.substring(0, stringPrefixCheckbox.length) == stringPrefixCheckbox)
         {            
             setRadioCheckboxGeneral(stringKey, stringValue);
         }
-        else if (stringKey.substring(0, 6) == stringPrefixSelect)
+        else if (stringKey.substring(0, stringPrefixSelect.length) == stringPrefixSelect)
         {            
             if (stringPageType == stringPageTypePDF)
             {
@@ -1039,7 +1063,7 @@ function getFromDatabase(objectContent, stringPageType)
                 setSelectForm(stringKey, stringValue);
             }
         }
-        else if (stringKey.substring(0, 4) == stringPrefixDate)
+        else if (stringKey.substring(0, stringPrefixDate.length) == stringPrefixDate)
         {            
             if (stringPageType == stringPageTypePDF)
             {
@@ -1048,6 +1072,17 @@ function getFromDatabase(objectContent, stringPageType)
             else
             {
                 setDateForm(stringKey, stringValue);
+            }
+        }
+        else if (stringKey.substring(0, stringAreaPrefix.length) == stringAreaPrefix)
+        {            
+            if (stringPageType == stringPageTypePDF)
+            {
+                setAreaPDF(stringKey, stringValue);
+            }
+            else
+            {
+                setAreaForm(stringKey, stringValue);
             }
         }
         else
@@ -1148,6 +1183,23 @@ function setToDatabase(stringPageType)
         else
         {
             stringValue = getSelectForm(stringKey);
+        }
+        
+        validatePush(objectContent, stringKey, stringValue);
+    });
+    
+    $("textarea").each(function()
+    {
+        var stringKey = $(this).attr("id");
+        var stringValue;
+        
+        if (stringPageType == stringPageTypePDF)
+        {
+            stringValue = getAreaPDF(stringKey);
+        }
+        else
+        {
+            stringValue = getAreaForm(stringKey);
         }
         
         validatePush(objectContent, stringKey, stringValue);

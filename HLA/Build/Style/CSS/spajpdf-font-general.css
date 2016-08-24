@@ -144,6 +144,11 @@ main section label.Single {
   line-height: 20px;
 }
 
+main section label.Double {
+  min-height: 40px;
+  vertical-align: top;
+}
+
 main section label.Multi {
   min-height: 60px;
   vertical-align: top;
@@ -463,7 +468,8 @@ table.Round tbody tr:last-child td:last-child {
 }
 
 table.Space thead tr th {
-  height: 40px;
+  height: 20px;
+  padding: 5px;
   font-size: 0.9em;
   text-align: center;
   border-style: solid;
@@ -471,7 +477,8 @@ table.Space thead tr th {
 }
 
 table.Space tbody tr td {
-  height: 40px;
+  height: 20px;
+  padding: 5px;
   font-size: 0.9em;
   border-style: solid;
   border-width: 1px;

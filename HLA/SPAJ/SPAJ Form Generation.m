@@ -158,6 +158,7 @@
         [arrayDBAgentID addObject:@"AgentName"];
         [arrayDBAgentID addObject:@"AgentCode"];
         [arrayDBAgentID addObject:@""];
+        [arrayDBAgentID addObject:@"AgentExpiryDate"];
         [arrayDBAgentID addObject:@"AgentName"];
         [arrayDBAgentID addObject:@"AgentCode"];
         
@@ -165,8 +166,9 @@
         [arrayHTMLAgentID addObject:@"TextAgentName"];
         [arrayHTMLAgentID addObject:@"TextAgentCode"];
         [arrayHTMLAgentID addObject:@"TextLicenseNumber"];
-        [arrayHTMLAgentID addObject:@"BoxIllustrationAgentName"];
-        [arrayHTMLAgentID addObject:@"BoxIllustrationAgentCode"];
+        [arrayHTMLAgentID addObject:@"DateActive"];
+        [arrayHTMLAgentID addObject:@"TextIllustrationAgentName"];
+        [arrayHTMLAgentID addObject:@"TextIllustrationAgentCode"];
     }
 
     -(void)arrayInitializeReferral{
@@ -181,7 +183,7 @@
         [arrayHTMLReferal addObject:@"TextReferenceName"];
         [arrayHTMLReferal addObject:@"TextBranchName"];
         [arrayHTMLReferal addObject:@"TextBranchCode"];
-        [arrayHTMLReferal addObject:@"TextArea"];
+        [arrayHTMLReferal addObject:@"AreaKanwilAgent"];
         [arrayHTMLReferal addObject:@"TextAgentID"];
     }
 
@@ -197,12 +199,13 @@
 
 
     -(void)arrayInitializeSIMaster{ //premnath Vijaykumar
-         arrayDBSIData=[[NSMutableArray alloc]init];
+        arrayDBSIData=[[NSMutableArray alloc]init];
         [arrayDBSIData addObject:@"SINO"];
         [arrayDBSIData addObject:@"CreatedDate"];
+        
         arrayHTMLSIData =[[NSMutableArray alloc]init];
         [arrayHTMLSIData addObject:@"TextIllustrationNumber"];
-        [arrayHTMLSIData addObject:@"BoxIllustrationDateDay"];
+        [arrayHTMLSIData addObject:@"DateIllustration"];
     }
 
     -(void)arrayInitializeSignature{ //premnath Vijaykumar
@@ -341,7 +344,14 @@
     
         NSMutableDictionary* dictAgentData=[[NSMutableDictionary alloc]init];
         [dictAgentData setObject:stringHTMLID forKey:@"elementID"];
-        [dictAgentData setObject:[dictAgentProfile valueForKey:stringDBColumnName]?:@"" forKey:@"Value"];
+        if ([stringDBColumnName isEqualToString:@"AgentExpiryDate"]){
+            NSString* trimmedString = [[dictAgentProfile valueForKey:stringDBColumnName] substringWithRange:NSMakeRange(0, 10)];
+            NSString* dateFormatted = [formatter convertDateFrom:@"yyyy-MM-dd" TargetDateFormat:@"dd/MM/yyyy" DateValue:trimmedString];
+            [dictAgentData setObject:dateFormatted?:@"" forKey:@"Value"];
+        }
+        else{
+            [dictAgentData setObject:[dictAgentProfile valueForKey:stringDBColumnName]?:@"" forKey:@"Value"];
+        }
         [dictAgentData setObject:@"1" forKey:@"CustomerID"];
         [dictAgentData setObject:@"1" forKey:@"SPAJID"];
         return dictAgentData;
@@ -368,7 +378,13 @@
     -(NSDictionary *)getDictionaryForSIMaster:(NSString *)stringDBColumnName HTMLID:(NSString *)stringHTMLID{
         NSMutableDictionary* dictSIMaster=[[NSMutableDictionary alloc]init];
         [dictSIMaster setObject:stringHTMLID forKey:@"elementID"];
-        [dictSIMaster setObject:[dictionarySIMaster valueForKey:stringDBColumnName]?:@"" forKey:@"Value"];
+        if ([stringDBColumnName isEqualToString:@"CreatedDate"]){
+            NSString* dateFormatted = [formatter convertDateFrom:@"yyyy-MM-dd HH:mm:ss" TargetDateFormat:@"dd/MM/yyyy" DateValue:[dictionarySIMaster valueForKey:stringDBColumnName]];
+            [dictSIMaster setObject:dateFormatted?:@"" forKey:@"Value"];
+        }
+        else{
+            [dictSIMaster setObject:[dictionarySIMaster valueForKey:stringDBColumnName]?:@"" forKey:@"Value"];
+        }
         [dictSIMaster setObject:@"1" forKey:@"CustomerID"];
         [dictSIMaster setObject:@"1" forKey:@"SPAJID"];
         return dictSIMaster;
@@ -408,10 +424,12 @@
         [finalDictionary setObject:answerDictionary forKey:@"data"];
         [finalDictionary setValue:[params valueForKey:@"successCallBack"] forKey:@"successCallBack"];
         [finalDictionary setValue:[params valueForKey:@"errorCallback"] forKey:@"errorCallback"];
+        [super readfromDB:finalDictionary];
         
-        NSMutableDictionary *dictOriginal = [[NSMutableDictionary alloc]initWithDictionary:[super readfromDB:finalDictionary]];
+        //NSMutableDictionary *dictOriginal = [[NSMutableDictionary alloc]initWithDictionary:[super readfromDB:finalDictionary]];
+        NSMutableDictionary *dictOriginal = [[NSMutableDictionary alloc]init];
         
-        NSMutableArray *modifieArray = [[NSMutableArray alloc]initWithArray:[dictOriginal valueForKey:@"readFromDB"]];
+        NSMutableArray *modifieArray = [[NSMutableArray alloc]init];
         for (int i=0; i<[arrayHTMLAgentID count];i++){
             [modifieArray addObject:[self getDictionaryForAgentData:[arrayDBAgentID objectAtIndex:i] HTMLID:[arrayHTMLAgentID objectAtIndex:i]]];
         }

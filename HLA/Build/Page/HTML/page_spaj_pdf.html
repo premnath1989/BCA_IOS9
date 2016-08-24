@@ -60,14 +60,14 @@
       	boxGenerator("#TextAgentCode", 11, boxTypeWithoutLabel, null);
       	boxGenerator("#TextProductCode", 11, boxTypeWithoutLabel, null);
       	boxGenerator("#TextLicenseNumber", 16, boxTypeWithoutLabel, null);
-      	boxGenerator("#DateActiveDay", 2, boxTypeWithBottomLabel, labelDay);
-      	boxGenerator("#DateActiveMonth", 2, boxTypeWithBottomLabel, labelMonth);
-      	boxGenerator("#DateActiveYear", 4, boxTypeWithBottomLabel, labelYear);
+      	boxGenerator("#DateActiveAgentExpiredDay", 2, boxTypeWithBottomLabel, labelDay);
+      	boxGenerator("#DateActiveAgentExpiredMonth", 2, boxTypeWithBottomLabel, labelMonth);
+      	boxGenerator("#DateActiveAgentExpiredYear", 4, boxTypeWithBottomLabel, labelYear);
       	boxGenerator("#TextProductName", 16, boxTypeWithoutLabel, null);
       	boxGenerator("#TextReferenceName", 30, boxTypeWithoutLabel, null);
       	boxGenerator("#TextBranchName", 30, boxTypeWithoutLabel, null);
       	boxGenerator("#TextBranchCode", 16, boxTypeWithoutLabel, null);
-      	boxGenerator("#TextArea", 16, boxTypeWithoutLabel, null);
+      	boxGenerator("#AreaKanwilAgent", 16, boxTypeWithoutLabel, null);
       	boxGenerator("#TextAgentID", 13, boxTypeWithoutLabel, null);
       	boxGenerator("#DateReferenceDay", 2, boxTypeWithBottomLabel, labelDay);
       	boxGenerator("#DateReferenceMonth", 2, boxTypeWithBottomLabel, labelMonth);
@@ -337,12 +337,12 @@
         <br>
         <label class='Medium Single PositionerLeft' for='TextLicenseNumber'>License Number</label>
         <table class='BoxSquare PositionerLeft' id='TextLicenseNumber'></table>
-        <table class='BoxSquare PositionerRight' id='DateActiveYear'></table>
-        <span class='Separator PositionerRight' for='DateActiveYear'>/</span>
-        <table class='BoxSquare PositionerRight' id='DateActiveMonth'></table>
-        <span class='Separator PositionerRight' for='DateActiveMonth'>/</span>
-        <table class='BoxSquare PositionerRight' id='DateActiveDay'></table>
-        <label class='Wrap Single PositionerRight' for='DateActiveDay'>Masa Berlaku</label>
+        <table class='BoxSquare PositionerRight' id='DateActiveAgentExpiredYear'></table>
+        <span class='Separator PositionerRight' for='DateActiveAgentExpiredYear'>/</span>
+        <table class='BoxSquare PositionerRight' id='DateActiveAgentExpiredMonth'></table>
+        <span class='Separator PositionerRight' for='DateActiveAgentExpiredMonth'>/</span>
+        <table class='BoxSquare PositionerRight' id='DateActiveAgentExpiredDay'></table>
+        <label class='Wrap Single PositionerRight' for='DateActiveAgentExpiredDay'>Masa Berlaku</label>
         <br>
         <label class='Medium Single PositionerLeft' for='TextProductName'>Nama Produk</label>
         <table class='BoxSquare PositionerLeft' id='TextProductName'></table>
@@ -373,8 +373,8 @@
         <label class='RadioButton PositionerRight' for='RadioButtonPolicyHolderReferenceSourceCustomerService'>CS</label>
         <label class='Wrap Single PositionerRight'>Tanggal Referal</label>
         <br>
-        <label class='Medium Single PositionerLeft' for='TextArea'>Area / Kanwil</label>
-        <table class='BoxSquare PositionerLeft' id='TextArea'></table>
+        <label class='Medium Single PositionerLeft' for='AreaKanwilAgent'>Area / Kanwil</label>
+        <table class='BoxSquare PositionerLeft' id='AreaKanwilAgent'></table>
         <label class='Note Wrap Single PositionerRight' style='margin-top: -10px'>(harap dapat dilingkari)</label>
         <br>
         <label class='Medium Single PositionerLeft' for='TextAgentID'>AgentID</label>
@@ -543,7 +543,8 @@
         <label class='Wrap Single PositionerLeft' for='TextPolicyHolderCompany'>11. a. Nama Perusahaan/Instansi/Sekolah</label>
         <table class='BoxSquare PositionerLeft' id='TextPolicyHolderCompany' style='margin-left: 4px'></table>
         <br>
-        <section class='SectionFooter'>
+        <!-- / QUICK FIX -->
+        <section class='SectionFooter' style='margin-top: 3px'>
           <div class='FooterContainer'>
             <div class='FooterGeneral'>
               <span class='Note Single PositionerLeft'>OP/NB/0104/031602 Hal 1 / 8</span>
@@ -620,7 +621,7 @@
         <div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderCorrespondanceOfficeAddress'></div>
         <label class='RadioButton PositionerLeft' for='RadioButtonPolicyHolderCorrespondanceOfficeAddress'>Alamat Kantor</label>
         <br>
-        <label class='Medium Single PositionerLeft' for='RadioButtonPolicyHolderRelationAssuredSelf'>17. Hubungan dengan Calon Tertangung</label>
+        <label class='Medium Double PositionerLeft' for='RadioButtonPolicyHolderRelationAssuredSelf'>17. Hubungan dengan Calon Tertangung</label>
         <input id='RadioButtonPolicyHolderRelationAssuredSelf' name='RadioButtonPolicyHolderRelationAssured' type='radio' value='dirisendiri'>
         <div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderRelationAssuredSelf'></div>
         <label class='RadioButton Short PositionerLeft' for='RadioButtonPolicyHolderRelationAssuredSelf'>Diri Sendiri</label>
@@ -638,7 +639,7 @@
         <label class='RadioButton PositionerLeft' for='RadioButtonPolicyHolderRelationAssuredOther'>Lainnya, sebutkan</label>
         <div class='LineDot PositionerLeft' id='LinePolicyHolderOtherRelationship'></div>
         <br>
-        <label class='Wrap Single PositionerLeft' for='RadioButtonPolicyHolderInsurancePurposeSavings'>18. Tujuan Pembelian Asuransi</label>
+        <label class='Medium Double PositionerLeft' for='RadioButtonPolicyHolderInsurancePurposeSavings'>18. Tujuan Pembelian Asuransi</label>
         <input id='RadioButtonPolicyHolderInsurancePurposeSavings' name='RadioButtonPolicyHolderInsurancePurpose' type='radio' value='tabungan'>
         <div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderInsurancePurposeSavings'></div>
         <label class='RadioButton Short PositionerLeft' for='RadioButtonPolicyHolderInsurancePurposeSavings'>Tabungan</label>
@@ -701,7 +702,8 @@
         <table class='BoxSquare PositionerLeft' id='TextPolicyHolderSource'></table>
         <br>
         <br>
-        <h3>A2. PERUSAHAAN/BERBADAN HUKUM</h3>
+        <!-- / QUICK FIX -->
+        <h3 style='margin-top: 25px; margin-bottom: 21px;'>A2. PERUSAHAAN/BERBADAN HUKUM</h3>
         <br>
         <label class='Medium Single PositionerLeft' for='TextPolicyHolderCompanyName'>1. Nama Perusahaan</label>
         <table class='BoxSquare PositionerLeft' id='TextPolicyHolderCompanyName'></table>
@@ -739,63 +741,76 @@
         <label class='RadioButton PositionerLeft' for='RadioButtonPolicyHolderCompanyTypeOther'>Lainnya, sebutkan</label>
         <div class='LineDot PositionerLeft' id='LinePolicyHolderCompanyTypeOther'></div>
         <br>
-        <label class='Medium Single PositionerLeft' for='TextPolicyHolderCompanyNoAnggaranDasar'>3. Nomor Anggaran Dasar/Akta Pendirian</label>
+        <!-- / QUICK FIX START -->
+        <label class='Medium Double PositionerLeft' for='TextPolicyHolderCompanyNoAnggaranDasar'>3. Nomor Anggaran Dasar/Akta Pendirian</label>
         <table class='BoxSquare PositionerLeft' id='TextPolicyHolderCompanyNoAnggaranDasar'></table>
         <br>
-        <label class='Medium Single PositionerLeft' for='DatePolicyHolderCompanyNoAnggaranDasarExpired'></label>
-        <label class='Medium Single PositionerLeft' for='DatePolicyHolderCompanyNoAnggaranDasarExpiredDay'>Tanggal Berlaku</label>
-        <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanyNoAnggaranDasarExpiredDay'></table>
-        <span class='Separator Single PositionerLeft' for='DatePolicyHolderCompanyNoAnggaranDasarExpiredMonth'>/</span>
-        <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanyNoAnggaranDasarExpiredMonth'></table>
-        <label class='Separator Single PositionerLeft' for='DatePolicyHolderCompanyNoAnggaranDasarExpiredYear'>/</label>
-        <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanyNoAnggaranDasarExpiredYear'></table>
-        <br>
+        <div style='margin-top: 10px;'>
+          <label class='Medium Single PositionerLeft' for='DatePolicyHolderCompanyNoAnggaranDasarExpired'></label>
+          <label class='Medium Single PositionerLeft' for='DatePolicyHolderCompanyNoAnggaranDasarExpiredDay'>Tanggal Berlaku</label>
+          <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanyNoAnggaranDasarExpiredDay'></table>
+          <span class='Separator Single PositionerLeft' for='DatePolicyHolderCompanyNoAnggaranDasarExpiredMonth'>/</span>
+          <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanyNoAnggaranDasarExpiredMonth'></table>
+          <label class='Separator Single PositionerLeft' for='DatePolicyHolderCompanyNoAnggaranDasarExpiredYear'>/</label>
+          <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanyNoAnggaranDasarExpiredYear'></table>
+          <br>
+        </div>
         <label class='Medium Single PositionerLeft' for='TextPolicyHolderCompanyNoSIUP'>4. Nomor Surat Ijin Usaha</label>
         <table class='BoxSquare PositionerLeft' id='TextPolicyHolderCompanyNoSIUP'></table>
         <br>
-        <label class='Medium Single PositionerLeft' for='DatePolicyHolderCompanySIUPExpired'></label>
-        <label class='Medium Single PositionerLeft' for='DatePolicyHolderCompanySIUPExpiredDay'>Tanggal Berlaku</label>
-        <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanySIUPExpiredDay'></table>
-        <span class='Separator Single PositionerLeft' for='DatePolicyHolderCompanySIUPExpiredMonth'>/</span>
-        <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanySIUPExpiredMonth'></table>
-        <label class='Separator Single PositionerLeft' for='DatePolicyHolderCompanySIUPExpiredYear'>/</label>
-        <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanySIUPExpiredYear'></table>
-        <br>
+        <div style='margin-top: 10px;'>
+          <label class='Medium Single PositionerLeft' for='DatePolicyHolderCompanySIUPExpired'></label>
+          <label class='Medium Single PositionerLeft' for='DatePolicyHolderCompanySIUPExpiredDay'>Tanggal Berlaku</label>
+          <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanySIUPExpiredDay'></table>
+          <span class='Separator Single PositionerLeft' for='DatePolicyHolderCompanySIUPExpiredMonth'>/</span>
+          <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanySIUPExpiredMonth'></table>
+          <label class='Separator Single PositionerLeft' for='DatePolicyHolderCompanySIUPExpiredYear'>/</label>
+          <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanySIUPExpiredYear'></table>
+          <br>
+        </div>
         <label class='Medium Single PositionerLeft' for='TextPolicyHolderCompanyNoTDP'>5. Nomor TDP</label>
         <table class='BoxSquare PositionerLeft' id='TextPolicyHolderCompanyNoTDP'></table>
         <br>
-        <label class='Medium Single PositionerLeft' for='DatePolicyHolderCompanyNoTDPExpired'></label>
-        <label class='Medium Single PositionerLeft' for='DatePolicyHolderCompanyNoTDPExpiredDay'>Tanggal Berlaku</label>
-        <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanyNoTDPExpiredDay'></table>
-        <span class='Separator Single PositionerLeft' for='DatePolicyHolderCompanyNoTDPExpiredMonth'>/</span>
-        <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanyNoTDPExpiredMonth'></table>
-        <label class='Separator Single PositionerLeft' for='DatePolicyHolderCompanyNoTDPExpiredYear'>/</label>
-        <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanyNoTDPExpiredYear'></table>
-        <br>
+        <div style='margin-top: 10px;'>
+          <label class='Medium Single PositionerLeft' for='DatePolicyHolderCompanyNoTDPExpired'></label>
+          <label class='Medium Single PositionerLeft' for='DatePolicyHolderCompanyNoTDPExpiredDay'>Tanggal Berlaku</label>
+          <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanyNoTDPExpiredDay'></table>
+          <span class='Separator Single PositionerLeft' for='DatePolicyHolderCompanyNoTDPExpiredMonth'>/</span>
+          <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanyNoTDPExpiredMonth'></table>
+          <label class='Separator Single PositionerLeft' for='DatePolicyHolderCompanyNoTDPExpiredYear'>/</label>
+          <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanyNoTDPExpiredYear'></table>
+          <br>
+        </div>
         <label class='Medium Single PositionerLeft' for='TextPolicyHolderCompanyNoSKDP'>6. Nomor SKDP (Domisili)</label>
         <table class='BoxSquare PositionerLeft' id='TextPolicyHolderCompanyNoSKDP'></table>
         <br>
-        <label class='Medium Single PositionerLeft' for='DatePolicyHolderCompanyNoSKDPExpired'></label>
-        <label class='Medium Single PositionerLeft' for='DatePolicyHolderCompanyNoSKDPExpiredDay'>Tanggal Berlaku</label>
-        <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanyNoSKDPExpiredDay'></table>
-        <span class='Separator Single PositionerLeft' for='DatePolicyHolderCompanyNoSKDPExpiredMonth'>/</span>
-        <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanyNoSKDPExpiredMonth'></table>
-        <label class='Separator Single PositionerLeft' for='DatePolicyHolderCompanyNoSKDPExpiredYear'>/</label>
-        <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanyNoSKDPExpiredYear'></table>
-        <br>
-        <label class='Medium Single PositionerLeft' for='TextPolicyHolderCompanyNoNPWP'>7. Nomor NPWP (jika ada)</label>
-        <table class='BoxSquare PositionerLeft' id='TextPolicyHolderCompanyNoNPWP'></table>
-        <table class='BoxSquare PositionerRight' id='DatePolicyHolderCompanyNoNPWPYear'></table>
-        <span class='Separator PositionerRight'>/</span>
-        <table class='BoxSquare PositionerRight' id='DatePolicyHolderCompanyNoNPWPMonth'></table>
-        <span class='Separator PositionerRight'>/</span>
-        <table class='BoxSquare PositionerRight' id='DatePolicyHolderCompanyNoNPWPDay'></table>
-        <label class='Wrap Single PositionerRight'>Tanggal Berlaku</label>
-        <br>
+        <div style='margin-top: 10px;'>
+          <label class='Medium Single PositionerLeft' for='DatePolicyHolderCompanyNoSKDPExpired'></label>
+          <label class='Medium Single PositionerLeft' for='DatePolicyHolderCompanyNoSKDPExpiredDay'>Tanggal Berlaku</label>
+          <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanyNoSKDPExpiredDay'></table>
+          <span class='Separator Single PositionerLeft' for='DatePolicyHolderCompanyNoSKDPExpiredMonth'>/</span>
+          <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanyNoSKDPExpiredMonth'></table>
+          <label class='Separator Single PositionerLeft' for='DatePolicyHolderCompanyNoSKDPExpiredYear'>/</label>
+          <table class='BoxSquare PositionerLeft' id='DatePolicyHolderCompanyNoSKDPExpiredYear'></table>
+          <br>
+        </div>
+        <div style='margin-top: 10px;'>
+          <label class='Medium Single PositionerLeft' for='TextPolicyHolderCompanyNoNPWP'>7. Nomor NPWP (jika ada)</label>
+          <table class='BoxSquare PositionerLeft' id='TextPolicyHolderCompanyNoNPWP'></table>
+          <table class='BoxSquare PositionerRight' id='DatePolicyHolderCompanyNoNPWPYear'></table>
+          <span class='Separator PositionerRight'>/</span>
+          <table class='BoxSquare PositionerRight' id='DatePolicyHolderCompanyNoNPWPMonth'></table>
+          <span class='Separator PositionerRight'>/</span>
+          <table class='BoxSquare PositionerRight' id='DatePolicyHolderCompanyNoNPWPDay'></table>
+          <label class='Wrap Single PositionerRight'>Tanggal Berlaku</label>
+          <br>
+        </div>
+        <!-- / QUICK FIX END -->
         <label class='Medium Single PositionerLeft' for='TextPolicyHolderCompanySector'>8. Bidang Usaha</label>
         <table class='BoxSquare PositionerLeft' id='TextPolicyHolderCompanySector'></table>
         <br>
-        <section class='SectionFooter'>
+        <!-- / QUICK FIX -->
+        <section class='SectionFooter' style='margin-top: 119px'>
           <div class='FooterContainer'>
             <div class='FooterGeneral'>
               <span class='Note Single PositionerLeft'>OP/NB/0104/031602 Hal 1 / 8</span>
@@ -1070,7 +1085,7 @@
         <label class='Medium Single PositionerLeft' for='TextProspectiveInsuredEmail'>14. Alamat Email</label>
         <table class='BoxSquare PositionerLeft' id='TextProspectiveInsuredEmail'></table>
         <br>
-        <section class='SectionFooter'>
+        <section class='SectionFooter' style='margin-top: 96px;'>
           <div class='FooterContainer'>
             <div class='FooterGeneral'>
               <span class='Note Single PositionerLeft'>OP/NB/0104/031602 Hal 1 / 8</span>
@@ -1371,7 +1386,7 @@
         <label class='RadioButton PositionerLeft' for='RadioButtonPremiPaymentThirdPartyAnswerNo' id='LabelPremiPaymentThirdPartyAnswerNo'>Tidak</label>
         <label class='Wrap Single FirstIndent PositionerLeft' for='TextPremiPaymentThirdPartyAnswerYesStatement'>Bila jawaban Anda “Ya”, mohon isi dan lengkapi Formulir Keterangan Tambahan untuk Pihak ketiga.</label>
         <br>
-        <section class='SectionFooter'>
+        <section class='SectionFooter' style='margin-top: 222px;'>
           <div class='FooterContainer'>
             <div class='FooterGeneral'>
               <span class='Note Single PositionerLeft'>OP/NB/0104/031602 Hal 1 / 8</span>
@@ -1830,6 +1845,42 @@
                 Jika pertanyaan nomor 6 dijawab "Ya" maka mohon agar melengkapi kolom dibawah ini
                 Apabila diperlukan dapat memberikan keterangan pada lembar tambahan. Lembar tambahan tersebut harus ditandatangani oleh Calon Pemegang Polis/Calon Tertanggung dan menjadi bagian yang tidak terpisahkan dari SPAJ ini.
                 <br>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <section class='SectionFooter' style='margin-top: 140px;'>
+          <div class='FooterContainer'>
+            <div class='FooterGeneral'>
+              <span class='Note Single PositionerLeft'>OP/NB/0104/031602 Hal 1 / 8</span>
+              <span class='Note Single PositionerRight'>PT Asuransi Jiwa BCA telah terdaftar dan diawasi oleh Otoritas Jasa Keuangan.</span>
+              <br>
+            </div>
+          </div>
+          <div class='PageBreak'></div>
+        </section>
+        <section id='SectionHeader5'>
+          <div class='HeaderContainer'>
+            <div class='HeaderGeneral'>
+              <table class='BoxSquare PositionerRight' id='TextHeaderSPAJNumber'></table>
+              <label class='Short Single PositionerRight' for='TextHeaderSPAJNumber'>Nomor SPAJ</label>
+              <br>
+              <hr>
+            </div>
+          </div>
+          <div class='HeaderBreak'></div>
+        </section>
+        <table class='Square'>
+          <thead>
+            <tr>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class='Child' colspan='3'>
                 <h3>Calon Tertanggung</h3>
                 <table class='Space' id='TableProspectiveInsuredIllness'>
                   <thead>
@@ -1860,38 +1911,6 @@
                 </table>
               </td>
             </tr>
-          </tbody>
-        </table>
-        <section class='SectionFooter'>
-          <div class='FooterContainer'>
-            <div class='FooterGeneral'>
-              <span class='Note Single PositionerLeft'>OP/NB/0104/031602 Hal 1 / 8</span>
-              <span class='Note Single PositionerRight'>PT Asuransi Jiwa BCA telah terdaftar dan diawasi oleh Otoritas Jasa Keuangan.</span>
-              <br>
-            </div>
-          </div>
-          <div class='PageBreak'></div>
-        </section>
-        <section id='SectionHeader5'>
-          <div class='HeaderContainer'>
-            <div class='HeaderGeneral'>
-              <table class='BoxSquare PositionerRight' id='TextHeaderSPAJNumber'></table>
-              <label class='Short Single PositionerRight' for='TextHeaderSPAJNumber'>Nomor SPAJ</label>
-              <br>
-              <hr>
-            </div>
-          </div>
-          <div class='HeaderBreak'></div>
-        </section>
-        <table class='Square'>
-          <thead>
-            <tr>
-              <th>Pertanyaan Kesehatan</th>
-              <th>Calon Tertanggung</th>
-              <th>Calon Pemegang Polis</th>
-            </tr>
-          </thead>
-          <tbody>
             <tr>
               <td class='Child'>
                 7. Apakah Anda telah memiliki atau sedang mengajukan pertanggungan Asuransi Jiwa, kecelakaan, kesehatan, pemulihan polis? Serta apakah pengajuan Anda pernah ditolak/ ditangguhkan/dikenakan ekstra Premi diubah dalam bentuk apapun oleh perusahaan Asuransi Jiwa?
@@ -1916,9 +1935,6 @@
             </tr>
             <tr>
               <td class='Child' colspan='3'>
-                Jika pertanyaan nomor 6 dijawab "Ya" maka mohon agar melengkapi kolom dibawah ini
-                Apabila diperlukan dapat memberikan keterangan pada lembar tambahan. Lembar tambahan tersebut harus ditandatangani oleh Calon Pemegang Polis/Calon Tertanggung dan menjadi bagian yang tidak terpisahkan dari SPAJ ini.
-                <br>
                 <h3>Calon Tertanggung</h3>
                 <table class='Space' id='TableProspectiveInsuredSPAJProposal'>
                   <thead>
@@ -2012,7 +2028,7 @@
             </tr>
           </tbody>
         </table>
-        <section class='SectionFooter'>
+        <section class='SectionFooter' style='margin-top: 70px;'>
           <div class='FooterContainer'>
             <div class='FooterGeneral'>
               <span class='Note Single PositionerLeft'>OP/NB/0104/031602 Hal 1 / 8</span>
@@ -2036,9 +2052,9 @@
         <table class='Square'>
           <thead>
             <tr>
-              <th>Pertanyaan Kesehatan</th>
-              <th>Calon Tertanggung</th>
-              <th>Calon Pemegang Polis</th>
+              <th></th>
+              <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -2201,7 +2217,7 @@
             Saya/Kami dengan ini mengizinkan Penanggung untuk menggunakan atau memberikan informasi atau keterangan mengenai Saya/Kami yang tersedia, diperoleh atau disimpan oleh Penanggung (sesuai yang tercantum dalam SPAJ ini atau sarana lain), kepada pihak-pihak lain (termasuk tetapi tidak terbatas pada perusahaan reasuransi, asuransi, lembaga, bank atau badan hukum lain baik di dalam maupun di luar negeri) yang memiliki hubungan kerjasama dengan Penanggung dalam rangka pengajuan SPAJ ini, pembayaran klaim dan pelayanan nasabah. Saya/Kami juga mengerti bahwa Saya/Kami berhak untuk melakukan koreksi atau penambahan atas informasi dan keterangan mengenai Saya/Kami tersebut dengan menghubungi Kantor Pusat Penanggung.
           </li>
         </ol>
-        <section class='SectionFooter'>
+        <section class='SectionFooter' style='margin-top: 310px;'>
           <div class='FooterContainer'>
             <div class='FooterGeneral'>
               <span class='Note Single PositionerLeft'>OP/NB/0104/031602 Hal 1 / 8</span>

@@ -25,6 +25,7 @@
     NSString *AgentName ;
     NSString *AgentCode ;
     NSString *AgentBranch ;
+    NSString *AgentExpiryDate ;
     
     FMResultSet *s = [database executeQuery:@"SELECT * FROM Agent_profile"];
     while ([s next]) {
@@ -34,9 +35,10 @@
         AgentName = [NSString stringWithFormat:@"%@",[s stringForColumn:@"AgentName"]];
         AgentCode = [NSString stringWithFormat:@"%@",[s stringForColumn:@"AgentCode"]];
         AgentBranch = [NSString stringWithFormat:@"%@",[s stringForColumn:@"BranchName"]];
+        AgentExpiryDate = [NSString stringWithFormat:@"%@",[s stringForColumn:@"LicenseExpiryDate"]];
     }
 
-    dict = [[NSDictionary alloc] initWithObjectsAndKeys:NamaChannel,@"ChannelName", CodeChannel,@"ChannelCode",Kanwil,@"Kanwil",AgentName,@"AgentName", AgentCode,@"AgentCode",AgentBranch,@"BranchName",nil];
+    dict = [[NSDictionary alloc] initWithObjectsAndKeys:NamaChannel,@"ChannelName", CodeChannel,@"ChannelCode",Kanwil,@"Kanwil",AgentName,@"AgentName", AgentCode,@"AgentCode",AgentBranch,@"BranchName",AgentExpiryDate,@"AgentExpiryDate",nil];
     
     [results close];
     [database close];
