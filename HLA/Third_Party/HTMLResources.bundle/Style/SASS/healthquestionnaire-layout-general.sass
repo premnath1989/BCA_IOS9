@@ -1,0 +1,85 @@
+/* @charset "utf-8"; */
+/* CSS Document */
+
+
+// IMPORT
+
+@import healthquestionnaire-initialization-general
+@import healthquestionnaire-setup
+
+
+/* HEADER */
+
+header
+    .Highlighted
+        padding-top: $general_space_small
+        padding-right: $general_space_huge
+        padding-left: $general_space_huge
+        padding-bottom: $general_space_small
+        border-top-style: solid
+        border-top-width: $general_borderwidth_thin
+        border-bottom-style: solid
+        border-bottom-width: $general_borderwidth_thin
+        display: block
+    h2
+        border-bottom-style: solid
+        border-bottom-width: $general_borderwidth_thin
+
+
+/* MAIN */
+
+main
+    form
+        border-bottom-style: solid
+        border-bottom-width: $general_borderwidth_thin
+
+
+/* POP UP */
+
+main
+    section.PopUp
+        position: fixed
+        top: 0px
+        right: 0px
+        left: 0px
+        bottom: 0px
+        padding: $general_space_medium
+        display: none
+        form
+            margin: $general_space_medium
+            header
+                margin: 0px
+                padding-top: $general_space_small
+                padding-right: $general_space_medium
+                padding-left: $general_space_medium
+                padding-bottom: $general_space_small
+            fieldset
+                margin: $general_space_medium
+    form.SPAJForm
+        padding-top: $general_space_small
+        padding-right: $general_space_medium
+        padding-left: $general_space_medium
+        padding-bottom: $general_space_small
+
+
+/* CONDITION */
+
+.PositionerRight
+    float: right
+    margin-top: 2px
+    margin-bottom: 2px
+    vertical-align: top
+    
+.PositionerLeft
+    float: left
+    margin-top: 2px
+    margin-bottom: 2px
+    vertical-align: top
+
+.PositionerCenter
+    position: relative
+    margin: auto
+        
+.Horizontal25of100
+    width: 24%
+    display: inline-block
