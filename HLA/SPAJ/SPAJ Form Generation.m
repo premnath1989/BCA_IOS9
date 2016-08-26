@@ -25,6 +25,8 @@
 #import "ModelProspectProfile.h"
 #import "ModelSIPOData.h"
 #import "Model_SI_Master.h"
+#import "ModelSPAJHtml.h"
+#import "SPAJPDFAutopopulateData.h"
 // DECLARATION
 
 @interface SPAJFormGeneration ()
@@ -41,6 +43,7 @@
 
 @implementation SPAJFormGeneration{
     Formatter* formatter;
+    SPAJPDFAutopopulateData* spajPDFData;
     SPAJPDFWebViewController* spajPDFWebView;
     ModelSPAJFormGeneration* modelSPAJFormGeneration;
     ModelProspectProfile* modelProspectProfile;
@@ -49,6 +52,7 @@
     Model_SI_Master* modelSIMaster;
     NDHTMLtoPDF *PDFCreator;
     ModelSPAJSignature* modelSPAJSignature;
+    ModelSPAJHtml *modelSPAJHtml;
     Alert* alert;
     
     UserInterface *objectUserInterface;
@@ -88,9 +92,11 @@
 
     // DID LOAD
     - (void)viewDidAppear:(BOOL)animated{
-        NSURL *url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"page_spaj_pdf" ofType:@"html" inDirectory:@"Build/Page/HTML"]];
+        /*NSURL *url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"page_spaj_pdf" ofType:@"html" inDirectory:@"Build/Page/HTML"]];
         //NSURL *url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"20160803113501" ofType:@"html" inDirectory:@"Build/Page/HTML"]];
-        [webview loadRequest:[NSURLRequest requestWithURL:url]];
+        [webview loadRequest:[NSURLRequest requestWithURL:url]];*/
+        NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PDF"];
+        [self loadSPAJPDFHTML:stringHTMLName];
     }
 
     - (void)viewDidLoad
@@ -110,6 +116,8 @@
         // INITIALIZATION
         alert = [[Alert alloc]init];
         formatter = [[Formatter alloc]init];
+        spajPDFData = [[SPAJPDFAutopopulateData alloc]init];
+        modelSPAJHtml = [[ModelSPAJHtml alloc]init];
         modelSPAJFormGeneration = [[ModelSPAJFormGeneration alloc]init];
         modelAgentProfile = [[ModelAgentProfile alloc]init];
         modelProspectProfile = [[ModelProspectProfile alloc]init];
@@ -152,69 +160,82 @@
         [self voidCheckBooleanLastState];
     }
 
+    -(void)loadSPAJPDFHTML:(NSString*)stringHTMLName{
+        NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        filePath = [docsDir stringByAppendingPathComponent:@"SPAJ"];
+        
+        NSString *htmlfilePath = [NSString stringWithFormat:@"SPAJ/%@",stringHTMLName];
+        NSString *localURL = [[NSString alloc] initWithString:
+                              [docsDir stringByAppendingPathComponent: htmlfilePath]];
+        NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localURL]];
+        [webview loadRequest:urlRequest];
+    }
+
+
     #pragma mark arrayInitialization
     -(void)arrayInitializeAgentProfile{
-        arrayDBAgentID =[[NSMutableArray alloc]init];
-        [arrayDBAgentID addObject:@"AgentName"];
+        arrayDBAgentID =[[NSMutableArray alloc]initWithArray:[spajPDFData arrayInitializeAgentProfileDB]];
+        /*[arrayDBAgentID addObject:@"AgentName"];
         [arrayDBAgentID addObject:@"AgentCode"];
         [arrayDBAgentID addObject:@""];
         [arrayDBAgentID addObject:@"AgentExpiryDate"];
         [arrayDBAgentID addObject:@"AgentName"];
-        [arrayDBAgentID addObject:@"AgentCode"];
+        [arrayDBAgentID addObject:@"AgentCode"];*/
         
-        arrayHTMLAgentID =[[NSMutableArray alloc]init];
-        [arrayHTMLAgentID addObject:@"TextAgentName"];
+        arrayHTMLAgentID =[[NSMutableArray alloc]initWithArray:[spajPDFData arrayInitializeAgentProfileHTML]];
+        /*[arrayHTMLAgentID addObject:@"TextAgentName"];
         [arrayHTMLAgentID addObject:@"TextAgentCode"];
         [arrayHTMLAgentID addObject:@"TextLicenseNumber"];
         [arrayHTMLAgentID addObject:@"DateActiveAgentExpired"];
         [arrayHTMLAgentID addObject:@"TextIllustrationAgentName"];
-        [arrayHTMLAgentID addObject:@"TextIllustrationAgentCode"];
+        [arrayHTMLAgentID addObject:@"TextIllustrationAgentCode"];*/
     }
 
     -(void)arrayInitializeReferral{
-        arrayDBReferral =[[NSMutableArray alloc]init];
-        [arrayDBReferral addObject:@"ReferralName"];
+        arrayDBReferral =[[NSMutableArray alloc]initWithArray:[spajPDFData arrayInitializeReferralDB]];
+        /*[arrayDBReferral addObject:@"ReferralName"];
         [arrayDBReferral addObject:@"BranchName"];
         [arrayDBReferral addObject:@"BranchCode"];
         [arrayDBReferral addObject:@"Kanwil"];
-        [arrayDBReferral addObject:@"NIP"];
+        [arrayDBReferral addObject:@"NIP"];*/
         
-        arrayHTMLReferal =[[NSMutableArray alloc]init];
-        [arrayHTMLReferal addObject:@"TextReferenceName"];
+        arrayHTMLReferal =[[NSMutableArray alloc]initWithArray:[spajPDFData arrayInitializeReferralHTML]];
+        /*[arrayHTMLReferal addObject:@"TextReferenceName"];
         [arrayHTMLReferal addObject:@"TextBranchName"];
         [arrayHTMLReferal addObject:@"TextBranchCode"];
         [arrayHTMLReferal addObject:@"AreaKanwilAgent"];
-        [arrayHTMLReferal addObject:@"TextAgentID"];
+        [arrayHTMLReferal addObject:@"TextAgentID"];*/
     }
 
     -(void)arrayInitializePOData{
-        arrayDBPOData =[[NSMutableArray alloc]init];
-        [arrayDBPOData addObject:@"ProductName"];
-        [arrayDBPOData addObject:@"ProductCode"];
+        arrayDBPOData =[[NSMutableArray alloc]initWithArray:[spajPDFData arrayInitializePODataDB]];
+        /*[arrayDBPOData addObject:@"ProductName"];
+        [arrayDBPOData addObject:@"ProductCode"];*/
         
-        arrayHTMLPOData =[[NSMutableArray alloc]init];
-        [arrayHTMLPOData addObject:@"TextProductName"];
-        [arrayHTMLPOData addObject:@"TextProductCode"];
+        arrayHTMLPOData =[[NSMutableArray alloc]initWithArray:[spajPDFData arrayInitializePODataHTML]];
+        /*[arrayHTMLPOData addObject:@"TextProductName"];
+        [arrayHTMLPOData addObject:@"TextProductCode"];*/
     }
 
 
     -(void)arrayInitializeSIMaster{ //premnath Vijaykumar
-        arrayDBSIData=[[NSMutableArray alloc]init];
-        [arrayDBSIData addObject:@"SINO"];
-        [arrayDBSIData addObject:@"CreatedDate"];
+        arrayDBSIData=[[NSMutableArray alloc]initWithArray:[spajPDFData arrayInitializeSIMasterDB]];
+        /*[arrayDBSIData addObject:@"SINO"];
+        [arrayDBSIData addObject:@"CreatedDate"];*/
         
-        arrayHTMLSIData =[[NSMutableArray alloc]init];
-        [arrayHTMLSIData addObject:@"TextIllustrationNumber"];
-        [arrayHTMLSIData addObject:@"DateIllustration"];
+        arrayHTMLSIData =[[NSMutableArray alloc]initWithArray:[spajPDFData arrayInitializeSIMasterHTML]];
+        /*[arrayHTMLSIData addObject:@"TextIllustrationNumber"];
+        [arrayHTMLSIData addObject:@"DateIllustration"];*/
     }
 
     -(void)arrayInitializeSignature{ //premnath Vijaykumar
-        arrayDBSignature=[[NSMutableArray alloc]init];
-        [arrayDBSignature addObject:@"SPAJSignatureLocation"];
-        [arrayDBSignature addObject:@"SPAJDateSignatureParty4"];
-        arrayHTMLSignature =[[NSMutableArray alloc]init];
-        [arrayHTMLSignature addObject:@"LineSignedPlace"];
-        [arrayHTMLSignature addObject:@"LineSignedDateDay"];
+        arrayDBSignature=[[NSMutableArray alloc]initWithArray:[spajPDFData arrayInitializeSignatureDB]];
+        /*[arrayDBSignature addObject:@"SPAJSignatureLocation"];
+        [arrayDBSignature addObject:@"SPAJDateSignatureParty4"];*/
+        
+        arrayHTMLSignature =[[NSMutableArray alloc]initWithArray:[spajPDFData arrayInitializeSignatureHTML]];
+        /*[arrayHTMLSignature addObject:@"LineSignedPlace"];
+        [arrayHTMLSignature addObject:@"LineSignedDateDay"];*/
     }
 
 

@@ -339,10 +339,10 @@
             }
             case 5:
             {
-                NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"KS"];
+                NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"KS_PH"];
                 //[self loadSPAJPembayaranPremi];
                 [self.navigationItem setTitle:@"Data Kesehatan"];
-                [spajCalonPemegangPolis loadSixthHTML:stringHTMLName PageSection:@"KS"];
+                [spajCalonPemegangPolis loadSixthHTML:stringHTMLName PageSection:@"KS_PH"];
                 //[rightButton setAction:@selector(voidDoneSPAJPembayaranPremi:)];
                 [rightButton setAction:@selector(voidDoneSPAJCalonPemegangPolis:)];
                 break;

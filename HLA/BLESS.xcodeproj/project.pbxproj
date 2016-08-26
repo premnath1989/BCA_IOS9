@@ -440,7 +440,6 @@
 		439B954C1D3896AD00C86F93 /* SPAJ Add Signature.xib in Resources */ = {isa = PBXBuildFile; fileRef = 439B954A1D3896AD00C86F93 /* SPAJ Add Signature.xib */; };
 		439E45821D585C0B009098EF /* SPAJPDFWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 439E45801D585C0B009098EF /* SPAJPDFWebViewController.m */; };
 		439E45831D585C0B009098EF /* SPAJPDFWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 439E45811D585C0B009098EF /* SPAJPDFWebViewController.xib */; };
-		439E45851D5874DC009098EF /* Build in Resources */ = {isa = PBXBuildFile; fileRef = 439E45841D5874DC009098EF /* Build */; };
 		439EFBFA1D1A621500A0B8B0 /* CFFValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = 439EFBF91D1A621500A0B8B0 /* CFFValidation.m */; };
 		43A401F11D26415D0057D558 /* CFFAPIController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A401F01D26415D0057D558 /* CFFAPIController.m */; };
 		43B346AA1D110DE300B8DE32 /* ModelProspectChild.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B346A91D110DE300B8DE32 /* ModelProspectChild.m */; };
@@ -488,6 +487,7 @@
 		43FA6C1A1C87CD7F0098BA47 /* eng_BCALH_Page2.html in Resources */ = {isa = PBXBuildFile; fileRef = 43FA6C171C87CD7F0098BA47 /* eng_BCALH_Page2.html */; };
 		43FA6C1B1C87CD7F0098BA47 /* eng_BCALH_Page3.html in Resources */ = {isa = PBXBuildFile; fileRef = 43FA6C181C87CD7F0098BA47 /* eng_BCALH_Page3.html */; };
 		43FA6C1D1C882D810098BA47 /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = 43FA6C1C1C882D810098BA47 /* style.css */; };
+		43FD2ECC1D6FE77A0018DB83 /* SPAJPDFAutopopulateData.m in Sources */ = {isa = PBXBuildFile; fileRef = 43FD2ECB1D6FE77A0018DB83 /* SPAJPDFAutopopulateData.m */; };
 		43FD4A041C620F3E00227F8F /* ModelVIPClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 43FD4A031C620F3E00227F8F /* ModelVIPClass.m */; };
 		5D3967981C02C89700464BCC /* HLAWPStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D3967971C02C89700464BCC /* HLAWPStoryboard.storyboard */; };
 		5D39679A1C02CA9000464BCC /* ClientProfileStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D3967991C02CA9000464BCC /* ClientProfileStoryboard.storyboard */; };
@@ -1688,7 +1688,6 @@
 		439E457F1D585C0B009098EF /* SPAJPDFWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPAJPDFWebViewController.h; sourceTree = "<group>"; };
 		439E45801D585C0B009098EF /* SPAJPDFWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPAJPDFWebViewController.m; sourceTree = "<group>"; };
 		439E45811D585C0B009098EF /* SPAJPDFWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SPAJPDFWebViewController.xib; sourceTree = "<group>"; };
-		439E45841D5874DC009098EF /* Build */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Build; sourceTree = "<group>"; };
 		439EFBF81D1A621500A0B8B0 /* CFFValidation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFFValidation.h; sourceTree = "<group>"; };
 		439EFBF91D1A621500A0B8B0 /* CFFValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFFValidation.m; sourceTree = "<group>"; };
 		43A401EF1D26415D0057D558 /* CFFAPIController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFFAPIController.h; sourceTree = "<group>"; };
@@ -1761,6 +1760,8 @@
 		43FA6C171C87CD7F0098BA47 /* eng_BCALH_Page2.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = eng_BCALH_Page2.html; path = SI/eng_BCALH_Page2.html; sourceTree = "<group>"; };
 		43FA6C181C87CD7F0098BA47 /* eng_BCALH_Page3.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = eng_BCALH_Page3.html; path = SI/eng_BCALH_Page3.html; sourceTree = "<group>"; };
 		43FA6C1C1C882D810098BA47 /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = style.css; path = SI/css/style.css; sourceTree = "<group>"; };
+		43FD2ECA1D6FE77A0018DB83 /* SPAJPDFAutopopulateData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPAJPDFAutopopulateData.h; sourceTree = "<group>"; };
+		43FD2ECB1D6FE77A0018DB83 /* SPAJPDFAutopopulateData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPAJPDFAutopopulateData.m; sourceTree = "<group>"; };
 		43FD4A021C620F3E00227F8F /* ModelVIPClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelVIPClass.h; sourceTree = "<group>"; };
 		43FD4A031C620F3E00227F8F /* ModelVIPClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelVIPClass.m; sourceTree = "<group>"; };
 		5D3967971C02C89700464BCC /* HLAWPStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HLAWPStoryboard.storyboard; sourceTree = "<group>"; };
@@ -2713,7 +2714,6 @@
 		0F3268201D1A9260001A9021 /* SPAJ */ = {
 			isa = PBXGroup;
 			children = (
-				439E45841D5874DC009098EF /* Build */,
 				43C98E001D51A1E200A3F911 /* SPAJ Forms */,
 				0FFA18611D21266000C63A47 /* Database */,
 				0F3268731D1BD140001A9021 /* Image.xcassets */,
@@ -2774,6 +2774,8 @@
 			children = (
 				0F3268421D1A93A4001A9021 /* User.h */,
 				0F3268431D1A93A4001A9021 /* User.m */,
+				43FD2ECA1D6FE77A0018DB83 /* SPAJPDFAutopopulateData.h */,
+				43FD2ECB1D6FE77A0018DB83 /* SPAJPDFAutopopulateData.m */,
 			);
 			name = Object;
 			sourceTree = "<group>";
@@ -5889,7 +5891,6 @@
 				17A299241C60A0DB00C2537A /* BPreplayBold.otf in Resources */,
 				17A299251C60A0DB00C2537A /* BPreplayBoldItalics.otf in Resources */,
 				17A299261C60A0DB00C2537A /* BPreplayItalics.otf in Resources */,
-				439E45851D5874DC009098EF /* Build in Resources */,
 				C4E9D19F1612C64900016053 /* InfoPlist.strings in Resources */,
 				C4E9D1A81612C64900016053 /* MainStoryboard.storyboard in Resources */,
 				C4E9D1BD1612C68200016053 /* selectionIndicatorImage.png in Resources */,
@@ -6395,6 +6396,7 @@
 				C4E7C0DD172FC9CD00038FA9 /* AFXMLRequestOperation.m in Sources */,
 				437223E61C89372200D94B2F /* RateModel.m in Sources */,
 				C4E7C0DE172FC9CD00038FA9 /* UIImageView+AFNetworking.m in Sources */,
+				43FD2ECC1D6FE77A0018DB83 /* SPAJPDFAutopopulateData.m in Sources */,
 				43870CBE1D362AD00035143C /* AnalisaKebutuhanWarisanViewController.m in Sources */,
 				EF5B611F173C9ED900751157 /* CustomerProfile.m in Sources */,
 				EF5B612A1740B70C00751157 /* SIUtilities.m in Sources */,
