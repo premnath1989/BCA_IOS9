@@ -1,0 +1,62 @@
+/* @charset "utf-8"; */
+/* CSS Document */
+
+
+// IMPORT
+
+@import healthquestionnaire-initialization-general
+
+	
+/* INPUT TYPE TEXT */
+
+input[type="text"], input[type="password"]
+	padding-top: $input_padding_edge
+    padding-right: $input_padding_side
+    padding-right: $input_padding_side
+    padding-bottom: $input_padding_edge
+	vertical-align: middle
+	border-style: solid
+	border-width: $input_borderwidth_pure
+
+input[type="text"].Tiny, input[type="password"].Tiny
+    min-width: $input_width_short / 2 !important
+    width: $input_width_short / 2 !important
+
+input[type="text"].Short, input[type="password"].Short
+    min-width: $input_width_short !important
+    width: $input_width_short !important
+
+input[type="text"].Medium, input[type="password"].Medium
+	width: $input_width_medium
+
+input[type="text"].Long, input[type="password"].Long
+	width: $input_width_long
+	
+input[type="text"].Full, input[type="password"].Full
+	width: 100%
+
+input[type="text"].Single, input[type="password"].Single
+	height: $input_height_single
+
+input[type="text"].Multi, input[type="password"].Multi
+	height: $input_height_multi
+
+
+/* CHECKBOX */
+
+.RadioButton
+    text-align: center
+    display: inline-block
+    input[type="radio"]
+        display: none
+    .Separator
+        width: 2px
+        height: 12px
+        display: inline-block
+    label.RadioButton
+        padding-top: $input_padding_edge
+        padding-right: $input_padding_side
+        padding-left: $input_padding_side
+        padding-bottom: $input_padding_edge
+        font-size: $fontsize_input_radiobutton
+        +BorderRadius($general_borderradius_thick)
