@@ -294,13 +294,14 @@
         if ([stringSIRelation isEqualToString:@"DIRI SENDIRI"]){
             //if (boolTenagaPenjual && boolPemegangPolis){
             if (indexSelected == 3){
+                NSString* signatureImage = [formatter encodedSignatureImage:viewToSign];
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                     [self voidSaveSignatureToPDF:3];
                 });
                 [self voidCreateAlertTextFieldViewAndShow:@"Masukkan lokasi pengambilan tanda tangan" tag:0];
                 //update signature party4
                 NSString* dateToday=[formatter getDateToday:@"yyyy-MM-dd HH:mm:ss"];
-                NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty4=1,SPAJDateSignatureParty4='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",dateToday,[dictTransaction valueForKey:@"SPAJEappNumber"]];
+                NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty4=1,SPAJDateSignatureParty4='%@',SPAJSignatureTempImageParty4='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",dateToday,signatureImage,[dictTransaction valueForKey:@"SPAJEappNumber"]];
                 [modelSPAJSignature updateSPAJSignature:stringUpdate];
                 [modelSPAJTransaction updateSPAJTransaction:@"SPAJCompleteness" StringColumnValue:@"Lengkap" StringWhereName:@"SPAJTransactionID" StringWhereValue:[dictTransaction valueForKey:@"SPAJTransactionID"]];
                 [self voidCheckBooleanLastState];
@@ -326,25 +327,27 @@
             if (LAAge<21){
                 //if (boolTenagaPenjual && boolOrangTuaWali && boolPemegangPolis){
                 if (indexSelected == 3){
+                    NSString* signatureImage = [formatter encodedSignatureImage:viewToSign];
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                         [self voidSaveSignatureToPDF:3];
                     });
                     [self voidCreateAlertTextFieldViewAndShow:@"Masukkan lokasi pengambilan tanda tangan" tag:0];
                     //update signature party4
                     NSString* dateToday=[formatter getDateToday:@"yyyy-MM-dd HH:mm:ss"];
-                    NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty4=1,SPAJDateSignatureParty4='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",dateToday,[dictTransaction valueForKey:@"SPAJEappNumber"]];
+                    NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty4=1,SPAJDateSignatureParty4='%@',SPAJSignatureTempImageParty4='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",dateToday,signatureImage,[dictTransaction valueForKey:@"SPAJEappNumber"]];
                     [modelSPAJSignature updateSPAJSignature:stringUpdate];
                     [modelSPAJTransaction updateSPAJTransaction:@"SPAJCompleteness" StringColumnValue:@"Lengkap" StringWhereName:@"SPAJTransactionID" StringWhereValue:[dictTransaction valueForKey:@"SPAJTransactionID"]];
                     [self voidCheckBooleanLastState];
                 }
                 //else if (boolOrangTuaWali && boolPemegangPolis){
                 else if (indexSelected == 2){
+                    NSString* signatureImage = [formatter encodedSignatureImage:viewToSign];
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                         [self voidSaveSignatureToPDF:2];
                     });
                     //update signature party3
                     NSString* dateToday=[formatter getDateToday:@"yyyy-MM-dd HH:mm:ss"];
-                    NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty3=1,SPAJDateSignatureParty3='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",dateToday,[dictTransaction valueForKey:@"SPAJEappNumber"]];
+                    NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty3=1,SPAJDateSignatureParty3='%@',SPAJSignatureTempImageParty3='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",dateToday,signatureImage,[dictTransaction valueForKey:@"SPAJEappNumber"]];
                     [modelSPAJSignature updateSPAJSignature:stringUpdate];
                     [self voidCheckBooleanLastState];
                 }
@@ -365,13 +368,14 @@
             else{
                 //if (boolTenagaPenjual  && boolPemegangPolis && boolTertanggung){
                 if (indexSelected == 3){
+                    NSString* signatureImage = [formatter encodedSignatureImage:viewToSign];
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                         [self voidSaveSignatureToPDF:3];
                     });
                     [self voidCreateAlertTextFieldViewAndShow:@"Masukkan lokasi pengambilan tanda tangan" tag:0];
                     //update signature party4
                     NSString* dateToday=[formatter getDateToday:@"yyyy-MM-dd HH:mm:ss"];
-                    NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty4=1,SPAJDateSignatureParty4='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",dateToday,[dictTransaction valueForKey:@"SPAJEappNumber"]];
+                    NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty4=1,SPAJDateSignatureParty4='%@',SPAJSignatureTempImageParty4='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",dateToday,signatureImage,[dictTransaction valueForKey:@"SPAJEappNumber"]];
                     [modelSPAJSignature updateSPAJSignature:stringUpdate];
                     [modelSPAJTransaction updateSPAJTransaction:@"SPAJCompleteness" StringColumnValue:@"Lengkap" StringWhereName:@"SPAJTransactionID" StringWhereValue:[dictTransaction valueForKey:@"SPAJTransactionID"]];
                     [self voidCheckBooleanLastState];
@@ -379,12 +383,13 @@
                 else if (indexSelected == 2){}
                 //else if (boolPemegangPolis && boolTertanggung){
                 else if (indexSelected == 1){
+                    NSString* signatureImage = [formatter encodedSignatureImage:viewToSign];
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                         [self voidSaveSignatureToPDF:1];
                     });
                     //update signature party2
                     NSString* dateToday=[formatter getDateToday:@"yyyy-MM-dd HH:mm:ss"];
-                    NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty2=1,SPAJDateSignatureParty2='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",dateToday,[dictTransaction valueForKey:@"SPAJEappNumber"]];
+                    NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty2=1,SPAJDateSignatureParty2='%@',SPAJSignatureTempImageParty2='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",dateToday,signatureImage,[dictTransaction valueForKey:@"SPAJEappNumber"]];
                     [modelSPAJSignature updateSPAJSignature:stringUpdate];
                     [self voidCheckBooleanLastState];
                 }
@@ -411,13 +416,14 @@
 
 -(void)voidSavePOSignature{
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    NSString* signatureImage = [formatter encodedSignatureImage:viewToSign];
     [self voidSaveSignatureToPDF:0];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self actionClearSign:nil];
             [tablePartiesSignature reloadData];
             [alertController dismissViewControllerAnimated:YES completion:nil];
             NSString* dateToday=[formatter getDateToday:@"yyyy-MM-dd HH:mm:ss"];
-            NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty1=1,SPAJDateSignatureParty1='%@'  where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",dateToday,[dictTransaction valueForKey:@"SPAJEappNumber"]];
+            NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty1=1,SPAJDateSignatureParty1='%@',SPAJSignatureTempImageParty1='%@'  where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",dateToday,signatureImage,[dictTransaction valueForKey:@"SPAJEappNumber"]];
             [modelSPAJSignature updateSPAJSignature:stringUpdate];
             
             NSString* dateExpired = [formatter getDateTodayByAddingDays:@"yyyy-MM-dd HH:mm:ss" DaysAdded:30];
@@ -437,6 +443,8 @@
         [self drawSignatureInPDF:imageSignature Index:index];
     });
 }
+
+
 
 -(void)drawSignatureInPDF:(UIImage *)signatureImage Index:(int)index{
     NSArray* path_forDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
@@ -566,7 +574,7 @@
     NSString *docsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     
     // File paths
-    NSString* filePath = [NSString stringWithFormat:@"%@/SPAJ/%@/%@SPAJ.pdf",documentsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"],[dictTransaction valueForKey:@"SPAJEappNumber"]];
+    NSString* filePath = [NSString stringWithFormat:@"%@/SPAJ/%@/%@_SPAJ.pdf",documentsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"],[dictTransaction valueForKey:@"SPAJEappNumber"]];
     NSString *pdfPath1 = [NSString stringWithFormat:@"%@/SPAJ/%@/SPAJSigned.pdf",docsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"]];
     NSString *pdfPathPage1 = [NSString stringWithFormat:@"%@/SPAJ/%@/SPAJSignedPage1.pdf",docsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"]];
     

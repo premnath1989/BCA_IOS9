@@ -16,6 +16,9 @@
 }
 
 -(void)loadIDInformation;
+-(void)loadIDImage:(UIImage *)imageFront ImageBack:(UIImage *)imageBack;
 @property (strong, nonatomic) NSDictionary* dictionaryIDData;
+@property (strong, nonatomic) UIImage* imageFront;
+@property (strong, nonatomic) UIImage* imageBack;
 
 @end

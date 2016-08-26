@@ -14,6 +14,8 @@
 
 @implementation SPAJIDCapturedViewController
 @synthesize dictionaryIDData;
+@synthesize imageFront,imageBack;
+
 - (void)viewWillLayoutSubviews{
     [super viewWillLayoutSubviews];
     self.view.superview.bounds = CGRectMake(0, 0, 587, 600);
@@ -32,16 +34,15 @@
 }
 
 -(void)loadIDInformation{
-    UIImage* imageFrontPhoto = [dictionaryIDData valueForKey:@"imageFrontPhoto"];
-    UIImage* imageBackPhoto = [dictionaryIDData valueForKey:@"imageBackPhoto"];
     NSString* IDType  = [dictionaryIDData valueForKey:@"IDType"];
     NSString* stringName = [dictionaryIDData valueForKey:@"stringName"];
     
-    [imageViewFront setImage:imageFrontPhoto];
-    [imageViewBack setImage:imageBackPhoto];
+    [imageViewFront setImage:imageFront];
+    [imageViewBack setImage:imageBack];
     [labelIDDesc setText:IDType];
     [labelName setText:stringName];
 }
+
 
 -(IBAction)actionClose:(id)sender{
     [self dismissViewControllerAnimated:YES completion:nil];

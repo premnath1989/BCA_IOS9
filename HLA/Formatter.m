@@ -518,5 +518,15 @@
     return stringReturn;
 }
 
+-(NSString *)encodedSignatureImage:(UIView *)viewSignature{
+    UIView *view = viewSignature;
+    UIGraphicsBeginImageContextWithOptions(view.bounds.size, NO, 1);
+    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage* imageSignature = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    NSData *imageData = UIImageJPEGRepresentation(imageSignature, 1.0);
+    NSString *encodedString = [imageData base64EncodedStringWithOptions:0];
+    return encodedString;
+}
 
 @end
