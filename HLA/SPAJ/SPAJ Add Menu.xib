@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
@@ -89,11 +88,11 @@
                         <constraint firstItem="NKd-r9-sYN" firstAttribute="leading" secondItem="pi0-Ce-Ifd" secondAttribute="leading" constant="20" id="gfg-eg-RiT"/>
                     </constraints>
                 </view>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Tnk-va-LaM" customClass="StackViewGuideMenuContainer">
-                    <rect key="frame" x="0.0" y="90" width="600" height="184"/>
+                <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Tnk-va-LaM" customClass="StackViewGuideMenuContainer">
+                    <rect key="frame" x="0.0" y="90" width="600" height="300"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pDg-BU-x6G" customClass="ViewGuideMenuSelected">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="30"/>
+                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pDg-BU-x6G" customClass="ViewGuideMenuSelected">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="xcY-qt-Kur" customClass="StackViewGuideMenuHorizontal">
                                     <rect key="frame" x="10" y="-11" width="580" height="52"/>
@@ -142,8 +141,8 @@
                                 <constraint firstItem="lnZ-K4-H9p" firstAttribute="top" secondItem="pDg-BU-x6G" secondAttribute="top" id="zkx-9v-BLk"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="buI-Tv-IiQ" customClass="ViewGuideMenuNotSelected">
-                            <rect key="frame" x="0.0" y="30" width="600" height="30"/>
+                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="buI-Tv-IiQ" customClass="ViewGuideMenuNotSelected">
+                            <rect key="frame" x="0.0" y="50" width="600" height="50"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="utj-z3-yFg" customClass="StackViewGuideMenuHorizontal">
                                     <rect key="frame" x="10" y="-11" width="580" height="52"/>
@@ -192,8 +191,8 @@
                                 <constraint firstAttribute="trailing" secondItem="iXD-ZI-9GH" secondAttribute="trailing" id="xqk-pb-mOa"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zi2-cg-J0b" customClass="ViewGuideMenuNotSelected">
-                            <rect key="frame" x="0.0" y="60" width="600" height="34"/>
+                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zi2-cg-J0b" customClass="ViewGuideMenuNotSelected">
+                            <rect key="frame" x="0.0" y="100" width="600" height="50"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Wwg-Ai-VE5" customClass="StackViewGuideMenuHorizontal">
                                     <rect key="frame" x="10" y="7" width="580" height="21"/>
@@ -233,8 +232,8 @@
                                 <constraint firstAttribute="trailing" secondItem="Wwg-Ai-VE5" secondAttribute="trailing" constant="10" id="XGY-Wg-kdx"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gc9-mq-FYk" customClass="ViewGuideMenuNotSelected">
-                            <rect key="frame" x="0.0" y="94" width="600" height="30"/>
+                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gc9-mq-FYk" customClass="ViewGuideMenuNotSelected">
+                            <rect key="frame" x="0.0" y="150" width="600" height="50"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="dOF-z7-Jim" customClass="StackViewGuideMenuHorizontal">
                                     <rect key="frame" x="10" y="5" width="580" height="21"/>
@@ -272,8 +271,8 @@
                                 <constraint firstItem="dOF-z7-Jim" firstAttribute="leading" secondItem="Gc9-mq-FYk" secondAttribute="leading" constant="10" id="ftG-L1-fTp"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t2M-kW-VHN" customClass="ViewGuideMenuNotSelected">
-                            <rect key="frame" x="0.0" y="124" width="600" height="30"/>
+                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t2M-kW-VHN" customClass="ViewGuideMenuNotSelected">
+                            <rect key="frame" x="0.0" y="200" width="600" height="50"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ImS-fB-fCt" customClass="StackViewGuideMenuHorizontal">
                                     <rect key="frame" x="10" y="5" width="580" height="21"/>
@@ -311,8 +310,8 @@
                                 <constraint firstItem="YfC-nK-9xE" firstAttribute="leading" secondItem="t2M-kW-VHN" secondAttribute="leading" id="icW-Xq-aw9"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cuF-oE-bKo" customClass="ViewGuideMenuNotSelected">
-                            <rect key="frame" x="0.0" y="154" width="600" height="30"/>
+                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cuF-oE-bKo" customClass="ViewGuideMenuNotSelected">
+                            <rect key="frame" x="0.0" y="250" width="600" height="50"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="aXq-OH-dDb" customClass="StackViewGuideMenuHorizontal">
                                     <rect key="frame" x="10" y="5" width="580" height="21"/>

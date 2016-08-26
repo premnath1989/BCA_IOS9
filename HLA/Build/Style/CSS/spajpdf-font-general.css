@@ -170,8 +170,8 @@ main section span.Separator {
 }
 
 main section span.Tight {
-  padding-left: 0px;
-  padding-right: 0px;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
 }
 
 main section span.Description, main section label.Description {
@@ -195,7 +195,7 @@ main section table.BoxSquare {
 main section table.BoxSquare tbody tr td {
   width: 20px;
   height: 20px;
-  text-align: center;
+  text-align: center !important;
   vertical-align: middle;
   border-style: solid;
   border-width: 1px;
@@ -205,6 +205,16 @@ main section table.BoxSquare tfoot tr td {
   text-align: center;
   vertical-align: middle;
   border-style: none;
+}
+
+main section table.BoxSquare tfoot tr td.Note {
+  margin: 0px;
+  padding-top: 2px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+  height: auto;
+  font-size: 0.4em;
 }
 
 main section .LineDot, main section .LineStraight {

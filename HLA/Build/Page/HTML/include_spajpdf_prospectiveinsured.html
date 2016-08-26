@@ -18,7 +18,7 @@
 <input id='RadioButtonProspectiveInsuredIDTypeSIM' name='RadioButtonProspectiveInsuredIDType' type='radio' value='SIM'>
 <div class='BoxRound PositionerLeft' id='RadioButtonProspectiveInsuredIDTypeSIM'></div>
 <label class='RadioButton PositionerLeft' for='RadioButtonProspectiveInsuredIDTypeSIM'>SIM</label>
-<input id='RadioButtonProspectiveInsuredIDTypePaspor' name='RadioButtonProspectiveInsuredIDType' type='radio' value='Paspor'>
+<input id='RadioButtonProspectiveInsuredIDTypePaspor' name='RadioButtonProspectiveInsuredIDType' type='radio' value='PASPOR'>
 <div class='BoxRound PositionerLeft' id='RadioButtonProspectiveInsuredIDTypePaspor'></div>
 <label class='RadioButton PositionerLeft' for='RadioButtonProspectiveInsuredIDTypePaspor'>Paspor</label>
 <input id='RadioButtonProspectiveInsuredIDTypeKIMSKITAS' name='RadioButtonProspectiveInsuredIDType' type='radio' value='KIMSKITAS'>
@@ -31,12 +31,12 @@
 <br>
 <label class='Medium Single PositionerLeft' for='TextProspectiveInsuredIDNumber'>4. Nomor Identitas Diri</label>
 <table class='BoxSquare PositionerLeft' id='TextProspectiveInsuredIDNumber'></table>
-<table class='BoxSquare PositionerRight' id='TextProspectiveInsuredActiveDateYear'></table>
-<label class='Separator Single PositionerRight' for='TextProspectiveInsuredActiveDateYear'>/</label>
-<table class='BoxSquare PositionerRight' id='TextProspectiveInsuredActiveDateMonth'></table>
-<label class='Separator Single PositionerRight' for='TextProspectiveInsuredActiveDateMonth'>/</label>
-<table class='BoxSquare PositionerRight' id='TextProspectiveInsuredActiveDateDay'></table>
-<label class='Wrap Single PositionerRight' for='TextProspectiveInsuredActiveDateDay'>Masa Berlaku</label>
+<table class='BoxSquare PositionerRight' id='DateProspectiveInsuredActiveYear'></table>
+<label class='Separator Single PositionerRight' for='DateProspectiveInsuredActiveYear'>/</label>
+<table class='BoxSquare PositionerRight' id='DateProspectiveInsuredActiveMonth'></table>
+<label class='Separator Single PositionerRight' for='DateProspectiveInsuredActiveMonth'>/</label>
+<table class='BoxSquare PositionerRight' id='DateProspectiveInsuredActiveDay'></table>
+<label class='Wrap Single PositionerRight' for='DateProspectiveInsuredActiveDay'>Masa Berlaku</label>
 <br>
 <label class='Medium Single PositionerLeft' for='TextProspectiveInsuredBirthPlace'>5. Tempat Tanggal Lahir</label>
 <div class='LineStraight PositionerLeft' id='TextProspectiveInsuredBirthPlace'></div>
@@ -50,20 +50,20 @@
 <span class='Separator Single PositionerLeft'>Tahun</span>
 <br>
 <label class='Medium Single PositionerLeft' for='RadioButtonProspectiveInsuredNationalityWNI'>6. Kewarganegaraan</label>
-<input id='RadioButtonProspectiveInsuredNationalityWNI' name='RadioButtonProspectiveInsuredNationality' type='radio' value='WNI'>
+<input id='RadioButtonProspectiveInsuredNationalityWNI' name='RadioButtonProspectiveInsuredNationality' type='radio' value='wni'>
 <div class='BoxRound PositionerLeft' id='RadioButtonProspectiveInsuredNationalityWNI'></div>
 <label class='RadioButton PositionerLeft' for='RadioButtonProspectiveInsuredNationalityWNI'>WNI</label>
-<input id='RadioButtonProspectiveInsuredNationalityWNA' name='RadioButtonProspectiveInsuredNationality' type='radio' value='WNA'>
+<input id='RadioButtonProspectiveInsuredNationalityWNA' name='RadioButtonProspectiveInsuredNationality' type='radio' value='wna'>
 <div class='BoxRound PositionerLeft' id='RadioButtonProspectiveInsuredNationalityWNA'></div>
 <label class='RadioButton PositionerLeft' for='RadioButtonProspectiveInsuredNationalityWNA'>WNA, sebutkan</label>
 <div class='LineDot PositionerLeft' id='LineProspectiveInsuredNationalityWNA'></div>
 <span class='Note PositionerLeft'>(Jika jawaban "WNA" mohon melampirkan fotokopi KITAS & Paspor dan melengkapi kuesioner WNA)</span>
 <br>
 <label class='Wrap Single PositionerLeft' for='RadioButtonProspectiveInsuredUSACitizenNo'>7. Apakah Anda merupakan warga negara atau wajib pajak Amerika Serikat ?</label>
-<input id='RadioButtonProspectiveInsuredUSACitizenYes' name='RadioButtonProspectiveInsuredUSACitizen' type='radio' value='yes'>
+<input id='RadioButtonProspectiveInsuredUSACitizenYes' name='RadioButtonProspectiveInsuredUSACitizen' type='radio' value='true'>
 <div class='BoxRound PositionerLeft' id='RadioButtonProspectiveInsuredUSACitizenYes'></div>
 <label class='RadioButton PositionerLeft' for='RadioButtonProspectiveInsuredUSACitizenYes'>YA</label>
-<input id='RadioButtonProspectiveInsuredUSACitizenNo' name='RadioButtonProspectiveInsuredUSACitizen' type='radio' value='no'>
+<input id='RadioButtonProspectiveInsuredUSACitizenNo' name='RadioButtonProspectiveInsuredUSACitizen' type='radio' value='false'>
 <div class='BoxRound PositionerLeft' id='RadioButtonProspectiveInsuredUSACitizenNo'></div>
 <label class='RadioButton PositionerLeft' for='RadioButtonProspectiveInsuredUSACitizenNo'>TIDAK</label>
 <span class='Note PositionerLeft'>(Jika jawaban "YA" mohon lampirkan formulir W8 / W9)</span>
@@ -76,36 +76,36 @@
 <div class='BoxRound PositionerLeft' id='RadioButtonProspectiveInsuredSexFemale'></div>
 <label class='RadioButton Medium PositionerLeft' for='RadioButtonProspectiveInsuredSexFemale'>Wanita</label>
 <br>
-<label class='Medium Single PositionerLeft' for='RadioButtonProspectiveInsuredStatusSingle'>9. Status Pernikahan</label>
-<input id='RadioButtonProspectiveInsuredStatusSingle' name='RadioButtonProspectiveInsuredStatus' type='radio' value='single'>
-<div class='BoxRound PositionerLeft' id='RadioButtonProspectiveInsuredStatusSingle'></div>
-<label class='RadioButton Medium PositionerLeft' for='RadioButtonProspectiveInsuredStatusSingle'>Belum Menikah</label>
-<input id='RadioButtonProspectiveInsuredStatusMarried' name='RadioButtonProspectiveInsuredStatus' type='radio' value='married'>
-<div class='BoxRound PositionerLeft' id='RadioButtonProspectiveInsuredStatusMarried'></div>
-<label class='RadioButton Medium PositionerLeft' for='RadioButtonProspectiveInsuredStatusMarried'>Menikah</label>
-<input id='RadioButtonProspectiveInsuredStatusWidower' name='RadioButtonProspectiveInsuredStatus' type='radio' value='widower'>
-<div class='BoxRound PositionerLeft' id='RadioButtonProspectiveInsuredStatusWidower'></div>
-<label class='RadioButton Medium PositionerLeft' for='RadioButtonProspectiveInsuredStatusWidower'>Janda / Duda</label>
+<label class='Medium Single PositionerLeft' for='RadioButtonProspectiveInsuredMaritalStatusSingle'>9. Status Pernikahan</label>
+<input id='RadioButtonProspectiveInsuredMaritalStatusSingle' name='RadioButtonProspectiveInsuredMaritalStatus' type='radio' value='single'>
+<div class='BoxRound PositionerLeft' id='RadioButtonProspectiveInsuredMaritalStatusSingle'></div>
+<label class='RadioButton Medium PositionerLeft' for='RadioButtonProspectiveInsuredMaritalStatusSingle'>Belum Menikah</label>
+<input id='RadioButtonProspectiveInsuredMaritalStatusMarried' name='RadioButtonProspectiveInsuredMaritalStatus' type='radio' value='married'>
+<div class='BoxRound PositionerLeft' id='RadioButtonProspectiveInsuredMaritalStatusMarried'></div>
+<label class='RadioButton Medium PositionerLeft' for='RadioButtonProspectiveInsuredMaritalStatusMarried'>Menikah</label>
+<input id='RadioButtonProspectiveInsuredMaritalStatusWidower' name='RadioButtonProspectiveInsuredMaritalStatus' type='radio' value='widower'>
+<div class='BoxRound PositionerLeft' id='RadioButtonProspectiveInsuredMaritalStatusWidower'></div>
+<label class='RadioButton Medium PositionerLeft' for='RadioButtonProspectiveInsuredMaritalStatusWidower'>Janda / Duda</label>
 <br>
-<label class='Medium Single PositionerLeft' for='RadioBoxProspectiveInsuredReligionIslam'>10. Agama</label>
-<input id='RadioBoxProspectiveInsuredReligionIslam' name='RadioBoxProspectiveInsuredReligion' type='radio' value='islam'>
-<div class='BoxRound PositionerLeft' id='RadioBoxProspectiveInsuredReligionIslam'></div>
-<label class='RadioButton Medium PositionerLeft' for='RadioBoxProspectiveInsuredReligionIslam'>Islam</label>
-<input id='RadioBoxProspectiveInsuredReligionCatholic' name='RadioBoxProspectiveInsuredReligion' type='radio' value='catholic'>
-<div class='BoxRound PositionerLeft' id='RadioBoxProspectiveInsuredReligionCatholic'></div>
-<label class='RadioButton Medium PositionerLeft' for='RadioBoxProspectiveInsuredReligionCatholic'>Kristen Katolik</label>
-<input id='RadioBoxProspectiveInsuredReligionProtestant' name='RadioBoxProspectiveInsuredReligion' type='radio' value='protestant'>
-<div class='BoxRound PositionerLeft' id='RadioBoxProspectiveInsuredReligionProtestant'></div>
-<label class='RadioButton PositionerLeft' for='RadioBoxProspectiveInsuredReligionProtestant'>Kristen Protestan</label>
-<input id='RadioBoxProspectiveInsuredReligionHindu' name='RadioBoxProspectiveInsuredReligion' type='radio' value='hindu'>
-<div class='BoxRound PositionerLeft' id='RadioBoxProspectiveInsuredReligionHindu'></div>
-<label class='RadioButton PositionerLeft' for='RadioBoxProspectiveInsuredReligionHindu'>Hindu</label>
-<input id='RadioBoxProspectiveInsuredReligionBudha' name='RadioBoxProspectiveInsuredReligion' type='radio' value='budha'>
-<div class='BoxRound PositionerLeft' id='RadioBoxProspectiveInsuredReligionBudha'></div>
-<label class='RadioButton PositionerLeft' for='RadioBoxProspectiveInsuredReligionBudha'>Budha</label>
-<input id='RadioBoxProspectiveInsuredReligionKongHuCu' name='RadioBoxProspectiveInsuredReligion' type='radio' value='konghucu'>
-<div class='BoxRound PositionerLeft' id='RadioBoxProspectiveInsuredReligionKongHuCu'></div>
-<label class='RadioButton PositionerLeft' for='RadioBoxProspectiveInsuredReligionKongHuCu'>Kong Hu Chu</label>
+<label class='Medium Single PositionerLeft' for='RadioButtonProspectiveInsuredReligionIslam'>10. Agama</label>
+<input id='RadioButtonProspectiveInsuredReligionIslam' name='RadioButtonProspectiveInsuredReligion' type='radio' value='islam'>
+<div class='BoxRound PositionerLeft' id='RadioButtonProspectiveInsuredReligionIslam'></div>
+<label class='RadioButton Medium PositionerLeft' for='RadioButtonProspectiveInsuredReligionIslam'>Islam</label>
+<input id='RadioButtonProspectiveInsuredReligionCatholic' name='RadioButtonProspectiveInsuredReligion' type='radio' value='katolik'>
+<div class='BoxRound PositionerLeft' id='RadioButtonProspectiveInsuredReligionCatholic'></div>
+<label class='RadioButton Medium PositionerLeft' for='RadioButtonProspectiveInsuredReligionCatholic'>Kristen Katolik</label>
+<input id='RadioButtonProspectiveInsuredReligionProtestant' name='RadioButtonProspectiveInsuredReligion' type='radio' value='kristen'>
+<div class='BoxRound PositionerLeft' id='RadioButtonProspectiveInsuredReligionProtestant'></div>
+<label class='RadioButton PositionerLeft' for='RadioButtonProspectiveInsuredReligionProtestant'>Kristen Protestan</label>
+<input id='RadioButtonProspectiveInsuredReligionHindu' name='RadioButtonProspectiveInsuredReligion' type='radio' value='hindu'>
+<div class='BoxRound PositionerLeft' id='RadioButtonProspectiveInsuredReligionHindu'></div>
+<label class='RadioButton PositionerLeft' for='RadioButtonProspectiveInsuredReligionHindu'>Hindu</label>
+<input id='RadioButtonProspectiveInsuredReligionBudha' name='RadioButtonProspectiveInsuredReligion' type='radio' value='budha'>
+<div class='BoxRound PositionerLeft' id='RadioButtonProspectiveInsuredReligionBudha'></div>
+<label class='RadioButton PositionerLeft' for='RadioButtonProspectiveInsuredReligionBudha'>Budha</label>
+<input id='RadioButtonProspectiveInsuredReligionKongHuCu' name='RadioButtonProspectiveInsuredReligion' type='radio' value='konghuchu'>
+<div class='BoxRound PositionerLeft' id='RadioButtonProspectiveInsuredReligionKongHuCu'></div>
+<label class='RadioButton PositionerLeft' for='RadioButtonProspectiveInsuredReligionKongHuCu'>Kong Hu Chu</label>
 <br>
 <label class='Wrap Single PositionerLeft' for='TextProspectiveInsuredCompany'>11. a. Nama Perusahaan/Instansi/Sekolah</label>
 <table class='BoxSquare PositionerLeft' id='TextProspectiveInsuredCompany' style='margin-left: 4px'></table>
@@ -125,8 +125,9 @@
 <label class='Medium FirstIndent Single PositionerLeft' for='TextProspectiveInsuredSideJob'>b. Pekerjaan Tambahan</label>
 <table class='BoxSquare PositionerLeft' id='TextProspectiveInsuredSideJob'></table>
 <br>
-<label class='Medium Multi PositionerLeft' for='TextProspectiveInsuredHomeAddress1' style='height: 112px'>12. Alamat Tempat Tinggal</label>
+<label class='Medium Single PositionerLeft' for='TextProspectiveInsuredHomeAddress1'>12. Alamat Tempat Tinggal</label>
 <table class='BoxSquare PositionerLeft' id='TextProspectiveInsuredHomeAddress1'></table>
+<span class='Note Medium Multi Tight PositionerLeft' style='height: 60px;'>(Bila tidak sesuai kartu identitas Diri, diisi dengan lengkap menginformasikan nomor rumah, RT, RW, Keluarahan & Kecamatan)</span>
 <table class='BoxSquare PositionerLeft' id='TextProspectiveInsuredHomeAddress2'></table>
 <label class='Box Single PositionerLeft' for='TextProspectiveInsuredHomeCity' id='LabelProspectiveInsuredHomeCity'>Kota</label>
 <table class='BoxSquare PositionerLeft' id='TextProspectiveInsuredHomeCity'></table>
@@ -138,10 +139,10 @@
 <table class='BoxSquare PositionerLeft' id='TextProspectiveInsuredHomeTelephoneInfix'></table>
 <br>
 <label class='Medium Single PositionerLeft' for='TextProspectiveInsuredTelephone1'>13. Nomor Ponsel</label>
-<label class='Box Single PositionerLeft' for='TextProspectiveInsuredTelephone1' id='LabelProspectiveInsuredTelephone1'>1.</label>
-<table class='BoxSquare PositionerLeft' id='TextProspectiveInsuredTelephone1'></table>
-<label class='Box Single PositionerLeft' for='TextProspectiveInsuredTelephone2' id='LabelProspectiveInsuredTelephone2'>2.</label>
-<table class='BoxSquare PositionerLeft' id='TextProspectiveInsuredTelephone2'></table>
+<label class='Box Single PositionerLeft' for='TextProspectiveInsuredHandphone1' id='LabelProspectiveInsuredTelephone1'>1.</label>
+<table class='BoxSquare PositionerLeft' id='TextProspectiveInsuredHandphone1'></table>
+<label class='Box Single PositionerLeft' for='TextProspectiveInsuredHandphone2' id='LabelProspectiveInsuredTelephone2'>2.</label>
+<table class='BoxSquare PositionerLeft' id='TextProspectiveInsuredHandphone2'></table>
 <br>
 <label class='Medium Single PositionerLeft' for='TextProspectiveInsuredEmail'>14. Alamat Email</label>
 <table class='BoxSquare PositionerLeft' id='TextProspectiveInsuredEmail'></table>
@@ -149,7 +150,7 @@
 <section class='SectionFooter' style='margin-top: 96px;'>
   <div class='FooterContainer'>
     <div class='FooterGeneral'>
-      <span class='Note Single PositionerLeft'>OP/NB/0104/031602 Hal 1 / 8</span>
+      <span class='Note Single PositionerLeft SpanFooterDetail'></span>
       <span class='Note Single PositionerRight'>PT Asuransi Jiwa BCA telah terdaftar dan diawasi oleh Otoritas Jasa Keuangan.</span>
       <br>
     </div>
@@ -179,13 +180,13 @@
 <label class='Box Plain Single PositionerLeft' for='TextProspectiveInsuredOfficeTelephoneInfix' id='LabelProspectiveInsuredOfficeTeleponeInfix'>-</label>
 <table class='BoxSquare PositionerLeft' id='TextProspectiveInsuredOfficeTelephoneInfix'></table>
 <br>
-<label class='Medium Single PositionerLeft' for='RadioButtonProspectiveInsuredCorrespondanceHomeAddress'>16. Alamat Korespondensi</label>
-<input id='RadioButtonProspectiveInsuredCorrespondanceHomeAddress' name='RadioButtonProspectiveInsuredCorrespondanceAddress' type='radio' value='home'>
-<div class='BoxRound PositionerLeft' id='RadioButtonProspectiveInsuredCorrespondanceHomeAddress'></div>
-<label class='RadioButton PositionerLeft' for='RadioButtonProspectiveInsuredCorrespondanceHomeAddress'>Alamat Tempat Tinggal</label>
-<input id='RadioButtonProspectiveInsuredCorrespondanceOfficeAddress' name='RadioButtonProspectiveInsuredCorrespondanceAddress' type='radio' value='office'>
-<div class='BoxRound PositionerLeft' id='RadioButtonProspectiveInsuredCorrespondanceOfficeAddress'></div>
-<label class='RadioButton PositionerLeft' for='RadioButtonProspectiveInsuredCorrespondanceOfficeAddress'>Alamat Kantor</label>
+<label class='Medium Single PositionerLeft' for='RadioButtonProspectiveInsuredCorrespondanceAddressHome'>16. Alamat Korespondensi</label>
+<input id='RadioButtonProspectiveInsuredCorrespondanceAddressHome' name='RadioButtonProspectiveInsuredCorrespondanceAddress' type='radio' value='home'>
+<div class='BoxRound PositionerLeft' id='RadioButtonProspectiveInsuredCorrespondanceAddressHome'></div>
+<label class='RadioButton PositionerLeft' for='RadioButtonProspectiveInsuredCorrespondanceAddressHome'>Alamat Tempat Tinggal</label>
+<input id='RadioButtonProspectiveInsuredCorrespondanceAddressOffice' name='RadioButtonProspectiveInsuredCorrespondanceAddress' type='radio' value='office'>
+<div class='BoxRound PositionerLeft' id='RadioButtonProspectiveInsuredCorrespondanceAddressOffice'></div>
+<label class='RadioButton PositionerLeft' for='RadioButtonProspectiveInsuredCorrespondanceAddressOffice'>Alamat Kantor</label>
 <br>
 <label class='Medium Single PositionerLeft' for='RadioButtonProspectiveInsuredRelationAssuredSelf'>17. Hubungan dengan Calon Tertangung</label>
 <input id='RadioButtonProspectiveInsuredRelationAssuredSelf' name='RadioButtonProspectiveInsuredRelationAssured' type='radio' value='self'>
@@ -221,24 +222,24 @@
 <input id='RadioButtonProspectiveInsuredInsurancePurposeOther' name='RadioButtonProspectiveInsuredInsurancePurpose' type='radio' value='other'>
 <div class='BoxRound PositionerLeft' id='RadioButtonProspectiveInsuredInsurancePurposeOther'></div>
 <label class='RadioButton PositionerLeft' for='RadioButtonProspectiveInsuredInsurancePurposeOther'>Lainnya, sebutkan</label>
-<div class='LineDot PositionerLeft' id='LineProspectiveInsuredOtherPurpose'></div>
+<div class='LineDot PositionerLeft' id='TextProspectiveInsuredInsurancePurposeOther'></div>
 <br>
 <label class='Medium Single PositionerLeft' for='TextProspectiveInsuredNPWP'>19. Nomor NPWP (jika ada)</label>
 <table class='BoxSquare PositionerLeft' id='TextProspectiveInsuredNPWP'></table>
-<table class='BoxSquare PositionerRight' id='TextProspectiveInsuredNPWPActiveDateYear'></table>
-<label class='Separator Single PositionerRight' for='TextProspectiveInsuredNPWPActiveDateYear'>/</label>
-<table class='BoxSquare PositionerRight' id='TextProspectiveInsuredNPWPActiveDateMonth'></table>
-<label class='Separator Single PositionerRight' for='TextProspectiveInsuredNPWPActiveDateMonth'>/</label>
-<table class='BoxSquare PositionerRight' id='TextProspectiveInsuredNPWPActiveDateDay'></table>
-<label class='Wrap Single PositionerRight' for='TextProspectiveInsuredNPWPActiveDateDay'>Masa Berlaku</label>
+<table class='BoxSquare PositionerRight' id='DateProspectiveInsuredNPWPActiveYear'></table>
+<label class='Separator Single PositionerRight' for='DateProspectiveInsuredNPWPActiveYear'>/</label>
+<table class='BoxSquare PositionerRight' id='DateProspectiveInsuredNPWPActiveMonth'></table>
+<label class='Separator Single PositionerRight' for='DateProspectiveInsuredNPWPActiveMonth'>/</label>
+<table class='BoxSquare PositionerRight' id='DateProspectiveInsuredNPWPActiveDay'></table>
+<label class='Wrap Single PositionerRight' for='DateProspectiveInsuredNPWPActiveDay'>Masa Berlaku</label>
 <br>
-<label class='Wrap Single PositionerLeft' for='BoxProspectiveInsuredSalaryIDR'>20. Penghasilan Kotor Per Tahun</label>
+<label class='Wrap Single PositionerLeft' for='TextProspectiveInsuredSalaryIDR'>20. Penghasilan Kotor Per Tahun</label>
 <br>
-<label class='Medium Single FirstIndent PositionerLeft' for='BoxProspectiveInsuredSalaryIDR'>Gaji</label>
+<label class='Medium Single FirstIndent PositionerLeft' for='TextProspectiveInsuredSalaryIDR'>Gaji</label>
 <input id='RadioButtonProspectiveInsuredSalaryIDR' name='RadioButtonProspectiveInsuredSalary' type='radio' value='idr'>
 <div class='BoxRound PositionerLeft' id='RadioButtonProspectiveInsuredSalaryIDR'></div>
 <label class='RadioButton PositionerLeft' for='RadioButtonProspectiveInsuredSalaryIDR'>Rp</label>
-<input id='RadioButtonProspectiveInsuredSalaryUSD' name='RadioButtonProspectiveInsuredSalary' type='radio' value='USD'>
+<input id='RadioButtonProspectiveInsuredSalaryUSD' name='RadioButtonProspectiveInsuredSalary' type='radio' value='usd'>
 <div class='BoxRound PositionerLeft' id='RadioButtonProspectiveInsuredSalaryUSD'></div>
 <label class='RadioButton PositionerLeft' for='RadioButtonProspectiveInsuredSalaryUSD'>USD</label>
 <label class='RadioButton PositionerLeft' for='TextProspectiveInsuredSalary'>Jumlah Penghasilan / tahun</label>
@@ -248,7 +249,7 @@
 <input id='RadioButtonProspectiveInsuredRevenueIDR' name='RadioButtonProspectiveInsuredRevenue' type='radio' value='idr'>
 <div class='BoxRound PositionerLeft' id='RadioButtonProspectiveInsuredRevenueIDR'></div>
 <label class='RadioButton PositionerLeft' for='RadioButtonProspectiveInsuredRevenueIDR'>Rp</label>
-<input id='RadioButtonProspectiveInsuredRevenueUSD' name='RadioButtonProspectiveInsuredRevenue' type='radio' value='USD'>
+<input id='RadioButtonProspectiveInsuredRevenueUSD' name='RadioButtonProspectiveInsuredRevenue' type='radio' value='usd'>
 <div class='BoxRound PositionerLeft' id='RadioButtonProspectiveInsuredRevenueUSD'></div>
 <label class='RadioButton PositionerLeft' for='RadioButtonProspectiveInsuredRevenueUSD'>USD</label>
 <label class='RadioButton PositionerLeft' for='TextProspectiveInsuredRevenue'>Jumlah Penghasilan / tahun</label>
@@ -258,7 +259,7 @@
 <input id='RadioButtonProspectiveInsuredOtherIncomeIDR' name='RadioButtonProspectiveInsuredOtherIncome' type='radio' value='idr'>
 <div class='BoxRound PositionerLeft' id='RadioButtonProspectiveInsuredOtherIncomeIDR'></div>
 <label class='RadioButton PositionerLeft' for='RadioButtonProspectiveInsuredOtherIncomeIDR'>Rp</label>
-<input id='RadioButtonProspectiveInsuredOtherIncomeUSD' name='RadioButtonProspectiveInsuredOtherIncome' type='radio' value='USD'>
+<input id='RadioButtonProspectiveInsuredOtherIncomeUSD' name='RadioButtonProspectiveInsuredOtherIncome' type='radio' value='usd'>
 <div class='BoxRound PositionerLeft' id='RadioButtonProspectiveInsuredOtherIncomeUSD'></div>
 <label class='RadioButton PositionerLeft' for='RadioButtonProspectiveInsuredOtherIncomeUSD'>USD</label>
 <label class='RadioButton PositionerLeft' for='TextProspectiveInsuredOtherIncome'>Jumlah Penghasilan / tahun</label>

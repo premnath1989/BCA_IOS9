@@ -318,6 +318,34 @@ main form .ContainerFit .Item, main form .ContainerLeft .Item, main form .Contai
   flex-grow: 1;
 }
 
+main form .ContainerFit .Item1, main form .ContainerLeft .Item1, main form .ContainerRight .Item1 {
+  flex-grow: 1;
+}
+
+main form .ContainerFit .Item2, main form .ContainerLeft .Item2, main form .ContainerRight .Item2 {
+  flex-grow: 2;
+}
+
+main form .ContainerFit .Item3, main form .ContainerLeft .Item3, main form .ContainerRight .Item3 {
+  flex-grow: 3;
+}
+
+main form .ContainerFit .Margin, main form .ContainerLeft .Margin, main form .ContainerRight .Margin {
+  margin: 5px;
+}
+
+main form .ContainerFit .Center, main form .ContainerLeft .Center, main form .ContainerRight .Center {
+  text-align: center;
+}
+
+main form .ContainerFit .Left, main form .ContainerLeft .Left, main form .ContainerRight .Left {
+  text-align: left;
+}
+
+main form .ContainerFit .Right, main form .ContainerLeft .Right, main form .ContainerRight .Right {
+  text-align: right;
+}
+
 main form .ContainerFit {
   justify-content: space-between;
 }
@@ -328,6 +356,40 @@ main form .ContainerLeft {
 
 main form .ContainerRight {
   justify-content: flex-end;
+}
+
+div.Short, div.Short {
+  min-width: 40px;
+  width: 40px;
+}
+
+div.Medium, div.Medium {
+  min-width: 126px;
+  width: 126px;
+}
+
+div.Long, div.Long {
+  min-width: 120px;
+  width: 120px;
+}
+
+div.Long, div.Long {
+  width: 100%;
+}
+
+div.ShortFix, div.ShortFix {
+  width: 40px;
+  max-width: 40px;
+}
+
+div.MediumFix, div.MediumFix {
+  width: 126px;
+  max-width: 126px;
+}
+
+div.LongFix, div.LongFix {
+  width: 240px;
+  max-width: 240px;
 }
 
 /* CONDITION */

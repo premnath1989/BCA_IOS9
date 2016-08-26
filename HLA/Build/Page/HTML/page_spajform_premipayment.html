@@ -25,7 +25,7 @@
     <link href='../../Style/CSS/spajform-layout-general.css' id='csslayout' rel='stylesheet' type='text/css'>
     <link href='../../Style/CSS/spajform-font-general.css' id='cssfont' rel='stylesheet' type='text/css'>
     <link href='../../Style/CSS/spajform-input-general.css' id='cssinput' rel='stylesheet' type='text/css'>
-    <!-- %link{ :id => "csslink", :href => "#{urlCSS}#{urlCSSSectionPrefix}-link-general.css", :rel => "stylesheet", :type => "text/css" } -->
+    <link href='../../Style/CSS/spajform-link-general.css' id='csslink' rel='stylesheet' type='text/css'>
     <link href='../../Style/CSS/bless-fontsize-medium.css' id='cssfontsize' rel='stylesheet' type='text/css'>
     <link href='../../Style/CSS/spajform-fontfamily-bpreplay.css' id='cssfontfamily' rel='stylesheet' type='text/css'>
     <link href='../../Style/CSS/spajform-theme-turqoise-svg.css' id='csstheme' rel='stylesheet' type='text/css'>
@@ -59,13 +59,8 @@
           
           // INITIALIZATION
           
-          // var jsonPolicyHolder = '{"result":{"readFromDB":[{"elementID":"TextPolicyHolderFullName","Value":"Yosi Oliver"},{"elementID":"RadioButtonPolicyHolderAmerican","Value":"true"},{"elementID":"DatePolicyHolderActive","Value":"01/02/2016"},{"elementID":"RadioButtonPolicyHolderReligion","Value":"budha"}]}}'
-          
-          $("#BoxDate").DateTimePicker(
-          {
-              dateSeparator: "/",
-              dateFormat: "dd/MM/yyyy"
-          });                                                                
+          // var jsonPolicyHolder = '{"result":{"readFromDB":[{"elementID":"TextPolicyHolderFullName","Value":"Yosi Oliver"},{"elementID":"RadioButtonPolicyHolderAmerican","Value":"true"},{"elementID":"DatePolicyHolderActive","Value":"01/02/2016"},{"elementID":"RadioButtonPolicyHolderReligion","Value":"budha"}]}}'                                                             
+          radioButtonOtherGenerator("RadioButtonPremiPaymentWay", "#TextPremiPaymentWayOther", "other");
       });
     </script>
   </head>
@@ -83,23 +78,36 @@
           <label class='RadioButton' for='RadioButtonPremiPaymentKursUSD'>USD</label>
         </div>
         <br>
-        <label class='Medium Single PositionerLeft' for='RadionButtonPremiPaymentFrequencyAnually'>Frekuensi Pembayaran</label>
+        <label class='Medium Single PositionerLeft' for='RadioButtonPremiPaymentFrequencyAnually'>Frekuensi Pembayaran</label>
         <div class='RadioButton PositionerLeft'>
-          <input class='Medium Single' id='RadionButtonPremiPaymentFrequencyAnually' name='RadionButtonPremiPaymentFrequency' type='radio' value='annualy'>
-          <label class='RadioButton' for='RadionButtonPremiPaymentFrequencyAnually'>Tahunan</label>
+          <input class='Medium Single' id='RadioButtonPremiPaymentFrequencyAnually' name='RadioButtonPremiPaymentFrequency' type='radio' value='annualy'>
+          <label class='RadioButton' for='RadioButtonPremiPaymentFrequencyAnually'>Tahunan</label>
           <div class='Separator'></div>
-          <input class='Medium Single' id='RadionButtonPremiPaymentFrequencySemester' name='RadionButtonPremiPaymentFrequency' type='radio' value='semester'>
-          <label class='RadioButton' for='RadionButtonPremiPaymentFrequencySemester'>Semesteran</label>
+          <input class='Medium Single' id='RadioButtonPremiPaymentFrequencySemester' name='RadioButtonPremiPaymentFrequency' type='radio' value='semester'>
+          <label class='RadioButton' for='RadioButtonPremiPaymentFrequencySemester'>Semesteran</label>
           <div class='Separator'></div>
-          <input class='Medium Single' id='RadionButtonPremiPaymentFrequencyQuarterly' name='RadionButtonPremiPaymentFrequency' type='radio' value='quarterly'>
-          <label class='RadioButton' for='RadionButtonPremiPaymentFrequencyQuarterly'>Triwulan</label>
+          <input class='Medium Single' id='RadioButtonPremiPaymentFrequencyQuarterly' name='RadioButtonPremiPaymentFrequency' type='radio' value='quarterly'>
+          <label class='RadioButton' for='RadioButtonPremiPaymentFrequencyQuarterly'>Triwulan</label>
           <div class='Separator'></div>
-          <input class='Medium Single' id='RadionButtonPremiPaymentFrequencyMonthly' name='RadionButtonPremiPaymentFrequency' type='radio' value='monthly'>
-          <label class='RadioButton' for='RadionButtonPremiPaymentFrequencyMonthly'>Bulanan</label>
+          <input class='Medium Single' id='RadioButtonPremiPaymentFrequencyMonthly' name='RadioButtonPremiPaymentFrequency' type='radio' value='monthly'>
+          <label class='RadioButton' for='RadioButtonPremiPaymentFrequencyMonthly'>Bulanan</label>
           <div class='Separator'></div>
-          <input class='Medium Single' id='RadionButtonPremiPaymentFrequencyFull' name='RadionButtonPremiPaymentFrequency' type='radio' value='full'>
-          <label class='RadioButton' for='RadionButtonPremiPaymentFrequencyFull'>Sekaligus</label>
+          <input class='Medium Single' id='RadioButtonPremiPaymentFrequencyFull' name='RadioButtonPremiPaymentFrequency' type='radio' value='full'>
+          <label class='RadioButton' for='RadioButtonPremiPaymentFrequencyFull'>Sekaligus</label>
         </div>
+        <br>
+        <label class='Medium Single PositionerLeft' for='RadioButtonPremiPaymentWayDebit'>Cara Pembayaran</label>
+        <div class='RadioButton PositionerLeft'>
+          <input class='Medium Single' id='RadioButtonPremiPaymentWayDebit' name='RadioButtonPremiPaymentWay' type='radio' value='annualy'>
+          <label class='RadioButton' for='RadioButtonPremiPaymentWayDebit'>Debit Rekening</label>
+          <div class='Separator'></div>
+          <input class='Medium Single' id='RadioButtonPremiPaymentWayCredit' name='RadioButtonPremiPaymentWay' type='radio' value='semester'>
+          <label class='RadioButton' for='RadioButtonPremiPaymentWayCredit'>Debit Kartu Kredit</label>
+          <div class='Separator'></div>
+          <input id='RadioButtonPremiPaymentWayOther' name='RadioButtonPremiPaymentWay' type='radio' value='other'>
+          <label class='RadioButton' for='RadioButtonPremiPaymentWayOther'>Lainnya</label>
+        </div>
+        <input class='Long Single PositionerLeft' id='TextPremiPaymentWayOther' type='text'>
         <br>
         <label class='Medium Single PositionerLeft' for='RadioButtonPremiPaymentPayorHolder'>Pembayar Premi</label>
         <div class='RadioButton PositionerLeft'>
@@ -141,10 +149,10 @@
         <div class='ContainerFit'>
           <label class='Full Single Item' for='TextPremiPaymentThirdPartyAnswer'>Apakah dalam pengajuan asuransi Anda, selain Anda dan Calon Tertanggung terdapat Pihak ketiga yang meminta mengajukan asuransi ini, menjadi pembayar Premi meminta hak atas manfaat Polis?</label>
           <div class='RadioButton MediumFix Single Item'>
-            <input class='Medium Single' id='RadioButtonPremiPaymentThirdPartyAnswerYes' name='RadioButtonPremiPaymentThirdPartyAnswer' type='radio' value='ya'>
+            <input class='Medium Single' id='RadioButtonPremiPaymentThirdPartyAnswerYes' name='RadioButtonPremiPaymentThirdPartyAnswer' type='radio' value='true'>
             <label class='RadioButton' for='RadioButtonPremiPaymentThirdPartyAnswerYes'>Ya</label>
             <div class='Separator'></div>
-            <input class='Medium Single' id='RadioButtonPremiPaymentThirdPartyAnswerNo' name='RadioButtonPremiPaymentThirdPartyAnswer' type='radio' value='tidak'>
+            <input class='Medium Single' id='RadioButtonPremiPaymentThirdPartyAnswerNo' name='RadioButtonPremiPaymentThirdPartyAnswer' type='radio' value='false'>
             <label class='RadioButton' for='RadioButtonPremiPaymentThirdPartyAnswerNo'>Tidak</label>
           </div>
         </div>

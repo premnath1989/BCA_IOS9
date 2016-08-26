@@ -88,6 +88,10 @@ a.Underline:active {
   vertical-align: middle;
   border: none;
   border-display: inline-block;
+  border-radius: 6px;
+  -ms-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
 }
 
 .ButtonPrimary:disabled {

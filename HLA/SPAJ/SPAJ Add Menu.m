@@ -74,6 +74,7 @@
 
     -(void)viewDidAppear:(BOOL)animated{
         [self voidLoadSIInformation];
+        [self renameSPAJPDF];
     }
 
     - (void)viewDidLoad
@@ -317,6 +318,7 @@
                 [CATransaction setCompletionBlock:^{
                         UIAlertController *alertNoSPAJNumber = [alert alertInformation:@"Sukses" stringMessage:[NSString stringWithFormat:@"Nomor SPAJ anda adalah %lli",spajNumber]];
                         [self presentViewController:alertNoSPAJNumber animated:YES completion:nil];
+                        [self voidChangeFileName:spajNumber];
                         [_delegateSPAJMain actionGoToExistingList:nil];// handle completion here
                 }];
                 
@@ -336,6 +338,41 @@
         }
     };
 
+    #pragma mark change file name
+    //this function for testing Only
+    -(void)renameSPAJPDF{
+        NSString* fileName = @"SPAJ.pdf";
+        
+        NSString* spajOriginalPath = [NSString stringWithFormat:@"%@/%@",[formatter generateSPAJFileDirectory:[dictTransaction valueForKey:@"SPAJEappNumber"]],fileName];
+        NSString* spajNewPath = [NSString stringWithFormat:@"%@/%@_%@",[formatter generateSPAJFileDirectory:[dictTransaction valueForKey:@"SPAJEappNumber"]],[dictTransaction valueForKey:@"SPAJEappNumber"],fileName];
+        
+        NSError *error = nil;
+        [[NSFileManager defaultManager] moveItemAtPath:spajOriginalPath toPath:spajNewPath error:&error];
+    }
+
+    -(void)voidChangeFileName:(long long)longSPAJNumber{
+        //SPAJ Form
+        NSString *filePrefix = [NSString stringWithFormat:@"%lld",longSPAJNumber];
+        /*NSString* fileName = @"SPAJ.pdf";
+        NSString* newSPAJFileName = [NSString stringWithFormat:@"%@_%@",filePrefix,fileName];
+    
+        NSString* spajOriginalPath = [NSString stringWithFormat:@"%@/%@",[formatter generateSPAJFileDirectory:[dictTransaction valueForKey:@"SPAJEappNumber"]],fileName];
+        NSString* spajNewPath = [NSString stringWithFormat:@"%@/%@",[formatter generateSPAJFileDirectory:[dictTransaction valueForKey:@"SPAJEappNumber"]],newSPAJFileName];*/
+        
+        NSString* stringFilePath = [formatter generateSPAJFileDirectory:[dictTransaction valueForKey:@"SPAJEappNumber"]];
+        
+        NSArray* directoryContent = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:stringFilePath error:NULL];
+        
+        for (int i=0;i<[directoryContent count];i++){
+            NSString* originalContent = [directoryContent objectAtIndex:i];
+            NSString * newString = [originalContent stringByReplacingOccurrencesOfString:[dictTransaction valueForKey:@"SPAJEappNumber"] withString:filePrefix];
+            
+            NSString* originalPath = [NSString stringWithFormat:@"%@/%@",[formatter generateSPAJFileDirectory:[dictTransaction valueForKey:@"SPAJEappNumber"]],originalContent];
+            NSString* newPath = [NSString stringWithFormat:@"%@/%@",[formatter generateSPAJFileDirectory:[dictTransaction valueForKey:@"SPAJEappNumber"]],newString];
+            NSError *error = nil;
+            [[NSFileManager defaultManager] moveItemAtPath:originalPath toPath:newPath error:&error];
+        }
+    }
 
     #pragma mark delegate
     -(void)selectedSI:(NSString *)SINO

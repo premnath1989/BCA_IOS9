@@ -25,7 +25,7 @@
     <link href='../../Style/CSS/spajform-layout-general.css' id='csslayout' rel='stylesheet' type='text/css'>
     <link href='../../Style/CSS/spajform-font-general.css' id='cssfont' rel='stylesheet' type='text/css'>
     <link href='../../Style/CSS/spajform-input-general.css' id='cssinput' rel='stylesheet' type='text/css'>
-    <!-- %link{ :id => "csslink", :href => "#{urlCSS}#{urlCSSSectionPrefix}-link-general.css", :rel => "stylesheet", :type => "text/css" } -->
+    <link href='../../Style/CSS/spajform-link-general.css' id='csslink' rel='stylesheet' type='text/css'>
     <link href='../../Style/CSS/bless-fontsize-medium.css' id='cssfontsize' rel='stylesheet' type='text/css'>
     <link href='../../Style/CSS/spajform-fontfamily-bpreplay.css' id='cssfontfamily' rel='stylesheet' type='text/css'>
     <link href='../../Style/CSS/spajform-theme-turqoise-svg.css' id='csstheme' rel='stylesheet' type='text/css'>
@@ -74,8 +74,8 @@
           $('#TextPolicyHolderOtherIncome').number( true, 0, ',', '.' );
           
           radioButtonOtherGenerator("RadioButtonPolicyHolderIDType", "#TextPolicyHolderIDTypeOther", "OTHER");
-          radioButtonOtherGenerator("RadioButtonPolicyHolderRelationAssured", "#TextPolicyHolderRelationAssuredOther", "lainnya");
-          radioButtonOtherGenerator("RadioButtonPolicyHolderInsurancePurpose", "#TextPolicyHolderInsurancePurposeOther", "lainnya");
+          radioButtonOtherGenerator("RadioButtonPolicyHolderRelationAssured", "#TextPolicyHolderRelationAssuredOther", "other");
+          radioButtonOtherGenerator("RadioButtonPolicyHolderInsurancePurpose", "#TextPolicyHolderInsurancePurposeOther", "other");
       });
     </script>
   </head>
@@ -119,10 +119,10 @@
           <input class='Medium Single Item' data-input-type='autopopulate' id='DatePolicyHolderActive' required='true' type='text'>
         </div>
         <div class='ContainerFit'>
-          <label class='Medium Single Item' for='TextPolicyHolderPlace'>Tempat lahir</label>
-          <input class='Medium Single Item' data-input-type='autopopulate' id='TextPolicyHolderPlace' type='text'>
-          <label class='Medium Single Item' for='DatePolicyHolderBirthday'>Tanggal lahir</label>
-          <input class='Medium Single Item' data-input-type='autopopulate' id='DatePolicyHolderBirthday' required='true' type='text'>
+          <label class='Medium Single Item' for='TextPolicyHolderBirthPlace'>Tempat lahir</label>
+          <input class='Medium Single Item' data-input-type='autopopulate' id='TextPolicyHolderBirthPlace' type='text'>
+          <label class='Medium Single Item' for='DatePolicyHolderBirth'>Tanggal lahir</label>
+          <input class='Medium Single Item' data-input-type='autopopulate' id='DatePolicyHolderBirth' required='true' type='text'>
           <label class='Medium Single Item' for='TextPolicyHolderAge'>Umur</label>
           <input class='Medium Single Item' data-input-type='autopopulate' id='TextPolicyHolderAge' type='text'>
         </div>
@@ -136,15 +136,15 @@
             <label class='RadioButton' for='RadioButtonPolicyHolderNationalityWNA'>WNA</label>
           </div>
         </div>
-        <label class='Wrap Single PositionerLeft' for='RadioButtonPolicyHolderAmericanYes'>Apakah anda merupakan warga negara atau wajib pajak amerika ?</label>
+        <label class='Wrap Single PositionerLeft' for='RadioButtonPolicyHolderUSACitizenYes'>Apakah anda merupakan warga negara atau wajib pajak amerika ?</label>
         <div class='RadioButton PositionerLeft'>
-          <input class='Medium Single' id='RadioButtonPolicyHolderAmericanYes' name='RadioButtonPolicyHolderAmerican' type='radio' value='true'>
-          <label class='RadioButton' for='RadioButtonPolicyHolderAmericanYes'>Ya</label>
+          <input class='Medium Single' id='RadioButtonPolicyHolderUSACitizenYes' name='RadioButtonPolicyHolderUSACitizen' type='radio' value='true'>
+          <label class='RadioButton' for='RadioButtonPolicyHolderUSACitizenYes'>Ya</label>
           <div class='Separator'></div>
-          <input class='Medium Single' id='RadioButtonPolicyHolderAmericanNo' name='RadioButtonPolicyHolderAmerican' type='radio' value='false'>
-          <label class='RadioButton' for='RadioButtonPolicyHolderAmericanNo'>Tidak</label>
+          <input class='Medium Single' id='RadioButtonPolicyHolderUSACitizenNo' name='RadioButtonPolicyHolderUSACitizen' type='radio' value='false'>
+          <label class='RadioButton' for='RadioButtonPolicyHolderUSACitizenNo'>Tidak</label>
         </div>
-        <label class='Wrap Single PositionerLeft' for='RadioButtonPolicyHolderAmericanYes'>(Jika jawaban "Ya" mohon lampirkan formulir W8 / W9).</label>
+        <label class='Wrap Single PositionerLeft' for='RadioButtonPolicyHolderUSACitizenYes'>(Jika jawaban "Ya" mohon lampirkan formulir W8 / W9).</label>
         <br>
         <label class='Medium Single PositionerLeft' for='RadioButtonPolicyHolderSex'>Jenis Kelamin</label>
         <div class='RadioButton PositionerLeft'>
@@ -197,8 +197,8 @@
           <input class='Full Single Item' data-input-type='autopopulate' id='TextPolicyHolderMainJob' type='text'>
         </div>
         <div class='ContainerFit'>
-          <label class='Medium Single Item' for='TextPolicyHolderScopeWork'>Bidang Usaha</label>
-          <input class='Full Single Item' id='TextPolicyHolderScopeWork' type='text'>
+          <label class='Medium Single Item' for='TextPolicyHolderWorkScope'>Bidang Usaha</label>
+          <input class='Full Single Item' id='TextPolicyHolderWorkScope' type='text'>
         </div>
         <div class='ContainerFit'>
           <label class='Medium Single Item' for='TextPolicyHolderPosition'>Jabatan</label>
@@ -229,7 +229,7 @@
           <label class='Medium Single Item' for='TextPolicyHolderHomeCity'>Kota</label>
           <input class='Medium Single Item' data-input-type='autopopulate' id='TextPolicyHolderHomeCity' required='true' type='text'>
           <label class='Medium Single Item' for='TextPolicyHolderHomePostalCode'>Kode Pos</label>
-          <input class='Medium Single Item' data-input-type='autopopulate' id='TextPolicyHolderPostalCode' required='true' type='text'>
+          <input class='Medium Single Item' data-input-type='autopopulate' id='TextPolicyHolderHomePostalCode' required='true' type='text'>
         </div>
         <div class='ContainerFit'>
           <label class='Medium Single Item' for='TextPolicyHolderHomeTelephone'></label>
@@ -272,47 +272,47 @@
         </div>
         <label class='Medium Single PositionerLeft' for='RadioButtonPolicyHolderCorrespondanceAddress'>Alamat Korespondensi</label>
         <div class='RadioButton PositionerLeft'>
-          <input class='Medium Single' id='RadioButtonPolicyHolderCorrespondanceAddressHome' name='RadioButtonPolicyHolderCorrespondanceAddress' type='radio' value='rumah'>
+          <input class='Medium Single' id='RadioButtonPolicyHolderCorrespondanceAddressHome' name='RadioButtonPolicyHolderCorrespondanceAddress' type='radio' value='home'>
           <label class='RadioButton' for='RadioButtonPolicyHolderCorrespondanceAddressHome'>Alamat Tempat Tinggal</label>
           <div class='Separator'></div>
-          <input class='Medium Single' id='RadioButtonPolicyHolderCorrespondanceAddressOffice' name='RadioButtonPolicyHolderCorrespondanceAddress' type='radio' value='kantor'>
+          <input class='Medium Single' id='RadioButtonPolicyHolderCorrespondanceAddressOffice' name='RadioButtonPolicyHolderCorrespondanceAddress' type='radio' value='office'>
           <label class='RadioButton' for='RadioButtonPolicyHolderCorrespondanceAddressOffice'>Alamat Kantor</label>
         </div>
         <br>
         <label class='Medium Multi PositionerLeft' for='RadioButtonPolicyHolderRelationAssured'>Hubungan Dengan Calon Tertanggung</label>
         <div class='RadioButton PositionerLeft'>
-          <input class='Medium Single' disabled='true' id='RadioButtonPolicyHolderRelationAssuredSelf' name='RadioButtonPolicyHolderRelationAssured' type='radio' value='dirisendiri'>
+          <input class='Medium Single' disabled='true' id='RadioButtonPolicyHolderRelationAssuredSelf' name='RadioButtonPolicyHolderRelationAssured' type='radio' value='self'>
           <label class='Short RadioButton' for='RadioButtonPolicyHolderRelationAssuredSelf'>Diri Sendiri</label>
           <div class='Separator'></div>
-          <input class='Medium Single' disabled='true' id='RadioButtonPolicyHolderRelationAssuredSpouse' name='RadioButtonPolicyHolderRelationAssured' type='radio' value='suamiistri'>
+          <input class='Medium Single' disabled='true' id='RadioButtonPolicyHolderRelationAssuredSpouse' name='RadioButtonPolicyHolderRelationAssured' type='radio' value='spouse'>
           <label class='Short RadioButton' for='RadioButtonPolicyHolderRelationAssuredSpouse'>Suami / Istri</label>
           <div class='Separator'></div>
-          <input class='Medium Single' disabled='true' id='RadioButtonPolicyHolderRelationAssuredFamily' name='RadioButtonPolicyHolderRelationAssured' type='radio' value='orangtuaanak'>
+          <input class='Medium Single' disabled='true' id='RadioButtonPolicyHolderRelationAssuredFamily' name='RadioButtonPolicyHolderRelationAssured' type='radio' value='family'>
           <label class='Short RadioButton' for='RadioButtonPolicyHolderRelationAssuredFamily'>Orang Tua / Anak</label>
           <div class='Separator'></div>
-          <input class='Medium Single' disabled='true' id='RadioButtonPolicyHolderRelationAssuredColleague' name='RadioButtonPolicyHolderRelationAssured' type='radio' value='perusahaankaryawan'>
+          <input class='Medium Single' disabled='true' id='RadioButtonPolicyHolderRelationAssuredColleague' name='RadioButtonPolicyHolderRelationAssured' type='radio' value='colleague'>
           <label class='RadioButton' for='RadioButtonPolicyHolderRelationAssuredColleague' style='width: 100px;'>Perusahaan / Karyawan</label>
           <div class='Separator'></div>
-          <input class='Medium Single' disabled='true' id='RadioButtonPolicyHolderRelationAssuredOther' name='RadioButtonPolicyHolderRelationAssured' type='radio' value='lainnya'>
+          <input class='Medium Single' disabled='true' id='RadioButtonPolicyHolderRelationAssuredOther' name='RadioButtonPolicyHolderRelationAssured' type='radio' value='other'>
           <label class='Short RadioButton' for='RadioButtonPolicyHolderRelationAssuredOther'>Lainnya</label>
         </div>
         <input class='Long Single PositionerLeft' id='TextPolicyHolderRelationAssuredOther' type='text'>
         <br>
         <label class='Medium Single PositionerLeft' for='RadioButtonPolicyHolderInsurancePurposeSavings'>Tujuan Pembelian Asuransi</label>
         <div class='RadioButton PositionerLeft'>
-          <input class='Medium Single' id='RadioButtonPolicyHolderInsurancePurposeSavings' name='RadioButtonPolicyHolderInsurancePurpose' type='radio' value='tabungan'>
+          <input class='Medium Single' id='RadioButtonPolicyHolderInsurancePurposeSavings' name='RadioButtonPolicyHolderInsurancePurpose' type='radio' value='savings'>
           <label class='RadioButton' for='RadioButtonPolicyHolderInsurancePurposeSavings'>Tabungan</label>
           <div class='Separator'></div>
-          <input class='Medium Single' id='RadioButtonPolicyHolderInsurancePurposeProtection' name='RadioButtonPolicyHolderInsurancePurpose' type='radio' value='proteksi'>
+          <input class='Medium Single' id='RadioButtonPolicyHolderInsurancePurposeProtection' name='RadioButtonPolicyHolderInsurancePurpose' type='radio' value='protection'>
           <label class='RadioButton' for='RadioButtonPolicyHolderInsurancePurposeProtection'>Proteksi</label>
           <div class='Separator'></div>
-          <input class='Medium Single' id='RadioButtonPolicyHolderInsurancePurposeInvestation' name='RadioButtonPolicyHolderInsurancePurpose' type='radio' value='investasi'>
+          <input class='Medium Single' id='RadioButtonPolicyHolderInsurancePurposeInvestation' name='RadioButtonPolicyHolderInsurancePurpose' type='radio' value='investment'>
           <label class='RadioButton' for='RadioButtonPolicyHolderInsurancePurposeInvestation'>Investasi</label>
           <div class='Separator'></div>
-          <input class='Medium Single' id='RadioButtonPolicyHolderInsurancePurposeEducation' name='RadioButtonPolicyHolderInsurancePurpose' type='radio' value='edukasi'>
+          <input class='Medium Single' id='RadioButtonPolicyHolderInsurancePurposeEducation' name='RadioButtonPolicyHolderInsurancePurpose' type='radio' value='education'>
           <label class='RadioButton' for='RadioButtonPolicyHolderInsurancePurposeEducation'>Edukasi</label>
           <div class='Separator'></div>
-          <input class='Medium Single' id='RadioButtonPolicyHolderInsurancePurposeOther' name='RadioButtonPolicyHolderInsurancePurpose' type='radio' value='lainnya'>
+          <input class='Medium Single' id='RadioButtonPolicyHolderInsurancePurposeOther' name='RadioButtonPolicyHolderInsurancePurpose' type='radio' value='other'>
           <label class='RadioButton' for='RadioButtonPolicyHolderInsurancePurposeOther'>Lainnya</label>
         </div>
         <input class='Long Single PositionerLeft' id='TextPolicyHolderInsurancePurposeOther' type='text'>

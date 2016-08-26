@@ -18,7 +18,7 @@
 <input id='RadioButtonPolicyHolderIDTypeSIM' name='RadioButtonPolicyHolderIDType' type='radio' value='SIM'>
 <div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderIDTypeSIM'></div>
 <label class='RadioButton PositionerLeft' for='RadioButtonPolicyHolderIDTypeSIM'>SIM</label>
-<input id='RadioButtonPolicyHolderIDTypePassport' name='RadioButtonPolicyHolderIDType' type='radio' value='Paspor'>
+<input id='RadioButtonPolicyHolderIDTypePassport' name='RadioButtonPolicyHolderIDType' type='radio' value='PASPOR'>
 <div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderIDTypePassport'></div>
 <label class='RadioButton PositionerLeft' for='RadioButtonPolicyHolderIDTypePassport'>Paspor</label>
 <input id='RadioButtonPolicyHolderIDTypeKIMSKITAS' name='RadioButtonPolicyHolderIDType' type='radio' value='KIMSKITAS'>
@@ -49,6 +49,8 @@
 <table class='BoxSquare PositionerLeft' id='TextPolicyHolderAge'></table>
 <span class='Separator Single PositionerLeft'>Tahun</span>
 <br>
+<span class='Note PositionerLeft' style='margin-top: -20px;'>(sesuai dengan indetitas diri)</span>
+<br>
 <label class='Medium Single PositionerLeft' for='RadioButtonPolicyHolderNationalityWNI'>6. Kewarganegaraan</label>
 <input id='RadioButtonPolicyHolderNationalityWNI' name='RadioButtonPolicyHolderNationality' type='radio' value='wni'>
 <div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderNationalityWNI'></div>
@@ -60,10 +62,10 @@
 <span class='Note PositionerLeft'>(Jika jawaban "WNA" mohon melampirkan fotokopi KITAS & Paspor dan melengkapi kuesioner WNA)</span>
 <br>
 <label class='Wrap Single PositionerLeft' for='RadioButtonPolicyHolderUSACitizenYes'>7. Apakah Anda merupakan warga negara atau wajib pajak Amerika Serikat ?</label>
-<input id='RadioButtonPolicyHolderUSACitizenYes' name='RadioButtonPolicyHolderUSACitizen' type='radio' value='yes'>
+<input id='RadioButtonPolicyHolderUSACitizenYes' name='RadioButtonPolicyHolderUSACitizen' type='radio' value='true'>
 <div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderUSACitizenYes'></div>
 <label class='RadioButton PositionerLeft' for='RadioButtonPolicyHolderUSACitizenYes'>YA</label>
-<input id='RadioButtonPolicyHolderUSACitizenNo' name='RadioButtonPolicyHolderUSACitizen' type='radio' value='no'>
+<input id='RadioButtonPolicyHolderUSACitizenNo' name='RadioButtonPolicyHolderUSACitizen' type='radio' value='false'>
 <div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderUSACitizenNo'></div>
 <label class='RadioButton PositionerLeft' for='RadioButtonPolicyHolderUSACitizenNo'>TIDAK</label>
 <span class='Note PositionerLeft'>(Jika jawaban "YA" mohon lampirkan formulir W8 / W9)</span>
@@ -76,16 +78,16 @@
 <div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderSexFemale'></div>
 <label class='RadioButton Medium PositionerLeft' for='RadioButtonPolicyHolderSexFemale'>Wanita</label>
 <br>
-<label class='Medium Single PositionerLeft' for='RadioButtonPolicyHolderStatusSingle'>9. Status Pernikahan</label>
-<input id='RadioButtonPolicyHolderStatusSingle' name='RadioButtonPolicyHolderStatus' type='radio' value='single'>
+<label class='Medium Single PositionerLeft' for='RadioButtonPolicyHolderMaritalStatusSingle'>9. Status Pernikahan</label>
+<input id='RadioButtonPolicyHolderMaritalStatusSingle' name='RadioButtonPolicyHolderMaritalStatus' type='radio' value='single'>
 <div class='BoxRound PositionerLeft' id='BoxPolicyHolderSingle'></div>
-<label class='RadioButton Medium PositionerLeft' for='RadioButtonPolicyHolderStatusSingle'>Belum Menikah</label>
-<input id='RadioButtonPolicyHolderStatusMarried' name='RadioButtonPolicyHolderStatus' type='radio' value='married'>
-<div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderStatusMarried'></div>
-<label class='RadioButton Medium PositionerLeft' for='RadioButtonPolicyHolderStatusMarried'>Menikah</label>
-<input id='RadioButtonPolicyHolderStatusWidower' name='RadioButtonPolicyHolderStatus' type='radio' value='widower'>
-<div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderStatusWidower'></div>
-<label class='RadioButton Medium PositionerLeft' for='RadioButtonPolicyHolderStatusWidower'>Janda / Duda</label>
+<label class='RadioButton Medium PositionerLeft' for='RadioButtonPolicyHolderMaritalStatusSingle'>Belum Menikah</label>
+<input id='RadioButtonPolicyHolderMaritalStatusMarried' name='RadioButtonPolicyHolderMaritalStatus' type='radio' value='married'>
+<div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderMaritalStatusMarried'></div>
+<label class='RadioButton Medium PositionerLeft' for='RadioButtonPolicyHolderMaritalStatusMarried'>Menikah</label>
+<input id='RadioButtonPolicyHolderMaritalStatusWidower' name='RadioButtonPolicyHolderMaritalStatus' type='radio' value='widower'>
+<div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderMaritalStatusWidower'></div>
+<label class='RadioButton Medium PositionerLeft' for='RadioButtonPolicyHolderMaritalStatusWidower'>Janda / Duda</label>
 <br>
 <label class='Medium Single PositionerLeft' for='RadioButtonPolicyHolderReligionIslam'>10. Agama</label>
 <input id='RadioButtonPolicyHolderReligionIslam' name='RadioButtonPolicyHolderReligion' type='radio' value='islam'>
@@ -114,7 +116,7 @@
 <section class='SectionFooter' style='margin-top: 3px'>
   <div class='FooterContainer'>
     <div class='FooterGeneral'>
-      <span class='Note Single PositionerLeft'>OP/NB/0104/031602 Hal 1 / 8</span>
+      <span class='Note Single PositionerLeft SpanFooterDetail'></span>
       <span class='Note Single PositionerRight'>PT Asuransi Jiwa BCA telah terdaftar dan diawasi oleh Otoritas Jasa Keuangan.</span>
       <br>
     </div>
@@ -147,8 +149,9 @@
 <label class='Medium FirstIndent Single PositionerLeft' for='TextPolicyHolderSideJob'>b. Pekerjaan Tambahan</label>
 <table class='BoxSquare PositionerLeft' id='TextPolicyHolderSideJob'></table>
 <br>
-<label class='Medium Multi PositionerLeft' for='TextPolicyHolderHomeAddress1' style='height: 112px'>12. Alamat Tempat Tinggal</label>
+<label class='Medium Single PositionerLeft' for='TextPolicyHolderHomeAddress1'>12. Alamat Tempat Tinggal</label>
 <table class='BoxSquare PositionerLeft' id='TextPolicyHolderHomeAddress1'></table>
+<span class='Note Medium Multi Tight PositionerLeft' style='height: 60px;'>(Bila tidak sesuai kartu identitas Diri, diisi dengan lengkap menginformasikan nomor rumah, RT, RW, Keluarahan & Kecamatan)</span>
 <table class='BoxSquare PositionerLeft' id='TextPolicyHolderHomeAddress2'></table>
 <label class='Box Single PositionerLeft' for='TextPolicyHolderHomeCity' id='LabelPolicyHolderHomeCity'>Kota</label>
 <table class='BoxSquare PositionerLeft' id='TextPolicyHolderHomeCity'></table>
@@ -159,11 +162,11 @@
 <label class='Box Plain Single PositionerLeft' for='TextPolicyHolderHomeTelephoneInfix' id='LabelPolicyHolderHomeTeleponeInfix'>-</label>
 <table class='BoxSquare PositionerLeft' id='TextPolicyHolderHomeTelephoneInfix'></table>
 <br>
-<label class='Medium Single PositionerLeft' for='TextPolicyHolderTelephone1'>13. Nomor Ponsel</label>
-<label class='Box Single PositionerLeft' for='TextPolicyHolderTelephone1' id='LabelPolicyHolderTelephone1'>1.</label>
-<table class='BoxSquare PositionerLeft' id='TextPolicyHolderTelephone1'></table>
-<label class='Box Single PositionerLeft' for='TextPolicyHolderTelephone2' id='LabelPolicyHolderTelephone2'>2.</label>
-<table class='BoxSquare PositionerLeft' id='TextPolicyHolderTelephone2'></table>
+<label class='Medium Single PositionerLeft' for='TextPolicyHolderHandphone1'>13. Nomor Ponsel</label>
+<label class='Box Single PositionerLeft' for='TextPolicyHolderHandphone1' id='LabelPolicyHolderHandphone1'>1.</label>
+<table class='BoxSquare PositionerLeft' id='TextPolicyHolderHandphone1'></table>
+<label class='Box Single PositionerLeft' for='TextPolicyHolderHandphone2' id='LabelPolicyHolderHandphone2'>2.</label>
+<table class='BoxSquare PositionerLeft' id='TextPolicyHolderHandphone2'></table>
 <br>
 <label class='Medium Single PositionerLeft' for='TextPolicyHolderEmail'>14. Alamat Email</label>
 <table class='BoxSquare PositionerLeft' id='TextPolicyHolderEmail'></table>
@@ -181,48 +184,48 @@
 <table class='BoxSquare PositionerLeft' id='TextPolicyHolderOfficeTelephoneInfix'></table>
 <br>
 <label class='Medium Single PositionerLeft' for='RadioButtonPolicyHolderCorrespondanceHomeAddress'>16. Alamat Korespondensi</label>
-<input id='RadioButtonPolicyHolderCorrespondanceHomeAddress' name='RadioButtonPolicyHolderCorrespondanceAddress' type='radio' value='rumah'>
+<input id='RadioButtonPolicyHolderCorrespondanceHomeAddress' name='RadioButtonPolicyHolderCorrespondanceAddress' type='radio' value='home'>
 <div class='BoxRound PositionerLeft' id='BoxPolicyHolderCorrespondanceHomeAddress'></div>
 <label class='RadioButton PositionerLeft' for='RadioButtonPolicyHolderCorrespondanceHomeAddress'>Alamat Tempat Tinggal</label>
-<input id='RadioButtonPolicyHolderCorrespondanceOfficeAddress' name='RadioButtonPolicyHolderCorrespondanceAddress' type='radio' value='kantor'>
+<input id='RadioButtonPolicyHolderCorrespondanceOfficeAddress' name='RadioButtonPolicyHolderCorrespondanceAddress' type='radio' value='office'>
 <div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderCorrespondanceOfficeAddress'></div>
 <label class='RadioButton PositionerLeft' for='RadioButtonPolicyHolderCorrespondanceOfficeAddress'>Alamat Kantor</label>
 <br>
 <label class='Medium Double PositionerLeft' for='RadioButtonPolicyHolderRelationAssuredSelf'>17. Hubungan dengan Calon Tertangung</label>
-<input id='RadioButtonPolicyHolderRelationAssuredSelf' name='RadioButtonPolicyHolderRelationAssured' type='radio' value='dirisendiri'>
+<input id='RadioButtonPolicyHolderRelationAssuredSelf' name='RadioButtonPolicyHolderRelationAssured' type='radio' value='self'>
 <div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderRelationAssuredSelf'></div>
 <label class='RadioButton Short PositionerLeft' for='RadioButtonPolicyHolderRelationAssuredSelf'>Diri Sendiri</label>
-<input id='RadioButtonPolicyHolderRelationAssuredSpouse' name='RadioButtonPolicyHolderRelationAssured' type='radio' value='suamiistri'>
+<input id='RadioButtonPolicyHolderRelationAssuredSpouse' name='RadioButtonPolicyHolderRelationAssured' type='radio' value='spouse'>
 <div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderRelationAssuredSpouse'></div>
 <label class='RadioButton Short PositionerLeft' for='RadioButtonPolicyHolderRelationAssuredSpouse'>Suami / Istri</label>
-<input id='RadioButtonPolicyHolderRelationAssuredFamily' name='RadioButtonPolicyHolderRelationAssured' type='radio' value='orangtuaanak'>
+<input id='RadioButtonPolicyHolderRelationAssuredFamily' name='RadioButtonPolicyHolderRelationAssured' type='radio' value='family'>
 <div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderRelationAssuredFamily'></div>
 <label class='RadioButton Short PositionerLeft' for='RadioButtonPolicyHolderRelationAssuredFamily'>Orang Tua / Anak</label>
-<input id='RadioButtonPolicyHolderRelationAssuredColleague' name='RadioButtonPolicyHolderRelationAssured' type='radio' value='perusahaankaryawan'>
+<input id='RadioButtonPolicyHolderRelationAssuredColleague' name='RadioButtonPolicyHolderRelationAssured' type='radio' value='colleague'>
 <div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderRelationAssuredColleague'></div>
 <label class='RadioButton Short PositionerLeft' for='RadioButtonPolicyHolderRelationAssuredColleague'>Perusahaan / Karyawan</label>
-<input id='RadioButtonPolicyHolderRelationAssuredOther' name='RadioButtonPolicyHolderRelationAssured' type='radio' value='lainnya'>
+<input id='RadioButtonPolicyHolderRelationAssuredOther' name='RadioButtonPolicyHolderRelationAssured' type='radio' value='other'>
 <div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderRelationAssuredOther'></div>
 <label class='RadioButton PositionerLeft' for='RadioButtonPolicyHolderRelationAssuredOther'>Lainnya, sebutkan</label>
 <div class='LineDot PositionerLeft' id='LinePolicyHolderOtherRelationship'></div>
 <br>
 <label class='Medium Double PositionerLeft' for='RadioButtonPolicyHolderInsurancePurposeSavings'>18. Tujuan Pembelian Asuransi</label>
-<input id='RadioButtonPolicyHolderInsurancePurposeSavings' name='RadioButtonPolicyHolderInsurancePurpose' type='radio' value='tabungan'>
+<input id='RadioButtonPolicyHolderInsurancePurposeSavings' name='RadioButtonPolicyHolderInsurancePurpose' type='radio' value='savings'>
 <div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderInsurancePurposeSavings'></div>
 <label class='RadioButton Short PositionerLeft' for='RadioButtonPolicyHolderInsurancePurposeSavings'>Tabungan</label>
-<input id='RadioButtonPolicyHolderInsurancePurposeProtection' name='RadioButtonPolicyHolderInsurancePurpose' type='radio' value='proteksi'>
+<input id='RadioButtonPolicyHolderInsurancePurposeProtection' name='RadioButtonPolicyHolderInsurancePurpose' type='radio' value='protection'>
 <div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderInsurancePurposeProtection'></div>
 <label class='RadioButton Short PositionerLeft' for='RadioButtonPolicyHolderInsurancePurposeProtection'>Proteksi</label>
-<input id='RadioButtonPolicyHolderInsurancePurposeInvestation' name='RadioButtonPolicyHolderInsurancePurpose' type='radio' value='investasi'>
+<input id='RadioButtonPolicyHolderInsurancePurposeInvestation' name='RadioButtonPolicyHolderInsurancePurpose' type='radio' value='investment'>
 <div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderInsurancePurposeInvestation'></div>
 <label class='RadioButton Short PositionerLeft' for='RadioButtonPolicyHolderInsurancePurposeInvestation'>Investasi</label>
-<input id='RadioButtonPolicyHolderInsurancePurposeEducation' name='RadioButtonPolicyHolderInsurancePurpose' type='radio' value='edukasi'>
+<input id='RadioButtonPolicyHolderInsurancePurposeEducation' name='RadioButtonPolicyHolderInsurancePurpose' type='radio' value='education'>
 <div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderInsurancePurposeEducation'></div>
 <label class='RadioButton Short PositionerLeft' for='RadioButtonPolicyHolderInsurancePurposeEducation'>Edukasi</label>
-<input id='RadioButtonPolicyHolderInsurancePurposeOther' name='RadioButtonPolicyHolderInsurancePurpose' type='radio' value='lainnya'>
+<input id='RadioButtonPolicyHolderInsurancePurposeOther' name='RadioButtonPolicyHolderInsurancePurpose' type='radio' value='other'>
 <div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderInsurancePurposeOther'></div>
 <label class='RadioButton PositionerLeft' for='RadioButtonPolicyHolderInsurancePurposeOther'>Lainnya, sebutkan</label>
-<div class='LineDot PositionerLeft' id='LinePolicyHolderOtherPurpose'></div>
+<div class='LineDot PositionerLeft' id='TextPolicyHolderInsurancePurposeOther'></div>
 <br>
 <label class='Medium Single PositionerLeft' for='TextPolicyHolderNPWP'>19. Nomor NPWP (jika ada)</label>
 <table class='BoxSquare PositionerLeft' id='TextPolicyHolderNPWP'></table>
@@ -231,7 +234,7 @@
 <table class='BoxSquare PositionerRight' id='DatePolicyHolderNPWPActiveMonth'></table>
 <label class='Separator Single PositionerRight' for='DatePolicyHolderNPWPActiveMonth'>/</label>
 <table class='BoxSquare PositionerRight' id='DatePolicyHolderNPWPActiveDay'></table>
-<label class='Wrap Single PositionerRight' for='DatePolicyHolderNPWPActiveDay'>Masa Berlaku</label>
+<label class='Wrap Single PositionerRight' for='DatePolicyHolderNPWPActiveDay'>Tanggal Berlaku</label>
 <br>
 <label class='Wrap Single PositionerLeft' for='BoxPolicyHolderSalaryIDR'>20. Penghasilan Kotor Per Tahun</label>
 <br>
@@ -255,13 +258,13 @@
 <label class='RadioButton PositionerLeft' for='TextPolicyHolderRevenue'>Jumlah Penghasilan / tahun</label>
 <table class='BoxSquare PositionerLeft' id='TextPolicyHolderRevenue'></table>
 <br>
-<label class='Medium FirstIndent Single PositionerLeft' for='RadioButtonHolderOtherIncomeIDR'>Penghasilan Lainnya</label>
-<input id='RadioButtonHolderOtherIncomeIDR' name='RadioButtonHolderOtherIncome' type='radio' value='idr'>
-<div class='BoxRound PositionerLeft' id='RadioButtonHolderOtherIncomeIDR'></div>
-<label class='RadioButton PositionerLeft' for='RadioButtonHolderOtherIncomeIDR'>Rp</label>
-<input id='RadioButtonHolderOtherIncomeUSD' name='RadioButtonHolderOtherIncome' type='radio' value='usd'>
-<div class='BoxRound PositionerLeft' id='RadioButtonHolderOtherIncomeUSD'></div>
-<label class='RadioButton PositionerLeft' for='RadioButtonHolderOtherIncomeUSD'>USD</label>
+<label class='Medium FirstIndent Single PositionerLeft' for='RadioButtonPolicyHolderOtherIncomeIDR'>Penghasilan Lainnya</label>
+<input id='RadioButtonPolicyHolderOtherIncomeIDR' name='RadioButtonPolicyHolderOtherIncome' type='radio' value='idr'>
+<div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderOtherIncomeIDR'></div>
+<label class='RadioButton PositionerLeft' for='RadioButtonPolicyHolderOtherIncomeIDR'>Rp</label>
+<input id='RadioButtonPolicyHolderOtherIncomeUSD' name='RadioButtonPolicyHolderOtherIncome' type='radio' value='usd'>
+<div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderOtherIncomeUSD'></div>
+<label class='RadioButton PositionerLeft' for='RadioButtonPolicyHolderOtherIncomeUSD'>USD</label>
 <label class='RadioButton PositionerLeft' for='TextPolicyHolderOtherIncome'>Jumlah Penghasilan / tahun</label>
 <table class='BoxSquare PositionerLeft' id='TextPolicyHolderOtherIncome'></table>
 <br>
@@ -274,24 +277,6 @@
 <br>
 <label class='Medium Single PositionerLeft' for='TextPolicyHolderCompanyName'>1. Nama Perusahaan</label>
 <table class='BoxSquare PositionerLeft' id='TextPolicyHolderCompanyName'></table>
-<br>
-<label class='Medium Single PositionerLeft' for='RadioButtonPolicyHolderComanyIDTypeKTP'>3. Jenis Identitas Diri</label>
-<input id='RadioButtonPolicyHolderComanyIDTypeKTP' name='RadioButtonPolicyHolderComanyIDType' type='radio' value='KTP'>
-<div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderComanyIDTypeKTP'></div>
-<label class='RadioButton PositionerLeft' for='RadioButtonPolicyHolderComanyIDTypeKTP'>KTP</label>
-<input id='RadioButtonPolicyHolderComanyIDTypeSIM' name='RadioButtonPolicyHolderComanyIDType' type='radio' value='SIM'>
-<div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderComanyIDTypeSIM'></div>
-<label class='RadioButton PositionerLeft' for='RadioButtonPolicyHolderComanyIDTypeSIM'>SIM</label>
-<input id='RadioButtonPolicyHolderComanyIDTypePassport' name='RadioButtonPolicyHolderComanyIDType' type='radio' value='PASPOR'>
-<div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderComanyIDTypePassport'></div>
-<label class='RadioButton PositionerLeft' for='RadioButtonPolicyHolderComanyIDTypePassport'>Paspor</label>
-<input id='RadioButtonPolicyHolderComanyIDTypeKIMKITAS' name='RadioButtonPolicyHolderComanyIDType' type='radio' value='KIMSKITAS'>
-<div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderComanyIDTypeKIMKITAS'></div>
-<label class='RadioButton PositionerLeft' for='RadioButtonPolicyHolderComanyIDTypeKIMKITAS'>KIMS / KITAS</label>
-<input id='RadioButtonPolicyHolderComanyIDTypeOther' name='RadioButtonPolicyHolderComanyIDType' type='radio' value='OTHER'>
-<div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderComanyIDTypeOther'></div>
-<label class='RadioButton PositionerLeft' for='RadioButtonPolicyHolderComanyIDTypeOther'>Lainnya, sebutkan</label>
-<div class='LineDot PositionerLeft' id='LinePolicyHolderComanyIDTypeOther'></div>
 <br>
 <label class='Medium Single PositionerLeft' for='RadioButtonPolicyHolderCompanyTypePT'>2. Jenis Perusahaan</label>
 <input id='RadioButtonPolicyHolderCompanyTypePT' name='RadioButtonPolicyHolderCompanyType' type='radio' value='pt'>
@@ -306,10 +291,10 @@
 <input id='RadioButtonPolicyHolderCompanyTypeOther' name='RadioButtonPolicyHolderCompanyType' type='radio' value='lainnya'>
 <div class='BoxRound PositionerLeft' id='RadioButtonPolicyHolderCompanyTypeOther'></div>
 <label class='RadioButton PositionerLeft' for='RadioButtonPolicyHolderCompanyTypeOther'>Lainnya, sebutkan</label>
-<div class='LineDot PositionerLeft' id='LinePolicyHolderCompanyTypeOther'></div>
+<div class='LineDot PositionerLeft' id='TextPolicyHolderCompanyTypeOther'></div>
 <br>
 <!-- / QUICK FIX START -->
-<label class='Medium Double PositionerLeft' for='TextPolicyHolderCompanyNoAnggaranDasar'>3. Nomor Anggaran Dasar/Akta Pendirian</label>
+<label class='Medium Single PositionerLeft' for='TextPolicyHolderCompanyNoAnggaranDasar'>3. Nomor Anggaran Dasar/Akta Pendirian</label>
 <table class='BoxSquare PositionerLeft' id='TextPolicyHolderCompanyNoAnggaranDasar'></table>
 <br>
 <div style='margin-top: 10px;'>
@@ -380,7 +365,7 @@
 <section class='SectionFooter' style='margin-top: 119px'>
   <div class='FooterContainer'>
     <div class='FooterGeneral'>
-      <span class='Note Single PositionerLeft'>OP/NB/0104/031602 Hal 1 / 8</span>
+      <span class='Note Single PositionerLeft SpanFooterDetail'></span>
       <span class='Note Single PositionerRight'>PT Asuransi Jiwa BCA telah terdaftar dan diawasi oleh Otoritas Jasa Keuangan.</span>
       <br>
     </div>

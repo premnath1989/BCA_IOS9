@@ -69,6 +69,14 @@ main form label.RadioButton.Short {
   width: 40px;
 }
 
+main form label.RadioButton.Medium {
+  width: 84px;
+}
+
+main form label.RadioButton.Long {
+  width: 120px;
+}
+
 main form label.RadioButton:after {
   content: '';
 }

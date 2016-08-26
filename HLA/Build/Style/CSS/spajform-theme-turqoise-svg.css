@@ -165,8 +165,11 @@ select:disabled {
 
 /* BUTTON */
 .ButtonPrimary {
-  background-color: transparent;
-  color: #00a6b3;
-  color: #00a6b3;
-  color: #00a6b3;
+  background-color: #00a6b3;
+  color: #ffffff;
+}
+
+.ButtonSecondary {
+  background-color: #ffffff;
+  background-color-color: #00a6b3;
 }

@@ -497,25 +497,26 @@
 -(NSString *)getRelationNameForHtml:(NSString *)stringRelation{
     NSString* stringReturn;
     if ([stringRelation caseInsensitiveCompare:@"DIRI SENDIRI"]== NSOrderedSame){
-        stringReturn = @"dirisendiri";
+        stringReturn = @"self";
     }
     else if ([stringRelation caseInsensitiveCompare:@"SUAMI/ISTRI"]== NSOrderedSame){
-        stringReturn = @"suamiistri";
+        stringReturn = @"spouse";
     }
     else if ([stringRelation caseInsensitiveCompare:@"ORANG TUA"]== NSOrderedSame){
-        stringReturn = @"orangtuaanak";
+        stringReturn = @"family";
     }
     else if ([stringRelation caseInsensitiveCompare:@"ANAK"]== NSOrderedSame){
-        stringReturn = @"orangtuaanak";
+        stringReturn = @"family";
     }
     else if ([stringRelation caseInsensitiveCompare:@"KARYAWAN"]== NSOrderedSame){
-        stringReturn = @"perusahaankaryawan";
+        stringReturn = @"colleague";
     }
     else {
-        stringReturn = @"lainnya";
+        stringReturn = @"other";
     }
 
     return stringReturn;
 }
+
 
 @end

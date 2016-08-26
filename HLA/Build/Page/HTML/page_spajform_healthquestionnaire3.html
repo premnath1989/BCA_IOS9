@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+  <!-- HEAD -->
+  <head>
+    <!-- META DATA -->
+    <meta charset='utf-8'>
+    <meta content='BCA Life - BLESS' name='application-name'>
+    <meta content='BCA Life Electronic Submission.' name='description'>
+    <meta content='BCA Life Electronic Submission.' name='keywords'>
+    <meta content='BCA Life' name='author'>
+    <meta content='Ibrahim Aziz' name='designer'>
+    <meta content='Copyright 2016 BCA Life' name='copyright'>
+    <meta content='BCA Life Electronic Submission.' name='dcterms.description'>
+    <meta content='BCA Life' name='dcterms.creator'>
+    <meta content='BCA Life' name='dcterms.rightsHolder'>
+    <meta content='All rights reserved. No part of this document may be reproduced or transmitted in any form or by any means, electronic, mechanical, photocopying, recording, or otherwise, without prior written permission from the Author, BCA Life.' name='dcterms.rights'>
+    <meta content='2016' name='dcterms.dateCopyrighted'>
+    <meta content='width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no' name='viewport'>
+    <!-- FAVICON -->
+    <!-- %link{ :rel => "shortcut icon", :href => "#{urlResource}logo_favicon.ico" } -->
+    <!-- %link{ :rel => "shortcut icon", :href => "#{urlResource}logo_favicon.ico", :type => "image/x-icon" } -->
+    <!-- %link{ :rel => "icon", :href => "#{urlResource}logo_favicon.ico", :type => "image/x-icon" } -->
+    <!-- CSS -->
+    <!-- %link{ :id => "cssresponsive", :href => "#{urlCSS}jquery.mobile-1.4.5.min.css", :rel => "stylesheet", :type => "text/css" } -->
+    <link href='../../Style/CSS/spajform-layout-general.css' id='csslayout' rel='stylesheet' type='text/css'>
+    <link href='../../Style/CSS/spajform-font-general.css' id='cssfont' rel='stylesheet' type='text/css'>
+    <link href='../../Style/CSS/spajform-input-general.css' id='cssinput' rel='stylesheet' type='text/css'>
+    <link href='../../Style/CSS/spajform-link-general.css' id='csslink' rel='stylesheet' type='text/css'>
+    <link href='../../Style/CSS/bless-fontsize-medium.css' id='cssfontsize' rel='stylesheet' type='text/css'>
+    <link href='../../Style/CSS/spajform-fontfamily-bpreplay.css' id='cssfontfamily' rel='stylesheet' type='text/css'>
+    <link href='../../Style/CSS/spajform-theme-turqoise-svg.css' id='csstheme' rel='stylesheet' type='text/css'>
+    <!-- %link{ :id => "cssresponsive", :href => "#{urlCSS}#{urlCSSSectionPrefix}-responsive-general.css", :rel => "stylesheet", :type => "text/css" } -->
+    <link href='../../Java Script/Minimized/DateTimePicker.min.css' id='cssresponsive' rel='stylesheet' type='text/css'>
+    <!-- JAVA SCRIPT -->
+    <script src='../../Java Script/Minimized/jquery.mobile-1.4.5.min.js' type='text/javascript'></script>
+    <script src='../../Java Script/Minimized/jquery-1.11.1.min.js' type='text/javascript'></script>
+    <script src='../../Java Script/Minimized/jquery-migrate-1.2.1.min.js' type='text/javascript'></script>
+    <script src='../../Java Script/Minimized/ibrahimaziz.min.js' type='text/javascript'></script>
+    <script src='../../Java Script/Minimized/DateTimePicker.min.js' type='text/javascript'></script>
+    <script src='../../Java Script/Minimized/DateTimePicker-i18n.js' type='text/javascript'></script>
+    <script src='../../Java Script/Minimized/DateTimePicker_IOS_fix.js' type='text/javascript'></script>
+    <script src='../../Java Script/RAW/jquery.number.js' type='text/javascript'></script>
+    <script>
+      var stringPageTypeCurrent = stringPageTypeForm;
+    </script>
+    <script src='../../Java Script/Minimized/ios-integration.min.js' type='text/javascript'></script>
+    <title>BCA Life - BLESS, Health Questionnaire 1 Form</title>
+    <!-- JQUERY -->
+    <script>
+      $(document).ready(function()
+      {
+          
+      });
+    </script>
+  </head>
+  <!-- BODY -->
+  <body id='Main'>
+    <!-- MAIN -->
+    <main>
+      <form id='HealthQuestionnaireMain'>
+        <label class='Wrap Single PositionerLeft' for='RadioButtonPolicyHolderWeightChangeYes'>
+          Apakah saat ini Anda mengonsumsi alkohol/ obat-obatan?
+        </label>
+        <div class='RadioButton PositionerRight'>
+          <input id='RadioButtonPolicyHolderWeightChangeYes' name='RadioButtonPolicyHolderWeightChange' type='radio' value='true'>
+          <label class='RadioButton' for='RadioButtonPolicyHolderWeightChangeYes'>Ya</label>
+          <div class='Separator'></div>
+          <input id='RadioButtonPolicyHolderWeightChangeNo' name='RadioButtonPolicyHolderWeightChange' type='radio' value='false'>
+          <label class='RadioButton' for='RadioButtonPolicyHolderWeightChangeNo'>Tidak</label>
+        </div>
+        <br>
+        <label class='Medium PositionerRight'>Waktu Pengunaan</label>
+        <br>
+        <div class='ContainerFit'>
+          <label class='LongFix Single Item3 Left'>Jenis</label>
+          <label class='Short Single Item1 Center'>Frekuensi</label>
+          <label class='Short Single Item1 Center'>Dosis</label>
+          <label class='Short Single Item1 Center'>Dari</label>
+          <label class='Short Single Item1 Center'>Sampai</label>
+        </div>
+        <hr>
+        <div class='ContainerFit'>
+          <label class='LongFix Single Item3 Margin' id='LabelPolicyHolderAlcohol'>Alkohol</label>
+          <input class='Short Single Item1 Margin' id='TextPolicyHolderAlcoholFrequency' type='text'>
+          <input class='Short Single Item1 Margin' id='TextPolicyHolderAlcoholDose' type='text'>
+          <input class='Short Single Item1 Margin' id='TextPolicyHolderAlcoholFrom' type='text'>
+          <input class='Short Single Item1 Margin' id='TextPolicyHolderAlcoholTo' type='text'>
+        </div>
+        <div class='ContainerFit'>
+          <label class='LongFix Single Item3 Margin' id='LabelPolicyHolderNarkotika'>Narkotika</label>
+          <input class='Short Single Item1 Margin' id='TextPolicyHolderNarkotikaFrequency' type='text'>
+          <input class='Short Single Item1 Margin' id='TextPolicyHolderNarkotikaDose' type='text'>
+          <input class='Short Single Item1 Margin' id='TextPolicyHolderNarkotikaFrom' type='text'>
+          <input class='Short Single Item1 Margin' id='TextPolicyHolderNarkotikaTo' type='text'>
+        </div>
+        <div class='ContainerFit'>
+          <label class='LongFix Single Item3 Margin' id='LabelPolicyHolderAmphetamine'>Amphetamine</label>
+          <input class='Short Single Item1 Margin' id='TextPolicyHolderAmphetamineFrequency' type='text'>
+          <input class='Short Single Item1 Margin' id='TextPolicyHolderAmphetamineDose' type='text'>
+          <input class='Short Single Item1 Margin' id='TextPolicyHolderAmphetamineFrom' type='text'>
+          <input class='Short Single Item1 Margin' id='TextPolicyHolderAmphetamineTo' type='text'>
+        </div>
+        <div class='ContainerFit'>
+          <label class='LongFix Single Item3 Margin' id='LabelPolicyHolderGanjamarijuana'>Ganja, marijuana</label>
+          <input class='Short Single Item1 Margin' id='TextPolicyHolderGanjamarijuanaFrequency' type='text'>
+          <input class='Short Single Item1 Margin' id='TextPolicyHolderGanjamarijuanaDose' type='text'>
+          <input class='Short Single Item1 Margin' id='TextPolicyHolderGanjamarijuanaFrom' type='text'>
+          <input class='Short Single Item1 Margin' id='TextPolicyHolderGanjamarijuanaTo' type='text'>
+        </div>
+        <div class='ContainerFit'>
+          <label class='LongFix Single Item3 Margin' id='LabelPolicyHolderCocainee'>Cocaine</label>
+          <input class='Short Single Item1 Margin' id='TextPolicyHolderCocaineFrequency' type='text'>
+          <input class='Short Single Item1 Margin' id='TextPolicyHolderCocaineDose' type='text'>
+          <input class='Short Single Item1 Margin' id='TextPolicyHolderCocaineFrom' type='text'>
+          <input class='Short Single Item1 Margin' id='TextPolicyHolderCocaineTo' type='text'>
+        </div>
+        <div class='ContainerFit'>
+          <label class='LongFix Single Item3 Margin' id='LabelPolicyHolderHalusinogen'>Halusinogen</label>
+          <input class='Short Single Item1 Margin' id='TextPolicyHolderHalusinogenFrequency' type='text'>
+          <input class='Short Single Item1 Margin' id='TextPolicyHolderHalusinogenDose' type='text'>
+          <input class='Short Single Item1 Margin' id='TextPolicyHolderHalusinogenFrom' type='text'>
+          <input class='Short Single Item1 Margin' id='TextPolicyHolderHalusinogenTo' type='text'>
+        </div>
+        <div class='ContainerFit'>
+          <label class='LongFix Single Item3 Margin' id='LabelPolicyHolderPenenangobattidur'>Penenang/ obat tidur</label>
+          <input class='Short Single Item1 Margin' id='TextPolicyHolderPenenangobattidurFrequency' type='text'>
+          <input class='Short Single Item1 Margin' id='TextPolicyHolderPenenangobattidurDose' type='text'>
+          <input class='Short Single Item1 Margin' id='TextPolicyHolderPenenangobattidurFrom' type='text'>
+          <input class='Short Single Item1 Margin' id='TextPolicyHolderPenenangobattidurTo' type='text'>
+        </div>
+        <div class='ContainerFit'>
+          <label class='LongFix Single Item3 Margin' id='LabelPolicyHolderZattertentu'>Zat tertentu (Lem, Thinner)</label>
+          <input class='Short Single Item1 Margin' id='TextPolicyHolderZattertentuFrequency' type='text'>
+          <input class='Short Single Item1 Margin' id='TextPolicyHolderZattertentuDose' type='text'>
+          <input class='Short Single Item1 Margin' id='TextPolicyHolderZattertentuFrom' type='text'>
+          <input class='Short Single Item1 Margin' id='TextPolicyHolderZattertentuTo' type='text'>
+        </div>
+        <div class='ContainerFit'>
+          <label class='LongFix Single Item3 Margin' id='LabelPolicyHolderObatpenghilangrasasakit'>Obat penghilang rasa sakit</label>
+          <input class='Short Single Item1 Margin' id='TextPolicyHolderObatpenghilangrasasakitFrequency' type='text'>
+          <input class='Short Single Item1 Margin' id='TextPolicyHolderObatpenghilangrasasakit' type='text'>
+          <input class='Short Single Item1 Margin' id='TextPolicyHolderObatpenghilangrasasakitFrom' type='text'>
+          <input class='Short Single Item1 Margin' id='TextPolicyHolderObatpenghilangrasasakitTo' type='text'>
+        </div>
+        <div class='ContainerFit'>
+          <label class='LongFix Single Item3 Margin' id='LabelPolicyHolderLainnya'>Lainnya</label>
+          <input class='Short Single Item1 Margin' id='TextPolicyHolderLainnyaFrequency' type='text'>
+          <input class='Short Single Item1 Margin' id='TextPolicyHolderLainnya' type='text'>
+          <input class='Short Single Item1 Margin' id='TextPolicyLainnyaFrom' type='text'>
+          <input class='Short Single Item1 Margin' id='TextPolicyHolderLainnyaTo' type='text'>
+        </div>
+        <hr>
+        <br>
+        <label class='medium Single Item'>2  Jelaskan alasan Anda berhenti menggunakan alkohol/ obat-obatan tersebut diatas?</label>
+        <br>
+        <input class='Full Multi Item1 Margin' id='TextPolicyHolderAlasanBerhentiAlcaholTo' type='text'>
+        <br>
+        <label class='medium Single Item'>3  Apakah Anda pernah melakukan konsultasi atau mendapatkan terapi dari dokter karena kondisi ini?</label>
+        <br>
+        <div class='ContainerFit'>
+          <label class='LongFix Single Item1 Center Margin'>Nama Dokter</label>
+          <label class='Short Single Item1 Center Margin'>Alamat</label>
+          <label class='Short Single Item1 Center Margin'>Waktu Konsultasi</label>
+        </div>
+        <hr>
+        <div class='ContainerFit'>
+          <input class='Short Single Item1 Margin' id='TextPolicyHolderNameDokterOne' type='text'>
+          <input class='Short Single Item1 Margin' id='TextPolicyHolderAlamatOne' type='text'>
+          <input class='Short Single Item1 Margin' id='TextPolicyHolderWaktuKonsultasiOne' type='text'>
+        </div>
+        <br>
+        <div class='ContainerFit'>
+          <input class='Short Single Item1 Margin' id='TextPolicyHolderNameDokterTwo' type='text'>
+          <input class='Short Single Item1 Margin' id='TextPolicyHolderAlamatTwo' type='text'>
+          <input class='Short Single Item1 Margin' id='TextPolicyHolderWaktuKonsultasiTwo' type='text'>
+        </div>
+        <br>
+        <div class='ContainerFit'>
+          <input class='Short Single Item1 Margin' id='TextPolicyHolderNameDokterThree' type='text'>
+          <input class='Short Single Item1 Margin' id='TextPolicyHolderAlamatThree' type='text'>
+          <input class='Short Single Item1 Margin' id='TextPolicyHolderWaktuKonsultasiThree' type='text'>
+        </div>
+        <br>
+        <hr>
+        <label class='medium Single Item'>4  Pernahkah Anda mengalami kondisi medis atau gangguan yang berhubungan dengan penggunaan alkohol/ obat-obatan, misal hepatitis, HIV, kesehatan mental, dan lain-lain?</label>
+        <br>
+        <div class='ContainerFit'>
+          <div class='RadioButton Medium Item'>
+            <input id='RadioButtonPolicyHolderKodisiMedisChangeYes' name='RadioButtonPolicyHolderKodisiMedisChange' type='radio' value='true'>
+            <label class='RadioButton' for='RadioButtonPolicyHolderKodisiMedisChangeYes'>Ya</label>
+            <div class='Separator'></div>
+            <input id='RadioButtonPolicyHolderKodisiMedisChangeNo' name='RadioButtonPolicyHolderKodisiMedisChange' type='radio' value='false'>
+            <label class='RadioButton' for='RadioButtonPolicyHolderKodisiMedisChangeNo'>Tidak</label>
+          </div>
+          <input class='Full Multi Item Margin' id='TextPolicyHolderAlasanBerhentiAlcaholTo' type='text'>
+        </div>
+        <br>
+        <hr>
+        <label class='Wrap Single PositionerLeft' for='RadioButtonPolicyHolderMermelukanRawatanChangeYes'>
+          5  Apakah memerlukan perawatan di rumah sakit? Jika YA, mohon jelaskan kapan, nama dokter/ nama rumah sakit?
+        </label>
+        <div class='RadioButton PositionerRight'>
+          <input id='RadioButtonPolicyHolderMermelukanRawatanChangeYes' name='RadioButtonPolicyHolderMermelukanRawatanChange' type='radio' value='true'>
+          <label class='RadioButton' for='RadioButtonPolicyHolderMermelukanRawatanChangeYes'>Ya</label>
+          <div class='Separator'></div>
+          <input id='RadioButtonPolicyHolderMermelukanRawatanChangeNo' name='RadioButtonPolicyHolderMermelukanRawatanChange' type='radio' value='false'>
+          <label class='RadioButton' for='RadioButtonPolicyHolderMermelukanRawatanChangeNo'>Tidak</label>
+        </div>
+        <br>
+        <div class='ContainerFit'>
+          <label class='Long Single PositionerLeft'>Nama Dokter</label>
+          <input class='Full Single Item Margin' id='TextPolicyHolderNamaDokterRumahSakitMemerlukan' type='text'>
+          <br>
+        </div>
+        <div class='ContainerFit'>
+          <label class='Long Single PositionerLeft'>Alamat Dokter</label>
+          <input class='Full Multi Item Margin' id='TextPolicyHolderAlamatDokterMemerlukan' type='text'>
+          <br>
+        </div>
+        <hr>
+        <label class='Wrap Single PositionerLeft' for='RadioButtonPolicyHolderMermelukanRawatanChangeYes'>
+          6 Apakah saat ini masih mendapatkan perawatan?
+        </label>
+        <div class='RadioButton PositionerRight'>
+          <input id='RadioButtonPolicyHolderMermelukanRawatanSaatIniChangeYes' name='RadioButtonPolicyHolderMermelukanRawatanSaatIniChange' type='radio' value='true'>
+          <label class='RadioButton' for='RadioButtonPolicyHolderMermelukanRawatanSaatIniChangeYes'>Ya</label>
+          <div class='Separator'></div>
+          <input id='RadioButtonPolicyHolderMermelukanRawatanSaatIniChangeNo' name='RadioButtonPolicyHolderMermelukanRawatanSaatIniChange' type='radio' value='false'>
+          <label class='RadioButton' for='RadioButtonPolicyHolderMermelukanRawatanSaatIniChangeNo'>Tidak</label>
+        </div>
+        <br>
+        <div class='ContainerFit'>
+          <label class='Long Single PositionerLeft'>Nama Dokter</label>
+          <input class='Full Single Item Margin' id='TextPolicyHolderNamaDokterRumahSakitMemerlukanSaatIni' type='text'>
+          <br>
+        </div>
+        <div class='ContainerFit'>
+          <label class='Long Single PositionerLeft'>Alamat Dokter</label>
+          <input class='Full Multi Item Margin' id='TextPolicyHolderAlamatDokterMemerlukanSaatIni' type='text'>
+          <br>
+        </div>
+        <hr>
+        <label class='Wrap Single PositionerLeft'>7  Apakah Anda pernah tidak masuk kerja karena kondisi ini ? Mohon tuliskan tanggal dan lamanya tidak masuk kerja?</label>
+        <br>
+        <input class='Full Multi Margin' id='TextPolicyHolderAlasanKerenaTidakMasukKerja' type='text'>
+        <br>
+        <hr>
+        <label class='Wrap Single PositionerLeft'>8  Apakah pernah melakukan pemeriksaan kesehatan sehubungan penggunaan alkohol/obat-obatan?</label>
+        <br>
+        <input class='Full Multi Item1 Margin' id='TextPolicyHolderAlasanKerenaPemeriksaanKesehatan' type='text'>
+        <br>
+        <hr>
+        <label class='Wrap Single PositionerLeft'>9  Mohon sebutkan bila ada informasi lain sehubungan dengan kondisi kesehatan Anda yang mungkin dapat membantu proses pengajuan Asuransi ini					%br</label>
+        <input class='Full Multi PositionerLeft Margin' id='TextPolicyHolderAlasanInformasiLainAlcahol' type='text'>
+        <br>
+        <hr>
+        <h2>PERNYATAAN DAN KUASA</h2>
+        <ol>
+          <li>Saya menyatakan dengan sebenarnya bahwa semua pernyataan dan jawaban di atas adalah lengkap dan sesuai dengan keadaan sebenarnya.</li>
+          <li>Saya memberi kuasa kepada setiap Dokter/ Rumah Sakit/ Klinik/ Puskesmas/ laboratorium, perusahaan asuransi atau perusahaan reasuransi, badan, instansi/ lembaga atau pihak lain yang mempunyai catatan riwayat kesehatan saya, untuk mengungkapkan kepada Penanggung semua keterangan tentang catatan riwayat kesehatan saya.</li>
+          <li>Kuasa ini merupakan hal yang tidak terpisahkan dari Surat Pengajuan Asuransi Jiwa dan akan mengikat saya, ahli waris, dan keluarga saya.</li>
+        </ol>
+      </form>
+    </main>
+  </body>
+</html>
