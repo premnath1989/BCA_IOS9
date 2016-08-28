@@ -637,12 +637,13 @@
         [dictionarySPAJTransaction setObject:@"0" forKey:@"SPAJIDCaptureParty3"];
         [dictionarySPAJTransaction setObject:@"0" forKey:@"SPAJIDCaptureParty4"];
         [dictionarySPAJTransaction setObject:@"0" forKey:@"SPAJIDCaptureParty5"];
+        [dictionarySPAJTransaction setObject:@"0" forKey:@"SPAJIDCaptureParty6"];
         [dictionarySPAJTransaction setObject:@"null" forKey:@"SPAJIDTypeParty1"];
         [dictionarySPAJTransaction setObject:@"null" forKey:@"SPAJIDTypeParty2"];
         [dictionarySPAJTransaction setObject:@"null" forKey:@"SPAJIDTypeParty3"];
         [dictionarySPAJTransaction setObject:@"null" forKey:@"SPAJIDTypeParty4"];
         [dictionarySPAJTransaction setObject:@"null" forKey:@"SPAJIDTypeParty5"];
-        
+        [dictionarySPAJTransaction setObject:@"null" forKey:@"SPAJIDTypeParty6"];
         
         [modelSPAJIDCapture saveSPAJIDCapture:dictionarySPAJTransaction];
     }

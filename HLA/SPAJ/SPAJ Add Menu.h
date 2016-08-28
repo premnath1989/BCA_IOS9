@@ -11,6 +11,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "HtmlGenerator/HtmlGenerator.h"
 
 
 // DECLARATION
@@ -26,7 +27,10 @@
 
 @end
 
-@interface SPAJAddMenu : UIViewController
+@interface SPAJAddMenu : HtmlGenerator{
+    NSString *filePath;
+}
+
 
     @property (strong, nonatomic) NSDictionary* dictTransaction;
 

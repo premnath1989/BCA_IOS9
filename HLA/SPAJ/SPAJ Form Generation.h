@@ -27,6 +27,8 @@
 @interface SPAJFormGeneration : HtmlGenerator{
     NSString *filePath;
 }
+    -(void)loadHTMLFile;
+
     @property (strong, nonatomic) NSDictionary* dictTransaction;
 
     // PROTOCOL

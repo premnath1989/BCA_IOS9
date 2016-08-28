@@ -466,6 +466,7 @@
         });
     }
 }
+
 -(void) addSignatureForPage1:(UIImage *)imgSignature onPDFData:(NSData *)pdfData Index:(int)index{
     NSString *docsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *pdfFilePathPage1 =[NSString stringWithFormat:@"%@/SPAJ/%@/SPAJSignedPage1.pdf",docsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"]];

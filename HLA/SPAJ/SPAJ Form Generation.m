@@ -77,11 +77,6 @@
     
     NSMutableArray * arrayDBSignature;
     NSMutableArray * arrayHTMLSignature;
-
-    
-
-    
-    
 }
     @synthesize dictTransaction;
     @synthesize viewActivityIndicator;
@@ -92,11 +87,7 @@
 
     // DID LOAD
     - (void)viewDidAppear:(BOOL)animated{
-        /*NSURL *url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"page_spaj_pdf" ofType:@"html" inDirectory:@"Build/Page/HTML"]];
-        //NSURL *url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"20160803113501" ofType:@"html" inDirectory:@"Build/Page/HTML"]];
-        [webview loadRequest:[NSURLRequest requestWithURL:url]];*/
-        NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PDF"];
-        [self loadSPAJPDFHTML:stringHTMLName];
+        [self loadHTMLFile];
     }
 
     - (void)viewDidLoad
@@ -109,8 +100,8 @@
         webview=[[UIWebView alloc]initWithFrame:CGRectMake(5, 0, 960,728)];
         webview.scrollView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
         [webview setHidden:YES];
-        
         [super viewDidLoad];
+        
         // Do any additional setup after loading the view, typically from a nib.
         
         // INITIALIZATION
@@ -160,6 +151,11 @@
         [self voidCheckBooleanLastState];
     }
 
+    -(void)loadHTMLFile{
+        NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PDF"];
+        [self loadSPAJPDFHTML:stringHTMLName];
+    }
+
     -(void)loadSPAJPDFHTML:(NSString*)stringHTMLName{
         NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
         filePath = [docsDir stringByAppendingPathComponent:@"SPAJ"];
@@ -175,73 +171,29 @@
     #pragma mark arrayInitialization
     -(void)arrayInitializeAgentProfile{
         arrayDBAgentID =[[NSMutableArray alloc]initWithArray:[spajPDFData arrayInitializeAgentProfileDB]];
-        /*[arrayDBAgentID addObject:@"AgentName"];
-        [arrayDBAgentID addObject:@"AgentCode"];
-        [arrayDBAgentID addObject:@""];
-        [arrayDBAgentID addObject:@"AgentExpiryDate"];
-        [arrayDBAgentID addObject:@"AgentName"];
-        [arrayDBAgentID addObject:@"AgentCode"];*/
-        
         arrayHTMLAgentID =[[NSMutableArray alloc]initWithArray:[spajPDFData arrayInitializeAgentProfileHTML]];
-        /*[arrayHTMLAgentID addObject:@"TextAgentName"];
-        [arrayHTMLAgentID addObject:@"TextAgentCode"];
-        [arrayHTMLAgentID addObject:@"TextLicenseNumber"];
-        [arrayHTMLAgentID addObject:@"DateActiveAgentExpired"];
-        [arrayHTMLAgentID addObject:@"TextIllustrationAgentName"];
-        [arrayHTMLAgentID addObject:@"TextIllustrationAgentCode"];*/
     }
 
     -(void)arrayInitializeReferral{
         arrayDBReferral =[[NSMutableArray alloc]initWithArray:[spajPDFData arrayInitializeReferralDB]];
-        /*[arrayDBReferral addObject:@"ReferralName"];
-        [arrayDBReferral addObject:@"BranchName"];
-        [arrayDBReferral addObject:@"BranchCode"];
-        [arrayDBReferral addObject:@"Kanwil"];
-        [arrayDBReferral addObject:@"NIP"];*/
-        
         arrayHTMLReferal =[[NSMutableArray alloc]initWithArray:[spajPDFData arrayInitializeReferralHTML]];
-        /*[arrayHTMLReferal addObject:@"TextReferenceName"];
-        [arrayHTMLReferal addObject:@"TextBranchName"];
-        [arrayHTMLReferal addObject:@"TextBranchCode"];
-        [arrayHTMLReferal addObject:@"AreaKanwilAgent"];
-        [arrayHTMLReferal addObject:@"TextAgentID"];*/
     }
 
     -(void)arrayInitializePOData{
         arrayDBPOData =[[NSMutableArray alloc]initWithArray:[spajPDFData arrayInitializePODataDB]];
-        /*[arrayDBPOData addObject:@"ProductName"];
-        [arrayDBPOData addObject:@"ProductCode"];*/
-        
         arrayHTMLPOData =[[NSMutableArray alloc]initWithArray:[spajPDFData arrayInitializePODataHTML]];
-        /*[arrayHTMLPOData addObject:@"TextProductName"];
-        [arrayHTMLPOData addObject:@"TextProductCode"];*/
     }
 
 
     -(void)arrayInitializeSIMaster{ //premnath Vijaykumar
         arrayDBSIData=[[NSMutableArray alloc]initWithArray:[spajPDFData arrayInitializeSIMasterDB]];
-        /*[arrayDBSIData addObject:@"SINO"];
-        [arrayDBSIData addObject:@"CreatedDate"];*/
-        
         arrayHTMLSIData =[[NSMutableArray alloc]initWithArray:[spajPDFData arrayInitializeSIMasterHTML]];
-        /*[arrayHTMLSIData addObject:@"TextIllustrationNumber"];
-        [arrayHTMLSIData addObject:@"DateIllustration"];*/
     }
 
     -(void)arrayInitializeSignature{ //premnath Vijaykumar
         arrayDBSignature=[[NSMutableArray alloc]initWithArray:[spajPDFData arrayInitializeSignatureDB]];
-        /*[arrayDBSignature addObject:@"SPAJSignatureLocation"];
-        [arrayDBSignature addObject:@"SPAJDateSignatureParty4"];*/
-        
         arrayHTMLSignature =[[NSMutableArray alloc]initWithArray:[spajPDFData arrayInitializeSignatureHTML]];
-        /*[arrayHTMLSignature addObject:@"LineSignedPlace"];
-        [arrayHTMLSignature addObject:@"LineSignedDateDay"];*/
     }
-
-
-
-
-
 
     -(void)voidCheckBooleanLastState {
         boolSPAJPDF = [modelSPAJFormGeneration voidCertainFormGenerateCaptured:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue] FormType:@"SPAJFormGeneration1"];
@@ -421,13 +373,15 @@
         return dictForSignature;
     }
 
-
-    -(NSDictionary *)getDictionaryForIllustrationData{
-        NSMutableDictionary* dictIllustration=[[NSMutableDictionary alloc]initWithDictionary:[modelAgentProfile getAgentData]];
-        NSMutableDictionary* dictIllustrationData=[[NSMutableDictionary alloc]init];
-        [dictIllustrationData setObject:[dictIllustration valueForKey:@""] forKey:@""];
-        return dictIllustrationData;
+    -(NSDictionary *)getDictionaryForSPAJNumber:(NSString *)stringDBColumnName HTMLID:(NSString *)stringHTMLID{
+        NSMutableDictionary* dictForSignature=[[NSMutableDictionary alloc]init];
+        [dictForSignature setObject:stringHTMLID forKey:@"elementID"];
+        [dictForSignature setObject:[dictTransaction valueForKey:stringDBColumnName]?:@"" forKey:@"Value"];
+        [dictForSignature setObject:@"1" forKey:@"CustomerID"];
+        [dictForSignature setObject:@"1" forKey:@"SPAJID"];
+        return dictForSignature;
     }
+
 
     - (NSMutableDictionary*)readfromDB:(NSMutableDictionary*) params{
         NSString *SPAJTransactionID = [dictTransaction valueForKey:@"SPAJTransactionID"];
@@ -470,7 +424,7 @@
         for (int i=0; i<[arrayHTMLSignature count];i++){
             [modifieArray addObject:[self getDictionaryForSignature:[arrayDBSignature objectAtIndex:i] HTMLID:[arrayHTMLSignature objectAtIndex:i]]];
         }
-
+        
         [dictOriginal setObject:modifieArray forKey:@"readFromDB"];
         //return [super readfromDB:finalDictionary];
         [self callSuccessCallback:[params valueForKey:@"successCallBack"] withRetValue:dictOriginal];
