@@ -30,6 +30,7 @@
     [arrayDBReferral addObject:@"BranchCode"];
     [arrayDBReferral addObject:@"Kanwil"];
     [arrayDBReferral addObject:@"NIP"];
+    
     return arrayDBReferral;
 }
 
@@ -44,6 +45,7 @@
 -(NSMutableArray *)arrayInitializeSIMasterDB{ //premnath Vijaykumar
     NSMutableArray *arrayDBSIData=[[NSMutableArray alloc]init];
     [arrayDBSIData addObject:@"SINO"];
+    [arrayDBSIData addObject:@"CreatedDate"];
     [arrayDBSIData addObject:@"CreatedDate"];
     return arrayDBSIData;
 }
@@ -74,6 +76,7 @@
     [arrayHTMLReferal addObject:@"TextBranchCode"];
     [arrayHTMLReferal addObject:@"AreaKanwilAgent"];
     [arrayHTMLReferal addObject:@"TextAgentID"];
+    
     return arrayHTMLReferal;
 }
 
@@ -89,6 +92,7 @@
     NSMutableArray *arrayHTMLSIData =[[NSMutableArray alloc]init];
     [arrayHTMLSIData addObject:@"TextIllustrationNumber"];
     [arrayHTMLSIData addObject:@"DateIllustration"];
+    [arrayHTMLSIData addObject:@"DateReference"];
     return arrayHTMLSIData;
 }
 

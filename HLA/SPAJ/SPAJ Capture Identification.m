@@ -365,7 +365,7 @@ NSString* const Back = @"Back";
                 break;
         }
         NSString* identityDesc ;
-        if ([modelIdentificationType getOtherTypeDesc:stringIDTypeIdentifier].length>0){
+        //if ([modelIdentificationType getOtherTypeDesc:stringIDTypeIdentifier].length>0){
             NSString* stringName;
             if (indexSelected == 0){
                 stringName = [NSString stringWithFormat:@"%@ (Calon Pemegang Polis)",[dictionaryPOData valueForKey:@"PO_Name"]];
@@ -390,10 +390,10 @@ NSString* const Back = @"Back";
             
             spajIDCapturedViewController.modalPresentationStyle = UIModalPresentationFormSheet;
             [self presentViewController:spajIDCapturedViewController animated:YES completion:nil];
-        }
+        /*}
         else{
             identityDesc = @"Select Identification Type";
-        }
+        }*/
         //[buttonIDTypeSelection setTitle:identityDesc forState:UIControlStateNormal];
         
     }
@@ -515,7 +515,7 @@ NSString* const Back = @"Back";
             case 0:
             {
                 stringIDIdentifier = [modelSPAJIDCapture selectIDType:@"SPAJIDTypeParty1" SPAJSection:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
-                fileName = [NSString stringWithFormat:@"/%@_%@_%@_%@.jpg",stringEAPPPath,PemegangPolis,[buttonIDTypeSelection currentTitle],Front];
+                fileName = [NSString stringWithFormat:@"/%@_%@_%@_%@.jpg",stringEAPPPath,PemegangPolis,[buttonIDTypeSelection currentTitle]?:@"",Front];
                 imagePath = [filePathApp stringByAppendingString:fileName];
                 imageID = [UIImage imageWithContentsOfFile:imagePath];
                 return imageID;
@@ -523,7 +523,7 @@ NSString* const Back = @"Back";
             }
             case 1:{
                 stringIDIdentifier = [modelSPAJIDCapture selectIDType:@"SPAJIDTypeParty2" SPAJSection:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
-                fileName = [NSString stringWithFormat:@"/%@_%@_%@_%@.jpg",stringEAPPPath,Tertanggung,[buttonIDTypeSelection currentTitle],Front];
+                fileName = [NSString stringWithFormat:@"/%@_%@_%@_%@.jpg",stringEAPPPath,Tertanggung,[buttonIDTypeSelection currentTitle]?:@"",Front];
                 imagePath = [filePathApp stringByAppendingString:fileName];
                 imageID = [UIImage imageWithContentsOfFile:imagePath];
                 return imageID;
@@ -531,7 +531,7 @@ NSString* const Back = @"Back";
             }
             case 2:{
                 stringIDIdentifier = [modelSPAJIDCapture selectIDType:@"SPAJIDTypeParty3" SPAJSection:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
-                fileName = [NSString stringWithFormat:@"/%@_%@_%@_%@.jpg",stringEAPPPath,OrangTuaWali,[buttonIDTypeSelection currentTitle],Front];
+                fileName = [NSString stringWithFormat:@"/%@_%@_%@_%@.jpg",stringEAPPPath,OrangTuaWali,[buttonIDTypeSelection currentTitle]?:@"",Front];
                 imagePath = [filePathApp stringByAppendingString:fileName];
                 imageID = [UIImage imageWithContentsOfFile:imagePath];
                 return imageID;
@@ -539,7 +539,8 @@ NSString* const Back = @"Back";
             }
             case 3:{
                 stringIDIdentifier = [modelSPAJIDCapture selectIDType:@"SPAJIDTypeParty4" SPAJSection:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
-                fileName = [NSString stringWithFormat:@"/%@_%@_%@_%@.jpg",stringEAPPPath,TenagaPenjual,[buttonIDTypeSelection currentTitle],Front];
+                NSString *identityDescNew =[modelIdentificationType getOtherTypeDesc:stringIDTypeIdentifier];
+                fileName = [NSString stringWithFormat:@"/%@_%@_%@_%@.jpg",stringEAPPPath,TenagaPenjual,identityDescNew,Front];
                 imagePath = [filePathApp stringByAppendingString:fileName];
                 imageID = [UIImage imageWithContentsOfFile:imagePath];
                 return imageID;
@@ -547,7 +548,7 @@ NSString* const Back = @"Back";
             }
             case 4:{
                 stringIDIdentifier = [modelSPAJIDCapture selectIDType:@"SPAJIDTypeParty5" SPAJSection:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
-                fileName = [NSString stringWithFormat:@"/%@_%@_%@_%@.jpg",stringEAPPPath,Payment,[buttonIDTypeSelection currentTitle],Front];
+                fileName = [NSString stringWithFormat:@"/%@_%@_%@_%@.jpg",stringEAPPPath,Payment,[buttonIDTypeSelection currentTitle]?:@"",Front];
                 imagePath = [filePathApp stringByAppendingString:fileName];
                 imageID = [UIImage imageWithContentsOfFile:imagePath];
                 return imageID;
@@ -555,7 +556,7 @@ NSString* const Back = @"Back";
             }
             case 5:{
                 stringIDIdentifier = [modelSPAJIDCapture selectIDType:@"SPAJIDTypeParty6" SPAJSection:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
-                fileName = [NSString stringWithFormat:@"/%@_%@_%@_%@.jpg",stringEAPPPath,Other,[buttonIDTypeSelection currentTitle],Front];
+                fileName = [NSString stringWithFormat:@"/%@_%@_%@_%@.jpg",stringEAPPPath,Other,[buttonIDTypeSelection currentTitle]?:@"",Front];
                 imagePath = [filePathApp stringByAppendingString:fileName];
                 imageID = [UIImage imageWithContentsOfFile:imagePath];
                 return imageID;
@@ -608,7 +609,8 @@ NSString* const Back = @"Back";
             }
             case 3:{
                 stringIDIdentifier = [modelSPAJIDCapture selectIDType:@"SPAJIDTypeParty4" SPAJSection:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
-                fileName = [NSString stringWithFormat:@"/%@_%@_%@_%@.jpg",stringEAPPPath,TenagaPenjual,[buttonIDTypeSelection currentTitle],Back];
+                NSString *identityDescNew =[modelIdentificationType getOtherTypeDesc:stringIDTypeIdentifier];
+                fileName = [NSString stringWithFormat:@"/%@_%@_%@_%@.jpg",stringEAPPPath,TenagaPenjual,identityDescNew,Back];
                 imagePath = [filePathApp stringByAppendingString:fileName];
                 imageID = [UIImage imageWithContentsOfFile:imagePath];
                 return imageID;
@@ -755,16 +757,16 @@ NSString* const Back = @"Back";
             {
                 if ([stringSIRelation isEqualToString:@"DIRI SENDIRI"]){
                     if (indexSelected == 5){
-                        [self copyIDImagesToSPAJFolder:imageViewFront Party:Other IDType:[buttonIDTypeSelection currentTitle] Side:Front];
-                        [self copyIDImagesToSPAJFolder:imageViewBack Party:Other IDType:[buttonIDTypeSelection currentTitle] Side:Back];
+                        [self copyIDImagesToSPAJFolder:imageViewFront Party:Other IDType:[buttonIDTypeSelection currentTitle]?:@"" Side:Front];
+                        [self copyIDImagesToSPAJFolder:imageViewBack Party:Other IDType:[buttonIDTypeSelection currentTitle]?:@"" Side:Back];
                         NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJIDCaptureParty6=1,SPAJIDTypeParty6='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",stringIDTypeIdentifier,[dictTransaction valueForKey:@"SPAJEappNumber"]];
                         
                         [modelSPAJIDCapture updateSPAJIDCapture:stringUpdate];
                         [self voidCheckBooleanLastState];
                     }
                     if (indexSelected == 4){
-                        [self copyIDImagesToSPAJFolder:imageViewFront Party:Payment IDType:[buttonIDTypeSelection currentTitle] Side:Front];
-                        [self copyIDImagesToSPAJFolder:imageViewBack Party:Payment IDType:[buttonIDTypeSelection currentTitle] Side:Back];
+                        [self copyIDImagesToSPAJFolder:imageViewFront Party:Payment IDType:[buttonIDTypeSelection currentTitle]?:@"" Side:Front];
+                        [self copyIDImagesToSPAJFolder:imageViewBack Party:Payment IDType:[buttonIDTypeSelection currentTitle]?:@"" Side:Back];
                         NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJIDCaptureParty5=1,SPAJIDTypeParty5='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",stringIDTypeIdentifier,[dictTransaction valueForKey:@"SPAJEappNumber"]];
                         
                         [modelSPAJIDCapture updateSPAJIDCapture:stringUpdate];
@@ -772,8 +774,8 @@ NSString* const Back = @"Back";
                     }
 
                     else if (indexSelected == 3){
-                        [self copyIDImagesToSPAJFolder:imageViewFront Party:TenagaPenjual IDType:[buttonIDTypeSelection currentTitle] Side:Front];
-                        [self copyIDImagesToSPAJFolder:imageViewBack Party:TenagaPenjual IDType:[buttonIDTypeSelection currentTitle] Side:Back];
+                        [self copyIDImagesToSPAJFolder:imageViewFront Party:TenagaPenjual IDType:[buttonIDTypeSelection currentTitle]?:@"" Side:Front];
+                        [self copyIDImagesToSPAJFolder:imageViewBack Party:TenagaPenjual IDType:[buttonIDTypeSelection currentTitle]?:@"" Side:Back];
                         NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJIDCaptureParty4=1,SPAJIDTypeParty4='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",stringIDTypeIdentifier,[dictTransaction valueForKey:@"SPAJEappNumber"]];
                         
                         [modelSPAJIDCapture updateSPAJIDCapture:stringUpdate];
@@ -786,8 +788,8 @@ NSString* const Back = @"Back";
                         
                     }
                     else if (indexSelected == 0){
-                        [self copyIDImagesToSPAJFolder:imageViewFront Party:PemegangPolis IDType:[buttonIDTypeSelection currentTitle] Side:Front];
-                        [self copyIDImagesToSPAJFolder:imageViewBack Party:PemegangPolis IDType:[buttonIDTypeSelection currentTitle] Side:Back];
+                        [self copyIDImagesToSPAJFolder:imageViewFront Party:PemegangPolis IDType:[buttonIDTypeSelection currentTitle]?:@"" Side:Front];
+                        [self copyIDImagesToSPAJFolder:imageViewBack Party:PemegangPolis IDType:[buttonIDTypeSelection currentTitle]?:@"" Side:Back];
                         NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJIDCaptureParty1=1,SPAJIDTypeParty1='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",stringIDTypeIdentifier,[dictTransaction valueForKey:@"SPAJEappNumber"]];
                         
                         [modelSPAJIDCapture updateSPAJIDCapture:stringUpdate];
@@ -797,32 +799,32 @@ NSString* const Back = @"Back";
                 else{
                     if (LAAge<21){
                         if (indexSelected == 5){
-                            [self copyIDImagesToSPAJFolder:imageViewFront Party:Other IDType:[buttonIDTypeSelection currentTitle] Side:Front];
-                            [self copyIDImagesToSPAJFolder:imageViewBack Party:Other IDType:[buttonIDTypeSelection currentTitle] Side:Back];
+                            [self copyIDImagesToSPAJFolder:imageViewFront Party:Other IDType:[buttonIDTypeSelection currentTitle]?:@"" Side:Front];
+                            [self copyIDImagesToSPAJFolder:imageViewBack Party:Other IDType:[buttonIDTypeSelection currentTitle]?:@"" Side:Back];
                             NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJIDCaptureParty6=1,SPAJIDTypeParty6='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",stringIDTypeIdentifier,[dictTransaction valueForKey:@"SPAJEappNumber"]];
                             
                             [modelSPAJIDCapture updateSPAJIDCapture:stringUpdate];
                             [self voidCheckBooleanLastState];
                         }
                         if (indexSelected == 4){
-                            [self copyIDImagesToSPAJFolder:imageViewFront Party:Payment IDType:[buttonIDTypeSelection currentTitle] Side:Front];
-                            [self copyIDImagesToSPAJFolder:imageViewBack Party:Payment IDType:[buttonIDTypeSelection currentTitle] Side:Back];
+                            [self copyIDImagesToSPAJFolder:imageViewFront Party:Payment IDType:[buttonIDTypeSelection currentTitle]?:@"" Side:Front];
+                            [self copyIDImagesToSPAJFolder:imageViewBack Party:Payment IDType:[buttonIDTypeSelection currentTitle]?:@"" Side:Back];
                             NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJIDCaptureParty5=1,SPAJIDTypeParty5='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",stringIDTypeIdentifier,[dictTransaction valueForKey:@"SPAJEappNumber"]];
                             
                             [modelSPAJIDCapture updateSPAJIDCapture:stringUpdate];
                             [self voidCheckBooleanLastState];
                         }
                         if (indexSelected == 3){
-                            [self copyIDImagesToSPAJFolder:imageViewFront Party:TenagaPenjual IDType:[buttonIDTypeSelection currentTitle] Side:Front];
-                            [self copyIDImagesToSPAJFolder:imageViewBack Party:TenagaPenjual IDType:[buttonIDTypeSelection currentTitle] Side:Back];
+                            [self copyIDImagesToSPAJFolder:imageViewFront Party:TenagaPenjual IDType:[buttonIDTypeSelection currentTitle]?:@"" Side:Front];
+                            [self copyIDImagesToSPAJFolder:imageViewBack Party:TenagaPenjual IDType:[buttonIDTypeSelection currentTitle]?:@"" Side:Back];
                             NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJIDCaptureParty4=1,SPAJIDTypeParty4='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",stringIDTypeIdentifier,[dictTransaction valueForKey:@"SPAJEappNumber"]];
                             
                             [modelSPAJIDCapture updateSPAJIDCapture:stringUpdate];
                             [self voidCheckBooleanLastState];
                         }
                         else if (indexSelected == 2){
-                            [self copyIDImagesToSPAJFolder:imageViewFront Party:OrangTuaWali IDType:[buttonIDTypeSelection currentTitle] Side:Front];
-                            [self copyIDImagesToSPAJFolder:imageViewBack Party:OrangTuaWali IDType:[buttonIDTypeSelection currentTitle] Side:Back];
+                            [self copyIDImagesToSPAJFolder:imageViewFront Party:OrangTuaWali IDType:[buttonIDTypeSelection currentTitle]?:@"" Side:Front];
+                            [self copyIDImagesToSPAJFolder:imageViewBack Party:OrangTuaWali IDType:[buttonIDTypeSelection currentTitle]?:@"" Side:Back];
                             NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJIDCaptureParty3=1,SPAJIDTypeParty3='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",stringIDTypeIdentifier,[dictTransaction valueForKey:@"SPAJEappNumber"]];
                             
                             [modelSPAJIDCapture updateSPAJIDCapture:stringUpdate];
@@ -832,8 +834,8 @@ NSString* const Back = @"Back";
                             //empty
                         }
                         else if (indexSelected == 0){
-                            [self copyIDImagesToSPAJFolder:imageViewFront Party:PemegangPolis IDType:[buttonIDTypeSelection currentTitle] Side:Front];
-                            [self copyIDImagesToSPAJFolder:imageViewBack Party:PemegangPolis IDType:[buttonIDTypeSelection currentTitle] Side:Back];
+                            [self copyIDImagesToSPAJFolder:imageViewFront Party:PemegangPolis IDType:[buttonIDTypeSelection currentTitle]?:@"" Side:Front];
+                            [self copyIDImagesToSPAJFolder:imageViewBack Party:PemegangPolis IDType:[buttonIDTypeSelection currentTitle]?:@"" Side:Back];
                             NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJIDCaptureParty1=1,SPAJIDTypeParty1='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",stringIDTypeIdentifier,[dictTransaction valueForKey:@"SPAJEappNumber"]];
                             
                             [modelSPAJIDCapture updateSPAJIDCapture:stringUpdate];
@@ -842,24 +844,24 @@ NSString* const Back = @"Back";
                     }
                     else{
                         if (indexSelected == 5){
-                            [self copyIDImagesToSPAJFolder:imageViewFront Party:Other IDType:[buttonIDTypeSelection currentTitle] Side:Front];
-                            [self copyIDImagesToSPAJFolder:imageViewBack Party:Other IDType:[buttonIDTypeSelection currentTitle] Side:Back];
+                            [self copyIDImagesToSPAJFolder:imageViewFront Party:Other IDType:[buttonIDTypeSelection currentTitle]?:@"" Side:Front];
+                            [self copyIDImagesToSPAJFolder:imageViewBack Party:Other IDType:[buttonIDTypeSelection currentTitle]?:@"" Side:Back];
                             NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJIDCaptureParty6=1,SPAJIDTypeParty6='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",stringIDTypeIdentifier,[dictTransaction valueForKey:@"SPAJEappNumber"]];
                             
                             [modelSPAJIDCapture updateSPAJIDCapture:stringUpdate];
                             [self voidCheckBooleanLastState];
                         }
                         else if (indexSelected == 4){
-                            [self copyIDImagesToSPAJFolder:imageViewFront Party:Payment IDType:[buttonIDTypeSelection currentTitle] Side:Front];
-                            [self copyIDImagesToSPAJFolder:imageViewBack Party:Payment IDType:[buttonIDTypeSelection currentTitle] Side:Back];
+                            [self copyIDImagesToSPAJFolder:imageViewFront Party:Payment IDType:[buttonIDTypeSelection currentTitle]?:@"" Side:Front];
+                            [self copyIDImagesToSPAJFolder:imageViewBack Party:Payment IDType:[buttonIDTypeSelection currentTitle]?:@"" Side:Back];
                             NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJIDCaptureParty5=1,SPAJIDTypeParty5='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",stringIDTypeIdentifier,[dictTransaction valueForKey:@"SPAJEappNumber"]];
                             
                             [modelSPAJIDCapture updateSPAJIDCapture:stringUpdate];
                             [self voidCheckBooleanLastState];
                         }
                         else if (indexSelected == 3){
-                            [self copyIDImagesToSPAJFolder:imageViewFront Party:TenagaPenjual IDType:[buttonIDTypeSelection currentTitle] Side:Front];
-                            [self copyIDImagesToSPAJFolder:imageViewBack Party:TenagaPenjual IDType:[buttonIDTypeSelection currentTitle] Side:Back];
+                            [self copyIDImagesToSPAJFolder:imageViewFront Party:TenagaPenjual IDType:[buttonIDTypeSelection currentTitle]?:@"" Side:Front];
+                            [self copyIDImagesToSPAJFolder:imageViewBack Party:TenagaPenjual IDType:[buttonIDTypeSelection currentTitle]?:@"" Side:Back];
                             NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJIDCaptureParty4=1,SPAJIDTypeParty4='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",stringIDTypeIdentifier,[dictTransaction valueForKey:@"SPAJEappNumber"]];
                             
                             [modelSPAJIDCapture updateSPAJIDCapture:stringUpdate];
@@ -869,16 +871,16 @@ NSString* const Back = @"Back";
                             //empty
                         }
                         else if (indexSelected == 1){
-                            [self copyIDImagesToSPAJFolder:imageViewFront Party:Tertanggung IDType:[buttonIDTypeSelection currentTitle] Side:Front];
-                            [self copyIDImagesToSPAJFolder:imageViewBack Party:Tertanggung IDType:[buttonIDTypeSelection currentTitle] Side:Back];
+                            [self copyIDImagesToSPAJFolder:imageViewFront Party:Tertanggung IDType:[buttonIDTypeSelection currentTitle]?:@"" Side:Front];
+                            [self copyIDImagesToSPAJFolder:imageViewBack Party:Tertanggung IDType:[buttonIDTypeSelection currentTitle]?:@"" Side:Back];
                             NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJIDCaptureParty2=1,SPAJIDTypeParty2='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",stringIDTypeIdentifier,[dictTransaction valueForKey:@"SPAJEappNumber"]];
                             
                             [modelSPAJIDCapture updateSPAJIDCapture:stringUpdate];
                             [self voidCheckBooleanLastState];
                         }
                         else if (indexSelected == 0){
-                            [self copyIDImagesToSPAJFolder:imageViewFront Party:PemegangPolis IDType:[buttonIDTypeSelection currentTitle] Side:Front];
-                            [self copyIDImagesToSPAJFolder:imageViewBack Party:PemegangPolis IDType:[buttonIDTypeSelection currentTitle] Side:Back];
+                            [self copyIDImagesToSPAJFolder:imageViewFront Party:PemegangPolis IDType:[buttonIDTypeSelection currentTitle]?:@"" Side:Front];
+                            [self copyIDImagesToSPAJFolder:imageViewBack Party:PemegangPolis IDType:[buttonIDTypeSelection currentTitle]?:@"" Side:Back];
                             NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJIDCaptureParty1=1,SPAJIDTypeParty1='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",stringIDTypeIdentifier,[dictTransaction valueForKey:@"SPAJEappNumber"]];
                             
                             [modelSPAJIDCapture updateSPAJIDCapture:stringUpdate];

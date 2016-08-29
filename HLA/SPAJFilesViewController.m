@@ -40,6 +40,7 @@
 }
 @synthesize dictTransaction;
 @synthesize buttonSubmit;
+@synthesize delegateSPAJFiles;
 
 - (void)viewWillLayoutSubviews{
     [super viewWillLayoutSubviews];
@@ -191,7 +192,7 @@
 - (void)downloadisFinished{
     intUploadCount = intUploadCount + 1;
     if (intUploadCount == [directoryContent count]){
-        
+        intUploadCount = 0;
         
         NSString* stringSPAJNumber=[dictTransaction valueForKey:@"SPAJNumber"];
         NSString* stringProductName=[dictTransaction valueForKey:@"ProductName"];
@@ -216,15 +217,16 @@
                         NSLog(@"%@", json);
                         [modelSPAJTransaction updateSPAJTransaction:@"SPAJStatus" StringColumnValue:@"Submitted" StringWhereName:@"SPAJEappNumber" StringWhereValue:[dictTransaction valueForKey:@"SPAJEappNumber"]];
                         
-                        UIAlertController* alertController = [UIAlertController alertControllerWithTitle:@"Sukses Upload" message:@"Data berhasil diupload" preferredStyle:UIAlertControllerStyleAlert];
-                        
-                        [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-                                [progressBar dismissViewControllerAnimated:YES completion:^{}];
-                        }]];
-                        //dispatch_async(dispatch_get_main_queue(), ^ {
-                            [self presentViewController:alertController animated:YES completion:nil];
-                        //});
                         [modelSPAJSubmitTracker saveSPAJSubmitDate:[dictTransaction valueForKey:@"SPAJNumber"] SubmitDate:[formatter getDateToday:@"yyyy-MM-dd HH:mm:ss"]];
+                        [progressBar dismissViewControllerAnimated:YES completion:^{
+                            UIAlertController* alertController = [UIAlertController alertControllerWithTitle:@"Sukses Upload" message:@"Data berhasil diupload" preferredStyle:UIAlertControllerStyleAlert];
+                            
+                            [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                                //[progressBar dismissViewControllerAnimated:YES completion:^{}];
+                                [self dismissViewControllerAnimated:YES completion:^{[delegateSPAJFiles loadSPAJTransaction];}];
+                            }]];
+                            [self presentViewController:alertController animated:YES completion:nil];
+                        }];
                     }
                 }] resume];
     }

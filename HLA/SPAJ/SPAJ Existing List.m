@@ -21,7 +21,7 @@
 
 // DECLARATION
 
-@interface SPAJExistingList ()
+@interface SPAJExistingList ()<SPAJFilesDelegate>
 
 
 
@@ -233,6 +233,7 @@
 
     - (IBAction)actionShowFilesList:(UIButton *)sender{
         spajFilesViewController = [[SPAJFilesViewController alloc]initWithNibName:@"SPAJFilesViewController" bundle:nil];
+        [spajFilesViewController setDelegateSPAJFiles:self];
         [spajFilesViewController setDictTransaction:[arraySPAJTransaction objectAtIndex:sender.tag]];
         spajFilesViewController.modalPresentationStyle = UIModalPresentationOverFullScreen;
         //spajPDFWebView.preferredContentSize = CGSizeMake(950, 768);

@@ -228,34 +228,27 @@
         
         if (signatureCaptured){
             [_viewStep6 setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
-            //[_viewStep6  setUserInteractionEnabled:YES];
         }
         else{
             [_viewStep6 setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_OCTONARY floatOpacity:1.0]];
-            //[_viewStep6  setUserInteractionEnabled:NO];
         }
 
         if (idCaptured){
             [_viewStep5 setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
-            //[_viewStep5  setUserInteractionEnabled:YES];
         }
         else{
             [_viewStep5 setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_OCTONARY floatOpacity:1.0]];
-            //[_viewStep5  setUserInteractionEnabled:NO];
         }
 
         if (formGeneration){
             [_viewStep4 setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
-            //[_viewStep4  setUserInteractionEnabled:YES];
         }
         else{
             [_viewStep4 setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_OCTONARY floatOpacity:1.0]];
-            //[_viewStep4  setUserInteractionEnabled:NO];
         }
 
         if (detailCapture){
             [_viewStep3 setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
-            //[_viewStep3  setUserInteractionEnabled:YES];
         }
         else{
             [_viewStep3 setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_OCTONARY floatOpacity:1.0]];
@@ -382,17 +375,18 @@
             if (spajNumber > 0){
                 [modelSPAJTransaction updateSPAJTransaction:@"SPAJNumber" StringColumnValue:[[NSNumber numberWithLongLong:spajNumber] stringValue] StringWhereName:@"SPAJEappNumber" StringWhereValue:[dictTransaction valueForKey:@"SPAJEappNumber"]];
                 [modelSPAJTransaction updateSPAJTransaction:@"SPAJStatus" StringColumnValue:@"Not Submitted" StringWhereName:@"SPAJEappNumber" StringWhereValue:[dictTransaction valueForKey:@"SPAJEappNumber"]];
-                
+                [self loadHTMLFile];
                 [CATransaction begin];
                 [CATransaction setCompletionBlock:^{
-                        [self loadHTMLFile];
+                        //[self loadHTMLFile];
                         /*UIAlertController *alertNoSPAJNumber = [alert alertInformation:@"Sukses" stringMessage:[NSString stringWithFormat:@"Nomor SPAJ anda adalah %lli",spajNumber]];
                         [self presentViewController:alertNoSPAJNumber animated:YES completion:nil];
                         [self voidChangeFileName:spajNumber];
                         [_delegateSPAJMain actionGoToExistingList:nil];// handle completion here*/
+                    //[self.navigationController popViewControllerAnimated:YES];
                 }];
                 
-                [self.navigationController popViewControllerAnimated:YES];
+                //
                 
                 [CATransaction commit];
 
@@ -521,7 +515,13 @@
                             [self presentViewController:alertNoSPAJNumber animated:YES completion:nil];
                             [self voidChangeFileName:longSPAJNumber];
                             
-                            [_delegateSPAJMain actionGoToExistingList:nil];// handle completion here
+                            [_delegateSPAJMain actionGoToExistingList:nil];
+                            /*dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                                dispatch_async(dispatch_get_main_queue(), ^{
+                                    // handle completion here
+                                });
+                            });*/
+                            
                         });
                     });
                 });

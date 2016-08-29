@@ -448,6 +448,11 @@
         NSMutableDictionary* dictRelWithLa = [[NSMutableDictionary alloc]initWithObjectsAndKeys:@"RadioButtonProspectiveInsuredRelationAssured",@"elementID",stringRelation,@"Value", nil];
         [arrayValue addObject:dictRelWithLa];
     }
+    /*else if ([stringSection isEqualToString:@"PP"]){
+        NSString* stringPaymentFrequency = [formatter getRelationNameForHtml:[dictPOData valueForKey:@"RelWithLA"]];
+        NSMutableDictionary* dictRelWithLa = [[NSMutableDictionary alloc]initWithObjectsAndKeys:@"RadioButtonProspectiveInsuredRelationAssured",@"elementID",stringRelation,@"Value", nil];
+        [arrayValue addObject:dictRelWithLa];
+    }*/
     
     NSDictionary *readFromDB=[[NSDictionary alloc]initWithObjectsAndKeys:arrayValue,@"autopopulateFromDB", nil];
     NSDictionary *result=[[NSDictionary alloc]initWithObjectsAndKeys:readFromDB,@"result", nil];

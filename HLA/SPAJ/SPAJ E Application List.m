@@ -22,6 +22,7 @@
 #import "ModelSPAJDetail.h"
 #import "ModelSPAJFormGeneration.h"
 #import "SPAJ Add Menu.h"
+#import "ModelSIPOData.h"
 // DECLARATION
 
 @interface SPAJEApplicationList ()<SPAJMainDelegate,SIListingDelegate,UIPopoverPresentationControllerDelegate,UITextFieldDelegate>{
@@ -42,6 +43,7 @@
     ModelSPAJIDCapture* modelSPAJIDCapture;
     ModelSPAJFormGeneration* modelSPAJFormGeneration;
     ModelSPAJDetail* modelSPAJDetail;
+    ModelSIPOData* modelSIPOData;
     SIListingPopOver *siListingPopOver;
     Formatter* formatter;
     
@@ -88,6 +90,7 @@
         modelSPAJIDCapture = [[ModelSPAJIDCapture alloc]init];
         modelSPAJDetail = [[ModelSPAJDetail alloc]init];
         modelSPAJFormGeneration = [[ModelSPAJFormGeneration alloc]init];
+        modelSIPOData  = [[ModelSIPOData alloc]init];
         formatter = [[Formatter alloc]init];
         
         _querySPAJHeader = [[QuerySPAJHeader alloc]init];
@@ -365,6 +368,7 @@
                 [self createSPAJIDCaptureData:stringGlobalEAPPNumber];
                 [self createSPAJDetail:stringGlobalEAPPNumber];
                 [self createSPAJFormGeneration:stringGlobalEAPPNumber];
+                [self copySIPDFToSPAJ:stringSINO];
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                         [self loadSPAJTransaction];
                     dispatch_sync(dispatch_get_main_queue(), ^{
@@ -579,6 +583,25 @@
 
     #pragma mark create SPAJ Transaction
     // Save New SPAJ to DB
+    -(void)copySIPDFToSPAJ:(NSString *)SINO{
+        NSDictionary* dictionaryPOData = [[NSDictionary alloc]initWithDictionary:[modelSIPOData getPO_DataFor:SINO]];
+        NSArray* path_forDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+        NSString* documentsDirectory = [path_forDirectory objectAtIndex:0];
+        NSString *pdfPathOutput = [NSString stringWithFormat:@"%@/%@_%@.pdf",documentsDirectory,[dictionaryPOData valueForKey:@"ProductName"],[dictionaryPOData valueForKey:@"SINO"]];
+        
+        NSString* destinationPath = [NSString stringWithFormat:@"%@/SPAJ/%@/%@_%@.pdf",documentsDirectory,stringGlobalEAPPNumber,[dictionaryPOData valueForKey:@"ProductName"],[dictionaryPOData valueForKey:@"SINO"]];
+        
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        
+        BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:pdfPathOutput];
+        if (fileExists){
+            if ([fileManager copyItemAtPath:pdfPathOutput
+                                     toPath:destinationPath  error:NULL]) {
+                NSLog(@"Copied successfully");
+            }
+        }
+    }
+
     -(NSString *)createSPAJTransactionNumber
     {
         int randomNumber = [formatter getRandomNumberBetween:1000 MaxValue:9999];

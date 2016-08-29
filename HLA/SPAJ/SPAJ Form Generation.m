@@ -27,6 +27,7 @@
 #import "Model_SI_Master.h"
 #import "ModelSPAJHtml.h"
 #import "SPAJPDFAutopopulateData.h"
+#import "Model_SI_Premium.h"
 // DECLARATION
 
 @interface SPAJFormGeneration ()
@@ -53,6 +54,7 @@
     NDHTMLtoPDF *PDFCreator;
     ModelSPAJSignature* modelSPAJSignature;
     ModelSPAJHtml *modelSPAJHtml;
+    Model_SI_Premium *modelSIPremium;
     Alert* alert;
     
     UserInterface *objectUserInterface;
@@ -116,7 +118,7 @@
         modelSPAJSignature = [[ModelSPAJSignature alloc]init];
         modelSIPOData = [[ModelSIPOData alloc]init];
         modelSIMaster = [[Model_SI_Master alloc]init];
-
+        //modelSIPremium = [[Mode]]
         [self setNavigationBar];
         
         

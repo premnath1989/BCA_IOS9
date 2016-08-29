@@ -7,8 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol SPAJFilesDelegate
+- (void) loadSPAJTransaction;
+@end
 
 @interface SPAJFilesViewController : UIViewController
+@property (nonatomic,strong) id <SPAJFilesDelegate> delegateSPAJFiles;
+
 @property (strong, nonatomic) NSDictionary* dictTransaction;
 
 @property (nonatomic, strong) IBOutlet UIButton* buttonSubmit;
