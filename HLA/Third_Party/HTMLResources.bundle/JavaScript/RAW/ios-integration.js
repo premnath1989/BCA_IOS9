@@ -119,11 +119,16 @@ function savetoDB()
 {
     var objectContent;
     
-    if (arrayHealthQuestionnaire.length > 0)
+    if (stringPageSectionCurrent == stringPageSectionHealthQuestionnaire)
     {
         //alert("no getter !, arrayHealthQuestionnaire length : " + arrayHealthQuestionnaire.length);
         objectContent = arrayHealthQuestionnaire;
     }
+	else if (stringPageSectionCurrent == stringPageSectionBeneficiariesList)
+	{
+		// alert("no getter !, arrayBeneficiariesList length : " + arrayBeneficiarisList.length);
+		objectContent = arrayBeneficiariesList;
+	}
     else
     {
         //alert("with getter !, arrayHealthQuestionnaire length : " + arrayHealthQuestionnaire.length);
@@ -131,8 +136,10 @@ function savetoDB()
     }
     
     var jsonToDatabase = JSONGenerator(objectContent);
-    
-    calliOSFunction('savetoDB:',onSuccess,onError, jsonToDatabase);    
+    calliOSFunction('savetoDB:',onSuccess,onError, jsonToDatabase);
+	
+	arrayHealthQuestionnaire = [];
+	arrayBeneficiariesList = [];
 }
 
 function PrintData()

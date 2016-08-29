@@ -228,38 +228,45 @@
         
         if (signatureCaptured){
             [_viewStep6 setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
+            //[_viewStep6  setUserInteractionEnabled:YES];
         }
         else{
             [_viewStep6 setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_OCTONARY floatOpacity:1.0]];
+            //[_viewStep6  setUserInteractionEnabled:NO];
         }
 
         if (idCaptured){
             [_viewStep5 setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
+            //[_viewStep5  setUserInteractionEnabled:YES];
         }
         else{
             [_viewStep5 setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_OCTONARY floatOpacity:1.0]];
+            //[_viewStep5  setUserInteractionEnabled:NO];
         }
 
         if (formGeneration){
             [_viewStep4 setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
+            //[_viewStep4  setUserInteractionEnabled:YES];
         }
         else{
             [_viewStep4 setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_OCTONARY floatOpacity:1.0]];
+            //[_viewStep4  setUserInteractionEnabled:NO];
         }
 
         if (detailCapture){
             [_viewStep3 setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
+            //[_viewStep3  setUserInteractionEnabled:YES];
         }
         else{
             [_viewStep3 setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_OCTONARY floatOpacity:1.0]];
         }
         
-        /*if ((detailCapture)&&(formGeneration)&&(idCaptured)&&(signatureCaptured)){
+        if ((detailCapture)&&(formGeneration)&&(idCaptured)&&(signatureCaptured)){
             [_buttonConfirmSPAJ setEnabled:YES];
         }
         else{
             [_buttonConfirmSPAJ setEnabled:NO];
-        }*/
+        }
     }
 
     -(void)voidGetFooterInformation{

@@ -68,14 +68,14 @@
     FMResultSet *s;
     //FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select count (*) as IDCaptured from SPAJIDCapture where SPAJTransactionID=%i and SPAJIDCaptureParty1=1 and SPAJIDCaptureParty2=1 and SPAJIDCaptureParty3=1 and SPAJIDCaptureParty4=1",intTransactionSPAJID]];
     if ([stringRelation isEqualToString:@"DIRI SENDIRI"]){
-        s = [database executeQuery:[NSString stringWithFormat:@"select count (*) as IDCaptured from SPAJIDCapture where SPAJTransactionID=%i and SPAJIDCaptureParty1=1",intTransactionSPAJID]];
+        s = [database executeQuery:[NSString stringWithFormat:@"select count (*) as IDCaptured from SPAJIDCapture where SPAJTransactionID=%i and SPAJIDCaptureParty1=1 and SPAJIDCaptureParty4=1",intTransactionSPAJID]];
     }
     else{
         if (laAge<21){
-            s = [database executeQuery:[NSString stringWithFormat:@"select count (*) as IDCaptured from SPAJIDCapture where SPAJTransactionID=%i and SPAJIDCaptureParty1=1 and SPAJIDCaptureParty3=1",intTransactionSPAJID]];
+            s = [database executeQuery:[NSString stringWithFormat:@"select count (*) as IDCaptured from SPAJIDCapture where SPAJTransactionID=%i and SPAJIDCaptureParty1=1 and SPAJIDCaptureParty3=1 and SPAJIDCaptureParty4=1",intTransactionSPAJID]];
         }
         else{
-            s = [database executeQuery:[NSString stringWithFormat:@"select count (*) as IDCaptured from SPAJIDCapture where SPAJTransactionID=%i and SPAJIDCaptureParty1=1 and SPAJIDCaptureParty2=1",intTransactionSPAJID]];
+            s = [database executeQuery:[NSString stringWithFormat:@"select count (*) as IDCaptured from SPAJIDCapture where SPAJTransactionID=%i and SPAJIDCaptureParty1=1 and SPAJIDCaptureParty2=1 and SPAJIDCaptureParty4=1",intTransactionSPAJID]];
         }
     }
     

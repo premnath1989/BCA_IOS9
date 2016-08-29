@@ -352,14 +352,14 @@
       NSMutableDictionary *modiFiedDictionary = [[NSMutableDictionary alloc]init];
         NSString* prospectID = [NSString stringWithFormat:@"%@",[originalDictionary valueForKey:@"IndexNo"]];
         if ([stringOriginalElementName isEqualToString:@"ProspectOccupationCode"]){
-            NSString* occupationDesc = [modelOccupation getOccupationDesc:[originalDictionary valueForKey:stringOriginalElementName]];
+            NSString* occupationDesc = [modelOccupation getOccupationDesc:[originalDictionary valueForKey:stringOriginalElementName]]?:@"";
             [modiFiedDictionary setObject:stringNewElementName forKey:@"elementID"];
             [modiFiedDictionary setObject:occupationDesc forKey:@"Value"];
             return modiFiedDictionary;
         }
         else if ([stringOriginalElementName isEqualToString:@"OtherIDType"]){
             NSString* identityDesc = [modelIdentificationType getOtherTypeDesc:[originalDictionary valueForKey:stringOriginalElementName]]?:@"";
-            NSString* stringIdtype = [formatter getIDNameForHtml:identityDesc];
+            NSString* stringIdtype = [formatter getIDNameForHtml:identityDesc]?:@"";
             [modiFiedDictionary setObject:stringNewElementName forKey:@"elementID"];
             [modiFiedDictionary setObject:stringIdtype forKey:@"Value"];
             return modiFiedDictionary;
@@ -391,7 +391,7 @@
     
     
         else if ([stringOriginalElementName isEqualToString:@"ProspectGender"]){
-            NSString* stringGender = [formatter getGenderNameForHtml:[originalDictionary valueForKey:stringOriginalElementName]];
+            NSString* stringGender = [formatter getGenderNameForHtml:[originalDictionary valueForKey:stringOriginalElementName]]?:@"";
             [modiFiedDictionary setObject:stringNewElementName forKey:@"elementID"];
             [modiFiedDictionary setObject:stringGender forKey:@"Value"];
             return modiFiedDictionary;
@@ -403,13 +403,13 @@
             return modiFiedDictionary;
         }
         else if ([stringOriginalElementName isEqualToString:@"Nationality"]){
-            NSString* stringNationality = [formatter getNationalityNameForHtml:[originalDictionary valueForKey:stringOriginalElementName]];
+            NSString* stringNationality = [formatter getNationalityNameForHtml:[originalDictionary valueForKey:stringOriginalElementName]]?:@"";
             [modiFiedDictionary setObject:stringNewElementName forKey:@"elementID"];
             [modiFiedDictionary setObject:stringNationality forKey:@"Value"];
             return modiFiedDictionary;
         }
         else if ([stringOriginalElementName isEqualToString:@"Religion"]){
-            NSString* stringReligion = [formatter getReligionNameForHtml:[originalDictionary valueForKey:stringOriginalElementName]];
+            NSString* stringReligion = [formatter getReligionNameForHtml:[originalDictionary valueForKey:stringOriginalElementName]]?:@"";
             [modiFiedDictionary setObject:stringNewElementName forKey:@"elementID"];
             [modiFiedDictionary setObject:stringReligion forKey:@"Value"];
             return modiFiedDictionary;
@@ -438,6 +438,7 @@
         NSMutableDictionary* dictRelWithLa = [[NSMutableDictionary alloc]initWithObjectsAndKeys:@"RadioButtonPolicyHolderRelationAssured",@"elementID",stringRelation,@"Value", nil];
         [arrayValue addObject:dictRelWithLa];
     }
+    
     else if ([stringSection isEqualToString:@"TR"]){
         for (int i=0;i<[newElementArrayTertanggungName count];i++){
             NSMutableDictionary* dictDetail = [[NSMutableDictionary alloc]initWithDictionary:[self ModifiedDictionary:[self OriginalDictionaryForAutoPopulate] OriginalElementName:[originalElementArrayTertanggungName objectAtIndex:i] NewElementName:[newElementArrayTertanggungName objectAtIndex:i]]];
@@ -448,13 +449,8 @@
         [arrayValue addObject:dictRelWithLa];
     }
     
-   
-    
-   
-    
-        NSDictionary *readFromDB=[[NSDictionary alloc]initWithObjectsAndKeys:arrayValue,@"autopopulateFromDB", nil];
+    NSDictionary *readFromDB=[[NSDictionary alloc]initWithObjectsAndKeys:arrayValue,@"autopopulateFromDB", nil];
     NSDictionary *result=[[NSDictionary alloc]initWithObjectsAndKeys:readFromDB,@"result", nil];
-    
     return result;
 }
 

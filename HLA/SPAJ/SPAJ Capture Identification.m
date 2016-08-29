@@ -228,7 +228,7 @@ NSString* const Back = @"Back";
             case 3:
                 //[self actionViewPhoto:nil];
                 [self showIDType:indexSelected];
-                [buttonIDTypeSelection setEnabled:false];
+                [buttonIDTypeSelection setEnabled:true];
                 break;
             case 4:
                 //[self actionViewPhoto:nil];
