@@ -24,6 +24,7 @@
 #import "Formatter.h"
 #import "ModelSPAJSignature.h"
 #import "Alert.h"
+#import "ModelSPAJTransaction.h"
 
 // DECLARATION
 
@@ -49,7 +50,7 @@
     ModelSPAJSignature* modelSPAJSignature;
     ModelSPAJHtml *modelSPAJHtml;
     ModelSPAJDetail *modelSPAJDetail;
-    
+    ModelSPAJTransaction *modelSPAJTransaction;
     Alert* alert;
     
     NSMutableArray *NumberListOfSubMenu;
@@ -92,6 +93,7 @@
         formatter = [[Formatter alloc]init];
         alert = [[Alert alloc]init];
         modelSPAJSignature = [[ModelSPAJSignature alloc]init];
+        modelSPAJTransaction = [[ModelSPAJTransaction alloc]init];
         
         [self setNavigationBar];
         
@@ -650,6 +652,8 @@
             [self voidSetKesehatanBoolValidate:true];
         }
         
+        [modelSPAJTransaction updateSPAJTransaction:@"SPAJDateModified" StringColumnValue:[formatter getDateToday:@"yyyy-MM-dd HH:mm:ss"] StringWhereName:@"SPAJEappNumber" StringWhereValue:[dictTransaction valueForKey:@"SPAJEappNumber"]];
+        
     }
 
     -(void)voidSetCalonTertnggungBoolValidate:(BOOL)boolValidate{
@@ -705,6 +709,7 @@
         NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJDetail6=1 where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",[dictTransaction valueForKey:@"SPAJEappNumber"]];
         [modelSPAJDetail updateSPAJDetail:stringUpdate];
         [self voidCheckBooleanLastState];
+        [self.navigationController popViewControllerAnimated:YES];
     }
 #pragma mark delegate image picker
     - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info

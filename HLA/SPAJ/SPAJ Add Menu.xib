@@ -141,7 +141,7 @@
                                 <constraint firstItem="lnZ-K4-H9p" firstAttribute="top" secondItem="pDg-BU-x6G" secondAttribute="top" id="zkx-9v-BLk"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="buI-Tv-IiQ" customClass="ViewGuideMenuNotSelected">
+                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="buI-Tv-IiQ" customClass="ViewGuideMenuSelected">
                             <rect key="frame" x="0.0" y="50" width="600" height="50"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="utj-z3-yFg" customClass="StackViewGuideMenuHorizontal">

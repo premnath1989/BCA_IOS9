@@ -888,6 +888,8 @@ NSString* const Back = @"Back";
                         }
                     }
                 }
+                [modelSPAJTransaction updateSPAJTransaction:@"SPAJDateModified" StringColumnValue:[formatter getDateToday:@"yyyy-MM-dd HH:mm:ss"] StringWhereName:@"SPAJEappNumber" StringWhereValue:[dictTransaction valueForKey:@"SPAJEappNumber"]];
+                
                 [tablePartiesCaprture reloadData];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [tablePartiesCaprture selectRowAtIndexPath:[NSIndexPath indexPathForRow:indexSelected inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];

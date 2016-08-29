@@ -107,6 +107,7 @@
     modelSPAJAnswers = [[ModelSPAJAnswers alloc]init];
     modelSIPData = [[ModelSIPOData alloc]init];
     modelIdentificationType = [[ModelIdentificationType alloc]init];
+    modelSIPremium = [[Model_SI_Premium alloc]init];
     formatter = [[Formatter alloc]init];
     
     [self initialArrayPolicyData];
@@ -425,7 +426,7 @@
 -(NSDictionary *)dictForAutoPopulate{
     NSString *SINO = [modelSPAJTransaction getSPAJTransactionData:@"SPAJSINO" StringWhereName:@"SPAJEappNumber" StringWhereValue:[delegate voidGetEAPPNumber]];
     NSDictionary* dictPOData = [[NSDictionary alloc ]initWithDictionary:[modelSIPData getPO_DataFor:SINO]];
-    
+    NSDictionary* dictPremiData=[[NSDictionary alloc]initWithDictionary:[modelSIPremium getPremium_For:SINO]];
     NSMutableArray* arrayValue = [[NSMutableArray alloc] init];
     if ([stringSection isEqualToString:@"PO"]){
         for (int i=0;i<[newElementArrayName count];i++){
@@ -446,6 +447,11 @@
         }
         NSString* stringRelation = [formatter getRelationNameForHtml:[dictPOData valueForKey:@"RelWithLA"]];
         NSMutableDictionary* dictRelWithLa = [[NSMutableDictionary alloc]initWithObjectsAndKeys:@"RadioButtonProspectiveInsuredRelationAssured",@"elementID",stringRelation,@"Value", nil];
+        [arrayValue addObject:dictRelWithLa];
+    }
+    else if ([stringSection isEqualToString:@"PP"]){
+        NSString* stringPaymentFrequency = [formatter getPaymentFrequencyValue:[dictPremiData valueForKey:@"Payment_Frequency"]];
+        NSMutableDictionary* dictRelWithLa = [[NSMutableDictionary alloc]initWithObjectsAndKeys:@"RadioButtonPremiPaymentFrequency",@"elementID",stringPaymentFrequency,@"Value", nil];
         [arrayValue addObject:dictRelWithLa];
     }
     /*else if ([stringSection isEqualToString:@"PP"]){

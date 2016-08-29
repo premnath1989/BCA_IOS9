@@ -107,12 +107,13 @@
 
     // DID LOAD
     -(void)viewWillAppear:(BOOL)animated{
+        [self voidLoadSIInformation];
         [self voidCheckListCompletion];
         [self voidGetFooterInformation];
     }
 
     -(void)viewDidAppear:(BOOL)animated{
-        [self voidLoadSIInformation];
+        
         [self renameSPAJPDF];
     }
 
@@ -260,6 +261,11 @@
         else{
             [_buttonConfirmSPAJ setEnabled:NO];
         }
+        //[self checkViewEnabled:]
+    }
+
+    -(void)checkViewEnabled:(bool)boolDetail BOOLForm:(bool)boolForm BOOLIDCaptured:(bool)boolIDCaptured BOOLSignature:(bool)boolSignature{
+
     }
 
     -(void)voidGetFooterInformation{

@@ -27,7 +27,8 @@
 #import "Model_SI_Master.h"
 #import "ModelSPAJHtml.h"
 #import "SPAJPDFAutopopulateData.h"
-#import "Model_SI_Premium.h"
+#import "ModelSPAJTransaction.h"
+
 // DECLARATION
 
 @interface SPAJFormGeneration ()
@@ -54,7 +55,7 @@
     NDHTMLtoPDF *PDFCreator;
     ModelSPAJSignature* modelSPAJSignature;
     ModelSPAJHtml *modelSPAJHtml;
-    Model_SI_Premium *modelSIPremium;
+    ModelSPAJTransaction *modelSPAJTransaction;
     Alert* alert;
     
     UserInterface *objectUserInterface;
@@ -85,10 +86,12 @@
     // SYNTHESIZE
 
     @synthesize delegateSPAJMain = _delegateSPAJMain;
-
+@synthesize labelActivityIncdicator;
 
     // DID LOAD
     - (void)viewDidAppear:(BOOL)animated{
+        [labelActivityIncdicator setText:@"Loading Data"];
+        [viewActivityIndicator setHidden:NO];
         [self loadHTMLFile];
     }
 
@@ -118,7 +121,8 @@
         modelSPAJSignature = [[ModelSPAJSignature alloc]init];
         modelSIPOData = [[ModelSIPOData alloc]init];
         modelSIMaster = [[Model_SI_Master alloc]init];
-        //modelSIPremium = [[Mode]]
+        modelSPAJTransaction = [[ModelSPAJTransaction alloc]init];
+        
         [self setNavigationBar];
         
         
@@ -252,8 +256,9 @@
     - (IBAction)actionGoToStep4:(id)sender
     {
         if (!boolTenagaPenjualSigned){
-            [viewActivityIndicator setHidden:NO];
-            [self performSelector:@selector(voidCreateThePDF) withObject:nil afterDelay:2.0];
+            [self voidCreateThePDF];
+            [modelSPAJTransaction updateSPAJTransaction:@"SPAJDateModified" StringColumnValue:[formatter getDateToday:@"yyyy-MM-dd HH:mm:ss"] StringWhereName:@"SPAJEappNumber" StringWhereValue:[dictTransaction valueForKey:@"SPAJEappNumber"]];
+            //[self performSelector:@selector(voidCreateThePDF) withObject:nil afterDelay:2.0];
         }
         else{
             UIAlertController *alertLockForm = [alert alertInformation:NSLocalizedString(@"ALERT_TITLE_LOCK", nil) stringMessage:NSLocalizedString(@"ALERT_MESSAGE_LOCK", nil)];
@@ -292,7 +297,7 @@
             
             UIAlertController *alertLockForm = [alert alertInformation:@"Berhasil" stringMessage:@"File SPAJ.pdf berhasil dibuat"];
             [self presentViewController:alertLockForm animated:YES completion:nil];
-            [viewActivityIndicator setHidden:YES];
+            //[viewActivityIndicator setHidden:YES];
             
             [self voidCheckBooleanLastState];
         }
@@ -430,6 +435,7 @@
         [dictOriginal setObject:modifieArray forKey:@"readFromDB"];
         //return [super readfromDB:finalDictionary];
         [self callSuccessCallback:[params valueForKey:@"successCallBack"] withRetValue:dictOriginal];
+        [viewActivityIndicator setHidden:YES];
         return dictOriginal;
     }
 

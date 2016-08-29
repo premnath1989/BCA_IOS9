@@ -405,6 +405,7 @@
                 }
             }
         }
+        [modelSPAJTransaction updateSPAJTransaction:@"SPAJDateModified" StringColumnValue:[formatter getDateToday:@"yyyy-MM-dd HH:mm:ss"] StringWhereName:@"SPAJEappNumber" StringWhereValue:[dictTransaction valueForKey:@"SPAJEappNumber"]];
         [self actionClearSign:nil];
         [tablePartiesSignature reloadData];
     }
@@ -428,6 +429,9 @@
             
             NSString* dateExpired = [formatter getDateTodayByAddingDays:@"yyyy-MM-dd HH:mm:ss" DaysAdded:30];
             [modelSPAJTransaction updateSPAJTransaction:@"SPAJDateExpired" StringColumnValue:dateExpired StringWhereName:@"SPAJTransactionID" StringWhereValue:[dictTransaction valueForKey:@"SPAJTransactionID"]];
+            
+            [modelSPAJTransaction updateSPAJTransaction:@"SPAJDateModified" StringColumnValue:[formatter getDateToday:@"yyyy-MM-dd HH:mm:ss"] StringWhereName:@"SPAJEappNumber" StringWhereValue:[dictTransaction valueForKey:@"SPAJEappNumber"]];
+            
             [self voidCheckBooleanLastState];
         });
     });

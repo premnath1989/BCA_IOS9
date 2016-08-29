@@ -518,6 +518,29 @@
     return stringReturn;
 }
 
+-(NSString *)getPaymentFrequencyValue:(NSString *)stringPaymentFrequency{
+    NSString* stringReturn;
+    if ([stringPaymentFrequency caseInsensitiveCompare:@"Pembayaran Sekaligus"]== NSOrderedSame){
+        stringReturn = @"full";
+    }
+    else if ([stringPaymentFrequency caseInsensitiveCompare:@"Tahunan"]== NSOrderedSame){
+        stringReturn = @"annualy";
+    }
+    else if ([stringPaymentFrequency caseInsensitiveCompare:@"Semester"]== NSOrderedSame){
+        stringReturn = @"semester";
+    }
+    else if ([stringPaymentFrequency caseInsensitiveCompare:@"Kuartal"]== NSOrderedSame){
+        stringReturn = @"quarterly";
+    }
+    else if ([stringPaymentFrequency caseInsensitiveCompare:@"Bulanan"]== NSOrderedSame){
+        stringReturn = @"monthly";
+    }
+    
+    
+    return stringReturn;
+}
+
+
 -(NSString *)encodedSignatureImage:(UIView *)viewSignature{
     UIView *view = viewSignature;
     UIGraphicsBeginImageContextWithOptions(view.bounds.size, NO, 1);

@@ -16,6 +16,7 @@
 #import "ModelIdentificationType.h"
 #import "Formatter.h"
 #import "ModelOccupation.h"
+#import "Model_SI_Premium.h"
 
 @protocol SPAJCalonPemegangPolisDelegate
     -(NSString *)voidGetEAPPNumber;
@@ -33,6 +34,7 @@
     ModelSPAJAnswers* modelSPAJAnswers;
     ModelSIPOData* modelSIPData;
     ModelIdentificationType* modelIdentificationType;
+    Model_SI_Premium *modelSIPremium;
 }
 @property (strong, nonatomic) NSString* htmlFileName;
 -(void)loadFirstHTML:(NSString*)stringHTMLName PageSection:(NSString *)stringPageSection;

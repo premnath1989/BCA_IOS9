@@ -40,6 +40,7 @@
 -(NSString *)getNationalityNameForHtml:(NSString *)stringNationality;
 -(NSString *)getReligionNameForHtml:(NSString *)stringReligion;
 -(NSString *)getRelationNameForHtml:(NSString *)stringRelation;
+-(NSString *)getPaymentFrequencyValue:(NSString *)stringPaymentFrequency;
 
 -(NSString *)encodedSignatureImage:(UIView *)viewSignature;
 @end

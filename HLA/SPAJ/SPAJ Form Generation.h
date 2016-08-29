@@ -45,6 +45,8 @@
 
     // LABEL
 
+    @property (nonatomic, weak) IBOutlet UILabel *labelActivityIncdicator;
+
     @property (nonatomic, weak) IBOutlet UILabel *labelPageTitle;
     @property (nonatomic, weak) IBOutlet UILabel *labelMenuHint;
 
