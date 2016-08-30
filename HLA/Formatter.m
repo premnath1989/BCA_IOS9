@@ -540,6 +540,25 @@
     return stringReturn;
 }
 
+-(NSString *)getReferralSourceValue:(NSString *)stringReferralSource{
+    NSString* stringReturn;
+    if ([stringReferralSource caseInsensitiveCompare:@"TELLER"]== NSOrderedSame){
+        stringReturn = @"Teller";
+    }
+    else if ([stringReferralSource caseInsensitiveCompare:@"CSO – CUSTOMER SERVICE OFFICER"]== NSOrderedSame){
+        stringReturn = @"CustomerService";
+    }
+    else if ([stringReferralSource caseInsensitiveCompare:@"AO – ACCOUNT OFFICER"]== NSOrderedSame){
+        stringReturn = @"AccountOfficer";
+    }
+    else if ([stringReferralSource caseInsensitiveCompare:@"OTHERS"]== NSOrderedSame){
+        stringReturn = @"Other";
+    }
+    
+    
+    return stringReturn;
+}
+
 
 -(NSString *)encodedSignatureImage:(UIView *)viewSignature{
     UIView *view = viewSignature;

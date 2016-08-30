@@ -35,6 +35,8 @@
     ModelSIPOData* modelSIPData;
     ModelIdentificationType* modelIdentificationType;
     Model_SI_Premium *modelSIPremium;
+    
+    IBOutlet UIView *viewActivityIndicator;
 }
 @property (strong, nonatomic) NSString* htmlFileName;
 -(void)loadFirstHTML:(NSString*)stringHTMLName PageSection:(NSString *)stringPageSection;

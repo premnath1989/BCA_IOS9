@@ -35,6 +35,8 @@
     ModelSPAJSubmitTracker* modelSPAJSubmitTracker;
     Alert* alert;
     NSArray *directoryContent;
+    NSMutableArray* arrayAfterSort;
+    NSMutableArray* arrayFinalSort;
     
     int intUploadCount;
 }
@@ -79,6 +81,36 @@
         NSLog(@"File %d: %@", (count + 1), [directoryContent objectAtIndex:count]);
     }
     
+    NSMutableArray* arrayBeforeSort = [[NSMutableArray alloc]initWithArray:directoryContent];
+    
+    arrayAfterSort = [[NSMutableArray alloc]init];
+    
+    for (int i=0; i<[arrayBeforeSort count];i++){
+        if ([[arrayBeforeSort objectAtIndex:i] rangeOfString:[dictTransaction valueForKey:@"SPAJSINO"]].location != NSNotFound) {
+            [arrayAfterSort insertObject:[arrayBeforeSort objectAtIndex:i] atIndex:0];
+        }
+        else if ([[arrayBeforeSort objectAtIndex:i] rangeOfString:@"SPAJ"].location != NSNotFound){
+            [arrayAfterSort insertObject:[arrayBeforeSort objectAtIndex:i] atIndex:1];
+        }
+        else{
+            //[arrayAfterSort addObject:[arrayBeforeSort objectAtIndex:i]];
+            [arrayAfterSort insertObject:[arrayBeforeSort objectAtIndex:i] atIndex:i];
+        }
+    }
+    
+    arrayFinalSort = [[NSMutableArray alloc]init];
+    for (int i=0; i<[arrayAfterSort count];i++){
+        if ([[arrayAfterSort objectAtIndex:i] rangeOfString:[dictTransaction valueForKey:@"SPAJSINO"]].location != NSNotFound) {
+            [arrayFinalSort insertObject:[arrayAfterSort objectAtIndex:i] atIndex:0];
+        }
+        else if ([[arrayAfterSort objectAtIndex:i] rangeOfString:@"SPAJ"].location != NSNotFound){
+            [arrayFinalSort insertObject:[arrayAfterSort objectAtIndex:i] atIndex:1];
+        }
+        else{
+            //[arrayAfterSort addObject:[arrayBeforeSort objectAtIndex:i]];
+            [arrayFinalSort insertObject:[arrayAfterSort objectAtIndex:i] atIndex:i];
+        }
+    }
     [tableFileList reloadData];
 }
 
@@ -99,9 +131,10 @@
 
 -(void)voidLoadFile:(int)arrayIndex{
     @try {
-        NSString* fileName = [directoryContent objectAtIndex:arrayIndex];
-        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[formatter generateSPAJFileDirectory:[dictTransaction valueForKey:@"SPAJEappNumber"]],fileName]];
-        
+        //NSString* fileName = [directoryContent objectAtIndex:arrayIndex];
+        NSString* fileName = [arrayFinalSort objectAtIndex:arrayIndex];
+        //NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[formatter generateSPAJFileDirectory:[dictTransaction valueForKey:@"SPAJEappNumber"]],fileName]];
+        NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@",[formatter generateSPAJFileDirectory:[dictTransaction valueForKey:@"SPAJEappNumber"]],fileName]];
         NSString* fileType = [formatter findExtensionOfFileInUrl:url];
         [imageViewDisplayImage setImage:nil];
         [webViewDisplayPDF loadHTMLString:@"" baseURL:nil];
@@ -259,7 +292,8 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [directoryContent count];
+    //return [directoryContent count];
+    return [arrayFinalSort count];
 }
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -288,7 +322,8 @@
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
-    [cell.textLabel setText:[directoryContent objectAtIndex:indexPath.row]];
+    //[cell.textLabel setText:[directoryContent objectAtIndex:indexPath.row]];
+    [cell.textLabel setText:[arrayFinalSort objectAtIndex:indexPath.row]];
     [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.textLabel.font = [UIFont fontWithName:@"BPReplay" size:17.0];

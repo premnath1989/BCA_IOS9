@@ -9,7 +9,7 @@
 
 // IMPORT
 #define kPaperSizeA4 CGSizeMake(595,842)
-#define kPaperSizeA4Portrait CGSizeMake(750,1300)
+#define kPaperSizeA4Portrait CGSizeMake(750,1250)
 
 #import <objc/runtime.h>
 
@@ -589,19 +589,19 @@
         CGContextDrawPDFPage(pdfContext, page);
         
         // Draw the signature on pdfContext
-        pageRect = CGRectMake(67, 507,96 , 53);
+        pageRect = CGRectMake(67, 500,96 , 53);
         CGImageRef pageImage1 = [imgSignature1 CGImage];
         CGContextDrawImage(pdfContext, pageRect, pageImage1);
         
-        pageRect = CGRectMake(239, 507,96 , 53);
+        pageRect = CGRectMake(239, 500,96 , 53);
         CGImageRef pageImage2 = [imgSignature2 CGImage];
         CGContextDrawImage(pdfContext, pageRect, pageImage2);
         
-        pageRect = CGRectMake(407, 507,96 , 53);
+        pageRect = CGRectMake(407, 500,96 , 53);
         CGImageRef pageImage3 = [imgSignature3 CGImage];
         CGContextDrawImage(pdfContext, pageRect, pageImage3);
         
-        pageRect = CGRectMake(575, 507,96 , 53);
+        pageRect = CGRectMake(575, 500,96 , 53);
         CGImageRef pageImage4 = [imgSignature4 CGImage];
         CGContextDrawImage(pdfContext, pageRect, pageImage4);
         
@@ -838,7 +838,13 @@
     -(NSDictionary *)getDictionaryForReferralData:(NSString *)stringDBColumnName HTMLID:(NSString *)stringHTMLID{
         NSMutableDictionary* dictReferralData=[[NSMutableDictionary alloc]init];
         [dictReferralData setObject:stringHTMLID forKey:@"elementID"];
-        [dictReferralData setObject:[modelProspectProfile selectProspectData:stringDBColumnName ProspectIndex:[[dictionaryPOData valueForKey:@"PO_ClientID"] intValue]]?:@"" forKey:@"Value"];
+        if ([stringDBColumnName isEqualToString:@"ReferralSource"]){
+            [dictReferralData setObject:[formatter getReferralSourceValue:[modelProspectProfile selectProspectData:stringDBColumnName ProspectIndex:[[dictionaryPOData valueForKey:@"PO_ClientID"] intValue]]]?:@"" forKey:@"Value"];
+        }
+        else{
+            [dictReferralData setObject:[modelProspectProfile selectProspectData:stringDBColumnName ProspectIndex:[[dictionaryPOData valueForKey:@"PO_ClientID"] intValue]]?:@"" forKey:@"Value"];
+        }
+        
         [dictReferralData setObject:@"1" forKey:@"CustomerID"];
         [dictReferralData setObject:@"1" forKey:@"SPAJID"];
         return dictReferralData;
@@ -931,15 +937,18 @@
             [modifieArray addObject:[self getDictionaryForSignature:[arrayDBSignature objectAtIndex:i] HTMLID:[arrayHTMLSignature objectAtIndex:i]]];
         }
         
-        [modifieArray addObject:[self getDictionaryForSPAJNumber:@"SPAJNumber" HTMLID:@"TextHeaderSPAJNumber"]];
+        //[modifieArray addObject:[self getDictionaryForSPAJNumber:@"SPAJNumber" HTMLID:@"TextHeaderSPAJNumber"]];
         [modifieArray addObject:[self getDictionaryForSPAJNumber:@"SPAJNumber" HTMLID:@"TextSPAJNumber"]];
         [dictOriginal setObject:modifieArray forKey:@"readFromDB"];
         [self callSuccessCallback:[params valueForKey:@"successCallBack"] withRetValue:dictOriginal];
+        //[webview setHidden:NO];
         [self voidCreateThePDF];
         return dictOriginal;
     }
 
     - (void)webViewDidFinishLoad:(UIWebView *)webView{
+        NSString* spajNumber = [modelSPAJTransaction getSPAJTransactionData:@"SPAJNumber" StringWhereName:@"SPAJTransactionID" StringWhereValue:[dictTransaction valueForKey:@"SPAJTransactionID"]];
+        [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"setHeader(\"%@\");",spajNumber]];
         [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"readfromDB();"]];
     }
 

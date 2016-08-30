@@ -7021,8 +7021,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bcalife.bless;
 				PRODUCT_NAME = BLESS;
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "5a9c3743-997b-4470-bf7c-e9ac5f57df00";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5a9c3743-997b-4470-bf7c-e9ac5f57df00";
 				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = "armv7 armv6 i386";
 				WRAPPER_EXTENSION = app;
@@ -7078,8 +7078,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bcalife.bless;
 				PRODUCT_NAME = BLESS;
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "5a9c3743-997b-4470-bf7c-e9ac5f57df00";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5a9c3743-997b-4470-bf7c-e9ac5f57df00";
 				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = "armv7 armv6 i386";
 				WRAPPER_EXTENSION = app;
@@ -7176,8 +7176,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bcalife.bless;
 				PRODUCT_NAME = BLESS;
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "5a9c3743-997b-4470-bf7c-e9ac5f57df00";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5a9c3743-997b-4470-bf7c-e9ac5f57df00";
 				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = "armv7 armv6 i386";
 				WRAPPER_EXTENSION = app;

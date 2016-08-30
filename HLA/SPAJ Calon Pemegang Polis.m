@@ -120,6 +120,8 @@
     //define the webview coordinate
     webview=[[UIWebView alloc]initWithFrame:CGRectMake(5, 0, 745,708)];
     webview.scrollView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
+    
+    [self.view.superview bringSubviewToFront:viewActivityIndicator];
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 }
@@ -320,7 +322,9 @@
     [finalDictionary setObject:answerDictionary forKey:@"data"];
     [finalDictionary setValue:[params valueForKey:@"successCallBack"] forKey:@"successCallBack"];
     [finalDictionary setValue:[params valueForKey:@"errorCallback"] forKey:@"errorCallback"];
-    return [super readfromDB:finalDictionary];
+    [super readfromDB:finalDictionary];
+    [viewActivityIndicator setHidden:YES];
+    return finalDictionary;
 }
 
 -(NSString *)getPOIndexNumber{
@@ -454,6 +458,11 @@
         NSMutableDictionary* dictRelWithLa = [[NSMutableDictionary alloc]initWithObjectsAndKeys:@"RadioButtonPremiPaymentFrequency",@"elementID",stringPaymentFrequency,@"Value", nil];
         [arrayValue addObject:dictRelWithLa];
     }
+    /*else if (([stringSection isEqualToString:@"KS_PH"])||([stringSection isEqualToString:@"KS_TR"])){
+        NSString* stringRelation = [formatter getRelationNameForHtml:[dictPOData valueForKey:@"RelWithLA"]];
+        NSMutableDictionary* dictRelWithLa = [[NSMutableDictionary alloc]initWithObjectsAndKeys:@"RelationStatus",@"elementID",stringRelation,@"Value", nil];
+        [arrayValue addObject:dictRelWithLa];
+    }*/
     /*else if ([stringSection isEqualToString:@"PP"]){
         NSString* stringPaymentFrequency = [formatter getRelationNameForHtml:[dictPOData valueForKey:@"RelWithLA"]];
         NSMutableDictionary* dictRelWithLa = [[NSMutableDictionary alloc]initWithObjectsAndKeys:@"RadioButtonProspectiveInsuredRelationAssured",@"elementID",stringRelation,@"Value", nil];
@@ -493,6 +502,7 @@
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
+    [viewActivityIndicator setHidden:NO];
     NSString *jsonString;
     NSError *error;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:[self dictForAutoPopulate]
@@ -505,6 +515,13 @@
         jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
         [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"AutoPopulate('%@');", jsonString]];
         NSLog(@"json string %@",jsonString);
+    }
+    
+    if (([stringSection isEqualToString:@"KS_PH"])||([stringSection isEqualToString:@"KS_TR"])){
+        NSString *SINO = [modelSPAJTransaction getSPAJTransactionData:@"SPAJSINO" StringWhereName:@"SPAJEappNumber" StringWhereValue:[delegate voidGetEAPPNumber]];
+        NSDictionary* dictPOData = [[NSDictionary alloc ]initWithDictionary:[modelSIPData getPO_DataFor:SINO]];
+        NSString* stringRelation = [formatter getRelationNameForHtml:[dictPOData valueForKey:@"RelWithLA"]];
+        [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"CheckRelationshipStatus('%@');",stringRelation]];
     }
     
     [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"readfromDB();"]];

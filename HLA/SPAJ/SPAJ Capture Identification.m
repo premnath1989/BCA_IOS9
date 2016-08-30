@@ -117,7 +117,7 @@ NSString* const Back = @"Back";
         //mutableArrayNumberListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"1", @"2", @"3", @"4", nil];
         //mutableArrayListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"Calon Pemegang Polis ", @"Calon Tertanggung", @"Orang Tua / Wali yang sah", @"Tenaga Penjual", nil];
         //mutableArrayListOfSubTitleMenu = [[NSMutableArray alloc] initWithObjects:@"", @"",@"", @"", nil];
-        arrayIDBackDisabled = [[NSMutableArray alloc]initWithObjects:@"PASPOR",@"KITAS",@"KIMS/KITAS", nil];
+        arrayIDBackDisabled = [[NSMutableArray alloc]initWithObjects:@"PASPOR",@"KITAS",@"KIMS/KITAS",@"Form Tenaga Penjual", nil];
         mutableArrayNumberListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"1", @"2", @"3",@"4",@"5",@"6", nil];
         mutableArrayListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"Calon Pemegang Polis ", @"Calon Tertanggung", @"Orang Tua / Wali yang sah",@"Tenaga Penjual",@"Payment",@"Other", nil];
         mutableArrayListOfSubTitleMenu = [[NSMutableArray alloc] initWithObjects:@"", @"",@"",@"",@"",@"", nil];
@@ -228,7 +228,7 @@ NSString* const Back = @"Back";
             case 3:
                 //[self actionViewPhoto:nil];
                 [self showIDType:indexSelected];
-                [buttonIDTypeSelection setEnabled:true];
+                [buttonIDTypeSelection setEnabled:false];
                 break;
             case 4:
                 //[self actionViewPhoto:nil];
@@ -328,7 +328,7 @@ NSString* const Back = @"Back";
         }
         else if (IndexRow==3){
             stringIDTypeIdentifier = @"" ;
-            NSString* identityDesc = @"Select Identification Type" ;
+            NSString* identityDesc = @"Form Tenaga Penjual" ;
             [buttonIDTypeSelection setTitle:identityDesc forState:UIControlStateNormal];
         }
         else{
@@ -539,7 +539,8 @@ NSString* const Back = @"Back";
             }
             case 3:{
                 stringIDIdentifier = [modelSPAJIDCapture selectIDType:@"SPAJIDTypeParty4" SPAJSection:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
-                NSString *identityDescNew =[modelIdentificationType getOtherTypeDesc:stringIDTypeIdentifier];
+                //NSString *identityDescNew =[modelIdentificationType getOtherTypeDesc:stringIDTypeIdentifier];
+                NSString *identityDescNew = @"Form Tenaga Penjual";
                 fileName = [NSString stringWithFormat:@"/%@_%@_%@_%@.jpg",stringEAPPPath,TenagaPenjual,identityDescNew,Front];
                 imagePath = [filePathApp stringByAppendingString:fileName];
                 imageID = [UIImage imageWithContentsOfFile:imagePath];
@@ -995,7 +996,7 @@ NSString* const Back = @"Back";
         // Dispose of any resources that can be recreated.
     }
 
-#pragma mark delegate IDType
+    #pragma mark delegate IDType
     -(void)IDTypeDescSelected:(NSString *)selectedIDType
     {
         if ([selectedIDType isEqualToString:@"- SELECT -"]){
@@ -1029,7 +1030,6 @@ NSString* const Back = @"Back";
     -(UIImage *) generateWatermarkForImage:(UIImage *) mainImg{
         UIImage *backgroundImage = mainImg;
         UIImage *watermarkImage = [UIImage imageNamed:@"watermarkID.png"];
-        
         
         //Now re-drawing your  Image using drawInRect method
         UIGraphicsBeginImageContext(backgroundImage.size);

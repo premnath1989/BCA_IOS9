@@ -408,3 +408,16 @@ main section .Note {
   width: 24%;
   display: inline-block;
 }
+
+.Horizontal25of100 thead tr th {
+  width: 288px;
+  height: 30px;
+}
+
+.Horizontal25of100 tbody tr td {
+  width: 288px;
+}
+
+.Horizontal25of100 tfoot tr td {
+  width: 288px;
+}

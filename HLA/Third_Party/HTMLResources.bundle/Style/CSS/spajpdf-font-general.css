@@ -340,6 +340,7 @@ main section table.SignatureMedium {
   margin-bottom: 20px;
   min-width: 144px;
   padding: 0px;
+  vertical-align: top;
   border-style: solid;
   border-width: 1px;
   border-radius: 4px;
@@ -354,6 +355,10 @@ main section table.SignatureMedium thead tr th {
   text-align: center;
   border-bottom-style: solid;
   border-width: 1px;
+}
+
+main section table.SignatureMedium thead tr th .Note {
+  font-size: 0.7em;
 }
 
 main section table.SignatureMedium tbody tr td {
@@ -457,6 +462,7 @@ table.Round thead tr:first-child th:last-child {
 }
 
 table.Round tbody tr td {
+  height: 20px;
   padding: 5px;
   font-size: 0.75em;
   border-style: solid;

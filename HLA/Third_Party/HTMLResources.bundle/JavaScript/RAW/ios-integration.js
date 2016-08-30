@@ -101,7 +101,7 @@ function onError (ret)
 	if (ret)
 	{
 		var returnRet = JSON.parse(ret);
-		alert(returnRet.error);
+		// alert(returnRet.error);
     }
 }
 
@@ -127,6 +127,8 @@ function savetoDB()
 	else if (stringPageSectionCurrent == stringPageSectionBeneficiariesList)
 	{
 		// alert("no getter !, arrayBeneficiariesList length : " + arrayBeneficiarisList.length);
+		arrayAdd(arrayBeneficiariesList, "TextBeneficiariesListSharePercentage", getTextForm("TextBeneficiariesListSharePercentage"));
+		// alert("TextBeneficiariesListSharePercentage" + " // " + getTextForm("TextBeneficiariesListSharePercentage"))
 		objectContent = arrayBeneficiariesList;
 	}
     else

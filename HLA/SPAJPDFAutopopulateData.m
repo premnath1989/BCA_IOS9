@@ -30,6 +30,7 @@
     [arrayDBReferral addObject:@"BranchCode"];
     [arrayDBReferral addObject:@"Kanwil"];
     [arrayDBReferral addObject:@"NIP"];
+    [arrayDBReferral addObject:@"ReferralSource"];
     
     return arrayDBReferral;
 }
@@ -76,6 +77,7 @@
     [arrayHTMLReferal addObject:@"TextBranchCode"];
     [arrayHTMLReferal addObject:@"AreaKanwilAgent"];
     [arrayHTMLReferal addObject:@"TextAgentID"];
+    [arrayHTMLReferal addObject:@"RadioButtonReferenceSource"];
     
     return arrayHTMLReferal;
 }
@@ -98,7 +100,7 @@
 
 -(NSMutableArray *)arrayInitializeSignatureHTML{ //premnath Vijaykumar
     NSMutableArray *arrayHTMLSignature =[[NSMutableArray alloc]init];
-    [arrayHTMLSignature addObject:@"LineSignedPlace"];
+    [arrayHTMLSignature addObject:@"TextSignedPlace"];
     [arrayHTMLSignature addObject:@"LineSignedDateDay"];
     return arrayHTMLSignature;
 }

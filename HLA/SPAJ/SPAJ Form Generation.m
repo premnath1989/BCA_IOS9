@@ -340,7 +340,13 @@
     -(NSDictionary *)getDictionaryForReferralData:(NSString *)stringDBColumnName HTMLID:(NSString *)stringHTMLID{
         NSMutableDictionary* dictReferralData=[[NSMutableDictionary alloc]init];
         [dictReferralData setObject:stringHTMLID forKey:@"elementID"];
-        [dictReferralData setObject:[modelProspectProfile selectProspectData:stringDBColumnName ProspectIndex:[[dictionaryPOData valueForKey:@"PO_ClientID"] intValue]]?:@"" forKey:@"Value"];
+        if ([stringDBColumnName isEqualToString:@"ReferralSource"]){
+            [dictReferralData setObject:[formatter getReferralSourceValue:[modelProspectProfile selectProspectData:stringDBColumnName ProspectIndex:[[dictionaryPOData valueForKey:@"PO_ClientID"] intValue]]]?:@"" forKey:@"Value"];
+        }
+        else{
+            [dictReferralData setObject:[modelProspectProfile selectProspectData:stringDBColumnName ProspectIndex:[[dictionaryPOData valueForKey:@"PO_ClientID"] intValue]]?:@"" forKey:@"Value"];
+        }
+        
         [dictReferralData setObject:@"1" forKey:@"CustomerID"];
         [dictReferralData setObject:@"1" forKey:@"SPAJID"];
         return dictReferralData;
@@ -441,6 +447,7 @@
 
     - (void)webViewDidFinishLoad:(UIWebView *)webView{
        //[webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"document.getElementById('read').click()"]];
+        
         [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"readfromDB();"]];
     }
 
