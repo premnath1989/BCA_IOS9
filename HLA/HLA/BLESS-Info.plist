@@ -49,7 +49,7 @@
 	<key>Prod_Webservices</key>
 	<string></string>
 	<key>UAT_Webservices</key>
-	<string>http://mposws.azurewebsites.net</string>
+	<string>http://mpos-sino-uat.cloudapp.net</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>BPreplay.otf</string>

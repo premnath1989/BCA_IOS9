@@ -261,11 +261,51 @@
         else{
             [_buttonConfirmSPAJ setEnabled:NO];
         }
-        //[self checkViewEnabled:]
+        [self checkViewEnabled:detailCapture BOOLForm:formGeneration BOOLIDCaptured:idCaptured BOOLSignature:signatureCaptured];
     }
 
     -(void)checkViewEnabled:(bool)boolDetail BOOLForm:(bool)boolForm BOOLIDCaptured:(bool)boolIDCaptured BOOLSignature:(bool)boolSignature{
+        [_viewStep3 setUserInteractionEnabled:false];
+        [_viewStep4 setUserInteractionEnabled:false];
+        [_viewStep5 setUserInteractionEnabled:false];
+        [_viewStep6 setUserInteractionEnabled:false];
+        if (boolDetail){
+            if (boolForm){
+                if (boolIDCaptured){
+                    if (boolSignature){
+                        [_viewStep3 setUserInteractionEnabled:true];
+                        [_viewStep4 setUserInteractionEnabled:true];
+                        [_viewStep5 setUserInteractionEnabled:true];
+                        [_viewStep6 setUserInteractionEnabled:true];
+                    }
+                    else{
+                        [_viewStep3 setUserInteractionEnabled:true];
+                        [_viewStep4 setUserInteractionEnabled:true];
+                        [_viewStep5 setUserInteractionEnabled:true];
+                        [_viewStep6 setUserInteractionEnabled:true];
+                    }
+                }
+                else{
+                    [_viewStep3 setUserInteractionEnabled:true];
+                    [_viewStep4 setUserInteractionEnabled:true];
+                    [_viewStep5 setUserInteractionEnabled:true];
+                    [_viewStep6 setUserInteractionEnabled:false];
+                }
+            }
+            else{
+                [_viewStep3 setUserInteractionEnabled:true];
+                [_viewStep4 setUserInteractionEnabled:true];
+                [_viewStep5 setUserInteractionEnabled:false];
+                [_viewStep6 setUserInteractionEnabled:false];
+            }
 
+        }
+        else{
+            [_viewStep3 setUserInteractionEnabled:true];
+            [_viewStep4 setUserInteractionEnabled:false];
+            [_viewStep5 setUserInteractionEnabled:false];
+            [_viewStep6 setUserInteractionEnabled:false];
+        }
     }
 
     -(void)voidGetFooterInformation{
