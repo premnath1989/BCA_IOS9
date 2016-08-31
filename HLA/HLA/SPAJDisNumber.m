@@ -177,7 +177,8 @@
 {
     [spinnerLoading startLoadingSpinner:self.view label:@"Loading"];
     
-    NSString *serverURL = [NSString stringWithFormat:@"%@/Service2.svc/AllocateSpajForAgent?agentCode=11600026",[(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL]];
+    LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
+    NSString *serverURL = [NSString stringWithFormat:@"%@/Service2.svc/AllocateSpajForAgent?agentCode=%@",[(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL], [loginDB AgentCodeLocal]];
     
     NSURLSession *session = [NSURLSession sharedSession];
     [[session dataTaskWithURL:[NSURL URLWithString:serverURL]
@@ -211,7 +212,6 @@
                     [ResponseDict setValue:jsonArray forKey:@"SPAJPackNumber"];
                     NSLog(@"%@",ResponseDict);
                     
-                    LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
                     [loginDB insertTableFromJSON:ResponseDict databasePath:@"hladb.sqlite"];
                     
                     dispatch_async(dispatch_get_main_queue(), ^{

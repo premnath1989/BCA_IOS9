@@ -6985,6 +6985,7 @@
         [responseData appendData:data];
     }
 }
+
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
     if (binding.logXMLInOut) {
