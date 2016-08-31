@@ -77,6 +77,7 @@ NSString* const Back = @"Back";
         modelSIPOData = [[ModelSIPOData alloc]init];
         modelIdentificationType = [[ModelIdentificationType alloc]init];
         modelSPAJSignature = [[ModelSPAJSignature alloc]init];
+        modelSPAJAnswers = [[ModelSPAJAnswers alloc]init];
         formatter = [[Formatter alloc]init];
         
         [self setNavigationBar];
@@ -111,6 +112,24 @@ NSString* const Back = @"Back";
         [self.navigationItem setTitle:@"Capture Identification Documents"];
         [self.navigationController.navigationBar setTitleTextAttributes:
          @{NSForegroundColorAttributeName:[formatter navigationBarTitleColor],NSFontAttributeName: [formatter navigationBarTitleFont]}];
+    }
+
+    -(NSString *)getIDTypeForPemegangPolis{
+        NSString* stringIDType;
+        NSString* stringWhere = [NSString stringWithFormat:@"where elementID ='RadioButtonPolicyHolderIDType' and SPAJTransactionID = %i",[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
+                NSString* stringPOIDFromSPAJAnswers =[modelSPAJAnswers selectSPAJAnswersData:@"Value" StringWhere:stringWhere];
+        NSString* stringDBID = [formatter getRevertIDNameFromHtml:stringPOIDFromSPAJAnswers];
+        stringIDType = stringDBID;
+        return stringIDType;
+    }
+
+    -(NSString *)getIDTypeForTertanggung{
+        NSString* stringIDType;
+        NSString* stringWhere = [NSString stringWithFormat:@"where elementID ='RadioButtonProspectiveInsuredIDType' and SPAJTransactionID = %i",[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
+        NSString* stringTRIDFromSPAJAnswers =[modelSPAJAnswers selectSPAJAnswersData:@"Value" StringWhere:stringWhere];
+        NSString* stringDBID = [formatter getRevertIDNameFromHtml:stringTRIDFromSPAJAnswers];
+        stringIDType = stringDBID;
+        return stringIDType;
     }
 
     -(void)voidArrayInitialization{
@@ -320,10 +339,16 @@ NSString* const Back = @"Back";
     }
 
     -(void)showIDType:(int)IndexRow{
-        if (IndexRow<2)
+        if (IndexRow==0)
         {
-            stringIDTypeIdentifier = [modelProspectProfile selectProspectData:@"OtherIDType" ProspectIndex:[[dictionaryPOData valueForKey:@"PO_ClientID"] intValue]] ;
-            NSString* identityDesc = [modelIdentificationType getOtherTypeDesc:stringIDTypeIdentifier] ;
+            stringIDTypeIdentifier = [modelIdentificationType getOtherTypeID:[self getIDTypeForPemegangPolis]];//[modelProspectProfile selectProspectData:@"OtherIDType" ProspectIndex:[[dictionaryPOData valueForKey:@"PO_ClientID"] intValue]] ;
+            NSString* identityDesc = [self getIDTypeForPemegangPolis];//[modelIdentificationType getOtherTypeDesc:stringIDTypeIdentifier] ;
+            [buttonIDTypeSelection setTitle:identityDesc forState:UIControlStateNormal];
+        }
+        else if (IndexRow==1)
+        {
+            stringIDTypeIdentifier = [modelIdentificationType getOtherTypeID:[self getIDTypeForTertanggung]];//[modelProspectProfile selectProspectData:@"OtherIDType" ProspectIndex:[[dictionaryPOData valueForKey:@"PO_ClientID"] intValue]] ;
+            NSString* identityDesc = [self getIDTypeForPemegangPolis];//[modelIdentificationType getOtherTypeDesc:stringIDTypeIdentifier] ;
             [buttonIDTypeSelection setTitle:identityDesc forState:UIControlStateNormal];
         }
         else if (IndexRow==3){

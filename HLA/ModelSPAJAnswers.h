@@ -14,5 +14,5 @@
     FMResultSet *results;
 }
 -(int)voidGetDuplicateRowID:(NSDictionary *)dictionaryCFFAnswers;
-
+-(NSString *)selectSPAJAnswersData:(NSString *)stringColumnName StringWhere:(NSString *)stringWhere;
 @end

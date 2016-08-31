@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "Model_SI_Master.h"
+#import "SIListingForSPAJTableViewCell.h"
+
 @protocol SIListingDelegate
 -(void)selectedSI:(NSString *)SINO;
 @end
@@ -17,6 +19,7 @@
     id <SIListingDelegate> _delegate;
     NSArray *sorted;
     NSMutableArray* arrayPOName;
+    NSMutableArray* arrayProductName;
     NSMutableArray* arraySINo;
     NSMutableArray* arraySIDate;
 }

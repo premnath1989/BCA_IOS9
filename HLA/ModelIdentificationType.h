@@ -15,4 +15,5 @@
 }
 -(NSDictionary *)getIDType;
 -(NSString*)getOtherTypeDesc : (NSString*)otherId;
+-(NSString*)getOtherTypeID : (NSString*)otherDesc;
 @end

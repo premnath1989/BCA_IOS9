@@ -28,9 +28,17 @@ NSString *SelectedString;
     return self;
 }
 
+/*- (void)viewWillLayoutSubviews{
+    [super viewWillLayoutSubviews];
+    self.view.superview.bounds = CGRectMake(0, 0, 450, 500);
+    [self.view.superview setBackgroundColor:[UIColor clearColor]];
+}*/
+
+
 -(void)loadData{
     sorted = [[NSArray alloc]init];
     NSDictionary* dictSIInfo = [[NSDictionary alloc]initWithDictionary:[modelSIMaster getNonQuickQuoteIlustrationata:@"sim.SINO" Method:@"DESC"]];
+    arrayProductName = [[NSMutableArray alloc]initWithArray:[dictSIInfo valueForKey:@"ProductName"]];
     arrayPOName = [[NSMutableArray alloc] initWithArray:[dictSIInfo valueForKey:@"PO_Name"]];;
     arraySINo = [[NSMutableArray alloc] initWithArray:[dictSIInfo valueForKey:@"SINO"]];
     arraySIDate = [[NSMutableArray alloc] initWithArray:[dictSIInfo valueForKey:@"CreatedDate"]];
@@ -62,6 +70,21 @@ NSString *SelectedString;
     self.tableView.tableHeaderView = zzz;
     CGRect searchbarFrame = zzz.frame;
     [self.tableView scrollRectToVisible:searchbarFrame animated:NO];
+    
+    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    // Prevent the cell from inheriting the Table View's margin settings
+    if ([self.tableView respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
+        [self.tableView setPreservesSuperviewLayoutMargins:NO];
+    }
+    
+    // Explictly set your cell's layout margins
+    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
+        [self.tableView setLayoutMargins:UIEdgeInsetsZero];
+    }
+
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -98,7 +121,6 @@ NSString *SelectedString;
 }
 
 #pragma mark - Table view data source
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
@@ -111,47 +133,76 @@ NSString *SelectedString;
         return [FilteredData count];;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 79;
+}
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Remove seperator inset
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    // Prevent the cell from inheriting the Table View's margin settings
+    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
+        [cell setPreservesSuperviewLayoutMargins:NO];
+    }
+    
+    // Explictly set your cell's layout margins
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    //static NSString *CellIdentifier = @"Cell";
+    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    SIListingForSPAJTableViewCell *cellSISPAJListing = (SIListingForSPAJTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"SIListingForSPAJTableViewCell"];
     
-    if (cell==nil) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+    if (cellSISPAJListing == nil)
+    {
+        NSArray *arrayNIB = [[NSBundle mainBundle] loadNibNamed:@"SIListingForSPAJTableViewCell" owner:self options:nil];
+        cellSISPAJListing = [arrayNIB objectAtIndex:0];
+    }
+    else
+    {
+        
     }
     
     if (isFiltered == true)
     {
         NSString *ms = [FilteredData objectAtIndex:indexPath.row];
-        cell.textLabel.text = ms;
+        cellSISPAJListing.textLabel.text = ms;
         
         
         if (ms == SelectedString) {
-            cell.accessoryType= UITableViewCellAccessoryCheckmark;
+            cellSISPAJListing.accessoryType= UITableViewCellAccessoryCheckmark;
         }
         else
         {
-            cell.accessoryType = UITableViewCellAccessoryNone;
+            cellSISPAJListing.accessoryType = UITableViewCellAccessoryNone;
         }
         
     }
     else{
         NSString *ms;
         ms = [arrayPOName objectAtIndex:indexPath.row];
-        cell.textLabel.text = ms;
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ - %@",[arraySIDate objectAtIndex:indexPath.row],[arraySINo objectAtIndex:indexPath.row]];
+        cellSISPAJListing.labelPOName.text = ms;
+        cellSISPAJListing.labelSIDateNumber.text = [NSString stringWithFormat:@"%@ / %@",[arraySIDate objectAtIndex:indexPath.row],[arraySINo objectAtIndex:indexPath.row]];
+        cellSISPAJListing.labelProductName.text = [NSString stringWithFormat:@"%@",[arrayProductName objectAtIndex:indexPath.row]];
+        
         if (ms == SelectedString) {
-            cell.accessoryType= UITableViewCellAccessoryCheckmark;
+            cellSISPAJListing.accessoryType= UITableViewCellAccessoryCheckmark;
         }
         else
         {
-            cell.accessoryType = UITableViewCellAccessoryNone;
+            cellSISPAJListing.accessoryType = UITableViewCellAccessoryNone;
         }
     }
     
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.textLabel.font = [UIFont fontWithName:@"TreBuchet MS" size:16 ];
-    return cell;
+    cellSISPAJListing.selectionStyle = UITableViewCellSelectionStyleNone;
+    cellSISPAJListing.labelPOName.font = [UIFont fontWithName:@"TreBuchet MS" size:16 ];
+    return cellSISPAJListing;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

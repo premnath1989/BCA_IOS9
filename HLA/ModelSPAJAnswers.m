@@ -31,4 +31,23 @@
     return IndexNo;
 }
 
+-(NSString *)selectSPAJAnswersData:(NSString *)stringColumnName StringWhere:(NSString *)stringWhere{
+    NSString *stringReturn;
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select %@ from SPAJAnswers %@",stringColumnName,stringWhere]];
+    while ([s next]) {
+        stringReturn = [s stringForColumn:stringColumnName];
+    }
+    
+    [results close];
+    [database close];
+    return stringReturn;
+}
+
+
 @end

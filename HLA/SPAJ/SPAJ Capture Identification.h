@@ -25,6 +25,7 @@
 #import "ModelSPAJSignature.h"
 #import "SPAJIDCapturedViewController.h"
 #import "ModelProspectProfile.h"
+#import "ModelSPAJAnswers.h"
 // DECLARATION
 
 /*@protocol SPAJMainDelegate
@@ -53,6 +54,7 @@
         Formatter* formatter;
         ModelIdentificationType* modelIdentificationType;
         ModelSPAJSignature* modelSPAJSignature;
+        ModelSPAJAnswers* modelSPAJAnswers;
         
         CameraViewController *imagePickerController;
         BOOL cameraFront;

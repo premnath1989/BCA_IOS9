@@ -42,6 +42,7 @@
 -(NSString *)getRelationNameForHtml:(NSString *)stringRelation;
 -(NSString *)getPaymentFrequencyValue:(NSString *)stringPaymentFrequency;
 -(NSString *)getReferralSourceValue:(NSString *)stringReferralSource;
+-(NSString *)getRevertIDNameFromHtml:(NSString *)stringID;
 
 -(NSString *)encodedSignatureImage:(UIView *)viewSignature;
 @end

@@ -422,6 +422,8 @@
 		43870CC41D362AE70035143C /* AnalisaKebutuhanInvestasiViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43870CC21D362AE70035143C /* AnalisaKebutuhanInvestasiViewController.xib */; };
 		438726541D0FB55F00F92A6B /* ModelCFFTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = 438726531D0FB55F00F92A6B /* ModelCFFTransaction.m */; };
 		438726571D0FE6FB00F92A6B /* ModelProspectSpouse.m in Sources */ = {isa = PBXBuildFile; fileRef = 438726561D0FE6FB00F92A6B /* ModelProspectSpouse.m */; };
+		438C65D81D76C275005ECF1B /* SIListingForSPAJTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 438C65D61D76C275005ECF1B /* SIListingForSPAJTableViewCell.m */; };
+		438C65D91D76C275005ECF1B /* SIListingForSPAJTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 438C65D71D76C275005ECF1B /* SIListingForSPAJTableViewCell.xib */; };
 		438CBC7A1D616D1C00FF44B1 /* ModelSPAJSubmitTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 438CBC791D616D1C00FF44B1 /* ModelSPAJSubmitTracker.m */; };
 		438DB5F41D49C28F00B92FEF /* ModelSPAJTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = 438DB5F31D49C28F00B92FEF /* ModelSPAJTransaction.m */; };
 		438DB5F81D49F52100B92FEF /* SIListingPopOver.m in Sources */ = {isa = PBXBuildFile; fileRef = 438DB5F71D49F52100B92FEF /* SIListingPopOver.m */; };
@@ -1657,6 +1659,9 @@
 		4388122B1D5EDB97002C633E /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4388122C1D5EDB97002C633E /* id */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = id; path = id.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		4388122D1D5EDB97002C633E /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		438C65D51D76C275005ECF1B /* SIListingForSPAJTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIListingForSPAJTableViewCell.h; sourceTree = "<group>"; };
+		438C65D61D76C275005ECF1B /* SIListingForSPAJTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIListingForSPAJTableViewCell.m; sourceTree = "<group>"; };
+		438C65D71D76C275005ECF1B /* SIListingForSPAJTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SIListingForSPAJTableViewCell.xib; sourceTree = "<group>"; };
 		438CBC781D616D1C00FF44B1 /* ModelSPAJSubmitTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelSPAJSubmitTracker.h; sourceTree = "<group>"; };
 		438CBC791D616D1C00FF44B1 /* ModelSPAJSubmitTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelSPAJSubmitTracker.m; sourceTree = "<group>"; };
 		438DB5F21D49C28F00B92FEF /* ModelSPAJTransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelSPAJTransaction.h; sourceTree = "<group>"; };
@@ -2869,6 +2874,7 @@
 				0FF845C31D23ACC2008CF861 /* SPAJ E Application List Cell.xib */,
 				0FF845611D237732008CF861 /* SPAJ Existing List Cell.xib */,
 				0FF8455D1D2376A8008CF861 /* SPAJ Submitted List Cell.xib */,
+				438C65D71D76C275005ECF1B /* SIListingForSPAJTableViewCell.xib */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -2876,6 +2882,8 @@
 		0FF845751D23A3BB008CF861 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				438C65D51D76C275005ECF1B /* SIListingForSPAJTableViewCell.h */,
+				438C65D61D76C275005ECF1B /* SIListingForSPAJTableViewCell.m */,
 				0FF845C11D23ACC2008CF861 /* SPAJ E Application List Cell.h */,
 				0FF845C21D23ACC2008CF861 /* SPAJ E Application List Cell.m */,
 				0FF8455F1D237732008CF861 /* SPAJ Existing List Cell.h */,
@@ -6125,6 +6133,7 @@
 				AA4EF7551C85A4260050CCD8 /* Reader-Export@2x.png in Resources */,
 				423A853618502D92008EC5D4 /* SelectCFFCell.xib in Resources */,
 				17F10EB31C6C85EF002C32D3 /* login_box.png in Resources */,
+				438C65D91D76C275005ECF1B /* SIListingForSPAJTableViewCell.xib in Resources */,
 				C394D6BB1C48861500722C07 /* PolicyOwner.storyboard in Resources */,
 				EF671896186302D0000BCE45 /* btn_exit.png in Resources */,
 				6A16C1A51889410700F7EFFA /* ProposalForm in Resources */,
@@ -6414,6 +6423,7 @@
 				174DD2551C9A54C400D56274 /* Pembelianke.m in Sources */,
 				C4E9F3D21765E2430070EA8A /* EverSeriesMasterViewController.m in Sources */,
 				DE15788D1CBB792900CE171B /* StringEncryption.m in Sources */,
+				438C65D81D76C275005ECF1B /* SIListingForSPAJTableViewCell.m in Sources */,
 				EFEB7A5B1766F2DF004FF3CE /* CFFTabBarController.m in Sources */,
 				EFEB7A5C1766F2DF004FF3CE /* CFFTabBar.m in Sources */,
 				0F32684B1D1A93A4001A9021 /* Label.m in Sources */,

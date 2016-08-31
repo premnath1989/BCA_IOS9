@@ -181,11 +181,14 @@
             
         }
         siListingPopOver.modalPresentationStyle = UIModalPresentationPopover;
+        [siListingPopOver setPreferredContentSize:CGSizeMake(400, 550)];
+        
         [self presentViewController:siListingPopOver animated:YES completion:nil];
         
         // configure the Popover presentation controller
         UIPopoverPresentationController *popController = [siListingPopOver popoverPresentationController];
         popController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+        [popController setSourceRect:CGRectMake(sender.customView.frame.origin.x, sender.customView.frame.origin.y, 400, 500)];
         popController.barButtonItem = rightButton;
         popController.delegate = self;
     }

@@ -74,5 +74,26 @@
     return desc;
 }
 
+-(NSString*) getOtherTypeID : (NSString*)otherDesc
+{
+    NSString *desc;
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    FMResultSet *result = [database executeQuery:@"SELECT DataIdentifier FROM eProposal_Identification WHERE Status='A' and IdentityDesc = ? ", otherDesc];
+    
+    NSInteger *count = 0;
+    while ([result next]) {
+        count = count + 1;
+        //desc =[result objectForColumnName:@"IdentityDesc"];
+        desc =[result stringForColumn:@"DataIdentifier"];
+    }
+    [result close];
+    
+    return desc;
+}
+
 
 @end

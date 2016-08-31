@@ -38,7 +38,7 @@ GUIDE_SPAJMENU_HEADER5 = "To Capture Proof of Identification";
 GUIDE_SPAJMENU_HEADER6 = "To Obtain eSignature from Respective Parties";
 
 GUIDE_SPAJMENU_DETAIL1 = "Nomor SI : 123456789012345-12345    Tertanggung Polis : Andy Phan Chee Seng    Produk : Heritage";
-GUIDE_SPAJMENU_DETAIL2 = "Pemegang Polist : Andy Phan Chee Seng";
+GUIDE_SPAJMENU_DETAIL2 = "Pemegang Polis : ";
 
 GUIDE_SPAJDETAILS_HEADER1 = "Policy Holder";
 GUIDE_SPAJDETAILS_HEADER2 = "Payor Holder";

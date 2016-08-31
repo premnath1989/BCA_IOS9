@@ -559,6 +559,30 @@
     return stringReturn;
 }
 
+-(NSString *)getRevertIDNameFromHtml:(NSString *)stringID{
+    NSString* stringReturn;
+    if ([stringID caseInsensitiveCompare:@"KTP"]== NSOrderedSame){
+        stringReturn = @"KTP";
+    }
+    /*else if ([stringID caseInsensitiveCompare:@"KIMSKITAS"]== NSOrderedSame){
+        stringReturn =  @"KIMS/KITAS";
+    }*/
+    else if ([stringID caseInsensitiveCompare:@"SIM"]== NSOrderedSame){
+        stringReturn =  @"SIM";
+    }
+    else if ([stringID caseInsensitiveCompare:@"PASPOR"]== NSOrderedSame){
+        stringReturn =  @"PASPOR";
+    }
+    else if ([stringID caseInsensitiveCompare:@"KIMSKITAS"]== NSOrderedSame){
+        stringReturn =  @"KITAS";
+    }
+    else if ([stringID caseInsensitiveCompare:@"OTHER"]== NSOrderedSame){
+        stringReturn =  @"Others";
+    }
+    return stringReturn;
+}
+
+
 
 -(NSString *)encodedSignatureImage:(UIView *)viewSignature{
     UIView *view = viewSignature;
