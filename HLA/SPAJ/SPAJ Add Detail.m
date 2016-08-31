@@ -284,6 +284,7 @@
     -(void) showDetailsForIndexPath:(NSIndexPath*)indexPath
     {
         indexSelected=indexPath.row;
+        [spajCalonPemegangPolis setDictTransaction:dictTransaction];
         switch (indexPath.row) {
             case 0:
             {

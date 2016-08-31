@@ -22,6 +22,8 @@
 }
 @synthesize htmlFileName;
 @synthesize delegate;
+@synthesize dictTransaction;
+
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:YES];
 }
@@ -268,6 +270,11 @@
 }
 
 - (void)savetoDB:(NSDictionary *)params{
+    if ([stringSection isEqualToString:@"PM"]){
+        NSString *stringWhere = [NSString stringWithFormat:@"where SPAJHtmlSection='PM' and SPAJTransactionID=%i",[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
+        [modelSPAJAnswers deleteSPAJAnswers:stringWhere];
+    }
+    
     //add another key to db
     NSString*spajTransactionID = [modelSPAJTransaction getSPAJTransactionData:@"SPAJTransactionID" StringWhereName:@"SPAJEappNumber" StringWhereValue:[delegate voidGetEAPPNumber]];
     //cffID = [cffHeaderSelectedDictionary valueForKey:@"PotentialDiscussionCFFID"];

@@ -38,6 +38,7 @@
     
     IBOutlet UIView *viewActivityIndicator;
 }
+@property (strong, nonatomic) NSDictionary* dictTransaction;
 @property (strong, nonatomic) NSString* htmlFileName;
 -(void)loadFirstHTML:(NSString*)stringHTMLName PageSection:(NSString *)stringPageSection;
 -(void)loadSecondHTML:(NSString*)stringHTMLName PageSection:(NSString *)stringPageSection;

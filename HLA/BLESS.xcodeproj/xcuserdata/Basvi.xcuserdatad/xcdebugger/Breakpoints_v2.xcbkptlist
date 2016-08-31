@@ -1910,11 +1910,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SPAJ/SPAJ Add Detail.m"
-            timestampString = "494217764.616852"
+            timestampString = "494325170.50157"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "629"
-            endingLineNumber = "629"
+            startingLineNumber = "630"
+            endingLineNumber = "630"
             landmarkName = "-voidSetCalonPemegangPolisBoolValidate:StringSection:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1996,6 +1996,22 @@
             startingLineNumber = "140"
             endingLineNumber = "140"
             landmarkName = "-voidLoadFile:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SPAJ Calon Pemegang Polis.m"
+            timestampString = "494325729.483544"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "314"
+            endingLineNumber = "314"
+            landmarkName = "-savetoDB:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
