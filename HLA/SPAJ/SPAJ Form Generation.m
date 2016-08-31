@@ -380,7 +380,14 @@
     -(NSDictionary *)getDictionaryForSignature:(NSString *)stringDBColumnName HTMLID:(NSString *)stringHTMLID{
         NSMutableDictionary* dictForSignature=[[NSMutableDictionary alloc]init];
         [dictForSignature setObject:stringHTMLID forKey:@"elementID"];
+        if ([stringDBColumnName isEqualToString:@"SPAJDateSignatureParty4"]){
+            NSString* newDate = [formatter convertDateFrom:@"yyyy-MM-dd HH:mm:ss" TargetDateFormat:@"dd/MM/yyyy" DateValue:[modelSPAJSignature selectSPAJSignatureData:stringDBColumnName SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]]];
+            [dictForSignature setObject:newDate?:@"" forKey:@"Value"];
+        }
+        else{
         [dictForSignature setObject:[modelSPAJSignature selectSPAJSignatureData:stringDBColumnName SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]]?:@"" forKey:@"Value"];
+        }
+        
         [dictForSignature setObject:@"1" forKey:@"CustomerID"];
         [dictForSignature setObject:@"1" forKey:@"SPAJID"];
         return dictForSignature;

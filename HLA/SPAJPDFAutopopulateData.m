@@ -101,7 +101,7 @@
 -(NSMutableArray *)arrayInitializeSignatureHTML{ //premnath Vijaykumar
     NSMutableArray *arrayHTMLSignature =[[NSMutableArray alloc]init];
     [arrayHTMLSignature addObject:@"TextSignedPlace"];
-    [arrayHTMLSignature addObject:@"LineSignedDateDay"];
+    [arrayHTMLSignature addObject:@"DateSigned"];
     return arrayHTMLSignature;
 }
 

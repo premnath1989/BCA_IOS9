@@ -974,7 +974,7 @@ NSString* const Back = @"Back";
         //NSData *imageData = UIImageJPEGRepresentation([self generateWatermarkForImage:imageView.image], 0.8);
         NSData *imageData = UIImageJPEGRepresentation(imageView.image, 0.8);
         
-        if ((indexSelected==3)||(indexSelected==4)){
+        if ((indexSelected==4)||(indexSelected==5)){
             NSString* target=[NSString stringWithFormat:@"%@/%@.jpg",filePathApp,fileName];
             NSString* fname = [target lastPathComponent];
             NSString* fnameNoExt = [fname stringByDeletingPathExtension];
