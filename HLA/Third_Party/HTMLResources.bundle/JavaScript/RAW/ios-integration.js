@@ -2,7 +2,8 @@ __functionIndexMap = {};
 
 function calliOSFunction(functionName, successCallback, errorCallback, callInfo)
 {
-    var url = 'js-frame:';
+    var url = 'js-frame:';	
+	
     callInfo.functionname = functionName;
 
 	if (successCallback)
@@ -135,7 +136,7 @@ function savetoDB()
 			if (stringValue == undefined || stringValue == null || stringValue == "")
 			{
 				//alert($(this).attr("id") + " " + stringValue);
-				alert($label.text() + " " + "harap diisi.");
+				ReplaceHTMLNameOnValidate("", $label.text() + " " + "harap diisi.");
 				booleanValidateState = false;
 				return false;
 			}
@@ -161,7 +162,7 @@ function savetoDB()
 			{
 				if (stringValue == undefined)
 				{							
-					alert($label.text() + " " + "harap dipilih.");
+					ReplaceHTMLNameOnValidate("", $label.text() + " " + "harap dipilih.");
 					stringRadioButtonFlag = $(this).attr("name");
 					booleanValidateState = false;
 					return false;
@@ -235,4 +236,15 @@ function AutoPopulate(jsonObject)
 function ReadData()
 {
     readfromDB();
+}
+
+function ReplaceHTMLNameOnValidate(title, body)
+{
+	var callInfo = {};
+	callInfo.data = {};
+	callInfo.data.title = title;
+	callInfo.data.body = body;
+
+	//call the wrapper with the parameterized info
+	calliOSFunction('showAlert:',onSuccess,onError, callInfo);
 }

@@ -356,6 +356,11 @@ NSString* const Back = @"Back";
             NSString* identityDesc = @"Form Tenaga Penjual" ;
             [buttonIDTypeSelection setTitle:identityDesc forState:UIControlStateNormal];
         }
+        else if (IndexRow==4){
+            stringIDTypeIdentifier = @"" ;
+            NSString* identityDesc = @"Payment" ;
+            [buttonIDTypeSelection setTitle:identityDesc forState:UIControlStateNormal];
+        }
         else{
             stringIDTypeIdentifier = @"VID17" ;
             NSString* identityDesc = [modelIdentificationType getOtherTypeDesc:stringIDTypeIdentifier] ;

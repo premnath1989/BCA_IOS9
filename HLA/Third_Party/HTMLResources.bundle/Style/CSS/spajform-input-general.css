@@ -37,6 +37,10 @@ input[type="text"], input[type="password"] {
   border-width: 1px;
 }
 
+input[type="text"] {
+  text-transform: uppercase;
+}
+
 input[type="text"].Tiny, input[type="password"].Tiny {
   min-width: 20px !important;
   width: 20px !important;

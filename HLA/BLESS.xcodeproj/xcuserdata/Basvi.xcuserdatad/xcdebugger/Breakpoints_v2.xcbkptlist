@@ -1861,22 +1861,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SPAJ/SPAJ Add Detail.m"
-            timestampString = "494158877.198181"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "163"
-            endingLineNumber = "163"
-            landmarkName = "-voidCheckBooleanLastState"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "ModelSPAJTransaction.m"
             timestampString = "494217197.091691"
             startingColumnNumber = "9223372036854775807"
@@ -1910,11 +1894,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SPAJ/SPAJ Add Detail.m"
-            timestampString = "494393918.314611"
+            timestampString = "494411225.9281"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "647"
-            endingLineNumber = "647"
+            startingLineNumber = "682"
+            endingLineNumber = "682"
             landmarkName = "-voidSetCalonPemegangPolisBoolValidate:StringSection:"
             landmarkType = "5">
          </BreakpointContent>

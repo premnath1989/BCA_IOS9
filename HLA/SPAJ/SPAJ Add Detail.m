@@ -186,7 +186,17 @@
                 }
                 else{
                     if (boolPM){
-                        [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:4 inSection:0]];
+                        if (boolPP){
+                            if (boolKS){
+                                [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:5 inSection:0]];
+                            }
+                            else{
+                                [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:5 inSection:0]];
+                            }
+                        }
+                        else{
+                            [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:4 inSection:0]];
+                        }
                     }
                     else{
                         [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
@@ -549,12 +559,37 @@
                     //perusahaan is not mandatory. so after tertanggung filled, then set perusahaan and calon penerima manfaat cell to active
                     //if (indexPath.row < 3){
                     if (boolPenerimaManfaat){
-                        if (indexPath.row < 5){
-                            [cell setUserInteractionEnabled:true];
-                            [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_ACTIVE_CELL floatOpacity:1.0]];
+                        if (boolPembayaranPremi){
+                            
+                            if (boolKesehatan){
+                                if (indexPath.row < 6){
+                                    [cell setUserInteractionEnabled:true];
+                                    [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_ACTIVE_CELL floatOpacity:1.0]];
+                                }
+                                else{
+                                    [cell setUserInteractionEnabled:false];
+                                }
+                            }
+                            else{
+                                if (indexPath.row < 6){
+                                    [cell setUserInteractionEnabled:true];
+                                    [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_ACTIVE_CELL floatOpacity:1.0]];
+                                }
+                                else{
+                                    [cell setUserInteractionEnabled:false];
+                                }
+                            }
+                            
                         }
+                        
                         else{
-                            [cell setUserInteractionEnabled:false];
+                            if (indexPath.row < 5){
+                                [cell setUserInteractionEnabled:true];
+                                [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_ACTIVE_CELL floatOpacity:1.0]];
+                            }
+                            else{
+                                [cell setUserInteractionEnabled:false];
+                            }
                         }
                     }
                     else{
