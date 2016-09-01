@@ -29,6 +29,7 @@
 #import "SPAJPDFAutopopulateData.h"
 #import "ModelSPAJTransaction.h"
 
+
 // DECLARATION
 
 @interface SPAJFormGeneration ()
@@ -57,6 +58,7 @@
     ModelSPAJHtml *modelSPAJHtml;
     ModelSPAJTransaction *modelSPAJTransaction;
     Alert* alert;
+    
     
     UserInterface *objectUserInterface;
     BOOL boolSPAJPDF;
@@ -122,6 +124,7 @@
         modelSIPOData = [[ModelSIPOData alloc]init];
         modelSIMaster = [[Model_SI_Master alloc]init];
         modelSPAJTransaction = [[ModelSPAJTransaction alloc]init];
+        
         
         [self setNavigationBar];
         

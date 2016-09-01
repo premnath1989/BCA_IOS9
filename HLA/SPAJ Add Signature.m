@@ -18,6 +18,7 @@
 #import "Alert.h"
 #import "ModelAgentProfile.h"
 #import "ModelProspectProfile.h"
+#import "ClassImageProcessing.h"
 
 @interface SPAJ_Add_Signature (){
     IBOutlet UILabel *labelSignatureFooter;
@@ -42,6 +43,7 @@
     ModelSPAJSignature* modelSPAJSignature;
     ModelAgentProfile* modelAgentProfile;
     ModelProspectProfile* modelProspectProfile;
+    ClassImageProcessing *classImageProcessing;
     
     NSDictionary* dictionaryPOData;
     
@@ -90,6 +92,7 @@
     modelSPAJSignature = [[ModelSPAJSignature alloc]init];
     modelAgentProfile=[[ModelAgentProfile alloc]init];
     modelProspectProfile = [[ModelProspectProfile alloc]init];
+    classImageProcessing = [[ClassImageProcessing alloc]init];
     
     [self setNavigationBar];
 
@@ -443,8 +446,12 @@
     [view.layer renderInContext:UIGraphicsGetCurrentContext()];
     UIImage* imageSignature = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
+    
+    UIColor* fromColor = [UIColor colorWithRed:255.0 green:255.0 blue:255.0 alpha:1.0];
+    UIColor* toColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
+    UIImage* imageConverted = [classImageProcessing changeColor:imageSignature fromColor:fromColor toColor:toColor];
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self drawSignatureInPDF:imageSignature Index:index];
+        [self drawSignatureInPDF:imageConverted Index:index];
     });
 }
 

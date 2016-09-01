@@ -40,6 +40,7 @@
 #import "ModelProspectProfile.h"
 #import "Alert.h"
 #import "ModelAgentProfile.h"
+#import "ClassImageProcessing.h"
 // DECLARATION
 
 @interface SPAJAddMenu ()<SIListingDelegate,UIPopoverPresentationControllerDelegate>
@@ -70,6 +71,7 @@
     ModelProspectProfile* modelProspectProfile;
     ModelAgentProfile* modelAgentProfile;
     Formatter* formatter;
+    ClassImageProcessing *classImageProcessing;
     
     SPAJFormGeneration* viewControllerFormGeneration;
     
@@ -143,7 +145,7 @@
         modelSPAJDetail = [[ModelSPAJDetail alloc]init];
         modelSPAJFormGeneration = [[ModelSPAJFormGeneration alloc]init];
         modelAgentProfile = [[ModelAgentProfile alloc]init];
-        
+        classImageProcessing = [[ClassImageProcessing alloc]init];
         objectUserInterface = [[UserInterface alloc] init];
         
         formatter = [[Formatter alloc]init];
@@ -533,8 +535,16 @@
         UIImage *imageSignatureParty3 = [UIImage imageWithData:imageParty3];
         UIImage *imageSignatureParty4 = [UIImage imageWithData:imageParty4];
         
+        
+        UIColor* fromColor = [UIColor colorWithRed:255.0 green:255.0 blue:255.0 alpha:1.0];
+        UIColor* toColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
+        UIImage* imageConverted1 = [classImageProcessing changeColor:imageSignatureParty1 fromColor:fromColor toColor:toColor];
+        UIImage* imageConverted2 = [classImageProcessing changeColor:imageSignatureParty2 fromColor:fromColor toColor:toColor];
+        UIImage* imageConverted3 = [classImageProcessing changeColor:imageSignatureParty3 fromColor:fromColor toColor:toColor];
+        UIImage* imageConverted4 = [classImageProcessing changeColor:imageSignatureParty4 fromColor:fromColor toColor:toColor];
+        
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self drawSignatureInPDF:imageSignatureParty1 Image2:imageSignatureParty2 Image3:imageSignatureParty3 Image4:imageSignatureParty4];
+            [self drawSignatureInPDF:imageConverted1 Image2:imageConverted2 Image3:imageConverted3 Image4:imageConverted4];
         });
     }
 

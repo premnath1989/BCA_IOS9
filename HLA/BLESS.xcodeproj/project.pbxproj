@@ -475,6 +475,7 @@
 		43C98E191D51D24600A3F911 /* SPAJ Pembayaran Premi.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43C98E171D51D24600A3F911 /* SPAJ Pembayaran Premi.xib */; };
 		43C98E1C1D51FF5E00A3F911 /* ModelSPAJAnswers.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C98E1B1D51FF5E00A3F911 /* ModelSPAJAnswers.m */; };
 		43CDBA671D190F5C00AC299F /* ModelCFFAnswers.m in Sources */ = {isa = PBXBuildFile; fileRef = 43CDBA661D190F5C00AC299F /* ModelCFFAnswers.m */; };
+		43D4561E1D780A3D00B89575 /* ClassImageProcessing.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D4561D1D780A3D00B89575 /* ClassImageProcessing.m */; };
 		43DA4BD91C76A59A0038C92C /* ModelAgentProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DA4BD81C76A59A0038C92C /* ModelAgentProfile.m */; };
 		43DA4BE31C770AA90038C92C /* SIMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DA4BE11C770AA90038C92C /* SIMenuTableViewCell.m */; };
 		43DA4BE41C770AA90038C92C /* SIMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43DA4BE21C770AA90038C92C /* SIMenuTableViewCell.xib */; };
@@ -1747,6 +1748,8 @@
 		43C98E1B1D51FF5E00A3F911 /* ModelSPAJAnswers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelSPAJAnswers.m; sourceTree = "<group>"; };
 		43CDBA651D190F5C00AC299F /* ModelCFFAnswers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelCFFAnswers.h; sourceTree = "<group>"; };
 		43CDBA661D190F5C00AC299F /* ModelCFFAnswers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelCFFAnswers.m; sourceTree = "<group>"; };
+		43D4561C1D780A3D00B89575 /* ClassImageProcessing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassImageProcessing.h; sourceTree = "<group>"; };
+		43D4561D1D780A3D00B89575 /* ClassImageProcessing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassImageProcessing.m; sourceTree = "<group>"; };
 		43DA4BD71C76A59A0038C92C /* ModelAgentProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelAgentProfile.h; sourceTree = "<group>"; };
 		43DA4BD81C76A59A0038C92C /* ModelAgentProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelAgentProfile.m; sourceTree = "<group>"; };
 		43DA4BE01C770AA90038C92C /* SIMenuTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIMenuTableViewCell.h; sourceTree = "<group>"; };
@@ -4040,6 +4043,8 @@
 			children = (
 				43F7C3171C9D40B70074F464 /* Formatter.m */,
 				43F7C3181C9D40B70074F464 /* Formatter.h */,
+				43D4561C1D780A3D00B89575 /* ClassImageProcessing.h */,
+				43D4561D1D780A3D00B89575 /* ClassImageProcessing.m */,
 			);
 			name = Formatter;
 			sourceTree = "<group>";
@@ -6571,6 +6576,7 @@
 				43B346AA1D110DE300B8DE32 /* ModelProspectChild.m in Sources */,
 				AAFFE1851C7EB161001B91BF /* SpinnerUtilities.m in Sources */,
 				AA4EF7641C85A4260050CCD8 /* ReaderConstants.m in Sources */,
+				43D4561E1D780A3D00B89575 /* ClassImageProcessing.m in Sources */,
 				AAFFE17D1C7D475E001B91BF /* AgentWS.m in Sources */,
 				2943213317F2E0DC00FB64AB /* SIDate_DOB.m in Sources */,
 				C30A259C17F3C8D500613A0F /* AdditionalQuestions.m in Sources */,
