@@ -5379,8 +5379,10 @@ bool WPTPD30RisDeleted = FALSE;
     int IsInternalStaff =[[_dictionaryPOForInsert valueForKey:@"IsInternalStaff"] intValue];
     NSNumber* diskonPremi = [classFormatter convertAnyNonDecimalNumberToString:_KKLKDiskaunBtn.text];
     if (IsInternalStaff==0){
-        minNumber= 1000000000;
-        validationUanglebih=@"Uang Pertangungan Dasar Min:Rp1,000,000,000 Max:Rp300,000,000,000";
+        //minNumber= 1000000000;
+        //validationUanglebih=@"Uang Pertangungan Dasar Min:Rp1,000,000,000 Max:Rp300,000,000,000";
+        minNumber= 500000000;
+        validationUanglebih=@"Uang Pertangungan Dasar Min:Rp500,000,000 Max:Rp300,000,000,000";
     }
     else{
         minNumber= 500000000;

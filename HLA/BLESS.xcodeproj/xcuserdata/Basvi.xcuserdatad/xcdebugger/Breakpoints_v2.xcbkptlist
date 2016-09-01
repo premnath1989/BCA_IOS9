@@ -934,11 +934,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HLA/BasicPlanViewController.m"
-            timestampString = "486007185.014648"
+            timestampString = "494390055.672662"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "5445"
-            endingLineNumber = "5445"
+            startingLineNumber = "5447"
+            endingLineNumber = "5447"
             landmarkName = "-validationDataBasicPlan"
             landmarkType = "5">
          </BreakpointContent>
@@ -1478,11 +1478,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HLA/BasicPlanViewController.m"
-            timestampString = "486028011.999273"
+            timestampString = "494390055.672662"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "5923"
-            endingLineNumber = "5923"
+            startingLineNumber = "5925"
+            endingLineNumber = "5925"
             landmarkName = "-loadHeritageCalculation"
             landmarkType = "5">
          </BreakpointContent>
@@ -1910,11 +1910,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SPAJ/SPAJ Add Detail.m"
-            timestampString = "494325170.50157"
+            timestampString = "494393918.314611"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "630"
-            endingLineNumber = "630"
+            startingLineNumber = "647"
+            endingLineNumber = "647"
             landmarkName = "-voidSetCalonPemegangPolisBoolValidate:StringSection:"
             landmarkType = "5">
          </BreakpointContent>
