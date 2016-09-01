@@ -735,7 +735,6 @@ static NSString *labelVers;
 //we store the UDID into the Keychain
 -(NSString *)getUniqueDeviceIdentifierAsString
 {
-    
     NSString *appName=[[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString*)kCFBundleNameKey];
     
     NSString *strApplicationUUID = [SSKeychain passwordForService:appName account:@"incoding"];

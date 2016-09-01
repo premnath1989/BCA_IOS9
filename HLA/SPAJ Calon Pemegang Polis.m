@@ -269,6 +269,17 @@
     //[webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"document.getElementById('read').click()"]];
 }
 
+- (void)showAlert:(NSDictionary *)params{
+    NSMutableDictionary* modifiedParams = [[NSMutableDictionary alloc]initWithDictionary:[params valueForKey:@"data"]];
+    NSString *title = [modifiedParams valueForKey:@"title"];
+    NSString *body = [modifiedParams valueForKey:@"body"];
+    
+    UIAlertView* alert = [[UIAlertView alloc]initWithTitle:title message:body delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
+    [alert show];
+    
+    
+}
+
 - (void)savetoDB:(NSDictionary *)params{
     if ([stringSection isEqualToString:@"PM"]){
         NSString *stringWhere = [NSString stringWithFormat:@"where SPAJHtmlSection='PM' and SPAJTransactionID=%i",[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
