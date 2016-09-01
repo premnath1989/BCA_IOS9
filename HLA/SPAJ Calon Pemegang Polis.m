@@ -474,7 +474,13 @@
     else if ([stringSection isEqualToString:@"PP"]){
         NSString* stringPaymentFrequency = [formatter getPaymentFrequencyValue:[dictPremiData valueForKey:@"Payment_Frequency"]];
         NSMutableDictionary* dictRelWithLa = [[NSMutableDictionary alloc]initWithObjectsAndKeys:@"RadioButtonPremiPaymentFrequency",@"elementID",stringPaymentFrequency,@"Value", nil];
+        
+        NSMutableDictionary* dictCurrency = [[NSMutableDictionary alloc]initWithObjectsAndKeys:@"RadioButtonPremiPaymentKurs",@"elementID",@"idr",@"Value", nil];
+        
         [arrayValue addObject:dictRelWithLa];
+        [arrayValue addObject:dictCurrency];
+        
+        
     }
     /*else if (([stringSection isEqualToString:@"KS_PH"])||([stringSection isEqualToString:@"KS_TR"])){
         NSString* stringRelation = [formatter getRelationNameForHtml:[dictPOData valueForKey:@"RelWithLA"]];
