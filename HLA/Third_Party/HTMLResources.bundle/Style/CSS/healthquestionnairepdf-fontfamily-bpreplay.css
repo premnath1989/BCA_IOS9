@@ -8,12 +8,10 @@
 /* ANIMATION */
 /* HEADER */
 /* FORM */
-/* INPUT */
 /* NOTE */
 /* SIGNATURE */
 /* FOOTER */
 /* TABLE */
-/* LINK */
 /* GENERAL */
 /* ICON */
 /* LAYOUT */
@@ -22,8 +20,6 @@
 /* BOX */
 /* TABLE INITIALIZATION */
 /* TABLE */
-/* INPUT INITIALIZATION */
-/* LINK */
 /* RESOURCE */
 /* TYPEFACE */
 /* GENERAL */
@@ -33,52 +29,60 @@ p {
 
 /* HEADER */
 header {
-  font-family: "BPreplay_Regular";
-}
-
-header h2 {
   font-family: "BPreplay_Bold";
 }
 
 /* FORM */
-main form label, main form span {
-  font-family: "BPreplay_Regular";
-}
-
-main form table.BoxSquare {
-  font-family: "BPreplay_Regular";
-}
-
-main form .BoxRound {
-  font-family: "BPreplay_Regular";
-}
-
-main form ol, main form ul {
-  font-family: "BPreplay_Regular";
-}
-
-main form .Note h3 {
+main section h2 {
   font-family: "BPreplay_Bold";
 }
 
-main form .Note p {
-  font-family: "BPreplay_Regular";
-}
-
-main form .Note ol li, main form .Note ul li {
-  font-family: "BPreplay_Regular";
-}
-
-main form table.SignatureSmall, main form table.SignatureMedium {
-  font-family: "BPreplay_Regular";
-}
-
-main form span.Separator, main form span.Description, main form span.Wrap, main form span.Note {
-  font-family: "BPreplay_Regular";
-}
-
-main form p {
+main section h3 {
   font-family: "BPreplay_Bold";
+}
+
+main section label, main section span {
+  font-family: "BPreplay_Regular";
+}
+
+main section table.BoxSquare {
+  font-family: "BPreplay_Regular";
+}
+
+main section .BoxRound {
+  font-family: "BPreplay_Regular";
+}
+
+main section ol, main section ul {
+  font-family: "BPreplay_Regular";
+}
+
+main section .Note h3 {
+  font-family: "BPreplay_Bold";
+}
+
+main section .Note p {
+  font-family: "BPreplay_Regular";
+}
+
+main section .Note ol li, main section .Note ul li {
+  font-family: "BPreplay_Regular";
+}
+
+main section table.SignatureSmall, main section table.SignatureMedium {
+  font-family: "BPreplay_Regular";
+}
+
+main section span.Separator, main section span.Description, main section span.Wrap, main section span.Note {
+  font-family: "BPreplay_Regular";
+}
+
+main section p {
+  font-family: "BPreplay_Bold";
+}
+
+main section .LineDot, main section .LineStraight {
+  font-family: "BPreplay_Regular";
 }
 
 /* TABLE */
@@ -95,10 +99,5 @@ table.Round thead tr th, table.Space thead tr th {
 }
 
 table.Round tbody tr td, table.Space tbody tr td {
-  font-family: "BPreplay_Regular";
-}
-
-/* LINK */
-.NavigationPopUp {
   font-family: "BPreplay_Regular";
 }

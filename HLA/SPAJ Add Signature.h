@@ -11,10 +11,12 @@
     -(NSString *)voidGetEAPPNumber;
 @end
 
-@interface SPAJ_Add_Signature : UIViewController
+@interface SPAJ_Add_Signature : UIViewController <UITextFieldDelegate>
 
 // PROTOCOL
 
 @property (nonatomic,strong) id <SPAJAddSignatureDelegate> SPAJAddSignatureDelegate;
 @property (strong, nonatomic) NSDictionary* dictTransaction;
+@property(strong,nonatomic)UITextField *textFieldLocation;
+@property(nonatomic, strong)UIAlertAction* okAction;
 @end

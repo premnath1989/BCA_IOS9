@@ -117,35 +117,36 @@ function readfromDB()
 }
 
 function savetoDB() 
-{
+{	
 	var stringValue;
-	var stringRadioButtonFlag;
+	var stringRadioButtonFlag = 0;
 	var booleanValidateState = true;
 
-	if (booleanValidateState == false)
+	// QUICK FIX FOR BENEFICIARIES LIST VALIDATION
+	
+	/* if (stringPageSectionCurrent == stringPageSectionBeneficiariesList)
 	{
-		
-	}
-	else
-	{
-		$("input:text[required]").each(function()
+		if (booleanValidateState == false)
 		{
-			stringValue = $(this).val();
-			var $label = $("label[for='"+this.id+"']")
-
-			if (stringValue == undefined || stringValue == null || stringValue == "")
+			
+		}
+		else
+		{
+			if (intBeneficiariesListID == 1)
 			{
-				//alert($(this).attr("id") + " " + stringValue);
-				ReplaceHTMLNameOnValidate("", $label.text() + " " + "harap diisi.");
-				booleanValidateState = false;
-				return false;
+
 			}
 			else
 			{
-
+				ReplaceHTMLNameOnValidate("", $label.text() + "Mohon masukkan minimal 1 orang calon penerima manfaat");
+				// alert("Mohon masukkan minimal 1 orang calon penerima manfaat");
 			}
-		});
+		}
 	}
+	else
+	{
+		
+	} */
 	
 	if (booleanValidateState == false)
 	{
@@ -153,20 +154,51 @@ function savetoDB()
 	}
 	else
 	{
-		$("input:radio[required]").each(function()
-		{												
-			stringValue = getRadioButtonGeneral($(this).attr("name"));						
-			var $label = $("label[for='"+this.name+"']")
-
-			if (stringRadioButtonFlag != $(this).attr("name"))
+		if (stringPageSectionCurrent != stringPageSectionBeneficiariesList)
+		{
+			$("input:text[required]").each(function()
 			{
-				if (stringValue == undefined)
-				{							
-					ReplaceHTMLNameOnValidate("", $label.text() + " " + "harap dipilih.");
-					stringRadioButtonFlag = $(this).attr("name");
+				stringValue = $(this).val();
+				var $label = $("label[for='"+this.id+"']")
+
+				if (stringValue == undefined || stringValue == null || stringValue == "")
+				{	
+					ReplaceHTMLNameOnValidate("", $label.text() + " " + "harap diisi.");
+					// alert($label.text() + " " + "harap diisi.");
 					booleanValidateState = false;
 					return false;
-				}				
+				}
+				else
+				{
+
+				}
+			});
+			
+			// QUICK FIX VALIDATION FOR FORM
+	
+			var booleanIncomeState = false;
+
+			 if (stringPageValidationCurrent == "gaji")
+			 {
+				$("input:text[data-customvalidation='income']").each(function()
+				{
+					if ($(this).val() > 0)
+					{
+						booleanIncomeState = true;
+						return false;
+					}
+					else
+					{
+
+					}
+				});
+
+				if (booleanIncomeState == false)
+				{
+					booleanValidateState = false;
+					ReplaceHTMLNameOnValidate("","Harap mengisi penghasilan kotor minimum satu jenis");
+					// alert("Harap mengisi penghasilan kotor minimum satu jenis !.");
+				}
 				else
 				{
 
@@ -176,7 +208,11 @@ function savetoDB()
 			{
 
 			}
-		});
+		}
+		else
+		{
+			
+		}
 	}
 	
 	if (booleanValidateState == false)
@@ -185,11 +221,83 @@ function savetoDB()
 	}
 	else
 	{
+		if (stringPageSectionCurrent != stringPageSectionBeneficiariesList)
+		{
+			$("input:radio[required]").each(function()
+			{												
+				stringValue = getRadioButtonGeneral($(this).attr("name"));						
+				var $label = $("label[for='"+this.name+"']")
+
+				if (stringRadioButtonFlag != $(this).attr("name"))
+				{
+					if (stringValue == undefined)
+					{
+						// alert("invalid : " + $(this).attr("name") + " " + stringValue);
+						ReplaceHTMLNameOnValidate("", $label.text() + " " + "harap dipilih.");
+
+						booleanValidateState = false;
+						return false;
+					}				
+					else
+					{
+						// alert("valid : " + $(this).attr("name") + " " + stringValue);
+					}
+
+					stringRadioButtonFlag = $(this).attr("name");
+				}
+				else
+				{
+
+				}
+			});
+		}
+		else
+		{
+			
+		}
+	}
+	
+	
+	
+	
+	
+	if (stringPageSectionCurrent == stringPageSectionBeneficiariesList)
+	{
+		if (booleanValidateState == false)
+		{
+			
+		}
+		else
+		{
+			if (intSharePercentage != 100)
+			{
+				ReplaceHTMLNameOnValidate("","Jumlah share percentage harus 100 !.");
+				//alert("Jumlah share percentage harus 100 !.");
+				booleanValidateState = false;
+				return false;
+			}				
+			else
+			{
+				
+			}
+		}
+	}
+	else
+	{
+		
+	}
+	
+	if (booleanValidateState == false)
+	{
+		
+	}
+	else
+	{		
 		var objectContent;
-    
+    	
 		if (stringPageSectionCurrent == stringPageSectionHealthQuestionnaire)
 		{
-			//alert("no getter !, arrayHealthQuestionnaire length : " + arrayHealthQuestionnaire.length);
+			// alert("no getter !, arrayHealthQuestionnaire length : " + arrayHealthQuestionnaire.length);
 			objectContent = arrayHealthQuestionnaire;
 		}
 		else if (stringPageSectionCurrent == stringPageSectionBeneficiariesList)

@@ -206,3 +206,8 @@ table.Square tbody tr:nth-child(even) {
   background-color: #ffffff;
   background-color-color: #00a6b3;
 }
+
+/* LINK */
+.NavigationPopUp {
+  color: #00a6b3;
+}

@@ -77,6 +77,14 @@ a.Underline:active {
   text-decoration: underline;
 }
 
+.NavigationPopUp {
+  margin-left: 5px;
+  margin-right: 5px;
+  font-size: 1em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
 /* BUTTON BY TEXT */
 .ButtonPrimary, .ButtonSecondary {
   padding-top: 2px;

@@ -151,7 +151,22 @@ nav a.Selected {
 }
 
 /* BUTTON */
-.ButtonPrimary, .ButtonPreview {
+.ButtonPrimary {
+  background-color: #00a6b3;
+  color: #ffffff;
+}
+
+.ButtonPreview, .ButtonView {
   background-color: transparent;
+  color: #00a6b3;
+}
+
+.ButtonDelete {
+  background-color: transparent;
+  color: #c3232d;
+}
+
+/* LINK */
+.NavigationPopUp {
   color: #00a6b3;
 }

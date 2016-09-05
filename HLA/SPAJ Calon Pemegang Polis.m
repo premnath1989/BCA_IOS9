@@ -286,6 +286,16 @@
         [modelSPAJAnswers deleteSPAJAnswers:stringWhere];
     }
     
+    else if ([stringSection isEqualToString:@"KS_PH"]){
+        NSString *stringWhere = [NSString stringWithFormat:@"where SPAJHtmlSection='KS_PH' and SPAJTransactionID=%i",[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
+        [modelSPAJAnswers deleteSPAJAnswers:stringWhere];
+    }
+    
+    else if ([stringSection isEqualToString:@"KS_TR"]){
+        NSString *stringWhere = [NSString stringWithFormat:@"where SPAJHtmlSection='KS_TR' and SPAJTransactionID=%i",[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
+        [modelSPAJAnswers deleteSPAJAnswers:stringWhere];
+    }
+    
     //add another key to db
     NSString*spajTransactionID = [modelSPAJTransaction getSPAJTransactionData:@"SPAJTransactionID" StringWhereName:@"SPAJEappNumber" StringWhereValue:[delegate voidGetEAPPNumber]];
     //cffID = [cffHeaderSelectedDictionary valueForKey:@"PotentialDiscussionCFFID"];

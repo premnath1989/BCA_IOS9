@@ -146,7 +146,7 @@
     int minutes = (countdown / 60) % 60;
     int hours = (countdown / 3600) % 24;
     
-    NSString *DateRemaining =[NSString stringWithFormat:@"%d Hari %d Jam\n %d Menit",days1,hours,minutes];
+    NSString *DateRemaining =[NSString stringWithFormat:@"%d Hari %d Jam %d Menit",days1,hours,minutes];
     return DateRemaining;
 }
 

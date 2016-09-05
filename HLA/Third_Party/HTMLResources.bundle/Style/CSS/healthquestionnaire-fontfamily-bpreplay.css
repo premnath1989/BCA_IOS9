@@ -102,3 +102,8 @@ table.Round tbody tr td, table.Space tbody tr td {
 .ButtonPrimary, .ButtonSecondary, .ButtonPreview {
   font-family: "BPreplay_Regular";
 }
+
+/* LINK */
+.NavigationPopUp {
+  font-family: "BPreplay_Regular";
+}

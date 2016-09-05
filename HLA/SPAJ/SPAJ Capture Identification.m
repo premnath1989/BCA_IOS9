@@ -123,6 +123,15 @@ NSString* const Back = @"Back";
         return stringIDType;
     }
 
+    -(NSString *)getIDTypeDescForPemegangPolis{
+        NSString* stringIDType;
+        NSString* stringWhere = [NSString stringWithFormat:@"where elementID ='TextPolicyHolderIDTypeOther' and SPAJTransactionID = %i",[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
+        NSString* stringPOIDFromSPAJAnswers =[modelSPAJAnswers selectSPAJAnswersData:@"Value" StringWhere:stringWhere];
+        NSString* stringDBID = stringPOIDFromSPAJAnswers;
+        stringIDType = stringDBID;
+        return stringIDType;
+    }
+
     -(NSString *)getIDTypeForTertanggung{
         NSString* stringIDType;
         NSString* stringWhere = [NSString stringWithFormat:@"where elementID ='RadioButtonProspectiveInsuredIDType' and SPAJTransactionID = %i",[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
@@ -131,6 +140,16 @@ NSString* const Back = @"Back";
         stringIDType = stringDBID;
         return stringIDType;
     }
+
+    -(NSString *)getIDTypeDescForTertanggung{
+        NSString* stringIDType;
+        NSString* stringWhere = [NSString stringWithFormat:@"where elementID ='TextProspectiveInsuredIDTypeOther' and SPAJTransactionID = %i",[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
+        NSString* stringPOIDFromSPAJAnswers =[modelSPAJAnswers selectSPAJAnswersData:@"Value" StringWhere:stringWhere];
+        NSString* stringDBID = stringPOIDFromSPAJAnswers;
+        stringIDType = stringDBID;
+        return stringIDType;
+    }
+
 
     -(void)voidArrayInitialization{
         //mutableArrayNumberListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"1", @"2", @"3", @"4", nil];
@@ -342,13 +361,27 @@ NSString* const Back = @"Back";
         if (IndexRow==0)
         {
             stringIDTypeIdentifier = [modelIdentificationType getOtherTypeID:[self getIDTypeForPemegangPolis]];//[modelProspectProfile selectProspectData:@"OtherIDType" ProspectIndex:[[dictionaryPOData valueForKey:@"PO_ClientID"] intValue]] ;
-            NSString* identityDesc = [self getIDTypeForPemegangPolis];//[modelIdentificationType getOtherTypeDesc:stringIDTypeIdentifier] ;
+            NSString* identityDesc;
+            if ([[self getIDTypeForPemegangPolis] isEqualToString:@"Others"]){
+                identityDesc = [self getIDTypeDescForPemegangPolis];
+            }
+            else{
+                identityDesc = [self getIDTypeForPemegangPolis];
+            }
+            //[modelIdentificationType getOtherTypeDesc:stringIDTypeIdentifier] ;
             [buttonIDTypeSelection setTitle:identityDesc forState:UIControlStateNormal];
         }
         else if (IndexRow==1)
         {
             stringIDTypeIdentifier = [modelIdentificationType getOtherTypeID:[self getIDTypeForTertanggung]];//[modelProspectProfile selectProspectData:@"OtherIDType" ProspectIndex:[[dictionaryPOData valueForKey:@"PO_ClientID"] intValue]] ;
-            NSString* identityDesc = [self getIDTypeForPemegangPolis];//[modelIdentificationType getOtherTypeDesc:stringIDTypeIdentifier] ;
+            NSString* identityDesc;
+            if ([[self getIDTypeForTertanggung] isEqualToString:@"Others"]){
+                identityDesc = [self getIDTypeDescForTertanggung];
+            }
+            else{
+                identityDesc = [self getIDTypeForTertanggung];
+            }
+            //[modelIdentificationType getOtherTypeDesc:stringIDTypeIdentifier] ;
             [buttonIDTypeSelection setTitle:identityDesc forState:UIControlStateNormal];
         }
         else if (IndexRow==3){
@@ -371,13 +404,20 @@ NSString* const Back = @"Back";
     -(IBAction)actionViewPhoto:(UIButton *)sender{
         //[self voidShowFrontPhoto:indexSelected];
         //[self voidShowBackPhoto:indexSelected];
-        
+        NSString* identityDesc ;
+        identityDesc =[modelIdentificationType getOtherTypeDesc:stringIDTypeIdentifier];
         switch (indexSelected) {
             case 0:
                 stringIDTypeIdentifier = [modelSPAJIDCapture selectIDType:@"SPAJIDTypeParty1" SPAJSection:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
+                if ([identityDesc isEqualToString:@"Others"]){
+                    identityDesc = [self getIDTypeDescForPemegangPolis];
+                }
                 break;
             case 1:
                 stringIDTypeIdentifier = [modelSPAJIDCapture selectIDType:@"SPAJIDTypeParty2" SPAJSection:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
+                if ([identityDesc isEqualToString:@"Others"]){
+                    identityDesc = [self getIDTypeDescForTertanggung];
+                }
                 break;
             case 2:
                 stringIDTypeIdentifier = [modelSPAJIDCapture selectIDType:@"SPAJIDTypeParty3" SPAJSection:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
@@ -394,7 +434,7 @@ NSString* const Back = @"Back";
             default:
                 break;
         }
-        NSString* identityDesc ;
+        
         //if ([modelIdentificationType getOtherTypeDesc:stringIDTypeIdentifier].length>0){
             NSString* stringName;
             if (indexSelected == 0){
@@ -405,7 +445,10 @@ NSString* const Back = @"Back";
                 stringName = [NSString stringWithFormat:@"%@ (Calon Tertanggung)",[dictionaryPOData valueForKey:@"LA_Name"]];
             }
             
-            identityDesc =[modelIdentificationType getOtherTypeDesc:stringIDTypeIdentifier];
+        
+        
+        
+        
             UIImage* imageFrontPhoto = [self getFrontPhoto:indexSelected]?:[UIImage imageNamed:@"xxx.png"];
             UIImage* imageBackPhoto = [self getBackPhoto:indexSelected]?:[UIImage imageNamed:@"xxx.png"];
             

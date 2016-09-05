@@ -374,7 +374,7 @@ bool WPTPD30RisDeleted = FALSE;
     if (IsInternalStaff==0){
         //_KKLKDiskaunBtn.hidden = YES;
         //_KKLKDiskaunLbl.hidden = YES;
-        [ExtraPremiDasarLBL setText:@"Min  Rp 1,000,000,000  Max Rp 300,000,000,000"];
+        [ExtraPremiDasarLBL setText:@"Min  Rp 500,000,000  Max Rp 300,000,000,000"];
     }
     else{
         //_KKLKDiskaunBtn.hidden = NO;
