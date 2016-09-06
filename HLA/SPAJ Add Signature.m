@@ -322,6 +322,7 @@
                 [modelSPAJTransaction updateSPAJTransaction:@"SPAJCompleteness" StringColumnValue:@"Lengkap" StringWhereName:@"SPAJTransactionID" StringWhereValue:[dictTransaction valueForKey:@"SPAJTransactionID"]];*/
                 [self voidCreateAlertTextFieldViewAndShow:@"Masukkan lokasi pengambilan tanda tangan" tag:0];
                 [self voidCheckBooleanLastState];
+                return;
             }
             else if (indexSelected==2){
             
@@ -356,6 +357,7 @@
                     [modelSPAJSignature updateSPAJSignature:stringUpdate];
                     [modelSPAJTransaction updateSPAJTransaction:@"SPAJCompleteness" StringColumnValue:@"Lengkap" StringWhereName:@"SPAJTransactionID" StringWhereValue:[dictTransaction valueForKey:@"SPAJTransactionID"]];*/
                     [self voidCheckBooleanLastState];
+                    return;
                 }
                 //else if (boolOrangTuaWali && boolPemegangPolis){
                 else if (indexSelected == 2){
@@ -398,6 +400,7 @@
                     [modelSPAJSignature updateSPAJSignature:stringUpdate];
                     [modelSPAJTransaction updateSPAJTransaction:@"SPAJCompleteness" StringColumnValue:@"Lengkap" StringWhereName:@"SPAJTransactionID" StringWhereValue:[dictTransaction valueForKey:@"SPAJTransactionID"]];*/
                     [self voidCheckBooleanLastState];
+                    return;
                 }
                 else if (indexSelected == 2){}
                 //else if (boolPemegangPolis && boolTertanggung){

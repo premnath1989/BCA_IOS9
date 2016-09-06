@@ -122,31 +122,8 @@ function savetoDB()
 	var stringRadioButtonFlag = 0;
 	var booleanValidateState = true;
 
-	// QUICK FIX FOR BENEFICIARIES LIST VALIDATION
 	
-	/* if (stringPageSectionCurrent == stringPageSectionBeneficiariesList)
-	{
-		if (booleanValidateState == false)
-		{
-			
-		}
-		else
-		{
-			if (intBeneficiariesListID == 1)
-			{
-
-			}
-			else
-			{
-				ReplaceHTMLNameOnValidate("", $label.text() + "Mohon masukkan minimal 1 orang calon penerima manfaat");
-				// alert("Mohon masukkan minimal 1 orang calon penerima manfaat");
-			}
-		}
-	}
-	else
-	{
-		
-	} */
+	// QUICK FIX VALIDATION FOR FORM
 	
 	if (booleanValidateState == false)
 	{
@@ -173,36 +150,41 @@ function savetoDB()
 
 				}
 			});
+		}
+		else
+		{
 			
-			// QUICK FIX VALIDATION FOR FORM
+		}
+	}
 	
-			var booleanIncomeState = false;
+	if (booleanValidateState == false)
+	{
+		
+	}
+	else
+	{
+		var booleanIncomeState = false;
 
-			 if (stringPageValidationCurrent == "gaji")
-			 {
-				$("input:text[data-customvalidation='income']").each(function()
+		if (stringPageValidationCurrent == stringPageValidationIncome)
+		{
+			$("input:text[data-customvalidation='" + stringPageValidationIncome + "']").each(function()
+			{
+				if ($(this).val() > 0)
 				{
-					if ($(this).val() > 0)
-					{
-						booleanIncomeState = true;
-						return false;
-					}
-					else
-					{
-
-					}
-				});
-
-				if (booleanIncomeState == false)
-				{
-					booleanValidateState = false;
-					ReplaceHTMLNameOnValidate("","Harap mengisi penghasilan kotor minimum satu jenis");
-					// alert("Harap mengisi penghasilan kotor minimum satu jenis !.");
+					booleanIncomeState = true;
+					return false;
 				}
 				else
 				{
 
 				}
+			});
+
+			if (booleanIncomeState == false)
+			{
+				booleanValidateState = false;
+				ReplaceHTMLNameOnValidate("","Harap mengisi penghasilan kotor minimum satu jenis");
+				// alert("Harap mengisi penghasilan kotor minimum satu jenis !.");
 			}
 			else
 			{
@@ -211,7 +193,7 @@ function savetoDB()
 		}
 		else
 		{
-			
+
 		}
 	}
 	
@@ -226,8 +208,7 @@ function savetoDB()
 			$("input:radio[required]").each(function()
 			{												
 				stringValue = getRadioButtonGeneral($(this).attr("name"));						
-				var $label = $("label[for='"+this.name+"']")
-
+				var $label = $("label[for='"+this.name+"']")				
 				if (stringRadioButtonFlag != $(this).attr("name"))
 				{
 					if (stringValue == undefined)
@@ -256,10 +237,9 @@ function savetoDB()
 			
 		}
 	}
+
 	
-	
-	
-	
+	// VALIDATION FOR BENEFICIARIES LIST
 	
 	if (stringPageSectionCurrent == stringPageSectionBeneficiariesList)
 	{
@@ -272,6 +252,44 @@ function savetoDB()
 			if (intSharePercentage != 100)
 			{
 				ReplaceHTMLNameOnValidate("","Jumlah share percentage harus 100 !.");
+				//alert("Jumlah share percentage harus 100 !.");
+				booleanValidateState = false;
+				return false;
+			}				
+			else
+			{
+				
+			}
+		}
+		
+		if (booleanValidateState == false)
+		{
+			
+		}
+		else
+		{
+			var stringBeneficiariesListPrefix = stringPrefixText + stringBeneficiariesListInfix + "FullName";
+			var stringBeneficiariesListFilter;
+			var arrayBeneficiariesListTemporary = [];
+			var booleanBeneficiariesList = false;
+			
+			for (var k = 0; k < arrayBeneficiariesList.length; k++)
+			{
+				stringBeneficiariesListFilter = arrayBeneficiariesList[k].elementID.substring(0, stringBeneficiariesListPrefix.length)
+				
+				if (stringBeneficiariesListFilter == stringBeneficiariesListPrefix)
+				{
+					booleanBeneficiariesList = true;
+				}
+				else
+				{
+					
+				}
+			}
+			
+			if (booleanBeneficiariesList == false)
+			{
+				ReplaceHTMLNameOnValidate("","Masukkan daftar penerima manfaat paling tidak satu !.");
 				//alert("Jumlah share percentage harus 100 !.");
 				booleanValidateState = false;
 				return false;
@@ -297,19 +315,14 @@ function savetoDB()
     	
 		if (stringPageSectionCurrent == stringPageSectionHealthQuestionnaire)
 		{
-			// alert("no getter !, arrayHealthQuestionnaire length : " + arrayHealthQuestionnaire.length);
 			objectContent = arrayHealthQuestionnaire;
 		}
 		else if (stringPageSectionCurrent == stringPageSectionBeneficiariesList)
 		{
-			// alert("no getter !, arrayBeneficiariesList length : " + arrayBeneficiarisList.length);
-			arrayAdd(arrayBeneficiariesList, "TextBeneficiariesListSharePercentage", getTextForm("TextBeneficiariesListSharePercentage"));
-			// alert("TextBeneficiariesListSharePercentage" + " // " + getTextForm("TextBeneficiariesListSharePercentage"))
 			objectContent = arrayBeneficiariesList;
 		}
 		else
 		{
-			//alert("with getter !, arrayHealthQuestionnaire length : " + arrayHealthQuestionnaire.length);
 			objectContent = setToDatabase(stringPageTypeCurrent);
 		}
 

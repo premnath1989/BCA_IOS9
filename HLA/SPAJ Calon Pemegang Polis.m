@@ -13,6 +13,7 @@
 
 @implementation SPAJ_Calon_Pemegang_Polis{
     NSString *stringSection;
+    NSString *htmlSection;
     
     NSArray* newElementArrayName;
     NSArray* originalElementArrayName;
@@ -90,6 +91,18 @@
 }
 
 -(void)loadSixthHTML:(NSString*)stringHTMLName PageSection:(NSString *)stringPageSection{
+    stringSection = stringPageSection;
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    filePath = [docsDir stringByAppendingPathComponent:@"SPAJ"];
+    
+    NSString *htmlfilePath = [NSString stringWithFormat:@"SPAJ/%@",stringHTMLName];
+    NSString *localURL = [[NSString alloc] initWithString:
+                          [docsDir stringByAppendingPathComponent: htmlfilePath]];
+    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localURL]];
+    [webview loadRequest:urlRequest];
+}
+
+-(void)loadSeventhHTML:(NSString*)stringHTMLName PageSection:(NSString *)stringPageSection{
     stringSection = stringPageSection;
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     filePath = [docsDir stringByAppendingPathComponent:@"SPAJ"];
@@ -296,6 +309,11 @@
         [modelSPAJAnswers deleteSPAJAnswers:stringWhere];
     }
     
+    else if ([stringSection isEqualToString:@"KS_IN"]){
+        NSString *stringWhere = [NSString stringWithFormat:@"where SPAJHtmlSection='KS_IN' and SPAJTransactionID=%i",[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
+        [modelSPAJAnswers deleteSPAJAnswers:stringWhere];
+    }
+    
     //add another key to db
     NSString*spajTransactionID = [modelSPAJTransaction getSPAJTransactionData:@"SPAJTransactionID" StringWhereName:@"SPAJEappNumber" StringWhereValue:[delegate voidGetEAPPNumber]];
     //cffID = [cffHeaderSelectedDictionary valueForKey:@"PotentialDiscussionCFFID"];
@@ -341,6 +359,7 @@
     NSMutableDictionary* modifiedParams = [[NSMutableDictionary alloc]initWithDictionary:[params valueForKey:@"data"]];
     NSMutableDictionary* tempDict = [[NSMutableDictionary alloc] initWithDictionary:[modifiedParams valueForKey:@"SPAJAnswers"]];
     NSString* stringWhere = [NSString stringWithFormat:@"where CustomerID=%@ and SPAJID=%@ and SPAJTransactionID=%@ and SPAJHtmlSection='%@'",@"1",@"1",SPAJTransactionID,stringSection];
+    //NSString* stringWhere = [NSString stringWithFormat:@"where CustomerID=%@ and SPAJID=%@ and SPAJTransactionID=%@",@"1",@"1",SPAJTransactionID];
     [tempDict setObject:stringWhere forKey:@"where"];
     
     NSMutableDictionary* answerDictionary = [[NSMutableDictionary alloc]init];
@@ -537,6 +556,12 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
     [viewActivityIndicator setHidden:NO];
+    htmlSection = [webview stringByEvaluatingJavaScriptFromString:@"stringPageInfixTypeCurrent;"];
+    
+    if ([htmlSection isEqualToString:@"ProspectiveInsured"]){
+        stringSection = @"KS_IN";
+    }
+    
     NSString *jsonString;
     NSError *error;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:[self dictForAutoPopulate]
@@ -551,7 +576,7 @@
         NSLog(@"json string %@",jsonString);
     }
     
-    if (([stringSection isEqualToString:@"KS_PH"])||([stringSection isEqualToString:@"KS_TR"])){
+    if (([stringSection isEqualToString:@"KS_PH"])||([stringSection isEqualToString:@"KS_TR"])||([stringSection isEqualToString:@"KS_IN"])){
         NSString *SINO = [modelSPAJTransaction getSPAJTransactionData:@"SPAJSINO" StringWhereName:@"SPAJEappNumber" StringWhereValue:[delegate voidGetEAPPNumber]];
         NSDictionary* dictPOData = [[NSDictionary alloc ]initWithDictionary:[modelSIPData getPO_DataFor:SINO]];
         NSString* stringRelation = [formatter getRelationNameForHtml:[dictPOData valueForKey:@"RelWithLA"]];

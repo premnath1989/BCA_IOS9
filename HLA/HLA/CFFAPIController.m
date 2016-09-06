@@ -181,14 +181,17 @@
                 
                 //check duplicate value
                 //NSString* query=[NSString stringWithFormat:@"select CFFHtmlID from CFFHtml where CFFID=%@ and CFFHtmlName=%@ and CFFHtmlStatus=%@ and CFFHtmlSection=%@",stringID,stringFileName,stringStatus,stringSection];
-                NSString* query=[NSString stringWithFormat:@"select count(%@) as %@ from %@ where %@=%@ and %@=%@ and %@=%@ and %@=%@",stringDuplicateCheckerColumnName,stringDuplicateCheckerColumnName,stringDuplicateCheckerTableName,stringDuplicateCheckerWhere1,stringID,stringDuplicateCheckerWhere2,stringFileName,stringDuplicateCheckerWhere3,stringStatus,stringDuplicateCheckerWhere4,stringSection];
+                NSString* query=[NSString stringWithFormat:@"select count(%@) as Count,%@ from %@ where %@=%@ and %@=%@ and %@=%@ and %@=%@",stringDuplicateCheckerColumnName,stringDuplicateCheckerColumnName,stringDuplicateCheckerTableName,stringDuplicateCheckerWhere1,stringID,stringDuplicateCheckerWhere2,stringFileName,stringDuplicateCheckerWhere3,stringStatus,stringDuplicateCheckerWhere4,stringSection];
                 //NSString* columnReturn = @"CFFHtmlID";
-                NSString* columnReturn = stringDuplicateCheckerColumnName;
+                
+                
+                NSString* columnReturn = @"Count";
 
                 int duplicateRow = [modelCFFHtml voidGetDuplicateRowID:query ColumnReturn:columnReturn];
+                int htmlID = [modelCFFHtml voidGetDuplicateRowID:query ColumnReturn:stringDuplicateCheckerColumnName];
                 if (duplicateRow>0){
-                    [tableColumn addObject:columnReturn];
-                    [tableValue addObject:[NSNumber numberWithInt:duplicateRow]];
+                    [tableColumn addObject:stringDuplicateCheckerColumnName];
+                    [tableValue addObject:[NSNumber numberWithInt:htmlID]];
                 }
                 
                 NSMutableDictionary* dictDataTable = [[NSMutableDictionary alloc]initWithDictionary:tableDictionary];

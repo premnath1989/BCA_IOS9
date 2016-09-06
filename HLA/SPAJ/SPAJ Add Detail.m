@@ -25,6 +25,7 @@
 #import "ModelSPAJSignature.h"
 #import "Alert.h"
 #import "ModelSPAJTransaction.h"
+#import "ModelSIPOData.h"
 
 // DECLARATION
 
@@ -51,6 +52,7 @@
     ModelSPAJHtml *modelSPAJHtml;
     ModelSPAJDetail *modelSPAJDetail;
     ModelSPAJTransaction *modelSPAJTransaction;
+    ModelSIPOData* modelSIPData;
     Alert* alert;
     
     NSMutableArray *NumberListOfSubMenu;
@@ -94,6 +96,7 @@
         alert = [[Alert alloc]init];
         modelSPAJSignature = [[ModelSPAJSignature alloc]init];
         modelSPAJTransaction = [[ModelSPAJTransaction alloc]init];
+        modelSIPData = [[ModelSIPOData alloc]init];
         
         [self setNavigationBar];
         
@@ -704,6 +707,9 @@
         else if ([stringSection isEqualToString:@"KS_PH"]){
             [self voidSetKesehatanBoolValidate:true];
         }
+        else if ([stringSection isEqualToString:@"KS_IN"]){
+            [self.navigationController popViewControllerAnimated:YES];
+        }
         
         [modelSPAJTransaction updateSPAJTransaction:@"SPAJDateModified" StringColumnValue:[formatter getDateToday:@"yyyy-MM-dd HH:mm:ss"] StringWhereName:@"SPAJEappNumber" StringWhereValue:[dictTransaction valueForKey:@"SPAJEappNumber"]];
         
@@ -762,7 +768,16 @@
         NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJDetail6=1 where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",[dictTransaction valueForKey:@"SPAJEappNumber"]];
         [modelSPAJDetail updateSPAJDetail:stringUpdate];
         [self voidCheckBooleanLastState];
-        [self.navigationController popViewControllerAnimated:YES];
+        //[self.navigationController popViewControllerAnimated:YES];
+        
+        NSDictionary* dictPOData = [[NSDictionary alloc ]initWithDictionary:[modelSIPData getPO_DataFor:[dictTransaction valueForKey:@"SPAJSINO"]]];
+        if ([[dictPOData valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"]){
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        else{
+            NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"KS_IN"];
+            [spajCalonPemegangPolis loadSeventhHTML:stringHTMLName PageSection:@"KS_IN"];
+        }
     }
 #pragma mark delegate image picker
     - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info

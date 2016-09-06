@@ -260,6 +260,7 @@
     {
         if (!boolTenagaPenjualSigned){
             [self voidCreateThePDF];
+            //[self voidCreateImageFromWebView];
             [modelSPAJTransaction updateSPAJTransaction:@"SPAJDateModified" StringColumnValue:[formatter getDateToday:@"yyyy-MM-dd HH:mm:ss"] StringWhereName:@"SPAJEappNumber" StringWhereValue:[dictTransaction valueForKey:@"SPAJEappNumber"]];
             //[self performSelector:@selector(voidCreateThePDF) withObject:nil afterDelay:2.0];
         }
@@ -310,6 +311,23 @@
             NSLog(@"PDF couldnot be created");
         }
 
+    }
+
+    -(void)voidCreateImageFromWebView{
+        UIGraphicsBeginImageContext(CGSizeMake(webview.layer.frame.size.width, webview.layer.frame.size.height));
+        [webview.layer renderInContext:UIGraphicsGetCurrentContext()];
+        UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        UIGraphicsBeginImageContext(CGSizeMake(70,100));
+        [image drawInRect:CGRectMake(0, 0, 70,100)];
+        image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+
+        NSData *thumbnailData = UIImagePNGRepresentation(image);
+        
+        NSString *relativeOutputFilePath = [NSString stringWithFormat:@"%@/HealthQuestionaire.png", [formatter generateSPAJFileDirectory:[dictTransaction valueForKey:@"SPAJEappNumber"]]];
+        [thumbnailData writeToFile:relativeOutputFilePath atomically:YES];
     }
 
     - (IBAction)actionGoToStep5:(id)sender

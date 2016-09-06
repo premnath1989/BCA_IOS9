@@ -239,7 +239,12 @@
     FMResultSet *s = [database executeQuery:@"SELECT IndexNo, ContactCode, ContactNo, Prefix FROM contact_input where indexNo = ? AND ContactCode = ?", IndexNo, ContactCode, Nil];
     
     while ([s next]) {
-        MobileNo = [NSString stringWithFormat:@"%@ - %@",[s stringForColumn:@"Prefix"],[s stringForColumn:@"ContactNo"]];
+        if ([[s stringForColumn:@"ContactNo"] length]>0){
+            MobileNo = [NSString stringWithFormat:@"%@-%@",[s stringForColumn:@"Prefix"],[s stringForColumn:@"ContactNo"]];
+        }
+        else{
+            MobileNo = [NSString stringWithFormat:@"%@%@",[s stringForColumn:@"Prefix"],[s stringForColumn:@"ContactNo"]];
+        }
     }
     
     [results close];
