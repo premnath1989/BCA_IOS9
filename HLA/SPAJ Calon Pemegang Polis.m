@@ -561,6 +561,9 @@
     if ([htmlSection isEqualToString:@"ProspectiveInsured"]){
         stringSection = @"KS_IN";
     }
+    else if ([htmlSection isEqualToString:@"PolicyHolder"]){
+        stringSection = @"KS_PH";
+    }
     
     NSString *jsonString;
     NSError *error;
