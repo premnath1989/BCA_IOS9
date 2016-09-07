@@ -66,8 +66,7 @@ NSString *uatAgentCode;
     ExitIndex = 4;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidTimeout:) name:kApplicationDidTimeoutNotification object:nil];
-    //[self getHTMLDataTable];
-    //[self getCFFHTMLFile];
+    
     [self copyJqueryLibstoDir];
     ClearData *CleanData =[[ClearData alloc]init];
     [CleanData SPAJExpiredWipeOff];
@@ -107,6 +106,26 @@ NSString *uatAgentCode;
 - (void)copyJqueryLibstoDir{
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     fileJqueryLibsPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"jqueryLibrary"];
+    
+    //first we get the version number of the JQueryLibrary from bundle
+    NSBundle *myLibraryBundle = [NSBundle bundleWithURL:[[NSBundle mainBundle]
+                                                         URLForResource:@"HTMLResources" withExtension:@"bundle"]];
+    NSString *filePath   = [myLibraryBundle pathForResource:@"Info" ofType:@"plist"];
+    NSMutableDictionary *infoBundleDict = [[NSMutableDictionary alloc] initWithContentsOfFile:filePath];
+    NSString *jQueryBundleVer = [infoBundleDict objectForKey:@"CFBundleShortVersionString"];
+    
+    NSString *htmlPath = [[NSString alloc] initWithString:
+                          [fileJqueryLibsPath stringByAppendingPathComponent: @"/Info.plist"]];
+    NSMutableDictionary *infoDirDict = [[NSMutableDictionary alloc] initWithContentsOfFile:htmlPath];
+    NSString *jQueryDirVer = [infoDirDict objectForKey:@"CFBundleShortVersionString"];
+    
+    NSInteger jQueryBundleVerInt = [jQueryBundleVer intValue];
+    NSInteger jQueryDirVerInt = [jQueryDirVer intValue];
+    
+    //if the bundle version is higher, remove the folder
+    if(jQueryBundleVerInt > jQueryDirVerInt){
+        [[NSFileManager defaultManager] removeItemAtPath:fileJqueryLibsPath error:NULL];
+    }
     [self createDirectory];
 }
 
