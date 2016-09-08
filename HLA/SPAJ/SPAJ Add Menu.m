@@ -687,19 +687,19 @@
         CGContextDrawPDFPage(pdfContext, page);
         
         // Draw the signature on pdfContext
-        pageRect = CGRectMake(67, 500,96 , 53);
+        pageRect = CGRectMake(67, 486,96 , 53);
         CGImageRef pageImage1 = [imgSignature1 CGImage];
         CGContextDrawImage(pdfContext, pageRect, pageImage1);
         
-        pageRect = CGRectMake(239, 500,96 , 53);
+        pageRect = CGRectMake(239, 486,96 , 53);
         CGImageRef pageImage2 = [imgSignature2 CGImage];
         CGContextDrawImage(pdfContext, pageRect, pageImage2);
         
-        pageRect = CGRectMake(407, 500,96 , 53);
+        pageRect = CGRectMake(407, 486,96 , 53);
         CGImageRef pageImage3 = [imgSignature3 CGImage];
         CGContextDrawImage(pdfContext, pageRect, pageImage3);
         
-        pageRect = CGRectMake(575, 500,96 , 53);
+        pageRect = CGRectMake(575, 486,96 , 53);
         CGImageRef pageImage4 = [imgSignature4 CGImage];
         CGContextDrawImage(pdfContext, pageRect, pageImage4);
         
@@ -999,6 +999,16 @@
         return dictForSignature;
     }
 
+    -(NSDictionary *)getDictionaryForVANumber:(NSString *)stringDBColumnName HTMLID:(NSString *)stringHTMLID{
+        NSString* spajNumber = [modelSPAJTransaction getSPAJTransactionData:@"SPAJNumber" StringWhereName:@"SPAJTransactionID" StringWhereValue:[dictTransaction valueForKey:@"SPAJTransactionID"]];
+        NSMutableDictionary* dictForSignature=[[NSMutableDictionary alloc]init];
+        [dictForSignature setObject:stringHTMLID forKey:@"elementID"];
+        [dictForSignature setObject:[NSString stringWithFormat:@"02063%@",spajNumber?:@""] forKey:@"Value"];
+        [dictForSignature setObject:@"1" forKey:@"CustomerID"];
+        [dictForSignature setObject:@"1" forKey:@"SPAJID"];
+        return dictForSignature;
+    }
+
 
     - (NSMutableDictionary*)readfromDB:(NSMutableDictionary*) params{
         NSString *SPAJTransactionID = [dictTransaction valueForKey:@"SPAJTransactionID"];
@@ -1042,8 +1052,9 @@
             [modifieArray addObject:[self getDictionaryForSignature:[arrayDBSignature objectAtIndex:i] HTMLID:[arrayHTMLSignature objectAtIndex:i]]];
         }
         
-        //[modifieArray addObject:[self getDictionaryForSPAJNumber:@"SPAJNumber" HTMLID:@"TextHeaderSPAJNumber"]];
         [modifieArray addObject:[self getDictionaryForSPAJNumber:@"SPAJNumber" HTMLID:@"TextSPAJNumber"]];
+        [modifieArray addObject:[self getDictionaryForVANumber:@"SPAJNumber" HTMLID:@"TextVANumber"]];
+        
         [dictOriginal setObject:modifieArray forKey:@"readFromDB"];
         [self callSuccessCallback:[params valueForKey:@"successCallBack"] withRetValue:dictOriginal];
         //[webview setHidden:NO];

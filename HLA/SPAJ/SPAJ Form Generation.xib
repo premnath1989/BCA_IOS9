@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="BPreplay_Regular.ttf">
+        <mutableArray key="BPreplay.otf">
             <string>BPreplay</string>
         </mutableArray>
     </customFonts>
@@ -34,6 +34,10 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0X5-SW-rtC">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pi5-52-vFL" customClass="ViewPageHeader">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
                     <subviews>
@@ -367,9 +371,15 @@
                 <constraint firstAttribute="trailing" secondItem="qLA-Ph-RKi" secondAttribute="trailing" id="9n7-uM-lsT"/>
                 <constraint firstItem="iRa-Ab-yiP" firstAttribute="top" secondItem="pi5-52-vFL" secondAttribute="top" id="BIJ-r9-Fmo"/>
                 <constraint firstItem="Tnk-va-LaM" firstAttribute="top" secondItem="pi5-52-vFL" secondAttribute="bottom" id="DQI-AU-00M"/>
+                <constraint firstAttribute="trailing" secondItem="0X5-SW-rtC" secondAttribute="trailing" constant="280" id="DfK-U5-nJ6">
+                    <variation key="widthClass=regular" constant="0.0"/>
+                </constraint>
                 <constraint firstAttribute="trailing" secondItem="iRa-Ab-yiP" secondAttribute="trailing" id="FAf-p7-c4a"/>
                 <constraint firstItem="Tnk-va-LaM" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="HIm-XD-vEu"/>
                 <constraint firstItem="iRa-Ab-yiP" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="JF9-4f-apw"/>
+                <constraint firstItem="0X5-SW-rtC" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="236" id="JNH-em-Xep">
+                    <variation key="widthClass=regular" constant="0.0"/>
+                </constraint>
                 <constraint firstAttribute="bottom" secondItem="iRa-Ab-yiP" secondAttribute="bottom" id="KYm-0C-T9A"/>
                 <constraint firstItem="iRa-Ab-yiP" firstAttribute="leading" secondItem="qLA-Ph-RKi" secondAttribute="leading" id="R4C-Jm-E1z"/>
                 <constraint firstItem="iRa-Ab-yiP" firstAttribute="top" secondItem="pi5-52-vFL" secondAttribute="top" id="T3j-69-yz9"/>
@@ -382,7 +392,13 @@
                 <constraint firstAttribute="bottom" secondItem="iRa-Ab-yiP" secondAttribute="bottom" id="dRq-T9-538"/>
                 <constraint firstItem="iRa-Ab-yiP" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="fWu-zk-61s"/>
                 <constraint firstItem="qLA-Ph-RKi" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="gTy-2Q-Nbh"/>
+                <constraint firstItem="0X5-SW-rtC" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="280" id="hJK-3p-Az1">
+                    <variation key="widthClass=regular" constant="0.0"/>
+                </constraint>
                 <constraint firstItem="iRa-Ab-yiP" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="jQC-TW-EFg"/>
+                <constraint firstAttribute="bottom" secondItem="0X5-SW-rtC" secondAttribute="bottom" constant="236" id="joT-ab-u5y">
+                    <variation key="widthClass=regular" constant="0.0"/>
+                </constraint>
                 <constraint firstAttribute="trailing" secondItem="Tnk-va-LaM" secondAttribute="trailing" id="lE6-3V-nYw"/>
                 <constraint firstItem="iRa-Ab-yiP" firstAttribute="trailing" secondItem="Tnk-va-LaM" secondAttribute="trailing" id="pb2-NN-gKb"/>
                 <constraint firstItem="pi5-52-vFL" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="rBK-Yf-qTL"/>
@@ -390,6 +406,9 @@
                 <constraint firstAttribute="trailing" secondItem="pi5-52-vFL" secondAttribute="trailing" id="x9T-aW-hmA"/>
             </constraints>
             <variation key="default">
+                <mask key="subviews">
+                    <exclude reference="0X5-SW-rtC"/>
+                </mask>
                 <mask key="constraints">
                     <exclude reference="0KR-ZG-JQY"/>
                     <exclude reference="3uC-N5-nx2"/>
@@ -411,14 +430,25 @@
                     <exclude reference="jQC-TW-EFg"/>
                     <exclude reference="pb2-NN-gKb"/>
                     <exclude reference="rQX-rH-RSf"/>
+                    <exclude reference="DfK-U5-nJ6"/>
+                    <exclude reference="JNH-em-Xep"/>
+                    <exclude reference="hJK-3p-Az1"/>
+                    <exclude reference="joT-ab-u5y"/>
                 </mask>
             </variation>
             <variation key="widthClass=regular">
+                <mask key="subviews">
+                    <include reference="0X5-SW-rtC"/>
+                </mask>
                 <mask key="constraints">
                     <include reference="8hQ-gv-S1w"/>
                     <include reference="BIJ-r9-Fmo"/>
                     <include reference="pb2-NN-gKb"/>
                     <include reference="rQX-rH-RSf"/>
+                    <include reference="DfK-U5-nJ6"/>
+                    <include reference="JNH-em-Xep"/>
+                    <include reference="hJK-3p-Az1"/>
+                    <include reference="joT-ab-u5y"/>
                 </mask>
             </variation>
             <variation key="heightClass=regular-widthClass=regular">

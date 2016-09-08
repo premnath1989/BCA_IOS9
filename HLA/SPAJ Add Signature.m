@@ -567,20 +567,20 @@
     switch (index) {
         case 0:
             //pageRect = CGRectMake(67, 1195,96 , 53);
-            pageRect = CGRectMake(67, 507,96 , 53);
+            pageRect = CGRectMake(67, 486,96 , 53);
             [self addSignatureForPage1:imgSignature onPDFData:pdfData Index:index];
             break;
         case 1:
             //pageRect = CGRectMake(239, 1195,96 , 53);
-            pageRect = CGRectMake(239, 507,96 , 53);
+            pageRect = CGRectMake(239, 486,96 , 53);
             break;
         case 2:
             //pageRect = CGRectMake(407, 1195,96 , 53);
-            pageRect = CGRectMake(407, 507,96 , 53);
+            pageRect = CGRectMake(407, 486,96 , 53);
             break;
         case 3:
             //pageRect = CGRectMake(575, 1195,96 , 53);
-            pageRect = CGRectMake(575, 507,96 , 53);
+            pageRect = CGRectMake(575, 486,96 , 53);
             break;
             
         default:

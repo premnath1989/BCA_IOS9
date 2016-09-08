@@ -5,6 +5,10 @@
 //  Created by Basvi on 8/19/16.
 //  Copyright © 2016 InfoConnect Sdn Bhd. All rights reserved.
 //
+NSString* const PaymentSection = @"Payment";
+NSString* const OtherSection = @"Other";
+NSString* const FrontPhoto = @"Front";
+NSString* const BackPhoto = @"Back";
 
 #import "SPAJIDCapturedViewController.h"
 
@@ -13,8 +17,10 @@
 @end
 
 @implementation SPAJIDCapturedViewController
-@synthesize dictionaryIDData;
+@synthesize dictionaryIDData,dictTransaction;
 @synthesize imageFront,imageBack;
+@synthesize partyIndex;
+@synthesize buttonTitle;
 
 - (void)viewWillLayoutSubviews{
     [super viewWillLayoutSubviews];
@@ -23,6 +29,8 @@
 }
 
 - (void)viewDidLoad {
+    formatter = [[Formatter alloc]init];
+    
     [self loadIDInformation];
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -36,11 +44,73 @@
 -(void)loadIDInformation{
     NSString* IDType  = [dictionaryIDData valueForKey:@"IDType"];
     NSString* stringName = [dictionaryIDData valueForKey:@"stringName"];
-    
-    [imageViewFront setImage:imageFront];
-    [imageViewBack setImage:imageBack];
     [labelIDDesc setText:IDType];
     [labelName setText:stringName];
+    if (([partyIndex intValue]==4)||([partyIndex intValue]==5)){
+        [scrollImageCaptured setHidden:NO];
+        [self showMultiplePictureForSection:@"" StringButtonType:buttonTitle];
+    }
+    else{
+        [imageViewFront setImage:imageFront];
+        [imageViewBack setImage:imageBack];
+        [scrollImageCaptured setHidden:YES];
+    }
+}
+
+
+-(void)showMultiplePictureForSection:(NSString *)stringSection StringButtonType:(NSString *)stringButtonType{
+    NSString* stringEAPPPath = [dictTransaction valueForKey:@"SPAJEappNumber"];
+    NSString* fileNameFront=[NSString stringWithFormat:@"%@_%@_%@_%@",stringEAPPPath,PaymentSection,stringButtonType?:@"",FrontPhoto];
+    NSString* fileNameBack=[NSString stringWithFormat:@"%@_%@_%@_%@",stringEAPPPath,PaymentSection,stringButtonType?:@"",BackPhoto];
+    
+    NSArray* arrayImageFront=[[NSArray alloc]initWithArray:[self loadFilesList:fileNameFront]];
+    NSArray* arrayImageBack=[[NSArray alloc]initWithArray:[self loadFilesList:fileNameBack]];
+    
+    NSMutableArray* arrayAllImage = [[NSMutableArray alloc]initWithArray:arrayImageFront];
+    [arrayAllImage addObjectsFromArray:arrayImageBack];
+    UIView* viewParent;
+    [viewParent setFrame:CGRectMake(0, 0, 398, 283)];
+    
+    [scrollImageCaptured addSubview:viewParent];
+    for (int i=0;i<[arrayAllImage count];i++){
+        [scrollImageCaptured addSubview:[self viewIDImage:i StringImageName:[arrayAllImage objectAtIndex:i]]];
+    }
+}
+
+-(UIView *)viewIDImage:(int)imageIndex StringImageName:(NSString *)stringImage{
+    NSString* fileName = stringImage;
+    UIView* viewParent;
+    [viewParent setFrame:CGRectMake(0, imageIndex*283, 398, 283)];
+    
+    UILabel* labelImageName = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 398, 50)];
+    UIImageView* imageViewID = [[UIImageView alloc]initWithFrame:CGRectMake(0, 50, 398, 233)];
+    
+    [labelImageName setText:fileName];
+    [imageViewID setImage:[UIImage imageWithContentsOfFile:[NSString stringWithFormat:@"%@/%@",[formatter generateSPAJFileDirectory:[dictTransaction valueForKey:@"SPAJEappNumber"]],fileName]]];
+    
+    [viewParent addSubview:labelImageName];
+    [viewParent addSubview:imageViewID];
+    [viewParent setBackgroundColor:[UIColor redColor]];
+    return viewParent;
+}
+
+- (NSArray *)loadFilesList:(NSString *)fileName{
+    //NSString* stringFilePath = fileName;
+    formatter = [[Formatter alloc]init];
+    NSString* stringFilePath = [formatter generateSPAJFileDirectory:[dictTransaction valueForKey:@"SPAJEappNumber"]];
+    
+    NSPredicate *sPredicate = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"SELF contains[c] '%@'",fileName]];
+    int count;
+    
+    NSArray *directoryContent = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:stringFilePath error:NULL];
+    NSMutableArray* arrayFileContent = [[NSMutableArray alloc]initWithArray:directoryContent];
+    
+    [arrayFileContent filterUsingPredicate:sPredicate];
+    for (count = 0; count < (int)[arrayFileContent count]; count++)
+    {
+        NSLog(@"File %d: %@", (count + 1), [arrayFileContent objectAtIndex:count]);
+    }
+    return arrayFileContent;
 }
 
 

@@ -8,6 +8,7 @@
 
 
 // IMPORT
+#define IS_RETINA ([[UIScreen mainScreen] respondsToSelector:@selector(displayLinkWithTarget:selector:)] && ([UIScreen mainScreen].scale == 2.0))
 #define kPaperSizeA4 CGSizeMake(595,842)
 #define kPaperSizeA4Portrait CGSizeMake(750,1300)
 
@@ -106,10 +107,13 @@
         //define the webview coordinate
         webview=[[UIWebView alloc]initWithFrame:CGRectMake(5, 0, 960,728)];
         webview.scrollView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
-        [webview setHidden:YES];
+        //[webview setHidden:YES];
         [super viewDidLoad];
         
         // Do any additional setup after loading the view, typically from a nib.
+        for (int i=0; i<[[self.view subviews] count];i++){
+            [self.view sendSubviewToBack:webview];
+        }
         
         // INITIALIZATION
         alert = [[Alert alloc]init];
@@ -314,19 +318,99 @@
     }
 
     -(void)voidCreateImageFromWebView{
-        UIGraphicsBeginImageContext(CGSizeMake(webview.layer.frame.size.width, webview.layer.frame.size.height));
-        [webview.layer renderInContext:UIGraphicsGetCurrentContext()];
-        UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
+        int currentWebViewHeight = webview.scrollView.contentSize.height;
+        int scrollByY = webview.frame.size.height;
         
-        UIGraphicsBeginImageContext(CGSizeMake(70,100));
-        [image drawInRect:CGRectMake(0, 0, 70,100)];
-        image = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-
-        NSData *thumbnailData = UIImagePNGRepresentation(image);
+        [webview.scrollView setContentOffset:CGPointMake(0, 0)];
         
-        NSString *relativeOutputFilePath = [NSString stringWithFormat:@"%@/HealthQuestionaire.png", [formatter generateSPAJFileDirectory:[dictTransaction valueForKey:@"SPAJEappNumber"]]];
+        NSMutableArray* images = [[NSMutableArray alloc] init];
+        
+        CGRect screenRect = webview.frame;
+        
+        int pages = currentWebViewHeight/scrollByY;
+        if (currentWebViewHeight%scrollByY > 0) {
+            pages ++;
+        }
+        
+        for (int i = 0; i< pages; i++)
+        {
+            if (i == pages-1) {
+                if (pages>1)
+                    screenRect.size.height = currentWebViewHeight - scrollByY;
+            }
+            
+            if (IS_RETINA)
+                UIGraphicsBeginImageContextWithOptions(screenRect.size, NO, 0);
+            else
+                UIGraphicsBeginImageContext( screenRect.size );
+            if ([webview.layer respondsToSelector:@selector(setContentsScale:)]) {
+                webview.layer.contentsScale = [[UIScreen mainScreen] scale];
+            }
+            //UIGraphicsBeginImageContext(screenRect.size);
+            CGContextRef ctx = UIGraphicsGetCurrentContext();
+            [[UIColor blackColor] set];
+            CGContextFillRect(ctx, screenRect);
+            
+            [webview.layer renderInContext:ctx];
+            
+            UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+            
+            if (i == 0)
+            {
+                scrollByY = webview.frame.size.height;
+            }
+            else
+            {
+                scrollByY += webview.frame.size.height;
+            }
+            [webview.scrollView setContentOffset:CGPointMake(0, scrollByY)];
+            [images addObject:newImage];
+        }
+        
+        [webview.scrollView setContentOffset:CGPointMake(0, 0)];
+        
+        UIImage *resultImage;
+        
+        if(images.count > 1) {
+            //join all images together..
+            CGSize size;
+            for(int i=0;i<images.count;i++) {
+                
+                size.width = MAX(size.width, ((UIImage*)[images objectAtIndex:i]).size.width );
+                size.height += ((UIImage*)[images objectAtIndex:i]).size.height;
+            }
+            
+            if (IS_RETINA)
+                UIGraphicsBeginImageContextWithOptions(size, NO, 0);
+            else
+                UIGraphicsBeginImageContext(size);
+            if ([webview.layer respondsToSelector:@selector(setContentsScale:)]) {
+                webview.layer.contentsScale = [[UIScreen mainScreen] scale];
+            }
+            CGContextRef ctx = UIGraphicsGetCurrentContext();
+            [[UIColor blackColor] set];
+            CGContextFillRect(ctx, screenRect);
+            
+            int y=0;
+            for(int i=0;i<images.count;i++) {
+                
+                UIImage* img = [images objectAtIndex:i];
+                [img drawAtPoint:CGPointMake(0,y)];
+                y += img.size.height;
+            }
+            
+            resultImage = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+        } else {
+            
+            resultImage = [images objectAtIndex:0];
+        }
+        [images removeAllObjects];
+        
+        NSData *thumbnailData = UIImageJPEGRepresentation(resultImage, 0);
+        
+        NSString *relativeOutputFilePath = [NSString stringWithFormat:@"%@/HealthQuestionaire.jpg", [formatter generateSPAJFileDirectory:[dictTransaction valueForKey:@"SPAJEappNumber"]]];
         [thumbnailData writeToFile:relativeOutputFilePath atomically:YES];
     }
 
@@ -475,8 +559,6 @@
     }
 
     - (void)webViewDidFinishLoad:(UIWebView *)webView{
-       //[webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"document.getElementById('read').click()"]];
-        
         [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"readfromDB();"]];
     }
 

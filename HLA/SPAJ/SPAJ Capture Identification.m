@@ -457,10 +457,15 @@ NSString* const Back = @"Back";
                                        stringName?:@"",@"stringName",nil];
             
             spajIDCapturedViewController = [[SPAJIDCapturedViewController alloc]initWithNibName:@"SPAJIDCapturedViewController" bundle:nil];
+            [spajIDCapturedViewController setDictTransaction:dictTransaction];
             [spajIDCapturedViewController setDictionaryIDData:dictIDInfo];
             [spajIDCapturedViewController setImageBack:imageBackPhoto];
             [spajIDCapturedViewController setImageFront:imageFrontPhoto];
-            
+            //[spajIDCapturedViewController showMultiplePictureForSection:@"Others" StringButtonType:[buttonIDTypeSelection currentTitle]];
+            [spajIDCapturedViewController setButtonTitle:[buttonIDTypeSelection currentTitle]];
+            [spajIDCapturedViewController setPartyIndex:[NSNumber numberWithInt:indexSelected]];
+        
+        
             spajIDCapturedViewController.modalPresentationStyle = UIModalPresentationFormSheet;
             [self presentViewController:spajIDCapturedViewController animated:YES completion:nil];
         /*}
