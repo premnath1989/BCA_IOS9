@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="BPreplay.otf">
+        <mutableArray key="BPreplay_Regular.otf">
             <string>BPreplay</string>
         </mutableArray>
     </customFonts>
@@ -410,6 +410,10 @@
                     <exclude reference="0X5-SW-rtC"/>
                 </mask>
                 <mask key="constraints">
+                    <exclude reference="DfK-U5-nJ6"/>
+                    <exclude reference="JNH-em-Xep"/>
+                    <exclude reference="hJK-3p-Az1"/>
+                    <exclude reference="joT-ab-u5y"/>
                     <exclude reference="0KR-ZG-JQY"/>
                     <exclude reference="3uC-N5-nx2"/>
                     <exclude reference="7PO-Hi-LeA"/>
@@ -430,10 +434,6 @@
                     <exclude reference="jQC-TW-EFg"/>
                     <exclude reference="pb2-NN-gKb"/>
                     <exclude reference="rQX-rH-RSf"/>
-                    <exclude reference="DfK-U5-nJ6"/>
-                    <exclude reference="JNH-em-Xep"/>
-                    <exclude reference="hJK-3p-Az1"/>
-                    <exclude reference="joT-ab-u5y"/>
                 </mask>
             </variation>
             <variation key="widthClass=regular">
@@ -441,14 +441,14 @@
                     <include reference="0X5-SW-rtC"/>
                 </mask>
                 <mask key="constraints">
-                    <include reference="8hQ-gv-S1w"/>
-                    <include reference="BIJ-r9-Fmo"/>
-                    <include reference="pb2-NN-gKb"/>
-                    <include reference="rQX-rH-RSf"/>
                     <include reference="DfK-U5-nJ6"/>
                     <include reference="JNH-em-Xep"/>
                     <include reference="hJK-3p-Az1"/>
                     <include reference="joT-ab-u5y"/>
+                    <include reference="8hQ-gv-S1w"/>
+                    <include reference="BIJ-r9-Fmo"/>
+                    <include reference="pb2-NN-gKb"/>
+                    <include reference="rQX-rH-RSf"/>
                 </mask>
             </variation>
             <variation key="heightClass=regular-widthClass=regular">

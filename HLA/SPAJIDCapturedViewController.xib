@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="BPreplay.otf">
+        <mutableArray key="BPreplay_Regular.otf">
             <string>BPreplay</string>
             <string>BPreplay</string>
             <string>BPreplay</string>
@@ -18,7 +18,7 @@
                 <outlet property="imageViewFront" destination="MBF-AJ-1Hl" id="Gof-D5-hIp"/>
                 <outlet property="labelIDDesc" destination="rhU-UU-3JY" id="KGf-7w-F1E"/>
                 <outlet property="labelName" destination="g30-HE-wVd" id="nSc-6k-wsz"/>
-                <outlet property="scrollImageCaptured" destination="v1E-Sz-21P" id="o4c-q8-J2D"/>
+                <outlet property="tableImageCaptured" destination="Bzi-T9-f8f" id="Jg3-XN-mjZ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -74,11 +74,16 @@
                     <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="v1E-Sz-21P">
-                    <rect key="frame" x="8" y="131" width="571" height="469"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="283" sectionHeaderHeight="28" sectionFooterHeight="28" id="Bzi-T9-f8f">
+                    <rect key="frame" x="94" y="131" width="398" height="469"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.0" green="0.62745098040000002" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
-                </scrollView>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="Njc-4i-c7B"/>
+                        <outlet property="delegate" destination="-1" id="0XS-tv-OL1"/>
+                    </connections>
+                </tableView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>

@@ -181,6 +181,7 @@
 -(IBAction)actionSubmit:(UIButton *)sender{
     bool maximumReach = [modelSPAJSubmitTracker voidMaximumSubmitReached:[formatter getDateToday:@"yyyy-MM-dd"]];
     if (!maximumReach){
+        [sender setEnabled:NO];
         NSString *serverURL = [NSString stringWithFormat:@"%@/Service2.svc/CreateRemoteFtpFolder?spajNumber=%@",[(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL], [dictTransaction valueForKey:@"SPAJNumber"]];
         
         NSURLSession *session = [NSURLSession sharedSession];
@@ -194,6 +195,9 @@
                             [sender setEnabled:NO];
                             [self voidUploadFile];
                         });
+                    }
+                    else{
+                        [sender setEnabled:YES];
                     }
                 }] resume];
     }

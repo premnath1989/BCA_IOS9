@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Formatter.h"
+#import "MultipleImageIDTableViewCell.h"
 
 @interface SPAJIDCapturedViewController : UIViewController{
     Formatter *formatter;
@@ -16,7 +17,7 @@
     IBOutlet UIImageView* imageViewBack;
     IBOutlet UILabel* labelName;
     IBOutlet UILabel* labelIDDesc;
-    IBOutlet UIScrollView* scrollImageCaptured;
+    IBOutlet UITableView* tableImageCaptured;
 }
 
 -(void)loadIDInformation;

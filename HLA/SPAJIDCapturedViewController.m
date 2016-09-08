@@ -12,7 +12,9 @@ NSString* const BackPhoto = @"Back";
 
 #import "SPAJIDCapturedViewController.h"
 
-@interface SPAJIDCapturedViewController ()
+@interface SPAJIDCapturedViewController (){
+    NSMutableArray* arrayAllImage;
+}
 
 @end
 
@@ -47,13 +49,13 @@ NSString* const BackPhoto = @"Back";
     [labelIDDesc setText:IDType];
     [labelName setText:stringName];
     if (([partyIndex intValue]==4)||([partyIndex intValue]==5)){
-        [scrollImageCaptured setHidden:NO];
+        [tableImageCaptured setHidden:NO];
         [self showMultiplePictureForSection:@"" StringButtonType:buttonTitle];
     }
     else{
         [imageViewFront setImage:imageFront];
         [imageViewBack setImage:imageBack];
-        [scrollImageCaptured setHidden:YES];
+        [tableImageCaptured setHidden:YES];
     }
 }
 
@@ -66,15 +68,10 @@ NSString* const BackPhoto = @"Back";
     NSArray* arrayImageFront=[[NSArray alloc]initWithArray:[self loadFilesList:fileNameFront]];
     NSArray* arrayImageBack=[[NSArray alloc]initWithArray:[self loadFilesList:fileNameBack]];
     
-    NSMutableArray* arrayAllImage = [[NSMutableArray alloc]initWithArray:arrayImageFront];
+    arrayAllImage = [[NSMutableArray alloc]initWithArray:arrayImageFront];
     [arrayAllImage addObjectsFromArray:arrayImageBack];
-    UIView* viewParent;
-    [viewParent setFrame:CGRectMake(0, 0, 398, 283)];
-    
-    [scrollImageCaptured addSubview:viewParent];
-    for (int i=0;i<[arrayAllImage count];i++){
-        [scrollImageCaptured addSubview:[self viewIDImage:i StringImageName:[arrayAllImage objectAtIndex:i]]];
-    }
+
+    [tableImageCaptured reloadData];
 }
 
 -(UIView *)viewIDImage:(int)imageIndex StringImageName:(NSString *)stringImage{
@@ -116,6 +113,61 @@ NSString* const BackPhoto = @"Back";
 
 -(IBAction)actionClose:(id)sender{
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [arrayAllImage count];
+}
+
+- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Remove seperator inset
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    // Prevent the cell from inheriting the Table View's margin settings
+    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
+        [cell setPreservesSuperviewLayoutMargins:NO];
+    }
+    
+    // Explictly set your cell's layout margins
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    MultipleImageIDTableViewCell *cellMultipleID = (MultipleImageIDTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"MultipleImageIDTableViewCell"];
+    
+    if (cellMultipleID == nil)
+    {
+        NSArray *arrayNIB = [[NSBundle mainBundle] loadNibNamed:@"MultipleImageIDTableViewCell" owner:self options:nil];
+        cellMultipleID = [arrayNIB objectAtIndex:0];
+    }
+    else
+    {
+        
+    }
+    
+    if (indexPath.row<[arrayAllImage count]){
+        [cellMultipleID.labelFileName setText:[arrayAllImage objectAtIndex:indexPath.row]];
+        [cellMultipleID.imageViewFile setImage:[UIImage imageWithContentsOfFile:[NSString stringWithFormat:@"%@/%@",[formatter generateSPAJFileDirectory:[dictTransaction valueForKey:@"SPAJEappNumber"]],[arrayAllImage objectAtIndex:indexPath.row]]]];
+    }
+    return cellMultipleID;
+}
+
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
 }
 /*
 #pragma mark - Navigation
