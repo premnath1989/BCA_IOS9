@@ -1830,11 +1830,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SPAJ Add Signature.m"
-            timestampString = "494834145.092921"
+            timestampString = "495029705.752016"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "863"
-            endingLineNumber = "863"
+            startingLineNumber = "927"
+            endingLineNumber = "927"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1926,11 +1926,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SPAJ/SPAJ Add Menu.m"
-            timestampString = "494759093.699758"
+            timestampString = "495031651.429899"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "460"
-            endingLineNumber = "460"
+            startingLineNumber = "468"
+            endingLineNumber = "468"
             landmarkName = "-actionGeneratePDF:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1948,6 +1948,22 @@
             startingLineNumber = "193"
             endingLineNumber = "193"
             landmarkName = "-insertJsonToDB:JSONKey:TableDictionary:DictionaryDuplicateChecker:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HLA/LoginDBManagement.m"
+            timestampString = "495010132.89372"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "428"
+            endingLineNumber = "428"
+            landmarkName = "-SyncTable:dbString:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
