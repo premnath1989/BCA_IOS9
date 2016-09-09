@@ -5,7 +5,9 @@
 //  Created by Ibrahim on 17/06/2016.
 //  Copyright © 2016 Ibrahim. All rights reserved.
 //
-
+NSString* const SPAJ = @"SPAJ";
+NSString* const Ringkasan = @"page_ringkasan_pembelian";
+//NSString* const PemegangPolis = @"PemegangPolis";
 
 // IMPORT
 #define IS_RETINA ([[UIScreen mainScreen] respondsToSelector:@selector(displayLinkWithTarget:selector:)] && ([UIScreen mainScreen].scale == 2.0))
@@ -65,6 +67,9 @@
     BOOL boolSPAJPDF;
     BOOL boolTenagaPenjualSigned;
     
+    NSMutableArray *arrayHTMLName;
+    int indexForPDFGeneration;
+    
     NSMutableDictionary* dictAgentProfile;
     NSDictionary *dictionaryPOData;
     NSDictionary *dictionarySIMaster;
@@ -94,8 +99,8 @@
     // DID LOAD
     - (void)viewDidAppear:(BOOL)animated{
         [labelActivityIncdicator setText:@"Loading Data"];
-        [viewActivityIndicator setHidden:NO];
-        [self loadHTMLFile];
+        //[viewActivityIndicator setHidden:NO];
+        //[self loadHTMLFile:@"SPAJHtmlName"];
     }
 
     - (void)viewDidLoad
@@ -164,8 +169,17 @@
         [self voidCheckBooleanLastState];
     }
 
-    -(void)loadHTMLFile{
-        NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PDF"];
+    -(void)generateAllPDF{
+        indexForPDFGeneration = 0;
+        arrayHTMLName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PDF"]];
+        
+        if ([arrayHTMLName count]>0){
+            [self loadSPAJPDFHTML:[arrayHTMLName objectAtIndex:indexForPDFGeneration] WithArrayIndex:indexForPDFGeneration];
+        }
+    }
+
+    -(void)loadHTMLFile:(NSString *)HTMLName{
+        NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:HTMLName SPAJSection:@"PDF"];
         [self loadSPAJPDFHTML:stringHTMLName];
     }
 
@@ -180,6 +194,16 @@
         [webview loadRequest:urlRequest];
     }
 
+    -(void)loadSPAJPDFHTML:(NSString*)stringHTMLName WithArrayIndex:(int)intArrayIndex{
+        NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        filePath = [docsDir stringByAppendingPathComponent:@"SPAJ"];
+        
+        NSString *htmlfilePath = [NSString stringWithFormat:@"SPAJ/%@",stringHTMLName];
+        NSString *localURL = [[NSString alloc] initWithString:
+                              [docsDir stringByAppendingPathComponent: htmlfilePath]];
+        NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localURL]];
+        [webview loadRequest:urlRequest];
+    }
 
     #pragma mark arrayInitialization
     -(void)arrayInitializeAgentProfile{
@@ -263,10 +287,10 @@
     - (IBAction)actionGoToStep4:(id)sender
     {
         if (!boolTenagaPenjualSigned){
-            [self voidCreateThePDF];
-            //[self voidCreateImageFromWebView];
-            [modelSPAJTransaction updateSPAJTransaction:@"SPAJDateModified" StringColumnValue:[formatter getDateToday:@"yyyy-MM-dd HH:mm:ss"] StringWhereName:@"SPAJEappNumber" StringWhereValue:[dictTransaction valueForKey:@"SPAJEappNumber"]];
-            //[self performSelector:@selector(voidCreateThePDF) withObject:nil afterDelay:2.0];
+            [self generateAllPDF];
+            //[self voidCreateThePDF:@"SPAJ"];
+            //[modelSPAJTransaction updateSPAJTransaction:@"SPAJDateModified" StringColumnValue:[formatter getDateToday:@"yyyy-MM-dd HH:mm:ss"] StringWhereName:@"SPAJEappNumber" StringWhereValue:[dictTransaction valueForKey:@"SPAJEappNumber"]];
+            
         }
         else{
             UIAlertController *alertLockForm = [alert alertInformation:NSLocalizedString(@"ALERT_TITLE_LOCK", nil) stringMessage:NSLocalizedString(@"ALERT_MESSAGE_LOCK", nil)];
@@ -278,12 +302,13 @@
     -(void)voidCreateThePDF{
         UIPrintPageRenderer *render = [[UIPrintPageRenderer alloc] init];
         [render addPrintFormatter:webview.viewPrintFormatter startingAtPageAtIndex:0];
+        
         //increase these values according to your requirement
         float topPadding = 0.0f;
         float bottomPadding = 0.0f;
         float leftPadding = 0.0f;
         float rightPadding = 0.0f;
-        NSLog(@"size %@",NSStringFromCGSize(kPaperSizeA4Portrait));
+        
         CGRect printableRect = CGRectMake(leftPadding,
                                           topPadding,
                                           kPaperSizeA4Portrait.width-leftPadding-rightPadding,
@@ -297,24 +322,80 @@
         NSArray* path_forDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
         NSString* documentsDirectory = [path_forDirectory objectAtIndex:0];
         if (pdfData) {
-            [pdfData writeToFile:[NSString stringWithFormat:@"%@/SPAJ/%@/%@_SPAJ.pdf",documentsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"],[dictTransaction valueForKey:@"SPAJEappNumber"]] atomically:YES];
+            [pdfData writeToFile:[NSString stringWithFormat:@"%@/SPAJ/%@/%@_%i.pdf",documentsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"],[dictTransaction valueForKey:@"SPAJEappNumber"],indexForPDFGeneration] atomically:YES];
             
-            //NSLog(@"datat %@",[NSString stringWithFormat:@"%@/%@_%@.pdf",documentsDirectory,[_dictionaryPOForInsert valueForKey:@"PO_Name"],[_dictionaryPOForInsert valueForKey:@"SINO"]]);
             NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJFormGeneration1=1 where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",[dictTransaction valueForKey:@"SPAJEappNumber"]];
             [modelSPAJFormGeneration updateSPAJFormGeneration:stringUpdate];
-            
-            
-            UIAlertController *alertLockForm = [alert alertInformation:@"Berhasil" stringMessage:@"File SPAJ.pdf berhasil dibuat"];
-            [self presentViewController:alertLockForm animated:YES completion:nil];
-            //[viewActivityIndicator setHidden:YES];
+            indexForPDFGeneration ++;
+
             
             [self voidCheckBooleanLastState];
+            if (indexForPDFGeneration < [arrayHTMLName count]){
+                [self loadSPAJPDFHTML:[arrayHTMLName objectAtIndex:indexForPDFGeneration] WithArrayIndex:indexForPDFGeneration];
+            }
+            else{
+                [self joinSPAJPDF];
+                UIAlertController *alertLockForm = [alert alertInformation:@"Berhasil" stringMessage:@"File SPAJ.pdf berhasil dibuat"];
+                [self presentViewController:alertLockForm animated:YES completion:nil];
+                [viewActivityIndicator setHidden:YES];
+            }
         }
         else
         {
             NSLog(@"PDF couldnot be created");
         }
+    }
 
+    -(void)joinSPAJPDF{
+        NSArray* path_forDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+        NSString* documentsDirectory = [path_forDirectory objectAtIndex:0];
+        
+        NSMutableArray *arrayPDFPath = [[NSMutableArray alloc]init];
+        NSMutableArray *arrayPDFURLRef = [[NSMutableArray alloc]init];
+        NSMutableArray *arrayPDFDocumentRef = [[NSMutableArray alloc]init];
+        NSMutableArray *arrayNumberOfPageFile = [[NSMutableArray alloc]init];
+        
+        for (int i=0;i<[arrayHTMLName count];i++){
+            NSString* filePDFPath =[NSString stringWithFormat:@"%@/SPAJ/%@/%@_%i.pdf",documentsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"],[dictTransaction valueForKey:@"SPAJEappNumber"],i];
+            [arrayPDFPath addObject:filePDFPath];
+        }
+        
+        for (int i=0;i<[arrayPDFPath count];i++){
+            CFURLRef pdfURLFilePath = (__bridge_retained CFURLRef)[[NSURL alloc] initFileURLWithPath:(NSString *)[arrayPDFPath objectAtIndex:i]];
+            [arrayPDFURLRef addObject:(__bridge id _Nonnull)(pdfURLFilePath)];
+        }
+        
+        for (int i=0;i<[arrayPDFURLRef count];i++){
+            CGPDFDocumentRef pdfRefFilePath = CGPDFDocumentCreateWithURL((CFURLRef)[arrayPDFURLRef objectAtIndex:i]);
+            [arrayPDFDocumentRef addObject:(__bridge id _Nonnull)(pdfRefFilePath)];
+        }
+        
+        for (int i=0;i<[arrayPDFDocumentRef count];i++){
+            NSInteger numberOfPagesFilePath = CGPDFDocumentGetNumberOfPages((__bridge CGPDFDocumentRef)([arrayPDFDocumentRef objectAtIndex:i]));
+            [arrayNumberOfPageFile addObject:[NSNumber numberWithInteger:numberOfPagesFilePath]];
+        }
+        
+        NSString* filePathSPAJ = [NSString stringWithFormat:@"%@/SPAJ/%@/%@_SPAJ.pdf",documentsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"],[dictTransaction valueForKey:@"SPAJEappNumber"]];
+        NSString *pdfPathOutput = filePathSPAJ;
+        CFURLRef pdfURLOutput =(__bridge_retained CFURLRef) [[NSURL alloc] initFileURLWithPath:(NSString *)pdfPathOutput];//(CFURLRef)
+        // Create the output context
+        CGContextRef writeContext = CGPDFContextCreateWithURL(pdfURLOutput, NULL, NULL);
+        // Loop variables
+        CGPDFPageRef page;
+        CGRect mediaBox;
+        
+        for (int i=0;i<[arrayHTMLName count];i++){
+            for (int j=1; j<=[(NSNumber *)[arrayNumberOfPageFile objectAtIndex:i] integerValue]; j++) {
+                page = CGPDFDocumentGetPage((__bridge CGPDFDocumentRef)([arrayPDFDocumentRef objectAtIndex:i]), j);
+                mediaBox = CGPDFPageGetBoxRect(page, kCGPDFMediaBox);
+                CGContextBeginPage(writeContext, &mediaBox);
+                CGContextDrawPDFPage(writeContext, page);
+                CGContextEndPage(writeContext);
+            }
+        }
+        CGPDFContextClose(writeContext);
+        CFRelease(pdfURLOutput);
+        CGContextRelease(writeContext);
     }
 
     -(void)voidCreateImageFromWebView{
@@ -427,7 +508,6 @@
     #pragma mark create additional dictionary
 
     -(NSDictionary *)getDictionaryForAgentData:(NSString *)stringDBColumnName HTMLID:(NSString *)stringHTMLID{
-    
         NSMutableDictionary* dictAgentData=[[NSMutableDictionary alloc]init];
         [dictAgentData setObject:stringHTMLID forKey:@"elementID"];
         if ([stringDBColumnName isEqualToString:@"AgentExpiryDate"]){
@@ -527,7 +607,6 @@
         [finalDictionary setValue:[params valueForKey:@"errorCallback"] forKey:@"errorCallback"];
         [super readfromDB:finalDictionary];
         
-        //NSMutableDictionary *dictOriginal = [[NSMutableDictionary alloc]initWithDictionary:[super readfromDB:finalDictionary]];
         NSMutableDictionary *dictOriginal = [[NSMutableDictionary alloc]init];
         
         NSMutableArray *modifieArray = [[NSMutableArray alloc]init];
@@ -555,6 +634,9 @@
         //return [super readfromDB:finalDictionary];
         [self callSuccessCallback:[params valueForKey:@"successCallBack"] withRetValue:dictOriginal];
         [viewActivityIndicator setHidden:YES];
+        
+        [self performSelector:@selector(voidCreateThePDF) withObject:nil afterDelay:1.0];
+        //[self voidCreateThePDF];
         return dictOriginal;
     }
 
@@ -571,4 +653,5 @@
         // Dispose of any resources that can be recreated.
     }
 
+    
 @end

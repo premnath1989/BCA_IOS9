@@ -48,9 +48,13 @@ NSString* const BackPhoto = @"Back";
     NSString* stringName = [dictionaryIDData valueForKey:@"stringName"];
     [labelIDDesc setText:IDType];
     [labelName setText:stringName];
-    if (([partyIndex intValue]==4)||([partyIndex intValue]==5)){
+    if ([partyIndex intValue]==4){
         [tableImageCaptured setHidden:NO];
-        [self showMultiplePictureForSection:@"" StringButtonType:buttonTitle];
+        [self showMultiplePictureForSection:PaymentSection StringButtonType:buttonTitle];
+    }
+    else if ([partyIndex intValue]==5){
+        [tableImageCaptured setHidden:NO];
+        [self showMultiplePictureForSection:OtherSection StringButtonType:buttonTitle];
     }
     else{
         [imageViewFront setImage:imageFront];
@@ -62,8 +66,10 @@ NSString* const BackPhoto = @"Back";
 
 -(void)showMultiplePictureForSection:(NSString *)stringSection StringButtonType:(NSString *)stringButtonType{
     NSString* stringEAPPPath = [dictTransaction valueForKey:@"SPAJEappNumber"];
-    NSString* fileNameFront=[NSString stringWithFormat:@"%@_%@_%@_%@",stringEAPPPath,PaymentSection,stringButtonType?:@"",FrontPhoto];
-    NSString* fileNameBack=[NSString stringWithFormat:@"%@_%@_%@_%@",stringEAPPPath,PaymentSection,stringButtonType?:@"",BackPhoto];
+    NSString* fileNameFront;
+    NSString* fileNameBack;
+    fileNameFront=[NSString stringWithFormat:@"%@_%@_%@_%@",stringEAPPPath,stringSection,stringButtonType?:@"",FrontPhoto];
+    fileNameBack=[NSString stringWithFormat:@"%@_%@_%@_%@",stringEAPPPath,stringSection,stringButtonType?:@"",BackPhoto];
     
     NSArray* arrayImageFront=[[NSArray alloc]initWithArray:[self loadFilesList:fileNameFront]];
     NSArray* arrayImageBack=[[NSArray alloc]initWithArray:[self loadFilesList:fileNameBack]];

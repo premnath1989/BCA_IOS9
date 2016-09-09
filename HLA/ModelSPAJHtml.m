@@ -29,6 +29,27 @@
     return stringReturn;
 }
 
+-(NSArray *)selectArrayHtmlFileName:(NSString *)stringColumnName SPAJSection:(NSString *)stringHtmlSection{
+    NSMutableArray* arrayHtmlFileName = [[NSMutableArray alloc]init];
+    NSString *stringReturn;
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    //FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select * from CFFHtml where CFFHtmlID = %i",CFFHtmlID]];
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select %@ from SPAJHtml where SPAJHtmlSection = \"%@\"",stringColumnName,stringHtmlSection]];
+    while ([s next]) {
+        stringReturn = [s stringForColumn:stringColumnName];
+        [arrayHtmlFileName addObject:stringReturn];
+    }
+    
+    [results close];
+    [database close];
+    return arrayHtmlFileName;
+}
+
 -(NSDictionary *)selectActiveHtmlForSection:(NSString *)htmlSection{
     NSDictionary *dict;
     

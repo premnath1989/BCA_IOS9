@@ -537,6 +537,52 @@
     [outputPDFDataPage1 writeToFile:pdfFilePathPage1 atomically:YES];
 }
 
+-(void) addSignatureForPage9:(UIImage *)imgSignature onPDFData:(NSData *)pdfData Index:(int)index{
+    NSString *docsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *pdfFilePathPage1 =[NSString stringWithFormat:@"%@/SPAJ/%@/SPAJSignedPage9.pdf",docsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"]];
+    
+    NSMutableData* outputPDFDataPage1 = [[NSMutableData alloc] init];
+    CGDataConsumerRef dataConsumerPage1 = CGDataConsumerCreateWithCFData((CFMutableDataRef)outputPDFDataPage1);
+    
+    CFMutableDictionaryRef attrDictionaryPage1 = NULL;
+    attrDictionaryPage1 = CFDictionaryCreateMutable(NULL, 0, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
+    CFDictionarySetValue(attrDictionaryPage1, kCGPDFContextTitle, CFSTR("My Doc"));
+    CGContextRef pdfContextPage1 = CGPDFContextCreate(dataConsumerPage1, NULL, attrDictionaryPage1);
+    CFRelease(dataConsumerPage1);
+    CFRelease(attrDictionaryPage1);
+    CGRect pageRectPage1;
+    
+    // Draw the old "pdfData" on pdfContext
+    CFDataRef myPDFDataPage1 = (__bridge CFDataRef) pdfData;
+    CGDataProviderRef providerPage1 = CGDataProviderCreateWithCFData(myPDFDataPage1);
+    CGPDFDocumentRef pdfPage1 = CGPDFDocumentCreateWithProvider(providerPage1);
+    CGDataProviderRelease(providerPage1);
+    CGPDFPageRef pagePage1 = CGPDFDocumentGetPage(pdfPage1, 9);
+    pageRectPage1 = CGPDFPageGetBoxRect(pagePage1, kCGPDFMediaBox);
+    CGContextBeginPage(pdfContextPage1, &pageRectPage1);
+    CGContextDrawPDFPage(pdfContextPage1, pagePage1);
+    
+    // Draw the signature on pdfContext
+    //pageRect = CGRectMake(343, 35,101 , 43);
+    if (index == 0){
+        pageRectPage1 = CGRectMake(67, 676,96 , 53);
+    }
+    else{
+        pageRectPage1 = CGRectMake(575, 676,96 , 53);
+    }
+    
+    CGImageRef pageImagePage1 = [imgSignature CGImage];
+    CGContextDrawImage(pdfContextPage1, pageRectPage1, pageImagePage1);
+    
+    // release the allocated memory
+    CGPDFContextEndPage(pdfContextPage1);
+    CGPDFContextClose(pdfContextPage1);
+    CGContextRelease(pdfContextPage1);
+    
+    // write new PDFData in "outPutPDF.pdf" file in document directory
+    [outputPDFDataPage1 writeToFile:pdfFilePathPage1 atomically:YES];
+}
+
 -(void) addSignature:(UIImage *)imgSignature onPDFData:(NSData *)pdfData Index:(int)index{
     NSString *docsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *pdfFilePath =[NSString stringWithFormat:@"%@/SPAJ/%@/SPAJSigned.pdf",docsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"]];
@@ -566,21 +612,19 @@
     //pageRect = CGRectMake(343, 35,101 , 43);
     switch (index) {
         case 0:
-            //pageRect = CGRectMake(67, 1195,96 , 53);
             pageRect = CGRectMake(67, 486,96 , 53);
             [self addSignatureForPage1:imgSignature onPDFData:pdfData Index:index];
+            [self addSignatureForPage9:imgSignature onPDFData:pdfData Index:index];
             break;
         case 1:
-            //pageRect = CGRectMake(239, 1195,96 , 53);
             pageRect = CGRectMake(239, 486,96 , 53);
             break;
         case 2:
-            //pageRect = CGRectMake(407, 1195,96 , 53);
             pageRect = CGRectMake(407, 486,96 , 53);
             break;
         case 3:
-            //pageRect = CGRectMake(575, 1195,96 , 53);
             pageRect = CGRectMake(575, 486,96 , 53);
+            [self addSignatureForPage9:imgSignature onPDFData:pdfData Index:index];
             break;
             
         default:
@@ -608,19 +652,24 @@
     NSString* filePath = [NSString stringWithFormat:@"%@/SPAJ/%@/%@_SPAJ.pdf",documentsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"],[dictTransaction valueForKey:@"SPAJEappNumber"]];
     NSString *pdfPath1 = [NSString stringWithFormat:@"%@/SPAJ/%@/SPAJSigned.pdf",docsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"]];
     NSString *pdfPathPage1 = [NSString stringWithFormat:@"%@/SPAJ/%@/SPAJSignedPage1.pdf",docsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"]];
+    NSString *pdfPathPage9 = [NSString stringWithFormat:@"%@/SPAJ/%@/SPAJSignedPage9.pdf",docsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"]];
     
     NSString *pdfPathOutput = filePath;
     
     // File URLs - bridge casting for ARC
     CFURLRef pdfURLFilePath = (__bridge_retained CFURLRef)[[NSURL alloc] initFileURLWithPath:(NSString *)filePath];//(CFURLRef) NSURL
     CFURLRef pdfURL1 = (__bridge_retained CFURLRef)[[NSURL alloc] initFileURLWithPath:(NSString *)pdfPath1];//(CFURLRef) NSURL
-    CFURLRef pdfURLPage1 = (__bridge_retained CFURLRef)[[NSURL alloc] initFileURLWithPath:(NSString *)pdfPathPage1];//(CFURLRef) NSURL
+    CFURLRef pdfURLPage1 = (__bridge_retained CFURLRef)[[NSURL alloc] initFileURLWithPath:(NSString *)pdfPathPage1];//(CFURLRef)
+    CFURLRef pdfURLPage9 = (__bridge_retained CFURLRef)[[NSURL alloc] initFileURLWithPath:(NSString *)pdfPathPage9];//(CFURLRef)
+    
+    //NSURL
     CFURLRef pdfURLOutput =(__bridge_retained CFURLRef) [[NSURL alloc] initFileURLWithPath:(NSString *)pdfPathOutput];//(CFURLRef)
     
     // File references
     CGPDFDocumentRef pdfRefFilePath = CGPDFDocumentCreateWithURL((CFURLRef) pdfURLFilePath);
     CGPDFDocumentRef pdfRef1 = CGPDFDocumentCreateWithURL((CFURLRef) pdfURL1);
     CGPDFDocumentRef pdfRefPage1 = CGPDFDocumentCreateWithURL((CFURLRef) pdfURLPage1);
+    CGPDFDocumentRef pdfRefPage9 = CGPDFDocumentCreateWithURL((CFURLRef) pdfURLPage9);
     
     // Number of pages
     NSInteger numberOfPagesFilePath = CGPDFDocumentGetNumberOfPages(pdfRefFilePath);
@@ -642,7 +691,7 @@
         CGContextDrawPDFPage(writeContext, page);
         CGContextEndPage(writeContext);
         
-        for (int i=2; i<=numberOfPagesFilePath-1; i++) {
+        for (int i=2; i<=numberOfPagesFilePath-2; i++) {
             page = CGPDFDocumentGetPage(pdfRefFilePath, i);
             mediaBox = CGPDFPageGetBoxRect(page, kCGPDFMediaBox);
             CGContextBeginPage(writeContext, &mediaBox);
@@ -651,7 +700,7 @@
         }
     }
     else{
-        for (int i=1; i<=numberOfPagesFilePath-1; i++) {
+        for (int i=1; i<=numberOfPagesFilePath-2; i++) {
             page = CGPDFDocumentGetPage(pdfRefFilePath, i);
             mediaBox = CGPDFPageGetBoxRect(page, kCGPDFMediaBox);
             CGContextBeginPage(writeContext, &mediaBox);
@@ -665,6 +714,21 @@
     CGContextBeginPage(writeContext, &mediaBox);
     CGContextDrawPDFPage(writeContext, page);
     CGContextEndPage(writeContext);
+    
+    if ((indexParty==0)||(indexParty==3)){
+        page = CGPDFDocumentGetPage(pdfRefPage9, 1);
+        mediaBox = CGPDFPageGetBoxRect(page, kCGPDFMediaBox);
+        CGContextBeginPage(writeContext, &mediaBox);
+        CGContextDrawPDFPage(writeContext, page);
+        CGContextEndPage(writeContext);
+    }
+    else{
+        page = CGPDFDocumentGetPage(pdfRefFilePath, 9);
+        mediaBox = CGPDFPageGetBoxRect(page, kCGPDFMediaBox);
+        CGContextBeginPage(writeContext, &mediaBox);
+        CGContextDrawPDFPage(writeContext, page);
+        CGContextEndPage(writeContext);
+    }
     
     // Finalize the output file
     CGPDFContextClose(writeContext);

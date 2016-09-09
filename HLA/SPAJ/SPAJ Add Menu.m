@@ -41,9 +41,10 @@
 #import "Alert.h"
 #import "ModelAgentProfile.h"
 #import "ClassImageProcessing.h"
+#import "AllAboutPDFGeneration.h"
 // DECLARATION
 
-@interface SPAJAddMenu ()<SIListingDelegate,UIPopoverPresentationControllerDelegate>
+@interface SPAJAddMenu ()<PDFGenerationDelegate,SIListingDelegate,UIPopoverPresentationControllerDelegate>
 
 
 
@@ -72,10 +73,14 @@
     ModelAgentProfile* modelAgentProfile;
     Formatter* formatter;
     ClassImageProcessing *classImageProcessing;
+    AllAboutPDFGeneration *allAboutPDFGeneration;
     
     SPAJFormGeneration* viewControllerFormGeneration;
     
     UserInterface *objectUserInterface;
+    
+    NSMutableArray *arrayHTMLName;
+    int indexForPDFGeneration;
     
     NSDictionary* dictionaryPOData;
     NSString *stringSINO;
@@ -147,6 +152,9 @@
         modelAgentProfile = [[ModelAgentProfile alloc]init];
         classImageProcessing = [[ClassImageProcessing alloc]init];
         objectUserInterface = [[UserInterface alloc] init];
+        
+        allAboutPDFGeneration = [[AllAboutPDFGeneration alloc]init];
+        allAboutPDFGeneration.delegatePDFGeneration = self;
         
         formatter = [[Formatter alloc]init];
         alert = [[Alert alloc]init];
@@ -607,6 +615,7 @@
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 [self addSignatureForPage1:signatureImage1 onPDFData:data];
                 [self addSignatureForPage8:signatureImage1 UIImage2:signatureImage2 UIImage3:signatureImage3 UIImage4:signatureImage4 onPDFData:data];
+                [self addSignatureForPage9:signatureImage1 UIImage2:signatureImage2 UIImage3:signatureImage3 UIImage4:signatureImage4 onPDFData:data];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self joinMultiplePDF];
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -712,6 +721,49 @@
         [outputPDFData writeToFile:pdfFilePath atomically:YES];
     }
 
+    -(void) addSignatureForPage9:(UIImage *)imgSignature1 UIImage2:(UIImage *)imgSignature2 UIImage3:(UIImage *)imgSignature3 UIImage4:(UIImage *)imgSignature4 onPDFData:(NSData *)pdfData {
+        NSString *docsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        NSString *pdfFilePath =[NSString stringWithFormat:@"%@/SPAJ/%@/SPAJSigned9.pdf",docsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"]];
+        
+        NSMutableData* outputPDFData = [[NSMutableData alloc] init];
+        CGDataConsumerRef dataConsumer = CGDataConsumerCreateWithCFData((CFMutableDataRef)outputPDFData);
+        
+        CFMutableDictionaryRef attrDictionary = NULL;
+        attrDictionary = CFDictionaryCreateMutable(NULL, 0, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
+        CFDictionarySetValue(attrDictionary, kCGPDFContextTitle, CFSTR("My Doc"));
+        CGContextRef pdfContext = CGPDFContextCreate(dataConsumer, NULL, attrDictionary);
+        CFRelease(dataConsumer);
+        CFRelease(attrDictionary);
+        CGRect pageRect;
+        
+        // Draw the old "pdfData" on pdfContext
+        CFDataRef myPDFData = (__bridge CFDataRef) pdfData;
+        CGDataProviderRef provider = CGDataProviderCreateWithCFData(myPDFData);
+        CGPDFDocumentRef pdf = CGPDFDocumentCreateWithProvider(provider);
+        CGDataProviderRelease(provider);
+        CGPDFPageRef page = CGPDFDocumentGetPage(pdf, 9);
+        pageRect = CGPDFPageGetBoxRect(page, kCGPDFMediaBox);
+        CGContextBeginPage(pdfContext, &pageRect);
+        CGContextDrawPDFPage(pdfContext, page);
+        
+        // Draw the signature on pdfContext
+        pageRect = CGRectMake(67, 676,96 , 53);
+        CGImageRef pageImage1 = [imgSignature1 CGImage];
+        CGContextDrawImage(pdfContext, pageRect, pageImage1);
+        
+        pageRect = CGRectMake(575, 676,96 , 53);
+        CGImageRef pageImage4 = [imgSignature4 CGImage];
+        CGContextDrawImage(pdfContext, pageRect, pageImage4);
+        
+        // release the allocated memory
+        CGPDFContextEndPage(pdfContext);
+        CGPDFContextClose(pdfContext);
+        CGContextRelease(pdfContext);
+        
+        // write new PDFData in "outPutPDF.pdf" file in document directory
+        [outputPDFData writeToFile:pdfFilePath atomically:YES];
+    }
+
     -(void) addSignatureForPage1:(UIImage *)imgSignature onPDFData:(NSData *)pdfData{
         NSString *docsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
         NSString *pdfFilePathPage1 =[NSString stringWithFormat:@"%@/SPAJ/%@/SPAJSignedPage1.pdf",docsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"]];
@@ -761,6 +813,7 @@
         NSString* filePathSPAJ = [NSString stringWithFormat:@"%@/SPAJ/%@/%@_SPAJ.pdf",documentsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"],[dictTransaction valueForKey:@"SPAJEappNumber"]];
         NSString *pdfPath1 = [NSString stringWithFormat:@"%@/SPAJ/%@/SPAJSigned.pdf",docsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"]];
         NSString *pdfPathPage1 = [NSString stringWithFormat:@"%@/SPAJ/%@/SPAJSignedPage1.pdf",docsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"]];
+        NSString *pdfPathPage9 = [NSString stringWithFormat:@"%@/SPAJ/%@/SPAJSigned9.pdf",docsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"]];
         
         NSString *pdfPathOutput = filePathSPAJ;
         
@@ -768,12 +821,15 @@
         CFURLRef pdfURLFilePath = (__bridge_retained CFURLRef)[[NSURL alloc] initFileURLWithPath:(NSString *)filePathSPAJ];//(CFURLRef) NSURL
         CFURLRef pdfURL1 = (__bridge_retained CFURLRef)[[NSURL alloc] initFileURLWithPath:(NSString *)pdfPath1];//(CFURLRef) NSURL
         CFURLRef pdfURLPage1 = (__bridge_retained CFURLRef)[[NSURL alloc] initFileURLWithPath:(NSString *)pdfPathPage1];//(CFURLRef) NSURL
+        CFURLRef pdfURLPage9 = (__bridge_retained CFURLRef)[[NSURL alloc] initFileURLWithPath:(NSString *)pdfPathPage9];//(CFURLRef)
+        
         CFURLRef pdfURLOutput =(__bridge_retained CFURLRef) [[NSURL alloc] initFileURLWithPath:(NSString *)pdfPathOutput];//(CFURLRef)
         
         // File references
         CGPDFDocumentRef pdfRefFilePath = CGPDFDocumentCreateWithURL((CFURLRef) pdfURLFilePath);
         CGPDFDocumentRef pdfRef1 = CGPDFDocumentCreateWithURL((CFURLRef) pdfURL1);
         CGPDFDocumentRef pdfRefPage1 = CGPDFDocumentCreateWithURL((CFURLRef) pdfURLPage1);
+        CGPDFDocumentRef pdfRefPage9 = CGPDFDocumentCreateWithURL((CFURLRef) pdfURLPage9);
         
         // Number of pages
         NSInteger numberOfPagesFilePath = CGPDFDocumentGetNumberOfPages(pdfRefFilePath);
@@ -794,7 +850,7 @@
             CGContextDrawPDFPage(writeContext, page);
             CGContextEndPage(writeContext);
             
-            for (int i=2; i<=numberOfPagesFilePath-1; i++) {
+            for (int i=2; i<=7; i++) {
                 page = CGPDFDocumentGetPage(pdfRefFilePath, i);
                 mediaBox = CGPDFPageGetBoxRect(page, kCGPDFMediaBox);
                 CGContextBeginPage(writeContext, &mediaBox);
@@ -813,6 +869,12 @@
         }*/
         
         page = CGPDFDocumentGetPage(pdfRef1, 1);
+        mediaBox = CGPDFPageGetBoxRect(page, kCGPDFMediaBox);
+        CGContextBeginPage(writeContext, &mediaBox);
+        CGContextDrawPDFPage(writeContext, page);
+        CGContextEndPage(writeContext);
+        
+        page = CGPDFDocumentGetPage(pdfRefPage9, 1);
         mediaBox = CGPDFPageGetBoxRect(page, kCGPDFMediaBox);
         CGContextBeginPage(writeContext, &mediaBox);
         CGContextDrawPDFPage(writeContext, page);
@@ -857,10 +919,18 @@
         NSArray* path_forDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
         NSString* documentsDirectory = [path_forDirectory objectAtIndex:0];
         if (pdfData) {
-            BOOL created = [pdfData writeToFile:[NSString stringWithFormat:@"%@/SPAJ/%@/%@_SPAJ.pdf",documentsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"],[dictTransaction valueForKey:@"SPAJEappNumber"]] atomically:YES];
-            if (created){
-                [self voidSaveSignatureToPDF];
+            BOOL created = [pdfData writeToFile:[NSString stringWithFormat:@"%@/SPAJ/%@/%@_%i.pdf",documentsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"],[dictTransaction valueForKey:@"SPAJEappNumber"],indexForPDFGeneration] atomically:YES];/*[pdfData writeToFile:[NSString stringWithFormat:@"%@/SPAJ/%@/%@_SPAJ.pdf",documentsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"],[dictTransaction valueForKey:@"SPAJEappNumber"]] atomically:YES];*/
+            
+                indexForPDFGeneration ++;
+            if (indexForPDFGeneration < [arrayHTMLName count]){
+                [self loadSPAJPDFHTML:[arrayHTMLName objectAtIndex:indexForPDFGeneration] WithArrayIndex:indexForPDFGeneration];
             }
+            else{
+                [allAboutPDFGeneration joinSPAJPDF:arrayHTMLName DictTransaction:dictTransaction];
+            }
+            /*if (created){
+                [self voidSaveSignatureToPDF];
+            }*/
         }
         else
         {
@@ -872,9 +942,28 @@
 
     #pragma mark allabout html spaj pdf
     -(void)loadHTMLFile{
-        NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PDF"];
-        [self loadSPAJPDFHTML:stringHTMLName];
+        indexForPDFGeneration = 0;
+        arrayHTMLName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PDF"]];
+        
+        if ([arrayHTMLName count]>0){
+            [self loadSPAJPDFHTML:[arrayHTMLName objectAtIndex:indexForPDFGeneration] WithArrayIndex:indexForPDFGeneration];
+        }
+        
+        //NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PDF"];
+        //[self loadSPAJPDFHTML:stringHTMLName];
+        
         //[self performSelector:@selector(voidCreateThePDF) withObject:nil afterDelay:5.0];
+    }
+
+    -(void)loadSPAJPDFHTML:(NSString*)stringHTMLName WithArrayIndex:(int)intArrayIndex{
+        NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        filePath = [docsDir stringByAppendingPathComponent:@"SPAJ"];
+        
+        NSString *htmlfilePath = [NSString stringWithFormat:@"SPAJ/%@",stringHTMLName];
+        NSString *localURL = [[NSString alloc] initWithString:
+                              [docsDir stringByAppendingPathComponent: htmlfilePath]];
+        NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localURL]];
+        [webview loadRequest:urlRequest];
     }
 
     -(void)loadSPAJPDFHTML:(NSString*)stringHTMLName{
@@ -1058,7 +1147,8 @@
         [dictOriginal setObject:modifieArray forKey:@"readFromDB"];
         [self callSuccessCallback:[params valueForKey:@"successCallBack"] withRetValue:dictOriginal];
         //[webview setHidden:NO];
-        [self voidCreateThePDF];
+        //[self voidCreateThePDF];
+        [self performSelector:@selector(voidCreateThePDF) withObject:nil afterDelay:1.0];
         return dictOriginal;
     }
 
@@ -1066,6 +1156,11 @@
         NSString* spajNumber = [modelSPAJTransaction getSPAJTransactionData:@"SPAJNumber" StringWhereName:@"SPAJTransactionID" StringWhereValue:[dictTransaction valueForKey:@"SPAJTransactionID"]];
         [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"setHeader(\"%@\");",spajNumber]];
         [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"readfromDB();"]];
+    }
+
+    #pragma mark delegate
+    -(void)voidPDFCreated{
+        [self voidSaveSignatureToPDF];
     }
 
 

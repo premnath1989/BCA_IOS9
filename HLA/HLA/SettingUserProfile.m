@@ -1006,7 +1006,9 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
     [dictDuplicateChecker setObject:@"CFFHtmlStatus" forKey:@"DuplicateCheckerWhere3"];
     [dictDuplicateChecker setObject:@"CFFHtmlSection" forKey:@"DuplicateCheckerWhere4"];
     
-    [cffAPIController apiCallHtmlTable:@"http://mposws.azurewebsites.net/Service2.svc/getAllData" JSONKey:arrayJSONKey TableDictionary:dictCFFTable DictionaryDuplicateChecker:dictDuplicateChecker WebServiceModule:@"CFF"];
+    NSString* stringURL = [NSString stringWithFormat:@"%@/Service2.svc/GetAllData",[(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL]];
+    [cffAPIController apiCallHtmlTable:stringURL JSONKey:arrayJSONKey TableDictionary:dictCFFTable DictionaryDuplicateChecker:dictDuplicateChecker WebServiceModule:@"CFF"];
+    //[cffAPIController apiCallHtmlTable:@"http://mpos-sino-uat.cloudapp.net/Service2.svc/getAllData" JSONKey:arrayJSONKey TableDictionary:dictCFFTable DictionaryDuplicateChecker:dictDuplicateChecker WebServiceModule:@"CFF"];
 }
 
 -(void)getSPAJHTMLDataTable{
@@ -1025,7 +1027,9 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
     [dictDuplicateChecker setObject:@"SPAJHtmlStatus" forKey:@"DuplicateCheckerWhere3"];
     [dictDuplicateChecker setObject:@"SPAJHtmlSection" forKey:@"DuplicateCheckerWhere4"];
     
-    [cffAPIController apiCallHtmlTable:@"http://mposws.azurewebsites.net/SPAJHTMLForm.svc/GetAllData" JSONKey:arrayJSONKey TableDictionary:dictCFFTable DictionaryDuplicateChecker:dictDuplicateChecker WebServiceModule:@"SPAJ"];
+    NSString* stringURL = [NSString stringWithFormat:@"%@/SPAJHTMLForm.svc/GetAllData",[(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL]];
+    [cffAPIController apiCallHtmlTable:stringURL JSONKey:arrayJSONKey TableDictionary:dictCFFTable DictionaryDuplicateChecker:dictDuplicateChecker WebServiceModule:@"SPAJ"];
+    //[cffAPIController apiCallHtmlTable:@"http://mpos-sino-uat.cloudapp.net/SPAJHTMLForm.svc/GetAllData" JSONKey:arrayJSONKey TableDictionary:dictCFFTable DictionaryDuplicateChecker:dictDuplicateChecker WebServiceModule:@"SPAJ"];
 }
 
 
