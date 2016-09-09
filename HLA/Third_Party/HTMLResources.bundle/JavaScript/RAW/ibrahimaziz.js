@@ -907,6 +907,14 @@ function arrayFind(arrayObject, stringKey)
     return stringValue;
 }
 
+function arrayTransfer(arrayTemporary, arrayContent)
+{
+	for (var i = 0; i < arrayTemporary.length; i++)
+	{
+		arrayAdd(arrayContent, arrayTemporary[i].elementID, arrayTemporary[i].Value);
+	}
+}
+
 function buttonPopUpGeneralGenerator()
 {
     var stringRadioButtonKey;
@@ -2891,11 +2899,4 @@ function telephoneStripGenerator(stringInputJavaScriptID)
 
 		}
 	});
-}
-function arrayTransfer(arrayTemporary, arrayContent)
-{
-	for (var i = 0; i < arrayTemporary.length; i++)
-	{
-		arrayAdd(arrayContent, arrayTemporary[i].elementID, arrayTemporary[i].Value);
-	}
 }
