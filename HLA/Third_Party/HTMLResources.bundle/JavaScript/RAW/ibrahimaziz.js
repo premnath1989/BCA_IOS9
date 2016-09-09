@@ -88,6 +88,7 @@ var intBeneficiariesListRecentID = 0;
 var intSPAJProposalRecentID = 0;
 var stringPageValidationIncome = "income";
 var stringPrefixArea = "Area";
+var stringPageTypeHealthQuestionnairePDF = "HealthQuestionnairePDF";
 
 
 // GENERATOR
@@ -786,7 +787,7 @@ function additionalQuestionGenerator()
 				// previewArrayObject(arrayHealthQuestionnaire);
             });
         }
-		else if ($(this).data("popup-type") == stringPopUpTypeCardiac)
+		/* else if ($(this).data("popup-type") == stringPopUpTypeCardiac)
         {
             $("input:radio[name='" + $(this).attr("name") + "']").change(function()
             {
@@ -804,7 +805,7 @@ function additionalQuestionGenerator()
 				arrayAdd(arrayHealthQuestionnaire, $(this).attr("name"), getRadioButtonGeneral($(this).attr("name")));
                 stringRadioButtonName = $(this).attr("name");
             });
-        }
+        } */
 		else if ($(this).data("custom-radiobutton") == "input")
 		{
 			$("input:radio[name='" + $(this).attr("name") + "']").change(function()
@@ -1614,6 +1615,18 @@ function validatePush(objectContent, stringKey, stringValue)
     }
 }
 
+function arrayValidatePush(objectContent, stringKey, stringValue)
+{
+    if (stringValue == undefined || stringValue == "" || stringValue === null)
+    {
+        
+    }
+    else
+    {
+        arrayAdd(objectContent, stringKey, stringValue);
+    }
+}
+
 function validateTextGeneral(stringInputJQueryID)
 {
 	var stringInputValue = $(stringInputJQueryID).val();
@@ -1649,6 +1662,23 @@ function validateRadioButtonGeneral(radioButtonName)
     {
 		validateState(false);
         return false;
+    }
+}
+
+function validateSpecificRadioButtonGeneral(stringLayoutJavaScriptID, radioButtonName)
+{
+	var stringLayoutJQueryID = stringKres + stringLayoutJavaScriptID;
+	var stringValue = $(stringLayoutJQueryID + " input:radio[name=" + radioButtonName + "]:checked").val();
+	
+    if (stringValue == undefined || stringValue == null || stringValue == "")
+    {
+        validateState(false);
+        return false;
+    }
+    else
+    {
+		validateState(true);
+        return true;
     }
 }
 
@@ -1715,6 +1745,24 @@ function setRadioButtonGeneral(stringName, stringValue)
     if (stringValue != null)
 	{
 		var radioButton = $("input:radio[name=" + stringName + "]");
+    	radioButton.filter("[value='" + stringValue + "']").prop("checked", true);
+	}
+	else
+	{
+		$("input:radio[name='" + stringName + "']").each(function()
+		{
+			$(this).prop("checked", false);
+		});
+	}
+}
+
+function setSpecificRadioButtonGeneral(stringLayoutJavaScriptID, stringName, stringValue)
+{
+	var stringLayoutJQueryID = stringKres + stringLayoutJavaScriptID;
+	
+    if (stringValue != null)
+	{
+		var radioButton = $(stringLayoutJQueryID + " input:radio[name=" + stringName + "]");
     	radioButton.filter("[value='" + stringValue + "']").prop("checked", true);
 	}
 	else
@@ -1889,6 +1937,15 @@ function getRadioButtonGeneral(stringName)
     return stringRadioButtonValue;
 }
 
+function getSpecificRadioButtonGeneral(stringLayoutJavaScriptID, stringName)
+{
+    var stringRadioButtonValue;
+    
+    stringRadioButtonValue = $(stringLayoutJavaScriptID + " input:radio[name=" + stringName + "]:checked").val();
+    
+    return stringRadioButtonValue;
+}
+
 function getSelectForm(stringID)
 {
     return getTextGeneral(stringID);
@@ -2042,8 +2099,6 @@ function getFromDatabase(objectContent, stringPageType)
 					if (stringKey.substring(stringKey.length - arrayHealthTableHeader[j].length, stringKey.length) == arrayHealthTableHeader[j])
 					{
 						var stringIndicatorPrefix = stringKey.substring(stringPrefixText.length, stringPrefixText.length + 3);
-						// var stringIndicatorPolicyHolder = "Pol";
-						// var stringIndicatorProspectiveInsured = "Pro";
 						var stringTableJQueryID;
 						var stringInfix;
 
@@ -2815,602 +2870,4 @@ stringValue)
            $(stringTextID).val('');
        }
    });
-}
-
-
-// MULTI POP UP
-
-function buttonPopUp(stringButtonJavaScriptID, stringPopUpLinkJavaScriptID, stringParentNameWithoutPrefix, arrayContent)
-{
-	$(stringPopUpLinkJQueryID).css("display", "block");
-	setInputFrom(stringPopUpLinkJavaScriptID, arrayContent, stringParentNameWithoutPrefix);
-}
-
-function buttonPopUpFromRadioButton(stringRadioButtonName, stringRadioButtonValue, stringPopUpLinkJavaScriptID, stringParentNameWithoutPrefix, arrayContent)
-{
-	if (getRadioButtonGeneral(stringRadioButtonName) == stringRadioButtonValue)
-	{
-		$(stringPopUpLinkJQueryID).css("display", "block");
-		setInputFrom(stringPopUpLinkJavaScriptID, arrayContent, stringParentNameWithoutPrefix);
-	}
-	else
-	{
-		
-	}
-}
-
-function buttonPopUpNavigation(stringButtonJavaScriptID, stringPopUpCurrentJavaScriptID, stringPopUpLinkJavaScriptID, stringParentNameWithoutPrefix, arrayContent)
-{
-	var stringButtonJQueryID = stringKres + stringButtonJavaScriptID;
-	var stringPopUpCurrentJQueryID = stringKres + stringPopUpCurrentJavaScriptID;
-	var stringPopUpLinkJQueryID = stringKres + stringPopUpLinkJavaScriptID;
-	
-	$(stringPopUpCurrentJQueryID).css("display", "none");
-	$(stringPopUpLinkJQueryID).css("display", "block");
-	
-	setInputFrom(stringPopUpLinkJavaScriptID, arrayContent, stringParentNameWithoutPrefix);
-}
-
-function buttonPopUpDone(stringPopUpCurrentJavaScriptID, stringParentNameWithoutPrefix, arrayContent)
-{
-	var stringPopUpCurrentJQueryID = stringKres + stringPopUpCurrentJavaScriptID;
-	var booleanState = getInputFrom(stringPopUpCurrentJavaScriptID, arrayContent, stringPageInfixTypeCurrent + stringParentNameWithoutPrefix);
-	
-	if (booleanState == true)
-	{
-		$(stringPopUpCurrentJQueryID).css("display", "none");
-		previewArrayObject(arrayContent);
-	}
-	else
-	{
-		
-	}
-}
-
-function buttonPopUpCancel(stringPopUpCurrentJavaScriptID)
-{
-	var stringPopUpCurrentJQueryID = stringKres + stringPopUpCurrentJavaScriptID;
-	
-	$(stringPopUpCurrentJQueryID).css("display", "none");
-}
-
-function buttonSubPopUpDone(stringPopUpCurrentJavaScriptID, stringPopUpParentJavaScriptID, stringParentNameWithoutPrefix, arrayContent)
-{
-	var stringPopUpCurrentJQueryID = stringKres + stringPopUpCurrentJavaScriptID;
-	var stringPopUpParentJQueryID = stringKres + stringPopUpParentJavaScriptID;
-	$(stringPopUpCurrentJQueryID).css("display", "none");
-	$(stringPopUpParentJQueryID).css("display", "block");
-	/* var booleanState = getInputFrom(stringPopUpCurrentJavaScriptID, stringParentNameWithoutPrefix, arrayContent);
-	
-	if (booleanState == true)
-	{
-		$(stringPopUpCurrentJQueryID).css("display", "none");
-		$(stringPopUpParentJQueryID).css("display", "none");
-		previewArrayObject(arrayContent);
-	}
-	else
-	{
-		
-	} */
-}
-
-function buttonSubPopUpCancel(stringPopUpCurrentJavaScriptID, stringPopUpParentJavaScriptID)
-{
-	var stringPopUpCurrentJQueryID = stringKres + stringPopUpCurrentJavaScriptID;
-	var stringPopUpParentJQueryID = stringKres + stringPopUpParentJavaScriptID;
-	
-	$(stringPopUpCurrentJQueryID).css("display", "none");
-	$(stringPopUpParentJQueryID).css("display", "block");
-}
-
-// POP UP SETTER
-
-function textPopUpSetter(stringPopUpJavaScriptID, stringParentNameWithoutPrefix, arrayContent)
-{
-	var stringPopUpJQueryID = stringKres + stringPopUpJavaScriptID;
-	
-	$(stringPopUpJQueryID + " input:text").each(function()
-    {
-        var stringInputJavaScriptID = $(this).attr("id");
-		var stringInputJQueryID = stringKres + stringInputJavaScriptID;
-		$(stringInputJQueryID).val("");
-		
-        var stringInputNameWithoutPrefix = stringInputJavaScriptID.substring(stringPrefixText.length, stringInputJavaScriptID.length);
-        var stringKey = stringPrefixText + stringParentNameWithoutPrefix + stringInputNameWithoutPrefix;
-        var stringValue = arrayFind(arrayContent, stringKey);
-        
-        if (stringValue == null || stringValue == undefined)
-        {
-            
-        }
-        else
-        {
-            setTextForm(stringInputJavaScriptID, stringValue);
-        }
-    });
-}
-
-function textPopUpGetter(stringPopUpJavaScriptID, stringParentNameWithoutPrefix, arrayContent)
-{
-	var stringPopUpJQueryID = stringKres + stringPopUpJavaScriptID;
-	
-	$(stringPopUpJQueryID + " form input[type=text]").each(function()
-	{
-		var stringInputJavaScriptID = $(this).attr("id");
-		var stringInputJQueryID = stringKres + stringInputJavaScriptID;
-		$(stringInputJQueryID).val("");
-		
-		var stringInputNameWithoutPrefix = stringInputJavaScriptID.substring(stringPrefixText.length, stringInputJavaScriptID.length);
-        var stringKey = stringPrefixText + stringParentNameWithoutPrefix + stringInputNameWithoutPrefix;
-        var stringValue = arrayFind(arrayContent, stringKey);
-		
-		if (validateTextGeneral(stringInputJQueryID) == true)
-		{
-			arrayAdd(arrayContent, stringKey, stringValue);
-		}
-		else
-		{
-			validationMessage("Harap lengkapi form terlebih dahulu !.", null);
-		}
-	});
-}
-
-
-// FOR POP UP
-
-function getInputFrom(stringLayoutJavaScriptID, arrayContent, stringInputInfix)
-{
-	var stringLayoutJQueryID = stringKres + stringLayoutJavaScriptID;
-	var arrayInputTemporary = [];
-	stateValidation = true;
-	
-	// TEXT
-	
-	if (stateValidation == true)
-	{
-		$(stringLayoutJQueryID + " form input:text").each(function()
-		{
-			var stringInputJavaScriptID =$(this).attr("id");
-			var stringInputJQueryID = stringKres + stringInputJavaScriptID;
-			var stringInputRequired = $(this).attr("required");
-			var stringInputIDWithoutPrefix = releasePrefix($(this).attr("id"));
-			var stringSpecificInputJavaScriptID = stringLayoutJavaScriptID + " " + stringInputJQueryID;
-			var stringSpecificInputJQueryID = stringKres + stringSpecificInputJavaScriptID;
-			var stringKey = stringPrefixText + stringInputInfix + stringInputIDWithoutPrefix;
-			var stringValue = getTextForm(stringSpecificInputJavaScriptID);
-			
-			if (stringInputRequired == stringStateRequired)
-			{
-				if (validateTextGeneral(stringSpecificInputJQueryID) == false)
-				{
-					validationMessage("Harap lengkapi form terlebih dahulu !.", null);
-					return false;
-				}
-				else
-				{
-					arrayAdd(arrayInputTemporary, stringKey, stringValue);
-				}
-			}
-			else
-			{
-				arrayAdd(arrayInputTemporary, stringKey, stringValue);
-			}
-		});
-	}
-	else
-	{
-		
-	}
-	
-	// RADIO BUTTON
-	
-	if (stateValidation == true)
-	{
-		var stringRadioButtonFlag = 0;
-		
-		$(stringLayoutJQueryID + " form input:radio").each(function()
-		{
-			var stringInputName = $(this).attr("name");
-			var stringInputRequired = $(this).attr("required");
-			var stringInputNameWithoutPrefix = releasePrefix($(this).attr("id"));
-			var stringSpecificInputNameJavaScriptID = stringLayoutJavaScriptID + " " + $(this).attr("name");
-			var stringSpecificInputNameJQueryID = stringKres + stringSpecificInputNameJavaScriptID;
-			var stringKey = stringPrefixRadioButton + stringInputInfix + stringInputNameWithoutPrefix;
-			var stringValue = getRadioButtonGeneral(stringSpecificInputNameJavaScriptID);
-
-			if (stringRadioButtonFlag != stringInputName)
-			{
-				if (stringInputRequired == stringStateRequired)
-				{
-					if (validateRadioButtonGeneral(stringSpecificInputNameJQueryID) == false)
-					{
-						validationMessage("Harap lengkapi form terlebih dahulu !.", null);
-						return false;
-					}
-					else
-					{
-						arrayAdd(arrayInputTemporary, stringKey, stringValue);
-						stringRadioButtonFlag = stringInputName;
-					}
-				}
-				else
-				{
-					arrayAdd(arrayInputTemporary, stringKey, stringValue);
-					stringRadioButtonFlag = stringInputName;
-				}
-			}
-			else
-			{
-				
-			}
-		});
-	}
-	else
-	{
-		
-	}
-	
-	// SELECT
-	
-	if (stateValidation == true)
-	{
-		$(stringLayoutJQueryID + " form select").each(function()
-		{
-			var stringInputJavaScriptID = $(this).attr("id");
-			var stringInputJQueryID = stringKres + stringInputJavaScriptID;
-			var stringInputRequired = $(this).attr("required");
-			var stringInputIDWithoutPrefix = releasePrefix($(this).attr("id"));
-			var stringSpecificInputJavaScriptID = stringLayoutJavaScriptID + " " + stringInputJQueryID;
-			var stringSpecificInputJQueryID = stringKres + stringSpecificInputJavaScriptID;
-			var stringKey = stringPrefixSelect + stringInputInfix + stringInputIDWithoutPrefix;
-			var stringValue = getSelectForm(stringSpecificInputJavaScriptID);
-
-			if (stringInputRequired == stringStateRequired)
-			{
-				if (validateSelectGeneral(stringSpecificInputJQueryID) == false)
-				{
-					validationMessage("Harap lengkapi form terlebih dahulu !.", null);
-					return false;
-				}
-				else
-				{
-					arrayAdd(arrayInputTemporary, stringKey, stringValue);
-				}
-			}
-			else
-			{
-				arrayAdd(arrayInputTemporary, stringKey, stringValue);
-			}
-		});
-	}
-	else
-	{
-		
-	}
-	
-	// DATE
-	
-	if (stateValidation == true)
-	{
-		$(stringLayoutJQueryID + " form input[type='date']").each(function()
-		{
-			var stringInputJavaScriptID = $(this).attr("id");
-			var stringInputJQueryID = stringKres + stringInputJavaScriptID;
-			var stringInputRequired = $(this).attr("required");
-			var stringInputIDWithoutPrefix = releasePrefix($(this).attr("id"));
-			var stringSpecificInputJavaScriptID = stringLayoutJavaScriptID + " " + stringInputJQueryID;
-			var stringSpecificInputJQueryID = stringKres + stringSpecificInputJavaScriptID;
-			var stringKey = stringPrefixDate + stringInputInfix + stringInputIDWithoutPrefix;
-			var stringValue = getDateForm(stringSpecificInputJavaScriptID);
-
-			if (stringInputRequired == stringStateRequired)
-			{
-				if (validateTextGeneral(stringSpecificInputJQueryID) == false)
-				{
-					validationMessage("Harap lengkapi form terlebih dahulu !.", null);
-					return false;
-				}
-				else
-				{
-					arrayAdd(arrayInputTemporary, stringKey, stringValue);
-				}
-			}
-			else
-			{
-				arrayAdd(arrayInputTemporary, stringKey, stringValue);
-			}
-		});
-	}
-	else
-	{
-		
-	}
-	
-	// EMAIL
-	
-	if (stateValidation == true)
-	{
-		$(stringLayoutJQueryID + " form input[type='email']").each(function()
-		{
-			var stringInputJavaScriptID = $(this).attr("id");
-			var stringInputJQueryID = stringKres + stringInputJavaScriptID;
-			var stringInputRequired = $(this).attr("required");
-			var stringInputIDWithoutPrefix = releasePrefix($(this).attr("id"));
-			var stringSpecificInputJavaScriptID = stringLayoutJavaScriptID + " " + stringInputJQueryID;
-			var stringSpecificInputJQueryID = stringKres + stringSpecificInputJavaScriptID;
-			var stringKey = stringPrefixEmail + stringInputInfix + stringInputIDWithoutPrefix;
-			var stringValue = getEmailForm(stringSpecificInputJavaScriptID);
-
-			if (stringInputRequired == true)
-			{
-				if (validateTextGeneral(stringSpecificInputJQueryID) == false)
-				{
-					validationMessage("Harap lengkapi form terlebih dahulu !.", null);
-					return false;
-				}
-				else
-				{
-					arrayAdd(arrayInputTemporary, stringKey, stringValue);
-				}
-			}
-			else
-			{
-				arrayAdd(arrayInputTemporary, stringKey, stringValue);
-			}
-		});
-	}
-	else
-	{
-		
-	}
-	
-	// NUMBER
-	
-	if (stateValidation == true)
-	{
-		$(stringLayoutJQueryID + " form input[type='number']").each(function()
-		{
-			var stringInputJavaScriptID = $(this).attr("id");
-			var stringInputJQueryID = stringKres + stringInputJavaScriptID;
-			var stringInputRequired = $(this).attr("required");
-			var stringInputIDWithoutPrefix = releasePrefix($(this).attr("id"));
-			var stringSpecificInputJavaScriptID = stringLayoutJavaScriptID + " " + stringInputJQueryID;
-			var stringSpecificInputJQueryID = stringKres + stringSpecificInputJavaScriptID;
-			var stringKey = stringPrefixText + stringInputInfix + stringInputIDWithoutPrefix;
-			var stringValue = getNumberForm(stringSpecificInputJavaScriptID);
-
-			if (stringInputRequired == stringStateRequired)
-			{
-				if (validateTextGeneral(stringSpecificInputJQueryID) == false)
-				{
-					validationMessage("Harap lengkapi form terlebih dahulu !.", null);
-					return false;
-				}
-				else
-				{
-					arrayAdd(arrayInputTemporary, stringKey, stringValue);
-				}
-			}
-			else
-			{
-				arrayAdd(arrayInputTemporary, stringKey, stringValue);
-			}
-		});
-	}
-	else
-	{
-		
-	}
-	
-	// CHECKBOX
-	
-	if (stateValidation == true)
-	{
-		$(stringLayoutJQueryID + " form input:checkbox").each(function()
-		{
-			var stringInputJavaScriptID = $(this).attr("id");
-			var stringInputJQueryID = stringKres + stringInputJavaScriptID;
-			var stringInputRequired = $(this).attr("required");
-			var stringInputIDWithoutPrefix = releasePrefix($(this).attr("id"));
-			var stringSpecificInputJavaScriptID = stringLayoutJavaScriptID + " " + stringInputJQueryID;
-			var stringSpecificInputJQueryID = stringKres + stringSpecificInputJavaScriptID;
-			var stringKey = stringPrefixText + stringInputInfix + stringInputIDWithoutPrefix;
-			var stringValue = getCheckboxGeneral(stringSpecificInputJavaScriptID);
-
-			if (stringInputRequired == stringStateRequired)
-			{
-				if (validateTextGeneral(stringSpecificInputJQueryID) == false)
-				{
-					validationMessage("Harap lengkapi form terlebih dahulu !.", null);
-					return false;
-				}
-				else
-				{
-					arrayAdd(arrayInputTemporary, stringKey, stringValue);
-				}
-			}
-			else
-			{
-				arrayAdd(arrayInputTemporary, stringKey, stringValue);
-			}
-		});
-	}
-	else
-	{
-		
-	}
-	
-	// TEXT AREA
-	
-	if (stateValidation == true)
-	{
-		$(stringLayoutJQueryID + " form textarea").each(function()
-		{
-			var stringInputJavaScriptID = $(this).attr("id");
-			var stringInputJQueryID = stringKres + stringInputJavaScriptID;
-			var stringInputRequired = $(this).attr("required");
-			var stringInputIDWithoutPrefix = releasePrefix($(this).attr("id"));
-			var stringSpecificInputJavaScriptID = stringLayoutJavaScriptID + " " + stringInputJQueryID;
-			var stringSpecificInputJQueryID = stringKres + stringSpecificInputJavaScriptID;
-			var stringKey = stringPrefixArea + stringInputInfix + stringInputIDWithoutPrefix;
-			var stringValue = getAreaForm(stringSpecificInputJavaScriptID);
-
-			if (stringInputRequired == stringStateRequired)
-			{
-				if (validateTextGeneral(stringSpecificInputJQueryID) == false)
-				{
-					validationMessage("Harap lengkapi form terlebih dahulu !.", null);
-					return false;
-				}
-				else
-				{
-					arrayAdd(arrayInputTemporary, stringKey, stringValue);
-				}
-			}
-			else
-			{
-				arrayAdd(arrayInputTemporary, stringKey, stringValue);
-			}
-		});
-	}
-	else
-	{
-		
-	}
-	
-	if (stateValidation == true)
-	{
-		alert("transfer" + " " + arrayInputTemporary + " " + arrayContent);
-		arrayTransfer(arrayInputTemporary, arrayContent);
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}
-
-function arrayTransfer(arrayTemporary, arrayContent)
-{
-	for (var i = 0; i < arrayTemporary.length; i++)
-	{
-		arrayAdd(arrayContent, arrayTemporary[i].elementID, arrayTemporary[i].Value);
-	}
-}
-
-function setInputFrom(stringLayoutJavaScriptID, arrayContent, stringInputInfix)
-{
-	var stringKey;
-	var stringValue;
-	var stringKeyPrefix;
-	var stringKeyWithoutPrefix;
-	var stringKeyWithoutInfix;
-	var stringLayoutJQueryID = stringKres + stringLayoutJavaScriptID;
-	
-	for (var i = 0; i < arrayContent.length; i++)
-	{
-		stringKey = arrayContent[i].elementID;
-		stringValue = arrayContent[i].Value;
-		stringKeyPrefix = getPrefix(stringKey);
-		stringKeyWithoutPrefix = releasePrefix(stringKey);
-		stringKeyWithoutInfix = stringKeyWithoutPrefix.substring(0, stringInputInfix.length);
-
-		if (stringKeyPrefix == stringPrefixText)
-		{
-			setTextForm(stringLayoutJavaScriptID + " " + stringKres + stringPrefixText + stringKeyWithoutInfix);
-		}
-		else if (stringKeyPrefix == stringPrefixRadioButton)
-		{
-			setRadioButtonGeneral(stringLayoutJavaScriptID + " " + stringKres + stringPrefixRadioButton + stringKeyWithoutInfix);
-		}
-		else if (stringKeyPrefix == stringPrefixCheckbox)
-		{
-			setCheckboxGeneral(stringLayoutJavaScriptID + " " + stringKres + stringPrefixCheckbox + stringKeyWithoutInfix);
-		}
-		else if (stringKeyPrefix == stringPrefixSelect)
-		{
-			setSelectForm(stringLayoutJavaScriptID + " " + stringKres + stringPrefixSelect + stringKeyWithoutInfix);
-		}
-		else if (stringKeyPrefix == stringPrefixArea)
-		{
-			setAreaForm(stringLayoutJavaScriptID + " " + stringKres + stringPrefixArea + stringKeyWithoutInfix);
-		}
-		else if (stringKeyPrefix == stringPrefixNumber)
-		{
-			setNumberForm(stringLayoutJavaScriptID + " " + stringKres + stringPrefixNumber + stringKeyWithoutInfix);
-		}
-		else if (stringKeyPrefix == stringPrefixEmail)
-		{
-			setEmailForm(stringLayoutJavaScriptID + " " + stringKres + stringPrefixEmail + stringKeyWithoutInfix);
-		}
-		else if (stringKeyPrefix == stringPrefixDate)
-		{
-			setDateForm(stringLayoutJavaScriptID + " " + stringKres + stringPrefixDate + stringKeyWithoutInfix);
-		}
-		else
-		{
-			
-		}
-	}
-}
-
-function getPrefix(stringKey)
-{
-	if (stringKey.substring(0, stringPrefixText.length) == stringPrefixText)
-	{
-		return stringPrefixText;
-	}
-	else if (stringKey.substring(0, stringPrefixRadioButton.length) == stringPrefixRadioButton)
-	{
-		return stringPrefixRadioButton;
-	}
-	else if (stringKey.substring(0, stringPrefixCheckbox.length) == stringPrefixCheckbox)
-	{
-		return stringPrefixCheckbox;
-	}
-	else if (stringKey.substring(0, stringPrefixSelect.length) == stringPrefixSelect)
-	{
-		return stringPrefixSelect;
-	}
-	else if (stringKey.substring(0, stringPrefixDate.length) == stringPrefixDate)
-	{
-		return stringPrefixDate;
-	}
-	else if (stringKey.substring(0, stringPrefixArea.length) == stringPrefixArea)
-	{
-		return stringPrefixArea;
-	}
-	else if (stringKey.substring(0, stringPrefixNumber.length) == stringPrefixNumber)
-	{
-		return stringPrefixNumber;
-	}
-	else if (stringKey.substring(0, stringPrefixEmail.length) == stringPrefixEmail)
-	{
-		return stringPrefixEmail;
-	}
-	else
-	{
-		
-	}
-}
-
-function telephoneStripGenerator(stringInputJavaScriptID)
-{
-	var stringInputValue;
-	var stringInputJQueryID = stringKres + stringInputJavaScriptID;
-  
-	$(stringInputJQueryID).keyup(function()
-	{
-		stringInputValue = $(this).val();
-
-		if (stringInputValue.length == 4)
-		{
-			stringInputValue += stringSeparatorTelephone;
-			$(this).val(stringInputValue);
-		}
-		else
-		{
-
-		}
-	});
 }
