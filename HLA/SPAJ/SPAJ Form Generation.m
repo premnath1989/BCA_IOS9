@@ -288,6 +288,7 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
     {
         if (!boolTenagaPenjualSigned){
             [self generateAllPDF];
+            [viewActivityIndicator setHidden:NO];
             //[self voidCreateThePDF:@"SPAJ"];
             //[modelSPAJTransaction updateSPAJTransaction:@"SPAJDateModified" StringColumnValue:[formatter getDateToday:@"yyyy-MM-dd HH:mm:ss"] StringWhereName:@"SPAJEappNumber" StringWhereValue:[dictTransaction valueForKey:@"SPAJEappNumber"]];
             
@@ -335,9 +336,6 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
             }
             else{
                 [self joinSPAJPDF];
-                UIAlertController *alertLockForm = [alert alertInformation:@"Berhasil" stringMessage:@"File SPAJ.pdf berhasil dibuat"];
-                [self presentViewController:alertLockForm animated:YES completion:nil];
-                [viewActivityIndicator setHidden:YES];
             }
         }
         else
@@ -396,6 +394,10 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
         CGPDFContextClose(writeContext);
         CFRelease(pdfURLOutput);
         CGContextRelease(writeContext);
+        
+        UIAlertController *alertLockForm = [alert alertInformation:@"Berhasil" stringMessage:@"File SPAJ.pdf berhasil dibuat"];
+        [self presentViewController:alertLockForm animated:YES completion:nil];
+        [viewActivityIndicator setHidden:YES];
     }
 
     -(void)voidCreateImageFromWebView{
@@ -633,7 +635,7 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
         [dictOriginal setObject:modifieArray forKey:@"readFromDB"];
         //return [super readfromDB:finalDictionary];
         [self callSuccessCallback:[params valueForKey:@"successCallBack"] withRetValue:dictOriginal];
-        [viewActivityIndicator setHidden:YES];
+        //  [viewActivityIndicator setHidden:YES];
         
         [self performSelector:@selector(voidCreateThePDF) withObject:nil afterDelay:1.0];
         //[self voidCreateThePDF];

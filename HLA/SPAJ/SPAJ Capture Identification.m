@@ -56,7 +56,7 @@ NSString* const Back = @"Back";
     NSMutableArray* arrayIDBackDisabled;
 }
 @synthesize SPAJCaptureIdentificationDelegate;
-@synthesize buttonCaptureBack,buttonCaptureFront,buttonIDTypeSelection;
+@synthesize buttonCaptureBack,buttonCaptureFront,buttonIDTypeSelection,buttonSave;
 @synthesize imageViewFront,imageViewBack;
 @synthesize tablePartiesCaprture;
 @synthesize dictTransaction;
@@ -973,7 +973,7 @@ NSString* const Back = @"Back";
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [tablePartiesCaprture selectRowAtIndexPath:[NSIndexPath indexPathForRow:indexSelected inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
                 });
-                
+                [buttonSavePicture setEnabled:false];
             }
         }
         else{
@@ -1061,6 +1061,7 @@ NSString* const Back = @"Back";
         else{
             [imageViewBack setImage:image];
         }
+        [buttonSave setEnabled:true];
         [picker dismissViewControllerAnimated:YES completion:nil];
         
     }

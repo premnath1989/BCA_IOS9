@@ -108,6 +108,7 @@
     @property (nonatomic, weak) IBOutlet UIButton* buttonCaptureBack;
 
     @property (nonatomic, weak) IBOutlet UIButton* buttonIDTypeSelection;
+    @property (nonatomic, weak) IBOutlet UIButton* buttonSave;
 
     @property (nonatomic, weak) IBOutlet UIButton* buttonStep1;
     @property (nonatomic, weak) IBOutlet UIButton* buttonStep2;

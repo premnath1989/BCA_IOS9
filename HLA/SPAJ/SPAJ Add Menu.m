@@ -648,11 +648,16 @@
         // File paths
         NSString *pdfPath1 = [NSString stringWithFormat:@"%@/SPAJ/%@/SPAJSigned.pdf",docsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"]];
         NSString *pdfPathPage1 = [NSString stringWithFormat:@"%@/SPAJ/%@/SPAJSignedPage1.pdf",docsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"]];
+        NSString *pdfPathPage9 = [NSString stringWithFormat:@"%@/SPAJ/%@/SPAJSigned9.pdf",docsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"]];
+        NSString *pdfPathPage9_1 = [NSString stringWithFormat:@"%@/SPAJ/%@/SPAJSignedPage9.pdf",docsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"]];
+        
         NSFileManager *fileManager = [NSFileManager defaultManager];
         
         NSError *error;
         BOOL success = [fileManager removeItemAtPath:pdfPath1 error:&error];
         BOOL successPage1 = [fileManager removeItemAtPath:pdfPathPage1 error:&error];
+        BOOL successPage9 = [fileManager removeItemAtPath:pdfPathPage9 error:&error];
+        BOOL successPage9_1 = [fileManager removeItemAtPath:pdfPathPage9_1 error:&error];
         if (success) {
             
         }
@@ -662,6 +667,22 @@
         }
         
         if (successPage1) {
+            
+        }
+        else
+        {
+            NSLog(@"Could not delete file -:%@ ",[error localizedDescription]);
+        }
+        
+        if (successPage9) {
+            
+        }
+        else
+        {
+            NSLog(@"Could not delete file -:%@ ",[error localizedDescription]);
+        }
+
+        if (successPage9_1) {
             
         }
         else

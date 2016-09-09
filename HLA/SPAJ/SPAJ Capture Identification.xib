@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -15,6 +14,7 @@
                 <outlet property="buttonCaptureBack" destination="IXP-68-glv" id="HZQ-hk-Whd"/>
                 <outlet property="buttonCaptureFront" destination="dk7-kq-Fjl" id="ZRR-pB-VeC"/>
                 <outlet property="buttonIDTypeSelection" destination="D1G-MS-cFn" id="6GZ-wm-ibu"/>
+                <outlet property="buttonSave" destination="Ony-2M-Rgb" id="YVk-4g-Wr7"/>
                 <outlet property="buttonStep1" destination="lnZ-K4-H9p" id="Fkv-LO-GpA"/>
                 <outlet property="buttonStep2" destination="iXD-ZI-9GH" id="N83-6a-b33"/>
                 <outlet property="buttonStep3" destination="hFC-J1-7WK" id="KS8-KN-a5l"/>
@@ -99,14 +99,14 @@
                             <rect key="frame" x="8" y="45" width="117" height="328"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Back" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1Kn-UG-Zpk">
                             <rect key="frame" x="8" y="381" width="117" height="328"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Ony-2M-Rgb">
