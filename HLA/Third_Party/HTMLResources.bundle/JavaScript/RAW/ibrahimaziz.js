@@ -2871,3 +2871,24 @@ stringValue)
        }
    });
 }
+
+function telephoneStripGenerator(stringInputJavaScriptID)
+{
+	var stringInputValue;
+	var stringInputJQueryID = stringKres + stringInputJavaScriptID;
+  
+	$(stringInputJQueryID).keyup(function()
+	{
+		stringInputValue = $(this).val();
+
+		if (stringInputValue.length == 4)
+		{
+			stringInputValue += stringSeparatorTelephone;
+			$(this).val(stringInputValue);
+		}
+		else
+		{
+
+		}
+	});
+}
