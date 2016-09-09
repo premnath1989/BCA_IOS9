@@ -5,6 +5,9 @@
 //  Created by Ibrahim on 17/06/2016.
 //  Copyright © 2016 Ibrahim. All rights reserved.
 //
+NSString* const statePDF = @"PDF";
+NSString* const stateIMG = @"IMG";
+
 NSString* const SPAJ = @"SPAJ";
 NSString* const Ringkasan = @"page_ringkasan_pembelian";
 //NSString* const PemegangPolis = @"PemegangPolis";
@@ -69,6 +72,11 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
     
     NSMutableArray *arrayHTMLName;
     int indexForPDFGeneration;
+    
+    NSMutableArray *arrayIMGName;
+    int indexImgForPDFGeneration;
+    
+    NSString* stateGeneration;
     
     NSMutableDictionary* dictAgentProfile;
     NSDictionary *dictionaryPOData;
@@ -170,11 +178,24 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
     }
 
     -(void)generateAllPDF{
+        stateGeneration = statePDF;
+        
         indexForPDFGeneration = 0;
         arrayHTMLName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PDF"]];
         
         if ([arrayHTMLName count]>0){
             [self loadSPAJPDFHTML:[arrayHTMLName objectAtIndex:indexForPDFGeneration] WithArrayIndex:indexForPDFGeneration];
+        }
+    }
+
+    -(void)generateAllIMGPDF{
+        stateGeneration = stateIMG;
+        
+        indexImgForPDFGeneration = 0;
+        arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG"]];
+        
+        if ([arrayIMGName count]>0){
+            [self loadSPAJPDFHTML:[arrayIMGName objectAtIndex:indexImgForPDFGeneration] WithArrayIndex:indexImgForPDFGeneration];
         }
     }
 
@@ -323,19 +344,32 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
         NSArray* path_forDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
         NSString* documentsDirectory = [path_forDirectory objectAtIndex:0];
         if (pdfData) {
-            [pdfData writeToFile:[NSString stringWithFormat:@"%@/SPAJ/%@/%@_%i.pdf",documentsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"],[dictTransaction valueForKey:@"SPAJEappNumber"],indexForPDFGeneration] atomically:YES];
-            
             NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJFormGeneration1=1 where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",[dictTransaction valueForKey:@"SPAJEappNumber"]];
             [modelSPAJFormGeneration updateSPAJFormGeneration:stringUpdate];
-            indexForPDFGeneration ++;
-
-            
             [self voidCheckBooleanLastState];
-            if (indexForPDFGeneration < [arrayHTMLName count]){
-                [self loadSPAJPDFHTML:[arrayHTMLName objectAtIndex:indexForPDFGeneration] WithArrayIndex:indexForPDFGeneration];
+            
+            if ([stateGeneration isEqualToString:statePDF]){
+                [pdfData writeToFile:[NSString stringWithFormat:@"%@/SPAJ/%@/%@_%i.pdf",documentsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"],[dictTransaction valueForKey:@"SPAJEappNumber"],indexForPDFGeneration] atomically:YES];
+                indexForPDFGeneration ++;
+                if (indexForPDFGeneration < [arrayHTMLName count]){
+                    [self loadSPAJPDFHTML:[arrayHTMLName objectAtIndex:indexForPDFGeneration] WithArrayIndex:indexForPDFGeneration];
+                }
+                else{
+                    [self joinSPAJPDF];
+                }
             }
             else{
-                [self joinSPAJPDF];
+                [pdfData writeToFile:[NSString stringWithFormat:@"%@/SPAJ/%@/%@_HEALTHQUESTIONAIRE_%i.pdf",documentsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"],[dictTransaction valueForKey:@"SPAJEappNumber"],indexImgForPDFGeneration] atomically:YES];
+                indexImgForPDFGeneration ++;
+                if (indexImgForPDFGeneration < [arrayIMGName count]){
+                    [self loadSPAJPDFHTML:[arrayIMGName objectAtIndex:indexImgForPDFGeneration] WithArrayIndex:indexImgForPDFGeneration];
+                }
+                else{
+                    //[self joinSPAJPDF];
+                    UIAlertController *alertLockForm = [alert alertInformation:@"Berhasil" stringMessage:@"Form berhasil dibuat"];
+                    [self presentViewController:alertLockForm animated:YES completion:nil];
+                    [viewActivityIndicator setHidden:YES];
+                }
             }
         }
         else
@@ -395,9 +429,14 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
         CFRelease(pdfURLOutput);
         CGContextRelease(writeContext);
         
-        UIAlertController *alertLockForm = [alert alertInformation:@"Berhasil" stringMessage:@"File SPAJ.pdf berhasil dibuat"];
-        [self presentViewController:alertLockForm animated:YES completion:nil];
-        [viewActivityIndicator setHidden:YES];
+        if ([stateGeneration isEqualToString:statePDF]){
+            [self generateAllIMGPDF];
+        }
+        else{
+            /*UIAlertController *alertLockForm = [alert alertInformation:@"Berhasil" stringMessage:@"File SPAJ.pdf berhasil dibuat"];
+            [self presentViewController:alertLockForm animated:YES completion:nil];
+            [viewActivityIndicator setHidden:YES];*/
+        }
     }
 
     -(void)voidCreateImageFromWebView{
