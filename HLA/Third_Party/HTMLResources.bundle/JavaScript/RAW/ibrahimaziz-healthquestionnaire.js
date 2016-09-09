@@ -1,3 +1,19 @@
+// GENERATOR
+
+function footerSetterForHealthQuestionnairePDF(stringDetail, intTotalPage)
+{
+	$("footer .Detail").each(function(indexPage)
+	{
+		$(this).text(stringDetail + " Hal " + (indexPage + 1) + " / " + intTotalPage);
+	})
+}
+
+function titleSetterForHealthQuestionnairePDF(stringTitle)
+{
+	$("h1").text(stringTitle);
+	$("span.QuestionnaireTitle").text(stringTitle);
+}
+
 // MULTI POP UP
 
 function showPopUpFromButton(stringPopUpLinkJavaScriptID, stringParentNameWithoutPrefix, arrayContent)
@@ -111,6 +127,7 @@ function buttonSubPopUpCancel(stringPopUpCurrentJavaScriptID, stringPopUpParentJ
 	$(stringPopUpCurrentJQueryID).css("display", "none");
 	$(stringPopUpParentJQueryID).css("display", "block");
 }
+
 
 // POP UP SETTER
 
@@ -497,14 +514,6 @@ function getInputFrom(stringLayoutJavaScriptID, arrayContent, stringInputInfix)
 	}
 }
 
-function arrayTransfer(arrayTemporary, arrayContent)
-{
-	for (var i = 0; i < arrayTemporary.length; i++)
-	{
-		arrayAdd(arrayContent, arrayTemporary[i].elementID, arrayTemporary[i].Value);
-	}
-}
-
 function setInputFrom(stringLayoutJavaScriptID, arrayContent, stringInputInfix)
 {	
 	var stringKey;
@@ -569,7 +578,6 @@ function getPrefix(stringKey)
 	}
 	else if (stringKey.substring(0, stringPrefixRadioButton.length) == stringPrefixRadioButton)
 	{
-		
 		return stringPrefixRadioButton;
 	}
 	else if (stringKey.substring(0, stringPrefixCheckbox.length) == stringPrefixCheckbox)
