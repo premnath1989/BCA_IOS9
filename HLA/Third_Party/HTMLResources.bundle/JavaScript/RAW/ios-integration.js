@@ -117,7 +117,7 @@ function readfromDB()
 }
 
 function savetoDB() 
-{	
+{		
 	var stringValue;
 	var stringRadioButtonFlag = 0;
 	var booleanValidateState = true;
@@ -310,9 +310,9 @@ function savetoDB()
 		
 	}
 	else
-	{		
-		var objectContent;
-    	
+	{			
+		var objectContent;    			
+		
 		if (stringPageSectionCurrent == stringPageSectionHealthQuestionnaire)
 		{
 			objectContent = arrayHealthQuestionnaire;
