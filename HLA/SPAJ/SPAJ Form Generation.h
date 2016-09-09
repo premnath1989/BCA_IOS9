@@ -12,6 +12,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "HtmlGenerator/HtmlGenerator.h"
+#import "AllAboutPDFGeneration.h"
+#import "SPAJFilesViewController.h"
 
 // DECLARATION
 

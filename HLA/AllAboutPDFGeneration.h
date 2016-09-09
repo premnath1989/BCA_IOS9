@@ -15,5 +15,6 @@
 
 @interface AllAboutPDFGeneration : NSObject
 -(void)joinSPAJPDF:(NSMutableArray *)arrayHTMLName DictTransaction:(NSDictionary *)dictTransaction;
+-(void)splitPDF:(NSURL *)sourcePDFUrl withOutputName:(NSString *)outputBaseName intoDirectory:(NSString *)directory;
 @property (nonatomic,strong) id <PDFGenerationDelegate> delegatePDFGeneration;
 @end

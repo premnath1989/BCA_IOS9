@@ -63,12 +63,16 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
     ModelSPAJSignature* modelSPAJSignature;
     ModelSPAJHtml *modelSPAJHtml;
     ModelSPAJTransaction *modelSPAJTransaction;
+    AllAboutPDFGeneration *allAboutPDFGeneration;
+    SPAJFilesViewController* spajFilesViewController;
     Alert* alert;
     
     
     UserInterface *objectUserInterface;
     BOOL boolSPAJPDF;
     BOOL boolTenagaPenjualSigned;
+    
+    NSMutableArray *arrayPDFHealthQuestionairreName;
     
     NSMutableArray *arrayHTMLName;
     int indexForPDFGeneration;
@@ -141,7 +145,7 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
         modelSIPOData = [[ModelSIPOData alloc]init];
         modelSIMaster = [[Model_SI_Master alloc]init];
         modelSPAJTransaction = [[ModelSPAJTransaction alloc]init];
-        
+        allAboutPDFGeneration = [[AllAboutPDFGeneration alloc]init];
         
         [self setNavigationBar];
         
@@ -190,6 +194,7 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
 
     -(void)generateAllIMGPDF{
         stateGeneration = stateIMG;
+        arrayPDFHealthQuestionairreName = [[NSMutableArray alloc]init];
         
         indexImgForPDFGeneration = 0;
         arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG"]];
@@ -197,6 +202,19 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
         if ([arrayIMGName count]>0){
             [self loadSPAJPDFHTML:[arrayIMGName objectAtIndex:indexImgForPDFGeneration] WithArrayIndex:indexImgForPDFGeneration];
         }
+    }
+
+    -(void)createImageFromPDF{
+        if ([arrayPDFHealthQuestionairreName count]>0){
+            for (int i=0;i<[arrayPDFHealthQuestionairreName count];i++){
+                NSURL *fileURL = [[NSURL alloc] initFileURLWithPath:[arrayPDFHealthQuestionairreName objectAtIndex:i]];
+                NSString* outputName = [NSString stringWithFormat:@"HealtQuestionaire_%i",i];
+                [allAboutPDFGeneration splitPDF:fileURL withOutputName:outputName intoDirectory:[dictTransaction valueForKey:@"SPAJEappNumber"]];
+            }
+        }
+        UIAlertController *alertLockForm = [alert alertInformation:@"Berhasil" stringMessage:@"Form berhasil dibuat"];
+        [self presentViewController:alertLockForm animated:YES completion:nil];
+        [viewActivityIndicator setHidden:YES];
     }
 
     -(void)loadHTMLFile:(NSString *)HTMLName{
@@ -302,7 +320,12 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
         /*  SPAJAddDetail* viewController = [[SPAJAddDetail alloc] initWithNibName:@"SPAJ Add Detail" bundle:nil];
             [self presentViewController:viewController animated:true completion:nil]; */
         
-        [_delegateSPAJMain voidGoToAddDetail];
+        //[_delegateSPAJMain voidGoToAddDetail];
+        spajFilesViewController = [[SPAJFilesViewController alloc]initWithNibName:@"SPAJFilesViewController" bundle:nil];
+        [spajFilesViewController setDictTransaction:dictTransaction];
+        spajFilesViewController.modalPresentationStyle = UIModalPresentationOverFullScreen;
+        [self presentViewController:spajFilesViewController animated:YES completion:nil];
+        [spajFilesViewController.buttonSubmit setHidden:YES];
     };
 
     - (IBAction)actionGoToStep4:(id)sender
@@ -359,16 +382,19 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
                 }
             }
             else{
-                [pdfData writeToFile:[NSString stringWithFormat:@"%@/SPAJ/%@/%@_HEALTHQUESTIONAIRE_%i.pdf",documentsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"],[dictTransaction valueForKey:@"SPAJEappNumber"],indexImgForPDFGeneration] atomically:YES];
+                NSString* fileName = [NSString stringWithFormat:@"%@/SPAJ/%@/%@_HEALTHQUESTIONAIRE_%i.pdf",documentsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"],[dictTransaction valueForKey:@"SPAJEappNumber"],indexImgForPDFGeneration];
+                [pdfData writeToFile:fileName atomically:YES];
+                [arrayPDFHealthQuestionairreName addObject:fileName];
+                
                 indexImgForPDFGeneration ++;
                 if (indexImgForPDFGeneration < [arrayIMGName count]){
                     [self loadSPAJPDFHTML:[arrayIMGName objectAtIndex:indexImgForPDFGeneration] WithArrayIndex:indexImgForPDFGeneration];
                 }
                 else{
-                    //[self joinSPAJPDF];
-                    UIAlertController *alertLockForm = [alert alertInformation:@"Berhasil" stringMessage:@"Form berhasil dibuat"];
-                    [self presentViewController:alertLockForm animated:YES completion:nil];
-                    [viewActivityIndicator setHidden:YES];
+                    [self createImageFromPDF];
+//                    UIAlertController *alertLockForm = [alert alertInformation:@"Berhasil" stringMessage:@"Form berhasil dibuat"];
+//                    [self presentViewController:alertLockForm animated:YES completion:nil];
+//                    [viewActivityIndicator setHidden:YES];
                 }
             }
         }

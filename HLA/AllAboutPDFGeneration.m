@@ -62,4 +62,43 @@
     CGContextRelease(writeContext);
     [delegatePDFGeneration voidPDFCreated];
 }
+
+#pragma mark image from pdf
+-(void)splitPDF:(NSURL *)sourcePDFUrl withOutputName:(NSString *)outputBaseName intoDirectory:(NSString *)directory
+{
+    CGPDFDocumentRef SourcePDFDocument = CGPDFDocumentCreateWithURL((__bridge CFURLRef)sourcePDFUrl);
+    size_t numberOfPages = CGPDFDocumentGetNumberOfPages(SourcePDFDocument);
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *filePathAndDirectory = [documentsDirectory stringByAppendingPathComponent:directory];
+    NSError *error;
+    /*if (![[NSFileManager defaultManager] createDirectoryAtPath:filePathAndDirectory
+     withIntermediateDirectories:NO
+     attributes:nil
+     error:&error])
+     {
+     NSLog(@"Create directory error: %@", error);
+     return;
+     }*/
+    for(int currentPage = 1; currentPage <= numberOfPages; currentPage ++ )
+    {
+        CGPDFPageRef SourcePDFPage = CGPDFDocumentGetPage(SourcePDFDocument, currentPage);
+        // CoreGraphics: MUST retain the Page-Refernce manually
+        CGPDFPageRetain(SourcePDFPage);
+        NSString *relativeOutputFilePath = [NSString stringWithFormat:@"SPAJ/%@/%@%d.jpg", directory, outputBaseName, currentPage];
+        NSString *ImageFileName = [documentsDirectory stringByAppendingPathComponent:relativeOutputFilePath];
+        CGRect sourceRect = CGPDFPageGetBoxRect(SourcePDFPage, kCGPDFMediaBox);
+        UIGraphicsBeginPDFContextToFile(ImageFileName, sourceRect, nil);
+        UIGraphicsBeginImageContext(CGSizeMake(sourceRect.size.width,sourceRect.size.height));
+        CGContextRef currentContext = UIGraphicsGetCurrentContext();
+        CGContextTranslateCTM(currentContext, 0.0, sourceRect.size.height); //596,842 //640×960,
+        CGContextScaleCTM(currentContext, 1.0, -1.0);
+        CGContextDrawPDFPage (currentContext, SourcePDFPage); // draws the page in the graphics context
+        UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        NSString *imagePath = [documentsDirectory stringByAppendingPathComponent: relativeOutputFilePath];
+        [UIImageJPEGRepresentation(image, 1) writeToFile: imagePath atomically:YES];
+    }
+}
 @end
