@@ -101,4 +101,19 @@
         [UIImageJPEGRepresentation(image, 1) writeToFile: imagePath atomically:YES];
     }
 }
+
+-(NSString *)getSPAJImageNameFromPath:(NSString *)stringImageName{
+    NSString *stringName;
+    NSArray *chunks = [stringImageName componentsSeparatedByString: @"/"];
+    
+    NSString* realString;
+    if ([chunks count]>0){
+         realString = [chunks lastObject];
+         NSArray *chunks1 = [realString componentsSeparatedByString: @"."];
+         stringName = [chunks1 objectAtIndex:0];
+    }
+    
+    
+    return stringName;
+}
 @end

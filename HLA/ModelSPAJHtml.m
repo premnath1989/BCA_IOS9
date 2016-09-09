@@ -39,7 +39,8 @@
     [database open];
     
     //FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select * from CFFHtml where CFFHtmlID = %i",CFFHtmlID]];
-    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select %@ from SPAJHtml where SPAJHtmlSection = \"%@\"",stringColumnName,stringHtmlSection]];
+    //FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select %@ from SPAJHtml where SPAJHtmlSection = \"%@\"",stringColumnName,stringHtmlSection]];
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select %@ from SPAJHtml where SPAJHtmlSection in (\"%@\")",stringColumnName,stringHtmlSection]];
     while ([s next]) {
         stringReturn = [s stringForColumn:stringColumnName];
         [arrayHtmlFileName addObject:stringReturn];
