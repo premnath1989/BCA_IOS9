@@ -16,4 +16,5 @@
 -(int)voidGetDuplicateRowID:(NSDictionary *)dictionaryCFFAnswers;
 -(NSString *)selectSPAJAnswersData:(NSString *)stringColumnName StringWhere:(NSString *)stringWhere;
 -(void)deleteSPAJAnswers:(NSString *)stringWhereValue;
+-(int)selectSPAJIDActiveHtml;
 @end

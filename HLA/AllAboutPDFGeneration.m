@@ -116,4 +116,26 @@
     
     return stringName;
 }
+
+-(UIImage *)generateSignatureForImage:(UIImage *)mainImg signatureImage1:(UIImage *)signatureImage1 signaturePostion1:(CGRect)signaturePosition1 signatureImage2:(UIImage *)signatureImage2 signaturePostion2:(CGRect)signaturePosition2 signatureImage3:(UIImage *)signatureImage3 signaturePostion3:(CGRect)signaturePosition3 signatureImage4:(UIImage *)signatureImage4 signaturePostion4:(CGRect)signaturePosition4{
+    UIImage *backgroundImage = mainImg;
+    UIImage *signImage1 = signatureImage1;
+    UIImage *signImage2 = signatureImage2;
+    UIImage *signImage3 = signatureImage3;
+    UIImage *signImage4 = signatureImage4;
+    
+    //Now re-drawing your  Image using drawInRect method
+    UIGraphicsBeginImageContext(backgroundImage.size);
+    [backgroundImage drawInRect:CGRectMake(0, 0, backgroundImage.size.width, backgroundImage.size.height)];
+    
+    [signImage1 drawInRect:signaturePosition1];
+    [signImage2 drawInRect:signaturePosition2];
+    [signImage3 drawInRect:signaturePosition3];
+    [signImage4 drawInRect:signaturePosition4];
+    
+    // now merging two images into one
+    UIImage *result = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return result;
+}
 @end

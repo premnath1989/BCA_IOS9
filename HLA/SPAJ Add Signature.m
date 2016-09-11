@@ -19,6 +19,8 @@
 #import "ModelAgentProfile.h"
 #import "ModelProspectProfile.h"
 #import "ClassImageProcessing.h"
+#import "ModelSPAJHtml.h"
+#import "AllAboutPDFGeneration.h"
 
 @interface SPAJ_Add_Signature (){
     IBOutlet UILabel *labelSignatureFooter;
@@ -43,6 +45,8 @@
     ModelSPAJSignature* modelSPAJSignature;
     ModelAgentProfile* modelAgentProfile;
     ModelProspectProfile* modelProspectProfile;
+    ModelSPAJHtml* modelSPAJHtml;
+    AllAboutPDFGeneration* allAboutPDFGeneration;
     ClassImageProcessing *classImageProcessing;
     
     NSDictionary* dictionaryPOData;
@@ -93,6 +97,8 @@
     modelSPAJSignature = [[ModelSPAJSignature alloc]init];
     modelAgentProfile=[[ModelAgentProfile alloc]init];
     modelProspectProfile = [[ModelProspectProfile alloc]init];
+    modelSPAJHtml = [[ModelSPAJHtml alloc]init];
+    allAboutPDFGeneration = [[AllAboutPDFGeneration alloc]init];
     classImageProcessing = [[ClassImageProcessing alloc]init];
     
     [self setNavigationBar];
@@ -440,6 +446,7 @@
 -(void)voidSavePOSignature{
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     NSString* signatureImage = [formatter encodedSignatureImage:viewToSign];
+    [self voidSaveSignatureForImages];
     [self voidSaveSignatureToPDF:0];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self actionClearSign:nil];
@@ -803,6 +810,165 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+-(void)voidSaveSignatureForImages{
+    NSString* base64StringImageParty1=[modelSPAJSignature selectSPAJSignatureData:@"SPAJSignatureTempImageParty1" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]]?:@"";
+    NSString* base64StringImageParty2=[modelSPAJSignature selectSPAJSignatureData:@"SPAJSignatureTempImageParty2" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]]?:@"";
+    NSString* base64StringImageParty3=[modelSPAJSignature selectSPAJSignatureData:@"SPAJSignatureTempImageParty3" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]]?:@"";
+    NSString* base64StringImageParty4=[modelSPAJSignature selectSPAJSignatureData:@"SPAJSignatureTempImageParty4" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]]?:@"";
+    
+    NSData* imageParty1=[[NSData alloc]
+                         initWithBase64EncodedString:base64StringImageParty1 options:0];;
+    NSData* imageParty2=[[NSData alloc]
+                         initWithBase64EncodedString:base64StringImageParty2 options:0];;
+    NSData* imageParty3=[[NSData alloc]
+                         initWithBase64EncodedString:base64StringImageParty3 options:0];;
+    NSData* imageParty4=[[NSData alloc]
+                         initWithBase64EncodedString:base64StringImageParty4 options:0];;
+    
+    UIImage *imageSignatureParty1 = [UIImage imageWithData:imageParty1];
+    UIImage *imageSignatureParty2 = [UIImage imageWithData:imageParty2];
+    UIImage *imageSignatureParty3 = [UIImage imageWithData:imageParty3];
+    UIImage *imageSignatureParty4 = [UIImage imageWithData:imageParty4];
+    
+    
+    UIColor* fromColor = [UIColor colorWithRed:255.0 green:255.0 blue:255.0 alpha:1.0];
+    UIColor* toColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
+    UIImage* imageConverted1 = [classImageProcessing changeColor:imageSignatureParty1 fromColor:fromColor toColor:toColor];
+    UIImage* imageConverted2 = [classImageProcessing changeColor:imageSignatureParty2 fromColor:fromColor toColor:toColor];
+    UIImage* imageConverted3 = [classImageProcessing changeColor:imageSignatureParty3 fromColor:fromColor toColor:toColor];
+    UIImage* imageConverted4 = [classImageProcessing changeColor:imageSignatureParty4 fromColor:fromColor toColor:toColor];
+    
+    NSMutableArray *arrayIMGName;
+    NSMutableArray *arrayPureIMGName = [[NSMutableArray alloc]init];
+    if ([[dictionaryPOData valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"]){
+        arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH"]];
+    }
+    else{
+        arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_IN"]];
+    }
+    
+    for (int i=0;i<[arrayIMGName count];i++){
+        NSString *pureName = [allAboutPDFGeneration getSPAJImageNameFromPath:[arrayIMGName objectAtIndex:i]];
+        [arrayPureIMGName addObject:pureName];
+    }
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        for (int x=0;x<[arrayPureIMGName count];x++){
+            [self saveSignatureForImage:imageConverted1 ImageSigned2:imageConverted2 ImageSigned3:imageConverted3 ImageSigned4:imageConverted4 FileName:[arrayPureIMGName objectAtIndex:x]];
+        }
+    });
+}
+
+
+-(void)saveSignatureForImage:(UIImage *)imageSigned1 ImageSigned2:(UIImage *)imageSigned2 ImageSigned3:(UIImage *)imageSigned3 ImageSigned4:(UIImage *)imageSigned4 FileName:(NSString *)stringFileName{
+    
+    NSString *mainFileName = [NSString stringWithFormat:@"%@_%@.jpg",[dictTransaction valueForKey:@"SPAJEappNumber"],stringFileName];
+    NSString *fullpath = [formatter generateSPAJFileDirectory:[dictTransaction valueForKey:@"SPAJEappNumber"]];
+    fullpath = [NSString stringWithFormat:@"%@/%@",fullpath,mainFileName];
+    
+    UIImage *baseImage = [UIImage imageWithContentsOfFile:fullpath];
+    if ([stringFileName rangeOfString:@"amandement"].location != NSNotFound) {
+        CGRect rectSign1 = CGRectMake(0, 0, imageSigned1.size.width, imageSigned1.size.height);
+        CGRect rectSign2 = CGRectMake(100, 0, imageSigned2.size.width, imageSigned2.size.height);
+        CGRect rectSign3 = CGRectMake(200, 0, imageSigned3.size.width, imageSigned3.size.height);
+        CGRect rectSign4 = CGRectMake(300, 0, imageSigned4.size.width, imageSigned4.size.height);
+        
+        UIImage *resultImage = [allAboutPDFGeneration generateSignatureForImage:baseImage signatureImage1:imageSigned1 signaturePostion1:rectSign1 signatureImage2:imageSigned2 signaturePostion2:rectSign2 signatureImage3:imageSigned3 signaturePostion3:rectSign3 signatureImage4:imageSigned4 signaturePostion4:rectSign4];
+        NSData *thumbnailData = UIImageJPEGRepresentation(resultImage, 0);
+        
+        NSString *relativeOutputFilePath = [NSString stringWithFormat:@"%@", fullpath];
+        [thumbnailData writeToFile:relativeOutputFilePath atomically:YES];
+        
+    }
+    else if ([stringFileName rangeOfString:@"chestpain"].location != NSNotFound) {
+        CGRect rectSign1 = CGRectMake(0, 0, imageSigned1.size.width, imageSigned1.size.height);
+        CGRect rectSign2 = CGRectMake(100, 0, imageSigned2.size.width, imageSigned2.size.height);
+        CGRect rectSign3 = CGRectMake(200, 0, imageSigned3.size.width, imageSigned3.size.height);
+        CGRect rectSign4 = CGRectMake(300, 0, imageSigned4.size.width, imageSigned4.size.height);
+        
+        UIImage *resultImage = [allAboutPDFGeneration generateSignatureForImage:baseImage signatureImage1:imageSigned1 signaturePostion1:rectSign1 signatureImage2:imageSigned2 signaturePostion2:rectSign2 signatureImage3:imageSigned3 signaturePostion3:rectSign3 signatureImage4:imageSigned4 signaturePostion4:rectSign4];
+        NSData *thumbnailData = UIImageJPEGRepresentation(resultImage, 0);
+        
+        NSString *relativeOutputFilePath = [NSString stringWithFormat:@"%@", fullpath];
+        [thumbnailData writeToFile:relativeOutputFilePath atomically:YES];
+    }
+    else if ([stringFileName rangeOfString:@"diabetes"].location != NSNotFound) {
+        CGRect rectSign1 = CGRectMake(0, 0, imageSigned1.size.width, imageSigned1.size.height);
+        CGRect rectSign2 = CGRectMake(100, 0, imageSigned2.size.width, imageSigned2.size.height);
+        CGRect rectSign3 = CGRectMake(200, 0, imageSigned3.size.width, imageSigned3.size.height);
+        CGRect rectSign4 = CGRectMake(300, 0, imageSigned4.size.width, imageSigned4.size.height);
+        
+        UIImage *resultImage = [allAboutPDFGeneration generateSignatureForImage:baseImage signatureImage1:imageSigned1 signaturePostion1:rectSign1 signatureImage2:imageSigned2 signaturePostion2:rectSign2 signatureImage3:imageSigned3 signaturePostion3:rectSign3 signatureImage4:imageSigned4 signaturePostion4:rectSign4];
+        NSData *thumbnailData = UIImageJPEGRepresentation(resultImage, 0);
+        
+        NSString *relativeOutputFilePath = [NSString stringWithFormat:@"%@", fullpath];
+        [thumbnailData writeToFile:relativeOutputFilePath atomically:YES];
+    }
+    else if ([stringFileName rangeOfString:@"digestion"].location != NSNotFound) {
+        CGRect rectSign1 = CGRectMake(0, 0, imageSigned1.size.width, imageSigned1.size.height);
+        CGRect rectSign2 = CGRectMake(100, 0, imageSigned2.size.width, imageSigned2.size.height);
+        CGRect rectSign3 = CGRectMake(200, 0, imageSigned3.size.width, imageSigned3.size.height);
+        CGRect rectSign4 = CGRectMake(300, 0, imageSigned4.size.width, imageSigned4.size.height);
+        
+        UIImage *resultImage = [allAboutPDFGeneration generateSignatureForImage:baseImage signatureImage1:imageSigned1 signaturePostion1:rectSign1 signatureImage2:imageSigned2 signaturePostion2:rectSign2 signatureImage3:imageSigned3 signaturePostion3:rectSign3 signatureImage4:imageSigned4 signaturePostion4:rectSign4];
+        NSData *thumbnailData = UIImageJPEGRepresentation(resultImage, 0);
+        
+        NSString *relativeOutputFilePath = [NSString stringWithFormat:@"%@", fullpath];
+        [thumbnailData writeToFile:relativeOutputFilePath atomically:YES];
+    }
+    else if ([stringFileName rangeOfString:@"epilepsy"].location != NSNotFound) {
+        CGRect rectSign1 = CGRectMake(0, 0, imageSigned1.size.width, imageSigned1.size.height);
+        CGRect rectSign2 = CGRectMake(100, 0, imageSigned2.size.width, imageSigned2.size.height);
+        CGRect rectSign3 = CGRectMake(200, 0, imageSigned3.size.width, imageSigned3.size.height);
+        CGRect rectSign4 = CGRectMake(300, 0, imageSigned4.size.width, imageSigned4.size.height);
+        
+        UIImage *resultImage = [allAboutPDFGeneration generateSignatureForImage:baseImage signatureImage1:imageSigned1 signaturePostion1:rectSign1 signatureImage2:imageSigned2 signaturePostion2:rectSign2 signatureImage3:imageSigned3 signaturePostion3:rectSign3 signatureImage4:imageSigned4 signaturePostion4:rectSign4];
+        NSData *thumbnailData = UIImageJPEGRepresentation(resultImage, 0);
+        
+        NSString *relativeOutputFilePath = [NSString stringWithFormat:@"%@", fullpath];
+        [thumbnailData writeToFile:relativeOutputFilePath atomically:YES];
+    }
+    else if ([stringFileName rangeOfString:@"hypertension"].location != NSNotFound) {
+        CGRect rectSign1 = CGRectMake(0, 0, imageSigned1.size.width, imageSigned1.size.height);
+        CGRect rectSign2 = CGRectMake(100, 0, imageSigned2.size.width, imageSigned2.size.height);
+        CGRect rectSign3 = CGRectMake(200, 0, imageSigned3.size.width, imageSigned3.size.height);
+        CGRect rectSign4 = CGRectMake(300, 0, imageSigned4.size.width, imageSigned4.size.height);
+        
+        UIImage *resultImage = [allAboutPDFGeneration generateSignatureForImage:baseImage signatureImage1:imageSigned1 signaturePostion1:rectSign1 signatureImage2:imageSigned2 signaturePostion2:rectSign2 signatureImage3:imageSigned3 signaturePostion3:rectSign3 signatureImage4:imageSigned4 signaturePostion4:rectSign4];
+        NSData *thumbnailData = UIImageJPEGRepresentation(resultImage, 0);
+        
+        NSString *relativeOutputFilePath = [NSString stringWithFormat:@"%@", fullpath];
+        [thumbnailData writeToFile:relativeOutputFilePath atomically:YES];
+    }
+    else if ([stringFileName rangeOfString:@"respiratory"].location != NSNotFound) {
+        CGRect rectSign1 = CGRectMake(0, 0, imageSigned1.size.width, imageSigned1.size.height);
+        CGRect rectSign2 = CGRectMake(100, 0, imageSigned2.size.width, imageSigned2.size.height);
+        CGRect rectSign3 = CGRectMake(200, 0, imageSigned3.size.width, imageSigned3.size.height);
+        CGRect rectSign4 = CGRectMake(300, 0, imageSigned4.size.width, imageSigned4.size.height);
+        
+        UIImage *resultImage = [allAboutPDFGeneration generateSignatureForImage:baseImage signatureImage1:imageSigned1 signaturePostion1:rectSign1 signatureImage2:imageSigned2 signaturePostion2:rectSign2 signatureImage3:imageSigned3 signaturePostion3:rectSign3 signatureImage4:imageSigned4 signaturePostion4:rectSign4];
+        NSData *thumbnailData = UIImageJPEGRepresentation(resultImage, 0);
+        
+        NSString *relativeOutputFilePath = [NSString stringWithFormat:@"%@", fullpath];
+        [thumbnailData writeToFile:relativeOutputFilePath atomically:YES];
+    }
+    else if ([stringFileName rangeOfString:@"tumor"].location != NSNotFound) {
+        CGRect rectSign1 = CGRectMake(0, 0, imageSigned1.size.width, imageSigned1.size.height);
+        CGRect rectSign2 = CGRectMake(100, 0, imageSigned2.size.width, imageSigned2.size.height);
+        CGRect rectSign3 = CGRectMake(200, 0, imageSigned3.size.width, imageSigned3.size.height);
+        CGRect rectSign4 = CGRectMake(300, 0, imageSigned4.size.width, imageSigned4.size.height);
+        
+        UIImage *resultImage = [allAboutPDFGeneration generateSignatureForImage:baseImage signatureImage1:imageSigned1 signaturePostion1:rectSign1 signatureImage2:imageSigned2 signaturePostion2:rectSign2 signatureImage3:imageSigned3 signaturePostion3:rectSign3 signatureImage4:imageSigned4 signaturePostion4:rectSign4];
+        NSData *thumbnailData = UIImageJPEGRepresentation(resultImage, 0);
+        
+        NSString *relativeOutputFilePath = [NSString stringWithFormat:@"%@", fullpath];
+        [thumbnailData writeToFile:relativeOutputFilePath atomically:YES];
+    }
+    else {
+        NSLog(@"string contains bla!");
+    }
+};
+
 #pragma mark - table view
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -927,80 +1093,6 @@
             [cell setUserInteractionEnabled:false];
         }
     }
-    /*if (boolPemegangPolis){
-        if (indexPath.row == 0){
-            [cell setUserInteractionEnabled:true];
-            [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
-        }
-        else{
-        
-        }
-    }
-    else{
-        if (indexPath.row == 0){
-            [cell setUserInteractionEnabled:true];
-            [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
-        }
-        else{
-            
-        }
-    }
-    
-    
-    if (boolTertanggung){
-        if (indexPath.row == 1){
-            [cell setUserInteractionEnabled:true];
-            [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
-        }
-        else{
-            
-        }
-    }
-    else{
-        if (indexPath.row == 1){
-            [cell setUserInteractionEnabled:false];
-        }
-        else{
-            
-        }
-    }
-    
-    if (boolOrangTuaWali){
-        if (indexPath.row == 2){
-            [cell setUserInteractionEnabled:true];
-            [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
-        }
-        else{
-            
-        }
-    }
-    else{
-        if (indexPath.row == 2){
-            [cell setUserInteractionEnabled:false];
-        }
-        else{
-            
-        }
-    }
-    
-    if (boolTenagaPenjual){
-        if (indexPath.row == 3){
-            [cell setUserInteractionEnabled:true];
-            [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
-        }
-        else{
-            
-        }
-    }
-    else{
-        if (indexPath.row == 3){
-            [cell setUserInteractionEnabled:false];
-        }
-        else{
-            
-        }
-    }*/
-    
     return cell;
 }
 

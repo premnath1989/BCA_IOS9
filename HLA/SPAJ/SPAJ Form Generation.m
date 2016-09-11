@@ -203,7 +203,14 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
         arrayPDFHealthQuestionairreName = [[NSMutableArray alloc]init];
         
         indexImgForPDFGeneration = 0;
-        arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH\",\"IMG_IN"]];
+        if ([[dictionaryPOData valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"]){
+            arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH"]];
+        }
+        else{
+            arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_IN"]];
+        }
+        
+        //arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH\",\"IMG_IN"]];
         
         if ([arrayIMGName count]>0){
             [self loadSPAJPDFHTML:[arrayIMGName objectAtIndex:indexImgForPDFGeneration] WithArrayIndex:indexImgForPDFGeneration];
@@ -292,10 +299,16 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
         if (boolSPAJPDF){
             [_viewStep1 setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
             [_viewStep1 setUserInteractionEnabled:YES];
+            
+            [_viewStep3 setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
+            [_viewStep3 setUserInteractionEnabled:YES];
         }
         else{
             [_viewStep1 setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_OCTONARY floatOpacity:1.0]];
             [_viewStep1 setUserInteractionEnabled:NO];
+            
+            [_viewStep3 setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_OCTONARY floatOpacity:1.0]];
+            [_viewStep3 setUserInteractionEnabled:NO];
         }
     }
 

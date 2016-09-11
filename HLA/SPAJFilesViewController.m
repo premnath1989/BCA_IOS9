@@ -347,8 +347,11 @@
     [self showFileSelected:indexPath.row];
 }
 
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
 
-
+{
+    return imageViewDisplayImage;
+}
 
 /*
 #pragma mark - Navigation
