@@ -66,5 +66,23 @@
     [database close];
 }
 
+-(int)selectSPAJIDActiveHtml{
+    int spajID;
+    
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select SPAJID from SPAJHtml where SPAJHtmlStatus = 'A'"]];
+    while ([s next]) {
+        spajID = [s intForColumn:@"SPAJID"];
+    }
+    
+    [results close];
+    [database close];
+    return spajID;
+}
 
 @end
