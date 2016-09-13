@@ -1054,7 +1054,7 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
     
     NSArray* arrayFileName = [[json objectForKey:@"d"] valueForKey:@"FileName"]; //2
     for (int i=0;i<[arrayFileName count];i++){
-        [cffAPIController apiCallCrateHtmlFile:[NSString stringWithFormat:@"http://mposws.azurewebsites.net/Service2.svc/GetHtmlFile?fileName=%@",[arrayFileName objectAtIndex:i]] RootPathFolder:@"CFFfolder"];
+        [cffAPIController apiCallCrateHtmlFile:[NSString stringWithFormat:@"%@/Service2.svc/GetHtmlFile?fileName=%@",[(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL],[arrayFileName objectAtIndex:i]] RootPathFolder:@"CFFfolder"];
     }
 }
 @end

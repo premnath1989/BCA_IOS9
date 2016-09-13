@@ -88,7 +88,19 @@ function onSuccess (ret)
 
         if (stringType == "readFromDB")
         {
-            getFromDatabase(objectContent.result.readFromDB, stringPageTypeCurrent);
+			if (stringPageTypeCurrent == stringPageTypePDF)
+			{
+				getFromDatabaseForHealthQuestionnaire(objectContent.result.readFromDB, stringPageTypeCurrent);
+			}
+			else if (stringPageTypeCurrent == stringPageTypeAmandment)
+			{
+				getFromDatabaseForHealthQuestionnaire(objectContent.result.readFromDB, stringPageTypeCurrent);
+				getFromDatabaseForAmandment(objectContent.result.readFromDB, stringPageInfixType, "FieldsetAmandment");
+			}
+            else
+			{
+				
+			}
         }
         else
         {
@@ -345,8 +357,8 @@ function AutoPopulate(jsonObject)
     var stringType = Object.keys(objectContent.result)[0];                
     
     if (stringType == "autopopulateFromDB")
-    {
-        getFromDatabase(objectContent.result.autopopulateFromDB, stringPageTypeCurrent);                
+    {		
+        getFromDatabaseForHealthQuestionnaire(objectContent.result.autopopulateFromDB, stringPageTypeCurrent);
     }
     else
     {
