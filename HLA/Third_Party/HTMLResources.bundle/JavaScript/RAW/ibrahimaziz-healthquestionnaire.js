@@ -61,7 +61,6 @@ function showPopUpFromRadioButton(stringRadioButtonName, stringRadioButtonValue,
 				}
 			}
 		}
-<<<<<<< HEAD
 		
 		for (var k = 0; k < arrayDeleteTemporary.length; k++)
 		{
@@ -78,24 +77,6 @@ function showPopUpFromRadioButton(stringRadioButtonName, stringRadioButtonValue,
 			}
 		}
 		
-=======
-		
-		for (var k = 0; k < arrayDeleteTemporary.length; k++)
-		{
-			for (var l = 0; l < arrayContent.length; l ++)
-			{
-				if (arrayDeleteTemporary[k].elementID == arrayContent[l].elementID)
-				{
-					arrayContent.splice(l, 1);
-				}
-				else
-				{
-					
-				}
-			}
-		}
-		
->>>>>>> 9c4bc98f551a78f0cd28214169ff9a44d9089fd9
 		arrayAdd(arrayContent, stringRadioButtonName, getRadioButtonGeneral(stringRadioButtonName));
 		
 		var stringButtonPreviewJavaScriptID = stringButtonPreviewPrefix + stringParentNameWithoutPrefix;
@@ -852,10 +833,6 @@ function getFromDatabaseForHealthQuestionnaire(objectContent, stringPageType)
         var stringKey = objectContent[i].elementID;
         var stringValue = objectContent[i].Value;                       		
 		
-<<<<<<< HEAD
-		previewArrayObject(objectContent);
-=======
->>>>>>> 9c4bc98f551a78f0cd28214169ff9a44d9089fd9
 		// GENERAL INPUT TYPE
 		
         if (stringKey.substring(0, stringPrefixText.length) == stringPrefixText)
@@ -866,21 +843,8 @@ function getFromDatabaseForHealthQuestionnaire(objectContent, stringPageType)
 				var stringKeyWithoutPrefix = releasePrefix(stringKey);
 				var stringKeyWithoutInfix = releaseInfix(stringKeyWithoutPrefix);
 				var stringIDMedication = "HypertensionMedication";
-<<<<<<< HEAD
-				var stringKeyForMedication = stringKeyWithoutInfix.substring(0, stringIDMedication.length);
-				var stringKeyForTable;
-				
-				if (stringKeyForMedication == stringIDMedication)
-				{
-					stringKeyForTable = stringCellPrefix + stringKeyWithoutPrefix;
-					// alert(stringKres + " " + stringKeyForTable + " " + stringValue)
-					$(stringKres + stringKeyForTable).append(stringValue);
-				}
-				else
-=======
 				
 				if (stringKeyWithoutInfix == undefined)
->>>>>>> 9c4bc98f551a78f0cd28214169ff9a44d9089fd9
 				{
 					if (stringValue.length > intMaxString)
 					{
@@ -894,9 +858,6 @@ function getFromDatabaseForHealthQuestionnaire(objectContent, stringPageType)
 					{
 						setTextPDF(stringKey, stringValue);
 					}
-<<<<<<< HEAD
-				} 
-=======
 				}
 				else
 				{
@@ -925,7 +886,6 @@ function getFromDatabaseForHealthQuestionnaire(objectContent, stringPageType)
 						}
 					} 
 				}
->>>>>>> 9c4bc98f551a78f0cd28214169ff9a44d9089fd9
 			}
 			else
 			{
@@ -1077,11 +1037,7 @@ function releaseInfix(stringKey)
 	{
 		return stringKey.substring(stringPolicyHolderPrefix.length, stringKey.length);
 	}
-<<<<<<< HEAD
-	else if (stringKey.substring(0, stringProspectiveInsuredPrefix.length) == stringPolicyHolderPrefix)
-=======
 	else if (stringKey.substring(0, stringProspectiveInsuredPrefix.length) == stringProspectiveInsuredPrefix)
->>>>>>> 9c4bc98f551a78f0cd28214169ff9a44d9089fd9
 	{
 		return stringKey.substring(stringProspectiveInsuredPrefix.length, stringKey.length);
 	}
