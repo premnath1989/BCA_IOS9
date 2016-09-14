@@ -588,7 +588,7 @@ function setInputFrom(stringLayoutJavaScriptID, arrayContent, stringInputInfix)
 		else if (stringKeyPrefix == stringPrefixArea)
 		{
 			setAreaForm(stringLayoutJavaScriptID + " " + stringKres + stringPrefixArea + stringKeyWithoutInfix, stringValue);
-			alert(stringKey + " " + stringValue);
+			// alert(stringKey + " " + stringValue);
 		}
 		else if (stringKeyPrefix == stringPrefixNumber)
 		{
