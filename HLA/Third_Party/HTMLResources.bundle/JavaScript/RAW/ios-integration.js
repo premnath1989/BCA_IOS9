@@ -117,7 +117,7 @@ function readfromDB()
 }
 
 function savetoDB() 
-{		
+{
 	var stringValue;
 	var stringRadioButtonFlag = 0;
 	var booleanValidateState = true;

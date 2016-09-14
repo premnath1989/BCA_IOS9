@@ -15,6 +15,9 @@
 }
 
 -(NSString *)selectHtmlFileName:(NSString *)stringColumnName SPAJSection:(NSString *)stringHtmlSection;
+-(NSString *)selectHtmlFileName:(NSString *)stringColumnName SPAJSection:(NSString *)stringHtmlSection SPAJID:(int)spajID;
 -(NSArray *)selectArrayHtmlFileName:(NSString *)stringColumnName SPAJSection:(NSString *)stringHtmlSection;
+-(NSArray *)selectArrayHtmlFileName:(NSString *)stringColumnName SPAJSection:(NSString *)stringHtmlSection SPAJID:(int)spajID;
 -(NSDictionary *)selectActiveHtmlForSection:(NSString *)htmlSection;
+-(int)selectActiveHtmlSPAJID;
 @end

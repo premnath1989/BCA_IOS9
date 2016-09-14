@@ -191,7 +191,8 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
         stateGeneration = statePDF;
         
         indexForPDFGeneration = 0;
-        arrayHTMLName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PDF"]];
+        //arrayHTMLName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PDF"]];
+        arrayHTMLName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PDF" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]]];
         
         if ([arrayHTMLName count]>0){
             [self loadSPAJPDFHTML:[arrayHTMLName objectAtIndex:indexForPDFGeneration] WithArrayIndex:indexForPDFGeneration];
@@ -204,10 +205,10 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
         
         indexImgForPDFGeneration = 0;
         if ([[dictionaryPOData valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"]){
-            arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH"]];
+            arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]]];
         }
         else{
-            arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_IN"]];
+            arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_IN" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]]];
         }
         
         //arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH\",\"IMG_IN"]];
@@ -355,6 +356,7 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
     - (IBAction)actionGoToStep4:(id)sender
     {
         if (!boolTenagaPenjualSigned){
+            boolConvertToImage = false;
             [self generateAllPDF];
             [viewActivityIndicator setHidden:NO];
             //[self voidCreateThePDF:@"SPAJ"];
@@ -597,10 +599,10 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
             [webview loadRequest:request];
         }
         else{
+            [allAboutPDFGeneration removeSPAJSigned:dictTransaction];
             UIAlertController *alertLockForm = [alert alertInformation:@"Berhasil" stringMessage:@"Form berhasil dibuat"];
             [self presentViewController:alertLockForm animated:YES completion:nil];
             [viewActivityIndicator setHidden:YES];
-
         }
     }
 

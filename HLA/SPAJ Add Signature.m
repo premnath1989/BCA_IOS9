@@ -22,7 +22,7 @@
 #import "ModelSPAJHtml.h"
 #import "AllAboutPDFGeneration.h"
 
-@interface SPAJ_Add_Signature (){
+@interface SPAJ_Add_Signature ()<PDFGenerationDelegate>{
     IBOutlet UILabel *labelSignatureFooter;
     IBOutlet UILabel *labelSignatureParty;
     IBOutlet UITableView *tablePartiesSignature;
@@ -99,6 +99,7 @@
     modelProspectProfile = [[ModelProspectProfile alloc]init];
     modelSPAJHtml = [[ModelSPAJHtml alloc]init];
     allAboutPDFGeneration = [[AllAboutPDFGeneration alloc]init];
+    allAboutPDFGeneration.delegatePDFGeneration = self;
     classImageProcessing = [[ClassImageProcessing alloc]init];
     
     [self setNavigationBar];
@@ -446,7 +447,8 @@
 -(void)voidSavePOSignature{
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     NSString* signatureImage = [formatter encodedSignatureImage:viewToSign];
-    [self voidSaveSignatureForImages];
+    //[self voidSaveSignatureForImages];
+    [allAboutPDFGeneration voidSaveSignatureForImages:dictTransaction DictionaryPOData:dictionaryPOData];
     [self voidSaveSignatureToPDF:0];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self actionClearSign:nil];
@@ -572,10 +574,10 @@
     // Draw the signature on pdfContext
     //pageRect = CGRectMake(343, 35,101 , 43);
     if (index == 0){
-        pageRectPage1 = CGRectMake(67, 676,96 , 53);
+        pageRectPage1 = CGRectMake(67, 376,96 , 53);
     }
     else{
-        pageRectPage1 = CGRectMake(575, 676,96 , 53);
+        pageRectPage1 = CGRectMake(575, 376,96 , 53);
     }
     
     CGImageRef pageImagePage1 = [imgSignature CGImage];
@@ -1101,6 +1103,10 @@
     [self showDetailsForIndexPath:indexPath];
 }
 
+#pragma mark delegate
+-(void)imgSigned{
+
+}
 /*
 #pragma mark - Navigation
 

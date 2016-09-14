@@ -1798,11 +1798,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SPAJ Add Signature.m"
-            timestampString = "495279780.113117"
+            timestampString = "495456115.573085"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "299"
-            endingLineNumber = "299"
+            startingLineNumber = "300"
+            endingLineNumber = "300"
             landmarkName = "-voidCreateDotInLine:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1814,11 +1814,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SPAJ/SPAJ E Application List.m"
-            timestampString = "494321818.161865"
+            timestampString = "495425917.278059"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "252"
-            endingLineNumber = "252"
+            startingLineNumber = "255"
+            endingLineNumber = "255"
             landmarkName = "-actionEdit:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1830,11 +1830,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SPAJ Add Signature.m"
-            timestampString = "495281054.874516"
+            timestampString = "495456115.573085"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1093"
-            endingLineNumber = "1093"
+            startingLineNumber = "1095"
+            endingLineNumber = "1095"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1916,22 +1916,6 @@
             startingLineNumber = "34"
             endingLineNumber = "34"
             landmarkName = "-changeColor:fromColor:toColor:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SPAJ/SPAJ Add Menu.m"
-            timestampString = "495031651.429899"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "468"
-            endingLineNumber = "468"
-            landmarkName = "-actionGeneratePDF:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

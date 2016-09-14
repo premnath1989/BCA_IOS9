@@ -87,8 +87,8 @@ function onSuccess (ret)
         var stringType = Object.keys(objectContent.result)[0];
 
         if (stringType == "readFromDB")
-        {
-            getFromDatabase(objectContent.result.readFromDB, stringPageTypeCurrent);
+        {			
+            getFromDatabaseForHealthQuestionnaire(objectContent.result.readFromDB, stringPageTypeCurrent);
         }
         else
         {
@@ -345,8 +345,8 @@ function AutoPopulate(jsonObject)
     var stringType = Object.keys(objectContent.result)[0];                
     
     if (stringType == "autopopulateFromDB")
-    {
-        getFromDatabase(objectContent.result.autopopulateFromDB, stringPageTypeCurrent);                
+    {		
+        getFromDatabaseForHealthQuestionnaire(objectContent.result.autopopulateFromDB, stringPageTypeCurrent);
     }
     else
     {

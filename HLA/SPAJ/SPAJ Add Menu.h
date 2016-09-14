@@ -43,7 +43,7 @@
     @property (strong, nonatomic) NSString* stringEAPPNumber;
 
     // VIEW
-
+    @property (nonatomic, weak) IBOutlet UIView *viewActivityIndicator;
     @property (nonatomic, weak) IBOutlet UIView *viewStep1;
     @property (nonatomic, weak) IBOutlet UIView *viewStep2;
     @property (nonatomic, weak) IBOutlet UIView *viewStep3;

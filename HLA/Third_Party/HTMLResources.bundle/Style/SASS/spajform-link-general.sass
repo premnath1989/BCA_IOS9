@@ -1,0 +1,85 @@
+/* @charset "utf-8"; */
+/* CSS Document */
+
+
+// IMPORT
+
+@import spajform-initialization-general
+
+
+/* LINK */
+
+/* Clear Hyperlink */
+
+a.Clear
+	text-decoration: none
+
+a.Clear:link
+	color: inherit
+	text-decoration: none
+
+a.Clear:visited
+	color: inherit
+	text-decoration: none
+
+a.Clear:hover
+	color: inherit
+	text-decoration: none
+
+a.Clear:active
+	color: inherit
+	text-decoration: none
+
+/* Underline Hyperlink */
+
+a.Underline
+	text-decoration: underline
+
+a.Underline:link
+	color: inherit
+	text-decoration: underline
+
+a.Underline:visited
+	color: inherit
+	text-decoration: underline
+
+a.Underlinek:hover
+	color: inherit
+	text-decoration: underline
+
+a.Underline:active
+	color: inherit
+	text-decoration: underline
+
+.NavigationPopUp
+	margin-left: $general_space_tiny
+	margin-right: $general_space_tiny
+	font-size: $fontsize_link_button
+	text-transform: uppercase
+	text-decoration: none
+	
+/* BUTTON BY TEXT */
+
+.ButtonPrimary, .ButtonSecondary
+	padding-top: $button_padding_edge
+	padding-right: $button_padding_side
+	padding-left: $button_padding_side
+	padding-bottom: $button_padding_edge
+    font-size: $fontsize_link_button
+	text-align: center
+	vertical-align: middle
+	border: none
+    display: inline-block
+	+BorderRadius($general_borderradius_thick)
+	
+.ButtonPrimary:disabled
+	z-index: 2
+	
+.ButtonPrimary:hover
+	z-index: 2
+
+.ButtonSecondary:disabled
+	z-index: 2
+	
+.ButtonSecondary:hover
+	z-index: 2

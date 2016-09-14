@@ -6,7 +6,10 @@
 //  Copyright © 2016 Ibrahim. All rights reserved.
 //
 
+NSString* const statePDFGeneration = @"PDF";
+NSString* const stateIMGGeneration = @"IMG";
 
+#define IS_RETINA ([[UIScreen mainScreen] respondsToSelector:@selector(displayLinkWithTarget:selector:)] && ([UIScreen mainScreen].scale == 2.0))
 // IMPORT
 #define kPaperSizeA4 CGSizeMake(595,842)
 #define kPaperSizeA4Portrait CGSizeMake(750,1250)
@@ -79,8 +82,19 @@
     
     UserInterface *objectUserInterface;
     
+    NSMutableArray *arrayPDFHealthQuestionairreName;
+    int indexPDFForIMGGeneration;
+    
     NSMutableArray *arrayHTMLName;
     int indexForPDFGeneration;
+    
+    NSMutableArray *arrayIMGName;
+    int indexImgForPDFGeneration;
+    
+    NSString* stateGeneration;
+    NSString* outputName;
+    
+    BOOL boolConvertToImage;
     
     NSDictionary* dictionaryPOData;
     NSString *stringSINO;
@@ -111,6 +125,7 @@
     @synthesize delegateSPAJMain = _delegateSPAJMain;
     @synthesize stringEAPPNumber;
     @synthesize dictTransaction;
+    @synthesize viewActivityIndicator;
 
     // DID LOAD
     -(void)viewWillAppear:(BOOL)animated{
@@ -139,6 +154,7 @@
         // Do any additional setup after loading the view, typically from a nib.
         
         // DATE
+        boolConvertToImage = false;
         modelProspectProfile = [[ModelProspectProfile alloc]init];
         modelSIMaster = [[Model_SI_Master alloc]init];
         spajPDFData = [[SPAJPDFAutopopulateData alloc]init];
@@ -431,21 +447,9 @@
             if (spajNumber > 0){
                 [modelSPAJTransaction updateSPAJTransaction:@"SPAJNumber" StringColumnValue:[[NSNumber numberWithLongLong:spajNumber] stringValue] StringWhereName:@"SPAJEappNumber" StringWhereValue:[dictTransaction valueForKey:@"SPAJEappNumber"]];
                 [modelSPAJTransaction updateSPAJTransaction:@"SPAJStatus" StringColumnValue:@"Not Submitted" StringWhereName:@"SPAJEappNumber" StringWhereValue:[dictTransaction valueForKey:@"SPAJEappNumber"]];
+                boolConvertToImage = false;
+                [viewActivityIndicator setHidden:NO];
                 [self loadHTMLFile];
-                [CATransaction begin];
-                [CATransaction setCompletionBlock:^{
-                        //[self loadHTMLFile];
-                        /*UIAlertController *alertNoSPAJNumber = [alert alertInformation:@"Sukses" stringMessage:[NSString stringWithFormat:@"Nomor SPAJ anda adalah %lli",spajNumber]];
-                        [self presentViewController:alertNoSPAJNumber animated:YES completion:nil];
-                        [self voidChangeFileName:spajNumber];
-                        [_delegateSPAJMain actionGoToExistingList:nil];// handle completion here*/
-                    //[self.navigationController popViewControllerAnimated:YES];
-                }];
-                
-                //
-                
-                [CATransaction commit];
-
             }
             else{
                 UIAlertController *alertNoSPAJNumber = [alert alertInformation:@"Peringatan" stringMessage:@"Alokasi Nomor SPAJ Bleum ada. Silahkan lakukan permintaan nomor SPAJ"];
@@ -620,15 +624,16 @@
                     [self joinMultiplePDF];
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                         dispatch_async(dispatch_get_main_queue(), ^{
-                            [self removeSPAJSigned];
+                            //[self removeSPAJSigned];
+                            [allAboutPDFGeneration removeSPAJSigned:dictTransaction];
                             NSString* spajNumber = [modelSPAJTransaction getSPAJTransactionData:@"SPAJNumber" StringWhereName:@"SPAJTransactionID" StringWhereValue:[dictTransaction valueForKey:@"SPAJTransactionID"]];
                             
                             long long longSPAJNumber = [spajNumber longLongValue];
-                            UIAlertController *alertNoSPAJNumber = [alert alertInformation:@"Sukses" stringMessage:[NSString stringWithFormat:@"Nomor SPAJ anda adalah %lli",longSPAJNumber]];
-                            [self presentViewController:alertNoSPAJNumber animated:YES completion:nil];
+                            /*UIAlertController *alertNoSPAJNumber = [alert alertInformation:@"Sukses" stringMessage:[NSString stringWithFormat:@"Nomor SPAJ anda adalah %lli",longSPAJNumber]];
+                            [self presentViewController:alertNoSPAJNumber animated:YES completion:nil];*/
                             [self voidChangeFileName:longSPAJNumber];
-                            
-                            [_delegateSPAJMain actionGoToExistingList:nil];
+                            [self generateAllIMGPDF];
+                            //[_delegateSPAJMain actionGoToExistingList:nil];
                             /*dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                                 dispatch_async(dispatch_get_main_queue(), ^{
                                     // handle completion here
@@ -768,11 +773,11 @@
         CGContextDrawPDFPage(pdfContext, page);
         
         // Draw the signature on pdfContext
-        pageRect = CGRectMake(67, 676,96 , 53);
+        pageRect = CGRectMake(67, 376,96 , 53);
         CGImageRef pageImage1 = [imgSignature1 CGImage];
         CGContextDrawImage(pdfContext, pageRect, pageImage1);
         
-        pageRect = CGRectMake(575, 676,96 , 53);
+        pageRect = CGRectMake(575, 376,96 , 53);
         CGImageRef pageImage4 = [imgSignature4 CGImage];
         CGContextDrawImage(pdfContext, pageRect, pageImage4);
         
@@ -940,15 +945,32 @@
         NSArray* path_forDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
         NSString* documentsDirectory = [path_forDirectory objectAtIndex:0];
         if (pdfData) {
-            BOOL created = [pdfData writeToFile:[NSString stringWithFormat:@"%@/SPAJ/%@/%@_%i.pdf",documentsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"],[dictTransaction valueForKey:@"SPAJEappNumber"],indexForPDFGeneration] atomically:YES];/*[pdfData writeToFile:[NSString stringWithFormat:@"%@/SPAJ/%@/%@_SPAJ.pdf",documentsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"],[dictTransaction valueForKey:@"SPAJEappNumber"]] atomically:YES];*/
-            
+            if ([stateGeneration isEqualToString:statePDFGeneration]){
+                BOOL created = [pdfData writeToFile:[NSString stringWithFormat:@"%@/SPAJ/%@/%@_%i.pdf",documentsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"],[dictTransaction valueForKey:@"SPAJEappNumber"],indexForPDFGeneration] atomically:YES];/*[pdfData writeToFile:[NSString stringWithFormat:@"%@/SPAJ/%@/%@_SPAJ.pdf",documentsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"],[dictTransaction valueForKey:@"SPAJEappNumber"]] atomically:YES];*/
+                
                 indexForPDFGeneration ++;
-            if (indexForPDFGeneration < [arrayHTMLName count]){
-                [self loadSPAJPDFHTML:[arrayHTMLName objectAtIndex:indexForPDFGeneration] WithArrayIndex:indexForPDFGeneration];
+                if (indexForPDFGeneration < [arrayHTMLName count]){
+                    [self loadSPAJPDFHTML:[arrayHTMLName objectAtIndex:indexForPDFGeneration] WithArrayIndex:indexForPDFGeneration];
+                }
+                else{
+                    [allAboutPDFGeneration joinSPAJPDF:arrayHTMLName DictTransaction:dictTransaction];
+                }
             }
             else{
-                [allAboutPDFGeneration joinSPAJPDF:arrayHTMLName DictTransaction:dictTransaction];
+                NSString* fileName = [NSString stringWithFormat:@"%@/SPAJ/%@/%@_%@.pdf",documentsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"],[dictTransaction valueForKey:@"SPAJEappNumber"],[allAboutPDFGeneration getSPAJImageNameFromPath:[arrayIMGName objectAtIndex:indexImgForPDFGeneration]]];
+                
+                [pdfData writeToFile:fileName atomically:YES];
+                [arrayPDFHealthQuestionairreName addObject:fileName];
+                
+                indexImgForPDFGeneration ++;
+                if (indexImgForPDFGeneration < [arrayIMGName count]){
+                    [self loadSPAJPDFHTML:[arrayIMGName objectAtIndex:indexImgForPDFGeneration] WithArrayIndex:indexImgForPDFGeneration];
+                }
+                else{
+                    [self createImageFromPDF];
+                }
             }
+            
             /*if (created){
                 [self voidSaveSignatureToPDF];
             }*/
@@ -960,11 +982,26 @@
         
     }
 
+    -(void)createImageFromPDF{
+        if ([arrayPDFHealthQuestionairreName count]>0){
+            boolConvertToImage = true;
+            
+            indexPDFForIMGGeneration = 0;
+            NSURL *fileURL = [[NSURL alloc] initFileURLWithPath:[arrayPDFHealthQuestionairreName objectAtIndex:indexPDFForIMGGeneration]];
+            outputName = [NSString stringWithFormat:@"%@_%@",[dictTransaction valueForKey:@"SPAJEappNumber"],[allAboutPDFGeneration getSPAJImageNameFromPath:[arrayIMGName objectAtIndex:indexPDFForIMGGeneration]]];
+            
+            NSURLRequest *request = [NSURLRequest requestWithURL:fileURL];
+            [webview loadRequest:request];
+         }
+     }
+
 
     #pragma mark allabout html spaj pdf
     -(void)loadHTMLFile{
+        
+        stateGeneration = statePDFGeneration;
         indexForPDFGeneration = 0;
-        arrayHTMLName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PDF"]];
+        arrayHTMLName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PDF" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]]];
         
         if ([arrayHTMLName count]>0){
             [self loadSPAJPDFHTML:[arrayHTMLName objectAtIndex:indexForPDFGeneration] WithArrayIndex:indexForPDFGeneration];
@@ -996,6 +1033,142 @@
                               [docsDir stringByAppendingPathComponent: htmlfilePath]];
         NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localURL]];
         [webview loadRequest:urlRequest];
+    }
+
+    -(void)generateAllIMGPDF{
+        stateGeneration = stateIMGGeneration;
+        arrayPDFHealthQuestionairreName = [[NSMutableArray alloc]init];
+        
+        indexImgForPDFGeneration = 0;
+        if ([[dictionaryPOData valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"]){
+            arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]]];
+        }
+        else{
+            arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_IN" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]]];
+        }
+        
+        if ([arrayIMGName count]>0){
+            [self loadSPAJPDFHTML:[arrayIMGName objectAtIndex:indexImgForPDFGeneration] WithArrayIndex:indexImgForPDFGeneration];
+        }
+    }
+
+    -(void)voidCreateImageFromWebView:(NSString *)fileName{
+        //[self.view bringSubviewToFront:webview];
+        
+        int currentWebViewHeight = webview.scrollView.contentSize.height;
+        int scrollByY = webview.frame.size.height;
+        
+        [webview.scrollView setContentOffset:CGPointMake(0, 0)];
+        
+        NSMutableArray* images = [[NSMutableArray alloc] init];
+        
+        CGRect screenRect = webview.frame;
+        
+        int pages = currentWebViewHeight/scrollByY;
+        if (currentWebViewHeight%scrollByY > 0) {
+            pages ++;
+        }
+        
+        for (int i = 0; i< pages; i++)
+        {
+            if (i == pages-1) {
+                if (pages>1)
+                    screenRect.size.height = currentWebViewHeight - scrollByY;
+            }
+            
+            if (IS_RETINA)
+                UIGraphicsBeginImageContextWithOptions(screenRect.size, NO, 0);
+            else
+                UIGraphicsBeginImageContext( screenRect.size );
+            if ([webview.layer respondsToSelector:@selector(setContentsScale:)]) {
+                webview.layer.contentsScale = [[UIScreen mainScreen] scale];
+            }
+            //UIGraphicsBeginImageContext(screenRect.size);
+            CGContextRef ctx = UIGraphicsGetCurrentContext();
+            [[UIColor blackColor] set];
+            CGContextFillRect(ctx, screenRect);
+            
+            [webview.layer renderInContext:ctx];
+            
+            UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+            
+            if (i == 0)
+            {
+                scrollByY = webview.frame.size.height;
+            }
+            else
+            {
+                scrollByY += webview.frame.size.height;
+            }
+            [webview.scrollView setContentOffset:CGPointMake(0, scrollByY)];
+            [images addObject:newImage];
+        }
+        
+        [webview.scrollView setContentOffset:CGPointMake(0, 0)];
+        
+        UIImage *resultImage;
+        
+        if(images.count > 1) {
+            //join all images together..
+            CGSize size;
+            for(int i=0;i<images.count;i++) {
+                
+                size.width = MAX(size.width, ((UIImage*)[images objectAtIndex:i]).size.width );
+                size.height += ((UIImage*)[images objectAtIndex:i]).size.height;
+            }
+            
+            if (IS_RETINA)
+                UIGraphicsBeginImageContextWithOptions(size, NO, 0);
+            else
+                UIGraphicsBeginImageContext(size);
+            if ([webview.layer respondsToSelector:@selector(setContentsScale:)]) {
+                webview.layer.contentsScale = [[UIScreen mainScreen] scale];
+            }
+            CGContextRef ctx = UIGraphicsGetCurrentContext();
+            [[UIColor blackColor] set];
+            CGContextFillRect(ctx, screenRect);
+            
+            int y=0;
+            for(int i=0;i<images.count;i++) {
+                
+                UIImage* img = [images objectAtIndex:i];
+                [img drawAtPoint:CGPointMake(0,y)];
+                y += img.size.height;
+            }
+            
+            resultImage = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+        } else {
+            
+            resultImage = [images objectAtIndex:0];
+        }
+        [images removeAllObjects];
+        
+        NSData *thumbnailData = UIImageJPEGRepresentation(resultImage, 0);
+        
+        NSString *relativeOutputFilePath = [NSString stringWithFormat:@"%@/%@.jpg", [formatter generateSPAJFileDirectory:[dictTransaction valueForKey:@"SPAJEappNumber"]],fileName];
+        [thumbnailData writeToFile:relativeOutputFilePath atomically:YES];
+        
+        indexPDFForIMGGeneration++;
+        if (indexPDFForIMGGeneration<[arrayPDFHealthQuestionairreName count]){
+            NSURL *fileURL = [[NSURL alloc] initFileURLWithPath:[arrayPDFHealthQuestionairreName objectAtIndex:indexPDFForIMGGeneration]];
+            outputName = [NSString stringWithFormat:@"%@_%@",[dictTransaction valueForKey:@"SPAJEappNumber"],[allAboutPDFGeneration getSPAJImageNameFromPath:[arrayIMGName objectAtIndex:indexPDFForIMGGeneration]]];
+            
+            NSURLRequest *request = [NSURLRequest requestWithURL:fileURL];
+            [webview loadRequest:request];
+        }
+        else{
+            //[allAboutPDFGeneration voidSaveSignatureForImages:dictTransaction DictionaryPOData:dictionaryPOData];
+            [allAboutPDFGeneration removeSPAJSigned:dictTransaction];
+            NSString* spajNumber = [modelSPAJTransaction getSPAJTransactionData:@"SPAJNumber" StringWhereName:@"SPAJTransactionID" StringWhereValue:[dictTransaction valueForKey:@"SPAJTransactionID"]];
+            
+            long long longSPAJNumber = [spajNumber longLongValue];
+            UIAlertController *alertNoSPAJNumber = [alert alertInformation:@"Sukses" stringMessage:[NSString stringWithFormat:@"Nomor SPAJ anda adalah %lli",longSPAJNumber]];
+            [self presentViewController:alertNoSPAJNumber animated:YES completion:nil];
+            [viewActivityIndicator setHidden:YES];
+            [_delegateSPAJMain actionGoToExistingList:nil];
+        }
     }
 
     #pragma mark arrayInitialization
@@ -1177,12 +1350,21 @@
         NSString* spajNumber = [modelSPAJTransaction getSPAJTransactionData:@"SPAJNumber" StringWhereName:@"SPAJTransactionID" StringWhereValue:[dictTransaction valueForKey:@"SPAJTransactionID"]];
         [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"setHeader(\"%@\");",spajNumber]];
         [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"readfromDB();"]];
+        if (boolConvertToImage){
+            [self performSelector:@selector(voidCreateImageFromWebView:) withObject:outputName afterDelay:0.3];
+        }
+
     }
 
     #pragma mark delegate
     -(void)voidPDFCreated{
         [self voidSaveSignatureToPDF];
     }
+
+    -(void)imgSigned{
+        
+    }
+
 
 
 @end

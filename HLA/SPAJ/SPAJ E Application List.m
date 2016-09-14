@@ -23,6 +23,7 @@
 #import "ModelSPAJFormGeneration.h"
 #import "SPAJ Add Menu.h"
 #import "ModelSIPOData.h"
+#import "ModelSPAJHtml.h"
 // DECLARATION
 
 @interface SPAJEApplicationList ()<SPAJMainDelegate,SIListingDelegate,UIPopoverPresentationControllerDelegate,UITextFieldDelegate>{
@@ -44,6 +45,7 @@
     ModelSPAJFormGeneration* modelSPAJFormGeneration;
     ModelSPAJDetail* modelSPAJDetail;
     ModelSIPOData* modelSIPOData;
+    ModelSPAJHtml* modelSPAJHtml;
     SIListingPopOver *siListingPopOver;
     Formatter* formatter;
     
@@ -91,6 +93,7 @@
         modelSPAJDetail = [[ModelSPAJDetail alloc]init];
         modelSPAJFormGeneration = [[ModelSPAJFormGeneration alloc]init];
         modelSIPOData  = [[ModelSIPOData alloc]init];
+        modelSPAJHtml = [[ModelSPAJHtml alloc]init];
         formatter = [[Formatter alloc]init];
         
         _querySPAJHeader = [[QuerySPAJHeader alloc]init];
@@ -619,7 +622,8 @@
         
         NSString* stringEAPPNumber = stringEAPPNo;//[self createSPAJTransactionNumber];
         
-        [dictionarySPAJTransaction setObject:@"1" forKey:@"SPAJID"];
+        //[dictionarySPAJTransaction setObject:@"1" forKey:@"SPAJID"];
+        [dictionarySPAJTransaction setObject:[NSNumber numberWithInt:[modelSPAJHtml selectActiveHtmlSPAJID]] forKey:@"SPAJID"];
         [dictionarySPAJTransaction setObject:stringEAPPNumber forKey:@"SPAJEappNumber"];
         [dictionarySPAJTransaction setObject:@"" forKey:@"SPAJNumber"];
         [dictionarySPAJTransaction setObject:stringSINO forKey:@"SPAJSINO"];

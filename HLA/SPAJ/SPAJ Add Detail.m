@@ -306,7 +306,8 @@
         switch (indexPath.row) {
             case 0:
             {
-                NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PO"];
+                //NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PO"];
+                NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PO" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]];
                 [self.navigationItem setTitle:@"Data Calon Pemegang Polis"];
                 [spajCalonPemegangPolis setHtmlFileName:stringHTMLName];
                 //[self loadSPAJCalonPemegangPolis];
@@ -316,7 +317,7 @@
             }
             case 1:
             {
-                NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"TR"];
+                NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"TR" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]];
                 [spajCalonTertanggung setHtmlFileName:stringHTMLName];
                 [self.navigationItem setTitle:@"Data Calon Tertanggung"];
                 //[self loadSPAJCalonTertanggung];
@@ -327,7 +328,7 @@
             }
             case 2:
             {
-                NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PR"];
+                NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PR" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]];
                 [spajPerusahaan setHtmlFileName:stringHTMLName];
                 [self.navigationItem setTitle:@"Data Perusahaan / Badan Hukum"];
                 //[self loadSPAJPerusahaan];
@@ -338,7 +339,7 @@
             }
             case 3:
             {
-                NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PM"];
+                NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PM" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]];
                 [spajCalonPenerimaManfaat setHtmlFileName:stringHTMLName];
                 [self.navigationItem setTitle:@"Data Calon Penerima Manfaat"];
                 //[self loadSPAJCalonPenerimaManfaat];
@@ -349,7 +350,7 @@
             }
             case 4:
             {
-                NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PP"];
+                NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PP" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]];
                 [spajPembayaranPremi setHtmlFileName:stringHTMLName];
                 [self.navigationItem setTitle:@"Data Pembayaran Premi"];
                 //[self loadSPAJPembayaranPremi];
@@ -360,7 +361,7 @@
             }
             case 5:
             {
-                NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"KS_PH"];
+                NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"KS_PH" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]];
                 //[self loadSPAJPembayaranPremi];
                 [self.navigationItem setTitle:@"Data Kesehatan"];
                 [spajCalonPemegangPolis loadSixthHTML:stringHTMLName PageSection:@"KS_PH"];
@@ -775,7 +776,7 @@
             [self.navigationController popViewControllerAnimated:YES];
         }
         else{
-            NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"KS_IN"];
+            NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"KS_IN" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]];
             [spajCalonPemegangPolis loadSeventhHTML:stringHTMLName PageSection:@"KS_IN"];
         }
     }
