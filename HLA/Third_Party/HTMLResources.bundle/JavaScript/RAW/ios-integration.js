@@ -315,7 +315,42 @@ function savetoDB()
 		
 		if (stringPageSectionCurrent == stringPageSectionHealthQuestionnaire)
 		{
+			// HARDCODE QUICK FIX FOR INPUT TEXT
+					
+			var stringInfixHardcode= stringPageInfixTypeCurrent;
+
+			var stringHeightJavaScriptID = stringPrefixText + stringInfixHardcode + "Height";
+			var stringHeightJQueryID = stringKres + stringHeightJavaScriptID;
+			var stringHeightValue = getTextForm(stringHeightJavaScriptID);
+			var stringWeightJavaScriptID = stringPrefixText + stringInfixHardcode + "Weight";
+			var stringWeightJQueryID = stringKres + stringHeightJavaScriptID;
+			var stringWeightValue = getTextForm(stringWeightJavaScriptID);
+			var stringBabyHeightJavaScriptID = stringPrefixText + stringInfixHardcode + "BabyHeight";
+			var stringBabyHeightJQueryID = stringKres + stringHeightJavaScriptID;
+			var stringBabyHeightValue = getTextForm(stringBabyHeightJavaScriptID);
+			var stringBabyWeightJavaScriptID = stringPrefixText + stringInfixHardcode + "BabyWeight";
+			var stringBabyWeightJQueryID = stringKres + stringHeightJavaScriptID;
+			var stringBabyWeightValue = getTextForm(stringBabyWeightJavaScriptID);
+			var stringPregnantWeekJavaScriptID = stringPrefixText + stringInfixHardcode + "PregnantWeek";
+			var stringPregnantWeekJQueryID = stringKres + stringPregnantWeekJavaScriptID;
+			var stringPregnantWeekValue = getTextForm(stringPregnantWeekJavaScriptID);
+			var stringPregnancyJavaScriptID = stringPrefixRadioButton + stringInfixHardcode + "Pregnancy";
+			var stringPregnancyJQueryID = stringKres + stringPregnancyJavaScriptID;
+			var stringPregnancyValue = getRadioButtonGeneral(stringPregnancyJavaScriptID);
+			var stringWeightChangeJavaScriptID = stringPrefixRadioButton + stringInfixHardcode + "WeightChange";
+			var stringWeightChangeJQueryID = stringKres + stringWeightChangeJavaScriptID;
+			var stringWeightChangeValue = getRadioButtonGeneral(stringWeightChangeJavaScriptID);
+
+			setHardCode(arrayHealthQuestionnaire, stringHeightJavaScriptID, stringHeightValue);
+			setHardCode(arrayHealthQuestionnaire, stringWeightJavaScriptID, stringWeightValue);
+			setHardCode(arrayHealthQuestionnaire, stringBabyHeightJavaScriptID, stringBabyHeightValue);
+			setHardCode(arrayHealthQuestionnaire, stringBabyWeightJavaScriptID, stringBabyWeightValue);
+			setHardCode(arrayHealthQuestionnaire, stringPregnantWeekJavaScriptID, stringPregnantWeekValue);
+			setHardCode(arrayHealthQuestionnaire, stringPregnancyJavaScriptID, stringPregnancyValue);
+			setHardCode(arrayHealthQuestionnaire, stringWeightChangeJavaScriptID, stringWeightChangeValue);
+
 			objectContent = arrayHealthQuestionnaire;
+			previewArrayObject(arrayHealthQuestionnaire);
 		}
 		else if (stringPageSectionCurrent == stringPageSectionBeneficiariesList)
 		{
