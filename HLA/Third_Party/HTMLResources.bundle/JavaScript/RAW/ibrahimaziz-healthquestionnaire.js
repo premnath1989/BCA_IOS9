@@ -193,7 +193,7 @@ function buttonPreviewForMultiPopUp(stringParentNameWithoutPrefix, arrayContent,
 		
 		for (var i = 0; i < arrayValidation.length; i++)
 		{
-			stringRequiredValue = arrayFind(arrayHealthQuestionnaire, arrayValidation[i]);
+			stringRequiredValue = arrayFind(arrayContent, arrayValidation[i]);
 			
 			if (stringRequiredValue != null)
 			{
@@ -570,35 +570,36 @@ function setInputFrom(stringLayoutJavaScriptID, arrayContent, stringInputInfix)
 		stringKeyWithoutInfix = stringKeyWithoutPrefix.substring(stringInputInfix.length, stringKeyWithoutPrefix.length);
 		
 		if (stringKeyPrefix == stringPrefixText)
-		{			
+		{
 			setTextForm(stringLayoutJavaScriptID + " " + stringKres + stringPrefixText + stringKeyWithoutInfix, stringValue);
 		}
 		else if (stringKeyPrefix == stringPrefixRadioButton)
-		{			
+		{
 			setSpecificRadioButtonGeneral(stringLayoutJavaScriptID, stringPrefixRadioButton + stringKeyWithoutInfix, stringValue);
 		}
 		else if (stringKeyPrefix == stringPrefixCheckbox)
-		{			
+		{
 			setCheckboxGeneral(stringLayoutJavaScriptID + " " + stringKres + stringPrefixCheckbox + stringKeyWithoutInfix, stringValue);
 		}
 		else if (stringKeyPrefix == stringPrefixSelect)
-		{			
+		{
 			setSelectForm(stringLayoutJavaScriptID + " " + stringKres + stringPrefixSelect + stringKeyWithoutInfix, stringValue);
 		}
 		else if (stringKeyPrefix == stringPrefixArea)
-		{			
+		{
 			setAreaForm(stringLayoutJavaScriptID + " " + stringKres + stringPrefixArea + stringKeyWithoutInfix, stringValue);
+			alert(stringKey + " " + stringValue);
 		}
 		else if (stringKeyPrefix == stringPrefixNumber)
-		{			
+		{
 			setNumberForm(stringLayoutJavaScriptID + " " + stringKres + stringPrefixNumber + stringKeyWithoutInfix, stringValue);
 		}
 		else if (stringKeyPrefix == stringPrefixEmail)
-		{			
+		{
 			setEmailForm(stringLayoutJavaScriptID + " " + stringKres + stringPrefixEmail + stringKeyWithoutInfix, stringValue);
 		}
 		else if (stringKeyPrefix == stringPrefixDate)
-		{			
+		{
 			setDateForm(stringLayoutJavaScriptID + " " + stringKres + stringPrefixDate + stringKeyWithoutInfix, stringValue);
 		}
 		else
