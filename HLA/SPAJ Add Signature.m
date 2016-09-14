@@ -869,7 +869,7 @@
     fullpath = [NSString stringWithFormat:@"%@/%@",fullpath,mainFileName];
     
     UIImage *baseImage = [UIImage imageWithContentsOfFile:fullpath];
-    if ([stringFileName rangeOfString:@"amandement"].location != NSNotFound) {
+    if ([stringFileName rangeOfString:@"amandment"].location != NSNotFound) {
         CGRect rectSign1 = CGRectMake(0, 0, imageSigned1.size.width, imageSigned1.size.height);
         CGRect rectSign2 = CGRectMake(100, 0, imageSigned2.size.width, imageSigned2.size.height);
         CGRect rectSign3 = CGRectMake(200, 0, imageSigned3.size.width, imageSigned3.size.height);
