@@ -18,7 +18,9 @@
 -(void)updateGlobalHtmlData:(NSString *)htmlSection;
 -(int)voidGetDuplicateRowID:(NSString *)stringQuery ColumnReturn:(NSString *)stringColumn;
 -(void)updateHtmlData:(NSDictionary *)dictHtmlData;
+-(void)updateGlobalHtml:(NSString *)tableName StringSet:(NSString *)stringSet StringWhere:(NSString *)stringWhere;
 -(NSMutableArray *)selectHtmlData:(int)CFFHtmlID HtmlSection:(NSString *)cffHtmlSection;
 -(NSDictionary *)selectActiveHtml;
 -(NSDictionary *)selectActiveHtmlForSection:(NSString *)htmlSection;
+-(NSMutableArray *)selectHtmlServerID:(NSString *)TableName ColumnName:(NSString *)columnName;
 @end

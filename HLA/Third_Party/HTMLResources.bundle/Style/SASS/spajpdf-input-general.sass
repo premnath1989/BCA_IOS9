@@ -1,0 +1,35 @@
+/* @charset "utf-8"; */
+/* CSS Document */
+
+
+// IMPORT
+
+@import spajform-initialization-general
+
+	
+/* RADIO BUTTON */
+
+input[type="radio"]
+    display: none
+input[type="radio"]:checked + .BoxRound
+    background-image: url("../../Resource/Input/input_checkbox_checked.svg");
+	
+input[type="radio"].Plain
+    display: none
+input[type="radio"].Plain + label
+	text-align: center
+	+BorderRadius($general_borderradius_thick)
+
+
+/* CHECKBOX */
+
+input[type="checkbox"]
+    display: none
+input[type="checkbox"]:checked + .BoxRound
+    background-image: url("../../Resource/Input/input_checkbox_checked.svg");
+	
+input[type="checkbox"].Plain
+    display: none
+input[type="checkbox"].Plain + label
+	text-align: center
+	+BorderRadius($general_borderradius_thick)

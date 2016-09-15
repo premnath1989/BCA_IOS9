@@ -52,6 +52,24 @@
     [database close];
 }
 
+-(void)updateGlobalHtml:(NSString *)tableName StringSet:(NSString *)stringSet StringWhere:(NSString *)stringWhere{
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    BOOL success = [database executeUpdate:[NSString stringWithFormat:@"update %@ set (%@) where %@",tableName,stringSet,stringWhere]];
+    
+    if (!success) {
+        NSLog(@"%s: insert error: %@", __FUNCTION__, [database lastErrorMessage]);
+        // do whatever you need to upon error
+    }
+    [results close];
+    [database close];
+}
+
+
 -(void)updateGlobalHtmlData:(NSString *)htmlSection{
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
@@ -215,6 +233,25 @@
     return dict;
 }
 
+-(NSMutableArray *)selectHtmlServerID:(NSString *)TableName ColumnName:(NSString *)columnName{
+    NSMutableArray* arrayServerID = [[NSMutableArray alloc]init];
+    
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    //FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select * from CFFHtml where CFFHtmlID = %i",CFFHtmlID]];
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select %@ from %@ where ",columnName,TableName]];
+    while ([s next]) {
+        [arrayServerID addObject:[s stringForColumn:columnName]];
+    }
+    
+    [results close];
+    [database close];
+    return arrayServerID;
+}
 
 
 @end

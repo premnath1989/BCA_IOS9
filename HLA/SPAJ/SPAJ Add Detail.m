@@ -26,6 +26,7 @@
 #import "Alert.h"
 #import "ModelSPAJTransaction.h"
 #import "ModelSIPOData.h"
+#import "ModelSPAJFormGeneration.h"
 
 // DECLARATION
 
@@ -53,6 +54,7 @@
     ModelSPAJDetail *modelSPAJDetail;
     ModelSPAJTransaction *modelSPAJTransaction;
     ModelSIPOData* modelSIPData;
+    ModelSPAJFormGeneration* modelSPAJFormGeneration;
     Alert* alert;
     
     NSMutableArray *NumberListOfSubMenu;
@@ -97,6 +99,7 @@
         modelSPAJSignature = [[ModelSPAJSignature alloc]init];
         modelSPAJTransaction = [[ModelSPAJTransaction alloc]init];
         modelSIPData = [[ModelSIPOData alloc]init];
+        modelSPAJFormGeneration = [[ModelSPAJFormGeneration alloc]init];
         
         [self setNavigationBar];
         
@@ -682,6 +685,15 @@
     }
 
     -(void)voidSetCalonPemegangPolisBoolValidate:(BOOL)boolValidate StringSection:(NSString *)stringSection{
+        BOOL boolSPAJPDF = [modelSPAJFormGeneration voidCertainFormGenerateCaptured:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue] FormType:@"SPAJFormGeneration1"];
+        if (boolSPAJPDF){
+            UIAlertController *alertLockForm = [alert alertInformation:NSLocalizedString(@"ALERT_TITLE_FORM_GENERATION", nil) stringMessage:NSLocalizedString(@"ALERT_MESSAGE_FORM_GENERATION", nil)];
+            [self presentViewController:alertLockForm animated:YES completion:nil];
+            
+            NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJFormGeneration1=0 where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",[dictTransaction valueForKey:@"SPAJEappNumber"]];
+            [modelSPAJFormGeneration updateSPAJFormGeneration:stringUpdate];
+        }
+        
         
         if ([stringSection isEqualToString:@"PO"]){
             [self.navigationItem setTitle:@"Data Calon Tertanggung"];

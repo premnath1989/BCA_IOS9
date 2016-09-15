@@ -1,0 +1,233 @@
+/* @charset "utf-8"; */
+/* CSS Document */
+
+
+// IMPORT
+
+@import healthquestionnairepdf-initialization-general
+
+
+/* TYPEFACE */
+
+@font-face 
+	font-family: $url_familyprimary_primary
+	src: url($url_font + $url_font_primary + $url_familyprimary_primary + '.eot?#iefix') format('embedded-opentype'), url($url_font + $url_font_primary + $url_familyprimary_primary + '.woff') format('woff'), url($url_font + $url_font_primary + $url_familyprimary_primary + '.ttf') format('truetype'), url($url_font + $url_font_primary + $url_familyprimary_primary + '.svg#' + $url_familyprimary_primary) format('svg')
+	font-weight: normal
+	font-style: normal
+
+@font-face 
+	font-family: $url_familyprimary_secondary
+	src: url($url_font + $url_font_primary + $url_familyprimary_secondary + '.eot?#iefix') format('embedded-opentype'), url($url_font + $url_font_primary + $url_familyprimary_secondary + '.woff') format('woff'), url($url_font + $url_font_primary + $url_familyprimary_secondary + '.ttf') format('truetype'), url($url_font + $url_font_primary + $url_familyprimary_secondary + '.svg#' + $url_familyprimary_secondary) format('svg')
+	font-weight: normal
+	font-style: normal
+
+@font-face 
+	font-family: $url_familyprimary_tertiary
+	src: url($url_font + $url_font_primary + $url_familyprimary_tertiary + '.eot?#iefix') format('embedded-opentype'), url($url_font + $url_font_primary + $url_familyprimary_tertiary + '.woff') format('woff'), url($url_font + $url_font_primary + $url_familyprimary_tertiary + '.ttf') format('truetype'), url($url_font + $url_font_primary + $url_familyprimary_tertiary + '.svg#' + $url_familyprimary_tertiary) format('svg')
+	font-weight: normal
+	font-style: normal
+
+@font-face 
+	font-family: $url_familyprimary_quaternary
+	src: url($url_font + $url_font_primary + $url_familyprimary_quaternary + '.eot?#iefix') format('embedded-opentype'), url($url_font + $url_font_primary + $url_familyprimary_quaternary + '.woff') format('woff'), url($url_font + $url_font_primary + $url_familyprimary_quaternary + '.ttf') format('truetype'), url($url_font + $url_font_primary + $url_familyprimary_quaternary + '.svg#' + $url_familyprimary_quaternary) format('svg')
+	font-weight: normal
+	font-style: normal
+
+
+/* SETUP */
+
+img
+	border: none
+
+label
+	cursor: pointer
+	cursor: hand
+
+input[type=button]
+	cursor: pointer
+	cursor: hand
+
+input[type=submit]
+	cursor: pointer
+	cursor: hand
+
+input[type=reset]
+	cursor: pointer
+	cursor: hand
+
+*
+	+Transition(all, 0.75s, ease-out)
+
+/**
+	transition-property: position, margin, width, height, padding, background-color, opacity, border
+	-ms-transition-property: position, margin, width, height, padding, background-color, opacity, border
+	-moz-transition-property: position, margin, width, height, padding, background-color, opacity, border
+	-o-transition-property: position, margin, width, height, padding, background-color, opacity, border
+	-webkit-transition-property: position, margin, width, height, padding, background-color, opacity, border
+	transition-duration: 0.75s
+	-ms-transition-duration: 0.75s
+	-moz-transition-duration: 0.75s
+	-o-transition-duration: 0.75s
+	-webkit-transition-duration: 0.75s
+	transition-movement: ease-out
+	-ms-transition-movement: ease-out
+	-moz-transition-movement: ease-out
+	-o-transition-movement: ease-out
+	-webkit-transition-movement: ease-out*/
+
+body
+	+Transition(all, 0, linear)
+
+
+/* NEUTRALIZE */
+
+h1, h2, h3, h4, h5, h6, p, mark, ol, ul, li
+	margin: auto
+	padding: auto
+	font-family: inherit
+	font-size: inherit
+	font-weight: inherit
+	color: inherit
+	text-decoration: inherit
+	text-transform: inherit
+
+
+/* SEMANTIC ELEMENTS */
+
+body
+    position: relative
+    margin-top: 0px
+    margin-right: auto
+    margin-left: auto
+    margin-bottom: 0px
+    padding: $general_space_large
+
+br
+    padding: 0px
+    width: 0px
+    height: 0px
+    clear: both
+    display: block
+    content: ''
+
+li, p, table
+    br
+        clear: none
+        content: none
+
+
+/* PAPER SIZE */
+
+$general_density_ldpi: 48dpi
+$general_desnity_mdpi: 72dpi
+$general_desnity_hdpi: 108dpi
+$general_density_xhdpi: 144dpi
+$general_density_xxhdpi: 216dpi
+$general_density_xxxhdpi: 288dpi
+$general_density_macbookpro2012 : 96dpi // 113.5dpi
+
+$general_scale_ldpi: 0.75
+$general_scale_mdpi: 1
+$general_scale_hdpi: 1.5
+$general_scale_xhdpi: 2
+$general_scale_xxhdpi: 3
+$general_scale_xxxhdpi: 4
+$general_scale_macbookpro2012: 1.15
+
+$papersize_a4_width: 21cm
+$papersize_a4_height: 29.7cm
+$papersize_letter_width: 21.6cm
+$papersize_letter_height: 27.9cm
+$papersize_legal_width: 21.6cm
+$papersize_legal_height: 35.6cm
+
+@media (min-resolution: $general_density_ldpi)
+    body#A4
+        width: $papersize_a4_width * $general_scale_ldpi
+        height: $papersize_a4_height * $general_scale_ldpi
+
+    body#Letter
+        width: $papersize_letter_width * $general_scale_ldpi
+        height: $papersize_letter_height * $general_scale_ldpi
+
+    body#Legal
+        width: $papersize_legal_width * $general_scale_ldpi
+        height: $papersize_legal_height * $general_scale_ldpi
+
+@media (min-resolution: $general_desnity_mdpi)
+    body#A4
+        width: $papersize_a4_width * $general_scale_mdpi
+        height: $papersize_a4_height * $general_scale_mdpi
+
+    body#Letter
+        width: $papersize_letter_width * $general_scale_mdpi
+        height: $papersize_letter_height * $general_scale_mdpi
+
+    body#Legal
+        width: $papersize_legal_width * $general_scale_mdpi
+        height: $papersize_legal_height * $general_scale_mdpi
+
+@media (min-resolution: $general_desnity_hdpi)
+    body#A4
+        width: $papersize_a4_width * $general_scale_hdpi
+        height: $papersize_a4_height * $general_scale_hdpi
+
+    body#Letter
+        width: $papersize_letter_width * $general_scale_hdpi
+        height: $papersize_letter_height * $general_scale_hdpi
+
+    body#Legal
+        width: $papersize_legal_width * $general_scale_hdpi
+        height: $papersize_legal_height * $general_scale_hdpi
+
+@media (min-resolution: $general_density_xhdpi)
+    body#A4
+        width: $papersize_a4_width * $general_scale_xhdpi
+        height: $papersize_a4_height * $general_scale_xhdpi
+
+    body#Letter
+        width: $papersize_letter_width * $general_scale_xhdpi
+        height: $papersize_letter_height * $general_scale_xhdpi
+
+    body#Legal
+        width: $papersize_legal_width * $general_scale_xhdpi
+        height: $papersize_legal_height * $general_scale_xhdpi
+
+@media (min-resolution: $general_density_xxhdpi)
+    body#A4
+        width: $papersize_a4_width * $general_scale_xxhdpi
+        height: $papersize_a4_height * $general_scale_xxhdpi
+
+    body#Letter
+        width: $papersize_letter_width * $general_scale_xxhdpi
+        height: $papersize_letter_height * $general_scale_xxhdpi
+
+    body#Legal
+        width: $papersize_legal_width * $general_scale_xxhdpi
+        height: $papersize_legal_height * $general_scale_xxhdpi
+
+@media (min-resolution: $general_density_xxxhdpi)
+    body#A4
+        width: $papersize_a4_width * $general_scale_xxxhdpi
+        height: $papersize_a4_height * $general_scale_xxxhdpi
+
+    body#Letter
+        width: $papersize_letter_width * $general_scale_xxxhdpi
+        height: $papersize_letter_height * $general_scale_xxxhdpi
+
+    body#Legal
+        width: $papersize_legal_width * $general_scale_xxxhdpi
+        height: $papersize_legal_height * $general_scale_xxxhdpi
+
+@media (min-resolution: $general_density_macbookpro2012)
+    body#A4
+        width: $papersize_a4_width * $general_scale_macbookpro2012
+        height: $papersize_a4_height * $general_scale_macbookpro2012
+
+    body#Letter
+        width: $papersize_letter_width * $general_scale_macbookpro2012
+        height: $papersize_letter_height * $general_scale_macbookpro2012
+
+    body#Legal
+        width: $papersize_legal_width * $general_scale_macbookpro2012
+        height: $papersize_legal_height * $general_scale_macbookpro2012

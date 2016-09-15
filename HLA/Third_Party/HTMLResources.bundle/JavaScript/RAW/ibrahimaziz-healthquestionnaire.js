@@ -518,6 +518,10 @@ function getInputFrom(stringLayoutJavaScriptID, arrayContent, stringInputInfix)
 			var stringKey = stringPrefixArea + stringInputInfix + stringInputIDWithoutPrefix;
 			var stringValue = getAreaForm(stringSpecificInputJavaScriptID);
 
+			
+			alert(stringLayoutJQueryID + " - " + stringKey + " - " + stringValue);
+			
+			
 			if (stringInputRequired == stringStateRequired)
 			{
 				if (validateTextGeneral(stringSpecificInputJQueryID) == false)
@@ -588,7 +592,7 @@ function setInputFrom(stringLayoutJavaScriptID, arrayContent, stringInputInfix)
 		else if (stringKeyPrefix == stringPrefixArea)
 		{
 			setAreaForm(stringLayoutJavaScriptID + " " + stringKres + stringPrefixArea + stringKeyWithoutInfix, stringValue);
-			// alert(stringKey + " " + stringValue);
+			// alert(stringKeyWithoutInfix + " " + stringKeyWithoutPrefix);
 		}
 		else if (stringKeyPrefix == stringPrefixNumber)
 		{
@@ -606,6 +610,33 @@ function setInputFrom(stringLayoutJavaScriptID, arrayContent, stringInputInfix)
 		{
 			
 		}
+		
+		var stringPopUpSuffix = stringLayoutJavaScriptID.substring("PopUp".length, stringLayoutJavaScriptID.length);
+		var stringSectionInfix = getInfixSection(stringKeyWithoutPrefix);
+	}
+	
+	var stringAmandmentDetailKey = stringPrefixArea + stringSectionInfix + stringPopUpSuffix + "AmandmentDetail";
+	var stringAmandmentDetail = arrayFind(arrayContent, stringAmandmentDetailKey);
+	alert(stringAmandmentDetailKey + " " + stringAmandmentDetail);
+	$(stringKres + stringLayoutJavaScriptID + " " + stringKres + stringPrefixArea + "AmandmentDetail").val(stringAmandmentDetail);
+	// alert(stringLayoutJavaScriptID + " " + stringKres + stringPrefixArea + stringKeyWithoutInfix + " - " + stringAmandmentDetail);
+	
+	// $(stringKres + stringLayoutJavaScriptID + " " + stringKres + stringPrefixArea + "AmandmentDetail").val("Test");
+}
+
+function getInfixSection(stringContent)
+{
+	if (stringContent.substring(0, 3) == "Pro")
+	{
+		return stringProspectiveInsuredPrefix;
+	}
+	else if (stringContent.substring(0, 3) == "Pol")
+	{
+		return stringPolicyHolderPrefix;
+	}
+	else
+	{
+
 	}
 }
 
@@ -841,6 +872,21 @@ function getFromDatabaseForHealthQuestionnaire(objectContent, stringPageType)
 			if (stringPageType == stringPageTypePDF)
 			{
 				var intMaxString = 26;
+				
+				if (stringValue.length > intMaxString)
+				{
+					var stringValue1 = stringValue.substring(0, intMaxString);
+					var stringValue2 = stringValue.substring(0, intMaxString);
+
+					setTextPDF(stringKey, stringValue1);
+					setTextPDF(stringKey + "2nd", stringValue2);
+				}
+				else
+				{
+					setTextPDF(stringKey, stringValue);
+				}
+				
+				/* var intMaxString = 26;
 				var stringKeyWithoutPrefix = releasePrefix(stringKey);
 				var stringKeyWithoutInfix = releaseInfix(stringKeyWithoutPrefix);
 				var stringIDMedication = "HypertensionMedication";
@@ -886,7 +932,7 @@ function getFromDatabaseForHealthQuestionnaire(objectContent, stringPageType)
 							setTextPDF(stringKey, stringValue);
 						}
 					} 
-				}
+				} */
 			}
 			else
 			{

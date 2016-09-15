@@ -23,6 +23,7 @@
     IBOutlet UIView* viewDisplay;
     IBOutlet UIImageView* imageViewDisplayImage;
     IBOutlet UIWebView* webViewDisplayPDF;
+    IBOutlet UIScrollView* scrollImage;
     
     IBOutlet UIButton* buttonClose;
 }
@@ -63,7 +64,8 @@
     modelSPAJSubmitTracker = [[ModelSPAJSubmitTracker alloc]init];
     alert = [[Alert alloc]init];
     intUploadCount = 0;
-    // Do any additional setup after loading the view from its nib.
+    
+        // Do any additional setup after loading the view from its nib.
 }
 
 - (void)didReceiveMemoryWarning {
@@ -146,6 +148,13 @@
             [webViewDisplayPDF loadRequest:request];
         }
         else{
+            
+            [scrollImage setZoomScale:4.0];
+            [scrollImage setContentOffset:CGPointMake(scrollImage.contentOffset.x, 0)
+                                     animated:YES];
+            
+            //[self setCenter];
+            
             [webViewDisplayPDF setHidden:YES];
             [imageViewDisplayImage setHidden:NO];
             
@@ -352,6 +361,36 @@
 {
     return imageViewDisplayImage;
 }
+
+/*- (void)scrollViewDidEndZooming:(UIScrollView *)aScrollView withView:(UIView *)view atScale:(float)scale {
+    CGSize imgViewSize = imageViewDisplayImage.frame.size;
+    CGSize imageSize = imageViewDisplayImage.image.size;
+    
+    CGSize realImgSize;
+    if(imageSize.width / imageSize.height > imgViewSize.width / imgViewSize.height) {
+        realImgSize = CGSizeMake(imgViewSize.width, imgViewSize.width / imageSize.width * imageSize.height);
+    }
+    else {
+        realImgSize = CGSizeMake(imgViewSize.height / imageSize.height * imageSize.width, imgViewSize.height);
+    }
+    
+    CGRect fr = CGRectMake(((scrollImage.frame.size.width - realImgSize.width)/2), 0, 0, 0);
+    fr.size = realImgSize;
+    imageViewDisplayImage.frame = fr;
+    
+    CGSize scrSize = scrollImage.frame.size;
+    float offx = (scrSize.width > realImgSize.width ? (scrSize.width - realImgSize.width) / 2 : 0);
+    float offy = (scrSize.height > realImgSize.height ? (scrSize.height - realImgSize.height) / 2 : 0);
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.25];
+    scrollImage.contentInset = UIEdgeInsetsMake(offy, offx, offy, offx);
+    [UIView commitAnimations];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)sender {
+    CGPoint contentOffset = CGPointMake(0, sender.contentOffset.y);
+    [sender setContentOffset:contentOffset];
+}*/
 
 /*
 #pragma mark - Navigation

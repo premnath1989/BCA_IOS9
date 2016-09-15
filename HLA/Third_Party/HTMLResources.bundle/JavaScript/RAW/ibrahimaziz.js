@@ -75,6 +75,7 @@ var intSharePercentage = 0;
 var stringSharePercentageSuffix = "SharePercentage";
 var stringSPAJProposalInfix = "SPAJProposal";
 var intSPAJProposalID = 1;
+var intSPAJProposalRecentID = null;
 var stringPopUpTypeHardCopy = "hardcopy";
 var stringIndicatorPolicyHolder = "Pol";
 var stringIndicatorProspectiveInsured = "Pro";
@@ -85,7 +86,6 @@ var stringPrefixEmail = "Email";
 var stringPrefixNumber = "Number";
 var stringStateRequired = "required";
 var intBeneficiariesListRecentID = null;
-var intSPAJProposalRecentID = 0;
 var stringPageValidationIncome = "income";
 var stringPrefixArea = "Area";
 var stringPageTypeHealthQuestionnairePDF = "HealthQuestionnairePDF";
@@ -597,7 +597,7 @@ function SPAJProposalGenerator(stringButtonJavaScriptID)
 	
 	$(stringButtonJQueryID).click(function()
 	{
-		popUpSPAJProposalShow("RadioButtonSPAJProposal", null, "PopUpSPAJProposal", arrayHealthQuestionnaire);
+		popUpSPAJProposalShow("RadioButton" + stringPageInfixTypeCurrent + "SPAJProposal", null, "PopUpSPAJProposal", arrayHealthQuestionnaire);
 	})
 }
 
@@ -693,7 +693,7 @@ function additionalQuestionGenerator()
                         var stringID = $(this).attr("id");
                         var stringSuffix = releasePrefix(stringID);
 						
-                        $(this).empty();
+                        $(this).val("");
                         stringDetailKey = stringPrefixText + stringInfix + stringSuffix;
 
 						for (var k = 0; k < arrayHealthQuestionnaire.length; k++)
@@ -1056,7 +1056,7 @@ function previewArrayObject(arrayContent)
 		stringObjectPreview += "key : " + arrayContent[i].elementID + "\nvalue : " + arrayContent[i].Value + "\n";
 	}
 
-	// alert(stringObjectPreview);
+	alert(stringObjectPreview);
 }	
 
 function buttonPopUpHealthGenerator()
@@ -1307,12 +1307,10 @@ function buttonPopUpBeneficiariesListGenerator()
 			if (intBeneficiariesListRecentID == null)
 			{
 				intID = parseInt(intBeneficiariesListID, 10) + parseInt(1, 10);
-				// alert("using last id : " + intID);
 			}
 			else
 			{
 				intID = intBeneficiariesListRecentID;
-				// alert("using recent id : " + intID);
 			}
 			
 			if (validateTextGeneral(stringSharePercentageJQueryID) == true)
@@ -1529,17 +1527,19 @@ function buttonPopUpSPAJProposalGenerator()
     {
 		var intID;
 		var arrayInputTemporary = [];
+		stringTriggerInfix = releasePrefix(stringRadioButtonName);
 
-		if (intSPAJProposalRecentID == 0)
+		intSPAJProposalID = getLastID(arrayHealthQuestionnaire, "Text" + stringTriggerInfix + "CompanyName");
+		
+		if (intSPAJProposalRecentID == null)
 		{
-			intID = intSPAJProposalID;
+			intID = parseInt(intSPAJProposalID, 10) + parseInt(1, 10);
 		}
 		else
 		{
 			intID = intSPAJProposalRecentID;
 		}
 		
-		stringTriggerInfix = releasePrefix(stringRadioButtonName);
 		stateValidation = true;
 		
 		$(stringPopUpJQueryID + " form input[type=text]").each(function()
@@ -1571,8 +1571,7 @@ function buttonPopUpSPAJProposalGenerator()
 			arrayTransfer(arrayInputTemporary, arrayHealthQuestionnaire);
 			
 			$(stringPopUpJQueryID).css("display", "none");
-			intSPAJProposalID++
-			intSPAJProposalRecentID = 0;
+			intSPAJProposalRecentID = null;
 
 			$(stringPopUpJQueryID + " form input[type=text]").each(function()
 			{
@@ -1580,7 +1579,7 @@ function buttonPopUpSPAJProposalGenerator()
 			});
 
 			tableSPAJProposalGenerator(stringTriggerInfix, "SPAJProposalList", arrayHealthQuestionnaire);
-			// previewArrayObject(arrayHealthQuestionnaire);
+			previewArrayObject(arrayHealthQuestionnaire);
 		}
     });
 }
@@ -1646,7 +1645,7 @@ function tableSPAJProposalGenerator(stringTriggerKey, stringContainerJavaScriptI
 		stringKey = stringPrefixText + stringTriggerKey + stringInputIDSuffix + stringKeyID;
 		
 		stringContentName = arrayFind(arrayContent, stringKey);
-		
+		// alert(stringKey + " " + stringContentName);
 		if (stringFlag == 0 || stringFlag != stringKeyID)
 		{
 			if (stringContentName == null || stringContentName == undefined)
@@ -1655,7 +1654,6 @@ function tableSPAJProposalGenerator(stringTriggerKey, stringContainerJavaScriptI
 			}
 			else
 			{
-				
 				$(stringContainerJQueryID).append
 				(
 					"<div style='display: block; margin-bottom: -15px;'>" + 
@@ -2822,6 +2820,8 @@ function setToDatabase(stringPageType)
 		var stringKey = $(this).attr("id");
         var stringValue = getCheckboxGeneral(stringKey);
         validatePush(objectContent, stringKey, stringValue);
+		// objectContent.push({ elementID: stringKey, Value: stringValue });
+		// arrayAdd(objectContent, stringKey, stringValue);
     });
     
     $("input[type=date]").each(function()

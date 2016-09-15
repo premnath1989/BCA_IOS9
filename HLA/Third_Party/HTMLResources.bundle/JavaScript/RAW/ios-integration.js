@@ -334,6 +334,9 @@ function savetoDB()
 			var stringPregnantWeekJavaScriptID = stringPrefixText + stringInfixHardcode + "PregnantWeek";
 			var stringPregnantWeekJQueryID = stringKres + stringPregnantWeekJavaScriptID;
 			var stringPregnantWeekValue = getTextForm(stringPregnantWeekJavaScriptID);
+			var stringPregnantJavaScriptID = stringPrefixRadioButton + stringInfixHardcode + "Pregnant";
+			var stringPregnantJQueryID = stringKres + stringPregnantJavaScriptID;
+			var stringPregnantValue = getRadioButtonGeneral(stringPregnantJavaScriptID);
 			var stringPregnancyJavaScriptID = stringPrefixRadioButton + stringInfixHardcode + "Pregnancy";
 			var stringPregnancyJQueryID = stringKres + stringPregnancyJavaScriptID;
 			var stringPregnancyValue = getRadioButtonGeneral(stringPregnancyJavaScriptID);
@@ -346,11 +349,12 @@ function savetoDB()
 			setHardCode(arrayHealthQuestionnaire, stringBabyHeightJavaScriptID, stringBabyHeightValue);
 			setHardCode(arrayHealthQuestionnaire, stringBabyWeightJavaScriptID, stringBabyWeightValue);
 			setHardCode(arrayHealthQuestionnaire, stringPregnantWeekJavaScriptID, stringPregnantWeekValue);
+			setHardCode(arrayHealthQuestionnaire, stringPregnantJavaScriptID, stringPregnantValue);
 			setHardCode(arrayHealthQuestionnaire, stringPregnancyJavaScriptID, stringPregnancyValue);
 			setHardCode(arrayHealthQuestionnaire, stringWeightChangeJavaScriptID, stringWeightChangeValue);
 
 			objectContent = arrayHealthQuestionnaire;
-			previewArrayObject(arrayHealthQuestionnaire);
+			// previewArrayObject(arrayHealthQuestionnaire);
 		}
 		else if (stringPageSectionCurrent == stringPageSectionBeneficiariesList)
 		{
