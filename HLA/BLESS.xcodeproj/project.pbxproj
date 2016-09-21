@@ -380,6 +380,10 @@
 		4353C94B1C61F3A000AE1ED9 /* ModelMaritalStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 4353C94A1C61F3A000AE1ED9 /* ModelMaritalStatus.m */; };
 		4353C94E1C61F6F800AE1ED9 /* ModelReligion.m in Sources */ = {isa = PBXBuildFile; fileRef = 4353C94D1C61F6F800AE1ED9 /* ModelReligion.m */; };
 		4353C9511C61FCD000AE1ED9 /* ModelIdentificationType.m in Sources */ = {isa = PBXBuildFile; fileRef = 4353C9501C61FCD000AE1ED9 /* ModelIdentificationType.m */; };
+		435464B01D92756200F04413 /* SegmentSPAJ.m in Sources */ = {isa = PBXBuildFile; fileRef = 435464AF1D92756200F04413 /* SegmentSPAJ.m */; };
+		435464B31D9281F200F04413 /* AllAboutPDFFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 435464B21D9281F200F04413 /* AllAboutPDFFunctions.m */; };
+		435464B71D928E6D00F04413 /* TextFieldSPAJ.m in Sources */ = {isa = PBXBuildFile; fileRef = 435464B61D928E6D00F04413 /* TextFieldSPAJ.m */; };
+		435464BE1D9293B600F04413 /* ButtonSPAJ.m in Sources */ = {isa = PBXBuildFile; fileRef = 435464BD1D9293B600F04413 /* ButtonSPAJ.m */; };
 		437223E61C89372200D94B2F /* RateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 437223E51C89372200D94B2F /* RateModel.m */; };
 		437343151C6B1CBD001516D9 /* ReferralSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 437343141C6B1CBD001516D9 /* ReferralSource.m */; };
 		4373949A1C9BE5C2004522A2 /* NIPInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 437394981C9BE5C2004522A2 /* NIPInfo.m */; };
@@ -1603,6 +1607,14 @@
 		4353C94D1C61F6F800AE1ED9 /* ModelReligion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelReligion.m; sourceTree = "<group>"; };
 		4353C94F1C61FCD000AE1ED9 /* ModelIdentificationType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelIdentificationType.h; sourceTree = "<group>"; };
 		4353C9501C61FCD000AE1ED9 /* ModelIdentificationType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelIdentificationType.m; sourceTree = "<group>"; };
+		435464AE1D92756200F04413 /* SegmentSPAJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentSPAJ.h; sourceTree = "<group>"; };
+		435464AF1D92756200F04413 /* SegmentSPAJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentSPAJ.m; sourceTree = "<group>"; };
+		435464B11D9281F200F04413 /* AllAboutPDFFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllAboutPDFFunctions.h; sourceTree = "<group>"; };
+		435464B21D9281F200F04413 /* AllAboutPDFFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllAboutPDFFunctions.m; sourceTree = "<group>"; };
+		435464B51D928E6D00F04413 /* TextFieldSPAJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldSPAJ.h; sourceTree = "<group>"; };
+		435464B61D928E6D00F04413 /* TextFieldSPAJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldSPAJ.m; sourceTree = "<group>"; };
+		435464BC1D9293B600F04413 /* ButtonSPAJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonSPAJ.h; sourceTree = "<group>"; };
+		435464BD1D9293B600F04413 /* ButtonSPAJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonSPAJ.m; sourceTree = "<group>"; };
 		437223E41C89372200D94B2F /* RateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RateModel.h; sourceTree = "<group>"; };
 		437223E51C89372200D94B2F /* RateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RateModel.m; sourceTree = "<group>"; };
 		437343131C6B1CBD001516D9 /* ReferralSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReferralSource.h; sourceTree = "<group>"; };
@@ -2831,6 +2843,9 @@
 		0F3268681D1A99AE001A9021 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				435464B81D9292DF00F04413 /* UIButton */,
+				435464B41D928E3C00F04413 /* UITextField */,
+				435464AD1D92753D00F04413 /* UISegmentedControl */,
 				0FF845751D23A3BB008CF861 /* Cell */,
 				438410BF1D66A2F700FD4152 /* SPAJIDCapturedViewController.h */,
 				438410C01D66A2F700FD4152 /* SPAJIDCapturedViewController.m */,
@@ -2885,6 +2900,8 @@
 				0F3268451D1A93A4001A9021 /* Validation.m */,
 				43B41DD71D81913900718F83 /* AllAboutPDFGeneration.h */,
 				43B41DD81D81913900718F83 /* AllAboutPDFGeneration.m */,
+				435464B11D9281F200F04413 /* AllAboutPDFFunctions.h */,
+				435464B21D9281F200F04413 /* AllAboutPDFFunctions.m */,
 			);
 			name = Function;
 			sourceTree = "<group>";
@@ -3868,6 +3885,33 @@
 				432E8F691D13F36D0030F0C4 /* AnalisaKebutuhanNasabahViewController.xib */,
 			);
 			name = "Section 4 Analisa Kebutuhan Nasabah";
+			sourceTree = "<group>";
+		};
+		435464AD1D92753D00F04413 /* UISegmentedControl */ = {
+			isa = PBXGroup;
+			children = (
+				435464AE1D92756200F04413 /* SegmentSPAJ.h */,
+				435464AF1D92756200F04413 /* SegmentSPAJ.m */,
+			);
+			name = UISegmentedControl;
+			sourceTree = "<group>";
+		};
+		435464B41D928E3C00F04413 /* UITextField */ = {
+			isa = PBXGroup;
+			children = (
+				435464B51D928E6D00F04413 /* TextFieldSPAJ.h */,
+				435464B61D928E6D00F04413 /* TextFieldSPAJ.m */,
+			);
+			name = UITextField;
+			sourceTree = "<group>";
+		};
+		435464B81D9292DF00F04413 /* UIButton */ = {
+			isa = PBXGroup;
+			children = (
+				435464BC1D9293B600F04413 /* ButtonSPAJ.h */,
+				435464BD1D9293B600F04413 /* ButtonSPAJ.m */,
+			);
+			name = UIButton;
 			sourceTree = "<group>";
 		};
 		437223E31C8936EB00D94B2F /* RATESDBModel */ = {
@@ -6332,6 +6376,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C4E9D1A11612C64900016053 /* main.m in Sources */,
+				435464BE1D9293B600F04413 /* ButtonSPAJ.m in Sources */,
 				AAFFE1701C7C4F14001B91BF /* WebResponObj.m in Sources */,
 				439E45821D585C0B009098EF /* SPAJPDFWebViewController.m in Sources */,
 				A9B8F3D41C5B5EE2005C9646 /* ModelProspectProfile.m in Sources */,
@@ -6346,6 +6391,7 @@
 				C4EB491F1615402800C7FC8C /* Login.m in Sources */,
 				438DB5F41D49C28F00B92FEF /* ModelSPAJTransaction.m in Sources */,
 				C4EB4924161558F300C7FC8C /* ChangePassword.m in Sources */,
+				435464B71D928E6D00F04413 /* TextFieldSPAJ.m in Sources */,
 				AA4EF7751C85A4260050CCD8 /* ThumbsViewController.m in Sources */,
 				C4EB493C161592EC00C7FC8C /* UserProfile.m in Sources */,
 				C4EA9BCD1616D7C700D51FE9 /* SecurityQuestion.m in Sources */,
@@ -6493,6 +6539,7 @@
 				C47F40E6178BA5230023D9EF /* EverFundMaturityViewController.m in Sources */,
 				C4C6C0A6178BB0F50006B00D /* PopOverFundViewController.m in Sources */,
 				EF90B0C9178E56A800FEC129 /* eAppStatusList.m in Sources */,
+				435464B31D9281F200F04413 /* AllAboutPDFFunctions.m in Sources */,
 				DE0E3EFF1D4F3AA500873967 /* SPAJDisNumber.m in Sources */,
 				EF90B0D1178E7F1800FEC129 /* Relationship.m in Sources */,
 				AADD7E721C743A1E00D87750 /* DDXMLElement.m in Sources */,
@@ -6707,6 +6754,7 @@
 				C3A8D1081833AEB700E65FC9 /* LA1DetailsVC.m in Sources */,
 				C3A8D1091833AEB700E65FC9 /* LA2DetailsVC.m in Sources */,
 				0F48376F1D34F262009A45D4 /* ModelCFFHtml.m in Sources */,
+				435464B01D92756200F04413 /* SegmentSPAJ.m in Sources */,
 				438E79021D5B2C0100C78AB2 /* ModelSPAJDetail.m in Sources */,
 				438410C21D66A2F700FD4152 /* SPAJIDCapturedViewController.m in Sources */,
 				C3A8D10A1833AEB700E65FC9 /* MainLA1DetailsVC.m in Sources */,
