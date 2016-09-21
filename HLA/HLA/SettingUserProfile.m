@@ -994,8 +994,8 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
     CFFAPIController* cffAPIController;
     cffAPIController = [[CFFAPIController alloc]init];
     
-    NSArray* arrayJSONKey = [[NSArray alloc]initWithObjects:@"CFFId",@"FileName",@"Status",@"CFFSection",@"FolderName", nil];
-    NSArray* tableColumn= [[NSArray alloc]initWithObjects:@"CFFID",@"CFFHtmlName",@"CFFHtmlStatus",@"CFFHtmlSection", nil];
+    NSArray* arrayJSONKey = [[NSArray alloc]initWithObjects:@"CFFId",@"FileName",@"Status",@"CFFSection",@"FolderName",@"Id" ,nil];
+    NSArray* tableColumn= [[NSArray alloc]initWithObjects:@"CFFID",@"CFFHtmlName",@"CFFHtmlStatus",@"CFFHtmlSection",@"CFFServerID", nil];
     NSDictionary *dictCFFTable = [[NSDictionary alloc]initWithObjectsAndKeys:@"CFFHtml",@"tableName",tableColumn,@"columnName", nil];
     
     NSMutableDictionary* dictDuplicateChecker = [[NSMutableDictionary alloc]init];
@@ -1005,6 +1005,7 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
     [dictDuplicateChecker setObject:@"CFFHtmlName" forKey:@"DuplicateCheckerWhere2"];
     [dictDuplicateChecker setObject:@"CFFHtmlStatus" forKey:@"DuplicateCheckerWhere3"];
     [dictDuplicateChecker setObject:@"CFFHtmlSection" forKey:@"DuplicateCheckerWhere4"];
+    [dictDuplicateChecker setObject:@"CFFServerID" forKey:@"DuplicateCheckerWhere5"];
     
     NSString* stringURL = [NSString stringWithFormat:@"%@/Service2.svc/GetAllData",[(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL]];
     [cffAPIController apiCallHtmlTable:stringURL JSONKey:arrayJSONKey TableDictionary:dictCFFTable DictionaryDuplicateChecker:dictDuplicateChecker WebServiceModule:@"CFF"];
@@ -1015,8 +1016,8 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
     CFFAPIController* cffAPIController;
     cffAPIController = [[CFFAPIController alloc]init];
     
-    NSArray* arrayJSONKey = [[NSArray alloc]initWithObjects:@"SPAJId",@"FileName",@"Status",@"SPAJSection",@"FolderName", nil];
-    NSArray* tableColumn= [[NSArray alloc]initWithObjects:@"SPAJID",@"SPAJHtmlName",@"SPAJHtmlStatus",@"SPAJHtmlSection", nil];
+    NSArray* arrayJSONKey = [[NSArray alloc]initWithObjects:@"SPAJId",@"FileName",@"Status",@"SPAJSection",@"FolderName",@"Id", nil];
+    NSArray* tableColumn= [[NSArray alloc]initWithObjects:@"SPAJID",@"SPAJHtmlName",@"SPAJHtmlStatus",@"SPAJHtmlSection",@"SPAJServerID", nil];
     NSDictionary *dictCFFTable = [[NSDictionary alloc]initWithObjectsAndKeys:@"SPAJHtml",@"tableName",tableColumn,@"columnName", nil];
     
     NSMutableDictionary* dictDuplicateChecker = [[NSMutableDictionary alloc]init];
@@ -1026,6 +1027,7 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
     [dictDuplicateChecker setObject:@"SPAJHtmlName" forKey:@"DuplicateCheckerWhere2"];
     [dictDuplicateChecker setObject:@"SPAJHtmlStatus" forKey:@"DuplicateCheckerWhere3"];
     [dictDuplicateChecker setObject:@"SPAJHtmlSection" forKey:@"DuplicateCheckerWhere4"];
+    [dictDuplicateChecker setObject:@"SPAJServerID" forKey:@"DuplicateCheckerWhere5"];
     
     NSString* stringURL = [NSString stringWithFormat:@"%@/SPAJHTMLForm.svc/GetAllData",[(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL]];
     [cffAPIController apiCallHtmlTable:stringURL JSONKey:arrayJSONKey TableDictionary:dictCFFTable DictionaryDuplicateChecker:dictDuplicateChecker WebServiceModule:@"SPAJ"];

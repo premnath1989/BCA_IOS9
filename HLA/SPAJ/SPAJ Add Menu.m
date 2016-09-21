@@ -631,7 +631,7 @@ NSString* const stateIMGGeneration = @"IMG";
                             long long longSPAJNumber = [spajNumber longLongValue];
                             /*UIAlertController *alertNoSPAJNumber = [alert alertInformation:@"Sukses" stringMessage:[NSString stringWithFormat:@"Nomor SPAJ anda adalah %lli",longSPAJNumber]];
                             [self presentViewController:alertNoSPAJNumber animated:YES completion:nil];*/
-                            [self voidChangeFileName:longSPAJNumber];
+                            //[self voidChangeFileName:longSPAJNumber];
                             [self generateAllIMGPDF];
                             //[_delegateSPAJMain actionGoToExistingList:nil];
                             /*dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -946,7 +946,9 @@ NSString* const stateIMGGeneration = @"IMG";
         NSString* documentsDirectory = [path_forDirectory objectAtIndex:0];
         if (pdfData) {
             if ([stateGeneration isEqualToString:statePDFGeneration]){
-                BOOL created = [pdfData writeToFile:[NSString stringWithFormat:@"%@/SPAJ/%@/%@_%i.pdf",documentsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"],[dictTransaction valueForKey:@"SPAJEappNumber"],indexForPDFGeneration] atomically:YES];/*[pdfData writeToFile:[NSString stringWithFormat:@"%@/SPAJ/%@/%@_SPAJ.pdf",documentsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"],[dictTransaction valueForKey:@"SPAJEappNumber"]] atomically:YES];*/
+                BOOL created = [pdfData writeToFile:[NSString stringWithFormat:@"%@/SPAJ/%@/%@_%i.pdf",documentsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"],[dictTransaction valueForKey:@"SPAJEappNumber"],indexForPDFGeneration] atomically:YES];
+                
+                /*[pdfData writeToFile:[NSString stringWithFormat:@"%@/SPAJ/%@/%@_SPAJ.pdf",documentsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"],[dictTransaction valueForKey:@"SPAJEappNumber"]] atomically:YES];*/
                 
                 indexForPDFGeneration ++;
                 if (indexForPDFGeneration < [arrayHTMLName count]){
@@ -1159,15 +1161,22 @@ NSString* const stateIMGGeneration = @"IMG";
             [webview loadRequest:request];
         }
         else{
-            //[allAboutPDFGeneration voidSaveSignatureForImages:dictTransaction DictionaryPOData:dictionaryPOData];
+            [allAboutPDFGeneration removeUnNecesaryPDFFiles:dictTransaction];
             [allAboutPDFGeneration removeSPAJSigned:dictTransaction];
-            NSString* spajNumber = [modelSPAJTransaction getSPAJTransactionData:@"SPAJNumber" StringWhereName:@"SPAJTransactionID" StringWhereValue:[dictTransaction valueForKey:@"SPAJTransactionID"]];
             
-            long long longSPAJNumber = [spajNumber longLongValue];
-            UIAlertController *alertNoSPAJNumber = [alert alertInformation:@"Sukses" stringMessage:[NSString stringWithFormat:@"Nomor SPAJ anda adalah %lli",longSPAJNumber]];
-            [self presentViewController:alertNoSPAJNumber animated:YES completion:nil];
-            [viewActivityIndicator setHidden:YES];
-            [_delegateSPAJMain actionGoToExistingList:nil];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                [allAboutPDFGeneration voidSaveSignatureForImages:dictTransaction DictionaryPOData:dictionaryPOData];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    NSString* spajNumber = [modelSPAJTransaction getSPAJTransactionData:@"SPAJNumber" StringWhereName:@"SPAJTransactionID" StringWhereValue:[dictTransaction valueForKey:@"SPAJTransactionID"]];
+                    
+                    long long longSPAJNumber = [spajNumber longLongValue];
+                    UIAlertController *alertNoSPAJNumber = [alert alertInformation:@"Sukses" stringMessage:[NSString stringWithFormat:@"Nomor SPAJ anda adalah %lli",longSPAJNumber]];
+                    [self presentViewController:alertNoSPAJNumber animated:YES completion:nil];
+                    [self voidChangeFileName:longSPAJNumber];
+                    [viewActivityIndicator setHidden:YES];
+                    [_delegateSPAJMain actionGoToExistingList:nil];
+                });
+            });
         }
     }
 

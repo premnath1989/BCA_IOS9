@@ -14,12 +14,15 @@
 #import "Query SPAJ Header.h"
 #import "User Interface.h"
 #import "Alert.h"
-
+#import "CameraViewController.h"
 
 // DECLARATION
 
-@interface SPAJExistingList : UIViewController <UITableViewDelegate, UITableViewDataSource>
-
+@interface SPAJExistingList : UIViewController <UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate>{
+    CameraViewController *imagePickerController;
+    CGRect imagePickerRect;
+}
+    @property (strong, nonatomic) NSDictionary* dictTransaction;
     // OBJECT
 
     @property (strong, retain) QuerySPAJHeader *querySPAJHeader;

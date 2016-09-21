@@ -114,10 +114,15 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
 @synthesize labelActivityIncdicator;
 
     // DID LOAD
+    -(void)viewWillAppear:(BOOL)animated{
+        [self voidCheckBooleanLastState];
+    }
+
     - (void)viewDidAppear:(BOOL)animated{
         [labelActivityIncdicator setText:@"Loading Data"];
         //[viewActivityIndicator setHidden:NO];
         //[self loadHTMLFile:@"SPAJHtmlName"];
+        [self voidCheckBooleanLastState];
     }
 
     - (void)viewDidLoad
@@ -184,7 +189,6 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
         boolSPAJPDF = false;
         dictionaryPOData = [[NSDictionary alloc]initWithDictionary:[modelSIPOData getPO_DataFor:[dictTransaction valueForKey:@"SPAJSINO"]]];
         dictionarySIMaster = [[NSDictionary alloc]initWithDictionary:[modelSIMaster getIlustrationDataForSI:[dictTransaction valueForKey:@"SPAJSINO"]]];
-        [self voidCheckBooleanLastState];
     }
 
     -(void)generateAllPDF{
@@ -348,6 +352,7 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
         //[_delegateSPAJMain voidGoToAddDetail];
         spajFilesViewController = [[SPAJFilesViewController alloc]initWithNibName:@"SPAJFilesViewController" bundle:nil];
         [spajFilesViewController setDictTransaction:dictTransaction];
+        [spajFilesViewController setBoolHealthQuestionairre:YES];
         spajFilesViewController.modalPresentationStyle = UIModalPresentationOverFullScreen;
         [self presentViewController:spajFilesViewController animated:YES completion:nil];
         [spajFilesViewController.buttonSubmit setHidden:YES];
@@ -600,6 +605,7 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
         }
         else{
             [allAboutPDFGeneration removeSPAJSigned:dictTransaction];
+            [allAboutPDFGeneration removeUnNecesaryPDFFiles:dictTransaction];
             UIAlertController *alertLockForm = [alert alertInformation:@"Berhasil" stringMessage:@"Form berhasil dibuat"];
             [self presentViewController:alertLockForm animated:YES completion:nil];
             [viewActivityIndicator setHidden:YES];

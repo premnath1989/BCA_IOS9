@@ -103,7 +103,7 @@ function buttonPopUpDone(stringPopUpCurrentJavaScriptID, stringParentNameWithout
 	var stringPopUpCurrentJQueryID = stringKres + stringPopUpCurrentJavaScriptID;
 	var booleanState = false;
 	
-	if (arrayValidation.length == 0 || arrayValidation == null)
+	if (arrayValidation == null)
 	{
 		booleanState = true;
 	}
@@ -135,9 +135,10 @@ function buttonPopUpDone(stringPopUpCurrentJavaScriptID, stringParentNameWithout
 		getInputFrom(stringPopUpCurrentJavaScriptID, arrayContent, stringParentNameWithoutPrefix);
 		$(stringPopUpCurrentJQueryID).css("display", "none");
 		$(stringButtonPreviewJQueryID).css("display", "block");
-		previewArrayObject(arrayContent);
 		setRadioButtonGeneral(stringRadioButtonName, "true");
 		arrayAdd(arrayContent, stringRadioButtonName, getRadioButtonGeneral(stringRadioButtonName));
+		
+		resetInputFrom(stringPopUpCurrentJavaScriptID);
 	}
 	else
 	{
@@ -150,6 +151,7 @@ function buttonPopUpCancel(stringPopUpCurrentJavaScriptID)
 	var stringPopUpCurrentJQueryID = stringKres + stringPopUpCurrentJavaScriptID;
 	
 	$(stringPopUpCurrentJQueryID).css("display", "none");
+	resetInputFrom(stringPopUpCurrentJavaScriptID);
 }
 
 function buttonSubPopUpDone(stringPopUpCurrentJavaScriptID, stringPopUpParentJavaScriptID, stringParentNameWithoutPrefix, arrayContent)
@@ -162,7 +164,7 @@ function buttonSubPopUpDone(stringPopUpCurrentJavaScriptID, stringPopUpParentJav
 	{
 		$(stringPopUpCurrentJQueryID).css("display", "none");
 		$(stringPopUpParentJQueryID).css("display", "block");
-		previewArrayObject(arrayContent);
+		resetInputFrom(stringPopUpCurrentJavaScriptID);
 	}
 	else
 	{
@@ -177,13 +179,14 @@ function buttonSubPopUpCancel(stringPopUpCurrentJavaScriptID, stringPopUpParentJ
 	
 	$(stringPopUpCurrentJQueryID).css("display", "none");
 	$(stringPopUpParentJQueryID).css("display", "block");
+	resetInputFrom(stringPopUpCurrentJavaScriptID);
 }
 
 function buttonPreviewForMultiPopUp(stringParentNameWithoutPrefix, arrayContent, arrayValidation)
 {
 	var booleanState = false;
 	
-	if (arrayValidation.length == 0 || arrayValidation == null)
+	if (arrayValidation == null)
 	{
 		booleanState = true;
 	}
@@ -221,6 +224,51 @@ function buttonPreviewForMultiPopUp(stringParentNameWithoutPrefix, arrayContent,
 
 
 // FOR POP UP
+
+function resetInputFrom(stringLayoutJavaScriptID)
+{
+	var stringLayoutJQueryID = stringKres + stringLayoutJavaScriptID;
+	
+	$(stringLayoutJQueryID + " input[type='text']").each(function()
+	{
+		$(this).val("");
+	});
+	
+	$(stringLayoutJQueryID + " input[type='date']").each(function()
+	{
+		$(this).val("");
+	});
+	
+	$(stringLayoutJQueryID + " input[type='number']").each(function()
+	{
+		$(this).val("");
+	});
+	
+	$(stringLayoutJQueryID + " input[type='email']").each(function()
+	{
+		$(this).val("");
+	});
+	
+	$(stringLayoutJQueryID + " input[type='radio']").each(function()
+	{
+		setRadioButtonGeneral($(this).attr("name"), null);
+	});
+	
+	$(stringLayoutJQueryID + " input[type='checkbox']").each(function()
+	{
+		setCheckboxGeneral($(this).attr("id"), stringStateNotChecked);
+	});
+	
+	$(stringLayoutJQueryID + " select").each(function()
+	{
+		$(this).val("");
+	});
+	
+	$(stringLayoutJQueryID + " textarea").each(function()
+	{
+		$(this).val("");
+	});
+}
 
 function getInputFrom(stringLayoutJavaScriptID, arrayContent, stringInputInfix)
 {
@@ -379,7 +427,6 @@ function getInputFrom(stringLayoutJavaScriptID, arrayContent, stringInputInfix)
 			}
 			else
 			{
-				// alert(stringKey + " " + stringValue);
 				arrayValidatePush(arrayInputTemporary, stringKey, stringValue);
 			}
 		});
@@ -518,10 +565,6 @@ function getInputFrom(stringLayoutJavaScriptID, arrayContent, stringInputInfix)
 			var stringKey = stringPrefixArea + stringInputInfix + stringInputIDWithoutPrefix;
 			var stringValue = getAreaForm(stringSpecificInputJavaScriptID);
 
-			
-			alert(stringLayoutJQueryID + " - " + stringKey + " - " + stringValue);
-			
-			
 			if (stringInputRequired == stringStateRequired)
 			{
 				if (validateTextGeneral(stringSpecificInputJQueryID) == false)
@@ -564,6 +607,8 @@ function setInputFrom(stringLayoutJavaScriptID, arrayContent, stringInputInfix)
 	var stringKeyWithoutPrefix;
 	var stringKeyWithoutInfix;
 	var stringLayoutJQueryID = stringKres + stringLayoutJavaScriptID;
+	var stringPopUpSuffix = stringLayoutJavaScriptID.substring("PopUp".length, stringLayoutJavaScriptID.length);
+	var stringSectionInfix;
 	
 	for (var i = 0; i < arrayContent.length; i++)
 	{
@@ -592,7 +637,6 @@ function setInputFrom(stringLayoutJavaScriptID, arrayContent, stringInputInfix)
 		else if (stringKeyPrefix == stringPrefixArea)
 		{
 			setAreaForm(stringLayoutJavaScriptID + " " + stringKres + stringPrefixArea + stringKeyWithoutInfix, stringValue);
-			// alert(stringKeyWithoutInfix + " " + stringKeyWithoutPrefix);
 		}
 		else if (stringKeyPrefix == stringPrefixNumber)
 		{
@@ -611,17 +655,23 @@ function setInputFrom(stringLayoutJavaScriptID, arrayContent, stringInputInfix)
 			
 		}
 		
-		var stringPopUpSuffix = stringLayoutJavaScriptID.substring("PopUp".length, stringLayoutJavaScriptID.length);
-		var stringSectionInfix = getInfixSection(stringKeyWithoutPrefix);
+		stringSectionInfix = getInfixSection(stringKeyWithoutPrefix);
 	}
+	
+	
+	// QUICK FIX FOR MULTI POP UP.
 	
 	var stringAmandmentDetailKey = stringPrefixArea + stringSectionInfix + stringPopUpSuffix + "AmandmentDetail";
 	var stringAmandmentDetail = arrayFind(arrayContent, stringAmandmentDetailKey);
-	alert(stringAmandmentDetailKey + " " + stringAmandmentDetail);
-	$(stringKres + stringLayoutJavaScriptID + " " + stringKres + stringPrefixArea + "AmandmentDetail").val(stringAmandmentDetail);
-	// alert(stringLayoutJavaScriptID + " " + stringKres + stringPrefixArea + stringKeyWithoutInfix + " - " + stringAmandmentDetail);
 	
-	// $(stringKres + stringLayoutJavaScriptID + " " + stringKres + stringPrefixArea + "AmandmentDetail").val("Test");
+	if (stringAmandmentDetail == null)
+	{
+		$(stringKres + stringLayoutJavaScriptID + " " + stringKres + stringPrefixArea + "AmandmentDetail").val("");
+	}
+	else
+	{
+		$(stringKres + stringLayoutJavaScriptID + " " + stringKres + stringPrefixArea + "AmandmentDetail").val(stringAmandmentDetail);
+	}
 }
 
 function getInfixSection(stringContent)
@@ -817,8 +867,8 @@ function getFromDatabaseForAmandment(arrayContent, stringPageInfix, stringLayout
 	var arrayPrefixFilter = [stringPrefixText, stringPrefixArea];
 	var stringInfixFilter;
 	var stringSuffixFilter = stringAmandmentSuffix + stringDetailSuffix;
-	var arrayGeneralForm = ["SmokeActivity", "Junkie", "Abroad", "Respiratory", "Cardiac", "Digest", "Nerve", "Liver", "Motion", "Gland", "Claim", "Diagnostic", "PregnancyIllness", "FemaleAbnormality", "PapSmear", "HeartDissorder"];
-	var arrayGeneralFormInIndonesia = ["Merokok", "Narkoba dan adiktif", "Bepergian keluar", "Pernapasan", "Jantung", "Pencernaan", "Saraf", "Hati", "Gerak", "Kelenjar", "Klaim SPAJ", "Pemeriksaan", "Sakit Kehamilan", "Kelainan Wanita", "Pap Smear", "Kelainan Jantung"];
+	var arrayGeneralForm = ["SmokeActivity", "Junkie", "Activity", "Abroad", "Respiratory", "Cardiac", "Digest", "Nerve", "Liver", "Motion", "Gland", "Cell", "Claim", "Diagnostic", "PregnancyIllness", "FemaleAbnormality", "PapSmear", "HeartDissorder"];
+	var arrayGeneralFormInIndonesia = ["Merokok", "Narkoba dan adiktif", "Aktifitas", "Bepergian keluar", "Pernapasan", "Jantung", "Pencernaan", "Saraf", "Hati", "Gerak", "Sel", "Kelenjar", "Klaim SPAJ", "Pemeriksaan", "Sakit Kehamilan", "Kelainan Wanita", "Pap Smear", "Kelainan Jantung"];
 	var stringKey;
 	var stringQuestionPrefix = "Jawaban tambahan kuesioner ";
 	var intQuestionNumber = 0;
@@ -871,15 +921,31 @@ function getFromDatabaseForHealthQuestionnaire(objectContent, stringPageType)
         {			
 			if (stringPageType == stringPageTypePDF)
 			{
-				var intMaxString = 26;
+				var stringKeyJQueryID = stringKres + stringKey;
 				
-				if (stringValue.length > intMaxString)
+				if ($(stringKeyJQueryID).is("table") == true)
 				{
-					var stringValue1 = stringValue.substring(0, intMaxString);
-					var stringValue2 = stringValue.substring(0, intMaxString);
+					var intMaxString = $(stringKeyJQueryID + " tbody tr td").length;
+				
+					if (stringValue.length > intMaxString)
+					{
+						if ($(stringKeyJQueryID + "2nd").length > 0)
+						{
+							var stringValue1 = stringValue.substring(0, intMaxString);
+							var stringValue2 = stringValue.substring(intMaxString, stringValue.length);
 
-					setTextPDF(stringKey, stringValue1);
-					setTextPDF(stringKey + "2nd", stringValue2);
+							setTextPDF(stringKey, stringValue1);
+							setTextPDF(stringKey + "2nd", stringValue2);
+						}
+						else
+						{
+							setTextPDF(stringKey, stringValue);
+						}
+					}
+					else
+					{
+						setTextPDF(stringKey, stringValue);
+					}
 				}
 				else
 				{
@@ -940,15 +1006,15 @@ function getFromDatabaseForHealthQuestionnaire(objectContent, stringPageType)
 			}
         }
         else if (stringKey.substring(0, stringPrefixRadioButton.length) == stringPrefixRadioButton)
-        {			
+        {
             setRadioButtonGeneral(stringKey, stringValue);
         }
         else if (stringKey.substring(0, stringPrefixCheckbox.length) == stringPrefixCheckbox)
-        {			
+        {
             setCheckboxGeneral(stringKey, stringValue);
         }
         else if (stringKey.substring(0, stringPrefixSelect.length) == stringPrefixSelect)
-        {			
+        {
             if (stringPageType == stringPageTypePDF)
             {
                 setSelectPDF(stringKey, stringValue);
@@ -959,9 +1025,9 @@ function getFromDatabaseForHealthQuestionnaire(objectContent, stringPageType)
             }
         }
         else if (stringKey.substring(0, stringPrefixDate.length) == stringPrefixDate)
-        {						
+        {
             if (stringPageType == stringPageTypePDF)
-            {				
+            {
                 setDatePDFForHealthQuestionnaire(stringKey, stringValue);
             }
             else
@@ -970,7 +1036,7 @@ function getFromDatabaseForHealthQuestionnaire(objectContent, stringPageType)
             }
         }
         else if (stringKey.substring(0, stringAreaPrefix.length) == stringAreaPrefix)
-        {			
+        {
             if (stringPageType == stringPageTypePDF)
             {
                 setAreaPDF(stringKey, stringValue);
@@ -981,7 +1047,7 @@ function getFromDatabaseForHealthQuestionnaire(objectContent, stringPageType)
             }
         }
 		else if (stringKey.substring(0, stringNumberPrefix.length) == stringNumberPrefix)
-        {	
+        {
             if (stringPageType == stringPageTypePDF)
             {
                 setNumberPDF(stringKey, stringValue);

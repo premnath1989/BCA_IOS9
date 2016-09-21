@@ -52,7 +52,7 @@ var stringBodyPrefix = "Body";
 var stringRowPrefix = "Row";
 var stringCellPrefix = "Cell";
 var stringNumberPrefix = "Number";
-var arrayHealthTableHeader = ["DiseaseName", "SickFrom", "SickDuration", "DoctorName", "Hospital", "Address", "Telephone"];
+var arrayHealthTableHeader = ["DiseaseName", "DiseaseSickFrom", "DiseaseSickDuration", "DiseaseDoctorName", "DiseaseHospital", "DiseaseAddress", "DiseaseTelephone"];
 var arraySPAJProposalTableHeader = ["CompanyName", "PolicyNumber", "Published", "BasicSumAssured", "Decision"];
 var stringAreaPrefix = "Area";
 var stringProspectiveInsuredPrefix = "ProspectiveInsured";
@@ -91,6 +91,11 @@ var stringPrefixArea = "Area";
 var stringPageTypeHealthQuestionnairePDF = "HealthQuestionnairePDF";
 var stringAmandmentSuffix = "Amandment";
 var stringPageTypeAmandment = "Amandment";
+var stringStateNotChecked = "Not Checked";
+var stringStateNotSelected = "Not Selected";
+var stringNationality;
+var arrayRelationshipWithProspectiveInsured = [];
+var arrayNationality = [];
 
 
 // GENERATOR
@@ -869,6 +874,26 @@ function arrayFind(arrayObject, stringKey)
     return stringValue;
 }
 
+function arrayOptionFind(arrayObject, stringKey)
+{
+    var stringValue = null;
+    
+    for (var i = 0; i < arrayObject.length; i++)
+    {
+        if (arrayObject[i].value === stringKey) 
+        {
+            stringValue = arrayObject[i].text;
+            break;
+        }
+        else
+        {
+            
+        }
+    }
+    
+    return stringValue;
+}
+
 function arrayTransfer(arrayTemporary, arrayContent)
 {
 	for (var i = 0; i < arrayTemporary.length; i++)
@@ -1579,7 +1604,7 @@ function buttonPopUpSPAJProposalGenerator()
 			});
 
 			tableSPAJProposalGenerator(stringTriggerInfix, "SPAJProposalList", arrayHealthQuestionnaire);
-			previewArrayObject(arrayHealthQuestionnaire);
+			// previewArrayObject(arrayHealthQuestionnaire);
 		}
     });
 }
@@ -1588,8 +1613,14 @@ function tableBeneficiariesListGenerator(stringTableJavaScriptID, arrayContent)
 {
 	var stringTableJQueryID = stringKres + stringTableJavaScriptID;
 	var stringContentName;
-	var stringInputIDSuffix = "FullName";
-	var stringKey = stringPrefixText + stringBeneficiariesListInfix + stringInputIDSuffix;
+	var stringContentBirthday;
+	var stringContentRelation;
+	var stringNameIDSuffix = "FullName";
+	var stringBirthdayIDSuffix = "Birthday";
+	var stringRelationshipIDSuffix = "Relationship";
+	var stringKeyName = stringPrefixText + stringBeneficiariesListInfix + stringNameIDSuffix;
+	var stringKeyBirthday = stringPrefixDate + stringBeneficiariesListInfix + stringBirthdayIDSuffix;
+	var stringKeyRelationship = stringPrefixSelect + stringBeneficiariesListInfix + stringRelationshipIDSuffix;
 	var stringKeyID;
 	var stringFlag = 0;
 	
@@ -1597,9 +1628,14 @@ function tableBeneficiariesListGenerator(stringTableJavaScriptID, arrayContent)
 	
 	for (var i = 0; i < arrayContent.length; i++)
 	{
-		stringKeyID = arrayContent[i].elementID.substring(stringKey.length, arrayContent[i].elementID.length);
-		stringKey = stringPrefixText + stringBeneficiariesListInfix + stringInputIDSuffix + stringKeyID;
-		stringContentName = arrayFind(arrayContent, stringKey);
+		stringKeyID = arrayContent[i].elementID.substring(stringKeyName.length, arrayContent[i].elementID.length);
+		stringKeyName = stringPrefixText + stringBeneficiariesListInfix + stringNameIDSuffix + stringKeyID;
+		stringKeyBirthday = stringPrefixDate + stringBeneficiariesListInfix + stringBirthdayIDSuffix + stringKeyID;
+		stringKeyRelationship = stringPrefixSelect + stringBeneficiariesListInfix + stringRelationshipIDSuffix + stringKeyID;
+		stringContentName = arrayFind(arrayContent, stringKeyName);
+		stringContentBirthday = arrayFind(arrayContent, stringKeyBirthday);
+		stringContentRelationship = arrayFind(arrayContent, stringKeyRelationship);
+		stringContentRelationship = arrayOptionFind(arrayRelationshipWithProspectiveInsured, stringContentRelationship);
 
 		if (stringFlag == 0 || stringFlag != stringKeyID)
 		{
@@ -1613,8 +1649,10 @@ function tableBeneficiariesListGenerator(stringTableJavaScriptID, arrayContent)
 				(
 					"<tr>" + 
 						"<td>" + stringContentName + "</td>" + 
-						"<td><input type='button' id='" + stringButtonViewPrefix + stringKeyID + "' class='ButtonPrimary ButtonView' value='View" + stringKeyID + "' name='" + stringKeyID + "' onclick='buttonViewBeneficiariesList(this.id, this.name)'/></td>" + 
-						"<td><input type='button' id='" + stringButtonDeletePrefix + stringKeyID + "' class='ButtonPrimary ButtonDelete' value='Delete" + stringKeyID + "' name='" + stringKeyID + "' onclick='buttonDeleteBeneficiariesList(this.id, this.name)'/></td>" + 
+						"<td>" + stringContentBirthday + "</td>" + 
+						"<td>" + stringContentRelationship + "</td>" + 
+						"<td><input type='button' id='" + stringButtonViewPrefix + stringKeyID + "' class='ButtonPrimary ButtonView' value='View' name='" + stringKeyID + "' onclick='buttonViewBeneficiariesList(this.id, this.name)'/></td>" + 
+						"<td><input type='button' id='" + stringButtonDeletePrefix + stringKeyID + "' class='ButtonPrimary ButtonDelete' value='Delete' name='" + stringKeyID + "' onclick='buttonDeleteBeneficiariesList(this.id, this.name)'/></td>" + 
 					"</tr>"
 				);
 				
@@ -1625,6 +1663,43 @@ function tableBeneficiariesListGenerator(stringTableJavaScriptID, arrayContent)
 		{
 			
 		}
+	}
+}
+
+
+
+function initiateArrayRelationshipWithProspectiveInsured(objectContent)
+{
+	objectContent.push({ value: stringStateNotSelected, text: "Please Select" });
+	objectContent.push({ value: "self", text: "Diri Sendiri" });
+	objectContent.push({ value: "parent", text: "Orang Tua" });
+	objectContent.push({ value: "child", text: "Anak" });
+	objectContent.push({ value: "spouse", text: "Pasangan" });
+	objectContent.push({ value: "brother", text: "Saudara Laki-Laki" });
+	objectContent.push({ value: "sister", text: "Saudara Perempuan" });
+	objectContent.push({ value: "grandparent", text: "Kakek / Nenek" });
+	objectContent.push({ value: "grandchildren", text: "Cucu" });
+	objectContent.push({ value: "aunt", text: "Bibi" });
+	objectContent.push({ value: "uncle", text: "Paman" });
+	objectContent.push({ value: "nephew", text: "Keponakan Laki-Laki" });
+	objectContent.push({ value: "niece", text: "Keponakan Perempuan" });
+	objectContent.push({ value: "employee", text: "Pekerja" });
+	objectContent.push({ value: "employer", text: "Pemberi Kerja" });
+	objectContent.push({ value: "other", text: "Lainnya" });
+	objectContent.push({ value: "heir", text: "Ahli Waris" });
+	objectContent.push({ value: "guardian", text: "Wali" });
+	objectContent.push({ value: "creditordebitor", text: "Kreditor / Debitor" });
+	objectContent.push({ value: "charity", text: "Amal" });
+	objectContent.push({ value: "heirlaw", text: "Ahli Waris Hukum" });
+}
+
+function generateSelectOption(stringSelectJavaScriptID, arrayOption)
+{
+	var stringSelectJQueryID = stringKres + stringSelectJavaScriptID;
+	
+	for (var i = 0; i < arrayOption.length; i++)
+	{
+		$(stringSelectJQueryID).append("<option value='" + arrayOption[i].value + "'>" + arrayOption[i].text + "</option>");
 	}
 }
 
@@ -1657,7 +1732,7 @@ function tableSPAJProposalGenerator(stringTriggerKey, stringContainerJavaScriptI
 				$(stringContainerJQueryID).append
 				(
 					"<div style='display: block; margin-bottom: -15px;'>" + 
-					"<input type='button' id='" + stringPrefixText + stringTriggerKey + "' class='ButtonView PositionerLeft' value='View " + arrayContent[i].Value + "' name='" + stringKeyID + "' onclick='buttonViewSPAJProposal(this.id, this.name)'/>" + 
+					"<input type='button' id='" + stringPrefixText + stringTriggerKey + "' class='ButtonView PositionerLeft' style='min-width: 200px; text-align: left;' value='View " + arrayContent[i].Value + "' name='" + stringKeyID + "' onclick='buttonViewSPAJProposal(this.id, this.name)'/>" + 
 					"<input type='button' id='" + stringPrefixText + stringTriggerKey + "' class='ButtonDelete PositionerLeft' value='Delete' name='" + stringKeyID + "' onclick='buttonDeleteSPAJProposal(this.id, this.name)'/><br/>" + 
 					"</div><br>"
 				);
@@ -1833,9 +1908,6 @@ function setBoxGeneral(stringID, stringValue)
     
     for (var i = 0; i < stringValue.length; i++)
     {
-		/* if ($(stringJQueryID).is(".chest-pain")) {
-    		alert(stringJQueryID + stringValue);
-		} */
         $(stringJQueryID + " tbody tr " + stringJQueryID + i).append(stringValue[i]);
     }
 }
@@ -1903,7 +1975,7 @@ function setCheckboxGeneral(stringCheckboxJavaScriptID, stringValue)
 {
 	var stringCheckboxJQueryID = stringKres + stringCheckboxJavaScriptID;
 	
-	if (stringValue == null)
+	if (stringValue == stringStateNotChecked)
 	{
 		$(stringCheckboxJQueryID).prop("checked", false);
 	}
@@ -2001,27 +2073,67 @@ function setAreaForm(stringID, stringValue)
 
 function setAreaPDF(stringID, stringValue)
 {
-    setBoxGeneral(stringID, stringValue);
+	var stringJQueryID = stringKres + stringID;
+        
+	if ($(stringJQueryID).is("div") == true)
+	{
+		setLineGeneral(stringID, stringValue);
+	}
+	else if ($(stringJQueryID).is("input[type='text']") == true)
+	{
+		setTextGeneral(stringID, stringValue);
+	}
+	else if ($(stringJQueryID).is("textarea") == true)
+	{
+		setTextGeneral(stringID, stringValue);
+	}
+	else
+	{
+		setBoxGeneral(stringID, stringValue);
+	}
 }
 
 function setNumberForm(stringID, stringValue)
 {
-    return setTextGeneral(stringID, stringValue);
+    setTextGeneral(stringID, stringValue);
 }
 
 function setNumberPDF(stringID, stringValue)
 {
-    return setTextGeneral(stringID, stringValue);
+//	alert("PDF " + stringID + " " + stringValue);
+//	if ($(stringJQueryID).is("div") == true)
+//	{
+//		setLineGeneral(stringID, stringValue);
+//	}
+//	else if ($(stringJQueryID).is("td") == true)
+//	{
+//		setTextGeneral(stringID, stringValue);
+//	}
+//	else if ($(stringJQueryID).is("input[type='text']") == true)
+//	{
+//		setTextGeneral(stringID, stringValue);
+//	}
+//	else if ($(stringJQueryID).is("input[type='number']") == true)
+//	{
+//		alert(stringID + " " + stringValue);
+//		setTextGeneral(stringID, stringValue);
+//	}
+//	else
+//	{
+//		setBoxGeneral(stringID, stringValue);
+//	}
+	
+	setTextGeneral(stringID, stringValue);
 }
 
 function setEmailForm(stringID, stringValue)
 {
-    return setTextGeneral(stringID), stringValue;
+    setTextGeneral(stringID, stringValue);
 }
 
 function getEmailPDF(stringID, stringValue)
 {
-    return setBoxGeneral(stringID, stringValue);
+    setBoxGeneral(stringID, stringValue);
 }
 
 
@@ -2095,7 +2207,7 @@ function getCheckboxGeneral(stringID)
 	}
     else
     {
-        stringCheckboxValue = null;
+        stringCheckboxValue = stringStateNotChecked;
     }
     
     return stringCheckboxValue;
@@ -2213,7 +2325,6 @@ function getFromDatabase(objectContent, stringPageType)
         var stringKey = objectContent[i].elementID;
         var stringValue = objectContent[i].Value;               
         
-		
 		// GENERAL INPUT TYPE
 		
         if (stringKey.substring(0, stringPrefixText.length) == stringPrefixText)
@@ -2657,6 +2768,17 @@ function getFromDatabase(objectContent, stringPageType)
                 setAreaForm(stringKey, stringValue);
             }
         }
+		else if (stringKey.substring(0, stringNumberPrefix.length) == stringNumberPrefix)
+        {            
+            if (stringPageType == stringPageTypePDF)
+            {
+                setNumberPDF(stringKey, stringValue);
+            }
+            else
+            {
+                setNumberForm(stringKey, stringValue);
+            }
+        }
         else
         {
             
@@ -2710,6 +2832,8 @@ function getFromDatabase(objectContent, stringPageType)
 		{
 			arrayHealthQuestionnaire = objectContent;
 			
+			buttonPreviewForMultiPopUp(stringPageInfixTypeCurrent + 'Activity', arrayHealthQuestionnaire, ['Area' + stringPageInfixTypeCurrent + 'Activity' + 'AmandmentDetail']);
+			buttonPreviewForMultiPopUp(stringPageInfixTypeCurrent + 'SmokeActivity', arrayHealthQuestionnaire, ['Number' + stringPageInfixTypeCurrent + 'SmokeActivity' + 'Amount']);
 			buttonPreviewForMultiPopUp(stringPageInfixTypeCurrent + 'Cell', arrayHealthQuestionnaire, ['Date' + stringPageInfixTypeCurrent + 'Tumor' + 'FirstDiagnose']);
 			buttonPreviewForMultiPopUp(stringPageInfixTypeCurrent + 'Cardiac', arrayHealthQuestionnaire, ['Date' + stringPageInfixTypeCurrent + 'ChestPain' + 'FirstAttack', 'Date' + stringPageInfixTypeCurrent + 'Hypertension' + 'FirstTime']);
 			buttonPreviewForMultiPopUp(stringPageInfixTypeCurrent + 'Digest', arrayHealthQuestionnaire, ['RadioButton' + stringPageInfixTypeCurrent + 'DigestDetail' + 'Problem']);
@@ -2819,9 +2943,9 @@ function setToDatabase(stringPageType)
     {
 		var stringKey = $(this).attr("id");
         var stringValue = getCheckboxGeneral(stringKey);
-        validatePush(objectContent, stringKey, stringValue);
+        // validatePush(objectContent, stringKey, stringValue);
 		// objectContent.push({ elementID: stringKey, Value: stringValue });
-		// arrayAdd(objectContent, stringKey, stringValue);
+		arrayAdd(objectContent, stringKey, stringValue);
     });
     
     $("input[type=date]").each(function()
@@ -3066,5 +3190,23 @@ function telephoneStripGenerator(stringInputJavaScriptID)
 		{
 
 		}
+	});
+}
+
+function inputListener()
+{
+	$("input").change(function()
+	{
+		booleanInputChangeState = true;
+	});
+	
+	$("textarea").change(function()
+	{
+		booleanInputChangeState = true;
+	});
+	
+	$("select").change(function()
+	{
+		booleanInputChangeState = true;
 	});
 }

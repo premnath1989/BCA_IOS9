@@ -17,10 +17,12 @@
 #import "Formatter.h"
 #import "ModelOccupation.h"
 #import "Model_SI_Premium.h"
+#import "AllAboutPDFGeneration.h"
 
 @protocol SPAJCalonPemegangPolisDelegate
     -(NSString *)voidGetEAPPNumber;
 -(void)voidSetCalonPemegangPolisBoolValidate:(BOOL)boolValidate StringSection:(NSString *)stringSection;
+-(void)setRightButtonEnable:(BOOL)boolEnabled;
 @end
 
 
@@ -35,6 +37,7 @@
     ModelSIPOData* modelSIPData;
     ModelIdentificationType* modelIdentificationType;
     Model_SI_Premium *modelSIPremium;
+    AllAboutPDFGeneration *allAboutPDFGeneration;
     
     IBOutlet UIView *viewActivityIndicator;
 }

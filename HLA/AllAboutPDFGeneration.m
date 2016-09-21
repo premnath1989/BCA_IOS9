@@ -167,50 +167,51 @@
             NSLog(@"Could not delete file -:%@ ",[error localizedDescription]);
         }
     }
-    // File paths
-    /*NSString *pdfPath1 = [NSString stringWithFormat:@"%@/SPAJ/%@/SPAJSigned.pdf",docsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"]];
-    NSString *pdfPathPage1 = [NSString stringWithFormat:@"%@/SPAJ/%@/SPAJSignedPage1.pdf",docsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"]];
-    NSString *pdfPathPage9 = [NSString stringWithFormat:@"%@/SPAJ/%@/SPAJSigned9.pdf",docsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"]];
-    NSString *pdfPathPage9_1 = [NSString stringWithFormat:@"%@/SPAJ/%@/SPAJSignedPage9.pdf",docsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"]];
+}
+
+-(void)removeUnNecesaryPDFFiles:(NSDictionary *)dictTransaction{
+    formatter = [[Formatter alloc]init];
+    NSString* stringFilePath = [formatter generateSPAJFileDirectory:[dictTransaction valueForKey:@"SPAJEappNumber"]];
     
-    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSArray *directoryContent = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:stringFilePath error:NULL];
+
+    NSString *docsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     
-    NSError *error;
-    BOOL success = [fileManager removeItemAtPath:pdfPath1 error:&error];
-    BOOL successPage1 = [fileManager removeItemAtPath:pdfPathPage1 error:&error];
-    BOOL successPage9 = [fileManager removeItemAtPath:pdfPathPage9 error:&error];
-    BOOL successPage9_1 = [fileManager removeItemAtPath:pdfPathPage9_1 error:&error];
-    if (success) {
+    NSArray *fileNameForDelete = [directoryContent filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"pathExtension IN %@", @"pdf"]];
+    
+    for (int i=0;i<[fileNameForDelete count];i++){
+        NSString *fileName = [fileNameForDelete objectAtIndex:i];
         
-    }
-    else
-    {
-        NSLog(@"Could not delete file -:%@ ",[error localizedDescription]);
-    }
-    
-    if (successPage1) {
+        NSString *filter1 = @"SPAJ.pdf";
+        NSString *filter2 = [NSString stringWithFormat:@"%@.pdf",[dictTransaction valueForKey:@"SPAJSINO"]];
         
+        if (([self doesString:fileName containCharacter:filter1])||([self doesString:fileName containCharacter:filter2])){
+            NSLog(@"'a' found");
+        }
+        else{
+            NSError *error;
+            NSString *pdfPath1 = [NSString stringWithFormat:@"%@/SPAJ/%@/%@",docsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"],[fileNameForDelete objectAtIndex:i]];
+            NSFileManager *fileManager = [NSFileManager defaultManager];
+            BOOL success =[fileManager removeItemAtPath:pdfPath1 error:&error];
+            
+            if (success) {
+                
+            }
+            else
+            {
+                NSLog(@"Could not delete file -:%@ ",[error localizedDescription]);
+            }
+        }
     }
-    else
+}
+
+-(BOOL)doesString:(NSString *)string containCharacter:(NSString *)character
+{
+    if ([string rangeOfString:[NSString stringWithFormat:@"%@",character]].location != NSNotFound)
     {
-        NSLog(@"Could not delete file -:%@ ",[error localizedDescription]);
+        return YES;
     }
-    
-    if (successPage9) {
-        
-    }
-    else
-    {
-        NSLog(@"Could not delete file -:%@ ",[error localizedDescription]);
-    }
-    
-    if (successPage9_1) {
-        
-    }
-    else
-    {
-        NSLog(@"Could not delete file -:%@ ",[error localizedDescription]);
-    }*/
+    return NO;
 }
 
 #pragma mark image signature

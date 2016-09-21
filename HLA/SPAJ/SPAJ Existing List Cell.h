@@ -38,5 +38,7 @@
     // BUTTON
 
     @property (nonatomic, strong) IBOutlet UIButton *buttonView;
+    @property (nonatomic, strong) IBOutlet UIButton *buttonPaymentReceipt;
+    @property (nonatomic, strong) IBOutlet UIButton *buttonAgentForm;
 
 @end

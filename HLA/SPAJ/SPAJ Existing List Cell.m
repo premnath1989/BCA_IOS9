@@ -28,7 +28,8 @@
     @synthesize labelTimeRemaining = _labelTimeRemaining;
     @synthesize buttonView = _buttonView;
     @synthesize intID = _intID;
-
+    @synthesize buttonAgentForm = _buttonAgentForm;
+    @synthesize buttonPaymentReceipt = _buttonPaymentReceipt;
 
     // AWAKE FROM NIB
 

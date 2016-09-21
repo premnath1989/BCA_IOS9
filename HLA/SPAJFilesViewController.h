@@ -15,6 +15,7 @@
 @property (nonatomic,strong) id <SPAJFilesDelegate> delegateSPAJFiles;
 
 @property (strong, nonatomic) NSDictionary* dictTransaction;
+@property (nonatomic,assign) BOOL boolHealthQuestionairre;
 
 @property (nonatomic, strong) IBOutlet UIButton* buttonSubmit;
 @end

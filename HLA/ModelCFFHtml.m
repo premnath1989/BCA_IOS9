@@ -59,7 +59,7 @@
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     [database open];
     
-    BOOL success = [database executeUpdate:[NSString stringWithFormat:@"update %@ set (%@) where %@",tableName,stringSet,stringWhere]];
+    BOOL success = [database executeUpdate:[NSString stringWithFormat:@"update %@ set %@ where %@",tableName,stringSet,stringWhere]];
     
     if (!success) {
         NSLog(@"%s: insert error: %@", __FUNCTION__, [database lastErrorMessage]);
@@ -243,9 +243,9 @@
     [database open];
     
     //FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select * from CFFHtml where CFFHtmlID = %i",CFFHtmlID]];
-    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select %@ from %@ where ",columnName,TableName]];
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select %@ from %@ ",columnName,TableName]];
     while ([s next]) {
-        [arrayServerID addObject:[s stringForColumn:columnName]];
+        [arrayServerID addObject:[s stringForColumn:columnName]?:@""];
     }
     
     [results close];

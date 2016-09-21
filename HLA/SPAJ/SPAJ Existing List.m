@@ -16,6 +16,7 @@
 #import "Alert.h"
 #import "ModelSPAJTransaction.h"
 #import "SPAJFilesViewController.h"
+#import "FormTenagaPenjualViewController.h"
 #import "Formatter.h"
 
 
@@ -34,9 +35,11 @@
 @implementation SPAJExistingList{
     ModelSPAJTransaction* modelSPAJTransaction;
     SPAJFilesViewController* spajFilesViewController;
+    FormTenagaPenjualViewController* formTenagaPenjualViewController;
     Formatter* formatter;
     
     NSMutableArray* arraySPAJTransaction;
+    int indexSelected;
     
     NSString* sortedBy;
     NSString* sortMethod;
@@ -61,6 +64,7 @@
     @synthesize buttonSortSPAJNumber,buttonSortFullName,buttonSortSIVersion,buttonSortLastModified,buttonSortTimeRemaining;
 
     @synthesize buttonEdit,buttonReset,buttonDelete,buttonSearch;
+
 
     // DID LOAD
 
@@ -230,11 +234,64 @@
         [self loadSPAJTransaction];
     }
 
+    - (IBAction)actionAgentForm:(UIButton *)sender{
+        indexSelected = sender.tag;
+        formTenagaPenjualViewController = [[FormTenagaPenjualViewController alloc]initWithNibName:@"FormTenagaPenjualViewController" bundle:nil];
+        //[spajFilesViewController setDelegateSPAJFiles:self];
+        [formTenagaPenjualViewController setDictTransaction:[arraySPAJTransaction objectAtIndex:sender.tag]];
+        formTenagaPenjualViewController.modalPresentationStyle = UIModalPresentationFormSheet;
+        [self presentViewController:formTenagaPenjualViewController animated:YES completion:nil];
+    }
+
+    - (IBAction)actionPaymentReceiptCapture:(UIButton *)sender{
+        indexSelected = sender.tag;
+        UIImagePickerControllerSourceType source = UIImagePickerControllerSourceTypeCamera;
+        if ([UIImagePickerController isSourceTypeAvailable:source])
+        {
+            imagePickerController= [[CameraViewController alloc] init];
+            imagePickerController.sourceType = source;
+            
+            CGRect rect = imagePickerController.view.frame;
+            imagePickerRect = rect;
+            CGSize frameSize = CGSizeMake(800,562.5);
+            
+            CGRect frameRect = CGRectMake((rect.size.width-frameSize.width)/2, (rect.size.height-frameSize.height)/2, frameSize.width, frameSize.height);
+            
+            UIView *view = [[UIView alloc]initWithFrame:frameRect];
+            [view setBackgroundColor:[UIColor clearColor]];
+            
+            view.layer.borderWidth = 5.0;
+            view.layer.borderColor = [UIColor redColor].CGColor;
+            UILabel *lbl = [[UILabel alloc]initWithFrame:CGRectMake(10, -80, 300, 200)];
+            lbl.backgroundColor = [UIColor clearColor];
+            lbl.text = @"Please snap within the red frame";
+            [view addSubview:lbl];
+            
+            imagePickerController.cameraOverlayView = view;
+            
+            imagePickerController.delegate = self;
+            imagePickerController.modalPresentationStyle = UIModalPresentationCustom;
+            [self presentViewController:imagePickerController animated:YES completion:nil];
+        }
+        else
+        {
+            
+            UIAlertController* alertController = [UIAlertController alertControllerWithTitle:@"" message:@"Your device has no camera!!" preferredStyle:UIAlertControllerStyleAlert];
+            
+            [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                
+            }]];
+            dispatch_async(dispatch_get_main_queue(), ^ {
+                [self presentViewController:alertController animated:YES completion:nil];
+            });
+        }
+    }
 
     - (IBAction)actionShowFilesList:(UIButton *)sender{
         spajFilesViewController = [[SPAJFilesViewController alloc]initWithNibName:@"SPAJFilesViewController" bundle:nil];
         [spajFilesViewController setDelegateSPAJFiles:self];
         [spajFilesViewController setDictTransaction:[arraySPAJTransaction objectAtIndex:sender.tag]];
+        [spajFilesViewController setBoolHealthQuestionairre:NO];
         spajFilesViewController.modalPresentationStyle = UIModalPresentationOverFullScreen;
         //spajPDFWebView.preferredContentSize = CGSizeMake(950, 768);
         [self presentViewController:spajFilesViewController animated:YES completion:nil];
@@ -370,7 +427,16 @@
             
             [cellSPAJExisting.buttonView addTarget:self
                        action:@selector(actionShowFilesList:) forControlEvents:UIControlEventTouchUpInside];
+            
+            [cellSPAJExisting.buttonPaymentReceipt addTarget:self
+                                            action:@selector(actionPaymentReceiptCapture:) forControlEvents:UIControlEventTouchUpInside];
+            
+            [cellSPAJExisting.buttonAgentForm addTarget:self
+                                                      action:@selector(actionAgentForm:) forControlEvents:UIControlEventTouchUpInside];
+            
             [cellSPAJExisting.buttonView setTag:indexPath.row];
+            [cellSPAJExisting.buttonPaymentReceipt setTag:indexPath.row];
+            [cellSPAJExisting.buttonAgentForm setTag:indexPath.row];
         }
         return cellSPAJExisting;
     }
@@ -410,7 +476,64 @@
         }
     }
 
+    #pragma mark crop function
+    - (UIImage *)crop:(UIImage *)image {
+        
+        CGRect originalrect = imagePickerRect;
+        CGSize frameSize = CGSizeMake(800,562.50);
+        
+        float CalX=(originalrect.size.width-frameSize.width)/2;
+        float CalY=(originalrect.size.height-frameSize.height)/2;
+        
+        CGRect frameRect = CGRectMake(CalX-55, CalY-55, frameSize.width, frameSize.height);
+        
+        CGImageRef imageRef = CGImageCreateWithImageInRect([self imageWithImage:image scaledToSize:CGSizeMake(512,360)].CGImage, frameRect);
+        UIImage *result = [UIImage imageWithCGImage:imageRef scale:1 orientation:UIImageOrientationUp];
+        UIImage *lowResImage = [UIImage imageWithData:UIImageJPEGRepresentation(result, 0.7)];
+        CGImageRelease(imageRef);
+        return lowResImage;
+    }
 
+    -(UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize
+    {
+        UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+        [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+        UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        return newImage;
+        
+    }
+
+    #pragma mark delegate image picker
+    - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+    {
+        UIImage *originalimage = [info objectForKey:UIImagePickerControllerOriginalImage];
+        UIImage *image = [self crop:originalimage];
+        [self copyIDImagesToSPAJFolder:image];
+        [picker dismissViewControllerAnimated:YES completion:nil];
+    }
+
+    #pragma mark copy images to spaj folder
+    -(void)copyIDImagesToSPAJFolder:(UIImage *)imageCaptured{
+        NSError *error =  nil;
+        NSDictionary* dictTransaction = [arraySPAJTransaction objectAtIndex:indexSelected];
+        
+        NSString* docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        NSString* rootFilePathApp = [docsDir stringByAppendingPathComponent:@"SPAJ"];
+        NSString* stringEAPPPath = [dictTransaction valueForKey:@"SPAJEappNumber"];
+        NSString* stringSPAJPath = [dictTransaction valueForKey:@"SPAJNumber"];
+        NSString* filePathApp = [rootFilePathApp stringByAppendingPathComponent:stringEAPPPath];
+        
+        //filename combination is EAPPNumberPartyIDTypeFront
+        //filename combination is EAPPNumberPartyIDTypeBack
+        NSString* fileName = [NSString stringWithFormat:@"%@_BuktiSetor",stringSPAJPath];
+        
+        //NSData *imageData = UIImageJPEGRepresentation([self generateWatermarkForImage:imageView.image], 0.8);
+        NSData *imageData = UIImageJPEGRepresentation(imageCaptured, 0.8);
+        
+        NSString* target=[NSString stringWithFormat:@"%@/%@.jpg",filePathApp,fileName];
+        [imageData writeToFile:target options:NSDataWritingAtomic error:&error];
+    }
     // DID RECEIVE MEMOY WARNING
 
     - (void)didReceiveMemoryWarning

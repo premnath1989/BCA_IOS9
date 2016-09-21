@@ -168,9 +168,9 @@
                 NSString* stringFileName=[NSString stringWithFormat:@"\"%@/\%@\"",[item objectForKey:[jsonKey objectAtIndex:4]],[item objectForKey:[jsonKey objectAtIndex:1]]];
                 NSString* stringStatus=[NSString stringWithFormat:@"\"%@\"",[item objectForKey:[jsonKey objectAtIndex:2]]];
                 NSString* stringSection=[NSString stringWithFormat:@"\"%@\"",[item objectForKey:[jsonKey objectAtIndex:3]]];
+                NSString* stringServerID=[NSString stringWithFormat:@"\"%@\"",[item objectForKey:[jsonKey objectAtIndex:5]]];
                 
-                NSMutableArray* tableValue = [[NSMutableArray alloc]initWithObjects:stringID,stringFileName,stringStatus,stringSection, nil];
-                NSMutableArray* tableColumn = [[NSMutableArray alloc] initWithArray:[tableDictionary valueForKey:@"columnName"]];
+                NSString* numberServerID = [NSString stringWithFormat:@"%@",[item objectForKey:[jsonKey objectAtIndex:5]]];
                 
                 NSString* stringDuplicateCheckerColumnName = [dictDuplicate valueForKey:@"DuplicateCheckerColumnName"];
                 NSString* stringDuplicateCheckerTableName = [dictDuplicate valueForKey:@"DuplicateCheckerTableName"];
@@ -178,27 +178,43 @@
                 NSString* stringDuplicateCheckerWhere2 = [dictDuplicate valueForKey:@"DuplicateCheckerWhere2"];
                 NSString* stringDuplicateCheckerWhere3 = [dictDuplicate valueForKey:@"DuplicateCheckerWhere3"];
                 NSString* stringDuplicateCheckerWhere4 = [dictDuplicate valueForKey:@"DuplicateCheckerWhere4"];
+                NSString* stringDuplicateCheckerWhere5 = [dictDuplicate valueForKey:@"DuplicateCheckerWhere5"];
                 
-                //check duplicate value
-                //NSString* query=[NSString stringWithFormat:@"select CFFHtmlID from CFFHtml where CFFID=%@ and CFFHtmlName=%@ and CFFHtmlStatus=%@ and CFFHtmlSection=%@",stringID,stringFileName,stringStatus,stringSection];
-                NSString* query=[NSString stringWithFormat:@"select count(%@) as Count,%@ from %@ where %@=%@ and %@=%@ and %@=%@ and %@=%@",stringDuplicateCheckerColumnName,stringDuplicateCheckerColumnName,stringDuplicateCheckerTableName,stringDuplicateCheckerWhere1,stringID,stringDuplicateCheckerWhere2,stringFileName,stringDuplicateCheckerWhere3,stringStatus,stringDuplicateCheckerWhere4,stringSection];
-                //NSString* columnReturn = @"CFFHtmlID";
+                NSMutableArray* tableValue = [[NSMutableArray alloc]initWithObjects:stringID,stringFileName,stringStatus,stringSection,stringServerID, nil];
+                NSMutableArray* tableColumn = [[NSMutableArray alloc] initWithArray:[tableDictionary valueForKey:@"columnName"]];
                 
+                NSString* stringTableName = [tableDictionary valueForKey:@"tableName"];
                 
-                NSString* columnReturn = @"Count";
-
-                int duplicateRow = [modelCFFHtml voidGetDuplicateRowID:query ColumnReturn:columnReturn];
-                int htmlID = [modelCFFHtml voidGetDuplicateRowID:query ColumnReturn:stringDuplicateCheckerColumnName];
-                if (duplicateRow>0){
-                    [tableColumn addObject:stringDuplicateCheckerColumnName];
-                    [tableValue addObject:[NSNumber numberWithInt:htmlID]];
+                NSMutableArray* arrayServerID = [[NSMutableArray alloc]initWithArray:[modelCFFHtml selectHtmlServerID:stringTableName ColumnName:stringDuplicateCheckerWhere5]];
+                
+                if ([arrayServerID containsObject:numberServerID]){
+                    NSString* stringSet = [NSString stringWithFormat:@"%@=%@,%@=%@,%@=%@,%@=%@",stringDuplicateCheckerWhere1,stringID,stringDuplicateCheckerWhere2,stringFileName,stringDuplicateCheckerWhere3,stringStatus,stringDuplicateCheckerWhere4,stringSection];
+                    NSString* stringWhere = [NSString stringWithFormat:@"%@=%@",stringDuplicateCheckerWhere5,stringServerID];
+                    
+                    [modelCFFHtml updateGlobalHtml:stringTableName StringSet:stringSet StringWhere:stringWhere];
                 }
-                
-                NSMutableDictionary* dictDataTable = [[NSMutableDictionary alloc]initWithDictionary:tableDictionary];
-                [dictDataTable setObject:tableValue forKey:@"columnValue"];
-                [dictDataTable setObject:tableColumn forKey:@"columnName"];
-                
-                [modelCFFHtml saveGlobalHtmlData:dictDataTable];
+                else{
+                    //check duplicate value
+                    //NSString* query=[NSString stringWithFormat:@"select CFFHtmlID from CFFHtml where CFFID=%@ and CFFHtmlName=%@ and CFFHtmlStatus=%@ and CFFHtmlSection=%@",stringID,stringFileName,stringStatus,stringSection];
+                    NSString* query=[NSString stringWithFormat:@"select count(%@) as Count,%@ from %@ where %@=%@ and %@=%@ and %@=%@ and %@=%@",stringDuplicateCheckerColumnName,stringDuplicateCheckerColumnName,stringDuplicateCheckerTableName,stringDuplicateCheckerWhere1,stringID,stringDuplicateCheckerWhere2,stringFileName,stringDuplicateCheckerWhere3,stringStatus,stringDuplicateCheckerWhere4,stringSection];
+                    //NSString* columnReturn = @"CFFHtmlID";
+                    
+                    
+                    NSString* columnReturn = @"Count";
+                    
+                    int duplicateRow = [modelCFFHtml voidGetDuplicateRowID:query ColumnReturn:columnReturn];
+                    int htmlID = [modelCFFHtml voidGetDuplicateRowID:query ColumnReturn:stringDuplicateCheckerColumnName];
+                    if (duplicateRow>0){
+                        [tableColumn addObject:stringDuplicateCheckerColumnName];
+                        [tableValue addObject:[NSNumber numberWithInt:htmlID]];
+                    }
+                    
+                    NSMutableDictionary* dictDataTable = [[NSMutableDictionary alloc]initWithDictionary:tableDictionary];
+                    [dictDataTable setObject:tableValue forKey:@"columnValue"];
+                    [dictDataTable setObject:tableColumn forKey:@"columnName"];
+                    
+                    [modelCFFHtml saveGlobalHtmlData:dictDataTable];
+                }
                 /*dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                     [modelCFFHtml updateGlobalHtmlData:[item objectForKey:[jsonKey objectAtIndex:3]]];
                     // Some long running task you want on another thread

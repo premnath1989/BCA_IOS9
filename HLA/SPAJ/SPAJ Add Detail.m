@@ -378,6 +378,9 @@
     }
 
     #pragma mark UIBarButtonItem Action
+    -(void)setRightButtonEnable:(BOOL)boolEnabled{
+        [rightButton setEnabled:boolEnabled];
+    }
 
     -(void)voidDoneSPAJCalonPemegangPolis:(UIBarButtonItem *)sender{
         if (!boolTenagaPenjualSigned){
@@ -685,9 +688,19 @@
     }
 
     -(void)voidSetCalonPemegangPolisBoolValidate:(BOOL)boolValidate StringSection:(NSString *)stringSection{
+        [rightButton setEnabled:YES];
         BOOL boolSPAJPDF = [modelSPAJFormGeneration voidCertainFormGenerateCaptured:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue] FormType:@"SPAJFormGeneration1"];
         if (boolSPAJPDF){
-            UIAlertController *alertLockForm = [alert alertInformation:NSLocalizedString(@"ALERT_TITLE_FORM_GENERATION", nil) stringMessage:NSLocalizedString(@"ALERT_MESSAGE_FORM_GENERATION", nil)];
+            //UIAlertController *alertLockForm = [alert alertInformation:NSLocalizedString(@"ALERT_TITLE_FORM_GENERATION", nil) stringMessage:NSLocalizedString(@"ALERT_MESSAGE_FORM_GENERATION", nil)];
+            
+            UIAlertController *alertLockForm = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"ALERT_TITLE_FORM_GENERATION", nil) message:NSLocalizedString(@"ALERT_MESSAGE_FORM_GENERATION", nil) preferredStyle:UIAlertControllerStyleAlert];
+            
+            [alertLockForm addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                if ([stringSection isEqualToString:@"KS_IN"]){
+                    [self.navigationController popViewControllerAnimated:YES];
+                }
+            }]];
+
             [self presentViewController:alertLockForm animated:YES completion:nil];
             
             NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJFormGeneration1=0 where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",[dictTransaction valueForKey:@"SPAJEappNumber"]];

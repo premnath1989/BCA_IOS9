@@ -44,6 +44,7 @@
 @synthesize dictTransaction;
 @synthesize buttonSubmit;
 @synthesize delegateSPAJFiles;
+@synthesize boolHealthQuestionairre;
 
 - (void)viewWillLayoutSubviews{
     [super viewWillLayoutSubviews];
@@ -57,6 +58,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [scrollImage setZoomScale:4.0];
+    //[scrollImage setContentOffset:CGPointMake(scrollImage.contentOffset.x, 0) animated:YES];
     
     alert = [[Alert alloc]init];
     formatter = [[Formatter alloc]init];
@@ -113,6 +116,12 @@
             [arrayFinalSort insertObject:[arrayAfterSort objectAtIndex:i] atIndex:i];
         }
     }
+    
+    if (boolHealthQuestionairre){
+        NSArray *extensions = [NSArray arrayWithObjects:@"jpg", nil];
+        arrayFinalSort = [[arrayFinalSort filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"pathExtension IN %@", extensions]] mutableCopy];
+    }
+    
     [tableFileList reloadData];
 }
 
@@ -148,17 +157,11 @@
             [webViewDisplayPDF loadRequest:request];
         }
         else{
-            
-            [scrollImage setZoomScale:4.0];
-            [scrollImage setContentOffset:CGPointMake(scrollImage.contentOffset.x, 0)
-                                     animated:YES];
-            
-            //[self setCenter];
-            
             [webViewDisplayPDF setHidden:YES];
             [imageViewDisplayImage setHidden:NO];
-            
             [imageViewDisplayImage setImage:[UIImage imageWithContentsOfFile:[NSString stringWithFormat:@"%@/%@",[formatter generateSPAJFileDirectory:[dictTransaction valueForKey:@"SPAJEappNumber"]],fileName]]];
+            
+            [self setCenter:nil];
         }
     } @catch (NSException *exception) {
         
@@ -357,12 +360,11 @@
 }
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
-
 {
     return imageViewDisplayImage;
 }
 
-/*- (void)scrollViewDidEndZooming:(UIScrollView *)aScrollView withView:(UIView *)view atScale:(float)scale {
+-(IBAction)setCenter:(UIButton *)sender{
     CGSize imgViewSize = imageViewDisplayImage.frame.size;
     CGSize imageSize = imageViewDisplayImage.image.size;
     
@@ -374,7 +376,35 @@
         realImgSize = CGSizeMake(imgViewSize.height / imageSize.height * imageSize.width, imgViewSize.height);
     }
     
-    CGRect fr = CGRectMake(((scrollImage.frame.size.width - realImgSize.width)/2), 0, 0, 0);
+    CGRect fr = CGRectMake(0, 0, 0, 0);
+    fr.size = realImgSize;
+    imageViewDisplayImage.frame = fr;
+    
+    CGSize scrSize = scrollImage.frame.size;
+    float offx = (scrSize.width > realImgSize.width ? (scrSize.width - realImgSize.width) / 2 : 0);
+    //float offy = (scrSize.height > realImgSize.height ? (scrSize.height - realImgSize.height) / 2 : 0);
+    //[UIView beginAnimations:nil context:nil];
+    //[UIView setAnimationDuration:0.25];
+    //scrollImage.contentInset = UIEdgeInsetsMake(offy, offx, offy, offx);
+    scrollImage.contentInset = UIEdgeInsetsMake(0, offx, 0, offx);
+    [scrollImage setContentOffset:CGPointMake(-offx, 0)];
+    [scrollImage setContentSize:CGSizeMake(imageViewDisplayImage.frame.size.width, imageViewDisplayImage.frame.size.height)];
+    //[UIView commitAnimations];
+}
+
+- (void)scrollViewDidEndZooming:(UIScrollView *)aScrollView withView:(UIView *)view atScale:(float)scale {
+    CGSize imgViewSize = imageViewDisplayImage.frame.size;
+    CGSize imageSize = imageViewDisplayImage.image.size;
+    
+    CGSize realImgSize;
+    if(imageSize.width / imageSize.height > imgViewSize.width / imgViewSize.height) {
+        realImgSize = CGSizeMake(imgViewSize.width, imgViewSize.width / imageSize.width * imageSize.height);
+    }
+    else {
+        realImgSize = CGSizeMake(imgViewSize.height / imageSize.height * imageSize.width, imgViewSize.height);
+    }
+    
+    CGRect fr = CGRectMake(0, 0, 0, 0);
     fr.size = realImgSize;
     imageViewDisplayImage.frame = fr;
     
@@ -388,9 +418,20 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)sender {
-    CGPoint contentOffset = CGPointMake(0, sender.contentOffset.y);
-    [sender setContentOffset:contentOffset];
-}*/
+    /*CGPoint contentOffset = CGPointMake(0, sender.contentOffset.y);
+    [sender setContentOffset:contentOffset];*/
+}
+
+-(void)scrollViewDidEndScrollingAnimation:(UIScrollView *)sender{
+    NSLog(@"inset %@",NSStringFromUIEdgeInsets(sender.contentInset));
+    NSLog(@"offset %@",NSStringFromCGPoint(sender.contentOffset));
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    NSLog(@"inset %@",NSStringFromUIEdgeInsets(scrollView.contentInset));
+    NSLog(@"offset %@",NSStringFromCGPoint(scrollView.contentOffset));
+}
+
 
 /*
 #pragma mark - Navigation
