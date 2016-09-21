@@ -2100,30 +2100,24 @@ function setNumberForm(stringID, stringValue)
 
 function setNumberPDF(stringID, stringValue)
 {
-//	alert("PDF " + stringID + " " + stringValue);
-//	if ($(stringJQueryID).is("div") == true)
-//	{
-//		setLineGeneral(stringID, stringValue);
-//	}
-//	else if ($(stringJQueryID).is("td") == true)
-//	{
-//		setTextGeneral(stringID, stringValue);
-//	}
-//	else if ($(stringJQueryID).is("input[type='text']") == true)
-//	{
-//		setTextGeneral(stringID, stringValue);
-//	}
-//	else if ($(stringJQueryID).is("input[type='number']") == true)
-//	{
-//		alert(stringID + " " + stringValue);
-//		setTextGeneral(stringID, stringValue);
-//	}
-//	else
-//	{
-//		setBoxGeneral(stringID, stringValue);
-//	}
+	var stringJQueryID = stringKres + stringID;
 	
-	setTextGeneral(stringID, stringValue);
+	if ($(stringJQueryID).is("div") == true)
+	{
+		setLineGeneral(stringID, stringValue);
+	}
+	else if ($(stringJQueryID).is("td") == true)
+	{
+		setTextGeneral(stringID, stringValue);
+	}
+	else if ($(stringJQueryID).is("input[type='number']") == true)
+	{
+		setTextGeneral(stringID, stringValue);
+	}
+	else
+	{
+		setBoxGeneral(stringID, stringValue);
+	}
 }
 
 function setEmailForm(stringID, stringValue)
@@ -2131,9 +2125,26 @@ function setEmailForm(stringID, stringValue)
     setTextGeneral(stringID, stringValue);
 }
 
-function getEmailPDF(stringID, stringValue)
+function setEmailPDF(stringID, stringValue)
 {
-    setBoxGeneral(stringID, stringValue);
+    var stringJQueryID = stringKres + stringID;
+	
+	if ($(stringJQueryID).is("div") == true)
+	{
+		setLineGeneral(stringID, stringValue);
+	}
+	else if ($(stringJQueryID).is("td") == true)
+	{
+		setTextGeneral(stringID, stringValue);
+	}
+	else if ($(stringJQueryID).is("input[type='email']") == true)
+	{
+		setTextGeneral(stringID, stringValue);
+	}
+	else
+	{
+		setBoxGeneral(stringID, stringValue);
+	}
 }
 
 
