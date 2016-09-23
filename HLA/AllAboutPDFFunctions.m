@@ -24,25 +24,25 @@
 
 -(NSString *)GetOutputForRelationWithPORadioButton:(NSString *)stringSegmentSelected{
     if ([stringSegmentSelected isEqualToString:@"Keluarga"]){
-        return @"true";
+        return @"family";
     }
     else if ([stringSegmentSelected isEqualToString:@"Referensi"]){
-        return @"false";
+        return @"reference";
     }
     else if ([stringSegmentSelected isEqualToString:@"Tidak Sengaja"]){
-        return @"false";
+        return @"stranger";
     }
     else if ([stringSegmentSelected isEqualToString:@"Iklan"]){
-        return @"false";
+        return @"advertisement";
     }
     else if ([stringSegmentSelected isEqualToString:@"Teman/ Kerabat"]){
-        return @"false";
+        return @"friend";
     }
     else if ([stringSegmentSelected isEqualToString:@"Sub Keagenan"]){
-        return @"false";
+        return @"agency";
     }
     else if ([stringSegmentSelected isEqualToString:@"Lainnya"]){
-        return @"false";
+        return @"other";
     }
     else{
         return @"";
@@ -51,21 +51,46 @@
 
 -(NSString *)GetOutputForDurationKnowPORadioButton:(NSString *)stringSegmentSelected{
     if ([stringSegmentSelected isEqualToString:@"Tidak Kenal"]){
-        return @"true";
+        return @"stranger";
     }
     else if ([stringSegmentSelected isEqualToString:@"< 1 tahun"]){
-        return @"false";
+        return @"lessthan1year";
     }
     else if ([stringSegmentSelected isEqualToString:@"< 5 tahun"]){
-        return @"false";
+        return @"lessthan5years";
     }
     else if ([stringSegmentSelected isEqualToString:@"Selama Hidup"]){
-        return @"false";
+        return @"entirelife";
     }
     else{
         return @"";
     }
 }
+
+-(NSString *)GetOutputForInsurancePurposeCheckBox:(NSString *)stringInsurancePurpose{
+    if ([stringInsurancePurpose isEqualToString:@"Tabungan"]){
+        return @"saving";
+    }
+    else if ([stringInsurancePurpose isEqualToString:@"Proteksi"]){
+        return @"protection";
+    }
+    else if ([stringInsurancePurpose isEqualToString:@"Investasi"]){
+        return @"investment";
+    }
+    else if ([stringInsurancePurpose isEqualToString:@"Pendidikan"]){
+        return @"education";
+    }
+    else if ([stringInsurancePurpose isEqualToString:@"Lainnya"]){
+        return @"other";
+    }
+    else if ([stringInsurancePurpose isEqualToString:@"Not Selected"]){
+        return @"Not Selected";
+    }
+    else{
+        return @"";
+    }
+}
+
 
 -(NSMutableDictionary *)dictAnswers:(NSDictionary *)dictTransaction ElementID:(NSString *)elementID Value:(NSString *)value{
     NSMutableDictionary *dictAnswer=[[NSMutableDictionary alloc]init];

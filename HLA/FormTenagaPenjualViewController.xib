@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="BPreplay_Italics.ttf">
+        <mutableArray key="BPreplayItalics.otf">
             <string>BPreplay-Italic</string>
         </mutableArray>
         <mutableArray key="BPreplay_Regular.otf">
@@ -36,21 +36,23 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FormTenagaPenjualViewController">
             <connections>
+                <outlet property="RadioButtonSalesDeclaration60DaysLimit" destination="0k3-ej-aAq" id="x81-H6-cl8"/>
+                <outlet property="RadioButtonSalesDeclaration90DaysLimit" destination="zdC-dw-Nmk" id="2Ia-0R-b1V"/>
+                <outlet property="RadioButtonSalesDeclarationBasicSumAssured" destination="vay-Vj-l9c" id="fbq-yK-aC8"/>
+                <outlet property="RadioButtonSalesDeclarationConsitution" destination="3et-Ge-Oae" id="r7z-zO-mzp"/>
+                <outlet property="RadioButtonSalesDeclarationDenyClaim" destination="db1-mj-HM3" id="pHd-YM-vVV"/>
+                <outlet property="RadioButtonSalesDeclarationFaceToFace" destination="7fF-E7-v2j" id="tzK-es-aA6"/>
+                <outlet property="RadioButtonSalesDeclarationHealth" destination="E4J-1j-WM8" id="sNo-Mr-ukl"/>
+                <outlet property="RadioButtonSalesDeclarationKnowProspectiveInsured" destination="jTE-3S-CrJ" id="9zH-wJ-RGf"/>
+                <outlet property="RadioButtonSalesDeclarationRelationshipWithProspectiveInsured" destination="OE0-fh-VrU" id="EBn-et-WYJ"/>
+                <outlet property="RadioButtonSalesDeclarationSelfVerified" destination="Z1v-ry-3JI" id="vGC-rj-WHL"/>
+                <outlet property="RadioButtonSalesDeclarationStillConsideration" destination="9lQ-Sb-pit" id="FTg-bc-f1c"/>
+                <outlet property="RadioButtonSalesDeclarationThirdParty" destination="dW9-Ba-WD2" id="XE1-aR-dnj"/>
+                <outlet property="RadioButtonSalesDeclarationWithoutSecrecy" destination="t7q-h1-KDV" id="C8i-MD-bJY"/>
+                <outlet property="TextSalesDeclarationPurposeOther" destination="8S1-tQ-zwD" id="VDo-1U-yMD"/>
+                <outlet property="TextSalesDeclarationRelationshipWithProspectiveInsuredOther" destination="G95-Uk-3Qq" id="ClS-Lv-MQl"/>
                 <outlet property="collectionReasonInsurancePurchase" destination="t3m-ki-XHT" id="qh0-5t-aEO"/>
                 <outlet property="scrollViewForm" destination="UQm-bs-aDz" id="CgX-Qh-iGZ"/>
-                <outlet property="segmentDurationKnowPolicyHolder" destination="jTE-3S-CrJ" id="zMI-hg-MeM"/>
-                <outlet property="segmentIs10" destination="dW9-Ba-WD2" id="V8b-pp-PDl"/>
-                <outlet property="segmentIs11" destination="3et-Ge-Oae" id="Knq-QT-Ksr"/>
-                <outlet property="segmentIs12" destination="zdC-dw-Nmk" id="Yyg-MB-hhx"/>
-                <outlet property="segmentIs13" destination="vay-Vj-l9c" id="WUY-bu-xZs"/>
-                <outlet property="segmentIs3" destination="E4J-1j-WM8" id="jRr-hL-rrq"/>
-                <outlet property="segmentIs4" destination="t7q-h1-KDV" id="Q89-28-72Y"/>
-                <outlet property="segmentIs5" destination="db1-mj-HM3" id="4Oo-Xm-7v4"/>
-                <outlet property="segmentIs6" destination="9lQ-Sb-pit" id="7Jd-OW-prj"/>
-                <outlet property="segmentIs7" destination="7fF-E7-v2j" id="1sQ-ir-fbc"/>
-                <outlet property="segmentIs8" destination="0k3-ej-aAq" id="WtG-gK-7Ue"/>
-                <outlet property="segmentIs9" destination="Z1v-ry-3JI" id="WDB-o1-A15"/>
-                <outlet property="segmentRelation" destination="OE0-fh-VrU" id="NTC-u0-Q15"/>
                 <outlet property="stackViewForm" destination="B1q-38-Mx6" id="kRK-BD-n98"/>
                 <outlet property="textFieldInsured" destination="2MS-5O-Jys" id="8XS-Lf-mtO"/>
                 <outlet property="textFieldPolicyHolder" destination="1ci-vq-g0M" id="5Yi-zV-naz"/>
@@ -101,7 +103,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Nomor SPAJ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HW9-ZR-hqi">
                                             <rect key="frame" x="20" y="84" width="97" height="21"/>
                                             <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1ci-vq-g0M" customClass="TextFieldSPAJ">
@@ -122,13 +124,13 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Nama Calon Tertanggung" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lBH-OU-M1h">
                                             <rect key="frame" x="20" y="46" width="196" height="21"/>
                                             <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Nama Calon Pemegang Polis" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J5V-RP-z1f">
                                             <rect key="frame" x="20" y="8" width="245" height="21"/>
                                             <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -142,7 +144,7 @@
                                             <string key="text">1. Apakah hubungan Anda mengenal Calon Tertanggung/Calon Pemegang Polis?
 </string>
                                             <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="OE0-fh-VrU" customClass="SegmentSPAJ">
@@ -158,7 +160,7 @@
                                             </segments>
                                             <color key="tintColor" red="0.0" green="0.62745098040000002" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                                         </segmentedControl>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="G95-Uk-3Qq">
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="G95-Uk-3Qq" customClass="TextFieldSPAJ">
                                             <rect key="frame" x="20" y="75" width="453" height="30"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
@@ -172,7 +174,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2. Sudah berapa lama Anda mengenal Calon Tertanggung/Calon Pemegang Polis?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RFQ-IQ-sNx">
                                             <rect key="frame" x="20" y="8" width="638" height="21"/>
                                             <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="jTE-3S-CrJ" customClass="SegmentSPAJ">
@@ -194,7 +196,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="3. Apakah Calon Tertanggung saat ini dalam keadaan sehat?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kQ2-Kb-kJa">
                                             <rect key="frame" x="20" y="8" width="638" height="21"/>
                                             <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <segmentedControl opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="E4J-1j-WM8" customClass="SegmentSPAJ">
@@ -215,7 +217,7 @@
                                             <rect key="frame" x="20" y="8" width="626" height="63"/>
                                             <string key="text">4. Apakah sudah dijelaskan kepada Calon Tertanggung/Calon Pemegang Polis untuk menjawab seluruh pertanyaan dalam SPAJ dengan benar dan tanpa ada hal yang dirahasiakan?</string>
                                             <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <segmentedControl opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="t7q-h1-KDV" customClass="SegmentSPAJ">
@@ -236,7 +238,7 @@
                                             <rect key="frame" x="20" y="8" width="626" height="61"/>
                                             <string key="text">5. Apakah sudah dijelaskan kepada Calon Pemegang Polis bahwa jawaban yang tidak benar akan berakibat batalnya perjanjian asuransi jiwa ini dan Penanggung berhak menolak Klaim yang diajukan?</string>
                                             <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <segmentedControl opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="db1-mj-HM3" customClass="SegmentSPAJ">
@@ -257,7 +259,7 @@
                                             <rect key="frame" x="20" y="8" width="626" height="81"/>
                                             <string key="text">6. Apakah sudah dijelaskan kepada Calon Pemegang Polis bahwa jawaban keputusan Underwriting atas pengajuan permohonan asuransi jiwa ini dapat ditolak, ditunda, dikenakan tambahan Premi atau diturunkan Uang Pertanggungannya?</string>
                                             <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <segmentedControl opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="9lQ-Sb-pit" customClass="SegmentSPAJ">
@@ -278,7 +280,7 @@
                                             <rect key="frame" x="20" y="8" width="626" height="61"/>
                                             <string key="text">7. Apakah Anda bertemu atau melihat langsung Calon Tertanggung/Calon Pemegang Polis pada saat pengisian atau penandatanganan SPAJ? (Penandatanganan SPAJ harus dihadapan Tenaga Penjual).</string>
                                             <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <segmentedControl opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="7fF-E7-v2j" customClass="SegmentSPAJ">
@@ -307,7 +309,7 @@
                                             <rect key="frame" x="20" y="8" width="626" height="81"/>
                                             <string key="text">8. Apakah sudah dijelaskan kepada Calon Pemegang Polis bahwa pengajuan asuransi akan dianggap batal, apabila persyaratan pengajuan asuransi jiwa tidak dilengkapi dalam waktu 60 (enam puluh) Hari Kalender sejak SPAJ terdaftar di Kantor Pusat BCA Life?</string>
                                             <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -328,7 +330,7 @@
                                             <rect key="frame" x="20" y="8" width="626" height="47"/>
                                             <string key="text">9. Apakah Anda telah melakukan verifikasi terhadap identitas diri dan kelengkapan dokumen lainnya yang telah diberikan kepada Anda?</string>
                                             <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -341,7 +343,7 @@
                                             <rect key="frame" x="20" y="8" width="626" height="81"/>
                                             <string key="text">10. Apakah ada pihak lain selain Calon Pemegang Polis/ Calon Tertanggung yang meminta atau berkepentingan atau menginstruksikan untuk mengajukan permohonan asuransi ini? Jika “Ya” apakah Anda telah meminta Calon Pemegang Polis untuk melakukan formulir Pihak Ketiga?</string>
                                             <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <segmentedControl opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="dW9-Ba-WD2" customClass="SegmentSPAJ">
@@ -362,7 +364,7 @@
                                             <rect key="frame" x="20" y="8" width="626" height="60"/>
                                             <string key="text">11. Apakah sudah dijelaskan kepada Calon Pemegang Polis bahwa Penerima Manfaat yang ditunjuk, sudah sesuai dengan peraturan perundang-undangan yang berlaku di Indonesia?</string>
                                             <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <segmentedControl opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3et-Ge-Oae" customClass="SegmentSPAJ">
@@ -383,7 +385,7 @@
                                             <rect key="frame" x="20" y="8" width="626" height="61"/>
                                             <string key="text">a. Apakah sudah dijelaskan bahwa terdapat masa tunggu Klaim selama 90 (sembilan puluh) Hari Kalender sejak Tanggal Mulai Asuransi atau sejak tanggal pemulihan Polis terakhir?</string>
                                             <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <segmentedControl opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="zdC-dw-Nmk" customClass="SegmentSPAJ">
@@ -404,7 +406,7 @@
                                             <rect key="frame" x="20" y="8" width="626" height="61"/>
                                             <string key="text">b. Apakah sudah dijelaskan bahwa manfaat Terminal Illness sebesar 20% Uang Pertanggungan atau maksimal Rp 3,000,000,000,- (tiga miliar rupiah) per Tertanggung?</string>
                                             <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <segmentedControl opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="vay-Vj-l9c" customClass="SegmentSPAJ">
@@ -434,19 +436,19 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sumber penghasilan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kui-tQ-QP8">
                                             <rect key="frame" x="71" y="46" width="196" height="21"/>
                                             <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="13. Sebutkan sumber dan total penghasilan Calon Pemegang Polis perbulan:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="32R-Jl-PjR">
                                             <rect key="frame" x="20" y="8" width="588" height="21"/>
                                             <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Total Penghasilan Kotor/Tahun" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="36h-0y-Y4o">
                                             <rect key="frame" x="71" y="84" width="233" height="21"/>
                                             <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -458,7 +460,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="14. Alasan pengajuan asuransi jiwa " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UIK-9h-m5x">
                                             <rect key="frame" x="20" y="8" width="588" height="21"/>
                                             <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="t3m-ki-XHT">
@@ -476,6 +478,11 @@
                                                 <outlet property="delegate" destination="-1" id="LUw-SK-zEp"/>
                                             </connections>
                                         </collectionView>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8S1-tQ-zwD" customClass="TextFieldSPAJ">
+                                            <rect key="frame" x="552" y="49" width="211" height="30"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
@@ -485,13 +492,13 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="15. Jika ada, berikan informasi lain yang menurut Anda dapat membantu BCA Life dalam mengevaluasi pengajuan ini:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uxa-HJ-uP1">
                                             <rect key="frame" x="20" y="8" width="766" height="42"/>
                                             <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Apabila diperlukan dapat mempergunakan lembar tambahan." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7mC-77-SXD">
                                             <rect key="frame" x="44" y="53" width="742" height="22"/>
                                             <fontDescription key="fontDescription" name="BPreplay-Italic" family="BPreplay" pointSize="14"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Scm-BL-s1R">
@@ -504,7 +511,7 @@
                                             <rect key="frame" x="20" y="197" width="766" height="130"/>
                                             <string key="text">Saya menyatakan bahwa semua keterangan dalam Laporan Tenaga Penjual ini adalah keterangan yang benar. Saya tidak menyembunyikan keterangan-keterangan yang dapat mempengaruhi penerimaan pengajuan ini dari Calon Tertanggungan/Calon Pemegang Polis. Saya tidak pernah memberikan informasi kepada Calon Tertanggung/Calon Pemegang Polis yang bertentangan dengan ketentuan-ketentuan yang terdapat di dalam Polis. Apabila di kemudian hari terdapat pernyataan dalam Laporan Tenaga Penjual ini yang tidak benar, Saya bersedia bertanggung jawab atas kerugian yang timbul akibat kesalahan tersebut. Saya menyatakan bahwa proses penjualan yang Saya lakukan sudah sesuai dengan proses penjualan yang Saya terima selama proses pelatihan.</string>
                                             <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="14"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>

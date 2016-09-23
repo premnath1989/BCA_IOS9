@@ -31,19 +31,23 @@
     IBOutlet TextFieldSPAJ *textFieldInsured;
     IBOutlet TextFieldSPAJ *textFieldSPAJNumber;
     
-    IBOutlet SegmentSPAJ *segmentRelation;
-    IBOutlet SegmentSPAJ *segmentDurationKnowPolicyHolder;
-    IBOutlet SegmentSPAJ *segmentIs3;
-    IBOutlet SegmentSPAJ *segmentIs4;
-    IBOutlet SegmentSPAJ *segmentIs5;
-    IBOutlet SegmentSPAJ *segmentIs6;
-    IBOutlet SegmentSPAJ *segmentIs7;
-    IBOutlet SegmentSPAJ *segmentIs8;
-    IBOutlet SegmentSPAJ *segmentIs9;
-    IBOutlet SegmentSPAJ *segmentIs10;
-    IBOutlet SegmentSPAJ *segmentIs11;
-    IBOutlet SegmentSPAJ *segmentIs12;
-    IBOutlet SegmentSPAJ *segmentIs13;
+    IBOutlet TextFieldSPAJ *TextSalesDeclarationRelationshipWithProspectiveInsuredOther;
+    IBOutlet TextFieldSPAJ *TextSalesDeclarationPurposeOther;
+    
+    IBOutlet SegmentSPAJ *RadioButtonSalesDeclarationRelationshipWithProspectiveInsured;
+    IBOutlet SegmentSPAJ *RadioButtonSalesDeclarationKnowProspectiveInsured;
+    IBOutlet SegmentSPAJ *RadioButtonSalesDeclarationHealth;
+    IBOutlet SegmentSPAJ *RadioButtonSalesDeclarationWithoutSecrecy;
+    IBOutlet SegmentSPAJ *RadioButtonSalesDeclarationDenyClaim;
+    IBOutlet SegmentSPAJ *RadioButtonSalesDeclarationStillConsideration;
+    IBOutlet SegmentSPAJ *RadioButtonSalesDeclarationFaceToFace;
+    IBOutlet SegmentSPAJ *RadioButtonSalesDeclaration60DaysLimit;
+    IBOutlet SegmentSPAJ *RadioButtonSalesDeclarationSelfVerified;
+    IBOutlet SegmentSPAJ *RadioButtonSalesDeclarationThirdParty;
+    IBOutlet SegmentSPAJ *RadioButtonSalesDeclarationConsitution;
+    IBOutlet SegmentSPAJ *RadioButtonSalesDeclaration90DaysLimit;
+    IBOutlet SegmentSPAJ *RadioButtonSalesDeclarationBasicSumAssured;
+    
 }
 @property (strong, nonatomic) NSDictionary* dictTransaction;
 @end
