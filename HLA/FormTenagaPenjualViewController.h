@@ -11,6 +11,7 @@
 #import "SegmentSPAJ.h"
 #import "TextFieldSPAJ.h"
 #import "ButtonSPAJ.h"
+#import "TextViewSPAJ.h"
 #import "AllAboutPDFFunctions.h"
 #import "HtmlGenerator/HtmlGenerator.h"
 
@@ -47,6 +48,10 @@
     IBOutlet SegmentSPAJ *RadioButtonSalesDeclarationConsitution;
     IBOutlet SegmentSPAJ *RadioButtonSalesDeclaration90DaysLimit;
     IBOutlet SegmentSPAJ *RadioButtonSalesDeclarationBasicSumAssured;
+    
+    IBOutlet TextFieldSPAJ *TextSalesDeclarationIncomeSource;
+    IBOutlet TextFieldSPAJ *TextSalesDeclarationIncomeBruto;
+    IBOutlet TextViewSPAJ *AreaSalesDeclarationAdditionalInformation;
     
 }
 @property (strong, nonatomic) NSDictionary* dictTransaction;

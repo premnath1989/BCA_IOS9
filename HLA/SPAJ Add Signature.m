@@ -370,7 +370,7 @@
                 else if (indexSelected == 2){
                     NSString* signatureImage = [formatter encodedSignatureImage:viewToSign];
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                        [allAboutPDFGeneration voidSaveSignatureForImages:dictTransaction DictionaryPOData:dictionaryPOData];
+                        //[allAboutPDFGeneration voidSaveSignatureForImages:dictTransaction DictionaryPOData:dictionaryPOData];
                         [self voidSaveSignatureToPDF:2];
                     });
                     //update signature party3
@@ -415,7 +415,7 @@
                 else if (indexSelected == 1){
                     NSString* signatureImage = [formatter encodedSignatureImage:viewToSign];
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                        [allAboutPDFGeneration voidSaveSignatureForImages:dictTransaction DictionaryPOData:dictionaryPOData];
+                        //[allAboutPDFGeneration voidSaveSignatureForImages:dictTransaction DictionaryPOData:dictionaryPOData];
                         [self voidSaveSignatureToPDF:1];
                     });
                     //update signature party2
@@ -800,7 +800,7 @@
     //update signature party4
     [allAboutPDFGeneration voidSaveSignatureForImages:dictTransaction DictionaryPOData:dictionaryPOData];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [allAboutPDFGeneration voidSaveSignatureForImages:dictTransaction DictionaryPOData:dictionaryPOData];
+        //[allAboutPDFGeneration voidSaveSignatureForImages:dictTransaction DictionaryPOData:dictionaryPOData];
         [self voidSaveSignatureToPDF:3];
     });
 
@@ -1157,6 +1157,10 @@
 
 #pragma mark delegate
 -(void)imgSigned{
+
+}
+
+-(void)allImgSigned{
 
 }
 /*

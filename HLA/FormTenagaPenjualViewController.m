@@ -39,6 +39,8 @@
     AllAboutPDFGeneration *allAboutPDFGeneration;
     Alert* alert;
     
+    NSString *imageFileName;
+    
     NSMutableArray *arrayCollectionInsurancePurchaseReason;
     NSMutableArray *arrayCollectionSelectedInsurancePurchaseReason;
     
@@ -112,9 +114,19 @@
     
     [self intializeArrayInsuranceReason];
     
+    [self arrayInitializeReferral];
+    [self arrayInitializeAgentProfile];
+    [self arrayInitializePOData];
+    [self arrayInitializeSIMaster];
+    [self arrayInitializeSignature];
+    
     [textFieldPolicyHolder setTextFieldName:@"textFieldPolicyHolder"];
     [textFieldInsured setTextFieldName:@"textFieldInsured"];
     [textFieldSPAJNumber setTextFieldName:@"textFieldSPAJNumber"];
+    
+    [TextSalesDeclarationRelationshipWithProspectiveInsuredOther setTextFieldName:@"TextSalesDeclarationRelationshipWithProspectiveInsuredOther"];
+    
+    [TextSalesDeclarationPurposeOther setTextFieldName:@"TextSalesDeclarationPurposeOther"];
     
     [RadioButtonSalesDeclarationRelationshipWithProspectiveInsured setSegmentName:@"RadioButtonSalesDeclarationRelationshipWithProspectiveInsured"];
     [RadioButtonSalesDeclarationKnowProspectiveInsured setSegmentName:@"RadioButtonSalesDeclarationKnowProspectiveInsured"];
@@ -130,8 +142,42 @@
     [RadioButtonSalesDeclaration90DaysLimit setSegmentName:@"RadioButtonSalesDeclaration90DaysLimit"];
     [RadioButtonSalesDeclarationBasicSumAssured setSegmentName:@"RadioButtonSalesDeclarationBasicSumAssured"];
     
+    [TextSalesDeclarationIncomeSource setTextFieldName:@"TextSalesDeclarationIncomeSource"];
+    [TextSalesDeclarationIncomeBruto setTextFieldName:@"TextSalesDeclarationIncomeBruto"];
+    
+    [AreaSalesDeclarationAdditionalInformation setTextViewName:@"AreaSalesDeclarationAdditionalInformation"];
+    
+    dictAgentProfile=[[NSMutableDictionary alloc]initWithDictionary:[modelAgentProfile getAgentData]];
     // Do any additional setup after loading the view from its nib.
 }
+
+#pragma mark arrayInitialization
+-(void)arrayInitializeAgentProfile{
+    arrayDBAgentID =[[NSMutableArray alloc]initWithArray:[spajPDFData arrayInitializeAgentProfileDB]];
+    arrayHTMLAgentID =[[NSMutableArray alloc]initWithArray:[spajPDFData arrayInitializeAgentProfileHTML]];
+}
+
+-(void)arrayInitializeReferral{
+    arrayDBReferral =[[NSMutableArray alloc]initWithArray:[spajPDFData arrayInitializeReferralDB]];
+    arrayHTMLReferal =[[NSMutableArray alloc]initWithArray:[spajPDFData arrayInitializeReferralHTML]];
+}
+
+-(void)arrayInitializePOData{
+    arrayDBPOData =[[NSMutableArray alloc]initWithArray:[spajPDFData arrayInitializePODataDB]];
+    arrayHTMLPOData =[[NSMutableArray alloc]initWithArray:[spajPDFData arrayInitializePODataHTML]];
+}
+
+
+-(void)arrayInitializeSIMaster{ //premnath Vijaykumar
+    arrayDBSIData=[[NSMutableArray alloc]initWithArray:[spajPDFData arrayInitializeSIMasterDB]];
+    arrayHTMLSIData =[[NSMutableArray alloc]initWithArray:[spajPDFData arrayInitializeSIMasterHTML]];
+}
+
+-(void)arrayInitializeSignature{ //premnath Vijaykumar
+    arrayDBSignature=[[NSMutableArray alloc]initWithArray:[spajPDFData arrayInitializeSignatureDB]];
+    arrayHTMLSignature =[[NSMutableArray alloc]initWithArray:[spajPDFData arrayInitializeSignatureHTML]];
+}
+
 
 -(void)loadTenagaPenjualPDFHTML:(NSString*)stringHTMLName WithArrayIndex:(int)intArrayIndex{
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
@@ -145,8 +191,9 @@
 }
 
 -(void)loadReport{
-    NSString* fileName = @"";
-    [self loadTenagaPenjualPDFHTML:fileName WithArrayIndex:0];
+    //NSString* fileName = @"20160803/page_spajpdf_salesdeclaration.html";
+    imageFileName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"AF" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]];
+    [self loadTenagaPenjualPDFHTML:imageFileName WithArrayIndex:0];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -156,7 +203,7 @@
 
 - (void)intializeArrayInsuranceReason{
     arrayCollectionInsurancePurchaseReason = [[NSMutableArray alloc]initWithObjects:@"Tabungan",@"Proteksi",@"Investasi",@"Pendidikan",@"Lainnya", nil];
-    arrayCollectionSelectedInsurancePurchaseReason = [[NSMutableArray alloc]initWithObjects:@"Not Selected",@"Not Selected",@"Not Selected",@"Not Selected",@"Not Selected",nil];
+    arrayCollectionSelectedInsurancePurchaseReason = [[NSMutableArray alloc]initWithObjects:@"Not Checked",@"Not Checked",@"Not Checked",@"Not Checked",@"Not Checked",nil];
 }
 
 -(IBAction)actionCloseForm:(UIButton *)sender{
@@ -166,7 +213,7 @@
 -(IBAction)actionButtonInsuranceReasonTapped:(ButtonSPAJ *)sender{
     
     for (int i=0;i<[arrayCollectionSelectedInsurancePurchaseReason count];i++){
-        if ([[arrayCollectionSelectedInsurancePurchaseReason objectAtIndex:i] isEqualToString:@"Not Selected"]){
+        if ([[arrayCollectionSelectedInsurancePurchaseReason objectAtIndex:i] isEqualToString:@"Not Checked"]){
             [arrayCollectionSelectedInsurancePurchaseReason removeObjectAtIndex:i];
         }
     }
@@ -183,7 +230,7 @@
     
     for (int i=0;i<[arrayCollectionInsurancePurchaseReason count];i++){
         if (i >= [arrayCollectionSelectedInsurancePurchaseReason count]){
-            [arrayCollectionSelectedInsurancePurchaseReason addObject:@"Not Selected"];
+            [arrayCollectionSelectedInsurancePurchaseReason addObject:@"Not Checked"];
         }
     }
     
@@ -200,7 +247,17 @@
             for (UIView *viewDetail in [view subviews]) {
                 if ([viewDetail isKindOfClass:[SegmentSPAJ class]]) {
                     SegmentSPAJ* segmentTemp = (SegmentSPAJ *)viewDetail;
-                    NSString *value = [allAboutPDFFunctions GetOutputForYaTidakRadioButton:[segmentTemp titleForSegmentAtIndex:segmentTemp.selectedSegmentIndex]];
+                    NSString *value;
+                    if (segmentTemp.tag == 0){
+                        value = [allAboutPDFFunctions GetOutputForYaTidakRadioButton:[segmentTemp titleForSegmentAtIndex:segmentTemp.selectedSegmentIndex]];
+                    }
+                    else if (segmentTemp.tag == 1){
+                        value = [allAboutPDFFunctions GetOutputForRelationWithPORadioButton:[segmentTemp titleForSegmentAtIndex:segmentTemp.selectedSegmentIndex]];
+                    }
+                    else if (segmentTemp.tag == 2){
+                        value = [allAboutPDFFunctions GetOutputForDurationKnowPORadioButton:[segmentTemp titleForSegmentAtIndex:segmentTemp.selectedSegmentIndex]];
+                    }
+                    
                     NSString *elementID = [segmentTemp getSegmentName];
                     
                     NSMutableDictionary *dictAnswer = [allAboutPDFFunctions dictAnswers:dictTransaction ElementID:elementID Value:value];
@@ -213,6 +270,17 @@
                     TextFieldSPAJ* textTemp = (TextFieldSPAJ *)viewDetail;
                     NSString *value = textTemp.text;
                     NSString *elementID = [textTemp getTextFieldName];
+                    
+                    NSMutableDictionary *dictAnswer = [allAboutPDFFunctions dictAnswers:dictTransaction ElementID:elementID Value:value];
+                    
+                    [arrayFormAnswers addObject:dictAnswer];
+                    i++;
+                }
+                
+                if ([viewDetail isKindOfClass:[TextViewSPAJ class]]) {
+                    TextViewSPAJ* textTemp = (TextViewSPAJ *)viewDetail;
+                    NSString *value = textTemp.text;
+                    NSString *elementID = [textTemp getTextViewName];
                     
                     NSMutableDictionary *dictAnswer = [allAboutPDFFunctions dictAnswers:dictTransaction ElementID:elementID Value:value];
                     
@@ -413,7 +481,11 @@
     
     NSData *thumbnailData = UIImageJPEGRepresentation(resultImage, 0);
     
-    NSString *relativeOutputFilePath = [NSString stringWithFormat:@"%@/%@.jpg", [formatter generateSPAJFileDirectory:[dictTransaction valueForKey:@"SPAJNumber"]],fileName];
+    //NSString *relativeOutputFilePath = [NSString stringWithFormat:@"%@/%@.jpg", [formatter generateSPAJFileDirectory:[dictTransaction valueForKey:@"SPAJEappNumber"]],fileName];
+    NSString* outputName = [NSString stringWithFormat:@"%@_%@",[dictTransaction valueForKey:@"SPAJNumber"],[allAboutPDFGeneration getSPAJImageNameFromPath:fileName]];
+    
+    NSString *relativeOutputFilePath = [NSString stringWithFormat:@"%@/%@.jpg", [formatter generateSPAJFileDirectory:[dictTransaction valueForKey:@"SPAJEappNumber"]],outputName];
+    
     [thumbnailData writeToFile:relativeOutputFilePath atomically:YES];
     
     UIAlertController *alertLockForm = [alert alertInformation:@"Berhasil" stringMessage:@"Form berhasil dibuat"];
@@ -463,19 +535,19 @@
     for (int i=0; i<[arrayHTMLSignature count];i++){
         [modifieArray addObject:[self getDictionaryForSignature:[arrayDBSignature objectAtIndex:i] HTMLID:[arrayHTMLSignature objectAtIndex:i]]];
     }
-    
+    [modifieArray addObject:[self getDictionaryForSPAJNumber:@"SPAJNumber" HTMLID:@"TextSPAJNumber"]];
     [dictOriginal setObject:modifieArray forKey:@"readFromDB"];
     [self callSuccessCallback:[params valueForKey:@"successCallBack"] withRetValue:dictOriginal];
     
     //[self performSelector:@selector(voidCreateThePDF) withObject:nil afterDelay:1.0];
-    [self performSelector:@selector(voidCreateImageFromWebView:) withObject:@"FormTenagaPenjual" afterDelay:1.0];
+    [self performSelector:@selector(voidCreateImageFromWebView:) withObject:imageFileName afterDelay:1.0];
     return dictOriginal;
 }
 
 - (void)savetoDB:(NSDictionary *)params{
     //add another key to db
     [super savetoDB:params];
-    //[self loadReport];
+    [self loadReport];
 }
 
 
@@ -495,7 +567,7 @@
     
     //UIButton* buttonInsurancePurchaseReason = (UIButton *)[cell viewWithTag:indexPath.row];
     ButtonSPAJ* buttonInsurancePurchaseReason = [[ButtonSPAJ alloc]initWithFrame:CGRectMake(0, 0, 100, 50)];
-    [buttonInsurancePurchaseReason setButtonName:@"RadioButtonSalesDeclarationPurpose"];
+    [buttonInsurancePurchaseReason setButtonName:@"CheckboxSalesDeclarationPurpose"];
     buttonInsurancePurpose = [buttonInsurancePurchaseReason getButtonName];
     [buttonInsurancePurchaseReason setTag:indexPath.row];
     [buttonInsurancePurchaseReason setTitle:[arrayCollectionInsurancePurchaseReason objectAtIndex:indexPath.row] forState:UIControlStateNormal];
@@ -514,6 +586,11 @@
     [cell.contentView addSubview:buttonInsurancePurchaseReason];
     
     return cell;
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView{
+    [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"readfromDB();"]];
+ 
 }
 
 - (UIImage *)imageWithColor:(UIColor *)color

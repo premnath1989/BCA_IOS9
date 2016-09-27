@@ -431,8 +431,8 @@
             [cellSPAJExisting.buttonPaymentReceipt addTarget:self
                                             action:@selector(actionPaymentReceiptCapture:) forControlEvents:UIControlEventTouchUpInside];
             
-//            [cellSPAJExisting.buttonAgentForm addTarget:self
-//                                                      action:@selector(actionAgentForm:) forControlEvents:UIControlEventTouchUpInside];
+            [cellSPAJExisting.buttonAgentForm addTarget:self
+                                                      action:@selector(actionAgentForm:) forControlEvents:UIControlEventTouchUpInside];
             
             [cellSPAJExisting.buttonView setTag:indexPath.row];
             [cellSPAJExisting.buttonPaymentReceipt setTag:indexPath.row];

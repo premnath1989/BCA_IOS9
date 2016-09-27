@@ -148,7 +148,7 @@ NSString* const stateIMGGeneration = @"IMG";
         //define the webview coordinate
         webview=[[UIWebView alloc]initWithFrame:CGRectMake(5, 0, 960,728)];
         webview.scrollView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
-        [webview setHidden:YES];
+        //[webview setHidden:YES];
         
         
         // Do any additional setup after loading the view, typically from a nib.
@@ -235,6 +235,10 @@ NSString* const stateIMGGeneration = @"IMG";
         [self arrayInitializeSignature];
         
         [super viewDidLoad];
+        
+        for (int i=0; i<[[self.view subviews] count];i++){
+            [self.view sendSubviewToBack:webview];
+        }
     }
 
 
@@ -1161,21 +1165,25 @@ NSString* const stateIMGGeneration = @"IMG";
             [webview loadRequest:request];
         }
         else{
-            [allAboutPDFGeneration removeUnNecesaryPDFFiles:dictTransaction];
-            [allAboutPDFGeneration removeSPAJSigned:dictTransaction];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                [allAboutPDFGeneration removeUnNecesaryPDFFiles:dictTransaction];
+                [allAboutPDFGeneration removeSPAJSigned:dictTransaction];
             
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 [allAboutPDFGeneration voidSaveSignatureForImages:dictTransaction DictionaryPOData:dictionaryPOData];
-                dispatch_async(dispatch_get_main_queue(), ^{
+                /*dispatch_async(dispatch_get_main_queue(), ^{
                     NSString* spajNumber = [modelSPAJTransaction getSPAJTransactionData:@"SPAJNumber" StringWhereName:@"SPAJTransactionID" StringWhereValue:[dictTransaction valueForKey:@"SPAJTransactionID"]];
                     
                     long long longSPAJNumber = [spajNumber longLongValue];
-                    UIAlertController *alertNoSPAJNumber = [alert alertInformation:@"Sukses" stringMessage:[NSString stringWithFormat:@"Nomor SPAJ anda adalah %lli",longSPAJNumber]];
-                    [self presentViewController:alertNoSPAJNumber animated:YES completion:nil];
                     [self voidChangeFileName:longSPAJNumber];
-                    [viewActivityIndicator setHidden:YES];
-                    [_delegateSPAJMain actionGoToExistingList:nil];
-                });
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [viewActivityIndicator setHidden:YES];
+                        UIAlertController *alertNoSPAJNumber = [alert alertInformation:@"Sukses" stringMessage:[NSString stringWithFormat:@"Nomor SPAJ anda adalah %lli",longSPAJNumber]];
+                        [self presentViewController:alertNoSPAJNumber animated:YES completion:nil];
+                            [_delegateSPAJMain actionGoToExistingList:nil];
+                    });
+                });*/
+            });
             });
         }
     }
@@ -1360,7 +1368,7 @@ NSString* const stateIMGGeneration = @"IMG";
         [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"setHeader(\"%@\");",spajNumber]];
         [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"readfromDB();"]];
         if (boolConvertToImage){
-            [self performSelector:@selector(voidCreateImageFromWebView:) withObject:outputName afterDelay:0.3];
+            [self performSelector:@selector(voidCreateImageFromWebView:) withObject:outputName afterDelay:1.0];
         }
 
     }
@@ -1372,6 +1380,21 @@ NSString* const stateIMGGeneration = @"IMG";
 
     -(void)imgSigned{
         
+    }
+
+    -(void)allImgSigned{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSString* spajNumber = [modelSPAJTransaction getSPAJTransactionData:@"SPAJNumber" StringWhereName:@"SPAJTransactionID" StringWhereValue:[dictTransaction valueForKey:@"SPAJTransactionID"]];
+            
+            long long longSPAJNumber = [spajNumber longLongValue];
+            [self voidChangeFileName:longSPAJNumber];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [viewActivityIndicator setHidden:YES];
+                UIAlertController *alertNoSPAJNumber = [alert alertInformation:@"Sukses" stringMessage:[NSString stringWithFormat:@"Nomor SPAJ anda adalah %lli",longSPAJNumber]];
+                [self presentViewController:alertNoSPAJNumber animated:YES completion:nil];
+                [_delegateSPAJMain actionGoToExistingList:nil];
+            });
+        });
     }
 
 

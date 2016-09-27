@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
@@ -7,7 +7,7 @@
         <mutableArray key="BPreplayItalics.otf">
             <string>BPreplay-Italic</string>
         </mutableArray>
-        <mutableArray key="BPreplay_Regular.otf">
+        <mutableArray key="BPreplay_Regular.ttf">
             <string>BPreplay</string>
             <string>BPreplay</string>
             <string>BPreplay</string>
@@ -36,6 +36,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FormTenagaPenjualViewController">
             <connections>
+                <outlet property="AreaSalesDeclarationAdditionalInformation" destination="Scm-BL-s1R" id="M75-ed-Dve"/>
                 <outlet property="RadioButtonSalesDeclaration60DaysLimit" destination="0k3-ej-aAq" id="x81-H6-cl8"/>
                 <outlet property="RadioButtonSalesDeclaration90DaysLimit" destination="zdC-dw-Nmk" id="2Ia-0R-b1V"/>
                 <outlet property="RadioButtonSalesDeclarationBasicSumAssured" destination="vay-Vj-l9c" id="fbq-yK-aC8"/>
@@ -49,6 +50,8 @@
                 <outlet property="RadioButtonSalesDeclarationStillConsideration" destination="9lQ-Sb-pit" id="FTg-bc-f1c"/>
                 <outlet property="RadioButtonSalesDeclarationThirdParty" destination="dW9-Ba-WD2" id="XE1-aR-dnj"/>
                 <outlet property="RadioButtonSalesDeclarationWithoutSecrecy" destination="t7q-h1-KDV" id="C8i-MD-bJY"/>
+                <outlet property="TextSalesDeclarationIncomeBruto" destination="FPG-1l-JLX" id="lFC-fM-pXK"/>
+                <outlet property="TextSalesDeclarationIncomeSource" destination="OUb-zp-yrX" id="YjN-e9-AkS"/>
                 <outlet property="TextSalesDeclarationPurposeOther" destination="8S1-tQ-zwD" id="VDo-1U-yMD"/>
                 <outlet property="TextSalesDeclarationRelationshipWithProspectiveInsuredOther" destination="G95-Uk-3Qq" id="ClS-Lv-MQl"/>
                 <outlet property="collectionReasonInsurancePurchase" destination="t3m-ki-XHT" id="qh0-5t-aEO"/>
@@ -147,7 +150,7 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="OE0-fh-VrU" customClass="SegmentSPAJ">
+                                        <segmentedControl opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="OE0-fh-VrU" customClass="SegmentSPAJ">
                                             <rect key="frame" x="20" y="39" width="791" height="29"/>
                                             <segments>
                                                 <segment title="Keluarga"/>
@@ -160,7 +163,7 @@
                                             </segments>
                                             <color key="tintColor" red="0.0" green="0.62745098040000002" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                                         </segmentedControl>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="G95-Uk-3Qq" customClass="TextFieldSPAJ">
+                                        <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="G95-Uk-3Qq" customClass="TextFieldSPAJ">
                                             <rect key="frame" x="20" y="75" width="453" height="30"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
@@ -177,7 +180,7 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="jTE-3S-CrJ" customClass="SegmentSPAJ">
+                                        <segmentedControl opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="jTE-3S-CrJ" customClass="SegmentSPAJ">
                                             <rect key="frame" x="20" y="37" width="791" height="29"/>
                                             <segments>
                                                 <segment title="Tidak Kenal"/>
@@ -199,7 +202,7 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <segmentedControl opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="E4J-1j-WM8" customClass="SegmentSPAJ">
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="E4J-1j-WM8" customClass="SegmentSPAJ">
                                             <rect key="frame" x="690" y="8" width="121" height="29"/>
                                             <segments>
                                                 <segment title="Ya"/>
@@ -220,7 +223,7 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <segmentedControl opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="t7q-h1-KDV" customClass="SegmentSPAJ">
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="t7q-h1-KDV" customClass="SegmentSPAJ">
                                             <rect key="frame" x="690" y="8" width="121" height="29"/>
                                             <segments>
                                                 <segment title="Ya"/>
@@ -241,7 +244,7 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <segmentedControl opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="db1-mj-HM3" customClass="SegmentSPAJ">
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="db1-mj-HM3" customClass="SegmentSPAJ">
                                             <rect key="frame" x="690" y="8" width="121" height="29"/>
                                             <segments>
                                                 <segment title="Ya"/>
@@ -262,7 +265,7 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <segmentedControl opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="9lQ-Sb-pit" customClass="SegmentSPAJ">
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="9lQ-Sb-pit" customClass="SegmentSPAJ">
                                             <rect key="frame" x="690" y="8" width="121" height="29"/>
                                             <segments>
                                                 <segment title="Ya"/>
@@ -283,7 +286,7 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <segmentedControl opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="7fF-E7-v2j" customClass="SegmentSPAJ">
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="7fF-E7-v2j" customClass="SegmentSPAJ">
                                             <rect key="frame" x="690" y="8" width="121" height="29"/>
                                             <segments>
                                                 <segment title="Ya"/>
@@ -297,7 +300,7 @@
                                 <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ek0-5n-wok" userLabel="View-8">
                                     <rect key="frame" x="0.0" y="860" width="819" height="105"/>
                                     <subviews>
-                                        <segmentedControl opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="0k3-ej-aAq" customClass="SegmentSPAJ">
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="0k3-ej-aAq" customClass="SegmentSPAJ">
                                             <rect key="frame" x="690" y="8" width="121" height="29"/>
                                             <segments>
                                                 <segment title="Ya"/>
@@ -318,7 +321,7 @@
                                 <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FfU-bZ-6B9" userLabel="View-9">
                                     <rect key="frame" x="0.0" y="970" width="819" height="100"/>
                                     <subviews>
-                                        <segmentedControl opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Z1v-ry-3JI" customClass="SegmentSPAJ">
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Z1v-ry-3JI" customClass="SegmentSPAJ">
                                             <rect key="frame" x="690" y="8" width="121" height="29"/>
                                             <segments>
                                                 <segment title="Ya"/>
@@ -346,7 +349,7 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <segmentedControl opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="dW9-Ba-WD2" customClass="SegmentSPAJ">
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="dW9-Ba-WD2" customClass="SegmentSPAJ">
                                             <rect key="frame" x="690" y="8" width="121" height="29"/>
                                             <segments>
                                                 <segment title="Ya"/>
@@ -367,7 +370,7 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <segmentedControl opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3et-Ge-Oae" customClass="SegmentSPAJ">
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3et-Ge-Oae" customClass="SegmentSPAJ">
                                             <rect key="frame" x="690" y="8" width="121" height="29"/>
                                             <segments>
                                                 <segment title="Ya"/>
@@ -388,7 +391,7 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <segmentedControl opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="zdC-dw-Nmk" customClass="SegmentSPAJ">
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="zdC-dw-Nmk" customClass="SegmentSPAJ">
                                             <rect key="frame" x="690" y="8" width="121" height="29"/>
                                             <segments>
                                                 <segment title="Ya"/>
@@ -409,7 +412,7 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <segmentedControl opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="vay-Vj-l9c" customClass="SegmentSPAJ">
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="vay-Vj-l9c" customClass="SegmentSPAJ">
                                             <rect key="frame" x="690" y="8" width="121" height="29"/>
                                             <segments>
                                                 <segment title="Ya"/>
@@ -423,12 +426,12 @@
                                 <view tag="1" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IB5-Cf-OHn" userLabel="View-Penghasilan">
                                     <rect key="frame" x="0.0" y="1515" width="819" height="125"/>
                                     <subviews>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OUb-zp-yrX">
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OUb-zp-yrX" customClass="TextFieldSPAJ">
                                             <rect key="frame" x="317" y="42" width="430" height="30"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
                                         </textField>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FPG-1l-JLX">
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FPG-1l-JLX" customClass="TextFieldSPAJ">
                                             <rect key="frame" x="317" y="80" width="430" height="30"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
@@ -501,7 +504,7 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Scm-BL-s1R">
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Scm-BL-s1R" customClass="TextViewSPAJ">
                                             <rect key="frame" x="20" y="83" width="766" height="106"/>
                                             <color key="backgroundColor" red="0.87450980389999999" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -518,6 +521,7 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
                             </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstItem="lFa-8A-cSt" firstAttribute="top" secondItem="B1q-38-Mx6" secondAttribute="top" constant="1405" id="3Ze-Mc-WUH"/>
                                 <constraint firstItem="7yH-zz-Pdx" firstAttribute="top" secondItem="B1q-38-Mx6" secondAttribute="top" constant="750" id="7Cv-bX-z9z"/>

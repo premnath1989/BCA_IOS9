@@ -205,7 +205,8 @@
                         }
                     }
                     else{
-                        [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
+                        //[self showDetailsForIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
+                        [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
                     }
                 }
             }
@@ -634,6 +635,11 @@
             }
         }
         
+        if (indexPath.row == 2){
+            [cell setUserInteractionEnabled:false];
+            [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_ACTIVE_CELL floatOpacity:1.0]];
+        }
+        
         [cell.button1 setEnabled:false];
         [cell.button2 setEnabled:false];
         [cell.button3 setEnabled:false];
@@ -719,7 +725,8 @@
             [self voidCheckBooleanLastState];
         }
         else if ([stringSection isEqualToString:@"TR"]){
-            [self voidSetCalonTertnggungBoolValidate:true];
+            //[self voidSetCalonTertnggungBoolValidate:true];
+            [self voidSetPerusahaanBoolValidate:true];
         }
         else if ([stringSection isEqualToString:@"PR"]){
             [self voidSetPerusahaanBoolValidate:true];
@@ -742,10 +749,7 @@
     }
 
     -(void)voidSetCalonTertnggungBoolValidate:(BOOL)boolValidate{
-        //boolPerusahaan = true;
         [self.navigationItem setTitle:@"Data Perusahaan / Badan Hukum"];
-        //NSIndexPath* indexPathSelect = [NSIndexPath indexPathForRow:2 inSection:0];
-        //[self showDetailsForIndexPath:indexPathSelect];
         NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJDetail2=1 where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",[dictTransaction valueForKey:@"SPAJEappNumber"]];
         [modelSPAJDetail updateSPAJDetail:stringUpdate];
         //[_tableSection reloadData];

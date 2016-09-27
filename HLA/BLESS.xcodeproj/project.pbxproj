@@ -406,6 +406,7 @@
 		438624B91D24B8B300F1BDC7 /* ProfilResikoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 438624B71D24B8B300F1BDC7 /* ProfilResikoViewController.xib */; };
 		438625191D24C30200F1BDC7 /* PernyataanNasabahViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 438625171D24C30200F1BDC7 /* PernyataanNasabahViewController.m */; };
 		4386251A1D24C30200F1BDC7 /* PernyataanNasabahViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 438625181D24C30200F1BDC7 /* PernyataanNasabahViewController.xib */; };
+		438639131D94DEC800DEF2DF /* TextViewSPAJ.m in Sources */ = {isa = PBXBuildFile; fileRef = 438639121D94DEC800DEF2DF /* TextViewSPAJ.m */; };
 		43870C9F1D35FEAF0035143C /* CustomerNeeds.html in Resources */ = {isa = PBXBuildFile; fileRef = 43870C971D35FEAF0035143C /* CustomerNeeds.html */; };
 		43870CA01D35FEAF0035143C /* CustomerStatement.html in Resources */ = {isa = PBXBuildFile; fileRef = 43870C981D35FEAF0035143C /* CustomerStatement.html */; };
 		43870CA11D35FEAF0035143C /* Investasi.html in Resources */ = {isa = PBXBuildFile; fileRef = 43870C991D35FEAF0035143C /* Investasi.html */; };
@@ -1646,6 +1647,8 @@
 		438625161D24C30200F1BDC7 /* PernyataanNasabahViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PernyataanNasabahViewController.h; sourceTree = "<group>"; };
 		438625171D24C30200F1BDC7 /* PernyataanNasabahViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PernyataanNasabahViewController.m; sourceTree = "<group>"; };
 		438625181D24C30200F1BDC7 /* PernyataanNasabahViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PernyataanNasabahViewController.xib; sourceTree = "<group>"; };
+		438639111D94DEC800DEF2DF /* TextViewSPAJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextViewSPAJ.h; sourceTree = "<group>"; };
+		438639121D94DEC800DEF2DF /* TextViewSPAJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextViewSPAJ.m; sourceTree = "<group>"; };
 		43870C971D35FEAF0035143C /* CustomerNeeds.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = CustomerNeeds.html; sourceTree = "<group>"; };
 		43870C981D35FEAF0035143C /* CustomerStatement.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = CustomerStatement.html; sourceTree = "<group>"; };
 		43870C991D35FEAF0035143C /* Investasi.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Investasi.html; sourceTree = "<group>"; };
@@ -2747,6 +2750,7 @@
 		0F3268201D1A9260001A9021 /* SPAJ */ = {
 			isa = PBXGroup;
 			children = (
+				4386390D1D94CE7F00DEF2DF /* Temp HTML */,
 				43C98E001D51A1E200A3F911 /* SPAJ Forms */,
 				0FFA18611D21266000C63A47 /* Database */,
 				0F3268731D1BD140001A9021 /* Image.xcassets */,
@@ -2843,6 +2847,7 @@
 		0F3268681D1A99AE001A9021 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				438639101D94DEAC00DEF2DF /* UITextView */,
 				435464B81D9292DF00F04413 /* UIButton */,
 				435464B41D928E3C00F04413 /* UITextField */,
 				435464AD1D92753D00F04413 /* UISegmentedControl */,
@@ -3949,6 +3954,22 @@
 				438625181D24C30200F1BDC7 /* PernyataanNasabahViewController.xib */,
 			);
 			name = "Section 5 Pernyataan Nasabah";
+			sourceTree = "<group>";
+		};
+		4386390D1D94CE7F00DEF2DF /* Temp HTML */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Temp HTML";
+			sourceTree = "<group>";
+		};
+		438639101D94DEAC00DEF2DF /* UITextView */ = {
+			isa = PBXGroup;
+			children = (
+				438639111D94DEC800DEF2DF /* TextViewSPAJ.h */,
+				438639121D94DEC800DEF2DF /* TextViewSPAJ.m */,
+			);
+			name = UITextView;
 			sourceTree = "<group>";
 		};
 		43870CA71D3629AD0035143C /* Proteksi */ = {
@@ -6570,6 +6591,7 @@
 				2958A85117E95EC80090A791 /* ChildrenViewController.m in Sources */,
 				2958A85217E95EC80090A791 /* CustomerClientProfile.m in Sources */,
 				DE15788C1CBB792900CE171B /* NSData+Base64.m in Sources */,
+				438639131D94DEC800DEF2DF /* TextViewSPAJ.m in Sources */,
 				2958A85317E95EC80090A791 /* CustomerViewController.m in Sources */,
 				2958A85417E95EC80090A791 /* PartnerClientProfile.m in Sources */,
 				2958A85517E95EC80090A791 /* PartnerViewController.m in Sources */,

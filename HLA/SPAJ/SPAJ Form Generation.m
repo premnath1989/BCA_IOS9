@@ -212,11 +212,11 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
             arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]]];
         }
         else{
-            arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_IN" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]]];
+            //arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_IN" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]]];
+            arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH\",\"IMG_IN"]];
         }
         
         //arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH\",\"IMG_IN"]];
-        
         if ([arrayIMGName count]>0){
             [self loadSPAJPDFHTML:[arrayIMGName objectAtIndex:indexImgForPDFGeneration] WithArrayIndex:indexImgForPDFGeneration];
         }
@@ -752,7 +752,9 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
         [self callSuccessCallback:[params valueForKey:@"successCallBack"] withRetValue:dictOriginal];
         //  [viewActivityIndicator setHidden:YES];
         
-        [self performSelector:@selector(voidCreateThePDF) withObject:nil afterDelay:1.0];
+        @autoreleasepool {
+            [self performSelector:@selector(voidCreateThePDF) withObject:nil afterDelay:1.0];
+        }
         //[self voidCreateThePDF];
         return dictOriginal;
     }
@@ -760,7 +762,9 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
     - (void)webViewDidFinishLoad:(UIWebView *)webView{
         [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"readfromDB();"]];
         if (boolConvertToImage){
-            [self performSelector:@selector(voidCreateImageFromWebView:) withObject:outputName afterDelay:0.3];
+            @autoreleasepool {
+                [self performSelector:@selector(voidCreateImageFromWebView:) withObject:outputName afterDelay:0.3];
+            }
         }
     }
 

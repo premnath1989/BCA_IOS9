@@ -58,7 +58,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [scrollImage setZoomScale:4.0];
     //[scrollImage setContentOffset:CGPointMake(scrollImage.contentOffset.x, 0) animated:YES];
     
     alert = [[Alert alloc]init];
@@ -157,11 +156,18 @@
             [webViewDisplayPDF loadRequest:request];
         }
         else{
+            if ([fileName rangeOfString:@"page"].location == NSNotFound) {
+                [scrollImage setZoomScale:0.0];
+            }
+            else{
+                [scrollImage setZoomScale:4.0];
+            }
             [webViewDisplayPDF setHidden:YES];
             [imageViewDisplayImage setHidden:NO];
             [imageViewDisplayImage setImage:[UIImage imageWithContentsOfFile:[NSString stringWithFormat:@"%@/%@",[formatter generateSPAJFileDirectory:[dictTransaction valueForKey:@"SPAJEappNumber"]],fileName]]];
             
             [self setCenter:nil];
+            //[self scrollViewDidEndZooming:scrollImage withView:imageViewDisplayImage atScale:scrollImage.zoomScale];
         }
     } @catch (NSException *exception) {
         
@@ -269,15 +275,15 @@
                         [modelSPAJTransaction updateSPAJTransaction:@"SPAJStatus" StringColumnValue:@"Submitted" StringWhereName:@"SPAJEappNumber" StringWhereValue:[dictTransaction valueForKey:@"SPAJEappNumber"]];
                         
                         [modelSPAJSubmitTracker saveSPAJSubmitDate:[dictTransaction valueForKey:@"SPAJNumber"] SubmitDate:[formatter getDateToday:@"yyyy-MM-dd HH:mm:ss"]];
-                        [progressBar dismissViewControllerAnimated:YES completion:^{
-                            UIAlertController* alertController = [UIAlertController alertControllerWithTitle:@"Sukses Upload" message:@"Data berhasil diupload" preferredStyle:UIAlertControllerStyleAlert];
-                            
-                            [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-                                //[progressBar dismissViewControllerAnimated:YES completion:^{}];
-                                [self dismissViewControllerAnimated:YES completion:^{[delegateSPAJFiles loadSPAJTransaction];}];
-                            }]];
-                            [self presentViewController:alertController animated:YES completion:nil];
-                        }];
+                        [progressBar dismissViewControllerAnimated:YES completion:nil];
+                        
+                        UIAlertController* alertController = [UIAlertController alertControllerWithTitle:@"Sukses Upload" message:@"Data berhasil diupload" preferredStyle:UIAlertControllerStyleAlert];
+                        
+                        [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                            //[progressBar dismissViewControllerAnimated:YES completion:^{}];
+                            [self dismissViewControllerAnimated:YES completion:^{[delegateSPAJFiles loadSPAJTransaction];}];
+                        }]];
+                        [self presentViewController:alertController animated:YES completion:nil];
                     }
                 }] resume];
     }

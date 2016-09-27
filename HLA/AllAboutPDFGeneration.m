@@ -252,7 +252,8 @@
         arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH"]];
     }
     else{
-        arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_IN"]];
+        //arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_IN"]];
+        arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH\",\"IMG_IN"]];
     }
     
     for (int i=0;i<[arrayIMGName count];i++){
@@ -262,9 +263,13 @@
     
     dispatch_async(dispatch_get_main_queue(), ^{
         for (int x=0;x<[arrayPureIMGName count];x++){
-            [self saveSignatureForImage:imageConverted1 ImageSigned2:imageConverted2 ImageSigned3:imageConverted3 ImageSigned4:imageConverted4 FileName:[arrayPureIMGName objectAtIndex:x] DictTransaction:dictTransaction];
+            @autoreleasepool {
+                [self saveSignatureForImage:imageConverted1 ImageSigned2:imageConverted2 ImageSigned3:imageConverted3 ImageSigned4:imageConverted4 FileName:[arrayPureIMGName objectAtIndex:x] DictTransaction:dictTransaction];
+            }
         }
     });
+    
+    [delegatePDFGeneration allImgSigned];
 }
 
 
@@ -282,7 +287,7 @@
         CGRect rectSign3 = CGRectMake(200, 1980, imageSigned3.size.width, imageSigned3.size.height);
         CGRect rectSign4 = CGRectMake(1320, 1980, imageSigned4.size.width, imageSigned4.size.height);
         
-        UIImage *resultImage = [self generateSignatureForImage:baseImage signatureImage1:imageSigned1 signaturePostion1:rectSign1 signatureImage2:imageSigned2 signaturePostion2:rectSign2 signatureImage3:imageSigned3 signaturePostion3:rectSign3 signatureImage4:imageSigned4 signaturePostion4:rectSign4];
+        UIImage *resultImage = [self generateSignatureForImage:baseImage signatureImage1:imageSigned1 signaturePostion1:rectSign1 signatureImage2:imageSigned2 signaturePostion2:rectSign2 signatureImage3:imageSigned3 signaturePostion3:rectSign3 signatureImage4:imageSigned4 signaturePostion4:rectSign4] ;
         NSData *thumbnailData = UIImageJPEGRepresentation(resultImage, 0);
         
         NSString *relativeOutputFilePath = [NSString stringWithFormat:@"%@", fullpath];

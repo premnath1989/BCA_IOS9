@@ -5,7 +5,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="BPreplay.otf">
+        <mutableArray key="BPreplay_Regular.otf">
             <string>BPreplay</string>
         </mutableArray>
     </customFonts>
@@ -61,6 +61,10 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8jP-cp-J10">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pi5-52-vFL" customClass="ViewPageHeader">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
                     <subviews>
@@ -713,20 +717,30 @@
                 <constraint firstAttribute="trailing" secondItem="qLA-Ph-RKi" secondAttribute="trailing" id="9n7-uM-lsT"/>
                 <constraint firstItem="6Zh-Ka-Pyq" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="60" id="Aqf-jc-tel"/>
                 <constraint firstItem="6Zh-Ka-Pyq" firstAttribute="top" secondItem="qLA-Ph-RKi" secondAttribute="bottom" constant="40" id="DMm-bL-wFD"/>
+                <constraint firstItem="8jP-cp-J10" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="180" id="EG4-e1-swb"/>
                 <constraint firstItem="Tnk-va-LaM" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="HIm-XD-vEu"/>
                 <constraint firstItem="Tnk-va-LaM" firstAttribute="top" secondItem="pi0-Ce-Ifd" secondAttribute="bottom" id="Hgb-9F-upe"/>
                 <constraint firstItem="WqI-nw-hgs" firstAttribute="top" secondItem="pi5-52-vFL" secondAttribute="top" id="NCb-rB-tb8"/>
+                <constraint firstItem="8jP-cp-J10" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="SOu-Z6-4hQ"/>
+                <constraint firstAttribute="bottom" secondItem="8jP-cp-J10" secondAttribute="bottom" id="SXx-IN-Awd"/>
                 <constraint firstItem="pi5-52-vFL" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="UaH-Sw-U7d"/>
                 <constraint firstItem="pi0-Ce-Ifd" firstAttribute="top" secondItem="pi5-52-vFL" secondAttribute="bottom" constant="-4" id="W4S-hB-Vvy"/>
                 <constraint firstItem="WqI-nw-hgs" firstAttribute="leading" secondItem="pi0-Ce-Ifd" secondAttribute="leading" id="WJy-1a-Tjy"/>
                 <constraint firstAttribute="trailing" secondItem="pi0-Ce-Ifd" secondAttribute="trailing" id="YL1-9e-by9"/>
+                <constraint firstItem="8jP-cp-J10" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ZRf-Jk-dMR"/>
                 <constraint firstItem="qLA-Ph-RKi" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="gTy-2Q-Nbh"/>
                 <constraint firstAttribute="trailing" secondItem="6Zh-Ka-Pyq" secondAttribute="trailing" constant="60" id="h7V-vJ-TSv"/>
                 <constraint firstItem="pi0-Ce-Ifd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="h8m-fO-MeP"/>
                 <constraint firstAttribute="trailing" secondItem="Tnk-va-LaM" secondAttribute="trailing" id="lE6-3V-nYw"/>
                 <constraint firstItem="pi5-52-vFL" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="rBK-Yf-qTL"/>
+                <constraint firstAttribute="trailing" secondItem="8jP-cp-J10" secondAttribute="trailing" id="vj7-7T-mUh"/>
                 <constraint firstAttribute="trailing" secondItem="pi5-52-vFL" secondAttribute="trailing" id="x9T-aW-hmA"/>
             </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="EG4-e1-swb"/>
+                </mask>
+            </variation>
         </view>
     </objects>
 </document>

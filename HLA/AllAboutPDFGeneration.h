@@ -15,6 +15,7 @@
 
 - (void) voidPDFCreated;
 - (void) imgSigned;
+- (void) allImgSigned;
 @end
 
 @interface AllAboutPDFGeneration : NSObject{
