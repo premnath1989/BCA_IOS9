@@ -485,6 +485,14 @@
     
 };
 
+- (void)showFormThirdParty{
+    spajThirdPartyViewController = [[SPAJThirdParty alloc]initWithNibName:@"SPAJThirdParty" bundle:nil];
+    //[spajFilesViewController setDelegateSPAJFiles:self];
+    [spajThirdPartyViewController setDictTransaction:dictTransaction];
+    spajThirdPartyViewController.modalPresentationStyle = UIModalPresentationFormSheet;
+    [self presentViewController:spajThirdPartyViewController animated:YES completion:nil];
+}
+
 #pragma mark call save function in HTML
 -(void)voidDoneSPAJCalonPemegangPolis{
     //[webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"document.getElementById('save').click()"]];
@@ -770,6 +778,20 @@
     
     return result;
 }
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    if ([[[request URL] absoluteString] hasPrefix:@"ios:"]) {
+        
+        // Call the given selector
+        [self performSelector:@selector(showFormThirdParty)];
+        // Cancel the location change
+        return NO;
+    }
+    return YES;
+    
+}
+
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
     [viewActivityIndicator setHidden:NO];

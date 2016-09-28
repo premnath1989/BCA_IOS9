@@ -391,38 +391,53 @@ main form .LongIndent, main fieldset .LongIndent {
 }
 
 /* WIDTH */
-div.Short, div.Short {
+.Tiny {
+  min-width: 32.5px;
+  width: 32.5px;
+}
+
+.Short {
   min-width: 130px;
   width: 130px;
 }
 
-div.Medium, div.Medium {
+.Medium {
   min-width: 390px;
   width: 390px;
 }
 
-div.Long, div.Long {
+.Long {
   min-width: 390px;
   width: 390px;
 }
 
-div.Long, div.Long {
+.Full {
   width: 100%;
 }
 
-div.ShortFix, div.ShortFix {
+.TinyFix {
+  width: 32.5px;
+  max-width: 32.5px;
+}
+
+.ShortFix {
   width: 130px;
   max-width: 130px;
 }
 
-div.MediumFix, div.MediumFix {
-  width: 390px;
-  max-width: 390px;
+.MediumFix {
+  width: 260px;
+  max-width: 260px;
 }
 
-div.LongFix, div.LongFix {
+.LongFix {
   width: 780px;
   max-width: 780px;
+}
+
+.FullFix {
+  width: 100%;
+  max-width: 100%;
 }
 
 /* HEIGHT */

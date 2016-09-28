@@ -358,38 +358,53 @@ main form .ContainerRight, main fieldset .ContainerRight {
   justify-content: flex-end;
 }
 
-div.Short, div.Short {
+div.Tiny {
+  min-width: 20px;
+  width: 20px;
+}
+
+div.Short {
   min-width: 40px;
   width: 40px;
 }
 
-div.Medium, div.Medium {
+div.Medium {
   min-width: 126px;
   width: 126px;
 }
 
-div.Long, div.Long {
+div.Long {
   min-width: 120px;
   width: 120px;
 }
 
-div.Long, div.Long {
+div.Full {
   width: 100%;
 }
 
-div.ShortFix, div.ShortFix {
+div.TinyFix {
+  width: 20px;
+  max-width: 20px;
+}
+
+div.ShortFix {
   width: 40px;
   max-width: 40px;
 }
 
-div.MediumFix, div.MediumFix {
+div.MediumFix {
   width: 126px;
   max-width: 126px;
 }
 
-div.LongFix, div.LongFix {
+div.LongFix {
   width: 240px;
   max-width: 240px;
+}
+
+div.FullFix {
+  width: 100%;
+  max-width: 100%;
 }
 
 /* POP UP */

@@ -434,6 +434,8 @@
 		438DB5F81D49F52100B92FEF /* SIListingPopOver.m in Sources */ = {isa = PBXBuildFile; fileRef = 438DB5F71D49F52100B92FEF /* SIListingPopOver.m */; };
 		438E79021D5B2C0100C78AB2 /* ModelSPAJDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 438E79011D5B2C0100C78AB2 /* ModelSPAJDetail.m */; };
 		438E79051D5B2C1800C78AB2 /* ModelSPAJFormGeneration.m in Sources */ = {isa = PBXBuildFile; fileRef = 438E79041D5B2C1800C78AB2 /* ModelSPAJFormGeneration.m */; };
+		4392993B1D9B0D4500C5B952 /* SPAJThirdParty.m in Sources */ = {isa = PBXBuildFile; fileRef = 439299391D9B0D4500C5B952 /* SPAJThirdParty.m */; };
+		4392993C1D9B0D4500C5B952 /* SPAJThirdParty.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4392993A1D9B0D4500C5B952 /* SPAJThirdParty.xib */; };
 		43952C831D914D6600682E87 /* FormTenagaPenjualViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43952C811D914D6600682E87 /* FormTenagaPenjualViewController.m */; };
 		43952C841D914D6600682E87 /* FormTenagaPenjualViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43952C821D914D6600682E87 /* FormTenagaPenjualViewController.xib */; };
 		4399826C1D07D025009CFEB2 /* CFFListingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4399826A1D07D025009CFEB2 /* CFFListingViewController.m */; };
@@ -1693,6 +1695,9 @@
 		438E79011D5B2C0100C78AB2 /* ModelSPAJDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelSPAJDetail.m; sourceTree = "<group>"; };
 		438E79031D5B2C1800C78AB2 /* ModelSPAJFormGeneration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelSPAJFormGeneration.h; sourceTree = "<group>"; };
 		438E79041D5B2C1800C78AB2 /* ModelSPAJFormGeneration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelSPAJFormGeneration.m; sourceTree = "<group>"; };
+		439299381D9B0D4500C5B952 /* SPAJThirdParty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPAJThirdParty.h; sourceTree = "<group>"; };
+		439299391D9B0D4500C5B952 /* SPAJThirdParty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPAJThirdParty.m; sourceTree = "<group>"; };
+		4392993A1D9B0D4500C5B952 /* SPAJThirdParty.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SPAJThirdParty.xib; sourceTree = "<group>"; };
 		43952C801D914D6600682E87 /* FormTenagaPenjualViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormTenagaPenjualViewController.h; sourceTree = "<group>"; };
 		43952C811D914D6600682E87 /* FormTenagaPenjualViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormTenagaPenjualViewController.m; sourceTree = "<group>"; };
 		43952C821D914D6600682E87 /* FormTenagaPenjualViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FormTenagaPenjualViewController.xib; sourceTree = "<group>"; };
@@ -2840,6 +2845,7 @@
 				438035DD1D5D8847003A9199 /* SPAJFilesViewController.xib */,
 				438410C11D66A2F700FD4152 /* SPAJIDCapturedViewController.xib */,
 				43952C821D914D6600682E87 /* FormTenagaPenjualViewController.xib */,
+				4392993A1D9B0D4500C5B952 /* SPAJThirdParty.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -2852,6 +2858,8 @@
 				435464B41D928E3C00F04413 /* UITextField */,
 				435464AD1D92753D00F04413 /* UISegmentedControl */,
 				0FF845751D23A3BB008CF861 /* Cell */,
+				439299381D9B0D4500C5B952 /* SPAJThirdParty.h */,
+				439299391D9B0D4500C5B952 /* SPAJThirdParty.m */,
 				438410BF1D66A2F700FD4152 /* SPAJIDCapturedViewController.h */,
 				438410C01D66A2F700FD4152 /* SPAJIDCapturedViewController.m */,
 				439E457F1D585C0B009098EF /* SPAJPDFWebViewController.h */,
@@ -6073,6 +6081,7 @@
 				C486D9CC163E5319009F8F21 /* btn_prospect_on.png in Resources */,
 				43F8B5511C81E71B006F3F6C /* SIListingTableViewCell.xib in Resources */,
 				43870CA51D35FEAF0035143C /* Proteksi.html in Resources */,
+				4392993C1D9B0D4500C5B952 /* SPAJThirdParty.xib in Resources */,
 				C486D9CE163E5319009F8F21 /* btn_SIlisting_on.png in Resources */,
 				C486D9D1163E5466009F8F21 /* btn_home.png in Resources */,
 				43C98E141D51D23100A3F911 /* SPAJ Calon Penerima Manfaat.xib in Resources */,
@@ -6644,6 +6653,7 @@
 				0F3268721D1BBDCB001A9021 /* String.m in Sources */,
 				AAFEE0351C6C1EC900702F64 /* TableManagement.m in Sources */,
 				29A38DA317EAEB6B00454787 /* eSignVC.m in Sources */,
+				4392993B1D9B0D4500C5B952 /* SPAJThirdParty.m in Sources */,
 				29A38DA417EAEB6B00454787 /* formsDetails.m in Sources */,
 				AAFEE03E1C6D927400702F64 /* UIButton+Property.m in Sources */,
 				29A38DA517EAEB6B00454787 /* FormCell.m in Sources */,

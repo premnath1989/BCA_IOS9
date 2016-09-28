@@ -325,6 +325,10 @@ main form fieldset p {
   font-size: 0.75em;
 }
 
+.QuestionnaireTitle {
+  font-size: 1em	!important;
+}
+
 /* SIGNATURE */
 .Signature {
   margin: 10px;

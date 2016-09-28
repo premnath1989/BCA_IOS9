@@ -18,6 +18,7 @@
 #import "ModelOccupation.h"
 #import "Model_SI_Premium.h"
 #import "AllAboutPDFGeneration.h"
+#import "SPAJThirdParty.h"
 
 @protocol SPAJCalonPemegangPolisDelegate
     -(NSString *)voidGetEAPPNumber;
@@ -38,6 +39,7 @@
     ModelIdentificationType* modelIdentificationType;
     Model_SI_Premium *modelSIPremium;
     AllAboutPDFGeneration *allAboutPDFGeneration;
+    SPAJThirdParty *spajThirdPartyViewController;
     
     IBOutlet UIView *viewActivityIndicator;
 }

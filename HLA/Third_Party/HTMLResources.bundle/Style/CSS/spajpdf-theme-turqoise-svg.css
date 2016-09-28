@@ -143,6 +143,11 @@ input[type="checkbox"].Plain:checked + label {
   background-color: #00a6b3;
 }
 
+textarea:disabled {
+  color: #ffffff;
+  background-color: #ebecec;
+}
+
 /* TABLE */
 section table.Square tbody tr td table.BoxSquare tbody tr td, section table.Square tbody tr td table.BoxRound tbody tr td, section table.Round tbody tr td table.BoxSquare tbody tr td, section table.Round tbody tr td table.BoxRound tbody tr td, section table.Space tbody tr td table.BoxSquare tbody tr td, section table.Space tbody tr td table.BoxRound tbody tr td {
   border-color: #000000;

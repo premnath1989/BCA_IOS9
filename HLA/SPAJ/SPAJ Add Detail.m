@@ -726,6 +726,8 @@
         }
         else if ([stringSection isEqualToString:@"TR"]){
             //[self voidSetCalonTertnggungBoolValidate:true];
+            NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJDetail2=1 where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",[dictTransaction valueForKey:@"SPAJEappNumber"]];
+            [modelSPAJDetail updateSPAJDetail:stringUpdate];
             [self voidSetPerusahaanBoolValidate:true];
         }
         else if ([stringSection isEqualToString:@"PR"]){

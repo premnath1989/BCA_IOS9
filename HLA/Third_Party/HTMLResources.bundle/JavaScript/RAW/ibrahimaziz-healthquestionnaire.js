@@ -863,15 +863,19 @@ function setToHealthQuestionnairePDF(stringLayoutJavaScriptID, arrayContent)
 
 function getFromDatabaseForAmandment(arrayContent, stringPageInfix, stringLayoutJavaScriptID)
 {
+	// AREA DETAIL
+
 	var stringLayoutJQueryID = stringKres + stringLayoutJavaScriptID;
 	var arrayPrefixFilter = [stringPrefixText, stringPrefixArea];
 	var stringInfixFilter;
 	var stringSuffixFilter = stringAmandmentSuffix + stringDetailSuffix;
 	var arrayGeneralForm = ["SmokeActivity", "Junkie", "Activity", "Abroad", "Respiratory", "Cardiac", "Digest", "Nerve", "Liver", "Motion", "Gland", "Cell", "Claim", "Diagnostic", "PregnancyIllness", "FemaleAbnormality", "PapSmear", "HeartDissorder"];
 	var arrayGeneralFormInIndonesia = ["Merokok", "Narkoba dan adiktif", "Aktifitas", "Bepergian keluar", "Pernapasan", "Jantung", "Pencernaan", "Saraf", "Hati", "Gerak", "Sel", "Kelenjar", "Klaim SPAJ", "Pemeriksaan", "Sakit Kehamilan", "Kelainan Wanita", "Pap Smear", "Kelainan Jantung"];
-	var stringKey;
+	var stringComposedKey;
 	var stringQuestionPrefix = "Jawaban tambahan kuesioner ";
 	var intQuestionNumber = 0;
+	var stringKey;
+	var stringValue;
 	
 	for (var i = 0; i < arrayGeneralForm.length; i++)
 	{
@@ -879,20 +883,23 @@ function getFromDatabaseForAmandment(arrayContent, stringPageInfix, stringLayout
 		
 		for (var j = 0; j < arrayContent.length; j++)
 		{
+			stringKey = arrayContent[j].elementID;
+			stringValue = arrayContent[j].Value;
+
 			for (var k = 0; k < arrayPrefixFilter.length; k++)
 			{
-				stringKey = arrayPrefixFilter[k] + stringInfixFilter + stringSuffixFilter;
+				stringComposedKey = arrayPrefixFilter[k] + stringInfixFilter + stringSuffixFilter;
 				
-				if (stringKey == arrayContent[j].elementID)
+				if (stringComposedKey == stringKey)
 				{
 					intQuestionNumber++;
 
 					$(stringLayoutJQueryID).append
 					(
 						"<span class='Number Single PositionerLeft'>" + intQuestionNumber + ". " + "</span>" + 
-						"<label for='" + arrayContent[j].elementID + "' class='Single PositionerLeft' >" + stringQuestionPrefix + arrayGeneralFormInIndonesia[i] + "</label>" + 
+						"<label for='" + stringKey + "' class='Single PositionerLeft' >" + stringQuestionPrefix + arrayGeneralFormInIndonesia[i] + "</label>" + 
 						"<br>" + 
-						"<textarea id='" + arrayContent[j].elementID + "' class='Full Double PositionerLeft'>" + arrayContent[j].Value + "</textarea>" + 
+						"<textarea id='" + stringKey + "' class='Full Double PositionerLeft'>" + stringValue + "</textarea>" + 
 						"</br>"
 					);
 				}
@@ -902,6 +909,104 @@ function getFromDatabaseForAmandment(arrayContent, stringPageInfix, stringLayout
 				}
 			}
 		}
+	}
+
+
+	// DISEASE
+
+	var stringContentSuffix;
+	var arraySicknessHeader = ["Vision", "ENT", "Reproduction", "Immune", "OtherIllness"];
+	var stringContentSickness;
+	var stringKeyWithoutPrefix;
+	var stringKeyWithoutInfix;
+	var stringContainerSicknessJavaScriptID;
+	var stringContainerSicknessJQueryID;
+	intQuestionNumber = 1;
+	var intFlagQuestionNumber = 0;
+
+	for (var k = 0; k < arraySicknessHeader.length; k++)
+	{
+		for (var j = 0; j < arrayContent.length; j++)
+		{
+			stringKey = arrayContent[j].elementID;
+			stringValue = arrayContent[j].Value;
+			stringKeyWithoutPrefix = releasePrefix(stringKey);
+			stringKeyWithoutInfix = releaseInfix(stringKeyWithoutPrefix);
+			stringContentSickness = stringKeyWithoutInfix.substring(0, arraySicknessHeader[k].length);
+
+			if (stringContentSickness == arraySicknessHeader[k])
+			{
+
+
+				
+				stringContainerSicknessJavaScriptID = stringContentSickness + intQuestionNumber;
+				stringContainerSicknessJQueryID = stringKres + stringContainerSicknessJavaScriptID;
+
+				if (intFlagQuestionNumber == intQuestionNumber)
+				{
+
+				}
+				else
+				{
+					if (intQuestionNumber == 1)
+					{
+						$(stringLayoutJQueryID).append
+						(
+							"<div class='ContainerFit'>" + 
+								// "<span class='ShortFix Single Item Margin'>" + "Nama Penyakit" + "</span>" + 
+								"<span class='Short Single Item Margin'>" + arrayHealthTableHeader[0] + "</span>" + 
+								"<span class='Short Single Item Margin'>" + arrayHealthTableHeader[1] + "</span>" + 
+								"<span class='Short Single Item Margin'>" + arrayHealthTableHeader[2] + "</span>" + 
+								"<span class='Short Single Item Margin'>" + arrayHealthTableHeader[3] + "</span>" + 
+								"<span class='Short Single Item Margin'>" + arrayHealthTableHeader[4] + "</span>" + 
+								"<span class='Short Single Item Margin'>" + arrayHealthTableHeader[5] + "</span>" + 
+								"<span class='Short Single Item Margin'>" + arrayHealthTableHeader[6] + "</span>" + 
+							"</div>"
+						);
+					}
+					else
+					{
+
+					}
+
+					$(stringLayoutJQueryID).append
+					(
+						"<div class='ContainerFit' id='" + stringContainerSicknessJavaScriptID + "'></div>"
+					);
+
+					/* $(stringContainerSicknessJQueryID).append
+					(
+						"<span class='ShortFix Single Item Margin'>" + stringContentSickness + "</span>"
+					); */
+
+					intFlagQuestionNumber = intQuestionNumber;
+				}
+
+				for (var i = 0; i < arrayHealthTableHeader.length; i++)
+				{
+					stringContentSuffix = stringKeyWithoutInfix.substring(arraySicknessHeader[k].length, stringKeyWithoutInfix.length);
+
+					if(stringContentSuffix == arrayHealthTableHeader[i])
+					{
+						$(stringContainerSicknessJQueryID).append
+						(
+							"<input type='text' class='Short Single Item Margin' value='" + stringValue + "'/>"
+						);
+					}
+					else
+					{
+
+					}
+				}
+			}
+			else
+			{
+
+			}
+		}
+
+		intQuestionNumber ++;
+		intFlagQuestionNumber = 0;
 	}
 }
 
@@ -1084,10 +1189,14 @@ function setDatePDFForHealthQuestionnaire(stringID, stringContent)
 			{				
 				setBoxGeneral(stringID + arrayDateID[i], arrayDateString[i]);	
 			}
-			else
+			else if ($(stringKres + stringID + arrayDateID[i]).is("div") == true)
 			{				
 				setLineGeneral(stringID + arrayDateID[i], arrayDateString[i]);	
-			}			
+			}
+			else
+			{
+				setTextGeneral(stringID, stringContent);
+			}
 		}
 	}
 	else
@@ -1098,9 +1207,13 @@ function setDatePDFForHealthQuestionnaire(stringID, stringContent)
 			{
 				setBoxGeneral(stringID + arrayTimeID[i], arrayTimeString[i]);	
 			}
+			else if ($(stringKres + stringID + arrayDateID[i]).is("div") == true)
+			{
+				setLineGeneral(stringID + arrayTimeID[i], arrayTimeString[i]);	
+			}
 			else
 			{
-				setTextGeneral(stringID + arrayTimeID[i], arrayTimeString[i]);	
+				setTextGeneral(stringID, stringContent);
 			}			
 		}
 	}

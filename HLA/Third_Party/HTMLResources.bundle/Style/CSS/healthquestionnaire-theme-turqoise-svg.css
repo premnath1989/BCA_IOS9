@@ -151,6 +151,20 @@ input, textarea, select {
   color: #ebecec;
 }
 
+.Checkbox .Separator {
+  background-color: #00a6b3;
+}
+
+.Checkbox label.Checkbox {
+  background-color: transparent;
+  color: #00a6b3;
+}
+
+.Checkbox input[type="checkbox"]:checked + label.Checkbox {
+  background-color: #00a6b3;
+  color: #ebecec;
+}
+
 /* NAVIGATION */
 nav a {
   color: #00a6b3;
