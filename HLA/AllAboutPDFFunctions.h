@@ -13,6 +13,9 @@
 -(NSString *)GetOutputForRelationWithPORadioButton:(NSString *)stringSegmentSelected;
 -(NSString *)GetOutputForYaTidakRadioButton:(NSString *)stringSegmentSelected;
 -(NSString *)GetOutputForInsurancePurposeCheckBox:(NSString *)stringInsurancePurpose;
--(NSMutableDictionary *)dictAnswers:(NSDictionary *)dictTransaction ElementID:(NSString *)elementID Value:(NSString *)value;
+-(NSMutableDictionary *)dictAnswers:(NSDictionary *)dictTransaction ElementID:(NSString *)elementID Value:(NSString *)value Section:(NSString *)stringSection;
 -(NSDictionary *)createDictionaryForSave:(NSMutableArray *)arrayAnswers;
+-(NSString *)GetOutputForRadioButton:(NSString *)stringSegmentSelected;
+-(void)showDict;
+-(void)createDictionaryForRadioButton;
 @end

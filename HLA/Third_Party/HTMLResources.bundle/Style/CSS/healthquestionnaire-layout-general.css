@@ -363,6 +363,11 @@ main form .ContainerRight, main fieldset .ContainerRight {
   width: 18.75px;
 }
 
+.Small {
+  min-width: 88.23529px;
+  width: 88.23529px;
+}
+
 .Short {
   min-width: 75px;
   width: 75px;
@@ -385,6 +390,11 @@ main form .ContainerRight, main fieldset .ContainerRight {
 .TinyFix {
   width: 18.75px;
   max-width: 18.75px;
+}
+
+.SmallFix {
+  width: 88.23529px;
+  max-width: 88.23529px;
 }
 
 .ShortFix {

@@ -4,13 +4,13 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="BPreplayBold.otf">
+        <mutableArray key="BPreplay_Bold.ttf">
             <string>BPreplay-Bold</string>
             <string>BPreplay-Bold</string>
             <string>BPreplay-Bold</string>
             <string>BPreplay-Bold</string>
         </mutableArray>
-        <mutableArray key="BPreplay_Regular.ttf">
+        <mutableArray key="BPreplay_Regular.otf">
             <string>BPreplay</string>
             <string>BPreplay</string>
             <string>BPreplay</string>
@@ -280,6 +280,10 @@
             <rect key="frame" x="0.0" y="0.0" width="819" height="724"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HMx-zG-lVz">
+                    <rect key="frame" x="0.0" y="0.0" width="819" height="724"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KJU-fP-FtL" customClass="ViewPageHeader">
                     <rect key="frame" x="0.0" y="0.0" width="819" height="44"/>
                     <subviews>
@@ -540,17 +544,6 @@
                                             </segments>
                                             <color key="tintColor" red="0.0" green="0.62745098040000002" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                                         </segmentedControl>
-                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="9fd-g9-iEN" customClass="SegmentSPAJ">
-                                            <rect key="frame" x="349" y="237" width="462" height="29"/>
-                                            <segments>
-                                                <segment title="Suami / Istri"/>
-                                                <segment title="Anak"/>
-                                                <segment title="Orang Tua"/>
-                                                <segment title="Saudara kandung"/>
-                                                <segment title="Lainnya, sebutkan"/>
-                                            </segments>
-                                            <color key="tintColor" red="0.0" green="0.62745098040000002" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        </segmentedControl>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="   Bila Ya, hubungan dengan Anda ?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oaf-wg-t79">
                                             <rect key="frame" x="8" y="240" width="326" height="21"/>
                                             <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="14"/>
@@ -598,6 +591,17 @@
                                             <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
                                         </textField>
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="9fd-g9-iEN" customClass="SegmentSPAJ">
+                                            <rect key="frame" x="349" y="237" width="462" height="29"/>
+                                            <segments>
+                                                <segment title="Suami / Istri"/>
+                                                <segment title="Anak"/>
+                                                <segment title="Orang Tua"/>
+                                                <segment title="Saudara kandung"/>
+                                                <segment title="Lainnya, sebutkan"/>
+                                            </segments>
+                                            <color key="tintColor" red="0.0" green="0.62745098040000002" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        </segmentedControl>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
@@ -709,6 +713,9 @@
                                             <rect key="frame" x="391" y="236" width="184" height="30"/>
                                             <color key="tintColor" red="0.0" green="0.62745098040000002" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <state key="normal" title="(Tanggal / Bulan / Tahun)"/>
+                                            <connections>
+                                                <action selector="actionDate:" destination="-1" eventType="touchUpInside" id="KXd-O1-cSo"/>
+                                            </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="19. Nomor NPWP (jika ada)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jQ5-RN-QbK">
                                             <rect key="frame" x="8" y="1333" width="258" height="30"/>
@@ -994,7 +1001,11 @@
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EuQ-vz-q3P">
                                             <rect key="frame" x="409" y="1371" width="184" height="30"/>
+                                            <color key="tintColor" red="0.0" green="0.62745098040000002" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <state key="normal" title="(Tanggal / Bulan / Tahun)"/>
+                                            <connections>
+                                                <action selector="actionDate:" destination="-1" eventType="touchUpInside" id="dYe-bF-WtN"/>
+                                            </connections>
                                         </button>
                                         <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="gXi-5l-pxX" customClass="SegmentSPAJ">
                                             <rect key="frame" x="290" y="340" width="173" height="29"/>
@@ -1288,6 +1299,9 @@
                                             <rect key="frame" x="391" y="302" width="184" height="30"/>
                                             <color key="tintColor" red="0.0" green="0.62745098040000002" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <state key="normal" title="(Tanggal / Bulan / Tahun)"/>
+                                            <connections>
+                                                <action selector="actionDate:" destination="-1" eventType="touchUpInside" id="9h7-9U-T6G"/>
+                                            </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tanggal Lahir" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mKo-c9-ZWo">
                                             <rect key="frame" x="290" y="306" width="93" height="21"/>
@@ -1352,9 +1366,9 @@
                                         <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="wAH-42-txZ" customClass="SegmentSPAJ">
                                             <rect key="frame" x="290" y="160" width="285" height="29"/>
                                             <segments>
-                                                <segment title="KTP"/>
-                                                <segment title="Paspor"/>
-                                                <segment title="KIMS / KITAS"/>
+                                                <segment title="Perseroan Terbatas"/>
+                                                <segment title="Yayasan"/>
+                                                <segment title="BUMN"/>
                                                 <segment title="Lainnya"/>
                                             </segments>
                                             <color key="tintColor" red="0.0" green="0.62745098040000002" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -1375,6 +1389,9 @@
                                             <rect key="frame" x="409" y="236" width="184" height="30"/>
                                             <color key="tintColor" red="0.0" green="0.62745098040000002" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <state key="normal" title="(Tanggal / Bulan / Tahun)"/>
+                                            <connections>
+                                                <action selector="actionDate:" destination="-1" eventType="touchUpInside" id="mKH-2r-x9s"/>
+                                            </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=":" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nNd-dm-fxR">
                                             <rect key="frame" x="269" y="273" width="2" height="21"/>
@@ -1516,6 +1533,9 @@
                                             <rect key="frame" x="409" y="306" width="184" height="30"/>
                                             <color key="tintColor" red="0.0" green="0.62745098040000002" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <state key="normal" title="(Tanggal / Bulan / Tahun)"/>
+                                            <connections>
+                                                <action selector="actionDate:" destination="-1" eventType="touchUpInside" id="m3b-KE-UPg"/>
+                                            </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tanggal Berlaku" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VCv-iP-23M">
                                             <rect key="frame" x="290" y="310" width="102" height="21"/>
@@ -1544,6 +1564,9 @@
                                             <rect key="frame" x="409" y="377" width="184" height="30"/>
                                             <color key="tintColor" red="0.0" green="0.62745098040000002" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <state key="normal" title="(Tanggal / Bulan / Tahun)"/>
+                                            <connections>
+                                                <action selector="actionDate:" destination="-1" eventType="touchUpInside" id="aO0-SQ-Tav"/>
+                                            </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tanggal Berlaku" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="btu-Ca-Wkm">
                                             <rect key="frame" x="288" y="381" width="104" height="21"/>
@@ -1572,6 +1595,9 @@
                                             <rect key="frame" x="409" y="448" width="184" height="30"/>
                                             <color key="tintColor" red="0.0" green="0.62745098040000002" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <state key="normal" title="(Tanggal / Bulan / Tahun)"/>
+                                            <connections>
+                                                <action selector="actionDate:" destination="-1" eventType="touchUpInside" id="WlF-16-V19"/>
+                                            </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tanggal Berlaku" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g7A-2j-3L2">
                                             <rect key="frame" x="288" y="452" width="104" height="21"/>
@@ -1600,6 +1626,9 @@
                                             <rect key="frame" x="409" y="519" width="184" height="30"/>
                                             <color key="tintColor" red="0.0" green="0.62745098040000002" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <state key="normal" title="(Tanggal / Bulan / Tahun)"/>
+                                            <connections>
+                                                <action selector="actionDate:" destination="-1" eventType="touchUpInside" id="hE5-YM-HiK"/>
+                                            </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tanggal Terdaftar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EAh-wR-Pa5">
                                             <rect key="frame" x="288" y="523" width="115" height="21"/>
@@ -1709,6 +1738,7 @@
                 <constraint firstItem="FzX-HB-nik" firstAttribute="trailing" secondItem="KJU-fP-FtL" secondAttribute="trailing" id="6OE-Se-tK4"/>
                 <constraint firstItem="KJU-fP-FtL" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="71j-Se-JCf"/>
                 <constraint firstItem="FzX-HB-nik" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="45" id="EiG-fc-tYy"/>
+                <constraint firstItem="HMx-zG-lVz" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="LdL-CV-0e6"/>
                 <constraint firstItem="FzX-HB-nik" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="NcU-6a-5aW"/>
                 <constraint firstAttribute="bottom" secondItem="FzX-HB-nik" secondAttribute="bottom" id="iCn-hY-L4t"/>
                 <constraint firstItem="FzX-HB-nik" firstAttribute="top" secondItem="KJU-fP-FtL" secondAttribute="bottom" constant="1" id="pPE-8y-N2v"/>

@@ -156,8 +156,10 @@ NSString* const Back = @"Back";
         //mutableArrayListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"Calon Pemegang Polis ", @"Calon Tertanggung", @"Orang Tua / Wali yang sah", @"Tenaga Penjual", nil];
         //mutableArrayListOfSubTitleMenu = [[NSMutableArray alloc] initWithObjects:@"", @"",@"", @"", nil];
         arrayIDBackDisabled = [[NSMutableArray alloc]initWithObjects:@"PASPOR",@"KITAS",@"KIMS/KITAS",@"Form Tenaga Penjual", nil];
-        mutableArrayNumberListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"1", @"2", @"3",@"4",@"5",@"6", nil];
-        mutableArrayListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"Calon Pemegang Polis ", @"Calon Tertanggung", @"Orang Tua / Wali yang sah",@"Tenaga Penjual",@"Payment",@"Other", nil];
+        //mutableArrayNumberListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"1", @"2", @"3",@"4",@"5",@"6", nil];
+        //mutableArrayListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"Calon Pemegang Polis ", @"Calon Tertanggung", @"Orang Tua / Wali yang sah",@"Tenaga Penjual",@"Payment",@"Other", nil];
+        mutableArrayNumberListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"1", @"2", @"3",@"4",@"5", nil];
+        mutableArrayListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"Calon Pemegang Polis ", @"Calon Tertanggung", @"Orang Tua / Wali yang sah",@"Payment",@"Other", nil];
         mutableArrayListOfSubTitleMenu = [[NSMutableArray alloc] initWithObjects:@"", @"",@"",@"",@"",@"", nil];
     }
 
@@ -185,7 +187,13 @@ NSString* const Back = @"Back";
     -(void)voidTableCellLastStateChecker:(BOOL)boolPO BOOLTR:(BOOL)boolTR BOOLOW:(BOOL)boolOW BOOLTP:(BOOL)boolTP BOOLPayment:(BOOL)boolPaymentMethod BOOLOthers:(BOOL)boolOthers{
         if (boolPO){
             if ([stringSIRelation isEqualToString:@"DIRI SENDIRI"]){
-                if (boolTP){
+                if (boolPaymentMethod){
+                    [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:4 inSection:0]];
+                }
+                else{
+                    [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
+                }
+                /*if (boolTP){
                     if (boolPaymentMethod){
                         [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:5 inSection:0]];
                     }
@@ -195,12 +203,18 @@ NSString* const Back = @"Back";
                 }
                 else{
                     [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
-                }
+                }*/
             }
             else{
                 if (LAAge<21){
                     if (boolOW){
-                        if (boolTP){
+                        if (boolPaymentMethod){
+                            [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:4 inSection:0]];
+                        }
+                        else{
+                            [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
+                        }
+                        /*if (boolTP){
                             if (boolPaymentMethod){
                                 [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:5 inSection:0]];
                             }
@@ -210,7 +224,7 @@ NSString* const Back = @"Back";
                         }
                         else{
                             [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
-                        }
+                        }*/
                         
                     }
                     else{
@@ -219,7 +233,13 @@ NSString* const Back = @"Back";
                 }
                 else{
                     if (boolTR){
-                        if (boolTP){
+                        if (boolPaymentMethod){
+                            [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:4 inSection:0]];
+                        }
+                        else{
+                            [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
+                        }
+                        /*if (boolTP){
                             if (boolPaymentMethod){
                                 [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:5 inSection:0]];
                             }
@@ -229,7 +249,7 @@ NSString* const Back = @"Back";
                         }
                         else{
                             [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
-                        }
+                        }*/
                         
                     }
                     else{
@@ -263,17 +283,17 @@ NSString* const Back = @"Back";
                 //[self actionViewPhoto:nil];
                 [buttonIDTypeSelection setEnabled:true];
                 break;
+            /*case 3:
+                //[self actionViewPhoto:nil];
+                [self showIDType:indexSelected];
+                [buttonIDTypeSelection setEnabled:false];
+                break;*/
             case 3:
                 //[self actionViewPhoto:nil];
                 [self showIDType:indexSelected];
                 [buttonIDTypeSelection setEnabled:false];
                 break;
             case 4:
-                //[self actionViewPhoto:nil];
-                [self showIDType:indexSelected];
-                [buttonIDTypeSelection setEnabled:false];
-                break;
-            case 5:
                 //[self actionViewPhoto:nil];
                 [self showIDType:indexSelected];
                 [buttonIDTypeSelection setEnabled:false];
@@ -384,12 +404,12 @@ NSString* const Back = @"Back";
             //[modelIdentificationType getOtherTypeDesc:stringIDTypeIdentifier] ;
             [buttonIDTypeSelection setTitle:identityDesc forState:UIControlStateNormal];
         }
-        else if (IndexRow==3){
+        /*else if (IndexRow==3){
             stringIDTypeIdentifier = @"" ;
             NSString* identityDesc = @"Form Tenaga Penjual" ;
             [buttonIDTypeSelection setTitle:identityDesc forState:UIControlStateNormal];
-        }
-        else if (IndexRow==4){
+        }*/
+        else if (IndexRow==3){
             stringIDTypeIdentifier = @"" ;
             NSString* identityDesc = @"Payment" ;
             [buttonIDTypeSelection setTitle:identityDesc forState:UIControlStateNormal];
@@ -422,13 +442,13 @@ NSString* const Back = @"Back";
             case 2:
                 stringIDTypeIdentifier = [modelSPAJIDCapture selectIDType:@"SPAJIDTypeParty3" SPAJSection:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
                 break;
-            case 3:
+            /*case 3:
                 stringIDTypeIdentifier = [modelSPAJIDCapture selectIDType:@"SPAJIDTypeParty4" SPAJSection:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
-                break;
-            case 4:
+                break;*/
+            case 3:
                 stringIDTypeIdentifier = [modelSPAJIDCapture selectIDType:@"SPAJIDTypeParty5" SPAJSection:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
                 break;
-            case 5:
+            case 4:
                 stringIDTypeIdentifier = [modelSPAJIDCapture selectIDType:@"SPAJIDTypeParty6" SPAJSection:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
                 break;
             default:
@@ -835,7 +855,7 @@ NSString* const Back = @"Back";
             else
             {
                 if ([stringSIRelation isEqualToString:@"DIRI SENDIRI"]){
-                    if (indexSelected == 5){
+                    if (indexSelected == 4){
                         [self copyIDImagesToSPAJFolder:imageViewFront Party:Other IDType:[buttonIDTypeSelection currentTitle]?:@"" Side:Front];
                         [self copyIDImagesToSPAJFolder:imageViewBack Party:Other IDType:[buttonIDTypeSelection currentTitle]?:@"" Side:Back];
                         NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJIDCaptureParty6=1,SPAJIDTypeParty6='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",stringIDTypeIdentifier,[dictTransaction valueForKey:@"SPAJEappNumber"]];
@@ -843,7 +863,7 @@ NSString* const Back = @"Back";
                         [modelSPAJIDCapture updateSPAJIDCapture:stringUpdate];
                         [self voidCheckBooleanLastState];
                     }
-                    if (indexSelected == 4){
+                    if (indexSelected == 3){
                         [self copyIDImagesToSPAJFolder:imageViewFront Party:Payment IDType:[buttonIDTypeSelection currentTitle]?:@"" Side:Front];
                         [self copyIDImagesToSPAJFolder:imageViewBack Party:Payment IDType:[buttonIDTypeSelection currentTitle]?:@"" Side:Back];
                         NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJIDCaptureParty5=1,SPAJIDTypeParty5='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",stringIDTypeIdentifier,[dictTransaction valueForKey:@"SPAJEappNumber"]];
@@ -852,14 +872,14 @@ NSString* const Back = @"Back";
                         [self voidCheckBooleanLastState];
                     }
 
-                    else if (indexSelected == 3){
+                    /*else if (indexSelected == 3){
                         [self copyIDImagesToSPAJFolder:imageViewFront Party:TenagaPenjual IDType:[buttonIDTypeSelection currentTitle]?:@"" Side:Front];
                         [self copyIDImagesToSPAJFolder:imageViewBack Party:TenagaPenjual IDType:[buttonIDTypeSelection currentTitle]?:@"" Side:Back];
                         NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJIDCaptureParty4=1,SPAJIDTypeParty4='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",stringIDTypeIdentifier,[dictTransaction valueForKey:@"SPAJEappNumber"]];
                         
                         [modelSPAJIDCapture updateSPAJIDCapture:stringUpdate];
                         [self voidCheckBooleanLastState];
-                    }
+                    }*/
                     else if (indexSelected == 2){
                         
                     }
@@ -872,12 +892,16 @@ NSString* const Back = @"Back";
                         NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJIDCaptureParty1=1,SPAJIDTypeParty1='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",stringIDTypeIdentifier,[dictTransaction valueForKey:@"SPAJEappNumber"]];
                         
                         [modelSPAJIDCapture updateSPAJIDCapture:stringUpdate];
+                        
+                        NSString *stringUpdate1 = [NSString stringWithFormat:@" set SPAJIDCaptureParty4=1,SPAJIDTypeParty4='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",stringIDTypeIdentifier,[dictTransaction valueForKey:@"SPAJEappNumber"]];
+                        
+                        [modelSPAJIDCapture updateSPAJIDCapture:stringUpdate1];
                         [self voidCheckBooleanLastState];
                     }
                 }
                 else{
                     if (LAAge<21){
-                        if (indexSelected == 5){
+                        if (indexSelected == 4){
                             [self copyIDImagesToSPAJFolder:imageViewFront Party:Other IDType:[buttonIDTypeSelection currentTitle]?:@"" Side:Front];
                             [self copyIDImagesToSPAJFolder:imageViewBack Party:Other IDType:[buttonIDTypeSelection currentTitle]?:@"" Side:Back];
                             NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJIDCaptureParty6=1,SPAJIDTypeParty6='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",stringIDTypeIdentifier,[dictTransaction valueForKey:@"SPAJEappNumber"]];
@@ -885,7 +909,7 @@ NSString* const Back = @"Back";
                             [modelSPAJIDCapture updateSPAJIDCapture:stringUpdate];
                             [self voidCheckBooleanLastState];
                         }
-                        if (indexSelected == 4){
+                        if (indexSelected == 3){
                             [self copyIDImagesToSPAJFolder:imageViewFront Party:Payment IDType:[buttonIDTypeSelection currentTitle]?:@"" Side:Front];
                             [self copyIDImagesToSPAJFolder:imageViewBack Party:Payment IDType:[buttonIDTypeSelection currentTitle]?:@"" Side:Back];
                             NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJIDCaptureParty5=1,SPAJIDTypeParty5='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",stringIDTypeIdentifier,[dictTransaction valueForKey:@"SPAJEappNumber"]];
@@ -893,14 +917,14 @@ NSString* const Back = @"Back";
                             [modelSPAJIDCapture updateSPAJIDCapture:stringUpdate];
                             [self voidCheckBooleanLastState];
                         }
-                        if (indexSelected == 3){
+                        /*if (indexSelected == 3){
                             [self copyIDImagesToSPAJFolder:imageViewFront Party:TenagaPenjual IDType:[buttonIDTypeSelection currentTitle]?:@"" Side:Front];
                             [self copyIDImagesToSPAJFolder:imageViewBack Party:TenagaPenjual IDType:[buttonIDTypeSelection currentTitle]?:@"" Side:Back];
                             NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJIDCaptureParty4=1,SPAJIDTypeParty4='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",stringIDTypeIdentifier,[dictTransaction valueForKey:@"SPAJEappNumber"]];
                             
                             [modelSPAJIDCapture updateSPAJIDCapture:stringUpdate];
                             [self voidCheckBooleanLastState];
-                        }
+                        }*/
                         else if (indexSelected == 2){
                             [self copyIDImagesToSPAJFolder:imageViewFront Party:OrangTuaWali IDType:[buttonIDTypeSelection currentTitle]?:@"" Side:Front];
                             [self copyIDImagesToSPAJFolder:imageViewBack Party:OrangTuaWali IDType:[buttonIDTypeSelection currentTitle]?:@"" Side:Back];
@@ -922,7 +946,7 @@ NSString* const Back = @"Back";
                         }
                     }
                     else{
-                        if (indexSelected == 5){
+                        if (indexSelected == 4){
                             [self copyIDImagesToSPAJFolder:imageViewFront Party:Other IDType:[buttonIDTypeSelection currentTitle]?:@"" Side:Front];
                             [self copyIDImagesToSPAJFolder:imageViewBack Party:Other IDType:[buttonIDTypeSelection currentTitle]?:@"" Side:Back];
                             NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJIDCaptureParty6=1,SPAJIDTypeParty6='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",stringIDTypeIdentifier,[dictTransaction valueForKey:@"SPAJEappNumber"]];
@@ -930,7 +954,7 @@ NSString* const Back = @"Back";
                             [modelSPAJIDCapture updateSPAJIDCapture:stringUpdate];
                             [self voidCheckBooleanLastState];
                         }
-                        else if (indexSelected == 4){
+                        else if (indexSelected == 3){
                             [self copyIDImagesToSPAJFolder:imageViewFront Party:Payment IDType:[buttonIDTypeSelection currentTitle]?:@"" Side:Front];
                             [self copyIDImagesToSPAJFolder:imageViewBack Party:Payment IDType:[buttonIDTypeSelection currentTitle]?:@"" Side:Back];
                             NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJIDCaptureParty5=1,SPAJIDTypeParty5='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",stringIDTypeIdentifier,[dictTransaction valueForKey:@"SPAJEappNumber"]];
@@ -938,14 +962,14 @@ NSString* const Back = @"Back";
                             [modelSPAJIDCapture updateSPAJIDCapture:stringUpdate];
                             [self voidCheckBooleanLastState];
                         }
-                        else if (indexSelected == 3){
+                        /*else if (indexSelected == 3){
                             [self copyIDImagesToSPAJFolder:imageViewFront Party:TenagaPenjual IDType:[buttonIDTypeSelection currentTitle]?:@"" Side:Front];
                             [self copyIDImagesToSPAJFolder:imageViewBack Party:TenagaPenjual IDType:[buttonIDTypeSelection currentTitle]?:@"" Side:Back];
                             NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJIDCaptureParty4=1,SPAJIDTypeParty4='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",stringIDTypeIdentifier,[dictTransaction valueForKey:@"SPAJEappNumber"]];
                             
                             [modelSPAJIDCapture updateSPAJIDCapture:stringUpdate];
                             [self voidCheckBooleanLastState];
-                        }
+                        }*/
                         else if (indexSelected == 2){
                             //empty
                         }
@@ -1185,7 +1209,14 @@ NSString* const Back = @"Back";
         
         if (boolPemegangPolis){
             if ([stringSIRelation isEqualToString:@"DIRI SENDIRI"]){
-                if (boolTenagaPenjual){
+                if ((indexPath.row == 0)||(indexPath.row == 3)||(indexPath.row == 4)){
+                    [cell setUserInteractionEnabled:true];
+                    [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_ACTIVE_CELL floatOpacity:1.0]];
+                }
+                else{
+                    [cell setUserInteractionEnabled:false];
+                }
+                /*if (boolTenagaPenjual){
                     if ((indexPath.row == 0)||(indexPath.row == 3)||(indexPath.row == 4)||(indexPath.row == 5)){
                         [cell setUserInteractionEnabled:true];
                         [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_ACTIVE_CELL floatOpacity:1.0]];
@@ -1202,14 +1233,22 @@ NSString* const Back = @"Back";
                     else{
                         [cell setUserInteractionEnabled:false];
                     }
-                }
+                }*/
                 
             }
             else{
                 if (LAAge<21){
                     if (boolOrangTuaWali){
-                        if (boolTenagaPenjual){
-                            if ((indexPath.row == 0)||(indexPath.row == 2)||(indexPath.row == 3)||(indexPath.row == 4)||(indexPath.row == 5)){
+                        if ((indexPath.row == 0)||(indexPath.row == 2)||(indexPath.row == 3)||(indexPath.row == 4)){
+                            [cell setUserInteractionEnabled:true];
+                            [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_ACTIVE_CELL floatOpacity:1.0]];
+                        }
+                        else{
+                            [cell setUserInteractionEnabled:false];
+                        }
+                        /*if (boolTenagaPenjual){
+                            //if ((indexPath.row == 0)||(indexPath.row == 2)||(indexPath.row == 3)||(indexPath.row == 4)||(indexPath.row == 5)){
+                            if ((indexPath.row == 0)||(indexPath.row == 2)||(indexPath.row == 3)||(indexPath.row == 4)){
                                 [cell setUserInteractionEnabled:true];
                                 [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_ACTIVE_CELL floatOpacity:1.0]];
                             }
@@ -1225,7 +1264,7 @@ NSString* const Back = @"Back";
                             else{
                                 [cell setUserInteractionEnabled:false];
                             }
-                        }
+                        }*/
                     }
                     else{
                         if ((indexPath.row == 0)||(indexPath.row == 2)){
@@ -1239,8 +1278,16 @@ NSString* const Back = @"Back";
                 }
                 else{
                     if (boolTertanggung){
-                        if (boolTenagaPenjual){
-                            if ((indexPath.row == 0)||(indexPath.row == 1)||(indexPath.row == 3)||(indexPath.row == 4)||(indexPath.row == 5)){
+                        if ((indexPath.row == 0)||(indexPath.row == 1)||(indexPath.row == 3)||(indexPath.row == 4)){
+                            [cell setUserInteractionEnabled:true];
+                            [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_ACTIVE_CELL floatOpacity:1.0]];
+                        }
+                        else{
+                            [cell setUserInteractionEnabled:false];
+                        }
+                        /*if (boolTenagaPenjual){
+                            //if ((indexPath.row == 0)||(indexPath.row == 1)||(indexPath.row == 3)||(indexPath.row == 4)||(indexPath.row == 5)){
+                            if ((indexPath.row == 0)||(indexPath.row == 1)||(indexPath.row == 3)||(indexPath.row == 4)){
                                 [cell setUserInteractionEnabled:true];
                                 [cell setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_ACTIVE_CELL floatOpacity:1.0]];
                             }
@@ -1256,7 +1303,7 @@ NSString* const Back = @"Back";
                             else{
                                 [cell setUserInteractionEnabled:false];
                             }
-                        }
+                        }*/
                     }
                     else{
                         if ((indexPath.row == 0)||(indexPath.row == 1)){

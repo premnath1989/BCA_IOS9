@@ -95,7 +95,7 @@ function onSuccess (ret)
 			else if (stringPageTypeCurrent == stringPageTypeAmandment)
 			{
 				getFromDatabaseForHealthQuestionnaire(objectContent.result.readFromDB, stringPageTypePDF);
-				getFromDatabaseForAmandment(objectContent.result.readFromDB, stringPageInfixType, "FieldsetAmandment");
+				getFromDatabaseForAmandment(objectContent.result.readFromDB, stringPageInfixTypeCurrent, "FieldsetAmandment");
 			}
             else
 			{
@@ -280,7 +280,7 @@ function savetoDB()
 		}
 		else
 		{
-			var stringBeneficiariesListPrefix = stringPrefixText + stringBeneficiariesListInfix + "FullName";
+			var stringBeneficiariesListPrefix = stringPrefixText + stringBeneficiariesListInfix + arrayBeneficiariesListTableHeader[0];
 			var stringBeneficiariesListFilter;
 			var arrayBeneficiariesListTemporary = [];
 			var booleanBeneficiariesList = false;

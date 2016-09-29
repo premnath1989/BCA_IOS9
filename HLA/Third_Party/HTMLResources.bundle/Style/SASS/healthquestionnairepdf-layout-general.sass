@@ -1,0 +1,132 @@
+/* @charset "utf-8"; */
+/* CSS Document */
+
+
+// IMPORT
+
+@import healthquestionnairepdf-initialization-general
+@import healthquestionnairepdf-setup
+
+
+/* HEADER */
+
+header
+	margin-top: $general_space_small
+	margin-bottom: $general_space_small
+	img
+		float: left
+		height: 65px
+		vartical-align: middle
+	.Address
+		float: right
+		text-align: right
+		vartical-align: middle
+
+
+/* MAIN */
+
+main
+	form, fieldset
+		.ContainerFit, .ContainerLeft, .ContainerRight
+			margin-top: $general_space_tiny
+			margin-bottom: $general_space_tiny
+			display: flex
+			flex-wrap: nowrap
+			align-content: stretch
+			align-items: stretch
+			.Item
+				flex-grow: 1
+			.Item1
+				flex-grow: 1
+			.Item2
+				flex-grow: 2
+			.Item3
+				flex-grow: 3
+		.ContainerFit
+			justify-content: space-between
+		.ContainerLeft
+			justify-content: flex-start
+		.ContainerRight
+			justify-content: flex-end
+		.Margin
+			margin: $general_space_tiny
+		.Center
+			text-align: center
+		.Left
+			text-align: left
+		.Right
+			text-align: right
+		.Short
+			min-width: $label_width_short
+		.Medium
+			min-width: $label_width_medium
+		.Long
+			min-width: $label_width_long
+		.NumberIndent
+			margin-left: 24px + $general_space_medium
+		.ShortWithNumberIndent
+			margin-left: 24px + $general_space_medium + $label_width_short
+		.MediumWithNumberIndent
+			margin-left: 24px + $general_space_medium + $label_width_medium
+		.LongWithNumberIndent
+			margin-left: 24px + $general_space_medium + $label_width_long
+		.ShortIndent
+			margin-left: $label_width_short
+		.MediumIndent
+			margin-left: $label_width_medium
+		.LongIndent
+			margin-left: $label_width_long
+
+
+/* WIDTH */
+
+.Tiny
+	min-width: $label_width_short / 4
+	width: $label_width_short / 4
+.Short
+	min-width: $label_width_short
+	width: $label_width_short
+.Medium
+	min-width: $label_width_medium * 1.5
+	width: $label_width_medium * 1.5
+.Long
+	min-width: $label_width_long
+	width: $label_width_long
+.Full
+	width: 100%
+.TinyFix
+	width: $label_width_short / 4
+	max-width: $label_width_short / 4
+.ShortFix
+	width: $label_width_short
+	max-width: $label_width_short
+.MediumFix
+	width: $label_width_medium // * 1.5
+	max-width: $label_width_medium // * 1.5
+.LongFix
+	width: $label_width_long * 2
+	max-width: $label_width_long * 2
+.FullFix
+	width: 100%
+	max-width: 100%
+
+
+/* HEIGHT */
+
+
+/* POSITIONER */
+
+.PositionerRight, .PositionerLeft, .PositionerCenter
+	margin-top: $general_space_tiny
+	margin-bottom: $general_space_tiny
+	vertical-align: top
+
+.PositionerRight
+	float: right
+
+.PositionerLeft
+	float: left
+
+.PositionerCenter
+	position: relative
+	margin: auto

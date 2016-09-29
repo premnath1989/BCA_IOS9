@@ -71,6 +71,7 @@ var stringButtonViewPrefix = "ButtonView";
 var stringButtonDeletePrefix = "ButtonDelete";
 var stringSharePercentage = 0;
 var arrayBeneficiariesListTableHeader = ["FullName", stringIDDay, stringIDMonth, stringIDYear, "Sex", "Relationship", "Nationality"];
+var arrayBeneficiariesListPopUpHeader = ["FullName", "Birthday", "Sex", "Relationship", "Nationality"];
 var intSharePercentage = 0;
 var stringSharePercentageSuffix = "SharePercentage";
 var stringSPAJProposalInfix = "SPAJProposal";
@@ -96,6 +97,7 @@ var stringStateNotSelected = "Not Selected";
 var stringNationality;
 var arrayRelationshipWithProspectiveInsured = [];
 var arrayNationality = [];
+var stringIllnessSuffix = "Illness";
 
 
 // GENERATOR
@@ -468,10 +470,9 @@ function setKeyPrefix(stringInputJavaScriptID, stringInputInfix)
 	}
 }
 
-function popUpSPAJProposalShow(stringTriggerKey, stringKeyID, stringPopUpJavaScriptID, arrayContent)
+function popUpSPAJProposalShow(stringKeyID, stringPopUpJavaScriptID, arrayContent)
 {
     var stringPopUpJQueryID = stringKres + stringPopUpJavaScriptID;
-    var stringTriggerInfix = releasePrefix(stringTriggerKey);
     $(stringPopUpJQueryID).css("display", "block");
 	
 	// INPUT SETTER
@@ -482,8 +483,7 @@ function popUpSPAJProposalShow(stringTriggerKey, stringKeyID, stringPopUpJavaScr
 		var stringInputJQueryID = stringKres + stringInputJavaScriptID;
 		$(stringInputJQueryID).val("");
 		var stringInputSuffix = releasePrefix(stringInputJavaScriptID);
-        var stringKey = setKeyPrefix(stringInputJavaScriptID, stringTriggerInfix + stringInputSuffix + stringKeyID);
-		
+        var stringKey = setKeyPrefix(stringInputJavaScriptID, stringPageInfixTypeCurrent + "SPAJProposal" + stringInputSuffix + stringKeyID);
         var stringValue = arrayFind(arrayContent, stringKey);
 		
         if (stringValue == null || stringValue == undefined)
@@ -602,11 +602,10 @@ function beneficiariesListGenerator(stringButtonJavaScriptID)
 function SPAJProposalGenerator(stringButtonJavaScriptID)
 {
 	var stringButtonJQueryID = stringKres + stringButtonJavaScriptID;
-	var stringButtonIDWithoutPrefix = stringButtonJavaScriptID.substring(stringButtonPrefix.length, stringButtonJavaScriptID.length);
 	
 	$(stringButtonJQueryID).click(function()
 	{
-		popUpSPAJProposalShow("RadioButton" + stringPageInfixTypeCurrent + "SPAJProposal", null, "PopUpSPAJProposal", arrayHealthQuestionnaire);
+		popUpSPAJProposalShow(null, "PopUpSPAJProposal", arrayHealthQuestionnaire);
 	})
 }
 
@@ -692,24 +691,26 @@ function additionalQuestionGenerator()
 				
                 if ($(this).val() == "true")
                 {
-                    popUpSPAJProposalShow($(this).attr("name"), null, "PopUpSPAJProposal", arrayHealthQuestionnaire);
+                    popUpSPAJProposalShow(null, "PopUpSPAJProposal", arrayHealthQuestionnaire);
 					$("#ButtonAddSPAJProposal").css("display", "block");
                 }
                 else
                 {
+                	var arrayInputTemporary = [];
+
 					$("#PopUpSPAJProposal input[type=text]").each(function()
                     {
                         var stringID = $(this).attr("id");
                         var stringSuffix = releasePrefix(stringID);
-						
+                        
                         $(this).val("");
-                        stringDetailKey = stringPrefixText + stringInfix + stringSuffix;
+                        stringDetailKey = setKeyPrefix(stringID, stringInfix + stringSuffix);
 
 						for (var k = 0; k < arrayHealthQuestionnaire.length; k++)
 						{
 							if (stringDetailKey == arrayHealthQuestionnaire[k].elementID.substring(0, stringDetailKey.length))
 							{
-								arrayDelete(arrayHealthQuestionnaire, stringDetailKey);
+								arrayAdd(arrayInputTemporary, arrayHealthQuestionnaire[k].elementID)
 							}
 							else
 							{
@@ -718,8 +719,14 @@ function additionalQuestionGenerator()
 						}
                     });
 					
+					for (var i = 0; i < arrayInputTemporary.length; i++)
+					{
+						arrayDelete(arrayHealthQuestionnaire, arrayInputTemporary[i].elementID);
+					}
+
                     $("#ButtonAddSPAJProposal").css("display", "none");
-					tableSPAJProposalGenerator(stringInfix, "SPAJProposalList", arrayHealthQuestionnaire);
+					tableSPAJProposalGenerator("SPAJProposalList", arrayHealthQuestionnaire);
+					previewArrayObject(arrayHealthQuestionnaire);
                 }
 
 				arrayAdd(arrayHealthQuestionnaire, $(this).attr("name"), getRadioButtonGeneral($(this).attr("name")));
@@ -918,8 +925,8 @@ function textPopUpSetter(stringPopUpJavaScriptID, stringParentNameWithoutPrefix,
 		var stringInputJQueryID = stringKres + stringInputJavaScriptID;
 		$(stringInputJQueryID).val("");
 		
-        var stringInputNameWithoutPrefix = stringInputJavaScriptID.substring(stringPrefixText.length, stringInputJavaScriptID.length);
-        var stringKey = stringPrefixText + stringParentNameWithoutPrefix + stringInputNameWithoutPrefix;
+        var stringInputNameWithoutPrefix = releasePrefix(stringInputJavaScriptID);
+        var stringKey = getPrefix(stringInputJavaScriptID) + stringParentNameWithoutPrefix + stringInputNameWithoutPrefix;
         var stringValue = arrayFind(arrayContent, stringKey);
         
         if (stringValue == null || stringValue == undefined)
@@ -943,8 +950,8 @@ function textPopUpGetter(stringPopUpJavaScriptID, stringParentNameWithoutPrefix,
 		var stringInputJQueryID = stringKres + stringInputJavaScriptID;
 		$(stringInputJQueryID).val("");
 		
-		var stringInputNameWithoutPrefix = stringInputJavaScriptID.substring(stringPrefixText.length, stringInputJavaScriptID.length);
-        var stringKey = stringPrefixText + stringParentNameWithoutPrefix + stringInputNameWithoutPrefix;
+		var stringInputNameWithoutPrefix = releasePrefix(stringInputJavaScriptID);
+        var stringKey = getPrefix(stringInputJavaScriptID) + stringParentNameWithoutPrefix + stringInputNameWithoutPrefix;
         var stringValue = arrayFind(arrayContent, stringKey);
 		
 		if (validateTextGeneral(stringInputJQueryID) == true)
@@ -1142,7 +1149,7 @@ function buttonPopUpHealthGenerator()
         {
             stringInputJavaScriptID = $(this).attr("id");
             stringInputJQueryID = stringKres + stringInputJavaScriptID;
-            stringDetailKey = stringPrefixText + stringInfixName + stringInputJavaScriptID.substring(stringPrefixText.length, stringInputJavaScriptID.length);
+            stringDetailKey = getPrefix(stringInputJavaScriptID) + stringInfixName + stringInputJavaScriptID.substring(stringPrefixText.length, stringInputJavaScriptID.length);
 
             if (validateTextGeneral(stringInputJQueryID) == false)
             {
@@ -1185,7 +1192,7 @@ function buttonViewBeneficiariesList(stringButtonViewJavaScriptID, stringButtonV
 function buttonViewSPAJProposal(stringButtonViewJavaScriptID, stringButtonViewName)
 {
 	intSPAJProposalRecentID = stringButtonViewName;
-	popUpSPAJProposalShow(stringButtonViewJavaScriptID, stringButtonViewName, "PopUpSPAJProposal", arrayHealthQuestionnaire);
+	popUpSPAJProposalShow(stringButtonViewName, "PopUpSPAJProposal", arrayHealthQuestionnaire);
 }
 
 function buttonDeleteBeneficiariesList(stringButtonViewJavaScriptID, stringButtonViewName)
@@ -1248,14 +1255,45 @@ function buttonDeleteSPAJProposal(stringButtonViewJavaScriptID, stringButtonView
 {
 	var stringButtonViewJQueryID = stringKres + stringButtonViewJavaScriptID;
 	var arrayTemporary = [];
-	
+	var stringKey;
+	var stringValue;
+	var stringKeyWithoutPrefix;
+	var stringKeyWithoutInfix;
+	var stringKeySuffix;
+	var stringKeyForDelete;
+	var stringKeyInfix;
+
 	for (var i = 0; i < arrayHealthQuestionnaire.length; i++)
 	{
-		var stringKeyForDelete = arrayHealthQuestionnaire[i].elementID.substring(arrayHealthQuestionnaire[i].elementID.length - stringButtonViewName.length, arrayHealthQuestionnaire[i].elementID.length);
-		
-		if (stringKeyForDelete == stringButtonViewName)
+		stringKey = arrayHealthQuestionnaire[i].elementID;
+		stringValue = arrayHealthQuestionnaire[i].Value;
+		stringKeyWithoutPrefix = releasePrefix(stringKey);
+		stringKeyInfix = getInfix(stringKeyWithoutPrefix);
+		stringKeyWithoutInfix = releaseInfix(stringKeyWithoutPrefix);
+		stringKeySuffix = stringKeyWithoutInfix.substring(stringSPAJProposalInfix.length, stringKeyWithoutInfix.length - stringButtonViewName.length);
+
+		if (stringKeyInfix == stringPageInfixTypeCurrent)
 		{
-			arrayAdd(arrayTemporary, arrayHealthQuestionnaire[i].elementID);
+			for (var j = 0; j < arraySPAJProposalTableHeader.length; j++)
+			{
+				if (stringKeySuffix == arraySPAJProposalTableHeader[j])
+				{
+					stringKeyForDelete = stringKeyWithoutInfix.substring(stringKeyWithoutInfix.length - stringButtonViewName.length, stringKeyWithoutInfix.length);
+
+					if (stringKeyForDelete == stringButtonViewName)
+					{
+						arrayAdd(arrayTemporary, stringKey);
+					}
+					else
+					{
+
+					}
+				}
+				else
+				{
+
+				}
+			}
 		}
 		else
 		{
@@ -1268,7 +1306,9 @@ function buttonDeleteSPAJProposal(stringButtonViewJavaScriptID, stringButtonView
 		arrayDelete(arrayHealthQuestionnaire, arrayTemporary[i].elementID);
 	}
 	
-	tableSPAJProposalGenerator(releasePrefix(stringButtonViewJavaScriptID), "SPAJProposalList", arrayHealthQuestionnaire);
+	previewArrayObject(arrayHealthQuestionnaire);
+
+	tableSPAJProposalGenerator("SPAJProposalList", arrayHealthQuestionnaire);
 }
 
 function getLastID(arrayContent, stringKeyFilter)
@@ -1331,7 +1371,7 @@ function buttonPopUpBeneficiariesListGenerator()
 			var intID;
 			var arrayInputTemporary = [];
 			
-			intBeneficiariesListID = getLastID(arrayBeneficiariesList, "TextBeneficiariesListFullName");
+			intBeneficiariesListID = getLastID(arrayBeneficiariesList, stringPrefixText + stringBeneficiariesListInfix + arrayBeneficiariesListPopUpHeader[0]);
 			
 			if (intBeneficiariesListRecentID == null)
 			{
@@ -1556,9 +1596,9 @@ function buttonPopUpSPAJProposalGenerator()
     {
 		var intID;
 		var arrayInputTemporary = [];
-		stringTriggerInfix = releasePrefix(stringRadioButtonName);
+		stringTriggerInfix = stringPageInfixTypeCurrent + stringSPAJProposalInfix;
 
-		intSPAJProposalID = getLastID(arrayHealthQuestionnaire, "Text" + stringTriggerInfix + "CompanyName");
+		intSPAJProposalID = getLastID(arrayHealthQuestionnaire, stringPrefixText + stringTriggerInfix + arraySPAJProposalTableHeader);
 		
 		if (intSPAJProposalRecentID == null)
 		{
@@ -1600,6 +1640,7 @@ function buttonPopUpSPAJProposalGenerator()
 			arrayTransfer(arrayInputTemporary, arrayHealthQuestionnaire);
 			
 			$(stringPopUpJQueryID).css("display", "none");
+			// $("#ButtonAddSPAJProposal").css("display", "block");
 			intSPAJProposalRecentID = null;
 
 			$(stringPopUpJQueryID + " form input[type=text]").each(function()
@@ -1607,8 +1648,8 @@ function buttonPopUpSPAJProposalGenerator()
 				$(this).val("");
 			});
 
-			tableSPAJProposalGenerator(stringTriggerInfix, "SPAJProposalList", arrayHealthQuestionnaire);
-			// previewArrayObject(arrayHealthQuestionnaire);
+			tableSPAJProposalGenerator("SPAJProposalList", arrayHealthQuestionnaire);
+			previewArrayObject(arrayHealthQuestionnaire);
 		}
     });
 }
@@ -1619,9 +1660,9 @@ function tableBeneficiariesListGenerator(stringTableJavaScriptID, arrayContent)
 	var stringContentName;
 	var stringContentBirthday;
 	var stringContentRelation;
-	var stringNameIDSuffix = "FullName";
-	var stringBirthdayIDSuffix = "Birthday";
-	var stringRelationshipIDSuffix = "Relationship";
+	var stringNameIDSuffix = arrayBeneficiariesListPopUpHeader[0];
+	var stringBirthdayIDSuffix = arrayBeneficiariesListPopUpHeader[2];
+	var stringRelationshipIDSuffix = arrayBeneficiariesListPopUpHeader[4];
 	var stringKeyName = stringPrefixText + stringBeneficiariesListInfix + stringNameIDSuffix;
 	var stringKeyBirthday = stringPrefixDate + stringBeneficiariesListInfix + stringBirthdayIDSuffix;
 	var stringKeyRelationship = stringPrefixSelect + stringBeneficiariesListInfix + stringRelationshipIDSuffix;
@@ -1705,46 +1746,51 @@ function generateSelectOption(stringSelectJavaScriptID, arrayOption)
 	}
 }
 
-function tableSPAJProposalGenerator(stringTriggerKey, stringContainerJavaScriptID, arrayContent)
+function tableSPAJProposalGenerator(stringContainerJavaScriptID, arrayContent)
 {
 	var stringContainerJQueryID = stringKres + stringContainerJavaScriptID;
-	var stringContentName;
-	var stringInputIDSuffix = "CompanyName";
-	var stringKey = stringPrefixText + stringTriggerKey + stringInputIDSuffix;
+	var stringInputIDSuffix = arraySPAJProposalTableHeader[0];
 	var stringKeyID;
+	var stringKey;
+	var stringValue;
 	var stringFlag = 0;
+	var stringKeyWithoutPrefix;
+	var stringKeyWithoutInfix;
+	var stringKeySuffix;
+	var stringKeyInfix;
 	
 	$(stringContainerJQueryID).empty();
 	
 	for (var i = 0; i < arrayContent.length; i++)
 	{
-		stringKeyID = arrayContent[i].elementID.substring(stringKey.length, arrayContent[i].elementID.length);
-		stringKey = stringPrefixText + stringTriggerKey + stringInputIDSuffix + stringKeyID;
+		stringKey = arrayContent[i].elementID;
+		stringValue = arrayContent[i].Value;
+		stringKeyWithoutPrefix = releasePrefix(stringKey);
+		stringKeyWithoutInfix = releaseInfix(stringKeyWithoutPrefix);
+		stringKeyInfix = getInfix(stringKeyWithoutPrefix);
+		stringKeySuffix = stringKeyWithoutInfix.substring(stringSPAJProposalInfix.length, stringSPAJProposalInfix.length + stringInputIDSuffix.length);
 		
-		stringContentName = arrayFind(arrayContent, stringKey);
-		// alert(stringKey + " " + stringContentName);
-		if (stringFlag == 0 || stringFlag != stringKeyID)
+		if (stringKeyInfix == stringPageInfixTypeCurrent)
 		{
-			if (stringContentName == null || stringContentName == undefined)
+			if (stringKeySuffix == stringInputIDSuffix)
 			{
-
-			}
-			else
-			{
+				stringKeyID = stringKeyWithoutInfix.substring(stringSPAJProposalInfix.length + stringInputIDSuffix.length, stringKeyWithoutInfix.length);
 				$(stringContainerJQueryID).append
 				(
 					"<div style='display: block; margin-bottom: -15px;'>" + 
-					"<input type='button' id='" + stringPrefixText + stringTriggerKey + "' class='ButtonView PositionerLeft' style='min-width: 200px; text-align: left;' value='View " + arrayContent[i].Value + "' name='" + stringKeyID + "' onclick='buttonViewSPAJProposal(this.id, this.name)'/>" + 
-					"<input type='button' id='" + stringPrefixText + stringTriggerKey + "' class='ButtonDelete PositionerLeft' value='Delete' name='" + stringKeyID + "' onclick='buttonDeleteSPAJProposal(this.id, this.name)'/><br/>" + 
+					"<input type='button' id='" + "ButtonPreview" + stringKeyID + "' class='ButtonView PositionerLeft' style='min-width: 200px; text-align: left;' value='View " + stringValue + "' name='" + stringKeyID + "' onclick='buttonViewSPAJProposal(this.id, this.name)'/>" + 
+					"<input type='button' id='" + "ButtonDelete" + stringKeyID + "' class='ButtonDelete PositionerLeft' value='Delete' name='" + stringKeyID + "' onclick='buttonDeleteSPAJProposal(this.id, this.name)'/><br/>" + 
 					"</div><br>"
 				);
-				
-				stringFlag = stringKeyID;
+			}
+			else
+			{
+
 			}
 		}
 		else
 		{
-			
+
 		}
 	}
 }
@@ -2356,12 +2402,12 @@ function getFromDatabase(objectContent, stringPageType)
 
 						if (stringIndicatorPrefix == stringIndicatorPolicyHolder)
 						{
-							stringTableJQueryID = stringKres + "TablePolicyHolderIllness";
+							stringTableJQueryID = stringKres + stringTablePrefix + stringPolicyHolderPrefix + stringIllnessSuffix;
 							stringInfix = stringPolicyHolderPrefix;
 						}
 						else
 						{
-							stringTableJQueryID = stringKres + "TableProspectiveInsuredIllness";
+							stringTableJQueryID = stringKres + stringTablePrefix + stringProspectiveInsuredPrefix + stringIllnessSuffix;
 							stringInfix = stringProspectiveInsuredPrefix;
 						}
 
@@ -2369,7 +2415,7 @@ function getFromDatabase(objectContent, stringPageType)
 						{
 							var stringRowJavaScriptID = $(this).attr("id");
 							var stringRowJQueryID = stringKres + stringRowJavaScriptID;
-							var stringCellJavaScriptID = stringCellPrefix + stringInfix + "Illness" + arrayHealthTableHeader[j];
+							var stringCellJavaScriptID = stringCellPrefix + stringInfix + stringIllnessSuffix + arrayHealthTableHeader[j];
 							var stringCellJQueryID = stringKres + stringCellJavaScriptID + indexRow;
 							var stringCellSuffix = stringCellJavaScriptID;
 							var booleanBreak = false;
@@ -2417,7 +2463,7 @@ function getFromDatabase(objectContent, stringPageType)
 										
 										// FOR NUMBER
 										
-										numberGenerator(stringInfix + "Illness", indexRow);
+										numberGenerator(stringInfix + stringIllnessSuffix, indexRow);
 										
 										return false;
 									}
@@ -2504,7 +2550,7 @@ function getFromDatabase(objectContent, stringPageType)
 					stringInfix = stringProspectiveInsuredPrefix;
 				}
 				
-				var stringIDWithoutInfix = stringIDWithoutPrefix.substring(stringInfix.length + "SPAJProposal".length, stringIDWithoutPrefix.length - 1);
+				var stringIDWithoutInfix = stringIDWithoutPrefix.substring(stringInfix.length + stringSPAJProposalInfix.length, stringIDWithoutPrefix.length - 1);
 				
 				for (var j = 0; j < arraySPAJProposalTableHeader.length; j++)
 				{
@@ -2512,7 +2558,7 @@ function getFromDatabase(objectContent, stringPageType)
 					{
 						var stringRowJavaScriptID = $(this).attr("id");
 						var stringRowJQueryID = stringKres + stringRowJavaScriptID;
-						var stringCellJavaScriptID = stringCellPrefix + stringInfix + "SPAJProposal" + arraySPAJProposalTableHeader[j];
+						var stringCellJavaScriptID = stringCellPrefix + stringInfix + stringSPAJProposalInfix + arraySPAJProposalTableHeader[j];
 						var stringCellJQueryID = stringKres + stringCellJavaScriptID + indexRow;
 						var stringCellSuffix = stringCellJavaScriptID;
 						
@@ -2524,7 +2570,7 @@ function getFromDatabase(objectContent, stringPageType)
 
 								// FOR NUMBER
 
-								numberGenerator(stringInfix + "SPAJProposal", indexRow);
+								numberGenerator(stringInfix + stringSPAJProposalInfix, indexRow);
 
 								return false;
 							}
@@ -2750,7 +2796,7 @@ function getFromDatabase(objectContent, stringPageType)
 					stringInfix = stringProspectiveInsuredPrefix;
 				}
 				
-				var stringIDWithoutInfix = stringIDWithoutPrefix.substring(stringInfix.length + "SPAJProposal".length, stringIDWithoutPrefix.length - 1);
+				var stringIDWithoutInfix = stringIDWithoutPrefix.substring(stringInfix.length + stringSPAJProposalInfix.length, stringIDWithoutPrefix.length - 1);
 				
 				for (var j = 0; j < arraySPAJProposalTableHeader.length; j++)
 				{
@@ -2758,7 +2804,7 @@ function getFromDatabase(objectContent, stringPageType)
 					{
 						var stringRowJavaScriptID = $(this).attr("id");
 						var stringRowJQueryID = stringKres + stringRowJavaScriptID;
-						var stringCellJavaScriptID = stringCellPrefix + stringInfix + "SPAJProposal" + arraySPAJProposalTableHeader[j];
+						var stringCellJavaScriptID = stringCellPrefix + stringInfix + stringSPAJProposalInfix + arraySPAJProposalTableHeader[j];
 						var stringCellJQueryID = stringKres + stringCellJavaScriptID + indexRow;
 						var stringCellSuffix = stringCellJavaScriptID;
 						
@@ -2770,7 +2816,7 @@ function getFromDatabase(objectContent, stringPageType)
 
 								// FOR NUMBER
 
-								numberGenerator(stringInfix + "SPAJProposal", indexRow);
+								numberGenerator(stringInfix + stringSPAJProposalInfix, indexRow);
 
 								return false;
 							}
@@ -2835,7 +2881,7 @@ function getFromDatabase(objectContent, stringPageType)
 		if (stringPageSectionCurrent == stringPageSectionBeneficiariesList)
 		{
 			arrayBeneficiariesList = objectContent;
-			tableBeneficiariesListGenerator("TableBeneficiariesList", arrayBeneficiariesList);
+			tableBeneficiariesListGenerator(stringTablePrefix + stringBeneficiariesListInfix, arrayBeneficiariesList);
 
 			var stringSharePercentagePrefix  = stringPrefixText + stringBeneficiariesListInfix + stringSharePercentageSuffix;
 			var intSharePercentageTemporary = 0;
@@ -2885,35 +2931,17 @@ function getFromDatabase(objectContent, stringPageType)
 				var stringNameInfix;
 				var stringRadioButtonValue;
 				
-				if (stringPageInfixTypeCurrent == stringPolicyHolderPrefix)
+				stringNameInfix = stringPageInfixTypeCurrent + stringSPAJProposalInfix;
+				stringRadioButtonValue = arrayFind(arrayHealthQuestionnaire, stringPrefixRadioButton + stringNameInfix)
+				
+				if (stringRadioButtonValue == true || stringRadioButtonValue == "true")
 				{
-					stringNameInfix = stringPolicyHolderPrefix + "SPAJProposal";
-					stringRadioButtonValue = arrayFind(arrayHealthQuestionnaire, stringPrefixRadioButton + stringNameInfix)
-					
-					if (stringRadioButtonValue == true || stringRadioButtonValue == "true")
-					{
-						tableSPAJProposalGenerator(stringNameInfix, "SPAJProposalList", arrayHealthQuestionnaire);
-						$("#ButtonAddSPAJProposal").css("display", "block");
-					}
-					else
-					{
-
-					}
+					tableSPAJProposalGenerator("SPAJProposalList", arrayHealthQuestionnaire);
+					$("#ButtonAddSPAJProposal").css("display", "block");
 				}
 				else
 				{
-					stringNameInfix = stringPolicyHolderPrefix + "SPAJProposal";
-					stringRadioButtonValue = arrayFind(arrayHealthQuestionnaire, stringPrefixRadioButton + stringNameInfix)
-					
-					if (stringRadioButtonValue == true || stringRadioButtonValue == "true")
-					{
-						tableSPAJProposalGenerator(stringProspectiveInsuredPrefix + "SPAJProposal", "SPAJProposalList", arrayHealthQuestionnaire);
-						$("#ButtonAddSPAJProposal").css("display", "block");
-					}
-					else
-					{
 
-					}
 				}
 
 				var stringButtonPreviewJavaScriptID;
@@ -3246,4 +3274,52 @@ function inputListener()
 	{
 		booleanInputChangeState = true;
 	});
+}
+
+function releaseInfix(stringKey)
+{
+	if (stringKey.substring(0, stringPolicyHolderPrefix.length) == stringPolicyHolderPrefix)
+	{
+		return stringKey.substring(stringPolicyHolderPrefix.length, stringKey.length);
+	}
+	else if (stringKey.substring(0, stringProspectiveInsuredPrefix.length) == stringProspectiveInsuredPrefix)
+	{
+		return stringKey.substring(stringProspectiveInsuredPrefix.length, stringKey.length);
+	}
+	else if (stringKey.substring(0, stringBeneficiariesListInfix.length) == stringBeneficiariesListInfix)
+	{
+		return stringKey.substring(stringBeneficiariesListInfix.length, stringKey.length);
+	}
+	else if (stringKey.substring(0, stringSPAJProposalInfix.length) == stringSPAJProposalInfix)
+	{
+		return stringKey.substring(stringSPAJProposalInfix.length, stringKey.length);
+	}
+	else
+	{
+		return "";
+	}
+}
+
+function getInfix(stringKey)
+{
+	if (stringKey.substring(0, stringPolicyHolderPrefix.length) == stringPolicyHolderPrefix)
+	{
+		return stringPolicyHolderPrefix;
+	}
+	else if (stringKey.substring(0, stringProspectiveInsuredPrefix.length) == stringProspectiveInsuredPrefix)
+	{
+		return stringProspectiveInsuredPrefix;
+	}
+	else if (stringKey.substring(0, stringBeneficiariesListInfix.length) == stringBeneficiariesListInfix)
+	{
+		return stringBeneficiariesListInfix;
+	}
+	else if (stringKey.substring(0, stringSPAJProposalInfix.length) == stringSPAJProposalInfix)
+	{
+		return stringSPAJProposalInfix;
+	}
+	else
+	{
+		return "";
+	}
 }

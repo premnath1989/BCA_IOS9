@@ -485,7 +485,7 @@
     
 };
 
-- (void)showFormThirdParty{
+- (void)showFormThirdParty:(NSDictionary *)params{
     spajThirdPartyViewController = [[SPAJThirdParty alloc]initWithNibName:@"SPAJThirdParty" bundle:nil];
     //[spajFilesViewController setDelegateSPAJFiles:self];
     [spajThirdPartyViewController setDictTransaction:dictTransaction];
@@ -779,7 +779,7 @@
     return result;
 }
 
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+/*- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     if ([[[request URL] absoluteString] hasPrefix:@"ios:"]) {
         
@@ -790,7 +790,7 @@
     }
     return YES;
     
-}
+}*/
 
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView{

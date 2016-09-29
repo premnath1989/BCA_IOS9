@@ -46,6 +46,11 @@ input.Tiny, textarea.Tiny {
   width: 18.75px !important;
 }
 
+input.Small, textarea.Small {
+  min-width: 88.23529px !important;
+  width: 88.23529px !important;
+}
+
 input.Short, textarea.Short {
   min-width: 75px !important;
   width: 75px !important;
@@ -67,6 +72,10 @@ input.Full, textarea.Full {
 
 input.TinyFix, textarea.TinyFix {
   max-width: 18.75px !important;
+}
+
+input.SmallFix, textarea.SmallFix {
+  max-width: 88.23529px !important;
 }
 
 input.ShortFix, textarea.ShortFix {

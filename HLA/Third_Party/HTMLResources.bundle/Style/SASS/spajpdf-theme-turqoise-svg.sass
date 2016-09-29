@@ -1,0 +1,272 @@
+/* @charset "utf-8"; */
+/* CSS Document */
+
+
+// WHITNEY
+
+/* THEME */
+
+$theme_primary_color: #00a6b3
+$theme_primary_red: 0
+$theme_primary_green: 166
+$theme_primary_blue: 179
+$theme_secondary_color: #b7e8eb
+$theme_secondary_red: 182
+$theme_secondary_green: 232
+$theme_secondary_blue: 235
+$theme_tertiary_color: #e47d3a
+$theme_tertiary_red: 228
+$theme_tertiary_green: 125
+$theme_tertiary_blue: 58
+$theme_quaternary_color: #ebecec
+$theme_quaternary_red: 235
+$theme_quaternary_green: 236
+$theme_quaternary_blue: 236
+$theme_quinary_color: #ffffff
+$theme_quinary_red: 255
+$theme_quinary_green: 255
+$theme_quinary_blue: 255
+$theme_senary_color: #000000
+$theme_senary_red: 0
+$theme_senary_green: 0
+$theme_senary_blue: 0
+$theme_septenary_color: #a5a5a5
+$theme_septenary_red: 90
+$theme_septenary_green: 90
+$theme_septenary_blue: 90
+
+$theme_success_color: #3cb94b
+$theme_flat_color: #f0822d
+$theme_fail_color: #c3232d
+
+
+// INPUT
+
+/* INPUT BACKGROUND */
+
+$input_background_enable: transparent
+$input_background_required: transparent
+$input_background_valid: transparent
+$input_background_invalid: transparent
+$input_background_readonly: $theme_tertiary_color
+$input_background_disable: $theme_quaternary_color
+
+/* INPUT BORDER */
+
+$input_border_enable: $theme_primary_color
+$input_border_disable: none
+$input_border_required: $theme_primary_color
+$input_border_valid: $theme_success_color
+$input_border_invalid: $theme_fail_color
+$input_border_readonly: none
+
+/* INPUT FONT */
+
+$input_font_enable: $theme_quinary_color
+$input_font_disable: $theme_quinary_color
+$input_font_required: $theme_quinary_color
+$input_font_valid: $theme_quinary_color
+$input_font_invalid: $theme_quinary_color
+$input_font_readonly: $theme_quinary_color
+
+
+// LINK
+
+/* BUTTON FONT */
+
+$button_font_enable: $theme_quinary_color
+$button_font_hover: $theme_primary_color
+$button_font_disable: $theme_quinary_color
+
+/* BUTTON BACKGROUND */
+
+$button_background_enable: $theme_primary_color
+$button_background_hover: $theme_quinary_color
+$button_background_disable: $theme_quaternary_color
+
+/* BUTTON BORDER */
+
+$button_border_enable: none
+$button_border_hover: none
+$button_border_disable: none
+
+
+// IMPORT
+
+@import spajpdf-initialization-general
+
+
+// SETUP
+
+/* SEMANTIC ELEMENTS */
+
+body
+	background-color: $theme_primary_color
+
+main
+    background-color: $theme_quinary_color
+
+/* NEUTRALIZATION */
+
+h1, h2, h3, h4, h5, h6, p, mark, ol, ul, li
+    background-color: transparent
+
+
+// LAYOUT
+
+
+// FONT
+
+/* HEADER */
+
+header
+    h1
+        color: $theme_quinary_color
+    .Header
+        color: $theme_quinary_color
+    .Detail
+        color: $theme_quinary_color
+
+/* FORM */
+
+section
+    h2
+        background-color: $theme_primary_color
+        color: $theme_quinary_color
+    h3
+        background-color: $theme_tertiary_color
+        color: $theme_quinary_color
+    label
+        color: $theme_senary_color
+    span.Separator, span.Description
+        color: $theme_senary_color
+    table.BoxSquare
+        tbody
+            tr
+                td
+                    border-color: $theme_senary_color
+    .BoxRound
+        border-color: $theme_senary_color
+    .Note
+        border-color: $theme_primary_color
+        h3
+            color: $theme_senary_color
+            background-color: transparent
+        ol, ul
+            li
+                color: $theme_senary_color
+    table.SignatureSmall, table.SignatureMedium
+        border-color: $theme_primary_color
+        thead
+            tr
+                th
+                    color: $theme_senary_color
+                    border-bottom-color: $theme_primary_color
+        tbody
+            tr
+                td
+                    color: $theme_senary_color
+                    background-color: $theme_quaternary_color
+        tfoot
+            tr
+                td
+                    color: $theme_senary_color
+    .LineStraight, .LineDot
+        color: $theme_senary_color
+        border-color: $theme_senary_color
+
+.InnerFieldset
+    background-color: $theme_quaternary_color
+
+
+input[type="radio"].Plain + label
+	color: $theme_senary_color
+	background-color: transparent
+
+input[type="radio"].Plain:checked + label
+	color: $theme_quinary_color
+	background-color: $theme_primary_color
+
+input[type="checkbox"].Plain + label
+	color: $theme_senary_color
+	background-color: transparent
+
+input[type="checkbox"].Plain:checked + label
+	color: $theme_quinary_color
+	background-color: $theme_primary_color
+
+textarea:disabled
+    color: $theme_quinary_color
+    background-color: $theme_quaternary_color
+
+
+/* TABLE */
+
+section
+    table.Square, table.Round, table.Space
+        tbody
+            tr
+                td
+                    table.BoxSquare, table.BoxRound
+                        tbody
+                            tr
+                                td
+                                    border-color: $theme_senary_color
+                                    background-color: transparent
+                            tr:nth-child(odd)
+                                background-color: transparent !important
+                            tr:nth-child(even)
+                                background-color: transparent !important
+    table.Square
+        thead
+            tr
+                th
+                    background-color: $theme_quinary_color
+                    color: $theme_senary_color
+                    border-color: $theme_primary_color
+        tbody
+            tr
+                td
+                    border-color: $theme_primary_color
+                    color: $theme_senary_color
+            tr:nth-child(odd)
+                background-color: $theme_secondary_color
+            tr:nth-child(even)
+                background-color: $theme_quinary_color
+    table.Round
+        thead
+            tr
+                th
+                    background-color: $theme_quinary_color
+                    color: $theme_senary_color
+                    border-color: $theme_primary_color
+        tbody
+            tr
+                td
+                    background-color: $theme_quinary_color
+                    color: $theme_senary_color
+                    border-color: $theme_primary_color
+    table.Space
+        thead
+            tr
+                th
+                    background-color: $theme_secondary_color
+                    color: $theme_senary_color
+                    border-color: $theme_quinary_color
+        tbody
+            tr
+                td
+                    background-color: $theme_quaternary_color
+                    color: $theme_senary_color
+                    border-color: $theme_quinary_color
+
+
+/* FOOTER */
+
+.FooterContainer, .HeaderContainer, .FooterContainerLast
+	background-color: $theme_primary_color
+	.FooterGeneral, .FooterLast, .HeaderGeneral
+		background-color: $theme_quinary_color
+	hr
+		border-color: $theme_primary_color
+		background-color: transparent

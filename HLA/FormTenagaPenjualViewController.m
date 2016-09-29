@@ -260,7 +260,7 @@
                     
                     NSString *elementID = [segmentTemp getSegmentName];
                     
-                    NSMutableDictionary *dictAnswer = [allAboutPDFFunctions dictAnswers:dictTransaction ElementID:elementID Value:value];
+                    NSMutableDictionary *dictAnswer = [allAboutPDFFunctions dictAnswers:dictTransaction ElementID:elementID Value:value Section:@"AF"];
                     
                     [arrayFormAnswers addObject:dictAnswer];
                     i++;
@@ -271,7 +271,7 @@
                     NSString *value = textTemp.text;
                     NSString *elementID = [textTemp getTextFieldName];
                     
-                    NSMutableDictionary *dictAnswer = [allAboutPDFFunctions dictAnswers:dictTransaction ElementID:elementID Value:value];
+                    NSMutableDictionary *dictAnswer = [allAboutPDFFunctions dictAnswers:dictTransaction ElementID:elementID Value:value Section:@"AF"];
                     
                     [arrayFormAnswers addObject:dictAnswer];
                     i++;
@@ -282,7 +282,7 @@
                     NSString *value = textTemp.text;
                     NSString *elementID = [textTemp getTextViewName];
                     
-                    NSMutableDictionary *dictAnswer = [allAboutPDFFunctions dictAnswers:dictTransaction ElementID:elementID Value:value];
+                    NSMutableDictionary *dictAnswer = [allAboutPDFFunctions dictAnswers:dictTransaction ElementID:elementID Value:value Section:@"AF"];
                     
                     [arrayFormAnswers addObject:dictAnswer];
                     i++;
@@ -296,7 +296,7 @@
         NSString *value = [allAboutPDFFunctions GetOutputForInsurancePurposeCheckBox:[arrayCollectionSelectedInsurancePurchaseReason objectAtIndex:x]];
         NSString *elementID = buttonInsurancePurpose;
         
-        NSMutableDictionary *dictAnswer = [allAboutPDFFunctions dictAnswers:dictTransaction ElementID:elementID Value:value];
+        NSMutableDictionary *dictAnswer = [allAboutPDFFunctions dictAnswers:dictTransaction ElementID:elementID Value:value Section:@"AF"];
         
         [arrayFormAnswers addObject:dictAnswer];
     }

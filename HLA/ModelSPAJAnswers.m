@@ -85,4 +85,24 @@
     return spajID;
 }
 
+
+-(int)getCountElementID:(NSString *)stringElementName SPAJTransactionID:(int)spajTransactionID{
+    int spajID;
+    
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select count(elementID) as Count  from SPAJAnswers where SPAJHtmlSection in ('KS_PH','KS_IN') and SPAJTransactionID = %i and elementID like \"%%%@%%\"",spajTransactionID,stringElementName]];
+    while ([s next]) {
+        spajID = [s intForColumn:@"Count"];
+    }
+    
+    [results close];
+    [database close];
+    return spajID;
+}
+
 @end

@@ -50,11 +50,17 @@ NSString* const BackPhoto = @"Back";
     [labelName setText:stringName];
     if ([partyIndex intValue]==4){
         [tableImageCaptured setHidden:NO];
-        [self showMultiplePictureForSection:PaymentSection StringButtonType:buttonTitle];
+        //[self showMultiplePictureForSection:PaymentSection StringButtonType:buttonTitle];
+        [self showMultiplePictureForSection:OtherSection StringButtonType:buttonTitle];
     }
-    else if ([partyIndex intValue]==5){
+    /*else if ([partyIndex intValue]==5){
         [tableImageCaptured setHidden:NO];
         [self showMultiplePictureForSection:OtherSection StringButtonType:buttonTitle];
+    }*/
+    else if ([partyIndex intValue]==3){
+        [tableImageCaptured setHidden:NO];
+        //[self showMultiplePictureForSection:OtherSection StringButtonType:buttonTitle];
+        [self showMultiplePictureForSection:PaymentSection StringButtonType:buttonTitle];
     }
     else{
         [imageViewFront setImage:imageFront];

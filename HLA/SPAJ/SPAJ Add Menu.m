@@ -34,6 +34,7 @@ NSString* const stateIMGGeneration = @"IMG";
 #import "ModelSPAJDetail.h"
 #import "ModelSPAJFormGeneration.h"
 #import "ModelSPAJHtml.h"
+#import "ModelSPAJAnswers.h"
 #import "Formatter.h"
 #import "Layout.h"
 #import "User Interface.h"
@@ -71,6 +72,7 @@ NSString* const stateIMGGeneration = @"IMG";
     ModelSPAJFormGeneration* modelSPAJFormGeneration;
     ModelSPAJDetail* modelSPAJDetail;
     ModelSPAJHtml *modelSPAJHtml;
+    ModelSPAJAnswers *modelSPAJAnswers;
     Model_SI_Master* modelSIMaster;
     ModelProspectProfile* modelProspectProfile;
     ModelAgentProfile* modelAgentProfile;
@@ -166,6 +168,7 @@ NSString* const stateIMGGeneration = @"IMG";
         modelSPAJDetail = [[ModelSPAJDetail alloc]init];
         modelSPAJFormGeneration = [[ModelSPAJFormGeneration alloc]init];
         modelAgentProfile = [[ModelAgentProfile alloc]init];
+        modelSPAJAnswers = [[ModelSPAJAnswers alloc]init];
         classImageProcessing = [[ClassImageProcessing alloc]init];
         objectUserInterface = [[UserInterface alloc] init];
         
@@ -994,7 +997,8 @@ NSString* const stateIMGGeneration = @"IMG";
             
             indexPDFForIMGGeneration = 0;
             NSURL *fileURL = [[NSURL alloc] initFileURLWithPath:[arrayPDFHealthQuestionairreName objectAtIndex:indexPDFForIMGGeneration]];
-            outputName = [NSString stringWithFormat:@"%@_%@",[dictTransaction valueForKey:@"SPAJEappNumber"],[allAboutPDFGeneration getSPAJImageNameFromPath:[arrayIMGName objectAtIndex:indexPDFForIMGGeneration]]];
+            //outputName = [NSString stringWithFormat:@"%@_%@",[dictTransaction valueForKey:@"SPAJEappNumber"],[allAboutPDFGeneration getSPAJImageNameFromPath:[arrayIMGName objectAtIndex:indexPDFForIMGGeneration]]];
+            outputName = [NSString stringWithFormat:@"%@",[allAboutPDFGeneration getSPAJImageNameFromPath:[arrayPDFHealthQuestionairreName objectAtIndex:indexPDFForIMGGeneration]]];
             
             NSURLRequest *request = [NSURLRequest requestWithURL:fileURL];
             [webview loadRequest:request];
@@ -1159,7 +1163,8 @@ NSString* const stateIMGGeneration = @"IMG";
         indexPDFForIMGGeneration++;
         if (indexPDFForIMGGeneration<[arrayPDFHealthQuestionairreName count]){
             NSURL *fileURL = [[NSURL alloc] initFileURLWithPath:[arrayPDFHealthQuestionairreName objectAtIndex:indexPDFForIMGGeneration]];
-            outputName = [NSString stringWithFormat:@"%@_%@",[dictTransaction valueForKey:@"SPAJEappNumber"],[allAboutPDFGeneration getSPAJImageNameFromPath:[arrayIMGName objectAtIndex:indexPDFForIMGGeneration]]];
+            //outputName = [NSString stringWithFormat:@"%@_%@",[dictTransaction valueForKey:@"SPAJEappNumber"],[allAboutPDFGeneration getSPAJImageNameFromPath:[arrayIMGName objectAtIndex:indexPDFForIMGGeneration]]];
+            outputName = [NSString stringWithFormat:@"%@",[allAboutPDFGeneration getSPAJImageNameFromPath:[arrayPDFHealthQuestionairreName objectAtIndex:indexPDFForIMGGeneration]]];
             
             NSURLRequest *request = [NSURLRequest requestWithURL:fileURL];
             [webview loadRequest:request];
@@ -1311,56 +1316,127 @@ NSString* const stateIMGGeneration = @"IMG";
 
 
     - (NSMutableDictionary*)readfromDB:(NSMutableDictionary*) params{
-        NSString *SPAJTransactionID = [dictTransaction valueForKey:@"SPAJTransactionID"];
-        NSMutableDictionary* modifiedParams = [[NSMutableDictionary alloc]initWithDictionary:[params valueForKey:@"data"]];
-        NSMutableDictionary* tempDict = [[NSMutableDictionary alloc] initWithDictionary:[modifiedParams valueForKey:@"SPAJAnswers"]];
-        NSString* stringWhere = [NSString stringWithFormat:@"where CustomerID=%@ and SPAJID=%@ and SPAJTransactionID=%@ ",@"1",@"1",SPAJTransactionID];
-        
-        [tempDict setObject:stringWhere forKey:@"where"];
-        [tempDict setObject:[tempDict valueForKey:@"columns"] forKey:@"columns"];
-        
-        NSMutableDictionary* answerDictionary = [[NSMutableDictionary alloc]init];
-        [answerDictionary setObject:tempDict forKey:@"SPAJAnswers"];
-        
-        NSMutableDictionary* finalDictionary = [[NSMutableDictionary alloc]init];
-        [finalDictionary setObject:answerDictionary forKey:@"data"];
-        [finalDictionary setValue:[params valueForKey:@"successCallBack"] forKey:@"successCallBack"];
-        [finalDictionary setValue:[params valueForKey:@"errorCallback"] forKey:@"errorCallback"];
-        [super readfromDB:finalDictionary];
-        
-        //NSMutableDictionary *dictOriginal = [[NSMutableDictionary alloc]initWithDictionary:[super readfromDB:finalDictionary]];
-        NSMutableDictionary *dictOriginal = [[NSMutableDictionary alloc]init];
-        
-        NSMutableArray *modifieArray = [[NSMutableArray alloc]init];
-        for (int i=0; i<[arrayHTMLAgentID count];i++){
-            [modifieArray addObject:[self getDictionaryForAgentData:[arrayDBAgentID objectAtIndex:i] HTMLID:[arrayHTMLAgentID objectAtIndex:i]]];
+        if (stateGeneration == stateIMGGeneration){
+            NSString* htmlFileName = [allAboutPDFGeneration getSPAJImageNameFromPath:[arrayIMGName objectAtIndex:indexImgForPDFGeneration]];
+            
+            NSString *stringName = [allAboutPDFGeneration getWordFromString:htmlFileName IndexWord:2];
+            int countElement = [modelSPAJAnswers getCountElementID:stringName SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue]];
+            NSLog(@"count %@ %i",stringName,countElement);
+            
+            if (countElement >0){
+                @autoreleasepool {
+                    NSString *SPAJTransactionID = [dictTransaction valueForKey:@"SPAJTransactionID"];
+                    NSMutableDictionary* modifiedParams = [[NSMutableDictionary alloc]initWithDictionary:[params valueForKey:@"data"]];
+                    NSMutableDictionary* tempDict = [[NSMutableDictionary alloc] initWithDictionary:[modifiedParams valueForKey:@"SPAJAnswers"]];
+                    NSString* stringWhere = [NSString stringWithFormat:@"where CustomerID=%@ and SPAJID=%@ and SPAJTransactionID=%@ ",@"1",@"1",SPAJTransactionID];
+                    
+                    [tempDict setObject:stringWhere forKey:@"where"];
+                    [tempDict setObject:[tempDict valueForKey:@"columns"] forKey:@"columns"];
+                    
+                    NSMutableDictionary* answerDictionary = [[NSMutableDictionary alloc]init];
+                    [answerDictionary setObject:tempDict forKey:@"SPAJAnswers"];
+                    
+                    NSMutableDictionary* finalDictionary = [[NSMutableDictionary alloc]init];
+                    [finalDictionary setObject:answerDictionary forKey:@"data"];
+                    [finalDictionary setValue:[params valueForKey:@"successCallBack"] forKey:@"successCallBack"];
+                    [finalDictionary setValue:[params valueForKey:@"errorCallback"] forKey:@"errorCallback"];
+                    [super readfromDB:finalDictionary];
+                    NSMutableDictionary *dictOriginal = [[NSMutableDictionary alloc]init];
+                    NSMutableArray *modifieArray = [[NSMutableArray alloc]init];
+                    for (int i=0; i<[arrayHTMLAgentID count];i++){
+                        [modifieArray addObject:[self getDictionaryForAgentData:[arrayDBAgentID objectAtIndex:i] HTMLID:[arrayHTMLAgentID objectAtIndex:i]]];
+                    }
+                    
+                    for (int i=0; i<[arrayHTMLReferal count];i++){
+                        [modifieArray addObject:[self getDictionaryForReferralData:[arrayDBReferral objectAtIndex:i] HTMLID:[arrayHTMLReferal objectAtIndex:i]]];
+                    }
+                    
+                    for (int i=0; i<[arrayHTMLPOData count];i++){
+                        [modifieArray addObject:[self getDictionaryForPOData:[arrayDBPOData objectAtIndex:i] HTMLID:[arrayHTMLPOData objectAtIndex:i]]];
+                    }
+                    
+                    for (int i=0; i<[arrayHTMLSIData count];i++){
+                        [modifieArray addObject:[self getDictionaryForSIMaster:[arrayDBSIData objectAtIndex:i] HTMLID:[arrayHTMLSIData objectAtIndex:i]]];
+                    }
+                    
+                    for (int i=0; i<[arrayHTMLSignature count];i++){
+                        [modifieArray addObject:[self getDictionaryForSignature:[arrayDBSignature objectAtIndex:i] HTMLID:[arrayHTMLSignature objectAtIndex:i]]];
+                    }
+                    
+                    [dictOriginal setObject:modifieArray forKey:@"readFromDB"];
+                    //return [super readfromDB:finalDictionary];
+                    [self callSuccessCallback:[params valueForKey:@"successCallBack"] withRetValue:dictOriginal];
+                    //  [viewActivityIndicator setHidden:YES];
+                    
+                    [self performSelector:@selector(voidCreateThePDF) withObject:nil afterDelay:1.0];
+                    
+                    //[self voidCreateThePDF];
+                    return dictOriginal;
+                }
+            }
+            else{
+                indexImgForPDFGeneration ++;
+                if (indexImgForPDFGeneration < [arrayIMGName count]){
+                    [self loadSPAJPDFHTML:[arrayIMGName objectAtIndex:indexImgForPDFGeneration] WithArrayIndex:indexImgForPDFGeneration];
+                }
+                else{
+                    [self createImageFromPDF];
+                }
+                return params;
+            }
         }
-        
-        for (int i=0; i<[arrayHTMLReferal count];i++){
-            [modifieArray addObject:[self getDictionaryForReferralData:[arrayDBReferral objectAtIndex:i] HTMLID:[arrayHTMLReferal objectAtIndex:i]]];
+        else{
+            NSString *SPAJTransactionID = [dictTransaction valueForKey:@"SPAJTransactionID"];
+            NSMutableDictionary* modifiedParams = [[NSMutableDictionary alloc]initWithDictionary:[params valueForKey:@"data"]];
+            NSMutableDictionary* tempDict = [[NSMutableDictionary alloc] initWithDictionary:[modifiedParams valueForKey:@"SPAJAnswers"]];
+            NSString* stringWhere = [NSString stringWithFormat:@"where CustomerID=%@ and SPAJID=%@ and SPAJTransactionID=%@ ",@"1",@"1",SPAJTransactionID];
+            
+            [tempDict setObject:stringWhere forKey:@"where"];
+            [tempDict setObject:[tempDict valueForKey:@"columns"] forKey:@"columns"];
+            
+            NSMutableDictionary* answerDictionary = [[NSMutableDictionary alloc]init];
+            [answerDictionary setObject:tempDict forKey:@"SPAJAnswers"];
+            
+            NSMutableDictionary* finalDictionary = [[NSMutableDictionary alloc]init];
+            [finalDictionary setObject:answerDictionary forKey:@"data"];
+            [finalDictionary setValue:[params valueForKey:@"successCallBack"] forKey:@"successCallBack"];
+            [finalDictionary setValue:[params valueForKey:@"errorCallback"] forKey:@"errorCallback"];
+            [super readfromDB:finalDictionary];
+            
+            //NSMutableDictionary *dictOriginal = [[NSMutableDictionary alloc]initWithDictionary:[super readfromDB:finalDictionary]];
+            NSMutableDictionary *dictOriginal = [[NSMutableDictionary alloc]init];
+            
+            NSMutableArray *modifieArray = [[NSMutableArray alloc]init];
+            for (int i=0; i<[arrayHTMLAgentID count];i++){
+                [modifieArray addObject:[self getDictionaryForAgentData:[arrayDBAgentID objectAtIndex:i] HTMLID:[arrayHTMLAgentID objectAtIndex:i]]];
+            }
+            
+            for (int i=0; i<[arrayHTMLReferal count];i++){
+                [modifieArray addObject:[self getDictionaryForReferralData:[arrayDBReferral objectAtIndex:i] HTMLID:[arrayHTMLReferal objectAtIndex:i]]];
+            }
+            
+            for (int i=0; i<[arrayHTMLPOData count];i++){
+                [modifieArray addObject:[self getDictionaryForPOData:[arrayDBPOData objectAtIndex:i] HTMLID:[arrayHTMLPOData objectAtIndex:i]]];
+            }
+            
+            for (int i=0; i<[arrayHTMLSIData count];i++){
+                [modifieArray addObject:[self getDictionaryForSIMaster:[arrayDBSIData objectAtIndex:i] HTMLID:[arrayHTMLSIData objectAtIndex:i]]];
+            }
+            
+            for (int i=0; i<[arrayHTMLSignature count];i++){
+                [modifieArray addObject:[self getDictionaryForSignature:[arrayDBSignature objectAtIndex:i] HTMLID:[arrayHTMLSignature objectAtIndex:i]]];
+            }
+            
+            [modifieArray addObject:[self getDictionaryForSPAJNumber:@"SPAJNumber" HTMLID:@"TextSPAJNumber"]];
+            [modifieArray addObject:[self getDictionaryForVANumber:@"SPAJNumber" HTMLID:@"TextVANumber"]];
+            
+            [dictOriginal setObject:modifieArray forKey:@"readFromDB"];
+            [self callSuccessCallback:[params valueForKey:@"successCallBack"] withRetValue:dictOriginal];
+            //[webview setHidden:NO];
+            //[self voidCreateThePDF];
+            [self performSelector:@selector(voidCreateThePDF) withObject:nil afterDelay:1.0];
+            return dictOriginal;
         }
-        
-        for (int i=0; i<[arrayHTMLPOData count];i++){
-            [modifieArray addObject:[self getDictionaryForPOData:[arrayDBPOData objectAtIndex:i] HTMLID:[arrayHTMLPOData objectAtIndex:i]]];
-        }
-        
-        for (int i=0; i<[arrayHTMLSIData count];i++){
-            [modifieArray addObject:[self getDictionaryForSIMaster:[arrayDBSIData objectAtIndex:i] HTMLID:[arrayHTMLSIData objectAtIndex:i]]];
-        }
-        
-        for (int i=0; i<[arrayHTMLSignature count];i++){
-            [modifieArray addObject:[self getDictionaryForSignature:[arrayDBSignature objectAtIndex:i] HTMLID:[arrayHTMLSignature objectAtIndex:i]]];
-        }
-        
-        [modifieArray addObject:[self getDictionaryForSPAJNumber:@"SPAJNumber" HTMLID:@"TextSPAJNumber"]];
-        [modifieArray addObject:[self getDictionaryForVANumber:@"SPAJNumber" HTMLID:@"TextVANumber"]];
-        
-        [dictOriginal setObject:modifieArray forKey:@"readFromDB"];
-        [self callSuccessCallback:[params valueForKey:@"successCallBack"] withRetValue:dictOriginal];
-        //[webview setHidden:NO];
-        //[self voidCreateThePDF];
-        [self performSelector:@selector(voidCreateThePDF) withObject:nil afterDelay:1.0];
-        return dictOriginal;
     }
 
     - (void)webViewDidFinishLoad:(UIWebView *)webView{

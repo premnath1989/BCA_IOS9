@@ -665,7 +665,7 @@
         [dictionarySPAJTransaction setObject:@"0" forKey:@"SPAJIDCaptureParty1"];
         [dictionarySPAJTransaction setObject:@"0" forKey:@"SPAJIDCaptureParty2"];
         [dictionarySPAJTransaction setObject:@"0" forKey:@"SPAJIDCaptureParty3"];
-        [dictionarySPAJTransaction setObject:@"0" forKey:@"SPAJIDCaptureParty4"];
+        [dictionarySPAJTransaction setObject:@"1" forKey:@"SPAJIDCaptureParty4"];
         [dictionarySPAJTransaction setObject:@"0" forKey:@"SPAJIDCaptureParty5"];
         [dictionarySPAJTransaction setObject:@"0" forKey:@"SPAJIDCaptureParty6"];
         [dictionarySPAJTransaction setObject:@"null" forKey:@"SPAJIDTypeParty1"];

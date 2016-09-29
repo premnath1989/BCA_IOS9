@@ -117,6 +117,22 @@
     return stringName;
 }
 
+-(NSString *)getWordFromString:(NSString *)stringImageName IndexWord:(int)index{
+    NSString *stringName;
+    NSArray *chunks = [stringImageName componentsSeparatedByString: @"_"];
+    stringName = [chunks objectAtIndex:index];
+    
+    /*NSString* realString;
+    if ([chunks count]>0){
+        realString = [chunks lastObject];
+        NSArray *chunks1 = [realString componentsSeparatedByString: @"."];
+        stringName = [chunks1 objectAtIndex:0];
+    }*/
+    
+    
+    return stringName;
+}
+
 -(UIImage *)generateSignatureForImage:(UIImage *)mainImg signatureImage1:(UIImage *)signatureImage1 signaturePostion1:(CGRect)signaturePosition1 signatureImage2:(UIImage *)signatureImage2 signaturePostion2:(CGRect)signaturePosition2 signatureImage3:(UIImage *)signatureImage3 signaturePostion3:(CGRect)signaturePosition3 signatureImage4:(UIImage *)signatureImage4 signaturePostion4:(CGRect)signaturePosition4{
     UIImage *backgroundImage = mainImg;
     UIImage *signImage1 = signatureImage1;
@@ -204,6 +220,44 @@
         }
     }
 }
+
+-(void)removeActivityAndHealthQuestionaireJPGFiles:(NSDictionary *)dictTransaction{
+    formatter = [[Formatter alloc]init];
+    NSString* stringFilePath = [formatter generateSPAJFileDirectory:[dictTransaction valueForKey:@"SPAJEappNumber"]];
+    
+    NSArray *directoryContent = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:stringFilePath error:NULL];
+    
+    NSString *docsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    
+    NSArray *fileNameForDelete = [directoryContent filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"pathExtension IN %@", @"jpg"]];
+    
+    for (int i=0;i<[fileNameForDelete count];i++){
+        NSString *fileName = [fileNameForDelete objectAtIndex:i];
+        
+        NSString *filter1 = @"healthquestionnairepdf";
+        NSString *filter2 = @"activityquestionnairepdf";
+        
+        if (([self doesString:fileName containCharacter:filter1])||([self doesString:fileName containCharacter:filter2])){
+            //NSLog(@"'a' found");
+            NSError *error;
+            NSString *pdfPath1 = [NSString stringWithFormat:@"%@/SPAJ/%@/%@",docsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"],[fileNameForDelete objectAtIndex:i]];
+            NSFileManager *fileManager = [NSFileManager defaultManager];
+            BOOL success =[fileManager removeItemAtPath:pdfPath1 error:&error];
+            
+            if (success) {
+                
+            }
+            else
+            {
+                NSLog(@"Could not delete file -:%@ ",[error localizedDescription]);
+            }
+
+        }
+        else{
+        }
+    }
+}
+
 
 -(BOOL)doesString:(NSString *)string containCharacter:(NSString *)character
 {

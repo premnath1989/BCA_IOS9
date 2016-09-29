@@ -1,0 +1,178 @@
+/* @charset "utf-8"; */
+/* CSS Document */
+
+
+// IMPORT
+
+@import healthquestionnaire-initialization-general
+
+
+/* HEADER */
+
+header
+    h1, h2
+        padding-top: $general_space_small
+        padding-bottom: $general_space_small
+        text-align: center
+    h1
+        font-size: $fontsize_form_h1
+    h2
+        font-size: $fontsize_form_h2
+        margin-bottom: $general_space_small
+    .Highlighted
+        label
+            font-size: $fontsize_form_labelgeneral
+
+
+/* FORM */
+
+main
+    form
+        ol, li, ul
+            margin: 0px
+            padding: 0px
+        ol
+            counter-reset: first
+            li:before
+                padding-left: $general_space_large
+                padding-right: $general_space_tiny
+                content: counter(first, decimal) "."
+                display: table-cell
+                text-align: right
+            li
+                list-style: none
+                counter-increment: first
+                display: table-row
+                ol
+                    padding-left: $general_space_tiny
+                    counter-reset: second
+                    li:before
+                        padding-left: $general_space_tiny
+                        padding-right: $general_space_tiny
+                        content: counter(second, lower-alpha) "."
+                    li
+                        counter-increment: second
+                        .Container
+                            border-bottom-style: solid
+                            border-bottom-width: thin
+                    li:last-child
+                        .Container
+                            border-bottom-style: none
+        label, span
+            font-size: $fontsize_form_labelgeneral
+            vertical-align: top
+        label:after
+            float: right
+            display: inline-block
+            margin-right: $general_space_tiny
+        label.RadioButton
+            padding: $general_space_tiny
+            vertical-align: middle
+        label.RadioButton.Short
+            width: $label_width_short
+        label.RadioButton:after
+            content: ''
+        label.RadioButton.Medium
+            width: $label_width_short * 1.4
+        label.Wrap, span.Wrap
+            margin-right: $general_space_tiny
+            width: auto;
+        label.Short, span.Short
+            width: $label_width_short
+        label.Medium, span.Medium
+            width: $label_width_medium
+        label.Long, span.Long
+            width: $label_width_long
+        label.FirstIndent, span.FirstIndent
+            margin-left: $general_space_medium
+        label.SecondIndent, span.SecondIndent
+            margin-left: $general_space_medium * 2
+        label.Short.FirstIndent
+            width: $label_width_short - $general_space_medium
+        label.Medium.FirstIndent
+            width: $label_width_medium - $general_space_medium
+        label.Long.FirstIndent
+            width: $label_width_long - $general_space_medium
+        label.Short.SecondIndent
+            width: $label_width_short - $general_space_medium * 2
+        label.Medium.SecondIndent
+            width: $label_width_medium - $general_space_medium * 2
+        label.Long.SecondIndent
+            width: $label_width_long - $general_space_medium * 2
+        label.Single
+            height: $label_height_single
+            line-height: $label_height_single
+        label.Multi
+            min-height: $label_height_multi
+            vertical-align: top
+        label.Box, label.Separator
+            padding-right: $general_space_tiny
+            padding-left: $general_space_tiny
+        label.Separator:after, label.Description:after, label.Note:after
+            margin-right: 0px
+            content: ''
+        label.Suffix, span.Suffix
+            min-width: ($label_width_medium / 15) * 2
+            text-align: left
+            display: inline-block
+        span.Separator
+            padding: $general_space_tiny
+            font-size: $fontsize_form_labelgeneral
+        span.Description, label.Description
+            padding-top: $general_space_tiny
+            padding-bottom: $general_space_tiny
+            font-size: $fontsize_form_labeldescription
+        span.Note, label.Note
+            margin: 0px
+            padding: $general_space_tiny
+            font-size: $fontsize_form_spannote
+            border: none
+        .Container
+            padding-top: $general_space_small
+            padding-bottom: $general_space_small
+    p
+        margin: 0px
+        padding: 0px
+    .Container
+        display: box
+        display: flex
+        flex-direction: row
+        flex-wrap: nowrap
+        justify-content: space-between
+        .Item:first-child
+            text-align: left
+        .Item:last-child
+            margin-right: $general_space_medium
+            min-width: $label_width_medium
+            text-align: right
+    hr
+        border-top: none
+        border-bottom: solid
+        border-width: $general_borderwidth_thin
+
+.Note
+	margin-left: $general_space_large + 10px
+	margin-right: $general_space_large + 10px
+	margin-bottom: $general_space_large
+	padding: $general_space_small
+	border-style: solid
+	border-width: $general_borderwidth_thin
+	h2
+		font-size: $fontsize_form_h2
+		margin-bottom: $general_space_small
+	ol, ul
+		margin-left: -$general_space_small
+		li
+			font-size: $fontsize_form_labelgeneral
+
+
+/* POP UP */
+
+main
+    section
+        form
+            header
+                h2
+                    border: none
+            fieldset
+                border: none

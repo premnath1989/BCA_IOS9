@@ -21,10 +21,11 @@
 #import "ModelSPAJTransaction.h"
 #import "AllAboutPDFGeneration.h"
 #import "Alert.h"
+#import "SIDate.h"
 
 #define IS_RETINA ([[UIScreen mainScreen] respondsToSelector:@selector(displayLinkWithTarget:selector:)] && ([UIScreen mainScreen].scale == 2.0))
 
-@interface SPAJThirdParty (){
+@interface SPAJThirdParty ()<SIDateDelegate>{
     Formatter* formatter;
     SPAJPDFAutopopulateData* spajPDFData;
     SPAJPDFWebViewController* spajPDFWebView;
@@ -38,6 +39,11 @@
     ModelSPAJTransaction *modelSPAJTransaction;
     AllAboutPDFGeneration *allAboutPDFGeneration;
     Alert* alert;
+    SIDate *siDate;
+    
+    ButtonSPAJ* tempDateButton;
+    
+    UIPopoverController *SIDatePopover;
     
     NSString *imageFileName;
     
@@ -95,7 +101,10 @@
     }
     
     functionUserInterface = [[UserInterface alloc] init];
+    
     allAboutPDFFunctions = [[AllAboutPDFFunctions alloc]init];
+    [allAboutPDFFunctions createDictionaryForRadioButton];
+    
     formatter = [[Formatter alloc]init];
     spajPDFData = [[SPAJPDFAutopopulateData alloc]init];
     modelSPAJHtml = [[ModelSPAJHtml alloc]init];
@@ -210,16 +219,16 @@
     //IBOutlet TextFieldSPAJ* //textSebutkanTujuanPembelianAsuransi//textSebutkan
     
     
-    [TextThirdPartyCompanyNoAnggaranDasar setTextFieldName:@""];
-    [TextThirdPartyCompanyNoSIUP setTextFieldName:@""];
-    [TextThirdPartyCompanyNoTDP setTextFieldName:@""];
-    [TextThirdPartyCompanyNoSKDP setTextFieldName:@""];
+    [TextThirdPartyCompanyNoAnggaranDasar setTextFieldName:@"TextThirdPartyCompanyNoAnggaranDasar"];
+    [TextThirdPartyCompanyNoSIUP setTextFieldName:@"TextThirdPartyCompanyNoSIUP"];
+    [TextThirdPartyCompanyNoTDP setTextFieldName:@"TextThirdPartyCompanyNoTDP"];
+    [TextThirdPartyCompanyNoSKDP setTextFieldName:@"TextThirdPartyCompanyNoSKDP"];
     //IBOutlet TextFieldSPAJ* //textNPWP
-    [TextThirdPartyCompanySector setTextFieldName:@""];
-    [TextThirdPartyCompanyAddress setTextFieldName:@""];
+    [TextThirdPartyCompanySector setTextFieldName:@"TextThirdPartyCompanySector"];
+    [TextThirdPartyCompanyAddress setTextFieldName:@"TextThirdPartyCompanyAddress"];
     //IBOutlet TextFieldSPAJ* //TextThirdPartyCompanyAddress2//ini belum ada
-    [TextThirdPartyCompanyCity setTextFieldName:@""];
-    [TextThirdPartyCompanyPostalCode setTextFieldName:@""];
+    [TextThirdPartyCompanyCity setTextFieldName:@"TextThirdPartyCompanyCity"];
+    [TextThirdPartyCompanyPostalCode setTextFieldName:@"TextThirdPartyCompanyPostalCode"];
     
     //IBOutlet TextFieldSPAJ*
     //IBOutlet TextFieldSPAJ*
@@ -253,10 +262,55 @@
     arrayHTMLSignature =[[NSMutableArray alloc]initWithArray:[spajPDFData arrayInitializeSignatureHTML]];
 }
 
+-(void)loadThirdPartyPDFHTML:(NSString*)stringHTMLName WithArrayIndex:(int)intArrayIndex{
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    filePath = [docsDir stringByAppendingPathComponent:@"SPAJ"];
+    
+    NSString *htmlfilePath = [NSString stringWithFormat:@"SPAJ/%@",stringHTMLName];
+    NSString *localURL = [[NSString alloc] initWithString:
+                          [docsDir stringByAppendingPathComponent: htmlfilePath]];
+    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localURL]];
+    [webview loadRequest:urlRequest];
+}
+
+-(void)loadReport{
+    //NSString* fileName = @"20160803/page_spajpdf_salesdeclaration.html";
+    imageFileName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"TP" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]];
+    [self loadThirdPartyPDFHTML:imageFileName WithArrayIndex:0];
+}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (IBAction)actionDate:(ButtonSPAJ *)sender
+{
+    tempDateButton = sender;
+    
+    [self resignFirstResponder];
+    [self.view endEditing:YES];
+    
+    NSString *dateString;
+    if ([sender.currentTitle isEqualToString:@"(Tanggal / Bulan / Tahun)"]){
+        dateString= [formatter getDateToday:@"dd/MM/yyyy"];
+    }
+    else{
+        dateString= sender.currentTitle;
+    }
+    
+    if (siDate == Nil) {
+        UIStoryboard *clientProfileStoryBoard = [UIStoryboard storyboardWithName:@"ClientProfileStoryboard" bundle:nil];
+        siDate = [clientProfileStoryBoard instantiateViewControllerWithIdentifier:@"SIDate"];
+        siDate.delegate = self;
+        SIDatePopover = [[UIPopoverController alloc] initWithContentViewController:siDate];
+    }
+    siDate.ProspectDOB=dateString;
+    [SIDatePopover setPopoverContentSize:CGSizeMake(300.0f, 255.0f)];
+    [SIDatePopover presentPopoverFromRect:[sender bounds]  inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:NO];
+}
+
 
 -(IBAction)actionCloseForm:(UIButton *)sender{
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -271,42 +325,35 @@
             for (UIView *viewDetail in [view subviews]) {
                 if ([viewDetail isKindOfClass:[SegmentSPAJ class]]) {
                     SegmentSPAJ* segmentTemp = (SegmentSPAJ *)viewDetail;
-                    NSString *value;
-                    if (segmentTemp.tag == 0){
-                        value = [allAboutPDFFunctions GetOutputForYaTidakRadioButton:[segmentTemp titleForSegmentAtIndex:segmentTemp.selectedSegmentIndex]];
-                    }
-                    else if (segmentTemp.tag == 1){
-                        value = [allAboutPDFFunctions GetOutputForRelationWithPORadioButton:[segmentTemp titleForSegmentAtIndex:segmentTemp.selectedSegmentIndex]];
-                    }
-                    else if (segmentTemp.tag == 2){
-                        value = [allAboutPDFFunctions GetOutputForDurationKnowPORadioButton:[segmentTemp titleForSegmentAtIndex:segmentTemp.selectedSegmentIndex]];
-                    }
+                    NSString *value= [allAboutPDFFunctions GetOutputForRadioButton:[segmentTemp titleForSegmentAtIndex:segmentTemp.selectedSegmentIndex]];
+                                        
+                    NSString *elementID = [segmentTemp getSegmentName]?:[NSString stringWithFormat:@"seg%i",i];;
                     
-                    NSString *elementID = [segmentTemp getSegmentName];
-                    
-                    NSMutableDictionary *dictAnswer = [allAboutPDFFunctions dictAnswers:dictTransaction ElementID:elementID Value:value];
+                    NSMutableDictionary *dictAnswer = [allAboutPDFFunctions dictAnswers:dictTransaction ElementID:elementID Value:value Section:@"TP"];
                     
                     [arrayFormAnswers addObject:dictAnswer];
                     i++;
                 }
                 
                 if ([viewDetail isKindOfClass:[TextFieldSPAJ class]]) {
+                    NSLog(@"tf");
                     TextFieldSPAJ* textTemp = (TextFieldSPAJ *)viewDetail;
                     NSString *value = textTemp.text;
-                    NSString *elementID = [textTemp getTextFieldName];
+                    NSString *elementID = [textTemp getTextFieldName]?:[NSString stringWithFormat:@"textField%i",i];
                     
-                    NSMutableDictionary *dictAnswer = [allAboutPDFFunctions dictAnswers:dictTransaction ElementID:elementID Value:value];
+                    NSMutableDictionary *dictAnswer = [allAboutPDFFunctions dictAnswers:dictTransaction ElementID:elementID Value:value Section:@"TP"];
                     
                     [arrayFormAnswers addObject:dictAnswer];
                     i++;
                 }
                 
-                if ([viewDetail isKindOfClass:[TextViewSPAJ class]]) {
-                    TextViewSPAJ* textTemp = (TextViewSPAJ *)viewDetail;
-                    NSString *value = textTemp.text;
-                    NSString *elementID = [textTemp getTextViewName];
+                if ([viewDetail isKindOfClass:[ButtonSPAJ class]]) {
+                    NSLog(@"btn");
+                    ButtonSPAJ* buttonTemp = (ButtonSPAJ *)viewDetail;
+                    NSString *value = buttonTemp.currentTitle;
+                    NSString *elementID = [buttonTemp getButtonName]?:[NSString stringWithFormat:@"btnView%i",i];
                     
-                    NSMutableDictionary *dictAnswer = [allAboutPDFFunctions dictAnswers:dictTransaction ElementID:elementID Value:value];
+                    NSMutableDictionary *dictAnswer = [allAboutPDFFunctions dictAnswers:dictTransaction ElementID:elementID Value:value Section:@"TP"];
                     
                     [arrayFormAnswers addObject:dictAnswer];
                     i++;
@@ -326,7 +373,7 @@
     }*/
     
     NSLog(@"answers %@",[allAboutPDFFunctions createDictionaryForSave:arrayFormAnswers]);
-    //[self savetoDB:[allAboutPDFFunctions createDictionaryForSave:arrayFormAnswers]];
+    [self savetoDB:[allAboutPDFFunctions createDictionaryForSave:arrayFormAnswers]];
 }
 
 -(NSDictionary *)getDictionaryForAgentData:(NSString *)stringDBColumnName HTMLID:(NSString *)stringHTMLID{
@@ -408,6 +455,186 @@
     [dictForSignature setObject:@"1" forKey:@"CustomerID"];
     [dictForSignature setObject:@"1" forKey:@"SPAJID"];
     return dictForSignature;
+}
+
+#pragma mark delegate date
+- (void)DateSelected:(NSString *)strDate:(NSString *) dbDate{
+    [tempDateButton setTitle:strDate forState:UIControlStateNormal];
+}
+
+- (void)CloseWindow{
+    [self resignFirstResponder];
+    [self.view endEditing:YES];
+    [SIDatePopover dismissPopoverAnimated:YES];
+}
+
+-(void)voidCreateImageFromWebView:(NSString *)fileName{
+    //[self.view bringSubviewToFront:webview];
+    
+    int currentWebViewHeight = webview.scrollView.contentSize.height;
+    int scrollByY = webview.frame.size.height;
+    
+    [webview.scrollView setContentOffset:CGPointMake(0, 0)];
+    
+    NSMutableArray* images = [[NSMutableArray alloc] init];
+    
+    CGRect screenRect = webview.frame;
+    
+    int pages = currentWebViewHeight/scrollByY;
+    if (currentWebViewHeight%scrollByY > 0) {
+        pages ++;
+    }
+    
+    for (int i = 0; i< pages; i++)
+    {
+        if (i == pages-1) {
+            if (pages>1)
+                screenRect.size.height = currentWebViewHeight - scrollByY;
+        }
+        
+        if (IS_RETINA)
+            UIGraphicsBeginImageContextWithOptions(screenRect.size, NO, 0);
+        else
+            UIGraphicsBeginImageContext( screenRect.size );
+        if ([webview.layer respondsToSelector:@selector(setContentsScale:)]) {
+            webview.layer.contentsScale = [[UIScreen mainScreen] scale];
+        }
+        //UIGraphicsBeginImageContext(screenRect.size);
+        CGContextRef ctx = UIGraphicsGetCurrentContext();
+        [[UIColor blackColor] set];
+        CGContextFillRect(ctx, screenRect);
+        
+        [webview.layer renderInContext:ctx];
+        
+        UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        if (i == 0)
+        {
+            scrollByY = webview.frame.size.height;
+        }
+        else
+        {
+            scrollByY += webview.frame.size.height;
+        }
+        [webview.scrollView setContentOffset:CGPointMake(0, scrollByY)];
+        [images addObject:newImage];
+    }
+    
+    [webview.scrollView setContentOffset:CGPointMake(0, 0)];
+    
+    UIImage *resultImage;
+    
+    if(images.count > 1) {
+        //join all images together..
+        CGSize size;
+        for(int i=0;i<images.count;i++) {
+            
+            size.width = MAX(size.width, ((UIImage*)[images objectAtIndex:i]).size.width );
+            size.height += ((UIImage*)[images objectAtIndex:i]).size.height;
+        }
+        
+        if (IS_RETINA)
+            UIGraphicsBeginImageContextWithOptions(size, NO, 0);
+        else
+            UIGraphicsBeginImageContext(size);
+        if ([webview.layer respondsToSelector:@selector(setContentsScale:)]) {
+            webview.layer.contentsScale = [[UIScreen mainScreen] scale];
+        }
+        CGContextRef ctx = UIGraphicsGetCurrentContext();
+        [[UIColor blackColor] set];
+        CGContextFillRect(ctx, screenRect);
+        
+        int y=0;
+        for(int i=0;i<images.count;i++) {
+            
+            UIImage* img = [images objectAtIndex:i];
+            [img drawAtPoint:CGPointMake(0,y)];
+            y += img.size.height;
+        }
+        
+        resultImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+    } else {
+        
+        resultImage = [images objectAtIndex:0];
+    }
+    [images removeAllObjects];
+    
+    NSData *thumbnailData = UIImageJPEGRepresentation(resultImage, 0);
+    
+    //NSString *relativeOutputFilePath = [NSString stringWithFormat:@"%@/%@.jpg", [formatter generateSPAJFileDirectory:[dictTransaction valueForKey:@"SPAJEappNumber"]],fileName];
+    NSString* outputName = [NSString stringWithFormat:@"%@_%@",[dictTransaction valueForKey:@"SPAJEappNumber"],@"ThirdParty"];
+    
+    NSString *relativeOutputFilePath = [NSString stringWithFormat:@"%@/%@.jpg", [formatter generateSPAJFileDirectory:[dictTransaction valueForKey:@"SPAJEappNumber"]],outputName];
+    
+    [thumbnailData writeToFile:relativeOutputFilePath atomically:YES];
+    
+    UIAlertController *alertLockForm = [alert alertInformation:@"Berhasil" stringMessage:@"Form berhasil dibuat"];
+    [self presentViewController:alertLockForm animated:YES completion:nil];
+    //[viewActivityIndicator setHidden:YES];
+}
+
+
+- (NSMutableDictionary*)readfromDB:(NSMutableDictionary*) params{
+    NSString *SPAJTransactionID = [dictTransaction valueForKey:@"SPAJTransactionID"];
+    NSMutableDictionary* modifiedParams = [[NSMutableDictionary alloc]initWithDictionary:[params valueForKey:@"data"]];
+    NSMutableDictionary* tempDict = [[NSMutableDictionary alloc] initWithDictionary:[modifiedParams valueForKey:@"SPAJAnswers"]];
+    NSString* stringWhere = [NSString stringWithFormat:@"where CustomerID=%@ and SPAJID=%@ and SPAJTransactionID=%@ ",@"1",@"1",SPAJTransactionID];
+    
+    [tempDict setObject:stringWhere forKey:@"where"];
+    [tempDict setObject:[tempDict valueForKey:@"columns"] forKey:@"columns"];
+    
+    NSMutableDictionary* answerDictionary = [[NSMutableDictionary alloc]init];
+    [answerDictionary setObject:tempDict forKey:@"SPAJAnswers"];
+    
+    NSMutableDictionary* finalDictionary = [[NSMutableDictionary alloc]init];
+    [finalDictionary setObject:answerDictionary forKey:@"data"];
+    [finalDictionary setValue:[params valueForKey:@"successCallBack"] forKey:@"successCallBack"];
+    [finalDictionary setValue:[params valueForKey:@"errorCallback"] forKey:@"errorCallback"];
+    [super readfromDB:finalDictionary];
+    
+    NSMutableDictionary *dictOriginal = [[NSMutableDictionary alloc]init];
+    
+    NSMutableArray *modifieArray = [[NSMutableArray alloc]init];
+    for (int i=0; i<[arrayHTMLAgentID count];i++){
+        [modifieArray addObject:[self getDictionaryForAgentData:[arrayDBAgentID objectAtIndex:i] HTMLID:[arrayHTMLAgentID objectAtIndex:i]]];
+    }
+    
+    for (int i=0; i<[arrayHTMLReferal count];i++){
+        [modifieArray addObject:[self getDictionaryForReferralData:[arrayDBReferral objectAtIndex:i] HTMLID:[arrayHTMLReferal objectAtIndex:i]]];
+    }
+    
+    for (int i=0; i<[arrayHTMLPOData count];i++){
+        [modifieArray addObject:[self getDictionaryForPOData:[arrayDBPOData objectAtIndex:i] HTMLID:[arrayHTMLPOData objectAtIndex:i]]];
+    }
+    
+    for (int i=0; i<[arrayHTMLSIData count];i++){
+        [modifieArray addObject:[self getDictionaryForSIMaster:[arrayDBSIData objectAtIndex:i] HTMLID:[arrayHTMLSIData objectAtIndex:i]]];
+    }
+    
+    for (int i=0; i<[arrayHTMLSignature count];i++){
+        [modifieArray addObject:[self getDictionaryForSignature:[arrayDBSignature objectAtIndex:i] HTMLID:[arrayHTMLSignature objectAtIndex:i]]];
+    }
+    [modifieArray addObject:[self getDictionaryForSPAJNumber:@"SPAJNumber" HTMLID:@"TextSPAJNumber"]];
+    [dictOriginal setObject:modifieArray forKey:@"readFromDB"];
+    [self callSuccessCallback:[params valueForKey:@"successCallBack"] withRetValue:dictOriginal];
+    
+    //[self performSelector:@selector(voidCreateThePDF) withObject:nil afterDelay:1.0];
+    [self performSelector:@selector(voidCreateImageFromWebView:) withObject:imageFileName afterDelay:1.0];
+    return dictOriginal;
+}
+
+
+- (void)savetoDB:(NSDictionary *)params{
+    //add another key to db
+    [super savetoDB:params];
+    [self loadReport];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView{
+    [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"readfromDB();"]];
+    
 }
 
 /*

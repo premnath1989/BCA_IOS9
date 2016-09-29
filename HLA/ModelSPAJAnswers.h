@@ -17,4 +17,5 @@
 -(NSString *)selectSPAJAnswersData:(NSString *)stringColumnName StringWhere:(NSString *)stringWhere;
 -(void)deleteSPAJAnswers:(NSString *)stringWhereValue;
 -(int)selectSPAJIDActiveHtml;
+-(int)getCountElementID:(NSString *)stringElementName SPAJTransactionID:(int)spajTransactionID;
 @end

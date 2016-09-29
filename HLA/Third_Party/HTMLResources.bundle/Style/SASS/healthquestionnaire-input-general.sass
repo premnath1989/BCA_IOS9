@@ -1,0 +1,117 @@
+/* @charset "utf-8"; */
+/* CSS Document */
+
+
+// IMPORT
+
+@import healthquestionnaire-initialization-general
+
+	
+/* INPUT TYPE TEXT */
+
+input, textarea
+	padding-top: $input_padding_edge
+    padding-right: $input_padding_side
+    padding-right: $input_padding_side
+    padding-bottom: $input_padding_edge
+	vertical-align: middle
+	border-style: solid
+	border-width: $input_borderwidth_pure
+
+input
+	text-transform: uppercase
+
+input.Tiny, textarea.Tiny
+    min-width: $input_width_short / 4 !important
+    width: $input_width_short / 4 !important
+	
+input.Small, textarea.Small
+    min-width: $input_width_short / 0.85 !important
+    width: $input_width_short / 0.85 !important
+
+input.Short, textarea.Short
+    min-width: $input_width_short !important
+    width: $input_width_short !important
+
+input.Medium, textarea.Medium
+    min-width: $input_width_medium
+    width: $input_width_medium
+
+input.Long, textarea.Long
+    min-width: $input_width_long
+    width: $input_width_long
+
+input.Full, textarea.Full
+    width: 100%
+
+input.TinyFix, textarea.TinyFix
+    max-width: $input_width_short / 4 !important
+	
+input.SmallFix, textarea.SmallFix
+    max-width: $input_width_short / 0.85 !important
+
+input.ShortFix, textarea.ShortFix
+    max-width: $input_width_short !important
+
+input.MediumFix, textarea.MediumFix
+    max-width: $input_width_medium
+
+input.LongFix, textarea.LongFix
+    max-width: $input_width_long
+	
+input.FullFix, textarea.FullFix
+    max-width: 100%
+
+input.Single, textarea.Single
+	height: $input_height_single
+
+input.Multi, textarea.Multi
+	height: $input_height_multi
+
+input:required, textarea:required
+    background-image: url("../../Resource/Input/input_text_required.svg")
+    background-size: 3em 2em
+    background-position: right top
+    background-repeat: no-repeat
+    
+input:disabled, textarea:disabled
+    background-image: none
+
+
+/* CHECKBOX */
+
+.RadioButton
+    text-align: center
+    display: inline-block
+    input[type="radio"]
+        display: none
+    .Separator
+        width: 2px
+        height: 12px
+        display: inline-block
+    label.RadioButton
+        padding-top: $input_padding_edge
+        padding-right: $input_padding_side
+        padding-left: $input_padding_side
+        padding-bottom: $input_padding_edge
+        font-size: $fontsize_input_radiobutton
+        +BorderRadius($general_borderradius_thick)
+		
+/* CHECKBOX */
+
+.Checkbox
+    text-align: center
+    display: inline-block
+    input[type="checkbox"]
+        display: none
+    .Separator
+        width: 2px
+        height: 12px
+        display: inline-block
+    label.Checkbox
+        padding-top: $input_padding_edge
+        padding-right: $input_padding_side
+        padding-left: $input_padding_side
+        padding-bottom: $input_padding_edge
+        font-size: $fontsize_input_radiobutton
+        +BorderRadius($general_borderradius_thick)
