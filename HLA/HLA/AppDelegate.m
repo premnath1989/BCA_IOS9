@@ -16,6 +16,7 @@
 #import "CFFListingViewController.h"
 #import <CoreData/CoreData.h>
 #import "CFFAPIController.h"
+#import "SPAJSubmissionFiles.h"
 
 @implementation AppDelegate
 @synthesize indexNo;
@@ -49,7 +50,6 @@ NSString *uatAgentCode;
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     databasePath = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
-    
     
     NSLog(@"db path %@",databasePath);
     [SIUtilities makeDBCopy:databasePath];
