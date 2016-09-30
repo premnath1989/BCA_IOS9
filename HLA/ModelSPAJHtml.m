@@ -139,7 +139,7 @@
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     [database open];
     
-    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select * from SPAJHtml where SPAJHtmlStatus = 'A'"]];
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select * from SPAJHtml where SPAJHtmlStatus = 'A' group by SPAJHtmlStatus"]];
     while ([s next]) {
         //spajHtmlID = [NSString stringWithFormat:@"%i",[s intForColumn:@"SPAJHtmlID"]];
         spajID = [s intForColumn:@"SPAJID"];
