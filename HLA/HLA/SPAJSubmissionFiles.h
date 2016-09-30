@@ -10,5 +10,5 @@
     
 }
 
--(void)xmltoFile:(NSString *)text path:(NSString *)filePath;
+-(void)xmltoFile:(NSMutableDictionary *)dictInfo path:(NSString *)filePath;
 @end

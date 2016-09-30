@@ -757,7 +757,7 @@ static NSString *labelVers;
     WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
     if (strApplicationUUID == nil)
     {
-        strApplicationUUID  = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+        strApplicationUUID  = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
         [SSKeychain setPassword:strApplicationUUID forService:appName account:@"incodingLogin"];
         
         //change the udid

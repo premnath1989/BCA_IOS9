@@ -13,19 +13,24 @@
     
 }
 
--(void)xmltoFile:(NSString *)text path:(NSString *)filePath
+-(void)xmltoFile:(NSMutableDictionary *)dictInfo path:(NSString *)filePath
 {
     NSError *error;
-    
-    
-    [text writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:&error];
+    NSString *textParsed = [self parseXML:dictInfo text:@""];
+    [textParsed writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:&error];
 }
 
-- (void) parseXML:(NSMutableDictionary *)dictInfo text:(NSString *)text{
+- (NSString *) parseXML:(NSMutableDictionary *)dictInfo text:(NSString *)text{
     for(NSString *root in [dictInfo allKeys]){
-        text = [text stringByAppendingString:[NSString stringWithFormat:@"%@",root]];
-        [dictInfo valueForKey:root];        
+        text = [text stringByAppendingString:[NSString stringWithFormat:@"<%@>",root]];
+        if([[dictInfo valueForKey:root] isKindOfClass:[NSMutableDictionary class]]){
+            text = [text stringByAppendingString:[NSString stringWithFormat:@"%@",[self parseXML:[dictInfo valueForKey:root] text:text]]];
+        }else{
+            text = [text stringByAppendingString:[NSString stringWithFormat:@"%@",[dictInfo valueForKey:root]]];
+        }
+        text = [text stringByAppendingString:[NSString stringWithFormat:@"<%@>",root]];
     }
+    return text;
 }
 
 @end
