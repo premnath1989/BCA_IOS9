@@ -1,0 +1,281 @@
+/* @charset "utf-8"; */
+/* CSS Document */
+/* @charset "utf-8"; */
+/* CSS Document */
+/* @charset "utf-8"; */
+/* CSS Document */
+/* FUNCTION */
+/* ANIMATION */
+/* HEADER */
+/* FORM */
+/* INPUT */
+/* NOTE */
+/* SIGNATURE */
+/* FOOTER */
+/* TABLE */
+/* LINK */
+/* GENERAL */
+/* ICON */
+/* LAYOUT */
+/* FORM INITIALIZATION */
+/* LABEL */
+/* BOX */
+/* TABLE INITIALIZATION */
+/* TABLE */
+/* INPUT INITIALIZATION */
+/* LINK */
+/* RESOURCE */
+/* TYPEFACE */
+/* HEADER */
+header h1, header h2 {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 1em;
+}
+
+header h2 {
+  font-size: 0.9em;
+  margin-bottom: 10px;
+}
+
+header .Highlighted label {
+  font-size: 0.75em;
+}
+
+/* FORM */
+main form ol, main form li, main form ul {
+  margin: 0px;
+  padding: 0px;
+}
+
+main form ol {
+  counter-reset: first;
+}
+
+main form ol li:before {
+  padding-left: 20px;
+  padding-right: 5px;
+  content: counter(first, decimal) ".";
+  display: table-cell;
+  text-align: right;
+}
+
+main form ol li {
+  list-style: none;
+  counter-increment: first;
+  display: table-row;
+}
+
+main form ol li ol {
+  padding-left: 5px;
+  counter-reset: second;
+}
+
+main form ol li ol li:before {
+  padding-left: 5px;
+  padding-right: 5px;
+  content: counter(second, lower-alpha) ".";
+}
+
+main form ol li ol li {
+  counter-increment: second;
+}
+
+main form ol li ol li .Container {
+  border-bottom-style: solid;
+  border-bottom-width: thin;
+}
+
+main form ol li ol li:last-child .Container {
+  border-bottom-style: none;
+}
+
+main form label, main form span {
+  font-size: 0.75em;
+  vertical-align: top;
+}
+
+main form label:after {
+  float: right;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+main form label.RadioButton {
+  padding: 5px;
+  vertical-align: middle;
+}
+
+main form label.RadioButton.Short {
+  width: 75px;
+}
+
+main form label.RadioButton:after {
+  content: '';
+}
+
+main form label.RadioButton.Medium {
+  width: 105px;
+}
+
+main form label.Wrap, main form span.Wrap {
+  margin-right: 5px;
+  width: auto;
+}
+
+main form label.Short, main form span.Short {
+  width: 75px;
+}
+
+main form label.Medium, main form span.Medium {
+  width: 154px;
+}
+
+main form label.Long, main form span.Long {
+  width: 225px;
+}
+
+main form label.FirstIndent, main form span.FirstIndent {
+  margin-left: 15px;
+}
+
+main form label.SecondIndent, main form span.SecondIndent {
+  margin-left: 30px;
+}
+
+main form label.Short.FirstIndent {
+  width: 60px;
+}
+
+main form label.Medium.FirstIndent {
+  width: 139px;
+}
+
+main form label.Long.FirstIndent {
+  width: 210px;
+}
+
+main form label.Short.SecondIndent {
+  width: 45px;
+}
+
+main form label.Medium.SecondIndent {
+  width: 124px;
+}
+
+main form label.Long.SecondIndent {
+  width: 195px;
+}
+
+main form label.Single {
+  height: 20px;
+  line-height: 20px;
+}
+
+main form label.Multi {
+  min-height: 60px;
+  vertical-align: top;
+}
+
+main form label.Box, main form label.Separator {
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+main form label.Separator:after, main form label.Description:after, main form label.Note:after {
+  margin-right: 0px;
+  content: '';
+}
+
+main form label.Suffix, main form span.Suffix {
+  min-width: 20.53333px;
+  text-align: left;
+  display: inline-block;
+}
+
+main form span.Separator {
+  padding: 5px;
+  font-size: 0.75em;
+}
+
+main form span.Description, main form label.Description {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-size: 0.7em;
+}
+
+main form span.Note, main form label.Note {
+  margin: 0px;
+  padding: 5px;
+  font-size: 0.4em;
+  border: none;
+}
+
+main form .Container {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+main p {
+  margin: 0px;
+  padding: 0px;
+}
+
+main .Container {
+  display: box;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+main .Container .Item:first-child {
+  text-align: left;
+}
+
+main .Container .Item:last-child {
+  margin-right: 15px;
+  min-width: 154px;
+  text-align: right;
+}
+
+main hr {
+  border-top: none;
+  border-bottom: solid;
+  border-width: 1px;
+}
+
+.Note {
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-bottom: 20px;
+  padding: 10px;
+  border-style: solid;
+  border-width: 1px;
+}
+
+.Note h2 {
+  font-size: 0.9em;
+  margin-bottom: 10px;
+}
+
+.Note ol, .Note ul {
+  margin-left: -10px;
+}
+
+.Note ol li, .Note ul li {
+  font-size: 0.75em;
+}
+
+/* POP UP */
+main section form header h2 {
+  border: none;
+}
+
+main section form fieldset {
+  border: none;
+}

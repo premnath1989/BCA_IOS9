@@ -45,6 +45,7 @@
 @synthesize buttonSubmit;
 @synthesize delegateSPAJFiles;
 @synthesize boolHealthQuestionairre;
+@synthesize boolThirdParty;
 
 - (void)viewWillLayoutSubviews{
     [super viewWillLayoutSubviews];
@@ -120,6 +121,23 @@
         NSArray *extensions = [NSArray arrayWithObjects:@"jpg", nil];
         arrayFinalSort = [[arrayFinalSort filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"pathExtension IN %@", extensions]] mutableCopy];
     }
+    
+    if (boolThirdParty){
+        NSString *match = @"*ThirdParty.jpg";
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF like %@", match];
+        arrayFinalSort = [[arrayFinalSort filteredArrayUsingPredicate:predicate] mutableCopy];
+    }
+    
+    //NSMutableArray *tempFinalSort = [[NSMutableArray alloc]initWithArray:arrayFinalSort];
+    NSArray *filteredArray = [arrayFinalSort filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF CONTAINS 'salesdeclaration'"]];
+    if (filteredArray.count > 0) {
+        // Do something
+        [buttonSubmit setEnabled:YES];
+    }
+    else{
+        [buttonSubmit setEnabled:NO];
+    }
+    //buttonSubmit
     
     [tableFileList reloadData];
 }

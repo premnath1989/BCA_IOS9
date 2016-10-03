@@ -21,6 +21,8 @@
     UserInterface *functionUserInterface;
     AllAboutPDFFunctions *allAboutPDFFunctions;
     
+    IBOutlet UICollectionView *collectionReasonInsurancePurchaseC;
+    IBOutlet UICollectionView *collectionReasonInsurancePurchaseD;
     
     IBOutlet UIScrollView *scrollViewForm;
     IBOutlet UIStackView *stackViewForm;
@@ -131,6 +133,9 @@
     
     //IBOutlet TextFieldSPAJ*
     //IBOutlet TextFieldSPAJ*
+    
+    UITextField *activeField;
+    UITextView *activeView;
 }
 @property (strong, nonatomic) NSDictionary* dictTransaction;
 @end

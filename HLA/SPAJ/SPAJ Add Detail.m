@@ -27,6 +27,7 @@
 #import "ModelSPAJTransaction.h"
 #import "ModelSIPOData.h"
 #import "ModelSPAJFormGeneration.h"
+#import "AllAboutPDFGeneration.h"
 
 // DECLARATION
 
@@ -40,8 +41,11 @@
 // IMPLEMENTATION
 
 @implementation SPAJAddDetail{
+    UIAlertController *alertController;
+    
     UIBarButtonItem* rightButton;
     
+    AllAboutPDFGeneration *allAboutPDFGeneration;
     SPAJ_Calon_Pemegang_Polis* spajCalonPemegangPolis;
     SPAJ_Calon_Tertanggung* spajCalonTertanggung;
     SPAJ_Perusahaan* spajPerusahaan;
@@ -100,6 +104,7 @@
         modelSPAJTransaction = [[ModelSPAJTransaction alloc]init];
         modelSIPData = [[ModelSIPOData alloc]init];
         modelSPAJFormGeneration = [[ModelSPAJFormGeneration alloc]init];
+        allAboutPDFGeneration = [[AllAboutPDFGeneration alloc]init];
         
         [self setNavigationBar];
         
@@ -310,67 +315,231 @@
         switch (indexPath.row) {
             case 0:
             {
-                //NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PO"];
-                NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PO" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]];
-                [self.navigationItem setTitle:@"Data Calon Pemegang Polis"];
-                [spajCalonPemegangPolis setHtmlFileName:stringHTMLName];
-                //[self loadSPAJCalonPemegangPolis];
-                [spajCalonPemegangPolis loadFirstHTML:stringHTMLName PageSection:@"PO"];
-                [rightButton setAction:@selector(voidDoneSPAJCalonPemegangPolis:)];
+                NSString* flagEdited = [spajCalonPemegangPolis getStringFlagEdited];
+                
+                if ([allAboutPDFGeneration doesString:flagEdited containCharacter:@"true"]){
+                    NSString* message=@"Telah terjadi perubahan data. Yakin ingin melanjutkan tanpa menyimpan data ?";
+                    alertController = [UIAlertController alertControllerWithTitle:@"" message:message preferredStyle:UIAlertControllerStyleAlert];
+                    
+                    [alertController addAction:[UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                        //NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PO"];
+                        NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PO" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]];
+                        [self.navigationItem setTitle:@"Data Calon Pemegang Polis"];
+                        [spajCalonPemegangPolis setHtmlFileName:stringHTMLName];
+                        //[self loadSPAJCalonPemegangPolis];
+                        [spajCalonPemegangPolis loadFirstHTML:stringHTMLName PageSection:@"PO"];
+                        [rightButton setAction:@selector(voidDoneSPAJCalonPemegangPolis:)];
+                    }]];
+                    
+                    [alertController addAction:[UIAlertAction actionWithTitle:@"NO" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                        [alertController dismissViewControllerAnimated:YES completion:nil];
+                        
+                        [_tableSection selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
+                    }]];
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^ {
+                        [self presentViewController:alertController animated:YES completion:nil];
+                    });
+                }
+                else{
+                    //NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PO"];
+                    NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PO" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]];
+                    [self.navigationItem setTitle:@"Data Calon Pemegang Polis"];
+                    [spajCalonPemegangPolis setHtmlFileName:stringHTMLName];
+                    //[self loadSPAJCalonPemegangPolis];
+                    [spajCalonPemegangPolis loadFirstHTML:stringHTMLName PageSection:@"PO"];
+                    [rightButton setAction:@selector(voidDoneSPAJCalonPemegangPolis:)];
+                    break;
+                }
                 break;
+                
             }
             case 1:
             {
-                NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"TR" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]];
-                [spajCalonTertanggung setHtmlFileName:stringHTMLName];
-                [self.navigationItem setTitle:@"Data Calon Tertanggung"];
-                //[self loadSPAJCalonTertanggung];
-                [spajCalonPemegangPolis loadSecondHTML:stringHTMLName PageSection:@"TR"];
-                //[rightButton setAction:@selector(voidDoneSPAJCalonTertanggung:)];
-                [rightButton setAction:@selector(voidDoneSPAJCalonPemegangPolis:)];
+                NSString* flagEdited = [spajCalonPemegangPolis getStringFlagEdited];
+                if ([allAboutPDFGeneration doesString:flagEdited containCharacter:@"true"]){
+                    NSString* message=@"Telah terjadi perubahan data. Yakin ingin melanjutkan tanpa menyimpan data ?";
+                    alertController = [UIAlertController alertControllerWithTitle:@"" message:message preferredStyle:UIAlertControllerStyleAlert];
+                    
+                    [alertController addAction:[UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                        NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"TR" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]];
+                        [spajCalonTertanggung setHtmlFileName:stringHTMLName];
+                        [self.navigationItem setTitle:@"Data Calon Tertanggung"];
+                        //[self loadSPAJCalonTertanggung];
+                        [spajCalonPemegangPolis loadSecondHTML:stringHTMLName PageSection:@"TR"];
+                        //[rightButton setAction:@selector(voidDoneSPAJCalonTertanggung:)];
+                        [rightButton setAction:@selector(voidDoneSPAJCalonPemegangPolis:)];
+                    }]];
+                    
+                    [alertController addAction:[UIAlertAction actionWithTitle:@"NO" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                        [alertController dismissViewControllerAnimated:YES completion:nil];
+                        
+                        [_tableSection selectRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
+                    }]];
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^ {
+                        [self presentViewController:alertController animated:YES completion:nil];
+                    });
+                }
+                else{
+                    NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"TR" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]];
+                    [spajCalonTertanggung setHtmlFileName:stringHTMLName];
+                    [self.navigationItem setTitle:@"Data Calon Tertanggung"];
+                    //[self loadSPAJCalonTertanggung];
+                    [spajCalonPemegangPolis loadSecondHTML:stringHTMLName PageSection:@"TR"];
+                    //[rightButton setAction:@selector(voidDoneSPAJCalonTertanggung:)];
+                    [rightButton setAction:@selector(voidDoneSPAJCalonPemegangPolis:)];
+                }
                 break;
             }
             case 2:
             {
-                NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PR" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]];
-                [spajPerusahaan setHtmlFileName:stringHTMLName];
-                [self.navigationItem setTitle:@"Data Perusahaan / Badan Hukum"];
-                //[self loadSPAJPerusahaan];
-                [spajCalonPemegangPolis loadThirdHTML:stringHTMLName PageSection:@"PR"];
-                //[rightButton setAction:@selector(voidDoneSPAJPerusahaan:)];
-                [rightButton setAction:@selector(voidDoneSPAJCalonPemegangPolis:)];
+                NSString* flagEdited = [spajCalonPemegangPolis getStringFlagEdited];
+                if ([allAboutPDFGeneration doesString:flagEdited containCharacter:@"true"]){
+                    NSString* message=@"Telah terjadi perubahan data. Yakin ingin melanjutkan tanpa menyimpan data ?";
+                    alertController = [UIAlertController alertControllerWithTitle:@"" message:message preferredStyle:UIAlertControllerStyleAlert];
+                    
+                    [alertController addAction:[UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                        NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PR" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]];
+                        [spajPerusahaan setHtmlFileName:stringHTMLName];
+                        [self.navigationItem setTitle:@"Data Perusahaan / Badan Hukum"];
+                        //[self loadSPAJPerusahaan];
+                        [spajCalonPemegangPolis loadThirdHTML:stringHTMLName PageSection:@"PR"];
+                        //[rightButton setAction:@selector(voidDoneSPAJPerusahaan:)];
+                        [rightButton setAction:@selector(voidDoneSPAJCalonPemegangPolis:)];
+                    }]];
+                    
+                    [alertController addAction:[UIAlertAction actionWithTitle:@"NO" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                        [alertController dismissViewControllerAnimated:YES completion:nil];
+                        
+                        [_tableSection selectRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
+                    }]];
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^ {
+                        [self presentViewController:alertController animated:YES completion:nil];
+                    });
+                }
+                else{
+                    NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PR" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]];
+                    [spajPerusahaan setHtmlFileName:stringHTMLName];
+                    [self.navigationItem setTitle:@"Data Perusahaan / Badan Hukum"];
+                    //[self loadSPAJPerusahaan];
+                    [spajCalonPemegangPolis loadThirdHTML:stringHTMLName PageSection:@"PR"];
+                    //[rightButton setAction:@selector(voidDoneSPAJPerusahaan:)];
+                    [rightButton setAction:@selector(voidDoneSPAJCalonPemegangPolis:)];
+                }
                 break;
             }
             case 3:
             {
-                NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PM" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]];
-                [spajCalonPenerimaManfaat setHtmlFileName:stringHTMLName];
-                [self.navigationItem setTitle:@"Data Calon Penerima Manfaat"];
-                //[self loadSPAJCalonPenerimaManfaat];
-                [spajCalonPemegangPolis loadFourthHTML:stringHTMLName PageSection:@"PM"];
-                //[rightButton setAction:@selector(voidDoneSPAJPenerimaManfaat:)];
-                [rightButton setAction:@selector(voidDoneSPAJCalonPemegangPolis:)];
+                NSString* flagEdited = [spajCalonPemegangPolis getStringFlagEdited];
+                if ([allAboutPDFGeneration doesString:flagEdited containCharacter:@"true"]){
+                    NSString* message=@"Telah terjadi perubahan data. Yakin ingin melanjutkan tanpa menyimpan data ?";
+                    alertController = [UIAlertController alertControllerWithTitle:@"" message:message preferredStyle:UIAlertControllerStyleAlert];
+                    
+                    [alertController addAction:[UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                        NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PM" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]];
+                        [spajCalonPenerimaManfaat setHtmlFileName:stringHTMLName];
+                        [self.navigationItem setTitle:@"Data Calon Penerima Manfaat"];
+                        //[self loadSPAJCalonPenerimaManfaat];
+                        [spajCalonPemegangPolis loadFourthHTML:stringHTMLName PageSection:@"PM"];
+                        //[rightButton setAction:@selector(voidDoneSPAJPenerimaManfaat:)];
+                        [rightButton setAction:@selector(voidDoneSPAJCalonPemegangPolis:)];
+                    }]];
+                    
+                    [alertController addAction:[UIAlertAction actionWithTitle:@"NO" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                        [alertController dismissViewControllerAnimated:YES completion:nil];
+                        
+                        [_tableSection selectRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
+                    }]];
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^ {
+                        [self presentViewController:alertController animated:YES completion:nil];
+                    });
+                }
+                else{
+                    NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PM" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]];
+                    [spajCalonPenerimaManfaat setHtmlFileName:stringHTMLName];
+                    [self.navigationItem setTitle:@"Data Calon Penerima Manfaat"];
+                    //[self loadSPAJCalonPenerimaManfaat];
+                    [spajCalonPemegangPolis loadFourthHTML:stringHTMLName PageSection:@"PM"];
+                    //[rightButton setAction:@selector(voidDoneSPAJPenerimaManfaat:)];
+                    [rightButton setAction:@selector(voidDoneSPAJCalonPemegangPolis:)];
+                }
                 break;
             }
             case 4:
             {
-                NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PP" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]];
-                [spajPembayaranPremi setHtmlFileName:stringHTMLName];
-                [self.navigationItem setTitle:@"Data Pembayaran Premi"];
-                //[self loadSPAJPembayaranPremi];
-                [spajCalonPemegangPolis loadFivethHTML:stringHTMLName PageSection:@"PP"];
-                //[rightButton setAction:@selector(voidDoneSPAJPembayaranPremi:)];
-                [rightButton setAction:@selector(voidDoneSPAJCalonPemegangPolis:)];
+                NSString* flagEdited = [spajCalonPemegangPolis getStringFlagEdited];
+                if ([allAboutPDFGeneration doesString:flagEdited containCharacter:@"true"]){
+                    NSString* message=@"Telah terjadi perubahan data. Yakin ingin melanjutkan tanpa menyimpan data ?";
+                    alertController = [UIAlertController alertControllerWithTitle:@"" message:message preferredStyle:UIAlertControllerStyleAlert];
+                    
+                    [alertController addAction:[UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                        NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PP" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]];
+                        [spajPembayaranPremi setHtmlFileName:stringHTMLName];
+                        [self.navigationItem setTitle:@"Data Pembayaran Premi"];
+                        //[self loadSPAJPembayaranPremi];
+                        [spajCalonPemegangPolis loadFivethHTML:stringHTMLName PageSection:@"PP"];
+                        //[rightButton setAction:@selector(voidDoneSPAJPembayaranPremi:)];
+                        [rightButton setAction:@selector(voidDoneSPAJCalonPemegangPolis:)];
+                    }]];
+                    
+                    [alertController addAction:[UIAlertAction actionWithTitle:@"NO" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                        [alertController dismissViewControllerAnimated:YES completion:nil];
+                        
+                        [_tableSection selectRowAtIndexPath:[NSIndexPath indexPathForRow:4 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
+                    }]];
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^ {
+                        [self presentViewController:alertController animated:YES completion:nil];
+                    });
+                }
+                else{
+                    NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PP" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]];
+                    [spajPembayaranPremi setHtmlFileName:stringHTMLName];
+                    [self.navigationItem setTitle:@"Data Pembayaran Premi"];
+                    //[self loadSPAJPembayaranPremi];
+                    [spajCalonPemegangPolis loadFivethHTML:stringHTMLName PageSection:@"PP"];
+                    //[rightButton setAction:@selector(voidDoneSPAJPembayaranPremi:)];
+                    [rightButton setAction:@selector(voidDoneSPAJCalonPemegangPolis:)];
+                }
                 break;
             }
             case 5:
             {
-                NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"KS_PH" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]];
-                //[self loadSPAJPembayaranPremi];
-                [self.navigationItem setTitle:@"Data Kesehatan"];
-                [spajCalonPemegangPolis loadSixthHTML:stringHTMLName PageSection:@"KS_PH"];
-                //[rightButton setAction:@selector(voidDoneSPAJPembayaranPremi:)];
-                [rightButton setAction:@selector(voidDoneSPAJCalonPemegangPolis:)];
+                NSString* flagEdited = [spajCalonPemegangPolis getStringFlagEdited];
+                if ([allAboutPDFGeneration doesString:flagEdited containCharacter:@"true"]){
+                    NSString* message=@"Telah terjadi perubahan data. Yakin ingin melanjutkan tanpa menyimpan data ?";
+                    alertController = [UIAlertController alertControllerWithTitle:@"" message:message preferredStyle:UIAlertControllerStyleAlert];
+                    
+                    [alertController addAction:[UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                        NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"KS_PH" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]];
+                        //[self loadSPAJPembayaranPremi];
+                        [self.navigationItem setTitle:@"Data Kesehatan"];
+                        [spajCalonPemegangPolis loadSixthHTML:stringHTMLName PageSection:@"KS_PH"];
+                        //[rightButton setAction:@selector(voidDoneSPAJPembayaranPremi:)];
+                        [rightButton setAction:@selector(voidDoneSPAJCalonPemegangPolis:)];
+                    }]];
+                    
+                    [alertController addAction:[UIAlertAction actionWithTitle:@"NO" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                        [alertController dismissViewControllerAnimated:YES completion:nil];
+                        
+                        [_tableSection selectRowAtIndexPath:[NSIndexPath indexPathForRow:5 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
+                    }]];
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^ {
+                        [self presentViewController:alertController animated:YES completion:nil];
+                    });
+                }
+                else{
+                    NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"KS_PH" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]];
+                    //[self loadSPAJPembayaranPremi];
+                    [self.navigationItem setTitle:@"Data Kesehatan"];
+                    [spajCalonPemegangPolis loadSixthHTML:stringHTMLName PageSection:@"KS_PH"];
+                    //[rightButton setAction:@selector(voidDoneSPAJPembayaranPremi:)];
+                    [rightButton setAction:@selector(voidDoneSPAJCalonPemegangPolis:)];
+                }
                 break;
             }
             default:

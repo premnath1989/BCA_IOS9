@@ -16,6 +16,7 @@
 
 @property (strong, nonatomic) NSDictionary* dictTransaction;
 @property (nonatomic,assign) BOOL boolHealthQuestionairre;
+@property (nonatomic,assign) BOOL boolThirdParty;
 
 @property (nonatomic, strong) IBOutlet UIButton* buttonSubmit;
 @end

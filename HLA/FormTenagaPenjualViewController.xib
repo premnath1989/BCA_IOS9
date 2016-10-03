@@ -7,7 +7,7 @@
         <mutableArray key="BPreplay_Italics.otf">
             <string>BPreplay-Italic</string>
         </mutableArray>
-        <mutableArray key="BPreplay_Regular.ttf">
+        <mutableArray key="BPreplay_Regular.otf">
             <string>BPreplay</string>
             <string>BPreplay</string>
             <string>BPreplay</string>
@@ -68,6 +68,10 @@
             <rect key="frame" x="0.0" y="0.0" width="819" height="724"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0A8-0V-3AO">
+                    <rect key="frame" x="0.0" y="0.0" width="819" height="724"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VrF-0f-Mb7" customClass="ViewPageHeader">
                     <rect key="frame" x="0.0" y="0.0" width="819" height="44"/>
                     <subviews>
@@ -94,53 +98,14 @@
                     </subviews>
                     <color key="backgroundColor" red="0.87450980389999999" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UQm-bs-aDz">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UQm-bs-aDz">
                     <rect key="frame" x="0.0" y="45" width="819" height="679"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="B1q-38-Mx6">
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="B1q-38-Mx6">
                             <rect key="frame" x="0.0" y="0.0" width="819" height="2102"/>
                             <subviews>
-                                <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N50-mh-UJL" userLabel="View-Header">
-                                    <rect key="frame" x="0.0" y="0.0" width="819" height="115"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Nomor SPAJ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HW9-ZR-hqi">
-                                            <rect key="frame" x="20" y="84" width="97" height="21"/>
-                                            <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1ci-vq-g0M" customClass="TextFieldSPAJ">
-                                            <rect key="frame" x="266" y="4" width="430" height="30"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
-                                        </textField>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2MS-5O-Jys" customClass="TextFieldSPAJ">
-                                            <rect key="frame" x="266" y="42" width="430" height="30"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
-                                        </textField>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yeE-Bj-z9b" customClass="TextFieldSPAJ">
-                                            <rect key="frame" x="266" y="80" width="430" height="30"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
-                                        </textField>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Nama Calon Tertanggung" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lBH-OU-M1h">
-                                            <rect key="frame" x="20" y="46" width="196" height="21"/>
-                                            <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Nama Calon Pemegang Polis" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J5V-RP-z1f">
-                                            <rect key="frame" x="20" y="8" width="245" height="21"/>
-                                            <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </view>
-                                <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jkc-VD-JSO" userLabel="View-1">
-                                    <rect key="frame" x="0.0" y="120" width="819" height="105"/>
+                                <view tag="1" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jkc-VD-JSO" userLabel="View-1">
+                                    <rect key="frame" x="0.0" y="0.0" width="819" height="114"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nVY-t1-oKK">
                                             <rect key="frame" x="20" y="8" width="624" height="21"/>
@@ -150,7 +115,7 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <segmentedControl opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="OE0-fh-VrU" customClass="SegmentSPAJ">
+                                        <segmentedControl opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="OE0-fh-VrU" customClass="SegmentSPAJ">
                                             <rect key="frame" x="20" y="39" width="791" height="29"/>
                                             <segments>
                                                 <segment title="Keluarga"/>
@@ -171,8 +136,8 @@
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
-                                <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ajb-Rl-9c9" userLabel="View-2">
-                                    <rect key="frame" x="0.0" y="230" width="819" height="105"/>
+                                <view tag="1" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ajb-Rl-9c9" userLabel="View-2">
+                                    <rect key="frame" x="0.0" y="119" width="819" height="105"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2. Sudah berapa lama Anda mengenal Calon Tertanggung/Calon Pemegang Polis?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RFQ-IQ-sNx">
                                             <rect key="frame" x="20" y="8" width="638" height="21"/>
@@ -180,7 +145,7 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <segmentedControl opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="jTE-3S-CrJ" customClass="SegmentSPAJ">
+                                        <segmentedControl opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="jTE-3S-CrJ" customClass="SegmentSPAJ">
                                             <rect key="frame" x="20" y="37" width="791" height="29"/>
                                             <segments>
                                                 <segment title="Tidak Kenal"/>
@@ -193,8 +158,8 @@
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
-                                <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n6X-dx-br8" userLabel="View-3">
-                                    <rect key="frame" x="0.0" y="340" width="819" height="75"/>
+                                <view tag="1" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n6X-dx-br8" userLabel="View-3">
+                                    <rect key="frame" x="0.0" y="229" width="819" height="75"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="3. Apakah Calon Tertanggung saat ini dalam keadaan sehat?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kQ2-Kb-kJa">
                                             <rect key="frame" x="20" y="8" width="638" height="21"/>
@@ -202,7 +167,7 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="E4J-1j-WM8" customClass="SegmentSPAJ">
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="E4J-1j-WM8" customClass="SegmentSPAJ">
                                             <rect key="frame" x="690" y="8" width="121" height="29"/>
                                             <segments>
                                                 <segment title="Ya"/>
@@ -213,8 +178,8 @@
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
-                                <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cmf-Bn-M6t" userLabel="View-4">
-                                    <rect key="frame" x="0.0" y="420" width="819" height="105"/>
+                                <view tag="1" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cmf-Bn-M6t" userLabel="View-4">
+                                    <rect key="frame" x="0.0" y="309" width="819" height="105"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zm2-iS-jVg">
                                             <rect key="frame" x="20" y="8" width="626" height="63"/>
@@ -223,7 +188,7 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="t7q-h1-KDV" customClass="SegmentSPAJ">
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="t7q-h1-KDV" customClass="SegmentSPAJ">
                                             <rect key="frame" x="690" y="8" width="121" height="29"/>
                                             <segments>
                                                 <segment title="Ya"/>
@@ -234,8 +199,8 @@
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
-                                <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fzx-UU-Gz6" userLabel="View-5">
-                                    <rect key="frame" x="0.0" y="530" width="819" height="105"/>
+                                <view tag="1" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fzx-UU-Gz6" userLabel="View-5">
+                                    <rect key="frame" x="0.0" y="419" width="819" height="105"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JIl-i8-IL7">
                                             <rect key="frame" x="20" y="8" width="626" height="61"/>
@@ -244,7 +209,7 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="db1-mj-HM3" customClass="SegmentSPAJ">
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="db1-mj-HM3" customClass="SegmentSPAJ">
                                             <rect key="frame" x="690" y="8" width="121" height="29"/>
                                             <segments>
                                                 <segment title="Ya"/>
@@ -255,8 +220,8 @@
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
-                                <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3th-Iy-ink" userLabel="View-6">
-                                    <rect key="frame" x="0.0" y="640" width="819" height="105"/>
+                                <view tag="1" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3th-Iy-ink" userLabel="View-6">
+                                    <rect key="frame" x="0.0" y="529" width="819" height="105"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cQC-oi-XdY">
                                             <rect key="frame" x="20" y="8" width="626" height="81"/>
@@ -265,7 +230,7 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="9lQ-Sb-pit" customClass="SegmentSPAJ">
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="9lQ-Sb-pit" customClass="SegmentSPAJ">
                                             <rect key="frame" x="690" y="8" width="121" height="29"/>
                                             <segments>
                                                 <segment title="Ya"/>
@@ -276,8 +241,8 @@
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
-                                <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7yH-zz-Pdx" userLabel="View-7">
-                                    <rect key="frame" x="0.0" y="750" width="819" height="105"/>
+                                <view tag="1" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7yH-zz-Pdx" userLabel="View-7">
+                                    <rect key="frame" x="0.0" y="639" width="819" height="105"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1kr-R8-OyQ">
                                             <rect key="frame" x="20" y="8" width="626" height="61"/>
@@ -286,7 +251,7 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="7fF-E7-v2j" customClass="SegmentSPAJ">
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="7fF-E7-v2j" customClass="SegmentSPAJ">
                                             <rect key="frame" x="690" y="8" width="121" height="29"/>
                                             <segments>
                                                 <segment title="Ya"/>
@@ -297,10 +262,10 @@
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
-                                <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ek0-5n-wok" userLabel="View-8">
-                                    <rect key="frame" x="0.0" y="860" width="819" height="105"/>
+                                <view tag="1" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ek0-5n-wok" userLabel="View-8">
+                                    <rect key="frame" x="0.0" y="749" width="819" height="105"/>
                                     <subviews>
-                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="0k3-ej-aAq" customClass="SegmentSPAJ">
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="0k3-ej-aAq" customClass="SegmentSPAJ">
                                             <rect key="frame" x="690" y="8" width="121" height="29"/>
                                             <segments>
                                                 <segment title="Ya"/>
@@ -318,10 +283,10 @@
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
-                                <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FfU-bZ-6B9" userLabel="View-9">
-                                    <rect key="frame" x="0.0" y="970" width="819" height="100"/>
+                                <view tag="1" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FfU-bZ-6B9" userLabel="View-9">
+                                    <rect key="frame" x="0.0" y="859" width="819" height="100"/>
                                     <subviews>
-                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Z1v-ry-3JI" customClass="SegmentSPAJ">
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="Z1v-ry-3JI" customClass="SegmentSPAJ">
                                             <rect key="frame" x="690" y="8" width="121" height="29"/>
                                             <segments>
                                                 <segment title="Ya"/>
@@ -339,8 +304,8 @@
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
-                                <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3uQ-3H-Ttc" userLabel="View-10">
-                                    <rect key="frame" x="0.0" y="1075" width="819" height="105"/>
+                                <view tag="1" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3uQ-3H-Ttc" userLabel="View-10">
+                                    <rect key="frame" x="0.0" y="964" width="819" height="105"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CqD-m1-Rf5">
                                             <rect key="frame" x="20" y="8" width="626" height="81"/>
@@ -349,7 +314,7 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="dW9-Ba-WD2" customClass="SegmentSPAJ">
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="dW9-Ba-WD2" customClass="SegmentSPAJ">
                                             <rect key="frame" x="690" y="8" width="121" height="29"/>
                                             <segments>
                                                 <segment title="Ya"/>
@@ -360,8 +325,8 @@
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
-                                <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CIb-SS-o0j" userLabel="View-11">
-                                    <rect key="frame" x="0.0" y="1185" width="819" height="105"/>
+                                <view tag="1" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CIb-SS-o0j" userLabel="View-11">
+                                    <rect key="frame" x="0.0" y="1074" width="819" height="105"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iiO-ZF-K2e">
                                             <rect key="frame" x="20" y="8" width="626" height="60"/>
@@ -370,7 +335,7 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3et-Ge-Oae" customClass="SegmentSPAJ">
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="3et-Ge-Oae" customClass="SegmentSPAJ">
                                             <rect key="frame" x="690" y="8" width="121" height="29"/>
                                             <segments>
                                                 <segment title="Ya"/>
@@ -381,8 +346,8 @@
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
-                                <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z3b-9Z-iDA" userLabel="View-12a">
-                                    <rect key="frame" x="0.0" y="1295" width="819" height="105"/>
+                                <view tag="1" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z3b-9Z-iDA" userLabel="View-12a">
+                                    <rect key="frame" x="0.0" y="1184" width="819" height="105"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UVQ-Fo-tri">
                                             <rect key="frame" x="20" y="8" width="626" height="61"/>
@@ -391,7 +356,7 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="zdC-dw-Nmk" customClass="SegmentSPAJ">
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="zdC-dw-Nmk" customClass="SegmentSPAJ">
                                             <rect key="frame" x="690" y="8" width="121" height="29"/>
                                             <segments>
                                                 <segment title="Ya"/>
@@ -403,7 +368,7 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
                                 <view tag="1" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lFa-8A-cSt" userLabel="View-12b">
-                                    <rect key="frame" x="0.0" y="1405" width="819" height="105"/>
+                                    <rect key="frame" x="0.0" y="1294" width="819" height="105"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iyK-hK-qLd">
                                             <rect key="frame" x="20" y="8" width="626" height="61"/>
@@ -412,7 +377,7 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="vay-Vj-l9c" customClass="SegmentSPAJ">
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="vay-Vj-l9c" customClass="SegmentSPAJ">
                                             <rect key="frame" x="690" y="8" width="121" height="29"/>
                                             <segments>
                                                 <segment title="Ya"/>
@@ -424,17 +389,23 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
                                 <view tag="1" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IB5-Cf-OHn" userLabel="View-Penghasilan">
-                                    <rect key="frame" x="0.0" y="1515" width="819" height="125"/>
+                                    <rect key="frame" x="0.0" y="1404" width="819" height="125"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OUb-zp-yrX" customClass="TextFieldSPAJ">
                                             <rect key="frame" x="317" y="42" width="430" height="30"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="-1" id="iqJ-Ps-pzz"/>
+                                            </connections>
                                         </textField>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FPG-1l-JLX" customClass="TextFieldSPAJ">
                                             <rect key="frame" x="317" y="80" width="430" height="30"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="-1" id="yeD-lX-9BF"/>
+                                            </connections>
                                         </textField>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sumber penghasilan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kui-tQ-QP8">
                                             <rect key="frame" x="71" y="46" width="196" height="21"/>
@@ -458,7 +429,7 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
                                 <view tag="1" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RuH-ZF-jxn" userLabel="View-Alasan">
-                                    <rect key="frame" x="0.0" y="1645" width="819" height="125"/>
+                                    <rect key="frame" x="0.0" y="1534" width="819" height="125"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="14. Alasan pengajuan asuransi jiwa " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UIK-9h-m5x">
                                             <rect key="frame" x="20" y="8" width="588" height="21"/>
@@ -490,7 +461,7 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
                                 <view tag="1" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eay-1D-KEM" userLabel="View-Saran">
-                                    <rect key="frame" x="0.0" y="1775" width="819" height="327"/>
+                                    <rect key="frame" x="0.0" y="1664" width="819" height="438"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="15. Jika ada, berikan informasi lain yang menurut Anda dapat membantu BCA Life dalam mengevaluasi pengajuan ini:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uxa-HJ-uP1">
                                             <rect key="frame" x="20" y="8" width="766" height="42"/>
@@ -504,11 +475,14 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Scm-BL-s1R" customClass="TextViewSPAJ">
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Scm-BL-s1R" customClass="TextViewSPAJ">
                                             <rect key="frame" x="20" y="83" width="766" height="106"/>
                                             <color key="backgroundColor" red="0.87450980389999999" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="-1" id="6sy-FB-Z5D"/>
+                                            </connections>
                                         </textView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XcI-e8-3vt">
                                             <rect key="frame" x="20" y="197" width="766" height="130"/>
@@ -523,28 +497,16 @@
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstItem="lFa-8A-cSt" firstAttribute="top" secondItem="B1q-38-Mx6" secondAttribute="top" constant="1405" id="3Ze-Mc-WUH"/>
-                                <constraint firstItem="7yH-zz-Pdx" firstAttribute="top" secondItem="B1q-38-Mx6" secondAttribute="top" constant="750" id="7Cv-bX-z9z"/>
-                                <constraint firstItem="cmf-Bn-M6t" firstAttribute="top" secondItem="B1q-38-Mx6" secondAttribute="top" constant="420" id="94i-3t-A7O"/>
-                                <constraint firstItem="CIb-SS-o0j" firstAttribute="top" secondItem="B1q-38-Mx6" secondAttribute="top" constant="1185" id="C1z-e1-eM3"/>
-                                <constraint firstItem="z3b-9Z-iDA" firstAttribute="top" secondItem="B1q-38-Mx6" secondAttribute="top" constant="1295" id="Wtf-RR-NAb"/>
-                                <constraint firstItem="n6X-dx-br8" firstAttribute="top" secondItem="B1q-38-Mx6" secondAttribute="top" constant="340" id="X9o-0i-Gvn"/>
-                                <constraint firstItem="Fzx-UU-Gz6" firstAttribute="top" secondItem="B1q-38-Mx6" secondAttribute="top" constant="530" id="XwB-8V-2gg"/>
-                                <constraint firstItem="Ek0-5n-wok" firstAttribute="top" secondItem="B1q-38-Mx6" secondAttribute="top" constant="860" id="aQ0-Qy-qQ2"/>
-                                <constraint firstItem="FfU-bZ-6B9" firstAttribute="top" secondItem="B1q-38-Mx6" secondAttribute="top" constant="970" id="efh-oh-iSJ"/>
-                                <constraint firstItem="3th-Iy-ink" firstAttribute="top" secondItem="B1q-38-Mx6" secondAttribute="top" constant="640" id="rNn-LK-WDR"/>
-                                <constraint firstItem="Jkc-VD-JSO" firstAttribute="top" secondItem="B1q-38-Mx6" secondAttribute="top" constant="120" id="uaV-dj-OKb"/>
-                                <constraint firstItem="Ajb-Rl-9c9" firstAttribute="top" secondItem="B1q-38-Mx6" secondAttribute="top" constant="230" id="uf1-6w-4bv"/>
-                                <constraint firstItem="3uQ-3H-Ttc" firstAttribute="top" secondItem="B1q-38-Mx6" secondAttribute="top" constant="1075" id="uk9-5e-Glh"/>
+                                <constraint firstAttribute="height" constant="2102" id="QoA-jM-4DV"/>
                             </constraints>
                         </stackView>
                     </subviews>
                     <constraints>
-                        <constraint firstItem="B1q-38-Mx6" firstAttribute="centerX" secondItem="UQm-bs-aDz" secondAttribute="centerX" id="3Jv-T8-2iu"/>
-                        <constraint firstItem="B1q-38-Mx6" firstAttribute="leading" secondItem="UQm-bs-aDz" secondAttribute="leading" id="8ch-wW-F5w"/>
-                        <constraint firstItem="B1q-38-Mx6" firstAttribute="top" secondItem="UQm-bs-aDz" secondAttribute="top" id="OxG-mL-hQf"/>
-                        <constraint firstAttribute="trailing" secondItem="B1q-38-Mx6" secondAttribute="trailing" id="cJk-LI-RLF"/>
-                        <constraint firstAttribute="bottom" secondItem="B1q-38-Mx6" secondAttribute="bottom" constant="-831" id="eZH-vg-5PG"/>
+                        <constraint firstAttribute="trailing" secondItem="B1q-38-Mx6" secondAttribute="trailing" id="KhE-26-fwT"/>
+                        <constraint firstItem="B1q-38-Mx6" firstAttribute="leading" secondItem="UQm-bs-aDz" secondAttribute="leading" id="NPO-0D-pBD"/>
+                        <constraint firstItem="B1q-38-Mx6" firstAttribute="centerX" secondItem="UQm-bs-aDz" secondAttribute="centerX" id="W5o-cb-vdE"/>
+                        <constraint firstAttribute="bottom" secondItem="B1q-38-Mx6" secondAttribute="bottom" constant="-1423" id="Yad-ye-Ue9"/>
+                        <constraint firstItem="B1q-38-Mx6" firstAttribute="top" secondItem="UQm-bs-aDz" secondAttribute="top" id="j9n-OE-DHi"/>
                     </constraints>
                     <connections>
                         <outlet property="delegate" destination="-1" id="EBH-zU-sld"/>
@@ -556,14 +518,58 @@
                 <constraint firstItem="VrF-0f-Mb7" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="6Vb-Hv-WX5"/>
                 <constraint firstItem="UQm-bs-aDz" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Be7-M3-wTw"/>
                 <constraint firstAttribute="bottom" secondItem="UQm-bs-aDz" secondAttribute="bottom" id="DnD-0H-bff"/>
+                <constraint firstAttribute="bottom" secondItem="0A8-0V-3AO" secondAttribute="bottom" id="FQy-va-1hP"/>
+                <constraint firstAttribute="trailing" secondItem="0A8-0V-3AO" secondAttribute="trailing" id="PK3-gQ-29S"/>
                 <constraint firstItem="VrF-0f-Mb7" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Wzh-9X-2o7"/>
                 <constraint firstItem="UQm-bs-aDz" firstAttribute="top" secondItem="VrF-0f-Mb7" secondAttribute="bottom" constant="1" id="XJX-mM-EOP"/>
                 <constraint firstAttribute="trailing" secondItem="UQm-bs-aDz" secondAttribute="trailing" id="b6i-vp-ZdR"/>
+                <constraint firstItem="0A8-0V-3AO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="hs4-QQ-alK"/>
                 <constraint firstItem="UQm-bs-aDz" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="45" id="j3q-85-zxz"/>
                 <constraint firstAttribute="trailing" secondItem="VrF-0f-Mb7" secondAttribute="trailing" id="tvq-uN-50S"/>
+                <constraint firstItem="0A8-0V-3AO" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="yLc-Yi-foi"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="609.5" y="17"/>
+        </view>
+        <view hidden="YES" tag="1" contentMode="scaleToFill" id="N50-mh-UJL" userLabel="View-Header">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Nomor SPAJ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HW9-ZR-hqi">
+                    <rect key="frame" x="20" y="84" width="97" height="21"/>
+                    <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1ci-vq-g0M" customClass="TextFieldSPAJ">
+                    <rect key="frame" x="266" y="4" width="430" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2MS-5O-Jys" customClass="TextFieldSPAJ">
+                    <rect key="frame" x="266" y="42" width="430" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yeE-Bj-z9b" customClass="TextFieldSPAJ">
+                    <rect key="frame" x="266" y="80" width="430" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Nama Calon Tertanggung" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lBH-OU-M1h">
+                    <rect key="frame" x="20" y="46" width="196" height="21"/>
+                    <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Nama Calon Pemegang Polis" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J5V-RP-z1f">
+                    <rect key="frame" x="20" y="8" width="245" height="21"/>
+                    <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
         </view>
     </objects>
 </document>

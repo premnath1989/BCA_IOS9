@@ -925,6 +925,8 @@ function getFromDatabaseForAmandment(arrayContent, stringPageInfix, stringLayout
 	intQuestionNumber = 1;
 	var intFlagQuestionNumber = 0;
 	var stringKeyInfix;
+	var booleanQuestionState = false;
+	var stringKeyPrefix;
 
 	for (var k = 0; k < arraySicknessHeader.length; k++)
 	{
@@ -936,72 +938,82 @@ function getFromDatabaseForAmandment(arrayContent, stringPageInfix, stringLayout
 			stringKeyInfix = getInfix(stringKeyWithoutPrefix);
 			stringKeyWithoutInfix = releaseInfix(stringKeyWithoutPrefix);
 			stringContentSickness = stringKeyWithoutInfix.substring(0, arraySicknessHeader[k].length);
-
+			stringKeyPrefix = getPrefix(stringKey);
+			
 			if (stringKeyInfix == stringPageInfix)
 			{
 				if (stringContentSickness == arraySicknessHeader[k])
 				{
-					stringContainerSicknessJavaScriptID = stringContentSickness + intQuestionNumber;
-					stringContainerSicknessJQueryID = stringKres + stringContainerSicknessJavaScriptID;
-
-					if (intFlagQuestionNumber == intQuestionNumber)
+					if (stringKeyPrefix == stringPrefixRadioButton)
 					{
 
 					}
 					else
 					{
-						if (intQuestionNumber == 1)
+						stringContainerSicknessJavaScriptID = stringContentSickness + intQuestionNumber;
+						stringContainerSicknessJQueryID = stringKres + stringContainerSicknessJavaScriptID;
+
+						if (intFlagQuestionNumber == intQuestionNumber)
 						{
+
+						}
+						else
+						{
+							if (intQuestionNumber == 1)
+							{
+								$(stringLayoutJQueryID).append
+								(
+									"<h3 style='margin-top: 40px; margin-bottom: 10px;'>" + "Disease Form" + "</h3>" + 
+									"<br>" + 
+									"<div class='ContainerFit'>" + 
+										"<span class='ShortFix Single Item Margin'>" + "Pertanyaan" + "</span>" + 
+										"<span class='Tiny Single Item Margin'>" + "Nama Penyakit" + "</span>" + 
+										"<span class='Tiny Single Item Margin'>" + "Mulai Sakit" + "</span>" + 
+										"<span class='Tiny Single Item Margin'>" + "Lama Sakit" + "</span>" + 
+										"<span class='Tiny Single Item Margin'>" + "Nama Dokter" + "</span>" + 
+										"<span class='Tiny Single Item Margin'>" + "Rumah Sakit" + "</span>" + 
+										"<span class='Tiny Single Item Margin'>" + "Alamat" + "</span>" + 
+										"<span class='Tiny Single Item Margin'>" + "Telepon" + "</span>" + 
+									"</div>"
+								);
+							}
+							else
+							{
+
+							}
+
 							$(stringLayoutJQueryID).append
 							(
-								"<h3 style='margin-top: 40px; margin-bottom: 10px;'>" + "Disease Form" + "</h3>" + 
-								"<br>" + 
-								"<div class='ContainerFit'>" + 
-									"<span class='ShortFix Single Item Margin'>" + "Pertanyaan" + "</span>" + 
-									"<span class='Tiny Single Item Margin'>" + "Nama Penyakit" + "</span>" + 
-									"<span class='Tiny Single Item Margin'>" + "Mulai Sakit" + "</span>" + 
-									"<span class='Tiny Single Item Margin'>" + "Lama Sakit" + "</span>" + 
-									"<span class='Tiny Single Item Margin'>" + "Nama Dokter" + "</span>" + 
-									"<span class='Tiny Single Item Margin'>" + "Rumah Sakit" + "</span>" + 
-									"<span class='Tiny Single Item Margin'>" + "Alamat" + "</span>" + 
-									"<span class='Tiny Single Item Margin'>" + "Telepon" + "</span>" + 
-								"</div>"
+								"<div class='ContainerFit' id='" + stringContainerSicknessJavaScriptID + "'></div>"
 							);
-						}
-						else
-						{
 
-						}
-
-						$(stringLayoutJQueryID).append
-						(
-							"<div class='ContainerFit' id='" + stringContainerSicknessJavaScriptID + "'></div>"
-						);
-
-						$(stringContainerSicknessJQueryID).append
-						(
-							"<span class='ShortFix Single Item Margin'>" + stringContentSickness + "</span>"
-						);
-
-						intFlagQuestionNumber = intQuestionNumber;
-					}
-
-					for (var i = 0; i < arrayHealthTableHeader.length; i++)
-					{
-						stringContentSuffix = stringKeyWithoutInfix.substring(arraySicknessHeader[k].length, stringKeyWithoutInfix.length);
-
-						if(stringContentSuffix == arrayHealthTableHeader[i])
-						{
 							$(stringContainerSicknessJQueryID).append
 							(
-								"<input type='text' class='Tiny Single Item Margin' value='" + stringValue + "'/>"
+								"<span class='ShortFix Single Item Margin'>" + stringContentSickness + "</span>"
 							);
-						}
-						else
-						{
 
+							booleanQuestionState = true;
+							intFlagQuestionNumber = intQuestionNumber;
+						}
+
+						for (var i = 0; i < arrayHealthTableHeader.length; i++)
+						{
+							stringContentSuffix = stringKeyWithoutInfix.substring(arraySicknessHeader[k].length, stringKeyWithoutInfix.length);
+
+							if(stringContentSuffix == arrayHealthTableHeader[i])
+							{
+								$(stringContainerSicknessJQueryID).append
+								(
+									"<input type='text' class='Tiny Single Item Margin' value='" + stringValue + "'/>"
+								);
+							}
+							else
+							{
+
+							}
 						}
 					}
+					
 				}
 				else
 				{
@@ -1014,8 +1026,15 @@ function getFromDatabaseForAmandment(arrayContent, stringPageInfix, stringLayout
 			}
 		}
 
-		intQuestionNumber ++;
-		intFlagQuestionNumber = 0;
+		if (booleanQuestionState == true)
+		{
+			intQuestionNumber ++;
+			intFlagQuestionNumber = 0;
+		}
+		else
+		{
+
+		}
 	}
 
 
@@ -1028,6 +1047,7 @@ function getFromDatabaseForAmandment(arrayContent, stringPageInfix, stringLayout
 	var intFlagBeneficiariesListID = 0;
 	var stringContainerBeneficiariesListJavaScriptID;
 	var stringContainerBeneficiariesListJQueryID;
+	booleanQuestionState = false;
 
 	for (var k = 1; k <= intBeneficiariesListTotalRow; k++)
 	{
@@ -1087,6 +1107,7 @@ function getFromDatabaseForAmandment(arrayContent, stringPageInfix, stringLayout
 								"<span class='ShortFix Single Item Margin'>" + intQuestionNumber + "</span>"
 							);
 
+							booleanQuestionState = true;
 							intFlagQuestionNumber = intQuestionNumber;
 						}
 
@@ -1107,8 +1128,15 @@ function getFromDatabaseForAmandment(arrayContent, stringPageInfix, stringLayout
 			}
 		}
 
-		intQuestionNumber ++;
-		intFlagQuestionNumber = 0;
+		if (booleanQuestionState == true)
+		{
+			intQuestionNumber ++;
+			intFlagQuestionNumber = 0;
+		}
+		else
+		{
+
+		}
 	}
 
 
@@ -1121,6 +1149,7 @@ function getFromDatabaseForAmandment(arrayContent, stringPageInfix, stringLayout
 	var intFlagSPAJProposalID = 0;
 	var stringContainerSPAJProposalJavaScriptID;
 	var stringContainerSPAJProposalJQueryID;
+	booleanQuestionState = false;
 
 	for (var k = 1; k <= intSPAJProposalTotalRow; k++)
 	{
@@ -1134,8 +1163,8 @@ function getFromDatabaseForAmandment(arrayContent, stringPageInfix, stringLayout
 				stringKeyInfix = getInfix(stringKeyWithoutPrefix);
 				stringKeyWithoutInfix = releaseInfix(stringKeyWithoutPrefix);
 
-				stringContentSuffix = stringKeyWithoutInfix.substring(stringPageInfix.length, stringPageInfix.length + arraySPAJProposalTableHeader[j].length);
-				intSPAJProposalID = stringKeyWithoutInfix.substring(stringPageInfix.length + arraySPAJProposalTableHeader[j].length, stringKeyWithoutInfix.length);
+				stringContentSuffix = stringKeyWithoutInfix.substring(stringSPAJProposalInfix.length, stringSPAJProposalInfix.length + arraySPAJProposalTableHeader[j].length);
+				intSPAJProposalID = stringKeyWithoutInfix.substring(stringSPAJProposalInfix.length + arraySPAJProposalTableHeader[j].length, stringKeyWithoutInfix.length);
 
 				if (stringKeyInfix == stringPageInfix)
 				{
@@ -1184,6 +1213,7 @@ function getFromDatabaseForAmandment(arrayContent, stringPageInfix, stringLayout
 									"<span class='ShortFix Single Item Margin'>" + intQuestionNumber + "</span>"
 								);
 
+								booleanQuestionState = true;
 								intFlagQuestionNumber = intQuestionNumber;
 							}
 
@@ -1210,8 +1240,15 @@ function getFromDatabaseForAmandment(arrayContent, stringPageInfix, stringLayout
 			}
 		}
 
-		intQuestionNumber ++;
-		intFlagQuestionNumber = 0;
+		if (booleanQuestionState == true)
+		{
+			intQuestionNumber ++;
+			intFlagQuestionNumber = 0;
+		}
+		else
+		{
+
+		}
 	}
 }
 
