@@ -1,0 +1,480 @@
+/* @charset "utf-8"; */
+/* CSS Document */
+/* @charset "utf-8"; */
+/* CSS Document */
+/* @charset "utf-8"; */
+/* CSS Document */
+/* FUNCTION */
+/* ANIMATION */
+/* HEADER */
+/* FORM */
+/* INPUT */
+/* NOTE */
+/* SIGNATURE */
+/* FOOTER */
+/* TABLE */
+/* LINK */
+/* GENERAL */
+/* ICON */
+/* LAYOUT */
+/* FORM INITIALIZATION */
+/* LABEL */
+/* BOX */
+/* TABLE INITIALIZATION */
+/* TABLE */
+/* INPUT INITIALIZATION */
+/* LINK */
+/* RESOURCE */
+/* TYPEFACE */
+/* @charset "utf-8"; */
+/* CSS Document */
+/* @charset "utf-8"; */
+/* CSS Document */
+/* @charset "utf-8"; */
+/* CSS Document */
+/* FUNCTION */
+/* ANIMATION */
+/* HEADER */
+/* FORM */
+/* INPUT */
+/* NOTE */
+/* SIGNATURE */
+/* FOOTER */
+/* TABLE */
+/* LINK */
+/* GENERAL */
+/* ICON */
+/* LAYOUT */
+/* FORM INITIALIZATION */
+/* LABEL */
+/* BOX */
+/* TABLE INITIALIZATION */
+/* TABLE */
+/* INPUT INITIALIZATION */
+/* LINK */
+/* RESOURCE */
+/* TYPEFACE */
+/* TYPEFACE */
+@font-face {
+  font-family: "BPreplay_Regular";
+  src: url("../../Resource/Font/BPreplay/BPreplay_Regular.eot?#iefix") format("embedded-opentype"), url("../../Resource/Font/BPreplay/BPreplay_Regular.woff") format("woff"), url("../../Resource/Font/BPreplay/BPreplay_Regular.ttf") format("truetype"), url("../../Resource/Font/BPreplay/BPreplay_Regular.svg#BPreplay_Regular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "BPreplay_Bold";
+  src: url("../../Resource/Font/BPreplay/BPreplay_Bold.eot?#iefix") format("embedded-opentype"), url("../../Resource/Font/BPreplay/BPreplay_Bold.woff") format("woff"), url("../../Resource/Font/BPreplay/BPreplay_Bold.ttf") format("truetype"), url("../../Resource/Font/BPreplay/BPreplay_Bold.svg#BPreplay_Bold") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "BPreplay_Italic";
+  src: url("../../Resource/Font/BPreplay/BPreplay_Italic.eot?#iefix") format("embedded-opentype"), url("../../Resource/Font/BPreplay/BPreplay_Italic.woff") format("woff"), url("../../Resource/Font/BPreplay/BPreplay_Italic.ttf") format("truetype"), url("../../Resource/Font/BPreplay/BPreplay_Italic.svg#BPreplay_Italic") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "BPreplay_BoldItalic";
+  src: url("../../Resource/Font/BPreplay/BPreplay_BoldItalic.eot?#iefix") format("embedded-opentype"), url("../../Resource/Font/BPreplay/BPreplay_BoldItalic.woff") format("woff"), url("../../Resource/Font/BPreplay/BPreplay_BoldItalic.ttf") format("truetype"), url("../../Resource/Font/BPreplay/BPreplay_BoldItalic.svg#BPreplay_BoldItalic") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* SETUP */
+img {
+  border: none;
+}
+
+label {
+  cursor: pointer;
+  cursor: hand;
+}
+
+input[type=button] {
+  cursor: pointer;
+  cursor: hand;
+}
+
+input[type=submit] {
+  cursor: pointer;
+  cursor: hand;
+}
+
+input[type=reset] {
+  cursor: pointer;
+  cursor: hand;
+}
+
+* {
+  transition: all 0.75s ease-out;
+  -ms-transition: all 0.75s ease-out;
+  -moz-transition: all 0.75s ease-out;
+  -o-transition: all 0.75s ease-out;
+  -webkit-transition: all 0.75s ease-out;
+}
+
+/**
+	transition-property: position, margin, width, height, padding, background-color, opacity, border
+	-ms-transition-property: position, margin, width, height, padding, background-color, opacity, border
+	-moz-transition-property: position, margin, width, height, padding, background-color, opacity, border
+	-o-transition-property: position, margin, width, height, padding, background-color, opacity, border
+	-webkit-transition-property: position, margin, width, height, padding, background-color, opacity, border
+	transition-duration: 0.75s
+	-ms-transition-duration: 0.75s
+	-moz-transition-duration: 0.75s
+	-o-transition-duration: 0.75s
+	-webkit-transition-duration: 0.75s
+	transition-movement: ease-out
+	-ms-transition-movement: ease-out
+	-moz-transition-movement: ease-out
+	-o-transition-movement: ease-out
+	-webkit-transition-movement: ease-out*/
+body {
+  transition: all 0 linear;
+  -ms-transition: all 0 linear;
+  -moz-transition: all 0 linear;
+  -o-transition: all 0 linear;
+  -webkit-transition: all 0 linear;
+}
+
+/* NEUTRALIZE */
+h1, h2, h3, h4, h5, h6, p, mark, ol, ul, li {
+  margin: auto;
+  padding: auto;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+  text-decoration: inherit;
+  text-transform: inherit;
+}
+
+/* SEMANTIC ELEMENTS */
+body {
+  position: relative;
+  margin: 0px;
+  padding: 0px;
+}
+
+br {
+  padding: 0px;
+  width: 0px;
+  height: 0px;
+  clear: both;
+  display: block;
+  content: '';
+}
+
+li br, p br, table br {
+  clear: none;
+  content: none;
+}
+
+/* PAPER SIZE */
+@media (min-resolution: 48dpi) {
+  body#A4 {
+    width: 15.75cm;
+    height: 22.275cm;
+  }
+  body#Letter {
+    width: 16.2cm;
+    height: 20.925cm;
+  }
+  body#Legal {
+    width: 16.2cm;
+    height: 26.7cm;
+  }
+}
+
+@media (min-resolution: 72dpi) {
+  body#A4 {
+    width: 21cm;
+    height: 29.7cm;
+  }
+  body#Letter {
+    width: 21.6cm;
+    height: 27.9cm;
+  }
+  body#Legal {
+    width: 21.6cm;
+    height: 35.6cm;
+  }
+}
+
+@media (min-resolution: 108dpi) {
+  body#A4 {
+    width: 31.5cm;
+    height: 44.55cm;
+  }
+  body#Letter {
+    width: 32.4cm;
+    height: 41.85cm;
+  }
+  body#Legal {
+    width: 32.4cm;
+    height: 53.4cm;
+  }
+}
+
+@media (min-resolution: 144dpi) {
+  body#A4 {
+    width: 42cm;
+    height: 59.4cm;
+  }
+  body#Letter {
+    width: 43.2cm;
+    height: 55.8cm;
+  }
+  body#Legal {
+    width: 43.2cm;
+    height: 71.2cm;
+  }
+}
+
+@media (min-resolution: 216dpi) {
+  body#A4 {
+    width: 63cm;
+    height: 89.1cm;
+  }
+  body#Letter {
+    width: 64.8cm;
+    height: 83.7cm;
+  }
+  body#Legal {
+    width: 64.8cm;
+    height: 106.8cm;
+  }
+}
+
+@media (min-resolution: 288dpi) {
+  body#A4 {
+    width: 84cm;
+    height: 118.8cm;
+  }
+  body#Letter {
+    width: 86.4cm;
+    height: 111.6cm;
+  }
+  body#Legal {
+    width: 86.4cm;
+    height: 142.4cm;
+  }
+}
+
+@media (min-resolution: 96dpi) {
+  body#A4 {
+    width: 24.15cm;
+    height: 34.155cm;
+  }
+  body#Letter {
+    width: 24.84cm;
+    height: 32.085cm;
+  }
+  body#Legal {
+    width: 24.84cm;
+    height: 40.94cm;
+  }
+}
+
+/* HEADER */
+header .Highlighted {
+  padding-top: 10px;
+  padding-right: 40px;
+  padding-left: 40px;
+  padding-bottom: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  display: block;
+}
+
+header h2 {
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+}
+
+/* MAIN */
+main form, main fieldset {
+  padding-top: 10px;
+  padding-right: 15px;
+  padding-left: 15px;
+  padding-bottom: 10px;
+}
+
+main form .ContainerFit, main form .ContainerLeft, main form .ContainerRight, main fieldset .ContainerFit, main fieldset .ContainerLeft, main fieldset .ContainerRight {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  display: flex;
+  flex-wrap: nowrap;
+  align-content: stretch;
+  align-items: stretch;
+}
+
+main form .ContainerFit .Item, main form .ContainerLeft .Item, main form .ContainerRight .Item, main fieldset .ContainerFit .Item, main fieldset .ContainerLeft .Item, main fieldset .ContainerRight .Item {
+  flex-grow: 1;
+}
+
+main form .ContainerFit .Item1, main form .ContainerLeft .Item1, main form .ContainerRight .Item1, main fieldset .ContainerFit .Item1, main fieldset .ContainerLeft .Item1, main fieldset .ContainerRight .Item1 {
+  flex-grow: 1;
+}
+
+main form .ContainerFit .Item2, main form .ContainerLeft .Item2, main form .ContainerRight .Item2, main fieldset .ContainerFit .Item2, main fieldset .ContainerLeft .Item2, main fieldset .ContainerRight .Item2 {
+  flex-grow: 2;
+}
+
+main form .ContainerFit .Item3, main form .ContainerLeft .Item3, main form .ContainerRight .Item3, main fieldset .ContainerFit .Item3, main fieldset .ContainerLeft .Item3, main fieldset .ContainerRight .Item3 {
+  flex-grow: 3;
+}
+
+main form .ContainerFit .Margin, main form .ContainerLeft .Margin, main form .ContainerRight .Margin, main fieldset .ContainerFit .Margin, main fieldset .ContainerLeft .Margin, main fieldset .ContainerRight .Margin {
+  margin: 5px;
+}
+
+main form .ContainerFit .Center, main form .ContainerLeft .Center, main form .ContainerRight .Center, main fieldset .ContainerFit .Center, main fieldset .ContainerLeft .Center, main fieldset .ContainerRight .Center {
+  text-align: center;
+}
+
+main form .ContainerFit .Left, main form .ContainerLeft .Left, main form .ContainerRight .Left, main fieldset .ContainerFit .Left, main fieldset .ContainerLeft .Left, main fieldset .ContainerRight .Left {
+  text-align: left;
+}
+
+main form .ContainerFit .Right, main form .ContainerLeft .Right, main form .ContainerRight .Right, main fieldset .ContainerFit .Right, main fieldset .ContainerLeft .Right, main fieldset .ContainerRight .Right {
+  text-align: right;
+}
+
+main form .ContainerFit, main fieldset .ContainerFit {
+  justify-content: space-between;
+}
+
+main form .ContainerLeft, main fieldset .ContainerLeft {
+  justify-content: flex-start;
+}
+
+main form .ContainerRight, main fieldset .ContainerRight {
+  justify-content: flex-end;
+}
+
+.Tiny {
+  min-width: 18.75px;
+  width: 18.75px;
+}
+
+.Small {
+  min-width: 88.23529px;
+  width: 88.23529px;
+}
+
+.Short {
+  min-width: 75px;
+  width: 75px;
+}
+
+.Medium {
+  min-width: 231px;
+  width: 231px;
+}
+
+.Long {
+  min-width: 225px;
+  width: 225px;
+}
+
+.Full {
+  width: 100%;
+}
+
+.TinyFix {
+  width: 18.75px;
+  max-width: 18.75px;
+}
+
+.SmallFix {
+  width: 88.23529px;
+  max-width: 88.23529px;
+}
+
+.ShortFix {
+  width: 75px;
+  max-width: 75px;
+}
+
+.MediumFix {
+  width: 231px;
+  max-width: 231px;
+}
+
+.LongFix {
+  width: 450px;
+  max-width: 450px;
+}
+
+.LongFix {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* MAIN */
+main form {
+  padding-top: 10px;
+  padding-right: 15px;
+  padding-left: 15px;
+  padding-bottom: 10px;
+}
+
+/* POP UP */
+main section.PopUp {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  left: 0px;
+  bottom: 0px;
+  padding: 15px;
+  display: none;
+  overflow: auto;
+}
+
+main section.PopUp form.PopUp {
+  margin: 20px;
+  padding: 0px;
+}
+
+main section.PopUp form.PopUp header {
+  margin: 0px;
+  padding-top: 10px;
+  padding-right: 15px;
+  padding-left: 15px;
+  padding-bottom: 10px;
+}
+
+main section.PopUp form.PopUp fieldset {
+  margin: 15px;
+}
+
+/* CONDITION */
+.PositionerRight {
+  float: right;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  vertical-align: top;
+}
+
+.PositionerLeft {
+  float: left;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  vertical-align: top;
+}
+
+.PositionerCenter {
+  position: relative;
+  margin: auto;
+}
+
+.Horizontal25of100 {
+  width: 24%;
+  display: inline-block;
+}

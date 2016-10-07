@@ -52,6 +52,8 @@
 -(void)loadFivethHTML:(NSString*)stringHTMLName PageSection:(NSString *)stringPageSection;
 -(void)loadSixthHTML:(NSString*)stringHTMLName PageSection:(NSString *)stringPageSection;
 -(void)loadSeventhHTML:(NSString*)stringHTMLName PageSection:(NSString *)stringPageSection;
+
+-(NSString *)getStringFlagEdited;
 @property (nonatomic,strong) id <SPAJCalonPemegangPolisDelegate> delegate;
 -(void)voidDoneSPAJCalonPemegangPolis;
 @end

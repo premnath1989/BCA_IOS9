@@ -15,6 +15,7 @@
 #import "ModelAgentProfile.h"
 #import "ModelProspectProfile.h"
 #import "ModelSIPOData.h"
+#import "ModelSPAJAnswers.h"
 #import "Model_SI_Master.h"
 #import "ModelSPAJHtml.h"
 #import "SPAJPDFAutopopulateData.h"
@@ -33,6 +34,7 @@
     ModelProspectProfile* modelProspectProfile;
     ModelAgentProfile* modelAgentProfile;
     ModelSIPOData* modelSIPOData;
+    ModelSPAJAnswers* modelSPAJAnswers;
     Model_SI_Master* modelSIMaster;
     ModelSPAJSignature* modelSPAJSignature;
     ModelSPAJHtml *modelSPAJHtml;
@@ -45,12 +47,23 @@
     
     UIPopoverController *SIDatePopover;
     
+    NSMutableArray *arrayCollectionInsurancePurchaseReasonC;
+    NSMutableArray *arrayCollectionInsurancePurchaseReasonIDC;
+    NSMutableArray *arrayCollectionSelectedInsurancePurchaseReasonC;
+    
+    NSMutableArray *arrayCollectionInsurancePurchaseReasonD;
+    NSMutableArray *arrayCollectionInsurancePurchaseReasonIDD;
+    NSMutableArray *arrayCollectionSelectedInsurancePurchaseReasonD;
+    
     NSString *imageFileName;
     
     NSMutableArray *arrayCollectionInsurancePurchaseReason;
     NSMutableArray *arrayCollectionSelectedInsurancePurchaseReason;
     
     NSString* buttonInsurancePurpose;
+    
+    NSString* buttonInsurancePurposeC;
+    NSString* buttonInsurancePurposeD;
     
     NSMutableDictionary* dictAgentProfile;
     NSDictionary *dictionaryPOData;
@@ -70,6 +83,9 @@
     
     NSMutableArray * arrayDBSignature;
     NSMutableArray * arrayHTMLSignature;
+    
+    NSMutableArray* valueCheckBoxReasonArrayC;
+    NSMutableArray* valueCheckBoxReasonArrayD;
 }
 
 @end
@@ -87,6 +103,13 @@
     [scrollViewForm setContentSize:CGSizeMake(stackViewForm.frame.size.width, stackViewForm.frame.size.height)];
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [self voidLoadAllThirdPartyData];
+    
+    [collectionReasonInsurancePurchaseC reloadData];
+    [collectionReasonInsurancePurchaseD reloadData];
+}
+
 - (void)viewDidLoad {
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     databasePath = [[NSString alloc] initWithString:
@@ -96,6 +119,14 @@
     webview.scrollView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     
     [super viewDidLoad];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
+
+    [collectionReasonInsurancePurchaseC registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
+    
+    [collectionReasonInsurancePurchaseD registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
+    
     for (int i=0; i<[[self.view subviews] count];i++){
         [self.view sendSubviewToBack:webview];
     }
@@ -115,6 +146,7 @@
     modelSIPOData = [[ModelSIPOData alloc]init];
     modelSIMaster = [[Model_SI_Master alloc]init];
     modelSPAJTransaction = [[ModelSPAJTransaction alloc]init];
+    modelSPAJAnswers = [[ModelSPAJAnswers alloc]init];
     allAboutPDFGeneration = [[AllAboutPDFGeneration alloc]init];
     alert = [[Alert alloc]init];
     
@@ -123,6 +155,9 @@
     [self arrayInitializePOData];
     [self arrayInitializeSIMaster];
     [self arrayInitializeSignature];
+    
+    [self intializeArrayInsuranceReasonC];
+    [self intializeArrayInsuranceReasonD];
     
     dictAgentProfile=[[NSMutableDictionary alloc]initWithDictionary:[modelAgentProfile getAgentData]];
     
@@ -285,6 +320,19 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)intializeArrayInsuranceReasonC{
+    arrayCollectionInsurancePurchaseReasonC = [[NSMutableArray alloc]initWithObjects:@"Tabungan",@"Proteksi",@"Investasi",@"Pendidikan",@"Lainnya", nil];
+    arrayCollectionInsurancePurchaseReasonIDC = [[NSMutableArray alloc]initWithObjects:@"CheckboxThirdpartyCPurposeSaving",@"CheckboxThirdpartyCPurposeProtection",@"CheckboxThirdpartyCPurposeInvestment",@"CheckboxThirdpartyCPurposeEducation",@"CheckboxThirdpartyCPurposeOther", nil];
+    arrayCollectionSelectedInsurancePurchaseReasonC = [[NSMutableArray alloc]initWithObjects:@"Not Checked",@"Not Checked",@"Not Checked",@"Not Checked",@"Not Checked",nil];
+}
+
+- (void)intializeArrayInsuranceReasonD{
+    arrayCollectionInsurancePurchaseReasonD = [[NSMutableArray alloc]initWithObjects:@"Tabungan",@"Proteksi",@"Investasi",@"Pendidikan",@"Lainnya", nil];
+    arrayCollectionInsurancePurchaseReasonIDD = [[NSMutableArray alloc]initWithObjects:@"CheckboxThirdpartyDPurposeSaving",@"CheckboxThirdpartyDPurposeProtection",@"CheckboxThirdpartyDPurposeInvestment",@"CheckboxThirdpartyDPurposeEducation",@"CheckboxThirdpartyDPurposeOther", nil];
+    arrayCollectionSelectedInsurancePurchaseReasonD = [[NSMutableArray alloc]initWithObjects:@"Not Checked",@"Not Checked",@"Not Checked",@"Not Checked",@"Not Checked",nil];
+}
+
+
 - (IBAction)actionDate:(ButtonSPAJ *)sender
 {
     tempDateButton = sender;
@@ -329,7 +377,7 @@
                                         
                     NSString *elementID = [segmentTemp getSegmentName]?:[NSString stringWithFormat:@"seg%i",i];;
                     
-                    NSMutableDictionary *dictAnswer = [allAboutPDFFunctions dictAnswers:dictTransaction ElementID:elementID Value:value Section:@"TP"];
+                    NSMutableDictionary *dictAnswer = [allAboutPDFFunctions dictAnswers:dictTransaction ElementID:elementID Value:value Section:@"TP" SPAJHtmlID:[[modelSPAJHtml selectActiveHtmlForSection:@"TP"] valueForKey:@"SPAJHtmlID"]];
                     
                     [arrayFormAnswers addObject:dictAnswer];
                     i++;
@@ -341,7 +389,7 @@
                     NSString *value = textTemp.text;
                     NSString *elementID = [textTemp getTextFieldName]?:[NSString stringWithFormat:@"textField%i",i];
                     
-                    NSMutableDictionary *dictAnswer = [allAboutPDFFunctions dictAnswers:dictTransaction ElementID:elementID Value:value Section:@"TP"];
+                    NSMutableDictionary *dictAnswer = [allAboutPDFFunctions dictAnswers:dictTransaction ElementID:elementID Value:value Section:@"TP" SPAJHtmlID:[[modelSPAJHtml selectActiveHtmlForSection:@"TP"] valueForKey:@"SPAJHtmlID"]];
                     
                     [arrayFormAnswers addObject:dictAnswer];
                     i++;
@@ -353,7 +401,7 @@
                     NSString *value = buttonTemp.currentTitle;
                     NSString *elementID = [buttonTemp getButtonName]?:[NSString stringWithFormat:@"btnView%i",i];
                     
-                    NSMutableDictionary *dictAnswer = [allAboutPDFFunctions dictAnswers:dictTransaction ElementID:elementID Value:value Section:@"TP"];
+                    NSMutableDictionary *dictAnswer = [allAboutPDFFunctions dictAnswers:dictTransaction ElementID:elementID Value:value Section:@"TP" SPAJHtmlID:[[modelSPAJHtml selectActiveHtmlForSection:@"TP"] valueForKey:@"SPAJHtmlID"]];
                     
                     [arrayFormAnswers addObject:dictAnswer];
                     i++;
@@ -362,19 +410,233 @@
         }
     }
     
-    /*for (int x=0;x<[arrayCollectionSelectedInsurancePurchaseReason count];x++){
+    /*for (int x=0;x<[arrayCollectionSelectedInsurancePurchaseReasonC count];x++){
         //NSString *value = [arrayCollectionSelectedInsurancePurchaseReason objectAtIndex:x];
-        NSString *value = [allAboutPDFFunctions GetOutputForInsurancePurposeCheckBox:[arrayCollectionSelectedInsurancePurchaseReason objectAtIndex:x]];
-        NSString *elementID = buttonInsurancePurpose;
+        NSString *value = [allAboutPDFFunctions GetOutputForInsurancePurposeCheckBox:[arrayCollectionSelectedInsurancePurchaseReasonC objectAtIndex:x]];
+        NSString *elementID = buttonInsurancePurposeC;
         
-        NSMutableDictionary *dictAnswer = [allAboutPDFFunctions dictAnswers:dictTransaction ElementID:elementID Value:value];
+        NSMutableDictionary *dictAnswer = [allAboutPDFFunctions dictAnswers:dictTransaction ElementID:elementID Value:value Section:@"TP" SPAJHtmlID:[[modelSPAJHtml selectActiveHtmlForSection:@"TP"] valueForKey:@"SPAJHtmlID"]];
+        
+        [arrayFormAnswers addObject:dictAnswer];
+    }
+    
+    for (int x=0;x<[arrayCollectionSelectedInsurancePurchaseReasonD count];x++){
+        //NSString *value = [arrayCollectionSelectedInsurancePurchaseReason objectAtIndex:x];
+        NSString *value = [allAboutPDFFunctions GetOutputForInsurancePurposeCheckBox:[arrayCollectionSelectedInsurancePurchaseReasonD objectAtIndex:x]];
+        NSString *elementID = buttonInsurancePurposeD;
+        
+        NSMutableDictionary *dictAnswer = [allAboutPDFFunctions dictAnswers:dictTransaction ElementID:elementID Value:value Section:@"TP" SPAJHtmlID:[[modelSPAJHtml selectActiveHtmlForSection:@"TP"] valueForKey:@"SPAJHtmlID"]];
         
         [arrayFormAnswers addObject:dictAnswer];
     }*/
     
-    NSLog(@"answers %@",[allAboutPDFFunctions createDictionaryForSave:arrayFormAnswers]);
+    for (int x=0;x<[arrayCollectionSelectedInsurancePurchaseReasonC count];x++){
+        NSString *value = [allAboutPDFFunctions GetOutputForInsurancePurposeCheckBox:[arrayCollectionSelectedInsurancePurchaseReasonC objectAtIndex:x]];
+        NSString *elementID = [arrayCollectionInsurancePurchaseReasonIDC objectAtIndex:x];
+        
+        NSMutableDictionary *dictAnswer = [allAboutPDFFunctions dictAnswers:dictTransaction ElementID:elementID Value:value Section:@"TP" SPAJHtmlID:[[modelSPAJHtml selectActiveHtmlForSection:@"TP"] valueForKey:@"SPAJHtmlID"]];
+        
+        [arrayFormAnswers addObject:dictAnswer];
+    }
+    
+    for (int x=0;x<[arrayCollectionSelectedInsurancePurchaseReasonD count];x++){
+        NSString *value = [allAboutPDFFunctions GetOutputForInsurancePurposeCheckBox:[arrayCollectionSelectedInsurancePurchaseReasonD objectAtIndex:x]];
+        NSString *elementID = [arrayCollectionInsurancePurchaseReasonIDD objectAtIndex:x];
+        
+        NSMutableDictionary *dictAnswer = [allAboutPDFFunctions dictAnswers:dictTransaction ElementID:elementID Value:value Section:@"TP" SPAJHtmlID:[[modelSPAJHtml selectActiveHtmlForSection:@"TP"] valueForKey:@"SPAJHtmlID"]];
+        
+        [arrayFormAnswers addObject:dictAnswer];
+    }
+    
+    //NSLog(@"answers %@",[allAboutPDFFunctions createDictionaryForSave:arrayFormAnswers]);
     [self savetoDB:[allAboutPDFFunctions createDictionaryForSave:arrayFormAnswers]];
 }
+
+-(IBAction)actionButtonInsuranceReasonTappedC:(ButtonSPAJ *)sender{
+    
+    /*for (int i=0;i<[arrayCollectionSelectedInsurancePurchaseReasonC count];i++){
+        if ([[arrayCollectionSelectedInsurancePurchaseReasonC objectAtIndex:i] isEqualToString:@"Not Checked"]){
+            [arrayCollectionSelectedInsurancePurchaseReasonC removeObjectAtIndex:i];
+        }
+    }
+    
+    if ([sender isSelected]){
+        [sender setSelected:NO];
+        int indexToClear = [arrayCollectionSelectedInsurancePurchaseReasonC indexOfObject:sender.currentTitle];
+        [arrayCollectionSelectedInsurancePurchaseReasonC removeObjectAtIndex:indexToClear];
+    }
+    else{
+        [arrayCollectionSelectedInsurancePurchaseReasonC addObject:sender.currentTitle];
+        [sender setSelected:YES];
+    }
+    
+    for (int i=0;i<[arrayCollectionInsurancePurchaseReasonC count];i++){
+        if (i >= [arrayCollectionSelectedInsurancePurchaseReasonC count]){
+            [arrayCollectionSelectedInsurancePurchaseReasonC addObject:@"Not Checked"];
+        }
+    }*/
+    if ([sender isSelected]){
+        [sender setSelected:NO];
+        [arrayCollectionSelectedInsurancePurchaseReasonC replaceObjectAtIndex:sender.tag withObject:@"Not Checked"];
+    }
+    else{
+        [arrayCollectionSelectedInsurancePurchaseReasonC replaceObjectAtIndex:sender.tag withObject:sender.currentTitle];
+        [sender setSelected:YES];
+    }
+    
+    
+    NSLog(@"array value %@",arrayCollectionSelectedInsurancePurchaseReasonC);
+}
+
+
+-(void)voidLoadAllThirdPartyData{
+    @try {
+        int i=1;
+        for (UIView *view in [stackViewForm subviews]) {
+            if (view.tag == 1){
+                for (UIView *viewDetail in [view subviews]) {
+                    if ([viewDetail isKindOfClass:[SegmentSPAJ class]]) {
+                        SegmentSPAJ* segmentTemp = (SegmentSPAJ *)viewDetail;
+                        NSMutableArray* valueArray = [[NSMutableArray alloc]initWithArray:[modelSPAJAnswers getSPAJAnswerValue:[segmentTemp getSegmentName] SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"AF"]];
+                        if ([valueArray count]>0){
+                            NSString* stringValue = [valueArray objectAtIndex:0];
+                            
+                            NSArray* arrayRadioObjectReturn = [[NSArray alloc]initWithArray:[allAboutPDFFunctions filterArrayByKey:stringValue]];
+                            
+                            for (int i = 0; i < [segmentTemp numberOfSegments]; i++)
+                            {
+                                if ([[arrayRadioObjectReturn valueForKey:@"Object"] containsObject:[segmentTemp titleForSegmentAtIndex:i]])
+                                {
+                                    [segmentTemp setSelectedSegmentIndex:i];
+                                    break;
+                                }
+                                //else {Do Nothing - these are not the droi, err, segment we are looking for}
+                            }
+                        }
+                        i++;
+                    }
+                    
+                    if ([viewDetail isKindOfClass:[TextFieldSPAJ class]]) {
+                        TextFieldSPAJ* textTemp = (TextFieldSPAJ *)viewDetail;
+                        NSMutableArray* valueArray = [[NSMutableArray alloc]initWithArray:[modelSPAJAnswers getSPAJAnswerValue:[textTemp getTextFieldName] SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"AF"]];
+                        if ([valueArray count]>0){
+                            NSString* stringValue = [valueArray objectAtIndex:0];
+                            [textTemp setText:stringValue];
+                        }
+                        else if ([valueArray count]>1){
+                            
+                        }
+                        i++;
+                    }
+                    
+                    if ([viewDetail isKindOfClass:[TextViewSPAJ class]]) {
+                        TextViewSPAJ* textTemp = (TextViewSPAJ *)viewDetail;
+                        NSMutableArray* valueArray = [[NSMutableArray alloc]initWithArray:[modelSPAJAnswers getSPAJAnswerValue:[textTemp getTextViewName] SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"AF"]];
+                        if ([valueArray count]>0){
+                            NSString* stringValue = [valueArray objectAtIndex:0];
+                            [textTemp setText:stringValue];
+                        }
+                        else if ([valueArray count]>1){
+                            
+                        }
+                        i++;
+                    }
+                    
+                    if ([viewDetail isKindOfClass:[collectionReasonInsurancePurchaseC class]]) {
+                        valueCheckBoxReasonArrayC = [[NSMutableArray alloc]initWithArray:[modelSPAJAnswers getSPAJAnswerElementValue:@"CheckboxThirdPartyCPurpose" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"TP"]];
+                        if ([valueCheckBoxReasonArrayC count]>0){
+                            NSLog(@"ElementValue %@",valueCheckBoxReasonArrayC);
+                        }
+                        i++;
+                    }
+                    
+                    if ([viewDetail isKindOfClass:[collectionReasonInsurancePurchaseD class]]) {
+                        valueCheckBoxReasonArrayD = [[NSMutableArray alloc]initWithArray:[modelSPAJAnswers getSPAJAnswerElementValue:@"CheckboxThirdPartyDPurpose" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"TP"]];
+                        if ([valueCheckBoxReasonArrayD count]>0){
+                            NSLog(@"ElementValue %@",valueCheckBoxReasonArrayD);
+                        }
+                        i++;
+                    }
+                }
+            }
+        }
+    } @catch (NSException *exception) {
+        
+    } @finally {
+        
+    }
+}
+
+-(IBAction)actionButtonInsuranceReasonTappedD:(ButtonSPAJ *)sender{
+    
+    /*for (int i=0;i<[arrayCollectionSelectedInsurancePurchaseReasonD count];i++){
+        if ([[arrayCollectionSelectedInsurancePurchaseReasonD objectAtIndex:i] isEqualToString:@"Not Checked"]){
+            [arrayCollectionSelectedInsurancePurchaseReasonD removeObjectAtIndex:i];
+        }
+    }
+    
+    if ([sender isSelected]){
+        [sender setSelected:NO];
+        int indexToClear = [arrayCollectionSelectedInsurancePurchaseReasonD indexOfObject:sender.currentTitle];
+        [arrayCollectionSelectedInsurancePurchaseReasonD removeObjectAtIndex:indexToClear];
+    }
+    else{
+        [arrayCollectionSelectedInsurancePurchaseReasonD addObject:sender.currentTitle];
+        [sender setSelected:YES];
+    }
+    
+    for (int i=0;i<[arrayCollectionInsurancePurchaseReasonD count];i++){
+        if (i >= [arrayCollectionSelectedInsurancePurchaseReasonD count]){
+            [arrayCollectionSelectedInsurancePurchaseReasonD addObject:@"Not Checked"];
+        }
+    }*/
+    if ([sender isSelected]){
+        [sender setSelected:NO];
+        [arrayCollectionSelectedInsurancePurchaseReasonD replaceObjectAtIndex:sender.tag withObject:@"Not Checked"];
+    }
+    else{
+        [arrayCollectionSelectedInsurancePurchaseReasonD replaceObjectAtIndex:sender.tag withObject:sender.currentTitle];
+        [sender setSelected:YES];
+    }
+    
+    
+    NSLog(@"array value %@",arrayCollectionSelectedInsurancePurchaseReasonD);
+}
+
+-(void)loadCheckBoxReasonDataC:(ButtonSPAJ *)sender{
+    if ([valueCheckBoxReasonArrayC count]>0){
+        if ([[[valueCheckBoxReasonArrayC objectAtIndex:sender.tag] valueForKey:@"Value"] isEqualToString:@"Not Checked"]){
+            [sender setSelected:NO];
+        }
+        else{
+            [sender setSelected:YES];
+            NSLog(@"reason %@",[[valueCheckBoxReasonArrayC objectAtIndex:sender.tag] valueForKey:@"Value"]);
+            [arrayCollectionSelectedInsurancePurchaseReason replaceObjectAtIndex:sender.tag withObject:sender.currentTitle];
+        }
+    }
+    
+    if (([sender tag]+1)==[valueCheckBoxReasonArrayC count]){
+        valueCheckBoxReasonArrayC = [[NSMutableArray alloc]init];
+    }
+}
+
+-(void)loadCheckBoxReasonDataD:(ButtonSPAJ *)sender{
+    if ([valueCheckBoxReasonArrayC count]>0){
+        if ([[[valueCheckBoxReasonArrayC objectAtIndex:sender.tag] valueForKey:@"Value"] isEqualToString:@"Not Checked"]){
+            [sender setSelected:NO];
+        }
+        else{
+            [sender setSelected:YES];
+            NSLog(@"reason %@",[[valueCheckBoxReasonArrayC objectAtIndex:sender.tag] valueForKey:@"Value"]);
+            [arrayCollectionSelectedInsurancePurchaseReason replaceObjectAtIndex:sender.tag withObject:sender.currentTitle];
+        }
+    }
+    
+    if (([sender tag]+1)==[valueCheckBoxReasonArrayC count]){
+        valueCheckBoxReasonArrayC = [[NSMutableArray alloc]init];
+    }
+}
+
 
 -(NSDictionary *)getDictionaryForAgentData:(NSString *)stringDBColumnName HTMLID:(NSString *)stringHTMLID{
     NSMutableDictionary* dictAgentData=[[NSMutableDictionary alloc]init];
@@ -628,14 +890,186 @@
 
 - (void)savetoDB:(NSDictionary *)params{
     //add another key to db
-    [super savetoDB:params];
-    [self loadReport];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSString *stringWhere = [NSString stringWithFormat:@"where SPAJHtmlSection='TP' and SPAJTransactionID=%i",[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
+        [modelSPAJAnswers deleteSPAJAnswers:stringWhere];
+        
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            //add another key to db
+            [super savetoDB:params];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    //add another key to db
+                    [self loadReport];
+                });
+            });
+        });
+    });
+
 }
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    activeField = textField;
+    activeView = nil;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    activeField = nil;
+}
+
+
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    activeField = nil;
+    activeView = textView;
+}
+
+
+/*-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+ {
+ activeView = textView;
+ return true;//textView.text.length + (text.length - range.length) <= 500   ;
+ }*/
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    if (collectionView == collectionReasonInsurancePurchaseC){
+        return arrayCollectionInsurancePurchaseReasonC.count;
+    }
+    else{
+        return arrayCollectionInsurancePurchaseReasonD.count;
+    }
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionView *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 1; // This is the minimum inter item spacing, can be more
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    if (collectionView == collectionReasonInsurancePurchaseC){
+        static NSString *identifier = @"Cell";
+        
+        UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
+        
+        //UIButton* buttonInsurancePurchaseReason = (UIButton *)[cell viewWithTag:indexPath.row];
+        ButtonSPAJ* buttonInsurancePurchaseReason = [[ButtonSPAJ alloc]initWithFrame:CGRectMake(0, 0, 100, 50)];
+        [buttonInsurancePurchaseReason setButtonName:@"CheckboxThirdPartyPurposeC"];
+        buttonInsurancePurposeC = [buttonInsurancePurchaseReason getButtonName];
+        [buttonInsurancePurchaseReason setTag:indexPath.row];
+        [buttonInsurancePurchaseReason setTitle:[arrayCollectionInsurancePurchaseReasonC objectAtIndex:indexPath.row] forState:UIControlStateNormal];
+        
+        [buttonInsurancePurchaseReason setBackgroundImage:[self imageWithColor:[UIColor whiteColor]]  forState:UIControlStateNormal];
+        [buttonInsurancePurchaseReason setBackgroundImage:[self imageWithColor:[functionUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]]  forState:UIControlStateSelected];
+        
+        [buttonInsurancePurchaseReason.titleLabel setFont:[UIFont fontWithName:@"BPReplay" size:17]];
+        [buttonInsurancePurchaseReason setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [buttonInsurancePurchaseReason setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+        
+        
+        [buttonInsurancePurchaseReason addTarget:self
+                                          action:@selector(actionButtonInsuranceReasonTappedC:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self loadCheckBoxReasonDataC:buttonInsurancePurchaseReason];
+        [cell.contentView addSubview:buttonInsurancePurchaseReason];
+        
+        return cell;
+    }
+    else{
+        static NSString *identifier = @"Cell";
+        
+        UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
+        
+        //UIButton* buttonInsurancePurchaseReason = (UIButton *)[cell viewWithTag:indexPath.row];
+        ButtonSPAJ* buttonInsurancePurchaseReason = [[ButtonSPAJ alloc]initWithFrame:CGRectMake(0, 0, 100, 50)];
+        [buttonInsurancePurchaseReason setButtonName:@"CheckboxThirdPartyPurposeD"];
+        buttonInsurancePurposeD = [buttonInsurancePurchaseReason getButtonName];
+        [buttonInsurancePurchaseReason setTag:indexPath.row];
+        [buttonInsurancePurchaseReason setTitle:[arrayCollectionInsurancePurchaseReasonD objectAtIndex:indexPath.row] forState:UIControlStateNormal];
+        
+        [buttonInsurancePurchaseReason setBackgroundImage:[self imageWithColor:[UIColor whiteColor]]  forState:UIControlStateNormal];
+        [buttonInsurancePurchaseReason setBackgroundImage:[self imageWithColor:[functionUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]]  forState:UIControlStateSelected];
+        
+        [buttonInsurancePurchaseReason.titleLabel setFont:[UIFont fontWithName:@"BPReplay" size:17]];
+        [buttonInsurancePurchaseReason setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [buttonInsurancePurchaseReason setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+        
+        
+        [buttonInsurancePurchaseReason addTarget:self
+                                          action:@selector(actionButtonInsuranceReasonTappedD:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self loadCheckBoxReasonDataD:buttonInsurancePurchaseReason];
+        [cell.contentView addSubview:buttonInsurancePurchaseReason];
+        
+        return cell;
+    }
+    
+}
+
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
     [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"readfromDB();"]];
     
 }
+
+- (UIImage *)imageWithColor:(UIColor *)color
+{
+    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+
+
+
+-(void)keyboardDidHide:(NSNotificationCenter *)notification
+{
+    [scrollViewForm setContentSize:CGSizeMake(stackViewForm.frame.size.width, stackViewForm.frame.size.height)];
+}
+
+-(void)keyboardDidShow:(NSNotification *)notification
+{
+    
+    
+    /*added by faiz*/
+    // Step 1: Get the size of the keyboard.
+    
+    NSDictionary *userInfo = [notification userInfo];
+    CGSize kbSize = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    // Step 2: Adjust the bottom content inset of your scroll view by the keyboard height.
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height+44, 0.0);
+    scrollViewForm.contentInset = contentInsets;
+    scrollViewForm.scrollIndicatorInsets = contentInsets;
+    
+    // Step 3: Scroll the target text field into view.
+    CGRect aRect = self.view.frame;
+    aRect.size.height -= kbSize.height;
+    if (activeView != nil){
+        // make sure the scrollview content size width and height are greater than 0
+        [scrollViewForm setContentSize:CGSizeMake (scrollViewForm.frame.size.width, scrollViewForm.contentSize.height)];
+        // scroll to the text view
+        [scrollViewForm scrollRectToVisible:activeView.superview.frame animated:YES];
+    }
+    else{
+        if (!CGRectContainsPoint(aRect, activeField.frame.origin) ) {
+            CGPoint scrollPoint = CGPointMake(0.0, activeField.frame.origin.y - (kbSize.height-15));
+            [scrollViewForm setContentOffset:scrollPoint animated:YES];
+        }
+    }
+    
+    /*end of added by faiz*/
+}
+
+
 
 /*
 #pragma mark - Navigation

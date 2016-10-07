@@ -178,7 +178,7 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
         _labelStep1.text = NSLocalizedString(@"GUIDE_FORMGENERATION_STEP1", nil);
         _labelHeader1.text = NSLocalizedString(@"GUIDE_FORMGENERATION_HEADER1", nil);
         
-        _labelStep2.text = NSLocalizedString(@"GUIDE_FORMGENERATION_STEP2", nil);
+        _labelStep2.text = NSLocalizedString(@"GUIDE_FORMGENERATION_STEP3", nil);
         _labelHeader2.text = NSLocalizedString(@"GUIDE_FORMGENERATION_HEADER2", nil);
         
         //_labelStep3.text = NSLocalizedString(@"GUIDE_FORMGENERATION_STEP3", nil);
@@ -315,6 +315,9 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
             
             [_viewStep3 setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
             [_viewStep3 setUserInteractionEnabled:YES];
+            
+            [_viewStep2 setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0]];
+            [_viewStep2 setUserInteractionEnabled:YES];
         }
         else{
             [_viewStep1 setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_OCTONARY floatOpacity:1.0]];
@@ -322,6 +325,9 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
             
             [_viewStep3 setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_OCTONARY floatOpacity:1.0]];
             [_viewStep3 setUserInteractionEnabled:NO];
+            
+            [_viewStep2 setBackgroundColor:[objectUserInterface generateUIColor:THEME_COLOR_OCTONARY floatOpacity:1.0]];
+            [_viewStep2 setUserInteractionEnabled:NO];
         }
     }
 
@@ -347,7 +353,12 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
 
     - (IBAction)actionGoToStep2:(id)sender
     {
-        
+        spajFilesViewController = [[SPAJFilesViewController alloc]initWithNibName:@"SPAJFilesViewController" bundle:nil];
+        [spajFilesViewController setDictTransaction:dictTransaction];
+        [spajFilesViewController setBoolThirdParty:YES];
+        spajFilesViewController.modalPresentationStyle = UIModalPresentationOverFullScreen;
+        [self presentViewController:spajFilesViewController animated:YES completion:nil];
+        [spajFilesViewController.buttonSubmit setHidden:YES];
     };
 
     - (IBAction)actionGoToStep3:(id)sender
@@ -724,7 +735,44 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
             NSString* htmlFileName = [allAboutPDFGeneration getSPAJImageNameFromPath:[arrayIMGName objectAtIndex:indexImgForPDFGeneration]];
             
             NSString *stringName = [allAboutPDFGeneration getWordFromString:htmlFileName IndexWord:2];
-            int countElement = [modelSPAJAnswers getCountElementID:stringName SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue]];
+            int countElement;
+            
+            if ([allAboutPDFGeneration doesString:htmlFileName containCharacter:@"_IN"]){
+                if ([allAboutPDFGeneration doesString:stringName containCharacter:@"gland"]){
+                    countElement = [modelSPAJAnswers getCountElementID:@"thyroid" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"KS_IN"];
+                }
+                else if ([allAboutPDFGeneration doesString:stringName containCharacter:@"respiratory"]){
+                    countElement = [modelSPAJAnswers getCountElementID:@"respiratorydetail" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"KS_IN"];
+                }
+                else if ([allAboutPDFGeneration doesString:stringName containCharacter:@"digestion"]){
+                    countElement = [modelSPAJAnswers getCountElementID:@"digestdetail" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"KS_IN"];
+                }
+                else if ([allAboutPDFGeneration doesString:stringName containCharacter:@"oilgas"]){
+                    countElement = [modelSPAJAnswers getCountElementID:@"mining" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"KS_IN"];
+                }
+                else{
+                    countElement = [modelSPAJAnswers getCountElementID:stringName SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"KS_IN"];
+                }
+            }
+            else{
+                if ([allAboutPDFGeneration doesString:stringName containCharacter:@"gland"]){
+                    countElement = [modelSPAJAnswers getCountElementID:@"thyroid" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"KS_PH"];
+                }
+                else if ([allAboutPDFGeneration doesString:stringName containCharacter:@"respiratory"]){
+                    countElement = [modelSPAJAnswers getCountElementID:@"respiratorydetail" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"KS_PH"];
+                }
+                else if ([allAboutPDFGeneration doesString:stringName containCharacter:@"digestion"]){
+                    countElement = [modelSPAJAnswers getCountElementID:@"digestdetail" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"KS_PH"];
+                }
+                else if ([allAboutPDFGeneration doesString:stringName containCharacter:@"oilgas"]){
+                    countElement = [modelSPAJAnswers getCountElementID:@"mining" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"KS_PH"];
+                }
+                else{
+                    countElement = [modelSPAJAnswers getCountElementID:stringName SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"KS_PH"];
+                }
+            }
+            
+            
             NSLog(@"count %@ %i",stringName,countElement);
             
             if (countElement >0){

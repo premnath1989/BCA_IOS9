@@ -370,7 +370,7 @@
                 else if (indexSelected == 2){
                     NSString* signatureImage = [formatter encodedSignatureImage:viewToSign];
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                        //[allAboutPDFGeneration voidSaveSignatureForImages:dictTransaction DictionaryPOData:dictionaryPOData];
+                        [allAboutPDFGeneration voidSaveSignatureForImages:dictTransaction DictionaryPOData:dictionaryPOData];
                         [self voidSaveSignatureToPDF:2];
                     });
                     //update signature party3
@@ -415,7 +415,7 @@
                 else if (indexSelected == 1){
                     NSString* signatureImage = [formatter encodedSignatureImage:viewToSign];
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                        //[allAboutPDFGeneration voidSaveSignatureForImages:dictTransaction DictionaryPOData:dictionaryPOData];
+                        [allAboutPDFGeneration voidSaveSignatureForImages:dictTransaction DictionaryPOData:dictionaryPOData];
                         [self voidSaveSignatureToPDF:1];
                     });
                     //update signature party2
@@ -447,8 +447,10 @@
 }
 
 -(void)voidSavePOSignature{
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     NSString* signatureImage = [formatter encodedSignatureImage:viewToSign];
+            
     //[self voidSaveSignatureForImages];
     [allAboutPDFGeneration voidSaveSignatureForImages:dictTransaction DictionaryPOData:dictionaryPOData];
     [self voidSaveSignatureToPDF:0];
@@ -576,10 +578,10 @@
     // Draw the signature on pdfContext
     //pageRect = CGRectMake(343, 35,101 , 43);
     if (index == 0){
-        pageRectPage1 = CGRectMake(67, 376,96 , 53);
+        pageRectPage1 = CGRectMake(67, 476,96 , 53);
     }
     else{
-        pageRectPage1 = CGRectMake(575, 376,96 , 53);
+        pageRectPage1 = CGRectMake(575, 476,96 , 53);
     }
     
     CGImageRef pageImagePage1 = [imgSignature CGImage];

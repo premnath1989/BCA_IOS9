@@ -86,7 +86,7 @@
 }
 
 
--(int)getCountElementID:(NSString *)stringElementName SPAJTransactionID:(int)spajTransactionID{
+-(int)getCountElementID:(NSString *)stringElementName SPAJTransactionID:(int)spajTransactionID Section:(NSString *)stringSection{
     int spajID;
     
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
@@ -95,7 +95,8 @@
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     [database open];
     
-    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select count(elementID) as Count  from SPAJAnswers where SPAJHtmlSection in ('KS_PH','KS_IN') and SPAJTransactionID = %i and elementID like \"%%%@%%\"",spajTransactionID,stringElementName]];
+    //FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select count(elementID) as Count  from SPAJAnswers where SPAJHtmlSection in ('KS_PH','KS_IN') and SPAJTransactionID = %i and elementID like \"%%%@%%\"",spajTransactionID,stringElementName]];
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select count(elementID) as Count  from SPAJAnswers where SPAJHtmlSection ='%@' and SPAJTransactionID = %i and elementID like \"%%%@%%\"",stringSection,spajTransactionID,stringElementName]];
     while ([s next]) {
         spajID = [s intForColumn:@"Count"];
     }
@@ -104,5 +105,49 @@
     [database close];
     return spajID;
 }
+
+-(NSMutableArray *)getSPAJAnswerValue:(NSString *)stringElementName SPAJTransactionID:(int)spajTransactionID Section:(NSString *)stringSection{
+    NSMutableArray* spajValueArray = [[NSMutableArray alloc]init];
+    
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    //FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select count(elementID) as Count  from SPAJAnswers where SPAJHtmlSection in ('KS_PH','KS_IN') and SPAJTransactionID = %i and elementID like \"%%%@%%\"",spajTransactionID,stringElementName]];
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select Value from SPAJAnswers where SPAJHtmlSection ='%@' and SPAJTransactionID = %i and elementID = \"%@\"",stringSection,spajTransactionID,stringElementName]];
+    while ([s next]) {
+        [spajValueArray addObject:[s stringForColumn:@"Value"]];
+    }
+    
+    [results close];
+    [database close];
+    return spajValueArray;
+}
+
+-(NSMutableArray *)getSPAJAnswerElementValue:(NSString *)stringElementName SPAJTransactionID:(int)spajTransactionID Section:(NSString *)stringSection{
+    NSMutableArray* spajValueArray = [[NSMutableArray alloc]init];
+    
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    //FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select count(elementID) as Count  from SPAJAnswers where SPAJHtmlSection in ('KS_PH','KS_IN') and SPAJTransactionID = %i and elementID like \"%%%@%%\"",spajTransactionID,stringElementName]];
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select elementID,Value from SPAJAnswers where SPAJHtmlSection ='%@' and SPAJTransactionID = %i and elementID like \"%%%@%%\"",stringSection,spajTransactionID,stringElementName]];
+    while ([s next]) {
+        NSMutableDictionary* tempRevertRadioButtonDict = [[NSMutableDictionary alloc]init];
+        [tempRevertRadioButtonDict setObject:[s stringForColumn:@"elementID"] forKey:@"elementID"];
+        [tempRevertRadioButtonDict setObject:[s stringForColumn:@"Value"] forKey:@"Value"];
+        [spajValueArray addObject:tempRevertRadioButtonDict];
+    }
+    
+    [results close];
+    [database close];
+    return spajValueArray;
+}
+
 
 @end

@@ -1320,7 +1320,15 @@ NSString* const stateIMGGeneration = @"IMG";
             NSString* htmlFileName = [allAboutPDFGeneration getSPAJImageNameFromPath:[arrayIMGName objectAtIndex:indexImgForPDFGeneration]];
             
             NSString *stringName = [allAboutPDFGeneration getWordFromString:htmlFileName IndexWord:2];
-            int countElement = [modelSPAJAnswers getCountElementID:stringName SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue]];
+            int countElement;
+            
+            if ([allAboutPDFGeneration doesString:htmlFileName containCharacter:@"_IN"]){
+                countElement = [modelSPAJAnswers getCountElementID:stringName SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"KS_IN"];
+            }
+            else{
+                countElement = [modelSPAJAnswers getCountElementID:stringName SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"KS_PH"];
+            }
+            
             NSLog(@"count %@ %i",stringName,countElement);
             
             if (countElement >0){

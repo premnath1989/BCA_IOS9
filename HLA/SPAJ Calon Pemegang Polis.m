@@ -47,7 +47,17 @@
     });
 }
 
+-(NSString *)getStringFlagEdited{
+    [self resignFirstResponder];
+    [self.view endEditing:YES];
+    
+    return [webview stringByEvaluatingJavaScriptFromString:@"booleanInputChangeState;"];
+}
+
 -(void)loadFirstHTML:(NSString*)stringHTMLName PageSection:(NSString *)stringPageSection{
+    //[self resignFirstResponder];
+    //[self.view endEditing:YES];
+    
     NSString* stringFlagEdited = [webview stringByEvaluatingJavaScriptFromString:@"booleanInputChangeState;"];
     NSLog(@"flag changes : %@", stringFlagEdited);
     stringSection = stringPageSection;
@@ -59,7 +69,7 @@
                           [docsDir stringByAppendingPathComponent: htmlfilePath]];
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localURL]];
     [webview loadRequest:urlRequest];
-    /* NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    /*NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     filePath = [docsDir stringByAppendingPathComponent:@"SPAJ"];
     
     NSString *htmlfilePath = [NSString stringWithFormat:@"SPAJ/%@",stringHTMLName];
@@ -93,6 +103,8 @@
 
 
 -(void)loadSecondHTML:(NSString*)stringHTMLName PageSection:(NSString *)stringPageSection{
+    
+    
     NSString* stringFlagEdited = [webview stringByEvaluatingJavaScriptFromString:@"booleanInputChangeState;"];
     NSLog(@"flag changes : %@", stringFlagEdited);
     
@@ -138,6 +150,9 @@
 }
 
 -(void)loadThirdHTML:(NSString*)stringHTMLName PageSection:(NSString *)stringPageSection{
+    //[self resignFirstResponder];
+    //[self.view endEditing:YES];
+    
     NSString* stringFlagEdited = [webview stringByEvaluatingJavaScriptFromString:@"booleanInputChangeState;"];
     
     stringSection = stringPageSection;
@@ -182,6 +197,9 @@
 }
 
 -(void)loadFourthHTML:(NSString*)stringHTMLName PageSection:(NSString *)stringPageSection{
+    //[self resignFirstResponder];
+    //[self.view endEditing:YES];
+    
     NSString* stringFlagEdited = [webview stringByEvaluatingJavaScriptFromString:@"booleanInputChangeState;"];
     
     stringSection = stringPageSection;
@@ -193,6 +211,7 @@
                           [docsDir stringByAppendingPathComponent: htmlfilePath]];
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localURL]];
     [webview loadRequest:urlRequest];
+    
     /*NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     filePath = [docsDir stringByAppendingPathComponent:@"SPAJ"];
     
@@ -226,6 +245,9 @@
 }
 
 -(void)loadFivethHTML:(NSString*)stringHTMLName PageSection:(NSString *)stringPageSection{
+    //[self resignFirstResponder];
+    //[self.view endEditing:YES];
+    
     NSString* stringFlagEdited = [webview stringByEvaluatingJavaScriptFromString:@"booleanInputChangeState;"];
     
     stringSection = stringPageSection;
@@ -237,6 +259,7 @@
                           [docsDir stringByAppendingPathComponent: htmlfilePath]];
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localURL]];
     [webview loadRequest:urlRequest];
+    
     /*NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     filePath = [docsDir stringByAppendingPathComponent:@"SPAJ"];
     
@@ -270,6 +293,9 @@
 }
 
 -(void)loadSixthHTML:(NSString*)stringHTMLName PageSection:(NSString *)stringPageSection{
+    //[self resignFirstResponder];
+    //[self.view endEditing:YES];
+    
     NSString* stringFlagEdited = [webview stringByEvaluatingJavaScriptFromString:@"booleanInputChangeState;"];
     
     stringSection = stringPageSection;
@@ -281,6 +307,7 @@
                           [docsDir stringByAppendingPathComponent: htmlfilePath]];
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localURL]];
     [webview loadRequest:urlRequest];
+    
     /*NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     filePath = [docsDir stringByAppendingPathComponent:@"SPAJ"];
     

@@ -53,6 +53,9 @@
     IBOutlet TextFieldSPAJ *TextSalesDeclarationIncomeBruto;
     IBOutlet TextViewSPAJ *AreaSalesDeclarationAdditionalInformation;
     
+    UITextField *activeField;
+    UITextView *activeView;
+    
 }
 @property (strong, nonatomic) NSDictionary* dictTransaction;
 @end

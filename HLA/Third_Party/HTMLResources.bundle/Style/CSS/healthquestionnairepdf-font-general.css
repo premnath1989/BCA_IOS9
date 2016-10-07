@@ -325,6 +325,10 @@ main form fieldset p {
   font-size: 0.75em;
 }
 
+main form fieldset.WithoutDoubleDot label:after {
+  content: '';
+}
+
 .QuestionnaireTitle {
   font-size: 1em	!important;
 }

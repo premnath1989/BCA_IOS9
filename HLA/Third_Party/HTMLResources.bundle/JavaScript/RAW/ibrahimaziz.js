@@ -1598,7 +1598,7 @@ function buttonPopUpSPAJProposalGenerator()
 		var arrayInputTemporary = [];
 		stringTriggerInfix = stringPageInfixTypeCurrent + stringSPAJProposalInfix;
 
-		intSPAJProposalID = getLastID(arrayHealthQuestionnaire, stringPrefixText + stringTriggerInfix + arraySPAJProposalTableHeader);
+		intSPAJProposalID = getLastID(arrayHealthQuestionnaire, stringPrefixText + stringTriggerInfix + arraySPAJProposalTableHeader[0]);
 		
 		if (intSPAJProposalRecentID == null)
 		{
@@ -1627,6 +1627,7 @@ function buttonPopUpSPAJProposalGenerator()
 			{
 				stringValue = getTextGeneral(stringInputJavaScriptID);
 				arrayAdd(arrayInputTemporary, stringKey, stringValue);
+				alert(stringKey + " " + stringValue);
 			}
 		});
 		
@@ -1636,7 +1637,9 @@ function buttonPopUpSPAJProposalGenerator()
 		}
 		else
 		{
-			arrayAdd(arrayHealthQuestionnaire, stringRadioButtonName, getRadioButtonGeneral(stringRadioButtonName));
+			var stringRadioButtonSPAJProposal = stringPrefixRadioButton + stringPageInfixTypeCurrent + stringSPAJProposalInfix;
+
+			arrayAdd(arrayHealthQuestionnaire, stringRadioButtonSPAJProposal, getRadioButtonGeneral(stringRadioButtonSPAJProposal));
 			arrayTransfer(arrayInputTemporary, arrayHealthQuestionnaire);
 			
 			$(stringPopUpJQueryID).css("display", "none");
@@ -3262,17 +3265,17 @@ function inputListener()
 {
 	$("input").change(function()
 	{
-		booleanInputChangeState = true;
+		booleanInputChangeState = "true";
 	});
 	
 	$("textarea").change(function()
 	{
-		booleanInputChangeState = true;
+		booleanInputChangeState = "true";
 	});
 	
 	$("select").change(function()
 	{
-		booleanInputChangeState = true;
+		booleanInputChangeState = "true";
 	});
 }
 
@@ -3322,4 +3325,21 @@ function getInfix(stringKey)
 	{
 		return "";
 	}
+}
+
+function imageSelector(stringPath)
+{
+	$("img").each(function()
+	{
+		var stringSource = $(this).attr("src");
+
+		if (stringSource == undefined || stringSource == "" || stringSource == null)
+		{
+
+		}
+		else
+		{
+			$(this).attr("src", $(this).attr("src").replace("..\/..\/Resource\/|..\/..\/jqueryLibrary\/Resource\/", stringPath));
+		}
+	});
 }

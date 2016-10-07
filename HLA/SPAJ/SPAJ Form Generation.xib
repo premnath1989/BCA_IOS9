@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="BPreplay.otf">
+        <mutableArray key="BPreplay_Regular.otf">
             <string>BPreplay</string>
         </mutableArray>
     </customFonts>
@@ -26,6 +26,7 @@
                 <outlet property="view" destination="iN0-l3-epB" id="poK-cu-8Lg"/>
                 <outlet property="viewActivityIndicator" destination="iRa-Ab-yiP" id="Whw-Te-5MN"/>
                 <outlet property="viewStep1" destination="pDg-BU-x6G" id="d0f-dp-UsF"/>
+                <outlet property="viewStep2" destination="buI-Tv-IiQ" id="pJM-pf-QwZ"/>
                 <outlet property="viewStep3" destination="zi2-cg-J0b" id="OmX-Ja-1r4"/>
             </connections>
         </placeholder>
@@ -103,51 +104,6 @@
                                 <rect key="frame" x="0.0" y="0.0" width="800" height="50"/>
                             </variation>
                         </view>
-                        <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="buI-Tv-IiQ" customClass="ViewGuideMenuSelected">
-                            <rect key="frame" x="0.0" y="50" width="600" height="0.0"/>
-                            <subviews>
-                                <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="utj-z3-yFg" customClass="StackViewGuideMenuHorizontal">
-                                    <rect key="frame" x="10" y="5" width="580" height="21"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kCh-3K-1kP" customClass="LabelGuideMenuStep">
-                                            <rect key="frame" x="0.0" y="0.0" width="42" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ctD-fX-KFg" customClass="LabelGuideMenuHeader">
-                                            <rect key="frame" x="62" y="0.0" width="518" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </stackView>
-                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iXD-ZI-9GH" customClass="ButtonGuideMenu">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="30"/>
-                                    <state key="normal" title="Button"/>
-                                    <connections>
-                                        <action selector="actionGoToStep2:" destination="-1" eventType="touchUpInside" id="7nG-b5-ghl"/>
-                                    </connections>
-                                </button>
-                            </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstItem="iXD-ZI-9GH" firstAttribute="leading" secondItem="buI-Tv-IiQ" secondAttribute="leading" id="0IH-Ny-0ek"/>
-                                <constraint firstItem="utj-z3-yFg" firstAttribute="centerY" secondItem="buI-Tv-IiQ" secondAttribute="centerY" id="7N1-eM-TqJ"/>
-                                <constraint firstItem="utj-z3-yFg" firstAttribute="leading" secondItem="buI-Tv-IiQ" secondAttribute="leading" constant="10" id="CAd-Od-nkV"/>
-                                <constraint firstAttribute="bottom" secondItem="iXD-ZI-9GH" secondAttribute="bottom" id="JKn-u7-FO0"/>
-                                <constraint firstAttribute="trailing" secondItem="utj-z3-yFg" secondAttribute="trailing" constant="10" id="i5s-kA-te7"/>
-                                <constraint firstItem="iXD-ZI-9GH" firstAttribute="top" secondItem="buI-Tv-IiQ" secondAttribute="top" id="r9J-7Z-vb5"/>
-                                <constraint firstAttribute="trailing" secondItem="iXD-ZI-9GH" secondAttribute="trailing" id="xqk-pb-mOa"/>
-                            </constraints>
-                            <variation key="widthClass=regular" misplaced="YES">
-                                <rect key="frame" x="0.0" y="50" width="800" height="0.0"/>
-                            </variation>
-                            <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                <rect key="frame" x="0.0" y="50" width="800" height="0.0"/>
-                            </variation>
-                        </view>
                         <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zi2-cg-J0b" customClass="ViewGuideMenuNotSelected">
                             <rect key="frame" x="0.0" y="50" width="600" height="50"/>
                             <subviews>
@@ -195,6 +151,57 @@
                                 <rect key="frame" x="0.0" y="50" width="800" height="50"/>
                             </variation>
                         </view>
+                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="buI-Tv-IiQ" customClass="ViewGuideMenuSelected">
+                            <rect key="frame" x="0.0" y="50" width="600" height="0.0"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="utj-z3-yFg" customClass="StackViewGuideMenuHorizontal">
+                                    <rect key="frame" x="10" y="5" width="580" height="21"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kCh-3K-1kP" customClass="LabelGuideMenuStep">
+                                            <rect key="frame" x="0.0" y="0.0" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ctD-fX-KFg" customClass="LabelGuideMenuHeader">
+                                            <rect key="frame" x="62" y="0.0" width="518" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <variation key="widthClass=regular" misplaced="YES">
+                                        <rect key="frame" x="10" y="-10" width="780" height="21"/>
+                                    </variation>
+                                </stackView>
+                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iXD-ZI-9GH" customClass="ButtonGuideMenu">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="30"/>
+                                    <state key="normal" title="Button"/>
+                                    <variation key="widthClass=regular" misplaced="YES">
+                                        <rect key="frame" x="0.0" y="0.0" width="800" height="0.0"/>
+                                    </variation>
+                                    <connections>
+                                        <action selector="actionGoToStep2:" destination="-1" eventType="touchUpInside" id="7nG-b5-ghl"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="iXD-ZI-9GH" firstAttribute="leading" secondItem="buI-Tv-IiQ" secondAttribute="leading" id="0IH-Ny-0ek"/>
+                                <constraint firstItem="utj-z3-yFg" firstAttribute="centerY" secondItem="buI-Tv-IiQ" secondAttribute="centerY" id="7N1-eM-TqJ"/>
+                                <constraint firstItem="utj-z3-yFg" firstAttribute="leading" secondItem="buI-Tv-IiQ" secondAttribute="leading" constant="10" id="CAd-Od-nkV"/>
+                                <constraint firstAttribute="bottom" secondItem="iXD-ZI-9GH" secondAttribute="bottom" id="JKn-u7-FO0"/>
+                                <constraint firstAttribute="trailing" secondItem="utj-z3-yFg" secondAttribute="trailing" constant="10" id="i5s-kA-te7"/>
+                                <constraint firstItem="iXD-ZI-9GH" firstAttribute="top" secondItem="buI-Tv-IiQ" secondAttribute="top" id="r9J-7Z-vb5"/>
+                                <constraint firstAttribute="trailing" secondItem="iXD-ZI-9GH" secondAttribute="trailing" id="xqk-pb-mOa"/>
+                            </constraints>
+                            <variation key="widthClass=regular" misplaced="YES">
+                                <rect key="frame" x="0.0" y="100" width="800" height="50"/>
+                            </variation>
+                            <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                <rect key="frame" x="0.0" y="50" width="800" height="0.0"/>
+                            </variation>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" red="0.94901960780000005" green="0.4431372549" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -208,7 +215,7 @@
                         <constraint firstItem="pDg-BU-x6G" firstAttribute="leading" secondItem="Tnk-va-LaM" secondAttribute="leading" id="wwL-qQ-NLv"/>
                     </constraints>
                     <variation key="widthClass=regular" misplaced="YES">
-                        <rect key="frame" x="0.0" y="64" width="800" height="100"/>
+                        <rect key="frame" x="0.0" y="64" width="800" height="150"/>
                     </variation>
                     <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
                         <rect key="frame" x="0.0" y="64" width="800" height="100"/>
@@ -217,6 +224,9 @@
                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qLA-Ph-RKi" customClass="ButtonConfirmSPAJ">
                     <rect key="frame" x="0.0" y="158" width="600" height="30"/>
                     <state key="normal" title="Button"/>
+                    <variation key="widthClass=regular" misplaced="YES">
+                        <rect key="frame" x="0.0" y="128" width="800" height="30"/>
+                    </variation>
                     <connections>
                         <action selector="actionGoToStep4:" destination="-1" eventType="touchUpInside" id="L3d-W9-c9Q"/>
                     </connections>
