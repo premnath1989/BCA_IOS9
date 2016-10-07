@@ -12,6 +12,7 @@
 #import "AgentWS.h"
 #import "LoginDBManagement.h"
 #import "SpinnerUtilities.h"
+#import "SSZipArchive.h"
 
 @interface SettingUserProfile : UIViewController <DateViewControllerDelegate, UITextFieldDelegate, NSXMLParserDelegate, AgentWSSoapBindingResponseDelegate>{
     NSString *databasePath;
@@ -63,6 +64,8 @@
 - (IBAction)btnDone:(id)sender;
 - (IBAction)ChangePassword:(id)sender;
 - (IBAction)syncSPAJNumber:(id)sender;
+- (IBAction)backupFiles:(id)sender;
+- (IBAction)restoreBackup:(id)sender;
 
 //--bob
 @property (strong, nonatomic) IBOutlet UIScrollView *myScrollView;

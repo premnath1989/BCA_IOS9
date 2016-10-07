@@ -274,10 +274,63 @@
                 [PartySI setValue:Riders forKey:@"Riders"];
             [PartiesSI setValue:PartySI forKey:@"Party PTypeCode=\"LA1\""];
         [SIInfo setValue:PartiesSI forKey:@"Parties"];
-    
     [sampleDict setValue:SIInfo forKey:@"SIInfo"];
     
-
+    //SPAJFilename
+    NSMutableDictionary *SPAJFilename = [[NSMutableDictionary alloc]init];
+        //SPAJ
+        NSMutableDictionary *SPAJ = [[NSMutableDictionary alloc]init];
+        [SPAJ setValue:@"1" forKey:@"FileCount"];
+            //filename
+            NSMutableDictionary *Filename = [[NSMutableDictionary alloc]init];
+            [Filename setValue:@"60000000001_SPAJ.pdf" forKey:@"Filename"];
+            [SPAJ setValue:Filename forKey:@"File ID=\"1\""];
+        [SPAJFilename setValue:SPAJ forKey:@"SPAJ"];
+        //Supplementary
+        NSMutableDictionary *Supplementary = [[NSMutableDictionary alloc]init];
+        [Supplementary setValue:@"1" forKey:@"FileCount"];
+        //filename
+        NSMutableDictionary *FilenameSup = [[NSMutableDictionary alloc]init];
+        [FilenameSup setValue:@"" forKey:@"Filename"];
+        [Supplementary setValue:FilenameSup forKey:@"File ID=\"1\""];
+        [SPAJFilename setValue:Supplementary forKey:@"Supplementary"];
+        //IDImages
+        NSMutableDictionary *IDImages = [[NSMutableDictionary alloc]init];
+        [IDImages setValue:@"1" forKey:@"FileCount"];
+        //filename
+        NSMutableDictionary *FilenameID = [[NSMutableDictionary alloc]init];
+        [FilenameID setValue:@"60000000001_ID2.jpg" forKey:@"Filename"];
+        [FilenameID setValue:@"KTP" forKey:@"IDType"];
+        [FilenameID setValue:@"LA1" forKey:@"PersonType"];
+        [IDImages setValue:FilenameID forKey:@"File ID=\"1\""];
+        [SPAJFilename setValue:IDImages forKey:@"IDImages"];
+        //HealthQuestionaires
+        NSMutableDictionary *HealthQuestionaires = [[NSMutableDictionary alloc]init];
+        [HealthQuestionaires setValue:@"1" forKey:@"FileCount"];
+        //filename
+        NSMutableDictionary *FilenameHealth = [[NSMutableDictionary alloc]init];
+        [FilenameHealth setValue:@"60000000001_AngkatanBersenjata.jpg" forKey:@"Filename"];
+        [FilenameHealth setValue:@"Angkatan Bersenjata" forKey:@"FormName"];
+        [HealthQuestionaires setValue:FilenameHealth forKey:@"File ID=\"1\""];
+        [SPAJFilename setValue:HealthQuestionaires forKey:@"SPAJ"];
+        //AmendmentForm
+        NSMutableDictionary *AmendmentForm = [[NSMutableDictionary alloc]init];
+        [AmendmentForm setValue:@"1" forKey:@"FileCount"];
+        //filename
+        NSMutableDictionary *FilenameAmandment = [[NSMutableDictionary alloc]init];
+        [FilenameAmandment setValue:@"60000000001_SPAJ.pdf" forKey:@"Filename"];
+        [AmendmentForm setValue:FilenameAmandment forKey:@"File ID=\"1\""];
+        [SPAJFilename setValue:AmendmentForm forKey:@"SPAJ"];
+        //ForeignerForm
+        NSMutableDictionary *ForeignerForm = [[NSMutableDictionary alloc]init];
+        [ForeignerForm setValue:@"1" forKey:@"FileCount"];
+        //filename
+        NSMutableDictionary *FilenameForeign = [[NSMutableDictionary alloc]init];
+        [FilenameForeign setValue:@"60000000001_SPAJ.pdf" forKey:@"Filename"];
+        [ForeignerForm setValue:FilenameForeign forKey:@"File ID=\"1\""];
+        [SPAJFilename setValue:ForeignerForm forKey:@"SPAJ"];
+    [sampleDict setValue:SPAJFilename forKey:@"SPAJFilename"];
+    
     NSString *textParsed = [self parseXML:sampleDict text:@""];
     [textParsed writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:&error];
 }

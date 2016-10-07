@@ -49,7 +49,7 @@
 
 -(void)loadFirstHTML:(NSString*)stringHTMLName PageSection:(NSString *)stringPageSection{
     NSString* stringFlagEdited = [webview stringByEvaluatingJavaScriptFromString:@"booleanInputChangeState;"];
-    
+    NSLog(@"flag changes : %@", stringFlagEdited);
     stringSection = stringPageSection;
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     filePath = [docsDir stringByAppendingPathComponent:@"SPAJ"];
@@ -94,6 +94,7 @@
 
 -(void)loadSecondHTML:(NSString*)stringHTMLName PageSection:(NSString *)stringPageSection{
     NSString* stringFlagEdited = [webview stringByEvaluatingJavaScriptFromString:@"booleanInputChangeState;"];
+    NSLog(@"flag changes : %@", stringFlagEdited);
     
     stringSection = stringPageSection;
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];

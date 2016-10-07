@@ -238,13 +238,54 @@ id temp;
     SPAJDisNum.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     
     [self presentViewController:SPAJDisNum animated:YES completion:nil];
-  
+}
 
+- (IBAction)backupFiles:(id)sender {
+    NSLog(@"backup files");
+    
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *libsDir = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSDate *currDate = [NSDate date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"YYYYMMdd"];
+    
+    NSString *dateString = [dateFormatter stringFromDate:currDate];
+
+    NSString *ZipFileName = [NSString stringWithFormat:@"%@_%@.zip",  txtAgentCode.text, dateString];
+    NSString *ZipPath = [libsDir stringByAppendingPathComponent: ZipFileName];
+    
+    // Create
+    [SSZipArchive createZipFileAtPath:ZipPath withContentsOfDirectory:docsDir];
+}
+
+- (IBAction)restoreBackup:(id)sender {
+    [self restoreFiles:@"11500001_20161007.zip"];
+}
+
+
+- (void)restoreFiles:(NSString *)BackupFileName {
+    NSLog(@"restore files");
+    
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    
+    //path of backup file
+    NSString *libsDir = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *ZipPath = [libsDir stringByAppendingPathComponent: BackupFileName];
+    
+    //first we delete all files inside the documents folder
+    NSArray *allFiles = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:docsDir error:nil];
+    NSError *error = nil;
+    
+    for(NSString *fileinDoc in allFiles){
+        [[NSFileManager defaultManager] removeItemAtPath:[docsDir stringByAppendingPathComponent:fileinDoc] error:&error];
+    }
+    
+    // then we unzip the backup file
+    [SSZipArchive unzipFileAtPath:ZipPath toDestination:docsDir];
 }
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-    
     activeField = textField;
     return YES;
 }
