@@ -36,28 +36,29 @@
 - (NSMutableDictionary *)getAgentDetails;
 
 //general functions
-- (int)insertTableFromJSON:(NSDictionary*) params databasePath:(NSString *)dbName;
+- (int) insertTableFromJSON:(NSDictionary*) params databasePath:(NSString *)dbName;
 - (int) ReferralSyncTable:(WebResponObj *)obj;
 - (BOOL) fullSyncTable:(WebResponObj *)obj;
+- (NSString *) dataVersion;
 
 //SPAJ Functions
-- (long long)SPAJAllocated;
-- (long long)SPAJBalance;
-- (long long)SPAJUsed;
-- (long long)getLastActiveSPAJNum;
-- (NSMutableArray *)SPAJRetrievePackID;
+- (long long) SPAJAllocated;
+- (long long) SPAJBalance;
+- (long long) SPAJUsed;
+- (long long) getLastActiveSPAJNum;
+- (NSMutableArray *) SPAJRetrievePackID;
 
 //SI functions
 - (void) updateSIMaster:(NSString *)SINO EnableEditing:(NSString *)EditFlag;
 - (BOOL) SpvAdmValidation:(NSString *)username password:(NSString *)password;
-- (NSString *)RiderCode:(NSString *)SINo riderCode:(NSString *)code;
+- (NSString *) RiderCode:(NSString *)SINo riderCode:(NSString *)code;
 - (NSString *) expiryDate:(NSString *)AgentID;
 - (NSString *) checkingLastLogout;
 - (NSString *) localDBUDID;
 - (NSString *) AgentCodeLocal;
-- (NSString *)EditIllustration:(NSString *)SIno;
-- (NSString *)getUniqueDeviceIdentifierAsString;
+- (NSString *) EditIllustration:(NSString *)SIno;
+- (NSString *) getUniqueDeviceIdentifierAsString;
 - (NSString *) getLastUpdateReferral;
-- (NSMutableDictionary *)premiKeluargaku:(NSString *)SINo;
+- (NSMutableDictionary *) premiKeluargaku:(NSString *)SINo;
 
 @end

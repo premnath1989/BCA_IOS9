@@ -130,6 +130,28 @@
     return AgentFound;
 }
 
+- (NSString *) dataVersion{
+    sqlite3_stmt *statement;
+    NSString *DataVersion = @"";
+    if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
+    {
+        NSString *querySQL = [NSString stringWithFormat: @"SELECT Version FROM Data_Version"];
+        
+        if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK){
+            if (sqlite3_step(statement) == SQLITE_ROW) {
+                DataVersion = [[NSString alloc]
+                                           initWithUTF8String:
+                                           (const char *) sqlite3_column_text(statement, 0)];
+                NSLog(@"Data Version = %@",DataVersion);
+            }
+            sqlite3_finalize(statement);
+        }
+        sqlite3_close(contactDB);
+    }
+    return DataVersion;
+}
+
+
 - (int) DeviceStatus:(NSString *)AgentID{
     sqlite3_stmt *statement;
     int DeviceStatusFlag = DATABASE_ERROR;

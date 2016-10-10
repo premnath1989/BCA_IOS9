@@ -24,6 +24,7 @@
               UUID:(NSString *)deviceID;
 - (int)fullSync:(NSString *)username delegate:(id)delegate;
 - (int)checkVersion:(NSString *)version delegate:(id)delegate;
+- (int)checkDataVersion:(NSString *)version delegate:(id)delegate;
 - (int)partialSync:(NSString *)agentCode delegate:(id)delegate xml:(NSString *)XMLTable;
 - (int)AppVersionChecker:(NSString *)strVersion delegate:(id)delegate;
 - (int)adminLogin:(NSString *)agentCode delegate:(id)delegate adminCode:(NSString *)adminCode adminPass:(NSString *)adminPass;

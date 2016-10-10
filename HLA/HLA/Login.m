@@ -140,6 +140,15 @@ NSString *ProceedStatus = @"";
     }
 }
 
+- (void)dataVersionChecker{
+    if([self connected]){
+        [spinnerLoading startLoadingSpinner:self.view label:@"Periksa Versi Data"];
+        NSString *version= [loginDB dataVersion];
+        WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
+        [webservice checkDataVersion:version delegate:self];
+    }
+}
+
 //added by Edwin 12-02-2014
 static NSString *labelVers;
 +(NSString*)getLabelVersion
@@ -184,7 +193,9 @@ static NSString *labelVers;
         [self presentViewController:UserProfileView animated:YES completion:nil];
     }
     
+    //we do some version checker over here
     [self appVersionChecker];
+    [self dataVersionChecker];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -238,6 +249,16 @@ static NSString *labelVers;
                 UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Informasi" message:@"Harap Download applikasi versi terbaru" delegate:self cancelButtonTitle:@"Download" otherButtonTitles:@"Cancel", nil];
                 [alert show];
                 alert.tag = 100;
+            }
+        }
+        
+        else if([bodyPart isKindOfClass:[AgentWS_SyncDataVersionResponse class]]) {
+            [spinnerLoading stopLoadingSpinner];
+            AgentWS_SyncDataVersionResponse* rateResponse = bodyPart;
+            
+            if([(NSString *)rateResponse.SyncDataVersionResult caseInsensitiveCompare:@"TRUE"]== NSOrderedSame){
+                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Informasi" message:@"Harap Melakukan SYNC setelah login" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                [alert show];
             }
         }
         

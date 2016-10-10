@@ -39,10 +39,11 @@
 @class AgentWS_AdminLoginResponse;
 @class AgentWS_ChangeUDID;
 @class AgentWS_ChangeUDIDResponse;
-@class AgentWS_DataSet;
 @class AgentWS_Syncdatareferral;
 @class AgentWS_SyncdatareferralResponse;
 @class AgentWS_SyncdatareferralResult;
+@class AgentWS_SyncDataVersion;
+@class AgentWS_SyncDataVersionResponse;
 @interface AgentWS_ValidateAgentAndDevice : NSObject {
     
     /* elements */
@@ -747,24 +748,6 @@
 /* attributes */
 - (NSDictionary *)attributes;
 @end
-@interface AgentWS_DataSet : NSObject {
-    
-    /* elements */
-    NSString * xmlDetails;
-    /* attributes */
-}
-- (NSString *)nsPrefix;
-- (xmlNodePtr)xmlNodeForDoc:(xmlDocPtr)doc elementName:(NSString *)elName elementNSPrefix:(NSString *)elNSPrefix;
-- (void)addAttributesToNode:(xmlNodePtr)node;
-- (void)addElementsToNode:(xmlNodePtr)node;
-+ (AgentWS_DataSet *)deserializeNode:(xmlNodePtr)cur;
-- (void)deserializeAttributesFromNode:(xmlNodePtr)cur;
-- (void)deserializeElementsFromNode:(xmlNodePtr)cur;
-/* elements */
-@property(retain) NSString * xmlDetails;
-/* attributes */
-- (NSDictionary *)attributes;
-@end
 
 @interface AgentWS_ChangeUDID : NSObject {
     
@@ -866,6 +849,49 @@
 - (NSDictionary *)attributes;
 @end
 
+@interface AgentWS_SyncDataVersion : NSObject {
+    
+    /* elements */
+    NSString * Version;
+    NSString * strStatus;
+    /* attributes */
+}
+- (NSString *)nsPrefix;
+- (xmlNodePtr)xmlNodeForDoc:(xmlDocPtr)doc elementName:(NSString *)elName elementNSPrefix:(NSString *)elNSPrefix;
+- (void)addAttributesToNode:(xmlNodePtr)node;
+- (void)addElementsToNode:(xmlNodePtr)node;
++ (AgentWS_SyncDataVersion *)deserializeNode:(xmlNodePtr)cur;
+- (void)deserializeAttributesFromNode:(xmlNodePtr)cur;
+- (void)deserializeElementsFromNode:(xmlNodePtr)cur;
+/* elements */
+@property (retain) NSString * Version;
+@property (retain) NSString * strStatus;
+/* attributes */
+- (NSDictionary *)attributes;
+@end
+
+@interface AgentWS_SyncDataVersionResponse : NSObject {
+    
+    /* elements */
+    NSString * SyncDataVersionResult;
+    NSString * strStatus;
+    /* attributes */
+}
+- (NSString *)nsPrefix;
+- (xmlNodePtr)xmlNodeForDoc:(xmlDocPtr)doc elementName:(NSString *)elName elementNSPrefix:(NSString *)elNSPrefix;
+- (void)addAttributesToNode:(xmlNodePtr)node;
+- (void)addElementsToNode:(xmlNodePtr)node;
++ (AgentWS_SyncDataVersionResponse *)deserializeNode:(xmlNodePtr)cur;
+- (void)deserializeAttributesFromNode:(xmlNodePtr)cur;
+- (void)deserializeElementsFromNode:(xmlNodePtr)cur;
+/* elements */
+@property (retain) NSString * SyncDataVersionResult;
+@property (retain) NSString * strStatus;
+/* attributes */
+- (NSDictionary *)attributes;
+@end
+
+
 
 /* Cookies handling provided by http://en.wikibooks.org/wiki/Programming:WebObjects/Web_Services/Web_Service_Provider */
 #import <libxml/parser.h>
@@ -934,6 +960,8 @@
 - (void)ChangeUDIDAsyncUsingParameters:(AgentWS_ChangeUDID *)aParameters  delegate:(id<AgentWSSoapBindingResponseDelegate>)responseDelegate;
 - (AgentWSSoapBindingResponse *)SyncdatareferralUsingParameters:(AgentWS_Syncdatareferral *)aParameters ;
 - (void)SyncdatareferralAsyncUsingParameters:(AgentWS_Syncdatareferral *)aParameters  delegate:(id<AgentWSSoapBindingResponseDelegate>)responseDelegate;
+- (AgentWSSoapBindingResponse *)SyncDataVersionUsingParameters:(AgentWS_SyncDataVersion *)aParameters ;
+- (void)SyncDataVersionAsyncUsingParameters:(AgentWS_SyncDataVersion *)aParameters  delegate:(id<AgentWSSoapBindingResponseDelegate>)responseDelegate;
 @end
 @interface AgentWSSoapBindingOperation : NSOperation {
     AgentWSSoapBinding *binding;
@@ -1077,6 +1105,14 @@
            parameters:(AgentWS_Syncdatareferral *)aParameters
 ;
 @end
+@interface AgentWSSoapBinding_SyncDataVersion : AgentWSSoapBindingOperation {
+    AgentWS_SyncDataVersion * parameters;
+}
+@property (retain) AgentWS_SyncDataVersion * parameters;
+- (id)initWithBinding:(AgentWSSoapBinding *)aBinding delegate:(id<AgentWSSoapBindingResponseDelegate>)aDelegate
+           parameters:(AgentWS_SyncDataVersion *)aParameters
+;
+@end
 @interface AgentWSSoapBinding_envelope : NSObject {
 }
 + (AgentWSSoapBinding_envelope *)sharedInstance;
@@ -1146,6 +1182,8 @@
 - (void)ChangeUDIDAsyncUsingParameters:(AgentWS_ChangeUDID *)aParameters  delegate:(id<AgentWSSoap12BindingResponseDelegate>)responseDelegate;
 - (AgentWSSoap12BindingResponse *)SyncdatareferralUsingParameters:(AgentWS_Syncdatareferral *)aParameters ;
 - (void)SyncdatareferralAsyncUsingParameters:(AgentWS_Syncdatareferral *)aParameters  delegate:(id<AgentWSSoap12BindingResponseDelegate>)responseDelegate;
+- (AgentWSSoap12BindingResponse *)SyncDataVersionUsingParameters:(AgentWS_SyncDataVersion *)aParameters ;
+- (void)SyncDataVersionAsyncUsingParameters:(AgentWS_SyncDataVersion *)aParameters  delegate:(id<AgentWSSoap12BindingResponseDelegate>)responseDelegate;
 @end
 @interface AgentWSSoap12BindingOperation : NSOperation {
     AgentWSSoap12Binding *binding;
@@ -1287,6 +1325,14 @@
 @property (retain) AgentWS_Syncdatareferral * parameters;
 - (id)initWithBinding:(AgentWSSoap12Binding *)aBinding delegate:(id<AgentWSSoap12BindingResponseDelegate>)aDelegate
            parameters:(AgentWS_Syncdatareferral *)aParameters
+;
+@end
+@interface AgentWSSoap12Binding_SyncDataVersion : AgentWSSoap12BindingOperation {
+    AgentWS_SyncDataVersion * parameters;
+}
+@property (retain) AgentWS_SyncDataVersion * parameters;
+- (id)initWithBinding:(AgentWSSoap12Binding *)aBinding delegate:(id<AgentWSSoap12BindingResponseDelegate>)aDelegate
+           parameters:(AgentWS_SyncDataVersion *)aParameters
 ;
 @end
 @interface AgentWSSoap12Binding_envelope : NSObject {

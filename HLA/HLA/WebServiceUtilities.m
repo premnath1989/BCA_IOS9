@@ -156,6 +156,17 @@
     return 1;
 }
 
+-(int)checkDataVersion:(NSString *)version delegate:(id)delegate{
+    AgentWSSoapBinding *binding = [AgentWS AgentWSSoapBinding];
+    binding.logXMLInOut = YES;
+    
+    AgentWS_SyncDataVersion *agentCodea = [[AgentWS_SyncDataVersion alloc]init];
+    agentCodea.Version = version;
+    agentCodea.strStatus = @"";
+    [binding SyncDataVersionAsyncUsingParameters:agentCodea delegate:delegate];
+    return 1;
+}
+
 
 -(int)forgotPassword:(NSString *)username delegate:(id)delegate{
     AgentWSSoapBinding *binding = [AgentWS AgentWSSoapBinding];
