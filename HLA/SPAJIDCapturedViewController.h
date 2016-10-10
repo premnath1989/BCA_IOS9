@@ -23,11 +23,11 @@
 -(void)loadIDInformation;
 -(void)loadIDImage:(UIImage *)imageFront ImageBack:(UIImage *)imageBack;
 -(void)showMultiplePictureForSection:(NSString *)stringSection StringButtonType:(NSString *)stringButtonType;
-@property (strong, nonatomic) NSDictionary* dictionaryIDData;
-@property (strong, nonatomic) NSDictionary* dictTransaction;
-@property (strong, nonatomic) UIImage* imageFront;
-@property (strong, nonatomic) UIImage* imageBack;
-@property (strong, nonatomic) NSNumber* partyIndex;
-@property (strong, nonatomic) NSString* buttonTitle;
+@property (weak, nonatomic) NSDictionary* dictionaryIDData;
+@property (weak, nonatomic) NSDictionary* dictTransaction;
+@property (weak, nonatomic) UIImage* imageFront;
+@property (weak, nonatomic) UIImage* imageBack;
+@property (weak, nonatomic) NSNumber* partyIndex;
+@property (weak, nonatomic) NSString* buttonTitle;
 
 @end

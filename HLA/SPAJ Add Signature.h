@@ -15,8 +15,8 @@
 
 // PROTOCOL
 
-@property (nonatomic,strong) id <SPAJAddSignatureDelegate> SPAJAddSignatureDelegate;
-@property (strong, nonatomic) NSDictionary* dictTransaction;
-@property(strong,nonatomic)UITextField *textFieldLocation;
-@property(nonatomic, strong)UIAlertAction* okAction;
+@property (nonatomic,weak) id <SPAJAddSignatureDelegate> SPAJAddSignatureDelegate;
+@property (weak, nonatomic) NSDictionary* dictTransaction;
+@property(weak,nonatomic)UITextField *textFieldLocation;
+@property(nonatomic, weak)UIAlertAction* okAction;
 @end

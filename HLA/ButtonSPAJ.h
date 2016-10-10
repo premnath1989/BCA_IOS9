@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface ButtonSPAJ : UIButton
-@property (strong, nonatomic) NSString* buttonName;
+@property (weak, nonatomic) NSString* buttonName;
 
 -(void)setButtonName:(NSString *)stringButtonName;
 -(NSString *)getButtonName;

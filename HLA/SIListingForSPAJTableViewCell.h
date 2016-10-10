@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface SIListingForSPAJTableViewCell : UITableViewCell
-    @property (nonatomic, strong) IBOutlet UILabel *labelPOName;
-    @property (nonatomic, strong) IBOutlet UILabel *labelSIDateNumber;
-    @property (nonatomic, strong) IBOutlet UILabel *labelProductName;
+    @property (nonatomic, weak) IBOutlet UILabel *labelPOName;
+    @property (nonatomic, weak) IBOutlet UILabel *labelSIDateNumber;
+    @property (nonatomic, weak) IBOutlet UILabel *labelProductName;
 @end

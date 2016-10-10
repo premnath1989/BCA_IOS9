@@ -70,7 +70,6 @@ main section label, main section span {
 }
 
 main section label.Plain:after, main section span.Plain:after {
-  text-align: center;
   content: '';
 }
 

@@ -25,6 +25,10 @@
 
 -(void)createDictionaryForRadioButton{
     dictKeyValueForRadioButton = [[NSMutableDictionary alloc]init];
+    [dictKeyValueForRadioButton setObject:@"KTP" forKey:@"KTP"];
+    [dictKeyValueForRadioButton setObject:@"PASPOR" forKey:@"Paspor"];
+    [dictKeyValueForRadioButton setObject:@"KIMSKITAS" forKey:@"KIMS / KITAS"];
+    
     [dictKeyValueForRadioButton setObject:@"true" forKey:@"Ya"];
     [dictKeyValueForRadioButton setObject:@"false" forKey:@"Tidak"];
     
@@ -63,7 +67,12 @@
     
     [dictKeyValueForRadioButton setObject:@"self" forKey:@"Diri Sendiri"];
     [dictKeyValueForRadioButton setObject:@"spouse" forKey:@"Suami/Istri"];
+    [dictKeyValueForRadioButton setObject:@"spouse" forKey:@"Suami / Istri"];
     [dictKeyValueForRadioButton setObject:@"family" forKey:@"Orang Tua/Anak"];
+    [dictKeyValueForRadioButton setObject:@"child" forKey:@"Anak"];
+    [dictKeyValueForRadioButton setObject:@"parent" forKey:@"Orang Tua"];
+    [dictKeyValueForRadioButton setObject:@"sibling" forKey:@"Saudara Kandung"];
+    [dictKeyValueForRadioButton setObject:@"sibling" forKey:@"Saudara kandung"];
     [dictKeyValueForRadioButton setObject:@"colleague" forKey:@"Perusahaan/Karyawan"];
     [dictKeyValueForRadioButton setObject:@"other" forKey:@"Lainnya"];
     [dictKeyValueForRadioButton setObject:@"other" forKey:@"Lainnya, sebutkan"];
@@ -164,6 +173,10 @@
     [mutableArrayForKey addObject:@"true" ];[mutableArrayForValue addObject:@"Ya"];
     [mutableArrayForKey addObject:@"false" ];[mutableArrayForValue addObject:@"Tidak"];
     
+    [mutableArrayForKey addObject:@"KTP"]; [mutableArrayForValue addObject:@"KTP"];
+    [mutableArrayForKey addObject:@"PASPOR"]; [mutableArrayForValue addObject:@"Paspor"];
+    [mutableArrayForKey addObject:@"KIMSKITAS"]; [mutableArrayForValue addObject:@"KIMS / KITAS"];
+    
     [mutableArrayForKey addObject:@"stranger" ];[mutableArrayForValue addObject:@"Tidak Kenal"];
     [mutableArrayForKey addObject:@"lessthan1year" ];[mutableArrayForValue addObject:@"< 1 tahun"];
     [mutableArrayForKey addObject:@"lessthan5years" ];[mutableArrayForValue addObject:@"< 5 tahun"];
@@ -199,7 +212,12 @@
     
     [mutableArrayForKey addObject:@"self" ];[mutableArrayForValue addObject:@"Diri Sendiri"];
     [mutableArrayForKey addObject:@"spouse" ];[mutableArrayForValue addObject:@"Suami/Istri"];
+    [mutableArrayForKey addObject:@"spouse" ];[mutableArrayForValue addObject:@"Suami / Istri"];
     [mutableArrayForKey addObject:@"family" ];[mutableArrayForValue addObject:@"Orang Tua/Anak"];
+    [mutableArrayForKey addObject:@"parent" ];[mutableArrayForValue addObject:@"Orang Tua"];
+    [mutableArrayForKey addObject:@"child" ];[mutableArrayForValue addObject:@"Anak"];
+    [mutableArrayForKey addObject:@"sibling" ];[mutableArrayForValue addObject:@"Saudara Kandung"];
+    [mutableArrayForKey addObject:@"sibling" ];[mutableArrayForValue addObject:@"Saudara kandung"];
     [mutableArrayForKey addObject:@"colleague" ];[mutableArrayForValue addObject:@"Perusahaan/Karyawan"];
     [mutableArrayForKey addObject:@"other" ];[mutableArrayForValue addObject:@"Lainnya"];
     [mutableArrayForKey addObject:@"other" ];[mutableArrayForValue addObject:@"Lainnya, sebutkan"];

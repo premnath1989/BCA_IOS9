@@ -32,15 +32,15 @@
 }
 
 
-    @property (strong, nonatomic) NSDictionary* dictTransaction;
+    @property (weak, nonatomic) NSDictionary* dictTransaction;
 
     // PROTOCOL
 
-    @property (nonatomic,strong) id <SPAJMainDelegate> delegateSPAJMain;
+    @property (nonatomic,weak) id <SPAJMainDelegate> delegateSPAJMain;
 
     //NSString
 
-    @property (strong, nonatomic) NSString* stringEAPPNumber;
+    @property (weak, nonatomic) NSString* stringEAPPNumber;
 
     // VIEW
     @property (nonatomic, weak) IBOutlet UIView *viewActivityIndicator;

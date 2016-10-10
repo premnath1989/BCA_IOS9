@@ -118,8 +118,11 @@
     }
     
     if (boolHealthQuestionairre){
-        NSArray *extensions = [NSArray arrayWithObjects:@"jpg", nil];
-        arrayFinalSort = [[arrayFinalSort filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"pathExtension IN %@", extensions]] mutableCopy];
+        NSString *matchHealth = @"*healthquestionnairepdf*";
+        NSString *matchActivity = @"*activityquestionnairepdf*";
+        NSPredicate *predicateHealth = [NSPredicate predicateWithFormat:@"SELF like %@ or SELF like %@", matchHealth,matchActivity];
+        
+        arrayFinalSort = [[arrayFinalSort filteredArrayUsingPredicate:predicateHealth] mutableCopy];
     }
     
     if (boolThirdParty){
@@ -135,6 +138,11 @@
         [buttonSubmit setEnabled:YES];
     }
     else{
+        if ((!boolHealthQuestionairre)&&(!boolThirdParty)){
+            UIAlertController *alertLockForm = [alert alertInformation:@"Tenaga Penjual" stringMessage:@"Isi Data tenaga penjual terlebih dahulu agar dapat submit"];
+            
+            [self presentViewController:alertLockForm animated:YES completion:nil];
+        }
         [buttonSubmit setEnabled:NO];
     }
     //buttonSubmit
@@ -317,21 +325,32 @@
 }
 
 - (void)downloadisError{
-    [progressBar dismissViewControllerAnimated:YES completion:nil];
-    UIAlertController* alertError = [UIAlertController alertControllerWithTitle:@"Koneksi ke FTP Gagal" message:@"Pastikan perangkat terhubung ke internet yang stabil untuk mengakses FTP" preferredStyle:UIAlertControllerStyleAlert];
-    [self presentViewController:alertError animated:YES completion:nil];
-    //UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Koneksi ke FTP Gagal" message:[NSString stringWithFormat:@"Pastikan perangkat terhubung ke internet yang stabil untuk mengakses FTP"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-    //[alert show];
-    [buttonSubmit setEnabled:YES];
+    //[progressBar dismissViewControllerAnimated:YES completion:nil];
+    [progressBar dismissViewControllerAnimated:YES completion:^{
+        UIAlertController *alertLockForm = [alert alertInformation:@"Koneksi ke FTP Gagal" stringMessage:@"Pastikan perangkat terhubung ke internet yang stabil untuk mengakses FTP"];
+        [self presentViewController:alertLockForm animated:YES completion:nil];
+        
+        /*UIAlertController* alertError = [UIAlertController alertControllerWithTitle:@"Koneksi ke FTP Gagal" message:@"Pastikan perangkat terhubung ke internet yang stabil untuk mengakses FTP" preferredStyle:UIAlertControllerStyleAlert];
+        
+        [self presentViewController:alertError animated:YES completion:nil];*/
+        //UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Koneksi ke FTP Gagal" message:[NSString stringWithFormat:@"Pastikan perangkat terhubung ke internet yang stabil untuk mengakses FTP"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        //[alert show];
+        [buttonSubmit setEnabled:YES];
+    }];
 }
 
 - (void)failedConnectToFTP{
-    [progressBar dismissViewControllerAnimated:YES completion:nil];
-    UIAlertController* alertError = [UIAlertController alertControllerWithTitle:@"Koneksi ke FTP Gagal" message:@"Pastikan perangkat terhubung ke internet yang stabil untuk mengakses FTP" preferredStyle:UIAlertControllerStyleAlert];
-    [self presentViewController:alertError animated:YES completion:nil];
-    //UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Koneksi ke FTP Gagal" message:[NSString stringWithFormat:@"Pastikan perangkat terhubung ke internet yang stabil untuk mengakses FTP"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-    //[alert show];
-    [buttonSubmit setEnabled:YES];
+    [progressBar dismissViewControllerAnimated:YES completion:^{
+        /*UIAlertController* alertError = [UIAlertController alertControllerWithTitle:@"Koneksi ke FTP Gagal" message:@"Pastikan perangkat terhubung ke internet yang stabil untuk mengakses FTP" preferredStyle:UIAlertControllerStyleAlert];
+        [self presentViewController:alertError animated:YES completion:nil];*/
+        
+        UIAlertController *alertLockForm = [alert alertInformation:@"Koneksi ke FTP Gagal" stringMessage:@"Pastikan perangkat terhubung ke internet yang stabil untuk mengakses FTP"];
+        [self presentViewController:alertLockForm animated:YES completion:nil];
+        
+        //UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Koneksi ke FTP Gagal" message:[NSString stringWithFormat:@"Pastikan perangkat terhubung ke internet yang stabil untuk mengakses FTP"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        //[alert show];
+        [buttonSubmit setEnabled:YES];
+    }];
 }
 
 

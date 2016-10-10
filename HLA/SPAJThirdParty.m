@@ -24,9 +24,23 @@
 #import "Alert.h"
 #import "SIDate.h"
 
+#define NUMBERS_ONLY @"0123456789"
+#define NUMBERS_MONEY @"0123456789."
+#define CHARACTER_LIMIT_PC_F 12
+#define CHARACTER_LIMIT_FULLNAME 40
+#define CHARACTER_LIMIT_OtherID 20
+#define CHARACTER_LIMIT_Bussiness 60
+#define CHARACTER_LIMIT_ExactDuties 40
+#define CHARACTER_LIMIT_Address 30
+#define CHARACTER_LIMIT_POSTCODE 6
+#define CHARACTER_LIMIT_FOREIGN_POSTCODE 12
+#define CHARACTER_LIMIT_ANNUALINCOME 15
+#define CHARACTER_LIMIT_GSTREGNO 15
+#define CHARACTER_LIMIT_30 30
+
 #define IS_RETINA ([[UIScreen mainScreen] respondsToSelector:@selector(displayLinkWithTarget:selector:)] && ([UIScreen mainScreen].scale == 2.0))
 
-@interface SPAJThirdParty ()<SIDateDelegate>{
+@interface SPAJThirdParty ()<SIDateDelegate,UITextFieldDelegate>{
     Formatter* formatter;
     SPAJPDFAutopopulateData* spajPDFData;
     SPAJPDFWebViewController* spajPDFWebView;
@@ -115,7 +129,7 @@
     databasePath = [[NSString alloc] initWithString:
                     [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
     
-    webview=[[UIWebView alloc]initWithFrame:CGRectMake(5, 0, 960,728)];
+    webview=[[UIWebView alloc]initWithFrame:CGRectMake(5, 0, 1035,728)];
     webview.scrollView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     
     [super viewDidLoad];
@@ -135,6 +149,8 @@
     
     allAboutPDFFunctions = [[AllAboutPDFFunctions alloc]init];
     [allAboutPDFFunctions createDictionaryForRadioButton];
+    [allAboutPDFFunctions createDictionaryRevertForRadioButton];
+    [allAboutPDFFunctions createArrayRevertForRadioButton];
     
     formatter = [[Formatter alloc]init];
     spajPDFData = [[SPAJPDFAutopopulateData alloc]init];
@@ -161,6 +177,10 @@
     
     dictAgentProfile=[[NSMutableDictionary alloc]initWithDictionary:[modelAgentProfile getAgentData]];
     
+    [TextThirdPartySalary addTarget:self action:@selector(RealTimeFormat:) forControlEvents:UIControlEventEditingChanged];
+    [TextThirdPartyRevenue addTarget:self action:@selector(RealTimeFormat:) forControlEvents:UIControlEventEditingChanged];
+    [TextThirdPartyOtherIncome addTarget:self action:@selector(RealTimeFormat:) forControlEvents:UIControlEventEditingChanged];
+    
     //view B
     [RadioButtonThirdPartyAsking setSegmentName:@"RadioButtonThirdPartyAsking"];
     [RadioButtonThirdPartyAskingRelationship setSegmentName:@"RadioButtonThirdPartyAskingRelationship"];
@@ -176,7 +196,7 @@
     [TextThirdPartyBeneficiaryRelationshipOther setTextFieldName:@"TextThirdPartyBeneficiaryRelationshipOther"]; //textSebutkan
     
     //view C
-    //IBOutlet SegmentSPAJ*
+    [RadioButtonThirdPartyIDType setSegmentName:@"RadioButtonThirdPartyIDType"];
     [RadioButtonThirdPartyNationality setSegmentName:@"RadioButtonThirdPartyNationality"];
     
     [RadioButtonThirdPartyUSACitizen setSegmentName:@"RadioButtonThirdPartyUSACitizen"];
@@ -194,12 +214,12 @@
     [RadioButtonThirdPartyOtherIncome setSegmentName:@"RadioButtonThirdPartyOtherIncome"];
     
     [DateThirdPartyActive setButtonName:@"DateThirdPartyActive"];
-    [DateThridPartyBirth setButtonName:@"DateThridPartyBirth"];
-    //IBOutlet ButtonSPAJ* //tanggal npwp
+    [DateThirdPartyBirth setButtonName:@"DateThirdPartyBirth"];
+    [DateThirdPartyNPWPActive setButtonName:@"DateThirdPartyNPWPActive"];//tanggal npwp
     
-    //IBOutlet TextFieldSPAJ* //textSebutkanjenisidentitas
+    [TextThirdPartyIDTypeOther setTextFieldName:@"TextThirdPartyIDTypeOther"];
     [TextThirdPartyBeneficiaryNationalityWNA setTextFieldName:@"TextThirdPartyBeneficiaryNationalityWNA"];//textSebutkan
-    [LineThirdPartyOtherRelationship setTextFieldName:@"LineThirdPartyOtherRelationship"];//textSebutkan
+    [LineThirdPartyOtherRelationship setTextFieldName:@"TextThirdPartyOtherRelationship"];//textSebutkan
     [TextThirdPartyInsurancePurposeOther setTextFieldName:@"TextThirdPartyInsurancePurposeOther"];//textSebutkan
     
     [TextThirdPartySalary setTextFieldName:@"TextThirdPartySalary"];//penghasilan/tahun
@@ -227,48 +247,86 @@
     [TextThirdPartyHandphone2 setTextFieldName:@"TextThirdPartyHandphone2"];
     [TextThirdPartyEmail setTextFieldName:@"TextThirdPartyEmail"];
     
-    //IBOutlet TextFieldSPAJ* //textOffice1
-    //IBOutlet TextFieldSPAJ* //textOffice2
-    //IBOutlet TextFieldSPAJ* //textOfficeKodePos
-    //IBOutlet TextFieldSPAJ* //textOfficeKota
-    //IBOutlet TextFieldSPAJ* //textNomorNPWP
+    [TextThirdPartyOfficeAddress1 setTextFieldName:@"TextThirdPartyOfficeAddress1"];//textOffice1
+    [TextThirdPartyOfficeAddress2 setTextFieldName:@"TextThirdPartyOfficeAddress2"];//textOffice2
+    [TextThirdPartyOfficePostalCode setTextFieldName:@"TextThirdPartyOfficePostalCode"];//textOfficeKodePos
+    [TextThirdPartyOfficeCity setTextFieldName:@"TextThirdPartyOfficeCity"];//textOfficeKota
+    
+    [TextThirdPartyNPWPNumber setTextFieldName:@"TextThirdPartyNPWPNumber"];//textNomorNPWP
     [TextThirdPartySource setTextFieldName:@"TextThirdPartySource"];
-    //IBOutlet TextFieldSPAJ* //textSumberDanaPembelianAsuransi
+    [TextThirdPartyFundingSource setTextFieldName:@"TextThirdPartyFundingSource"]; //textSumberDanaPembelianAsuransi
     
     //view D
     [RadioButtonThirdPartyCompanyType setSegmentName:@"RadioButtonThirdPartyCompanyType"];
     [RadioButtonThirdPartyCompanyAsset setSegmentName:@"RadioButtonThirdPartyCompanyAsset"];
     
     [RadioButtonThirdPartyCompanyRevenue setSegmentName:@"RadioButtonThirdPartyCompanyRevenue"];
-    //IBOutlet SegmentSPAJ* RadioButtonRelationWithInsured
+    [RadioButtonThirdPartyCompanyRelationAssured setSegmentName:@"RadioButtonThirdPartyCompanyRelationAssured"];
     
     
     [DateThirdPartyCompanyNoAnggaranDasarExpired setButtonName:@"DateThirdPartyCompanyNoAnggaranDasarExpired"];
     [DateThirdPartyCompanySIUPExpired setButtonName:@"DateThirdPartyCompanySIUPExpired"];
     [DateThirdPartyCompanyNoTDPExpired setButtonName:@"DateThirdPartyCompanyNoTDPExpired"];
     [DateThirdPartyCompanyNoSKDPExpired setButtonName:@"DateThirdPartyCompanyNoSKDPExpired"];
-    //IBOutlet ButtonSPAJ* //tanggalNPWP
+    [DateThirdPartyCompanyNoNPWP setButtonName:@"DateThirdPartyCompanyNoNPWP"];//tanggalNPWP
     
     [TextThirdPartyCompanyTypeOther setTextFieldName:@"TextThirdPartyCompanyTypeOther"];//textSebutkan
-    //IBOutlet TextFieldSPAJ* //textHubunganCalonTertanggung//textSebutkan
-    //IBOutlet TextFieldSPAJ* //textSebutkanTujuanPembelianAsuransi//textSebutkan
+    [TextThirdPartyNonPersonOtherRelationship setTextFieldName:@"TextThirdPartyNonPersonOtherRelationship"];
+    [TextThirdPartyNonPersonInsurancePurposeOther setTextFieldName:@"TextThirdPartyNonPersonInsurancePurposeOther"];
     
-    
+    [TextThirdPartyCompanyName setTextFieldName:@"TextThirdPartyCompanyName"];
+    [TextThirdPartyCompanyDirectorName setTextFieldName:@"TextThirdPartyCompanyDirectorName"];
+    [TextThirdPartyCompanyDirectorName2 setTextFieldName:@"TextThirdPartyCompanyDirectorName2nd"];
     [TextThirdPartyCompanyNoAnggaranDasar setTextFieldName:@"TextThirdPartyCompanyNoAnggaranDasar"];
     [TextThirdPartyCompanyNoSIUP setTextFieldName:@"TextThirdPartyCompanyNoSIUP"];
     [TextThirdPartyCompanyNoTDP setTextFieldName:@"TextThirdPartyCompanyNoTDP"];
     [TextThirdPartyCompanyNoSKDP setTextFieldName:@"TextThirdPartyCompanyNoSKDP"];
-    //IBOutlet TextFieldSPAJ* //textNPWP
+    [TextThirdPartyCompanyNoNPWP setTextFieldName:@"TextThirdPartyCompanyNoNPWP"];
     [TextThirdPartyCompanySector setTextFieldName:@"TextThirdPartyCompanySector"];
     [TextThirdPartyCompanyAddress setTextFieldName:@"TextThirdPartyCompanyAddress"];
-    //IBOutlet TextFieldSPAJ* //TextThirdPartyCompanyAddress2//ini belum ada
+    [TextThirdPartyCompanyAddress2nd setTextFieldName:@"TextThirdPartyCompanyAddress2nd"]; //ini belum ada
     [TextThirdPartyCompanyCity setTextFieldName:@"TextThirdPartyCompanyCity"];
     [TextThirdPartyCompanyPostalCode setTextFieldName:@"TextThirdPartyCompanyPostalCode"];
     
     //IBOutlet TextFieldSPAJ*
     //IBOutlet TextFieldSPAJ*
+    
+    [RadioButtonThirdPartyAskingRelationship addTarget:self action:@selector(actionSegmentSPAJ:) forControlEvents:UIControlEventValueChanged];
+    [RadioButtonThirdPartyPremiPayorRelationship addTarget:self action:@selector(actionSegmentSPAJ:) forControlEvents:UIControlEventValueChanged];
+    [RadioButtonThirdPartyBeneficiaryRelationship addTarget:self action:@selector(actionSegmentSPAJ:) forControlEvents:UIControlEventValueChanged];
+    /*else if (sender==RadioButtonThirdPartyAskingRelationship){
+     
+    }*///Jenis Identitas Diri
+    
+    
+    //view E
+    [TextThirdPartyAccountHolder setTextFieldName:@"TextThirdPartyAccountHolder"];
+    [TextThirdPartyAccountNumber setTextFieldName:@"TextThirdPartyAccountNumber"];
+    [TextThirdPartyBankName setTextFieldName:@"TextThirdPartyBankName"];
+    [TextThirdPartyBankBranch setTextFieldName:@"TextThirdPartyBankBranch"];
+    
+    [RadioButtonThirdPartyIDType addTarget:self action:@selector(actionSegmentSPAJ:) forControlEvents:UIControlEventValueChanged];
+    [RadioButtonThirdPartyNationality addTarget:self action:@selector(actionSegmentSPAJ:) forControlEvents:UIControlEventValueChanged];
+    [RadioButtonThirdPartyRelationAssured addTarget:self action:@selector(actionSegmentSPAJ:) forControlEvents:UIControlEventValueChanged];
+    [RadioButtonThirdPartyCompanyType addTarget:self action:@selector(actionSegmentSPAJ:) forControlEvents:UIControlEventValueChanged];
+    
+    [self setTextFieldProperties];
     // Do any additional setup after loading the view from its nib.
 }
+
+-(void)setTextFieldProperties{
+    for (UIView *view in [stackViewForm subviews]) {
+        if (view.tag == 1){
+            for (UIView *viewDetail in [view subviews]) {
+                if ([viewDetail isKindOfClass:[TextFieldSPAJ class]]) {
+                    TextFieldSPAJ* textTemp = (TextFieldSPAJ *)viewDetail;
+                    [textTemp setDelegate:self];
+                }
+            }
+        }
+    }
+}
+
 
 #pragma mark arrayInitialization
 -(void)arrayInitializeAgentProfile{
@@ -322,16 +380,168 @@
 
 - (void)intializeArrayInsuranceReasonC{
     arrayCollectionInsurancePurchaseReasonC = [[NSMutableArray alloc]initWithObjects:@"Tabungan",@"Proteksi",@"Investasi",@"Pendidikan",@"Lainnya", nil];
-    arrayCollectionInsurancePurchaseReasonIDC = [[NSMutableArray alloc]initWithObjects:@"CheckboxThirdpartyCPurposeSaving",@"CheckboxThirdpartyCPurposeProtection",@"CheckboxThirdpartyCPurposeInvestment",@"CheckboxThirdpartyCPurposeEducation",@"CheckboxThirdpartyCPurposeOther", nil];
+    arrayCollectionInsurancePurchaseReasonIDC = [[NSMutableArray alloc]initWithObjects:@"CheckboxThirdPartyInsurancePurposeSavings",@"CheckboxThirdPartyInsurancePurposeProtection",@"CheckboxThirdPartyInsurancePurposeInvestation",@"CheckboxThirdPartyInsurancePurposeEducation",@"CheckboxThirdPartyInsurancePurposeOther", nil];
     arrayCollectionSelectedInsurancePurchaseReasonC = [[NSMutableArray alloc]initWithObjects:@"Not Checked",@"Not Checked",@"Not Checked",@"Not Checked",@"Not Checked",nil];
 }
 
 - (void)intializeArrayInsuranceReasonD{
     arrayCollectionInsurancePurchaseReasonD = [[NSMutableArray alloc]initWithObjects:@"Tabungan",@"Proteksi",@"Investasi",@"Pendidikan",@"Lainnya", nil];
-    arrayCollectionInsurancePurchaseReasonIDD = [[NSMutableArray alloc]initWithObjects:@"CheckboxThirdpartyDPurposeSaving",@"CheckboxThirdpartyDPurposeProtection",@"CheckboxThirdpartyDPurposeInvestment",@"CheckboxThirdpartyDPurposeEducation",@"CheckboxThirdpartyDPurposeOther", nil];
+    arrayCollectionInsurancePurchaseReasonIDD = [[NSMutableArray alloc]initWithObjects:@"CheckboxThirdPartyCompanyInsurancePurposeSavings",@"CheckboxThirdPartyCompanyInsurancePurposeProtection",@"CheckboxThirdPartyCompanyInsurancePurposeInvestation",@"CheckboxThirdPartyCompanyInsurancePurposeEducation",@"CheckboxThirdPartyCompanyInsurancePurposeOther", nil];
     arrayCollectionSelectedInsurancePurchaseReasonD = [[NSMutableArray alloc]initWithObjects:@"Not Checked",@"Not Checked",@"Not Checked",@"Not Checked",@"Not Checked",nil];
 }
 
+-(void)setTextFieldEnabled:(TextFieldSPAJ *)textFieldSPAJInput BoolEnabled:(BOOL)boolEnabled{
+    if (boolEnabled){
+        [textFieldSPAJInput setEnabled:YES];
+        [textFieldSPAJInput setBackgroundColor:[UIColor whiteColor]];
+    }
+    else{
+        [textFieldSPAJInput setEnabled:NO];
+        [textFieldSPAJInput setBackgroundColor:[UIColor lightGrayColor]];
+    }
+}
+
+-(BOOL)checkMandatoryFields{
+    NSMutableArray *arrayMandatorySegment = [[NSMutableArray alloc]init];
+    NSMutableArray *arrayMandatoryTextField = [[NSMutableArray alloc]init];
+    
+    [arrayMandatorySegment addObject:RadioButtonThirdPartyCorrespondanceAddress];
+    [arrayMandatorySegment addObject:RadioButtonThirdPartyRelationAssured];
+    
+    [arrayMandatoryTextField addObject:TextThirdPartyCIN];
+    [arrayMandatoryTextField addObject:TextThirdPartyFullName];
+    [arrayMandatoryTextField addObject:TextThirdPartyIDNumber];
+    [arrayMandatoryTextField addObject:TextThirdPartyHomeAddress];
+    [arrayMandatoryTextField addObject:TextThirdPartyHomeCity];
+    [arrayMandatoryTextField addObject:TextThirdPartyHomePostalCode];
+    [arrayMandatoryTextField addObject:TextThirdPartySource];
+    
+    for (int x=0;x<[arrayMandatorySegment count];x++){
+        SegmentSPAJ* segmentTemp = (SegmentSPAJ *)[arrayMandatorySegment objectAtIndex:x];
+        if (segmentTemp.selectedSegmentIndex == UISegmentedControlNoSegment) {
+            UIAlertController *alertLockForm = [alert alertInformation:@"Data Tidak Lengkap" stringMessage:[NSString stringWithFormat:@"Mohon lengkapi data %@ terlbih dahulu",[segmentTemp getSegmentName]]];
+            [self presentViewController:alertLockForm animated:YES completion:nil];
+            return false;
+        }
+    }
+    
+    for (int x=0;x<[arrayMandatoryTextField count];x++){
+        TextFieldSPAJ* textTemp = (TextFieldSPAJ *)[arrayMandatoryTextField objectAtIndex:x];
+        if (textTemp.text.length<=0) {
+            UIAlertController *alertLockForm = [alert alertInformation:@"Data Tidak Lengkap" stringMessage:[NSString stringWithFormat:@"Mohon lengkapi data %@ terlbih dahulu",[textTemp getTextFieldName]]];
+            [self presentViewController:alertLockForm animated:YES completion:nil];
+            return false;
+        }
+    }
+    
+    return true;
+}
+
+-(IBAction)actionSegmentSPAJ:(SegmentSPAJ *)sender{
+    if (sender==RadioButtonThirdPartyAskingRelationship){
+        if (sender.selectedSegmentIndex == [sender numberOfSegments]-1){
+            //[TextThirdPartyAskingRelationshipOther setEnabled:YES];
+            [self setTextFieldEnabled:TextThirdPartyAskingRelationshipOther BoolEnabled:YES];
+        }
+        else if (sender.selectedSegmentIndex == UISegmentedControlNoSegment){
+            [self setTextFieldEnabled:TextThirdPartyAskingRelationshipOther BoolEnabled:NO];
+        }
+        else {
+            //[TextThirdPartyAskingRelationshipOther setEnabled:NO];
+            [self setTextFieldEnabled:TextThirdPartyAskingRelationshipOther BoolEnabled:NO];
+        }
+        //TextThirdPartyAskingRelationshipOther
+    }
+    else if (sender==RadioButtonThirdPartyPremiPayorRelationship){
+        if (sender.selectedSegmentIndex == [sender numberOfSegments]-1){
+            //[TextThirdPartyAskingRelationshipOther setEnabled:YES];
+            [self setTextFieldEnabled:TextThirdPartyPremiPayorRelationshipOther BoolEnabled:YES];
+        }
+        else if (sender.selectedSegmentIndex == UISegmentedControlNoSegment){
+            [self setTextFieldEnabled:TextThirdPartyPremiPayorRelationshipOther BoolEnabled:NO];
+        }
+        else {
+            //[TextThirdPartyAskingRelationshipOther setEnabled:NO];
+            [self setTextFieldEnabled:TextThirdPartyPremiPayorRelationshipOther BoolEnabled:NO];
+        }
+        //TextThirdPartyPremiPayorRelationshipOther
+    }
+    else if (sender==RadioButtonThirdPartyBeneficiaryRelationship){
+        if (sender.selectedSegmentIndex == [sender numberOfSegments]-1){
+            //[TextThirdPartyAskingRelationshipOther setEnabled:YES];
+            [self setTextFieldEnabled:TextThirdPartyBeneficiaryRelationshipOther BoolEnabled:YES];
+        }
+        else if (sender.selectedSegmentIndex == UISegmentedControlNoSegment){
+            [self setTextFieldEnabled:TextThirdPartyBeneficiaryRelationshipOther BoolEnabled:NO];
+        }
+        else {
+            //[TextThirdPartyAskingRelationshipOther setEnabled:NO];
+            [self setTextFieldEnabled:TextThirdPartyBeneficiaryRelationshipOther BoolEnabled:NO];
+        }
+        //TextThirdPartyBeneficiaryRelationshipOther
+    }
+    
+    else if (sender==RadioButtonThirdPartyIDType){
+        if (sender.selectedSegmentIndex == [sender numberOfSegments]-1){
+            //[TextThirdPartyAskingRelationshipOther setEnabled:YES];
+            [self setTextFieldEnabled:TextThirdPartyIDTypeOther BoolEnabled:YES];
+        }
+        else if (sender.selectedSegmentIndex == UISegmentedControlNoSegment){
+            [self setTextFieldEnabled:TextThirdPartyIDTypeOther BoolEnabled:NO];
+        }
+        else {
+            //[TextThirdPartyAskingRelationshipOther setEnabled:NO];
+            [self setTextFieldEnabled:TextThirdPartyIDTypeOther BoolEnabled:NO];
+        }
+    }//Jenis Identitas Diri
+    
+    else if (sender==RadioButtonThirdPartyNationality){
+        if (sender.selectedSegmentIndex == [sender numberOfSegments]-1){
+            //[TextThirdPartyAskingRelationshipOther setEnabled:YES];
+            [self setTextFieldEnabled:TextThirdPartyBeneficiaryNationalityWNA BoolEnabled:YES];
+        }
+        else if (sender.selectedSegmentIndex == UISegmentedControlNoSegment){
+            [self setTextFieldEnabled:TextThirdPartyBeneficiaryNationalityWNA BoolEnabled:NO];
+        }
+        else {
+            //[TextThirdPartyAskingRelationshipOther setEnabled:NO];
+            [self setTextFieldEnabled:TextThirdPartyBeneficiaryNationalityWNA BoolEnabled:NO];
+        }
+        //TextThirdPartyBeneficiaryNationalityWNA
+    }
+    else if (sender==RadioButtonThirdPartyRelationAssured){
+        if (sender.selectedSegmentIndex == [sender numberOfSegments]-1){
+            //[TextThirdPartyAskingRelationshipOther setEnabled:YES];
+            [self setTextFieldEnabled:LineThirdPartyOtherRelationship BoolEnabled:YES];
+        }
+        else if (sender.selectedSegmentIndex == UISegmentedControlNoSegment){
+            [self setTextFieldEnabled:LineThirdPartyOtherRelationship BoolEnabled:NO];
+        }
+        else {
+            //[TextThirdPartyAskingRelationshipOther setEnabled:NO];
+            [self setTextFieldEnabled:LineThirdPartyOtherRelationship BoolEnabled:NO];
+        }
+        //LineThirdPartyOtherRelationship
+    }
+    
+    else if (sender==RadioButtonThirdPartyCompanyType){
+        if (sender.selectedSegmentIndex == [sender numberOfSegments]-1){
+            //[TextThirdPartyAskingRelationshipOther setEnabled:YES];
+            [self setTextFieldEnabled:TextThirdPartyCompanyTypeOther BoolEnabled:YES];
+        }
+        else if (sender.selectedSegmentIndex == UISegmentedControlNoSegment){
+            [self setTextFieldEnabled:TextThirdPartyCompanyTypeOther BoolEnabled:NO];
+        }
+        else {
+            //[TextThirdPartyAskingRelationshipOther setEnabled:NO];
+            [self setTextFieldEnabled:TextThirdPartyCompanyTypeOther BoolEnabled:NO];
+        }
+        //TextThirdPartyCompanyTypeOther
+    }
+    /*else if (sender==RadioButtonThirdPartyAskingRelationship){
+        
+    }*///Hubungan Dengan Calon Tertanggung
+}
 
 - (IBAction)actionDate:(ButtonSPAJ *)sender
 {
@@ -359,122 +569,114 @@
     [SIDatePopover presentPopoverFromRect:[sender bounds]  inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:NO];
 }
 
+- (IBAction)btnDOBPressed:(ButtonSPAJ *)sender
+{
+    UIStoryboard *sharedStoryboard = [UIStoryboard storyboardWithName:@"SharedStoryboard" bundle:Nil];
+    LADate = [sharedStoryboard instantiateViewControllerWithIdentifier:@"showDate"];
+    LADate.delegate = self;
+    LADate.btnSender = 1;
+    LADate.msgDate = [formatter getDateToday:@"dd/MM/yyyy"];
+    //LADate.msgDate = sender.titleLabel.text;
+    
+    dobPopover = [[UIPopoverController alloc] initWithContentViewController:LADate];
+    [dobPopover setPopoverContentSize:CGSizeMake(100.0f, 100.0f)];
+    
+    CGRect rect = [sender frame];
+    rect.origin.y = [sender frame].origin.y + 40;
+    
+    [dobPopover presentPopoverFromRect:[sender bounds]  inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:NO];
+}
+
+
 
 -(IBAction)actionCloseForm:(UIButton *)sender{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(IBAction)getUISwitchValue:(UIButton *)sender{
-    NSMutableArray* arrayFormAnswers = [[NSMutableArray alloc]init];
-    
-    int i=1;
-    for (UIView *view in [stackViewForm subviews]) {
-        if (view.tag == 1){
-            for (UIView *viewDetail in [view subviews]) {
-                if ([viewDetail isKindOfClass:[SegmentSPAJ class]]) {
-                    SegmentSPAJ* segmentTemp = (SegmentSPAJ *)viewDetail;
-                    NSString *value= [allAboutPDFFunctions GetOutputForRadioButton:[segmentTemp titleForSegmentAtIndex:segmentTemp.selectedSegmentIndex]];
-                                        
-                    NSString *elementID = [segmentTemp getSegmentName]?:[NSString stringWithFormat:@"seg%i",i];;
-                    
-                    NSMutableDictionary *dictAnswer = [allAboutPDFFunctions dictAnswers:dictTransaction ElementID:elementID Value:value Section:@"TP" SPAJHtmlID:[[modelSPAJHtml selectActiveHtmlForSection:@"TP"] valueForKey:@"SPAJHtmlID"]];
-                    
-                    [arrayFormAnswers addObject:dictAnswer];
-                    i++;
-                }
-                
-                if ([viewDetail isKindOfClass:[TextFieldSPAJ class]]) {
-                    NSLog(@"tf");
-                    TextFieldSPAJ* textTemp = (TextFieldSPAJ *)viewDetail;
-                    NSString *value = textTemp.text;
-                    NSString *elementID = [textTemp getTextFieldName]?:[NSString stringWithFormat:@"textField%i",i];
-                    
-                    NSMutableDictionary *dictAnswer = [allAboutPDFFunctions dictAnswers:dictTransaction ElementID:elementID Value:value Section:@"TP" SPAJHtmlID:[[modelSPAJHtml selectActiveHtmlForSection:@"TP"] valueForKey:@"SPAJHtmlID"]];
-                    
-                    [arrayFormAnswers addObject:dictAnswer];
-                    i++;
-                }
-                
-                if ([viewDetail isKindOfClass:[ButtonSPAJ class]]) {
-                    NSLog(@"btn");
-                    ButtonSPAJ* buttonTemp = (ButtonSPAJ *)viewDetail;
-                    NSString *value = buttonTemp.currentTitle;
-                    NSString *elementID = [buttonTemp getButtonName]?:[NSString stringWithFormat:@"btnView%i",i];
-                    
-                    NSMutableDictionary *dictAnswer = [allAboutPDFFunctions dictAnswers:dictTransaction ElementID:elementID Value:value Section:@"TP" SPAJHtmlID:[[modelSPAJHtml selectActiveHtmlForSection:@"TP"] valueForKey:@"SPAJHtmlID"]];
-                    
-                    [arrayFormAnswers addObject:dictAnswer];
-                    i++;
+    @try {
+        //if ([self checkMandatoryFields]){
+            NSMutableArray* arrayFormAnswers = [[NSMutableArray alloc]init];
+            [buttonSubmit setEnabled:false];
+            int i=1;
+            for (UIView *view in [stackViewForm subviews]) {
+                if (view.tag == 1){
+                    for (UIView *viewDetail in [view subviews]) {
+                        if ([viewDetail isKindOfClass:[SegmentSPAJ class]]) {
+                            
+                            SegmentSPAJ* segmentTemp = (SegmentSPAJ *)viewDetail;
+                            if (segmentTemp.selectedSegmentIndex != UISegmentedControlNoSegment){
+                                NSString *value= [allAboutPDFFunctions GetOutputForRadioButton:[segmentTemp titleForSegmentAtIndex:segmentTemp.selectedSegmentIndex]];
+                                
+                                NSString *elementID = [segmentTemp getSegmentName]?:[NSString stringWithFormat:@"seg%i",i];;
+                                
+                                NSMutableDictionary *dictAnswer = [allAboutPDFFunctions dictAnswers:dictTransaction ElementID:elementID Value:value Section:@"TP" SPAJHtmlID:[[modelSPAJHtml selectActiveHtmlForSection:@"TP"] valueForKey:@"SPAJHtmlID"]];
+                            
+                                [arrayFormAnswers addObject:dictAnswer];
+                            }
+                            i++;
+                        }
+                        
+                        if ([viewDetail isKindOfClass:[TextFieldSPAJ class]]) {
+                            NSLog(@"tf");
+                            TextFieldSPAJ* textTemp = (TextFieldSPAJ *)viewDetail;
+                            NSString *value = textTemp.text;
+                            NSString *elementID = [textTemp getTextFieldName]?:[NSString stringWithFormat:@"textField%i",i];
+                            
+                            NSMutableDictionary *dictAnswer = [allAboutPDFFunctions dictAnswers:dictTransaction ElementID:elementID Value:value Section:@"TP" SPAJHtmlID:[[modelSPAJHtml selectActiveHtmlForSection:@"TP"] valueForKey:@"SPAJHtmlID"]];
+                            
+                            [arrayFormAnswers addObject:dictAnswer];
+                            i++;
+                        }
+                        
+                        if ([viewDetail isKindOfClass:[ButtonSPAJ class]]) {
+                            NSLog(@"btn");
+                            ButtonSPAJ* buttonTemp = (ButtonSPAJ *)viewDetail;
+                            NSString *value = buttonTemp.currentTitle;
+                            NSString *elementID = [buttonTemp getButtonName]?:[NSString stringWithFormat:@"btnView%i",i];
+                            
+                            NSMutableDictionary *dictAnswer = [allAboutPDFFunctions dictAnswers:dictTransaction ElementID:elementID Value:value Section:@"TP" SPAJHtmlID:[[modelSPAJHtml selectActiveHtmlForSection:@"TP"] valueForKey:@"SPAJHtmlID"]];
+                            
+                            [arrayFormAnswers addObject:dictAnswer];
+                            i++;
+                        }
+                    }
                 }
             }
-        }
+            
+            for (int x=0;x<[arrayCollectionSelectedInsurancePurchaseReasonC count];x++){
+                NSString *value = [allAboutPDFFunctions GetOutputForInsurancePurposeCheckBox:[arrayCollectionSelectedInsurancePurchaseReasonC objectAtIndex:x]];
+                NSString *elementID = [arrayCollectionInsurancePurchaseReasonIDC objectAtIndex:x];
+                
+                NSMutableDictionary *dictAnswer = [allAboutPDFFunctions dictAnswers:dictTransaction ElementID:elementID Value:value Section:@"TP" SPAJHtmlID:[[modelSPAJHtml selectActiveHtmlForSection:@"TP"] valueForKey:@"SPAJHtmlID"]];
+                
+                [arrayFormAnswers addObject:dictAnswer];
+            }
+            
+            for (int x=0;x<[arrayCollectionSelectedInsurancePurchaseReasonD count];x++){
+                NSString *value = [allAboutPDFFunctions GetOutputForInsurancePurposeCheckBox:[arrayCollectionSelectedInsurancePurchaseReasonD objectAtIndex:x]];
+                NSString *elementID = [arrayCollectionInsurancePurchaseReasonIDD objectAtIndex:x];
+                
+                NSMutableDictionary *dictAnswer = [allAboutPDFFunctions dictAnswers:dictTransaction ElementID:elementID Value:value Section:@"TP" SPAJHtmlID:[[modelSPAJHtml selectActiveHtmlForSection:@"TP"] valueForKey:@"SPAJHtmlID"]];
+                
+                [arrayFormAnswers addObject:dictAnswer];
+            }
+            
+            //NSLog(@"answers %@",[allAboutPDFFunctions createDictionaryForSave:arrayFormAnswers]);
+            [self savetoDB:[allAboutPDFFunctions createDictionaryForSave:arrayFormAnswers]];
+        //}
+    } @catch (NSException *exception) {
+        [buttonSubmit setEnabled:true];
+        NSLog(@"error %@",exception);
+        UIAlertController *alertLockForm = [alert alertInformation:@"Data Tidak Lengkap" stringMessage:@"Mohon lengkapi data pihak ketiga terlbih dahulu"];
+        //[self presentViewController:alertLockForm animated:YES completion:nil];
+    } @finally {
+        
     }
     
-    /*for (int x=0;x<[arrayCollectionSelectedInsurancePurchaseReasonC count];x++){
-        //NSString *value = [arrayCollectionSelectedInsurancePurchaseReason objectAtIndex:x];
-        NSString *value = [allAboutPDFFunctions GetOutputForInsurancePurposeCheckBox:[arrayCollectionSelectedInsurancePurchaseReasonC objectAtIndex:x]];
-        NSString *elementID = buttonInsurancePurposeC;
-        
-        NSMutableDictionary *dictAnswer = [allAboutPDFFunctions dictAnswers:dictTransaction ElementID:elementID Value:value Section:@"TP" SPAJHtmlID:[[modelSPAJHtml selectActiveHtmlForSection:@"TP"] valueForKey:@"SPAJHtmlID"]];
-        
-        [arrayFormAnswers addObject:dictAnswer];
-    }
-    
-    for (int x=0;x<[arrayCollectionSelectedInsurancePurchaseReasonD count];x++){
-        //NSString *value = [arrayCollectionSelectedInsurancePurchaseReason objectAtIndex:x];
-        NSString *value = [allAboutPDFFunctions GetOutputForInsurancePurposeCheckBox:[arrayCollectionSelectedInsurancePurchaseReasonD objectAtIndex:x]];
-        NSString *elementID = buttonInsurancePurposeD;
-        
-        NSMutableDictionary *dictAnswer = [allAboutPDFFunctions dictAnswers:dictTransaction ElementID:elementID Value:value Section:@"TP" SPAJHtmlID:[[modelSPAJHtml selectActiveHtmlForSection:@"TP"] valueForKey:@"SPAJHtmlID"]];
-        
-        [arrayFormAnswers addObject:dictAnswer];
-    }*/
-    
-    for (int x=0;x<[arrayCollectionSelectedInsurancePurchaseReasonC count];x++){
-        NSString *value = [allAboutPDFFunctions GetOutputForInsurancePurposeCheckBox:[arrayCollectionSelectedInsurancePurchaseReasonC objectAtIndex:x]];
-        NSString *elementID = [arrayCollectionInsurancePurchaseReasonIDC objectAtIndex:x];
-        
-        NSMutableDictionary *dictAnswer = [allAboutPDFFunctions dictAnswers:dictTransaction ElementID:elementID Value:value Section:@"TP" SPAJHtmlID:[[modelSPAJHtml selectActiveHtmlForSection:@"TP"] valueForKey:@"SPAJHtmlID"]];
-        
-        [arrayFormAnswers addObject:dictAnswer];
-    }
-    
-    for (int x=0;x<[arrayCollectionSelectedInsurancePurchaseReasonD count];x++){
-        NSString *value = [allAboutPDFFunctions GetOutputForInsurancePurposeCheckBox:[arrayCollectionSelectedInsurancePurchaseReasonD objectAtIndex:x]];
-        NSString *elementID = [arrayCollectionInsurancePurchaseReasonIDD objectAtIndex:x];
-        
-        NSMutableDictionary *dictAnswer = [allAboutPDFFunctions dictAnswers:dictTransaction ElementID:elementID Value:value Section:@"TP" SPAJHtmlID:[[modelSPAJHtml selectActiveHtmlForSection:@"TP"] valueForKey:@"SPAJHtmlID"]];
-        
-        [arrayFormAnswers addObject:dictAnswer];
-    }
-    
-    //NSLog(@"answers %@",[allAboutPDFFunctions createDictionaryForSave:arrayFormAnswers]);
-    [self savetoDB:[allAboutPDFFunctions createDictionaryForSave:arrayFormAnswers]];
 }
 
 -(IBAction)actionButtonInsuranceReasonTappedC:(ButtonSPAJ *)sender{
-    
-    /*for (int i=0;i<[arrayCollectionSelectedInsurancePurchaseReasonC count];i++){
-        if ([[arrayCollectionSelectedInsurancePurchaseReasonC objectAtIndex:i] isEqualToString:@"Not Checked"]){
-            [arrayCollectionSelectedInsurancePurchaseReasonC removeObjectAtIndex:i];
-        }
-    }
-    
-    if ([sender isSelected]){
-        [sender setSelected:NO];
-        int indexToClear = [arrayCollectionSelectedInsurancePurchaseReasonC indexOfObject:sender.currentTitle];
-        [arrayCollectionSelectedInsurancePurchaseReasonC removeObjectAtIndex:indexToClear];
-    }
-    else{
-        [arrayCollectionSelectedInsurancePurchaseReasonC addObject:sender.currentTitle];
-        [sender setSelected:YES];
-    }
-    
-    for (int i=0;i<[arrayCollectionInsurancePurchaseReasonC count];i++){
-        if (i >= [arrayCollectionSelectedInsurancePurchaseReasonC count]){
-            [arrayCollectionSelectedInsurancePurchaseReasonC addObject:@"Not Checked"];
-        }
-    }*/
     if ([sender isSelected]){
         [sender setSelected:NO];
         [arrayCollectionSelectedInsurancePurchaseReasonC replaceObjectAtIndex:sender.tag withObject:@"Not Checked"];
@@ -497,7 +699,7 @@
                 for (UIView *viewDetail in [view subviews]) {
                     if ([viewDetail isKindOfClass:[SegmentSPAJ class]]) {
                         SegmentSPAJ* segmentTemp = (SegmentSPAJ *)viewDetail;
-                        NSMutableArray* valueArray = [[NSMutableArray alloc]initWithArray:[modelSPAJAnswers getSPAJAnswerValue:[segmentTemp getSegmentName] SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"AF"]];
+                        NSMutableArray* valueArray = [[NSMutableArray alloc]initWithArray:[modelSPAJAnswers getSPAJAnswerValue:[segmentTemp getSegmentName] SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"TP"]];
                         if ([valueArray count]>0){
                             NSString* stringValue = [valueArray objectAtIndex:0];
                             
@@ -508,17 +710,23 @@
                                 if ([[arrayRadioObjectReturn valueForKey:@"Object"] containsObject:[segmentTemp titleForSegmentAtIndex:i]])
                                 {
                                     [segmentTemp setSelectedSegmentIndex:i];
+                                    [self actionSegmentSPAJ:segmentTemp];
                                     break;
                                 }
-                                //else {Do Nothing - these are not the droi, err, segment we are looking for}
+                                else{
+                                    [self actionSegmentSPAJ:segmentTemp];
+                                }
                             }
+                        }
+                        else{
+                            [self actionSegmentSPAJ:segmentTemp];
                         }
                         i++;
                     }
                     
                     if ([viewDetail isKindOfClass:[TextFieldSPAJ class]]) {
                         TextFieldSPAJ* textTemp = (TextFieldSPAJ *)viewDetail;
-                        NSMutableArray* valueArray = [[NSMutableArray alloc]initWithArray:[modelSPAJAnswers getSPAJAnswerValue:[textTemp getTextFieldName] SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"AF"]];
+                        NSMutableArray* valueArray = [[NSMutableArray alloc]initWithArray:[modelSPAJAnswers getSPAJAnswerValue:[textTemp getTextFieldName] SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"TP"]];
                         if ([valueArray count]>0){
                             NSString* stringValue = [valueArray objectAtIndex:0];
                             [textTemp setText:stringValue];
@@ -531,7 +739,7 @@
                     
                     if ([viewDetail isKindOfClass:[TextViewSPAJ class]]) {
                         TextViewSPAJ* textTemp = (TextViewSPAJ *)viewDetail;
-                        NSMutableArray* valueArray = [[NSMutableArray alloc]initWithArray:[modelSPAJAnswers getSPAJAnswerValue:[textTemp getTextViewName] SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"AF"]];
+                        NSMutableArray* valueArray = [[NSMutableArray alloc]initWithArray:[modelSPAJAnswers getSPAJAnswerValue:[textTemp getTextViewName] SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"TP"]];
                         if ([valueArray count]>0){
                             NSString* stringValue = [valueArray objectAtIndex:0];
                             [textTemp setText:stringValue];
@@ -542,8 +750,21 @@
                         i++;
                     }
                     
+                    if ([viewDetail isKindOfClass:[ButtonSPAJ class]]) {
+                        ButtonSPAJ* buttonTemp = (ButtonSPAJ *)viewDetail;
+                        NSMutableArray* valueArray = [[NSMutableArray alloc]initWithArray:[modelSPAJAnswers getSPAJAnswerValue:[buttonTemp getButtonName] SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"TP"]];
+                        if ([valueArray count]>0){
+                            NSString* stringValue = [valueArray objectAtIndex:0];
+                            [buttonTemp setTitle:stringValue forState:UIControlStateNormal];
+                        }
+                        else if ([valueArray count]>1){
+                            
+                        }
+                        i++;
+                    }
+                    
                     if ([viewDetail isKindOfClass:[collectionReasonInsurancePurchaseC class]]) {
-                        valueCheckBoxReasonArrayC = [[NSMutableArray alloc]initWithArray:[modelSPAJAnswers getSPAJAnswerElementValue:@"CheckboxThirdPartyCPurpose" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"TP"]];
+                        valueCheckBoxReasonArrayC = [[NSMutableArray alloc]initWithArray:[modelSPAJAnswers getSPAJAnswerElementValue:@"CheckboxThirdPartyInsurancePurpose" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"TP"]];
                         if ([valueCheckBoxReasonArrayC count]>0){
                             NSLog(@"ElementValue %@",valueCheckBoxReasonArrayC);
                         }
@@ -551,7 +772,7 @@
                     }
                     
                     if ([viewDetail isKindOfClass:[collectionReasonInsurancePurchaseD class]]) {
-                        valueCheckBoxReasonArrayD = [[NSMutableArray alloc]initWithArray:[modelSPAJAnswers getSPAJAnswerElementValue:@"CheckboxThirdPartyDPurpose" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"TP"]];
+                        valueCheckBoxReasonArrayD = [[NSMutableArray alloc]initWithArray:[modelSPAJAnswers getSPAJAnswerElementValue:@"CheckboxThirdPartyCompanyInsurancePurpose" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"TP"]];
                         if ([valueCheckBoxReasonArrayD count]>0){
                             NSLog(@"ElementValue %@",valueCheckBoxReasonArrayD);
                         }
@@ -568,28 +789,6 @@
 }
 
 -(IBAction)actionButtonInsuranceReasonTappedD:(ButtonSPAJ *)sender{
-    
-    /*for (int i=0;i<[arrayCollectionSelectedInsurancePurchaseReasonD count];i++){
-        if ([[arrayCollectionSelectedInsurancePurchaseReasonD objectAtIndex:i] isEqualToString:@"Not Checked"]){
-            [arrayCollectionSelectedInsurancePurchaseReasonD removeObjectAtIndex:i];
-        }
-    }
-    
-    if ([sender isSelected]){
-        [sender setSelected:NO];
-        int indexToClear = [arrayCollectionSelectedInsurancePurchaseReasonD indexOfObject:sender.currentTitle];
-        [arrayCollectionSelectedInsurancePurchaseReasonD removeObjectAtIndex:indexToClear];
-    }
-    else{
-        [arrayCollectionSelectedInsurancePurchaseReasonD addObject:sender.currentTitle];
-        [sender setSelected:YES];
-    }
-    
-    for (int i=0;i<[arrayCollectionInsurancePurchaseReasonD count];i++){
-        if (i >= [arrayCollectionSelectedInsurancePurchaseReasonD count]){
-            [arrayCollectionSelectedInsurancePurchaseReasonD addObject:@"Not Checked"];
-        }
-    }*/
     if ([sender isSelected]){
         [sender setSelected:NO];
         [arrayCollectionSelectedInsurancePurchaseReasonD replaceObjectAtIndex:sender.tag withObject:@"Not Checked"];
@@ -611,7 +810,7 @@
         else{
             [sender setSelected:YES];
             NSLog(@"reason %@",[[valueCheckBoxReasonArrayC objectAtIndex:sender.tag] valueForKey:@"Value"]);
-            [arrayCollectionSelectedInsurancePurchaseReason replaceObjectAtIndex:sender.tag withObject:sender.currentTitle];
+            [arrayCollectionSelectedInsurancePurchaseReasonC replaceObjectAtIndex:sender.tag withObject:sender.currentTitle];
         }
     }
     
@@ -621,19 +820,19 @@
 }
 
 -(void)loadCheckBoxReasonDataD:(ButtonSPAJ *)sender{
-    if ([valueCheckBoxReasonArrayC count]>0){
-        if ([[[valueCheckBoxReasonArrayC objectAtIndex:sender.tag] valueForKey:@"Value"] isEqualToString:@"Not Checked"]){
+    if ([valueCheckBoxReasonArrayD count]>0){
+        if ([[[valueCheckBoxReasonArrayD objectAtIndex:sender.tag] valueForKey:@"Value"] isEqualToString:@"Not Checked"]){
             [sender setSelected:NO];
         }
         else{
             [sender setSelected:YES];
-            NSLog(@"reason %@",[[valueCheckBoxReasonArrayC objectAtIndex:sender.tag] valueForKey:@"Value"]);
-            [arrayCollectionSelectedInsurancePurchaseReason replaceObjectAtIndex:sender.tag withObject:sender.currentTitle];
+            NSLog(@"reason %@",[[valueCheckBoxReasonArrayD objectAtIndex:sender.tag] valueForKey:@"Value"]);
+            [arrayCollectionSelectedInsurancePurchaseReasonD replaceObjectAtIndex:sender.tag withObject:sender.currentTitle];
         }
     }
     
-    if (([sender tag]+1)==[valueCheckBoxReasonArrayC count]){
-        valueCheckBoxReasonArrayC = [[NSMutableArray alloc]init];
+    if (([sender tag]+1)==[valueCheckBoxReasonArrayD count]){
+        valueCheckBoxReasonArrayD = [[NSMutableArray alloc]init];
     }
 }
 
@@ -719,7 +918,135 @@
     return dictForSignature;
 }
 
+#pragma Mark Character Limitation
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    NSUInteger newLength = [textField.text length] + [string length] - range.length;
+    
+    NSArray* arrayCaharacterLimit6 = [[NSArray alloc]initWithObjects:TextThirdPartyHomePostalCode,TextThirdPartyCompanyPostalCode, nil];
+    
+    NSArray* arrayCaharacterLimit7 = [[NSArray alloc]initWithObjects:TextThirdPartyCIN, nil];
+    
+    NSArray* arrayCaharacterLimit13 = [[NSArray alloc]initWithObjects:TextThirdPartyHandphone1,TextThirdPartyHandphone1,TextThirdPartyHomeTelephoneSuffix, nil];
+    
+    NSArray* arrayCaharacterLimit14 = [[NSArray alloc]initWithObjects:TextThirdPartySalary,TextThirdPartyRevenue,TextThirdPartyOtherIncome, nil];
+    
+    NSArray* arrayCaharacterLimit16 = [[NSArray alloc]initWithObjects:TextThirdPartyIDNumber, nil]; //untuk nomor identitas
+    
+    NSArray* arrayCaharacterLimit17 = [[NSArray alloc]initWithObjects:TextThirdPartyHomeCity,TextThirdPartyCompanyCity, nil];
+    
+    NSArray* arrayCaharacterLimit28 = [[NSArray alloc]initWithObjects:TextThirdPartyBirthPlace, nil];
+    
+    NSArray* arrayCaharacterLimit30 = [[NSArray alloc]initWithObjects:TextThirdPartyFullName,TextThirdPartyFullName2nd,TextThirdPartyCompany,TextThirdPartyMainJob,TextThirdPartyWorkScope,TextThirdPartyPosition,TextThirdPartyJobDescription,TextThirdPartySideJob,TextThirdPartyHomeAddress,TextThirdPartyHomeAddress2nd,TextThirdPartyEmail,TextThirdPartySource, nil];
+    
+    
+    if ([arrayCaharacterLimit6 containsObject:textField]){
+        return (newLength <= 6);
+    }
+    else if ([arrayCaharacterLimit7 containsObject:textField]){
+        return (newLength <= 7);
+    }
+    else if ([arrayCaharacterLimit13 containsObject:textField]){
+        return (newLength <= 13);
+    }
+    else if ([arrayCaharacterLimit14 containsObject:textField]){
+        BOOL return13digit = FALSE;
+        //KY - IMPORTANT - PUT THIS LINE TO DETECT THE FIRST CHARACTER PRESSED....
+        //This method is being called before the content of textField.text is changed.
+        NSString * AI = [textField.text stringByReplacingCharactersInRange:range withString:string];
+        
+        if ([AI rangeOfString:@"."].length == 1) {
+            NSArray  *comp = [AI componentsSeparatedByString:@"."];
+            NSString *get_num = [[comp objectAtIndex:0] stringByReplacingOccurrencesOfString:@"," withString:@""];
+            int c = [get_num length];
+            return13digit = (c > 15);
+            
+        } else if([AI rangeOfString:@"."].length == 0) {
+            NSArray  *comp = [AI componentsSeparatedByString:@"."];
+            NSString *get_num = [[comp objectAtIndex:0] stringByReplacingOccurrencesOfString:@"," withString:@""];
+            int c = [get_num length];
+            return13digit = (c  > 15);
+        }
+        
+        NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
+        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        
+        if( return13digit == TRUE) {
+            return (([string isEqualToString:filtered])&&(newLength <= 15));
+        } else {
+            return (([string isEqualToString:filtered])&&(newLength <= 19));
+        }
+        //return (newLength <= 14);
+    }
+    else if ([arrayCaharacterLimit16 containsObject:textField]){
+        return (newLength <= 16);
+    }
+    else if ([arrayCaharacterLimit17 containsObject:textField]){
+        return (newLength <= 17);
+    }
+    else if ([arrayCaharacterLimit28 containsObject:textField]){
+        return (newLength <= 28);
+    }
+    else if ([arrayCaharacterLimit30 containsObject:textField]){
+        return (newLength <= 30);
+    }
+    else if (textField == TextThirdPartyHomeTelephonePrefix){
+        return (newLength <= 4);
+    }
+    
+}
+
+-(void)RealTimeFormat:(UITextField *)sender{
+    NSNumber *plainNumber = [formatter convertAnyNonDecimalNumberToString:sender.text];
+    [sender setText:[formatter numberToCurrencyDecimalFormatted:plainNumber]];
+}
+
+
 #pragma mark delegate date
+-(void)datePick:(DateViewController *)inController strDate:(NSString *)aDate strAge:(NSString *)aAge intAge:(int)bAge intANB:(int)aANB
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+    NSString *selectDate = aDate;
+    NSDate *startDate = [dateFormatter dateFromString:selectDate];
+    
+    NSString *todayDate = [dateFormatter stringFromDate:[NSDate date]];
+    NSDate *endDate = [dateFormatter dateFromString:todayDate];
+    
+    unsigned flags = NSDayCalendarUnit;
+    NSDateComponents *difference = [[NSCalendar currentCalendar] components:flags fromDate:startDate toDate:endDate options:0];
+    int diffDays = [difference day];
+    BOOL AgeExceed189Days;
+    if (diffDays >180)
+    {
+        AgeExceed189Days = true;
+    }
+    else
+    {
+        AgeExceed189Days = false;
+    }
+    
+    int age = [formatter calculateAge:aDate];
+    
+    if (age<18){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:@"Usia harus sama dengan atau lebih dari 18 tahun"
+                                                       delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
+        [alert show];
+    }
+    else{
+        [DateThirdPartyBirth setTitle:aDate forState:UIControlStateNormal];
+    }
+    
+    /*if (aDate == NULL) {
+        [DateThridPartyBirth setTitle:@"" forState:UIControlStateNormal];
+    }
+    else {
+    
+    }*/
+    
+    //self.btnDOB.titleLabel.textColor = [UIColor blackColor];
+    [dobPopover dismissPopoverAnimated:YES];
+}
+
 - (void)DateSelected:(NSString *)strDate:(NSString *) dbDate{
     [tempDateButton setTitle:strDate forState:UIControlStateNormal];
 }
@@ -832,7 +1159,17 @@
     
     [thumbnailData writeToFile:relativeOutputFilePath atomically:YES];
     
-    UIAlertController *alertLockForm = [alert alertInformation:@"Berhasil" stringMessage:@"Form berhasil dibuat"];
+    [buttonSubmit setEnabled:true];
+    
+    UIAlertController *alertLockForm = [UIAlertController alertControllerWithTitle:@"Berhasil" message:@"Form berhasil dibuat" preferredStyle:UIAlertControllerStyleAlert];
+    [alert alertInformation:@"Berhasil" stringMessage:@"Form berhasil dibuat"];
+    
+    UIAlertAction* alertActionClose = [UIAlertAction actionWithTitle:NSLocalizedString(@"BUTTON_CLOSE", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }];
+    
+    [alertLockForm addAction: alertActionClose];
+
     [self presentViewController:alertLockForm animated:YES completion:nil];
     //[viewActivityIndicator setHidden:YES];
 }
@@ -901,6 +1238,14 @@
                 dispatch_sync(dispatch_get_main_queue(), ^{
                     //add another key to db
                     [self loadReport];
+                    
+                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                        dispatch_sync(dispatch_get_main_queue(), ^{
+                            
+                        });
+                    });
+                    
+                    
                 });
             });
         });
@@ -1032,41 +1377,33 @@
 
 -(void)keyboardDidHide:(NSNotificationCenter *)notification
 {
-    [scrollViewForm setContentSize:CGSizeMake(stackViewForm.frame.size.width, stackViewForm.frame.size.height)];
+    UIEdgeInsets tableViewInsets = UIEdgeInsetsZero;
+    UIScrollView *someScrollView = scrollViewForm;
+    
+    [someScrollView setContentInset:tableViewInsets];
 }
 
 -(void)keyboardDidShow:(NSNotification *)notification
 {
+    CGRect keyBoardFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
     
+    UIWindow *keyWindow = [[[UIApplication sharedApplication] delegate] window];
     
-    /*added by faiz*/
-    // Step 1: Get the size of the keyboard.
+    UIScrollView *someScrollView = scrollViewForm;
     
-    NSDictionary *userInfo = [notification userInfo];
-    CGSize kbSize = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    CGPoint tableViewBottomPoint = CGPointMake(0, CGRectGetMaxY([someScrollView bounds]));
+    CGPoint convertedTableViewBottomPoint = [someScrollView convertPoint:tableViewBottomPoint
+                                                                  toView:keyWindow];
     
-    // Step 2: Adjust the bottom content inset of your scroll view by the keyboard height.
-    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height+44, 0.0);
-    scrollViewForm.contentInset = contentInsets;
-    scrollViewForm.scrollIndicatorInsets = contentInsets;
+    CGFloat keyboardOverlappedSpaceHeight = convertedTableViewBottomPoint.y - keyBoardFrame.origin.y;
     
-    // Step 3: Scroll the target text field into view.
-    CGRect aRect = self.view.frame;
-    aRect.size.height -= kbSize.height;
-    if (activeView != nil){
-        // make sure the scrollview content size width and height are greater than 0
-        [scrollViewForm setContentSize:CGSizeMake (scrollViewForm.frame.size.width, scrollViewForm.contentSize.height)];
-        // scroll to the text view
-        [scrollViewForm scrollRectToVisible:activeView.superview.frame animated:YES];
+    if (keyboardOverlappedSpaceHeight > 0)
+    {
+        UIEdgeInsets tableViewInsets = UIEdgeInsetsMake(0, 0, keyboardOverlappedSpaceHeight, 0);
+        [someScrollView setContentInset:tableViewInsets];
     }
-    else{
-        if (!CGRectContainsPoint(aRect, activeField.frame.origin) ) {
-            CGPoint scrollPoint = CGPointMake(0.0, activeField.frame.origin.y - (kbSize.height-15));
-            [scrollViewForm setContentOffset:scrollPoint animated:YES];
-        }
-    }
-    
-    /*end of added by faiz*/
+
+   /*end of added by faiz*/
 }
 
 

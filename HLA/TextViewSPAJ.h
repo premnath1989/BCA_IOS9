@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface TextViewSPAJ : UITextView
-@property (strong, nonatomic) NSString* textViewName;
+@property (weak, nonatomic) NSString* textViewName;
 
 -(void)setTextViewName:(NSString *)stringTextViewName;
 -(NSString *)getTextViewName;

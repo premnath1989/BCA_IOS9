@@ -143,6 +143,8 @@
     [self arrayInitializeSIMaster];
     [self arrayInitializeSignature];
     
+    [TextSalesDeclarationIncomeBruto addTarget:self action:@selector(RealTimeFormat:) forControlEvents:UIControlEventEditingChanged];
+    
     [textFieldPolicyHolder setTextFieldName:@"textFieldPolicyHolder"];
     [textFieldInsured setTextFieldName:@"textFieldInsured"];
     [textFieldSPAJNumber setTextFieldName:@"textFieldSPAJNumber"];
@@ -284,10 +286,17 @@
                                 if ([[arrayRadioObjectReturn valueForKey:@"Object"] containsObject:[segmentTemp titleForSegmentAtIndex:i]])
                                 {
                                     [segmentTemp setSelectedSegmentIndex:i];
+                                    [self actionSegmentSPAJ:segmentTemp];
                                     break;
+                                }
+                                else{
+                                    [self actionSegmentSPAJ:segmentTemp];
                                 }
                                 //else {Do Nothing - these are not the droi, err, segment we are looking for}
                             }
+                        }
+                        else{
+                            [self actionSegmentSPAJ:segmentTemp];
                         }
                         i++;
                     }
@@ -336,69 +345,78 @@
 }
 
 -(IBAction)getUISwitchValue:(UIButton *)sender{
-    NSMutableArray* arrayFormAnswers = [[NSMutableArray alloc]init];
-
-    int i=1;
-    for (UIView *view in [stackViewForm subviews]) {
-        if (view.tag == 1){
-            for (UIView *viewDetail in [view subviews]) {
-                if ([viewDetail isKindOfClass:[SegmentSPAJ class]]) {
-                    SegmentSPAJ* segmentTemp = (SegmentSPAJ *)viewDetail;
-                    NSString *value;
-                    if (segmentTemp.tag == 0){
-                        value = [allAboutPDFFunctions GetOutputForYaTidakRadioButton:[segmentTemp titleForSegmentAtIndex:segmentTemp.selectedSegmentIndex]];
+    @try {
+        NSMutableArray* arrayFormAnswers = [[NSMutableArray alloc]init];
+        
+        int i=1;
+        for (UIView *view in [stackViewForm subviews]) {
+            if (view.tag == 1){
+                for (UIView *viewDetail in [view subviews]) {
+                    if ([viewDetail isKindOfClass:[SegmentSPAJ class]]) {
+                        SegmentSPAJ* segmentTemp = (SegmentSPAJ *)viewDetail;
+                        NSString *value;
+                        if (segmentTemp.tag == 0){
+                            value = [allAboutPDFFunctions GetOutputForYaTidakRadioButton:[segmentTemp titleForSegmentAtIndex:segmentTemp.selectedSegmentIndex]];
+                        }
+                        else if (segmentTemp.tag == 1){
+                            value = [allAboutPDFFunctions GetOutputForRelationWithPORadioButton:[segmentTemp titleForSegmentAtIndex:segmentTemp.selectedSegmentIndex]];
+                        }
+                        else if (segmentTemp.tag == 2){
+                            value = [allAboutPDFFunctions GetOutputForDurationKnowPORadioButton:[segmentTemp titleForSegmentAtIndex:segmentTemp.selectedSegmentIndex]];
+                        }
+                        
+                        NSString *elementID = [segmentTemp getSegmentName];
+                        
+                        NSMutableDictionary *dictAnswer = [allAboutPDFFunctions dictAnswers:dictTransaction ElementID:elementID Value:value Section:@"AF" SPAJHtmlID:[[modelSPAJHtml selectActiveHtmlForSection:@"AF"] valueForKey:@"SPAJHtmlID"]];
+                        
+                        [arrayFormAnswers addObject:dictAnswer];
+                        i++;
                     }
-                    else if (segmentTemp.tag == 1){
-                        value = [allAboutPDFFunctions GetOutputForRelationWithPORadioButton:[segmentTemp titleForSegmentAtIndex:segmentTemp.selectedSegmentIndex]];
+                    
+                    if ([viewDetail isKindOfClass:[TextFieldSPAJ class]]) {
+                        TextFieldSPAJ* textTemp = (TextFieldSPAJ *)viewDetail;
+                        NSString *value = textTemp.text;
+                        NSString *elementID = [textTemp getTextFieldName];
+                        
+                        NSMutableDictionary *dictAnswer = [allAboutPDFFunctions dictAnswers:dictTransaction ElementID:elementID Value:value Section:@"AF" SPAJHtmlID:[[modelSPAJHtml selectActiveHtmlForSection:@"AF"] valueForKey:@"SPAJHtmlID"]];
+                        
+                        [arrayFormAnswers addObject:dictAnswer];
+                        i++;
                     }
-                    else if (segmentTemp.tag == 2){
-                        value = [allAboutPDFFunctions GetOutputForDurationKnowPORadioButton:[segmentTemp titleForSegmentAtIndex:segmentTemp.selectedSegmentIndex]];
+                    
+                    if ([viewDetail isKindOfClass:[TextViewSPAJ class]]) {
+                        TextViewSPAJ* textTemp = (TextViewSPAJ *)viewDetail;
+                        NSString *value = textTemp.text;
+                        NSString *elementID = [textTemp getTextViewName];
+                        
+                        NSMutableDictionary *dictAnswer = [allAboutPDFFunctions dictAnswers:dictTransaction ElementID:elementID Value:value Section:@"AF" SPAJHtmlID:[[modelSPAJHtml selectActiveHtmlForSection:@"AF"] valueForKey:@"SPAJHtmlID"]];
+                        
+                        [arrayFormAnswers addObject:dictAnswer];
+                        i++;
                     }
-                    
-                    NSString *elementID = [segmentTemp getSegmentName];
-                    
-                    NSMutableDictionary *dictAnswer = [allAboutPDFFunctions dictAnswers:dictTransaction ElementID:elementID Value:value Section:@"AF" SPAJHtmlID:[[modelSPAJHtml selectActiveHtmlForSection:@"AF"] valueForKey:@"SPAJHtmlID"]];
-                    
-                    [arrayFormAnswers addObject:dictAnswer];
-                    i++;
-                }
-                
-                if ([viewDetail isKindOfClass:[TextFieldSPAJ class]]) {
-                    TextFieldSPAJ* textTemp = (TextFieldSPAJ *)viewDetail;
-                    NSString *value = textTemp.text;
-                    NSString *elementID = [textTemp getTextFieldName];
-                    
-                    NSMutableDictionary *dictAnswer = [allAboutPDFFunctions dictAnswers:dictTransaction ElementID:elementID Value:value Section:@"AF" SPAJHtmlID:[[modelSPAJHtml selectActiveHtmlForSection:@"AF"] valueForKey:@"SPAJHtmlID"]];
-                    
-                    [arrayFormAnswers addObject:dictAnswer];
-                    i++;
-                }
-                
-                if ([viewDetail isKindOfClass:[TextViewSPAJ class]]) {
-                    TextViewSPAJ* textTemp = (TextViewSPAJ *)viewDetail;
-                    NSString *value = textTemp.text;
-                    NSString *elementID = [textTemp getTextViewName];
-                    
-                    NSMutableDictionary *dictAnswer = [allAboutPDFFunctions dictAnswers:dictTransaction ElementID:elementID Value:value Section:@"AF" SPAJHtmlID:[[modelSPAJHtml selectActiveHtmlForSection:@"AF"] valueForKey:@"SPAJHtmlID"]];
-                    
-                    [arrayFormAnswers addObject:dictAnswer];
-                    i++;
                 }
             }
         }
+        
+        for (int x=0;x<[arrayCollectionSelectedInsurancePurchaseReason count];x++){
+            NSString *value = [allAboutPDFFunctions GetOutputForInsurancePurposeCheckBox:[arrayCollectionSelectedInsurancePurchaseReason objectAtIndex:x]];
+            NSString *elementID = [arrayCollectionInsurancePurchaseReasonID objectAtIndex:x];
+            
+            NSMutableDictionary *dictAnswer = [allAboutPDFFunctions dictAnswers:dictTransaction ElementID:elementID Value:value Section:@"AF" SPAJHtmlID:[[modelSPAJHtml selectActiveHtmlForSection:@"AF"] valueForKey:@"SPAJHtmlID"]];
+            
+            [arrayFormAnswers addObject:dictAnswer];
+        }
+        
+        NSLog(@"answers %@",[allAboutPDFFunctions createDictionaryForSave:arrayFormAnswers]);
+        [self savetoDB:[allAboutPDFFunctions createDictionaryForSave:arrayFormAnswers]];
+    } @catch (NSException *exception) {
+        NSLog(@"error %@",exception);
+        UIAlertController *alertLockForm = [alert alertInformation:@"Data Tidak Lengkap" stringMessage:@"Mohon lengkapi data tenaga penjual terlbih dahulu"];
+        [self presentViewController:alertLockForm animated:YES completion:nil];
+    } @finally {
+        
     }
     
-    for (int x=0;x<[arrayCollectionSelectedInsurancePurchaseReason count];x++){
-        NSString *value = [allAboutPDFFunctions GetOutputForInsurancePurposeCheckBox:[arrayCollectionSelectedInsurancePurchaseReason objectAtIndex:x]];
-        NSString *elementID = [arrayCollectionInsurancePurchaseReasonID objectAtIndex:x];
-        
-        NSMutableDictionary *dictAnswer = [allAboutPDFFunctions dictAnswers:dictTransaction ElementID:elementID Value:value Section:@"AF" SPAJHtmlID:[[modelSPAJHtml selectActiveHtmlForSection:@"AF"] valueForKey:@"SPAJHtmlID"]];
-        
-        [arrayFormAnswers addObject:dictAnswer];
-    }
-    
-    NSLog(@"answers %@",[allAboutPDFFunctions createDictionaryForSave:arrayFormAnswers]);
-    [self savetoDB:[allAboutPDFFunctions createDictionaryForSave:arrayFormAnswers]];
 }
 
 -(NSDictionary *)getDictionaryForAgentData:(NSString *)stringDBColumnName HTMLID:(NSString *)stringHTMLID{
@@ -584,7 +602,13 @@
     
     [thumbnailData writeToFile:relativeOutputFilePath atomically:YES];
     
-    UIAlertController *alertLockForm = [alert alertInformation:@"Berhasil" stringMessage:@"Form berhasil dibuat"];
+    UIAlertController *alertLockForm = [UIAlertController alertControllerWithTitle:@"Berhasil" message:@"Form berhasil dibuat" preferredStyle:UIAlertControllerStyleAlert];[alert alertInformation:@"Berhasil" stringMessage:@"Form berhasil dibuat"];
+    
+    UIAlertAction* alertActionClose = [UIAlertAction actionWithTitle:NSLocalizedString(@"BUTTON_CLOSE", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }];
+    [alertLockForm addAction: alertActionClose];
+    
     [self presentViewController:alertLockForm animated:YES completion:nil];
     //[viewActivityIndicator setHidden:YES];
 }
@@ -673,6 +697,73 @@
     activeView = textView;
 }
 
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+    activeField = nil;
+    activeView = nil;
+}
+
+-(IBAction)actionSegmentSPAJ:(SegmentSPAJ *)sender{
+    if (sender==RadioButtonSalesDeclarationRelationshipWithProspectiveInsured){
+        if (sender.selectedSegmentIndex == [sender numberOfSegments]-1){
+            [self setTextFieldEnabled:TextSalesDeclarationRelationshipWithProspectiveInsuredOther BoolEnabled:YES];
+        }
+        else{
+            [self setTextFieldEnabled:TextSalesDeclarationRelationshipWithProspectiveInsuredOther BoolEnabled:NO];
+        }
+    
+    }
+}
+
+-(void)setTextFieldEnabled:(TextFieldSPAJ *)textFieldSPAJInput BoolEnabled:(BOOL)boolEnabled{
+    if (boolEnabled){
+        [textFieldSPAJInput setEnabled:YES];
+        [textFieldSPAJInput setBackgroundColor:[UIColor whiteColor]];
+    }
+    else{
+        [textFieldSPAJInput setEnabled:NO];
+        [textFieldSPAJInput setBackgroundColor:[UIColor lightGrayColor]];
+    }
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    NSUInteger newLength = [textField.text length] + [string length] - range.length;
+    if (textField==TextSalesDeclarationIncomeBruto){
+        BOOL return13digit = FALSE;
+        //KY - IMPORTANT - PUT THIS LINE TO DETECT THE FIRST CHARACTER PRESSED....
+        //This method is being called before the content of textField.text is changed.
+        NSString * AI = [textField.text stringByReplacingCharactersInRange:range withString:string];
+        
+        if ([AI rangeOfString:@"."].length == 1) {
+            NSArray  *comp = [AI componentsSeparatedByString:@"."];
+            NSString *get_num = [[comp objectAtIndex:0] stringByReplacingOccurrencesOfString:@"," withString:@""];
+            int c = [get_num length];
+            return13digit = (c > 15);
+            
+        } else if([AI rangeOfString:@"."].length == 0) {
+            NSArray  *comp = [AI componentsSeparatedByString:@"."];
+            NSString *get_num = [[comp objectAtIndex:0] stringByReplacingOccurrencesOfString:@"," withString:@""];
+            int c = [get_num length];
+            return13digit = (c  > 15);
+        }
+        
+        NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
+        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        
+        if( return13digit == TRUE) {
+            return (([string isEqualToString:filtered])&&(newLength <= 15));
+        } else {
+            return (([string isEqualToString:filtered])&&(newLength <= 19));
+        }
+        //return (newLength <= 14);
+    }
+}
+
+-(void)RealTimeFormat:(UITextField *)sender{
+    NSNumber *plainNumber = [formatter convertAnyNonDecimalNumberToString:sender.text];
+    [sender setText:[formatter numberToCurrencyDecimalFormatted:plainNumber]];
+}
+
 
 /*-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
@@ -746,7 +837,7 @@
     /*added by faiz*/
     // Step 1: Get the size of the keyboard.
     
-    NSDictionary *userInfo = [notification userInfo];
+    /*NSDictionary *userInfo = [notification userInfo];
     CGSize kbSize = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     
     // Step 2: Adjust the bottom content inset of your scroll view by the keyboard height.
@@ -768,15 +859,59 @@
             CGPoint scrollPoint = CGPointMake(0.0, activeField.frame.origin.y - (kbSize.height-15));
             [scrollViewForm setContentOffset:scrollPoint animated:YES];
         }
-    }
+    }*/
     
     /*end of added by faiz*/
+    if (activeView){
+        // keyboard frame is in window coordinates
+        NSDictionary *userInfo = [notification userInfo];
+        CGRect keyboardInfoFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+        
+        // get the height of the keyboard by taking into account the orientation of the device too
+        CGRect windowFrame = [self.view.window convertRect:self.view.frame fromView:self.view];
+        CGRect keyboardFrame = CGRectIntersection (windowFrame, keyboardInfoFrame);
+        CGRect coveredFrame = [self.view.window convertRect:keyboardFrame toView:self.view];
+        
+        // add the keyboard height to the content insets so that the scrollview can be scrolled
+        UIEdgeInsets contentInsets = UIEdgeInsetsMake (0.0, 0.0, coveredFrame.size.height, 0.0);
+        scrollViewForm.contentInset = contentInsets;
+        scrollViewForm.scrollIndicatorInsets = contentInsets;
+        
+        // make sure the scrollview content size width and height are greater than 0
+        [scrollViewForm setContentSize:CGSizeMake (scrollViewForm.frame.size.width, scrollViewForm.contentSize.height)];
+        
+        // scroll to the text view
+        [scrollViewForm scrollRectToVisible:activeView.superview.frame animated:YES];
+    }
+    else{
+        CGRect keyBoardFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+        
+        UIWindow *keyWindow = [[[UIApplication sharedApplication] delegate] window];
+        
+        UIScrollView *someScrollView = scrollViewForm;
+        
+        CGPoint tableViewBottomPoint = CGPointMake(0, CGRectGetMaxY([someScrollView bounds]));
+        CGPoint convertedTableViewBottomPoint = [someScrollView convertPoint:tableViewBottomPoint
+                                                                      toView:keyWindow];
+        
+        CGFloat keyboardOverlappedSpaceHeight = convertedTableViewBottomPoint.y - keyBoardFrame.origin.y;
+        
+        if (keyboardOverlappedSpaceHeight > 0)
+        {
+            UIEdgeInsets tableViewInsets = UIEdgeInsetsMake(0, 0, keyboardOverlappedSpaceHeight, 0);
+            [someScrollView setContentInset:tableViewInsets];
+        }
+    }
 }
 
 
 -(void)keyboardDidHide:(NSNotificationCenter *)notification
 {
-    [scrollViewForm setContentSize:CGSizeMake(stackViewForm.frame.size.width, stackViewForm.frame.size.height)];
+    //[scrollViewForm setContentSize:CGSizeMake(stackViewForm.frame.size.width, stackViewForm.frame.size.height)];
+    UIEdgeInsets tableViewInsets = UIEdgeInsetsZero;
+    UIScrollView *someScrollView = scrollViewForm;
+    
+    [someScrollView setContentInset:tableViewInsets];
 }
 
 /*

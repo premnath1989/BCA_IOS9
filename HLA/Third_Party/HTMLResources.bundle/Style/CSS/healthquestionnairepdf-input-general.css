@@ -62,7 +62,7 @@ input.Wrap, textarea.Wrap {
 }
 
 /* TEXT */
-input[type="text"], input[type="password"], input[type="number"], input[type="email"], textarea {
+input[type="text"], input[type="password"], input[type="number"], input[type="email"], input[type="date"], textarea {
   padding-left: 5px;
   padding-right: 5px;
   text-align: left;
@@ -75,8 +75,36 @@ input[type="text"], input[type="password"], input[type="number"], input[type="em
   border-bottom-width: thin;
 }
 
-input[type="text"].LineDot, input[type="password"].LineDot, input[type="number"].LineDot, input[type="email"].LineDot, textarea.LineDot {
+input[type="text"].LineDot, input[type="password"].LineDot, input[type="number"].LineDot, input[type="email"].LineDot, input[type="date"].LineDot, textarea.LineDot {
   border-bottom-style: dotted;
+}
+
+div.TableItem input[type="text"], div.TableItem input[type="password"], div.TableItem input[type="number"], div.TableItem input[type="email"], div.TableItem input[type="date"], div.TableItem textarea {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  text-align: left;
+  font-size: 0.75em;
+  vertical-align: top;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-left-style: none;
+  border-left-width: none;
+  border-right-style: solid;
+  border-right-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+}
+
+div.TableItem input[type="text"], div.TableItem input[type="password"], div.TableItem input[type="number"], div.TableItem input[type="email"], div.TableItem input[type="date"], div.TableItem textarea {
+  padding-left: 5px;
+  padding-right: 5px;
+  text-align: left;
+  font-size: 0.75em;
+  vertical-align: top;
+  border-right-style: solid;
+  border-right-width: 1px;
 }
 
 /* RADIO BUTTON */

@@ -40,5 +40,5 @@
 -(NSString *)getWordFromString:(NSString *)stringImageName IndexWord:(int)index;
 
 
-@property (nonatomic,strong) id <PDFGenerationDelegate> delegatePDFGeneration;
+@property (nonatomic,weak) id <PDFGenerationDelegate> delegatePDFGeneration;
 @end

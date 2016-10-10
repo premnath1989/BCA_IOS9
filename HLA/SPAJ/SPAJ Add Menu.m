@@ -780,11 +780,11 @@ NSString* const stateIMGGeneration = @"IMG";
         CGContextDrawPDFPage(pdfContext, page);
         
         // Draw the signature on pdfContext
-        pageRect = CGRectMake(67, 376,96 , 53);
+        pageRect = CGRectMake(67, 476,96 , 53);
         CGImageRef pageImage1 = [imgSignature1 CGImage];
         CGContextDrawImage(pdfContext, pageRect, pageImage1);
         
-        pageRect = CGRectMake(575, 376,96 , 53);
+        pageRect = CGRectMake(575, 476,96 , 53);
         CGImageRef pageImage4 = [imgSignature4 CGImage];
         CGContextDrawImage(pdfContext, pageRect, pageImage4);
         

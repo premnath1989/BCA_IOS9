@@ -86,7 +86,7 @@ a.Underline:active {
 }
 
 /* BUTTON BY TEXT */
-.ButtonPrimary, .ButtonSecondary {
+.ButtonPrimary, .ButtonSecondary, .ButtonPreview {
   padding-top: 2px;
   padding-right: 5px;
   padding-left: 5px;
@@ -116,4 +116,8 @@ a.Underline:active {
 
 .ButtonSecondary:hover {
   z-index: 2;
+}
+
+.ButtonPreview {
+  display: none;
 }

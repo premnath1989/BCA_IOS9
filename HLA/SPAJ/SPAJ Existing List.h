@@ -22,22 +22,22 @@
     CameraViewController *imagePickerController;
     CGRect imagePickerRect;
 }
-    @property (strong, nonatomic) NSDictionary* dictTransaction;
+    @property (weak, nonatomic) NSDictionary* dictTransaction;
     // OBJECT
 
-    @property (strong, retain) QuerySPAJHeader *querySPAJHeader;
-    @property (strong, retain) UserInterface *functionUserInterface;
-    @property (strong, retain) Alert *functionAlert;
+    @property (weak, nonatomic) QuerySPAJHeader *querySPAJHeader;
+    @property (weak, nonatomic) UserInterface *functionUserInterface;
+    @property (weak, nonatomic) Alert *functionAlert;
 
     // QUERY
 
-    @property (strong, retain) NSArray *arrayQueryExisting;
+    @property (weak, nonatomic) NSArray *arrayQueryExisting;
 
     // VARIABLE
 
-    @property (strong, retain) NSMutableArray *arrayTextField;
-    @property (strong, retain) NSString *stringQueryName;
-    @property (strong, retain) NSNumber *intQueryID;
+    @property (weak, nonatomic) NSMutableArray *arrayTextField;
+    @property (weak, nonatomic) NSString *stringQueryName;
+    @property (weak, nonatomic) NSNumber *intQueryID;
 
     // LAYOUT
 

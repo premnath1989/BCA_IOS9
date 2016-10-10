@@ -26,9 +26,9 @@
         //IBOutlet UINavigationBar* barDetail;
     }
 
-    @property (strong, nonatomic) NSDictionary* dictTransaction;
+    @property (weak, nonatomic) NSDictionary* dictTransaction;
 
-    @property (strong, nonatomic) NSString* stringGlobalEAPPNumber;
+    @property (weak, nonatomic) NSString* stringGlobalEAPPNumber;
     // VIEW
 
     @property (nonatomic, weak) IBOutlet UIView* viewContent;
@@ -70,7 +70,7 @@
 
 
     // BUTTON
-    //@property (nonatomic, strong) IBOutlet UIBarButtonItem* rightButton;
+    //@property (nonatomic, weak) IBOutlet UIBarButtonItem* rightButton;
 
     @property (nonatomic, weak) IBOutlet UIButton* buttonCaptureFront;
     @property (nonatomic, weak) IBOutlet UIButton* buttonCaptureBack;

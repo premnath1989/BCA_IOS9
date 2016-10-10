@@ -43,8 +43,8 @@
     
     IBOutlet UIView *viewActivityIndicator;
 }
-@property (strong, nonatomic) NSDictionary* dictTransaction;
-@property (strong, nonatomic) NSString* htmlFileName;
+@property (weak, nonatomic) NSDictionary* dictTransaction;
+@property (weak, nonatomic) NSString* htmlFileName;
 -(void)loadFirstHTML:(NSString*)stringHTMLName PageSection:(NSString *)stringPageSection;
 -(void)loadSecondHTML:(NSString*)stringHTMLName PageSection:(NSString *)stringPageSection;
 -(void)loadThirdHTML:(NSString*)stringHTMLName PageSection:(NSString *)stringPageSection;
@@ -54,6 +54,6 @@
 -(void)loadSeventhHTML:(NSString*)stringHTMLName PageSection:(NSString *)stringPageSection;
 
 -(NSString *)getStringFlagEdited;
-@property (nonatomic,strong) id <SPAJCalonPemegangPolisDelegate> delegate;
+@property (nonatomic,weak) id <SPAJCalonPemegangPolisDelegate> delegate;
 -(void)voidDoneSPAJCalonPemegangPolis;
 @end

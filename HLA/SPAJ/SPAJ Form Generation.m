@@ -216,11 +216,13 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
         
         indexImgForPDFGeneration = 0;
         if ([[dictionaryPOData valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"]){
-            arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]]];
+            //arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]]];
+            arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH\",\"TP" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]]];
         }
         else{
             //arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_IN" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]]];
-            arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH\",\"IMG_IN"]];
+            //arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH\",\"IMG_IN"]];
+            arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH\",\"IMG_IN\",\"TP"]];
         }
         
         //arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH\",\"IMG_IN"]];
@@ -235,17 +237,19 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
             
             indexPDFForIMGGeneration = 0;
             NSURL *fileURL = [[NSURL alloc] initFileURLWithPath:[arrayPDFHealthQuestionairreName objectAtIndex:indexPDFForIMGGeneration]];
-                //outputName = [NSString stringWithFormat:@"%@_%@",[dictTransaction valueForKey:@"SPAJEappNumber"],[allAboutPDFGeneration getSPAJImageNameFromPath:[arrayIMGName objectAtIndex:indexPDFForIMGGeneration]]];
                 outputName = [NSString stringWithFormat:@"%@",[allAboutPDFGeneration getSPAJImageNameFromPath:[arrayPDFHealthQuestionairreName objectAtIndex:indexPDFForIMGGeneration]]];
             
             NSURLRequest *request = [NSURLRequest requestWithURL:fileURL];
             [webview loadRequest:request];
-                //[allAboutPDFGeneration splitPDF:fileURL withOutputName:outputName intoDirectory:[dictTransaction valueForKey:@"SPAJEappNumber"]];
-            //}
         }
-        /*UIAlertController *alertLockForm = [alert alertInformation:@"Berhasil" stringMessage:@"Form berhasil dibuat"];
-        [self presentViewController:alertLockForm animated:YES completion:nil];
-        [viewActivityIndicator setHidden:YES];*/
+        else{
+            [allAboutPDFGeneration removeSPAJSigned:dictTransaction];
+            [allAboutPDFGeneration removeUnNecesaryPDFFiles:dictTransaction];
+            
+            UIAlertController *alertLockForm = [alert alertInformation:@"Berhasil" stringMessage:@"Form berhasil dibuat"];
+            [self presentViewController:alertLockForm animated:YES completion:nil];
+            [viewActivityIndicator setHidden:YES];
+        }
     }
 
     -(void)loadHTMLFile:(NSString *)HTMLName{
@@ -446,9 +450,6 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
                 }
                 else{
                     [self createImageFromPDF];
-//                    UIAlertController *alertLockForm = [alert alertInformation:@"Berhasil" stringMessage:@"Form berhasil dibuat"];
-//                    [self presentViewController:alertLockForm animated:YES completion:nil];
-//                    [viewActivityIndicator setHidden:YES];
                 }
             }
         }
@@ -615,8 +616,21 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
         NSData *thumbnailData = UIImageJPEGRepresentation(resultImage, 0);
         
         NSString *relativeOutputFilePath = [NSString stringWithFormat:@"%@/%@.jpg", [formatter generateSPAJFileDirectory:[dictTransaction valueForKey:@"SPAJEappNumber"]],fileName];
-        [thumbnailData writeToFile:relativeOutputFilePath atomically:YES];
+        BOOL written = [thumbnailData writeToFile:relativeOutputFilePath atomically:YES];
         
+        if (!written){
+            UIAlertController *alertFailedGenerate = [UIAlertController alertControllerWithTitle:@"Kesalahan Generate File" message:@"Terjadi kegagalan dalam pembuatan file. Aplikasi akan menutup menu SPAJ. Silahkan melakukan generate ulang " preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction* alertActionClose = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"GOTOHOME" object:self];
+            }];
+            
+            [alertFailedGenerate addAction: alertActionClose];
+            
+            [self presentViewController:alertFailedGenerate animated:YES completion:nil];
+        }
+        
+        thumbnailData = nil;
         indexPDFForIMGGeneration++;
         if (indexPDFForIMGGeneration<[arrayPDFHealthQuestionairreName count]){
             NSURL *fileURL = [[NSURL alloc] initFileURLWithPath:[arrayPDFHealthQuestionairreName objectAtIndex:indexPDFForIMGGeneration]];
@@ -772,7 +786,6 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
                 }
             }
             
-            
             NSLog(@"count %@ %i",stringName,countElement);
             
             if (countElement >0){
@@ -894,6 +907,7 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
     - (void)webViewDidFinishLoad:(UIWebView *)webView{
         
         if (boolConvertToImage){
+            
             @autoreleasepool {
                 [self performSelector:@selector(voidCreateImageFromWebView:) withObject:outputName afterDelay:0.3];
             }
@@ -908,6 +922,7 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
 
     - (void)didReceiveMemoryWarning
     {
+        NSLog(@"warning memory");
         [super didReceiveMemoryWarning];
         // Dispose of any resources that can be recreated.
     }

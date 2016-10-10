@@ -22,19 +22,19 @@
 
     // OBJECT
 
-    @property (retain, strong) QuerySPAJHeader *querySPAJHeader;
-    @property (retain, strong) UserInterface *functionUserInterface;
-    @property (retain, strong) Alert *functionAlert;
+    @property (nonatomic, weak) QuerySPAJHeader *querySPAJHeader;
+    @property (nonatomic, weak) UserInterface *functionUserInterface;
+    @property (nonatomic, weak) Alert *functionAlert;
 
     // QUERY
 
-    @property (retain, strong) NSArray *arrayQuerySubmitted;
+    @property (nonatomic, weak) NSArray *arrayQuerySubmitted;
 
     // VARIABLE
 
-    @property (retain, strong) NSMutableArray *arrayTextField;
-    @property (retain, strong) NSNumber *intQueryID;
-    @property (retain, strong) NSString *stringQueryName;
+    @property (nonatomic, weak) NSMutableArray *arrayTextField;
+    @property (nonatomic, weak) NSNumber *intQueryID;
+    @property (nonatomic, weak) NSString *stringQueryName;
 
     // TABLE
 

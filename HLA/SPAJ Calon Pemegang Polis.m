@@ -522,7 +522,9 @@
 
 #pragma mark call save function in HTML
 -(void)voidDoneSPAJCalonPemegangPolis{
-    //[webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"document.getElementById('save').click()"]];
+    [self resignFirstResponder];
+    [self.view endEditing:YES];
+    
     [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"savetoDB();"]];
 }
 
@@ -563,7 +565,7 @@
             NSString *stringWhere = [NSString stringWithFormat:@"where SPAJHtmlSection='KS_IN' and SPAJTransactionID=%i",[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
             [modelSPAJAnswers deleteSPAJAnswers:stringWhere];
         }
-        dispatch_sync(dispatch_get_main_queue(), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
             //add another key to db
             NSString*spajTransactionID = [modelSPAJTransaction getSPAJTransactionData:@"SPAJTransactionID" StringWhereName:@"SPAJEappNumber" StringWhereValue:[delegate voidGetEAPPNumber]];
             //cffID = [cffHeaderSelectedDictionary valueForKey:@"PotentialDiscussionCFFID"];
@@ -601,7 +603,13 @@
             [finalDictionary setValue:[params valueForKey:@"successCallBack"] forKey:@"successCallBack"];
             [finalDictionary setValue:[params valueForKey:@"errorCallback"] forKey:@"errorCallback"];
             [super savetoDB:finalDictionary];
-            [delegate voidSetCalonPemegangPolisBoolValidate:true StringSection:stringSection];
+            
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    [delegate voidSetCalonPemegangPolisBoolValidate:true StringSection:stringSection];
+                });
+            });
+            
         });
     });
 }
@@ -760,8 +768,6 @@
         
         [arrayValue addObject:dictRelWithLa];
         [arrayValue addObject:dictCurrency];
-        
-        
     }
     /*else if (([stringSection isEqualToString:@"KS_PH"])||([stringSection isEqualToString:@"KS_TR"])){
         NSString* stringRelation = [formatter getRelationNameForHtml:[dictPOData valueForKey:@"RelWithLA"]];

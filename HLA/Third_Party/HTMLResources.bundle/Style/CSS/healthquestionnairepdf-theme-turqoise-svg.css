@@ -150,14 +150,26 @@ main form fieldset .LineStraight, main form fieldset .LineDot {
   color: #000000;
 }
 
+div.TableHeader {
+  border-color: #00b0f0;
+}
+
+div.TableHeader label {
+  border-color: #00b0f0;
+}
+
+div.TableItem label {
+  border-color: #00b0f0;
+}
+
 /* INPUT */
-input[type="text"], input[type="password"], input[type="email"], input[type="number"], textarea {
+input[type="text"], input[type="password"], input[type="email"], input[type="number"], input[type="date"], textarea {
   color: #000000;
   background-color: #ebecec;
   border-color: #00b0f0;
 }
 
-input[type="text"].LineDot, input[type="password"].LineDot, input[type="number"].LineDot, input[type="email"].LineDot, xtarea.LineDot {
+input[type="text"].LineDot, input[type="password"].LineDot, input[type="number"].LineDot, input[type="email"].LineDot, input[type="date"].LineDot, textarea.LineDot {
   background-color: transparent;
   border-color: #000000;
 }
@@ -185,6 +197,12 @@ input[type="checkbox"].Plain:checked + label {
 textarea:disabled {
   color: #ffffff;
   background-color: #e47d3a;
+}
+
+div.TableItem input[type="text"], div.TableItem input[type="password"], div.TableItem input[type="email"], div.TableItem input[type="number"], div.TableItem input[type="date"], div.TableItem textarea {
+  color: #000000;
+  background-color: #ebecec;
+  border-color: #00b0f0;
 }
 
 /* TABLE */

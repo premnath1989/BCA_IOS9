@@ -19,26 +19,26 @@
 
     // VARIABLE
 
-    @property (retain, strong) NSNumber *intID;
+    @property (nonatomic, weak) NSNumber *intID;
 
     // LAYOUT
 
-    @property (nonatomic, strong) IBOutlet UITableViewCell *tableViewCell;
+    @property (nonatomic, weak) IBOutlet UITableViewCell *tableViewCell;
 
     // LABEL
 
-    @property (nonatomic, strong) IBOutlet UILabel *labelName;
-    @property (nonatomic, strong) IBOutlet UILabel *labelSocialNumber;
-    @property (nonatomic, strong) IBOutlet UILabel *labelSPAJNumber;
-    @property (nonatomic, strong) IBOutlet UILabel *labelUpdatedOnDate;
-    @property (nonatomic, strong) IBOutlet UILabel *labelUpdatedOnTime;
-    @property (nonatomic, strong) IBOutlet UILabel *labelSalesIllustration;
-    @property (nonatomic, strong) IBOutlet UILabel *labelTimeRemaining;
+    @property (nonatomic, weak) IBOutlet UILabel *labelName;
+    @property (nonatomic, weak) IBOutlet UILabel *labelSocialNumber;
+    @property (nonatomic, weak) IBOutlet UILabel *labelSPAJNumber;
+    @property (nonatomic, weak) IBOutlet UILabel *labelUpdatedOnDate;
+    @property (nonatomic, weak) IBOutlet UILabel *labelUpdatedOnTime;
+    @property (nonatomic, weak) IBOutlet UILabel *labelSalesIllustration;
+    @property (nonatomic, weak) IBOutlet UILabel *labelTimeRemaining;
 
     // BUTTON
 
-    @property (nonatomic, strong) IBOutlet UIButton *buttonView;
-    @property (nonatomic, strong) IBOutlet UIButton *buttonPaymentReceipt;
-    @property (nonatomic, strong) IBOutlet UIButton *buttonAgentForm;
+    @property (nonatomic, weak) IBOutlet UIButton *buttonView;
+    @property (nonatomic, weak) IBOutlet UIButton *buttonPaymentReceipt;
+    @property (nonatomic, weak) IBOutlet UIButton *buttonAgentForm;
 
 @end

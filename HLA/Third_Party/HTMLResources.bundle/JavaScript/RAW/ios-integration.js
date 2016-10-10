@@ -122,7 +122,7 @@ function savetoDB()
 	var stringRadioButtonFlag = 0;
 	var booleanValidateState = true;
 
-	
+
 	// QUICK FIX VALIDATION FOR FORM
 	
 	if (booleanValidateState == false)
@@ -366,6 +366,8 @@ function savetoDB()
 		}
 
 		var jsonToDatabase = JSONGenerator(objectContent);
+		booleanInputChangeState = "false";
+
 		calliOSFunction('savetoDB:',onSuccess,onError, jsonToDatabase);
 
 		arrayHealthQuestionnaire = [];

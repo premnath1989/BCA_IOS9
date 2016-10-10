@@ -23,7 +23,7 @@
     ModelSPAJHtml* modelSPAJHtml;
     ModelSPAJAnswers* modelSPAJAnswers;
 }
-@property (strong, nonatomic) NSString* htmlFileName;
-@property (nonatomic,strong) id <SPAJPembayaranPremiDelegate> delegate;
+@property (weak, nonatomic) NSString* htmlFileName;
+@property (nonatomic,weak) id <SPAJPembayaranPremiDelegate> delegate;
 -(void)voidDoneSPAJPembayaranPremi;
 @end

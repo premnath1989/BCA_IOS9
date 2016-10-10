@@ -115,6 +115,10 @@
             //doSomething here.
             [self actionGoToExistingList:nil];
         }
+        else if ([[notification name] isEqualToString:@"GOTOHOME"]) {
+            //doSomething here.
+            [self actionGoToHome:nil];
+        }
     }
 
 

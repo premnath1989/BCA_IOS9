@@ -13,13 +13,19 @@
 #import "ButtonSPAJ.h"
 #import "TextViewSPAJ.h"
 #import "AllAboutPDFFunctions.h"
+#import "DateViewController.h"
 #import "HtmlGenerator/HtmlGenerator.h"
 
-@interface SPAJThirdParty : HtmlGenerator{
+@interface SPAJThirdParty : HtmlGenerator<DateViewControllerDelegate>{
     NSString *filePath;
     
     UserInterface *functionUserInterface;
+    DateViewController *LADate;
     AllAboutPDFFunctions *allAboutPDFFunctions;
+    
+    UIPopoverController *dobPopover;
+    
+    IBOutlet UIButton* buttonSubmit;
     
     IBOutlet UICollectionView *collectionReasonInsurancePurchaseC;
     IBOutlet UICollectionView *collectionReasonInsurancePurchaseD;
@@ -42,7 +48,7 @@
     IBOutlet TextFieldSPAJ* TextThirdPartyBeneficiaryRelationshipOther; //textSebutkan
     
     //view C
-    //IBOutlet SegmentSPAJ*
+    IBOutlet SegmentSPAJ* RadioButtonThirdPartyIDType;
     IBOutlet SegmentSPAJ* RadioButtonThirdPartyNationality;
     
     IBOutlet SegmentSPAJ* RadioButtonThirdPartyUSACitizen;
@@ -60,10 +66,10 @@
     IBOutlet SegmentSPAJ* RadioButtonThirdPartyOtherIncome;
     
     IBOutlet ButtonSPAJ* DateThirdPartyActive;
-    IBOutlet ButtonSPAJ* DateThridPartyBirth;
-    //IBOutlet ButtonSPAJ* //tanggal npwp
+    IBOutlet ButtonSPAJ* DateThirdPartyBirth;
+    IBOutlet ButtonSPAJ* DateThirdPartyNPWPActive;//tanggal npwp
     
-    //IBOutlet TextFieldSPAJ* //textSebutkanjenisidentitas
+    IBOutlet TextFieldSPAJ* TextThirdPartyIDTypeOther;//textSebutkanjenisidentitas
     IBOutlet TextFieldSPAJ* TextThirdPartyBeneficiaryNationalityWNA;//textSebutkan
     IBOutlet TextFieldSPAJ* LineThirdPartyOtherRelationship;//textSebutkan
     IBOutlet TextFieldSPAJ* TextThirdPartyInsurancePurposeOther;//textSebutkan
@@ -93,49 +99,58 @@
     IBOutlet TextFieldSPAJ* TextThirdPartyHandphone2;
     IBOutlet TextFieldSPAJ* TextThirdPartyEmail;
     
-    //IBOutlet TextFieldSPAJ* //textOffice1
-    //IBOutlet TextFieldSPAJ* //textOffice2
-    //IBOutlet TextFieldSPAJ* //textOfficeKodePos
-    //IBOutlet TextFieldSPAJ* //textOfficeKota
-    //IBOutlet TextFieldSPAJ* //textNomorNPWP
+    IBOutlet TextFieldSPAJ* TextThirdPartyOfficeAddress1;//textOffice1
+    IBOutlet TextFieldSPAJ* TextThirdPartyOfficeAddress2;//textOffice2
+    IBOutlet TextFieldSPAJ* TextThirdPartyOfficePostalCode;//textOfficeKodePos
+    IBOutlet TextFieldSPAJ* TextThirdPartyOfficeCity;//textOfficeKota
+    
+    IBOutlet TextFieldSPAJ* TextThirdPartyNPWPNumber;//textNomorNPWP
     IBOutlet TextFieldSPAJ* TextThirdPartySource;
-    //IBOutlet TextFieldSPAJ* //textSumberDanaPembelianAsuransi
+    IBOutlet TextFieldSPAJ* TextThirdPartyFundingSource;//textSumberDanaPembelianAsuransi ()
     
     //view D
     IBOutlet SegmentSPAJ* RadioButtonThirdPartyCompanyType;
     IBOutlet SegmentSPAJ* RadioButtonThirdPartyCompanyAsset;
     
     IBOutlet SegmentSPAJ* RadioButtonThirdPartyCompanyRevenue;
-    //IBOutlet SegmentSPAJ* RadioButtonRelationWithInsured
-    
+    IBOutlet SegmentSPAJ* RadioButtonThirdPartyCompanyRelationAssured;
     
     IBOutlet ButtonSPAJ* DateThirdPartyCompanyNoAnggaranDasarExpired;
     IBOutlet ButtonSPAJ* DateThirdPartyCompanySIUPExpired;
     IBOutlet ButtonSPAJ* DateThirdPartyCompanyNoTDPExpired;
     IBOutlet ButtonSPAJ* DateThirdPartyCompanyNoSKDPExpired;
-    //IBOutlet ButtonSPAJ* //tanggalNPWP
+    IBOutlet ButtonSPAJ* DateThirdPartyCompanyNoNPWP;//tanggalNPWP
     
     IBOutlet TextFieldSPAJ* TextThirdPartyCompanyTypeOther;//textSebutkan
-    //IBOutlet TextFieldSPAJ* //textHubunganCalonTertanggung//textSebutkan
-    //IBOutlet TextFieldSPAJ* //textSebutkanTujuanPembelianAsuransi//textSebutkan
+    IBOutlet TextFieldSPAJ* TextThirdPartyNonPersonOtherRelationship;//textHubunganCalonTertanggung//textSebutkan
+    IBOutlet TextFieldSPAJ* TextThirdPartyNonPersonInsurancePurposeOther;//textSebutkanTujuanPembelianAsuransi//textSebutkan
     
     
+    IBOutlet TextFieldSPAJ* TextThirdPartyCompanyName;
+    IBOutlet TextFieldSPAJ* TextThirdPartyCompanyDirectorName;
+    IBOutlet TextFieldSPAJ* TextThirdPartyCompanyDirectorName2;
     IBOutlet TextFieldSPAJ* TextThirdPartyCompanyNoAnggaranDasar;
     IBOutlet TextFieldSPAJ* TextThirdPartyCompanyNoSIUP;
     IBOutlet TextFieldSPAJ* TextThirdPartyCompanyNoTDP;
     IBOutlet TextFieldSPAJ* TextThirdPartyCompanyNoSKDP;
-    //IBOutlet TextFieldSPAJ* //textNPWP
+    IBOutlet TextFieldSPAJ* TextThirdPartyCompanyNoNPWP;//textNPWP
     IBOutlet TextFieldSPAJ* TextThirdPartyCompanySector;
     IBOutlet TextFieldSPAJ* TextThirdPartyCompanyAddress;
-    //IBOutlet TextFieldSPAJ* //TextThirdPartyCompanyAddress2//ini belum ada
+    IBOutlet TextFieldSPAJ* TextThirdPartyCompanyAddress2nd;//ini belum ada
     IBOutlet TextFieldSPAJ* TextThirdPartyCompanyCity;
     IBOutlet TextFieldSPAJ* TextThirdPartyCompanyPostalCode;
     
     //IBOutlet TextFieldSPAJ*
     //IBOutlet TextFieldSPAJ*
     
+    //view E
+    IBOutlet TextFieldSPAJ* TextThirdPartyAccountHolder;
+    IBOutlet TextFieldSPAJ* TextThirdPartyAccountNumber;
+    IBOutlet TextFieldSPAJ* TextThirdPartyBankName;
+    IBOutlet TextFieldSPAJ* TextThirdPartyBankBranch;
+    
     UITextField *activeField;
     UITextView *activeView;
 }
-@property (strong, nonatomic) NSDictionary* dictTransaction;
+@property (weak, nonatomic) NSDictionary* dictTransaction;
 @end

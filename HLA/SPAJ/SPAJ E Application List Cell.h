@@ -19,20 +19,20 @@
 
     // LAYOUT
 
-    @property (nonatomic, strong) IBOutlet UITableViewCell *tableViewCell;
+    @property (nonatomic, weak) IBOutlet UITableViewCell *tableViewCell;
 
     // LABEL
 
-    @property (nonatomic, strong) IBOutlet UILabel *labelName;
-    @property (nonatomic, strong) IBOutlet UILabel *labelSocialNumber;
-    @property (nonatomic, strong) IBOutlet UILabel *labelEApplicationNumber;
-    @property (nonatomic, strong) IBOutlet UILabel *labelUpdatedOnDate;
-    @property (nonatomic, strong) IBOutlet UILabel *labelUpdatedOnTime;
-    @property (nonatomic, strong) IBOutlet UILabel *labelState;
-    @property (nonatomic, strong) IBOutlet UILabel *labelSPAJNumber;
+    @property (nonatomic, weak) IBOutlet UILabel *labelName;
+    @property (nonatomic, weak) IBOutlet UILabel *labelSocialNumber;
+    @property (nonatomic, weak) IBOutlet UILabel *labelEApplicationNumber;
+    @property (nonatomic, weak) IBOutlet UILabel *labelUpdatedOnDate;
+    @property (nonatomic, weak) IBOutlet UILabel *labelUpdatedOnTime;
+    @property (nonatomic, weak) IBOutlet UILabel *labelState;
+    @property (nonatomic, weak) IBOutlet UILabel *labelSPAJNumber;
 
     // VARIABLE
 
-    @property (retain, strong) NSNumber *intID;
+    @property (nonatomic, weak) NSNumber *intID;
 
 @end

@@ -12,11 +12,11 @@
 @end
 
 @interface SPAJFilesViewController : UIViewController
-@property (nonatomic,strong) id <SPAJFilesDelegate> delegateSPAJFiles;
+@property (nonatomic,weak) id <SPAJFilesDelegate> delegateSPAJFiles;
 
-@property (strong, nonatomic) NSDictionary* dictTransaction;
+@property (weak, nonatomic) NSDictionary* dictTransaction;
 @property (nonatomic,assign) BOOL boolHealthQuestionairre;
 @property (nonatomic,assign) BOOL boolThirdParty;
 
-@property (nonatomic, strong) IBOutlet UIButton* buttonSubmit;
+@property (nonatomic, weak) IBOutlet UIButton* buttonSubmit;
 @end

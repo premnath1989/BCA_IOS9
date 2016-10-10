@@ -524,7 +524,7 @@
         stringReturn = @"full";
     }
     else if ([stringPaymentFrequency caseInsensitiveCompare:@"Tahunan"]== NSOrderedSame){
-        stringReturn = @"annualy";
+        stringReturn = @"anually";
     }
     else if ([stringPaymentFrequency caseInsensitiveCompare:@"Semester"]== NSOrderedSame){
         stringReturn = @"semester";

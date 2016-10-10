@@ -32,12 +32,10 @@
 /* ANIMATION */
 /* HEADER */
 /* FORM */
-/* INPUT */
 /* NOTE */
 /* SIGNATURE */
 /* FOOTER */
 /* TABLE */
-/* LINK */
 /* GENERAL */
 /* ICON */
 /* LAYOUT */
@@ -46,8 +44,6 @@
 /* BOX */
 /* TABLE INITIALIZATION */
 /* TABLE */
-/* INPUT INITIALIZATION */
-/* LINK */
 /* RESOURCE */
 /* TYPEFACE */
 /* TYPEFACE */
@@ -383,6 +379,10 @@ main section .ContainerFit .Left, main section .ContainerLeft .Left, main sectio
 
 main section .ContainerFit .Right, main section .ContainerLeft .Right, main section .ContainerRight .Right {
   text-align: right;
+}
+
+main section .ContainerFit .Justify, main section .ContainerLeft .Justify, main section .ContainerRight .Justify {
+  text-align: justify;
 }
 
 main section .ContainerFit {

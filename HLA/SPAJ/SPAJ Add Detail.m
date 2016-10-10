@@ -41,6 +41,8 @@
 // IMPLEMENTATION
 
 @implementation SPAJAddDetail{
+    int lastIndexSelected;
+    
     UIAlertController *alertController;
     
     UIBarButtonItem* rightButton;
@@ -329,12 +331,13 @@
                         //[self loadSPAJCalonPemegangPolis];
                         [spajCalonPemegangPolis loadFirstHTML:stringHTMLName PageSection:@"PO"];
                         [rightButton setAction:@selector(voidDoneSPAJCalonPemegangPolis:)];
+                        
+                        lastIndexSelected = indexSelected;
                     }]];
                     
                     [alertController addAction:[UIAlertAction actionWithTitle:@"NO" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                         [alertController dismissViewControllerAnimated:YES completion:nil];
-                        
-                        [_tableSection selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
+                        [_tableSection selectRowAtIndexPath:[NSIndexPath indexPathForRow:lastIndexSelected inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
                     }]];
                     
                     dispatch_async(dispatch_get_main_queue(), ^ {
@@ -349,6 +352,7 @@
                     //[self loadSPAJCalonPemegangPolis];
                     [spajCalonPemegangPolis loadFirstHTML:stringHTMLName PageSection:@"PO"];
                     [rightButton setAction:@selector(voidDoneSPAJCalonPemegangPolis:)];
+                    lastIndexSelected = indexSelected;
                     break;
                 }
                 break;
@@ -369,12 +373,13 @@
                         [spajCalonPemegangPolis loadSecondHTML:stringHTMLName PageSection:@"TR"];
                         //[rightButton setAction:@selector(voidDoneSPAJCalonTertanggung:)];
                         [rightButton setAction:@selector(voidDoneSPAJCalonPemegangPolis:)];
+                        lastIndexSelected = indexSelected;
                     }]];
                     
                     [alertController addAction:[UIAlertAction actionWithTitle:@"NO" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                         [alertController dismissViewControllerAnimated:YES completion:nil];
                         
-                        [_tableSection selectRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
+                        [_tableSection selectRowAtIndexPath:[NSIndexPath indexPathForRow:lastIndexSelected inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
                     }]];
                     
                     dispatch_async(dispatch_get_main_queue(), ^ {
@@ -389,6 +394,7 @@
                     [spajCalonPemegangPolis loadSecondHTML:stringHTMLName PageSection:@"TR"];
                     //[rightButton setAction:@selector(voidDoneSPAJCalonTertanggung:)];
                     [rightButton setAction:@selector(voidDoneSPAJCalonPemegangPolis:)];
+                    lastIndexSelected = indexSelected;
                 }
                 break;
             }
@@ -407,12 +413,13 @@
                         [spajCalonPemegangPolis loadThirdHTML:stringHTMLName PageSection:@"PR"];
                         //[rightButton setAction:@selector(voidDoneSPAJPerusahaan:)];
                         [rightButton setAction:@selector(voidDoneSPAJCalonPemegangPolis:)];
+                        lastIndexSelected = indexSelected;
                     }]];
                     
                     [alertController addAction:[UIAlertAction actionWithTitle:@"NO" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                         [alertController dismissViewControllerAnimated:YES completion:nil];
                         
-                        [_tableSection selectRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
+                        [_tableSection selectRowAtIndexPath:[NSIndexPath indexPathForRow:lastIndexSelected inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
                     }]];
                     
                     dispatch_async(dispatch_get_main_queue(), ^ {
@@ -427,6 +434,7 @@
                     [spajCalonPemegangPolis loadThirdHTML:stringHTMLName PageSection:@"PR"];
                     //[rightButton setAction:@selector(voidDoneSPAJPerusahaan:)];
                     [rightButton setAction:@selector(voidDoneSPAJCalonPemegangPolis:)];
+                    lastIndexSelected = indexSelected;
                 }
                 break;
             }
@@ -445,12 +453,13 @@
                         [spajCalonPemegangPolis loadFourthHTML:stringHTMLName PageSection:@"PM"];
                         //[rightButton setAction:@selector(voidDoneSPAJPenerimaManfaat:)];
                         [rightButton setAction:@selector(voidDoneSPAJCalonPemegangPolis:)];
+                        lastIndexSelected = indexSelected;
                     }]];
                     
                     [alertController addAction:[UIAlertAction actionWithTitle:@"NO" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                         [alertController dismissViewControllerAnimated:YES completion:nil];
                         
-                        [_tableSection selectRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
+                        [_tableSection selectRowAtIndexPath:[NSIndexPath indexPathForRow:lastIndexSelected inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
                     }]];
                     
                     dispatch_async(dispatch_get_main_queue(), ^ {
@@ -465,6 +474,7 @@
                     [spajCalonPemegangPolis loadFourthHTML:stringHTMLName PageSection:@"PM"];
                     //[rightButton setAction:@selector(voidDoneSPAJPenerimaManfaat:)];
                     [rightButton setAction:@selector(voidDoneSPAJCalonPemegangPolis:)];
+                    lastIndexSelected = indexSelected;
                 }
                 break;
             }
@@ -483,12 +493,13 @@
                         [spajCalonPemegangPolis loadFivethHTML:stringHTMLName PageSection:@"PP"];
                         //[rightButton setAction:@selector(voidDoneSPAJPembayaranPremi:)];
                         [rightButton setAction:@selector(voidDoneSPAJCalonPemegangPolis:)];
+                        lastIndexSelected = indexSelected;
                     }]];
                     
                     [alertController addAction:[UIAlertAction actionWithTitle:@"NO" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                         [alertController dismissViewControllerAnimated:YES completion:nil];
                         
-                        [_tableSection selectRowAtIndexPath:[NSIndexPath indexPathForRow:4 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
+                        [_tableSection selectRowAtIndexPath:[NSIndexPath indexPathForRow:lastIndexSelected inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
                     }]];
                     
                     dispatch_async(dispatch_get_main_queue(), ^ {
@@ -503,6 +514,7 @@
                     [spajCalonPemegangPolis loadFivethHTML:stringHTMLName PageSection:@"PP"];
                     //[rightButton setAction:@selector(voidDoneSPAJPembayaranPremi:)];
                     [rightButton setAction:@selector(voidDoneSPAJCalonPemegangPolis:)];
+                    lastIndexSelected = indexSelected;
                 }
                 break;
             }
@@ -520,12 +532,13 @@
                         [spajCalonPemegangPolis loadSixthHTML:stringHTMLName PageSection:@"KS_PH"];
                         //[rightButton setAction:@selector(voidDoneSPAJPembayaranPremi:)];
                         [rightButton setAction:@selector(voidDoneSPAJCalonPemegangPolis:)];
+                        lastIndexSelected = indexSelected;
                     }]];
                     
                     [alertController addAction:[UIAlertAction actionWithTitle:@"NO" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                         [alertController dismissViewControllerAnimated:YES completion:nil];
                         
-                        [_tableSection selectRowAtIndexPath:[NSIndexPath indexPathForRow:5 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
+                        [_tableSection selectRowAtIndexPath:[NSIndexPath indexPathForRow:lastIndexSelected inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
                     }]];
                     
                     dispatch_async(dispatch_get_main_queue(), ^ {
@@ -539,6 +552,7 @@
                     [spajCalonPemegangPolis loadSixthHTML:stringHTMLName PageSection:@"KS_PH"];
                     //[rightButton setAction:@selector(voidDoneSPAJPembayaranPremi:)];
                     [rightButton setAction:@selector(voidDoneSPAJCalonPemegangPolis:)];
+                    lastIndexSelected = indexSelected;
                 }
                 break;
             }
@@ -871,9 +885,16 @@
             UIAlertController *alertLockForm = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"ALERT_TITLE_FORM_GENERATION", nil) message:NSLocalizedString(@"ALERT_MESSAGE_FORM_GENERATION", nil) preferredStyle:UIAlertControllerStyleAlert];
             
             [alertLockForm addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-                if ([stringSection isEqualToString:@"KS_IN"]){
+                NSDictionary* dictPOData = [[NSDictionary alloc ]initWithDictionary:[modelSIPData getPO_DataFor:[dictTransaction valueForKey:@"SPAJSINO"]]];
+                if ([[dictPOData valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"]){
                     [self.navigationController popViewControllerAnimated:YES];
                 }
+                else{
+                    if ([stringSection isEqualToString:@"KS_IN"]){
+                        [self.navigationController popViewControllerAnimated:YES];
+                    }
+                }
+                
             }]];
 
             [self presentViewController:alertLockForm animated:YES completion:nil];
@@ -884,7 +905,7 @@
         
         
         if ([stringSection isEqualToString:@"PO"]){
-            [self.navigationItem setTitle:@"Data Calon Tertanggung"];
+            //[self.navigationItem setTitle:@"Data Calon Tertanggung"];
             //NSIndexPath* indexPathSelect = [NSIndexPath indexPathForRow:1 inSection:0];
             //[self showDetailsForIndexPath:indexPathSelect];
             NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJDetail1=1 where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",[dictTransaction valueForKey:@"SPAJEappNumber"]];
@@ -930,7 +951,7 @@
 
     -(void)voidSetPerusahaanBoolValidate:(BOOL)boolValidate{
         //boolPenerimaManfaat = true;
-        [self.navigationItem setTitle:@"Data Calon Penerima Manfaat"];
+        //[self.navigationItem setTitle:@"Data Calon Penerima Manfaat"];
         //NSIndexPath* indexPathSelect = [NSIndexPath indexPathForRow:3 inSection:0];
         //[self showDetailsForIndexPath:indexPathSelect];
         NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJDetail3=1 where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",[dictTransaction valueForKey:@"SPAJEappNumber"]];
@@ -942,7 +963,7 @@
 
     -(void)voidSetPenerimaManfaatBoolValidate:(BOOL)boolValidate{
         //boolPembayaranPremi = true;
-        [self.navigationItem setTitle:@"Data Pembayaran Premi"];
+        //[self.navigationItem setTitle:@"Data Pembayaran Premi"];
         //NSIndexPath* indexPathSelect = [NSIndexPath indexPathForRow:4 inSection:0];
         //[self showDetailsForIndexPath:indexPathSelect];
         NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJDetail4=1 where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",[dictTransaction valueForKey:@"SPAJEappNumber"]];
@@ -954,7 +975,7 @@
 
     -(void)voidSetPembayaranPremiBoolValidate:(BOOL)boolValidate{
         //boolKesehatan = true;
-        [self.navigationItem setTitle:@"Data Kesehatan"];
+        //[self.navigationItem setTitle:@"Data Kesehatan"];
         //NSIndexPath* indexPathSelect = [NSIndexPath indexPathForRow:5 inSection:0];
         //[self showDetailsForIndexPath:indexPathSelect];
         NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJDetail5=1 where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",[dictTransaction valueForKey:@"SPAJEappNumber"]];

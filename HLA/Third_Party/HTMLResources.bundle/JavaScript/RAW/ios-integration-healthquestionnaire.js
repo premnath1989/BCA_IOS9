@@ -343,6 +343,8 @@ function savetoDB()
 
 		arrayHealthQuestionnaire = [];
 		arrayBeneficiariesList = [];
+
+		// booleanInputChangeState = "false";
 	}
 }
 

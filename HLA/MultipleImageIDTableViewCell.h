@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface MultipleImageIDTableViewCell : UITableViewCell
-@property (nonatomic, strong) IBOutlet UILabel *labelFileName;
-@property (nonatomic, strong) IBOutlet UIImageView *imageViewFile;
+@property (nonatomic, weak) IBOutlet UILabel *labelFileName;
+@property (nonatomic, weak) IBOutlet UIImageView *imageViewFile;
 
 @end

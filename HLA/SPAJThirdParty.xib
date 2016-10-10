@@ -4,13 +4,26 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="BPreplay_Bold.otf">
+        <mutableArray key="BPreplayBold.otf">
+            <string>BPreplay-Bold</string>
             <string>BPreplay-Bold</string>
             <string>BPreplay-Bold</string>
             <string>BPreplay-Bold</string>
             <string>BPreplay-Bold</string>
         </mutableArray>
-        <mutableArray key="BPreplay_Regular.otf">
+        <mutableArray key="BPreplay_Regular.ttf">
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
             <string>BPreplay</string>
             <string>BPreplay</string>
             <string>BPreplay</string>
@@ -207,20 +220,24 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SPAJThirdParty">
             <connections>
                 <outlet property="DateThirdPartyActive" destination="GR7-em-lZC" id="OVd-7Y-g1r"/>
+                <outlet property="DateThirdPartyBirth" destination="TmZ-KU-Z0n" id="viq-g1-Wfa"/>
                 <outlet property="DateThirdPartyCompanyNoAnggaranDasarExpired" destination="G7p-Zo-eNi" id="DgJ-7e-ybX"/>
+                <outlet property="DateThirdPartyCompanyNoNPWP" destination="VLo-2x-w2j" id="mIP-dd-h99"/>
                 <outlet property="DateThirdPartyCompanyNoSKDPExpired" destination="jSB-RE-8gk" id="JEE-4n-hOl"/>
                 <outlet property="DateThirdPartyCompanyNoTDPExpired" destination="AQh-zf-bQT" id="daO-1j-hOK"/>
                 <outlet property="DateThirdPartyCompanySIUPExpired" destination="UfR-SZ-oJo" id="1kD-jy-Gpn"/>
-                <outlet property="DateThridPartyBirth" destination="TmZ-KU-Z0n" id="PlL-XW-gH8"/>
+                <outlet property="DateThirdPartyNPWPActive" destination="EuQ-vz-q3P" id="5N0-5O-SsL"/>
                 <outlet property="LineThirdPartyOtherRelationship" destination="au4-yo-Vzp" id="N4D-PF-j46"/>
                 <outlet property="RadioButtonThirdPartyAsking" destination="NB8-AV-poG" id="a0H-y2-0W7"/>
                 <outlet property="RadioButtonThirdPartyAskingRelationship" destination="QYF-TV-MyA" id="ZZq-Jx-o83"/>
                 <outlet property="RadioButtonThirdPartyBeneficiary" destination="nsW-Yu-j47" id="TTf-G1-MBg"/>
                 <outlet property="RadioButtonThirdPartyBeneficiaryRelationship" destination="OKg-KR-qEF" id="ENq-yW-wk3"/>
                 <outlet property="RadioButtonThirdPartyCompanyAsset" destination="Mfn-B9-U9o" id="8eT-02-Dqk"/>
+                <outlet property="RadioButtonThirdPartyCompanyRelationAssured" destination="tRN-cN-iVh" id="sgC-eV-hRE"/>
                 <outlet property="RadioButtonThirdPartyCompanyRevenue" destination="cum-J4-BXa" id="0pO-M6-ln0"/>
                 <outlet property="RadioButtonThirdPartyCompanyType" destination="wAH-42-txZ" id="roA-QY-qlE"/>
                 <outlet property="RadioButtonThirdPartyCorrespondanceAddress" destination="1TN-L6-4Wb" id="p8B-33-OQK"/>
+                <outlet property="RadioButtonThirdPartyIDType" destination="FRJ-47-Vhu" id="yRp-BO-10k"/>
                 <outlet property="RadioButtonThirdPartyMaritalStatus" destination="cus-EF-e1f" id="jHg-yh-uwt"/>
                 <outlet property="RadioButtonThirdPartyNationality" destination="gXi-5l-pxX" id="L6b-t9-mBB"/>
                 <outlet property="RadioButtonThirdPartyOtherIncome" destination="8h4-hb-fPL" id="cuG-Yb-ra0"/>
@@ -232,15 +249,24 @@
                 <outlet property="RadioButtonThirdPartySalary" destination="5Lj-Eb-I2C" id="PfG-0Y-hpS"/>
                 <outlet property="RadioButtonThirdPartySex" destination="4Xk-7e-ghy" id="L3w-uo-je9"/>
                 <outlet property="RadioButtonThirdPartyUSACitizen" destination="7nC-lY-XGq" id="oOp-5u-G8V"/>
+                <outlet property="TextThirdPartyAccountHolder" destination="5sb-HH-TUn" id="4lF-zF-Kmg"/>
+                <outlet property="TextThirdPartyAccountNumber" destination="7rm-mz-h3c" id="Wec-wf-eJy"/>
                 <outlet property="TextThirdPartyAskingRelationshipOther" destination="R1T-YF-hzY" id="h00-lG-rUC"/>
+                <outlet property="TextThirdPartyBankBranch" destination="Klo-cq-PTG" id="Irb-Fs-4sm"/>
+                <outlet property="TextThirdPartyBankName" destination="64H-X3-vZ0" id="9ka-7O-ZQQ"/>
                 <outlet property="TextThirdPartyBeneficiaryNationalityWNA" destination="dDp-nD-Bc2" id="K3a-HQ-Ujp"/>
                 <outlet property="TextThirdPartyBeneficiaryRelationshipOther" destination="V2X-4v-2wY" id="5Zg-8S-qVE"/>
                 <outlet property="TextThirdPartyBirthPlace" destination="Rng-Zo-Sxg" id="Jof-Hz-2Ck"/>
                 <outlet property="TextThirdPartyCIN" destination="q88-Wa-oCY" id="QgL-Z8-bBF"/>
                 <outlet property="TextThirdPartyCompany" destination="BcK-47-LU2" id="mll-BV-uFv"/>
                 <outlet property="TextThirdPartyCompanyAddress" destination="dgZ-T6-DF6" id="i9C-Q5-Cre"/>
+                <outlet property="TextThirdPartyCompanyAddress2nd" destination="4Nx-Y9-Gp7" id="hxv-3w-jdS"/>
                 <outlet property="TextThirdPartyCompanyCity" destination="EeR-Lq-3Ad" id="lib-XL-hBa"/>
+                <outlet property="TextThirdPartyCompanyDirectorName" destination="h90-P7-EMw" id="T4z-vp-XtD"/>
+                <outlet property="TextThirdPartyCompanyDirectorName2" destination="Yw0-pD-3GD" id="Gfy-NQ-hS3"/>
+                <outlet property="TextThirdPartyCompanyName" destination="SLJ-lV-rr5" id="Ubh-MK-xSI"/>
                 <outlet property="TextThirdPartyCompanyNoAnggaranDasar" destination="PdL-rf-qtV" id="Et4-Me-rLk"/>
+                <outlet property="TextThirdPartyCompanyNoNPWP" destination="0Iq-Z8-PvI" id="umI-0O-aTd"/>
                 <outlet property="TextThirdPartyCompanyNoSIUP" destination="55Q-kt-fFw" id="0De-dO-0pN"/>
                 <outlet property="TextThirdPartyCompanyNoSKDP" destination="DZo-dR-iGy" id="Ijo-Tl-HUw"/>
                 <outlet property="TextThirdPartyCompanyNoTDP" destination="eLa-ox-1eK" id="Vpg-6q-Eka"/>
@@ -250,6 +276,7 @@
                 <outlet property="TextThirdPartyEmail" destination="nSk-gG-63c" id="o7G-sX-mHm"/>
                 <outlet property="TextThirdPartyFullName" destination="9VC-qF-Jl0" id="9Te-0x-pUq"/>
                 <outlet property="TextThirdPartyFullName2nd" destination="j4c-8i-Sa9" id="qSX-sN-Ydk"/>
+                <outlet property="TextThirdPartyFundingSource" destination="LUd-pl-5o3" id="JnD-C4-Htj"/>
                 <outlet property="TextThirdPartyHandphone1" destination="HEZ-P5-Wch" id="i8c-Ys-aKJ"/>
                 <outlet property="TextThirdPartyHandphone2" destination="1Xg-5d-2IJ" id="gVU-V0-PWV"/>
                 <outlet property="TextThirdPartyHomeAddress" destination="S4w-aa-8NL" id="DLX-If-1FE"/>
@@ -259,9 +286,17 @@
                 <outlet property="TextThirdPartyHomeTelephonePrefix" destination="iwf-jU-vXT" id="C3j-dF-mfl"/>
                 <outlet property="TextThirdPartyHomeTelephoneSuffix" destination="aPL-2Z-hY9" id="Y5b-zj-XfD"/>
                 <outlet property="TextThirdPartyIDNumber" destination="pYn-wV-QNY" id="NUA-EG-wcB"/>
+                <outlet property="TextThirdPartyIDTypeOther" destination="LPq-1Z-4Kf" id="iaM-EJ-QW0"/>
                 <outlet property="TextThirdPartyInsurancePurposeOther" destination="euU-5o-AGQ" id="f5U-SO-j72"/>
                 <outlet property="TextThirdPartyJobDescription" destination="5Vu-nn-W4X" id="9WY-uw-nC8"/>
                 <outlet property="TextThirdPartyMainJob" destination="Xjp-PQ-VaU" id="5AS-F9-W7c"/>
+                <outlet property="TextThirdPartyNPWPNumber" destination="3Nq-L7-ibr" id="Ogx-Un-eUP"/>
+                <outlet property="TextThirdPartyNonPersonInsurancePurposeOther" destination="cc6-dB-BWj" id="7lA-PD-k07"/>
+                <outlet property="TextThirdPartyNonPersonOtherRelationship" destination="AMd-R9-KzK" id="aAn-ln-BWz"/>
+                <outlet property="TextThirdPartyOfficeAddress1" destination="6i8-g5-Rbe" id="Nxh-Ik-0z5"/>
+                <outlet property="TextThirdPartyOfficeAddress2" destination="0Ap-kB-d7H" id="Eyh-4Y-yd0"/>
+                <outlet property="TextThirdPartyOfficeCity" destination="px5-3l-k7G" id="LUT-Yj-7mz"/>
+                <outlet property="TextThirdPartyOfficePostalCode" destination="vvD-sE-EYY" id="zwU-jx-oRB"/>
                 <outlet property="TextThirdPartyOtherIncome" destination="b3H-mP-CIh" id="ouN-hI-yYh"/>
                 <outlet property="TextThirdPartyPosition" destination="cjq-0W-eGv" id="1xA-77-G9g"/>
                 <outlet property="TextThirdPartyPremiPayorRelationshipOther" destination="Tcz-ar-ARi" id="CZP-ed-eUC"/>
@@ -270,6 +305,7 @@
                 <outlet property="TextThirdPartySideJob" destination="7UR-jg-Gao" id="9nd-u5-E3n"/>
                 <outlet property="TextThirdPartySource" destination="hx7-VY-sax" id="RQZ-4j-mda"/>
                 <outlet property="TextThirdPartyWorkScope" destination="iGL-8N-2dx" id="3Ts-wm-F1h"/>
+                <outlet property="buttonSubmit" destination="5ZV-1R-pD9" id="zh1-hu-jbx"/>
                 <outlet property="collectionReasonInsurancePurchaseC" destination="Ase-DE-9KM" id="i1B-xJ-JDt"/>
                 <outlet property="collectionReasonInsurancePurchaseD" destination="AKK-cV-mgM" id="LT2-iV-rjR"/>
                 <outlet property="scrollViewForm" destination="FzX-HB-nik" id="TfY-HS-pir"/>
@@ -316,9 +352,9 @@
                     <rect key="frame" x="0.0" y="45" width="819" height="679"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Lcq-5d-wwb">
-                            <rect key="frame" x="0.0" y="0.0" width="819" height="2997"/>
+                            <rect key="frame" x="0.0" y="0.0" width="819" height="3207"/>
                             <subviews>
-                                <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="usJ-ps-Ykq" userLabel="View - A Data Calon Pemegang Polis">
+                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="usJ-ps-Ykq" userLabel="View - A Data Calon Pemegang Polis">
                                     <rect key="frame" x="0.0" y="0.0" width="819" height="0.0"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="max-Rv-sLw">
@@ -520,6 +556,9 @@
                                                 <segment title="Lainnya, sebutkan"/>
                                             </segments>
                                             <color key="tintColor" red="0.0" green="0.62745098040000002" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <connections>
+                                                <action selector="actionSegmentSPAJ:" destination="-1" eventType="valueChanged" id="uX8-So-NUh"/>
+                                            </connections>
                                         </segmentedControl>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="   Bila Ya, hubungan dengan Anda ?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z7U-bm-Cx4">
                                             <rect key="frame" x="8" y="127" width="326" height="21"/>
@@ -1001,7 +1040,7 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EuQ-vz-q3P">
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EuQ-vz-q3P" customClass="ButtonSPAJ">
                                             <rect key="frame" x="409" y="1371" width="184" height="30"/>
                                             <color key="tintColor" red="0.0" green="0.62745098040000002" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <state key="normal" title="(Tanggal / Bulan / Tahun)"/>
@@ -1306,7 +1345,7 @@
                                             <color key="tintColor" red="0.0" green="0.62745098040000002" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <state key="normal" title="(Tanggal / Bulan / Tahun)"/>
                                             <connections>
-                                                <action selector="actionDate:" destination="-1" eventType="touchUpInside" id="9h7-9U-T6G"/>
+                                                <action selector="btnDOBPressed:" destination="-1" eventType="touchUpInside" id="rIS-BY-Ca4"/>
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tanggal Lahir" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mKo-c9-ZWo">
@@ -1721,6 +1760,86 @@
                                         </textField>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="55Q-kt-fFw" customClass="TextFieldSPAJ">
                                             <rect key="frame" x="290" y="268" width="525" height="30"/>
+                                            <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </view>
+                                <view tag="1" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wdn-c6-uRR" userLabel="View - E Data Rekening Pihak Ketiga">
+                                    <rect key="frame" x="0.0" y="3002" width="819" height="205"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Data Rekening Bank Pihak Ketiga" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Ge-cO-HBx">
+                                            <rect key="frame" x="8" y="11" width="537" height="21"/>
+                                            <fontDescription key="fontDescription" name="BPreplay-Bold" family="BPreplay" pointSize="16"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1. Nama Pemilik Rekening" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kdz-OY-DjW">
+                                            <rect key="frame" x="8" y="50" width="258" height="21"/>
+                                            <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="14"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2. Nomor Rekening" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B2x-EC-uoR">
+                                            <rect key="frame" x="8" y="87" width="258" height="21"/>
+                                            <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="14"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=":" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U6z-mg-hrc">
+                                            <rect key="frame" x="269" y="50" width="2" height="21"/>
+                                            <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="14"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=":" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bF7-HB-FaF">
+                                            <rect key="frame" x="269" y="84" width="2" height="21"/>
+                                            <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="14"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=":" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vAq-We-Zx9">
+                                            <rect key="frame" x="269" y="124" width="2" height="21"/>
+                                            <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="14"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=":" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yFB-WQ-ACF">
+                                            <rect key="frame" x="269" y="164" width="2" height="21"/>
+                                            <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="14"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="3. Nama Bank" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VQZ-kX-wOe">
+                                            <rect key="frame" x="8" y="128" width="258" height="21"/>
+                                            <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="14"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="4. Cabang" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D8f-Xi-oS8">
+                                            <rect key="frame" x="8" y="164" width="258" height="21"/>
+                                            <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="14"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5sb-HH-TUn" customClass="TextFieldSPAJ">
+                                            <rect key="frame" x="290" y="46" width="525" height="30"/>
+                                            <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7rm-mz-h3c" customClass="TextFieldSPAJ">
+                                            <rect key="frame" x="290" y="84" width="525" height="30"/>
+                                            <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Klo-cq-PTG" customClass="TextFieldSPAJ">
+                                            <rect key="frame" x="290" y="160" width="525" height="30"/>
+                                            <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="64H-X3-vZ0" customClass="TextFieldSPAJ">
+                                            <rect key="frame" x="290" y="122" width="525" height="30"/>
                                             <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
                                         </textField>

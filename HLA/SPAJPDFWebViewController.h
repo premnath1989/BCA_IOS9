@@ -12,6 +12,6 @@
 @interface SPAJPDFWebViewController : HtmlGenerator{
     NSString *filePath;
 }
-@property (strong, nonatomic) NSDictionary* dictTransaction;
+@property (weak, nonatomic) NSDictionary* dictTransaction;
 
 @end

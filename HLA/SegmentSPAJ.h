@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface SegmentSPAJ : UISegmentedControl
-    @property (strong, nonatomic) NSString* segmentName;
+    @property (weak, nonatomic) NSString* segmentName;
 
 -(void)setSegmentName:(NSString *)stringSegmentName;
 -(NSString *)getSegmentName;

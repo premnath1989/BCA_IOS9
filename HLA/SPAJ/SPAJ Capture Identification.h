@@ -68,9 +68,9 @@
 
     // PROTOCOL
 
-    @property (nonatomic,strong) id <SPAJCaptureIdentificationDelegate> SPAJCaptureIdentificationDelegate;
+    @property (nonatomic,weak) id <SPAJCaptureIdentificationDelegate> SPAJCaptureIdentificationDelegate;
 
-    @property (strong, nonatomic) NSDictionary* dictTransaction;
+    @property (weak, nonatomic) NSDictionary* dictTransaction;
 
     // VIEW
     @property (nonatomic, weak) IBOutlet UIView* viewCaptureFront;

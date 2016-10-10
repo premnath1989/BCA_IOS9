@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface TextFieldSPAJ : UITextField
-@property (strong, nonatomic) NSString* textFieldName;
+@property (weak, nonatomic) NSString* textFieldName;
 
 -(void)setTextFieldName:(NSString *)stringTextFieldName;
 -(NSString *)getTextFieldName;

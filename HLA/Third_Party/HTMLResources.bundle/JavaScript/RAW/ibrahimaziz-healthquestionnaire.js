@@ -1298,54 +1298,6 @@ function getFromDatabaseForHealthQuestionnaire(objectContent, stringPageType)
 				{
 					setTextPDF(stringKey, stringValue);
 				}
-				
-				/* var intMaxString = 26;
-				var stringKeyWithoutPrefix = releasePrefix(stringKey);
-				var stringKeyWithoutInfix = releaseInfix(stringKeyWithoutPrefix);
-				var stringIDMedication = "HypertensionMedication";
-				
-				if (stringKeyWithoutInfix == undefined)
-				{
-					if (stringValue.length > intMaxString)
-					{
-						var stringValue1 = stringValue.substring(0, intMaxString);
-						var stringValue2 = stringValue.substring(0, intMaxString);
-
-						setTextPDF(stringKey, stringValue1);
-						setTextPDF(stringKey + "2nd", stringValue2);
-					}
-					else
-					{
-						setTextPDF(stringKey, stringValue);
-					}
-				}
-				else
-				{
-					var stringKeyForMedication = stringKeyWithoutInfix.substring(0, stringIDMedication.length);
-					var stringKeyForTable;
-				
-					if (stringKeyForMedication == stringIDMedication)
-					{
-						stringKeyForTable = stringCellPrefix + stringKeyWithoutPrefix;
-						// alert(stringKres + " " + stringKeyForTable + " " + stringValue)
-						$(stringKres + stringKeyForTable).append(stringValue);
-					}
-					else
-					{
-						if (stringValue.length > intMaxString)
-						{
-							var stringValue1 = stringValue.substring(0, intMaxString);
-							var stringValue2 = stringValue.substring(0, intMaxString);
-
-							setTextPDF(stringKey, stringValue1);
-							setTextPDF(stringKey + "2nd", stringValue2);
-						}
-						else
-						{
-							setTextPDF(stringKey, stringValue);
-						}
-					} 
-				} */
 			}
 			else
 			{

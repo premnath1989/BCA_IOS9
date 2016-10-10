@@ -27,7 +27,7 @@
     ModelSPAJAnswers* modelSPAJAnswers;
     ModelSIPOData* modelSIPData;
 }
-@property (strong, nonatomic) NSString* htmlFileName;
-@property (nonatomic,strong) id <SPAJCalonTertanggungDelegate> delegate;
+@property (weak, nonatomic) NSString* htmlFileName;
+@property (nonatomic,weak) id <SPAJCalonTertanggungDelegate> delegate;
 -(void)voidDoneSPAJCalonTertanggung;
 @end

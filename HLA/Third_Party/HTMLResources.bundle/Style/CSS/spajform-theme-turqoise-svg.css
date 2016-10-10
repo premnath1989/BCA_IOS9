@@ -221,6 +221,11 @@ table.Square tbody tr:nth-child(even), table.Space tbody tr:nth-child(even) {
   color: #00a6b3;
 }
 
+.ButtonPreview {
+  background-color: transparent;
+  color: #00a6b3;
+}
+
 /* LINK */
 .NavigationPopUp {
   color: #00a6b3;

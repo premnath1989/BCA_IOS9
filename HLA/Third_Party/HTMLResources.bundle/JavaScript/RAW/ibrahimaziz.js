@@ -96,6 +96,7 @@ var stringStateNotChecked = "Not Checked";
 var stringStateNotSelected = "Not Selected";
 var stringNationality;
 var arrayRelationshipWithProspectiveInsured = [];
+var arrayDatePeriod = [];
 var arrayNationality = [];
 var stringIllnessSuffix = "Illness";
 
@@ -109,8 +110,9 @@ function labelGenerator(labelID, labelAmount)
 
 function labelGeneratorForHealthQuestionnaire(labelID, labelAmount)
 {
-    $(labelID).css("width", ((sizeBox + 3) * labelAmount) + "px");
+    $(labelID).css("width", (((sizeBox + 3) * labelAmount) - 10) + "px");
 }
+
 function spanGenerator(spanID, spanAmount)
 {
     $(spanID).css("width", (((sizeBox + 4) * spanAmount) - 10) - spanAmount + "px");
@@ -343,9 +345,6 @@ function buttonCancelGenerator(stringPopUpID, booleanState)
         $(stringButtonCancelJQueryID).css("display", "none");
     }           
 }
-
-
-
 
 
 // POP UP SHOW
@@ -726,7 +725,7 @@ function additionalQuestionGenerator()
 
                     $("#ButtonAddSPAJProposal").css("display", "none");
 					tableSPAJProposalGenerator("SPAJProposalList", arrayHealthQuestionnaire);
-					previewArrayObject(arrayHealthQuestionnaire);
+					// previewArrayObject(arrayHealthQuestionnaire);
                 }
 
 				arrayAdd(arrayHealthQuestionnaire, $(this).attr("name"), getRadioButtonGeneral($(this).attr("name")));
@@ -1306,7 +1305,7 @@ function buttonDeleteSPAJProposal(stringButtonViewJavaScriptID, stringButtonView
 		arrayDelete(arrayHealthQuestionnaire, arrayTemporary[i].elementID);
 	}
 	
-	previewArrayObject(arrayHealthQuestionnaire);
+	// previewArrayObject(arrayHealthQuestionnaire);
 
 	tableSPAJProposalGenerator("SPAJProposalList", arrayHealthQuestionnaire);
 }
@@ -1627,7 +1626,6 @@ function buttonPopUpSPAJProposalGenerator()
 			{
 				stringValue = getTextGeneral(stringInputJavaScriptID);
 				arrayAdd(arrayInputTemporary, stringKey, stringValue);
-				alert(stringKey + " " + stringValue);
 			}
 		});
 		
@@ -1652,7 +1650,7 @@ function buttonPopUpSPAJProposalGenerator()
 			});
 
 			tableSPAJProposalGenerator("SPAJProposalList", arrayHealthQuestionnaire);
-			previewArrayObject(arrayHealthQuestionnaire);
+			// previewArrayObject(arrayHealthQuestionnaire);
 		}
     });
 }
@@ -1664,8 +1662,8 @@ function tableBeneficiariesListGenerator(stringTableJavaScriptID, arrayContent)
 	var stringContentBirthday;
 	var stringContentRelation;
 	var stringNameIDSuffix = arrayBeneficiariesListPopUpHeader[0];
-	var stringBirthdayIDSuffix = arrayBeneficiariesListPopUpHeader[2];
-	var stringRelationshipIDSuffix = arrayBeneficiariesListPopUpHeader[4];
+	var stringBirthdayIDSuffix = arrayBeneficiariesListPopUpHeader[1];
+	var stringRelationshipIDSuffix = arrayBeneficiariesListPopUpHeader[3];
 	var stringKeyName = stringPrefixText + stringBeneficiariesListInfix + stringNameIDSuffix;
 	var stringKeyBirthday = stringPrefixDate + stringBeneficiariesListInfix + stringBirthdayIDSuffix;
 	var stringKeyRelationship = stringPrefixSelect + stringBeneficiariesListInfix + stringRelationshipIDSuffix;
@@ -1737,6 +1735,14 @@ function initiateArrayRelationshipWithProspectiveInsured(objectContent)
 	objectContent.push({ value: "creditordebitor", text: "Kreditor / Debitor" });
 	objectContent.push({ value: "charity", text: "Amal" });
 	objectContent.push({ value: "heirlaw", text: "Ahli Waris Hukum" });
+}
+
+function initiateArrayDatePeriod(objectContent)
+{
+	objectContent.push({ value: "hari", text: "Hari" })
+	objectContent.push({ value: "minggu", text: "Minggu" })
+	objectContent.push({ value: "bulan", text: "Bulan" })
+	objectContent.push({ value: "tahun", text: "Tahun" })
 }
 
 function generateSelectOption(stringSelectJavaScriptID, arrayOption)
@@ -2019,7 +2025,24 @@ function setSelectForm(stringID, stringValue)
 
 function setSelectPDF(stringID, stringValue)
 {
-    setBoxGeneral(stringID, stringValue);
+	var stringJQueryID = stringKres + stringID;
+        
+    if ($(stringJQueryID).is("div") == true)
+    {
+        setLineGeneral(stringID, stringValue);
+    }
+    else if ($(stringJQueryID).is("td") == true)
+    {
+        setTextGeneral(stringID, stringValue);
+    }
+	else if ($(stringJQueryID).is("input[type='text']") == true)
+	{
+		setTextGeneral(stringID, stringValue);
+	}
+    else
+    {
+        setBoxGeneral(stringID, stringValue);
+    }
 }
 
 function setCheckboxGeneral(stringCheckboxJavaScriptID, stringValue)
@@ -2917,17 +2940,28 @@ function getFromDatabase(objectContent, stringPageType)
 		{
 			arrayHealthQuestionnaire = objectContent;
 			
-			buttonPreviewForMultiPopUp(stringPageInfixTypeCurrent + 'Activity', arrayHealthQuestionnaire, ['Area' + stringPageInfixTypeCurrent + 'Activity' + 'AmandmentDetail']);
-			buttonPreviewForMultiPopUp(stringPageInfixTypeCurrent + 'SmokeActivity', arrayHealthQuestionnaire, ['Number' + stringPageInfixTypeCurrent + 'SmokeActivity' + 'Amount']);
-			buttonPreviewForMultiPopUp(stringPageInfixTypeCurrent + 'Junkie', arrayHealthQuestionnaire, ['RadioButton' + stringPageInfixTypeCurrent + 'Alcohol' + 'ALConsume']);
-			buttonPreviewForMultiPopUp(stringPageInfixTypeCurrent + 'Cell', arrayHealthQuestionnaire, ['Date' + stringPageInfixTypeCurrent + 'Tumor' + 'FirstDiagnose']);
-			buttonPreviewForMultiPopUp(stringPageInfixTypeCurrent + 'Cardiac', arrayHealthQuestionnaire, ['Date' + stringPageInfixTypeCurrent + 'ChestPain' + 'FirstAttack', 'Date' + stringPageInfixTypeCurrent + 'Hypertension' + 'FirstTime']);
-			buttonPreviewForMultiPopUp(stringPageInfixTypeCurrent + 'Digest', arrayHealthQuestionnaire, ['RadioButton' + stringPageInfixTypeCurrent + 'DigestDetail' + 'Problem']);
-			buttonPreviewForMultiPopUp(stringPageInfixTypeCurrent + 'Gland', arrayHealthQuestionnaire, ['Date' + stringPageInfixTypeCurrent + 'Thyroid' + 'THFirstGot']);
-			buttonPreviewForMultiPopUp(stringPageInfixTypeCurrent + 'Liver', arrayHealthQuestionnaire, ['Date' + stringPageInfixTypeCurrent + 'Diabetes' + 'FirstKnown']);
-			buttonPreviewForMultiPopUp(stringPageInfixTypeCurrent + 'Motion', arrayHealthQuestionnaire, ['RadioButton' + stringPageInfixTypeCurrent + 'Backbone' + 'BBDissorder', 'RadioButton' + stringPageInfixTypeCurrent + 'Joint' + 'Atritis']);
-			buttonPreviewForMultiPopUp(stringPageInfixTypeCurrent + 'Nerve', arrayHealthQuestionnaire, ['Text' + stringPageInfixTypeCurrent + 'Epilepsy' + 'Since']);
-			buttonPreviewForMultiPopUp(stringPageInfixTypeCurrent + 'Respiratory', arrayHealthQuestionnaire, ['RadioButton' + stringPageInfixTypeCurrent + 'RespiratoryDetail' + 'Disruption']);
+			buttonPreviewForMultiPopUp(stringPageInfixTypeCurrent + 'Activity', arrayHealthQuestionnaire, 
+			[
+				stringPrefixRadioButton + stringPageInfixTypeCurrent + 'Diving' + 'Criteria', 
+				stringPrefixText + stringPageInfixTypeCurrent + 'Hiking' + 'HKType', 
+				stringPrefixText + stringPageInfixTypeCurrent + 'Racing' + 'RCActivity', 
+				stringPrefixRadioButton + stringPageInfixTypeCurrent + 'Paragliding' + 'GlidingChange', 
+				stringPrefixArea + stringPageInfixTypeCurrent + 'Mining' + 'Position', 
+				stringPrefixRadioButton + stringPageInfixTypeCurrent + 'Traveling' + 'TVReason', 
+				stringPrefixRadioButton + stringPageInfixTypeCurrent + 'Flight' + 'FLJob', 
+				stringPrefixRadioButton + stringPageInfixTypeCurrent + 'Military' + 'Unit'
+			]);
+			buttonPreviewForMultiPopUp(stringPageInfixTypeCurrent + 'SmokeActivity', arrayHealthQuestionnaire, 
+			[stringPrefixNumber + stringPageInfixTypeCurrent + 'SmokeActivity' + 'Amount']);
+			buttonPreviewForMultiPopUp(stringPageInfixTypeCurrent + 'Junkie', arrayHealthQuestionnaire, [stringPrefixRadioButton + stringPageInfixTypeCurrent + 'Alcohol' + 'ALConsume']);
+			buttonPreviewForMultiPopUp(stringPageInfixTypeCurrent + 'Cell', arrayHealthQuestionnaire, [stringPrefixDate + stringPageInfixTypeCurrent + 'Tumor' + 'FirstDiagnose']);
+			buttonPreviewForMultiPopUp(stringPageInfixTypeCurrent + 'Cardiac', arrayHealthQuestionnaire, [stringPrefixDate + stringPageInfixTypeCurrent + 'ChestPain' + 'FirstAttack', 'Date' + stringPageInfixTypeCurrent + 'Hypertension' + 'FirstTime']);
+			buttonPreviewForMultiPopUp(stringPageInfixTypeCurrent + 'Digest', arrayHealthQuestionnaire, [stringPrefixRadioButton + stringPageInfixTypeCurrent + 'DigestDetail' + 'Problem']);
+			buttonPreviewForMultiPopUp(stringPageInfixTypeCurrent + 'Gland', arrayHealthQuestionnaire, [stringPrefixDate + stringPageInfixTypeCurrent + 'Thyroid' + 'THFirstGot']);
+			buttonPreviewForMultiPopUp(stringPageInfixTypeCurrent + 'Liver', arrayHealthQuestionnaire, [stringPrefixDate + stringPageInfixTypeCurrent + 'Diabetes' + 'FirstKnown']);
+			buttonPreviewForMultiPopUp(stringPageInfixTypeCurrent + 'Motion', arrayHealthQuestionnaire, [stringPrefixRadioButton + stringPageInfixTypeCurrent + 'Backbone' + 'BBDissorder', 'RadioButton' + stringPageInfixTypeCurrent + 'Joint' + 'Atritis']);
+			buttonPreviewForMultiPopUp(stringPageInfixTypeCurrent + 'Nerve', arrayHealthQuestionnaire, [stringPrefixText + stringPageInfixTypeCurrent + 'Epilepsy' + 'Since']);
+			buttonPreviewForMultiPopUp(stringPageInfixTypeCurrent + 'Respiratory', arrayHealthQuestionnaire, [stringPrefixRadioButton + stringPageInfixTypeCurrent + 'RespiratoryDetail' + 'Disruption']);
 			
 			if (arrayHealthQuestionnaire.length > 0)
 			{
@@ -2978,7 +3012,20 @@ function getFromDatabase(objectContent, stringPageType)
 		}
 		else
 		{
-			
+			var stringThirdParty = arrayFind(objectContent, "RadioButtonPremiPaymentThirdPartyAnswer")
+
+			if (stringThirdParty == "true")
+			{
+				$(stringKres + "ButtonPreviewPremiPaymentThirdParty").css("display", "block");
+			}
+			else if (stringThirdParty == "false")
+			{
+				$(stringKres + "ButtonPreviewPremiPaymentThirdParty").css("display", "none");
+			}
+			else
+			{
+				
+			}
 		}
 	}
 }
@@ -3151,7 +3198,7 @@ function calculateAge(stringBirthdayID, stringAgeID)
 			var arrayBirthday = $(stringBirthdayJQueryID).val().split('/');
 			var dateBirthday = new Date(arrayBirthday[2], parseInt(arrayBirthday[1] - 1, 10), arrayBirthday[0]);
 			var dateToday = new Date();
-			
+
 			if( (dateBirthday.getTime() > dateToday.getTime()))
 			{
 				alert("Tanggal lahir tidak bisa lebih dari hari ini !.");
@@ -3159,9 +3206,46 @@ function calculateAge(stringBirthdayID, stringAgeID)
 			}
 			else
 			{
-				
-				var dateDifference = Math.ceil(dateToday.getTime() - dateBirthday.getTime()) / (1000 * 60 * 60 * 24 * 366);
-				var intAge = parseInt(dateDifference);
+				// var dateDifference = Math.ceil(dateToday.getTime() - dateBirthday.getTime()) / (1000 * 60 * 60 * 24 * 366);
+				// var intAge = parseInt(dateDifference);
+
+				var dateTodayDay = dateToday.getDate();
+				var dateTodayMonth = dateToday.getMonth() + 1;
+				var dateTodayYear = dateToday.getFullYear();
+				var dateBirthdayDay = dateBirthday.getDate();
+				var dateBirthdayMonth = dateBirthday.getMonth() + 1;
+				var dateBirthdayYear = dateBirthday.getFullYear();
+
+				if (dateBirthdayYear < dateTodayYear)
+				{
+					if (dateTodayMonth > dateBirthdayMonth)
+					{
+						intAge = dateTodayYear - dateBirthdayYear;
+					}
+					else if (dateTodayMonth < dateBirthdayMonth)
+					{
+						intAge = dateTodayYear - dateBirthdayYear - 1;
+					}
+					else
+					{
+						if (dateTodayDay > dateBirthdayDay)
+						{
+							intAge = dateTodayYear - dateBirthdayYear;
+						}
+						else if (dateTodayDay < dateBirthdayDay)
+						{
+							intAge = dateTodayYear - dateBirthdayYear - 1;
+						}
+						else
+						{
+							intAge = dateTodayYear - dateBirthdayYear;
+						}
+					}
+				}
+				else
+				{
+					intAge = 0;
+				}
 
 				if (intAge == null || intAge == undefined)
 				{
@@ -3341,5 +3425,28 @@ function imageSelector(stringPath)
 		{
 			$(this).attr("src", $(this).attr("src").replace("..\/..\/Resource\/|..\/..\/jqueryLibrary\/Resource\/", stringPath));
 		}
+	});
+}
+
+function checkboxAsRadioButton(stringCheckboxName)
+{
+	$("input:checkbox[name='" + stringCheckboxName + "']").each(function()
+	{
+		$(this).click(function()
+		{
+			var stringCurrentJavaScriptID = $(this).attr("id");
+
+			$("input:checkbox[name='" + stringCheckboxName + "']").each(function()
+			{
+				if ($(this).attr("id") == stringCurrentJavaScriptID)
+				{
+
+				}
+				else
+				{
+					$(this).prop("checked", false);
+				}
+			});
+		});
 	});
 }

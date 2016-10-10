@@ -4,10 +4,17 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="BPreplay_Italics.otf">
+        <mutableArray key="BPreplayBold.otf">
+            <string>BPreplay-Bold</string>
+        </mutableArray>
+        <mutableArray key="BPreplayBoldItalics.otf">
+            <string>BPreplay-BoldItalic</string>
+        </mutableArray>
+        <mutableArray key="BPreplay_Italics.ttf">
             <string>BPreplay-Italic</string>
         </mutableArray>
-        <mutableArray key="BPreplay_Regular.otf">
+        <mutableArray key="BPreplay_Regular.ttf">
+            <string>BPreplay</string>
             <string>BPreplay</string>
             <string>BPreplay</string>
             <string>BPreplay</string>
@@ -98,11 +105,11 @@
                     </subviews>
                     <color key="backgroundColor" red="0.87450980389999999" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UQm-bs-aDz">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UQm-bs-aDz">
                     <rect key="frame" x="0.0" y="45" width="819" height="679"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="B1q-38-Mx6">
-                            <rect key="frame" x="0.0" y="0.0" width="819" height="2102"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="B1q-38-Mx6">
+                            <rect key="frame" x="0.0" y="0.0" width="819" height="1975"/>
                             <subviews>
                                 <view tag="1" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jkc-VD-JSO" userLabel="View-1">
                                     <rect key="frame" x="0.0" y="0.0" width="819" height="114"/>
@@ -127,6 +134,9 @@
                                                 <segment title="Lainnya"/>
                                             </segments>
                                             <color key="tintColor" red="0.0" green="0.62745098040000002" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <connections>
+                                                <action selector="actionSegmentSPAJ:" destination="-1" eventType="valueChanged" id="P6D-au-ohT"/>
+                                            </connections>
                                         </segmentedControl>
                                         <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="G95-Uk-3Qq" customClass="TextFieldSPAJ">
                                             <rect key="frame" x="20" y="75" width="453" height="30"/>
@@ -347,28 +357,46 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
                                 <view tag="1" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z3b-9Z-iDA" userLabel="View-12a">
-                                    <rect key="frame" x="0.0" y="1184" width="819" height="105"/>
+                                    <rect key="frame" x="0.0" y="1184" width="819" height="122"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UVQ-Fo-tri">
-                                            <rect key="frame" x="20" y="8" width="626" height="61"/>
+                                            <rect key="frame" x="20" y="30" width="626" height="61"/>
                                             <string key="text">a. Apakah sudah dijelaskan bahwa terdapat masa tunggu Klaim selama 90 (sembilan puluh) Hari Kalender sejak Tanggal Mulai Asuransi atau sejak tanggal pemulihan Polis terakhir?</string>
                                             <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="zdC-dw-Nmk" customClass="SegmentSPAJ">
-                                            <rect key="frame" x="690" y="8" width="121" height="29"/>
+                                            <rect key="frame" x="690" y="30" width="121" height="29"/>
                                             <segments>
                                                 <segment title="Ya"/>
                                                 <segment title="Tidak"/>
                                             </segments>
                                             <color key="tintColor" red="0.0" green="0.62745098040000002" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                                         </segmentedControl>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Khusus untuk produk dengan manfaat" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WZj-F8-oye">
+                                            <rect key="frame" x="38" y="4" width="608" height="22"/>
+                                            <fontDescription key="fontDescription" name="BPreplay-Bold" family="BPreplay" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Terminal Illness (TI):" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CwL-Db-s2k">
+                                            <rect key="frame" x="336" y="4" width="608" height="22"/>
+                                            <fontDescription key="fontDescription" name="BPreplay-BoldItalic" family="BPreplay" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="12." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GmX-Hv-wq2">
+                                            <rect key="frame" x="14" y="6" width="20" height="22"/>
+                                            <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
                                 <view tag="1" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lFa-8A-cSt" userLabel="View-12b">
-                                    <rect key="frame" x="0.0" y="1294" width="819" height="105"/>
+                                    <rect key="frame" x="0.0" y="1311" width="819" height="105"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iyK-hK-qLd">
                                             <rect key="frame" x="20" y="8" width="626" height="61"/>
@@ -389,7 +417,7 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
                                 <view tag="1" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IB5-Cf-OHn" userLabel="View-Penghasilan">
-                                    <rect key="frame" x="0.0" y="1404" width="819" height="125"/>
+                                    <rect key="frame" x="0.0" y="1421" width="819" height="118"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OUb-zp-yrX" customClass="TextFieldSPAJ">
                                             <rect key="frame" x="317" y="42" width="430" height="30"/>
@@ -429,7 +457,7 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
                                 <view tag="1" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RuH-ZF-jxn" userLabel="View-Alasan">
-                                    <rect key="frame" x="0.0" y="1534" width="819" height="125"/>
+                                    <rect key="frame" x="0.0" y="1544" width="819" height="99"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="14. Alasan pengajuan asuransi jiwa " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UIK-9h-m5x">
                                             <rect key="frame" x="20" y="8" width="588" height="21"/>
@@ -461,7 +489,7 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
                                 <view tag="1" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eay-1D-KEM" userLabel="View-Saran">
-                                    <rect key="frame" x="0.0" y="1664" width="819" height="438"/>
+                                    <rect key="frame" x="0.0" y="1648" width="819" height="327"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="15. Jika ada, berikan informasi lain yang menurut Anda dapat membantu BCA Life dalam mengevaluasi pengajuan ini:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uxa-HJ-uP1">
                                             <rect key="frame" x="20" y="8" width="766" height="42"/>
@@ -496,9 +524,6 @@
                                 </view>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="2102" id="QoA-jM-4DV"/>
-                            </constraints>
                         </stackView>
                     </subviews>
                     <constraints>

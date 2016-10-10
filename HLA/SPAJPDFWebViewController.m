@@ -102,7 +102,9 @@
     //[self seePDF];
 }
 
-
+-(IBAction)barRefresh:(UIBarButtonItem *)sender{
+    [self loadFile];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -303,11 +303,13 @@
     NSMutableArray *arrayIMGName;
     NSMutableArray *arrayPureIMGName = [[NSMutableArray alloc]init];
     if ([[dictionaryPOData valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"]){
-        arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH"]];
+        //arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH"]];
+        arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH\",\"TP\",\"AF"]];
     }
     else{
         //arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_IN"]];
-        arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH\",\"IMG_IN"]];
+        //arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH\",\"IMG_IN"]];
+        arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH\",\"IMG_IN\",\"TP\",\"AF"]];
     }
     
     for (int i=0;i<[arrayIMGName count];i++){
@@ -569,6 +571,36 @@
         CGRect rectSign2 = CGRectMake(720, 8060, imageSigned2.size.width, imageSigned2.size.height);
         CGRect rectSign3 = CGRectMake(200, 8060, imageSigned3.size.width, imageSigned3.size.height);
         CGRect rectSign4 = CGRectMake(1320, 8060, imageSigned4.size.width, imageSigned4.size.height);
+        
+        UIImage *resultImage = [self generateSignatureForImage:baseImage signatureImage1:imageSigned1 signaturePostion1:rectSign1 signatureImage2:imageSigned2 signaturePostion2:rectSign2 signatureImage3:imageSigned3 signaturePostion3:rectSign3 signatureImage4:imageSigned4 signaturePostion4:rectSign4];
+        NSData *thumbnailData = UIImageJPEGRepresentation(resultImage, 0);
+        
+        NSString *relativeOutputFilePath = [NSString stringWithFormat:@"%@", fullpath];
+        [thumbnailData writeToFile:relativeOutputFilePath atomically:YES];
+    }
+    else if ([stringFileName rangeOfString:@"salesdeclaration"].location != NSNotFound) {
+        CGRect rectSign1 = CGRectMake(120,  8060, 0, 0);
+        CGRect rectSign2 = CGRectMake(720, 8060, 0, 0);
+        CGRect rectSign3 = CGRectMake(200, 8060, 0, 0);
+        CGRect rectSign4 = CGRectMake(103, 2712, 117 ,67);
+        
+        UIImage *resultImage = [self generateSignatureForImage:baseImage signatureImage1:imageSigned1 signaturePostion1:rectSign1 signatureImage2:imageSigned2 signaturePostion2:rectSign2 signatureImage3:imageSigned3 signaturePostion3:rectSign3 signatureImage4:imageSigned4 signaturePostion4:rectSign4];
+        NSData *thumbnailData = UIImageJPEGRepresentation(resultImage, 0);
+        
+        NSString *relativeOutputFilePath = [NSString stringWithFormat:@"%@", fullpath];
+        [thumbnailData writeToFile:relativeOutputFilePath atomically:YES];
+    }
+    else if ([stringFileName rangeOfString:@"thirdparty"].location != NSNotFound) {
+        NSString *mainFileName = [NSString stringWithFormat:@"%@_ThirdParty.jpg",[dictTransaction valueForKey:@"SPAJEappNumber"]];
+        NSString *fullpath = [formatter generateSPAJFileDirectory:[dictTransaction valueForKey:@"SPAJEappNumber"]];
+        fullpath = [NSString stringWithFormat:@"%@/%@",fullpath,mainFileName];
+        
+        UIImage *baseImage = [UIImage imageWithContentsOfFile:fullpath];
+        
+        CGRect rectSign1 = CGRectMake(120,  200, imageSigned1.size.width, imageSigned1.size.height);
+        CGRect rectSign2 = CGRectMake(720, 200, imageSigned2.size.width, imageSigned2.size.height);
+        CGRect rectSign3 = CGRectMake(200, 200, imageSigned3.size.width, imageSigned3.size.height);
+        CGRect rectSign4 = CGRectMake(1320, 200, imageSigned4.size.width, imageSigned4.size.height);
         
         UIImage *resultImage = [self generateSignatureForImage:baseImage signatureImage1:imageSigned1 signaturePostion1:rectSign1 signatureImage2:imageSigned2 signaturePostion2:rectSign2 signatureImage3:imageSigned3 signaturePostion3:rectSign3 signatureImage4:imageSigned4 signaturePostion4:rectSign4];
         NSData *thumbnailData = UIImageJPEGRepresentation(resultImage, 0);

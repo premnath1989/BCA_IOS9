@@ -333,6 +333,37 @@ main form fieldset.WithoutDoubleDot label:after {
   font-size: 1em	!important;
 }
 
+div.TableHeader {
+  border-style: solid;
+  border-width: 1px;
+}
+
+div.TableHeader label {
+  margin-top: 5px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  vertical-align: middle;
+  text-align: center;
+  border-style: none;
+  border-width: 1px;
+}
+
+div.TableItem label {
+  margin-top: 5px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-bottom: 5px;
+  padding-top: 1px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 1px;
+  border-style: solid;
+  border-width: 1px;
+}
+
 /* SIGNATURE */
 .Signature {
   margin: 10px;
