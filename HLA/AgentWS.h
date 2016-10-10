@@ -44,7 +44,6 @@
 @class AgentWS_SyncdatareferralResult;
 @class AgentWS_SyncDataVersion;
 @class AgentWS_SyncDataVersionResponse;
-@class AgentWS_SyncDataVersionResult;
 @interface AgentWS_ValidateAgentAndDevice : NSObject {
     
     /* elements */
@@ -870,26 +869,11 @@
 /* attributes */
 - (NSDictionary *)attributes;
 @end
-@interface AgentWS_SyncDataVersionResult : NSObject {
-    
-    /* elements */
-    /* attributes */
-}
-- (NSString *)nsPrefix;
-- (xmlNodePtr)xmlNodeForDoc:(xmlDocPtr)doc elementName:(NSString *)elName elementNSPrefix:(NSString *)elNSPrefix;
-- (void)addAttributesToNode:(xmlNodePtr)node;
-- (void)addElementsToNode:(xmlNodePtr)node;
-+ (AgentWS_SyncDataVersionResult *)deserializeNode:(xmlNodePtr)cur;
-- (void)deserializeAttributesFromNode:(xmlNodePtr)cur;
-- (void)deserializeElementsFromNode:(xmlNodePtr)cur;
-/* elements */
-/* attributes */
-- (NSDictionary *)attributes;
-@end
+
 @interface AgentWS_SyncDataVersionResponse : NSObject {
     
     /* elements */
-    AgentWS_SyncDataVersionResult * SyncDataVersionResult;
+    NSString * SyncDataVersionResult;
     NSString * strStatus;
     /* attributes */
 }
@@ -901,7 +885,7 @@
 - (void)deserializeAttributesFromNode:(xmlNodePtr)cur;
 - (void)deserializeElementsFromNode:(xmlNodePtr)cur;
 /* elements */
-@property (retain) AgentWS_SyncDataVersionResult * SyncDataVersionResult;
+@property (retain) NSString * SyncDataVersionResult;
 @property (retain) NSString * strStatus;
 /* attributes */
 - (NSDictionary *)attributes;

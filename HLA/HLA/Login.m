@@ -195,7 +195,7 @@ static NSString *labelVers;
     
     //we do some version checker over here
     [self appVersionChecker];
-    //[self dataVersionChecker];
+    [self dataVersionChecker];
 }
 
 - (void)viewWillDisappear:(BOOL)animated

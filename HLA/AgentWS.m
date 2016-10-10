@@ -6702,77 +6702,6 @@
     }
 }
 @end
-@implementation AgentWS_SyncDataVersionResult
-- (id)init
-{
-    if((self = [super init])) {
-    }
-    
-    return self;
-}
-- (void)dealloc
-{
-    
-    [super dealloc];
-}
-- (NSString *)nsPrefix
-{
-    return @"AgentWS";
-}
-- (xmlNodePtr)xmlNodeForDoc:(xmlDocPtr)doc elementName:(NSString *)elName elementNSPrefix:(NSString *)elNSPrefix
-{
-    NSString *nodeName = nil;
-    if(elNSPrefix != nil && [elNSPrefix length] > 0)
-    {
-        nodeName = [NSString stringWithFormat:@"%@:%@", elNSPrefix, elName];
-    }
-    else
-    {
-        nodeName = [NSString stringWithFormat:@"%@:%@", @"AgentWS", elName];
-    }
-    
-    xmlNodePtr node = xmlNewDocNode(doc, NULL, [nodeName xmlString], NULL);
-    
-    
-    [self addAttributesToNode:node];
-    
-    
-    return node;
-}
-- (void)addAttributesToNode:(xmlNodePtr)node
-{
-    
-}
-- (void)addElementsToNode:(xmlNodePtr)node
-{
-    
-}
-/* elements */
-/* attributes */
-- (NSDictionary *)attributes
-{
-    NSMutableDictionary *attributes = [NSMutableDictionary dictionary];
-    
-    return attributes;
-}
-+ (AgentWS_SyncDataVersionResult *)deserializeNode:(xmlNodePtr)cur
-{
-    AgentWS_SyncDataVersionResult *newObject = [[AgentWS_SyncDataVersionResult new] autorelease];
-    
-    [newObject deserializeAttributesFromNode:cur];
-    [newObject deserializeElementsFromNode:cur];
-    
-    return newObject;
-}
-- (void)deserializeAttributesFromNode:(xmlNodePtr)cur
-{
-}
-- (void)deserializeElementsFromNode:(xmlNodePtr)cur
-{
-    
-    
-}
-@end
 @implementation AgentWS_SyncDataVersionResponse
 - (id)init
 {
@@ -6870,7 +6799,7 @@
                 Class elementClass = nil;
                 xmlChar *instanceType = xmlGetNsProp(cur, (const xmlChar *) "type", (const xmlChar *) "http://www.w3.org/2001/XMLSchema-instance");
                 if(instanceType == NULL) {
-                    elementClass = [AgentWS_SyncDataVersionResult class];
+                    elementClass = [NSString class];
                 } else {
                     NSString *elementTypeString = [NSString stringWithCString:(char*)instanceType encoding:NSUTF8StringEncoding];
                     
