@@ -297,7 +297,7 @@ header .Address {
 }
 
 /* MAIN */
-main form .ContainerFit, main form .ContainerLeft, main form .ContainerRight, main fieldset .ContainerFit, main fieldset .ContainerLeft, main fieldset .ContainerRight {
+main form .ContainerFit, main form .ContainerLeft, main form .ContainerRight, main form .ContainerCenter, main fieldset .ContainerFit, main fieldset .ContainerLeft, main fieldset .ContainerRight, main fieldset .ContainerCenter {
   margin-top: 5px;
   margin-bottom: 5px;
   display: flex;
@@ -306,19 +306,19 @@ main form .ContainerFit, main form .ContainerLeft, main form .ContainerRight, ma
   align-items: stretch;
 }
 
-main form .ContainerFit .Item, main form .ContainerLeft .Item, main form .ContainerRight .Item, main fieldset .ContainerFit .Item, main fieldset .ContainerLeft .Item, main fieldset .ContainerRight .Item {
+main form .ContainerFit .Item, main form .ContainerLeft .Item, main form .ContainerRight .Item, main form .ContainerCenter .Item, main fieldset .ContainerFit .Item, main fieldset .ContainerLeft .Item, main fieldset .ContainerRight .Item, main fieldset .ContainerCenter .Item {
   flex-grow: 1;
 }
 
-main form .ContainerFit .Item1, main form .ContainerLeft .Item1, main form .ContainerRight .Item1, main fieldset .ContainerFit .Item1, main fieldset .ContainerLeft .Item1, main fieldset .ContainerRight .Item1 {
+main form .ContainerFit .Item1, main form .ContainerLeft .Item1, main form .ContainerRight .Item1, main form .ContainerCenter .Item1, main fieldset .ContainerFit .Item1, main fieldset .ContainerLeft .Item1, main fieldset .ContainerRight .Item1, main fieldset .ContainerCenter .Item1 {
   flex-grow: 1;
 }
 
-main form .ContainerFit .Item2, main form .ContainerLeft .Item2, main form .ContainerRight .Item2, main fieldset .ContainerFit .Item2, main fieldset .ContainerLeft .Item2, main fieldset .ContainerRight .Item2 {
+main form .ContainerFit .Item2, main form .ContainerLeft .Item2, main form .ContainerRight .Item2, main form .ContainerCenter .Item2, main fieldset .ContainerFit .Item2, main fieldset .ContainerLeft .Item2, main fieldset .ContainerRight .Item2, main fieldset .ContainerCenter .Item2 {
   flex-grow: 2;
 }
 
-main form .ContainerFit .Item3, main form .ContainerLeft .Item3, main form .ContainerRight .Item3, main fieldset .ContainerFit .Item3, main fieldset .ContainerLeft .Item3, main fieldset .ContainerRight .Item3 {
+main form .ContainerFit .Item3, main form .ContainerLeft .Item3, main form .ContainerRight .Item3, main form .ContainerCenter .Item3, main fieldset .ContainerFit .Item3, main fieldset .ContainerLeft .Item3, main fieldset .ContainerRight .Item3, main fieldset .ContainerCenter .Item3 {
   flex-grow: 3;
 }
 
@@ -334,20 +334,16 @@ main form .ContainerRight, main fieldset .ContainerRight {
   justify-content: flex-end;
 }
 
-main form .Margin, main fieldset .Margin {
-  margin: 5px;
-}
-
-main form .Center, main fieldset .Center {
+main form .ContainerCenter, main fieldset .ContainerCenter {
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  align-content: center;
+  align-items: center;
   text-align: center;
 }
 
-main form .Left, main fieldset .Left {
-  text-align: left;
-}
-
-main form .Right, main fieldset .Right {
-  text-align: right;
+main form .Margin, main fieldset .Margin {
+  margin: 5px;
 }
 
 main form .Short, main fieldset .Short {
@@ -388,6 +384,22 @@ main form .MediumIndent, main fieldset .MediumIndent {
 
 main form .LongIndent, main fieldset .LongIndent {
   margin-left: 390px;
+}
+
+.Center {
+  text-align: center;
+}
+
+.Left {
+  text-align: left;
+}
+
+.Right {
+  text-align: right;
+}
+
+.Justify {
+  text-align: justify;
 }
 
 /* WIDTH */

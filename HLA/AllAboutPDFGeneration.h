@@ -38,7 +38,7 @@
 -(BOOL)doesString:(NSString *)string containCharacter:(NSString *)character;
 
 -(NSString *)getWordFromString:(NSString *)stringImageName IndexWord:(int)index;
-
+-(void)voidSaveSignatureForSingleImage:(NSDictionary *)dictTransaction StringFileName:(NSString *)stringFileName;
 
 @property (nonatomic,weak) id <PDFGenerationDelegate> delegatePDFGeneration;
 @end

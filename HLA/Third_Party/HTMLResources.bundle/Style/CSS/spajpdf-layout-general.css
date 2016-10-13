@@ -369,22 +369,6 @@ main section .ContainerFit .Margin, main section .ContainerLeft .Margin, main se
   margin: 5px;
 }
 
-main section .ContainerFit .Center, main section .ContainerLeft .Center, main section .ContainerRight .Center {
-  text-align: center;
-}
-
-main section .ContainerFit .Left, main section .ContainerLeft .Left, main section .ContainerRight .Left {
-  text-align: left;
-}
-
-main section .ContainerFit .Right, main section .ContainerLeft .Right, main section .ContainerRight .Right {
-  text-align: right;
-}
-
-main section .ContainerFit .Justify, main section .ContainerLeft .Justify, main section .ContainerRight .Justify {
-  text-align: justify;
-}
-
 main section .ContainerFit {
   justify-content: space-between;
 }
@@ -428,6 +412,22 @@ main section .ContainerFit.InnerFieldset .Item.Column label:after {
 
 main section .ContainerFit.InnerFieldset label.RadioButton {
   margin-top: 0px !important;
+}
+
+.Center {
+  text-align: center;
+}
+
+.Left {
+  text-align: left;
+}
+
+.Right {
+  text-align: right;
+}
+
+.Justify {
+  text-align: justify;
 }
 
 div.Short {

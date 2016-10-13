@@ -24,6 +24,7 @@
 #import "SPAJ Add Menu.h"
 #import "ModelSIPOData.h"
 #import "ModelSPAJHtml.h"
+#import "CFFAPIController.h"
 // DECLARATION
 
 @interface SPAJEApplicationList ()<SPAJMainDelegate,SIListingDelegate,UIPopoverPresentationControllerDelegate,UITextFieldDelegate>{
@@ -219,6 +220,28 @@
         //[_delegateSPAJEappList actionGoToExistingList:nil];
          [[NSNotificationCenter defaultCenter] postNotificationName:@"GOTOSPAJ" object:self];
     }
+
+    - (IBAction)actionLoadLocalJSON:(UIBarButtonItem *)sender{
+        CFFAPIController* cffAPIController;
+        cffAPIController = [[CFFAPIController alloc]init];
+        
+        NSArray* arrayJSONKey = [[NSArray alloc]initWithObjects:@"SPAJId",@"FileName",@"Status",@"SPAJSection",@"FolderName",@"Id",@"FileNameIndo", nil];
+        NSArray* tableColumn= [[NSArray alloc]initWithObjects:@"SPAJID",@"SPAJHtmlName",@"SPAJHtmlStatus",@"SPAJHtmlSection",@"SPAJServerID",@"SPAJHtmlTranslateName", nil];
+        NSDictionary *dictCFFTable = [[NSDictionary alloc]initWithObjectsAndKeys:@"SPAJHtml",@"tableName",tableColumn,@"columnName", nil];
+        
+        NSMutableDictionary* dictDuplicateChecker = [[NSMutableDictionary alloc]init];
+        [dictDuplicateChecker setObject:@"SPAJHtmlID" forKey:@"DuplicateCheckerColumnName"];
+        [dictDuplicateChecker setObject:@"SPAJHtml" forKey:@"DuplicateCheckerTableName"];
+        [dictDuplicateChecker setObject:@"SPAJID" forKey:@"DuplicateCheckerWhere1"];
+        [dictDuplicateChecker setObject:@"SPAJHtmlName" forKey:@"DuplicateCheckerWhere2"];
+        [dictDuplicateChecker setObject:@"SPAJHtmlStatus" forKey:@"DuplicateCheckerWhere3"];
+        [dictDuplicateChecker setObject:@"SPAJHtmlSection" forKey:@"DuplicateCheckerWhere4"];
+        [dictDuplicateChecker setObject:@"SPAJServerID" forKey:@"DuplicateCheckerWhere5"];
+        [dictDuplicateChecker setObject:@"SPAJHtmlTranslateName" forKey:@"DuplicateCheckerWhere6"];
+        
+        [cffAPIController tempInsertJsonToDB:@"GetAllData" JSONKey:arrayJSONKey TableDictionary:dictCFFTable DictionaryDuplicateChecker:dictDuplicateChecker];
+    }
+
     // FUNCTION ON PAGE
 
     - (void) generateQuery

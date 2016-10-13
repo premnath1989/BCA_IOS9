@@ -402,6 +402,91 @@ div.TableItem label {
   font-size: 0.6em;
 }
 
+.SignatureSquare {
+  margin: 10px;
+  text-align: center;
+  vertical-align: top;
+  border-style: solid;
+  border-width: 1px;
+}
+
+.SignatureSquare img {
+  min-height: 160px;
+  display: block;
+}
+
+.SignatureSquare span.Name, .SignatureSquare span.Description {
+  position: relative;
+  display: block;
+}
+
+.SignatureSquare span.Name {
+  margin-bottom: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 0.7em;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+}
+
+.SignatureSquare span.Description {
+  font-size: 0.6em;
+  border-top-style: solid;
+  border-top-width: 1px;
+}
+
+.Horizontal30of100 {
+  width: 30%;
+}
+
+.Horizontal30of100 thead tr th {
+  width: 288px;
+}
+
+.Horizontal30of100 tbody tr td {
+  width: 288px;
+}
+
+.Horizontal30of100 tfoot tr td {
+  width: 288px;
+}
+
+table.SignatureMedium {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  min-width: 144px;
+  padding: 0px;
+  vertical-align: top;
+  border-spacing: 0px;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 4px;
+  -ms-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+
+table.SignatureMedium thead tr th {
+  padding: 2px;
+  font-size: 0.75em;
+  text-align: center;
+  border-bottom-style: solid;
+  border-width: 1px;
+}
+
+table.SignatureMedium thead tr th .Note {
+  font-size: 0.7em;
+}
+
+table.SignatureMedium tbody tr td {
+  height: 108px;
+}
+
+table.SignatureMedium tfoot tr td {
+  font-size: 0.75em;
+  text-align: center;
+}
+
 /* TABLE */
 table.Square {
   margin-top: 5px;

@@ -540,9 +540,20 @@
     
     UIAlertView* alert = [[UIAlertView alloc]initWithTitle:title message:body delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
     [alert show];
-    
-    
 }
+
+-(NSDictionary *)getDictionaryForAdditionalData:(NSString *)SPAJHtmlSection HTMLID:(NSString *)stringHTMLID{
+    NSMutableDictionary* dictAdditionalData=[[NSMutableDictionary alloc]init];
+    [dictAdditionalData setObject:stringHTMLID forKey:@"elementID"];
+    
+    NSString* stringWhere = [NSString stringWithFormat:@"where elementID ='%@' and SPAJTransactionID = %i and SPAJHtmlSection ='%@'",stringHTMLID,[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue],SPAJHtmlSection];
+    NSString* stringValue =[modelSPAJAnswers selectSPAJAnswersData:@"Value" StringWhere:stringWhere];
+    [dictAdditionalData setObject:stringValue?:@"" forKey:@"Value"];
+    [dictAdditionalData setObject:@"1" forKey:@"CustomerID"];
+    [dictAdditionalData setObject:@"1" forKey:@"SPAJID"];
+    return dictAdditionalData;
+}
+
 
 - (void)savetoDB:(NSDictionary *)params{
     [delegate setRightButtonEnable:NO];
@@ -620,6 +631,13 @@
     NSMutableDictionary* modifiedParams = [[NSMutableDictionary alloc]initWithDictionary:[params valueForKey:@"data"]];
     NSMutableDictionary* tempDict = [[NSMutableDictionary alloc] initWithDictionary:[modifiedParams valueForKey:@"SPAJAnswers"]];
     NSString* stringWhere = [NSString stringWithFormat:@"where CustomerID=%@ and SPAJID=%@ and SPAJTransactionID=%@ and SPAJHtmlSection='%@'",@"1",@"1",SPAJTransactionID,stringSection];
+    /*if ([stringSection isEqualToString:@"KS_PH"]||[stringSection isEqualToString:@"KS_IN"]){
+        stringWhere = [NSString stringWithFormat:@"where CustomerID=%@ and SPAJID=%@ and SPAJTransactionID=%@ and SPAJHtmlSection in ('%@','PO','TR')",@"1",@"1",SPAJTransactionID,stringSection];
+    }
+    else{
+        stringWhere = [NSString stringWithFormat:@"where CustomerID=%@ and SPAJID=%@ and SPAJTransactionID=%@ and SPAJHtmlSection='%@'",@"1",@"1",SPAJTransactionID,stringSection];
+    }*/
+    
     //NSString* stringWhere = [NSString stringWithFormat:@"where CustomerID=%@ and SPAJID=%@ and SPAJTransactionID=%@",@"1",@"1",SPAJTransactionID];
     [tempDict setObject:stringWhere forKey:@"where"];
     
@@ -631,6 +649,31 @@
     [finalDictionary setValue:[params valueForKey:@"successCallBack"] forKey:@"successCallBack"];
     [finalDictionary setValue:[params valueForKey:@"errorCallback"] forKey:@"errorCallback"];
     [super readfromDB:finalDictionary];
+    /*NSMutableDictionary *readFromDBDictionary = [super readfromDB:finalDictionary];
+    
+    if ([stringSection isEqualToString:@"KS_PH"]){
+        //NSMutableDictionary *readFromDBDictionary = [super readfromDB:finalDictionary];
+        NSMutableDictionary *dictOriginal = [[NSMutableDictionary alloc]init];
+        NSMutableArray *modifieArray = [[NSMutableArray alloc]initWithArray:[readFromDBDictionary valueForKey:@"readFromDB"]];
+        
+        [modifieArray addObject:[self getDictionaryForAdditionalData:@"PO" HTMLID:@"RadioButtonPolicyHolderSex"]];
+        //[modifieArray addObject:[self getDictionaryForAdditionalData:@"TR" HTMLID:@"RadioButtonProspectiveInsuredSex"]];
+        
+        [dictOriginal setObject:modifieArray forKey:@"readFromDB"];
+        [self callSuccessCallback:[params valueForKey:@"successCallBack"] withRetValue:dictOriginal];
+    }
+    
+    else if ([stringSection isEqualToString:@"KS_IN"]){
+        //NSMutableDictionary *readFromDBDictionary = [super readfromDB:finalDictionary];
+        NSMutableDictionary *dictOriginal = [[NSMutableDictionary alloc]init];
+        NSMutableArray *modifieArray = [[NSMutableArray alloc]initWithArray:[readFromDBDictionary valueForKey:@"readFromDB"]];
+        
+        //[modifieArray addObject:[self getDictionaryForAdditionalData:@"PO" HTMLID:@"RadioButtonPolicyHolderSex"]];
+        [modifieArray addObject:[self getDictionaryForAdditionalData:@"TR" HTMLID:@"RadioButtonProspectiveInsuredSex"]];
+        
+        [dictOriginal setObject:modifieArray forKey:@"readFromDB"];
+        [self callSuccessCallback:[params valueForKey:@"successCallBack"] withRetValue:dictOriginal];
+    }*/
     [viewActivityIndicator setHidden:YES];
     return finalDictionary;
 }
@@ -857,6 +900,18 @@
         NSDictionary* dictPOData = [[NSDictionary alloc ]initWithDictionary:[modelSIPData getPO_DataFor:SINO]];
         NSString* stringRelation = [formatter getRelationNameForHtml:[dictPOData valueForKey:@"RelWithLA"]];
         [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"CheckRelationshipStatus('%@');",stringRelation]];
+        
+        if ([stringSection isEqualToString:@"KS_PH"]){
+            NSString* stringWhere = [NSString stringWithFormat:@"where elementID ='RadioButtonPolicyHolderSex' and SPAJTransactionID = %i and SPAJHtmlSection ='PO'",[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
+            NSString* stringValue =[modelSPAJAnswers selectSPAJAnswersData:@"Value" StringWhere:stringWhere];
+            
+            [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"setFemaleQuestionForHealthQuestionnaire('%@');",stringValue]];
+        }
+        else if ([stringSection isEqualToString:@"KS_IN"]){
+            NSString* stringWhere = [NSString stringWithFormat:@"where elementID ='RadioButtonProspectiveInsuredSex' and SPAJTransactionID = %i and SPAJHtmlSection ='TR'",[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
+            NSString* stringValue =[modelSPAJAnswers selectSPAJAnswersData:@"Value" StringWhere:stringWhere];
+            [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"setFemaleQuestionForHealthQuestionnaire('%@');",stringValue]];
+        }
     }
     
     [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"readfromDB();"]];

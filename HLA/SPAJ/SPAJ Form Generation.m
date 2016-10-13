@@ -69,18 +69,26 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
     SPAJFilesViewController* spajFilesViewController;
     Alert* alert;
     
-    
     UserInterface *objectUserInterface;
+    
+    //for image creation from webview
+    NSMutableArray* images;
+    UIImage *newImage;
+    UIImage *resultImage;
+    NSData *thumbnailData;
+    
     BOOL boolSPAJPDF;
     BOOL boolTenagaPenjualSigned;
     
     NSMutableArray *arrayPDFHealthQuestionairreName;
+    NSMutableArray *arrayPDFHealthQuestionairreTranslateName;
     int indexPDFForIMGGeneration;
     
     NSMutableArray *arrayHTMLName;
     int indexForPDFGeneration;
     
     NSMutableArray *arrayIMGName;
+    NSMutableArray *arrayIMGTranslateName;
     int indexImgForPDFGeneration;
     
     NSString* stateGeneration;
@@ -192,6 +200,9 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
         boolSPAJPDF = false;
         dictionaryPOData = [[NSDictionary alloc]initWithDictionary:[modelSIPOData getPO_DataFor:[dictTransaction valueForKey:@"SPAJSINO"]]];
         dictionarySIMaster = [[NSDictionary alloc]initWithDictionary:[modelSIMaster getIlustrationDataForSI:[dictTransaction valueForKey:@"SPAJSINO"]]];
+        
+        spajFilesViewController = [[SPAJFilesViewController alloc]initWithNibName:@"SPAJFilesViewController" bundle:nil];
+        spajPDFWebView = [[SPAJPDFWebViewController alloc]initWithNibName:@"SPAJPDFWebViewController" bundle:nil];
     }
 
     -(void)generateAllPDF{
@@ -213,16 +224,21 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
         
         stateGeneration = stateIMG;
         arrayPDFHealthQuestionairreName = [[NSMutableArray alloc]init];
+        arrayPDFHealthQuestionairreTranslateName = [[NSMutableArray alloc]init];
         
         indexImgForPDFGeneration = 0;
         if ([[dictionaryPOData valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"]){
             //arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]]];
             arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH\",\"TP" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]]];
+            
+            arrayIMGTranslateName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlTranslateName" SPAJSection:@"IMG_PH\",\"TP" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]]];
         }
         else{
             //arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_IN" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]]];
             //arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH\",\"IMG_IN"]];
             arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH\",\"IMG_IN\",\"TP"]];
+            
+            arrayIMGTranslateName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlTranslateName" SPAJSection:@"IMG_PH\",\"IMG_IN\",\"TP" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]]];
         }
         
         //arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH\",\"IMG_IN"]];
@@ -237,7 +253,9 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
             
             indexPDFForIMGGeneration = 0;
             NSURL *fileURL = [[NSURL alloc] initFileURLWithPath:[arrayPDFHealthQuestionairreName objectAtIndex:indexPDFForIMGGeneration]];
-                outputName = [NSString stringWithFormat:@"%@",[allAboutPDFGeneration getSPAJImageNameFromPath:[arrayPDFHealthQuestionairreName objectAtIndex:indexPDFForIMGGeneration]]];
+                //outputName = [NSString stringWithFormat:@"%@",[allAboutPDFGeneration getSPAJImageNameFromPath:[arrayPDFHealthQuestionairreName objectAtIndex:indexPDFForIMGGeneration]]];
+            
+                outputName = [NSString stringWithFormat:@"%@",[allAboutPDFGeneration getSPAJImageNameFromPath:[arrayPDFHealthQuestionairreTranslateName objectAtIndex:indexPDFForIMGGeneration]]];
             
             NSURLRequest *request = [NSURLRequest requestWithURL:fileURL];
             [webview loadRequest:request];
@@ -346,7 +364,7 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
 
     - (IBAction)actionGoToStep1:(id)sender
     {
-        spajPDFWebView = [[SPAJPDFWebViewController alloc]initWithNibName:@"SPAJPDFWebViewController" bundle:nil];
+        
         [spajPDFWebView setDictTransaction:dictTransaction];
         spajPDFWebView.modalPresentationStyle = UIModalPresentationFormSheet;
         //spajPDFWebView.preferredContentSize = CGSizeMake(950, 768);
@@ -357,9 +375,10 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
 
     - (IBAction)actionGoToStep2:(id)sender
     {
-        spajFilesViewController = [[SPAJFilesViewController alloc]initWithNibName:@"SPAJFilesViewController" bundle:nil];
+        
         [spajFilesViewController setDictTransaction:dictTransaction];
         [spajFilesViewController setBoolThirdParty:YES];
+        [spajFilesViewController setBoolHealthQuestionairre:NO];
         spajFilesViewController.modalPresentationStyle = UIModalPresentationOverFullScreen;
         [self presentViewController:spajFilesViewController animated:YES completion:nil];
         [spajFilesViewController.buttonSubmit setHidden:YES];
@@ -373,9 +392,10 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
             [self presentViewController:viewController animated:true completion:nil]; */
         
         //[_delegateSPAJMain voidGoToAddDetail];
-        spajFilesViewController = [[SPAJFilesViewController alloc]initWithNibName:@"SPAJFilesViewController" bundle:nil];
+        
         [spajFilesViewController setDictTransaction:dictTransaction];
         [spajFilesViewController setBoolHealthQuestionairre:YES];
+        [spajFilesViewController setBoolThirdParty:NO];
         spajFilesViewController.modalPresentationStyle = UIModalPresentationOverFullScreen;
         [self presentViewController:spajFilesViewController animated:YES completion:nil];
         [spajFilesViewController.buttonSubmit setHidden:YES];
@@ -441,12 +461,19 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
             else{
                 NSString* fileName = [NSString stringWithFormat:@"%@/SPAJ/%@/%@_%@.pdf",documentsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"],[dictTransaction valueForKey:@"SPAJEappNumber"],[allAboutPDFGeneration getSPAJImageNameFromPath:[arrayIMGName objectAtIndex:indexImgForPDFGeneration]]];
                 
+                NSString* fileNameTranslate = [NSString stringWithFormat:@"%@/SPAJ/%@/%@_%@.pdf",documentsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"],[dictTransaction valueForKey:@"SPAJEappNumber"],[allAboutPDFGeneration getSPAJImageNameFromPath:[arrayIMGTranslateName objectAtIndex:indexImgForPDFGeneration]]];
+                
                 [pdfData writeToFile:fileName atomically:YES];
                 [arrayPDFHealthQuestionairreName addObject:fileName];
+                
+                //[pdfData writeToFile:fileName atomically:YES];
+                [arrayPDFHealthQuestionairreTranslateName addObject:fileNameTranslate];
                 
                 indexImgForPDFGeneration ++;
                 if (indexImgForPDFGeneration < [arrayIMGName count]){
                     [self loadSPAJPDFHTML:[arrayIMGName objectAtIndex:indexImgForPDFGeneration] WithArrayIndex:indexImgForPDFGeneration];
+                    
+                    //[self loadSPAJPDFHTML:[arrayIMGTranslateName objectAtIndex:indexImgForPDFGeneration] WithArrayIndex:indexImgForPDFGeneration];
                 }
                 else{
                     [self createImageFromPDF];
@@ -528,7 +555,7 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
         
         [webview.scrollView setContentOffset:CGPointMake(0, 0)];
         
-        NSMutableArray* images = [[NSMutableArray alloc] init];
+        images = [[NSMutableArray alloc] init];
         
         CGRect screenRect = webview.frame;
         
@@ -558,7 +585,7 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
             
             [webview.layer renderInContext:ctx];
             
-            UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+            newImage = UIGraphicsGetImageFromCurrentImageContext();
             UIGraphicsEndImageContext();
             
             if (i == 0)
@@ -575,7 +602,7 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
         
         [webview.scrollView setContentOffset:CGPointMake(0, 0)];
         
-        UIImage *resultImage;
+        //resultImage;
         
         if(images.count > 1) {
             //join all images together..
@@ -613,7 +640,7 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
         }
         [images removeAllObjects];
         
-        NSData *thumbnailData = UIImageJPEGRepresentation(resultImage, 0);
+        thumbnailData = UIImageJPEGRepresentation(resultImage, 0);
         
         NSString *relativeOutputFilePath = [NSString stringWithFormat:@"%@/%@.jpg", [formatter generateSPAJFileDirectory:[dictTransaction valueForKey:@"SPAJEappNumber"]],fileName];
         BOOL written = [thumbnailData writeToFile:relativeOutputFilePath atomically:YES];
@@ -635,7 +662,9 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
         if (indexPDFForIMGGeneration<[arrayPDFHealthQuestionairreName count]){
             NSURL *fileURL = [[NSURL alloc] initFileURLWithPath:[arrayPDFHealthQuestionairreName objectAtIndex:indexPDFForIMGGeneration]];
             //outputName = [NSString stringWithFormat:@"%@_%@",[dictTransaction valueForKey:@"SPAJEappNumber"],[allAboutPDFGeneration getSPAJImageNameFromPath:[arrayIMGName objectAtIndex:indexPDFForIMGGeneration]]];
-            outputName = [NSString stringWithFormat:@"%@",[allAboutPDFGeneration getSPAJImageNameFromPath:[arrayPDFHealthQuestionairreName objectAtIndex:indexPDFForIMGGeneration]]];
+            
+            //outputName = [NSString stringWithFormat:@"%@",[allAboutPDFGeneration getSPAJImageNameFromPath:[arrayPDFHealthQuestionairreName objectAtIndex:indexPDFForIMGGeneration]]];
+            outputName = [NSString stringWithFormat:@"%@",[allAboutPDFGeneration getSPAJImageNameFromPath:[arrayPDFHealthQuestionairreTranslateName objectAtIndex:indexPDFForIMGGeneration]]];
             
             NSURLRequest *request = [NSURLRequest requestWithURL:fileURL];
             [webview loadRequest:request];
@@ -751,7 +780,7 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
             NSString *stringName = [allAboutPDFGeneration getWordFromString:htmlFileName IndexWord:2];
             int countElement;
             
-            if ([allAboutPDFGeneration doesString:htmlFileName containCharacter:@"_IN"]){
+            if (([allAboutPDFGeneration doesString:htmlFileName containCharacter:@"_IN"])||(([allAboutPDFGeneration doesString:htmlFileName containCharacter:@"tertanggung"]))){
                 if ([allAboutPDFGeneration doesString:stringName containCharacter:@"gland"]){
                     countElement = [modelSPAJAnswers getCountElementID:@"thyroid" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"KS_IN"];
                 }

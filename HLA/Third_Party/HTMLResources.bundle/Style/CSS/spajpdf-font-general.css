@@ -80,6 +80,10 @@ main section label:after {
   content: ' : ';
 }
 
+main section label.SlimDoubleDot:after {
+  margin-right: 0px;
+}
+
 main section label.RadioButton {
   padding: 5px;
   vertical-align: middle;

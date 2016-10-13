@@ -42,6 +42,10 @@
     ModelSPAJIDCapture* modelSPAJIDCapture;
     Formatter* formatter;
     
+    SPAJEApplicationList *viewControllerEappListing;
+    SPAJExistingList* viewControllerExistingList;
+    SPAJSubmittedList* viewControllerSubmittedList;
+    
     NSString* stringGlobalEAPPNumber;
 }
 
@@ -58,6 +62,13 @@
         modelSPAJSignature = [[ModelSPAJSignature alloc]init];
         modelSPAJIDCapture = [[ModelSPAJIDCapture alloc]init];
         formatter = [[Formatter alloc]init];
+        
+        UIStoryboard *spajStoryboard = [UIStoryboard storyboardWithName:@"SPAJEAppListStoryBoard" bundle:Nil];
+        viewControllerEappListing = [spajStoryboard instantiateViewControllerWithIdentifier:@"EAppListRootVC"];
+        
+        viewControllerExistingList = [[SPAJExistingList alloc] initWithNibName:@"SPAJ Existing List" bundle:nil];
+        
+        viewControllerSubmittedList = [[SPAJSubmittedList alloc] initWithNibName:@"SPAJ Submitted List" bundle:nil];
         
         //NSNOTIFICATION CENTER
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -99,12 +110,12 @@
         
         //SPAJExistingList* viewController = [[SPAJExistingList alloc] initWithNibName:@"SPAJ Existing List" bundle:nil];
         //SPAJEApplicationList* viewController = [[SPAJEApplicationList alloc] initWithNibName:@"SPAJ E Application List" bundle:nil];
-        UIStoryboard *spajStoryboard = [UIStoryboard storyboardWithName:@"SPAJEAppListStoryBoard" bundle:Nil];
-        SPAJEApplicationList *viewController = [spajStoryboard instantiateViewControllerWithIdentifier:@"EAppListRootVC"];
+        //UIStoryboard *spajStoryboard = [UIStoryboard storyboardWithName:@"SPAJEAppListStoryBoard" bundle:Nil];
+        //SPAJEApplicationList *viewController = [spajStoryboard instantiateViewControllerWithIdentifier:@"EAppListRootVC"];
         //viewController.delegateSPAJEappList = self;
-        viewController.view.frame = self.viewContent.bounds;
-        [self addChildViewController:viewController];
-        [self.viewContent addSubview:viewController.view];
+        viewControllerEappListing.view.frame = self.viewContent.bounds;
+        [self addChildViewController:viewControllerEappListing];
+        [self.viewContent addSubview:viewControllerEappListing.view];
         //[self actionGoToEApplicationList:nil];
     };
 
@@ -126,38 +137,30 @@
 
     - (IBAction)actionGoToEApplicationList:(id)sender
     {
-        /*SPAJEApplicationList* viewController = [[SPAJEApplicationList alloc] initWithNibName:@"SPAJ E Application List" bundle:nil];
-        viewController.view.frame = self.viewContent.bounds;
-        [self addChildViewController:viewController];
-        [self.viewContent addSubview:viewController.view];*/
-        UIStoryboard *spajStoryboard = [UIStoryboard storyboardWithName:@"SPAJEAppListStoryBoard" bundle:Nil];
-        SPAJEApplicationList *viewController = [spajStoryboard instantiateViewControllerWithIdentifier:@"EAppListRootVC"];
-        viewController.view.frame = self.viewContent.bounds;
-        //viewController.delegateSPAJEappList = self;
-        [self addChildViewController:viewController];
-        [self.viewContent addSubview:viewController.view];
-        //viewController.modalPresentationStyle = UIModalPresentationFullScreen;*/
-        //viewController.IndexTab = 1;
-        //[self presentViewController:viewController animated:NO completion:Nil];
-        //viewController = Nil;
-        //AppDelegate *appdlg = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-        //appdlg.eApp=NO;
+        @autoreleasepool {
+            viewControllerEappListing.view.frame = self.viewContent.bounds;
+            //viewController.delegateSPAJEappList = self;
+            [self addChildViewController:viewControllerEappListing];
+            [self.viewContent addSubview:viewControllerEappListing.view];
+        }
     };
 
     - (IBAction)actionGoToExistingList:(id)sender
     {
-        SPAJExistingList* viewController = [[SPAJExistingList alloc] initWithNibName:@"SPAJ Existing List" bundle:nil];
-        viewController.view.frame = self.viewContent.bounds;
-        [self addChildViewController:viewController];
-        [self.viewContent addSubview:viewController.view];
+        @autoreleasepool {
+            viewControllerExistingList.view.frame = self.viewContent.bounds;
+            [self addChildViewController:viewControllerExistingList];
+            [self.viewContent addSubview:viewControllerExistingList.view];
+        }
     };
 
     - (IBAction)actionGoToSubmittedList:(id)sender
     {
-        SPAJSubmittedList* viewController = [[SPAJSubmittedList alloc] initWithNibName:@"SPAJ Submitted List" bundle:nil];
-        viewController.view.frame = self.viewContent.bounds;
-        [self addChildViewController:viewController];
-        [self.viewContent addSubview:viewController.view];
+        @autoreleasepool {
+            viewControllerSubmittedList.view.frame = self.viewContent.bounds;
+            [self addChildViewController:viewControllerSubmittedList];
+            [self.viewContent addSubview:viewControllerSubmittedList.view];
+        }
     };
 
     - (IBAction)actionGoToAddMenu:(id)sender
@@ -231,7 +234,11 @@
         UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"CarouselStoryboard" bundle:Nil];
         
         CarouselViewController *viewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"carouselView"];
-        [self presentViewController:viewController animated:NO completion:Nil];
+        
+        [self dismissViewControllerAnimated:YES
+                                 completion:^{
+                                     [self presentViewController:viewController animated:NO completion:Nil];
+                                 }];
     }
 
 #pragma mark create SPAJ Transaction

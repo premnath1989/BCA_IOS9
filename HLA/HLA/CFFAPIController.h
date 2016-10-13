@@ -14,4 +14,5 @@
 -(void)apiCallHtmlTable:(NSString *)URL JSONKey:(NSArray *)jsonKey TableDictionary:(NSDictionary *)tableDictionary DictionaryDuplicateChecker:(NSDictionary *)dictDuplicate WebServiceModule:(NSString *)stringWebService;
 -(void)apiCallCrateHtmlFile:(NSString *)URL RootPathFolder:(NSString *)rootPathFolder;
 - (void)createDirectory:(NSString *)documentRootDirectory;
+-(void)tempInsertJsonToDB:(NSString *)stringFileName JSONKey:(NSArray *)jsonKey TableDictionary:(NSDictionary *)tableDictionary DictionaryDuplicateChecker:(NSDictionary *)dictDuplicate;
 @end

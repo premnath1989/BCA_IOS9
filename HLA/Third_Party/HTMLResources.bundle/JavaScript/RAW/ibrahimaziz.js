@@ -99,6 +99,8 @@ var arrayRelationshipWithProspectiveInsured = [];
 var arrayDatePeriod = [];
 var arrayNationality = [];
 var stringIllnessSuffix = "Illness";
+var stringSexFemale = "female";
+var stringSexMale = "male";
 
 
 // GENERATOR
@@ -177,6 +179,70 @@ function footerGenerator(stringDetail, intTotalPage)
 	{
 		$(this).text(stringDetail + " Hal " + (indexPage + 1) + " / " + intTotalPage);
 	})
+}
+
+function getOffset(stringLayoutJavaScriptID, stringLayoutJavaScriptClass)
+{
+	var stringLayoutJQuerySelector;
+
+	if (stringLayoutJavaScriptID == null)
+	{
+		stringLayoutJQuerySelector = "." + stringLayoutJavaScriptClass;
+	}
+	else
+	{
+		stringLayoutJQuerySelector = stringKres + stringLayoutJavaScriptID;
+	}
+	
+	var stringOffsetX = $(stringLayoutSelectorID).offset().left;
+	var stringOffsetY = $(stringLayoutSelectorID).offset().top;
+
+	return [stringOffsetX, stringOffsetY];
+}
+
+function getMeasurement(stringLayoutJavaScriptID, stringLayoutJavaScriptClass)
+{
+	var stringLayoutSelectorID;
+
+	if (stringLayoutJavaScriptID == null)
+	{
+		stringLayoutJQuerySelector = "." + stringLayoutJavaScriptClass;
+	}
+	else
+	{
+		stringLayoutJQuerySelector = stringKres + stringLayoutJavaScriptID;
+	}
+
+	var stringMeasurementWidth = $(stringLayoutSelectorID).width();
+	var stringMeasurementHeight = $(stringLayoutSelectorID).height();
+
+	return [stringMeasurementWidth, stringMeasurementHeight];
+}
+	
+function getSignatureAttribute()
+{
+	var arrayObjectSignatureAttribute = [];
+
+	$(".SignatureImage").each(function()
+	{
+		arrayObjectSignatureAttribute.push
+		({ 
+			floatOffsetX: $(this).offset().left, 
+			floatOffsetY: $(this).offset().top, 
+			floatMeasurementWidth : $(this).width(), 
+			floatMeasurementHeight : $(this).height() 
+		});
+		
+		alert
+		(
+			"floatOffsetX = " + $(this).offset().left + 
+			", floatOffsetY = " + $(this).offset().top + 
+			", floatMeasurementWidth = " + $(this).width() + 
+			", floatMeasurementHeight = " + $(this).height() 
+		);
+	});
+	
+	return arrayObjectSignatureAttribute;
 }
 
 function tableHealthGenerator(stringTableID, intRow)
@@ -2939,7 +3005,8 @@ function getFromDatabase(objectContent, stringPageType)
 		else if (stringPageSectionCurrent == stringPageSectionHealthQuestionnaire)
 		{
 			arrayHealthQuestionnaire = objectContent;
-			
+			// previewArrayObject(arrayHealthQuestionnaire);
+
 			buttonPreviewForMultiPopUp(stringPageInfixTypeCurrent + 'Activity', arrayHealthQuestionnaire, 
 			[
 				stringPrefixRadioButton + stringPageInfixTypeCurrent + 'Diving' + 'Criteria', 
@@ -2951,8 +3018,7 @@ function getFromDatabase(objectContent, stringPageType)
 				stringPrefixRadioButton + stringPageInfixTypeCurrent + 'Flight' + 'FLJob', 
 				stringPrefixRadioButton + stringPageInfixTypeCurrent + 'Military' + 'Unit'
 			]);
-			buttonPreviewForMultiPopUp(stringPageInfixTypeCurrent + 'SmokeActivity', arrayHealthQuestionnaire, 
-			[stringPrefixNumber + stringPageInfixTypeCurrent + 'SmokeActivity' + 'Amount']);
+			buttonPreviewForMultiPopUp(stringPageInfixTypeCurrent + 'SmokeActivity', arrayHealthQuestionnaire, [stringPrefixNumber + stringPageInfixTypeCurrent + 'SmokeActivity' + 'Amount']);
 			buttonPreviewForMultiPopUp(stringPageInfixTypeCurrent + 'Junkie', arrayHealthQuestionnaire, [stringPrefixRadioButton + stringPageInfixTypeCurrent + 'Alcohol' + 'ALConsume']);
 			buttonPreviewForMultiPopUp(stringPageInfixTypeCurrent + 'Cell', arrayHealthQuestionnaire, [stringPrefixDate + stringPageInfixTypeCurrent + 'Tumor' + 'FirstDiagnose']);
 			buttonPreviewForMultiPopUp(stringPageInfixTypeCurrent + 'Cardiac', arrayHealthQuestionnaire, [stringPrefixDate + stringPageInfixTypeCurrent + 'ChestPain' + 'FirstAttack', 'Date' + stringPageInfixTypeCurrent + 'Hypertension' + 'FirstTime']);
@@ -3004,6 +3070,9 @@ function getFromDatabase(objectContent, stringPageType)
 						$(stringButtonPreviewJQueryID).css("display", "block");
 					}
 				});
+
+				// stringValue = arrayFind(arrayHealthQuestionnaire, stringPrefixRadioButton + stringPageInfixTypeCurrent + "Sex");
+				// setFemaleQuestionForHealthQuestionnaire(stringValue);
 			}
 			else
 			{
@@ -3027,6 +3096,38 @@ function getFromDatabase(objectContent, stringPageType)
 				
 			}
 		}
+	}
+}
+
+function setFemaleQuestionForHealthQuestionnaire(stringValue)
+{
+	if (stringValue == stringSexMale)
+	{
+		$(".ContainerFemaleQuestion").css("opacity", 0.4);
+		radioButtonSetRequired(stringPrefixRadioButton + stringPageInfixTypeCurrent + "State", false);
+		radioButtonSetRequired(stringPrefixRadioButton + stringPageInfixTypeCurrent + "Pregnant", false);
+		radioButtonSetRequired(stringPrefixRadioButton + stringPageInfixTypeCurrent + "PregnancyIllness", false);
+		radioButtonSetRequired(stringPrefixRadioButton + stringPageInfixTypeCurrent + "FemaleAbnormality", false);
+		radioButtonSetRequired(stringPrefixRadioButton + stringPageInfixTypeCurrent + "PapSmear", false);
+		radioButtonSetDisabled(stringPrefixRadioButton + stringPageInfixTypeCurrent + "State", true);
+		radioButtonSetDisabled(stringPrefixRadioButton + stringPageInfixTypeCurrent + "Pregnant", true);
+		radioButtonSetDisabled(stringPrefixRadioButton + stringPageInfixTypeCurrent + "PregnancyIllness", true);
+		radioButtonSetDisabled(stringPrefixRadioButton + stringPageInfixTypeCurrent + "FemaleAbnormality", true);
+		radioButtonSetDisabled(stringPrefixRadioButton + stringPageInfixTypeCurrent + "PapSmear", true);
+	}
+	else
+	{
+		$(".ContainerFemaleQuestion").css("opacity", 1.0);
+		radioButtonSetRequired(stringPrefixRadioButton + stringPageInfixTypeCurrent + "State", true);
+		radioButtonSetRequired(stringPrefixRadioButton + stringPageInfixTypeCurrent + "Pregnant", true);
+		radioButtonSetRequired(stringPrefixRadioButton + stringPageInfixTypeCurrent + "PregnancyIllness", true);
+		radioButtonSetRequired(stringPrefixRadioButton + stringPageInfixTypeCurrent + "FemaleAbnormality", true);
+		radioButtonSetRequired(stringPrefixRadioButton + stringPageInfixTypeCurrent + "PapSmear", true);
+		radioButtonSetDisabled(stringPrefixRadioButton + stringPageInfixTypeCurrent + "State", false);
+		radioButtonSetDisabled(stringPrefixRadioButton + stringPageInfixTypeCurrent + "Pregnant", false);
+		radioButtonSetDisabled(stringPrefixRadioButton + stringPageInfixTypeCurrent + "PregnancyIllness", false);
+		radioButtonSetDisabled(stringPrefixRadioButton + stringPageInfixTypeCurrent + "FemaleAbnormality", false);
+		radioButtonSetDisabled(stringPrefixRadioButton + stringPageInfixTypeCurrent + "PapSmear", false);
 	}
 }
 
@@ -3145,6 +3246,8 @@ function setToDatabase(stringPageType)
         validatePush(objectContent, stringKey, stringValue);
     });
     
+	// previewArrayObject(objectContent);
+
     return objectContent;
 }
 
@@ -3423,7 +3526,7 @@ function imageSelector(stringPath)
 		}
 		else
 		{
-			$(this).attr("src", $(this).attr("src").replace("..\/..\/Resource\/|..\/..\/jqueryLibrary\/Resource\/", stringPath));
+			$(this).attr("src", $(this).attr("src").replace("..\/..\/Resource\/", stringPath));			
 		}
 	});
 }
@@ -3448,5 +3551,86 @@ function checkboxAsRadioButton(stringCheckboxName)
 				}
 			});
 		});
+	});
+}
+
+function validateEmail(stringInputJavaScriptID)
+{
+	var stringInputJQueryID = stringKres + stringInputJavaScriptID;
+
+	$(stringInputJQueryID).change(function()
+	{
+		var stringEmail = $(this).val();
+
+		if (stringEmail.indexOf("@") >= 0)
+		{
+			
+		}
+		else
+		{
+			alert("Format validasi email salah !.");
+		}
+	});
+}
+
+function validateDateNotExceedToday(stringInputJavaScriptID)
+{
+	var stringBirthdayJQueryID = stringKres + stringInputJavaScriptID;
+    
+    $(stringBirthdayJQueryID).change(function()
+    {
+        if ($(stringBirthdayJQueryID).val().length > 0)
+        {
+			var arrayBirthday = $(stringBirthdayJQueryID).val().split('/');
+			var dateBirthday = new Date(arrayBirthday[2], parseInt(arrayBirthday[1] - 1, 10), arrayBirthday[0]);
+			var dateToday = new Date();
+
+			if((dateBirthday.getTime() > dateToday.getTime()))
+			{
+				alert("Tanggal lahir tidak bisa lebih dari hari ini !.");
+			}
+			else
+			{
+				
+			}
+        }
+        else
+        {
+
+        }
+    });
+}
+
+function validatePressNumeric(stringInputJavaScriptID)
+{
+	var stringInputJQueryID = stringKres + stringInputJavaScriptID;
+
+	$(stringInputJQueryID).keypress(function(e) 
+	{
+		//if the letter is not digit then display error and don't type anything
+		if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) 
+		{
+			return false;
+		}
+		else
+		{
+
+		}
+    });
+}
+
+function radioButtonSetRequired(stringName, booleanState)
+{
+	$("input:radio[name='" + stringName + "']").each(function()
+	{
+		$(this).prop("required", booleanState);
+	});
+}
+
+function radioButtonSetDisabled(stringName, booleanState)
+{
+	$("input:radio[name='" + stringName + "']").each(function()
+	{
+		$(this).prop("disabled", booleanState);
 	});
 }

@@ -602,14 +602,17 @@
     
     [thumbnailData writeToFile:relativeOutputFilePath atomically:YES];
     
-    UIAlertController *alertLockForm = [UIAlertController alertControllerWithTitle:@"Berhasil" message:@"Form berhasil dibuat" preferredStyle:UIAlertControllerStyleAlert];[alert alertInformation:@"Berhasil" stringMessage:@"Form berhasil dibuat"];
-    
-    UIAlertAction* alertActionClose = [UIAlertAction actionWithTitle:NSLocalizedString(@"BUTTON_CLOSE", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }];
-    [alertLockForm addAction: alertActionClose];
-    
-    [self presentViewController:alertLockForm animated:YES completion:nil];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [allAboutPDFGeneration voidSaveSignatureForSingleImage:dictTransaction StringFileName:[allAboutPDFGeneration getSPAJImageNameFromPath:fileName]];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            UIAlertController *alertLockForm = [UIAlertController alertControllerWithTitle:@"Berhasil" message:@"Form berhasil dibuat" preferredStyle:UIAlertControllerStyleAlert];[alert alertInformation:@"Berhasil" stringMessage:@"Form berhasil dibuat"];
+            UIAlertAction* alertActionClose = [UIAlertAction actionWithTitle:NSLocalizedString(@"BUTTON_CLOSE", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }];
+            [alertLockForm addAction: alertActionClose];
+            [self presentViewController:alertLockForm animated:YES completion:nil];
+        });
+    });
     //[viewActivityIndicator setHidden:YES];
 }
 

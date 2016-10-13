@@ -436,6 +436,7 @@
 		438E79051D5B2C1800C78AB2 /* ModelSPAJFormGeneration.m in Sources */ = {isa = PBXBuildFile; fileRef = 438E79041D5B2C1800C78AB2 /* ModelSPAJFormGeneration.m */; };
 		4392993B1D9B0D4500C5B952 /* SPAJThirdParty.m in Sources */ = {isa = PBXBuildFile; fileRef = 439299391D9B0D4500C5B952 /* SPAJThirdParty.m */; };
 		4392993C1D9B0D4500C5B952 /* SPAJThirdParty.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4392993A1D9B0D4500C5B952 /* SPAJThirdParty.xib */; };
+		4394FD7D1DAF0A2C0084F6F3 /* GetAllData.json in Resources */ = {isa = PBXBuildFile; fileRef = 4394FD7C1DAF0A2C0084F6F3 /* GetAllData.json */; };
 		43952C831D914D6600682E87 /* FormTenagaPenjualViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43952C811D914D6600682E87 /* FormTenagaPenjualViewController.m */; };
 		43952C841D914D6600682E87 /* FormTenagaPenjualViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43952C821D914D6600682E87 /* FormTenagaPenjualViewController.xib */; };
 		4399826C1D07D025009CFEB2 /* CFFListingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4399826A1D07D025009CFEB2 /* CFFListingViewController.m */; };
@@ -1712,6 +1713,7 @@
 		439299381D9B0D4500C5B952 /* SPAJThirdParty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPAJThirdParty.h; sourceTree = "<group>"; };
 		439299391D9B0D4500C5B952 /* SPAJThirdParty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPAJThirdParty.m; sourceTree = "<group>"; };
 		4392993A1D9B0D4500C5B952 /* SPAJThirdParty.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SPAJThirdParty.xib; sourceTree = "<group>"; };
+		4394FD7C1DAF0A2C0084F6F3 /* GetAllData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetAllData.json; sourceTree = "<group>"; };
 		43952C801D914D6600682E87 /* FormTenagaPenjualViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormTenagaPenjualViewController.h; sourceTree = "<group>"; };
 		43952C811D914D6600682E87 /* FormTenagaPenjualViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormTenagaPenjualViewController.m; sourceTree = "<group>"; };
 		43952C821D914D6600682E87 /* FormTenagaPenjualViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FormTenagaPenjualViewController.xib; sourceTree = "<group>"; };
@@ -5042,6 +5044,7 @@
 		C4E9D1851612C64900016053 = {
 			isa = PBXGroup;
 			children = (
+				4394FD7C1DAF0A2C0084F6F3 /* GetAllData.json */,
 				43F7C3161C9D409D0074F464 /* Formatter */,
 				43FA6C151C87CD5D0098BA47 /* HTML USED */,
 				AA4EF6E61C85A3F20050CCD8 /* PDFReader */,
@@ -6336,6 +6339,7 @@
 				29096FB217F9543B003421A0 /* MengCheong_Storyboard_eApp.storyboard in Resources */,
 				431376C81D0E6821007D3BF1 /* AddChildViewController.xib in Resources */,
 				1706BD4F1C7169A40038D1DB /* menu_productinformation.png in Resources */,
+				4394FD7D1DAF0A2C0084F6F3 /* GetAllData.json in Resources */,
 				C3560C941805119400745FC6 /* priority.plist in Resources */,
 				425092AE180E71E80022FED3 /* prospect_100_2.png in Resources */,
 				43870CA41D35FEAF0035143C /* ProfileRisk.html in Resources */,

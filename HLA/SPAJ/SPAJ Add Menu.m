@@ -80,17 +80,22 @@ NSString* const stateIMGGeneration = @"IMG";
     ClassImageProcessing *classImageProcessing;
     AllAboutPDFGeneration *allAboutPDFGeneration;
     
+    SPAJAddDetail* viewControllerDetail;
     SPAJFormGeneration* viewControllerFormGeneration;
+    SPAJCaptureIdentification* viewControllerCapture;
+    SPAJ_Add_Signature* viewControllerSignature;
     
     UserInterface *objectUserInterface;
     
     NSMutableArray *arrayPDFHealthQuestionairreName;
+    NSMutableArray *arrayPDFHealthQuestionairreTranslateName;
     int indexPDFForIMGGeneration;
     
     NSMutableArray *arrayHTMLName;
     int indexForPDFGeneration;
     
     NSMutableArray *arrayIMGName;
+    NSMutableArray *arrayIMGTranslateName;
     int indexImgForPDFGeneration;
     
     NSString* stateGeneration;
@@ -180,7 +185,10 @@ NSString* const stateIMGGeneration = @"IMG";
         
         [self setNavigationBar];
         
+        viewControllerDetail = [[SPAJAddDetail alloc] initWithNibName:@"SPAJ Add Detail" bundle:nil];
         viewControllerFormGeneration = [[SPAJFormGeneration alloc] initWithNibName:@"SPAJ Form Generation" bundle:nil];
+        viewControllerCapture = [[SPAJCaptureIdentification alloc] initWithNibName:@"SPAJ Capture Identification" bundle:nil];
+        viewControllerSignature = [[SPAJ_Add_Signature alloc] initWithNibName:@"SPAJ Add Signature" bundle:nil];
         
         NSLocale* currentLocale = [NSLocale currentLocale];
         [[NSDate date] descriptionWithLocale:currentLocale];
@@ -411,10 +419,10 @@ NSString* const stateIMGGeneration = @"IMG";
             [self presentViewController:viewController animated:true completion:nil]; */
         
         //[_delegateSPAJMain voidGoToAddDetail];
-        SPAJAddDetail* viewController = [[SPAJAddDetail alloc] initWithNibName:@"SPAJ Add Detail" bundle:nil];
+        //SPAJAddDetail* viewController = [[SPAJAddDetail alloc] initWithNibName:@"SPAJ Add Detail" bundle:nil];
         //[viewController setStringEAPPNumber:stringGlobalEAPPNumber];
-        [viewController setDictTransaction:dictTransaction];
-        [self.navigationController pushViewController:viewController animated:YES];
+        [viewControllerDetail setDictTransaction:dictTransaction];
+        [self.navigationController pushViewController:viewControllerDetail animated:YES];
     };
 
     - (IBAction)actionGoToStep4:(id)sender
@@ -428,21 +436,21 @@ NSString* const stateIMGGeneration = @"IMG";
     - (IBAction)actionGoToStep5:(id)sender
     {
         //[_delegateSPAJMain voidGoToCaptureIdentification];
-        SPAJCaptureIdentification* viewController = [[SPAJCaptureIdentification alloc] initWithNibName:@"SPAJ Capture Identification" bundle:nil];
-        [viewController setDictTransaction:dictTransaction];
+        //SPAJCaptureIdentification* viewController = [[SPAJCaptureIdentification alloc] initWithNibName:@"SPAJ Capture Identification" bundle:nil];
+        [viewControllerCapture setDictTransaction:dictTransaction];
         //[viewController setStringEAPPNumber:stringGlobalEAPPNumber];
         //[viewController setDictTransaction:[arraySPAJTransaction objectAtIndex:indexPath.row]];
-        [self.navigationController pushViewController:viewController animated:YES];
+        [self.navigationController pushViewController:viewControllerCapture animated:YES];
     };
 
     - (IBAction)actionGoToStep6:(id)sender
     {
         //[_delegateSPAJMain voidGoToAddSignature];
-        SPAJ_Add_Signature* viewController = [[SPAJ_Add_Signature alloc] initWithNibName:@"SPAJ Add Signature" bundle:nil];
-        [viewController setDictTransaction:dictTransaction];
+        //SPAJ_Add_Signature* viewController = [[SPAJ_Add_Signature alloc] initWithNibName:@"SPAJ Add Signature" bundle:nil];
+        [viewControllerSignature setDictTransaction:dictTransaction];
         //[viewController setStringEAPPNumber:stringGlobalEAPPNumber];
         //[viewController setDictTransaction:[arraySPAJTransaction objectAtIndex:indexPath.row]];
-        [self.navigationController pushViewController:viewController animated:YES];
+        [self.navigationController pushViewController:viewControllerSignature animated:YES];
     };
 
     - (IBAction)actionConfirmAndAssignSPAJNumber:(UIButton *)sender
@@ -968,8 +976,12 @@ NSString* const stateIMGGeneration = @"IMG";
             else{
                 NSString* fileName = [NSString stringWithFormat:@"%@/SPAJ/%@/%@_%@.pdf",documentsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"],[dictTransaction valueForKey:@"SPAJEappNumber"],[allAboutPDFGeneration getSPAJImageNameFromPath:[arrayIMGName objectAtIndex:indexImgForPDFGeneration]]];
                 
+                NSString* fileNameTranslate = [NSString stringWithFormat:@"%@/SPAJ/%@/%@_%@.pdf",documentsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"],[dictTransaction valueForKey:@"SPAJEappNumber"],[allAboutPDFGeneration getSPAJImageNameFromPath:[arrayIMGTranslateName objectAtIndex:indexImgForPDFGeneration]]];
+                
                 [pdfData writeToFile:fileName atomically:YES];
                 [arrayPDFHealthQuestionairreName addObject:fileName];
+                
+                [arrayPDFHealthQuestionairreTranslateName addObject:fileNameTranslate];
                 
                 indexImgForPDFGeneration ++;
                 if (indexImgForPDFGeneration < [arrayIMGName count]){
@@ -998,7 +1010,8 @@ NSString* const stateIMGGeneration = @"IMG";
             indexPDFForIMGGeneration = 0;
             NSURL *fileURL = [[NSURL alloc] initFileURLWithPath:[arrayPDFHealthQuestionairreName objectAtIndex:indexPDFForIMGGeneration]];
             //outputName = [NSString stringWithFormat:@"%@_%@",[dictTransaction valueForKey:@"SPAJEappNumber"],[allAboutPDFGeneration getSPAJImageNameFromPath:[arrayIMGName objectAtIndex:indexPDFForIMGGeneration]]];
-            outputName = [NSString stringWithFormat:@"%@",[allAboutPDFGeneration getSPAJImageNameFromPath:[arrayPDFHealthQuestionairreName objectAtIndex:indexPDFForIMGGeneration]]];
+            //outputName = [NSString stringWithFormat:@"%@",[allAboutPDFGeneration getSPAJImageNameFromPath:[arrayPDFHealthQuestionairreName objectAtIndex:indexPDFForIMGGeneration]]];
+            outputName = [NSString stringWithFormat:@"%@",[allAboutPDFGeneration getSPAJImageNameFromPath:[arrayPDFHealthQuestionairreTranslateName objectAtIndex:indexPDFForIMGGeneration]]];
             
             NSURLRequest *request = [NSURLRequest requestWithURL:fileURL];
             [webview loadRequest:request];
@@ -1048,13 +1061,18 @@ NSString* const stateIMGGeneration = @"IMG";
     -(void)generateAllIMGPDF{
         stateGeneration = stateIMGGeneration;
         arrayPDFHealthQuestionairreName = [[NSMutableArray alloc]init];
+        arrayPDFHealthQuestionairreTranslateName = [[NSMutableArray alloc]init];
         
         indexImgForPDFGeneration = 0;
         if ([[dictionaryPOData valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"]){
-            arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]]];
+            arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH\",\"TP" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]]];
+            
+            arrayIMGTranslateName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlTranslateName" SPAJSection:@"IMG_PH\",\"TP" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]]];
         }
         else{
-            arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_IN" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]]];
+            arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH\",\"IMG_IN\",\"TP"]];
+            
+            arrayIMGTranslateName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlTranslateName" SPAJSection:@"IMG_PH\",\"IMG_IN\",\"TP" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]]];
         }
         
         if ([arrayIMGName count]>0){
@@ -1164,7 +1182,8 @@ NSString* const stateIMGGeneration = @"IMG";
         if (indexPDFForIMGGeneration<[arrayPDFHealthQuestionairreName count]){
             NSURL *fileURL = [[NSURL alloc] initFileURLWithPath:[arrayPDFHealthQuestionairreName objectAtIndex:indexPDFForIMGGeneration]];
             //outputName = [NSString stringWithFormat:@"%@_%@",[dictTransaction valueForKey:@"SPAJEappNumber"],[allAboutPDFGeneration getSPAJImageNameFromPath:[arrayIMGName objectAtIndex:indexPDFForIMGGeneration]]];
-            outputName = [NSString stringWithFormat:@"%@",[allAboutPDFGeneration getSPAJImageNameFromPath:[arrayPDFHealthQuestionairreName objectAtIndex:indexPDFForIMGGeneration]]];
+            //outputName = [NSString stringWithFormat:@"%@",[allAboutPDFGeneration getSPAJImageNameFromPath:[arrayPDFHealthQuestionairreName objectAtIndex:indexPDFForIMGGeneration]]];
+            outputName = [NSString stringWithFormat:@"%@",[allAboutPDFGeneration getSPAJImageNameFromPath:[arrayPDFHealthQuestionairreTranslateName objectAtIndex:indexPDFForIMGGeneration]]];
             
             NSURLRequest *request = [NSURLRequest requestWithURL:fileURL];
             [webview loadRequest:request];
@@ -1323,10 +1342,38 @@ NSString* const stateIMGGeneration = @"IMG";
             int countElement;
             
             if ([allAboutPDFGeneration doesString:htmlFileName containCharacter:@"_IN"]){
-                countElement = [modelSPAJAnswers getCountElementID:stringName SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"KS_IN"];
+                if ([allAboutPDFGeneration doesString:stringName containCharacter:@"gland"]){
+                    countElement = [modelSPAJAnswers getCountElementID:@"thyroid" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"KS_IN"];
+                }
+                else if ([allAboutPDFGeneration doesString:stringName containCharacter:@"respiratory"]){
+                    countElement = [modelSPAJAnswers getCountElementID:@"respiratorydetail" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"KS_IN"];
+                }
+                else if ([allAboutPDFGeneration doesString:stringName containCharacter:@"digestion"]){
+                    countElement = [modelSPAJAnswers getCountElementID:@"digestdetail" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"KS_IN"];
+                }
+                else if ([allAboutPDFGeneration doesString:stringName containCharacter:@"oilgas"]){
+                    countElement = [modelSPAJAnswers getCountElementID:@"mining" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"KS_IN"];
+                }
+                else{
+                    countElement = [modelSPAJAnswers getCountElementID:stringName SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"KS_IN"];
+                }
             }
             else{
-                countElement = [modelSPAJAnswers getCountElementID:stringName SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"KS_PH"];
+                if ([allAboutPDFGeneration doesString:stringName containCharacter:@"gland"]){
+                    countElement = [modelSPAJAnswers getCountElementID:@"thyroid" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"KS_PH"];
+                }
+                else if ([allAboutPDFGeneration doesString:stringName containCharacter:@"respiratory"]){
+                    countElement = [modelSPAJAnswers getCountElementID:@"respiratorydetail" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"KS_PH"];
+                }
+                else if ([allAboutPDFGeneration doesString:stringName containCharacter:@"digestion"]){
+                    countElement = [modelSPAJAnswers getCountElementID:@"digestdetail" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"KS_PH"];
+                }
+                else if ([allAboutPDFGeneration doesString:stringName containCharacter:@"oilgas"]){
+                    countElement = [modelSPAJAnswers getCountElementID:@"mining" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"KS_PH"];
+                }
+                else{
+                    countElement = [modelSPAJAnswers getCountElementID:stringName SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"KS_PH"];
+                }
             }
             
             NSLog(@"count %@ %i",stringName,countElement);

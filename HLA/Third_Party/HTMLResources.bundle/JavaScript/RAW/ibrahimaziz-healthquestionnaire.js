@@ -654,13 +654,12 @@ function setInputFrom(stringLayoutJavaScriptID, arrayContent, stringInputInfix)
 		{
 			
 		}
-		
-		stringSectionInfix = getInfixSection(stringKeyWithoutPrefix);
 	}
 	
 	
 	// QUICK FIX FOR MULTI POP UP.
 	
+	stringSectionInfix = getInfixSection(stringInputInfix);
 	var stringAmandmentDetailKey = stringPrefixArea + stringSectionInfix + stringPopUpSuffix + "AmandmentDetail";
 	var stringAmandmentDetail = arrayFind(arrayContent, stringAmandmentDetailKey);
 	
@@ -676,13 +675,17 @@ function setInputFrom(stringLayoutJavaScriptID, arrayContent, stringInputInfix)
 
 function getInfixSection(stringContent)
 {
-	if (stringContent.substring(0, 3) == "Pro")
+	if (stringContent.substring(0, 3) == stringProspectiveInsuredPrefix.substring(0, 3))
 	{
 		return stringProspectiveInsuredPrefix;
 	}
-	else if (stringContent.substring(0, 3) == "Pol")
+	else if (stringContent.substring(0, 3) == stringPolicyHolderPrefix.substring(0, 3))
 	{
 		return stringPolicyHolderPrefix;
+	}
+	else if (stringContent.substring(0, 3) == stringBeneficiariesListInfix.substring(0, 3))
+	{
+		return stringBeneficiariesListInfix;
 	}
 	else
 	{
