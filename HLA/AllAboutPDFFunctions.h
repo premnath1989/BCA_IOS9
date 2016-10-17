@@ -7,8 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ClassImageProcessing.h"
+#import "ModelSPAJSignature.h"
+#import "ModelSPAJHtml.h"
+#import "Formatter.h"
 
-@interface AllAboutPDFFunctions : NSObject
+@interface AllAboutPDFFunctions : NSObject{
+    ClassImageProcessing *classImageProcessing;
+    ModelSPAJSignature *modelSPAJSignature;
+    ModelSPAJHtml *modelSPAJHtml;
+    Formatter* formatter;
+}
+
 -(NSString *)GetOutputForDurationKnowPORadioButton:(NSString *)stringSegmentSelected;
 -(NSString *)GetOutputForRelationWithPORadioButton:(NSString *)stringSegmentSelected;
 -(NSString *)GetOutputForYaTidakRadioButton:(NSString *)stringSegmentSelected;
@@ -23,4 +33,7 @@
 -(void)createArrayRevertForRadioButton;
 
 -(NSArray *)filterArrayByKey:(NSString *)stringKey;
+
+- (void)createFileDirectory:(NSString *)fileTimeDirectory;
+-(NSMutableArray *)createImageSignatureForEapp:(NSDictionary *)dictTransaction;
 @end

@@ -88,7 +88,11 @@
     -(void)viewDidAppear:(BOOL)animated{
         /*[_tableSection selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
         [self tableView:_tableSection didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];*/
-        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"EditMode" object:self];
+    }
+
+    -(void)viewDidDisappear:(BOOL)animated{
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ViewMode" object:self];
     }
 
     // DID LOAD

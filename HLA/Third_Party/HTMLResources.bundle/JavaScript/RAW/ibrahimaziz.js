@@ -233,16 +233,35 @@ function getSignatureAttribute()
 			floatMeasurementHeight : $(this).height() 
 		});
 		
-		alert
+		/* alert
 		(
 			"floatOffsetX = " + $(this).offset().left + 
 			", floatOffsetY = " + $(this).offset().top + 
 			", floatMeasurementWidth = " + $(this).width() + 
 			", floatMeasurementHeight = " + $(this).height() 
-		);
+		); */
 	});
 	
-	return arrayObjectSignatureAttribute;
+	// calliOSFunction('savetoDB:',onSuccess,onError, jsonToDatabase);
+
+	return JSONGeneratorForSignatureAttribute(arrayObjectSignatureAttribute);
+}
+
+function setSignatureImage(arrayImageSource)
+{
+	$(".SignatureImage").each(function(index)
+	{
+		// alert("arrayImageSource[" + index + "]" + " = " + arrayImageSource[index]);
+
+		if (arrayImageSource[index] == undefined || arrayImageSource[index] == "" || arrayImageSource == null)
+		{
+
+		}
+		else
+		{
+			$(this).attr("src", arrayImageSource[index]);			
+		}
+	});
 }
 
 function tableHealthGenerator(stringTableID, intRow)
@@ -865,24 +884,13 @@ function additionalQuestionGenerator()
     });
 }
 
-function setHardCode(arrayContent, stringKey, stringValue)
-{
-	if (stringValue == null || stringValue == undefined || stringValue == "")
-	{
-		
-	}
-	else
-	{
-		arrayAdd(arrayContent, stringKey, stringValue);
-	}
-}
-
 
 // ARRAY ACTION
 
 function arrayAdd(arrayObject, stringKey, stringValue)
 {
     var booleanPushState = true;
+    var booleanDeleteState = false;
     
     if (arrayObject.length > 0)
     {
@@ -890,7 +898,15 @@ function arrayAdd(arrayObject, stringKey, stringValue)
         {
             if (arrayObject[i].elementID == stringKey)
             {
-                arrayObject[i].Value = stringValue;
+            	if (stringValue == "")
+            	{
+            		booleanDeleteState = true;
+            	}
+            	else
+            	{
+        			arrayObject[i].Value = stringValue;
+                }
+
                 booleanPushState = false;
             }
             else
@@ -902,6 +918,15 @@ function arrayAdd(arrayObject, stringKey, stringValue)
         if (booleanPushState == true)
         {
             arrayObject.push({ elementID: stringKey, Value: stringValue });
+        }
+        else
+        {
+
+        }
+
+        if (booleanDeleteState == true)
+        {
+            arrayDelete(objectContent, stringKey);
         }
         else
         {
@@ -972,9 +997,52 @@ function arrayOptionFind(arrayObject, stringKey)
 
 function arrayTransfer(arrayTemporary, arrayContent)
 {
+	var stringTemporaryKey;
+	var stringTemporaryValue;
+	var stringContentKey;
+	var stringContentValue;
+	var booleanAddState = true;
+	var booleanDeleteState = false;
+
 	for (var i = 0; i < arrayTemporary.length; i++)
 	{
-		arrayAdd(arrayContent, arrayTemporary[i].elementID, arrayTemporary[i].Value);
+		stringTemporaryKey = arrayTemporary[i].elementID;
+		stringTemporaryValue = arrayTemporary[i].Value;
+
+		for (var j = 0; j < arrayContent.length; j++)
+		{
+			stringContentKey = arrayContent[j].elementID;
+			stringContentValue = arrayContent[j].Value;
+
+			if (stringTemporaryKey == stringContentKey)
+			{
+				if (stringTemporaryValue == "")
+				{
+					arrayDelete(arrayContent, stringContentKey);
+					booleanAddState = false;
+					j = arrayContent.length;
+				}
+				else
+				{
+					
+				}
+
+				
+			}
+			else
+			{
+				
+			}
+		}
+		
+		if (booleanAddState == true)
+		{
+			arrayValidatePush(arrayContent, stringTemporaryKey, stringTemporaryValue);
+		}
+		else
+		{
+
+		}
 	}
 }
 
@@ -1913,29 +1981,32 @@ function validationMessage(stringMessageNegative, stringMessagePositive)
     }
 }
 
-function validatePush(objectContent, stringKey, stringValue)
+function arrayEmptyPush(objectContent, stringKey, stringValue)
 {
-    if (stringValue == undefined | stringValue == "")
+    if (stringValue == undefined || stringValue == null)
     {
         
     }
     else
     {
-        objectContent.push({ elementID: stringKey, Value: stringValue });
+        // objectContent.push({ elementID: stringKey, Value: stringValue });
+        arrayAdd(objectContent, stringKey, stringValue);
     }
 }
 
 function arrayValidatePush(objectContent, stringKey, stringValue)
 {
-    if (stringValue == undefined || stringValue == "" || stringValue === null)
+    if (stringValue == undefined || stringValue == null || stringValue == "")
     {
         
     }
     else
     {
+        // objectContent.push({ elementID: stringKey, Value: stringValue });
         arrayAdd(objectContent, stringKey, stringValue);
     }
 }
+
 
 function validateTextGeneral(stringInputJQueryID)
 {
@@ -2471,6 +2542,9 @@ function numberGenerator(stringNameInfix, indexRow)
 
 function getFromDatabase(objectContent, stringPageType)
 {
+	// alert("get from database");
+	// previewArrayObject(objectContent);
+
     for (var i = 0; i < objectContent.length; i++)
     {        
         var stringKey = objectContent[i].elementID;
@@ -3152,7 +3226,7 @@ function setToDatabase(stringPageType)
             stringValue = getTextForm(stringKey);
         }
 
-        validatePush(objectContent, stringKey, stringValue);
+        arrayValidatePush(objectContent, stringKey, stringValue);
     });
     
     $("input[type=checkbox]").each(function()
@@ -3178,7 +3252,7 @@ function setToDatabase(stringPageType)
             stringValue = getDateForm(stringKey);
         }
 
-        validatePush(objectContent, stringKey, stringValue);
+        arrayValidatePush(objectContent, stringKey, stringValue);
     });
     
     $("input[type=radio]").each(function()
@@ -3208,7 +3282,7 @@ function setToDatabase(stringPageType)
         {
             stringValue = getRadioButtonGeneral(stringKey);
 
-            validatePush(objectContent, stringKey, stringValue);
+            arrayValidatePush(objectContent, stringKey, stringValue);
         }
     });
     
@@ -3226,7 +3300,7 @@ function setToDatabase(stringPageType)
             stringValue = getSelectForm(stringKey);
         }
         
-        validatePush(objectContent, stringKey, stringValue);
+        arrayValidatePush(objectContent, stringKey, stringValue);
     });
     
     $("textarea").each(function()
@@ -3243,9 +3317,10 @@ function setToDatabase(stringPageType)
             stringValue = getAreaForm(stringKey);
         }
         
-        validatePush(objectContent, stringKey, stringValue);
+        arrayValidatePush(objectContent, stringKey, stringValue);
     });
     
+    // alert("set to database");
 	// previewArrayObject(objectContent);
 
     return objectContent;
@@ -3265,6 +3340,20 @@ function JSONGenerator(objectContent)
     console.log(JSON.stringify(callInfo));
     
     return callInfo;
+}
+
+function JSONGeneratorForSignatureAttribute(objectContent)
+{
+    var jsonSignatureAttribute = {};
+    jsonSignatureAttribute.data = {};
+    jsonSignatureAttribute.data.attribute = [];
+
+    for (var i = 0; i < objectContent.length; i++)
+    {
+        jsonSignatureAttribute.data.attribute.push({ floatOffsetX : objectContent[i].floatOffsetX, floatOffsetY : objectContent[i].floatOffsetY, floatMeasurementWidth : objectContent[i].floatMeasurementWidth, floatMeasurementHeight : objectContent[i].floatMeasurementHeight });
+    }
+    
+    return JSON.stringify(jsonSignatureAttribute);
 }
 
 
@@ -3304,7 +3393,8 @@ function calculateAge(stringBirthdayID, stringAgeID)
 
 			if( (dateBirthday.getTime() > dateToday.getTime()))
 			{
-				alert("Tanggal lahir tidak bisa lebih dari hari ini !.");
+				// alert("Tanggal lahir tidak bisa lebih dari hari ini !.");
+				ReplaceHTMLNameOnValidate("","Tanggal lahir tidak bisa lebih dari hari ini !.");
 				$(stringBirthdayJQueryID).val("");
 			}
 			else
@@ -3568,7 +3658,8 @@ function validateEmail(stringInputJavaScriptID)
 		}
 		else
 		{
-			alert("Format validasi email salah !.");
+			// alert("Format validasi email salah !.");
+			ReplaceHTMLNameOnValidate("","Format validasi email salah !.");
 		}
 	});
 }
@@ -3587,7 +3678,8 @@ function validateDateNotExceedToday(stringInputJavaScriptID)
 
 			if((dateBirthday.getTime() > dateToday.getTime()))
 			{
-				alert("Tanggal lahir tidak bisa lebih dari hari ini !.");
+				// alert("Tanggal lahir tidak bisa lebih dari hari ini !.");
+				ReplaceHTMLNameOnValidate("","Format validasi email salah !.");
 			}
 			else
 			{

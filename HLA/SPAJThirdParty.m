@@ -118,10 +118,26 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
+
+    [self voidCreateDotInLine:viewBorder];
+
     [self voidLoadAllThirdPartyData];
     
     [collectionReasonInsurancePurchaseC reloadData];
     [collectionReasonInsurancePurchaseD reloadData];
+}
+
+-(void)voidCreateDotInLine:(UIView *)sender {
+    CGFloat lineWidth = sender.frame.size.width;
+    CGFloat dotWidth = 5;
+    int numberOfDot = (lineWidth/2);
+    int xStart=0;
+    for (int i=0;i<numberOfDot;i++){
+        UIView* viewDot = [[UIView alloc]initWithFrame:CGRectMake(xStart, 0, dotWidth, 1)];
+        [viewDot setBackgroundColor:[UIColor blackColor]];
+        [sender addSubview:viewDot];
+        xStart = dotWidth * i * 2;
+    }
 }
 
 - (void)viewDidLoad {
@@ -590,7 +606,35 @@
 
 
 -(IBAction)actionCloseForm:(UIButton *)sender{
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if ([sender.currentTitle isEqualToString:@"Back"]){
+        [UIView animateWithDuration:0.3 animations:^{
+            [viewSignature setAlpha:0];
+            [buttonClose setEnabled:false];
+            [buttonClose setTitle:@"Close" forState:UIControlStateNormal];
+        } completion:^ (BOOL completed) {
+            [viewSignature setHidden:true];
+            //[buttonShowSignature setHidden:false];
+            [buttonClose setEnabled:true];
+            [buttonSubmit setHidden:false];
+        }];
+    }
+    else{
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+
+}
+
+-(IBAction)createThirdPartySignature:(UIButton *)sender{
+    [UIView animateWithDuration:0.3 animations:^{
+        [viewSignature setHidden:false];
+        [viewSignature setAlpha:1];
+        [buttonClose setTitle:@"Back" forState:UIControlStateNormal];
+        [buttonClose setEnabled:false];
+        [buttonSubmit setHidden:true];
+    } completion:^ (BOOL completed) {
+        [buttonShowSignature setHidden:true];
+        [buttonClose setEnabled:true];
+    }];
 }
 
 -(IBAction)getUISwitchValue:(UIButton *)sender{
@@ -675,6 +719,8 @@
     }
     
 }
+
+
 
 -(IBAction)actionButtonInsuranceReasonTappedC:(ButtonSPAJ *)sender{
     if ([sender isSelected]){
@@ -817,6 +863,49 @@
     if (([sender tag]+1)==[valueCheckBoxReasonArrayC count]){
         valueCheckBoxReasonArrayC = [[NSMutableArray alloc]init];
     }
+}
+
+- (IBAction)actionClearSign:(UIButton *)sender {
+    [viewToSign clearView];
+    //viewToSign.layer.sublayers = nil;
+}
+
+- (IBAction)actionCompleteSignature:(id)sender{
+    //if (!boolTenagaPenjual){
+        NSString* signatureImage = [formatter encodedSignatureImage:viewToSign];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSString* dateToday=[formatter getDateToday:@"yyyy-MM-dd HH:mm:ss"];
+            NSString *stringUpdate = [NSString stringWithFormat:@" set SPAJSignatureParty5=1,SPAJDateSignatureParty5='%@',SPAJSignatureTempImageParty5='%@' where SPAJTransactionID = (select SPAJTransactionID from SPAJTransaction where SPAJEappNumber = '%@')",dateToday,signatureImage,[dictTransaction valueForKey:@"SPAJEappNumber"]];
+            [modelSPAJSignature updateSPAJSignature:stringUpdate];
+            
+            //update signature party3
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                [allAboutPDFGeneration voidSaveSignatureForImages:dictTransaction DictionaryPOData:dictionaryPOData];
+                //[self voidSaveSignatureToPDF:2];
+        
+                dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                [modelSPAJTransaction updateSPAJTransaction:@"SPAJDateModified" StringColumnValue:[formatter getDateToday:@"yyyy-MM-dd HH:mm:ss"] StringWhereName:@"SPAJEappNumber" StringWhereValue:[dictTransaction valueForKey:@"SPAJEappNumber"]];
+                [self actionClearSign:nil];
+                    
+                    UIAlertController *alertLockForm = [UIAlertController alertControllerWithTitle:@"Berhasil" message:@"Form berhasil dibuat" preferredStyle:UIAlertControllerStyleAlert];
+                    [alert alertInformation:@"Berhasil" stringMessage:@"Form berhasil dibuat"];
+                    
+                    UIAlertAction* alertActionClose = [UIAlertAction actionWithTitle:NSLocalizedString(@"BUTTON_CLOSE", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+                        [self dismissViewControllerAnimated:YES completion:nil];
+                    }];
+                    
+                    [alertLockForm addAction: alertActionClose];
+                    
+                    [self presentViewController:alertLockForm animated:YES completion:nil];
+                //[self actionCloseForm:buttonClose];
+                });
+            });
+        });
+    /*}
+    else{
+        UIAlertController *alertLockForm = [alert alertInformation:NSLocalizedString(@"ALERT_TITLE_LOCK", nil) stringMessage:NSLocalizedString(@"ALERT_MESSAGE_LOCK", nil)];
+        [self presentViewController:alertLockForm animated:YES completion:nil];
+    }*/
 }
 
 -(void)loadCheckBoxReasonDataD:(ButtonSPAJ *)sender{
@@ -1153,15 +1242,21 @@
     NSData *thumbnailData = UIImageJPEGRepresentation(resultImage, 0);
     
     //NSString *relativeOutputFilePath = [NSString stringWithFormat:@"%@/%@.jpg", [formatter generateSPAJFileDirectory:[dictTransaction valueForKey:@"SPAJEappNumber"]],fileName];
-    NSString* outputName = [NSString stringWithFormat:@"%@_%@",[dictTransaction valueForKey:@"SPAJEappNumber"],@"ThirdParty"];
+    //NSString* outputName = [NSString stringWithFormat:@"%@_%@",[dictTransaction valueForKey:@"SPAJEappNumber"],@"ThirdParty"];
+    NSString* outputName = [NSString stringWithFormat:@"%@_%@",[dictTransaction valueForKey:@"SPAJEappNumber"],@"pihakketiga"];
     
     NSString *relativeOutputFilePath = [NSString stringWithFormat:@"%@/%@.jpg", [formatter generateSPAJFileDirectory:[dictTransaction valueForKey:@"SPAJEappNumber"]],outputName];
     
-    [thumbnailData writeToFile:relativeOutputFilePath atomically:YES];
+    BOOL success = [thumbnailData writeToFile:relativeOutputFilePath atomically:YES];
     
     [buttonSubmit setEnabled:true];
     
-    UIAlertController *alertLockForm = [UIAlertController alertControllerWithTitle:@"Berhasil" message:@"Form berhasil dibuat" preferredStyle:UIAlertControllerStyleAlert];
+    if (success){
+        [self createThirdPartySignature:nil];
+    }
+    
+    
+    /*UIAlertController *alertLockForm = [UIAlertController alertControllerWithTitle:@"Berhasil" message:@"Form berhasil dibuat" preferredStyle:UIAlertControllerStyleAlert];
     [alert alertInformation:@"Berhasil" stringMessage:@"Form berhasil dibuat"];
     
     UIAlertAction* alertActionClose = [UIAlertAction actionWithTitle:NSLocalizedString(@"BUTTON_CLOSE", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
@@ -1170,7 +1265,7 @@
     
     [alertLockForm addAction: alertActionClose];
 
-    [self presentViewController:alertLockForm animated:YES completion:nil];
+    [self presentViewController:alertLockForm animated:YES completion:nil];*/
     //[viewActivityIndicator setHidden:YES];
 }
 

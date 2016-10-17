@@ -398,6 +398,13 @@ main section table.SignatureMedium tfoot tr td {
   text-align: center;
 }
 
+.SignatureImage {
+  height: 100%;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
 /* TABLE */
 table.Square, table.Round, table.Space {
   margin-top: 5px;

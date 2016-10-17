@@ -376,6 +376,7 @@
 		432E8F6A1D13F36D0030F0C4 /* AnalisaKebutuhanNasabahViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 432E8F681D13F36D0030F0C4 /* AnalisaKebutuhanNasabahViewController.m */; };
 		432E8F6B1D13F36D0030F0C4 /* AnalisaKebutuhanNasabahViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 432E8F691D13F36D0030F0C4 /* AnalisaKebutuhanNasabahViewController.xib */; };
 		43346FB61CF4080F001A6C25 /* pensign.png in Resources */ = {isa = PBXBuildFile; fileRef = 43346FB51CF4080F001A6C25 /* pensign.png */; };
+		433F23AC1DB4510A004304B4 /* empty.html in Resources */ = {isa = PBXBuildFile; fileRef = 433F23AB1DB4510A004304B4 /* empty.html */; };
 		4353C9481C61E95000AE1ED9 /* ModelNationality.m in Sources */ = {isa = PBXBuildFile; fileRef = 4353C9471C61E95000AE1ED9 /* ModelNationality.m */; };
 		4353C94B1C61F3A000AE1ED9 /* ModelMaritalStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 4353C94A1C61F3A000AE1ED9 /* ModelMaritalStatus.m */; };
 		4353C94E1C61F6F800AE1ED9 /* ModelReligion.m in Sources */ = {isa = PBXBuildFile; fileRef = 4353C94D1C61F6F800AE1ED9 /* ModelReligion.m */; };
@@ -397,6 +398,7 @@
 		4376DF211CD196EC00816BB6 /* check_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4376DF1D1CD196EC00816BB6 /* check_icon@2x.png */; };
 		438035DE1D5D8847003A9199 /* SPAJFilesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 438035DC1D5D8847003A9199 /* SPAJFilesViewController.m */; };
 		438035DF1D5D8847003A9199 /* SPAJFilesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 438035DD1D5D8847003A9199 /* SPAJFilesViewController.xib */; };
+		4381A1691DB0F81900766C00 /* emptyImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 4381A1681DB0F81900766C00 /* emptyImage.png */; };
 		438410BE1D66A07200FD4152 /* watermarkID.png in Resources */ = {isa = PBXBuildFile; fileRef = 438410BD1D66A07200FD4152 /* watermarkID.png */; };
 		438410C21D66A2F700FD4152 /* SPAJIDCapturedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 438410C01D66A2F700FD4152 /* SPAJIDCapturedViewController.m */; };
 		438410C31D66A2F700FD4152 /* SPAJIDCapturedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 438410C11D66A2F700FD4152 /* SPAJIDCapturedViewController.xib */; };
@@ -1617,6 +1619,7 @@
 		432E8F681D13F36D0030F0C4 /* AnalisaKebutuhanNasabahViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalisaKebutuhanNasabahViewController.m; sourceTree = "<group>"; };
 		432E8F691D13F36D0030F0C4 /* AnalisaKebutuhanNasabahViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnalisaKebutuhanNasabahViewController.xib; sourceTree = "<group>"; };
 		43346FB51CF4080F001A6C25 /* pensign.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pensign.png; sourceTree = "<group>"; };
+		433F23AB1DB4510A004304B4 /* empty.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = empty.html; sourceTree = "<group>"; };
 		4353C9461C61E95000AE1ED9 /* ModelNationality.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelNationality.h; sourceTree = "<group>"; };
 		4353C9471C61E95000AE1ED9 /* ModelNationality.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelNationality.m; sourceTree = "<group>"; };
 		4353C9491C61F3A000AE1ED9 /* ModelMaritalStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelMaritalStatus.h; sourceTree = "<group>"; };
@@ -1651,6 +1654,7 @@
 		438035DB1D5D8847003A9199 /* SPAJFilesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPAJFilesViewController.h; sourceTree = "<group>"; };
 		438035DC1D5D8847003A9199 /* SPAJFilesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPAJFilesViewController.m; sourceTree = "<group>"; };
 		438035DD1D5D8847003A9199 /* SPAJFilesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SPAJFilesViewController.xib; sourceTree = "<group>"; };
+		4381A1681DB0F81900766C00 /* emptyImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emptyImage.png; sourceTree = "<group>"; };
 		438410BD1D66A07200FD4152 /* watermarkID.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = watermarkID.png; sourceTree = "<group>"; };
 		438410BF1D66A2F700FD4152 /* SPAJIDCapturedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPAJIDCapturedViewController.h; sourceTree = "<group>"; };
 		438410C01D66A2F700FD4152 /* SPAJIDCapturedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPAJIDCapturedViewController.m; sourceTree = "<group>"; };
@@ -4197,6 +4201,7 @@
 		43FA6C151C87CD5D0098BA47 /* HTML USED */ = {
 			isa = PBXGroup;
 			children = (
+				433F23AB1DB4510A004304B4 /* empty.html */,
 				43EFEB721C93915A00B9AA2A /* LogoBCALife.jpg */,
 				A120EC811C93966E00C8A1C9 /* BCAHTMLlogo.png */,
 				4374ACFB1C911FF00006522A /* eng_BCALKK_Page1.html */,
@@ -5253,6 +5258,7 @@
 		C4E9D1BF1612C6A500016053 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				4381A1681DB0F81900766C00 /* emptyImage.png */,
 				438410BD1D66A07200FD4152 /* watermarkID.png */,
 				4385C9641D6661A600D2DEB4 /* watermark overlay.png */,
 				43346FB51CF4080F001A6C25 /* pensign.png */,
@@ -6445,6 +6451,7 @@
 				6AA78DB1199E114400013566 /* DiscloseBtnFinea.png in Resources */,
 				0FF8455E1D2376A8008CF861 /* SPAJ Submitted List Cell.xib in Resources */,
 				A1A8312019A1978400C0302D /* P2-1-Row3.jpg in Resources */,
+				433F23AC1DB4510A004304B4 /* empty.html in Resources */,
 				A1A8312219A1978D00C0302D /* P2-1-Row2.jpg in Resources */,
 				A170C12E19A6052A0073325B /* P2-1Full.png in Resources */,
 				A1E3AFC219BD5F5200F332B3 /* P5-footer-B.jpg in Resources */,
@@ -6487,6 +6494,7 @@
 				043FDBA31A1AEF14008EDC24 /* sales_illustrationv3.png in Resources */,
 				1706BD4C1C7169A40038D1DB /* menu_customerfactfind.png in Resources */,
 				4385C9651D6661A600D2DEB4 /* watermark overlay.png in Resources */,
+				4381A1691DB0F81900766C00 /* emptyImage.png in Resources */,
 				AA4EF7441C85A4260050CCD8 /* AppIcon-144.png in Resources */,
 				043FDBAB1A1AF226008EDC24 /* sales_illustration@2x_20141118.png in Resources */,
 				043FDBAC1A1AF226008EDC24 /* eAplication@2x_20141118.png in Resources */,

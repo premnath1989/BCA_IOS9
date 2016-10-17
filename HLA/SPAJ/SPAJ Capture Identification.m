@@ -62,6 +62,14 @@ NSString* const Back = @"Back";
 @synthesize dictTransaction;
     // DID LOAD
 
+    -(void)viewDidAppear:(BOOL)animated{
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"EditMode" object:self];
+    }
+
+    -(void)viewDidDisappear:(BOOL)animated{
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ViewMode" object:self];
+    }
+
     - (void)viewDidLoad
     {
         [super viewDidLoad];

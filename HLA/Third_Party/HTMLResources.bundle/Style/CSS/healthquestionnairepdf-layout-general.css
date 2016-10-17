@@ -340,6 +340,7 @@ main form .ContainerCenter, main fieldset .ContainerCenter {
   align-content: center;
   align-items: center;
   text-align: center;
+  flex: none;
 }
 
 main form .Margin, main fieldset .Margin {

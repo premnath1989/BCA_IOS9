@@ -155,11 +155,38 @@
     return result;
 }
 
+-(UIImage *)generateSignatureForThirdPartyImage:(UIImage *)mainImg signatureImage1:(UIImage *)signatureImage1 signaturePostion1:(CGRect)signaturePosition1 signatureImage2:(UIImage *)signatureImage2 signaturePostion2:(CGRect)signaturePosition2 signatureImage3:(UIImage *)signatureImage3 signaturePostion3:(CGRect)signaturePosition3 signatureImage4:(UIImage *)signatureImage4  signaturePostion4:(CGRect)signaturePosition4 signatureImage5:(UIImage *)signatureImage5
+    signaturePostion5:(CGRect)signaturePosition5{
+    UIImage *backgroundImage = mainImg;
+    UIImage *signImage1 = signatureImage1;
+    UIImage *signImage2 = signatureImage2;
+    UIImage *signImage3 = signatureImage3;
+    UIImage *signImage4 = signatureImage4;
+    UIImage *signImage5 = signatureImage5;
+    
+    //Now re-drawing your  Image using drawInRect method
+    UIGraphicsBeginImageContext(backgroundImage.size);
+    [backgroundImage drawInRect:CGRectMake(0, 0, backgroundImage.size.width, backgroundImage.size.height)];
+    
+    [signImage1 drawInRect:signaturePosition1];
+    [signImage2 drawInRect:signaturePosition2];
+    [signImage3 drawInRect:signaturePosition3];
+    [signImage4 drawInRect:signaturePosition4];
+    [signImage5 drawInRect:signaturePosition5];
+    
+    
+    // now merging two images into one
+    UIImage *result = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return result;
+}
+
 -(void)removeSPAJSigned:(NSDictionary *)dictTransaction{
     NSString *docsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
 
     NSMutableArray* fileNameForDelete = [[NSMutableArray alloc]init];
     
+    //[fileNameForDelete addObject:@"ImageSignature"];
     [fileNameForDelete addObject:@"SPAJSigned.pdf"];
     [fileNameForDelete addObject:@"SPAJSignedPage1.pdf"];
     [fileNameForDelete addObject:@"SPAJSigned9.pdf"];
@@ -184,6 +211,8 @@
         }
     }
 }
+
+
 
 -(void)removeUnNecesaryPDFFiles:(NSDictionary *)dictTransaction{
     formatter = [[Formatter alloc]init];
@@ -279,6 +308,7 @@
     NSString* base64StringImageParty2=[modelSPAJSignature selectSPAJSignatureData:@"SPAJSignatureTempImageParty2" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]]?:@"";
     NSString* base64StringImageParty3=[modelSPAJSignature selectSPAJSignatureData:@"SPAJSignatureTempImageParty3" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]]?:@"";
     NSString* base64StringImageParty4=[modelSPAJSignature selectSPAJSignatureData:@"SPAJSignatureTempImageParty4" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]]?:@"";
+    NSString* base64StringImageParty5=[modelSPAJSignature selectSPAJSignatureData:@"SPAJSignatureTempImageParty5" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]]?:@"";
     
     NSData* imageParty1=[[NSData alloc]
                          initWithBase64EncodedString:base64StringImageParty1 options:0];;
@@ -288,11 +318,14 @@
                          initWithBase64EncodedString:base64StringImageParty3 options:0];;
     NSData* imageParty4=[[NSData alloc]
                          initWithBase64EncodedString:base64StringImageParty4 options:0];;
+    NSData* imageParty5=[[NSData alloc]
+                         initWithBase64EncodedString:base64StringImageParty5 options:0];;
     
     UIImage *imageSignatureParty1 = [UIImage imageWithData:imageParty1];
     UIImage *imageSignatureParty2 = [UIImage imageWithData:imageParty2];
     UIImage *imageSignatureParty3 = [UIImage imageWithData:imageParty3];
     UIImage *imageSignatureParty4 = [UIImage imageWithData:imageParty4];
+    UIImage *imageSignatureParty5 = [UIImage imageWithData:imageParty5];
     
     
     UIColor* fromColor = [UIColor colorWithRed:255.0 green:255.0 blue:255.0 alpha:1.0];
@@ -301,10 +334,11 @@
     UIImage* imageConverted2 = [classImageProcessing changeColor:imageSignatureParty2 fromColor:fromColor toColor:toColor];
     UIImage* imageConverted3 = [classImageProcessing changeColor:imageSignatureParty3 fromColor:fromColor toColor:toColor];
     UIImage* imageConverted4 = [classImageProcessing changeColor:imageSignatureParty4 fromColor:fromColor toColor:toColor];
+    UIImage* imageConverted5 = [classImageProcessing changeColor:imageSignatureParty5 fromColor:fromColor toColor:toColor];
     
     dispatch_async(dispatch_get_main_queue(), ^{
             @autoreleasepool {
-                [self saveSignatureForImage:imageConverted1 ImageSigned2:imageConverted2 ImageSigned3:imageConverted3 ImageSigned4:imageConverted4 FileName:stringFileName DictTransaction:dictTransaction];
+                [self saveSignatureForImage:imageConverted1 ImageSigned2:imageConverted2 ImageSigned3:imageConverted3 ImageSigned4:imageConverted4 ImageSigned5:imageConverted5 FileName:stringFileName DictTransaction:dictTransaction];
             }
     });
 }
@@ -317,6 +351,7 @@
     NSString* base64StringImageParty2=[modelSPAJSignature selectSPAJSignatureData:@"SPAJSignatureTempImageParty2" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]]?:@"";
     NSString* base64StringImageParty3=[modelSPAJSignature selectSPAJSignatureData:@"SPAJSignatureTempImageParty3" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]]?:@"";
     NSString* base64StringImageParty4=[modelSPAJSignature selectSPAJSignatureData:@"SPAJSignatureTempImageParty4" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]]?:@"";
+    NSString* base64StringImageParty5=[modelSPAJSignature selectSPAJSignatureData:@"SPAJSignatureTempImageParty5" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]]?:@"";
     
     NSData* imageParty1=[[NSData alloc]
                          initWithBase64EncodedString:base64StringImageParty1 options:0];;
@@ -326,12 +361,14 @@
                          initWithBase64EncodedString:base64StringImageParty3 options:0];;
     NSData* imageParty4=[[NSData alloc]
                          initWithBase64EncodedString:base64StringImageParty4 options:0];;
+    NSData* imageParty5=[[NSData alloc]
+                         initWithBase64EncodedString:base64StringImageParty5 options:0];;
     
     UIImage *imageSignatureParty1 = [UIImage imageWithData:imageParty1];
     UIImage *imageSignatureParty2 = [UIImage imageWithData:imageParty2];
     UIImage *imageSignatureParty3 = [UIImage imageWithData:imageParty3];
     UIImage *imageSignatureParty4 = [UIImage imageWithData:imageParty4];
-    
+    UIImage *imageSignatureParty5 = [UIImage imageWithData:imageParty5];
     
     UIColor* fromColor = [UIColor colorWithRed:255.0 green:255.0 blue:255.0 alpha:1.0];
     UIColor* toColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
@@ -339,28 +376,32 @@
     UIImage* imageConverted2 = [classImageProcessing changeColor:imageSignatureParty2 fromColor:fromColor toColor:toColor];
     UIImage* imageConverted3 = [classImageProcessing changeColor:imageSignatureParty3 fromColor:fromColor toColor:toColor];
     UIImage* imageConverted4 = [classImageProcessing changeColor:imageSignatureParty4 fromColor:fromColor toColor:toColor];
+    UIImage* imageConverted5 = [classImageProcessing changeColor:imageSignatureParty5 fromColor:fromColor toColor:toColor];
     
     NSMutableArray *arrayIMGName;
+    NSMutableArray *arrayIMGNameTranslate;
     NSMutableArray *arrayPureIMGName = [[NSMutableArray alloc]init];
     if ([[dictionaryPOData valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"]){
         //arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH"]];
         arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH\",\"TP\",\"AF"]];
+        arrayIMGNameTranslate = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlTranslateName" SPAJSection:@"IMG_PH\",\"TP\",\"AF"]];
     }
     else{
         //arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_IN"]];
         //arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH\",\"IMG_IN"]];
         arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH\",\"IMG_IN\",\"TP\",\"AF"]];
+        arrayIMGNameTranslate = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlTranslateName" SPAJSection:@"IMG_PH\",\"IMG_IN\",\"TP\",\"AF"]];
     }
     
-    for (int i=0;i<[arrayIMGName count];i++){
-        NSString *pureName = [self getSPAJImageNameFromPath:[arrayIMGName objectAtIndex:i]];
+    for (int i=0;i<[arrayIMGNameTranslate count];i++){
+        NSString *pureName = [self getSPAJImageNameFromPath:[arrayIMGNameTranslate objectAtIndex:i]];
         [arrayPureIMGName addObject:pureName];
     }
     
     dispatch_async(dispatch_get_main_queue(), ^{
         for (int x=0;x<[arrayPureIMGName count];x++){
             @autoreleasepool {
-                [self saveSignatureForImage:imageConverted1 ImageSigned2:imageConverted2 ImageSigned3:imageConverted3 ImageSigned4:imageConverted4 FileName:[arrayPureIMGName objectAtIndex:x] DictTransaction:dictTransaction];
+                [self saveSignatureForImage:imageConverted1 ImageSigned2:imageConverted2 ImageSigned3:imageConverted3 ImageSigned4:imageConverted4 ImageSigned5:imageConverted5 FileName:[arrayPureIMGName objectAtIndex:x] DictTransaction:dictTransaction];
             }
         }
     });
@@ -369,7 +410,7 @@
 }
 
 
--(void)saveSignatureForImage:(UIImage *)imageSigned1 ImageSigned2:(UIImage *)imageSigned2 ImageSigned3:(UIImage *)imageSigned3 ImageSigned4:(UIImage *)imageSigned4 FileName:(NSString *)stringFileName DictTransaction:(NSDictionary *)dictTransaction{
+-(void)saveSignatureForImage:(UIImage *)imageSigned1 ImageSigned2:(UIImage *)imageSigned2 ImageSigned3:(UIImage *)imageSigned3 ImageSigned4:(UIImage *)imageSigned4 ImageSigned5:(UIImage *)imageSigned5 FileName:(NSString *)stringFileName DictTransaction:(NSDictionary *)dictTransaction{
     
     formatter = [[Formatter alloc]init];
     NSString *mainFileName = [NSString stringWithFormat:@"%@_%@.jpg",[dictTransaction valueForKey:@"SPAJEappNumber"],stringFileName];
@@ -377,7 +418,7 @@
     fullpath = [NSString stringWithFormat:@"%@/%@",fullpath,mainFileName];
     
     UIImage *baseImage = [UIImage imageWithContentsOfFile:fullpath];
-    if (([stringFileName rangeOfString:@"amandment"].location != NSNotFound)||([stringFileName rangeOfString:@"amandemen"].location != NSNotFound)) {
+    /*if (([stringFileName rangeOfString:@"amandment"].location != NSNotFound)||([stringFileName rangeOfString:@"amandemen"].location != NSNotFound)) {
         CGRect rectSign1 = CGRectMake(120,  1990, imageSigned1.size.width, imageSigned1.size.height);
         CGRect rectSign2 = CGRectMake(720, 1990, imageSigned2.size.width, imageSigned2.size.height);
         CGRect rectSign3 = CGRectMake(200, 1990, imageSigned3.size.width, imageSigned3.size.height);
@@ -389,8 +430,8 @@
         NSString *relativeOutputFilePath = [NSString stringWithFormat:@"%@", fullpath];
         [thumbnailData writeToFile:relativeOutputFilePath atomically:YES];
         
-    }
-    else if (([stringFileName rangeOfString:@"chestpain"].location != NSNotFound)||([stringFileName rangeOfString:@"nyeridada"].location != NSNotFound)) {
+    }*/
+    if (([stringFileName rangeOfString:@"chestpain"].location != NSNotFound)||([stringFileName rangeOfString:@"nyeridada"].location != NSNotFound)) {
         CGRect rectSign1 = CGRectMake(120,  7642, imageSigned1.size.width, imageSigned1.size.height);
         CGRect rectSign2 = CGRectMake(720, 7642, imageSigned2.size.width, imageSigned2.size.height);
         CGRect rectSign3 = CGRectMake(200, 7642, imageSigned3.size.width, imageSigned3.size.height);
@@ -618,7 +659,7 @@
         NSString *relativeOutputFilePath = [NSString stringWithFormat:@"%@", fullpath];
         [thumbnailData writeToFile:relativeOutputFilePath atomically:YES];
     }
-    else if ([stringFileName rangeOfString:@"salesdeclaration"].location != NSNotFound) {
+    else if (([stringFileName rangeOfString:@"salesdeclaration"].location != NSNotFound)||([stringFileName rangeOfString:@"tenagapenjual"].location != NSNotFound)) {
         NSString *mainFileName = [NSString stringWithFormat:@"%@_%@.jpg",[dictTransaction valueForKey:@"SPAJNumber"],stringFileName];
         NSString *fullpath = [formatter generateSPAJFileDirectory:[dictTransaction valueForKey:@"SPAJEappNumber"]];
         fullpath = [NSString stringWithFormat:@"%@/%@",fullpath,mainFileName];
@@ -635,19 +676,21 @@
         NSString *relativeOutputFilePath = [NSString stringWithFormat:@"%@", fullpath];
         [thumbnailData writeToFile:relativeOutputFilePath atomically:YES];
     }
-    else if ([stringFileName rangeOfString:@"thirdparty"].location != NSNotFound) {
-        NSString *mainFileName = [NSString stringWithFormat:@"%@_ThirdParty.jpg",[dictTransaction valueForKey:@"SPAJEappNumber"]];
+    else if (([stringFileName rangeOfString:@"thirdparty"].location != NSNotFound)||([stringFileName rangeOfString:@"pihakketiga"].location != NSNotFound)) {
+        //NSString *mainFileName = [NSString stringWithFormat:@"%@_ThirdParty.jpg",[dictTransaction valueForKey:@"SPAJEappNumber"]];
+        NSString *mainFileName = [NSString stringWithFormat:@"%@_pihakketiga.jpg",[dictTransaction valueForKey:@"SPAJEappNumber"]];
         NSString *fullpath = [formatter generateSPAJFileDirectory:[dictTransaction valueForKey:@"SPAJEappNumber"]];
         fullpath = [NSString stringWithFormat:@"%@/%@",fullpath,mainFileName];
         
         UIImage *baseImage = [UIImage imageWithContentsOfFile:fullpath];
         
-        CGRect rectSign1 = CGRectMake(840,  10868, 390, 210);
-        CGRect rectSign2 = CGRectMake(720, 10868, 0, 0);
-        CGRect rectSign3 = CGRectMake(200, 10868, 0, 0);
-        CGRect rectSign4 = CGRectMake(1385, 10868, 390, 210);
+        CGRect rectSign1 = CGRectMake(798,  10928, 456, 247);
+        CGRect rectSign2 = CGRectMake(720, 10928, 0, 0);
+        CGRect rectSign3 = CGRectMake(200, 10928, 0, 0);
+        CGRect rectSign4 = CGRectMake(1347, 10928, 456, 247);
+        CGRect rectSign5 = CGRectMake(245, 10928, 456, 247);
         
-        UIImage *resultImage = [self generateSignatureForImage:baseImage signatureImage1:imageSigned1 signaturePostion1:rectSign1 signatureImage2:imageSigned2 signaturePostion2:rectSign2 signatureImage3:imageSigned3 signaturePostion3:rectSign3 signatureImage4:imageSigned4 signaturePostion4:rectSign4];
+        UIImage *resultImage = [self generateSignatureForThirdPartyImage:baseImage signatureImage1:imageSigned1 signaturePostion1:rectSign1 signatureImage2:imageSigned2 signaturePostion2:rectSign2 signatureImage3:imageSigned3 signaturePostion3:rectSign3 signatureImage4:imageSigned4 signaturePostion4:rectSign4 signatureImage5:imageSigned5 signaturePostion5:rectSign5];
         NSData *thumbnailData = UIImageJPEGRepresentation(resultImage, 0);
         
         NSString *relativeOutputFilePath = [NSString stringWithFormat:@"%@", fullpath];

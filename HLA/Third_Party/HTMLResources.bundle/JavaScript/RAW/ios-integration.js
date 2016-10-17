@@ -89,6 +89,8 @@ function onSuccess (ret)
         if (stringType == "readFromDB")
         {
             getFromDatabase(objectContent.result.readFromDB, stringPageTypeCurrent);
+            // alert("readfromdb");
+            // previewArrayObject(objectContent.result.readFromDB);
         }
         else
         {
@@ -344,14 +346,14 @@ function savetoDB()
 			var stringWeightChangeJQueryID = stringKres + stringWeightChangeJavaScriptID;
 			var stringWeightChangeValue = getRadioButtonGeneral(stringWeightChangeJavaScriptID);
 
-			setHardCode(arrayHealthQuestionnaire, stringHeightJavaScriptID, stringHeightValue);
-			setHardCode(arrayHealthQuestionnaire, stringWeightJavaScriptID, stringWeightValue);
-			setHardCode(arrayHealthQuestionnaire, stringBabyHeightJavaScriptID, stringBabyHeightValue);
-			setHardCode(arrayHealthQuestionnaire, stringBabyWeightJavaScriptID, stringBabyWeightValue);
-			setHardCode(arrayHealthQuestionnaire, stringPregnantWeekJavaScriptID, stringPregnantWeekValue);
-			setHardCode(arrayHealthQuestionnaire, stringPregnantJavaScriptID, stringPregnantValue);
-			setHardCode(arrayHealthQuestionnaire, stringPregnancyJavaScriptID, stringPregnancyValue);
-			setHardCode(arrayHealthQuestionnaire, stringWeightChangeJavaScriptID, stringWeightChangeValue);
+			arrayValidatePush(arrayHealthQuestionnaire, stringHeightJavaScriptID, stringHeightValue);
+			arrayValidatePush(arrayHealthQuestionnaire, stringWeightJavaScriptID, stringWeightValue);
+			arrayValidatePush(arrayHealthQuestionnaire, stringBabyHeightJavaScriptID, stringBabyHeightValue);
+			arrayValidatePush(arrayHealthQuestionnaire, stringBabyWeightJavaScriptID, stringBabyWeightValue);
+			arrayValidatePush(arrayHealthQuestionnaire, stringPregnantWeekJavaScriptID, stringPregnantWeekValue);
+			arrayValidatePush(arrayHealthQuestionnaire, stringPregnantJavaScriptID, stringPregnantValue);
+			arrayValidatePush(arrayHealthQuestionnaire, stringPregnancyJavaScriptID, stringPregnancyValue);
+			arrayValidatePush(arrayHealthQuestionnaire, stringWeightChangeJavaScriptID, stringWeightChangeValue);
 
 			objectContent = arrayHealthQuestionnaire;
 		}
@@ -362,6 +364,8 @@ function savetoDB()
 		else
 		{
 			objectContent = setToDatabase(stringPageTypeCurrent);
+			// alert("savetodb");
+			// previewArrayObject(objectContent);
 		}
 
 		var jsonToDatabase = JSONGenerator(objectContent);
@@ -386,7 +390,9 @@ function AutoPopulate(jsonObject)
     
     if (stringType == "autopopulateFromDB")
     {
-        getFromDatabase(objectContent.result.autopopulateFromDB, stringPageTypeCurrent);                
+        getFromDatabase(objectContent.result.autopopulateFromDB, stringPageTypeCurrent);
+        // alert("autopopulate");
+        // previewArrayObject(objectContent.result.autopopulateFromDB);              
     }
     else
     {

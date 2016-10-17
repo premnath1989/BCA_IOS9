@@ -14,6 +14,7 @@
 #import "TextViewSPAJ.h"
 #import "AllAboutPDFFunctions.h"
 #import "DateViewController.h"
+#import "mySmoothLineView.h"
 #import "HtmlGenerator/HtmlGenerator.h"
 
 @interface SPAJThirdParty : HtmlGenerator<DateViewControllerDelegate>{
@@ -26,10 +27,13 @@
     UIPopoverController *dobPopover;
     
     IBOutlet UIButton* buttonSubmit;
+    IBOutlet UIButton* buttonClose;
+    IBOutlet UIButton* buttonShowSignature;
     
     IBOutlet UICollectionView *collectionReasonInsurancePurchaseC;
     IBOutlet UICollectionView *collectionReasonInsurancePurchaseD;
     
+    IBOutlet UIView *viewSignature;
     IBOutlet UIScrollView *scrollViewForm;
     IBOutlet UIStackView *stackViewForm;
     
@@ -151,6 +155,10 @@
     
     UITextField *activeField;
     UITextView *activeView;
+    
+    //signature
+    IBOutlet UIView *viewBorder;
+    IBOutlet mySmoothLineView *viewToSign;
 }
 @property (weak, nonatomic) NSDictionary* dictTransaction;
 @end

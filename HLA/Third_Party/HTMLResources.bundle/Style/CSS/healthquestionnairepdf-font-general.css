@@ -302,7 +302,32 @@ main form fieldset .LineStraight {
   border-bottom-width: 1px;
 }
 
-main form fieldset .BoxRound {
+main form fieldset p {
+  font-size: 0.75em;
+}
+
+main form fieldset.WithoutDoubleDot label:after {
+  content: '';
+}
+
+.HeaderFieldset label, .HeaderFieldset span {
+  font-size: 0.75em;
+  vertical-align: middle;
+}
+
+.HeaderFieldset .RadioButton label, .HeaderFieldset .Checkbox label {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.HeaderFieldset .RadioButton label:after, .HeaderFieldset .Checkbox label:after {
+  float: none;
+  display: inline-block;
+  margin: 0px;
+  content: '';
+}
+
+.HeaderFieldset .BoxRound {
   width: 20px;
   height: 28px;
   font-size: 0.75em;
@@ -319,14 +344,6 @@ main form fieldset .BoxRound {
   -ms-border-radius: 4px;
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
-}
-
-main form fieldset p {
-  font-size: 0.75em;
-}
-
-main form fieldset.WithoutDoubleDot label:after {
-  content: '';
 }
 
 .QuestionnaireTitle {
@@ -411,8 +428,7 @@ div.TableItem label {
 }
 
 .SignatureSquare img {
-  min-height: 160px;
-  display: block;
+  min-height: 144px;
 }
 
 .SignatureSquare span.Name, .SignatureSquare span.Description {
@@ -479,12 +495,19 @@ table.SignatureMedium thead tr th .Note {
 }
 
 table.SignatureMedium tbody tr td {
-  height: 108px;
+  height: 144px;
 }
 
 table.SignatureMedium tfoot tr td {
   font-size: 0.75em;
   text-align: center;
+}
+
+.SignatureImage {
+  height: 144px;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 /* TABLE */

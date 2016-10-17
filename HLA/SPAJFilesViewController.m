@@ -41,7 +41,7 @@
     NSArray *directoryContent;
     NSMutableArray* arrayAfterSort;
     NSMutableArray* arrayFinalSort;
-    
+    CGPoint originalImagePos;
     int intUploadCount;
 }
 @synthesize dictTransaction;
@@ -72,6 +72,7 @@
     alert = [[Alert alloc]init];
     intUploadCount = 0;
     
+    originalImagePos = imageViewDisplayImage.center;
         // Do any additional setup after loading the view from its nib.
 }
 
@@ -99,7 +100,12 @@
             [arrayAfterSort insertObject:[arrayBeforeSort objectAtIndex:i] atIndex:0];
         }
         else if ([[arrayBeforeSort objectAtIndex:i] rangeOfString:@"SPAJ"].location != NSNotFound){
-            [arrayAfterSort insertObject:[arrayBeforeSort objectAtIndex:i] atIndex:1];
+            if ([arrayAfterSort count]>0){
+                [arrayAfterSort insertObject:[arrayBeforeSort objectAtIndex:i] atIndex:1];
+            }
+            else{
+                [arrayAfterSort insertObject:[arrayBeforeSort objectAtIndex:i] atIndex:0];
+            }
         }
         else{
             //[arrayAfterSort addObject:[arrayBeforeSort objectAtIndex:i]];
@@ -133,7 +139,8 @@
     
     if (boolThirdParty){
         NSString *match = @"*ThirdParty.jpg";
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF like %@", match];
+        NSString *matchIndo = @"*pihakketiga.jpg";
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF like %@ or SELF like %@", match,matchIndo];
         arrayFinalSort = [[arrayFinalSort filteredArrayUsingPredicate:predicate] mutableCopy];
     }
     
@@ -156,6 +163,42 @@
     [tableFileList reloadData];
 }
 
+-(void)resetImageZoom {
+    CGPoint centerPoint = CGPointMake(CGRectGetMidX(scrollImage.bounds),
+                                      CGRectGetMidY(scrollImage.bounds));
+    [self view:imageViewDisplayImage setCenter:centerPoint];
+}
+
+- (void)view:(UIView*)view setCenter:(CGPoint)centerPoint
+{
+    CGRect vf = view.frame;
+    CGPoint co = scrollImage.contentOffset;
+    
+    CGFloat x = centerPoint.x - vf.size.width / 2.0;
+    CGFloat y = centerPoint.y - vf.size.height / 2.0;
+    
+    if(x < 0)
+    {
+        co.x = -x;
+        vf.origin.x = 0.0;
+    }
+    else
+    {
+        vf.origin.x = x;
+    }
+    if(y < 0)
+    {
+        co.y = -y;
+        vf.origin.y = 0.0;
+    }
+    else
+    {
+        vf.origin.y = y;
+    }
+    
+    view.frame = vf;
+    scrollImage.contentOffset = co;
+}
 -(void)showFileSelected:(int)indexSelected{
         [UIView animateWithDuration:0.3 animations:^{
             
@@ -192,12 +235,13 @@
                 [scrollImage setZoomScale:0.0];
             }
             else*/ //if (([fileName rangeOfString:@"kuesioneraktivitas"].location != NSNotFound)||([fileName rangeOfString:@"kuesionerkesehatan"].location != NSNotFound)) {
-            if (([allAboutPDFGeneration doesString:fileName containCharacter:@"kuesioneraktivitas"])||([allAboutPDFGeneration doesString:fileName containCharacter:@"kuesionerkesehatan"])||([allAboutPDFGeneration doesString:fileName containCharacter:@"page"]))
+            
+            if (([allAboutPDFGeneration doesString:fileName containCharacter:@"kuesioneraktivitas"])||([allAboutPDFGeneration doesString:fileName containCharacter:@"kuesionerkesehatan"])||([allAboutPDFGeneration doesString:fileName containCharacter:@"ThirdParty"])||([allAboutPDFGeneration doesString:fileName containCharacter:@"pihakketiga"]))
             {
                 [scrollImage setZoomScale:4.0];
             }
             else{
-                [scrollImage setZoomScale:0.0];
+                [scrollImage setZoomScale:1.0];
             }
             [webViewDisplayPDF setHidden:YES];
             [imageViewDisplayImage setHidden:NO];
@@ -226,6 +270,7 @@
             [buttonSubmit setHidden:false];
             [imageViewDisplayImage setImage:nil];
             [webViewDisplayPDF loadHTMLString:@"" baseURL:nil];
+            [self resetImageZoom];
         }];
     }
     else{

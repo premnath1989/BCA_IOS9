@@ -33,7 +33,7 @@
 -(void)removeActivityAndHealthQuestionaireJPGFiles:(NSDictionary *)dictTransaction;
 
 -(void)voidSaveSignatureForImages:(NSDictionary *)dictTransaction DictionaryPOData:(NSDictionary *)dictionaryPOData;
--(void)saveSignatureForImage:(UIImage *)imageSigned1 ImageSigned2:(UIImage *)imageSigned2 ImageSigned3:(UIImage *)imageSigned3 ImageSigned4:(UIImage *)imageSigned4 FileName:(NSString *)stringFileName DictTransaction:(NSDictionary *)dictTransaction;
+-(void)saveSignatureForImage:(UIImage *)imageSigned1 ImageSigned2:(UIImage *)imageSigned2 ImageSigned3:(UIImage *)imageSigned3 ImageSigned4:(UIImage *)imageSigned4 ImageSigned5:(UIImage *)imageSigned5 FileName:(NSString *)stringFileName DictTransaction:(NSDictionary *)dictTransaction;
 
 -(BOOL)doesString:(NSString *)string containCharacter:(NSString *)character;
 

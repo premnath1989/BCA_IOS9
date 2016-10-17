@@ -305,7 +305,7 @@ function getInputFrom(stringLayoutJavaScriptID, arrayContent, stringInputInfix)
 			}
 			else
 			{
-				arrayValidatePush(arrayInputTemporary, stringKey, stringValue);
+				arrayEmptyPush(arrayInputTemporary, stringKey, stringValue);
 			}
 		});
 	}
@@ -345,7 +345,7 @@ function getInputFrom(stringLayoutJavaScriptID, arrayContent, stringInputInfix)
 				}
 				else
 				{
-					arrayValidatePush(arrayInputTemporary, stringKey, stringValue);
+					arrayEmptyPush(arrayInputTemporary, stringKey, stringValue);
 					stringRadioButtonFlag = stringInputName;
 				}
 			}
@@ -389,7 +389,7 @@ function getInputFrom(stringLayoutJavaScriptID, arrayContent, stringInputInfix)
 			}
 			else
 			{
-				arrayValidatePush(arrayInputTemporary, stringKey, stringValue);
+				arrayEmptyPush(arrayInputTemporary, stringKey, stringValue);
 			}
 		});
 	}
@@ -427,7 +427,7 @@ function getInputFrom(stringLayoutJavaScriptID, arrayContent, stringInputInfix)
 			}
 			else
 			{
-				arrayValidatePush(arrayInputTemporary, stringKey, stringValue);
+				arrayEmptyPush(arrayInputTemporary, stringKey, stringValue);
 			}
 		});
 	}
@@ -465,7 +465,7 @@ function getInputFrom(stringLayoutJavaScriptID, arrayContent, stringInputInfix)
 			}
 			else
 			{
-				arrayValidatePush(arrayInputTemporary, stringKey, stringValue);
+				arrayEmptyPush(arrayInputTemporary, stringKey, stringValue);
 			}
 		});
 	}
@@ -503,7 +503,7 @@ function getInputFrom(stringLayoutJavaScriptID, arrayContent, stringInputInfix)
 			}
 			else
 			{
-				arrayValidatePush(arrayInputTemporary, stringKey, stringValue);
+				arrayEmptyPush(arrayInputTemporary, stringKey, stringValue);
 			}
 		});
 	}
@@ -541,7 +541,7 @@ function getInputFrom(stringLayoutJavaScriptID, arrayContent, stringInputInfix)
 			}
 			else
 			{
-				arrayValidatePush(arrayInputTemporary, stringKey, stringValue);
+				arrayEmptyPush(arrayInputTemporary, stringKey, stringValue);
 			}
 		});
 	}
@@ -579,7 +579,7 @@ function getInputFrom(stringLayoutJavaScriptID, arrayContent, stringInputInfix)
 			}
 			else
 			{
-				arrayValidatePush(arrayInputTemporary, stringKey, stringValue);
+				arrayEmptyPush(arrayInputTemporary, stringKey, stringValue);
 			}
 		});
 	}
@@ -600,7 +600,7 @@ function getInputFrom(stringLayoutJavaScriptID, arrayContent, stringInputInfix)
 }
 
 function setInputFrom(stringLayoutJavaScriptID, arrayContent, stringInputInfix)
-{	
+{
 	var stringKey;
 	var stringValue;
 	var stringKeyPrefix;

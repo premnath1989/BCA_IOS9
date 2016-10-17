@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="BPreplay_Regular.otf">
+        <mutableArray key="BPreplay.otf">
             <string>BPreplay</string>
         </mutableArray>
     </customFonts>
@@ -35,9 +35,9 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0X5-SW-rtC">
+                <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0X5-SW-rtC">
                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.94901960780000005" green="0.4431372549" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pi5-52-vFL" customClass="ViewPageHeader">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
@@ -57,7 +57,7 @@
                     </constraints>
                 </view>
                 <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Tnk-va-LaM" customClass="StackViewGuideMenuContainer">
-                    <rect key="frame" x="0.0" y="64" width="600" height="100"/>
+                    <rect key="frame" x="0.0" y="64" width="600" height="150"/>
                     <subviews>
                         <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pDg-BU-x6G" customClass="ViewGuideMenuNotSelected">
                             <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
@@ -152,9 +152,9 @@
                             </variation>
                         </view>
                         <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="buI-Tv-IiQ" customClass="ViewGuideMenuSelected">
-                            <rect key="frame" x="0.0" y="50" width="600" height="0.0"/>
+                            <rect key="frame" x="0.0" y="100" width="600" height="50"/>
                             <subviews>
-                                <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="utj-z3-yFg" customClass="StackViewGuideMenuHorizontal">
+                                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="utj-z3-yFg" customClass="StackViewGuideMenuHorizontal">
                                     <rect key="frame" x="10" y="5" width="580" height="21"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kCh-3K-1kP" customClass="LabelGuideMenuStep">
@@ -174,7 +174,7 @@
                                         <rect key="frame" x="10" y="-10" width="780" height="21"/>
                                     </variation>
                                 </stackView>
-                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iXD-ZI-9GH" customClass="ButtonGuideMenu">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iXD-ZI-9GH" customClass="ButtonGuideMenu">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="30"/>
                                     <state key="normal" title="Button"/>
                                     <variation key="widthClass=regular" misplaced="YES">
@@ -221,7 +221,7 @@
                         <rect key="frame" x="0.0" y="64" width="800" height="100"/>
                     </variation>
                 </stackView>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qLA-Ph-RKi" customClass="ButtonConfirmSPAJ">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qLA-Ph-RKi" customClass="ButtonConfirmSPAJ">
                     <rect key="frame" x="0.0" y="158" width="600" height="30"/>
                     <state key="normal" title="Button"/>
                     <variation key="widthClass=regular" misplaced="YES">
@@ -371,7 +371,7 @@
                     </variation>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="iRa-Ab-yiP" secondAttribute="trailing" id="0KR-ZG-JQY"/>
                 <constraint firstItem="iRa-Ab-yiP" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="3uC-N5-nx2"/>

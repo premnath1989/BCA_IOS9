@@ -42,6 +42,7 @@
     Alert* alert;
     
     NSString *imageFileName;
+    NSString *imageFileNameTranslate;
     
     NSMutableArray *arrayCollectionInsurancePurchaseReason;
     NSMutableArray *arrayCollectionInsurancePurchaseReasonID;
@@ -218,6 +219,7 @@
 -(void)loadReport{
     //NSString* fileName = @"20160803/page_spajpdf_salesdeclaration.html";
     imageFileName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"AF" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]];
+    imageFileNameTranslate = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlTranslateName" SPAJSection:@"AF" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]];
     [self loadTenagaPenjualPDFHTML:imageFileName WithArrayIndex:0];
 }
 
@@ -663,7 +665,7 @@
     [self callSuccessCallback:[params valueForKey:@"successCallBack"] withRetValue:dictOriginal];
     
     //[self performSelector:@selector(voidCreateThePDF) withObject:nil afterDelay:1.0];
-    [self performSelector:@selector(voidCreateImageFromWebView:) withObject:imageFileName afterDelay:1.0];
+    [self performSelector:@selector(voidCreateImageFromWebView:) withObject:imageFileNameTranslate afterDelay:1.0];
     return dictOriginal;
 }
 

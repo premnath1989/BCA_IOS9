@@ -37,16 +37,20 @@
 // IMPLEMENTATION
 
 @implementation SPAJMain{
+    CarouselViewController *viewControllerHome;
     ModelSPAJTransaction* modelSPAJTransaction;
     ModelSPAJSignature* modelSPAJSignature;
     ModelSPAJIDCapture* modelSPAJIDCapture;
     Formatter* formatter;
     
+    UIAlertController *alertController;
     SPAJEApplicationList *viewControllerEappListing;
     SPAJExistingList* viewControllerExistingList;
     SPAJSubmittedList* viewControllerSubmittedList;
     
     NSString* stringGlobalEAPPNumber;
+    
+    BOOL isInEditMode;
 }
 
     // DID LOAD
@@ -55,6 +59,8 @@
     {
         [super viewDidLoad];
         // Do any additional setup after loading the view, typically from a nib.
+        isInEditMode = false;
+        
         SPAJAddMenu* viewController = [[SPAJAddMenu alloc] initWithNibName:@"SPAJ Add Menu" bundle:nil];
         viewController.delegateSPAJMain = self;
         
@@ -63,7 +69,11 @@
         modelSPAJIDCapture = [[ModelSPAJIDCapture alloc]init];
         formatter = [[Formatter alloc]init];
         
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"CarouselStoryboard" bundle:Nil];
+        viewControllerHome = [mainStoryboard instantiateViewControllerWithIdentifier:@"carouselView"];
+        
         UIStoryboard *spajStoryboard = [UIStoryboard storyboardWithName:@"SPAJEAppListStoryBoard" bundle:Nil];
+        
         viewControllerEappListing = [spajStoryboard instantiateViewControllerWithIdentifier:@"EAppListRootVC"];
         
         viewControllerExistingList = [[SPAJExistingList alloc] initWithNibName:@"SPAJ Existing List" bundle:nil];
@@ -74,6 +84,21 @@
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(receiveNotification:)
                                                      name:@"GOTOSPAJ"
+                                                   object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(receiveNotification:)
+                                                     name:@"GOTOHOME"
+                                                   object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(receiveNotification:)
+                                                     name:@"EditMode"
+                                                   object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(receiveNotification:)
+                                                     name:@"ViewMode"
                                                    object:nil];
         
         // LAYOUT DECLARATION
@@ -130,6 +155,16 @@
             //doSomething here.
             [self actionGoToHome:nil];
         }
+        
+        else if ([[notification name] isEqualToString:@"EditMode"]) {
+            //doSomething here.
+            isInEditMode = true;
+        }
+        
+        else if ([[notification name] isEqualToString:@"ViewMode"]) {
+            //doSomething here.
+            isInEditMode = false;
+        }
     }
 
 
@@ -138,28 +173,105 @@
     - (IBAction)actionGoToEApplicationList:(id)sender
     {
         @autoreleasepool {
-            viewControllerEappListing.view.frame = self.viewContent.bounds;
-            //viewController.delegateSPAJEappList = self;
-            [self addChildViewController:viewControllerEappListing];
-            [self.viewContent addSubview:viewControllerEappListing.view];
+            /*if (isInEditMode){
+                NSString* message=@"Anda sedang berada pada menu input Data. Yakin ingin keluar tanpa menyimpan data ?";
+                alertController = [UIAlertController alertControllerWithTitle:@"Peringatan" message:message preferredStyle:UIAlertControllerStyleAlert];
+                
+                [alertController addAction:[UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                    viewControllerEappListing.view.frame = self.viewContent.bounds;
+                    //viewController.delegateSPAJEappList = self;
+                    [self addChildViewController:viewControllerEappListing];
+                    [self.viewContent addSubview:viewControllerEappListing.view];
+                    
+                    isInEditMode = false;
+                }]];
+                
+                [alertController addAction:[UIAlertAction actionWithTitle:@"NO" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                    [alertController dismissViewControllerAnimated:YES completion:nil];
+                }]];
+                
+                dispatch_async(dispatch_get_main_queue(), ^ {
+                    [self presentViewController:alertController animated:YES completion:nil];
+                });
+                
+            }
+            else{*/
+                viewControllerEappListing.view.frame = self.viewContent.bounds;
+                //viewController.delegateSPAJEappList = self;
+                [self addChildViewController:viewControllerEappListing];
+                [self.viewContent addSubview:viewControllerEappListing.view];
+                
+                //isInEditMode = false;
+            //}
         }
     };
 
     - (IBAction)actionGoToExistingList:(id)sender
     {
         @autoreleasepool {
-            viewControllerExistingList.view.frame = self.viewContent.bounds;
-            [self addChildViewController:viewControllerExistingList];
-            [self.viewContent addSubview:viewControllerExistingList.view];
+            if (isInEditMode){
+                NSString* message=@"Anda sedang berada pada menu input Data. Yakin ingin keluar tanpa menyimpan data ?";
+                alertController = [UIAlertController alertControllerWithTitle:@"Peringatan" message:message preferredStyle:UIAlertControllerStyleAlert];
+                
+                [alertController addAction:[UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                    viewControllerExistingList.view.frame = self.viewContent.bounds;
+                    [self addChildViewController:viewControllerExistingList];
+                    [self.viewContent addSubview:viewControllerExistingList.view];
+                    
+                    isInEditMode = false;
+                }]];
+                
+                [alertController addAction:[UIAlertAction actionWithTitle:@"NO" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                    [alertController dismissViewControllerAnimated:YES completion:nil];
+                }]];
+                
+                dispatch_async(dispatch_get_main_queue(), ^ {
+                    [self presentViewController:alertController animated:YES completion:nil];
+                });
+                
+            }
+            else{
+                viewControllerExistingList.view.frame = self.viewContent.bounds;
+                [self addChildViewController:viewControllerExistingList];
+                [self.viewContent addSubview:viewControllerExistingList.view];
+                
+                isInEditMode = false;
+            }
         }
     };
 
     - (IBAction)actionGoToSubmittedList:(id)sender
     {
         @autoreleasepool {
-            viewControllerSubmittedList.view.frame = self.viewContent.bounds;
-            [self addChildViewController:viewControllerSubmittedList];
-            [self.viewContent addSubview:viewControllerSubmittedList.view];
+            
+            if (isInEditMode){
+                NSString* message=@"Anda sedang berada pada menu input Data. Yakin ingin keluar tanpa menyimpan data ?";
+                alertController = [UIAlertController alertControllerWithTitle:@"Peringatan" message:message preferredStyle:UIAlertControllerStyleAlert];
+                
+                [alertController addAction:[UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                    viewControllerSubmittedList.view.frame = self.viewContent.bounds;
+                    [self addChildViewController:viewControllerSubmittedList];
+                    [self.viewContent addSubview:viewControllerSubmittedList.view];
+                    
+                    isInEditMode = false;
+                }]];
+                
+                [alertController addAction:[UIAlertAction actionWithTitle:@"NO" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                    [alertController dismissViewControllerAnimated:YES completion:nil];
+                }]];
+                
+                dispatch_async(dispatch_get_main_queue(), ^ {
+                    [self presentViewController:alertController animated:YES completion:nil];
+                });
+                
+            }
+            else{
+                viewControllerSubmittedList.view.frame = self.viewContent.bounds;
+                [self addChildViewController:viewControllerSubmittedList];
+                [self.viewContent addSubview:viewControllerSubmittedList.view];
+                
+                isInEditMode = false;
+            }
         }
     };
 
@@ -230,15 +342,33 @@
     {
         // CarouselViewController* viewController = [[CarouselViewController alloc] initWithNibName:@"SPAJ Add Detail" bundle:nil];
         // [self presentViewController:viewController animated:true completion:nil];
+        if (isInEditMode){
+            NSString* message=@"Anda sedang berada pada menu input Data. Yakin ingin keluar tanpa menyimpan data ?";
+            alertController = [UIAlertController alertControllerWithTitle:@"Peringatan" message:message preferredStyle:UIAlertControllerStyleAlert];
+            
+            [alertController addAction:[UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                [self dismissViewControllerAnimated:YES
+                                         completion:^{
+                                             [self presentViewController:viewControllerHome animated:NO completion:Nil];
+                                         }];
+            }]];
+            
+            [alertController addAction:[UIAlertAction actionWithTitle:@"NO" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                [alertController dismissViewControllerAnimated:YES completion:nil];
+            }]];
+            
+            dispatch_async(dispatch_get_main_queue(), ^ {
+                [self presentViewController:alertController animated:YES completion:nil];
+            });
+
+        }
+        else{
+            [self dismissViewControllerAnimated:YES
+                                     completion:^{
+                                         [self presentViewController:viewControllerHome animated:NO completion:Nil];
+                                     }];
+        }
         
-        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"CarouselStoryboard" bundle:Nil];
-        
-        CarouselViewController *viewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"carouselView"];
-        
-        [self dismissViewControllerAnimated:YES
-                                 completion:^{
-                                     [self presentViewController:viewController animated:NO completion:Nil];
-                                 }];
     }
 
 #pragma mark create SPAJ Transaction

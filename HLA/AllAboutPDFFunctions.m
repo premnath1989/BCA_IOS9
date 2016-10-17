@@ -435,4 +435,117 @@
     return dictSPAJAnswers;
 }
 
+
+- (void)createFileDirectory:(NSString *)fileTimeDirectory{
+    //create Directory
+    NSError *error;
+    if (![[NSFileManager defaultManager] fileExistsAtPath:fileTimeDirectory])	//Does directory already exist?
+    {
+        if (![[NSFileManager defaultManager] createDirectoryAtPath:fileTimeDirectory
+                                       withIntermediateDirectories:NO
+                                                        attributes:nil
+                                                             error:&error])
+        {
+            NSLog(@"Create directory error: %@", error);
+        }
+    }
+}
+
+- (NSMutableArray *)createImageSignatureFiles:(NSDictionary *)dictTransaction{
+    classImageProcessing = [[ClassImageProcessing alloc]init];
+    modelSPAJSignature = [[ModelSPAJSignature alloc]init];
+    modelSPAJHtml = [[ModelSPAJHtml alloc]init];
+    formatter = [[Formatter alloc]init];
+    
+    UIImage* emptyImage = [UIImage imageNamed:@"emptyImage"];
+    NSData * emptyImageData = UIImagePNGRepresentation(emptyImage);
+    NSString *encodedEmptyImageString = [emptyImageData base64EncodedStringWithOptions:0];
+    
+    NSString* base64StringImageParty1=[modelSPAJSignature selectSPAJSignatureData:@"SPAJSignatureTempImageParty1" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]]?:encodedEmptyImageString;
+    NSString* base64StringImageParty2=[modelSPAJSignature selectSPAJSignatureData:@"SPAJSignatureTempImageParty2" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]]?:encodedEmptyImageString;
+    NSString* base64StringImageParty3=[modelSPAJSignature selectSPAJSignatureData:@"SPAJSignatureTempImageParty3" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]]?:encodedEmptyImageString;
+    NSString* base64StringImageParty4=[modelSPAJSignature selectSPAJSignatureData:@"SPAJSignatureTempImageParty4" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]]?:encodedEmptyImageString;
+    NSString* base64StringImageParty5=[modelSPAJSignature selectSPAJSignatureData:@"SPAJSignatureTempImageParty5" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]]?:encodedEmptyImageString;
+    
+    NSData* imageParty1=[[NSData alloc]
+                         initWithBase64EncodedString:base64StringImageParty1 options:0];
+    NSData* imageParty2=[[NSData alloc]
+                         initWithBase64EncodedString:base64StringImageParty2 options:0];
+    NSData* imageParty3=[[NSData alloc]
+                         initWithBase64EncodedString:base64StringImageParty3 options:0];
+    NSData* imageParty4=[[NSData alloc]
+                         initWithBase64EncodedString:base64StringImageParty4 options:0];
+    NSData* imageParty5=[[NSData alloc]
+                         initWithBase64EncodedString:base64StringImageParty5 options:0];
+    
+    UIImage *imageSignatureParty1 = [UIImage imageWithData:imageParty1];
+    UIImage *imageSignatureParty2 = [UIImage imageWithData:imageParty2];
+    UIImage *imageSignatureParty3 = [UIImage imageWithData:imageParty3];
+    UIImage *imageSignatureParty4 = [UIImage imageWithData:imageParty4];
+    UIImage *imageSignatureParty5 = [UIImage imageWithData:imageParty5];
+    
+    
+    UIColor* fromColor = [UIColor colorWithRed:255.0 green:255.0 blue:255.0 alpha:1.0];
+    UIColor* toColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
+    UIImage* imageConverted1 = [classImageProcessing changeColor:imageSignatureParty1 fromColor:fromColor toColor:toColor];
+    UIImage* imageConverted2 = [classImageProcessing changeColor:imageSignatureParty2 fromColor:fromColor toColor:toColor];
+    UIImage* imageConverted3 = [classImageProcessing changeColor:imageSignatureParty3 fromColor:fromColor toColor:toColor];
+    UIImage* imageConverted4 = [classImageProcessing changeColor:imageSignatureParty4 fromColor:fromColor toColor:toColor];
+    UIImage* imageConverted5 = [classImageProcessing changeColor:imageSignatureParty5 fromColor:fromColor toColor:toColor];
+    
+    NSData *imageConvertedData1 = UIImagePNGRepresentation(imageConverted1);
+    NSData *imageConvertedData2 = UIImagePNGRepresentation(imageConverted2);
+    NSData *imageConvertedData3 = UIImagePNGRepresentation(imageConverted3);
+    NSData *imageConvertedData4 = UIImagePNGRepresentation(imageConverted4);
+    NSData *imageConvertedData5 = UIImagePNGRepresentation(imageConverted5);
+    
+    NSArray* arrayImageSignature = [[NSArray alloc]initWithObjects:imageConvertedData1,imageConvertedData2,imageConvertedData4,imageConvertedData3,imageConvertedData5, nil];
+    
+    
+    NSMutableArray* pathResultSignatureImages = [[NSMutableArray alloc]init];
+    //for (int i = 0;i<[arrayImageSignature count];i++){
+    for (int i = 0;i<5;i++){
+        @autoreleasepool {
+            NSString *relativeOutputFilePath = [NSString stringWithFormat:@"%@/ImageSignature/SignatureParty%i.png", [formatter generateSPAJFileDirectory:[dictTransaction valueForKey:@"SPAJEappNumber"]],i+1];
+            
+            NSArray* pathComponents = [relativeOutputFilePath pathComponents];
+            NSArray* lastFourArray = [pathComponents subarrayWithRange:NSMakeRange([pathComponents count]-4,4)];
+            NSString* lastFourPath = [NSString stringWithFormat:@"%@",[NSString pathWithComponents:lastFourArray]];
+            
+            [pathResultSignatureImages addObject:[NSString stringWithFormat:@"\"../../%@\"",lastFourPath]];
+            
+            if (i<[arrayImageSignature count]){
+                BOOL written = [[arrayImageSignature objectAtIndex:i] writeToFile:relativeOutputFilePath atomically:YES];
+                
+                if (!written){
+                    
+                }
+            }
+            
+        }
+    }
+    return pathResultSignatureImages;
+}
+
+-(NSMutableArray *)createImageSignatureForEapp:(NSDictionary *)dictTransaction{
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *filePathApp = [docsDir stringByAppendingPathComponent:@"SPAJ"];
+    NSString* folderName = [NSString stringWithFormat:@"/%@",[dictTransaction valueForKey:@"SPAJEappNumber"]];
+    filePathApp = [filePathApp  stringByAppendingString:folderName];
+    [self createFileDirectory:[NSString stringWithFormat:@"%@/ImageSignature",filePathApp]];
+    //NSMutableArray* arraySignatureImages=[[NSMutableArray alloc]init];
+    NSMutableArray* arraySignatureImages;
+    
+    arraySignatureImages = [[NSMutableArray alloc]initWithArray:[self createImageSignatureFiles:dictTransaction]];
+    /*dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        //1.create the folder
+        
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            //2.create the file
+            
+        });
+    });*/
+    return [[NSMutableArray alloc]initWithArray:arraySignatureImages];
+}
+
 @end

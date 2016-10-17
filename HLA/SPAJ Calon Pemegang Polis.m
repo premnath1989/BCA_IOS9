@@ -31,6 +31,14 @@
     [super viewDidAppear:YES];
 }
 
+
+-(void)viewWillDisappear:(BOOL)animated{
+    //boolConvertToImage = false;
+    NSString *htmlFile = [[NSBundle mainBundle] pathForResource:@"empty" ofType:@"html"];
+    NSString* htmlString = [NSString stringWithContentsOfFile:htmlFile encoding:NSUTF8StringEncoding error:nil];
+    [webview loadHTMLString:htmlString baseURL: [[NSBundle mainBundle] bundleURL]];
+}
+
 - (void)voidCreateAlertTwoOptionViewAndShow:(NSString *)message tag:(int)alertTag{
     alertController = [UIAlertController alertControllerWithTitle:@"" message:message preferredStyle:UIAlertControllerStyleAlert];
     
@@ -69,42 +77,15 @@
                           [docsDir stringByAppendingPathComponent: htmlfilePath]];
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localURL]];
     [webview loadRequest:urlRequest];
-    /*NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    filePath = [docsDir stringByAppendingPathComponent:@"SPAJ"];
     
-    NSString *htmlfilePath = [NSString stringWithFormat:@"SPAJ/%@",stringHTMLName];
-    NSString *localURL = [[NSString alloc] initWithString:
-                          [docsDir stringByAppendingPathComponent: htmlfilePath]];
-    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localURL]];
-    
-    NSString* stringFlagEdited = [webview stringByEvaluatingJavaScriptFromString:@"booleanInputChangeState;"];
-    if ([allAboutPDFGeneration doesString:stringFlagEdited containCharacter:@"true"]){
-        NSString* message=@"Telah terjadi perubahan data. Yakin ingin melanjutkan tanpa menyimpan data ?";
-        alertController = [UIAlertController alertControllerWithTitle:@"" message:message preferredStyle:UIAlertControllerStyleAlert];
-        
-        [alertController addAction:[UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            stringSection = stringPageSection;
-            [webview loadRequest:urlRequest];
-        }]];
-        
-        [alertController addAction:[UIAlertAction actionWithTitle:@"NO" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            [alertController dismissViewControllerAnimated:YES completion:nil];
-        }]];
-        
-        dispatch_async(dispatch_get_main_queue(), ^ {
-            [self presentViewController:alertController animated:YES completion:nil];
-        });
-    }
-    else{
-        stringSection = stringPageSection;
-        [webview loadRequest:urlRequest];
-    }*/
+    docsDir = nil;
+    htmlfilePath = nil;
+    localURL = nil;
+    urlRequest = nil;
 }
 
 
 -(void)loadSecondHTML:(NSString*)stringHTMLName PageSection:(NSString *)stringPageSection{
-    
-    
     NSString* stringFlagEdited = [webview stringByEvaluatingJavaScriptFromString:@"booleanInputChangeState;"];
     NSLog(@"flag changes : %@", stringFlagEdited);
     
@@ -117,36 +98,11 @@
                           [docsDir stringByAppendingPathComponent: htmlfilePath]];
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localURL]];
     [webview loadRequest:urlRequest];
-    /*NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    filePath = [docsDir stringByAppendingPathComponent:@"SPAJ"];
     
-    NSString *htmlfilePath = [NSString stringWithFormat:@"SPAJ/%@",stringHTMLName];
-    NSString *localURL = [[NSString alloc] initWithString:
-                          [docsDir stringByAppendingPathComponent: htmlfilePath]];
-    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localURL]];
-    
-    NSString* stringFlagEdited = [webview stringByEvaluatingJavaScriptFromString:@"booleanInputChangeState;"];
-    if ([allAboutPDFGeneration doesString:stringFlagEdited containCharacter:@"true"]){
-        NSString* message=@"Telah terjadi perubahan data. Yakin ingin melanjutkan tanpa menyimpan data ?";
-        alertController = [UIAlertController alertControllerWithTitle:@"" message:message preferredStyle:UIAlertControllerStyleAlert];
-        
-        [alertController addAction:[UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            stringSection = stringPageSection;
-            [webview loadRequest:urlRequest];
-        }]];
-        
-        [alertController addAction:[UIAlertAction actionWithTitle:@"NO" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            [alertController dismissViewControllerAnimated:YES completion:nil];
-        }]];
-        
-        dispatch_async(dispatch_get_main_queue(), ^ {
-            [self presentViewController:alertController animated:YES completion:nil];
-        });
-    }
-    else{
-        stringSection = stringPageSection;
-        [webview loadRequest:urlRequest];
-    }*/
+    docsDir = nil;
+    htmlfilePath = nil;
+    localURL = nil;
+    urlRequest = nil;
 }
 
 -(void)loadThirdHTML:(NSString*)stringHTMLName PageSection:(NSString *)stringPageSection{
@@ -164,36 +120,11 @@
                           [docsDir stringByAppendingPathComponent: htmlfilePath]];
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localURL]];
     [webview loadRequest:urlRequest];
-    /*NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    filePath = [docsDir stringByAppendingPathComponent:@"SPAJ"];
     
-    NSString *htmlfilePath = [NSString stringWithFormat:@"SPAJ/%@",stringHTMLName];
-    NSString *localURL = [[NSString alloc] initWithString:
-                          [docsDir stringByAppendingPathComponent: htmlfilePath]];
-    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localURL]];
-    
-    NSString* stringFlagEdited = [webview stringByEvaluatingJavaScriptFromString:@"booleanInputChangeState;"];
-    if ([allAboutPDFGeneration doesString:stringFlagEdited containCharacter:@"true"]){
-        NSString* message=@"Telah terjadi perubahan data. Yakin ingin melanjutkan tanpa menyimpan data ?";
-        alertController = [UIAlertController alertControllerWithTitle:@"" message:message preferredStyle:UIAlertControllerStyleAlert];
-        
-        [alertController addAction:[UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            stringSection = stringPageSection;
-            [webview loadRequest:urlRequest];
-        }]];
-        
-        [alertController addAction:[UIAlertAction actionWithTitle:@"NO" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            [alertController dismissViewControllerAnimated:YES completion:nil];
-        }]];
-        
-        dispatch_async(dispatch_get_main_queue(), ^ {
-            [self presentViewController:alertController animated:YES completion:nil];
-        });
-    }
-    else{
-        stringSection = stringPageSection;
-        [webview loadRequest:urlRequest];
-    }*/
+    docsDir = nil;
+    htmlfilePath = nil;
+    localURL = nil;
+    urlRequest = nil;
 }
 
 -(void)loadFourthHTML:(NSString*)stringHTMLName PageSection:(NSString *)stringPageSection{
@@ -212,36 +143,10 @@
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localURL]];
     [webview loadRequest:urlRequest];
     
-    /*NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    filePath = [docsDir stringByAppendingPathComponent:@"SPAJ"];
-    
-    NSString *htmlfilePath = [NSString stringWithFormat:@"SPAJ/%@",stringHTMLName];
-    NSString *localURL = [[NSString alloc] initWithString:
-                          [docsDir stringByAppendingPathComponent: htmlfilePath]];
-    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localURL]];
-    
-    NSString* stringFlagEdited = [webview stringByEvaluatingJavaScriptFromString:@"booleanInputChangeState;"];
-    if ([allAboutPDFGeneration doesString:stringFlagEdited containCharacter:@"true"]){
-        NSString* message=@"Telah terjadi perubahan data. Yakin ingin melanjutkan tanpa menyimpan data ?";
-        alertController = [UIAlertController alertControllerWithTitle:@"" message:message preferredStyle:UIAlertControllerStyleAlert];
-        
-        [alertController addAction:[UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            stringSection = stringPageSection;
-            [webview loadRequest:urlRequest];
-        }]];
-        
-        [alertController addAction:[UIAlertAction actionWithTitle:@"NO" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            [alertController dismissViewControllerAnimated:YES completion:nil];
-        }]];
-        
-        dispatch_async(dispatch_get_main_queue(), ^ {
-            [self presentViewController:alertController animated:YES completion:nil];
-        });
-    }
-    else{
-        stringSection = stringPageSection;
-        [webview loadRequest:urlRequest];
-    }*/
+    docsDir = nil;
+    htmlfilePath = nil;
+    localURL = nil;
+    urlRequest = nil;
 }
 
 -(void)loadFivethHTML:(NSString*)stringHTMLName PageSection:(NSString *)stringPageSection{
@@ -260,36 +165,10 @@
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localURL]];
     [webview loadRequest:urlRequest];
     
-    /*NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    filePath = [docsDir stringByAppendingPathComponent:@"SPAJ"];
-    
-    NSString *htmlfilePath = [NSString stringWithFormat:@"SPAJ/%@",stringHTMLName];
-    NSString *localURL = [[NSString alloc] initWithString:
-                          [docsDir stringByAppendingPathComponent: htmlfilePath]];
-    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localURL]];
-    
-    NSString* stringFlagEdited = [webview stringByEvaluatingJavaScriptFromString:@"booleanInputChangeState;"];
-    if ([allAboutPDFGeneration doesString:stringFlagEdited containCharacter:@"true"]){
-        NSString* message=@"Telah terjadi perubahan data. Yakin ingin melanjutkan tanpa menyimpan data ?";
-        alertController = [UIAlertController alertControllerWithTitle:@"" message:message preferredStyle:UIAlertControllerStyleAlert];
-        
-        [alertController addAction:[UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            stringSection = stringPageSection;
-            [webview loadRequest:urlRequest];
-        }]];
-        
-        [alertController addAction:[UIAlertAction actionWithTitle:@"NO" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            [alertController dismissViewControllerAnimated:YES completion:nil];
-        }]];
-        
-        dispatch_async(dispatch_get_main_queue(), ^ {
-            [self presentViewController:alertController animated:YES completion:nil];
-        });
-    }
-    else{
-        stringSection = stringPageSection;
-        [webview loadRequest:urlRequest];
-    }*/
+    docsDir = nil;
+    htmlfilePath = nil;
+    localURL = nil;
+    urlRequest = nil;
 }
 
 -(void)loadSixthHTML:(NSString*)stringHTMLName PageSection:(NSString *)stringPageSection{
@@ -308,37 +187,10 @@
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localURL]];
     [webview loadRequest:urlRequest];
     
-    /*NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    filePath = [docsDir stringByAppendingPathComponent:@"SPAJ"];
-    
-    NSString *htmlfilePath = [NSString stringWithFormat:@"SPAJ/%@",stringHTMLName];
-    NSString *localURL = [[NSString alloc] initWithString:
-                          [docsDir stringByAppendingPathComponent: htmlfilePath]];
-    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localURL]];
-    
-    NSString* stringFlagEdited = [webview stringByEvaluatingJavaScriptFromString:@"booleanInputChangeState;"];
-    if ([allAboutPDFGeneration doesString:stringFlagEdited containCharacter:@"true"]){
-        NSString* message=@"Telah terjadi perubahan data. Yakin ingin melanjutkan tanpa menyimpan data ?";
-        alertController = [UIAlertController alertControllerWithTitle:@"" message:message preferredStyle:UIAlertControllerStyleAlert];
-        
-        [alertController addAction:[UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            stringSection = stringPageSection;
-            [webview loadRequest:urlRequest];
-        }]];
-        
-        [alertController addAction:[UIAlertAction actionWithTitle:@"NO" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            [alertController dismissViewControllerAnimated:YES completion:nil];
-        }]];
-        
-        dispatch_async(dispatch_get_main_queue(), ^ {
-            [self presentViewController:alertController animated:YES completion:nil];
-        });
-    }
-    else{
-        stringSection = stringPageSection;
-        [webview loadRequest:urlRequest];
-    }*/
-}
+    docsDir = nil;
+    htmlfilePath = nil;
+    localURL = nil;
+    urlRequest = nil;}
 
 -(void)loadSeventhHTML:(NSString*)stringHTMLName PageSection:(NSString *)stringPageSection{
     NSString* stringFlagEdited = [webview stringByEvaluatingJavaScriptFromString:@"booleanInputChangeState;"];
@@ -352,6 +204,11 @@
                           [docsDir stringByAppendingPathComponent: htmlfilePath]];
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localURL]];
     [webview loadRequest:urlRequest];
+    
+    docsDir = nil;
+    htmlfilePath = nil;
+    localURL = nil;
+    urlRequest = nil;
 }
 
 - (void)viewDidLoad {
@@ -563,6 +420,26 @@
             [modelSPAJAnswers deleteSPAJAnswers:stringWhere];
         }
         
+        else if ([stringSection isEqualToString:@"PO"]){
+            NSString *stringWhere = [NSString stringWithFormat:@"where SPAJHtmlSection='PO' and SPAJTransactionID=%i",[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
+            [modelSPAJAnswers deleteSPAJAnswers:stringWhere];
+        }
+        
+        else if ([stringSection isEqualToString:@"TR"]){
+            NSString *stringWhere = [NSString stringWithFormat:@"where SPAJHtmlSection='TR' and SPAJTransactionID=%i",[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
+            [modelSPAJAnswers deleteSPAJAnswers:stringWhere];
+        }
+        
+        else if ([stringSection isEqualToString:@"PR"]){
+            NSString *stringWhere = [NSString stringWithFormat:@"where SPAJHtmlSection='PR' and SPAJTransactionID=%i",[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
+            [modelSPAJAnswers deleteSPAJAnswers:stringWhere];
+        }
+        
+        else if ([stringSection isEqualToString:@"PP"]){
+            NSString *stringWhere = [NSString stringWithFormat:@"where SPAJHtmlSection='PP' and SPAJTransactionID=%i",[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
+            [modelSPAJAnswers deleteSPAJAnswers:stringWhere];
+        }
+        
         else if ([stringSection isEqualToString:@"KS_PH"]){
             NSString *stringWhere = [NSString stringWithFormat:@"where SPAJHtmlSection='KS_PH' and SPAJTransactionID=%i",[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
             [modelSPAJAnswers deleteSPAJAnswers:stringWhere];
@@ -675,6 +552,12 @@
         [self callSuccessCallback:[params valueForKey:@"successCallBack"] withRetValue:dictOriginal];
     }*/
     [viewActivityIndicator setHidden:YES];
+    SPAJTransactionID = nil;
+    modifiedParams = nil;
+    tempDict = nil;
+    stringWhere = nil;
+    answerDictionary = nil;
+    finalDictionary=nil;
     return finalDictionary;
 }
 
@@ -912,9 +795,15 @@
             NSString* stringValue =[modelSPAJAnswers selectSPAJAnswersData:@"Value" StringWhere:stringWhere];
             [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"setFemaleQuestionForHealthQuestionnaire('%@');",stringValue]];
         }
+        
+        dictPOData = nil;
     }
     
     [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"readfromDB();"]];
+    
+    jsonString = nil;
+    error = nil;
+    jsonData = nil;
 }
 
 

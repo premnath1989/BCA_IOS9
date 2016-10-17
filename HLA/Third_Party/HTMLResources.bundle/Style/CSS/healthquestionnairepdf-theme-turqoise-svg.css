@@ -137,8 +137,9 @@ main form fieldset .LineStraight, main form fieldset .LineDot {
   border-color: #000000;
 }
 
-.Signature img {
-  background-color: #e47d3a;
+.HeaderFieldset .BoxRound {
+  border-color: #00b0f0;
+  background-color: #ebecec;
 }
 
 .Signature span.Name {
