@@ -3726,3 +3726,27 @@ function radioButtonSetDisabled(stringName, booleanState)
 		$(this).prop("disabled", booleanState);
 	});
 }
+
+
+// CHANGE PAGE
+
+function alertSaveRecentInput()
+{
+	// window.location = 'ios:alertSaveRecentInput';
+
+	var callInfo = {};
+	callInfo.data = {};
+	calliOSFunction('alertSaveRecentInput:',onSuccess,onError, callInfo);
+}
+
+function goToChangePageAlert(URLPage)
+{
+	if (booleanInputChangeState == "true")
+	{
+		alertSaveRecentInput();
+	}
+	else
+	{
+		window.location.replace(URLPage);
+	}
+}

@@ -383,6 +383,23 @@
     [modelSPAJAnswers deleteSPAJAnswers:stringWhere];
 }
 
+- (void)alertSaveRecentInput:(NSDictionary *)params{
+    NSString* message=@"Telah terjadi perubahan data. Yakin ingin melanjutkan tanpa menyimpan data ?";
+    alertController = [UIAlertController alertControllerWithTitle:@"" message:message preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alertController addAction:[UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"KS_IN" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]];
+        [self loadSeventhHTML:stringHTMLName PageSection:@"KS_IN"];
+    }]];
+    
+    [alertController addAction:[UIAlertAction actionWithTitle:@"NO" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [alertController dismissViewControllerAnimated:YES completion:nil];
+    }]];
+    
+    dispatch_async(dispatch_get_main_queue(), ^ {
+        [self presentViewController:alertController animated:YES completion:nil];
+    });
+}
 
 #pragma mark call save function in HTML
 -(void)voidDoneSPAJCalonPemegangPolis{
