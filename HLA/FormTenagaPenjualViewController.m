@@ -349,7 +349,7 @@
 -(IBAction)getUISwitchValue:(UIButton *)sender{
     @try {
         NSMutableArray* arrayFormAnswers = [[NSMutableArray alloc]init];
-        
+        [buttonSubmit setEnabled:false];
         int i=1;
         for (UIView *view in [stackViewForm subviews]) {
             if (view.tag == 1){
@@ -412,6 +412,7 @@
         NSLog(@"answers %@",[allAboutPDFFunctions createDictionaryForSave:arrayFormAnswers]);
         [self savetoDB:[allAboutPDFFunctions createDictionaryForSave:arrayFormAnswers]];
     } @catch (NSException *exception) {
+        [buttonSubmit setEnabled:true];
         NSLog(@"error %@",exception);
         UIAlertController *alertLockForm = [alert alertInformation:@"Data Tidak Lengkap" stringMessage:@"Mohon lengkapi data tenaga penjual terlbih dahulu"];
         [self presentViewController:alertLockForm animated:YES completion:nil];
@@ -603,6 +604,8 @@
     NSString *relativeOutputFilePath = [NSString stringWithFormat:@"%@/%@.jpg", [formatter generateSPAJFileDirectory:[dictTransaction valueForKey:@"SPAJEappNumber"]],outputName];
     
     [thumbnailData writeToFile:relativeOutputFilePath atomically:YES];
+    
+    [buttonSubmit setEnabled:true];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [allAboutPDFGeneration voidSaveSignatureForSingleImage:dictTransaction StringFileName:[allAboutPDFGeneration getSPAJImageNameFromPath:fileName]];

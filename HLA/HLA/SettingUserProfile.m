@@ -565,7 +565,7 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
                         });
                     });
                 });
-                [self getHTMLDataTable];
+                //[self getHTMLDataTable];
                 [self getSPAJHTMLDataTable];
             }else if([rateResponse.strStatus caseInsensitiveCompare:@"False"] == NSOrderedSame){
                 [spinnerLoading stopLoadingSpinner];

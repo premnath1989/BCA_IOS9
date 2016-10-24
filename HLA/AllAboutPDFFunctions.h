@@ -12,12 +12,20 @@
 #import "ModelSPAJHtml.h"
 #import "Formatter.h"
 
+@protocol PDFFunctionDelegate
+
+- (void) allSignatureCreated;
+
+@end
+
+
 @interface AllAboutPDFFunctions : NSObject{
     ClassImageProcessing *classImageProcessing;
     ModelSPAJSignature *modelSPAJSignature;
     ModelSPAJHtml *modelSPAJHtml;
     Formatter* formatter;
 }
+@property (nonatomic,weak) id <PDFFunctionDelegate> delegatePDFFunctions;
 
 -(NSString *)GetOutputForDurationKnowPORadioButton:(NSString *)stringSegmentSelected;
 -(NSString *)GetOutputForRelationWithPORadioButton:(NSString *)stringSegmentSelected;

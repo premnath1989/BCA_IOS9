@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="BPreplayBold.otf">
+        <mutableArray key="BPreplay_Bold.otf">
             <string>BPreplay-Bold</string>
         </mutableArray>
-        <mutableArray key="BPreplayBoldItalics.otf">
+        <mutableArray key="BPreplay_BoldItalics.otf">
             <string>BPreplay-BoldItalic</string>
         </mutableArray>
         <mutableArray key="BPreplay_Italics.ttf">
@@ -61,6 +61,7 @@
                 <outlet property="TextSalesDeclarationIncomeSource" destination="OUb-zp-yrX" id="YjN-e9-AkS"/>
                 <outlet property="TextSalesDeclarationPurposeOther" destination="8S1-tQ-zwD" id="VDo-1U-yMD"/>
                 <outlet property="TextSalesDeclarationRelationshipWithProspectiveInsuredOther" destination="G95-Uk-3Qq" id="ClS-Lv-MQl"/>
+                <outlet property="buttonSubmit" destination="CjL-i9-Xry" id="BKD-So-gab"/>
                 <outlet property="collectionReasonInsurancePurchase" destination="t3m-ki-XHT" id="qh0-5t-aEO"/>
                 <outlet property="scrollViewForm" destination="UQm-bs-aDz" id="CgX-Qh-iGZ"/>
                 <outlet property="stackViewForm" destination="B1q-38-Mx6" id="kRK-BD-n98"/>

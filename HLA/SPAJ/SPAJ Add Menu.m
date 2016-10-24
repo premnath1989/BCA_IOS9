@@ -50,7 +50,7 @@ NSString* const stateIMGGeneration = @"IMG";
 
 // DECLARATION
 
-@interface SPAJAddMenu ()<PDFGenerationDelegate,SIListingDelegate,UIPopoverPresentationControllerDelegate>
+@interface SPAJAddMenu ()<PDFGenerationDelegate,PDFFunctionDelegate,SIListingDelegate,UIPopoverPresentationControllerDelegate>
 
 
 
@@ -158,7 +158,7 @@ NSString* const stateIMGGeneration = @"IMG";
                         [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
         
         //define the webview coordinate
-        webview=[[UIWebView alloc]initWithFrame:CGRectMake(5, 0, 1035,728)];
+        webview=[[UIWebView alloc]initWithFrame:CGRectMake(5, 0, 960,728)];
         webview.scrollView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
         //[webview setHidden:YES];
         
@@ -184,7 +184,7 @@ NSString* const stateIMGGeneration = @"IMG";
         allAboutPDFFunctions = [[AllAboutPDFFunctions alloc]init];
         allAboutPDFGeneration = [[AllAboutPDFGeneration alloc]init];
         allAboutPDFGeneration.delegatePDFGeneration = self;
-        
+        allAboutPDFFunctions.delegatePDFFunctions = self;
         formatter = [[Formatter alloc]init];
         alert = [[Alert alloc]init];
         
@@ -572,6 +572,22 @@ NSString* const stateIMGGeneration = @"IMG";
     }
 
     #pragma mark delegate
+
+    -(void)allSignatureCreated{
+         stateGeneration = statePDFGeneration;
+         indexForPDFGeneration = 0;
+         arrayHTMLName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PDF" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]]];
+         
+         if ([arrayHTMLName count]>0){
+         [self loadSPAJPDFHTML:[arrayHTMLName objectAtIndex:indexForPDFGeneration] WithArrayIndex:indexForPDFGeneration];
+         }
+         
+         //NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PDF"];
+         //[self loadSPAJPDFHTML:stringHTMLName];
+         
+         //[self performSelector:@selector(voidCreateThePDF) withObject:nil afterDelay:5.0];
+    }
+
     -(void)selectedSI:(NSString *)SINO
     {
         NSDictionary* dictionaryPODataLocal = [[NSDictionary alloc]initWithDictionary:[modelSIPOData getPO_DataFor:SINO]];
@@ -955,12 +971,22 @@ NSString* const stateIMGGeneration = @"IMG";
         NSString* htmlFileName = [allAboutPDFGeneration getSPAJImageNameFromPath:[arrayIMGName objectAtIndex:indexImgForPDFGeneration]];
         CGRect printableRect;
         CGRect paperRect;
-        if ([allAboutPDFGeneration doesString:htmlFileName containCharacter:@"thirdparty"]){
-            printableRect = CGRectMake(leftPadding,
-                                       topPadding,
-                                       838,
-                                       kPaperSizeA4Portrait.height-topPadding-bottomPadding);
-            paperRect = CGRectMake(0, 0, 838, kPaperSizeA4Portrait.height);
+        
+        if ([htmlFileName length]>0){
+            if ([allAboutPDFGeneration doesString:htmlFileName containCharacter:@"thirdparty"]){
+                printableRect = CGRectMake(leftPadding,
+                                           topPadding,
+                                           825,
+                                           kPaperSizeA4Portrait.height-topPadding-bottomPadding);
+                paperRect = CGRectMake(0, 0, 825, kPaperSizeA4Portrait.height);
+            }
+            else{
+                printableRect = CGRectMake(leftPadding,
+                                           topPadding,
+                                           kPaperSizeA4Portrait.width-leftPadding-rightPadding,
+                                           kPaperSizeA4Portrait.height-topPadding-bottomPadding);
+                paperRect = CGRectMake(0, 0, kPaperSizeA4Portrait.width, kPaperSizeA4Portrait.height);
+            }
         }
         else{
             printableRect = CGRectMake(leftPadding,
@@ -969,6 +995,8 @@ NSString* const stateIMGGeneration = @"IMG";
                                        kPaperSizeA4Portrait.height-topPadding-bottomPadding);
             paperRect = CGRectMake(0, 0, kPaperSizeA4Portrait.width, kPaperSizeA4Portrait.height);
         }
+
+        
         [render setValue:[NSValue valueWithCGRect:paperRect] forKey:@"paperRect"];
         [render setValue:[NSValue valueWithCGRect:printableRect] forKey:@"printableRect"];
         
@@ -1039,7 +1067,7 @@ NSString* const stateIMGGeneration = @"IMG";
     #pragma mark allabout html spaj pdf
     -(void)loadHTMLFile{
         listArrayFiles = [[NSMutableArray alloc]initWithArray:[allAboutPDFFunctions createImageSignatureForEapp:dictTransaction]];
-        stateGeneration = statePDFGeneration;
+        /*stateGeneration = statePDFGeneration;
         indexForPDFGeneration = 0;
         arrayHTMLName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PDF" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]]];
         
@@ -1050,10 +1078,16 @@ NSString* const stateIMGGeneration = @"IMG";
         //NSString *stringHTMLName = [modelSPAJHtml selectHtmlFileName:@"SPAJHtmlName" SPAJSection:@"PDF"];
         //[self loadSPAJPDFHTML:stringHTMLName];
         
-        //[self performSelector:@selector(voidCreateThePDF) withObject:nil afterDelay:5.0];
+        //[self performSelector:@selector(voidCreateThePDF) withObject:nil afterDelay:5.0];*/
     }
 
     -(void)loadSPAJPDFHTML:(NSString*)stringHTMLName WithArrayIndex:(int)intArrayIndex{
+        if ([allAboutPDFGeneration doesString:stringHTMLName containCharacter:@"thirdparty"]){
+            [webview setFrame:CGRectMake(0, 0, 1035, 728)];
+        }
+        else{
+            [webview setFrame:CGRectMake(0, 0, 960, 728)];
+        }
         NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
         filePath = [docsDir stringByAppendingPathComponent:@"SPAJ"];
         
@@ -1537,7 +1571,7 @@ NSString* const stateIMGGeneration = @"IMG";
                     
                     NSString *functionCall = [NSString stringWithFormat:@"setSignatureImage([%@])", [listArrayFiles componentsJoinedByString:@","]];
                     [webview stringByEvaluatingJavaScriptFromString:functionCall];
-                    [self performSelector:@selector(performReadFromDB) withObject:nil afterDelay:0.2];
+                    [self performSelector:@selector(performReadFromDB) withObject:nil afterDelay:0.5];
                     //[webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"readfromDB();"]];
                 }
                 else{
@@ -1570,9 +1604,17 @@ NSString* const stateIMGGeneration = @"IMG";
             [self voidChangeFileName:longSPAJNumber];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [viewActivityIndicator setHidden:YES];
+                indexImgForPDFGeneration = 0;
+                indexPDFForIMGGeneration = 0;
+                indexForPDFGeneration = 0;
+                
                 UIAlertController *alertNoSPAJNumber = [alert alertInformation:@"Sukses" stringMessage:[NSString stringWithFormat:@"Nomor SPAJ anda adalah %lli",longSPAJNumber]];
-                [self presentViewController:alertNoSPAJNumber animated:YES completion:nil];
-                [_delegateSPAJMain actionGoToExistingList:nil];
+                [self presentViewController:alertNoSPAJNumber animated:YES completion:^{
+                    [_delegateSPAJMain actionGoToExistingList:nil];
+                    [allAboutPDFGeneration removeSPAJFolder:dictTransaction];
+                }];
+                
+                
             });
         });
     }

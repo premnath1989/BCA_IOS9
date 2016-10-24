@@ -16,7 +16,7 @@
     NSMutableArray* mutableArrayForValue;
     NSMutableArray* arrayDictRadioButton;
 }
-
+@synthesize delegatePDFFunctions;
 /*-(id)init{
     
     [self createDictionaryForRadioButton];
@@ -504,6 +504,7 @@
     
     NSMutableArray* pathResultSignatureImages = [[NSMutableArray alloc]init];
     //for (int i = 0;i<[arrayImageSignature count];i++){
+    int x=0;
     for (int i = 0;i<5;i++){
         @autoreleasepool {
             NSString *relativeOutputFilePath = [NSString stringWithFormat:@"%@/ImageSignature/SignatureParty%i.png", [formatter generateSPAJFileDirectory:[dictTransaction valueForKey:@"SPAJEappNumber"]],i+1];
@@ -517,8 +518,11 @@
             if (i<[arrayImageSignature count]){
                 BOOL written = [[arrayImageSignature objectAtIndex:i] writeToFile:relativeOutputFilePath atomically:YES];
                 
-                if (!written){
-                    
+                if (written){
+                    x = x+1;
+                    if (x==5){
+                        [delegatePDFFunctions allSignatureCreated];
+                    }
                 }
             }
             

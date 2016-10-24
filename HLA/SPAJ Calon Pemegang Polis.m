@@ -34,9 +34,9 @@
 
 -(void)viewWillDisappear:(BOOL)animated{
     //boolConvertToImage = false;
-    NSString *htmlFile = [[NSBundle mainBundle] pathForResource:@"empty" ofType:@"html"];
+    /*NSString *htmlFile = [[NSBundle mainBundle] pathForResource:@"empty" ofType:@"html"];
     NSString* htmlString = [NSString stringWithContentsOfFile:htmlFile encoding:NSUTF8StringEncoding error:nil];
-    [webview loadHTMLString:htmlString baseURL: [[NSBundle mainBundle] bundleURL]];
+    [webview loadHTMLString:htmlString baseURL: [[NSBundle mainBundle] bundleURL]];*/
 }
 
 - (void)voidCreateAlertTwoOptionViewAndShow:(NSString *)message tag:(int)alertTag{
@@ -377,6 +377,12 @@
     spajThirdPartyViewController.modalPresentationStyle = UIModalPresentationFormSheet;
     [self presentViewController:spajThirdPartyViewController animated:YES completion:nil];
 }
+
+- (void)deleteFormThirdParty:(NSDictionary *)params{
+    NSString *stringWhere = [NSString stringWithFormat:@"where SPAJHtmlSection='TP' and SPAJTransactionID=%i",[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
+    [modelSPAJAnswers deleteSPAJAnswers:stringWhere];
+}
+
 
 #pragma mark call save function in HTML
 -(void)voidDoneSPAJCalonPemegangPolis{
@@ -738,19 +744,6 @@
     
     return result;
 }
-
-/*- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
-{
-    if ([[[request URL] absoluteString] hasPrefix:@"ios:"]) {
-        
-        // Call the given selector
-        [self performSelector:@selector(showFormThirdParty)];
-        // Cancel the location change
-        return NO;
-    }
-    return YES;
-    
-}*/
 
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView{

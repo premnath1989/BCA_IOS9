@@ -182,7 +182,7 @@
                 NSString* stringDuplicateCheckerWhere5 = [dictDuplicate valueForKey:@"DuplicateCheckerWhere5"];
                 NSString* stringDuplicateCheckerWhere6 = [dictDuplicate valueForKey:@"DuplicateCheckerWhere6"];
                 
-                NSMutableArray* tableValue = [[NSMutableArray alloc]initWithObjects:stringID,stringFileName,stringStatus,stringSection,stringServerID, nil];
+                NSMutableArray* tableValue = [[NSMutableArray alloc]initWithObjects:stringID,stringFileName,stringStatus,stringSection,stringServerID,stringFileNameIndo, nil];
                 NSMutableArray* tableColumn = [[NSMutableArray alloc] initWithArray:[tableDictionary valueForKey:@"columnName"]];
                 
                 NSString* stringTableName = [tableDictionary valueForKey:@"tableName"];

@@ -40,7 +40,7 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
 
 // DECLARATION
 
-@interface SPAJFormGeneration ()
+@interface SPAJFormGeneration ()<PDFGenerationDelegate>
 
 
 
@@ -68,6 +68,8 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
     ModelSPAJTransaction *modelSPAJTransaction;
     AllAboutPDFGeneration *allAboutPDFGeneration;
     AllAboutPDFFunctions *allAboutPDFFunctions;
+   
+    
     SPAJFilesViewController* spajFilesViewController;
     Alert* alert;
     
@@ -150,6 +152,7 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
 
     -(void)viewDidDisappear:(BOOL)animated{
         indexImgForPDFGeneration=0;
+        [allAboutPDFGeneration removeSPAJFolder:dictTransaction];
     }
 
     - (void)viewDidLoad
@@ -159,7 +162,8 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
                         [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
         
         //define the webview coordinate
-        webview=[[UIWebView alloc]initWithFrame:CGRectMake(0, 0, 1035,728)];
+        //webview=[[UIWebView alloc]initWithFrame:CGRectMake(0, 0, 1035,728)];
+        webview=[[UIWebView alloc]initWithFrame:CGRectMake(0, 0, 960,728)];
         webview.scrollView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
         //[webview setHidden:YES];
         [super viewDidLoad];
@@ -187,6 +191,7 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
         allAboutPDFFunctions = [[AllAboutPDFFunctions alloc]init];
         modelSPAJAnswers = [[ModelSPAJAnswers alloc]init];
         
+        allAboutPDFFunctions.delegatePDFFunctions = self;
         [self setNavigationBar];
         
         
@@ -282,6 +287,10 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
             [allAboutPDFGeneration removeSPAJSigned:dictTransaction];
             [allAboutPDFGeneration removeUnNecesaryPDFFiles:dictTransaction];
             
+            indexImgForPDFGeneration = 0;
+            indexPDFForIMGGeneration = 0;
+            indexForPDFGeneration = 0;
+            
             UIAlertController *alertLockForm = [alert alertInformation:@"Berhasil" stringMessage:@"Form berhasil dibuat"];
             [self presentViewController:alertLockForm animated:YES completion:nil];
             [viewActivityIndicator setHidden:YES];
@@ -305,6 +314,12 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
     }
 
     -(void)loadSPAJPDFHTML:(NSString*)stringHTMLName WithArrayIndex:(int)intArrayIndex{
+        if ([allAboutPDFGeneration doesString:stringHTMLName containCharacter:@"thirdparty"]){
+            [webview setFrame:CGRectMake(0, 0, 1035, 728)];
+        }
+        else{
+            [webview setFrame:CGRectMake(0, 0, 960, 728)];
+        }
         NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
         filePath = [docsDir stringByAppendingPathComponent:@"SPAJ"];
         
@@ -424,10 +439,11 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
         if (!boolTenagaPenjualSigned){
             boolConvertToImage = false;
                 listArrayFiles = [[NSMutableArray alloc]initWithArray:[allAboutPDFFunctions createImageSignatureForEapp:dictTransaction]];
-                 dispatch_sync(dispatch_get_main_queue(), ^{
-                     [self generateAllPDF];
-                     [viewActivityIndicator setHidden:NO];
-                 });
+                [viewActivityIndicator setHidden:NO];
+                 //dispatch_sync(dispatch_get_main_queue(), ^{
+//                     [self generateAllPDF];
+            
+                 //});
         }
         else{
             UIAlertController *alertLockForm = [alert alertInformation:NSLocalizedString(@"ALERT_TITLE_LOCK", nil) stringMessage:NSLocalizedString(@"ALERT_MESSAGE_LOCK", nil)];
@@ -451,12 +467,21 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
         
         NSString* htmlFileName = [allAboutPDFGeneration getSPAJImageNameFromPath:[arrayIMGName objectAtIndex:indexImgForPDFGeneration]];
         
-        if ([allAboutPDFGeneration doesString:htmlFileName containCharacter:@"thirdparty"]){
-            printableRect = CGRectMake(leftPadding,
-                                       topPadding,
-                                       838,
-                                       kPaperSizeA4Portrait.height-topPadding-bottomPadding);
-            paperRect = CGRectMake(0, 0, 838, kPaperSizeA4Portrait.height);
+        if ([htmlFileName length]>0){
+            if ([allAboutPDFGeneration doesString:htmlFileName containCharacter:@"thirdparty"]){
+                printableRect = CGRectMake(leftPadding,
+                                           topPadding,
+                                           825,
+                                           kPaperSizeA4Portrait.height-topPadding-bottomPadding);
+                paperRect = CGRectMake(0, 0, 825, kPaperSizeA4Portrait.height);
+            }
+            else{
+                printableRect = CGRectMake(leftPadding,
+                                           topPadding,
+                                           kPaperSizeA4Portrait.width-leftPadding-rightPadding,
+                                           kPaperSizeA4Portrait.height-topPadding-bottomPadding);
+                paperRect = CGRectMake(0, 0, kPaperSizeA4Portrait.width, kPaperSizeA4Portrait.height);
+            }
         }
         else{
             printableRect = CGRectMake(leftPadding,
@@ -465,6 +490,8 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
                                        kPaperSizeA4Portrait.height-topPadding-bottomPadding);
             paperRect = CGRectMake(0, 0, kPaperSizeA4Portrait.width, kPaperSizeA4Portrait.height);
         }
+        
+        
         
         [render setValue:[NSValue valueWithCGRect:paperRect] forKey:@"paperRect"];
         [render setValue:[NSValue valueWithCGRect:printableRect] forKey:@"printableRect"];
@@ -709,6 +736,10 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
             [allAboutPDFGeneration removeSPAJSigned:dictTransaction];
             [allAboutPDFGeneration removeUnNecesaryPDFFiles:dictTransaction];
             
+            indexImgForPDFGeneration = 0;
+            indexPDFForIMGGeneration = 0;
+            indexForPDFGeneration = 0;
+            
             UIAlertController *alertLockForm = [alert alertInformation:@"Berhasil" stringMessage:@"Form berhasil dibuat"];
             [self presentViewController:alertLockForm animated:YES completion:nil];
             [viewActivityIndicator setHidden:YES];
@@ -724,6 +755,11 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
     {
         [_delegateSPAJMain voidGoToAddSignature];
     };
+
+    #pragma mark delegate
+    -(void)allSignatureCreated{
+        [self generateAllPDF];
+    }
 
     #pragma mark create additional dictionary
 
@@ -989,7 +1025,7 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
                     
                     NSString *functionCall = [NSString stringWithFormat:@"setSignatureImage([%@])", [listArrayFiles componentsJoinedByString:@","]];
                     [webview stringByEvaluatingJavaScriptFromString:functionCall];
-                    [self performSelector:@selector(performReadFromDB) withObject:nil afterDelay:0.2];
+                    [self performSelector:@selector(performReadFromDB) withObject:nil afterDelay:0.5];
                 }
                 else{
                     [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"readfromDB();"]];

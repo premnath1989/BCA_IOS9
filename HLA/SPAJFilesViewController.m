@@ -17,14 +17,14 @@
 #import "Alert.h"
 #import "AllAboutPDFGeneration.h"
 
-@interface SPAJFilesViewController ()<ProgressBarDelegate>{
+@interface SPAJFilesViewController ()<ProgressBarDelegate,UIScrollViewDelegate>{
     ProgressBar *progressBar;
     
     IBOutlet UITableView* tableFileList;
     IBOutlet UIView* viewDisplay;
-    IBOutlet UIImageView* imageViewDisplayImage;
+    UIImageView* imageViewDisplayImage;
     IBOutlet UIWebView* webViewDisplayPDF;
-    IBOutlet UIScrollView* scrollImage;
+    UIScrollView* scrollImage;
     
     IBOutlet UIButton* buttonClose;
 }
@@ -145,7 +145,7 @@
     }
     
     //NSMutableArray *tempFinalSort = [[NSMutableArray alloc]initWithArray:arrayFinalSort];
-    NSArray *filteredArray = [arrayFinalSort filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF CONTAINS 'salesdeclaration'"]];
+    NSArray *filteredArray = [arrayFinalSort filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF CONTAINS 'tenagapenjual'"]];
     if (filteredArray.count > 0) {
         // Do something
         [buttonSubmit setEnabled:YES];
@@ -200,17 +200,17 @@
     scrollImage.contentOffset = co;
 }
 -(void)showFileSelected:(int)indexSelected{
-        [UIView animateWithDuration:0.3 animations:^{
-            
-            [tableFileList setFrame:CGRectMake(-tableFileList.frame.size.width, tableFileList.frame.origin.y, tableFileList.frame.size.width, tableFileList.frame.size.height)];
-            [viewDisplay setFrame:CGRectMake(0, viewDisplay.frame.origin.y, viewDisplay.frame.size.width, viewDisplay.frame.size.height)];
-            [buttonClose setTitle:@"Back" forState:UIControlStateNormal];
-            [buttonClose setEnabled:false];
-            [buttonSubmit setHidden:true];
-        } completion:^ (BOOL completed) {
-            [buttonClose setEnabled:true];
-            [self voidLoadFile:indexSelected];
-        }];
+    [self createAndInsertScrollView];
+    [UIView animateWithDuration:0.3 animations:^{
+        [tableFileList setFrame:CGRectMake(-tableFileList.frame.size.width, tableFileList.frame.origin.y, tableFileList.frame.size.width, tableFileList.frame.size.height)];
+        [viewDisplay setFrame:CGRectMake(0, viewDisplay.frame.origin.y, viewDisplay.frame.size.width, viewDisplay.frame.size.height)];
+        [buttonClose setTitle:@"Back" forState:UIControlStateNormal];
+        [buttonClose setEnabled:false];
+        [buttonSubmit setHidden:true];
+    } completion:^ (BOOL completed) {
+        [buttonClose setEnabled:true];
+        [self voidLoadFile:indexSelected];
+    }];
     
 }
 
@@ -258,6 +258,20 @@
     
 }
 
+-(void)createAndInsertScrollView{
+    scrollImage = [[UIScrollView alloc]initWithFrame:CGRectMake(8, 8, 1001, 704)];
+    [scrollImage setDelegate:self];
+    [scrollImage setScrollEnabled:YES];
+    [scrollImage setMinimumZoomScale:1];
+    [scrollImage setMaximumZoomScale:12];
+    
+    imageViewDisplayImage = [[UIImageView alloc]initWithFrame:CGRectMake(186, 0, 628, 704)];
+    
+    [scrollImage addSubview:imageViewDisplayImage];
+    
+    [viewDisplay insertSubview:scrollImage atIndex:0];
+}
+
 -(IBAction)actionClose:(UIButton *)sender{
     if ([sender.currentTitle isEqualToString:@"Back"]){
         [UIView animateWithDuration:0.3 animations:^{
@@ -266,6 +280,7 @@
             [buttonClose setEnabled:false];
             [buttonClose setTitle:@"Close" forState:UIControlStateNormal];
         } completion:^ (BOOL completed) {
+            [scrollImage removeFromSuperview];
             [buttonClose setEnabled:true];
             [buttonSubmit setHidden:false];
             [imageViewDisplayImage setImage:nil];

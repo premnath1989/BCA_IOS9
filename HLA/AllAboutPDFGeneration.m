@@ -181,6 +181,26 @@
     return result;
 }
 
+-(void)removeSPAJFolder:(NSDictionary *)dictTransaction{
+    NSString *docsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSMutableArray* fileNameForDelete = [[NSMutableArray alloc]init];
+    [fileNameForDelete addObject:@"ImageSignature"];
+    for (int i=0;i<[fileNameForDelete count];i++){
+        NSError *error;
+        NSString *pdfPath1 = [NSString stringWithFormat:@"%@/SPAJ/%@/%@",docsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"],[fileNameForDelete objectAtIndex:i]];
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        BOOL success =[fileManager removeItemAtPath:pdfPath1 error:&error];
+        
+        if (success) {
+            
+        }
+        else
+        {
+            NSLog(@"Could not delete file -:%@ ",[error localizedDescription]);
+        }
+    }
+}
+
 -(void)removeSPAJSigned:(NSDictionary *)dictTransaction{
     NSString *docsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
 
@@ -468,10 +488,10 @@
         [thumbnailData writeToFile:relativeOutputFilePath atomically:YES];
     }
     else if (([stringFileName rangeOfString:@"epilepsy"].location != NSNotFound)||([stringFileName rangeOfString:@"epilepsi"].location != NSNotFound)) {
-        CGRect rectSign1 = CGRectMake(120,  7095, imageSigned1.size.width, imageSigned1.size.height);
-        CGRect rectSign2 = CGRectMake(720, 7095, imageSigned2.size.width, imageSigned2.size.height);
-        CGRect rectSign3 = CGRectMake(200, 7095, imageSigned3.size.width, imageSigned3.size.height);
-        CGRect rectSign4 = CGRectMake(1320, 7095, imageSigned4.size.width, imageSigned4.size.height);
+        CGRect rectSign1 = CGRectMake(120,  7224, imageSigned1.size.width, imageSigned1.size.height);
+        CGRect rectSign2 = CGRectMake(720, 7224, imageSigned2.size.width, imageSigned2.size.height);
+        CGRect rectSign3 = CGRectMake(200, 7224, imageSigned3.size.width, imageSigned3.size.height);
+        CGRect rectSign4 = CGRectMake(1320, 7224, imageSigned4.size.width, imageSigned4.size.height);
         
         UIImage *resultImage = [self generateSignatureForImage:baseImage signatureImage1:imageSigned1 signaturePostion1:rectSign1 signatureImage2:imageSigned2 signaturePostion2:rectSign2 signatureImage3:imageSigned3 signaturePostion3:rectSign3 signatureImage4:imageSigned4 signaturePostion4:rectSign4];
         NSData *thumbnailData = UIImageJPEGRepresentation(resultImage, 0);
@@ -612,10 +632,10 @@
         [thumbnailData writeToFile:relativeOutputFilePath atomically:YES];
     }
     else if (([stringFileName rangeOfString:@"paragliding"].location != NSNotFound)||([stringFileName rangeOfString:@"terbanglayang"].location != NSNotFound)) {
-        CGRect rectSign1 = CGRectMake(120,  7326, imageSigned1.size.width, imageSigned1.size.height);
-        CGRect rectSign2 = CGRectMake(720, 7326, imageSigned2.size.width, imageSigned2.size.height);
-        CGRect rectSign3 = CGRectMake(200, 7326, imageSigned3.size.width, imageSigned3.size.height);
-        CGRect rectSign4 = CGRectMake(1320, 7326, imageSigned4.size.width, imageSigned4.size.height);
+        CGRect rectSign1 = CGRectMake(120,  7192, imageSigned1.size.width, imageSigned1.size.height);
+        CGRect rectSign2 = CGRectMake(720, 7192, imageSigned2.size.width, imageSigned2.size.height);
+        CGRect rectSign3 = CGRectMake(200, 7192, imageSigned3.size.width, imageSigned3.size.height);
+        CGRect rectSign4 = CGRectMake(1320, 7192, imageSigned4.size.width, imageSigned4.size.height);
         
         UIImage *resultImage = [self generateSignatureForImage:baseImage signatureImage1:imageSigned1 signaturePostion1:rectSign1 signatureImage2:imageSigned2 signaturePostion2:rectSign2 signatureImage3:imageSigned3 signaturePostion3:rectSign3 signatureImage4:imageSigned4 signaturePostion4:rectSign4];
         NSData *thumbnailData = UIImageJPEGRepresentation(resultImage, 0);

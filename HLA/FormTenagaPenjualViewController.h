@@ -21,6 +21,7 @@
     UserInterface *functionUserInterface;
     AllAboutPDFFunctions *allAboutPDFFunctions;
     
+    IBOutlet UIButton* buttonSubmit;
     
     IBOutlet UIScrollView *scrollViewForm;
     IBOutlet UIStackView *stackViewForm;

@@ -343,6 +343,52 @@
     }
 }
 
+#pragma mark clear all value
+-(void)clearAllValues{
+    @try {
+        for (UIView *view in [stackViewForm subviews]) {
+            if (view.tag == 1){
+                for (UIView *viewDetail in [view subviews]) {
+                    if ([viewDetail isKindOfClass:[SegmentSPAJ class]]) {
+                        SegmentSPAJ* segmentTemp = (SegmentSPAJ *)viewDetail;
+                        [segmentTemp setSelectedSegmentIndex:UISegmentedControlNoSegment];
+                        
+                    }
+                    
+                    if ([viewDetail isKindOfClass:[TextFieldSPAJ class]]) {
+                        TextFieldSPAJ* textTemp = (TextFieldSPAJ *)viewDetail;
+                        [textTemp setText:@""];
+                    }
+                    
+                    if ([viewDetail isKindOfClass:[TextViewSPAJ class]]) {
+                        TextViewSPAJ* textTemp = (TextViewSPAJ *)viewDetail;
+                        [textTemp setText:@""];
+                    }
+                    
+                    if ([viewDetail isKindOfClass:[ButtonSPAJ class]]) {
+                        ButtonSPAJ* buttonTemp = (ButtonSPAJ *)viewDetail;
+                        [buttonTemp setTitle:@"(Tanggal / Bulan / Tahun)" forState:UIControlStateNormal];
+                    }
+                    
+                    if ([viewDetail isKindOfClass:[collectionReasonInsurancePurchaseC class]]) {
+                        valueCheckBoxReasonArrayC = [[NSMutableArray alloc]init];
+                    }
+                    
+                    if ([viewDetail isKindOfClass:[collectionReasonInsurancePurchaseD class]]) {
+                        valueCheckBoxReasonArrayD = [[NSMutableArray alloc]init];
+                    }
+                }
+            }
+        }
+        [collectionReasonInsurancePurchaseC reloadData];
+        [collectionReasonInsurancePurchaseD reloadData];
+    } @catch (NSException *exception) {
+        
+    } @finally {
+        
+    }
+}
+
 
 #pragma mark arrayInitialization
 -(void)arrayInitializeAgentProfile{
@@ -884,20 +930,7 @@
                 //[self voidSaveSignatureToPDF:2];
         
                 dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                [modelSPAJTransaction updateSPAJTransaction:@"SPAJDateModified" StringColumnValue:[formatter getDateToday:@"yyyy-MM-dd HH:mm:ss"] StringWhereName:@"SPAJEappNumber" StringWhereValue:[dictTransaction valueForKey:@"SPAJEappNumber"]];
-                [self actionClearSign:nil];
-                    
-                    UIAlertController *alertLockForm = [UIAlertController alertControllerWithTitle:@"Berhasil" message:@"Form berhasil dibuat" preferredStyle:UIAlertControllerStyleAlert];
-                    [alert alertInformation:@"Berhasil" stringMessage:@"Form berhasil dibuat"];
-                    
-                    UIAlertAction* alertActionClose = [UIAlertAction actionWithTitle:NSLocalizedString(@"BUTTON_CLOSE", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
-                        [self dismissViewControllerAnimated:YES completion:nil];
-                    }];
-                    
-                    [alertLockForm addAction: alertActionClose];
-                    
-                    [self presentViewController:alertLockForm animated:YES completion:nil];
-                //[self actionCloseForm:buttonClose];
+                    [self performSelectorOnMainThread:@selector(signatureSuccess)withObject:nil waitUntilDone:YES];
                 });
             });
         });
@@ -906,6 +939,22 @@
         UIAlertController *alertLockForm = [alert alertInformation:NSLocalizedString(@"ALERT_TITLE_LOCK", nil) stringMessage:NSLocalizedString(@"ALERT_MESSAGE_LOCK", nil)];
         [self presentViewController:alertLockForm animated:YES completion:nil];
     }*/
+}
+
+-(void)signatureSuccess{
+    [modelSPAJTransaction updateSPAJTransaction:@"SPAJDateModified" StringColumnValue:[formatter getDateToday:@"yyyy-MM-dd HH:mm:ss"] StringWhereName:@"SPAJEappNumber" StringWhereValue:[dictTransaction valueForKey:@"SPAJEappNumber"]];
+    [self actionClearSign:nil];
+    
+    UIAlertController *alertLockForm = [UIAlertController alertControllerWithTitle:@"Berhasil" message:@"Form berhasil dibuat" preferredStyle:UIAlertControllerStyleAlert];
+    [alert alertInformation:@"Berhasil" stringMessage:@"Form berhasil dibuat"];
+    
+    UIAlertAction* alertActionClose = [UIAlertAction actionWithTitle:NSLocalizedString(@"BUTTON_CLOSE", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }];
+    
+    [alertLockForm addAction: alertActionClose];
+    
+    [self presentViewController:alertLockForm animated:YES completion:nil];
 }
 
 -(void)loadCheckBoxReasonDataD:(ButtonSPAJ *)sender{
@@ -1250,6 +1299,10 @@
     BOOL success = [thumbnailData writeToFile:relativeOutputFilePath atomically:YES];
     
     [buttonSubmit setEnabled:true];
+    
+    thumbnailData = nil;
+    resultImage = nil;
+    images = nil;
     
     if (success){
         [self createThirdPartySignature:nil];

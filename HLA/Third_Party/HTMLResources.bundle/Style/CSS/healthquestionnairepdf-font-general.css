@@ -153,6 +153,25 @@ main form fieldset .RadioButton label:after, main form fieldset .Checkbox label:
   content: '';
 }
 
+main form fieldset .BoxRound {
+  width: 20px;
+  height: 28px;
+  font-size: 0.75em;
+  text-align: center;
+  vertical-align: middle;
+  border-style: solid;
+  border-width: 1px;
+  background-image: none;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: inline-block;
+  border-radius: 4px;
+  -ms-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+
 main form fieldset label.Wrap, main form fieldset span.Wrap {
   width: auto;
   min-height: 32px;
