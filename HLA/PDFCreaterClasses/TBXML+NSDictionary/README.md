@@ -1,4 +1,0 @@
-TBXML-NSDictionary
-==================
-
-TBXML+NSDictionary
