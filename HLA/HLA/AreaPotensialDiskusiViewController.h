@@ -22,4 +22,5 @@
 @property (strong, nonatomic) NSNumber* cffID;
 @property (strong, nonatomic) NSDictionary* cffHeaderSelectedDictionary;
 - (void)voidDoneAreaPotential;
+-(void)loadHTMLFile;
 @end

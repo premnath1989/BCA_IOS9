@@ -25,9 +25,9 @@
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:YES];
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    filePath = [docsDir stringByAppendingPathComponent:@"CFFfolder"];
+    filePath = [docsDir stringByAppendingPathComponent:@"CFF"];
     
-    NSString *htmlfilePath = [NSString stringWithFormat:@"CFFfolder/%@",htmlFileName];
+    NSString *htmlfilePath = [NSString stringWithFormat:@"CFF/%@",htmlFileName];
     NSString *localURL = [[NSString alloc] initWithString:
                           [docsDir stringByAppendingPathComponent: htmlfilePath]];
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localURL]];

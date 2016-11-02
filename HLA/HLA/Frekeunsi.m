@@ -37,6 +37,24 @@
         ListOfCode = [[NSMutableArray alloc] initWithObjects:@"", @"", nil ];
 
     }
+    if ([Frekuensi isEqualToString:@"Premi 10 Tahun"])
+    {
+        ListOfPlan = [[NSMutableArray alloc] initWithObjects: @"Tahunan",@"Bulanan", nil ];
+        ListOfCode = [[NSMutableArray alloc] initWithObjects:@"", @"", nil ];
+        
+    }
+    if ([Frekuensi isEqualToString:@"Premi 15 Tahun"])
+    {
+        ListOfPlan = [[NSMutableArray alloc] initWithObjects: @"Tahunan",@"Bulanan", nil ];
+        ListOfCode = [[NSMutableArray alloc] initWithObjects:@"", @"", nil ];
+        
+    }
+    if ([Frekuensi isEqualToString:@"Premi 20 Tahun"])
+    {
+        ListOfPlan = [[NSMutableArray alloc] initWithObjects: @"Tahunan",@"Bulanan", nil ];
+        ListOfCode = [[NSMutableArray alloc] initWithObjects:@"", @"", nil ];
+        
+    }
     
     if ([Frekuensi isEqualToString:@"10 Tahun"])
     {

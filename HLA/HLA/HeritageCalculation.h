@@ -75,4 +75,15 @@
 -(double)calculateExtraPremiNumberSekaligus;
 -(double)calculateExtraPremiNumberTahunan;
 -(double)calculateExtraPremiNumberBulanan;
+
+-(double)totalPremiBulanan:(int)intPremiPay;
+-(double)totalPremiTahunan:(int)intPremiPay;
+-(double)extraPremiBulanan:(int)intPremiPay;
+-(double)extraPremiTahunan:(int)intPremiPay;
+-(double)getPremiDasarBulanan:(int)intPremPay;
+-(double)getPremiDasarTahunan:(int)intPremPay;
+-(double)getDiskonTahunan:(int)intPremiPay;
+-(double)getDiskonBulanan:(int)intPremiPay;
+-(double)calculateExtraPremiPercentBulanan:(int)intPremiPay;
+-(double)calculateExtraPremiPercentTahunan:(int)intPremPay;
 @end

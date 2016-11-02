@@ -142,7 +142,7 @@
     NSArray* arrayFileName = [[json objectForKey:@"d"] valueForKey:@"FileName"]; //2
     if ([stringWebService isEqualToString:@"CFF"]){
         for (int i=0;i<[arrayFileName count];i++){
-            [cffAPIController apiCallCrateHtmlFile:[NSString stringWithFormat:@"%@/Service2.svc/GetHtmlFile?fileName=%@", [(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL],[arrayFileName objectAtIndex:i]] RootPathFolder:@"CFFfolder"];
+            [cffAPIController apiCallCrateHtmlFile:[NSString stringWithFormat:@"%@/Service2.svc/GetHtmlFile?fileName=%@", [(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL],[arrayFileName objectAtIndex:i]] RootPathFolder:@"CFF"];
         }
     }
     else if ([stringWebService isEqualToString:@"SPAJ"]){

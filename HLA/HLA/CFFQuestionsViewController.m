@@ -164,32 +164,39 @@
     areaPotensialDiskusiVC.cffTransactionID  = cffTransactionID;
     areaPotensialDiskusiVC.cffID = cffID;
     areaPotensialDiskusiVC.htmlFileName = [[arrayHtml objectAtIndex:0]valueForKey:@"CFFHtmlName"];
+    
     if ([areaPotensialDiskusiVC.view isDescendantOfView:childView]){
         [childView bringSubviewToFront:areaPotensialDiskusiVC.view];
     }
     else{
         [childView addSubview:areaPotensialDiskusiVC.view];
     }
+    
+    [areaPotensialDiskusiVC loadHTMLFile];
 }
 
 -(void)loadProfilResikoNasabahView{
     cffID = [cffHeaderSelectedDictionary valueForKey:@"CustomerRiskCFFID"];
     NSMutableArray *arrayHtml = [modelCFFHtml selectHtmlData:[cffID intValue] HtmlSection:@"CR"];
-    profilResikoVC.cffHeaderSelectedDictionary = [[NSDictionary alloc]initWithDictionary:cffHeaderSelectedDictionary];
-    profilResikoVC.prospectProfileID = prospectProfileID;
-    profilResikoVC.cffTransactionID  = cffTransactionID;
-    profilResikoVC.cffID = cffID;
-    profilResikoVC.htmlFileName = [[arrayHtml objectAtIndex:0]valueForKey:@"CFFHtmlName"];
-    //profilResikoVC.htmlFileName = @"index2.html";
-    if ([profilResikoVC.view isDescendantOfView:childView]){
-        [childView bringSubviewToFront:profilResikoVC.view];
+    areaPotensialDiskusiVC.cffHeaderSelectedDictionary = [[NSDictionary alloc]initWithDictionary:cffHeaderSelectedDictionary];
+    areaPotensialDiskusiVC.prospectProfileID = prospectProfileID;
+    areaPotensialDiskusiVC.cffTransactionID  = cffTransactionID;
+    areaPotensialDiskusiVC.cffID = cffID;
+    areaPotensialDiskusiVC.htmlFileName = [[arrayHtml objectAtIndex:0]valueForKey:@"CFFHtmlName"];
+    if ([areaPotensialDiskusiVC.view isDescendantOfView:childView]){
+        [childView bringSubviewToFront:areaPotensialDiskusiVC.view];
     }
     else{
-        [childView addSubview:profilResikoVC.view];
+        [childView addSubview:areaPotensialDiskusiVC.view];
     }
+    [areaPotensialDiskusiVC loadHTMLFile];
 }
 
 -(void)loadAnalisaKebutuhanNasabahView{
+    if ([areaPotensialDiskusiVC.view isDescendantOfView:childView]){
+        [areaPotensialDiskusiVC.view removeFromSuperview];
+    }
+    
     analisaKebutuhanNasabahVC.cffHeaderSelectedDictionary = [[NSDictionary alloc]initWithDictionary:cffHeaderSelectedDictionary];
     analisaKebutuhanNasabahVC.prospectProfileID = prospectProfileID;
     analisaKebutuhanNasabahVC.cffTransactionID  = cffTransactionID;
@@ -205,17 +212,18 @@
 -(void)loadPernyataanNasabahView{
     cffID = [cffHeaderSelectedDictionary valueForKey:@"CustomerStatementCFFID"];
     NSMutableArray *arrayHtml = [modelCFFHtml selectHtmlData:[cffID intValue] HtmlSection:@"CS"];
-    pernyataanNasabahVC.cffHeaderSelectedDictionary = [[NSDictionary alloc]initWithDictionary:cffHeaderSelectedDictionary];
-    pernyataanNasabahVC.prospectProfileID = prospectProfileID;
-    pernyataanNasabahVC.cffTransactionID  = cffTransactionID;
-    pernyataanNasabahVC.cffID = cffID;
-    pernyataanNasabahVC.htmlFileName = [[arrayHtml objectAtIndex:0]valueForKey:@"CFFHtmlName"];
-    if ([pernyataanNasabahVC.view isDescendantOfView:childView]){
-        [childView bringSubviewToFront:pernyataanNasabahVC.view];
+    areaPotensialDiskusiVC.cffHeaderSelectedDictionary = [[NSDictionary alloc]initWithDictionary:cffHeaderSelectedDictionary];
+    areaPotensialDiskusiVC.prospectProfileID = prospectProfileID;
+    areaPotensialDiskusiVC.cffTransactionID  = cffTransactionID;
+    areaPotensialDiskusiVC.cffID = cffID;
+    areaPotensialDiskusiVC.htmlFileName = [[arrayHtml objectAtIndex:0]valueForKey:@"CFFHtmlName"];
+    if ([areaPotensialDiskusiVC.view isDescendantOfView:childView]){
+        [childView bringSubviewToFront:areaPotensialDiskusiVC.view];
     }
     else{
-        [childView addSubview:pernyataanNasabahVC.view];
+        [childView addSubview:areaPotensialDiskusiVC.view];
     }
+    [areaPotensialDiskusiVC loadHTMLFile];
 }
 
 - (void)didReceiveMemoryWarning {

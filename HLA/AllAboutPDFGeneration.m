@@ -309,6 +309,43 @@
     }
 }
 
+-(void)removeThirdPartyJPGFiles:(NSDictionary *)dictTransaction{
+    formatter = [[Formatter alloc]init];
+    NSString* stringFilePath = [formatter generateSPAJFileDirectory:[dictTransaction valueForKey:@"SPAJEappNumber"]];
+    
+    NSArray *directoryContent = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:stringFilePath error:NULL];
+    
+    NSString *docsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    
+    NSArray *fileNameForDelete = [directoryContent filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"pathExtension IN %@", @"jpg"]];
+    
+    for (int i=0;i<[fileNameForDelete count];i++){
+        NSString *fileName = [fileNameForDelete objectAtIndex:i];
+        
+        NSString *filter1 = @"pihakketiga";
+        
+        if ([self doesString:fileName containCharacter:filter1]){
+            //NSLog(@"'a' found");
+            NSError *error;
+            NSString *pdfPath1 = [NSString stringWithFormat:@"%@/SPAJ/%@/%@",docsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"],[fileNameForDelete objectAtIndex:i]];
+            NSFileManager *fileManager = [NSFileManager defaultManager];
+            BOOL success =[fileManager removeItemAtPath:pdfPath1 error:&error];
+            
+            if (success) {
+                
+            }
+            else
+            {
+                NSLog(@"Could not delete file -:%@ ",[error localizedDescription]);
+            }
+            
+        }
+        else{
+        }
+    }
+}
+
+
 
 -(BOOL)doesString:(NSString *)string containCharacter:(NSString *)character
 {
@@ -704,11 +741,11 @@
         
         UIImage *baseImage = [UIImage imageWithContentsOfFile:fullpath];
         
-        CGRect rectSign1 = CGRectMake(798,  10928, 456, 247);
-        CGRect rectSign2 = CGRectMake(720, 10928, 0, 0);
-        CGRect rectSign3 = CGRectMake(200, 10928, 0, 0);
-        CGRect rectSign4 = CGRectMake(1347, 10928, 456, 247);
-        CGRect rectSign5 = CGRectMake(245, 10928, 456, 247);
+        CGRect rectSign1 = CGRectMake(750,  10685, 400, 247);
+        CGRect rectSign2 = CGRectMake(720, 10685, 0, 0);
+        CGRect rectSign3 = CGRectMake(200, 10685, 0, 0);
+        CGRect rectSign4 = CGRectMake(1250, 10685, 400, 247);
+        CGRect rectSign5 = CGRectMake(250, 10685, 400, 247);
         
         UIImage *resultImage = [self generateSignatureForThirdPartyImage:baseImage signatureImage1:imageSigned1 signaturePostion1:rectSign1 signatureImage2:imageSigned2 signaturePostion2:rectSign2 signatureImage3:imageSigned3 signaturePostion3:rectSign3 signatureImage4:imageSigned4 signaturePostion4:rectSign4 signatureImage5:imageSigned5 signaturePostion5:rectSign5];
         NSData *thumbnailData = UIImageJPEGRepresentation(resultImage, 0);

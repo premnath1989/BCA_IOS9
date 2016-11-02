@@ -27,10 +27,10 @@
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:YES];
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    filePath = [docsDir stringByAppendingPathComponent:@"CFFfolder"];
+    filePath = [docsDir stringByAppendingPathComponent:@"CFF"];
     [self createDirectory];
     
-    NSString *htmlfilePath = [NSString stringWithFormat:@"CFFfolder/%@",htmlFileName];
+    NSString *htmlfilePath = [NSString stringWithFormat:@"CFF/%@",htmlFileName];
     NSString *localURL = [[NSString alloc] initWithString:
                           [docsDir stringByAppendingPathComponent: htmlfilePath]];
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localURL]];
@@ -74,6 +74,18 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark html load
+-(void)loadHTMLFile{
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    filePath = [docsDir stringByAppendingPathComponent:@"CFF"];
+    
+    NSString *htmlfilePath = [NSString stringWithFormat:@"CFF/%@",htmlFileName];
+    NSString *localURL = [[NSString alloc] initWithString:
+                          [docsDir stringByAppendingPathComponent: htmlfilePath]];
+    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localURL]];
+    [webview loadRequest:urlRequest];
 }
 
 #pragma mark call save function in HTML

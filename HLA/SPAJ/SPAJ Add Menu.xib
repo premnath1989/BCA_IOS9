@@ -490,9 +490,9 @@
                                 </stackView>
                             </subviews>
                         </stackView>
-                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ks1-hZ-biZ">
-                            <rect key="frame" x="338" y="11" width="122" height="30"/>
-                            <state key="normal" title="Test generate pdf"/>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ks1-hZ-biZ">
+                            <rect key="frame" x="324" y="11" width="136" height="30"/>
+                            <state key="normal" title="Test generate xml"/>
                             <connections>
                                 <action selector="actionGeneratePDF:" destination="-1" eventType="touchUpInside" id="2HF-0Z-YvU"/>
                             </connections>

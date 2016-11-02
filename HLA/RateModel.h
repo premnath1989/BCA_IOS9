@@ -13,6 +13,9 @@
 @interface RateModel : NSObject{
     FMResultSet *results;
 }
+-(double)getCashSurValue20Year:(NSString *)BasicCode EntryAge:(int)entryAge PolYear:(int)polYear Gender:(NSString *)gender;
+-(double)getCashSurValue15Year:(NSString *)BasicCode EntryAge:(int)entryAge PolYear:(int)polYear Gender:(NSString *)gender;
+-(double)getCashSurValue10Year:(NSString *)BasicCode EntryAge:(int)entryAge PolYear:(int)polYear Gender:(NSString *)gender;
 -(double)getCashSurValue5Year:(NSString *)BasicCode EntryAge:(int)entryAge PolYear:(int)polYear Gender:(NSString *)gender;
 -(double)getCashSurValue1Year:(NSString *)Gender BasicCode:(NSString *)basicCode EntryAge:(int)entryAge;
 -(double)getCashSurValue:(NSString *)Gender BasicCode:(NSString *)basicCode EntryAge:(int)entryAge PolYear:(int)polYear;

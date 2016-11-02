@@ -30,6 +30,7 @@
 -(NSString *)getSPAJImageNameFromPath:(NSString *)stringImageName;
 -(UIImage *)generateSignatureForImage:(UIImage *)mainImg signatureImage1:(UIImage *)signatureImage1 signaturePostion1:(CGRect)signaturePosition1 signatureImage2:(UIImage *)signatureImage2 signaturePostion2:(CGRect)signaturePosition2 signatureImage3:(UIImage *)signatureImage3 signaturePostion3:(CGRect)signaturePosition3 signatureImage4:(UIImage *)signatureImage4 signaturePostion4:(CGRect)signaturePosition4;
 
+-(void)removeThirdPartyJPGFiles:(NSDictionary *)dictTransaction;
 -(void)removeSPAJFolder:(NSDictionary *)dictTransaction;
 -(void)removeSPAJSigned:(NSDictionary *)dictTransaction;
 -(void)removeUnNecesaryPDFFiles:(NSDictionary *)dictTransaction;

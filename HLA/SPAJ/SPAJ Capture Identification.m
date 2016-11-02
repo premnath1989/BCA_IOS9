@@ -621,7 +621,7 @@ NSString* const Back = @"Back";
             case 0:
             {
                 stringIDIdentifier = [modelSPAJIDCapture selectIDType:@"SPAJIDTypeParty1" SPAJSection:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
-                fileName = [NSString stringWithFormat:@"/%@_%@_%@_%@.jpg",stringEAPPPath,PemegangPolis,[buttonIDTypeSelection currentTitle]?:@"",Front];
+                fileName = [NSString stringWithFormat:@"/%@_ID_%@_%@_%@.jpg",stringEAPPPath,PemegangPolis,[buttonIDTypeSelection currentTitle]?:@"",Front];
                 imagePath = [filePathApp stringByAppendingString:fileName];
                 imageID = [UIImage imageWithContentsOfFile:imagePath];
                 return imageID;
@@ -629,7 +629,7 @@ NSString* const Back = @"Back";
             }
             case 1:{
                 stringIDIdentifier = [modelSPAJIDCapture selectIDType:@"SPAJIDTypeParty2" SPAJSection:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
-                fileName = [NSString stringWithFormat:@"/%@_%@_%@_%@.jpg",stringEAPPPath,Tertanggung,[buttonIDTypeSelection currentTitle]?:@"",Front];
+                fileName = [NSString stringWithFormat:@"/%@_ID_%@_%@_%@.jpg",stringEAPPPath,Tertanggung,[buttonIDTypeSelection currentTitle]?:@"",Front];
                 imagePath = [filePathApp stringByAppendingString:fileName];
                 imageID = [UIImage imageWithContentsOfFile:imagePath];
                 return imageID;
@@ -637,7 +637,7 @@ NSString* const Back = @"Back";
             }
             case 2:{
                 stringIDIdentifier = [modelSPAJIDCapture selectIDType:@"SPAJIDTypeParty3" SPAJSection:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
-                fileName = [NSString stringWithFormat:@"/%@_%@_%@_%@.jpg",stringEAPPPath,OrangTuaWali,[buttonIDTypeSelection currentTitle]?:@"",Front];
+                fileName = [NSString stringWithFormat:@"/%@_ID_%@_%@_%@.jpg",stringEAPPPath,OrangTuaWali,[buttonIDTypeSelection currentTitle]?:@"",Front];
                 imagePath = [filePathApp stringByAppendingString:fileName];
                 imageID = [UIImage imageWithContentsOfFile:imagePath];
                 return imageID;
@@ -647,7 +647,7 @@ NSString* const Back = @"Back";
                 stringIDIdentifier = [modelSPAJIDCapture selectIDType:@"SPAJIDTypeParty4" SPAJSection:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
                 //NSString *identityDescNew =[modelIdentificationType getOtherTypeDesc:stringIDTypeIdentifier];
                 NSString *identityDescNew = @"Form Tenaga Penjual";
-                fileName = [NSString stringWithFormat:@"/%@_%@_%@_%@.jpg",stringEAPPPath,TenagaPenjual,identityDescNew,Front];
+                fileName = [NSString stringWithFormat:@"/%@_ID_%@_%@_%@.jpg",stringEAPPPath,TenagaPenjual,identityDescNew,Front];
                 imagePath = [filePathApp stringByAppendingString:fileName];
                 imageID = [UIImage imageWithContentsOfFile:imagePath];
                 return imageID;
@@ -655,7 +655,7 @@ NSString* const Back = @"Back";
             }
             case 4:{
                 stringIDIdentifier = [modelSPAJIDCapture selectIDType:@"SPAJIDTypeParty5" SPAJSection:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
-                fileName = [NSString stringWithFormat:@"/%@_%@_%@_%@.jpg",stringEAPPPath,Payment,[buttonIDTypeSelection currentTitle]?:@"",Front];
+                fileName = [NSString stringWithFormat:@"/%@_ID_%@_%@_%@.jpg",stringEAPPPath,Payment,[buttonIDTypeSelection currentTitle]?:@"",Front];
                 imagePath = [filePathApp stringByAppendingString:fileName];
                 imageID = [UIImage imageWithContentsOfFile:imagePath];
                 return imageID;
@@ -663,7 +663,7 @@ NSString* const Back = @"Back";
             }
             case 5:{
                 stringIDIdentifier = [modelSPAJIDCapture selectIDType:@"SPAJIDTypeParty6" SPAJSection:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
-                fileName = [NSString stringWithFormat:@"/%@_%@_%@_%@.jpg",stringEAPPPath,Other,[buttonIDTypeSelection currentTitle]?:@"",Front];
+                fileName = [NSString stringWithFormat:@"/%@_ID_%@_%@_%@.jpg",stringEAPPPath,Other,[buttonIDTypeSelection currentTitle]?:@"",Front];
                 imagePath = [filePathApp stringByAppendingString:fileName];
                 imageID = [UIImage imageWithContentsOfFile:imagePath];
                 return imageID;
@@ -1054,7 +1054,8 @@ NSString* const Back = @"Back";
         
         //filename combination is EAPPNumberPartyIDTypeFront
         //filename combination is EAPPNumberPartyIDTypeBack
-        NSString* fileName = [NSString stringWithFormat:@"%@_%@_%@_%@",stringEAPPPath,stringParty,stringIDType,stringSide];
+        //NSString* fileName = [NSString stringWithFormat:@"%@_%@_%@_%@",stringEAPPPath,stringParty,stringIDType,stringSide];
+        NSString* fileName = [NSString stringWithFormat:@"%@_ID_%@_%@_%@",stringEAPPPath,stringParty,stringIDType,stringSide];
         
         //NSData *imageData = UIImageJPEGRepresentation([self generateWatermarkForImage:imageView.image], 0.8);
         NSData *imageData = UIImageJPEGRepresentation(imageView.image, 0.8);

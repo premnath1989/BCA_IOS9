@@ -725,10 +725,12 @@
                             NSString *value = buttonTemp.currentTitle;
                             NSString *elementID = [buttonTemp getButtonName]?:[NSString stringWithFormat:@"btnView%i",i];
                             
-                            NSMutableDictionary *dictAnswer = [allAboutPDFFunctions dictAnswers:dictTransaction ElementID:elementID Value:value Section:@"TP" SPAJHtmlID:[[modelSPAJHtml selectActiveHtmlForSection:@"TP"] valueForKey:@"SPAJHtmlID"]];
-                            
-                            [arrayFormAnswers addObject:dictAnswer];
-                            i++;
+                            if (![value isEqualToString:@"(Tanggal / Bulan / Tahun)"]){
+                                NSMutableDictionary *dictAnswer = [allAboutPDFFunctions dictAnswers:dictTransaction ElementID:elementID Value:value Section:@"TP" SPAJHtmlID:[[modelSPAJHtml selectActiveHtmlForSection:@"TP"] valueForKey:@"SPAJHtmlID"]];
+                                
+                                [arrayFormAnswers addObject:dictAnswer];
+                                i++;
+                            }
                         }
                     }
                 }

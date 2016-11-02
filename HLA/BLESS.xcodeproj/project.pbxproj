@@ -398,6 +398,8 @@
 		4376DF211CD196EC00816BB6 /* check_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4376DF1D1CD196EC00816BB6 /* check_icon@2x.png */; };
 		438035DE1D5D8847003A9199 /* SPAJFilesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 438035DC1D5D8847003A9199 /* SPAJFilesViewController.m */; };
 		438035DF1D5D8847003A9199 /* SPAJFilesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 438035DD1D5D8847003A9199 /* SPAJFilesViewController.xib */; };
+		4380F9DF1DC8338600717FB4 /* SPAJSubmissionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4380F9DE1DC8338600717FB4 /* SPAJSubmissionModel.m */; };
+		4380F9E21DC843EF00717FB4 /* AllAboutSPAJXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 4380F9E11DC843EF00717FB4 /* AllAboutSPAJXML.m */; };
 		4381A1691DB0F81900766C00 /* emptyImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 4381A1681DB0F81900766C00 /* emptyImage.png */; };
 		438410BE1D66A07200FD4152 /* watermarkID.png in Resources */ = {isa = PBXBuildFile; fileRef = 438410BD1D66A07200FD4152 /* watermarkID.png */; };
 		438410C21D66A2F700FD4152 /* SPAJIDCapturedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 438410C01D66A2F700FD4152 /* SPAJIDCapturedViewController.m */; };
@@ -1654,6 +1656,10 @@
 		438035DB1D5D8847003A9199 /* SPAJFilesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPAJFilesViewController.h; sourceTree = "<group>"; };
 		438035DC1D5D8847003A9199 /* SPAJFilesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPAJFilesViewController.m; sourceTree = "<group>"; };
 		438035DD1D5D8847003A9199 /* SPAJFilesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SPAJFilesViewController.xib; sourceTree = "<group>"; };
+		4380F9DD1DC8338600717FB4 /* SPAJSubmissionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPAJSubmissionModel.h; sourceTree = "<group>"; };
+		4380F9DE1DC8338600717FB4 /* SPAJSubmissionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPAJSubmissionModel.m; sourceTree = "<group>"; };
+		4380F9E01DC843EF00717FB4 /* AllAboutSPAJXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllAboutSPAJXML.h; sourceTree = "<group>"; };
+		4380F9E11DC843EF00717FB4 /* AllAboutSPAJXML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllAboutSPAJXML.m; sourceTree = "<group>"; };
 		4381A1681DB0F81900766C00 /* emptyImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emptyImage.png; sourceTree = "<group>"; };
 		438410BD1D66A07200FD4152 /* watermarkID.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = watermarkID.png; sourceTree = "<group>"; };
 		438410BF1D66A2F700FD4152 /* SPAJIDCapturedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPAJIDCapturedViewController.h; sourceTree = "<group>"; };
@@ -2970,6 +2976,8 @@
 				43B41DD81D81913900718F83 /* AllAboutPDFGeneration.m */,
 				435464B11D9281F200F04413 /* AllAboutPDFFunctions.h */,
 				435464B21D9281F200F04413 /* AllAboutPDFFunctions.m */,
+				4380F9E01DC843EF00717FB4 /* AllAboutSPAJXML.h */,
+				4380F9E11DC843EF00717FB4 /* AllAboutSPAJXML.m */,
 			);
 			name = Function;
 			sourceTree = "<group>";
@@ -4414,6 +4422,8 @@
 				438CBC791D616D1C00FF44B1 /* ModelSPAJSubmitTracker.m */,
 				438410C41D66E9AA00FD4152 /* ModelOccupation.h */,
 				438410C51D66E9AA00FD4152 /* ModelOccupation.m */,
+				4380F9DD1DC8338600717FB4 /* SPAJSubmissionModel.h */,
+				4380F9DE1DC8338600717FB4 /* SPAJSubmissionModel.m */,
 			);
 			name = "HLADB Model";
 			sourceTree = "<group>";
@@ -6691,6 +6701,7 @@
 				DE7B8C4F1D5321B1002C7EDF /* SPAJTableCell.m in Sources */,
 				178A076B1C7DAD7300B91582 /* ExtraPremi.m in Sources */,
 				EF1ADDE117826CCC00996388 /* Education.m in Sources */,
+				4380F9DF1DC8338600717FB4 /* SPAJSubmissionModel.m in Sources */,
 				EF1ADDE417826F2700996388 /* SavingCFF.m in Sources */,
 				438035DE1D5D8847003A9199 /* SPAJFilesViewController.m in Sources */,
 				EF1ADDE71782771200996388 /* RecordAdviceII.m in Sources */,
@@ -7019,6 +7030,7 @@
 				42B8B1401917339500E09A34 /* PRPage11.m in Sources */,
 				42B8B1411917339500E09A34 /* PRPage12.m in Sources */,
 				4373949A1C9BE5C2004522A2 /* NIPInfo.m in Sources */,
+				4380F9E21DC843EF00717FB4 /* AllAboutSPAJXML.m in Sources */,
 				42B8B1421917339500E09A34 /* PRPage13.m in Sources */,
 				42B8B1431917339500E09A34 /* PRPage2.m in Sources */,
 				AA4EF76C1C85A4260050CCD8 /* ReaderThumbCache.m in Sources */,

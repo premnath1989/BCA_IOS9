@@ -3739,14 +3739,45 @@ function alertSaveRecentInput()
 	calliOSFunction('alertSaveRecentInput:',onSuccess,onError, callInfo);
 }
 
-function goToChangePageAlert(URLPage)
+function goToChangePageAlert(stringLinkJavaScriptID, URLPage, stringRelationshipStatus)
 {
+	var stringLinkJQueryID = stringKres + stringLinkJavaScriptID;
+	//alert("initiate : " + stringLinkJQueryID + ", " + stringLinkJavaScriptID + ", " + URLPage + ", " + stringRelationshipStatus);
+	
 	if (booleanInputChangeState == "true")
 	{
-		alertSaveRecentInput();
+		//alert("alert - input change state true");
+
+		if (stringRelationshipStatus == "self")
+		{
+			//alert("relationship status : " + "self");
+		}
+		else
+		{
+			//alert("relationship status : " + "not self");
+			alertSaveRecentInput();
+		}
 	}
 	else
 	{
-		window.location.replace(URLPage);
+		//alert("alert - input change state false");
+		if (stringLinkJavaScriptID == "LinkProspectiveInsured")
+		{
+			//alert("link : linkProspectiveInsured - " + stringLinkJavaScriptID);
+			if (stringRelationshipStatus == "self")
+			{
+				//alert("relationship status : " + "self");
+			}
+			else
+			{
+				//alert("relationship status : " + "not self");
+				window.location.replace(URLPage);
+			}
+		}
+		else
+		{
+			//alert("link : linkPolicyHolder - " + stringLinkJavaScriptID);
+			window.location.replace(URLPage);
+		}
 	}
 }

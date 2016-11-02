@@ -47,6 +47,7 @@ NSString* const stateIMGGeneration = @"IMG";
 #import "ClassImageProcessing.h"
 #import "AllAboutPDFGeneration.h"
 #import "AllAboutPDFFunctions.h"
+#import "AllAboutSPAJXML.h"
 
 // DECLARATION
 
@@ -87,6 +88,7 @@ NSString* const stateIMGGeneration = @"IMG";
     SPAJFormGeneration* viewControllerFormGeneration;
     SPAJCaptureIdentification* viewControllerCapture;
     SPAJ_Add_Signature* viewControllerSignature;
+    AllAboutSPAJXML* allAboutSPAJXML;
     
     UserInterface *objectUserInterface;
     
@@ -183,6 +185,8 @@ NSString* const stateIMGGeneration = @"IMG";
         objectUserInterface = [[UserInterface alloc] init];
         allAboutPDFFunctions = [[AllAboutPDFFunctions alloc]init];
         allAboutPDFGeneration = [[AllAboutPDFGeneration alloc]init];
+        allAboutSPAJXML = [[AllAboutSPAJXML alloc]init];
+        
         allAboutPDFGeneration.delegatePDFGeneration = self;
         allAboutPDFFunctions.delegatePDFFunctions = self;
         formatter = [[Formatter alloc]init];
@@ -483,7 +487,7 @@ NSString* const stateIMGGeneration = @"IMG";
     };
 
     -(IBAction)actionGeneratePDF:(id)sender{
-        NSString* fileName = @"SPAJ.pdf";
+        /*NSString* fileName = @"SPAJ.pdf";
         NSString* spajOriginalPath = [NSString stringWithFormat:@"%@/%@_%@",[formatter generateSPAJFileDirectory:[dictTransaction valueForKey:@"SPAJEappNumber"]],[dictTransaction valueForKey:@"SPAJEappNumber"],fileName];
         
         if([[NSFileManager defaultManager] fileExistsAtPath:spajOriginalPath])
@@ -494,7 +498,8 @@ NSString* const stateIMGGeneration = @"IMG";
         else
         {
             NSLog(@"File not exits");
-        }
+        }*/
+        [allAboutSPAJXML generateXMLDictionary:dictTransaction];
     }
 
     -(void)splitPDF:(NSURL *)sourcePDFUrl withOutputName:(NSString *)outputBaseName intoDirectory:(NSString *)directory
@@ -1061,6 +1066,18 @@ NSString* const stateIMGGeneration = @"IMG";
             NSURLRequest *request = [NSURLRequest requestWithURL:fileURL];
             [webview loadRequest:request];
          }
+        else{
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                [allAboutPDFGeneration removeUnNecesaryPDFFiles:dictTransaction];
+                [allAboutPDFGeneration removeSPAJSigned:dictTransaction];
+                
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                    [self allImgSigned];
+                });
+            });
+            
+        }
+
      }
 
 

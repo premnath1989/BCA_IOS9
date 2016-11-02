@@ -74,8 +74,8 @@ NSString* const BackPhoto = @"Back";
     NSString* stringEAPPPath = [dictTransaction valueForKey:@"SPAJEappNumber"];
     NSString* fileNameFront;
     NSString* fileNameBack;
-    fileNameFront=[NSString stringWithFormat:@"%@_%@_%@_%@",stringEAPPPath,stringSection,stringButtonType?:@"",FrontPhoto];
-    fileNameBack=[NSString stringWithFormat:@"%@_%@_%@_%@",stringEAPPPath,stringSection,stringButtonType?:@"",BackPhoto];
+    fileNameFront=[NSString stringWithFormat:@"%@_ID_%@_%@_%@",stringEAPPPath,stringSection,stringButtonType?:@"",FrontPhoto];
+    fileNameBack=[NSString stringWithFormat:@"%@_ID_%@_%@_%@",stringEAPPPath,stringSection,stringButtonType?:@"",BackPhoto];
     
     NSArray* arrayImageFront=[[NSArray alloc]initWithArray:[self loadFilesList:fileNameFront]];
     NSArray* arrayImageBack=[[NSArray alloc]initWithArray:[self loadFilesList:fileNameBack]];

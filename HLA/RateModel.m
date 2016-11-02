@@ -30,6 +30,66 @@
     return Rate;
 }
 
+-(double)getCashSurValue10Year:(NSString *)BasicCode EntryAge:(int)entryAge PolYear:(int)polYear Gender:(NSString *)gender{
+    double Rate;
+    
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"BCA_Rates.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"SELECT Rate FROM Cash_SurValue_Regular_10 Where BasicCode = \"%@\" AND EntryAge = %i  AND PolYear = %i AND Gender = \"%@\"",BasicCode,entryAge,polYear,gender]];
+    
+    while ([s next]) {
+        Rate = [s doubleForColumn:@"Rate"];
+    }
+    
+    [results close];
+    [database close];
+    return Rate;
+}
+
+-(double)getCashSurValue15Year:(NSString *)BasicCode EntryAge:(int)entryAge PolYear:(int)polYear Gender:(NSString *)gender{
+    double Rate;
+    
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"BCA_Rates.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"SELECT Rate FROM Cash_SurValue_Regular_15 Where BasicCode = \"%@\" AND EntryAge = %i  AND PolYear = %i AND Gender = \"%@\"",BasicCode,entryAge,polYear,gender]];
+    
+    while ([s next]) {
+        Rate = [s doubleForColumn:@"Rate"];
+    }
+    
+    [results close];
+    [database close];
+    return Rate;
+}
+
+-(double)getCashSurValue20Year:(NSString *)BasicCode EntryAge:(int)entryAge PolYear:(int)polYear Gender:(NSString *)gender{
+    double Rate;
+    
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"BCA_Rates.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"SELECT Rate FROM Cash_SurValue_Regular_20 Where BasicCode = \"%@\" AND EntryAge = %i  AND PolYear = %i AND Gender = \"%@\"",BasicCode,entryAge,polYear,gender]];
+    
+    while ([s next]) {
+        Rate = [s doubleForColumn:@"Rate"];
+    }
+    
+    [results close];
+    [database close];
+    return Rate;
+}
+
 -(double)getCashSurValue1Year:(NSString *)Gender BasicCode:(NSString *)basicCode EntryAge:(int)entryAge{
     double Rate;
     

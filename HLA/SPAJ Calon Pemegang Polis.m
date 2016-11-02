@@ -190,7 +190,8 @@
     docsDir = nil;
     htmlfilePath = nil;
     localURL = nil;
-    urlRequest = nil;}
+    urlRequest = nil;
+}
 
 -(void)loadSeventhHTML:(NSString*)stringHTMLName PageSection:(NSString *)stringPageSection{
     NSString* stringFlagEdited = [webview stringByEvaluatingJavaScriptFromString:@"booleanInputChangeState;"];
@@ -381,6 +382,7 @@
 - (void)deleteFormThirdParty:(NSDictionary *)params{
     NSString *stringWhere = [NSString stringWithFormat:@"where SPAJHtmlSection='TP' and SPAJTransactionID=%i",[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
     [modelSPAJAnswers deleteSPAJAnswers:stringWhere];
+    [allAboutPDFGeneration removeThirdPartyJPGFiles:dictTransaction];
 }
 
 - (void)alertSaveRecentInput:(NSDictionary *)params{
@@ -792,11 +794,15 @@
         NSString *SINO = [modelSPAJTransaction getSPAJTransactionData:@"SPAJSINO" StringWhereName:@"SPAJEappNumber" StringWhereValue:[delegate voidGetEAPPNumber]];
         NSDictionary* dictPOData = [[NSDictionary alloc ]initWithDictionary:[modelSIPData getPO_DataFor:SINO]];
         NSString* stringRelation = [formatter getRelationNameForHtml:[dictPOData valueForKey:@"RelWithLA"]];
+        
         [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"CheckRelationshipStatus('%@');",stringRelation]];
         
         if ([stringSection isEqualToString:@"KS_PH"]){
             NSString* stringWhere = [NSString stringWithFormat:@"where elementID ='RadioButtonPolicyHolderSex' and SPAJTransactionID = %i and SPAJHtmlSection ='PO'",[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
             NSString* stringValue =[modelSPAJAnswers selectSPAJAnswersData:@"Value" StringWhere:stringWhere];
+        
+            NSString* jsString = [NSString stringWithFormat:@"stringRelationshipStatus = '%@';",stringRelation];
+            [webview stringByEvaluatingJavaScriptFromString:jsString];
             
             [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"setFemaleQuestionForHealthQuestionnaire('%@');",stringValue]];
         }

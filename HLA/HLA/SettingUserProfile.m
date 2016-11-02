@@ -565,7 +565,7 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
                         });
                     });
                 });
-                //[self getHTMLDataTable];
+                [self getHTMLDataTable];
                 [self getSPAJHTMLDataTable];
             }else if([rateResponse.strStatus caseInsensitiveCompare:@"False"] == NSOrderedSame){
                 [spinnerLoading stopLoadingSpinner];
@@ -1037,8 +1037,8 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
     
     //NSArray* arrayJSONKey = [[NSArray alloc]initWithObjects:@"CFFId",@"FileName",@"Status",@"CFFSection",@"FolderName",@"Id",@"FileNameIndo" ,nil];
     //NSArray* tableColumn= [[NSArray alloc]initWithObjects:@"CFFID",@"CFFHtmlName",@"CFFHtmlStatus",@"CFFHtmlSection",@"CFFServerID",@"CFFHtmlTranslateName", nil];
-    NSArray* arrayJSONKey = [[NSArray alloc]initWithObjects:@"CFFId",@"FileName",@"Status",@"CFFSection",@"FolderName",@"Id",nil];
-    NSArray* tableColumn= [[NSArray alloc]initWithObjects:@"CFFID",@"CFFHtmlName",@"CFFHtmlStatus",@"CFFHtmlSection",@"CFFServerID", nil];
+    NSArray* arrayJSONKey = [[NSArray alloc]initWithObjects:@"CFFId",@"FileName",@"Status",@"CFFSection",@"FolderName",@"Id",@"FileNameIndo",nil];
+    NSArray* tableColumn= [[NSArray alloc]initWithObjects:@"CFFID",@"CFFHtmlName",@"CFFHtmlStatus",@"CFFHtmlSection",@"CFFServerID",@"CFFHtmlTranslateName", nil];
     NSDictionary *dictCFFTable = [[NSDictionary alloc]initWithObjectsAndKeys:@"CFFHtml",@"tableName",tableColumn,@"columnName", nil];
     
     NSMutableDictionary* dictDuplicateChecker = [[NSMutableDictionary alloc]init];
@@ -1049,7 +1049,7 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
     [dictDuplicateChecker setObject:@"CFFHtmlStatus" forKey:@"DuplicateCheckerWhere3"];
     [dictDuplicateChecker setObject:@"CFFHtmlSection" forKey:@"DuplicateCheckerWhere4"];
     [dictDuplicateChecker setObject:@"CFFServerID" forKey:@"DuplicateCheckerWhere5"];
-    //[dictDuplicateChecker setObject:@"CFFHtmlTranslateName" forKey:@"DuplicateCheckerWhere6"];
+    [dictDuplicateChecker setObject:@"CFFHtmlTranslateName" forKey:@"DuplicateCheckerWhere6"];
     
     NSString* stringURL = [NSString stringWithFormat:@"%@/Service2.svc/GetAllData",[(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL]];
     [cffAPIController apiCallHtmlTable:stringURL JSONKey:arrayJSONKey TableDictionary:dictCFFTable DictionaryDuplicateChecker:dictDuplicateChecker WebServiceModule:@"CFF"];

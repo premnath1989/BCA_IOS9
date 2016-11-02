@@ -29,8 +29,8 @@
 	if([TradOrEver isEqualToString:@"TRAD"]){
 		ListOfPlan = [[NSMutableArray alloc] initWithObjects:@"Secure100", @"HLA Wealth Plan", nil ];
 		ListOfCode = [[NSMutableArray alloc] initWithObjects:@"S100", @"HLAWP", nil ];
-        ListOfPlan = [[NSMutableArray alloc] initWithObjects:@"Premi Tunggal",@"Premi 5 Tahun",nil];
-        ListOfCode = [[NSMutableArray alloc] initWithObjects:@"BCALH",@"BCAKK", nil ];
+        ListOfPlan = [[NSMutableArray alloc] initWithObjects:@"Premi Tunggal",@"Premi 5 Tahun",@"Premi 10 Tahun",@"Premi 15 Tahun",@"Premi 20 Tahun",nil];
+        ListOfCode = [[NSMutableArray alloc] initWithObjects:@"BCALH",@"BCAKK",@"BCALH10",@"BCALH15",@"BCALH20", nil ];
         
 //		ListOfPlan = [[NSMutableArray alloc] initWithObjects:@"HLA Wealth Plan", nil ];
 //		ListOfCode = [[NSMutableArray alloc] initWithObjects:@"HLAWP", nil ];

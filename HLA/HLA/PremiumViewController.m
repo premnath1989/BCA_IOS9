@@ -4458,6 +4458,7 @@
     NSString* premiDasar = [dictionaryPremium valueForKey:@"PremiumPolicyA"];
     NSString* totalPremi = [dictionaryPremium valueForKey:@"TotalPremiumLoading"];
     int IsInternalStaff =[[dictionaryPremium valueForKey:@"IsInternalStaff"] intValue];
+    NSString* paymentTerm = [dictionaryPremium valueForKey:@"Payment_Term"];
     
     [lblAsuransiDasarSekaligus setText:@"0"];
     [lblExtraPremiPercentSekaligus setText:@"0"];
@@ -4496,84 +4497,95 @@
     [lblDiskonTahunan setTextColor:[UIColor clearColor]];
     [lblTotalTahunan setTextColor:[UIColor whiteColor]];
     
-    /*if ([Highlight isEqualToString:@"Pembayaran Sekaligus"])
-     {
-     [lblAsuransiDasarSekaligus setText:premiDasar];
-     [lblExtraPremiPercentSekaligus setText:[NSString stringWithFormat:@"%@",[Premformatter stringFromNumber:[NSNumber numberWithDouble:[self calculateExtraPremiPercentSekaligus]]]]];
-     [lblExtraPremiNumberSekaligus setText:[NSString stringWithFormat:@"%@",[Premformatter stringFromNumber:[NSNumber numberWithDouble:[self calculateExtraPremiNumberSekaligus]]]]];
-     [lblTotalSekaligus setText:totalPremi];
-     
-     [lblAsuransiDasarSekaligus setTextColor:themeColour];
-     [lblExtraPremiPercentSekaligus setTextColor:themeColour];
-     [lblExtraPremiNumberSekaligus setTextColor:themeColour];
-     
-     }
-     else if ([Highlight isEqualToString:@"Bulanan"]){
-     [lblAsuransiDasarBulanan setText:premiDasar];
-     [lblExtraPremiPercentBulanan setText:[NSString stringWithFormat:@"%@",[Premformatter stringFromNumber:[NSNumber numberWithDouble:[self calculateExtraPremiPercentBulanan]]]]];
-     [lblExtraPremiNumberBulanan setText:[NSString stringWithFormat:@"%@",[Premformatter stringFromNumber:[NSNumber numberWithDouble:[self calculateExtraPremiNumberBulanan]]]]];
-     [lblTotalBulanan setText:totalPremi];
-     
-     [lblAsuransiDasarTahunan setText:[NSString stringWithFormat:@"%@",[Premformatter stringFromNumber:[NSNumber numberWithDouble:[self getPremiDasarTahunan]]]]];
-     [lblExtraPremiPercentTahunan setText:[NSString stringWithFormat:@"%@",[Premformatter stringFromNumber:[NSNumber numberWithDouble:[self calculateExtraPremiPercentTahunan]]]]];
-     [lblExtraPremiNumberTahunan setText:[NSString stringWithFormat:@"%@",[Premformatter stringFromNumber:[NSNumber numberWithDouble:[self calculateExtraPremiNumberTahunan]]]]];
-     [lblTotalTahunan setText:[NSString stringWithFormat:@"%@",[Premformatter stringFromNumber:[NSNumber numberWithDouble:[self totalPremiTahunan]]]]];
-     
-     [lblAsuransiDasarBulanan setTextColor:themeColour];
-     [lblExtraPremiPercentBulanan setTextColor:themeColour];
-     [lblExtraPremiNumberBulanan setTextColor:themeColour];
-     
-     [lblAsuransiDasarTahunan setTextColor:[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1]];
-     [lblExtraPremiPercentTahunan setTextColor:[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1]];
-     [lblExtraPremiNumberTahunan setTextColor:[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1]];
-     }
-     else{
-     [lblAsuransiDasarBulanan setText:[NSString stringWithFormat:@"%@",[Premformatter stringFromNumber:[NSNumber numberWithDouble:[self getPremiDasarBulanan]]]]];
-     [lblExtraPremiPercentBulanan setText:[NSString stringWithFormat:@"%@",[Premformatter stringFromNumber:[NSNumber numberWithDouble:[self calculateExtraPremiPercentBulanan]]]]];
-     [lblExtraPremiNumberBulanan setText:[NSString stringWithFormat:@"%@",[Premformatter stringFromNumber:[NSNumber numberWithDouble:[self calculateExtraPremiNumberBulanan]]]]];
-     [lblTotalBulanan setText:[NSString stringWithFormat:@"%@",[Premformatter stringFromNumber:[NSNumber numberWithDouble:[self totalPremiBulanan]]]]];
-     
-     [lblAsuransiDasarTahunan setText:premiDasar];
-     [lblExtraPremiPercentTahunan setText:[NSString stringWithFormat:@"%@",[Premformatter stringFromNumber:[NSNumber numberWithDouble:[self calculateExtraPremiPercentTahunan]]]]];
-     [lblExtraPremiNumberTahunan setText:[NSString stringWithFormat:@"%@",[Premformatter stringFromNumber:[NSNumber numberWithDouble:[self calculateExtraPremiNumberTahunan]]]]];
-     [lblTotalTahunan setText:totalPremi];
-     
-     [lblAsuransiDasarBulanan setTextColor:[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1]];
-     [lblExtraPremiPercentBulanan setTextColor:[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1]];
-     [lblExtraPremiNumberBulanan setTextColor:[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1]];
-     
-     [lblAsuransiDasarTahunan setTextColor:themeColour];
-     [lblExtraPremiPercentTahunan setTextColor:themeColour];
-     [lblExtraPremiNumberTahunan setTextColor:themeColour];
-     }*/
-    
     [lblAsuransiDasarSekaligus setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getPremiDasarSekaligus]]]]];
     [lblExtraPremiPercentSekaligus setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation calculateExtraPremiPercentSekaligus]]]]];
     [lblExtraPremiNumberSekaligus setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation calculateExtraPremiNumberSekaligus]]]]];
-    //[lblTotalSekaligus setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiSekaligus]]]]];
-    //[lblDiskonSekaligus setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getDiskonSekaligus]]]]];
     
-    [lblAsuransiDasarBulanan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getPremiDasarBulanan]]]]];
-    [lblExtraPremiPercentBulanan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation calculateExtraPremiPercentBulanan]]]]];
-    [lblExtraPremiNumberBulanan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation calculateExtraPremiNumberBulanan]]]]];
-    //[lblTotalBulanan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiBulanan]]]]];
-    //[lblDiskonBulanan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getDiskonBulanan]]]]];
+    if ([paymentTerm isEqualToString:@"Premi 5 Tahun"]){
+        [lblAsuransiDasarBulanan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getPremiDasarBulanan:5]]]]];
+        [lblExtraPremiPercentBulanan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation calculateExtraPremiPercentBulanan:5]]]]];
+        [lblExtraPremiNumberBulanan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation calculateExtraPremiNumberBulanan]]]]];
+        
+        [lblAsuransiDasarTahunan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getPremiDasarTahunan:5]]]]];
+        [lblExtraPremiPercentTahunan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation calculateExtraPremiPercentTahunan:5]]]]];
+        [lblExtraPremiNumberTahunan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation calculateExtraPremiNumberTahunan]]]]];
+    }
+    else if ([paymentTerm isEqualToString:@"Premi 10 Tahun"]){
+        [lblAsuransiDasarBulanan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getPremiDasarBulanan:10]]]]];
+        [lblExtraPremiPercentBulanan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation calculateExtraPremiPercentBulanan:10]]]]];
+        [lblExtraPremiNumberBulanan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation calculateExtraPremiNumberBulanan]]]]];
+        
+        [lblAsuransiDasarTahunan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getPremiDasarTahunan:10]]]]];
+        [lblExtraPremiPercentTahunan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation calculateExtraPremiPercentTahunan:10]]]]];
+        [lblExtraPremiNumberTahunan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation calculateExtraPremiNumberTahunan]]]]];
+    }
+    else if ([paymentTerm isEqualToString:@"Premi 15 Tahun"]){
+        [lblAsuransiDasarBulanan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getPremiDasarBulanan:15]]]]];
+        [lblExtraPremiPercentBulanan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation calculateExtraPremiPercentBulanan:15]]]]];
+        [lblExtraPremiNumberBulanan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation calculateExtraPremiNumberBulanan]]]]];
+        
+        [lblAsuransiDasarTahunan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getPremiDasarTahunan:15]]]]];
+        [lblExtraPremiPercentTahunan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation calculateExtraPremiPercentTahunan:15]]]]];
+        [lblExtraPremiNumberTahunan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation calculateExtraPremiNumberTahunan]]]]];
+    }
+    else if ([paymentTerm isEqualToString:@"Premi 20 Tahun"]){
+        [lblAsuransiDasarBulanan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getPremiDasarBulanan:20]]]]];
+        [lblExtraPremiPercentBulanan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation calculateExtraPremiPercentBulanan:20]]]]];
+        [lblExtraPremiNumberBulanan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation calculateExtraPremiNumberBulanan]]]]];
+        
+        [lblAsuransiDasarTahunan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getPremiDasarTahunan:20]]]]];
+        [lblExtraPremiPercentTahunan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation calculateExtraPremiPercentTahunan:20]]]]];
+        [lblExtraPremiNumberTahunan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation calculateExtraPremiNumberTahunan]]]]];
+    }
+    else{
+        [lblAsuransiDasarBulanan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getPremiDasarBulanan:5]]]]];
+        [lblExtraPremiPercentBulanan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation calculateExtraPremiPercentBulanan:5]]]]];
+        [lblExtraPremiNumberBulanan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation calculateExtraPremiNumberBulanan]]]]];
+        
+        [lblAsuransiDasarTahunan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getPremiDasarTahunan:5]]]]];
+        [lblExtraPremiPercentTahunan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation calculateExtraPremiPercentTahunan:5]]]]];
+        [lblExtraPremiNumberTahunan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation calculateExtraPremiNumberTahunan]]]]];
+    }
     
-    [lblAsuransiDasarTahunan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getPremiDasarTahunan]]]]];
-    [lblExtraPremiPercentTahunan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation calculateExtraPremiPercentTahunan]]]]];
-    [lblExtraPremiNumberTahunan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation calculateExtraPremiNumberTahunan]]]]];
-    //[lblTotalTahunan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiTahunan]]]]];
-    //[lblDiskonTahunan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getDiskonTahunan]]]]];
+    
+    
+    
     
     if (IsInternalStaff==1){
         [lblDiskonSekaligus setText:[NSString stringWithFormat:@"(%@)",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getDiskonSekaligus]]]]];
         [lblTotalSekaligus setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:[heritageCalculation getDiskonSekaligus] BasicPremi:[heritageCalculation getPremiDasarSekaligus]] ExtraPremi:[heritageCalculation extraPremiSekaligus]]]]]];
+ 
+        if ([paymentTerm isEqualToString:@"Premi 5 Tahun"]){
+            [lblDiskonBulanan setText:[NSString stringWithFormat:@"(%@)",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getDiskonBulanan:5]]]]];
+            [lblTotalBulanan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:[heritageCalculation getDiskonBulanan:5] BasicPremi:[heritageCalculation getPremiDasarBulanan:5]] ExtraPremi:[heritageCalculation extraPremiBulanan:5]]]]]];
+            
+            [lblDiskonTahunan setText:[NSString stringWithFormat:@"(%@)",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getDiskonTahunan:5]]]]];
+            [lblTotalTahunan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:[heritageCalculation getDiskonTahunan:5] BasicPremi:[heritageCalculation getPremiDasarTahunan:5]] ExtraPremi:[heritageCalculation extraPremiTahunan:5]]]]]];
+        }
+        else if ([paymentTerm isEqualToString:@"Premi 10 Tahun"]){
+            [lblDiskonBulanan setText:[NSString stringWithFormat:@"(%@)",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getDiskonBulanan:10]]]]];
+            [lblTotalBulanan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:[heritageCalculation getDiskonBulanan:10] BasicPremi:[heritageCalculation getPremiDasarBulanan:10]] ExtraPremi:[heritageCalculation extraPremiBulanan:10]]]]]];
+            
+            [lblDiskonTahunan setText:[NSString stringWithFormat:@"(%@)",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getDiskonTahunan:10]]]]];
+            [lblTotalTahunan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:[heritageCalculation getDiskonTahunan:10] BasicPremi:[heritageCalculation getPremiDasarTahunan:10]] ExtraPremi:[heritageCalculation extraPremiTahunan:10]]]]]];
+        }
+        else if ([paymentTerm isEqualToString:@"Premi 15 Tahun"]){
+            [lblDiskonBulanan setText:[NSString stringWithFormat:@"(%@)",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getDiskonBulanan:15]]]]];
+            [lblTotalBulanan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:[heritageCalculation getDiskonBulanan:15] BasicPremi:[heritageCalculation getPremiDasarBulanan:15]] ExtraPremi:[heritageCalculation extraPremiBulanan:15]]]]]];
+            
+            [lblDiskonTahunan setText:[NSString stringWithFormat:@"(%@)",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getDiskonTahunan:15]]]]];
+            [lblTotalTahunan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:[heritageCalculation getDiskonTahunan:15] BasicPremi:[heritageCalculation getPremiDasarTahunan:15]] ExtraPremi:[heritageCalculation extraPremiTahunan:15]]]]]];
+        }
+        else if ([paymentTerm isEqualToString:@"Premi 20 Tahun"]){
+            [lblDiskonBulanan setText:[NSString stringWithFormat:@"(%@)",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getDiskonBulanan:20]]]]];
+            [lblTotalBulanan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:[heritageCalculation getDiskonBulanan:20] BasicPremi:[heritageCalculation getPremiDasarBulanan:20]] ExtraPremi:[heritageCalculation extraPremiBulanan:20]]]]]];
+            
+            [lblDiskonTahunan setText:[NSString stringWithFormat:@"(%@)",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getDiskonTahunan:20]]]]];
+            [lblTotalTahunan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:[heritageCalculation getDiskonTahunan:20] BasicPremi:[heritageCalculation getPremiDasarTahunan:20]] ExtraPremi:[heritageCalculation extraPremiTahunan:20]]]]]];
+        }
+        else{
+        }
         
-        [lblDiskonBulanan setText:[NSString stringWithFormat:@"(%@)",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getDiskonBulanan]]]]];
-        [lblTotalBulanan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:[heritageCalculation getDiskonBulanan] BasicPremi:[heritageCalculation getPremiDasarBulanan]] ExtraPremi:[heritageCalculation extraPremiBulanan]]]]]];
-        
-        [lblDiskonTahunan setText:[NSString stringWithFormat:@"(%@)",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getDiskonTahunan]]]]];
-        [lblTotalTahunan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:[heritageCalculation getDiskonTahunan] BasicPremi:[heritageCalculation getPremiDasarTahunan]] ExtraPremi:[heritageCalculation extraPremiTahunan]]]]]];
         
         [viewDiskon setHidden:NO];
     }
@@ -4582,34 +4594,37 @@
         [lblTotalSekaligus setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:0 BasicPremi:[heritageCalculation getPremiDasarSekaligus]] ExtraPremi:[heritageCalculation extraPremiSekaligus]]]]]];
         
         [lblDiskonBulanan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:0]]]];
-        [lblTotalBulanan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:0 BasicPremi:[heritageCalculation getPremiDasarBulanan]] ExtraPremi:[heritageCalculation extraPremiBulanan]]]]]];
+        
         
         [lblDiskonTahunan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:0]]]];
-        [lblTotalTahunan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:0 BasicPremi:[heritageCalculation getPremiDasarTahunan]] ExtraPremi:[heritageCalculation extraPremiTahunan]]]]]];
+        
+        
+        if ([paymentTerm isEqualToString:@"Premi 5 Tahun"]){
+            [lblTotalBulanan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:0 BasicPremi:[heritageCalculation getPremiDasarBulanan:5]] ExtraPremi:[heritageCalculation extraPremiBulanan:5]]]]]];
+            
+            [lblTotalTahunan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber    numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:0 BasicPremi:[heritageCalculation getPremiDasarTahunan:5]] ExtraPremi:[heritageCalculation extraPremiTahunan:5]]]]]];
+        }
+        else if ([paymentTerm isEqualToString:@"Premi 10 Tahun"]){
+            [lblTotalBulanan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:0 BasicPremi:[heritageCalculation getPremiDasarBulanan:10]] ExtraPremi:[heritageCalculation extraPremiBulanan:10]]]]]];
+            
+            [lblTotalTahunan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber    numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:0 BasicPremi:[heritageCalculation getPremiDasarTahunan:10]] ExtraPremi:[heritageCalculation extraPremiTahunan:10]]]]]];
+        }
+        else if ([paymentTerm isEqualToString:@"Premi 15 Tahun"]){
+            [lblTotalBulanan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:0 BasicPremi:[heritageCalculation getPremiDasarBulanan:15]] ExtraPremi:[heritageCalculation extraPremiBulanan:15]]]]]];
+            
+            [lblTotalTahunan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber    numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:0 BasicPremi:[heritageCalculation getPremiDasarTahunan:15]] ExtraPremi:[heritageCalculation extraPremiTahunan:15]]]]]];
+        }
+        else if ([paymentTerm isEqualToString:@"Premi 20 Tahun"]){
+            [lblTotalBulanan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:0 BasicPremi:[heritageCalculation getPremiDasarBulanan:20]] ExtraPremi:[heritageCalculation extraPremiBulanan:20]]]]]];
+            
+            [lblTotalTahunan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber    numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:0 BasicPremi:[heritageCalculation getPremiDasarTahunan:20]] ExtraPremi:[heritageCalculation extraPremiTahunan:20]]]]]];
+        }
         
         [viewDiskon setHidden:YES];
     }
     
     if ([Highlight isEqualToString:@"Pembayaran Sekaligus"])
     {
-        /*[lblAsuransiDasarSekaligus setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getPremiDasarSekaligus]]]]];
-        [lblExtraPremiPercentSekaligus setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation calculateExtraPremiPercentSekaligus]]]]];
-        [lblExtraPremiNumberSekaligus setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation calculateExtraPremiNumberSekaligus]]]]];
-        [lblTotalSekaligus setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiSekaligus]]]]];
-        [lblDiskonSekaligus setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getDiskonSekaligus]]]]];
-        
-        [lblAsuransiDasarBulanan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getPremiDasarBulanan]]]]];
-        [lblExtraPremiPercentBulanan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation calculateExtraPremiPercentBulanan]]]]];
-        [lblExtraPremiNumberBulanan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation calculateExtraPremiNumberBulanan]]]]];
-        [lblTotalBulanan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiBulanan]]]]];
-        [lblDiskonBulanan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getDiskonBulanan]]]]];
-        
-        [lblAsuransiDasarTahunan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getPremiDasarTahunan]]]]];
-        [lblExtraPremiPercentTahunan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation calculateExtraPremiPercentTahunan]]]]];
-        [lblExtraPremiNumberTahunan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation calculateExtraPremiNumberTahunan]]]]];
-        [lblTotalTahunan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiTahunan]]]]];
-        [lblDiskonTahunan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getDiskonTahunan]]]]];*/
-        
         [lblAsuransiDasarSekaligus setTextColor:themeColour];
         [lblExtraPremiPercentSekaligus setTextColor:themeColour];
         [lblExtraPremiNumberSekaligus setTextColor:themeColour];
@@ -4627,21 +4642,6 @@
         
     }
     else if ([Highlight isEqualToString:@"Bulanan"]){
-        /*[lblAsuransiDasarSekaligus setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getPremiDasarSekaligus]]]]];
-        [lblExtraPremiPercentSekaligus setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation calculateExtraPremiPercentSekaligus]]]]];
-        [lblExtraPremiNumberSekaligus setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation calculateExtraPremiNumberSekaligus]]]]];
-        [lblTotalSekaligus setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiSekaligus]]]]];
-        
-        [lblAsuransiDasarBulanan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getPremiDasarBulanan]]]]];
-        [lblExtraPremiPercentBulanan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation calculateExtraPremiPercentBulanan]]]]];
-        [lblExtraPremiNumberBulanan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation calculateExtraPremiNumberBulanan]]]]];
-        [lblTotalBulanan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiBulanan]]]]];
-        
-        [lblAsuransiDasarTahunan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getPremiDasarTahunan]]]]];
-        [lblExtraPremiPercentTahunan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation calculateExtraPremiPercentTahunan]]]]];
-        [lblExtraPremiNumberTahunan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation calculateExtraPremiNumberTahunan]]]]];
-        [lblTotalTahunan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiTahunan]]]]];*/
-        
         [lblAsuransiDasarSekaligus setTextColor:[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1]];
         [lblExtraPremiPercentSekaligus setTextColor:[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1]];
         [lblExtraPremiNumberSekaligus setTextColor:[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1]];
@@ -4658,21 +4658,6 @@
         [lblDiskonTahunan setTextColor:[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1]];
     }
     else{
-        /*[lblAsuransiDasarSekaligus setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getPremiDasarSekaligus]]]]];
-        [lblExtraPremiPercentSekaligus setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation calculateExtraPremiPercentSekaligus]]]]];
-        [lblExtraPremiNumberSekaligus setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation calculateExtraPremiNumberSekaligus]]]]];
-        [lblTotalSekaligus setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiSekaligus]]]]];
-        
-        [lblAsuransiDasarBulanan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getPremiDasarBulanan]]]]];
-        [lblExtraPremiPercentBulanan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation calculateExtraPremiPercentBulanan]]]]];
-        [lblExtraPremiNumberBulanan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation calculateExtraPremiNumberBulanan]]]]];
-        [lblTotalBulanan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiBulanan]]]]];
-        
-        [lblAsuransiDasarTahunan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getPremiDasarTahunan]]]]];
-        [lblExtraPremiPercentTahunan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation calculateExtraPremiPercentTahunan]]]]];
-        [lblExtraPremiNumberTahunan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation calculateExtraPremiNumberTahunan]]]]];
-        [lblTotalTahunan setText:[NSString stringWithFormat:@"%@",[classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiTahunan]]]]];*/
-        
         [lblAsuransiDasarSekaligus setTextColor:[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1]];
         [lblExtraPremiPercentSekaligus setTextColor:[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1]];
         [lblExtraPremiNumberSekaligus setTextColor:[UIColor colorWithRed:128.0f/255.0f green:130.0f/255.0f blue:133.0f/255.0f alpha:1]];

@@ -1022,7 +1022,6 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
         else{
             if (stateGeneration == stateIMG){
                 if ([[arrayIMGName objectAtIndex:indexImgForPDFGeneration]rangeOfString:@"amandment"].location != NSNotFound){
-                    
                     NSString *functionCall = [NSString stringWithFormat:@"setSignatureImage([%@])", [listArrayFiles componentsJoinedByString:@","]];
                     [webview stringByEvaluatingJavaScriptFromString:functionCall];
                     [self performSelector:@selector(performReadFromDB) withObject:nil afterDelay:0.5];

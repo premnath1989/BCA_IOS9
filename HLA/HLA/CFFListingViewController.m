@@ -36,6 +36,8 @@
     
     UIBarButtonItem* rightButton;
     
+    NSIndexPath* indexPathSelected;
+    
     NSMutableArray *ItemToBeDeleted;
     NSMutableArray *indexPaths;
     
@@ -140,7 +142,7 @@
 -(void)copyHTMLFile:(NSString *)fileName{
     NSError *error =  nil;
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *filePathApp = [docsDir stringByAppendingPathComponent:@"CFFfolder"];
+    NSString *filePathApp = [docsDir stringByAppendingPathComponent:@"CFF"];
     [cffAPIController createDirectory:filePathApp];
     NSString *filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"html"];
     NSData *htmlData = [NSData dataWithContentsOfFile:filePath];
@@ -360,7 +362,9 @@
         else{
             [self CreateNewCFFTransaction];
             [self loadCFFTransaction];
-            [self dismissViewControllerAnimated:YES completion:nil];
+            [self dismissViewControllerAnimated:YES completion:^{
+                [self showDetailsForIndexPath:indexPathSelected];
+            }];
         }
         
     }
@@ -470,6 +474,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    indexPathSelected = indexPath;
     RecDelete = RecDelete+1;
     if ([tableCFFListing isEditing] == TRUE ) {
         BOOL gotRowSelected = FALSE;
@@ -604,6 +609,7 @@
 #pragma mark save to CFFTransaction
 -(void)CreateNewCFFTransaction{
     NSString* dateToday=[formatter getDateToday:@"yyyy-MM-dd"];
+    NSString* dateTimeToday=[formatter getDateToday:@"yyyy-MM-dd hh:mm:ss"];
     NSDictionary* dictActiveHtml = [[NSDictionary alloc]initWithDictionary:[modelCFFHtml selectActiveHtml]];
     NSDictionary* dictCustomerStatementCFFID=[[NSDictionary alloc]initWithDictionary:[modelCFFHtml selectActiveHtmlForSection:@"CS"]];
     NSDictionary* dictCustomerNeedsCFFID=[[NSDictionary alloc]initWithDictionary:[modelCFFHtml selectActiveHtmlForSection:@"CN"]];
@@ -615,7 +621,7 @@
     NSDictionary* dictWarisanCFFID=[[NSDictionary alloc]initWithDictionary:[modelCFFHtml selectActiveHtmlForSection:@"WRS"]];
     NSDictionary* dictInvestasiCFFID=[[NSDictionary alloc]initWithDictionary:[modelCFFHtml selectActiveHtmlForSection:@"INV"]];
     
-    NSDictionary* dictCFFTransaction = [[NSDictionary alloc]initWithObjectsAndKeys:[dictActiveHtml valueForKey:@"CFFID"],@"CFFID",[NSNumber numberWithInteger:clientProfileID],@"ProspectIndexNo",dateToday,@"CFFDateCreated",@"",@"CreatedBy",dateToday,@"CFFDateModified",@"",@"ModifiedBy",@"Not Complete",@"CFFStatus",[NSString stringWithFormat:@"%@",[dictCustomerStatementCFFID valueForKey:@"CFFID"]],@"CustomerStatementCFFID",[NSString stringWithFormat:@"%@",[dictCustomerNeedsCFFID valueForKey:@"CFFID"]],@"CustomerNeedsCFFID",[NSString stringWithFormat:@"%@",[dictCustomerRiskCFFID valueForKey:@"CFFID"]],@"CustomerRiskCFFID",[NSString stringWithFormat:@"%@",[dictPotentialDiscussionCFFID valueForKey:@"CFFID"]],@"PotentialDiscussionCFFID",[NSString stringWithFormat:@"%@",[dictProteksiCFFID valueForKey:@"CFFID"]],@"ProteksiCFFID",[NSString stringWithFormat:@"%@",[dictPensiunCFFID valueForKey:@"CFFID"]],@"PensiunCFFID",[NSString stringWithFormat:@"%@",[dictPendidikanCFFID valueForKey:@"CFFID"]],@"PendidikanCFFID",[NSString stringWithFormat:@"%@",[dictWarisanCFFID valueForKey:@"CFFID"]],@"WarisanCFFID",[NSString stringWithFormat:@"%@",[dictInvestasiCFFID valueForKey:@"CFFID"]],@"InvestasiCFFID", nil];
+    NSDictionary* dictCFFTransaction = [[NSDictionary alloc]initWithObjectsAndKeys:[dictActiveHtml valueForKey:@"CFFID"],@"CFFID",[NSNumber numberWithInteger:clientProfileID],@"ProspectIndexNo",dateToday,@"CFFDateCreated",@"",@"CreatedBy",dateTimeToday,@"CFFDateModified",@"",@"ModifiedBy",@"Not Complete",@"CFFStatus",[NSString stringWithFormat:@"%@",[dictCustomerStatementCFFID valueForKey:@"CFFID"]],@"CustomerStatementCFFID",[NSString stringWithFormat:@"%@",[dictCustomerNeedsCFFID valueForKey:@"CFFID"]],@"CustomerNeedsCFFID",[NSString stringWithFormat:@"%@",[dictCustomerRiskCFFID valueForKey:@"CFFID"]],@"CustomerRiskCFFID",[NSString stringWithFormat:@"%@",[dictPotentialDiscussionCFFID valueForKey:@"CFFID"]],@"PotentialDiscussionCFFID",[NSString stringWithFormat:@"%@",[dictProteksiCFFID valueForKey:@"CFFID"]],@"ProteksiCFFID",[NSString stringWithFormat:@"%@",[dictPensiunCFFID valueForKey:@"CFFID"]],@"PensiunCFFID",[NSString stringWithFormat:@"%@",[dictPendidikanCFFID valueForKey:@"CFFID"]],@"PendidikanCFFID",[NSString stringWithFormat:@"%@",[dictWarisanCFFID valueForKey:@"CFFID"]],@"WarisanCFFID",[NSString stringWithFormat:@"%@",[dictInvestasiCFFID valueForKey:@"CFFID"]],@"InvestasiCFFID", nil];
     [modelCFFTransaction saveCFFTransaction:dictCFFTransaction];
 }
 

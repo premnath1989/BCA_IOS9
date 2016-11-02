@@ -660,7 +660,7 @@ bool WPTPD30RisDeleted = FALSE;
             return (([string isEqualToString:filtered]) && newLength <= 2);
         }
         else{
-            return (([string isEqualToString:filtered]) && newLength <= 1);
+            return (([string isEqualToString:filtered]) && newLength <= 2);
         }
        
     }
@@ -746,7 +746,7 @@ bool WPTPD30RisDeleted = FALSE;
                     [self loadHeritageCalculation];
                 }
             }
-            else{
+            else if ([_masaPembayaranButton.titleLabel.text isEqualToString:@"Premi 5 Tahun"]){
                 if (([_extraPremiNumberField.text length]>0)||([_extraPremiPercentField.text length]>0)){
                     if (masaExtraPremi<1 || masaExtraPremi>5){
                         [self createAlertViewAndShow:@"Masa extra premi tidak boleh lebih dari 5 dan kurang dari 1" tag:0];
@@ -759,6 +759,46 @@ bool WPTPD30RisDeleted = FALSE;
                     [self loadHeritageCalculation];
                 }
             }
+            else if ([_masaPembayaranButton.titleLabel.text isEqualToString:@"Premi 10 Tahun"]){
+                if (([_extraPremiNumberField.text length]>0)||([_extraPremiPercentField.text length]>0)){
+                    if (masaExtraPremi<1 || masaExtraPremi>10){
+                        [self createAlertViewAndShow:@"Masa extra premi tidak boleh lebih dari 10 dan kurang dari 1" tag:0];
+                        [textField setText:@""];
+                        [textField becomeFirstResponder];
+                    }
+                }
+                else{
+                    [self PremiDasarActB];
+                    [self loadHeritageCalculation];
+                }
+            }
+            else if ([_masaPembayaranButton.titleLabel.text isEqualToString:@"Premi 15 Tahun"]){
+                if (([_extraPremiNumberField.text length]>0)||([_extraPremiPercentField.text length]>0)){
+                    if (masaExtraPremi<1 || masaExtraPremi>15){
+                        [self createAlertViewAndShow:@"Masa extra premi tidak boleh lebih dari 15 dan kurang dari 1" tag:0];
+                        [textField setText:@""];
+                        [textField becomeFirstResponder];
+                    }
+                }
+                else{
+                    [self PremiDasarActB];
+                    [self loadHeritageCalculation];
+                }
+            }
+            else if ([_masaPembayaranButton.titleLabel.text isEqualToString:@"Premi 20 Tahun"]){
+                if (([_extraPremiNumberField.text length]>0)||([_extraPremiPercentField.text length]>0)){
+                    if (masaExtraPremi<1 || masaExtraPremi>20){
+                        [self createAlertViewAndShow:@"Masa extra premi tidak boleh lebih dari 20 dan kurang dari 1" tag:0];
+                        [textField setText:@""];
+                        [textField becomeFirstResponder];
+                    }
+                }
+                else{
+                    [self PremiDasarActB];
+                    [self loadHeritageCalculation];
+                }
+            }
+            
         }
     }
 }
@@ -880,6 +920,15 @@ bool WPTPD30RisDeleted = FALSE;
         else if ([_masaPembayaranButton.titleLabel.text isEqualToString:@"Premi 5 Tahun"]){
             [MasaExtraPremiLBL setText:@"Min 1 | Max 5"];
         }
+        else if ([_masaPembayaranButton.titleLabel.text isEqualToString:@"Premi 10 Tahun"]){
+            [MasaExtraPremiLBL setText:@"Min 1 | Max 10"];
+        }
+        else if ([_masaPembayaranButton.titleLabel.text isEqualToString:@"Premi 15 Tahun"]){
+            [MasaExtraPremiLBL setText:@"Min 1 | Max 15"];
+        }
+        else if ([_masaPembayaranButton.titleLabel.text isEqualToString:@"Premi 20 Tahun"]){
+            [MasaExtraPremiLBL setText:@"Min 1 | Max 20"];
+        }
     }
     [MasaExtraPremiLBL setHidden:NO];
 }
@@ -915,7 +964,6 @@ bool WPTPD30RisDeleted = FALSE;
         _masaPembayaran.TradOrEver = @"TRAD";
         _masaPembayaran.delegate = self;
         self.planPopover = [[UIPopoverController alloc] initWithContentViewController:_masaPembayaran];
-        
     }
     else
     {
@@ -923,8 +971,6 @@ bool WPTPD30RisDeleted = FALSE;
         _masaPembayaran.TradOrEver = @"TRAD";
         _masaPembayaran.delegate = self;
         self.planPopover = [[UIPopoverController alloc] initWithContentViewController:_masaPembayaran];
-        
-        
     }
     
     CGRect rect = [sender frame];
@@ -1017,6 +1063,106 @@ bool WPTPD30RisDeleted = FALSE;
         [self.planPopover presentPopoverFromRect:rect  inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
        // _frekuensiPembayaranButton.enabled =TRUE;
     }
+    else if ([FrekuensiPembayaranChecking isEqualToString:@"Premi 10 Tahun"])
+    {
+        
+        [self resignFirstResponder];
+        [self.view endEditing:YES];
+        
+        Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
+        id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
+        [activeInstance performSelector:@selector(dismissKeyboard)];
+        
+        if (_frekuensi == nil) {
+            _frekuensi = [[Frekeunsi alloc] init];
+            _frekuensi.Frekuensi = @"Premi 10 Tahun";
+            _frekuensi.delegate = self;
+            premiType = @"R";
+            self.planPopover = [[UIPopoverController alloc] initWithContentViewController:_frekuensi];
+        }
+        else
+        {
+            _frekuensi = [[Frekeunsi alloc] init];
+            _frekuensi.Frekuensi = @"Premi 10 Tahun";
+            _frekuensi.delegate = self;
+            premiType = @"R";
+            self.planPopover = [[UIPopoverController alloc] initWithContentViewController:_frekuensi];
+            
+        }
+        CGRect rect = [sender frame];
+        rect.origin.y = [sender frame].origin.y + 30;
+        
+        [self.planPopover setPopoverContentSize:CGSizeMake(350.0f, 200.0f)];
+        [self.planPopover presentPopoverFromRect:rect  inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        // _frekuensiPembayaranButton.enabled =TRUE;
+    }
+    else if ([FrekuensiPembayaranChecking isEqualToString:@"Premi 15 Tahun"])
+    {
+        
+        [self resignFirstResponder];
+        [self.view endEditing:YES];
+        
+        Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
+        id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
+        [activeInstance performSelector:@selector(dismissKeyboard)];
+        
+        if (_frekuensi == nil) {
+            _frekuensi = [[Frekeunsi alloc] init];
+            _frekuensi.Frekuensi = @"Premi 15 Tahun";
+            _frekuensi.delegate = self;
+            premiType = @"R";
+            self.planPopover = [[UIPopoverController alloc] initWithContentViewController:_frekuensi];
+        }
+        else
+        {
+            _frekuensi = [[Frekeunsi alloc] init];
+            _frekuensi.Frekuensi = @"Premi 15 Tahun";
+            _frekuensi.delegate = self;
+            premiType = @"R";
+            self.planPopover = [[UIPopoverController alloc] initWithContentViewController:_frekuensi];
+            
+        }
+        CGRect rect = [sender frame];
+        rect.origin.y = [sender frame].origin.y + 30;
+        
+        [self.planPopover setPopoverContentSize:CGSizeMake(350.0f, 200.0f)];
+        [self.planPopover presentPopoverFromRect:rect  inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        // _frekuensiPembayaranButton.enabled =TRUE;
+    }
+    else if ([FrekuensiPembayaranChecking isEqualToString:@"Premi 20 Tahun"])
+    {
+        
+        [self resignFirstResponder];
+        [self.view endEditing:YES];
+        
+        Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
+        id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
+        [activeInstance performSelector:@selector(dismissKeyboard)];
+        
+        if (_frekuensi == nil) {
+            _frekuensi = [[Frekeunsi alloc] init];
+            _frekuensi.Frekuensi = @"Premi 20 Tahun";
+            _frekuensi.delegate = self;
+            premiType = @"R";
+            self.planPopover = [[UIPopoverController alloc] initWithContentViewController:_frekuensi];
+        }
+        else
+        {
+            _frekuensi = [[Frekeunsi alloc] init];
+            _frekuensi.Frekuensi = @"Premi 20 Tahun";
+            _frekuensi.delegate = self;
+            premiType = @"R";
+            self.planPopover = [[UIPopoverController alloc] initWithContentViewController:_frekuensi];
+            
+        }
+        CGRect rect = [sender frame];
+        rect.origin.y = [sender frame].origin.y + 30;
+        
+        [self.planPopover setPopoverContentSize:CGSizeMake(350.0f, 200.0f)];
+        [self.planPopover presentPopoverFromRect:rect  inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        // _frekuensiPembayaranButton.enabled =TRUE;
+    }
+    
     else if ([FrekuensiPembayaranChecking isEqualToString:@"10 Tahun"])
     {
         
@@ -5952,39 +6098,144 @@ bool WPTPD30RisDeleted = FALSE;
     }
     else if ([FRekeunsiPembayaranMode isEqualToString:@"Bulanan"])
     {
-        premiDasar = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getPremiDasarBulanan]]];
-        extraBasicPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation extraPremiBulanan]]];
-        totalPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiBulanan]]];
-        if (IsInternalStaff==1){
-            diskon = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getDiskonBulanan]]];
-            totalPremiAfterDiscount = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiDiscount:[heritageCalculation getDiskonBulanan] BasicPremi:[heritageCalculation getPremiDasarBulanan]]]];
-            totalPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:[heritageCalculation getDiskonBulanan] BasicPremi:[heritageCalculation getPremiDasarBulanan]] ExtraPremi:[heritageCalculation extraPremiBulanan]]]];
-        }
-        else{
-            diskon = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:0]];
-            totalPremiAfterDiscount = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiDiscount:0 BasicPremi:[heritageCalculation getPremiDasarBulanan]]]];
-            totalPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:0 BasicPremi:[heritageCalculation getPremiDasarBulanan]] ExtraPremi:[heritageCalculation extraPremiBulanan]]]];
+        if ([_masaPembayaranButton.currentTitle isEqualToString:@"Premi 5 Tahun"]){
+            premiDasar = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getPremiDasarBulanan:5]]];
+            extraBasicPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation extraPremiBulanan:5]]];
+            totalPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiBulanan:5]]];
+            if (IsInternalStaff==1){
+                diskon = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getDiskonBulanan:5]]];
+                totalPremiAfterDiscount = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiDiscount:[heritageCalculation getDiskonBulanan:5] BasicPremi:[heritageCalculation getPremiDasarBulanan:5]]]];
+                totalPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:[heritageCalculation getDiskonBulanan:5] BasicPremi:[heritageCalculation getPremiDasarBulanan:5]] ExtraPremi:[heritageCalculation extraPremiBulanan:5]]]];
+            }
+            else{
+                diskon = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:0]];
+                totalPremiAfterDiscount = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiDiscount:0 BasicPremi:[heritageCalculation getPremiDasarBulanan:5]]]];
+                totalPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:0 BasicPremi:[heritageCalculation getPremiDasarBulanan:5]] ExtraPremi:[heritageCalculation extraPremiBulanan:5]]]];
+            }
         }
         
-
+        else if ([_masaPembayaranButton.currentTitle isEqualToString:@"Premi 10 Tahun"]){
+            premiDasar = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getPremiDasarBulanan:10]]];
+            extraBasicPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation extraPremiBulanan:10]]];
+            totalPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiBulanan:10]]];
+            
+            if (IsInternalStaff==1){
+                diskon = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getDiskonBulanan:10]]];
+                totalPremiAfterDiscount = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiDiscount:[heritageCalculation getDiskonBulanan:10] BasicPremi:[heritageCalculation getPremiDasarBulanan:10]]]];
+                totalPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:[heritageCalculation getDiskonBulanan:10] BasicPremi:[heritageCalculation getPremiDasarBulanan:10]] ExtraPremi:[heritageCalculation extraPremiBulanan:10]]]];
+            }
+            else{
+                diskon = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:0]];
+                totalPremiAfterDiscount = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiDiscount:0 BasicPremi:[heritageCalculation getPremiDasarBulanan:10]]]];
+                totalPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:0 BasicPremi:[heritageCalculation getPremiDasarBulanan:10]] ExtraPremi:[heritageCalculation extraPremiBulanan:10]]]];
+            }
+        }
+        
+        else if ([_masaPembayaranButton.currentTitle isEqualToString:@"Premi 15 Tahun"]){
+            premiDasar = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getPremiDasarBulanan:15]]];
+            extraBasicPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation extraPremiBulanan:15]]];
+            totalPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiBulanan:15]]];
+            
+            if (IsInternalStaff==1){
+                diskon = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getDiskonBulanan:15]]];
+                totalPremiAfterDiscount = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiDiscount:[heritageCalculation getDiskonBulanan:15] BasicPremi:[heritageCalculation getPremiDasarBulanan:15]]]];
+                totalPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:[heritageCalculation getDiskonBulanan:15] BasicPremi:[heritageCalculation getPremiDasarBulanan:15]] ExtraPremi:[heritageCalculation extraPremiBulanan:15]]]];
+            }
+            else{
+                diskon = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:0]];
+                totalPremiAfterDiscount = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiDiscount:0 BasicPremi:[heritageCalculation getPremiDasarBulanan:15]]]];
+                totalPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:0 BasicPremi:[heritageCalculation getPremiDasarBulanan:15]] ExtraPremi:[heritageCalculation extraPremiBulanan:15]]]];
+            }
+        }
+        
+        else if ([_masaPembayaranButton.currentTitle isEqualToString:@"Premi 20 Tahun"]){
+            premiDasar = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getPremiDasarBulanan:20]]];
+            extraBasicPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation extraPremiBulanan:20]]];
+            totalPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiBulanan:20]]];
+            
+            if (IsInternalStaff==1){
+                diskon = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getDiskonBulanan:20]]];
+                totalPremiAfterDiscount = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiDiscount:[heritageCalculation getDiskonBulanan:20] BasicPremi:[heritageCalculation getPremiDasarBulanan:20]]]];
+                totalPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:[heritageCalculation getDiskonBulanan:20] BasicPremi:[heritageCalculation getPremiDasarBulanan:20]] ExtraPremi:[heritageCalculation extraPremiBulanan:20]]]];
+            }
+            else{
+                diskon = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:0]];
+                totalPremiAfterDiscount = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiDiscount:0 BasicPremi:[heritageCalculation getPremiDasarBulanan:20]]]];
+                totalPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:0 BasicPremi:[heritageCalculation getPremiDasarBulanan:20]] ExtraPremi:[heritageCalculation extraPremiBulanan:20]]]];
+            }
+        }
+        
     }
     else if ([FRekeunsiPembayaranMode isEqualToString:@"Tahunan"])
     {
-        premiDasar = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getPremiDasarTahunan]]];
-        extraBasicPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation extraPremiTahunan]]];
-        totalPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiTahunan]]];
-        if (IsInternalStaff==1){
-            diskon = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getDiskonTahunan]]];
-            totalPremiAfterDiscount = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiDiscount:[heritageCalculation getDiskonTahunan] BasicPremi:[heritageCalculation getPremiDasarTahunan]]]];
-            totalPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:[heritageCalculation getDiskonTahunan] BasicPremi:[heritageCalculation getPremiDasarTahunan]] ExtraPremi:[heritageCalculation extraPremiTahunan]]]];
-        }
-        else{
-            diskon = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:0]];
-            totalPremiAfterDiscount = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiDiscount:0 BasicPremi:[heritageCalculation getPremiDasarTahunan]]]];
-            totalPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:0 BasicPremi:[heritageCalculation getPremiDasarTahunan]] ExtraPremi:[heritageCalculation extraPremiTahunan]]]];
+        if ([_masaPembayaranButton.currentTitle isEqualToString:@"Premi 5 Tahun"]){
+            premiDasar = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getPremiDasarTahunan:5]]];
+            extraBasicPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation extraPremiTahunan:5]]];
+            totalPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiTahunan:5]]];
+            
+            if (IsInternalStaff==1){
+                diskon = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getDiskonTahunan:5]]];
+                totalPremiAfterDiscount = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiDiscount:[heritageCalculation getDiskonTahunan:5] BasicPremi:[heritageCalculation getPremiDasarTahunan:5]]]];
+                totalPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:[heritageCalculation getDiskonTahunan:5] BasicPremi:[heritageCalculation getPremiDasarTahunan:5]] ExtraPremi:[heritageCalculation extraPremiTahunan:5]]]];
+            }
+            else{
+                diskon = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:0]];
+                totalPremiAfterDiscount = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiDiscount:0 BasicPremi:[heritageCalculation getPremiDasarTahunan:5]]]];
+                totalPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:0 BasicPremi:[heritageCalculation getPremiDasarTahunan:5]] ExtraPremi:[heritageCalculation extraPremiTahunan:5]]]];
+            }
         }
         
-
+        else if ([_masaPembayaranButton.currentTitle isEqualToString:@"Premi 10 Tahun"]){
+            premiDasar = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getPremiDasarTahunan:10]]];
+            extraBasicPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation extraPremiTahunan:10]]];
+            totalPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiTahunan:10]]];
+            
+            if (IsInternalStaff==1){
+                diskon = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getDiskonTahunan:10]]];
+                totalPremiAfterDiscount = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiDiscount:[heritageCalculation getDiskonTahunan:10] BasicPremi:[heritageCalculation getPremiDasarTahunan:10]]]];
+                totalPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:[heritageCalculation getDiskonTahunan:10] BasicPremi:[heritageCalculation getPremiDasarTahunan:10]] ExtraPremi:[heritageCalculation extraPremiTahunan:10]]]];
+            }
+            else{
+                diskon = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:0]];
+                totalPremiAfterDiscount = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiDiscount:0 BasicPremi:[heritageCalculation getPremiDasarTahunan:10]]]];
+                totalPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:0 BasicPremi:[heritageCalculation getPremiDasarTahunan:10]] ExtraPremi:[heritageCalculation extraPremiTahunan:10]]]];
+            }
+        }
+        
+        else if ([_masaPembayaranButton.currentTitle isEqualToString:@"Premi 15 Tahun"]){
+            premiDasar = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getPremiDasarTahunan:15]]];
+            extraBasicPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation extraPremiTahunan:15]]];
+            totalPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiTahunan:15]]];
+            
+            if (IsInternalStaff==1){
+                diskon = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getDiskonTahunan:15]]];
+                totalPremiAfterDiscount = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiDiscount:[heritageCalculation getDiskonTahunan:15] BasicPremi:[heritageCalculation getPremiDasarTahunan:15]]]];
+                totalPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:[heritageCalculation getDiskonTahunan:15] BasicPremi:[heritageCalculation getPremiDasarTahunan:15]] ExtraPremi:[heritageCalculation extraPremiTahunan:15]]]];
+            }
+            else{
+                diskon = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:0]];
+                totalPremiAfterDiscount = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiDiscount:0 BasicPremi:[heritageCalculation getPremiDasarTahunan:15]]]];
+                totalPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:0 BasicPremi:[heritageCalculation getPremiDasarTahunan:15]] ExtraPremi:[heritageCalculation extraPremiTahunan:15]]]];
+            }
+        }
+        
+        else if ([_masaPembayaranButton.currentTitle isEqualToString:@"Premi 20 Tahun"]){
+            premiDasar = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getPremiDasarTahunan:20]]];
+            extraBasicPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation extraPremiTahunan:20]]];
+            totalPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiTahunan:20]]];
+            
+            if (IsInternalStaff==1){
+                diskon = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation getDiskonTahunan:20]]];
+                totalPremiAfterDiscount = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiDiscount:[heritageCalculation getDiskonTahunan:20] BasicPremi:[heritageCalculation getPremiDasarTahunan:20]]]];
+                totalPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:[heritageCalculation getDiskonTahunan:20] BasicPremi:[heritageCalculation getPremiDasarTahunan:20]] ExtraPremi:[heritageCalculation extraPremiTahunan:20]]]];
+            }
+            else{
+                diskon = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:0]];
+                totalPremiAfterDiscount = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiDiscount:0 BasicPremi:[heritageCalculation getPremiDasarTahunan:20]]]];
+                totalPremi = [classFormatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:[heritageCalculation totalPremiAll:[heritageCalculation totalPremiDiscount:0 BasicPremi:[heritageCalculation getPremiDasarTahunan:20]] ExtraPremi:[heritageCalculation extraPremiTahunan:20]]]];
+            }
+        }
+        
     }
     else{
         

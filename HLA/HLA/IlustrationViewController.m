@@ -507,6 +507,36 @@
     return arrayRate;
 }
 
+-(NSMutableArray *)getRate10:(int)age{
+    NSMutableArray* arrayRate=[[NSMutableArray alloc]init];
+    int rowNumber = 99 - age;
+    NSString *gender =[[_dictionaryPOForInsert valueForKey:@"LA_Gender"]substringToIndex:1];
+    for (int i=1;i<rowNumber;i++){
+        [arrayRate addObject:[NSNumber numberWithDouble:[modelRate getCashSurValue10Year:@"HRT" EntryAge:age PolYear:i Gender:gender]]];
+    }
+    return arrayRate;
+}
+
+-(NSMutableArray *)getRate15:(int)age{
+    NSMutableArray* arrayRate=[[NSMutableArray alloc]init];
+    int rowNumber = 99 - age;
+    NSString *gender =[[_dictionaryPOForInsert valueForKey:@"LA_Gender"]substringToIndex:1];
+    for (int i=1;i<rowNumber;i++){
+        [arrayRate addObject:[NSNumber numberWithDouble:[modelRate getCashSurValue15Year:@"HRT" EntryAge:age PolYear:i Gender:gender]]];
+    }
+    return arrayRate;
+}
+
+-(NSMutableArray *)getRate20:(int)age{
+    NSMutableArray* arrayRate=[[NSMutableArray alloc]init];
+    int rowNumber = 99 - age;
+    NSString *gender =[[_dictionaryPOForInsert valueForKey:@"LA_Gender"]substringToIndex:1];
+    for (int i=1;i<rowNumber;i++){
+        [arrayRate addObject:[NSNumber numberWithDouble:[modelRate getCashSurValue20Year:@"HRT" EntryAge:age PolYear:i Gender:gender]]];
+    }
+    return arrayRate;
+}
+
 -(NSMutableArray *)getRateTunggal:(int)age{
     NSMutableArray* arrayRate=[[NSMutableArray alloc]init];
     int rowNumber = 99 - age;
@@ -631,10 +661,29 @@
     NSMutableArray* valSurValue=[[NSMutableArray alloc]initWithArray:[self getSurValue:laAge]];
     NSString *stringSurValue = [[valSurValue valueForKey:@"description"] componentsJoinedByString:@","];
     
-    NSMutableArray* valRate5Year=[[NSMutableArray alloc]initWithArray:[self getRate5:laAge]];
-    NSString *string5Year = [[valRate5Year valueForKey:@"description"] componentsJoinedByString:@","];
+    //NSMutableArray* valRate5Year=[[NSMutableArray alloc]initWithArray:[self getRate5:laAge]];
+    //NSString *string5Year = [[valRate5Year valueForKey:@"description"] componentsJoinedByString:@","];
     
-    NSString *responseTable = [webIlustration stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"createTable(%d,%i,%f,%d,[%@],[%@],[%@])", laAge,numberOfRow,basicSumAssured,paymentTerm,string,string5Year,stringSurValue]];
+    NSMutableArray* valRateYear=[[NSMutableArray alloc]init];
+    NSString *stringYear;
+    
+    if ([[_dictionaryForBasicPlan valueForKey:@"Payment_Term"] isEqualToString:@"Premi 5 Tahun"]){
+        valRateYear = [self getRate5:laAge];
+    }
+    else if ([[_dictionaryForBasicPlan valueForKey:@"Payment_Term"] isEqualToString:@"Premi 10 Tahun"]){
+        valRateYear = [self getRate10:laAge];
+    }
+    else if ([[_dictionaryForBasicPlan valueForKey:@"Payment_Term"] isEqualToString:@"Premi 15 Tahun"]){
+        valRateYear = [self getRate15:laAge];
+    }
+    else if ([[_dictionaryForBasicPlan valueForKey:@"Payment_Term"] isEqualToString:@"Premi 20 Tahun"]){
+        valRateYear = [self getRate20:laAge];
+    }
+    
+    stringYear = [[valRateYear valueForKey:@"description"] componentsJoinedByString:@","];
+    
+    //NSString *responseTable = [webIlustration stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"createTable(%d,%i,%f,%d,[%@],[%@],[%@])", laAge,numberOfRow,basicSumAssured,paymentTerm,string,string5Year,stringSurValue]];
+    NSString *responseTable = [webIlustration stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"createTable(%d,%i,%f,%d,[%@],[%@],[%@])", laAge,numberOfRow,basicSumAssured,paymentTerm,string,stringYear,stringSurValue]];
     
     // Make the UIWebView method call
      [webIlustration stringByEvaluatingJavaScriptFromString:javaScript];

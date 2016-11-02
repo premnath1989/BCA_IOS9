@@ -366,7 +366,8 @@ NSMutableArray *DelGroupArr;
     modelDataReferral=[[ModelDataReferral alloc]init];
     
     dictAgentData=[[NSDictionary alloc]initWithDictionary:[modelAgentProfil getAgentData]];
-    [_txtChannelName setText:pp.ReferralSource];
+    //[_txtChannelName setText:pp.ReferralSource];
+    [_txtChannelName setText:[NSString stringWithFormat:@"%@ - %@",[dictAgentData valueForKey:@"ChannelCode"],[dictAgentData valueForKey:@"ChannelName"]]];
     [txtKanwil setText:pp.Kanwil];
 }
 
