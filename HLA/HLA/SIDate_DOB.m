@@ -9,7 +9,7 @@
 #import "SIDate_DOB.h"
 #import "DataClass.h"
 
-@interface SIDate_DOB(){
+@interface SIDate_DOB()<UITextFieldDelegate>{
     DataClass *obj;
 }
 
@@ -82,7 +82,9 @@ id msg, DBDate;
 {
     [super viewDidLoad];
     obj=[DataClass getInstance];
-
+    
+    [_outletTextMonth setDelegate:self];
+    [_outletTextDay setDelegate:self];
     /*
     if (ProspectDOB != NULL ) {
         NSLog(@"sadfas");
@@ -124,6 +126,34 @@ id msg, DBDate;
 }
 
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (textField == _outletTextMonth){
+        NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+        
+        //first, check if the new string is numeric only. If not, return NO;
+        NSCharacterSet *characterSet = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789,."] invertedSet];
+        if ([newString rangeOfCharacterFromSet:characterSet].location != NSNotFound)
+        {
+            return NO;
+        }
+        
+        return [newString doubleValue] < 13;
+    }
+    else if (textField == _outletTextDay){
+        NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+        
+        //first, check if the new string is numeric only. If not, return NO;
+        NSCharacterSet *characterSet = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789,."] invertedSet];
+        if ([newString rangeOfCharacterFromSet:characterSet].location != NSNotFound)
+        {
+            return NO;
+        }
+        
+        return [newString doubleValue] < 32;
+    }
+}
+
 -(IBAction)textChanged:(UITextField *)sender{
     @try {
         if (sender == _outletTextYear){
@@ -143,6 +173,7 @@ id msg, DBDate;
         }
         else{
             if ([sender.text length]>0){
+                
                 NSString* date = [NSString stringWithFormat:@"%@/%@/%@",_outletTextDay.text,_outletTextMonth.text,_outletTextYear.text];
                 
                 NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
