@@ -181,6 +181,24 @@
     return (int)result;
 }
 
+-(NSString *)getNumberFromString:(NSString *)stringText{
+    NSString *originalString = stringText;
+    
+    // Intermediate
+    NSString *numberString;
+    
+    NSScanner *scanner = [NSScanner scannerWithString:originalString];
+    NSCharacterSet *numbers = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
+    
+    // Throw away characters before the first number.
+    [scanner scanUpToCharactersFromSet:numbers intoString:NULL];
+    
+    // Collect numbers.
+    [scanner scanCharactersFromSet:numbers intoString:&numberString];
+    
+    return numberString;
+}
+
 #pragma mark calculate age
 -(int)calculateAge:(NSString *)DOB{
     BOOL AgeLess = NO;

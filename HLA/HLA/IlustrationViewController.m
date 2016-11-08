@@ -775,13 +775,17 @@
     NSString *javaScriptP4H85;
     NSString *javaScriptP4H9;
     NSString *javaScriptP4H10;
+    
+    NSString* paymentTerm = [formatter getNumberFromString:[_dictionaryForBasicPlan valueForKey:@"Payment_Term"]];
     if ([[_dictionaryForBasicPlan valueForKey:@"Payment_Frequency"] isEqualToString:@"Tahunan"]){
         javaScriptP4H81 = [NSString stringWithFormat:@"document.getElementById('MasaPembayaran4.1').innerHTML =\"%@\";", @"per tahun"];
         javaScriptP4H82 = [NSString stringWithFormat:@"document.getElementById('MasaPembayaran4.2').innerHTML =\"%@\";", @"per tahun"];
         javaScriptP4H83 = [NSString stringWithFormat:@"document.getElementById('MasaPembayaran4.3').innerHTML =\"%@\";", @"per tahun"];
         javaScriptP4H84 = [NSString stringWithFormat:@"document.getElementById('MasaPembayaran4.4').innerHTML =\"%@\";", @"per tahun"];
         javaScriptP4H85 = [NSString stringWithFormat:@"document.getElementById('MasaPembayaran4.5').innerHTML =\"%@\";", @"per tahun"];
-        javaScriptP4H9 = [NSString stringWithFormat:@"document.getElementById('RegularAdditionalNote1').innerHTML =\"%@\";", @"- Besarnya diskon premi yang diberikan akan sama setiap pembayaran premi selama 5 tahun masa pembayaran premi."];
+        
+        NSString* stringAdditionalNote = [NSString stringWithFormat:@"- Besarnya diskon premi yang diberikan akan sama setiap pembayaran premi selama %@ tahun masa pembayaran premi.",paymentTerm];
+        javaScriptP4H9 = [NSString stringWithFormat:@"document.getElementById('RegularAdditionalNote1').innerHTML =\"%@\";", stringAdditionalNote];
         javaScriptP4H10 = [NSString stringWithFormat:@"document.getElementById('RegularAdditionalNote2').innerHTML =\"%@\";", @"- Total Premi yang dibayarkan mengacu kepada Total Premi Dibayar Setelah Diskon yang tercantum pada tabel diatas."];
     }
     else if ([[_dictionaryForBasicPlan valueForKey:@"Payment_Frequency"] isEqualToString:@"Bulanan"]){
@@ -790,7 +794,9 @@
         javaScriptP4H83 = [NSString stringWithFormat:@"document.getElementById('MasaPembayaran4.3').innerHTML =\"%@\";", @"per bulan"];
         javaScriptP4H84 = [NSString stringWithFormat:@"document.getElementById('MasaPembayaran4.4').innerHTML =\"%@\";", @"per bulan"];
         javaScriptP4H85 = [NSString stringWithFormat:@"document.getElementById('MasaPembayaran4.5').innerHTML =\"%@\";", @"per bulan"];
-        javaScriptP4H9 = [NSString stringWithFormat:@"document.getElementById('RegularAdditionalNote1').innerHTML =\"%@\";", @"- Besarnya diskon premi yang diberikan akan sama setiap pembayaran premi selama 5 tahun masa pembayaran premi."];
+        
+        NSString* stringAdditionalNote = [NSString stringWithFormat:@"- Besarnya diskon premi yang diberikan akan sama setiap pembayaran premi selama %@ tahun masa pembayaran premi.",paymentTerm];
+        javaScriptP4H9 = [NSString stringWithFormat:@"document.getElementById('RegularAdditionalNote1').innerHTML =\"%@\";", stringAdditionalNote];
         javaScriptP4H10 = [NSString stringWithFormat:@"document.getElementById('RegularAdditionalNote2').innerHTML =\"%@\";", @"- Total Premi yang dibayarkan mengacu kepada Total Premi Dibayar Setelah Diskon yang tercantum pada tabel diatas."];
     }
     else{

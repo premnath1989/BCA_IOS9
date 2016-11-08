@@ -8,7 +8,7 @@
 
 #import "DateViewController.h"
 
-@interface DateViewController ()
+@interface DateViewController ()<UITextFieldDelegate>
 
 @end
 
@@ -34,6 +34,8 @@ id msg, ComDate;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [_outletTextMonth setDelegate:self];
+    [_outletTextDay setDelegate:self];
     if ((msgDate != NULL)&&(![msgDate isEqualToString:@"--Please Select--"])) {
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"dd/MM/yyyy"];
@@ -46,6 +48,35 @@ id msg, ComDate;
 {
 	return YES;
 }
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (textField == _outletTextMonth){
+        NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+        
+        //first, check if the new string is numeric only. If not, return NO;
+        NSCharacterSet *characterSet = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789,."] invertedSet];
+        if ([newString rangeOfCharacterFromSet:characterSet].location != NSNotFound)
+        {
+            return NO;
+        }
+        
+        return [newString doubleValue] < 13;
+    }
+    else if (textField == _outletTextDay){
+        NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+        
+        //first, check if the new string is numeric only. If not, return NO;
+        NSCharacterSet *characterSet = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789,."] invertedSet];
+        if ([newString rangeOfCharacterFromSet:characterSet].location != NSNotFound)
+        {
+            return NO;
+        }
+        
+        return [newString doubleValue] < 32;
+    }
+}
+
 
 -(IBAction)textChanged:(UITextField *)sender{
     @try {
@@ -110,16 +141,14 @@ id msg, ComDate;
         
         
         msgDate = [NSString stringWithFormat:@"%@",pickerDate];
+        
+        [self setTextFieldDates];
     }
 }
 
 - (IBAction)donePressed:(id)sender
 {
     [self calculateAge];
- 
-    
-    
-    
 }
 
 -(void)calculateAge
