@@ -2595,7 +2595,6 @@ bool RegDatehandling;
     
     //dateFormatter = Nil;
     //dateString = Nil;
-    
 }
 
 - (IBAction)btnExpiryDate:(id)sender

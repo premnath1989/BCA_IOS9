@@ -18,6 +18,10 @@
 }
 
 @property (retain, nonatomic) IBOutlet UIDatePicker *datePickerView;
+@property (weak, nonatomic) IBOutlet UITextField *outletTextDay;
+@property (weak, nonatomic) IBOutlet UITextField *outletTextMonth;
+@property (weak, nonatomic) IBOutlet UITextField *outletTextYear;
+
 @property (nonatomic, copy) NSString *msgDate;
 @property (nonatomic, copy) NSString *msgAge;
 @property (nonatomic, copy) NSString *msgAgeYear;

@@ -3742,41 +3742,41 @@ function alertSaveRecentInput()
 function goToChangePageAlert(stringLinkJavaScriptID, URLPage, stringRelationshipStatus)
 {
 	var stringLinkJQueryID = stringKres + stringLinkJavaScriptID;
-	//alert("initiate : " + stringLinkJQueryID + ", " + stringLinkJavaScriptID + ", " + URLPage + ", " + stringRelationshipStatus);
+	alert("initiate : " + stringLinkJQueryID + ", " + stringLinkJavaScriptID + ", " + URLPage + ", " + stringRelationshipStatus);
 	
 	if (booleanInputChangeState == "true")
 	{
-		//alert("alert - input change state true");
+		alert("alert - input change state true");
 
 		if (stringRelationshipStatus == "self")
 		{
-			//alert("relationship status : " + "self");
+			alert("relationship status : " + "self");
 		}
 		else
 		{
-			//alert("relationship status : " + "not self");
+			alert("relationship status : " + "not self");
 			alertSaveRecentInput();
 		}
 	}
 	else
 	{
-		//alert("alert - input change state false");
+		alert("alert - input change state false");
 		if (stringLinkJavaScriptID == "LinkProspectiveInsured")
 		{
-			//alert("link : linkProspectiveInsured - " + stringLinkJavaScriptID);
+			alert("link : linkProspectiveInsured - " + stringLinkJavaScriptID);
 			if (stringRelationshipStatus == "self")
 			{
-				//alert("relationship status : " + "self");
+				alert("relationship status : " + "self");
 			}
 			else
 			{
-				//alert("relationship status : " + "not self");
+				alert("relationship status : " + "not self");
 				window.location.replace(URLPage);
 			}
 		}
 		else
 		{
-			//alert("link : linkPolicyHolder - " + stringLinkJavaScriptID);
+			alert("link : linkPolicyHolder - " + stringLinkJavaScriptID);
 			window.location.replace(URLPage);
 		}
 	}

@@ -1448,7 +1448,7 @@ id dobtanngal;
     CGRect rect = [sender frame];
     rect.origin.y = [sender frame].origin.y + 40;
     
-    [self.dobPopover presentPopoverFromRect:[sender frame]  inView:scrollLA permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+    [self.dobPopover presentPopoverFromRect:[sender frame]  inView:scrollLA permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     appDelegate.isNeedPromptSaveMsg = YES;
 }
 

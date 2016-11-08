@@ -90,18 +90,21 @@
 
 #pragma mark call save function in HTML
 - (void)voidDoneAreaPotential{
-    [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"document.getElementById('save').click()"]];
+    //[webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"document.getElementById('save').click()"]];
+    [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"savetoDB();"]];
     
 }
 
 - (void)voidReadAreaPotential{
-    [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"document.getElementById('read').click()"]];
+    //[webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"document.getElementById('read').click()"]];
+    [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"readfromDB();"]];
 }
 
 - (void)voidSetPriorityData{
     NSLog(@"dob %@",[formatter convertDateFrom:@"dd/MM/yyyy" TargetDateFormat:@"yyyy-MM-dd" DateValue:[cffHeaderSelectedDictionary valueForKey:@"ProspectDOB"]]);
     NSString* prospectDOB  = [formatter convertDateFrom:@"dd/MM/yyyy" TargetDateFormat:@"yyyy-MM-dd" DateValue:[cffHeaderSelectedDictionary valueForKey:@"ProspectDOB"]];
-    [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"calculatePriority('%@')", prospectDOB]];
+    [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"calculatePriority('%@');", prospectDOB]];
+    
 }
 
 

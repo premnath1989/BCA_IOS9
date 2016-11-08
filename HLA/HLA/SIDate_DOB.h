@@ -27,6 +27,9 @@
 @property (nonatomic, strong) id<SIDateDelegate_DOB> delegate;
 - (IBAction)ActionDate:(id)sender;
 @property (weak, nonatomic) IBOutlet UIDatePicker *outletDate;
+@property (weak, nonatomic) IBOutlet UITextField *outletTextDay;
+@property (weak, nonatomic) IBOutlet UITextField *outletTextMonth;
+@property (weak, nonatomic) IBOutlet UITextField *outletTextYear;
 - (IBAction)btnClose:(id)sender;
 - (IBAction)btnDone:(id)sender;
 - (IBAction)doClear:(id)sender;

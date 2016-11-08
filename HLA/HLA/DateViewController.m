@@ -26,6 +26,8 @@ id msg, ComDate;
         //[dateFormatter setDateFormat:@"yyyy-MM-dd"];
         NSDate *zzz = [dateFormatter dateFromString:msgDate];
         [_datePickerView setDate:zzz animated:YES ];
+        
+        [self setTextFieldDates];
     }
 }
 
@@ -43,6 +45,59 @@ id msg, ComDate;
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
 	return YES;
+}
+
+-(IBAction)textChanged:(UITextField *)sender{
+    @try {
+        if (sender == _outletTextYear){
+            if ([sender.text length]==4){
+                NSString* date = [NSString stringWithFormat:@"%@/%@/%@",_outletTextDay.text,_outletTextMonth.text,_outletTextYear.text];
+                
+                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+                NSDate *zzz = [dateFormatter dateFromString:date];
+                [_datePickerView setDate:zzz animated:YES ];
+                
+                NSString *pickerDate = [dateFormatter stringFromDate:[_datePickerView date]];
+                msg = [NSString stringWithFormat:@"%@",pickerDate];
+                [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+                //DBDate = [dateFormatter stringFromDate:[_outletDate date]];
+            }
+        }
+        else{
+            if ([sender.text length]>0){
+                NSString* date = [NSString stringWithFormat:@"%@/%@/%@",_outletTextDay.text,_outletTextMonth.text,_outletTextYear.text];
+                
+                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+                NSDate *zzz = [dateFormatter dateFromString:date];
+                [_datePickerView setDate:zzz animated:YES ];
+                
+                NSString *pickerDate = [dateFormatter stringFromDate:[_datePickerView date]];
+                msg = [NSString stringWithFormat:@"%@",pickerDate];
+                [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+                //DBDate = [dateFormatter stringFromDate:[_outletDate date]];
+            }
+        }
+        
+    } @catch (NSException *exception) {
+        
+    } @finally {
+        
+    }
+}
+
+-(void)setTextFieldDates{
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    NSDateComponents* components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:[_datePickerView date]]; // Get necessary date components
+    
+    NSInteger day = [components day];
+    NSInteger month = [components month];
+    NSInteger year = [components year];
+    
+    [_outletTextDay setText:[NSString stringWithFormat:@"%ld",(long)day]];
+    [_outletTextMonth setText:[NSString stringWithFormat:@"%ld",(long)month]];
+    [_outletTextYear setText:[NSString stringWithFormat:@"%ld",(long)year]];
 }
 
 #pragma mark - action

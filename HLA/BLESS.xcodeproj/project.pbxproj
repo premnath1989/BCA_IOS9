@@ -499,6 +499,7 @@
 		43DA4BE61C770B3C0038C92C /* icon_leads_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 43DA4BE51C770B3C0038C92C /* icon_leads_2.png */; };
 		43E171861CCB5411008B2235 /* Signature Filled.png in Resources */ = {isa = PBXBuildFile; fileRef = 43E171841CCB5411008B2235 /* Signature Filled.png */; };
 		43E171871CCB5411008B2235 /* Signature Filled@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43E171851CCB5411008B2235 /* Signature Filled@2x.png */; };
+		43E3859F1DCB100500B790FC /* ModelEproposalRelation.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E3859E1DCB100500B790FC /* ModelEproposalRelation.m */; };
 		43EFEB731C93915A00B9AA2A /* LogoBCALife.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 43EFEB721C93915A00B9AA2A /* LogoBCALife.jpg */; };
 		43F7C3191C9D40B70074F464 /* Formatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F7C3171C9D40B70074F464 /* Formatter.m */; };
 		43F8B5511C81E71B006F3F6C /* SIListingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43F8B54E1C81E71A006F3F6C /* SIListingTableViewCell.xib */; };
@@ -1817,6 +1818,8 @@
 		43DA4BE51C770B3C0038C92C /* icon_leads_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_leads_2.png; sourceTree = "<group>"; };
 		43E171841CCB5411008B2235 /* Signature Filled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Signature Filled.png"; sourceTree = "<group>"; };
 		43E171851CCB5411008B2235 /* Signature Filled@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Signature Filled@2x.png"; sourceTree = "<group>"; };
+		43E3859D1DCB100500B790FC /* ModelEproposalRelation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelEproposalRelation.h; sourceTree = "<group>"; };
+		43E3859E1DCB100500B790FC /* ModelEproposalRelation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelEproposalRelation.m; sourceTree = "<group>"; };
 		43EFEB721C93915A00B9AA2A /* LogoBCALife.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = LogoBCALife.jpg; path = SI/LogoBCALife.jpg; sourceTree = "<group>"; };
 		43F7C3171C9D40B70074F464 /* Formatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Formatter.m; sourceTree = "<group>"; };
 		43F7C3181C9D40B70074F464 /* Formatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Formatter.h; sourceTree = "<group>"; };
@@ -4424,6 +4427,8 @@
 				438410C51D66E9AA00FD4152 /* ModelOccupation.m */,
 				4380F9DD1DC8338600717FB4 /* SPAJSubmissionModel.h */,
 				4380F9DE1DC8338600717FB4 /* SPAJSubmissionModel.m */,
+				43E3859D1DCB100500B790FC /* ModelEproposalRelation.h */,
+				43E3859E1DCB100500B790FC /* ModelEproposalRelation.m */,
 			);
 			name = "HLADB Model";
 			sourceTree = "<group>";
@@ -7043,6 +7048,7 @@
 				42B8B1471917339500E09A34 /* PRPage6.m in Sources */,
 				42B8B1481917339500E09A34 /* PRPage7.m in Sources */,
 				43100C751CE1C00B006ECC7F /* HeritageCalculation.m in Sources */,
+				43E3859F1DCB100500B790FC /* ModelEproposalRelation.m in Sources */,
 				42B8B1491917339500E09A34 /* PRPage8.m in Sources */,
 				0F32685A1D1A93A4001A9021 /* Validation.m in Sources */,
 				42B8B14A1917339500E09A34 /* PRPage9.m in Sources */,

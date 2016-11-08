@@ -18,6 +18,7 @@
 {
     NSError *error;
     NSString *textParsed = [self parseXML:dictInfo text:@""];
+    textParsed = [NSString stringWithFormat:@"<?xml version=\"1.0\" encoding=\"UTF-8\"?>%@", textParsed];
     [textParsed writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:&error];
 }
 

@@ -166,6 +166,28 @@
     return stringValue;
 }
 
+-(NSMutableArray *)getSPAJAnswerElementValueForSubmission:(int)spajTransactionID Section:(NSString *)stringSection{
+    NSMutableArray* spajValueArray = [[NSMutableArray alloc]init];
+    
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select elementID,Value from SPAJAnswers where SPAJHtmlSection ='%@' and SPAJTransactionID = %i",stringSection,spajTransactionID]];
+    while ([s next]) {
+        NSMutableDictionary* tempRevertRadioButtonDict = [[NSMutableDictionary alloc]init];
+        [tempRevertRadioButtonDict setObject:[s stringForColumn:@"elementID"] forKey:@"elementID"];
+        [tempRevertRadioButtonDict setObject:[s stringForColumn:@"Value"] forKey:@"Value"];
+        [spajValueArray addObject:tempRevertRadioButtonDict];
+    }
+    
+    [results close];
+    [database close];
+    return spajValueArray;
+}
+
 
 #pragma mark FileName
 -(NSArray *)getFileNamesFor:(NSString *)stringFileNameFilter DictTransaction:(NSDictionary *)dictTransaction{
@@ -287,6 +309,145 @@
     
     return stringType;
 }
+
+
+#pragma mark assured Info 
+-(NSString *)GetSexCode:(NSString *)stringSex{
+    if ([stringSex isEqualToString:@"male"]){
+        return @"0";
+    }
+    else if ([stringSex isEqualToString:@"male"]){
+        return @"1";
+    }
+    return @"";
+}
+
+-(NSString *)GetIDTypeCode:(NSString *)stringIDType{
+    if ([stringIDType isEqualToString:@"KTP"]){
+        return @"1";
+    }
+    else if ([stringIDType isEqualToString:@"SIM"]){
+        return @"2";
+    }
+    else if ([stringIDType isEqualToString:@"PASPOR"]){
+        return @"3";
+    }
+    else if ([stringIDType isEqualToString:@"KIMSKITAS"]){
+        return @"4";
+    }
+    else if ([stringIDType isEqualToString:@"OTHER"]){
+        return @"5";
+    }
+    return @"";
+}
+
+-(NSString *)GetMaritalStatusCode:(NSString *)stringMaritalStatus{
+    if ([stringMaritalStatus isEqualToString:@"single"]){
+        return @"1";
+    }
+    else if ([stringMaritalStatus isEqualToString:@"married"]){
+        return @"2";
+    }
+    else if ([stringMaritalStatus isEqualToString:@"divorced"]){
+        return @"3";
+    }
+    return @"";
+}
+
+-(NSString *)GetReligionCode:(NSString *)stringReligion{
+    if ([stringReligion isEqualToString:@"islam"]){
+        return @"1";
+    }
+    else if ([stringReligion isEqualToString:@"katolik"]){
+        return @"2";
+    }
+    else if ([stringReligion isEqualToString:@"kristen"]){
+        return @"3";
+    }
+    else if ([stringReligion isEqualToString:@"hindu"]){
+        return @"4";
+    }
+    else if ([stringReligion isEqualToString:@"budha"]){
+        return @"5";
+    }
+    else if ([stringReligion isEqualToString:@"konghuchu"]){
+        return @"6";
+    }
+    return @"";
+}
+
+-(NSString *)GetCorrespondenceAddressCode:(NSString *)stringCorrespondenceAddress{
+    if ([stringCorrespondenceAddress isEqualToString:@"home"]){
+        return @"0";
+    }
+    else if ([stringCorrespondenceAddress isEqualToString:@"office"]){
+        return @"1";
+    }
+    return @"";
+}
+
+-(NSString *)getStringFromString:(NSString *)stringFileName StringSeparator:(NSString *)stringSeparator AtIndex:(int)indexReturn{
+    NSString *stringName;
+    NSArray *chunks = [stringFileName componentsSeparatedByString: stringSeparator];
+    
+    NSString* realString;
+    if ([chunks count]>0){
+        realString = [chunks lastObject];
+        NSArray *chunks1 = [realString componentsSeparatedByString: @"."];
+        stringName = [chunks1 objectAtIndex:indexReturn];
+    }
+    
+    
+    return stringName;
+}
+
+-(NSString *)getPartTimeConfirmation:(NSString *)stringPartTimeWork{
+    if ([stringPartTimeWork length]>0){
+        return @"Y";
+    }
+    else{
+        return @"N";
+    }
+    
+    return @"";
+}
+
+-(NSString *)getAnswerValue:(NSString *)stringAnswerValue{
+    if ([stringAnswerValue isEqualToString:@"true"]){
+        return @"Y";
+    }
+    else if ([stringAnswerValue isEqualToString:@"false"]){
+        return @"N";
+    }
+    return stringAnswerValue;
+}
+
+-(NSString *)getAnswerType:(NSString *)stringElementID{
+    if ([stringElementID rangeOfString:@"RadioButton"].location == NSNotFound){
+        return @"TXT";
+    }
+    else if ([stringElementID isEqualToString:@"false"]){
+        return @"OPT";
+    }
+    return @"";
+}
+
+-(NSString *)stringFromArray:(NSMutableArray *)OriginalArray StringFilter:(NSString *)stringFilter{
+    NSMutableArray *cars = [[NSMutableArray alloc]initWithArray:OriginalArray];
+    
+    NSString *stringToSearch = stringFilter;
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF contains[c] %@",stringToSearch]; // if you need case sensitive search avoid '[c]' in the predicate
+    
+    NSArray *resultsArray = [cars filteredArrayUsingPredicate:predicate];
+    if ([resultsArray count]>0){
+        return [[resultsArray objectAtIndex:0] valueForKey:@"Value"];
+    }
+    else{
+        return @"";
+    }
+}
+
 
 
 

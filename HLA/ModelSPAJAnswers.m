@@ -149,5 +149,4 @@
     return spajValueArray;
 }
 
-
 @end

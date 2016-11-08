@@ -26,4 +26,16 @@
 -(NSString *)getFormNameFromFileName:(NSString *)stringFileName;
 -(NSString *)getPersonType:(NSString *)stringFileName AtIndex:(int)indexString;
 -(NSString *)getIDType:(NSString *)stringFileName AtIndex:(int)indexString;
+
+-(NSString *)GetSexCode:(NSString *)stringSex;
+-(NSString *)GetIDTypeCode:(NSString *)stringIDType;
+-(NSString *)GetMaritalStatusCode:(NSString *)stringMaritalStatus;
+-(NSString *)GetReligionCode:(NSString *)stringReligion;
+-(NSString *)GetCorrespondenceAddressCode:(NSString *)stringCorrespondenceAddress;
+-(NSString *)getStringFromString:(NSString *)stringFileName StringSeparator:(NSString *)stringSeparator AtIndex:(int)indexReturn;
+-(NSString *)getPartTimeConfirmation:(NSString *)stringPartTimeWork;
+-(NSMutableArray *)getSPAJAnswerElementValueForSubmission:(int)spajTransactionID Section:(NSString *)stringSection;
+-(NSString *)getAnswerValue:(NSString *)stringAnswerValue;
+-(NSString *)getAnswerType:(NSString *)stringElementID;
+-(NSString *)stringFromArray:(NSMutableArray *)OriginalArray StringFilter:(NSString *)stringFilter;
 @end

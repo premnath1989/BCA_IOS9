@@ -20,4 +20,5 @@
 -(int)getCountElementID:(NSString *)stringElementName SPAJTransactionID:(int)spajTransactionID Section:(NSString *)stringSection;
 -(NSMutableArray *)getSPAJAnswerValue:(NSString *)stringElementName SPAJTransactionID:(int)spajTransactionID Section:(NSString *)stringSection;
 -(NSMutableArray *)getSPAJAnswerElementValue:(NSString *)stringElementName SPAJTransactionID:(int)spajTransactionID Section:(NSString *)stringSection;
+-(NSMutableArray *)getSPAJAnswerElementValueForSubmission:(NSString *)stringElementName SPAJTransactionID:(int)spajTransactionID Section:(NSString *)stringSection;
 @end
