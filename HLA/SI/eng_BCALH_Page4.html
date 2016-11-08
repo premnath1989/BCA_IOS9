@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--<link href="SI/css/style.css" rel="stylesheet" type="text/css" />-->
+        <script type="text/javascript" charset="utf-8" src="SI/js/jquery-1.8.2.min.js"></script>
+        <script type="text/javascript" charset="utf-8" src="SI/js/hla.js"></script>
+        <style>
+            thead,table-Summary1 {
+                border: 1px solid black;
+            }
+            thead,table-Summary2 {
+                border: 1px solid black;
+            }
+            #maincontainer
+            {
+                top:0px;
+                padding-top:0;
+                margin:auto;
+                width:100%;
+                height:480px;
+            }
+			td {
+				border-style: solid;
+				border-color: black;
+				border-width: 0px;
+				padding: 0px 0px 0px 0px;
+				text-align: justify;
+				font-size:10px;
+				font-family: "Helvetica";
+				font-weight:normal
+			}
+			td.paymentterm{
+			
+			}
+			p {
+				font-size:10px;
+				padding: 0px 0px 0px 0px;
+			}
+			z {
+				font-size:10px;
+				padding: 0px 0px 0px 0px;
+				font-family: "Helvetica";
+				font-weight:bold
+			}
+			header1 {
+				font-size:18px;
+				padding: 0px 0px 0px 0px;
+			}
+            footer1 {
+                width:100%;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+            }
+			tr.rowStyle {
+				border-style: solid;
+				border-color: black;
+				border-width: 1px;
+				font-size:10px;
+	
+			}
+			
+			.test
+			{
+				/*border: solid 1px #000000;*/
+				border-left: 0px;
+                border-right: solid 1px #000000;
+                border-bottom: solid 1px #000000;
+                border-top: solid 1px #000000;
+			}
+			
+			.test:empty
+			{
+				/*border: none;*/
+                border-left: solid 1px #000000;
+                border-right: 0px;
+                border-bottom:0px;
+                border-top: 0px;
+			}
+        </style>
+        <script>
+        </script>
+        <head>
+            <body onload="onBodyLoad()">
+                <div id="gstPage">&nbsp</div>
+                <div id="header">
+                    
+                    <table border="0" style="border-collapse:separate;border:0px solid black;width:100%;">
+                        <tr>
+                            <td style="width: 25%"><img src="BCAHTMLlogo.png" height="55px"/></td>
+                            <td style="width: 45%" valign="top">
+                                <table  style="border-collapse:separate;border:1px solid black;width:100%;font-size:10px;text-align: center">
+                                    <tr>
+                                        <td style="font-size:10px;font-family: Helvetica; text-align: center">
+                                            Kecuali dinyatakan lain, ilustrasi ini bukan merupakan kontrak asuransi
+                                        </td>
+                                    </tr>
+                                    
+                                </table>
+                            </td>
+                            <td style="width: 30%; font-size:13px;font-family:Helvetica; text-align: right" valign="top" style="margin:0" >
+                                <header1>BCA Life Heritage Protection</header1></br>
+                                <font color="red">Nomor Ilustrasi : </font><font color="red"><label id="SINumber4"></label></font>
+                                    </td>
+                        </tr>
+                    </table>    
+                </div>
+                <div id="maincontainer">
+					<div class="main-content">
+                    <!--520,430px-->
+    	                <div style="width:100%;background-color: #fff;vertical-align: top;">
+	                    <!--Information Data-->
+	                    	<z>Perhitungan Premi BCA Life Heritage Protection</z>
+	                    	<br/>
+	                    	<z>Hanya Untuk Karyawan Grup BCA</z>
+	                    	<br/>
+	                    	<br/>
+	                        <table id="table-Summary2" width="75%" cellspacing="0" cellpadding="0" >
+	                        	<tr>
+		                        	<td style="width :1%">
+		                        	&nbsp
+									</td>
+									<td >
+										Uang Pertanggungan
+									</td>
+									<td style="width :2%;padding-left:5px;">
+		                        	Rp
+									</td>
+									<td style="width:37%;text-align:right;padding-right:5px">
+										<label id="SumAssured4">1</label>
+									</td>
+									<td style="width:8%">&nbsp</td>
+		                        </tr>
+		                        <tr>
+			                        <td>
+			                        &nbsp
+									</td>
+									<td>
+										Frekuensi Pembayaran Premi
+									</td>
+									<td style="padding-left:5px;">
+		                        	
+									</td>
+									<td style="text-align:right;padding-right:5px">
+										<label id="FrekuensiPembayaran4">1</label>
+									</td>
+									<td>
+									</td>                        	
+		                        </tr>
+		                        <tr>
+			                        <td>
+			                        &nbsp
+									</td>
+									<td>
+									</td>
+									<td>
+		    						</td>
+									<td>
+									</td>
+									<td>
+									</td>                        	
+		                        </tr>
+		                        
+		                        <tr style="border: 1px solid black">
+			                        <td>
+			                        &nbsp
+									</td>
+                                    <td style="border: 1px solid black;padding-left:5px">
+										Premi Standard
+									</td>
+									<td style="border-top:1px solid black;border-left:1px solid black;border-bottom:1px solid black;text-align:left;padding-left:5px;">
+		                        	Rp
+									</td>
+									<td style="border: 1px solid black;border-left:0px;border-right:0px;text-align:right;padding-right:5px;">
+										<label id="BasicPremi4">1</label>
+									</td>
+									<td style="text-align: left" id="MasaPembayaran4.1" class="test"></td>                        			                        </tr>
+		                        <tr>
+			                        <td>
+			                        &nbsp
+									</td>
+									<td style="border: 1px solid black;padding-left:5px">
+										Diskon Premi
+									</td>
+									<td style="border-top:1px solid black;border-left:1px solid black;border-bottom:1px solid black;text-align:left;padding-left:5px;">
+		                        	Rp
+									</td>
+									<td style="border: 1px solid black;border-left:0px;border-right:0px;text-align:right;padding-right:5px;">
+										<label id="Diskon4">1</label>
+									</td>
+									<td style="text-align: left" id="MasaPembayaran4.2" class="test"></td>
+		                        </tr>
+		                        <tr>
+			                        <td>
+			                        &nbsp
+									</td>
+									<td style="border: 1px solid black;padding-left:5px">
+										Premi Setelah Diskon
+									</td>
+									<td style="border-top:1px solid black;border-left:1px solid black;border-bottom:1px solid black;text-align:left;padding-left:5px;">
+		                        	Rp
+									</td>
+									<td style="border: 1px solid black;border-left:0px;border-right:0px;text-align:right;padding-right:5px;">
+										<label id="PremiAfterDiskon4">1</label>
+									</td>
+									<td style="text-align: left" id="MasaPembayaran4.3" class="test"></td>
+		                        </tr>
+		                        <tr>
+			                        <td>
+			                        &nbsp
+									</td>
+									<td style="border: 1px solid black;padding-left:5px">
+										Extra Premi
+									</td>
+									<td style="border-top:1px solid black;border-left:1px solid black;border-bottom:1px solid black;text-align:left;padding-left:5px;">
+		                        	Rp
+									</td>
+									<td style="border: 1px solid black;border-left:0px;border-right:0px;text-align:right;padding-right:5px;">
+										<label id="ExtraPremi4">1</label>
+									</td>
+									<td style="text-align: left" id="MasaPembayaran4.4" class="test"></td>
+                                </tr>
+		                        <tr>
+			                        <td>
+			                        &nbsp
+									</td>
+									<td style="border: 1px solid black;padding-left:5px;font-weight:bold">
+										Total Premi Dibayar Setelah Diskon
+									</td>
+									<td style="border-top:1px solid black;border-left:1px solid black;border-bottom:1px solid black;text-align:left;padding-left:5px;">
+		                        	Rp
+									</td>
+									<td style="border: 1px solid black;border-left:0px;border-right:0px;text-align:right;padding-right:5px;font-weight:bold">
+										<label id="TotalPremi4">1</label>
+									</td>
+									<td style="text-align:left;font-weight:bold" id="MasaPembayaran4.5" class="test"></td>
+		                        </tr>
+
+								<tr>
+			                        <td style=" border: 0px solid black">
+				                        &nbsp
+									</td>
+									<td style=" border: 0px solid black">
+										&nbsp
+									</td>
+									<td style=" border: 0px solid black">
+										&nbsp
+									</td>
+									<td style="border: 0px solid black">
+										&nbsp
+									</td>
+									<td style="border: 0px solid black">
+										&nbsp
+									</td>                        	
+		                        </tr>
+
+		                        <tr>
+			                        <td>
+				                        &nbsp
+									</td>
+									<td colspan="4" style="border: 0px solid black">
+										Catatan
+									</td>
+		                        </tr>
+		                        <tr>
+			                        <td>
+				                        &nbsp
+									</td>
+									<td colspan="4" style=" border: 0px solid black">
+										- Diskon premi langsung diberikan sebagai pemotong premi yang dibayarkan oleh Pemegang Polis
+									</td>
+		                        </tr>
+		                        <tr>
+			                        <td>
+				                        &nbsp
+									</td>
+									<td colspan="4" style="border: 0px solid black">
+										<label id="RegularAdditionalNote1">- Total Premi yang dibayarkan mengacu kepada Total Premi Dibayar Setelah Diskon yang tercantum pada tabel diatas.</label>
+									</td>
+		                        </tr>
+		                        <tr>
+			                        <td>
+				                        &nbsp
+									</td>
+									<td colspan="4" style="border: 0px solid black">
+										<label id="RegularAdditionalNote2">- Besarnya diskon premi yang diberikan akan sama setiap pembayaran premi selama 5 tahun masa pembayaran premi.</label>
+									</td>
+		                        </tr>
+	                        </table>
+        	            </div>
+	                </div>
+                </div>
+                <footer>
+                    <!--Tanda tangan-->
+                    <div style="width:100%;background-color: #fff;vertical-align: top;">
+                        <table border="0" style="border-collapse:separate;border:0px solid black;width:100%;">
+                            <td style="width: 30%">
+                                <table  style="border-collapse:separate;border:0px solid black;width:100%;">
+                                    <tr>
+                                        <td>Disiapkan oleh</td><td>:</td><td style="width: 60%">&nbsp;<label id="FooterAgentName4"></label></td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td>Tanggal dan jam cetak</td><td>:</td><td>&nbsp;<label id="FooterPrintDate4"></label></td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td>Versi</td><td>:</td><td>&nbsp;<label id="FooterVersion4">1.0.000</label></td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td>Kode Tenaga Penjual</td><td>:</td><td>&nbsp;<label id="FooterAgentCode4"></label></td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td>Cabang</td><td>:</td><td>&nbsp;<label id="FooterBranch4"></label></td>
+                                    </tr>
+                                    
+                                    <tr>
+									<td colspan="3"><br/></td>
+								</tr>
+								<tr>
+									<td colspan="3"><br/></td>
+								</tr>
+
+								<!--<tr>
+									<td colspan="3">Saya Telah menjelaskan isi ilustrasi ini kepada Calon Pemegang Polis</td>
+								</tr>
+								
+								<tr>
+									<td>Tanda Tangan Tenaga Penjual</td><td>:</td><td></td>
+								</tr>-->
+                                </table>
+                            </td>
+                            <td style="width: 70%">
+							<table  style="border-collapse:separate;border:1px solid black;width:100%;border-spacing:0;">
+								<tr>
+									<td style="border-right: 1px solid black"><br/></td>
+									<td><br/></td>
+								</tr>
+
+								<tr >
+									<td style="text-align:center; width: 35%; border-right: 1px solid black">Saya telah menjelaskan isi ilustrasi ini kepada Calon Pemegang Polis.</td>
+									<td style="text-align:center; width: 35%">Saya telah memahami dan menyetujui penjelasan yang diberikan atas ilustrasi manfaat asuransi yang diuraikan pada halaman ini.</td>
+								</tr>
+								<tr>
+                                    <td style="border-right: 1px solid black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+								</tr>
+								<tr>
+									<td style="text-align:center;border-right: 1px solid black">Tanda Tangan Tenaga Penjual :</td>
+									<td style="text-align:center">Tanda Tangan Pemegang Polis :</td>
+								</tr>
+								<tr>
+									<td style="border-right: 1px solid black"><br/></td>
+									<td><br/></td>
+								</tr>
+								<tr>
+									<td style="border-right: 1px solid black"><br/></td>
+									<td><br/></td>
+								</tr>
+								<tr>
+									<td style="border-right: 1px solid black"><br/></td>
+									<td><br/></td>
+								</tr>
+								<tr>
+									<td style="border-right: 1px solid black"><br/></td>
+									<td><br/></td>
+								</tr>
+								<tr>
+									<td style="border-right: 1px solid black"><br/></td>
+									<td><br/></td>
+								</tr>
+
+							</table>
+						</td>
+                            
+                        </table>
+                    </div>
+                    <!--halaman-->
+                    <div style="width:100%;height:20px;background-color: #fff;vertical-align: top;">
+                        <table border="0" style="border-collapse:separate;border:0px solid black;width:100%;;font-family:Helvetica;font-size:10px;text-align: right">
+                            <tr style="text-align: right">
+                                <!--<td style="text-align: right">Halaman 4 dari 4</td>-->
+                            </tr>
+                            <tr style="text-align: right">
+                                <td style="text-align: right">www.bcalife.co.id</td>
+                            </tr>
+                        </table>
+                    </div>
+                </footer>
+            </body>
+            
+</html>

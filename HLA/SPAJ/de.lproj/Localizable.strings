@@ -1,0 +1,62 @@
+/* 
+  Localizable.strings
+  Bless SPAJ
+
+  Created by Ibrahim on 21/06/2016.
+  Copyright © 2016 Ibrahim. All rights reserved.
+*/
+
+
+// FIELD
+
+FIELD_NAME = "Name";
+FIELD_SPAJNUMBER = "SPAJ number";
+FIELD_SOCIALNUMBER = "Social number";
+
+
+// TITLE
+
+TITLE_SPAJEXISTINGLIST = "SPAJ Existing List";
+TITLE_SPAJSUBMITTEDLIST = "SPAJ Submitted List";
+TITLE_EAPPLICATIONGUIDE = "eApplication Checklist";
+
+
+// GUIDE
+
+GUIDE_SPAJMENU_STEP1 = "1";
+GUIDE_SPAJMENU_STEP2 = "2";
+GUIDE_SPAJMENU_STEP3 = "3";
+GUIDE_SPAJMENU_STEP4 = "4";
+GUIDE_SPAJMENU_STEP5 = "5";
+GUIDE_SPAJMENU_STEP6 = "6";
+
+GUIDE_SPAJMENU_HEADER1 = "Select Sales Illustration";
+GUIDE_SPAJMENU_HEADER2 = "Select Customer Fact Find";
+GUIDE_SPAJMENU_HEADER3 = "To Complete SPAJ Details";
+GUIDE_SPAJMENU_HEADER4 = "Forms Generation And Verification";
+GUIDE_SPAJMENU_HEADER5 = "To Capture Proof of Identification";
+GUIDE_SPAJMENU_HEADER6 = "To Obtain eSignature from Respective Parties";
+
+GUIDE_SPAJMENU_DETAIL1 = "Nomor SI : 123456789012345-12345    Tertanggung Polis : Andy Phan Chee Seng    Produk : Heritage";
+GUIDE_SPAJMENU_DETAIL2 = "Pemegang Polis : ";
+
+GUIDE_SPAJDETAILS_HEADER1 = "Policy Holder";
+GUIDE_SPAJDETAILS_HEADER2 = "Payor Holder";
+GUIDE_SPAJDETAILS_HEADER3 = "Legal";
+GUIDE_SPAJDETAILS_HEADER4 = "Benefit Holder";
+GUIDE_SPAJDETAILS_HEADER5 = "Payment";
+GUIDE_SPAJDETAILS_HEADER6 = "Health";
+
+
+// NOTE
+
+NOTE_SPAJHEADER = "Attention";
+NOTE_SPAJDETAIL = "Online submission is available within weekday, between 07:00 - 19:00 WIB\nAny order receiver by New Business BCA Life after 14:00 will be process on the next day\nTwo case max per submission";
+
+
+// BUTTON
+
+BUTTON_SEARCH = "Search";
+BUTTON_RESET = "Reset";
+BUTTON_DELETE = "Delete";
+BUTTON_ADD = "Add";

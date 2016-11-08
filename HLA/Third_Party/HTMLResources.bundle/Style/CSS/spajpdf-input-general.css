@@ -1,0 +1,154 @@
+/* @charset "utf-8"; */
+/* CSS Document */
+/* @charset "utf-8"; */
+/* CSS Document */
+/* @charset "utf-8"; */
+/* CSS Document */
+/* FUNCTION */
+/* ANIMATION */
+/* HEADER */
+/* FORM */
+/* INPUT */
+/* NOTE */
+/* SIGNATURE */
+/* FOOTER */
+/* TABLE */
+/* LINK */
+/* GENERAL */
+/* ICON */
+/* LAYOUT */
+/* FORM INITIALIZATION */
+/* LABEL */
+/* BOX */
+/* TABLE INITIALIZATION */
+/* TABLE */
+/* INPUT INITIALIZATION */
+/* LINK */
+/* RESOURCE */
+/* TYPEFACE */
+/* INPUT TYPE TEXT */
+input, textarea {
+  padding-top: 2px;
+  padding-top-padding-right: 5px;
+  padding-top-padding-right: 5px;
+  padding-top-padding-bottom: 2px;
+  vertical-align: middle;
+  border-style: solid;
+  border-width: 1px;
+}
+
+input {
+  text-transform: uppercase;
+}
+
+input.Tiny, textarea.Tiny {
+  min-width: 20px !important;
+  width: 20px !important;
+}
+
+input.Short, textarea.Short {
+  min-width: 40px !important;
+  width: 40px !important;
+}
+
+input.Medium, textarea.Medium {
+  min-width: 84px;
+  width: 84px;
+}
+
+input.Long, textarea.Long {
+  min-width: 120px;
+  width: 120px;
+}
+
+input.Full, textarea.Full {
+  width: 100%;
+}
+
+input.TinyFix, textarea.TinyFix {
+  max-width: 20px !important;
+}
+
+input.ShortFix, textarea.ShortFix {
+  max-width: 40px !important;
+}
+
+input.MediumFix, textarea.MediumFix {
+  max-width: 84px;
+}
+
+input.LongFix, textarea.LongFix {
+  max-width: 120px;
+}
+
+input.FullFix, textarea.FullFix {
+  max-width: 100%;
+}
+
+input.Single, textarea.Single {
+  height: 20px;
+}
+
+input.Multi, textarea.Multi {
+  height: 60px;
+}
+
+input:required, textarea:required {
+  background-image: url("../../Resource/Input/input_text_required.svg");
+  background-size: 3em 2em;
+  background-position: right top;
+  background-repeat: no-repeat;
+}
+
+input:disabled, textarea:disabled {
+  background-image: none;
+}
+
+textarea.Round {
+  border-radius: 6px;
+  -ms-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+}
+
+/* RADIO BUTTON */
+input[type="radio"] {
+  display: none;
+}
+
+input[type="radio"]:checked + .BoxRound {
+  background-image: url("../../Resource/Input/input_checkbox_checked.svg");
+}
+
+input[type="radio"].Plain {
+  display: none;
+}
+
+input[type="radio"].Plain + label {
+  text-align: center;
+  border-radius: 6px;
+  -ms-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+}
+
+/* CHECKBOX */
+input[type="checkbox"] {
+  display: none;
+}
+
+input[type="checkbox"]:checked + .BoxRound {
+  background-image: url("../../Resource/Input/input_checkbox_checked.svg");
+}
+
+input[type="checkbox"].Plain {
+  display: none;
+}
+
+input[type="checkbox"].Plain + label {
+  text-align: center;
+  border-radius: 6px;
+  -ms-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+}

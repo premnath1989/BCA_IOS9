@@ -1,0 +1,220 @@
+/* @charset "utf-8"; */
+/* CSS Document */
+/* THEME */
+/* INPUT BACKGROUND */
+/* INPUT BORDER */
+/* INPUT FONT */
+/* BUTTON FONT */
+/* BUTTON BACKGROUND */
+/* BUTTON BORDER */
+/* @charset "utf-8"; */
+/* CSS Document */
+/* @charset "utf-8"; */
+/* CSS Document */
+/* FUNCTION */
+/* ANIMATION */
+/* HEADER */
+/* FORM */
+/* NOTE */
+/* SIGNATURE */
+/* FOOTER */
+/* TABLE */
+/* GENERAL */
+/* ICON */
+/* LAYOUT */
+/* FORM INITIALIZATION */
+/* LABEL */
+/* BOX */
+/* TABLE INITIALIZATION */
+/* TABLE */
+/* RESOURCE */
+/* TYPEFACE */
+/* SEMANTIC ELEMENTS */
+body {
+  background-color: #00a6b3;
+}
+
+main {
+  background-color: #ffffff;
+}
+
+/* NEUTRALIZATION */
+h1, h2, h3, h4, h5, h6, p, mark, ol, ul, li {
+  background-color: transparent;
+}
+
+/* HEADER */
+header h1 {
+  color: #ffffff;
+}
+
+header .Header {
+  color: #ffffff;
+}
+
+header .Detail {
+  color: #ffffff;
+}
+
+/* FORM */
+section h2 {
+  background-color: #00a6b3;
+  color: #ffffff;
+}
+
+section h3 {
+  background-color: #e47d3a;
+  color: #ffffff;
+}
+
+section label {
+  color: #000000;
+}
+
+section span.Separator, section span.Description {
+  color: #000000;
+}
+
+section table.BoxSquare tbody tr td {
+  border-color: #000000;
+}
+
+section .BoxRound {
+  border-color: #000000;
+}
+
+section .Note {
+  border-color: #00a6b3;
+}
+
+section .Note h3 {
+  color: #000000;
+  background-color: transparent;
+}
+
+section .Note ol li, section .Note ul li {
+  color: #000000;
+}
+
+section table.SignatureSmall, section table.SignatureMedium {
+  border-color: #00a6b3;
+}
+
+section table.SignatureSmall thead tr th, section table.SignatureMedium thead tr th {
+  color: #000000;
+  border-bottom-color: #00a6b3;
+}
+
+section table.SignatureSmall tbody tr td, section table.SignatureMedium tbody tr td {
+  color: #000000;
+  background-color: #ebecec;
+}
+
+section table.SignatureSmall tfoot tr td, section table.SignatureMedium tfoot tr td {
+  color: #000000;
+}
+
+section .LineStraight, section .LineDot {
+  color: #000000;
+  border-color: #000000;
+}
+
+.InnerFieldset {
+  background-color: #ebecec;
+}
+
+input[type="radio"].Plain + label {
+  color: #000000;
+  background-color: transparent;
+}
+
+input[type="radio"].Plain:checked + label {
+  color: #ffffff;
+  background-color: #00a6b3;
+}
+
+input[type="checkbox"].Plain + label {
+  color: #000000;
+  background-color: transparent;
+}
+
+input[type="checkbox"].Plain:checked + label {
+  color: #ffffff;
+  background-color: #00a6b3;
+}
+
+textarea:disabled {
+  color: #ffffff;
+  background-color: #ebecec;
+}
+
+/* TABLE */
+section table.Square tbody tr td table.BoxSquare tbody tr td, section table.Square tbody tr td table.BoxRound tbody tr td, section table.Round tbody tr td table.BoxSquare tbody tr td, section table.Round tbody tr td table.BoxRound tbody tr td, section table.Space tbody tr td table.BoxSquare tbody tr td, section table.Space tbody tr td table.BoxRound tbody tr td {
+  border-color: #000000;
+  background-color: transparent;
+}
+
+section table.Square tbody tr td table.BoxSquare tbody tr:nth-child(odd), section table.Square tbody tr td table.BoxRound tbody tr:nth-child(odd), section table.Round tbody tr td table.BoxSquare tbody tr:nth-child(odd), section table.Round tbody tr td table.BoxRound tbody tr:nth-child(odd), section table.Space tbody tr td table.BoxSquare tbody tr:nth-child(odd), section table.Space tbody tr td table.BoxRound tbody tr:nth-child(odd) {
+  background-color: transparent !important;
+}
+
+section table.Square tbody tr td table.BoxSquare tbody tr:nth-child(even), section table.Square tbody tr td table.BoxRound tbody tr:nth-child(even), section table.Round tbody tr td table.BoxSquare tbody tr:nth-child(even), section table.Round tbody tr td table.BoxRound tbody tr:nth-child(even), section table.Space tbody tr td table.BoxSquare tbody tr:nth-child(even), section table.Space tbody tr td table.BoxRound tbody tr:nth-child(even) {
+  background-color: transparent !important;
+}
+
+section table.Square thead tr th {
+  background-color: #ffffff;
+  color: #000000;
+  border-color: #00a6b3;
+}
+
+section table.Square tbody tr td {
+  border-color: #00a6b3;
+  color: #000000;
+}
+
+section table.Square tbody tr:nth-child(odd) {
+  background-color: #b7e8eb;
+}
+
+section table.Square tbody tr:nth-child(even) {
+  background-color: #ffffff;
+}
+
+section table.Round thead tr th {
+  background-color: #ffffff;
+  color: #000000;
+  border-color: #00a6b3;
+}
+
+section table.Round tbody tr td {
+  background-color: #ffffff;
+  color: #000000;
+  border-color: #00a6b3;
+}
+
+section table.Space thead tr th {
+  background-color: #b7e8eb;
+  color: #000000;
+  border-color: #ffffff;
+}
+
+section table.Space tbody tr td {
+  background-color: #ebecec;
+  color: #000000;
+  border-color: #ffffff;
+}
+
+/* FOOTER */
+.FooterContainer, .HeaderContainer, .FooterContainerLast {
+  background-color: #00a6b3;
+}
+
+.FooterContainer .FooterGeneral, .FooterContainer .FooterLast, .FooterContainer .HeaderGeneral, .HeaderContainer .FooterGeneral, .HeaderContainer .FooterLast, .HeaderContainer .HeaderGeneral, .FooterContainerLast .FooterGeneral, .FooterContainerLast .FooterLast, .FooterContainerLast .HeaderGeneral {
+  background-color: #ffffff;
+}
+
+.FooterContainer hr, .HeaderContainer hr, .FooterContainerLast hr {
+  border-color: #00a6b3;
+  background-color: transparent;
+}

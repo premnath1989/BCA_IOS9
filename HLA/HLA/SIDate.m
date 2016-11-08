@@ -1,0 +1,207 @@
+//
+//  SIDate.m
+//  HLA Ipad
+//
+//  Created by Md. Nazmus Saadat on 10/4/12.
+//  Copyright (c) 2012 InfoConnect Sdn Bhd. All rights reserved.
+//
+
+#import "SIDate.h"
+
+@interface SIDate ()
+
+@end
+
+@implementation SIDate
+@synthesize outletDate = _outletDate;
+@synthesize delegate = _delegate;
+@synthesize ProspectDOB;
+
+id msg, DBDate;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    if ((ProspectDOB != NULL)&&(![ProspectDOB isEqual:@"(null)"])) {
+        @try {
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+            //[dateFormatter setDateFormat:@"yyyy-MM-dd"];
+            NSDate *zzz = [dateFormatter dateFromString:ProspectDOB];
+            [_outletDate setDate:zzz animated:YES ];
+
+            [self setTextFieldDates];
+        }
+        @catch (NSException *exception) {
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            //[dateFormatter setDateFormat:@"dd/MM/yyyy"];
+            [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+            NSDate *zzz = [dateFormatter dateFromString:ProspectDOB];
+            [_outletDate setDate:zzz animated:YES ];
+            
+            [self setTextFieldDates];
+
+        }
+        @finally {
+            NSLog(@"succeded");
+        }
+        
+    }
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    msg = @"";
+    DBDate = @"";
+    
+    NSDateFormatter *formatter;
+    NSString        *dateString;
+    
+    formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"dd/MM/yyyy"];
+    
+    dateString = [formatter stringFromDate:[NSDate date]];
+    msg = dateString;
+  
+    
+    if ((ProspectDOB != NULL)&&(![ProspectDOB isEqual:@"(null)"])) {
+        @try {
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+            //[dateFormatter setDateFormat:@"yyyy-MM-dd"];
+            NSDate *zzz = [dateFormatter dateFromString:ProspectDOB];
+            [_outletDate setDate:zzz animated:YES ];
+        }
+        @catch (NSException *exception) {
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            //[dateFormatter setDateFormat:@"dd/MM/yyyy"];
+            [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+            NSDate *zzz = [dateFormatter dateFromString:ProspectDOB];
+            [_outletDate setDate:zzz animated:YES ];
+        }
+        @finally {
+            NSLog(@"berhasil");
+        }
+    }
+}
+
+- (void)viewDidUnload
+{
+    [self setOutletDate:nil];
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+	return YES;
+}
+
+-(IBAction)textChanged:(UITextField *)sender{
+    @try {
+        if (sender == _outletTextYear){
+            if ([sender.text length]==4){
+                NSString* date = [NSString stringWithFormat:@"%@/%@/%@",_outletTextDay.text,_outletTextMonth.text,_outletTextYear.text];
+                
+                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+                NSDate *zzz = [dateFormatter dateFromString:date];
+                [_outletDate setDate:zzz animated:YES ];
+                
+                NSString *pickerDate = [dateFormatter stringFromDate:[_outletDate date]];
+                msg = [NSString stringWithFormat:@"%@",pickerDate];
+                [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+                DBDate = [dateFormatter stringFromDate:[_outletDate date]];
+            }
+        }
+        else{
+            if ([sender.text length]>0){
+                NSString* date = [NSString stringWithFormat:@"%@/%@/%@",_outletTextDay.text,_outletTextMonth.text,_outletTextYear.text];
+                
+                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+                NSDate *zzz = [dateFormatter dateFromString:date];
+                [_outletDate setDate:zzz animated:YES ];
+                
+                NSString *pickerDate = [dateFormatter stringFromDate:[_outletDate date]];
+                msg = [NSString stringWithFormat:@"%@",pickerDate];
+                [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+                DBDate = [dateFormatter stringFromDate:[_outletDate date]];
+            }
+        }
+        
+    } @catch (NSException *exception) {
+        
+    } @finally {
+        
+    }
+}
+
+-(void)setTextFieldDates{
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    NSDateComponents* components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:[_outletDate date]]; // Get necessary date components
+    
+    NSInteger day = [components day];
+    NSInteger month = [components month];
+    NSInteger year = [components year];
+    
+    [_outletTextDay setText:[NSString stringWithFormat:@"%ld",(long)day]];
+    [_outletTextMonth setText:[NSString stringWithFormat:@"%ld",(long)month]];
+    [_outletTextYear setText:[NSString stringWithFormat:@"%ld",(long)year]];
+}
+
+- (IBAction)ActionDate:(id)sender {
+    if (_delegate != Nil) {
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+        
+        NSString *pickerDate = [dateFormatter stringFromDate:[_outletDate date]];
+        
+        msg = [NSString stringWithFormat:@"%@",pickerDate];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+        DBDate = [dateFormatter stringFromDate:[_outletDate date]];
+        //[_delegate DateSelected:msg :DBDate];
+        
+        [self setTextFieldDates];
+    }
+}
+- (IBAction)btnClose:(id)sender {
+    [_delegate CloseWindow];
+}
+
+- (IBAction)btnDone:(id)sender {
+   
+    if (msg == NULL) {
+        
+        // if msg = null means user din rotate the date...and choose the default date value
+        NSDateFormatter *formatter;
+        NSString        *dateString;
+        
+        formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"dd/MM/yyyy"];
+        
+        dateString = [formatter stringFromDate:[NSDate date]];
+        msg = dateString;
+        
+          [_delegate DateSelected:msg :DBDate];
+    }
+    else{
+        
+         
+         [_delegate DateSelected:msg :DBDate];
+    }
+    
+    
+    
+    
+    [_delegate CloseWindow];
+}
+@end

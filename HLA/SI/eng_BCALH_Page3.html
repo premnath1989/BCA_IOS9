@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--<link href="SI/css/style.css" rel="stylesheet" type="text/css" />-->
+        <script type="text/javascript" charset="utf-8" src="SI/js/jquery-1.8.2.min.js"></script>
+        <script type="text/javascript" charset="utf-8" src="SI/js/hla.js"></script>
+        <style>
+            thead,table-Summary1 {
+                border: 1px solid black;
+            }
+        thead,table-Summary2 {
+            border: 1px solid black;
+        }
+            #maincontainer
+            {
+                top:0px;
+                padding-top:0;
+                margin:auto;
+                width:100%;
+                height:480px;
+            }
+			td {
+				border-style: solid;
+				border-color: black;
+				border-width: 0px;
+				padding: 0px 0px 0px 0px;
+				text-align: justify;
+				font-size:10px;
+				font-family: "Helvetica"
+			}
+			p {
+				font-size:10px;
+				padding: 0px 0px 0px 0px;
+			}
+			z {
+				font-size:10px;
+				padding: 0px 0px 0px 0px;
+			}
+			header1 {
+				font-size:18px;
+				padding: 0px 0px 0px 0px;
+			}
+            footer1 {
+                width:100%;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+            }
+			tr.rowStyle {
+				border-style: solid;
+				border-color: black;
+				border-width: 1px;
+				font-size:10px;
+	
+			}
+        .test
+        {
+            /*border: solid 1px #000000;*/
+            border-left: 0px;
+            border-right: solid 1px #000000;
+            border-bottom: solid 1px #000000;
+            border-top: solid 1px #000000;
+        }
+        
+        .test:empty
+        {
+            /*border: none;*/
+            border-left: solid 1px #000000;
+            border-right: 0px;
+            border-bottom:0px;
+            border-top: 0px;
+        }
+        </style>
+        <script>
+            var gData;
+            function onBodyLoad(){
+                $.ajaxSetup({ cache: false });
+                $.ajax({
+                       url: 'SI.json',
+                       async: false,
+                       dataType: 'json',
+                       success: function (data) {
+                       gdata = data;
+                       
+                       for(j=0;j<data.SI[0].SI_Temp_Pages.data.length;j++)
+                       {
+                       row = gdata.SI[0].SI_Temp_Pages.data[j];
+                       if (row.PageDesc != "Page1")
+                       {
+                       if (row.PageDesc == "Page2")
+                       htmlPages = '<div id="' + row.PageDesc + '" style="margin-top:900px;padding: 15px 0px 0px 0px;"></div>';
+                       else
+                       htmlPages = '<div id="' + row.PageDesc + '" style="margin-top:900px;padding: 15px 0px 0px 0px;"></div>';
+                       $(htmlPages).appendTo('#externalPages');
+                       }
+                       }
+                       
+                       
+                       for(j=0;j<data.SI[0].SI_Temp_Pages.data.length;j++)
+                       {
+                       row = gdata.SI[0].SI_Temp_Pages.data[j];
+                       $.ajax({
+                              url: "SI/" + row.htmlName,
+                              async: false,
+                              dataType: 'html',
+                              success: function (data) {
+                              $("#" + row.PageDesc).html(data);
+                              }
+                              });
+                       }
+                       
+                       
+                       loadJson();
+                       }
+                       });
+                       
+            }
+        
+        function loadJson()
+        {
+            
+            
+            setPage();
+            //writeGST();
+            
+            writeSummary();
+            
+            //alert('11');
+            
+            var result = gdata.SI[0].SI_Temp_trad_LA.data;
+            
+            if(result.length > 1){
+                var row2 = result[1];
+            }
+            
+            if (gdata.SI[0].ModeOfPayment == 'L'){
+                $('.ModeOfPayment').html('Sekaligus');
+            }
+            else if (gdata.SI[0].ModeOfPayment == 'Y'){
+                $('.ModeOfPayment').html('Tahunan');
+            }
+            else if (gdata.SI[0].ModeOfPayment == 'M'){
+                $('.ModeOfPayment').html('Bulanan');
+            }
+            
+            if(result.length == 1){
+                var row = result[0];
+                $('.LADesc').html(row.LADesc);
+                $('.LAName').html(row.Name);
+                $('.LAAge').html(row.Age);
+                $('.OccpDesc').html(row.OccpDesc);
+                
+                if (row.MOP == '1'){
+                    $('.MOP').html('Tunggal');
+                }
+                else{
+                    $('.MOP').html('5 Tahun');
+                }
+                
+                
+                
+                if (row.Sex.substring(0,1) == 'M'){
+                    $('.LASex').html('Laki-laki');
+                }
+                else{
+                    $('.LASex').html('Perempuan');
+                }
+                
+            }
+            else if(result.length == 2 && row2.PTypeCode == 'LA'){ //got 2nd life assured
+                var row = result[0];
+                var row2 = result[1];
+                $('.LADesc').html(row.LADesc + '<br/>' + row2.LADesc + '<br/>');
+                $('.LAName').html(row.Name + '<br/>' + row2.Name)  ;
+                $('.LAAge').html(row.Age + '<br/>' + row2.Age);
+                if (row.Sex.substring(0,1) == 'M' && row2.Sex.substring(0,1) == 'M'){
+                    $('.LASex').html('Male' + '<br/>' + 'Male' );
+                }
+                else if(row.Sex.substring(0,1) == 'M' && row2.Sex.substring(0,1) == 'F'){
+                    $('.LASex').html('Male' + '<br/>' + 'Female' );
+                }
+                else if(row.Sex.substring(0,1) == 'F' && row2.Sex.substring(0,1) == 'M'){
+                    $('.LASex').html('Female' + '<br/>' + 'Male' );
+                }
+                else{
+                    $('.LASex').html('Female' + '<br/>' + 'Female' );
+                }
+                
+                if (row.Smoker == 'Y' && row2.Smoker == 'Y' ){
+                    $('.LASmoker').html('Yes' + '<br/>' + 'Yes'  );
+                }
+                else if (row.Smoker == 'Y' && row2.Smoker == 'N' ){
+                    $('.LASmoker').html('Yes' + '<br/>' + 'No'  );
+                }
+                else if (row.Smoker == 'N' && row2.Smoker == 'Y' ){
+                    $('.LASmoker').html('No' + '<br/>' + 'Yes'  );
+                }
+                else{
+                    $('.LASmoker').html('No' + '<br/>' + 'No' );
+                }
+            }
+            else{ // got payor
+                var row = result[0];
+                var row2 = result[1];
+                
+                $('.LADesc').html(row.LADesc + '<br/>' + row2.LADesc + '<br/>');
+                $('.LAName').html(row.Name + '<br/>' + row2.Name)  ;
+                $('.LAAge').html(row.Age + '<br/>' + row2.Age);
+                if (row.Sex.substring(0,1) == 'M' && row2.Sex.substring(0,1) == 'M'){
+                    $('.LASex').html('Male' + '<br/>' + 'Male' );
+                }
+                else if(row.Sex.substring(0,1) == 'M' && row2.Sex.substring(0,1) == 'F'){
+                    $('.LASex').html('Male' + '<br/>' + 'Female' );
+                }
+                else if(row.Sex.substring(0,1) == 'F' && row2.Sex.substring(0,1) == 'M'){
+                    $('.LASex').html('Female' + '<br/>' + 'Male' );
+                }
+                else if(row.Sex.substring(0, 1) == 'F' && row2.Sex.substring(0, 1) == 'F'){
+                    $('.LASex').html('Female' + '<br/>' + 'Female' );
+                }
+                else {
+                    if(row2.Sex.substring(0, 1) == 'F'){
+                        $('.LASex').html('' + '<br/>' + 'Female' );
+                    }
+                    else
+                    {
+                        $('.LASex').html('' + '<br/>' + 'Male' );
+                    }
+                }
+                
+                if (row.Smoker == 'Y' && row2.Smoker == 'Y' ){
+                    $('.LASmoker').html('Yes' + '<br/>' + 'Yes'  );
+                }
+                else if (row.Smoker == 'Y' && row2.Smoker == 'N' ){
+                    $('.LASmoker').html('Yes' + '<br/>' + 'No'  );
+                }
+                else if (row.Smoker == 'N' && row2.Smoker == 'Y' ){
+                    $('.LASmoker').html('No' + '<br/>' + 'Yes'  );
+                }
+                else if (row.Smoker == 'N' && row2.Smoker == 'N' ){
+                    $('.LASmoker').html('No' + '<br/>' + 'No'  );
+                }
+                else{
+                    if(row2.Smoker == 'N'){
+                        $('.LASmoker').html('' + '<br/>' + 'No' );
+                    }
+                    else
+                    {
+                        $('.LASmoker').html('' + '<br/>' + 'yes' );
+                    }
+                }
+            }
+            
+        }
+        
+        function replaceChar(char){
+            var temp, returnVal;
+            if (char == "0")
+            returnVal = "-"
+            else if (char == "")
+            returnVal = "-"
+            else
+            returnVal = char;
+            return returnVal;
+        }
+        
+        function isIncomeRider(amt,rider){
+            //rider.replace(/^\s+|\s$/g,"")
+            //$.trim(rider)
+            
+            var temp;
+            temp = $.trim(rider)
+            //alert(temp + "x")
+            
+            if (temp == "HLA Cash Promise" || temp == "HLA Income Builder" || temp == "Income 20 Rider" || temp == "Income 30 Rider" || temp == "Income 40 Rider" || temp == "Income D-20 Rider" || temp == "Income D-30 Rider" || temp == "Income D-40 Rider" || temp == "Income E-20 Rider" || temp == "Income E-30 Rider"){
+                
+                return amt + " *";
+            }
+            else
+            return amt + "&nbsp;&nbsp;";
+        }
+        
+            </script>
+        <head>
+            <body onload="onBodyLoad()">
+                <div id="gstPage"><br/><br/></div>
+                <div id="header">
+                    
+                    <table border="0" style="border-collapse:separate;border:0px solid black;width:100%;">
+                        <tr>
+                            <td style="width: 25%"><img src="BCAHTMLlogo.png" height="55px"/></td>
+                            <td style="width: 45%" valign="top">
+                                <table  style="border-collapse:separate;border:1px solid black;width:100%;font-size:10px;text-align: center">
+                                    <tr>
+                                        <td style="font-size:10px;font-family: Helvetica; text-align: center">
+                                            Kecuali dinyatakan lain, ilustrasi ini bukan merupakan kontrak asuransi
+                                        </td>
+                                    </tr>
+                                    
+                                </table>
+                            </td>
+                            <td style="width: 30%; font-size:13px;font-family:Helvetica; text-align: right" valign="top" style="margin:0" >
+                                <header1>BCA Life Heritage Protection</header1></br>
+                                <font color="red">Nomor Ilustrasi : </font><font color="red"><label id="SINumber3"></label></font>
+                                    </td>
+                        </tr>
+                    </table>    
+                </div>
+                <div id="maincontainer">
+					<div class="main-content">
+                    <!--520,430px-->
+                    <div style="width:100%;background-color: #fff;vertical-align: top;">
+                    
+                    <!--Information Data-->
+                        <!--<table width="100%" cellpadding="0" cellspacing="0" style="page-break-before: always">-->
+                        <table style="border-collapse:separate;border:0px solid black;width:100%;">
+                            <col width="8*">
+                                <col width="112*">
+                                    <col width="137*">
+                                        <tr valign="top">
+                                            <td width="3%" style="border: none; padding: 0in" sdval="1" sdnum="1033;">
+                                                1
+                                            </td>
+                                            <td colspan="2" width="97%" style="border: none; padding: 0in">
+                                                Ilustrasi
+                                                ini bukan merupakan kontrak asuransi dan bukan bagian dari polis:
+                                            </td>
+                                        </tr>
+                                        <tr valign="top">
+                                            <td width="3%" style="border: none; padding: 0in">
+                                                <br/>
+                                                
+                                                
+                                            </td>
+                                            <td colspan="2" width="97%" style="border: none; padding: 0in">
+                                                -
+                                                Hak dan kewajiban Pemegang Polis/Tertanggung dan ketentuan produk
+                                                ini akan diatur dalam Polis;
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr valign="top">
+                                            <td width="3%" style="border: none; padding: 0in">
+                                                <br/>
+                                                
+                                                
+                                            </td>
+                                            <td colspan="2" width="97%" style="border: none; padding: 0in">
+                                                -
+                                                Jika ada perbedaan antara Ilustrasi dan Polis, maka Polis yang
+                                                akan tetap dianggap berlaku
+                                            </td>
+                                        </tr>
+                                        <tr valign="top">
+                                            <td width="3%" style="border: none; padding: 0in" sdval="2" sdnum="1033;">
+                                                2
+                                            </td>
+                                            <td colspan="2" width="97%" style="border: none; padding: 0in">
+                                                Manfaat:
+                                            </td>
+                                        </tr>
+                                        <tr valign="top">
+                                            <td width="3%" style="border: none; padding: 0in">
+                                                <br/>
+                                                
+                                                
+                                            </td>
+                                            <td rowspan="4" width="7%" style="border: none; padding: 0in">
+                                                </br>
+                                                <table width="280"cellpadding="0" cellspacing="0" border="1">
+                                                    <col width="140">
+                                                        <col width="140">
+                                                            <tr>
+                                                                <td width="140" height="22" style="border:1px solid black; padding: 0in; text-align:center">
+                                                                    Usia saat Meninggal Dunia (tahun)
+                                                                        </td>
+                                                                <td width="140" height="22"  style="border:1px solid black; padding: 0in; text-align:center">
+                                                                    Persentase Uang Pertanggungan
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td width="140" height="22"  style="border:1px solid black; padding: 0in; text-align:center">
+                                                                    6 bulan s/d &lt; 1                                                                       </td>
+                                                                <td width="140" height="22"  height="2" style="border:1px solid black; padding: 0in; text-align:center">
+                                                                    10.00%
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td width="140" height="22" style="border:1px solid black; padding: 0in; text-align:center">
+                                                                    1
+                                                                        </td>
+                                                                <td width="140" height="22"  style="border:1px solid black; padding: 0in; text-align:center">
+                                                                    20.00%
+                                                                        </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td width="140" height="22"  style="border:1px solid black; padding: 0in; text-align:center">
+                                                                    2
+                                                                </td>
+                                                                <td width="140" height="22"  style="border:1px solid black; padding: 0in; text-align:center">
+                                                                    40.00%
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td width="140" height="22" style="border:1px solid black; padding: 0in; text-align:center">
+                                                                    3
+                                                                </td>
+                                                                <td width="140" height="22"  style="border:1px solid black; padding: 0in; text-align:center">
+                                                                    60.00%
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td width="140" height="22"  style="border:1px solid black; padding: 0in; text-align:center">
+                                                                    4
+                                                                </td>
+                                                                <td width="140" height="22"  style="border:1px solid black; padding: 0in; text-align:center">
+                                                                    80.00%
+                                                                </td>
+                                                            </tr>
+                                                        </col>
+                                                    </col>
+                                                </table>
+                                            </td>
+                                            <td width="70%" style="border: none; padding: 0in">
+                                                <ol type="a" style="margin:0">
+                                                    <li/>
+                                                    Manfaat
+                                                    Meninggal Dunia: Apabila Tertanggung meninggal dunia selama Masa
+                                                    Pertanggungan, Penanggung akan membayarkan sejumlah Uang
+                                                    Pertanggungan sesuai yang tercantum dalam Data Polis ditambah
+                                                    dengan akumulasi Nilai Pertanggungan Tambahan (jika ada). 
+                                                </ol>
+                                            </td>
+                                        </tr>
+                                        <tr valign="top">
+                                            <td width="3%" style="border: none; padding: 0in">
+                                                <br/>
+                                                <br/>
+                                                
+                                                
+                                            </td>
+                                            <td width="40%" style="border: none; padding: 0in">
+                                                <ol type="a" start="2" style="margin:0">
+                                                    <li/>
+                                                    Apabila
+                                                    Tertanggung Meninggal Dunia sebelum mencapai Usia 5 (lima) tahun,
+                                                    maka Penanggung akan membayarkan Manfaat Meninggal Dunia sesuai
+                                                    dengan tabel disamping dan akumulasi Nilai Pertanggungan Tambahan
+                                                    (jika ada): 
+                                                </ol>
+                                            </td>
+                                        </tr>
+                                        <tr valign="top">
+                                            <td width="3%" style="border: none; padding: 0in">
+                                                <br/>
+                                                <br/>
+                                                
+                                                
+                                            </td>
+                                            <td width="40%" style="border: none; padding: 0in">
+                                                <ol type="a" start="3" style="margin:0">
+                                                    <li/>
+                                                    Apabila
+                                                    Tertanggung didiagnosa oleh dokter menderita penyakit atau
+                                                    kondisi sakit yang mengakibatkan Tertanggung hanya dapat bertahan
+                                                    hidup dalam kurun waktu kurang dari 6 bulan, maka BCA Life akan
+                                                    membayarkan kepada Pemegang Polis sebesar 20% (dua puluh persen)
+                                                    dari Uang Pertanggungan atau maksimal Rp 3.000.000.000,- (tiga
+                                                    milyar rupiah) per Tertanggung untuk seluruh polis yang
+                                                    diterbitkan oleh Penanggung. Selanjutnya Penanggung akan
+                                                    membayarkan sisa Uang Pertanggungan kepada Penerima Manfaat
+                                                    setelah Tertanggung Meninggal Dunia. <br/>
+                                                    Pembayaran Manfaat
+                                                    <i>Terminal Illness </i>akan mengurangi Uang Pertanggungan dan
+                                                    Nilai Tunai yang dijamin sesuai manfaat <i>Terminal Illness </i>yang
+                                                    sudah dibayarkan oleh Penanggung 
+                                                </ol>
+                                            </td>
+                                        </tr>
+                                        <tr valign="top">
+                                            <td width="3%" style="border: none; padding: 0in">
+                                                <br/>
+                                                <br/>
+                                                
+                                                
+                                            </td>
+                                            <td width="40%" style="border: none; padding: 0in">
+                                                <ol type="a" start="4" style="margin:0">
+                                                    <li/>
+                                                    Apabila
+                                                    Tertanggung hidup hingga akhir masa pertanggungan (usia 99
+                                                    tahun), maka BCA Life akan membayarkan Uang Pertanggungan BCA
+                                                    Life Heritage Protection ditambah akumulasi Nilai Pertanggungan
+                                                    Tambahan (jika ada)
+                                                </ol>
+                                            </td>
+                                        </tr>
+                                        <tr valign="top">
+                                            <td width="3%" style="border: none; padding: 0in" sdval="3" sdnum="1033;">
+                                                3
+                                            </td>
+                                            <td colspan="2" width="97%" style="border: none; padding: 0in">
+                                                Penanggung
+                                                akan mengumumkan jumlah Nilai Pertanggungan Tambahan sebagai
+                                                persentase dari Uang Pertanggungan (jika ada) setiap tahunnya pada
+                                                bulan berikutnya setelah ulang tahun Polis, sejak akhir tahun
+                                                polis pertama untuk polis premi sekaligus dan akhir tahun polis
+                                                kedua untuk polis premi berkala. 
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr valign="top">
+                                            <td width="3%" style="border: none; padding: 0in" sdval="4" sdnum="1033;">
+                                                4
+                                            </td>
+                                            <td colspan="2" width="97%" style="border: none; padding: 0in">
+                                                Nilai
+                                                Pertanggungan Tambahan yang sudah diumumkan oleh Penanggung akan
+                                                menjadi tambahan tetap terhadap manfaat dan terjamin dibayar dalam
+                                                hal Tertanggung meninggal dunia, atau pada Tanggal Akhir
+                                                Pertanggungan Polis. Apabila polis berhenti sebelum tanggal
+                                                diumumkannya Nilai Pertanggungan Tambahan maka Pemegang Polis
+                                                tidak berhak untuk mendapatkan Nilai Pertanggungan Tambahan, namun
+                                                Pemegang Polis tetap berhak atas Nilai Pertanggungan Tambahan yang
+                                                didapat sebelumnya (jika ada). 
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr valign="top">
+                                            <td width="3%" style="border: none; padding: 0in" sdval="5" sdnum="1033;">
+                                                5
+                                            </td>
+                                            <td colspan="2" width="97%" style="border: none; padding: 0in">
+                                                Pemegang
+                                                Polis dapat mengajukan penghentian polis dengan mengajukan
+                                                permohonan penebusan polis. Apabila Polis ditebus, total Nilai
+                                                Tunai yang terbentuk setelah diperhitungkan dengan
+                                                kewajiban-kewajiban dan manfaat yang sudah dibayarkan kepada
+                                                Pemegang Polis, akan diberikan setelah Penanggung menyetujui
+                                                permohonan penebusan Polis yang diajukan oleh Pemegang
+                                                Polis.<br/>
+                                                Penebusan polis mengakibatkan polis berhenti berlaku
+                                                dan permohonan penebusan polis tidak dapat ditarik kembali oleh
+                                                Pemegang Polis. 
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr valign="top">
+                                            <td width="3%" style="border: none; padding: 0in" sdval="6" sdnum="1033;">
+                                                6
+                                            </td>
+                                            <td colspan="2" width="97%" style="border: none; padding: 0in">
+                                                Selain
+                                                Nilai Tunai yang Dijamin, Nilai Pertanggungan Tambahan dan Nilai
+                                                Tunai dari Pertanggungan Tambahan yang terdapat pada tabel
+                                                Ilustasi pada halaman kedua hanyalah gambaran Ilustrasi saja dan
+                                                tidak ada jaminan atau estimasi masa depan. 
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr valign="top">
+                                            <td width="3%" style="border: none; padding: 0in" sdval="7" sdnum="1033;">
+                                                7
+                                            </td>
+                                            <td colspan="2" width="97%" style="border: none; padding: 0in">
+                                                Ilustrasi
+                                                ini berlaku untuk risiko standar dan selama tidak ada perubahan
+                                                usia masuk dari Calon Tertanggung. 
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr valign="top">
+                                            <td width="3%" style="border: none; padding: 0in" sdval="8" sdnum="1033;">
+                                                8
+                                            </td>
+                                            <td colspan="2" width="97%" style="border: none; padding: 0in">
+                                                Produk
+                                                BCA Life Heritage Protection yang ditawarkan bukan merupakan
+                                                produk dan tanggung jawab PT Bank Central Asia (BCA) (bukan produk
+                                                bank) dan tidak termasuk dalam cakupan Lembaga Penjaminan
+                                                <br/>
+                                                Simpanan (LPS) meskipun terdapat logo dan/atau atribut BCA
+                                                dalam ilustrasi yang digunakan.
+                                            </td>
+                                        </tr>
+                                        <tr valign="top">
+                                            <td width="3%" style="border: none; padding: 0in" sdval="9" sdnum="1033;">
+                                                9
+                                            </td>
+                                            <td colspan="2" width="97%" style="border: none; padding: 0in">
+                                                Penggunaan
+                                                logo dan/atau atribut BCA dalam ilustrasi tidak dapat diartikan
+                                                bahwa produk asuransi ini merupakan produk BCA (produk bank)
+                                                melainkan hanya dimaksudkan untuk menunjukkan adanya kerja sama
+                                                antara BCA dengan BCA Life 
+                                                
+                                            </td>
+                                        </tr>
+                                    </col>
+                                </col>
+                            </col>
+                        </table>
+                        
+                    </div>
+                </div>
+                </div>
+                <footer>
+                    <!--Tanda tangan-->
+                    <div style="width:100%;background-color: #fff;vertical-align: top;">
+                        <table border="0" style="border-collapse:separate;border:0px solid black;width:100%;">
+                            <td style="width: 30%">
+                                <table  style="border-collapse:separate;border:0px solid black;width:100%;">
+                                    <tr>
+                                        <td>Disiapkan oleh</td><td>:</td><td style="width: 60%">&nbsp;<label id="FooterAgentName3"></label></td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td>Tanggal dan jam cetak</td><td>:</td><td>&nbsp;<label id="FooterPrintDate3"></label></td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td>Versi</td><td>:</td><td>&nbsp;<label id="FooterVersion3">1.0.000</label></td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td>Kode Tenaga Penjual</td><td>:</td><td>&nbsp;<label id="FooterAgentCode3"></label></td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td>Cabang</td><td>:</td><td>&nbsp;<label id="FooterBranch3"></label></td>
+                                    </tr>
+                                    
+                                    <tr>
+									<td colspan="3"><br/></td>
+								</tr>
+								<tr>
+									<td colspan="3"><br/></td>
+								</tr>
+
+								<!--<tr>
+									<td colspan="3">Saya Telah menjelaskan isi ilustrasi ini kepada Calon Pemegang Polis</td>
+								</tr>
+								
+								<tr>
+									<td>Tanda Tangan Tenaga Penjual</td><td>:</td><td></td>
+								</tr>-->
+                                </table>
+                            </td>
+                            <td style="width: 70%">
+							<table  style="border-collapse:separate;border:1px solid black;width:100%;border-spacing:0;">
+								<tr>
+									<td style="border-right: 1px solid black"><br/></td>
+									<td><br/></td>
+								</tr>
+
+								<tr >
+									<td style="text-align:center; width: 35%; border-right: 1px solid black">Saya telah menjelaskan isi ilustrasi ini kepada Calon Pemegang Polis.</td>
+									<td style="text-align:center; width: 35%">Saya telah memahami dan menyetujui penjelasan yang diberikan atas ilustrasi manfaat asuransi yang diuraikan pada halaman ini.</td>
+								</tr>
+								<tr>
+                                    <td style="border-right: 1px solid black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+								</tr>
+								<tr>
+									<td style="text-align:center;border-right: 1px solid black">Tanda Tangan Tenaga Penjual :</td>
+									<td style="text-align:center">Tanda Tangan Pemegang Polis :</td>
+								</tr>
+								<tr>
+									<td style="border-right: 1px solid black"><br/></td>
+									<td><br/></td>
+								</tr>
+								<tr>
+									<td style="border-right: 1px solid black"><br/></td>
+									<td><br/></td>
+								</tr>
+								<tr>
+									<td style="border-right: 1px solid black"><br/></td>
+									<td><br/></td>
+								</tr>
+								<tr>
+									<td style="border-right: 1px solid black"><br/></td>
+									<td><br/></td>
+								</tr>
+								<tr>
+									<td style="border-right: 1px solid black"><br/></td>
+									<td><br/></td>
+								</tr>
+
+							</table>
+						</td>
+                            
+                        </table>
+                    </div>
+                    <!--halaman-->
+                    <div style="width:100%;height:20px;background-color: #fff;vertical-align: top;">
+                        <table border="0" style="border-collapse:separate;border:0px solid black;width:100%;;font-family:Helvetica;font-size:10px;text-align: right">
+                            <tr style="text-align: right">
+                                <td style="text-align: right">Halaman 3 dari 3</td>
+                            </tr>
+                            <tr style="text-align: right">
+                                <td style="text-align: right">www.bcalife.co.id</td>
+                            </tr>
+                        </table>
+                    </div>
+                </footer>
+            </body>
+            
+</html>

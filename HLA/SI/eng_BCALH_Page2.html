@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="css/htmlStyle.css" rel="stylesheet" type="text/css" />
+        <style>
+        	#maincontainer
+            {
+                top:0px;
+                padding-top:0;
+                margin:auto;
+                width:100%;
+                height:480px;
+            }
+            thead,table-Summary1 {
+                border: 1px solid black;
+            }
+        thead,table-Summary2 {
+            border: 1px solid black;
+        }
+            td.one {
+                border-style: solid;
+                border-color: black;
+                border-width: 1px;
+                padding: 0px 0px 0px 0px;
+                font-family: "Helvetica"
+                font-size: 10px;
+                text-align: center;
+            }
+            td.two {
+                border-style: solid;
+                border-color: black;
+                border-width: 1px;
+                padding: 0px 0px 0px 0px;
+                font-family: "Helvetica"
+                font-size: 10px;
+                text-align: right;
+            }
+
+            tr.rowStyle {
+                border-style: solid;
+                border-color: black;
+                border-width: 1px;
+                font-family: "Helvetica"
+                font-size: 10px;
+            }
+
+            p {
+                font-size:10px;
+                padding: 0px 0px 0px 0px;
+            }
+            z {
+                font-size:10px;
+                padding: 0px 0px 0px 0px;
+            }
+            header1 {
+                font-size:18px;
+                padding: 0px 0px 0px 0px;
+            }
+            footer1 {
+                width:100%;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+            }
+        </style>
+        
+        
+        <script type="text/javascript" charset="utf-8" src="js/jquery-1.8.2.min.js"></script>
+        <script type="text/javascript" charset="utf-8" src="js/hla.js"></script>
+        <script>
+            var gData;
+            function onBodyLoad(){
+                $.ajaxSetup({ cache: false });
+                $.ajax({
+                       url: 'SI.json',
+                       async: false,
+                       dataType: 'json',
+                       success: function (data) {
+                       gdata = data;
+                       
+                       for(j=0;j<data.SI[0].SI_Temp_Pages.data.length;j++)
+                       {
+                       row = gdata.SI[0].SI_Temp_Pages.data[j];
+                       if (row.PageDesc != "Page1")
+                       {
+                       if (row.PageDesc == "Page2")
+                       htmlPages = '<div id="' + row.PageDesc + '" style="margin-top:900px;padding: 15px 0px 0px 0px;"></div>';
+                       else
+                       htmlPages = '<div id="' + row.PageDesc + '" style="margin-top:900px;padding: 15px 0px 0px 0px;"></div>';
+                       $(htmlPages).appendTo('#externalPages');
+                       }
+                       }
+                       
+                       
+                       for(j=0;j<data.SI[0].SI_Temp_Pages.data.length;j++)
+                       {
+                       row = gdata.SI[0].SI_Temp_Pages.data[j];
+                       $.ajax({
+                              url: "SI/" + row.htmlName,
+                              async: false,
+                              dataType: 'html',
+                              success: function (data) {
+                              $("#" + row.PageDesc).html(data);
+                              }
+                              });
+                       }
+                       
+                       
+                       loadJson();
+                       }
+                       });
+            }
+        
+        function replaceChar(char){
+            var temp, returnVal;
+            if (char == "0")
+            returnVal = "-"
+            else if (char == "")
+            returnVal = "-"
+            else
+            returnVal = char;
+            return returnVal;
+        }
+        
+        function isIncomeRider(amt,rider){
+            //rider.replace(/^\s+|\s$/g,"")
+            //$.trim(rider)
+            var temp;
+            temp = $.trim(rider)
+            //alert(temp + "x")
+            if (temp == "HLA Income Builder" || temp == "Income 20 Rider" || temp == "Income 30 Rider" || temp == "Income 40 Rider" || temp == "Income D-20 Rider" || temp == "Income D-30 Rider" || temp == "Income D-40 Rider" || temp == "Income E-20 Rider" || temp == "Income E-30 Rider"){
+                return amt + " *";
+            }
+            else
+            return amt + "&nbsp;&nbsp;";
+        }
+        
+        function removeRows(rowCount,LAAge){
+			if (LAAge<16){
+					var rowTobeDeleted=9;
+            var checkPointColA=5;
+            
+            for (i = 4; i < rowCount+3; i++) {
+                var Val1=(i+1)-4;
+                var Val2=LAAge +Val1;
+                //if (Val1>10){
+                if (Val1>5){
+                    if (Val2<55){
+                        var modulusResult=Val1%10;
+                        if (modulusResult != 0){
+                            document.getElementById("table-Summary1").deleteRow(rowTobeDeleted);
+                        }
+                        else{
+                            rowTobeDeleted=rowTobeDeleted+1;
+                        }
+                        checkPointColA = Val1;
+                    }
+                    else if (Val2==55){
+                        rowTobeDeleted=rowTobeDeleted+1;
+                        checkPointColA = Val1;
+                    }
+                    else if (Val2>55){
+                        var rowToCheck = (Val1-checkPointColA);
+                        if (rowToCheck>0)
+                        {
+                            var modulusResult=rowToCheck%10;
+                            if (modulusResult != 0){
+                                document.getElementById("table-Summary1").deleteRow(rowTobeDeleted);
+                            }
+                            else{
+                                rowTobeDeleted=rowTobeDeleted+1;
+                            }
+                        }
+                    }
+                }
+            }
+			}
+			else{
+			var rowTobeDeleted=9;
+            var checkPointColA=5;
+            
+            for (i = 4; i < rowCount+3; i++) {
+                var Val1=(i+1)-4;
+                var Val2=LAAge +Val1;
+                //if (Val1>10){
+                if (Val1>5){
+                    if (Val2<55){
+                        var modulusResult=Val1%5;
+                        if (modulusResult != 0){
+                            document.getElementById("table-Summary1").deleteRow(rowTobeDeleted);
+                        }
+                        else{
+                            rowTobeDeleted=rowTobeDeleted+1;
+                        }
+                        checkPointColA = Val1;
+                    }
+                    else if (Val2==55){
+                        rowTobeDeleted=rowTobeDeleted+1;
+                        checkPointColA = Val1;
+                    }
+                    else if (Val2>55){
+                        var rowToCheck = (Val1-checkPointColA);
+                        if (rowToCheck>0)
+                        {
+                            var modulusResult=rowToCheck%10;
+                            if (modulusResult != 0){
+                                document.getElementById("table-Summary1").deleteRow(rowTobeDeleted);
+                            }
+                            else{
+                                rowTobeDeleted=rowTobeDeleted+1;
+                            }
+                        }
+                    }
+                }
+            }
+			}
+            
+
+        }
+        
+        function createTable(Age,xRow,BasicSumAssured,PaymentTerm,rateTunggal,rate5,surValue) {
+            var table = document.getElementById("table-Summary1");
+            var rbFactor = 1;
+            var term = PaymentTerm;
+            var rbRate=1.5;
+            var interesRate=2.25;
+            var prevColE=0;
+            var finalRate;
+            
+            if (term == 1){
+                finalRate=surValue;
+            }
+            else{
+                finalRate=rate5;
+            }
+            
+            for (i = 0; i < xRow; i++) {
+                var col1Val=i+1;
+                var col2Val=Age +col1Val;
+                var col3Val=BasicSumAssured;
+                var col4Val=0;
+                if (term == 1){
+                    if (col1Val<2){
+                        rbFactor=0;
+                    }
+                    else{
+                        rbFactor=1;
+                    }
+                }
+                else{
+                    if (col1Val<3){
+                        rbFactor=0;
+                    }
+                    else{
+                        rbFactor=1;
+                    }
+                }
+                col4Val=rbFactor*((col3Val*rbRate)+(prevColE*interesRate));
+                col4Val=col4Val/100;
+                var col5Val = col4Val + prevColE;
+                var col6Val = col3Val + col5Val;
+                var col7Val;
+                var col8Val;
+                if (col2Val == 99){
+                    col7Val = col3Val;
+                    col8Val = col5Val;
+                }
+                else if (col2Val>99){
+                    col8Val = 0;
+                }
+                else{
+                    var valueRate = finalRate[i];
+                    col7Val = (Math.round(col3Val) * finalRate[i])/1000;
+                    col8Val = (surValue[i] * Math.round(col5Val))/1000;
+                }
+                
+                var col9Val = col7Val + col8Val;
+
+                var displayCol3Val=Math.round(col3Val).toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
+                var displayCol4Val=Math.round(col4Val).toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
+                var displayCol5Val=Math.round(col5Val).toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
+                var displayCol6Val=Math.round(col6Val).toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
+                var displayCol7Val=Math.round(col7Val).toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
+                var displayCol8Val=Math.round(col8Val).toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
+                var displayCol9Val=Math.round(col9Val).toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
+                
+                var row = table.insertRow(i+4);
+                var cell1 = row.insertCell(0);
+                var cell2 = row.insertCell(1);
+                var cell3 = row.insertCell(2);
+                var cell4 = row.insertCell(3);
+                var cell5 = row.insertCell(4);
+                var cell6 = row.insertCell(5);
+                var cell7 = row.insertCell(6);
+                var cell8 = row.insertCell(7);
+                var cell9 = row.insertCell(8);
+                
+                cell1.className = 'one';
+                cell2.className = 'one';
+                cell3.className = 'two';
+                cell4.className = 'two';
+                cell5.className = 'two';
+                cell6.className = 'two';
+                cell7.className = 'two';
+                cell8.className = 'two';
+                cell9.className = 'two';
+                
+                cell1.innerHTML = col1Val;
+                cell2.innerHTML = col2Val;
+                cell3.innerHTML = displayCol3Val;
+                cell4.innerHTML = displayCol4Val;
+                cell5.innerHTML = displayCol5Val;
+                cell6.innerHTML = displayCol6Val;
+                cell7.innerHTML = displayCol7Val;
+                cell8.innerHTML = displayCol8Val;
+                cell9.innerHTML = displayCol9Val;
+                
+                prevColE=col5Val;
+            }
+            removeRows(xRow,Age);
+        }
+        
+    </script>
+    </head>
+    <body onload="onBodyLoad()">
+	    <div id="gstPage2"><br/><br/></div>
+        <div id="header">
+            <table border="0" style="border-collapse:separate;border:0px solid black;width:100%;">
+                <tr>
+                    <td style="width: 25%"><img src="BCAHTMLlogo.png" height="55px"/></td>
+                    <td style="width: 45%" valign="top">
+                        <table  style="border-collapse:separate;border:1px solid black;width:100%;font-family:Helveticafont-size:10px;text-align: center">
+                            <tr>
+                                <td style="font-size:10px;font-family: Helvetica; text-align: center">
+                                    Kecuali dinyatakan lain, ilustrasi ini bukan merupakan kontrak asuransi
+                                </td>
+                            </tr>
+                            
+                        </table>
+                    </td>
+                    <td style="width: 30%; font-size:13px;font-family:Helvetica; text-align: right" valign="top" style="margin:0" >
+                        <header1>BCA Life Heritage Protection</header1></br>
+                        <font color="red">Nomor Ilustrasi :</font> <font color="red"><label id="SINumber2"></label></font>
+                            </td>
+                </tr>
+            </table>
+        </div>
+        <div id="maincontainer">
+        <div class="main-content">
+
+            <table style="border-collapse:separate;border:0px solid black;width:100%;" >
+                <tr valign="top">
+                    <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;font-family:Helvetica;font-size:10px">Nama Pemegang Polis</td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;font-family:Helvetica;font-size:10px">:&nbsp;&nbsp;&nbsp;<label id="HeaderPOName">Amin Suramin</label></td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;font-family:Helvetica;font-size:10px">Uang Pertanggungan :</td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;font-family:Helvetica;font-size:10px">:&nbsp;&nbsp;&nbsp;<label id="HeaderSumAssured">1.000.000.000</label></td>
+                </tr>
+                <tr valign="top">
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:10px ">Tanggal Lahir Pemegang Polis (dd/mm/yyyy)</td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:10px ">:&nbsp;&nbsp;&nbsp;<label id="HeaderPODOB">07/07/1970</label></td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:10px ">Masa Pembayaran Premi</td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:10px ">:&nbsp;&nbsp;&nbsp;<label id="HeaderPaymentPeriode1"></label></td>
+                </tr>
+                <tr valign="top">
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:10px ">Nama Tertanggung (jika berbeda)</td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:10px">:&nbsp;&nbsp;&nbsp;<label id="HeaderLAName1">Budi Budiman</label></td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:10px ">Frekuensi Pembayaran</td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:10px ">:&nbsp;&nbsp;&nbsp;<label id="HeaderPaymentFrequency1"></label></td>
+                </tr>
+                <tr valign="top">
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:10px ">Tanggal Lahir Tertanggung (jika berbeda dengan pemegang polis) (dd/mm/yyyy) </td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:10px ">:&nbsp;&nbsp;&nbsp;<label id="HeaderLADOB2">07/07/1970</label></td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:10px ">Premi Standard</td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:10px ">:&nbsp;&nbsp;&nbsp;<label id="HeaderBasicPremi">69.560.000</label></td>
+                </tr>
+                <tr valign="top">
+                    <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;font-family:Helvetica;font-size:10px">Tanggal pembuatan illustrasi :</td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;font-family:Helvetica;font-size:10px">:&nbsp;&nbsp;&nbsp;<label id="HeaderIlustrationDate">18/01/2016</label></td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;font-family:Helvetica;font-size:10px">Extra Premi Substandard 1</td>
+                    <!--<td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;font-family:Helvetica;font-size:10px">:&nbsp;&nbsp;&nbsp;<label id="HeaderExtraPremiPercent"></label></td>-->
+                    <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;font-family:Helvetica;font-size:10px"><label id="HeaderExtraPremiPercent"></label></td>
+                </tr>
+                <tr valign="top">
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:10px ">Usia Pemegang Polis</td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:10px ">:&nbsp;&nbsp;&nbsp;<label id="HeaderPOAge">45</label></td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:10px ">Extra Premi Substandard 2</td>
+                    <!--<td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:10px ">:&nbsp;&nbsp;&nbsp;<label id="HeaderExtraPremiNumber"></label></td>-->
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:10px "><label id="HeaderExtraPremiNumber"></label></td>
+                </tr>
+                <tr valign="top">
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:10px ">Usia Masuk Tertanggung</td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:10px ">:&nbsp;&nbsp;&nbsp;<label id="HeaderLAAge">45</label></td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:10px ">Durasi Extra Premi</td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:10px ">:&nbsp;&nbsp;&nbsp;<label id="HeaderExtraPremiDuration1"></label>&nbsp;tahun</td>
+                </tr>
+                <tr valign="top">
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:10px ">Jenis Kelamin</td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:10px ">:&nbsp;&nbsp;&nbsp;<label id="HeaderPOSex"></label></td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:10px ">Extra Premi Karena UW Loading</td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:10px ">:&nbsp;&nbsp;&nbsp;<label id="HeaderExtraPremiUWLoading"></label></td>
+                </tr>
+                <tr valign="top">
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:10px "></td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:10px ">&nbsp;&nbsp;&nbsp;</td>
+                    <!--<td style="text-align:left;padding: 0px 0px 0px 0px;font-size:14px ">Extra Premi Karena UW Loading</td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-size:14px "><label id="HeaderExtraPremiUWLoading">70.560.000</label></td>-->
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:10px ">Total Premi</td>
+                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:10px ">:&nbsp;&nbsp;&nbsp;<label id="HeaderPremiPay"></label></td>
+                </tr>
+
+<!--                <tr valign="top">-->
+<!--                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:11px ">Jenis Kelamin</td>-->
+<!--                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-family:Helvetica;font-size:11px ">:&nbsp;&nbsp;&nbsp;<label id="HeaderPOAge">Pria</label></td>-->
+<!--                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-size:14px ">Total Premi Dibayar</td>-->
+<!--                    <td style="text-align:left;padding: 0px 0px 0px 0px;font-size:14px "><label id="HeaderPremiPay">140.120.000</label></td>-->
+<!--                </tr>-->
+
+            </table>
+            
+            <!--520px-->
+            <div class="contentArea" >
+                
+                <table id="table-Summary1" width="100%" cellspacing="0" cellpadding="0" >
+                    <thead>
+                        <!--<tr>
+                            <th colspan="9" class="contentSmall">Ilustrasi Manfaat Asuransi</th>
+                        </tr>-->
+                        <tr>
+                            <td colspan="3" style="border: none"></td>
+                            <td colspan="3" style="text-align: center; border:1px solid black;font-family:Helvetica;font-size:10px">Death Benefit</td>
+                            <td colspan="3" style="text-align: center; border:1px solid black;font-family:Helvetica;font-size:10px">Surrender Benefit</td>
+                        </tr>
+                        <tr bgcolor="#BDE2FC">
+                            <td  class="contentSmall" valign="top" style="border:1px solid black; font-family:Helvetica;font-size:10px;text-align: center;border-bottom: none">Tahun Polis ke-</td>
+                            <td  class="contentSmall" valign="top" style="border:1px solid black; font-family:Helvetica;font-size:10px;text-align: center;border-bottom: none">Usia Tertanggung</td>
+                            <td  class="contentSmall" valign="top" style="border:1px solid black; font-family:Helvetica;font-size:10px;text-align: center;border-bottom: none">Uang Pertanggungan</td>
+                            <td  class="contentSmall" valign="top" style="border:1px solid black; font-family:Helvetica;font-size:10px;text-align: center;border-bottom: none">Nilai Pertanggungan Tambahan*</td>
+                            <td  class="contentSmall" valign="top" style="border:1px solid black; font-family:Helvetica;font-size:10px;text-align: center;border-bottom: none">Akumulasi Nilai Pertanggungan Tambahan*</td>
+                            <td  class="contentSmall" valign="top"style="border:1px solid black; font-family:Helvetica;font-size:10px;text-align: center;border-bottom: none">Total Manfaat Meninggal Dunia</td>
+                            <td  class="contentSmall" valign="top" style="border:1px solid black; font-family:Helvetica;font-size:10px;text-align: center;border-bottom: none">Nilai Tunai Yang Dijamin</td>
+                            <td  class="contentSmall" valign="top" style="border:1px solid black; font-family:Helvetica;font-size:10px;text-align: center;border-bottom: none">Nilai Tunai Pertanggungan Tambahan*</td>
+                            <td  class="contentSmall" valign="top" style="border:1px solid black;font-family:Helvetica;font-size:10px;text-align: center;border-bottom: none">Total Nilai Tunai Pertanggungan*</td>
+                        </tr>
+                        <tr bgcolor="#BDE2FC">
+                            <td  class="contentSmall" valign="middle" style="border:1px solid black;font-family:Helvetica;font-size:10px;text-align: center;border-top: none;border-bottom: none"></td>
+                            <td  class="contentSmall" valign="middle" style="border:1px solid black;font-family:Helvetica;font-size:10px;text-align: center;border-top: none;border-bottom: none"></td>
+                            <td  class="contentSmall" valign="middle" style="border:1px solid black;font-family:Helvetica;font-size:10px;text-align: center;border-top: none;border-bottom: none">(Rp 000)</td>
+                            <td  class="contentSmall" valign="middle" style="border:1px solid black;font-family:Helvetica;font-size:10px;text-align: center;border-top: none;border-bottom: none">(Rp 000)</td>
+                            <td  class="contentSmall" valign="middle" style="border:1px solid black;font-family:Helvetica;font-size:10px;text-align: center;border-top: none;border-bottom: none">(Rp 000)</td>
+                            <td  class="contentSmall" valign="middle"style="border:1px solid black;font-family:Helvetica;font-size:10px;text-align: center;border-top: none;border-bottom: none">(Rp 000)</td>
+                            <td  class="contentSmall" valign="middle" style="border:1px solid black;font-family:Helvetica;font-size:10px;text-align: center;border-top: none;border-bottom: none">(Rp 000)</td>
+                            <td  class="contentSmall" valign="middle" style="border:1px solid black;font-family:Helvetica;font-size:10px;text-align: center;border-top: none;border-bottom: none">(Rp 000)</td>
+                            <td  class="contentSmall" valign="middle" style="border:1px solid black;font-family:Helvetica;font-size:10px;text-align: center;border-top: none;border-bottom: none">(Rp 000)</td>
+                        </tr>
+                        <tr bgcolor="#BDE2FC">
+                            <td  class="contentSmall" valign="top" style="border:1px solid black;font-family:Helvetica;font-size:10px;text-align: center;border-top: none">a</td>
+                            <td  class="contentSmall" valign="top" style="border:1px solid black;font-family:Helvetica;font-size:10px;text-align: center;border-top: none">b</td>
+                            <td  class="contentSmall" valign="top" style="border:1px solid black;font-family:Helvetica;font-size:10px;text-align: center;border-top: none">c</td>
+                            <td  class="contentSmall" valign="top" style="border:1px solid black;font-family:Helvetica;font-size:10px;text-align: center;border-top: none">d</td>
+                            <td  class="contentSmall" valign="top" style="border:1px solid black;font-family:Helvetica;font-size:10px;text-align: center;border-top: none">e</td>
+                            <td  class="contentSmall" valign="top" style="border:1px solid black;font-family:Helvetica;font-size:10px;text-align: center;border-top: none">f=(c+e)</td>
+                            <td  class="contentSmall" valign="top" style="border:1px solid black;font-family:Helvetica;font-size:10px;text-align: center;border-top: none">g</td>
+                            <td  class="contentSmall" valign="top" style="border:1px solid black;font-family:Helvetica;font-size:10px;text-align: center;border-top: none">h</td>
+                            <td  class="contentSmall" valign="top" style="border:1px solid black;font-family:Helvetica;font-size:10px;text-align: center;border-top: none">i=(g+h)</td>
+                        </tr>
+                        
+                    </thead>
+                    <tbody>
+                        <!--sql data here-->
+                    </tbody>
+                    
+                </table>
+                <table width="100%" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td style="text-align: left; border:0px solid black;font-family:Helvetica;font-size:10px">*Nilai Pertanggungan Tambahan beserta akumulasinya tidak dijamin</td>
+                        </tr>
+                        </table>
+            </div>
+            
+        </div>
+		</div>
+        <footer>
+            <!--Tanda tangan-->
+            <div style="width:100%;background-color: #fff;vertical-align: top;">
+                <table border="0" style="border-collapse:separate;border:0px solid black;width:100%;">
+                    <td style="width: 30%">
+                        <table  style="border-collapse:separate;border:0px solid black;width:100%;">
+                            <tr>
+                                <td>Disiapkan oleh</td><td>:</td><td style="width: 60%">&nbsp;&nbsp;<label id="FooterAgentName2"></label></td>
+                            </tr>
+                            
+                            <tr>
+                                <td>Tanggal dan jam cetak</td><td>:</td><td>&nbsp;&nbsp;<label id="FooterPrintDate2"></label></td>
+                            </tr>
+                            
+                            <tr>
+                                <td>Versi</td><td>:</td><td>&nbsp;&nbsp;<label id="FooterVersion2">1.0.000</label></td>
+                            </tr>
+                            
+                            <tr>
+                                <td>Kode Tenaga Penjual</td><td>:</td><td>&nbsp;&nbsp;<label id="FooterAgentCode2"></label></td>
+                            </tr>
+                            
+                            <tr>
+                                <td>Cabang</td><td>:</td><td>&nbsp;&nbsp;<label id="FooterBranch2"></label></td>
+                            </tr>
+                            
+                            <tr>
+									<td colspan="3"><br/></td>
+								</tr>
+								<tr>
+									<td colspan="3"><br/></td>
+								</tr>
+
+								<!--<tr>
+									<td colspan="3">Saya Telah menjelaskan isi ilustrasi ini kepada Calon Pemegang Polis</td>
+								</tr>
+								
+								<tr>
+									<td>Tanda Tangan Tenaga Penjual</td><td>:</td><td></td>
+								</tr>-->
+                        </table>
+                    </td>
+                    <td style="width: 70%">
+							<table  style="border-collapse:separate;border:1px solid black;width:100%;border-spacing:0;">
+								<tr>
+									<td style="border-right: 1px solid black"><br/></td>
+									<td><br/></td>
+								</tr>
+
+								<tr >
+									<td style="text-align:center; width: 35%; border-right: 1px solid black">Saya telah menjelaskan isi ilustrasi ini kepada Calon Pemegang Polis.</td>
+									<td style="text-align:center; width: 35%">Saya telah memahami dan menyetujui penjelasan yang diberikan atas ilustrasi manfaat asuransi yang diuraikan pada halaman ini.</td>
+								</tr>
+								<tr>
+                                    <td style="border-right: 1px solid black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+								</tr>
+								<tr>
+									<td style="text-align:center;border-right: 1px solid black">Tanda Tangan Tenaga Penjual :</td>
+									<td style="text-align:center">Tanda Tangan Pemegang Polis :</td>
+								</tr>
+								<tr>
+									<td style="border-right: 1px solid black"><br/></td>
+									<td><br/></td>
+								</tr>
+								<tr>
+									<td style="border-right: 1px solid black"><br/></td>
+									<td><br/></td>
+								</tr>
+								<tr>
+									<td style="border-right: 1px solid black"><br/></td>
+									<td><br/></td>
+								</tr>
+								<tr>
+									<td style="border-right: 1px solid black"><br/></td>
+									<td><br/></td>
+								</tr>
+								<tr>
+									<td style="border-right: 1px solid black"><br/></td>
+									<td><br/></td>
+								</tr>
+
+							</table>
+						</td>
+                    
+                </table>
+            </div>
+            <!--halaman-->
+            <div style="width:100%;height:20px;background-color: #fff;vertical-align: top;">
+                <table border="0" style="border-collapse:separate;border:0px solid black;width:100%;;font-family:Helvetica;font-size:10px;text-align: right">
+                    <tr style="text-align: right">
+                        <td style="text-align: right">Halaman 2 dari 3</td>
+                    </tr>
+                    <tr style="text-align: right">
+                        <td style="text-align: right">www.bcalife.co.id</td>
+                    </tr>
+                </table>
+            </div>
+        </footer>
+    </body>
+</html>

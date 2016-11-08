@@ -1,0 +1,320 @@
+/* @charset "utf-8"; */
+/* CSS Document */
+/* @charset "utf-8"; */
+/* CSS Document */
+/* @charset "utf-8"; */
+/* CSS Document */
+/* FUNCTION */
+/* ANIMATION */
+/* HEADER */
+/* FORM */
+/* INPUT */
+/* NOTE */
+/* SIGNATURE */
+/* FOOTER */
+/* TABLE */
+/* LINK */
+/* GENERAL */
+/* ICON */
+/* LAYOUT */
+/* FORM INITIALIZATION */
+/* LABEL */
+/* BOX */
+/* TABLE INITIALIZATION */
+/* TABLE */
+/* INPUT INITIALIZATION */
+/* LINK */
+/* RESOURCE */
+/* TYPEFACE */
+/* HEADER */
+header h1, header h2 {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 1em;
+  margin-bottom: 10px;
+}
+
+header h2 {
+  font-size: 0.9em;
+}
+
+header .Highlighted label {
+  font-size: 0.75em;
+}
+
+/* FORM */
+main form label, main form span {
+  margin-left: 5px;
+  margin-right: 5px;
+  font-size: 0.75em;
+  vertical-align: top;
+}
+
+main form label:after {
+  float: right;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+main form label.RadioButton {
+  marginL: 0px !important;
+  padding: 5px;
+  vertical-align: middle;
+}
+
+main form label.RadioButton.Short {
+  width: 40px;
+}
+
+main form label.RadioButton.Medium {
+  width: 84px;
+}
+
+main form label.RadioButton.Long {
+  width: 120px;
+}
+
+main form label.RadioButton:after {
+  content: '';
+}
+
+main form label.RadioButton.Medium {
+  width: 56px;
+}
+
+main form label.Wrap, main form span.Wrap {
+  margin-right: 5px;
+  min-width: auto;
+  width: auto;
+}
+
+main form label.Short, main form span.Short {
+  min-width: 40px;
+  width: 40px;
+}
+
+main form label.Medium, main form span.Medium {
+  min-width: 126px;
+  width: 126px;
+}
+
+main form label.Long, main form span.Long {
+  min-width: 120px;
+  width: 120px;
+}
+
+main form label.ShortFix, main form span.ShortFix {
+  width: 40px;
+  max-width: 40px;
+}
+
+main form label.MediumFix, main form span.MediumFix {
+  width: 126px;
+  max-width: 126px;
+}
+
+main form label.LongFix, main form span.LongFix {
+  width: 240px;
+  max-width: 240px;
+}
+
+main form label.FirstIndent, main form span.FirstIndent {
+  margin-left: 15px;
+}
+
+main form label.SecondIndent, main form span.SecondIndent {
+  margin-left: 30px;
+}
+
+main form label.Short.FirstIndent {
+  min-width: 25px;
+  width: 25px;
+}
+
+main form label.Medium.FirstIndent {
+  min-width: 69px;
+  width: 69px;
+}
+
+main form label.Long.FirstIndent {
+  width: 105px;
+}
+
+main form label.Short.SecondIndent {
+  min-width: 10px;
+  width: 10px;
+}
+
+main form label.Medium.SecondIndent {
+  min-width: 54px;
+  width: 54px;
+}
+
+main form label.Long.SecondIndent {
+  min-width: 90px;
+  width: 90px;
+}
+
+main form label.Single {
+  height: 20px;
+  line-height: 20px;
+}
+
+main form label.Double {
+  min-height: 40px;
+}
+
+main form label.Multi {
+  min-height: 60px;
+  vertical-align: top;
+}
+
+main form label.Box, main form label.Separator {
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+main form label.Separator:after, main form label.Description:after, main form label.Note:after {
+  margin-right: 0px;
+  content: '';
+}
+
+main form label.Suffix, main form span.Suffix {
+  min-width: 11.2px;
+  text-align: left;
+  display: inline-block;
+}
+
+main form span.Separator {
+  padding: 5px;
+  font-size: 0.75em;
+}
+
+main form span.Description, main form label.Description {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-size: 0.7em;
+}
+
+main form span.Note, main form label.Note {
+  margin: 0px;
+  padding: 5px;
+  font-size: 0.4em;
+  border: none;
+}
+
+main hr {
+  border-top: none;
+  border-bottom: solid;
+  border-width: 1px;
+}
+
+/* TABLE */
+table.Square, table.Space {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+table.Square tbody tr td table.BoxSquare, table.Square tbody tr td table.BoxRound, table.Space tbody tr td table.BoxSquare, table.Space tbody tr td table.BoxRound {
+  margin-bottom: 5px;
+}
+
+table.Square tbody tr td table.BoxSquare tbody tr td, table.Square tbody tr td table.BoxRound tbody tr td, table.Space tbody tr td table.BoxSquare tbody tr td, table.Space tbody tr td table.BoxRound tbody tr td {
+  padding: 0px !important;
+}
+
+table.Square tbody tr td.Child, table.Space tbody tr td.Child {
+  padding: 15px;
+}
+
+table.Square {
+  border-style: solid;
+  border-width: 1px;
+  border-spacing: 0;
+}
+
+table.Square thead tr th {
+  width: 86px;
+  padding: 5px;
+  font-size: 0.75em;
+  border-style: solid;
+  border-width: 1px;
+}
+
+table.Square thead tr th:first-child {
+  width: auto !important;
+}
+
+table.Square tbody tr td {
+  padding: 5px;
+  font-size: 0.7em;
+  text-align: center;
+  vertical-align: top;
+  border-top-style: none;
+  border-right-style: solid;
+  border-left-style: solid;
+  border-bottom-style: none;
+  border-width: 1px;
+}
+
+table.Square tbody tr td .PositionerCenter {
+  display: inline-block;
+}
+
+table.Square tbody tr td span, table.Square tbody tr td label {
+  padding-left: 5px;
+  padding-right: 5px;
+  min-width: 15px;
+  line-height: 20px;
+  font-size: 1em;
+  display: inline-block;
+}
+
+table.Square tbody tr td:first-child {
+  text-align: left;
+  white-space: normal;
+}
+
+table.Space {
+  width: 100%;
+  width-border-style: none;
+}
+
+table.Space thead tr th {
+  width: auto;
+  padding: 5px;
+  font-sze: 0.75em;
+  border-style: solid;
+  border-width: 1px;
+}
+
+table.Space thead tr th:first-child {
+  width: auto !important;
+}
+
+table.Space tbody tr td {
+  padding: 5px;
+  font-size: 0.7em;
+  text-align: center;
+  vertical-align: middle;
+  border-style: solid;
+  border-width: 1px;
+}
+
+table.Space tbody tr td:first-child {
+  text-align: left;
+  white-space: normal;
+}
+
+/* POP UP */
+main section form header h2 {
+  border: none;
+}
+
+main section form fieldset {
+  border: none;
+}

@@ -1,0 +1,111 @@
+/* @charset "utf-8"; */
+/* CSS Document */
+/* @charset "utf-8"; */
+/* CSS Document */
+/* @charset "utf-8"; */
+/* CSS Document */
+/* FUNCTION */
+/* ANIMATION */
+/* HEADER */
+/* FORM */
+/* NOTE */
+/* SIGNATURE */
+/* FOOTER */
+/* TABLE */
+/* GENERAL */
+/* ICON */
+/* LAYOUT */
+/* FORM INITIALIZATION */
+/* LABEL */
+/* BOX */
+/* TABLE INITIALIZATION */
+/* TABLE */
+/* RESOURCE */
+/* TYPEFACE */
+/* GENERAL */
+p {
+  font-family: "BPreplay_Bold";
+}
+
+/* HEADER */
+header h1 {
+  font-family: "BPreplay_Bold";
+}
+
+header .Header {
+  font-family: "BPreplay_Regular";
+}
+
+header .Detail {
+  font-family: "BPreplay_Regular";
+}
+
+/* FORM */
+main section h2 {
+  font-family: "BPreplay_Bold";
+}
+
+main section h3 {
+  font-family: "BPreplay_Bold";
+}
+
+main section label, main section span {
+  font-family: "BPreplay_Regular";
+}
+
+main section table.BoxSquare {
+  font-family: "BPreplay_Regular";
+}
+
+main section .BoxRound {
+  font-family: "BPreplay_Regular";
+}
+
+main section ol, main section ul {
+  font-family: "BPreplay_Regular";
+}
+
+main section .Note h3 {
+  font-family: "BPreplay_Bold";
+}
+
+main section .Note p {
+  font-family: "BPreplay_Regular";
+}
+
+main section .Note ol li, main section .Note ul li {
+  font-family: "BPreplay_Regular";
+}
+
+main section table.SignatureSmall, main section table.SignatureMedium {
+  font-family: "BPreplay_Regular";
+}
+
+main section span.Separator, main section span.Description, main section span.Wrap, main section span.Note {
+  font-family: "BPreplay_Regular";
+}
+
+main section p {
+  font-family: "BPreplay_Bold";
+}
+
+main section .LineDot, main section .LineStraight {
+  font-family: "BPreplay_Regular";
+}
+
+/* TABLE */
+table.Square thead tr th {
+  font-family: "BPreplay_Bold";
+}
+
+table.Square tbody tr td {
+  font-family: "BPreplay_Regular";
+}
+
+table.Round thead tr th, table.Space thead tr th {
+  font-family: "BPreplay_Regular";
+}
+
+table.Round tbody tr td, table.Space tbody tr td {
+  font-family: "BPreplay_Regular";
+}

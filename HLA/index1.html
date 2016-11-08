@@ -1,0 +1,456 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='utf-8'>
+<title>Quesioner</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+
+    <link rel="stylesheet" href="../jqueryLibrary/jquery.mobile-1.4.5.min.css">
+    <script type='text/javascript' src="../jqueryLibrary/jquery-1.11.1.min.js"></script>
+    <script type='text/javascript' src="../jqueryLibrary/jquery.mobile-1.4.5.min.js"></script>
+    <script type='text/javascript' src="../jqueryLibrary/jquery.validate.min.js"></script>
+
+<script type='text/javascript'>
+var SelectName1var = '';
+var SelectName2var = '';
+var SelectName3var = '';
+var SelectName4var = '';
+var SelectName5var = '';
+var SelectName6var = '';
+var SelectName7var = '';
+var SelectName8var = '';
+var SelectName9var = '';
+var SelectName10var = '';
+var SelectName11var = '';
+var SelectName12var = '';
+var SelectName13var = '';
+var SelectName14var = '';
+
+__functionIndexMap = {};
+<!-- core wrapper to client -->
+function calliOSFunction(functionName, successCallback, errorCallback, callInfo)
+{
+    var url = 'js-frame:';
+callInfo.functionname = functionName;
+if (successCallback)
+{
+if (typeof successCallback == 'function')
+{
+var callbackFuncName = createCallbackFunction(functionName + '_' + 'successCallback', successCallback);
+callInfo.success = callbackFuncName;
+}
+else
+callInfo.success = successCallback;
+}
+if (errorCallback)
+{
+if (typeof errorCallback == 'function')
+{
+var callbackFuncName = createCallbackFunction(functionName + '_' + 'errorCallback', errorCallback);
+callInfo.error = callbackFuncName;
+}
+else
+callInfo.error = errorCallback;
+}
+url += JSON.stringify(callInfo);
+var iFrame = createIFrame(url);
+//remove the frame now
+iFrame.parentNode.removeChild(iFrame);
+}
+function createCallbackFunction (funcName, callbackFunc)
+{
+if (callbackFunc && callbackFunc.name != null && callbackFunc.name.length > 0)
+{
+return callbackFunc.name;
+}
+if (typeof window[funcName+0] != 'function')
+{
+window[funcName+0] = callbackFunc;
+__functionIndexMap[funcName] = 0;
+return funcName+0
+} else
+{
+var maxIndex = __functionIndexMap[funcName];
+var callbackFuncStr = callbackFunc.toString();
+for (var i = 0; i <= maxIndex; i++)
+{
+var tmpName = funcName + i;
+if (window[tmpName].toString() == callbackFuncStr)
+return tmpName;
+}
+var newIndex = ++__functionIndexMap[funcName];
+window[funcName+newIndex] = callbackFunc;
+return funcName+newIndex;
+}
+}
+function createIFrame(src)
+{
+var rootElm = document.documentElement;
+var newFrameElm = document.createElement('IFRAME');
+newFrameElm.setAttribute('src',src);
+rootElm.appendChild(newFrameElm);
+return newFrameElm;
+}
+function onSuccess (ret)
+{
+if (ret)
+{
+var returnRet = JSON.parse(ret);
+alert(returnRet.result);
+}
+}
+function onError (ret)
+{
+if (ret)
+{
+var returnRet = JSON.parse(ret);
+alert(returnRet.error);
+}
+}
+function readfromDB() {
+var callInfo = {};
+callInfo.data = {};
+callInfo.data.CFFAnswers = {};
+callInfo.data.CFFAnswers.columns = 'elementID,Value,CFFID,CustomerID';
+callInfo.data.CFFAnswers.where = '';
+calliOSFunction('readfromDB:',onSuccess,onError, callInfo);
+}
+function savetoDB() {
+//we fill up the parameters here
+var callInfo = {};
+callInfo.data = {};
+callInfo.data.CFFAnswers = [{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}];
+//if the table inserted is same with multiple rows.
+//treat the data as array
+callInfo.data.CFFAnswers[0].elementID = 'SelectID0';
+callInfo.data.CFFAnswers[0].Value = $('#SelectID0 :selected').val();
+callInfo.data.CFFAnswers[0].CFFID = '1';
+callInfo.data.CFFAnswers[0].CustomerID = '1';
+
+callInfo.data.CFFAnswers[0].elementID = 'SelectID0';
+callInfo.data.CFFAnswers[0].Value = $('#SelectID0 :selected').val();
+callInfo.data.CFFAnswers[0].CFFID = '1';
+callInfo.data.CFFAnswers[0].CustomerID = '1';
+
+callInfo.data.CFFAnswers[0].elementID = 'SelectID0';
+callInfo.data.CFFAnswers[0].Value = $('#SelectID0 :selected').val();
+callInfo.data.CFFAnswers[0].CFFID = '1';
+callInfo.data.CFFAnswers[0].CustomerID = '1';
+
+callInfo.data.CFFAnswers[1].elementID = 'SelectID1';
+callInfo.data.CFFAnswers[1].Value = $('#SelectID1 :selected').val();
+callInfo.data.CFFAnswers[1].CFFID = '1';
+callInfo.data.CFFAnswers[1].CustomerID = '1';
+
+callInfo.data.CFFAnswers[2].elementID = 'SelectID2';
+callInfo.data.CFFAnswers[2].Value = $('#SelectID2 :selected').val();
+callInfo.data.CFFAnswers[2].CFFID = '1';
+callInfo.data.CFFAnswers[2].CustomerID = '1';
+
+callInfo.data.CFFAnswers[3].elementID = 'SelectID3';
+callInfo.data.CFFAnswers[3].Value = $('#SelectID3 :selected').val();
+callInfo.data.CFFAnswers[3].CFFID = '1';
+callInfo.data.CFFAnswers[3].CustomerID = '1';
+
+callInfo.data.CFFAnswers[4].elementID = 'SelectID4';
+callInfo.data.CFFAnswers[4].Value = $('#SelectID4 :selected').val();
+callInfo.data.CFFAnswers[4].CFFID = '1';
+callInfo.data.CFFAnswers[4].CustomerID = '1';
+
+callInfo.data.CFFAnswers[5].elementID = 'SelectID5';
+callInfo.data.CFFAnswers[5].Value = $('#SelectID5 :selected').val();
+callInfo.data.CFFAnswers[5].CFFID = '1';
+callInfo.data.CFFAnswers[5].CustomerID = '1';
+
+callInfo.data.CFFAnswers[6].elementID = 'SelectID6';
+callInfo.data.CFFAnswers[6].Value = $('#SelectID6 :selected').val();
+callInfo.data.CFFAnswers[6].CFFID = '1';
+callInfo.data.CFFAnswers[6].CustomerID = '1';
+
+callInfo.data.CFFAnswers[7].elementID = 'SelectID6';
+callInfo.data.CFFAnswers[7].Value = $('#SelectID6 :selected').val();
+callInfo.data.CFFAnswers[7].CFFID = '1';
+callInfo.data.CFFAnswers[7].CustomerID = '1';
+
+callInfo.data.CFFAnswers[8].elementID = 'SelectID7';
+callInfo.data.CFFAnswers[8].Value = $('#SelectID7 :selected').val();
+callInfo.data.CFFAnswers[8].CFFID = '1';
+callInfo.data.CFFAnswers[8].CustomerID = '1';
+
+callInfo.data.CFFAnswers[9].elementID = 'SelectID8';
+callInfo.data.CFFAnswers[9].Value = $('#SelectID8 :selected').val();
+callInfo.data.CFFAnswers[9].CFFID = '1';
+callInfo.data.CFFAnswers[9].CustomerID = '1';
+
+callInfo.data.CFFAnswers[10].elementID = 'SelectID9';
+callInfo.data.CFFAnswers[10].Value = $('#SelectID9 :selected').val();
+callInfo.data.CFFAnswers[10].CFFID = '1';
+callInfo.data.CFFAnswers[10].CustomerID = '1';
+
+callInfo.data.CFFAnswers[11].elementID = 'SelectID10';
+callInfo.data.CFFAnswers[11].Value = $('#SelectID10 :selected').val();
+callInfo.data.CFFAnswers[11].CFFID = '1';
+callInfo.data.CFFAnswers[11].CustomerID = '1';
+
+callInfo.data.CFFAnswers[12].elementID = 'SelectID11';
+callInfo.data.CFFAnswers[12].Value = $('#SelectID11 :selected').val();
+callInfo.data.CFFAnswers[12].CFFID = '1';
+callInfo.data.CFFAnswers[12].CustomerID = '1';
+
+callInfo.data.CFFAnswers[13].elementID = 'SelectID12';
+callInfo.data.CFFAnswers[13].Value = $('#SelectID12 :selected').val();
+callInfo.data.CFFAnswers[13].CFFID = '1';
+callInfo.data.CFFAnswers[13].CustomerID = '1';
+
+callInfo.data.CFFAnswers[14].elementID = 'SelectID13';
+callInfo.data.CFFAnswers[14].Value = $('#SelectID13 :selected').val();
+callInfo.data.CFFAnswers[14].CFFID = '1';
+callInfo.data.CFFAnswers[14].CustomerID = '1';
+//call the wrapper with the parameterized info
+calliOSFunction('savetoDB:',onSuccess,onError, callInfo);
+SelectName1var = $('#SelectID0 :selected').val();
+SelectName2var = $('#SelectID1 :selected').val();
+SelectName3var = $('#SelectID2 :selected').val();
+SelectName4var = $('#SelectID3 :selected').val();
+SelectName5var = $('#SelectID4 :selected').val();
+SelectName6var = $('#SelectID5 :selected').val();
+SelectName7var = $('#SelectID6 :selected').val();
+SelectName8var = $('#SelectID7 :selected').val();
+SelectName9var = $('#SelectID8 :selected').val();
+SelectName10var = $('#SelectI9 :selected').val();
+SelectName11var = $('#SelectID10 :selected').val();
+SelectName12var = $('#SelectID11 :selected').val();
+SelectName13var = $('#SelectID12 :selected').val();
+SelectName14var = $('#SelectID13 :selected').val();
+console.log(JSON.stringify(callInfo));
+}
+function PrintData()
+{
+    savetoDB();
+}
+function ReadData()
+{
+$("#SelectID0").val(SelectName1var).slider('refresh');
+$("#SelectID1").val(SelectName2var).slider('refresh');
+$("#SelectID2").val(SelectName3var).slider('refresh');
+$("#SelectID3").val(SelectName4var).slider('refresh');
+$("#SelectID4").val(SelectName5var).slider('refresh');
+$("#SelectID5").val(SelectName6var).slider('refresh');
+$("#SelectID6").val(SelectName7var).slider('refresh');
+$("#SelectID7").val(SelectName8var).slider('refresh');
+$("#SelectID8").val(SelectName9var).slider('refresh');
+$("#SelectID9").val(SelectName10var).slider('refresh');
+$("#SelectID10").val(SelectName11var).slider('refresh');
+$("#SelectID11").val(SelectName12var).slider('refresh');
+$("#SelectID12").val(SelectName13var).slider('refresh');
+$("#SelectID13").val(SelectName14var).slider('refresh');
+readfromDB();
+}
+</script>
+
+<style>
+label.error {
+color: red;
+font-size: 16px;
+font-weight: normal;
+line-height: 1.4;
+margin-top: 0.5em;
+width: 100%;
+float: none;
+}
+@media screen and (orientation: portrait) {
+label.error {
+margin-left: 0;
+display: block;
+}
+}
+@media screen and (orientation: landscape) {
+label.error {
+display: inline-block;
+margin-left: 0%;
+}
+}
+em {
+color: red;
+font-weight: bold;
+padding-right: .25em;
+}  
+</style>
+</head>
+<body>
+<div id='page1' data-role='page'>
+<div data-role='content'>
+<form id='myform'>
+<div data-role='main' class='ui-content'>
+<table data-role="table" class="ui-responsive table-stroke">
+     <thead>
+       <tr style="background-color: blue; color: white;" >
+         <th data-priority="2"></th>
+         <th>KEBUTUHAN</th>
+         <th data-priority="3">SUDAH PUNYA</th>
+         <th data-priority="1">BERENCANA PUNYA</th>
+         <th data-priority="5">PRIORITAS</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <th>1</th>
+         <td>Proteksi Pribadi</a><br />
+             (Proteksi Jiwa, Cacat Tetap Total, dan Penyakit Kritis)<br />
+             Proteksi Pasangan<br />
+             (Proteksi Jiwa, Cacat Tetap Total, dan Penyakit Kritis)<br />
+             Proteksi Anak<br />
+             (Proteksi Jiwa, Cacat Tetap Total, dan Penyakit Kritis)</td>
+         <td>            
+             <select id="SelectID0" name="flip-2" data-role="slider" data-mini="true">
+        <option value="off">Ya</option>
+        <option value="on">Tidak</option>
+    </select><br />
+             <select id="SelectID1" name="flip-3" data-role="slider" data-mini="true">
+        <option value="off">Ya</option>
+        <option value="on">Tidak</option>
+    </select><br />
+             <select id="SelectID2" name="flip-4" data-role="slider" data-mini="true">
+        <option value="off">Ya</option>
+        <option value="on">Tidak</option>
+    </select><br />             
+             </td>
+         <td>            
+             <select id="SelectID3" name="flip-5" data-role="slider" data-mini="true">
+        <option value="off">Ya</option>
+        <option value="on">Tidak</option>
+    </select><br />
+             <select id="SelectID4" name="flip-6" data-role="slider" data-mini="true">
+        <option value="off">Ya</option>
+        <option value="on">Tidak</option>
+    </select><br />
+             <select id="SelectID5" name="flip-7" data-role="slider" data-mini="true">
+        <option value="off">Ya</option>
+        <option value="on">Tidak</option>
+    </select></td>
+         <td>1<br />
+             <br />
+             2<br />
+             <br />
+             3</td>
+       </tr>
+       <tr>
+         <th>2</th>
+         <td>Pensiun</td>
+         <td>
+             <select id="SelectID6" name="flip-8" data-role="slider" data-mini="true">
+        <option value="off">Ya</option>
+        <option value="on">Tidak</option>
+    </select></td>
+         <td>
+             <select id="SelectID7" name="flip-9" data-role="slider" data-mini="true">
+        <option value="off">Ya</option>
+        <option value="on">Tidak</option>
+    </select></td>
+         <td class="style1">4</td>
+       </tr>
+       <tr>
+         <th>3</th>
+         <td>Pendidikan Anak</td>
+         <td>
+             <select id="SelectID8" name="flip-10" data-role="slider" data-mini="true">
+        <option value="off">Ya</option>
+        <option value="on">Tidak</option>
+    </select></td>
+         <td>
+             <select id="SelectID9" name="flip-11" data-role="slider" data-mini="true">
+        <option value="off">Ya</option>
+        <option value="on">Tidak</option>
+    </select></td>
+         <td>5</td>
+       </tr>
+       <tr>
+         <th>4</th>
+         <td>Warisan</td>
+         <td>
+             <select id="SelectID10" name="flip-12" data-role="slider" data-mini="true">
+        <option value="off">Ya</option>
+        <option value="on">Tidak</option>
+    </select></td>
+         <td>
+             <select id="SelectID11" name="flip-13" data-role="slider" data-mini="true">
+        <option value="off">Ya</option>
+        <option value="on">Tidak</option>
+    </select></td>
+         <td>6</td>
+       </tr>
+       <tr>
+         <th>5</th>
+         <td>Investasi</td>
+         <td>
+             <select id="SelectID12" name="flip-14" data-role="slider" data-mini="true">
+        <option value="off">Ya</option>
+        <option value="on">Tidak</option>
+    </select></td>
+         <td>
+             <select id="SelectID13" name="flip-15" data-role="slider" data-mini="true">
+        <option value="off">Ya</option>
+        <option value="on">Tidak</option>
+    </select></td>
+         <td>7</td>
+       </tr>      
+     </tbody>
+   </table>
+
+<div><button class="ui-btn ui-btn-inline" id="save">Save</button>
+    <button class="ui-btn ui-btn-inline" id="read">Read</button>
+</div>
+</div>
+</form>
+</div>
+</div>
+<script>
+$(document).ready(function () {
+$.validator.addMethod('valueNotEquals', function(value, element, arg){
+return arg != value;
+}, 'Value must not equal arg.');
+$('#myform').validate({ // initialize the plugin
+rules: {
+TextName0: {
+required: true,
+},
+RangeName1: {
+required: true,
+range: [5, 50]
+},
+CheckBoxName3:{required:true,'minlength':2},
+ SelectName4 : { valueNotEquals: 'Choose' },
+},
+messages:
+{
+CheckBoxName3:
+{
+minlength:'Please select at least {0} options'
+},
+    SelectName4: { valueNotEquals: 'Please select an item!' },
+},
+errorPlacement: function( error, element ) {
+if ( element.is(':checkbox') ) 
+    {
+        error.appendTo( element.parents('.container') );
+    }
+else
+{
+error.insertAfter( element.parent() );
+}
+}
+})
+$('#save').click(function(e) {
+e.preventDefault();
+PrintData();
+$('#myform')[0].reset();
+} 
+);
+$('#read').click(function(e) {
+e.preventDefault();
+ReadData();
+});
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AnalisaKebutuhanNasabahViewController">
+            <connections>
+                <outlet property="buttonInvestasi" destination="UXU-em-yrL" id="gSn-Nn-82I"/>
+                <outlet property="buttonPendidikan" destination="cJK-tF-6Xx" id="RHJ-3D-k3w"/>
+                <outlet property="buttonPensiun" destination="wuU-Po-o6a" id="EwT-WH-ZYB"/>
+                <outlet property="buttonProteksi" destination="V3F-RP-yNq" id="vp9-g7-Ese"/>
+                <outlet property="buttonWarisan" destination="hA9-mW-6HC" id="W9d-K0-UAD"/>
+                <outlet property="childView" destination="sJg-fm-8uy" id="5VZ-i3-HNE"/>
+                <outlet property="segmentPage4" destination="aB1-47-9KZ" id="Mca-Ck-5Lq"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="760" height="768"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view clipsSubviews="YES" contentMode="scaleToFill" id="Byv-jf-bO6">
+                    <rect key="frame" x="0.0" y="0.0" width="760" height="42"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="V3F-RP-yNq">
+                            <rect key="frame" x="0.0" y="0.0" width="152" height="42"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="PROTEKSI"/>
+                            <connections>
+                                <action selector="actionChangeTabPage:" destination="-1" eventType="touchUpInside" id="I8d-XV-6Vh"/>
+                            </connections>
+                        </button>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="UXU-em-yrL">
+                            <rect key="frame" x="608" y="0.0" width="152" height="42"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="INVESTASI"/>
+                            <connections>
+                                <action selector="actionChangeTabPage:" destination="-1" eventType="touchUpInside" id="5lV-be-SK0"/>
+                            </connections>
+                        </button>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="wuU-Po-o6a">
+                            <rect key="frame" x="152" y="0.0" width="152" height="42"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="PENSIUN"/>
+                            <connections>
+                                <action selector="actionChangeTabPage:" destination="-1" eventType="touchUpInside" id="lem-kL-pDV"/>
+                            </connections>
+                        </button>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="cJK-tF-6Xx">
+                            <rect key="frame" x="304" y="0.0" width="152" height="42"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="PENDIDIKAN"/>
+                            <connections>
+                                <action selector="actionChangeTabPage:" destination="-1" eventType="touchUpInside" id="IpU-xB-n0R"/>
+                            </connections>
+                        </button>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hA9-mW-6HC">
+                            <rect key="frame" x="456" y="0.0" width="152" height="42"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="WARISAN"/>
+                            <connections>
+                                <action selector="actionChangeTabPage:" destination="-1" eventType="touchUpInside" id="dM5-2A-Z09"/>
+                            </connections>
+                        </button>
+                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="aB1-47-9KZ">
+                            <rect key="frame" x="8" y="7" width="744" height="29"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="Proteksi"/>
+                                <segment title="Pensiun"/>
+                                <segment title="Pendidikan"/>
+                                <segment title="Warisan"/>
+                                <segment title="Investasi"/>
+                            </segments>
+                            <connections>
+                                <action selector="actionChangeMenuPage:" destination="-1" eventType="valueChanged" id="vfr-1e-UNa"/>
+                            </connections>
+                        </segmentedControl>
+                    </subviews>
+                    <color key="backgroundColor" red="0.92549019610000005" green="0.92549019610000005" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
+                <view contentMode="scaleToFill" id="sJg-fm-8uy">
+                    <rect key="frame" x="8" y="50" width="744" height="710"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <nil key="simulatedStatusBarMetrics"/>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="146" y="162"/>
+        </view>
+    </objects>
+</document>

@@ -1,0 +1,104 @@
+/* @charset "utf-8"; */
+/* CSS Document */
+/* @charset "utf-8"; */
+/* CSS Document */
+/* @charset "utf-8"; */
+/* CSS Document */
+/* FUNCTION */
+/* ANIMATION */
+/* HEADER */
+/* FORM */
+/* INPUT */
+/* NOTE */
+/* SIGNATURE */
+/* FOOTER */
+/* TABLE */
+/* LINK */
+/* GENERAL */
+/* ICON */
+/* LAYOUT */
+/* FORM INITIALIZATION */
+/* LABEL */
+/* BOX */
+/* TABLE INITIALIZATION */
+/* TABLE */
+/* INPUT INITIALIZATION */
+/* LINK */
+/* RESOURCE */
+/* TYPEFACE */
+/* GENERAL */
+p {
+  font-family: "BPreplay_Bold";
+}
+
+/* HEADER */
+header {
+  font-family: "BPreplay_Regular";
+}
+
+header h2 {
+  font-family: "BPreplay_Bold";
+}
+
+/* FORM */
+main form label, main form span {
+  font-family: "BPreplay_Regular";
+}
+
+main form table.BoxSquare {
+  font-family: "BPreplay_Regular";
+}
+
+main form .BoxRound {
+  font-family: "BPreplay_Regular";
+}
+
+main form ol, main form ul {
+  font-family: "BPreplay_Regular";
+}
+
+main form .Note h3 {
+  font-family: "BPreplay_Bold";
+}
+
+main form .Note p {
+  font-family: "BPreplay_Regular";
+}
+
+main form .Note ol li, main form .Note ul li {
+  font-family: "BPreplay_Regular";
+}
+
+main form table.SignatureSmall, main form table.SignatureMedium {
+  font-family: "BPreplay_Regular";
+}
+
+main form span.Separator, main form span.Description, main form span.Wrap, main form span.Note {
+  font-family: "BPreplay_Regular";
+}
+
+main form p {
+  font-family: "BPreplay_Bold";
+}
+
+/* TABLE */
+table.Square thead tr th {
+  font-family: "BPreplay_Bold";
+}
+
+table.Square tbody tr td {
+  font-family: "BPreplay_Regular";
+}
+
+table.Round thead tr th, table.Space thead tr th {
+  font-family: "BPreplay_Regular";
+}
+
+table.Round tbody tr td, table.Space tbody tr td {
+  font-family: "BPreplay_Regular";
+}
+
+/* LINK */
+.NavigationPopUp {
+  font-family: "BPreplay_Regular";
+}

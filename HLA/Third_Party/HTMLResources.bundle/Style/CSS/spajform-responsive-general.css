@@ -1,0 +1,42 @@
+/* @charset "utf-8"; */
+/* CSS Document */
+/* @charset "utf-8"; */
+/* CSS Document */
+/* @charset "utf-8"; */
+/* CSS Document */
+/* FUNCTION */
+/* ANIMATION */
+/* HEADER */
+/* FORM */
+/* INPUT */
+/* NOTE */
+/* SIGNATURE */
+/* FOOTER */
+/* TABLE */
+/* LINK */
+/* GENERAL */
+/* ICON */
+/* LAYOUT */
+/* FORM INITIALIZATION */
+/* LABEL */
+/* BOX */
+/* TABLE INITIALIZATION */
+/* TABLE */
+/* INPUT INITIALIZATION */
+/* LINK */
+/* RESOURCE */
+/* TYPEFACE */
+/* LAYOUT */
+@media screen and (max-width: 540px) {
+  form .ContainerLeft, form .ContainerRight, form .ContainerFit {
+    flex-wrap: wrap;
+    align-content: stretch;
+    align-items: stretch;
+    background: blue;
+  }
+  form .ContainerLeft .Item, form .ContainerRight .Item, form .ContainerFit .Item {
+    min-width: 100% !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}

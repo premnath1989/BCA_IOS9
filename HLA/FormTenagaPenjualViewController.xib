@@ -1,0 +1,601 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="BPreplay_Bold.otf">
+            <string>BPreplay-Bold</string>
+        </mutableArray>
+        <mutableArray key="BPreplay_BoldItalics.otf">
+            <string>BPreplay-BoldItalic</string>
+        </mutableArray>
+        <mutableArray key="BPreplay_Italics.ttf">
+            <string>BPreplay-Italic</string>
+        </mutableArray>
+        <mutableArray key="BPreplay_Regular.ttf">
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FormTenagaPenjualViewController">
+            <connections>
+                <outlet property="AreaSalesDeclarationAdditionalInformation" destination="Scm-BL-s1R" id="M75-ed-Dve"/>
+                <outlet property="RadioButtonSalesDeclaration60DaysLimit" destination="0k3-ej-aAq" id="x81-H6-cl8"/>
+                <outlet property="RadioButtonSalesDeclaration90DaysLimit" destination="zdC-dw-Nmk" id="2Ia-0R-b1V"/>
+                <outlet property="RadioButtonSalesDeclarationBasicSumAssured" destination="vay-Vj-l9c" id="fbq-yK-aC8"/>
+                <outlet property="RadioButtonSalesDeclarationConsitution" destination="3et-Ge-Oae" id="r7z-zO-mzp"/>
+                <outlet property="RadioButtonSalesDeclarationDenyClaim" destination="db1-mj-HM3" id="pHd-YM-vVV"/>
+                <outlet property="RadioButtonSalesDeclarationFaceToFace" destination="7fF-E7-v2j" id="tzK-es-aA6"/>
+                <outlet property="RadioButtonSalesDeclarationHealth" destination="E4J-1j-WM8" id="sNo-Mr-ukl"/>
+                <outlet property="RadioButtonSalesDeclarationKnowProspectiveInsured" destination="jTE-3S-CrJ" id="9zH-wJ-RGf"/>
+                <outlet property="RadioButtonSalesDeclarationRelationshipWithProspectiveInsured" destination="OE0-fh-VrU" id="EBn-et-WYJ"/>
+                <outlet property="RadioButtonSalesDeclarationSelfVerified" destination="Z1v-ry-3JI" id="vGC-rj-WHL"/>
+                <outlet property="RadioButtonSalesDeclarationStillConsideration" destination="9lQ-Sb-pit" id="FTg-bc-f1c"/>
+                <outlet property="RadioButtonSalesDeclarationThirdParty" destination="dW9-Ba-WD2" id="XE1-aR-dnj"/>
+                <outlet property="RadioButtonSalesDeclarationWithoutSecrecy" destination="t7q-h1-KDV" id="C8i-MD-bJY"/>
+                <outlet property="TextSalesDeclarationIncomeBruto" destination="FPG-1l-JLX" id="lFC-fM-pXK"/>
+                <outlet property="TextSalesDeclarationIncomeSource" destination="OUb-zp-yrX" id="YjN-e9-AkS"/>
+                <outlet property="TextSalesDeclarationPurposeOther" destination="8S1-tQ-zwD" id="VDo-1U-yMD"/>
+                <outlet property="TextSalesDeclarationRelationshipWithProspectiveInsuredOther" destination="G95-Uk-3Qq" id="ClS-Lv-MQl"/>
+                <outlet property="buttonSubmit" destination="CjL-i9-Xry" id="BKD-So-gab"/>
+                <outlet property="collectionReasonInsurancePurchase" destination="t3m-ki-XHT" id="qh0-5t-aEO"/>
+                <outlet property="scrollViewForm" destination="UQm-bs-aDz" id="CgX-Qh-iGZ"/>
+                <outlet property="stackViewForm" destination="B1q-38-Mx6" id="kRK-BD-n98"/>
+                <outlet property="textFieldInsured" destination="2MS-5O-Jys" id="8XS-Lf-mtO"/>
+                <outlet property="textFieldPolicyHolder" destination="1ci-vq-g0M" id="5Yi-zV-naz"/>
+                <outlet property="textFieldSPAJNumber" destination="yeE-Bj-z9b" id="LHM-ba-FmX"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="819" height="724"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0A8-0V-3AO">
+                    <rect key="frame" x="0.0" y="0.0" width="819" height="724"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VrF-0f-Mb7" customClass="ViewPageHeader">
+                    <rect key="frame" x="0.0" y="0.0" width="819" height="44"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Form Tenaga Penjual" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C2l-cA-HZA" customClass="LabelPageTitle">
+                            <rect key="frame" x="0.0" y="0.0" width="819" height="44"/>
+                            <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
+                            <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KkF-wd-GK1">
+                            <rect key="frame" x="8" y="7" width="66" height="30"/>
+                            <state key="normal" title="Close"/>
+                            <connections>
+                                <action selector="actionCloseForm:" destination="-1" eventType="touchUpInside" id="9CL-SK-Psp"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CjL-i9-Xry">
+                            <rect key="frame" x="745" y="7" width="66" height="30"/>
+                            <state key="normal" title="Submit"/>
+                            <connections>
+                                <action selector="getUISwitchValue:" destination="-1" eventType="touchUpInside" id="vXj-eQ-fqY"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.87450980389999999" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UQm-bs-aDz">
+                    <rect key="frame" x="0.0" y="45" width="819" height="679"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="B1q-38-Mx6">
+                            <rect key="frame" x="0.0" y="0.0" width="819" height="1975"/>
+                            <subviews>
+                                <view tag="1" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jkc-VD-JSO" userLabel="View-1">
+                                    <rect key="frame" x="0.0" y="0.0" width="819" height="114"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nVY-t1-oKK">
+                                            <rect key="frame" x="20" y="8" width="624" height="21"/>
+                                            <string key="text">1. Apakah hubungan Anda mengenal Calon Tertanggung/Calon Pemegang Polis?
+</string>
+                                            <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <segmentedControl opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="OE0-fh-VrU" customClass="SegmentSPAJ">
+                                            <rect key="frame" x="20" y="39" width="791" height="29"/>
+                                            <segments>
+                                                <segment title="Keluarga"/>
+                                                <segment title="Referensi"/>
+                                                <segment title="Tidak Sengaja"/>
+                                                <segment title="Iklan"/>
+                                                <segment title="Teman/ Kerabat"/>
+                                                <segment title="Sub Keagenan"/>
+                                                <segment title="Lainnya"/>
+                                            </segments>
+                                            <color key="tintColor" red="0.0" green="0.62745098040000002" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <connections>
+                                                <action selector="actionSegmentSPAJ:" destination="-1" eventType="valueChanged" id="P6D-au-ohT"/>
+                                            </connections>
+                                        </segmentedControl>
+                                        <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="G95-Uk-3Qq" customClass="TextFieldSPAJ">
+                                            <rect key="frame" x="20" y="75" width="453" height="30"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </view>
+                                <view tag="1" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ajb-Rl-9c9" userLabel="View-2">
+                                    <rect key="frame" x="0.0" y="119" width="819" height="105"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2. Sudah berapa lama Anda mengenal Calon Tertanggung/Calon Pemegang Polis?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RFQ-IQ-sNx">
+                                            <rect key="frame" x="20" y="8" width="638" height="21"/>
+                                            <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <segmentedControl opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="jTE-3S-CrJ" customClass="SegmentSPAJ">
+                                            <rect key="frame" x="20" y="37" width="791" height="29"/>
+                                            <segments>
+                                                <segment title="Tidak Kenal"/>
+                                                <segment title="&lt; 1 tahun"/>
+                                                <segment title="&lt; 5 tahun"/>
+                                                <segment title="Selama Hidup"/>
+                                            </segments>
+                                            <color key="tintColor" red="0.0" green="0.62745098040000002" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        </segmentedControl>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </view>
+                                <view tag="1" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n6X-dx-br8" userLabel="View-3">
+                                    <rect key="frame" x="0.0" y="229" width="819" height="75"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="3. Apakah Calon Tertanggung saat ini dalam keadaan sehat?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kQ2-Kb-kJa">
+                                            <rect key="frame" x="20" y="8" width="638" height="21"/>
+                                            <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="E4J-1j-WM8" customClass="SegmentSPAJ">
+                                            <rect key="frame" x="690" y="8" width="121" height="29"/>
+                                            <segments>
+                                                <segment title="Ya"/>
+                                                <segment title="Tidak"/>
+                                            </segments>
+                                            <color key="tintColor" red="0.0" green="0.62745098040000002" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        </segmentedControl>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </view>
+                                <view tag="1" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cmf-Bn-M6t" userLabel="View-4">
+                                    <rect key="frame" x="0.0" y="309" width="819" height="105"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zm2-iS-jVg">
+                                            <rect key="frame" x="20" y="8" width="626" height="63"/>
+                                            <string key="text">4. Apakah sudah dijelaskan kepada Calon Tertanggung/Calon Pemegang Polis untuk menjawab seluruh pertanyaan dalam SPAJ dengan benar dan tanpa ada hal yang dirahasiakan?</string>
+                                            <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="t7q-h1-KDV" customClass="SegmentSPAJ">
+                                            <rect key="frame" x="690" y="8" width="121" height="29"/>
+                                            <segments>
+                                                <segment title="Ya"/>
+                                                <segment title="Tidak"/>
+                                            </segments>
+                                            <color key="tintColor" red="0.0" green="0.62745098040000002" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        </segmentedControl>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </view>
+                                <view tag="1" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fzx-UU-Gz6" userLabel="View-5">
+                                    <rect key="frame" x="0.0" y="419" width="819" height="105"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JIl-i8-IL7">
+                                            <rect key="frame" x="20" y="8" width="626" height="61"/>
+                                            <string key="text">5. Apakah sudah dijelaskan kepada Calon Pemegang Polis bahwa jawaban yang tidak benar akan berakibat batalnya perjanjian asuransi jiwa ini dan Penanggung berhak menolak Klaim yang diajukan?</string>
+                                            <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="db1-mj-HM3" customClass="SegmentSPAJ">
+                                            <rect key="frame" x="690" y="8" width="121" height="29"/>
+                                            <segments>
+                                                <segment title="Ya"/>
+                                                <segment title="Tidak"/>
+                                            </segments>
+                                            <color key="tintColor" red="0.0" green="0.62745098040000002" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        </segmentedControl>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </view>
+                                <view tag="1" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3th-Iy-ink" userLabel="View-6">
+                                    <rect key="frame" x="0.0" y="529" width="819" height="105"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cQC-oi-XdY">
+                                            <rect key="frame" x="20" y="8" width="626" height="81"/>
+                                            <string key="text">6. Apakah sudah dijelaskan kepada Calon Pemegang Polis bahwa jawaban keputusan Underwriting atas pengajuan permohonan asuransi jiwa ini dapat ditolak, ditunda, dikenakan tambahan Premi atau diturunkan Uang Pertanggungannya?</string>
+                                            <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="9lQ-Sb-pit" customClass="SegmentSPAJ">
+                                            <rect key="frame" x="690" y="8" width="121" height="29"/>
+                                            <segments>
+                                                <segment title="Ya"/>
+                                                <segment title="Tidak"/>
+                                            </segments>
+                                            <color key="tintColor" red="0.0" green="0.62745098040000002" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        </segmentedControl>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </view>
+                                <view tag="1" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7yH-zz-Pdx" userLabel="View-7">
+                                    <rect key="frame" x="0.0" y="639" width="819" height="105"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1kr-R8-OyQ">
+                                            <rect key="frame" x="20" y="8" width="626" height="61"/>
+                                            <string key="text">7. Apakah Anda bertemu atau melihat langsung Calon Tertanggung/Calon Pemegang Polis pada saat pengisian atau penandatanganan SPAJ? (Penandatanganan SPAJ harus dihadapan Tenaga Penjual).</string>
+                                            <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="7fF-E7-v2j" customClass="SegmentSPAJ">
+                                            <rect key="frame" x="690" y="8" width="121" height="29"/>
+                                            <segments>
+                                                <segment title="Ya"/>
+                                                <segment title="Tidak"/>
+                                            </segments>
+                                            <color key="tintColor" red="0.0" green="0.62745098040000002" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        </segmentedControl>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </view>
+                                <view tag="1" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ek0-5n-wok" userLabel="View-8">
+                                    <rect key="frame" x="0.0" y="749" width="819" height="105"/>
+                                    <subviews>
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="0k3-ej-aAq" customClass="SegmentSPAJ">
+                                            <rect key="frame" x="690" y="8" width="121" height="29"/>
+                                            <segments>
+                                                <segment title="Ya"/>
+                                                <segment title="Tidak"/>
+                                            </segments>
+                                            <color key="tintColor" red="0.0" green="0.62745098040000002" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        </segmentedControl>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z8F-9G-k1P">
+                                            <rect key="frame" x="20" y="8" width="626" height="81"/>
+                                            <string key="text">8. Apakah sudah dijelaskan kepada Calon Pemegang Polis bahwa pengajuan asuransi akan dianggap batal, apabila persyaratan pengajuan asuransi jiwa tidak dilengkapi dalam waktu 60 (enam puluh) Hari Kalender sejak SPAJ terdaftar di Kantor Pusat BCA Life?</string>
+                                            <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </view>
+                                <view tag="1" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FfU-bZ-6B9" userLabel="View-9">
+                                    <rect key="frame" x="0.0" y="859" width="819" height="100"/>
+                                    <subviews>
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="Z1v-ry-3JI" customClass="SegmentSPAJ">
+                                            <rect key="frame" x="690" y="8" width="121" height="29"/>
+                                            <segments>
+                                                <segment title="Ya"/>
+                                                <segment title="Tidak"/>
+                                            </segments>
+                                            <color key="tintColor" red="0.0" green="0.62745098040000002" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        </segmentedControl>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5He-xv-DAK">
+                                            <rect key="frame" x="20" y="8" width="626" height="47"/>
+                                            <string key="text">9. Apakah Anda telah melakukan verifikasi terhadap identitas diri dan kelengkapan dokumen lainnya yang telah diberikan kepada Anda?</string>
+                                            <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </view>
+                                <view tag="1" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3uQ-3H-Ttc" userLabel="View-10">
+                                    <rect key="frame" x="0.0" y="964" width="819" height="105"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CqD-m1-Rf5">
+                                            <rect key="frame" x="20" y="8" width="626" height="81"/>
+                                            <string key="text">10. Apakah ada pihak lain selain Calon Pemegang Polis/ Calon Tertanggung yang meminta atau berkepentingan atau menginstruksikan untuk mengajukan permohonan asuransi ini? Jika “Ya” apakah Anda telah meminta Calon Pemegang Polis untuk melakukan formulir Pihak Ketiga?</string>
+                                            <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="dW9-Ba-WD2" customClass="SegmentSPAJ">
+                                            <rect key="frame" x="690" y="8" width="121" height="29"/>
+                                            <segments>
+                                                <segment title="Ya"/>
+                                                <segment title="Tidak"/>
+                                            </segments>
+                                            <color key="tintColor" red="0.0" green="0.62745098040000002" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        </segmentedControl>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </view>
+                                <view tag="1" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CIb-SS-o0j" userLabel="View-11">
+                                    <rect key="frame" x="0.0" y="1074" width="819" height="105"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iiO-ZF-K2e">
+                                            <rect key="frame" x="20" y="8" width="626" height="60"/>
+                                            <string key="text">11. Apakah sudah dijelaskan kepada Calon Pemegang Polis bahwa Penerima Manfaat yang ditunjuk, sudah sesuai dengan peraturan perundang-undangan yang berlaku di Indonesia?</string>
+                                            <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="3et-Ge-Oae" customClass="SegmentSPAJ">
+                                            <rect key="frame" x="690" y="8" width="121" height="29"/>
+                                            <segments>
+                                                <segment title="Ya"/>
+                                                <segment title="Tidak"/>
+                                            </segments>
+                                            <color key="tintColor" red="0.0" green="0.62745098040000002" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        </segmentedControl>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </view>
+                                <view tag="1" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z3b-9Z-iDA" userLabel="View-12a">
+                                    <rect key="frame" x="0.0" y="1184" width="819" height="122"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UVQ-Fo-tri">
+                                            <rect key="frame" x="20" y="30" width="626" height="61"/>
+                                            <string key="text">a. Apakah sudah dijelaskan bahwa terdapat masa tunggu Klaim selama 90 (sembilan puluh) Hari Kalender sejak Tanggal Mulai Asuransi atau sejak tanggal pemulihan Polis terakhir?</string>
+                                            <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="zdC-dw-Nmk" customClass="SegmentSPAJ">
+                                            <rect key="frame" x="690" y="30" width="121" height="29"/>
+                                            <segments>
+                                                <segment title="Ya"/>
+                                                <segment title="Tidak"/>
+                                            </segments>
+                                            <color key="tintColor" red="0.0" green="0.62745098040000002" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        </segmentedControl>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Khusus untuk produk dengan manfaat" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WZj-F8-oye">
+                                            <rect key="frame" x="38" y="4" width="608" height="22"/>
+                                            <fontDescription key="fontDescription" name="BPreplay-Bold" family="BPreplay" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Terminal Illness (TI):" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CwL-Db-s2k">
+                                            <rect key="frame" x="336" y="4" width="608" height="22"/>
+                                            <fontDescription key="fontDescription" name="BPreplay-BoldItalic" family="BPreplay" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="12." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GmX-Hv-wq2">
+                                            <rect key="frame" x="14" y="6" width="20" height="22"/>
+                                            <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </view>
+                                <view tag="1" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lFa-8A-cSt" userLabel="View-12b">
+                                    <rect key="frame" x="0.0" y="1311" width="819" height="105"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iyK-hK-qLd">
+                                            <rect key="frame" x="20" y="8" width="626" height="61"/>
+                                            <string key="text">b. Apakah sudah dijelaskan bahwa manfaat Terminal Illness sebesar 20% Uang Pertanggungan atau maksimal Rp 3,000,000,000,- (tiga miliar rupiah) per Tertanggung?</string>
+                                            <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="vay-Vj-l9c" customClass="SegmentSPAJ">
+                                            <rect key="frame" x="690" y="8" width="121" height="29"/>
+                                            <segments>
+                                                <segment title="Ya"/>
+                                                <segment title="Tidak"/>
+                                            </segments>
+                                            <color key="tintColor" red="0.0" green="0.62745098040000002" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        </segmentedControl>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </view>
+                                <view tag="1" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IB5-Cf-OHn" userLabel="View-Penghasilan">
+                                    <rect key="frame" x="0.0" y="1421" width="819" height="118"/>
+                                    <subviews>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OUb-zp-yrX" customClass="TextFieldSPAJ">
+                                            <rect key="frame" x="317" y="42" width="430" height="30"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="-1" id="iqJ-Ps-pzz"/>
+                                            </connections>
+                                        </textField>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FPG-1l-JLX" customClass="TextFieldSPAJ">
+                                            <rect key="frame" x="317" y="80" width="430" height="30"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="-1" id="yeD-lX-9BF"/>
+                                            </connections>
+                                        </textField>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sumber penghasilan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kui-tQ-QP8">
+                                            <rect key="frame" x="71" y="46" width="196" height="21"/>
+                                            <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="13. Sebutkan sumber dan total penghasilan Calon Pemegang Polis perbulan:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="32R-Jl-PjR">
+                                            <rect key="frame" x="20" y="8" width="588" height="21"/>
+                                            <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Total Penghasilan Kotor/Tahun" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="36h-0y-Y4o">
+                                            <rect key="frame" x="71" y="84" width="233" height="21"/>
+                                            <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </view>
+                                <view tag="1" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RuH-ZF-jxn" userLabel="View-Alasan">
+                                    <rect key="frame" x="0.0" y="1544" width="819" height="99"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="14. Alasan pengajuan asuransi jiwa " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UIK-9h-m5x">
+                                            <rect key="frame" x="20" y="8" width="588" height="21"/>
+                                            <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="t3m-ki-XHT">
+                                            <rect key="frame" x="20" y="39" width="510" height="50"/>
+                                            <color key="backgroundColor" red="0.0" green="0.62745098040000002" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="tintColor" red="0.36862745099999999" green="0.61960784310000006" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
+                                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="Y5v-kP-O2l">
+                                                <size key="itemSize" width="100" height="50"/>
+                                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                            </collectionViewFlowLayout>
+                                            <connections>
+                                                <outlet property="dataSource" destination="-1" id="tuH-qD-5bI"/>
+                                                <outlet property="delegate" destination="-1" id="LUw-SK-zEp"/>
+                                            </connections>
+                                        </collectionView>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8S1-tQ-zwD" customClass="TextFieldSPAJ">
+                                            <rect key="frame" x="552" y="49" width="211" height="30"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </view>
+                                <view tag="1" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eay-1D-KEM" userLabel="View-Saran">
+                                    <rect key="frame" x="0.0" y="1648" width="819" height="327"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="15. Jika ada, berikan informasi lain yang menurut Anda dapat membantu BCA Life dalam mengevaluasi pengajuan ini:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uxa-HJ-uP1">
+                                            <rect key="frame" x="20" y="8" width="766" height="42"/>
+                                            <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Apabila diperlukan dapat mempergunakan lembar tambahan." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7mC-77-SXD">
+                                            <rect key="frame" x="44" y="53" width="742" height="22"/>
+                                            <fontDescription key="fontDescription" name="BPreplay-Italic" family="BPreplay" pointSize="14"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Scm-BL-s1R" customClass="TextViewSPAJ">
+                                            <rect key="frame" x="20" y="83" width="766" height="106"/>
+                                            <color key="backgroundColor" red="0.87450980389999999" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="-1" id="6sy-FB-Z5D"/>
+                                            </connections>
+                                        </textView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XcI-e8-3vt">
+                                            <rect key="frame" x="20" y="197" width="766" height="130"/>
+                                            <string key="text">Saya menyatakan bahwa semua keterangan dalam Laporan Tenaga Penjual ini adalah keterangan yang benar. Saya tidak menyembunyikan keterangan-keterangan yang dapat mempengaruhi penerimaan pengajuan ini dari Calon Tertanggungan/Calon Pemegang Polis. Saya tidak pernah memberikan informasi kepada Calon Tertanggung/Calon Pemegang Polis yang bertentangan dengan ketentuan-ketentuan yang terdapat di dalam Polis. Apabila di kemudian hari terdapat pernyataan dalam Laporan Tenaga Penjual ini yang tidak benar, Saya bersedia bertanggung jawab atas kerugian yang timbul akibat kesalahan tersebut. Saya menyatakan bahwa proses penjualan yang Saya lakukan sudah sesuai dengan proses penjualan yang Saya terima selama proses pelatihan.</string>
+                                            <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="14"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </stackView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="B1q-38-Mx6" secondAttribute="trailing" id="KhE-26-fwT"/>
+                        <constraint firstItem="B1q-38-Mx6" firstAttribute="leading" secondItem="UQm-bs-aDz" secondAttribute="leading" id="NPO-0D-pBD"/>
+                        <constraint firstItem="B1q-38-Mx6" firstAttribute="centerX" secondItem="UQm-bs-aDz" secondAttribute="centerX" id="W5o-cb-vdE"/>
+                        <constraint firstAttribute="bottom" secondItem="B1q-38-Mx6" secondAttribute="bottom" constant="-1423" id="Yad-ye-Ue9"/>
+                        <constraint firstItem="B1q-38-Mx6" firstAttribute="top" secondItem="UQm-bs-aDz" secondAttribute="top" id="j9n-OE-DHi"/>
+                    </constraints>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="EBH-zU-sld"/>
+                    </connections>
+                </scrollView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="VrF-0f-Mb7" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="6Vb-Hv-WX5"/>
+                <constraint firstItem="UQm-bs-aDz" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Be7-M3-wTw"/>
+                <constraint firstAttribute="bottom" secondItem="UQm-bs-aDz" secondAttribute="bottom" id="DnD-0H-bff"/>
+                <constraint firstAttribute="bottom" secondItem="0A8-0V-3AO" secondAttribute="bottom" id="FQy-va-1hP"/>
+                <constraint firstAttribute="trailing" secondItem="0A8-0V-3AO" secondAttribute="trailing" id="PK3-gQ-29S"/>
+                <constraint firstItem="VrF-0f-Mb7" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Wzh-9X-2o7"/>
+                <constraint firstItem="UQm-bs-aDz" firstAttribute="top" secondItem="VrF-0f-Mb7" secondAttribute="bottom" constant="1" id="XJX-mM-EOP"/>
+                <constraint firstAttribute="trailing" secondItem="UQm-bs-aDz" secondAttribute="trailing" id="b6i-vp-ZdR"/>
+                <constraint firstItem="0A8-0V-3AO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="hs4-QQ-alK"/>
+                <constraint firstItem="UQm-bs-aDz" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="45" id="j3q-85-zxz"/>
+                <constraint firstAttribute="trailing" secondItem="VrF-0f-Mb7" secondAttribute="trailing" id="tvq-uN-50S"/>
+                <constraint firstItem="0A8-0V-3AO" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="yLc-Yi-foi"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="609.5" y="17"/>
+        </view>
+        <view hidden="YES" tag="1" contentMode="scaleToFill" id="N50-mh-UJL" userLabel="View-Header">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Nomor SPAJ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HW9-ZR-hqi">
+                    <rect key="frame" x="20" y="84" width="97" height="21"/>
+                    <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1ci-vq-g0M" customClass="TextFieldSPAJ">
+                    <rect key="frame" x="266" y="4" width="430" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2MS-5O-Jys" customClass="TextFieldSPAJ">
+                    <rect key="frame" x="266" y="42" width="430" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yeE-Bj-z9b" customClass="TextFieldSPAJ">
+                    <rect key="frame" x="266" y="80" width="430" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Nama Calon Tertanggung" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lBH-OU-M1h">
+                    <rect key="frame" x="20" y="46" width="196" height="21"/>
+                    <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Nama Calon Pemegang Polis" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J5V-RP-z1f">
+                    <rect key="frame" x="20" y="8" width="245" height="21"/>
+                    <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+        </view>
+    </objects>
+</document>

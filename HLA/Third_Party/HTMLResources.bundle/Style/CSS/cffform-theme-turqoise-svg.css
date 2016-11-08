@@ -1,0 +1,198 @@
+/* @charset "utf-8"; */
+/* CSS Document */
+/* THEME */
+/* INPUT BACKGROUND */
+/* INPUT BORDER */
+/* INPUT FONT */
+/* BUTTON FONT */
+/* BUTTON BACKGROUND */
+/* BUTTON BORDER */
+/* @charset "utf-8"; */
+/* CSS Document */
+/* @charset "utf-8"; */
+/* CSS Document */
+/* FUNCTION */
+/* ANIMATION */
+/* HEADER */
+/* FORM */
+/* INPUT */
+/* NOTE */
+/* SIGNATURE */
+/* FOOTER */
+/* TABLE */
+/* LINK */
+/* GENERAL */
+/* ICON */
+/* LAYOUT */
+/* FORM INITIALIZATION */
+/* LABEL */
+/* BOX */
+/* TABLE INITIALIZATION */
+/* TABLE */
+/* INPUT INITIALIZATION */
+/* LINK */
+/* RESOURCE */
+/* TYPEFACE */
+/* SEMANTIC ELEMENTS */
+body {
+  background-color: #ffffff;
+}
+
+main {
+  background-color: #ffffff;
+}
+
+/* NEUTRALIZATION */
+h1, h2, h3, h4, h5, h6, p, mark, ol, ul, li {
+  background-color: transparent;
+}
+
+/* HEADER */
+header h1 {
+  color: #000000;
+}
+
+header .Highlighted {
+  background-color: #ebecec;
+  border-top-color: #00a6b3;
+  border-bottom-color: #00a6b3;
+}
+
+header h2 {
+  color: #3e3e3e;
+  border-bottom-color: #00a6b3;
+}
+
+/* FORM */
+main form label {
+  color: #000000;
+}
+
+main form span {
+  color: #000000;
+}
+
+main form table.BoxSquare tbody tr td {
+  border-color: #000000;
+}
+
+main form .BoxRound {
+  border-color: #000000;
+}
+
+main form .Note {
+  border-color: #00a6b3;
+}
+
+main form .Note h3 {
+  color: #000000;
+  background-color: transparent;
+}
+
+main form .Note ol li, main form .Note ul li {
+  color: #000000;
+}
+
+main form .LineStraight, main form .LineDot {
+  color: #000000;
+  border-color: #000000;
+}
+
+main .Container {
+  border-color: #00a6b3;
+}
+
+main hr {
+  border-color: #00a6b3;
+}
+
+.Note {
+  border-color: #00a6b3;
+}
+
+.Note h2 {
+  color: #3e3e3e;
+}
+
+.Note ol li, .Note ul li {
+  color: #000000;
+}
+
+/* POP UP */
+main section {
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+main section form {
+  background-color: #ffffff;
+}
+
+main section form header {
+  background-color: #ebecec;
+}
+
+/* INPUT */
+input, textarea, select {
+  border-color: #00a6b3;
+  color: #000000;
+}
+
+.RadioButton .Separator {
+  background-color: #00a6b3;
+}
+
+.RadioButton label.RadioButton {
+  background-color: transparent;
+  color: #00a6b3;
+}
+
+.RadioButton input[type="radio"]:checked + label.RadioButton {
+  background-color: #00a6b3;
+  color: #ebecec;
+}
+
+.Checkbox .Separator {
+  background-color: #00a6b3;
+}
+
+.Checkbox label.Checkbox {
+  background-color: transparent;
+  color: #00a6b3;
+}
+
+.Checkbox input[type="checkbox"]:checked + label.Checkbox {
+  background-color: #00a6b3;
+  color: #ebecec;
+}
+
+/* NAVIGATION */
+nav a {
+  color: #00a6b3;
+  background-color: transparent;
+}
+
+nav a.Selected {
+  color: #ffffff;
+  background-color: #00a6b3;
+}
+
+/* BUTTON */
+.ButtonPrimary {
+  background-color: #00a6b3;
+  color: #ffffff;
+}
+
+.ButtonPreview, .ButtonView {
+  background-color: transparent;
+  color: #00a6b3;
+}
+
+.ButtonDelete {
+  background-color: transparent;
+  color: #c3232d;
+}
+
+/* LINK */
+.NavigationPopUp {
+  color: #00a6b3;
+}

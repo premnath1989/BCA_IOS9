@@ -1,0 +1,570 @@
+/* @charset "utf-8"; */
+/* CSS Document */
+/* @charset "utf-8"; */
+/* CSS Document */
+/* @charset "utf-8"; */
+/* CSS Document */
+/* FUNCTION */
+/* ANIMATION */
+/* HEADER */
+/* FORM */
+/* NOTE */
+/* SIGNATURE */
+/* FOOTER */
+/* TABLE */
+/* GENERAL */
+/* ICON */
+/* LAYOUT */
+/* FORM INITIALIZATION */
+/* LABEL */
+/* BOX */
+/* TABLE INITIALIZATION */
+/* TABLE */
+/* RESOURCE */
+/* TYPEFACE */
+/* @charset "utf-8"; */
+/* CSS Document */
+/* @charset "utf-8"; */
+/* CSS Document */
+/* @charset "utf-8"; */
+/* CSS Document */
+/* FUNCTION */
+/* ANIMATION */
+/* HEADER */
+/* FORM */
+/* NOTE */
+/* SIGNATURE */
+/* FOOTER */
+/* TABLE */
+/* GENERAL */
+/* ICON */
+/* LAYOUT */
+/* FORM INITIALIZATION */
+/* LABEL */
+/* BOX */
+/* TABLE INITIALIZATION */
+/* TABLE */
+/* RESOURCE */
+/* TYPEFACE */
+/* TYPEFACE */
+@font-face {
+  font-family: "BPreplay_Regular";
+  src: url("../../Resource/Font/BPreplay/BPreplay_Regular.eot?#iefix") format("embedded-opentype"), url("../../Resource/Font/BPreplay/BPreplay_Regular.woff") format("woff"), url("../../Resource/Font/BPreplay/BPreplay_Regular.ttf") format("truetype"), url("../../Resource/Font/BPreplay/BPreplay_Regular.svg#BPreplay_Regular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "BPreplay_Bold";
+  src: url("../../Resource/Font/BPreplay/BPreplay_Bold.eot?#iefix") format("embedded-opentype"), url("../../Resource/Font/BPreplay/BPreplay_Bold.woff") format("woff"), url("../../Resource/Font/BPreplay/BPreplay_Bold.ttf") format("truetype"), url("../../Resource/Font/BPreplay/BPreplay_Bold.svg#BPreplay_Bold") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "BPreplay_Italic";
+  src: url("../../Resource/Font/BPreplay/BPreplay_Italic.eot?#iefix") format("embedded-opentype"), url("../../Resource/Font/BPreplay/BPreplay_Italic.woff") format("woff"), url("../../Resource/Font/BPreplay/BPreplay_Italic.ttf") format("truetype"), url("../../Resource/Font/BPreplay/BPreplay_Italic.svg#BPreplay_Italic") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "BPreplay_BoldItalic";
+  src: url("../../Resource/Font/BPreplay/BPreplay_BoldItalic.eot?#iefix") format("embedded-opentype"), url("../../Resource/Font/BPreplay/BPreplay_BoldItalic.woff") format("woff"), url("../../Resource/Font/BPreplay/BPreplay_BoldItalic.ttf") format("truetype"), url("../../Resource/Font/BPreplay/BPreplay_BoldItalic.svg#BPreplay_BoldItalic") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* SETUP */
+img {
+  border: none;
+}
+
+label {
+  cursor: pointer;
+  cursor: hand;
+}
+
+input[type=button] {
+  cursor: pointer;
+  cursor: hand;
+}
+
+input[type=submit] {
+  cursor: pointer;
+  cursor: hand;
+}
+
+input[type=reset] {
+  cursor: pointer;
+  cursor: hand;
+}
+
+* {
+  transition: all 0.75s ease-out;
+  -ms-transition: all 0.75s ease-out;
+  -moz-transition: all 0.75s ease-out;
+  -o-transition: all 0.75s ease-out;
+  -webkit-transition: all 0.75s ease-out;
+}
+
+/**
+	transition-property: position, margin, width, height, padding, background-color, opacity, border
+	-ms-transition-property: position, margin, width, height, padding, background-color, opacity, border
+	-moz-transition-property: position, margin, width, height, padding, background-color, opacity, border
+	-o-transition-property: position, margin, width, height, padding, background-color, opacity, border
+	-webkit-transition-property: position, margin, width, height, padding, background-color, opacity, border
+	transition-duration: 0.75s
+	-ms-transition-duration: 0.75s
+	-moz-transition-duration: 0.75s
+	-o-transition-duration: 0.75s
+	-webkit-transition-duration: 0.75s
+	transition-movement: ease-out
+	-ms-transition-movement: ease-out
+	-moz-transition-movement: ease-out
+	-o-transition-movement: ease-out
+	-webkit-transition-movement: ease-out*/
+body {
+  transition: all 0 linear;
+  -ms-transition: all 0 linear;
+  -moz-transition: all 0 linear;
+  -o-transition: all 0 linear;
+  -webkit-transition: all 0 linear;
+}
+
+/* NEUTRALIZE */
+h1, h2, h3, h4, h5, h6, p, mark, ol, ul, li {
+  margin: auto;
+  padding: auto;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+  text-decoration: inherit;
+  text-transform: inherit;
+}
+
+/* SEMANTIC ELEMENTS */
+body {
+  position: relative;
+  margin-top: 0px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 0px;
+  padding: 15px;
+}
+
+br {
+  padding: 0px;
+  width: 0px;
+  height: 0px;
+  clear: both;
+  display: block;
+  content: '';
+}
+
+li br, p br, table br {
+  clear: none;
+  content: none;
+}
+
+/* PAPER SIZE */
+@media (min-resolution: 48dpi) {
+  body#A4 {
+    width: 15.75cm;
+    height: 22.275cm;
+  }
+  body#Letter {
+    width: 16.2cm;
+    height: 20.925cm;
+  }
+  body#Legal {
+    width: 16.2cm;
+    height: 26.7cm;
+  }
+}
+
+@media (min-resolution: 72dpi) {
+  body#A4 {
+    width: 21cm;
+    height: 29.7cm;
+  }
+  body#Letter {
+    width: 21.6cm;
+    height: 27.9cm;
+  }
+  body#Legal {
+    width: 21.6cm;
+    height: 35.6cm;
+  }
+}
+
+@media (min-resolution: 108dpi) {
+  body#A4 {
+    width: 31.5cm;
+    height: 44.55cm;
+  }
+  body#Letter {
+    width: 32.4cm;
+    height: 41.85cm;
+  }
+  body#Legal {
+    width: 32.4cm;
+    height: 53.4cm;
+  }
+}
+
+@media (min-resolution: 144dpi) {
+  body#A4 {
+    width: 42cm;
+    height: 59.4cm;
+  }
+  body#Letter {
+    width: 43.2cm;
+    height: 55.8cm;
+  }
+  body#Legal {
+    width: 43.2cm;
+    height: 71.2cm;
+  }
+}
+
+@media (min-resolution: 216dpi) {
+  body#A4 {
+    width: 63cm;
+    height: 89.1cm;
+  }
+  body#Letter {
+    width: 64.8cm;
+    height: 83.7cm;
+  }
+  body#Legal {
+    width: 64.8cm;
+    height: 106.8cm;
+  }
+}
+
+@media (min-resolution: 288dpi) {
+  body#A4 {
+    width: 84cm;
+    height: 118.8cm;
+  }
+  body#Letter {
+    width: 86.4cm;
+    height: 111.6cm;
+  }
+  body#Legal {
+    width: 86.4cm;
+    height: 142.4cm;
+  }
+}
+
+@media (min-resolution: 96dpi) {
+  body#A4 {
+    width: 24.15cm;
+    height: 34.155cm;
+  }
+  body#Letter {
+    width: 24.84cm;
+    height: 32.085cm;
+  }
+  body#Legal {
+    width: 24.84cm;
+    height: 40.94cm;
+  }
+}
+
+/* HEADER */
+header {
+  margin-bottom: 20px;
+}
+
+header img {
+  float: right;
+  width: 260px;
+  height: 80px;
+}
+
+header h1 {
+  float: left;
+}
+
+.HeaderContainer {
+  position: absolute;
+  height: 65px;
+  left: 15px;
+  right: 15px;
+}
+
+.HeaderContainer .HeaderGeneral {
+  padding-top: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 10px;
+  border-top-left-radius: 4px;
+  -ms-border-top-left-radius: 4px;
+  -moz-border-top-left-radius: 4px;
+  -webkit-border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  -ms-border-top-right-radius: 4px;
+  -moz-border-top-right-radius: 4px;
+  -webkit-border-top-right-radius: 4px;
+}
+
+.HeaderContainer hr {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+}
+
+.HeaderBreak {
+  width: 100%;
+  height: 65px;
+}
+
+/* MAIN */
+main {
+  padding: 15px;
+}
+
+main section .Note {
+  margin-bottom: 15px;
+  padding: 10px;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 2px;
+  -ms-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+}
+
+main section .ContainerFit, main section .ContainerLeft, main section .ContainerRight {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  display: flex;
+  flex-wrap: nowrap;
+  align-content: stretch;
+  align-items: stretch;
+}
+
+main section .ContainerFit .Item, main section .ContainerLeft .Item, main section .ContainerRight .Item {
+  flex-grow: 1;
+}
+
+main section .ContainerFit .Item1, main section .ContainerLeft .Item1, main section .ContainerRight .Item1 {
+  flex-grow: 1;
+}
+
+main section .ContainerFit .Item2, main section .ContainerLeft .Item2, main section .ContainerRight .Item2 {
+  flex-grow: 2;
+}
+
+main section .ContainerFit .Item3, main section .ContainerLeft .Item3, main section .ContainerRight .Item3 {
+  flex-grow: 3;
+}
+
+main section .ContainerFit .Margin, main section .ContainerLeft .Margin, main section .ContainerRight .Margin {
+  margin: 5px;
+}
+
+main section .ContainerFit {
+  justify-content: space-between;
+}
+
+main section .ContainerLeft {
+  justify-content: flex-start;
+}
+
+main section .ContainerRight {
+  justify-content: flex-end;
+}
+
+main section .ContainerFit.InnerFieldset {
+  margin-top: 5px;
+  margin-left: -15px;
+  margin-right: -15px;
+  margin-top: 5px;
+  padding-top: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 5px;
+}
+
+main section .ContainerFit.InnerFieldset .Item.Column:first-child {
+  padding-right: 15px;
+  border-right-style: solid;
+  border-right-width: 1px;
+}
+
+main section .ContainerFit.InnerFieldset .Item.Column:last-child {
+  padding-left: 15px;
+}
+
+main section .ContainerFit.InnerFieldset .Item.Column label {
+  margin-top: 5px;
+}
+
+main section .ContainerFit.InnerFieldset .Item.Column label:after {
+  content: '';
+}
+
+main section .ContainerFit.InnerFieldset label.RadioButton {
+  margin-top: 0px !important;
+}
+
+.Center {
+  text-align: center;
+}
+
+.Left {
+  text-align: left;
+}
+
+.Right {
+  text-align: right;
+}
+
+.Justify {
+  text-align: justify;
+}
+
+div.Short {
+  min-width: 75px;
+  width: 75px;
+}
+
+div.Medium {
+  min-width: 154px;
+  width: 154px;
+}
+
+div.Long {
+  min-width: 225px;
+  width: 225px;
+}
+
+div.Full {
+  width: 100%;
+}
+
+div.ShortFix {
+  min-width: 75px;
+  min-width-width: 75px;
+  min-width-max-width: 75px;
+}
+
+div.MediumFix {
+  min-width: 123.2px;
+  min-width-width: 123.2px;
+  min-width-max-width: 154px;
+}
+
+div.LongFix {
+  min-width: 225px;
+  min-width-width: 225px;
+  min-width-max-width: 225px;
+}
+
+div.FullFix {
+  min-width: 100%;
+  min-width-width: 100%;
+  min-width-max-width: 100%;
+}
+
+/* FOOTER */
+.FooterContainer, .FooterContainerLast {
+  position: absolute;
+  height: 60px;
+  left: 15px;
+  right: 15px;
+}
+
+.FooterContainer .FooterGeneral, .FooterContainer .FooterLast, .FooterContainerLast .FooterGeneral, .FooterContainerLast .FooterLast {
+  padding-top: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 5px;
+  border-bottom-left-radius: 4px;
+  -ms-border-bottom-left-radius: 4px;
+  -moz-border-bottom-left-radius: 4px;
+  -webkit-border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  -ms-border-bottom-right-radius: 4px;
+  -moz-border-bottom-right-radius: 4px;
+  -webkit-border-bottom-right-radius: 4px;
+}
+
+.FooterContainer img, .FooterContainerLast img {
+  width: 130px;
+}
+
+.FooterContainerLast {
+  height: 120px;
+}
+
+.FooterContainerLast + .PageBreak {
+  margin-top: 70px;
+}
+
+.PageBreak {
+  width: 100%;
+  height: 60px;
+}
+
+/* CONDITION */
+.PositionerRight {
+  float: right;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  vertical-align: top;
+}
+
+.PositionerLeft {
+  float: left;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  vertical-align: top;
+}
+
+.PositionerCenter {
+  position: relative;
+  margin: auto;
+}
+
+.Horizontal25of100 {
+  width: 24%;
+  display: inline-block;
+}
+
+.Horizontal25of100 thead tr th {
+  width: 288px;
+  height: 45px;
+}
+
+.Horizontal25of100 tbody tr td {
+  width: 288px;
+}
+
+.Horizontal25of100 tfoot tr td {
+  width: 288px;
+}
+
+.Horizontal50of100 {
+  width: 48%;
+  display: inline-block;
+}
+
+.Horizontal50of100 thead tr th {
+  width: 288px;
+  height: 30px;
+}
+
+.Horizontal50of100 tbody tr td {
+  width: 288px;
+}
+
+.Horizontal50of100 tfoot tr td {
+  width: 288px;
+}

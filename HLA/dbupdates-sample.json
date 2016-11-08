@@ -1,0 +1,22 @@
+{
+"sql":[
+"UPDATE Trad_Sys_Rider_Label SET LabelCode='GYIRM', LabelDesc='Guaranteeed Monthly Cash Coupons (RM)' WHERE RiderCode='WBM6R' AND LabelCode='SUMA'",
+"UPDATE Trad_Sys_Rider_Mtn SET MinSA='9.00' WHERE RiderCode='WBM6R' AND MinSA!='9.00'",
+"UPDATE Trad_Sys_Rider_Label SET LabelDesc='Health Loading (Per 1K SA) Term' WHERE RiderCode='WBM6R' AND LabelCode='HL1KT'"
+],
+"execOnFalse": [
+[
+"SELECT isGYI FROM Trad_Details",
+"ALTER TABLE Trad_Details ADD COLUMN isGYI BOOL"
+],
+[
+"SELECT NoNomination from eProposal",
+"alter table eProposal add NoNomination TEXT"
+],
+[
+"SELECT * FROM eProposal_PostCode WHERE PostCode='79150' AND StateCode='JH' AND Town='NUSAJAYA' AND Status='A'",
+"INSERT INTO eProposal_PostCode (PostCode, StateCode, Town,Status) VALUES (79150, 'JH', 'NUSAJAYA', 'A')"
+]
+],
+"remark":""
+}

@@ -1,0 +1,150 @@
+/* 
+  Localizable.strings
+  Bless SPAJ
+
+  Created by Ibrahim on 21/06/2016.
+  Copyright © 2016 Ibrahim. All rights reserved.
+*/
+
+
+// FIELD
+
+FIELD_NAME = "Nama";
+FIELD_SPAJNUMBER = "Nomor SPAJ";
+FIELD_SOCIALNUMBER = "Nomor Identitas";
+FIELD_EAPPLICATIONNUMBER = "E application number";
+
+FIELD_CUSTOMERSIGNATURE = "Customer signature";
+FIELD_DATETIME = "Date & time";
+FIELD_SPAJEXPIRED = "SPAJ expired date";
+FIELD_SPAJLASTUPDATED = "Last update / vieweing date & time";
+FIELD_TIMEREMAINING = "Time remaining";
+
+
+// TITLE
+
+TITLE_SPAJEXISTINGLIST = "SPAJ Listing";
+TITLE_SPAJSUBMITTEDLIST = "Submitted SPAJ Listing";
+TITLE_EAPPLICATIONLIST = "E Application List";
+TITLE_EAPPLICATIONGUIDE = "eApplication Checklist";
+
+TITLE_IMPORTANTINFORMATION = "Important Information";
+TITLE_CAPTUREDID = "Capture Identification Documents";
+TITLE_FORMGENERATION = "E Application Forms Generation";
+
+
+// TABLE
+
+TABLE_HEADER_POLICYHOLDER = "Nama Pemegang Polis / Tertanggung Polis";
+TABLE_HEADER_EAPPLICATIONNUMBER = "E Application Number";
+TABLE_HEADER_SPAJNUMBER = "Nomor SPAJ";
+TABLE_HEADER_LASTUPDATEDON = "Tanggal Terakhir Di Update";
+TABLE_HEADER_STATUS = "Status";
+TABLE_HEADER_ILLUSTRATIONVERSION = "Versi SI";
+TABLE_HEADER_TIMEREMAINING = "Sisa Waktu";
+TABLE_HEADER_VIEW = "View";
+TABLE_HEADER_PRODUCT = "Produk";
+TABLE_HEADER_SUBMITTEDDATE = "Tanggal Di Submit";
+
+
+// GUIDE
+
+GUIDE_SPAJMENU_STEP1 = "1";
+GUIDE_SPAJMENU_STEP2 = "2";
+GUIDE_SPAJMENU_STEP3 = "3";
+GUIDE_SPAJMENU_STEP4 = "4";
+GUIDE_SPAJMENU_STEP5 = "5";
+GUIDE_SPAJMENU_STEP6 = "6";
+
+GUIDE_SPAJMENU_HEADER1 = "Select Sales Illustration";
+GUIDE_SPAJMENU_HEADER2 = "Select Customer Fact Find";
+GUIDE_SPAJMENU_HEADER3 = "To Complete SPAJ Details";
+GUIDE_SPAJMENU_HEADER4 = "Forms Generation And Verification";
+GUIDE_SPAJMENU_HEADER5 = "To Capture Proof of Identification";
+GUIDE_SPAJMENU_HEADER6 = "To Obtain eSignature from Respective Parties";
+
+GUIDE_SPAJMENU_DETAIL1 = "Nomor SI : 123456789012345-12345    Tertanggung Polis : Andy Phan Chee Seng    Produk : Heritage";
+GUIDE_SPAJMENU_DETAIL2 = "Pemegang Polis : ";
+
+GUIDE_SPAJDETAIL_STEP1 = "1";
+GUIDE_SPAJDETAIL_STEP2 = "2";
+GUIDE_SPAJDETAIL_STEP3 = "3";
+GUIDE_SPAJDETAIL_STEP4 = "4";
+GUIDE_SPAJDETAIL_STEP5 = "5";
+GUIDE_SPAJDETAIL_STEP6 = "6";
+
+GUIDE_SPAJDETAIL_HEADER1 = "Policy Holder";
+GUIDE_SPAJDETAIL_HEADER2 = "Payor Holder";
+GUIDE_SPAJDETAIL_HEADER3 = "Legal";
+GUIDE_SPAJDETAIL_HEADER4 = "Benefit Holder";
+GUIDE_SPAJDETAIL_HEADER5 = "Payment";
+GUIDE_SPAJDETAIL_HEADER6 = "Health";
+
+GUIDE_FORMGENERATION_STEP1 = "1";
+GUIDE_FORMGENERATION_STEP2 = "2";
+GUIDE_FORMGENERATION_STEP3 = "3";
+
+GUIDE_FORMGENERATION_HEADER1 = "SPAJ";
+GUIDE_FORMGENERATION_HEADER2 = "Third Party";
+GUIDE_FORMGENERATION_HEADER3 = "Additional Health Questionnaires";
+
+GUIDE_CAPTUREID_STEP1 = "1";
+GUIDE_CAPTUREID_STEP2 = "2";
+GUIDE_CAPTUREID_STEP3 = "3";
+GUIDE_CAPTUREID_STEP4 = "4";
+
+GUIDE_CAPTUREID_HEADER1 = "Policy Holder";
+GUIDE_CAPTUREID_HEADER2 = "Payor Holder";
+GUIDE_CAPTUREID_HEADER3 = "Parent / Guardian";
+GUIDE_CAPTUREID_HEADER4 = "Agent";
+
+
+// ALERT
+ALERT_TITLE_FORM_GENERATION = "Peringatan";
+ALERT_MESSAGE_FORM_GENERATION = "Telah terjadi perubahan data pada detail SPAJ. Harap generate ulang form SPAJ.";
+
+ALERT_TITLE_LOCK = "Peringatan";
+ALERT_MESSAGE_LOCK = "Anda tidak dapat melakukan perubahan data karena tenaga penjual sudah menandatangani pengajuan ini.";
+
+ALERT_TITLE_TABLEDELETE = "Delete ";
+ALERT_MESSAGE_TABLEDELETE = "Are you sure to delete ";
+
+
+// NOTE
+
+NOTE_SPAJHEADER = "Perhatian";
+NOTE_SPAJDETAIL = "Perngiriman online dapat dilakukan setiap hari kerj jam 07:00 - 19:00 WIB\nPengajuan yang diterima oleh New Business BCA Life setelah jam 14:00 akan diproses pada hari kerja berikutnya\nMaksimum 2 kasus per pengiriman";
+NOTE_GUIDEMENU = "Please complete the following items before submission";
+
+
+// STATE
+
+STATE_CAPTURED = "Captured";
+
+
+// LABEL
+
+LABEL_FRONT = "Front";
+LABEL_BACK = "Back";
+
+
+// BUTTON
+
+BUTTON_EDIT_CANCEL = "Cancel";
+BUTTON_EDIT = "Delete";
+BUTTON_SEARCH = "Search";
+BUTTON_RESET = "Clear Search";
+BUTTON_DELETE = "Delete";
+BUTTON_ADD = "Add";
+BUTTON_CONFIRMSPAJ = "Confirm & Assign SPAJ Number";
+BUTTON_HOME = "Home";
+BUTTON_EAPPLICATIONLIST = "E App\nList";
+BUTTON_EXISTINGLIST = "Existing\nList";
+BUTTON_SUBMITTEDLIST = "Submitted\nList";
+BUTTON_ADD = "Add";
+BUTTON_VIEW = "View";
+BUTTON_CLOSE = "Close";
+BUTTON_DONE = "Done";
+BUTTON_CANCEL = "Cancel";
+BUTTON_GENERATEFORM = "Generate Form";
+BUTTON_SAVE = "Save";

@@ -1,0 +1,613 @@
+/* @charset "utf-8"; */
+/* CSS Document */
+/* @charset "utf-8"; */
+/* CSS Document */
+/* @charset "utf-8"; */
+/* CSS Document */
+/* FUNCTION */
+/* ANIMATION */
+/* HEADER */
+/* FORM */
+/* INPUT */
+/* NOTE */
+/* SIGNATURE */
+/* FOOTER */
+/* TABLE */
+/* GENERAL */
+/* ICON */
+/* LAYOUT */
+/* FORM INITIALIZATION */
+/* INPUT */
+/* LABEL */
+/* BOX */
+/* TABLE INITIALIZATION */
+/* TABLE */
+/* RESOURCE */
+/* TYPEFACE */
+/* HEADER */
+header span {
+  margin: 2px !important;
+}
+
+header span.Header {
+  font-size: 0.7em;
+}
+
+header span.Detail {
+  font-size: 0.6em;
+}
+
+header h1 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  font-size: 1.2em;
+  text-align: center;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+}
+
+/* FORM */
+.Note {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding: 10px;
+  text-align: left;
+  border-style: solid;
+  border-width: 1px;
+}
+
+.Note p {
+  font-size: 0.7em;
+}
+
+.Note ol, .Note ul {
+  font-size: 0.7em;
+}
+
+ol, ul {
+  margin: 5px;
+  padding-left: 10px;
+  font-size: 0.75em;
+}
+
+ol li, ul li {
+  margin-bottom: 5px;
+}
+
+ul.Checklist {
+  list-style-type: none;
+}
+
+ul.Checklist li:before {
+  content: "\2713";
+}
+
+main form h2 {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-size: 1em;
+  text-align: center;
+  vertical-align: middle;
+  text-transform: uppercase;
+}
+
+main form h2.Plain {
+  margin-left: 10px;
+  text-align: left;
+}
+
+main form fieldset {
+  margin-top: 15px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-bottom: 15px;
+  padding: 0px;
+  border: none;
+}
+
+main form fieldset span.Number, main form fieldset span.NumberFix {
+  margin-right: 15px;
+  width: 20px;
+  padding-left: 2px;
+  padding-right: 2px;
+  text-align: center;
+}
+
+main form fieldset span.NumberFix {
+  min-width: 20px;
+  max-width: 20px;
+}
+
+main form fieldset label, main form fieldset span {
+  font-size: 0.75em;
+  vertical-align: top;
+}
+
+main form fieldset label.Plain:after, main form fieldset span.Plain:after {
+  text-align: center;
+  content: '';
+}
+
+main form fieldset label:after {
+  float: right;
+  display: inline-block;
+  margin-right: 5px;
+  content: ' : ';
+}
+
+main form fieldset .RadioButton label, main form fieldset .Checkbox label {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+main form fieldset .RadioButton label:after, main form fieldset .Checkbox label:after {
+  float: none;
+  display: inline-block;
+  margin: 0px;
+  content: '';
+}
+
+main form fieldset .BoxRound {
+  width: 20px;
+  height: 28px;
+  font-size: 0.75em;
+  text-align: center;
+  vertical-align: middle;
+  border-style: solid;
+  border-width: 1px;
+  background-image: none;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: inline-block;
+  border-radius: 4px;
+  -ms-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+
+main form fieldset label.Wrap, main form fieldset span.Wrap {
+  width: auto;
+  min-height: 32px;
+  line-height: 22px;
+}
+
+main form fieldset label.Short, main form fieldset span.Short {
+  width: 130px;
+}
+
+main form fieldset label.Medium, main form fieldset span.Medium {
+  width: 260px;
+}
+
+main form fieldset label.Long, main form fieldset span.Long {
+  width: 390px;
+}
+
+main form fieldset label.FirstIndent, main form fieldset span.FirstIndent {
+  margin-left: 15px;
+}
+
+main form fieldset label.SecondIndent, main form fieldset span.SecondIndent {
+  margin-left: 30px;
+}
+
+main form fieldset label.Short.FirstIndent {
+  width: 115px;
+}
+
+main form fieldset label.Medium.FirstIndent {
+  width: 245px;
+}
+
+main form fieldset label.Long.FirstIndent {
+  width: 375px;
+}
+
+main form fieldset label.Short.SecondIndent {
+  width: 100px;
+}
+
+main form fieldset label.Medium.SecondIndent {
+  width: 230px;
+}
+
+main form fieldset label.Long.SecondIndent {
+  width: 360px;
+}
+
+main form fieldset label.Single, main form fieldset span.Single {
+  height: 32px;
+  line-height: 32px;
+}
+
+main form fieldset label.Double, main form fieldset span.Double {
+  min-height: 56px;
+  vertical-align: top;
+}
+
+main form fieldset label.Multi, main form fieldset span.Multi {
+  min-height: 84px;
+  vertical-align: top;
+}
+
+main form fieldset label.Box, main form fieldset label.Separator {
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+main form fieldset label.Separator:after, main form fieldset label.Description:after, main form fieldset label.Note:after {
+  margin-right: 0px;
+  content: '';
+}
+
+main form fieldset span.Separator {
+  padding: 5px;
+  font-size: 0.75em;
+}
+
+main form fieldset span.Tight {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+
+main form fieldset span.Description, main form fieldset label.Description {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-size: 0.7em;
+}
+
+main form fieldset span.Note, main form fieldset label.Note {
+  margin: 0px;
+  padding: 5px;
+  font-size: 0.4em;
+  border: none;
+}
+
+main form fieldset table.BoxSquare {
+  border-collapse: collapse;
+  font-size: 0.75em;
+}
+
+main form fieldset table.BoxSquare tbody tr td {
+  width: 20px;
+  height: 28px;
+  text-align: center !important;
+  vertical-align: middle;
+  border-style: solid;
+  border-width: 1px;
+}
+
+main form fieldset table.BoxSquare tfoot tr td {
+  text-align: center;
+  vertical-align: middle;
+  border-style: none;
+}
+
+main form fieldset table.BoxSquare tfoot tr td.Note {
+  margin: 0px;
+  padding-top: 2px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+  height: auto;
+  font-size: 0.4em;
+}
+
+main form fieldset .LineDot, main form fieldset .LineStraight {
+  margin-right: 5px;
+  height: 28px;
+}
+
+main form fieldset .LineDot {
+  border-top-style: none;
+  border-right-style: none;
+  border-left-style: none;
+  border-bottom-style: dotted;
+  border-bottom-width: 1px;
+}
+
+main form fieldset .LineStraight {
+  border-top-style: none;
+  border-right-style: none;
+  border-left-style: none;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+}
+
+main form fieldset p {
+  font-size: 0.75em;
+}
+
+main form fieldset.WithoutDoubleDot label:after {
+  content: '';
+}
+
+.HeaderFieldset label, .HeaderFieldset span {
+  font-size: 0.75em;
+  vertical-align: middle;
+}
+
+.HeaderFieldset .RadioButton label, .HeaderFieldset .Checkbox label {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.HeaderFieldset .RadioButton label:after, .HeaderFieldset .Checkbox label:after {
+  float: none;
+  display: inline-block;
+  margin: 0px;
+  content: '';
+}
+
+.HeaderFieldset .BoxRound {
+  width: 20px;
+  height: 28px;
+  font-size: 0.75em;
+  text-align: center;
+  vertical-align: middle;
+  border-style: solid;
+  border-width: 1px;
+  background-image: none;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: inline-block;
+  border-radius: 4px;
+  -ms-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+
+.QuestionnaireTitle {
+  font-size: 1em	!important;
+}
+
+div.TableHeader {
+  border-style: solid;
+  border-width: 1px;
+}
+
+div.TableHeader label {
+  margin-top: 5px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  vertical-align: middle;
+  text-align: center;
+  border-style: none;
+  border-width: 1px;
+}
+
+div.TableItem label {
+  margin-top: 5px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-bottom: 5px;
+  padding-top: 1px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 1px;
+  border-style: solid;
+  border-width: 1px;
+}
+
+/* SIGNATURE */
+.Signature {
+  margin: 10px;
+  text-align: center;
+  vertical-align: top;
+}
+
+.Signature img {
+  min-height: 160px;
+  display: block;
+}
+
+.Signature span.Name, .Signature span.Description {
+  position: relative;
+  display: block;
+}
+
+.Signature span.Name {
+  margin-bottom: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 0.7em;
+}
+
+.Signature span.Name:before {
+  float: left;
+  content: '(';
+}
+
+.Signature span.Name:after {
+  float: right;
+  content: ')';
+}
+
+.Signature span.Description {
+  font-size: 0.6em;
+}
+
+.SignatureSquare {
+  margin: 10px;
+  text-align: center;
+  vertical-align: top;
+  border-style: solid;
+  border-width: 1px;
+}
+
+.SignatureSquare img {
+  min-height: 144px;
+}
+
+.SignatureSquare span.Name, .SignatureSquare span.Description {
+  position: relative;
+  display: block;
+}
+
+.SignatureSquare span.Name {
+  margin-bottom: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 0.7em;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+}
+
+.SignatureSquare span.Description {
+  font-size: 0.6em;
+  border-top-style: solid;
+  border-top-width: 1px;
+}
+
+.Horizontal30of100 {
+  width: 30%;
+}
+
+.Horizontal30of100 thead tr th {
+  width: 288px;
+}
+
+.Horizontal30of100 tbody tr td {
+  width: 288px;
+}
+
+.Horizontal30of100 tfoot tr td {
+  width: 288px;
+}
+
+table.SignatureMedium {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  min-width: 144px;
+  padding: 0px;
+  vertical-align: top;
+  border-spacing: 0px;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 4px;
+  -ms-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+
+table.SignatureMedium thead tr th {
+  padding: 2px;
+  font-size: 0.75em;
+  text-align: center;
+  border-bottom-style: solid;
+  border-width: 1px;
+}
+
+table.SignatureMedium thead tr th .Note {
+  font-size: 0.7em;
+}
+
+table.SignatureMedium tbody tr td {
+  height: 144px;
+}
+
+table.SignatureMedium tfoot tr td {
+  font-size: 0.75em;
+  text-align: center;
+}
+
+.SignatureImage {
+  height: 144px;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+/* TABLE */
+table.Square {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+table.Square tbody tr td table.BoxSquare, table.Square tbody tr td table.BoxRound {
+  margin-bottom: 5px;
+}
+
+table.Square tbody tr td table.BoxSquare tbody tr td, table.Square tbody tr td table.BoxRound tbody tr td {
+  padding: 0px !important;
+}
+
+table.Square tbody tr td.Child {
+  padding: 15px;
+}
+
+table.Square {
+  border-spacing: 5px;
+}
+
+table.Square thead tr th {
+  width: 302px;
+  padding: 5px;
+  font-size: 0.8em;
+  border-style: solid;
+  border-width: 1px;
+}
+
+table.Square thead tr th:first-child {
+  width: auto !important;
+}
+
+table.Square tbody tr td {
+  padding: 5px;
+  height: 18px;
+  font-size: 0.75em;
+  text-align: center;
+  vertical-align: top;
+  border-style: solid;
+  border-width: 1px;
+}
+
+table.Square tbody tr td .PositionerCenter {
+  display: inline-block;
+}
+
+table.Square tbody tr td span, table.Square tbody tr td label {
+  padding-left: 5px;
+  padding-right: 5px;
+  min-width: 15px;
+  line-height: 32px;
+  font-size: 1em;
+  display: inline-block;
+}
+
+table.Square tbody tr td:first-child {
+  text-align: left;
+  white-space: normal;
+}
+
+/* FOOTER */
+footer {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding-top: 15px;
+  border-top-style: solid;
+  border-top-width: 2px;
+}
+
+footer img {
+  float: right;
+  height: 36px;
+}
+
+footer span.Header, footer span.Detail {
+  margin: 0px !important;
+  padding: 0px !important;
+  font-size: 0.6em;
+  display: block;
+}
