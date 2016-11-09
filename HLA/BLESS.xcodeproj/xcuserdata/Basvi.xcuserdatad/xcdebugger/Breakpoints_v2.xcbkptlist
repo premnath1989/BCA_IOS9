@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SIMenuViewController.m"
-            timestampString = "490267122.863155"
+            timestampString = "500289753.66887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "4958"
-            endingLineNumber = "4958"
+            startingLineNumber = "4964"
+            endingLineNumber = "4964"
             landmarkName = "-showSummaryQuotation"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SIMenuViewController.m"
-            timestampString = "490267122.863155"
+            timestampString = "500289753.66887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "5560"
-            endingLineNumber = "5560"
+            startingLineNumber = "5566"
+            endingLineNumber = "5566"
             landmarkName = "-create1stLA:currCustCode:currentdate:nextSiNo:nextCustCode:"
             landmarkType = "5">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SIMenuViewController.m"
-            timestampString = "490267122.863155"
+            timestampString = "500289753.66887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1518"
-            endingLineNumber = "1518"
+            startingLineNumber = "1524"
+            endingLineNumber = "1524"
             landmarkName = "-validateSaveAllWithoutPrompt"
             landmarkType = "5">
          </BreakpointContent>
@@ -122,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HLA/NewLAViewController.m"
-            timestampString = "486035426.603575"
+            timestampString = "500289753.66887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2879"
-            endingLineNumber = "2879"
+            startingLineNumber = "2886"
+            endingLineNumber = "2886"
             landmarkName = "-listing:didSelectIndex:andName:andDOB:andGender:andOccpCode:andSmoker:andMaritalStatus:"
             landmarkType = "5">
          </BreakpointContent>
@@ -154,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HLA/NewLAViewController.m"
-            timestampString = "486035426.603575"
+            timestampString = "500289753.66887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1131"
-            endingLineNumber = "1131"
+            startingLineNumber = "1138"
+            endingLineNumber = "1138"
             landmarkName = "-saveBasicPlan"
             landmarkType = "5">
          </BreakpointContent>
@@ -218,11 +218,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SIMenuViewController.m"
-            timestampString = "490267122.863155"
+            timestampString = "500289753.66887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3161"
-            endingLineNumber = "3161"
+            startingLineNumber = "3167"
+            endingLineNumber = "3167"
             landmarkName = "-saveLAForTableDidSelect"
             landmarkType = "5">
          </BreakpointContent>
@@ -266,11 +266,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SIMenuViewController.m"
-            timestampString = "490267122.863155"
+            timestampString = "500289753.66887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2836"
-            endingLineNumber = "2836"
+            startingLineNumber = "2842"
+            endingLineNumber = "2842"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -646,11 +646,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HLA/NewLAViewController.m"
-            timestampString = "486035426.603575"
+            timestampString = "500289753.66887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2142"
-            endingLineNumber = "2142"
+            startingLineNumber = "2149"
+            endingLineNumber = "2149"
             landmarkName = "-updateData:"
             landmarkType = "5">
          </BreakpointContent>
@@ -678,11 +678,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HLA/NewLAViewController.m"
-            timestampString = "486035426.603575"
+            timestampString = "500289753.66887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2017"
-            endingLineNumber = "2017"
+            startingLineNumber = "2024"
+            endingLineNumber = "2024"
             landmarkName = "-insertData"
             landmarkType = "5">
          </BreakpointContent>
@@ -742,11 +742,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SIMenuViewController.m"
-            timestampString = "481782207.37303"
+            timestampString = "500289753.66887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "349"
-            endingLineNumber = "349"
+            startingLineNumber = "355"
+            endingLineNumber = "355"
             landmarkName = "-loadSecondLAPage"
             landmarkType = "5">
          </BreakpointContent>
@@ -774,11 +774,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SIMenuViewController.m"
-            timestampString = "481782207.37303"
+            timestampString = "500289753.66887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "206"
-            endingLineNumber = "206"
+            startingLineNumber = "212"
+            endingLineNumber = "212"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -790,11 +790,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SIMenuViewController.m"
-            timestampString = "481782207.37303"
+            timestampString = "500289753.66887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "201"
-            endingLineNumber = "201"
+            startingLineNumber = "207"
+            endingLineNumber = "207"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -806,11 +806,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SIMenuViewController.m"
-            timestampString = "481781956.261752"
+            timestampString = "500289753.66887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "197"
-            endingLineNumber = "197"
+            startingLineNumber = "203"
+            endingLineNumber = "203"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -822,11 +822,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SIMenuViewController.m"
-            timestampString = "490267122.863155"
+            timestampString = "500289753.66887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3599"
-            endingLineNumber = "3599"
+            startingLineNumber = "3605"
+            endingLineNumber = "3605"
             landmarkName = "-tableView:didSelectRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -838,11 +838,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SIMenuViewController.m"
-            timestampString = "481783049.962024"
+            timestampString = "500289753.66887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "415"
-            endingLineNumber = "415"
+            startingLineNumber = "421"
+            endingLineNumber = "421"
             landmarkName = "-loadBasicPlanPage:"
             landmarkType = "5">
          </BreakpointContent>
@@ -854,11 +854,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SIMenuViewController.m"
-            timestampString = "490267122.863155"
+            timestampString = "500289753.66887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3215"
-            endingLineNumber = "3215"
+            startingLineNumber = "3221"
+            endingLineNumber = "3221"
             landmarkName = "-saveNewLA:"
             landmarkType = "5">
          </BreakpointContent>
@@ -870,11 +870,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SIMenuViewController.m"
-            timestampString = "490267122.863155"
+            timestampString = "500289753.66887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3613"
-            endingLineNumber = "3613"
+            startingLineNumber = "3619"
+            endingLineNumber = "3619"
             landmarkName = "-tableView:didSelectRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -950,11 +950,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SIMenuViewController.m"
-            timestampString = "484802145.569628"
+            timestampString = "500289753.66887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "737"
-            endingLineNumber = "737"
+            startingLineNumber = "743"
+            endingLineNumber = "743"
             landmarkName = "-Reset"
             landmarkType = "5">
          </BreakpointContent>
@@ -966,11 +966,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SIMenuViewController.m"
-            timestampString = "490267122.863155"
+            timestampString = "500289753.66887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "6305"
-            endingLineNumber = "6305"
+            startingLineNumber = "6311"
+            endingLineNumber = "6311"
             landmarkName = "-BasicSI:andAge:andOccpCode:andCovered:andBasicSA:andBasicHL:andBasicTempHL:andMOP:andPlanCode:andAdvance:andBasicPlan:planName:"
             landmarkType = "5">
          </BreakpointContent>
@@ -982,11 +982,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SIMenuViewController.m"
-            timestampString = "482409141.113447"
+            timestampString = "500289753.66887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -1254,11 +1254,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SIMenuViewController.m"
-            timestampString = "490267122.863155"
+            timestampString = "500289753.66887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "6424"
-            endingLineNumber = "6424"
+            startingLineNumber = "6437"
+            endingLineNumber = "6437"
             landmarkName = "-viewDidUnload"
             landmarkType = "5">
          </BreakpointContent>
@@ -1286,11 +1286,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SIMenuViewController.m"
-            timestampString = "484802145.569628"
+            timestampString = "500289753.66887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "731"
-            endingLineNumber = "731"
+            startingLineNumber = "737"
+            endingLineNumber = "737"
             landmarkName = "-clearSINO"
             landmarkType = "5">
          </BreakpointContent>
@@ -1350,11 +1350,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HLA/NewLAViewController.m"
-            timestampString = "486035426.603575"
+            timestampString = "500289753.66887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2760"
-            endingLineNumber = "2760"
+            startingLineNumber = "2767"
+            endingLineNumber = "2767"
             landmarkName = "-validateSave"
             landmarkType = "5">
          </BreakpointContent>
@@ -1526,11 +1526,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SIMenuViewController.m"
-            timestampString = "490267122.863155"
+            timestampString = "500289753.66887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "909"
-            endingLineNumber = "909"
+            startingLineNumber = "915"
+            endingLineNumber = "915"
             landmarkName = "-brngSubview:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1542,11 +1542,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SIMenuViewController.m"
-            timestampString = "490267122.863155"
+            timestampString = "500289753.66887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "5881"
-            endingLineNumber = "5881"
+            startingLineNumber = "5887"
+            endingLineNumber = "5887"
             landmarkName = "-saveAll"
             landmarkType = "5">
          </BreakpointContent>
@@ -1622,11 +1622,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SIMenuViewController.m"
-            timestampString = "490267122.863155"
+            timestampString = "500289753.66887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3166"
-            endingLineNumber = "3166"
+            startingLineNumber = "3172"
+            endingLineNumber = "3172"
             landmarkName = "-saveBasicPlanForTableDidSelect"
             landmarkType = "5">
          </BreakpointContent>
@@ -1638,11 +1638,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SIMenuViewController.m"
-            timestampString = "490267122.863155"
+            timestampString = "500289753.66887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3304"
-            endingLineNumber = "3304"
+            startingLineNumber = "3310"
+            endingLineNumber = "3310"
             landmarkName = "-saveBasicPlan:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1654,11 +1654,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SIMenuViewController.m"
-            timestampString = "490267122.863155"
+            timestampString = "500289753.66887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3326"
-            endingLineNumber = "3326"
+            startingLineNumber = "3332"
+            endingLineNumber = "3332"
             landmarkName = "-saveBasicPlan:"
             landmarkType = "5">
          </BreakpointContent>

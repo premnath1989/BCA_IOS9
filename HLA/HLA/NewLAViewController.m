@@ -1033,8 +1033,12 @@ id dobtanngal;
 //            txtPolicyTerm.text =  [NSString stringWithFormat:@"25"];
 //        }
     
-    
-    
+    if ([aaCode isEqualToString:@"BCALUL"]){
+        NSLog(@"Unit Linked");
+        [self.planPopover dismissPopoverAnimated:YES];
+        [_delegate voidCreateUnitLinkedView];
+    }
+    else{
         ilustrationProductCode = aaCode;
         if ([ilustrationProductCode isEqualToString:@"BCALHST"]){
             numberIntInternalStaff = [NSNumber numberWithInt:1];
@@ -1045,6 +1049,9 @@ id dobtanngal;
         [NamaProduk setTitle:aaDesc forState:UIControlStateNormal];
         [_BtnHubungan setTitle:@"--Please Select--" forState:UIControlStateNormal];
         [self.planPopover dismissPopoverAnimated:YES];
+    }
+    
+    
        // getPlanCode = aaCode;
         
 //    }

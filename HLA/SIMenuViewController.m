@@ -32,6 +32,7 @@
 #import "UIView+viewRecursion.h"
 #import "LoginDBManagement.h"
 #import "PremiumViewController.h"
+#import "SIMenuUnitLinkedViewController.h"
 
 #define TRAD_PAYOR_FIRSTLA  @"0"
 #define TRAD_PAYOR_SECONDLA  @"1"
@@ -40,7 +41,10 @@
 #define TRAD_RIDER_DETAILS @"4"
 
 @interface SIMenuViewController (){
+    SIMenuUnitLinkedViewController *siMenuUnitLinkedVC;
+    
     PremiumViewController *_PremiumController;
+    
     NSMutableArray* arrayIntValidate;
     NSMutableDictionary* dictionaryPOForInsert;
     NSMutableDictionary* dictionaryMasterForInsert;
@@ -90,6 +94,8 @@ BOOL isFirstLoad;
     _modelSIPOData = [[ModelSIPOData alloc]init];
     _modelSIMaster = [[Model_SI_Master alloc]init];
     _modelSIRider = [[ModelSIRider alloc]init];
+    
+    siMenuUnitLinkedVC = [[SIMenuUnitLinkedViewController alloc]initWithNibName:@"SIMenuUnitLinkedViewController" bundle:nil];
     
     self.RiderController = [self.storyboard instantiateViewControllerWithIdentifier:@"RiderView"];
     _RiderController.delegate = self;
@@ -6414,6 +6420,13 @@ NSString *prevPlan;
     }
     
     return [riderCode objectForKey:riderName];
+}
+
+#pragma mark unitlinked
+-(void)voidCreateUnitLinkedView{
+    UIView* viewUnitlinked = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 1024, 768)];
+    [viewUnitlinked addSubview:siMenuUnitLinkedVC.view];
+    [self.view addSubview:viewUnitlinked];
 }
 
 #pragma mark - memory
