@@ -279,6 +279,11 @@ main hr {
   font-size: 0.75em;
 }
 
+.ScoreResult {
+  padding: 10px;
+  font-size: 0.75em;
+}
+
 /* POP UP */
 main section form header h2 {
   border: none;
