@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Formatter.h"
 @protocol SIDateDelegate
 - (void)DateSelected:(NSString *)strDate:(NSString *) dbDate;
 - (void)CloseWindow;
@@ -14,6 +15,7 @@
 
 @interface SIDate : UIViewController{
     id<SIDateDelegate> _delegate;
+    Formatter *formatter;
 }
 
 @property (nonatomic, copy) NSString *ProspectDOB;

@@ -132,7 +132,7 @@ id msg, DBDate;
         NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
         
         //first, check if the new string is numeric only. If not, return NO;
-        NSCharacterSet *characterSet = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789,."] invertedSet];
+        NSCharacterSet *characterSet = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
         if ([newString rangeOfCharacterFromSet:characterSet].location != NSNotFound)
         {
             return NO;
@@ -144,11 +144,15 @@ id msg, DBDate;
         NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
         
         //first, check if the new string is numeric only. If not, return NO;
-        NSCharacterSet *characterSet = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789,."] invertedSet];
+        NSCharacterSet *characterSet = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
         if ([newString rangeOfCharacterFromSet:characterSet].location != NSNotFound)
         {
             return NO;
         }
+        NSCalendar *calendar = [NSCalendar currentCalendar];
+        NSRange range = [calendar rangeOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitMonth forDate:[NSDate date]];
+        NSUInteger numberOfDaysInMonth = range.length;
+        
         
         return [newString doubleValue] < 32;
     }

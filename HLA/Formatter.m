@@ -90,6 +90,13 @@
     return targetDateString;
 }
 
+-(NSDate *)DateFromString:(NSString *)stringDate DateFormat:(NSString *)stringDateFormat{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:stringDateFormat];
+    NSDate *date = [formatter dateFromString:stringDate];
+    return date;
+}
+
 -(NSString *)getDateToday:(NSString *)dateFormat{
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:[NSString stringWithFormat:@"%@",dateFormat]];

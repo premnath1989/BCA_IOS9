@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface Formatter : NSObject
+-(NSDate *)DateFromString:(NSString *)stringDate DateFormat:(NSString *)stringDateFormat;
 -(NSString *)getNumberFromString:(NSString *)stringText;
 -(NSString *)numberToCurrencyDecimalFormatted:(NSNumber *)number;
 -(NSString *)convertDateFrom:(NSString *)originalDateFormat TargetDateFormat:(NSString *)targetDateFormat DateValue:(NSString *)dateValue;
