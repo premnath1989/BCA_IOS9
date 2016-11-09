@@ -53,7 +53,7 @@ var stringRowPrefix = "Row";
 var stringCellPrefix = "Cell";
 var stringNumberPrefix = "Number";
 var arrayHealthTableHeader = ["DiseaseName", "DiseaseSickFrom", "DiseaseSickDuration", "DiseaseDoctorName", "DiseaseHospital", "DiseaseAddress", "DiseaseTelephone"];
-var arraySPAJProposalTableHeader = ["CompanyName", "PolicyNumber", "Published", "BasicSumAssured", "Decision"];
+var arraySPAJProposalTableHeader = ["CompanyName", "PolicyNumber", "BeneficiariesType", "Published", "BasicSumAssured", "Decision"];
 var stringAreaPrefix = "Area";
 var stringProspectiveInsuredPrefix = "ProspectiveInsured";
 var stringPolicyHolderPrefix = "PolicyHolder";
@@ -561,7 +561,7 @@ function popUpSPAJProposalShow(stringKeyID, stringPopUpJavaScriptID, arrayConten
 	
 	// INPUT SETTER
 	
-	$(stringPopUpJQueryID + " input:text").each(function()
+	$(stringPopUpJQueryID + " input[type=text]").each(function()
     {
         var stringInputJavaScriptID = $(this).attr("id");
 		var stringInputJQueryID = stringKres + stringInputJavaScriptID;
@@ -577,6 +577,25 @@ function popUpSPAJProposalShow(stringKeyID, stringPopUpJavaScriptID, arrayConten
         else
         {
             setTextForm(stringInputJavaScriptID, stringValue);
+        }
+    });
+
+    $(stringPopUpJQueryID + " input[type=number]").each(function()
+    {
+        var stringInputJavaScriptID = $(this).attr("id");
+		var stringInputJQueryID = stringKres + stringInputJavaScriptID;
+		$(stringInputJQueryID).val("");
+		var stringInputSuffix = releasePrefix(stringInputJavaScriptID);
+        var stringKey = setKeyPrefix(stringInputJavaScriptID, stringPageInfixTypeCurrent + "SPAJProposal" + stringInputSuffix + stringKeyID);
+        var stringValue = arrayFind(arrayContent, stringKey);
+		
+        if (stringValue == null || stringValue == undefined)
+        {
+            
+        }
+        else
+        {
+            setNumberForm(stringInputJavaScriptID, stringValue);
         }
     });
 }
@@ -783,6 +802,27 @@ function additionalQuestionGenerator()
                 	var arrayInputTemporary = [];
 
 					$("#PopUpSPAJProposal input[type=text]").each(function()
+                    {
+                        var stringID = $(this).attr("id");
+                        var stringSuffix = releasePrefix(stringID);
+                        
+                        $(this).val("");
+                        stringDetailKey = setKeyPrefix(stringID, stringInfix + stringSuffix);
+
+						for (var k = 0; k < arrayHealthQuestionnaire.length; k++)
+						{
+							if (stringDetailKey == arrayHealthQuestionnaire[k].elementID.substring(0, stringDetailKey.length))
+							{
+								arrayAdd(arrayInputTemporary, arrayHealthQuestionnaire[k].elementID)
+							}
+							else
+							{
+								
+							}
+						}
+                    });
+
+                    $("#PopUpSPAJProposal input[type=number]").each(function()
                     {
                         var stringID = $(this).attr("id");
                         var stringSuffix = releasePrefix(stringID);
@@ -1762,6 +1802,25 @@ function buttonPopUpSPAJProposalGenerator()
 				arrayAdd(arrayInputTemporary, stringKey, stringValue);
 			}
 		});
+
+		$(stringPopUpJQueryID + " form input[type=number]").each(function()
+		{
+			stringInputJavaScriptID = $(this).attr("id");
+			stringInputJQueryID = stringKres + stringInputJavaScriptID;
+			stringInputSuffix = releasePrefix(stringInputJavaScriptID);
+        	stringKey = setKeyPrefix(stringInputJavaScriptID, stringTriggerInfix + stringInputSuffix + intID);
+			
+			if (validateTextGeneral(stringInputJQueryID) == false)
+			{
+				validationMessage("Harap lengkapi form terlebih dahulu !.", null);
+				return false;
+			}
+			else
+			{
+				stringValue = getTextGeneral(stringInputJavaScriptID);
+				arrayAdd(arrayInputTemporary, stringKey, stringValue);
+			}
+		});
 		
 		if (stateValidation == false)
 		{
@@ -1783,9 +1842,16 @@ function buttonPopUpSPAJProposalGenerator()
 				$(this).val("");
 			});
 
+			$(stringPopUpJQueryID + " form input[type=number]").each(function()
+			{
+				$(this).val("");
+			});
+
 			tableSPAJProposalGenerator("SPAJProposalList", arrayHealthQuestionnaire);
-			// previewArrayObject(arrayHealthQuestionnaire);
+			
 		}
+
+		previewArrayObject(arrayHealthQuestionnaire);
     });
 }
 
@@ -1903,7 +1969,7 @@ function tableSPAJProposalGenerator(stringContainerJavaScriptID, arrayContent)
 	var stringKeyInfix;
 	
 	$(stringContainerJQueryID).empty();
-	
+	previewArrayObject(arrayHealthQuestionnaire);
 	for (var i = 0; i < arrayContent.length; i++)
 	{
 		stringKey = arrayContent[i].elementID;
@@ -2789,11 +2855,11 @@ function getFromDatabase(objectContent, stringPageType)
 								{
 									if (stringValue == "female")
 									{
-										$(stringCellJQueryID).append("Wanita");
+										$(stringCellJQueryID).append("Perempuan");
 									}
 									else
 									{
-										$(stringCellJQueryID).append("Pria");
+										$(stringCellJQueryID).append("Laki - laki");
 									}
 								}
 								else
@@ -2947,6 +3013,101 @@ function getFromDatabase(objectContent, stringPageType)
 				
 				}
 				
+				// FOR TABLE HEALTH
+				
+				for (var j = 0; j < arrayHealthTableHeader.length; j++)
+				{
+					if (stringKey.substring(stringKey.length - arrayHealthTableHeader[j].length, stringKey.length) == arrayHealthTableHeader[j])
+					{
+						var stringIndicatorPrefix = stringKey.substring(stringPrefixText.length, stringPrefixText.length + 3);
+						var stringTableJQueryID;
+						var stringInfix;
+
+						if (stringIndicatorPrefix == stringIndicatorPolicyHolder)
+						{
+							stringTableJQueryID = stringKres + stringTablePrefix + stringPolicyHolderPrefix + stringIllnessSuffix;
+							stringInfix = stringPolicyHolderPrefix;
+						}
+						else
+						{
+							stringTableJQueryID = stringKres + stringTablePrefix + stringProspectiveInsuredPrefix + stringIllnessSuffix;
+							stringInfix = stringProspectiveInsuredPrefix;
+						}
+
+						$(stringTableJQueryID + " tbody tr").each(function(indexRow)
+						{
+							var stringRowJavaScriptID = $(this).attr("id");
+							var stringRowJQueryID = stringKres + stringRowJavaScriptID;
+							var stringCellJavaScriptID = stringCellPrefix + stringInfix + stringIllnessSuffix + arrayHealthTableHeader[j];
+							var stringCellJQueryID = stringKres + stringCellJavaScriptID + indexRow;
+							var stringCellSuffix = stringCellJavaScriptID;
+							var booleanBreak = false;
+							
+							if (stringCellSuffix.substring(stringCellSuffix.length - arrayHealthTableHeader[j].length, stringCellSuffix.length) == arrayHealthTableHeader[j])
+							{
+								if (j == 1)
+								{
+									var stringDate = stringValue.split(stringSeparatorDate);
+									var stringDay = stringDate[0];
+									var stringMonth = stringDate[1];
+									var stringYear = stringDate[2];
+									stringDate = [stringMonth, stringYear.substring(2, 4)];
+
+									$(stringCellJQueryID + " table").each(function(indexTable)
+									{
+										var stringBoxID = $(this).attr("id");
+										var stringBoxValue = getBoxGeneral(stringBoxID);
+										
+										if (stringBoxValue == null || stringBoxValue == undefined || stringBoxValue == "")
+										{
+											setBoxGeneral(stringBoxID, stringDate[indexTable]);
+											booleanBreak = true;
+										}
+										else
+										{
+											
+										}
+									});
+									
+									if (booleanBreak == true)
+									{
+										return false;
+									}
+									else
+									{
+										
+									}
+								}
+								else
+								{
+									if ($(stringCellJQueryID).text() == "" || $(stringCellJQueryID).text() == undefined || $(stringCellJQueryID).text() == null)
+									{
+										$(stringCellJQueryID).append(stringValue);
+										
+										// FOR NUMBER
+										
+										numberGenerator(stringInfix + stringIllnessSuffix, indexRow);
+										
+										return false;
+									}
+									else
+									{
+										
+									}
+								}
+							}
+							else
+							{
+
+							}
+						});
+					}
+					else
+					{
+
+					}
+				}
+
 				// FOR TABLE SPAJ PROPOSAL
 				
 				var stringInfix;
@@ -3018,8 +3179,62 @@ function getFromDatabase(objectContent, stringPageType)
         }
 		else if (stringKey.substring(0, stringNumberPrefix.length) == stringNumberPrefix)
         {            
+        	var stringIDWithoutPrefix = stringKey.substring(stringPrefixNumber.length, stringKey.length);
+        	var stringIndicatorPrefix = stringIDWithoutPrefix.substring(0, 3);
+
             if (stringPageType == stringPageTypePDF)
             {
+            	// FOR TABLE SPAJ PROPOSAL
+				
+				var stringInfix;
+				
+				if (stringIndicatorPrefix == stringIndicatorPolicyHolder)
+				{
+					stringTableJQueryID = stringKres + "TablePolicyHolderSPAJProposal";
+					stringInfix = stringPolicyHolderPrefix;
+				}
+				else
+				{
+					stringTableJQueryID = stringKres + "TableProspectiveInsuredSPAJProposal";
+					stringInfix = stringProspectiveInsuredPrefix;
+				}
+				
+				var stringIDWithoutInfix = stringIDWithoutPrefix.substring(stringInfix.length + stringSPAJProposalInfix.length, stringIDWithoutPrefix.length - 1);
+
+				for (var j = 0; j < arraySPAJProposalTableHeader.length; j++)
+				{
+					$(stringTableJQueryID + " tbody tr").each(function(indexRow)
+					{
+						var stringRowJavaScriptID = $(this).attr("id");
+						var stringRowJQueryID = stringKres + stringRowJavaScriptID;
+						var stringCellJavaScriptID = stringCellPrefix + stringInfix + stringSPAJProposalInfix + arraySPAJProposalTableHeader[j];
+						var stringCellJQueryID = stringKres + stringCellJavaScriptID + indexRow;
+						var stringCellSuffix = stringCellJavaScriptID;
+						
+						if (stringIDWithoutInfix == arraySPAJProposalTableHeader[j])
+						{
+							if ($(stringCellJQueryID).text() == "" || $(stringCellJQueryID).text() == undefined || $(stringCellJQueryID).text() == null)
+							{
+								$(stringCellJQueryID).append(stringValue);
+
+								// FOR NUMBER
+
+								numberGenerator(stringInfix + stringSPAJProposalInfix, indexRow);
+
+								return false;
+							}
+							else
+							{
+
+							}
+						}
+						else
+						{
+
+						}
+					});
+				}
+
                 setNumberPDF(stringKey, stringValue);
             }
             else
@@ -3742,41 +3957,33 @@ function alertSaveRecentInput()
 function goToChangePageAlert(stringLinkJavaScriptID, URLPage, stringRelationshipStatus)
 {
 	var stringLinkJQueryID = stringKres + stringLinkJavaScriptID;
-	alert("initiate : " + stringLinkJQueryID + ", " + stringLinkJavaScriptID + ", " + URLPage + ", " + stringRelationshipStatus);
 	
 	if (booleanInputChangeState == "true")
 	{
-		alert("alert - input change state true");
-
 		if (stringRelationshipStatus == "self")
 		{
-			alert("relationship status : " + "self");
+			
 		}
 		else
 		{
-			alert("relationship status : " + "not self");
 			alertSaveRecentInput();
 		}
 	}
 	else
 	{
-		alert("alert - input change state false");
 		if (stringLinkJavaScriptID == "LinkProspectiveInsured")
 		{
-			alert("link : linkProspectiveInsured - " + stringLinkJavaScriptID);
 			if (stringRelationshipStatus == "self")
 			{
-				alert("relationship status : " + "self");
+				
 			}
 			else
 			{
-				alert("relationship status : " + "not self");
 				window.location.replace(URLPage);
 			}
 		}
 		else
 		{
-			alert("link : linkPolicyHolder - " + stringLinkJavaScriptID);
 			window.location.replace(URLPage);
 		}
 	}
