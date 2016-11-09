@@ -297,10 +297,6 @@ header h2 {
   border-bottom-width: 1px;
 }
 
-header .HighlightedFlex {
-  display: flex;
-}
-
 /* MAIN */
 main form, main fieldset {
   padding-top: 10px;
@@ -309,7 +305,7 @@ main form, main fieldset {
   padding-bottom: 10px;
 }
 
-.ContainerFit, .ContainerLeft, .ContainerRight {
+main form .ContainerFit, main form .ContainerLeft, main form .ContainerRight, main fieldset .ContainerFit, main fieldset .ContainerLeft, main fieldset .ContainerRight {
   margin-top: 5px;
   margin-bottom: 5px;
   display: flex;
@@ -318,47 +314,47 @@ main form, main fieldset {
   align-items: stretch;
 }
 
-.ContainerFit .Item, .ContainerLeft .Item, .ContainerRight .Item {
+main form .ContainerFit .Item, main form .ContainerLeft .Item, main form .ContainerRight .Item, main fieldset .ContainerFit .Item, main fieldset .ContainerLeft .Item, main fieldset .ContainerRight .Item {
   flex-grow: 1;
 }
 
-.ContainerFit .Item1, .ContainerLeft .Item1, .ContainerRight .Item1 {
+main form .ContainerFit .Item1, main form .ContainerLeft .Item1, main form .ContainerRight .Item1, main fieldset .ContainerFit .Item1, main fieldset .ContainerLeft .Item1, main fieldset .ContainerRight .Item1 {
   flex-grow: 1;
 }
 
-.ContainerFit .Item2, .ContainerLeft .Item2, .ContainerRight .Item2 {
+main form .ContainerFit .Item2, main form .ContainerLeft .Item2, main form .ContainerRight .Item2, main fieldset .ContainerFit .Item2, main fieldset .ContainerLeft .Item2, main fieldset .ContainerRight .Item2 {
   flex-grow: 2;
 }
 
-.ContainerFit .Item3, .ContainerLeft .Item3, .ContainerRight .Item3 {
+main form .ContainerFit .Item3, main form .ContainerLeft .Item3, main form .ContainerRight .Item3, main fieldset .ContainerFit .Item3, main fieldset .ContainerLeft .Item3, main fieldset .ContainerRight .Item3 {
   flex-grow: 3;
 }
 
-.Margin {
+main form .ContainerFit .Margin, main form .ContainerLeft .Margin, main form .ContainerRight .Margin, main fieldset .ContainerFit .Margin, main fieldset .ContainerLeft .Margin, main fieldset .ContainerRight .Margin {
   margin: 5px;
 }
 
-.Center {
+main form .ContainerFit .Center, main form .ContainerLeft .Center, main form .ContainerRight .Center, main fieldset .ContainerFit .Center, main fieldset .ContainerLeft .Center, main fieldset .ContainerRight .Center {
   text-align: center;
 }
 
-.Left {
-  text-align: left !important;
+main form .ContainerFit .Left, main form .ContainerLeft .Left, main form .ContainerRight .Left, main fieldset .ContainerFit .Left, main fieldset .ContainerLeft .Left, main fieldset .ContainerRight .Left {
+  text-align: left;
 }
 
-.Right {
+main form .ContainerFit .Right, main form .ContainerLeft .Right, main form .ContainerRight .Right, main fieldset .ContainerFit .Right, main fieldset .ContainerLeft .Right, main fieldset .ContainerRight .Right {
   text-align: right;
 }
 
-.ContainerFit {
+main form .ContainerFit, main fieldset .ContainerFit {
   justify-content: space-between;
 }
 
-.ContainerLeft {
+main form .ContainerLeft, main fieldset .ContainerLeft {
   justify-content: flex-start;
 }
 
-.ContainerRight {
+main form .ContainerRight, main fieldset .ContainerRight {
   justify-content: flex-end;
 }
 
@@ -375,11 +371,6 @@ main form, main fieldset {
 .Short {
   min-width: 75px;
   width: 75px;
-}
-
-.Slim {
-  min-width: 115.5px;
-  width: 115.5px;
 }
 
 .Medium {
@@ -404,11 +395,6 @@ main form, main fieldset {
 .SmallFix {
   width: 88.23529px;
   max-width: 88.23529px;
-}
-
-.SlimFix {
-  width: 154px;
-  max-width: 154px;
 }
 
 .ShortFix {
