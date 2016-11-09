@@ -34,6 +34,7 @@ id msg, ComDate;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    formatter = [[Formatter alloc]init];
     [_outletTextMonth setDelegate:self];
     [_outletTextDay setDelegate:self];
     if ((msgDate != NULL)&&(![msgDate isEqualToString:@"--Please Select--"])) {
@@ -73,7 +74,11 @@ id msg, ComDate;
             return NO;
         }
         
-        return [newString doubleValue] < 32;
+        NSCalendar *calendar = [NSCalendar currentCalendar];
+        NSDate* dateSelected = [formatter DateFromString:[NSString stringWithFormat:@"1/%@/%@",_outletTextMonth.text,_outletTextYear.text] DateFormat:@"dd/MM/yyyy"];
+        NSRange range = [calendar rangeOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitMonth forDate:dateSelected];
+        NSUInteger numberOfDaysInMonth = range.length;
+        return [newString doubleValue] <= numberOfDaysInMonth;
     }
 }
 

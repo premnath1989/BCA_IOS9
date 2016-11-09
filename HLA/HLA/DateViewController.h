@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Formatter.h"
 
 @class DateViewController;
 @protocol DateViewControllerDelegate
@@ -15,6 +16,7 @@
 
 @interface DateViewController : UIViewController {
     id <DateViewControllerDelegate> _delegate;
+    Formatter *formatter;
 }
 
 @property (retain, nonatomic) IBOutlet UIDatePicker *datePickerView;
