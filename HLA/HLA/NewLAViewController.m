@@ -1036,7 +1036,7 @@ id dobtanngal;
     if ([aaCode isEqualToString:@"BCALUL"]){
         NSLog(@"Unit Linked");
         [self.planPopover dismissPopoverAnimated:YES];
-        [_delegate voidCreateUnitLinkedView];
+        [_delegate voidCreateUnitLinkedView:_SINumberBCA.text];
     }
     else{
         ilustrationProductCode = aaCode;
@@ -3086,7 +3086,7 @@ id dobtanngal;
 //    {
 //        [self.TanggalIllustrasi setTitle:aDate forState:UIControlStateNormal];
 //        
-//        
+//        Planlisting
 //        [self.datePopover dismissPopoverAnimated:YES];
 //        
     

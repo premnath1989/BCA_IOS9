@@ -10,8 +10,12 @@
 #import "SIMenuTableViewCell.h"
 @interface SIMenuUnitLinkedViewController : UIViewController{
     IBOutlet UITableView *myTableView;
-    
     IBOutlet UIView* viewRightView;
+    
+    NSString* stringSINumber;
 }
 
+@property (nonatomic,weak)NSString* stringSIDate;
+
+-(void)setIllustrationNumber:(NSString *)stringIllustrationNumber;
 @end

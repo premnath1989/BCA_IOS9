@@ -10,6 +10,7 @@
 #import "HtmlGenerator/HtmlGenerator.h"
 @protocol AreaPotensialDiskusiViewControllerDelegate
 -(void)voidSetAreaPotentialBoolValidate:(BOOL)boolValidate;
+-(void)voidSetProfileRiskBoolValidate:(BOOL)boolValidate;
 @end
 
 @interface AreaPotensialDiskusiViewController : HtmlGenerator{
@@ -22,5 +23,5 @@
 @property (strong, nonatomic) NSNumber* cffID;
 @property (strong, nonatomic) NSDictionary* cffHeaderSelectedDictionary;
 - (void)voidDoneAreaPotential;
--(void)loadHTMLFile;
+-(void)loadHTMLFile:(NSString *)StringPageSection;
 @end

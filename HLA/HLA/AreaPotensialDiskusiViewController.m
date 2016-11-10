@@ -1,4 +1,4 @@
-//
+    //
 //  AreaPotensialDiskusiViewController.m
 //  BLESS
 //
@@ -16,6 +16,8 @@
     ModelCFFHtml* modelCFFHtml;
     Formatter* formatter;
     ModelCFFAnswers* modelCFFAsnwers;
+    
+    NSString *stringPageSection;
 }
 
 @end
@@ -77,7 +79,9 @@
 }
 
 #pragma mark html load
--(void)loadHTMLFile{
+-(void)loadHTMLFile:(NSString *)StringPageSection{
+    stringPageSection = StringPageSection;
+    
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     filePath = [docsDir stringByAppendingPathComponent:@"CFF"];
     
@@ -110,9 +114,18 @@
 
 - (void)savetoDB:(NSDictionary *)params{
     //add another key to db
-    cffID = [cffHeaderSelectedDictionary valueForKey:@"PotentialDiscussionCFFID"];
+    if ([stringPageSection isEqualToString:@"PD"]){
+        cffID = [cffHeaderSelectedDictionary valueForKey:@"PotentialDiscussionCFFID"];
+    }
+    else if ([stringPageSection isEqualToString:@"CR"]){
+        cffID = [cffHeaderSelectedDictionary valueForKey:@"CustomerRiskCFFID"];
+    }
+    else if ([stringPageSection isEqualToString:@"CS"]){
+        cffID = [cffHeaderSelectedDictionary valueForKey:@"CustomerRiskCFFID"];
+    }
+    
     NSMutableDictionary* modifiedParams = [[NSMutableDictionary alloc]initWithDictionary:[params valueForKey:@"data"]];
-    [modifiedParams setObject:[[modelCFFHtml selectActiveHtmlForSection:@"PD"] valueForKey:@"CFFHtmlID"] forKey:@"CFFHtmlID"];
+    [modifiedParams setObject:[[modelCFFHtml selectActiveHtmlForSection:stringPageSection] valueForKey:@"CFFHtmlID"] forKey:@"CFFHtmlID"];
     [modifiedParams setObject:[cffTransactionID stringValue] forKey:@"CFFTransactionID"];
     [modifiedParams setObject:cffID forKey:@"CFFID"];
     [modifiedParams setObject:[prospectProfileID stringValue] forKey:@"CustomerID"];
@@ -122,11 +135,11 @@
     if ([arrayCFFAnswers count]>0){
         for (int i = 0;i<[arrayCFFAnswers count];i++){
             NSMutableDictionary* tempDict = [[NSMutableDictionary alloc] initWithDictionary:[arrayCFFAnswers objectAtIndex:i]];
-            [tempDict setObject:[[modelCFFHtml selectActiveHtmlForSection:@"PD"] valueForKey:@"CFFHtmlID"] forKey:@"CFFHtmlID"];
+            [tempDict setObject:[[modelCFFHtml selectActiveHtmlForSection:stringPageSection] valueForKey:@"CFFHtmlID"] forKey:@"CFFHtmlID"];
             [tempDict setObject:[cffTransactionID stringValue] forKey:@"CFFTransactionID"];
             [tempDict setObject:cffID forKey:@"CFFID"];
             [tempDict setObject:[prospectProfileID stringValue] forKey:@"CustomerID"];
-            [tempDict setObject:@"PD" forKey:@"CFFHtmlSection"];
+            [tempDict setObject:stringPageSection forKey:@"CFFHtmlSection"];
             int indexNo = [modelCFFAsnwers voidGetDuplicateRowID:tempDict];
             
             if (indexNo>0){
@@ -146,13 +159,20 @@
     [finalDictionary setValue:[params valueForKey:@"successCallBack"] forKey:@"successCallBack"];
     [finalDictionary setValue:[params valueForKey:@"errorCallback"] forKey:@"errorCallback"];
     [super savetoDB:finalDictionary];
-    [delegate voidSetAreaPotentialBoolValidate:true];
+    if ([stringPageSection isEqualToString:@"PD"]){
+        [delegate voidSetAreaPotentialBoolValidate:true];
+    }
+    else if ([stringPageSection isEqualToString:@"CR"]){
+        [delegate voidSetProfileRiskBoolValidate:true];
+    }
+
+
 }
 
 - (NSMutableDictionary*)readfromDB:(NSMutableDictionary*) params{
     NSMutableDictionary* modifiedParams = [[NSMutableDictionary alloc]initWithDictionary:[params valueForKey:@"data"]];
     NSMutableDictionary* tempDict = [[NSMutableDictionary alloc] initWithDictionary:[modifiedParams valueForKey:@"CFFAnswers"]];
-    NSString* stringWhere = [NSString stringWithFormat:@"where CustomerID=%@ and CFFID=%@ and CFFTransactionID=%@ and CFFHtmlSection='PD'",prospectProfileID,[cffHeaderSelectedDictionary valueForKey:@"PotentialDiscussionCFFID"],[cffHeaderSelectedDictionary valueForKey:@"CFFTransactionID"]];
+    NSString* stringWhere = [NSString stringWithFormat:@"where CustomerID=%@ and CFFID=%@ and CFFTransactionID=%@ and CFFHtmlSection='%@'",prospectProfileID,[cffHeaderSelectedDictionary valueForKey:@"PotentialDiscussionCFFID"],[cffHeaderSelectedDictionary valueForKey:@"CFFTransactionID"],stringPageSection];
     [tempDict setObject:stringWhere forKey:@"where"];
     
     NSMutableDictionary* answerDictionary = [[NSMutableDictionary alloc]init];

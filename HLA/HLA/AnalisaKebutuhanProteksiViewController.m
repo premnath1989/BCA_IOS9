@@ -14,6 +14,8 @@
     ModelCFFTransaction* modelCFFTransaction;
     ModelCFFHtml* modelCFFHtml;
     ModelCFFAnswers* modelCFFAsnwers;
+    
+    NSString *stringPageSection;
 }
 
 
@@ -24,14 +26,14 @@
 @synthesize delegate;
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:YES];
-    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+/*    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     filePath = [docsDir stringByAppendingPathComponent:@"CFF"];
     
     NSString *htmlfilePath = [NSString stringWithFormat:@"CFF/%@",htmlFileName];
     NSString *localURL = [[NSString alloc] initWithString:
                           [docsDir stringByAppendingPathComponent: htmlfilePath]];
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localURL]];
-    [webview loadRequest:urlRequest];
+    [webview loadRequest:urlRequest];*/
 }
 
 - (void)viewDidLoad {
@@ -54,20 +56,50 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)loadHTMLFile:(NSString *)StringPageSection{
+    stringPageSection = StringPageSection;
+    
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    filePath = [docsDir stringByAppendingPathComponent:@"CFF"];
+    
+    NSString *htmlfilePath = [NSString stringWithFormat:@"CFF/%@",htmlFileName];
+    NSString *localURL = [[NSString alloc] initWithString:
+                          [docsDir stringByAppendingPathComponent: htmlfilePath]];
+    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localURL]];
+    [webview loadRequest:urlRequest];
+}
+
 #pragma mark call save function in HTML
 - (void)voidDoneProteksi{
-    [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"document.getElementById('save').click()"]];
+    //[webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"document.getElementById('save').click()"]];
+    [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"savetoDB();"]];
 }
 
 - (void)voidReadProteksi{
-    [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"document.getElementById('read').click()"]];
+    //[webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"document.getElementById('read').click()"]];
+    [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"readfromDB();"]];
 }
 
 
 - (void)savetoDB:(NSDictionary *)params{
     //add another key to db
     //
-    cffID = [cffHeaderSelectedDictionary valueForKey:@"ProteksiCFFID"];
+    if ([stringPageSection isEqualToString:@"PRT"]){
+        cffID = [cffHeaderSelectedDictionary valueForKey:@"ProteksiCFFID"];
+    }
+    else if ([stringPageSection isEqualToString:@"PSN"]){
+        cffID = [cffHeaderSelectedDictionary valueForKey:@"PensiunCFFID"];
+    }
+    else if ([stringPageSection isEqualToString:@"PND"]){
+        cffID = [cffHeaderSelectedDictionary valueForKey:@"PendidikanCFFID"];
+    }
+    else if ([stringPageSection isEqualToString:@"WRS"]){
+        cffID = [cffHeaderSelectedDictionary valueForKey:@"WarisanCFFID"];
+    }
+    else if ([stringPageSection isEqualToString:@"INV"]){
+        cffID = [cffHeaderSelectedDictionary valueForKey:@"InvestasiCFFID"];
+    }
+    
     NSMutableDictionary* modifiedParams = [[NSMutableDictionary alloc]initWithDictionary:[params valueForKey:@"data"]];
     [modifiedParams setObject:[[modelCFFHtml selectActiveHtmlForSection:@"PRT"] valueForKey:@"CFFHtmlID"] forKey:@"CFFHtmlID"];
     //[modifiedParams setObject:@"1" forKey:@"CFFHtmlID"];
@@ -84,7 +116,7 @@
             [tempDict setObject:[cffTransactionID stringValue] forKey:@"CFFTransactionID"];
             [tempDict setObject:cffID forKey:@"CFFID"];
             [tempDict setObject:[prospectProfileID stringValue] forKey:@"CustomerID"];
-            [tempDict setObject:@"PRT" forKey:@"CFFHtmlSection"];
+            [tempDict setObject:stringPageSection forKey:@"CFFHtmlSection"];
             int indexNo = [modelCFFAsnwers voidGetDuplicateRowID:tempDict];
             
             if (indexNo>0){
@@ -104,13 +136,28 @@
     [finalDictionary setValue:[params valueForKey:@"successCallBack"] forKey:@"successCallBack"];
     [finalDictionary setValue:[params valueForKey:@"errorCallback"] forKey:@"errorCallback"];
     [super savetoDB:finalDictionary];
-    [delegate voidSetAnalisaKebutuhanProteksiBoolValidate:true];
+    
+    if ([stringPageSection isEqualToString:@"PRT"]){
+        [delegate voidSetAnalisaKebutuhanProteksiBoolValidate:true];
+    }
+    else if ([stringPageSection isEqualToString:@"PSN"]){
+        [delegate voidSetAnalisaKebutuhanPensiunBoolValidate:true];
+    }
+    else if ([stringPageSection isEqualToString:@"PND"]){
+        [delegate voidSetAnalisaKebutuhanPendidikanBoolValidate:true];
+    }
+    else if ([stringPageSection isEqualToString:@"WRS"]){
+        [delegate voidSetAnalisaKebutuhanWarisanBoolValidate:true];
+    }
+    else if ([stringPageSection isEqualToString:@"INV"]){
+        [delegate voidSetAnalisaKebutuhanInvestasiBoolValidate:true];
+    }
 }
 
 - (NSMutableDictionary*)readfromDB:(NSMutableDictionary*) params{
     NSMutableDictionary* modifiedParams = [[NSMutableDictionary alloc]initWithDictionary:[params valueForKey:@"data"]];
     NSMutableDictionary* tempDict = [[NSMutableDictionary alloc] initWithDictionary:[modifiedParams valueForKey:@"CFFAnswers"]];
-    NSString* stringWhere = [NSString stringWithFormat:@"where CustomerID=%@ and CFFID=%@ and CFFTransactionID=%@ and CFFHtmlSection='PRT'",prospectProfileID,[cffHeaderSelectedDictionary valueForKey:@"ProteksiCFFID"],[cffHeaderSelectedDictionary valueForKey:@"CFFTransactionID"]];
+    NSString* stringWhere = [NSString stringWithFormat:@"where CustomerID=%@ and CFFID=%@ and CFFTransactionID=%@ and CFFHtmlSection='%@'",prospectProfileID,[cffHeaderSelectedDictionary valueForKey:@"ProteksiCFFID"],[cffHeaderSelectedDictionary valueForKey:@"CFFTransactionID"],stringPageSection];
     [tempDict setObject:stringWhere forKey:@"where"];
     
     NSMutableDictionary* answerDictionary = [[NSMutableDictionary alloc]init];

@@ -6423,10 +6423,12 @@ NSString *prevPlan;
 }
 
 #pragma mark unitlinked
--(void)voidCreateUnitLinkedView{
+-(void)voidCreateUnitLinkedView:(NSString *)SINumber{
     UIView* viewUnitlinked = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 1024, 768)];
     [viewUnitlinked addSubview:siMenuUnitLinkedVC.view];
     [self.view addSubview:viewUnitlinked];
+
+    [siMenuUnitLinkedVC setIllustrationNumber:SINumber];
 }
 
 #pragma mark - memory

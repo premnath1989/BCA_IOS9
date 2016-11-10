@@ -10,6 +10,10 @@
 #import "HtmlGenerator/HtmlGenerator.h"
 @protocol AnalisaKebutuhanProteksiViewControllerDelegate
 -(void)voidSetAnalisaKebutuhanProteksiBoolValidate:(BOOL)boolValidate;
+-(void)voidSetAnalisaKebutuhanPensiunBoolValidate:(BOOL)boolValidate;
+-(void)voidSetAnalisaKebutuhanPendidikanBoolValidate:(BOOL)boolValidate;
+-(void)voidSetAnalisaKebutuhanWarisanBoolValidate:(BOOL)boolValidate;
+-(void)voidSetAnalisaKebutuhanInvestasiBoolValidate:(BOOL)boolValidate;
 @end
 
 @interface AnalisaKebutuhanProteksiViewController : HtmlGenerator{
@@ -23,4 +27,6 @@
 @property (strong, nonatomic) NSDictionary* cffHeaderSelectedDictionary;
 -(void)voidDoneProteksi;
 -(void)viewDidAppear:(BOOL)animated;
+
+-(void)loadHTMLFile:(NSString *)StringPageSection;
 @end

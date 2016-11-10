@@ -8,6 +8,23 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SIUnitLinkedPolicyHolderViewController : UIViewController
-
+@interface SIUnitLinkedPolicyHolderViewController : UIViewController{
+    IBOutlet UIScrollView* scrollPolicyHolder;
+    
+    IBOutlet UILabel* labelQuickQuote;
+    
+    IBOutlet UIButton* buttonPlan;
+    IBOutlet UIButton* buttonDOB;
+    IBOutlet UIButton* buttonOccupation;
+    IBOutlet UIButton* buttonRelation;
+    IBOutlet UIButton* buttonIllustrationDate;
+    IBOutlet UIButton* buttonPOlist;
+    
+    IBOutlet UITextField* textPO;
+    IBOutlet UITextField* textPOAge;
+    
+    IBOutlet UISegmentedControl* segmentSex;
+}
+-(void)setInfoNewIllustration:(NSDictionary *)dictIllustration;
+@property (nonatomic,weak)IBOutlet UITextField* textIllustrationNumber;
 @end

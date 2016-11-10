@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SIUnitLinkedLifeAssuredViewController : UIViewController
+@interface SIUnitLinkedLifeAssuredViewController : UIViewController  {
+    IBOutlet UIButton* buttonDOB;
+    IBOutlet UIButton* buttonOccupation;
+    IBOutlet UIButton* buttonPOlist;
+    
+    IBOutlet UITextField* textLA;
+    IBOutlet UITextField* textLAAge;
+    
+    IBOutlet UISegmentedControl* segmentSex;
+}
 
 @end

@@ -172,7 +172,7 @@
         [childView addSubview:areaPotensialDiskusiVC.view];
     }
     
-    [areaPotensialDiskusiVC loadHTMLFile];
+    [areaPotensialDiskusiVC loadHTMLFile:@"PD"];
 }
 
 -(void)loadProfilResikoNasabahView{
@@ -189,7 +189,7 @@
     else{
         [childView addSubview:areaPotensialDiskusiVC.view];
     }
-    [areaPotensialDiskusiVC loadHTMLFile];
+    [areaPotensialDiskusiVC loadHTMLFile:@"CR"];
 }
 
 -(void)loadAnalisaKebutuhanNasabahView{
@@ -223,7 +223,7 @@
     else{
         [childView addSubview:areaPotensialDiskusiVC.view];
     }
-    [areaPotensialDiskusiVC loadHTMLFile];
+    [areaPotensialDiskusiVC loadHTMLFile:@"CS"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -247,7 +247,8 @@
         case 2:
             [self loadProfilResikoNasabahView];
             [rightButton setTitle:@"Simpan"];
-            [rightButton setAction:@selector(voidProfileRiskDoneButton:)];
+            //[rightButton setAction:@selector(voidProfileRiskDoneButton:)];
+            [rightButton setAction:@selector(voidAreaPotensialDiskusiDoneButton:)];
             break;
         case 3:
             [self loadAnalisaKebutuhanNasabahView];

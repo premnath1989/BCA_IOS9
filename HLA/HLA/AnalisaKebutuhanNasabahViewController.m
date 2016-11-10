@@ -84,6 +84,8 @@
         else{
             [childView addSubview:proteksiVC.view];
         }
+        
+        [proteksiVC loadHTMLFile:@"PRT"];
     }
     else if (sender==buttonPensiun){
         cffID = [cffHeaderSelectedDictionary valueForKey:@"PensiunCFFID"];
@@ -169,74 +171,79 @@
             [childView addSubview:proteksiVC.view];
         }
         buttonSelected = buttonProteksi;
+        [proteksiVC loadHTMLFile:@"PRT"];
     }
     else if (sender.selectedSegmentIndex==1){
         cffID = [cffHeaderSelectedDictionary valueForKey:@"PensiunCFFID"];
         NSMutableArray *arrayHtml = [modelCFFHtml selectHtmlData:[cffID intValue] HtmlSection:@"PSN"];
-        pensiunVC.prospectProfileID = prospectProfileID;
-        pensiunVC.cffTransactionID  = cffTransactionID;
-        pensiunVC.cffID = cffID;
-        pensiunVC.htmlFileName = [[arrayHtml objectAtIndex:0]valueForKey:@"CFFHtmlName"];
-        pensiunVC.cffHeaderSelectedDictionary = [[NSDictionary alloc]initWithDictionary:cffHeaderSelectedDictionary];
-        if ([pensiunVC.view isDescendantOfView:childView]){
-            [childView bringSubviewToFront:pensiunVC.view];
-            [pensiunVC viewDidAppear:NO];
+        proteksiVC.prospectProfileID = prospectProfileID;
+        proteksiVC.cffTransactionID  = cffTransactionID;
+        proteksiVC.cffID = cffID;
+        proteksiVC.htmlFileName = [[arrayHtml objectAtIndex:0]valueForKey:@"CFFHtmlName"];
+        proteksiVC.cffHeaderSelectedDictionary = [[NSDictionary alloc]initWithDictionary:cffHeaderSelectedDictionary];
+        if ([proteksiVC.view isDescendantOfView:childView]){
+            [childView bringSubviewToFront:proteksiVC.view];
+            [proteksiVC viewDidAppear:NO];
         }
         else{
-            [childView addSubview:pensiunVC.view];
+            [childView addSubview:proteksiVC.view];
         }
         buttonSelected = buttonPensiun;
+        [proteksiVC loadHTMLFile:@"PSN"];
     }
     else if (sender.selectedSegmentIndex==2){
         cffID = [cffHeaderSelectedDictionary valueForKey:@"PendidikanCFFID"];
         NSMutableArray *arrayHtml = [modelCFFHtml selectHtmlData:[cffID intValue] HtmlSection:@"PND"];
-        pendidikanVC.prospectProfileID = prospectProfileID;
-        pendidikanVC.cffTransactionID  = cffTransactionID;
-        pendidikanVC.cffID = cffID;
-        pendidikanVC.htmlFileName = [[arrayHtml objectAtIndex:0]valueForKey:@"CFFHtmlName"];
-        pendidikanVC.cffHeaderSelectedDictionary = [[NSDictionary alloc]initWithDictionary:cffHeaderSelectedDictionary];
-        if ([pendidikanVC.view isDescendantOfView:childView]){
-            [childView bringSubviewToFront:pendidikanVC.view];
-            [pendidikanVC viewDidAppear:NO];
+        proteksiVC.prospectProfileID = prospectProfileID;
+        proteksiVC.cffTransactionID  = cffTransactionID;
+        proteksiVC.cffID = cffID;
+        proteksiVC.htmlFileName = [[arrayHtml objectAtIndex:0]valueForKey:@"CFFHtmlName"];
+        proteksiVC.cffHeaderSelectedDictionary = [[NSDictionary alloc]initWithDictionary:cffHeaderSelectedDictionary];
+        if ([proteksiVC.view isDescendantOfView:childView]){
+            [childView bringSubviewToFront:proteksiVC.view];
+            [proteksiVC viewDidAppear:NO];
         }
         else{
-            [childView addSubview:pendidikanVC.view];
+            [childView addSubview:proteksiVC.view];
         }
         buttonSelected = buttonPendidikan;
+        [proteksiVC loadHTMLFile:@"PND"];
     }
     else if (sender.selectedSegmentIndex==3){
         cffID = [cffHeaderSelectedDictionary valueForKey:@"WarisanCFFID"];
         NSMutableArray *arrayHtml = [modelCFFHtml selectHtmlData:[cffID intValue] HtmlSection:@"WRS"];
-        warisanVC.prospectProfileID = prospectProfileID;
-        warisanVC.cffTransactionID  = cffTransactionID;
-        warisanVC.cffID = cffID;
-        warisanVC.htmlFileName = [[arrayHtml objectAtIndex:0]valueForKey:@"CFFHtmlName"];
-        warisanVC.cffHeaderSelectedDictionary = [[NSDictionary alloc]initWithDictionary:cffHeaderSelectedDictionary];
-        if ([warisanVC.view isDescendantOfView:childView]){
-            [childView bringSubviewToFront:warisanVC.view];
-            [warisanVC viewDidAppear:NO];
+        proteksiVC.prospectProfileID = prospectProfileID;
+        proteksiVC.cffTransactionID  = cffTransactionID;
+        proteksiVC.cffID = cffID;
+        proteksiVC.htmlFileName = [[arrayHtml objectAtIndex:0]valueForKey:@"CFFHtmlName"];
+        proteksiVC.cffHeaderSelectedDictionary = [[NSDictionary alloc]initWithDictionary:cffHeaderSelectedDictionary];
+        if ([proteksiVC.view isDescendantOfView:childView]){
+            [childView bringSubviewToFront:proteksiVC.view];
+            [proteksiVC viewDidAppear:NO];
         }
         else{
-            [childView addSubview:warisanVC.view];
+            [childView addSubview:proteksiVC.view];
         }
         buttonSelected = buttonWarisan;
+        [proteksiVC loadHTMLFile:@"WRS"];
     }
     else if (sender.selectedSegmentIndex==4){
         cffID = [cffHeaderSelectedDictionary valueForKey:@"InvestasiCFFID"];
         NSMutableArray *arrayHtml = [modelCFFHtml selectHtmlData:[cffID intValue] HtmlSection:@"INV"];
-        investasiVC.prospectProfileID = prospectProfileID;
-        investasiVC.cffTransactionID  = cffTransactionID;
-        investasiVC.cffID = cffID;
-        investasiVC.htmlFileName = [[arrayHtml objectAtIndex:0]valueForKey:@"CFFHtmlName"];
-        investasiVC.cffHeaderSelectedDictionary = [[NSDictionary alloc]initWithDictionary:cffHeaderSelectedDictionary];
-        if ([investasiVC.view isDescendantOfView:childView]){
-            [childView bringSubviewToFront:investasiVC.view];
-            [investasiVC viewDidAppear:NO];
+        proteksiVC.prospectProfileID = prospectProfileID;
+        proteksiVC.cffTransactionID  = cffTransactionID;
+        proteksiVC.cffID = cffID;
+        proteksiVC.htmlFileName = [[arrayHtml objectAtIndex:0]valueForKey:@"CFFHtmlName"];
+        proteksiVC.cffHeaderSelectedDictionary = [[NSDictionary alloc]initWithDictionary:cffHeaderSelectedDictionary];
+        if ([proteksiVC.view isDescendantOfView:childView]){
+            [childView bringSubviewToFront:proteksiVC.view];
+            [proteksiVC viewDidAppear:NO];
         }
         else{
-            [childView addSubview:investasiVC.view];
+            [childView addSubview:proteksiVC.view];
         }
         buttonSelected = buttonInvestasi;
+        [proteksiVC loadHTMLFile:@"INV"];
     }
     //buttonSelected = sender;
 }

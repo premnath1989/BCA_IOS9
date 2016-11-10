@@ -73,9 +73,16 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)setIllustrationNumber:(NSString *)stringIllustrationNumber{
+    stringSINumber = stringIllustrationNumber;
+}
+
 -(void)showUnitLinkModuleAtIndex:(NSIndexPath *)indexPath{
     for (int i=0;i<[arrayUnitLinkedModuleView count];i++){
         if (i == indexPath.row){
+            if (i==0){
+                [siUnitLinkedPolicyHolderVC.textIllustrationNumber setText:stringSINumber];
+            }
             [viewRightView addSubview:[arrayUnitLinkedModuleView objectAtIndex:i]];
         }
     }
