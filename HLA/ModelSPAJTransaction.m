@@ -97,6 +97,7 @@
     NSString *SPAJCompleteness;
     NSString *SPAJSINO;
     NSString *SPAJSIVersion;
+    NSString *SPAJSubmissionDate;
     
     int ProspectIndex;
     int SPAJTransactionID;
@@ -109,7 +110,8 @@
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     [database open];
     
-    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"SELECT spajtrans.*,sipo.*,pp.*,ep.*,sim.SI_Version FROM SPAJTransaction spajtrans left join SI_Master sim on spajtrans.SPAJSINO = sim.SINO left join SI_PO_Data sipo on spajtrans.SPAJSINO = sipo.SINO left join prospect_profile pp on sipo.PO_ClientID = pp.IndexNo left join eProposal_Identification ep on pp.OtherIDType=ep.DataIdentifier where spajtrans.SPAJNumber <>'' and spajtrans.SPAJStatus in (%@) order by %@ %@",stringSPAJStatus,sortedBy,sortMethod]];
+    //FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"SELECT spajtrans.*,sipo.*,pp.*,ep.*,sim.SI_Version FROM SPAJTransaction spajtrans left join SI_Master sim on spajtrans.SPAJSINO = sim.SINO left join SI_PO_Data sipo on spajtrans.SPAJSINO = sipo.SINO left join prospect_profile pp on sipo.PO_ClientID = pp.IndexNo left join eProposal_Identification ep on pp.OtherIDType=ep.DataIdentifier where spajtrans.SPAJNumber <>'' and spajtrans.SPAJStatus in (%@) order by %@ %@",stringSPAJStatus,sortedBy,sortMethod]];
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"SELECT spajtrans.*,sipo.*,pp.*,ep.*,sim.SI_Version,spajTrack.SPAJSubmissionDate FROM SPAJTransaction spajtrans left join SI_Master sim on spajtrans.SPAJSINO = sim.SINO left join SI_PO_Data sipo on spajtrans.SPAJSINO = sipo.SINO left join prospect_profile pp on sipo.PO_ClientID = pp.IndexNo left join eProposal_Identification ep on pp.OtherIDType=ep.DataIdentifier left join SPAJSubmitTracker spajTrack on spajtrans.SPAJNumber = spajTrack.SPAJNumber where spajtrans.SPAJNumber <>'' and spajtrans.SPAJStatus in (%@) order by %@ %@",stringSPAJStatus,sortedBy,sortMethod]];
     
     while ([s next]) {
         ProspectIndex = [s intForColumn:@"IndexNo"];
@@ -128,6 +130,7 @@
         SPAJProduct = [s stringForColumn:@"ProductName"]?:@"";
         SPAJSINO = [s stringForColumn:@"SPAJSINO"]?:@"";
         SPAJSIVersion = [s stringForColumn:@"SI_Version"]?:@"";
+        SPAJSubmissionDate = [s stringForColumn:@"SPAJSubmissionDate"]?:@"";
         
         dict=[[NSDictionary alloc]initWithObjectsAndKeys:
               [NSNumber numberWithInt:ProspectIndex],@"IndexNo",
@@ -145,7 +148,8 @@
               SPAJNumber,@"SPAJNumber",
               SPAJProduct,@"ProductName",
               SPAJSINO,@"SPAJSINO",
-              SPAJSIVersion,@"SI_Version",nil];
+              SPAJSIVersion,@"SI_Version",
+              SPAJSubmissionDate,@"SPAJSubmissionDate",nil];
         
         [arrayDictSPAJ addObject:dict];
     }

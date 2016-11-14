@@ -81,6 +81,10 @@ main form p {
   font-family: "BPreplay_Bold";
 }
 
+.Note h2, .Note ol, .Note ul, .Note li {
+  font-family: "BPreplay_Regular";
+}
+
 /* TABLE */
 table.Square thead tr th {
   font-family: "BPreplay_Bold";

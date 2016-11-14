@@ -101,14 +101,14 @@ function buttonPopUpNavigation(stringButtonJavaScriptID, stringPopUpCurrentJavaS
 function buttonPopUpDone(stringPopUpCurrentJavaScriptID, stringParentNameWithoutPrefix, arrayContent, arrayValidation)
 {
 	var stringPopUpCurrentJQueryID = stringKres + stringPopUpCurrentJavaScriptID;
-	var booleanState = false;		
+	var booleanState = false;				
 	
 	if (arrayValidation == null)
 	{
 		booleanState = true;
 	}
 	else
-	{
+	{		
 		var stringRequiredValue;
 		
 		for (var i = 0; i < arrayValidation.length; i++)
@@ -136,8 +136,7 @@ function buttonPopUpDone(stringPopUpCurrentJavaScriptID, stringParentNameWithout
 		$(stringPopUpCurrentJQueryID).css("display", "none");
 		$(stringButtonPreviewJQueryID).css("display", "block");
 		setRadioButtonGeneral(stringRadioButtonName, "true");
-		arrayAdd(arrayContent, stringRadioButtonName, getRadioButtonGeneral(stringRadioButtonName));
-		
+		arrayAdd(arrayContent, stringRadioButtonName, getRadioButtonGeneral(stringRadioButtonName));		
 		resetInputFrom(stringPopUpCurrentJavaScriptID);
 	}
 	else

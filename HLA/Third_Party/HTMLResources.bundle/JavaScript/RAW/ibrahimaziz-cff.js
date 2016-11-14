@@ -101,6 +101,9 @@ var arrayNationality = [];
 var stringIllnessSuffix = "Illness";
 var stringSexFemale = "female";
 var stringSexMale = "male";
+var stringPageScoring = false;
+var stringPageAgeCalculation = false;
+var stringSpanScore = "";
 
 
 // GENERATOR
@@ -2122,7 +2125,7 @@ function setLineGeneral(stringID, stringValue)
 }
 
 function setRadioButtonGeneral(stringName, stringValue)
-{
+{	
     if (stringValue != null)
 	{
 		var radioButton = $("input:radio[name=" + stringName + "]");
@@ -2546,14 +2549,14 @@ function getFromDatabase(objectContent, stringPageType)
 	// previewArrayObject(objectContent);
 
     for (var i = 0; i < objectContent.length; i++)
-    {        
+    {  		
         var stringKey = objectContent[i].elementID;
         var stringValue = objectContent[i].Value;               
         
 		// GENERAL INPUT TYPE
 		
         if (stringKey.substring(0, stringPrefixText.length) == stringPrefixText)
-        {
+        {			
 			if (stringPageType == stringPageTypePDF)
 			{
 				// FOR TABLE HEALTH
@@ -2755,7 +2758,7 @@ function getFromDatabase(objectContent, stringPageType)
 				setTextPDF(stringKey, stringValue);        
 			}
 			else
-			{
+			{				
 				setTextForm(stringKey, stringValue);
 			}
         }
@@ -2818,8 +2821,7 @@ function getFromDatabase(objectContent, stringPageType)
 			else
 			{
 
-			}
-			
+			}			
             setRadioButtonGeneral(stringKey, stringValue);
         }
         else if (stringKey.substring(0, stringPrefixCheckbox.length) == stringPrefixCheckbox)
@@ -3170,6 +3172,34 @@ function getFromDatabase(objectContent, stringPageType)
 				
 			}
 		}
+	}
+	
+	if (stringPageScoring == true)
+	{
+		$("input:radio").each(function()
+		{
+			if ($(this).is(':checked'))
+			{
+				intScore += parseInt($(this).val(), 10);   
+			}
+			else
+			{
+
+			}
+		});
+
+		scoreResultListener(arrayScoreResult, intScore, stringSpanScore);
+	}
+	if (stringPageAgeCalculation == true)
+	{
+		// alert(dob('1990-08-05'));
+		// calculatePriority('1990-08-05');
+
+		
+	}
+	else
+	{
+		
 	}
 }
 
@@ -3782,4 +3812,46 @@ function goToChangePageAlert(stringLinkJavaScriptID, URLPage, stringRelationship
 			window.location.replace(URLPage);
 		}
 	}
+}
+
+function scoreResultListener(arrayScoreResult, intScore, spanScore)
+{				
+	var stringScoreResultSelected;
+
+	if (intScore == 0)
+	{
+		// TANPA STYLE DI TD NYA
+	}  
+	else if (intScore < 28)
+	{
+		stringScoreResultSelected = arrayScoreResult[0];
+	}   
+	else if(intScore >= 28 && intScore <= 40)
+	{
+		stringScoreResultSelected = arrayScoreResult[1];
+	}
+	else if(intScore > 40)
+	{
+		stringScoreResultSelected = arrayScoreResult[2];
+	}
+	else
+	{
+		//DO NOTHING
+	}
+
+	for (var i = 0; i < arrayScoreResult.length; i++)
+	{
+		if (arrayScoreResult[i] == stringScoreResultSelected)
+		{
+			$(arrayScoreResult[i]).removeClass("ScoreResultNotSelected");
+			$(arrayScoreResult[i]).addClass("ScoreResultSelected");
+		}
+		else
+		{
+			$(arrayScoreResult[i]).removeClass("ScoreResultSelected");
+			$(arrayScoreResult[i]).addClass("ScoreResultNotSelected");
+		}
+	}
+
+	$(stringKres + spanScore).html(intScore);
 }

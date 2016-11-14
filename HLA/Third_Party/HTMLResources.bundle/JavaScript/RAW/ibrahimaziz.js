@@ -1002,7 +1002,7 @@ function arrayFind(arrayObject, stringKey)
     for (var i = 0; i < arrayObject.length; i++)
     {
         if (arrayObject[i].elementID === stringKey) 
-        {
+        {			
             stringValue = arrayObject[i].Value;
             break;
         }
@@ -1851,7 +1851,7 @@ function buttonPopUpSPAJProposalGenerator()
 			
 		}
 
-		previewArrayObject(arrayHealthQuestionnaire);
+		// previewArrayObject(arrayHealthQuestionnaire);
     });
 }
 
@@ -1969,7 +1969,7 @@ function tableSPAJProposalGenerator(stringContainerJavaScriptID, arrayContent)
 	var stringKeyInfix;
 	
 	$(stringContainerJQueryID).empty();
-	previewArrayObject(arrayHealthQuestionnaire);
+	// previewArrayObject(arrayHealthQuestionnaire);
 	for (var i = 0; i < arrayContent.length; i++)
 	{
 		stringKey = arrayContent[i].elementID;

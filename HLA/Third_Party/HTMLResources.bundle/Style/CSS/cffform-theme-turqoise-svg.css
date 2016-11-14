@@ -54,13 +54,13 @@ header h1 {
 
 header .Highlighted {
   background-color: #ebecec;
-  border-top-color: #006683;
-  border-bottom-color: #006683;
+  border-top-color: #0065B3;
+  border-bottom-color: #0065B3;
 }
 
 header h2 {
   color: #3e3e3e;
-  border-bottom-color: #006683;
+  border-bottom-color: #0065B3;
 }
 
 /* FORM */
@@ -81,7 +81,7 @@ main form .BoxRound {
 }
 
 main form .Note {
-  border-color: #006683;
+  border-color: #0065B3;
 }
 
 main form .Note h3 {
@@ -99,15 +99,15 @@ main form .LineStraight, main form .LineDot {
 }
 
 main .Container {
-  border-color: #006683;
+  border-color: #0065B3;
 }
 
 main hr {
-  border-color: #006683;
+  border-color: #0065B3;
 }
 
 .Note {
-  border-color: #006683;
+  border-color: #0065B3;
 }
 
 .Note h2 {
@@ -133,69 +133,74 @@ main section form header {
 
 /* INPUT */
 input, textarea, select {
-  border-color: #006683;
+  border-color: #0065B3;
   color: #000000;
 }
 
 .RadioButton .Separator {
-  background-color: #006683;
+  background-color: #0065B3;
 }
 
 .RadioButton label.RadioButton {
   background-color: transparent;
-  color: #006683;
+  color: #0065B3;
 }
 
 .RadioButton input[type="radio"]:checked + label.RadioButton {
-  background-color: #006683;
+  background-color: #0065B3;
   color: #ebecec;
 }
 
 .Checkbox .Separator {
-  background-color: #006683;
+  background-color: #0065B3;
 }
 
 .Checkbox label.Checkbox {
   background-color: transparent;
-  color: #006683;
+  color: #0065B3;
 }
 
 .Checkbox input[type="checkbox"]:checked + label.Checkbox {
-  background-color: #006683;
+  background-color: #0065B3;
   color: #ebecec;
 }
 
 /* NAVIGATION */
 nav a {
-  color: #006683;
+  color: #0065B3;
   background-color: transparent;
 }
 
 nav a.Selected {
   color: #ffffff;
-  background-color: #006683;
+  background-color: #0065B3;
 }
 
 /* SCORE */
 .ScoreResultSelected {
-  background-color: #006683 !important;
+  background-color: #0065B3 !important;
   color: #ffffff !important;
 }
 
 .ScoreResultNotSelected {
   background-color: transparent !important;
-  color: #006683 !important;
+  color: #0065B3 !important;
 }
 
 /* BUTTON */
 .ButtonPrimary {
-  background-color: #006683;
+  background-color: #0065B3;
   color: #ffffff;
+}
+
+.ButtonSecondary {
+  background-color: transparent;
+  color: #0065B3;
 }
 
 .ButtonPreview, .ButtonView {
   background-color: transparent;
-  color: #006683;
+  color: #0065B3;
 }
 
 .ButtonDelete {
@@ -205,5 +210,5 @@ nav a.Selected {
 
 /* LINK */
 .NavigationPopUp {
-  color: #006683;
+  color: #0065B3;
 }

@@ -122,8 +122,7 @@ function savetoDB()
 {
 	var stringValue;
 	var stringRadioButtonFlag = 0;
-	var booleanValidateState = true;
-
+	var booleanValidateState = true;	
 
 	// QUICK FIX VALIDATION FOR FORM
 	
@@ -312,11 +311,12 @@ function savetoDB()
 		
 	}
 	else
-	{			
+	{
+		
 		var objectContent;    			
 		
 		if (stringPageSectionCurrent == stringPageSectionHealthQuestionnaire)
-		{
+		{			
 			// HARDCODE QUICK FIX FOR INPUT TEXT
 					
 			var stringInfixHardcode= stringPageInfixTypeCurrent;
@@ -358,14 +358,15 @@ function savetoDB()
 			objectContent = arrayHealthQuestionnaire;
 		}
 		else if (stringPageSectionCurrent == stringPageSectionBeneficiariesList)
-		{
+		{			
 			objectContent = arrayBeneficiariesList;
 		}
 		else
-		{
+		{			
 			objectContent = setToDatabase(stringPageTypeCurrent);
-			// alert("savetodb");
-			// previewArrayObject(objectContent);
+			arrayTransfer(arrayForeigner, objectContent);
+			
+			previewArrayObject(objectContent);
 		}
 
 		var jsonToDatabase = JSONGenerator(objectContent);
@@ -375,6 +376,7 @@ function savetoDB()
 
 		arrayHealthQuestionnaire = [];
 		arrayBeneficiariesList = [];
+		arrayForeigner = [];
 	}
 }
 

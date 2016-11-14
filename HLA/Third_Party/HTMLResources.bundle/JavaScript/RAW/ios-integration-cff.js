@@ -123,8 +123,7 @@ function savetoDB()
 	var stringValue;
 	var stringRadioButtonFlag = 0;
 	var booleanValidateState = true;
-
-
+		
 	// QUICK FIX VALIDATION FOR FORM
 	
 	if (booleanValidateState == false)
@@ -216,7 +215,7 @@ function savetoDB()
 					if (stringValue == undefined)
 					{
 						// alert("invalid : " + $(this).attr("name") + " " + stringValue);
-						ReplaceHTMLNameOnValidate("", $label.text() + " " + "harap dipilih.");
+						ReplaceHTMLNameOnValidate("", $label.text() + " " + " harap dipilih.");
 
 						booleanValidateState = false;
 						return false;
