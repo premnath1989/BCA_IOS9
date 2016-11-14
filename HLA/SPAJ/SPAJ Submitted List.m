@@ -349,8 +349,8 @@
             [cellSPAJSubmitted.labelName setText: [[arraySPAJTransaction objectAtIndex:indexPath.row] valueForKey:@"ProspectName"]];
             [cellSPAJSubmitted.labelSocialNumber setText: prospectID];
             [cellSPAJSubmitted.labelSPAJNumber setText: [[arraySPAJTransaction objectAtIndex:indexPath.row] valueForKey:@"SPAJNumber"]];
-            [cellSPAJSubmitted.labelUpdatedOnDate setText: [[arraySPAJTransaction objectAtIndex:indexPath.row] valueForKey:@"SPAJDateModified"]];
-            [cellSPAJSubmitted.labelUpdatedOnTime setText: [[arraySPAJTransaction objectAtIndex:indexPath.row] valueForKey:@"SPAJDateModified"]];
+            [cellSPAJSubmitted.labelUpdatedOnDate setText: [[arraySPAJTransaction objectAtIndex:indexPath.row] valueForKey:@"SPAJSubmissionDate"]];
+            [cellSPAJSubmitted.labelUpdatedOnTime setText: [[arraySPAJTransaction objectAtIndex:indexPath.row] valueForKey:@"SPAJSubmissionDate"]];
             [cellSPAJSubmitted.labelProduct setText: [[arraySPAJTransaction objectAtIndex:indexPath.row] valueForKey:@"ProductName"]];
             [cellSPAJSubmitted.labelState setText: [[arraySPAJTransaction objectAtIndex:indexPath.row] valueForKey:@"SPAJStatus"]];
             [cellSPAJSubmitted.buttonView  setTitle:NSLocalizedString(@"BUTTON_VIEW", nil) forState:UIControlStateNormal];

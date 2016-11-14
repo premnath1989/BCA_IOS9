@@ -107,6 +107,18 @@ main hr {
   border-color: #00a6b3;
 }
 
+.Note {
+  border-color: #00a6b3;
+}
+
+.Note h2 {
+  color: #3e3e3e;
+}
+
+.Note ol li, .Note ul li {
+  color: #000000;
+}
+
 /* POP UP */
 main section {
   background-color: rgba(0, 0, 0, 0.75);

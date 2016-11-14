@@ -213,6 +213,27 @@ main hr {
   border-width: 1px;
 }
 
+.Note {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 10px;
+  border-style: solid;
+  border-width: 1px;
+}
+
+.Note h2 {
+  font-size: 0.9em;
+  margin-bottom: 10px;
+}
+
+.Note ol, .Note ul {
+  margin-left: -10px;
+}
+
+.Note ol li, .Note ul li {
+  font-size: 0.75em;
+}
+
 /* TABLE */
 table.Square, table.Space {
   margin-top: 5px;

@@ -193,6 +193,11 @@ nav a.Selected {
   color: #ffffff;
 }
 
+.ButtonSecondary {
+  background-color: transparent;
+  color: #0065B3;
+}
+
 .ButtonPreview, .ButtonView {
   background-color: transparent;
   color: #0065B3;
