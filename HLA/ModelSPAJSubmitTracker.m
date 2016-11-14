@@ -27,17 +27,19 @@
 }
 
 -(bool)voidMaximumSubmitReached:(NSString *)stringSubmitDate{
-    int countSubmit = 0;
+    int countSubmit=0;
+    
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
     
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     [database open];
     
-    FMResultSet *s = [database executeQuery:@"SELECT count(*) as CountSubmit FROM SPAJSubmitTracker where substr(SPAJSubmissionDate,0,11)  = ?",stringSubmitDate];
+    FMResultSet *s = [database executeQuery:@"SELECT count(*) FROM SPAJSubmitTracker where substr(SPAJSubmissionDate,0,10)=?",stringSubmitDate];
     
     while ([s next]) {
-        countSubmit = [s intForColumn:@"CountSubmit"];
+        //countSubmit = [s intForColumn:@"cnt"];
+         NSLog(@"Total Records :%@", [s stringForColumn:@"count(*)"]);
     }
     
     [results close];

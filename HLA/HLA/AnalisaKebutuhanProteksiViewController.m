@@ -56,6 +56,15 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)showAlert:(NSDictionary *)params{
+    NSMutableDictionary* modifiedParams = [[NSMutableDictionary alloc]initWithDictionary:[params valueForKey:@"data"]];
+    NSString *title = [modifiedParams valueForKey:@"title"];
+    NSString *body = [modifiedParams valueForKey:@"body"];
+    
+    UIAlertView* alert = [[UIAlertView alloc]initWithTitle:title message:body delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
+    [alert show];
+}
+
 -(void)loadHTMLFile:(NSString *)StringPageSection{
     stringPageSection = StringPageSection;
     

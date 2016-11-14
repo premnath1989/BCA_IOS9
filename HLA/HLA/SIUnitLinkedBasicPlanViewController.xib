@@ -4,32 +4,33 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <customFonts key="customFonts">
+        <mutableArray key="BPreplay.otf">
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+        </mutableArray>
         <mutableArray key="BPreplay_Italics.ttf">
             <string>BPreplay-Italic</string>
             <string>BPreplay-Italic</string>
-        </mutableArray>
-        <mutableArray key="BPreplay_Regular.otf">
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
         </mutableArray>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SIUnitLinkedBasicPlanViewController">
             <connections>
+                <outlet property="buttonTargetAccountValue" destination="lp0-bl-IoB" id="QwL-Sw-F0b"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -213,6 +214,9 @@
                             <state key="normal" title="--Please Select--">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="actionTargetAccountValue:" destination="-1" eventType="touchUpInside" id="ARZ-wy-leN"/>
+                            </connections>
                         </button>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Min  Rp 500,000,000     Max Rp 300,000,000,000" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wwB-7P-96o">
                             <rect key="frame" x="508" y="285" width="145" height="30"/>

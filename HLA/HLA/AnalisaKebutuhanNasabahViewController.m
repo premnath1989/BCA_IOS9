@@ -251,7 +251,8 @@
 
 #pragma mark UIBarButtonItem Action
 -(void)voidDoneAnalisaKebutuhanNasabah{
-    if (buttonSelected==buttonProteksi){
+    [proteksiVC voidDoneProteksi];
+    /*if (buttonSelected==buttonProteksi){
         [proteksiVC voidDoneProteksi];
     }
     else if (buttonSelected==buttonPensiun){
@@ -265,7 +266,7 @@
     }
     else if (buttonSelected==buttonInvestasi){
         [investasiVC voidDoneInvestasi];
-    }
+    }*/
 }
 
 

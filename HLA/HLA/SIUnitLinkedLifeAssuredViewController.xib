@@ -4,18 +4,23 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="BPreplay.otf">
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-        </mutableArray>
         <mutableArray key="BPreplay_Italics.ttf">
             <string>BPreplay-Italic</string>
             <string>BPreplay-Italic</string>
+            <string>BPreplay-Italic</string>
+        </mutableArray>
+        <mutableArray key="BPreplay_Regular.otf">
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -57,14 +62,14 @@
                             <color key="tintColor" red="0.85490196080000003" green="0.19215686269999999" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                         </segmentedControl>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Pekerjaan Tertanggung" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="AQ7-rH-9hi">
-                            <rect key="frame" x="27" y="150" width="166" height="30"/>
+                            <rect key="frame" x="27" y="266" width="166" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
                             <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ni1-ww-G1C">
-                            <rect key="frame" x="258" y="150" width="430" height="30"/>
+                            <rect key="frame" x="258" y="266" width="430" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.85490196080000003" green="0.19215686269999999" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" name="BPreplay-Italic" family="BPreplay" pointSize="16"/>
@@ -125,7 +130,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hWx-Sb-mY8">
-                            <rect key="frame" x="692" y="150" width="12" height="30"/>
+                            <rect key="frame" x="692" y="266" width="12" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
                             <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -169,6 +174,55 @@
                             <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Penghasilan Per Bulan" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="YoO-9B-mz9">
+                            <rect key="frame" x="30" y="150" width="162" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
+                            <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Perokok" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="EX8-sf-W6m">
+                            <rect key="frame" x="27" y="227" width="224" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
+                            <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Tanggal Dimulai" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="rCB-sP-kIY">
+                            <rect key="frame" x="30" y="188" width="221" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
+                            <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="16" clearButtonMode="whileEditing" id="ahg-2C-PFO">
+                            <rect key="frame" x="261" y="150" width="219" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="textColor" red="0.34509803919999998" green="0.34901960780000002" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                        </textField>
+                        <segmentedControl contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" id="0u6-1h-f7B">
+                            <rect key="frame" x="261" y="230" width="220" height="29"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <segments>
+                                <segment title="Ya"/>
+                                <segment title="Tidak"/>
+                            </segments>
+                            <color key="tintColor" red="0.85490196080000003" green="0.19215686269999999" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
+                        </segmentedControl>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ICp-PH-ObD">
+                            <rect key="frame" x="261" y="189" width="220" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.85490196080000003" green="0.19215686269999999" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" name="BPreplay-Italic" family="BPreplay" pointSize="16"/>
+                            <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="--Please Select--">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" red="0.98431372549999996" green="0.98431372549999996" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
                     <color key="tintColor" red="0.98431372549999996" green="0.98431372549999996" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>

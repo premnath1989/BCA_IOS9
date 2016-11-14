@@ -172,6 +172,11 @@
     [popoverViewer presentPopoverFromRect:rect inView:self.view permittedArrowDirections:UIPopoverArrowDirectionRight animated:YES];
 }
 
+#pragma mark saveData
+-(IBAction)actionSaveData:(UIButton *)sender{
+    //if (dirisendiri)
+}
+
 #pragma mark delegate
 -(void)listing:(ListingTbViewController *)inController didSelectIndex:(NSString *)aaIndex andName:(NSString *)aaName andDOB:(NSString *)aaDOB andGender:(NSString *)aaGender andOccpCode:(NSString *)aaCode andSmoker:(NSString *)aaSmoker andMaritalStatus:(NSString *)aaMaritalStatus;
 {

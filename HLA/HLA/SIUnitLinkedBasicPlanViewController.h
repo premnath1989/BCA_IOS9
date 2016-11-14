@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SIUnitLinkedBasicPlanViewController : UIViewController
+@interface SIUnitLinkedBasicPlanViewController : UIViewController{
+    IBOutlet UIButton* buttonTargetAccountValue;
+}
 
 @end
