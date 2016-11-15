@@ -709,7 +709,8 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
             UIAlertController *alertFailedGenerate = [UIAlertController alertControllerWithTitle:@"Kesalahan Generate File" message:@"Terjadi kegagalan dalam pembuatan file. Aplikasi akan menutup menu SPAJ. Silahkan melakukan generate ulang " preferredStyle:UIAlertControllerStyleAlert];
             
             UIAlertAction* alertActionClose = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"GOTOHOME" object:self];
+                //[[NSNotificationCenter defaultCenter] postNotificationName:@"GOTOHOME" object:self];
+                exit(0);
             }];
             
             [alertFailedGenerate addAction: alertActionClose];

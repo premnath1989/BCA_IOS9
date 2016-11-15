@@ -603,8 +603,19 @@
     
     NSString *relativeOutputFilePath = [NSString stringWithFormat:@"%@/%@.jpg", [formatter generateSPAJFileDirectory:[dictTransaction valueForKey:@"SPAJEappNumber"]],outputName];
     
-    [thumbnailData writeToFile:relativeOutputFilePath atomically:YES];
+    BOOL written = [thumbnailData writeToFile:relativeOutputFilePath atomically:YES];
     
+    if (!written){
+        UIAlertController *alertFailedGenerate = [UIAlertController alertControllerWithTitle:@"Kesalahan Generate File" message:@"Terjadi kegagalan dalam pembuatan file. Aplikasi akan menutup secara otomatis. Silahkan membuka ulang aplikasi BLESS dan megisi data tenaga penjual kembali." preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* alertActionClose = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+            exit(0);
+        }];
+        
+        [alertFailedGenerate addAction: alertActionClose];
+        
+        [self presentViewController:alertFailedGenerate animated:YES completion:nil];
+    }
     [buttonSubmit setEnabled:true];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{

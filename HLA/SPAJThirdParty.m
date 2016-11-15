@@ -1309,6 +1309,18 @@
     if (success){
         [self createThirdPartySignature:nil];
     }
+    else{
+        UIAlertController *alertFailedGenerate = [UIAlertController alertControllerWithTitle:@"Kesalahan Generate File" message:@"Terjadi kegagalan dalam pembuatan file. Aplikasi akan menutup secara otomatis. Silahkan melakukan generate ulang " preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* alertActionClose = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+            //[[NSNotificationCenter defaultCenter] postNotificationName:@"GOTOHOME" object:self];
+            exit(0);
+        }];
+        
+        [alertFailedGenerate addAction: alertActionClose];
+        
+        [self presentViewController:alertFailedGenerate animated:YES completion:nil];
+    }
     
     
     /*UIAlertController *alertLockForm = [UIAlertController alertControllerWithTitle:@"Berhasil" message:@"Form berhasil dibuat" preferredStyle:UIAlertControllerStyleAlert];
