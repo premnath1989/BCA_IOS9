@@ -123,7 +123,7 @@ function savetoDB()
 	var stringValue;
 	var stringRadioButtonFlag = 0;
 	var booleanValidateState = true;
-		
+	
 	// QUICK FIX VALIDATION FOR FORM
 	
 	if (booleanValidateState == false)
@@ -133,9 +133,9 @@ function savetoDB()
 	else
 	{
 		if (stringPageSectionCurrent != stringPageSectionBeneficiariesList)
-		{
+		{			
 			$("input:text[required]").each(function()
-			{
+			{				
 				stringValue = $(this).val();
 				var $label = $("label[for='"+this.id+"']")
 
@@ -208,15 +208,23 @@ function savetoDB()
 		{
 			$("input:radio[required]").each(function()
 			{												
-				stringValue = getRadioButtonGeneral($(this).attr("name"));						
+				stringValue = getRadioButtonGeneral($(this).attr("name"));				
 				var $label = $("label[for='"+this.name+"']")				
 				if (stringRadioButtonFlag != $(this).attr("name"))
 				{
 					if (stringValue == undefined)
 					{
-						// alert("invalid : " + $(this).attr("name") + " " + stringValue);
-						ReplaceHTMLNameOnValidate("", $label.text() + " " + " harap dipilih.");
-
+						if ($(this).attr('data-validation') == null)
+						{
+							// alert("invalid : " + $(this).attr("name") + " " + stringValue);
+							ReplaceHTMLNameOnValidate("", $label.text() + " " + "harap dipilih.");
+						}
+						else
+						{
+							alert($(this).attr('data-validation') + " " + "harap dipilih.");
+							ReplaceHTMLNameOnValidate("", $(this).attr('data-validation') + " " + "harap dipilih.");
+						};
+						
 						booleanValidateState = false;
 						return false;
 					}				

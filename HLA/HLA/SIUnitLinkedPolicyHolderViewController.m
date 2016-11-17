@@ -14,6 +14,7 @@
 #import "PlanList.h"
 #import "ModelOccupation.h"
 #import "Formatter.h"
+#import "ModelSIPOData.h"
 
 @interface SIUnitLinkedPolicyHolderViewController ()<DateViewControllerDelegate,OccupationListDelegate,RelationshipPopoverViewControllerDelegate,ListingTbViewControllerDelegate,PlanListDelegate>{
     ListingTbViewController *prospectList;
@@ -22,6 +23,8 @@
     RelationshipPopoverViewController *relationShipTypePicker;
     PlanList *planList;
     ModelOccupation *modelOccupation;
+    ModelSIPOData *modelSIPOData;
+    
     Formatter *formatter;
     
     UIColor *themeColour;
@@ -33,6 +36,8 @@
 
 @implementation SIUnitLinkedPolicyHolderViewController
 @synthesize textIllustrationNumber;
+@synthesize delegate;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -42,6 +47,7 @@
     laDate = [[DateViewController alloc]init];
     formatter = [[Formatter alloc]init];
     modelOccupation = [[ModelOccupation alloc]init];
+    modelSIPOData = [[ModelSIPOData alloc]init];
     
     [buttonIllustrationDate setTitle:[formatter getDateToday:@"dd/MM/yyyy"] forState:UIControlStateNormal];
     //occupationList = [[OccupationList alloc]init];
@@ -172,9 +178,47 @@
     [popoverViewer presentPopoverFromRect:rect inView:self.view permittedArrowDirections:UIPopoverArrowDirectionRight animated:YES];
 }
 
+#pragma mark dictionary maker
+-(void)setPOLADictionary{
+    NSMutableDictionary* dictPOLAData = [[NSMutableDictionary alloc]init];
+    [dictPOLAData setObject:@"" forKey:@"SINO"];
+    [dictPOLAData setObject:@"" forKey:@"ProductCode"];
+    [dictPOLAData setObject:@"" forKey:@"ProductName"];
+    [dictPOLAData setObject:@"" forKey:@"QuickQuote"];
+    [dictPOLAData setObject:@"" forKey:@"SIDate"];
+    [dictPOLAData setObject:@"" forKey:@"PO_Name"];
+    [dictPOLAData setObject:@"" forKey:@"PO_DOB"];
+    [dictPOLAData setObject:@"" forKey:@"PO_Gender"];
+    [dictPOLAData setObject:@"" forKey:@"PO_Age"];
+    [dictPOLAData setObject:@"" forKey:@"PO_OccpCode"];
+    [dictPOLAData setObject:@"" forKey:@"PO_Occp"];
+    [dictPOLAData setObject:@"" forKey:@"PO_ClientID"];
+    [dictPOLAData setObject:@"" forKey:@"RelWithLA"];
+    [dictPOLAData setObject:@"" forKey:@"LA_ClientID"];
+    [dictPOLAData setObject:@"" forKey:@"LA_Name"];
+    [dictPOLAData setObject:@"" forKey:@"LA_DOB"];
+    [dictPOLAData setObject:@"" forKey:@"LA_Age"];
+    [dictPOLAData setObject:@"" forKey:@"LA_Gender"];
+    [dictPOLAData setObject:@"" forKey:@"LA_OccpCode"];
+    [dictPOLAData setObject:@"" forKey:@"LA_Occp"];
+    [dictPOLAData setObject:@"" forKey:@"IsInternalStaff"];
+    [dictPOLAData setObject:@"" forKey:@"PO_Smoker"];
+    [dictPOLAData setObject:@"" forKey:@"PO_CommencementDate"];
+    [dictPOLAData setObject:@"" forKey:@"PO_MonthlyIncome"];
+    [dictPOLAData setObject:@"" forKey:@"LA_Smoker"];
+    [dictPOLAData setObject:@"" forKey:@"LA_CommencementDate"];
+    [dictPOLAData setObject:@"" forKey:@"LA_MonthlyIncome"];
+    
+    [delegate setPOLADictionary:dictPOLAData];
+}
+
 #pragma mark saveData
 -(IBAction)actionSaveData:(UIButton *)sender{
-    //if (dirisendiri)
+    //set the updated data to parent
+    [self setPOLADictionary];
+    
+    //get updated data from parent and save it.
+    [modelSIPOData savePOLAData:[delegate getPOLADictionary]];
 }
 
 #pragma mark delegate

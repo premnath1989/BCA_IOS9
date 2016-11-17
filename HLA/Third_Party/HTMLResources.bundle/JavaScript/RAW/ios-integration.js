@@ -306,6 +306,42 @@ function savetoDB()
 		
 	}
 	
+	
+	// SPECIFIC VALIDATION
+	
+	if (booleanValidateState == false)
+	{
+		// alert("specific validation not enter" + booleanValidateState);
+	}
+	else
+	{
+		// alert("specific validation enter" + booleanValidateState);
+		$("input:text").each(function()
+		{
+			if ($(this).attr("data-validation") == stringPrefixEmail)
+			{
+				// alert("email id " + $(this).attr("id"));
+				booleanValidateState = validateEmail($(this).attr("id"));
+				
+				if (booleanValidateState == false)
+				{					
+					return false;
+				}
+				else
+				{
+					
+				}
+			}
+			else
+			{
+				
+			}
+		});
+	}
+	
+	
+	// SAVE TO DATABASE
+	
 	if (booleanValidateState == false)
 	{
 		
@@ -362,11 +398,19 @@ function savetoDB()
 			objectContent = arrayBeneficiariesList;
 		}
 		else
-		{			
+		{
 			objectContent = setToDatabase(stringPageTypeCurrent);
-			arrayTransfer(arrayForeigner, objectContent);
 			
-			previewArrayObject(objectContent);
+			if (arrayForeigner.length == 0)
+			{
+				
+			}
+			else
+			{
+				arrayTransfer(arrayForeigner, objectContent);
+			}
+			
+			// previewArrayObject(objectContent);
 		}
 
 		var jsonToDatabase = JSONGenerator(objectContent);
@@ -413,7 +457,8 @@ function ReplaceHTMLNameOnValidate(title, body)
 	callInfo.data = {};
 	callInfo.data.title = title;
 	callInfo.data.body = body;
-
+	
+	// alert(title + '' + body);
 	//call the wrapper with the parameterized info
 	calliOSFunction('showAlert:',onSuccess,onError, callInfo);
 }

@@ -23,4 +23,7 @@
 -(int)getLADataCount:(NSString *)prospectProfileID;
 -(NSMutableArray *)getSINumberForProspectProfileID:(NSString *)prospectProfileID;
 -(void)updatePODataDate:(NSString *)SINO Date:(NSString *)date;
+
+-(void)savePOLAData:(NSMutableDictionary *)dictPOLAData;
+-(NSDictionary *)getPOLADataFor:(NSString *)SINo;
 @end

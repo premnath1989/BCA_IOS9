@@ -13,6 +13,8 @@
     IBOutlet UIView* viewRightView;
     
     NSString* stringSINumber;
+    NSMutableDictionary* dictParentPOLAData;
+    NSMutableDictionary* dictParentULBasicPlanData;
 }
 
 @property (nonatomic,weak)NSString* stringSIDate;

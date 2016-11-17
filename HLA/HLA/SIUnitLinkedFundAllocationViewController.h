@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@protocol ULFundAllocationViewControllerDelegate
+    -(void)setULFundAllocationDictionary:(NSMutableDictionary *)dictULFundAllocation;
+    -(NSMutableDictionary *)getULFundAllocationDictionary;
+@end
 @interface SIUnitLinkedFundAllocationViewController : UIViewController
 
+
+@property (nonatomic,strong) id <ULFundAllocationViewControllerDelegate> delegate;
 @end

@@ -375,6 +375,10 @@
 		4329213A1C7FFC26000D1064 /* Model_SI_Master.m in Sources */ = {isa = PBXBuildFile; fileRef = 432921391C7FFC26000D1064 /* Model_SI_Master.m */; };
 		432E8F6A1D13F36D0030F0C4 /* AnalisaKebutuhanNasabahViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 432E8F681D13F36D0030F0C4 /* AnalisaKebutuhanNasabahViewController.m */; };
 		432E8F6B1D13F36D0030F0C4 /* AnalisaKebutuhanNasabahViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 432E8F691D13F36D0030F0C4 /* AnalisaKebutuhanNasabahViewController.xib */; };
+		4330609F1DDB0F8500DE062C /* ModelSIULBasicPlan.m in Sources */ = {isa = PBXBuildFile; fileRef = 4330609E1DDB0F8500DE062C /* ModelSIULBasicPlan.m */; };
+		433060A21DDB0FA000DE062C /* ModelSIULFundAllocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 433060A11DDB0FA000DE062C /* ModelSIULFundAllocation.m */; };
+		433060A51DDB0FBD00DE062C /* ModelSIULRider.m in Sources */ = {isa = PBXBuildFile; fileRef = 433060A41DDB0FBD00DE062C /* ModelSIULRider.m */; };
+		433060A81DDB0FD500DE062C /* ModelSIULSpecialOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 433060A71DDB0FD500DE062C /* ModelSIULSpecialOption.m */; };
 		43346FB61CF4080F001A6C25 /* pensign.png in Resources */ = {isa = PBXBuildFile; fileRef = 43346FB51CF4080F001A6C25 /* pensign.png */; };
 		433CD7731DD1BD4A004C9B27 /* SIMenuUnitLinkedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 433CD7711DD1BD4A004C9B27 /* SIMenuUnitLinkedViewController.m */; };
 		433CD7741DD1BD4A004C9B27 /* SIMenuUnitLinkedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 433CD7721DD1BD4A004C9B27 /* SIMenuUnitLinkedViewController.xib */; };
@@ -1639,6 +1643,14 @@
 		432E8F671D13F36D0030F0C4 /* AnalisaKebutuhanNasabahViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalisaKebutuhanNasabahViewController.h; sourceTree = "<group>"; };
 		432E8F681D13F36D0030F0C4 /* AnalisaKebutuhanNasabahViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalisaKebutuhanNasabahViewController.m; sourceTree = "<group>"; };
 		432E8F691D13F36D0030F0C4 /* AnalisaKebutuhanNasabahViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnalisaKebutuhanNasabahViewController.xib; sourceTree = "<group>"; };
+		4330609D1DDB0F8500DE062C /* ModelSIULBasicPlan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelSIULBasicPlan.h; sourceTree = "<group>"; };
+		4330609E1DDB0F8500DE062C /* ModelSIULBasicPlan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelSIULBasicPlan.m; sourceTree = "<group>"; };
+		433060A01DDB0FA000DE062C /* ModelSIULFundAllocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelSIULFundAllocation.h; sourceTree = "<group>"; };
+		433060A11DDB0FA000DE062C /* ModelSIULFundAllocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelSIULFundAllocation.m; sourceTree = "<group>"; };
+		433060A31DDB0FBD00DE062C /* ModelSIULRider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelSIULRider.h; sourceTree = "<group>"; };
+		433060A41DDB0FBD00DE062C /* ModelSIULRider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelSIULRider.m; sourceTree = "<group>"; };
+		433060A61DDB0FD500DE062C /* ModelSIULSpecialOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelSIULSpecialOption.h; sourceTree = "<group>"; };
+		433060A71DDB0FD500DE062C /* ModelSIULSpecialOption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelSIULSpecialOption.m; sourceTree = "<group>"; };
 		43346FB51CF4080F001A6C25 /* pensign.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pensign.png; sourceTree = "<group>"; };
 		433CD7701DD1BD4A004C9B27 /* SIMenuUnitLinkedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIMenuUnitLinkedViewController.h; sourceTree = "<group>"; };
 		433CD7711DD1BD4A004C9B27 /* SIMenuUnitLinkedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMenuUnitLinkedViewController.m; sourceTree = "<group>"; };
@@ -4508,6 +4520,14 @@
 				4380F9DE1DC8338600717FB4 /* SPAJSubmissionModel.m */,
 				43E3859D1DCB100500B790FC /* ModelEproposalRelation.h */,
 				43E3859E1DCB100500B790FC /* ModelEproposalRelation.m */,
+				4330609D1DDB0F8500DE062C /* ModelSIULBasicPlan.h */,
+				4330609E1DDB0F8500DE062C /* ModelSIULBasicPlan.m */,
+				433060A01DDB0FA000DE062C /* ModelSIULFundAllocation.h */,
+				433060A11DDB0FA000DE062C /* ModelSIULFundAllocation.m */,
+				433060A31DDB0FBD00DE062C /* ModelSIULRider.h */,
+				433060A41DDB0FBD00DE062C /* ModelSIULRider.m */,
+				433060A61DDB0FD500DE062C /* ModelSIULSpecialOption.h */,
+				433060A71DDB0FD500DE062C /* ModelSIULSpecialOption.m */,
 			);
 			name = "HLADB Model";
 			sourceTree = "<group>";
@@ -6666,6 +6686,7 @@
 				43B5909E1CA29D7200DC53AC /* ModelSIRider.m in Sources */,
 				C4EA9BED1619359D00D51FE9 /* OccupationList.m in Sources */,
 				C4EA9BF01619404D00D51FE9 /* ProspectListing.m in Sources */,
+				433060A51DDB0FBD00DE062C /* ModelSIULRider.m in Sources */,
 				DE1269471DA75CFD0027564B /* hmac.c in Sources */,
 				AA4EF76F1C85A4260050CCD8 /* ReaderThumbRender.m in Sources */,
 				C4EA9BF31619460500D51FE9 /* ProspectProfile.m in Sources */,
@@ -6685,6 +6706,7 @@
 				AAFEE0411C6DA60E00702F64 /* UIElementsManagement.m in Sources */,
 				EF05984B161A91EF004A9095 /* RiderViewController.m in Sources */,
 				0F3268471D1A93A4001A9021 /* Button.m in Sources */,
+				4330609F1DDB0F8500DE062C /* ModelSIULBasicPlan.m in Sources */,
 				438E79051D5B2C1800C78AB2 /* ModelSPAJFormGeneration.m in Sources */,
 				EF059850161A92C4004A9095 /* DateViewController.m in Sources */,
 				EF059853161A92E3004A9095 /* JobListTbViewController.m in Sources */,
@@ -6943,6 +6965,7 @@
 				C30A25A517F3C8D500613A0F /* HealthQuestionnaire2.m in Sources */,
 				DE7B8C5B1D5341F8002C7EDF /* SPAJRequestCell.m in Sources */,
 				C30A25A617F3C8D500613A0F /* HealthQuestionnaire3.m in Sources */,
+				433060A81DDB0FD500DE062C /* ModelSIULSpecialOption.m in Sources */,
 				AAFEE0381C6C239E00702F64 /* ColumnHeaderStyle.m in Sources */,
 				C30A25A717F3C8D500613A0F /* HealthQuestionnaire5.m in Sources */,
 				C30A25A817F3C8D500613A0F /* HealthQuestionnaire6.m in Sources */,
@@ -7225,6 +7248,7 @@
 				AA4EF76B1C85A4260050CCD8 /* ReaderMainToolbar.m in Sources */,
 				C35DF4081AE62C1F00A19353 /* WebViewViewController.m in Sources */,
 				FA0DC1A91AE0F0BE00ABDF3F /* DataManager.m in Sources */,
+				433060A21DDB0FA000DE062C /* ModelSIULFundAllocation.m in Sources */,
 				C36D82341AF9E2CE0070D070 /* Country2.m in Sources */,
 				C39046DE1B8EBB0700DE1E5B /* CameraViewController.m in Sources */,
 				C35EC8601B983C5D00738933 /* PymtWebViewViewController.m in Sources */,

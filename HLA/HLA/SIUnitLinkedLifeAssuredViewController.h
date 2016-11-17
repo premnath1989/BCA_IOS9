@@ -7,6 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol ULLifeAssuredViewControllerDelegate
+-(void)setPOLADictionary:(NSMutableDictionary *)NSDictionary;
+-(NSMutableDictionary *)getPOLADictionary;
+@end
 
 @interface SIUnitLinkedLifeAssuredViewController : UIViewController  {
     IBOutlet UIButton* buttonDOB;
@@ -18,5 +22,5 @@
     
     IBOutlet UISegmentedControl* segmentSex;
 }
-
+@property (nonatomic,strong) id <ULLifeAssuredViewControllerDelegate> delegate;
 @end

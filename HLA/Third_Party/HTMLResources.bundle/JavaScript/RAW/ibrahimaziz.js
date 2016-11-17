@@ -101,6 +101,7 @@ var arrayNationality = [];
 var stringIllnessSuffix = "Illness";
 var stringSexFemale = "female";
 var stringSexMale = "male";
+var arrayForeigner = [];
 
 
 // GENERATOR
@@ -3861,22 +3862,22 @@ function checkboxAsRadioButton(stringCheckboxName)
 
 function validateEmail(stringInputJavaScriptID)
 {
+	// alert("2");
 	var stringInputJQueryID = stringKres + stringInputJavaScriptID;
 
-	$(stringInputJQueryID).change(function()
-	{
-		var stringEmail = $(this).val();
+	var stringEmail = $(stringInputJQueryID).val();
 
-		if (stringEmail.indexOf("@") >= 0)
-		{
-			
-		}
-		else
-		{
-			// alert("Format validasi email salah !.");
-			ReplaceHTMLNameOnValidate("","Format validasi email salah !.");
-		}
-	});
+	if (stringEmail.indexOf("@") >= 0)
+	{
+		return true;
+	}
+	else
+	{
+		// alert("Format validasi email salah !.");
+		ReplaceHTMLNameOnValidate("","Format validasi email salah !.");
+		return false;
+	}
+	
 }
 
 function validateDateNotExceedToday(stringInputJavaScriptID)

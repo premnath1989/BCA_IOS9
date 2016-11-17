@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SIUnitLinkedRiderViewController : UIViewController
+@protocol ULRiderViewControllerDelegate
+    -(void)setULRiderDictionary:(NSMutableDictionary *)dictULRider;
+    -(NSMutableDictionary *)getULRiderDictionary;
+@end
 
+@interface SIUnitLinkedRiderViewController : UIViewController
+@property (nonatomic,strong) id <ULRiderViewControllerDelegate> delegate;
 @end

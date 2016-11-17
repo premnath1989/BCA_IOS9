@@ -14,6 +14,7 @@
 #import "PlanList.h"
 #import "ModelOccupation.h"
 #import "Formatter.h"
+#import "ModelSIPOData.h"
 
 @interface SIUnitLinkedLifeAssuredViewController ()<DateViewControllerDelegate,OccupationListDelegate,RelationshipPopoverViewControllerDelegate,ListingTbViewControllerDelegate,PlanListDelegate>{
     
@@ -22,6 +23,7 @@
     OccupationList *occupationList;
     ModelOccupation *modelOccupation;
     Formatter *formatter;
+    ModelSIPOData *modelSIPOData;
     
     UIColor *themeColour;
     
@@ -31,9 +33,10 @@
 @end
 
 @implementation SIUnitLinkedLifeAssuredViewController
-
+@synthesize delegate;
 - (void)viewDidLoad {
     [super viewDidLoad];
+    modelSIPOData = [[ModelSIPOData alloc]init];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -72,6 +75,72 @@
     rect.origin.y = [sender frame].origin.y + 40;
     [popoverViewer presentPopoverFromRect:rect inView:self.view permittedArrowDirections:UIPopoverArrowDirectionRight animated:YES];
 }
+
+#pragma mark dictionary maker
+-(void)setPOLADictionary{
+    NSMutableDictionary* dictPOLAData = [[NSMutableDictionary alloc]initWithDictionary:[delegate getPOLADictionary]];
+    [dictPOLAData setObject:@"" forKey:@"LA_ClientID"];
+    [dictPOLAData setObject:@"" forKey:@"LA_Name"];
+    [dictPOLAData setObject:@"" forKey:@"LA_DOB"];
+    [dictPOLAData setObject:@"" forKey:@"LA_Age"];
+    [dictPOLAData setObject:@"" forKey:@"LA_Gender"];
+    [dictPOLAData setObject:@"" forKey:@"LA_OccpCode"];
+    [dictPOLAData setObject:@"" forKey:@"LA_Occp"];
+    [dictPOLAData setObject:@"" forKey:@"LA_Smoker"];
+    [dictPOLAData setObject:@"" forKey:@"LA_CommencementDate"];
+    [dictPOLAData setObject:@"" forKey:@"LA_MonthlyIncome"];
+    
+    [delegate setPOLADictionary:dictPOLAData];
+}
+
+#pragma mark saveData
+-(IBAction)actionSaveData:(UIButton *)sender{
+    //set the updated data to parent
+    [self setPOLADictionary];
+    
+    //get updated data from parent and save it.
+    [modelSIPOData savePOLAData:[delegate getPOLADictionary]];
+}
+
+#pragma mark delegate
+-(void)listing:(ListingTbViewController *)inController didSelectIndex:(NSString *)aaIndex andName:(NSString *)aaName andDOB:(NSString *)aaDOB andGender:(NSString *)aaGender andOccpCode:(NSString *)aaCode andSmoker:(NSString *)aaSmoker andMaritalStatus:(NSString *)aaMaritalStatus;
+{
+    textLA.text = aaName;
+    [buttonDOB setTitle:aaDOB forState:UIControlStateNormal];
+    [textLAAge setText:[NSString stringWithFormat:@"%i",[formatter calculateAge:aaDOB]]];
+    [buttonOccupation setTitle:[modelOccupation getOccupationDesc:aaCode] forState:UIControlStateNormal];
+    
+    if ([aaGender isEqualToString:@"MALE"] || [aaGender isEqualToString:@"M"] ) {
+        segmentSex.selectedSegmentIndex = 0;
+    } else {
+        segmentSex.selectedSegmentIndex = 1;
+    }
+    [popoverViewer dismissPopoverAnimated:YES];
+}
+
+-(void)datePick:(DateViewController *)inController strDate:(NSString *)aDate strAge:(NSString *)aAge intAge:(int)bAge intANB:(int)aANB
+{
+    [buttonDOB setTitle:aDate forState:UIControlStateNormal];
+    
+    [textLAAge setText:[NSString stringWithFormat:@"%i",[formatter calculateAge:aDate]]];
+    [popoverViewer dismissPopoverAnimated:YES];
+}
+
+- (void)OccupCodeSelected:(NSString *)OccupCode
+{
+    [popoverViewer dismissPopoverAnimated:YES];
+}
+
+- (void)OccupDescSelected:(NSString *)color {
+    [buttonOccupation setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", color]forState:UIControlStateNormal];
+    [popoverViewer dismissPopoverAnimated:YES];
+}
+
+-(void)OccupClassSelected:(NSString *)OccupClass{
+    [popoverViewer dismissPopoverAnimated:YES];
+}
+
+
 /*
 #pragma mark - Navigation
 

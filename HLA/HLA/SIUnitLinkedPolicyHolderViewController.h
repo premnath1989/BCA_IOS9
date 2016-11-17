@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol ULPolicyHolderViewControllerDelegate
+-(void)setPOLADictionary:(NSMutableDictionary *)NSDictionary;
+-(NSMutableDictionary *)getPOLADictionary;
+@end
+
 @interface SIUnitLinkedPolicyHolderViewController : UIViewController{
     IBOutlet UIScrollView* scrollPolicyHolder;
     
@@ -27,4 +32,6 @@
 }
 -(void)setInfoNewIllustration:(NSDictionary *)dictIllustration;
 @property (nonatomic,weak)IBOutlet UITextField* textIllustrationNumber;
+
+@property (nonatomic,strong) id <ULPolicyHolderViewControllerDelegate> delegate;
 @end

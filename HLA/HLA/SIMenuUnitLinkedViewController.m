@@ -14,8 +14,10 @@
 #import "SIUnitLinkedLifeAssuredViewController.h"
 #import "SIUnitLinkedPolicyHolderViewController.h"
 #import "SIUnitLinkedSpecialOptionViewController.h"
+#import "ModelSIPOData.h"
+#import "ModelSIULBasicPlan.h"
 
-@interface SIMenuUnitLinkedViewController (){
+@interface SIMenuUnitLinkedViewController ()<ULPolicyHolderViewControllerDelegate,ULLifeAssuredViewControllerDelegate,ULBasicPlanViewControllerDelegate,ULRiderViewControllerDelegate,ULSpecialOptionViewControllerDelegate,ULFundAllocationViewControllerDelegate>{
     SIUnitLinkedRiderViewController * siUnitLinkedRiderVC;
     SIUnitLinkedBasicPlanViewController *siUnitLinkedBasicPlanVC;
     SIUnitLinkedQuotationViewController *siUnitLinkedQuotationVC;
@@ -23,6 +25,9 @@
     SIUnitLinkedLifeAssuredViewController *siUnitLinkedLifeAssuredVC;
     SIUnitLinkedPolicyHolderViewController *siUnitLinkedPolicyHolderVC;
     SIUnitLinkedSpecialOptionViewController *siUnitLinkedSpecialOptionVC;
+    
+    ModelSIPOData *modelSIPOData;
+    ModelSIULBasicPlan *modelSIULBasicPlan;
 }
 
 @end
@@ -39,27 +44,36 @@
     [super viewDidLoad];
     siUnitLinkedPolicyHolderVC =[[SIUnitLinkedPolicyHolderViewController alloc]initWithNibName:@"SIUnitLinkedPolicyHolderViewController" bundle:nil];
     [siUnitLinkedPolicyHolderVC.view setTag:0];
+    [siUnitLinkedPolicyHolderVC setDelegate:self];
     
     siUnitLinkedLifeAssuredVC =[[SIUnitLinkedLifeAssuredViewController alloc]initWithNibName:@"SIUnitLinkedLifeAssuredViewController" bundle:nil];
     [siUnitLinkedLifeAssuredVC.view setTag:1];
+    [siUnitLinkedLifeAssuredVC setDelegate:self];
     
     siUnitLinkedBasicPlanVC =[[SIUnitLinkedBasicPlanViewController alloc]initWithNibName:@"SIUnitLinkedBasicPlanViewController" bundle:nil];
     [siUnitLinkedBasicPlanVC.view setTag:2];
+    [siUnitLinkedBasicPlanVC setDelegate:self];
     
     siUnitLinkedFundAllocationVC =[[SIUnitLinkedFundAllocationViewController alloc]initWithNibName:@"SIUnitLinkedFundAllocationViewController" bundle:nil];
     [siUnitLinkedFundAllocationVC.view setTag:3];
+    [siUnitLinkedFundAllocationVC setDelegate:self];
     
     siUnitLinkedRiderVC = [[SIUnitLinkedRiderViewController alloc]initWithNibName:@"SIUnitLinkedRiderViewController" bundle:nil];
     [siUnitLinkedRiderVC.view setTag:4];
+    [siUnitLinkedRiderVC setDelegate:self];
     
     siUnitLinkedSpecialOptionVC =[[SIUnitLinkedSpecialOptionViewController alloc]initWithNibName:@"SIUnitLinkedSpecialOptionViewController" bundle:nil];
     [siUnitLinkedSpecialOptionVC.view setTag:5];
+    [siUnitLinkedSpecialOptionVC setDelegate:self];
     
     siUnitLinkedQuotationVC =[[SIUnitLinkedQuotationViewController alloc]initWithNibName:@"SIUnitLinkedQuotationViewController" bundle:nil];
     [siUnitLinkedQuotationVC.view setTag:6];
     
     
     arrayUnitLinkedModuleView = [[NSMutableArray alloc]initWithObjects:siUnitLinkedPolicyHolderVC.view,siUnitLinkedLifeAssuredVC.view,siUnitLinkedBasicPlanVC.view,siUnitLinkedFundAllocationVC.view,siUnitLinkedRiderVC.view,siUnitLinkedSpecialOptionVC.view,siUnitLinkedQuotationVC.view, nil];
+    
+    modelSIPOData = [[ModelSIPOData alloc]init];
+    modelSIULBasicPlan = [[ModelSIULBasicPlan alloc]init];
     
     arrayIntValidate = [[NSMutableArray alloc] initWithObjects:@"0",@"0",@"0",@"0",@"0",@"0",@"0", nil];
     NumberListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"1", @"2", @"3", @"4",@"5",@"6",@"7", nil];
@@ -87,6 +101,73 @@
         }
     }
 }
+
+#pragma mark delegate Fund Allocation
+-(void)setInitialULFundAllocationDictionary{
+    dictParentULBasicPlanData = [[NSMutableDictionary alloc]initWithDictionary:[modelSIULBasicPlan getULBasicPlanDataFor:stringSINumber]];
+}
+
+-(void)setULFundAllocationDictionary:(NSMutableDictionary *)dictULBasicPlanData{
+    dictParentULBasicPlanData = [[NSMutableDictionary alloc]initWithDictionary:dictULBasicPlanData];
+}
+
+-(NSMutableDictionary *)getULFundAllocationDictionary{
+    return dictParentULBasicPlanData ;
+}
+
+#pragma mark delegate Special Option
+-(void)setInitialULSpecialOptionDictionary{
+    dictParentULBasicPlanData = [[NSMutableDictionary alloc]initWithDictionary:[modelSIULBasicPlan getULBasicPlanDataFor:stringSINumber]];
+}
+
+-(void)setULSpecialOptionDictionary:(NSMutableDictionary *)dictULBasicPlanData{
+    dictParentULBasicPlanData = [[NSMutableDictionary alloc]initWithDictionary:dictULBasicPlanData];
+}
+
+-(NSMutableDictionary *)getULSpecialOptionDictionary{
+    return dictParentULBasicPlanData ;
+}
+
+#pragma mark delegate Rider
+-(void)setInitialULRiderDictionary{
+    dictParentULBasicPlanData = [[NSMutableDictionary alloc]initWithDictionary:[modelSIULBasicPlan getULBasicPlanDataFor:stringSINumber]];
+}
+
+-(void)setULRiderDictionary:(NSMutableDictionary *)dictULBasicPlanData{
+    dictParentULBasicPlanData = [[NSMutableDictionary alloc]initWithDictionary:dictULBasicPlanData];
+}
+
+-(NSMutableDictionary *)getULRiderDictionary{
+    return dictParentULBasicPlanData ;
+}
+
+
+#pragma mark delegate basic plan
+-(void)setInitialULBasicPlanDictionary{
+    dictParentULBasicPlanData = [[NSMutableDictionary alloc]initWithDictionary:[modelSIULBasicPlan getULBasicPlanDataFor:stringSINumber]];
+}
+
+-(void)setBasicPlanDictionary:(NSMutableDictionary *)dictULBasicPlanData{
+    dictParentULBasicPlanData = [[NSMutableDictionary alloc]initWithDictionary:dictULBasicPlanData];
+}
+
+-(NSMutableDictionary *)getBasicPlanDictionary{
+    return dictParentULBasicPlanData ;
+}
+
+#pragma mark delegate POLA
+-(void)setInitialPOLADictionary{
+    dictParentPOLAData = [[NSMutableDictionary alloc]initWithDictionary:[modelSIPOData getPOLADataFor:stringSINumber]];
+}
+
+-(void)setPOLADictionary:(NSMutableDictionary *)dictPOLAData{
+    dictParentPOLAData = [[NSMutableDictionary alloc]initWithDictionary:dictPOLAData];
+}
+
+-(NSMutableDictionary *)getPOLADictionary{
+    return dictParentPOLAData ;
+}
+
 
 #pragma mark - table view
 

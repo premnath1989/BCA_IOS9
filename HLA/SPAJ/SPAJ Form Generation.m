@@ -492,7 +492,6 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
         }
         
         
-        
         [render setValue:[NSValue valueWithCGRect:paperRect] forKey:@"paperRect"];
         [render setValue:[NSValue valueWithCGRect:printableRect] forKey:@"printableRect"];
         

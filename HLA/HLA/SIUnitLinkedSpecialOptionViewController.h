@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SIUnitLinkedSpecialOptionViewController : UIViewController
+@protocol ULSpecialOptionViewControllerDelegate
+    -(void)setULSpecialOptionDictionary:(NSMutableDictionary *)dictULSpecialOption;
+    -(NSMutableDictionary *)getULSpecialOptionDictionary;
+@end
 
+
+@interface SIUnitLinkedSpecialOptionViewController : UIViewController
+@property (nonatomic,strong) id <ULSpecialOptionViewControllerDelegate> delegate;
 @end

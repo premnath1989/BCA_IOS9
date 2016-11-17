@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@protocol ULBasicPlanViewControllerDelegate
+-(void)setBasicPlanDictionary:(NSMutableDictionary *)dictULBasicPlanData;
+-(NSMutableDictionary *)getBasicPlanDictionary;
+@end
 @interface SIUnitLinkedBasicPlanViewController : UIViewController{
     IBOutlet UIButton* buttonTargetAccountValue;
 }
-
+@property (nonatomic,strong) id <ULBasicPlanViewControllerDelegate> delegate;
 @end

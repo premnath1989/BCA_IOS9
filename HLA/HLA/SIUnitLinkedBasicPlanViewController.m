@@ -8,21 +8,27 @@
 
 #import "SIUnitLinkedBasicPlanViewController.h"
 #import "UnitLinkedPopOverViewController.h"
+#import "ModelSIULBasicPlan.h"
 
 @interface SIUnitLinkedBasicPlanViewController ()<UIPopoverPresentationControllerDelegate,UnitLinkedPopOverDelegate>{
     UnitLinkedPopOverViewController* unitLinkedPopOverVC;
     UIPopoverPresentationController *popController;
+    
+    ModelSIULBasicPlan *modelSIULBasicPlan;
 }
 
 @end
 
 @implementation SIUnitLinkedBasicPlanViewController
+@synthesize delegate;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     unitLinkedPopOverVC = [[UnitLinkedPopOverViewController alloc]initWithNibName:@"UnitLinkedPopOverViewController" bundle:nil];
     unitLinkedPopOverVC.UnitLinkedPopOverDelegate = self;
+    
+    modelSIULBasicPlan = [[ModelSIULBasicPlan alloc]init];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -60,6 +66,31 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark dictionary maker
+-(void)setULBasicPlanDictionary{
+    NSMutableDictionary* dictULBasicPlanData = [[NSMutableDictionary alloc]init];
+    [dictULBasicPlanData setObject:@"" forKey:@"SINO"];
+    [dictULBasicPlanData setObject:@"" forKey:@"PaymentMode"];
+    [dictULBasicPlanData setObject:@"" forKey:@"PreferredPremium"];
+    [dictULBasicPlanData setObject:@"" forKey:@"RegularTopUp"];
+    [dictULBasicPlanData setObject:@"" forKey:@"Premium"];
+    [dictULBasicPlanData setObject:@"" forKey:@"SumAssured"];
+    [dictULBasicPlanData setObject:@"" forKey:@"PremiumHolidayTerm"];
+    [dictULBasicPlanData setObject:@"" forKey:@"TotalUnAppliedPremium"];
+    [dictULBasicPlanData setObject:@"" forKey:@"TargetValue"];
+    
+    [delegate setBasicPlanDictionary:dictULBasicPlanData];
+}
+
+#pragma mark saveData
+-(IBAction)actionSaveData:(UIButton *)sender{
+    //set the updated data to parent
+    [self setULBasicPlanDictionary];
+    
+    //get updated data from parent and save it.
+    [modelSIULBasicPlan saveULBasicPlanData:[delegate getBasicPlanDictionary]];
+
+}
 
 #pragma mark delegate
 -(void)TableData:(NSString *)stringDesc TableCode:(NSString *)stringCode{
