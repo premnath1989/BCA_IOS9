@@ -700,7 +700,13 @@
         
         NSString* stringRelation = [formatter getRelationNameForHtml:[dictPOData valueForKey:@"RelWithLA"]];
         NSMutableDictionary* dictRelWithLa = [[NSMutableDictionary alloc]initWithObjectsAndKeys:@"RadioButtonPolicyHolderRelationAssured",@"elementID",stringRelation,@"Value", nil];
+        
+        NSMutableDictionary* dictRelWithLaDetail = [[NSMutableDictionary alloc]initWithObjectsAndKeys:@"TextPolicyHolderRelationAssuredOther",@"elementID",[dictPOData valueForKey:@"RelWithLA"],@"Value", nil];
+        
         [arrayValue addObject:dictRelWithLa];
+        if ([stringRelation isEqualToString:@"other"]){
+            [arrayValue addObject:dictRelWithLaDetail];
+        }
     }
     
     else if ([stringSection isEqualToString:@"TR"]){
@@ -710,7 +716,14 @@
         }
         NSString* stringRelation = [formatter getRelationNameForHtml:[dictPOData valueForKey:@"RelWithLA"]];
         NSMutableDictionary* dictRelWithLa = [[NSMutableDictionary alloc]initWithObjectsAndKeys:@"RadioButtonProspectiveInsuredRelationAssured",@"elementID",stringRelation,@"Value", nil];
+        
+        NSMutableDictionary* dictRelWithLaDetail = [[NSMutableDictionary alloc]initWithObjectsAndKeys:@"TextProspectiveInsuredRelationAssuredOther",@"elementID",[dictPOData valueForKey:@"RelWithLA"],@"Value", nil];
+        
         [arrayValue addObject:dictRelWithLa];
+        if ([stringRelation isEqualToString:@"other"]){
+            [arrayValue addObject:dictRelWithLaDetail];
+        }
+
     }
     else if ([stringSection isEqualToString:@"PP"]){
         NSString* stringPaymentFrequency = [formatter getPaymentFrequencyValue:[dictPremiData valueForKey:@"Payment_Frequency"]];
