@@ -28,7 +28,7 @@
 @synthesize indexNo, showQuotation;
 @synthesize userRequest,EAPPorSI;
 @synthesize IndexTab,mainBH,mainPH,mainLa2ndH, tradOrEver;;
-
+@synthesize planName;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -81,6 +81,7 @@
     if ([tradOrEver isEqualToString:@"TRAD"]) {
         SIMenuViewController *menuSIPage = [self.storyboard instantiateViewControllerWithIdentifier:@"SIPageView"];
 		menuSIPage.requestSINo = [self.requestSINo description];
+        menuSIPage.planName = planName;
 		menuSIPage.SIshowQuotation = showQuotation;
         menuSIPage.EAPPorSI = [self.EAPPorSI description];
         image = [UIImage imageNamed:@"btn_newSI_off.png"];

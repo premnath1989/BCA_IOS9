@@ -30,6 +30,16 @@
     UIColor *themeColour;
     
     UIPopoverController *popoverViewer;
+    
+    NSNumber *numberBoolQuickQuote;
+    int clientProfileID;
+    NSString *sex;
+    NSString *smoker;
+    NSString *occupationCode;
+    NSString *occupationDesc;
+    NSString *relWithLA;
+    NSString *productCode;
+    NSNumber *numberIntInternalStaff;
 }
 
 @end
@@ -82,6 +92,8 @@
         buttonPOlist.enabled = NO;
 
         [labelQuickQuote setTextColor:themeColour];
+        numberBoolQuickQuote = [NSNumber numberWithInt:1];
+        clientProfileID = -1;
     }
     else
     {
@@ -98,6 +110,23 @@
         buttonPOlist.enabled = YES;
         
         [labelQuickQuote setTextColor:[UIColor lightGrayColor]];
+        numberBoolQuickQuote = [NSNumber numberWithInt:0];
+    }
+}
+
+-(IBAction)actionSegmentGender:(UISegmentedControl *)sender{
+    if ([segmentSex selectedSegmentIndex]==0) {
+        sex = @"MALE";
+    } else if (segmentSex.selectedSegmentIndex == 1) {
+        sex = @"FEMALE";
+    }
+}
+
+-(IBAction)actionSegmentSmoker:(UISegmentedControl *)sender{
+    if ([segmentSmoker selectedSegmentIndex]==0) {
+        smoker = @"Y";
+    } else if (segmentSmoker.selectedSegmentIndex == 1) {
+        smoker = @"N";
     }
 }
 
@@ -180,50 +209,77 @@
 
 #pragma mark dictionary maker
 -(void)setPOLADictionary{
+    numberIntInternalStaff = [NSNumber numberWithInt:0];
+    
     NSMutableDictionary* dictPOLAData = [[NSMutableDictionary alloc]init];
-    [dictPOLAData setObject:@"" forKey:@"SINO"];
-    [dictPOLAData setObject:@"" forKey:@"ProductCode"];
-    [dictPOLAData setObject:@"" forKey:@"ProductName"];
-    [dictPOLAData setObject:@"" forKey:@"QuickQuote"];
-    [dictPOLAData setObject:@"" forKey:@"SIDate"];
-    [dictPOLAData setObject:@"" forKey:@"PO_Name"];
-    [dictPOLAData setObject:@"" forKey:@"PO_DOB"];
-    [dictPOLAData setObject:@"" forKey:@"PO_Gender"];
-    [dictPOLAData setObject:@"" forKey:@"PO_Age"];
-    [dictPOLAData setObject:@"" forKey:@"PO_OccpCode"];
-    [dictPOLAData setObject:@"" forKey:@"PO_Occp"];
-    [dictPOLAData setObject:@"" forKey:@"PO_ClientID"];
-    [dictPOLAData setObject:@"" forKey:@"RelWithLA"];
-    [dictPOLAData setObject:@"" forKey:@"LA_ClientID"];
-    [dictPOLAData setObject:@"" forKey:@"LA_Name"];
-    [dictPOLAData setObject:@"" forKey:@"LA_DOB"];
-    [dictPOLAData setObject:@"" forKey:@"LA_Age"];
-    [dictPOLAData setObject:@"" forKey:@"LA_Gender"];
-    [dictPOLAData setObject:@"" forKey:@"LA_OccpCode"];
-    [dictPOLAData setObject:@"" forKey:@"LA_Occp"];
-    [dictPOLAData setObject:@"" forKey:@"IsInternalStaff"];
-    [dictPOLAData setObject:@"" forKey:@"PO_Smoker"];
+    [dictPOLAData setObject:textIllustrationNumber.text forKey:@"SINO"];
+    [dictPOLAData setObject:productCode forKey:@"ProductCode"];
+    [dictPOLAData setObject:buttonPlan.currentTitle forKey:@"ProductName"];
+    [dictPOLAData setObject:numberBoolQuickQuote forKey:@"QuickQuote"];
+    [dictPOLAData setObject:buttonIllustrationDate.currentTitle forKey:@"SIDate"];
+    [dictPOLAData setObject:textPO.text forKey:@"PO_Name"];
+    [dictPOLAData setObject:buttonDOB.currentTitle forKey:@"PO_DOB"];
+    [dictPOLAData setObject:sex forKey:@"PO_Gender"];
+    [dictPOLAData setObject:textPOAge.text forKey:@"PO_Age"];
+    [dictPOLAData setObject:occupationCode forKey:@"PO_OccpCode"];
+    [dictPOLAData setObject:occupationDesc forKey:@"PO_Occp"];
+    [dictPOLAData setObject:[NSNumber numberWithInt:clientProfileID] forKey:@"PO_ClientID"];
+    [dictPOLAData setObject:relWithLA forKey:@"RelWithLA"];
+    
+    if ([relWithLA isEqualToString:@"DIRI SENDIRI"]){
+        [dictPOLAData setObject:[NSNumber numberWithInt:clientProfileID] forKey:@"LA_ClientID"];
+        [dictPOLAData setObject:textPO.text forKey:@"LA_Name"];
+        [dictPOLAData setObject:buttonDOB.currentTitle forKey:@"LA_DOB"];
+        [dictPOLAData setObject:textPOAge.text forKey:@"LA_Age"];
+        [dictPOLAData setObject:sex forKey:@"LA_Gender"];
+        [dictPOLAData setObject:occupationCode forKey:@"LA_OccpCode"];
+        [dictPOLAData setObject:occupationDesc forKey:@"LA_Occp"];
+        
+        [dictPOLAData setObject:smoker forKey:@"LA_Smoker"];
+        [dictPOLAData setObject:@"" forKey:@"LA_CommencementDate"];
+        [dictPOLAData setObject:@"" forKey:@"LA_MonthlyIncome"];
+    }
+    else{
+        [dictPOLAData setObject:@"" forKey:@"LA_ClientID"];
+        [dictPOLAData setObject:@"" forKey:@"LA_Name"];
+        [dictPOLAData setObject:@"" forKey:@"LA_DOB"];
+        [dictPOLAData setObject:@"" forKey:@"LA_Age"];
+        [dictPOLAData setObject:@"" forKey:@"LA_Gender"];
+        [dictPOLAData setObject:@"" forKey:@"LA_OccpCode"];
+        [dictPOLAData setObject:@"" forKey:@"LA_Occp"];
+        
+        [dictPOLAData setObject:@"" forKey:@"LA_Smoker"];
+        [dictPOLAData setObject:@"" forKey:@"LA_CommencementDate"];
+        [dictPOLAData setObject:@"" forKey:@"LA_MonthlyIncome"];
+    }
+    
+    [dictPOLAData setObject:numberIntInternalStaff forKey:@"IsInternalStaff"];
+    [dictPOLAData setObject:smoker forKey:@"PO_Smoker"];
     [dictPOLAData setObject:@"" forKey:@"PO_CommencementDate"];
     [dictPOLAData setObject:@"" forKey:@"PO_MonthlyIncome"];
-    [dictPOLAData setObject:@"" forKey:@"LA_Smoker"];
-    [dictPOLAData setObject:@"" forKey:@"LA_CommencementDate"];
-    [dictPOLAData setObject:@"" forKey:@"LA_MonthlyIncome"];
     
     [delegate setPOLADictionary:dictPOLAData];
 }
 
 #pragma mark saveData
--(IBAction)actionSaveData:(UIButton *)sender{
+-(IBAction)actionSaveData:(UIBarButtonItem *)sender{
     //set the updated data to parent
     [self setPOLADictionary];
     
     //get updated data from parent and save it.
     [modelSIPOData savePOLAData:[delegate getPOLADictionary]];
+
+    //save SIMaster
+    [delegate saveSIMaster];
+    
+    //changePage
+    [delegate showUnitLinkModuleAtIndex:[NSIndexPath indexPathForRow:1 inSection:0]];
 }
 
 #pragma mark delegate
 -(void)listing:(ListingTbViewController *)inController didSelectIndex:(NSString *)aaIndex andName:(NSString *)aaName andDOB:(NSString *)aaDOB andGender:(NSString *)aaGender andOccpCode:(NSString *)aaCode andSmoker:(NSString *)aaSmoker andMaritalStatus:(NSString *)aaMaritalStatus;
 {
+    clientProfileID = [aaIndex intValue];
     textPO.text = aaName;
     [buttonDOB setTitle:aaDOB forState:UIControlStateNormal];
     [textPOAge setText:[NSString stringWithFormat:@"%i",[formatter calculateAge:aaDOB]]];
@@ -247,11 +303,13 @@
 
 - (void)OccupCodeSelected:(NSString *)OccupCode
 {
+    occupationCode = OccupCode;
     [popoverViewer dismissPopoverAnimated:YES];
 }
 
 - (void)OccupDescSelected:(NSString *)color {
     [buttonOccupation setTitle:[[NSString stringWithFormat:@" "] stringByAppendingFormat:@"%@", color]forState:UIControlStateNormal];
+    occupationDesc = color;
     [popoverViewer dismissPopoverAnimated:YES];
 }
 
@@ -260,6 +318,7 @@
 }
 
 -(void)Planlisting:(PlanList *)inController didSelectCode:(NSString *)aaCode andDesc:(NSString *)aaDesc{
+    productCode = aaCode;
     [buttonPlan setTitle:aaDesc forState:UIControlStateNormal];
     [buttonRelation setTitle:@"--Please Select--" forState:UIControlStateNormal];
     
@@ -268,6 +327,7 @@
 
 -(void)selectedRship:(NSString *)selectedRship :(NSString *)SelectedPshipCode;
 {
+    relWithLA = selectedRship;
     [buttonRelation setTitle:selectedRship forState:UIControlStateNormal];
     [popoverViewer dismissPopoverAnimated:YES];
 }

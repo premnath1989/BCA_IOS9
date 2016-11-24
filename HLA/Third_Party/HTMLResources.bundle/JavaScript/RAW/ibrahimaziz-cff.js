@@ -101,6 +101,8 @@ var arrayNationality = [];
 var stringIllnessSuffix = "Illness";
 var stringSexFemale = "female";
 var stringSexMale = "male";
+var stringPageScoring = false;
+var stringSpanScore = "SpanScore";
 
 
 // GENERATOR
@@ -3168,6 +3170,24 @@ function getFromDatabase(objectContent, stringPageType)
 			{
 				
 			}
+			
+			if (stringPageScoring == true)
+			{
+				var intScore = 0;
+
+				$("input:radio").each(function()
+				{
+					if ($(this).is(':checked'))
+					{
+						intScore += parseInt($(this).val(), 10);   
+					}
+					else
+					{
+
+					}
+				});
+				scoreResultListener(arrayScoreResult, intScore, stringSpanScore);
+			}
 		}
 	}
 }
@@ -3781,4 +3801,47 @@ function goToChangePageAlert(stringLinkJavaScriptID, URLPage, stringRelationship
 			window.location.replace(URLPage);
 		}
 	}
+}
+
+// SCORING
+
+function scoreResultListener(arrayScoreResult, intScore, spanScore)
+{ 
+	var stringScoreResultSelected;
+
+	if (intScore == 0)
+	{
+		// TANPA STYLE DI TD NYA
+	}  
+	else if (intScore < 28)
+	{
+		stringScoreResultSelected = arrayScoreResult[0];
+	}   
+	else if(intScore >= 28 && intScore <= 40)
+	{
+		stringScoreResultSelected = arrayScoreResult[1];
+	}
+	else if(intScore > 40)
+	{
+		stringScoreResultSelected = arrayScoreResult[2];
+	}
+	else
+	{
+		//DO NOTHING
+	}
+
+	for (var i = 0; i < arrayScoreResult.length; i++)
+	{
+		if (arrayScoreResult[i] == stringScoreResultSelected)
+		{
+			$(arrayScoreResult[i]).removeClass("ScoreResultNotSelected");
+			$(arrayScoreResult[i]).addClass("ScoreResultSelected");
+		}
+		else
+		{
+			$(arrayScoreResult[i]).removeClass("ScoreResultSelected");
+			$(arrayScoreResult[i]).addClass("ScoreResultNotSelected");
+		}
+	}
+	$(stringKres + spanScore).html(intScore);
 }

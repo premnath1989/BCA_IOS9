@@ -15,13 +15,17 @@
     UIAlertController *alertController;
     
     NSString *stringSection;
+    NSString *stringParentSection;
     NSString *htmlSection;
+    NSString *htmlName;
     
     NSArray* newElementArrayName;
     NSArray* originalElementArrayName;
     
     NSArray* newElementArrayTertanggungName;
     NSArray* originalElementArrayTertanggungName;
+    
+    int pageIndex;
 }
 @synthesize htmlFileName;
 @synthesize delegate;
@@ -29,6 +33,34 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:YES];
+    /*if ([stringParentSection isEqualToString:@"PO"]){
+        [self loadFirstHTML:htmlName PageSection:stringParentSection];
+    }
+    
+    else if ([stringParentSection isEqualToString:@"TR"]){
+        [self loadSecondHTML:htmlName PageSection:@"TR"];
+    }
+    
+    else if ([stringParentSection isEqualToString:@"PR"]){
+        [self loadThirdHTML:htmlName PageSection:@"PR"];
+    }
+    
+    else if ([stringParentSection isEqualToString:@"PM"]){
+        [self loadFourthHTML:htmlName PageSection:@"PM"];
+    }
+    
+    else if ([stringParentSection isEqualToString:@"PP"]){
+        [self loadFivethHTML:htmlName PageSection:@"PP"];
+    }
+    
+    else if ([stringParentSection isEqualToString:@"KS_PH"]){
+        [self loadSixthHTML:htmlName PageSection:@"KS_PH"];
+    }
+    
+    else if ([stringParentSection isEqualToString:@"KS_IN"]){
+        [self loadSeventhHTML:htmlName PageSection:@"KS_IN"];
+    }*/
+    
 }
 
 
@@ -66,9 +98,12 @@
     //[self resignFirstResponder];
     //[self.view endEditing:YES];
     
+    pageIndex =1;
     NSString* stringFlagEdited = [webview stringByEvaluatingJavaScriptFromString:@"booleanInputChangeState;"];
     NSLog(@"flag changes : %@", stringFlagEdited);
     stringSection = stringPageSection;
+    stringParentSection = stringPageSection;
+    htmlName = stringHTMLName;
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     filePath = [docsDir stringByAppendingPathComponent:@"SPAJ"];
     
@@ -86,10 +121,14 @@
 
 
 -(void)loadSecondHTML:(NSString*)stringHTMLName PageSection:(NSString *)stringPageSection{
+    pageIndex =2;
+    
     NSString* stringFlagEdited = [webview stringByEvaluatingJavaScriptFromString:@"booleanInputChangeState;"];
     NSLog(@"flag changes : %@", stringFlagEdited);
     
     stringSection = stringPageSection;
+    stringParentSection = stringPageSection;
+    htmlName = stringHTMLName;
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     filePath = [docsDir stringByAppendingPathComponent:@"SPAJ"];
     
@@ -108,10 +147,13 @@
 -(void)loadThirdHTML:(NSString*)stringHTMLName PageSection:(NSString *)stringPageSection{
     //[self resignFirstResponder];
     //[self.view endEditing:YES];
+    pageIndex =3;
     
     NSString* stringFlagEdited = [webview stringByEvaluatingJavaScriptFromString:@"booleanInputChangeState;"];
     
     stringSection = stringPageSection;
+    stringParentSection = stringPageSection;
+    htmlName = stringHTMLName;
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     filePath = [docsDir stringByAppendingPathComponent:@"SPAJ"];
     
@@ -131,9 +173,12 @@
     //[self resignFirstResponder];
     //[self.view endEditing:YES];
     
+    pageIndex =4;
     NSString* stringFlagEdited = [webview stringByEvaluatingJavaScriptFromString:@"booleanInputChangeState;"];
     
     stringSection = stringPageSection;
+    stringParentSection = stringPageSection;
+    htmlName = stringHTMLName;
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     filePath = [docsDir stringByAppendingPathComponent:@"SPAJ"];
     
@@ -152,10 +197,12 @@
 -(void)loadFivethHTML:(NSString*)stringHTMLName PageSection:(NSString *)stringPageSection{
     //[self resignFirstResponder];
     //[self.view endEditing:YES];
-    
+    pageIndex =5;
     NSString* stringFlagEdited = [webview stringByEvaluatingJavaScriptFromString:@"booleanInputChangeState;"];
     
     stringSection = stringPageSection;
+    stringParentSection = stringPageSection;
+    htmlName = stringHTMLName;
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     filePath = [docsDir stringByAppendingPathComponent:@"SPAJ"];
     
@@ -174,10 +221,12 @@
 -(void)loadSixthHTML:(NSString*)stringHTMLName PageSection:(NSString *)stringPageSection{
     //[self resignFirstResponder];
     //[self.view endEditing:YES];
-    
+    pageIndex =6;
     NSString* stringFlagEdited = [webview stringByEvaluatingJavaScriptFromString:@"booleanInputChangeState;"];
     
     stringSection = stringPageSection;
+    stringParentSection = stringPageSection;
+    htmlName = stringHTMLName;
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     filePath = [docsDir stringByAppendingPathComponent:@"SPAJ"];
     
@@ -194,9 +243,12 @@
 }
 
 -(void)loadSeventhHTML:(NSString*)stringHTMLName PageSection:(NSString *)stringPageSection{
+    pageIndex =7;
     NSString* stringFlagEdited = [webview stringByEvaluatingJavaScriptFromString:@"booleanInputChangeState;"];
     
     stringSection = stringPageSection;
+    stringParentSection = stringPageSection;
+    htmlName = stringHTMLName;
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     filePath = [docsDir stringByAppendingPathComponent:@"SPAJ"];
     
@@ -440,27 +492,27 @@
 - (void)savetoDB:(NSDictionary *)params{
     [delegate setRightButtonEnable:NO];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        if ([stringSection isEqualToString:@"PM"]){
+        if ([stringParentSection isEqualToString:@"PM"]){
             NSString *stringWhere = [NSString stringWithFormat:@"where SPAJHtmlSection='PM' and SPAJTransactionID=%i",[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
             [modelSPAJAnswers deleteSPAJAnswers:stringWhere];
         }
         
-        else if ([stringSection isEqualToString:@"PO"]){
+        else if ([stringParentSection isEqualToString:@"PO"]){
             NSString *stringWhere = [NSString stringWithFormat:@"where SPAJHtmlSection='PO' and SPAJTransactionID=%i",[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
             [modelSPAJAnswers deleteSPAJAnswers:stringWhere];
         }
         
-        else if ([stringSection isEqualToString:@"TR"]){
+        else if ([stringParentSection isEqualToString:@"TR"]){
             NSString *stringWhere = [NSString stringWithFormat:@"where SPAJHtmlSection='TR' and SPAJTransactionID=%i",[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
             [modelSPAJAnswers deleteSPAJAnswers:stringWhere];
         }
         
-        else if ([stringSection isEqualToString:@"PR"]){
+        else if ([stringParentSection isEqualToString:@"PR"]){
             NSString *stringWhere = [NSString stringWithFormat:@"where SPAJHtmlSection='PR' and SPAJTransactionID=%i",[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
             [modelSPAJAnswers deleteSPAJAnswers:stringWhere];
         }
         
-        else if ([stringSection isEqualToString:@"PP"]){
+        else if ([stringParentSection isEqualToString:@"PP"]){
             NSString *stringWhere = [NSString stringWithFormat:@"where SPAJHtmlSection='PP' and SPAJTransactionID=%i",[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
             [modelSPAJAnswers deleteSPAJAnswers:stringWhere];
         }
@@ -484,7 +536,13 @@
             NSString*spajTransactionID = [modelSPAJTransaction getSPAJTransactionData:@"SPAJTransactionID" StringWhereName:@"SPAJEappNumber" StringWhereValue:[delegate voidGetEAPPNumber]];
             //cffID = [cffHeaderSelectedDictionary valueForKey:@"PotentialDiscussionCFFID"];
             NSMutableDictionary* modifiedParams = [[NSMutableDictionary alloc]initWithDictionary:[params valueForKey:@"data"]];
-            [modifiedParams setObject:[[modelSPAJHtml selectActiveHtmlForSection:stringSection] valueForKey:@"SPAJHtmlID"] forKey:@"SPAJHtmlID"];
+            if (pageIndex>5){
+                [modifiedParams setObject:[[modelSPAJHtml selectActiveHtmlForSection:stringSection] valueForKey:@"SPAJHtmlID"] forKey:@"SPAJHtmlID"];
+            }
+            else{
+                [modifiedParams setObject:[[modelSPAJHtml selectActiveHtmlForSection:stringParentSection] valueForKey:@"SPAJHtmlID"] forKey:@"SPAJHtmlID"];
+            }
+            
             [modifiedParams setObject:spajTransactionID forKey:@"SPAJTransactionID"];
             //[modifiedParams setObject:cffID forKey:@"SPAJID"];
             //[modifiedParams setObject:[prospectProfileID stringValue] forKey:@"CustomerID"];
@@ -494,11 +552,23 @@
             if ([arraySPAJAnswers count]>0){
                 for (int i = 0;i<[arraySPAJAnswers count];i++){
                     NSMutableDictionary* tempDict = [[NSMutableDictionary alloc] initWithDictionary:[arraySPAJAnswers objectAtIndex:i]];
-                    [tempDict setObject:[[modelSPAJHtml selectActiveHtmlForSection:stringSection] valueForKey:@"SPAJHtmlID"] forKey:@"SPAJHtmlID"];
+                    if (pageIndex>5){
+                        [tempDict setObject:[[modelSPAJHtml selectActiveHtmlForSection:stringSection] valueForKey:@"SPAJHtmlID"] forKey:@"SPAJHtmlID"];
+                    }
+                    else{
+                        [tempDict setObject:[[modelSPAJHtml selectActiveHtmlForSection:stringParentSection] valueForKey:@"SPAJHtmlID"] forKey:@"SPAJHtmlID"];
+                    }
+                    
                     [tempDict setObject:spajTransactionID forKey:@"SPAJTransactionID"];
                     //[tempDict setObject:cffID forKey:@"SPAJID"];
                     //[tempDict setObject:[prospectProfileID stringValue] forKey:@"CustomerID"];
-                    [tempDict setObject:stringSection forKey:@"SPAJHtmlSection"];
+                    if (pageIndex>5){
+                        [tempDict setObject:stringSection forKey:@"SPAJHtmlSection"];
+                    }
+                    else{
+                        [tempDict setObject:stringParentSection forKey:@"SPAJHtmlSection"];
+                    }
+                    
                     int indexNo = [modelSPAJAnswers voidGetDuplicateRowID:tempDict];
                     
                     if (indexNo>0){
@@ -520,7 +590,12 @@
             
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 dispatch_sync(dispatch_get_main_queue(), ^{
-                    [delegate voidSetCalonPemegangPolisBoolValidate:true StringSection:stringSection];
+                    if (pageIndex>5){
+                        [delegate voidSetCalonPemegangPolisBoolValidate:true StringSection:stringSection];
+                    }
+                    else{
+                        [delegate voidSetCalonPemegangPolisBoolValidate:true StringSection:stringParentSection];
+                    }
                 });
             });
             
@@ -532,7 +607,14 @@
     NSString *SPAJTransactionID = [modelSPAJTransaction getSPAJTransactionData:@"SPAJTransactionID" StringWhereName:@"SPAJEappNumber" StringWhereValue:[delegate voidGetEAPPNumber]];
     NSMutableDictionary* modifiedParams = [[NSMutableDictionary alloc]initWithDictionary:[params valueForKey:@"data"]];
     NSMutableDictionary* tempDict = [[NSMutableDictionary alloc] initWithDictionary:[modifiedParams valueForKey:@"SPAJAnswers"]];
-    NSString* stringWhere = [NSString stringWithFormat:@"where CustomerID=%@ and SPAJID=%@ and SPAJTransactionID=%@ and SPAJHtmlSection='%@'",@"1",@"1",SPAJTransactionID,stringSection];
+    NSString* stringWhere;
+    if (pageIndex>5){
+        stringWhere = [NSString stringWithFormat:@"where CustomerID=%@ and SPAJID=%@ and SPAJTransactionID=%@ and SPAJHtmlSection='%@'",@"1",@"1",SPAJTransactionID,stringSection];
+    }
+    else{
+        stringWhere = [NSString stringWithFormat:@"where CustomerID=%@ and SPAJID=%@ and SPAJTransactionID=%@ and SPAJHtmlSection='%@'",@"1",@"1",SPAJTransactionID,stringParentSection];
+    }
+    
     /*if ([stringSection isEqualToString:@"KS_PH"]||[stringSection isEqualToString:@"KS_IN"]){
         stringWhere = [NSString stringWithFormat:@"where CustomerID=%@ and SPAJID=%@ and SPAJTransactionID=%@ and SPAJHtmlSection in ('%@','PO','TR')",@"1",@"1",SPAJTransactionID,stringSection];
     }
@@ -590,7 +672,7 @@
     NSString *SINO = [modelSPAJTransaction getSPAJTransactionData:@"SPAJSINO" StringWhereName:@"SPAJEappNumber" StringWhereValue:[delegate voidGetEAPPNumber]];
     NSDictionary* dictPOData = [[NSDictionary alloc ]initWithDictionary:[modelSIPData getPO_DataFor:SINO]];
     NSString *stringPOClientID;
-    if ([stringSection isEqualToString:@"PO"]){
+    if ([stringParentSection isEqualToString:@"PO"]){
         stringPOClientID = [dictPOData valueForKey:@"PO_ClientID"];
     }
     else{
@@ -691,7 +773,7 @@
     NSDictionary* dictPOData = [[NSDictionary alloc ]initWithDictionary:[modelSIPData getPO_DataFor:SINO]];
     NSDictionary* dictPremiData=[[NSDictionary alloc]initWithDictionary:[modelSIPremium getPremium_For:SINO]];
     NSMutableArray* arrayValue = [[NSMutableArray alloc] init];
-    if ([stringSection isEqualToString:@"PO"]){
+    if ([stringParentSection isEqualToString:@"PO"]){
         for (int i=0;i<[newElementArrayName count];i++){
             NSLog(@"indexpop %i",i);
             NSMutableDictionary* dictDetail = [[NSMutableDictionary alloc]initWithDictionary:[self ModifiedDictionary:[self OriginalDictionaryForAutoPopulate] OriginalElementName:[originalElementArrayName objectAtIndex:i] NewElementName:[newElementArrayName objectAtIndex:i]]];
@@ -709,7 +791,7 @@
         }
     }
     
-    else if ([stringSection isEqualToString:@"TR"]){
+    else if ([stringParentSection isEqualToString:@"TR"]){
         for (int i=0;i<[newElementArrayTertanggungName count];i++){
             NSMutableDictionary* dictDetail = [[NSMutableDictionary alloc]initWithDictionary:[self ModifiedDictionary:[self OriginalDictionaryForAutoPopulate] OriginalElementName:[originalElementArrayTertanggungName objectAtIndex:i] NewElementName:[newElementArrayTertanggungName objectAtIndex:i]]];
             [arrayValue addObject:dictDetail];
@@ -725,7 +807,7 @@
         }
 
     }
-    else if ([stringSection isEqualToString:@"PP"]){
+    else if ([stringParentSection isEqualToString:@"PP"]){
         NSString* stringPaymentFrequency = [formatter getPaymentFrequencyValue:[dictPremiData valueForKey:@"Payment_Frequency"]];
         NSMutableDictionary* dictRelWithLa = [[NSMutableDictionary alloc]initWithObjectsAndKeys:@"RadioButtonPremiPaymentFrequency",@"elementID",stringPaymentFrequency,@"Value", nil];
         

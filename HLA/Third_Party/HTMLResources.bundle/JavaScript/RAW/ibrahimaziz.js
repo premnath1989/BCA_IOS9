@@ -102,6 +102,8 @@ var stringIllnessSuffix = "Illness";
 var stringSexFemale = "female";
 var stringSexMale = "male";
 var arrayForeigner = [];
+var stringPageForeigner = false;
+var stringPageThirdParty = false; 
 
 
 // GENERATOR
@@ -3371,19 +3373,40 @@ function getFromDatabase(objectContent, stringPageType)
 		}
 		else
 		{
-			var stringThirdParty = arrayFind(objectContent, "RadioButtonPremiPaymentThirdPartyAnswer")
+			if (stringPageThirdParty == true)
+			{
+				var stringThirdParty = arrayFind(objectContent, "RadioButtonPremiPaymentThirdPartyAnswer")
 
-			if (stringThirdParty == "true")
+				if (stringThirdParty == "true")
+				{
+					$(stringKres + "ButtonPreviewPremiPaymentThirdParty").css("display", "block");
+				}
+				else if (stringThirdParty == "false")
+				{
+					$(stringKres + "ButtonPreviewPremiPaymentThirdParty").css("display", "none");
+				}
+				else
+				{
+
+				}
+			}						
+			
+			if (stringPageForeigner == true)
 			{
-				$(stringKres + "ButtonPreviewPremiPaymentThirdParty").css("display", "block");
-			}
-			else if (stringThirdParty == "false")
-			{
-				$(stringKres + "ButtonPreviewPremiPaymentThirdParty").css("display", "none");
-			}
-			else
-			{
-				
+				var stringForeigner = arrayFind(objectContent, "RadioButton" + stringPageInfixTypeCurrent + "Foreigner")
+
+				if (stringForeigner == "true")
+				{
+					$(stringKres + "ButtonPreview" + stringPageInfixTypeCurrent + "Foreigner").css("display", "block");
+				}
+				else if (stringForeigner == "false")
+				{
+					$(stringKres + "ButtonPreview" + stringPageInfixTypeCurrent + "Foreigner").css("display", "none");
+				}
+				else
+				{
+
+				}
 			}
 		}
 	}
@@ -3501,7 +3524,7 @@ function setToDatabase(stringPageType)
             arrayValidatePush(objectContent, stringKey, stringValue);
         }
     });
-    
+
     $("select").each(function()
     {
         var stringKey = $(this).attr("id");
@@ -3696,10 +3719,12 @@ stringValue)
        if (getRadioButtonGeneral(stringRadioButtonName) == stringValue)
        {
            $(stringTextID).prop("readonly", false);
+           $(stringTextID).prop("required", true);
        }
        else
        {
            $(stringTextID).prop("readonly", true);
+           $(stringTextID).prop("required", false);
            $(stringTextID).val("");
        }
    });
@@ -3718,16 +3743,19 @@ stringValue)
 			if (getCheckboxGeneral(stringCheckboxJavaScriptID) == stringValue)
 			{
 			   $(stringTextID).prop("readonly", false);
+			   $(stringTextID).prop("required", true);
 			}
 			else
 			{
 			   $(stringTextID).prop("readonly", true);
+			   $(stringTextID).prop("required", false);
 			   $(stringTextID).val("");
 			}
 		}
 		else
 		{
 			$(stringTextID).prop("readonly", true);
+			$(stringTextID).prop("required", false);
 			$(stringTextID).val("");	
 		}
 	});

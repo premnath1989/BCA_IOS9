@@ -2,21 +2,21 @@ __functionIndexMap = {};
 
 function calliOSFunction(functionName, successCallback, errorCallback, callInfo)
 {
-    var url = 'js-frame:';	
-	
+    var url = 'js-frame:';    
+    
     callInfo.functionname = functionName;
 
-	if (successCallback)
-	{
-		if (typeof successCallback == 'function')
-		{
-			var callbackFuncName = createCallbackFunction(functionName + '_' + 'successCallback', successCallback);
-			callInfo.success = callbackFuncName;
-		}
-		else
-		{
-			callInfo.success = successCallback;
-		}
+    if (successCallback)
+    {
+        if (typeof successCallback == 'function')
+        {
+            var callbackFuncName = createCallbackFunction(functionName + '_' + 'successCallback', successCallback);
+            callInfo.success = callbackFuncName;
+        }
+        else
+        {
+            callInfo.success = successCallback;
+        }
     }
 
     if (errorCallback)
@@ -32,10 +32,10 @@ function calliOSFunction(functionName, successCallback, errorCallback, callInfo)
         }
     }
 
-	url += JSON.stringify(callInfo);
-	var iFrame = createIFrame(url);
-	
-	iFrame.parentNode.removeChild(iFrame);
+    url += JSON.stringify(callInfo);
+    var iFrame = createIFrame(url);
+    
+    iFrame.parentNode.removeChild(iFrame);
 }
 
 function createCallbackFunction (funcName, callbackFunc)
@@ -72,11 +72,11 @@ function createCallbackFunction (funcName, callbackFunc)
 
 function createIFrame(src)
 {
-	var rootElm = document.documentElement;
-	var newFrameElm = document.createElement('IFRAME');
-	newFrameElm.setAttribute('src',src);
-	rootElm.appendChild(newFrameElm);
-	return newFrameElm;
+    var rootElm = document.documentElement;
+    var newFrameElm = document.createElement('IFRAME');
+    newFrameElm.setAttribute('src',src);
+    rootElm.appendChild(newFrameElm);
+    return newFrameElm;
 }
 
 function onSuccess (ret)
@@ -101,10 +101,10 @@ function onSuccess (ret)
 
 function onError (ret)
 {
-	if (ret)
-	{
-		var returnRet = JSON.parse(ret);
-		// alert(returnRet.error);
+    if (ret)
+    {
+        var returnRet = JSON.parse(ret);
+        // alert(returnRet.error);
     }
 }
 
@@ -120,308 +120,357 @@ function readfromDB()
 
 function savetoDB() 
 {
-	var stringValue;
-	var stringRadioButtonFlag = 0;
-	var booleanValidateState = true;	
+    var stringValue;
+    var stringRadioButtonFlag = 0;
+    var booleanValidateState = true;    
 
-	// QUICK FIX VALIDATION FOR FORM
-	
-	if (booleanValidateState == false)
-	{
-		
-	}
-	else
-	{
-		if (stringPageSectionCurrent != stringPageSectionBeneficiariesList)
-		{
-			$("input:text[required]").each(function()
-			{
-				stringValue = $(this).val();
-				var $label = $("label[for='"+this.id+"']")
+    // QUICK FIX VALIDATION FOR FORM
+    
+    if (booleanValidateState == false)
+    {
+        
+    }
+    else
+    {
+        if (stringPageSectionCurrent != stringPageSectionBeneficiariesList)
+        {
+            $("input:text[required]").each(function()
+            {
+                stringValue = $(this).val();
+                var $label = $("label[for='"+this.id+"']")
 
-				if (stringValue == undefined || stringValue == null || stringValue == "")
-				{	
-					ReplaceHTMLNameOnValidate("", $label.text() + " " + "harap diisi.");
-					// alert($label.text() + " " + "harap diisi.");
-					booleanValidateState = false;
-					return false;
-				}
-				else
-				{
+                if (stringValue == undefined || stringValue == null || stringValue == "")
+                {
+                    if ($(this).attr('data-validation') == null)
+                    {
+                        ReplaceHTMLNameOnValidate("", $label.text() + " " + "harap diisi.");
+                    }
+                    else
+                    {
+                        ReplaceHTMLNameOnValidate("", $(this).attr('data-validation') + " " + "harap dipilih.");
+                    };
 
-				}
-			});
-		}
-		else
-		{
-			
-		}
-	}
-	
-	if (booleanValidateState == false)
-	{
-		
-	}
-	else
-	{
-		var booleanIncomeState = false;
+                    booleanValidateState = false;
+                    return false;
+                }
+                else
+                {
 
-		if (stringPageValidationCurrent == stringPageValidationIncome)
-		{
-			$("input:text[data-customvalidation='" + stringPageValidationIncome + "']").each(function()
-			{
-				if ($(this).val() > 0)
-				{
-					booleanIncomeState = true;
-					return false;
-				}
-				else
-				{
+                }
+            });
 
-				}
-			});
+            
+        }
+        else
+        {
+            
+        }
+    }
 
-			if (booleanIncomeState == false)
-			{
-				booleanValidateState = false;
-				ReplaceHTMLNameOnValidate("","Harap mengisi penghasilan kotor minimum satu jenis");
-				// alert("Harap mengisi penghasilan kotor minimum satu jenis !.");
-			}
-			else
-			{
+    if (booleanValidateState == false)
+    {
+        
+    }
+    else
+    {
+        var stringCheckboxName;
 
-			}
-		}
-		else
-		{
+        $("input[type=checkbox][required]").each(function()
+        {
+            stringCheckboxName = $(this).attr("name");
+            var $label = $("label[for='"+this.name+"']")
+            var booleanValidateCheckbox = false;
+            
+            $("input[type=checkbox][name='" + stringCheckboxName + "']").each(function()
+            {
+                if($(this).prop("checked") == true)
+                {
+                    booleanValidateCheckbox = true;
+                    return false;
+                }
+                else
+                {
 
-		}
-	}
-	
-	if (booleanValidateState == false)
-	{
-		
-	}
-	else
-	{
-		if (stringPageSectionCurrent != stringPageSectionBeneficiariesList)
-		{
-			$("input:radio[required]").each(function()
-			{												
-				stringValue = getRadioButtonGeneral($(this).attr("name"));						
-				var $label = $("label[for='"+this.name+"']")				
-				if (stringRadioButtonFlag != $(this).attr("name"))
-				{
-					if (stringValue == undefined)
-					{
-						// alert("invalid : " + $(this).attr("name") + " " + stringValue);
-						ReplaceHTMLNameOnValidate("", $label.text() + " " + "harap dipilih.");
+                }
+            });
+            
+            if(booleanValidateCheckbox == false)
+            {
+                ReplaceHTMLNameOnValidate("", $label.text() + " " + "harap diisi.");
+                booleanValidateState = false;
+                return false;
+            }
+            else
+            {
 
-						booleanValidateState = false;
-						return false;
-					}				
-					else
-					{
-						// alert("valid : " + $(this).attr("name") + " " + stringValue);
-					}
+            }
+        });
+    }
+    
+    if (booleanValidateState == false)
+    {
+        
+    }
+    else
+    {
+        var booleanIncomeState = false;
 
-					stringRadioButtonFlag = $(this).attr("name");
-				}
-				else
-				{
+        if (stringPageValidationCurrent == stringPageValidationIncome)
+        {
+            $("input:text[data-customvalidation='" + stringPageValidationIncome + "']").each(function()
+            {
+                if ($(this).val() > 0)
+                {
+                    booleanIncomeState = true;
+                    return false;
+                }
+                else
+                {
 
-				}
-			});
-		}
-		else
-		{
-			
-		}
-	}
+                }
+            });
 
-	
-	// VALIDATION FOR BENEFICIARIES LIST
-	
-	if (stringPageSectionCurrent == stringPageSectionBeneficiariesList)
-	{
-		if (booleanValidateState == false)
-		{
-			
-		}
-		else
-		{
-			if (intSharePercentage != 100)
-			{
-				ReplaceHTMLNameOnValidate("","Jumlah share percentage harus 100 !.");
-				//alert("Jumlah share percentage harus 100 !.");
-				booleanValidateState = false;
-				return false;
-			}				
-			else
-			{
-				
-			}
-		}
-		
-		if (booleanValidateState == false)
-		{
-			
-		}
-		else
-		{
-			var stringBeneficiariesListPrefix = stringPrefixText + stringBeneficiariesListInfix + "FullName";
-			var stringBeneficiariesListFilter;
-			var arrayBeneficiariesListTemporary = [];
-			var booleanBeneficiariesList = false;
-			
-			for (var k = 0; k < arrayBeneficiariesList.length; k++)
-			{
-				stringBeneficiariesListFilter = arrayBeneficiariesList[k].elementID.substring(0, stringBeneficiariesListPrefix.length)
-				
-				if (stringBeneficiariesListFilter == stringBeneficiariesListPrefix)
-				{
-					booleanBeneficiariesList = true;
-				}
-				else
-				{
-					
-				}
-			}
-			
-			if (booleanBeneficiariesList == false)
-			{
-				ReplaceHTMLNameOnValidate("","Masukkan daftar penerima manfaat paling tidak satu !.");
-				//alert("Jumlah share percentage harus 100 !.");
-				booleanValidateState = false;
-				return false;
-			}				
-			else
-			{
-				
-			}
-		}
-	}
-	else
-	{
-		
-	}
-	
-	
-	// SPECIFIC VALIDATION
-	
-	if (booleanValidateState == false)
-	{
-		// alert("specific validation not enter" + booleanValidateState);
-	}
-	else
-	{
-		// alert("specific validation enter" + booleanValidateState);
-		$("input:text").each(function()
-		{
-			if ($(this).attr("data-validation") == stringPrefixEmail)
-			{
-				// alert("email id " + $(this).attr("id"));
-				booleanValidateState = validateEmail($(this).attr("id"));
-				
-				if (booleanValidateState == false)
-				{					
-					return false;
-				}
-				else
-				{
-					
-				}
-			}
-			else
-			{
-				
-			}
-		});
-	}
-	
-	
-	// SAVE TO DATABASE
-	
-	if (booleanValidateState == false)
-	{
-		
-	}
-	else
-	{
-		
-		var objectContent;    			
-		
-		if (stringPageSectionCurrent == stringPageSectionHealthQuestionnaire)
-		{			
-			// HARDCODE QUICK FIX FOR INPUT TEXT
-					
-			var stringInfixHardcode= stringPageInfixTypeCurrent;
+            if (booleanIncomeState == false)
+            {
+                booleanValidateState = false;
+                ReplaceHTMLNameOnValidate("","Harap mengisi penghasilan kotor minimum satu jenis");
+                // alert("Harap mengisi penghasilan kotor minimum satu jenis !.");
+            }
+            else
+            {
 
-			var stringHeightJavaScriptID = stringPrefixText + stringInfixHardcode + "Height";
-			var stringHeightJQueryID = stringKres + stringHeightJavaScriptID;
-			var stringHeightValue = getTextForm(stringHeightJavaScriptID);
-			var stringWeightJavaScriptID = stringPrefixText + stringInfixHardcode + "Weight";
-			var stringWeightJQueryID = stringKres + stringHeightJavaScriptID;
-			var stringWeightValue = getTextForm(stringWeightJavaScriptID);
-			var stringBabyHeightJavaScriptID = stringPrefixText + stringInfixHardcode + "BabyHeight";
-			var stringBabyHeightJQueryID = stringKres + stringHeightJavaScriptID;
-			var stringBabyHeightValue = getTextForm(stringBabyHeightJavaScriptID);
-			var stringBabyWeightJavaScriptID = stringPrefixText + stringInfixHardcode + "BabyWeight";
-			var stringBabyWeightJQueryID = stringKres + stringHeightJavaScriptID;
-			var stringBabyWeightValue = getTextForm(stringBabyWeightJavaScriptID);
-			var stringPregnantWeekJavaScriptID = stringPrefixText + stringInfixHardcode + "PregnantWeek";
-			var stringPregnantWeekJQueryID = stringKres + stringPregnantWeekJavaScriptID;
-			var stringPregnantWeekValue = getTextForm(stringPregnantWeekJavaScriptID);
-			var stringPregnantJavaScriptID = stringPrefixRadioButton + stringInfixHardcode + "Pregnant";
-			var stringPregnantJQueryID = stringKres + stringPregnantJavaScriptID;
-			var stringPregnantValue = getRadioButtonGeneral(stringPregnantJavaScriptID);
-			var stringPregnancyJavaScriptID = stringPrefixRadioButton + stringInfixHardcode + "Pregnancy";
-			var stringPregnancyJQueryID = stringKres + stringPregnancyJavaScriptID;
-			var stringPregnancyValue = getRadioButtonGeneral(stringPregnancyJavaScriptID);
-			var stringWeightChangeJavaScriptID = stringPrefixRadioButton + stringInfixHardcode + "WeightChange";
-			var stringWeightChangeJQueryID = stringKres + stringWeightChangeJavaScriptID;
-			var stringWeightChangeValue = getRadioButtonGeneral(stringWeightChangeJavaScriptID);
+            }
+        }
+        else
+        {
 
-			arrayValidatePush(arrayHealthQuestionnaire, stringHeightJavaScriptID, stringHeightValue);
-			arrayValidatePush(arrayHealthQuestionnaire, stringWeightJavaScriptID, stringWeightValue);
-			arrayValidatePush(arrayHealthQuestionnaire, stringBabyHeightJavaScriptID, stringBabyHeightValue);
-			arrayValidatePush(arrayHealthQuestionnaire, stringBabyWeightJavaScriptID, stringBabyWeightValue);
-			arrayValidatePush(arrayHealthQuestionnaire, stringPregnantWeekJavaScriptID, stringPregnantWeekValue);
-			arrayValidatePush(arrayHealthQuestionnaire, stringPregnantJavaScriptID, stringPregnantValue);
-			arrayValidatePush(arrayHealthQuestionnaire, stringPregnancyJavaScriptID, stringPregnancyValue);
-			arrayValidatePush(arrayHealthQuestionnaire, stringWeightChangeJavaScriptID, stringWeightChangeValue);
+        }
+    }
+    
+    if (booleanValidateState == false)
+    {
+        
+    }
+    else
+    {
+        if (stringPageSectionCurrent != stringPageSectionBeneficiariesList)
+        {
+            $("input:radio[required]").each(function()
+            {                    
+                stringValue = getRadioButtonGeneral($(this).attr("name"));                        
+                var $label = $("label[for='"+this.name+"']")                
+                if (stringRadioButtonFlag != $(this).attr("name"))
+                {
+                    if (stringValue == undefined)
+                    {
+                        // alert("invalid : " + $(this).attr("name") + " " + stringValue);
+                        ReplaceHTMLNameOnValidate("", $label.text() + " " + "harap dipilih.");
 
-			objectContent = arrayHealthQuestionnaire;
-		}
-		else if (stringPageSectionCurrent == stringPageSectionBeneficiariesList)
-		{			
-			objectContent = arrayBeneficiariesList;
-		}
-		else
-		{
-			objectContent = setToDatabase(stringPageTypeCurrent);
-			
-			if (arrayForeigner.length == 0)
-			{
-				
-			}
-			else
-			{
-				arrayTransfer(arrayForeigner, objectContent);
-			}
-			
-			// previewArrayObject(objectContent);
-		}
+                        booleanValidateState = false;
+                        return false;
+                    }                
+                    else
+                    {
+                        // alert("valid : " + $(this).attr("name") + " " + stringValue);
+                    }
 
-		var jsonToDatabase = JSONGenerator(objectContent);
-		booleanInputChangeState = "false";
+                    stringRadioButtonFlag = $(this).attr("name");
+                }
+                else
+                {
 
-		calliOSFunction('savetoDB:',onSuccess,onError, jsonToDatabase);
+                }
+            });
+        }
+        else
+        {
+            
+        }
+    }
 
-		arrayHealthQuestionnaire = [];
-		arrayBeneficiariesList = [];
-		arrayForeigner = [];
-	}
+    
+    // VALIDATION FOR BENEFICIARIES LIST
+    
+    if (stringPageSectionCurrent == stringPageSectionBeneficiariesList)
+    {
+        if (booleanValidateState == false)
+        {
+            
+        }
+        else
+        {
+            if (intSharePercentage != 100)
+            {
+                ReplaceHTMLNameOnValidate("","Jumlah share percentage harus 100 !.");
+                //alert("Jumlah share percentage harus 100 !.");
+                booleanValidateState = false;
+                return false;
+            }                
+            else
+            {
+                
+            }
+        }
+        
+        if (booleanValidateState == false)
+        {
+            
+        }
+        else
+        {
+            var stringBeneficiariesListPrefix = stringPrefixText + stringBeneficiariesListInfix + "FullName";
+            var stringBeneficiariesListFilter;
+            var arrayBeneficiariesListTemporary = [];
+            var booleanBeneficiariesList = false;
+            
+            for (var k = 0; k < arrayBeneficiariesList.length; k++)
+            {
+                stringBeneficiariesListFilter = arrayBeneficiariesList[k].elementID.substring(0, stringBeneficiariesListPrefix.length)
+                
+                if (stringBeneficiariesListFilter == stringBeneficiariesListPrefix)
+                {
+                    booleanBeneficiariesList = true;
+                }
+                else
+                {
+                    
+                }
+            }
+            
+            if (booleanBeneficiariesList == false)
+            {
+                ReplaceHTMLNameOnValidate("","Masukkan daftar penerima manfaat paling tidak satu !.");
+                //alert("Jumlah share percentage harus 100 !.");
+                booleanValidateState = false;
+                return false;
+            }                
+            else
+            {
+                
+            }
+        }
+    }
+    else
+    {
+        
+    }
+    
+    
+    // SPECIFIC VALIDATION
+    
+    if (booleanValidateState == false)
+    {
+        // alert("specific validation not enter" + booleanValidateState);
+    }
+    else
+    {
+        // alert("specific validation enter" + booleanValidateState);
+        $("input:text").each(function()
+        {
+            if ($(this).attr("data-validation") == stringPrefixEmail)
+            {
+                // alert("email id " + $(this).attr("id"));
+                booleanValidateState = validateEmail($(this).attr("id"));
+                
+                if (booleanValidateState == false)
+                {                    
+                    return false;
+                }
+                else
+                {
+                    
+                }
+            }
+            else
+            {
+                
+            }
+        });
+    }
+    
+    
+    // SAVE TO DATABASE
+    
+    if (booleanValidateState == false)
+    {
+        
+    }
+    else
+    {
+        
+        var objectContent;                
+        
+        if (stringPageSectionCurrent == stringPageSectionHealthQuestionnaire)
+        {            
+            // HARDCODE QUICK FIX FOR INPUT TEXT
+                    
+            var stringInfixHardcode= stringPageInfixTypeCurrent;
+
+            var stringHeightJavaScriptID = stringPrefixText + stringInfixHardcode + "Height";
+            var stringHeightJQueryID = stringKres + stringHeightJavaScriptID;
+            var stringHeightValue = getTextForm(stringHeightJavaScriptID);
+            var stringWeightJavaScriptID = stringPrefixText + stringInfixHardcode + "Weight";
+            var stringWeightJQueryID = stringKres + stringHeightJavaScriptID;
+            var stringWeightValue = getTextForm(stringWeightJavaScriptID);
+            var stringBabyHeightJavaScriptID = stringPrefixText + stringInfixHardcode + "BabyHeight";
+            var stringBabyHeightJQueryID = stringKres + stringHeightJavaScriptID;
+            var stringBabyHeightValue = getTextForm(stringBabyHeightJavaScriptID);
+            var stringBabyWeightJavaScriptID = stringPrefixText + stringInfixHardcode + "BabyWeight";
+            var stringBabyWeightJQueryID = stringKres + stringHeightJavaScriptID;
+            var stringBabyWeightValue = getTextForm(stringBabyWeightJavaScriptID);
+            var stringPregnantWeekJavaScriptID = stringPrefixText + stringInfixHardcode + "PregnantWeek";
+            var stringPregnantWeekJQueryID = stringKres + stringPregnantWeekJavaScriptID;
+            var stringPregnantWeekValue = getTextForm(stringPregnantWeekJavaScriptID);
+            var stringPregnantJavaScriptID = stringPrefixRadioButton + stringInfixHardcode + "Pregnant";
+            var stringPregnantJQueryID = stringKres + stringPregnantJavaScriptID;
+            var stringPregnantValue = getRadioButtonGeneral(stringPregnantJavaScriptID);
+            var stringPregnancyJavaScriptID = stringPrefixRadioButton + stringInfixHardcode + "Pregnancy";
+            var stringPregnancyJQueryID = stringKres + stringPregnancyJavaScriptID;
+            var stringPregnancyValue = getRadioButtonGeneral(stringPregnancyJavaScriptID);
+            var stringWeightChangeJavaScriptID = stringPrefixRadioButton + stringInfixHardcode + "WeightChange";
+            var stringWeightChangeJQueryID = stringKres + stringWeightChangeJavaScriptID;
+            var stringWeightChangeValue = getRadioButtonGeneral(stringWeightChangeJavaScriptID);
+
+            arrayValidatePush(arrayHealthQuestionnaire, stringHeightJavaScriptID, stringHeightValue);
+            arrayValidatePush(arrayHealthQuestionnaire, stringWeightJavaScriptID, stringWeightValue);
+            arrayValidatePush(arrayHealthQuestionnaire, stringBabyHeightJavaScriptID, stringBabyHeightValue);
+            arrayValidatePush(arrayHealthQuestionnaire, stringBabyWeightJavaScriptID, stringBabyWeightValue);
+            arrayValidatePush(arrayHealthQuestionnaire, stringPregnantWeekJavaScriptID, stringPregnantWeekValue);
+            arrayValidatePush(arrayHealthQuestionnaire, stringPregnantJavaScriptID, stringPregnantValue);
+            arrayValidatePush(arrayHealthQuestionnaire, stringPregnancyJavaScriptID, stringPregnancyValue);
+            arrayValidatePush(arrayHealthQuestionnaire, stringWeightChangeJavaScriptID, stringWeightChangeValue);
+
+            objectContent = arrayHealthQuestionnaire;
+        }
+        else if (stringPageSectionCurrent == stringPageSectionBeneficiariesList)
+        {            
+            objectContent = arrayBeneficiariesList;
+        }
+        else
+        {
+            objectContent = setToDatabase(stringPageTypeCurrent);
+            
+            if (arrayForeigner.length == 0)
+            {
+                
+            }
+            else
+            {
+                arrayTransfer(arrayForeigner, objectContent);
+            }
+            
+            // previewArrayObject(objectContent);
+        }
+
+        var jsonToDatabase = JSONGenerator(objectContent);
+        booleanInputChangeState = "false";
+
+        calliOSFunction('savetoDB:',onSuccess,onError, jsonToDatabase);
+
+        arrayHealthQuestionnaire = [];
+        arrayBeneficiariesList = [];
+        arrayForeigner = [];
+    }
 }
 
 function PrintData()
@@ -436,9 +485,10 @@ function AutoPopulate(jsonObject)
     
     if (stringType == "autopopulateFromDB")
     {
+        // alert("begin" + "autopopulate");
+        // previewArrayObject(objectContent.result.autopopulateFromDB);
         getFromDatabase(objectContent.result.autopopulateFromDB, stringPageTypeCurrent);
-        // alert("autopopulate");
-        // previewArrayObject(objectContent.result.autopopulateFromDB);              
+        // alert("finish" + "autopopulate");
     }
     else
     {
@@ -453,12 +503,12 @@ function ReadData()
 
 function ReplaceHTMLNameOnValidate(title, body)
 {
-	var callInfo = {};
-	callInfo.data = {};
-	callInfo.data.title = title;
-	callInfo.data.body = body;
-	
-	// alert(title + '' + body);
-	//call the wrapper with the parameterized info
-	calliOSFunction('showAlert:',onSuccess,onError, callInfo);
+    var callInfo = {};
+    callInfo.data = {};
+    callInfo.data.title = title;
+    callInfo.data.body = body;
+    
+    // alert(title + '' + body);
+    //call the wrapper with the parameterized info
+    calliOSFunction('showAlert:',onSuccess,onError, callInfo);
 }

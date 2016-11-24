@@ -15,6 +15,7 @@
 #import "SIUnitLinkedPolicyHolderViewController.h"
 #import "SIUnitLinkedSpecialOptionViewController.h"
 #import "ModelSIPOData.h"
+#import "Model_SI_Master.h"
 #import "ModelSIULBasicPlan.h"
 
 @interface SIMenuUnitLinkedViewController ()<ULPolicyHolderViewControllerDelegate,ULLifeAssuredViewControllerDelegate,ULBasicPlanViewControllerDelegate,ULRiderViewControllerDelegate,ULSpecialOptionViewControllerDelegate,ULFundAllocationViewControllerDelegate>{
@@ -28,6 +29,7 @@
     
     ModelSIPOData *modelSIPOData;
     ModelSIULBasicPlan *modelSIULBasicPlan;
+    Model_SI_Master *modelSIMaster;
 }
 
 @end
@@ -74,6 +76,7 @@
     
     modelSIPOData = [[ModelSIPOData alloc]init];
     modelSIULBasicPlan = [[ModelSIULBasicPlan alloc]init];
+    modelSIMaster = [[Model_SI_Master alloc] init];
     
     arrayIntValidate = [[NSMutableArray alloc] initWithObjects:@"0",@"0",@"0",@"0",@"0",@"0",@"0", nil];
     NumberListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"1", @"2", @"3", @"4",@"5",@"6",@"7", nil];
@@ -100,6 +103,14 @@
             [viewRightView addSubview:[arrayUnitLinkedModuleView objectAtIndex:i]];
         }
     }
+}
+
+#pragma mark Save SIMaster
+
+-(void)saveSIMaster{
+    NSMutableDictionary *dictionaryMasterForInsert = [[NSMutableDictionary alloc]initWithObjectsAndKeys:[[self getPOLADictionary] valueForKey:@"SINO"],@"SINO",@"1.1",@"SI_Version",@"Not Created",@"ProposalStatus", nil];
+    
+    [modelSIMaster saveIlustrationMaster:dictionaryMasterForInsert];
 }
 
 #pragma mark delegate Fund Allocation

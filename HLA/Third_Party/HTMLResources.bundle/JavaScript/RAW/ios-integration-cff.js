@@ -221,7 +221,7 @@ function savetoDB()
 						}
 						else
 						{
-							alert($(this).attr('data-validation') + " " + "harap dipilih.");
+							// alert($(this).attr('data-validation') + " " + "harap dipilih.");
 							ReplaceHTMLNameOnValidate("", $(this).attr('data-validation') + " " + "harap dipilih.");
 						};
 						

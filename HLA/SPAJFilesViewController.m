@@ -132,7 +132,8 @@
         NSString *matchActivity = @"*activityquestionnairepdf*";
         NSString *matchHealthIndo = @"*kuesionerkesehatan*";
         NSString *matchActivityIndo = @"*kuesioneraktivitas*";
-        NSPredicate *predicateHealth = [NSPredicate predicateWithFormat:@"SELF like %@ or SELF like %@ or SELF like %@ or SELF like %@", matchHealth,matchActivity,matchHealthIndo,matchActivityIndo];
+        NSString *matchActivityForeigner = @"*wna*";
+        NSPredicate *predicateHealth = [NSPredicate predicateWithFormat:@"SELF like %@ or SELF like %@ or SELF like %@ or SELF like %@ or SELF like %@", matchHealth,matchActivity,matchHealthIndo,matchActivityIndo,matchActivityForeigner];
         
         arrayFinalSort = [[arrayFinalSort filteredArrayUsingPredicate:predicateHealth] mutableCopy];
     }

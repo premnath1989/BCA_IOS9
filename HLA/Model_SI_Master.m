@@ -367,4 +367,38 @@
     }
 }
 
+-(int)getSIMasterCount:(NSString *)SINo{
+    int count;
+    
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select count(*) from SI_Master where SINO = \"%@\"",SINo]];
+    while ([s next]) {
+        count = [s intForColumn:@"count(*)"];
+    }
+    
+    [results close];
+    [database close];
+    return count;
+}
+
+-(void)saveSIMaster:(NSDictionary *)dataIlustration{
+    //cek the SINO exist or not
+    int exist = [self getSIMasterCount:[dataIlustration valueForKey:@"SINO"]];
+    
+    if (exist>0){
+        //update data
+        [self updateIlustrationMaster:dataIlustration];
+    }
+    else{
+        //insert data
+        [self saveIlustrationMaster:dataIlustration];
+    }
+}
+
+
 @end

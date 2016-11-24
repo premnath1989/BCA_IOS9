@@ -4,64 +4,64 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="BPreplay_Bold.ttf">
-            <string>BPreplay-Bold</string>
+        <mutableArray key="BPreplay.otf">
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
         </mutableArray>
-        <mutableArray key="BPreplay_Regular.ttf">
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
+        <mutableArray key="BPreplay_Bold.otf">
+            <string>BPreplay-Bold</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -566,7 +566,7 @@
                                         <color key="textColor" red="0.34509803919999998" green="0.34901960780000002" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="av2-Bz-avD">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="av2-Bz-avD">
                                         <rect key="frame" x="631" y="610" width="79" height="47"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>

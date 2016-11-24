@@ -76,7 +76,7 @@
 @synthesize HLController = _HLController;
 id RiderCount;
 @synthesize isNewSI;
-
+@synthesize planName;
 
 const NSString * SUM_MSG_HLACP = @"Guaranteed Yearly Income";
 const NSString * SUM_MSG_L100 = @"Basic Sum Assured";

@@ -1133,14 +1133,22 @@ NSString* const stateIMGGeneration = @"IMG";
         
         indexImgForPDFGeneration = 0;
         if ([[dictionaryPOData valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"]){
-            arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH\",\"TP" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]]];
+            //arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH\",\"TP" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]]];
             
-            arrayIMGTranslateName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlTranslateName" SPAJSection:@"IMG_PH\",\"TP" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]]];
+            //arrayIMGTranslateName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlTranslateName" SPAJSection:@"IMG_PH\",\"TP" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]]];
+            
+            arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH\",\"FRG_PH\",\"TP" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]]];
+            
+            arrayIMGTranslateName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlTranslateName" SPAJSection:@"IMG_PH\",\"FRG_PH\",\"TP" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]]];
         }
         else{
-            arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH\",\"IMG_IN\",\"TP"]];
+            //arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH\",\"IMG_IN\",\"TP"]];
             
-            arrayIMGTranslateName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlTranslateName" SPAJSection:@"IMG_PH\",\"IMG_IN\",\"TP" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]]];
+            //arrayIMGTranslateName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlTranslateName" SPAJSection:@"IMG_PH\",\"IMG_IN\",\"TP" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]]];
+            
+            arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH\",\"IMG_IN\",\"FRG_PH\",\"FRG_IN\",\"TP"]];
+            
+            arrayIMGTranslateName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlTranslateName" SPAJSection:@"IMG_PH\",\"IMG_IN\",\"FRG_PH\",\"FRG_IN\",\"TP" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]]];
         }
         
         if ([arrayIMGName count]>0){
@@ -1424,7 +1432,11 @@ NSString* const stateIMGGeneration = @"IMG";
                     countElement = [modelSPAJAnswers getCountElementID:@"digestdetail" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"KS_IN"];
                 }
                 else if ([allAboutPDFGeneration doesString:stringName containCharacter:@"oilgas"]){
-                    countElement = [modelSPAJAnswers getCountElementID:@"mining" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"KS_IN"];
+                    countElement = [modelSPAJAnswers getCountElementID:@"mining" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue]
+                                                               Section:@"KS_IN"];
+                }
+                else if ([allAboutPDFGeneration doesString:stringName containCharacter:@"foreigner"]){
+                    countElement = [modelSPAJAnswers getCountElementID:@"Foreigner" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"TR"];
                 }
                 else{
                     countElement = [modelSPAJAnswers getCountElementID:stringName SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"KS_IN"];
@@ -1445,6 +1457,9 @@ NSString* const stateIMGGeneration = @"IMG";
                 }
                 else if ([allAboutPDFGeneration doesString:stringName containCharacter:@"oilgas"]){
                     countElement = [modelSPAJAnswers getCountElementID:@"mining" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"KS_PH"];
+                }
+                else if ([allAboutPDFGeneration doesString:stringName containCharacter:@"foreigner"]){
+                    countElement = [modelSPAJAnswers getCountElementID:@"Foreigner" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"PO"];
                 }
                 else{
                     countElement = [modelSPAJAnswers getCountElementID:stringName SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"KS_PH"];
@@ -1590,6 +1605,11 @@ NSString* const stateIMGGeneration = @"IMG";
                     [webview stringByEvaluatingJavaScriptFromString:functionCall];
                     [self performSelector:@selector(performReadFromDB) withObject:nil afterDelay:0.5];
                     //[webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"readfromDB();"]];
+                }
+                else if ([[arrayIMGName objectAtIndex:indexImgForPDFGeneration]rangeOfString:@"foreigner"].location != NSNotFound){
+                    NSString *functionCall = [NSString stringWithFormat:@"setSignatureImage([%@])", [listArrayFiles componentsJoinedByString:@","]];
+                    [webview stringByEvaluatingJavaScriptFromString:functionCall];
+                    [self performSelector:@selector(performReadFromDB) withObject:nil afterDelay:0.5];
                 }
                 else{
                     [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"readfromDB();"]];

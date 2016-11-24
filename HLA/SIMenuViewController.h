@@ -159,6 +159,7 @@
 @property (nonatomic,strong) PayorHandler *menuPH;
 @property (nonatomic,strong) SecondLAHandler *menuLa2ndH;
 @property (nonatomic,strong) id requestSINo;
+@property (nonatomic,strong) NSString* planName;
 @property (nonatomic,strong) id requestSINo2;
 @property (nonatomic,strong) id SaveSINO;
 @property (nonatomic,strong) id EAPPorSI;

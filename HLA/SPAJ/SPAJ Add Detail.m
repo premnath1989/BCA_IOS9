@@ -84,6 +84,9 @@
 @synthesize stringGlobalEAPPNumber;
 @synthesize dictTransaction;
 
+    -(void)viewWillAppear:(BOOL)animated{
+        [self voidCheckBooleanLastState];
+    }
 
     -(void)viewDidAppear:(BOOL)animated{
         /*[_tableSection selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
@@ -163,7 +166,7 @@
         boolPenerimaManfaat = false;
         boolPembayaranPremi = false;
         boolKesehatan = false;
-        [self voidCheckBooleanLastState];
+        //[self voidCheckBooleanLastState];
         
         [self voidCreateRightBarButton];
     }

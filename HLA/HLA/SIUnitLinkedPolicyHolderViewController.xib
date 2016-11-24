@@ -4,32 +4,28 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <customFonts key="customFonts">
+        <mutableArray key="BPreplay.otf">
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+        </mutableArray>
         <mutableArray key="BPreplay_Italics.ttf">
             <string>BPreplay-Italic</string>
             <string>BPreplay-Italic</string>
             <string>BPreplay-Italic</string>
             <string>BPreplay-Italic</string>
-            <string>BPreplay-Italic</string>
-        </mutableArray>
-        <mutableArray key="BPreplay_Regular.otf">
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -44,6 +40,7 @@
                 <outlet property="labelQuickQuote" destination="ePl-NX-jSn" id="jg9-uQ-mFq"/>
                 <outlet property="scrollPolicyHolder" destination="loK-iY-6ta" id="XNi-Bp-Sgr"/>
                 <outlet property="segmentSex" destination="PLg-NK-0Ea" id="Me1-WX-sSN"/>
+                <outlet property="segmentSmoker" destination="dfT-oN-uDx" id="Xko-Dp-hlu"/>
                 <outlet property="textIllustrationNumber" destination="rl3-72-hwg" id="Yz3-5b-KkC"/>
                 <outlet property="textPO" destination="tkX-mw-bun" id="HKv-v2-uhX"/>
                 <outlet property="textPOAge" destination="Gow-lA-XXi" id="eUU-gi-c0B"/>
@@ -67,6 +64,9 @@
                             <barButtonItem key="leftBarButtonItem" id="Zuh-Pa-4OW"/>
                             <barButtonItem key="rightBarButtonItem" title="Done" id="onV-Tq-CAI">
                                 <color key="tintColor" red="0.85490196080000003" green="0.19215686269999999" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="actionSaveData:" destination="-1" id="7Ka-j6-dMj"/>
+                                </connections>
                             </barButtonItem>
                         </navigationItem>
                     </items>
@@ -176,6 +176,9 @@
                                 <segment title="Wanita"/>
                             </segments>
                             <color key="tintColor" red="0.85490196080000003" green="0.19215686269999999" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="actionSegmentGender:" destination="-1" eventType="valueChanged" id="rOs-xO-dd0"/>
+                            </connections>
                         </segmentedControl>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="clx-Xz-Kkg">
                             <rect key="frame" x="261" y="240" width="220" height="30"/>
@@ -265,36 +268,15 @@
                                 <action selector="actionPOList:" destination="-1" eventType="touchUpInside" id="qwD-R7-Hqt"/>
                             </connections>
                         </button>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Penghasilan Per Bulan" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="AGS-kf-tQO">
-                            <rect key="frame" x="30" y="318" width="162" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
-                            <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Perokok" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="dU9-Eg-6sA">
-                            <rect key="frame" x="27" y="395" width="224" height="30"/>
+                            <rect key="frame" x="27" y="316" width="224" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
                             <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Tanggal Dimulai" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="hfI-Tf-0pU">
-                            <rect key="frame" x="30" y="356" width="221" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
-                            <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="16" clearButtonMode="whileEditing" id="dHq-os-FdC">
-                            <rect key="frame" x="261" y="318" width="219" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="textColor" red="0.34509803919999998" green="0.34901960780000002" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
-                            <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
-                            <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
-                        </textField>
                         <segmentedControl contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" id="dfT-oN-uDx">
-                            <rect key="frame" x="261" y="397" width="220" height="29"/>
+                            <rect key="frame" x="261" y="318" width="220" height="29"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <segments>
@@ -302,44 +284,33 @@
                                 <segment title="Tidak"/>
                             </segments>
                             <color key="tintColor" red="0.85490196080000003" green="0.19215686269999999" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
-                        </segmentedControl>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="OnB-2P-71M">
-                            <rect key="frame" x="261" y="357" width="220" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.85490196080000003" green="0.19215686269999999" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
-                            <fontDescription key="fontDescription" name="BPreplay-Italic" family="BPreplay" pointSize="16"/>
-                            <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" title="--Please Select--">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
                             <connections>
-                                <action selector="actionDOB:" destination="-1" eventType="touchUpInside" id="1ZE-Jk-tSP"/>
+                                <action selector="actionSegmentSmoker:" destination="-1" eventType="valueChanged" id="uTL-Vk-0vJ"/>
                             </connections>
-                        </button>
+                        </segmentedControl>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9rP-mB-HvV">
-                            <rect key="frame" x="695" y="433" width="7" height="30"/>
+                            <rect key="frame" x="695" y="354" width="7" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
                             <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Pekerjaan Pemegang Polis" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="vZT-JT-jpb">
-                            <rect key="frame" x="31" y="433" width="221" height="30"/>
+                            <rect key="frame" x="31" y="354" width="221" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
                             <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Hubungan Dengan Tertanggung " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="pKW-iJ-mqZ">
-                            <rect key="frame" x="31" y="471" width="221" height="30"/>
+                            <rect key="frame" x="31" y="392" width="221" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
                             <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="YFl-gu-ewd">
-                            <rect key="frame" x="262" y="433" width="430" height="30"/>
+                            <rect key="frame" x="262" y="354" width="430" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.85490196080000003" green="0.19215686269999999" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" name="BPreplay-Italic" family="BPreplay" pointSize="16"/>
@@ -353,7 +324,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="NII-XS-gVa">
-                            <rect key="frame" x="262" y="471" width="220" height="30"/>
+                            <rect key="frame" x="262" y="392" width="220" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.85490196080000003" green="0.19215686269999999" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" name="BPreplay-Italic" family="BPreplay" pointSize="16"/>
@@ -367,7 +338,7 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PxI-CT-PAP">
-                            <rect key="frame" x="483" y="471" width="7" height="30"/>
+                            <rect key="frame" x="483" y="392" width="7" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
                             <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>

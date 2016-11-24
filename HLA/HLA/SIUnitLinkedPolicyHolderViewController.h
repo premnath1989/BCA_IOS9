@@ -11,6 +11,9 @@
 @protocol ULPolicyHolderViewControllerDelegate
 -(void)setPOLADictionary:(NSMutableDictionary *)NSDictionary;
 -(NSMutableDictionary *)getPOLADictionary;
+
+-(void)showUnitLinkModuleAtIndex:(NSIndexPath *)indexPath;
+-(void)saveSIMaster;
 @end
 
 @interface SIUnitLinkedPolicyHolderViewController : UIViewController{
@@ -29,6 +32,7 @@
     IBOutlet UITextField* textPOAge;
     
     IBOutlet UISegmentedControl* segmentSex;
+    IBOutlet UISegmentedControl* segmentSmoker;
 }
 -(void)setInfoNewIllustration:(NSDictionary *)dictIllustration;
 @property (nonatomic,weak)IBOutlet UITextField* textIllustrationNumber;

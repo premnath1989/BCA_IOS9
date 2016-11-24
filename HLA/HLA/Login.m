@@ -794,7 +794,7 @@ static NSString *labelVers;
 
 - (void) openHome
 {
-    if([loginDB SPAJBalance] < 30){
+    /*if([loginDB SPAJBalance] < 30){
         UIAlertView *alert = [[UIAlertView alloc]
                               initWithTitle: @""
                               message: @"SPAJ Balance anda di bawah 30, segera lakukan synch"
@@ -802,7 +802,7 @@ static NSString *labelVers;
                               cancelButtonTitle: @"OK"
                               otherButtonTitles: nil, nil];
         [alert show];
-    }
+    }*/
     
     UIStoryboard *carouselStoryboard = [UIStoryboard storyboardWithName:@"CarouselStoryboard" bundle:Nil];
     CarouselViewController* carouselMenu = [carouselStoryboard instantiateViewControllerWithIdentifier:@"carouselView"];

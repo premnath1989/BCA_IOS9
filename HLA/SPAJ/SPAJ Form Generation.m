@@ -252,16 +252,17 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
         indexImgForPDFGeneration = 0;
         if ([[dictionaryPOData valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"]){
             //arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]]];
-            arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH\",\"TP" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]]];
+            //arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH\",\"TP" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]]];
+            arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH\",\"FRG_PH\",\"TP" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]]];
             
-            arrayIMGTranslateName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlTranslateName" SPAJSection:@"IMG_PH\",\"TP" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]]];
+            arrayIMGTranslateName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlTranslateName" SPAJSection:@"IMG_PH\",\"FRG_PH\",\"TP" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]]];
         }
         else{
             //arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_IN" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]]];
             //arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH\",\"IMG_IN"]];
-            arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH\",\"IMG_IN\",\"TP"]];
+            arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH\",\"IMG_IN\",\"FRG_PH\",\"FRG_IN\",\"TP"]];
             
-            arrayIMGTranslateName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlTranslateName" SPAJSection:@"IMG_PH\",\"IMG_IN\",\"TP" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]]];
+            arrayIMGTranslateName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlTranslateName" SPAJSection:@"IMG_PH\",\"IMG_IN\",\"FRG_PH\",\"FRG_IN\",\"TP" SPAJID:[[dictTransaction valueForKey:@"SPAJID"] intValue]]];
         }
         
         //arrayIMGName = [[NSMutableArray alloc]initWithArray:[modelSPAJHtml selectArrayHtmlFileName:@"SPAJHtmlName" SPAJSection:@"IMG_PH\",\"IMG_IN"]];
@@ -865,6 +866,9 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
                 else if ([allAboutPDFGeneration doesString:stringName containCharacter:@"oilgas"]){
                     countElement = [modelSPAJAnswers getCountElementID:@"mining" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"KS_IN"];
                 }
+                else if ([allAboutPDFGeneration doesString:stringName containCharacter:@"foreigner"]){
+                    countElement = [modelSPAJAnswers getCountElementID:@"Foreigner" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"TR"];
+                }
                 else{
                     countElement = [modelSPAJAnswers getCountElementID:stringName SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"KS_IN"];
                 }
@@ -884,6 +888,9 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
                 }
                 else if ([allAboutPDFGeneration doesString:stringName containCharacter:@"oilgas"]){
                     countElement = [modelSPAJAnswers getCountElementID:@"mining" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"KS_PH"];
+                }
+                else if ([allAboutPDFGeneration doesString:stringName containCharacter:@"foreigner"]){
+                    countElement = [modelSPAJAnswers getCountElementID:@"Foreigner" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"PO"];
                 }
                 else{
                     countElement = [modelSPAJAnswers getCountElementID:stringName SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"KS_PH"];
@@ -1021,7 +1028,13 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
         }
         else{
             if (stateGeneration == stateIMG){
+
                 if ([[arrayIMGName objectAtIndex:indexImgForPDFGeneration]rangeOfString:@"amandment"].location != NSNotFound){
+                    NSString *functionCall = [NSString stringWithFormat:@"setSignatureImage([%@])", [listArrayFiles componentsJoinedByString:@","]];
+                    [webview stringByEvaluatingJavaScriptFromString:functionCall];
+                    [self performSelector:@selector(performReadFromDB) withObject:nil afterDelay:0.5];
+                }
+                else if ([[arrayIMGName objectAtIndex:indexImgForPDFGeneration]rangeOfString:@"foreigner"].location != NSNotFound){
                     NSString *functionCall = [NSString stringWithFormat:@"setSignatureImage([%@])", [listArrayFiles componentsJoinedByString:@","]];
                     [webview stringByEvaluatingJavaScriptFromString:functionCall];
                     [self performSelector:@selector(performReadFromDB) withObject:nil afterDelay:0.5];
