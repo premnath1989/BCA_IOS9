@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--<link href="SI/css/style.css" rel="stylesheet" type="text/css" />-->
+        <script type="text/javascript" charset="utf-8" src="SI/js/jquery-1.8.2.min.js"></script>
+        <script type="text/javascript" charset="utf-8" src="SI/js/hla.js"></script>
+        <style>
+            #maincontainer
+            {
+                top:0px;
+                padding-top:0;
+                margin:auto;
+                width:100%;
+                height:480px;
+            }
+            thead,table-Summary1 {
+                border: 1px solid black;
+            }
+        thead,table-Summary2 {
+            border: 1px solid black;
+        }
+        td {
+            border-style: solid;
+            border-color: black;
+            border-width: 0px;
+            padding: 0px 0px 0px 0px;
+            text-align: justify;
+            font-size:10px;
+            font-family: "Helvetica"
+        }
+        p {
+            font-size:10px;
+            padding: 0px 0px 0px 0px;
+        }
+        z {
+            font-size:10px;
+            padding: 0px 0px 0px 0px;
+        }
+        header1 {
+            font-size:18px;
+            padding: 0px 0px 0px 0px;
+        }
+        footer1 {
+            width:100%;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+        tr.rowStyle {
+            border-style: solid;
+            border-color: black;
+            border-width: 1px;
+            font-size:10px;
+            
+        }
+        </style>
+        <script>
+            var gData;
+            function onBodyLoad(){
+                $.ajaxSetup({ cache: false });
+                $.ajax({
+                       url: 'SI.json',
+                       async: false,
+                       dataType: 'json',
+                       success: function (data) {
+                       gdata = data;
+                       
+                       for(j=0;j<data.SI[0].SI_Temp_Pages.data.length;j++)
+                       {
+                       row = gdata.SI[0].SI_Temp_Pages.data[j];
+                       if (row.PageDesc != "Page1")
+                       {
+                       if (row.PageDesc == "Page2")
+                       htmlPages = '<div id="' + row.PageDesc + '" style="margin-top:900px;padding: 15px 0px 0px 0px;"></div>';
+                       else
+                       htmlPages = '<div id="' + row.PageDesc + '" style="margin-top:900px;padding: 15px 0px 0px 0px;"></div>';
+                       $(htmlPages).appendTo('#externalPages');
+                       }
+                       }
+                       
+                       
+                       for(j=0;j<data.SI[0].SI_Temp_Pages.data.length;j++)
+                       {
+                       row = gdata.SI[0].SI_Temp_Pages.data[j];
+                       $.ajax({
+                              url: "SI/" + row.htmlName,
+                              async: false,
+                              dataType: 'html',
+                              success: function (data) {
+                              $("#" + row.PageDesc).html(data);
+                              }
+                              });
+                       }
+                       
+                       
+                       loadJson();
+                       }
+                       });
+                       
+            }
+        
+        function loadJson()
+        {
+            
+            
+            setPage();
+            //writeGST();
+            
+            writeSummary();
+            
+            //alert('11');
+            
+            var result = gdata.SI[0].SI_Temp_trad_LA.data;
+            
+            if(result.length > 1){
+                var row2 = result[1];
+            }
+            
+            if (gdata.SI[0].ModeOfPayment == 'L'){
+                $('.ModeOfPayment').html('Sekaligus');
+            }
+            else if (gdata.SI[0].ModeOfPayment == 'Y'){
+                $('.ModeOfPayment').html('Tahunan');
+            }
+            else if (gdata.SI[0].ModeOfPayment == 'M'){
+                $('.ModeOfPayment').html('Bulanan');
+            }
+            
+            if(result.length == 1){
+                var row = result[0];
+                $('.LADesc').html(row.LADesc);
+                $('.LAName').html(row.Name);
+                $('.LAAge').html(row.Age);
+                $('.OccpDesc').html(row.OccpDesc);
+                
+                if (row.MOP == '1'){
+                    $('.MOP').html('Tunggal');
+                }
+                else{
+                    $('.MOP').html('5 Tahun');
+                }
+                
+                
+                
+                if (row.Sex.substring(0,1) == 'M'){
+                    $('.LASex').html('Laki-laki');
+                }
+                else{
+                    $('.LASex').html('Perempuan');
+                }
+                
+            }
+            else if(result.length == 2 && row2.PTypeCode == 'LA'){ //got 2nd life assured
+                var row = result[0];
+                var row2 = result[1];
+                $('.LADesc').html(row.LADesc + '<br/>' + row2.LADesc + '<br/>');
+                $('.LAName').html(row.Name + '<br/>' + row2.Name)  ;
+                $('.LAAge').html(row.Age + '<br/>' + row2.Age);
+                if (row.Sex.substring(0,1) == 'M' && row2.Sex.substring(0,1) == 'M'){
+                    $('.LASex').html('Male' + '<br/>' + 'Male' );
+                }
+                else if(row.Sex.substring(0,1) == 'M' && row2.Sex.substring(0,1) == 'F'){
+                    $('.LASex').html('Male' + '<br/>' + 'Female' );
+                }
+                else if(row.Sex.substring(0,1) == 'F' && row2.Sex.substring(0,1) == 'M'){
+                    $('.LASex').html('Female' + '<br/>' + 'Male' );
+                }
+                else{
+                    $('.LASex').html('Female' + '<br/>' + 'Female' );
+                }
+                
+                if (row.Smoker == 'Y' && row2.Smoker == 'Y' ){
+                    $('.LASmoker').html('Yes' + '<br/>' + 'Yes'  );
+                }
+                else if (row.Smoker == 'Y' && row2.Smoker == 'N' ){
+                    $('.LASmoker').html('Yes' + '<br/>' + 'No'  );
+                }
+                else if (row.Smoker == 'N' && row2.Smoker == 'Y' ){
+                    $('.LASmoker').html('No' + '<br/>' + 'Yes'  );
+                }
+                else{
+                    $('.LASmoker').html('No' + '<br/>' + 'No' );
+                }
+            }
+            else{ // got payor
+                var row = result[0];
+                var row2 = result[1];
+                
+                $('.LADesc').html(row.LADesc + '<br/>' + row2.LADesc + '<br/>');
+                $('.LAName').html(row.Name + '<br/>' + row2.Name)  ;
+                $('.LAAge').html(row.Age + '<br/>' + row2.Age);
+                if (row.Sex.substring(0,1) == 'M' && row2.Sex.substring(0,1) == 'M'){
+                    $('.LASex').html('Male' + '<br/>' + 'Male' );
+                }
+                else if(row.Sex.substring(0,1) == 'M' && row2.Sex.substring(0,1) == 'F'){
+                    $('.LASex').html('Male' + '<br/>' + 'Female' );
+                }
+                else if(row.Sex.substring(0,1) == 'F' && row2.Sex.substring(0,1) == 'M'){
+                    $('.LASex').html('Female' + '<br/>' + 'Male' );
+                }
+                else if(row.Sex.substring(0, 1) == 'F' && row2.Sex.substring(0, 1) == 'F'){
+                    $('.LASex').html('Female' + '<br/>' + 'Female' );
+                }
+                else {
+                    if(row2.Sex.substring(0, 1) == 'F'){
+                        $('.LASex').html('' + '<br/>' + 'Female' );
+                    }
+                    else
+                    {
+                        $('.LASex').html('' + '<br/>' + 'Male' );
+                    }
+                }
+                
+                if (row.Smoker == 'Y' && row2.Smoker == 'Y' ){
+                    $('.LASmoker').html('Yes' + '<br/>' + 'Yes'  );
+                }
+                else if (row.Smoker == 'Y' && row2.Smoker == 'N' ){
+                    $('.LASmoker').html('Yes' + '<br/>' + 'No'  );
+                }
+                else if (row.Smoker == 'N' && row2.Smoker == 'Y' ){
+                    $('.LASmoker').html('No' + '<br/>' + 'Yes'  );
+                }
+                else if (row.Smoker == 'N' && row2.Smoker == 'N' ){
+                    $('.LASmoker').html('No' + '<br/>' + 'No'  );
+                }
+                else{
+                    if(row2.Smoker == 'N'){
+                        $('.LASmoker').html('' + '<br/>' + 'No' );
+                    }
+                    else
+                    {
+                        $('.LASmoker').html('' + '<br/>' + 'yes' );
+                    }
+                }
+            }
+            
+        }
+        
+        function replaceChar(char){
+            var temp, returnVal;
+            if (char == "0")
+            returnVal = "-"
+            else if (char == "")
+            returnVal = "-"
+            else
+            returnVal = char;
+            return returnVal;
+        }
+        
+        function isIncomeRider(amt,rider){
+            //rider.replace(/^\s+|\s$/g,"")
+            //$.trim(rider)
+            
+            var temp;
+            temp = $.trim(rider)
+            //alert(temp + "x")
+            
+            if (temp == "HLA Cash Promise" || temp == "HLA Income Builder" || temp == "Income 20 Rider" || temp == "Income 30 Rider" || temp == "Income 40 Rider" || temp == "Income D-20 Rider" || temp == "Income D-30 Rider" || temp == "Income D-40 Rider" || temp == "Income E-20 Rider" || temp == "Income E-30 Rider"){
+                
+                return amt + " *";
+            }
+            else
+            return amt + "&nbsp;&nbsp;";
+        }
+        
+            </script>
+        <head>
+            <!--<body onload="onBodyLoad()">-->
+            <body>
+				<div id="gstPage"><br/></div>
+				<div id="header">
+					<table border="0" style="border-collapse:separate;border:0px solid black;width:100%;">
+						<tr>
+							<td style="width: 25%"><img src="BCAHTMLlogo.png" height="55px"/></td>
+							<td style="width: 45%" valign="top">
+								<table  style="border-collapse:separate;border:1px solid black;width:100%;font-size:10px;text-align: center">
+									<tr>
+										<td style="font-size:10px;font-family: Helvetica; text-align: center">
+											Kecuali dinyatakan lain, ilustrasi ini bukan merupakan kontrak asuransi
+										</td>
+									</tr>
+									
+								</table>
+							</td>
+							<td style="width: 30%; font-size:13px;font-family:Helvetica; text-align: right" valign="top" style="margin:0" >
+								<header1>BCA Life Proteksi & Investasiku</header1></br>
+								<font color="red">Nomor Ilustrasi :</font> <font color="red"><label id="SINumber">16011813027</label></font>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div id="maincontainer">
+				<div class="main-content">
+					<br/>
+					
+					
+					<br/>
+					
+					<!--520,430px-->
+					<div style="width:100%;background-color: #fff;vertical-align: top;font-size:10px;font-family: Helvetica;">
+
+						<center><b>ILUSTRASI ASUMSI HASIL DANA INVESTASI</b></center>
+					<br/>
+					</div>
+					<div style="width:100%;background-color: #fff;vertical-align: top;font-size:10px;font-family: Helvetica;">
+						<table width="100%" style="border:1px solid black;border-spacing:0;"> 
+						  <tr>
+							<td rowspan="3" style="border:1px solid black;text-align: center">Tahun Polis ke-</td>
+							<td rowspan="3" style="border:1px solid black;text-align: center">Usia Tertanggung<br/>(Tahun)</td>
+							<td colspan="3" rowspan="2" style="border:1px solid black;text-align: center">Ringkasan Transaksi Pembayaran Premi dalam ribuan rupiah</td>
+							<td colspan="3" style="border:1px solid black;text-align: center" >ILUSTRASI MANFAAT</td>
+						  </tr>
+
+						  <tr>
+							<td colspan="3" style="border:1px solid black;text-align: center">Estimasi Nilai Dana Investasimerupakan nilai pada akhir tahun polis(dalam ribuan rupiah)</td>
+						  </tr>
+						  <tr>
+							<td style="border:1px solid black;text-align: center">Premi Dasar Sekaligus</td>
+							<td style="border:1px solid black;text-align: center">Premi Top-up Sekaligus</td>
+							<td style="border:1px solid black;text-align: center">Penarikan Dana Investasi</td>
+							<td style="border:1px solid black;text-align: center">Rendah</td>
+							<td style="border:1px solid black;text-align: center">Sedang</td>
+							<td style="border:1px solid black;text-align: center">Tinggi</td>
+						  </tr>
+						  <tr>
+							<td style="border:1px solid black">&nbsp</td>
+							<td style="border:1px solid black">&nbsp</td>
+							<td style="border:1px solid black">&nbsp</td>
+							<td style="border:1px solid black">&nbsp</td>
+							<td style="border:1px solid black">&nbsp</td>
+							<td style="border:1px solid black">&nbsp</td>
+							<td style="border:1px solid black">&nbsp</td>
+							<td style="border:1px solid black">&nbsp</td>
+						  </tr>
+						</table>
+					</div>
+					<div style="width:100%;background-color: #fff;vertical-align: top;font-size:10px;font-family: Helvetica;">
+						<br/>
+						Asumsi tingkat hasil investasi yang digunakan adalah sebagai berikut.
+						<br/>
+						<table width="60%" style="border:1px solid black;border-spacing:0;"> 
+						  <tr>
+							<td width="30%" style="border:1px solid black;text-align: center">Dana Investasi</td>
+							<td style="border:1px solid black;text-align: center">Rendah*</td>
+							<td style="border:1px solid black;text-align: center">Sedang*</td>
+							<td style="border:1px solid black;text-align: center">Tinggi*</td>
+						  </tr>
+						  <tr>
+							<td style="border:1px solid black">BCA Life IDR Fixed Income Fund</td>
+							<td style="border:1px solid black;text-align: center">8.0%</td>
+							<td style="border:1px solid black;text-align: center">9.0%</td>
+							<td style="border:1px solid black;text-align: center">10.0%</td>
+						  </tr>
+						  <tr>
+							<td style="border:1px solid black">BCA Life IDR Equity Fund</td>
+							<td style="border:1px solid black;text-align: center">10.0%</td>
+							<td style="border:1px solid black;text-align: center">13.0%</td>
+							<td style="border:1px solid black;text-align: center">16.0%</td>
+						  </tr>
+
+						  <tr>
+							<td style="border:1px solid black">BCA Life USD Fixed Income Fund</td>
+							<td style="border:1px solid black;text-align: center">8.0%</td>
+							<td style="border:1px solid black;text-align: center">9.0%</td>
+							<td style="border:1px solid black;text-align: center">10.0%</td>
+						  </tr>
+
+						  <tr>
+							<td style="border:1px solid black">BCA Life USD Equity Fund</td>
+							<td style="border:1px solid black;text-align: center">10.0%</td>
+							<td style="border:1px solid black;text-align: center">13.0%</td>
+							<td style="border:1px solid black;text-align: center">16.0%</td>
+						  </tr>
+
+						</table>
+					<br/>
+					
+					* Estimasi Nilai Dana Investasi pada illustrasi diatas berdasarkan tingkat pertumbuhan investasi yang tetap per tahun. Asumsi hasil investasi bukan merupakan tolak ukur untuk perhitungan rata-rata tingkat pertumbuhan terendah dan yang tertinggi. Realisasi hasil perkembangan invetasi dapat lebih rendah atau lebih tinggi dari illustrasi diatas.
+					<br/>
+					<br/>
+					** Menunjukkan bahwa nilai dana investasi  pada tahun tersebut tidak mencukupi untuk membayar biaya asuransi dan biaya administrasi, dan oleh karena itu Polis menjadi batas (lapse).
+					</div>
+
+				</div>
+				</div>
+				<footer>
+				<!--Tanda tangan-->				
+				<div style="width:100%;background-color: #fff;vertical-align: top;">
+					<br/>
+					<table border="0" style="border-collapse:separate;border:0px solid black;width:100%;">
+						<td style="width: 30%">
+							<table  style="border-collapse:separate;border:0px solid black;width:100%;">
+								<tr>
+									<td>Disiapkan oleh</td><td>:</td><td style="width: 60%">&nbsp;&nbsp;<label id="FooterAgentName">Andreas</label></td>
+								</tr>
+								
+								<tr>
+									<td>Tanggal dan jam cetak</td><td>:</td><td>&nbsp;&nbsp;<label id="FooterPrintDate">26-Januari-2016</label></td>
+								</tr>
+								
+								<tr>
+									<td>Versi</td><td>:</td><td>&nbsp;&nbsp;<label id="FooterVersion">1.0.000</label></td>
+								</tr>
+								
+								<tr>
+									<td>Kode Tenaga Penjual</td><td>:</td><td>&nbsp;&nbsp;<label id="FooterAgentCode">HRTG-003</label></td>
+								</tr>
+								
+								<tr>
+									<td>Cabang</td><td>:</td><td>&nbsp;&nbsp;<label id="FooterBranch">Head Office</label></td>
+								</tr>
+								<tr>
+									<td colspan="3"><br/></td>
+								</tr>
+								<tr>
+									<td colspan="3"><br/></td>
+								</tr>
+
+								<!--<tr>
+									<td colspan="3">Saya Telah menjelaskan isi ilustrasi ini kepada Calon Pemegang Polis</td>
+								</tr>
+								
+								<tr>
+									<td>Tanda Tangan Tenaga Penjual</td><td>:</td><td></td>
+								</tr>-->
+							</table>
+						</td>
+						<td style="width: 70%">
+							<table  style="border-collapse:separate;border:1px solid black;width:100%;border-spacing:0;">
+								<tr>
+									<td style="border-right: 1px solid black"><br/></td>
+									<td><br/></td>
+								</tr>
+								<tr >
+									<td style="text-align:center; width: 35%; border-right: 1px solid black">Saya telah menjelaskan isi ilustrasi ini kepada Calon Pemegang Polis.</td>
+									<td style="text-align:center; width: 35%">Saya telah memahami dan menyetujui penjelasan yang diberikan atas ilustrasi manfaat asuransi yang diuraikan pada halaman ini.</td>
+								</tr>
+								<tr>
+                                    <td style="border-right: 1px solid black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+								</tr>
+								<tr>
+									<td style="text-align:center;border-right: 1px solid black"><u>Tanda Tangan Tenaga Penjual :</u></td>
+									<td style="text-align:center"><u>Tanda Tangan Pemegang Polis :</u></td>
+								</tr>
+								<tr>
+									<td style="border-right: 1px solid black"><br/></td>
+									<td><br/></td>
+								</tr>
+								<tr>
+									<td style="border-right: 1px solid black"><br/></td>
+									<td><br/></td>
+								</tr>
+								<tr>
+									<td style="border-right: 1px solid black"><br/></td>
+									<td><br/></td>
+								</tr>
+								<tr>
+									<td style="border-right: 1px solid black"><br/></td>
+									<td><br/></td>
+								</tr>
+								<tr>
+									<td style="border-right: 1px solid black"><br/></td>
+									<td><br/></td>
+								</tr>
+
+							</table>
+						</td>
+
+					</table>
+				</div>
+				<!--halaman-->
+				<div style="width:100%;height:20px;background-color: #fff;vertical-align: top;">
+						<table border="0" style="border-collapse:separate;border:0px solid black;width:100%;;font-family:Helvetica;font-size:10px;text-align: right">
+							<tr style="text-align: right">
+								<td style="text-align: right">Halaman 2 dari 4</td>
+							</tr>
+							<tr style="text-align: right">
+								<td style="text-align: right">www.bcalife.co.id</td>
+							</tr>
+						</table>
+						</div>
+				</footer>
+            </body>
+            
+</html>

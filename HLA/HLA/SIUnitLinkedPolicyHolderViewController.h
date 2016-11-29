@@ -14,10 +14,13 @@
 
 -(void)showUnitLinkModuleAtIndex:(NSIndexPath *)indexPath;
 -(void)saveSIMaster;
+-(NSString *)getRunnigSINumber;
 @end
 
 @interface SIUnitLinkedPolicyHolderViewController : UIViewController{
     IBOutlet UIScrollView* scrollPolicyHolder;
+    
+    IBOutlet UISwitch* quickQuoteFlag;
     
     IBOutlet UILabel* labelQuickQuote;
     
@@ -34,6 +37,7 @@
     IBOutlet UISegmentedControl* segmentSex;
     IBOutlet UISegmentedControl* segmentSmoker;
 }
+-(void)loadDataFromList;
 -(void)setInfoNewIllustration:(NSDictionary *)dictIllustration;
 @property (nonatomic,weak)IBOutlet UITextField* textIllustrationNumber;
 

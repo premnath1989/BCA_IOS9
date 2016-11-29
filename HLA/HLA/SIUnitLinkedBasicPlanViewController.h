@@ -10,9 +10,20 @@
 @protocol ULBasicPlanViewControllerDelegate
 -(void)setBasicPlanDictionary:(NSMutableDictionary *)dictULBasicPlanData;
 -(NSMutableDictionary *)getBasicPlanDictionary;
+-(NSString *)getRunnigSINumber;
+-(void)showUnitLinkModuleAtIndex:(NSIndexPath *)indexPath;
 @end
 @interface SIUnitLinkedBasicPlanViewController : UIViewController{
-    IBOutlet UIButton* buttonTargetAccountValue;
+    IBOutlet UISegmentedControl* segmentCurrency;
+    IBOutlet UITextField *textBasicPremiField;
+    IBOutlet UITextField *textSumAssuredField;
+    IBOutlet UITextField *textExtraPremiPercentField;
+    IBOutlet UITextField *textExtraPremiNumberField;
+    IBOutlet UITextField *textMasaExtraPremiField;
+    IBOutlet UIButton *buttonMasaPembayaran;
+    IBOutlet UIButton *buttonFrekuensiPembayaran;
+
 }
+
 @property (nonatomic,strong) id <ULBasicPlanViewControllerDelegate> delegate;
 @end

@@ -26,6 +26,7 @@
                 <outlet property="buttonOccupation" destination="ni1-ww-G1C" id="qEY-xx-rao"/>
                 <outlet property="buttonPOlist" destination="NLb-Rs-CkI" id="fsS-LO-i6y"/>
                 <outlet property="segmentSex" destination="4R8-Eq-EeY" id="ZhM-Y0-Xb7"/>
+                <outlet property="segmentSmoker" destination="0u6-1h-f7B" id="zgi-Jx-bvn"/>
                 <outlet property="textLA" destination="4Bg-IU-Opl" id="bzX-Mr-gcb"/>
                 <outlet property="textLAAge" destination="Pea-MX-WwE" id="4qn-Ib-u8f"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -56,6 +57,9 @@
                                 <segment title="Wanita"/>
                             </segments>
                             <color key="tintColor" red="0.85490196080000003" green="0.19215686269999999" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="actionSegmentGender:" destination="-1" eventType="valueChanged" id="orI-nE-Z3q"/>
+                            </connections>
                         </segmentedControl>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Pekerjaan Tertanggung" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="AQ7-rH-9hi">
                             <rect key="frame" x="27" y="187" width="166" height="30"/>
@@ -186,6 +190,9 @@
                                 <segment title="Tidak"/>
                             </segments>
                             <color key="tintColor" red="0.85490196080000003" green="0.19215686269999999" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="actionSegmentSmoker:" destination="-1" eventType="valueChanged" id="pO7-Kd-Ped"/>
+                            </connections>
                         </segmentedControl>
                     </subviews>
                     <color key="backgroundColor" red="0.98431372549999996" green="0.98431372549999996" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -205,6 +212,9 @@
                             <barButtonItem key="leftBarButtonItem" id="HFS-sn-o89"/>
                             <barButtonItem key="rightBarButtonItem" title="Done   " id="KIy-Vi-46O">
                                 <color key="tintColor" red="0.85490196080000003" green="0.19215686269999999" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="actionSaveData:" destination="-1" id="AJX-jh-Tl6"/>
+                                </connections>
                             </barButtonItem>
                         </navigationItem>
                     </items>

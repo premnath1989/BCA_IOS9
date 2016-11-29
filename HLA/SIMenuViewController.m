@@ -721,6 +721,10 @@ BOOL isFirstLoad;
     [self.RightView bringSubviewToFront:self.LAController.view];
     [_LAController processLifeAssured];
     [self.myTableView selectRowAtIndexPath:selectedPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+    
+    if ([planName isEqualToString:@"BCA Life Unit Linked"]){
+        [self voidCreateUnitLinkedView:self.requestSINo];
+    }
 }
 
 -(void)checkNeedPromptMsg
@@ -6429,6 +6433,10 @@ NSString *prevPlan;
     [self.view addSubview:viewUnitlinked];
 
     [siMenuUnitLinkedVC setIllustrationNumber:SINumber];
+    [siMenuUnitLinkedVC setInitialPOLADictionary];
+    [siMenuUnitLinkedVC setInitialULBasicPlanDictionary];
+    [siMenuUnitLinkedVC setInitialULFundAllocationDictionary];
+    [siMenuUnitLinkedVC setInitialULSpecialOptionDictionary];
 }
 
 #pragma mark - memory

@@ -106,6 +106,33 @@
     return spajID;
 }
 
+-(int)getCountElementIDForeigner:(NSString *)stringElementName SPAJTransactionID:(int)spajTransactionID Section:(NSString *)stringSection{
+    NSString* value;
+    int spajID;
+    
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select Value  from SPAJAnswers where SPAJHtmlSection ='%@' and SPAJTransactionID = %i and elementID like \"%%%@%%\"",stringSection,spajTransactionID,stringElementName]];
+    while ([s next]) {
+        value = [s stringForColumn:@"Value"];
+    }
+    
+    if ([value isEqualToString:@"false"]){
+        spajID = 0;
+    }
+    else{
+        spajID = 1;
+    }
+    
+    [results close];
+    [database close];
+    return spajID;
+}
+
 -(NSMutableArray *)getSPAJAnswerValue:(NSString *)stringElementName SPAJTransactionID:(int)spajTransactionID Section:(NSString *)stringSection{
     NSMutableArray* spajValueArray = [[NSMutableArray alloc]init];
     

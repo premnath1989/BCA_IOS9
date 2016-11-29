@@ -13,11 +13,19 @@
     IBOutlet UIView* viewRightView;
     
     NSString* stringSINumber;
+    NSString* stringProductName;
+    NSString* stringProductCode;
     NSMutableDictionary* dictParentPOLAData;
     NSMutableDictionary* dictParentULBasicPlanData;
+    NSMutableDictionary* dictParentULFundAllocationData;
+    NSMutableArray* arraySpecialOptionData;
 }
 
 @property (nonatomic,weak)NSString* stringSIDate;
 
 -(void)setIllustrationNumber:(NSString *)stringIllustrationNumber;
+-(void)setInitialPOLADictionary;
+-(void)setInitialULBasicPlanDictionary;
+-(void)setInitialULFundAllocationDictionary;
+-(void)setInitialULSpecialOptionDictionary;
 @end

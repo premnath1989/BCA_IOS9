@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--<link href="SI/css/style.css" rel="stylesheet" type="text/css" />-->
+        <script type="text/javascript" charset="utf-8" src="SI/js/jquery-1.8.2.min.js"></script>
+        <script type="text/javascript" charset="utf-8" src="SI/js/hla.js"></script>
+        <style>
+            thead,table-Summary1 {
+                border: 1px solid black;
+            }
+        thead,table-Summary2 {
+            border: 1px solid black;
+        }
+            #maincontainer
+            {
+                top:0px;
+                padding-top:0;
+                margin:auto;
+                width:100%;
+                height:480px;
+            }
+			td {
+				border-style: solid;
+				border-color: black;
+				border-width: 0px;
+				padding: 0px 0px 0px 0px;
+				text-align: justify;
+				font-size:10px;
+				font-family: "Helvetica"
+			}
+			p {
+				font-size:10px;
+				padding: 0px 0px 0px 0px;
+			}
+			z {
+				font-size:10px;
+				padding: 0px 0px 0px 0px;
+			}
+			header1 {
+				font-size:18px;
+				padding: 0px 0px 0px 0px;
+			}
+            footer1 {
+                width:100%;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+            }
+			tr.rowStyle {
+				border-style: solid;
+				border-color: black;
+				border-width: 1px;
+				font-size:10px;
+	
+			}
+        .test
+        {
+            /*border: solid 1px #000000;*/
+            border-left: 0px;
+            border-right: solid 1px #000000;
+            border-bottom: solid 1px #000000;
+            border-top: solid 1px #000000;
+        }
+        
+        .test:empty
+        {
+            /*border: none;*/
+            border-left: solid 1px #000000;
+            border-right: 0px;
+            border-bottom:0px;
+            border-top: 0px;
+        }
+        </style>
+        
+        <head>
+            <body onload="onBodyLoad()">
+                <div id="gstPage"><br/><br/></div>
+                <div id="header">
+                    
+                    <table border="0" style="border-collapse:separate;border:0px solid black;width:100%;">
+                        <tr>
+                            <td style="width: 25%"><img src="BCAHTMLlogo.png" height="55px"/></td>
+                            <td style="width: 45%" valign="top">
+                                <table  style="border-collapse:separate;border:1px solid black;width:100%;font-size:10px;text-align: center">
+                                    <tr>
+                                        <td style="font-size:10px;font-family: Helvetica; text-align: center">
+                                            Kecuali dinyatakan lain, ilustrasi ini bukan merupakan kontrak asuransi
+                                        </td>
+                                    </tr>
+                                    
+                                </table>
+                            </td>
+                            <td style="width: 30%; font-size:13px;font-family:Helvetica; text-align: right" valign="top" style="margin:0" >
+                                <header1>BCA Life Heritage Protection</header1></br>
+                                <font color="red">Nomor Ilustrasi : </font><font color="red"><label id="SINumber3"></label></font>
+                                    </td>
+                        </tr>
+                    </table>    
+                </div>
+                <div id="maincontainer">
+					<div class="main-content">
+                    <!--520,430px-->
+                    <div style="width:100%;background-color: #fff;vertical-align: top;">
+                    
+                    <!--Information Data-->
+                        <!--<table width="100%" cellpadding="0" cellspacing="0" style="page-break-before: always">-->
+                        <table style="border-collapse:separate;border:0px solid black;width:100%;">
+                            <col width="8*">
+                                <col width="112*">
+                                    <col width="137*">
+                                        <tr valign="top">
+                                            <td width="3%" style="border: none; padding: 0in" sdval="1" sdnum="1033;">
+
+                                            </td>
+                                            <td colspan="2" width="97%" style="border: none; padding: 0in">
+                                                <b><u>Catatan :</u></b>
+                                            </td>
+                                        </tr>
+
+                                        <tr valign="top">
+                                            <td width="3%" style="border: none; padding: 0in" sdval="1" sdnum="1033;">
+                                                1
+                                            </td>
+                                            <td colspan="2" width="97%" style="border: none; padding: 0in">
+                                                Alokasi premi:
+                                            </td>
+                                        </tr>
+                                       <tr valign="top">
+                                            <td width="3%" style="border: none; padding: 0in" sdval="1" sdnum="1033;">
+                                                &nbsp
+                                            </td>
+                                            <td colspan="2" width="97%" style="border: none; padding: 0in">
+                                                <table width="30%" style="border:1px solid black;border-spacing:0;">
+												  <tr style="border:1px solid black">
+													<td style="border:1px solid black"></td>
+													<td style="border:1px solid black;text-align: center">Alokasi Investasi</td>
+													<td style="border:1px solid black;text-align: center">Biaya Akuisisi</td>
+												  </tr>
+												  <tr >
+													<td style="border:1px solid black;text-align: center">Premi Dasar Sekaligus</td>
+													<td style="border:1px solid black;text-align: center">95%</td>
+													<td style="border:1px solid black;text-align: center">5%</td>
+												  </tr>
+												  <tr >
+													<td style="border:1px solid black;text-align: center">Premi Top-up Sekaligus</td>
+													<td style="border:1px solid black;text-align: center">97%</td>
+													<td style="border:1px solid black;text-align: center">3%</td>
+												  </tr>
+												</table>
+                                            </td>
+                                        </tr>
+                                        <tr valign="top">
+                                            <td width="3%" style="border: none; padding: 0in" sdval="2" sdnum="1033;">
+                                                2
+                                            </td>
+                                            <td colspan="2" width="97%" style="border: none; padding: 0in">
+                                                Apabila Tertanggung meninggal dunia sebelum mencapai usia 5 (lima) tahun, maka Penanggung akan membayarkan manfaat Uang Pertanggungan sesuai dengan tabel dibawah:
+                                            </td>
+                                        </tr>
+										<tr valign="top">
+                                            <td width="3%" style="border: none; padding: 0in" sdval="2" sdnum="1033;">
+                                                &nbsp
+                                            </td>
+                                            <td colspan="2" width="97%" style="border: none; padding: 0in">
+                                                <table width="22%" style="border:1px solid black;border-spacing:0;">
+												  <tr style="border:1px solid black">
+													<td style="border:1px solid black;text-align: center">Usia Tertanggung Saat Meninggal Dunia (Tahun)</td>
+													<td style="border:1px solid black;text-align: center">Persentase Uang Pertanggungan</td>
+												  </tr>
+												  <tr >
+													<td style="border:1px solid black;text-align: center">0</td>
+													<td style="border:1px solid black;text-align: center">10%</td>
+												  </tr>
+												  <tr >
+													<td style="border:1px solid black;text-align: center">1</td>
+													<td style="border:1px solid black;text-align: center">20%</td>
+												  </tr>
+												  <tr >
+													<td style="border:1px solid black;text-align: center">2</td>
+													<td style="border:1px solid black;text-align: center">40%</td>
+												  </tr>
+												  <tr >
+													<td style="border:1px solid black;text-align: center">3</td>
+													<td style="border:1px solid black;text-align: center">60%</td>
+												  </tr>
+												  <tr >
+													<td style="border:1px solid black;text-align: center">4</td>
+													<td style="border:1px solid black;text-align: center">80%</td>
+												  </tr>
+												  <tr >
+													<td style="border:1px solid black;text-align: center">≥ 5</td>
+													<td style="border:1px solid black;text-align: center">100%</td>
+												  </tr>
+												</table>
+                                            </td>
+                                        </tr>
+
+                                        <tr valign="top">
+                                            <td width="3%" style="border: none; padding: 0in" sdval="3" sdnum="1033;">
+                                                3
+                                            </td>
+                                            <td colspan="2" width="97%" style="border: none; padding: 0in">
+                                                Estimasi Nilai Dana Investasi sudah memperhitungkan Biaya Asuransi, Biaya Administrasi "&IF('Halaman 1'!K6="Rupiah","Rp 30.000,- (tiga puluh ribu rupiah)","US $3 (three US Dollars)")&" per bulan, Biaya Pengelolaan Dana Investasi maksimal 2% per tahun dan Biaya Akuisisi dari Premi Dasar Sekaligus serta  Biaya Akuisisi dari Premi Top-up Sekaligus. 
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr valign="top">
+                                            <td width="3%" style="border: none; padding: 0in" sdval="4" sdnum="1033;">
+                                                4
+                                            </td>
+                                            <td colspan="2" width="97%" style="border: none; padding: 0in">
+                                                Nilai Dana Investasi dapat meningkat atau menurun tanpa jaminan akan adanya batas minimal dan maksimal. 
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr valign="top">
+                                            <td width="3%" style="border: none; padding: 0in" sdval="5" sdnum="1033;">
+                                                5
+                                            </td>
+                                            <td colspan="2" width="97%" style="border: none; padding: 0in">
+                                                Kinerja Dana Investasi tidak dijamin sehingga segala risiko menjadi tanggung jawab Pemegang Polis 
+                                            </td>
+                                        </tr>
+                                        <tr valign="top">
+                                            <td width="3%" style="border: none; padding: 0in" sdval="6" sdnum="1033;">
+                                                6
+                                            </td>
+                                            <td colspan="2" width="97%" style="border: none; padding: 0in">
+                                                Estimasi Nilai Dana Investasi hanyalah merupakan ilustrasi. 
+                                            </td>
+                                        </tr>
+                                        <tr valign="top">
+                                            <td width="3%" style="border: none; padding: 0in" sdval="7" sdnum="1033;">
+                                                7
+                                            </td>
+                                            <td colspan="2" width="97%" style="border: none; padding: 0in">
+                                                Estimasi Nilai Dana Investasi pada ilustrasi diatas berdasarkan tingkat pertumbuhan investasi yang tetap per tahun. Asumsi hasil investasi bukan merupakan tolak ukur untuk perhitungan rata-rata tingkat pertumbuhan terendah dan yang tertinggi. Realisasi hasil perkembangan invetasi dapat lebih rendah atau lebih tinggi dari tingkat hasil investasi sesuai  ilustrasi. 
+                                            </td>
+                                        </tr>
+                                        <tr valign="top">
+                                            <td width="3%" style="border: none; padding: 0in" sdval="8" sdnum="1033;">
+                                                8
+                                            </td>
+                                            <td colspan="2" width="97%" style="border: none; padding: 0in">
+                                                Jumlah Unit sesungguhnya yang terbentuk tergantung  kepada besar Total Premi yang dibayar (baik Premi Dasar Sekaligus atau Premi Top-up Sekaligus)
+                                            </td>
+                                        </tr>
+                                        <tr valign="top">
+                                            <td width="3%" style="border: none; padding: 0in" sdval="9" sdnum="1033;">
+                                                9
+                                            </td>
+                                            <td colspan="2" width="97%" style="border: none; padding: 0in">
+												Nilai Dana Investasi sesungguhnya adalah nilai jual Unit berdasarkan harga unit yang akan datang. Harga unit menggunakan harga jual dan beli yang sama.                                                
+                                            </td>
+                                        </tr>
+                                        <tr valign="top">
+                                            <td width="3%" style="border: none; padding: 0in" sdval="9" sdnum="1033;">
+                                                10
+                                            </td>
+                                            <td colspan="2" width="97%" style="border: none; padding: 0in">
+												Ketentuan mengenai perpajakan mengikuti peraturan yang berlaku.                                                
+                                            </td>
+                                        </tr>
+                                        <tr valign="top">
+                                            <td width="3%" style="border: none; padding: 0in" sdval="9" sdnum="1033;">
+                                                11
+                                            </td>
+                                            <td colspan="2" width="97%" style="border: none; padding: 0in">
+												Membeli Polis Asuransi jiwa adalah komitmen jangka panjang, apabila Polis dihentikan pada tahun-tahun awal akan menyebabkan kerugian bagi nasabah.                                                
+                                            </td>
+                                        </tr>
+                                    </col>
+                                </col>
+                            </col>
+                        </table>
+                        
+                    </div>
+                </div>
+                </div>
+                <footer>
+                    <!--Tanda tangan-->
+                    <div style="width:100%;background-color: #fff;vertical-align: top;">
+                        <table border="0" style="border-collapse:separate;border:0px solid black;width:100%;">
+                            <td style="width: 30%">
+                                <table  style="border-collapse:separate;border:0px solid black;width:100%;">
+                                    <tr>
+                                        <td>Disiapkan oleh</td><td>:</td><td style="width: 60%">&nbsp;<label id="FooterAgentName3"></label></td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td>Tanggal dan jam cetak</td><td>:</td><td>&nbsp;<label id="FooterPrintDate3"></label></td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td>Versi</td><td>:</td><td>&nbsp;<label id="FooterVersion3">1.0.000</label></td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td>Kode Tenaga Penjual</td><td>:</td><td>&nbsp;<label id="FooterAgentCode3"></label></td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td>Cabang</td><td>:</td><td>&nbsp;<label id="FooterBranch3"></label></td>
+                                    </tr>
+                                    
+                                    <tr>
+									<td colspan="3"><br/></td>
+								</tr>
+								<tr>
+									<td colspan="3"><br/></td>
+								</tr>
+
+								<!--<tr>
+									<td colspan="3">Saya Telah menjelaskan isi ilustrasi ini kepada Calon Pemegang Polis</td>
+								</tr>
+								
+								<tr>
+									<td>Tanda Tangan Tenaga Penjual</td><td>:</td><td></td>
+								</tr>-->
+                                </table>
+                            </td>
+                            <td style="width: 70%">
+							<table  style="border-collapse:separate;border:1px solid black;width:100%;border-spacing:0;">
+								<tr>
+									<td style="border-right: 1px solid black"><br/></td>
+									<td><br/></td>
+								</tr>
+
+								<tr >
+									<td style="text-align:center; width: 35%; border-right: 1px solid black">Saya telah menjelaskan isi ilustrasi ini kepada Calon Pemegang Polis.</td>
+									<td style="text-align:center; width: 35%">Saya telah memahami dan menyetujui penjelasan yang diberikan atas ilustrasi manfaat asuransi yang diuraikan pada halaman ini.</td>
+								</tr>
+								<tr>
+                                    <td style="border-right: 1px solid black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+								</tr>
+								<tr>
+									<td style="text-align:center;border-right: 1px solid black">Tanda Tangan Tenaga Penjual :</td>
+									<td style="text-align:center">Tanda Tangan Pemegang Polis :</td>
+								</tr>
+								<tr>
+									<td style="border-right: 1px solid black"><br/></td>
+									<td><br/></td>
+								</tr>
+								<tr>
+									<td style="border-right: 1px solid black"><br/></td>
+									<td><br/></td>
+								</tr>
+								<tr>
+									<td style="border-right: 1px solid black"><br/></td>
+									<td><br/></td>
+								</tr>
+								<tr>
+									<td style="border-right: 1px solid black"><br/></td>
+									<td><br/></td>
+								</tr>
+								<tr>
+									<td style="border-right: 1px solid black"><br/></td>
+									<td><br/></td>
+								</tr>
+
+							</table>
+						</td>
+                            
+                        </table>
+                    </div>
+                    <!--halaman-->
+                    <div style="width:100%;height:20px;background-color: #fff;vertical-align: top;">
+                        <table border="0" style="border-collapse:separate;border:0px solid black;width:100%;;font-family:Helvetica;font-size:10px;text-align: right">
+                            <tr style="text-align: right">
+                                <td style="text-align: right">Halaman 4 dari 4</td>
+                            </tr>
+                            <tr style="text-align: right">
+                                <td style="text-align: right">www.bcalife.co.id</td>
+                            </tr>
+                        </table>
+                    </div>
+                </footer>
+            </body>
+            
+</html>

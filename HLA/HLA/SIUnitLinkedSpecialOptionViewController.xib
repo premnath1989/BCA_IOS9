@@ -4,12 +4,11 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="BPreplayItalics.otf">
+        <mutableArray key="BPreplay_Italics.ttf">
             <string>BPreplay-Italic</string>
             <string>BPreplay-Italic</string>
         </mutableArray>
         <mutableArray key="BPreplay_Regular.otf">
-            <string>BPreplay</string>
             <string>BPreplay</string>
             <string>BPreplay</string>
             <string>BPreplay</string>
@@ -29,6 +28,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SIUnitLinkedSpecialOptionViewController">
             <connections>
+                <outlet property="buttonTopUpYear" destination="6bu-u3-Jj5" id="lL6-cC-VcN"/>
+                <outlet property="buttonWithDrawalYear" destination="pHf-T2-ssU" id="9X2-Fw-Nge"/>
+                <outlet property="tableTopUp" destination="zlh-mc-C3q" id="XEw-6h-jXQ"/>
+                <outlet property="tableWithDrawal" destination="lAM-HA-x26" id="qgw-hw-0SF"/>
+                <outlet property="textTopUpAmount" destination="KB3-tJ-Vrh" id="Md7-79-q4h"/>
+                <outlet property="textWithDrawalAmount" destination="sBM-E8-qMQ" id="koo-53-Cpf"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -48,6 +53,9 @@
                         <navigationItem title="Input Data Ilustrasi : Special Option" id="4Wk-yL-cXw">
                             <barButtonItem key="rightBarButtonItem" title="Done" id="GWT-OQ-MRZ">
                                 <color key="tintColor" red="0.85490196080000003" green="0.19215686269999999" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="actionSaveData:" destination="-1" id="9D1-KH-ZFY"/>
+                                </connections>
                             </barButtonItem>
                         </navigationItem>
                     </items>
@@ -77,15 +85,6 @@
                             <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <segmentedControl hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="jYA-EH-zxp">
-                            <rect key="frame" x="38" y="717" width="287" height="29"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            <segments>
-                                <segment title="English"/>
-                                <segment title="B.Malaysia"/>
-                            </segments>
-                        </segmentedControl>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Year" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="17" adjustsFontSizeToFit="NO" id="jRg-tT-dMp">
                             <rect key="frame" x="25" y="403" width="153" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -107,29 +106,14 @@
                             <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VvT-TA-tQe">
-                            <rect key="frame" x="504" y="394" width="246" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="12"/>
-                            <color key="textColor" red="0.94901960780000005" green="0.4431372549" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                         <view contentMode="scaleToFill" id="mjA-nW-rdX">
                             <rect key="frame" x="25" y="394" width="397" height="1"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.85490196080000003" green="0.19215686269999999" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
-                        <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="16" clearButtonMode="whileEditing" id="KB3-tJ-Vrh">
-                            <rect key="frame" x="186" y="166" width="236" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="textColor" red="0.34509803919999998" green="0.34901960780000002" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
-                            <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
-                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
-                        </textField>
-                        <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="16" id="sBM-E8-qMQ">
+                        <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="16" id="sBM-E8-qMQ">
                             <rect key="frame" x="186" y="441" width="236" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="textColor" red="0.34509803919999998" green="0.34901960780000002" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
                             <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
@@ -148,6 +132,9 @@
                             <state key="normal" title="--Please Select--">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="actionTopUpYearPopOver:" destination="-1" eventType="touchUpInside" id="avy-Ix-lvl"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="pHf-T2-ssU">
                             <rect key="frame" x="186" y="403" width="236" height="30"/>
@@ -158,6 +145,9 @@
                             <state key="normal" title="--Please Select--">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="actionwithDrawalYearPopOver:" destination="-1" eventType="touchUpInside" id="OJi-Qg-GHu"/>
+                            </connections>
                         </button>
                         <view contentMode="scaleToFill" id="mbe-RO-BeF">
                             <rect key="frame" x="430" y="119" width="322" height="39"/>
@@ -184,6 +174,10 @@
                             <rect key="frame" x="430" y="157" width="320" height="189"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="4Bv-cg-NvW"/>
+                                <outlet property="delegate" destination="-1" id="QwQ-Dc-hA9"/>
+                            </connections>
                         </tableView>
                         <view contentMode="scaleToFill" id="5iI-4Y-AWo">
                             <rect key="frame" x="428" y="394" width="322" height="39"/>
@@ -210,6 +204,10 @@
                             <rect key="frame" x="428" y="432" width="320" height="189"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="QXV-i4-z49"/>
+                                <outlet property="delegate" destination="-1" id="zTl-pw-GSN"/>
+                            </connections>
                         </tableView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="SNb-mC-dLO">
                             <rect key="frame" x="186" y="479" width="236" height="30"/>
@@ -217,6 +215,9 @@
                             <state key="normal" title="Add">
                                 <color key="titleColor" red="0.85490196080000003" green="0.19215686269999999" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <connections>
+                                <action selector="actionAddWithDrawal:" destination="-1" eventType="touchUpInside" id="S8C-y4-EPZ"/>
+                            </connections>
                         </button>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Regular Top Up" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="17" adjustsFontSizeToFit="NO" id="xVH-T3-HxE">
                             <rect key="frame" x="25" y="36" width="153" height="30"/>
@@ -238,7 +239,17 @@
                             <state key="normal" title="Add">
                                 <color key="titleColor" red="0.85490196080000003" green="0.19215686269999999" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <connections>
+                                <action selector="actionAddTopUp:" destination="-1" eventType="touchUpInside" id="lCe-5p-Tnl"/>
+                            </connections>
                         </button>
+                        <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="16" clearButtonMode="whileEditing" id="KB3-tJ-Vrh">
+                            <rect key="frame" x="186" y="166" width="236" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="textColor" red="0.34509803919999998" green="0.34901960780000002" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
+                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                        </textField>
                     </subviews>
                 </scrollView>
             </subviews>

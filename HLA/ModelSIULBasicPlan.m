@@ -50,7 +50,7 @@
     
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     [database open];
-    BOOL success = [database executeUpdate:@"insert into SI_PO_Data (SINO, PaymentMode, PreferredPremium, RegularTopUp,Premium,SumAssured,PremiumHolidayTerm,TotalUnAppliedPremium,TargetValue) values (?,?,?,?,?,?,?,?,?)",
+    BOOL success = [database executeUpdate:@"insert into SI_UL_BasicPlan (SINO, PaymentMode, PreferredPremium, RegularTopUp,Premium,SumAssured,PremiumHolidayTerm,TotalUnAppliedPremium,TargetValue,ExtraPremiumPercentage,ExtraPremiumMil,ExtraPremiumTerm,Payment_Term,Payment_Frequency,PaymentCurrency) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
                     [dictULBasicPlanData valueForKey:@"SINO"],
                     [dictULBasicPlanData valueForKey:@"PaymentMode"],
                     [dictULBasicPlanData valueForKey:@"PreferredPremium"],
@@ -59,7 +59,13 @@
                     [dictULBasicPlanData valueForKey:@"SumAssured"],
                     [dictULBasicPlanData valueForKey:@"PremiumHolidayTerm"],
                     [dictULBasicPlanData valueForKey:@"TotalUnAppliedPremium"],
-                    [dictULBasicPlanData valueForKey:@"TargetValue"]];
+                    [dictULBasicPlanData valueForKey:@"TargetValue"],
+                    [dictULBasicPlanData valueForKey:@"ExtraPremiumPercentage"],
+                    [dictULBasicPlanData valueForKey:@"ExtraPremiumMil"],
+                    [dictULBasicPlanData valueForKey:@"ExtraPremiumTerm"],
+                    [dictULBasicPlanData valueForKey:@"Payment_Term"],
+                    [dictULBasicPlanData valueForKey:@"Payment_Frequency"],
+                    [dictULBasicPlanData valueForKey:@"PaymentCurrency"]];
     
     if (!success) {
         NSLog(@"%s: insert error: %@", __FUNCTION__, [database lastErrorMessage]);
@@ -75,7 +81,7 @@
     
     FMDatabase *database = [FMDatabase databaseWithPath:path] ;
     [database open];
-    BOOL success = [database executeUpdate:@"update SI_PO_Data set PaymentMode=?, PreferredPremium=?, RegularTopUp=?,Premium=?,SumAssured=?,PremiumHolidayTerm=?,TotalUnAppliedPremium=?,TargetValue=? where SINO=?" ,
+    BOOL success = [database executeUpdate:@"update SI_UL_BasicPlan set PaymentMode=?, PreferredPremium=?, RegularTopUp=?,Premium=?,SumAssured=?,PremiumHolidayTerm=?,TotalUnAppliedPremium=?,TargetValue=?,ExtraPremiumPercentage=?,ExtraPremiumMil=?,ExtraPremiumTerm=?,Payment_Term=?,Payment_Frequency=?,PaymentCurrency=? where SINO=?" ,
                     [dictULBasicPlanData valueForKey:@"PaymentMode"],
                     [dictULBasicPlanData valueForKey:@"PreferredPremium"],
                     [dictULBasicPlanData valueForKey:@"RegularTopUp"],
@@ -84,6 +90,12 @@
                     [dictULBasicPlanData valueForKey:@"PremiumHolidayTerm"],
                     [dictULBasicPlanData valueForKey:@"TotalUnAppliedPremium"],
                     [dictULBasicPlanData valueForKey:@"TargetValue"],
+                    [dictULBasicPlanData valueForKey:@"ExtraPremiumPercentage"],
+                    [dictULBasicPlanData valueForKey:@"ExtraPremiumMil"],
+                    [dictULBasicPlanData valueForKey:@"ExtraPremiumTerm"],
+                    [dictULBasicPlanData valueForKey:@"Payment_Term"],
+                    [dictULBasicPlanData valueForKey:@"Payment_Frequency"],
+                    [dictULBasicPlanData valueForKey:@"PaymentCurrency"],
                     [dictULBasicPlanData valueForKey:@"SINO"]];
     
     if (!success) {
@@ -106,6 +118,12 @@
     NSString* PremiumHolidayTerm;
     NSString* TotalUnAppliedPremium;
     NSString* TargetValue;
+    NSString* ExtraPremiumPercentage;
+    NSString* ExtraPremiumMil;
+    NSString* ExtraPremiumTerm;
+    NSString* Payment_Term;
+    NSString* Payment_Frequency;
+    NSString* PaymentCurrency;
     
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
@@ -124,6 +142,12 @@
         PremiumHolidayTerm = [s stringForColumn:@"PremiumHolidayTerm"];
         TotalUnAppliedPremium = [s stringForColumn:@"TotalUnAppliedPremium"];
         TargetValue = [s stringForColumn:@"TargetValue"];
+        ExtraPremiumPercentage = [s stringForColumn:@"ExtraPremiumPercentage"];
+        ExtraPremiumMil = [s stringForColumn:@"ExtraPremiumMil"];
+        ExtraPremiumTerm = [s stringForColumn:@"ExtraPremiumTerm"];
+        Payment_Term = [s stringForColumn:@"Payment_Term"];
+        Payment_Frequency = [s stringForColumn:@"Payment_Frequency"];
+        PaymentCurrency = [s stringForColumn:@"PaymentCurrency"];
     }
     
     dict=[[NSDictionary alloc]initWithObjectsAndKeys:
@@ -135,7 +159,13 @@
           SumAssured,@"SumAssured",
           PremiumHolidayTerm,@"PremiumHolidayTerm",
           TotalUnAppliedPremium,@"TotalUnAppliedPremium",
-          TargetValue,@"TargetValue",nil];
+          TargetValue,@"TargetValue",
+          ExtraPremiumPercentage ,@"ExtraPremiumPercentage",
+          ExtraPremiumMil ,@"ExtraPremiumMil",
+          ExtraPremiumTerm ,@"ExtraPremiumTerm",
+          Payment_Term ,@"Payment_Term",
+          Payment_Frequency ,@"Payment_Frequency",
+          PaymentCurrency,@"PaymentCurrency",nil];
     
     [results close];
     [database close];

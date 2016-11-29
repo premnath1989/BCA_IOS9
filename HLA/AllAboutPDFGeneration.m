@@ -287,8 +287,9 @@
         NSString *filter2 = @"activityquestionnairepdf";
         NSString *filter3 = @"kuesionerkesehatan";
         NSString *filter4 = @"kuesioneraktivitas";
+        NSString *filter5 = @"wna";
         
-        if (([self doesString:fileName containCharacter:filter1])||([self doesString:fileName containCharacter:filter2])||([self doesString:fileName containCharacter:filter3])||([self doesString:fileName containCharacter:filter4])){
+        if (([self doesString:fileName containCharacter:filter1])||([self doesString:fileName containCharacter:filter2])||([self doesString:fileName containCharacter:filter3])||([self doesString:fileName containCharacter:filter4])||([self doesString:fileName containCharacter:filter5])){
             //NSLog(@"'a' found");
             NSError *error;
             NSString *pdfPath1 = [NSString stringWithFormat:@"%@/SPAJ/%@/%@",docsDirectory,[dictTransaction valueForKey:@"SPAJEappNumber"],[fileNameForDelete objectAtIndex:i]];

@@ -343,11 +343,50 @@
 }
 
 #pragma mark delegate
+-(void)uploadCompleted{
+    NSString* stringSPAJNumber=[dictTransaction valueForKey:@"SPAJNumber"];
+    NSString* stringProductName=[dictTransaction valueForKey:@"ProductName"];
+    NSString* stringPemegangPolis=[dictTransaction valueForKey:@"ProspectName"];
+    
+    NSString *urlStr = [NSString stringWithFormat:@"%@/Service2.svc/UpdateOnPostUploadData?spajNumber=%@&producName=%@&polisOwner=%@", [(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL], stringSPAJNumber,stringProductName,stringPemegangPolis];
+    
+    
+    urlStr = [urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    
+    NSURLSession *session = [NSURLSession sharedSession];
+    [[session dataTaskWithURL:[NSURL URLWithString:urlStr]
+            completionHandler:^(NSData *data,
+                                NSURLResponse *response,
+                                NSError *error) {
+                // handle response
+                if(data != nil){
+                    NSMutableDictionary* json = [NSJSONSerialization
+                                                 JSONObjectWithData:data //1
+                                                 options:NSJSONReadingMutableContainers
+                                                 error:&error];
+                    NSLog(@"%@", json);
+                    [buttonSubmit setEnabled:YES];
+                    [modelSPAJTransaction updateSPAJTransaction:@"SPAJStatus" StringColumnValue:@"Submitted" StringWhereName:@"SPAJEappNumber" StringWhereValue:[dictTransaction valueForKey:@"SPAJEappNumber"]];
+                    
+                    [modelSPAJSubmitTracker saveSPAJSubmitDate:[dictTransaction valueForKey:@"SPAJNumber"] SubmitDate:[formatter getDateToday:@"yyyy-MM-dd HH:mm:ss"]];
+                    [progressBar dismissViewControllerAnimated:YES completion:nil];
+                    
+                    UIAlertController* alertController = [UIAlertController alertControllerWithTitle:@"Sukses Upload" message:@"Data berhasil diupload" preferredStyle:UIAlertControllerStyleAlert];
+                    
+                    [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                        //[progressBar dismissViewControllerAnimated:YES completion:^{}];
+                        [self dismissViewControllerAnimated:YES completion:^{[delegateSPAJFiles loadSPAJTransaction];}];
+                    }]];
+                    [self presentViewController:alertController animated:YES completion:nil];
+                }
+            }] resume];
+}
+
 - (void)downloadisFinished{
     intUploadCount = intUploadCount + 1;
     if (intUploadCount == [directoryContent count]){
         intUploadCount = 0;
-        
+        //[self performSelector:@selector(uploadCompleted) withObject:nil afterDelay:5];
         NSString* stringSPAJNumber=[dictTransaction valueForKey:@"SPAJNumber"];
         NSString* stringProductName=[dictTransaction valueForKey:@"ProductName"];
         NSString* stringPemegangPolis=[dictTransaction valueForKey:@"ProspectName"];

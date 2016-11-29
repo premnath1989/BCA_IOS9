@@ -1,3 +1,10 @@
+// IBRAHIM AZIZ 
+// BHIMBIM
+// http://www.ibrahimaziz.biz
+// built for InfoConnect Sdn Bhd - BCA Life Bless
+// http://www.infoconnect.com.my
+
+
 // GENERATOR
 
 function footerSetterForHealthQuestionnairePDF(stringDetail, intTotalPage)

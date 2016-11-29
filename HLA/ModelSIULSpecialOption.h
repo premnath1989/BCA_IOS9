@@ -15,6 +15,5 @@
 }
 
 -(void)saveULSpecialOptionData:(NSMutableDictionary *)dictULSpecialOptionData;
--(NSDictionary *)getULSpecialOptionDataFor:(NSString *)SINo;
-
+-(NSMutableArray *)getULSpecialOptionDataFor:(NSString *)SINo;
 @end

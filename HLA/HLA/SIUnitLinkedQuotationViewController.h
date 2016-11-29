@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SIUnitLinkedQuotationViewController : UIViewController
+@interface SIUnitLinkedQuotationViewController : UIViewController{
+    IBOutlet UIWebView* webIlustration;
+}
 
 @end

@@ -15,6 +15,7 @@
 #import "ModelOccupation.h"
 #import "Formatter.h"
 #import "ModelSIPOData.h"
+#import "PlanList.h"
 
 @interface SIUnitLinkedPolicyHolderViewController ()<DateViewControllerDelegate,OccupationListDelegate,RelationshipPopoverViewControllerDelegate,ListingTbViewControllerDelegate,PlanListDelegate>{
     ListingTbViewController *prospectList;
@@ -48,6 +49,10 @@
 @synthesize textIllustrationNumber;
 @synthesize delegate;
 
+-(void)viewDidAppear:(BOOL)animated{
+    [self loadDataFromList];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -58,6 +63,9 @@
     formatter = [[Formatter alloc]init];
     modelOccupation = [[ModelOccupation alloc]init];
     modelSIPOData = [[ModelSIPOData alloc]init];
+    planList = [[PlanList alloc] init];
+    planList.TradOrEver = @"TRAD";
+    planList.delegate = self;
     
     [buttonIllustrationDate setTitle:[formatter getDateToday:@"dd/MM/yyyy"] forState:UIControlStateNormal];
     //occupationList = [[OccupationList alloc]init];
@@ -71,8 +79,68 @@
 }
 
 
--(void)setInfoNewIllustration:(NSDictionary *)dictIllustration{
+#pragma mark - Data Load from listing added by faiz
+-(void)loadDataFromList{
+    NSMutableDictionary* dictPOLAData = [[NSMutableDictionary alloc]init];
+    dictPOLAData = [delegate getPOLADictionary];
+    if ([dictPOLAData count]!=0){
+        numberBoolQuickQuote = [NSNumber numberWithInt:[[dictPOLAData valueForKey:@"QuickQuote"] intValue]];
+        
+        if ([numberBoolQuickQuote intValue]==0){
+            [quickQuoteFlag setOn:false];
+        }
+        else{
+            [quickQuoteFlag setOn:true];
+        }
+        [self QuickQuoteFunc:quickQuoteFlag];
+        
+        textIllustrationNumber.text = [dictPOLAData valueForKey:@"SINO"];
+        textPOAge.text = [dictPOLAData valueForKey:@"PO_Age"];
+        textPO.text = [dictPOLAData valueForKey:@"PO_Name"];
+        [buttonPlan setTitle:[dictPOLAData valueForKey:@"ProductName"] forState:UIControlStateNormal];
+        [buttonIllustrationDate setTitle:[dictPOLAData valueForKey:@"SIDate"] forState:UIControlStateNormal];
+        [buttonDOB setTitle:[dictPOLAData valueForKey:@"PO_DOB"] forState:UIControlStateNormal];
+        [buttonOccupation setTitle:[dictPOLAData valueForKey:@"PO_Occp"] forState:UIControlStateNormal];
+        [buttonRelation setTitle:[dictPOLAData valueForKey:@"RelWithLA"] forState:UIControlStateNormal];
+        
+        sex = [dictPOLAData valueForKey:@"PO_Gender"];
+        smoker = [dictPOLAData valueForKey:@"PO_Smoker"];
+        
+        if ([sex isEqualToString:@"MALE"]){
+            [segmentSex setSelectedSegmentIndex:0];
+        }
+        else{
+            [segmentSex setSelectedSegmentIndex:1];
+        }
+        
+        if ([smoker isEqualToString:@"Y"]){
+            [segmentSmoker setSelectedSegmentIndex:0];
+        }
+        else{
+            [segmentSmoker setSelectedSegmentIndex:1];
+        }
+        
+        occupationDesc = [dictPOLAData valueForKey:@"PO_Occp"];
+        occupationCode = [dictPOLAData valueForKey:@"PO_OccpCode"];
+        clientProfileID = [[dictPOLAData valueForKey:@"PO_ClientID"] intValue];
+        productCode = [dictPOLAData valueForKey:@"ProductCode"];
+        relWithLA = [dictPOLAData valueForKey:@"RelWithLA"];
+    }
+    else{
+        [textIllustrationNumber setText:[delegate getRunnigSINumber]];
+        productCode = @"BCALUL";
+        [buttonPlan setTitle:@"BCA Life Unit Linked" forState:UIControlStateNormal];
+    }
+}
 
+-(NSNumber *)getQuickQuoteState{
+    if ([quickQuoteFlag isOn]){
+        numberBoolQuickQuote = [NSNumber numberWithInt:1];
+    }
+    else{
+        numberBoolQuickQuote = [NSNumber numberWithInt:0];
+    }
+    return numberBoolQuickQuote;
 }
 
 - (IBAction)QuickQuoteFunc:(UISwitch *)sender
@@ -138,9 +206,7 @@
     id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
     [activeInstance performSelector:@selector(dismissKeyboard)];
     
-    planList = [[PlanList alloc] init];
-    planList.TradOrEver = @"TRAD";
-    planList.delegate = self;
+    
     popoverViewer = [[UIPopoverController alloc] initWithContentViewController:planList];
     
     CGRect rect = [sender frame];
@@ -209,13 +275,16 @@
 
 #pragma mark dictionary maker
 -(void)setPOLADictionary{
+    NSMutableDictionary* originalDictPOLAData = [[NSMutableDictionary alloc]init];
+    originalDictPOLAData = [delegate getPOLADictionary];
+
     numberIntInternalStaff = [NSNumber numberWithInt:0];
     
     NSMutableDictionary* dictPOLAData = [[NSMutableDictionary alloc]init];
     [dictPOLAData setObject:textIllustrationNumber.text forKey:@"SINO"];
     [dictPOLAData setObject:productCode forKey:@"ProductCode"];
     [dictPOLAData setObject:buttonPlan.currentTitle forKey:@"ProductName"];
-    [dictPOLAData setObject:numberBoolQuickQuote forKey:@"QuickQuote"];
+    [dictPOLAData setObject:numberBoolQuickQuote?:[self getQuickQuoteState] forKey:@"QuickQuote"];
     [dictPOLAData setObject:buttonIllustrationDate.currentTitle forKey:@"SIDate"];
     [dictPOLAData setObject:textPO.text forKey:@"PO_Name"];
     [dictPOLAData setObject:buttonDOB.currentTitle forKey:@"PO_DOB"];
@@ -225,6 +294,8 @@
     [dictPOLAData setObject:occupationDesc forKey:@"PO_Occp"];
     [dictPOLAData setObject:[NSNumber numberWithInt:clientProfileID] forKey:@"PO_ClientID"];
     [dictPOLAData setObject:relWithLA forKey:@"RelWithLA"];
+    [dictPOLAData setObject:numberIntInternalStaff forKey:@"IsInternalStaff"];
+    [dictPOLAData setObject:smoker forKey:@"PO_Smoker"];
     
     if ([relWithLA isEqualToString:@"DIRI SENDIRI"]){
         [dictPOLAData setObject:[NSNumber numberWithInt:clientProfileID] forKey:@"LA_ClientID"];
@@ -240,21 +311,20 @@
         [dictPOLAData setObject:@"" forKey:@"LA_MonthlyIncome"];
     }
     else{
-        [dictPOLAData setObject:@"" forKey:@"LA_ClientID"];
-        [dictPOLAData setObject:@"" forKey:@"LA_Name"];
-        [dictPOLAData setObject:@"" forKey:@"LA_DOB"];
-        [dictPOLAData setObject:@"" forKey:@"LA_Age"];
-        [dictPOLAData setObject:@"" forKey:@"LA_Gender"];
-        [dictPOLAData setObject:@"" forKey:@"LA_OccpCode"];
-        [dictPOLAData setObject:@"" forKey:@"LA_Occp"];
+        [dictPOLAData setObject:[originalDictPOLAData valueForKey:@"LA_ClientID"]?:@"" forKey:@"LA_ClientID"];
+        [dictPOLAData setObject:[originalDictPOLAData valueForKey:@"LA_Name"]?:@"" forKey:@"LA_Name"];
+        [dictPOLAData setObject:[originalDictPOLAData valueForKey:@"LA_DOB"]?:@"" forKey:@"LA_DOB"];
+        [dictPOLAData setObject:[originalDictPOLAData valueForKey:@"LA_Age"]?:@"" forKey:@"LA_Age"];
+        [dictPOLAData setObject:[originalDictPOLAData valueForKey:@"LA_Gender"]?:@"" forKey:@"LA_Gender"];
+        [dictPOLAData setObject:[originalDictPOLAData valueForKey:@"LA_OccpCode"]?:@"" forKey:@"LA_OccpCode"];
+        [dictPOLAData setObject:[originalDictPOLAData valueForKey:@"LA_Occp"]?:@"" forKey:@"LA_Occp"];
         
-        [dictPOLAData setObject:@"" forKey:@"LA_Smoker"];
-        [dictPOLAData setObject:@"" forKey:@"LA_CommencementDate"];
-        [dictPOLAData setObject:@"" forKey:@"LA_MonthlyIncome"];
+        [dictPOLAData setObject:[originalDictPOLAData valueForKey:@"LA_Smoker"]?:@"" forKey:@"LA_Smoker"];
+        [dictPOLAData setObject:[originalDictPOLAData valueForKey:@"LA_CommencementDate"]?:@"" forKey:@"LA_CommencementDate"];
+        [dictPOLAData setObject:[originalDictPOLAData valueForKey:@"LA_MonthlyIncome"]?:@"" forKey:@"LA_MonthlyIncome"];
     }
     
-    [dictPOLAData setObject:numberIntInternalStaff forKey:@"IsInternalStaff"];
-    [dictPOLAData setObject:smoker forKey:@"PO_Smoker"];
+    
     [dictPOLAData setObject:@"" forKey:@"PO_CommencementDate"];
     [dictPOLAData setObject:@"" forKey:@"PO_MonthlyIncome"];
     

@@ -10,6 +10,7 @@
 @protocol ULLifeAssuredViewControllerDelegate
 -(void)setPOLADictionary:(NSMutableDictionary *)NSDictionary;
 -(NSMutableDictionary *)getPOLADictionary;
+-(void)showUnitLinkModuleAtIndex:(NSIndexPath *)indexPath;
 @end
 
 @interface SIUnitLinkedLifeAssuredViewController : UIViewController  {
@@ -21,6 +22,8 @@
     IBOutlet UITextField* textLAAge;
     
     IBOutlet UISegmentedControl* segmentSex;
+    IBOutlet UISegmentedControl* segmentSmoker;
 }
+-(void)loadDataFromList;
 @property (nonatomic,strong) id <ULLifeAssuredViewControllerDelegate> delegate;
 @end

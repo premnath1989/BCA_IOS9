@@ -17,9 +17,10 @@
     NSUInteger selectedIndex;
     id <PlanListDelegate> delegate;
 }
+-(void)setProductDataForUnitLink;
 
-@property (retain, nonatomic) NSMutableArray *ListOfPlan;
-@property (retain, nonatomic) NSMutableArray *ListOfCode;
+@property (strong, nonatomic) NSMutableArray *ListOfPlan;
+@property (strong, nonatomic) NSMutableArray *ListOfCode;
 @property (nonatomic,strong) id <PlanListDelegate> delegate;
 
 @property (nonatomic,strong) id TradOrEver;

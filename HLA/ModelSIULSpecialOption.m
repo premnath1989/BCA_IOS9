@@ -9,7 +9,7 @@
 #import "ModelSIULSpecialOption.h"
 
 @implementation ModelSIULSpecialOption
--(int)getULSpecialOptionDataCount:(NSString *)SINo{
+-(int)getULSpecialOptionDataCount:(NSString *)SINo Year:(NSString *)stringYear Option:(NSString *)stringOption{
     int count;
     
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
@@ -18,7 +18,7 @@
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     [database open];
     
-    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select count(*) from SI_UL_SpecialOption where SINO = \"%@\"",SINo]];
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select count(*) from SI_UL_SpecialOption where SINO = \"%@\" and Year = \"%@\" and Option = \"%@\"",SINo,stringYear,stringOption]];
     while ([s next]) {
         count = [s intForColumn:@"count(*)"];
     }
@@ -30,7 +30,7 @@
 
 -(void)saveULSpecialOptionData:(NSMutableDictionary *)dictULSpecialOptionData{
     //cek the SINO exist or not
-    int exist = [self getULSpecialOptionDataCount:[dictULSpecialOptionData valueForKey:@"SINO"]];
+    int exist = [self getULSpecialOptionDataCount:[dictULSpecialOptionData valueForKey:@"SINO"] Year:[dictULSpecialOptionData valueForKey:@"Year"] Option:[dictULSpecialOptionData valueForKey:@"Option"]];
     
     if (exist>0){
         //update data
@@ -48,12 +48,11 @@
     
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     [database open];
-    BOOL success = [database executeUpdate:@"insert into SI_UL_SpecialOption (SINO, TopUpYear, TopUpAmount, WithDrawalYear,WithDrawalAmount) values (?,?,?,?,?)",
+    BOOL success = [database executeUpdate:@"insert into SI_UL_SpecialOption (SINO, Year, Amount,Option) values (?,?,?,?)",
                     [dictULSpecialOptionData valueForKey:@"SINO"],
-                    [dictULSpecialOptionData valueForKey:@"TopUpYear"],
-                    [dictULSpecialOptionData valueForKey:@"TopUpAmount"],
-                    [dictULSpecialOptionData valueForKey:@"WithDrawalYear"],
-                    [dictULSpecialOptionData valueForKey:@"WithDrawalAmount"]];
+                    [dictULSpecialOptionData valueForKey:@"Year"],
+                    [dictULSpecialOptionData valueForKey:@"Amount"],
+                    [dictULSpecialOptionData valueForKey:@"Option"]];
     
     if (!success) {
         NSLog(@"%s: insert error: %@", __FUNCTION__, [database lastErrorMessage]);
@@ -69,11 +68,10 @@
     
     FMDatabase *database = [FMDatabase databaseWithPath:path] ;
     [database open];
-    BOOL success = [database executeUpdate:@"update SI_UL_SpecialOption set TopUpYear=?, TopUpAmount=?, WithDrawalYear=?,WithDrawalAmount=? where SINO=?" ,
-                    [dictULSpecialOptionData valueForKey:@"TopUpYear"],
-                    [dictULSpecialOptionData valueForKey:@"TopUpAmount"],
-                    [dictULSpecialOptionData valueForKey:@"WithDrawalYear"],
-                    [dictULSpecialOptionData valueForKey:@"WithDrawalAmount"],
+    BOOL success = [database executeUpdate:@"update SI_UL_SpecialOption set Year=?, Amount=?, Option=? where SINO=?" ,
+                    [dictULSpecialOptionData valueForKey:@"Year"],
+                    [dictULSpecialOptionData valueForKey:@"Amount"],
+                    [dictULSpecialOptionData valueForKey:@"Option"],
                     [dictULSpecialOptionData valueForKey:@"SINO"]];
     
     if (!success) {
@@ -84,14 +82,15 @@
     [database close];
 }
 
--(NSDictionary *)getULSpecialOptionDataFor:(NSString *)SINo{
+-(NSMutableArray *)getULSpecialOptionDataFor:(NSString *)SINo{
+    NSMutableArray* arraySpecialOption = [[NSMutableArray alloc]init];
     NSDictionary *dict;
     
     NSString *SINO;
-    NSString *TopUpYear;
-    NSString *TopUpAmount;
-    NSString *WithDrawalYear;
-    NSString *WithDrawalAmount;
+    NSString *Year;
+    NSString *Amount;
+    NSString *Option;
+    
     
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
@@ -102,21 +101,23 @@
     FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select * from SI_UL_SpecialOption where SINO = \"%@\"",SINo]];
     while ([s next]) {
         SINO = [s stringForColumn:@"SINO"];
-        TopUpYear = [s stringForColumn:@"TopUpYear"];
-        TopUpAmount = [s stringForColumn:@"TopUpAmount"];
-        WithDrawalYear = [s stringForColumn:@"WithDrawalYear"];
-        WithDrawalAmount = [s stringForColumn:@"WithDrawalAmount"];
+        Year = [s stringForColumn:@"Year"];
+        Amount = [s stringForColumn:@"Amount"];
+        Option = [s stringForColumn:@"Option"];
+        
+        dict=[[NSDictionary alloc]initWithObjectsAndKeys:
+              SINO,@"SINO",
+              Year,@"Year",
+              Amount,@"Amount",
+              Option,@"Option",nil];
+        
+        [arraySpecialOption addObject:dict];
     }
     
-    dict=[[NSDictionary alloc]initWithObjectsAndKeys:
-          SINO,@"SINO",
-          TopUpYear,@"TopUpYear",
-          TopUpAmount,@"TopUpAmount",
-          WithDrawalYear,@"WithDrawalYear",
-          WithDrawalAmount,@"WithDrawalAmount",nil];
+    
     
     [results close];
     [database close];
-    return dict;
+    return arraySpecialOption;
 }
 @end

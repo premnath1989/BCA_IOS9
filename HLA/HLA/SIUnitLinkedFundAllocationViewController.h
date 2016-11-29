@@ -10,8 +10,14 @@
 @protocol ULFundAllocationViewControllerDelegate
     -(void)setULFundAllocationDictionary:(NSMutableDictionary *)dictULFundAllocation;
     -(NSMutableDictionary *)getULFundAllocationDictionary;
+    -(NSMutableDictionary *)getBasicPlanDictionary;
+    -(NSString *)getRunnigSINumber;
+    -(void)showUnitLinkModuleAtIndex:(NSIndexPath *)indexPath;
 @end
-@interface SIUnitLinkedFundAllocationViewController : UIViewController
+@interface SIUnitLinkedFundAllocationViewController : UIViewController{
+    IBOutlet UITextField* textFixedIncome;
+    IBOutlet UITextField* textEquityIncome;
+}
 
 
 @property (nonatomic,strong) id <ULFundAllocationViewControllerDelegate> delegate;

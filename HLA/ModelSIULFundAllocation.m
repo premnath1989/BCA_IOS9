@@ -48,13 +48,16 @@
     
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     [database open];
-    BOOL success = [database executeUpdate:@"insert into SI_UL_FundAllocation (SINO, DanaProteksiNusantara, DanaEkuitasNusantara, DanaObligasiNusantara,BNPParibasCashInvestFund,DanaProgresifNusantara) values (?,?,?,?,?,?)",
+    BOOL success = [database executeUpdate:@"insert into SI_UL_FundAllocation (SINO, DanaProteksiNusantara, DanaEkuitasNusantara, DanaObligasiNusantara,BNPParibasCashInvestFund,DanaProgresifNusantara,IDRFixedIncomeFund,IDREquityIncomeFund,USDFixedIncomeFund,USDEquityIncomeFund) values (?,?,?,?,?,?,?,?,?,?)",
                     [dictULFundAllocationData valueForKey:@"SINO"],
                     [dictULFundAllocationData valueForKey:@"DanaProteksiNusantara"],
                     [dictULFundAllocationData valueForKey:@"DanaEkuitasNusantara"],
                     [dictULFundAllocationData valueForKey:@"DanaObligasiNusantara"],
                     [dictULFundAllocationData valueForKey:@"BNPParibasCashInvestFund"],
-                    [dictULFundAllocationData valueForKey:@"DanaProgresifNusantara"]];
+                    [dictULFundAllocationData valueForKey:@"DanaProgresifNusantara"],
+                    [dictULFundAllocationData valueForKey:@"IDRFixedIncomeFund"],
+                    [dictULFundAllocationData valueForKey:@"IDREquityIncomeFund"],[dictULFundAllocationData valueForKey:@"USDFixedIncomeFund"],
+                    [dictULFundAllocationData valueForKey:@"USDEquityIncomeFund"]];
     
     if (!success) {
         NSLog(@"%s: insert error: %@", __FUNCTION__, [database lastErrorMessage]);
@@ -70,12 +73,15 @@
     
     FMDatabase *database = [FMDatabase databaseWithPath:path] ;
     [database open];
-    BOOL success = [database executeUpdate:@"update SI_UL_FundAllocation set DanaProteksiNusantara=?, DanaEkuitasNusantara=?, DanaObligasiNusantara=?,BNPParibasCashInvestFund=?,DanaProgresifNusantara=? where SINO=?" ,
+    BOOL success = [database executeUpdate:@"update SI_UL_FundAllocation set DanaProteksiNusantara=?, DanaEkuitasNusantara=?, DanaObligasiNusantara=?,BNPParibasCashInvestFund=?,DanaProgresifNusantara=?,IDRFixedIncomeFund=?, IDREquityIncomeFund=?,USDFixedIncomeFund=?,USDEquityIncomeFund=? where SINO=?" ,
                     [dictULFundAllocationData valueForKey:@"DanaProteksiNusantara"],
                     [dictULFundAllocationData valueForKey:@"DanaEkuitasNusantara"],
                     [dictULFundAllocationData valueForKey:@"DanaObligasiNusantara"],
                     [dictULFundAllocationData valueForKey:@"BNPParibasCashInvestFund"],
                     [dictULFundAllocationData valueForKey:@"DanaProgresifNusantara"],
+                    [dictULFundAllocationData valueForKey:@"IDRFixedIncomeFund"],
+                    [dictULFundAllocationData valueForKey:@"IDREquityIncomeFund"],
+                    [dictULFundAllocationData valueForKey:@"USDFixedIncomeFund"],[dictULFundAllocationData valueForKey:@"USDEquityIncomeFund"],
                     [dictULFundAllocationData valueForKey:@"SINO"]];
     
     if (!success) {
@@ -95,6 +101,10 @@
     NSString* DanaObligasiNusantara;
     NSString* BNPParibasCashInvestFund;
     NSString* DanaProgresifNusantara;
+    NSString* IDRFixedIncomeFund;
+    NSString* IDREquityIncomeFund;
+    NSString* USDFixedIncomeFund;
+    NSString* USDEquityIncomeFund;
     
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
@@ -110,6 +120,10 @@
         DanaObligasiNusantara = [s stringForColumn:@"DanaObligasiNusantara"];
         BNPParibasCashInvestFund = [s stringForColumn:@"BNPParibasCashInvestFund"];
         DanaProgresifNusantara = [s stringForColumn:@"DanaProgresifNusantara"];
+        IDRFixedIncomeFund = [s stringForColumn:@"IDRFixedIncomeFund"];
+        IDREquityIncomeFund = [s stringForColumn:@"IDREquityIncomeFund"];
+        USDFixedIncomeFund = [s stringForColumn:@"USDFixedIncomeFund"];
+        USDEquityIncomeFund = [s stringForColumn:@"USDEquityIncomeFund"];
     }
     
     dict=[[NSDictionary alloc]initWithObjectsAndKeys:
@@ -119,6 +133,10 @@
           DanaObligasiNusantara,@"DanaObligasiNusantara",
           BNPParibasCashInvestFund,@"BNPParibasCashInvestFund",
           DanaProgresifNusantara,@"DanaProgresifNusantara",
+          IDRFixedIncomeFund,@"IDRFixedIncomeFund",
+          IDREquityIncomeFund,@"IDREquityIncomeFund",
+          USDFixedIncomeFund,@"USDFixedIncomeFund",
+          USDEquityIncomeFund,@"USDEquityIncomeFund",
           nil];
     
     [results close];

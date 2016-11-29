@@ -2272,38 +2272,46 @@ function setTextForm(stringID, stringValue)
 
 function setTextPDF(stringID, stringValue)
 {
-    if (stringValue.indexOf(stringSeparatorTelephone) > 0)
+	var intIndexSeparatorTelephone = stringValue.indexOf(stringSeparatorTelephone);
+	var stringJQueryID = stringKres + stringID;
+
+    if (intIndexSeparatorTelephone > 0)
     {
-		var stringHandphoneSuffixID = stringID.substring(stringID.length - stringHandphoneSuffix.length - 1, stringID.length - 1);
+    	if ($(stringJQueryID).is("input[type='text']") == true)
+    	{
+    		setTextGeneral(stringID, stringValue);
+    	}
+    	else
+    	{
+    		var stringHandphoneSuffixID = stringID.substring(stringID.length - stringHandphoneSuffix.length - 1, stringID.length - 1);
 		
-		if (stringHandphoneSuffixID != stringHandphoneSuffix)
-		{
-			var arrayTelephoneString = stringValue.split(stringSeparatorTelephone);
-			var arrayTelephoneID = [stringIDPrefix, stringIDInfix];
-			var booleanPrefix = $.isNumeric(arrayTelephoneString[0].substring(arrayTelephoneString[0].length - 1, arrayTelephoneString[0]));
-			var booleanSuffix = $.isNumeric(arrayTelephoneString[1].substring(0, 1));
-			
-			if (booleanPrefix == true && booleanSuffix == true)
+			if (stringHandphoneSuffixID != stringHandphoneSuffix)
 			{
-				for(var i = 0; i < arrayTelephoneString.length; i++)
+				var arrayTelephoneString = stringValue.split(stringSeparatorTelephone);
+				var arrayTelephoneID = [stringIDPrefix, stringIDInfix];
+				var booleanPrefix = $.isNumeric(arrayTelephoneString[0].substring(arrayTelephoneString[0].length - 1, arrayTelephoneString[0]));
+				var booleanSuffix = $.isNumeric(arrayTelephoneString[1].substring(0, 1));
+				
+				if (booleanPrefix == true && booleanSuffix == true)
 				{
-					setBoxGeneral(stringID + arrayTelephoneID[i], arrayTelephoneString[i]);
+					for(var i = 0; i < arrayTelephoneString.length; i++)
+					{
+						setBoxGeneral(stringID + arrayTelephoneID[i], arrayTelephoneString[i]);
+					}
+				}
+				else
+				{
+					setBoxGeneral(stringID, stringValue);
 				}
 			}
 			else
 			{
 				setBoxGeneral(stringID, stringValue);
 			}
-		}
-		else
-		{
-			setBoxGeneral(stringID, stringValue);
-		}
+    	}
     }
     else
     {
-        var stringJQueryID = stringKres + stringID;
-        
         if ($(stringJQueryID).is("div") == true)
         {
             setLineGeneral(stringID, stringValue);
@@ -2858,11 +2866,11 @@ function getFromDatabase(objectContent, stringPageType)
 								{
 									if (stringValue == "female")
 									{
-										$(stringCellJQueryID).append("Perempuan");
+										$(stringCellJQueryID).append("P");
 									}
 									else
 									{
-										$(stringCellJQueryID).append("Laki - laki");
+										$(stringCellJQueryID).append("L");
 									}
 								}
 								else
@@ -3390,7 +3398,7 @@ function getFromDatabase(objectContent, stringPageType)
 
 				}
 			}						
-			
+
 			if (stringPageForeigner == true)
 			{
 				var stringForeigner = arrayFind(objectContent, "RadioButton" + stringPageInfixTypeCurrent + "Foreigner")

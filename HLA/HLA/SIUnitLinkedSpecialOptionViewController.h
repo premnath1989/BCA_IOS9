@@ -9,11 +9,22 @@
 #import <UIKit/UIKit.h>
 
 @protocol ULSpecialOptionViewControllerDelegate
-    -(void)setULSpecialOptionDictionary:(NSMutableDictionary *)dictULSpecialOption;
-    -(NSMutableDictionary *)getULSpecialOptionDictionary;
+    -(void)setULSpecialOptionArray:(NSMutableArray *)arraySpecialOption;
+    -(NSMutableArray *)getULSpecialOptionArray;
+    -(NSString *)getRunnigSINumber;
+    -(void)showUnitLinkModuleAtIndex:(NSIndexPath *)indexPath;
 @end
 
 
-@interface SIUnitLinkedSpecialOptionViewController : UIViewController
+@interface SIUnitLinkedSpecialOptionViewController : UIViewController{
+    IBOutlet UITableView* tableTopUp;
+    IBOutlet UITableView* tableWithDrawal;
+    
+    IBOutlet UIButton* buttonTopUpYear;
+    IBOutlet UIButton* buttonWithDrawalYear;
+    
+    IBOutlet UITextField* textTopUpAmount;
+    IBOutlet UITextField* textWithDrawalAmount;
+}
 @property (nonatomic,strong) id <ULSpecialOptionViewControllerDelegate> delegate;
 @end

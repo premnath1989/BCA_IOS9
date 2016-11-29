@@ -17,6 +17,8 @@
 #import "ModelSIPOData.h"
 #import "Model_SI_Master.h"
 #import "ModelSIULBasicPlan.h"
+#import "ModelSIULFundAllocation.h"
+#import "ModelSIULSpecialOption.h"
 
 @interface SIMenuUnitLinkedViewController ()<ULPolicyHolderViewControllerDelegate,ULLifeAssuredViewControllerDelegate,ULBasicPlanViewControllerDelegate,ULRiderViewControllerDelegate,ULSpecialOptionViewControllerDelegate,ULFundAllocationViewControllerDelegate>{
     SIUnitLinkedRiderViewController * siUnitLinkedRiderVC;
@@ -30,6 +32,8 @@
     ModelSIPOData *modelSIPOData;
     ModelSIULBasicPlan *modelSIULBasicPlan;
     Model_SI_Master *modelSIMaster;
+    ModelSIULFundAllocation* modelSIULFundAllocation;
+    ModelSIULSpecialOption *modelSIULSpecialOption;
 }
 
 @end
@@ -77,11 +81,16 @@
     modelSIPOData = [[ModelSIPOData alloc]init];
     modelSIULBasicPlan = [[ModelSIULBasicPlan alloc]init];
     modelSIMaster = [[Model_SI_Master alloc] init];
+    modelSIULFundAllocation = [[ModelSIULFundAllocation alloc]init];
+    modelSIULSpecialOption = [[ModelSIULSpecialOption alloc]init];
     
     arrayIntValidate = [[NSMutableArray alloc] initWithObjects:@"0",@"0",@"0",@"0",@"0",@"0",@"0", nil];
     NumberListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"1", @"2", @"3", @"4",@"5",@"6",@"7", nil];
     ListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"Pemegang Polis", @"Tertanggung", @"Asuransi Dasar", @"Alokasi Uang",@"Asuransi Tambahan",@"Special Option",@"Ilustrasi", nil];
 
+    
+    //load pemegang polis view
+    [self showUnitLinkModuleAtIndex:[NSIndexPath indexPathForRow:0 inSection:0]];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -99,44 +108,52 @@
         if (i == indexPath.row){
             if (i==0){
                 [siUnitLinkedPolicyHolderVC.textIllustrationNumber setText:stringSINumber];
+                [siUnitLinkedPolicyHolderVC loadDataFromList];
+            }
+            else if (i==1){
+                [siUnitLinkedLifeAssuredVC loadDataFromList];
             }
             [viewRightView addSubview:[arrayUnitLinkedModuleView objectAtIndex:i]];
         }
     }
+    [myTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionTop];
 }
 
+-(NSString *)getRunnigSINumber{
+    return stringSINumber;
+}
 #pragma mark Save SIMaster
 
 -(void)saveSIMaster{
     NSMutableDictionary *dictionaryMasterForInsert = [[NSMutableDictionary alloc]initWithObjectsAndKeys:[[self getPOLADictionary] valueForKey:@"SINO"],@"SINO",@"1.1",@"SI_Version",@"Not Created",@"ProposalStatus", nil];
     
-    [modelSIMaster saveIlustrationMaster:dictionaryMasterForInsert];
+    [modelSIMaster saveSIMaster:dictionaryMasterForInsert];
 }
 
 #pragma mark delegate Fund Allocation
 -(void)setInitialULFundAllocationDictionary{
-    dictParentULBasicPlanData = [[NSMutableDictionary alloc]initWithDictionary:[modelSIULBasicPlan getULBasicPlanDataFor:stringSINumber]];
+    dictParentULFundAllocationData = [[NSMutableDictionary alloc]initWithDictionary:[modelSIULFundAllocation getULFundAllocationDataFor:stringSINumber]];
 }
 
 -(void)setULFundAllocationDictionary:(NSMutableDictionary *)dictULBasicPlanData{
-    dictParentULBasicPlanData = [[NSMutableDictionary alloc]initWithDictionary:dictULBasicPlanData];
+    dictParentULFundAllocationData = [[NSMutableDictionary alloc]initWithDictionary:dictULBasicPlanData];
 }
 
 -(NSMutableDictionary *)getULFundAllocationDictionary{
-    return dictParentULBasicPlanData ;
+    return dictParentULFundAllocationData ;
 }
 
 #pragma mark delegate Special Option
 -(void)setInitialULSpecialOptionDictionary{
-    dictParentULBasicPlanData = [[NSMutableDictionary alloc]initWithDictionary:[modelSIULBasicPlan getULBasicPlanDataFor:stringSINumber]];
+    arraySpecialOptionData = [[NSMutableArray alloc]initWithArray:[modelSIULSpecialOption getULSpecialOptionDataFor:stringSINumber]];
 }
 
--(void)setULSpecialOptionDictionary:(NSMutableDictionary *)dictULBasicPlanData{
-    dictParentULBasicPlanData = [[NSMutableDictionary alloc]initWithDictionary:dictULBasicPlanData];
+-(void)setULSpecialOptionArray:(NSMutableArray *)arraySpecialOption{
+    arraySpecialOptionData = [[NSMutableArray alloc]initWithArray:arraySpecialOption];
 }
 
--(NSMutableDictionary *)getULSpecialOptionDictionary{
-    return dictParentULBasicPlanData ;
+-(NSMutableArray *)getULSpecialOptionArray{
+    return arraySpecialOptionData ;
 }
 
 #pragma mark delegate Rider

@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="BPreplay_Regular.otf">
+        <mutableArray key="BPreplay_Regular.ttf">
             <string>BPreplay</string>
             <string>BPreplay</string>
             <string>BPreplay</string>
@@ -23,6 +23,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SIUnitLinkedFundAllocationViewController">
             <connections>
+                <outlet property="textEquityIncome" destination="e8z-db-UmT" id="kCu-ZU-i3V"/>
+                <outlet property="textFixedIncome" destination="aBc-Rx-BxW" id="MO5-Cg-miC"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -194,6 +196,9 @@
                         <navigationItem title="Fund Allocation" id="i0i-Ub-wrs">
                             <barButtonItem key="rightBarButtonItem" title="Done" id="wjK-nd-QnH">
                                 <color key="tintColor" red="0.85490196080000003" green="0.19215686269999999" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="actionSaveData:" destination="-1" id="HUl-65-uJw"/>
+                                </connections>
                             </barButtonItem>
                         </navigationItem>
                     </items>

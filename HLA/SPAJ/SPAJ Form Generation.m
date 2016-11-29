@@ -867,7 +867,7 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
                     countElement = [modelSPAJAnswers getCountElementID:@"mining" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"KS_IN"];
                 }
                 else if ([allAboutPDFGeneration doesString:stringName containCharacter:@"foreigner"]){
-                    countElement = [modelSPAJAnswers getCountElementID:@"Foreigner" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"TR"];
+                    countElement = [modelSPAJAnswers getCountElementIDForeigner:@"Foreigner" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"TR"];
                 }
                 else{
                     countElement = [modelSPAJAnswers getCountElementID:stringName SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"KS_IN"];
@@ -890,7 +890,7 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
                     countElement = [modelSPAJAnswers getCountElementID:@"mining" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"KS_PH"];
                 }
                 else if ([allAboutPDFGeneration doesString:stringName containCharacter:@"foreigner"]){
-                    countElement = [modelSPAJAnswers getCountElementID:@"Foreigner" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"PO"];
+                    countElement = [modelSPAJAnswers getCountElementIDForeigner:@"Foreigner" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"PO"];
                 }
                 else{
                     countElement = [modelSPAJAnswers getCountElementID:stringName SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"KS_PH"];

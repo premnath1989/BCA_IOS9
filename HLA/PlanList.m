@@ -50,6 +50,11 @@
 	}
 }
 
+-(void)setProductDataForUnitLink{
+    selectedIndex = [ListOfPlan count]-1;
+    [delegate Planlisting:self didSelectCode:self.selectedCode andDesc:self.selectedDesc];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
 	return YES;
