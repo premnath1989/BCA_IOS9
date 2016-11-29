@@ -20,7 +20,7 @@
 #import "ModelSIULFundAllocation.h"
 #import "ModelSIULSpecialOption.h"
 
-@interface SIMenuUnitLinkedViewController ()<ULPolicyHolderViewControllerDelegate,ULLifeAssuredViewControllerDelegate,ULBasicPlanViewControllerDelegate,ULRiderViewControllerDelegate,ULSpecialOptionViewControllerDelegate,ULFundAllocationViewControllerDelegate>{
+@interface SIMenuUnitLinkedViewController ()<ULPolicyHolderViewControllerDelegate,ULLifeAssuredViewControllerDelegate,ULBasicPlanViewControllerDelegate,ULRiderViewControllerDelegate,ULSpecialOptionViewControllerDelegate,ULFundAllocationViewControllerDelegate,ULQuotationViewControllerDelegate>{
     SIUnitLinkedRiderViewController * siUnitLinkedRiderVC;
     SIUnitLinkedBasicPlanViewController *siUnitLinkedBasicPlanVC;
     SIUnitLinkedQuotationViewController *siUnitLinkedQuotationVC;
@@ -74,6 +74,7 @@
     
     siUnitLinkedQuotationVC =[[SIUnitLinkedQuotationViewController alloc]initWithNibName:@"SIUnitLinkedQuotationViewController" bundle:nil];
     [siUnitLinkedQuotationVC.view setTag:6];
+    [siUnitLinkedQuotationVC setDelegate:self];
     
     
     arrayUnitLinkedModuleView = [[NSMutableArray alloc]initWithObjects:siUnitLinkedPolicyHolderVC.view,siUnitLinkedLifeAssuredVC.view,siUnitLinkedBasicPlanVC.view,siUnitLinkedFundAllocationVC.view,siUnitLinkedRiderVC.view,siUnitLinkedSpecialOptionVC.view,siUnitLinkedQuotationVC.view, nil];

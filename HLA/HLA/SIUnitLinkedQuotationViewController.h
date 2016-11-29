@@ -8,8 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol ULQuotationViewControllerDelegate
+    -(NSString *)getRunnigSINumber;
+@end
+
 @interface SIUnitLinkedQuotationViewController : UIViewController{
     IBOutlet UIWebView* webIlustration;
 }
 
+@property (nonatomic,strong) id <ULQuotationViewControllerDelegate> delegate;
 @end

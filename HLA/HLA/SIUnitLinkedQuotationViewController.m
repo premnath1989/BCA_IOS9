@@ -22,7 +22,7 @@
 
 
 @implementation SIUnitLinkedQuotationViewController
-
+@synthesize delegate;
 -(void)viewDidAppear:(BOOL)animated{
     [self loadHTML];
 }
@@ -75,7 +75,7 @@
     NSArray* path_forDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
     NSString* documentsDirectory = [path_forDirectory objectAtIndex:0];
     if (pdfData) {
-        [pdfData writeToFile:[NSString stringWithFormat:@"%@/%@_%@.pdf",documentsDirectory,[_dictionaryPOForInsert valueForKey:@"ProductName"],[_dictionaryPOForInsert valueForKey:@"SINO"]] atomically:YES];
+        [pdfData writeToFile:[NSString stringWithFormat:@"%@/BCA Life Unit Linked_%@.pdf",documentsDirectory,[delegate getRunnigSINumber]] atomically:YES];
     }
     else
     {
