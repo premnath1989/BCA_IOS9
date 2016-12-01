@@ -10,6 +10,9 @@
 
 @protocol ULQuotationViewControllerDelegate
     -(NSString *)getRunnigSINumber;
+    -(NSMutableDictionary *)getBasicPlanDictionary;
+    -(NSMutableDictionary *)getPOLADictionary;
+    -(NSMutableDictionary *)getULFundAllocationDictionary;
 @end
 
 @interface SIUnitLinkedQuotationViewController : UIViewController{

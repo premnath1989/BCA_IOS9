@@ -9,7 +9,7 @@
 #import "ModelCFFTransaction.h"
 
 @implementation ModelCFFTransaction
-
+@synthesize delegate;
 -(void)saveCFFTransaction:(NSDictionary *)cffTransactionDictionary{
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
@@ -290,6 +290,8 @@
     }
     [results close];
     [database close];
+    
+    [delegate voidCFFCompleted];
 }
 
 

@@ -10,9 +10,16 @@
 #import "FMDatabase.h"
 #import "FMResultSet.h"
 
+@protocol CFFTransactionModelDelegate
+-(void)voidCFFCompleted;
+@end
+
 @interface ModelCFFTransaction : NSObject{
     FMResultSet *results;
 }
+
+ @property (nonatomic,weak) id <CFFTransactionModelDelegate> delegate;
+
 -(void)saveCFFTransaction:(NSDictionary *)cffTransactionDictionary;
 -(NSMutableArray *)getAllCFF:(NSString *)sortedBy SortMethod:(NSString *)sortMethod;
 -(NSMutableArray *)searchCFF:(NSDictionary *)dictSearch;

@@ -15,6 +15,7 @@
 #import "ModelOccupation.h"
 #import "Formatter.h"
 #import "ModelSIPOData.h"
+#import "Alert.h"
 
 @interface SIUnitLinkedLifeAssuredViewController ()<DateViewControllerDelegate,OccupationListDelegate,RelationshipPopoverViewControllerDelegate,ListingTbViewControllerDelegate,PlanListDelegate>{
     
@@ -24,6 +25,7 @@
     ModelOccupation *modelOccupation;
     Formatter *formatter;
     ModelSIPOData *modelSIPOData;
+    Alert* alert;
     
     UIColor *themeColour;
     
@@ -52,6 +54,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     modelSIPOData = [[ModelSIPOData alloc]init];
+    alert = [[Alert alloc]init];
     formatter = [[Formatter alloc]init];
     // Do any additional setup after loading the view from its nib.
 }
@@ -232,10 +235,21 @@
 
 -(void)datePick:(DateViewController *)inController strDate:(NSString *)aDate strAge:(NSString *)aAge intAge:(int)bAge intANB:(int)aANB
 {
-    [buttonDOB setTitle:aDate forState:UIControlStateNormal];
+    int laAge = [formatter calculateAge:aDate];
+    int differenceDay = [formatter calculateDifferenceDay:aDate];
     
-    [textLAAge setText:[NSString stringWithFormat:@"%i",[formatter calculateAge:aDate]]];
-    [popoverViewer dismissPopoverAnimated:YES];
+    if ((differenceDay<180)||(laAge>70)){
+        NSString *stringAlertLAAge=@"Usia tidak boleh kurang dari 180 hari atau lebih dari 70 tahun";
+        UIAlertController *alertEmptyImage = [alert alertInformation:@"Peringatan" stringMessage:stringAlertLAAge];
+        [popoverViewer dismissPopoverAnimated:YES];
+        [self presentViewController:alertEmptyImage animated:YES completion:nil];
+    }
+    else{
+        [buttonDOB setTitle:aDate forState:UIControlStateNormal];
+        
+        [textLAAge setText:[NSString stringWithFormat:@"%i",[formatter calculateAge:aDate]]];
+        [popoverViewer dismissPopoverAnimated:YES];
+    }
 }
 
 - (void)OccupCodeSelected:(NSString *)OccupCode

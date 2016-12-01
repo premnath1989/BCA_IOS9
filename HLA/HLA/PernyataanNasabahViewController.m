@@ -9,7 +9,7 @@
 #import "PernyataanNasabahViewController.h"
 #import "ModelCFFTransaction.h"
 #import "ModelCFFHtml.h"
-@interface PernyataanNasabahViewController (){
+@interface PernyataanNasabahViewController ()<CFFTransactionModelDelegate>{
     ModelCFFTransaction* modelCFFTransaction;
     ModelCFFHtml* modelCFFHtml;
 }
@@ -35,6 +35,7 @@
 
 - (void)viewDidLoad {
     modelCFFTransaction = [[ModelCFFTransaction alloc]init];
+    [modelCFFTransaction setDelegate:self];
     modelCFFHtml = [[ModelCFFHtml alloc]init];
     
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
@@ -54,8 +55,14 @@
 }
 
 - (void)voidDoneCFFData{
+    modelCFFTransaction = [[ModelCFFTransaction alloc]init];
+    [modelCFFTransaction setDelegate:self];
     NSLog(@"CFFHeader selected %@",cffHeaderSelectedDictionary);
     [modelCFFTransaction updateCFFStatu:@"Completed" CFFTransactionID:[[cffHeaderSelectedDictionary valueForKey:@"CFFTransactionID"] intValue]];
+
+}
+
+-(void)voidCFFCompleted{
     [delegate voidCompleteCFFData];
 }
 

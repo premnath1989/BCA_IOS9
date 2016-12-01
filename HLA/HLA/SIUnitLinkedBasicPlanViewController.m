@@ -11,9 +11,11 @@
 #import "ModelSIULBasicPlan.h"
 #import "Formatter.h"
 #import "SingleUnitLinkedCalculation.h"
+#import "Alert.h"
 
 @interface SIUnitLinkedBasicPlanViewController ()<UIPopoverPresentationControllerDelegate,UnitLinkedPopOverDelegate,UITextFieldDelegate>{
     Formatter* formatter;
+    Alert* alert;
     UnitLinkedPopOverViewController* unitLinkedPopOverVC;
     SingleUnitLinkedCalculation* singleUnitLinkedCalculation;
     UIPopoverPresentationController *popController;
@@ -36,7 +38,7 @@
     [super viewDidLoad];
     formatter = [[Formatter alloc]init];
     singleUnitLinkedCalculation = [[SingleUnitLinkedCalculation alloc]init];
-    
+    alert = [[Alert alloc]init];
     unitLinkedPopOverVC = [[UnitLinkedPopOverViewController alloc]initWithNibName:@"UnitLinkedPopOverViewController" bundle:nil];
     unitLinkedPopOverVC.UnitLinkedPopOverDelegate = self;
     
@@ -47,6 +49,8 @@
     
     [textBasicPremiField addTarget:self action:@selector(RealTimeFormat:) forControlEvents:UIControlEventEditingChanged];
     [textBasicPremiField addTarget:self action:@selector(BasicPremiEditingEnd:) forControlEvents:UIControlEventEditingDidEnd];
+    [textExtraPremiPercentField addTarget:self action:@selector(ExtraPremiPercentEditingEnd:) forControlEvents:UIControlEventEditingDidEnd];
+    [textExtraPremiNumberField addTarget:self action:@selector(ExtraPremiNumberEditingEnd:) forControlEvents:UIControlEventEditingDidEnd];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -142,6 +146,36 @@
     [sender setText:[formatter numberToCurrencyDecimalFormatted:plainNumber]];
 }
 
+-(void)ExtraPremiPercentEditingEnd:(UITextField *)sender{
+    NSArray* arrayNumberValidate = [[NSArray alloc]initWithObjects:@"25",@"50",@"75",@"100",@"125",@"150",@"175",@"200",@"225",@"250", nil];
+    NSString * combinedArray = [arrayNumberValidate componentsJoinedByString:@","];
+    if ([sender.text length]>0){
+        if (![arrayNumberValidate containsObject: sender.text] ) {
+            // do found
+            NSString *stringAlertPremiRange = [NSString stringWithFormat:@"Pilihan extra premi adalah %@",combinedArray];
+            UIAlertController *alertEmptyImage = [alert alertInformation:@"Peringatan" stringMessage:stringAlertPremiRange];
+            [self presentViewController:alertEmptyImage animated:YES completion:^{
+                [sender becomeFirstResponder];
+            }];
+        }
+    }
+}
+
+-(void)ExtraPremiNumberEditingEnd:(UITextField *)sender{
+    NSArray* arrayNumberValidate = [[NSArray alloc]initWithObjects:@"2",@"4",@"6",@"8",@"10",@"12",@"14",@"16",@"18",@"20", nil];
+    NSString * combinedArray = [arrayNumberValidate componentsJoinedByString:@","];
+    if ([sender.text length]>0){
+        if (![arrayNumberValidate containsObject: sender.text] ) {
+            // do found
+            NSString *stringAlertPremiRange = [NSString stringWithFormat:@"Pilihan extra premi adalah %@",combinedArray];
+            UIAlertController *alertEmptyImage = [alert alertInformation:@"Peringatan" stringMessage:stringAlertPremiRange];
+            [self presentViewController:alertEmptyImage animated:YES completion:^{
+                [sender becomeFirstResponder];
+            }];
+        }
+    }
+}
+
 -(void)BasicPremiEditingEnd:(UITextField *)sender{
     double basicPremi = [[formatter convertNumberFromStringCurrency:textBasicPremiField.text] doubleValue];
     double sumAssured = [singleUnitLinkedCalculation calculateSumAssured:basicPremi];
@@ -182,19 +216,73 @@
             return (([string isEqualToString:filtered])&&(newLength <= 19));
         }
     }
+    if (textField == textExtraPremiPercentField)
+    {
+        //KY - IMPORTANT - PUT THIS LINE TO DETECT THE FIRST CHARACTER PRESSED....
+        //This method is being called before the content of textField.text is changed.
+        NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
+        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        
+        return (([string isEqualToString:filtered])&&(newLength <= 3));
+        
+    }
+    if ((textField == textExtraPremiNumberField)||(textField == textMasaExtraPremiField))
+    {
+        //KY - IMPORTANT - PUT THIS LINE TO DETECT THE FIRST CHARACTER PRESSED....
+        //This method is being called before the content of textField.text is changed.
+        NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
+        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        
+        return (([string isEqualToString:filtered])&&(newLength <= 2));
+        
+    }
     return YES;
+}
+
+#pragma mark validation 
+-(BOOL)validateSave{
+    NSString* textPremi=textBasicPremiField.text;
+    NSNumber *numberPremi = [formatter convertAnyNonDecimalNumberToString:textPremi];
+    long long longPremi = [numberPremi longLongValue];
+
+    NSString* currency = [segmentCurrency titleForSegmentAtIndex:segmentCurrency.selectedSegmentIndex];
+    
+    NSString *stringAlertMinimumPremi=@"Premi minimal adalah Rp 100.000.000 atau USD 10,000";
+    if ([currency isEqualToString:@"IDR"]){
+        if (longPremi < 100000000){
+            UIAlertController *alertEmptyImage = [alert alertInformation:@"Peringatan" stringMessage:stringAlertMinimumPremi];
+            [self presentViewController:alertEmptyImage animated:YES completion:^{
+                [textBasicPremiField becomeFirstResponder];
+            }];
+            
+            return false;
+        }
+    }
+    else{
+        if (longPremi < 10000){
+            UIAlertController *alertEmptyImage = [alert alertInformation:@"Peringatan" stringMessage:stringAlertMinimumPremi];
+            [self presentViewController:alertEmptyImage animated:YES completion:^{
+                [textBasicPremiField becomeFirstResponder];
+            }];
+            return false;
+        }
+    }
+    
+    return true;
 }
 
 #pragma mark saveData
 -(IBAction)actionSaveData:(UIBarButtonItem *)sender{
-    //set the updated data to parent
-    [self setULBasicPlanDictionary];
-    
-    //get updated data from parent and save it.
-    [modelSIULBasicPlan saveULBasicPlanData:[delegate getBasicPlanDictionary]];
+    if ([self validateSave]){
+        //set the updated data to parent
+        [self setULBasicPlanDictionary];
+        
+        //get updated data from parent and save it.
+        [modelSIULBasicPlan saveULBasicPlanData:[delegate getBasicPlanDictionary]];
 
-    //change to next page
-    [delegate showUnitLinkModuleAtIndex:[NSIndexPath indexPathForRow:3 inSection:0]];
+        //change to next page
+        [delegate showUnitLinkModuleAtIndex:[NSIndexPath indexPathForRow:3 inSection:0]];
+    }
 }
 
 #pragma mark delegate

@@ -61,6 +61,11 @@
     
     [self setBooleanValidationValue];
     [myTableView reloadData];
+    
+    if ([[cffHeaderSelectedDictionary valueForKey:@"CFFStatus"] isEqualToString:@"Completed"]){
+        [myTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:4 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
+        [self tableView:myTableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:4 inSection:0]];
+    }
 }
 
 - (void)viewDidLoad {
@@ -212,6 +217,7 @@
 -(void)loadPernyataanNasabahView{
     cffID = [cffHeaderSelectedDictionary valueForKey:@"CustomerStatementCFFID"];
     NSMutableArray *arrayHtml = [modelCFFHtml selectHtmlData:[cffID intValue] HtmlSection:@"CS"];
+    pernyataanNasabahVC.cffHeaderSelectedDictionary = [[NSDictionary alloc]initWithDictionary:cffHeaderSelectedDictionary];
     areaPotensialDiskusiVC.cffHeaderSelectedDictionary = [[NSDictionary alloc]initWithDictionary:cffHeaderSelectedDictionary];
     areaPotensialDiskusiVC.prospectProfileID = prospectProfileID;
     areaPotensialDiskusiVC.cffTransactionID  = cffTransactionID;
@@ -300,6 +306,8 @@
     else{
         boolPernyataanNasabah=false;
     }
+    
+    
 }
 
 #pragma mark - table view
@@ -402,7 +410,10 @@
     }
     if (boolPernyataanNasabah){
         if (indexPath.row == 4){
-            //[cell setBackgroundColor:selectedColor];
+            if ([[cffHeaderSelectedDictionary valueForKey:@"CFFStatus"] isEqualToString:@"Completed"])
+            {
+                [cell setBackgroundColor:selectedColor];
+            }
             [cell setUserInteractionEnabled:true];
         }
         else{

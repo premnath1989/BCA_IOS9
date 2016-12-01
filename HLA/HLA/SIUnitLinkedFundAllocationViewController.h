@@ -17,6 +17,7 @@
 @interface SIUnitLinkedFundAllocationViewController : UIViewController{
     IBOutlet UITextField* textFixedIncome;
     IBOutlet UITextField* textEquityIncome;
+    IBOutlet UITextField* textTotalIncome;
 }
 
 

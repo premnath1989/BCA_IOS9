@@ -11,6 +11,7 @@
 @protocol ULSpecialOptionViewControllerDelegate
     -(void)setULSpecialOptionArray:(NSMutableArray *)arraySpecialOption;
     -(NSMutableArray *)getULSpecialOptionArray;
+    -(NSMutableDictionary *)getBasicPlanDictionary;
     -(NSString *)getRunnigSINumber;
     -(void)showUnitLinkModuleAtIndex:(NSIndexPath *)indexPath;
 @end

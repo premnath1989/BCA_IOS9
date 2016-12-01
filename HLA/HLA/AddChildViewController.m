@@ -422,10 +422,22 @@
         segGender.selectedSegmentIndex = 0;
         ClientSmoker = @"";
         segSmoker.selectedSegmentIndex = 0;
+        IDTypeCodeSelected = @"";
     }
 }
 
 -(NSMutableDictionary *)setDictionaryChild{
+    if ([segGender selectedSegmentIndex]==0) {
+        gender = @"MALE";
+    } else if([segGender selectedSegmentIndex]==1) {
+        gender = @"FEMALE";
+    }
+    
+    if ([segSmoker selectedSegmentIndex]==0) {
+        ClientSmoker = @"Y";
+    } else if ([segSmoker selectedSegmentIndex]==1) {
+        ClientSmoker = @"N";
+    }
     NSMutableDictionary* dictionaryChild;
     NSString* childName = txtName.text;
     NSString* childDOB = outletDOB.titleLabel.text;

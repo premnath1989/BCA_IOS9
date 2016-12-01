@@ -16,6 +16,7 @@
 #import "Formatter.h"
 #import "ModelSIPOData.h"
 #import "PlanList.h"
+#import "Alert.h"
 
 @interface SIUnitLinkedPolicyHolderViewController ()<DateViewControllerDelegate,OccupationListDelegate,RelationshipPopoverViewControllerDelegate,ListingTbViewControllerDelegate,PlanListDelegate>{
     ListingTbViewController *prospectList;
@@ -25,6 +26,7 @@
     PlanList *planList;
     ModelOccupation *modelOccupation;
     ModelSIPOData *modelSIPOData;
+    Alert* alert;
     
     Formatter *formatter;
     
@@ -64,6 +66,8 @@
     modelOccupation = [[ModelOccupation alloc]init];
     modelSIPOData = [[ModelSIPOData alloc]init];
     planList = [[PlanList alloc] init];
+    alert = [[Alert alloc]init];
+    
     planList.TradOrEver = @"TRAD";
     planList.delegate = self;
     
@@ -252,7 +256,7 @@
     relationShipTypePicker = [[RelationshipPopoverViewController alloc] initWithStyle:UITableViewStylePlain];
     relationShipTypePicker.delegate = self;
     
-    [relationShipTypePicker loadData:[NSNumber numberWithInteger:0]];
+    [relationShipTypePicker loadData:[NSNumber numberWithInteger:1]];
     popoverViewer = [[UIPopoverController alloc] initWithContentViewController:relationShipTypePicker];
     [popoverViewer presentPopoverFromRect:[sender bounds] inView:sender permittedArrowDirections:UIPopoverArrowDirectionLeft animated:YES];
 }
@@ -331,6 +335,12 @@
     [delegate setPOLADictionary:dictPOLAData];
 }
 
+#pragma mark validation
+-(BOOL)ValidateSave{
+    
+    
+}
+
 #pragma mark saveData
 -(IBAction)actionSaveData:(UIBarButtonItem *)sender{
     //set the updated data to parent
@@ -365,10 +375,20 @@
 
 -(void)datePick:(DateViewController *)inController strDate:(NSString *)aDate strAge:(NSString *)aAge intAge:(int)bAge intANB:(int)aANB
 {
-    [buttonDOB setTitle:aDate forState:UIControlStateNormal];
+    int poAge = [formatter calculateAge:aDate];
     
-    [textPOAge setText:[NSString stringWithFormat:@"%i",[formatter calculateAge:aDate]]];
-    [popoverViewer dismissPopoverAnimated:YES];
+    if ((poAge<21)||(poAge>70)){
+        NSString* stringAlertPOAge = @"Usia pemegang polis tidak boleh kurang dari 21 atau lebih dari 70 tahun";
+        UIAlertController *alertEmptyImage = [alert alertInformation:@"Peringatan" stringMessage:stringAlertPOAge];
+        [popoverViewer dismissPopoverAnimated:YES];
+        [self presentViewController:alertEmptyImage animated:YES completion:nil];
+    }
+    else{
+        [buttonDOB setTitle:aDate forState:UIControlStateNormal];
+        [textPOAge setText:[NSString stringWithFormat:@"%i",[formatter calculateAge:aDate]]];
+        [popoverViewer dismissPopoverAnimated:YES];
+    }
+    
 }
 
 - (void)OccupCodeSelected:(NSString *)OccupCode

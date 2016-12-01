@@ -11,7 +11,7 @@
                 padding-top:0;
                 margin:auto;
                 width:100%;
-                height:480px;
+                height:460px;
             }
             thead,table-Summary1 {
                 border: 1px solid black;
@@ -267,7 +267,7 @@
         <head>
             <!--<body onload="onBodyLoad()">-->
             <body>
-				<div id="gstPage"><br/></div>
+				<div id="gstPage"></div>
 				<div id="header">
 					<table border="0" style="border-collapse:separate;border:0px solid black;width:100%;">
 						<tr>
@@ -284,14 +284,14 @@
 							</td>
 							<td style="width: 30%; font-size:13px;font-family:Helvetica; text-align: right" valign="top" style="margin:0" >
 								<header1>BCA Life Proteksi & Investasiku</header1></br>
-								<font color="red">Nomor Ilustrasi :</font> <font color="red"><label id="SINumber">16011813027</label></font>
+								<font color="red">Nomor Ilustrasi :</font> <font color="red"><label id="stringSINumber1">16011813027</label></font>
 							</td>
 						</tr>
 					</table>
 				</div>
 				<div id="maincontainer">
 				<div class="main-content">
-					<br/>
+					
 					<table style="border-collapse:separate;border:0px solid black;width:100%;border-spacing:0" >
 						<tr>
 							<td colspan="4" style="text-align:left;padding: 0px 0px 0px 0px; width: 50%;"><b>Data Calon Tertanggung dan Pemegang Polis</b></td>
@@ -309,18 +309,18 @@
 						</tr>
 						<tr>
 							<td style="text-align:left;padding: 0px 0px 0px 0px; width: 12.5%;border-right: 1px solid black;border-bottom: 1px solid black;border-left: 1px solid black">Nama</td>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 12.5%;border-right: 1px solid black;border-bottom: 1px solid black"></td>
-							<td style="text-align:left;padding: 0px 0px 0px 0px; width: 12.5%;border-right: 1px solid black;border-bottom: 1px solid black"></td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 12.5%;border-right: 1px solid black;border-bottom: 1px solid black"><label id="stringLAName"></label></td>
+							<td style="text-align:left;padding: 0px 0px 0px 0px; width: 12.5%;border-right: 1px solid black;border-bottom: 1px solid black"><label id="stringPOName"></label></td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; width: 12.5%;"></td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; width: 12.5%;">Mata Uang</td>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 12.5%;"><label id="Currency">Rupiah</label></td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 12.5%;"><label id="stringCurrency"></label></td>
 							<td style="text-align:left;padding: 0px 0px 0px 0px; width: 12.5%;"></td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; width: 12.5%;"></td>
 						</tr>
 						<tr>
 							<td style="text-align:left;padding: 0px 0px 0px 0px; width: 12.5%;border-right: 1px solid black;border-bottom: 1px solid black;border-left: 1px solid black">Usia</td>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 12.5%;border-right: 1px solid black;border-bottom: 1px solid black"></td>
-							<td style="text-align:left;padding: 0px 0px 0px 0px; width: 12.5%;border-right: 1px solid black;border-bottom: 1px solid black"></td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 12.5%;border-right: 1px solid black;border-bottom: 1px solid black"><label id="stringLAAge"></label></td>
+							<td style="text-align:left;padding: 0px 0px 0px 0px; width: 12.5%;border-right: 1px solid black;border-bottom: 1px solid black"><label id="stringPOAge"></label></td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; width: 12.5%;"></td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; width: 12.5%;">Masa Pembayaran Premi</td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; width: 12.5%;">Premi Tunggal</td>
@@ -329,8 +329,8 @@
 						</tr>
 						<tr>
 							<td style="text-align:left;padding: 0px 0px 0px 0px; width: 12.5%;border-right: 1px solid black;border-bottom: 1px solid black;border-left: 1px solid black">Jenis Kelamin</td>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 12.5%;border-right: 1px solid black;border-bottom: 1px solid black"></td>
-							<td style="text-align:left;padding: 0px 0px 0px 0px; width: 12.5%;border-right: 1px solid black;border-bottom: 1px solid black"></td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 12.5%;border-right: 1px solid black;border-bottom: 1px solid black"><label id="stringLAGender"></label></td>
+							<td style="text-align:left;padding: 0px 0px 0px 0px; width: 12.5%;border-right: 1px solid black;border-bottom: 1px solid black"><label id="stringPOGender"></label></td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; width: 12.5%;"></td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; width: 12.5%;"></td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; width: 12.5%;"></td>
@@ -339,8 +339,8 @@
 						</tr>
 						<tr>
 							<td style="text-align:left;padding: 0px 0px 0px 0px; width: 12.5%;border-right: 1px solid black;border-bottom: 1px solid black;border-left: 1px solid black">Pekerjaan</td>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 12.5%;border-right: 1px solid black;border-bottom: 1px solid black"></td>
-							<td style="text-align:left;padding: 0px 0px 0px 0px; width: 12.5%;border-right: 1px solid black;border-bottom: 1px solid black"></td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 12.5%;border-right: 1px solid black;border-bottom: 1px solid black"><label id="stringLAOccp"></label></td>
+							<td style="text-align:left;padding: 0px 0px 0px 0px; width: 12.5%;border-right: 1px solid black;border-bottom: 1px solid black"><label id="stringPOOccp"></label></td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; width: 12.5%;"></td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; width: 12.5%;"></td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; width: 12.5%;"></td>
@@ -363,9 +363,9 @@
 							<td style="text-align: left">   Asuransi Dasar</td>
 							<td style="text-align: left">BCA Life Heritage Protection</td>
 							<td style="text-align: left">Hingga umur 99</td>
-							<td style="text-align: left"><label id="BasicSA"></label></td>
-							<td style="text-align: left"><label id="COI"></label></td>
-							<td style="text-align: left"><label id="Premi"></label></td>
+							<td style="text-align: left"><label id="stringSumAssured"></label></td>
+							<td style="text-align: left"><label id="stringCostOfInsurance"></label></td>
+							<td style="text-align: left"><label id="stringTotalPremi"></label></td>
 						</tr>
 						<tr>
 							<td colspan="5"></br>(Frekuensi Pembayaran, Mata Uang, Masa Pembayaran, Uang Pertanggungan dan Premi tersebut di atas adalah bagian dari SPAJ yang akan digunakan sebagai acuan dalam proses penerbitan Polis)</td>
@@ -374,9 +374,7 @@
 					</table>
 					<!--520,430px-->
 					<div style="width:100%;background-color: #fff;vertical-align: top;font-size:10px;font-family: Helvetica;">
-						<br/>
 						* Biaya Asuransi akan dipotong setiap bulannya dan besarnya dapat berubah tergantung pada Uang Pertanggungan, usia, dan jenis kelamin dari Tertanggung.
-						<br/>
 						<br/>
 					<table style="border-collapse:separate;border:0px solid black;width:100%;border-spacing:0" >
 						<tr>
@@ -385,7 +383,7 @@
 						</tr>
 						<tr>
 							<td style="text-align:left;padding: 0px 0px 0px 0px; width: 20%;">Premi Dasar Sekaligus</td>
-                            <td style="text-align:right;padding: 0px 0px 0px 0px; width: 20%;">500,000,000</td>
+                            <td style="text-align:right;padding: 0px 0px 0px 0px; width: 20%;"><label id="stringPremiDasarSekaligus"></label></td>
 							<td style="text-align:center;padding: 0px 0px 0px 0px; width: 20%;"></td>
                             <td style="text-align:center;padding: 0px 0px 0px 0px; width: 17.5%;border-right: 1px solid black;border-bottom: 1px solid black;border-left: 1px solid black;border-top: 1px solid black"><b>Jenis Dana Investasi</b></td>
                             <td style="text-align:center;padding: 0px 0px 0px 0px; width: 17.5%;border-right: 1px solid black;border-bottom: 1px solid black;border-top: 1px solid black"><b>Presentase %</b></td>
@@ -393,10 +391,10 @@
 						</tr>
 						<tr>
 							<td style="text-align:left;padding: 0px 0px 0px 0px; width: 20%;">Premi Top-Up Sekaligus</td>
-                            <td style="text-align:right;padding: 0px 0px 0px 0px; width: 20%;">9,666,666,667</td>
+                            <td style="text-align:right;padding: 0px 0px 0px 0px; width: 20%;"><label id="stringPremiTopUpSekaligus"></label></td>
 							<td style="text-align:left;padding: 0px 0px 0px 0px; width: 20%;"></td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; width: 17.5%;border-right: 1px solid black;border-bottom: 1px solid black;border-left: 1px solid black;">BCA Life IDR Fixed Income Fund</td>
-                            <td style="text-align:right;padding: 0px 0px 0px 0px; width: 17.5%;border-right: 1px solid black;border-bottom: 1px solid black;">Presentase %</td>
+                            <td style="text-align:right;padding: 0px 0px 0px 0px; width: 17.5%;border-right: 1px solid black;border-bottom: 1px solid black;"><label id="stringIDRFixedIncome"></label>%</td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; width: 5%;"></td>
 						</tr>
 						<tr>
@@ -404,7 +402,7 @@
                             <td style="text-align:center;padding: 0px 0px 0px 0px; width: 20%;"></td>
 							<td style="text-align:left;padding: 0px 0px 0px 0px; width: 20%;"></td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; width: 17.5%;border-right: 1px solid black;border-bottom: 1px solid black;border-left: 1px solid black;">BCA Life IDR Equity Fund</td>
-                            <td style="text-align:right;padding: 0px 0px 0px 0px; width: 17.5%;border-right: 1px solid black;border-bottom: 1px solid black;">Presentase %</td>
+                            <td style="text-align:right;padding: 0px 0px 0px 0px; width: 17.5%;border-right: 1px solid black;border-bottom: 1px solid black;"><label id="stringIDREquityIncome"></label>%</td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; width: 5%;"></td>
 						</tr>
 						<tr>
@@ -412,7 +410,7 @@
                             <td style="text-align:center;padding: 0px 0px 0px 0px; width: 20%;"></td>
 							<td style="text-align:left;padding: 0px 0px 0px 0px; width: 20%;"></td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; width: 17.5%;border-right: 1px solid black;border-bottom: 1px solid black;border-left: 1px solid black;">BCA Life USD Fixed Income Fund</td>
-                            <td style="text-align:right;padding: 0px 0px 0px 0px; width: 17.5%;border-right: 1px solid black;border-bottom: 1px solid black;">Presentase %</td>
+                            <td style="text-align:right;padding: 0px 0px 0px 0px; width: 17.5%;border-right: 1px solid black;border-bottom: 1px solid black;"><label id="stringUSDFixedIncome"></label>%</td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; width: 5%;"></td>
 						</tr>
 						<tr>
@@ -420,16 +418,16 @@
                             <td style="text-align:center;padding: 0px 0px 0px 0px; width: 20%;"></td>
 							<td style="text-align:left;padding: 0px 0px 0px 0px; width: 20%;"></td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; width: 17.5%;border-right: 1px solid black;border-bottom: 1px solid black;border-left: 1px solid black;">BCA Life USD Equity Fund</td>
-                            <td style="text-align:right;padding: 0px 0px 0px 0px; width: 17.5%;border-right: 1px solid black;border-bottom: 1px solid black;">Presentase %</td>
+                            <td style="text-align:right;padding: 0px 0px 0px 0px; width: 17.5%;border-right: 1px solid black;border-bottom: 1px solid black;"><label id="stringUSDEquityIncome"></label>%</td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; width: 5%;"></td>
 						</tr>
 
 					</table>
-					<br/>
+					
 					</div>
 					<div style="width:100%;background-color: #fff;vertical-align: top;font-size:10px;font-family: Helvetica;">
 						<b>Ringkasan Manfaat</b></br>
-						Untuk keperluan ilustrasi, penjelasan lengkap mengenai Manfaat Asuransi (termasuk syarat-syarat dan pengecualian-pengecualian) tercantum dalam polis, berlaku dan mengikat.</br></br>
+						Untuk keperluan ilustrasi, penjelasan lengkap mengenai Manfaat Asuransi (termasuk syarat-syarat dan pengecualian-pengecualian) tercantum dalam polis, berlaku dan mengikat.</br>
 						<table  >
 							
 							<!--<tr>
@@ -490,7 +488,8 @@
 				<!--Tanda tangan-->				
 				<div style="width:100%;background-color: #fff;vertical-align: top;">
 					<br/>
-					<table border="0" style="border-collapse:separate;border:0px solid black;width:100%;">
+                    <br/>
+                    <table border="0" style="border-collapse:separate;border:0px solid black;width:100%;">
 						<td style="width: 30%">
 							<table  style="border-collapse:separate;border:0px solid black;width:100%;">
 								<tr>
@@ -572,7 +571,7 @@
 
 					</table>
 				</div>
-				<!--halaman-->
+                <!--halaman-->
 				<div style="width:100%;height:20px;background-color: #fff;vertical-align: top;">
 						<table border="0" style="border-collapse:separate;border:0px solid black;width:100%;;font-family:Helvetica;font-size:10px;text-align: right">
 							<tr style="text-align: right">
@@ -582,8 +581,9 @@
 								<td style="text-align: right">www.bcalife.co.id</td>
 							</tr>
 						</table>
-						</div>
+                </div>
 				</footer>
+                
             </body>
             
 </html>

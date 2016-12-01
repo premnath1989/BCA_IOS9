@@ -7,7 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-
-@interface SingleUnitLinkedCalculation : NSObject
+#import "ModelSIULSpecialOption.h"
+#import "Formatter.h"
+@interface SingleUnitLinkedCalculation : NSObject{
+    ModelSIULSpecialOption* modelSIULSpecialOption;
+    Formatter* formatter;
+}
 -(double)calculateSumAssured:(double)basicPremi;
+-(double)calculateTotalPremiTopUp:(NSString *)stringSINO;
+-(double)calculateTotalPremi:(double)totalPremiSekaligus TotalPremiTopUp:(double)totalPremiTopUp;
 @end

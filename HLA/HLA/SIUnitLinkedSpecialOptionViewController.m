@@ -10,8 +10,12 @@
 #import "ModelSIULSpecialOption.h"
 #import "UnitLinkedPopOverViewController.h"
 #import "SpecialOptionTableViewCell.h"
+#import "Formatter.h"
+#import "Alert.h"
 
 @interface SIUnitLinkedSpecialOptionViewController ()<UIPopoverPresentationControllerDelegate,UnitLinkedPopOverDelegate>{
+    Formatter *formatter;
+    Alert* alert;
     ModelSIULSpecialOption  *modelSIULSpecialOption;
     UnitLinkedPopOverViewController* unitLinkedPopOverVC;
     UIPopoverPresentationController *popController;
@@ -36,10 +40,17 @@
     [super viewDidLoad];
     modelSIULSpecialOption = [[ModelSIULSpecialOption alloc]init];
     
-    
+    formatter = [[Formatter alloc]init];
+    alert = [[Alert alloc]init];
     unitLinkedPopOverVC = [[UnitLinkedPopOverViewController alloc]initWithNibName:@"UnitLinkedPopOverViewController" bundle:nil];
     unitLinkedPopOverVC.UnitLinkedPopOverDelegate = self;
     // Do any additional setup after loading the view from its nib.
+    
+    
+    [textTopUpAmount addTarget:self action:@selector(RealTimeFormat:) forControlEvents:UIControlEventEditingChanged];
+    [textTopUpAmount addTarget:self action:@selector(AmountEditingEnd:) forControlEvents:UIControlEventEditingDidEnd];
+
+    [textWithDrawalAmount addTarget:self action:@selector(RealTimeFormat:) forControlEvents:UIControlEventEditingChanged];
     
     arraySpecialOption = [[NSMutableArray alloc]init];
 
@@ -68,6 +79,75 @@
     }
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSUInteger newLength = [textField.text length] + [string length] - range.length;
+    
+    if ((textField == textTopUpAmount)||(textField == textWithDrawalAmount))
+    {
+        BOOL return13digit = FALSE;
+        //KY - IMPORTANT - PUT THIS LINE TO DETECT THE FIRST CHARACTER PRESSED....
+        //This method is being called before the content of textField.text is changed.
+        NSString * AI = [textField.text stringByReplacingCharactersInRange:range withString:string];
+        
+        if ([AI rangeOfString:@"."].length == 1) {
+            NSArray  *comp = [AI componentsSeparatedByString:@"."];
+            NSString *get_num = [[comp objectAtIndex:0] stringByReplacingOccurrencesOfString:@"," withString:@""];
+            int c = [get_num length];
+            return13digit = (c > 15);
+            
+        } else if([AI rangeOfString:@"."].length == 0) {
+            NSArray  *comp = [AI componentsSeparatedByString:@"."];
+            NSString *get_num = [[comp objectAtIndex:0] stringByReplacingOccurrencesOfString:@"," withString:@""];
+            int c = [get_num length];
+            return13digit = (c  > 15);
+        }
+        
+        NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
+        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        
+        if( return13digit == TRUE) {
+            return (([string isEqualToString:filtered])&&(newLength <= 15));
+        } else {
+            return (([string isEqualToString:filtered])&&(newLength <= 19));
+        }
+    }
+    return YES;
+}
+
+-(void)AmountEditingEnd:(UITextField *)sender{
+    NSString* textTopUp=sender.text;
+    NSNumber *numberTopUp = [formatter convertAnyNonDecimalNumberToString:textTopUp];
+    long long longPremi = [numberTopUp longLongValue];
+
+    NSMutableDictionary* dictULBasicPlanDictionary = [delegate getBasicPlanDictionary];
+    
+    NSString* currency = [dictULBasicPlanDictionary valueForKey:@"PaymentCurrency"];
+    
+    NSString *stringAlertMinimumPremi=@"Premi minimal adalah Rp 10.000.000 atau USD 1,000";
+    if ([currency isEqualToString:@"IDR"]){
+        if (longPremi < 10000000){
+            UIAlertController *alertEmptyImage = [alert alertInformation:@"Peringatan" stringMessage:stringAlertMinimumPremi];
+            [self presentViewController:alertEmptyImage animated:YES completion:^{
+                [textTopUpAmount becomeFirstResponder];
+            }];
+        }
+    }
+    else{
+        if (longPremi < 1000){
+            UIAlertController *alertEmptyImage = [alert alertInformation:@"Peringatan" stringMessage:stringAlertMinimumPremi];
+            [self presentViewController:alertEmptyImage animated:YES completion:^{
+                [textTopUpAmount becomeFirstResponder];
+            }];
+        }
+    }
+}
+
+
+-(void)RealTimeFormat:(UITextField *)sender{
+    NSNumber *plainNumber = [formatter convertAnyNonDecimalNumberToString:sender.text];
+    [sender setText:[formatter numberToCurrencyDecimalFormatted:plainNumber]];
+}
 
 #pragma mark dictionary maker
 -(void)setULSpecialOtionDictionary{
@@ -161,6 +241,9 @@
 -(IBAction)actionSaveData:(UIBarButtonItem *)sender{
     //set the updated data to parent
     [self setULSpecialOtionDictionary];
+    
+    //delete first
+    [modelSIULSpecialOption deleteULSpecialOptionData:[delegate getRunnigSINumber]];
     
     //get updated data from parent and save it.
     NSMutableArray* arraySpecialOptionForInsert = [[NSMutableArray alloc]initWithArray:[delegate getULSpecialOptionArray]];
