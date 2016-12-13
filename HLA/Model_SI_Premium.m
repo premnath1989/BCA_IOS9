@@ -12,6 +12,8 @@
 @implementation Model_SI_Premium
 
 -(void)savePremium:(NSDictionary *)dataPremium{
+    modelSIMaster = [[Model_SI_Master alloc]init];
+    
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
     
@@ -37,11 +39,14 @@
         NSLog(@"%s: insert error: %@", __FUNCTION__, [database lastErrorMessage]);
         // do whatever you need to upon error
     }
+    
+    [modelSIMaster updateIlustrationSumAssured:[dataPremium valueForKey:@"Sum_Assured"] SINO:[dataPremium valueForKey:@"SINO"]];
     [results close];
     [database close];
 }
 
 -(void)updatePremium:(NSDictionary *)dataPremium{
+    modelSIMaster = [[Model_SI_Master alloc]init];
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
     
@@ -81,6 +86,7 @@
         NSLog(@"%s: insert error: %@", __FUNCTION__, [database lastErrorMessage]);
         // do whatever you need to upon error
     }
+    [modelSIMaster updateIlustrationSumAssured:[dataPremium valueForKey:@"Sum_Assured"] SINO:[dataPremium valueForKey:@"SINO"]];
     [results close];
     [database close];
 }

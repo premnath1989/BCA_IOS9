@@ -26,4 +26,7 @@
 -(NSString *)getKeluargakuMOPRate:(int)PaymentCode;
 -(double)getKeluargakuAnuityRate:(int)PaymentCode;
 -(int)getKeluargakuMOPFreq:(int)PaymentType;
+
+//unit linked
+-(NSMutableArray *)getBasicChargesRate:(NSString *)ColType EntryAge:(int)intEntryAge;
 @end

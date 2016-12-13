@@ -28,4 +28,7 @@
 -(void)updateIlustrationMasterDate:(NSString *)SINO;
 -(NSDictionary *)getIlustrationDataForSI:(NSString *)SINO;
 -(void)saveSIMaster:(NSDictionary *)dataIlustration;
+-(void)updateIlustrationSumAssured:(NSString *)stringSumAssured SINO:(NSString *)stringSINO;
+-(void)updateAllSumAssuredMasterDataFromUnitLinkedTable;
+-(void)updateAllSumAssuredMasterDataFromHeritageKeluargakuTable;
 @end

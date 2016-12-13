@@ -25,5 +25,6 @@
     IBOutlet UISegmentedControl* segmentSmoker;
 }
 -(void)loadDataFromList;
+@property (nonatomic,weak)IBOutlet UIView* viewLifeAssured;
 @property (nonatomic,strong) id <ULLifeAssuredViewControllerDelegate> delegate;
 @end

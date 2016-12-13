@@ -15,6 +15,6 @@
 }
 
 -(void)saveULRiderData:(NSMutableDictionary *)dictULRiderData;
--(NSDictionary *)getULRiderDataFor:(NSString *)SINo;
-
+-(NSMutableArray *)getULRiderDataFor:(NSString *)SINo;
+-(void)deleteULRiderData:(NSString *)stringSINO;
 @end

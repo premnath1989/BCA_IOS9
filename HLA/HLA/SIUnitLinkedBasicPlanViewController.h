@@ -24,6 +24,6 @@
     IBOutlet UIButton *buttonFrekuensiPembayaran;
 
 }
-
+@property (nonatomic,weak)IBOutlet UIScrollView* scrollBasicPlan;
 @property (nonatomic,strong) id <ULBasicPlanViewControllerDelegate> delegate;
 @end

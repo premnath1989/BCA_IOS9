@@ -53,6 +53,24 @@
     [database close];
 }
 
+-(void)updateIlustrationSumAssured:(NSString *)stringSumAssured SINO:(NSString *)stringSINO{
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    BOOL success = [database executeUpdate:@"update SI_Master set SumAssured=? where SINO=?" ,
+                    stringSumAssured,
+                    stringSINO];
+    
+    if (!success) {
+        NSLog(@"%s: insert error: %@", __FUNCTION__, [database lastErrorMessage]);
+        // do whatever you need to upon error
+    }
+    [results close];
+    [database close];
+}
+
 -(void)updateIlustrationMasterDate:(NSString *)SINO{
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
@@ -61,6 +79,38 @@
     [database open];
     BOOL success = [database executeUpdate:@"update SI_Master set CreatedDate=""datetime(\"now\", \"+7 hour\")"",UpdatedDate=""datetime(\"now\", \"+7 hour\")"" where SINO=?" ,
                     SINO];
+    
+    if (!success) {
+        NSLog(@"%s: insert error: %@", __FUNCTION__, [database lastErrorMessage]);
+        // do whatever you need to upon error
+    }
+    [results close];
+    [database close];
+}
+
+-(void)updateAllSumAssuredMasterDataFromUnitLinkedTable{
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    BOOL success = [database executeUpdate:@"UPDATE SI_Master SET SumAssured = (SELECT SumAssured FROM SI_UL_BasicPlan WHERE SINO = SI_Master.SINO) where SINO in (select SINO from SI_UL_BasicPlan)" ];
+    
+    if (!success) {
+        NSLog(@"%s: insert error: %@", __FUNCTION__, [database lastErrorMessage]);
+        // do whatever you need to upon error
+    }
+    [results close];
+    [database close];
+}
+
+-(void)updateAllSumAssuredMasterDataFromHeritageKeluargakuTable{
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    BOOL success = [database executeUpdate:@"UPDATE SI_Master SET SumAssured = (SELECT Sum_Assured FROM SI_Premium WHERE SINO = SI_Master.SINO) where SINO in (select SINO from SI_Premium)" ];
     
     if (!success) {
         NSLog(@"%s: insert error: %@", __FUNCTION__, [database lastErrorMessage]);
@@ -107,7 +157,7 @@
     NSMutableArray* arraySigned=[[NSMutableArray alloc] init];
     
    // FMResultSet *s = [database executeQuery:@"SELECT sim.*, po.ProductName,po.PO_Name,premi.Sum_Assured FROM SI_master sim, SI_PO_Data po,SI_Premium premi WHERE sim.SINO = po.SINO and sim.SINO = premi.SINO"];
-    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select sim.*, po.ProductName,po.PO_Name,ifnull(sip.Sum_Assured,0) as Sum_Assured, po.QuickQuote FROM SI_master sim left join SI_PO_Data po on sim.SINO=po.SINO left join SI_Premium sip on sim.SINO=sip.SINO group by sim.ID order by %@ %@",orderBy,sortMethod]];
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select sim.*,ifnull(sim.SumAssured,'0') as SumAssuredNonNull, po.ProductName,po.PO_Name,ifnull(sip.Sum_Assured,0) as Sum_Assured, po.QuickQuote FROM SI_master sim left join SI_PO_Data po on sim.SINO=po.SINO left join SI_Premium sip on sim.SINO=sip.SINO group by sim.ID order by %@ %@",orderBy,sortMethod]];
     
     NSLog(@"query %@",[NSString stringWithFormat:@"select sim.*, po.ProductName,po.PO_Name,ifnull(sip.Sum_Assured,0) FROM SI_master sim left join SI_PO_Data po on sim.SINO=po.SINO left join SI_Premium sip on sim.SINO=sip.SINO group by sim.ID order by %@ %@",orderBy,sortMethod]);
     
@@ -118,7 +168,8 @@
         NSString *stringProductName = [NSString stringWithFormat:@"%@",[s stringForColumn:@"ProductName"]];
         NSString *stringProposalStatus = [NSString stringWithFormat:@"%@",[s stringForColumn:@"ProposalStatus"]];
         NSString *stringSIVersion = [NSString stringWithFormat:@"%@",[s stringForColumn:@"SI_Version"]];
-        NSString *sumAssured = [NSString stringWithFormat:@"%@",[s stringForColumn:@"Sum_Assured"]];
+        //NSString *sumAssured = [NSString stringWithFormat:@"%@",[s stringForColumn:@"Sum_Assured"]];
+        NSString *sumAssured = [NSString stringWithFormat:@"%@",[s stringForColumn:@"SumAssuredNonNull"]];
         NSString *qqStr = [NSString stringWithFormat:@"%@",[s stringForColumn:@"QuickQuote"]];
         NSString *editStr = [NSString stringWithFormat:@"%@",[s stringForColumn:@"EnableEditing"]];
         NSString *signedStr = [NSString stringWithFormat:@"%@",[s stringForColumn:@"IllustrationSigned"]];

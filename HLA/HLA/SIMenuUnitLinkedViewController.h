@@ -8,9 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import "SIMenuTableViewCell.h"
+@protocol ULMenuViewControllerDelegate
+-(void)showQuotation:(UIViewController *)viewControllerQuotation SINumber:(NSString *)stringSINumber;
+- (IBAction)brochureTapped:(UIButton *)sender;
+- (IBAction)SaveTapped:(UIButton *)sender;
+-(void)SetUnitLinkedSINumber:(NSString *)stringSINumber;
+@end
+
 @interface SIMenuUnitLinkedViewController : UIViewController{
     IBOutlet UITableView *myTableView;
     IBOutlet UIView* viewRightView;
+    
+    IBOutlet UIButton *outletSaveAs;
     
     NSString* stringSINumber;
     NSString* stringProductName;
@@ -19,13 +28,17 @@
     NSMutableDictionary* dictParentULBasicPlanData;
     NSMutableDictionary* dictParentULFundAllocationData;
     NSMutableArray* arraySpecialOptionData;
+    NSMutableArray* arrayRiderData;
 }
-
+@property (nonatomic,strong) id <ULMenuViewControllerDelegate> delegate;
 @property (nonatomic,weak)NSString* stringSIDate;
-
+-(void)setBOOLSectionFilled;
 -(void)setIllustrationNumber:(NSString *)stringIllustrationNumber;
 -(void)setInitialPOLADictionary;
 -(void)setInitialULBasicPlanDictionary;
 -(void)setInitialULFundAllocationDictionary;
 -(void)setInitialULSpecialOptionDictionary;
+-(void)setInitialULRiderArray;
+-(void)showUnitLinkModuleAtIndex:(NSIndexPath *)indexPath;
+- (void) checkEditingMode;
 @end

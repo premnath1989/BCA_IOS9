@@ -264,5 +264,26 @@
     return Rate;
 }
 
+//unit linked
+-(NSMutableArray *)getBasicChargesRate:(NSString *)ColType EntryAge:(int)intEntryAge{
+    NSMutableArray* arrayRate =[[NSMutableArray alloc]init];
+    double Rate;
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"BCA_Rates.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"SELECT %@ FROM BLIFE_UL Where EntryAge between %i and 99",ColType,intEntryAge]];
+    while ([s next]) {
+        Rate = [s doubleForColumn:ColType];
+        [arrayRate addObject:[NSNumber numberWithDouble:Rate]];
+    }
+    
+    [results close];
+    [database close];
+    return arrayRate;
+}
+
 
 @end

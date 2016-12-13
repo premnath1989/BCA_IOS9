@@ -75,6 +75,9 @@
         if ([numberIsInternalStaff intValue]==1){
             querySQL = [NSString stringWithFormat:@"SELECT RelCode,RelDesc FROM eProposal_Relation where status = 'A' and InternalStaff='Y' ORDER BY RelDesc ASC"];
         }
+        if ([numberIsInternalStaff intValue]==2){
+            querySQL = [NSString stringWithFormat:@"SELECT RelCode,RelDesc FROM eProposal_Relation where status = 'A' and RelCode in ('00','02','03') ORDER BY RelDesc ASC"];
+        }
         else{
             querySQL = [NSString stringWithFormat:@"SELECT RelCode,RelDesc FROM eProposal_Relation where status = 'A' ORDER BY RelDesc ASC"];
         }

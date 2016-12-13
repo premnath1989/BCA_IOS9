@@ -9,11 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "FMDatabase.h"
 #import "FMResultSet.h"
+#import "Model_SI_Master.h"
 
 @interface ModelSIULBasicPlan : NSObject{
-FMResultSet *results;
+    FMResultSet *results;
+    Model_SI_Master *modelSIMaster;
 }
 
 -(void)saveULBasicPlanData:(NSMutableDictionary *)dictULBasicPlanData;
 -(NSDictionary *)getULBasicPlanDataFor:(NSString *)SINo;
+-(int)getULBasicPlanDataCount:(NSString *)SINo;
 @end

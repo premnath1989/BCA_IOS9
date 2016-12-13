@@ -13,6 +13,7 @@
     -(NSMutableDictionary *)getBasicPlanDictionary;
     -(NSMutableDictionary *)getPOLADictionary;
     -(NSMutableDictionary *)getULFundAllocationDictionary;
+    -(NSMutableArray *)getULSpecialOptionArray;
 @end
 
 @interface SIUnitLinkedQuotationViewController : UIViewController{

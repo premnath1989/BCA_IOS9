@@ -422,6 +422,8 @@
 		4376DF1F1CD196EC00816BB6 /* cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4376DF1B1CD196EC00816BB6 /* cancel@2x.png */; };
 		4376DF201CD196EC00816BB6 /* check_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4376DF1C1CD196EC00816BB6 /* check_icon.png */; };
 		4376DF211CD196EC00816BB6 /* check_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4376DF1D1CD196EC00816BB6 /* check_icon@2x.png */; };
+		437FE8A61DF5178800534F53 /* ULRiderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 437FE8A41DF5178800534F53 /* ULRiderTableViewCell.m */; };
+		437FE8A71DF5178800534F53 /* ULRiderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 437FE8A51DF5178800534F53 /* ULRiderTableViewCell.xib */; };
 		438035DE1D5D8847003A9199 /* SPAJFilesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 438035DC1D5D8847003A9199 /* SPAJFilesViewController.m */; };
 		438035DF1D5D8847003A9199 /* SPAJFilesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 438035DD1D5D8847003A9199 /* SPAJFilesViewController.xib */; };
 		4380F9DF1DC8338600717FB4 /* SPAJSubmissionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4380F9DE1DC8338600717FB4 /* SPAJSubmissionModel.m */; };
@@ -1722,6 +1724,9 @@
 		4376DF1B1CD196EC00816BB6 /* cancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancel@2x.png"; sourceTree = "<group>"; };
 		4376DF1C1CD196EC00816BB6 /* check_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check_icon.png; sourceTree = "<group>"; };
 		4376DF1D1CD196EC00816BB6 /* check_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "check_icon@2x.png"; sourceTree = "<group>"; };
+		437FE8A31DF5178800534F53 /* ULRiderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ULRiderTableViewCell.h; sourceTree = "<group>"; };
+		437FE8A41DF5178800534F53 /* ULRiderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ULRiderTableViewCell.m; sourceTree = "<group>"; };
+		437FE8A51DF5178800534F53 /* ULRiderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ULRiderTableViewCell.xib; sourceTree = "<group>"; };
 		438035DB1D5D8847003A9199 /* SPAJFilesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPAJFilesViewController.h; sourceTree = "<group>"; };
 		438035DC1D5D8847003A9199 /* SPAJFilesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPAJFilesViewController.m; sourceTree = "<group>"; };
 		438035DD1D5D8847003A9199 /* SPAJFilesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SPAJFilesViewController.xib; sourceTree = "<group>"; };
@@ -4257,6 +4262,9 @@
 				439C01F61DEA4914000F2CC2 /* SpecialOptionTableViewCell.h */,
 				439C01F71DEA4914000F2CC2 /* SpecialOptionTableViewCell.m */,
 				439C01F81DEA4914000F2CC2 /* SpecialOptionTableViewCell.xib */,
+				437FE8A31DF5178800534F53 /* ULRiderTableViewCell.h */,
+				437FE8A41DF5178800534F53 /* ULRiderTableViewCell.m */,
+				437FE8A51DF5178800534F53 /* ULRiderTableViewCell.xib */,
 			);
 			name = TableViewCell;
 			sourceTree = "<group>";
@@ -6281,6 +6289,7 @@
 				17A299261C60A0DB00C2537A /* BPreplayItalics.otf in Resources */,
 				C4E9D19F1612C64900016053 /* InfoPlist.strings in Resources */,
 				C4E9D1A81612C64900016053 /* MainStoryboard.storyboard in Resources */,
+				437FE8A71DF5178800534F53 /* ULRiderTableViewCell.xib in Resources */,
 				C4E9D1BD1612C68200016053 /* selectionIndicatorImage.png in Resources */,
 				432E8F6B1D13F36D0030F0C4 /* AnalisaKebutuhanNasabahViewController.xib in Resources */,
 				C4E9D1BE1612C68200016053 /* selectionIndicatorImage@2x.png in Resources */,
@@ -7235,6 +7244,7 @@
 				4239AE231946013900BD6F53 /* SupportingDocCell.m in Sources */,
 				43C98E1C1D51FF5E00A3F911 /* ModelSPAJAnswers.m in Sources */,
 				4239AEB41946DAE200BD6F53 /* eSignController.m in Sources */,
+				437FE8A61DF5178800534F53 /* ULRiderTableViewCell.m in Sources */,
 				4239AEB61946DAE200BD6F53 /* ESignGenerator.m in Sources */,
 				4239AED31946DAE200BD6F53 /* PDFSerializer.m in Sources */,
 				4239AED41946DAE200BD6F53 /* PDFViewController.m in Sources */,

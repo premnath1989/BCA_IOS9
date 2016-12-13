@@ -12,6 +12,7 @@
 #import "SpecialOptionTableViewCell.h"
 #import "Formatter.h"
 #import "Alert.h"
+#import "LoginDBManagement.h"
 
 @interface SIUnitLinkedSpecialOptionViewController ()<UIPopoverPresentationControllerDelegate,UnitLinkedPopOverDelegate>{
     Formatter *formatter;
@@ -34,6 +35,10 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [self loadDataFromList];
+    arrayPolisYear = [[NSMutableArray alloc]init];
+    for (int i=1;i<(99-[[[delegate getPOLADictionary] valueForKey:@"LA_Age"]intValue]+1);i++){
+        [arrayPolisYear addObject:[NSString stringWithFormat:@"%i",i]];
+    }
 }
 
 - (void)viewDidLoad {
@@ -48,7 +53,7 @@
     
     
     [textTopUpAmount addTarget:self action:@selector(RealTimeFormat:) forControlEvents:UIControlEventEditingChanged];
-    [textTopUpAmount addTarget:self action:@selector(AmountEditingEnd:) forControlEvents:UIControlEventEditingDidEnd];
+    //[textTopUpAmount addTarget:self action:@selector(AmountEditingEnd:) forControlEvents:UIControlEventEditingDidEnd];
 
     [textWithDrawalAmount addTarget:self action:@selector(RealTimeFormat:) forControlEvents:UIControlEventEditingChanged];
     
@@ -56,7 +61,7 @@
 
     arrayPolisYear = [[NSMutableArray alloc]init];
     
-    for (int i=1;i<101;i++){
+    for (int i=1;i<(99-[[[delegate getPOLADictionary] valueForKey:@"LA_Age"]intValue]+1);i++){
         [arrayPolisYear addObject:[NSString stringWithFormat:@"%i",i]];
     }
 }
@@ -76,6 +81,11 @@
     }
     else{
 
+    }
+    
+    arrayPolisYear = [[NSMutableArray alloc]init];
+    for (int i=1;i<(99-[[[delegate getPOLADictionary] valueForKey:@"LA_Age"]intValue]+1);i++){
+        [arrayPolisYear addObject:[NSString stringWithFormat:@"%i",i]];
     }
 }
 
@@ -115,7 +125,7 @@
     return YES;
 }
 
--(void)AmountEditingEnd:(UITextField *)sender{
+-(BOOL)AmountEditingEnd:(UITextField *)sender{
     NSString* textTopUp=sender.text;
     NSNumber *numberTopUp = [formatter convertAnyNonDecimalNumberToString:textTopUp];
     long long longPremi = [numberTopUp longLongValue];
@@ -131,6 +141,7 @@
             [self presentViewController:alertEmptyImage animated:YES completion:^{
                 [textTopUpAmount becomeFirstResponder];
             }];
+            return false;
         }
     }
     else{
@@ -139,8 +150,10 @@
             [self presentViewController:alertEmptyImage animated:YES completion:^{
                 [textTopUpAmount becomeFirstResponder];
             }];
+            return false;
         }
     }
+    return true;
 }
 
 
@@ -221,41 +234,165 @@
     [self presentViewController:unitLinkedPopOverVC animated:YES completion:nil];
 }
 
+-(BOOL)validateAdd:(UIButton *)buttonYear TextFieldAmount:(UITextField *)textFieldAmount{
+    NSString *jumlah = textFieldAmount.text;
+    NSString *tahun = buttonYear.currentTitle;
+    
+    NSString *alertTahun = @"Tahun Polis diisi.";
+    NSString *alertAmount = @"Jumlah TopUp atau WithDraw harus diisi";
+    
+    UIAlertController *alertvalidation;
+    if ([jumlah length]<=0){
+        alertvalidation = [alert alertInformation:@"Peringatan" stringMessage:alertAmount];
+        [self presentViewController:alertvalidation animated:YES completion:nil];
+        return false;
+    }
+    if ([tahun isEqualToString:@"(null)"]||[tahun isEqualToString:@" - SELECT -"]||[tahun isEqualToString:@"- SELECT -"]||[tahun isEqualToString:@"--Please Select--"] ||[tahun length]<=0){
+        alertvalidation = [alert alertInformation:@"Peringatan" stringMessage:alertTahun];
+        [self presentViewController:alertvalidation animated:YES completion:nil];
+        return false;
+    }
+    
+
+    return true;
+}
 
 #pragma mark addToArray
 -(IBAction)actionAddTopUp:(id)sender{
-    NSDictionary* dictTopUp = [[NSDictionary alloc]initWithObjectsAndKeys:buttonTopUpYear.currentTitle,@"Year",textTopUpAmount.text,@"Amount",@"TopUp",@"Option", nil];
-    
-    [arraySpecialOption addObject:dictTopUp];
-    [tableTopUp reloadData];
+    if ([self validateAdd:buttonTopUpYear TextFieldAmount:textTopUpAmount]){
+        if ([self AmountEditingEnd:textTopUpAmount]){
+            NSDictionary* dictTopUp = [[NSDictionary alloc]initWithObjectsAndKeys:buttonTopUpYear.currentTitle,@"Year",textTopUpAmount.text,@"Amount",@"TopUp",@"Option", nil];
+            
+            NSArray *filtered = [arraySpecialOption filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(Option == %@)", @"TopUp"]];
+            if ([[filtered valueForKey:@"Year"] containsObject:[dictTopUp valueForKey:@"Year"]]){
+                int index = [[filtered valueForKey:@"Year"] indexOfObject:[dictTopUp valueForKey:@"Year"]];
+                id item = [filtered objectAtIndex:index];
+                NSUInteger itemIndex = [arraySpecialOption indexOfObject:item];
+                [arraySpecialOption replaceObjectAtIndex:itemIndex withObject:dictTopUp];
+            }
+            else{
+                [arraySpecialOption addObject:dictTopUp];
+            }
+            
+            [tableTopUp reloadData];
+            [textTopUpAmount setText:@""];
+            [self resignFirstResponder];
+            [buttonTopUpYear setTitle:@"--Please Select--" forState:UIControlStateNormal];
+            
+            Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
+            id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
+            [activeInstance performSelector:@selector(dismissKeyboard)];
+        }
+    }
 }
 
 -(IBAction)actionAddWithDrawal:(id)sender{
-    NSDictionary* dictWithDrawal = [[NSDictionary alloc]initWithObjectsAndKeys:buttonWithDrawalYear.currentTitle,@"Year",textWithDrawalAmount.text,@"Amount",@"WithDraw",@"Option", nil];
+    if ([self validateAdd:buttonWithDrawalYear TextFieldAmount:textWithDrawalAmount]){
+        //if ([self AmountEditingEnd:textWithDrawalAmount]){
+            NSDictionary* dictWithDrawal = [[NSDictionary alloc]initWithObjectsAndKeys:buttonWithDrawalYear.currentTitle,@"Year",textWithDrawalAmount.text,@"Amount",@"WithDraw",@"Option", nil];
+            
+            NSArray *filtered = [arraySpecialOption filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(Option == %@)", @"WithDraw"]];
+            if ([[filtered valueForKey:@"Year"] containsObject:[dictWithDrawal valueForKey:@"Year"]]){
+                int index = [[filtered valueForKey:@"Year"] indexOfObject:[dictWithDrawal valueForKey:@"Year"]];
+                id item = [filtered objectAtIndex:index];
+                NSUInteger itemIndex = [arraySpecialOption indexOfObject:item];
+                [arraySpecialOption replaceObjectAtIndex:itemIndex withObject:dictWithDrawal];
+            }
+            else{
+                [arraySpecialOption addObject:dictWithDrawal];
+            }
+            [tableWithDrawal reloadData];
+            [self resignFirstResponder];
+            [textWithDrawalAmount setText:@""];
+            [buttonWithDrawalYear setTitle:@"--Please Select--" forState:UIControlStateNormal];
+            Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
+            id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
+            [activeInstance performSelector:@selector(dismissKeyboard)];
+        //}
+    }
+}
+
+-(BOOL)validateSave{
+    if ([textTopUpAmount.text length]>0 || [textWithDrawalAmount.text length]>0){
+        if ([textTopUpAmount.text intValue]>0 || [textWithDrawalAmount.text intValue]>0){
+            NSString *stringSaveData = @"Data TopUp/WithDraw belum dimasukkan ke tabel. Silahkan tekan tombol ""Add"" untuk dapat menyimpan data";
+            UIAlertController *alertEmptyImage = [alert alertInformation:@"Peringatan" stringMessage:stringSaveData];
+            [self presentViewController:alertEmptyImage animated:YES completion:nil];
+            return false;
+        }
+    }
     
-    [arraySpecialOption addObject:dictWithDrawal];
-    [tableWithDrawal reloadData];
+    return true;
 }
 
 #pragma mark saveData
 -(IBAction)actionSaveData:(UIBarButtonItem *)sender{
-    //set the updated data to parent
-    [self setULSpecialOtionDictionary];
+    Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
+    id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
+    [activeInstance performSelector:@selector(dismissKeyboard)];
     
-    //delete first
-    [modelSIULSpecialOption deleteULSpecialOptionData:[delegate getRunnigSINumber]];
-    
-    //get updated data from parent and save it.
-    NSMutableArray* arraySpecialOptionForInsert = [[NSMutableArray alloc]initWithArray:[delegate getULSpecialOptionArray]];
-    for (int i=0;i<[arraySpecialOptionForInsert count];i++){
-        NSMutableDictionary *dictForInsert = [[NSMutableDictionary alloc]initWithDictionary:[arraySpecialOption objectAtIndex:i]];
-        [dictForInsert setObject:[delegate getRunnigSINumber] forKey:@"SINO"];
+    if ([self validateSave]){
+        [self simpanAct:nil];
+        /*//set the updated data to parent
+        [self setULSpecialOtionDictionary];
         
-        [modelSIULSpecialOption saveULSpecialOptionData:dictForInsert];
+        //delete first
+        [modelSIULSpecialOption deleteULSpecialOptionData:[delegate getRunnigSINumber]];
+        
+        //get updated data from parent and save it.
+        NSMutableArray* arraySpecialOptionForInsert = [[NSMutableArray alloc]initWithArray:[delegate getULSpecialOptionArray]];
+        for (int i=0;i<[arraySpecialOptionForInsert count];i++){
+            NSMutableDictionary *dictForInsert = [[NSMutableDictionary alloc]initWithDictionary:[arraySpecialOption objectAtIndex:i]];
+            [dictForInsert setObject:[delegate getRunnigSINumber] forKey:@"SINO"];
+            
+            [modelSIULSpecialOption saveULSpecialOptionData:dictForInsert];
+        }
+        
+        [delegate showUnitLinkModuleAtIndex:[NSIndexPath indexPathForRow:6 inSection:0]];*/
     }
-    
-    [delegate showUnitLinkModuleAtIndex:[NSIndexPath indexPathForRow:6 inSection:0]];
 }
+
+- (IBAction)simpanAct:(id)sender {
+    NSLog(@"simpan has been pressed");
+    UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Konfirmasi" message:@"Anda tidak dapat melakukan perubahan setelah simpan" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: @"cancel", nil];
+    [alert show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (buttonIndex) {
+        case 0:
+        {
+            NSLog(@"ok");
+            LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
+            [loginDB updateSIMaster:[delegate getRunnigSINumber] EnableEditing:@"0"];
+            
+            //set the updated data to parent
+            [self setULSpecialOtionDictionary];
+            
+            //delete first
+            [modelSIULSpecialOption deleteULSpecialOptionData:[delegate getRunnigSINumber]];
+            
+            //get updated data from parent and save it.
+            NSMutableArray* arraySpecialOptionForInsert = [[NSMutableArray alloc]initWithArray:[delegate getULSpecialOptionArray]];
+            for (int i=0;i<[arraySpecialOptionForInsert count];i++){
+                NSMutableDictionary *dictForInsert = [[NSMutableDictionary alloc]initWithDictionary:[arraySpecialOption objectAtIndex:i]];
+                [dictForInsert setObject:[delegate getRunnigSINumber] forKey:@"SINO"];
+                
+                [modelSIULSpecialOption saveULSpecialOptionData:dictForInsert];
+            }
+            
+            [delegate showUnitLinkModuleAtIndex:[NSIndexPath indexPathForRow:6 inSection:0]];
+        }
+            break;
+        case 1:
+        {
+            // Do something for button #2
+            NSLog(@"cancel");
+        }
+            break;
+    }
+}
+
 
 -(void)TableData:(NSString *)stringDesc TableCode:(NSString *)stringCode{
     if (buttonActive == buttonTopUpYear){
@@ -336,13 +473,44 @@
 {
     if (tableView == tableTopUp){
         NSArray *filtered = [arraySpecialOption filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(Option == %@)", @"TopUp"]];
-        [buttonTopUpYear setTitle:[[filtered objectAtIndex:indexPath.row] valueForKey:@"TopUpYear"] forState:UIControlStateNormal];
-        [textTopUpAmount setText:[[filtered objectAtIndex:indexPath.row] valueForKey:@"TopUpValue"]];
+        [buttonTopUpYear setTitle:[[filtered objectAtIndex:indexPath.row] valueForKey:@"Year"] forState:UIControlStateNormal];
+        [textTopUpAmount setText:[[filtered objectAtIndex:indexPath.row] valueForKey:@"Amount"]];
     }
     else{
         NSArray *filtered = [arraySpecialOption filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(Option == %@)", @"WithDraw"]];
-        [buttonWithDrawalYear setTitle:[[filtered objectAtIndex:indexPath.row] valueForKey:@"WithDrawalYear"] forState:UIControlStateNormal];
-        [textWithDrawalAmount setText:[[filtered objectAtIndex:indexPath.row] valueForKey:@"WithDrawalValue"]];
+        [buttonWithDrawalYear setTitle:[[filtered objectAtIndex:indexPath.row] valueForKey:@"Year"] forState:UIControlStateNormal];
+        [textWithDrawalAmount setText:[[filtered objectAtIndex:indexPath.row] valueForKey:@"Amount"]];
+    }
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Return YES if you want the specified item to be editable.
+    return YES;
+}
+
+// Override to support editing the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
+        if (tableView==tableTopUp){
+            NSArray *filtered = [arraySpecialOption filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(Option == %@)", @"TopUp"]];
+            int index = indexPath.row;
+            id item = [filtered objectAtIndex:index];
+            NSUInteger itemIndex = [arraySpecialOption indexOfObject:item];
+            [arraySpecialOption removeObjectAtIndex:itemIndex];
+            
+            [tableTopUp deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        }
+        else{
+            NSArray *filtered = [arraySpecialOption filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(Option == %@)", @"WithDraw"]];
+            
+            int index = indexPath.row;
+            id item = [filtered objectAtIndex:index];
+            NSUInteger itemIndex = [arraySpecialOption indexOfObject:item];
+            [arraySpecialOption removeObjectAtIndex:itemIndex];
+            
+            [tableWithDrawal deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        }
     }
 }
 /*
