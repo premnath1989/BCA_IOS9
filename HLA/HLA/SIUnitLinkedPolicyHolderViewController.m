@@ -101,7 +101,7 @@
 -(void)loadDataFromList{
     NSMutableDictionary* dictPOLAData = [[NSMutableDictionary alloc]init];
     dictPOLAData = [delegate getPOLADictionary];
-    if ([dictPOLAData count]!=0){
+    if ([dictPOLAData count]!=0 && [dictPOLAData objectForKey:@"ProductName"]){
         numberBoolQuickQuote = [NSNumber numberWithInt:[[dictPOLAData valueForKey:@"QuickQuote"] intValue]];
         
         if ([numberBoolQuickQuote intValue]==0){

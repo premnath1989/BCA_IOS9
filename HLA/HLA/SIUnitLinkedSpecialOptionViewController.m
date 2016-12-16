@@ -22,6 +22,7 @@
     UIPopoverPresentationController *popController;
     
     UIButton* buttonActive;
+    UITextField* activeField;
     
     NSMutableArray* arrayPolisYear;
     
@@ -32,6 +33,7 @@
 
 @implementation SIUnitLinkedSpecialOptionViewController
 @synthesize delegate;
+@synthesize scrollSpecialOption;
 
 -(void)viewDidAppear:(BOOL)animated{
     [self loadDataFromList];
@@ -64,6 +66,13 @@
     for (int i=1;i<(99-[[[delegate getPOLADictionary] valueForKey:@"LA_Age"]intValue]+1);i++){
         [arrayPolisYear addObject:[NSString stringWithFormat:@"%i",i]];
     }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -262,17 +271,22 @@
     if ([self validateAdd:buttonTopUpYear TextFieldAmount:textTopUpAmount]){
         if ([self AmountEditingEnd:textTopUpAmount]){
             NSDictionary* dictTopUp = [[NSDictionary alloc]initWithObjectsAndKeys:buttonTopUpYear.currentTitle,@"Year",textTopUpAmount.text,@"Amount",@"TopUp",@"Option", nil];
-            
-            NSArray *filtered = [arraySpecialOption filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(Option == %@)", @"TopUp"]];
-            if ([[filtered valueForKey:@"Year"] containsObject:[dictTopUp valueForKey:@"Year"]]){
-                int index = [[filtered valueForKey:@"Year"] indexOfObject:[dictTopUp valueForKey:@"Year"]];
-                id item = [filtered objectAtIndex:index];
-                NSUInteger itemIndex = [arraySpecialOption indexOfObject:item];
-                [arraySpecialOption replaceObjectAtIndex:itemIndex withObject:dictTopUp];
-            }
-            else{
+            if ([arraySpecialOption count]<=0){
                 [arraySpecialOption addObject:dictTopUp];
             }
+            else{
+                NSArray *filtered = [arraySpecialOption filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(Option == %@)", @"TopUp"]];
+                if ([[filtered valueForKey:@"Year"] containsObject:[dictTopUp valueForKey:@"Year"]]){
+                    int index = [[filtered valueForKey:@"Year"] indexOfObject:[dictTopUp valueForKey:@"Year"]];
+                    id item = [filtered objectAtIndex:index];
+                    NSUInteger itemIndex = [arraySpecialOption indexOfObject:item];
+                    [arraySpecialOption replaceObjectAtIndex:itemIndex withObject:dictTopUp];
+                }
+                else{
+                    [arraySpecialOption addObject:dictTopUp];
+                }
+            }
+            
             
             [tableTopUp reloadData];
             [textTopUpAmount setText:@""];
@@ -512,6 +526,36 @@
             [tableWithDrawal deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         }
     }
+}
+
+-(void)textFieldDidBeginEditing:(UITextField *)textField {
+    activeField = textField;
+}
+
+// Called when the UIKeyboardDidShowNotification is sent.
+- (void)keyboardWasShown:(NSNotification*)aNotification
+{
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
+    scrollSpecialOption.contentInset = contentInsets;
+    scrollSpecialOption.scrollIndicatorInsets = contentInsets;
+    
+    // If active text field is hidden by keyboard, scroll it so it's visible
+    // Your application might not need or want this behavior.
+    CGRect aRect = self.view.frame;
+    aRect.size.height -= kbSize.height;
+    if (!CGRectContainsPoint(aRect, activeField.frame.origin) ) {
+        CGPoint scrollPoint = CGPointMake(0.0, (activeField.frame.origin.y-kbSize.height)+44);
+        [scrollSpecialOption setContentOffset:scrollPoint animated:YES];
+    }}
+
+// Called when the UIKeyboardWillHideNotification is sent
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+{
+    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+    scrollSpecialOption.contentInset = contentInsets;
+    scrollSpecialOption.scrollIndicatorInsets = contentInsets;
 }
 /*
 #pragma mark - Navigation

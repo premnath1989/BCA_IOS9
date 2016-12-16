@@ -56,7 +56,7 @@
     arrayRiderData = [delegate getULRiderArray];
     
     if ([arrayRiderData count]<=0){
-        arrayRiderData = [[NSMutableArray alloc]initWithObjects:[self dictionaryRider1],[self dictionaryRider2],[self dictionaryRider3], nil];
+        arrayRiderData = [[NSMutableArray alloc]initWithObjects:[self dictionaryRider1],/*[self dictionaryRider2],*/[self dictionaryRider3], nil];
     }
 }
 
@@ -120,7 +120,7 @@
 
 #pragma mark dictionary maker
 -(void)setULRiderDictionary{
-    arrayRiderData = [[NSMutableArray alloc]initWithObjects:[self dictionaryRider1],[self dictionaryRider2],[self dictionaryRider3], nil];
+    arrayRiderData = [[NSMutableArray alloc]initWithObjects:[self dictionaryRider1],/*[self dictionaryRider2],*/[self dictionaryRider3], nil];
     //NSMutableDictionary* dictRiderData = [[NSMutableDictionary alloc]init];
     [delegate setULRiderDictionary:arrayRiderData];
 }
@@ -196,7 +196,13 @@
     [cellULRider.labelExtraPremiPerMil setText:[[arrayRiderData objectAtIndex:indexPath.row] valueForKey:@"ExtraPremiMil"]];
     [cellULRider.labelMasaExtraPremi setText:[dictPremiData valueForKey:@"ExtraPremiumTerm"]];
     [cellULRider.labelExtraPremiRp setText:@""];
-    [cellULRider.labelPremiRp setText:[dictPremiData valueForKey:@"Premium"]];
+    if (indexPath.row == 0){
+        [cellULRider.labelPremiRp setText:[dictPremiData valueForKey:@"Premium"]];
+    }
+    else{
+        [cellULRider.labelPremiRp setText:@""];
+    }
+    
     
     
     return cellULRider;

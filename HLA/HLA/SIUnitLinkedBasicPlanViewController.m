@@ -21,7 +21,7 @@
     UIPopoverPresentationController *popController;
     
     ModelSIULBasicPlan *modelSIULBasicPlan;
-    
+    UITextField* activeField;
     NSString* paymentCurrency;
 }
 
@@ -29,6 +29,7 @@
 
 @implementation SIUnitLinkedBasicPlanViewController
 @synthesize delegate;
+@synthesize scrollBasicPlan;
 
 -(void)viewDidAppear:(BOOL)animated{
     [self loadDataFromList];
@@ -49,6 +50,13 @@
     
     [textBasicPremiField addTarget:self action:@selector(RealTimeFormat:) forControlEvents:UIControlEventEditingChanged];
     [textBasicPremiField addTarget:self action:@selector(BasicPremiEditingEnd:) forControlEvents:UIControlEventEditingDidEnd];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
     //[textExtraPremiPercentField addTarget:self action:@selector(ExtraPremiPercentEditingEnd:) forControlEvents:UIControlEventEditingDidEnd];
     //[textExtraPremiNumberField addTarget:self action:@selector(ExtraPremiNumberEditingEnd:) forControlEvents:UIControlEventEditingDidEnd];
     // Do any additional setup after loading the view from its nib.
@@ -323,6 +331,37 @@
         }
     }
 }
+
+-(void)textFieldDidBeginEditing:(UITextField *)textField {
+    activeField = textField;
+}
+
+// Called when the UIKeyboardDidShowNotification is sent.
+- (void)keyboardWasShown:(NSNotification*)aNotification
+{
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
+    scrollBasicPlan.contentInset = contentInsets;
+    scrollBasicPlan.scrollIndicatorInsets = contentInsets;
+    
+    // If active text field is hidden by keyboard, scroll it so it's visible
+    // Your application might not need or want this behavior.
+    CGRect aRect = self.view.frame;
+    aRect.size.height -= kbSize.height;
+    if (!CGRectContainsPoint(aRect, activeField.frame.origin) ) {
+        CGPoint scrollPoint = CGPointMake(0.0, (activeField.frame.origin.y-kbSize.height)+44);
+        [scrollBasicPlan setContentOffset:scrollPoint animated:YES];
+    }}
+
+// Called when the UIKeyboardWillHideNotification is sent
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+{
+    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+    scrollBasicPlan.contentInset = contentInsets;
+    scrollBasicPlan.scrollIndicatorInsets = contentInsets;
+}
+
 
 #pragma mark delegate
 /*-(void)TableData:(NSString *)stringDesc TableCode:(NSString *)stringCode{

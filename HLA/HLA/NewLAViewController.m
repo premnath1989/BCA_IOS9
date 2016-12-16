@@ -1079,6 +1079,7 @@ id dobtanngal;
     
     if ([aaCode isEqualToString:@"BCALUL"]){
         [self.planPopover dismissPopoverAnimated:YES];
+        ilustrationProductCode = aaCode;
         [NamaProduk setTitle:aaDesc forState:UIControlStateNormal];
         [_BtnHubungan setTitle:@"--Please Select--" forState:UIControlStateNormal];
         [_delegate voidCreateUnitLinkedViewFromModifiedPlan:_SINumberBCA.text];
@@ -1264,9 +1265,9 @@ id dobtanngal;
                                           TanggalIllustrasi.titleLabel.text,@"SIDate",
                                           LANameField.text,@"PO_Name",
                                           btnDOB.titleLabel.text,@"PO_DOB",
-                                          sex,@"PO_Gender",
+                                          sex?:@"",@"PO_Gender",
                                           LAAgeField.text,@"PO_Age",
-                                          occuCode,@"PO_OccpCode",
+                                          occuCode?:@"",@"PO_OccpCode",
                                           occupationDesc,@"PO_Occp",
                                           numberIntClientProfile,@"PO_ClientID",
                                           relationDesc,@"RelWithLA",
