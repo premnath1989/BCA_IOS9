@@ -74,6 +74,9 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
     _modelSIPremium=[[Model_SI_Premium alloc]init];
     _modelSIPOData=[[ModelSIPOData alloc]init];
     
+    [_modelSIMaster updateAllSumAssuredMasterDataFromHeritageKeluargakuTable];
+    [_modelSIMaster updateAllSumAssuredMasterDataFromUnitLinkedTable];
+    
     sortedBy = @"sim.CreatedDate";
     sortMethod=@"DESC";
     

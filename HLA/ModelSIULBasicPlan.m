@@ -7,7 +7,7 @@
 //
 
 #import "ModelSIULBasicPlan.h"
-
+#import "Model_SI_Master.h"
 @implementation ModelSIULBasicPlan
 #pragma mark unit linked methods
 
@@ -31,6 +31,7 @@
 }
 
 -(void)saveULBasicPlanData:(NSMutableDictionary *)dictULBasicPlanData{
+    modelSIMaster = [[Model_SI_Master alloc]init];
     //cek the SINO exist or not
     int exist = [self getULBasicPlanDataCount:[dictULBasicPlanData valueForKey:@"SINO"]];
     
@@ -42,6 +43,7 @@
         //insert data
         [self insertToDBULBasicPlanData:dictULBasicPlanData];
     }
+    [modelSIMaster updateIlustrationSumAssured:[dictULBasicPlanData valueForKey:@"SumAssured"] SINO:[dictULBasicPlanData valueForKey:@"SINO"]];
 }
 
 -(void)insertToDBULBasicPlanData:(NSMutableDictionary *)dictULBasicPlanData{

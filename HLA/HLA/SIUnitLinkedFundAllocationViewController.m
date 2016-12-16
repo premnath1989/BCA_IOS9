@@ -30,8 +30,8 @@
     modelSIULFundAllocation = [[ModelSIULFundAllocation alloc]init];
     alert = [[Alert alloc]init];
     
-    [textFixedIncome addTarget:self action:@selector(FundAllocationEditingEnd:) forControlEvents:UIControlEventEditingDidEnd];
-    [textEquityIncome addTarget:self action:@selector(FundAllocationEditingEnd:) forControlEvents:UIControlEventEditingDidEnd];
+    //[textFixedIncome addTarget:self action:@selector(FundAllocationEditingEnd:) forControlEvents:UIControlEventEditingDidEnd];
+    //[textEquityIncome addTarget:self action:@selector(FundAllocationEditingEnd:) forControlEvents:UIControlEventEditingDidEnd];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -125,19 +125,24 @@
 
 #pragma mark validation
 -(BOOL)validateSave{
+    Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
+    id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
+    [activeInstance performSelector:@selector(dismissKeyboard)];
+    
     int fixedIncome = [textFixedIncome.text intValue];
     int equityIncome = [textEquityIncome.text intValue];
     
     int totalIncome = fixedIncome + equityIncome;
     [textTotalIncome setText:[NSString stringWithFormat:@"%i",totalIncome]];
-    if (totalIncome>100){
+    //if (totalIncome>100){
         if (totalIncome!=100){
             NSString *stringAlertMaxFundAllocation = [NSString stringWithFormat:@"Alokasi dana harus sama dengan 100%%"];
             UIAlertController *alertMaxFundAllocation = [alert alertInformation:@"Peringatan" stringMessage:stringAlertMaxFundAllocation];
             [self presentViewController:alertMaxFundAllocation animated:YES completion:nil];
+            return false;
         }
-        return false;
-    }
+    
+    //}
     
     return true;
 }

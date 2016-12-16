@@ -14,11 +14,12 @@
 
 -(void)showUnitLinkModuleAtIndex:(NSIndexPath *)indexPath;
 -(void)saveSIMaster;
+-(void)dismissUnitLinkedView;
 -(NSString *)getRunnigSINumber;
 @end
 
 @interface SIUnitLinkedPolicyHolderViewController : UIViewController{
-    IBOutlet UIScrollView* scrollPolicyHolder;
+    
     
     IBOutlet UISwitch* quickQuoteFlag;
     
@@ -39,6 +40,7 @@
 }
 -(void)loadDataFromList;
 -(void)setInfoNewIllustration:(NSDictionary *)dictIllustration;
+@property (nonatomic,weak)IBOutlet UIScrollView* scrollPolicyHolder;
 @property (nonatomic,weak)IBOutlet UITextField* textIllustrationNumber;
 
 @property (nonatomic,strong) id <ULPolicyHolderViewControllerDelegate> delegate;

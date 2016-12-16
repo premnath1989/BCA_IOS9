@@ -19,15 +19,24 @@
         thead,table-Summary2 {
             border: 1px solid black;
         }
-        td {
-            border-style: solid;
-            border-color: black;
-            border-width: 0px;
-            padding: 0px 0px 0px 0px;
-            text-align: justify;
-            font-size:10px;
-            font-family: "Helvetica"
-        }
+            td.one {
+                border-style: solid;
+                border-color: black;
+                border-width: 1px;
+                padding: 0px 0px 0px 0px;
+                font-family: "Helvetica"
+                font-size: 10px;
+                text-align: center;
+            }
+            td.two {
+                border-style: solid;
+                border-color: black;
+                border-width: 1px;
+                padding: 0px 0px 0px 0px;
+                font-family: "Helvetica"
+                font-size: 10px;
+                text-align: right;
+            }
         p {
             font-size:10px;
             padding: 0px 0px 0px 0px;
@@ -56,6 +65,795 @@
         </style>
         <script>
             var gData;
+            var sameColABLowFixedIncomeIDR = 0;
+            var sameColCDLowFixedIncomeIDR = 0;
+            
+            var sameColABLowEquityIncomeIDR = 0;
+            var sameColCDLowEquityIncomeIDR = 0;
+            
+            var sameColABLowFixedIncomeUSD = 0;
+            var sameColCDLowFixedIncomeUSD = 0;
+            
+            var sameColABLowEquityIncomeUSD = 0;
+            var sameColCDLowEquityIncomeUSD = 0;
+
+            var sameColABMidFixedIncomeIDR = 0;
+            var sameColCDMidFixedIncomeIDR = 0;
+            
+            var sameColABMidEquityIncomeIDR = 0;
+            var sameColCDMidEquityIncomeIDR = 0;
+            
+            var sameColABMidFixedIncomeUSD = 0;
+            var sameColCDMidFixedIncomeUSD = 0;
+            
+            var sameColABMidEquityIncomeUSD = 0;
+            var sameColCDMidEquityIncomeUSD = 0;
+
+            var sameColABHighFixedIncomeIDR = 0;
+            var sameColCDHighFixedIncomeIDR = 0;
+            
+            var sameColABHighEquityIncomeIDR = 0;
+            var sameColCDHighEquityIncomeIDR = 0;
+            
+            var sameColABHighFixedIncomeUSD = 0;
+            var sameColCDHighFixedIncomeUSD = 0;
+            
+            var sameColABHighEquityIncomeUSD = 0;
+            var sameColCDHighEquityIncomeUSD = 0;
+			
+
+			function getResultQ3(Age,Fund,ProjRate,ColP,ColN,ColO,ColS,ColT,ColU){
+				var resultE;
+				//if ((Age>100) || (Fund==0) || (Fund=="")) {
+				if (Age>100 || Fund==0 || Fund==""){
+					resultE = 0;
+				}
+				else{
+					var resultA = sameColABLowFixedIncomeIDR + (ColP - ColN - ColO) * (Fund/100);
+					var operateB;
+					var comparisonOperateB = sameColABLowFixedIncomeIDR + (ColP - ColN - ColO) * (Fund/100);
+					if (comparisonOperateB < 0) {
+						operateB = 0; 
+					}
+					else{
+						operateB = ProjRate/100;
+					}
+					var resultB = 1 + operateB;
+					
+					sameColABLowFixedIncomeIDR = resultA*resultB;
+					
+					var resultC = sameColCDLowFixedIncomeIDR + (ColU - ColT) * (Fund / 100);
+					//var resultC = sameColCDLowFixedIncomeIDR + (ColU – ColT) * (Fund/100);
+					var resultD;
+					var comparisonOperateResultD = sameColCDLowFixedIncomeIDR + (ColU - ColT) * (Fund / 100);
+					if (comparisonOperateResultD < 0) { 
+						resultD = 0;
+					}
+					else {
+						resultD = 1+ (ProjRate/100);
+					}
+					
+					sameColCDLowFixedIncomeIDR = (resultC * resultD) - (ColS*(Fund/100));
+					
+
+					
+					if (sameColABLowFixedIncomeIDR<0){
+						resultE = sameColCDLowFixedIncomeIDR;
+					}
+					else{
+						resultE = sameColABLowFixedIncomeIDR+sameColCDLowFixedIncomeIDR
+					}
+				}
+				return resultE;
+			}
+				
+			function getResultQ9(Age,Fund,ProjRate,ColP,ColN,ColO,ColS,ColT,ColU){
+				var resultE;
+				//if ((Age>100) || (Fund==0) || (Fund=="")) {
+				if (Age>100 || Fund==0 || Fund==""){
+					resultE = 0;
+				}
+				else{
+					
+					var resultA = sameColABLowEquityIncomeIDR + (ColP - ColN - ColO) * (Fund/100);
+					var operateB;
+					var comparisonOperateB = sameColABLowEquityIncomeIDR + (ColP - ColN - ColO) * (Fund/100);
+					if (comparisonOperateB < 0) {
+						operateB = 0; 
+					}
+					else{
+						operateB = ProjRate/100;
+					}
+					var resultB = 1 + operateB;
+					
+					sameColABLowEquityIncomeIDR = resultA*resultB;
+
+					var resultC = sameColCDLowEquityIncomeIDR + (ColU - ColT) * (Fund / 100);
+					//var resultC = sameColCDLowFixedIncomeIDR + (ColU – ColT) * (Fund/100);
+					var resultD;
+					var comparisonOperateResultD = sameColCDLowEquityIncomeIDR + (ColU - ColT) * (Fund / 100);
+					
+
+					if (comparisonOperateResultD < 0) { 
+						resultD = 0;
+					}
+					else {
+						resultD = 1+ (ProjRate/100);
+					}
+					
+					sameColCDLowEquityIncomeIDR = (resultC * resultD) - (ColS*(Fund/100));
+					
+
+					
+					if (sameColABLowEquityIncomeIDR<0){
+						resultE = sameColCDLowEquityIncomeIDR;
+					}
+					else{
+						resultE = sameColABLowEquityIncomeIDR+sameColCDLowEquityIncomeIDR
+					}
+					
+					
+				}
+				return resultE;
+			}
+			
+			function getResultQ15(Age,Fund,ProjRate,ColP,ColN,ColO,ColS,ColT,ColU){
+				var resultE;
+				//if ((Age>100) || (Fund==0) || (Fund=="")) {
+				if (Age>100 || Fund==0 || Fund==""){
+					resultE = 0;
+				}
+				else{
+					var resultA = sameColABLowFixedIncomeUSD + (ColP - ColN - ColO) * (Fund/100);
+					var operateB;
+					var comparisonOperateB = sameColABLowFixedIncomeUSD + (ColP - ColN - ColO) * (Fund/100);
+					if (comparisonOperateB < 0) {
+						operateB = 0; 
+					}
+					else{
+						operateB = ProjRate/100;
+					}
+					var resultB = 1 + operateB;
+					sameColABLowFixedIncomeUSD = resultA*resultB;
+					
+					var resultC = sameColCDLowFixedIncomeUSD + (ColU - ColT) * (Fund / 100);
+					//var resultC = sameColCDLowFixedIncomeIDR + (ColU – ColT) * (Fund/100);
+					var resultD;
+					var comparisonOperateResultD = sameColCDLowFixedIncomeUSD + (ColU - ColT) * (Fund / 100);
+					if (comparisonOperateResultD < 0) { 
+						resultD = 0;
+					}
+					else {
+						resultD = 1+ (ProjRate/100);
+					}
+					
+					sameColCDLowFixedIncomeUSD = (resultC * resultD) - (ColS*(Fund/100));
+					
+
+					
+					if (sameColABLowFixedIncomeUSD<0){
+						resultE = sameColCDLowFixedIncomeUSD;
+					}
+					else{
+						resultE = sameColABLowFixedIncomeUSD+sameColCDLowFixedIncomeUSD;
+					}
+					
+				}
+				return resultE;
+			}
+			
+			function getResultQ21(Age,Fund,ProjRate,ColP,ColN,ColO,ColS,ColT,ColU){
+				var resultE;
+				//if ((Age>100) || (Fund==0) || (Fund=="")) {
+				if (Age>100 || Fund==0 || Fund==""){
+					resultE = 0;
+				}
+				else{
+					var resultA = sameColABLowEquityIncomeUSD + (ColP - ColN - ColO) * (Fund/100);
+					var operateB;
+					var comparisonOperateB = sameColABLowEquityIncomeUSD + (ColP - ColN - ColO) * (Fund/100);
+					if (comparisonOperateB < 0) {
+						operateB = 0; 
+					}
+					else{
+						operateB = ProjRate/100;
+					}
+					var resultB = 1 + operateB;
+					
+					sameColABLowEquityIncomeUSD = resultA*resultB;
+					
+					var resultC = sameColCDLowEquityIncomeUSD + (ColU - ColT) * (Fund / 100);
+					//var resultC = sameColCDLowFixedIncomeIDR + (ColU – ColT) * (Fund/100);
+					var resultD;
+					var comparisonOperateResultD = sameColCDLowEquityIncomeUSD + (ColU - ColT) * (Fund / 100);
+					if (comparisonOperateResultD < 0) { 
+						resultD = 0;
+					}
+					else {
+						resultD = 1+ (ProjRate/100);
+					}
+					
+					sameColCDLowEquityIncomeUSD = (resultC * resultD) - (ColS*(Fund/100));
+					
+
+					
+					if (sameColABLowEquityIncomeUSD<0){
+						resultE = sameColCDLowEquityIncomeUSD;
+					}
+					else{
+						resultE = sameColABLowEquityIncomeUSD+sameColCDLowEquityIncomeUSD
+					}
+				}
+				return resultE;
+			}
+/*----------------------------------------------------------------------------------------------------------------------*/			
+			function getResultQ4(Age,Fund,ProjRate,ColP,ColN,ColO,ColS,ColT,ColU){
+				var resultE;
+				//if ((Age>100) || (Fund==0) || (Fund=="")) {
+				if (Age>100 || Fund==0 || Fund==""){
+					resultE = 0;
+				}
+				else{
+					var resultA = sameColABMidFixedIncomeIDR + (ColP - ColN - ColO) * (Fund/100);
+					var operateB;
+					var comparisonOperateB = sameColABMidFixedIncomeIDR + (ColP - ColN - ColO) * (Fund/100);
+					if (comparisonOperateB < 0) {
+						operateB = 0; 
+					}
+					else{
+						operateB = ProjRate/100;
+					}
+					var resultB = 1 + operateB;
+					
+					sameColABMidFixedIncomeIDR = resultA*resultB;
+					
+					var resultC = sameColCDMidFixedIncomeIDR + (ColU - ColT) * (Fund / 100);
+					//var resultC = sameColCDMidFixedIncomeIDR + (ColU – ColT) * (Fund/100);
+					var resultD;
+					var comparisonOperateResultD = sameColCDMidFixedIncomeIDR + (ColU - ColT) * (Fund / 100);
+					if (comparisonOperateResultD < 0) { 
+						resultD = 0;
+					}
+					else {
+						resultD = 1+ (ProjRate/100);
+					}
+					
+					sameColCDMidFixedIncomeIDR = (resultC * resultD) - (ColS*(Fund/100));
+					
+
+					
+					if (sameColABMidFixedIncomeIDR<0){
+						resultE = sameColCDMidFixedIncomeIDR;
+					}
+					else{
+						resultE = sameColABMidFixedIncomeIDR+sameColCDMidFixedIncomeIDR
+					}
+				}
+				return resultE;
+			}
+				
+			function getResultQ10(Age,Fund,ProjRate,ColP,ColN,ColO,ColS,ColT,ColU){
+				var resultE;
+				//if ((Age>100) || (Fund==0) || (Fund=="")) {
+				if (Age>100 || Fund==0 || Fund==""){
+					resultE = 0;
+				}
+				else{
+					var resultA = sameColABMidEquityIncomeIDR + (ColP - ColN - ColO) * (Fund/100);
+					var operateB;
+					var comparisonOperateB = sameColABMidEquityIncomeIDR + (ColP - ColN - ColO) * (Fund/100);
+					if (comparisonOperateB < 0) {
+						operateB = 0; 
+					}
+					else{
+						operateB = ProjRate/100;
+					}
+					var resultB = 1 + operateB;
+					
+					sameColABMidEquityIncomeIDR = resultA*resultB;
+					
+					var resultC = sameColCDMidEquityIncomeIDR + (ColU - ColT) * (Fund / 100);
+					//var resultC = sameColCDMidFixedIncomeIDR + (ColU – ColT) * (Fund/100);
+					var resultD;
+					var comparisonOperateResultD = sameColCDMidEquityIncomeIDR + (ColU - ColT) * (Fund / 100);
+					if (comparisonOperateResultD < 0) { 
+						resultD = 0;
+					}
+					else {
+						resultD = 1+ (ProjRate/100);
+					}
+					
+					sameColCDMidEquityIncomeIDR = (resultC * resultD) - (ColS*(Fund/100));
+					
+
+					
+					if (sameColABMidEquityIncomeIDR<0){
+						resultE = sameColCDMidEquityIncomeIDR;
+					}
+					else{
+						resultE = sameColABMidEquityIncomeIDR+sameColCDMidEquityIncomeIDR
+					}
+				}
+				return resultE;
+			}
+			
+			function getResultQ16(Age,Fund,ProjRate,ColP,ColN,ColO,ColS,ColT,ColU){
+				var resultE;
+				//if ((Age>100) || (Fund==0) || (Fund=="")) {
+				if (Age>100 || Fund==0 || Fund==""){
+					resultE = 0;
+				}
+				else{
+					var resultA = sameColABMidFixedIncomeUSD + (ColP - ColN - ColO) * (Fund/100);
+					var operateB;
+					var comparisonOperateB = sameColABMidFixedIncomeUSD + (ColP - ColN - ColO) * (Fund/100);
+					if (comparisonOperateB < 0) {
+						operateB = 0; 
+					}
+					else{
+						operateB = ProjRate/100;
+					}
+					var resultB = 1 + operateB;
+					
+					sameColABMidFixedIncomeUSD = resultA*resultB;
+					
+					var resultC = sameColCDMidFixedIncomeUSD + (ColU - ColT) * (Fund / 100);
+					//var resultC = sameColCDMidFixedIncomeIDR + (ColU – ColT) * (Fund/100);
+					var resultD;
+					var comparisonOperateResultD = sameColCDMidFixedIncomeUSD + (ColU - ColT) * (Fund / 100);
+					if (comparisonOperateResultD < 0) { 
+						resultD = 0;
+					}
+					else {
+						resultD = 1+ (ProjRate/100);
+					}
+					
+					sameColCDMidFixedIncomeUSD = (resultC * resultD) - (ColS*(Fund/100));
+					
+
+					
+					if (sameColABMidFixedIncomeUSD<0){
+						resultE = sameColCDMidFixedIncomeUSD;
+					}
+					else{
+						resultE = sameColABMidFixedIncomeUSD+sameColCDMidFixedIncomeUSD;
+					}
+				}
+				return resultE;
+			}
+			
+			function getResultQ22(Age,Fund,ProjRate,ColP,ColN,ColO,ColS,ColT,ColU){
+				var resultE;
+				//if ((Age>100) || (Fund==0) || (Fund=="")) {
+				if (Age>100 || Fund==0 || Fund==""){
+					resultE = 0;
+				}
+				else{
+					var resultA = sameColABMidEquityIncomeUSD + (ColP - ColN - ColO) * (Fund/100);
+					var operateB;
+					var comparisonOperateB = sameColABMidEquityIncomeUSD + (ColP - ColN - ColO) * (Fund/100);
+					if (comparisonOperateB < 0) {
+						operateB = 0; 
+					}
+					else{
+						operateB = ProjRate/100;
+					}
+					var resultB = 1 + operateB;
+					
+					sameColABMidEquityIncomeUSD = resultA*resultB;
+					
+					var resultC = sameColCDMidEquityIncomeUSD + (ColU - ColT) * (Fund / 100);
+					//var resultC = sameColCDMidFixedIncomeIDR + (ColU – ColT) * (Fund/100);
+					var resultD;
+					var comparisonOperateResultD = sameColCDMidEquityIncomeUSD + (ColU - ColT) * (Fund / 100);
+					if (comparisonOperateResultD < 0) { 
+						resultD = 0;
+					}
+					else {
+						resultD = 1+ (ProjRate/100);
+					}
+					
+					sameColCDMidEquityIncomeUSD = (resultC * resultD) - (ColS*(Fund/100));
+					
+
+					
+					if (sameColABMidEquityIncomeUSD<0){
+						resultE = sameColCDMidEquityIncomeUSD;
+					}
+					else{
+						resultE = sameColABMidEquityIncomeUSD+sameColCDMidEquityIncomeUSD
+					}
+				}
+				return resultE;
+			}
+/*----------------------------------------------------------------------------------------------------------------------*/			
+			function getResultQ5(Age,Fund,ProjRate,ColP,ColN,ColO,ColS,ColT,ColU){
+				var resultE;
+				//if ((Age>100) || (Fund==0) || (Fund=="")) {
+				if (Age>100 || Fund==0 || Fund==""){
+					resultE = 0;
+				}
+				else{
+					var resultA = sameColABHighFixedIncomeIDR + (ColP - ColN - ColO) * (Fund/100);
+					var operateB;
+					var comparisonOperateB = sameColABHighFixedIncomeIDR + (ColP - ColN - ColO) * (Fund/100);
+					if (comparisonOperateB < 0) {
+						operateB = 0; 
+					}
+					else{
+						operateB = ProjRate/100;
+					}
+					var resultB = 1 + operateB;
+					
+					sameColABHighFixedIncomeIDR = resultA*resultB;
+					
+					var resultC = sameColCDHighFixedIncomeIDR + (ColU - ColT) * (Fund / 100);
+					//var resultC = sameColCDHighFixedIncomeIDR + (ColU – ColT) * (Fund/100);
+					var resultD;
+					var comparisonOperateResultD = sameColCDHighFixedIncomeIDR + (ColU - ColT) * (Fund / 100);
+					if (comparisonOperateResultD < 0) { 
+						resultD = 0;
+					}
+					else {
+						resultD = 1+ (ProjRate/100);
+					}
+					
+					sameColCDHighFixedIncomeIDR = (resultC * resultD) - (ColS*(Fund/100));
+					
+
+					
+					if (sameColABHighFixedIncomeIDR<0){
+						resultE = sameColCDHighFixedIncomeIDR;
+					}
+					else{
+						resultE = sameColABHighFixedIncomeIDR+sameColCDHighFixedIncomeIDR
+					}
+				}
+				return resultE;
+			}
+				
+			function getResultQ11(Age,Fund,ProjRate,ColP,ColN,ColO,ColS,ColT,ColU){
+				var resultE;
+				//if ((Age>100) || (Fund==0) || (Fund=="")) {
+				if (Age>100 || Fund==0 || Fund==""){
+					resultE = 0;
+				}
+				else{
+					var resultA = sameColABHighEquityIncomeIDR + (ColP - ColN - ColO) * (Fund/100);
+					var operateB;
+					var comparisonOperateB = sameColABHighEquityIncomeIDR + (ColP - ColN - ColO) * (Fund/100);
+					if (comparisonOperateB < 0) {
+						operateB = 0; 
+					}
+					else{
+						operateB = ProjRate/100;
+					}
+					var resultB = 1 + operateB;
+					
+					sameColABHighEquityIncomeIDR = resultA*resultB;
+					
+					var resultC = sameColCDHighEquityIncomeIDR + (ColU - ColT) * (Fund / 100);
+					//var resultC = sameColCDHighFixedIncomeIDR + (ColU – ColT) * (Fund/100);
+					var resultD;
+					var comparisonOperateResultD = sameColCDHighEquityIncomeIDR + (ColU - ColT) * (Fund / 100);
+					if (comparisonOperateResultD < 0) { 
+						resultD = 0;
+					}
+					else {
+						resultD = 1+ (ProjRate/100);
+					}
+					
+					sameColCDHighEquityIncomeIDR = (resultC * resultD) - (ColS*(Fund/100));
+					
+
+					
+					if (sameColABHighEquityIncomeIDR<0){
+						resultE = sameColCDHighEquityIncomeIDR;
+					}
+					else{
+						resultE = sameColABHighEquityIncomeIDR+sameColCDHighEquityIncomeIDR
+					}
+				}
+				return resultE;
+			}
+			
+			function getResultQ17(Age,Fund,ProjRate,ColP,ColN,ColO,ColS,ColT,ColU){
+				var resultE;
+				//if ((Age>100) || (Fund==0) || (Fund=="")) {
+				if (Age>100 || Fund==0 || Fund==""){
+					resultE = 0;
+				}
+				else{
+					var resultA = sameColABHighFixedIncomeUSD + (ColP - ColN - ColO) * (Fund/100);
+					var operateB;
+					var comparisonOperateB = sameColABHighFixedIncomeUSD + (ColP - ColN - ColO) * (Fund/100);
+					if (comparisonOperateB < 0) {
+						operateB = 0; 
+					}
+					else{
+						operateB = ProjRate/100;
+					}
+					var resultB = 1 + operateB;
+					
+					sameColABHighFixedIncomeUSD = resultA*resultB;
+					
+					var resultC = sameColCDHighFixedIncomeUSD + (ColU - ColT) * (Fund / 100);
+					//var resultC = sameColCDHighFixedIncomeIDR + (ColU – ColT) * (Fund/100);
+					var resultD;
+					var comparisonOperateResultD = sameColCDHighFixedIncomeUSD + (ColU - ColT) * (Fund / 100);
+					if (comparisonOperateResultD < 0) { 
+						resultD = 0;
+					}
+					else {
+						resultD = 1+ (ProjRate/100);
+					}
+					
+					sameColCDHighFixedIncomeUSD = (resultC * resultD) - (ColS*(Fund/100));
+					
+
+					
+					if (sameColABHighFixedIncomeUSD<0){
+						resultE = sameColCDHighFixedIncomeUSD;
+					}
+					else{
+						resultE = sameColABHighFixedIncomeUSD+sameColCDHighFixedIncomeUSD;
+					}
+				}
+				return resultE;
+			}
+			
+			function getResultQ23(Age,Fund,ProjRate,ColP,ColN,ColO,ColS,ColT,ColU){
+				var resultE;
+				//if ((Age>100) || (Fund==0) || (Fund=="")) {
+				if (Age>100 || Fund==0 || Fund==""){
+					resultE = 0;
+				}
+				else{
+					var resultA = sameColABHighEquityIncomeUSD + (ColP - ColN - ColO) * (Fund/100);
+					var operateB;
+					var comparisonOperateB = sameColABHighEquityIncomeUSD + (ColP - ColN - ColO) * (Fund/100);
+					if (comparisonOperateB < 0) {
+						operateB = 0; 
+					}
+					else{
+						operateB = ProjRate/100;
+					}
+					var resultB = 1 + operateB;
+					
+					sameColABHighEquityIncomeUSD = resultA*resultB;
+					
+					var resultC = sameColCDHighEquityIncomeUSD + (ColU - ColT) * (Fund / 100);
+					//var resultC = sameColCDHighFixedIncomeIDR + (ColU – ColT) * (Fund/100);
+					var resultD;
+					var comparisonOperateResultD = sameColCDHighEquityIncomeUSD + (ColU - ColT) * (Fund / 100);
+					if (comparisonOperateResultD < 0) { 
+						resultD = 0;
+					}
+					else {
+						resultD = 1+ (ProjRate/100);
+					}
+					
+					sameColCDHighEquityIncomeUSD = (resultC * resultD) - (ColS*(Fund/100));
+					
+
+					
+					if (sameColABHighEquityIncomeUSD<0){
+						resultE = sameColCDHighEquityIncomeUSD;
+					}
+					else{
+						resultE = sameColABHighEquityIncomeUSD+sameColCDHighEquityIncomeUSD
+					}
+				}
+				return resultE;
+			}
+/*----------------------------------------------------------------------------------------------------------------------*/
+            function getAllocation(PolYear){
+            	var result;
+            	if (PolYear>1){
+            		result = 0;
+            	}
+            	else{
+	            	result = 95/100;
+            	}
+            	return result;
+            }
+            
+            function getAlternativePremiHoliday(Age){
+            	var result = 99 - Age;
+            	return result;
+            }
+            
+            function getColP(Age,PolYear,Premi,JsonInsuranceCharge){
+            	
+            	var result;
+            	var alternativePremiHoliday = JsonInsuranceCharge.AlternativePremiHoliday;
+            	var allocation = getAllocation(PolYear);
+            	var prevPolYear = PolYear-1;            	
+            	var numberPremi = Premi.replace(/\./g,'');
+            	if ((Age + prevPolYear) > alternativePremiHoliday){
+            		result = 0;            		
+            	}
+            	else{
+            		result = numberPremi * allocation;
+            	}
+            	var tot = Age + prevPolYear;
+            	return result;
+            }
+            
+            function getColN(JsonInsuranceCharge,selectedRate){
+            	var result;
+            	//var Rate = JsonInsuranceCharge.Rate;
+            	var Rate = selectedRate;
+            	var EMPercent = JsonInsuranceCharge.EMPercent;
+            	var EMMil = JsonInsuranceCharge.EMMil;
+				var SumAssured = JsonInsuranceCharge.SumAssured;
+				
+            	var equation1 = (1 +(EMPercent/100));
+            	var equation2 = (SumAssured/1000 * Rate);
+            	var equation3 = (EMMil * SumAssured/1000);
+            	
+            	result = ((equation1 * equation2)+equation3);
+            	return result;
+            }
+            
+            function getColU(Age,PolYear,TopUpAmount,JsonInsuranceCharge){
+				var result;
+            	var RTUPremi = JsonInsuranceCharge.RTUPremi;
+            	var AlternativePremiHoliday = JsonInsuranceCharge.AlternativePremiHoliday;
+            	
+            	var prevPolYear = PolYear-1;            	
+            	if ((Age + prevPolYear) > AlternativePremiHoliday){
+            		//result =(0.95 * RTUPremi) + (0.95 * TopUpAmount); 
+            		result =(0.97 * TopUpAmount); 
+            	}
+            	else{
+	            	result = (0.97 * RTUPremi) + (0.97 * TopUpAmount);
+            	}
+            	return result;
+            }
+            
+            function getPremiTopUpWithDraw(year,topUpWithDrawYear,topUpWithDrawAmount){
+            	var premiTopUpWithDraw="0";
+            	var arrayYear = topUpWithDrawYear.split(",");
+            	var arrayAmount = topUpWithDrawAmount.split(",");
+            	var indexElement = arrayYear.indexOf(year);
+				
+				for (var i=0;i<arrayYear.length;i++){
+					if (arrayYear[i]==year){
+						premiTopUpWithDraw = arrayAmount[i];
+					}
+				}
+	
+            	return premiTopUpWithDraw;
+            }
+
+            function createTableSummary1(Age,xRow,OneTimePremi,topUpYear,topUpAmount,withDrawYear,withDrawAmount,JsonInsuranceCharge) {
+                var arrayRate = JsonInsuranceCharge.Rate;
+            	var table = document.getElementById("table-Summary1");
+				 for (i = 0; i < xRow; i++) {
+					var col1Val=i+1;
+                	var col2Val=Age +i;
+					var col3Val;
+					var col4Val = getPremiTopUpWithDraw(col1Val,topUpYear,topUpAmount); 
+					var col5Val = getPremiTopUpWithDraw(col1Val,withDrawYear,withDrawAmount); 
+					
+					var numberTopUpAmount = col4Val.replace(/\./g,'');
+					var colP = getColP(Age,col1Val,OneTimePremi,JsonInsuranceCharge);
+					var colN = getColN(JsonInsuranceCharge,arrayRate[i]);
+					var colO;
+					if (JsonInsuranceCharge.PaymentCurrency=='IDR'){
+						colO = 360000;
+					}
+					else{
+						colO = 36;
+					}
+					
+
+					var colS = col5Val.replace(/\./g,'');
+					var colT = 0;
+					var colU =  getColU(Age,col1Val,numberTopUpAmount,JsonInsuranceCharge);
+					
+					var fundFixedIncomeIDR = JsonInsuranceCharge.IDRFixedIncomeFund;
+					var fundEquityIncomeIDR = JsonInsuranceCharge.IDREquityIncomeFund;
+					var fundFixedIncomeUSD = JsonInsuranceCharge.USDFixedIncomeFund;
+					var fundEquityIncomeUSD = JsonInsuranceCharge.USDEquityIncomeFund;
+					var projRateQ3 = 4;
+
+					//getResultQ3(Age,fundFixedIncomeIDR,projRateQ3,colP,colN,colO,colS,colT,colU);
+					var resQ3 = getResultQ3(Age,fundFixedIncomeIDR,projRateQ3,colP,colN,colO,colS,colT,colU);  
+					var resQ9 = getResultQ9(Age,fundEquityIncomeIDR,10,colP,colN,colO,colS,colT,colU);  
+					var resQ15 = getResultQ15(Age,fundFixedIncomeUSD,8,colP,colN,colO,colS,colT,colU);  
+					var resQ21 = getResultQ21(Age,fundEquityIncomeUSD,3,colP,colN,colO,colS,colT,colU); 
+					
+					var resQ4 = getResultQ4(Age,fundFixedIncomeIDR,8,colP,colN,colO,colS,colT,colU);  
+					var resQ10 = getResultQ10(Age,fundEquityIncomeIDR,13,colP,colN,colO,colS,colT,colU);  
+					var resQ16 = getResultQ16(Age,fundFixedIncomeUSD,9,colP,colN,colO,colS,colT,colU);  
+					var resQ22 = getResultQ22(Age,fundEquityIncomeUSD,5,colP,colN,colO,colS,colT,colU);  
+
+					var resQ5 = getResultQ5(Age,fundFixedIncomeIDR,13,colP,colN,colO,colS,colT,colU);  
+					var resQ11 = getResultQ11(Age,fundEquityIncomeIDR,16,colP,colN,colO,colS,colT,colU);  
+					var resQ17 = getResultQ17(Age,fundFixedIncomeUSD,10,colP,colN,colO,colS,colT,colU);  
+					var resQ23 = getResultQ23(Age,fundEquityIncomeUSD,8,colP,colN,colO,colS,colT,colU);  
+
+					var resQ45 = resQ3+resQ9+resQ15+resQ21;
+					var resQ46 = resQ4+resQ10+resQ16+resQ22;
+					var resQ47 = resQ5+resQ11+resQ17+resQ23;
+					if (i==0){
+						col3Val=OneTimePremi;
+					}
+					else{
+						col3Val="0";
+					}
+					
+					var row = table.insertRow(i+3);
+					var cell1 = row.insertCell(0);
+					var cell2 = row.insertCell(1);
+					var cell3 = row.insertCell(2);
+					var cell4 = row.insertCell(3);
+					var cell5 = row.insertCell(4);
+					var cell6 = row.insertCell(5);
+					var cell7 = row.insertCell(6);
+					var cell8 = row.insertCell(7);
+					
+					cell1.className = 'one';
+					cell2.className = 'one';
+					cell3.className = 'one';
+					cell4.className = 'one';
+					cell5.className = 'one';
+					cell6.className = 'one';
+					cell7.className = 'one';
+					cell8.className = 'one';
+					
+					cell1.innerHTML = col1Val;
+					cell2.innerHTML = col2Val;
+					cell3.innerHTML = col3Val;
+					cell4.innerHTML = col4Val;
+					cell5.innerHTML = col5Val;
+					if (JsonInsuranceCharge.PaymentCurrency=='IDR'){
+						cell6.innerHTML = Math.round(resQ45/1000).toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
+						cell7.innerHTML = Math.round(resQ46/1000).toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
+						cell8.innerHTML = Math.round(resQ47/1000).toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
+					}
+					else{
+						cell6.innerHTML = parseFloat(resQ45/1000).toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
+						cell7.innerHTML = parseFloat(resQ46/1000).toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
+						cell8.innerHTML = parseFloat(resQ47/1000).toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
+					}
+				}
+				//var rowToRemove = ["15", "17", "10","3","6"];
+				//removeRow(rowToRemove);
+        	}
+        	
+        	function removeRow(data){
+				var xRow = document.getElementById("table-Summary1").rows.length;
+
+				for (var x=0;x<data.length;x++){
+					for (var i=3;i<xRow;i++){
+		        		var cellData = document.getElementById("table-Summary1").rows[i].cells[0].innerHTML;
+				        if (cellData == data[x]){
+        					document.getElementById("table-Summary1").deleteRow(i);
+        				}
+        				xRow = document.getElementById("table-Summary1").rows.length;
+        			}
+				}    	
+			}
+        	
+        	function removeRows(rowsToRemove){
+        		var xRow = document.getElementById("table-Summary1").rows.length;
+        		alert(xRow);
+        		alert(rowsToRemove);
+        		for (var x=0;x<rowsToRemove.length;x++){
+	        		alert(rowsToRemove[x]);
+        			for (var i=0;i<xRow;i++){
+						var cell =  document.getElementById("table-Summary1").rows[i].cell[0].innerHTML;
+        		        if (cell == rowsToRemove[x]){
+        					alert(cell);
+        				}
+        			}    	
+        		}
+        		
+        	}
+        	
             function onBodyLoad(){
                 $.ajaxSetup({ cache: false });
                 $.ajax({
@@ -247,21 +1045,7 @@
             return returnVal;
         }
         
-        function isIncomeRider(amt,rider){
-            //rider.replace(/^\s+|\s$/g,"")
-            //$.trim(rider)
-            
-            var temp;
-            temp = $.trim(rider)
-            //alert(temp + "x")
-            
-            if (temp == "HLA Cash Promise" || temp == "HLA Income Builder" || temp == "Income 20 Rider" || temp == "Income 30 Rider" || temp == "Income 40 Rider" || temp == "Income D-20 Rider" || temp == "Income D-30 Rider" || temp == "Income D-40 Rider" || temp == "Income E-20 Rider" || temp == "Income E-30 Rider"){
-                
-                return amt + " *";
-            }
-            else
-            return amt + "&nbsp;&nbsp;";
-        }
+        
         
             </script>
         <head>
@@ -284,7 +1068,7 @@
 							</td>
 							<td style="width: 30%; font-size:13px;font-family:Helvetica; text-align: right" valign="top" style="margin:0" >
 								<header1>BCA Life Proteksi & Investasiku</header1></br>
-								<font color="red">Nomor Ilustrasi :</font> <font color="red"><label id="SINumber">16011813027</label></font>
+								<font color="red">Nomor Ilustrasi :</font> <font color="red"><label id="stringSINumber2">16011813027</label></font>
 							</td>
 						</tr>
 					</table>
@@ -292,10 +1076,6 @@
 				<div id="maincontainer">
 				<div class="main-content">
 					<br/>
-					
-					
-					<br/>
-					
 					<!--520,430px-->
 					<div style="width:100%;background-color: #fff;vertical-align: top;font-size:10px;font-family: Helvetica;">
 
@@ -303,7 +1083,7 @@
 					<br/>
 					</div>
 					<div style="width:100%;background-color: #fff;vertical-align: top;font-size:10px;font-family: Helvetica;">
-						<table width="100%" style="border:1px solid black;border-spacing:0;"> 
+						<table id="table-Summary1" width="100%" style="border:1px solid black;border-spacing:0;"> 
 						  <tr>
 							<td rowspan="3" style="border:1px solid black;text-align: center">Tahun Polis ke-</td>
 							<td rowspan="3" style="border:1px solid black;text-align: center">Usia Tertanggung<br/>(Tahun)</td>
@@ -322,16 +1102,7 @@
 							<td style="border:1px solid black;text-align: center">Sedang</td>
 							<td style="border:1px solid black;text-align: center">Tinggi</td>
 						  </tr>
-						  <tr>
-							<td style="border:1px solid black">&nbsp</td>
-							<td style="border:1px solid black">&nbsp</td>
-							<td style="border:1px solid black">&nbsp</td>
-							<td style="border:1px solid black">&nbsp</td>
-							<td style="border:1px solid black">&nbsp</td>
-							<td style="border:1px solid black">&nbsp</td>
-							<td style="border:1px solid black">&nbsp</td>
-							<td style="border:1px solid black">&nbsp</td>
-						  </tr>
+						  
 						</table>
 					</div>
 					<div style="width:100%;background-color: #fff;vertical-align: top;font-size:10px;font-family: Helvetica;">
@@ -377,7 +1148,6 @@
 					
 					* Estimasi Nilai Dana Investasi pada illustrasi diatas berdasarkan tingkat pertumbuhan investasi yang tetap per tahun. Asumsi hasil investasi bukan merupakan tolak ukur untuk perhitungan rata-rata tingkat pertumbuhan terendah dan yang tertinggi. Realisasi hasil perkembangan invetasi dapat lebih rendah atau lebih tinggi dari illustrasi diatas.
 					<br/>
-					<br/>
 					** Menunjukkan bahwa nilai dana investasi  pada tahun tersebut tidak mencukupi untuk membayar biaya asuransi dan biaya administrasi, dan oleh karena itu Polis menjadi batas (lapse).
 					</div>
 
@@ -392,23 +1162,23 @@
 						<td style="width: 30%">
 							<table  style="border-collapse:separate;border:0px solid black;width:100%;">
 								<tr>
-									<td>Disiapkan oleh</td><td>:</td><td style="width: 60%">&nbsp;&nbsp;<label id="FooterAgentName">Andreas</label></td>
+									<td>Disiapkan oleh</td><td>:</td><td style="width: 60%">&nbsp;&nbsp;<label id="FooterAgentName2">Andreas</label></td>
 								</tr>
 								
 								<tr>
-									<td>Tanggal dan jam cetak</td><td>:</td><td>&nbsp;&nbsp;<label id="FooterPrintDate">26-Januari-2016</label></td>
+									<td>Tanggal dan jam cetak</td><td>:</td><td>&nbsp;&nbsp;<label id="FooterPrintDate2">26-Januari-2016</label></td>
 								</tr>
 								
 								<tr>
-									<td>Versi</td><td>:</td><td>&nbsp;&nbsp;<label id="FooterVersion">1.0.000</label></td>
+									<td>Versi</td><td>:</td><td>&nbsp;&nbsp;<label id="FooterVersion2">1.0.000</label></td>
 								</tr>
 								
 								<tr>
-									<td>Kode Tenaga Penjual</td><td>:</td><td>&nbsp;&nbsp;<label id="FooterAgentCode">HRTG-003</label></td>
+									<td>Kode Tenaga Penjual</td><td>:</td><td>&nbsp;&nbsp;<label id="FooterAgentCode2">HRTG-003</label></td>
 								</tr>
 								
 								<tr>
-									<td>Cabang</td><td>:</td><td>&nbsp;&nbsp;<label id="FooterBranch">Head Office</label></td>
+									<td>Cabang</td><td>:</td><td>&nbsp;&nbsp;<label id="FooterBranch2">Head Office</label></td>
 								</tr>
 								<tr>
 									<td colspan="3"><br/></td>

@@ -64,6 +64,21 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    
+    if (textField == textLA)
+    {
+        NSUInteger newLength = [textField.text length] + [string length] - range.length;
+        /*NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:@"ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz./@'()-"] invertedSet];
+         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+         return (([string isEqualToString:filtered]) && newLength <= 40);*/
+        return (newLength <= 40);
+    }
+    
+    return YES;
+}
+
 #pragma mark - Data Load from listing added by faiz
 -(void)loadDataFromList{
     NSMutableDictionary* dictPOLAData = [[NSMutableDictionary alloc]init];
@@ -106,9 +121,17 @@
         clientProfileID = [[dictPOLAData valueForKey:@"LA_ClientID"] intValue];
         productCode = [dictPOLAData valueForKey:@"ProductCode"];
         relWithLA = [dictPOLAData valueForKey:@"RelWithLA"];
+        
+        if ([occupationDesc isEqualToString:@""]){
+            [buttonDOB setTitle:@"--Please Select--" forState:UIControlStateNormal];
+            [buttonOccupation setTitle:@"--Please Select--" forState:UIControlStateNormal];
+            [segmentSmoker setSelectedSegmentIndex:UISegmentedControlNoSegment];
+            [segmentSex setSelectedSegmentIndex:UISegmentedControlNoSegment];
+        }
     }
     else{
         //[textIllustrationNumber setText:[delegate getRunnigSINumber]];
+        
     }
 }
 
@@ -156,7 +179,21 @@
     }
 }
 
+-(NSString *)getSmokerFromSegment:(UISegmentedControl *)sender{
+    if ([segmentSmoker selectedSegmentIndex]==0) {
+        smoker = @"Y";
+    } else if (segmentSmoker.selectedSegmentIndex == 1) {
+        smoker = @"N";
+    }
+    
+    return smoker;
+}
+
 -(IBAction)actionDOB:(UIButton *)sender{
+    Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
+    id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
+    [activeInstance performSelector:@selector(dismissKeyboard)];
+    
     UIStoryboard *sharedStoryboard = [UIStoryboard storyboardWithName:@"SharedStoryboard" bundle:Nil];
     laDate = [sharedStoryboard instantiateViewControllerWithIdentifier:@"showDate"];
     laDate.delegate = self;
@@ -172,6 +209,10 @@
 }
 
 -(IBAction)actionPOOccupation:(UIButton *)sender{
+    Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
+    id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
+    [activeInstance performSelector:@selector(dismissKeyboard)];
+    
     occupationList = [[OccupationList alloc] initWithStyle:UITableViewStylePlain];
     occupationList.delegate = self;
     popoverViewer = [[UIPopoverController alloc] initWithContentViewController:occupationList];
@@ -179,6 +220,10 @@
 }
 
 -(IBAction)actionLAList:(UIButton *)sender{
+    Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
+    id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
+    [activeInstance performSelector:@selector(dismissKeyboard)];
+    
     prospectList = [[ListingTbViewController alloc] initWithStyle:UITableViewStylePlain];
     prospectList.delegate = self;
     popoverViewer = [[UIPopoverController alloc] initWithContentViewController:prospectList];
@@ -198,23 +243,69 @@
     [dictPOLAData setObject:occupationCode forKey:@"LA_OccpCode"];
     [dictPOLAData setObject:occupationDesc forKey:@"LA_Occp"];
     
-    [dictPOLAData setObject:smoker forKey:@"LA_Smoker"];
+    [dictPOLAData setObject:smoker?:[self getSmokerFromSegment:segmentSmoker] forKey:@"LA_Smoker"];
     [dictPOLAData setObject:@"" forKey:@"LA_CommencementDate"];
     [dictPOLAData setObject:@"" forKey:@"LA_MonthlyIncome"];
     
     [delegate setPOLADictionary:dictPOLAData];
 }
 
+#pragma mark validation
+-(BOOL)ValidateSave{
+    NSString *namaTertanggung = textLA.text;
+    NSString *tanggalLahir = buttonDOB.currentTitle;
+    //jenis kelamin
+    //perokok
+    NSString *pekerjaan = buttonOccupation.currentTitle;
+    
+    NSString *alertNamaTertanggung = @"Nama Tertanggung harus diisi.";
+    NSString *alertTanggalLahir = @"Tanggal Lahir Tertanggung harus diisi";
+    NSString *alertJenisKelamin = @"Jenis kelamin Tertanggung harus diisi.";
+    NSString *alertPerokok = @"Status Merokok Tertanggung harus diisi.";
+    NSString *alertPekerjaan = @"Pekerjaan Tertanggung harus diisi.";
+    
+    UIAlertController *alertvalidation;
+    if ([namaTertanggung length]<=0){
+        alertvalidation = [alert alertInformation:@"Peringatan" stringMessage:alertNamaTertanggung];
+        [self presentViewController:alertvalidation animated:YES completion:nil];
+        return false;
+    }
+    if ([tanggalLahir isEqualToString:@"(null)"]||[tanggalLahir isEqualToString:@" - SELECT -"]||[tanggalLahir isEqualToString:@"- SELECT -"]||[tanggalLahir isEqualToString:@"--Please Select--"] ||[tanggalLahir length]<=0){
+        alertvalidation = [alert alertInformation:@"Peringatan" stringMessage:alertTanggalLahir];
+        [self presentViewController:alertvalidation animated:YES completion:nil];
+        return false;
+    }
+    if (segmentSex.selectedSegmentIndex == UISegmentedControlNoSegment){
+        alertvalidation = [alert alertInformation:@"Peringatan" stringMessage:alertJenisKelamin];
+        [self presentViewController:alertvalidation animated:YES completion:nil];
+        return false;
+    }
+    if (segmentSmoker.selectedSegmentIndex == UISegmentedControlNoSegment){
+        alertvalidation = [alert alertInformation:@"Peringatan" stringMessage:alertPerokok];
+        [self presentViewController:alertvalidation animated:YES completion:nil];
+        return false;
+    }
+    if ([pekerjaan isEqualToString:@"(null)"]||[pekerjaan isEqualToString:@" - SELECT -"]||[pekerjaan isEqualToString:@"- SELECT -"]||[pekerjaan isEqualToString:@"--Please Select--"] ||[pekerjaan length]<=0){
+        alertvalidation = [alert alertInformation:@"Peringatan" stringMessage:alertPekerjaan];
+        [self presentViewController:alertvalidation animated:YES completion:nil];
+        return false;
+    }
+    
+    return true;
+}
+
 #pragma mark saveData
 -(IBAction)actionSaveData:(UIBarButtonItem *)sender{
-    //set the updated data to parent
-    [self setPOLADictionary];
-    
-    //get updated data from parent and save it.
-    [modelSIPOData savePOLAData:[delegate getPOLADictionary]];
-    
-    //changePage
-    [delegate showUnitLinkModuleAtIndex:[NSIndexPath indexPathForRow:2 inSection:0]];
+    if ([self ValidateSave]){
+        //set the updated data to parent
+        [self setPOLADictionary];
+        
+        //get updated data from parent and save it.
+        [modelSIPOData savePOLAData:[delegate getPOLADictionary]];
+        
+        //changePage
+        [delegate showUnitLinkModuleAtIndex:[NSIndexPath indexPathForRow:2 inSection:0]];
+    }
 }
 
 #pragma mark delegate
@@ -224,11 +315,16 @@
     [buttonDOB setTitle:aaDOB forState:UIControlStateNormal];
     [textLAAge setText:[NSString stringWithFormat:@"%i",[formatter calculateAge:aaDOB]]];
     [buttonOccupation setTitle:[modelOccupation getOccupationDesc:aaCode] forState:UIControlStateNormal];
-    
+    occupationCode = aaCode;
+    occupationDesc = [modelOccupation getOccupationDesc:aaCode];
     if ([aaGender isEqualToString:@"MALE"] || [aaGender isEqualToString:@"M"] ) {
         segmentSex.selectedSegmentIndex = 0;
+        sex = @"MALE";
+
     } else {
         segmentSex.selectedSegmentIndex = 1;
+        sex = @"FEMALE";
+
     }
     [popoverViewer dismissPopoverAnimated:YES];
 }

@@ -16,5 +16,5 @@
 
 -(void)saveULFundAllocationData:(NSMutableDictionary *)dictULFundAllocationData;
 -(NSDictionary *)getULFundAllocationDataFor:(NSString *)SINo;
-
+-(int)getULFundAllocationDataCount:(NSString *)SINo;
 @end

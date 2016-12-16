@@ -854,6 +854,12 @@
                 createSQL = [NSString stringWithFormat:@"UPDATE tmp SET %@ =\"%@\",EnableEditing='1',IllustrationSigned='1',id = ((Select max(id) from %@)+1)",column,newValue,tableName];
             }else if([tableName caseInsensitiveCompare:@"SI_Temp_Trad_Rider"]==NSOrderedSame){
                 createSQL = [NSString stringWithFormat:@"UPDATE tmp SET %@ =\"%@\",rowid = ((Select max(id) from %@)+1)",column,newValue,tableName];
+            }
+            else if([tableName caseInsensitiveCompare:@"SI_UL_Rider"]==NSOrderedSame){
+                createSQL = [NSString stringWithFormat:@"UPDATE tmp SET %@ =\"%@\",ID = rowid + ((Select max(id) from %@)+1)",column,newValue,tableName];
+            }
+            else if([tableName caseInsensitiveCompare:@"SI_UL_SpecialOption"]==NSOrderedSame){
+                createSQL = [NSString stringWithFormat:@"UPDATE tmp SET %@ =\"%@\",ID = rowid + ((Select max(id) from %@)+1)",column,newValue,tableName];
             }else{
                 createSQL = [NSString stringWithFormat:@"UPDATE tmp SET %@ =\"%@\",id = ((Select max(id) from %@)+1)",column,newValue,tableName];
             }

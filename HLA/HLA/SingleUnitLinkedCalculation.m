@@ -26,7 +26,10 @@
     NSMutableArray *arrayAmountTopUp = [[NSMutableArray alloc]init];
     
     for (int i=0;i<[araySpecialOption count];i++){
-        [arrayAmountTopUp addObject:[[araySpecialOption objectAtIndex:i] valueForKey:@"Amount"]];
+        if ([[[araySpecialOption objectAtIndex:i] valueForKey:@"Year"] isEqualToString:@"1"]){
+            [arrayAmountTopUp addObject:[[araySpecialOption objectAtIndex:i] valueForKey:@"Amount"]];
+            break;
+        }
     }
     
     

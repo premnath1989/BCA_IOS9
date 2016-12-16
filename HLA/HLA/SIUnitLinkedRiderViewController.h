@@ -9,10 +9,15 @@
 #import <UIKit/UIKit.h>
 
 @protocol ULRiderViewControllerDelegate
-    -(void)setULRiderDictionary:(NSMutableDictionary *)dictULRider;
-    -(NSMutableDictionary *)getULRiderDictionary;
+    -(NSString *)getRunnigSINumber;
+    -(NSMutableDictionary *)getBasicPlanDictionary;
+    -(void)setULRiderDictionary:(NSMutableArray *)arrayULRiderData;
+    -(NSMutableArray *)getULRiderArray;
+    -(void)showUnitLinkModuleAtIndex:(NSIndexPath *)indexPath;
 @end
 
 @interface SIUnitLinkedRiderViewController : UIViewController
+
+@property (nonatomic,weak)IBOutlet UIView* viewRider;
 @property (nonatomic,strong) id <ULRiderViewControllerDelegate> delegate;
 @end

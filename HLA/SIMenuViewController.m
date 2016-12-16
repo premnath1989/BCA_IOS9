@@ -40,7 +40,7 @@
 #define TRAD_DETAILS_BASICPLAN @"3"
 #define TRAD_RIDER_DETAILS @"4"
 
-@interface SIMenuViewController (){
+@interface SIMenuViewController ()<ULMenuViewControllerDelegate>{
     SIMenuUnitLinkedViewController *siMenuUnitLinkedVC;
     
     PremiumViewController *_PremiumController;
@@ -51,6 +51,9 @@
     NSMutableDictionary* newDictionaryForBasicPlan;
     bool selfRelation;
     int lastIndexSelected;
+    
+    NSString *unitLinkedSINumber;
+    UIView* viewUnitlinked;
 }
 
 @end
@@ -96,6 +99,7 @@ BOOL isFirstLoad;
     _modelSIRider = [[ModelSIRider alloc]init];
     
     siMenuUnitLinkedVC = [[SIMenuUnitLinkedViewController alloc]initWithNibName:@"SIMenuUnitLinkedViewController" bundle:nil];
+    [siMenuUnitLinkedVC setDelegate:self];
     
     self.RiderController = [self.storyboard instantiateViewControllerWithIdentifier:@"RiderView"];
     _RiderController.delegate = self;
@@ -723,6 +727,7 @@ BOOL isFirstLoad;
     [self.myTableView selectRowAtIndexPath:selectedPath animated:NO scrollPosition:UITableViewScrollPositionNone];
     
     if ([planName isEqualToString:@"BCA Life Unit Linked"]){
+    //if ([_LAController.NamaProduk.currentTitle isEqualToString:@"BCA Life Unit Linked"]){
         [self voidCreateUnitLinkedView:self.requestSINo];
     }
 }
@@ -1104,14 +1109,34 @@ BOOL isFirstLoad;
                 NSLog(@"ok");
                 NSString *oldSiNo = [dictionaryPOForInsert valueForKey:@"SINO"];
                 NSString *newSiNo = [self generateSINO];
-                NSString *PlanType = [dictionaryPOForInsert valueForKey:@"ProductName"];
+                NSString *PlanType = [dictionaryPOForInsert valueForKey:@"ProductName"]?:_LAController.NamaProduk.currentTitle;
+                if ([dictionaryPOForInsert count]>0){
+                    oldSiNo = [dictionaryPOForInsert valueForKey:@"SINO"];
+                    PlanType = [dictionaryPOForInsert valueForKey:@"ProductName"];
+                }
+                else{
+                    oldSiNo = unitLinkedSINumber;
+                    PlanType = @"BCA Life Unit Linked";
+                }
+                
+
                 if([PlanType isEqualToString:@"BCA Life Heritage Protection"]){
                     
                     LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
                     [loginDB duplicateRow:@"SI_Master" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
                     [loginDB duplicateRow:@"SI_Premium" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
                     [loginDB duplicateRow:@"SI_PO_Data" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
-                }else{
+                }
+                else if([PlanType isEqualToString:@"BCA Life Unit Linked"]){
+                    LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
+                    [loginDB duplicateRow:@"SI_Master" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
+                    [loginDB duplicateRow:@"SI_UL_BasicPlan" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
+                    [loginDB duplicateRow:@"SI_UL_FundAllocation" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
+                    [loginDB duplicateRow:@"SI_UL_Rider" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
+                    [loginDB duplicateRow:@"SI_UL_SpecialOption" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
+                    [loginDB duplicateRow:@"SI_PO_Data" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
+                }
+                else{
                     NSString *oldSiNo = [dictionaryPOForInsert valueForKey:@"SINO"];
                     NSString *newSiNo = [self generateSINO];
                     
@@ -3127,6 +3152,16 @@ BOOL isFirstLoad;
 }
 
 #pragma mark - delegate added by faiz
+-(void)dismissUnitLinkedView:(NSMutableDictionary *)dictionaryPOLA{
+    [viewUnitlinked removeFromSuperview];
+    //[dictionaryPOLA setObject:@"" forKey:@"RelWithLA"];
+    planName = [dictionaryPOLA valueForKey:@"ProductName"];
+    //dictionaryPOForInsert  = dictionaryPOLA;
+    //[_LAController.NamaProduk setTitle:planName forState:UIControlStateNormal];
+    [_LAController loadDataFromModifiedUnitLinked:dictionaryPOLA];
+    [self LoadViewController];
+}
+
 -(void)setBasicPlanDictionaryWhenLoadFromList:(NSDictionary *)basicPlan{
     newDictionaryForBasicPlan = [NSMutableDictionary dictionaryWithDictionary:basicPlan];
     NSDictionary* dictPOData=[[NSDictionary alloc]initWithDictionary:[_modelSIPOData getPO_DataFor:[self.requestSINo description]]];
@@ -4631,6 +4666,7 @@ BOOL isFirstLoad;
  */
 - (void) showQuotation
 {
+
     reportType = REPORT_SI;
     PDSorSI = @"SI";
     if ([getOccpCode isEqualToString:@"OCC01975"]) {
@@ -6427,8 +6463,25 @@ NSString *prevPlan;
 }
 
 #pragma mark unitlinked
+-(void)showQuotation:(UIViewController *)viewControllerQuotation SINumber:(NSString *)stringSINumber{
+    LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
+    NSString *EditMode = [loginDB EditIllustration:stringSINumber];
+    //disable all text fields
+    if([EditMode caseInsensitiveCompare:@"0"] == NSOrderedSame){
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewControllerQuotation];
+        [self presentViewController:navController animated:YES completion:nil];
+    }else{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Simpan terlebih dahulu ilustrasi." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
+        [alert show];
+    }
+}
+
+-(void)SetUnitLinkedSINumber:(NSString *)stringSINumber{
+    unitLinkedSINumber = stringSINumber;
+}
+
 -(void)voidCreateUnitLinkedView:(NSString *)SINumber{
-    UIView* viewUnitlinked = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 1024, 768)];
+    viewUnitlinked = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 1024, 768)];
     [viewUnitlinked addSubview:siMenuUnitLinkedVC.view];
     [self.view addSubview:viewUnitlinked];
 
@@ -6437,7 +6490,34 @@ NSString *prevPlan;
     [siMenuUnitLinkedVC setInitialULBasicPlanDictionary];
     [siMenuUnitLinkedVC setInitialULFundAllocationDictionary];
     [siMenuUnitLinkedVC setInitialULSpecialOptionDictionary];
+    [siMenuUnitLinkedVC setInitialULRiderArray];
+    
+    [siMenuUnitLinkedVC setBOOLSectionFilled];
+
+    [siMenuUnitLinkedVC checkEditingMode];
+    
+    [siMenuUnitLinkedVC showUnitLinkModuleAtIndex:[NSIndexPath indexPathForRow:0 inSection:0]];
 }
+
+-(void)voidCreateUnitLinkedViewFromModifiedPlan:(NSString *)SINumber{
+    viewUnitlinked = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 1024, 768)];
+    [viewUnitlinked addSubview:siMenuUnitLinkedVC.view];
+    [self.view addSubview:viewUnitlinked];
+    
+    [siMenuUnitLinkedVC setIllustrationNumber:SINumber];
+    [siMenuUnitLinkedVC setExchangePOLADictionary:[_LAController setDictionaryLA]];
+    /*[siMenuUnitLinkedVC setInitialULBasicPlanDictionary];
+    [siMenuUnitLinkedVC setInitialULFundAllocationDictionary];
+    [siMenuUnitLinkedVC setInitialULSpecialOptionDictionary];
+    [siMenuUnitLinkedVC setInitialULRiderArray];*/
+    
+    [siMenuUnitLinkedVC setBOOLSectionFilled];
+    
+    [siMenuUnitLinkedVC checkEditingMode];
+    
+    [siMenuUnitLinkedVC showUnitLinkModuleAtIndex:[NSIndexPath indexPathForRow:0 inSection:0]];
+}
+
 
 #pragma mark - memory
 
@@ -6543,6 +6623,9 @@ NSString *prevPlan;
         [self seePDF:@"Brochure_ProdukBCALifeHeritage"];
     }
     if([_LAController.NamaProduk.titleLabel.text caseInsensitiveCompare:@"BCA Life Keluargaku"] == NSOrderedSame){
+        [self seePDF:@"Brochure_ProdukBCALIfeKeluargaku"];
+    }
+    if([_LAController.NamaProduk.titleLabel.text caseInsensitiveCompare:@"BCA Life Unit Linked"] == NSOrderedSame){
         [self seePDF:@"Brochure_ProdukBCALIfeKeluargaku"];
     }
 }

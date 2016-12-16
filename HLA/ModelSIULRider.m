@@ -32,14 +32,32 @@
     //cek the SINO exist or not
     int exist = [self getULRiderDataCount:[dictULRiderData valueForKey:@"SINO"]];
     
-    if (exist>0){
+    /*if (exist>0){
         //update data
         [self updateULRiderData:dictULRiderData];
     }
     else{
         //insert data
         [self insertToDBULRiderData:dictULRiderData];
+    }*/
+    [self insertToDBULRiderData:dictULRiderData];
+}
+
+-(void)deleteULRiderData:(NSString *)stringSINO{
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path] ;
+    [database open];
+    BOOL success = [database executeUpdate:@"delete from SI_UL_Rider where SINO=?" ,
+                    stringSINO];
+    
+    if (!success) {
+        NSLog(@"%s: insert error: %@", __FUNCTION__, [database lastErrorMessage]);
+        // do whatever you need to upon error
     }
+    [results close];
+    [database close];
 }
 
 -(void)insertToDBULRiderData:(NSMutableDictionary *)dictULRiderData{
@@ -92,7 +110,8 @@
     [database close];
 }
 
--(NSDictionary *)getULRiderDataFor:(NSString *)SINo{
+-(NSMutableArray *)getULRiderDataFor:(NSString *)SINo{
+    NSMutableArray* arrayRiderData = [[NSMutableArray alloc]init];
     NSDictionary *dict;
     
     NSString* SINO;
@@ -122,21 +141,24 @@
         ExtraPremiMilTerm = [s stringForColumn:@"ExtraPremiMilTerm"];
         ExtraPremiPercent = [s stringForColumn:@"ExtraPremiPercent"];
         ExtraPremiPercentTerm = [s stringForColumn:@"ExtraPremiPercentTerm"];
+        
+        dict=[[NSDictionary alloc]initWithObjectsAndKeys:
+              SINO,@"SINO",
+              RiderCode,@"RiderCode",
+              RiderDesc,@"RiderDesc",
+              SumAssured,@"SumAssured",
+              Term,@"Term",
+              ExtraPremiMil,@"ExtraPremiMil",
+              ExtraPremiMilTerm,@"ExtraPremiMilTerm",
+              ExtraPremiPercent,@"ExtraPremiPercent",
+              ExtraPremiPercentTerm,@"ExtraPremiPercentTerm",nil];
+        
+        [arrayRiderData addObject:dict];
     }
     
-    dict=[[NSDictionary alloc]initWithObjectsAndKeys:
-          SINO,@"SINO",
-          RiderCode,@"RiderCode",
-          RiderDesc,@"RiderDesc",
-          SumAssured,@"SumAssured",
-          Term,@"Term",
-          ExtraPremiMil,@"ExtraPremiMil",
-          ExtraPremiMilTerm,@"ExtraPremiMilTerm",
-          ExtraPremiPercent,@"ExtraPremiPercent",
-          ExtraPremiPercentTerm,@"ExtraPremiPercentTerm",nil];
     
     [results close];
     [database close];
-    return dict;
+    return arrayRiderData;
 }
 @end

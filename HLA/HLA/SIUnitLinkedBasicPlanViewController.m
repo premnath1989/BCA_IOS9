@@ -49,8 +49,8 @@
     
     [textBasicPremiField addTarget:self action:@selector(RealTimeFormat:) forControlEvents:UIControlEventEditingChanged];
     [textBasicPremiField addTarget:self action:@selector(BasicPremiEditingEnd:) forControlEvents:UIControlEventEditingDidEnd];
-    [textExtraPremiPercentField addTarget:self action:@selector(ExtraPremiPercentEditingEnd:) forControlEvents:UIControlEventEditingDidEnd];
-    [textExtraPremiNumberField addTarget:self action:@selector(ExtraPremiNumberEditingEnd:) forControlEvents:UIControlEventEditingDidEnd];
+    //[textExtraPremiPercentField addTarget:self action:@selector(ExtraPremiPercentEditingEnd:) forControlEvents:UIControlEventEditingDidEnd];
+    //[textExtraPremiNumberField addTarget:self action:@selector(ExtraPremiNumberEditingEnd:) forControlEvents:UIControlEventEditingDidEnd];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -146,7 +146,7 @@
     [sender setText:[formatter numberToCurrencyDecimalFormatted:plainNumber]];
 }
 
--(void)ExtraPremiPercentEditingEnd:(UITextField *)sender{
+-(BOOL)ExtraPremiPercentEditingEnd:(UITextField *)sender{
     NSArray* arrayNumberValidate = [[NSArray alloc]initWithObjects:@"25",@"50",@"75",@"100",@"125",@"150",@"175",@"200",@"225",@"250", nil];
     NSString * combinedArray = [arrayNumberValidate componentsJoinedByString:@","];
     if ([sender.text length]>0){
@@ -157,11 +157,13 @@
             [self presentViewController:alertEmptyImage animated:YES completion:^{
                 [sender becomeFirstResponder];
             }];
+            return false;
         }
     }
+    return true;
 }
 
--(void)ExtraPremiNumberEditingEnd:(UITextField *)sender{
+-(BOOL)ExtraPremiNumberEditingEnd:(UITextField *)sender{
     NSArray* arrayNumberValidate = [[NSArray alloc]initWithObjects:@"2",@"4",@"6",@"8",@"10",@"12",@"14",@"16",@"18",@"20", nil];
     NSString * combinedArray = [arrayNumberValidate componentsJoinedByString:@","];
     if ([sender.text length]>0){
@@ -172,8 +174,10 @@
             [self presentViewController:alertEmptyImage animated:YES completion:^{
                 [sender becomeFirstResponder];
             }];
+            return false;
         }
     }
+    return true;
 }
 
 -(void)BasicPremiEditingEnd:(UITextField *)sender{
@@ -271,17 +275,52 @@
     return true;
 }
 
+#pragma mark validation
+-(BOOL)ValidateSave{
+    NSString *premiDasar = textBasicPremiField.text;
+    NSString *extraPremiPercent = textExtraPremiPercentField.text;
+    NSString *extraPremiPerMil = textExtraPremiNumberField.text;
+    NSString *masaExtraPremi = textMasaExtraPremiField.text;
+    
+    NSString *alertPremiDasar = @"Premi Dasar harus diisi.";
+    NSString *alertMasaExtraPremi = @"Masa Extra Premi harus diisi.";
+    
+    UIAlertController *alertvalidation;
+    if ([premiDasar length]<=0){
+        alertvalidation = [alert alertInformation:@"Peringatan" stringMessage:alertPremiDasar];
+        [self presentViewController:alertvalidation animated:YES completion:nil];
+        return false;
+    }
+    if ([extraPremiPercent length]>0 || [extraPremiPerMil length]>0){
+        if ([masaExtraPremi length]<=0){
+            alertvalidation = [alert alertInformation:@"Peringatan" stringMessage:alertMasaExtraPremi];
+            [self presentViewController:alertvalidation animated:YES completion:nil];
+            return false;
+        }
+    }
+    
+    return true;
+}
+
 #pragma mark saveData
 -(IBAction)actionSaveData:(UIBarButtonItem *)sender{
+    Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
+    id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
+    [activeInstance performSelector:@selector(dismissKeyboard)];
+    
     if ([self validateSave]){
-        //set the updated data to parent
-        [self setULBasicPlanDictionary];
-        
-        //get updated data from parent and save it.
-        [modelSIULBasicPlan saveULBasicPlanData:[delegate getBasicPlanDictionary]];
+        if ([self ExtraPremiPercentEditingEnd:textExtraPremiPercentField] && [self ExtraPremiNumberEditingEnd:textExtraPremiNumberField]){
+            if ([self ValidateSave]){
+                //set the updated data to parent
+                [self setULBasicPlanDictionary];
+                
+                //get updated data from parent and save it.
+                [modelSIULBasicPlan saveULBasicPlanData:[delegate getBasicPlanDictionary]];
 
-        //change to next page
-        [delegate showUnitLinkModuleAtIndex:[NSIndexPath indexPathForRow:3 inSection:0]];
+                //change to next page
+                [delegate showUnitLinkModuleAtIndex:[NSIndexPath indexPathForRow:3 inSection:0]];
+            }
+        }
     }
 }
 

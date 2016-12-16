@@ -19,7 +19,7 @@
     IBOutlet UITextField* textEquityIncome;
     IBOutlet UITextField* textTotalIncome;
 }
-
+@property (nonatomic,weak)IBOutlet UIScrollView* scrollFundAllocation;
 
 @property (nonatomic,strong) id <ULFundAllocationViewControllerDelegate> delegate;
 @end

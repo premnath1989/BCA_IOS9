@@ -4,25 +4,25 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="BPreplay.otf">
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
-            <string>BPreplay</string>
+        <mutableArray key="BPreplayItalics.otf">
+            <string>BPreplay-Italic</string>
+            <string>BPreplay-Italic</string>
         </mutableArray>
-        <mutableArray key="BPreplay_Italics.otf">
-            <string>BPreplay-Italic</string>
-            <string>BPreplay-Italic</string>
+        <mutableArray key="BPreplay_Regular.ttf">
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
+            <string>BPreplay</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -30,6 +30,7 @@
             <connections>
                 <outlet property="buttonFrekuensiPembayaran" destination="xMo-3V-8Sw" id="ldY-ny-0Xu"/>
                 <outlet property="buttonMasaPembayaran" destination="hPv-Ft-WIR" id="68g-NK-ULK"/>
+                <outlet property="scrollBasicPlan" destination="Gv0-VE-TiB" id="ZQV-kk-vgd"/>
                 <outlet property="segmentCurrency" destination="AVc-NT-DDq" id="6Gq-AE-hgL"/>
                 <outlet property="textBasicPremiField" destination="l49-OI-A5W" id="F7x-0H-1qx"/>
                 <outlet property="textExtraPremiNumberField" destination="bpS-M0-hki" id="wWh-H8-EyH"/>

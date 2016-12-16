@@ -31,9 +31,7 @@
                     <rect key="frame" x="0.0" y="1" width="350" height="44"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <items>
-                        <navigationItem id="sHH-4Z-m1v">
-                            <barButtonItem key="rightBarButtonItem" title="Done" id="jX4-uU-JU2"/>
-                        </navigationItem>
+                        <navigationItem id="sHH-4Z-m1v"/>
                     </items>
                 </navigationBar>
             </subviews>

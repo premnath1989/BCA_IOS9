@@ -19,6 +19,8 @@
 #import "ModelSIULBasicPlan.h"
 #import "ModelSIULFundAllocation.h"
 #import "ModelSIULSpecialOption.h"
+#import "ModelSIULRider.h"
+#import "LoginDBManagement.h"
 
 @interface SIMenuUnitLinkedViewController ()<ULPolicyHolderViewControllerDelegate,ULLifeAssuredViewControllerDelegate,ULBasicPlanViewControllerDelegate,ULRiderViewControllerDelegate,ULSpecialOptionViewControllerDelegate,ULFundAllocationViewControllerDelegate,ULQuotationViewControllerDelegate>{
     SIUnitLinkedRiderViewController * siUnitLinkedRiderVC;
@@ -34,6 +36,14 @@
     Model_SI_Master *modelSIMaster;
     ModelSIULFundAllocation* modelSIULFundAllocation;
     ModelSIULSpecialOption *modelSIULSpecialOption;
+    ModelSIULRider *modelSIULRider;
+    
+    BOOL isPOFilled;
+    BOOL isLAFilled;
+    BOOL isBasicPlanFilled;
+    BOOL isRiderFilled;
+    BOOL isFundAllocationFilled;
+    BOOL isSpecialOptionFilled;
 }
 
 @end
@@ -44,8 +54,9 @@
     NSMutableArray* arrayIntValidate;
     
     NSMutableArray* arrayUnitLinkedModuleView;
+    NSMutableArray* arrayUnitLinkedModule;
 }
-
+@synthesize delegate;
 - (void)viewDidLoad {
     [super viewDidLoad];
     siUnitLinkedPolicyHolderVC =[[SIUnitLinkedPolicyHolderViewController alloc]initWithNibName:@"SIUnitLinkedPolicyHolderViewController" bundle:nil];
@@ -79,11 +90,14 @@
     
     arrayUnitLinkedModuleView = [[NSMutableArray alloc]initWithObjects:siUnitLinkedPolicyHolderVC.view,siUnitLinkedLifeAssuredVC.view,siUnitLinkedBasicPlanVC.view,siUnitLinkedFundAllocationVC.view,siUnitLinkedRiderVC.view,siUnitLinkedSpecialOptionVC.view,siUnitLinkedQuotationVC.view, nil];
     
+    arrayUnitLinkedModule = [[NSMutableArray alloc]initWithObjects:siUnitLinkedPolicyHolderVC,siUnitLinkedLifeAssuredVC,siUnitLinkedBasicPlanVC,siUnitLinkedFundAllocationVC,siUnitLinkedRiderVC,siUnitLinkedSpecialOptionVC,siUnitLinkedQuotationVC, nil];
+    
     modelSIPOData = [[ModelSIPOData alloc]init];
     modelSIULBasicPlan = [[ModelSIULBasicPlan alloc]init];
     modelSIMaster = [[Model_SI_Master alloc] init];
     modelSIULFundAllocation = [[ModelSIULFundAllocation alloc]init];
     modelSIULSpecialOption = [[ModelSIULSpecialOption alloc]init];
+    modelSIULRider = [[ModelSIULRider alloc]init];
     
     arrayIntValidate = [[NSMutableArray alloc] initWithObjects:@"0",@"0",@"0",@"0",@"0",@"0",@"0", nil];
     NumberListOfSubMenu = [[NSMutableArray alloc] initWithObjects:@"1", @"2", @"3", @"4",@"5",@"6",@"7", nil];
@@ -114,15 +128,112 @@
             else if (i==1){
                 [siUnitLinkedLifeAssuredVC loadDataFromList];
             }
+            else if (i==6){
+                [self setSaveAsMode:stringSINumber];
+                [delegate showQuotation:siUnitLinkedQuotationVC SINumber:stringSINumber];
+                break;
+            }
+            [[arrayUnitLinkedModule objectAtIndex:i] loadDataFromList];
             [viewRightView addSubview:[arrayUnitLinkedModuleView objectAtIndex:i]];
         }
     }
+    [self setBOOLSectionFilled];
+    
     [myTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionTop];
 }
+
+- (void) checkEditingMode {
+    LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
+    NSString *EditMode = [loginDB EditIllustration:stringSINumber];
+    //disable all text fields
+    [self setSaveAsMode:stringSINumber];
+    if([EditMode caseInsensitiveCompare:@"0"] == NSOrderedSame){
+        //disable
+        [siUnitLinkedPolicyHolderVC.scrollPolicyHolder setUserInteractionEnabled:false];
+        [siUnitLinkedLifeAssuredVC.viewLifeAssured setUserInteractionEnabled:false];
+        [siUnitLinkedBasicPlanVC.scrollBasicPlan setUserInteractionEnabled:false];
+        [siUnitLinkedFundAllocationVC.scrollFundAllocation setUserInteractionEnabled:false];
+        [siUnitLinkedRiderVC.viewRider setUserInteractionEnabled:true];
+        [siUnitLinkedSpecialOptionVC.scrollSpecialOption setUserInteractionEnabled:false];
+    }else{
+        //enable
+        [siUnitLinkedPolicyHolderVC.scrollPolicyHolder setUserInteractionEnabled:true];
+        [siUnitLinkedLifeAssuredVC.viewLifeAssured setUserInteractionEnabled:true];
+        [siUnitLinkedBasicPlanVC.scrollBasicPlan setUserInteractionEnabled:true];
+        [siUnitLinkedFundAllocationVC.scrollFundAllocation setUserInteractionEnabled:true];
+        [siUnitLinkedRiderVC.viewRider setUserInteractionEnabled:true];
+        [siUnitLinkedSpecialOptionVC.scrollSpecialOption setUserInteractionEnabled:true];
+    }
+}
+
+-(IBAction)brochureTapped:(id)sender{
+    [delegate brochureTapped:nil];
+}
+
+-(IBAction)saveTapped:(id)sender{
+    [delegate SetUnitLinkedSINumber:stringSINumber];
+    [delegate SaveTapped:nil];
+}
+
+- (void)setSaveAsMode:(NSString *)SINO{
+    LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
+    NSString *EditMode = [loginDB EditIllustration:SINO];
+    NSLog(@" Edit Mode second %@ : %@", EditMode, SINO);
+    //disable all text fields
+    if([EditMode caseInsensitiveCompare:@"0"] != NSOrderedSame){
+        outletSaveAs.hidden = YES;
+    }else{
+        outletSaveAs.hidden = NO;
+    }
+}
+
 
 -(NSString *)getRunnigSINumber{
     return stringSINumber;
 }
+
+-(void)setBOOLSectionFilled{
+    isPOFilled = false;
+    isLAFilled = false;
+    isBasicPlanFilled = false;
+    isRiderFilled = false;
+    isFundAllocationFilled = false;
+    isSpecialOptionFilled = false;
+    
+    if ([dictParentPOLAData count]>0){
+        isPOFilled = true;
+        if ([[dictParentPOLAData valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"]){
+            isLAFilled = true;
+        }
+        else {
+            if ([[dictParentPOLAData valueForKey:@"LA_Name"] isEqualToString:@""]){
+                isLAFilled = false;
+            }
+            else{
+                isLAFilled = true;
+            }
+            
+        }
+        
+    }
+    if ([dictParentULBasicPlanData count]>0){
+        isBasicPlanFilled = true;
+    }
+    if ([dictParentULFundAllocationData count]>0){
+        isFundAllocationFilled = true;
+    }
+    
+    if ([arrayRiderData count]>0){
+        isRiderFilled = true;
+    }
+    
+    if ([arraySpecialOptionData count]>0){
+        isSpecialOptionFilled = true;
+    }
+    
+    [myTableView reloadData];
+}
+
 #pragma mark Save SIMaster
 
 -(void)saveSIMaster{
@@ -158,16 +269,16 @@
 }
 
 #pragma mark delegate Rider
--(void)setInitialULRiderDictionary{
-    dictParentULBasicPlanData = [[NSMutableDictionary alloc]initWithDictionary:[modelSIULBasicPlan getULBasicPlanDataFor:stringSINumber]];
+-(void)setInitialULRiderArray{
+    arrayRiderData = [[NSMutableArray alloc]initWithArray:[modelSIULRider getULRiderDataFor:stringSINumber]];
 }
 
--(void)setULRiderDictionary:(NSMutableDictionary *)dictULBasicPlanData{
-    dictParentULBasicPlanData = [[NSMutableDictionary alloc]initWithDictionary:dictULBasicPlanData];
+-(void)setULRiderDictionary:(NSMutableArray *)arrayULRiderData{
+    arrayRiderData = [[NSMutableArray alloc]initWithArray:arrayULRiderData];
 }
 
--(NSMutableDictionary *)getULRiderDictionary{
-    return dictParentULBasicPlanData ;
+-(NSMutableArray *)getULRiderArray{
+    return arrayRiderData ;
 }
 
 
@@ -185,6 +296,14 @@
 }
 
 #pragma mark delegate POLA
+-(void)dismissUnitLinkedView{
+    [delegate dismissUnitLinkedView:[self getPOLADictionary]];
+}
+
+-(void)setExchangePOLADictionary:(NSMutableDictionary *)dictPOLAdata{
+    dictParentPOLAData = [[NSMutableDictionary alloc]initWithDictionary:dictPOLAdata];
+}
+
 -(void)setInitialPOLADictionary{
     dictParentPOLAData = [[NSMutableDictionary alloc]initWithDictionary:[modelSIPOData getPOLADataFor:stringSINumber]];
 }
@@ -259,6 +378,94 @@
             [cell setUserInteractionEnabled:YES];
         }
     }*/
+    
+    if (indexPath.row==0){
+        if (isPOFilled){
+            [cell setBackgroundColor:[UIColor colorWithRed:88.0/255.0 green:89.0/255.0 blue:92.0/255.0 alpha:1.0]];
+        }
+        [cell setUserInteractionEnabled:true];
+    }
+    else if (indexPath.row==1){
+        if (isLAFilled){
+            [cell setBackgroundColor:[UIColor colorWithRed:88.0/255.0 green:89.0/255.0 blue:92.0/255.0 alpha:1.0]];
+            if ([[dictParentPOLAData valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"]){
+                [cell setUserInteractionEnabled:false];
+            }
+            else{
+                [cell setUserInteractionEnabled:true];
+            }
+        }
+        else{
+            if (isPOFilled){
+                if ([[dictParentPOLAData valueForKey:@"RelWithLA"] isEqualToString:@"DIRI SENDIRI"]){
+                    [cell setUserInteractionEnabled:false];
+                }
+                else{
+                    [cell setUserInteractionEnabled:true];
+                }
+            }
+            else{
+                [cell setUserInteractionEnabled:false];
+            }
+        }
+    }
+    else if (indexPath.row==2){
+        if (isBasicPlanFilled){
+            [cell setBackgroundColor:[UIColor colorWithRed:88.0/255.0 green:89.0/255.0 blue:92.0/255.0 alpha:1.0]];
+        }
+        else{
+            if (isLAFilled){
+                [cell setUserInteractionEnabled:true];
+            }
+            else{
+                [cell setUserInteractionEnabled:false];
+            }
+        }
+    }else if (indexPath.row==3){
+        if (isFundAllocationFilled){
+            [cell setBackgroundColor:[UIColor colorWithRed:88.0/255.0 green:89.0/255.0 blue:92.0/255.0 alpha:1.0]];
+        }
+        else{
+            if (isBasicPlanFilled){
+                [cell setUserInteractionEnabled:true];
+            }
+            else{
+                [cell setUserInteractionEnabled:false];
+            }
+        }
+    }else if (indexPath.row==4){
+        if (isRiderFilled){
+            [cell setBackgroundColor:[UIColor colorWithRed:88.0/255.0 green:89.0/255.0 blue:92.0/255.0 alpha:1.0]];
+        }
+        else{
+            if (isFundAllocationFilled){
+                [cell setUserInteractionEnabled:true];
+            }
+            else{
+                [cell setUserInteractionEnabled:false];
+            }
+        }
+    }else if (indexPath.row==5){
+        if (isSpecialOptionFilled){
+            [cell setBackgroundColor:[UIColor colorWithRed:88.0/255.0 green:89.0/255.0 blue:92.0/255.0 alpha:1.0]];
+        }
+        else{
+            if (isRiderFilled){
+                [cell setUserInteractionEnabled:true];
+            }
+            else{
+                [cell setUserInteractionEnabled:false];
+            }
+        }
+    }
+    else if (indexPath.row==6){
+        if (isSpecialOptionFilled){
+            [cell setUserInteractionEnabled:true];
+        }
+        else{
+            [cell setUserInteractionEnabled:false];
+        }
+    }
     
     bgColorView.backgroundColor = [UIColor colorWithRed:218.0f/255.0f green:49.0f/255.0f blue:85.0f/255.0f alpha:1];
     

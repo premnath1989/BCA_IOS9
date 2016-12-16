@@ -7,6 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SIMenuUnitLinkedViewController">
             <connections>
                 <outlet property="myTableView" destination="xln-m7-dkM" id="WK2-1N-ja2"/>
+                <outlet property="outletSaveAs" destination="AeD-mN-gOq" id="5Z6-Qi-G1p"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="viewRightView" destination="Uke-gJ-IVY" id="t2h-f3-IG7"/>
             </connections>
@@ -22,7 +23,7 @@
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" separatorStyle="default" rowHeight="83" sectionHeaderHeight="22" sectionFooterHeight="22" id="xln-m7-dkM">
-                    <rect key="frame" x="0.0" y="20" width="205" height="748"/>
+                    <rect key="frame" x="0.0" y="20" width="205" height="650"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.80000000000000004" green="0.79607843140000001" blue="0.80392156859999997" alpha="1" colorSpace="calibratedRGB"/>
                     <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -38,6 +39,29 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.2292430694" green="0.3648514564" blue="0.57879577019999995" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
+                <view contentMode="scaleToFill" id="up2-ry-3R5">
+                    <rect key="frame" x="0.0" y="670" width="205" height="100"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bqq-6a-Moz">
+                            <rect key="frame" x="28" y="0.0" width="70" height="70"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="Icon_Brochure.png"/>
+                            <connections>
+                                <action selector="brochureTapped:" destination="-1" eventType="touchUpInside" id="A9I-cy-2b4"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="AeD-mN-gOq">
+                            <rect key="frame" x="106" y="0.0" width="70" height="70"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="Icon_SaveAs.png"/>
+                            <connections>
+                                <action selector="saveTapped:" destination="-1" eventType="touchUpInside" id="XKR-sO-eVk"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.80000000000000004" green="0.79607843140000001" blue="0.80392156859999997" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
@@ -46,4 +70,8 @@
             <point key="canvasLocation" x="196" y="238"/>
         </view>
     </objects>
+    <resources>
+        <image name="Icon_Brochure.png" width="506" height="506"/>
+        <image name="Icon_SaveAs.png" width="506" height="506"/>
+    </resources>
 </document>

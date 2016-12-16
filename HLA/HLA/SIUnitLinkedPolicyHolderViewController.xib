@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="BPreplay_Italics.otf">
+        <mutableArray key="BPreplayItalics.otf">
             <string>BPreplay-Italic</string>
             <string>BPreplay-Italic</string>
             <string>BPreplay-Italic</string>
@@ -39,7 +39,7 @@
                 <outlet property="buttonRelation" destination="NII-XS-gVa" id="FLP-xl-kAT"/>
                 <outlet property="labelQuickQuote" destination="ePl-NX-jSn" id="jg9-uQ-mFq"/>
                 <outlet property="quickQuoteFlag" destination="5mi-0F-puv" id="LJK-pn-Jw2"/>
-                <outlet property="scrollPolicyHolder" destination="loK-iY-6ta" id="XNi-Bp-Sgr"/>
+                <outlet property="scrollPolicyHolder" destination="loK-iY-6ta" id="e03-nR-L7R"/>
                 <outlet property="segmentSex" destination="PLg-NK-0Ea" id="Me1-WX-sSN"/>
                 <outlet property="segmentSmoker" destination="dfT-oN-uDx" id="Xko-Dp-hlu"/>
                 <outlet property="textIllustrationNumber" destination="rl3-72-hwg" id="Yz3-5b-KkC"/>
@@ -159,6 +159,9 @@
                             <color key="textColor" red="0.34509803919999998" green="0.34901960780000002" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="DQf-il-AYH"/>
+                            </connections>
                         </textField>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="16" id="rl3-72-hwg">
                             <rect key="frame" x="259" y="75" width="430" height="30"/>

@@ -11,6 +11,7 @@
 @protocol ULSpecialOptionViewControllerDelegate
     -(void)setULSpecialOptionArray:(NSMutableArray *)arraySpecialOption;
     -(NSMutableArray *)getULSpecialOptionArray;
+    -(NSMutableDictionary *)getPOLADictionary;
     -(NSMutableDictionary *)getBasicPlanDictionary;
     -(NSString *)getRunnigSINumber;
     -(void)showUnitLinkModuleAtIndex:(NSIndexPath *)indexPath;
@@ -27,5 +28,6 @@
     IBOutlet UITextField* textTopUpAmount;
     IBOutlet UITextField* textWithDrawalAmount;
 }
+@property (nonatomic,weak)IBOutlet UIScrollView* scrollSpecialOption;
 @property (nonatomic,strong) id <ULSpecialOptionViewControllerDelegate> delegate;
 @end

@@ -29,6 +29,7 @@
 }
 
 -(void)saveULFundAllocationData:(NSMutableDictionary *)dictULFundAllocationData{
+    
     //cek the SINO exist or not
     int exist = [self getULFundAllocationDataCount:[dictULFundAllocationData valueForKey:@"SINO"]];
     
@@ -40,6 +41,7 @@
         //insert data
         [self insertToDBULFundAllocationData:dictULFundAllocationData];
     }
+    
 }
 
 -(void)insertToDBULFundAllocationData:(NSMutableDictionary *)dictULFundAllocationData{
