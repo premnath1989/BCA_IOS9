@@ -94,7 +94,6 @@ NSString *ProceedStatus = @"";
     tap.cancelsTouchesInView = NO;
     [self.view addGestureRecognizer:tap];
     
-    NSLog(@"devideId %@", [[[UIDevice currentDevice] identifierForVendor] UUIDString]);
     [self ShowLoginDate];
 
     outletLogin.hidden = FALSE;
@@ -299,7 +298,7 @@ static NSString *labelVers;
                 
                 NSString *encryptedPass = [encryptWrapper encrypt:txtPassword.text];
                 WebServiceUtilities *webservice = [[WebServiceUtilities alloc]init];
-                [webservice ValidateLogin:txtUsername.text password:encryptedPass UUID:[[[UIDevice currentDevice] identifierForVendor] UUIDString] delegate:self];
+                [webservice ValidateLogin:txtUsername.text password:encryptedPass UUID:[self getUniqueDeviceIdentifierAsString] delegate:self];
             }else{
                 
                 NSString *appName=[[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString*)kCFBundleNameKey];
