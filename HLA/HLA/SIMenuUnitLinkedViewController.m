@@ -296,6 +296,14 @@
 }
 
 #pragma mark delegate POLA
+-(void)dismissUnitLinkedView{
+    [delegate dismissUnitLinkedView:[self getPOLADictionary]];
+}
+
+-(void)setExchangePOLADictionary:(NSMutableDictionary *)dictPOLAdata{
+    dictParentPOLAData = [[NSMutableDictionary alloc]initWithDictionary:dictPOLAdata];
+}
+
 -(void)setInitialPOLADictionary{
     dictParentPOLAData = [[NSMutableDictionary alloc]initWithDictionary:[modelSIPOData getPOLADataFor:stringSINumber]];
 }

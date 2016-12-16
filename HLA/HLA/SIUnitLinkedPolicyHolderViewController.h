@@ -14,6 +14,7 @@
 
 -(void)showUnitLinkModuleAtIndex:(NSIndexPath *)indexPath;
 -(void)saveSIMaster;
+-(void)dismissUnitLinkedView;
 -(NSString *)getRunnigSINumber;
 @end
 

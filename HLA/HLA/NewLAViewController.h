@@ -22,6 +22,7 @@
 @class NewLAViewController;
 @protocol NewLAViewControllerDelegate
 -(void)voidCreateUnitLinkedView:(NSString *)SINumber;
+-(void)voidCreateUnitLinkedViewFromModifiedPlan:(NSString *)SINumber;
 
 -(void) LAIDPayor:(int)aaIdPayor andIDProfile:(int)aaIdProfile andAge:(int)aaAge andOccpCode:(NSString *)aaOccpCode andOccpClass:(int)aaOccpClass andSex:(NSString *)aaSex andIndexNo:(int)aaIndexNo andCommDate:(NSString *)aaCommDate andSmoker:(NSString *)aaSmoker DiffClient:(BOOL)DiffClient bEDDCase:(BOOL)aaEDDCase;
 
@@ -250,6 +251,7 @@
 
 -(BOOL)validateSave;
 -(void)loadDataFromList;
+-(void)loadDataFromModifiedUnitLinked:(NSDictionary *)dictionaryPOLAData;
 -(void)loadDataAfterSaveAs:(NSString *)SINO;
 -(NSDictionary *)setDictionaryLA;
 @end

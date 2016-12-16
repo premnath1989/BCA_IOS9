@@ -930,6 +930,50 @@ id dobtanngal;
         [_delegate setPODictionaryWhenLoadFromList:dictPOData];
     }
 }
+#pragma mark Unit linked
+-(void)loadDataFromModifiedUnitLinked:(NSDictionary *)dictionaryPOLAData{
+    _modelSIPOData = [[ModelSIPOData alloc]init];
+    dictPOData=[[NSDictionary alloc]initWithDictionary:dictionaryPOLAData];
+    if ([dictPOData count]!=0){
+        NSNumber *numberBoolQuickQuote =[NSNumber numberWithInt:[[dictPOData valueForKey:@"QuickQuote"] intValue]];
+        if ([numberBoolQuickQuote intValue]==0){
+            [quickQuoteFlag setOn:false];
+        }
+        else{
+            [quickQuoteFlag setOn:true];
+        }
+        [self QuickQuoteFunc:quickQuoteFlag];
+        
+        ilustrationProductCode = [dictPOData valueForKey:@"ProductCode"];
+        occuCode = [dictPOData valueForKey:@"PO_OccpCode"];
+        clientProfileID = [[dictPOData valueForKey:@"PO_ClientID"] intValue];
+        [_SINumberBCA setText:[dictPOData valueForKey:@"SINO"]];
+        [LANameField setText:[dictPOData valueForKey:@"PO_Name"]];
+        [LAAgeField setText:[dictPOData valueForKey:@"PO_Age"]];
+        [NamaProduk setTitle:[dictPOData valueForKey:@"ProductName"] forState:UIControlStateNormal];
+        [TanggalIllustrasi setTitle:[dictPOData valueForKey:@"SIDate"] forState:UIControlStateNormal];
+        [btnDOB setTitle:[dictPOData valueForKey:@"PO_DOB"] forState:UIControlStateNormal];
+        [btnOccp setTitle:[dictPOData valueForKey:@"PO_Occp"] forState:UIControlStateNormal];
+        [_BtnHubungan setTitle:[dictPOData valueForKey:@"RelWithLA"] forState:UIControlStateNormal];
+        
+        sex=[[NSString alloc]initWithString:[dictPOData valueForKey:@"PO_Gender"]];
+        if ([sex isEqualToString:@"MALE"]){
+            [sexSegment setSelectedSegmentIndex:0];
+        }
+        else{
+            [sexSegment setSelectedSegmentIndex:1];
+        }
+        
+        if ([ilustrationProductCode isEqualToString:@"BCALHST"]){
+            numberIntInternalStaff = [NSNumber numberWithInt:1];
+        }
+        else{
+            numberIntInternalStaff = [NSNumber numberWithInt:0];
+        }
+        
+        [_delegate setPODictionaryWhenLoadFromList:dictPOData];
+    }
+}
 
 -(void)loadDataAfterSaveAs:(NSString *)SINO{
     _modelSIPOData = [[ModelSIPOData alloc]init];
@@ -1034,9 +1078,10 @@ id dobtanngal;
 //        }
     
     if ([aaCode isEqualToString:@"BCALUL"]){
-        NSLog(@"Unit Linked");
         [self.planPopover dismissPopoverAnimated:YES];
-        [_delegate voidCreateUnitLinkedView:_SINumberBCA.text];
+        [NamaProduk setTitle:aaDesc forState:UIControlStateNormal];
+        [_BtnHubungan setTitle:@"--Please Select--" forState:UIControlStateNormal];
+        [_delegate voidCreateUnitLinkedViewFromModifiedPlan:_SINumberBCA.text];
     }
     else{
         ilustrationProductCode = aaCode;
@@ -1207,9 +1252,9 @@ id dobtanngal;
     NSDictionary *originalDictionaryPO = [_modelSIPOData getPO_DataFor:[self.requestSINo description]];
     
     
-    NSString *occupationDesc=btnOccp.titleLabel.text;
-    NSString *relationDesc=_BtnHubungan.titleLabel.text;
-    NSString *productName=NamaProduk.titleLabel.text;
+    NSString *occupationDesc=btnOccp.currentTitle;
+    NSString *relationDesc=_BtnHubungan.currentTitle;
+    NSString *productName=NamaProduk.currentTitle;
     NSString *originalRelation = [originalDictionaryPO valueForKey:@"RelWithLA"];
     NSMutableDictionary *dictionaryNewLA=[[NSMutableDictionary alloc]initWithObjectsAndKeys:
                                           _SINumberBCA.text,@"SINO",

@@ -53,6 +53,7 @@
     int lastIndexSelected;
     
     NSString *unitLinkedSINumber;
+    UIView* viewUnitlinked;
 }
 
 @end
@@ -726,6 +727,7 @@ BOOL isFirstLoad;
     [self.myTableView selectRowAtIndexPath:selectedPath animated:NO scrollPosition:UITableViewScrollPositionNone];
     
     if ([planName isEqualToString:@"BCA Life Unit Linked"]){
+    //if ([_LAController.NamaProduk.currentTitle isEqualToString:@"BCA Life Unit Linked"]){
         [self voidCreateUnitLinkedView:self.requestSINo];
     }
 }
@@ -3150,6 +3152,16 @@ BOOL isFirstLoad;
 }
 
 #pragma mark - delegate added by faiz
+-(void)dismissUnitLinkedView:(NSMutableDictionary *)dictionaryPOLA{
+    [viewUnitlinked removeFromSuperview];
+    //[dictionaryPOLA setObject:@"" forKey:@"RelWithLA"];
+    planName = [dictionaryPOLA valueForKey:@"ProductName"];
+    //dictionaryPOForInsert  = dictionaryPOLA;
+    //[_LAController.NamaProduk setTitle:planName forState:UIControlStateNormal];
+    [_LAController loadDataFromModifiedUnitLinked:dictionaryPOLA];
+    [self LoadViewController];
+}
+
 -(void)setBasicPlanDictionaryWhenLoadFromList:(NSDictionary *)basicPlan{
     newDictionaryForBasicPlan = [NSMutableDictionary dictionaryWithDictionary:basicPlan];
     NSDictionary* dictPOData=[[NSDictionary alloc]initWithDictionary:[_modelSIPOData getPO_DataFor:[self.requestSINo description]]];
@@ -6469,7 +6481,7 @@ NSString *prevPlan;
 }
 
 -(void)voidCreateUnitLinkedView:(NSString *)SINumber{
-    UIView* viewUnitlinked = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 1024, 768)];
+    viewUnitlinked = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 1024, 768)];
     [viewUnitlinked addSubview:siMenuUnitLinkedVC.view];
     [self.view addSubview:viewUnitlinked];
 
@@ -6486,6 +6498,26 @@ NSString *prevPlan;
     
     [siMenuUnitLinkedVC showUnitLinkModuleAtIndex:[NSIndexPath indexPathForRow:0 inSection:0]];
 }
+
+-(void)voidCreateUnitLinkedViewFromModifiedPlan:(NSString *)SINumber{
+    viewUnitlinked = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 1024, 768)];
+    [viewUnitlinked addSubview:siMenuUnitLinkedVC.view];
+    [self.view addSubview:viewUnitlinked];
+    
+    [siMenuUnitLinkedVC setIllustrationNumber:SINumber];
+    [siMenuUnitLinkedVC setExchangePOLADictionary:[_LAController setDictionaryLA]];
+    /*[siMenuUnitLinkedVC setInitialULBasicPlanDictionary];
+    [siMenuUnitLinkedVC setInitialULFundAllocationDictionary];
+    [siMenuUnitLinkedVC setInitialULSpecialOptionDictionary];
+    [siMenuUnitLinkedVC setInitialULRiderArray];*/
+    
+    [siMenuUnitLinkedVC setBOOLSectionFilled];
+    
+    [siMenuUnitLinkedVC checkEditingMode];
+    
+    [siMenuUnitLinkedVC showUnitLinkModuleAtIndex:[NSIndexPath indexPathForRow:0 inSection:0]];
+}
+
 
 #pragma mark - memory
 

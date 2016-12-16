@@ -313,6 +313,15 @@
         dictSearch = [[NSDictionary alloc]initWithObjectsAndKeys:textName.text,@"Name",textBranch.text,@"BranchName", nil];
     }
     arrayCFFTransaction = [modelCFFTransaction searchCFF:dictSearch];
+    
+    if ([arrayCFFTransaction count]==0){
+        NSString *msg = @"Data Tidak Ditemukan";//Client Profile has been successfully deleted.";
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Informasi" message:msg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        
+        [alert show];
+        alert = nil;
+    }
+
     [tableCFFListing reloadData];
 }
 
@@ -360,10 +369,13 @@
             
         }
         else{
+            sortedBy=@"CFFT.CFFDateModified";
+            sortMethod=@"DESC";
+            
             [self CreateNewCFFTransaction];
             [self loadCFFTransaction];
             [self dismissViewControllerAnimated:YES completion:^{
-                [self showDetailsForIndexPath:indexPathSelected];
+                [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
             }];
         }
         
@@ -389,6 +401,8 @@
             [modelProspectChild deleteProspectChildByCFFTransID:[[[arrayCFFTransaction objectAtIndex:value] valueForKey:@"CFFTransactionID"] intValue]];
             [modelProspectSpouse deleteProspectSpouseByCFFTransID:[[[arrayCFFTransaction objectAtIndex:value] valueForKey:@"CFFTransactionID"] intValue]];
             [modelCFFAnswers deleteCFFAnswerByCFFTransID:[[[arrayCFFTransaction objectAtIndex:value] valueForKey:@"CFFTransactionID"] intValue]];
+            
+            [arrayCFFTransaction removeObjectAtIndex:value];
             //remove array for index value
         }
         [ItemToBeDeleted removeAllObjects];
@@ -398,7 +412,7 @@
         
         [self loadCFFTransaction];
         
-        NSString *msg = @"Profil klien berhasil dihapus";//Client Profile has been successfully deleted.";
+        NSString *msg = @"Profil CFF klien berhasil dihapus";//Client Profile has been successfully deleted.";
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:msg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         
         [alert show];

@@ -520,9 +520,19 @@
 }
 
 -(void)Planlisting:(PlanList *)inController didSelectCode:(NSString *)aaCode andDesc:(NSString *)aaDesc{
-    productCode = aaCode;
-    [buttonPlan setTitle:aaDesc forState:UIControlStateNormal];
-    [buttonRelation setTitle:@"--Please Select--" forState:UIControlStateNormal];
+    if ([aaDesc isEqualToString:@"BCA Life Unit Linked"]){
+        productCode = aaCode;
+        [buttonPlan setTitle:aaDesc forState:UIControlStateNormal];
+        //[buttonRelation setTitle:@"--Please Select--" forState:UIControlStateNormal];
+    }
+    else{
+        productCode = aaCode;
+        [buttonPlan setTitle:aaDesc forState:UIControlStateNormal];
+        [buttonRelation setTitle:@"--Please Select--" forState:UIControlStateNormal];
+        relWithLA = buttonRelation.currentTitle;
+        [self setPOLADictionary];
+        [delegate dismissUnitLinkedView];
+    }
     
     [popoverViewer dismissPopoverAnimated:YES];
 }

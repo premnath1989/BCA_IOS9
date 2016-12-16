@@ -13,6 +13,8 @@
 - (IBAction)brochureTapped:(UIButton *)sender;
 - (IBAction)SaveTapped:(UIButton *)sender;
 -(void)SetUnitLinkedSINumber:(NSString *)stringSINumber;
+
+-(void)dismissUnitLinkedView:(NSMutableDictionary *)dictionaryPOLA;
 @end
 
 @interface SIMenuUnitLinkedViewController : UIViewController{
@@ -35,6 +37,7 @@
 -(void)setBOOLSectionFilled;
 -(void)setIllustrationNumber:(NSString *)stringIllustrationNumber;
 -(void)setInitialPOLADictionary;
+-(void)setExchangePOLADictionary:(NSMutableDictionary *)dictPOLAdata;
 -(void)setInitialULBasicPlanDictionary;
 -(void)setInitialULFundAllocationDictionary;
 -(void)setInitialULSpecialOptionDictionary;

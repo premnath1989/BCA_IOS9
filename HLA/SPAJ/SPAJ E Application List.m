@@ -264,6 +264,7 @@
         arraySPAJTransaction = [modelSPAJTransaction searchSPAJ:dictSearch];
         [_tableView reloadData];
         
+        
         [self resignFirstResponder];
         [self.view endEditing:YES];
         
@@ -398,6 +399,9 @@
                 [self createSPAJDetail:stringGlobalEAPPNumber];
                 [self createSPAJFormGeneration:stringGlobalEAPPNumber];
                 [self copySIPDFToSPAJ:stringSINO];
+                
+                sortedBy=@"datetime(spajtrans.SPAJDateModified)";
+                sortMethod=@"DESC";
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                         [self loadSPAJTransaction];
                     dispatch_sync(dispatch_get_main_queue(), ^{
