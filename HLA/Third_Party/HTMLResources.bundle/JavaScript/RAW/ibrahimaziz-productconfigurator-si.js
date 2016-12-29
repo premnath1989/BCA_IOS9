@@ -137,7 +137,6 @@ function questionGenerator(JSONQuestion)
 		{
 
 		}
-
 	}
 };
 
@@ -163,6 +162,7 @@ function inputGenerator(JSONInput)
 	var stringJSONInputOrder;
 	var stringJSONInputWidth;
 	var stringJSONInputKeyTemporary;
+	var stringJSONInputFormulaKey;
 
 	var arrayJSONInputValue;
 	var arrayJSONInputText;
@@ -195,9 +195,10 @@ function inputGenerator(JSONInput)
 		stringJSONInputValidationType = JSONInput[i].inputValidationType;
 		stringJSONInputValidationName = JSONInput[i].inputValidationName;
 		stringJSONInputOrder = JSONInput[i].inputOrder;
+		stringJSONInputFormulaKey = JSONInput[i].formulaKey;
 		stringHTMLInput = "";
-		arrayJSONInputState = "";
-		arrayJSONInputSelectedValue = "";
+		arrayJSONInputState = [];
+		arrayJSONInputSelectedValue = [];
 		stringAttributeState = "";
 
 		if (stringJSONInputState != stringStateFalse)
@@ -250,7 +251,8 @@ function inputGenerator(JSONInput)
 					"placeholder='" + stringJSONInputPlaceholder + "' " + 
 					stringJSONInputState + "='true' " + 
 					stringDataValidationType + "='" + stringJSONInputValidationType + "' " + 
-					stringDataErrorMessage + "='" + stringJSONInputValidationName + "'>";
+					stringDataErrorMessage + "='" + stringJSONInputValidationName + "' " + 
+					stringDataFormulaKey + "='" + stringJSONInputFormulaKey + "' >";
 
 				arrayJSONInputValue = stringJSONInputValue.split(stringJSONArraySeparator);
 				arrayJSONInputText = stringJSONInputPlaceholder.split(stringJSONArraySeparator);
@@ -278,7 +280,10 @@ function inputGenerator(JSONInput)
 				{
 					stringAttributeState = setInputStateAttribute(arrayJSONInputSelectedValue, arrayJSONInputValue[j], stringStateChecked);
 
-					stringHTMLInput += "<input type='" + stringJSONInputType + "' id='" + arrayJSONInputKey[j] + "' name='" + stringJSONInputName + "' value='" + arrayJSONInputValue[j] + "' " + stringAttributeState + "/>";
+					stringHTMLInput += 
+						"<input type='" + stringJSONInputType + "' id='" + arrayJSONInputKey[j] + "' " + 
+						"name='" + stringJSONInputName + "' value='" + arrayJSONInputValue[j] + "' " + 
+						stringAttributeState + " " + stringDataFormulaKey + "='" + stringJSONInputFormulaKey + "' />";
 					stringHTMLInput += "<label for='" + arrayJSONInputKey[j] + "'>" + arrayJSONInputText[j] + "</label>";
 				}
 
@@ -297,7 +302,8 @@ function inputGenerator(JSONInput)
 					"value='" + stringJSONInputValue + "' " + 
 					stringJSONInputState + "='true' " + 
 					stringDataValidationType + "='" + stringJSONInputValidationType + "' " + 
-					stringDataErrorMessage + "='" + stringJSONInputValidationName + "'/>";
+					stringDataErrorMessage + "='" + stringJSONInputValidationName + "' " + 
+					stringDataFormulaKey + "='" + stringJSONInputFormulaKey + "' />";
 			}
 		}
 		else
@@ -435,7 +441,7 @@ function tableRowGenerator(JSONInput)
 
 		if (stringJSONInputTableState == stringStateTrue)
 		{
-			stringHTMLRow += "<tr id='" + stringJSONInputRowKey + "'></tr>";
+			stringHTMLRow = "<tr id='" + stringJSONInputRowKey + "'></tr>";
 			$(stringKres + stringJSONInputSectionKey).append(stringHTMLRow);
 		}
 		else
@@ -475,7 +481,9 @@ function tableColumnGenerator(JSONInput)
 
 		if (stringJSONInputTableState == stringStateTrue)
 		{
-			stringHTMLColumn += "<td id='" + stringJSONInputRowKey + "' rowspan='" + stringJSONInputRowSpan + "' colspan='" + stringJSONInputColumnSpan + "'>" + stringJSONInputColumnValue + "</tr>";
+			stringHTMLColumn = 
+				"<td id='" + stringJSONInputColumnKey + "' rowspan='" + stringJSONInputRowSpan + "' " + 
+				"colspan='" + stringJSONInputColumnSpan + "'>" + stringJSONInputColumnValue + "</td>";
 			$(stringKres + stringJSONInputRowKey).append(stringHTMLColumn);
 		}
 		else
@@ -488,7 +496,7 @@ function tableColumnGenerator(JSONInput)
 
 // FORMULA
 
-function formulaGenerator(JSONInput)
+function formulaGenerator(JSONInput, JSONConstant)
 {
 	/* INITIALIZE */
 
@@ -496,57 +504,354 @@ function formulaGenerator(JSONInput)
 	var stringJSONInputFormulaContent;
 	var stringJSONInputKey;
 	var stringJSONInputFormulaState;
-	var arrayFormulaContent;
-	var arrayFormulaValue;
+	var arrayJSONInputFormulaContent = [];
+	var arrayJSONInputFormulaValue = [];
 
-	/* READ JSON */
+	var JSONConstantFormula;
+	var JSONConstantTable;
+	var stringJSONConstantFormulaKey;
+	var stringJSONConstantTableHeader;
+	var stringJSONConstantTableKey;
+	var stringJSONConstantFormulaOperator;
+	var stringJSONConstantFormulaState;
+	var arrayJSONConstantTableHeader = [];
+	var arrayJSONConstantInputValue = [];
+	var arrayJSONConstantFormulaOperator = [];
 
-	for (var i = 0; i < JSONInput.length; i++)
+	var JSONConstantTableSelected;
+	var arrayJSONConstantTableSelectedKey = [];
+	var arrayJSONConstantTableSelectedValue = [];
+	var arrayJSONConstantFormulaValue = [];
+
+
+	/* INPUT LISTENER */
+
+	$("input,select,textarea").each(function()
 	{
-		stringJSONInputFormulaKey = JSONInput[i].formulaKey;
-		stringJSONInputFormulaContent = JSONInput[i].formulaContent;
-		stringJSONInputKey = JSONInput[i].inputKey;
-		stringJSONInputFormulaState = JSONInput[i].formulaState;
-
-		if (stringJSONInputFormulaState == stringStateTrue)
+		var stringFormulaKey = $(this).attr(stringDataFormulaKey);
+		
+		if (stringFormulaKey == null | stringFormulaKey == undefined | stringFormulaKey == "")
 		{
-			arrayFormulaContent = stringJSONInputFormulaContent.split(stringJSONArraySeparator);
-			arrayFormulaValue = arrayFormulaContent;
 
-			/* FORMULA LISTENER */
-
-			for (var j = 0; j < arrayFormulaContent.length; j++)
+		}
+		else
+		{
+			$(this).change(function()
 			{
-				if (indicatorPrefix(arrayFormulaContent[j]) == stringStateInput)
+				arrayJSONInputFormulaContent = [];
+				arrayJSONInputFormulaValue = [];
+				arrayJSONConstantTableHeader = [];
+				arrayJSONConstantInputValue = [];
+				arrayJSONConstantFormulaOperator = [];
+				arrayJSONConstantTableSelectedKey = [];
+				arrayJSONConstantTableSelectedValue = [];
+				arrayJSONConstantFormulaValue = [];
+
+				/* READ JSON */
+
+				for (var i = 0; i < JSONInput.length; i++)
 				{
-					$(stringKres + arrayFormulaContent[j]).change(function()
+					stringJSONInputFormulaKey = JSONInput[i].formulaKey;
+					stringJSONInputFormulaState = JSONInput[i].formulaState;
+
+					if (stringJSONInputFormulaState == stringStateTrue && stringJSONInputFormulaKey == stringFormulaKey)
 					{
-						var arrayFormulaValue = arrayFormulaContent;
-						for (var k = 0; k < arrayFormulaValue.length; k++)
+						stringJSONInputFormulaContent = JSONInput[i].formulaContent;
+						stringJSONInputKey = JSONInput[i].inputKey;
+						arrayJSONInputFormulaContent = stringJSONInputFormulaContent.split(stringJSONArraySeparator);
+						arrayJSONInputFormulaValue = arrayJSONInputFormulaContent;
+
+						/* FORMULA LISTENER */
+
+						for (var j = 0; j < arrayJSONInputFormulaContent.length; j++)
 						{
-							if (indicatorPrefix(arrayFormulaValue[k]) == stringStateInput)
+							if (indicatorPrefix(arrayJSONInputFormulaContent[j]) == stringStateInput)
 							{
-								arrayFormulaValue[k] = $(stringKres + arrayFormulaValue[k]).val();
-								alert(arrayFormulaValue[k]);
+								/* GET VALUE FROM UI */
+
+								arrayJSONInputFormulaValue[j] = getGeneralInputForm(arrayJSONInputFormulaContent[j]);
+							}
+							else if (indicatorPrefix(arrayJSONInputFormulaContent[j]) == stringStateConstant)
+							{
+								/* GET VALUE FROM CONSTANT */
+
+								JSONConstantFormula = JSONConstant.formula;
+								JSONConstantTable = JSONConstant.table;
+
+								for (var k = 0; k < JSONConstantFormula.length; k++)
+								{
+									stringJSONConstantFormulaKey = JSONConstantFormula[k].formulaKey;
+									stringJSONConstantFormulaState = JSONConstantFormula[k].formulaState;
+
+									if (stringJSONConstantFormulaState == stringStateTrue && stringJSONConstantFormulaKey == arrayJSONInputFormulaContent[j])
+									{
+										stringJSONConstantTableKey = JSONConstantFormula[k].tableKey;
+										stringJSONConstantTableHeader = JSONConstantFormula[k].tableHeader;
+										stringJSONConstantFormulaOperator = JSONConstantFormula[k].formulaOperator;
+										
+										arrayJSONConstantTableHeader = stringJSONConstantTableHeader.split(stringJSONArraySeparator);
+										arrayJSONConstantFormulaOperator = stringJSONConstantFormulaOperator.split(stringJSONArraySeparator);
+										JSONConstantTableSelected = eval("JSONConstantTable." + stringJSONConstantTableKey);
+
+										/* SELECT TABLE */
+										
+										if (JSONConstantTableSelected == null | JSONConstantTableSelected == undefined | JSONConstantTableSelected == "")
+										{
+
+										}
+										else
+										{
+											/* GET INPUT VALUE AND TABLE KEY */
+											
+											for (var l = 0; l < arrayJSONConstantTableHeader.length; l++)
+											{
+												arrayJSONConstantTableSelectedKey[l] = releaseInfix(releasePrefix(arrayJSONConstantTableHeader[l])).toLowerCase();
+
+												if (indicatorPrefix(arrayJSONConstantTableHeader[l]) == stringStateInput)
+												{
+													arrayJSONConstantFormulaValue[l] = getGeneralInputForm(arrayJSONConstantTableHeader[l]);
+												}
+												else
+												{
+
+												}
+											}
+
+											/* QUERY TABLE WITH KEY AND VALUE */
+
+											for (var l = 0; l < JSONConstantTableSelected.length; l++)
+											{
+												var booleanEquals = true;
+												
+												for (var m = 0; m < arrayJSONConstantTableSelectedKey.length; m++)
+												{
+													arrayJSONConstantTableSelectedValue[m] = eval("JSONConstantTableSelected[" + l + "]." + arrayJSONConstantTableSelectedKey[m]);
+													
+													if (eval("parseInt(arrayJSONConstantFormulaValue[" + m + "], 10) " + arrayJSONConstantFormulaOperator[m] + " parseInt(arrayJSONConstantTableSelectedValue[" + m + "], 10)"))
+													{
+														
+													}
+													else
+													{
+														booleanEquals = false;
+													}
+												}
+
+												if (booleanEquals == true)
+												{
+													arrayJSONInputFormulaValue[j] = JSONConstantTableSelected[l].value;
+													l = JSONConstantTableSelected.length;
+												}
+												else
+												{
+													
+												}
+											}
+										}
+									}
+									else
+									{
+
+									}
+								}
 							}
 							else
 							{
 
 							}
 						}
-						// alert(arrayFormulaValue.join(" "));
-						// $(stringKres + stringJSONInputFormulaKey).val(eval(arrayFormulaValue.join(" ")));
-					});
-				}
-				else
-				{
 
+						// alert(arrayJSONInputFormulaValue.join(" "));
+						$(stringKres + stringJSONInputKey).val(eval(arrayJSONInputFormulaValue.join(" ")));
+					}
+					else
+					{
+						
+					}
 				}
-			}
+			});
+		}
+	});
+}
+
+function formulaTableGenerator(JSONFormula, JSONConstant)
+{
+	/* INITIALIZE */
+
+	var stringJSONFormulaKey;
+	var stringJSONFormulaContent;
+	var stringJSONFormulaInputKey;
+	var stringJSONFormulaState;
+	var stringJSONFormulaKeyWithoutPrefix;
+	var arrayJSONFormulaContent = [];
+	var arrayJSONFormulaValue = [];
+	var stringRowJavaScriptID;
+	var stringColumnJavaScriptID;
+
+	var JSONConstantFormula;
+	var JSONConstantTable;
+	var stringJSONConstantFormulaKey;
+	var stringJSONConstantTableHeader;
+	var stringJSONConstantTableKey;
+	var stringJSONConstantFormulaOperator;
+	var stringJSONConstantFormulaState;
+	var arrayJSONConstantTableHeader = [];
+	var arrayJSONConstantInputValue = [];
+	var arrayJSONConstantFormulaOperator = [];
+
+	var JSONConstantTableSelected;
+	var arrayJSONConstantTableSelectedKey = [];
+	var arrayJSONConstantTableSelectedValue = [];
+	var arrayJSONConstantFormulaValue = [];
+
+	var intColumnID;
+	
+	for (var i = 0; i < JSONFormula.length; i++)
+	{
+		stringJSONFormulaState = JSONFormula[i].formulaState;
+		stringJSONFormulaKey = JSONFormula[i].formulaKey;
+		stringJSONFormulaKeyWithoutPrefix = releasePrefix(stringJSONFormulaKey);
+
+		if (stringJSONFormulaState == stringStateTrue && getPrefix(stringJSONFormulaKeyWithoutPrefix) == stringPrefixTable)
+		{
+			$(stringKres + stringJSONFormulaKeyWithoutPrefix + " tbody tr").each(function()
+			{
+				stringJSONFormulaContent = JSONFormula[i].formulaContent;
+				stringJSONFormulaInputKey = JSONFormula[i].inputKey;
+				arrayJSONFormulaContent = stringJSONFormulaContent.split(stringJSONArraySeparator);
+				arrayJSONFormulaValue = arrayJSONFormulaContent;
+				stringRowJavaScriptID = $(this).attr("id");
+				intColumnID = stringRowJavaScriptID.substring("RowRiderBody".length, stringRowJavaScriptID.length);
+				
+				$(stringKres + stringRowJavaScriptID + " td").each(function()
+				{
+					stringColumnJavaScriptID = $(this).attr("id");
+
+					if (stringColumnJavaScriptID.substring(0, stringJSONFormulaInputKey.length) == stringJSONFormulaInputKey)
+					{
+						/* FORMULA LISTENER */
+						
+						for (var j = 0; j < arrayJSONFormulaContent.length; j++)
+						{
+							if (indicatorPrefix(arrayJSONFormulaContent[j]) == stringStateInput)
+							{
+								/* GET VALUE FROM UI */
+								
+								arrayJSONFormulaValue[j] = getGeneralInputForm(arrayJSONFormulaContent[j]);
+							}
+							else if (indicatorPrefix(arrayJSONFormulaContent[j]) == stringStateTable)
+							{
+								/* GET VALUE FROM TABLE */
+
+								arrayJSONFormulaValue[j] = $(this).text();
+							}
+							else if (indicatorPrefix(arrayJSONFormulaContent[j]) == stringStateConstant)
+							{
+								/* GET VALUE FROM CONSTANT */
+
+								JSONConstantFormula = JSONConstant.formula;
+								JSONConstantTable = JSONConstant.table;
+
+								for (var k = 0; k < JSONConstantFormula.length; k++)
+								{
+									stringJSONConstantFormulaKey = JSONConstantFormula[k].formulaKey;
+									stringJSONConstantFormulaState = JSONConstantFormula[k].formulaState;
+
+									if (stringJSONConstantFormulaState == stringStateTrue && stringJSONConstantFormulaKey == arrayJSONFormulaContent[j])
+									{
+										stringJSONConstantTableKey = JSONConstantFormula[k].tableKey;
+										stringJSONConstantTableHeader = JSONConstantFormula[k].tableHeader;
+										stringJSONConstantFormulaOperator = JSONConstantFormula[k].formulaOperator;
+										
+										arrayJSONConstantTableHeader = stringJSONConstantTableHeader.split(stringJSONArraySeparator);
+										arrayJSONConstantFormulaOperator = stringJSONConstantFormulaOperator.split(stringJSONArraySeparator);
+										JSONConstantTableSelected = eval("JSONConstantTable." + stringJSONConstantTableKey);
+
+										/* SELECT TABLE */
+										
+										if (JSONConstantTableSelected == null | JSONConstantTableSelected == undefined | JSONConstantTableSelected == "")
+										{
+
+										}
+										else
+										{
+											/* GET INPUT VALUE AND TABLE KEY */
+											
+											for (var l = 0; l < arrayJSONConstantTableHeader.length; l++)
+											{
+												arrayJSONConstantTableSelectedKey[l] = releaseInfix(releasePrefix(arrayJSONConstantTableHeader[l])).toLowerCase();
+
+												if (indicatorPrefix(arrayJSONConstantTableHeader[l]) == stringStateInput)
+												{
+													arrayJSONConstantFormulaValue[l] = getGeneralInputForm(arrayJSONConstantTableHeader[l]);
+												}
+												else if (indicatorPrefix(arrayJSONConstantTableHeader[l]) == stringStateTable)
+												{
+													arrayJSONConstantFormulaValue[l] = $(stringKres + arrayJSONConstantTableHeader[l] + intColumnID).text();
+												}
+												else
+												{
+
+												}
+											}
+
+											/* QUERY TABLE WITH KEY AND VALUE */
+											
+											for (var l = 0; l < JSONConstantTableSelected.length; l++)
+											{
+												var booleanEquals = true;
+
+												for (var m = 0; m < arrayJSONConstantTableSelectedKey.length; m++)
+												{
+													arrayJSONConstantTableSelectedValue[m] = eval("JSONConstantTableSelected[" + l + "]." + arrayJSONConstantTableSelectedKey[m]);
+
+													if (eval("parseInt(arrayJSONConstantFormulaValue[" + m + "], 10) " + arrayJSONConstantFormulaOperator[m] + " parseInt(arrayJSONConstantTableSelectedValue[" + m + "], 10)"))
+													{
+														
+													}
+													else
+													{
+														booleanEquals = false;
+													}
+												}
+
+												if (booleanEquals == true)
+												{
+													arrayJSONFormulaValue[j] = JSONConstantTableSelected[l].value;
+													l = JSONConstantTableSelected.length;
+												}
+												else
+												{
+													
+												}
+											}
+										}
+									}
+									else
+									{
+
+									}
+								}
+							}
+							else
+							{
+								
+							}
+						}
+
+						// alert(arrayJSONFormulaValue.join(" "));
+						$(stringKres + stringJSONFormulaInputKey + intColumnID).text(eval(arrayJSONFormulaValue.join(" ")));
+					}
+					else
+					{
+
+					}
+				});
+			});
 		}
 		else
 		{
-			
+
 		}
 	}
 }

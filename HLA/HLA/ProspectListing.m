@@ -47,6 +47,8 @@ MBProgressHUD *HUD;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    
     modelSIPOData=[[ModelSIPOData alloc]init];
     modelSIRider=[[ModelSIRider alloc]init];
     modelSIPremium=[[Model_SI_Premium alloc]init];
@@ -82,6 +84,8 @@ MBProgressHUD *HUD;
 	AppDelegate *appDel= (AppDelegate*)[[UIApplication sharedApplication] delegate ];
 	appDel.MhiMessage = Nil;
 	appDel = Nil;
+    NSLog(@"isFromSAM %i",appDel.isFromSAM);
+    
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eApp_SI:) name:@"eApp_SI" object:nil];
     

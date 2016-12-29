@@ -726,7 +726,7 @@ BOOL isFirstLoad;
     [_LAController processLifeAssured];
     [self.myTableView selectRowAtIndexPath:selectedPath animated:NO scrollPosition:UITableViewScrollPositionNone];
     
-    if ([planName isEqualToString:@"BCA Life Unit Linked"]){
+    if ([planName isEqualToString:@"BCA Life Unit Linked"]||[planName isEqualToString:@"BCA Life Proteksi & Investasiku"]){
     //if ([_LAController.NamaProduk.currentTitle isEqualToString:@"BCA Life Unit Linked"]){
         [self voidCreateUnitLinkedView:self.requestSINo];
     }
@@ -1116,7 +1116,8 @@ BOOL isFirstLoad;
                 }
                 else{
                     oldSiNo = unitLinkedSINumber;
-                    PlanType = @"BCA Life Unit Linked";
+                    //PlanType = @"BCA Life Unit Linked";
+                    PlanType = @"BCA Life Proteksi & Investasiku";
                 }
                 
 
@@ -1127,7 +1128,7 @@ BOOL isFirstLoad;
                     [loginDB duplicateRow:@"SI_Premium" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
                     [loginDB duplicateRow:@"SI_PO_Data" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
                 }
-                else if([PlanType isEqualToString:@"BCA Life Unit Linked"]){
+                else if([PlanType isEqualToString:@"BCA Life Unit Linked"]||[PlanType isEqualToString:@"BCA Life Proteksi & Investasiku"]){
                     LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
                     [loginDB duplicateRow:@"SI_Master" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
                     [loginDB duplicateRow:@"SI_UL_BasicPlan" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
@@ -6626,6 +6627,9 @@ NSString *prevPlan;
         [self seePDF:@"Brochure_ProdukBCALIfeKeluargaku"];
     }
     if([_LAController.NamaProduk.titleLabel.text caseInsensitiveCompare:@"BCA Life Unit Linked"] == NSOrderedSame){
+        [self seePDF:@"Brochure_ProdukBCALIfeKeluargaku"];
+    }
+    if([_LAController.NamaProduk.titleLabel.text caseInsensitiveCompare:@"BCA Life Proteksi & Investasiku"] == NSOrderedSame){
         [self seePDF:@"Brochure_ProdukBCALIfeKeluargaku"];
     }
 }

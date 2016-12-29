@@ -23,38 +23,38 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ft1-6d-2IT" customClass="ViewNavigation">
                     <rect key="frame" x="0.0" y="20" width="102" height="600"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="6yl-4f-OaM" customClass="StackViewNavigation">
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="6yl-4f-OaM" customClass="StackViewNavigation">
                             <rect key="frame" x="0.0" y="0.0" width="102" height="192"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vo3-Dn-ebm" customClass="ButtonNavigation">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vo3-Dn-ebm" customClass="ButtonNavigation">
                                     <rect key="frame" x="0.0" y="0.0" width="102" height="48"/>
                                     <state key="normal" title="Button" image="Icon SPAJ Home Secondary"/>
                                     <connections>
                                         <action selector="actionGoToHome:" destination="-1" eventType="touchUpInside" id="9Mr-Go-eAG"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TWM-DY-RE5" customClass="ButtonNavigation">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TWM-DY-RE5" customClass="ButtonNavigation">
                                     <rect key="frame" x="0.0" y="48" width="102" height="48"/>
                                     <state key="normal" title="Button" image="Icon SPAJ E Application List Secondary"/>
                                     <connections>
                                         <action selector="actionGoToEApplicationList:" destination="-1" eventType="touchUpInside" id="R9W-La-Vxc"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="93Z-kW-y6W" customClass="ButtonNavigation">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="93Z-kW-y6W" customClass="ButtonNavigation">
                                     <rect key="frame" x="0.0" y="96" width="102" height="48"/>
                                     <state key="normal" title="Button" image="Icon SPAJ Existing List Secondary"/>
                                     <connections>
                                         <action selector="actionGoToExistingList:" destination="-1" eventType="touchUpInside" id="qUU-LZ-hWo"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xjb-6e-2fk" customClass="ButtonNavigation">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xjb-6e-2fk" customClass="ButtonNavigation">
                                     <rect key="frame" x="0.0" y="144" width="102" height="48"/>
                                     <state key="normal" title="Button" image="Icon SPAJ Submitted List Secondary"/>
                                     <connections>
                                         <action selector="actionGoToSubmittedList:" destination="-1" eventType="touchUpInside" id="jdc-Tp-oI3"/>
                                     </connections>
                                 </button>
-                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7hp-Mb-GWr" customClass="ButtonNavigation">
+                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7hp-Mb-GWr" customClass="ButtonNavigation">
                                     <rect key="frame" x="0.0" y="192" width="102" height="0.0"/>
                                     <state key="normal" title="Button" image="Icon SPAJ Add Secondary"/>
                                     <connections>

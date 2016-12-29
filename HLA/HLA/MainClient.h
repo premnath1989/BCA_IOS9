@@ -14,6 +14,7 @@
 @property (nonatomic,strong) id requestSINo;
 @property (nonatomic, assign,readwrite) int indexNo;
 @property (nonatomic, assign,readwrite) int IndexTab;
+
 @property (nonatomic,strong) id showQuotation;
 @property (nonatomic,strong) id EAPPorSI;
 

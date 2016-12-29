@@ -35,7 +35,7 @@ id msg, DBDate;
             //[dateFormatter setDateFormat:@"yyyy-MM-dd"];
             NSDate *zzz = [dateFormatter dateFromString:ProspectDOB];
             [_outletDate setDate:zzz animated:YES ];
-
+            msg = ProspectDOB;
             [self setTextFieldDates];
         }
         @catch (NSException *exception) {

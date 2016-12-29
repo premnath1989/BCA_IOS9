@@ -15,6 +15,7 @@
     -(NSMutableDictionary *)getBasicPlanDictionary;
     -(NSString *)getRunnigSINumber;
     -(void)showUnitLinkModuleAtIndex:(NSIndexPath *)indexPath;
+    - (void) checkEditingMode;
 @end
 
 

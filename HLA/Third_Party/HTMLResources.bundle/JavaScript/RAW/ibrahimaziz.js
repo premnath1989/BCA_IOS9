@@ -13,6 +13,9 @@ var boxTypeWithoutLabel = "Without label";
 var labelDay = "Tanggal";
 var labelMonth = "Bulan";
 var labelYear = "Tahun";
+var labelHour = "Jam";
+var labelMinute = "Menit";
+var labelSecond = "Detik";
 var labelDate = "Tanggal";
 var sizeBox = 20;
 var arrayHealthQuestionnaire = [];
@@ -103,7 +106,7 @@ var stringSexFemale = "female";
 var stringSexMale = "male";
 var arrayForeigner = [];
 var stringPageForeigner = false;
-var stringPageThirdParty = false; 
+var stringPageThirdParty = false;
 
 
 // GENERATOR
@@ -3406,6 +3409,24 @@ function getFromDatabase(objectContent, stringPageType)
 				if (stringForeigner == "true")
 				{
 					$(stringKres + "ButtonPreview" + stringPageInfixTypeCurrent + "Foreigner").css("display", "block");
+					var stringKey;
+					var stringValue;
+					arrayForeigner = [];
+
+					for(var i = 0; i < objectContent.length; i++)
+					{
+						stringKey = objectContent[i].elementID;
+						stringValue = objectContent[i].Value;
+
+						if (stringKey.indexOf("Foreigner") > 0)
+						{
+							arrayValidatePush(arrayForeigner,stringKey, stringValue);
+						}
+						else
+						{
+
+						}
+					}
 				}
 				else if (stringForeigner == "false")
 				{

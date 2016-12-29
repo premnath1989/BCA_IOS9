@@ -389,7 +389,7 @@
         txtYearsInsured.text=[DictChildData valueForKey:@"YearsInsured"];
         [outletOccupation setTitle:[dictOccup valueForKey:@"OccpDesc"] forState:UIControlStateNormal];
         OccupCodeSelected = [dictOccup valueForKey:@"OccpCode"];
-         [txtAge setText:[NSString stringWithFormat:@"%i",[formatter calculateAge:[DictChildData valueForKey:@"ProspectChildDOB"]]]];
+        [txtAge setText:[NSString stringWithFormat:@"%i",[formatter calculateAge:[DictChildData valueForKey:@"ProspectChildDOB"]]]];
         if ([[DictChildData valueForKey:@"ProspectChildGender"] isEqualToString:@"MALE"]) {
             gender = @"MALE";
             segGender.selectedSegmentIndex = 0;
@@ -409,6 +409,7 @@
         }
     }
     else{
+        txtAge.text = @"";
         txtName.text = @"";
         [outletDOB setTitle:@"" forState:UIControlStateNormal];
         [OtherIDType setTitle:@"" forState:UIControlStateNormal];
@@ -450,7 +451,7 @@
     
     dictionaryChild = [[NSMutableDictionary alloc]initWithObjectsAndKeys:childName,@"ProspectChildName",
                         childDOB,@"ProspectChildDOB",
-                        IDTypeCodeSelected,@"OtherIDType",
+                        IDTypeCodeSelected?:@"",@"OtherIDType",
                         childOtherIDNumber,@"OtherIDTypeNo",
                         childNationality,@"Nationality",
                         childRelation,@"Relation",

@@ -155,6 +155,10 @@ main section label.Long.FirstIndent {
   width: 210px;
 }
 
+main section label.Wide.FirstIndent {
+  width: 271.875px;
+}
+
 main section label.Short.SecondIndent {
   width: 45px;
 }
@@ -165,6 +169,10 @@ main section label.Medium.SecondIndent {
 
 main section label.Long.SecondIndent {
   width: 195px;
+}
+
+main section label.Wide.SecondIndent {
+  width: 256.875px;
 }
 
 main section label.Single {

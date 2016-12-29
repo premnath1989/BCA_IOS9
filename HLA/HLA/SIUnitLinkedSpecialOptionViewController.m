@@ -80,11 +80,20 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(NSMutableArray *)SortedArray:(NSArray *)ArrayToSort KeyToSort:(NSString *)stringKey{
+    NSSortDescriptor * descriptor = [[NSSortDescriptor alloc] initWithKey:stringKey ascending:YES];
+    ArrayToSort = [ArrayToSort sortedArrayUsingDescriptors:@[descriptor]];
+    NSMutableArray *recent = [[NSMutableArray alloc]initWithArray:ArrayToSort];
+    return recent;
+}
 
 -(void)loadDataFromList{
     arraySpecialOption=[[NSMutableArray alloc]init];
     arraySpecialOption = [delegate getULSpecialOptionArray];
+    
+    
     if ([arraySpecialOption count]!=0){
+        arraySpecialOption = [self SortedArray:arraySpecialOption KeyToSort:@"Year"];
         [tableTopUp reloadData];
         [tableWithDrawal reloadData];
     }
@@ -143,7 +152,7 @@
     
     NSString* currency = [dictULBasicPlanDictionary valueForKey:@"PaymentCurrency"];
     
-    NSString *stringAlertMinimumPremi=@"Premi minimal adalah Rp 10.000.000 atau USD 1,000";
+    NSString *stringAlertMinimumPremi=@"TopUp/WithDraw minimal adalah Rp 10.000.000 atau USD 1,000";
     if ([currency isEqualToString:@"IDR"]){
         if (longPremi < 10000000){
             UIAlertController *alertEmptyImage = [alert alertInformation:@"Peringatan" stringMessage:stringAlertMinimumPremi];
@@ -287,7 +296,7 @@
                 }
             }
             
-            
+            arraySpecialOption = [self SortedArray:arraySpecialOption KeyToSort:@"Year"];
             [tableTopUp reloadData];
             [textTopUpAmount setText:@""];
             [self resignFirstResponder];
@@ -302,7 +311,7 @@
 
 -(IBAction)actionAddWithDrawal:(id)sender{
     if ([self validateAdd:buttonWithDrawalYear TextFieldAmount:textWithDrawalAmount]){
-        //if ([self AmountEditingEnd:textWithDrawalAmount]){
+        if ([self AmountEditingEnd:textWithDrawalAmount]){
             NSDictionary* dictWithDrawal = [[NSDictionary alloc]initWithObjectsAndKeys:buttonWithDrawalYear.currentTitle,@"Year",textWithDrawalAmount.text,@"Amount",@"WithDraw",@"Option", nil];
             
             NSArray *filtered = [arraySpecialOption filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(Option == %@)", @"WithDraw"]];
@@ -315,6 +324,8 @@
             else{
                 [arraySpecialOption addObject:dictWithDrawal];
             }
+            
+            arraySpecialOption = [self SortedArray:arraySpecialOption KeyToSort:@"Year"];
             [tableWithDrawal reloadData];
             [self resignFirstResponder];
             [textWithDrawalAmount setText:@""];
@@ -322,7 +333,7 @@
             Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
             id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
             [activeInstance performSelector:@selector(dismissKeyboard)];
-        //}
+        }
     }
 }
 
@@ -366,44 +377,74 @@
     }
 }
 
+-(IBAction)actionSaveSpecialOptionData:(UIButton *)sender{
+    Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
+    id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
+    [activeInstance performSelector:@selector(dismissKeyboard)];
+    
+    if ([self validateSave]){
+        //set the updated data to parent
+        [self setULSpecialOtionDictionary];
+        
+        //delete first
+        [modelSIULSpecialOption deleteULSpecialOptionData:[delegate getRunnigSINumber]];
+        
+        //get updated data from parent and save it.
+        NSMutableArray* arraySpecialOptionForInsert = [[NSMutableArray alloc]initWithArray:[delegate getULSpecialOptionArray]];
+        for (int i=0;i<[arraySpecialOptionForInsert count];i++){
+            NSMutableDictionary *dictForInsert = [[NSMutableDictionary alloc]initWithDictionary:[arraySpecialOption objectAtIndex:i]];
+            [dictForInsert setObject:[delegate getRunnigSINumber] forKey:@"SINO"];
+            
+            [modelSIULSpecialOption saveULSpecialOptionData:dictForInsert];
+        }
+        
+        UIAlertView* alertSave = [[UIAlertView alloc]initWithTitle:@"Informasi" message:@"Data Special Option Berhasil Disimpan" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil, nil];
+        [alertSave setTag:0];
+        [alertSave show];
+    }
+}
+
 - (IBAction)simpanAct:(id)sender {
     NSLog(@"simpan has been pressed");
-    UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Konfirmasi" message:@"Anda tidak dapat melakukan perubahan setelah simpan" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: @"cancel", nil];
-    [alert show];
+    UIAlertView* alertConfirm = [[UIAlertView alloc]initWithTitle:@"Konfirmasi" message:@"Anda tidak dapat melakukan perubahan setelah simpan" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: @"cancel", nil];
+    [alertConfirm setTag:1];
+    [alertConfirm show];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    switch (buttonIndex) {
-        case 0:
-        {
-            NSLog(@"ok");
-            LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
-            [loginDB updateSIMaster:[delegate getRunnigSINumber] EnableEditing:@"0"];
-            
-            //set the updated data to parent
-            [self setULSpecialOtionDictionary];
-            
-            //delete first
-            [modelSIULSpecialOption deleteULSpecialOptionData:[delegate getRunnigSINumber]];
-            
-            //get updated data from parent and save it.
-            NSMutableArray* arraySpecialOptionForInsert = [[NSMutableArray alloc]initWithArray:[delegate getULSpecialOptionArray]];
-            for (int i=0;i<[arraySpecialOptionForInsert count];i++){
-                NSMutableDictionary *dictForInsert = [[NSMutableDictionary alloc]initWithDictionary:[arraySpecialOption objectAtIndex:i]];
-                [dictForInsert setObject:[delegate getRunnigSINumber] forKey:@"SINO"];
+    if (alertView.tag == 1){
+        switch (buttonIndex) {
+            case 0:
+            {
+                NSLog(@"ok");
+                LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
+                [loginDB updateSIMaster:[delegate getRunnigSINumber] EnableEditing:@"0"];
                 
-                [modelSIULSpecialOption saveULSpecialOptionData:dictForInsert];
+                //set the updated data to parent
+                [self setULSpecialOtionDictionary];
+                
+                //delete first
+                [modelSIULSpecialOption deleteULSpecialOptionData:[delegate getRunnigSINumber]];
+                
+                //get updated data from parent and save it.
+                NSMutableArray* arraySpecialOptionForInsert = [[NSMutableArray alloc]initWithArray:[delegate getULSpecialOptionArray]];
+                for (int i=0;i<[arraySpecialOptionForInsert count];i++){
+                    NSMutableDictionary *dictForInsert = [[NSMutableDictionary alloc]initWithDictionary:[arraySpecialOption objectAtIndex:i]];
+                    [dictForInsert setObject:[delegate getRunnigSINumber] forKey:@"SINO"];
+                    
+                    [modelSIULSpecialOption saveULSpecialOptionData:dictForInsert];
+                }
+                [delegate checkEditingMode];
+                [delegate showUnitLinkModuleAtIndex:[NSIndexPath indexPathForRow:6 inSection:0]];
             }
-            
-            [delegate showUnitLinkModuleAtIndex:[NSIndexPath indexPathForRow:6 inSection:0]];
+                break;
+            case 1:
+            {
+                // Do something for button #2
+                NSLog(@"cancel");
+            }
+                break;
         }
-            break;
-        case 1:
-        {
-            // Do something for button #2
-            NSLog(@"cancel");
-        }
-            break;
     }
 }
 

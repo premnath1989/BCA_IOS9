@@ -106,6 +106,12 @@ NSString *validationID=@"Data identitas sudah ada. Silahkan gunakan data indetit
     /*else if ([validationSet containsObject:spouseOtherIDNumber]||(spouseOtherIDNumber==NULL)){
         return false;
     }*/
+    else if ([spouseOtherIDType length]>0){
+        if (![validationSet containsObject:spouseOtherIDType] && [spouseOtherIDNumber length]==0){
+            [self createAlertViewAndShow:validationNomorIdentitas tag:0];
+            return false;
+        }
+    }
     else if ([validationSet containsObject:spouseNationality]||(spouseNationality==NULL)){
         [self createAlertViewAndShow:validationKebangsaan tag:0];
         return false;
@@ -173,9 +179,19 @@ NSString *validationID=@"Data identitas sudah ada. Silahkan gunakan data indetit
         [self createAlertViewAndShow:validationTanggalLahir tag:0];
         return false;
     }
-    /*else if ([validationSet containsObject:spouseOtherIDType]||(spouseOtherIDType==NULL)){
-     return false;
-     }*/
+    /*else if (![validationSet containsObject:spouseOtherIDType]||(spouseOtherIDType!=NULL)){
+        if ([validationSet containsObject:spouseOtherIDNumber]||(spouseOtherIDNumber==NULL)){
+            [self createAlertViewAndShow:validationNomorIdentitas tag:0];
+            return false;
+        }
+        //return false;
+    }*/
+    else if ([spouseOtherIDType length]>0){
+        if (![validationSet containsObject:spouseOtherIDType] && [spouseOtherIDNumber length]==0){
+            [self createAlertViewAndShow:validationNomorIdentitas tag:0];
+            return false;
+        }
+    }
     /*else if ([validationSet containsObject:spouseOtherIDNumber]||(spouseOtherIDNumber==NULL)){
      return false;
      }*/
@@ -199,6 +215,7 @@ NSString *validationID=@"Data identitas sudah ada. Silahkan gunakan data indetit
         [self createAlertViewAndShow:validationJenisKelamin tag:0];
         return false;
     }
+    
     /*else if (segSmoker.selectedSegmentIndex==UISegmentedControlNoSegment){
      return false;
      }*/

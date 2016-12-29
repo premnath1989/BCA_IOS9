@@ -1,4 +1,4 @@
-// IBRAHIM AZIZ 
+// IBRAHIM AZIZ
 // BHIMBIM
 // http://www.ibrahimaziz.design
 // built for InfoConnect Sdn Bhd - BCA Life Bless
@@ -32,6 +32,7 @@ var stringStateDisable = "disabled";
 var stringStateRequired = "required";
 var stringStateInput = "input";
 var stringStateTable = "table";
+var stringStateConstant = "constant";
 
 /* STRING */
 
@@ -55,11 +56,55 @@ var stringPrefixTable = "Table";
 var stringPrefixRow = "Row";
 var stringPrefixColumn = "Column";
 
+var stringPrefixConstant = "Constant";
+var stringPrefixFormula = "Formula";
+
+var arrayPrefix = 
+[
+	stringPrefixText, 
+	stringPrefixRadioButton, 
+	stringPrefixSelect, 
+	stringPrefixCheckbox, 
+	stringPrefixDate, 
+	stringPrefixArea, 
+	stringPrefixNumber, 
+	stringPrefixEmail, 
+	stringPrefixTelephone, 
+	stringPrefixTable,
+	stringPrefixRow, 
+	stringPrefixColumn, 
+	stringPrefixConstant, 
+	stringPrefixFormula
+];
+
 /* INFIX */
 
 var stringInfixProspectiveInsured = "ProspectiveInsured";
-var stringInfixPolicyHolder = "PolicyHolder";
+var stringInfixPolicyholder = "Policyholder";
 var stringInfixBeneficiariesList = "BeneficiariesList";
+var stringInfixBasicInsurance = "BasicInsurance";
+var stringInfixMoneyAllocation = "MoneyAllocation";
+var stringInfixAdditionalInsurance = "AdditionalInsurance";
+var stringInfixPremiPayment = "PremiPayment";
+var stringInfixCompany = "Company";
+var stringInfixRider = "Rider";
+
+var arrayInfix = 
+[
+	stringInfixPolicyholder, 
+	stringInfixProspectiveInsured, 
+	stringInfixBeneficiariesList, 
+	stringInfixBasicInsurance, 
+	stringInfixMoneyAllocation, 
+	stringInfixAdditionalInsurance, 
+	stringInfixRider,
+	stringInfixPremiPayment,
+	stringInfixCompany
+];
+
+/* SUFFIX */
+
+var stringSuffixBody = "Body";
 
 /* JSON */
 
@@ -97,6 +142,7 @@ var stringMessageGeneralIncomplete = "Harap lengkapi form terlebih dahulu !.";
 var stringDataErrorTitle = "data-error-title";
 var stringDataErrorMessage = "data-error-message";
 var stringDataValidationType = "data-validation-type";
+var stringDataFormulaKey = "data-formula-key";
 
 /* REGULAR EXPRESSION */
 
@@ -404,9 +450,9 @@ function setGeneralTextForm(stringInputJavaScriptID, stringInputValue)
 
 function setGeneralRadioButtonForm(stringInputName, stringInputValue)
 {
-    if (stringValue != null)
+    if (stringInputValue != null)
 	{
-		$("input:radio[name=" + stringInputName + "]");
+		var elementRadioButton = $("input:radio[name=" + stringInputName + "]");
     	elementRadioButton.filter("[value='" + stringInputValue + "']").prop("checked", true);
 	}
 	else
@@ -463,6 +509,52 @@ function setGeneralTelephoneForm(stringInputJavaScriptID, stringInputValue)
     setGeneralInputBasic(stringInputJavaScriptID, stringInputValue);
 }
 
+function setGeneralInputForm(stringInputJavaScriptID, stringInputValue)
+{
+	var stringInputPrefix = getPrefix(stringInputJavaScriptID);
+
+	if (stringInputPrefix == stringPrefixText)
+	{
+		setGeneralTextForm(stringInputJavaScriptID, stringInputValue);
+	}
+	else if (stringInputPrefix == stringPrefixRadioButton)
+	{
+		setGeneralRadioButtonForm(stringInputJavaScriptID, stringInputValue);
+	}
+	else if (stringInputPrefix == stringPrefixSelect)
+	{
+		setGeneralSelectForm(stringInputJavaScriptID, stringInputValue);
+	}
+	else if (stringInputPrefix == stringPrefixCheckbox)
+	{
+		setGeneralCheckboxForm(stringInputJavaScriptID, stringInputValue);
+	}
+	else if (stringInputPrefix == stringPrefixDate)
+	{
+		setGeneralDateForm(stringInputJavaScriptID, stringInputValue);
+	}
+	else if (stringInputPrefix == stringPrefixArea)
+	{
+		setGeneralAreaForm(stringInputJavaScriptID, stringInputValue);
+	}
+	else if (stringInputPrefix == stringPrefixNumber)
+	{
+		setGeneralNumberForm(stringInputJavaScriptID, stringInputValue);
+	}
+	else if (stringInputPrefix == stringPrefixEmail)
+	{
+		setGeneralEmailForm(stringInputJavaScriptID, stringInputValue);
+	}
+	else if (stringInputPrefix == stringPrefixTelephone)
+	{
+		setGeneralTelephoneForm(stringInputJavaScriptID, stringInputValue);
+	}
+	else
+	{
+		setGeneralInputBasic(stringInputJavaScriptID, stringInputValue);
+	}
+}
+
 /* PDF */
 
 function setGeneralTextPDF(stringInputJavaScriptID, stringInputValue)
@@ -472,7 +564,17 @@ function setGeneralTextPDF(stringInputJavaScriptID, stringInputValue)
 
 function setGeneralRadioButtonPDF(stringInputName, stringInputValue)
 {
-    setGeneralInputBasic(stringInputName, stringInputValue);
+	var stringInputJQueryID = stringKres + stringInputName;
+
+	if ($(stringInputJQueryID).is("input[type='text']") == true)
+	{
+		setGeneralInputBasic(stringInputName, stringInputValue);
+	}
+	else
+	{
+		setGeneralRadioButtonForm(stringInputName, stringInputValue);
+	}
+
 }
 
 function setGeneralSelectPDF(stringInputJavaScriptID, stringInputValue)
@@ -524,6 +626,52 @@ function setGeneralEmailPDF(stringInputJavaScriptID, stringInputValue)
 function setGeneralTelephonePDF(stringInputJavaScriptID, stringInputValue)
 {
     setGeneralInputBasic(stringInputJavaScriptID, stringInputValue);
+}
+
+function setGeneralInputPDF(stringInputJavaScriptID, stringInputValue)
+{
+	var stringInputPrefix = getPrefix(stringInputJavaScriptID);
+
+	if (stringInputPrefix == stringPrefixText)
+	{
+		setGeneralTextPDF(stringInputJavaScriptID, stringInputValue);
+	}
+	else if (stringInputPrefix == stringPrefixRadioButton)
+	{
+		setGeneralRadioButtonPDF(stringInputJavaScriptID, stringInputValue);
+	}
+	else if (stringInputPrefix == stringPrefixSelect)
+	{
+		setGeneralSelectPDF(stringInputJavaScriptID, stringInputValue);
+	}
+	else if (stringInputPrefix == stringPrefixCheckbox)
+	{
+		setGeneralCheckboxPDF(stringInputJavaScriptID, stringInputValue);
+	}
+	else if (stringInputPrefix == stringPrefixDate)
+	{
+		setGeneralDatePDF(stringInputJavaScriptID, stringInputValue);
+	}
+	else if (stringInputPrefix == stringPrefixArea)
+	{
+		setGeneralAreaPDF(stringInputJavaScriptID, stringInputValue);
+	}
+	else if (stringInputPrefix == stringPrefixNumber)
+	{
+		setGeneralNumberPDF(stringInputJavaScriptID, stringInputValue);
+	}
+	else if (stringInputPrefix == stringPrefixEmail)
+	{
+		setGeneralEmailPDF(stringInputJavaScriptID, stringInputValue);
+	}
+	else if (stringInputPrefix == stringPrefixTelephone)
+	{
+		setGeneralTelephonePDF(stringInputJavaScriptID, stringInputValue);
+	}
+	else
+	{
+		setGeneralInputBasic(stringInputJavaScriptID, stringInputValue);
+	}
 }
 
 
@@ -606,6 +754,52 @@ function getGeneralTelephoneForm(stringInputJavaScriptID)
 	return getGeneralInputBasic(stringInputJavaScriptID);
 }
 
+function getGeneralInputForm(stringInputJavaScriptID)
+{
+	var stringInputPrefix = getPrefix(stringInputJavaScriptID);
+
+	if (stringInputPrefix == stringPrefixText)
+	{
+		return getGeneralTextForm(stringInputJavaScriptID);
+	}
+	else if (stringInputPrefix == stringPrefixRadioButton)
+	{
+		return getGeneralRadioButtonForm(stringInputJavaScriptID);
+	}
+	else if (stringInputPrefix == stringPrefixSelect)
+	{
+		return getGeneralSelectForm(stringInputJavaScriptID);
+	}
+	else if (stringInputPrefix == stringPrefixCheckbox)
+	{
+		return getGeneralCheckboxForm(stringInputJavaScriptID);
+	}
+	else if (stringInputPrefix == stringPrefixDate)
+	{
+		return getGeneralDateForm(stringInputJavaScriptID);
+	}
+	else if (stringInputPrefix == stringPrefixArea)
+	{
+		return getGeneralAreaForm(stringInputJavaScriptID);
+	}
+	else if (stringInputPrefix == stringPrefixNumber)
+	{
+		return getGeneralNumberForm(stringInputJavaScriptID);
+	}
+	else if (stringInputPrefix == stringPrefixEmail)
+	{
+		return getGeneralEmailForm(stringInputJavaScriptID);
+	}
+	else if (stringInputPrefix == stringPrefixTelephone)
+	{
+		return getGeneralTelephoneForm(stringInputJavaScriptID);
+	}
+	else
+	{
+		return getGeneralInputBasic(stringInputJavaScriptID);
+	}
+}
+
 /* PDF */
 
 function getGeneralTextPDF(stringInputJavaScriptID)
@@ -653,6 +847,52 @@ function getGeneralTelephonePDF(stringInputJavaScriptID)
 	return getGeneralInputBasic(stringInputJavaScriptID);
 }
 
+function getGeneralInputPDF(stringInputJavaScriptID)
+{
+	var stringInputPrefix = getPrefix(stringInputJavaScriptID);
+
+	if (stringInputPrefix == stringPrefixText)
+	{
+		return getGeneralTextPDF(stringInputJavaScriptID);
+	}
+	else if (stringInputPrefix == stringPrefixRadioButton)
+	{
+		return getGeneralRadioButtonPDF(stringInputJavaScriptID);
+	}
+	else if (stringInputPrefix == stringPrefixSelect)
+	{
+		return getGeneralSelectPDF(stringInputJavaScriptID);
+	}
+	else if (stringInputPrefix == stringPrefixCheckbox)
+	{
+		return getGeneralCheckboxPDF(stringInputJavaScriptID);
+	}
+	else if (stringInputPrefix == stringPrefixDate)
+	{
+		return getGeneralDatePDF(stringInputJavaScriptID);
+	}
+	else if (stringInputPrefix == stringPrefixArea)
+	{
+		return getGeneralAreaPDF(stringInputJavaScriptID);
+	}
+	else if (stringInputPrefix == stringPrefixNumber)
+	{
+		return getGeneralNumberPDF(stringInputJavaScriptID);
+	}
+	else if (stringInputPrefix == stringPrefixEmail)
+	{
+		return getGeneralEmailPDF(stringInputJavaScriptID);
+	}
+	else if (stringInputPrefix == stringPrefixTelephone)
+	{
+		return getGeneralTelephonePDF(stringInputJavaScriptID);
+	}
+	else
+	{
+		return getGeneralInputBasic(stringInputJavaScriptID);
+	}
+}
+
 
 // SETTER SPECIFIC
 
@@ -668,14 +908,14 @@ function setSpecificInputBasic(stringLayoutJavaScriptID, stringInputJavaScriptID
 
 function setSpecificTextForm(stringLayoutJavaScriptID, stringInputJavaScriptID, stringInputValue)
 {
-	setSepecificInputBasic(stringLayoutJavaScriptID, stringInputJavaScriptID, stringInputValue);
+	setSpecificInputBasic(stringLayoutJavaScriptID, stringInputJavaScriptID, stringInputValue);
 }
 
 function setSpecificRadioButtonForm(stringLayoutJavaScriptID, stringInputName, stringInputValue)
 {
 	var stringLayoutJQueryID = stringKres + stringLayoutJavaScriptID;
-	
-    if (stringValue != null)
+
+    if (stringInputValue != null)
 	{
 		var elementRadioButton = $(stringLayoutJQueryID + " input:radio[name=" + stringInputName + "]");
     	elementRadioButton.filter("[value='" + stringInputValue + "']").prop("checked", true);
@@ -691,7 +931,7 @@ function setSpecificRadioButtonForm(stringLayoutJavaScriptID, stringInputName, s
 
 function setSpecificSelectForm(stringLayoutJavaScriptID, stringInputJavaScriptID, stringInputValue)
 {
-	setSepecificInputBasic(stringLayoutJavaScriptID, stringInputJavaScriptID, stringInputValue);
+	setSpecificInputBasic(stringLayoutJavaScriptID, stringInputJavaScriptID, stringInputValue);
 }
 
 function setSpecificCheckboxForm(stringLayoutJavaScriptID, stringInputName, arrayInputValue)
@@ -713,27 +953,73 @@ function setSpecificCheckboxForm(stringLayoutJavaScriptID, stringInputName, arra
 
 function setSpecificDateForm(stringLayoutJavaScriptID, stringInputJavaScriptID, stringInputValue)
 {
-	setSepecificInputBasic(stringLayoutJavaScriptID, stringInputJavaScriptID, stringInputValue);
+	setSpecificInputBasic(stringLayoutJavaScriptID, stringInputJavaScriptID, stringInputValue);
 }
 
 function setSpecificAreaForm(stringLayoutJavaScriptID, stringInputJavaScriptID, stringInputValue)
 {
-	setSepecificInputBasic(stringLayoutJavaScriptID, stringInputJavaScriptID, stringInputValue);
+	setSpecificInputBasic(stringLayoutJavaScriptID, stringInputJavaScriptID, stringInputValue);
 }
 
 function setSpecificNumberForm(stringLayoutJavaScriptID, stringInputJavaScriptID, stringInputValue)
 {
-	setSepecificInputBasic(stringLayoutJavaScriptID, stringInputJavaScriptID, stringInputValue);
+	setSpecificInputBasic(stringLayoutJavaScriptID, stringInputJavaScriptID, stringInputValue);
 }
 
 function setSpecificEmailForm(stringLayoutJavaScriptID, stringInputJavaScriptID, stringInputValue)
 {
-	setSepecificInputBasic(stringLayoutJavaScriptID, stringInputJavaScriptID, stringInputValue);
+	setSpecificInputBasic(stringLayoutJavaScriptID, stringInputJavaScriptID, stringInputValue);
 }
 
 function setSpecificTelephoneForm(stringLayoutJavaScriptID, stringInputJavaScriptID, stringInputValue)
 {
-	setSepecificInputBasic(stringLayoutJavaScriptID, stringInputJavaScriptID, stringInputValue);
+	setSpecificInputBasic(stringLayoutJavaScriptID, stringInputJavaScriptID, stringInputValue);
+}
+
+function setSpecificInputForm(stringLayoutJavaScriptID, stringInputJavaScriptID, stringInputValue)
+{
+	var stringInputPrefix = getPrefix(stringInputJavaScriptID);
+
+	if (stringInputPrefix == stringPrefixText)
+	{
+		setSpecificTextForm(stringLayoutJavaScriptID, stringInputJavaScriptID, stringInputValue);
+	}
+	else if (stringInputPrefix == stringPrefixRadioButton)
+	{
+		setSpecificRadioButtonForm(stringLayoutJavaScriptID, stringInputJavaScriptID, stringInputValue);
+	}
+	else if (stringInputPrefix == stringPrefixSelect)
+	{
+		setSpecificSelectForm(stringLayoutJavaScriptID, stringInputJavaScriptID, stringInputValue);
+	}
+	else if (stringInputPrefix == stringPrefixCheckbox)
+	{
+		setSpecificCheckboxForm(stringLayoutJavaScriptID, stringInputJavaScriptID, stringInputValue);
+	}
+	else if (stringInputPrefix == stringPrefixDate)
+	{
+		setSpecificDateForm(stringLayoutJavaScriptID, stringInputJavaScriptID, stringInputValue);
+	}
+	else if (stringInputPrefix == stringPrefixArea)
+	{
+		setSpecificAreaForm(stringLayoutJavaScriptID, stringInputJavaScriptID, stringInputValue);
+	}
+	else if (stringInputPrefix == stringPrefixNumber)
+	{
+		setSpecificNumberForm(stringLayoutJavaScriptID, stringInputJavaScriptID, stringInputValue);
+	}
+	else if (stringInputPrefix == stringPrefixEmail)
+	{
+		setSpecificEmailForm(stringLayoutJavaScriptID, stringInputJavaScriptID, stringInputValue);
+	}
+	else if (stringInputPrefix == stringPrefixTelephone)
+	{
+		setSpecificTelephoneForm(stringLayoutJavaScriptID, stringInputJavaScriptID, stringInputValue);
+	}
+	else
+	{
+		setSpecificInputBasic(stringLayoutJavaScriptID, stringInputJavaScriptID, stringInputValue);
+	}
 }
 
 /* PDF */
@@ -798,6 +1084,52 @@ function setSpecificEmailPDF(stringLayoutJavaScriptID, stringInputJavaScriptID, 
 function setSpecificTelephonePDF(stringLayoutJavaScriptID, stringInputJavaScriptID, stringInputValue)
 {
     setSpecificInputBasic(stringLayoutJavaScriptID, stringInputJavaScriptID, stringInputValue);
+}
+
+function setSpecificInputPDF(stringLayoutJavaScriptID, stringInputJavaScriptID, stringInputValue)
+{
+	var stringInputPrefix = getPrefix(stringInputJavaScriptID);
+
+	if (stringInputPrefix == stringPrefixText)
+	{
+		setSpecificTextPDF(stringLayoutJavaScriptID, stringInputJavaScriptID, stringInputValue);
+	}
+	else if (stringInputPrefix == stringPrefixRadioButton)
+	{
+		setSpecificRadioButtonPDF(stringLayoutJavaScriptID, stringInputJavaScriptID, stringInputValue);
+	}
+	else if (stringInputPrefix == stringPrefixSelect)
+	{
+		setSpecificSelectPDF(stringLayoutJavaScriptID, stringInputJavaScriptID, stringInputValue);
+	}
+	else if (stringInputPrefix == stringPrefixCheckbox)
+	{
+		setSpecificCheckboxPDF(stringLayoutJavaScriptID, stringInputJavaScriptID, stringInputValue);
+	}
+	else if (stringInputPrefix == stringPrefixDate)
+	{
+		setSpecificDatePDF(stringLayoutJavaScriptID, stringInputJavaScriptID, stringInputValue);
+	}
+	else if (stringInputPrefix == stringPrefixArea)
+	{
+		setSpecificAreaPDF(stringLayoutJavaScriptID, stringInputJavaScriptID, stringInputValue);
+	}
+	else if (stringInputPrefix == stringPrefixNumber)
+	{
+		setSpecificNumberPDF(stringLayoutJavaScriptID, stringInputJavaScriptID, stringInputValue);
+	}
+	else if (stringInputPrefix == stringPrefixEmail)
+	{
+		setSpecificEmailPDF(stringLayoutJavaScriptID, stringInputJavaScriptID, stringInputValue);
+	}
+	else if (stringInputPrefix == stringPrefixTelephone)
+	{
+		setSpecificTelephonePDF(stringLayoutJavaScriptID, stringInputJavaScriptID, stringInputValue);
+	}
+	else
+	{
+		setSpecificInputBasic(stringLayoutJavaScriptID, stringInputJavaScriptID, stringInputValue);
+	}
 }
 
 
@@ -884,6 +1216,52 @@ function getSpecificTelephoneForm(stringLayoutJavaScriptID, stringInputJavaScrip
 	return getSpecificInputBasic(stringLayoutJavaScriptID, stringInputJavaScriptID);
 }
 
+function getSpecificInputForm(stringInputJavaScriptID, stringInputValue)
+{
+	var stringInputPrefix = getPrefix(stringInputJavaScriptID);
+
+	if (stringInputPrefix == stringPrefixText)
+	{
+		return getSpecificTextForm(stringInputJavaScriptID, stringInputValue);
+	}
+	else if (stringInputPrefix == stringPrefixRadioButton)
+	{
+		return getSpecificRadioButtonForm(stringInputJavaScriptID, stringInputValue);
+	}
+	else if (stringInputPrefix == stringPrefixSelect)
+	{
+		return getSpecificSelectForm(stringInputJavaScriptID, stringInputValue);
+	}
+	else if (stringInputPrefix == stringPrefixCheckbox)
+	{
+		return getSpecificCheckboxForm(stringInputJavaScriptID, stringInputValue);
+	}
+	else if (stringInputPrefix == stringPrefixDate)
+	{
+		return getSpecificDateForm(stringInputJavaScriptID, stringInputValue);
+	}
+	else if (stringInputPrefix == stringPrefixArea)
+	{
+		return getSpecificAreaForm(stringInputJavaScriptID, stringInputValue);
+	}
+	else if (stringInputPrefix == stringPrefixNumber)
+	{
+		return getSpecificNumberForm(stringInputJavaScriptID, stringInputValue);
+	}
+	else if (stringInputPrefix == stringPrefixEmail)
+	{
+		return getSpecificEmailForm(stringInputJavaScriptID, stringInputValue);
+	}
+	else if (stringInputPrefix == stringPrefixTelephone)
+	{
+		return getSpecificTelephoneForm(stringInputJavaScriptID, stringInputValue);
+	}
+	else
+	{
+		return getSpecificInputBasic(stringInputJavaScriptID, stringInputValue);
+	}
+}
+
 /* PDF */
 
 function getSpecificTextPDF(stringLayoutJavaScriptID, stringInputJavaScriptID)
@@ -929,6 +1307,52 @@ function getSpecificEmailPDF(stringLayoutJavaScriptID, stringInputJavaScriptID)
 function getSpecificTelephonePDF(stringLayoutJavaScriptID, stringInputJavaScriptID)
 {
 	return getSpecificInputBasic(stringLayoutJavaScriptID, stringInputJavaScriptID);
+}
+
+function getSpecificInputPDF(stringInputJavaScriptID, stringInputValue)
+{
+	var stringInputPrefix = getPrefix(stringInputJavaScriptID);
+
+	if (stringInputPrefix == stringPrefixText)
+	{
+		return getSpecificTextPDF(stringInputJavaScriptID, stringInputValue);
+	}
+	else if (stringInputPrefix == stringPrefixRadioButton)
+	{
+		return getSpecificRadioButtonPDF(stringInputJavaScriptID, stringInputValue);
+	}
+	else if (stringInputPrefix == stringPrefixSelect)
+	{
+		return getSpecificSelectPDF(stringInputJavaScriptID, stringInputValue);
+	}
+	else if (stringInputPrefix == stringPrefixCheckbox)
+	{
+		return getSpecificChckboxPDF(stringInputJavaScriptID, stringInputValue);
+	}
+	else if (stringInputPrefix == stringPrefixDate)
+	{
+		return getSpecificDatePDF(stringInputJavaScriptID, stringInputValue);
+	}
+	else if (stringInputPrefix == stringPrefixArea)
+	{
+		return getSpecificAreaPDF(stringInputJavaScriptID, stringInputValue);
+	}
+	else if (stringInputPrefix == stringPrefixNumber)
+	{
+		return getSpecificNumberPDF(stringInputJavaScriptID, stringInputValue);
+	}
+	else if (stringInputPrefix == stringPrefixEmail)
+	{
+		return getSpecificEmailPDF(stringInputJavaScriptID, stringInputValue);
+	}
+	else if (stringInputPrefix == stringPrefixTelephone)
+	{
+		return getSpecificTelephonePDF(stringInputJavaScriptID, stringInputValue);
+	}
+	else
+	{
+		return getSpecificInputBasic(stringInputJavaScriptID, stringInputValue);
+	}
 }
 
 
@@ -2401,78 +2825,42 @@ function getSpecificPagePDF(stringLayoutJavaScriptID, JSONInput)
 
 function getInfix(stringInputJavaScriptID)
 {
-	if (stringInputJavaScriptID.substring(0, stringInfixProspectiveInsured.length) == stringInfixProspectiveInsured)
-	{
-		return stringInfixProspectiveInsured;
-	}
-	else if (stringInputJavaScriptID.substring(0, stringInfixPolicyHolder.length) == stringInfixPolicyHolder)
-	{
-		return stringInfixPolicyHolder;
-	}
-	else if (stringInputJavaScriptID.substring(0, stringInfixBeneficiariesList.length) == stringInfixBeneficiariesList)
-	{
-		return stringInfixBeneficiariesList;
-	}
-	else
-	{
+	var stringInfix = "";
 
+	for (var i = 0; i < arrayInfix.length; i++)
+	{
+		if (stringInputJavaScriptID.substring(0, arrayInfix[i].length) == arrayInfix[i])
+		{
+			stringInfix = arrayInfix[i];
+			i = arrayInfix.length;
+		}
+		else
+		{
+
+		}
 	}
+	
+	return stringInfix;
 }
 
 function getPrefix(stringInputJavaScriptID)
 {
-	if (stringInputJavaScriptID.substring(0, stringPrefixText.length) == stringPrefixText)
+	var stringPrefix = "";
+
+	for (var i = 0; i < arrayPrefix.length; i++)
 	{
-		return stringPrefixText;
+		if (stringInputJavaScriptID.substring(0, arrayPrefix[i].length) == arrayPrefix[i])
+		{
+			stringPrefix = arrayPrefix[i];
+			i = arrayPrefix.length;
+		}
+		else
+		{
+			
+		}
 	}
-	else if (stringInputJavaScriptID.substring(0, stringPrefixRadioButton.length) == stringPrefixRadioButton)
-	{
-		return stringPrefixRadioButton;
-	}
-	else if (stringInputJavaScriptID.substring(0, stringPrefixCheckbox.length) == stringPrefixCheckbox)
-	{
-		return stringPrefixCheckbox;
-	}
-	else if (stringInputJavaScriptID.substring(0, stringPrefixSelect.length) == stringPrefixSelect)
-	{
-		return stringPrefixSelect;
-	}
-	else if (stringInputJavaScriptID.substring(0, stringPrefixDate.length) == stringPrefixDate)
-	{
-		return stringPrefixDate;
-	}
-	else if (stringInputJavaScriptID.substring(0, stringPrefixArea.length) == stringPrefixArea)
-	{
-		return stringPrefixArea;
-	}
-	else if (stringInputJavaScriptID.substring(0, stringPrefixNumber.length) == stringPrefixNumber)
-	{
-		return stringPrefixNumber;
-	}
-	else if (stringInputJavaScriptID.substring(0, stringPrefixEmail.length) == stringPrefixEmail)
-	{
-		return stringPrefixEmail;
-	}
-	else if (stringInputJavaScriptID.substring(0, stringPrefixTelephone.length) == stringPrefixTelephone)
-	{
-		return stringPrefixTelephone;
-	}
-	else if (stringInputJavaScriptID.substring(0, stringPrefixTable.length) == stringPrefixTable)
-	{
-		return stringPrefixTable;
-	}
-	else if (stringInputJavaScriptID.substring(0, stringPrefixRow.length) == stringPrefixRow)
-	{
-		return stringPrefixRow;
-	}
-	else if (stringInputJavaScriptID.substring(0, stringPrefixColumn.length) == stringPrefixColumn)
-	{
-		return stringPrefixColumn;
-	}
-	else
-	{
-		
-	}
+
+	return stringPrefix;
 }
 
 function getLastID(JSONInput, stringKeyFilter)
@@ -2527,83 +2915,133 @@ function setSignatureImage(arrayImageSource)
 	});
 }
 
+function setTable(arrayTableHeader, JSONInput, stringTableJavaScriptID)
+{
+	/* INITIALIZE */
+
+	var stringJSONInputKey;
+	var stringJSONInputValue;
+	var stringKeyWithoutPrefix;
+	var stringKeyInfix;
+	var JSONTable = [];
+	var stringTableInfix = releasePrefix(stringTableJavaScriptID);
+
+	/* JSON FILTER */
+
+	for (var i = 0; i < JSONInput.length; i++)
+	{
+		stringJSONInputKey = JSONInput[i].key;
+		stringJSONInputValue = JSONInput[i].value;
+
+		stringKeyWithoutPrefix = releasePrefix(stringJSONInputKey);
+		stringKeyInfix = getInfix(stringKeyWithoutPrefix);
+
+		if (stringKeyInfix == stringTableInfix)
+		{
+			JSONAdd(JSONTable, stringJSONInputKey, stringJSONInputValue);
+		}
+		else
+		{
+
+		}
+	}
+
+	/* GET LAST ID */
+
+	var intLastID = getLastID(JSONTable, stringPrefixText + releasePrefix(stringTableJavaScriptID) + arrayTableHeader[1]);
+
+	/* GENERATE TABLE */
+
+	var stringTableJQueryID = stringKres + stringTableJavaScriptID;
+	var stringRowJavaScriptID;
+	var stringRowJQueryID;
+
+	for (var i = 0; i < intLastID; i++)
+	{
+		$(stringTableJQueryID + " tbody").append("<tr id='" + stringPrefixRow + stringTableInfix + stringSuffixBody + (i + 1) + "'></tr>");
+	}
+
+	$(stringTableJQueryID + " tbody tr").each(function(index)
+	{
+		stringRowJavaScriptID = $(this).attr("id");
+		stringRowJQueryID = stringKres + stringRowJavaScriptID;
+
+		for (var i = 0; i < arrayTableHeader.length; i++)
+		{
+			$(stringTableJQueryID + " tbody tr" + stringRowJQueryID).append("<td id='" + stringPrefixColumn + stringTableInfix + arrayTableHeader[i] + (index + 1) + "'></td>");
+		}
+	});
+	
+	/* SET TABLE VALUE */
+
+	var stringJSONTableKey;
+	var stringJSONTableValue;
+	var stringKeyTable;
+	var stringColumnJavaScriptID;
+
+	for (var i = 0; i < JSONTable.length; i++)
+	{
+		stringJSONTableKey = JSONTable[i].key;
+		stringJSONTableValue = JSONTable[i].value;
+
+		stringKeyWithoutPrefix = releasePrefix(stringJSONTableKey);
+		stringKeyTable = stringPrefixColumn + stringKeyWithoutPrefix;
+
+		$(stringTableJQueryID + " tbody td").each(function()
+		{
+			stringColumnJavaScriptID = $(this).attr("id");
+
+			if (stringColumnJavaScriptID == stringKeyTable)
+			{
+				$(this).html(stringJSONTableValue);
+			}
+			else
+			{
+
+			}
+		});
+	}
+}
+
 
 // RELEASE
 
 function releasePrefix(stringInputJavaScriptID)
 {
-	if (stringInputJavaScriptID.substring(0, stringPrefixText.length) == stringPrefixText)
+	var stringWithoutPrefix = "";
+
+	for (var i = 0; i < arrayPrefix.length; i++)
 	{
-		return stringInputJavaScriptID.substring(stringPrefixText.length, stringInputJavaScriptID.length);
+		if (stringInputJavaScriptID.substring(0, arrayPrefix[i].length) == arrayPrefix[i])
+		{
+			stringWithoutPrefix = stringInputJavaScriptID.substring(arrayPrefix[i].length, stringInputJavaScriptID.length);
+		}
+		else
+		{
+			
+		}
 	}
-	else if (stringInputJavaScriptID.substring(0, stringPrefixRadioButton.length) == stringPrefixRadioButton)
-	{
-		return stringInputJavaScriptID.substring(stringPrefixRadioButton.length, stringInputJavaScriptID.length);
-	}
-	else if (stringInputJavaScriptID.substring(0, stringPrefixSelect.length) == stringPrefixSelect)
-	{
-		return stringInputJavaScriptID.substring(stringPrefixSelect.length, stringInputJavaScriptID.length);
-	}
-	else if (stringInputJavaScriptID.substring(0, stringPrefixDate.length) == stringPrefixDate)
-	{
-		return stringInputJavaScriptID.substring(stringPrefixDate.length, stringInputJavaScriptID.length);
-	}
-	else if (stringInputJavaScriptID.substring(0, stringPrefixArea.length) == stringPrefixArea)
-	{
-		return stringInputJavaScriptID.substring(stringPrefixArea.length, stringInputJavaScriptID.length);
-	}
-	else if (stringInputJavaScriptID.substring(0, stringPrefixCheckbox.length) == stringPrefixCheckbox)
-	{
-		return stringInputJavaScriptID.substring(stringPrefixCheckbox.length, stringInputJavaScriptID.length);
-	}
-	else if (stringInputJavaScriptID.substring(0, stringPrefixNumber.length) == stringPrefixNumber)
-	{
-		return stringInputJavaScriptID.substring(stringPrefixNumber.length,stringInputJavaScriptID.length);
-	}
-	else if (stringInputJavaScriptID.substring(0, stringPrefixEmail.length) == stringPrefixEmail)
-	{
-		return stringInputJavaScriptID.substring(stringPrefixEmail.length, stringInputJavaScriptID.length);
-	}
-	else if (stringInputJavaScriptID.substring(0, stringPrefixTelephone.length) == stringPrefixTelephone)
-	{
-		return stringInputJavaScriptID.substring(stringPrefixTelephone.length, stringInputJavaScriptID.length);
-	}
-	else if (stringInputJavaScriptID.substring(0, stringPrefixTable.length) == stringPrefixTable)
-	{
-		return stringInputJavaScriptID.substring(stringPrefixTable.length, stringInputJavaScriptID.length);
-	}
-	else if (stringInputJavaScriptID.substring(0, stringPrefixRow.length) == stringPrefixRow)
-	{
-		return stringInputJavaScriptID.substring(stringPrefixRow.length, stringInputJavaScriptID.length);
-	}
-	else if (stringInputJavaScriptID.substring(0, stringPrefixColumn.length) == stringPrefixColumn)
-	{
-		return stringInputJavaScriptID.substring(stringPrefixColumn.length, stringInputJavaScriptID.length);
-	}
-	else
-	{
-		
-	}
+	
+	return stringWithoutPrefix;
 }
 
 function releaseInfix(stringInputJavaScriptID)
 {
-	if (stringInputJavaScriptID.substring(0, stringInfixPolicyHolder.length) == stringInfixPolicyHolder)
+	var stringWithoutInfix = "";
+
+	for (var i = 0; i < arrayInfix.length; i ++)
 	{
-		return stringInputJavaScriptID.substring(stringInfixPolicyHolder.length, stringInputJavaScriptID.length);
+		if (stringInputJavaScriptID.substring(0, arrayInfix[i].length) == arrayInfix[i])
+		{
+			stringWithoutInfix = stringInputJavaScriptID.substring(arrayInfix[i].length, stringInputJavaScriptID.length);
+		}
+		else
+		{
+			
+		}
 	}
-	else if (stringInputJavaScriptID.substring(0, stringInfixProspectiveInsured.length) == stringInfixProspectiveInsured)
-	{
-		return stringInputJavaScriptID.substring(stringInfixProspectiveInsured.length, stringInputJavaScriptID.length);
-	}
-	else if (stringInputJavaScriptID.substring(0, stringInfixBeneficiariesList.length) == stringInfixBeneficiariesList)
-	{
-		return stringInputJavaScriptID.substring(stringInfixBeneficiariesList.length, stringInputJavaScriptID.length);
-	}
-	else
-	{
-		
-	}
+	
+	return stringWithoutInfix;
 }
 
 
@@ -2658,6 +3096,10 @@ function indicatorPrefix(stringInputJavaScriptID)
 	else if (stringInputJavaScriptID.substring(0, stringPrefixColumn.length) == stringPrefixColumn)
 	{
 		return stringStateTable;
+	}
+	else if (stringInputJavaScriptID.substring(0, stringPrefixConstant.length) == stringPrefixConstant)
+	{
+		return stringStateConstant;
 	}
 	else
 	{
@@ -2748,4 +3190,20 @@ function messageError(stringMessageTitle, stringMessageContent)
 			alert(stringMessageTitle + "\n" + stringMessageContent);
 		}
 	}
+}
+
+
+// UI
+
+function generateSelectOption(stringSelectJavaScriptID, arrayOption)
+{
+	var stringSelectJQueryID = stringKres + stringSelectJavaScriptID;
+	var stringOptionAdded = "";
+	
+	for (var i = 0; i < arrayOption.length; i++)
+	{
+		stringOptionAdded += "<option value='" + arrayOption[i].value + "'>" + arrayOption[i].text + "</option>";
+	}
+
+	$(stringSelectJQueryID).html(stringOptionAdded);
 }

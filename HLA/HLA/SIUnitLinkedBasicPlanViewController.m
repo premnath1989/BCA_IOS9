@@ -172,7 +172,7 @@
 }
 
 -(BOOL)ExtraPremiNumberEditingEnd:(UITextField *)sender{
-    NSArray* arrayNumberValidate = [[NSArray alloc]initWithObjects:@"2",@"4",@"6",@"8",@"10",@"12",@"14",@"16",@"18",@"20", nil];
+    NSArray* arrayNumberValidate = [[NSArray alloc]initWithObjects:@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10", nil];
     NSString * combinedArray = [arrayNumberValidate componentsJoinedByString:@","];
     if ([sender.text length]>0){
         if (![arrayNumberValidate containsObject: sender.text] ) {
@@ -290,8 +290,10 @@
     NSString *extraPremiPerMil = textExtraPremiNumberField.text;
     NSString *masaExtraPremi = textMasaExtraPremiField.text;
     
-    NSString *alertPremiDasar = @"Premi Dasar harus diisi.";
-    NSString *alertMasaExtraPremi = @"Masa Extra Premi harus diisi.";
+    NSString *alertPremiDasar = @"Premi Dasar harus diisi";
+    NSString *alertMasaExtraPremi = @"Masa Extra Premi harus diisi";
+    NSString *alertNumberExtraPremi = @"Besaran Extra Premi harus diisi";
+    NSString *alertMaximumMasaExtraPremi = @"Masa Extra Premi harus sama dengan 1";
     
     UIAlertController *alertvalidation;
     if ([premiDasar length]<=0){
@@ -302,6 +304,19 @@
     if ([extraPremiPercent length]>0 || [extraPremiPerMil length]>0){
         if ([masaExtraPremi length]<=0){
             alertvalidation = [alert alertInformation:@"Peringatan" stringMessage:alertMasaExtraPremi];
+            [self presentViewController:alertvalidation animated:YES completion:nil];
+            return false;
+        }
+    }
+    if ([masaExtraPremi length]>0){
+        if ([extraPremiPercent length]<=0 && [extraPremiPerMil length]<=0){
+                
+            alertvalidation = [alert alertInformation:@"Peringatan" stringMessage:alertNumberExtraPremi];
+            [self presentViewController:alertvalidation animated:YES completion:nil];
+            return false;
+        }
+        if ([masaExtraPremi intValue]>1){
+            alertvalidation = [alert alertInformation:@"Peringatan" stringMessage:alertMaximumMasaExtraPremi];
             [self presentViewController:alertvalidation animated:YES completion:nil];
             return false;
         }
@@ -348,7 +363,7 @@
     // If active text field is hidden by keyboard, scroll it so it's visible
     // Your application might not need or want this behavior.
     CGRect aRect = self.view.frame;
-    aRect.size.height -= kbSize.height;
+    aRect.size.height -= kbSize.height+44;
     if (!CGRectContainsPoint(aRect, activeField.frame.origin) ) {
         CGPoint scrollPoint = CGPointMake(0.0, (activeField.frame.origin.y-kbSize.height)+44);
         [scrollBasicPlan setContentOffset:scrollPoint animated:YES];

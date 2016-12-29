@@ -1,1 +1,84 @@
-form fieldset{padding-top:7.5px;padding-left:0px;padding-right:0px;padding-bottom:5px;border-top-style:solid;border-top-width:1px;border-left:none;border-right:none;border-bottom:none}form fieldset ol,form fieldset ul{margin:0px;padding:0px;list-style-type:none}form fieldset ol li,form fieldset ul li{margin-top:7.5px;margin-left:0px;margin-right:0px;margin-bottom:7.5px;padding:0px}form fieldset label{margin-left:5px;margin-right:5px;min-height:28px;min-width:200px;line-height:28px;font-size:0.8em;vertical-align:middle;display:inline-block}form fieldset:first-of-type{border-top:none}.IndentFirst{margin-left:20px}.IndentSecond{margin-left:40px}table{margin-top:20px;margin-bottom:20px;width:100%;border-collapse:collapse}table thead tr td,table thead tr th,table tbody tr td,table tbody tr th,table tfoot tr td,table tfoot tr th{padding-top:15px;padding-left:10px;padding-right:10px;padding-bottom:15px}table thead tr td,table thead tr th{font-size:0.8em}
+/* @charset "utf-8"; */
+/* CSS Document */
+/* @charset "utf-8"; */
+/* CSS Document */
+/* @charset "utf-8"; */
+/* CSS Document */
+/* FUNCTION */
+/* ANIMATION */
+/* SPACE */
+/* SIZE */
+/* RADIO */
+/* LABEL */
+/* INPUT */
+/* RESOURCE */
+/* TYPEFACE */
+/* FORM */
+form fieldset {
+  padding-top: 7.5px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-bottom: 5px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
+}
+
+form fieldset ol, form fieldset ul {
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none;
+}
+
+form fieldset ol li, form fieldset ul li {
+  margin-top: 7.5px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-bottom: 7.5px;
+  padding: 0px;
+}
+
+form fieldset label {
+  margin-left: 5px;
+  margin-right: 5px;
+  min-height: 28px;
+  min-width: 200px;
+  line-height: 28px;
+  font-size: 0.8em;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+form fieldset:first-of-type {
+  border-top: none;
+}
+
+/* INDENT */
+.IndentFirst {
+  margin-left: 20px;
+}
+
+.IndentSecond {
+  margin-left: 40px;
+}
+
+/* TABLE */
+table {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table thead tr td, table thead tr th, table tbody tr td, table tbody tr th, table tfoot tr td, table tfoot tr th {
+  padding-top: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 15px;
+}
+
+table thead tr td, table thead tr th {
+  font-size: 0.8em;
+}

@@ -538,7 +538,7 @@
     
     dictionarySpouse = [[NSMutableDictionary alloc]initWithObjectsAndKeys:spouseName,@"ProspectSpouseName",
                         spouseDOB,@"ProspectSpouseDOB",
-                        IDTypeCodeSelected,@"OtherIDType",
+                        IDTypeCodeSelected?:@"",@"OtherIDType",
                         spouseOtherIDNumber,@"OtherIDTypeNo",
                         spouseNationality,@"Nationality",
                         spouseRelation,@"Relation",

@@ -355,7 +355,7 @@
     
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     [database open];
-    BOOL success = [database executeUpdate:@"insert into SI_PO_Data (SINO, ProductCode, ProductName, QuickQuote,SIDate,PO_Name,PO_DOB,PO_Gender,PO_Age,PO_OccpCode,PO_Occp,PO_ClientID,RelWithLA,LA_ClientID,LA_Name,LA_DOB,LA_Age,LA_Gender,LA_OccpCode,LA_Occp,CreatedDate,UpdatedDate,IsInternalStaff) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,""datetime(\"now\", \"+7 hour\")"",""datetime(\"now\", \"+7 hour\")"",?)" ,
+    BOOL success = [database executeUpdate:@"insert into SI_PO_Data (SINO, ProductCode, ProductName, QuickQuote,SIDate,PO_Name,PO_DOB,PO_Gender,PO_Age,PO_OccpCode,PO_Occp,PO_ClientID,RelWithLA,LA_ClientID,LA_Name,LA_DOB,LA_Age,LA_Gender,LA_OccpCode,LA_Occp,CreatedDate,UpdatedDate,IsInternalStaff,PO_Smoker,PO_CommencementDate,PO_MonthlyIncome,LA_Smoker,LA_CommencementDate,LA_MonthlyIncome) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,""datetime(\"now\", \"+7 hour\")"",""datetime(\"now\", \"+7 hour\")"",?,?,?,?,?,?,?)" ,
                     [dictPOLAData valueForKey:@"SINO"],
                     [dictPOLAData valueForKey:@"ProductCode"],
                     [dictPOLAData valueForKey:@"ProductName"],
@@ -532,12 +532,12 @@
           CreatedDate,@"CreatedDate",
           UpdatedDate,@"UpdatedDate",
           IsInternalStaff,@"IsInternalStaff",
-          PO_Smoker,@"PO_Smoker",
-          PO_CommencementDate,@"PO_CommencementDate",
-          PO_MonthlyIncome,@"PO_MonthlyIncome",
-          LA_Smoker,@"LA_Smoker",
-          LA_CommencementDate,@"LA_CommencementDate",
-          LA_MonthlyIncome,@"LA_MonthlyIncome",nil];
+          PO_Smoker?:@"",@"PO_Smoker",
+          PO_CommencementDate?:@"",@"PO_CommencementDate",
+          PO_MonthlyIncome?:@"",@"PO_MonthlyIncome",
+          LA_Smoker?:@"",@"LA_Smoker",
+          LA_CommencementDate?:@"",@"LA_CommencementDate",
+          LA_MonthlyIncome?:@"",@"LA_MonthlyIncome",nil];
     
     [results close];
     [database close];

@@ -19,7 +19,8 @@
 
     @interface ViewNavigation : UIView
 
-        - (void)setupStyle;
+        - (void)setupStyleSPAJ;
+        - (void)setupStyleSAM;
 
     @end
 

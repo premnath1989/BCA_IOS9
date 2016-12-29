@@ -27,7 +27,7 @@
     [super viewDidLoad];
     
     self.delegate = self;
-	
+    
     NSMutableArray* controllersToAdd = [[NSMutableArray alloc] init];
     
     UIStoryboard *carouselStoryboard = [UIStoryboard storyboardWithName:@"CarouselStoryboard" bundle:Nil];

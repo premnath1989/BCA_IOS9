@@ -16,6 +16,8 @@
 
     // COLOR
 
+    UInt32 const THEME_COLOR_PRIMARY_SAM = 0x89c765; // Dark Turqoise
+
     UInt32 const THEME_COLOR_PRIMARY = 0x00a6b5; // Dark Turqoise
     UInt32 const THEME_COLOR_SECONDARY = 0x1ec4d3; // Light Turqoise
     UInt32 const THEME_COLOR_TERTIARY = 0xe1e1e1; // Dark Background

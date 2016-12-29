@@ -820,11 +820,42 @@
 						cell8.innerHTML = parseFloat(resQ47/1000).toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
 					}
 				}
-				//var rowToRemove = ["15", "17", "10","3","6"];
-				//removeRow(rowToRemove);
+				
+				var rowForDisplay = arrayForDisplay(Age);
+				var rowForRemove = arrayForRemove(rowForDisplay);
+				//removeSpecificRow2(rowForRemove);
         	}
         	
-        	function removeRow(data){
+        	function arrayForDisplay(EntryAge){
+        		if (EntryAge >=0 && EntryAge <=10){
+        			var rowToShow = ["1", "2", "3","4","5","10","15","20","30","40","50","60","70","80","99"];
+        			return rowToShow;
+        		}
+        		else if (EntryAge >=11 && EntryAge <=40){
+        		    var rowToShow = ["1", "2", "3","4","5","10","15","20","25","30","35","40","45","50","99"];
+        		    return rowToShow;
+        		}
+        		else if(EntryAge >=41 && EntryAge <=70){
+        		    var rowToShow = ["1", "2", "3","4","5","10","12","14","16","18","20","22","24","26","99"];
+        		    return rowToShow;
+        		}
+        	}
+        	
+        	function arrayForRemove(arrayForDisplay){
+        		var arrayRemove=[];
+				for (var i=1;i<100;i++){
+					var num = i.toString();
+					var indexObject = arrayForDisplay.indexOf(num);
+
+					if (indexObject<0){
+						arrayRemove.push(num);
+					}
+				}
+				return arrayRemove;
+        	}
+        	
+        	function removeSpecificRow2(data){
+
 				var xRow = document.getElementById("table-Summary1").rows.length;
 
 				for (var x=0;x<data.length;x++){
@@ -835,7 +866,7 @@
         				}
         				xRow = document.getElementById("table-Summary1").rows.length;
         			}
-				}    	
+				}   
 			}
         	
         	function removeRows(rowsToRemove){

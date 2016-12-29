@@ -35,6 +35,7 @@
     [self loadDataFromList];
     dictPremiData = [[NSMutableDictionary alloc]initWithDictionary:[delegate getBasicPlanDictionary]];
     [tableRider reloadData];
+    [self clearRiderDataDetail];
 }
 
 - (void)viewDidLoad {
@@ -58,6 +59,11 @@
     if ([arrayRiderData count]<=0){
         arrayRiderData = [[NSMutableArray alloc]initWithObjects:[self dictionaryRider1],/*[self dictionaryRider2],*/[self dictionaryRider3], nil];
     }
+    else{
+        [self refreshRiderData];
+        [tableRider reloadData];
+    }
+    [self clearRiderDataDetail];
 }
 
 -(void)showRiderDataDetail:(NSDictionary *)dictRiderData{
@@ -71,6 +77,18 @@
     [textExtraPremiPercent setText:[dictRiderData valueForKey:@"ExtraPremiPercent"]];
     [textExtraPremiMil setText:[dictRiderData valueForKey:@"ExtraPremiMil"]];
     [textMasaExtraPremi setText:[dictPremiData valueForKey:@"ExtraPremiumTerm"]];
+}
+
+-(void)clearRiderDataDetail{
+    [buttonManfaat setTitle:@"--Please Select--" forState:UIControlStateNormal];
+    [textTerm setText:@""];
+    [textUangPertanggungan setText:@""];
+    [textKelasPekerjaan setText:@""];
+    [textOccpLoading setText:@""];
+    [textUnit setText:@""];
+    [textExtraPremiPercent setText:@""];
+    [textExtraPremiMil setText:@""];
+    [textMasaExtraPremi setText:@""];
 }
 
 -(NSMutableDictionary *)dictionaryRider1{
@@ -126,6 +144,24 @@
 }
 
 #pragma mark saveData
+-(void)refreshRiderData{
+    //set the updated data to parent
+    [self setULRiderDictionary];
+    
+    //delete first
+    [modelSIULRider deleteULRiderData:[delegate getRunnigSINumber]];
+    
+    //get updated data from parent and save it.
+    NSMutableArray* arrayRiderForInsert = [[NSMutableArray alloc]initWithArray:[delegate getULRiderArray]];
+    for (int i=0;i<[arrayRiderForInsert count];i++){
+        NSMutableDictionary *dictForInsert = [[NSMutableDictionary alloc]initWithDictionary:[arrayRiderForInsert objectAtIndex:i]];
+        [dictForInsert setObject:[delegate getRunnigSINumber] forKey:@"SINO"];
+        
+        [modelSIULRider saveULRiderData:dictForInsert];
+    }
+
+}
+
 -(IBAction)actionSaveData:(UIBarButtonItem *)sender{
     //set the updated data to parent
     [self setULRiderDictionary];

@@ -972,7 +972,8 @@
         NSString *path = document.filePath;
         NSData *data = [[NSFileManager defaultManager] contentsAtPath:path];
         NSString* filename=document.fileName;
-        if ([filename rangeOfString:@"Unit Linked"].location != NSNotFound) {
+        //if ([filename rangeOfString:@"Unit Linked"].location != NSNotFound) {
+        if ([filename rangeOfString:@"Proteksi & Investasiku"].location != NSNotFound) {
             [self addSignature1:agentSignature CustomerSignature:customerSignature onPDFData:data];
             [self addSignature2:agentSignature CustomerSignature:customerSignature onPDFData:data];
             [self addSignature3:agentSignature CustomerSignature:customerSignature onPDFData:data];
@@ -993,7 +994,8 @@
         
         dispatch_async(dispatch_get_main_queue(), ^{
             NSString* filename=document.fileName;
-            if ([filename rangeOfString:@"Unit Linked"].location != NSNotFound) {
+            //if ([filename rangeOfString:@"Unit Linked"].location != NSNotFound) {
+            if ([filename rangeOfString:@"Proteksi & Investasiku"].location != NSNotFound) {
                 [self joinMultiplePDF];
             }
             else if ([filename rangeOfString:@"Heritage"].location == NSNotFound) {

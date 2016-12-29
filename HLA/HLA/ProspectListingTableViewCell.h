@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface ProspectListingTableViewCell : UITableViewCell {
+    IBOutlet UIView *viewCell;
     
 }
 

@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="BPreplay_Regular.ttf">
+        <mutableArray key="BPreplay_Regular.otf">
             <string>BPreplay</string>
             <string>BPreplay</string>
             <string>BPreplay</string>
@@ -23,6 +23,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SIUnitLinkedFundAllocationViewController">
             <connections>
+                <outlet property="labelEquityIncome" destination="vvZ-md-0Yl" id="3JU-ii-RyR"/>
+                <outlet property="labelFixedIncome" destination="GhN-3M-sVF" id="RXt-eE-zo7"/>
                 <outlet property="scrollFundAllocation" destination="bfU-Tu-qeR" id="6lS-Ny-LFe"/>
                 <outlet property="textEquityIncome" destination="e8z-db-UmT" id="kCu-ZU-i3V"/>
                 <outlet property="textFixedIncome" destination="aBc-Rx-BxW" id="MO5-Cg-miC"/>

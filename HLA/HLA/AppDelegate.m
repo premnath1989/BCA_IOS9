@@ -37,12 +37,13 @@ NSString * const NSURLIsExcludedFromBackupKey =@"NSURLIsExcludedFromBackupKey";
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
-
+@synthesize isFromSAM;
 
 #ifdef UAT_BUILD
 NSString *uatAgentCode;
 #endif
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    isFromSAM = 0;
     //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     UIViewController *cffListingNavigation=[[CFFListingViewController alloc]initWithNibName:@"CFFListingViewController" bundle:nil];
     self.navController=[[UINavigationController alloc]initWithRootViewController:cffListingNavigation];

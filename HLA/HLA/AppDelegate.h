@@ -16,6 +16,7 @@
 }
 @property(nonatomic, retain) UINavigationController *navController;
 @property (strong, nonatomic) UIWindow *window;
+@property (nonatomic, assign,readwrite) int isFromSAM;
 @property (nonatomic, assign,readwrite) int indexNo;
 @property (nonatomic, assign,readwrite) int HomeIndex;
 @property (nonatomic, assign,readwrite) int ProspectListingIndex;

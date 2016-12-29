@@ -445,32 +445,43 @@ div.Long {
   width: 225px;
 }
 
+div.Wide {
+  min-width: 286.875px;
+  width: 286.875px;
+}
+
 div.Full {
   width: 100%;
 }
 
 div.ShortFix {
   min-width: 75px;
-  min-width-width: 75px;
-  min-width-max-width: 75px;
+  width: 75px;
+  max-width: 75px;
 }
 
 div.MediumFix {
   min-width: 123.2px;
-  min-width-width: 123.2px;
-  min-width-max-width: 154px;
+  width: 123.2px;
+  max-width: 154px;
 }
 
 div.LongFix {
   min-width: 225px;
-  min-width-width: 225px;
-  min-width-max-width: 225px;
+  width: 225px;
+  max-width: 225px;
+}
+
+div.WideFix {
+  min-width: 286.875px;
+  width: 286.875px;
+  max-width: 286.875px;
 }
 
 div.FullFix {
   min-width: 100%;
-  min-width-width: 100%;
-  min-width-max-width: 100%;
+  width: 100%;
+  max-width: 100%;
 }
 
 /* FOOTER */

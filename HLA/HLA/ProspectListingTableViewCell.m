@@ -20,7 +20,38 @@
 
 - (void)awakeFromNib {
     NSLog(@"test");
-    // Initialization code
+    UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveViewWithGestureRecognizer:)];
+    [viewCell addGestureRecognizer:panGestureRecognizer];
+    
+}
+
+-(void)moveViewWithGestureRecognizer:(UIPanGestureRecognizer *)panGestureRecognizer{
+    if (panGestureRecognizer.state == UIGestureRecognizerStateChanged) {
+        CGPoint translation = [panGestureRecognizer translationInView:panGestureRecognizer.view];
+        viewCell.center = CGPointMake(viewCell.center.x+ translation.x, viewCell.center.y );
+        [panGestureRecognizer setTranslation:CGPointMake(0, 0) inView:panGestureRecognizer.view];
+    }
+    else if (panGestureRecognizer.state == UIGestureRecognizerStateEnded) {
+        CGFloat frameX = viewCell.frame.origin.x;
+        if (frameX > -50){
+            [UIView animateWithDuration:0.2 animations:^{
+                [viewCell setFrame:CGRectMake(0, viewCell.frame.origin.y, viewCell.frame.size.width, viewCell.frame.size.height)];
+            }];
+        }
+        else{
+            [UIView animateWithDuration:0.2 animations:^{
+                [viewCell setFrame:CGRectMake(-100, viewCell.frame.origin.y, viewCell.frame.size.width, viewCell.frame.size.height)];
+            }];
+        }
+    }
+}
+
+-(void)handleSwipeFromLeft{
+    
+}
+
+-(void)handleSwipeFromRight{
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

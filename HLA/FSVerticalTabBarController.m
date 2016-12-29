@@ -143,6 +143,7 @@ BOOL isBusy;
                                                                    self.view.bounds.size.height);
                     selectedViewController.view.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
                     [self.view addSubview:selectedViewController.view];*/
+                    [delegate setIsFromSAM:0];
                     [self presentViewController:selectedViewController animated:NO completion:Nil];
                     
                     [self updateTabBar];

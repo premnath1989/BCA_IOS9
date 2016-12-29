@@ -357,6 +357,14 @@
 		42D3277618487F2D0030AA7A /* NewGroupListing.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D3277518487F2D0030AA7A /* NewGroupListing.m */; };
 		42F8590F1772E4EF003907CD /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = 42F8590D1772E4EF003907CD /* add.png */; };
 		42F859101772E4EF003907CD /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 42F8590E1772E4EF003907CD /* delete.png */; };
+		4307B4991E0A7B9000380162 /* SAMActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4307B4971E0A7B9000380162 /* SAMActivityViewController.m */; };
+		4307B49A1E0A7B9000380162 /* SAMActivityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4307B4981E0A7B9000380162 /* SAMActivityViewController.xib */; };
+		4307B49E1E0A7BA600380162 /* SAMActivityListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4307B49C1E0A7BA600380162 /* SAMActivityListViewController.m */; };
+		4307B49F1E0A7BA600380162 /* SAMActivityListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4307B49D1E0A7BA600380162 /* SAMActivityListViewController.xib */; };
+		4307B4A31E0A7BB900380162 /* SAMActivityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4307B4A11E0A7BB900380162 /* SAMActivityDetailViewController.m */; };
+		4307B4A41E0A7BB900380162 /* SAMActivityDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4307B4A21E0A7BB900380162 /* SAMActivityDetailViewController.xib */; };
+		4307B4A81E0A7BCA00380162 /* SAMReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4307B4A61E0A7BCA00380162 /* SAMReportViewController.m */; };
+		4307B4A91E0A7BCA00380162 /* SAMReportViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4307B4A71E0A7BCA00380162 /* SAMReportViewController.xib */; };
 		43100C751CE1C00B006ECC7F /* HeritageCalculation.m in Sources */ = {isa = PBXBuildFile; fileRef = 43100C741CE1C00B006ECC7F /* HeritageCalculation.m */; };
 		431253921CF581C700A874B7 /* eng_BCALH_Page4.html in Resources */ = {isa = PBXBuildFile; fileRef = 431253911CF581C700A874B7 /* eng_BCALH_Page4.html */; };
 		431376C21D0E5B2D007D3BF1 /* AddSpouseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 431376C01D0E5B2D007D3BF1 /* AddSpouseViewController.m */; };
@@ -373,6 +381,14 @@
 		432209141D4F37E300971DF3 /* ModelSPAJIDCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 432209131D4F37E300971DF3 /* ModelSPAJIDCapture.m */; };
 		432466541C9000EC001EE22F /* ModelDataReferral.m in Sources */ = {isa = PBXBuildFile; fileRef = 432466531C9000EC001EE22F /* ModelDataReferral.m */; };
 		4329213A1C7FFC26000D1064 /* Model_SI_Master.m in Sources */ = {isa = PBXBuildFile; fileRef = 432921391C7FFC26000D1064 /* Model_SI_Master.m */; };
+		432B26091E121B28000EDFB4 /* SAMTableViewAcitivtyListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 432B26071E121B28000EDFB4 /* SAMTableViewAcitivtyListCell.m */; };
+		432B260A1E121B28000EDFB4 /* SAMTableViewAcitivtyListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 432B26081E121B28000EDFB4 /* SAMTableViewAcitivtyListCell.xib */; };
+		432B260E1E122270000EDFB4 /* SAMTableViewActivityDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 432B260C1E122270000EDFB4 /* SAMTableViewActivityDetailCell.m */; };
+		432B260F1E122270000EDFB4 /* SAMTableViewActivityDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 432B260D1E122270000EDFB4 /* SAMTableViewActivityDetailCell.xib */; };
+		432B26131E12264A000EDFB4 /* SAMMeetingScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 432B26111E12264A000EDFB4 /* SAMMeetingScheduleViewController.m */; };
+		432B26141E12264A000EDFB4 /* SAMMeetingScheduleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 432B26121E12264A000EDFB4 /* SAMMeetingScheduleViewController.xib */; };
+		432B26181E12554A000EDFB4 /* TimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 432B26161E12554A000EDFB4 /* TimeViewController.m */; };
+		432B26191E12554A000EDFB4 /* TimeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 432B26171E12554A000EDFB4 /* TimeViewController.xib */; };
 		432BBEA01DEC165700FF5ED3 /* eng_BCALULS_Page1.html in Resources */ = {isa = PBXBuildFile; fileRef = 432BBE9C1DEC165700FF5ED3 /* eng_BCALULS_Page1.html */; };
 		432BBEA11DEC165700FF5ED3 /* eng_BCALULS_Page2.html in Resources */ = {isa = PBXBuildFile; fileRef = 432BBE9D1DEC165700FF5ED3 /* eng_BCALULS_Page2.html */; };
 		432BBEA21DEC165700FF5ED3 /* eng_BCALULS_Page3.html in Resources */ = {isa = PBXBuildFile; fileRef = 432BBE9E1DEC165700FF5ED3 /* eng_BCALULS_Page3.html */; };
@@ -509,6 +525,10 @@
 		43BB5A551D3738EC0067D189 /* Pendidikan.html in Resources */ = {isa = PBXBuildFile; fileRef = 43BB5A541D3738EC0067D189 /* Pendidikan.html */; };
 		43C166191C99448500001691 /* ModelKodepos.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C166181C99448500001691 /* ModelKodepos.m */; };
 		43C1661C1C99489000001691 /* KodePosInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C1661B1C99489000001691 /* KodePosInfo.m */; };
+		43C94BD11E090B00009A30F3 /* SAMMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C94BCF1E090B00009A30F3 /* SAMMain.m */; };
+		43C94BD21E090B00009A30F3 /* SAMMain.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43C94BD01E090B00009A30F3 /* SAMMain.xib */; };
+		43C94BD61E091C0E009A30F3 /* SAMStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43C94BD51E091C0E009A30F3 /* SAMStoryboard.storyboard */; };
+		43C94BD91E091D56009A30F3 /* SAMDashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C94BD81E091D56009A30F3 /* SAMDashboardViewController.m */; };
 		43C98DFE1D519D5900A3F911 /* SPAJ Calon Pemegang Polis.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C98DFC1D519D5900A3F911 /* SPAJ Calon Pemegang Polis.m */; };
 		43C98DFF1D519D5900A3F911 /* SPAJ Calon Pemegang Polis.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43C98DFD1D519D5900A3F911 /* SPAJ Calon Pemegang Polis.xib */; };
 		43C98E021D51A20100A3F911 /* datacalonpemegangpolis.html in Resources */ = {isa = PBXBuildFile; fileRef = 43C98E011D51A20100A3F911 /* datacalonpemegangpolis.html */; };
@@ -1623,6 +1643,18 @@
 		42D3277518487F2D0030AA7A /* NewGroupListing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewGroupListing.m; sourceTree = "<group>"; };
 		42F8590D1772E4EF003907CD /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
 		42F8590E1772E4EF003907CD /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete.png; sourceTree = "<group>"; };
+		4307B4961E0A7B9000380162 /* SAMActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMActivityViewController.h; sourceTree = "<group>"; };
+		4307B4971E0A7B9000380162 /* SAMActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMActivityViewController.m; sourceTree = "<group>"; };
+		4307B4981E0A7B9000380162 /* SAMActivityViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SAMActivityViewController.xib; sourceTree = "<group>"; };
+		4307B49B1E0A7BA600380162 /* SAMActivityListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMActivityListViewController.h; sourceTree = "<group>"; };
+		4307B49C1E0A7BA600380162 /* SAMActivityListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMActivityListViewController.m; sourceTree = "<group>"; };
+		4307B49D1E0A7BA600380162 /* SAMActivityListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SAMActivityListViewController.xib; sourceTree = "<group>"; };
+		4307B4A01E0A7BB900380162 /* SAMActivityDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMActivityDetailViewController.h; sourceTree = "<group>"; };
+		4307B4A11E0A7BB900380162 /* SAMActivityDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMActivityDetailViewController.m; sourceTree = "<group>"; };
+		4307B4A21E0A7BB900380162 /* SAMActivityDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SAMActivityDetailViewController.xib; sourceTree = "<group>"; };
+		4307B4A51E0A7BCA00380162 /* SAMReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMReportViewController.h; sourceTree = "<group>"; };
+		4307B4A61E0A7BCA00380162 /* SAMReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMReportViewController.m; sourceTree = "<group>"; };
+		4307B4A71E0A7BCA00380162 /* SAMReportViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SAMReportViewController.xib; sourceTree = "<group>"; };
 		43100C731CE1C00B006ECC7F /* HeritageCalculation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeritageCalculation.h; sourceTree = "<group>"; };
 		43100C741CE1C00B006ECC7F /* HeritageCalculation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeritageCalculation.m; sourceTree = "<group>"; };
 		431253911CF581C700A874B7 /* eng_BCALH_Page4.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = eng_BCALH_Page4.html; path = SI/eng_BCALH_Page4.html; sourceTree = "<group>"; };
@@ -1649,6 +1681,18 @@
 		432466531C9000EC001EE22F /* ModelDataReferral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelDataReferral.m; sourceTree = "<group>"; };
 		432921381C7FFC26000D1064 /* Model_SI_Master.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model_SI_Master.h; sourceTree = "<group>"; };
 		432921391C7FFC26000D1064 /* Model_SI_Master.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Model_SI_Master.m; sourceTree = "<group>"; };
+		432B26061E121B28000EDFB4 /* SAMTableViewAcitivtyListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMTableViewAcitivtyListCell.h; sourceTree = "<group>"; };
+		432B26071E121B28000EDFB4 /* SAMTableViewAcitivtyListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMTableViewAcitivtyListCell.m; sourceTree = "<group>"; };
+		432B26081E121B28000EDFB4 /* SAMTableViewAcitivtyListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SAMTableViewAcitivtyListCell.xib; sourceTree = "<group>"; };
+		432B260B1E122270000EDFB4 /* SAMTableViewActivityDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMTableViewActivityDetailCell.h; sourceTree = "<group>"; };
+		432B260C1E122270000EDFB4 /* SAMTableViewActivityDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMTableViewActivityDetailCell.m; sourceTree = "<group>"; };
+		432B260D1E122270000EDFB4 /* SAMTableViewActivityDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SAMTableViewActivityDetailCell.xib; sourceTree = "<group>"; };
+		432B26101E12264A000EDFB4 /* SAMMeetingScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMMeetingScheduleViewController.h; sourceTree = "<group>"; };
+		432B26111E12264A000EDFB4 /* SAMMeetingScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMMeetingScheduleViewController.m; sourceTree = "<group>"; };
+		432B26121E12264A000EDFB4 /* SAMMeetingScheduleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SAMMeetingScheduleViewController.xib; sourceTree = "<group>"; };
+		432B26151E12554A000EDFB4 /* TimeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeViewController.h; sourceTree = "<group>"; };
+		432B26161E12554A000EDFB4 /* TimeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeViewController.m; sourceTree = "<group>"; };
+		432B26171E12554A000EDFB4 /* TimeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimeViewController.xib; sourceTree = "<group>"; };
 		432BBE9C1DEC165700FF5ED3 /* eng_BCALULS_Page1.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = eng_BCALULS_Page1.html; path = SI/eng_BCALULS_Page1.html; sourceTree = "<group>"; };
 		432BBE9D1DEC165700FF5ED3 /* eng_BCALULS_Page2.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = eng_BCALULS_Page2.html; path = SI/eng_BCALULS_Page2.html; sourceTree = "<group>"; };
 		432BBE9E1DEC165700FF5ED3 /* eng_BCALULS_Page3.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = eng_BCALULS_Page3.html; path = SI/eng_BCALULS_Page3.html; sourceTree = "<group>"; };
@@ -1864,6 +1908,12 @@
 		43C166181C99448500001691 /* ModelKodepos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelKodepos.m; sourceTree = "<group>"; };
 		43C1661A1C99489000001691 /* KodePosInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KodePosInfo.h; sourceTree = "<group>"; };
 		43C1661B1C99489000001691 /* KodePosInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KodePosInfo.m; sourceTree = "<group>"; };
+		43C94BCE1E090B00009A30F3 /* SAMMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMMain.h; sourceTree = "<group>"; };
+		43C94BCF1E090B00009A30F3 /* SAMMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMMain.m; sourceTree = "<group>"; };
+		43C94BD01E090B00009A30F3 /* SAMMain.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SAMMain.xib; sourceTree = "<group>"; };
+		43C94BD51E091C0E009A30F3 /* SAMStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SAMStoryboard.storyboard; sourceTree = "<group>"; };
+		43C94BD71E091D56009A30F3 /* SAMDashboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMDashboardViewController.h; sourceTree = "<group>"; };
+		43C94BD81E091D56009A30F3 /* SAMDashboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMDashboardViewController.m; sourceTree = "<group>"; };
 		43C98DFB1D519D5900A3F911 /* SPAJ Calon Pemegang Polis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SPAJ Calon Pemegang Polis.h"; sourceTree = "<group>"; };
 		43C98DFC1D519D5900A3F911 /* SPAJ Calon Pemegang Polis.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SPAJ Calon Pemegang Polis.m"; sourceTree = "<group>"; };
 		43C98DFD1D519D5900A3F911 /* SPAJ Calon Pemegang Polis.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SPAJ Calon Pemegang Polis.xib"; sourceTree = "<group>"; };
@@ -4029,6 +4079,26 @@
 			name = tableViewCell;
 			sourceTree = "<group>";
 		};
+		432B25FF1E121A98000EDFB4 /* TableViewCellView */ = {
+			isa = PBXGroup;
+			children = (
+				432B26081E121B28000EDFB4 /* SAMTableViewAcitivtyListCell.xib */,
+				432B260D1E122270000EDFB4 /* SAMTableViewActivityDetailCell.xib */,
+			);
+			name = TableViewCellView;
+			sourceTree = "<group>";
+		};
+		432B26001E121AA9000EDFB4 /* TableViewCellController */ = {
+			isa = PBXGroup;
+			children = (
+				432B260B1E122270000EDFB4 /* SAMTableViewActivityDetailCell.h */,
+				432B260C1E122270000EDFB4 /* SAMTableViewActivityDetailCell.m */,
+				432B26061E121B28000EDFB4 /* SAMTableViewAcitivtyListCell.h */,
+				432B26071E121B28000EDFB4 /* SAMTableViewAcitivtyListCell.m */,
+			);
+			name = TableViewCellController;
+			sourceTree = "<group>";
+		};
 		432E8F661D13F2AE0030F0C4 /* Section 4 Analisa Kebutuhan Nasabah */ = {
 			isa = PBXGroup;
 			children = (
@@ -4324,6 +4394,52 @@
 				43BB38BA1CBCA4CC00A5F5C5 /* IlustrationSignatureViewController.m */,
 			);
 			name = "Ilustration Signature";
+			sourceTree = "<group>";
+		};
+		43C94BCD1E0908A9009A30F3 /* SAM */ = {
+			isa = PBXGroup;
+			children = (
+				43C94BD31E091A9C009A30F3 /* View */,
+				43C94BD41E091AA9009A30F3 /* Controller */,
+			);
+			name = SAM;
+			sourceTree = "<group>";
+		};
+		43C94BD31E091A9C009A30F3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				432B25FF1E121A98000EDFB4 /* TableViewCellView */,
+				4307B4981E0A7B9000380162 /* SAMActivityViewController.xib */,
+				4307B49D1E0A7BA600380162 /* SAMActivityListViewController.xib */,
+				4307B4A21E0A7BB900380162 /* SAMActivityDetailViewController.xib */,
+				4307B4A71E0A7BCA00380162 /* SAMReportViewController.xib */,
+				43C94BD01E090B00009A30F3 /* SAMMain.xib */,
+				43C94BD51E091C0E009A30F3 /* SAMStoryboard.storyboard */,
+				432B26121E12264A000EDFB4 /* SAMMeetingScheduleViewController.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		43C94BD41E091AA9009A30F3 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				432B26001E121AA9000EDFB4 /* TableViewCellController */,
+				43C94BCE1E090B00009A30F3 /* SAMMain.h */,
+				43C94BCF1E090B00009A30F3 /* SAMMain.m */,
+				432B26101E12264A000EDFB4 /* SAMMeetingScheduleViewController.h */,
+				432B26111E12264A000EDFB4 /* SAMMeetingScheduleViewController.m */,
+				43C94BD71E091D56009A30F3 /* SAMDashboardViewController.h */,
+				43C94BD81E091D56009A30F3 /* SAMDashboardViewController.m */,
+				4307B4961E0A7B9000380162 /* SAMActivityViewController.h */,
+				4307B4971E0A7B9000380162 /* SAMActivityViewController.m */,
+				4307B49B1E0A7BA600380162 /* SAMActivityListViewController.h */,
+				4307B49C1E0A7BA600380162 /* SAMActivityListViewController.m */,
+				4307B4A01E0A7BB900380162 /* SAMActivityDetailViewController.h */,
+				4307B4A11E0A7BB900380162 /* SAMActivityDetailViewController.m */,
+				4307B4A51E0A7BCA00380162 /* SAMReportViewController.h */,
+				4307B4A61E0A7BCA00380162 /* SAMReportViewController.m */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 		43C98E001D51A1E200A3F911 /* SPAJ Forms */ = {
@@ -5235,6 +5351,7 @@
 				6A5E1C441897459E00815C33 /* chilkat */,
 				6C0B08CD18D1979B00826FC9 /* underwriting */,
 				0F3268201D1A9260001A9021 /* SPAJ */,
+				43C94BCD1E0908A9009A30F3 /* SAM */,
 				6A3D70CC188A4B8B000B2097 /* XMLObjects */,
 				6A16C1A018893C0E00F7EFFA /* NDHTMLtoPDF */,
 				6A16C1811889384300F7EFFA /* FormObjects */,
@@ -5630,6 +5747,9 @@
 				43C1661B1C99489000001691 /* KodePosInfo.m */,
 				438DB5F61D49F52100B92FEF /* SIListingPopOver.h */,
 				438DB5F71D49F52100B92FEF /* SIListingPopOver.m */,
+				432B26151E12554A000EDFB4 /* TimeViewController.h */,
+				432B26161E12554A000EDFB4 /* TimeViewController.m */,
+				432B26171E12554A000EDFB4 /* TimeViewController.xib */,
 			);
 			name = PopOver;
 			sourceTree = "<group>";
@@ -6271,6 +6391,7 @@
 				17A299181C60A0DB00C2537A /* HelveticaLTStd-Comp.otf in Resources */,
 				17A299191C60A0DB00C2537A /* HelveticaLTStd-Cond.otf in Resources */,
 				43FA6C1D1C882D810098BA47 /* style.css in Resources */,
+				432B26191E12554A000EDFB4 /* TimeViewController.xib in Resources */,
 				17A2991A1C60A0DB00C2537A /* HelveticaLTStd-CondObl.otf in Resources */,
 				17A2991B1C60A0DB00C2537A /* HelveticaLTStd-ExtraComp.otf in Resources */,
 				17A2991C1C60A0DB00C2537A /* HelveticaLTStd-Light.otf in Resources */,
@@ -6296,6 +6417,7 @@
 				C4E9D1C51612C78400016053 /* ios-linen.png in Resources */,
 				431376C31D0E5B2D007D3BF1 /* AddSpouseViewController.xib in Resources */,
 				C4E9D1C61612C78400016053 /* magnifying-glass.png in Resources */,
+				43C94BD61E091C0E009A30F3 /* SAMStoryboard.storyboard in Resources */,
 				C4E9D1C71612C78400016053 /* magnifying-glass@2x.png in Resources */,
 				43BB5A551D3738EC0067D189 /* Pendidikan.html in Resources */,
 				C4EB49101615327E00C7FC8C /* button_hover.png in Resources */,
@@ -6328,6 +6450,7 @@
 				C4660EBD1625047800BA4AFE /* prospect_btnB.png in Resources */,
 				4376DF1E1CD196EC00816BB6 /* cancel.png in Resources */,
 				178765DB1C74C25D0036F31A /* Images.xcassets in Resources */,
+				43C94BD21E090B00009A30F3 /* SAMMain.xib in Resources */,
 				AA4EF7451C85A4260050CCD8 /* AppIcon-152.png in Resources */,
 				C4660EBE1625047800BA4AFE /* prospect_btnB2_144.png in Resources */,
 				AA4EF74C1C85A4260050CCD8 /* Reader-Button-H@2x.png in Resources */,
@@ -6353,6 +6476,7 @@
 				43C98E0A1D51D1F500A3F911 /* SPAJ Calon Tertanggung.xib in Resources */,
 				C4660EC91625047800BA4AFE /* SI_buttonB_144.png in Resources */,
 				C4660ECA1625047800BA4AFE /* SI_buttonB.png in Resources */,
+				4307B49A1E0A7B9000380162 /* SAMActivityViewController.xib in Resources */,
 				C4F83005162E503D00EF8FAA /* iconHLwithbackground.png in Resources */,
 				C4F83031162FCEE000EF8FAA /* HLassurance.png in Resources */,
 				C4F83035162FCEE000EF8FAA /* style.css in Resources */,
@@ -6422,6 +6546,7 @@
 				C4E5A47A168AAA89007848CE /* Profile64.png in Resources */,
 				C4E5A47B168AAA89007848CE /* Profile72.png in Resources */,
 				A1FCF07C1CA80B92000D85E1 /* Icon_Brochure.png in Resources */,
+				432B260F1E122270000EDFB4 /* SAMTableViewActivityDetailCell.xib in Resources */,
 				4376DF181CD1934400816BB6 /* undo.png in Resources */,
 				C4E5A47C168AAA89007848CE /* Profile96.png in Resources */,
 				C4E5A47D168AAA89007848CE /* Profile128.png in Resources */,
@@ -6542,6 +6667,7 @@
 				6A16C1A51889410700F7EFFA /* ProposalForm in Resources */,
 				6A0B175C188A36DE00931673 /* ApplicationAuthorization in Resources */,
 				6A0B175E188A36DE00931673 /* CA in Resources */,
+				4307B4A41E0A7BB900380162 /* SAMActivityDetailViewController.xib in Resources */,
 				43FA6C191C87CD7F0098BA47 /* eng_BCALH_Page1.html in Resources */,
 				AA4EF74D1C85A4260050CCD8 /* Reader-Button-H@3x.png in Resources */,
 				6A0B1760188A36DE00931673 /* FF in Resources */,
@@ -6558,7 +6684,9 @@
 				2994B41118E121AE00B0D4D2 /* CA_HeaderImage.png in Resources */,
 				AAFE1AAF1C7B05E1008D4B9C /* Login Page Bless_english_final_2-01.jpg in Resources */,
 				2994B41218E121AE00B0D4D2 /* Footer.png in Resources */,
+				432B260A1E121B28000EDFB4 /* SAMTableViewAcitivtyListCell.xib in Resources */,
 				2994B41318E121AE00B0D4D2 /* Header.jpg in Resources */,
+				432B26141E12264A000EDFB4 /* SAMMeetingScheduleViewController.xib in Resources */,
 				2994B41418E121AE00B0D4D2 /* P1.jpg in Resources */,
 				2994B41518E121AE00B0D4D2 /* P2-1-Header.jpg in Resources */,
 				1706BD4D1C7169A40038D1DB /* menu_datanasabah.png in Resources */,
@@ -6660,6 +6788,7 @@
 				AA4EF73F1C85A4260050CCD8 /* AppIcon-057.png in Resources */,
 				043FDB9A1A1AEEE6008EDC24 /* eAplicationv2.png in Resources */,
 				043FDB9B1A1AEEE6008EDC24 /* customer_fact_findv2.png in Resources */,
+				4307B4A91E0A7BCA00380162 /* SAMReportViewController.xib in Resources */,
 				043FDBA21A1AEF14008EDC24 /* transparent_boxv3.png in Resources */,
 				0F3268741D1BD140001A9021 /* Image.xcassets in Resources */,
 				A1442C541C819834009B14C9 /* Icon Brochure & save as-01-02.png in Resources */,
@@ -6676,6 +6805,7 @@
 				AA4EF7441C85A4260050CCD8 /* AppIcon-144.png in Resources */,
 				043FDBAB1A1AF226008EDC24 /* sales_illustration@2x_20141118.png in Resources */,
 				043FDBAC1A1AF226008EDC24 /* eAplication@2x_20141118.png in Resources */,
+				4307B49F1E0A7BA600380162 /* SAMActivityListViewController.xib in Resources */,
 				43870CBA1D362AB90035143C /* AnalisaKebutuhanPendidikanViewController.xib in Resources */,
 				4356EBE71DD5630100D6CAAE /* UnitLinkedPopOverViewController.xib in Resources */,
 				043FDBAD1A1AF226008EDC24 /* customer_fact_find@2x_20141118.png in Resources */,
@@ -6766,6 +6896,7 @@
 				EF059850161A92C4004A9095 /* DateViewController.m in Sources */,
 				EF059853161A92E3004A9095 /* JobListTbViewController.m in Sources */,
 				EF059856161A9373004A9095 /* PremiumViewController.m in Sources */,
+				432B26181E12554A000EDFB4 /* TimeViewController.m in Sources */,
 				EF059859161A9406004A9095 /* RiderPTypeTbViewController.m in Sources */,
 				EF05985C161A9428004A9095 /* RiderListTbViewController.m in Sources */,
 				C4E7B388161B119E00066CBF /* SIListing.m in Sources */,
@@ -7034,6 +7165,7 @@
 				C30A25AA17F3C8D500613A0F /* HealthQuestionnaire7b.m in Sources */,
 				C30A25AB17F3C8D500613A0F /* HealthQuestionnaire7c.m in Sources */,
 				C30A25AC17F3C8D500613A0F /* HealthQuestionnaire7d.m in Sources */,
+				43C94BD11E090B00009A30F3 /* SAMMain.m in Sources */,
 				C30A25AD17F3C8D500613A0F /* HealthQuestionnaire7e.m in Sources */,
 				C30A25AE17F3C8D500613A0F /* HealthQuestionnaire7f.m in Sources */,
 				C30A25AF17F3C8D500613A0F /* HealthQuestionnaire7g.m in Sources */,
@@ -7050,6 +7182,7 @@
 				C30A25B617F3C8D500613A0F /* HealthQuestionnaire8d.m in Sources */,
 				C30A25B717F3C8D500613A0F /* HealthQuestionnaire8e.m in Sources */,
 				433CD7871DD1BEDA004C9B27 /* SIUnitLinkedFundAllocationViewController.m in Sources */,
+				432B26131E12264A000EDFB4 /* SAMMeetingScheduleViewController.m in Sources */,
 				AAFFE17E1C7D475E001B91BF /* NSDate+ISO8601Parsing.m in Sources */,
 				C30A25B817F3C8D500613A0F /* HealthQuestionnaire9.m in Sources */,
 				C30A25B917F3C8D500613A0F /* HealthQuestionnaire10.m in Sources */,
@@ -7083,6 +7216,7 @@
 				C30A25EF17F3CB7100613A0F /* InsuredDetail.m in Sources */,
 				C30A25F017F3CB7100613A0F /* InsuredObject.m in Sources */,
 				C30A25F117F3CB7100613A0F /* MainAdditionalQuestInsureds.m in Sources */,
+				4307B4A31E0A7BB900380162 /* SAMActivityDetailViewController.m in Sources */,
 				C30A25F217F3CB7100613A0F /* MainAddPolicyVC.m in Sources */,
 				C30A25F317F3CB7100613A0F /* MainEditInsured.m in Sources */,
 				C30A25F417F3CB7100613A0F /* MainExistingPolicyListing.m in Sources */,
@@ -7094,6 +7228,7 @@
 				C30A25F817F3CB7100613A0F /* MasterMenuCFFWithData.m in Sources */,
 				43870CC31D362AE70035143C /* AnalisaKebutuhanInvestasiViewController.m in Sources */,
 				C30A25F917F3CB7100613A0F /* PolicyDetails.m in Sources */,
+				432B26091E121B28000EDFB4 /* SAMTableViewAcitivtyListCell.m in Sources */,
 				C30A25FA17F3CB7100613A0F /* ViewInsuredRecord.m in Sources */,
 				298C96F217FAE1AF007D696F /* PolicyOwnerData.m in Sources */,
 				298C96F517FAE214007D696F /* PolicyOwnerDataDetails.m in Sources */,
@@ -7132,12 +7267,14 @@
 				433CD78C1DD1BEF2004C9B27 /* SIUnitLinkedRiderViewController.m in Sources */,
 				43FD4A041C620F3E00227F8F /* ModelVIPClass.m in Sources */,
 				AA4EF6E01C8572F30050CCD8 /* ProductInformation.m in Sources */,
+				4307B49E1E0A7BA600380162 /* SAMActivityListViewController.m in Sources */,
 				0F3268571D1A93A4001A9021 /* Theme.m in Sources */,
 				DEE2B7C71C9FADCF00B7283A /* DBMigration.m in Sources */,
 				431F5FE41C6D93E800A9CA6C /* ProspectListingTableViewCell.m in Sources */,
 				4212708118459CBB000C2156 /* HealthQuestionsPO.m in Sources */,
 				0FFA185F1D1D1FB100C63A47 /* SPAJ Add Detail.m in Sources */,
 				4212708218459CBB000C2156 /* HealthQuestionsVC.m in Sources */,
+				432B260E1E122270000EDFB4 /* SAMTableViewActivityDetailCell.m in Sources */,
 				4212708818459FC0000C2156 /* eAppReport.m in Sources */,
 				4212708918459FC0000C2156 /* ReportCell.m in Sources */,
 				0FF845C41D23ACC2008CF861 /* SPAJ E Application List Cell.m in Sources */,
@@ -7212,6 +7349,7 @@
 				42B8B1411917339500E09A34 /* PRPage12.m in Sources */,
 				4373949A1C9BE5C2004522A2 /* NIPInfo.m in Sources */,
 				4380F9E21DC843EF00717FB4 /* AllAboutSPAJXML.m in Sources */,
+				4307B4991E0A7B9000380162 /* SAMActivityViewController.m in Sources */,
 				42B8B1421917339500E09A34 /* PRPage13.m in Sources */,
 				42B8B1431917339500E09A34 /* PRPage2.m in Sources */,
 				AA4EF76C1C85A4260050CCD8 /* ReaderThumbCache.m in Sources */,
@@ -7261,6 +7399,7 @@
 				433CD7911DD1BF13004C9B27 /* SIUnitLinkedSpecialOptionViewController.m in Sources */,
 				4239AEDE1946DAE200BD6F53 /* PDFPage.m in Sources */,
 				AAD5455F1C6443080029631D /* LoginDBManagement.m in Sources */,
+				43C94BD91E091D56009A30F3 /* SAMDashboardViewController.m in Sources */,
 				0F3268591D1A93A4001A9021 /* User.m in Sources */,
 				4239AEDF1946DAE200BD6F53 /* PDFStream.m in Sources */,
 				43B590971CA2702400DC53AC /* KeluargakuTableViewCell.m in Sources */,
@@ -7310,6 +7449,7 @@
 				C36D82341AF9E2CE0070D070 /* Country2.m in Sources */,
 				C39046DE1B8EBB0700DE1E5B /* CameraViewController.m in Sources */,
 				C35EC8601B983C5D00738933 /* PymtWebViewViewController.m in Sources */,
+				4307B4A81E0A7BCA00380162 /* SAMReportViewController.m in Sources */,
 				AA4EF7721C85A4260050CCD8 /* ReaderThumbView.m in Sources */,
 				0FFA187D1D2134AD00C63A47 /* Query SPAJ Header.m in Sources */,
 				FA49F2891B9EE4E500B20169 /* DBUpdater.m in Sources */,

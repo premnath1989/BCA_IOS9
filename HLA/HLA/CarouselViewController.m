@@ -30,6 +30,7 @@
 #import "ProductInformation.h"
 #import "ProductInformation.h"
 #import "SPAJ Main.h"
+#import "SAMMain.h"
 
 const int numberOfModule = 7;
 
@@ -102,6 +103,15 @@ const int numberOfModule = 7;
          _AgentName.text  = [results stringForColumn:@"AgentName"];
     }
     
+}
+
+
+#pragma mark SAM
+- (IBAction)goToSAM:(id)sender
+{
+    SAMMain* viewController = [[SAMMain alloc] initWithNibName:@"SAMMain" bundle:nil];
+    
+    [self presentViewController:viewController animated:true completion:nil];
 }
 
 
@@ -507,6 +517,7 @@ const int numberOfModule = 7;
     MainClient *mainClient = [cpStoryboard instantiateViewControllerWithIdentifier:@"mainClient"];
     mainClient.modalPresentationStyle = UIModalPresentationFullScreen;
     mainClient.IndexTab = appdlg.ProspectListingIndex;
+    [appdlg setIsFromSAM:0];
     [self presentViewController:mainClient animated:NO completion:Nil];
     appdlg = Nil;
     mainClient= Nil;

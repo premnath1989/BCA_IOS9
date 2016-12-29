@@ -7,7 +7,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="BPreplay_Regular.ttf">
+        <mutableArray key="BPreplay_Regular.otf">
             <string>BPreplay</string>
             <string>BPreplay</string>
             <string>BPreplay</string>

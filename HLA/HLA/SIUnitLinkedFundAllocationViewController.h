@@ -18,6 +18,9 @@
     IBOutlet UITextField* textFixedIncome;
     IBOutlet UITextField* textEquityIncome;
     IBOutlet UITextField* textTotalIncome;
+    
+    IBOutlet UILabel* labelFixedIncome;
+    IBOutlet UILabel* labelEquityIncome;
 }
 @property (nonatomic,weak)IBOutlet UIScrollView* scrollFundAllocation;
 

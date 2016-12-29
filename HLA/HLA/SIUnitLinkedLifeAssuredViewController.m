@@ -54,6 +54,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     modelSIPOData = [[ModelSIPOData alloc]init];
+    modelOccupation = [[ModelOccupation alloc]init];
     alert = [[Alert alloc]init];
     formatter = [[Formatter alloc]init];
     // Do any additional setup after loading the view from its nib.
@@ -143,6 +144,7 @@
         textLA.enabled = YES;
         buttonDOB.enabled = YES;
         segmentSex.enabled = YES;
+        segmentSmoker.enabled = YES;
         buttonOccupation.enabled = YES;
         buttonPOlist.enabled = NO;
         
@@ -155,6 +157,7 @@
         textLA.enabled = NO;
         buttonDOB.enabled = NO;
         segmentSex.enabled = NO;
+        segmentSmoker.enabled = NO;
         buttonOccupation.enabled = NO;
         buttonPOlist.enabled = YES;
         
@@ -263,8 +266,13 @@
     NSString *alertJenisKelamin = @"Jenis kelamin Tertanggung harus diisi.";
     NSString *alertPerokok = @"Status Merokok Tertanggung harus diisi.";
     NSString *alertPekerjaan = @"Pekerjaan Tertanggung harus diisi.";
+    NSString *alertLAAge=@"Usia tidak boleh kurang dari 180 hari atau lebih dari 70 tahun";
     
     UIAlertController *alertvalidation;
+
+    int laAge = [formatter calculateAge:buttonDOB.currentTitle];
+    int differenceDay = [formatter calculateDifferenceDay:buttonDOB.currentTitle];
+    
     if ([namaTertanggung length]<=0){
         alertvalidation = [alert alertInformation:@"Peringatan" stringMessage:alertNamaTertanggung];
         [self presentViewController:alertvalidation animated:YES completion:nil];
@@ -273,6 +281,12 @@
     if ([tanggalLahir isEqualToString:@"(null)"]||[tanggalLahir isEqualToString:@" - SELECT -"]||[tanggalLahir isEqualToString:@"- SELECT -"]||[tanggalLahir isEqualToString:@"--Please Select--"] ||[tanggalLahir length]<=0){
         alertvalidation = [alert alertInformation:@"Peringatan" stringMessage:alertTanggalLahir];
         [self presentViewController:alertvalidation animated:YES completion:nil];
+        return false;
+    }
+    if ((differenceDay<180)||(laAge>70)){
+        UIAlertController *alertEmptyImage = [alert alertInformation:@"Peringatan" stringMessage:alertLAAge];
+        [popoverViewer dismissPopoverAnimated:YES];
+        [self presentViewController:alertEmptyImage animated:YES completion:nil];
         return false;
     }
     if (segmentSex.selectedSegmentIndex == UISegmentedControlNoSegment){
@@ -325,6 +339,14 @@
         segmentSex.selectedSegmentIndex = 1;
         sex = @"FEMALE";
 
+    }
+    
+    if ([aaSmoker isEqualToString:@"Y"]) {
+        segmentSmoker.selectedSegmentIndex = 0;
+        smoker = @"Y";
+    } else  {
+        segmentSmoker.selectedSegmentIndex = 1;
+        smoker = @"N";
     }
     [popoverViewer dismissPopoverAnimated:YES];
 }

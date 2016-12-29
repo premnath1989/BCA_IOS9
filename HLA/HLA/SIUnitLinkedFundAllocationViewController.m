@@ -44,6 +44,8 @@
 -(void)loadDataFromList{
     NSDictionary* dictFundAllocationData=[[NSDictionary alloc]init];
     dictFundAllocationData = [delegate getULFundAllocationDictionary];
+    
+    NSDictionary* dictBasicPlanData = [[NSMutableDictionary alloc]initWithDictionary:[delegate getBasicPlanDictionary]];
     if ([dictFundAllocationData count]!=0){
         if ([[dictFundAllocationData valueForKey:@"USDFixedIncomeFund"] isEqualToString:@""]){
             [textFixedIncome setText:[dictFundAllocationData valueForKey:@"IDRFixedIncomeFund"]];
@@ -54,10 +56,25 @@
             [textEquityIncome setText:[dictFundAllocationData valueForKey:@"USDEquityIncomeFund"]];
         }
         
+        if ([[dictBasicPlanData valueForKey:@"PaymentCurrency"] isEqualToString:@"USD"]){
+            [labelFixedIncome setText:@"BCA Life USD Fixed Income Fund"];
+            [labelEquityIncome setText:@"BCA Life USD Equity Fund"];
+        }
+        else{
+            [labelFixedIncome setText:@"BCA Life IDR Fixed Income Fund"];
+            [labelEquityIncome setText:@"BCA Life IDR Equity Fund"];
+        }
         [self calculateTotalIncome];
     }
     else{
-        
+        if ([[dictBasicPlanData valueForKey:@"PaymentCurrency"] isEqualToString:@"USD"]){
+            [labelFixedIncome setText:@"BCA Life USD Fixed Income Fund"];
+            [labelEquityIncome setText:@"BCA Life USD Equity Fund"];
+        }
+        else{
+            [labelFixedIncome setText:@"BCA Life IDR Fixed Income Fund"];
+            [labelEquityIncome setText:@"BCA Life IDR Equity Fund"];
+        }
     }
 }
 

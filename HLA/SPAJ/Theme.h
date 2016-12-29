@@ -16,6 +16,8 @@
 
     // COLOR
 
+    extern UInt32 const THEME_COLOR_PRIMARY_SAM;
+
     extern UInt32 const THEME_COLOR_PRIMARY;
     extern UInt32 const THEME_COLOR_SECONDARY;
     extern UInt32 const THEME_COLOR_TERTIARY;

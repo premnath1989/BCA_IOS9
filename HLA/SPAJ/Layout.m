@@ -25,18 +25,26 @@
 
         - (void)awakeFromNib
         {
-            [self setupStyle];
+            [self setupStyleSPAJ];
         }
 
 
         // FUNCTION
 
-        - (void)setupStyle
+        - (void)setupStyleSPAJ
         {
             UserInterface *objectUserInterface = [[UserInterface alloc] init];
             
             [self.widthAnchor constraintEqualToConstant:NAVIGATION_CONTAINER_WIDTH].active = true;
             self.backgroundColor = [objectUserInterface generateUIColor:THEME_COLOR_PRIMARY floatOpacity:1.0];
+        }
+
+        - (void)setupStyleSAM
+        {
+            UserInterface *objectUserInterface = [[UserInterface alloc] init];
+            
+            [self.widthAnchor constraintEqualToConstant:NAVIGATION_CONTAINER_WIDTH].active = true;
+            self.backgroundColor = [objectUserInterface generateUIColor:THEME_COLOR_PRIMARY_SAM floatOpacity:1.0];
         }
 
     @end

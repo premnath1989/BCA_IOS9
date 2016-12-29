@@ -428,14 +428,16 @@
     NSArray* path_forDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
     NSString* documentsDirectory = [path_forDirectory objectAtIndex:0];
     if (pdfData) {
-        [pdfData writeToFile:[NSString stringWithFormat:@"%@/BCA Life Unit Linked_%@.pdf",documentsDirectory,[delegate getRunnigSINumber]] atomically:YES];
+        //[pdfData writeToFile:[NSString stringWithFormat:@"%@/BCA Life Unit Linked_%@.pdf",documentsDirectory,[delegate getRunnigSINumber]] atomically:YES];
+        [pdfData writeToFile:[NSString stringWithFormat:@"%@/BCA Life Proteksi & Investasiku_%@.pdf",documentsDirectory,[delegate getRunnigSINumber]] atomically:YES];
     }
     else
     {
         NSLog(@"PDF couldnot be created");
     }
     [webIlustration setHidden:YES];
-    [self loadPDF:[NSString stringWithFormat:@"%@/BCA Life Unit Linked_%@.pdf",documentsDirectory,[delegate getRunnigSINumber]]];
+    //[self loadPDF:[NSString stringWithFormat:@"%@/BCA Life Unit Linked_%@.pdf",documentsDirectory,[delegate getRunnigSINumber]]];
+    [self loadPDF:[NSString stringWithFormat:@"%@/BCA Life Proteksi & Investasiku_%@.pdf",documentsDirectory,[delegate getRunnigSINumber]]];
 }
 
 - (void)dismissReaderViewController:(ReaderViewController *)viewController {

@@ -61,7 +61,7 @@ main form label:after {
 }
 
 main form label.RadioButton {
-  marginL: 0px !important;
+  margin: 0px !important;
   padding: 5px;
   vertical-align: middle;
 }
@@ -181,9 +181,6 @@ main form label.Box, main form label.Separator {
 main form label.Separator:after, main form label.Description:after, main form label.Note:after {
   margin-right: 0px;
   content: '';
-}
-
-main form label.Suffix, main form span.Suffix {
   min-width: 11.2px;
   text-align: left;
   display: inline-block;
@@ -207,7 +204,7 @@ main form span.Note, main form label.Note {
   border: none;
 }
 
-main hr {
+main form hr {
   border-top: none;
   border-bottom: solid;
   border-width: 1px;
@@ -230,7 +227,7 @@ main hr {
   margin-left: -10px;
 }
 
-.Note ol li, .Note ul li {
+.Note li {
   font-size: 0.75em;
 }
 
@@ -240,15 +237,15 @@ table.Square, table.Space {
   margin-bottom: 5px;
 }
 
-table.Square tbody tr td table.BoxSquare, table.Square tbody tr td table.BoxRound, table.Space tbody tr td table.BoxSquare, table.Space tbody tr td table.BoxRound {
+table.BoxSquare, table.BoxRound {
   margin-bottom: 5px;
 }
 
-table.Square tbody tr td table.BoxSquare tbody tr td, table.Square tbody tr td table.BoxRound tbody tr td, table.Space tbody tr td table.BoxSquare tbody tr td, table.Space tbody tr td table.BoxRound tbody tr td {
+table.BoxSquare tr td, table.BoxRound tr td {
   padding: 0px !important;
 }
 
-table.Square tbody tr td.Child, table.Space tbody tr td.Child {
+table.BoxSquare tr td.Child, table.BoxRound tr td.Child {
   padding: 15px;
 }
 
@@ -302,7 +299,7 @@ table.Square tbody tr td:first-child {
 
 table.Space {
   width: 100%;
-  width-border-style: none;
+  border-style: none;
 }
 
 table.Space thead tr th {

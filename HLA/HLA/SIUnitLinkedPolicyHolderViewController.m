@@ -127,15 +127,21 @@
         if ([sex isEqualToString:@"MALE"]){
             [segmentSex setSelectedSegmentIndex:0];
         }
-        else{
+        else if ([sex isEqualToString:@"FEMALE"]){
             [segmentSex setSelectedSegmentIndex:1];
+        }
+        else{
+            [segmentSex setSelectedSegmentIndex:UISegmentedControlNoSegment];
         }
         
         if ([smoker isEqualToString:@"Y"]){
             [segmentSmoker setSelectedSegmentIndex:0];
         }
-        else{
+        else if ([smoker isEqualToString:@"N"]){
             [segmentSmoker setSelectedSegmentIndex:1];
+        }
+        else{
+            [segmentSmoker setSelectedSegmentIndex:UISegmentedControlNoSegment];
         }
         
         occupationDesc = [dictPOLAData valueForKey:@"PO_Occp"];
@@ -147,7 +153,8 @@
     else{
         [textIllustrationNumber setText:[delegate getRunnigSINumber]];
         productCode = @"BCALUL";
-        [buttonPlan setTitle:@"BCA Life Unit Linked" forState:UIControlStateNormal];
+        //[buttonPlan setTitle:@"BCA Life Unit Linked" forState:UIControlStateNormal];
+        [buttonPlan setTitle:@"BCA Life Proteksi & Investasiku" forState:UIControlStateNormal];
     }
 }
 
@@ -167,6 +174,7 @@
     {
         [buttonDOB setTitle:@"--Please Select--" forState:UIControlStateNormal];
         [segmentSex setSelectedSegmentIndex:UISegmentedControlNoSegment];
+        [segmentSmoker setSelectedSegmentIndex:UISegmentedControlNoSegment];
         [buttonOccupation setTitle:@"--Please Select--" forState:UIControlStateNormal];
         textPOAge.enabled = FALSE;
         textPOAge.text =@"";
@@ -174,6 +182,7 @@
         textPO.enabled = YES;
         buttonDOB.enabled = YES;
         segmentSex.enabled = YES;
+        segmentSmoker.enabled = YES;
         buttonOccupation.enabled = YES;
         buttonPOlist.enabled = NO;
 
@@ -185,6 +194,7 @@
     {
         [buttonDOB setTitle:@"--Please Select--" forState:UIControlStateNormal];
         [segmentSex setSelectedSegmentIndex:-1];
+        [segmentSmoker setSelectedSegmentIndex:-1];
         [buttonOccupation setTitle:@"--Please Select--" forState:UIControlStateNormal];
         textPOAge.enabled = FALSE;
         textPOAge.text =@"";
@@ -192,6 +202,7 @@
         textPO.enabled = NO;
         buttonDOB.enabled = NO;
         segmentSex.enabled = NO;
+        segmentSmoker.enabled = NO;
         buttonOccupation.enabled = NO;
         buttonPOlist.enabled = YES;
         
@@ -397,6 +408,8 @@
     NSString *alertPekerjaan = @"Pekerjaan Pemegang Polis harus diisi.";
     NSString *alertRelasi = @"Hubungan Dengan Tertannggung harus diisi";
     
+    int poAge = [textPOAge.text intValue];
+    
     UIAlertController *alertvalidation;
     if ([namaProduk isEqualToString:@"(null)"]||[namaProduk isEqualToString:@" - SELECT -"]||[namaProduk isEqualToString:@"- SELECT -"]||[namaProduk isEqualToString:@"--Please Select--"] ||[namaProduk length]<=0){
         alertvalidation = [alert alertInformation:@"Peringatan" stringMessage:alertNamaProduk];
@@ -411,6 +424,13 @@
     if ([tanggalLahir isEqualToString:@"(null)"]||[tanggalLahir isEqualToString:@" - SELECT -"]||[tanggalLahir isEqualToString:@"- SELECT -"]||[tanggalLahir isEqualToString:@"--Please Select--"] ||[tanggalLahir length]<=0){
         alertvalidation = [alert alertInformation:@"Peringatan" stringMessage:alertTanggalLahir];
         [self presentViewController:alertvalidation animated:YES completion:nil];
+        return false;
+    }
+    if ((poAge<21)||(poAge>70)){
+        NSString* stringAlertPOAge = @"Usia pemegang polis tidak boleh kurang dari 21 atau lebih dari 70 tahun";
+        UIAlertController *alertEmptyImage = [alert alertInformation:@"Peringatan" stringMessage:stringAlertPOAge];
+        [popoverViewer dismissPopoverAnimated:YES];
+        [self presentViewController:alertEmptyImage animated:YES completion:nil];
         return false;
     }
     if (segmentSex.selectedSegmentIndex == UISegmentedControlNoSegment){
@@ -482,6 +502,17 @@
         sex = @"FEMALE";
 
     }
+    
+    
+    if ([aaSmoker isEqualToString:@"Y"]) {
+        segmentSmoker.selectedSegmentIndex = 0;
+        smoker = @"Y";
+    } else  {
+        segmentSmoker.selectedSegmentIndex = 1;
+        smoker = @"N";
+    }
+    
+    
     [popoverViewer dismissPopoverAnimated:YES];
 }
 
@@ -520,7 +551,7 @@
 }
 
 -(void)Planlisting:(PlanList *)inController didSelectCode:(NSString *)aaCode andDesc:(NSString *)aaDesc{
-    if ([aaDesc isEqualToString:@"BCA Life Unit Linked"]){
+    if ([aaDesc isEqualToString:@"BCA Life Unit Linked"]||[aaDesc isEqualToString:@"BCA Life Proteksi & Investasiku"]){
         productCode = aaCode;
         [buttonPlan setTitle:aaDesc forState:UIControlStateNormal];
         //[buttonRelation setTitle:@"--Please Select--" forState:UIControlStateNormal];
