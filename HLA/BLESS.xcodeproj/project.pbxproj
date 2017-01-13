@@ -7583,6 +7583,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Developer: Erwin Lim (9838FHPX2V)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Erwin Lim (9838FHPX2V)";
+				DEVELOPMENT_TEAM = 87JN2XNQTS;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7623,8 +7624,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bcalife.bless;
 				PRODUCT_NAME = BLESS;
-				PROVISIONING_PROFILE = "5a9c3743-997b-4470-bf7c-e9ac5f57df00";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5a9c3743-997b-4470-bf7c-e9ac5f57df00";
+				PROVISIONING_PROFILE = "ed5cb610-3b74-4250-9ae5-97bac9fad453";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "ed5cb610-3b74-4250-9ae5-97bac9fad453";
+				PROVISIONING_PROFILE_SPECIFIER = "BLESS InHouse Distribution";
 				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = "armv7 armv6 i386";
 				WRAPPER_EXTENSION = app;
@@ -7680,8 +7682,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bcalife.bless;
 				PRODUCT_NAME = BLESS;
-				PROVISIONING_PROFILE = "5a9c3743-997b-4470-bf7c-e9ac5f57df00";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5a9c3743-997b-4470-bf7c-e9ac5f57df00";
+				PROVISIONING_PROFILE = "ed5cb610-3b74-4250-9ae5-97bac9fad453";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "ed5cb610-3b74-4250-9ae5-97bac9fad453";
 				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = "armv7 armv6 i386";
 				WRAPPER_EXTENSION = app;
@@ -7778,8 +7780,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bcalife.bless;
 				PRODUCT_NAME = BLESS;
-				PROVISIONING_PROFILE = "5a9c3743-997b-4470-bf7c-e9ac5f57df00";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5a9c3743-997b-4470-bf7c-e9ac5f57df00";
+				PROVISIONING_PROFILE = "ed5cb610-3b74-4250-9ae5-97bac9fad453";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "ed5cb610-3b74-4250-9ae5-97bac9fad453";
 				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = "armv7 armv6 i386";
 				WRAPPER_EXTENSION = app;

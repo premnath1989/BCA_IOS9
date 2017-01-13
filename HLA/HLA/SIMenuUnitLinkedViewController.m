@@ -234,13 +234,6 @@
     [myTableView reloadData];
 }
 
-#pragma mark Save SIMaster
-
--(void)saveSIMaster{
-    NSMutableDictionary *dictionaryMasterForInsert = [[NSMutableDictionary alloc]initWithObjectsAndKeys:[[self getPOLADictionary] valueForKey:@"SINO"],@"SINO",@"1.1",@"SI_Version",@"Not Created",@"ProposalStatus", nil];
-    
-    [modelSIMaster saveSIMaster:dictionaryMasterForInsert];
-}
 
 #pragma mark delegate Fund Allocation
 -(void)setInitialULFundAllocationDictionary{
@@ -316,6 +309,13 @@
     return dictParentPOLAData ;
 }
 
+#pragma mark Save SIMaster
+
+-(void)saveSIMaster{
+    NSMutableDictionary *dictionaryMasterForInsert = [[NSMutableDictionary alloc]initWithObjectsAndKeys:[[self getPOLADictionary] valueForKey:@"SINO"],@"SINO",@"1.1",@"SI_Version",@"Not Created",@"ProposalStatus", nil];
+    
+    [modelSIMaster saveSIMaster:dictionaryMasterForInsert];
+}
 
 #pragma mark - table view
 
