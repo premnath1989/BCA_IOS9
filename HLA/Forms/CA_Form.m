@@ -233,10 +233,12 @@
 #pragma mark - Create PDF
 - (void)drawLayer:(CALayer *)layer inContext:(CGContextRef)ctx {
     BOOL isPDF = !CGRectIsEmpty(UIGraphicsGetPDFContextBounds());
-    if (!layer.shouldRasterize && isPDF)
+    if (!layer.shouldRasterize && isPDF){
         [self.view drawRect:self.view.bounds]; // draw unrasterized
-    else
-        [super drawLayer:layer inContext:ctx];
+    }
+    else{
+        //[super drawLayer:layer inContext:ctx];
+    }
 }
 
 -(NSString *)createPDFfromUIView:(UIView*)aView saveToDocumentsWithFileName:(NSString*)aFilename

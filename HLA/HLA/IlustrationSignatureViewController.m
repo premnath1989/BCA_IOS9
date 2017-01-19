@@ -67,7 +67,7 @@
                 UIGraphicsEndImageContext();
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self ActionClearSign:nil];
-                    [labelSigner setText:@"Tanda Tangan Agen Asuransi"];
+                    [labelSigner setText:@"Tanda Tangan Tenaga Penjual"];
                     [labelAgreement setText:@"Saya Telah Menjelaskan Isi Ilustrasi Kepada Calon Pemegang Polis."];
                     NSString *datetime=[formatter getDateToday:@"dd-MM-yyyy hh:mm:ss"];
                     [labelName setText:[NSString stringWithFormat:@"%@/%@/%@",AgentName,AgentID,datetime]];
