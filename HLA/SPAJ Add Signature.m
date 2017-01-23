@@ -527,7 +527,7 @@
 
     // Draw the signature on pdfContext
     //pageRect = CGRectMake(343, 35,101 , 43);
-    pageRectPage1 = CGRectMake(617, 375,80, 37);
+    pageRectPage1 = CGRectMake(617, 480, 80, 37);
     CGImageRef pageImagePage1 = [imgSignature CGImage];
     CGContextDrawImage(pdfContextPage1, pageRectPage1, pageImagePage1);
 
@@ -560,8 +560,8 @@
     CGDataProviderRef providerPage1 = CGDataProviderCreateWithCFData(myPDFDataPage1);
     CGPDFDocumentRef pdfPage1 = CGPDFDocumentCreateWithProvider(providerPage1);
     CGDataProviderRelease(providerPage1);
-    //CGPDFPageRef pagePage1 = CGPDFDocumentGetPage(pdfPage1, 9);
-    CGPDFPageRef pagePage1 = CGPDFDocumentGetPage(pdfPage1, 10);
+    CGPDFPageRef pagePage1 = CGPDFDocumentGetPage(pdfPage1, 9);
+    //CGPDFPageRef pagePage1 = CGPDFDocumentGetPage(pdfPage1, 10);
     pageRectPage1 = CGPDFPageGetBoxRect(pagePage1, kCGPDFMediaBox);
     CGContextBeginPage(pdfContextPage1, &pageRectPage1);
     CGContextDrawPDFPage(pdfContextPage1, pagePage1);
@@ -569,10 +569,10 @@
     // Draw the signature on pdfContext
     //pageRect = CGRectMake(343, 35,101 , 43);
     if (index == 0){
-        pageRectPage1 = CGRectMake(67, 476,96 , 53);
+        pageRectPage1 = CGRectMake(67, 510,96 , 53);
     }
     else{
-        pageRectPage1 = CGRectMake(575, 476,96 , 53);
+        pageRectPage1 = CGRectMake(575, 510,96 , 53);
     }
     
     CGImageRef pageImagePage1 = [imgSignature CGImage];
@@ -607,7 +607,7 @@
     CGDataProviderRef provider = CGDataProviderCreateWithCFData(myPDFData);
     CGPDFDocumentRef pdf = CGPDFDocumentCreateWithProvider(provider);
     CGDataProviderRelease(provider);
-    CGPDFPageRef page = CGPDFDocumentGetPage(pdf, 9);
+    CGPDFPageRef page = CGPDFDocumentGetPage(pdf, 8);
     pageRect = CGPDFPageGetBoxRect(page, kCGPDFMediaBox);
     CGContextBeginPage(pdfContext, &pageRect);
     CGContextDrawPDFPage(pdfContext, page);
@@ -616,18 +616,18 @@
     //pageRect = CGRectMake(343, 35,101 , 43);
     switch (index) {
         case 0:
-            pageRect = CGRectMake(67, 413,96 , 53);
+            pageRect = CGRectMake(67, 536,96 , 53);
             [self addSignatureForPage1:imgSignature onPDFData:pdfData Index:index];
             [self addSignatureForPage9:imgSignature onPDFData:pdfData Index:index];
             break;
         case 1:
-            pageRect = CGRectMake(239, 413,96 , 53);
+            pageRect = CGRectMake(239, 536,96 , 53);
             break;
         case 2:
-            pageRect = CGRectMake(407, 413,96 , 53);
+            pageRect = CGRectMake(407, 536,96 , 53);
             break;
         case 3:
-            pageRect = CGRectMake(575, 413,96 , 53);
+            pageRect = CGRectMake(575, 536,96 , 53);
             [self addSignatureForPage9:imgSignature onPDFData:pdfData Index:index];
             break;
             

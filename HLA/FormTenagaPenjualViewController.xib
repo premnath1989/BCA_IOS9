@@ -8,17 +8,17 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="BPreplay.otf">
-            <string>BPreplay</string>
-        </array>
         <array key="BPreplayBold.otf">
             <string>BPreplay-Bold</string>
         </array>
-        <array key="BPreplayBoldItalics.otf">
+        <array key="BPreplayItalics.otf">
+            <string>BPreplay-Italic</string>
+        </array>
+        <array key="BPreplay_BoldItalics.ttf">
             <string>BPreplay-BoldItalic</string>
         </array>
-        <array key="BPreplay_Italics.otf">
-            <string>BPreplay-Italic</string>
+        <array key="BPreplay_Regular.otf">
+            <string>BPreplay</string>
         </array>
     </customFonts>
     <objects>
