@@ -110,10 +110,12 @@ NSString *ProceedStatus = @"";
         serverSegmented.hidden = TRUE;
         serverSegmented.selectedSegmentIndex = 1;
         delegate.serverURL = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"Prod_Webservices"];
+        delegate.maxSPAJSubmit = 2;
         viewWrapper.hidden = TRUE;
     }else{
         serverSegmented.selectedSegmentIndex = 0;
         delegate.serverURL = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"UAT_Webservices"];
+        delegate.maxSPAJSubmit = 1000000;
     }
 }
 

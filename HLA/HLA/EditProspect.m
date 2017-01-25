@@ -601,8 +601,8 @@ NSMutableArray *DelGroupArr;
     _outletBranchCode.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
     
     _outletBranchName.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    _outletBranchName.imageEdgeInsets = UIEdgeInsetsMake(0., _outletBranchName.frame.size.width - (24 + 10.0), 0., 0.);
-    _outletBranchName.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
+    //_outletBranchName.imageEdgeInsets = UIEdgeInsetsMake(0., _outletBranchName.frame.size.width - (24 + 10.0), 0., 0.);
+    _outletBranchName.titleEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 31.7);
     
     _outletProvinsi.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     _outletProvinsi.imageEdgeInsets = UIEdgeInsetsMake(0., _outletProvinsi.frame.size.width - (24 + 10.0), 0., 0.);
@@ -13169,7 +13169,7 @@ NSMutableArray *DelGroupArr;
     [_outletBranchCode setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",branchCode]forState:UIControlStateNormal];
     [_outletBranchName setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",branchName]forState:UIControlStateNormal];
     [_outletBranchCode setBackgroundColor:[UIColor clearColor]];
-    [_outletBranchName setBackgroundColor:[UIColor clearColor]];
+    //[_outletBranchName setBackgroundColor:[UIColor clearColor]];
     [txtKcu setText:branchStatus];
     [txtKanwil setText:branchKanwil];
     [_branchInfoPopover dismissPopoverAnimated:YES];

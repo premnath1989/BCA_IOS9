@@ -42,12 +42,17 @@
     
     [results close];
     [database close];
-    if (countSubmit>1){
-        return true;
+    if(![[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"] containsString:@"UAT"])
+    {
+        if (countSubmit>1){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
-    else{
-        return false;
-    }
+    
+    return false;
 }
 
 

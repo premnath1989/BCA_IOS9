@@ -38,6 +38,7 @@
 @property (nonatomic, retain) NSString* secondLAsex;
 @property (nonatomic, retain) NSString* planChoose;
 @property (nonatomic, assign) NSString* serverURL;
+@property (nonatomic, assign) int maxSPAJSubmit;
 @property (nonatomic, assign) BOOL isLoggedIn;
 @property (nonatomic, assign) BOOL ViewFromPendingBool;
 @property (nonatomic, assign) BOOL ViewFromSubmissionBool;

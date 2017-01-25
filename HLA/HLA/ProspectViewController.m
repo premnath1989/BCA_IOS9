@@ -614,8 +614,8 @@ bool RegDatehandling;
     outletBranchCode.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
     
     outletBranchName.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    outletBranchName.imageEdgeInsets = UIEdgeInsetsMake(0., outletBranchName.frame.size.width - (24 + 10.0), 0., 0.);
-    outletBranchName.titleEdgeInsets = UIEdgeInsetsMake(0, -14.0, 0, 31.7);
+    /*outletBranchName.imageEdgeInsets = UIEdgeInsetsMake(0., outletBranchName.frame.size.width - (24 + 10.0), 0., 0.);*/
+    outletBranchName.titleEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 31.7);
 
     _outletProvinsi.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     _outletProvinsi.imageEdgeInsets = UIEdgeInsetsMake(0., _outletProvinsi.frame.size.width - (24 + 10.0), 0., 0.);
@@ -8116,7 +8116,7 @@ bool RegDatehandling;
     [outletBranchCode setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",branchCode]forState:UIControlStateNormal];
     [outletBranchName setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",branchName]forState:UIControlStateNormal];
     [outletBranchCode setBackgroundColor:[UIColor clearColor]];
-    [outletBranchName setBackgroundColor:[UIColor clearColor    ]];
+    //[outletBranchName setBackgroundColor:[UIColor clearColor    ]];
     [txtKcu setText:branchStatus];
     [txtKanwil setText:branchKanwil];
     [_branchInfoPopover dismissPopoverAnimated:YES];
