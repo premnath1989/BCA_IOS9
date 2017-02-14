@@ -614,16 +614,18 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
                 [self parseXML:root objBuff:returnObj index:0];
                 int result = [loginDB ReferralSyncTable:returnObj];
                 
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    
-                    [spinnerLoading stopLoadingSpinner];
-                    UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Sync telah selesai" message:@"" delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
-                    [alert show];
-                });
                 
             }else{
                 
             }
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [spinnerLoading stopLoadingSpinner];
+                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Sync telah selesai" message:@"" delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
+                [alert show];
+            });
+
         }
         
     }
@@ -692,6 +694,8 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
     [self.datePopover setPopoverContentSize:CGSizeMake(300.0f, 255.0f)];
     [self.datePopover presentPopoverFromRect:[sender frame]  inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:NO];
 }
+
+
 
 -(void)datePick:(DateViewController *)inController strDate:(NSString *)aDate strAge:(NSString *)aAge intAge:(int)bAge intANB:(int)aANB
 {
