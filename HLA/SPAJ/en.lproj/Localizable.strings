@@ -17,7 +17,7 @@ FIELD_EAPPLICATIONNUMBER = "E application number";
 FIELD_CUSTOMERSIGNATURE = "Customer signature";
 FIELD_DATETIME = "Date & time";
 FIELD_SPAJEXPIRED = "SPAJ expired date";
-FIELD_SPAJLASTUPDATED = "Last update / vieweing date & time";
+FIELD_SPAJLASTUPDATED = "Last update / viewing date & time";
 FIELD_TIMEREMAINING = "Time remaining";
 
 
@@ -113,7 +113,7 @@ ALERT_MESSAGE_TABLEDELETE = "Are you sure to delete ";
 // NOTE
 
 NOTE_SPAJHEADER = "Perhatian";
-NOTE_SPAJDETAIL = "Perngiriman online dapat dilakukan setiap hari kerj jam 07:00 - 19:00 WIB\nPengajuan yang diterima oleh New Business BCA Life setelah jam 14:00 akan diproses pada hari kerja berikutnya\nMaksimum 2 kasus per pengiriman";
+NOTE_SPAJDETAIL = "Pengiriman online dapat dilakukan setiap hari kerja jam 07:00 - 19:00 WIB\nPengajuan yang diterima oleh New Business BCA Life setelah jam 14:00 akan diproses pada hari kerja berikutnya\nMaksimum 2 kasus per pengiriman";
 NOTE_GUIDEMENU = "Please complete the following items before submission";
 
 
