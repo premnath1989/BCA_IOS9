@@ -36,6 +36,7 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
 #import "ModelSPAJTransaction.h"
 #import "ModelSPAJAnswers.h"
 #import "AllAboutPDFFunctions.h"
+#import "Model_SI_Premium.h"
 
 
 // DECLARATION
@@ -62,6 +63,7 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
     ModelSIPOData* modelSIPOData;
     ModelSPAJAnswers* modelSPAJAnswers;
     Model_SI_Master* modelSIMaster;
+    Model_SI_Premium* modelSIPremi;
     NDHTMLtoPDF *PDFCreator;
     ModelSPAJSignature* modelSPAJSignature;
     ModelSPAJHtml *modelSPAJHtml;
@@ -104,6 +106,7 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
     NSMutableDictionary* dictAgentProfile;
     NSDictionary *dictionaryPOData;
     NSDictionary *dictionarySIMaster;
+    NSDictionary *dictionarySIPremi;
     
     NSMutableArray * arrayDBAgentID;
     NSMutableArray * arrayHTMLAgentID;
@@ -186,6 +189,7 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
         modelSPAJSignature = [[ModelSPAJSignature alloc]init];
         modelSIPOData = [[ModelSIPOData alloc]init];
         modelSIMaster = [[Model_SI_Master alloc]init];
+        modelSIPremi = [[Model_SI_Premium alloc] init];
         modelSPAJTransaction = [[ModelSPAJTransaction alloc]init];
         allAboutPDFGeneration = [[AllAboutPDFGeneration alloc]init];
         allAboutPDFFunctions = [[AllAboutPDFFunctions alloc]init];
@@ -223,6 +227,7 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
         boolSPAJPDF = false;
         dictionaryPOData = [[NSDictionary alloc]initWithDictionary:[modelSIPOData getPO_DataFor:[dictTransaction valueForKey:@"SPAJSINO"]]];
         dictionarySIMaster = [[NSDictionary alloc]initWithDictionary:[modelSIMaster getIlustrationDataForSI:[dictTransaction valueForKey:@"SPAJSINO"]]];
+        dictionarySIPremi = [[NSDictionary alloc] initWithDictionary:[modelSIPremi getPremium_For:[dictTransaction valueForKey:@"SPAJSINO"]]];
         
         spajFilesViewController = [[SPAJFilesViewController alloc]initWithNibName:@"SPAJFilesViewController" bundle:nil];
         spajPDFWebView = [[SPAJPDFWebViewController alloc]initWithNibName:@"SPAJPDFWebViewController" bundle:nil];
@@ -804,6 +809,15 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
         return dictReferralData;
     }
 
+    -(NSDictionary *)getDictionaryForPremiData:(NSString *)stringDBColumnName HTMLID:(NSString *)stringHTMLID{
+        NSMutableDictionary* dictPremiData=[[NSMutableDictionary alloc]init];
+        [dictPremiData setObject:stringHTMLID forKey:@"elementID"];
+        [dictPremiData setObject:[dictionarySIPremi valueForKey:stringDBColumnName]?:@"" forKey:@"Value"];
+        [dictPremiData setObject:@"1" forKey:@"CustomerID"];
+        [dictPremiData setObject:@"1" forKey:@"SPAJID"];
+        return dictPremiData;
+    }
+
     -(NSDictionary *)getDictionaryForSIMaster:(NSString *)stringDBColumnName HTMLID:(NSString *)stringHTMLID{
         NSMutableDictionary* dictSIMaster=[[NSMutableDictionary alloc]init];
         [dictSIMaster setObject:stringHTMLID forKey:@"elementID"];
@@ -928,6 +942,33 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
                     }
                     
                     for (int i=0; i<[arrayHTMLPOData count];i++){
+                        //Test
+                        if(i == 1) { //Checking if we are getting the ProductCode instead of ProductName
+                            if([[[self getDictionaryForPOData:[arrayDBPOData objectAtIndex:i] HTMLID:[arrayHTMLPOData objectAtIndex:i]] valueForKey:@"Value"] isEqual: @"BCALH"] || [[[self getDictionaryForPOData:[arrayDBPOData objectAtIndex:i] HTMLID:[arrayHTMLPOData objectAtIndex:i]] valueForKey:@"Value"] isEqual: @"BCALHST"]) {
+                                //Only do code below if product code is BCALH or BCALHST, we're replacing them with new Product Code based on payment frequency and isInternalStaff
+                                int id;
+                                
+                                NSDictionary *poDict = [self getDictionaryForPOData:@"IsInternalStaff" HTMLID:[arrayHTMLPOData objectAtIndex:i]];
+                                NSDictionary *premiDict = [self getDictionaryForPremiData:@"Payment_Frequency" HTMLID:@""];
+                                
+                                if([[premiDict valueForKey:@"Value"] isEqual: @"Bulanan"]) {
+                                    id = 0;
+                                } else {
+                                    id = 1;
+                                }
+                                
+                                if([[poDict valueForKey:@"Value"] isEqual: @"1"]) {
+                                    id += 2;
+                                }
+                                
+                                NSString *idString = [NSString stringWithFormat:@"BHP%d", id];
+                                
+                                NSDictionary *testDict = [self getDictionaryForPOData:[arrayDBPOData objectAtIndex:i] HTMLID:[arrayHTMLPOData objectAtIndex:i]];
+                                [testDict setValue: idString forKey:@"Value"];
+                                [modifieArray addObject: testDict];
+                                continue;
+                            }
+                        }
                         [modifieArray addObject:[self getDictionaryForPOData:[arrayDBPOData objectAtIndex:i] HTMLID:[arrayHTMLPOData objectAtIndex:i]]];
                     }
                     
@@ -991,6 +1032,34 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
                 }
                 
                 for (int i=0; i<[arrayHTMLPOData count];i++){
+                    if(i == 1) { //Checking if we are getting the ProductCode instead of ProductName
+                        if([[[self getDictionaryForPOData:[arrayDBPOData objectAtIndex:i] HTMLID:[arrayHTMLPOData objectAtIndex:i]] valueForKey:@"Value"] isEqual: @"BCALH"] ||
+                           [[[self getDictionaryForPOData:[arrayDBPOData objectAtIndex:i] HTMLID:[arrayHTMLPOData objectAtIndex:i]] valueForKey:@"Value"] isEqual: @"BCALHST"]) {
+                            //Only do code below if product code is BCALH or BCALHST, we're replacing them with new Product Code based on payment frequency and isInternalStaff
+                            int id;
+                            
+                            NSDictionary *poDict = [self getDictionaryForPOData:@"IsInternalStaff" HTMLID:[arrayHTMLPOData objectAtIndex:i]];
+                            NSDictionary *premiDict = [self getDictionaryForPremiData:@"Payment_Frequency" HTMLID:@""];
+                            
+                            if([[premiDict valueForKey:@"Value"] isEqual: @"Bulanan"]) {
+                                id = 0;
+                            } else {
+                                id = 1;
+                            }
+                            
+                            if([[poDict valueForKey:@"Value"] isEqual: @"1"]) {
+                                id += 2;
+                            }
+                            
+                            NSString *idString = [NSString stringWithFormat:@"BHP%d", id];
+                            
+                            NSDictionary *testDict = [self getDictionaryForPOData:[arrayDBPOData objectAtIndex:i] HTMLID:[arrayHTMLPOData objectAtIndex:i]];
+                            [testDict setValue: idString forKey:@"Value"];
+                            [modifieArray addObject: testDict];
+                            continue;
+                        }
+                    }
+
                     [modifieArray addObject:[self getDictionaryForPOData:[arrayDBPOData objectAtIndex:i] HTMLID:[arrayHTMLPOData objectAtIndex:i]]];
                 }
                 
@@ -1060,5 +1129,5 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
         // Dispose of any resources that can be recreated.
     }
 
-    
+
 @end
