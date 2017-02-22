@@ -61,6 +61,12 @@ typedef enum
 	kBRListDirectoryRequest
 } BRRequestTypes;
 
+typedef enum BRTransferMode
+{
+    kBRHTTPMode = 800,
+    kBRFTPMode = 801
+} BRTransferMode;
+
 
 typedef enum 
 {

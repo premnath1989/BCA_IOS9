@@ -25,7 +25,7 @@
 }
 
 - (void) listDirectory;
-- (void) downloadFile:(NSString *)fileNameTemp;
+- (void) downloadFile:(NSString *)fileNameTemp FTPPath:(NSString *)FTPPath;
 - (void) cancelAction;
 - (void) uploadFile:(NSString *)filePath destinationFolder:(NSString *)destinationFolder
            fileName:(NSString *)fileNameUpload;

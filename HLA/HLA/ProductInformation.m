@@ -214,7 +214,7 @@
             progressBar.modalPresentationStyle = UIModalPresentationFormSheet;
             progressBar.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
             progressBar.preferredContentSize = CGSizeMake(600, 200);
-            progressBar.ftpFunction = @"download";
+            progressBar.TransferFunction = @"download";
             [self presentViewController:progressBar animated:YES completion:nil];
             
         }else{
@@ -229,7 +229,7 @@
             progressBar.modalPresentationStyle = UIModalPresentationFormSheet;
             progressBar.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
             progressBar.preferredContentSize = CGSizeMake(600, 200);
-            progressBar.ftpFunction = @"download";
+            progressBar.TransferFunction = @"download";
             [self presentViewController:progressBar animated:YES completion:nil];
         }else{
             [self seeVideo:[NSString stringWithFormat: @"%@.%@",fileName.text, videoExt]];
