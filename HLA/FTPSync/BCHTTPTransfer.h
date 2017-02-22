@@ -12,12 +12,11 @@
 @interface BCHTTPTransfer : NSObject<NSURLConnectionDataDelegate>{
     NSMutableData *receivedData;
     float expectedBytes;
-    NSURLConnection * connection;
 }
 
+@property BOOL cancelDoesNotCallDelegate;
 @property (nonatomic, assign) id<ProductInfoItemsDelegate>  ftpDelegate;
 @property (nonatomic,retain)NSString *localFilePath;
-@property (nonatomic,retain)NSString *cancelDoesNotCallDelegate;
 
 -(void)getListDirectoryHTTP;
 -(void)downloadWithNsurlconnection:(NSString *)currentURL expectedFileSize:(float)expectedFileSize;

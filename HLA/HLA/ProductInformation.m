@@ -91,7 +91,6 @@
             NSLog(@"Create directory error: %@", error);
         }
     }
-    
 }
 
 - (void)directoryFileListing{
