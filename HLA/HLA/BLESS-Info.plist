@@ -96,5 +96,7 @@
 	<string>11</string>
 	<key>dbVersion</key>
 	<string>24</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Take the photo</string>
 </dict>
 </plist>
