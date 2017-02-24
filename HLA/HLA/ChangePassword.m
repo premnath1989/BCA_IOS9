@@ -505,8 +505,8 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
                         });
                     });
                 });
-                
                 [self getHTMLDataTable];
+                [self getSPAJHTMLDataTable];
             }else if([rateResponse.strStatus caseInsensitiveCompare:@"False"] == NSOrderedSame){
                 [spinnerLoading stopLoadingSpinner];
                 UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Proses Login anda gagal, periksa username dan password anda" message:@"" delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
@@ -610,6 +610,32 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
         [self parseXML:DataSetMenuElement objBuff:obj index:index];
     }
 }
+
+-(void)getSPAJHTMLDataTable{
+    CFFAPIController* cffAPIController;
+    cffAPIController = [[CFFAPIController alloc]init];
+    
+    NSArray* arrayJSONKey = [[NSArray alloc]initWithObjects:@"SPAJId",@"FileName",@"Status",@"SPAJSection",@"FolderName",@"Id",@"FileNameIndo", nil];
+    //NSArray* arrayJSONKey = [[NSArray alloc]initWithObjects:@"SPAJId",@"FileName",@"Status",@"SPAJSection",@"FolderName",@"Id", nil];
+    NSArray* tableColumn= [[NSArray alloc]initWithObjects:@"SPAJID",@"SPAJHtmlName",@"SPAJHtmlStatus",@"SPAJHtmlSection",@"SPAJServerID",@"SPAJHtmlTranslateName", nil];
+    //NSArray* tableColumn= [[NSArray alloc]initWithObjects:@"SPAJID",@"SPAJHtmlName",@"SPAJHtmlStatus",@"SPAJHtmlSection",@"SPAJServerID", nil];
+    NSDictionary *dictCFFTable = [[NSDictionary alloc]initWithObjectsAndKeys:@"SPAJHtml",@"tableName",tableColumn,@"columnName", nil];
+    
+    NSMutableDictionary* dictDuplicateChecker = [[NSMutableDictionary alloc]init];
+    [dictDuplicateChecker setObject:@"SPAJHtmlID" forKey:@"DuplicateCheckerColumnName"];
+    [dictDuplicateChecker setObject:@"SPAJHtml" forKey:@"DuplicateCheckerTableName"];
+    [dictDuplicateChecker setObject:@"SPAJID" forKey:@"DuplicateCheckerWhere1"];
+    [dictDuplicateChecker setObject:@"SPAJHtmlName" forKey:@"DuplicateCheckerWhere2"];
+    [dictDuplicateChecker setObject:@"SPAJHtmlStatus" forKey:@"DuplicateCheckerWhere3"];
+    [dictDuplicateChecker setObject:@"SPAJHtmlSection" forKey:@"DuplicateCheckerWhere4"];
+    [dictDuplicateChecker setObject:@"SPAJServerID" forKey:@"DuplicateCheckerWhere5"];
+    [dictDuplicateChecker setObject:@"SPAJHtmlTranslateName" forKey:@"DuplicateCheckerWhere6"];
+    
+    NSString* stringURL = [NSString stringWithFormat:@"%@/SPAJHTMLForm.svc/GetAllData",[(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL]];
+    [cffAPIController apiCallHtmlTable:stringURL JSONKey:arrayJSONKey TableDictionary:dictCFFTable DictionaryDuplicateChecker:dictDuplicateChecker WebServiceModule:@"SPAJ"];
+    //[cffAPIController apiCallHtmlTable:@"http://mpos-sino-uat.cloudapp.net/SPAJHTMLForm.svc/GetAllData" JSONKey:arrayJSONKey TableDictionary:dictCFFTable DictionaryDuplicateChecker:dictDuplicateChecker WebServiceModule:@"SPAJ"];
+}
+
 
 
 - (BOOL) isPasswordLegal:(NSString*) password

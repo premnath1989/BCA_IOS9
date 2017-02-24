@@ -527,7 +527,7 @@
 
     // Draw the signature on pdfContext
     //pageRect = CGRectMake(343, 35,101 , 43);
-    pageRectPage1 = CGRectMake(617, 480, 80, 37);
+    pageRectPage1 = CGRectMake(617, 490, 80, 37);
     CGImageRef pageImagePage1 = [imgSignature CGImage];
     CGContextDrawImage(pdfContextPage1, pageRectPage1, pageImagePage1);
 
@@ -616,18 +616,18 @@
     //pageRect = CGRectMake(343, 35,101 , 43);
     switch (index) {
         case 0:
-            pageRect = CGRectMake(67, 536,96 , 53);
+            pageRect = CGRectMake(67, 651,96 , 53);
             [self addSignatureForPage1:imgSignature onPDFData:pdfData Index:index];
             [self addSignatureForPage9:imgSignature onPDFData:pdfData Index:index];
             break;
         case 1:
-            pageRect = CGRectMake(239, 536,96 , 53);
+            pageRect = CGRectMake(239, 651,96 , 53);
             break;
         case 2:
-            pageRect = CGRectMake(407, 536,96 , 53);
+            pageRect = CGRectMake(407, 651,96 , 53);
             break;
         case 3:
-            pageRect = CGRectMake(575, 536,96 , 53);
+            pageRect = CGRectMake(575, 651,96 , 53);
             [self addSignatureForPage9:imgSignature onPDFData:pdfData Index:index];
             break;
             

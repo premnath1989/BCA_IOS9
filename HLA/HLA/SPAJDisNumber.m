@@ -259,7 +259,7 @@
                     progressBar.progressDelegate = self;
                     progressBar.ftpfolderdestination = @"60000000009";
                     progressBar.ftpfiletoUpload = defaultDBPath;
-                    progressBar.ftpFunction = @"upload";
+                    progressBar.TransferFunction = @"upload";
                     progressBar.modalPresentationStyle = UIModalPresentationFormSheet;
                     progressBar.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
                     progressBar.preferredContentSize = CGSizeMake(600, 200);

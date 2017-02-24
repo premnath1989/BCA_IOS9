@@ -13,8 +13,12 @@
 #import "LoginDBManagement.h"
 #import "SpinnerUtilities.h"
 #import "SSZipArchive.h"
+#import "ProgressBar.h"
+#import "SSKeychain.h"
 
-@interface SettingUserProfile : UIViewController <DateViewControllerDelegate, UITextFieldDelegate, NSXMLParserDelegate, AgentWSSoapBindingResponseDelegate>{
+
+@interface SettingUserProfile : UIViewController <DateViewControllerDelegate, UITextFieldDelegate, NSXMLParserDelegate, AgentWSSoapBindingResponseDelegate, SSZipArchiveDelegate, ProgressBarDelegate>{
+    ProgressBar *progressBar;
     NSString *databasePath;
     sqlite3 *contactDB;
     UITextField *activeField;
@@ -23,6 +27,8 @@
     NSMutableDictionary *agentDetails;
     LoginDBManagement *loginDB;
     SpinnerUtilities *spinnerLoading;
+    NSString *backupFolder;
+    unsigned long long fileSize;
 }
 
 @property (nonatomic,strong) id idRequest;
