@@ -765,19 +765,19 @@ NSString* const stateIMGGeneration = @"IMG";
         CGContextDrawPDFPage(pdfContext, page);
         
         // Draw the signature on pdfContext
-        pageRect = CGRectMake(67, 651,96 , 53);
+        pageRect = CGRectMake(67, 601,96 , 53);
         CGImageRef pageImage1 = [imgSignature1 CGImage];
         CGContextDrawImage(pdfContext, pageRect, pageImage1);
         
-        pageRect = CGRectMake(239, 651,96 , 53);
+        pageRect = CGRectMake(239, 601,96 , 53);
         CGImageRef pageImage2 = [imgSignature2 CGImage];
         CGContextDrawImage(pdfContext, pageRect, pageImage2);
         
-        pageRect = CGRectMake(407, 651,96 , 53);
+        pageRect = CGRectMake(407, 601,96 , 53);
         CGImageRef pageImage3 = [imgSignature3 CGImage];
         CGContextDrawImage(pdfContext, pageRect, pageImage3);
         
-        pageRect = CGRectMake(575, 651,96 , 53);
+        pageRect = CGRectMake(575, 601,96 , 53);
         CGImageRef pageImage4 = [imgSignature4 CGImage];
         CGContextDrawImage(pdfContext, pageRect, pageImage4);
         
@@ -1447,7 +1447,7 @@ NSString* const stateIMGGeneration = @"IMG";
                                                                Section:@"KS_IN"];
                 }
                 else if ([allAboutPDFGeneration doesString:stringName containCharacter:@"foreigner"]){
-                    countElement = [modelSPAJAnswers getCountElementID:@"Foreigner" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"TR"];
+                    countElement = [modelSPAJAnswers getCountElementIDForeigner:@"Foreigner" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"TR"];
                 }
                 else{
                     countElement = [modelSPAJAnswers getCountElementID:stringName SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"KS_IN"];
@@ -1470,7 +1470,7 @@ NSString* const stateIMGGeneration = @"IMG";
                     countElement = [modelSPAJAnswers getCountElementID:@"mining" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"KS_PH"];
                 }
                 else if ([allAboutPDFGeneration doesString:stringName containCharacter:@"foreigner"]){
-                    countElement = [modelSPAJAnswers getCountElementID:@"Foreigner" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"PO"];
+                    countElement = [modelSPAJAnswers getCountElementIDForeigner:@"Foreigner" SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"PO"];
                 }
                 else{
                     countElement = [modelSPAJAnswers getCountElementID:stringName SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] integerValue] Section:@"KS_PH"];
