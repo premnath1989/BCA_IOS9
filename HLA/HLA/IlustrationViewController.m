@@ -1234,7 +1234,7 @@
 
         int discount = [[_dictionaryForBasicPlan valueForKey:@"Discount"] intValue];
         NSString *javaScriptP1H14;
-        NSNumber *myNumber = [formatter convertNumberFromString:[_dictionaryForBasicPlan valueForKey:@"Sum_Assured"]];
+        NSString *myNumber = [formatter stringToCurrencyDecimalFormatted:[_dictionaryForBasicPlan valueForKey:@"Sum_Assured"]];
         if (discount>0){
         javaScriptP1H14=[NSString stringWithFormat:@"document.getElementById('SIDiscount').innerHTML =\"(%@)\";", [_dictionaryForBasicPlan valueForKey:@"Discount"]];
         }
@@ -1243,7 +1243,7 @@
         }
     
         NSString *javaScriptP1H17=[NSString stringWithFormat:@"document.getElementById('TotalPremi').innerHTML =\"%@\";", [NSString stringWithFormat:@"%@",[formatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:totalDibayar]]]];
-        NSString *javaScriptP1H1=[NSString stringWithFormat:@"document.getElementById('SumAssured').innerHTML =\"%@\";", [formatter numberToCurrencyDecimalFormatted:myNumber]];
+        NSString *javaScriptP1H1=[NSString stringWithFormat:@"document.getElementById('SumAssured').innerHTML =\"%@\";", myNumber];
         NSString *javaScriptP1H4=[NSString stringWithFormat:@"document.getElementById('Loading').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"LA_Name"]];
         NSString *javaScriptP1H6=[NSString stringWithFormat:@"document.getElementById('ExtraPremi').innerHTML =\"%@\";", [NSString stringWithFormat:@"%@",[formatter numberToCurrencyDecimalFormatted:[NSNumber numberWithDouble:extraPremi]]]];
         NSString *javaScriptP1H8=[NSString stringWithFormat:@"document.getElementById('ExtraOccupation').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"LA_Name"]];

@@ -1516,17 +1516,7 @@ NSString* const stateIMGGeneration = @"IMG";
                                 NSDictionary *poDict = [self getDictionaryForPOData:@"IsInternalStaff" HTMLID:[arrayHTMLPOData objectAtIndex:i]];
                                 NSDictionary *premiDict = [self getDictionaryForPremiData:@"Payment_Frequency" HTMLID:@""];
                                 
-                                if([[premiDict valueForKey:@"Value"] isEqual: @"Bulanan"]) {
-                                    id = 0;
-                                } else {
-                                    id = 1;
-                                }
-                                
-                                if([[poDict valueForKey:@"Value"] isEqual: @"1"]) {
-                                    id += 2;
-                                }
-                                
-                                NSString *idString = [NSString stringWithFormat:@"BHP%d", id];
+                                NSString *idString = [self generateBCALHProductCodeWithPO: poDict andPremi: premiDict];
                                 
                                 NSDictionary *testDict = [self getDictionaryForPOData:[arrayDBPOData objectAtIndex:i] HTMLID:[arrayHTMLPOData objectAtIndex:i]];
                                 [testDict setValue: idString forKey:@"Value"];
@@ -1603,23 +1593,10 @@ NSString* const stateIMGGeneration = @"IMG";
                 if(i == 1) { //Checking if we are getting the ProductCode instead of ProductName
                     if([[[self getDictionaryForPOData:[arrayDBPOData objectAtIndex:i] HTMLID:[arrayHTMLPOData objectAtIndex:i]] valueForKey:@"Value"] isEqual: @"BCALH"] ||
                        [[[self getDictionaryForPOData:[arrayDBPOData objectAtIndex:i] HTMLID:[arrayHTMLPOData objectAtIndex:i]] valueForKey:@"Value"] isEqual: @"BCALHST"]) {
-                        //Only do code below if product code is BCALH or BCALHST, we're replacing them with new Product Code based on payment frequency and isInternalStaff
-                        int id;
-                        
                         NSDictionary *poDict = [self getDictionaryForPOData:@"IsInternalStaff" HTMLID:[arrayHTMLPOData objectAtIndex:i]];
                         NSDictionary *premiDict = [self getDictionaryForPremiData:@"Payment_Frequency" HTMLID:@""];
                         
-                        if([[premiDict valueForKey:@"Value"] isEqual: @"Bulanan"]) {
-                            id = 0;
-                        } else {
-                            id = 1;
-                        }
-                        
-                        if([[poDict valueForKey:@"Value"] isEqual: @"1"]) {
-                            id += 2;
-                        }
-                        
-                        NSString *idString = [NSString stringWithFormat:@"BHP%d", id];
+                        NSString *idString = [self generateBCALHProductCodeWithPO: poDict andPremi: premiDict];
                         
                         NSDictionary *testDict = [self getDictionaryForPOData:[arrayDBPOData objectAtIndex:i] HTMLID:[arrayHTMLPOData objectAtIndex:i]];
                         [testDict setValue: idString forKey:@"Value"];
@@ -1687,6 +1664,28 @@ NSString* const stateIMGGeneration = @"IMG";
         }
 
     }
+
+/**
+ * Generate BCA Life Heritage Product Code based on payment frequency and staff/non-staff status
+ */
+-(NSString*) generateBCALHProductCodeWithPO: (NSDictionary*) poDict andPremi: (NSDictionary*) premiDict {
+    int id;
+    
+    if([[premiDict valueForKey:@"Value"] isEqual: @"Bulanan"] || [[premiDict valueForKey:@"Value"] isEqual: @"Tahunan"]) {
+        id = 0;
+    } else {
+        id = 1;
+    }
+    
+    // If staff, then add 2 to product code id
+    if([[poDict valueForKey:@"Value"] isEqual: @"1"]) {
+        id += 2;
+    }
+        
+    NSString *idString = [NSString stringWithFormat:@"BHP%d", id];
+        
+    return idString;
+}
 
     #pragma mark delegate
     -(void)voidPDFCreated{

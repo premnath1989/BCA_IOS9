@@ -3382,13 +3382,13 @@ BOOL isFirstLoad;
     if([PlanType isEqualToString:@"BCA Life Keluargaku"])
     {
         if(![self.RiderController.view isDescendantOfView:self.RightView]) {
-            [_RiderController setPODictionaryFromRoot:dictionaryPOForInsert];
+            [_RiderController setPODictionaryFromRootToReplace:dictionaryPOForInsert];
             [_RiderController setDictionaryForBasicPlan:newDictionaryForBasicPlan];
             [_RiderController setElementActive];
             [_RiderController loadInitialRiderData];
             [self.RightView addSubview:self.RiderController.view];
         } else {
-            [_RiderController setPODictionaryFromRoot:dictionaryPOForInsert];
+            [_RiderController setPODictionaryFromRootToReplace:dictionaryPOForInsert];
             [_RiderController setDictionaryForBasicPlan:newDictionaryForBasicPlan];
             [_RiderController setElementActive];
             [_RiderController loadInitialRiderData];

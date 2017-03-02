@@ -88,6 +88,8 @@
 -(void)loadInitialRiderData;
 -(void)loadInitialRiderDataFromDatabase;
 -(void)setPODictionaryFromRoot:(NSMutableDictionary *)dictionaryRootPO;
+//QUICK FIX by NORMAN
+-(void)setPODictionaryFromRootToReplace:(NSMutableDictionary *)dictionaryRootPO;
 
 @property (retain, nonatomic) NSMutableDictionary* dictionaryPOForInsert;
 @property (retain, nonatomic) NSMutableDictionary* dictionaryForBasicPlan;

@@ -162,6 +162,7 @@ int maxGycc = 0;
 
 -(void)loadInitialRiderData{
     arrayDataRiders=[[NSMutableArray alloc]initWithObjects:[self dictMDBKK],[self dictMBKK],[self dictBebasPremi], nil];
+//    [[arrayDataRiders objectAtIndex:2] removeObjectForKey:@"PremiRp"];
     [myTableView reloadData];
 }
 
@@ -688,6 +689,13 @@ int maxGycc = 0;
         return YES;
 
     }
+}
+
+// QUICK FIX by Norman
+// Used to replace old dictPO with new one generated when PO data was edited
+-(void)setPODictionaryFromRootToReplace:(NSMutableDictionary *)dictionaryRootPO{
+    _dictionaryPOForInsert=dictionaryRootPO;
+    
 }
 
 #pragma mark - added by faiz
