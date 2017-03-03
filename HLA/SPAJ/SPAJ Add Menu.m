@@ -84,6 +84,7 @@ NSString* const stateIMGGeneration = @"IMG";
     ClassImageProcessing *classImageProcessing;
     AllAboutPDFGeneration *allAboutPDFGeneration;
     AllAboutPDFFunctions *allAboutPDFFunctions;
+    Model_SI_Premium *modelSIPremi;
     
     SPAJAddDetail* viewControllerDetail;
     SPAJFormGeneration* viewControllerFormGeneration;
@@ -183,6 +184,7 @@ NSString* const stateIMGGeneration = @"IMG";
         modelSPAJFormGeneration = [[ModelSPAJFormGeneration alloc]init];
         modelAgentProfile = [[ModelAgentProfile alloc]init];
         modelSPAJAnswers = [[ModelSPAJAnswers alloc]init];
+        modelSIPremi = [[Model_SI_Premium alloc] init];
         classImageProcessing = [[ClassImageProcessing alloc]init];
         objectUserInterface = [[UserInterface alloc] init];
         allAboutPDFFunctions = [[AllAboutPDFFunctions alloc]init];
@@ -249,6 +251,7 @@ NSString* const stateIMGGeneration = @"IMG";
         
         dictAgentProfile=[[NSMutableDictionary alloc]initWithDictionary:[modelAgentProfile getAgentData]];
         dictionarySIMaster = [[NSDictionary alloc]initWithDictionary:[modelSIMaster getIlustrationDataForSI:[dictTransaction valueForKey:@"SPAJSINO"]]];
+        dictionarySIPremi = [[NSDictionary alloc] initWithDictionary:[modelSIPremi getPremium_For:[dictTransaction valueForKey:@"SPAJSINO"]]];
         
         [self arrayInitializeReferral];
         [self arrayInitializeAgentProfile];
