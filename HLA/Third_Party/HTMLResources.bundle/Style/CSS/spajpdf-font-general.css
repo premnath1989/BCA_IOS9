@@ -1,3 +1,28 @@
+/* @charset "utf-8"; */
+/* CSS Document */
+/* @charset "utf-8"; */
+/* CSS Document */
+/* @charset "utf-8"; */
+/* CSS Document */
+/* FUNCTION */
+/* ANIMATION */
+/* HEADER */
+/* FORM */
+/* NOTE */
+/* SIGNATURE */
+/* FOOTER */
+/* TABLE */
+/* GENERAL */
+/* ICON */
+/* LAYOUT */
+/* FORM INITIALIZATION */
+/* LABEL */
+/* BOX */
+/* TABLE INITIALIZATION */
+/* TABLE */
+/* RESOURCE */
+/* TYPEFACE */
+/* HEADER */
 header h1 {
   margin-top: 10px;
   margin-bottom: 10px;
@@ -311,6 +336,16 @@ main section .Note ol, main section .Note ul {
 
 main section .Note ol li, main section .Note ul li {
   margin-bottom: 5px;
+}
+
+main section .Note ul li {
+  list-style-type: none;
+  text-indent: -8px;
+}
+
+main section .Note ul li:before {
+  text-indent: -5px;
+  content: '-';
 }
 
 main section table.SignatureSmall, main section table.SignatureMedium {

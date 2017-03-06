@@ -951,17 +951,7 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
                                 NSDictionary *poDict = [self getDictionaryForPOData:@"IsInternalStaff" HTMLID:[arrayHTMLPOData objectAtIndex:i]];
                                 NSDictionary *premiDict = [self getDictionaryForPremiData:@"Payment_Frequency" HTMLID:@""];
                                 
-                                if([[premiDict valueForKey:@"Value"] isEqual: @"Bulanan"]) {
-                                    id = 0;
-                                } else {
-                                    id = 1;
-                                }
-                                
-                                if([[poDict valueForKey:@"Value"] isEqual: @"1"]) {
-                                    id += 2;
-                                }
-                                
-                                NSString *idString = [NSString stringWithFormat:@"BHP%d", id];
+                                NSString *idString = [self generateBCALHProductCodeWithPO:poDict andPremi:premiDict];
                                 
                                 NSDictionary *testDict = [self getDictionaryForPOData:[arrayDBPOData objectAtIndex:i] HTMLID:[arrayHTMLPOData objectAtIndex:i]];
                                 [testDict setValue: idString forKey:@"Value"];
@@ -1040,18 +1030,8 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
                             
                             NSDictionary *poDict = [self getDictionaryForPOData:@"IsInternalStaff" HTMLID:[arrayHTMLPOData objectAtIndex:i]];
                             NSDictionary *premiDict = [self getDictionaryForPremiData:@"Payment_Frequency" HTMLID:@""];
-                            
-                            if([[premiDict valueForKey:@"Value"] isEqual: @"Bulanan"]) {
-                                id = 0;
-                            } else {
-                                id = 1;
-                            }
-                            
-                            if([[poDict valueForKey:@"Value"] isEqual: @"1"]) {
-                                id += 2;
-                            }
-                            
-                            NSString *idString = [NSString stringWithFormat:@"BHP%d", id];
+
+                            NSString *idString = [self generateBCALHProductCodeWithPO:poDict andPremi:premiDict];
                             
                             NSDictionary *testDict = [self getDictionaryForPOData:[arrayDBPOData objectAtIndex:i] HTMLID:[arrayHTMLPOData objectAtIndex:i]];
                             [testDict setValue: idString forKey:@"Value"];
@@ -1086,6 +1066,25 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
 
     -(void)performReadFromDB{
         [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"readfromDB();"]];
+    }
+
+    -(NSString*) generateBCALHProductCodeWithPO: (NSDictionary*) poDict andPremi: (NSDictionary*) premiDict {
+        int id;
+    
+        if([[premiDict valueForKey:@"Value"] isEqual: @"Bulanan"] || [[premiDict valueForKey:@"Value"] isEqual: @"Tahunan"]) {
+            id = 0;
+        } else {
+            id = 1;
+        }
+    
+        // If staff, then add 2 to product code id
+        if([[poDict valueForKey:@"Value"] isEqual: @"1"]) {
+            id += 2;
+        }
+    
+        NSString *idString = [NSString stringWithFormat:@"BHP%d", id];
+    
+        return idString;
     }
 
     - (void)webViewDidFinishLoad:(UIWebView *)webView{
