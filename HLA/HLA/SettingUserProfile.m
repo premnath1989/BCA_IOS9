@@ -433,15 +433,17 @@ id temp;
 
 -(void)uploadBackupFile:(NSString *)fileName folderDestination:(NSString *)folderDestination filePath:(NSString *)filePath
 {
-    NSString *urlUpload = @"http://tmcuat.tokiomarine-life.co.id/TMLI_WebService/Default.aspx";
+    NSString *urlUpload = @"http://tmcuat.tokiomarine-life.co.id/TMLI_WebService/Default.aspx?folderName=11242";
     NSBundle *myLibraryBundle = [NSBundle bundleWithURL:[[NSBundle mainBundle]
                                                          URLForResource:@"xibLibrary" withExtension:@"bundle"]];
     progressBar = [[ProgressBar alloc]initWithNibName:@"ProgressBar" bundle:myLibraryBundle];
     progressBar.TitleProgressBar = @"Uploading Backup File";
     progressBar.TitleFileName = fileName;
     progressBar.progressDelegate = self;
+    progressBar.TransferMode = kBRHTTPMode;
     progressBar.ftpfolderdestination = folderDestination;
     progressBar.ftpfiletoUpload = filePath;
+    progressBar.HTTPURLFilePath = urlUpload;
     progressBar.TransferFunction = @"upload";
     progressBar.modalPresentationStyle = UIModalPresentationFormSheet;
     progressBar.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
@@ -494,7 +496,7 @@ id temp;
         [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"file\"; filename=\"%@\"\r\n", FileParamConstant] dataUsingEncoding:NSUTF8StringEncoding]];
         [body appendData:[@"Content-Type: application/octet-stream\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
         [body appendData:zipData];
-//        [body appendData:[[NSString stringWithFormat:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
     }
     
     [body appendData:[[NSString stringWithFormat:@"--%@--\r\n", BoundaryConstant] dataUsingEncoding:NSUTF8StringEncoding]];
