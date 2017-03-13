@@ -353,7 +353,7 @@ main section table.SignatureSmall, main section table.SignatureMedium {
 }
 
 main section table.SignatureSmall {
-  width: 172px;
+  width: 200px;
   padding: 0px;
   border-style: solid;
   border-width: 1px;
@@ -468,7 +468,7 @@ table.Square tbody tr td {
   padding: 5px;
   font-size: 0.75em;
   text-align: center;
-  vertical-align: top;
+  vertical-align: middle;
   border-top-style: none;
   border-right-style: solid;
   border-left-style: solid;

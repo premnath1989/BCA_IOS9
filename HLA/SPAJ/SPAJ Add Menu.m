@@ -863,7 +863,7 @@ NSString* const stateIMGGeneration = @"IMG";
         
         // Draw the signature on pdfContext
         //pageRect = CGRectMake(343, 35,101 , 43);
-        pageRectPage1 = CGRectMake(617, 490,80, 37);
+        pageRectPage1 = CGRectMake(617, 470,80, 37);
         CGImageRef pageImagePage1 = [imgSignature CGImage];
         CGContextDrawImage(pdfContextPage1, pageRectPage1, pageImagePage1);
         
@@ -1335,7 +1335,7 @@ NSString* const stateIMGGeneration = @"IMG";
             [dictAgentData setObject:dateFormatted?:@"" forKey:@"Value"];
         }
         else{
-            [dictAgentData setObject:[dictAgentProfile valueForKey:stringDBColumnName]?:@"" forKey:@"Value"];
+            [dictAgentData setObject:[formatter toUpperCase:[dictAgentProfile valueForKey:stringDBColumnName]?:@""] forKey:@"Value"];
         }
         [dictAgentData setObject:@"1" forKey:@"CustomerID"];
         [dictAgentData setObject:@"1" forKey:@"SPAJID"];
@@ -1349,7 +1349,7 @@ NSString* const stateIMGGeneration = @"IMG";
             [dictReferralData setObject:[formatter getReferralSourceValue:[modelProspectProfile selectProspectData:stringDBColumnName ProspectIndex:[[dictionaryPOData valueForKey:@"PO_ClientID"] intValue]]]?:@"" forKey:@"Value"];
         }
         else{
-            [dictReferralData setObject:[modelProspectProfile selectProspectData:stringDBColumnName ProspectIndex:[[dictionaryPOData valueForKey:@"PO_ClientID"] intValue]]?:@"" forKey:@"Value"];
+            [dictReferralData setObject:[formatter toUpperCase:[modelProspectProfile selectProspectData:stringDBColumnName ProspectIndex:[[dictionaryPOData valueForKey:@"PO_ClientID"] intValue]]?:@""] forKey:@"Value"];
         }
         
         [dictReferralData setObject:@"1" forKey:@"CustomerID"];
@@ -1360,7 +1360,7 @@ NSString* const stateIMGGeneration = @"IMG";
     -(NSDictionary *)getDictionaryForPOData:(NSString *)stringDBColumnName HTMLID:(NSString *)stringHTMLID{
         NSMutableDictionary* dictReferralData=[[NSMutableDictionary alloc]init];
         [dictReferralData setObject:stringHTMLID forKey:@"elementID"];
-        [dictReferralData setObject:[dictionaryPOData valueForKey:stringDBColumnName]?:@"" forKey:@"Value"];
+        [dictReferralData setObject:[formatter toUpperCase:[dictionaryPOData valueForKey:stringDBColumnName]?:@""] forKey:@"Value"];
         [dictReferralData setObject:@"1" forKey:@"CustomerID"];
         [dictReferralData setObject:@"1" forKey:@"SPAJID"];
         return dictReferralData;
@@ -1369,7 +1369,7 @@ NSString* const stateIMGGeneration = @"IMG";
     -(NSDictionary *)getDictionaryForPremiData:(NSString *)stringDBColumnName HTMLID:(NSString *)stringHTMLID{
         NSMutableDictionary* dictPremiData=[[NSMutableDictionary alloc]init];
         [dictPremiData setObject:stringHTMLID forKey:@"elementID"];
-        [dictPremiData setObject:[dictionarySIPremi valueForKey:stringDBColumnName]?:@"" forKey:@"Value"];
+        [dictPremiData setObject:[formatter toUpperCase:[dictionarySIPremi valueForKey:stringDBColumnName]?:@""] forKey:@"Value"];
         [dictPremiData setObject:@"1" forKey:@"CustomerID"];
         [dictPremiData setObject:@"1" forKey:@"SPAJID"];
         return dictPremiData;
@@ -1383,7 +1383,7 @@ NSString* const stateIMGGeneration = @"IMG";
             [dictSIMaster setObject:dateFormatted?:@"" forKey:@"Value"];
         }
         else{
-            [dictSIMaster setObject:[dictionarySIMaster valueForKey:stringDBColumnName]?:@"" forKey:@"Value"];
+            [dictSIMaster setObject:[formatter toUpperCase:[dictionarySIMaster valueForKey:stringDBColumnName]?:@""] forKey:@"Value"];
         }
         [dictSIMaster setObject:@"1" forKey:@"CustomerID"];
         [dictSIMaster setObject:@"1" forKey:@"SPAJID"];
@@ -1399,7 +1399,7 @@ NSString* const stateIMGGeneration = @"IMG";
             [dictForSignature setObject:newDate?:@"" forKey:@"Value"];
         }
         else{
-            [dictForSignature setObject:[modelSPAJSignature selectSPAJSignatureData:stringDBColumnName SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]]?:@"" forKey:@"Value"];
+            [dictForSignature setObject:[formatter toUpperCase:[modelSPAJSignature selectSPAJSignatureData:stringDBColumnName SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]]?:@""] forKey:@"Value"];
         }
         
         [dictForSignature setObject:@"1" forKey:@"CustomerID"];

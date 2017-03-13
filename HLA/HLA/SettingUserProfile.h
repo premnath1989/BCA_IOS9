@@ -17,7 +17,7 @@
 #import "SSKeychain.h"
 
 
-@interface SettingUserProfile : UIViewController <DateViewControllerDelegate, UITextFieldDelegate, NSXMLParserDelegate, AgentWSSoapBindingResponseDelegate, SSZipArchiveDelegate, ProgressBarDelegate>{
+@interface SettingUserProfile : UIViewController <DateViewControllerDelegate, UITextFieldDelegate, NSXMLParserDelegate, AgentWSSoapBindingResponseDelegate, SSZipArchiveDelegate, ProgressBarDelegate, NSURLSessionTaskDelegate>{
     ProgressBar *progressBar;
     NSString *databasePath;
     sqlite3 *contactDB;
@@ -61,6 +61,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *outletSave;
 @property (weak, nonatomic) IBOutlet UIButton *outletChgPassword;
 @property (weak, nonatomic) IBOutlet UIButton *outletSyncSPAJNumber;
+@property (weak, nonatomic) IBOutlet UIButton *outletBackup;
+@property (weak, nonatomic) IBOutlet UIButton *outletRestore;
 
 @property(strong) NSString *previousElementName;
 @property(strong) NSString *elementName;

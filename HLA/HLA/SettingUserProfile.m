@@ -240,57 +240,6 @@ id temp;
     [self presentViewController:SPAJDisNum animated:YES completion:nil];
 }
 
-- (IBAction)backupFiles:(id)sender {
-    [spinnerLoading startLoadingSpinner:self.view label:@"Backup sedang berjalan"];
-    //first we call pre upload webservice from Server
-    NSString *serverURL = [NSString stringWithFormat:@"%@/Service2.svc/CreateRemoteFtpBackupFolder",[(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL]];
-    
-    NSURLSession *session = [NSURLSession sharedSession];
-    [[session dataTaskWithURL:[NSURL URLWithString:serverURL]
-            completionHandler:^(NSData *data,
-                                NSURLResponse *response,
-                                NSError *error) {
-                // handle response
-                if(data != nil){
-                    
-                    NSMutableDictionary* json = [NSJSONSerialization
-                                                 JSONObjectWithData:data //1
-                                                 options:NSJSONReadingMutableContainers
-                                                 error:&error];
-                    
-                    NSLog(@"backup files to %@", [[json valueForKey:@"d"] valueForKey:@"FtpRemoteFolder"]);
-                    backupFolder =[[json valueForKey:@"d"] valueForKey:@"FtpRemoteFolder"];
-                    
-                    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-                    NSString *libsDir = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-                    NSString *backupDir = [libsDir stringByAppendingPathComponent:@"Backup"];
-                    
-                    [self createDirectory:backupDir];
-                    
-                    NSDate *currDate = [NSDate date];
-                    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-                    [dateFormatter setDateFormat:@"YYYYMMdd"];
-                    
-                    NSString *dateString = [dateFormatter stringFromDate:currDate];
-                    
-                    NSString *ZipFileName = [NSString stringWithFormat:@"%@_%@.zip",  txtAgentCode.text, dateString];
-                    NSString *ZipPath = [backupDir stringByAppendingPathComponent: ZipFileName];
-                    
-                    fileSize = [[[NSFileManager defaultManager] attributesOfItemAtPath:ZipPath error:nil] fileSize];
-                    
-                    // Create
-                    [SSZipArchive createZipFileAtPath:ZipPath withContentsOfDirectory:docsDir];
-                    
-                    //upload to FTP
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [self uploadBackupFile:ZipFileName folderDestination:[NSString stringWithFormat:@"/Backup/%@", backupFolder] filePath:ZipPath];
-                    });
-                }else{
-                    
-                }
-            }] resume];
-}
-
 - (void)createDirectory:(NSString *)filePath{
     //create Directory
     NSError *error;
@@ -308,96 +257,6 @@ id temp;
             [self createDirectory:filePath];
         }
     }
-}
-
-- (void)downloadBackupFile:(NSString *)fileName filePath:(NSString *)filePath{
-    NSBundle *myLibraryBundle = [NSBundle bundleWithURL:[[NSBundle mainBundle]
-                                                         URLForResource:@"xibLibrary" withExtension:@"bundle"]];
-    progressBar = [[ProgressBar alloc]initWithNibName:@"ProgressBar" bundle:myLibraryBundle];
-    progressBar.TitleProgressBar = [NSString stringWithFormat: @"Downloading %@",fileName];
-    progressBar.TitleFileName = fileName;
-    progressBar.progressDelegate = self;
-    progressBar.ftpfiletoDownload = [NSString stringWithFormat:@"%@/%@", filePath, fileName];
-    progressBar.modalPresentationStyle = UIModalPresentationFormSheet;
-    progressBar.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    progressBar.preferredContentSize = CGSizeMake(600, 200);
-    progressBar.TransferFunction = @"download";
-    [self presentViewController:progressBar animated:YES completion:nil];
-}
-
--(void)uploadBackupFile:(NSString *)fileName folderDestination:(NSString *)folderDestination filePath:(NSString *)filePath{
-    NSBundle *myLibraryBundle = [NSBundle bundleWithURL:[[NSBundle mainBundle]
-                                                         URLForResource:@"xibLibrary" withExtension:@"bundle"]];
-    progressBar = [[ProgressBar alloc]initWithNibName:@"ProgressBar" bundle:myLibraryBundle];
-    progressBar.TitleProgressBar = @"Uploading Backup File";
-    progressBar.TitleFileName = fileName;
-    progressBar.progressDelegate = self;
-    progressBar.ftpfolderdestination = folderDestination;
-    progressBar.ftpfiletoUpload = filePath;
-    progressBar.TransferFunction = @"upload";
-    progressBar.modalPresentationStyle = UIModalPresentationFormSheet;
-    progressBar.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    progressBar.preferredContentSize = CGSizeMake(600, 200);
-    [self presentViewController:progressBar animated:YES completion:nil];
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [spinnerLoading stopLoadingSpinner];
-    });
-}
-
-
-
-- (IBAction)restoreBackup:(id)sender {
-    //first we call pre download webservice
-    NSString *preDownloadParams = [NSString stringWithFormat:@"?agentID=%@",txtAgentCode.text];
-    
-    NSString *serverURL = [NSString stringWithFormat:@"%@/Service2.svc/GetFTPAddressForBackupFile%@",[(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL], preDownloadParams];
-    
-    NSURLSession *session = [NSURLSession sharedSession];
-    [[session dataTaskWithURL:[NSURL URLWithString:serverURL]
-            completionHandler:^(NSData *data,
-                                NSURLResponse *response,
-                                NSError *error) {
-                // handle response
-                if(data != nil){
-                    NSLog(@"backup post upload : %@",preDownloadParams);
-                    
-                    //download to FTP
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        
-                    });
-                    
-                    //[self restoreFiles:@"11500001_20161007.zip"];
-                }else{
-                    
-                }
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    UIAlertView* alertError = [[UIAlertView alloc] initWithTitle:@"Back up telah sukses" message:[NSString stringWithFormat:@""] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-                    [alertError show];
-                });
-            }] resume];
-}
-
-
-- (void)restoreFiles:(NSString *)BackupFileName {
-    NSLog(@"restore files");
-    
-    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    
-    //path of backup file
-    NSString *libsDir = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *ZipPath = [libsDir stringByAppendingPathComponent: BackupFileName];
-    
-    //first we delete all files inside the documents folder
-    NSArray *allFiles = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:docsDir error:nil];
-    NSError *error = nil;
-    
-    for(NSString *fileinDoc in allFiles){
-        [[NSFileManager defaultManager] removeItemAtPath:[docsDir stringByAppendingPathComponent:fileinDoc] error:&error];
-    }
-    
-    // then we unzip the backup file
-    [SSZipArchive unzipFileAtPath:ZipPath toDestination:docsDir];
 }
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
@@ -444,6 +303,235 @@ id temp;
 -(void)keyboardDidHide:(NSNotificationCenter *)notification
 {
     self.myScrollView.frame = CGRectMake(0, 44, 768, 704);
+}
+
+#pragma mark - Backup & Restore
+
+- (IBAction)backupFiles:(id)sender {
+    [spinnerLoading startLoadingSpinner:self.view label:@"Backup sedang berjalan"];
+    //first we call pre upload webservice from Server
+//    NSString *serverURL = [NSString stringWithFormat:@"%@/Service2.svc/CreateRemoteFtpBackupFolder",[(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL]];
+    NSString *serverURL = @"http://tmcuat.tokiomarine-life.co.id/TMLI_WebService/AgentWS.asmx/CreateBackupFolder";
+    
+    NSURLSession *session = [NSURLSession sharedSession];
+    [[session dataTaskWithURL:[NSURL URLWithString:serverURL]
+            completionHandler:^(NSData *data,
+                                NSURLResponse *response,
+                                NSError *error) {
+                // handle response
+                if(data != nil){
+                    
+                    NSMutableDictionary* json = [NSJSONSerialization
+                                                 JSONObjectWithData:data //1
+                                                 options:NSJSONReadingMutableContainers
+                                                 error:&error];
+                    
+//                    NSLog(@"backup files to %@", [[json valueForKey:@"d"] valueForKey:@"FtpRemoteFolder"]);
+                    backupFolder =[[json valueForKey:@"d"] valueForKey:@"FtpRemoteFolder"];
+                    
+                    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+                    NSString *libsDir = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+                    NSString *backupDir = [libsDir stringByAppendingPathComponent:@"Backup"];
+                    
+                    [self createDirectory:backupDir];
+                    
+                    NSDate *currDate = [NSDate date];
+                    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+                    [dateFormatter setDateFormat:@"YYYYMMdd"];
+                    
+                    NSString *dateString = [dateFormatter stringFromDate:currDate];
+                    
+                    NSString *ZipFileName = [NSString stringWithFormat:@"%@_%@.zip",  txtAgentCode.text, dateString];
+//                    NSString *ZipPath = [backupDir stringByAppendingPathComponent: ZipFileName];
+                    NSString *ZipPath = [docsDir stringByAppendingPathComponent: @"testupload2.zip"];
+                    
+                    
+                    fileSize = [[[NSFileManager defaultManager] attributesOfItemAtPath:ZipPath error:nil] fileSize];
+                    
+                    // Create
+//                    if([SSZipArchive createZipFileAtPath:ZipPath withContentsOfDirectory:docsDir]) {
+                    
+                        //upload to FTP
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self uploadBackupFile:ZipFileName
+                                  folderDestination:[NSString stringWithFormat:@"/Backup/%@", backupFolder]
+                                  filePath:ZipPath];
+                        });
+//                    }
+                }else{
+                    
+                }
+            }] resume];
+}
+
+- (IBAction)restoreBackup:(id)sender {
+    //first we call pre download webservice
+    NSString *preDownloadParams = [NSString stringWithFormat:@"?agentID=%@",txtAgentCode.text];
+    
+    NSString *serverURL = [NSString stringWithFormat:@"%@/Service2.svc/GetFTPAddressForBackupFile%@",[(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL], preDownloadParams];
+    
+    NSURLSession *session = [NSURLSession sharedSession];
+    [[session dataTaskWithURL:[NSURL URLWithString:serverURL]
+            completionHandler:^(NSData *data,
+                                NSURLResponse *response,
+                                NSError *error) {
+                // handle response
+                if(data != nil){
+                    NSLog(@"backup post upload : %@",preDownloadParams);
+                    
+                    //download from FTP
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        
+                    });
+                    
+                    [self restoreFiles:@"11500001_20161007.zip"];
+                }else{
+                    
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    UIAlertView* alertError = [[UIAlertView alloc] initWithTitle:@"Back up telah sukses" message:[NSString stringWithFormat:@""] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                    [alertError show];
+                });
+            }] resume];
+}
+
+- (void)restoreFiles:(NSString *)BackupFileName {
+    NSLog(@"restore files");
+    
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    
+    //path of backup file
+    NSString *libsDir = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *ZipPath = [libsDir stringByAppendingPathComponent: BackupFileName];
+    
+    //first we delete all files inside the documents folder
+    NSArray *allFiles = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:docsDir error:nil];
+    NSError *error = nil;
+    
+    for(NSString *fileinDoc in allFiles){
+        [[NSFileManager defaultManager] removeItemAtPath:[docsDir stringByAppendingPathComponent:fileinDoc] error:&error];
+    }
+    
+    // then we unzip the backup file
+    [SSZipArchive unzipFileAtPath:ZipPath toDestination:docsDir];
+}
+
+- (void)downloadBackupFile:(NSString *)fileName filePath:(NSString *)filePath{
+    NSBundle *myLibraryBundle = [NSBundle bundleWithURL:[[NSBundle mainBundle]
+                                                         URLForResource:@"xibLibrary" withExtension:@"bundle"]];
+    progressBar = [[ProgressBar alloc]initWithNibName:@"ProgressBar" bundle:myLibraryBundle];
+    progressBar.TitleProgressBar = [NSString stringWithFormat: @"Downloading %@",fileName];
+    progressBar.TitleFileName = fileName;
+    progressBar.progressDelegate = self;
+    progressBar.ftpfiletoDownload = [NSString stringWithFormat:@"%@/%@", filePath, fileName];
+    progressBar.modalPresentationStyle = UIModalPresentationFormSheet;
+    progressBar.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    progressBar.preferredContentSize = CGSizeMake(600, 200);
+    progressBar.TransferFunction = @"download";
+    [self presentViewController:progressBar animated:YES completion:nil];
+}
+
+-(void)uploadBackupFile:(NSString *)fileName folderDestination:(NSString *)folderDestination filePath:(NSString *)filePath
+{
+    NSString *urlUpload = @"http://tmcuat.tokiomarine-life.co.id/TMLI_WebService/Default.aspx";
+    NSBundle *myLibraryBundle = [NSBundle bundleWithURL:[[NSBundle mainBundle]
+                                                         URLForResource:@"xibLibrary" withExtension:@"bundle"]];
+    progressBar = [[ProgressBar alloc]initWithNibName:@"ProgressBar" bundle:myLibraryBundle];
+    progressBar.TitleProgressBar = @"Uploading Backup File";
+    progressBar.TitleFileName = fileName;
+    progressBar.progressDelegate = self;
+    progressBar.ftpfolderdestination = folderDestination;
+    progressBar.ftpfiletoUpload = filePath;
+    progressBar.TransferFunction = @"upload";
+    progressBar.modalPresentationStyle = UIModalPresentationFormSheet;
+    progressBar.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    progressBar.preferredContentSize = CGSizeMake(600, 200);
+    [self presentViewController:progressBar animated:YES completion:nil];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [spinnerLoading stopLoadingSpinner];
+    });
+    
+    NSString * resourcePath = [[NSBundle mainBundle] resourcePath];
+    
+    NSString * documentsPath = [resourcePath stringByAppendingPathComponent:@"Documents"];
+    
+    // Dictionary that holds post parameters. You can set your post parameters that your server accepts or programmed to accept.
+    NSMutableDictionary* _params = [[NSMutableDictionary alloc] init];
+    [_params setObject:@"1.0" forKey:@"ver"];
+    [_params setObject:@"en" forKey:@"lan"];
+//    [_params setObject:[NSString stringWithFormat:@"%d", userId] forKey:@"userId"];
+//    [_params setObject:[NSString stringWithFormat:@"%@", title] forKey:@"title"];
+    
+    // the boundary string : a random string, that will not repeat in post data, to separate post data fields.
+    NSString *BoundaryConstant = @"----------V2ymHFg03ehbqgZCaKO6uy";
+    
+    // string constant for the post parameter 'file'
+    NSString* FileParamConstant = fileName;
+    
+    // create request
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+//    [request setTimeoutInterval:30];
+    [request setHTTPMethod:@"POST"];
+    
+    // set Content-Type in HTTP header
+    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", BoundaryConstant];
+    [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
+    
+    NSMutableData *body = [NSMutableData data];
+    
+    // add params (all params are strings)
+//    for (NSString *param in _params) {
+//        [body appendData:[[NSString stringWithFormat:@"--%@\r\n", BoundaryConstant] dataUsingEncoding:NSUTF8StringEncoding]];
+//        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", param] dataUsingEncoding:NSUTF8StringEncoding]];
+//        [body appendData:[[NSString stringWithFormat:@"%@\r\n", [_params objectForKey:param]] dataUsingEncoding:NSUTF8StringEncoding]];
+//    }
+    
+    // add zip data
+    NSData *zipData = [[NSData alloc] initWithContentsOfFile:filePath];
+    if (zipData) {
+        [body appendData:[[NSString stringWithFormat:@"--%@\r\n", BoundaryConstant] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"file\"; filename=\"%@\"\r\n", FileParamConstant] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[@"Content-Type: application/octet-stream\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:zipData];
+//        [body appendData:[[NSString stringWithFormat:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    }
+    
+    [body appendData:[[NSString stringWithFormat:@"--%@--\r\n", BoundaryConstant] dataUsingEncoding:NSUTF8StringEncoding]];
+    NSLog(@"%@", [[NSString alloc] initWithData:body encoding:NSUTF8StringEncoding]);
+    [request setHTTPBody: body];
+    
+    // set the content-length
+    NSString *postLength = [NSString stringWithFormat:@"%d", [body length]];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    
+    [request setURL:[NSURL URLWithString: urlUpload]];
+    
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
+    [[session dataTaskWithRequest:request
+               completionHandler:^(NSData *data,
+                                   NSURLResponse *response,
+                                   NSError *error) {
+//                   if(error) {
+                        NSLog(@"%@", [error localizedDescription]);
+//                   }
+                   
+                   long statusCode = [(NSHTTPURLResponse *)response statusCode];
+                   NSLog(@"%ld", statusCode);
+               }
+      ] resume];
+}
+
+#pragma mark - NSURLSessionDelegate
+-(void) URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didSendBodyData:(int64_t)bytesSent totalBytesSent:(int64_t)totalBytesSent totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
+{
+    NSLog(@"%lld %lld %lld", bytesSent, totalBytesSent, totalBytesExpectedToSend);
+}
+
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error
+{
+    NSLog(@"Session Error: %@", [error localizedDescription]);
 }
 
 
@@ -1225,5 +1313,10 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
     for (int i=0;i<[arrayFileName count];i++){
         [cffAPIController apiCallCrateHtmlFile:[NSString stringWithFormat:@"%@/Service2.svc/GetHtmlFile?fileName=%@",[(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL],[arrayFileName objectAtIndex:i]] RootPathFolder:@"CFFfolder"];
     }
+}
+
+- (void)downloadisError{
+    UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Koneksi ke FTP Gagal" message:[NSString stringWithFormat:@"Pastikan perangkat terhubung ke internet yang stabil untuk mengakses FTP"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    [alert show];
 }
 @end

@@ -778,7 +778,7 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
             [dictAgentData setObject:dateFormatted?:@"" forKey:@"Value"];
         }
         else{
-            [dictAgentData setObject:[dictAgentProfile valueForKey:stringDBColumnName]?:@"" forKey:@"Value"];
+            [dictAgentData setObject:[formatter toUpperCase:[dictAgentProfile valueForKey:stringDBColumnName]?:@""] forKey:@"Value"];
         }
         [dictAgentData setObject:@"1" forKey:@"CustomerID"];
         [dictAgentData setObject:@"1" forKey:@"SPAJID"];
@@ -792,7 +792,7 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
             [dictReferralData setObject:[formatter getReferralSourceValue:[modelProspectProfile selectProspectData:stringDBColumnName ProspectIndex:[[dictionaryPOData valueForKey:@"PO_ClientID"] intValue]]]?:@"" forKey:@"Value"];
         }
         else{
-            [dictReferralData setObject:[modelProspectProfile selectProspectData:stringDBColumnName ProspectIndex:[[dictionaryPOData valueForKey:@"PO_ClientID"] intValue]]?:@"" forKey:@"Value"];
+            [dictReferralData setObject:[formatter toUpperCase:[modelProspectProfile selectProspectData:stringDBColumnName ProspectIndex:[[dictionaryPOData valueForKey:@"PO_ClientID"] intValue]]?:@""] forKey:@"Value"];
         }
         
         [dictReferralData setObject:@"1" forKey:@"CustomerID"];
@@ -803,7 +803,7 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
     -(NSDictionary *)getDictionaryForPOData:(NSString *)stringDBColumnName HTMLID:(NSString *)stringHTMLID{
         NSMutableDictionary* dictReferralData=[[NSMutableDictionary alloc]init];
         [dictReferralData setObject:stringHTMLID forKey:@"elementID"];
-        [dictReferralData setObject:[dictionaryPOData valueForKey:stringDBColumnName]?:@"" forKey:@"Value"];
+        [dictReferralData setObject:[formatter toUpperCase:[dictionaryPOData valueForKey:stringDBColumnName]?:@""] forKey:@"Value"];
         [dictReferralData setObject:@"1" forKey:@"CustomerID"];
         [dictReferralData setObject:@"1" forKey:@"SPAJID"];
         return dictReferralData;
@@ -812,7 +812,7 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
     -(NSDictionary *)getDictionaryForPremiData:(NSString *)stringDBColumnName HTMLID:(NSString *)stringHTMLID{
         NSMutableDictionary* dictPremiData=[[NSMutableDictionary alloc]init];
         [dictPremiData setObject:stringHTMLID forKey:@"elementID"];
-        [dictPremiData setObject:[dictionarySIPremi valueForKey:stringDBColumnName]?:@"" forKey:@"Value"];
+        [dictPremiData setObject:[formatter toUpperCase:[dictionarySIPremi valueForKey:stringDBColumnName]?:@""] forKey:@"Value"];
         [dictPremiData setObject:@"1" forKey:@"CustomerID"];
         [dictPremiData setObject:@"1" forKey:@"SPAJID"];
         return dictPremiData;
@@ -826,7 +826,7 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
             [dictSIMaster setObject:dateFormatted?:@"" forKey:@"Value"];
         }
         else{
-            [dictSIMaster setObject:[dictionarySIMaster valueForKey:stringDBColumnName]?:@"" forKey:@"Value"];
+            [dictSIMaster setObject:[formatter toUpperCase:[dictionarySIMaster valueForKey:stringDBColumnName]?:@""] forKey:@"Value"];
         }
         [dictSIMaster setObject:@"1" forKey:@"CustomerID"];
         [dictSIMaster setObject:@"1" forKey:@"SPAJID"];
@@ -842,7 +842,7 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
             [dictForSignature setObject:newDate?:@"" forKey:@"Value"];
         }
         else{
-        [dictForSignature setObject:[modelSPAJSignature selectSPAJSignatureData:stringDBColumnName SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]]?:@"" forKey:@"Value"];
+        [dictForSignature setObject:[formatter toUpperCase:[modelSPAJSignature selectSPAJSignatureData:stringDBColumnName SPAJTransactionID:[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]]?:@""] forKey:@"Value"];
         }
         
         [dictForSignature setObject:@"1" forKey:@"CustomerID"];
@@ -853,7 +853,7 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
     -(NSDictionary *)getDictionaryForSPAJNumber:(NSString *)stringDBColumnName HTMLID:(NSString *)stringHTMLID{
         NSMutableDictionary* dictForSignature=[[NSMutableDictionary alloc]init];
         [dictForSignature setObject:stringHTMLID forKey:@"elementID"];
-        [dictForSignature setObject:[dictTransaction valueForKey:stringDBColumnName]?:@"" forKey:@"Value"];
+        [dictForSignature setObject:[formatter toUpperCase:[dictTransaction valueForKey:stringDBColumnName]?:@""] forKey:@"Value"];
         [dictForSignature setObject:@"1" forKey:@"CustomerID"];
         [dictForSignature setObject:@"1" forKey:@"SPAJID"];
         return dictForSignature;
