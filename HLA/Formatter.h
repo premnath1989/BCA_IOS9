@@ -23,6 +23,7 @@
 -(NSNumber *)convertAnyNonDecimalNumberToString:(NSString *)stringNumber;
 -(NSNumberFormatter *)formatterForCurrencyText;
 -(int)decimalDigitFromString:(NSString *)decimalString DecimalSeparator:(NSString *)decimalSeparator;
+-(NSString *)toUpperCase: (NSString*) string;
 
 -(int)getRandomNumberBetween:(int)minValue MaxValue:(int)maxValue;
 

@@ -188,6 +188,10 @@
     return (int)result;
 }
 
+-(NSString *)toUpperCase: (NSString*) string {
+    return string.uppercaseString;
+}
+
 -(NSString *)getNumberFromString:(NSString *)stringText{
     NSString *originalString = stringText;
     
@@ -619,5 +623,7 @@
     NSString *encodedString = [imageData base64EncodedStringWithOptions:0];
     return encodedString;
 }
+
+
 
 @end
