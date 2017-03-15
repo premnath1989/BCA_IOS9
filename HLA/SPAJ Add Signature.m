@@ -527,7 +527,8 @@
 
     // Draw the signature on pdfContext
     //pageRect = CGRectMake(343, 35,101 , 43);
-    pageRectPage1 = CGRectMake(617, 490, 80, 37);
+    //(X, Y, width, length) - Add Y to move signature upward
+    pageRectPage1 = CGRectMake(617, 470, 80, 37);
     CGImageRef pageImagePage1 = [imgSignature CGImage];
     CGContextDrawImage(pdfContextPage1, pageRectPage1, pageImagePage1);
 

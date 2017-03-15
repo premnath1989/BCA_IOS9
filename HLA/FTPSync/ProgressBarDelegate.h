@@ -19,5 +19,7 @@
 
 - (void)downloadisFinished;
 - (void)downloadisError;
+- (void)uploadisFinished;
+- (void)uploadisError;
 
 @end
