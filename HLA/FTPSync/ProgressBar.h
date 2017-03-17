@@ -21,6 +21,7 @@
 @property (nonatomic,retain)NSString *TitleFileName;
 @property (nonatomic,retain)NSString *TitleProgressBar;
 @property (nonatomic,retain)NSString *TransferFunction;
+@property (nonatomic,retain)NSString *isBackupFiles;
 @property int TransferMode;
 
 //ftp properties

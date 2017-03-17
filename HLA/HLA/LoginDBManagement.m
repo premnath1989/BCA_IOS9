@@ -412,6 +412,41 @@
     statement = Nil;
 }
 
+// Used to update UDID after the restore backup process
+- (void) updateUDID
+{
+    //Retrieve the UUID
+    NSString *strApplicationUUID  = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    const char *dbpath = [databasePath UTF8String];
+    sqlite3_stmt *statement;
+    
+    if (sqlite3_open(dbpath, &contactDB) == SQLITE_OK)
+    {
+        NSString *querySQL = [NSString stringWithFormat:@"UPDATE Agent_Profile SET UDID= \"%@\"",strApplicationUUID];
+        
+        const char *query_stmt = [querySQL UTF8String];
+        if (sqlite3_prepare_v2(contactDB, query_stmt, -1, &statement, NULL) == SQLITE_OK)
+        {
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                NSLog(@"UUID update!");
+                
+            } else {
+                NSLog(@"UUID update Failed!");
+            }
+            sqlite3_finalize(statement);
+        }
+        sqlite3_close(contactDB);
+        
+        query_stmt = Nil;
+        querySQL = Nil;
+    }
+    
+    strApplicationUUID = Nil;
+    dbpath = Nil;
+    statement = Nil;
+}
+
 -(BOOL)fullSyncTable:(WebResponObj *)obj{
     return [self SyncTable:obj dbString:databasePath];
 }

@@ -13,6 +13,7 @@
 #import "DBUpdater.h"
 #import "SessionManagement.h"
 #import "Login.h"
+#import "SettingUserProfile.h"
 #import "CFFListingViewController.h"
 #import <CoreData/CoreData.h>
 #import "CFFAPIController.h"
@@ -99,7 +100,7 @@ NSString *uatAgentCode;
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
     UIViewController *mainLogin = [storyboard instantiateViewControllerWithIdentifier:@"Login"];
     
-    if(![topController isKindOfClass:[Login class]]){
+    if(![topController isKindOfClass:[Login class]] || ![topController isKindOfClass:[SettingUserProfile class]]){
         [topController presentViewController:mainLogin animated:YES completion:NULL];
     }
 }

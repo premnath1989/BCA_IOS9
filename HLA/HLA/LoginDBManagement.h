@@ -31,6 +31,7 @@
 - (void) makeDBCopy;
 - (void) updateLoginDate;
 - (void) updateLogoutDate;
+- (void) updateUDID;
 - (void) duplicateRow:(NSString *)tableName param:(NSString *)column
              oldValue:(NSString *)oldValue newValue:(NSString *)newValue;
 - (NSMutableDictionary *)getAgentDetails;

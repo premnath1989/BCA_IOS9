@@ -18,6 +18,7 @@
 @property (nonatomic, assign) id<ProductInfoItemsDelegate>  ftpDelegate;
 @property (nonatomic,retain)NSString *localFilePath;
 @property (nonatomic,retain)NSString *cancelDoesNotCallDelegate;
+@property (nonatomic, retain)NSString *isBackupFiles;
 
 -(void)getListDirectoryHTTP;
 -(void)downloadWithNsurlconnection:(NSString *)currentURL expectedFileSize:(float)expectedFileSize;

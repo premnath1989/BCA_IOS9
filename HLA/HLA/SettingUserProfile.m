@@ -17,7 +17,7 @@
 #import "LoginDatabaseManagement.h"
 #import "ProgressBar.h"
 #import "SPAJDisNumber.h"
-
+#import "LoginDBManagement.h"
 #import "DDXMLDocument.h"
 #import "DDXMLElementAdditions.h"
 #import "DDXMLNode.h"
@@ -40,6 +40,8 @@
 @synthesize outletChgPassword;
 @synthesize outletSave;
 @synthesize outletSyncSPAJNumber;
+@synthesize outletBackup;
+@synthesize outletRestore;
 @synthesize txtAgentCode;
 @synthesize txtAgentName;
 @synthesize txtCabang;
@@ -82,6 +84,12 @@ id temp;
     
     outletChgPassword.layer.cornerRadius = 10.0f;
     outletChgPassword.clipsToBounds = YES;
+    
+    outletBackup.layer.cornerRadius = 10.0f;
+    outletBackup.clipsToBounds = YES;
+    
+    outletRestore.layer.cornerRadius = 10.0f;
+    outletRestore.clipsToBounds = YES;
     
     txtAddress1.delegate = self;
     txtAddress2.delegate = self;
@@ -306,112 +314,130 @@ id temp;
 }
 
 #pragma mark - Backup & Restore
+//TODO: HASH Checking
 
 - (IBAction)backupFiles:(id)sender {
-    [spinnerLoading startLoadingSpinner:self.view label:@"Backup sedang berjalan"];
-    //first we call pre upload webservice from Server
-//    NSString *serverURL = [NSString stringWithFormat:@"%@/Service2.svc/CreateRemoteFtpBackupFolder",[(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL]];
-    NSString *serverURL = @"http://tmcuat.tokiomarine-life.co.id/TMLI_WebService/AgentWS.asmx/CreateBackupFolder";
-    
-    NSURLSession *session = [NSURLSession sharedSession];
-    [[session dataTaskWithURL:[NSURL URLWithString:serverURL]
-            completionHandler:^(NSData *data,
-                                NSURLResponse *response,
-                                NSError *error) {
-                // handle response
-                if(data != nil){
-                    
-                    NSMutableDictionary* json = [NSJSONSerialization
-                                                 JSONObjectWithData:data //1
-                                                 options:NSJSONReadingMutableContainers
-                                                 error:&error];
-                    
-//                    NSLog(@"backup files to %@", [[json valueForKey:@"d"] valueForKey:@"FtpRemoteFolder"]);
-                    backupFolder =[[json valueForKey:@"d"] valueForKey:@"FtpRemoteFolder"];
-                    
-                    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-                    NSString *libsDir = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-                    NSString *backupDir = [libsDir stringByAppendingPathComponent:@"Backup"];
-                    
-                    [self createDirectory:backupDir];
-                    
-                    NSDate *currDate = [NSDate date];
-                    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-                    [dateFormatter setDateFormat:@"YYYYMMdd"];
-                    
-                    NSString *dateString = [dateFormatter stringFromDate:currDate];
-                    
-                    NSString *ZipFileName = [NSString stringWithFormat:@"%@_%@.zip",  txtAgentCode.text, dateString];
-                    NSString *ZipPath = [backupDir stringByAppendingPathComponent: ZipFileName];
-                    
-                    /*TESTING UPLOAD PURPOSE*/
-//                    NSString *ZipPath = [docsDir stringByAppendingPathComponent: @"testupload2.zip"];
-                    
-                    
-                    fileSize = [[[NSFileManager defaultManager] attributesOfItemAtPath:ZipPath error:nil] fileSize];
-                    
-//                  Create
-                    if([SSZipArchive createZipFileAtPath:ZipPath withContentsOfDirectory:docsDir]) {
-                    
-                        //upload to FTP
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            [self uploadBackupFile:ZipFileName
-                                  folderDestination:[NSString stringWithFormat:@"/Backup/%@", backupFolder]
-                                  filePath:ZipPath];
-                        });
+    if([self connected]) {
+        [spinnerLoading startLoadingSpinner:self.view label:@"Backup sedang berjalan"];
+        //first we call pre upload webservice from Server
+        NSString *serverURL = [NSString stringWithFormat:@"%@/webservices/agentws.asmx/CreateBackupFolder",[(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL]];
+        //    NSString *serverURL = @"http://tmcuat.tokiomarine-life.co.id/TMLI_WebService/AgentWS.asmx/CreateBackupFolder";
+        
+        NSURLSession *session = [NSURLSession sharedSession];
+        [[session dataTaskWithURL:[NSURL URLWithString:serverURL]
+                completionHandler:^(NSData *data,
+                                    NSURLResponse *response,
+                                    NSError *error) {
+                    // handle response
+                    if(data != nil){
+                        
+                        NSMutableDictionary* json = [NSJSONSerialization
+                                                     JSONObjectWithData:data //1
+                                                     options:NSJSONReadingMutableContainers
+                                                     error:&error];
+                        
+                        //                    NSLog(@"backup files to %@", [[json valueForKey:@"d"] valueForKey:@"FtpRemoteFolder"]);
+                        backupFolder =[[json valueForKey:@"d"] valueForKey:@"FtpRemoteFolder"];
+                        
+                        NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+                        NSString *libsDir = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+                        NSString *backupDir = [libsDir stringByAppendingPathComponent:@"Backup"];
+                        
+                        [self createDirectory:backupDir];
+                        
+                        NSDate *currDate = [NSDate date];
+                        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+                        [dateFormatter setDateFormat:@"YYYYMMdd"];
+                        
+                        NSString *dateString = [dateFormatter stringFromDate:currDate];
+                        
+                        NSString *ZipFileName = [NSString stringWithFormat:@"%@_%@.zip",  txtAgentCode.text, dateString];
+                        NSString *ZipPath = [backupDir stringByAppendingPathComponent: ZipFileName];
+                        
+                        /*TESTING UPLOAD PURPOSE*/
+//                        NSString *ZipPath = [docsDir stringByAppendingPathComponent: @"testupload2.zip"];
+                        
+                        
+                        fileSize = [[[NSFileManager defaultManager] attributesOfItemAtPath:ZipPath error:nil] fileSize];
+                        
+                        //                  Create
+                        if([SSZipArchive createZipFileAtPath:ZipPath withContentsOfDirectory:docsDir]) {
+                        
+                            //upload to FTP
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                [self uploadBackupFile:ZipFileName
+                                     folderDestination:[NSString stringWithFormat:@"/Backup/%@", backupFolder]
+                                              filePath:ZipPath];
+                            });
+                        }
+                    }else{
+                        
                     }
-                }else{
-                    
-                }
-            }] resume];
+                }] resume];
+    } else {
+        UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Koneksi ke Server Gagal" message:[NSString stringWithFormat:@"Pastikan perangkat terhubung ke internet yang stabil untuk mengakses server"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+    }
 }
 
-- (IBAction)restoreBackup:(id)sender {
-    [spinnerLoading startLoadingSpinner:self.view label:@"Restore sedang berjalan"];
-    //first we call pre download webservice
-    NSString *preDownloadParams = [NSString stringWithFormat:@"?agentID=%@",txtAgentCode.text];
-    
-//    NSString *serverURL = [NSString stringWithFormat:@"http://tmcuat.tokiomarine-life.co.id/TMLI_WebService/AgentWS.asmx/GetBackupFileLink%@", preDownloadParams];
-    NSString *serverURL = @"http://tmcuat.tokiomarine-life.co.id/TMLI_WebService/AgentWS.asmx/GetBackupFileLink?agentCode=11242";
-    
-    NSURLSession *session = [NSURLSession sharedSession];
-    [[session dataTaskWithURL:[NSURL URLWithString:serverURL]
-            completionHandler:^(NSData *data,
-                                NSURLResponse *response,
-                                NSError *error) {
-                // handle response
-                if(data != nil){
-                    NSLog(@"backup post upload : %@",preDownloadParams);
-                    NSString *myString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                    NSLog(@"data : %@",myString);
+- (IBAction)restoreBackup:(id)sender
+{ //TODO: Check behaviour if download took to long
+    if([self connected]) {
+        [spinnerLoading startLoadingSpinner:self.view label:@"Restore sedang berjalan"];
+        //first we call pre download webservice
+        NSString *preDownloadParams = [NSString stringWithFormat:@"?agentID=%@",txtAgentCode.text];
+        
+        NSString *serverURL = [NSString stringWithFormat:@"%@/webservices/agentws.asmx/GetBackupFileLink?agentCode=%@",[(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL], txtAgentCode.text];
+        //    NSString *serverURL = [NSString stringWithFormat:@"http://tmcuat.tokiomarine-life.co.id/TMLI_WebService/AgentWS.asmx/GetBackupFileLink?agentCode=%@", txtAgentCode.text];
+        
+        NSURLSession *session = [NSURLSession sharedSession];
+        [[session dataTaskWithURL:[NSURL URLWithString:serverURL]
+                completionHandler:^(NSData *data,
+                                    NSURLResponse *response,
+                                    NSError *error) {
+                    // handle response
+                    if(data != nil){
+                        NSLog(@"backup post upload : %@",preDownloadParams);
+                        NSString *myString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                        NSLog(@"data : %@",myString);
+                        
+                        NSString *startTag = @"<string xmlns=\"http://tempuri.org/\">";
+                        NSString *endTag = @"</string>";
+                        NSString *responseString;
+                        
+                        NSScanner *scanner = [[NSScanner alloc] initWithString:myString];
+                        [scanner scanUpToString:startTag intoString:nil];
+                        scanner.scanLocation += [startTag length];
+                        [scanner scanUpToString:endTag intoString:&responseString];
+                        //                    NSString *urlScheme = @"http://";
+                        NSString *urlDownload = responseString;
+                        
+                        //TODO: fix backup folder destination
+                        NSString *destination = @"backup.zip";
+                        //download from FTP
+                        if([responseString rangeOfString:@"No Data Found"].location == NSNotFound) {
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                [self downloadBackupFile:@"files.zip" filePath:urlDownload downloadDestination:destination];
+                            });
+                        } else {
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                [spinnerLoading stopLoadingSpinner];
+                                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Tidak ada data backup di server" message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                                [alert show];
+                            });
+                        }
+                        
+                        //                    [self restoreFiles:@"11500001_20161007.zip"];
+                    }else{
+                        
+                    }
                     
-                    NSString *startTag = @"<string xmlns=\"http://tempuri.org/\">";
-                    NSString *endTag = @"</string>";
-                    NSString *responseString;
-                    
-                    NSScanner *scanner = [[NSScanner alloc] initWithString:myString];
-                    [scanner scanUpToString:startTag intoString:nil];
-                    scanner.scanLocation += [startTag length];
-                    [scanner scanUpToString:endTag intoString:&responseString];
-                    NSString *urlScheme = @"http://";
-                    NSString *urlDownload = [urlScheme stringByAppendingString:responseString];
-                    
-                    //TODO: fix backup folder destination
-                    NSString *destination = @"backup.zip";
-                    //download from FTP
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [self downloadBackupFile:@"files.zip" filePath:urlDownload downloadDestination:destination];
-                    });
-                    
-//                    [self restoreFiles:@"11500001_20161007.zip"];
-                }else{
-                    
-                }
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    UIAlertView* alertError = [[UIAlertView alloc] initWithTitle:@"Back up telah sukses" message:[NSString stringWithFormat:@""] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-                    [alertError show];
-                });
-            }] resume];
+                }] resume];
+
+    } else {
+        UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Koneksi ke Server Gagal" message:[NSString stringWithFormat:@"Pastikan perangkat terhubung ke internet yang stabil untuk mengakses server"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+    }
 }
 
 - (void)restoreFiles:(NSString *)BackupFileName {
@@ -419,7 +445,7 @@ id temp;
     
     //path of backup file
     NSString *libsDir = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *ZipPath = [docsDir stringByAppendingPathComponent: BackupFileName];
+    NSString *ZipPath = [libsDir stringByAppendingPathComponent: BackupFileName];
     
     //first we delete all files inside the documents folder
     NSArray *allFiles = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:docsDir error:nil];
@@ -430,11 +456,15 @@ id temp;
     }
     
     // then we unzip the backup file
-    [SSZipArchive unzipFileAtPath:ZipPath toDestination:docsDir];
+    if([SSZipArchive unzipFileAtPath:ZipPath toDestination:docsDir]) {
+        UIAlertView* alertError = [[UIAlertView alloc] initWithTitle:@"Restore telah sukses" message:[NSString stringWithFormat:@""] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alertError show];
+    } else {
+        //TODO: Add error message when unzipping failed
+    }
 }
 
 - (void)downloadBackupFile:(NSString *)fileName filePath:(NSString *)filePath downloadDestination: (NSString *) destination{
-    //TODO: add error handler for download process
     NSString *urlDownload = filePath;
     NSBundle *myLibraryBundle = [NSBundle bundleWithURL:[[NSBundle mainBundle]
                                                          URLForResource:@"xibLibrary" withExtension:@"bundle"]];
@@ -445,7 +475,7 @@ id temp;
     progressBar.TransferMode = kBRHTTPMode;
     progressBar.HTTPURLFilePath = urlDownload;
     progressBar.HTTPLocalFilePath = destination;
-//    progressBar.HTTPFileSize = 
+    progressBar.isBackupFiles = @"TRUE";
     progressBar.ftpfiletoDownload = [NSString stringWithFormat:@"%@/%@", filePath, fileName];
     progressBar.modalPresentationStyle = UIModalPresentationFormSheet;
     progressBar.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
@@ -461,7 +491,10 @@ id temp;
 -(void)uploadBackupFile:(NSString *)fileName folderDestination:(NSString *)folderDestination filePath:(NSString *)filePath
 {
     NSString *preUploadParams = [NSString stringWithFormat:@"?agentID=%@",txtAgentCode.text];
-    NSString *urlUpload = [NSString stringWithFormat: @"http://tmcuat.tokiomarine-life.co.id/TMLI_WebService/Default.aspx?folderName=%@", txtAgentCode.text];
+    NSString *urlUpload = [NSString stringWithFormat:@"%@/webservices/Default.aspx?folderName=%@",[(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL], txtAgentCode.text];
+//    NSString *urlUpload = [NSString stringWithFormat: @"http://tmcuat.tokiomarine-life.co.id/TMLI_WebService/Default.aspx?folderName=%@", txtAgentCode.text];
+    
+//    NSString *serverURL = [NSString stringWithFormat:@"%@/webservices/agentws.asmx/GetBackupFileLink?agentCode=%@",[(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL], txtAgentCode.text];
     NSBundle *myLibraryBundle = [NSBundle bundleWithURL:[[NSBundle mainBundle]
                                                          URLForResource:@"xibLibrary" withExtension:@"bundle"]];
     progressBar = [[ProgressBar alloc]initWithNibName:@"ProgressBar" bundle:myLibraryBundle];
@@ -489,7 +522,8 @@ id temp;
 #pragma mark - ProgressDelegate
 -(void) uploadisFinished
 {
-    NSString *urlUpdate = @"http://tmcuat.tokiomarine-life.co.id/TMLI_WebService/AgentWS.asmx";
+    NSString *urlUpdate = [NSString stringWithFormat:@"%@/webservices/agentws.asmx",[(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL]];
+//    NSString *urlUpdate = @"http://mpos-sino-uat.cloudapp.net/webservices/agentws.asmx";
     
     // string constant for the post parameter
     NSString* agentCodeParamConstant = txtAgentCode.text;
@@ -527,8 +561,6 @@ id temp;
 //    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", BoundaryConstant];
 //    [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
     
-    
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sharedSession];
     [[session dataTaskWithRequest:request completionHandler:^(NSData *data,
                                                               NSURLResponse *response,
@@ -537,27 +569,33 @@ id temp;
         if(error) {
             NSLog(@"%@", [error localizedDescription]);
         }
-                       
+        NSString *responseData = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         long statusCode = [(NSHTTPURLResponse *)response statusCode];
         NSLog(@"%ld", statusCode);
     }] resume];
 
-    UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Backup Berhasil" message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-    [alert show];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Backup Berhasil" message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+    });
 }
 -(void) uploadisError
 {
-    UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Koneksi ke FTP Gagal" message:[NSString stringWithFormat:@"Pastikan perangkat terhubung ke internet yang stabil untuk mengakses FTP"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-    [alert show];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Koneksi ke Server Gagal" message:[NSString stringWithFormat:@"Pastikan perangkat terhubung ke internet yang stabil untuk mengakses server"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+    });
 }
 
 -(void) downloadisFinished
 {
-    [self restoreFiles:@"Brochures/backup.zip"];
+    //Restore the files downloaded
+    [self restoreFiles:@"backup.zip"];
     
-    NSString *urlUpdate = @"http://tmcuat.tokiomarine-life.co.id/TMLI_WebService/AgentWS.asmx";
-    // the boundary string : a random string, that will not repeat in post data, to separate post data fields.
-    NSString *BoundaryConstant = @"----------V2ymHFg03ehbqgZCaKO6uy";
+    /* Call webservice UpdateOnPostDownload START*/
+    NSString *urlUpdate = [NSString stringWithFormat:@"%@/webservices/agentws.asmx",[(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL]];
+    // NSString *urlUpdate = @"http://mpos-sino-uat.cloudapp.net/webservices/agentws.asmx";
     
     // string constant for the post parameter
     NSString* agentCodeParamConstant = txtAgentCode.text;
@@ -595,15 +633,20 @@ id temp;
         if(error) {
             NSLog(@"%@", [error localizedDescription]);
         }
-                    
+        NSString *responseData = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         long statusCode = [(NSHTTPURLResponse *)response statusCode];
         NSLog(@"%ld", statusCode);
     }] resume];
+    /* Call webservice UpdateOnPostDownload END*/
+    
+    [loginDB updateUDID];
 }
 
 - (void)downloadisError{
-    UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Koneksi ke FTP Gagal" message:[NSString stringWithFormat:@"Pastikan perangkat terhubung ke internet yang stabil untuk mengakses FTP"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-    [alert show];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Koneksi ke Server Gagal" message:[NSString stringWithFormat:@"Pastikan perangkat terhubung ke internet yang stabil untuk mengakses server"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+    });
 }
 
 
@@ -1385,5 +1428,27 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
     for (int i=0;i<[arrayFileName count];i++){
         [cffAPIController apiCallCrateHtmlFile:[NSString stringWithFormat:@"%@/Service2.svc/GetHtmlFile?fileName=%@",[(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL],[arrayFileName objectAtIndex:i]] RootPathFolder:@"CFFfolder"];
     }
+}
+
+- (BOOL)connected
+{
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
+    return networkStatus != NotReachable;
+}
+
+//we store the UDID into the Keychain
+-(NSString *)getUniqueDeviceIdentifierAsString
+{
+    NSString *appName=[[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString*)kCFBundleNameKey];
+    
+    NSString *strApplicationUUID = [SSKeychain passwordForService:appName account:@"incoding"];
+    if (strApplicationUUID == nil)
+    {
+        strApplicationUUID  = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+        [SSKeychain setPassword:strApplicationUUID forService:appName account:@"incoding"];
+        
+    }
+    return strApplicationUUID;
 }
 @end
