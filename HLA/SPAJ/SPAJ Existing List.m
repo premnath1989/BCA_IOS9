@@ -241,6 +241,7 @@
         [formTenagaPenjualViewController setDictTransaction:[arraySPAJTransaction objectAtIndex:sender.tag]];
         formTenagaPenjualViewController.modalPresentationStyle = UIModalPresentationFormSheet;
         [self presentViewController:formTenagaPenjualViewController animated:YES completion:nil];
+        [formTenagaPenjualViewController setPreferredContentSize:CGSizeMake(819, 724)];
     }
 
     - (IBAction)actionPaymentReceiptCapture:(UIButton *)sender{

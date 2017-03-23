@@ -78,13 +78,15 @@
 @synthesize dictTransaction;
 
 - (void)viewWillLayoutSubviews{
-    [super viewWillLayoutSubviews];
-    self.view.superview.bounds = CGRectMake(0, 0, 819, 724);
-    [self.view.superview setBackgroundColor:[UIColor clearColor]];
+//    [super viewWillLayoutSubviews];
+//    self.view.superview.bounds = CGRectMake(0, 0, 819, 724);
+//    [self.view.superview setBackgroundColor:[UIColor clearColor]];
 }
 
 -(void)viewDidLayoutSubviews{
-    [scrollViewForm setContentSize:CGSizeMake(stackViewForm.frame.size.width, stackViewForm.frame.size.height)];
+    dispatch_async (dispatch_get_main_queue(), ^{
+        [scrollViewForm setContentSize:CGSizeMake(819, 1901)];
+    });
 }
 
 
@@ -272,7 +274,7 @@
 -(void)voidLoadAllSalesDeclarationData{
     @try {
         int i=1;
-        for (UIView *view in [stackViewForm subviews]) {
+        for (UIView *view in [scrollViewForm subviews]) {
             if (view.tag == 1){
                 for (UIView *viewDetail in [view subviews]) {
                     if ([viewDetail isKindOfClass:[SegmentSPAJ class]]) {
@@ -351,7 +353,7 @@
         NSMutableArray* arrayFormAnswers = [[NSMutableArray alloc]init];
         [buttonSubmit setEnabled:false];
         int i=1;
-        for (UIView *view in [stackViewForm subviews]) {
+        for (UIView *view in [scrollViewForm subviews]) {
             if (view.tag == 1){
                 for (UIView *viewDetail in [view subviews]) {
                     if ([viewDetail isKindOfClass:[SegmentSPAJ class]]) {

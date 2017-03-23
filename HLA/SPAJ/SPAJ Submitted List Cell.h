@@ -34,6 +34,7 @@
     // BUTTON
 
     @property (nonatomic, weak) IBOutlet UIButton *buttonView;
+    @property (nonatomic, weak) IBOutlet UIButton *buttonResubmission;
 
     // VARIABLE
 

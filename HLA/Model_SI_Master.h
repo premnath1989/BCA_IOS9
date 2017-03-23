@@ -16,10 +16,12 @@
 }
 -(void)saveIlustrationMaster:(NSDictionary *)dataIlustration;
 -(NSDictionary *)getIlustrationata:(NSString *)orderBy Method:(NSString *)sortMethod;
+-(NSDictionary *)getIlustrationOnlyResubmissionData:(NSString *)orderBy Method:(NSString *)sortMethod;
 -(void)updateIlustrationMaster:(NSDictionary *)dataIlustration;
 -(int)getMasterCount:(NSString *)SINo;
 
 -(NSDictionary *)searchSIListingByName:(NSString *)SINO POName:(NSString *)poName Order:(NSString *)orderBy Method:(NSString *)method DateFrom:(NSString *)dateFrom DateTo:(NSString *)dateTo;
+-(NSDictionary *)searchSIOnlyResubmissionListingByName:(NSString *)SINO POName:(NSString *)poName Order:(NSString *)orderBy Method:(NSString *)method DateFrom:(NSString *)dateFrom DateTo:(NSString *)dateTo;
 -(NSDictionary *)getNonQuickQuoteIlustrationata:(NSString *)orderBy Method:(NSString *)sortMethod;
 
 -(void)deleteIlustrationMaster:(NSString *)siNo;
@@ -31,4 +33,5 @@
 -(void)updateIlustrationSumAssured:(NSString *)stringSumAssured SINO:(NSString *)stringSINO;
 -(void)updateAllSumAssuredMasterDataFromUnitLinkedTable;
 -(void)updateAllSumAssuredMasterDataFromHeritageKeluargakuTable;
+
 @end

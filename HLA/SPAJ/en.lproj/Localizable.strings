@@ -143,6 +143,7 @@ BUTTON_EXISTINGLIST = "Existing\nList";
 BUTTON_SUBMITTEDLIST = "Submitted\nList";
 BUTTON_ADD = "Add";
 BUTTON_VIEW = "View";
+BUTTON_RESUBMIT = "Resubmit";
 BUTTON_CLOSE = "Close";
 BUTTON_DONE = "Done";
 BUTTON_CANCEL = "Cancel";

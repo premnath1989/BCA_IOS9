@@ -1102,9 +1102,9 @@ BOOL isFirstLoad;
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if(alertView.tag == 5000){
+    if(alertView.tag == 5000){ // SaveAs AlertView
         switch (buttonIndex) {
-            case 0:
+            case 0: // OK Button
             {
                 NSLog(@"ok");
                 NSString *oldSiNo = [dictionaryPOForInsert valueForKey:@"SINO"];
@@ -1150,6 +1150,7 @@ BOOL isFirstLoad;
                 
                 //update SI created date for newSiNo
                 [_modelSIPOData updatePODataDate:newSiNo Date:[formatter getDateToday:@"dd/MM/yyyy"]];
+                [_modelSIPOData updatePODataResubmission:newSiNo isResubmission:@"1"];
                 [_modelSIMaster updateIlustrationMasterDate:newSiNo];
                 [_modelSIPremium updatePremiumDate:newSiNo];
                 

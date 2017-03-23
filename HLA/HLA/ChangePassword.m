@@ -447,6 +447,9 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
         else if([bodyPart isKindOfClass:[AgentWS_LoginAPIResponse class]]) {
             AgentWS_LoginAPIResponse* rateResponse = bodyPart;
             if([rateResponse.LoginAPIResult caseInsensitiveCompare:@"TRUE"]== NSOrderedSame){
+                //TODO: Add webservice call to check if agent has backup data
+//                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Backup Tersedia" message:[NSString stringWithFormat:@"Apakah Anda ingin mengunduh backup dari server?"] delegate:self cancelButtonTitle:@"Tidak" otherButtonTitles: @"Ya", nil];
+//                [alert show];
                 
                 [spinnerLoading stopLoadingSpinner];
                 [spinnerLoading startLoadingSpinner:self.view label:@"Sync sedang berjalan 1/4"];

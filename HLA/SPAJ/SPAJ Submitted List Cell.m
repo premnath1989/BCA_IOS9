@@ -27,6 +27,7 @@
     @synthesize labelProduct = _labelProduct;
     @synthesize labelState = _labelState;
     @synthesize buttonView = _buttonView;
+    @synthesize buttonResubmission = _buttonResubmission;
     @synthesize intID = _intID;
 
 
@@ -35,6 +36,7 @@
     - (void)awakeFromNib
     {
         [[_buttonView titleLabel]setText:NSLocalizedString(@"BUTTON_VIEW", nil)];
+        [[_buttonResubmission titleLabel] setText:NSLocalizedString(@"BUTTON_RESUBMIT", nil)];
     }
 
 

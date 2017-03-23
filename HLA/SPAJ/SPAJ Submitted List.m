@@ -15,6 +15,7 @@
 #import "String.h"
 #import "ModelSPAJTransaction.h"
 #import "SPAJFilesViewController.h"
+#import "SIResubmissionListing.h"
 
 // DECLARATION
 
@@ -30,6 +31,7 @@
 @implementation SPAJSubmittedList{
     ModelSPAJTransaction* modelSPAJTransaction;
     SPAJFilesViewController* spajFilesViewController;
+    SIResubmissionListing* siResubmissionListingViewController;
     NSMutableArray* arraySPAJTransaction;
     
     NSString* sortedBy;
@@ -194,6 +196,15 @@
         [spajFilesViewController.buttonSubmit setHidden:YES];
     }
 
+    - (IBAction)actionShowResubmissionList:(UIButton *)sender {
+        UIStoryboard *HLAWPStoryBoard = [UIStoryboard storyboardWithName:@"HLAWPStoryboard" bundle:Nil];
+        siResubmissionListingViewController = [HLAWPStoryBoard instantiateViewControllerWithIdentifier:@"SIResubmissionListing"];
+        siResubmissionListingViewController.modalPresentationStyle = UIModalPresentationOverFullScreen;
+        NSMutableArray *test = [arraySPAJTransaction objectAtIndex:sender.tag];
+        [siResubmissionListingViewController setSelectedSPAJ: [test valueForKey:@"SPAJNumber"]];
+        [self presentViewController:siResubmissionListingViewController animated:YES completion:nil];
+    }
+
     - (IBAction)actionEdit:(id)sender
     {
         [self resignFirstResponder];
@@ -320,6 +331,8 @@
             
         }
         
+        tableView.rowHeight = 100;
+        
         /*NSManagedObject* querySubmitted = [_arrayQuerySubmitted objectAtIndex:[indexPath row]];
         
         NSString* stringUpdatedOnDate = [_functionUserInterface generateDate:[querySubmitted valueForKey:COLUMN_SPAJHEADER_UPDATEDON]];
@@ -354,10 +367,14 @@
             [cellSPAJSubmitted.labelProduct setText: [[arraySPAJTransaction objectAtIndex:indexPath.row] valueForKey:@"ProductName"]];
             [cellSPAJSubmitted.labelState setText: [[arraySPAJTransaction objectAtIndex:indexPath.row] valueForKey:@"SPAJStatus"]];
             [cellSPAJSubmitted.buttonView  setTitle:NSLocalizedString(@"BUTTON_VIEW", nil) forState:UIControlStateNormal];
+            [cellSPAJSubmitted.buttonResubmission setTitle:NSLocalizedString(@"BUTTON_RESUBMIT", nil) forState:UIControlStateNormal];
             
             [cellSPAJSubmitted.buttonView addTarget:self
                                             action:@selector(actionShowFilesList:) forControlEvents:UIControlEventTouchUpInside];
+            [cellSPAJSubmitted.buttonResubmission addTarget:self
+                                             action:@selector(actionShowResubmissionList:) forControlEvents:UIControlEventTouchUpInside];
             [cellSPAJSubmitted.buttonView setTag:indexPath.row];
+            [cellSPAJSubmitted.buttonResubmission setTag:indexPath.row];
         }
         return cellSPAJSubmitted;
     }
