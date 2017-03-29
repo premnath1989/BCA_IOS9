@@ -298,24 +298,25 @@
     bool maximumReach = [modelSPAJSubmitTracker voidMaximumSubmitReached:[formatter getDateToday:@"yyyy-MM-dd"]];
     if (!maximumReach){
         [sender setEnabled:NO];
-        NSString *serverURL = [NSString stringWithFormat:@"%@/Service2.svc/CreateRemoteFtpFolder?spajNumber=%@",[(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL], [dictTransaction valueForKey:@"SPAJNumber"]];
-        
-        NSURLSession *session = [NSURLSession sharedSession];
-        [[session dataTaskWithURL:[NSURL URLWithString:serverURL]
-                completionHandler:^(NSData *data,
-                                    NSURLResponse *response,
-                                    NSError *error) {
-                    // handle response
-                    if(data != nil){
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            [sender setEnabled:NO];
+        [spinnerLoading startLoadingSpinner:self.view label:@"Uploading files"];
+//        NSString *serverURL = [NSString stringWithFormat:@"%@/Service2.svc/CreateRemoteFtpFolder?spajNumber=%@",[(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL], [dictTransaction valueForKey:@"SPAJNumber"]];
+//        
+//        NSURLSession *session = [NSURLSession sharedSession];
+//        [[session dataTaskWithURL:[NSURL URLWithString:serverURL]
+//                completionHandler:^(NSData *data,
+//                                    NSURLResponse *response,
+//                                    NSError *error) {
+//                    // handle response
+//                    if(data != nil){
+//                        dispatch_async(dispatch_get_main_queue(), ^{
+//                            [sender setEnabled:NO];
                             [self voidUploadFile];
-                        });
-                    }
-                    else{
-                        [sender setEnabled:YES];
-                    }
-                }] resume];
+//                        });
+//                    }
+//                    else{
+//                        [sender setEnabled:YES];
+//                    }
+//                }] resume];
     }
     else{
         UIAlertController *alertLockForm = [alert alertInformation:@"Peringatan" stringMessage:@"Anda tidak dapat melakukan submission karena telah melebihi batas jumlah submit per hari"];
@@ -326,33 +327,64 @@
 -(void)voidUploadFile{
     //NSArray * dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     //NSString *defaultDBPath = [[dirPaths objectAtIndex:0] stringByAppendingPathComponent:@"hladb.sqlite"];
-    NSString* fileName = [directoryContent objectAtIndex:intUploadCount];
-    fileName = [NSString stringWithFormat:@"%@/%@",[formatter generateSPAJFileDirectory:[dictTransaction valueForKey:@"SPAJEappNumber"]],fileName];
-    NSBundle *myLibraryBundle = [NSBundle bundleWithURL:[[NSBundle mainBundle]
-                                                         URLForResource:@"xibLibrary" withExtension:@"bundle"]];
-    progressBar = [[ProgressBar alloc]initWithNibName:@"ProgressBar" bundle:myLibraryBundle];
-    progressBar.TitleFileName = [NSString stringWithFormat: @"%@",[directoryContent objectAtIndex:intUploadCount]];
-    progressBar.progressDelegate = self;
-    progressBar.ftpfolderdestination = [dictTransaction valueForKey:@"SPAJNumber"];
-    progressBar.ftpfiletoUpload = fileName;
-    progressBar.TransferFunction = @"upload";
-    progressBar.TransferMode = kBRFTPMode;
-    progressBar.modalPresentationStyle = UIModalPresentationFormSheet;
-    progressBar.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    progressBar.preferredContentSize = CGSizeMake(600, 200);
-    [self presentViewController:progressBar animated:YES completion:nil];
+//    NSString* fileName = [directoryContent objectAtIndex:intUploadCount];
+//    fileName = [NSString stringWithFormat:@"%@/%@",[formatter generateSPAJFileDirectory:[dictTransaction valueForKey:@"SPAJEappNumber"]],fileName];
+//    NSBundle *myLibraryBundle = [NSBundle bundleWithURL:[[NSBundle mainBundle]
+//                                                         URLForResource:@"xibLibrary" withExtension:@"bundle"]];
+//    progressBar = [[ProgressBar alloc]initWithNibName:@"ProgressBar" bundle:myLibraryBundle];
+//    progressBar.TitleFileName = [NSString stringWithFormat: @"%@",[directoryContent objectAtIndex:intUploadCount]];
+//    progressBar.progressDelegate = self;
+//    progressBar.ftpfolderdestination = [dictTransaction valueForKey:@"SPAJNumber"];
+//    progressBar.ftpfiletoUpload = fileName;
+//    progressBar.TransferFunction = @"upload";
+//    progressBar.TransferMode = kBRFTPMode;
+//    progressBar.modalPresentationStyle = UIModalPresentationFormSheet;
+//    progressBar.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+//    progressBar.preferredContentSize = CGSizeMake(600, 200);
+//    [self presentViewController:progressBar animated:YES completion:nil];
+    
+    //USING HTTP POST
+    NSString* SPAJeappnum = [dictTransaction valueForKey:@"SPAJEappNumber"];
+    NSString* filePath = [formatter generateSPAJFileDirectory:SPAJeappnum];
+    NSString* docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString* submissionDir = [docDir stringByAppendingPathComponent:@"Submission"];
+    
+    [self createDirectory:submissionDir];
+    
+    // We're going to put the submission zip files at submission directory on Documents
+    NSString* ZipPath = [NSString stringWithFormat:@"%@.zip", [submissionDir stringByAppendingPathComponent:SPAJeappnum]];
+    
+    if([SSZipArchive createZipFileAtPath:ZipPath withContentsOfDirectory:filePath]) {
+        NSString *urlUpload = [NSString stringWithFormat:@"%@/default.aspx?folderName=%@",[(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL], [dictTransaction valueForKey:@"SPAJNumber"]];
+        
+        NSBundle *myLibraryBundle = [NSBundle bundleWithURL:[[NSBundle mainBundle]
+                                                             URLForResource:@"xibLibrary" withExtension:@"bundle"]];
+        progressBar = [[ProgressBar alloc]initWithNibName:@"ProgressBar" bundle:myLibraryBundle];
+        progressBar.TitleProgressBar = @"Uploading SPAJ Files";
+        progressBar.progressDelegate = self;
+        progressBar.TransferMode = kBRHTTPMode;
+        progressBar.ftpfiletoUpload = ZipPath;
+        progressBar.HTTPURLFilePath = urlUpload;
+        progressBar.TransferFunction = @"upload";
+        progressBar.modalPresentationStyle = UIModalPresentationFormSheet;
+        progressBar.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        progressBar.preferredContentSize = CGSizeMake(600, 200);
+        [self presentViewController:progressBar animated:YES completion:nil];
+        
+        [spinnerLoading stopLoadingSpinner];
+    }
 }
 
 - (void)uploadisFinished{
-    intUploadCount = intUploadCount + 1;
-    if (intUploadCount == [directoryContent count]){
-        intUploadCount = 0;
+//    intUploadCount = intUploadCount + 1;
+//    if (intUploadCount == [directoryContent count]){
+//        intUploadCount = 0;
         //[self performSelector:@selector(uploadCompleted) withObject:nil afterDelay:5];
         NSString* stringSPAJNumber=[dictTransaction valueForKey:@"SPAJNumber"];
         NSString* stringProductName=[dictTransaction valueForKey:@"ProductName"];
         NSString* stringPemegangPolis=[dictTransaction valueForKey:@"ProspectName"];
         
-        NSString *urlStr = [NSString stringWithFormat:@"%@/Service2.svc/UpdateOnPostUploadData?spajNumber=%@&producName=%@&polisOwner=%@", [(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL], stringSPAJNumber,stringProductName,stringPemegangPolis];
+        NSString *urlStr = [NSString stringWithFormat:@"%@/Service2.svc/UpdateOnPostUploadData?spajNumber=%@&producName=%@&polisOwner=%@&isHttpPost=TRUE", [(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL], stringSPAJNumber,stringProductName,stringPemegangPolis];
         
         
         urlStr = [urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
@@ -384,13 +416,32 @@
                         [self presentViewController:alertController animated:YES completion:nil];
                     }
                 }] resume];
-    }
-    else{
-        [progressBar dismissViewControllerAnimated:YES completion:^{
-            [self voidUploadFile];
-        }];
-    }
+//    }
+//    else{
+//        [progressBar dismissViewControllerAnimated:YES completion:^{
+//            [self voidUploadFile];
+//        }];
+//    }
 
+}
+
+- (void)createDirectory:(NSString *)filePath{
+    //create Directory
+    NSError *error;
+    if (![[NSFileManager defaultManager] fileExistsAtPath:filePath])	//Does directory already exist?
+    {
+        if (![[NSFileManager defaultManager] createDirectoryAtPath:filePath
+                                       withIntermediateDirectories:NO
+                                                        attributes:nil
+                                                             error:&error])
+        {
+            NSLog(@"Create directory error: %@", error);
+        }
+    }else{
+        if ([[NSFileManager defaultManager] removeItemAtPath:filePath error:&error]){
+            [self createDirectory:filePath];
+        }
+    }
 }
 
 #pragma mark delegate

@@ -7,11 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SSZipArchive.h"
+#import "SpinnerUtilities.h"
+
 @protocol SPAJFilesDelegate
 - (void) loadSPAJTransaction;
 @end
 
-@interface SPAJFilesViewController : UIViewController
+@interface SPAJFilesViewController : UIViewController {
+    SpinnerUtilities *spinnerLoading;
+}
 @property (nonatomic,weak) id <SPAJFilesDelegate> delegateSPAJFiles;
 
 @property (weak, nonatomic) NSDictionary* dictTransaction;
