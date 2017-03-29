@@ -10,12 +10,15 @@
 #import <QuartzCore/QuartzCore.h>
 #import "SAMActivityViewController.h"
 #import "SAMActivityListViewController.h"
+#import "SAMNewNasabahViewController.h"
 #import "AppDelegate.h"
 #import "MainClient.h"
 
 @interface SAMDashboardViewController ()
 
 @end
+
+int const ADD_NASABAH_ALERT_TAG = 100;
 
 @implementation SAMDashboardViewController
 
@@ -55,14 +58,38 @@
 }
 
 -(IBAction)actionDataReferral:(id)sender{
-    SAMActivityViewController* viewController = [[SAMActivityViewController alloc] initWithNibName:@"SAMActivityViewController" bundle:nil];
-    [self.navigationController pushViewController:viewController animated:YES];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Apakah Anda ingin menggunakan data nasabah yang ada?" delegate:self cancelButtonTitle:@"Ya" otherButtonTitles:@"Buat Baru", nil];
+    [alert setTag:ADD_NASABAH_ALERT_TAG];
+    [alert show];
+    
 }
 
 -(IBAction)actionActivityLog:(id)sender{
     SAMActivityListViewController* viewController = [[SAMActivityListViewController alloc] initWithNibName:@"SAMActivityListViewController" bundle:nil];
     [self.navigationController pushViewController:viewController animated:YES];
 }
+
+-(void)actionActivityView {
+    SAMActivityViewController* viewController = [[SAMActivityViewController alloc] initWithNibName:@"SAMActivityViewController" bundle:nil];
+    [self.navigationController pushViewController:viewController animated:YES];
+}
+
+#pragma mark -Delegate
+
+-(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if(alertView.tag == ADD_NASABAH_ALERT_TAG) {
+        if(buttonIndex == 0) {
+            //TODO: Add call to create new nasabah vc
+            
+        } else {
+            SAMNewNasabahViewController* viewController = [[SAMNewNasabahViewController alloc] initWithNibName:@"SAMNewNasabahViewController" bundle:nil];
+            viewController.dashboardVC = self;
+            [self.navigationController pushViewController:viewController animated:YES];
+        }
+    }
+}
+
+
 
 /*
 #pragma mark - Navigation
