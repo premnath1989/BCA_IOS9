@@ -7,16 +7,24 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ActivityStatus.h"
 
-@interface SAMMeetingNoteViewController : UIViewController
+@interface SAMMeetingNoteViewController : UIViewController <ActivityStatusDelegate> {
+    ActivityStatus *_activityStatus;
+    
+    UIPopoverController *_statusPopoverController;
+}
 
 @property (weak, nonatomic) IBOutlet UIButton *meetingDatePicker;
-@property (weak, nonatomic) IBOutlet UIButton *meetingTimePicker;
+@property (weak, nonatomic) IBOutlet UIButton *meetingTimeFromPicker;
+@property (weak, nonatomic) IBOutlet UIButton *meetingTimeToPicker;
 @property (weak, nonatomic) IBOutlet UITextField *txtMeetingWhere;
 @property (weak, nonatomic) IBOutlet UITextField *txtMeetingActivity;
 @property (weak, nonatomic) IBOutlet UITextField *txtMeetingStatus;
 @property (weak, nonatomic) IBOutlet UITextView *txtMeetingComment;
+@property (weak, nonatomic) IBOutlet UIButton *outletStatus;
 
 -(IBAction)actionSubmit:(id)sender;
+-(IBAction)actionStatus:(id)sender;
 
 @end

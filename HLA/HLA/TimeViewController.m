@@ -15,6 +15,7 @@
 @implementation TimeViewController
 @synthesize outletTextHour,outletTextMinute,outletTextSecond;
 @synthesize timePickerView;
+@synthesize btnSender;
 @synthesize delegate = _delegate;
 
 - (void)viewDidLoad {

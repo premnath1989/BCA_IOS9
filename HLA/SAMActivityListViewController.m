@@ -7,7 +7,7 @@
 //
 
 #import "SAMActivityListViewController.h"
-#import "SAMTableViewAcitivtyListCell.h"
+#import "SAMTableViewActivityListCell.h"
 #import "SAMActivityDetailViewController.h"
 
 @interface SAMActivityListViewController ()
@@ -31,6 +31,16 @@
 {
     SAMActivityDetailViewController* viewController = [[SAMActivityDetailViewController alloc] initWithNibName:@"SAMActivityDetailViewController" bundle:nil];
     [self.navigationController pushViewController:viewController animated:YES];
+}
+
+-(void) editDetailsForIndexPath:(NSIndexPath*)indexPath
+{
+    SAMActivityDetailViewController* viewController = [[SAMActivityDetailViewController alloc] initWithNibName:@"SAMActivityDetailViewController" bundle:nil];
+    [self.navigationController pushViewController:viewController animated:YES];
+}
+
+-(IBAction)actionEdit:(UIButton*)sender {
+    [self editDetailsForIndexPath:0];
 }
 
 // TABLE
@@ -66,16 +76,21 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SAMTableViewAcitivtyListCell *cellSAMList = (SAMTableViewAcitivtyListCell *)[tableView dequeueReusableCellWithIdentifier:@"SAMTableViewAcitivtyListCell"];
+    SAMTableViewActivityListCell *cellSAMList = (SAMTableViewActivityListCell *)[tableView dequeueReusableCellWithIdentifier:@"SAMTableViewActivityListCell"];
     
     if (cellSAMList == nil)
     {
-        NSArray *arrayNIB = [[NSBundle mainBundle] loadNibNamed:@"SAMTableViewAcitivtyListCell" owner:self options:nil];
+        NSArray *arrayNIB = [[NSBundle mainBundle] loadNibNamed:@"SAMTableViewActivityListCell" owner:self options:nil];
         cellSAMList = [arrayNIB objectAtIndex:0];
     }
     else
     {
         
+    }
+    
+    if(indexPath.row < 5) {
+        [cellSAMList.buttonEdit addTarget:self action:@selector(actionEdit:) forControlEvents:UIControlEventTouchUpInside];
+        [cellSAMList.buttonEdit setTag:indexPath.row];
     }
     
     return cellSAMList;

@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *outletTextSecond;
 
 @property (nonatomic, strong) id <TimeViewControllerDelegate> delegate;
+@property int btnSender;
 
 
 @end

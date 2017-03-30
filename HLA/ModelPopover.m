@@ -267,6 +267,31 @@
     return dict;
 }
 
+-(NSDictionary *)getActivityStatus {
+    NSDictionary *dict;
+    
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    NSString *activityStatus = [[NSString alloc] init];
+    
+    FMResultSet *s = [database executeQuery:@"SELECT * FROM SAM_Activity_Status"];
+    
+    while([s next]) {
+        activityStatus = [NSString stringWithFormat:@"%@", [s stringForColumn:@"StatusDesc"]];
+    }
+    
+    dict = [[NSDictionary alloc] initWithObjectsAndKeys:activityStatus,@"ActivityStatus", nil];
+    
+    [results close];
+    [database close];
+    
+    return dict;
+}
+
 
 
 @end

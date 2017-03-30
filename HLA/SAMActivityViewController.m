@@ -8,9 +8,11 @@
 
 #import "SAMActivityViewController.h"
 #import "SAMMeetingScheduleViewController.h"
+#import "SAMMeetingNoteViewController.h"
 
 @interface SAMActivityViewController (){
     SAMMeetingScheduleViewController* samMeetingScheduleVC;
+    SAMMeetingNoteViewController* samMeetingNoteVC;
 }
 
 @end
@@ -21,6 +23,7 @@
     [super viewDidLoad];
     [self setCircleAndBorderView];
     samMeetingScheduleVC = [[SAMMeetingScheduleViewController alloc]initWithNibName:@"SAMMeetingScheduleViewController" bundle:nil];
+    samMeetingNoteVC = [[SAMMeetingNoteViewController alloc] initWithNibName:@"SAMMeetingNoteViewController" bundle:nil];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -48,6 +51,32 @@
     [samMeetingScheduleVC setModalPresentationStyle:UIModalPresentationFormSheet];
     samMeetingScheduleVC.preferredContentSize = CGSizeMake(703, 306);
     [self presentViewController:samMeetingScheduleVC animated:YES completion:nil];
+}
+
+-(IBAction)actionNewMeetingNote:(id)sender {
+    [samMeetingNoteVC setModalPresentationStyle:UIModalPresentationFormSheet];
+    samMeetingNoteVC.preferredContentSize = CGSizeMake(703, 456);
+    [self presentViewController:samMeetingNoteVC animated:YES completion:nil];
+}
+
+-(IBAction)actionCFF:(id)sender {
+    
+}
+
+-(IBAction)actionRecomendation:(id)sender {
+    
+}
+
+-(IBAction)actionVideo:(id)sender {
+    
+}
+
+-(IBAction)actionIllustration:(id)sender {
+    
+}
+
+-(IBAction)actionSPAJ:(id)sender {
+    
 }
 
 /*
