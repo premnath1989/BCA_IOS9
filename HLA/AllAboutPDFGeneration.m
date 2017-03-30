@@ -476,11 +476,11 @@
     fullpath = [NSString stringWithFormat:@"%@/%@",fullpath,mainFileName];
     
     UIImage *baseImage = [UIImage imageWithContentsOfFile:fullpath];
-    /*if (([stringFileName rangeOfString:@"amandment"].location != NSNotFound)||([stringFileName rangeOfString:@"amandemen"].location != NSNotFound)) {
-        CGRect rectSign1 = CGRectMake(120,  1990, imageSigned1.size.width, imageSigned1.size.height);
-        CGRect rectSign2 = CGRectMake(720, 1990, imageSigned2.size.width, imageSigned2.size.height);
-        CGRect rectSign3 = CGRectMake(200, 1990, imageSigned3.size.width, imageSigned3.size.height);
-        CGRect rectSign4 = CGRectMake(1320, 1990, imageSigned4.size.width, imageSigned4.size.height);
+    if (([stringFileName rangeOfString:@"amandment"].location != NSNotFound)||([stringFileName rangeOfString:@"amandemen"].location != NSNotFound)) {
+        CGRect rectSign1 = CGRectMake(120,  2600, imageSigned1.size.width, imageSigned1.size.height);
+        CGRect rectSign2 = CGRectMake(720, 2600, imageSigned2.size.width, imageSigned2.size.height);
+        CGRect rectSign3 = CGRectMake(200, 2600, imageSigned3.size.width, imageSigned3.size.height);
+        CGRect rectSign4 = CGRectMake(1320, 2600, imageSigned4.size.width, imageSigned4.size.height);
         
         UIImage *resultImage = [self generateSignatureForImage:baseImage signatureImage1:imageSigned1 signaturePostion1:rectSign1 signatureImage2:imageSigned2 signaturePostion2:rectSign2 signatureImage3:imageSigned3 signaturePostion3:rectSign3 signatureImage4:imageSigned4 signaturePostion4:rectSign4] ;
         NSData *thumbnailData = UIImageJPEGRepresentation(resultImage, 0);
@@ -488,8 +488,7 @@
         NSString *relativeOutputFilePath = [NSString stringWithFormat:@"%@", fullpath];
         [thumbnailData writeToFile:relativeOutputFilePath atomically:YES];
         
-    }*/
-    if (([stringFileName rangeOfString:@"chestpain"].location != NSNotFound)||([stringFileName rangeOfString:@"nyeridada"].location != NSNotFound)) {
+    } else if (([stringFileName rangeOfString:@"chestpain"].location != NSNotFound)||([stringFileName rangeOfString:@"nyeridada"].location != NSNotFound)) {
         CGRect rectSign1 = CGRectMake(120,  7842, imageSigned1.size.width, imageSigned1.size.height);
         CGRect rectSign2 = CGRectMake(720, 7842, imageSigned2.size.width, imageSigned2.size.height);
         CGRect rectSign3 = CGRectMake(200, 7842, imageSigned3.size.width, imageSigned3.size.height);
