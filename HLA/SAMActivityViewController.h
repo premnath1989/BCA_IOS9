@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AppDelegate.h"
 
 @interface SAMActivityViewController : UIViewController{
     IBOutlet UIView* viewActivitySteps;

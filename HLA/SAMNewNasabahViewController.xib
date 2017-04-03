@@ -17,6 +17,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SAMNewNasabahViewController">
             <connections>
                 <outlet property="outletDoB" destination="HM3-Xp-DaL" id="6WK-or-xKf"/>
+                <outlet property="outletProspectCountryBirthplace" destination="0hO-OE-78p" id="TbW-DK-rQ4"/>
                 <outlet property="outletReferralSource" destination="0Ja-f7-PDd" id="XfV-RE-Ar8"/>
                 <outlet property="scrollViewForm" destination="Uzs-cN-qs8" id="TK3-ek-AVu"/>
                 <outlet property="segGender" destination="sc0-Lb-NTt" id="cvb-oP-UuO"/>
@@ -429,6 +430,15 @@
                                     </segments>
                                     <color key="tintColor" red="0.53812521700000004" green="0.7821553349" blue="0.39622092250000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </segmentedControl>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0hO-OE-78p">
+                                    <rect key="frame" x="656" y="105" width="300" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
+                                    <state key="normal" image="Expand Arrow.png">
+                                        <color key="titleColor" red="0.34509803919999998" green="0.34901960780000002" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>

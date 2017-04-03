@@ -31,6 +31,10 @@ int const TIME_TO_BUTTON_TAG = 1;
 @synthesize txtMeetingComment;
 @synthesize outletStatus;
 
+@synthesize databasePath;
+
+#pragma mark -View
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -39,12 +43,17 @@ int const TIME_TO_BUTTON_TAG = 1;
     
     meetingTimeFromPicker.tag = TIME_FROM_BUTTON_TAG;
     meetingTimeToPicker.tag = TIME_TO_BUTTON_TAG;
+    
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark -Action
 
 -(IBAction)actionStatus:(id)sender {
     [self resignFirstResponder];
@@ -64,27 +73,6 @@ int const TIME_TO_BUTTON_TAG = 1;
     }
     [_statusPopoverController presentPopoverFromRect:[sender bounds]  inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 
-}
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
--(void) selectedStatus:(NSString *)status {
-    outletStatus.titleLabel.text = status;
-    if([status isEqualToString:@"- SELECT -"]) {
-        outletStatus.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
-    } else {
-        outletStatus.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    }
-    [outletStatus setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",status]forState:UIControlStateNormal];
-    [outletStatus setBackgroundColor:[UIColor clearColor]];
-    [_statusPopoverController dismissPopoverAnimated:YES];
 }
 
 -(IBAction)actionDateMeeting:(UIButton *)sender{
@@ -122,6 +110,29 @@ int const TIME_TO_BUTTON_TAG = 1;
     rect.origin.y = [sender frame].origin.y + 40;
     
     [popoverViewer presentPopoverFromRect:[sender frame]  inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+}
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+#pragma mark -Delegate
+
+-(void) selectedStatus:(NSString *)status {
+    outletStatus.titleLabel.text = status;
+    if([status isEqualToString:@"- SELECT -"]) {
+        outletStatus.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+    } else {
+        outletStatus.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    }
+    [outletStatus setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",status]forState:UIControlStateNormal];
+    [outletStatus setBackgroundColor:[UIColor clearColor]];
+    [_statusPopoverController dismissPopoverAnimated:YES];
 }
 
 -(void)datePick:(DateViewController *)inController strDate:(NSString *)aDate strAge:(NSString *)aAge intAge:(int)bAge intANB:(int)aANB {

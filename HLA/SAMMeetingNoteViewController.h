@@ -11,6 +11,7 @@
 
 @interface SAMMeetingNoteViewController : UIViewController <ActivityStatusDelegate> {
     ActivityStatus *_activityStatus;
+    sqlite3 *contactDB;
     
     UIPopoverController *_statusPopoverController;
 }
@@ -23,6 +24,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtMeetingStatus;
 @property (weak, nonatomic) IBOutlet UITextView *txtMeetingComment;
 @property (weak, nonatomic) IBOutlet UIButton *outletStatus;
+
+@property NSString *databasePath;
 
 -(IBAction)actionSubmit:(id)sender;
 -(IBAction)actionStatus:(id)sender;

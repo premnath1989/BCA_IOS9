@@ -79,12 +79,17 @@ int const ADD_NASABAH_ALERT_TAG = 100;
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if(alertView.tag == ADD_NASABAH_ALERT_TAG) {
         if(buttonIndex == 0) {
-            //TODO: Add call to create new nasabah vc
+            //TODO: Add call to select existing nasabah
             
         } else {
-            SAMNewNasabahViewController* viewController = [[SAMNewNasabahViewController alloc] initWithNibName:@"SAMNewNasabahViewController" bundle:nil];
-            viewController.dashboardVC = self;
-            [self.navigationController pushViewController:viewController animated:YES];
+//            SAMNewNasabahViewController* viewController = [[SAMNewNasabahViewController alloc] initWithNibName:@"SAMNewNasabahViewController" bundle:nil];
+//            viewController.dashboardVC = self;
+//            [self.navigationController pushViewController:viewController animated:YES];
+            
+            UIStoryboard* clientProfileStoryboard = [UIStoryboard storyboardWithName:@"ProspectProfileStoryboard" bundle:nil];
+            prospectVC = [clientProfileStoryboard instantiateViewControllerWithIdentifier:@"Prospect"];
+            prospectVC.delegate = self;
+            [self.navigationController pushViewController: prospectVC animated:YES];
         }
     }
 }

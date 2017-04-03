@@ -9,6 +9,10 @@
 #import "SAMActivityViewController.h"
 #import "SAMMeetingScheduleViewController.h"
 #import "SAMMeetingNoteViewController.h"
+#import "MainCustomer.h"
+#import "MainScreen.h"
+#import "ProductInformation.h"
+#import "SPAJ Main.h"
 
 @interface SAMActivityViewController (){
     SAMMeetingScheduleViewController* samMeetingScheduleVC;
@@ -60,11 +64,20 @@
 }
 
 -(IBAction)actionCFF:(id)sender {
-    
+    UIStoryboard *cpStoryboard = [UIStoryboard storyboardWithName:@"CFFStoryboard" bundle:Nil];
+    MainCustomer *mainCustomer = [cpStoryboard instantiateViewControllerWithIdentifier:@"mainCFF"];
+    mainCustomer.modalPresentationStyle = UIModalPresentationFullScreen;
+    mainCustomer.IndexTab = 1;
+    [self presentViewController:mainCustomer animated:NO completion:Nil];
+    mainCustomer = Nil;
+    AppDelegate *appdlg = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    appdlg.eApp=NO;
 }
 
 -(IBAction)actionRecomendation:(id)sender {
-    
+    ProductInformation *view = [[ProductInformation alloc] initWithNibName:@"ProductInformation" bundle:nil];
+    view.modalTransitionStyle = UIModalPresentationFullScreen;
+    [self presentViewController:view animated:NO completion:nil];
 }
 
 -(IBAction)actionVideo:(id)sender {
@@ -72,11 +85,21 @@
 }
 
 -(IBAction)actionIllustration:(id)sender {
-    
+    // Override option, open the Traditional SI
+    UIStoryboard *cpStoryboard = [UIStoryboard storyboardWithName:@"HLAWPStoryboard" bundle:Nil];
+    AppDelegate *appdlg = (AppDelegate*)[[UIApplication sharedApplication] delegate ];
+    MainScreen *mainScreen= [cpStoryboard instantiateViewControllerWithIdentifier:@"Main"];
+    mainScreen.tradOrEver = @"TRAD";
+    mainScreen.modalPresentationStyle = UIModalPresentationFullScreen;
+    mainScreen.IndexTab = appdlg.SIListingIndex;
+    [self presentViewController:mainScreen animated:NO completion:Nil];
+    mainScreen= Nil;
+    appdlg = nil;
 }
 
 -(IBAction)actionSPAJ:(id)sender {
-    
+    SPAJMain* viewController = [[SPAJMain alloc] initWithNibName:@"SPAJ Main" bundle:nil];
+    [self presentViewController:viewController animated:true completion:nil];
 }
 
 /*

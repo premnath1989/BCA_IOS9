@@ -7,13 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ProspectViewController.h"
 
-@interface SAMDashboardViewController : UIViewController <UIAlertViewDelegate>{
+@interface SAMDashboardViewController : UIViewController <UIAlertViewDelegate, ProspectViewControllerDelegate>{
     IBOutlet UIView *viewCircleOutside;
     IBOutlet UIView *viewCircleInnerSide;
     
     IBOutlet UIView *viewUpcomingAppointments;
     IBOutlet UIView *viewSubmitted;
+    
+    ProspectViewController *prospectVC;
 }
 
 -(void)actionActivityView;

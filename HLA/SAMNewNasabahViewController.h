@@ -12,6 +12,7 @@
 #import "ReferralSource.h"
 #import "SIDate.h"
 #import "SAMDashboardViewController.h"
+#import "Country2.h"
 
 @interface SAMNewNasabahViewController : UIViewController <NIPInfoDelegate, BranchInfoDelegate, ReferralSourceDelegate, SIDateDelegate, UIAlertViewDelegate> {
 
@@ -19,11 +20,16 @@
     BranchInfo *_branchInfo;
     ReferralSource *_referralSource;
     SIDate *_SIDate;
+    Country2 *_Country2List;
+    
+    NSString *databasePath;
+    sqlite3 *contactDB;
     
     UIPopoverController *_nipInfoPopover;
     UIPopoverController *_branchInfoPopover;
     UIPopoverController *_referralSourcePopover;
     UIPopoverController *_datePopover;
+    UIPopoverController *_country2Popover;
     
     IBOutlet UIScrollView *scrollViewForm;
 }
@@ -46,6 +52,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtProspectId;
 @property (weak, nonatomic) IBOutlet UITextField *txtProspectBirthplace;
 @property (weak, nonatomic) IBOutlet UIButton *outletDoB;
+@property (weak, nonatomic) IBOutlet UIButton *outletProspectCountryBirthplace;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segGender;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segNationality;
 
