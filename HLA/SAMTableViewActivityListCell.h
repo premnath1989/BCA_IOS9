@@ -12,5 +12,12 @@
 
 @property (nonatomic, weak) IBOutlet UITableViewCell *tableViewCell;
 @property (nonatomic, weak) IBOutlet UIButton *buttonEdit;
+@property (nonatomic, weak) IBOutlet UILabel *name;
+@property (nonatomic, weak) IBOutlet UILabel *age;
+@property (nonatomic, weak) IBOutlet UILabel *activityDate;
+@property (nonatomic, weak) IBOutlet UILabel *status;
+@property (nonatomic, weak) IBOutlet UILabel *activity;
+@property (nonatomic, weak) IBOutlet UILabel *type;
+@property (nonatomic, weak) IBOutlet UILabel *nextMeeting;
 
 @end

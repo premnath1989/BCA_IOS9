@@ -11,6 +11,7 @@
 #import "SAMActivityViewController.h"
 #import "SAMActivityDetailViewController.h"
 #import "SAMDBHelper.h"
+#import "SAMModel.h"
 
 @interface SAMActivityListViewController ()
 
@@ -40,14 +41,14 @@ NSMutableArray *SAMData;
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
--(void) editDetailsForIndexPath:(NSIndexPath*)indexPath
+-(void) editDetailsForIndexPath:(NSInteger)indexPath
 {
     SAMActivityViewController* viewController = [[SAMActivityViewController alloc] initWithNibName:@"SAMActivityViewController" bundle:nil];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
 -(IBAction)actionEdit:(UIButton*)sender {
-    [self editDetailsForIndexPath:0];
+    [self editDetailsForIndexPath:sender.tag];
 }
 
 - (void) loadSAMData {
@@ -100,12 +101,18 @@ NSMutableArray *SAMData;
         
     }
     
-//    if(indexPath.row < 5) {
-//        [cellSAMList.buttonEdit addTarget:self action:@selector(actionEdit:) forControlEvents:UIControlEventTouchUpInside];
-//        [cellSAMList.buttonEdit setTag:indexPath.row];
-//    }
+    [cellSAMList.buttonEdit addTarget:self action:@selector(actionEdit:) forControlEvents:UIControlEventTouchUpInside];
+    [cellSAMList.buttonEdit setTag:indexPath.row];
     
+    SAMModel *sam = [SAMData objectAtIndex:indexPath.row];
     
+    // Set the field value;
+    [cellSAMList.name setText:sam.customerName];
+    [cellSAMList.age setText:@"30"];
+    [cellSAMList.activityDate setText:sam.dateModified];
+    [cellSAMList.type setText:sam.customerType];
+    [cellSAMList.activity setText:@"Introduction"];
+    [cellSAMList.status setText:sam.status];
     
     return cellSAMList;
 }

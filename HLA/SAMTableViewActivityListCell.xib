@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="BPreplay_Regular.ttf">
+        <array key="BPreplay_Regular.otf">
             <string>BPreplay</string>
         </array>
     </customFonts>
@@ -136,7 +136,14 @@
             </tableViewCellContentView>
             <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
+                <outlet property="activity" destination="U03-ey-ZFJ" id="aYq-oN-Osr"/>
+                <outlet property="activityDate" destination="hkp-Pg-NlZ" id="jjw-Ni-HP5"/>
+                <outlet property="age" destination="rry-iI-TT9" id="gWk-9x-Yqw"/>
                 <outlet property="buttonEdit" destination="2xU-Rs-CIa" id="14S-YX-Oyb"/>
+                <outlet property="name" destination="174-J4-Tfu" id="jFl-HV-aqA"/>
+                <outlet property="nextMeeting" destination="xe1-2h-urh" id="xvF-Gn-0Bm"/>
+                <outlet property="status" destination="EXL-yO-0R7" id="dsI-5q-bJF"/>
+                <outlet property="type" destination="diP-am-y3q" id="qqD-sJ-Dbq"/>
             </connections>
         </tableViewCell>
     </objects>
