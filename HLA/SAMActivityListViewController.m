@@ -10,15 +10,21 @@
 #import "SAMTableViewActivityListCell.h"
 #import "SAMActivityViewController.h"
 #import "SAMActivityDetailViewController.h"
+#import "SAMDBHelper.h"
 
 @interface SAMActivityListViewController ()
 
 @end
 
-@implementation SAMActivityListViewController
+NSMutableArray *SAMData;
+
+@implementation SAMActivityListViewController {
+    sqlite3 *contactDB;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self loadSAMData];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -44,11 +50,16 @@
     [self editDetailsForIndexPath:0];
 }
 
+- (void) loadSAMData {
+    SAMDBHelper *dbHelper = [[SAMDBHelper alloc] init];
+    SAMData = [dbHelper loadAllSAMData];
+}
+
 // TABLE
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    return [SAMData count];
 }
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
@@ -89,10 +100,12 @@
         
     }
     
-    if(indexPath.row < 5) {
-        [cellSAMList.buttonEdit addTarget:self action:@selector(actionEdit:) forControlEvents:UIControlEventTouchUpInside];
-        [cellSAMList.buttonEdit setTag:indexPath.row];
-    }
+//    if(indexPath.row < 5) {
+//        [cellSAMList.buttonEdit addTarget:self action:@selector(actionEdit:) forControlEvents:UIControlEventTouchUpInside];
+//        [cellSAMList.buttonEdit setTag:indexPath.row];
+//    }
+    
+    
     
     return cellSAMList;
 }

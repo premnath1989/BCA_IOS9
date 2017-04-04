@@ -60,8 +60,11 @@
 @property (nonatomic, assign) bool needFiltered;
 @property (nonatomic, assign) bool filterEDD;
 @property (nonatomic, assign) int ignoreID;
+@property (strong, nonatomic) NSString *SAMFilter;
 @property (strong, nonatomic) NSString *SIOrEAPPS;
 @property (strong, nonatomic) NSString *blacklistedIndentificationNos;
 @property (strong, nonatomic) NSString *blacklistedOtherIDType;
 @property (strong, nonatomic) NSString *blacklistedOtherID;
+
+- (void) filterListingWithString: (NSString *) filter;
 @end

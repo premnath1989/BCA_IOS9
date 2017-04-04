@@ -770,6 +770,8 @@
 		C30A260117F3CFBC00613A0F /* LynnStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C30A25FF17F3CFBC00613A0F /* LynnStoryboard.storyboard */; };
 		C30A260217F3CFBC00613A0F /* NewStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C30A260017F3CFBC00613A0F /* NewStoryboard.storyboard */; };
 		C319633918D98A0C00565B1C /* SupplementaryProposalForm1.m in Sources */ = {isa = PBXBuildFile; fileRef = C319633718D98A0C00565B1C /* SupplementaryProposalForm1.m */; };
+		C321419B1E93926300C0F28D /* SAMModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C321419A1E93926300C0F28D /* SAMModel.m */; };
+		C321419E1E93979F00C0F28D /* SAMDBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C321419D1E93979F00C0F28D /* SAMDBHelper.m */; };
 		C333A2B81831E98F00FA8200 /* AddPolicyLA2TableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C333A2A51831E98F00FA8200 /* AddPolicyLA2TableVC.m */; };
 		C333A2B91831E98F00FA8200 /* AddPolicyPOTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C333A2A71831E98F00FA8200 /* AddPolicyPOTableVC.m */; };
 		C333A2BB1831E98F00FA8200 /* ExistingPoliciesPersonType.m in Sources */ = {isa = PBXBuildFile; fileRef = C333A2AB1831E98F00FA8200 /* ExistingPoliciesPersonType.m */; };
@@ -2380,6 +2382,10 @@
 		C30A260017F3CFBC00613A0F /* NewStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NewStoryboard.storyboard; sourceTree = "<group>"; };
 		C319633718D98A0C00565B1C /* SupplementaryProposalForm1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SupplementaryProposalForm1.m; sourceTree = "<group>"; };
 		C319633818D98A0C00565B1C /* SupplementaryProposalForm1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SupplementaryProposalForm1.h; sourceTree = "<group>"; };
+		C32141991E93926300C0F28D /* SAMModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMModel.h; sourceTree = "<group>"; };
+		C321419A1E93926300C0F28D /* SAMModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMModel.m; sourceTree = "<group>"; };
+		C321419C1E93979F00C0F28D /* SAMDBHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMDBHelper.h; sourceTree = "<group>"; };
+		C321419D1E93979F00C0F28D /* SAMDBHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMDBHelper.m; sourceTree = "<group>"; };
 		C333A2A41831E98F00FA8200 /* AddPolicyLA2TableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddPolicyLA2TableVC.h; sourceTree = "<group>"; };
 		C333A2A51831E98F00FA8200 /* AddPolicyLA2TableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddPolicyLA2TableVC.m; sourceTree = "<group>"; };
 		C333A2A61831E98F00FA8200 /* AddPolicyPOTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddPolicyPOTableVC.h; sourceTree = "<group>"; };
@@ -4415,8 +4421,11 @@
 		43C94BCD1E0908A9009A30F3 /* SAM */ = {
 			isa = PBXGroup;
 			children = (
+				C32141981E93920F00C0F28D /* Model */,
 				43C94BD31E091A9C009A30F3 /* View */,
 				43C94BD41E091AA9009A30F3 /* Controller */,
+				C321419C1E93979F00C0F28D /* SAMDBHelper.h */,
+				C321419D1E93979F00C0F28D /* SAMDBHelper.m */,
 			);
 			name = SAM;
 			sourceTree = "<group>";
@@ -4955,6 +4964,15 @@
 				C319633818D98A0C00565B1C /* SupplementaryProposalForm1.h */,
 			);
 			name = SupplementaryProposalForm1;
+			sourceTree = "<group>";
+		};
+		C32141981E93920F00C0F28D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C32141991E93926300C0F28D /* SAMModel.h */,
+				C321419A1E93926300C0F28D /* SAMModel.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		C35AE5171828A29E0003CC83 /* PersonalDetails */ = {
@@ -7226,6 +7244,7 @@
 				C30A25BD17F3C8D500613A0F /* HealthQuestionnaire14.m in Sources */,
 				C30A25BE17F3C8D500613A0F /* HealthQuestionnaire14b.m in Sources */,
 				C30A25BF17F3C8D500613A0F /* HealthQuestionnaire15.m in Sources */,
+				C321419E1E93979F00C0F28D /* SAMDBHelper.m in Sources */,
 				C30A25C017F3C8D500613A0F /* HealthQuestions.m in Sources */,
 				C30A25C117F3C8D500613A0F /* HealthQuestPersonType.m in Sources */,
 				C30A25C217F3C8D500613A0F /* MaineApp.m in Sources */,
@@ -7314,6 +7333,7 @@
 				4212708C1845DF33000C2156 /* eConfirmationCell.m in Sources */,
 				43C98E0E1D51D20E00A3F911 /* SPAJ Perusahaan.m in Sources */,
 				AA4EF76D1C85A4260050CCD8 /* ReaderThumbFetch.m in Sources */,
+				C321419B1E93926300C0F28D /* SAMModel.m in Sources */,
 				42D3277618487F2D0030AA7A /* NewGroupListing.m in Sources */,
 				EF509EC7184F30110058CCD8 /* ClientProfileListingSortBy.m in Sources */,
 				43BB38BB1CBCA4CC00A5F5C5 /* IlustrationSignatureViewController.m in Sources */,

@@ -69,6 +69,9 @@
     int RecDelete;
 }
 
+@synthesize isFromSAM;
+@synthesize SAMFilter;
+
 - (void)viewWillAppear:(BOOL)animated{
     [self loadCFFTransaction];
 }
@@ -130,6 +133,10 @@
         
     }
     ProspectList.modalPresentationStyle = UIModalPresentationPopover;
+    if(isFromSAM) {
+        ProspectList.isFiltered = true;
+        ProspectList.SAMFilter = SAMFilter;
+    }
     [self presentViewController:ProspectList animated:YES completion:nil];
     
     // configure the Popover presentation controller

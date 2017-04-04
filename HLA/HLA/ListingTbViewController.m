@@ -30,6 +30,7 @@
 @synthesize MaritalStatus = _MaritalStatus;
 @synthesize FilteredName,FilteredIndex,FilteredDOB,FilteredGender,FilteredOccp,FilteredSmoker,FilteredOtherID,FilteredID,isFiltered, FilteredOtherIDType, FilteredMaritalStatus;
 @synthesize SIOrEAPPS;
+@synthesize SAMFilter;
 
 - (void)viewDidLoad
 {
@@ -50,6 +51,10 @@
     self.tableView.tableHeaderView = searchbar;
     CGRect searchbarFrame = searchbar.frame;
     [self.tableView scrollRectToVisible:searchbarFrame animated:NO];
+    
+    if(isFiltered) {
+        [self filterListingWithString: SAMFilter];
+    }
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -227,83 +232,85 @@
     else {
         isFiltered = true;
         
-        FilteredIndex = [[NSMutableArray alloc] init ];
-        FilteredName = [[NSMutableArray alloc] init ];
-        FilteredDOB = [[NSMutableArray alloc] init];
-        FilteredGender = [[NSMutableArray alloc] init];
-        FilteredOccp = [[NSMutableArray alloc] init];
-        FilteredSmoker = [[NSMutableArray alloc] init];
-        FilteredOtherID = [[NSMutableArray alloc] init];
-        FilteredID = [[NSMutableArray alloc] init];
-        FilteredOtherIDType = [[NSMutableArray alloc] init];
-        FilteredMaritalStatus = [[NSMutableArray alloc] init];
-        
-        NSRange pp;
-        NSRange pp1;
-        NSRange pp2;
-        NSRange pp3;
-        for (int a =0; a<_NameList.count; a++ ) {
-            pp = [[_NameList objectAtIndex:a] rangeOfString:text options:NSCaseInsensitiveSearch];
-            pp1 = [[_IDList objectAtIndex:a] rangeOfString:text options:NSCaseInsensitiveSearch];
-            pp2 = [[_OtherIDList objectAtIndex:a] rangeOfString:text options:NSCaseInsensitiveSearch];
-            pp3 = [[_DOBList objectAtIndex:a] rangeOfString:text options:NSCaseInsensitiveSearch];
-            
-            
-            if (pp.location != NSNotFound) {
-                [FilteredIndex addObject:[_indexNo objectAtIndex:a]];
-                [FilteredName addObject:[_NameList objectAtIndex:a]];
-                [FilteredDOB addObject:[_DOBList objectAtIndex:a]];
-                [FilteredGender addObject:[_GenderList objectAtIndex:a]];
-                [FilteredOccp addObject:[_OccpCodeList objectAtIndex:a]];
-                [FilteredSmoker addObject:[_SmokerList objectAtIndex:a]];
-                [FilteredOtherID addObject:[_OtherIDList objectAtIndex:a]];
-                [FilteredID addObject:[_IDList objectAtIndex:a]];
-                [FilteredOtherIDType addObject:[_OtherIDTypeList objectAtIndex:a]];
-                [FilteredMaritalStatus addObject:[_MaritalStatus objectAtIndex:a]];
-            }
-            else if (pp1.location != NSNotFound) {
-                [FilteredIndex addObject:[_indexNo objectAtIndex:a]];
-                [FilteredName addObject:[_NameList objectAtIndex:a]];
-                [FilteredDOB addObject:[_DOBList objectAtIndex:a]];
-                [FilteredGender addObject:[_GenderList objectAtIndex:a]];
-                [FilteredOccp addObject:[_OccpCodeList objectAtIndex:a]];
-                [FilteredSmoker addObject:[_SmokerList objectAtIndex:a]];
-                [FilteredOtherID addObject:[_OtherIDList objectAtIndex:a]];
-                [FilteredID addObject:[_IDList objectAtIndex:a]];
-                [FilteredOtherIDType addObject:[_OtherIDTypeList objectAtIndex:a]];
-                [FilteredMaritalStatus addObject:[_MaritalStatus objectAtIndex:a]];
-            }
-            else if (pp2.location != NSNotFound) {
-                [FilteredIndex addObject:[_indexNo objectAtIndex:a]];
-                [FilteredName addObject:[_NameList objectAtIndex:a]];
-                [FilteredDOB addObject:[_DOBList objectAtIndex:a]];
-                [FilteredGender addObject:[_GenderList objectAtIndex:a]];
-                [FilteredOccp addObject:[_OccpCodeList objectAtIndex:a]];
-                [FilteredSmoker addObject:[_SmokerList objectAtIndex:a]];
-                [FilteredOtherID addObject:[_OtherIDList objectAtIndex:a]];
-                [FilteredID addObject:[_IDList objectAtIndex:a]];
-                [FilteredOtherIDType addObject:[_OtherIDTypeList objectAtIndex:a]];
-                [FilteredMaritalStatus addObject:[_MaritalStatus objectAtIndex:a]];
-            }
-
-            else if (pp3.location != NSNotFound) {
-                [FilteredIndex addObject:[_indexNo objectAtIndex:a]];
-                [FilteredName addObject:[_NameList objectAtIndex:a]];
-                [FilteredDOB addObject:[_DOBList objectAtIndex:a]];
-                [FilteredGender addObject:[_GenderList objectAtIndex:a]];
-                [FilteredOccp addObject:[_OccpCodeList objectAtIndex:a]];
-                [FilteredSmoker addObject:[_SmokerList objectAtIndex:a]];
-                [FilteredOtherID addObject:[_OtherIDList objectAtIndex:a]];
-                [FilteredID addObject:[_IDList objectAtIndex:a]];
-                [FilteredOtherIDType addObject:[_OtherIDTypeList objectAtIndex:a]];
-                [FilteredMaritalStatus addObject:[_MaritalStatus objectAtIndex:a]];
-            }
-
-
-        }
+        [self filterListingWithString:text];
     }
     
     [self.tableView reloadData];
+}
+
+- (void) filterListingWithString: (NSString *) filter {
+    FilteredIndex = [[NSMutableArray alloc] init ];
+    FilteredName = [[NSMutableArray alloc] init ];
+    FilteredDOB = [[NSMutableArray alloc] init];
+    FilteredGender = [[NSMutableArray alloc] init];
+    FilteredOccp = [[NSMutableArray alloc] init];
+    FilteredSmoker = [[NSMutableArray alloc] init];
+    FilteredOtherID = [[NSMutableArray alloc] init];
+    FilteredID = [[NSMutableArray alloc] init];
+    FilteredOtherIDType = [[NSMutableArray alloc] init];
+    FilteredMaritalStatus = [[NSMutableArray alloc] init];
+    
+    NSRange pp;
+    NSRange pp1;
+    NSRange pp2;
+    NSRange pp3;
+    for (int a =0; a<_NameList.count; a++ ) {
+        pp = [[_NameList objectAtIndex:a] rangeOfString:filter options:NSCaseInsensitiveSearch];
+        pp1 = [[_IDList objectAtIndex:a] rangeOfString:filter options:NSCaseInsensitiveSearch];
+        pp2 = [[_OtherIDList objectAtIndex:a] rangeOfString:filter options:NSCaseInsensitiveSearch];
+        pp3 = [[_DOBList objectAtIndex:a] rangeOfString:filter options:NSCaseInsensitiveSearch];
+        
+        
+        if (pp.location != NSNotFound) {
+            [FilteredIndex addObject:[_indexNo objectAtIndex:a]];
+            [FilteredName addObject:[_NameList objectAtIndex:a]];
+            [FilteredDOB addObject:[_DOBList objectAtIndex:a]];
+            [FilteredGender addObject:[_GenderList objectAtIndex:a]];
+            [FilteredOccp addObject:[_OccpCodeList objectAtIndex:a]];
+            [FilteredSmoker addObject:[_SmokerList objectAtIndex:a]];
+            [FilteredOtherID addObject:[_OtherIDList objectAtIndex:a]];
+            [FilteredID addObject:[_IDList objectAtIndex:a]];
+            [FilteredOtherIDType addObject:[_OtherIDTypeList objectAtIndex:a]];
+            [FilteredMaritalStatus addObject:[_MaritalStatus objectAtIndex:a]];
+        }
+        else if (pp1.location != NSNotFound) {
+            [FilteredIndex addObject:[_indexNo objectAtIndex:a]];
+            [FilteredName addObject:[_NameList objectAtIndex:a]];
+            [FilteredDOB addObject:[_DOBList objectAtIndex:a]];
+            [FilteredGender addObject:[_GenderList objectAtIndex:a]];
+            [FilteredOccp addObject:[_OccpCodeList objectAtIndex:a]];
+            [FilteredSmoker addObject:[_SmokerList objectAtIndex:a]];
+            [FilteredOtherID addObject:[_OtherIDList objectAtIndex:a]];
+            [FilteredID addObject:[_IDList objectAtIndex:a]];
+            [FilteredOtherIDType addObject:[_OtherIDTypeList objectAtIndex:a]];
+            [FilteredMaritalStatus addObject:[_MaritalStatus objectAtIndex:a]];
+        }
+        else if (pp2.location != NSNotFound) {
+            [FilteredIndex addObject:[_indexNo objectAtIndex:a]];
+            [FilteredName addObject:[_NameList objectAtIndex:a]];
+            [FilteredDOB addObject:[_DOBList objectAtIndex:a]];
+            [FilteredGender addObject:[_GenderList objectAtIndex:a]];
+            [FilteredOccp addObject:[_OccpCodeList objectAtIndex:a]];
+            [FilteredSmoker addObject:[_SmokerList objectAtIndex:a]];
+            [FilteredOtherID addObject:[_OtherIDList objectAtIndex:a]];
+            [FilteredID addObject:[_IDList objectAtIndex:a]];
+            [FilteredOtherIDType addObject:[_OtherIDTypeList objectAtIndex:a]];
+            [FilteredMaritalStatus addObject:[_MaritalStatus objectAtIndex:a]];
+        }
+        
+        else if (pp3.location != NSNotFound) {
+            [FilteredIndex addObject:[_indexNo objectAtIndex:a]];
+            [FilteredName addObject:[_NameList objectAtIndex:a]];
+            [FilteredDOB addObject:[_DOBList objectAtIndex:a]];
+            [FilteredGender addObject:[_GenderList objectAtIndex:a]];
+            [FilteredOccp addObject:[_OccpCodeList objectAtIndex:a]];
+            [FilteredSmoker addObject:[_SmokerList objectAtIndex:a]];
+            [FilteredOtherID addObject:[_OtherIDList objectAtIndex:a]];
+            [FilteredID addObject:[_IDList objectAtIndex:a]];
+            [FilteredOtherIDType addObject:[_OtherIDTypeList objectAtIndex:a]];
+            [FilteredMaritalStatus addObject:[_MaritalStatus objectAtIndex:a]];
+        }
+    }
 }
 
 #pragma mark - Table view delegate

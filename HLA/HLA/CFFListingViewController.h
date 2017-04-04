@@ -14,4 +14,7 @@
     
 }
 
+@property (nonatomic, assign) BOOL isFromSAM;
+@property (strong, nonatomic) NSString *SAMFilter;
+
 @end
