@@ -8,6 +8,7 @@
 
 #import "SAMActivityListViewController.h"
 #import "SAMTableViewActivityListCell.h"
+#import "SAMActivityViewController.h"
 #import "SAMActivityDetailViewController.h"
 
 @interface SAMActivityListViewController ()
@@ -35,7 +36,7 @@
 
 -(void) editDetailsForIndexPath:(NSIndexPath*)indexPath
 {
-    SAMActivityDetailViewController* viewController = [[SAMActivityDetailViewController alloc] initWithNibName:@"SAMActivityDetailViewController" bundle:nil];
+    SAMActivityViewController* viewController = [[SAMActivityViewController alloc] initWithNibName:@"SAMActivityViewController" bundle:nil];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 

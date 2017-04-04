@@ -381,8 +381,6 @@
 		432209141D4F37E300971DF3 /* ModelSPAJIDCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 432209131D4F37E300971DF3 /* ModelSPAJIDCapture.m */; };
 		432466541C9000EC001EE22F /* ModelDataReferral.m in Sources */ = {isa = PBXBuildFile; fileRef = 432466531C9000EC001EE22F /* ModelDataReferral.m */; };
 		4329213A1C7FFC26000D1064 /* Model_SI_Master.m in Sources */ = {isa = PBXBuildFile; fileRef = 432921391C7FFC26000D1064 /* Model_SI_Master.m */; };
-		432B26091E121B28000EDFB4 /* SAMTableViewAcitivtyListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 432B26071E121B28000EDFB4 /* SAMTableViewAcitivtyListCell.m */; };
-		432B260A1E121B28000EDFB4 /* SAMTableViewAcitivtyListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 432B26081E121B28000EDFB4 /* SAMTableViewAcitivtyListCell.xib */; };
 		432B260E1E122270000EDFB4 /* SAMTableViewActivityDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 432B260C1E122270000EDFB4 /* SAMTableViewActivityDetailCell.m */; };
 		432B260F1E122270000EDFB4 /* SAMTableViewActivityDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 432B260D1E122270000EDFB4 /* SAMTableViewActivityDetailCell.xib */; };
 		432B26131E12264A000EDFB4 /* SAMMeetingScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 432B26111E12264A000EDFB4 /* SAMMeetingScheduleViewController.m */; };
@@ -804,6 +802,14 @@
 		C3A8D1151833D2B800E65FC9 /* ELP1stLifeAssuredVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A8D1101833D2B700E65FC9 /* ELP1stLifeAssuredVC.m */; };
 		C3A8D1161833D2B800E65FC9 /* ELP2ndLifeAssuredVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A8D1121833D2B800E65FC9 /* ELP2ndLifeAssuredVC.m */; };
 		C3A8D1171833D2B800E65FC9 /* ELPPolicyOwnerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A8D1141833D2B800E65FC9 /* ELPPolicyOwnerVC.m */; };
+		C3B3CF131E81061800079851 /* SIResubmissionListing.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B3CF121E81061800079851 /* SIResubmissionListing.m */; };
+		C3C6278F1E933BA800C94E14 /* SAMMeetingNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3C6278C1E933BA800C94E14 /* SAMMeetingNoteViewController.m */; };
+		C3C627901E933BA800C94E14 /* SAMNewNasabahViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3C6278E1E933BA800C94E14 /* SAMNewNasabahViewController.m */; };
+		C3C627931E933BB200C94E14 /* SAMTableViewActivityListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3C627921E933BB200C94E14 /* SAMTableViewActivityListCell.m */; };
+		C3C627951E933BBA00C94E14 /* SAMTableViewActivityListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3C627941E933BBA00C94E14 /* SAMTableViewActivityListCell.xib */; };
+		C3C627981E933BC300C94E14 /* SAMMeetingNoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3C627961E933BC300C94E14 /* SAMMeetingNoteViewController.xib */; };
+		C3C627991E933BC300C94E14 /* SAMNewNasabahViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3C627971E933BC300C94E14 /* SAMNewNasabahViewController.xib */; };
+		C3C6279C1E933DA100C94E14 /* ActivityStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = C3C6279B1E933DA100C94E14 /* ActivityStatus.m */; };
 		C3D174B718B766030076F078 /* view.png in Resources */ = {isa = PBXBuildFile; fileRef = C3D174B618B766030076F078 /* view.png */; };
 		C40059FA16BB678000B03041 /* CashPromiseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C40059F916BB678000B03041 /* CashPromiseViewController.m */; };
 		C416C2B61855BA9B00D29E46 /* SettingUserProfileReg.m in Sources */ = {isa = PBXBuildFile; fileRef = C416C2B51855BA9B00D29E46 /* SettingUserProfileReg.m */; };
@@ -1681,9 +1687,6 @@
 		432466531C9000EC001EE22F /* ModelDataReferral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelDataReferral.m; sourceTree = "<group>"; };
 		432921381C7FFC26000D1064 /* Model_SI_Master.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model_SI_Master.h; sourceTree = "<group>"; };
 		432921391C7FFC26000D1064 /* Model_SI_Master.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Model_SI_Master.m; sourceTree = "<group>"; };
-		432B26061E121B28000EDFB4 /* SAMTableViewAcitivtyListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMTableViewAcitivtyListCell.h; sourceTree = "<group>"; };
-		432B26071E121B28000EDFB4 /* SAMTableViewAcitivtyListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMTableViewAcitivtyListCell.m; sourceTree = "<group>"; };
-		432B26081E121B28000EDFB4 /* SAMTableViewAcitivtyListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SAMTableViewAcitivtyListCell.xib; sourceTree = "<group>"; };
 		432B260B1E122270000EDFB4 /* SAMTableViewActivityDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMTableViewActivityDetailCell.h; sourceTree = "<group>"; };
 		432B260C1E122270000EDFB4 /* SAMTableViewActivityDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMTableViewActivityDetailCell.m; sourceTree = "<group>"; };
 		432B260D1E122270000EDFB4 /* SAMTableViewActivityDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SAMTableViewActivityDetailCell.xib; sourceTree = "<group>"; };
@@ -2434,6 +2437,19 @@
 		C3A8D1121833D2B800E65FC9 /* ELP2ndLifeAssuredVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELP2ndLifeAssuredVC.m; sourceTree = "<group>"; };
 		C3A8D1131833D2B800E65FC9 /* ELPPolicyOwnerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELPPolicyOwnerVC.h; sourceTree = "<group>"; };
 		C3A8D1141833D2B800E65FC9 /* ELPPolicyOwnerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELPPolicyOwnerVC.m; sourceTree = "<group>"; };
+		C3B3CF111E81061800079851 /* SIResubmissionListing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIResubmissionListing.h; sourceTree = "<group>"; };
+		C3B3CF121E81061800079851 /* SIResubmissionListing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIResubmissionListing.m; sourceTree = "<group>"; };
+		C3C6278B1E933BA800C94E14 /* SAMMeetingNoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMMeetingNoteViewController.h; sourceTree = "<group>"; };
+		C3C6278C1E933BA800C94E14 /* SAMMeetingNoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMMeetingNoteViewController.m; sourceTree = "<group>"; };
+		C3C6278D1E933BA800C94E14 /* SAMNewNasabahViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMNewNasabahViewController.h; sourceTree = "<group>"; };
+		C3C6278E1E933BA800C94E14 /* SAMNewNasabahViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMNewNasabahViewController.m; sourceTree = "<group>"; };
+		C3C627911E933BB200C94E14 /* SAMTableViewActivityListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMTableViewActivityListCell.h; sourceTree = "<group>"; };
+		C3C627921E933BB200C94E14 /* SAMTableViewActivityListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMTableViewActivityListCell.m; sourceTree = "<group>"; };
+		C3C627941E933BBA00C94E14 /* SAMTableViewActivityListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SAMTableViewActivityListCell.xib; sourceTree = "<group>"; };
+		C3C627961E933BC300C94E14 /* SAMMeetingNoteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SAMMeetingNoteViewController.xib; sourceTree = "<group>"; };
+		C3C627971E933BC300C94E14 /* SAMNewNasabahViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SAMNewNasabahViewController.xib; sourceTree = "<group>"; };
+		C3C6279A1E933DA100C94E14 /* ActivityStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityStatus.h; sourceTree = "<group>"; };
+		C3C6279B1E933DA100C94E14 /* ActivityStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityStatus.m; sourceTree = "<group>"; };
 		C3D174B618B766030076F078 /* view.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = view.png; sourceTree = "<group>"; };
 		C40059F816BB678000B03041 /* CashPromiseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CashPromiseViewController.h; sourceTree = "<group>"; };
 		C40059F916BB678000B03041 /* CashPromiseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CashPromiseViewController.m; sourceTree = "<group>"; };
@@ -4082,7 +4098,7 @@
 		432B25FF1E121A98000EDFB4 /* TableViewCellView */ = {
 			isa = PBXGroup;
 			children = (
-				432B26081E121B28000EDFB4 /* SAMTableViewAcitivtyListCell.xib */,
+				C3C627941E933BBA00C94E14 /* SAMTableViewActivityListCell.xib */,
 				432B260D1E122270000EDFB4 /* SAMTableViewActivityDetailCell.xib */,
 			);
 			name = TableViewCellView;
@@ -4091,10 +4107,10 @@
 		432B26001E121AA9000EDFB4 /* TableViewCellController */ = {
 			isa = PBXGroup;
 			children = (
+				C3C627911E933BB200C94E14 /* SAMTableViewActivityListCell.h */,
+				C3C627921E933BB200C94E14 /* SAMTableViewActivityListCell.m */,
 				432B260B1E122270000EDFB4 /* SAMTableViewActivityDetailCell.h */,
 				432B260C1E122270000EDFB4 /* SAMTableViewActivityDetailCell.m */,
-				432B26061E121B28000EDFB4 /* SAMTableViewAcitivtyListCell.h */,
-				432B26071E121B28000EDFB4 /* SAMTableViewAcitivtyListCell.m */,
 			);
 			name = TableViewCellController;
 			sourceTree = "<group>";
@@ -4408,6 +4424,8 @@
 		43C94BD31E091A9C009A30F3 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C3C627961E933BC300C94E14 /* SAMMeetingNoteViewController.xib */,
+				C3C627971E933BC300C94E14 /* SAMNewNasabahViewController.xib */,
 				432B25FF1E121A98000EDFB4 /* TableViewCellView */,
 				4307B4981E0A7B9000380162 /* SAMActivityViewController.xib */,
 				4307B49D1E0A7BA600380162 /* SAMActivityListViewController.xib */,
@@ -4423,6 +4441,10 @@
 		43C94BD41E091AA9009A30F3 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				C3C6278B1E933BA800C94E14 /* SAMMeetingNoteViewController.h */,
+				C3C6278C1E933BA800C94E14 /* SAMMeetingNoteViewController.m */,
+				C3C6278D1E933BA800C94E14 /* SAMNewNasabahViewController.h */,
+				C3C6278E1E933BA800C94E14 /* SAMNewNasabahViewController.m */,
 				432B26001E121AA9000EDFB4 /* TableViewCellController */,
 				43C94BCE1E090B00009A30F3 /* SAMMain.h */,
 				43C94BCF1E090B00009A30F3 /* SAMMain.m */,
@@ -5294,6 +5316,8 @@
 				AAFEE0391C6C23A300702F64 /* ColumnStyle */,
 				AAFEE0321C6C1EA300702F64 /* TableManagement */,
 				C4E7B386161B119E00066CBF /* SIListing.h */,
+				C3B3CF111E81061800079851 /* SIResubmissionListing.h */,
+				C3B3CF121E81061800079851 /* SIResubmissionListing.m */,
 				C4E7B387161B119E00066CBF /* SIListing.m */,
 			);
 			name = "SI Listing";
@@ -5689,6 +5713,8 @@
 		C4EA9BCF1616DAFF00D51FE9 /* PopOver */ = {
 			isa = PBXGroup;
 			children = (
+				C3C6279A1E933DA100C94E14 /* ActivityStatus.h */,
+				C3C6279B1E933DA100C94E14 /* ActivityStatus.m */,
 				437394981C9BE5C2004522A2 /* NIPInfo.m */,
 				437394991C9BE5C2004522A2 /* NIPInfo.h */,
 				EF509EC5184F30110058CCD8 /* ClientProfileListingSortBy.h */,
@@ -6347,7 +6373,7 @@
 				TargetAttributes = {
 					C4E9D18F1612C64900016053 = {
 						DevelopmentTeam = 87JN2XNQTS;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -6473,6 +6499,7 @@
 				C4660EC81625047800BA4AFE /* SI_button2.png in Resources */,
 				AA4EF75A1C85A4260050CCD8 /* Reader-Mark-Y.png in Resources */,
 				43870CA01D35FEAF0035143C /* CustomerStatement.html in Resources */,
+				C3C627951E933BBA00C94E14 /* SAMTableViewActivityListCell.xib in Resources */,
 				173E81601C28F9C600BDAAE9 /* EappListing.storyboard in Resources */,
 				43C98E0A1D51D1F500A3F911 /* SPAJ Calon Tertanggung.xib in Resources */,
 				C4660EC91625047800BA4AFE /* SI_buttonB_144.png in Resources */,
@@ -6570,6 +6597,7 @@
 				178765D91C7409F00036F31A /* menu_selectoption.png in Resources */,
 				EF1F6C7C16A7C1CC001EDC81 /* pdfData.plist in Resources */,
 				439B0B7D1D54743F00C28F19 /* SPAJEAppListStoryBoard.storyboard in Resources */,
+				C3C627991E933BC300C94E14 /* SAMNewNasabahViewController.xib in Resources */,
 				046735971C23A61300DEE400 /* CFFStoryboard.storyboard in Resources */,
 				C4E1B9471714091000D7F83B /* SI in Resources */,
 				C4E643801724E821001DF8F8 /* PDS in Resources */,
@@ -6685,7 +6713,6 @@
 				2994B41118E121AE00B0D4D2 /* CA_HeaderImage.png in Resources */,
 				AAFE1AAF1C7B05E1008D4B9C /* Login Page Bless_english_final_2-01.jpg in Resources */,
 				2994B41218E121AE00B0D4D2 /* Footer.png in Resources */,
-				432B260A1E121B28000EDFB4 /* SAMTableViewAcitivtyListCell.xib in Resources */,
 				2994B41318E121AE00B0D4D2 /* Header.jpg in Resources */,
 				432B26141E12264A000EDFB4 /* SAMMeetingScheduleViewController.xib in Resources */,
 				2994B41418E121AE00B0D4D2 /* P1.jpg in Resources */,
@@ -6715,6 +6742,7 @@
 				2994B42518E121AE00B0D4D2 /* P2Table.xib in Resources */,
 				DE80E43A1CA3F7FB00D9E775 /* BlackRaccoon-Info.plist in Resources */,
 				2994B42718E121AE00B0D4D2 /* Table2.xib in Resources */,
+				C3C627981E933BC300C94E14 /* SAMMeetingNoteViewController.xib in Resources */,
 				2994B42918E121AE00B0D4D2 /* Table3.xib in Resources */,
 				C34B421618ED620B00BD92C9 /* IDTypeForCO.plist in Resources */,
 				42B8B13A1917339500E09A34 /* CA_Form.xib in Resources */,
@@ -6858,6 +6886,7 @@
 				C4E9D1CA1612C7D300016053 /* MainScreen.m in Sources */,
 				C4EB491F1615402800C7FC8C /* Login.m in Sources */,
 				438DB5F41D49C28F00B92FEF /* ModelSPAJTransaction.m in Sources */,
+				C3C6279C1E933DA100C94E14 /* ActivityStatus.m in Sources */,
 				C4EB4924161558F300C7FC8C /* ChangePassword.m in Sources */,
 				435464B71D928E6D00F04413 /* TextFieldSPAJ.m in Sources */,
 				AA4EF7751C85A4260050CCD8 /* ThumbsViewController.m in Sources */,
@@ -6947,6 +6976,7 @@
 				C4E1B9451713FFBC00D7F83B /* DBController.m in Sources */,
 				C4E6437D171BE69A001DF8F8 /* Reachability.m in Sources */,
 				C4E7C07117291E2D00038FA9 /* PagesController.m in Sources */,
+				C3C6278F1E933BA800C94E14 /* SAMMeetingNoteViewController.m in Sources */,
 				C4E7C0D6172FC9CD00038FA9 /* AFHTTPClient.m in Sources */,
 				AA4EF7631C85A4260050CCD8 /* CGPDFDocument.m in Sources */,
 				C4E7C0D7172FC9CD00038FA9 /* AFHTTPRequestOperation.m in Sources */,
@@ -6974,6 +7004,7 @@
 				17A7D83E1C5B3EE50016EE7F /* setting.m in Sources */,
 				438CBC7A1D616D1C00FF44B1 /* ModelSPAJSubmitTracker.m in Sources */,
 				42867EB3175F75E6001CE661 /* TitleViewController.m in Sources */,
+				C3B3CF131E81061800079851 /* SIResubmissionListing.m in Sources */,
 				174DD2551C9A54C400D56274 /* Pembelianke.m in Sources */,
 				C4E9F3D21765E2430070EA8A /* EverSeriesMasterViewController.m in Sources */,
 				DE15788D1CBB792900CE171B /* StringEncryption.m in Sources */,
@@ -7039,6 +7070,7 @@
 				175E3A561C7BFE4A000EC161 /* MasaPembayaran.m in Sources */,
 				2958A83217E95EA10090A791 /* CountryPopoverViewController.m in Sources */,
 				2958A83317E95EA10090A791 /* NationalityPopoverViewController.m in Sources */,
+				C3C627931E933BB200C94E14 /* SAMTableViewActivityListCell.m in Sources */,
 				2958A83417E95EA10090A791 /* OtherIDPopoverViewController.m in Sources */,
 				DE8D29C71C94512900727765 /* TabValidation.m in Sources */,
 				2958A83517E95EA10090A791 /* RacePopoverViewController.m in Sources */,
@@ -7218,6 +7250,7 @@
 				C30A25F017F3CB7100613A0F /* InsuredObject.m in Sources */,
 				C30A25F117F3CB7100613A0F /* MainAdditionalQuestInsureds.m in Sources */,
 				4307B4A31E0A7BB900380162 /* SAMActivityDetailViewController.m in Sources */,
+				C3C627901E933BA800C94E14 /* SAMNewNasabahViewController.m in Sources */,
 				C30A25F217F3CB7100613A0F /* MainAddPolicyVC.m in Sources */,
 				C30A25F317F3CB7100613A0F /* MainEditInsured.m in Sources */,
 				C30A25F417F3CB7100613A0F /* MainExistingPolicyListing.m in Sources */,
@@ -7229,7 +7262,6 @@
 				C30A25F817F3CB7100613A0F /* MasterMenuCFFWithData.m in Sources */,
 				43870CC31D362AE70035143C /* AnalisaKebutuhanInvestasiViewController.m in Sources */,
 				C30A25F917F3CB7100613A0F /* PolicyDetails.m in Sources */,
-				432B26091E121B28000EDFB4 /* SAMTableViewAcitivtyListCell.m in Sources */,
 				C30A25FA17F3CB7100613A0F /* ViewInsuredRecord.m in Sources */,
 				298C96F217FAE1AF007D696F /* PolicyOwnerData.m in Sources */,
 				298C96F517FAE214007D696F /* PolicyOwnerDataDetails.m in Sources */,
@@ -7582,8 +7614,8 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Erwin Lim (385P6MX3H3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Asuransi Jiwa BCA, PT";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = 87JN2XNQTS;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -7625,9 +7657,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bcalife.bless;
 				PRODUCT_NAME = BLESS;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "6b548485-fbbb-4efb-a335-73abcd07401a";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "BLESS InHouse Distribution";
 				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = "armv7 armv6 i386";
 				WRAPPER_EXTENSION = app;
@@ -7641,7 +7673,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Asuransi Jiwa BCA, PT";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = 87JN2XNQTS;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -7684,9 +7716,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bcalife.bless;
 				PRODUCT_NAME = BLESS;
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "954ccc9a-01f8-4583-9ed7-fc4107de17e9";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "6b548485-fbbb-4efb-a335-73abcd07401a";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE_SPECIFIER = "BLESS InHouse Distribution";
 				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = "armv7 armv6 i386";
 				WRAPPER_EXTENSION = app;
@@ -7739,7 +7771,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Asuransi Jiwa BCA, PT";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = 87JN2XNQTS;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -7784,9 +7816,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bcalife.bless;
 				PRODUCT_NAME = BLESS;
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "954ccc9a-01f8-4583-9ed7-fc4107de17e9";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "6b548485-fbbb-4efb-a335-73abcd07401a";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE_SPECIFIER = "BLESS InHouse Distribution";
 				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = "armv7 armv6 i386";
 				WRAPPER_EXTENSION = app;

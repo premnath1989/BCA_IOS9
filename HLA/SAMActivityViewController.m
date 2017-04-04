@@ -68,7 +68,7 @@
     MainCustomer *mainCustomer = [cpStoryboard instantiateViewControllerWithIdentifier:@"mainCFF"];
     mainCustomer.modalPresentationStyle = UIModalPresentationFullScreen;
     mainCustomer.IndexTab = 1;
-    [self presentViewController:mainCustomer animated:NO completion:Nil];
+    [self.navigationController pushViewController:mainCustomer animated:YES];
     mainCustomer = Nil;
     AppDelegate *appdlg = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     appdlg.eApp=NO;
@@ -77,7 +77,7 @@
 -(IBAction)actionRecomendation:(id)sender {
     ProductInformation *view = [[ProductInformation alloc] initWithNibName:@"ProductInformation" bundle:nil];
     view.modalTransitionStyle = UIModalPresentationFullScreen;
-    [self presentViewController:view animated:NO completion:nil];
+    [self.navigationController pushViewController:view animated:YES];
 }
 
 -(IBAction)actionVideo:(id)sender {
@@ -92,14 +92,14 @@
     mainScreen.tradOrEver = @"TRAD";
     mainScreen.modalPresentationStyle = UIModalPresentationFullScreen;
     mainScreen.IndexTab = appdlg.SIListingIndex;
-    [self presentViewController:mainScreen animated:NO completion:Nil];
+    [self.navigationController pushViewController:mainScreen animated:YES];
     mainScreen= Nil;
     appdlg = nil;
 }
 
 -(IBAction)actionSPAJ:(id)sender {
     SPAJMain* viewController = [[SPAJMain alloc] initWithNibName:@"SPAJ Main" bundle:nil];
-    [self presentViewController:viewController animated:true completion:nil];
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 /*

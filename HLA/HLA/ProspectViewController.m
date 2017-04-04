@@ -144,6 +144,8 @@
 @synthesize outletBranchName;
 @synthesize segReferralType;
 @synthesize txtNPWPNo;
+@synthesize isFromSam;
+@synthesize formatter;
 
 bool PostcodeContinue = TRUE;
 bool HomePostcodeContinue = false;
@@ -2944,6 +2946,7 @@ bool RegDatehandling;
                 
                 
                 NSString *insertSQL;
+                NSString *insertSAMSQL;
                 NSString *group = outletGroup.titleLabel.text;
                 group = @"";
                 
@@ -3078,12 +3081,17 @@ bool RegDatehandling;
                                  "VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\",\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", %@, \"%@\", %@, \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\",\"%@\",\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%s\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", txtFullName.text, strDOB, GSTRigperson, txtRigNO.text, Rigdateoutlet,GSTRigExempted,genderSeg, txtHomeAddr1.text, txtHomeAddr2.text, txtHomeAddr3.text,txtHomeTown.text/*_outletKota.titleLabel.text*/, SelectedStateCode, txtHomePostCode.text, HomeCountry,txtHomeDistrict.text,txtHomeVillage.text, txtHomeProvince.text/*_outletProvinsi.titleLabel.text*/, txtOfficeAddr1.text, txtOfficeAddr2.text, txtOfficeAddr3.text, txtOfficeTown.text/*_outletKotaOffice.titleLabel.text*/, SelectedOfficeStateCode, txtOfficePostcode.text, OffCountry, txtOfficeDistrict.text,txtOfficeVillage.text, txtOfficeProvince.text/*_outletProvinsiOffice.titleLabel.text*/, txtEmail.text, OccupCodeSelected, txtExactDuties.text, txtRemark.text, _outletVIPClass.titleLabel.text,
                                  @"datetime(\"now\", \"+7 hour\")", @"1", @"datetime(\"now\", \"+7 hour\")", @"1", group, TitleCodeSelected , txtIDType.text, othertype, txtOtherIDType.text, ClientSmoker, txtAnnIncome.text, _outletSourceIncome.titleLabel.text, txtBussinessType.text,race,marital,religion,nation,"false",@"1", isGrouping, CountryOfBirth, txtNip.text, outletBranchCode.titleLabel.text, outletBranchName.titleLabel.text, txtKcu.text, txtKanwil.text, outletReferralSource.titleLabel.text, txtReferralName.text, strExpiryDate, txtNPWPNo.text];
                     
+
+                    
                 }
                 
                 const char *insert_stmt = [insertSQL UTF8String];
                 if(sqlite3_prepare_v2(contactDB, insert_stmt, -1, &statement, NULL) == SQLITE_OK) {
                     if (sqlite3_step(statement) == SQLITE_DONE) {
                         [self GetLastID];
+                        if(isFromSam) {
+                            [self SaveToSAM];
+                        }
                     } else {
                         UIAlertView *failAlert = [[UIAlertView alloc] initWithTitle:@" " message:@"Fail in inserting into profile table" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
                         [failAlert show];
@@ -3181,6 +3189,43 @@ bool RegDatehandling;
     
     //********* END ***************  UPDATE CLIENT OF LA1, LA2, PO IN EAPP   *********************************
     
+}
+
+- (void) SaveToSAM {
+    sqlite3_stmt *statement;
+    sqlite3_stmt *statement2;
+    NSString *lastID;
+    
+    NSString *GetLastIdSQL = [NSString stringWithFormat:@"Select indexno  from prospect_profile order by \"indexNo\" desc limit 1"];
+    const char *SelectLastId_stmt = [GetLastIdSQL UTF8String];
+    if(sqlite3_prepare_v2(contactDB, SelectLastId_stmt, -1, &statement2, NULL) == SQLITE_OK) {
+        if (sqlite3_step(statement2) == SQLITE_ROW) {
+            lastID = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement2, 0)];
+            sqlite3_finalize(statement2);
+        }
+    }
+    
+    NSString* dateToday=[formatter getDateToday:@"yyyy-MM-dd"];
+    
+    NSString *insertSAMSQL = [NSString stringWithFormat:@"INSERT INTO SAM_Master(\"SAM_Number\", \"SAM_CustomerID\", \"SAM_Type\", \"SAM_ID_CFF\", \"SAM_ID_ProductRecommendation\", \"SAM_ID_Video\", \"SAM_ID_Illustration\", \"SAM_ID_Application\", \"SAM_DateCreated\", \"SAM_DateModified\", \"SAM_Comments\", \"SAM_Status\", \"SAM_NextMeeting\") VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", @"1", lastID, @"", @"", @"", @"", @"", @"", dateToday, @"", @"", @"", @""];
+    
+    const char *insert_stmt = [insertSAMSQL UTF8String];
+    if(sqlite3_prepare_v2(contactDB, insert_stmt, -1, &statement, NULL) == SQLITE_OK) {
+        if (sqlite3_step(statement) == SQLITE_DONE) {
+
+        } else {
+            UIAlertView *failAlert = [[UIAlertView alloc] initWithTitle:@" " message:@"Fail in inserting into profile table" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [failAlert show];
+        }
+        sqlite3_finalize(statement);
+    }
+    else{
+        NSLog(@"query insert %@",insertSAMSQL);
+        NSLog(@"could not prepare statement: %s", sqlite3_errmsg(contactDB));
+    }
+    
+    sqlite3_close(contactDB);
+    insertSAMSQL = Nil, insert_stmt = Nil;
 }
 
 

@@ -11,6 +11,7 @@
 #import "SAMActivityViewController.h"
 #import "SAMActivityListViewController.h"
 #import "SAMNewNasabahViewController.h"
+#import "SAMMeetingScheduleViewController.h"
 #import "AppDelegate.h"
 #import "MainClient.h"
 
@@ -19,6 +20,7 @@
 @end
 
 int const ADD_NASABAH_ALERT_TAG = 100;
+int const CONTINUE_ALERT_TAG = 101;
 
 @implementation SAMDashboardViewController
 
@@ -89,11 +91,30 @@ int const ADD_NASABAH_ALERT_TAG = 100;
             UIStoryboard* clientProfileStoryboard = [UIStoryboard storyboardWithName:@"ProspectProfileStoryboard" bundle:nil];
             prospectVC = [clientProfileStoryboard instantiateViewControllerWithIdentifier:@"Prospect"];
             prospectVC.delegate = self;
+            prospectVC.isFromSam = YES;
             [self.navigationController pushViewController: prospectVC animated:YES];
+        }
+    } else if(alertView.tag == CONTINUE_ALERT_TAG) {
+        if(buttonIndex == 0) {
+            //Pressed "Lanjutkan"
+            [self.navigationController popViewControllerAnimated:YES];
+            [self actionActivityView];
+            
+        } else {
+            //Pressed "Jadwalkan Meeting"
+            SAMMeetingScheduleViewController *samMeetingScheduleVC = [[SAMMeetingScheduleViewController alloc] initWithNibName:@"SAMMeetingScheduleViewController" bundle:nil];
+            [samMeetingScheduleVC setModalPresentationStyle:UIModalPresentationFormSheet];
+            samMeetingScheduleVC.preferredContentSize = CGSizeMake(703, 306);
+            [self presentViewController:samMeetingScheduleVC animated:YES completion:nil];
         }
     }
 }
 
+-(void) FinishInsert {
+    UIAlertView *continueAlert = [[UIAlertView alloc] initWithTitle:@"Data Nasabah tersimpan" message:@"Apakah Anda ingin melanjutkan proses?" delegate:self cancelButtonTitle:@"Lanjut" otherButtonTitles: @"Jadwalkan Meeting", nil];
+    [continueAlert setTag:CONTINUE_ALERT_TAG];
+    [continueAlert show];
+}
 
 
 /*

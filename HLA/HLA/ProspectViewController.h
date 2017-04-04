@@ -105,6 +105,8 @@
 @property (strong, nonatomic) DataTable * tableDB;
 @property (strong, nonatomic) DataTable * tableCheckSameRecord;
 
+@property Formatter *formatter;
+
 @property (nonatomic, retain) EditProspect *EditProspect;
 @property (nonatomic, strong) id<ProspectViewControllerDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UIScrollView *myScrollView;
@@ -290,6 +292,7 @@
 @property (nonatomic, copy) NSString *ClientSmoker;
 @property (nonatomic, copy) NSString *GSTRigperson;
 @property (nonatomic, copy) NSString *GSTRigExempted;
+@property BOOL isFromSam;
 
 -(void)keyboardDidShow:(NSNotificationCenter *)notification;
 -(void)keyboardDidHide:(NSNotificationCenter *)notification;
