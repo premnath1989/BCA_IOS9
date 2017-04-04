@@ -1396,8 +1396,11 @@ static const int UPLOAD_DONE_ALERT_TAG = 101;
             NSString *ZipPath = [resubmitDir stringByAppendingPathComponent: ZipFileName];
             
             NSString *fileName = [NSString stringWithFormat:@"%@_%@", [PlanName objectAtIndex:selectedId], [SINO objectAtIndex:selectedId]];
+            NSString *newFileName = [NSString stringWithFormat:@"%@_%@", fileName, selectedSPAJ];
             NSString *filePath = [NSString stringWithFormat:@"%@.pdf", [docsDir stringByAppendingPathComponent: fileName]];
-            NSArray *paths = [[NSArray alloc] initWithObjects:filePath, nil];
+            NSString *newFilePath = [NSString stringWithFormat:@"%@.pdf", [docsDir stringByAppendingPathComponent: newFileName]];
+            [[NSFileManager defaultManager] moveItemAtPath:filePath toPath:newFilePath error:nil];
+            NSArray *paths = [[NSArray alloc] initWithObjects:newFilePath, nil];
             
             if([SSZipArchive createZipFileAtPath:ZipPath withFilesAtPaths:paths]) {
                 //upload to FTP
@@ -1434,7 +1437,7 @@ static const int UPLOAD_DONE_ALERT_TAG = 101;
 {
     // TODO: ADD upload URL & params
 //    NSString *preUploadParams = [NSString stringWithFormat:@"?agentID=%@",txtAgentCode.text];
-    NSString *urlUpload = [NSString stringWithFormat:@"%@/default.aspx?folderName=%@",[(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL], selectedSPAJ];
+    NSString *urlUpload = [NSString stringWithFormat:@"%@/default.aspx?folderName=%@&isResubmit=TRUE",[(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL], selectedSPAJ];
     
     NSBundle *myLibraryBundle = [NSBundle bundleWithURL:[[NSBundle mainBundle]
                                                          URLForResource:@"xibLibrary" withExtension:@"bundle"]];
