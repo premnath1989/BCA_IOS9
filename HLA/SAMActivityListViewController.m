@@ -44,6 +44,7 @@ NSMutableArray *SAMData;
 -(void) editDetailsForIndexPath:(NSInteger)indexPath
 {
     SAMActivityViewController* viewController = [[SAMActivityViewController alloc] initWithNibName:@"SAMActivityViewController" bundle:nil];
+    viewController._SAMModel = [SAMData objectAtIndex:indexPath];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
@@ -53,7 +54,7 @@ NSMutableArray *SAMData;
 
 - (void) loadSAMData {
     SAMDBHelper *dbHelper = [[SAMDBHelper alloc] init];
-    SAMData = [dbHelper loadAllSAMData];
+    SAMData = [dbHelper readAllSAMData];
 }
 
 // TABLE

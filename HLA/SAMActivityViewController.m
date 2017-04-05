@@ -26,6 +26,8 @@
 
 @implementation SAMActivityViewController
 
+@synthesize _SAMModel;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setCircleAndBorderView];

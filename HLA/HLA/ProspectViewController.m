@@ -19,6 +19,7 @@
 #import "DataTable.h"
 #import "FMDatabase.h"
 #import "textFields.h"
+#import "SAMDBHelper.h"
 
 #define NUMBERS_ONLY @"0123456789"
 #define NUMBERS_MONEY @"0123456789."
@@ -3192,9 +3193,18 @@ bool RegDatehandling;
 }
 
 - (void) SaveToSAM {
+    SAMDBHelper *dbHelper = [[SAMDBHelper alloc] init];
+    // [dbHelper InsertSAMData];
+    
+    NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsDir = [dirPaths objectAtIndex:0];
+    NSString *databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent:@"hladb.sqlite"]];
+    
     sqlite3_stmt *statement;
     sqlite3_stmt *statement2;
     NSString *lastID;
+    
+    SAMModel *model = [[SAMModel alloc] init];
     
     NSString *GetLastIdSQL = [NSString stringWithFormat:@"Select indexno  from prospect_profile order by \"indexNo\" desc limit 1"];
     const char *SelectLastId_stmt = [GetLastIdSQL UTF8String];
@@ -3205,14 +3215,22 @@ bool RegDatehandling;
         }
     }
     
-    NSString* dateToday=[formatter getDateToday:@"yyyy-MM-dd"];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:[NSString stringWithFormat:@"%@",@"yyyy-MM-dd"]];
+    NSString *targetDateString = [dateFormatter stringFromDate:[NSDate date]];
+    NSString* dateToday = targetDateString;
     
     NSString *insertSAMSQL = [NSString stringWithFormat:@"INSERT INTO SAM_Master(\"SAM_Number\", \"SAM_CustomerID\", \"SAM_Type\", \"SAM_ID_CFF\", \"SAM_ID_ProductRecommendation\", \"SAM_ID_Video\", \"SAM_ID_Illustration\", \"SAM_ID_Application\", \"SAM_DateCreated\", \"SAM_DateModified\", \"SAM_Comments\", \"SAM_Status\", \"SAM_NextMeeting\") VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", lastID, lastID, @"Prospect", @"", @"", @"", @"", @"", dateToday, dateToday, @"", @"Follow Up", @""];
     
     const char *insert_stmt = [insertSAMSQL UTF8String];
     if(sqlite3_prepare_v2(contactDB, insert_stmt, -1, &statement, NULL) == SQLITE_OK) {
         if (sqlite3_step(statement) == SQLITE_DONE) {
-
+            model.number = lastID;
+            model.customerID = lastID;
+            model.customerType = @"Prospect";
+            model.dateCreated = dateToday;
+            model.dateModified = dateToday;
+            model.status = @"Follow Up";
         } else {
             UIAlertView *failAlert = [[UIAlertView alloc] initWithTitle:@" " message:@"Fail in inserting into profile table" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [failAlert show];
@@ -3225,7 +3243,6 @@ bool RegDatehandling;
     }
     
     sqlite3_close(contactDB);
-    insertSAMSQL = Nil, insert_stmt = Nil;
 }
 
 

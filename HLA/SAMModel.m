@@ -26,6 +26,4 @@
 @synthesize dateNextMeeting;
 @synthesize status;
 
-
-
 @end

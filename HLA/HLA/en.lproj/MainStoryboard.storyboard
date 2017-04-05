@@ -8,11 +8,11 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="BPreplay_Bold.ttf">
-            <string>BPreplay-Bold</string>
-        </array>
-        <array key="BPreplay_Regular.ttf">
+        <array key="BPreplay.otf">
             <string>BPreplay</string>
+        </array>
+        <array key="BPreplay_Bold.otf">
+            <string>BPreplay-Bold</string>
         </array>
     </customFonts>
     <scenes>
@@ -253,6 +253,7 @@
                                 <items>
                                     <navigationItem id="bKU-F0-up0">
                                         <barButtonItem key="leftBarButtonItem" title="Close" id="Xly-1i-G15">
+                                            <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <connections>
                                                 <action selector="btnClose:" destination="Xma-Uf-txG" id="XeH-1Z-4Bu"/>
                                             </connections>
@@ -6933,7 +6934,7 @@
                                         <rect key="frame" x="0.0" y="22" width="684" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ALQ-bS-d9V" id="geC-bd-eWK">
-                                            <rect key="frame" x="0.0" y="0.0" width="684" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="684" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NrD-oa-Trq">

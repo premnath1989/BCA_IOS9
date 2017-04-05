@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
+#import "SAMModel.h"
 
 @interface SAMActivityViewController : UIViewController{
     IBOutlet UIView* viewActivitySteps;
     IBOutlet UIView* viewActivityComments;
 }
+
+@property (strong, nonatomic) SAMModel *_SAMModel;
 
 @end

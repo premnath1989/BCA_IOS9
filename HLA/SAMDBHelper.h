@@ -8,9 +8,16 @@
 
 #import <Foundation/Foundation.h>
 #import <sqlite3.h>
+#import "Formatter.h"
+#import "SAMModel.h"
 
 @interface SAMDBHelper : NSObject
 
-- (NSMutableArray *) loadAllSAMData;
+@property Formatter *formatter;
+
+- (NSMutableArray *) readAllSAMData;
+- (SAMModel *) InsertSAMData;
+- (SAMModel *) GetSAMData: (NSString *) customerID;
+- (BOOL) UpdateSAMData:(SAMModel *) model;
 
 @end
