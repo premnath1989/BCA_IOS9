@@ -1437,7 +1437,7 @@ static const int UPLOAD_DONE_ALERT_TAG = 101;
 {
     // TODO: ADD upload URL & params
 //    NSString *preUploadParams = [NSString stringWithFormat:@"?agentID=%@",txtAgentCode.text];
-    NSString *urlUpload = [NSString stringWithFormat:@"%@/default.aspx?folderName=%@&isResubmit=TRUE",[(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL], selectedSPAJ];
+    NSString *urlUpload = [NSString stringWithFormat:@"%@/default.aspx?folderName=%@&isResubmit=true",[(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL], selectedSPAJ];
     
     NSBundle *myLibraryBundle = [NSBundle bundleWithURL:[[NSBundle mainBundle]
                                                          URLForResource:@"xibLibrary" withExtension:@"bundle"]];

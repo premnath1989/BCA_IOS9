@@ -355,7 +355,7 @@
     NSString* ZipPath = [NSString stringWithFormat:@"%@.zip", [submissionDir stringByAppendingPathComponent:SPAJeappnum]];
     
     if([SSZipArchive createZipFileAtPath:ZipPath withContentsOfDirectory:filePath]) {
-        NSString *urlUpload = [NSString stringWithFormat:@"%@/default.aspx?folderName=%@&isResubmit=FALSE",[(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL], [dictTransaction valueForKey:@"SPAJNumber"]];
+        NSString *urlUpload = [NSString stringWithFormat:@"%@/default.aspx?folderName=%@&isResubmit=false",[(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL], [dictTransaction valueForKey:@"SPAJNumber"]];
         
         NSBundle *myLibraryBundle = [NSBundle bundleWithURL:[[NSBundle mainBundle]
                                                              URLForResource:@"xibLibrary" withExtension:@"bundle"]];

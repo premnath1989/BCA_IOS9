@@ -942,9 +942,9 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
                     }
                     
                     for (int i=0; i<[arrayHTMLPOData count];i++){
-                        //Test
-                        if(i == 1) { //Checking if we are getting the ProductCode instead of ProductName
-                            if([[[self getDictionaryForPOData:[arrayDBPOData objectAtIndex:i] HTMLID:[arrayHTMLPOData objectAtIndex:i]] valueForKey:@"Value"] isEqual: @"BCALH"] || [[[self getDictionaryForPOData:[arrayDBPOData objectAtIndex:i] HTMLID:[arrayHTMLPOData objectAtIndex:i]] valueForKey:@"Value"] isEqual: @"BCALHST"]) {
+                        if([[arrayHTMLPOData objectAtIndex:i] isEqual: @"TextProductCode"]) { //Checking if we are getting the ProductCode instead of ProductName
+                            NSString *productCode = [[self getDictionaryForPOData:[arrayDBPOData objectAtIndex:i] HTMLID:[arrayHTMLPOData objectAtIndex:i]] valueForKey:@"Value"];
+                            if([productCode isEqual: @"BCALH"] || [productCode isEqual: @"BCALHST"]) {
                                 //Only do code below if product code is BCALH or BCALHST, we're replacing them with new Product Code based on payment frequency and isInternalStaff
                                 int id;
                                 
@@ -953,6 +953,12 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
                                 
                                 NSString *idString = [self generateBCALHProductCodeWithPO:poDict andPremi:premiDict];
                                 
+                                NSDictionary *testDict = [self getDictionaryForPOData:[arrayDBPOData objectAtIndex:i] HTMLID:[arrayHTMLPOData objectAtIndex:i]];
+                                [testDict setValue: idString forKey:@"Value"];
+                                [modifieArray addObject: testDict];
+                                continue;
+                            } else if([productCode isEqual: @"BCAKK"]) {
+                                NSString *idString = @"BLK0";
                                 NSDictionary *testDict = [self getDictionaryForPOData:[arrayDBPOData objectAtIndex:i] HTMLID:[arrayHTMLPOData objectAtIndex:i]];
                                 [testDict setValue: idString forKey:@"Value"];
                                 [modifieArray addObject: testDict];
@@ -1022,9 +1028,9 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
                 }
                 
                 for (int i=0; i<[arrayHTMLPOData count];i++){
-                    if(i == 1) { //Checking if we are getting the ProductCode instead of ProductName
-                        if([[[self getDictionaryForPOData:[arrayDBPOData objectAtIndex:i] HTMLID:[arrayHTMLPOData objectAtIndex:i]] valueForKey:@"Value"] isEqual: @"BCALH"] ||
-                           [[[self getDictionaryForPOData:[arrayDBPOData objectAtIndex:i] HTMLID:[arrayHTMLPOData objectAtIndex:i]] valueForKey:@"Value"] isEqual: @"BCALHST"]) {
+                    if([[arrayHTMLPOData objectAtIndex:i] isEqual: @"TextProductCode"]) { //Checking if we are getting the ProductCode instead of ProductName
+                        NSString *productCode = [[self getDictionaryForPOData:[arrayDBPOData objectAtIndex:i] HTMLID:[arrayHTMLPOData objectAtIndex:i]] valueForKey:@"Value"];
+                        if([productCode isEqual: @"BCALH"] || [productCode isEqual: @"BCALHST"]) {
                             //Only do code below if product code is BCALH or BCALHST, we're replacing them with new Product Code based on payment frequency and isInternalStaff
                             int id;
                             
@@ -1033,6 +1039,12 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
 
                             NSString *idString = [self generateBCALHProductCodeWithPO:poDict andPremi:premiDict];
                             
+                            NSDictionary *testDict = [self getDictionaryForPOData:[arrayDBPOData objectAtIndex:i] HTMLID:[arrayHTMLPOData objectAtIndex:i]];
+                            [testDict setValue: idString forKey:@"Value"];
+                            [modifieArray addObject: testDict];
+                            continue;
+                        } else if([productCode isEqual: @"BCAKK"]) {
+                            NSString *idString = @"BLK0";
                             NSDictionary *testDict = [self getDictionaryForPOData:[arrayDBPOData objectAtIndex:i] HTMLID:[arrayHTMLPOData objectAtIndex:i]];
                             [testDict setValue: idString forKey:@"Value"];
                             [modifieArray addObject: testDict];
