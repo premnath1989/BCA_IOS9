@@ -791,21 +791,31 @@
         }
     }
     
-    else if ([stringParentSection isEqualToString:@"TR"]){
-        for (int i=0;i<[newElementArrayTertanggungName count];i++){
-            NSMutableDictionary* dictDetail = [[NSMutableDictionary alloc]initWithDictionary:[self ModifiedDictionary:[self OriginalDictionaryForAutoPopulate] OriginalElementName:[originalElementArrayTertanggungName objectAtIndex:i] NewElementName:[newElementArrayTertanggungName objectAtIndex:i]]];
-            [arrayValue addObject:dictDetail];
-        }
+    else if ([stringParentSection isEqualToString:@"TR"]){ // TERTANGGUNG
+        //TODO: Add autopopulate from policy holder's data if insured and holder's is the same person
         NSString* stringRelation = [formatter getRelationNameForHtml:[dictPOData valueForKey:@"RelWithLA"]];
-        NSMutableDictionary* dictRelWithLa = [[NSMutableDictionary alloc]initWithObjectsAndKeys:@"RadioButtonProspectiveInsuredRelationAssured",@"elementID",stringRelation,@"Value", nil];
-        
-        NSMutableDictionary* dictRelWithLaDetail = [[NSMutableDictionary alloc]initWithObjectsAndKeys:@"TextProspectiveInsuredRelationAssuredOther",@"elementID",[dictPOData valueForKey:@"RelWithLA"],@"Value", nil];
-        
-        [arrayValue addObject:dictRelWithLa];
-        if ([stringRelation isEqualToString:@"other"]){
-            [arrayValue addObject:dictRelWithLaDetail];
-        }
-
+//        if([stringRelation isEqualToString:@"self"]) {
+//            for (int i=0;i<[newElementArrayTertanggungName count];i++){
+//                NSMutableDictionary* dictDetail = [[NSMutableDictionary alloc]initWithDictionary:[self ModifiedDictionary:[self OriginalDictionaryForAutoPopulate] OriginalElementName:[originalElementArrayTertanggungName objectAtIndex:i] NewElementName:[newElementArrayTertanggungName objectAtIndex:i]]];
+//                [arrayValue addObject:dictDetail];
+//            }
+//            NSMutableDictionary* dictRelWithLa = [[NSMutableDictionary alloc]initWithObjectsAndKeys:@"RadioButtonProspectiveInsuredRelationAssured",@"elementID",stringRelation,@"Value", nil];
+//            
+//            [arrayValue addObject:dictRelWithLa];
+//        } else {
+            for (int i=0;i<[newElementArrayTertanggungName count];i++){
+                NSMutableDictionary* dictDetail = [[NSMutableDictionary alloc]initWithDictionary:[self ModifiedDictionary:[self OriginalDictionaryForAutoPopulate] OriginalElementName:[originalElementArrayTertanggungName objectAtIndex:i] NewElementName:[newElementArrayTertanggungName objectAtIndex:i]]];
+                [arrayValue addObject:dictDetail];
+            }
+            NSMutableDictionary* dictRelWithLa = [[NSMutableDictionary alloc]initWithObjectsAndKeys:@"RadioButtonProspectiveInsuredRelationAssured",@"elementID",stringRelation,@"Value", nil];
+            
+            NSMutableDictionary* dictRelWithLaDetail = [[NSMutableDictionary alloc]initWithObjectsAndKeys:@"TextProspectiveInsuredRelationAssuredOther",@"elementID",[dictPOData valueForKey:@"RelWithLA"],@"Value", nil];
+            
+            [arrayValue addObject:dictRelWithLa];
+            if ([stringRelation isEqualToString:@"other"]){
+                [arrayValue addObject:dictRelWithLaDetail];
+            }
+//        }
     }
     else if ([stringParentSection isEqualToString:@"PP"]){
         NSString* stringPaymentFrequency = [formatter getPaymentFrequencyValue:[dictPremiData valueForKey:@"Payment_Frequency"]];

@@ -384,7 +384,7 @@
         NSString* stringProductName=[dictTransaction valueForKey:@"ProductName"];
         NSString* stringPemegangPolis=[dictTransaction valueForKey:@"ProspectName"];
         
-        NSString *urlStr = [NSString stringWithFormat:@"%@/Service2.svc/UpdateOnPostUploadData?spajNumber=%@&producName=%@&polisOwner=%@&isHttpPost=TRUE", [(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL], stringSPAJNumber,stringProductName,stringPemegangPolis];
+        NSString *urlStr = [NSString stringWithFormat:@"%@/Service2.svc/UpdateOnPostUploadData?spajNumber=%@&producName=%@&polisOwner=%@&isHttpPost=true", [(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL], stringSPAJNumber,stringProductName,stringPemegangPolis];
         
         
         urlStr = [urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];

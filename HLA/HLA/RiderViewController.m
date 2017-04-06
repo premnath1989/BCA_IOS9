@@ -6089,7 +6089,7 @@ int maxGycc = 0;
     int masaPremium=[[_dictionaryForBasicPlan valueForKey:@"ExtraPremiumTerm"] integerValue];
     NSNumber* premiDasar = [formatter convertNumberFromStringCurrency:[_dictionaryForBasicPlan valueForKey:@"PremiumPolicyA"]];
     NSNumber* premiExtra = [formatter convertNumberFromStringCurrency:[_dictionaryForBasicPlan valueForKey:@"ExtraPremiumPolicy"]];
-    dictMDBKK=[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"Meniggal Dunia Bukan Karena Kecelakaan",@"RiderName",
+    dictMDBKK=[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"Meninggal Dunia Bukan Karena Kecelakaan",@"RiderName",
                              @"MDBKK",@"RiderCode",
                              [riderCalculation getSumAssuredForMDBKK:sumAssured],@"SumAssured",
                              @"10",@"MasaAsuransi",
@@ -6105,7 +6105,7 @@ int maxGycc = 0;
 
 -(NSDictionary *)dictMBKK{
     NSNumber *sumAssured = [NSNumber numberWithLongLong:[[_dictionaryForBasicPlan valueForKey:@"Number_Sum_Assured"] longLongValue]];
-    dictMBKK=[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"Meniggal Dunia Karena Kecelakaan",@"RiderName",
+    dictMBKK=[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"Meninggal Dunia Karena Kecelakaan",@"RiderName",
                              @"MDKK",@"RiderCode",
                              [riderCalculation getSumAssuredForMBKK:sumAssured],@"SumAssured",
                              @"10",@"MasaAsuransi",

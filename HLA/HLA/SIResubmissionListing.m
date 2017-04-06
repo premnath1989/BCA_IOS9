@@ -1466,7 +1466,7 @@ static const int UPLOAD_DONE_ALERT_TAG = 101;
     NSString *stringProductName = [PlanName objectAtIndex:selectedId];
     NSString *stringPemegangPolis = [Name objectAtIndex:selectedId];
     
-    NSString *urlStr = [NSString stringWithFormat:@"%@/service2.svc/UpdateOnResubmitData?spajNumber=%@&producName=%@&polisOwner=%@&isHttpPost=TRUE", [(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL], selectedSPAJ,stringProductName,stringPemegangPolis];
+    NSString *urlStr = [NSString stringWithFormat:@"%@/service2.svc/UpdateOnResubmitData?spajNumber=%@&producName=%@&polisOwner=%@&isHttpPost=true", [(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL], selectedSPAJ,stringProductName,stringPemegangPolis];
     
     urlStr = [urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     
@@ -1490,6 +1490,10 @@ static const int UPLOAD_DONE_ALERT_TAG = 101;
         alert.tag = UPLOAD_DONE_ALERT_TAG;
         [alert show];
     });
+    
+}
+
+- (void) downloadisError {
     
 }
 

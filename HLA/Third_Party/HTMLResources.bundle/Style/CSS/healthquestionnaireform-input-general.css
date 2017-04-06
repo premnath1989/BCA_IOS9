@@ -113,6 +113,15 @@ input:disabled, textarea:disabled {
   background-image: none;
 }
 
+input.LowerCase, textarea.LowerCase {
+  text-transform: capitalize;
+}
+
+input.GeneralMediumFix {
+  max-width: 231px;
+  width: 231px;
+}
+
 /* CHECKBOX */
 .RadioButton {
   text-align: center;
