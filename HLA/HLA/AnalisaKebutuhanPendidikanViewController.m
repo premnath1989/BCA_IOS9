@@ -62,6 +62,7 @@
 - (void)voidReadPendidikan{
     //[webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"document.getElementById('read').click()"]];
     [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"readfromDB();"]];
+    [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"init();"]];
 }
 
 - (void)savetoDB:(NSDictionary *)params{
