@@ -372,11 +372,24 @@
             sortedBy=@"CFFT.CFFDateModified";
             sortMethod=@"DESC";
             
-            [self CreateNewCFFTransaction];
-            [self loadCFFTransaction];
+            //[self CreateNewCFFTransaction];
+            /*[self loadCFFTransaction];
             [self dismissViewControllerAnimated:YES completion:^{
                 [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-            }];
+            }];*/
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                [self CreateNewCFFTransaction];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self loadCFFTransaction];
+                    dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                        if ([arrayCFFTransaction count]>0){
+                            [self dismissViewControllerAnimated:YES completion:^{
+                                [self showDetailsForIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+                            }];
+                        }
+                    });
+                });
+            });
         }
         
     }

@@ -859,6 +859,9 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
                 DDXMLElement *root = [xml rootElement];
                 WebResponObj *returnObj = [[WebResponObj alloc]init];
                 
+                [self getHTMLDataTable];
+                [self getSPAJHTMLDataTable];
+                
                 //nested async to avoid ui changes in same queue
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [spinnerLoading stopLoadingSpinner];
@@ -884,8 +887,7 @@ completedWithResponse:(AgentWSSoapBindingResponse *)response
                         });
                     });
                 });
-                [self getHTMLDataTable];
-                [self getSPAJHTMLDataTable];
+                
             }else if([rateResponse.strStatus caseInsensitiveCompare:@"False"] == NSOrderedSame){
                 [spinnerLoading stopLoadingSpinner];
                 UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Proses Login anda gagal" message:@"" delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
