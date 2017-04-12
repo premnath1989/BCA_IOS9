@@ -15,7 +15,9 @@
 
 @end
 
-@implementation SAMNewNasabahViewController
+@implementation SAMNewNasabahViewController {
+    BOOL Update_record;
+}
 
 @synthesize dashboardVC;
 @synthesize txtNip;
@@ -25,22 +27,32 @@
 @synthesize txtBranchCode;
 @synthesize txtBranchName;
 @synthesize txtProspectFullName;
+@synthesize txtProspectId;
+@synthesize txtProspectNoHP;
+@synthesize txtProspectNoHPPrefix;
 @synthesize outletDoB;
 @synthesize segNationality;
 @synthesize segGender;
 @synthesize gender;
 @synthesize nationality;
-@synthesize SIDate;
-@synthesize SIDatePopover;
+@synthesize SIDate = _SIDate;
+@synthesize SIDatePopover = _SIDatePopover;
 @synthesize outletProspectCountryBirthplace;
 
 @synthesize outletReferralSource;
 
 int const CONTINUE_ALERT_TAG = 100;
+int const SAVE_SUCCESS_ALERT_TAG = 101;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Selesai" style:UIBarButtonItemStyleBordered target:self action:@selector(saveToDb)];
+    
+    NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsDir = [dirPaths objectAtIndex:0];
+    
+    databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -67,331 +79,398 @@ int const CONTINUE_ALERT_TAG = 100;
 #pragma mark Database
 
 -(void) saveToDb {
-//    [self.view endEditing:YES];
-//    [self resignFirstResponder];
-//    
-//    Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
-//    id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
-//    [activeInstance performSelector:@selector(dismissKeyboard)];
-//    
-//    NSString *strDOB = @"";
-//    NSString *title = @"";
-//    NSString *strExpiryDate = @"";
-//    NSString *othertype = @"";
-//    NSString *marital  = @"";
-//    NSString *race = @"";
-//    NSString *Rigdateoutlet = @"";
-//    NSString *religion = @"";
-//    NSString *nation  = @"";
-//    
-//    NSString *OffCountry = @"";
-//    NSString *HomeCountry = @"";
-//    NSString *RegNumber = @"";
-//    
-//    NSString *SelectedStateCode = @"";
-//    NSString *TitleCodeSelected = @"";
-//    int counter = 0;
-//    
-//    /*added by faiz*/
-//    
-//    /*end of added by faiz*/
-//    if ([self Validation] == TRUE && DATE_OK == YES && [self OtherIDValidation] == TRUE) {
-//        
-//        sqlite3_stmt *statement;
-//        const char *dbpath = [databasePath UTF8String];
-//        
-//        if (sqlite3_open(dbpath, &contactDB) == SQLITE_OK) {
-//            txtProspectFullName.text = [txtProspectFullName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-////            if (checked) {
-////                HomeCountry = btnHomeCountry.titleLabel.text;
-////                SelectedStateCode = txtHomeState.text;
-////            } else {
-////                HomeCountry = txtHomeCountry.text;
-////            }
-//            
-////            RegNumber = txtRigNO.text;
-////            Rigdateoutlet = outletRigDate.titleLabel.text;
-////            if (checked2) {
-////                OffCountry = btnOfficeCountry.titleLabel.text;
-////                SelectedOfficeStateCode = txtOfficeState.text;
-////            } else {
-////                OffCountry = txtOfficeCountry.text;
-////            }
-//            
-//            if (outletDoB.titleLabel.text.length == 0) {
-//                strDOB = [outletDoB.titleLabel.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    [self.view endEditing:YES];
+    [self resignFirstResponder];
+    
+    Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
+    id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
+    [activeInstance performSelector:@selector(dismissKeyboard)];
+    
+    NSString *strDOB = @"";
+    NSString *title = @"";
+    NSString *strExpiryDate = @"";
+    NSString *othertype = @"";
+    NSString *marital  = @"";
+    NSString *race = @"";
+    NSString *Rigdateoutlet = @"";
+    NSString *religion = @"";
+    NSString *nation  = @"";
+    
+    NSString *OffCountry = @"";
+    NSString *HomeCountry = @"";
+    NSString *RegNumber = @"";
+    
+    NSString *SelectedStateCode = @"";
+    NSString *TitleCodeSelected = @"";
+    int counter = 0;
+    
+    /*added by faiz*/
+    
+    /*end of added by faiz*/
+    if ([self ValidateData] == TRUE) {
+    
+        sqlite3_stmt *statement;
+        const char *dbpath = [databasePath UTF8String];
+        
+        if (sqlite3_open(dbpath, &contactDB) == SQLITE_OK) {
+            txtProspectFullName.text = [txtProspectFullName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+//            if (checked) {
+//                HomeCountry = btnHomeCountry.titleLabel.text;
+//                SelectedStateCode = txtHomeState.text;
 //            } else {
-//                strDOB = outletDoB.titleLabel.text;
+//                HomeCountry = txtHomeCountry.text;
 //            }
-//            
-//            if(gender == nil || gender==NULL || segGender.selectedSegmentIndex == -1) {
-//                gender = @"";
+            
+//            RegNumber = txtRigNO.text;
+//            Rigdateoutlet = outletRigDate.titleLabel.text;
+//            if (checked2) {
+//                OffCountry = btnOfficeCountry.titleLabel.text;
+//                SelectedOfficeStateCode = txtOfficeState.text;
+//            } else {
+//                OffCountry = txtOfficeCountry.text;
 //            }
-//            
-//            //HomeCountry =  [self getCountryCode:HomeCountry];
-//            //OffCountry =  [self getCountryCode:OffCountry];
-//            
-//            /*modified by faiz*/
-//            race  = @"OTHERS";//[outletRace.titleLabel.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-//            
-//            
-//            //ENS: Save othertype with code
-//            //othertype = IDTypeCodeSelected;
-////            othertype = IDTypeIdentifierSelected;
-////            if (IDTypeCodeSelected == NULL) {
-////                othertype = @"";
-////            }
-////            
-////            NSString *type = [_txtProspectId.text stringByTrimmingCharactersInSet:
-////                              [NSCharacterSet whitespaceCharacterSet]];
-////            if (type.length != 0) {
-////                type = [self getOtherTypeCode:type];
-////                othertype = type;
-////            }
-//            
-//            strDOB = [strDOB stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-//            
-//            
-//            NSString *insertSQL;
-//            
-//            if([othertype isEqualToString:@"- SELECT -"]) {
+            
+            if (outletDoB.titleLabel.text.length == 0) {
+                strDOB = [outletDoB.titleLabel.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+            } else {
+                strDOB = outletDoB.titleLabel.text;
+            }
+            
+            if(gender == nil || gender==NULL || segGender.selectedSegmentIndex == -1) {
+                gender = @"";
+            }
+            
+            //HomeCountry =  [self getCountryCode:HomeCountry];
+            //OffCountry =  [self getCountryCode:OffCountry];
+            
+            /*modified by faiz*/
+            race  = @"OTHERS";//[outletRace.titleLabel.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            
+            
+            //ENS: Save othertype with code
+            //othertype = IDTypeCodeSelected;
+//            othertype = IDTypeIdentifierSelected;
+//            if (IDTypeCodeSelected == NULL) {
 //                othertype = @"";
 //            }
 //            
-//            if([title isEqualToString:@"- SELECT -"]) {
-//                title = @"";
+//            NSString *type = [_txtProspectId.text stringByTrimmingCharactersInSet:
+//                              [NSCharacterSet whitespaceCharacterSet]];
+//            if (type.length != 0) {
+//                type = [self getOtherTypeCode:type];
+//                othertype = type;
 //            }
-//            
-//            if([strDOB isEqualToString:@"- SELECT -"] || [strDOB isEqualToString:@"-SELECT-"]) {
-//                strDOB = @"";
-//            }
-//            
-//            if ([strDOB isEqualToString:@""]
-//                && [textFields trimWhiteSpaces:outletDoB.titleLabel.text].length != 0
-//                && ![[textFields trimWhiteSpaces:outletDoB.titleLabel.text] isEqualToString:@"- SELECT -"]
-//                && ![[textFields trimWhiteSpaces:outletDoB.titleLabel.text] isEqualToString:@"-SELECT-"])
-//            {
-//                strDOB = [outletDoB.titleLabel.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-//            }
-//            
-//            if([marital isEqualToString:@"- SELECT -"]) {
-//                marital = @"";
-//            }
-//            
-//            if([race isEqualToString:@"- SELECT -"]) {
-//                race = @"";
-//            }
-//            
-//            if([Rigdateoutlet isEqualToString:@"- SELECT -"]) {
-//                Rigdateoutlet = @"";
-//            }
-//            
-//            if([religion isEqualToString:@"- SELECT -"]) {
-//                religion = @"";
-//            }
-//            
-//            if([nation isEqualToString:@"- SELECT -"]) {
-//                nation = @"";
-//            }
-//            
-//            if([HomeCountry isEqualToString:@"(null)"]  || (HomeCountry == NULL)) {
-//                HomeCountry = @"";
-//            }
-//            
-//            if([SelectedStateCode isEqualToString:@"(null)"]  || (SelectedStateCode == NULL)) {
-//                SelectedStateCode = @"";
-//            }
-//            
-//            if([TitleCodeSelected isEqualToString:@"(null)"]  || (TitleCodeSelected == NULL)) {
-//                TitleCodeSelected = @"";
-//            }
-//            
-//            if ([TitleCodeSelected isEqualToString:@""] && ![title isEqualToString:@""]) {
-//                TitleCodeSelected = [self getTitleCode:title];
-//            }
-//            
-//            NSString *isGrouping = @"N";
-//            
-////            if (segIsGrouping.selectedSegmentIndex == 0) {
-////                isGrouping = @"Y";
-////                group = [self ProspectGroup_toString];
-////            } else {
-////                isGrouping = @"N";
-////                group = @"";
-////            }
-//            
-//            // Convert string to date object
-//            NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-//            [dateFormat setDateFormat:@"yyyy-MM-dd"];
-//            NSDate *date = [dateFormat dateFromString:strDOB];
-//            
-//            // Convert date object to desired output format
-//            [dateFormat setDateFormat:@"dd/MM/yyyy"];
-//            NSString *newDOB = [dateFormat stringFromDate:date];
-//            
-//            NSDateFormatter *expiryDateFormat = [[NSDateFormatter alloc] init];
-//            [expiryDateFormat setDateFormat:@"yyyy-MM-dd"];
-//            NSDate *dateExpiry = [expiryDateFormat dateFromString:strExpiryDate];
-//            
-//            // Convert date object to desired output format
-//            [expiryDateFormat setDateFormat:@"dd/MM/yyyy"];
-//            NSString *newExpiryDate = [expiryDateFormat stringFromDate:dateExpiry];
-//            
-//            NSLog(@"%@",newDOB);
-//            
-//            NSString *genderSeg;
-//            if(segGender.selectedSegmentIndex == 0){
-//                genderSeg = @"MALE";
-//            }else{
-//                genderSeg = @"FEMALE";
-//            }
-//            
-//            NSString *CountryOfBirth = @"";
-//            CountryOfBirth = outletProspectCountryBirthplace.titleLabel.text;//btnCoutryOfBirth.titleLabel.text;
-//            //CountryOfBirth = [self getCountryCode:CountryOfBirth];
-//            
-//            if(Update_record == YES) {
-//                //GET PP  CHANGES COUNTER
-//                
-//                FMDatabase *db = [FMDatabase databaseWithPath:databasePath];
-//                [db open];
-//                FMResultSet *result = [db executeQuery:@"SELECT ProspectProfileChangesCounter from prospect_profile WHERE indexNo = ?", pp.ProspectID];
-//                while ([result next]) {
-//                    counter =  [result intForColumn:@"ProspectProfileChangesCounter"];
-//                }
-//                [result close];
-//                
-//                counter = counter+1;
-//                
-//                NSString *str_counter = [NSString stringWithFormat:@"%i",counter];
-//                NSString *prosID = prospectprofile.ProspectID;
-//                
-//                if (prospectprofile.ProspectID == Nil) {
-//                    NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
-//                    prospectprofile.ProspectID = [ClientProfile objectForKey:@"LastID"];
-//                    prosID = [ClientProfile objectForKey:@"LastID"];
-//                }
-//                
-//                if ([db close]) {
-//                    [db open];
-//                }
-//                
-//                
-//                insertSQL = [NSString stringWithFormat:
-//                             @"UPDATE prospect_profile set \"ProspectName\"=\'%@\', \"ProspectDOB\"=\"%@\",\"GST_registered\"=\"%@\",\"GST_registrationNo\"=\"%@\",\"GST_registrationDate\"=\"%@\",\"GST_exempted\"=\"%@\", \"ProspectGender\"=\"%@\", \"ResidenceAddress1\"=\"%@\", \"ResidenceAddress2\"=\"%@\", \"ResidenceAddress3\"=\"%@\", \"ResidenceAddressTown\"=\"%@\", \"ResidenceAddressState\"=\"%@\", \"ResidenceAddressPostCode\"=\"%@\", \"ResidenceAddressCountry\"=\"%@\", \"OfficeAddress1\"=\"%@\", \"OfficeAddress2\"=\"%@\", \"OfficeAddress3\"=\"%@\", \"OfficeAddressTown\"=\"%@\",\"OfficeAddressState\"=\"%@\", \"OfficeAddressPostCode\"=\"%@\", \"OfficeAddressCountry\"=\"%@\", \"ProspectEmail\"= \"%@\", \"ProspectOccupationCode\"=\"%@\", \"ExactDuties\"=\"%@\", \"ProspectRemark\"=\"%@\", \"DateModified\"=%@,\"ModifiedBy\"=\"%@\", \"ProspectGroup\"=\"%@\", \"ProspectTitle\"=\"%@\", \"IDTypeNo\"=\"%@\", \"OtherIDType\"=\"%@\", \"OtherIDTypeNo\"=\"%@\", \"Smoker\"=\"%@\", \"AnnualIncome\"=\"%@\", \"BussinessType\"=\"%@\", \"Race\"=\"%@\", \"MaritalStatus\"=\"%@\", \"Nationality\"=\"%@\", \"Religion\"=\"%@\",\"ProspectProfileChangesCounter\"=\"%@\", \"Prospect_IsGrouping\"=\"%@\", \"CountryOfBirth\"=\"%@\" where IndexNo = \"%@\" " ,
-//                             txtFullName.text, strDOB, GSTRigperson, txtRigNO.text, Rigdateoutlet,GSTRigExempted,gender, txtHomeAddr1.text, txtHomeAddr2.text, txtHomeAddr3.text, txtHomeTown.text, SelectedStateCode, txtHomePostCode.text, HomeCountry, txtOfficeAddr1.text, txtOfficeAddr2.text, txtOfficeAddr3.text, txtOfficeTown.text, SelectedOfficeStateCode, txtOfficePostcode.text, OffCountry, txtEmail.text, OccupCodeSelected, txtExactDuties.text, txtRemark.text, @"datetime(\"now\", \"+8 hour\")", @"1", group, TitleCodeSelected, txtIDType.text, othertype, txtOtherIDType.text, ClientSmoker, txtAnnIncome.text, txtBussinessType.text, race, marital, nation, religion, str_counter,isGrouping, CountryOfBirth, prosID];
-//                
+            
+            strDOB = [strDOB stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            
+            
+            NSString *insertSQL;
+            
+            if([othertype isEqualToString:@"- SELECT -"]) {
+                othertype = @"";
+            }
+            
+            if([title isEqualToString:@"- SELECT -"]) {
+                title = @"";
+            }
+            
+            if([strDOB isEqualToString:@"- SELECT -"] || [strDOB isEqualToString:@"-SELECT-"]) {
+                strDOB = @"";
+            }
+            
+            if ([strDOB isEqualToString:@""]
+                && [textFields trimWhiteSpaces:outletDoB.titleLabel.text].length != 0
+                && ![[textFields trimWhiteSpaces:outletDoB.titleLabel.text] isEqualToString:@"- SELECT -"]
+                && ![[textFields trimWhiteSpaces:outletDoB.titleLabel.text] isEqualToString:@"-SELECT-"])
+            {
+                strDOB = [outletDoB.titleLabel.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            }
+            
+            if([marital isEqualToString:@"- SELECT -"]) {
+                marital = @"";
+            }
+            
+            if([race isEqualToString:@"- SELECT -"]) {
+                race = @"";
+            }
+            
+            if([Rigdateoutlet isEqualToString:@"- SELECT -"]) {
+                Rigdateoutlet = @"";
+            }
+            
+            if([religion isEqualToString:@"- SELECT -"]) {
+                religion = @"";
+            }
+            
+            if([nation isEqualToString:@"- SELECT -"]) {
+                nation = @"";
+            }
+            
+            if([HomeCountry isEqualToString:@"(null)"]  || (HomeCountry == NULL)) {
+                HomeCountry = @"";
+            }
+            
+            if([SelectedStateCode isEqualToString:@"(null)"]  || (SelectedStateCode == NULL)) {
+                SelectedStateCode = @"";
+            }
+            
+            if([TitleCodeSelected isEqualToString:@"(null)"]  || (TitleCodeSelected == NULL)) {
+                TitleCodeSelected = @"";
+            }
+            
+            if ([TitleCodeSelected isEqualToString:@""] && ![title isEqualToString:@""]) {
+                TitleCodeSelected = [self getTitleCode:title];
+            }
+            
+            NSString *isGrouping = @"N";
+            
+//            if (segIsGrouping.selectedSegmentIndex == 0) {
+//                isGrouping = @"Y";
+//                group = [self ProspectGroup_toString];
 //            } else {
-//                
-//                insertSQL = [NSString stringWithFormat:
-//                             @"INSERT INTO prospect_profile(\'ProspectName\', \"ProspectDOB\", \"GST_registered\", \"GST_registrationNo\", \"GST_registrationDate\", \"GST_exempted\",\"ProspectGender\", \"ResidenceAddress1\", \"ResidenceAddress2\", \"ResidenceAddress3\", \"ResidenceAddressTown\", \"ResidenceAddressState\",\"ResidenceAddressPostCode\", \"ResidenceAddressCountry\", \"ResidenceDistrict\", \"ResidenceVillage\", \"ResidenceProvince\", \"OfficeAddress1\", \"OfficeAddress2\", \"OfficeAddress3\",\"OfficeAddressTown\", \"OfficeAddressState\", \"OfficeAddressPostCode\", \"OfficeAddressCountry\", \"OfficeDistrict\", \"OfficeVillage\", \"OfficeProvince\", \"ProspectEmail\",\"ProspectOccupationCode\", \"ExactDuties\", \"ProspectRemark\", \"ClientSegmentation\", \"DateCreated\", \"CreatedBy\", \"DateModified\",\"ModifiedBy\", \"ProspectGroup\", \"ProspectTitle\", \"IDTypeNo\", \"OtherIDType\", \"OtherIDTypeNo\", \"Smoker\", \"AnnualIncome\", \"SourceIncome\", \"BussinessType\", \"Race\", \"MaritalStatus\", \"Religion\", \"Nationality\", \"QQFlag\",\"ProspectProfileChangesCounter\",\"prospect_IsGrouping\", \"CountryOfBirth\", \"NIP\", \"BranchCode\", \"BranchName\", \"KCU\", \"Kanwil\",\"ReferralSource\", \"ReferralName\", \"IDExpiryDate\", \"NPWPNo\") "
-//                             "VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\",\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", %@, \"%@\", %@, \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\",\"%@\",\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%s\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", txtFullName.text, strDOB, GSTRigperson, txtRigNO.text, Rigdateoutlet,GSTRigExempted,genderSeg, txtHomeAddr1.text, txtHomeAddr2.text, txtHomeAddr3.text,txtHomeTown.text/*_outletKota.titleLabel.text*/, SelectedStateCode, txtHomePostCode.text, HomeCountry,txtHomeDistrict.text,txtHomeVillage.text, txtHomeProvince.text/*_outletProvinsi.titleLabel.text*/, txtOfficeAddr1.text, txtOfficeAddr2.text, txtOfficeAddr3.text, txtOfficeTown.text/*_outletKotaOffice.titleLabel.text*/, SelectedOfficeStateCode, txtOfficePostcode.text, OffCountry, txtOfficeDistrict.text,@"", @""/*_outletProvinsiOffice.titleLabel.text*/, @"", OccupCodeSelected, txtExactDuties.text, txtRemark.text, _outletVIPClass.titleLabel.text,
-//                             @"datetime(\"now\", \"+7 hour\")", @"1", @"datetime(\"now\", \"+7 hour\")", @"1", group, TitleCodeSelected , txtIDType.text, othertype, txtOtherIDType.text, ClientSmoker, txtAnnIncome.text, _outletSourceIncome.titleLabel.text, txtBussinessType.text,race,marital,religion,nation,"false",@"1", isGrouping, CountryOfBirth, txtNip.text, outletBranchCode.titleLabel.text, outletBranchName.titleLabel.text, txtKcu.text, txtKanwil.text, outletReferralSource.titleLabel.text, txtReferralName.text, strExpiryDate, txtNPWPNo.text];
-//                
+//                isGrouping = @"N";
+//                group = @"";
 //            }
-//            
-//            const char *insert_stmt = [insertSQL UTF8String];
-//            if(sqlite3_prepare_v2(contactDB, insert_stmt, -1, &statement, NULL) == SQLITE_OK) {
-//                if (sqlite3_step(statement) == SQLITE_DONE) {
-//                    [self GetLastID];
-//                } else {
-//                    UIAlertView *failAlert = [[UIAlertView alloc] initWithTitle:@" " message:@"Fail in inserting into profile table" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-//                    [failAlert show];
-//                }
-//                sqlite3_finalize(statement);
-//            }
-//            else{
-//                NSLog(@"query insert %@",insertSQL);
-//                NSLog(@"could not prepare statement: %s", sqlite3_errmsg(contactDB));
-//            }
-//            
-//            sqlite3_close(contactDB);
-//            insertSQL = Nil, insert_stmt = Nil;
-//        }
-//        
-//        statement = Nil;
-//        dbpath = Nil;
-//    } else {
-//        NSLog(@"Either validation return false or 'DATE_OK' =  NO");
-//    }
-//    
-//    PostcodeContinue = TRUE;
-//    
-//    //******** START ****************  UPDATE CLIENT OF LA1, LA2, PO IN EAPP   *********************************
-//    
-//    
-//    FMDatabase *db = [FMDatabase databaseWithPath:databasePath];
-//    [db open];
-//    
-//    FMResultSet *result = [db executeQuery:@"SELECT COUNT(*) as COUNT FROM eProposal_LA_Details WHERE ProspectProfileID = ? AND POFlag = 'N'", prospectprofile.ProspectID];
-//    NSString *str_counter;
-//    NSString *contact1;
-//    NSString *contact2;
-//    NSString *contact3;
-//    NSString *contact4;
-//    while ([result next]) {
-//        int count = [result intForColumn:@"COUNT"];
-//        if(count > 0) {
-//            str_counter = [NSString stringWithFormat:@"%i",counter];
-//            /*edit by faiz*/
-//            contact1 =  [NSString stringWithFormat:@"%@",txtContact1.text];//[NSString stringWithFormat:@"%@%@",txtPrefix1.text, txtContact1.text];
-//            contact2 =  [NSString stringWithFormat:@"%@",txtContact2.text];//[NSString stringWithFormat:@"%@%@",txtPrefix2.text, txtContact2.text];
-//            contact3 =  [NSString stringWithFormat:@"%@",txtContact3.text];//[NSString stringWithFormat:@"%@%@",txtPrefix3.text, txtContact3.text];
-//            contact4 =  [NSString stringWithFormat:@"%@",txtContact4.text];//[NSString stringWithFormat:@"%@%@",txtPrefix4.text, txtContact4.text];
-//            /*end of edit by faiz*/
-//            
-//            [db executeUpdate:@"Update eProposal_LA_Details SET \"LATitle\" = \"%@\", \"LAName\" = \"%@\", \"LASex\" = \"%@\", \"LADOB\" = \"%@\", \"LANewICNO\" = \"%@\", \"LAOtherIDType\" = \"%@\", \"LAOtherID\" = \"%@\", \"LAMaritalStatus\" = \"%@\", \"LARace\" = \"%@\", \"LAReligion\" = \"%@\", \"LANationality\" = \"%@\", \"LAOccupationCode\" = \"%@\", \"LAExactDuties\" = \"%@\", \"LATypeOfBusiness\" = \"%@\", \"ResidenceAddress1\" = \"%@\", \"ResidenceAddress2\" = \"%@\", \"ResidenceAddress3\" = \"%@\", \"ResidenceTown\" = \"%@\", \"ResidenceState\" = \"%@\", \"ResidencePostcode\" = \"%@\", \"ResidenceCountry\" = \"%@\", \"OfficeAddress1\" = \"%@\", \"OfficeAddress2\" = \"%@\", \"OfficeAddress3\" = \"%@\", \"OfficeTown\" = \"%@\", \"OfficeState\" = \"%@\", \"OfficePostcode\" = \"%@\", \"OfficeCountry\" = \"%@\", \"ResidencePhoneNo\" = \"%@\", \"OfficePhoneNo\" = \"%@\", \"FaxPhoneNo\" = \"%@\", \"MobilePhoneNo\" = \"%@\", \"EmailAddress\" = \"%@\", \"LASmoker\" = \"%@\", \"ProspectProfileChangesCounter\" = \"%@\" WHERE  ProspectProfileID = \"%@\";",
-//             
-//             TitleCodeSelected,
-//             txtFullName.text,
-//             gender,
-//             strDOB,
-//             txtIDType.text,
-//             othertype,
-//             txtOtherIDType.text,
-//             
-//             marital,
-//             race,
-//             religion,
-//             nation,
-//             OccupCodeSelected,
-//             txtExactDuties.text,
-//             txtBussinessType.text,
-//             
-//             txtHomeAddr1.text,
-//             txtHomeAddr2.text,
-//             txtHomeAddr3.text,
-//             
-//             txtHomeTown.text,
-//             SelectedStateCode,
-//             txtHomePostCode.text,
-//             HomeCountry,
-//             
-//             txtOfficeAddr1.text,
-//             txtOfficeAddr2.text,
-//             txtOfficeAddr3.text,
-//             txtOfficeTown.text,
-//             SelectedOfficeStateCode,
-//             txtOfficePostcode.text,
-//             OffCountry,
-//             
-//             contact1,
-//             contact2,
-//             contact3,
-//             contact4,
-//             txtEmail.text,
-//             ClientSmoker,
-//             str_counter,
-//             prospectprofile.ProspectID];
-//            
-//        }
-//    }
-//    
-//    [db close];
+            
+            // Convert string to date object
+            NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+            [dateFormat setDateFormat:@"yyyy-MM-dd"];
+            NSDate *date = [dateFormat dateFromString:strDOB];
+            
+            // Convert date object to desired output format
+            [dateFormat setDateFormat:@"dd/MM/yyyy"];
+            NSString *newDOB = [dateFormat stringFromDate:date];
+            
+            NSDateFormatter *expiryDateFormat = [[NSDateFormatter alloc] init];
+            [expiryDateFormat setDateFormat:@"yyyy-MM-dd"];
+            NSDate *dateExpiry = [expiryDateFormat dateFromString:strExpiryDate];
+            
+            // Convert date object to desired output format
+            [expiryDateFormat setDateFormat:@"dd/MM/yyyy"];
+            NSString *newExpiryDate = [expiryDateFormat stringFromDate:dateExpiry];
+            
+            NSLog(@"%@",newDOB);
+            
+            NSString *genderSeg;
+            if(segGender.selectedSegmentIndex == 0){
+                genderSeg = @"MALE";
+            }else{
+                genderSeg = @"FEMALE";
+            }
+            
+            NSString *CountryOfBirth = @"";
+            CountryOfBirth = outletProspectCountryBirthplace.titleLabel.text;//btnCoutryOfBirth.titleLabel.text;
+            //CountryOfBirth = [self getCountryCode:CountryOfBirth];
+            
+            
+            insertSQL = [NSString stringWithFormat:
+                             @"INSERT INTO prospect_profile(\'ProspectName\', \"ProspectDOB\", \"ProspectGender\", \"DateCreated\", \"CreatedBy\", \"DateModified\", \"ModifiedBy\",\"OtherIDType\", \"OtherIDTypeNo\", \"CountryOfBirth\", \"NIP\", \"BranchCode\", \"BranchName\", \"KCU\", \"Kanwil\",\"ReferralSource\", \"ReferralName\", \"QQFlag\") "
+                             "VALUES (\"%@\", \"%@\", \"%@\", %@, \"%@\", %@, \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%s\")",
+                         txtProspectFullName.text,
+                         strDOB,
+                         genderSeg,
+                         @"datetime(\"now\", \"+7 hour\")",
+                         @"1",
+                         @"datetime(\"now\", \"+7 hour\")",
+                         @"1",
+                         @"VID18",  //Hardcode KTP DataIdentifier (found from eProposal_Identification table)
+                         txtProspectId.text,
+                         CountryOfBirth,
+                         txtNip.text,
+                         txtBranchCode.text,
+                         txtBranchName.text,
+                         txtKcu.text,
+                         txtKanwil.text,
+                         outletReferralSource.titleLabel.text,
+                         txtReferralName.text,
+                         "false"];
+                
+            
+            
+            const char *insert_stmt = [insertSQL UTF8String];
+            if(sqlite3_prepare_v2(contactDB, insert_stmt, -1, &statement, NULL) == SQLITE_OK) {
+                if (sqlite3_step(statement) == SQLITE_DONE) {
+                    [self GetLastID];
+                    [self SaveToSAM];
+                } else {
+                    UIAlertView *failAlert = [[UIAlertView alloc] initWithTitle:@" " message:@"Fail in inserting into profile table" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                    [failAlert show];
+                }
+                sqlite3_finalize(statement);
+            }
+            else{
+                NSLog(@"query insert %@",insertSQL);
+                NSLog(@"could not prepare statement: %s", sqlite3_errmsg(contactDB));
+            }
+            
+            sqlite3_close(contactDB);
+            insertSQL = Nil, insert_stmt = Nil;
+        }
+        
+        statement = Nil;
+        dbpath = Nil;
+    } else {
+        NSLog(@"Either validation return false or 'DATE_OK' =  NO");
+    }
+
+}
+
+- (void) SaveToSAM {
+    //    SAMDBHelper *dbHelper = [[SAMDBHelper alloc] init];
+    // [dbHelper InsertSAMData];
     
-    //********* END ***************  UPDATE CLIENT OF LA1, LA2, PO IN EAPP   *********************************
+    NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsDir = [dirPaths objectAtIndex:0];
+    NSString *databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent:@"hladb.sqlite"]];
+    
+    sqlite3_stmt *statement;
+    sqlite3_stmt *statement2;
+    NSString *lastID;
+    
+    SAMModel *model = [[SAMModel alloc] init];
+    
+    NSString *GetLastIdSQL = [NSString stringWithFormat:@"Select indexno  from prospect_profile order by \"indexNo\" desc limit 1"];
+    const char *SelectLastId_stmt = [GetLastIdSQL UTF8String];
+    if(sqlite3_prepare_v2(contactDB, SelectLastId_stmt, -1, &statement2, NULL) == SQLITE_OK) {
+        if (sqlite3_step(statement2) == SQLITE_ROW) {
+            lastID = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement2, 0)];
+            sqlite3_finalize(statement2);
+        }
+    }
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:[NSString stringWithFormat:@"%@",@"yyyy-MM-dd"]];
+    NSString *targetDateString = [dateFormatter stringFromDate:[NSDate date]];
+    NSString* dateToday = targetDateString;
+    
+    NSString *insertSAMSQL = [NSString stringWithFormat:@"INSERT INTO SAM_Master(\"SAM_Number\", \"SAM_CustomerID\", \"SAM_Type\", \"SAM_ID_CFF\", \"SAM_ID_ProductRecommendation\", \"SAM_ID_Video\", \"SAM_ID_Illustration\", \"SAM_ID_Application\", \"SAM_DateCreated\", \"SAM_DateModified\", \"SAM_Comments\", \"SAM_Status\", \"SAM_NextMeeting\") VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", lastID, lastID, @"Prospect", @"", @"", @"", @"", @"", dateToday, dateToday, @"", @"Follow Up", @""];
+    
+    const char *insert_stmt = [insertSAMSQL UTF8String];
+    if(sqlite3_prepare_v2(contactDB, insert_stmt, -1, &statement, NULL) == SQLITE_OK) {
+        if (sqlite3_step(statement) == SQLITE_DONE) {
+            model.number = lastID;
+            model.customerID = lastID;
+            model.customerType = @"Prospect";
+            model.dateCreated = dateToday;
+            model.dateModified = dateToday;
+            model.status = @"Follow Up";
+        } else {
+            UIAlertView *failAlert = [[UIAlertView alloc] initWithTitle:@" " message:@"Fail in inserting into profile table" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [failAlert show];
+        }
+        sqlite3_finalize(statement);
+    }
+    else{
+        NSLog(@"query insert %@",insertSAMSQL);
+        NSLog(@"could not prepare statement: %s", sqlite3_errmsg(contactDB));
+    }
+    
+    sqlite3_close(contactDB);
+}
+
+-(void) GetLastID
+{
+    sqlite3_stmt *statement2;
+    sqlite3_stmt *statement3;
+    NSString *lastID;
+    NSString *contactCode;
+    
+    NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
+    
+    const char *dbpath = [databasePath UTF8String];
+    
+    if (sqlite3_open(dbpath, &contactDB) == SQLITE_OK) {
+        NSString *GetLastIdSQL = [NSString stringWithFormat:@"Select indexno  from prospect_profile order by \"indexNo\" desc limit 1"];
+        const char *SelectLastId_stmt = [GetLastIdSQL UTF8String];
+        if(sqlite3_prepare_v2(contactDB, SelectLastId_stmt, -1, &statement2, NULL) == SQLITE_OK) {
+            if (sqlite3_step(statement2) == SQLITE_ROW) {
+                lastID = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement2, 0)];
+                sqlite3_finalize(statement2);
+                [ClientProfile setObject:lastID forKey:@"LastID"];
+            }
+        }
+    }
+    
+    for (int a = 0; a<4; a++) {
+        switch (a) {
+            case 0:
+                contactCode = @"CONT006";
+                break;
+                
+            case 1:
+                contactCode = @"CONT008";
+                break;
+                
+            case 2:
+                contactCode = @"CONT007";
+                break;
+                
+            case 3:
+                contactCode = @"CONT009";
+                break;
+                
+            default:
+                break;
+        }
+        
+            if (![contactCode isEqualToString:@""]) {
+                NSString *insertContactSQL = @"";
+                if (a==0) {
+                    insertContactSQL = [NSString stringWithFormat:
+                                        @"INSERT INTO contact_input(\"IndexNo\",\"contactCode\", \"ContactNo\", \"Primary\", \"Prefix\") "
+                                        " VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", lastID, contactCode, @"", @"N", @""];
+                } else if (a==1) {
+                    insertContactSQL = [NSString stringWithFormat:
+                                        @"INSERT INTO contact_input(\"IndexNo\",\"contactCode\", \"ContactNo\", \"Primary\", \"Prefix\") "
+                                        " VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", lastID, contactCode, txtProspectNoHP.text, @"N", txtProspectNoHPPrefix.text];
+                } else if (a==2) {
+                    insertContactSQL = [NSString stringWithFormat:
+                                        @"INSERT INTO contact_input(\"IndexNo\",\"contactCode\", \"ContactNo\", \"Primary\", \"Prefix\") "
+                                        " VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", lastID, contactCode, @"", @"N", @""];
+                } else if (a==3) {
+                    insertContactSQL = [NSString stringWithFormat:
+                                        @"INSERT INTO contact_input(\"IndexNo\",\"contactCode\", \"ContactNo\", \"Primary\", \"Prefix\") "
+                                        " VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", lastID, contactCode, @"", @"N", @""];
+                }
+                
+                const char *insert_contactStmt = [insertContactSQL UTF8String];
+                if(sqlite3_prepare_v2(contactDB, insert_contactStmt, -1, &statement3, NULL) == SQLITE_OK) {
+                    sqlite3_step(statement3);
+                    sqlite3_finalize(statement3);
+                }
+                insert_contactStmt = Nil, insertContactSQL = Nil;
+            }
+        
+    }
+    
+    UIAlertView *SuccessAlert;
+    if(Update_record == YES) {
+        if (![[ClientProfile objectForKey:@"TabBar"] isEqualToString:@"YES"]) {
+            SuccessAlert = [[UIAlertView alloc] initWithTitle:@" "
+                                                      message:@"Perubahan berhasil disimpan." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        }
+        SuccessAlert.tag = 1;
+        [SuccessAlert show];
+        [ClientProfile setObject:@"NO" forKey:@"isNew"];
+        
+    } else {
+        if (![[ClientProfile objectForKey:@"TabBar"] isEqualToString:@"YES"]) {
+            SuccessAlert = [[UIAlertView alloc] initWithTitle:@" "
+                                                      message:@"Data Nasabah telah berhasil disimpan" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        }
+        SuccessAlert.tag = SAVE_SUCCESS_ALERT_TAG;
+        [SuccessAlert show];
+        [ClientProfile setObject:@"NO" forKey:@"isNew"];
+    }
+    
+    statement2 = Nil;
+    statement3 = Nil;
+    lastID = Nil;
+    contactCode = Nil;
+    dbpath = Nil;
     
 }
+
 
 -(NSString*) getTitleCode : (NSString*)Title
 {
@@ -425,6 +504,12 @@ int const CONTINUE_ALERT_TAG = 100;
 }
 
 #pragma mark Validation
+
+- (bool) ValidateData {
+    bool returnBool = [self validationDataReferral] && [self validationDataPribadi];
+    
+    return returnBool;
+}
 
 - (bool)validationDataReferral{
     bool valid=true;
@@ -715,39 +800,21 @@ int const CONTINUE_ALERT_TAG = 100;
     //dateString = Nil;
 }
 
-- (IBAction)actionCountryOfBirth:(id)sender
-{
-    [self resignFirstResponder];
-    [self.view endEditing:YES];
-    
-    NSUserDefaults *ClientProfile = [NSUserDefaults standardUserDefaults];
-    [ClientProfile setObject:@"YES" forKey:@"isNew"];
-    
-    Class UIKeyboardImpl = NSClassFromString(@"UIKeyboardImpl");
-    id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
-    [activeInstance performSelector:@selector(dismissKeyboard)];
-    
-    _Country2List = [[Country2 alloc] initWithStyle:UITableViewStylePlain];
-    _Country2List.delegate = self;
-    _country2Popover = [[UIPopoverController alloc] initWithContentViewController:_Country2List];
-    
-    [_country2Popover presentPopoverFromRect:[sender bounds]  inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-}
-
 -(IBAction)ActionContinue:(id)sender {
+    [self saveToDb];
     UIAlertView *continueAlert = [[UIAlertView alloc] initWithTitle:@"Data Nasabah tersimpan" message:@"Apakah Anda ingin melanjutkan proses?" delegate:self cancelButtonTitle:@"Lanjut" otherButtonTitles: @"Jadwalkan Meeting", nil];
     [continueAlert setTag:CONTINUE_ALERT_TAG];
     [continueAlert show];
 }
 
 #pragma mark - delegate
--(void)selectedNIP:(NSString *)nipNumber Name:(NSString *)name{
+-(void) selectedNIP:(NSString *)nipNumber Name:(NSString *)name{
     [txtNip setText:nipNumber];
     [txtReferralName setText:name];
     [_nipInfoPopover dismissPopoverAnimated:YES];
 }
 
--(void)selectedBranch:(NSString *)branchCode BranchName:(NSString *)branchName BranchStatus:(NSString *)branchStatus BranchKanwil:(NSString *)branchKanwil {
+-(void) selectedBranch:(NSString *)branchCode BranchName:(NSString *)branchName BranchStatus:(NSString *)branchStatus BranchKanwil:(NSString *)branchKanwil {
     txtBranchCode.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     txtBranchName.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [txtBranchCode setText:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@",branchCode]];
@@ -808,20 +875,38 @@ int const CONTINUE_ALERT_TAG = 100;
     df = Nil, d = Nil, d2 = Nil;
 }
 
+-(void)CloseWindow
+{
+    [self resignFirstResponder];
+    [self.view endEditing:YES];
+    [_SIDatePopover dismissPopoverAnimated:YES];
+}
+
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if(alertView.tag == CONTINUE_ALERT_TAG) {
-        if(buttonIndex == 0) {
-            //Pressed "Lanjutkan"
-            [self.navigationController popViewControllerAnimated:YES];
-            [dashboardVC actionActivityView];
-            
-        } else {
-            //Pressed "Jadwalkan Meeting"
-            SAMMeetingScheduleViewController *samMeetingScheduleVC = [[SAMMeetingScheduleViewController alloc] initWithNibName:@"SAMMeetingScheduleViewController" bundle:nil];
-            [samMeetingScheduleVC setModalPresentationStyle:UIModalPresentationFormSheet];
-            samMeetingScheduleVC.preferredContentSize = CGSizeMake(703, 306);
-            [self presentViewController:samMeetingScheduleVC animated:YES completion:nil];
-        }
+    UIAlertView *continueAlert;
+    switch (alertView.tag) {
+        case SAVE_SUCCESS_ALERT_TAG:
+            continueAlert = [[UIAlertView alloc] initWithTitle:@"Data Nasabah tersimpan" message:@"Apakah Anda ingin melanjutkan proses?" delegate:self cancelButtonTitle:@"Lanjut" otherButtonTitles: @"Jadwalkan Meeting", nil];
+            [continueAlert setTag:CONTINUE_ALERT_TAG];
+            [continueAlert show];
+            break;
+        case CONTINUE_ALERT_TAG:
+            if(buttonIndex == 0) {
+                //Pressed "Lanjutkan"
+                [self.navigationController popViewControllerAnimated:YES];
+                //            [dashboardVC actionActivityView];
+                
+            } else {
+                //Pressed "Jadwalkan Meeting"
+                [self.navigationController popViewControllerAnimated:YES];
+                SAMMeetingScheduleViewController *samMeetingScheduleVC = [[SAMMeetingScheduleViewController alloc] initWithNibName:@"SAMMeetingScheduleViewController" bundle:nil];
+                [samMeetingScheduleVC setModalPresentationStyle:UIModalPresentationFormSheet];
+                samMeetingScheduleVC.preferredContentSize = CGSizeMake(703, 306);
+                [self presentViewController:samMeetingScheduleVC animated:YES completion:nil];
+            }
+            break;
+        default:
+            break;
     }
 }
 

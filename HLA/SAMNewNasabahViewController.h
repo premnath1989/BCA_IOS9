@@ -48,6 +48,7 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segReferralType;
 
 @property (weak, nonatomic) IBOutlet UITextField *txtProspectFullName;
+@property (weak, nonatomic) IBOutlet UITextField *txtProspectNoHPPrefix;
 @property (weak, nonatomic) IBOutlet UITextField *txtProspectNoHP;
 @property (weak, nonatomic) IBOutlet UITextField *txtProspectId;
 @property (weak, nonatomic) IBOutlet UITextField *txtProspectBirthplace;

@@ -84,15 +84,16 @@ int const CONTINUE_ALERT_TAG = 101;
             //TODO: Add call to select existing nasabah
             
         } else {
-//            SAMNewNasabahViewController* viewController = [[SAMNewNasabahViewController alloc] initWithNibName:@"SAMNewNasabahViewController" bundle:nil];
-//            viewController.dashboardVC = self;
-//            [self.navigationController pushViewController:viewController animated:YES];
+            SAMNewNasabahViewController* viewController = [[SAMNewNasabahViewController alloc] initWithNibName:@"SAMNewNasabahViewController" bundle:nil];
+            viewController.dashboardVC = self;
+            [self.navigationController pushViewController:viewController animated:YES];
+            viewController.navigationItem.title = @"New Refered";
             
-            UIStoryboard* clientProfileStoryboard = [UIStoryboard storyboardWithName:@"ProspectProfileStoryboard" bundle:nil];
-            prospectVC = [clientProfileStoryboard instantiateViewControllerWithIdentifier:@"Prospect"];
-            prospectVC.delegate = self;
-            prospectVC.isFromSam = YES;
-            [self.navigationController pushViewController: prospectVC animated:YES];
+//            UIStoryboard* clientProfileStoryboard = [UIStoryboard storyboardWithName:@"ProspectProfileStoryboard" bundle:nil];
+//            prospectVC = [clientProfileStoryboard instantiateViewControllerWithIdentifier:@"Prospect"];
+//            prospectVC.delegate = self;
+//            prospectVC.isFromSam = YES;
+//            [self.navigationController pushViewController: prospectVC animated:YES];
         }
     } else if(alertView.tag == CONTINUE_ALERT_TAG) {
         if(buttonIndex == 0) {
