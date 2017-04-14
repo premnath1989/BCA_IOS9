@@ -14,6 +14,7 @@
 #import "SAMMeetingScheduleViewController.h"
 #import "AppDelegate.h"
 #import "MainClient.h"
+#import "ProspectListing.h"
 
 @interface SAMDashboardViewController ()
 
@@ -47,16 +48,24 @@ int const CONTINUE_ALERT_TAG = 101;
 }
 
 -(IBAction)actionDataNasabah:(id)sender{
+//    AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate ];
+//    UIStoryboard *cpStoryboard = [UIStoryboard storyboardWithName:@"ClientProfileStoryboard" bundle:Nil];
+//    AppDelegate *appdlg = (AppDelegate*)[[UIApplication sharedApplication] delegate ];
+//    MainClient *mainClient = [cpStoryboard instantiateViewControllerWithIdentifier:@"mainClient"];
+//    mainClient.modalPresentationStyle = UIModalPresentationFullScreen;
+//    mainClient.IndexTab = appdlg.ProspectListingIndex;
+//    [delegate setIsFromSAM:1];
+//    UIImage *image = [UIImage imageNamed:@"btn_prospect_off.png"];
+//    mainClient.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Client" image:image selectedImage:image];
+//    [self presentViewController:mainClient animated:NO completion:Nil];
+    
     AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate ];
-    UIStoryboard *cpStoryboard = [UIStoryboard storyboardWithName:@"ClientProfileStoryboard" bundle:Nil];
-    AppDelegate *appdlg = (AppDelegate*)[[UIApplication sharedApplication] delegate ];
-    MainClient *mainClient = [cpStoryboard instantiateViewControllerWithIdentifier:@"mainClient"];
-    mainClient.modalPresentationStyle = UIModalPresentationFullScreen;
-    mainClient.IndexTab = appdlg.ProspectListingIndex;
     [delegate setIsFromSAM:1];
-    UIImage *image = [UIImage imageNamed:@"btn_prospect_off.png"];
-    mainClient.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Client" image:image selectedImage:image];
-    [self presentViewController:mainClient animated:NO completion:Nil];
+    UIStoryboard *cpStoryboard = [UIStoryboard storyboardWithName:@"ProspectProfileStoryboard" bundle:nil];
+    ProspectListing *prospectListing = [cpStoryboard instantiateViewControllerWithIdentifier:@"newClientListing"];
+    [self.navigationController pushViewController:prospectListing animated:YES];
+    prospectListing.navigationItem.title = @"Data Nasabah";
+    
 }
 
 -(IBAction)actionDataReferral:(id)sender{

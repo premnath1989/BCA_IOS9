@@ -53,6 +53,9 @@ int const SAVE_SUCCESS_ALERT_TAG = 101;
     NSString *docsDir = [dirPaths objectAtIndex:0];
     
     databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
+    
+    gender = @"MALE";
+    nationality = @"WNI";
 }
 
 - (void)didReceiveMemoryWarning {
@@ -444,24 +447,20 @@ int const SAVE_SUCCESS_ALERT_TAG = 101;
     }
     
     UIAlertView *SuccessAlert;
-    if(Update_record == YES) {
-        if (![[ClientProfile objectForKey:@"TabBar"] isEqualToString:@"YES"]) {
-            SuccessAlert = [[UIAlertView alloc] initWithTitle:@" "
-                                                      message:@"Perubahan berhasil disimpan." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        }
-        SuccessAlert.tag = 1;
-        [SuccessAlert show];
-        [ClientProfile setObject:@"NO" forKey:@"isNew"];
-        
-    } else {
-        if (![[ClientProfile objectForKey:@"TabBar"] isEqualToString:@"YES"]) {
-            SuccessAlert = [[UIAlertView alloc] initWithTitle:@" "
-                                                      message:@"Data Nasabah telah berhasil disimpan" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        }
-        SuccessAlert.tag = SAVE_SUCCESS_ALERT_TAG;
-        [SuccessAlert show];
-        [ClientProfile setObject:@"NO" forKey:@"isNew"];
+    UIAlertView *continueAlert;
+
+    if (![[ClientProfile objectForKey:@"TabBar"] isEqualToString:@"YES"]) {
+        continueAlert = [[UIAlertView alloc] initWithTitle:@"Data Nasabah tersimpan"
+                                                   message:@"Apakah Anda ingin melanjutkan proses?"
+                                                  delegate:self
+                                         cancelButtonTitle:@"Lanjut"
+                                         otherButtonTitles:@"Jadwalkan Meeting", nil];
+            
     }
+    [continueAlert setTag:CONTINUE_ALERT_TAG];
+    [continueAlert show];
+    [ClientProfile setObject:@"NO" forKey:@"isNew"];
+    
     
     statement2 = Nil;
     statement3 = Nil;

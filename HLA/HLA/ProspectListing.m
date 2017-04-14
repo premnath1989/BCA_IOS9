@@ -19,7 +19,9 @@
 #import "CustomAlertBox.h"
 #import "ClearData.h"
 #import "Cleanup.h"
-
+#import "SAMDBHelper.h"
+#import "SAMModel.h"
+#import "SAMActivityViewController.h"
 
 @interface ProspectListing ()
 
@@ -35,12 +37,15 @@
 @synthesize GroupPopover = _GroupPopover;
 @synthesize dataMobile,dataPrefix,dataIndex;
 @synthesize OrderBy;
+@synthesize SAMData;
 //@synthesize outletDOB;
 //@synthesize SIDate = _SIDate;
 
 int RecDelete = 0;
 int totalView = 20;
 int TotalData;
+int isFromSAM;
+
 
 MBProgressHUD *HUD;
 
@@ -83,9 +88,15 @@ MBProgressHUD *HUD;
     
 	AppDelegate *appDel= (AppDelegate*)[[UIApplication sharedApplication] delegate ];
 	appDel.MhiMessage = Nil;
-	appDel = Nil;
+//	appDel = Nil;
+    isFromSAM = appDel.isFromSAM;
     NSLog(@"isFromSAM %i",appDel.isFromSAM);
     
+    if(appDel.isFromSAM == 1) {
+        self.navigationItem.rightBarButtonItem = nil;
+        
+        [self loadSAMData];
+    }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eApp_SI:) name:@"eApp_SI" object:nil];
     
@@ -148,6 +159,11 @@ MBProgressHUD *HUD;
 - (BOOL)disablesAutomaticKeyboardDismissal
 {
     return NO;
+}
+
+- (void) loadSAMData {
+    SAMDBHelper *dbHelper = [[SAMDBHelper alloc] init];
+    SAMData = [dbHelper readAllSAMData];
 }
 
 #pragma mark - added by faiz
@@ -767,13 +783,17 @@ MBProgressHUD *HUD;
         NSString *zzz = [NSString stringWithFormat:@"%d", indexPath.row];
         [ItemToBeDeleted addObject:zzz];
         [indexPaths addObject:indexPath];
-    }
-    else {
-		NSUInteger row = [indexPath row];
-		NSUInteger count = [ProspectTableData count];
-		if (row != count) {
-			[self showDetailsForIndexPath:indexPath];
-		}
+    } else if(isFromSAM == 1) {
+        int row = [ProspectTableData count] - 1 - indexPath.row;
+        SAMActivityViewController* viewController = [[SAMActivityViewController alloc] initWithNibName:@"SAMActivityViewController" bundle:nil];
+        viewController._SAMModel = [SAMData objectAtIndex:row];
+        [self.navigationController pushViewController:viewController animated:YES];
+    } else {
+        NSUInteger row = [indexPath row];
+        NSUInteger count = [ProspectTableData count];
+        if (row != count) {
+            [self showDetailsForIndexPath:indexPath];
+        }
     }
 }
 

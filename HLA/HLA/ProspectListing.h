@@ -64,6 +64,7 @@
 @property (strong, nonatomic) NSMutableArray* dataIndex;
 @property (strong, nonatomic) NSMutableArray* dataMobile;
 @property (strong, nonatomic) NSMutableArray* dataPrefix;
+@property (strong, nonatomic) NSMutableArray *SAMData;
 
 @property (strong, nonatomic) NSMutableArray *dataArray;
 @property (nonatomic) BOOL noMoreResultsAvail;

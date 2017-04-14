@@ -27,6 +27,7 @@ NSString *databasePath;
     NSMutableArray *res;
     
     NSString *SAMType;
+    NSString *SAMCustomerID;
     NSString *SAMDateModified;
     NSString *SAMStatus;
     NSString *SAMNextMeeting;
@@ -35,27 +36,30 @@ NSString *databasePath;
     sqlite3_stmt *statement;
     const char *dbpath = [databasePath UTF8String];
     if(sqlite3_open(dbpath, &contactDB) == SQLITE_OK) {
-        NSString *sql = [NSString stringWithFormat:@"SELECT a.SAM_Type, a.SAM_DateModified, a.SAM_Status, a.SAM_NextMeeting, b.ProspectName FROM SAM_Master as a, prospect_profile as b WHERE a.SAM_CustomerID = b.IndexNo"];
+        NSString *sql = [NSString stringWithFormat:@"SELECT a.SAM_Type, a.SAM_CustomerID, a.SAM_DateModified, a.SAM_Status, a.SAM_NextMeeting, b.ProspectName FROM SAM_Master as a, prospect_profile as b WHERE a.SAM_CustomerID = b.IndexNo"];
         const char *query_stmt = [sql UTF8String];
         if (sqlite3_prepare_v2(contactDB, query_stmt, -1, &statement, NULL) == SQLITE_OK) {
             res = [[NSMutableArray alloc] init];
             while (sqlite3_step(statement) == SQLITE_ROW) {
                 SAMType = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 0)];
                 
-                const char *datemodified = (const char *) sqlite3_column_text(statement, 1);
+                SAMCustomerID = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 1)];
+                
+                const char *datemodified = (const char *) sqlite3_column_text(statement, 2);
                 SAMDateModified = datemodified == NULL ? nil : [[NSString alloc] initWithUTF8String:datemodified];
                 
-                const char *status = (const char *) sqlite3_column_text(statement, 2);
+                const char *status = (const char *) sqlite3_column_text(statement, 3);
                 SAMStatus = status == NULL ? nil : [[NSString alloc] initWithUTF8String:status];
                 
-                const char *nextmeeting = (const char *) sqlite3_column_text(statement, 3);
+                const char *nextmeeting = (const char *) sqlite3_column_text(statement, 4);
                 SAMNextMeeting = nextmeeting == NULL ? nil : [[NSString alloc] initWithUTF8String:nextmeeting];
                 
-                const char *prospectname = (const char *) sqlite3_column_text(statement, 4);
+                const char *prospectname = (const char *) sqlite3_column_text(statement, 5);
                 SAMProspectName = prospectname == NULL ? nil : [[NSString alloc] initWithUTF8String:prospectname];
                 
                 SAMModel *model = [[SAMModel alloc] init];
                 model.customerType = SAMType;
+                model.customerID = SAMCustomerID;
                 model.dateModified = SAMDateModified;
                 model.status = SAMStatus;
                 model.dateNextMeeting = SAMNextMeeting;
