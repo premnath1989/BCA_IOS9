@@ -44,7 +44,7 @@ NSString * const NSURLIsExcludedFromBackupKey =@"NSURLIsExcludedFromBackupKey";
 NSString *uatAgentCode;
 #endif
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    isFromSAM = 0;
+    isFromSAM = NO;
     //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     UIViewController *cffListingNavigation=[[CFFListingViewController alloc]initWithNibName:@"CFFListingViewController" bundle:nil];
     self.navController=[[UINavigationController alloc]initWithRootViewController:cffListingNavigation];

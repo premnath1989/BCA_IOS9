@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "SIUtilities.h"
+#import "SAMModel.h"
 
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate> {
@@ -16,7 +17,7 @@
 }
 @property(nonatomic, retain) UINavigationController *navController;
 @property (strong, nonatomic) UIWindow *window;
-@property (nonatomic, assign,readwrite) int isFromSAM;
+@property (nonatomic, assign,readwrite) BOOL isFromSAM;
 @property (nonatomic, assign,readwrite) int indexNo;
 @property (nonatomic, assign,readwrite) int HomeIndex;
 @property (nonatomic, assign,readwrite) int ProspectListingIndex;
@@ -55,6 +56,7 @@
 
 
 @property (nonatomic, retain) NSString* eappProposal;
+@property (nonatomic, assign) SAMModel* SAMData;
 
 
 // SPAJ - COREDATA

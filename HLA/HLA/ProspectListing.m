@@ -92,9 +92,8 @@ MBProgressHUD *HUD;
     isFromSAM = appDel.isFromSAM;
     NSLog(@"isFromSAM %i",appDel.isFromSAM);
     
-    if(appDel.isFromSAM == 1) {
+    if(appDel.isFromSAM) {
         self.navigationItem.rightBarButtonItem = nil;
-        
         [self loadSAMData];
     }
     
@@ -783,9 +782,10 @@ MBProgressHUD *HUD;
         NSString *zzz = [NSString stringWithFormat:@"%d", indexPath.row];
         [ItemToBeDeleted addObject:zzz];
         [indexPaths addObject:indexPath];
-    } else if(isFromSAM == 1) {
+    } else if(isFromSAM) {
         int row = [ProspectTableData count] - 1 - indexPath.row;
         SAMActivityViewController* viewController = [[SAMActivityViewController alloc] initWithNibName:@"SAMActivityViewController" bundle:nil];
+        viewController.SAMDataRow = row;
         viewController._SAMModel = [SAMData objectAtIndex:row];
         [self.navigationController pushViewController:viewController animated:YES];
     } else {

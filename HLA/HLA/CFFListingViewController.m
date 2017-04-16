@@ -16,6 +16,7 @@
 #import "SIDate.h"
 #import "ModelCFFHtml.h"
 #import "CFFAPIController.h"
+#import "AppDelegate.h"
 
 @interface CFFListingViewController ()<SIDateDelegate,ListingTbViewControllerDelegate,UITextFieldDelegate,UIPopoverPresentationControllerDelegate>{
     SIDate* datePickerViewController;
@@ -30,6 +31,8 @@
 }
 
 @end
+
+AppDelegate *delegate;
 
 @implementation CFFListingViewController{
     UIColor *borderColor;
@@ -105,6 +108,8 @@
     outletDeleteBtn.enabled = FALSE;
     ItemToBeDeleted = [[NSMutableArray alloc] init];
     
+    delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
     [self loadCFFTransaction];
 
     //Penyebab lambat
@@ -133,10 +138,6 @@
         
     }
     ProspectList.modalPresentationStyle = UIModalPresentationPopover;
-    if(isFromSAM) {
-        ProspectList.isFiltered = true;
-        ProspectList.SAMFilter = SAMFilter;
-    }
     [self presentViewController:ProspectList animated:YES completion:nil];
     
     // configure the Popover presentation controller

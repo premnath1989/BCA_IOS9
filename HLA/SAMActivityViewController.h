@@ -16,5 +16,6 @@
 }
 
 @property (strong, nonatomic) SAMModel *_SAMModel;
+@property (assign, nonatomic) int SAMDataRow;
 
 @end

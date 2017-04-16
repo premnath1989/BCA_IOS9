@@ -772,6 +772,9 @@
 		C319633918D98A0C00565B1C /* SupplementaryProposalForm1.m in Sources */ = {isa = PBXBuildFile; fileRef = C319633718D98A0C00565B1C /* SupplementaryProposalForm1.m */; };
 		C321419B1E93926300C0F28D /* SAMModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C321419A1E93926300C0F28D /* SAMModel.m */; };
 		C321419E1E93979F00C0F28D /* SAMDBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C321419D1E93979F00C0F28D /* SAMDBHelper.m */; };
+		C327F0FE1EA1572100780C1B /* SAMRecommendationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C327F0FC1EA1572100780C1B /* SAMRecommendationViewController.m */; };
+		C327F1011EA1573800780C1B /* SAMRecommendationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C327F1001EA1573800780C1B /* SAMRecommendationViewController.xib */; };
+		C327F1041EA1B6A100780C1B /* SAMMeetingNoteModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C327F1031EA1B6A100780C1B /* SAMMeetingNoteModel.m */; };
 		C333A2B81831E98F00FA8200 /* AddPolicyLA2TableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C333A2A51831E98F00FA8200 /* AddPolicyLA2TableVC.m */; };
 		C333A2B91831E98F00FA8200 /* AddPolicyPOTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C333A2A71831E98F00FA8200 /* AddPolicyPOTableVC.m */; };
 		C333A2BB1831E98F00FA8200 /* ExistingPoliciesPersonType.m in Sources */ = {isa = PBXBuildFile; fileRef = C333A2AB1831E98F00FA8200 /* ExistingPoliciesPersonType.m */; };
@@ -2386,6 +2389,11 @@
 		C321419A1E93926300C0F28D /* SAMModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMModel.m; sourceTree = "<group>"; };
 		C321419C1E93979F00C0F28D /* SAMDBHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMDBHelper.h; sourceTree = "<group>"; };
 		C321419D1E93979F00C0F28D /* SAMDBHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMDBHelper.m; sourceTree = "<group>"; };
+		C327F0FB1EA1572100780C1B /* SAMRecommendationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMRecommendationViewController.h; sourceTree = "<group>"; };
+		C327F0FC1EA1572100780C1B /* SAMRecommendationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMRecommendationViewController.m; sourceTree = "<group>"; };
+		C327F1001EA1573800780C1B /* SAMRecommendationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SAMRecommendationViewController.xib; sourceTree = "<group>"; };
+		C327F1021EA1B6A100780C1B /* SAMMeetingNoteModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMMeetingNoteModel.h; sourceTree = "<group>"; };
+		C327F1031EA1B6A100780C1B /* SAMMeetingNoteModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMMeetingNoteModel.m; sourceTree = "<group>"; };
 		C333A2A41831E98F00FA8200 /* AddPolicyLA2TableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddPolicyLA2TableVC.h; sourceTree = "<group>"; };
 		C333A2A51831E98F00FA8200 /* AddPolicyLA2TableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddPolicyLA2TableVC.m; sourceTree = "<group>"; };
 		C333A2A61831E98F00FA8200 /* AddPolicyPOTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddPolicyPOTableVC.h; sourceTree = "<group>"; };
@@ -4433,6 +4441,7 @@
 		43C94BD31E091A9C009A30F3 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C327F1001EA1573800780C1B /* SAMRecommendationViewController.xib */,
 				C3C627961E933BC300C94E14 /* SAMMeetingNoteViewController.xib */,
 				C3C627971E933BC300C94E14 /* SAMNewNasabahViewController.xib */,
 				432B25FF1E121A98000EDFB4 /* TableViewCellView */,
@@ -4469,6 +4478,8 @@
 				4307B4A11E0A7BB900380162 /* SAMActivityDetailViewController.m */,
 				4307B4A51E0A7BCA00380162 /* SAMReportViewController.h */,
 				4307B4A61E0A7BCA00380162 /* SAMReportViewController.m */,
+				C327F0FB1EA1572100780C1B /* SAMRecommendationViewController.h */,
+				C327F0FC1EA1572100780C1B /* SAMRecommendationViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -4971,6 +4982,8 @@
 			children = (
 				C32141991E93926300C0F28D /* SAMModel.h */,
 				C321419A1E93926300C0F28D /* SAMModel.m */,
+				C327F1021EA1B6A100780C1B /* SAMMeetingNoteModel.h */,
+				C327F1031EA1B6A100780C1B /* SAMMeetingNoteModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -6854,6 +6867,7 @@
 				043FDBAC1A1AF226008EDC24 /* eAplication@2x_20141118.png in Resources */,
 				4307B49F1E0A7BA600380162 /* SAMActivityListViewController.xib in Resources */,
 				43870CBA1D362AB90035143C /* AnalisaKebutuhanPendidikanViewController.xib in Resources */,
+				C327F1011EA1573800780C1B /* SAMRecommendationViewController.xib in Resources */,
 				4356EBE71DD5630100D6CAAE /* UnitLinkedPopOverViewController.xib in Resources */,
 				043FDBAD1A1AF226008EDC24 /* customer_fact_find@2x_20141118.png in Resources */,
 				043FDBAE1A1AF226008EDC24 /* client_profile@2x_20141118.png in Resources */,
@@ -6984,6 +6998,7 @@
 				C4E1B93A1713FE9500D7F83B /* FMDatabaseAdditions.m in Sources */,
 				433CD7731DD1BD4A004C9B27 /* SIMenuUnitLinkedViewController.m in Sources */,
 				4353C9481C61E95000AE1ED9 /* ModelNationality.m in Sources */,
+				C327F0FE1EA1572100780C1B /* SAMRecommendationViewController.m in Sources */,
 				C4E1B93B1713FE9500D7F83B /* FMDatabasePool.m in Sources */,
 				C4E1B93C1713FE9500D7F83B /* FMDatabaseQueue.m in Sources */,
 				C4E1B93D1713FE9500D7F83B /* FMResultSet.m in Sources */,
@@ -7271,6 +7286,7 @@
 				4307B4A31E0A7BB900380162 /* SAMActivityDetailViewController.m in Sources */,
 				C3C627901E933BA800C94E14 /* SAMNewNasabahViewController.m in Sources */,
 				C30A25F217F3CB7100613A0F /* MainAddPolicyVC.m in Sources */,
+				C327F1041EA1B6A100780C1B /* SAMMeetingNoteModel.m in Sources */,
 				C30A25F317F3CB7100613A0F /* MainEditInsured.m in Sources */,
 				C30A25F417F3CB7100613A0F /* MainExistingPolicyListing.m in Sources */,
 				AA4EF7661C85A4260050CCD8 /* ReaderContentTile.m in Sources */,

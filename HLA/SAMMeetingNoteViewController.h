@@ -27,6 +27,7 @@
 
 @property NSString *databasePath;
 
+-(IBAction)actionClose:(id)sender;
 -(IBAction)actionSubmit:(id)sender;
 -(IBAction)actionStatus:(id)sender;
 

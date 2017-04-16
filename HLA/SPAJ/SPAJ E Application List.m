@@ -25,6 +25,7 @@
 #import "ModelSIPOData.h"
 #import "ModelSPAJHtml.h"
 #import "CFFAPIController.h"
+#import "AppDelegate.h"
 // DECLARATION
 
 @interface SPAJEApplicationList ()<SPAJMainDelegate,SIListingDelegate,UIPopoverPresentationControllerDelegate,UITextFieldDelegate>{
@@ -36,6 +37,7 @@
 
 @end
 
+AppDelegate *appDel;
 
 // IMPLEMENTATION
 
@@ -74,7 +76,7 @@
     @synthesize stringQueryName = _stringQueryName;
     @synthesize buttonSortStatus,buttonSortFullName,buttonSortEappNumber,buttonSortSPAJNumber,buttonSortLastModified;
     @synthesize buttonEdit,buttonReset,buttonDelete,buttonSearch;
-
+    @synthesize SAMFilter;
 
     // DID LOAD
 
@@ -145,6 +147,8 @@
         sortedBy=@"datetime(spajtrans.SPAJDateModified)";
         sortMethod=@"DESC";
         
+        appDel= (AppDelegate*) [[UIApplication sharedApplication] delegate ];
+        
         [self loadSPAJTransaction];
     }
 
@@ -186,6 +190,11 @@
         }
         siListingPopOver.modalPresentationStyle = UIModalPresentationPopover;
         [siListingPopOver setPreferredContentSize:CGSizeMake(400, 550)];
+        
+        if(appDel.isFromSAM) {
+            siListingPopOver.isFiltered = YES;
+            siListingPopOver.SAMFilter = appDel.SAMData.customerName;
+        }
         
         [self presentViewController:siListingPopOver animated:YES completion:nil];
         

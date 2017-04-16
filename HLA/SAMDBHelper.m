@@ -8,6 +8,7 @@
 
 #import "SAMDBHelper.h"
 #import "SAMModel.h"
+#import "FMDatabase.h"
 
 @implementation SAMDBHelper {
     sqlite3 *contactDB;
@@ -32,11 +33,16 @@ NSString *databasePath;
     NSString *SAMStatus;
     NSString *SAMNextMeeting;
     NSString *SAMProspectName;
+    NSString *SAMIDCFF;
+    NSString *SAMIDProductRecommendation;
+    NSString *SAMIDVideo;
+    NSString *SAMIDIllustration;
+    NSString *SAMIDApplication;
     
     sqlite3_stmt *statement;
     const char *dbpath = [databasePath UTF8String];
     if(sqlite3_open(dbpath, &contactDB) == SQLITE_OK) {
-        NSString *sql = [NSString stringWithFormat:@"SELECT a.SAM_Type, a.SAM_CustomerID, a.SAM_DateModified, a.SAM_Status, a.SAM_NextMeeting, b.ProspectName FROM SAM_Master as a, prospect_profile as b WHERE a.SAM_CustomerID = b.IndexNo"];
+        NSString *sql = [NSString stringWithFormat:@"SELECT a.SAM_Type, a.SAM_CustomerID, a.SAM_DateModified, a.SAM_Status, a.SAM_NextMeeting, b.ProspectName, a.SAM_ID_CFF, a.SAM_ID_ProductRecommendation, a.SAM_ID_Video, a.SAM_ID_Illustration, a.SAM_ID_Application FROM SAM_Master as a, prospect_profile as b WHERE a.SAM_CustomerID = b.IndexNo"];
         const char *query_stmt = [sql UTF8String];
         if (sqlite3_prepare_v2(contactDB, query_stmt, -1, &statement, NULL) == SQLITE_OK) {
             res = [[NSMutableArray alloc] init];
@@ -57,6 +63,21 @@ NSString *databasePath;
                 const char *prospectname = (const char *) sqlite3_column_text(statement, 5);
                 SAMProspectName = prospectname == NULL ? nil : [[NSString alloc] initWithUTF8String:prospectname];
                 
+                const char *cff = (const char *) sqlite3_column_text(statement, 6);
+                SAMIDCFF = cff == NULL ? nil : [[NSString alloc] initWithUTF8String:cff];
+                
+                const char *recommendation = (const char *) sqlite3_column_text(statement, 7);
+                SAMIDProductRecommendation = recommendation == NULL ? nil : [[NSString alloc] initWithUTF8String:recommendation];
+                
+                const char *video = (const char *) sqlite3_column_text(statement, 8);
+                SAMIDVideo = video == NULL ? nil : [[NSString alloc] initWithUTF8String:video];
+                
+                const char *illustration = (const char *) sqlite3_column_text(statement, 9);
+                SAMIDIllustration = illustration == NULL ? nil : [[NSString alloc] initWithUTF8String:illustration];
+                
+                const char *application = (const char *) sqlite3_column_text(statement, 10);
+                SAMIDApplication = application == NULL ? nil : [[NSString alloc] initWithUTF8String:application];
+                
                 SAMModel *model = [[SAMModel alloc] init];
                 model.customerType = SAMType;
                 model.customerID = SAMCustomerID;
@@ -64,6 +85,11 @@ NSString *databasePath;
                 model.status = SAMStatus;
                 model.dateNextMeeting = SAMNextMeeting;
                 model.customerName = SAMProspectName;
+                model.idCFF = SAMIDCFF;
+                model.idRecomendation = SAMIDProductRecommendation;
+                model.idVideo = SAMIDVideo;
+                model.idApplication = SAMIDApplication;
+                model.idIllustration = SAMIDIllustration;
                 
                 [res addObject:model];
             }
@@ -182,16 +208,26 @@ NSString *databasePath;
 - (BOOL) UpdateSAMData:(SAMModel *) model {
     BOOL isSuccess = false;
     
-    sqlite3_stmt *statement;
-    const char *dbpath = [databasePath UTF8String];
-    if(sqlite3_open(dbpath, &contactDB) == SQLITE_OK) {
-        NSString *sql = [NSString stringWithFormat:@"UPDATE SAM_Master set \"SAM_Type\"=\"%@\", \"SAM_DateModified\"=\"%@\", \"SAM_ID_CFF\"=\"%@\", \"SAM_ID_ProductRecommendation\"=\"%@\", \"SAM_ID_Video\"=\"%@\", \"SAM_ID_Illustration\"=\"%@\", \"SAM_ID_Application\"=\"%@\", \"SAM_Status\"=\"%@\", \"SAM_NextMeeting\"=\"%@\" WHERE SAM_CustomerID = \"%@\" ", model.customerType, [formatter getDateToday:@"yyyy-MM-dd"], model.idCFF, model.idRecomendation, model.idVideo, model.idIllustration, model.idApplication, model.status, model.dateNextMeeting, model.customerID];
-        const char *query_stmt = [sql UTF8String];
-        if (sqlite3_prepare_v2(contactDB, query_stmt, -1, &statement, NULL) == SQLITE_OK) {
-            isSuccess = true;
-        }
-        sqlite3_finalize(statement);
-    }
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    NSString *sql = [NSString stringWithFormat:@"UPDATE SAM_Master set \"SAM_Type\"=\"%@\", \"SAM_DateModified\"=\"%@\", \"SAM_ID_CFF\"=\"%@\", \"SAM_ID_ProductRecommendation\"=\"%@\", \"SAM_ID_Video\"=\"%@\", \"SAM_ID_Illustration\"=\"%@\", \"SAM_ID_Application\"=\"%@\", \"SAM_Status\"=\"%@\", \"SAM_NextMeeting\"=\"%@\" WHERE SAM_CustomerID = \"%@\" ", model.customerType, [formatter getDateToday:@"yyyy-MM-dd"], model.idCFF, model.idRecomendation, model.idVideo, model.idIllustration, model.idApplication, model.status, model.dateNextMeeting, model.customerID];
+    
+    isSuccess = [database executeUpdate:sql];
+    
+    //sqlite3_stmt *statement;
+    //const char *dbpath = [databasePath UTF8String];
+    //if(sqlite3_open(dbpath, &contactDB) == SQLITE_OK) {
+    //    NSString *sql = [NSString stringWithFormat:@"UPDATE SAM_Master set \"SAM_Type\"=\"%@\", \"SAM_DateModified\"=\"%@\", \"SAM_ID_CFF\"=\"%@\", \"SAM_ID_ProductRecommendation\"=\"%@\", \"SAM_ID_Video\"=\"%@\", \"SAM_ID_Illustration\"=\"%@\", \"SAM_ID_Application\"=\"%@\", \"SAM_Status\"=\"%@\", \"SAM_NextMeeting\"=\"%@\" WHERE SAM_CustomerID = \"%@\" ", model.customerType, [formatter getDateToday:@"yyyy-MM-dd"], model.idCFF, model.idRecomendation, model.idVideo, model.idIllustration, model.idApplication, model.status, model.dateNextMeeting, model.customerID];
+    //    const char *query_stmt = [sql UTF8String];
+    //    if (sqlite3_prepare_v2(contactDB, query_stmt, -1, &statement, NULL) == SQLITE_OK) {
+    //        isSuccess = true;
+    //    }
+    //    sqlite3_finalize(statement);
+    //}
     sqlite3_close(contactDB);
     
     return isSuccess;

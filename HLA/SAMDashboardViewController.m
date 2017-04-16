@@ -60,7 +60,7 @@ int const CONTINUE_ALERT_TAG = 101;
 //    [self presentViewController:mainClient animated:NO completion:Nil];
     
     AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate ];
-    [delegate setIsFromSAM:1];
+    [delegate setIsFromSAM:YES];
     UIStoryboard *cpStoryboard = [UIStoryboard storyboardWithName:@"ProspectProfileStoryboard" bundle:nil];
     ProspectListing *prospectListing = [cpStoryboard instantiateViewControllerWithIdentifier:@"newClientListing"];
     [self.navigationController pushViewController:prospectListing animated:YES];

@@ -28,6 +28,7 @@
 @property (nonatomic, assign) bool isFiltered;
 @property (strong, nonatomic) NSMutableArray* FilteredData;
 @property (nonatomic, strong) NSString *stringSINO;
+@property (strong, nonatomic) NSString *SAMFilter;
 
 
 @end

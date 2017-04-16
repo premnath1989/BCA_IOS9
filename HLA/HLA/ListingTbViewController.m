@@ -8,6 +8,7 @@
 
 #import "ListingTbViewController.h"
 #import "textFields.h"
+#import "AppDelegate.h"
 
 @interface ListingTbViewController ()
 {
@@ -52,8 +53,11 @@
     CGRect searchbarFrame = searchbar.frame;
     [self.tableView scrollRectToVisible:searchbarFrame animated:NO];
     
-    if(isFiltered) {
-        [self filterListingWithString: SAMFilter];
+    AppDelegate *appDel = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    if(appDel.isFromSAM) {
+        isFiltered = YES;
+        [self filterListingWithString: appDel.SAMData.customerName];
     }
 }
 

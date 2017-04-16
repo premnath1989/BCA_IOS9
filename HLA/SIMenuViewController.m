@@ -33,6 +33,7 @@
 #import "LoginDBManagement.h"
 #import "PremiumViewController.h"
 #import "SIMenuUnitLinkedViewController.h"
+#import "SAMDBHelper.h"
 
 #define TRAD_PAYOR_FIRSTLA  @"0"
 #define TRAD_PAYOR_SECONDLA  @"1"
@@ -5969,7 +5970,12 @@ BOOL isFirstLoad;
 - (void)savePremium{
     [self setSaveAsMode:[dictionaryPOForInsert valueForKey:@"SINO"]];
     [self LoadIlustrationPage];
-    
+    if(appDel.isFromSAM) {
+        SAMModel *data = appDel.SAMData;
+        data.idIllustration = [dictionaryPOForInsert valueForKey:@"SINO"];
+        SAMDBHelper *helper = [[SAMDBHelper alloc] init];
+        [helper UpdateSAMData:data];
+    }
 }
 
 #pragma mark - copy object from diff tab
@@ -6676,6 +6682,12 @@ NSString *prevPlan;
 - (void)heritageSimpan{
     [self setSaveAsMode:[dictionaryPOForInsert valueForKey:@"SINO"]];
     [self LoadIlustrationPage];
+    if(appDel.isFromSAM) {
+        SAMModel *data = appDel.SAMData;
+        data.idIllustration = [dictionaryPOForInsert valueForKey:@"SINO"];
+        SAMDBHelper *helper = [[SAMDBHelper alloc] init];
+        [helper UpdateSAMData:data];
+    }
 }
 
 @end

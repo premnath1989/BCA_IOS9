@@ -55,6 +55,10 @@ int const TIME_TO_BUTTON_TAG = 1;
 
 #pragma mark -Action
 
+-(IBAction)actionClose:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 -(IBAction)actionStatus:(id)sender {
     [self resignFirstResponder];
     [self.view endEditing:YES];

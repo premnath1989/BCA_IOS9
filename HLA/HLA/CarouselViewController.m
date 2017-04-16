@@ -119,7 +119,9 @@ const int numberOfModule = 7;
 
 - (IBAction)goToSPAJ:(id)sender
 {
+    AppDelegate *appdlg = (AppDelegate*)[[UIApplication sharedApplication] delegate ];
     SPAJMain* viewController = [[SPAJMain alloc] initWithNibName:@"SPAJ Main" bundle:nil];
+    [appdlg setIsFromSAM:NO];
     [self presentViewController:viewController animated:true completion:nil];
 }
 
@@ -517,7 +519,7 @@ const int numberOfModule = 7;
     MainClient *mainClient = [cpStoryboard instantiateViewControllerWithIdentifier:@"mainClient"];
     mainClient.modalPresentationStyle = UIModalPresentationFullScreen;
     mainClient.IndexTab = appdlg.ProspectListingIndex;
-    [appdlg setIsFromSAM:0];
+    [appdlg setIsFromSAM:NO];
     [self presentViewController:mainClient animated:NO completion:Nil];
     appdlg = Nil;
     mainClient= Nil;
@@ -548,6 +550,7 @@ const int numberOfModule = 7;
     mainScreen.tradOrEver = @"TRAD";
     mainScreen.modalPresentationStyle = UIModalPresentationFullScreen;
     mainScreen.IndexTab = appdlg.SIListingIndex;
+    [appdlg setIsFromSAM:NO];
     [self presentViewController:mainScreen animated:NO completion:Nil];
     mainScreen= Nil;
     appdlg = nil;
@@ -563,6 +566,7 @@ const int numberOfModule = 7;
     mainCustomer = Nil;
     AppDelegate *appdlg = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     appdlg.eApp=NO;
+    [appdlg setIsFromSAM:NO];
 }
 
 #pragma mark - other

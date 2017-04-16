@@ -16,6 +16,7 @@ NSString *SelectedString;
 @implementation SIListingPopOver
 @synthesize delegate = _delegate;
 @synthesize isFiltered,FilteredData;
+@synthesize SAMFilter;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -90,6 +91,11 @@ NSString *SelectedString;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    if(isFiltered) {
+        isFiltered = YES;
+        [self filterListingWith:SAMFilter];
+    }
 }
 
 -(void)searchBar:(UISearchBar*)searchBar textDidChange:(NSString*)text
@@ -113,6 +119,19 @@ NSString *SelectedString;
     }
     
     [self.tableView reloadData];
+}
+
+-(void) filterListingWith: (NSString *)filter {
+    FilteredData = [[NSMutableArray alloc] init ];
+    
+    for (int a =0; a<sorted.count; a++ ) {
+        NSRange Occu = [[sorted objectAtIndex:a ] rangeOfString:filter options:NSCaseInsensitiveSearch];
+        
+        if (Occu.location != NSNotFound) {
+            [FilteredData addObject:[sorted objectAtIndex:a ] ];
+            
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning {

@@ -9,6 +9,8 @@
 #import "PernyataanNasabahViewController.h"
 #import "ModelCFFTransaction.h"
 #import "ModelCFFHtml.h"
+#import "AppDelegate.h"
+#import "SAMDBHelper.h"
 @interface PernyataanNasabahViewController ()<CFFTransactionModelDelegate>{
     ModelCFFTransaction* modelCFFTransaction;
     ModelCFFHtml* modelCFFHtml;
@@ -59,7 +61,15 @@
     [modelCFFTransaction setDelegate:self];
     NSLog(@"CFFHeader selected %@",cffHeaderSelectedDictionary);
     [modelCFFTransaction updateCFFStatu:@"Completed" CFFTransactionID:[[cffHeaderSelectedDictionary valueForKey:@"CFFTransactionID"] intValue]];
-
+    
+    AppDelegate *appDel = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    if(appDel.isFromSAM) {
+        SAMModel *data = appDel.SAMData;
+        data.idCFF = [cffHeaderSelectedDictionary valueForKey:@"CFFTransactionID"];
+        
+        SAMDBHelper *helper = [[SAMDBHelper alloc] init];
+        [helper UpdateSAMData:data];
+    }
 }
 
 -(void)voidCFFCompleted{

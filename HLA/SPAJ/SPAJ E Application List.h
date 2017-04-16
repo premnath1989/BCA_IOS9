@@ -42,6 +42,7 @@
     @property (nonatomic, weak) NSMutableArray *arrayTextField;
     @property (nonatomic, weak) NSNumber *intQueryID;
     @property (nonatomic, weak) NSString *stringQueryName;
+    @property (nonatomic, weak) NSString *SAMFilter;
 
     // TABLE
 
