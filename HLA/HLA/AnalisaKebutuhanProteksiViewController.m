@@ -73,60 +73,95 @@
     [alert show];
 }
 
--   (void) isSaveData{
-    
-    if ([[self getStringFlagEdited] containsString:@"true"]) {
-        
-        [self voidDoneProteksi:false];
-    }
-    
+-   (void) isSaveData:(NSString*) StringPageSection{
+//    
 //    if ([[self getStringFlagEdited] containsString:@"true"]) {
-//        UIAlertController * alert = [UIAlertController
-//                                     alertControllerWithTitle:@""
-//                                     message:@"Simpan data ?"
-//                                     preferredStyle:UIAlertControllerStyleAlert];
 //        
-//        
-//        
-//        UIAlertAction* yesButton = [UIAlertAction
-//                                    actionWithTitle:@"Simpan"
-//                                    style:UIAlertActionStyleDefault
-//                                    handler:^(UIAlertAction * action) {
-//                                        //Handle your yes please button action here
-//                                        
-//                                        [self voidDoneProteksi:false];
-//                                    }];
-//        
-//        UIAlertAction* noButton = [UIAlertAction
-//                                   actionWithTitle:@"Tidak"
-//                                   style:UIAlertActionStyleDefault
-//                                   handler:^(UIAlertAction * action) {
-//                                       //Handle no, thanks button
-//                                   }];
-//        
-//        [alert addAction:yesButton];
-//        [alert addAction:noButton];
-//        
-//        [self presentViewController:alert animated:YES completion:nil];
-//
+//        [self voidDoneProteksi:false];
 //    }
+//    
+    if ([[self getStringFlagEdited] containsString:@"true"]) {
+        UIAlertController * alert = [UIAlertController
+                                     alertControllerWithTitle:@""
+                                     message:@"Simpan data ?"
+                                     preferredStyle:UIAlertControllerStyleAlert];
+        
+        
+        
+        UIAlertAction* yesButton = [UIAlertAction
+                                    actionWithTitle:@"Simpan"
+                                    style:UIAlertActionStyleDefault
+                                    handler:^(UIAlertAction * action) {
+                                        
+                                        [self voidDoneProteksi:false];
+                                        
+                                        
+                                        stringPageSection = StringPageSection;
+                                        NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+                                        filePath = [docsDir stringByAppendingPathComponent:@"CFF"];
+                                        
+                                        NSString *htmlfilePath = [NSString stringWithFormat:@"CFF/%@",htmlFileName];
+                                        NSString *localURL = [[NSString alloc] initWithString:
+                                                              [docsDir stringByAppendingPathComponent: htmlfilePath]];
+                                        NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localURL]];
+                                        [webview loadRequest:urlRequest];
+                                        
+                                    }];
+        
+        UIAlertAction* noButton = [UIAlertAction
+                                   actionWithTitle:@"Tidak"
+                                   style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction * action) {
+                                       //Handle no, thanks button
+                                       
+                                       stringPageSection = StringPageSection;
+                                       NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+                                       filePath = [docsDir stringByAppendingPathComponent:@"CFF"];
+                                       
+                                       NSString *htmlfilePath = [NSString stringWithFormat:@"CFF/%@",htmlFileName];
+                                       NSString *localURL = [[NSString alloc] initWithString:
+                                                             [docsDir stringByAppendingPathComponent: htmlfilePath]];
+                                       NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localURL]];
+                                       [webview loadRequest:urlRequest];
+                                       
+
+                                       
+                                   }];
+        
+        [alert addAction:yesButton];
+        [alert addAction:noButton];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+
+    }
+    else {
+        
+        stringPageSection = StringPageSection;
+        NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        filePath = [docsDir stringByAppendingPathComponent:@"CFF"];
+        
+        NSString *htmlfilePath = [NSString stringWithFormat:@"CFF/%@",htmlFileName];
+        NSString *localURL = [[NSString alloc] initWithString:
+                              [docsDir stringByAppendingPathComponent: htmlfilePath]];
+        NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localURL]];
+        [webview loadRequest:urlRequest];
+    }
     
 }
 
 -(void)loadHTMLFile:(NSString *)StringPageSection{
-    [self isSaveData];
+    [self isSaveData:StringPageSection];
 //    [self voidDoneProteksi:false];
     
-    stringPageSection = StringPageSection;
-    
-    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    filePath = [docsDir stringByAppendingPathComponent:@"CFF"];
-    
-    NSString *htmlfilePath = [NSString stringWithFormat:@"CFF/%@",htmlFileName];
-    NSString *localURL = [[NSString alloc] initWithString:
-                          [docsDir stringByAppendingPathComponent: htmlfilePath]];
-    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localURL]];
-    [webview loadRequest:urlRequest];
+//    
+//    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+//    filePath = [docsDir stringByAppendingPathComponent:@"CFF"];
+//    
+//    NSString *htmlfilePath = [NSString stringWithFormat:@"CFF/%@",htmlFileName];
+//    NSString *localURL = [[NSString alloc] initWithString:
+//                          [docsDir stringByAppendingPathComponent: htmlfilePath]];
+//    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localURL]];
+//    [webview loadRequest:urlRequest];
 }
 
 -(NSString *)getStringFlagEdited{
