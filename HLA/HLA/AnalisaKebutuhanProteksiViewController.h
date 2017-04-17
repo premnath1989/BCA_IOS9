@@ -25,8 +25,9 @@
 @property (strong, nonatomic) NSString* htmlFileName;
 @property (strong, nonatomic) NSNumber* cffID;
 @property (strong, nonatomic) NSDictionary* cffHeaderSelectedDictionary;
--(void)voidDoneProteksi;
+-(void)voidDoneProteksi:(BOOL)mIsDelegate;
 -(void)viewDidAppear:(BOOL)animated;
+-(NSString *)getStringFlagEdited;
 
 -(void)loadHTMLFile:(NSString *)StringPageSection;
 @end

@@ -16,6 +16,8 @@
     ModelCFFAnswers* modelCFFAsnwers;
     
     NSString *stringPageSection;
+    BOOL isDelegate;
+    
 }
 
 
@@ -37,6 +39,8 @@
 }
 
 - (void)viewDidLoad {
+    NSLog(@"view did load ");
+    
     modelCFFTransaction = [[ModelCFFTransaction alloc]init];
     modelCFFHtml = [[ModelCFFHtml alloc]init];
     modelCFFAsnwers = [[ModelCFFAnswers alloc]init];
@@ -51,6 +55,10 @@
     // Do any additional setup after loading the view from its nib.
 }
 
+//- (void)viewWillDisappear:(BOOL)animated {
+//    [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"savetoDB();"]];
+//}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -61,11 +69,54 @@
     NSString *title = [modifiedParams valueForKey:@"title"];
     NSString *body = [modifiedParams valueForKey:@"body"];
     
-    UIAlertView* alert = [[UIAlertView alloc]initWithTitle:title message:body delegate:self cancelButtonTitle:@"OK"otherButtonTitles: nil];
+    UIAlertView* alert = [[UIAlertView alloc]initWithTitle:title message:body delegate:self     cancelButtonTitle:@"OK"otherButtonTitles: nil];
     [alert show];
 }
 
+-   (void) isSaveData{
+    
+    if ([[self getStringFlagEdited] containsString:@"true"]) {
+        
+        [self voidDoneProteksi:false];
+    }
+    
+//    if ([[self getStringFlagEdited] containsString:@"true"]) {
+//        UIAlertController * alert = [UIAlertController
+//                                     alertControllerWithTitle:@""
+//                                     message:@"Simpan data ?"
+//                                     preferredStyle:UIAlertControllerStyleAlert];
+//        
+//        
+//        
+//        UIAlertAction* yesButton = [UIAlertAction
+//                                    actionWithTitle:@"Simpan"
+//                                    style:UIAlertActionStyleDefault
+//                                    handler:^(UIAlertAction * action) {
+//                                        //Handle your yes please button action here
+//                                        
+//                                        [self voidDoneProteksi:false];
+//                                    }];
+//        
+//        UIAlertAction* noButton = [UIAlertAction
+//                                   actionWithTitle:@"Tidak"
+//                                   style:UIAlertActionStyleDefault
+//                                   handler:^(UIAlertAction * action) {
+//                                       //Handle no, thanks button
+//                                   }];
+//        
+//        [alert addAction:yesButton];
+//        [alert addAction:noButton];
+//        
+//        [self presentViewController:alert animated:YES completion:nil];
+//
+//    }
+    
+}
+
 -(void)loadHTMLFile:(NSString *)StringPageSection{
+    [self isSaveData];
+//    [self voidDoneProteksi:false];
+    
     stringPageSection = StringPageSection;
     
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
@@ -78,8 +129,17 @@
     [webview loadRequest:urlRequest];
 }
 
+-(NSString *)getStringFlagEdited{
+    [self resignFirstResponder];
+    [self.view endEditing:YES];
+    
+    return [webview stringByEvaluatingJavaScriptFromString:@"booleanInputChangeState;"];
+}
+
 #pragma mark call save function in HTML
-- (void)voidDoneProteksi{
+- (void)voidDoneProteksi:(BOOL)mIsDelegate{
+    isDelegate = mIsDelegate;
+    
     //[webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"document.getElementById('save').click()"]];
     [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"savetoDB();"]];
 }
@@ -87,7 +147,7 @@
 - (void)voidReadProteksi{
     //[webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"document.getElementById('read').click()"]];
     [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"readfromDB();"]];
-    [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"init();"]];
+//    [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"init();"]];
     
 }
 
@@ -148,6 +208,7 @@
     [finalDictionary setValue:[params valueForKey:@"errorCallback"] forKey:@"errorCallback"];
     [super savetoDB:finalDictionary];
     
+    if (isDelegate) {
     if ([stringPageSection isEqualToString:@"PRT"]){
         [delegate voidSetAnalisaKebutuhanProteksiBoolValidate:true];
     }
@@ -162,6 +223,7 @@
     }
     else if ([stringPageSection isEqualToString:@"INV"]){
         [delegate voidSetAnalisaKebutuhanInvestasiBoolValidate:true];
+    }
     }
 }
 
@@ -184,6 +246,7 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     [self voidReadProteksi];
 }
+
 
 /*
 #pragma mark - Navigation

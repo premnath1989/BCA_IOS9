@@ -101,6 +101,7 @@
         }
         else{
             [childView addSubview:pensiunVC.view];
+            
         }
     }
     else if (sender==buttonPendidikan){
@@ -155,6 +156,8 @@
 }
 
 -(IBAction)actionChangeMenuPage:(UISegmentedControl *)sender{
+//    [proteksiVC voidDoneProteksi];
+    
     if (sender.selectedSegmentIndex==0){
         cffID = [cffHeaderSelectedDictionary valueForKey:@"ProteksiCFFID"];
         NSMutableArray *arrayHtml = [modelCFFHtml selectHtmlData:[cffID intValue] HtmlSection:@"PRT"];
@@ -251,7 +254,8 @@
 
 #pragma mark UIBarButtonItem Action
 -(void)voidDoneAnalisaKebutuhanNasabah{
-    [proteksiVC voidDoneProteksi];
+    [proteksiVC voidDoneProteksi:YES];
+    
     /*if (buttonSelected==buttonProteksi){
         [proteksiVC voidDoneProteksi];
     }
