@@ -105,7 +105,7 @@ NSString *databasePath;
  * @param customerID customer ID after creating new customer
  * @return A new SAMModel object containing customer's data
  */
-- (SAMModel *) GetSAMData: (NSString *) customerID {
+- (SAMModel *) ReadSAMData: (NSString *) customerID {
     SAMModel *model = [[SAMModel alloc] init];
     
     dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -155,8 +155,6 @@ NSString *databasePath;
 }
 
 - (SAMModel *) InsertSAMData {
-    sqlite3_stmt *statement;
-    sqlite3_stmt *statement2;
     NSString *lastID;
     
     dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -165,40 +163,43 @@ NSString *databasePath;
     
     SAMModel *model = [[SAMModel alloc] init];
     
+    FMDatabase *database = [FMDatabase databaseWithPath:databasePath];
+    [database open];
+    
     NSString *GetLastIdSQL = [NSString stringWithFormat:@"Select indexno  from prospect_profile order by \"indexNo\" desc limit 1"];
-    const char *SelectLastId_stmt = [GetLastIdSQL UTF8String];
-    if(sqlite3_prepare_v2(contactDB, SelectLastId_stmt, -1, &statement2, NULL) == SQLITE_OK) {
-        if (sqlite3_step(statement2) == SQLITE_ROW) {
-            lastID = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement2, 0)];
-            sqlite3_finalize(statement2);
-        }
+    FMResultSet *lastIdResult = [database executeQuery:GetLastIdSQL];
+    while([lastIdResult next]) {
+        lastID = [NSString stringWithFormat:@"%@", [lastIdResult objectForColumnName:@"indexno"]];
     }
+    
+    model = [self InsertSAMDataWithLastID:lastID];
+    
+    return model;
+}
+
+- (SAMModel *) InsertSAMDataWithLastID: (NSString *)lastID {
+    dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    docsDir = [dirPaths objectAtIndex:0];
+    databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent:@"hladb.sqlite"]];
+    
+    SAMModel *model = [[SAMModel alloc] init];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:databasePath];
+    [database open];
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:[NSString stringWithFormat:@"%@",@"yyyy-MM-dd"]];
     NSString *targetDateString = [dateFormatter stringFromDate:[NSDate date]];
     NSString* dateToday = targetDateString;
     
-    NSString *insertSAMSQL = [NSString stringWithFormat:@"INSERT INTO SAM_Master(\"SAM_Number\", \"SAM_CustomerID\", \"SAM_Type\", \"SAM_ID_CFF\", \"SAM_ID_ProductRecommendation\", \"SAM_ID_Video\", \"SAM_ID_Illustration\", \"SAM_ID_Application\", \"SAM_DateCreated\", \"SAM_DateModified\", \"SAM_Comments\", \"SAM_Status\", \"SAM_NextMeeting\") VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", lastID, lastID, @"Prospect", @"", @"", @"", @"", @"", dateToday, dateToday, @"", @"Follow Up", @""];
-    
-    const char *insert_stmt = [insertSAMSQL UTF8String];
-    if(sqlite3_prepare_v2(contactDB, insert_stmt, -1, &statement, NULL) == SQLITE_OK) {
-        if (sqlite3_step(statement) == SQLITE_DONE) {
-            model.number = lastID;
-            model.customerID = lastID;
-            model.customerType = @"Prospect";
-            model.dateCreated = dateToday;
-            model.dateModified = dateToday;
-            model.status = @"Follow Up";
-        } else {
-            UIAlertView *failAlert = [[UIAlertView alloc] initWithTitle:@" " message:@"Fail in inserting into profile table" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [failAlert show];
-        }
-        sqlite3_finalize(statement);
-    }
-    else{
-        NSLog(@"query insert %@",insertSAMSQL);
-        NSLog(@"could not prepare statement: %s", sqlite3_errmsg(contactDB));
+    BOOL success = [database executeUpdate:@"INSERT INTO SAM_Master(\"SAM_Number\", \"SAM_CustomerID\", \"SAM_Type\", \"SAM_ID_CFF\", \"SAM_ID_ProductRecommendation\", \"SAM_ID_Video\", \"SAM_ID_Illustration\", \"SAM_ID_Application\", \"SAM_DateCreated\", \"SAM_DateModified\", \"SAM_Comments\", \"SAM_Status\", \"SAM_NextMeeting\") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", lastID, lastID, @"Prospect", @"", @"", @"", @"", @"", dateToday, dateToday, @"", @"Follow Up", @""];
+    if(success) {
+        model.number = lastID;
+        model.customerID = lastID;
+        model.customerType = @"Prospect";
+        model.dateCreated = dateToday;
+        model.dateModified = dateToday;
+        model.status = @"Follow Up";
     }
     
     sqlite3_close(contactDB);
@@ -214,7 +215,7 @@ NSString *databasePath;
     FMDatabase *database = [FMDatabase databaseWithPath:path];
     [database open];
     
-    NSString *sql = [NSString stringWithFormat:@"UPDATE SAM_Master set \"SAM_Type\"=\"%@\", \"SAM_DateModified\"=\"%@\", \"SAM_ID_CFF\"=\"%@\", \"SAM_ID_ProductRecommendation\"=\"%@\", \"SAM_ID_Video\"=\"%@\", \"SAM_ID_Illustration\"=\"%@\", \"SAM_ID_Application\"=\"%@\", \"SAM_Status\"=\"%@\", \"SAM_NextMeeting\"=\"%@\" WHERE SAM_CustomerID = \"%@\" ", model.customerType, [formatter getDateToday:@"yyyy-MM-dd"], model.idCFF, model.idRecomendation, model.idVideo, model.idIllustration, model.idApplication, model.status, model.dateNextMeeting, model.customerID];
+    NSString *sql = [NSString stringWithFormat:@"UPDATE SAM_Master set \"SAM_Type\"=\"%@\", \"SAM_DateModified\"=\"%@\", \"SAM_ID_CFF\"=\"%@\", \"SAM_ID_ProductRecommendation\"=\"%@\", \"SAM_ID_Video\"=\"%@\", \"SAM_ID_Illustration\"=\"%@\", \"SAM_ID_Application\"=\"%@\", \"SAM_Status\"=\"%@\", \"SAM_NextMeeting\"=\"%@\" WHERE SAM_CustomerID = \"%@\" ", model.customerType, model.dateModified, model.idCFF, model.idRecomendation, model.idVideo, model.idIllustration, model.idApplication, model.status, model.dateNextMeeting, model.customerID];
     
     isSuccess = [database executeUpdate:sql];
     

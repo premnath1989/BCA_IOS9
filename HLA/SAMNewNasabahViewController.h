@@ -13,6 +13,7 @@
 #import "SIDate.h"
 #import "SAMDashboardViewController.h"
 #import "Country2.h"
+#import "SAMDBHelper.h"
 
 @interface SAMNewNasabahViewController : UIViewController <NIPInfoDelegate, BranchInfoDelegate, ReferralSourceDelegate, SIDateDelegate, UIAlertViewDelegate> {
 
@@ -21,6 +22,7 @@
     ReferralSource *_referralSource;
     SIDate *_SIDate;
     Country2 *_Country2List;
+    SAMDBHelper *dbHelper;
     
     NSString *databasePath;
     sqlite3 *contactDB;

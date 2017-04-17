@@ -19,9 +19,11 @@
 #import "SPAJ E Application List.h"
 #import "ModelCFFTransaction.h"
 #import "SAMDBHelper.h"
+#import "Formatter.h"
 
 int progress;
 SAMDBHelper *dbHelper;
+Formatter *formatter;
 
 @interface SAMActivityViewController (){
     SAMMeetingScheduleViewController* samMeetingScheduleVC;
@@ -44,6 +46,7 @@ SAMDBHelper *dbHelper;
     samMeetingScheduleVC = [[SAMMeetingScheduleViewController alloc]initWithNibName:@"SAMMeetingScheduleViewController" bundle:nil];
     samMeetingNoteVC = [[SAMMeetingNoteViewController alloc] initWithNibName:@"SAMMeetingNoteViewController" bundle:nil];
     modelCFFTransaction = [[ModelCFFTransaction alloc] init];
+    formatter = [[Formatter alloc] init];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -83,7 +86,6 @@ SAMDBHelper *dbHelper;
  Called to update progress circle button every time agent go to every module
  */
 - (void) UpdateProgress {
-    //TODO: Add Update progress if CFF is completed
     NSDictionary *dictSearch = [[NSDictionary alloc] initWithObjectsAndKeys:_SAMModel.customerID, @"ProspectIndexNo", nil];
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
@@ -98,7 +100,7 @@ SAMDBHelper *dbHelper;
     s = [database executeQuery:[NSString stringWithFormat:@"select CFFT.* from CFFTransaction CFFT where CFFT.ProspectIndexNo=\"%@\" AND CFFT.CFFStatus=\"Completed\"" ,[dictSearch valueForKey:@"ProspectIndexNo"]]];
     
     while([s next]) { // if found, we update the circle bar to orange to indicate that the process has been completed
-        progress = 1; // Update progress, now we can press product recommendation
+        progress = 1; // Update progress, now we can press next button
         [self UpdateProgressButton:0 Color:orange];
     }
     
@@ -117,9 +119,6 @@ SAMDBHelper *dbHelper;
         [self UpdateProgressButton:3 Color:orange];
     }
     
-    //TODO: Add Update progress if Product Recommendation is completed
-    //TODO: Add Update progress if Video is completed
-    //TODO: Add Update progress if Illustration is completed
     //TODO: Add Update progress if Application is completed
     [database close];
 }
@@ -172,6 +171,7 @@ SAMDBHelper *dbHelper;
         view.modalTransitionStyle = UIModalPresentationFullScreen;
         [self.navigationController pushViewController:view animated:YES];
         _SAMModel.idRecomendation = @"1";
+        _SAMModel.dateModified = [formatter getDateToday:@"yyyy-MM-dd hh:mm:ss"];
         [dbHelper UpdateSAMData:_SAMModel];
     } else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Harap mengisi CFF terlebih dahulu" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
@@ -187,6 +187,7 @@ SAMDBHelper *dbHelper;
         [self.navigationController pushViewController:view animated:YES];
         view.navigationItem.title = @"Informasi Produk";
         _SAMModel.idVideo = @"1";
+        _SAMModel.dateModified = [formatter getDateToday:@"yyyy-MM-dd hh:mm:ss"];
         [dbHelper UpdateSAMData:_SAMModel];
     } else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Harap membuka Rekomendasi Produk terlebih dahulu" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
@@ -196,7 +197,14 @@ SAMDBHelper *dbHelper;
 
 -(IBAction)actionIllustration:(id)sender {
     // Override option, open the Traditional SI
-    if(progress > 2) {
+    //TODO: Add check if customer already had illustration
+    if (progress > 3) { // Customer already had illustration, cannot make a new one
+        UIStoryboard *cpStoryboard = [UIStoryboard storyboardWithName:@"HLAWPStoryboard" bundle:Nil];
+        AppDelegate *appdlg = (AppDelegate*)[[UIApplication sharedApplication] delegate ];
+        SIListing *SIListing = [cpStoryboard instantiateViewControllerWithIdentifier:@"SIListing"];
+        SIListing.TradOrEver = @"TRAD";
+        [self.navigationController pushViewController:SIListing animated:YES];
+    } else if(progress > 2) {
         UIStoryboard *cpStoryboard = [UIStoryboard storyboardWithName:@"HLAWPStoryboard" bundle:Nil];
         AppDelegate *appdlg = (AppDelegate*)[[UIApplication sharedApplication] delegate ];
         SIListing *SIListing = [cpStoryboard instantiateViewControllerWithIdentifier:@"SIListing"];
@@ -212,12 +220,17 @@ SAMDBHelper *dbHelper;
 }
 
 -(IBAction)actionSPAJ:(id)sender {
-    AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate ];
-    [delegate setIsFromSAM:1];
-    [delegate setSAMData:_SAMModel];
-    SPAJMain* viewController = [[SPAJMain alloc] initWithNibName:@"SPAJ Main" bundle:nil];
-    [self presentViewController:viewController animated:YES completion:nil];
-//    
+    if(progress > 3) {
+        AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate ];
+        [delegate setIsFromSAM:YES];
+        [delegate setSAMData:_SAMModel];
+        SPAJMain* viewController = [[SPAJMain alloc] initWithNibName:@"SPAJ Main" bundle:nil];
+        [self presentViewController:viewController animated:YES completion:nil];
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Harap membuat Illustrasi terlebih dahulu" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+    }
+//
 //    UIStoryboard *spajStoryboard = [UIStoryboard storyboardWithName:@"SPAJEAppListStoryBoard" bundle:Nil];
 //    SPAJEApplicationList *viewControllerEappListing = [spajStoryboard instantiateViewControllerWithIdentifier:@"EAppListRootVC"];
 //    [self addChildViewController:viewControllerEappListing];

@@ -51,6 +51,7 @@
 @synthesize Popover = _Popover;
 @synthesize SIDate = _SIDate;
 @synthesize SIDatePopover = _SIDatePopover;
+@synthesize btnAdd;
 
 //@synthesize TableHeader;
 
@@ -87,6 +88,10 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
 	AppDelegate *appDel= (AppDelegate*)[[UIApplication sharedApplication] delegate ];
 	appDel.MhiMessage = Nil;
 	appDel = Nil;
+    
+    if(!appDel.isFromSAM) {
+        btnAdd.enabled = false;
+    }
     
     //set Button want to add border
     outletDateFrom.property = 1;

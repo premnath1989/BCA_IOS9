@@ -16,8 +16,9 @@
 @property Formatter *formatter;
 
 - (NSMutableArray *) readAllSAMData;
+- (SAMModel *) ReadSAMData: (NSString *) customerID;
 - (SAMModel *) InsertSAMData;
-- (SAMModel *) GetSAMData: (NSString *) customerID;
+- (SAMModel *) InsertSAMDataWithLastID: (NSString *)lastID;
 - (BOOL) UpdateSAMData:(SAMModel *) model;
 
 @end

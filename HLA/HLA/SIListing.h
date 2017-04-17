@@ -57,6 +57,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *btnSortCreatedDate;
 @property (strong, nonatomic) IBOutlet UIButton *btnSortProduct;
 @property (strong, nonatomic) IBOutlet UIButton *btnSortSumAssured;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *btnAdd;
 
 @property (nonatomic, strong) NDHTMLtoPDF *PDFCreator;
 @property (nonatomic, copy) NSString *TradOrEver;

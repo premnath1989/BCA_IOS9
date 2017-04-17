@@ -270,24 +270,33 @@
 -(NSDictionary *)getActivityStatus {
     NSDictionary *dict;
     
-    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+//    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+//    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+//    
+//    FMDatabase *database = [FMDatabase databaseWithPath:path];
+//    [database open];
+//    
+//    NSString *activityStatus = [[NSString alloc] init];
+//    
+//    FMResultSet *s = [database executeQuery:@"SELECT * FROM SAM_Activity_Status"];
+//    
+//    while([s next]) {
+//        activityStatus = [NSString stringWithFormat:@"%@", [s stringForColumn:@"StatusDesc"]];
+//    }
+//    
+//    dict = [[NSDictionary alloc] initWithObjectsAndKeys:activityStatus,@"ActivityStatus", nil];
+//    
+//    [results close];
+//    [database close];
     
-    FMDatabase *database = [FMDatabase databaseWithPath:path];
-    [database open];
+    NSMutableArray *statuses = [[NSMutableArray alloc] init];
+    [statuses addObject:@"Follow Up"];
+    [statuses addObject:@"Cancel Meeting"];
+    [statuses addObject:@"Rejected (cust)"];
+    [statuses addObject:@"Pending"];
+    [statuses addObject:@"Submitted"];
     
-    NSString *activityStatus = [[NSString alloc] init];
-    
-    FMResultSet *s = [database executeQuery:@"SELECT * FROM SAM_Activity_Status"];
-    
-    while([s next]) {
-        activityStatus = [NSString stringWithFormat:@"%@", [s stringForColumn:@"StatusDesc"]];
-    }
-    
-    dict = [[NSDictionary alloc] initWithObjectsAndKeys:activityStatus,@"ActivityStatus", nil];
-    
-    [results close];
-    [database close];
+    dict = [[NSDictionary alloc] initWithObjectsAndKeys:statuses,@"ActivityStatus", nil];
     
     return dict;
 }

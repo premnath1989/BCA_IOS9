@@ -191,11 +191,6 @@ AppDelegate *appDel;
         siListingPopOver.modalPresentationStyle = UIModalPresentationPopover;
         [siListingPopOver setPreferredContentSize:CGSizeMake(400, 550)];
         
-        if(appDel.isFromSAM) {
-            siListingPopOver.isFiltered = YES;
-            siListingPopOver.SAMFilter = appDel.SAMData.customerName;
-        }
-        
         [self presentViewController:siListingPopOver animated:YES completion:nil];
         
         // configure the Popover presentation controller

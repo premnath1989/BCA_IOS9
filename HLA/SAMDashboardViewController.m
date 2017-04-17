@@ -91,7 +91,13 @@ int const CONTINUE_ALERT_TAG = 101;
     if(alertView.tag == ADD_NASABAH_ALERT_TAG) {
         if(buttonIndex == 0) {
             //TODO: Add call to select existing nasabah
-            
+            AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate ];
+            [delegate setIsFromSAM:YES];
+            UIStoryboard *cpStoryboard = [UIStoryboard storyboardWithName:@"ProspectProfileStoryboard" bundle:nil];
+            ProspectListing *prospectListing = [cpStoryboard instantiateViewControllerWithIdentifier:@"newClientListing"];
+            prospectListing.isSAMUseExistingNasabah = YES;
+            [self.navigationController pushViewController:prospectListing animated:YES];
+            prospectListing.navigationItem.title = @"Data Nasabah";
         } else {
             SAMNewNasabahViewController* viewController = [[SAMNewNasabahViewController alloc] initWithNibName:@"SAMNewNasabahViewController" bundle:nil];
             viewController.dashboardVC = self;

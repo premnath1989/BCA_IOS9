@@ -112,7 +112,7 @@ NSMutableArray *SAMData;
     [cellSAMList.age setText:@"30"];
     [cellSAMList.activityDate setText:sam.dateModified];
     [cellSAMList.type setText:sam.customerType];
-    [cellSAMList.activity setText:@"Introduction"];
+    [cellSAMList.activity setText:[self GetActivity:sam]];
     [cellSAMList.status setText:sam.status];
     
     return cellSAMList;
@@ -121,6 +121,23 @@ NSMutableArray *SAMData;
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self showDetailsForIndexPath:indexPath];
+}
+
+- (NSString *) GetActivity: (SAMModel *) data
+{
+    if(!([data.idApplication isEqualToString:@""] || [data.idApplication isEqualToString:@"null"])) {
+        return @"Aplikasi";
+    } else if(!([data.idIllustration isEqualToString:@""] || [data.idIllustration isEqualToString:@"null"])) {
+        return @"Illustrasi";
+    } else if(!([data.idVideo isEqualToString:@""] || [data.idVideo isEqualToString:@"null"])) {
+        return @"Video";
+    } else if(!([data.idRecomendation isEqualToString:@""] || [data.idRecomendation isEqualToString:@"null"])) {
+        return @"Rekomendasi Produk";
+    } else if(!([data.idCFF isEqualToString:@""] || [data.idCFF isEqualToString:@"null"])) {
+        return @"CFF";
+    } else {
+        return @"Introduksi";
+    }
 }
 
 /*

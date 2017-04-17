@@ -7,6 +7,7 @@
 //
 
 #import "SIListingPopOver.h"
+#import "AppDelegate.h"
 NSString *SelectedString;
 
 @interface SIListingPopOver ()
@@ -15,7 +16,7 @@ NSString *SelectedString;
 
 @implementation SIListingPopOver
 @synthesize delegate = _delegate;
-@synthesize isFiltered,FilteredData;
+@synthesize isFiltered,FilteredData, FilteredDataRow;
 @synthesize SAMFilter;
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -92,9 +93,11 @@ NSString *SelectedString;
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    if(isFiltered) {
-        isFiltered = YES;
-        [self filterListingWith:SAMFilter];
+    AppDelegate *appDel = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    if(appDel.isFromSAM) {
+        isFiltered = true;
+        [self filterListingWith:appDel.SAMData.idIllustration];
     }
 }
 
@@ -106,16 +109,7 @@ NSString *SelectedString;
     }
     else {
         isFiltered = true;
-        FilteredData = [[NSMutableArray alloc] init ];
-        
-        for (int a =0; a<sorted.count; a++ ) {
-            NSRange Occu = [[sorted objectAtIndex:a ] rangeOfString:text options:NSCaseInsensitiveSearch];
-            
-            if (Occu.location != NSNotFound) {
-                [FilteredData addObject:[sorted objectAtIndex:a ] ];
-                
-            }
-        }
+        [self filterListingWith:text];
     }
     
     [self.tableView reloadData];
@@ -129,7 +123,6 @@ NSString *SelectedString;
         
         if (Occu.location != NSNotFound) {
             [FilteredData addObject:[sorted objectAtIndex:a ] ];
-            
         }
     }
 }
@@ -148,7 +141,6 @@ NSString *SelectedString;
     if(isFiltered ==false)
         return [arraySINo count];
     else
-        
         return [FilteredData count];;
 }
 
@@ -190,9 +182,23 @@ NSString *SelectedString;
     
     if (isFiltered == true)
     {
-        NSString *ms = [FilteredData objectAtIndex:indexPath.row];
-        cellSISPAJListing.textLabel.text = ms;
+        int row = 0;
+        NSString *ms = [FilteredData objectAtIndex:(FilteredData.count - 1 - indexPath.row)];
         
+        NSRange Occu = [[arraySINo objectAtIndex:indexPath.row ] rangeOfString:ms options:NSCaseInsensitiveSearch];
+        if(Occu.location != NSNotFound) {
+            row = indexPath.row;
+            
+            [FilteredDataRow addObject:[NSString stringWithFormat:@"%d", row]];
+//            cellSISPAJListing.textLabel.text = ms;
+            cellSISPAJListing.labelPOName.text = [arrayPOName objectAtIndex:row];
+            cellSISPAJListing.labelSIDateNumber.text = [NSString stringWithFormat:@"%@ / %@",[arraySIDate objectAtIndex:row],ms];
+            cellSISPAJListing.labelProductName.text = [NSString stringWithFormat:@"%@",[arrayProductName objectAtIndex:row]];
+        } else {
+            cellSISPAJListing.labelPOName.text = @"";
+            cellSISPAJListing.labelSIDateNumber.text = @"";
+            cellSISPAJListing.labelProductName.text = @"";
+        }
         
         if (ms == SelectedString) {
             cellSISPAJListing.accessoryType= UITableViewCellAccessoryCheckmark;
@@ -235,6 +241,11 @@ NSString *SelectedString;
     }
     else
     {
+        NSString *SINO = [arraySINo objectAtIndex:(int) [FilteredDataRow objectAtIndex:indexPath.row]];
+        //NSString *POName = [arrayPOName objectAtIndex:indexPath.row];
+        SelectedString = SINO;
+        [_delegate selectedSI:SINO];
+        
         /*NSString *ms = [FilteredData objectAtIndex:indexPath.row];
         SelectedString = ms;
         NSDictionary* dictBranchFilteredData = [modelDataReferral getNIPInfoByNIP:SelectedString];

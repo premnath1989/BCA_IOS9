@@ -38,6 +38,7 @@
 @synthesize dataMobile,dataPrefix,dataIndex;
 @synthesize OrderBy;
 @synthesize SAMData;
+@synthesize isSAMUseExistingNasabah;
 //@synthesize outletDOB;
 //@synthesize SIDate = _SIDate;
 
@@ -77,7 +78,7 @@ MBProgressHUD *HUD;
 
     [self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
     
-    self.noMoreResultsAvail =NO;
+    self.noMoreResultsAvail = NO;
 	totalView = 20;
 	
     [btnGroup setTitle:@"- SELECT -" forState:UIControlStateNormal];
@@ -96,6 +97,8 @@ MBProgressHUD *HUD;
         self.navigationItem.rightBarButtonItem = nil;
         [self loadSAMData];
     }
+    
+    dbHelper = [[SAMDBHelper alloc] init];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eApp_SI:) name:@"eApp_SI" object:nil];
     
@@ -783,11 +786,19 @@ MBProgressHUD *HUD;
         [ItemToBeDeleted addObject:zzz];
         [indexPaths addObject:indexPath];
     } else if(isFromSAM) {
-        int row = [ProspectTableData count] - 1 - indexPath.row;
-        SAMActivityViewController* viewController = [[SAMActivityViewController alloc] initWithNibName:@"SAMActivityViewController" bundle:nil];
-        viewController.SAMDataRow = row;
-        viewController._SAMModel = [SAMData objectAtIndex:row];
-        [self.navigationController pushViewController:viewController animated:YES];
+        if(isSAMUseExistingNasabah) {
+            SAMModel *data = [dbHelper InsertSAMDataWithLastID:[[ProspectTableData objectAtIndex:indexPath.row] ProspectID]];
+            int lastRow = [[dbHelper readAllSAMData] count] - 1;
+            SAMActivityViewController* viewController = [[SAMActivityViewController alloc] initWithNibName:@"SAMActivityViewController" bundle:nil];
+            viewController.SAMDataRow = lastRow;
+            [self.navigationController pushViewController:viewController animated:YES];
+        } else {
+            int row = [ProspectTableData count] - 1 - indexPath.row;
+            SAMActivityViewController* viewController = [[SAMActivityViewController alloc] initWithNibName:@"SAMActivityViewController" bundle:nil];
+            viewController.SAMDataRow = row;
+            viewController._SAMModel = [SAMData objectAtIndex:row];
+            [self.navigationController pushViewController:viewController animated:YES];
+        }
     } else {
         NSUInteger row = [indexPath row];
         NSUInteger count = [ProspectTableData count];

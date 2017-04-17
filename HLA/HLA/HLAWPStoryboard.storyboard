@@ -11,7 +11,7 @@
         <array key="BPreplay.otf">
             <string>BPreplay</string>
         </array>
-        <array key="BPreplayItalics.otf">
+        <array key="BPreplay_Italics.ttf">
             <string>BPreplay-Italic</string>
         </array>
     </customFonts>
@@ -480,6 +480,7 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
+                        <outlet property="btnAdd" destination="YRd-YU-hUD" id="H1X-dx-hsO"/>
                         <outlet property="btnSortCreatedDate" destination="hd3-1d-1CL" id="8gd-Ca-vTO"/>
                         <outlet property="btnSortFullName" destination="ADq-k6-LR5" id="ZsM-BF-vkh"/>
                         <outlet property="btnSortProduct" destination="CGe-YO-C5q" id="xOk-ng-x5v"/>

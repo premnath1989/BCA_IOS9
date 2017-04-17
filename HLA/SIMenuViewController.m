@@ -5973,6 +5973,7 @@ BOOL isFirstLoad;
     if(appDel.isFromSAM) {
         SAMModel *data = appDel.SAMData;
         data.idIllustration = [dictionaryPOForInsert valueForKey:@"SINO"];
+        data.dateModified = [formatter getDateToday:@"yyyy-MM-dd hh:mm:ss"];
         SAMDBHelper *helper = [[SAMDBHelper alloc] init];
         [helper UpdateSAMData:data];
     }
@@ -6685,6 +6686,7 @@ NSString *prevPlan;
     if(appDel.isFromSAM) {
         SAMModel *data = appDel.SAMData;
         data.idIllustration = [dictionaryPOForInsert valueForKey:@"SINO"];
+        data.dateModified = [formatter getDateToday:@"yyyy-MM-dd hh:mm:ss"];
         SAMDBHelper *helper = [[SAMDBHelper alloc] init];
         [helper UpdateSAMData:data];
     }

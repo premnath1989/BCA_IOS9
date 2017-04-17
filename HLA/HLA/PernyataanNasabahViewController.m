@@ -68,6 +68,8 @@
         data.idCFF = [cffHeaderSelectedDictionary valueForKey:@"CFFTransactionID"];
         
         SAMDBHelper *helper = [[SAMDBHelper alloc] init];
+        Formatter *formatter = [[Formatter alloc] init];
+        data.dateModified = [formatter getDateToday:@"yyyy-MM-dd hh:mm:ss"];
         [helper UpdateSAMData:data];
     }
 }

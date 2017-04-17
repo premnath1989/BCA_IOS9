@@ -53,6 +53,7 @@ int const SAVE_SUCCESS_ALERT_TAG = 101;
     NSString *docsDir = [dirPaths objectAtIndex:0];
     
     databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
+    dbHelper = [[SAMDBHelper alloc] init];
     
     gender = @"MALE";
     nationality = @"WNI";
@@ -294,7 +295,8 @@ int const SAVE_SUCCESS_ALERT_TAG = 101;
             if(sqlite3_prepare_v2(contactDB, insert_stmt, -1, &statement, NULL) == SQLITE_OK) {
                 if (sqlite3_step(statement) == SQLITE_DONE) {
                     [self GetLastID];
-                    [self SaveToSAM];
+                    [dbHelper InsertSAMData];
+//                    [self SaveToSAM];
                 } else {
                     UIAlertView *failAlert = [[UIAlertView alloc] initWithTitle:@" " message:@"Fail in inserting into profile table" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
                     [failAlert show];

@@ -20,6 +20,7 @@
 #import "Model_SI_Master.h"
 #import "Model_SI_Premium.h"
 #import "ModelSIRider.h"
+#import "SAMDBHelper.h"
 
 @interface ProspectListing : UIViewController<EditProspectDelegate, ProspectViewControllerDelegate,UITableViewDelegate,UITableViewDataSource,GroupDelegate, ClientProfileListingDelegate,CustomAlertBoxDelegate, UITabBarDelegate, UITextFieldDelegate,SIDateDelegate>
 {
@@ -34,6 +35,7 @@
     NSString *databasePath;
     sqlite3 *contactDB;
     ModelProspectProfile *modelProspectProfile;
+    SAMDBHelper *dbHelper;
     
     EditProspect *_EditProspect;
     ProspectViewController *_ProspectViewController;
@@ -69,6 +71,7 @@
 @property (strong, nonatomic) NSMutableArray *dataArray;
 @property (nonatomic) BOOL noMoreResultsAvail;
 @property (nonatomic) BOOL loading;
+@property (nonatomic) BOOL isSAMUseExistingNasabah;
 
 @property (nonatomic, assign) bool isFiltered;
 //@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
