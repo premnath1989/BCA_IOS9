@@ -10,4 +10,13 @@
 
 @interface SAMTableViewActivityDetailCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UITableViewCell *cell;
+@property (weak, nonatomic) IBOutlet UILabel *labelActivityDate;
+@property (weak, nonatomic) IBOutlet UILabel *labelTime;
+@property (weak, nonatomic) IBOutlet UILabel *labelLocation;
+@property (weak, nonatomic) IBOutlet UILabel *labelDuration;
+@property (weak, nonatomic) IBOutlet UILabel *labelActivity;
+@property (weak, nonatomic) IBOutlet UILabel *labelStatus;
+@property (weak, nonatomic) IBOutlet UILabel *labelComments;
+
 @end

@@ -11,6 +11,7 @@
 
 @interface SAMModel : NSObject
 
+@property (strong, nonatomic) NSString *_id;
 @property (strong, nonatomic) NSString *number;
 @property (strong, nonatomic) NSString *customerID;
 @property (strong, nonatomic) NSString *customerType;

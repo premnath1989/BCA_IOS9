@@ -8,11 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "ActivityStatus.h"
+#import "SAMDBHelper.h"
+#import "SIDate.h"
 
-@interface SAMMeetingNoteViewController : UIViewController <ActivityStatusDelegate> {
+@interface SAMMeetingNoteViewController : UIViewController <ActivityStatusDelegate, SIDateDelegate> {
     ActivityStatus *_activityStatus;
     sqlite3 *contactDB;
+    SAMDBHelper *dbHelper;
+    SIDate *_SIDate;
     
+    UIPopoverController *_SIDatePopover;
     UIPopoverController *_statusPopoverController;
 }
 
@@ -24,6 +29,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtMeetingStatus;
 @property (weak, nonatomic) IBOutlet UITextView *txtMeetingComment;
 @property (weak, nonatomic) IBOutlet UIButton *outletStatus;
+
+@property (nonatomic, retain) SIDate *SIDate;
+@property (nonatomic, retain) UIPopoverController *SIDatePopover;
 
 @property NSString *databasePath;
 

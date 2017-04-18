@@ -10,6 +10,8 @@
 
 @implementation SAMMeetingNoteModel
 
+@synthesize SAMID;
+@synthesize SAMNumber;
 @synthesize meetingDate;
 @synthesize meetingTime;
 @synthesize meetingStatus;

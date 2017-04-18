@@ -10,6 +10,8 @@
 
 @implementation SAMTableViewActivityDetailCell
 
+@synthesize cell = _cell;
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code

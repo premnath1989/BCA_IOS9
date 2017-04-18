@@ -38,6 +38,7 @@ NSMutableArray *SAMData;
 -(void) showDetailsForIndexPath:(NSIndexPath*)indexPath
 {
     SAMActivityDetailViewController* viewController = [[SAMActivityDetailViewController alloc] initWithNibName:@"SAMActivityDetailViewController" bundle:nil];
+    viewController.SAMdata = [SAMData objectAtIndex:indexPath.row];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 

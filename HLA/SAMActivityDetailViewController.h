@@ -7,7 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SAMDBHelper.h"
+#import "SAMModel.h"
+#import "SAMMeetingNoteModel.h"
 
-@interface SAMActivityDetailViewController : UIViewController
+@interface SAMActivityDetailViewController : UIViewController {
+    SAMDBHelper *dbHelper;
+    SAMMeetingNoteModel *note;
+}
+
+@property (weak, nonatomic) SAMModel *SAMdata;
 
 @end

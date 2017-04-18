@@ -22,6 +22,7 @@
                 <outlet property="txtMeetingActivity" destination="eAC-WE-fJO" id="g6C-4E-f6H"/>
                 <outlet property="txtMeetingComment" destination="4mJ-hV-U1a" id="NrQ-0O-tH6"/>
                 <outlet property="txtMeetingStatus" destination="JXF-GM-Tdl" id="cPJ-iU-VNV"/>
+                <outlet property="txtMeetingWhere" destination="bZ4-5T-K6B" id="jRd-75-TjX"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -40,7 +41,11 @@
                                     <action selector="actionClose:" destination="-1" id="Prb-6n-Igi"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem key="rightBarButtonItem" title="Simpan" id="DMu-3U-KFz"/>
+                            <barButtonItem key="rightBarButtonItem" title="Simpan" id="DMu-3U-KFz">
+                                <connections>
+                                    <action selector="actionSave:" destination="-1" id="dRZ-La-6Tr"/>
+                                </connections>
+                            </barButtonItem>
                         </navigationItem>
                     </items>
                 </navigationBar>
@@ -96,6 +101,9 @@
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
+                    <connections>
+                        <action selector="actionTimeMeeting:" destination="-1" eventType="touchUpInside" id="sTW-ht-bre"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hJc-Y1-vCi">
                     <rect key="frame" x="439" y="100" width="218" height="30"/>
@@ -107,6 +115,9 @@
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
+                    <connections>
+                        <action selector="actionTimeMeeting:" destination="-1" eventType="touchUpInside" id="TQk-Vl-ayZ"/>
+                    </connections>
                 </button>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bZ4-5T-K6B">
                     <rect key="frame" x="148" y="138" width="509" height="30"/>

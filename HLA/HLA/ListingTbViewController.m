@@ -41,9 +41,23 @@
     NSString *docsDir = [dirPaths objectAtIndex:0];
     databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"hladb.sqlite"]];
     
+    AppDelegate *appDel = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
     self.clearsSelectionOnViewWillAppear = NO;
     self.contentSizeForViewInPopover = CGSizeMake(500.0, 400.0);
-    [self getListing];
+    
+    @try { // Agent probably going to forgot to completely filled data nasabah after creating one, we need to catch the exception caused by this
+        [self getListing];
+        
+        if(appDel.isFromSAM) {
+            isFiltered = YES;
+            [self filterListingWithString: appDel.SAMData.customerName];
+        }
+    } @catch (NSException *exception) {
+        NSLog(@"Caught %@%@", [exception name], [exception reason]);
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Harap lengkapi data nasabah terlebih dahulu" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        [alert show];
+    }
     
     UISearchBar *searchbar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 200, 50) ];
     
@@ -53,12 +67,8 @@
     CGRect searchbarFrame = searchbar.frame;
     [self.tableView scrollRectToVisible:searchbarFrame animated:NO];
     
-    AppDelegate *appDel = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    if(appDel.isFromSAM) {
-        isFiltered = YES;
-        [self filterListingWithString: appDel.SAMData.customerName];
-    }
+    
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -201,28 +211,35 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     cell.detailTextLabel.numberOfLines = 2;
-    if (isFiltered == false) {
-        cell.textLabel.text = [_NameList objectAtIndex:indexPath.row];
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@\n%@", [_IDList objectAtIndex:indexPath.row], [_OtherIDList objectAtIndex:indexPath.row]];
-        if ([[_IDList objectAtIndex:indexPath.row] isEqualToString:@""]) {
-            cell.detailTextLabel.text = [_OtherIDList objectAtIndex:indexPath.row];
+    @try {
+        if (isFiltered == false) {
+            cell.textLabel.text = [_NameList objectAtIndex:indexPath.row];
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%@\n%@", [_IDList objectAtIndex:indexPath.row], [_OtherIDList objectAtIndex:indexPath.row]];
+            if ([[_IDList objectAtIndex:indexPath.row] isEqualToString:@""]) {
+                cell.detailTextLabel.text = [_OtherIDList objectAtIndex:indexPath.row];
+            }
+            
+            if ([[textFields trimWhiteSpaces:[_OtherIDTypeList objectAtIndex:indexPath.row]] caseInsensitiveCompare:@"EDD"] == NSOrderedSame) {
+                cell.detailTextLabel.text = [textFields trimWhiteSpaces:[_DOBList objectAtIndex:indexPath.row]];
+            }
         }
-
-        if ([[textFields trimWhiteSpaces:[_OtherIDTypeList objectAtIndex:indexPath.row]] caseInsensitiveCompare:@"EDD"] == NSOrderedSame) {
-            cell.detailTextLabel.text = [textFields trimWhiteSpaces:[_DOBList objectAtIndex:indexPath.row]];
+        else {
+            cell.textLabel.text = [FilteredName objectAtIndex:indexPath.row];
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%@\n%@", [FilteredID objectAtIndex:indexPath.row], [FilteredOtherID objectAtIndex:indexPath.row]];
+            if ([[FilteredID objectAtIndex:indexPath.row] isEqualToString:@""]) {
+                cell.detailTextLabel.text = [FilteredOtherID objectAtIndex:indexPath.row];
+            }
+            if ([[textFields trimWhiteSpaces:[FilteredOtherIDType objectAtIndex:indexPath.row]] caseInsensitiveCompare:@"EDD"] == NSOrderedSame) {
+                cell.detailTextLabel.text = [textFields trimWhiteSpaces:[FilteredDOB objectAtIndex:indexPath.row]];
+            }
+            
         }
+    } @catch (NSException *exception) {
+        NSLog(@"Caught %@%@", [exception name], [exception reason]);
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Harap lengkapi data nasabah terlebih dahulu" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        [alert show];
     }
-    else {
-        cell.textLabel.text = [FilteredName objectAtIndex:indexPath.row];
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@\n%@", [FilteredID objectAtIndex:indexPath.row], [FilteredOtherID objectAtIndex:indexPath.row]];
-        if ([[FilteredID objectAtIndex:indexPath.row] isEqualToString:@""]) {
-            cell.detailTextLabel.text = [FilteredOtherID objectAtIndex:indexPath.row];
-        }
-        if ([[textFields trimWhiteSpaces:[FilteredOtherIDType objectAtIndex:indexPath.row]] caseInsensitiveCompare:@"EDD"] == NSOrderedSame) {
-            cell.detailTextLabel.text = [textFields trimWhiteSpaces:[FilteredDOB objectAtIndex:indexPath.row]];
-        }
-
-    }
+    
         
     cell.selectionStyle = UITableViewCellSelectionStyleBlue;
     

@@ -12,6 +12,7 @@
     sqlite3 *contactDB;
 }
 
+@synthesize _id;
 @synthesize number;
 @synthesize customerID;
 @synthesize customerType;

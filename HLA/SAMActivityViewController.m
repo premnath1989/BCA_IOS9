@@ -143,6 +143,8 @@ Formatter *formatter;
 -(IBAction)actionNewMeetingNote:(id)sender {
     [samMeetingNoteVC setModalPresentationStyle:UIModalPresentationFormSheet];
     samMeetingNoteVC.preferredContentSize = CGSizeMake(703, 456);
+    AppDelegate *appDel = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDel.SAMData = _SAMModel;
     [self presentViewController:samMeetingNoteVC animated:YES completion:nil];
 }
 
@@ -203,6 +205,8 @@ Formatter *formatter;
         AppDelegate *appdlg = (AppDelegate*)[[UIApplication sharedApplication] delegate ];
         SIListing *SIListing = [cpStoryboard instantiateViewControllerWithIdentifier:@"SIListing"];
         SIListing.TradOrEver = @"TRAD";
+        [appdlg setIsFromSAM:YES];
+        [appdlg setSAMData:_SAMModel];
         [self.navigationController pushViewController:SIListing animated:YES];
     } else if(progress > 2) {
         UIStoryboard *cpStoryboard = [UIStoryboard storyboardWithName:@"HLAWPStoryboard" bundle:Nil];

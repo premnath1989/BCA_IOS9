@@ -87,11 +87,12 @@ int deleteOption; // 101 = SI and eApps, 102 = delete Si only, 103 = combination
     
 	AppDelegate *appDel= (AppDelegate*)[[UIApplication sharedApplication] delegate ];
 	appDel.MhiMessage = Nil;
-	appDel = Nil;
     
-    if(!appDel.isFromSAM) {
+    if(![appDel.SAMData.idIllustration isEqualToString: @"(null)"] && appDel.SAMData != nil) { // Prospect already have illustration, cannot make new one until closed
         btnAdd.enabled = false;
     }
+    
+	appDel = Nil;
     
     //set Button want to add border
     outletDateFrom.property = 1;

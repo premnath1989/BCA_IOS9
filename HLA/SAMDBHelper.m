@@ -38,11 +38,13 @@ NSString *databasePath;
     NSString *SAMIDVideo;
     NSString *SAMIDIllustration;
     NSString *SAMIDApplication;
+    NSString *SAMID;
+    NSString *SAMNumber;
     
     sqlite3_stmt *statement;
     const char *dbpath = [databasePath UTF8String];
     if(sqlite3_open(dbpath, &contactDB) == SQLITE_OK) {
-        NSString *sql = [NSString stringWithFormat:@"SELECT a.SAM_Type, a.SAM_CustomerID, a.SAM_DateModified, a.SAM_Status, a.SAM_NextMeeting, b.ProspectName, a.SAM_ID_CFF, a.SAM_ID_ProductRecommendation, a.SAM_ID_Video, a.SAM_ID_Illustration, a.SAM_ID_Application FROM SAM_Master as a, prospect_profile as b WHERE a.SAM_CustomerID = b.IndexNo"];
+        NSString *sql = [NSString stringWithFormat:@"SELECT a.SAM_Type, a.SAM_CustomerID, a.SAM_DateModified, a.SAM_Status, a.SAM_NextMeeting, b.ProspectName, a.SAM_ID_CFF, a.SAM_ID_ProductRecommendation, a.SAM_ID_Video, a.SAM_ID_Illustration, a.SAM_ID_Application, a.SAM_ID, a.SAM_Number FROM SAM_Master as a, prospect_profile as b WHERE a.SAM_CustomerID = b.IndexNo"];
         const char *query_stmt = [sql UTF8String];
         if (sqlite3_prepare_v2(contactDB, query_stmt, -1, &statement, NULL) == SQLITE_OK) {
             res = [[NSMutableArray alloc] init];
@@ -78,7 +80,16 @@ NSString *databasePath;
                 const char *application = (const char *) sqlite3_column_text(statement, 10);
                 SAMIDApplication = application == NULL ? nil : [[NSString alloc] initWithUTF8String:application];
                 
+                const char *samId = (const char *) sqlite3_column_text(statement, 11);
+                SAMID = samId == NULL ? nil : [[NSString alloc] initWithUTF8String:samId];
+                
+                const char *samNumber = (const char *) sqlite3_column_text(statement, 12);
+                SAMNumber = samNumber == NULL ? nil : [[NSString alloc] initWithUTF8String:samNumber];
+                
                 SAMModel *model = [[SAMModel alloc] init];
+                
+                model._id = SAMID;
+                model.number = SAMNumber;
                 model.customerType = SAMType;
                 model.customerID = SAMCustomerID;
                 model.dateModified = SAMDateModified;
@@ -117,11 +128,12 @@ NSString *databasePath;
     NSString *SAMStatus;
     NSString *SAMNextMeeting;
     NSString *SAMProspectName;
+    NSString *SAMID;
     
     sqlite3_stmt *statement;
     const char *dbpath = [databasePath UTF8String];
     if(sqlite3_open(dbpath, &contactDB) == SQLITE_OK) {
-        NSString *sql = [NSString stringWithFormat:@"SELECT a.SAM_Type, a.SAM_DateModified, a.SAM_Status, a.SAM_NextMeeting, b.ProspectName FROM SAM_Master as a, prospect_profile as b WHERE a.SAM_CustomerID = b.IndexNo"];
+        NSString *sql = [NSString stringWithFormat:@"SELECT a.SAM_Type, a.SAM_DateModified, a.SAM_Status, a.SAM_NextMeeting, b.ProspectName, a.SAM_ID FROM SAM_Master as a, prospect_profile as b WHERE a.SAM_CustomerID = b.IndexNo"];
         const char *query_stmt = [sql UTF8String];
         if (sqlite3_prepare_v2(contactDB, query_stmt, -1, &statement, NULL) == SQLITE_OK) {
             while (sqlite3_step(statement) == SQLITE_ROW) {
@@ -139,6 +151,10 @@ NSString *databasePath;
                 const char *prospectname = (const char *) sqlite3_column_text(statement, 4);
                 SAMProspectName = prospectname == NULL ? nil : [[NSString alloc] initWithUTF8String:prospectname];
                 
+                const char *samId = (const char *) sqlite3_column_text(statement, 5);
+                SAMID = samId == NULL ? nil : [[NSString alloc] initWithUTF8String:samId];
+                
+                model._id = SAMID;
                 model.customerType = SAMType;
                 model.dateModified = SAMDateModified;
                 model.status = SAMStatus;
@@ -182,6 +198,8 @@ NSString *databasePath;
     docsDir = [dirPaths objectAtIndex:0];
     databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent:@"hladb.sqlite"]];
     
+    NSString *lastSAMID;
+    
     SAMModel *model = [[SAMModel alloc] init];
     
     FMDatabase *database = [FMDatabase databaseWithPath:databasePath];
@@ -201,6 +219,15 @@ NSString *databasePath;
         model.dateModified = dateToday;
         model.status = @"Follow Up";
     }
+    
+    NSString *GetLastIdSQL = @"Select SAM_ID from SAM_Master order by \"SAM_ID\" desc limit 1";
+    FMResultSet *lastIdResult = [database executeQuery:GetLastIdSQL];
+    while([lastIdResult next]) {
+        lastSAMID = [NSString stringWithFormat:@"%@", [lastIdResult objectForColumnName:@"SAM_ID"]];
+        model._id = lastSAMID;
+    }
+    
+    [database close];
     
     sqlite3_close(contactDB);
     return model;
@@ -230,6 +257,52 @@ NSString *databasePath;
     //    sqlite3_finalize(statement);
     //}
     sqlite3_close(contactDB);
+    
+    return isSuccess;
+}
+
+- (NSMutableArray *) ReadMeetingNoteForSAM:(NSString *)SAMid
+{
+    NSMutableArray *notes = [[NSMutableArray alloc] init];
+    
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent:@"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    FMResultSet *result = [database executeQuery:@"SELECT * FROM SAM_detail as details WHERE details.SAM_ID = ?", SAMid];
+    
+    while([result next]) {
+        SAMMeetingNoteModel *note = [[SAMMeetingNoteModel alloc] init];
+        note.SAMID = [result objectForColumnName:@"SAM_ID"];
+        note.SAMNumber = [result objectForColumnName:@"SAM_Number"];
+        note.meetingDate = [result objectForColumnName:@"SAMDetail_MeetingDate"];
+        note.meetingTime = [result objectForColumnName:@"SAMDetail_MeetingTime"];
+        note.meetingLocation = [result objectForColumnName:@"SAMDetail_MeetingLocation"];
+        note.meetingDuration = [result objectForColumnName:@"SAMDetail_MeetingDuration"];
+        note.meetingStatus = [result objectForColumnName:@"SAMDetail_MeetingStatus"];
+        note.meetingActivity = [result objectForColumnName:@"SAMDetail_MeetingActivity"];
+        note.meetingComments = [result objectForColumnName:@"SAMDetail_MeetingComments"];
+        [notes addObject:note];
+    }
+    
+    [database close];
+    
+    return notes;
+}
+
+- (BOOL) CreateMeetingNote:(SAMMeetingNoteModel *)note
+{
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent:@"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+
+    BOOL isSuccess = [database executeUpdate:@"INSERT INTO SAM_Detail(\"SAM_ID\", \"SAM_Number\", \"SAMDetail_MeetingDate\", \"SAMDetail_MeetingTime\", \"SAMDetail_MeetingLocation\", \"SAMDetail_MeetingDuration\", \"SAMDetail_MeetingStatus\", \"SAMDetail_MeetingActivity\", \"SAMDetail_MeetingComments\") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", note.SAMID, note.SAMNumber, note.meetingDate, note.meetingTime, note.meetingLocation, note.meetingDuration, note.meetingStatus, note.meetingActivity, note.meetingComments];
+    
+    [database close];
     
     return isSuccess;
 }

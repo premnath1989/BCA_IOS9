@@ -10,6 +10,7 @@
 #import <sqlite3.h>
 #import "Formatter.h"
 #import "SAMModel.h"
+#import "SAMMeetingNoteModel.h"
 
 @interface SAMDBHelper : NSObject
 
@@ -20,5 +21,11 @@
 - (SAMModel *) InsertSAMData;
 - (SAMModel *) InsertSAMDataWithLastID: (NSString *)lastID;
 - (BOOL) UpdateSAMData:(SAMModel *) model;
+
+- (NSMutableArray *) ReadMeetingNotes;
+- (NSMutableArray *) ReadMeetingNoteForSAM: (NSString *) SAMid;
+- (BOOL) CreateMeetingNote: (SAMMeetingNoteModel *) note;
+- (BOOL) UpdateMeetingNote: (SAMMeetingNoteModel *) note;
+- (BOOL) DeleteMeetingNote: (NSString *) _id;
 
 @end
