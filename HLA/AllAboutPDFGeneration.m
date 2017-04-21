@@ -621,10 +621,10 @@
         [thumbnailData writeToFile:relativeOutputFilePath atomically:YES];
     }
     else if (([stringFileName rangeOfString:@"alcohol"].location != NSNotFound)||([stringFileName rangeOfString:@"alkohol"].location != NSNotFound)) {
-        CGRect rectSign1 = CGRectMake(120,  7808, imageSigned1.size.width, imageSigned1.size.height);
-        CGRect rectSign2 = CGRectMake(720, 7808, imageSigned2.size.width, imageSigned2.size.height);
-        CGRect rectSign3 = CGRectMake(200, 7808, imageSigned3.size.width, imageSigned3.size.height);
-        CGRect rectSign4 = CGRectMake(1320, 7808, imageSigned4.size.width, imageSigned4.size.height);
+        CGRect rectSign1 = CGRectMake(120,  8158, imageSigned1.size.width, imageSigned1.size.height);
+        CGRect rectSign2 = CGRectMake(720, 8158, imageSigned2.size.width, imageSigned2.size.height);
+        CGRect rectSign3 = CGRectMake(200, 8158, imageSigned3.size.width, imageSigned3.size.height);
+        CGRect rectSign4 = CGRectMake(1320, 8158, imageSigned4.size.width, imageSigned4.size.height);
         
         UIImage *resultImage = [self generateSignatureForImage:baseImage signatureImage1:imageSigned1 signaturePostion1:rectSign1 signatureImage2:imageSigned2 signaturePostion2:rectSign2 signatureImage3:imageSigned3 signaturePostion3:rectSign3 signatureImage4:imageSigned4 signaturePostion4:rectSign4];
         NSData *thumbnailData = UIImageJPEGRepresentation(resultImage, 0);
@@ -645,10 +645,12 @@
         [thumbnailData writeToFile:relativeOutputFilePath atomically:YES];
     }
     else if (([stringFileName rangeOfString:@"hiking"].location != NSNotFound)||([stringFileName rangeOfString:@"mendaki"].location != NSNotFound)) {
-        CGRect rectSign1 = CGRectMake(120,  10348, imageSigned1.size.width, imageSigned1.size.height);
-        CGRect rectSign2 = CGRectMake(720, 10348, imageSigned2.size.width, imageSigned2.size.height);
-        CGRect rectSign3 = CGRectMake(200, 10348, imageSigned3.size.width, imageSigned3.size.height);
-        CGRect rectSign4 = CGRectMake(1320, 10348, imageSigned4.size.width, imageSigned4.size.height);
+        
+//        CGRect rectSign1 = CGRectMake(120,  10348, imageSigned1.size.width, imageSigned1.size.height);
+        CGRect rectSign1 = CGRectMake(120,  10800, imageSigned1.size.width, imageSigned1.size.height);
+        CGRect rectSign2 = CGRectMake(720, 10800, imageSigned2.size.width, imageSigned2.size.height);
+        CGRect rectSign3 = CGRectMake(200, 10800, imageSigned3.size.width, imageSigned3.size.height);
+        CGRect rectSign4 = CGRectMake(1320, 10800, imageSigned4.size.width, imageSigned4.size.height);
         
         UIImage *resultImage = [self generateSignatureForImage:baseImage signatureImage1:imageSigned1 signaturePostion1:rectSign1 signatureImage2:imageSigned2 signaturePostion2:rectSign2 signatureImage3:imageSigned3 signaturePostion3:rectSign3 signatureImage4:imageSigned4 signaturePostion4:rectSign4];
         NSData *thumbnailData = UIImageJPEGRepresentation(resultImage, 0);
@@ -669,10 +671,10 @@
         [thumbnailData writeToFile:relativeOutputFilePath atomically:YES];
     }
     else if (([stringFileName rangeOfString:@"paragliding"].location != NSNotFound)||([stringFileName rangeOfString:@"terbanglayang"].location != NSNotFound)) {
-        CGRect rectSign1 = CGRectMake(120,  7192, imageSigned1.size.width, imageSigned1.size.height);
-        CGRect rectSign2 = CGRectMake(720, 7192, imageSigned2.size.width, imageSigned2.size.height);
-        CGRect rectSign3 = CGRectMake(200, 7192, imageSigned3.size.width, imageSigned3.size.height);
-        CGRect rectSign4 = CGRectMake(1320, 7192, imageSigned4.size.width, imageSigned4.size.height);
+        CGRect rectSign1 = CGRectMake(120,  7472, imageSigned1.size.width, imageSigned1.size.height);
+        CGRect rectSign2 = CGRectMake(720, 7472, imageSigned2.size.width, imageSigned2.size.height);
+        CGRect rectSign3 = CGRectMake(200, 7472, imageSigned3.size.width, imageSigned3.size.height);
+        CGRect rectSign4 = CGRectMake(1320, 7472, imageSigned4.size.width, imageSigned4.size.height);
         
         UIImage *resultImage = [self generateSignatureForImage:baseImage signatureImage1:imageSigned1 signaturePostion1:rectSign1 signatureImage2:imageSigned2 signaturePostion2:rectSign2 signatureImage3:imageSigned3 signaturePostion3:rectSign3 signatureImage4:imageSigned4 signaturePostion4:rectSign4];
         NSData *thumbnailData = UIImageJPEGRepresentation(resultImage, 0);
@@ -681,10 +683,11 @@
         [thumbnailData writeToFile:relativeOutputFilePath atomically:YES];
     }
     else if (([stringFileName rangeOfString:@"racing"].location != NSNotFound)||([stringFileName rangeOfString:@"balapmotor"].location != NSNotFound)) {
-        CGRect rectSign1 = CGRectMake(120,  7193, imageSigned1.size.width, imageSigned1.size.height);
-        CGRect rectSign2 = CGRectMake(720, 7193, imageSigned2.size.width, imageSigned2.size.height);
-        CGRect rectSign3 = CGRectMake(200, 7193, imageSigned3.size.width, imageSigned3.size.height);
-        CGRect rectSign4 = CGRectMake(1320, 7193, imageSigned4.size.width, imageSigned4.size.height);
+//        CGRect rectSign1 = CGRectMake(120,  7193, imageSigned1.size.width, imageSigned1.size.height);
+        CGRect rectSign1 = CGRectMake(120,  7500, imageSigned1.size.width, imageSigned1.size.height);
+        CGRect rectSign2 = CGRectMake(720, 7500, imageSigned2.size.width, imageSigned2.size.height);
+        CGRect rectSign3 = CGRectMake(200, 7500, imageSigned3.size.width, imageSigned3.size.height);
+        CGRect rectSign4 = CGRectMake(1320, 7500, imageSigned4.size.width, imageSigned4.size.height);
         
         UIImage *resultImage = [self generateSignatureForImage:baseImage signatureImage1:imageSigned1 signaturePostion1:rectSign1 signatureImage2:imageSigned2 signaturePostion2:rectSign2 signatureImage3:imageSigned3 signaturePostion3:rectSign3 signatureImage4:imageSigned4 signaturePostion4:rectSign4];
         NSData *thumbnailData = UIImageJPEGRepresentation(resultImage, 0);
@@ -693,10 +696,10 @@
         [thumbnailData writeToFile:relativeOutputFilePath atomically:YES];
     }
     else if (([stringFileName rangeOfString:@"traveling"].location != NSNotFound)||([stringFileName rangeOfString:@"perjalanankeluarnegeri"].location != NSNotFound)) {
-        CGRect rectSign1 = CGRectMake(120,  8270, imageSigned1.size.width, imageSigned1.size.height);
-        CGRect rectSign2 = CGRectMake(720, 8270, imageSigned2.size.width, imageSigned2.size.height);
-        CGRect rectSign3 = CGRectMake(200, 8270, imageSigned3.size.width, imageSigned3.size.height);
-        CGRect rectSign4 = CGRectMake(1320, 8270, imageSigned4.size.width, imageSigned4.size.height);
+        CGRect rectSign1 = CGRectMake(120,  8550, imageSigned1.size.width, imageSigned1.size.height);
+        CGRect rectSign2 = CGRectMake(720, 8550, imageSigned2.size.width, imageSigned2.size.height);
+        CGRect rectSign3 = CGRectMake(200, 8550, imageSigned3.size.width, imageSigned3.size.height);
+        CGRect rectSign4 = CGRectMake(1320, 8550, imageSigned4.size.width, imageSigned4.size.height);
         
         UIImage *resultImage = [self generateSignatureForImage:baseImage signatureImage1:imageSigned1 signaturePostion1:rectSign1 signatureImage2:imageSigned2 signaturePostion2:rectSign2 signatureImage3:imageSigned3 signaturePostion3:rectSign3 signatureImage4:imageSigned4 signaturePostion4:rectSign4];
         NSData *thumbnailData = UIImageJPEGRepresentation(resultImage, 0);
