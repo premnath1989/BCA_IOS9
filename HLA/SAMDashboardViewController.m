@@ -12,9 +12,11 @@
 #import "SAMActivityListViewController.h"
 #import "SAMNewNasabahViewController.h"
 #import "SAMMeetingScheduleViewController.h"
+#import "SAMTableViewMeetingScheduleListCell.h"
 #import "AppDelegate.h"
 #import "MainClient.h"
 #import "ProspectListing.h"
+#import "SAMDBHelper.h"
 
 @interface SAMDashboardViewController ()
 
@@ -23,12 +25,19 @@
 int const ADD_NASABAH_ALERT_TAG = 100;
 int const CONTINUE_ALERT_TAG = 101;
 
+NSMutableArray *schedules;
+SAMDBHelper *dbHelper;
+UIAlertView *newNasabahAlertView;
+
 @implementation SAMDashboardViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setCircleAndBorderView];
     // Do any additional setup after loading the view.
+    dbHelper = [[SAMDBHelper alloc] init];
+    schedules = [[NSMutableArray alloc] init];
+    schedules = [dbHelper ReadAllSchedule];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -46,6 +55,67 @@ int const CONTINUE_ALERT_TAG = 101;
     viewSubmitted.layer.borderWidth = 1.0;
     viewSubmitted.layer.borderColor = [UIColor lightGrayColor].CGColor;
 }
+
+#pragma mark - Table
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [schedules count];
+}
+
+- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Remove seperator inset
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    // Prevent the cell from inheriting the Table View's margin settings
+    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
+        [cell setPreservesSuperviewLayoutMargins:NO];
+    }
+    
+    // Explictly set your cell's layout margins
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    SAMTableViewMeetingScheduleListCell *cellSAMList = (SAMTableViewMeetingScheduleListCell *)[tableView dequeueReusableCellWithIdentifier:@"SAMTableViewMeetingScheduleListCell"];
+    
+    if (cellSAMList == nil)
+    {
+        NSArray *arrayNIB = [[NSBundle mainBundle] loadNibNamed:@"SAMTableViewMeetingScheduleListCell" owner:self options:nil];
+        cellSAMList = [arrayNIB objectAtIndex:0];
+    }
+    else
+    {
+        
+    }
+
+    SAMModel *sam = [schedules objectAtIndex:indexPath.row];
+    NSArray *dateAndTimeString = [[NSArray alloc] init];
+    if(![sam.dateNextMeeting isEqualToString:@""]) {
+        dateAndTimeString = [sam.dateNextMeeting componentsSeparatedByString:@" "];
+        
+        // Set the field value;
+        [cellSAMList.labelName setText:sam.customerName];
+        [cellSAMList.labelDate setText:[dateAndTimeString objectAtIndex:0]];
+        [cellSAMList.labelTime setText:[dateAndTimeString objectAtIndex:1]];
+    }
+    
+    return cellSAMList;
+}
+
+#pragma mark - Action
 
 -(IBAction)actionDataNasabah:(id)sender{
 //    AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate ];
@@ -69,9 +139,9 @@ int const CONTINUE_ALERT_TAG = 101;
 }
 
 -(IBAction)actionDataReferral:(id)sender{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Apakah Anda ingin menggunakan data nasabah yang ada?" delegate:self cancelButtonTitle:@"Ya" otherButtonTitles:@"Buat Baru", nil];
-    [alert setTag:ADD_NASABAH_ALERT_TAG];
-    [alert show];
+    newNasabahAlertView = [[UIAlertView alloc] initWithTitle:@"" message:@"Apakah Anda ingin menggunakan data nasabah yang ada?" delegate:self cancelButtonTitle:@"Batal" otherButtonTitles:@"Ya", @"Buat Baru", nil];
+    [newNasabahAlertView setTag:ADD_NASABAH_ALERT_TAG];
+    [newNasabahAlertView show];
     
 }
 
@@ -89,7 +159,7 @@ int const CONTINUE_ALERT_TAG = 101;
 
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if(alertView.tag == ADD_NASABAH_ALERT_TAG) {
-        if(buttonIndex == 0) {
+        if(buttonIndex == 1) {
             //TODO: Add call to select existing nasabah
             AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate ];
             [delegate setIsFromSAM:YES];
@@ -98,7 +168,7 @@ int const CONTINUE_ALERT_TAG = 101;
             prospectListing.isSAMUseExistingNasabah = YES;
             [self.navigationController pushViewController:prospectListing animated:YES];
             prospectListing.navigationItem.title = @"Data Nasabah";
-        } else {
+        } else if(buttonIndex == 2) {
             SAMNewNasabahViewController* viewController = [[SAMNewNasabahViewController alloc] initWithNibName:@"SAMNewNasabahViewController" bundle:nil];
             viewController.dashboardVC = self;
             [self.navigationController pushViewController:viewController animated:YES];
@@ -109,6 +179,8 @@ int const CONTINUE_ALERT_TAG = 101;
 //            prospectVC.delegate = self;
 //            prospectVC.isFromSam = YES;
 //            [self.navigationController pushViewController: prospectVC animated:YES];
+        } else {
+            [alertView dismissWithClickedButtonIndex:-1 animated:YES];
         }
     } else if(alertView.tag == CONTINUE_ALERT_TAG) {
         if(buttonIndex == 0) {

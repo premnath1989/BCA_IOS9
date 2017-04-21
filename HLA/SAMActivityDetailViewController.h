@@ -18,4 +18,9 @@
 
 @property (weak, nonatomic) SAMModel *SAMdata;
 
+@property (strong, nonatomic) IBOutlet UILabel *labelFullName;
+@property (strong, nonatomic) IBOutlet UILabel *labelBirthDate;
+@property (strong, nonatomic) IBOutlet UILabel *labelBranchName;
+@property (strong, nonatomic) IBOutlet UILabel *labelKCU;
+
 @end

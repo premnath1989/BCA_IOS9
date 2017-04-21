@@ -11,6 +11,7 @@
 #import "Formatter.h"
 #import "SAMModel.h"
 #import "SAMMeetingNoteModel.h"
+#import "FMDatabase.h"
 
 @interface SAMDBHelper : NSObject
 
@@ -27,5 +28,7 @@
 - (BOOL) CreateMeetingNote: (SAMMeetingNoteModel *) note;
 - (BOOL) UpdateMeetingNote: (SAMMeetingNoteModel *) note;
 - (BOOL) DeleteMeetingNote: (NSString *) _id;
+
+- (NSMutableArray *) ReadAllSchedule;
 
 @end

@@ -9,6 +9,8 @@
 #import "SAMMeetingScheduleViewController.h"
 #import "DateViewController.h"
 #import "TimeViewController.h"
+#import "AppDelegate.h"
+#import "SAMModel.h"
 
 @interface SAMMeetingScheduleViewController ()<DateViewControllerDelegate,TimeViewControllerDelegate>{
     DateViewController *scheduleDate;
@@ -18,13 +20,28 @@
 
 @end
 
+AppDelegate *appDel;
+SAMModel *data;
+
 @implementation SAMMeetingScheduleViewController
+
+@synthesize SIDate = _SIDate;
+@synthesize SIDatePopover = _SIDatePopover;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // Do any additional setup after loading the view from its nib.
     scheduleDate = [[DateViewController alloc]init];
     scheduleTime = [[TimeViewController alloc]init];
-    // Do any additional setup after loading the view from its nib.
+    
+    textComment.layer.borderWidth = 1.0f;
+    textComment.layer.borderColor = [[UIColor blackColor] CGColor];
+    
+    dbHelper = [[SAMDBHelper alloc] init];
+    
+    appDel = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    data = appDel.SAMData;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -37,13 +54,15 @@
     id activeInstance = [UIKeyboardImpl performSelector:@selector(activeInstance)];
     [activeInstance performSelector:@selector(dismissKeyboard)];
     
-    UIStoryboard *sharedStoryboard = [UIStoryboard storyboardWithName:@"SharedStoryboard" bundle:Nil];
-    scheduleDate = [sharedStoryboard instantiateViewControllerWithIdentifier:@"showDate"];
-    scheduleDate.delegate = self;
-    scheduleDate.btnSender = 1;
-    scheduleDate.msgDate = sender.currentTitle;
-    popoverViewer = [[UIPopoverController alloc] initWithContentViewController:scheduleDate];
-    [popoverViewer setPopoverContentSize:CGSizeMake(100.0f, 100.0f)];
+    if (_SIDate == Nil) {
+        UIStoryboard *clientProfileStoryBoard = [UIStoryboard storyboardWithName:@"ClientProfileStoryboard" bundle:nil];
+        self.SIDate = [clientProfileStoryBoard instantiateViewControllerWithIdentifier:@"SIDate"];
+        _SIDate.delegate = self;
+        self.SIDatePopover = [[UIPopoverController alloc] initWithContentViewController:_SIDate];
+    }
+    [self.SIDatePopover setPopoverContentSize:CGSizeMake(300.0f, 255.0f)];
+    [self.SIDatePopover presentPopoverFromRect:[sender bounds]  inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:NO];
+    
     
     CGRect rect = [sender frame];
     rect.origin.y = [sender frame].origin.y + 40;
@@ -70,7 +89,35 @@
 }
 
 -(IBAction)actionSaveSchedule:(id)sender{
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if(![buttonDate.titleLabel.text containsString:@"Please Select"]) {
+        data.dateNextMeeting = [NSString stringWithFormat:@"%@ %@", buttonDate.titleLabel.text, buttonTime.titleLabel.text];
+        if([dbHelper UpdateSAMData:data]) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Meeting Berhasil Dijadwalkan"
+                                                            message:@""
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles: nil];
+            [alert show];
+            [self dismissViewControllerAnimated:YES completion:nil];
+        } else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Gagal Menjadwalkan Meeting, Mohon Hubungi Kantor"
+                                                            message:@""
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles: nil];
+            [alert show];
+
+        }
+        
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Harap Mengisi Tanggal Meeting"
+                                                        message:@""
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles: nil];
+        [alert show];
+    }
+    
 }
 
 -(IBAction)actionDismissSchedule:(id)sender{
@@ -88,6 +135,17 @@
     [popoverViewer dismissPopoverAnimated:YES];
 }
 
+-(void)DateSelected:(NSString *)strDate :(NSString *)dbDate
+{
+    [buttonDate setTitle:[[NSString stringWithFormat:@""] stringByAppendingFormat:@"%@", strDate] forState:UIControlStateNormal];
+}
+
+-(void)CloseWindow
+{
+    [self resignFirstResponder];
+    [self.view endEditing:YES];
+    [_SIDatePopover dismissPopoverAnimated:YES];
+}
 
 /*
 #pragma mark - Navigation

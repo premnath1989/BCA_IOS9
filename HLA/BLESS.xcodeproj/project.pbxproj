@@ -816,6 +816,8 @@
 		C3C627991E933BC300C94E14 /* SAMNewNasabahViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3C627971E933BC300C94E14 /* SAMNewNasabahViewController.xib */; };
 		C3C6279C1E933DA100C94E14 /* ActivityStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = C3C6279B1E933DA100C94E14 /* ActivityStatus.m */; };
 		C3D174B718B766030076F078 /* view.png in Resources */ = {isa = PBXBuildFile; fileRef = C3D174B618B766030076F078 /* view.png */; };
+		C3EE1FB71EA8A2970068FAEB /* SAMTableViewMeetingScheduleListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3EE1FB51EA8A2970068FAEB /* SAMTableViewMeetingScheduleListCell.m */; };
+		C3EE1FBA1EA8A2A80068FAEB /* SAMTableViewMeetingScheduleListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3EE1FB91EA8A2A80068FAEB /* SAMTableViewMeetingScheduleListCell.xib */; };
 		C40059FA16BB678000B03041 /* CashPromiseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C40059F916BB678000B03041 /* CashPromiseViewController.m */; };
 		C416C2B61855BA9B00D29E46 /* SettingUserProfileReg.m in Sources */ = {isa = PBXBuildFile; fileRef = C416C2B51855BA9B00D29E46 /* SettingUserProfileReg.m */; };
 		C416C2C11855BBA700D29E46 /* ChangePasswordReg.m in Sources */ = {isa = PBXBuildFile; fileRef = C416C2B81855BBA700D29E46 /* ChangePasswordReg.m */; };
@@ -2465,6 +2467,9 @@
 		C3C6279A1E933DA100C94E14 /* ActivityStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityStatus.h; sourceTree = "<group>"; };
 		C3C6279B1E933DA100C94E14 /* ActivityStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityStatus.m; sourceTree = "<group>"; };
 		C3D174B618B766030076F078 /* view.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = view.png; sourceTree = "<group>"; };
+		C3EE1FB41EA8A2970068FAEB /* SAMTableViewMeetingScheduleListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMTableViewMeetingScheduleListCell.h; sourceTree = "<group>"; };
+		C3EE1FB51EA8A2970068FAEB /* SAMTableViewMeetingScheduleListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMTableViewMeetingScheduleListCell.m; sourceTree = "<group>"; };
+		C3EE1FB91EA8A2A80068FAEB /* SAMTableViewMeetingScheduleListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SAMTableViewMeetingScheduleListCell.xib; sourceTree = "<group>"; };
 		C40059F816BB678000B03041 /* CashPromiseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CashPromiseViewController.h; sourceTree = "<group>"; };
 		C40059F916BB678000B03041 /* CashPromiseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CashPromiseViewController.m; sourceTree = "<group>"; };
 		C416C2B41855BA9B00D29E46 /* SettingUserProfileReg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingUserProfileReg.h; sourceTree = "<group>"; };
@@ -4112,6 +4117,7 @@
 		432B25FF1E121A98000EDFB4 /* TableViewCellView */ = {
 			isa = PBXGroup;
 			children = (
+				C3EE1FB91EA8A2A80068FAEB /* SAMTableViewMeetingScheduleListCell.xib */,
 				C3C627941E933BBA00C94E14 /* SAMTableViewActivityListCell.xib */,
 				432B260D1E122270000EDFB4 /* SAMTableViewActivityDetailCell.xib */,
 			);
@@ -4125,6 +4131,8 @@
 				C3C627921E933BB200C94E14 /* SAMTableViewActivityListCell.m */,
 				432B260B1E122270000EDFB4 /* SAMTableViewActivityDetailCell.h */,
 				432B260C1E122270000EDFB4 /* SAMTableViewActivityDetailCell.m */,
+				C3EE1FB41EA8A2970068FAEB /* SAMTableViewMeetingScheduleListCell.h */,
+				C3EE1FB51EA8A2970068FAEB /* SAMTableViewMeetingScheduleListCell.m */,
 			);
 			name = TableViewCellController;
 			sourceTree = "<group>";
@@ -6542,6 +6550,7 @@
 				1706BD511C7169A40038D1DB /* menu_spaj.png in Resources */,
 				5D59C88E1C16893900F5C028 /* SharedStoryboard.storyboard in Resources */,
 				AA4EF7471C85A4260050CCD8 /* AppIcon-180.png in Resources */,
+				C3EE1FBA1EA8A2A80068FAEB /* SAMTableViewMeetingScheduleListCell.xib in Resources */,
 				C4FCDDE816395F290065D024 /* btn_prospect_home.png in Resources */,
 				4376DF211CD196EC00816BB6 /* check_icon@2x.png in Resources */,
 				17983C331C473373009E2977 /* HealthQuestionPO.storyboard in Resources */,
@@ -7207,6 +7216,7 @@
 				43DA4BE31C770AA90038C92C /* SIMenuTableViewCell.m in Sources */,
 				C30A259D17F3C8D500613A0F /* AddtionalQuestInsured.m in Sources */,
 				C30A259E17F3C8D500613A0F /* Declaration.m in Sources */,
+				C3EE1FB71EA8A2970068FAEB /* SAMTableViewMeetingScheduleListCell.m in Sources */,
 				4399826C1D07D025009CFEB2 /* CFFListingViewController.m in Sources */,
 				C30A259F17F3C8D500613A0F /* eAppCheckList.m in Sources */,
 				C30A25A017F3C8D500613A0F /* eAppMenu.m in Sources */,

@@ -8,13 +8,17 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="BPreplay_Regular.otf">
+        <array key="BPreplay.otf">
             <string>BPreplay</string>
         </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SAMActivityDetailViewController">
             <connections>
+                <outlet property="labelBirthDate" destination="gzo-ms-0ri" id="MfC-Yg-JQ1"/>
+                <outlet property="labelBranchName" destination="0n8-T9-bkF" id="uEH-Ej-vgf"/>
+                <outlet property="labelFullName" destination="BjN-6E-hfQ" id="FB8-C9-VVU"/>
+                <outlet property="labelKCU" destination="iHX-wZ-gfl" id="S4Z-DA-Ehr"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

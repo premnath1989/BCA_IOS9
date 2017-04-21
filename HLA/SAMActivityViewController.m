@@ -83,7 +83,7 @@ Formatter *formatter;
 }
 
 /**
- Called to update progress circle button every time agent go to every module
+ Called to update progress circle button every time agent go to each module
  */
 - (void) UpdateProgress {
     NSDictionary *dictSearch = [[NSDictionary alloc] initWithObjectsAndKeys:_SAMModel.customerID, @"ProspectIndexNo", nil];
@@ -96,7 +96,7 @@ Formatter *formatter;
     [database open];
     
     FMResultSet *s;
-    // We search for customer's CFF that has been completed.
+    // We search for customer's CFF and see if it has been completed.
     s = [database executeQuery:[NSString stringWithFormat:@"select CFFT.* from CFFTransaction CFFT where CFFT.ProspectIndexNo=\"%@\" AND CFFT.CFFStatus=\"Completed\"" ,[dictSearch valueForKey:@"ProspectIndexNo"]]];
     
     while([s next]) { // if found, we update the circle bar to orange to indicate that the process has been completed
@@ -137,6 +137,8 @@ Formatter *formatter;
 -(IBAction)actionScheduleMeeting:(id)sender{
     [samMeetingScheduleVC setModalPresentationStyle:UIModalPresentationFormSheet];
     samMeetingScheduleVC.preferredContentSize = CGSizeMake(703, 306);
+    AppDelegate *appDel = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDel.SAMData = _SAMModel;
     [self presentViewController:samMeetingScheduleVC animated:YES completion:nil];
 }
 

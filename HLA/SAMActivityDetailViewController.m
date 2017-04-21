@@ -8,6 +8,7 @@
 
 #import "SAMActivityDetailViewController.h"
 #import "SAMTableViewActivityDetailCell.h"
+#import "FMDatabase.h"
 
 @interface SAMActivityDetailViewController ()
 
@@ -18,6 +19,10 @@ NSMutableArray *notes;
 @implementation SAMActivityDetailViewController
 
 @synthesize SAMdata;
+@synthesize labelFullName;
+@synthesize labelBirthDate;
+@synthesize labelBranchName;
+@synthesize labelKCU;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -26,11 +31,41 @@ NSMutableArray *notes;
     dbHelper = [[SAMDBHelper alloc] init];
     
     notes = [dbHelper ReadMeetingNoteForSAM:SAMdata._id];
+    NSMutableArray *res = [self LoadSAMMeetingNoteProspectProfile:SAMdata.customerID];
+    
+    [labelFullName setText:SAMdata.customerName];
+//    while([res next]) {
+        [labelBirthDate setText:[res objectAtIndex:0]];
+        [labelBranchName setText:[res objectAtIndex:1]];
+        [labelKCU setText:[res objectAtIndex:2]];
+//    }
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (NSMutableArray *) LoadSAMMeetingNoteProspectProfile: (NSString *) customerID
+{
+    NSMutableArray *arrayProspectDetail = [[NSMutableArray alloc] init];
+    NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsDir = [dirPaths objectAtIndex:0];
+    NSString *databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent:@"hladb.sqlite"]];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:databasePath];
+    [database open];
+    
+    FMResultSet *result = [database executeQuery:@"SELECT p.ProspectDOB, p.BranchName, p.KCU FROM prospect_profile AS p WHERE IndexNo = ?", customerID];
+    
+    while([result next]) {
+        [arrayProspectDetail addObject:[result stringForColumn:@"ProspectDOB"]];
+        [arrayProspectDetail addObject:[result stringForColumn:@"BranchName"]];
+        [arrayProspectDetail addObject:[result stringForColumn:@"KCU"]];
+    }
+    
+    [database close];
+    return arrayProspectDetail;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -42,7 +77,6 @@ NSMutableArray *notes;
 {
     return 1;
 }
-
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {

@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="BPreplay_Regular.ttf">
+        <array key="BPreplay.otf">
             <string>BPreplay</string>
         </array>
     </customFonts>
@@ -107,21 +107,14 @@
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vly-6j-iON">
                                 <rect key="frame" x="882" y="0.0" width="66" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2xU-Rs-CIa">
-                                        <rect key="frame" x="15" y="10" width="37" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Ubah"/>
-                                    </button>
-                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xT0-bj-mbl">
-                                <rect key="frame" x="796" y="0.0" width="78" height="50"/>
+                                <rect key="frame" x="796" y="0.0" width="152" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Next Meeting" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="xe1-2h-urh">
-                                        <rect key="frame" x="5" y="0.0" width="71" height="50"/>
+                                        <rect key="frame" x="5" y="0.0" width="147" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="16"/>
                                         <nil key="highlightedColor"/>
@@ -139,7 +132,6 @@
                 <outlet property="activity" destination="U03-ey-ZFJ" id="aYq-oN-Osr"/>
                 <outlet property="activityDate" destination="hkp-Pg-NlZ" id="jjw-Ni-HP5"/>
                 <outlet property="age" destination="rry-iI-TT9" id="gWk-9x-Yqw"/>
-                <outlet property="buttonEdit" destination="2xU-Rs-CIa" id="14S-YX-Oyb"/>
                 <outlet property="name" destination="174-J4-Tfu" id="jFl-HV-aqA"/>
                 <outlet property="nextMeeting" destination="xe1-2h-urh" id="xvF-Gn-0Bm"/>
                 <outlet property="status" destination="EXL-yO-0R7" id="dsI-5q-bJF"/>

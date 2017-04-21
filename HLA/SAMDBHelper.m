@@ -188,6 +188,8 @@ NSString *databasePath;
         lastID = [NSString stringWithFormat:@"%@", [lastIdResult objectForColumnName:@"indexno"]];
     }
     
+    [database close];
+    
     model = [self InsertSAMDataWithLastID:lastID];
     
     return model;
@@ -229,7 +231,6 @@ NSString *databasePath;
     
     [database close];
     
-    sqlite3_close(contactDB);
     return model;
 }
 
@@ -256,7 +257,7 @@ NSString *databasePath;
     //    }
     //    sqlite3_finalize(statement);
     //}
-    sqlite3_close(contactDB);
+    [database close];
     
     return isSuccess;
 }
@@ -288,6 +289,7 @@ NSString *databasePath;
     }
     
     [database close];
+//    [result close];
     
     return notes;
 }
@@ -305,6 +307,28 @@ NSString *databasePath;
     [database close];
     
     return isSuccess;
+}
+
+- (NSMutableArray *) ReadAllSchedule {
+    
+    NSMutableArray *result = [[NSMutableArray alloc] init];
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent:@"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    FMResultSet *res = [database executeQuery:@"SELECT p.ProspectName, SAM.SAM_NextMeeting FROM SAM_Master AS SAM, prospect_profile AS p WHERE SAM.SAM_CustomerID = p.IndexNo"];
+    
+    while([res next]) {
+        SAMModel *data = [[SAMModel alloc] init];
+        data.customerName = [res objectForColumnName:@"ProspectName"];
+        data.dateNextMeeting = [res objectForColumnName:@"SAM_NextMeeting"];
+        [result addObject:data];
+    }
+    
+    [database close];
+    return result;
 }
 
 @end

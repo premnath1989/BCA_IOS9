@@ -7,11 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SAMDBHelper.h"
+#import "SIDate.h"
 
 @interface SAMMeetingScheduleViewController : UIViewController{
     IBOutlet UIButton *buttonDate;
     IBOutlet UIButton *buttonTime;
+    IBOutlet UITextView *textComment;
+    
+    SAMDBHelper *dbHelper;
+    SIDate *_SIDate;
+    
+    UIPopoverController *_SIDatePopover;
 }
     
+@property (nonatomic, retain) SIDate *SIDate;
+@property (nonatomic, retain) UIPopoverController *SIDatePopover;
 
 @end
