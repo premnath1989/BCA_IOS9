@@ -98,5 +98,19 @@
 	<string>11</string>
 	<key>dbVersion</key>
 	<string>26</string>
+    <key>Fabric</key>
+    <dict>
+        <key>APIKey</key>
+        <string>7421aa692c3984f61e61f163ea77518a072c4341</string>
+        <key>Kits</key>
+        <array>
+            <dict>
+                <key>KitInfo</key>
+                <dict/>
+                <key>KitName</key>
+                <string>Crashlytics</string>
+            </dict>
+        </array>
+    </dict>
 </dict>
 </plist>

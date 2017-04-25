@@ -18,6 +18,8 @@
 #import <CoreData/CoreData.h>
 #import "CFFAPIController.h"
 #import "SPAJSubmissionFiles.h"
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 
 @implementation AppDelegate
 @synthesize indexNo;
@@ -46,6 +48,7 @@ NSString *uatAgentCode;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     isFromSAM = 0;
     //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    [Fabric with:@[[Crashlytics class]]];
     UIViewController *cffListingNavigation=[[CFFListingViewController alloc]initWithNibName:@"CFFListingViewController" bundle:nil];
     self.navController=[[UINavigationController alloc]initWithRootViewController:cffListingNavigation];
     
