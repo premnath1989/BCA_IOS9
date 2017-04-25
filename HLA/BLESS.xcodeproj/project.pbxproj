@@ -806,6 +806,8 @@
 		C3A8D1161833D2B800E65FC9 /* ELP2ndLifeAssuredVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A8D1121833D2B800E65FC9 /* ELP2ndLifeAssuredVC.m */; };
 		C3A8D1171833D2B800E65FC9 /* ELPPolicyOwnerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A8D1141833D2B800E65FC9 /* ELPPolicyOwnerVC.m */; };
 		C3D174B718B766030076F078 /* view.png in Resources */ = {isa = PBXBuildFile; fileRef = C3D174B618B766030076F078 /* view.png */; };
+		C3EE1FBD1EAF03B80068FAEB /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3EE1FBB1EAF03B70068FAEB /* Crashlytics.framework */; };
+		C3EE1FBE1EAF03B80068FAEB /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3EE1FBC1EAF03B70068FAEB /* Fabric.framework */; };
 		C40059FA16BB678000B03041 /* CashPromiseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C40059F916BB678000B03041 /* CashPromiseViewController.m */; };
 		C416C2B61855BA9B00D29E46 /* SettingUserProfileReg.m in Sources */ = {isa = PBXBuildFile; fileRef = C416C2B51855BA9B00D29E46 /* SettingUserProfileReg.m */; };
 		C416C2C11855BBA700D29E46 /* ChangePasswordReg.m in Sources */ = {isa = PBXBuildFile; fileRef = C416C2B81855BBA700D29E46 /* ChangePasswordReg.m */; };
@@ -2438,6 +2440,8 @@
 		C3A8D1131833D2B800E65FC9 /* ELPPolicyOwnerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELPPolicyOwnerVC.h; sourceTree = "<group>"; };
 		C3A8D1141833D2B800E65FC9 /* ELPPolicyOwnerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELPPolicyOwnerVC.m; sourceTree = "<group>"; };
 		C3D174B618B766030076F078 /* view.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = view.png; sourceTree = "<group>"; };
+		C3EE1FBB1EAF03B70068FAEB /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		C3EE1FBC1EAF03B70068FAEB /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		C40059F816BB678000B03041 /* CashPromiseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CashPromiseViewController.h; sourceTree = "<group>"; };
 		C40059F916BB678000B03041 /* CashPromiseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CashPromiseViewController.m; sourceTree = "<group>"; };
 		C416C2B41855BA9B00D29E46 /* SettingUserProfileReg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingUserProfileReg.h; sourceTree = "<group>"; };
@@ -2930,7 +2934,9 @@
 				DE06FFD21CABCB8200E4DE3A /* libFTPFileSynchronization.a in Frameworks */,
 				C4E64379171669D2001DF8F8 /* MessageUI.framework in Frameworks */,
 				C486D9E9163E6762009F8F21 /* CoreMedia.framework in Frameworks */,
+				C3EE1FBE1EAF03B80068FAEB /* Fabric.framework in Frameworks */,
 				C486D9E7163E675C009F8F21 /* MobileCoreServices.framework in Frameworks */,
+				C3EE1FBD1EAF03B80068FAEB /* Crashlytics.framework in Frameworks */,
 				C486D9E5163E6756009F8F21 /* SystemConfiguration.framework in Frameworks */,
 				C486D9E1163E6741009F8F21 /* CoreLocation.framework in Frameworks */,
 				C486D9DF163E6739009F8F21 /* AVFoundation.framework in Frameworks */,
@@ -5340,6 +5346,8 @@
 		C4E9D1851612C64900016053 = {
 			isa = PBXGroup;
 			children = (
+				C3EE1FBB1EAF03B70068FAEB /* Crashlytics.framework */,
+				C3EE1FBC1EAF03B70068FAEB /* Fabric.framework */,
 				4394FD7C1DAF0A2C0084F6F3 /* GetAllData.json */,
 				43F7C3161C9D409D0074F464 /* Formatter */,
 				43FA6C151C87CD5D0098BA47 /* HTML USED */,
@@ -6339,6 +6347,7 @@
 				C4E9D18D1612C64900016053 /* Frameworks */,
 				C4E9D18E1612C64900016053 /* Resources */,
 				16CB3F911B12C03300C048BD /* ShellScript */,
+				C3EE1FBF1EAF05D10068FAEB /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -6848,6 +6857,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/database/gendb.sh\"";
+		};
+		C3EE1FBF1EAF05D10068FAEB /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PROJECT_DIR}/Fabric.framework/run\" 7421aa692c3984f61e61f163ea77518a072c4341 bbca94a646f5134b2a2b873cd582434d0e62c30735fbc1db2a8f6c9b7a805434";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -7605,6 +7627,7 @@
 					"$(SRCROOT)",
 					"\"$(SRCROOT)/CustomUI\"",
 					"\"$(SRCROOT)/eSignature/eSign/eSignFramework\"",
+					"$(PROJECT_DIR)",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -7663,6 +7686,7 @@
 					"$(SRCROOT)",
 					"\"$(SRCROOT)/CustomUI\"",
 					"\"$(SRCROOT)/eSignature/eSign/eSignFramework\"",
+					"$(PROJECT_DIR)",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -7761,6 +7785,7 @@
 					"$(SRCROOT)",
 					"\"$(SRCROOT)/CustomUI\"",
 					"\"$(SRCROOT)/eSignature/eSign/eSignFramework\"",
+					"$(PROJECT_DIR)",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
