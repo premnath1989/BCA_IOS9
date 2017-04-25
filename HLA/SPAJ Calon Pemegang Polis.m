@@ -578,6 +578,36 @@
                 }
             }
             
+            NSString *SINO = [modelSPAJTransaction getSPAJTransactionData:@"SPAJSINO" StringWhereName:@"SPAJEappNumber" StringWhereValue:[delegate voidGetEAPPNumber]];
+            NSDictionary* dictPOData = [[NSDictionary alloc ]initWithDictionary:[modelSIPData getPO_DataFor:SINO]];
+            NSString* stringRelation = [formatter getRelationNameForHtml:[dictPOData valueForKey:@"RelWithLA"]];
+            
+            if([stringRelation isEqualToString:@"self"] && [stringParentSection isEqualToString:@"PO"]) { // Save polich holder field value as prospective insured
+                if ([arraySPAJAnswers count]>0){
+                    for (int i = 0;i<[arraySPAJAnswers count];i++){
+                        NSMutableDictionary* tempDict = [[NSMutableDictionary alloc] initWithDictionary:[arraySPAJAnswers objectAtIndex:i]];
+                        
+                        NSString *temp = [tempDict objectForKey:@"elementID"];
+                        temp = [temp stringByReplacingOccurrencesOfString:@"PolicyHolder" withString:@"ProspectiveInsured"];
+                        [tempDict setObject:temp forKey:@"elementID"];
+                        
+                        [tempDict setObject:[[modelSPAJHtml selectActiveHtmlForSection:@"TR"] valueForKey:@"SPAJHtmlID"] forKey:@"SPAJHtmlID"];
+
+                        [tempDict setObject:spajTransactionID forKey:@"SPAJTransactionID"];
+                        //[tempDict setObject:cffID forKey:@"SPAJID"];
+                        //[tempDict setObject:[prospectProfileID stringValue] forKey:@"CustomerID"];
+                        [tempDict setObject:@"TR" forKey:@"SPAJHtmlSection"];
+                        
+                        int indexNo = [modelSPAJAnswers voidGetDuplicateRowID:tempDict];
+                        
+                        if (indexNo>0){
+                            [tempDict setObject:[NSNumber numberWithInt:indexNo] forKey:@"IndexNo"];
+                        }
+                        [modifiedArrayCFFAnswers addObject:tempDict];
+                    }
+                }
+            }
+            
             NSMutableDictionary* finalArrayDictionary = [[NSMutableDictionary alloc]init];
             [finalArrayDictionary setObject:modifiedArrayCFFAnswers forKey:@"SPAJAnswers"];
             

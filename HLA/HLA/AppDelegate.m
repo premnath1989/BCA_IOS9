@@ -48,7 +48,7 @@ NSString *uatAgentCode;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     isFromSAM = 0;
     //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
-    [Fabric with:@[[Crashlytics class]]];
+    
     UIViewController *cffListingNavigation=[[CFFListingViewController alloc]initWithNibName:@"CFFListingViewController" bundle:nil];
     self.navController=[[UINavigationController alloc]initWithRootViewController:cffListingNavigation];
     
@@ -86,6 +86,7 @@ NSString *uatAgentCode;
 #endif
     DBUpdater *dbupdater = [[DBUpdater alloc]init];
     [dbupdater updateDatabase];
+    [Fabric with:@[[Crashlytics class]]];
     return YES;
 }
 
