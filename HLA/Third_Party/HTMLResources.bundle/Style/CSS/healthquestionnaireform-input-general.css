@@ -118,8 +118,12 @@ input.LowerCase, textarea.LowerCase {
 }
 
 input.GeneralMediumFix {
-  max-width: 231px;
+  max-width: 217px;
   width: 231px;
+}
+
+input.GeneralShort {
+  width: 62px;
 }
 
 /* CHECKBOX */
