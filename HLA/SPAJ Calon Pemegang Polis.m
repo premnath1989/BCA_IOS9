@@ -645,6 +645,15 @@
         stringWhere = [NSString stringWithFormat:@"where CustomerID=%@ and SPAJID=%@ and SPAJTransactionID=%@ and SPAJHtmlSection='%@'",@"1",@"1",SPAJTransactionID,stringParentSection];
     }
     
+    NSString *SINO = [modelSPAJTransaction getSPAJTransactionData:@"SPAJSINO" StringWhereName:@"SPAJEappNumber" StringWhereValue:[delegate voidGetEAPPNumber]];
+    NSDictionary* dictPOData = [[NSDictionary alloc ]initWithDictionary:[modelSIPData getPO_DataFor:SINO]];
+    NSString* stringRelation = [formatter getRelationNameForHtml:[dictPOData valueForKey:@"RelWithLA"]];
+    
+    if([stringRelation isEqualToString:@"self"] && [stringParentSection isEqualToString:@"TR"]) {
+        [webview stringByEvaluatingJavaScriptFromString:@"document.getElementById(\"RadioButtonProspectiveInsuredForeignerWNI\").disabled = true;"];
+        [webview stringByEvaluatingJavaScriptFromString:@"document.getElementById(\"RadioButtonProspectiveInsuredForeignerWNA\").disabled = true;"];
+    }
+    
     /*if ([stringSection isEqualToString:@"KS_PH"]||[stringSection isEqualToString:@"KS_IN"]){
         stringWhere = [NSString stringWithFormat:@"where CustomerID=%@ and SPAJID=%@ and SPAJTransactionID=%@ and SPAJHtmlSection in ('%@','PO','TR')",@"1",@"1",SPAJTransactionID,stringSection];
     }
