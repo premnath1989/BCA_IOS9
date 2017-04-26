@@ -650,8 +650,10 @@
     NSString* stringRelation = [formatter getRelationNameForHtml:[dictPOData valueForKey:@"RelWithLA"]];
     
     if([stringRelation isEqualToString:@"self"] && [stringParentSection isEqualToString:@"TR"]) {
-        [webview stringByEvaluatingJavaScriptFromString:@"document.getElementById(\"RadioButtonProspectiveInsuredForeignerWNI\").disabled = true;"];
-        [webview stringByEvaluatingJavaScriptFromString:@"document.getElementById(\"RadioButtonProspectiveInsuredForeignerWNA\").disabled = true;"];
+//        [webview stringByEvaluatingJavaScriptFromString:@"document.getElementById(\"RadioButtonProspectiveInsuredForeignerWNI\").disabled = true;"];
+//        [webview stringByEvaluatingJavaScriptFromString:@"document.getElementById(\"RadioButtonProspectiveInsuredForeignerWNA\").disabled = true;"];
+        
+        [webview stringByEvaluatingJavaScriptFromString:@"disableAllInput(true);"];
     }
     
     /*if ([stringSection isEqualToString:@"KS_PH"]||[stringSection isEqualToString:@"KS_IN"]){
