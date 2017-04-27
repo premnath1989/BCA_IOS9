@@ -656,12 +656,18 @@
     NSString *SINO = [modelSPAJTransaction getSPAJTransactionData:@"SPAJSINO" StringWhereName:@"SPAJEappNumber" StringWhereValue:[delegate voidGetEAPPNumber]];
     NSDictionary* dictPOData = [[NSDictionary alloc ]initWithDictionary:[modelSIPData getPO_DataFor:SINO]];
     NSString* stringRelation = [formatter getRelationNameForHtml:[dictPOData valueForKey:@"RelWithLA"]];
+    int clientID = [[dictPOData valueForKey:@"PO_ClientID"] intValue];
+    
+    ModelProspectProfile *prospect = [[ModelProspectProfile alloc] init];
+    NSString *nationality = [prospect selectProspectData:@"NATIONALITY" ProspectIndex:clientID];
     
     if([stringRelation isEqualToString:@"self"] && [stringParentSection isEqualToString:@"TR"]) {
-//        [webview stringByEvaluatingJavaScriptFromString:@"document.getElementById(\"RadioButtonProspectiveInsuredForeignerWNI\").disabled = true;"];
-//        [webview stringByEvaluatingJavaScriptFromString:@"document.getElementById(\"RadioButtonProspectiveInsuredForeignerWNA\").disabled = true;"];
-        
         [webview stringByEvaluatingJavaScriptFromString:@"disableAllInput(true);"];
+    }
+    
+    if([nationality containsString:@"INDONESIA"]) {
+        [webview stringByEvaluatingJavaScriptFromString:@"document.getElementById(\"RadioButtonPolicyHolderForeignerWNI\").checked = true;"];
+        [webview stringByEvaluatingJavaScriptFromString:@"document.getElementById(\"RadioButtonProspectiveInsuredForeignerWNI\").checked = true;"];
     }
     
     /*if ([stringSection isEqualToString:@"KS_PH"]||[stringSection isEqualToString:@"KS_IN"]){
