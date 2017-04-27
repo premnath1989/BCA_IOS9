@@ -94,7 +94,7 @@ input.Multi, textarea.Multi {
 }
 
 input.LowerCase {
-  text-transform: lowercase;
+  text-transform: none;
 }
 
 input:required, textarea:required {
