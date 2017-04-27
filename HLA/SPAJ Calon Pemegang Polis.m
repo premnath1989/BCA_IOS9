@@ -492,6 +492,10 @@
 - (void)savetoDB:(NSDictionary *)params{
     [delegate setRightButtonEnable:NO];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSString *SINO = [modelSPAJTransaction getSPAJTransactionData:@"SPAJSINO" StringWhereName:@"SPAJEappNumber" StringWhereValue:[delegate voidGetEAPPNumber]];
+        NSDictionary* dictPOData = [[NSDictionary alloc ]initWithDictionary:[modelSIPData getPO_DataFor:SINO]];
+        NSString* stringRelation = [formatter getRelationNameForHtml:[dictPOData valueForKey:@"RelWithLA"]];
+        
         if ([stringParentSection isEqualToString:@"PM"]){
             NSString *stringWhere = [NSString stringWithFormat:@"where SPAJHtmlSection='PM' and SPAJTransactionID=%i",[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
             [modelSPAJAnswers deleteSPAJAnswers:stringWhere];
@@ -500,6 +504,12 @@
         else if ([stringParentSection isEqualToString:@"PO"]){
             NSString *stringWhere = [NSString stringWithFormat:@"where SPAJHtmlSection='PO' and SPAJTransactionID=%i",[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
             [modelSPAJAnswers deleteSPAJAnswers:stringWhere];
+            
+            // We need to remove "Tertanggung" saved value if PO and TR is the same person, so later we can save new value to db
+            if([stringRelation isEqualToString:@"self"]) {
+                NSString *stringWhere = [NSString stringWithFormat:@"where SPAJHtmlSection='TR' and SPAJTransactionID=%i",[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
+                [modelSPAJAnswers deleteSPAJAnswers:stringWhere];
+            }
         }
         
         else if ([stringParentSection isEqualToString:@"TR"]){
@@ -578,9 +588,7 @@
                 }
             }
             
-            NSString *SINO = [modelSPAJTransaction getSPAJTransactionData:@"SPAJSINO" StringWhereName:@"SPAJEappNumber" StringWhereValue:[delegate voidGetEAPPNumber]];
-            NSDictionary* dictPOData = [[NSDictionary alloc ]initWithDictionary:[modelSIPData getPO_DataFor:SINO]];
-            NSString* stringRelation = [formatter getRelationNameForHtml:[dictPOData valueForKey:@"RelWithLA"]];
+            
             
             if([stringRelation isEqualToString:@"self"] && [stringParentSection isEqualToString:@"PO"]) { // Save polich holder field value as prospective insured
                 if ([arraySPAJAnswers count]>0){

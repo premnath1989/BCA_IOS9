@@ -16,6 +16,7 @@
 #import "ModelSPAJSubmitTracker.h"
 #import "Alert.h"
 #import "AllAboutPDFGeneration.h"
+#import <Crashlytics/Crashlytics.h>
 
 @interface SPAJFilesViewController ()<ProgressBarDelegate,UIScrollViewDelegate>{
     ProgressBar *progressBar;
@@ -400,6 +401,8 @@
                                                      JSONObjectWithData:data //1
                                                      options:NSJSONReadingMutableContainers
                                                      error:&error];
+                        //Logging PostUpload return
+                        CLS_LOG(@"UpdateOnPostUploadData called on SPAJ: %@, returned json : %@", stringSPAJNumber, json);
                         NSLog(@"%@", json);
                         [buttonSubmit setEnabled:YES];
                         [modelSPAJTransaction updateSPAJTransaction:@"SPAJStatus" StringColumnValue:@"Submitted" StringWhereName:@"SPAJEappNumber" StringWhereValue:[dictTransaction valueForKey:@"SPAJEappNumber"]];
