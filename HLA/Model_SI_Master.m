@@ -194,7 +194,7 @@
     return dict;
 }
 
--(NSDictionary *)getIlustrationOnlyResubmissionData:(NSString *)orderBy Method:(NSString *)sortMethod{
+-(NSDictionary *)getIlustrationOnlyResubmissionData:(NSString *)customerID Order:(NSString *)orderBy Method:(NSString *)sortMethod{
     NSDictionary *dict;
     
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
@@ -215,9 +215,9 @@
     NSMutableArray* arraySigned=[[NSMutableArray alloc] init];
     
     // FMResultSet *s = [database executeQuery:@"SELECT sim.*, po.ProductName,po.PO_Name,premi.Sum_Assured FROM SI_master sim, SI_PO_Data po,SI_Premium premi WHERE sim.SINO = po.SINO and sim.SINO = premi.SINO"];
-    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select sim.*,ifnull(sim.SumAssured,'0') as SumAssuredNonNull, po.ProductName,po.PO_Name,ifnull(sip.Sum_Assured,0) as Sum_Assured, po.QuickQuote FROM SI_master sim left join SI_PO_Data po on sim.SINO=po.SINO left join SI_Premium sip on sim.SINO=sip.SINO where sim.Resubmission=1 group by sim.ID order by %@ %@",orderBy,sortMethod]];
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select sim.*,ifnull(sim.SumAssured,'0') as SumAssuredNonNull, po.ProductName,po.PO_Name,ifnull(sip.Sum_Assured,0) as Sum_Assured, po.QuickQuote FROM SI_master sim left join SI_PO_Data po on sim.SINO=po.SINO left join SI_Premium sip on sim.SINO=sip.SINO WHERE sim.Resubmission=1 AND po.PO_ClientID = %@ group by sim.ID order by %@ %@", customerID,orderBy,sortMethod]];
     
-    NSLog(@"query %@",[NSString stringWithFormat:@"select sim.*, po.ProductName,po.PO_Name,ifnull(sip.Sum_Assured,0) FROM SI_master sim left join SI_PO_Data po on sim.SINO=po.SINO left join SI_Premium sip on sim.SINO=sip.SINO where sim.Resubmission=1 group by sim.ID order by %@ %@",orderBy,sortMethod]);
+    NSLog(@"query %@",[NSString stringWithFormat:@"select sim.*, po.ProductName,po.PO_Name,ifnull(sip.Sum_Assured,0) FROM SI_master sim left join SI_PO_Data po on sim.SINO=po.SINO left join SI_Premium sip on sim.SINO=sip.SINO where sim.Resubmission=1 AND po.PO_ClientID = %@ group by sim.ID order by %@ %@",customerID, orderBy,sortMethod]);
     
     while ([s next]) {
         NSString *stringSINo = [NSString stringWithFormat:@"%@",[s stringForColumn:@"SINO"]];

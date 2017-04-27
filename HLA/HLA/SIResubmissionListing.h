@@ -77,6 +77,7 @@
 @property (nonatomic, copy) NSString *OrderBy;
 @property (nonatomic, copy) NSString *selectedSINO;
 @property (nonatomic, copy) NSString *selectedSPAJ;
+@property (nonatomic, copy) NSString *selectedCustomerId;
 @property NSInteger selectedId;
 @property (retain, nonatomic) NSMutableArray *SINO;
 @property (retain, nonatomic) NSMutableArray *DateCreated;

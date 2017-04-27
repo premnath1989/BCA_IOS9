@@ -202,6 +202,7 @@
         siResubmissionListingViewController.modalPresentationStyle = UIModalPresentationOverFullScreen;
         NSMutableArray *test = [arraySPAJTransaction objectAtIndex:sender.tag];
         [siResubmissionListingViewController setSelectedSPAJ: [test valueForKey:@"SPAJNumber"]];
+        [siResubmissionListingViewController setSelectedCustomerId: [test valueForKey:@"IndexNo"]];
         [self presentViewController:siResubmissionListingViewController animated:YES completion:nil];
     }
 

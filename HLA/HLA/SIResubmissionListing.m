@@ -44,7 +44,7 @@
 @synthesize btnSortBy;
 @synthesize outletDateTo;
 @synthesize txtSINO,CustomerCode;
-@synthesize selectedSINO, selectedSPAJ;
+@synthesize selectedSINO, selectedSPAJ, selectedCustomerId;
 @synthesize selectedId;
 @synthesize txtLAName, SINO,FilteredBasicSA,FilteredDateCreated,FilteredName;
 @synthesize FilteredSINO,FilteredPlanName,FilteredSIStatus,SIStatus,FilteredCustomerCode;
@@ -196,11 +196,11 @@ static const int UPLOAD_DONE_ALERT_TAG = 101;
                             @"select A.Sino, B.createdAT, name, planname, basicSA, F.Status, A.CustCode, B.SIVersion, B.SIStatus, G.ProspectName, G.QQFlag "
                             " from trad_lapayor as A, trad_details as B, clt_profile as C, trad_sys_profile as D, eProposal as E, eProposal_Status as F, prospect_profile as G, eApp_Listing as H "
                             " where A.sino = B.sino and A.CustCode = C.custcode and B.plancode = D.plancode AND A.Sequence = 1 AND A.ptypeCode = \"LA\" AND E.Sino = A.Sino "
-                            " AND H.Status = F.StatusCode AND C.IndexNo = G.IndexNo AND E.eproposalNo = H.proposalNo "
+                            " AND H.Status = F.StatusCode AND C.IndexNo = G.IndexNo AND E.eproposalNo = H.proposalNo AND G.IndexNo = %@ "
                             "union "
                             "select A.Sino, B.createdAT, name, planname, basicSA, 'Not Created', A.CustCode, B.SIVersion, B.SIStatus, E.ProspectName, E.QQFlag   from Trad_lapayor as A, "
                             "Trad_details as B, clt_profile as C, trad_sys_profile as D, prospect_profile as E  where A.sino = B.sino and A.CustCode = C.custcode and B.plancode = D.plancode "
-                            "AND A.Sequence = 1 AND A.ptypeCode = 'LA' AND A.sino not in (select sino from eProposal)  AND C.IndexNo = E.IndexNo "];
+                            "AND A.Sequence = 1 AND A.ptypeCode = 'LA' AND A.sino not in (select sino from eProposal)  AND C.IndexNo = E.IndexNo AND E.IndexNo = %@ ", selectedCustomerId, selectedCustomerId];
             
             if ([txtSINO.text length]>0) {
                 SIListingSQL = [SIListingSQL stringByAppendingFormat:@" AND A.Sino like \"%%%@%%\"", txtSINO.text ];
@@ -862,7 +862,7 @@ static const int UPLOAD_DONE_ALERT_TAG = 101;
         dictIlustrationData=[[NSDictionary alloc]initWithDictionary:[_modelSIMaster searchSIOnlyResubmissionListingByName:txtSINO.text POName:txtLAName.text Order:sortedBy Method:sortMethod DateFrom:DBDateFrom2 DateTo:DBDateTo2]];
     }
     else{
-        dictIlustrationData=[[NSDictionary alloc]initWithDictionary:[_modelSIMaster getIlustrationOnlyResubmissionData:sortedBy Method:sortMethod]];
+        dictIlustrationData=[[NSDictionary alloc]initWithDictionary:[_modelSIMaster getIlustrationOnlyResubmissionData:selectedCustomerId Order:sortedBy Method:sortMethod]];
     }
     
     

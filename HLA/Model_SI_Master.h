@@ -16,7 +16,7 @@
 }
 -(void)saveIlustrationMaster:(NSDictionary *)dataIlustration;
 -(NSDictionary *)getIlustrationata:(NSString *)orderBy Method:(NSString *)sortMethod;
--(NSDictionary *)getIlustrationOnlyResubmissionData:(NSString *)orderBy Method:(NSString *)sortMethod;
+-(NSDictionary *)getIlustrationOnlyResubmissionData:(NSString *)customerID Order:(NSString *)orderBy Method:(NSString *)sortMethod;
 -(void)updateIlustrationMaster:(NSDictionary *)dataIlustration;
 -(int)getMasterCount:(NSString *)SINo;
 
