@@ -952,24 +952,32 @@
     
     if (([stringSection isEqualToString:@"KS_PH"])||([stringSection isEqualToString:@"KS_TR"])||([stringSection isEqualToString:@"KS_IN"])){
         NSString *SINO = [modelSPAJTransaction getSPAJTransactionData:@"SPAJSINO" StringWhereName:@"SPAJEappNumber" StringWhereValue:[delegate voidGetEAPPNumber]];
+        
         NSDictionary* dictPOData = [[NSDictionary alloc ]initWithDictionary:[modelSIPData getPO_DataFor:SINO]];
+        
         NSString* stringRelation = [formatter getRelationNameForHtml:[dictPOData valueForKey:@"RelWithLA"]];
+        NSString* age = [dictPOData valueForKey:@"LA_Age"];
         
         [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"CheckRelationshipStatus('%@');",stringRelation]];
         
         if ([stringSection isEqualToString:@"KS_PH"]){
             NSString* stringWhere = [NSString stringWithFormat:@"where elementID ='RadioButtonPolicyHolderSex' and SPAJTransactionID = %i and SPAJHtmlSection ='PO'",[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
+            
             NSString* stringValue =[modelSPAJAnswers selectSPAJAnswersData:@"Value" StringWhere:stringWhere];
         
-            NSString* jsString = [NSString stringWithFormat:@"stringRelationshipStatus = '%@';",stringRelation];
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        11  NSString* jsString = [NSString stringWithFormat:@"stringRelationshipStatus = '%@';",stringRelation];
             [webview stringByEvaluatingJavaScriptFromString:jsString];
             
             [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"setFemaleQuestionForHealthQuestionnaire('%@');",stringValue]];
+            
+            [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"setChildrenQuestionForHealthQuestionnaire('%@');",age]];
         }
         else if ([stringSection isEqualToString:@"KS_IN"]){
             NSString* stringWhere = [NSString stringWithFormat:@"where elementID ='RadioButtonProspectiveInsuredSex' and SPAJTransactionID = %i and SPAJHtmlSection ='TR'",[[dictTransaction valueForKey:@"SPAJTransactionID"] intValue]];
             NSString* stringValue =[modelSPAJAnswers selectSPAJAnswersData:@"Value" StringWhere:stringWhere];
             [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"setFemaleQuestionForHealthQuestionnaire('%@');",stringValue]];
+            
+            [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"setChildrenQuestionForHealthQuestionnaire('%@');",age]];
         }
         
         dictPOData = nil;
