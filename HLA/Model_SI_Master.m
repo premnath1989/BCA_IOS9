@@ -317,7 +317,7 @@
     NSMutableArray* arrayEdit=[[NSMutableArray alloc] init];
     NSMutableArray* arraySigned=[[NSMutableArray alloc] init];
     
-    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select sim.*, po.ProductName,po.PO_Name,ifnull(sip.Sum_Assured,0) as Sum_Assured, po.QuickQuote FROM SI_Master sim left join SI_PO_Data po on sim.SINO=po.SINO left join SI_Premium sip on sim.SINO=sip.SINO where sim.IllustrationSigned=0 and po.QuickQuote=0 and sim.Resubmission!=1 and po.SINO not in (select SPAJSINO from SPAJTransaction) group by sim.ID order by %@ %@",orderBy,sortMethod]];
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select sim.*, po.ProductName,po.PO_Name,ifnull(sip.Sum_Assured,0) as Sum_Assured, po.QuickQuote FROM SI_Master sim left join SI_PO_Data po on sim.SINO=po.SINO left join SI_Premium sip on sim.SINO=sip.SINO where sim.IllustrationSigned=0 and po.QuickQuote=0 and ifnull(sim.Resubmission, 0)=0 and po.SINO not in (select SPAJSINO from SPAJTransaction) group by sim.ID order by %@ %@",orderBy,sortMethod]];
     
     NSLog(@"query %@",[NSString stringWithFormat:@"select sim.*, po.ProductName,po.PO_Name,ifnull(sip.Sum_Assured,0) FROM SI_master sim left join SI_PO_Data po on sim.SINO=po.SINO left join SI_Premium sip on sim.SINO=sip.SINO group by sim.ID order by %@ %@",orderBy,sortMethod]);
     
