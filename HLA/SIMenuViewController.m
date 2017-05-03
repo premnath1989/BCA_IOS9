@@ -59,7 +59,7 @@
 @end
 @implementation SIMenuViewController
 
-@synthesize outletSaveAs, SaveSINO;
+@synthesize outletSaveAs, outletDuplicate, SaveSINO;
 @synthesize myTableView, SIshowQuotation;
 @synthesize RightView,EAPPorSI;
 @synthesize ListOfSubMenu,SelectedRow;
@@ -80,6 +80,7 @@
 id RiderCount;
 @synthesize isNewSI;
 @synthesize planName;
+@synthesize isResubmission;
 
 const NSString * SUM_MSG_HLACP = @"Guaranteed Yearly Income";
 const NSString * SUM_MSG_L100 = @"Basic Sum Assured";
@@ -164,9 +165,14 @@ BOOL isFirstLoad;
         
         label = nil, label2 = nil;
     }
+    
+    outletDuplicate.layer.cornerRadius = 5;
+    [outletDuplicate.layer setMasksToBounds:YES];
     CustomColor = nil;
     
     [self geteProposalStatus];
+    
+    [self setResubmission:[dictionaryPOForInsert valueForKey:@"SINO"]];
     
     if (![[self.EAPPorSI description] isEqualToString:@"eAPP"]) {
         if ([eProposalStatus isEqualToString:@"Confirmed"] || [eProposalStatus isEqualToString:@"Submitted"] || [eProposalStatus isEqualToString:@"Received"] || [eProposalStatus isEqualToString:@"Failed"]  ) {
@@ -226,9 +232,18 @@ BOOL isFirstLoad;
     //disable all text fields
     if([EditMode caseInsensitiveCompare:@"0"] != NSOrderedSame){
         outletSaveAs.hidden = YES;
+        outletDuplicate.hidden = YES;
     }else{
         outletSaveAs.hidden = NO;
+        outletDuplicate.hidden = NO;
     }
+}
+
+- (void)setResubmission: (NSString *)SINO
+{
+    LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
+    NSString *resubmit = [loginDB IllustrationIsResubmission:SINO];
+    isResubmission = [resubmit isEqualToString:@"1"] ? YES : NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -371,6 +386,9 @@ BOOL isFirstLoad;
             lastActiveController = self.SecondLAController;
         } else {
             //self.SecondLAController.requestSINo = getSINo;
+            if([eProposalStatus isEqualToString: @"Resubmission"]) {
+                self.SecondLAController.isResubmission = YES;
+            }
             [self.SecondLAController setQuickQuoteEnabled:quickQuoteEnabled];
             [self.SecondLAController setElementActive:quickQuoteEnabled];
             self.SecondLAController.requestSINo = [self.requestSINo description];
@@ -382,6 +400,7 @@ BOOL isFirstLoad;
         previousPath = selectedPath;
         blocked = NO;
         //[self.SecondLAController setPoDictionaryPO:dictionaryPOForInsert];
+        
         [self.SecondLAController setPODictionaryFromRoot:dictionaryPOForInsert originalRelation:[dictionaryPOForInsert valueForKey:@"originalRelation"]];
         [self hideSeparatorLine];
         //[myTableView reloadData];
@@ -691,6 +710,11 @@ BOOL isFirstLoad;
     
 }
 
+-(void)LoadViewControllerResubmission:(BOOL) isResubmission {
+    [self LoadViewController];
+    self.LAController.isResubmission = isResubmission;
+}
+
 -(void)LoadViewController
 {
     if (_LAController == nil) {
@@ -704,11 +728,13 @@ BOOL isFirstLoad;
         self.LAController.requestSINo = [self.requestSINo description];
         self.LAController.requesteProposalStatus = eProposalStatus;
         self.LAController.EAPPorSI = [self.EAPPorSI description];
+        
         [self.LAController.view removeFromSuperview];
         [self.RightView addSubview:self.LAController.view];
     }
     lastActiveController = self.LAController;
     [_LAController processLifeAssured];
+    
     blocked = NO;
     selectedPath = [NSIndexPath indexPathForRow:0 inSection:0];
     previousPath = [NSIndexPath indexPathForRow:0 inSection:0];
@@ -1150,15 +1176,16 @@ BOOL isFirstLoad;
                 
                 //update SI created date for newSiNo
                 [_modelSIPOData updatePODataDate:newSiNo Date:[formatter getDateToday:@"dd/MM/yyyy"]];
-                [_modelSIPOData updatePODataResubmission:newSiNo isResubmission:@"1"];
                 [_modelSIMaster updateIlustrationMasterDate:newSiNo];
                 [_modelSIPremium updatePremiumDate:newSiNo];
                 
                 getSINo = newSiNo;
                 self.requestSINo = getSINo;
                 outletSaveAs.hidden = YES;
+                outletDuplicate.hidden = YES;
                 [dictionaryPOForInsert setValue:getSINo forKey:@"SINO"];
                 [_LAController updateSINO:getSINo];
+                
                 [self LoadViewController];
                 [_LAController loadDataAfterSaveAs:newSiNo];
                 arrayIntValidate = [[NSMutableArray alloc] initWithObjects:@"0",@"0",@"0",@"0", nil];                
@@ -1172,7 +1199,76 @@ BOOL isFirstLoad;
                 break;
         }
 
-    }else if (alertView.tag == 1001 && buttonIndex == 0) {
+    }else if(alertView.tag == 5001){ // Duplicate AlertView
+        switch (buttonIndex) {
+            case 0: // OK Button
+            {
+                NSString *oldSiNo = [dictionaryPOForInsert valueForKey:@"SINO"];
+                NSString *newSiNo = [self generateSINO];
+                NSString *PlanType = [dictionaryPOForInsert valueForKey:@"ProductName"]?:_LAController.NamaProduk.currentTitle;
+                if ([dictionaryPOForInsert count]>0){
+                    oldSiNo = [dictionaryPOForInsert valueForKey:@"SINO"];
+                    PlanType = [dictionaryPOForInsert valueForKey:@"ProductName"];
+                }
+                else{
+                    oldSiNo = unitLinkedSINumber;
+                    //PlanType = @"BCA Life Unit Linked";
+                    PlanType = @"BCA Life Proteksi & Investasiku";
+                }
+                
+                if([PlanType isEqualToString:@"BCA Life Heritage Protection"]){
+                    
+                    LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
+                    [loginDB duplicateRow:@"SI_Master" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
+                    [loginDB duplicateRow:@"SI_Premium" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
+                    [loginDB duplicateRow:@"SI_PO_Data" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
+                }
+                else if([PlanType isEqualToString:@"BCA Life Unit Linked"]||[PlanType isEqualToString:@"BCA Life Proteksi & Investasiku"]){
+                    LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
+                    [loginDB duplicateRow:@"SI_Master" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
+                    [loginDB duplicateRow:@"SI_UL_BasicPlan" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
+                    [loginDB duplicateRow:@"SI_UL_FundAllocation" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
+                    [loginDB duplicateRow:@"SI_UL_Rider" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
+                    [loginDB duplicateRow:@"SI_UL_SpecialOption" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
+                    [loginDB duplicateRow:@"SI_PO_Data" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
+                }
+                else{
+                    NSString *oldSiNo = [dictionaryPOForInsert valueForKey:@"SINO"];
+                    NSString *newSiNo = [self generateSINO];
+                    
+                    LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
+                    [loginDB duplicateRow:@"SI_Master" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
+                    [loginDB duplicateRow:@"SI_Premium" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
+                    [loginDB duplicateRow:@"SI_PO_Data" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
+                    [loginDB duplicateRow:@"SI_Temp_Trad_Raider" param:@"SINO" oldValue:oldSiNo newValue:newSiNo];
+                }
+                
+                //update SI created date for newSiNo
+                [_modelSIPOData updatePODataDate:newSiNo Date:[formatter getDateToday:@"dd/MM/yyyy"]];
+                [_modelSIPOData updatePODataResubmission:newSiNo isResubmission:@"1"];
+                [_modelSIMaster updateIlustrationMasterDate:newSiNo];
+                [_modelSIPremium updatePremiumDate:newSiNo];
+                
+                getSINo = newSiNo;
+                self.requestSINo = getSINo;
+                outletSaveAs.hidden = YES;
+                outletDuplicate.hidden = YES;
+                [dictionaryPOForInsert setValue:getSINo forKey:@"SINO"];
+                [_LAController updateSINO:getSINo];
+                [self LoadViewController];
+                [_LAController loadDataAfterSaveAs:newSiNo];
+                arrayIntValidate = [[NSMutableArray alloc] initWithObjects:@"0",@"0",@"0",@"0", nil];
+            }
+                break;
+            case 1:
+            {
+                // Do something for button #2
+                NSLog(@"cancel");
+            }
+                break;
+        }
+        
+    } else if (alertView.tag == 1001 && buttonIndex == 0) {
         saved = YES;
         _SecondLAController = nil;
         
@@ -2558,9 +2654,18 @@ BOOL isFirstLoad;
 				const char *temp = (const char *)sqlite3_column_text(statement, 0);
                 eProposalStatus = temp == NULL ? @"NotFound" : [[NSString alloc] initWithUTF8String:temp];
             } else {
-				eProposalStatus = @"NotFound";
+                eProposalStatus = @"NotFound";
 			}
 			
+            sqlite3_finalize(statement);
+        }
+        
+        querySQL = [NSString stringWithFormat:@"SELECT A.Resubmission FROM SI_Master as A WHERE A.SINO=\"%@\"", [self.requestSINo description]];
+        if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK) {
+            if (sqlite3_step(statement) == SQLITE_ROW) {
+                const char *temp = (const char *)sqlite3_column_text(statement, 0);
+                eProposalStatus = temp == NULL ? eProposalStatus : ([[[NSString alloc] initWithUTF8String:temp] isEqualToString: @"1"] ? @"Resubmission" : eProposalStatus);
+            }
             sqlite3_finalize(statement);
         }
         
@@ -5525,6 +5630,13 @@ BOOL isFirstLoad;
     
     UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Konfirmasi" message:@"Anda yakin untuk menduplikat data?" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: @"cancel", nil];
     alert.tag = 5000;
+    [alert show];
+}
+
+- (IBAction)ActionDuplicate:(UIButton *)sender{
+    
+    UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Konfirmasi" message:@"Anda yakin untuk membuat SI resubmission?" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: @"cancel", nil];
+    alert.tag = 5001;
     [alert show];
 }
 

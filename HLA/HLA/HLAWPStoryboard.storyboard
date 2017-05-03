@@ -8,11 +8,11 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="BPreplay.otf">
-            <string>BPreplay</string>
-        </array>
-        <array key="BPreplayItalics.otf">
+        <array key="BPreplay_Italics.ttf">
             <string>BPreplay-Italic</string>
+        </array>
+        <array key="BPreplay_Regular.otf">
+            <string>BPreplay</string>
         </array>
     </customFonts>
     <scenes>
@@ -45,8 +45,8 @@
                                     <outlet property="delegate" destination="geq-zo-2Ih" id="aFf-Bk-Dxc"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" id="cID-5y-RUj">
-                                <rect key="frame" x="0.0" y="670" width="205" height="100"/>
+                            <view contentMode="scaleToFill" misplaced="YES" id="cID-5y-RUj">
+                                <rect key="frame" x="0.0" y="596" width="205" height="174"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="xlQ-6E-XPK">
@@ -65,6 +65,14 @@
                                             <action selector="SaveTapped:" destination="geq-zo-2Ih" eventType="touchUpInside" id="Pfc-XB-2Si"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="BZ9-YK-tJn">
+                                        <rect key="frame" x="108" y="78" width="66" height="66"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="icon_Duplicate.png"/>
+                                        <connections>
+                                            <action selector="ActionDuplicate:" destination="geq-zo-2Ih" eventType="touchUpInside" id="gU6-v0-6LZ"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
@@ -74,6 +82,7 @@
                     <connections>
                         <outlet property="RightView" destination="H24-Bb-FUr" id="z2S-IV-LsS"/>
                         <outlet property="myTableView" destination="Dmj-H4-hpd" id="R5u-Ck-emB"/>
+                        <outlet property="outletDuplicate" destination="BZ9-YK-tJn" id="lVd-wd-yne"/>
                         <outlet property="outletSaveAs" destination="voa-jX-hEh" id="6gx-Ht-6p2"/>
                     </connections>
                 </viewController>
@@ -5065,7 +5074,7 @@
                                                 <action selector="ActionEAPP:" destination="dE2-cD-TzV" id="jsP-bO-jsQ"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="Done   " id="Ven-dD-eO4">
+                                        <barButtonItem key="rightBarButtonItem" title="Done" id="Ven-dD-eO4">
                                             <color key="tintColor" red="0.85490196080000003" green="0.19215686269999999" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <connections>
                                                 <action selector="doSave:" destination="dE2-cD-TzV" id="yib-Qc-9CP"/>
@@ -5750,6 +5759,7 @@
         <image name="check_icon.png" width="36" height="33"/>
         <image name="disclosure_indicator.png" width="8" height="13"/>
         <image name="emptyCheckBox.png" width="44" height="43"/>
+        <image name="icon_Duplicate.png" width="547" height="547"/>
         <image name="prospect_100_2.png" width="100" height="100"/>
         <image name="prospect_100_3.png" width="100" height="100"/>
         <image name="undo.png" width="32" height="32"/>

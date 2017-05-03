@@ -782,6 +782,7 @@
 		C333A2BF1831E98F00FA8200 /* MainAddPolicyPOVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C333A2B31831E98F00FA8200 /* MainAddPolicyPOVC.m */; };
 		C333A2C01831E98F00FA8200 /* MainExistingPolicyLA2Listing.m in Sources */ = {isa = PBXBuildFile; fileRef = C333A2B51831E98F00FA8200 /* MainExistingPolicyLA2Listing.m */; };
 		C333A2C11831E98F00FA8200 /* MainExistingPolicyPOListing.m in Sources */ = {isa = PBXBuildFile; fileRef = C333A2B71831E98F00FA8200 /* MainExistingPolicyPOListing.m */; };
+		C33F28E31EB9801100F7DC10 /* icon_Duplicate.png in Resources */ = {isa = PBXBuildFile; fileRef = C33F28E21EB9801100F7DC10 /* icon_Duplicate.png */; };
 		C34B421618ED620B00BD92C9 /* IDTypeForCO.plist in Resources */ = {isa = PBXBuildFile; fileRef = C34B421518ED620B00BD92C9 /* IDTypeForCO.plist */; };
 		C34F6AE51A280FFC000B957F /* GroupVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C34F6AE41A280FFC000B957F /* GroupVC.m */; };
 		C3560C941805119400745FC6 /* priority.plist in Resources */ = {isa = PBXBuildFile; fileRef = C3560C931805119400745FC6 /* priority.plist */; };
@@ -2400,6 +2401,7 @@
 		C333A2B51831E98F00FA8200 /* MainExistingPolicyLA2Listing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainExistingPolicyLA2Listing.m; sourceTree = "<group>"; };
 		C333A2B61831E98F00FA8200 /* MainExistingPolicyPOListing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainExistingPolicyPOListing.h; sourceTree = "<group>"; };
 		C333A2B71831E98F00FA8200 /* MainExistingPolicyPOListing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainExistingPolicyPOListing.m; sourceTree = "<group>"; };
+		C33F28E21EB9801100F7DC10 /* icon_Duplicate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_Duplicate.png; sourceTree = "<group>"; };
 		C34B421518ED620B00BD92C9 /* IDTypeForCO.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = IDTypeForCO.plist; sourceTree = "<group>"; };
 		C34F6AE31A280FFC000B957F /* GroupVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupVC.h; sourceTree = "<group>"; };
 		C34F6AE41A280FFC000B957F /* GroupVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupVC.m; sourceTree = "<group>"; };
@@ -5560,6 +5562,7 @@
 		C4E9D1BF1612C6A500016053 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				C33F28E21EB9801100F7DC10 /* icon_Duplicate.png */,
 				4381A1681DB0F81900766C00 /* emptyImage.png */,
 				438410BD1D66A07200FD4152 /* watermarkID.png */,
 				4385C9641D6661A600D2DEB4 /* watermark overlay.png */,
@@ -6520,6 +6523,7 @@
 				C486D9CB163E5319009F8F21 /* btn_prospect_off.png in Resources */,
 				C486D9CC163E5319009F8F21 /* btn_prospect_on.png in Resources */,
 				43F8B5511C81E71B006F3F6C /* SIListingTableViewCell.xib in Resources */,
+				C33F28E31EB9801100F7DC10 /* icon_Duplicate.png in Resources */,
 				43870CA51D35FEAF0035143C /* Proteksi.html in Resources */,
 				4392993C1D9B0D4500C5B952 /* SPAJThirdParty.xib in Resources */,
 				432BBEA11DEC165700FF5ED3 /* eng_BCALULS_Page2.html in Resources */,

@@ -8,11 +8,11 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="BPreplay.otf">
-            <string>BPreplay</string>
-        </array>
         <array key="BPreplay_Bold.otf">
             <string>BPreplay-Bold</string>
+        </array>
+        <array key="BPreplay_Regular.otf">
+            <string>BPreplay</string>
         </array>
     </customFonts>
     <scenes>
@@ -884,11 +884,11 @@
                                 <rect key="frame" x="0.0" y="22" width="768" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="05Q-8E-b5H" id="3oh-8H-bDg">
-                                    <rect key="frame" x="0.0" y="0.0" width="702" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="730" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="testing" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YBs-qi-OsW">
-                                            <rect key="frame" x="48" y="0.0" width="654" height="43"/>
+                                            <rect key="frame" x="20" y="0.0" width="710" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

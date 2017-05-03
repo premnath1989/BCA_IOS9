@@ -886,7 +886,7 @@
         if (success)
         {
             if([tableName caseInsensitiveCompare:@"SI_Master"]==NSOrderedSame){
-                createSQL = [NSString stringWithFormat:@"UPDATE tmp SET %@ =\"%@\",EnableEditing='1',IllustrationSigned='1',id = ((Select max(id) from %@)+1)",column,newValue,tableName];
+                createSQL = [NSString stringWithFormat:@"UPDATE tmp SET %@ =\"%@\",EnableEditing='1',IllustrationSigned='1',Resubmission=NULL,id = ((Select max(id) from %@)+1)",column,newValue,tableName];
             }else if([tableName caseInsensitiveCompare:@"SI_Temp_Trad_Rider"]==NSOrderedSame){
                 createSQL = [NSString stringWithFormat:@"UPDATE tmp SET %@ =\"%@\",rowid = ((Select max(id) from %@)+1)",column,newValue,tableName];
             }
@@ -992,6 +992,30 @@
     if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
     {
         NSString *querySQL = [NSString stringWithFormat: @"SELECT EnableEditing FROM SI_Master WHERE SINO=\"%@\"", SIno];
+        
+        if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK){
+            if (sqlite3_step(statement) == SQLITE_ROW) {
+                if((const char *) sqlite3_column_text(statement, 0) != NULL){
+                    EditMode = [[NSString alloc]
+                                initWithUTF8String:
+                                (const char *) sqlite3_column_text(statement, 0)];
+                }
+            }
+            sqlite3_finalize(statement);
+        }
+        sqlite3_close(contactDB);
+    }
+    return EditMode;
+}
+
+-(NSString *)IllustrationIsResubmission:(NSString *)SIno
+{
+    
+    sqlite3_stmt *statement;
+    NSString *EditMode = @"";
+    if (sqlite3_open([databasePath UTF8String ], &contactDB) == SQLITE_OK)
+    {
+        NSString *querySQL = [NSString stringWithFormat: @"SELECT Resubmission FROM SI_Master WHERE SINO=\"%@\"", SIno];
         
         if (sqlite3_prepare_v2(contactDB, [querySQL UTF8String], -1, &statement, NULL) == SQLITE_OK){
             if (sqlite3_step(statement) == SQLITE_ROW) {

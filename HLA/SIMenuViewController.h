@@ -137,6 +137,7 @@
     //end of added by faiz
 }
 @property (strong, nonatomic) IBOutlet UIButton *outletSaveAs;
+@property (strong, nonatomic) IBOutlet UIButton *outletDuplicate;
 
 @property (nonatomic, assign) id<SIMenuDelegate> delegate;
 
@@ -208,6 +209,7 @@
 @property(nonatomic , retain) NSString *NameLA;
 @property(nonatomic , retain) NSString *Name2ndLA;
 @property(nonatomic , retain) NSString *NamePayor;
+@property (nonatomic, assign) BOOL *isResubmission;
 
 @property (nonatomic,strong) id SIshowQuotation;
 -(void)clearSINO;

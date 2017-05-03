@@ -58,6 +58,7 @@
 - (NSString *) localDBUDID;
 - (NSString *) AgentCodeLocal;
 - (NSString *) EditIllustration:(NSString *)SIno;
+- (NSString *) IllustrationIsResubmission:(NSString *)SIno;
 - (NSString *) getUniqueDeviceIdentifierAsString;
 - (NSString *) getLastUpdateReferral;
 - (NSMutableDictionary *) premiKeluargaku:(NSString *)SINo;

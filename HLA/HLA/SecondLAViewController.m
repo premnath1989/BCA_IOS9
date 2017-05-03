@@ -170,9 +170,10 @@ id dobtemp;
     
     LoginDBManagement *loginDB = [[LoginDBManagement alloc]init];
     NSString *EditMode = [loginDB EditIllustration:[_poDictionaryPO valueForKey:@"SINO"]];
+    NSString *isResubmission = [loginDB IllustrationIsResubmission:[_poDictionaryPO valueForKey:@"SINO"]];
     NSLog(@" Edit Mode second %@ : %@", EditMode, [_poDictionaryPO valueForKey:@"SINO"]);
     //disable all text fields
-    if([EditMode caseInsensitiveCompare:@"0"] == NSOrderedSame){
+    if([EditMode caseInsensitiveCompare:@"0"] == NSOrderedSame || [isResubmission caseInsensitiveCompare:@"1"] == NSOrderedSame){
         for(UIView *v in [self.view allSubViews])
         {
             if([v isKindOfClass:[UITextField class]])
@@ -180,7 +181,12 @@ id dobtemp;
                 ((UITextField*)v).userInteractionEnabled=NO;
             }else if([v isKindOfClass:[UIButton class]])
             {
-                ((UIButton*)v).userInteractionEnabled=NO;
+                if([EditMode caseInsensitiveCompare:@"0"] == NSOrderedSame ||
+                   (![((UIButton *) v).titleLabel.text isEqualToString:@"Done"] && [isResubmission caseInsensitiveCompare:@"1"] == NSOrderedSame)) {
+                    ((UIButton*)v).userInteractionEnabled=NO;
+                } else {
+                    ((UIButton*)v).userInteractionEnabled=YES;
+                }
             }else if([v isKindOfClass:[UISegmentedControl class]])
             {
                 ((UISegmentedControl*)v).userInteractionEnabled=NO;

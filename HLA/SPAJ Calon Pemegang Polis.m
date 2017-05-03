@@ -965,7 +965,8 @@
             
             NSString* stringValue =[modelSPAJAnswers selectSPAJAnswersData:@"Value" StringWhere:stringWhere];
         
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        11  NSString* jsString = [NSString stringWithFormat:@"stringRelationshipStatus = '%@';",stringRelation];
+            NSString* jsString = [NSString stringWithFormat:@"stringRelationshipStatus = '%@';",stringRelation];
+            
             [webview stringByEvaluatingJavaScriptFromString:jsString];
             
             [webview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"setFemaleQuestionForHealthQuestionnaire('%@');",stringValue]];
