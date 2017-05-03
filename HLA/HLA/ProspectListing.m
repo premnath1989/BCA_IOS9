@@ -795,9 +795,23 @@ MBProgressHUD *HUD;
         } else {
             int row = [ProspectTableData count] - 1 - indexPath.row;
             SAMActivityViewController* viewController = [[SAMActivityViewController alloc] initWithNibName:@"SAMActivityViewController" bundle:nil];
-            viewController.SAMDataRow = row;
-            viewController._SAMModel = [SAMData objectAtIndex:row];
-            [self.navigationController pushViewController:viewController animated:YES];
+            ProspectProfile *pp = [ProspectTableData objectAtIndex:indexPath.row];
+            BOOL isSAMFound = NO;
+            for(int i = [SAMData count] - 1; i >= 0; i--) {
+                SAMModel *data = [SAMData objectAtIndex: i];
+                if([pp.ProspectID isEqualToString:data.customerID]) {
+                    isSAMFound = YES;
+                    viewController.SAMDataRow = i;
+                    viewController._SAMModel = [SAMData objectAtIndex:i];
+                    [self.navigationController pushViewController:viewController animated:YES];
+                    break;
+                }
+            }
+            
+            if(!isSAMFound) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Referal Belum Dibuat" message:@"Harap membuat referal terlebih dahulu di menu New Referal" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                [alert show];
+            }
         }
     } else {
         NSUInteger row = [indexPath row];
