@@ -386,9 +386,6 @@ BOOL isFirstLoad;
             lastActiveController = self.SecondLAController;
         } else {
             //self.SecondLAController.requestSINo = getSINo;
-            if([eProposalStatus isEqualToString: @"Resubmission"]) {
-                self.SecondLAController.isResubmission = YES;
-            }
             [self.SecondLAController setQuickQuoteEnabled:quickQuoteEnabled];
             [self.SecondLAController setElementActive:quickQuoteEnabled];
             self.SecondLAController.requestSINo = [self.requestSINo description];
@@ -708,11 +705,6 @@ BOOL isFirstLoad;
 	
     return custCodeForSecondLa?YES:NO;
     
-}
-
--(void)LoadViewControllerResubmission:(BOOL) isResubmission {
-    [self LoadViewController];
-    self.LAController.isResubmission = isResubmission;
 }
 
 -(void)LoadViewController

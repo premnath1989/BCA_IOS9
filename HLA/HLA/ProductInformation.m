@@ -16,6 +16,8 @@
 #import "ChangePassword.h"
 #import "UIView+viewRecursion.h"
 
+NSMutableArray *arrayProductInformation;
+
 @implementation ProductInformation
 
 @synthesize btnHome;
@@ -73,9 +75,34 @@
 
 
 - (void)FTPFileListing{
-    FTPitems = [[ProductInfoItems alloc]init];
-    [FTPitems listDirectory];
-    FTPitems.ftpDelegate = self;
+//    FTPitems = [[ProductInfoItems alloc]init];
+//    [FTPitems listDirectory];
+//    FTPitems.ftpDelegate = self;
+    
+    if([self connected]) {
+        NSString *urlFileListingWebService = [NSString stringWithFormat:@"%@/service2.svc/getproductinformationdata",
+                                              [(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL]];
+        
+        NSURLSession *session = [NSURLSession sharedSession];
+        [[session dataTaskWithURL:[NSURL URLWithString:urlFileListingWebService]
+                completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                    if(data != nil) {
+                        NSMutableDictionary* json = [NSJSONSerialization
+                                                     JSONObjectWithData:data //1
+                                                     options:NSJSONReadingMutableContainers
+                                                     error:&error];
+                        NSMutableArray *array = [json objectForKey:@"d"];
+                        arrayProductInformation = [[NSMutableArray alloc] init];
+                        arrayProductInformation = array;
+                        [self itemsList:array];
+                        
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [spinnerLoading stopLoadingSpinner];
+                        });
+                    }
+                }
+         ] resume];
+    }
 }
 
 - (void)createDirectory{
@@ -200,16 +227,24 @@
     UILabel *fileType = (UILabel *)[cell viewWithTag:(indexPath.row*1000)+2];
     UILabel *unduhLabel = (UILabel *)[cell viewWithTag:(indexPath.row*1000)+4];
     NSLog(@"file : %@.%@", fileName.text,fileType.text);
+    NSString *urlDownload = [NSString stringWithFormat:@"%@/%@",
+                             [(AppDelegate*)[[UIApplication sharedApplication] delegate] serverURL],
+                             [[arrayProductInformation objectAtIndex:indexPath.row] objectForKey:@"FilePath"]];
     
     NSBundle *myLibraryBundle = [NSBundle bundleWithURL:[[NSBundle mainBundle]
                                                          URLForResource:@"xibLibrary" withExtension:@"bundle"]];
     
     if([fileType.text caseInsensitiveCompare:brochureLabel] == NSOrderedSame){
+        NSString *fileNameWithExt = [NSString stringWithFormat: @"%@.%@",fileName.text, brochureExt];
         if([unduhLabel.text caseInsensitiveCompare:downloadMacro] == NSOrderedSame){
             
             ProgressBar *progressBar = [[ProgressBar alloc]initWithNibName:@"ProgressBar" bundle:myLibraryBundle];
-            progressBar.TitleFileName = [NSString stringWithFormat: @"%@.%@",fileName.text, brochureExt];
+            progressBar.TitleFileName = fileNameWithExt;
             progressBar.progressDelegate = self;
+            progressBar.TransferMode = kBRHTTPMode;
+            progressBar.HTTPURLFilePath = urlDownload;
+            progressBar.HTTPLocalFilePath = fileNameWithExt;
+            progressBar.isBackupFiles = @"FALSE";
             progressBar.modalPresentationStyle = UIModalPresentationFormSheet;
             progressBar.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
             progressBar.preferredContentSize = CGSizeMake(600, 200);
@@ -217,21 +252,24 @@
             [self presentViewController:progressBar animated:YES completion:nil];
             
         }else{
-            [self seePDF:[NSString stringWithFormat: @"%@.%@",fileName.text, brochureExt]];
+            [self seePDF:fileNameWithExt];
         }
     }else if([fileType.text caseInsensitiveCompare:videoLabel] == NSOrderedSame){
+        NSString *fileNameWithExt = [NSString stringWithFormat: @"%@.%@",fileName.text, videoExt];
         if([unduhLabel.text caseInsensitiveCompare:downloadMacro] == NSOrderedSame){
-            
             ProgressBar *progressBar = [[ProgressBar alloc]initWithNibName:@"ProgressBar" bundle:myLibraryBundle];
-            progressBar.TitleFileName = [NSString stringWithFormat: @"%@.%@",fileName.text, videoExt];
+            progressBar.TitleFileName = fileNameWithExt;
             progressBar.progressDelegate = self;
+            progressBar.TransferMode = kBRHTTPMode;
+            progressBar.HTTPURLFilePath = urlDownload;
+            progressBar.HTTPLocalFilePath = fileNameWithExt;
             progressBar.modalPresentationStyle = UIModalPresentationFormSheet;
             progressBar.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
             progressBar.preferredContentSize = CGSizeMake(600, 200);
             progressBar.TransferFunction = @"download";
             [self presentViewController:progressBar animated:YES completion:nil];
         }else{
-            [self seeVideo:[NSString stringWithFormat: @"%@.%@",fileName.text, videoExt]];
+            [self seeVideo:fileNameWithExt];
         }
     }
 }
@@ -315,10 +353,10 @@
     
     [FTPItemsList removeAllObjects];
     for(NSMutableDictionary *itemInfo in ftpItems){
-        for(NSString *key in [itemInfo allKeys]){
-            [self insertIntoTableData:key size:[itemInfo objectForKey:key] index:index];
-            index++;
-        }
+        //We remove the prefix (ProductInformation/) to get the file name
+        NSString *fileName = [[itemInfo objectForKey: @"FilePath"] substringFromIndex:19];
+        [self insertIntoTableData:fileName size:[itemInfo objectForKey:@"FileSize"] index:index];
+        index++;
     }
     [myTableView reloadData];
 }
