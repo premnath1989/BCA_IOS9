@@ -96,7 +96,7 @@
     [database open];
     
     //FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select count(elementID) as Count  from SPAJAnswers where SPAJHtmlSection in ('KS_PH','KS_IN') and SPAJTransactionID = %i and elementID like \"%%%@%%\"",spajTransactionID,stringElementName]];
-    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select count(elementID) as Count  from SPAJAnswers where SPAJHtmlSection ='%@' and SPAJTransactionID = %i and elementID like \"%%%@%%\"",stringSection,spajTransactionID,stringElementName]];
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select count(elementID) as Count  from SPAJAnswers where SPAJHtmlSection ='%@' and SPAJTransactionID = %i and elementID like \"%%%@%%\"  and elementID not in (select elementID from SPAJAnswers where SPAJHtmlSection ='%@' and SPAJTransactionID = %i and (elementID like \"%%%@\" or elementID like \"%@%%\"))",stringSection,spajTransactionID,stringElementName,stringSection,spajTransactionID,stringElementName,stringElementName]];
     while ([s next]) {
         spajID = [s intForColumn:@"Count"];
     }

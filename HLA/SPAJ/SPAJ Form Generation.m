@@ -1083,7 +1083,7 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
     -(NSString*) generateBCALHProductCodeWithPO: (NSDictionary*) poDict andPremi: (NSDictionary*) premiDict {
         int id;
     
-        if([[premiDict valueForKey:@"Value"] isEqual: @"Bulanan"] || [[premiDict valueForKey:@"Value"] isEqual: @"Tahunan"]) {
+        if([[[premiDict valueForKey:@"Value"] capitalizedString] isEqual: @"Bulanan"] || [[[premiDict valueForKey:@"Value"] capitalizedString] isEqual: @"Tahunan"]) {
             id = 0;
         } else {
             id = 1;

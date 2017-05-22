@@ -1003,7 +1003,13 @@ NSString* const Back = @"Back";
                 
                 [tablePartiesCaprture reloadData];
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [tablePartiesCaprture selectRowAtIndexPath:[NSIndexPath indexPathForRow:indexSelected inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
+                    if ((indexSelected == 3) || (indexSelected == 4)){
+                        imageViewFront.image = nil;
+                        imageViewBack.image = nil;
+                    }
+                    else{
+                        [tablePartiesCaprture selectRowAtIndexPath:[NSIndexPath indexPathForRow:indexSelected inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
+                    }
                 });
                 [buttonSavePicture setEnabled:false];
             }
@@ -1060,7 +1066,7 @@ NSString* const Back = @"Back";
         //NSData *imageData = UIImageJPEGRepresentation([self generateWatermarkForImage:imageView.image], 0.8);
         NSData *imageData = UIImageJPEGRepresentation(imageView.image, 0.8);
         
-        if ((indexSelected==4)||(indexSelected==5)){
+        if ((indexSelected==4)||(indexSelected==5)||(indexSelected==3)){
             NSString* target=[NSString stringWithFormat:@"%@/%@.jpg",filePathApp,fileName];
             NSString* fname = [target lastPathComponent];
             NSString* fnameNoExt = [fname stringByDeletingPathExtension];
