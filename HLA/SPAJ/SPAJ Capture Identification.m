@@ -1007,9 +1007,8 @@ NSString* const Back = @"Back";
                         imageViewFront.image = nil;
                         imageViewBack.image = nil;
                     }
-                    else{
-                        [tablePartiesCaprture selectRowAtIndexPath:[NSIndexPath indexPathForRow:indexSelected inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
-                    }
+                    [tablePartiesCaprture selectRowAtIndexPath:[NSIndexPath indexPathForRow:indexSelected inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
+                    
                 });
                 [buttonSavePicture setEnabled:false];
             }
