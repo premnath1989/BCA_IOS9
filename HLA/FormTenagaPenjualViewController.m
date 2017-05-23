@@ -274,7 +274,7 @@
 -(void)voidLoadAllSalesDeclarationData{
     @try {
         int i=1;
-        for (UIView *view in [scrollViewForm subviews]) {
+        for (UIView *view in [stackViewForm subviews]) {
             if (view.tag == 1){
                 for (UIView *viewDetail in [view subviews]) {
                     if ([viewDetail isKindOfClass:[SegmentSPAJ class]]) {
@@ -353,7 +353,7 @@
         NSMutableArray* arrayFormAnswers = [[NSMutableArray alloc]init];
         [buttonSubmit setEnabled:false];
         int i=1;
-        for (UIView *view in [scrollViewForm subviews]) {
+        for (UIView *view in [stackViewForm subviews]) {
             if (view.tag == 1){
                 for (UIView *viewDetail in [view subviews]) {
                     if ([viewDetail isKindOfClass:[SegmentSPAJ class]]) {
