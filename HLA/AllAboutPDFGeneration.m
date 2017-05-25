@@ -476,7 +476,7 @@
     fullpath = [NSString stringWithFormat:@"%@/%@",fullpath,mainFileName];
     
     UIImage *baseImage = [UIImage imageWithContentsOfFile:fullpath];
-    if (([stringFileName rangeOfString:@"amandment"].location != NSNotFound)||([stringFileName rangeOfString:@"amandemen"].location != NSNotFound)) {
+    /*if (([stringFileName rangeOfString:@"amandment"].location != NSNotFound)||([stringFileName rangeOfString:@"amandemen"].location != NSNotFound)) {
         CGRect rectSign1 = CGRectMake(120,  2600, imageSigned1.size.width, imageSigned1.size.height);
         CGRect rectSign2 = CGRectMake(720, 2600, imageSigned2.size.width, imageSigned2.size.height);
         CGRect rectSign3 = CGRectMake(200, 2600, imageSigned3.size.width, imageSigned3.size.height);
@@ -488,7 +488,7 @@
         NSString *relativeOutputFilePath = [NSString stringWithFormat:@"%@", fullpath];
         [thumbnailData writeToFile:relativeOutputFilePath atomically:YES];
         
-    } else if (([stringFileName rangeOfString:@"chestpain"].location != NSNotFound)||([stringFileName rangeOfString:@"nyeridada"].location != NSNotFound)) {
+    } else*/ if (([stringFileName rangeOfString:@"chestpain"].location != NSNotFound)||([stringFileName rangeOfString:@"nyeridada"].location != NSNotFound)) {
         CGRect rectSign1 = CGRectMake(120,  7842, imageSigned1.size.width, imageSigned1.size.height);
         CGRect rectSign2 = CGRectMake(720, 7842, imageSigned2.size.width, imageSigned2.size.height);
         CGRect rectSign3 = CGRectMake(200, 7842, imageSigned3.size.width, imageSigned3.size.height);

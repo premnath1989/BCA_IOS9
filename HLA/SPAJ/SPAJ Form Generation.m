@@ -155,7 +155,7 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
 
     -(void)viewDidDisappear:(BOOL)animated{
         indexImgForPDFGeneration=0;
-        [allAboutPDFGeneration removeSPAJFolder:dictTransaction];
+        //[allAboutPDFGeneration removeSPAJFolder:dictTransaction];
     }
 
     - (void)viewDidLoad
@@ -1112,6 +1112,7 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
                 if ([[arrayIMGName objectAtIndex:indexImgForPDFGeneration]rangeOfString:@"amandment"].location != NSNotFound){
                     NSString *functionCall = [NSString stringWithFormat:@"setSignatureImage([%@])", [listArrayFiles componentsJoinedByString:@","]];
                     [webview stringByEvaluatingJavaScriptFromString:functionCall];
+                    
                     [self performSelector:@selector(performReadFromDB) withObject:nil afterDelay:0.5];
                 }
                 else if ([[arrayIMGName objectAtIndex:indexImgForPDFGeneration]rangeOfString:@"foreigner"].location != NSNotFound){
