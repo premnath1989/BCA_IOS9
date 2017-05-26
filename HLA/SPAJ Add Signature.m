@@ -366,7 +366,7 @@
                         [self voidSaveSignatureToPDF:1];
                         dispatch_async(dispatch_get_main_queue(), ^{
                             [allAboutPDFGeneration voidSaveSignatureForImages:dictTransaction DictionaryPOData:dictionaryPOData];
-                            dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                                 [viewActivityIndicator setHidden:YES];
                                 [self voidCheckBooleanLastState];
                             });
@@ -406,7 +406,7 @@
                         [self voidSaveSignatureToPDF:1];
                         dispatch_async(dispatch_get_main_queue(), ^{
                             [allAboutPDFGeneration voidSaveSignatureForImages:dictTransaction DictionaryPOData:dictionaryPOData];
-                            dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                                     [viewActivityIndicator setHidden:YES];
                                     [self voidCheckBooleanLastState];
                                 });
@@ -446,7 +446,7 @@
         [self voidSaveSignatureToPDF:0];
         dispatch_async(dispatch_get_main_queue(), ^{
             [allAboutPDFGeneration voidSaveSignatureForImages:dictTransaction DictionaryPOData:dictionaryPOData];
-            dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 [viewActivityIndicator setHidden:YES];
                 [self actionClearSign:nil];
                 [tablePartiesSignature reloadData];
@@ -826,7 +826,7 @@
         [self voidSaveSignatureToPDF:3];
         dispatch_async(dispatch_get_main_queue(), ^{
             [allAboutPDFGeneration voidSaveSignatureForImages:dictTransaction DictionaryPOData:dictionaryPOData];
-            dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 [viewActivityIndicator setHidden:YES];
                 [alertController dismissViewControllerAnimated:YES completion:nil];
                 [self.navigationController popViewControllerAnimated:YES];
