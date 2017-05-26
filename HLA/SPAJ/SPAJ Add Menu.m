@@ -1687,7 +1687,7 @@ NSString* const stateIMGGeneration = @"IMG";
 -(NSString*) generateBCALHProductCodeWithPO: (NSDictionary*) poDict andPremi: (NSDictionary*) premiDict {
     int id;
     
-    if([[premiDict valueForKey:@"Value"] isEqual: @"Bulanan"] || [[premiDict valueForKey:@"Value"] isEqual: @"Tahunan"]) {
+    if([[[premiDict valueForKey:@"Value"] capitalizedString] isEqual: @"Bulanan"] || [[[premiDict valueForKey:@"Value"] capitalizedString] isEqual: @"Tahunan"]) {
         id = 0;
     } else {
         id = 1;
@@ -1697,9 +1697,9 @@ NSString* const stateIMGGeneration = @"IMG";
     if([[poDict valueForKey:@"Value"] isEqual: @"1"]) {
         id += 2;
     }
-        
+    
     NSString *idString = [NSString stringWithFormat:@"BHP%d", id];
-        
+    
     return idString;
 }
 
