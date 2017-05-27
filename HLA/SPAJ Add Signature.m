@@ -808,7 +808,6 @@
     
     [alertController dismissViewControllerAnimated:YES completion:nil];
     [self.navigationController popViewControllerAnimated:YES];*/
-    
     stringSignatureLocation = stringSignatureLocationFromAlert;
     [viewActivityIndicator setHidden:NO];
     NSString* signatureImage = [formatter encodedSignatureImage:viewToSign];
@@ -825,14 +824,18 @@
         
         [self voidSaveSignatureToPDF:3];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [allAboutPDFGeneration voidSaveSignatureForImages:dictTransaction DictionaryPOData:dictionaryPOData];
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                [viewActivityIndicator setHidden:YES];
-                [alertController dismissViewControllerAnimated:YES completion:nil];
-                [self.navigationController popViewControllerAnimated:YES];
-            });
+          //[allAboutPDFGeneration voidSaveSignatureForImages:dictTransaction DictionaryPOData:dictionaryPOData];
+          [viewActivityIndicator setHidden:YES];
+          [alertController dismissViewControllerAnimated:YES completion:nil];
+          [self.navigationController popViewControllerAnimated:YES];
+//          dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//          });
         });
     });
+}
+
+-(void)popSelfView{
+    
 }
 
 -(void)voidSaveSignatureForImages{
@@ -1180,7 +1183,13 @@
 }
 
 -(void)allImgSigned{
-
+    /*if (indexSelected == 3){
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [viewActivityIndicator setHidden:YES];
+            [alertController dismissViewControllerAnimated:YES completion:nil];
+            [self.navigationController popViewControllerAnimated:YES];
+        });
+    }*/
 }
 /*
 #pragma mark - Navigation
