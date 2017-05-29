@@ -1064,7 +1064,9 @@
     
     NSArray* arrayCaharacterLimit6 = [[NSArray alloc]initWithObjects:TextThirdPartyHomePostalCode,TextThirdPartyCompanyPostalCode, nil];
     
-    NSArray* arrayCaharacterLimit7 = [[NSArray alloc]initWithObjects:TextThirdPartyCIN, nil];
+    //NSArray* arrayCaharacterLimit7 = [[NSArray alloc]initWithObjects:TextThirdPartyCIN, nil];
+    
+    NSArray* arrayCaharacterLimit11 = [[NSArray alloc]initWithObjects:TextThirdPartyCIN, nil];
     
     NSArray* arrayCaharacterLimit13 = [[NSArray alloc]initWithObjects:TextThirdPartyHandphone1,TextThirdPartyHandphone1,TextThirdPartyHomeTelephoneSuffix, nil];
     
@@ -1082,8 +1084,8 @@
     if ([arrayCaharacterLimit6 containsObject:textField]){
         return (newLength <= 6);
     }
-    else if ([arrayCaharacterLimit7 containsObject:textField]){
-        return (newLength <= 7);
+    else if ([arrayCaharacterLimit11 containsObject:textField]){
+        return (newLength <= 11);
     }
     else if ([arrayCaharacterLimit13 containsObject:textField]){
         return (newLength <= 13);
