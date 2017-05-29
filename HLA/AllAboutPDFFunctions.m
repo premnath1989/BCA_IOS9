@@ -507,7 +507,10 @@
     int x=0;
     for (int i = 0;i<5;i++){
         @autoreleasepool {
-            NSString *relativeOutputFilePath = [NSString stringWithFormat:@"%@/ImageSignature/SignatureParty%i.png", [formatter generateSPAJFileDirectory:[dictTransaction valueForKey:@"SPAJEappNumber"]],i+1];
+            NSTimeInterval timeStamp = [[NSDate date] timeIntervalSince1970];
+            NSNumber *timeStampObj = [NSNumber numberWithDouble: timeStamp];
+            NSString* strTimeStamp = [NSString stringWithFormat:@"%@",timeStampObj];
+            NSString *relativeOutputFilePath = [NSString stringWithFormat:@"%@/ImageSignature/SignatureParty%i_%@.png", [formatter generateSPAJFileDirectory:[dictTransaction valueForKey:@"SPAJEappNumber"]],i+1,strTimeStamp];
             
             NSArray* pathComponents = [relativeOutputFilePath pathComponents];
             NSArray* lastFourArray = [pathComponents subarrayWithRange:NSMakeRange([pathComponents count]-4,4)];

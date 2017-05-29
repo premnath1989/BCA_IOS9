@@ -155,7 +155,7 @@ NSString* const Ringkasan = @"page_ringkasan_pembelian";
 
     -(void)viewDidDisappear:(BOOL)animated{
         indexImgForPDFGeneration=0;
-        //[allAboutPDFGeneration removeSPAJFolder:dictTransaction];
+        [allAboutPDFGeneration removeSPAJFolder:dictTransaction];
     }
 
     - (void)viewDidLoad
