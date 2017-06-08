@@ -373,6 +373,8 @@
 		431376C81D0E6821007D3BF1 /* AddChildViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 431376C61D0E6821007D3BF1 /* AddChildViewController.xib */; };
 		431376CD1D0E6E35007D3BF1 /* DataNasabahViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 431376CB1D0E6E35007D3BF1 /* DataNasabahViewController.m */; };
 		431376CE1D0E6E35007D3BF1 /* DataNasabahViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 431376CC1D0E6E35007D3BF1 /* DataNasabahViewController.xib */; };
+		431AC1BD1EE13CEE00183512 /* HeritageRiderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 431AC1BB1EE13CEE00183512 /* HeritageRiderViewController.m */; };
+		431AC1BE1EE13CEE00183512 /* HeritageRiderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 431AC1BC1EE13CEE00183512 /* HeritageRiderViewController.xib */; };
 		431C065F1C823A9B001824FD /* Model_SI_Premium.m in Sources */ = {isa = PBXBuildFile; fileRef = 431C065D1C823A9B001824FD /* Model_SI_Premium.m */; };
 		431F5FDF1C6D781A00A9CA6C /* BranchInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 431F5FDE1C6D781A00A9CA6C /* BranchInfo.m */; };
 		431F5FE41C6D93E800A9CA6C /* ProspectListingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 431F5FE21C6D93E800A9CA6C /* ProspectListingTableViewCell.m */; };
@@ -1671,6 +1673,9 @@
 		431376CA1D0E6E35007D3BF1 /* DataNasabahViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataNasabahViewController.h; sourceTree = "<group>"; };
 		431376CB1D0E6E35007D3BF1 /* DataNasabahViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataNasabahViewController.m; sourceTree = "<group>"; };
 		431376CC1D0E6E35007D3BF1 /* DataNasabahViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DataNasabahViewController.xib; sourceTree = "<group>"; };
+		431AC1BA1EE13CEE00183512 /* HeritageRiderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeritageRiderViewController.h; sourceTree = "<group>"; };
+		431AC1BB1EE13CEE00183512 /* HeritageRiderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeritageRiderViewController.m; sourceTree = "<group>"; };
+		431AC1BC1EE13CEE00183512 /* HeritageRiderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeritageRiderViewController.xib; sourceTree = "<group>"; };
 		431C065D1C823A9B001824FD /* Model_SI_Premium.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Model_SI_Premium.m; sourceTree = "<group>"; };
 		431C065E1C823A9B001824FD /* Model_SI_Premium.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model_SI_Premium.h; sourceTree = "<group>"; };
 		431F5FDD1C6D781A00A9CA6C /* BranchInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BranchInfo.h; sourceTree = "<group>"; };
@@ -4071,6 +4076,16 @@
 			name = "Section 1 Data Nasabah";
 			sourceTree = "<group>";
 		};
+		431AC1B91EE13CC900183512 /* Heritage Rider */ = {
+			isa = PBXGroup;
+			children = (
+				431AC1BA1EE13CEE00183512 /* HeritageRiderViewController.h */,
+				431AC1BB1EE13CEE00183512 /* HeritageRiderViewController.m */,
+				431AC1BC1EE13CEE00183512 /* HeritageRiderViewController.xib */,
+			);
+			name = "Heritage Rider";
+			sourceTree = "<group>";
+		};
 		431F5FE01C6D93B700A9CA6C /* tableViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -6126,6 +6141,7 @@
 		EF05984C161A9201004A9095 /* Rider */ = {
 			isa = PBXGroup;
 			children = (
+				431AC1B91EE13CC900183512 /* Heritage Rider */,
 				43B590981CA2703000DC53AC /* RiderCalculation */,
 				EF05984A161A91EE004A9095 /* RiderViewController.h */,
 				EF059849161A91EE004A9095 /* RiderViewController.m */,
@@ -6842,6 +6858,7 @@
 				FAF6791B1AE5F6EA001C0F1B /* AppDataWipeStoryboard.storyboard in Resources */,
 				04D7C8B41C1FA9580053F651 /* EverStoryboard.storyboard in Resources */,
 				C35EC8611B983C5D00738933 /* PymtWebViewViewController.xib in Resources */,
+				431AC1BE1EE13CEE00183512 /* HeritageRiderViewController.xib in Resources */,
 				FAF16A261B7B4D6E0034F16C /* ReleaseDate.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -7213,6 +7230,7 @@
 				4353C94B1C61F3A000AE1ED9 /* ModelMaritalStatus.m in Sources */,
 				C30A25B017F3C8D500613A0F /* HealthQuestionnaire7h.m in Sources */,
 				C30A25B117F3C8D500613A0F /* HealthQuestionnaire7i.m in Sources */,
+				431AC1BD1EE13CEE00183512 /* HeritageRiderViewController.m in Sources */,
 				4356EBE61DD5630100D6CAAE /* UnitLinkedPopOverViewController.m in Sources */,
 				C30A25B217F3C8D500613A0F /* HealthQuestionnaire7j.m in Sources */,
 				C30A25B317F3C8D500613A0F /* HealthQuestionnaire8.m in Sources */,
@@ -7622,9 +7640,9 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Erwin Lim (385P6MX3H3)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 87JN2XNQTS;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7681,9 +7699,9 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Asuransi Jiwa BCA, PT";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 87JN2XNQTS;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7727,7 +7745,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.bcalife.bless;
 				PRODUCT_NAME = BLESS;
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "954ccc9a-01f8-4583-9ed7-fc4107de17e9";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = "armv7 armv6 i386";
@@ -7780,9 +7798,9 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Asuransi Jiwa BCA, PT";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 87JN2XNQTS;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7828,7 +7846,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.bcalife.bless;
 				PRODUCT_NAME = BLESS;
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "954ccc9a-01f8-4583-9ed7-fc4107de17e9";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = "armv7 armv6 i386";

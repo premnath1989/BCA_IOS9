@@ -746,11 +746,11 @@
         
         UIImage *baseImage = [UIImage imageWithContentsOfFile:fullpath];
         
-        CGRect rectSign1 = CGRectMake(750,  10685, 400, 247);
-        CGRect rectSign2 = CGRectMake(720, 10685, 0, 0);
-        CGRect rectSign3 = CGRectMake(200, 10685, 0, 0);
-        CGRect rectSign4 = CGRectMake(1250, 10685, 400, 247);
-        CGRect rectSign5 = CGRectMake(250, 10685, 400, 247);
+        CGRect rectSign1 = CGRectMake(750,  11045, 400, 247);
+        CGRect rectSign2 = CGRectMake(720, 11045, 0, 0);
+        CGRect rectSign3 = CGRectMake(200, 11045, 0, 0);
+        CGRect rectSign4 = CGRectMake(1250, 11045, 400, 247);
+        CGRect rectSign5 = CGRectMake(250, 11045, 400, 247);
         
         UIImage *resultImage = [self generateSignatureForThirdPartyImage:baseImage signatureImage1:imageSigned1 signaturePostion1:rectSign1 signatureImage2:imageSigned2 signaturePostion2:rectSign2 signatureImage3:imageSigned3 signaturePostion3:rectSign3 signatureImage4:imageSigned4 signaturePostion4:rectSign4 signatureImage5:imageSigned5 signaturePostion5:rectSign5];
         NSData *thumbnailData = UIImageJPEGRepresentation(resultImage, 0);
@@ -764,5 +764,7 @@
 
     [delegatePDFGeneration imgSigned];
 };
+
+
 
 @end

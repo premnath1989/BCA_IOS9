@@ -21,7 +21,7 @@
 - (void)awakeFromNib {
     NSLog(@"test");
     UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveViewWithGestureRecognizer:)];
-    [viewCell addGestureRecognizer:panGestureRecognizer];
+    //[viewCell addGestureRecognizer:panGestureRecognizer];
     
 }
 

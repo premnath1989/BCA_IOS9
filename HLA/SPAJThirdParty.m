@@ -114,6 +114,10 @@
 }
 
 -(void)viewDidLayoutSubviews{
+
+}
+
+-(void)viewDidAppear:(BOOL)animated{
     [scrollViewForm setContentSize:CGSizeMake(stackViewForm.frame.size.width, stackViewForm.frame.size.height)];
 }
 

@@ -151,6 +151,68 @@
     return dict;
 }
 
+-(NSMutableArray *)getRiderArray:(NSString *)SINo{
+    NSMutableArray* arrayRider = [[NSMutableArray alloc]init];
+    
+    NSString *SINO;
+    NSString *RiderCode;
+    NSString *RiderName;
+    NSString *SumAssured;
+    NSString *MasaAsuransi;
+    NSString *Unit;
+    NSString *ExtraPremiPerCent;
+    NSString *ExtraPremiPerMil;
+    NSString *MasaExtraPremi;
+    NSString *ExtraPremiRp;
+    NSString *PremiRp;
+    
+    
+    NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:path];
+    [database open];
+    
+    FMResultSet *s = [database executeQuery:[NSString stringWithFormat:@"select * from SI_Temp_Trad_Rider where SINo = \"%@\"",SINo]];
+    //NSLog(@"query %@",[NSString stringWithFormat:@"select * from SI_Premium where SINO = \"%@\" and RiderCode=\"%@\"",SINo,riderCode]);
+    while ([s next]) {
+        SINO = [s stringForColumn:@"SINo"];
+        RiderCode = [s stringForColumn:@"RiderCode"];
+        RiderName = [s stringForColumn:@"RiderName"];
+        SumAssured = [s stringForColumn:@"SumAssured"];
+        MasaAsuransi = [s stringForColumn:@"MasaAsuransi"];
+        Unit = [s stringForColumn:@"Unit"];
+        ExtraPremiPerCent = [s stringForColumn:@"ExtraPremiPercent"];
+        ExtraPremiPerMil = [s stringForColumn:@"ExtraPremiMil"];
+        MasaExtraPremi = [s stringForColumn:@"MasaExtraPremi"];
+        ExtraPremiRp = [s stringForColumn:@"ExtraPremiRp"];
+        PremiRp = [s stringForColumn:@"PremiRp"];
+        
+        NSDictionary *dict;
+        dict=[[NSDictionary alloc]initWithObjectsAndKeys:
+              SINO,@"SINO",
+              RiderCode,@"RiderCode",
+              RiderName,@"RiderName",
+              SumAssured,@"SumAssured",
+              MasaAsuransi,@"MasaAsuransi",
+              Unit,@"Unit",
+              ExtraPremiPerCent,@"ExtraPremiPercent",
+              ExtraPremiPerMil,@"ExtraPremiMil",
+              MasaExtraPremi,@"MasaExtraPremi",
+              ExtraPremiRp,@"ExtraPremiRp",
+              PremiRp,@"PremiRp",
+              nil];
+        
+        [arrayRider addObject:dict];
+    }
+    
+    
+    
+    [results close];
+    [database close];
+    return arrayRider;
+}
+
 -(void)deleteRiderData:(NSString *)siNo{
     NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *path = [docsDir stringByAppendingPathComponent: @"hladb.sqlite"];
