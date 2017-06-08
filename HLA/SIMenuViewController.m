@@ -32,6 +32,7 @@
 #import "UIView+viewRecursion.h"
 #import "LoginDBManagement.h"
 #import "PremiumViewController.h"
+#import "HeritageRiderViewController.h"
 #import "SIMenuUnitLinkedViewController.h"
 
 #define TRAD_PAYOR_FIRSTLA  @"0"
@@ -40,10 +41,11 @@
 #define TRAD_DETAILS_BASICPLAN @"3"
 #define TRAD_RIDER_DETAILS @"4"
 
-@interface SIMenuViewController ()<ULMenuViewControllerDelegate>{
+@interface SIMenuViewController ()<ULMenuViewControllerDelegate,HeritageRiderViewControllerDelegate>{
     SIMenuUnitLinkedViewController *siMenuUnitLinkedVC;
     
     PremiumViewController *_PremiumController;
+    HeritageRiderViewController *heritageRiderVC;
     
     NSMutableArray* arrayIntValidate;
     NSMutableDictionary* dictionaryPOForInsert;
@@ -101,6 +103,9 @@ BOOL isFirstLoad;
     
     siMenuUnitLinkedVC = [[SIMenuUnitLinkedViewController alloc]initWithNibName:@"SIMenuUnitLinkedViewController" bundle:nil];
     [siMenuUnitLinkedVC setDelegate:self];
+    
+    heritageRiderVC = [[HeritageRiderViewController alloc]initWithNibName:@"HeritageRiderViewController" bundle:nil];
+    heritageRiderVC.delegate = self;
     
     self.RiderController = [self.storyboard instantiateViewControllerWithIdentifier:@"RiderView"];
     _RiderController.delegate = self;
@@ -3250,6 +3255,26 @@ BOOL isFirstLoad;
         }
 }
 
+#pragma mark - delegate for heritage Rider added by faiz
+-(NSMutableDictionary *)getPOLAData{
+    return dictionaryPOForInsert;
+}
+
+-(NSMutableDictionary *)getBasicPlanData{
+    return newDictionaryForBasicPlan;
+}
+
+-(NSMutableArray *)getHeritageRiderData:(NSString *)stringSINO{
+    return [_modelSIRider getRiderArray:stringSINO];
+}
+
+-(void)setHeritageRiderData:(NSString *)stringSINO ArrayRiderHeritage:(NSMutableArray *)arrayRider{
+    [_modelSIRider deleteRiderData:stringSINO];
+    for (int i=0;i<[arrayRider count];i++){
+        [_modelSIRider saveRider:[arrayRider objectAtIndex:i]];
+    }
+}
+
 #pragma mark - delegate added by faiz
 -(void)dismissUnitLinkedView:(NSMutableDictionary *)dictionaryPOLA{
     [viewUnitlinked removeFromSuperview];
@@ -3431,6 +3456,8 @@ BOOL isFirstLoad;
     [arrayIntValidate replaceObjectAtIndex:2 withObject:@"1"];
     NSDictionary* dictPOData=[[NSDictionary alloc]initWithDictionary:[_modelSIPOData getPO_DataFor:[self.requestSINo description]]];
     newDictionaryForBasicPlan=[NSMutableDictionary dictionaryWithDictionary:basicPlan];
+    
+    //edit mode
     if (self.requestSINo){
         NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
         f.numberStyle = NSNumberFormatterDecimalStyle;
@@ -3452,6 +3479,7 @@ BOOL isFirstLoad;
             [_modelSIPremium savePremium:newDictionaryForBasicPlan];
         }
     }
+    //new mode
     else{
         NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
         f.numberStyle = NSNumberFormatterDecimalStyle;
@@ -3476,6 +3504,7 @@ BOOL isFirstLoad;
     }
 
     NSString *PlanType = [dictionaryPOForInsert valueForKey:@"ProductName"];
+    NSString *PlanCode = [dictionaryPOForInsert valueForKey:@"ProductCode"];
     
     if([PlanType isEqualToString:@"BCA Life Keluargaku"])
     {
@@ -3496,19 +3525,17 @@ BOOL isFirstLoad;
         }
         [_RiderController calculateRiderPremi];
     }
-    else{
-        if (!_PremiumController) {
-            _PremiumController = [self.storyboard instantiateViewControllerWithIdentifier:@"premiumView"];
-            _PremiumController.delegate = self;
-            _PremiumController.requestSINo = [dictionaryPOForInsert valueForKey:@"SINO"];
-            [self.RightView addSubview:_PremiumController.view];
+    else if ([[PlanCode uppercaseString] isEqualToString:@"BCALH"] || [[PlanCode uppercaseString] isEqualToString:@"BCALHST"]){
+        if(![heritageRiderVC.view isDescendantOfView:self.RightView]) {
+           [self.RightView addSubview:heritageRiderVC.view];
+        } else {
+            [heritageRiderVC.view removeFromSuperview];
+            [self.RightView addSubview:heritageRiderVC.view];
+            [self.RightView bringSubviewToFront:heritageRiderVC.view];
         }
-        [_PremiumController setPremiumDictionary:newDictionaryForBasicPlan];
-        [_PremiumController loadDataFromDB];
-        [_PremiumController.view removeFromSuperview];
-        _PremiumController.requestSINo = [dictionaryPOForInsert valueForKey:@"SINO"];
-        [self.RightView addSubview:_PremiumController.view];
-        [self.RightView bringSubviewToFront:_PremiumController.view];
+    }
+    else{
+        [self showPremiumPage];
     }
     
     
@@ -3521,6 +3548,21 @@ BOOL isFirstLoad;
     }
     [self.RiderController setSumAssured:[newDictionaryForBasicPlan valueForKey:@"Sum_Assured"]];
     [self.RightView bringSubviewToFront:self.RiderController.view];    //[self.myTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:SIMENU_RIDER inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];*/
+}
+
+-(void)showPremiumPage{
+    if (!_PremiumController) {
+        _PremiumController = [self.storyboard instantiateViewControllerWithIdentifier:@"premiumView"];
+        _PremiumController.delegate = self;
+        _PremiumController.requestSINo = [dictionaryPOForInsert valueForKey:@"SINO"];
+        [self.RightView addSubview:_PremiumController.view];
+    }
+    [_PremiumController setPremiumDictionary:newDictionaryForBasicPlan];
+    [_PremiumController loadDataFromDB];
+    [_PremiumController.view removeFromSuperview];
+    _PremiumController.requestSINo = [dictionaryPOForInsert valueForKey:@"SINO"];
+    [self.RightView addSubview:_PremiumController.view];
+    [self.RightView bringSubviewToFront:_PremiumController.view];
 }
 
 -(void)saveRider:(NSDictionary *)dictMDBKK MDKK:(NSDictionary *)dictMDKK BP:(NSDictionary *)dictBasicPremi{
@@ -3559,6 +3601,18 @@ BOOL isFirstLoad;
     }
     [_PremiumController setPremiumDictionary:newDictionaryForBasicPlan];
     [self.RightView bringSubviewToFront:_PremiumController.view];*/
+}
+
+-(void)saveRiderData:(NSDictionary *)dictRiderData{
+    NSMutableDictionary *mutableRiderData=[[NSMutableDictionary alloc]initWithDictionary:dictRiderData];
+    
+    [mutableRiderData setObject:[dictionaryPOForInsert valueForKey:@"SINO"] forKey:@"SINO"];
+    if ([_modelSIRider getRiderCount:[dictionaryPOForInsert valueForKey:@"SINO"] RiderCode:[mutableRiderData valueForKey:@"RiderCode"]]<=0){
+        [_modelSIRider saveRider:mutableRiderData];
+    }
+    else{
+        [_modelSIRider updateRider:mutableRiderData];
+    }
 }
 
 #pragma mark auto save rider
