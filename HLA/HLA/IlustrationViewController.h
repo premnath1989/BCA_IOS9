@@ -18,6 +18,12 @@
 #import "ModelSIRider.h"
 #import "RiderCalculation.h"
 #import "Model_SI_Master.h"
+@class IlustrationViewController;
+@protocol IllustrationViewControllerDelegate
+-(NSMutableDictionary *)getPOLAData;
+-(NSMutableArray *)getHeritageRiderData:(NSString *)stringSINO;
+-(NSMutableDictionary *)getBasicPlanData;
+@end
 
 @interface IlustrationViewController : UIViewController<ReaderViewControllerDelegate,NDHTMLtoPDFDelegate,UIWebViewDelegate,MFMailComposeViewControllerDelegate,PagesControllerDelegate>{
     IBOutlet UIWebView* webIlustration;
@@ -53,6 +59,9 @@
     int totalYear;
     int totalBulanan;
 }
+
+@property (nonatomic,strong) id <IllustrationViewControllerDelegate> delegate;
+
 @property (retain, nonatomic) NSMutableDictionary* dictionaryPOForInsert;
 @property (retain, nonatomic) NSMutableDictionary* dictionaryMasterForInsert;
 @property (retain, nonatomic) NSMutableDictionary* dictionaryForBasicPlan;

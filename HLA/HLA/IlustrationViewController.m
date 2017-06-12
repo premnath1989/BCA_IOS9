@@ -377,6 +377,8 @@
 }
 
 - (void)setValuePage1{
+    NSArray *arrayRiderData = [[NSMutableArray alloc]initWithArray:[_delegate getHeritageRiderData:[_dictionaryPOForInsert valueForKey:@"SINO"]]];
+    
     NSString *javaScript = [NSString stringWithFormat:@"document.getElementById('SINumber').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"SINO"]];
     
     NSString *sex;
@@ -418,6 +420,40 @@
     else{
         javaScriptTotalPage = [NSString stringWithFormat:@"document.getElementById('TotalPage1').innerHTML =\"%@\";", @"4"];
     }
+    
+    NSString *jsonPOLAString;
+    NSError *error;
+    NSData *jsonPOLAData = [NSJSONSerialization dataWithJSONObject:[_delegate getPOLAData]
+                                                           options:0 // Pass 0 if you don't care about the readability of the generated string
+                                                             error:&error];
+    
+    if (! jsonPOLAData) {
+        NSLog(@"Got an error: %@", error);
+    } else {
+        jsonPOLAString = [[NSString alloc] initWithData:jsonPOLAData encoding:NSUTF8StringEncoding];
+    }
+    if (arrayRiderData.count > 0){
+        NSDictionary* dictDataRider = [arrayRiderData objectAtIndex:0];
+        NSString *jsonRiderString;
+        NSData *jsonRiderData = [NSJSONSerialization dataWithJSONObject:dictDataRider
+                                                               options:0 // Pass 0 if you don't care about the readability of the generated string
+                                                                 error:&error];
+        
+        if (! jsonRiderData) {
+            NSLog(@"Got an error: %@", error);
+        } else {
+            jsonRiderString = [[NSString alloc] initWithData:jsonRiderData encoding:NSUTF8StringEncoding];
+        }
+        
+        NSString* riderName = [dictDataRider valueForKey:@"RiderName"];
+        [webIlustration stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"createInsuranceBenefitTable('%@')", riderName]];
+        [webIlustration stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"setRiderData('true',%@)", jsonPOLAString]];
+        [webIlustration stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"setRiderInformation(%@)", jsonRiderString]];
+    }
+    else{
+        [webIlustration stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"setRiderData('false',%@)", jsonPOLAString]];
+    }
+    
     
     
     

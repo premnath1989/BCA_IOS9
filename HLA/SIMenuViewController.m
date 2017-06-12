@@ -632,7 +632,7 @@ BOOL isFirstLoad;
     
         if (_salesIlustrationViewController == nil) {
             _salesIlustrationViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SalesIlustration"];
-            //_LAController.delegate = self;
+            _salesIlustrationViewController.delegate = self;
             [_salesIlustrationViewController setDictionaryPOForInsert:dictionaryPOForInsert];
             [_salesIlustrationViewController setDictionaryForBasicPlan:newDictionaryForBasicPlan];
         }
