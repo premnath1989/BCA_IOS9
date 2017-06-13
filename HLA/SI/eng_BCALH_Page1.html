@@ -99,171 +99,237 @@
                        
             }
         
-        function loadJson()
-        {
-            
-            
-            setPage();
-            //writeGST();
-            
-            writeSummary();
-            
-            //alert('11');
-            
-            var result = gdata.SI[0].SI_Temp_trad_LA.data;
-            
-            if(result.length > 1){
-                var row2 = result[1];
-            }
-            
-            if (gdata.SI[0].ModeOfPayment == 'L'){
-                $('.ModeOfPayment').html('Sekaligus');
-            }
-            else if (gdata.SI[0].ModeOfPayment == 'Y'){
-                $('.ModeOfPayment').html('Tahunan');
-            }
-            else if (gdata.SI[0].ModeOfPayment == 'M'){
-                $('.ModeOfPayment').html('Bulanan');
-            }
-            
-            if(result.length == 1){
-                var row = result[0];
-                $('.LADesc').html(row.LADesc);
-                $('.LAName').html(row.Name);
-                $('.LAAge').html(row.Age);
-                $('.OccpDesc').html(row.OccpDesc);
-                
-                if (row.MOP == '1'){
-                    $('.MOP').html('Tunggal');
-                }
-                else{
-                    $('.MOP').html('5 Tahun');
-                }
+            function loadJson()
+            {
                 
                 
+                setPage();
+                //writeGST();
                 
-                if (row.Sex.substring(0,1) == 'M'){
-                    $('.LASex').html('Laki-laki');
-                }
-                else{
-                    $('.LASex').html('Perempuan');
-                }
+                writeSummary();
                 
-            }
-            else if(result.length == 2 && row2.PTypeCode == 'LA'){ //got 2nd life assured
-                var row = result[0];
-                var row2 = result[1];
-                $('.LADesc').html(row.LADesc + '<br/>' + row2.LADesc + '<br/>');
-                $('.LAName').html(row.Name + '<br/>' + row2.Name)  ;
-                $('.LAAge').html(row.Age + '<br/>' + row2.Age);
-                if (row.Sex.substring(0,1) == 'M' && row2.Sex.substring(0,1) == 'M'){
-                    $('.LASex').html('Male' + '<br/>' + 'Male' );
-                }
-                else if(row.Sex.substring(0,1) == 'M' && row2.Sex.substring(0,1) == 'F'){
-                    $('.LASex').html('Male' + '<br/>' + 'Female' );
-                }
-                else if(row.Sex.substring(0,1) == 'F' && row2.Sex.substring(0,1) == 'M'){
-                    $('.LASex').html('Female' + '<br/>' + 'Male' );
-                }
-                else{
-                    $('.LASex').html('Female' + '<br/>' + 'Female' );
+                //alert('11');
+                
+                var result = gdata.SI[0].SI_Temp_trad_LA.data;
+                
+                if(result.length > 1){
+                    var row2 = result[1];
                 }
                 
-                if (row.Smoker == 'Y' && row2.Smoker == 'Y' ){
-                    $('.LASmoker').html('Yes' + '<br/>' + 'Yes'  );
+                if (gdata.SI[0].ModeOfPayment == 'L'){
+                    $('.ModeOfPayment').html('Sekaligus');
                 }
-                else if (row.Smoker == 'Y' && row2.Smoker == 'N' ){
-                    $('.LASmoker').html('Yes' + '<br/>' + 'No'  );
+                else if (gdata.SI[0].ModeOfPayment == 'Y'){
+                    $('.ModeOfPayment').html('Tahunan');
                 }
-                else if (row.Smoker == 'N' && row2.Smoker == 'Y' ){
-                    $('.LASmoker').html('No' + '<br/>' + 'Yes'  );
+                else if (gdata.SI[0].ModeOfPayment == 'M'){
+                    $('.ModeOfPayment').html('Bulanan');
                 }
-                else{
-                    $('.LASmoker').html('No' + '<br/>' + 'No' );
-                }
-            }
-            else{ // got payor
-                var row = result[0];
-                var row2 = result[1];
                 
-                $('.LADesc').html(row.LADesc + '<br/>' + row2.LADesc + '<br/>');
-                $('.LAName').html(row.Name + '<br/>' + row2.Name)  ;
-                $('.LAAge').html(row.Age + '<br/>' + row2.Age);
-                if (row.Sex.substring(0,1) == 'M' && row2.Sex.substring(0,1) == 'M'){
-                    $('.LASex').html('Male' + '<br/>' + 'Male' );
-                }
-                else if(row.Sex.substring(0,1) == 'M' && row2.Sex.substring(0,1) == 'F'){
-                    $('.LASex').html('Male' + '<br/>' + 'Female' );
-                }
-                else if(row.Sex.substring(0,1) == 'F' && row2.Sex.substring(0,1) == 'M'){
-                    $('.LASex').html('Female' + '<br/>' + 'Male' );
-                }
-                else if(row.Sex.substring(0, 1) == 'F' && row2.Sex.substring(0, 1) == 'F'){
-                    $('.LASex').html('Female' + '<br/>' + 'Female' );
-                }
-                else {
-                    if(row2.Sex.substring(0, 1) == 'F'){
-                        $('.LASex').html('' + '<br/>' + 'Female' );
+                if(result.length == 1){
+                    var row = result[0];
+                    $('.LADesc').html(row.LADesc);
+                    $('.LAName').html(row.Name);
+                    $('.LAAge').html(row.Age);
+                    $('.OccpDesc').html(row.OccpDesc);
+                    
+                    if (row.MOP == '1'){
+                        $('.MOP').html('Tunggal');
                     }
-                    else
-                    {
-                        $('.LASex').html('' + '<br/>' + 'Male' );
+                    else{
+                        $('.MOP').html('5 Tahun');
+                    }
+                    
+                    
+                    
+                    if (row.Sex.substring(0,1) == 'M'){
+                        $('.LASex').html('Laki-laki');
+                    }
+                    else{
+                        $('.LASex').html('Perempuan');
+                    }
+                    
+                }
+                else if(result.length == 2 && row2.PTypeCode == 'LA'){ //got 2nd life assured
+                    var row = result[0];
+                    var row2 = result[1];
+                    $('.LADesc').html(row.LADesc + '<br/>' + row2.LADesc + '<br/>');
+                    $('.LAName').html(row.Name + '<br/>' + row2.Name)  ;
+                    $('.LAAge').html(row.Age + '<br/>' + row2.Age);
+                    if (row.Sex.substring(0,1) == 'M' && row2.Sex.substring(0,1) == 'M'){
+                        $('.LASex').html('Male' + '<br/>' + 'Male' );
+                    }
+                    else if(row.Sex.substring(0,1) == 'M' && row2.Sex.substring(0,1) == 'F'){
+                        $('.LASex').html('Male' + '<br/>' + 'Female' );
+                    }
+                    else if(row.Sex.substring(0,1) == 'F' && row2.Sex.substring(0,1) == 'M'){
+                        $('.LASex').html('Female' + '<br/>' + 'Male' );
+                    }
+                    else{
+                        $('.LASex').html('Female' + '<br/>' + 'Female' );
+                    }
+                    
+                    if (row.Smoker == 'Y' && row2.Smoker == 'Y' ){
+                        $('.LASmoker').html('Yes' + '<br/>' + 'Yes'  );
+                    }
+                    else if (row.Smoker == 'Y' && row2.Smoker == 'N' ){
+                        $('.LASmoker').html('Yes' + '<br/>' + 'No'  );
+                    }
+                    else if (row.Smoker == 'N' && row2.Smoker == 'Y' ){
+                        $('.LASmoker').html('No' + '<br/>' + 'Yes'  );
+                    }
+                    else{
+                        $('.LASmoker').html('No' + '<br/>' + 'No' );
                     }
                 }
+                else{ // got payor
+                    var row = result[0];
+                    var row2 = result[1];
+                    
+                    $('.LADesc').html(row.LADesc + '<br/>' + row2.LADesc + '<br/>');
+                    $('.LAName').html(row.Name + '<br/>' + row2.Name)  ;
+                    $('.LAAge').html(row.Age + '<br/>' + row2.Age);
+                    if (row.Sex.substring(0,1) == 'M' && row2.Sex.substring(0,1) == 'M'){
+                        $('.LASex').html('Male' + '<br/>' + 'Male' );
+                    }
+                    else if(row.Sex.substring(0,1) == 'M' && row2.Sex.substring(0,1) == 'F'){
+                        $('.LASex').html('Male' + '<br/>' + 'Female' );
+                    }
+                    else if(row.Sex.substring(0,1) == 'F' && row2.Sex.substring(0,1) == 'M'){
+                        $('.LASex').html('Female' + '<br/>' + 'Male' );
+                    }
+                    else if(row.Sex.substring(0, 1) == 'F' && row2.Sex.substring(0, 1) == 'F'){
+                        $('.LASex').html('Female' + '<br/>' + 'Female' );
+                    }
+                    else {
+                        if(row2.Sex.substring(0, 1) == 'F'){
+                            $('.LASex').html('' + '<br/>' + 'Female' );
+                        }
+                        else
+                        {
+                            $('.LASex').html('' + '<br/>' + 'Male' );
+                        }
+                    }
+                    
+                    if (row.Smoker == 'Y' && row2.Smoker == 'Y' ){
+                        $('.LASmoker').html('Yes' + '<br/>' + 'Yes'  );
+                    }
+                    else if (row.Smoker == 'Y' && row2.Smoker == 'N' ){
+                        $('.LASmoker').html('Yes' + '<br/>' + 'No'  );
+                    }
+                    else if (row.Smoker == 'N' && row2.Smoker == 'Y' ){
+                        $('.LASmoker').html('No' + '<br/>' + 'Yes'  );
+                    }
+                    else if (row.Smoker == 'N' && row2.Smoker == 'N' ){
+                        $('.LASmoker').html('No' + '<br/>' + 'No'  );
+                    }
+                    else{
+                        if(row2.Smoker == 'N'){
+                            $('.LASmoker').html('' + '<br/>' + 'No' );
+                        }
+                        else
+                        {
+                            $('.LASmoker').html('' + '<br/>' + 'yes' );
+                        }
+                    }
+                }
                 
-                if (row.Smoker == 'Y' && row2.Smoker == 'Y' ){
-                    $('.LASmoker').html('Yes' + '<br/>' + 'Yes'  );
+            }
+            
+            function replaceChar(char){
+                var temp, returnVal;
+                if (char == "0")
+                returnVal = "-"
+                else if (char == "")
+                returnVal = "-"
+                else
+                returnVal = char;
+                return returnVal;
+            }
+            
+            function isIncomeRider(amt,rider){
+                //rider.replace(/^\s+|\s$/g,"")
+                //$.trim(rider)
+                
+                var temp;
+                temp = $.trim(rider)
+                //alert(temp + "x")
+                
+                if (temp == "HLA Cash Promise" || temp == "HLA Income Builder" || temp == "Income 20 Rider" || temp == "Income 30 Rider" || temp == "Income 40 Rider" || temp == "Income D-20 Rider" || temp == "Income D-30 Rider" || temp == "Income D-40 Rider" || temp == "Income E-20 Rider" || temp == "Income E-30 Rider"){
+                    
+                    return amt + " *";
                 }
-                else if (row.Smoker == 'Y' && row2.Smoker == 'N' ){
-                    $('.LASmoker').html('Yes' + '<br/>' + 'No'  );
-                }
-                else if (row.Smoker == 'N' && row2.Smoker == 'Y' ){
-                    $('.LASmoker').html('No' + '<br/>' + 'Yes'  );
-                }
-                else if (row.Smoker == 'N' && row2.Smoker == 'N' ){
-                    $('.LASmoker').html('No' + '<br/>' + 'No'  );
+                else
+                return amt + "&nbsp;&nbsp;";
+            }
+            
+            function createInsuranceBenefitTable(RiderType) {
+                var table = document.getElementById("tableInsuarnceBenefit");
+                var tableRowCount = document.getElementById("tableInsuarnceBenefit").rows.length;;
+                var row = table.insertRow(tableRowCount);
+                var cell1 = row.insertCell(0);
+                var cell2 = row.insertCell(1);
+                
+                //cell1.className = 'one';
+                
+                cell1.innerHTML = "&nbsp";
+                if( RiderType.indexOf('Payor') >= 0){
+                  // Found world
+                  var strPayor = "<b>Asuransi Tambahan</b><br/>Apabila Tertanggung Tambahan Meninggal Dunia atau mengalami Ketidakmampuan Tetap Total, maka Pemegang Polis dibebaskan dari kewajiban membayar Premi. Manfaat Asuransi Tambahan berlaku sampai dengan Tertanggung Tambahan berusia 75 tahun untuk manfaat Meninggal Dunia atau 65 tahun untuk manfaat Ketidakmampuan Tetap Total."
+                  cell2.innerHTML = strPayor;
                 }
                 else{
-                    if(row2.Smoker == 'N'){
-                        $('.LASmoker').html('' + '<br/>' + 'No' );
-                    }
-                    else
-                    {
-                        $('.LASmoker').html('' + '<br/>' + 'yes' );
-                    }
+                    var strWaiver = "<b>Asuransi Tambahan</b><br/>Apabila Tertanggung Tambahan mengalami Ketidakmampuan Tetap Total, maka Pemegang Polis dibebaskan dari kewajiban membayar Premi. Manfaat Asuransi Tambahan berlaku sampai dengan Tertanggung Tambahan berusia 65 tahun."
+                    cell2.innerHTML = strWaiver;
                 }
             }
-            
-        }
-        
-        function replaceChar(char){
-            var temp, returnVal;
-            if (char == "0")
-            returnVal = "-"
-            else if (char == "")
-            returnVal = "-"
-            else
-            returnVal = char;
-            return returnVal;
-        }
-        
-        function isIncomeRider(amt,rider){
-            //rider.replace(/^\s+|\s$/g,"")
-            //$.trim(rider)
-            
-            var temp;
-            temp = $.trim(rider)
-            //alert(temp + "x")
-            
-            if (temp == "HLA Cash Promise" || temp == "HLA Income Builder" || temp == "Income 20 Rider" || temp == "Income 30 Rider" || temp == "Income 40 Rider" || temp == "Income D-20 Rider" || temp == "Income D-30 Rider" || temp == "Income D-40 Rider" || temp == "Income E-20 Rider" || temp == "Income E-30 Rider"){
-                
-                return amt + " *";
+
+            function setRiderData(GotRider,DictPOLAData){
+                if (GotRider == 'true'){
+                    var sex;
+                    if (DictPOLAData.PO_Gender=="MALE"){
+                        sex="Pria";
+                    }
+                    else{
+                        sex="Wanita";
+                    }
+                   document.getElementById("TitleHeaderRider").style.display='block'; 
+                   document.getElementById("HeaderLARiderName").style.display='block'; 
+                   document.getElementById("HeaderLARiderDOB").style.display='block'; 
+                   document.getElementById("HeaderLARiderSex").style.display='block';
+                   document.getElementById("HeaderRiderOccupation").style.display='block';
+
+                   document.getElementById("HeaderLARiderName").innerHTML=DictPOLAData.PO_Name; 
+                   document.getElementById("HeaderLARiderDOB").innerHTML=DictPOLAData.PO_Age; 
+                   document.getElementById("HeaderLARiderSex").innerHTML=sex;
+                   document.getElementById("HeaderRiderOccupation").innerHTML=DictPOLAData.PO_Occp;
+                }
+                else{
+                   document.getElementById("TitleHeaderRider").style.display='none'; 
+                   document.getElementById("HeaderLARiderName").style.display='none'; 
+                   document.getElementById("HeaderLARiderDOB").style.display='none'; 
+                   document.getElementById("HeaderLARiderSex").style.display='none';
+                   document.getElementById("HeaderRiderOccupation").style.display='none';
+                }
             }
-            else
-            return amt + "&nbsp;&nbsp;";
-        }
-        
-            </script>
+
+            function setRiderInformation(RiderInfo){
+                var table = document.getElementById("TableInsuranceInformation");
+                var tableRowCount = document.getElementById("TableInsuranceInformation").rows.length;;
+                var row = table.insertRow(tableRowCount);
+                var cell1 = row.insertCell(0);
+                var cell2 = row.insertCell(1);
+                var cell3 = row.insertCell(2);
+                var cell4 = row.insertCell(3);
+                var cell5 = row.insertCell(4);
+                
+                cell1.innerHTML = "Asuransi Tambahan";
+                cell2.innerHTML = RiderInfo.RiderName;
+                cell3.innerHTML = "Hingga Masa Pembayaran Premi berakhir";
+                cell4.innerHTML = "Pembebasan Premi";
+                cell5.innerHTML = RiderInfo.PremiRp;
+            }
+        </script>
         <head>
             <!--<body onload="onBodyLoad()">-->
             <body>
@@ -294,26 +360,37 @@
 					<br/>
 					<table style="border-collapse:separate;border:0px solid black;width:100%;" >
 						<tr>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;"></td>
+                            <td style="text-align:center;padding: 0px 0px 0px 0px; width: 12.5%;"><b>Asuransi Dasar</b></td>
+                            <td style="text-align:center;padding: 0px 0px 0px 0px; width: 12.5%;"><label id="TitleHeaderRider"><b>Asuransi Tambahan</b></label></td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%">&nbsp</td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%">&nbsp</td>
+                        </tr>
+                        <tr>
 							<td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;">Nama Tertanggung</td>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;">:&nbsp;&nbsp;&nbsp;<label id="HeaderLAName"></label></td>
-							<td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;">Jenis Kelamin :</td>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;">:&nbsp;&nbsp;&nbsp;<label id="HeaderLASex"></label></td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 12.5%;">:&nbsp;&nbsp;&nbsp;<label id="HeaderLAName"></label></td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 12.5%;"><label id="HeaderLARiderName">Name</label></td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%">Frekuensi Pembayaran </td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%">:&nbsp;&nbsp;&nbsp;<label id="HeaderPaymentFrequency"></label></td>
 						</tr>
 						<tr>
 							<td style="text-align:left;padding: 0px 0px 0px 0px; ">Usia Masuk</td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; ">:&nbsp;&nbsp;&nbsp;<label id="HeaderLADOB"></label></td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; "><label id="HeaderLARiderDOB"></label></td>
 							<td style="text-align:left;padding: 0px 0px 0px 0px; ">Mata Uang</td>
                             <td style="text-align:left;padding: 0px 0px 0px 0px; ">:&nbsp;&nbsp;&nbsp;Rupiah</td>
 						</tr>
 						<tr>
-							<td style="text-align:left;padding: 0px 0px 0px 0px; ">Pekerjaan</td>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; ">:&nbsp;&nbsp;&nbsp;<label id="HeaderOccupation"></label></td>
-							<td style="text-align:left;padding: 0px 0px 0px 0px; ">Masa Pembayaran</td>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; ">:&nbsp;&nbsp;&nbsp;<label id="HeaderPaymentPeriode"></label></td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%;">Jenis Kelamin :</td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 12.5%;">:&nbsp;&nbsp;&nbsp;<label id="HeaderLASex"></label></td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 12.5%;"><label id="HeaderLARiderSex"></label></td>
+							<td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%">Masa Pembayaran</td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; width: 25%">:&nbsp;&nbsp;&nbsp;<label id="HeaderPaymentPeriode"></label></td>
 						</tr>
 						<tr>
-							<td style="text-align:left;padding: 0px 0px 0px 0px; ">Frekuensi Pembayaran </td>
-                            <td style="text-align:left;padding: 0px 0px 0px 0px; ">:&nbsp;&nbsp;&nbsp;<label id="HeaderPaymentFrequency"></label></td>
+							<td style="text-align:left;padding: 0px 0px 0px 0px; ">Pekerjaan</td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; ">:&nbsp;&nbsp;&nbsp;<label id="HeaderOccupation"></label></td>
+                            <td style="text-align:left;padding: 0px 0px 0px 0px; "><label id="HeaderRiderOccupation"></label></td>
 							<td style="text-align:left;padding: 0px 0px 0px 0px; "></td>
 							<td style="text-align:left;padding: 0px 0px 0px 0px; "></td>
 						</tr>
@@ -321,33 +398,35 @@
 					</table>
 					
 					<br/>
-					<table style="border-collapse:separate;border:1px solid black;width:100%;" >
+					<table id="TableInsuranceInformation" style="border-collapse:separate;border:1px solid black;width:100%;" >
 						<tr>
 							<td style="width: 20%;text-align: left"><u>   Jenis Asuransi</u></td>
 							<td style="width:  20%;text-align: left"><u>Nama Produk</u></td>
-							<td style="width: 20%;text-align: left"><u>Masa Pertanggungan</u></td>
-							<td style="width:  20%;text-align: left"><u>Uang Pertanggungan</u></td>
+							<td style="width: 20%;text-align: center"><u>Masa Pertanggungan</u></td>
+							<td style="width:  20%;text-align: center"><u>Uang Pertanggungan</u></td>
 							<td style="width: 20%;text-align: left"><u>Total Premi</u></td>
 						</tr>
 						<tr>
 							<td style="text-align: left">   Asuransi Dasar</td>
 							<td style="text-align: left">BCA Life Heritage Protection</td>
-							<td style="text-align: left">Hingga umur 99</td>
-							<td style="text-align: left"><label id="BasicSA"></label></td>
-							<td style="text-align: left"><label id="Premi"></label></td>
+							<td style="text-align: center">Hingga umur 99</td>
+							<td style="text-align: center"><label id="BasicSA"></label></td>
+							<td style="text-align: right"><label id="Premi"></label></td>
 						</tr>
-						<tr>
+						<!--<tr>
 							<td colspan="5"></br>(Frekuensi Pembayaran, Mata Uang, Masa Pembayaran, Uang Pertanggungan dan Premi tersebut di atas adalah bagian dari SPAJ yang akan digunakan sebagai acuan dalam proses penerbitan polis)</td>
-						</tr>
+						</tr>-->
 						
 					</table>
-					
+
 					<!--520,430px-->
 					<div style="width:100%;background-color: #fff;vertical-align: top;font-size:10px;font-family: Helvetica;">
+                        <br/>
+                        (Frekuensi Pembayaran, Mata Uang, Masa Pembayaran, Uang Pertanggungan dan Premi tersebut di atas adalah bagian dari SPAJ yang akan digunakan sebagai acuan dalam proses penerbitan polis)
 						<br/>
 						<b>Ringkasan Manfaat</b></br>
 						Untuk keperluan ilustrasi, penjelasan lengkap mengenai Manfaat Asuransi (termasuk syarat-syarat dan pengecualian-pengecualian) tercantum dalam polis, berlaku dan mengikat.</br></br>
-						<table  >
+						<table id="tableInsuarnceBenefit">
 							
 							<!--<tr>
 							 <td >
