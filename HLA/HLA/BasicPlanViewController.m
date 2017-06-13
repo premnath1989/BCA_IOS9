@@ -2209,6 +2209,9 @@ bool WPTPD30RisDeleted = FALSE;
         PaymentDescMDKK = FRekeunsiPembayaranMode;
         [_delegate setBasicPlanDictionaryWhenLoadFromList:dictPremiData];
     }
+    else{
+        PembelianKEString = _KKLKPembelianKeBtn.currentTitle;
+    }
 }
 //end of added by faiz
 
@@ -6075,6 +6078,7 @@ bool WPTPD30RisDeleted = FALSE;
         [self PremiDasarActKeluargaku:aaDesc];
         //[self PremiDasarActkklk];
         [self calculateRiderPremi];
+        PembelianKEString = _KKLKPembelianKeBtn.currentTitle;
     }
     else
     {

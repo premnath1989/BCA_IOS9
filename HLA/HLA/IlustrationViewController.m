@@ -785,6 +785,8 @@
 }
 
 -(void)setValuePage4{
+    NSArray *arrayRiderData = [[NSMutableArray alloc]initWithArray:[_delegate getHeritageRiderData:[_dictionaryPOForInsert valueForKey:@"SINO"]]];
+    
     NSString *javaScript = [NSString stringWithFormat:@"document.getElementById('SINumber4').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"SINO"]];
     
     NSString *javaScriptP4H1 = [NSString stringWithFormat:@"document.getElementById('SumAssured4').innerHTML =\"%@\";", [_dictionaryForBasicPlan valueForKey:@"Sum_Assured"]];
@@ -850,6 +852,22 @@
     NSString *javaScriptF2 = [NSString stringWithFormat:@"document.getElementById('FooterPrintDate4').innerHTML =\"%@\";",[formatter getDateToday:@"yyyy-MM-dd hh:mm:ss"]];
     NSString *javaScriptF3 = [NSString stringWithFormat:@"document.getElementById('FooterAgentCode4').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"AgentCode"]];
     NSString *javaScriptF4 = [NSString stringWithFormat:@"document.getElementById('FooterBranch4').innerHTML =\"%@\";", [_dictionaryForAgentProfile valueForKey:@"BranchName"]];
+    
+    if (arrayRiderData.count > 0){
+        NSDictionary* dictDataRider = [arrayRiderData objectAtIndex:0];
+        NSString *jsonRiderString;
+        NSError *error;
+        NSData *jsonRiderData = [NSJSONSerialization dataWithJSONObject:dictDataRider
+                                                                options:0 // Pass 0 if you don't care about the readability of the generated string
+                                                                  error:&error];
+        
+        if (! jsonRiderData) {
+            NSLog(@"Got an error: %@", error);
+        } else {
+            jsonRiderString = [[NSString alloc] initWithData:jsonRiderData encoding:NSUTF8StringEncoding];
+        }
+        [webIlustration stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"setInsuranceWithRiderSummary(%@)", jsonRiderString]];
+    }
     
     // Make the UIWebView method call
     [webIlustration stringByEvaluatingJavaScriptFromString:javaScript];
