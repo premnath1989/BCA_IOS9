@@ -5981,6 +5981,47 @@ bool WPTPD30RisDeleted = FALSE;
     basicPlanSIObj.siNO = SINo;
     
 }
+
+-(BOOL)checkMaximumAgeHeritage:(NSString *)PaymentPlan InsuredAge:(int)insuredAge{
+    BOOL isAllowedToBuy = YES;
+    if ([[PaymentPlan uppercaseString] isEqualToString:@"PREMI 5 TAHUN"]){
+        if (insuredAge > 70){
+            isAllowedToBuy = NO;
+        }
+    }
+    else if ([[PaymentPlan uppercaseString] isEqualToString:@"PREMI 10 TAHUN"]){
+        if (insuredAge > 65){
+            isAllowedToBuy = NO;
+        }
+    }
+    else if ([[PaymentPlan uppercaseString] isEqualToString:@"PREMI 15 TAHUN"]){
+        if (insuredAge > 60){
+            isAllowedToBuy = NO;
+        }
+    }
+    else if ([[PaymentPlan uppercaseString] isEqualToString:@"PREMI 20 TAHUN"]){
+        if (insuredAge > 55){
+            isAllowedToBuy = NO;
+        }
+    }
+    return isAllowedToBuy;
+}
+
+-(NSString *)getMaxAge:(NSString *)PaymentPlan{
+    if ([[PaymentPlan uppercaseString] isEqualToString:@"PREMI 5 TAHUN"]){
+        return @"70";
+    }
+    else if ([[PaymentPlan uppercaseString] isEqualToString:@"PREMI 10 TAHUN"]){
+        return @"65";
+    }
+    else if ([[PaymentPlan uppercaseString] isEqualToString:@"PREMI 15 TAHUN"]){
+        return @"60";
+    }
+    else if ([[PaymentPlan uppercaseString] isEqualToString:@"PREMI 20 TAHUN"]){
+        return @"55";
+    }
+}
+
 #pragma mark - delegate
 
 -(void)PlanPembelianKe:(PembeliaKe *)inController didSelectCode:(NSString *)aaCode andDesc:(NSString *)aaDesc;
@@ -6009,7 +6050,7 @@ bool WPTPD30RisDeleted = FALSE;
 
 -(void)Planlisting:(MasaPembayaran *)inController didSelectCode:(NSString *)aaCode andDesc:(NSString *)aaDesc{
   
-    [_masaPembayaranButton setTitle:aaDesc forState:UIControlStateNormal];
+    /*[_masaPembayaranButton setTitle:aaDesc forState:UIControlStateNormal];
     [self.planPopover dismissPopoverAnimated:YES];
     // getPlanCode = aaCode;
     
@@ -6017,7 +6058,35 @@ bool WPTPD30RisDeleted = FALSE;
     
     FrekuensiPembayaranChecking = aaDesc;
     
-    [_basicPremiField setText:[NSString stringWithFormat:@"%@",@"0"]];
+    [_basicPremiField setText:[NSString stringWithFormat:@"%@",@"0"]];*/
+    NSString* productCode = [_dictionaryPOForInsert valueForKey:@"ProductCode"];
+    int laAge = [[_dictionaryPOForInsert valueForKey:@"LA_Age"] intValue];
+    if ([[productCode uppercaseString] isEqualToString:@"BCALH"] || [[productCode uppercaseString] isEqualToString:@"BCALHST"]){
+        BOOL checkMaxAge = [self checkMaximumAgeHeritage:aaDesc InsuredAge:laAge];
+        if (checkMaxAge){
+            [_masaPembayaranButton setTitle:aaDesc forState:UIControlStateNormal];
+            // getPlanCode = aaCode;
+            [_frekuensiPembayaranButton setTitle:@"--Please Select--" forState:UIControlStateNormal];
+            FrekuensiPembayaranChecking = aaDesc;
+            [_basicPremiField setText:[NSString stringWithFormat:@"%@",@"0"]];
+            [self.planPopover dismissPopoverAnimated:YES];
+        }
+        else{
+            NSString* maxLAAge = [self getMaxAge:aaDesc];
+            NSString* stringAlert = [NSString stringWithFormat:@"Usia Maksimum untuk masa pembayaran ini adalah %@ tahun",maxLAAge];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@" " message:stringAlert delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
+            [alert show];
+        }
+    }
+    else{
+        [_masaPembayaranButton setTitle:aaDesc forState:UIControlStateNormal];
+        // getPlanCode = aaCode;
+        [_frekuensiPembayaranButton setTitle:@"--Please Select--" forState:UIControlStateNormal];
+        FrekuensiPembayaranChecking = aaDesc;
+        [_basicPremiField setText:[NSString stringWithFormat:@"%@",@"0"]];
+        [self.planPopover dismissPopoverAnimated:YES];
+    }
+
     
     //[self PremiDasarAct];
     
@@ -6037,6 +6106,7 @@ bool WPTPD30RisDeleted = FALSE;
         [self PremiDasarActKeluargaku:aaDesc];
         //[self PremiDasarActkklk];
         [self calculateRiderPremi];
+        PembelianKEString = _KKLKPembelianKeBtn.currentTitle;
     }
     else
     {
