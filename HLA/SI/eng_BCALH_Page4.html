@@ -8,7 +8,7 @@
             thead,table-Summary1 {
                 border: 1px solid black;
             }
-            thead,table-Summary2 {
+            thead,tableInsuranceSummary,table-Summary2 {
                 border: 1px solid black;
             }
             #maincontainer
@@ -77,8 +77,58 @@
                 border-bottom:0px;
                 border-top: 0px;
 			}
+
+
         </style>
         <script>
+        	function setInsuranceWithRiderSummary(RiderInfo){
+                var table = document.getElementById("tableInsuranceSummary");
+                var tableRowCount = document.getElementById("tableInsuranceSummary").rows.length;;
+                var row3 = table.insertRow(3);
+                var row4 = table.insertRow(4);
+                
+                var cell1 = row3.insertCell(0);
+                var cell2 = row3.insertCell(1);
+                var cell3 = row3.insertCell(2);
+                var cell4 = row3.insertCell(3);
+                var cell5 = row3.insertCell(4);
+                
+				var cell1_4 = row4.insertCell(0);
+                var cell2_4 = row4.insertCell(1);
+                var cell3_4 = row4.insertCell(2);
+                var cell4_4 = row4.insertCell(3);
+                var cell5_4 = row4.insertCell(4);
+
+                cell2.style.border = '1px solid black';
+                cell3.style.border-left  = '1px solid black';
+                cell3.style.border-top  = '1px solid black';
+                cell3.style.border-bottom = '1px solid black';
+                cell4.style.border-left = '1px solid black';
+                cell4.style.border= '1px solid black';
+                cell4.style.border-left='0px';
+                cell4.style.border-right='0px';
+
+                cell2_4.style.border = '1px solid black';
+                cell3_4.style.border-left  = '1px solid black';
+                cell3_4.style.border-top  = '1px solid black';
+                cell3_4.style.border-bottom = '1px solid black';
+                cell4_4.style.border-left = '1px solid black';
+                cell4_4.style.border= '1px solid black';
+                cell4_4.style.border-left='0px';
+                cell4_4.style.border-right='0px';
+
+                cell1.innerHTML = "&nbsp";
+                cell2.innerHTML = "Premi Standard Asuransi Dasar";
+                cell3.innerHTML = "Rp";
+                cell4.innerHTML = "1.000.000";
+                cell5.innerHTML = "Per tahun";
+
+                cell1_4.innerHTML = "&nbsp";
+                cell2_4.innerHTML = "Premi Standard Asuransi Tambahan";
+                cell3_4.innerHTML = "Rp";
+                cell4_4.innerHTML = "1.000.000";
+                cell5_4.innerHTML = "Per tahun";
+            }
         </script>
         <head>
             <body onload="onBodyLoad()">
@@ -115,7 +165,7 @@
 	                    	<z>Hanya Untuk Karyawan Grup BCA</z>
 	                    	<br/>
 	                    	<br/>
-	                        <table id="table-Summary2" width="75%" cellspacing="0" cellpadding="0" >
+	                        <table id="tableInsuranceSummary" width="75%" cellspacing="0" cellpadding="0" >
 	                        	<tr>
 		                        	<td style="width :1%">
 		                        	&nbsp
