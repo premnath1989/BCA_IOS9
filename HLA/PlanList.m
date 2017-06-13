@@ -29,11 +29,11 @@
 		ListOfPlan = [[NSMutableArray alloc] initWithObjects:@"Secure100", @"HLA Wealth Plan", nil ];
 		ListOfCode = [[NSMutableArray alloc] initWithObjects:@"S100", @"HLAWP", nil ];
         
-        ListOfPlan = [[NSMutableArray alloc] initWithObjects:@"BCA Life Heritage Protection",@"BCA Life Keluargaku",@"BCA Life Heritage Protection - For BCA Staff",@"BCA Life Proteksi & Investasiku",nil];
-        ListOfCode = [[NSMutableArray alloc] initWithObjects:@"BCALH",@"BCAKK",@"BCALHST",@"BCALUL", nil ];
+        //ListOfPlan = [[NSMutableArray alloc] initWithObjects:@"BCA Life Heritage Protection",@"BCA Life Keluargaku",@"BCA Life Heritage Protection - For BCA Staff",@"BCA Life Proteksi & Investasiku",nil];
+        //ListOfCode = [[NSMutableArray alloc] initWithObjects:@"BCALH",@"BCAKK",@"BCALHST",@"BCALUL", nil ];
         
-        //ListOfPlan = [[NSMutableArray alloc] initWithObjects:@"BCA Life Heritage Protection",@"BCA Life Keluargaku",@"BCA Life Heritage Protection – For BCA Staff",nil];
-        //ListOfCode = [[NSMutableArray alloc] initWithObjects:@"BCALH",@"BCAKK",@"BCALHST", nil ];
+        ListOfPlan = [[NSMutableArray alloc] initWithObjects:@"BCA Life Heritage Protection",@"BCA Life Keluargaku",@"BCA Life Heritage Protection – For BCA Staff",nil];
+        ListOfCode = [[NSMutableArray alloc] initWithObjects:@"BCALH",@"BCAKK",@"BCALHST", nil ];
         
 //		ListOfPlan = [[NSMutableArray alloc] initWithObjects:@"HLA Wealth Plan", nil ];
 //		ListOfCode = [[NSMutableArray alloc] initWithObjects:@"HLAWP", nil ];
