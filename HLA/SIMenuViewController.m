@@ -628,7 +628,7 @@ BOOL isFirstLoad;
     NSString *EditMode = [loginDB EditIllustration:[dictionaryPOForInsert valueForKey:@"SINO"]];
     NSLog(@" Edit Mode %@ : %@", EditMode, [dictionaryPOForInsert valueForKey:@"SINO"]);
     //disable all text fields
-    if([EditMode caseInsensitiveCompare:@"0"] == NSOrderedSame){
+    //if([EditMode caseInsensitiveCompare:@"0"] == NSOrderedSame){
     
         if (_salesIlustrationViewController == nil) {
             _salesIlustrationViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SalesIlustration"];
@@ -640,10 +640,10 @@ BOOL isFirstLoad;
         [_salesIlustrationViewController setDictionaryForBasicPlan:newDictionaryForBasicPlan];
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:_salesIlustrationViewController];
         [self presentViewController:navController animated:YES completion:nil];
-    }else{
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Simpan terlebih dahulu ilustrasi." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
-        [alert show];
-    }
+    //}else{
+    //    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Simpan terlebih dahulu ilustrasi." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
+        //[alert show];
+    //}
 }
 
 

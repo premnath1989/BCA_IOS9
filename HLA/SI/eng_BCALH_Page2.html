@@ -135,90 +135,88 @@
             return amt + "&nbsp;&nbsp;";
         }
         
-        function removeRows(rowCount,LAAge){
+        function removeRows(rowCount,LAAge,StartRow,StopRow){
 			if (LAAge<16){
-					var rowTobeDeleted=9;
-            var checkPointColA=5;
-            
-            for (i = 4; i < rowCount+3; i++) {
-                var Val1=(i+1)-4;
-                var Val2=LAAge +Val1;
-                //if (Val1>10){
-                if (Val1>5){
-                    if (Val2<55){
-                        var modulusResult=Val1%10;
-                        if (modulusResult != 0){
-                            document.getElementById("table-Summary1").deleteRow(rowTobeDeleted);
-                        }
-                        else{
-                            rowTobeDeleted=rowTobeDeleted+1;
-                        }
-                        checkPointColA = Val1;
-                    }
-                    else if (Val2==55){
-                        rowTobeDeleted=rowTobeDeleted+1;
-                        checkPointColA = Val1;
-                    }
-                    else if (Val2>55){
-                        var rowToCheck = (Val1-checkPointColA);
-                        if (rowToCheck>0)
-                        {
-                            var modulusResult=rowToCheck%10;
+                var rowTobeDeleted=9;
+                var checkPointColA=5;
+                
+                for (i = 4; i < rowCount+3; i++) {
+                    var Val1=(i+1)-4;
+                    var Val2=LAAge +Val1;
+                    //if (Val1>10){
+                    if (Val1>5){
+                        if (Val2<55){
+                            var modulusResult=Val1%10;
                             if (modulusResult != 0){
                                 document.getElementById("table-Summary1").deleteRow(rowTobeDeleted);
                             }
                             else{
                                 rowTobeDeleted=rowTobeDeleted+1;
                             }
+                            checkPointColA = Val1;
+                        }
+                        else if (Val2==55){
+                            rowTobeDeleted=rowTobeDeleted+1;
+                            checkPointColA = Val1;
+                        }
+                        else if (Val2>55){
+                            var rowToCheck = (Val1-checkPointColA);
+                            if (rowToCheck>0)
+                            {
+                                var modulusResult=rowToCheck%10;
+                                if (modulusResult != 0){
+                                    document.getElementById("table-Summary1").deleteRow(rowTobeDeleted);
+                                }
+                                else{
+                                    rowTobeDeleted=rowTobeDeleted+1;
+                                }
+                            }
                         }
                     }
                 }
             }
-			}
 			else{
-			var rowTobeDeleted=9;
-            var checkPointColA=5;
-            
-            for (i = 4; i < rowCount+3; i++) {
-                var Val1=(i+1)-4;
-                var Val2=LAAge +Val1;
-                //if (Val1>10){
-                if (Val1>5){
-                    if (Val2<55){
-                        var modulusResult=Val1%5;
-                        if (modulusResult != 0){
-                            document.getElementById("table-Summary1").deleteRow(rowTobeDeleted);
-                        }
-                        else{
-                            rowTobeDeleted=rowTobeDeleted+1;
-                        }
-                        checkPointColA = Val1;
-                    }
-                    else if (Val2==55){
-                        rowTobeDeleted=rowTobeDeleted+1;
-                        checkPointColA = Val1;
-                    }
-                    else if (Val2>55){
-                        var rowToCheck = (Val1-checkPointColA);
-                        if (rowToCheck>0)
-                        {
-                            var modulusResult=rowToCheck%10;
+                var rowTobeDeleted=9;
+                var checkPointColA=5;
+                
+                for (i = 4; i < rowCount+3; i++) {
+                    var Val1=(i+1)-4;
+                    var Val2=LAAge +Val1;
+                    //if (Val1>10){
+                    if (Val1>5){
+                        if (Val2<55){
+                            var modulusResult=Val1%5;
                             if (modulusResult != 0){
                                 document.getElementById("table-Summary1").deleteRow(rowTobeDeleted);
                             }
                             else{
                                 rowTobeDeleted=rowTobeDeleted+1;
                             }
+                            checkPointColA = Val1;
+                        }
+                        else if (Val2==55){
+                            rowTobeDeleted=rowTobeDeleted+1;
+                            checkPointColA = Val1;
+                        }
+                        else if (Val2>55){
+                            var rowToCheck = (Val1-checkPointColA);
+                            if (rowToCheck>0)
+                            {
+                                var modulusResult=rowToCheck%10;
+                                if (modulusResult != 0){
+                                    document.getElementById("table-Summary1").deleteRow(rowTobeDeleted);
+                                }
+                                else{
+                                    rowTobeDeleted=rowTobeDeleted+1;
+                                }
+                            }
                         }
                     }
                 }
-            }
 			}
-            
-
         }
         
-        function createTable(Age,xRow,BasicSumAssured,PaymentTerm,rateTunggal,rate5,surValue) {
+        function createTable(Age,xRow,BasicSumAssured,PaymentTerm,rateTunggal,rate5,surValue,AgeStartRow,AgeStopRow) {
             var table = document.getElementById("table-Summary1");
             var rbFactor = 1;
             var term = PaymentTerm;
@@ -317,7 +315,7 @@
                 
                 prevColE=col5Val;
             }
-            removeRows(xRow,Age);
+            removeRows(xRow,Age,AgeStartRow,AgeStopRow);
         }
         
     </script>

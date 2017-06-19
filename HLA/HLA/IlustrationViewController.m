@@ -231,6 +231,13 @@
     [webIlustration loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page1" ofType:@"html"]isDirectory:NO]]];
 }
 
+-(int)calculateBenfitPage:(int)maxAge RowCount:(int)rowCount{
+    int laAge = [[_dictionaryPOForInsert valueForKey:@"LA_Age"] intValue];
+    double numberPages = ((double)maxAge - (double)laAge) / (double)rowCount;
+    numberPages = ceil(numberPages);
+    return (int)numberPages;
+}
+
 -(void)joinHTML{
 
     NSString *path1 = [[NSBundle mainBundle] pathForResource:@"eng_BCALH_Page1" ofType:@"html"]; //changed for language
@@ -251,21 +258,45 @@
     NSString* documentsDirectory = [path_forDirectory objectAtIndex:0];
     
     NSMutableData* data;
+    int numberPages = [self calculateBenfitPage:99 RowCount:19];
     int IsInternalStaff =[[_dictionaryPOForInsert valueForKey:@"IsInternalStaff"] intValue];
     if (IsInternalStaff==1){
         data = [NSMutableData dataWithContentsOfURL:pathURL4];
         NSData* data1 = [NSData dataWithContentsOfURL:pathURL1];
-        NSData* data2 = [NSData dataWithContentsOfURL:pathURL2];
         NSData* data3 = [NSData dataWithContentsOfURL:pathURL3];
         [data appendData:data1];
-        [data appendData:data2];
+        for (int i=0; i<numberPages;i++){
+            NSData* data2 = [NSData dataWithContentsOfURL:pathURL2];
+            NSString* newTableName = [NSString stringWithFormat:@"table-Summary1_%i",i];
+            NSString* newFunctionName = [NSString stringWithFormat:@"createTable_%i",i];
+            NSString* newFunctionRemoveRow = [NSString stringWithFormat:@"removeRows_%i",i];
+            NSString* stringPage2 = [[NSString alloc] initWithData:data2 encoding:NSASCIIStringEncoding];
+            stringPage2 = [stringPage2 stringByReplacingOccurrencesOfString:@"table-Summary1" withString:newTableName];
+            stringPage2 = [stringPage2 stringByReplacingOccurrencesOfString:@"createTable" withString:newFunctionName];
+            stringPage2 = [stringPage2 stringByReplacingOccurrencesOfString:@"removeRows" withString:newFunctionRemoveRow];
+            NSData* newData = [stringPage2 dataUsingEncoding:NSUTF8StringEncoding];
+            [data appendData:newData];
+        }
         [data appendData:data3];
     }
     else{
         data = [NSMutableData dataWithContentsOfURL:pathURL1];
-        NSData* data2 = [NSData dataWithContentsOfURL:pathURL2];
+        
         NSData* data3 = [NSData dataWithContentsOfURL:pathURL3];
-        [data appendData:data2];
+        //[data appendData:data2];
+        for (int i=0; i<numberPages;i++){
+            NSData* data2 = [NSData dataWithContentsOfURL:pathURL2];
+            NSString* newTableName = [NSString stringWithFormat:@"table-Summary1_%i",i];
+            NSString* newFunctionName = [NSString stringWithFormat:@"createTable_%i(",i];
+            NSString* newFunctionRemoveRow = [NSString stringWithFormat:@"removeRows_%i",i];
+            
+            NSString* stringPage2 = [[NSString alloc] initWithData:data2 encoding:NSASCIIStringEncoding];
+            stringPage2 = [stringPage2 stringByReplacingOccurrencesOfString:@"table-Summary1" withString:newTableName];
+            stringPage2 = [stringPage2 stringByReplacingOccurrencesOfString:@"createTable(" withString:newFunctionName];
+            stringPage2 = [stringPage2 stringByReplacingOccurrencesOfString:@"removeRows" withString:newFunctionRemoveRow];
+            NSData* newData = [stringPage2 dataUsingEncoding:NSUTF8StringEncoding];
+            [data appendData:newData];
+        }
         [data appendData:data3];
     }
     
@@ -592,6 +623,7 @@
 }
 
 -(void)setValuePage2{
+    int numberPages = [self calculateBenfitPage:99 RowCount:19];
     int IsInternalStaff =[[_dictionaryPOForInsert valueForKey:@"IsInternalStaff"] intValue];
     NSString *javaScript = [NSString stringWithFormat:@"document.getElementById('SINumber2').innerHTML =\"%@\";", [_dictionaryPOForInsert valueForKey:@"SINO"]];
     
@@ -719,7 +751,13 @@
     stringYear = [[valRateYear valueForKey:@"description"] componentsJoinedByString:@","];
     
     //NSString *responseTable = [webIlustration stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"createTable(%d,%i,%f,%d,[%@],[%@],[%@])", laAge,numberOfRow,basicSumAssured,paymentTerm,string,string5Year,stringSurValue]];
-    NSString *responseTable = [webIlustration stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"createTable(%d,%i,%f,%d,[%@],[%@],[%@])", laAge,numberOfRow,basicSumAssured,paymentTerm,string,stringYear,stringSurValue]];
+    for (int i=0; i<numberPages;i++){
+        int ageStart = (26 + laAge) * i;
+        int ageStop = ageStart + 19;
+        NSString* newFunctionName = [NSString stringWithFormat:@"createTable_%i",i];
+        NSString *responseTable = [webIlustration stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"%@(%d,%i,%f,%d,[%@],[%@],[%@],%i,%i)", newFunctionName,laAge,numberOfRow,basicSumAssured,paymentTerm,string,stringYear,stringSurValue,ageStart,ageStop]];
+    }
+    //NSString *responseTable = [webIlustration stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"createTable(%d,%i,%f,%d,[%@],[%@],[%@])", laAge,numberOfRow,basicSumAssured,paymentTerm,string,stringYear,stringSurValue]];
     
     // Make the UIWebView method call
      [webIlustration stringByEvaluatingJavaScriptFromString:javaScript];
@@ -866,7 +904,15 @@
         } else {
             jsonRiderString = [[NSString alloc] initWithData:jsonRiderData encoding:NSUTF8StringEncoding];
         }
-        [webIlustration stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"setInsuranceWithRiderSummary(%@)", jsonRiderString]];
+        NSString* stringPaymentFrequency;
+        if ([[_dictionaryForBasicPlan valueForKey:@"Payment_Frequency"] isEqualToString:@"Bulanan"])
+        {
+            stringPaymentFrequency = @"per bulan";
+        }
+        else{
+            stringPaymentFrequency = @"per tahun";
+        }
+        [webIlustration stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"setInsuranceWithRiderSummary(%@,'%@')", jsonRiderString,stringPaymentFrequency]];
     }
     
     // Make the UIWebView method call

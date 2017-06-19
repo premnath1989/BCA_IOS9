@@ -59,7 +59,27 @@
 				font-size:10px;
 	
 			}
-			
+
+			td.style1{
+				border :1px solid black;
+				padding-left:5px;
+			}
+
+			td.style2{
+				border-left  : 1px solid black;
+                border-top  : 1px solid black;
+                border-bottom : 1px solid black;
+                padding-left:5px;
+			}
+
+			td.style3{
+				text-align:right;
+				border : 1px solid black;
+                border-left :0px;
+                border-right :0px;
+                padding-right:5px
+			}
+
 			.test
 			{
 				/*border: solid 1px #000000;*/
@@ -81,8 +101,8 @@
 
         </style>
         <script>
-        	function setInsuranceWithRiderSummary(RiderInfo){
-                var table = document.getElementById("tableInsuranceSummary");
+        	function setInsuranceWithRiderSummary(RiderInfo,PaymentFrequency){
+        		var table = document.getElementById("tableInsuranceSummary");
                 var tableRowCount = document.getElementById("tableInsuranceSummary").rows.length;;
                 var row3 = table.insertRow(3);
                 var row4 = table.insertRow(4);
@@ -99,35 +119,27 @@
                 var cell4_4 = row4.insertCell(3);
                 var cell5_4 = row4.insertCell(4);
 
-                cell2.style.border = '1px solid black';
-                cell3.style.border-left  = '1px solid black';
-                cell3.style.border-top  = '1px solid black';
-                cell3.style.border-bottom = '1px solid black';
-                cell4.style.border-left = '1px solid black';
-                cell4.style.border= '1px solid black';
-                cell4.style.border-left='0px';
-                cell4.style.border-right='0px';
+                cell2.className = 'style1';
+                cell3.className = 'style2';
+                cell4.className = 'style3';
+                cell5.className = 'test';
 
-                cell2_4.style.border = '1px solid black';
-                cell3_4.style.border-left  = '1px solid black';
-                cell3_4.style.border-top  = '1px solid black';
-                cell3_4.style.border-bottom = '1px solid black';
-                cell4_4.style.border-left = '1px solid black';
-                cell4_4.style.border= '1px solid black';
-                cell4_4.style.border-left='0px';
-                cell4_4.style.border-right='0px';
-
+                cell2_4.className = 'style1';
+                cell3_4.className = 'style2';
+                cell4_4.className = 'style3';
+                cell5_4.className = 'test';
+                
                 cell1.innerHTML = "&nbsp";
                 cell2.innerHTML = "Premi Standard Asuransi Dasar";
                 cell3.innerHTML = "Rp";
                 cell4.innerHTML = "1.000.000";
-                cell5.innerHTML = "Per tahun";
+                cell5.innerHTML = PaymentFrequency;
 
                 cell1_4.innerHTML = "&nbsp";
                 cell2_4.innerHTML = "Premi Standard Asuransi Tambahan";
                 cell3_4.innerHTML = "Rp";
                 cell4_4.innerHTML = "1.000.000";
-                cell5_4.innerHTML = "Per tahun";
+                cell5_4.innerHTML = PaymentFrequency;
             }
         </script>
         <head>
